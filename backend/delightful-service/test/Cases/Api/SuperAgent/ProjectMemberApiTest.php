@@ -66,7 +66,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
     public function testFile()
     {
-        // 使用现有的项目和文件ID进行测试
+        // use现有的项目和文件ID进行测试
         $fileId = $this->fileId; // 测试文件ID
         $projectId = $this->projectId;
 
@@ -157,7 +157,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             'workspace_name' => date('Y-m-d')
         ];
 
-        // 1. 创建工作区
+        // 1. create工作区
         $response = $this->post('/api/v1/be-agent/workspaces', $requestData, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $workspaceId = $response['data']['id'];
@@ -169,7 +169,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             'workspace_id' => $workspaceId,
         ];
 
-        // 2. 创建工作区
+        // 2. create工作区
         $response = $this->post('/api/v1/be-agent/projects', $requestData, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $projectId = $response['data']['project']['id'];*/
@@ -182,7 +182,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateProject($workspaceId, $projectId);
 
         // 确保不会对原有功能造成影响
-        // 创建话题
+        // create话题
         $topicId = $this->createTopic($workspaceId, $projectId);
         // 话题列表
         $this->topicList($workspaceId, $projectId);
@@ -224,7 +224,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->collaborationProjects();
         $this->collaborationProjects('test');
 
-        // 创建话题
+        // create话题
         $topicId = $this->createTopic($workspaceId, $projectId);
         // 话题列表
         $this->topicList($workspaceId, $projectId);
@@ -245,7 +245,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 9. 测试项目置顶功能
         $this->projectPinFeature($projectId);
 
-        // 10. 测试协作项目创建者列表功能
+        // 10. 测试协作项目create者列表功能
         //        $this->collaborationProjectCreatorFeature();
 
         // 11. 清nullnull成员
@@ -779,11 +779,11 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试协作项目创建者列表功能 - 完整流程测试.
+     * 测试协作项目create者列表功能 - 完整流程测试.
      */
     public function collaborationProjectCreatorFeature(): void
     {
-        // 1. 测试有权限user获取创建者列表
+        // 1. 测试有权限user获取create者列表
         $this->switchUserTest2(); // 确保是有权限的协作user
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
@@ -802,7 +802,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试协作项目创建者列表权限控制.
+     * 测试协作项目create者列表权限控制.
      */
     public function testCollaborationProjectCreatorsPermission(): void
     {
@@ -812,7 +812,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
-        // 2. 切换到有权限的user测试获取创建者列表success
+        // 2. 切换到有权限的user测试获取create者列表success
         $this->switchUserTest2();
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
@@ -828,7 +828,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试协作项目创建者列表边界情况.
+     * 测试协作项目create者列表边界情况.
      */
     public function testCollaborationProjectCreatorsEdgeCases(): void
     {
@@ -844,13 +844,13 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals($response1['code'], $response2['code']);
         $this->assertEquals(count($response1['data']), count($response2['data']));
 
-        // 2. validate创建者去重 - 同一创建者只应该出现一次
+        // 2. validatecreate者去重 - 同一create者只应该出现一次
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListDeduplication($response);
     }
 
     /**
-     * 获取协作项目创建者列表.
+     * 获取协作项目create者列表.
      */
     public function getCollaborationProjectCreators(int $expectedCode = 1000): array
     {
@@ -868,7 +868,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * validate创建者列表响应结构.
+     * validatecreate者列表响应结构.
      */
     public function verifyCreatorListResponse(array $response): void
     {
@@ -876,15 +876,15 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data'], '响应数据应该是array');
 
-        // validate至少有一个创建者
-        $this->assertGreaterThan(0, count($response['data']), '应该至少有一个创建者');
+        // validate至少有一个create者
+        $this->assertGreaterThan(0, count($response['data']), '应该至少有一个create者');
 
-        // validate创建者数据结构
+        // validatecreate者数据结构
         $creator = $response['data'][0];
-        $this->assertArrayHasKey('id', $creator, '创建者应containid字段');
-        $this->assertArrayHasKey('name', $creator, '创建者应containname字段');
-        $this->assertArrayHasKey('user_id', $creator, '创建者应containuser_id字段');
-        $this->assertArrayHasKey('avatar_url', $creator, '创建者应containavatar_url字段');
+        $this->assertArrayHasKey('id', $creator, 'create者应containid字段');
+        $this->assertArrayHasKey('name', $creator, 'create者应containname字段');
+        $this->assertArrayHasKey('user_id', $creator, 'create者应containuser_id字段');
+        $this->assertArrayHasKey('avatar_url', $creator, 'create者应containavatar_url字段');
 
         // validate字段type
         $this->assertIsString($creator['id'], 'id应该是string');
@@ -898,7 +898,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * validatenull创建者列表响应.
+     * validatenullcreate者列表响应.
      */
     public function verifyEmptyCreatorListResponse(array $response): void
     {
@@ -909,7 +909,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * validate创建者列表去重.
+     * validatecreate者列表去重.
      */
     public function verifyCreatorListDeduplication(array $response): void
     {
@@ -920,7 +920,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals(
             count($userIds),
             count($uniqueUserIds),
-            '创建者列表中不应该有重复的user_id'
+            'create者列表中不应该有重复的user_id'
         );
     }
 

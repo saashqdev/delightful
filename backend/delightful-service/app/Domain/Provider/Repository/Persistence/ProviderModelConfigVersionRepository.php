@@ -26,7 +26,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
         Db::transaction(function () use ($dataIsolation, $entity) {
             $serviceProviderModelId = $entity->getServiceProviderModelId();
 
-            // 1. get最新版本号并计算新版本号（使用 FOR UPDATE 行锁防止并发issue）
+            // 1. get最新版本号并计算新版本号（use FOR UPDATE 行锁防止并发issue）
             $builder = $this->createBuilder($dataIsolation, ProviderModelConfigVersionModel::query());
             $latestVersion = $builder
                 ->where('service_provider_model_id', $serviceProviderModelId)

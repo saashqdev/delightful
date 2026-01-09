@@ -28,7 +28,7 @@ enum DelightfulMessageStatus: int
         return strtolower($this->name);
     }
 
-    // 根据控制messagetypegetmessagestatus
+    // according to控制messagetypegetmessagestatus
     public static function getMessageStatusByControlMessageType(ControlMessageType $controlMessageType): DelightfulMessageStatus
     {
         return match ($controlMessageType) {

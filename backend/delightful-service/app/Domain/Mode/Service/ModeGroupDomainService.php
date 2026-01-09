@@ -25,7 +25,7 @@ class ModeGroupDomainService
     }
 
     /**
-     * 根据IDget分组.
+     * according toIDget分组.
      */
     public function getGroupById(ModeDataIsolation $dataIsolation, string $id): ?ModeGroupEntity
     {
@@ -53,7 +53,7 @@ class ModeGroupDomainService
     }
 
     /**
-     * 根据modeIDget分组列表.
+     * according tomodeIDget分组列表.
      */
     public function getGroupsByModeId(ModeDataIsolation $dataIsolation, string $modeId): array
     {

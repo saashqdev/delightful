@@ -20,7 +20,7 @@ use Hyperf\DbConnection\Db;
 use function Hyperf\Support\now;
 
 /**
- * organization管理员仓库实现.
+ * organization管理员仓库implement.
  */
 readonly class OrganizationAdminRepository implements OrganizationAdminRepositoryInterface
 {
@@ -64,7 +64,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 根据IDgetorganization管理员.
+     * according toIDgetorganization管理员.
      */
     public function getById(DataIsolation $dataIsolation, int $id): ?OrganizationAdminEntity
     {
@@ -76,7 +76,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 根据userIDgetorganization管理员.
+     * according touserIDgetorganization管理员.
      */
     public function getByUserId(DataIsolation $dataIsolation, string $userId): ?OrganizationAdminEntity
     {
@@ -231,7 +231,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 基于数据隔离get OrganizationAdminModel query构造器.
+     * based on数据隔离get OrganizationAdminModel query构造器.
      */
     private function organizationAdminQuery(DataIsolation $dataIsolation): Builder
     {

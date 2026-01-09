@@ -25,7 +25,7 @@ class PasswordService
         if (empty($hashedPassword)) {
             return false;
         }
-        // 使用 hash_equals 防止时序攻击
+        // use hash_equals 防止时序攻击
         return hash_equals($hashedPassword, hash('sha256', $plainPassword));
     }
 }

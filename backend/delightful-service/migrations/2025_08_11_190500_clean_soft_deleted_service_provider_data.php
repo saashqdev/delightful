@@ -50,7 +50,7 @@ return new class extends Migration {
         $logger->info('start清理 service_provider 相关表的软删除数据');
 
         try {
-            // 使用事务确保数据一致性
+            // use事务确保数据一致性
             Db::transaction(function () use ($logger) {
                 $totalDeleted = 0;
 
@@ -99,7 +99,7 @@ return new class extends Migration {
         $logger->info('start清null官方organization的 Delightful 服务商配置和模型');
 
         try {
-            // 使用事务确保数据一致性
+            // use事务确保数据一致性
             Db::transaction(function () use ($logger) {
                 // 获取官方organization编码
                 $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
@@ -164,7 +164,7 @@ return new class extends Migration {
         $logger->info('start清洗 Official 服务商的 description 和 translate 字段');
 
         try {
-            // 使用事务确保数据一致性
+            // use事务确保数据一致性
             Db::transaction(function () use ($logger) {
                 // query需要清洗的 Official 服务商记录
                 $query = Db::table('service_provider')
@@ -464,7 +464,7 @@ return new class extends Migration {
         // 2. 循环检查每个配置的有效性
         foreach ($configs as $config) {
             try {
-                // 解密配置（使用配置 ID 作为 salt）
+                // 解密配置（use配置 ID 作为 salt）
                 $decodedConfig = ProviderConfigAssembler::decodeConfig($config['config'], (string) $config['id']);
 
                 // 检查配置是否有效
@@ -481,7 +481,7 @@ return new class extends Migration {
             return 0;
         }
 
-        // 3. 批量删除使用无效配置的模型
+        // 3. 批量删除use无效配置的模型
         return Db::table('service_provider_models')
             ->where('organization_code', $organizationCode)
             ->where('organization_code', '!=', $officialOrganizationCode) // 双重防护

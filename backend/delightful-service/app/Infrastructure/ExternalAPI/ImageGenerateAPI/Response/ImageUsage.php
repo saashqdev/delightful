@@ -14,7 +14,7 @@ class ImageUsage extends Usage
     /**
      * @param int $promptTokens prompt词的令牌数量
      * @param int $completionTokens 完成content的令牌数量
-     * @param int $totalTokens 使用的总令牌数量
+     * @param int $totalTokens use的总令牌数量
      * @param int $generatedImages 生成的image数量
      * @param array $completionTokensDetails 完成令牌的详细information
      * @param array $promptTokensDetails prompt令牌的详细information

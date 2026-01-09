@@ -53,7 +53,7 @@ readonly class LongTermMemoryDomainService
             return;
         }
 
-        // generate锁名称和所有者（基于记忆IDsort后generate唯一锁名）
+        // generate锁名称和所有者（based on记忆IDsort后generate唯一锁名）
         sort($memoryIds);
         $lockName = 'memory:batch:reinforce:' . md5(implode(',', $memoryIds));
         $lockOwner = getmypid() . '_' . microtime(true);
@@ -108,7 +108,7 @@ readonly class LongTermMemoryDomainService
             throw new InvalidArgumentException('delightful_message_id is required when scenario is memory_card_quick');
         }
 
-        // generate锁名称和所有者（基于记忆IDsort后generate唯一锁名）
+        // generate锁名称和所有者（based on记忆IDsort后generate唯一锁名）
         sort($memoryIds);
         $lockName = sprintf('memory:batch:%s:%s:%s', $action->value, $scenario->value, md5(implode(',', $memoryIds)));
         $lockOwner = getmypid() . '_' . microtime(true);
@@ -145,7 +145,7 @@ readonly class LongTermMemoryDomainService
                     ExceptionBuilder::throw(LongTermMemoryErrorCode::UPDATE_FAILED);
                 }
             } elseif ($action === MemoryOperationAction::REJECT) {
-                // 批量拒绝记忆建议：根据记忆status决定删除还是清nullpending_content
+                // 批量拒绝记忆建议：according to记忆status决定删除还是清nullpending_content
                 $memories = $this->repository->findByIds($memoryIds);
 
                 $memoriesToDelete = [];
@@ -317,7 +317,7 @@ readonly class LongTermMemoryDomainService
                 ExceptionBuilder::throw(LongTermMemoryErrorCode::MEMORY_NOT_FOUND);
             }
 
-            // 如果更新了pending_content，需要根据业务规则调整status
+            // 如果更新了pending_content，需要according to业务规则调整status
             if ($dto->pendingContent !== null) {
                 $this->adjustMemoryStatusBasedOnPendingContent($memory, $dto->pendingContent);
             }
@@ -368,7 +368,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 根据项目ID列表批量删除记忆.
+     * according to项目ID列表批量删除记忆.
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID
@@ -392,7 +392,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 获取user的有效记忆并构建提示词string.
+     * 获取user的有效记忆并build提示词string.
      */
     public function getEffectiveMemoriesForPrompt(string $orgId, string $appId, string $userId, ?string $projectId, int $maxLength = 4000): string
     {
@@ -441,7 +441,7 @@ readonly class LongTermMemoryDomainService
         $memoryIds = array_map(static fn ($memory) => $memory->getId(), $selectedMemories);
         $this->accessMemories($memoryIds);
 
-        // 构建记忆提示词string
+        // build记忆提示词string
         if (empty($selectedMemories)) {
             return '';
         }
@@ -490,7 +490,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 通用querymethod (使用 DTO).
+     * 通用querymethod (use DTO).
      * @return LongTermMemoryEntity[]
      */
     public function findMemories(MemoryQueryDTO $dto): array
@@ -499,7 +499,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 根据queryconditionstatistics记忆数量.
+     * according toqueryconditionstatistics记忆数量.
      */
     public function countMemories(MemoryQueryDTO $dto): int
     {
@@ -538,7 +538,7 @@ readonly class LongTermMemoryDomainService
             return 0;
         }
 
-        // generate锁名称和所有者（基于记忆IDsort后generate唯一锁名）
+        // generate锁名称和所有者（based on记忆IDsort后generate唯一锁名）
         sort($memoryIds);
         $enabledStatus = $enabled ? 'enable' : 'disable';
         $lockName = sprintf('memory:batch:%s:%s', $enabledStatus, md5(implode(',', $memoryIds)));
@@ -648,7 +648,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 根据pending_content的变化调整记忆status.
+     * according topending_content的变化调整记忆status.
      */
     private function adjustMemoryStatusBasedOnPendingContent(LongTermMemoryEntity $memory, ?string $pendingContent): void
     {
@@ -665,7 +665,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 根据当前status和pending_content的存在确定新status.
+     * according to当前status和pending_content的存在确定新status.
      */
     private function determineNewMemoryStatus(MemoryStatus $currentStatus, bool $hasPendingContent): MemoryStatus
     {
@@ -687,7 +687,7 @@ readonly class LongTermMemoryDomainService
     private function updateMessageWithMemoryOperation(string $delightfulMessageId, MemoryOperationAction $action, array $memoryIds): void
     {
         try {
-            // 根据 delightful_message_id querymessage数据
+            // according to delightful_message_id querymessage数据
             $messageEntity = $this->messageRepository->getMessageByDelightfulMessageId($delightfulMessageId);
 
             if (! $messageEntity) {

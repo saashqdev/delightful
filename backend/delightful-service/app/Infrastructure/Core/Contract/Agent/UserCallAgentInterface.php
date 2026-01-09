@@ -25,7 +25,7 @@ interface UserCallAgentInterface
      * get处理器优先级.
      *
      * number越大优先级越高，默认为0
-     * 企业版canreturn更高的优先级以覆盖默认实现
+     * 企业版canreturn更高的优先级以覆盖默认implement
      */
     public static function getPriority(): int;
 }

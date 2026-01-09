@@ -48,7 +48,7 @@ class RoleApi extends AbstractPermissionApi
         // createpaginationobject
         $page = $this->createPage();
 
-        // 构建queryobject（自动filter掉paginationfield）
+        // buildqueryobject（自动filter掉paginationfield）
         $query = new SubAdminQuery($this->request->all());
 
         // 转换为仓储filterarray

@@ -16,7 +16,7 @@ use App\Domain\LongTermMemory\Entity\LongTermMemoryEntity;
 class LongTermMemoryAssembler
 {
     /**
-     * 使用 UpdateMemoryDTO update记忆实体.
+     * use UpdateMemoryDTO update记忆实体.
      */
     public static function updateEntityFromDTO(LongTermMemoryEntity $entity, UpdateMemoryDTO $dto): void
     {

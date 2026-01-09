@@ -111,7 +111,7 @@ class PermissionCheckerTest extends TestCase
     }
 
     /**
-     * 使用数据提供者testpermissioncheck.
+     * use数据提供者testpermissioncheck.
      */
     #[DataProvider('permissionCheckDataProvider')]
     public function testPermissionCheckWithDataProvider(

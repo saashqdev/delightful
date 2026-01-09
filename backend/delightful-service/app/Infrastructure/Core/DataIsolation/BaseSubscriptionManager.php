@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\DataIsolation;
 use App\Domain\Provider\Entity\ValueObject\ModelType;
 
 /**
- * 订阅管理器.
+ * subscribe管理器.
  */
 class BaseSubscriptionManager implements SubscriptionManagerInterface
 {

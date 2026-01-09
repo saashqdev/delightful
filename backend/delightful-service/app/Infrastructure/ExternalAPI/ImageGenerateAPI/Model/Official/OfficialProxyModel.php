@@ -80,7 +80,7 @@ class OfficialProxyModel extends AbstractImageGenerate
                 'data_count' => count($responseData['data'] ?? []),
             ]);
 
-            // 构建 OpenAI 格式响应
+            // build OpenAI 格式响应
             return new OpenAIFormatResponse($responseData);
         } catch (GuzzleException $e) {
             $errorBody = '';
@@ -156,7 +156,7 @@ class OfficialProxyModel extends AbstractImageGenerate
 
     protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
-        // 官方代理不使用此method，直接使用 generateImageOpenAIFormat
+        // 官方代理不use此method，直接use generateImageOpenAIFormat
         throw new Exception('OfficialProxyModel does not support generateImageInternal method');
     }
 }

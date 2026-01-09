@@ -30,7 +30,7 @@ class MCPServerToolRepository extends MCPAbstractRepository implements MCPServer
     }
 
     /**
-     * 根据mcpServerCodequerytool.
+     * according tomcpServerCodequerytool.
      * @return array<MCPServerToolEntity>
      */
     public function getByMcpServerCode(MCPDataIsolation $dataIsolation, string $mcpServerCode): array
@@ -124,7 +124,7 @@ class MCPServerToolRepository extends MCPAbstractRepository implements MCPServer
     }
 
     /**
-     * 根据ID和mcpServerCode联合querytool.
+     * according toID和mcpServerCode联合querytool.
      */
     public function getByIdAndMcpServerCode(MCPDataIsolation $dataIsolation, int $id, string $mcpServerCode): ?MCPServerToolEntity
     {

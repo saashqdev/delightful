@@ -170,7 +170,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             $this->testGrantorUserId
         );
 
-        // 使用空的organization代码callmethod
+        // use空的organization代码callmethod
         $result = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation(''));
 
         // 验证result为空
@@ -187,7 +187,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             $this->testGrantorUserId
         );
 
-        // 使用不存在的organization代码callmethod
+        // use不存在的organization代码callmethod
         $result = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation('non_existent_org_code'));
 
         // 验证result为空

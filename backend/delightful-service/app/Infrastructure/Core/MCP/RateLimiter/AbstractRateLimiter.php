@@ -43,7 +43,7 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
             return;
         }
 
-        // 初始化请求不进行限制
+        // initialize请求不进行限制
         if ($request->getMethod() === 'initialize') {
             return;
         }
@@ -67,7 +67,7 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
 
     /**
      * 实际执行的速率限制check.
-     * 由子类实现具体逻辑.
+     * 由子类implement具体逻辑.
      */
     abstract protected function doCheck(string $clientId, MessageInterface $request): void;
 }

@@ -34,7 +34,7 @@ return new class extends Migration {
                 $table->dropIndex('delightful_bot_versions_organization_code_index');
             }
 
-            // 3. 优化企业发布statusquery
+            // 3. 优化企业publishstatusquery
             // 对应SQL: WHERE organization_code = ? AND enterprise_release_status = ?
             $table->index(['organization_code', 'enterprise_release_status'], 'idx_organization_enterprise_status');
         });

@@ -68,7 +68,7 @@ abstract class VolcengineApi
     protected string $secretKey = '';
 
     /**
-     * 短信签名. 比如[灯塔引擎].
+     * 短信签名. such as[灯塔引擎].
      */
     protected string $sign = '';
 

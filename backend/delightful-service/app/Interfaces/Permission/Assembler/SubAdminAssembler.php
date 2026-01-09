@@ -14,7 +14,7 @@ use App\Interfaces\Kernel\DTO\PageDTO;
 class SubAdminAssembler
 {
     /**
-     * 将 RoleEntity 转换为array格式，供前端使用。
+     * 将 RoleEntity 转换为array格式，供前端use。
      */
     public static function toArray(RoleEntity $entity): array
     {
@@ -32,7 +32,7 @@ class SubAdminAssembler
     }
 
     /**
-     * 构建分页 DTO。
+     * build分页 DTO。
      *
      * @param RoleEntity[] $list
      */

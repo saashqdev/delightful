@@ -86,16 +86,16 @@ class AdminModeAssembler
         foreach ($groupAggregate->getRelations() as $relation) {
             $modelDTO = new ModeGroupModelDTO($relation->toArray());
 
-            // 使用 model_id 查找model
+            // use model_id 查找model
             $modelId = $relation->getModelId();
             $modelInfo = $providerModels[$modelId] ?? null;
 
             if ($modelInfo && $modelInfo['best']) {
-                // 找到可用model，使用最佳model的info
+                // 找到可用model，use最佳model的info
                 $providerModel = $modelInfo['best'];
                 $modelDTO->setModelName($providerModel->getName());
                 $modelDTO->setModelIcon($providerModel->getIcon());
-                $modelDTO->setModelStatus($modelInfo['status']); // 使用计算出的status
+                $modelDTO->setModelStatus($modelInfo['status']); // use计算出的status
                 $description = '';
                 $translate = $providerModel->getTranslate();
                 if (is_array($translate) && isset($translate['description'][$locale])) {
@@ -108,7 +108,7 @@ class AdminModeAssembler
                 // 保持向后兼容，set providerModelId 为查找到的model的ID
                 $modelDTO->setProviderModelId((string) $providerModel->getId());
             } else {
-                // 后台管理需要显示所有status，包括无可用model的情况
+                // 后台管理需要显示所有status，include无可用model的情况
                 $status = $modelInfo['status'] ?? ModelStatus::Deleted;
                 $modelDTO->setModelStatus($status);
                 $modelDTO->setModelStatus($status);

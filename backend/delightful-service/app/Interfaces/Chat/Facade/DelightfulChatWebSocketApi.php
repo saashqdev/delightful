@@ -110,7 +110,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
         }
         $this->setLocale($params['context']['language'] ?? '');
         try {
-            // 使用 delightfulChatContract 校验parameter
+            // use delightfulChatContract 校验parameter
             $context = new DelightfulContext($params['context']);
             // 兼容历史版本,从query中gettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
@@ -172,14 +172,14 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->relationAppMsgIdAndRequestId($params['data']['message']['app_message_id'] ?? '');
             $this->checkParams($appendRules, $params);
             $this->setLocale($params['context']['language'] ?? '');
-            // 使用 delightfulChatContract 校验parameter
+            // use delightfulChatContract 校验parameter
             $controlRequest = new ControlRequest($params);
             // 兼容历史版本,从query中gettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
             $this->delightfulChatMessageAppService->setUserContext($userToken, $controlRequest->getContext());
             // getuserinfo
             $userAuthorization = $this->getAuthorization();
-            // 根据messagetype,分发到对应的处理模块
+            // according tomessagetype,分发到对应的处理模块
             $messageDTO = MessageAssembler::getControlMessageDTOByRequest($controlRequest, $userAuthorization, ConversationType::User);
             return $this->delightfulControlMessageAppService->dispatchClientControlMessage($messageDTO, $userAuthorization);
         } catch (BusinessException $exception) {
@@ -228,12 +228,12 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->relationAppMsgIdAndRequestId($params['data']['message']['app_message_id'] ?? '');
             $this->checkParams($appendRules, $params);
             $this->setLocale($params['context']['language'] ?? '');
-            # 使用 delightfulChatContract 校验parameter
+            # use delightfulChatContract 校验parameter
             $chatRequest = new ChatRequest($params);
             // 兼容历史版本,从query中gettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
-            // 根据messagetype,分发到对应的处理模块
+            // according tomessagetype,分发到对应的处理模块
             $userAuthorization = $this->getAuthorization();
             // 将账号的所有设备加入同一个房间
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
@@ -282,12 +282,12 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->relationAppMsgIdAndRequestId($params['data']['message']['app_message_id'] ?? '');
             $this->checkParams($appendRules, $params);
             $this->setLocale($params['context']['language'] ?? '');
-            # 使用 delightfulChatContract 校验parameter
+            # use delightfulChatContract 校验parameter
             $chatRequest = new ChatRequest($params);
             // 兼容历史版本,从query中gettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
-            // 根据messagetype,分发到对应的处理模块
+            // according tomessagetype,分发到对应的处理模块
             $userAuthorization = $this->getAuthorization();
             // 将账号的所有设备加入同一个房间
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
@@ -340,12 +340,12 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     }
 
     /**
-     * 发布订阅/多个message分发和推送的队列保活.
+     * publishsubscribe/多个message分发和推送的队列保活.
      */
     private function keepSubscribeAlive(): void
     {
-        // 只需要一个进程能定时发布message,让订阅的redis链接保活即可.
-        // 不把锁放在最外层,是为了防止pod频繁重启时,没有任何一个进程能够发布message
+        // 只需要一个进程能定时publishmessage,让subscribe的redis链接保活即可.
+        // 不把锁放在最外层,是为了防止pod频繁重启时,没有任何一个进程能够publishmessage
         co(function () {
             // 每 5 秒推一次message
             $this->timer->tick(

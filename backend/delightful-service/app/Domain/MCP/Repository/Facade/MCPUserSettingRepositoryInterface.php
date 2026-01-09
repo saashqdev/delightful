@@ -23,19 +23,19 @@ interface MCPUserSettingRepositoryInterface
     public function getByIds(MCPDataIsolation $dataIsolation, array $ids): array;
 
     /**
-     * 根据userID和MCP服务IDgetusersetting.
+     * according touserID和MCP服务IDgetusersetting.
      */
     public function getByUserAndMcpServer(MCPDataIsolation $dataIsolation, string $userId, string $mcpServerId): ?MCPUserSettingEntity;
 
     /**
-     * 根据userIDget所有MCPusersetting.
+     * according touserIDget所有MCPusersetting.
      *
      * @return array<MCPUserSettingEntity>
      */
     public function getByUserId(MCPDataIsolation $dataIsolation, string $userId): array;
 
     /**
-     * 根据MCP服务IDget所有usersetting.
+     * according toMCP服务IDget所有usersetting.
      *
      * @return array<MCPUserSettingEntity>
      */

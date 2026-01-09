@@ -79,7 +79,7 @@ class KnowledgeBaseApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * 根据 file_key get知识库文件链接.
+     * according to file_key get知识库文件链接.
      */
     public function getFileLink(RequestInterface $request): array
     {

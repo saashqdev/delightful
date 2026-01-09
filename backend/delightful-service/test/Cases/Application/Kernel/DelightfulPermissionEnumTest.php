@@ -183,7 +183,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     }
 
     /**
-     * test类实现了正确的接口.
+     * test类implement了正确的接口.
      */
     public function testImplementsInterface()
     {

@@ -106,7 +106,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
 
     public function saveModel(ProviderDataIsolation $dataIsolation, SaveProviderModelDTO $dto): ProviderModelEntity
     {
-        // 设置organization编码（优先使用DTO中的organization编码，否则使用当前数据隔离中的）
+        // 设置organization编码（优先useDTO中的organization编码，否则use当前数据隔离中的）
         $dto->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
 
         $data = $dto->toArray();
@@ -179,7 +179,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
 
     /**
      * 通过 service_provider_config_id 获取模型列表.
-     * @param string $configId 可能是模板 id，比如 ProviderConfigIdAssembler
+     * @param string $configId 可能是模板 id，such as ProviderConfigIdAssembler
      * @return ProviderModelEntity[]
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId, ProviderEntity $providerEntity): array
@@ -243,7 +243,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $enabledConfigIds = Db::select($enabledConfigQuery->toSql(), $enabledConfigQuery->getBindings());
         $enabledConfigIdArray = array_column($enabledConfigIds, 'id');
 
-        // 2. 使用启用的配置IDqueryorganization自己的启用模型
+        // 2. use启用的配置IDqueryorganization自己的启用模型
         $organizationModels = [];
         if (! empty($enabledConfigIdArray)) {
             $organizationModelsBuilder = $this->createProviderModelQuery()
@@ -344,7 +344,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 根据IDquery模型（不限制organization）.
+     * according toIDquery模型（不限制organization）.
      */
     public function getModelByIdWithoutOrgFilter(string $id): ?ProviderModelEntity
     {
@@ -391,7 +391,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 根据querycondition获取按模型typegroup的模型ID列表.
+     * according toquerycondition获取按模型typegroup的模型ID列表.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param ProviderModelQuery $query querycondition
@@ -453,7 +453,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 准备移除软删相关功能，临时这样写。创建带有软删除filter的 ProviderModelModel query构建器.
+     * 准备移除软删相关功能，临时这样写。create带有软删除filter的 ProviderModelModel querybuild器.
      */
     private function createProviderModelQuery(): Builder
     {

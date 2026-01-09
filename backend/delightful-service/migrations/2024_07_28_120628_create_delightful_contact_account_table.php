@@ -45,7 +45,7 @@ return new class extends Migration {
             $table->unique(['country_code', 'phone'], 'unq_country_code_phone');
             $table->timestamps();
             $table->softDeletes();
-            $table->comment('user账号table,recorduser跨organization唯一的info,比如的手机号/真名/性别/usertype等');
+            $table->comment('user账号table,recorduser跨organization唯一的info,such as的手机号/真名/性别/usertype等');
         });
     }
 

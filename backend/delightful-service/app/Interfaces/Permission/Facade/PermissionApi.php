@@ -34,7 +34,7 @@ class PermissionApi extends AbstractPermissionApi
         // getwhen前登录user的认证information
         $authorization = $this->getAuthorization();
 
-        // 构建permissiondata隔离context
+        // buildpermissiondata隔离context
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()

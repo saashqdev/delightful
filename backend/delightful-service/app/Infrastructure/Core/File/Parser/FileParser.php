@@ -39,7 +39,7 @@ class FileParser
      */
     public function parse(string $fileUrl, bool $textPreprocess = false): string
     {
-        // 使用md5作为cachekey
+        // usemd5作为cachekey
         $cacheKey = 'file_parser:parse_' . md5($fileUrl) . '_' . ($textPreprocess ? 1 : 0);
         // checkcache,如果存在则returncachecontent
         if ($this->cache->has($cacheKey)) {

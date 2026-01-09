@@ -137,7 +137,7 @@ class ImageGenerateFactory
         $model = $data['model'];
         $mode = strtolower(explode('-', $model, limit: 2)[1] ?? 'fast');
 
-        // Midjourney 不使用宽高parameter，只需要 prompt 和 mode，但是 Request 类继承需要这些parameter
+        // Midjourney 不use宽高parameter，只需要 prompt 和 mode，但是 Request 类继承需要这些parameter
         // 所以我们给默认value即可
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
@@ -301,10 +301,10 @@ class ImageGenerateFactory
     private static function createGoogleGeminiRequest(array $data): GoogleGeminiRequest
     {
         $request = new GoogleGeminiRequest(
-            '', // width - Google Gemini不使用
-            '', // height - Google Gemini不使用
+            '', // width - Google Gemini不use
+            '', // height - Google Gemini不use
             $data['user_prompt'] ?? '',
-            '', // negative_prompt - Google Gemini不使用
+            '', // negative_prompt - Google Gemini不use
             $data['model'] ?? 'gemini-2.5-flash-image-preview'
         );
 
@@ -321,7 +321,7 @@ class ImageGenerateFactory
 
     private static function createVolcengineArkRequest(array $data): VolcengineArkRequest
     {
-        // 解析 size parameter为 width 和 height（使用 VolcengineArk 的固定比例configuration）
+        // 解析 size parameter为 width 和 height（use VolcengineArk 的固定比例configuration）
         [$width, $height] = self::parseSizeToWidthHeight($data['size'] ?? '1024x1024', ImageGenerateModelType::VolcengineArk->value);
 
         $request = new VolcengineArkRequest(
@@ -367,7 +367,7 @@ class ImageGenerateFactory
      * 解析各种 size 格式为 [width, height] array.
      * 支持格式：1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 等.
      * @param string $size 尺寸string
-     * @param null|string $modelKey model键名，如果指定则优先使用该model的固定比例configuration
+     * @param null|string $modelKey model键名，如果指定则优先use该model的固定比例configuration
      */
     private static function parseSizeToWidthHeight(string $size, ?string $modelKey = null): array
     {
@@ -400,7 +400,7 @@ class ImageGenerateFactory
                 return $fixedSize;
             }
 
-            // 如果没有固定configuration，按照正常换算（基于1024为基准）
+            // 如果没有固定configuration，按照正常换算（based on1024为基准）
             if ($width >= $height) {
                 // 横向
                 $actualWidth = 1024;
@@ -421,7 +421,7 @@ class ImageGenerateFactory
      * get指定model的固定比例尺寸configuration.
      * @param null|string $modelKey model键名
      * @param string $ratioKey 比例键名，如 "1:1", "16:9"
-     * @return null|array 如果存在固定configurationreturn [width, height] array，否则return null table示需要使用换算
+     * @return null|array 如果存在固定configurationreturn [width, height] array，否则return null table示需要use换算
      */
     private static function getFixedRatioSize(?string $modelKey, string $ratioKey): ?array
     {
@@ -435,7 +435,7 @@ class ImageGenerateFactory
             return self::SIZE_FIXED_RATIOS[$modelKey][$ratioKey] ?? self::SIZE_FIXED_RATIOS[$modelKey]['1:1'];
         }
 
-        // 如果不存在，return null table示需要使用换算
+        // 如果不存在，return null table示需要use换算
         return null;
     }
 

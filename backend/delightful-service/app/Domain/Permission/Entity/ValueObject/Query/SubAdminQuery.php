@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractQuery;
 /**
  * 子管理员列表queryobject.
  *
- * 使用示例：
+ * use示例：
  * $query = new SubAdminQuery([
  *     'name' => '角色名称',
  *     'status' => 1,
@@ -27,7 +27,7 @@ class SubAdminQuery extends AbstractQuery
     private ?int $status = null;
 
     /**
-     * 构造函数支持从array批量初始化属性（继承自 AbstractObject）。
+     * 构造函数支持从array批量initialize属性（继承自 AbstractObject）。
      */
 
     /* -------------------- getter / setter -------------------- */

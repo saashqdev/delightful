@@ -216,7 +216,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
      */
     protected function getModels(ModeAggregate $modeAggregate): array
     {
-        // 获取所有模型ID (使用model_id而不是provider_model_id)
+        // 获取所有模型ID (usemodel_id而不是provider_model_id)
         $allModelIds = [];
         foreach ($modeAggregate->getGroupAggregates() as $groupAggregate) {
             foreach ($groupAggregate->getRelations() as $relation) {
@@ -331,7 +331,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return null;
         }
 
-        // 如果没有提供服务商status，使用原有逻辑（向后兼容）
+        // 如果没有提供服务商status，use原有逻辑（向后兼容）
         if (empty($providerStatuses)) {
             foreach ($models as $model) {
                 if ($model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
@@ -361,7 +361,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * 根据模型列表确定status（考虑服务商级联status）.
+     * according to模型列表确定status（考虑服务商级联status）.
      *
      * @param ProviderModelEntity[] $models 模型列表
      * @param array<int, Status> $providerStatuses 服务商status映射
@@ -373,7 +373,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return ModelStatus::Deleted;
         }
 
-        // 如果没有提供服务商status，使用原有逻辑（向后兼容）
+        // 如果没有提供服务商status，use原有逻辑（向后兼容）
         if (empty($providerStatuses)) {
             foreach ($models as $model) {
                 if ($model->getStatus() && $model->getStatus() === Status::Enabled) {

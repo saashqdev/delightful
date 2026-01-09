@@ -107,7 +107,7 @@ class LoaderTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "file_name",
                         "title": "文件名称",
-                        "description": "文件名称。没有时可使用 url 中的文件名",
+                        "description": "文件名称。没有时可use url 中的文件名",
                         "required": null,
                         "value": null,
                         "encryption": false,

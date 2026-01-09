@@ -166,7 +166,7 @@ JSON,
                 "type": "array",
                 "key": "use_tools",
                 "sort": 0,
-                "title": "使用到的tool",
+                "title": "use到的tool",
                 "description": "",
                 "items": {
                     "type": "object",

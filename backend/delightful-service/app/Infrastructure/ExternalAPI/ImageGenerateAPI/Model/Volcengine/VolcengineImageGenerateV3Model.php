@@ -66,7 +66,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先创建响应object
+        // 1. 预先create响应object
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -79,7 +79,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
             return $response; // returnnull数据响应
         }
 
-        // 3. 同步handle图片generate
+        // 3. synchandle图片generate
         $count = $imageGenerateRequest->getGenerateNum();
 
         for ($i = 0; $i < $count; ++$i) {
@@ -172,7 +172,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
             'req_key' => $imageGenerateRequest->getModel(),
         ]);
 
-        // 使用同步方式handle
+        // usesync方式handle
         $rawResults = [];
         $errors = [];
 
@@ -201,7 +201,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
         }
 
         if (empty($rawResults)) {
-            // 优先使用具体的error码，如果都是通用error则使用 NO_VALID_IMAGE
+            // 优先use具体的error码，如果都是通用error则use NO_VALID_IMAGE
             $finalErrorCode = ImageGenerateErrorCode::NO_VALID_IMAGE;
             $finalErrorMsg = '';
 
@@ -213,7 +213,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                 }
             }
 
-            // 如果没有找到具体errormessage，使用第一个errormessage
+            // 如果没有找到具体errormessage，use第一个errormessage
             if (empty($finalErrorMsg) && ! empty($errors[0]['message'])) {
                 $finalErrorMsg = $errors[0]['message'];
             }
@@ -407,7 +407,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
         array $volcengineResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // 使用锁确保并发安全（虽然V3使用同步，但保持一致性）
+        // use锁确保并发安全（虽然V3usesync，但保持一致性）
         $lockOwner = $this->lockResponse($response);
         try {
             // 从火山引擎V3响应中提取数据
@@ -433,7 +433,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                         'error' => $e->getMessage(),
                         'url' => $imageUrl,
                     ]);
-                    // 水印handlefail时使用原始URL
+                    // 水印handlefail时use原始URL
                     $currentData[] = [
                         'url' => $imageUrl,
                     ];
@@ -451,7 +451,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                     $this->logger->error('VolcengineV3添加图片数据：base64水印handlefail', [
                         'error' => $e->getMessage(),
                     ]);
-                    // 水印handlefail时使用原始数据
+                    // 水印handlefail时use原始数据
                     $currentData[] = [
                         'b64_json' => $base64Image,
                     ];

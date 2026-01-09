@@ -81,7 +81,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             $seqEntity->setObjectId($agentAccountEntity->getDelightfulId());
             $seqEntity->setContent($messageDTO->getContent());
 
-            // set额外info (包括 topicId)
+            // set额外info (include topicId)
             $seqExtra = new SeqExtra();
             // 从 messageDTO 中get topicId
             $topicId = $messageDTO->getTopicId() ?? '';
@@ -110,7 +110,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
 
             // 6. create发送者额外info
             $senderExtraDTO = new SenderExtraDTO();
-            // 临时message可能不需要环境ID，使用默认value
+            // 临时message可能不需要环境ID，use默认value
             $senderExtraDTO->setDelightfulEnvId(null);
 
             // 7. 触发usercall超级麦吉event

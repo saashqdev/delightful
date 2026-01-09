@@ -78,7 +78,7 @@ class MessageAssembler
     }
 
     /**
-     * 根据arraygetmessage结构.
+     * according toarraygetmessage结构.
      */
     public static function getMessageStructByArray(ChatMessageType|ControlMessageType|string $messageTypeString, array $messageStructArray): MessageInterface
     {
@@ -174,7 +174,7 @@ class MessageAssembler
     }
 
     /**
-     * 根据 protobuf 的message结构,get对应的messageobject.
+     * according to protobuf 的message结构,get对应的messageobject.
      */
     public static function getControlMessageDTOByRequest(ControlRequest $controlRequest, DelightfulUserAuthorization $userAuthorization, ConversationType $conversationType): DelightfulMessageEntity
     {
@@ -227,7 +227,7 @@ class MessageAssembler
      */
     public static function getControlMessageStruct(ControlMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
-        // 其实可以直接使用 protobuf 生成的 php object,但是暂时没有time全量替换,以后再说.
+        // 其实可以直接use protobuf 生成的 php object,但是暂时没有time全量替换,以后再说.
         return match ($messageTypeEnum) {
             # 控制message
             ControlMessageType::CreateConversation => new ConversationWindowCreateMessage($messageStructArray),

@@ -50,7 +50,7 @@ interface HighAvailabilityInterface
      *
      * 该method将:
      * 1. 记录请求统计data
-     * 2. 根据请求success或failedstatus自动触发熔断器反馈
+     * 2. according to请求success或failedstatus自动触发熔断器反馈
      *
      * @param EndpointResponseDTO $response 接入点响应实体
      */

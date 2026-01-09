@@ -52,7 +52,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 根据configurationIDarraygetconfiguration实体list.
+     * according toconfigurationIDarraygetconfiguration实体list.
      * @return ProviderConfigEntity[]
      */
     public function getConfigsByIds(array $configIds): array
@@ -66,7 +66,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 根据多个service商configurationIDgetmodellist.
+     * according to多个service商configurationIDgetmodellist.
      * @param array $configIds service商configurationIDarray
      * @return ProviderModelEntity[]
      */
@@ -83,7 +83,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 初始化实体的ID和time戳（为新create的实体set）.
+     * initialize实体的ID和time戳（为新create的实体set）.
      * @param mixed $entity
      */
     protected function initializeEntityForCreation($entity, array &$attributes): void
@@ -132,7 +132,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 准备移除软删相关功能，临时这样写。create带有软deletefilter的 ProviderConfigModel query构建器.
+     * 准备移除软删相关功能，临时这样写。create带有软deletefilter的 ProviderConfigModel querybuild器.
      */
     private function createConfigQuery(): Builder
     {
@@ -140,7 +140,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 准备移除软删相关功能，临时这样写。create带有软deletefilter的 ProviderModelModel query构建器.
+     * 准备移除软删相关功能，临时这样写。create带有软deletefilter的 ProviderModelModel querybuild器.
      */
     private function createProviderModelQuery(): Builder
     {

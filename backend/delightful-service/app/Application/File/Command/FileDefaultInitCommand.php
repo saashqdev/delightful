@@ -71,7 +71,7 @@ class FileDefaultInitCommand extends Command
     {
         $this->line('startinitialize文件...');
 
-        // 基础文件目录 - 使用新的路径结构
+        // 基础文件目录 - use新的路径结构
         $baseFileDir = BASE_PATH . '/storage/files';
         $defaultModulesDir = $baseFileDir . '/DELIGHTFUL/open/default';
 
@@ -133,7 +133,7 @@ class FileDefaultInitCommand extends Command
                     $existingFiles = $this->defaultFileDomainService->getByOrganizationCodeAndBusinessType($businessType, $organizationCode);
                     $isDuplicate = false;
                     foreach ($existingFiles as $existingFile) {
-                        // 使用 userId 字段存储业务标识来判断重复
+                        // use userId 字段存储业务标识来判断重复
                         if ($existingFile->getUserId() === $businessIdentifier) {
                             $isDuplicate = true;
                             break;
@@ -171,7 +171,7 @@ class FileDefaultInitCommand extends Command
                             throw new Exception('文件上传fail，无法获取访问链接');
                         }
 
-                        // validatesuccess后才创建数据库记录，使用实际的上传 key
+                        // validatesuccess后才create数据库记录，use实际的上传 key
                         $defaultFileEntity = new DefaultFileEntity();
                         $defaultFileEntity->setBusinessType($businessType->value);
                         $defaultFileEntity->setFileType(DefaultFileType::DEFAULT->value);
@@ -179,7 +179,7 @@ class FileDefaultInitCommand extends Command
                         $defaultFileEntity->setFileSize($fileSize);
                         $defaultFileEntity->setOrganization($organizationCode);
                         $defaultFileEntity->setFileExtension($fileExtension);
-                        $defaultFileEntity->setUserId($businessIdentifier); // 使用业务标识作为 userId
+                        $defaultFileEntity->setUserId($businessIdentifier); // use业务标识作为 userId
 
                         // save实体
                         $this->defaultFileDomainService->insert($defaultFileEntity);
@@ -229,6 +229,6 @@ class FileDefaultInitCommand extends Command
     protected function processDefaultIcons(string $baseFileDir, string $organizationCode, int &$totalFiles, int &$skippedFiles): void
     {
         // 如果有需要单独handle的默认图标，可以在这里implement
-        // 例如handle Midjourney 等默认图标
+        // for examplehandle Midjourney 等默认图标
     }
 }

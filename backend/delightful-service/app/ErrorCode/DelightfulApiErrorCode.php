@@ -71,7 +71,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.user.create_access_token_limit')]
     case USER_CREATE_ACCESS_TOKEN_LIMIT = 4014;
 
-    // user使用的token数量超过限制
+    // useruse的token数量超过限制
     #[ErrorMessage(message: 'api.user.use_access_token_limit')]
     case USER_USE_ACCESS_TOKEN_LIMIT = 4015;
 

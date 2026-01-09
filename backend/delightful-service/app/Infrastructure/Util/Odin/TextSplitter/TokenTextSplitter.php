@@ -38,12 +38,12 @@ class TokenTextSplitter extends TextSplitter
     private $tokenizer;
 
     /**
-     * 默认token计算闭包使用到的encoderProvider.
+     * 默认token计算闭包use到的encoderProvider.
      */
     private EncoderProvider $defaultEncoderProvider;
 
     /**
-     * 默认token计算闭包使用到的encoder.
+     * 默认token计算闭包use到的encoder.
      */
     private Encoder $defaultEncoder;
 
@@ -172,7 +172,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 使用指定分隔符分割文本.
+     * use指定分隔符分割文本.
      */
     private function splitBySeparator(string $text, string $separator): array
     {
@@ -218,7 +218,7 @@ class TokenTextSplitter extends TextSplitter
      */
     private function splitByFixedLength(string $text): array
     {
-        $chunkSize = (int) floor($this->chunkSize / 2); // 使用较小的块大小
+        $chunkSize = (int) floor($this->chunkSize / 2); // use较小的块大小
         $length = mb_strlen($text);
         $splits = [];
         for ($i = 0; $i < $length; $i += $chunkSize) {
@@ -292,7 +292,7 @@ class TokenTextSplitter extends TextSplitter
         }
         $separatorBeginIndex = min($i + 1, count($this->separators));
 
-        // 使用选定的分隔符分割文本
+        // use选定的分隔符分割文本
         if ($separator !== '') {
             $splits = $this->splitBySeparator($text, $separator);
         } else {
@@ -409,10 +409,10 @@ class TokenTextSplitter extends TextSplitter
         // 尝试检测编码
         $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], true);
         if ($encoding === false) {
-            // 如果无法检测到编码，尝试使用 iconv 检测
+            // 如果无法检测到编码，尝试use iconv 检测
             $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], false);
             if ($encoding === false) {
-                return 'UTF-8'; // 默认使用 UTF-8
+                return 'UTF-8'; // 默认use UTF-8
             }
         }
 

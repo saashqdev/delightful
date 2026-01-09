@@ -119,7 +119,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                         $memoryManager->addMessage($contentMessage);
                     }
                 } else {
-                    // create一个新的，在后续使用
+                    // create一个新的，在后续use
                     $currentMessage = new UserMessage();
                     $currentMessage->setContent($userPrompt);
                     $memoryManager->addMessage($currentMessage);
@@ -192,7 +192,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             }
         } else {
             if ($userPrompt !== '') {
-                // create一个新的，在后续使用
+                // create一个新的，在后续use
                 $currentMessage = new UserMessage();
                 $currentMessage->setContent($userPrompt);
                 $memoryManager->addMessage($currentMessage);

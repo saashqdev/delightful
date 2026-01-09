@@ -80,7 +80,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 内部使用 chat 时，一定是使用该method.
+     * 内部use chat 时，一定是use该method.
      * 会自动替代为本地代理模型.
      */
     public function getChatModelProxy(BaseDataIsolation $dataIsolation, string $model, bool $useOfficialAccessToken = false): DelightfulAILocalModel
@@ -97,7 +97,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 内部使用 embedding 时，一定是使用该method.
+     * 内部use embedding 时，一定是use该method.
      * 会自动替代为本地代理模型.
      */
     public function getEmbeddingModelProxy(BaseDataIsolation $dataIsolation, string $model): DelightfulAILocalModel
@@ -117,7 +117,7 @@ class ModelGatewayMapper extends ModelMapper
 
     /**
      * 该method获取到的一定是真实call的模型.
-     * 仅 ModelGateway 领域使用.
+     * 仅 ModelGateway 领域use.
      * @param string $model 预期是管理后台的 model_id，过度阶段接受传入 model_version
      */
     public function getOrganizationChatModel(BaseDataIsolation $dataIsolation, string $model): ModelInterface|OdinModel
@@ -132,7 +132,7 @@ class ModelGatewayMapper extends ModelMapper
 
     /**
      * 该method获取到的一定是真实call的模型.
-     * 仅 ModelGateway 领域使用.
+     * 仅 ModelGateway 领域use.
      * @param string $model 模型名称 预期是管理后台的 model_id，过度阶段接受 model_version
      */
     public function getOrganizationEmbeddingModel(BaseDataIsolation $dataIsolation, string $model): EmbeddingInterface|OdinModel
@@ -422,7 +422,7 @@ class ModelGatewayMapper extends ModelMapper
             $iconUrl = '';
         }
 
-        // 根据模型typereturn不同的包装object
+        // according to模型typereturn不同的包装object
         if ($providerModelEntity->getModelType()->isVLM()) {
             return new ImageModel($providerConfigItem->toArray(), $providerModelEntity->getModelVersion(), (string) $providerModelEntity->getId(), $providerEntity->getProviderCode());
         }
@@ -484,7 +484,7 @@ class ModelGatewayMapper extends ModelMapper
             return null;
         }
 
-        // 检查当前套餐是否有这个模型的使用权限 - 目前只有 LLM 模型有这个限制
+        // 检查当前套餐是否有这个模型的use权限 - 目前只有 LLM 模型有这个限制
         if ($providerModelEntity->getModelType()->isLLM()) {
             if (! $dataIsolation->isOfficialOrganization() && ! $dataIsolation->getSubscriptionManager()->isValidModelAvailable($providerModelEntity->getModelId(), $modelType)) {
                 $this->logger->info('模型不在可用名单', ['model' => $providerModelEntity->getModelId(), 'model_type' => $modelType?->value]);
@@ -516,7 +516,7 @@ class ModelGatewayMapper extends ModelMapper
 
     private function createProxy(ModelGatewayDataIsolation $dataIsolation, string $model, ModelOptions $modelOptions, ApiOptions $apiOptions, bool $useOfficialAccessToken = false): DelightfulAILocalModel
     {
-        // 使用ModelFactory创建模型实例
+        // useModelFactorycreate模型实例
         $odinModel = ModelFactory::create(
             DelightfulAILocalModel::class,
             $model,

@@ -290,7 +290,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             if ($messageChatInstruction) {
                 $value = $messageChatInstruction->getValue();
             } else {
-                // 如果message体中没有指令value，使用默认value
+                // 如果message体中没有指令value，use默认value
                 $value = $instructionConfig->getDefaultValue();
             }
             $instructions[$instructionConfig->getId()] = $instructionConfig->getNameAndValueByType($value);

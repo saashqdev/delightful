@@ -57,13 +57,13 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 根据服务商配置ID获取服务商详细信息.
+     * according to服务商配置ID获取服务商详细信息.
      */
     public function getProviderModelsByConfigId(
         DelightfulUserAuthorization $authorization,
         string $configId
     ): ?ProviderConfigModelsDTO {
-        // 构建数据隔离object
+        // build数据隔离object
         $dataIsolation = ProviderDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId(),
@@ -114,7 +114,7 @@ readonly class AdminProviderAppService
 
         $providerConfigEntity = $this->providerConfigDomainService->createProviderConfig($dataIsolation, $providerConfigEntity);
 
-        // 触发服务商配置创建事件
+        // 触发服务商配置create事件
         $this->eventDispatcher->dispatch(new ProviderConfigCreatedEvent(
             $providerConfigEntity,
             $authorization->getOrganizationCode(),
@@ -229,7 +229,7 @@ readonly class AdminProviderAppService
     {
         $dataIsolation = ProviderDataIsolation::create($authorization->getOrganizationCode(), $authorization->getId());
 
-        // 记录是创建还是更新
+        // 记录是create还是更新
         $isCreate = ! $saveProviderModelDTO->getId();
 
         $saveProviderModelDTO = $this->providerModelDomainService->saveModel($dataIsolation, $saveProviderModelDTO);
@@ -258,7 +258,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 根据organization编码和服务商分类获取活跃的服务商配置.
+     * according toorganization编码和服务商分类获取活跃的服务商配置.
      * @param string $organizationCode organization编码
      * @param Category $category 服务商分类
      * @return ProviderConfigDTO[]
@@ -279,7 +279,7 @@ readonly class AdminProviderAppService
      */
     public function connectivityTest(string $serviceProviderConfigId, string $modelVersion, string $modelPrimaryId, DelightfulUserAuthorization $authorization): ConnectResponse
     {
-        // 构建数据隔离object
+        // build数据隔离object
         $dataIsolation = ProviderDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId(),
@@ -290,7 +290,7 @@ readonly class AdminProviderAppService
             $dataIsolation,
             $modelPrimaryId
         );
-        // 根据服务商type和模型type进行连通性测试
+        // according to服务商type和模型type进行连通性测试
         return match ($this->getConnectivityTestType($providerModelEntity->getCategory()->value, $providerModelEntity->getModelType()->value)) {
             NaturalLanguageProcessing::EMBEDDING => $this->embeddingConnectivityTest($modelPrimaryId, $authorization),
             NaturalLanguageProcessing::LLM => $this->llmConnectivityTest($modelPrimaryId, $authorization),
@@ -321,7 +321,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 获取所有可用的服务商列表（包括官方服务商），不依赖于organization.
+     * 获取所有可用的服务商列表（include官方服务商），不依赖于organization.
      *
      * @param Category $category 服务商分类
      * @param string $organizationCode organization编码
@@ -329,7 +329,7 @@ readonly class AdminProviderAppService
      */
     public function getAllAvailableLlmProviders(Category $category, string $organizationCode): array
     {
-        // 获取所有服务商（包括Official）
+        // 获取所有服务商（includeOfficial）
         $serviceProviders = $this->adminProviderDomainService->getAllAvailableProviders($category);
 
         if (empty($serviceProviders)) {
@@ -383,7 +383,7 @@ readonly class AdminProviderAppService
             $iconUrlMap[] = $links;
         }
         ! empty($iconUrlMap) && $iconUrlMap = array_merge(...$iconUrlMap);
-        // 创建DTO并设置图标URL
+        // createDTO并设置图标URL
         $modelDTOs = [];
         foreach ($models as $model) {
             $modelDTO = new ProviderModelDetailDTO($model->toArray());
@@ -675,7 +675,7 @@ readonly class AdminProviderAppService
         foreach ($serviceProviders as $serviceProvider) {
             $icon = $serviceProvider->getIcon();
 
-            // 如果有URL映射，使用映射的URL
+            // 如果有URL映射，use映射的URL
             if (isset($iconUrlMap[$icon])) {
                 $serviceProvider->setIcon($iconUrlMap[$icon]->getUrl());
             }

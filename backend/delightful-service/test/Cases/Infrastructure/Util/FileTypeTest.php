@@ -90,8 +90,8 @@ class FileTypeTest extends TestCase
     /**
      * test从HTTP头infogettype（需要模拟HTTP响应）.
      *
-     * 注意：这个test可能需要使用function模拟，如果项目中没有configurationfunction模拟，
-     * 可以将此test标记为跳过或使用真实URL进行test
+     * 注意：这个test可能需要usefunction模拟，如果项目中没有configurationfunction模拟，
+     * 可以将此test标记为跳过或use真实URL进行test
      */
     public function testGetTypeFromHeaders()
     {

@@ -48,7 +48,7 @@ class MCPHandler implements MCPHandlerInterface
         $this->exceptionHandler = $this->container->get(MCPExceptionHandler::class);
         $this->methodHandlerFactory = new MethodHandlerFactory($this->container);
 
-        // 初始化默认组件
+        // initialize默认组件
         $this->authentication = new NoAuthentication();
         $this->rateLimiter = new NoRateLimiter();
         $this->toolManager = new MCPToolManager();
@@ -193,7 +193,7 @@ class MCPHandler implements MCPHandlerInterface
             return $params['sessionId'];
         }
 
-        // 如果都没有，则使用请求ID
+        // 如果都没有，则use请求ID
         return (string) $request->getId();
     }
 }

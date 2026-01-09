@@ -9,7 +9,7 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR configurationconstant
- * 统一管理 ASR 相关的所有configurationconstant，包括超时time、轮询间隔、重试次数等.
+ * 统一管理 ASR 相关的所有configurationconstant，include超时time、轮询间隔、重试次数等.
  */
 class AsrConfig
 {
@@ -51,7 +51,7 @@ class AsrConfig
     public const int SANDBOX_STARTUP_TIMEOUT = 121;
 
     /**
-     * 工作区初始化超时（秒）.
+     * 工作区initialize超时（秒）.
      */
     public const int WORKSPACE_INIT_TIMEOUT = 60;
 

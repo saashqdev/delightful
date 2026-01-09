@@ -59,7 +59,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         }
     }
 
-    // 创建群聊
+    // create群聊
     public function createChatGroup(array $groupUserIds, array $inputDepartmentIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $delightfulGroupDTO): array
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
@@ -72,7 +72,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         $groupName = $this->getGroupName($delightfulGroupDTO, $userIds, $dataIsolation);
         $delightfulGroupDTO->setGroupName($groupName);
         $delightfulGroupDTO->setMemberLimit($chatGroupUserNumLimit);
-        // 创建群聊
+        // create群聊
         Db::beginTransaction();
         try {
             $groupEntity = $this->delightfulGroupDomainService->createGroup($delightfulGroupDTO, $dataIsolation);
@@ -345,7 +345,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
                 'new_owner_user_id' => $delightfulGroupDTO->getGroupOwner(),
             ];
             $userSeq = $this->createAndDispatchOperateGroupUsersSeq(
-                $seqContent,// 全员通知
+                $seqContent,// 全员notify
                 $groupEntity,
                 $dataIsolation,
                 ControlMessageType::GroupOwnerChange
@@ -458,13 +458,13 @@ class DelightfulChatGroupAppService extends AbstractAppService
     ): DelightfulSeqEntity {
         // 往群聊中添加user
         $this->delightfulGroupDomainService->addUsersToGroup($groupEntity, $userIds);
-        // 为新增的成员创建conversation窗口
+        // 为新增的成员createconversation窗口
         $this->delightfulConversationDomainService->batchCreateGroupConversationByUserIds($groupEntity, $userIds);
         return $this->createAndDispatchOperateGroupUsersSeq($structure, $groupEntity, $dataIsolation, $controlMessageType);
     }
 
     /**
-     * 创建并分发操作群成员的 seq.
+     * create并分发操作群成员的 seq.
      */
     private function createAndDispatchOperateGroupUsersSeq(
         array $seqContent,
@@ -481,7 +481,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
 
     private function noticeGroupChangeSeq(DelightfulSeqEntity $seqEntity): array
     {
-        // 协程通知user其他设备,放在事务外面
+        // 协程notifyuser其他设备,放在事务外面
         co(function () use ($seqEntity) {
             $this->delightfulControlDomainService->pushControlSequence($seqEntity);
         });

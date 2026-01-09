@@ -50,7 +50,7 @@ class DelightfulAgentDTO extends AbstractDTO
     public string $robotDescription;
 
     /**
-     * 发布人.
+     * publish人.
      */
     public string $createdUid;
 

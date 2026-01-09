@@ -156,7 +156,7 @@ class DelightfulAgentApi extends AbstractApi
         return $agentsByUserIdPage;
     }
 
-    // get发布版本的助理
+    // getpublish版本的助理
     public function getAgentVersionById(RequestInterface $request, ?string $agentVersionId = null)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -187,7 +187,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getAgentsFromMarketplacePage($page, $pageSize);
     }
 
-    // 发布助理版本
+    // publish助理版本
 
     /**
      * @throws Throwable
@@ -266,7 +266,7 @@ class DelightfulAgentApi extends AbstractApi
         $this->delightfulAgentAppService->updateAgentStatus($authorization, $agentId, DelightfulAgentVersionStatus::from($status));
     }
 
-    // 改变助理发布到organization的status
+    // 改变助理publish到organization的status
     public function updateAgentEnterpriseStatus(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -315,7 +315,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->isUpdated($authenticatable, $agentId);
     }
 
-    // 根据 userId get发布版本的助理详情
+    // according to userId getpublish版本的助理详情
     public function getDetailByUserId(RequestInterface $request, ?string $userId = null)
     {
         $this->getAuthorization();

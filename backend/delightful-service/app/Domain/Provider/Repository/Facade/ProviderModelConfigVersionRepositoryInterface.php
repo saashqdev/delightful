@@ -14,7 +14,7 @@ interface ProviderModelConfigVersionRepositoryInterface
 {
     /**
      * 保存modelconfiguration版本（包含版本号递增和标记当前版本的完整逻辑）.
-     * 使用事务确保数据一致性.
+     * use事务确保数据一致性.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param ProviderModelConfigVersionEntity $entity configuration版本实体

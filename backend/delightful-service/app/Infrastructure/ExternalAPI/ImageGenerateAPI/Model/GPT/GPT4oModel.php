@@ -71,7 +71,7 @@ class GPT4oModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先创建响应object
+        // 1. 预先create响应object
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -334,7 +334,7 @@ class GPT4oModel extends AbstractImageGenerate
         $rawResults = [];
         $errors = [];
 
-        // 使用 Parallel 并行handle
+        // use Parallel 并行handle
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
         for ($i = 0; $i < $count; ++$i) {
@@ -430,7 +430,7 @@ class GPT4oModel extends AbstractImageGenerate
         array $gpt4oResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // 使用Redis锁确保并发安全
+        // useRedis锁确保并发安全
         $lockOwner = $this->lockResponse($response);
         try {
             // 从GPT4o轮询结果中提取图片URL
@@ -452,7 +452,7 @@ class GPT4oModel extends AbstractImageGenerate
                     'error' => $e->getMessage(),
                     'url' => $imageUrl,
                 ]);
-                // 水印handlefail时使用原始URL
+                // 水印handlefail时use原始URL
             }
 
             $currentData[] = [

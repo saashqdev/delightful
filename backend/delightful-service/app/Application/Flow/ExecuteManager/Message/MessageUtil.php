@@ -68,7 +68,7 @@ class MessageUtil
                     $chatAttachments[] = $chatAttachment;
 
                     if ($attachment instanceof ExternalAttachment) {
-                        // 异步下载外链文件并上传到本service oss
+                        // async下载外链文件并上传到本service oss
                         $imageUploadEvent = new ExternalAttachmentUploadEvent($attachment, $executionData->getDataIsolation()->getCurrentOrganizationCode());
                         AsyncEventUtil::dispatch($imageUploadEvent);
                     }
@@ -96,7 +96,7 @@ class MessageUtil
                     if (! is_string($linkPath) || ! $attachment = $executionData->getAttachmentRecord($linkPath)) {
                         continue;
                     }
-                    // get文件name。如果 linkPaths 只有 1 个，并且 linkDesc 也是只有一个，那么可以直接使用 linkDesc 作为文件name
+                    // get文件name。如果 linkPaths 只有 1 个，并且 linkDesc 也是只有一个，那么可以直接use linkDesc 作为文件name
                     if (count($linkPaths) === 1 && is_string($linkDesc) && $linkDesc !== '') {
                         $attachment->setName($linkDesc);
                     }
@@ -111,7 +111,7 @@ class MessageUtil
                     $chatAttachments[] = $chatAttachment;
 
                     if ($attachment instanceof ExternalAttachment) {
-                        // 异步下载外链文件并上传到本service oss
+                        // async下载外链文件并上传到本service oss
                         $imageUploadEvent = new ExternalAttachmentUploadEvent($attachment, $executionData->getDataIsolation()->getCurrentOrganizationCode());
                         AsyncEventUtil::dispatch($imageUploadEvent);
                     }
@@ -126,7 +126,7 @@ class MessageUtil
                     return null;
                 }
                 $contentString = $content->getKeyValue($executionData->getExpressionFieldData());
-                // todo 实际上没实现，以下是伪代码
+                // todo 实际上没implement，以下是伪代码
                 return new AggregateAISearchCardMessageV2([
                     'search' => $contentString['search'] ?? [],
                     'llm_response' => $contentString['llm_response'] ?? '',

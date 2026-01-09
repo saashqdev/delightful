@@ -119,7 +119,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.user_already_in_group')]
     case USER_ALREADY_IN_GROUP = 3024;
 
-    // 请发送message后再使用智能重命名功能
+    // 请发送message后再use智能重命名功能
         // Send a message before using smart rename
     #[ErrorMessage('chat.topic.send_message_and_rename_topic')]
     case SEND_MESSAGE_AND_RENAME_TOPIC = 3025;
@@ -189,7 +189,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.topic.id_not_found')]
     case TOPIC_ID_NOT_FOUND = 3038;
 
-    // 不支持同步这个第三方平台的department数据
+    // 不支持sync这个第三方平台的department数据
         // Syncing department data from this third-party platform is not supported
     #[ErrorMessage('chat.department.sync_not_support')]
     case DEPARTMENT_SYNC_NOT_SUPPORT = 3039;
@@ -199,7 +199,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.platform.organization_code_not_found')]
     case PLATFORM_ORGANIZATION_CODE_NOT_FOUND = 3040;
 
-    // department同步fail
+    // departmentsyncfail
         // Department sync failed
     #[ErrorMessage('chat.department.sync_failed')]
     case DEPARTMENT_SYNC_FAILED = 3041;

@@ -13,18 +13,18 @@ use App\Domain\Mode\Entity\ModeGroupRelationEntity;
 interface ModeGroupRelationRepositoryInterface
 {
     /**
-     * 根据IDget关联关系.
+     * according toIDget关联关系.
      */
     public function findById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeGroupRelationEntity;
 
     /**
-     * 根据modeIDget所有关联关系.
+     * according tomodeIDget所有关联关系.
      * @return ModeGroupRelationEntity[]
      */
     public function findByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;
 
     /**
-     * 根据分组IDget关联关系.
+     * according to分组IDget关联关系.
      * @return ModeGroupRelationEntity[]
      */
     public function findByGroupId(ModeDataIsolation $dataIsolation, int|string $groupId): array;
@@ -35,12 +35,12 @@ interface ModeGroupRelationRepositoryInterface
     public function save(ModeGroupRelationEntity $relationEntity): ModeGroupRelationEntity;
 
     /**
-     * 根据分组IDdelete关联关系.
+     * according to分组IDdelete关联关系.
      */
     public function deleteByGroupId(ModeDataIsolation $dataIsolation, int|string $groupId): bool;
 
     /**
-     * 根据modeIDdelete所有关联关系.
+     * according tomodeIDdelete所有关联关系.
      */
     public function deleteByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): bool;
 
@@ -50,7 +50,7 @@ interface ModeGroupRelationRepositoryInterface
     public function batchSave(ModeDataIsolation $dataIsolation, array $relationEntities);
 
     /**
-     * 根据多个modeID批量get关联关系.
+     * according to多个modeID批量get关联关系.
      * @param int[]|string[] $modeIds
      * @return ModeGroupRelationEntity[]
      */

@@ -20,7 +20,7 @@ abstract class AbstractRequestDTO extends AbstractEntity implements ProxyModelRe
     public const string METHOD_EMBEDDINGS = 'embeddings';
 
     /**
-     * 业务parameter，比如application版就need额外的parameter.
+     * 业务parameter，such asapplication版就need额外的parameter.
      */
     protected array $businessParams = [];
 

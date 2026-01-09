@@ -89,7 +89,7 @@ readonly class FlowMemoryManager
     }
 
     /**
-     * 根据记忆typequery聊天记录.
+     * according to记忆typequery聊天记录.
      * @return LLMMemoryMessage[]
      */
     public function queries(MemoryQuery $memoryQuery, array $ignoreMessageIds = []): array

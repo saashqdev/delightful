@@ -15,7 +15,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
         $content = $this->convertToCsv($content);
         // delete ## 开头的行
         $content = preg_replace('/^##.*\n/', '', $content);
-        // 使用正则table达式匹配不在引号内的换行符
+        // use正则table达式匹配不在引号内的换行符
         return preg_replace('/(?<!")[\r\n]+(?!")/', "\n\n", $content);
     }
 
@@ -45,7 +45,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
                 continue;
             }
 
-            // 使用fgetcsv的方式解析CSV行
+            // usefgetcsv的方式解析CSV行
             $row = str_getcsv($line);
 
             // 如果是第一行且不是sheet标记，则作为标题行
@@ -62,7 +62,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
                 }
             }
 
-            // 使用原始行的分隔符
+            // use原始行的分隔符
             $originalSeparator = $this->detectSeparator($line);
             $result[] = implode($originalSeparator, $rowResult);
         }
@@ -86,7 +86,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             }
         }
 
-        // 如果没有找到分隔符，默认使用逗号
+        // 如果没有找到分隔符，默认use逗号
         return ',';
     }
 

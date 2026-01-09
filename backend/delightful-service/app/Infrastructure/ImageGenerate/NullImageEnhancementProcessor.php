@@ -11,8 +11,8 @@ use App\Domain\ImageGenerate\Contract\ImageEnhancementProcessorInterface;
 use App\Domain\ImageGenerate\ValueObject\ImplicitWatermark;
 
 /**
- * null实现的image增强处理器
- * 在没有商业代码时提供默认实现.
+ * nullimplement的image增强处理器
+ * 在没有商业代码时提供默认implement.
  */
 class NullImageEnhancementProcessor implements ImageEnhancementProcessorInterface
 {

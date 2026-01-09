@@ -9,7 +9,7 @@ namespace App\Infrastructure\Core\MCP\Resources;
 
 /**
  * MCP资源管理器.
- * when前version为null实现，仅returnnull列表.
+ * when前version为nullimplement，仅returnnull列表.
  */
 class MCPResourceManager
 {
@@ -20,16 +20,16 @@ class MCPResourceManager
 
     /**
      * 注册资源.
-     * when前为null实现.
+     * when前为nullimplement.
      */
     public function registerResource(array $resource): void
     {
-        // null实现，暂不注册任何资源
+        // nullimplement，暂不注册任何资源
     }
 
     /**
      * get资源列表.
-     * when前为null实现，returnnullarray.
+     * when前为nullimplement，returnnullarray.
      *
      * @return array<int, array<string, mixed>>
      */
@@ -40,7 +40,7 @@ class MCPResourceManager
 
     /**
      * get指定ID的资源.
-     * when前为null实现，始终returnnull.
+     * when前为nullimplement，始终returnnull.
      */
     public function getResource(string $id): ?array
     {

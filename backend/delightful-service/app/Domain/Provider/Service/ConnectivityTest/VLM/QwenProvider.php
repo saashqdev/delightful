@@ -45,7 +45,7 @@ class QwenProvider implements IProvider
         $body = [];
         // 文生图configuration
         $body['prompt'] = '生成一只狗';
-        $body['size'] = '1328*1328'; // 使用qwen-image支持的默认1:1尺寸
+        $body['size'] = '1328*1328'; // useqwen-image支持的默认1:1尺寸
         $body['n'] = 1;
         $body['model'] = $modelVersion;
         $body['watermark'] = false;

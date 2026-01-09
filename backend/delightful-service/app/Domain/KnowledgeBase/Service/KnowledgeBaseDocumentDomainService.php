@@ -38,7 +38,7 @@ readonly class KnowledgeBaseDocumentDomainService
     {
         $this->prepareForCreation($documentEntity);
         $entity = $this->knowledgeBaseDocumentRepository->create($dataIsolation, $documentEntity);
-        // 如果有文件，同步文件
+        // 如果有文件，sync文件
         if ($documentEntity->getDocumentFile()) {
             $event = new KnowledgeBaseDocumentSavedEvent($dataIsolation, $knowledgeBaseEntity, $entity, true);
             AsyncEventUtil::dispatch($event);
@@ -110,7 +110,7 @@ readonly class KnowledgeBaseDocumentDomainService
             $deltaWordCount = -$documentEntity->getWordCount();
             $this->updateWordCount($dataIsolation, $knowledgeBaseCode, $documentEntity->getCode(), $deltaWordCount);
         });
-        // 异步delete向量database片段
+        // asyncdelete向量database片段
         /* @phpstan-ignore-next-line */
         ! is_null($documentEntity) && AsyncEventUtil::dispatch(new KnowledgeBaseDocumentRemovedEvent($dataIsolation, $knowledgeBaseEntity, $documentEntity));
     }
@@ -122,14 +122,14 @@ readonly class KnowledgeBaseDocumentDomainService
     {
         $document = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode);
 
-        // 如果强制重建或者同步status为fail，则重新同步
-        if ($force || $document->getSyncStatus() === 2) { // 2 table示同步fail
-            $document->setSyncStatus(0); // 0 table示未同步
+        // 如果强制重建或者syncstatus为fail，则重新sync
+        if ($force || $document->getSyncStatus() === 2) { // 2 table示syncfail
+            $document->setSyncStatus(0); // 0 table示未sync
             $document->setSyncStatusMessage('');
             $document->setSyncTimes(0);
             $this->knowledgeBaseDocumentRepository->update($dataIsolation, $document);
 
-            // 异步触发重建（这里可以发送event或者加入队列）
+            // async触发重建（这里可以发送event或者加入队列）
             // TODO: 触发重建向量event
         }
     }
@@ -272,7 +272,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $documentFile = $documentEntity->getDocumentFile();
         $documentEntity->setUpdatedAt($documentEntity->getCreatedAt());
         $documentEntity->setUpdatedUid($documentEntity->getCreatedUid());
-        $documentEntity->setSyncStatus(0); // 0 table示未同步
+        $documentEntity->setSyncStatus(0); // 0 table示未sync
         // 以下property均从文档文件中get
         $documentEntity->setDocType($documentFile?->getDocType() ?? DocType::TXT->value);
         $documentEntity->setThirdFileId($documentFile?->getThirdFileId());

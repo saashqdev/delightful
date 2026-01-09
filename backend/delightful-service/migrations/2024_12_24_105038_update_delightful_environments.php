@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_environments', function (Blueprint $table) {
-            $table->text('extra')->nullable()->comment('扩展field，比如记录一下这个环境关联的环境 id。（预发布和生产是关联的）');
+            $table->text('extra')->nullable()->comment('扩展field，such as记录一下这个环境关联的环境 id。（预publish和生产是关联的）');
         });
     }
 

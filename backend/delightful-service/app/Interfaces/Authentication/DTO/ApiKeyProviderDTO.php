@@ -57,7 +57,7 @@ class ApiKeyProviderDTO extends AbstractDTO
     protected bool $enabled = true;
 
     /**
-     * 最后使用时间.
+     * 最后use时间.
      */
     protected ?string $lastUsed = null;
 

@@ -45,7 +45,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     {
         // 先登录获取token
         $token = $this->performLogin();
-        echo "\n使用token进行user信息更新: " . $token . "\n";
+        echo "\nusetoken进行user信息更新: " . $token . "\n";
 
         $requestData = [
             'avatar_url' => 'https://example.com/avatar/new-avatar.jpg',
@@ -308,7 +308,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // 根据业务逻辑，可能接受任何string作为avatar_url，或进行validate
+        // according to业务逻辑，可能接受任何string作为avatar_url，或进行validate
         $this->assertIsArray($response, '无效URL格式应被妥善handle');
 
         // 如果是认证error，跳过测试
@@ -389,7 +389,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     {
         // 先登录获取token
         $token = $this->performLogin();
-        echo "\n使用token获取user更新权限: " . $token . "\n";
+        echo "\nusetoken获取user更新权限: " . $token . "\n";
 
         $headers = $this->getTestHeaders();
         echo "\n请求头信息: " . json_encode($headers, JSON_UNESCAPED_UNICODE) . "\n";

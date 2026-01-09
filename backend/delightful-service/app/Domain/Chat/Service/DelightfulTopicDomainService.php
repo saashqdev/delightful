@@ -200,7 +200,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
     }
 
     /**
-     * 根据收件方或者发件方的session id + 话题 id，为收件方create一个新的话题.
+     * according to收件方或者发件方的session id + 话题 id，为收件方create一个新的话题.
      */
     public function createReceiveTopic(string $topicId, string $senderConversationId = '', string $receiveConversationId = ''): ?DelightfulTopicEntity
     {

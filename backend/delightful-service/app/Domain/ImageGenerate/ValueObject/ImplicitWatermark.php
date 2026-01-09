@@ -116,7 +116,7 @@ class ImplicitWatermark
             'userId' => $this->userId,
             'organizationCode' => $this->organizationCode,
             'createdAt' => $this->createdAt->format('Y-m-d H:i:s'),
-            'sign' => $this->sign, // 使用解密后的签名
+            'sign' => $this->sign, // use解密后的签名
         ];
 
         if ($this->topicId !== '') {

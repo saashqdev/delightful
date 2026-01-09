@@ -44,7 +44,7 @@ class ExcelLoaderNodeRunner extends NodeRunner
 
             $link = SSRFUtil::getSafeUrl($fileUrl, replaceIp: false);
 
-            // 根据链接get文件type，这里只get后缀可能不准确
+            // according to链接get文件type，这里只get后缀可能不准确
             $fileExtension = FileType::getType($link);
             if (! in_array($fileExtension, ['xlsx', 'xls'])) {
                 ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loader.unsupported_file_type', ['file_extension' => $fileExtension]);

@@ -15,13 +15,13 @@ interface MCPServerToolRepositoryInterface
     public function getById(MCPDataIsolation $dataIsolation, int $id): ?MCPServerToolEntity;
 
     /**
-     * 根据mcpServerCodequerytool.
+     * according tomcpServerCodequerytool.
      * @return array<MCPServerToolEntity>
      */
     public function getByMcpServerCode(MCPDataIsolation $dataIsolation, string $mcpServerCode): array;
 
     /**
-     * 根据ID和mcpServerCode联合querytool.
+     * according toID和mcpServerCode联合querytool.
      */
     public function getByIdAndMcpServerCode(MCPDataIsolation $dataIsolation, int $id, string $mcpServerCode): ?MCPServerToolEntity;
 

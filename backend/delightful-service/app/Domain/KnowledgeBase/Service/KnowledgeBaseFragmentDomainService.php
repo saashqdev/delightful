@@ -158,7 +158,7 @@ readonly class KnowledgeBaseFragmentDomainService
     }
 
     /**
-     * 根据 point_id get所有相关片段，按 version 倒序sort.
+     * according to point_id get所有相关片段，按 version 倒序sort.
      * @return array<KnowledgeBaseFragmentEntity>
      */
     public function getFragmentsByPointId(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, string $pointId, bool $lock = false): array

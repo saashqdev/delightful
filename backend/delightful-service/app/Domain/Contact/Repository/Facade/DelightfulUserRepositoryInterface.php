@@ -44,7 +44,7 @@ interface DelightfulUserRepositoryInterface
     public function getByUserIds(string $organizationCode, array $userIds): array;
 
     /**
-     * 根据 userIdType,生成对应类型的值.
+     * according to userIdType,生成对应类型的值.
      */
     public function getUserIdByType(UserIdType $userIdType, string $addStr): string;
 
@@ -54,7 +54,7 @@ interface DelightfulUserRepositoryInterface
     public function getUserOrganizations(string $userId): array;
 
     /**
-     * 根据 delightfulId getuser所属的organization列table.
+     * according to delightfulId getuser所属的organization列table.
      * @return string[]
      */
     public function getUserOrganizationsByDelightfulId(string $delightfulId): array;

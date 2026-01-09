@@ -22,7 +22,7 @@ use Throwable;
 
 /**
  * ASR 标题generate服务
- * 负责根据不同场景generate录音总结标题.
+ * 负责according to不同场景generate录音总结标题.
  */
 readonly class AsrTitleGeneratorService
 {
@@ -36,10 +36,10 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 根据不同场景generate标题.
+     * according to不同场景generate标题.
      *
      * 场景一：有 asr_stream_content（前端实时录音），直接用内容generate标题
-     * 场景二：有 file_id（上传已有文件），构建提示词generate标题
+     * 场景二：有 file_id（上传已有文件），build提示词generate标题
      *
      * @param DelightfulUserAuthorization $userAuthorization user授权
      * @param string $asrStreamContent ASRstream识别内容
@@ -82,16 +82,16 @@ readonly class AsrTitleGeneratorService
                 // 获取音频文件名称
                 $audioFileName = $fileEntity->getFileName();
 
-                // 构建笔记文件名（如果有）
+                // build笔记文件名（如果有）
                 $noteFileName = null;
                 if ($note !== null && $note->hasContent()) {
                     $noteFileName = $note->generateFileName();
                 }
 
-                // 构建user请求message（模拟user聊天message）
+                // builduser请求message（模拟user聊天message）
                 $userRequestMessage = $this->buildUserRequestMessage($audioFileName, $noteFileName);
 
-                // 使用 AsrPromptAssembler 构建提示词
+                // use AsrPromptAssembler build提示词
                 $customPrompt = AsrPromptAssembler::getTitlePromptForUploadedFile(
                     $userRequestMessage,
                     $language
@@ -116,7 +116,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 从任务statusgenerate标题（使用save的 ASR 内容和笔记内容）.
+     * 从任务statusgenerate标题（usesave的 ASR 内容和笔记内容）.
      *
      * @param AsrTaskStatusDTO $taskStatus 任务status
      * @return string generate的标题（fail时return默认标题）
@@ -124,19 +124,19 @@ readonly class AsrTitleGeneratorService
     public function generateFromTaskStatus(AsrTaskStatusDTO $taskStatus): string
     {
         try {
-            // 使用上报时save的语种，如果没有则使用当前语种
+            // use上报时save的语种，如果没有则use当前语种
             $language = $taskStatus->language ?: $this->translator->getLocale() ?: 'zh_CN';
 
-            $this->logger->info('使用语种generate标题', [
+            $this->logger->info('use语种generate标题', [
                 'task_key' => $taskStatus->taskKey,
                 'language' => $language,
                 'has_asr_content' => ! empty($taskStatus->asrStreamContent),
                 'has_note' => ! empty($taskStatus->noteContent),
             ]);
 
-            // 如果有 ASR stream内容，使用它generate标题
+            // 如果有 ASR stream内容，use它generate标题
             if (! empty($taskStatus->asrStreamContent)) {
-                // 构建笔记 DTO（如果有）
+                // build笔记 DTO（如果有）
                 $note = null;
                 if (! empty($taskStatus->noteContent)) {
                     $note = new NoteDTO(
@@ -152,7 +152,7 @@ readonly class AsrTitleGeneratorService
                     $language
                 );
 
-                // 使用自定义提示词generate标题
+                // use自定义提示词generate标题
                 $userAuthorization = $this->getUserAuthorizationFromUserId($taskStatus->userId);
                 $title = $this->delightfulChatMessageAppService->summarizeTextWithCustomPrompt(
                     $userAuthorization,
@@ -165,7 +165,7 @@ readonly class AsrTitleGeneratorService
             // 如果没有 ASR 内容，return默认标题
             return $this->generateDefaultDirectoryName();
         } catch (Throwable $e) {
-            $this->logger->warning('generate标题fail，使用默认标题', [
+            $this->logger->warning('generate标题fail，use默认标题', [
                 'task_key' => $taskStatus->taskKey,
                 'error' => $e->getMessage(),
             ]);
@@ -211,7 +211,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 为文件直传场景generate标题（仅根据文件名）.
+     * 为文件直传场景generate标题（仅according to文件名）.
      *
      * @param DelightfulUserAuthorization $userAuthorization user授权
      * @param string $fileName 文件名
@@ -226,10 +226,10 @@ readonly class AsrTitleGeneratorService
         try {
             $language = $this->translator->getLocale() ?: 'zh_CN';
 
-            // 构建user请求message（模拟user聊天message）
+            // builduser请求message（模拟user聊天message）
             $userRequestMessage = $this->buildUserRequestMessage($fileName, null);
 
-            // 使用 AsrPromptAssembler 构建提示词
+            // use AsrPromptAssembler build提示词
             $customPrompt = AsrPromptAssembler::getTitlePromptForUploadedFile(
                 $userRequestMessage,
                 $language
@@ -252,7 +252,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 构建user请求message（模拟user聊天message，使用国际化文本）.
+     * builduser请求message（模拟user聊天message，use国际化文本）.
      *
      * @param string $audioFileName 音频文件名称
      * @param null|string $noteFileName 笔记文件名称（可选）

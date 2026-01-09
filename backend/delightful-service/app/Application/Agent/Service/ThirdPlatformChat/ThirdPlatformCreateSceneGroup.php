@@ -33,7 +33,7 @@ class ThirdPlatformCreateSceneGroup
     // 入群是否需要验证：0（默认）：不验证 1：入群验证
     private int $validationType = 0;
 
-    // @all 使用范围： 0（默认）：所有人都可以@all
+    // @all use范围： 0（默认）：所有人都可以@all
     private int $mentionAllAuthority = 0;
 
     // 群管理type：0（默认）：所有人可管理，1：仅群主可管理

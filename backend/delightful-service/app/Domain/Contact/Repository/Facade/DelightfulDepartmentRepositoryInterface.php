@@ -79,7 +79,7 @@ interface DelightfulDepartmentRepositoryInterface
     public function updateDepartmentsOptionByIds(array $departmentIds, ?DepartmentOption $departmentOption = null): int;
 
     /**
-     * 根据departmentID批量deletedepartment（逻辑delete，set deleted_at field）。
+     * according todepartmentID批量deletedepartment（逻辑delete，set deleted_at field）。
      */
     public function deleteDepartmentsByIds(array $departmentIds, string $organizationCode): int;
 

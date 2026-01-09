@@ -148,11 +148,11 @@ class DelightfulFlowExecutor
             $this->addEdges();
             $this->checkCircularDependencies();
         } else {
-            // 具有 callback 的流程不参与重试与异步
+            // 具有 callback 的流程不参与重试与async
             $this->async = false;
         }
         if ($this->executionData->getExecutionType()->isDebug()) {
-            // debug 下不允许异步
+            // debug 下不允许async
             $this->async = false;
         }
         if ($this->async) {
@@ -199,7 +199,7 @@ class DelightfulFlowExecutor
             $this->delightfulFlowEntity->getCreator()
         );
 
-        // 为了在运行中，给有需要get当前流程的节点使用
+        // 为了在运行中，给有需要get当前流程的节点use
         ExecutionDataCollector::add($this->executionData);
     }
 
@@ -255,7 +255,7 @@ class DelightfulFlowExecutor
     {
         $result = [];
 
-        // 如果是异步call的 API 或者 执行fail了
+        // 如果是asynccall的 API 或者 执行fail了
         if ($this->executionData->getExecutionType()->isApi() || ! $this->success) {
             $result = match ($this->executionData->getTriggerType()) {
                 TriggerType::ChatMessage => [
@@ -430,7 +430,7 @@ class DelightfulFlowExecutor
             try {
                 $node->validate();
             } catch (Throwable $throwable) {
-                // 有些是悬浮节点（即在流程运行中不会被使用节点)，兜底会在执行时再次进行parameter验证
+                // 有些是悬浮节点（即在流程运行中不会被use节点)，兜底会在执行时再次进行parameter验证
             }
 
             $job = function (array $frontResults) use ($node): VertexResult {
@@ -474,7 +474,7 @@ class DelightfulFlowExecutor
                         $this->rootId = $this->appointRootId;
                     }
                 } else {
-                    // 没有指定的必须使用开始节点
+                    // 没有指定的必须use开始节点
                     if ($node->isStart()) {
                         $vertex->markAsRoot();
                         $this->rootId = $node->getNodeId();

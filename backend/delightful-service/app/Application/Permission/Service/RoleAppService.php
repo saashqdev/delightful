@@ -54,7 +54,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * 根据名称get角色.
+     * according to名称get角色.
      */
     public function getByName(PermissionDataIsolation $dataIsolation, string $name): ?RoleEntity
     {

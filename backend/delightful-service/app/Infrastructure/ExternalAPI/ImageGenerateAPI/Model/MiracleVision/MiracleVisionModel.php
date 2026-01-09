@@ -192,7 +192,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             case self::STATUS_INIT:
                 $response->setFinishStatus(false);
                 $response->setProgress($result['data']['progress']);
-                $this->logger->info('美图超清转换：task正在初始化', [
+                $this->logger->info('美图超清转换：task正在initialize', [
                     'progress' => $result['data']['progress'],
                 ]);
                 break;

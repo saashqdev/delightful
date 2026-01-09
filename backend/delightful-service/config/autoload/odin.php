@@ -250,7 +250,7 @@ return [
                 // 日志字段白名单配置
                 // 如果为nullarray或未配置，则打印所有字段
                 // 如果配置了字段列表，则只打印指定的字段
-                // 支持嵌套字段，使用点语法如 'args.messages'
+                // 支持嵌套字段，use点语法如 'args.messages'
                 // 注意：messages 和 tools 字段不在白名单中，不会被打印
                 'whitelist_fields' => [
                     // 基本请求信息
@@ -273,7 +273,7 @@ return [
                     'options.json.business_params',
                     'options.json.thinking',
 
-                    // 使用量statistics
+                    // use量statistics
                     'usage',                       // 完整的usageobject
                     'usage.input_tokens',          // 输入token数量
                     'usage.output_tokens',         // 输出token数量
@@ -306,7 +306,7 @@ return [
                     'error.message',               // errormessage（不contain具体内容）
 
                     // 其他元数据
-                    'created',                     // 创建时间戳
+                    'created',                     // create时间戳
                     'id',                         // 请求ID
                     'object',                     // objecttype
                     'system_fingerprint',         // 系统指纹

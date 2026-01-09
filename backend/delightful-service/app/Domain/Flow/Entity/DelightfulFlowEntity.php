@@ -207,7 +207,7 @@ class DelightfulFlowEntity extends AbstractEntity
         $this->modifier = $publisher;
         $this->updatedAt = new DateTime('now');
 
-        // 发布时需要按照开启来处理
+        // publish时需要按照开启来处理
         $enable = $this->enabled;
         $this->enabled = true;
         $this->nodeValidate(true);
@@ -252,7 +252,7 @@ class DelightfulFlowEntity extends AbstractEntity
             }
         }
 
-        // 已经是发布status的才需要检测
+        // 已经是publishstatus的才需要检测
         if ($this->enabled) {
             //            if (! $this->startNode) {
             //                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.must_exist');
@@ -679,7 +679,7 @@ class DelightfulFlowEntity extends AbstractEntity
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.tool.name.invalid_format');
             }
             // todo 要唯一
-            // todo 内置工具名允许被使用
+            // todo 内置工具名允许被use
         }
     }
 

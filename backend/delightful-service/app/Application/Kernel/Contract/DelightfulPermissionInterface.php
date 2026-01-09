@@ -24,7 +24,7 @@ interface DelightfulPermissionInterface
     public function getResources(): array;
 
     /**
-     * 构建permission标识.
+     * buildpermission标识.
      */
     public function buildPermission(string $resource, string $operation): string;
 

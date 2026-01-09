@@ -133,7 +133,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
         $departmentIds = array_column($departmentUserEntities, 'department_id');
         $departments = $this->departmentDomainService->getDepartmentByIds($dataIsolation, $departmentIds, true);
 
-        // 构建departmentarray
+        // builddepartmentarray
         $departmentArray = [];
         foreach ($departmentUserEntities as $departmentUserEntity) {
             $departmentEntity = $departments[$departmentUserEntity->getDepartmentId()] ?? null;
@@ -163,7 +163,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * 构建空的userinfo.
+     * build空的userinfo.
      *
      * @param string $userId userID
      * @return array 空的userinfoarray

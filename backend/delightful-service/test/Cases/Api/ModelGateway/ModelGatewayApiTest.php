@@ -26,7 +26,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
      */
     public function testHighAvaiable()
     {
-        // 构建test数据
+        // buildtest数据
         $expectedResponse = [
             'id' => '',
             'object' => 'chat.completion',
@@ -226,7 +226,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * 构建基础的请求数据.
+     * build基础的请求数据.
      */
     private function buildRequestData(array $overrides = []): array
     {

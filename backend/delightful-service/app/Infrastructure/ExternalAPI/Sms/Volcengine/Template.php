@@ -70,7 +70,7 @@ class Template extends AbstractTemplate
     }
 
     /**
-     * 根据传来的短信文本,解析variable. 只有variable的value,未匹配variable的key!
+     * according to传来的短信文本,解析variable. 只有variable的value,未匹配variable的key!
      * 需要variable解析的原因:火山短信只支持variable短信的发送,而业务方会出于创蓝短信的原因,会传来整个短信文本content,没有variable.
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
@@ -82,10 +82,10 @@ class Template extends AbstractTemplate
                 throw new RuntimeException('未匹配到模板id:' . $templateId);
             }
             $pregMatch = $this->variablePregAnalyse[$language][$templateId] ?? '';
-            // 如果根据短信content匹配到了模板id,就变更传入的模板id的value
+            // 如果according to短信content匹配到了模板id,就变更传入的模板id的value
             $pregMatch && [$templateId, $matchedVariables] = $this->variablePregMatch([$templateId => $pregMatch], $message);
         } elseif (isset($this->variablePregAnalyse[$language])) {
-            // 火山普通短信,且无法根据type + language 确定模板id,尝试根据短信文本content + language 确定模板id和variable
+            // 火山普通短信,且无法according totype + language 确定模板id,尝试according to短信文本content + language 确定模板id和variable
             [$templateId, $matchedVariables] = $this->variablePregMatch($this->variablePregAnalyse[$language], $message);
         }
         if (empty($templateId)) {

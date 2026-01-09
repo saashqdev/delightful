@@ -39,7 +39,7 @@ class DelightfulAccessToken
             $application = $applicationDomainService->save($llmDataIsolation, $application);
         }
 
-        // 这里的常量 AccessToken 不落库，仅存在于内存中，保证内部调用时使用一致
+        // 这里的常量 AccessToken 不落库，仅存在于内存中，保证内部调用时use一致
         $accessToken = new AccessTokenEntity();
         $accessToken->setId(1);
         $accessToken->setName($application->getCode());

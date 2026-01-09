@@ -255,7 +255,7 @@ class LLMAppService extends AbstractLLMAppService
         $this->logger->info('images', $images);
         $this->recordImageGenerateMessageLog($modelVersion, $authorization->getId(), $authorization->getOrganizationCode());
 
-        // 发布图片生成event
+        // publish图片生成event
         $imageGeneratedEvent = new ImageGeneratedEvent();
         $imageGeneratedEvent->setOrganizationCode($authorization->getOrganizationCode());
         $imageGeneratedEvent->setUserId($authorization->getId());
@@ -1124,13 +1124,13 @@ class LLMAppService extends AbstractLLMAppService
         $modelVersion = $imageModel->getModelVersion();
 
         if ($imageModel->getProviderCode()->isOfficial()) {
-            // 使用官方service商
+            // use官方service商
             $imageGenerateType = ImageGenerateModelType::fromModel(ImageGenerateModelType::Official->value, false);
         } else {
             $imageGenerateType = ImageGenerateModelType::fromModel($modelVersion, false);
         }
 
-        // 构建图片生成parameter
+        // build图片生成parameter
         $imageGenerateParamsVO = new AIImageGenerateParamsVO();
         $imageGenerateParamsVO->setModel($modelVersion);
         $imageGenerateParamsVO->setUserPrompt($proxyModelRequest->getPrompt());
@@ -1139,7 +1139,7 @@ class LLMAppService extends AbstractLLMAppService
         $imageGenerateParamsVO->setSequentialImageGenerationOptions($proxyModelRequest->getSequentialImageGenerationOptions());
         $imageGenerateParamsVO->setReferenceImages($proxyModelRequest->getImages());
 
-        // 直接透传原始 size parameter，让各service商根据自己的需求处理
+        // 直接透传原始 size parameter，让各service商according to自己的需求处理
         $imageGenerateParamsVO->setSize($proxyModelRequest->getSize());
 
         $data = $imageGenerateParamsVO->toArray();
@@ -1737,7 +1737,7 @@ class LLMAppService extends AbstractLLMAppService
         // get价格configuration版本ID
         $priceId = $this->getPriceIdByServiceProviderModelId($serviceProviderModelsId, $organizationCode);
 
-        // 构建并发布event
+        // build并publishevent
         $event = $this->buildImageGenerateEntity(
             $creator,
             $organizationCode,

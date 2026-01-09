@@ -98,7 +98,7 @@ class QwenImageAPI
             'Content-Type' => 'application/json',
         ];
 
-        // 构建符合阿里云APIdocument的请求格式
+        // build符合阿里云APIdocument的请求格式
         $body = [
             'model' => $params['model'] ?? 'qwen-image-edit',
             'input' => [

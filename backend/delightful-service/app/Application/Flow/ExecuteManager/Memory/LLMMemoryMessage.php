@@ -135,7 +135,7 @@ class LLMMemoryMessage
             return null;
         }
 
-        // 根据messagetypecreate对应的message
+        // according tomessagetypecreate对应的message
         $messageType = $delightfulMessageEntity->getSenderType() ?? ConversationType::Ai;
         $role = ($messageType === ConversationType::Ai) ? Role::Assistant : Role::User;
 

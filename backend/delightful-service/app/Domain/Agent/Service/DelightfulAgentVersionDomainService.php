@@ -72,7 +72,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * 发布版本.
+     * publish版本.
      */
     public function releaseAgentVersion(DelightfulAgentVersionEntity $delightfulAgentVersionEntity): array
     {
@@ -89,10 +89,10 @@ class DelightfulAgentVersionDomainService
         }
 
         if ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PERSONAL_USE->value) {
-            // 个人使用
-            $msg = '发布success';
+            // 个人use
+            $msg = 'publishsuccess';
         } elseif ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
-            // 发布到企业内部
+            // publish到企业内部
             /* @phpstan-ignore-next-line */
             if ($approvalOpen) {
                 $delightfulAgentVersionEntity->setApprovalStatus(DelightfulAgentVersionStatus::APPROVAL_PENDING->value);
@@ -101,9 +101,9 @@ class DelightfulAgentVersionDomainService
             } else {
                 $delightfulAgentVersionEntity->setEnterpriseReleaseStatus(DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value);
             }
-            $msg = '发布success';
+            $msg = 'publishsuccess';
         } elseif ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value) {
-            // 发布到应用市场
+            // publish到应用市场
             // 审核开关
             /* @phpstan-ignore-next-line */
             if ($reviewOpen) {
@@ -123,7 +123,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * 根据idsget助理版本.
+     * according toidsget助理版本.
      * @return array<DelightfulAgentVersionEntity>
      */
     public function getAgentByIds(array $ids): array
@@ -184,19 +184,19 @@ class DelightfulAgentVersionDomainService
             $agentMaxVersion = $agentMaxVersion . '.0.0';
         }
 
-        // 解析版本号，例如 "0.0.1" => ['0', '0', '1']
+        // 解析版本号，for example "0.0.1" => ['0', '0', '1']
         [$major, $minor, $patch] = explode('.', $agentMaxVersion);
 
         // 将 PATCH 部分加 1
         $patch = (int) $patch + 1;
 
-        // 如果 PATCH 达到 10，进位到 MINOR（可以根据需求调整此规则）
+        // 如果 PATCH 达到 10，进位到 MINOR（可以according to需求调整此规则）
         if ($patch > 99) {
             $patch = 0;
             $minor = (int) $minor + 1;
         }
 
-        // 如果 MINOR 达到 10，进位到 MAJOR（可以根据需求调整此规则）
+        // 如果 MINOR 达到 10，进位到 MAJOR（可以according to需求调整此规则）
         if ($minor > 99) {
             // 不重置minor，而是直接增大major，避免不必要的重置
             $minor = 0;
@@ -208,7 +208,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * 根据助理 id get默认的版本.
+     * according to助理 id get默认的版本.
      */
     public function getDefaultVersions(array $agentIds): void
     {
@@ -239,7 +239,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * 基于游标paginationget指定organization的助理版本list.
+     * based on游标paginationget指定organization的助理版本list.
      * @param string $organizationCode organization代码
      * @param array $agentVersionIds 助理版本IDlist
      * @param string $cursor 游标ID，如果为空string则从最新开始
@@ -267,7 +267,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * 验证发布范围是否合法.
+     * 验证publish范围是否合法.
      */
     private function validateReleaseScope(int $newScope, int $oldScope): void
     {
@@ -275,7 +275,7 @@ class DelightfulAgentVersionDomainService
             return;
         }
 
-        // check是否试图从更高级别的发布范围回退到更低级别
+        // check是否试图从更高级别的publish范围回退到更低级别
         $errorMessage = match ($oldScope) {
             DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value => 'agent.already_published_to_enterprise_cannot_publish_to_individual',
             DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value => 'agent.already_published_to_market_cannot_publish_to_individual',

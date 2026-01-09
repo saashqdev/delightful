@@ -29,9 +29,9 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property null|string $creator_id create人
  * @property int $type
  * @property null|int $seats 席位数
- * @property null|string $sync_type 同步type
- * @property null|int $sync_status 同步status
- * @property null|Carbon $sync_time 同步time
+ * @property null|string $sync_type synctype
+ * @property null|int $sync_status syncstatus
+ * @property null|Carbon $sync_time synctime
  * @property Carbon $created_at createtime
  * @property Carbon $updated_at updatetime
  * @property null|Carbon $deleted_at deletetime

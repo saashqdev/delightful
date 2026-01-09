@@ -49,7 +49,7 @@ class ByteDanceSTSService
     }
 
     /**
-     * 根据userDelightful IDgetJWT Token（带cache）.
+     * according touserDelightful IDgetJWT Token（带cache）.
      *
      * @param string $delightfulId userDelightful ID
      * @param int $duration 有效期（秒），默认7200秒
@@ -92,7 +92,7 @@ class ByteDanceSTSService
 
         $jwtToken = $this->getJwtToken($appId, $accessToken, $duration);
 
-        // 构建return数据
+        // buildreturn数据
         $tokenData = [
             'jwt_token' => $jwtToken,
             'app_id' => $appId,
@@ -189,7 +189,7 @@ class ByteDanceSTSService
     }
 
     /**
-     * 使用环境variableconfigurationgetJWT token.
+     * use环境variableconfigurationgetJWT token.
      *
      * @param int $duration 有效期（秒），默认7200秒
      * @return string JWT token

@@ -46,12 +46,12 @@ readonly class LoginAppService
         // 生成令牌
         $authorization = $this->authenticationDomainService->generateAccountToken($account->getDelightfulId());
 
-        // 构建响应
+        // build响应
         return $this->buildLoginResponse($authorization, $account, $user);
     }
 
     /**
-     * 根据登录type验证账户info并return账户实体.
+     * according to登录type验证账户info并return账户实体.
      */
     private function verifyAndGetAccount(CheckLoginRequest $request): AccountEntity
     {
@@ -94,7 +94,7 @@ readonly class LoginAppService
         }
 
         // 验证密码
-        // 使用SHA256校验密码
+        // useSHA256校验密码
         if (! $this->passwordService->verifyPassword($request->getPassword(), $account->getPassword())) {
             ExceptionBuilder::throw(AuthenticationErrorCode::PasswordError);
         }
@@ -119,7 +119,7 @@ readonly class LoginAppService
     }
 
     /**
-     * 构建登录响应.
+     * build登录响应.
      */
     private function buildLoginResponse(string $authorization, AccountEntity $account, DelightfulUserEntity $user): CheckLoginResponse
     {
@@ -128,7 +128,7 @@ readonly class LoginAppService
         // 处理国家代码格式
         $stateCode = $this->formatStateCode($account->getStateCode() ?? '+86');
 
-        // 构建user数据
+        // builduser数据
         $userData = [
             'id' => $user->getUserId(),
             'real_name' => $user->getNickname(),
@@ -139,7 +139,7 @@ readonly class LoginAppService
             'state_code' => $stateCode,
         ];
 
-        // 构建响应数据
+        // build响应数据
         $responseData = [
             'access_token' => $authorization,
             'bind_phone' => ! empty($account->getPhone()),

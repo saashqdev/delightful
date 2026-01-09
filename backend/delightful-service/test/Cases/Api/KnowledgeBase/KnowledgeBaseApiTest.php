@@ -694,7 +694,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
      */
     protected function clearTestKnowledgeBaseData()
     {
-        // 根据实际情况实现清理逻辑
+        // according to实际情况implement清理逻辑
         // 可以直接calldatabase操作deletetest数据
         // 或者call相应的servicemethod
     }

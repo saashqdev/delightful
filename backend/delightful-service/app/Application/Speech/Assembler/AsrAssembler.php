@@ -50,7 +50,7 @@ class AsrAssembler
         bool $isHidden = false,
         ?string $taskKey = null
     ): TaskFileEntity {
-        // 构建 metadata
+        // build metadata
         $metadata = [
             'created_by' => 'asr_prepare_recording',
             'created_at' => date('Y-m-d H:i:s'),
@@ -65,11 +65,11 @@ class AsrAssembler
             $metadata['asr_display_directory'] = true;
         }
 
-        // 构建完整的 file_key
+        // build完整的 file_key
         $fileKey = WorkDirectoryUtil::getFullFileKey($fullPrefix, $workDir, $relativePath);
         $fileKey = rtrim($fileKey, '/') . '/';
 
-        // 确定文件名：隐藏目录使用 basename，显示目录使用完整路径
+        // 确定文件名：隐藏目录use basename，显示目录use完整路径
         $fileName = $isHidden ? basename($relativePath) : $relativePath;
 
         return new TaskFileEntity([
@@ -97,7 +97,7 @@ class AsrAssembler
     }
 
     /**
-     * 构建完整 file_key.
+     * build完整 file_key.
      *
      * 转换关系: file_key = fullPrefix + workDir + "/" + relativePath
      *

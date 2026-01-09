@@ -19,7 +19,7 @@ use App\Infrastructure\Util\Text\TextPreprocess\ValueObject\TextPreprocessRule;
 class TextPreprocessUtil
 {
     /**
-     * 根据文本预处理规则进行预处理.
+     * according to文本预处理规则进行预处理.
      * @param array<TextPreprocessRule> $rules
      */
     public static function preprocess(array $rules, string $text): string

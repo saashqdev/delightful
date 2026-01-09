@@ -63,7 +63,7 @@ class AsrApi
             'transcript_file_config' => $transcriptFileConfig,
         ]);
 
-        // 初始化taskstatus（重置轮询计数）
+        // initializetaskstatus（重置轮询计数）
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $this->redis->del($countKey);
 
@@ -98,7 +98,7 @@ class AsrApi
         $noteFileConfig = $request->input('note_file');
         $transcriptFileConfig = $request->input('transcript_file');
 
-        // 使用 Redis 计数器模拟轮询进度
+        // use Redis 计数器模拟轮询进度
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $count = (int) $this->redis->incr($countKey);
         $this->redis->expire($countKey, AsrConfig::MOCK_POLLING_TTL); // 10分钟过期
@@ -130,30 +130,30 @@ class AsrApi
         $targetDir = $audioConfig['target_dir'] ?? '';
         $outputFilename = $audioConfig['output_filename'] ?? 'audio';
 
-        // 模拟真实沙箱行为：根据 output_filename 重命名目录
+        // 模拟真实沙箱行为：according to output_filename 重命名目录
         // 提取原目录中的time戳部分（格式：_YYYYMMDD_HHMMSS）
         $timestamp = '';
         if (preg_match('/_(\d{8}_\d{6})$/', $targetDir, $matches)) {
             $timestamp = '_' . $matches[1];
         }
 
-        // 构建新的目录名：智能标题 + time戳
+        // build新的目录名：智能标题 + time戳
         $renamedDir = $outputFilename . $timestamp;
 
-        // 构建音频文件info
+        // build音频文件info
         $audioFileName = $outputFilename . '.webm';
         $audioPath = rtrim($renamedDir, '/') . '/' . $audioFileName;
 
-        // 构建return数据 (V2 详细版本)
+        // buildreturn数据 (V2 详细版本)
         $responseData = [
             'status' => SandboxAsrStatusEnum::COMPLETED->value,
             'task_key' => $taskKey,
-            'intelligent_title' => $outputFilename, // 使用输出文件名作为智能标题
+            'intelligent_title' => $outputFilename, // use输出文件名作为智能标题
             'error_message' => null,
             'files' => [
                 'audio_file' => [
                     'filename' => $audioFileName,
-                    'path' => $audioPath, // 使用重命名后的目录路径
+                    'path' => $audioPath, // use重命名后的目录路径
                     'size' => 127569,
                     'duration' => 17.0,
                     'action_performed' => 'merged_and_created',
@@ -171,7 +171,7 @@ class AsrApi
 
         // 如果有笔记文件configuration且文件大小 > 0，添加到return中（模拟真实沙箱的笔记文件contentcheck）
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
-            // 使用请求中提供的 target_path，而不是硬编码文件名
+            // use请求中提供的 target_path，而不是硬编码文件名
             // 这样可以正确支持国际化的文件名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
@@ -180,7 +180,7 @@ class AsrApi
             // 这里简化处理，默认假设有content（真实沙箱会check文件content是否为空）
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
-                'path' => $noteFilePath, // 使用请求中的 target_path
+                'path' => $noteFilePath, // use请求中的 target_path
                 'size' => 256, // 模拟有content的文件大小
                 'duration' => null,
                 'action_performed' => 'renamed_and_moved',

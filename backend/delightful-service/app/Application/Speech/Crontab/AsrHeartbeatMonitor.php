@@ -56,7 +56,7 @@ class AsrHeartbeatMonitor
         try {
             $this->logger->info('开始执行 ASR 录音心跳监控task');
 
-            // 扫描所有心跳 key（使用 RedisUtil::scanKeys 防止阻塞）
+            // 扫描所有心跳 key（use RedisUtil::scanKeys 防止阻塞）
             $keys = RedisUtil::scanKeys(
                 AsrRedisKeys::HEARTBEAT_SCAN_PATTERN,
                 AsrConfig::REDIS_SCAN_BATCH_SIZE,

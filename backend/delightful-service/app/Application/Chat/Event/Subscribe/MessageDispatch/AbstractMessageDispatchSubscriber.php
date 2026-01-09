@@ -41,7 +41,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
     }
 
     /**
-     * 根据message优先级.将收件方的message生成序列号.
+     * according tomessage优先级.将收件方的message生成序列号.
      * @param SeqCreatedEvent $data
      */
     public function consumeMessage($data, AMQPMessage $message): Result

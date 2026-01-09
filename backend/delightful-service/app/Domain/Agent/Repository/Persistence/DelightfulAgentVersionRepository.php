@@ -143,7 +143,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function getAgentsFromMarketplaceCount(array $agentIds): int
     {
-        // 使用 count() method来统计符合条件的record数
+        // use count() method来统计符合条件的record数
         return $this->agentVersionModel::query()
             ->whereIn('id', $agentIds)
             ->where('app_market_status', DelightfulAgentVersionStatus::APP_MARKET_LISTED)
@@ -183,7 +183,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
             ->update(['enterprise_release_status' => $status]);
     }
 
-    // 根据助理idget最大的 version_number
+    // according to助理idget最大的 version_number
     public function getAgentMaxVersion(string $agentId): string
     {
         // query指定 agent_id 和 user_id 下的最大版本号,这里不能用 max 取 version，因为会出现 0.3 大于 0.10的情况，但是实际是 0.10大于 0.3
@@ -291,7 +291,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * 基于游标paginationget指定organization的助理版本list.
+     * based on游标paginationget指定organization的助理版本list.
      * @param string $organizationCode organization代码
      * @param array $agentVersionIds 助理版本IDlist
      * @param string $cursor 游标ID，如果为空string则从最新开始
@@ -313,7 +313,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * 根据idsget助理版本.
+     * according toidsget助理版本.
      * @return array<DelightfulAgentVersionEntity>
      */
     public function getAgentByIds(array $ids)

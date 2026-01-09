@@ -18,7 +18,7 @@ use Throwable;
 
 /**
  * message推送模块.
- * 根据生成的seq以及它的优先级,用长连接推送给user.
+ * according to生成的seq以及它的优先级,用长连接推送给user.
  * 每个seq可能要推给user的1到几十个客户端.
  */
 abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
@@ -35,7 +35,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
     }
 
     /**
-     * 根据序列号优先级.实时通知收件方. 这可能需要发布订阅.
+     * according to序列号优先级.实时notify收件方. 这可能需要publishsubscribe.
      * @param SeqCreatedEvent $data
      */
     public function consumeMessage($data, AMQPMessage $message): Result
@@ -45,7 +45,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
             return Result::ACK;
         }
 
-        // 通知收件方
+        // notify收件方
         $this->logger->info(sprintf('messagePush 收到message data:%s', Json::encode($data)));
         try {
             foreach ($seqIds as $seqId) {

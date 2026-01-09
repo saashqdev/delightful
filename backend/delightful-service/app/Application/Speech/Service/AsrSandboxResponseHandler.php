@@ -59,7 +59,7 @@ readonly class AsrSandboxResponseHandler
             return;
         }
 
-        // 2. 检查并handle目录重命名（沙箱有bug，会重命名目录但是没有通知文件变动，没有改数据库记录）
+        // 2. 检查并handle目录重命名（沙箱有bug，会重命名目录但是没有notify文件变动，没有改数据库记录）
         $taskStatus->displayDirectory = $this->extractDirectoryPath($audioFile);
 
         // 3. 查找音频文件记录
@@ -100,8 +100,8 @@ readonly class AsrSandboxResponseHandler
     }
 
     /**
-     * 根据响应的音频文件名/文件路径，找到音频文件 id，用于后续发聊天message.
-     * 使用轮询机制等待沙箱同步文件到数据库（最多等待 30 秒）.
+     * according to响应的音频文件名/文件路径，找到音频文件 id，用于后续发聊天message.
+     * use轮询机制等待沙箱sync文件到数据库（最多等待 30 秒）.
      *
      * @param AsrTaskStatusDTO $taskStatus 任务status
      * @param array $audioFile 音频文件信息
@@ -148,8 +148,8 @@ readonly class AsrSandboxResponseHandler
     }
 
     /**
-     * 根据响应的笔记文件路径，找到笔记文件 id.
-     * 使用轮询机制等待沙箱同步文件到数据库（最多等待 30 秒）.
+     * according to响应的笔记文件路径，找到笔记文件 id.
+     * use轮询机制等待沙箱sync文件到数据库（最多等待 30 秒）.
      *
      * @param AsrTaskStatusDTO $taskStatus 任务status
      * @param array $noteFile 笔记文件信息
@@ -188,7 +188,7 @@ readonly class AsrSandboxResponseHandler
                     'old_preset_note_file_id' => $taskStatus->presetNoteFileId,
                 ]);
             } else {
-                // 没找到就清null，不使用预设ID
+                // 没找到就清null，不use预设ID
                 $this->logger->warning('未找到笔记文件记录', [
                     'task_key' => $taskStatus->taskKey,
                     'relative_path' => $relativePath,
@@ -236,7 +236,7 @@ readonly class AsrSandboxResponseHandler
             ExceptionBuilder::throw(AsrErrorCode::CreateAudioFileFailed, '', ['error' => '任务status信息不完整']);
         }
 
-        // 获取项目信息并构建 file_key
+        // 获取项目信息并build file_key
         $projectEntity = $this->projectDomainService->getProject(
             (int) $taskStatus->projectId,
             $taskStatus->userId
@@ -291,7 +291,7 @@ readonly class AsrSandboxResponseHandler
             // 记录轮询进度
             if ($attempt % AsrConfig::FILE_RECORD_QUERY_LOG_FREQUENCY === 0 || $attempt === 1) {
                 $remainingSeconds = max(0, $timeoutSeconds - $elapsedSeconds);
-                $this->logger->info(sprintf('等待沙箱同步%s到数据库', $fileTypeName), [
+                $this->logger->info(sprintf('等待沙箱sync%s到数据库', $fileTypeName), [
                     'task_key' => $taskStatus->taskKey,
                     'file_type' => $fileTypeName,
                     'file_key' => $fileKey,

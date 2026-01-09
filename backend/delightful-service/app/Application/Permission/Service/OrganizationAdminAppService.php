@@ -60,7 +60,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 根据userIDgetorganization管理员.
+     * according touserIDgetorganization管理员.
      */
     public function getByUserId(DataIsolation $dataIsolation, string $userId): ?OrganizationAdminEntity
     {

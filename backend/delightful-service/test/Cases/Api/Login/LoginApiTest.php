@@ -71,7 +71,7 @@ class LoginApiTest extends AbstractHttpTest
         // 构造请求parameter - test手机号不存在
         $requestData = [
             'state_code' => '+86',
-            'phone' => '19999999999', // 使用一个确定不存在的手机号
+            'phone' => '19999999999', // use一个确定不存在的手机号
             'password' => '123456',
             'type' => 'phone_password',
         ];

@@ -54,7 +54,7 @@ class DelightfulAgentEntity extends AbstractEntity
     protected string $robotDescription;
 
     /**
-     * 发布人.
+     * publish人.
      */
     protected string $createdUid;
 

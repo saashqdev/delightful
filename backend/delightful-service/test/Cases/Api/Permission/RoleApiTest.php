@@ -140,7 +140,7 @@ class RoleApiTest extends AbstractHttpTest
 
         // 再次query应当return角色不存在或空
         $detailResp = $this->get(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
-        // 预期这里会returnerror码，具体根据业务而定，只要非1000即可
+        // 预期这里会returnerror码，具体according to业务而定，只要非1000即可
         $this->assertNotEquals(1000, $detailResp['code'] ?? null);
         // === testdelete子管理员END ===
     }

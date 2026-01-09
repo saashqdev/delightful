@@ -19,12 +19,12 @@ interface OrganizationAdminRepositoryInterface
     public function save(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdminEntity): OrganizationAdminEntity;
 
     /**
-     * 根据IDgetorganization管理员.
+     * according toIDgetorganization管理员.
      */
     public function getById(DataIsolation $dataIsolation, int $id): ?OrganizationAdminEntity;
 
     /**
-     * 根据userIDgetorganization管理员.
+     * according touserIDgetorganization管理员.
      */
     public function getByUserId(DataIsolation $dataIsolation, string $userId): ?OrganizationAdminEntity;
 

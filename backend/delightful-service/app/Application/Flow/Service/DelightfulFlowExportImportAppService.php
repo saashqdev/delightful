@@ -38,7 +38,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * 导出assistant流程
-     * 递归导出流程相关的所有节点，包括子流程和工具流程.
+     * 递归导出流程相关的所有节点，include子流程和工具流程.
      */
     public function exportFlow(FlowDataIsolation $dataIsolation, string $flowCode): array
     {
@@ -78,7 +78,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * 导入assistant流程
-     * 遇到重复的工具或流程会创建新实例，并通过名称区分.
+     * 遇到重复的工具或流程会create新实例，并通过名称区分.
      */
     public function importFlow(FlowDataIsolation $dataIsolation, array $importData, string $agentId = ''): DelightfulFlowEntity
     {
@@ -95,7 +95,7 @@ class DelightfulFlowExportImportAppService
             'nodes' => [], // 老ID => 新ID
         ];
 
-        // 导入报告，记录创建、重命名和error信息
+        // 导入报告，记录create、重命名和error信息
         $importReport = [
             'created' => [],
             'renamed' => [],
@@ -166,7 +166,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * validate是否存在循环依赖
-     * 使用深度优先search检测循环引用.
+     * use深度优先search检测循环引用.
      */
     public function checkCircularDependency(FlowDataIsolation $dataIsolation, string $flowCode, array $visited = []): bool
     {
@@ -231,7 +231,7 @@ class DelightfulFlowExportImportAppService
             'flow_code' => $agent->getFlowCode(),
             'avatar' => $agent->getAgentAvatar(),
             'instruct' => $agent->getInstructs(),
-            // 可以根据需要添加其他assistant信息
+            // 可以according to需要添加其他assistant信息
         ];
 
         return [
@@ -244,7 +244,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * 导入流程和assistant信息
-     * 从导出的数据中创建新的流程和assistant，并建立关联.
+     * 从导出的数据中create新的流程和assistant，并建立关联.
      */
     public function importFlowWithAgent(FlowDataIsolation $dataIsolation, array $importData): array
     {
@@ -258,7 +258,7 @@ class DelightfulFlowExportImportAppService
         // 1. 先导入流程
         $mainFlow = $this->importFlow($dataIsolation, $flowData);
 
-        // 2. 创建新的assistant并关联流程
+        // 2. create新的assistant并关联流程
         $agentDomainService = di(DelightfulAgentDomainService::class);
 
         $agentEntity = new DelightfulAgentEntity();
@@ -281,7 +281,7 @@ class DelightfulFlowExportImportAppService
                 'flow_name' => $mainFlow->getName(),
             ];
         } catch (Throwable $e) {
-            // 如果创建assistantfail，但流程已导入，仍return流程信息
+            // 如果createassistantfail，但流程已导入，仍return流程信息
             return [
                 'agent_id' => null,
                 'agent_error' => $e->getMessage(),
@@ -330,7 +330,7 @@ class DelightfulFlowExportImportAppService
 
         // 保留agentId字段，如果存在的话
         $agentId = $flowData['agent_id'] ?? '';
-        // 创建流程实体并save
+        // create流程实体并save
         $flowEntity = DelightfulFlowFactory::arrayToEntity($flowData);
         $flowEntity->setCreator($dataIsolation->getCurrentUserId());
         $flowEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
@@ -344,7 +344,7 @@ class DelightfulFlowExportImportAppService
         $flowEntity->setId(0); // 设置ID为0表示新建
         $flowEntity->setId(null);
         $savedFlow = $this->delightfulFlowDomainService->create($dataIsolation, $flowEntity);
-        $importReport['created'][] = "创建流程: {$savedFlow->getName()} (ID: {$savedFlow->getCode()})";
+        $importReport['created'][] = "create流程: {$savedFlow->getName()} (ID: {$savedFlow->getCode()})";
 
         return $savedFlow->getCode();
     }
@@ -374,20 +374,20 @@ class DelightfulFlowExportImportAppService
         $toolSetData['created_uid'] = $dataIsolation->getCurrentUserId();
         $toolSetData['updated_uid'] = $dataIsolation->getCurrentUserId();
 
-        // 移除可能影响创建逻辑的字段
+        // 移除可能影响create逻辑的字段
         unset($toolSetData['created_at'], $toolSetData['updated_at'], $toolSetData['id']);
 
-        // 设置创建实体必要的字段
+        // 设置create实体必要的字段
         $toolSetData['id'] = 0; // 确保设置为新建
         $toolSetData['created_at'] = new DateTime();
         $toolSetData['updated_at'] = new DateTime();
 
-        // 使用工厂method创建工具集实体
+        // use工厂methodcreate工具集实体
         $toolSetEntity = DelightfulFlowToolSetFactory::arrayToEntity($toolSetData);
 
         // save工具集
         $savedToolSet = $this->delightfulFlowToolSetDomainService->create($dataIsolation, $toolSetEntity);
-        $importReport['created'][] = "创建工具集: {$savedToolSet->getName()} (ID: {$savedToolSet->getCode()})";
+        $importReport['created'][] = "create工具集: {$savedToolSet->getName()} (ID: {$savedToolSet->getCode()})";
 
         // 记录新旧ID的映射关系
         $idMapping['tool_sets'][$originalCode] = $savedToolSet->getCode();
@@ -426,7 +426,7 @@ class DelightfulFlowExportImportAppService
         $newName = $name;
         $counter = 1;
 
-        // 使用queryobject检查是否存在同名工具集
+        // usequeryobject检查是否存在同名工具集
         while (true) {
             $query = new DelightfulFlowToolSetQuery();
             $query->setName($newName);
@@ -476,7 +476,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * 更新流程中的引用关系
-     * 包括节点引用、子流程引用、工具引用等.
+     * include节点引用、子流程引用、工具引用等.
      */
     private function updateFlowReferences(array &$flowData, array $idMapping): void
     {
@@ -583,7 +583,7 @@ class DelightfulFlowExportImportAppService
                         $oldIdStr = (string) $oldId;
                         $newIdStr = (string) $newId;
 
-                        // 使用正则表达式确保只替换完整的ID
+                        // use正则表达式确保只替换完整的ID
                         if (preg_match('/^' . preg_quote($oldIdStr, '/') . '_/', $edge['sourceHandle'])) {
                             $edge['sourceHandle'] = preg_replace('/^' . preg_quote($oldIdStr, '/') . '/', $newIdStr, $edge['sourceHandle']);
                         }
@@ -620,7 +620,7 @@ class DelightfulFlowExportImportAppService
                     $oldNodeIdStr = (string) $oldNodeId;
                     $newNodeIdStr = (string) $newNodeId;
 
-                    // 使用正则表达式确保只替换完整的节点ID
+                    // use正则表达式确保只替换完整的节点ID
                     if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $item)) {
                         $fieldName = substr($item, strlen($oldNodeIdStr));
                         $item = $newNodeIdStr . $fieldName;
@@ -656,7 +656,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * 判断是否为内置工具
-     * 内置工具不需要重新创建，可以直接使用.
+     * 内置工具不需要重新create，可以直接use.
      */
     private function isBuiltInTool(string $toolId, string $toolSetId): bool
     {
@@ -758,7 +758,7 @@ class DelightfulFlowExportImportAppService
             $oldNodeIdStr = (string) $oldNodeId;
             $newNodeIdStr = (string) $newNodeId;
 
-            // 使用正则表达式确保只替换完整的节点ID
+            // use正则表达式确保只替换完整的节点ID
             if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $str)) {
                 $fieldName = substr($str, strlen($oldNodeIdStr));
                 $str = $newNodeIdStr . $fieldName;

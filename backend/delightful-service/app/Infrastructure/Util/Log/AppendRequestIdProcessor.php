@@ -22,7 +22,7 @@ class AppendRequestIdProcessor implements ProcessorInterface
         try {
             $coroutineId = Coroutine::id();
         } catch (Throwable $e) {
-            // when协程context未初始化时，return -1 作为标识
+            // when协程context未initialize时，return -1 作为标识
             $coroutineId = -1;
         }
 
@@ -30,7 +30,7 @@ class AppendRequestIdProcessor implements ProcessorInterface
             $requestId = CoContext::getOrSetRequestId();
             $traceId = CoContext::getTraceId();
         } catch (Throwable $e) {
-            // whencontext不可用时，使用null值
+            // whencontext不可用时，usenull值
             $requestId = '';
             $traceId = '';
         }

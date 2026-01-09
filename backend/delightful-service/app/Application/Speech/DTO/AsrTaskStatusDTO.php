@@ -63,7 +63,7 @@ class AsrTaskStatusDTO
 
     public ?string $recordingStatus = null; // 录音status：start|recording|paused|stopped
 
-    public bool $sandboxTaskCreated = false; // 沙箱任务是否已创建
+    public bool $sandboxTaskCreated = false; // 沙箱任务是否已create
 
     public bool $isPaused = false; // 是否处于暂停status（用于超时判断）
 
@@ -82,7 +82,7 @@ class AsrTaskStatusDTO
 
     public ?string $noteFileType = null; // 笔记文件type（md、txt、json）
 
-    public ?string $language = null; // 语种（zh_CN、en_US等），用于generate标题时使用
+    public ?string $language = null; // 语种（zh_CN、en_US等），用于generate标题时use
 
     public ?string $uploadGeneratedTitle = null; // upload-tokens generate的标题（用于 summary 复用）
 
@@ -137,7 +137,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 从array创建DTOobject
+     * 从arraycreateDTOobject
      */
     public static function fromArray(array $data): self
     {

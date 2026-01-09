@@ -26,16 +26,16 @@ return new class extends Migration {
 
             $table->string('version_description', 255)->default('')->comment('description');
             $table->string('version_number')->nullable()->comment('version number');
-            $table->integer('release_scope')->nullable()->comment('发布范围.1:发布到企业内部 2:发布到应用市场');
+            $table->integer('release_scope')->nullable()->comment('publish范围.1:publish到企业内部 2:publish到应用市场');
 
             $table->integer('approval_status')->default(3)->nullable(false)->comment('审批status');
             $table->integer('review_status')->default(0)->nullable(false)->comment('审核status');
-            $table->integer('enterprise_release_status')->default(0)->nullable(false)->comment('发布到企业内部status');
-            $table->integer('app_market_status')->default(0)->nullable(false)->comment('发布到应用市场status');
+            $table->integer('enterprise_release_status')->default(0)->nullable(false)->comment('publish到企业内部status');
+            $table->integer('app_market_status')->default(0)->nullable(false)->comment('publish到应用市场status');
 
             $table->string('organization_code')->comment('organization编码');
 
-            $table->string('created_uid')->default('')->comment('发布人');
+            $table->string('created_uid')->default('')->comment('publish人');
             $table->timestamp('created_at')->nullable()->comment('creation time');
             $table->string('updated_uid')->default('')->comment('update者userID');
             $table->timestamp('updated_at')->nullable()->comment('update time');

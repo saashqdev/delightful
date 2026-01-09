@@ -18,12 +18,12 @@ interface RoleRepositoryInterface
     public function save(string $organizationCode, RoleEntity $roleEntity): RoleEntity;
 
     /**
-     * 根据IDget角色.
+     * according toIDget角色.
      */
     public function getById(string $organizationCode, int $id): ?RoleEntity;
 
     /**
-     * 根据名称get角色.
+     * according to名称get角色.
      */
     public function getByName(string $organizationCode, string $name): ?RoleEntity;
 

@@ -84,7 +84,7 @@ class VolcengineModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先创建响应object
+        // 1. 预先create响应object
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -172,7 +172,7 @@ class VolcengineModel extends AbstractImageGenerate
             'textToImageReqScheduleConf' => $this->textToImageReqScheduleConf,
         ]);
 
-        // 使用 Parallel 并行handle
+        // use Parallel 并行handle
         $parallel = new Parallel();
         for ($i = 0; $i < $count; ++$i) {
             $fromCoroutineId = Coroutine::id();
@@ -222,7 +222,7 @@ class VolcengineModel extends AbstractImageGenerate
         }
 
         if (empty($rawResults)) {
-            // 优先使用具体的error码，如果都是通用error则使用 NO_VALID_IMAGE
+            // 优先use具体的error码，如果都是通用error则use NO_VALID_IMAGE
             $finalErrorCode = ImageGenerateErrorCode::NO_VALID_IMAGE;
             $finalErrorMsg = '';
 
@@ -234,7 +234,7 @@ class VolcengineModel extends AbstractImageGenerate
                 }
             }
 
-            // 如果没有找到具体errormessage，使用第一个errormessage
+            // 如果没有找到具体errormessage，use第一个errormessage
             if (empty($finalErrorMsg) && ! empty($errors[0]['message'])) {
                 $finalErrorMsg = $errors[0]['message'];
             }
@@ -289,7 +289,7 @@ class VolcengineModel extends AbstractImageGenerate
             'textToImageReqScheduleConf' => $this->textToImageReqScheduleConf,
         ]);
 
-        // 使用 Parallel 并行handle
+        // use Parallel 并行handle
         $parallel = new Parallel();
         for ($i = 0; $i < $count; ++$i) {
             $fromCoroutineId = Coroutine::id();
@@ -579,7 +579,7 @@ class VolcengineModel extends AbstractImageGenerate
         array $volcengineResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // 使用Redis锁确保并发安全
+        // useRedis锁确保并发安全
         $lockOwner = $this->lockResponse($response);
         try {
             // 从火山引擎响应中提取数据
@@ -605,7 +605,7 @@ class VolcengineModel extends AbstractImageGenerate
                         'error' => $e->getMessage(),
                         'url' => $imageUrl,
                     ]);
-                    // 水印handlefail时使用原始URL
+                    // 水印handlefail时use原始URL
                     $currentData[] = [
                         'url' => $imageUrl,
                     ];
@@ -623,7 +623,7 @@ class VolcengineModel extends AbstractImageGenerate
                     $this->logger->error('Volcengine添加图片数据：base64水印handlefail', [
                         'error' => $e->getMessage(),
                     ]);
-                    // 水印handlefail时使用原始数据
+                    // 水印handlefail时use原始数据
                     $currentData[] = [
                         'b64_json' => $base64Image,
                     ];

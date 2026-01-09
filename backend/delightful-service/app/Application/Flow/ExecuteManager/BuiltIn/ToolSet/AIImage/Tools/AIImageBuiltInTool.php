@@ -64,7 +64,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "model": {
             "type": "string",
             "key": "model",
-            "title": "所使用的文生图模型",
+            "title": "所use的文生图模型",
             "description": "可选：Volcengine,Midjourney,Flux1-Schnell,默认Volcengine,TTAPI-GPT4o",
             "required": null,
             "value": null,

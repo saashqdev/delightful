@@ -58,8 +58,8 @@ class RetrieveConfig extends AbstractValueObject
      * 重sort模式.
      *
      * 可选value：
-     * - reranking_model: 使用重sortmodel
-     * - weighted_score: 使用加权分数
+     * - reranking_model: use重sortmodel
+     * - weighted_score: use加权分数
      *
      * @see RerankMode
      */

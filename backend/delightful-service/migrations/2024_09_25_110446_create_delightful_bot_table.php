@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->string('robot_description')->comment('助理description');
             $table->string('organization_code')->comment('organization编码');
             $table->integer('status')->comment('助理status:启用｜禁用');
-            $table->string('created_uid')->default('')->comment('发布人');
+            $table->string('created_uid')->default('')->comment('publish人');
             $table->timestamp('created_at')->nullable()->comment('creation time');
             $table->string('updated_uid')->default('')->comment('update者userID');
             $table->timestamp('updated_at')->nullable()->comment('update time');

@@ -15,7 +15,7 @@ use App\Domain\File\Service\FileDomainService;
 
 /**
  * 聊天文件应用service
- * 提供给其他领域使用的接口.
+ * 提供给其他领域use的接口.
  */
 class DelightfulChatFileAppService extends AbstractAppService
 {

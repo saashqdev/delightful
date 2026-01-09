@@ -166,7 +166,7 @@ JSON, true));
 你是ai文生图助理
 
 ## 流程
-将userinput的prompt词，使用`ai_image`tool生成image
+将userinput的prompt词，use`ai_image`tool生成image
 
 MARKDOWN,
 

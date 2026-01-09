@@ -81,7 +81,7 @@ class CommentRepository
     }
 
     /**
-     * 根据条件get评论list。
+     * according to条件get评论list。
      *
      * @param RequestContext $requestContext 请求上下文
      * @param GetCommentsWhereVo $whereVo query条件valueobject
@@ -104,7 +104,7 @@ class CommentRepository
     }
 
     /**
-     * 根据评论IDarrayget对应的评论list。
+     * according to评论IDarrayget对应的评论list。
      *
      * @param RequestContext $requestContext 请求上下文
      * @param array $commentIds 评论IDarray
@@ -120,7 +120,7 @@ class CommentRepository
     }
 
     /**
-     * 根据评论IDget单个评论实体。
+     * according to评论IDget单个评论实体。
      *
      * @param RequestContext $requestContext 请求上下文
      * @param int $commentId 评论ID
@@ -200,7 +200,7 @@ class CommentRepository
     }
 
     /**
-     * 根据资源IDget所有相关的评论。
+     * according to资源IDget所有相关的评论。
      *
      * @param int $resourceId 资源ID
      * @return array<CommentEntity> 评论实体array
@@ -215,7 +215,7 @@ class CommentRepository
     }
 
     /**
-     * 根据query条件get评论list。
+     * according toquery条件get评论list。
      *
      * @param RequestContext $requestContext 请求上下文
      * @param GetCommentsWhereVo $commentsWhereVo query条件valueobject

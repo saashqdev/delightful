@@ -39,7 +39,7 @@ class EndpointRequestDTO extends AbstractDTO
 
     /**
      * 上次选择的接入点ID (可选).
-     * 用于对话延续等场景，优先选择上次使用的接入点.
+     * 用于对话延续等场景，优先选择上次use的接入点.
      */
     protected ?string $lastSelectedEndpointId = null;
 

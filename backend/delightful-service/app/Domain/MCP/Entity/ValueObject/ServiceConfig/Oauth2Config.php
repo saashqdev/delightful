@@ -24,7 +24,7 @@ class Oauth2Config extends AbstractValueObject
     protected string $clientId = '';
 
     /**
-     * Client Secret - 客户端密钥，和客户端ID配合使用，用于auth应用的身份。
+     * Client Secret - 客户端密钥，和客户端ID配合use，用于auth应用的身份。
      * 确保只有authorization的应用可以请求permission。
      *
      * createOAuth应用时会分配client_secret，本示例输入 8jmSATwI*********

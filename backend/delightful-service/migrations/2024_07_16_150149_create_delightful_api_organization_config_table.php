@@ -20,7 +20,7 @@ class CreateDelightfulApiOrganizationConfigTable extends Migration
             $table->bigIncrements('id');
             $table->string('organization_code')->comment('organization编码');
             $table->unsignedDecimal('total_amount', 40, 6)->comment('总额度');
-            $table->unsignedDecimal('use_amount', 40, 6)->comment('使用额度')->default(0);
+            $table->unsignedDecimal('use_amount', 40, 6)->comment('use额度')->default(0);
             $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('create时间');
             $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('修改时间')->nullable();
             $table->timestamp('deleted_at')->comment('逻辑delete')->nullable();

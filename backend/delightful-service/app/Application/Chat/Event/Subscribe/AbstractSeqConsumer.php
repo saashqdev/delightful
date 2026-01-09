@@ -63,7 +63,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
     }
 
     /**
-     * 继承以实现setting队列相关parameter.
+     * 继承以implementsetting队列相关parameter.
      */
     public function getQueueBuilder(): QueueBuilder
     {
@@ -92,7 +92,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
 
     protected function setRequestId(string $appMsgId): void
     {
-        // 使用 app_msg_id 做 request_id
+        // use app_msg_id 做 request_id
         $requestId = empty($appMsgId) ? IdGenerator::getSnowId() : $appMsgId;
         CoContext::setRequestId((string) $requestId);
     }

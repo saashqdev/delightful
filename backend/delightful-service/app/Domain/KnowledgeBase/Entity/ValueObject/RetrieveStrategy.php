@@ -31,7 +31,7 @@ class RetrieveStrategy
      * 同时从多个知识库中检索info，然后对result进行重新sort。
      * 该策略通过configurationparameter `retrieve_strategy` fieldset，
      * 从database中的 retrieve_config configurationget。
-     * 它支持不同的重sort策略，如使用重sortmodel或加权分数。
+     * 它支持不同的重sort策略，如use重sortmodel或加权分数。
      */
     public const MULTIPLE = 'multiple';
 

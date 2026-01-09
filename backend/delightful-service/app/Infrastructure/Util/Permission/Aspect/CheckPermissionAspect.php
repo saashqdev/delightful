@@ -49,12 +49,12 @@ class CheckPermissionAspect extends AbstractAspect
             ExceptionBuilder::throw(PermissionErrorCode::AccessDenied, 'permission.error.access_denied');
         }
 
-        // 构建permission键（支持多个，任一满足即通过）
+        // buildpermission键（支持多个，任一满足即通过）
         $permissionKeys = method_exists($permissionAnnotation, 'getPermissionKeys')
             ? $permissionAnnotation->getPermissionKeys()
             : [$permissionAnnotation->getPermissionKey()];
 
-        // 构建data隔离context
+        // builddata隔离context
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()

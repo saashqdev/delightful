@@ -112,7 +112,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     break;
                 case TriggerType::ParamCall:
                     $outputComponent = ComponentFactory::fastCreate($branch['output']['form'] ?? []);
-                    // parametercall可以无parameter触发，例如触发一个event
+                    // parametercall可以无parameter触发，for example触发一个event
                     if ($outputComponent) {
                         $output = new NodeOutput();
                         $output->setForm($outputComponent);

@@ -157,7 +157,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     private function generateImage(RequestContext $requestContext, AIImageGenerateParamsVO $generateParamsVO): array
     {
         $model = $generateParamsVO->getModel();
-        // 根据modeltypecreate对应的service
+        // according tomodeltypecreate对应的service
         $data = $generateParamsVO->toArray();
         $delightfulUserAuthorization = $requestContext->getUserAuthorization();
         $images = $this->llmAppService->imageGenerate($delightfulUserAuthorization, $model, '', $data);
@@ -185,7 +185,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                 $this->fileDomainService->uploadByCredential($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile);
                 // geturl
                 $url = $this->fileDomainService->getLink($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile->getKey())->getUrl();
-                // 同步文件至delightful
+                // sync文件至delightful
                 $fileUploadDTOs = [];
                 $fileType = FileType::getTypeFromFileExtension($uploadFile->getExt());
                 $fileUploadDTO = new DelightfulChatFileEntity();

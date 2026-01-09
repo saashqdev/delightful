@@ -210,7 +210,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
         $container = ApplicationContext::getContainer();
         $speechClient = $container->get(VolcengineStandardClient::class);
 
-        // 构建Flash语音识别请求
+        // buildFlash语音识别请求
         $submitDTO = new FlashSpeechSubmitDTO();
 
         // setting音频information
@@ -263,7 +263,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
 
             $fileEntity = $fileEntities[0];
 
-            // if有外链URL，直接使用
+            // if有外链URL，直接use
             if (! empty($fileEntity->getExternalUrl())) {
                 return $fileEntity->getExternalUrl();
             }

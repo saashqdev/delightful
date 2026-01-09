@@ -19,7 +19,7 @@ class CreateDelightfulChatMessageTable extends Migration
             return;
         }
         Schema::create('delightful_chat_messages', static function (Blueprint $table) {
-            // 根据上面的建table语句，得出以下代码
+            // according to上面的建table语句，得出以下代码
             $table->bigIncrements('id');
             // 发件方所属organization
             $table->string('sender_id', 64)->comment('发件方的id');

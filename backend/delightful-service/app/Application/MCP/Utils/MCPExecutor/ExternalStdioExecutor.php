@@ -57,7 +57,7 @@ class ExternalStdioExecutor implements ExternalStdioExecutorInterface
         }
 
         if ($this->pythonExecutor) {
-            // 使用 python 代码来执行
+            // use python 代码来执行
             return $this->getListToolsResultByPython($mcpServerConfig);
         }
 

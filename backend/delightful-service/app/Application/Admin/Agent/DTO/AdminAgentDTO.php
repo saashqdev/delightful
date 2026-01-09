@@ -35,7 +35,7 @@ class AdminAgentDTO extends AbstractDTO
     // create人名称
     protected string $createdName;
 
-    // 发布status
+    // publishstatus
     protected ?int $releaseScope = null;
 
     // 审核status

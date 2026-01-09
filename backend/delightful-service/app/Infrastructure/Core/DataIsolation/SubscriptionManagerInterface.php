@@ -12,7 +12,7 @@ use App\Domain\Provider\Entity\ValueObject\ModelType;
 interface SubscriptionManagerInterface
 {
     /**
-     * 是否启用订阅功能.
+     * 是否启用subscribe功能.
      */
     public function isEnabled(): bool;
 
@@ -21,12 +21,12 @@ interface SubscriptionManagerInterface
     public function setCurrentSubscription(string $subscriptionId, array $subscriptionInfo, array $modelIdsGroupByType = []): void;
 
     /**
-     * getwhen前订阅ID.
+     * getwhen前subscribeID.
      */
     public function getCurrentSubscriptionId(): string;
 
     /**
-     * getwhen前订阅information.
+     * getwhen前subscribeinformation.
      */
     public function getCurrentSubscriptionInfo(): array;
 

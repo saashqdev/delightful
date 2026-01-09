@@ -43,12 +43,12 @@ class QwenImageEditModel extends AbstractImageGenerate
 
     public function setAK(string $ak)
     {
-        // 通义千问不使用AK/SK认证，此method为nullimplement
+        // 通义千问不useAK/SK认证，此method为nullimplement
     }
 
     public function setSK(string $sk)
     {
-        // 通义千问不使用AK/SK认证，此method为nullimplement
+        // 通义千问不useAK/SK认证，此method为nullimplement
     }
 
     public function setApiKey(string $apiKey)
@@ -68,7 +68,7 @@ class QwenImageEditModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先创建响应object
+        // 1. 预先create响应object
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -81,7 +81,7 @@ class QwenImageEditModel extends AbstractImageGenerate
             return $response; // returnnull数据响应
         }
 
-        // 3. 同步handle图像编辑（单图）
+        // 3. synchandle图像编辑（单图）
         try {
             $result = $this->callSyncEditAPI($imageGenerateRequest);
             $this->validateQwenEditResponse($result);
@@ -141,7 +141,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像的核心逻辑，return原生结果 - 同步call.
+     * generate图像的核心逻辑，return原生结果 - synccall.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -205,7 +205,7 @@ class QwenImageEditModel extends AbstractImageGenerate
 
             $response = $this->api->submitEditTask($params);
 
-            // 检查响应格式 - 适配新的同步响应格式
+            // 检查响应格式 - 适配新的sync响应格式
             if (! isset($response['output']['choices'])) {
                 $errorMsg = $response['message'] ?? '未知error';
                 $this->logger->warning('通义千问图像编辑：响应格式error', ['response' => $response]);
@@ -335,7 +335,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                         'error' => $e->getMessage(),
                         'url' => $content['image'],
                     ]);
-                    // 水印handlefail时使用原始URL
+                    // 水印handlefail时use原始URL
                 }
 
                 $currentData[] = [

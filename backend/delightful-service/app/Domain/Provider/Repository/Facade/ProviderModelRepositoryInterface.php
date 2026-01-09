@@ -58,7 +58,7 @@ interface ProviderModelRepositoryInterface
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, Status $status = Status::Enabled): array;
 
     /**
-     * 批量根据IDgetmodel.
+     * 批量according toIDgetmodel.
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param string[] $ids modelIDarray
      * @return ProviderModelEntity[] model实体array，以ID为键
@@ -68,7 +68,7 @@ interface ProviderModelRepositoryInterface
     public function getModelByIdWithoutOrgFilter(string $id): ?ProviderModelEntity;
 
     /**
-     * 批量根据ModelIDgetmodel.
+     * 批量according toModelIDgetmodel.
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param string[] $modelIds model标识array
      * @return array<string, ProviderModelEntity[]> model实体array，以model_id为键，value为对应的modellist
@@ -81,7 +81,7 @@ interface ProviderModelRepositoryInterface
     public function queries(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query, Page $page): array;
 
     /**
-     * 根据query条件get按modeltype分组的modelIDlist.
+     * according toquery条件get按modeltype分组的modelIDlist.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param ProviderModelQuery $query query条件

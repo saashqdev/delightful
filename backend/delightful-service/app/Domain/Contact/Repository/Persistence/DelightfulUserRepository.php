@@ -200,7 +200,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
 
         $delightfulId = $userEntity->getDelightfulId();
 
-        // 第二次query：根据 delightful_id query所有该账号在不同organization中的userrecord
+        // 第二次query：according to delightful_id query所有该账号在不同organization中的userrecord
         $query = $this->userModel::query()
             ->select('organization_code')
             ->where('delightful_id', $delightfulId)
@@ -213,7 +213,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     }
 
     /**
-     * 根据 delightfulId getuser所属的organizationlist.
+     * according to delightfulId getuser所属的organizationlist.
      * @return string[]
      */
     public function getUserOrganizationsByDelightfulId(string $delightfulId): array
@@ -499,7 +499,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     }
 
     /**
-     * 投递初始化默认助手sessionevent到MQ.
+     * 投递initialize默认助手sessionevent到MQ.
      */
     private function publishInitDefaultAssistantConversationEventForMQ(DelightfulUserEntity $userEntity): void
     {

@@ -20,7 +20,7 @@ class ModelConfigRepository extends AbstractRepository implements ModelConfigRep
 {
     public function save(LLMDataIsolation $dataIsolation, ModelConfigEntity $modelConfigEntity): ModelConfigEntity
     {
-        // 由于可能双写2张表，因此开事务。又由于不想生成代理类，因此使用 Db::transaction
+        // 由于可能双写2张表，因此开事务。又由于不想生成代理类，因此use Db::transaction
         return Db::transaction(function () use ($dataIsolation, $modelConfigEntity) {
             $model = $this->createBuilder($dataIsolation, ModelConfigModel::query())->where('model', $modelConfigEntity->getModel())->first();
             if (! $model) {
@@ -46,7 +46,7 @@ class ModelConfigRepository extends AbstractRepository implements ModelConfigRep
     }
 
     /**
-     * 根据IDget模型configuration.
+     * according toIDget模型configuration.
      */
     public function getById(LLMDataIsolation $dataIsolation, string $id): ?ModelConfigEntity
     {
@@ -56,7 +56,7 @@ class ModelConfigRepository extends AbstractRepository implements ModelConfigRep
     }
 
     /**
-     * 根据endpoint或typeget模型configuration.
+     * according toendpoint或typeget模型configuration.
      */
     public function getByEndpointOrType(LLMDataIsolation $dataIsolation, string $endpointOrType): ?ModelConfigEntity
     {

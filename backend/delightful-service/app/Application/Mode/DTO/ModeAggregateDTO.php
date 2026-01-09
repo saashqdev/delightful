@@ -55,7 +55,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 根据分组IDget分组聚合根.
+     * according to分组IDget分组聚合根.
      */
     public function getGroupAggregateByGroupId(string $groupId): ?ModeGroupAggregateDTO
     {

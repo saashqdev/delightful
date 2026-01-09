@@ -122,7 +122,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             return $ownershipValidation;
         }
 
-        // 3. 处理contentupdate并构建DTO
+        // 3. 处理contentupdate并buildDTO
         $dto = $this->buildUpdateMemoryDTO(
             $validatedParams['content'] ?? null,
             $validatedParams['pending_content'] ?? null
@@ -648,11 +648,11 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 处理contentupdate并构建update记忆的DTO.
+     * 处理contentupdate并buildupdate记忆的DTO.
      */
     private function buildUpdateMemoryDTO(?string $inputContent, ?string $inputPendingContent = null): UpdateMemoryDTO
     {
-        // 构建DTO（长度check已在parameter验证阶段完成，且至少有一个field不为空）
+        // buildDTO（长度check已在parameter验证阶段完成，且至少有一个field不为空）
         $status = null;
         $explanation = null;
 

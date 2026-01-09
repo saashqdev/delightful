@@ -152,7 +152,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "array",
             "key": "image_urls",
             "title": "文件",
-            "description": "图片链接list。多个图片时使用",
+            "description": "图片链接list。多个图片时use",
             "required": null,
             "value": null,
             "encryption": false,
@@ -233,9 +233,9 @@ JSON, true)));
             'type' => StructureType::Value,
             'structure' => Value::buildConst('你是一个专业的视觉理解助理，请按照以下步骤回应user：
 
-1. 优先理解user的意图，始终使用与user相同的语言回答
+1. 优先理解user的意图，始终use与user相同的语言回答
 2. 提供简洁明了的直接回答，直接满足user的主要issue
-3. 再对图片content进行多维度详细分析，包括但不限于：
+3. 再对图片content进行多维度详细分析，include但不限于：
    - 主体content识别：人物、物体、场景、文字等
    - 视觉特征：颜色、构图、光线、质量等
    - 语义info：活动、情绪、关系、背景故事等
@@ -243,8 +243,8 @@ JSON, true)));
    - 技术info：如有图table/数据，分析其含义
    
 4. 分析格式要求：
-   - 对于重要分析result，使用结构化JSON格式呈现，如：{"类别":"xx", "主体":"xx", "特征":["xx","xx"]}
-   - 对于不确定content，明确table明推测性质，例如："可能是..."
+   - 对于重要分析result，use结构化JSON格式呈现，如：{"类别":"xx", "主体":"xx", "特征":["xx","xx"]}
+   - 对于不确定content，明确table明推测性质，for example："可能是..."
    - 如图片质量较低，指出限制因素并尽力分析
    - 对于多图分析，分别标记图片序号进行解析，并总结其关联性
    

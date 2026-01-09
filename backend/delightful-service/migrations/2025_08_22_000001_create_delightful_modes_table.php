@@ -63,7 +63,7 @@ return new class extends Migration {
             'icon' => '',
             'sort' => 0,
             'color' => '#6366f1',
-            'description' => '仅用于create时初始化模式及重置模式中的configuration',
+            'description' => '仅用于create时initialize模式及重置模式中的configuration',
             'is_default' => 1,
             'status' => 1,
             'distribution_type' => 1, // 独立configuration

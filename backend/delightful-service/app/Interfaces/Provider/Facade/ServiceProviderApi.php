@@ -44,7 +44,7 @@ class ServiceProviderApi extends AbstractApi
 
     /**
      * 不需要判断管理员permission。
-     * 根据分类getservice商list.
+     * according to分类getservice商list.
      */
     public function getServiceProviders(RequestInterface $request)
     {
@@ -53,7 +53,7 @@ class ServiceProviderApi extends AbstractApi
 
     /**
      * 不需要判断管理员permission。
-     * 根据分类getservice商list.
+     * according to分类getservice商list.
      */
     public function getOrganizationProvidersByCategory(RequestInterface $request)
     {
@@ -212,13 +212,13 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * get所有可用的LLMservice商list（包括官方service商）.
+     * get所有可用的LLMservice商list（include官方service商）.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getAllAvailableLlmProviders()
     {
         $authenticatable = $this->getAuthorization();
-        // get所有LLMtype的service商（包括Official）
+        // get所有LLMtype的service商（includeOfficial）
         return $this->adminProviderAppService->getAllAvailableLlmProviders(Category::LLM, $authenticatable->getOrganizationCode());
     }
 
@@ -243,7 +243,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 根据分类getservice商通用逻辑.
+     * according to分类getservice商通用逻辑.
      * @param RequestInterface $request 请求object
      * @return array service商list
      */

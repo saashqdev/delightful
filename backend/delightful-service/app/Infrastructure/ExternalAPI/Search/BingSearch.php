@@ -54,7 +54,7 @@ class BingSearch
         string $requestUrl = ''
     ): array {
         /*
-         * 使用 bing search并return上下文。
+         * use bing search并return上下文。
          */
         if (empty($requestUrl)) {
             $requestUrl = trim(config('search.drivers.bing.endpoint'));
@@ -64,7 +64,7 @@ class BingSearch
             $requestUrl = rtrim($requestUrl, '/') . '/search';
         }
 
-        // 构建基础queryparameter
+        // build基础queryparameter
         $queryParams = [
             'q' => $query,
             'mkt' => $mkt,
@@ -119,7 +119,7 @@ class BingSearch
                 // get响应体content
                 $body = $response->getBody()->getContents();
 
-                // 如果需要将 JSON 转换为array或object，可以使用 json_decode
+                // 如果需要将 JSON 转换为array或object，可以use json_decode
                 // 请求success，return数据
                 return Json::decode($body);
             } catch (RequestException $e) {

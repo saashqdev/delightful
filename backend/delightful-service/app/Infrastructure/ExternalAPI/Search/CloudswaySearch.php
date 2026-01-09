@@ -53,7 +53,7 @@ class CloudswaySearch
         string $freshness = '',
         string $setLang = ''
     ): array {
-        // 构建queryparameter
+        // buildqueryparameter
         $queryParams = [
             'q' => $query,
             'count' => $count,
@@ -63,7 +63,7 @@ class CloudswaySearch
         if (empty($requestUrl)) {
             $basePath = $this->config->get('search.cloudsway.base_path');
             $endpoint = $this->config->get('search.cloudsway.endpoint');
-            // 构建完整 URL: https://{BasePath}/search/{Endpoint}/smart
+            // build完整 URL: https://{BasePath}/search/{Endpoint}/smart
             $requestUrl = rtrim($basePath, '/') . '/search/' . trim($endpoint, '/') . '/smart';
         }
 
@@ -76,10 +76,10 @@ class CloudswaySearch
             $queryParams['setLang'] = $setLang;
         }
 
-        // 构建请求头
+        // build请求头
         $headers = [
             'Authorization' => 'Bearer ' . $apiKey,
-            'Pragma' => 'no-cache',  // 不使用cache，保证实时性
+            'Pragma' => 'no-cache',  // 不usecache，保证实时性
         ];
 
         // create Guzzle 客户端

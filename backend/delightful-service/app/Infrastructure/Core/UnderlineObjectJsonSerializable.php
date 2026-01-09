@@ -34,7 +34,7 @@ abstract class UnderlineObjectJsonSerializable implements JsonSerializable, Arra
     }
 
     /**
-     * get类的属性，不包括动态属性.
+     * get类的属性，不include动态属性.
      */
     public function toArray(): array
     {

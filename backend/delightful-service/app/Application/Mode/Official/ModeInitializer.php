@@ -215,7 +215,7 @@ class ModeInitializer
             'icon' => 'Icon3dCubeSphere',
             'color' => '#999999',
             'sort' => 0,
-            'description' => '仅用于create时初始化模式及重置模式中的configuration',
+            'description' => '仅用于create时initialize模式及重置模式中的configuration',
             'is_default' => 1,
             'status' => 1,
             'distribution_type' => 1,

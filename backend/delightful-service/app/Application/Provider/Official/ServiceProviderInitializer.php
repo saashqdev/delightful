@@ -86,7 +86,7 @@ class ServiceProviderInitializer
                 'id' => '759103339540475904',
                 'name' => 'Delightful',
                 'provider_code' => 'Official',
-                'description' => '由 Delightful 通过官方部署的 API 来implement AI 模型的call，可直接购买积分使用海量的大模型。',
+                'description' => '由 Delightful 通过官方部署的 API 来implement AI 模型的call，可直接购买积分use海量的大模型。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/delightful.png',
                 'provider_type' => 1, // Official
                 'category' => 'llm',
@@ -102,7 +102,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'The AI model invocation is achieved through the API officially deployed by Delightful, and you can directly purchase points to use a vast number of large models.',
-                        'zh_CN' => '由 Delightful 通过官方部署的 API 来implement AI 模型的call，可直接购买积分使用海量的大模型。',
+                        'zh_CN' => '由 Delightful 通过官方部署的 API 来implement AI 模型的call，可直接购买积分use海量的大模型。',
                     ],
                 ]),
                 'remark' => '',
@@ -112,7 +112,7 @@ class ServiceProviderInitializer
                 'id' => '759109912413282304',
                 'name' => 'Microsoft Azure',
                 'provider_code' => 'MicrosoftAzure',
-                'description' => 'Azure 提供多种先进的AI模型、包括GPT-3.5和最新的GPT-4系列、支持多种数据type和复杂任务，致力于安全、可靠和可持续的AI解决方案,',
+                'description' => 'Azure 提供多种先进的AI模型、includeGPT-3.5和最新的GPT-4系列、支持多种数据type和复杂任务，致力于安全、可靠和可持续的AI解决方案,',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/azure Avatars.png',
                 'provider_type' => 0, // Normal
                 'category' => 'llm',
@@ -128,7 +128,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Azure provides a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, committed to safe, reliable and sustainable AI solutions.',
-                        'zh_CN' => 'Azure 提供多种先进的AI模型、包括GPT-3.5和最新的GPT-4系列、支持多种数据type和复杂任务，致力于安全、可靠和可持续的AI解决方案,',
+                        'zh_CN' => 'Azure 提供多种先进的AI模型、includeGPT-3.5和最新的GPT-4系列、支持多种数据type和复杂任务，致力于安全、可靠和可持续的AI解决方案,',
                     ],
                 ]),
                 'remark' => '',
@@ -216,7 +216,7 @@ class ServiceProviderInitializer
                 'id' => '759144726407426049',
                 'name' => 'Delightful',
                 'provider_code' => 'Official',
-                'description' => '由 Delightful 通过官方部署的 API 来implement多种热门的文生图、图生图等模型的call，可直接购买积分使用海量的大模型。',
+                'description' => '由 Delightful 通过官方部署的 API 来implement多种热门的文生图、图生图等模型的call，可直接购买积分use海量的大模型。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/delightful.png',
                 'provider_type' => 1, // Official
                 'category' => 'vlm',
@@ -232,7 +232,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Delightful implements the invocation of various popular models such as text-to-image and image-to-image through the officially deployed API. You can directly purchase points to use a vast number of large models.',
-                        'zh_CN' => '由 Delightful 通过官方部署的 API 来implement多种热门的文生图、图生图等模型的call，可直接购买积分使用海量的大模型。',
+                        'zh_CN' => '由 Delightful 通过官方部署的 API 来implement多种热门的文生图、图生图等模型的call，可直接购买积分use海量的大模型。',
                     ],
                 ]),
                 'remark' => '',
@@ -268,7 +268,7 @@ class ServiceProviderInitializer
                 'id' => '764067503220973568',
                 'name' => '自定义服务商',
                 'provider_code' => 'OpenAI',
-                'description' => '请使用接口与 OpenAI API 相同形式的服务商',
+                'description' => '请use接口与 OpenAI API 相同形式的服务商',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/默认图标.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -284,7 +284,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Use a service provider with the same form of interface as the OpenAI API',
-                        'zh_CN' => '请使用接口与 OpenAI API 相同形式的服务商',
+                        'zh_CN' => '请use接口与 OpenAI API 相同形式的服务商',
                     ],
                 ]),
                 'remark' => '支持 OpenAI API 形式',
@@ -294,7 +294,7 @@ class ServiceProviderInitializer
                 'id' => '771078297613344768',
                 'name' => 'Amazon Bedrock',
                 'provider_code' => 'AWSBedrock',
-                'description' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项服务，专注于为企业提供先进的 AI 语言模型和视觉模型。其模型家族包括 Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高性能的多种选择，支持文本generate、对话、图像handle等多种任务，适用于不同规模和需求的企业application。',
+                'description' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项服务，专注于为企业提供先进的 AI 语言模型和视觉模型。其模型家族include Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高性能的多种选择，支持文本generate、对话、图像handle等多种任务，适用于不同规模和需求的企业application。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/awsAvatars.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -310,7 +310,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => "Amazon Bedrock is a service offered by Amazon AWS that focuses on advanced AI language models and visual models for businesses. Its model family, including Anthropic's Claude series and Meta's Llama 3.1 series, covers a variety of options from lightweight to high-performance, supporting a variety of tasks such as text generation, dialogue, image processing, and suitable for enterprise applications of different sizes and needs.",
-                        'zh_CN' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项服务，专注于为企业提供先进的 AI 语言模型和视觉模型。其模型家族包括 Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高性能的多种选择，支持文本generate、对话、图像handle等多种任务，适用于不同规模和需求的企业application。',
+                        'zh_CN' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项服务，专注于为企业提供先进的 AI 语言模型和视觉模型。其模型家族include Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高性能的多种选择，支持文本generate、对话、图像handle等多种任务，适用于不同规模和需求的企业application。',
                     ],
                 ]),
                 'remark' => '',
@@ -320,7 +320,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920384',
                 'name' => 'Microsoft Azure',
                 'provider_code' => 'MicrosoftAzure',
-                'description' => '提供多种先进的AI模型、包括GPT-3.5和最新的GPT-4系列、支持多种数据type和复杂任务，致力于安全、可靠和可持续的AI解决方案。',
+                'description' => '提供多种先进的AI模型、includeGPT-3.5和最新的GPT-4系列、支持多种数据type和复杂任务，致力于安全、可靠和可持续的AI解决方案。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/azure Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -336,7 +336,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Azure offers a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, and is committed to providing safe, reliable and sustainable AI solutions.',
-                        'zh_CN' => 'Azure 提供多种先进的AI模型，包括GPT-3.5和最新的GPT-4系列，支持多种数据type和复杂任务，致力于安全、可靠和可持续的AI解决方案。',
+                        'zh_CN' => 'Azure 提供多种先进的AI模型，includeGPT-3.5和最新的GPT-4系列，支持多种数据type和复杂任务，致力于安全、可靠和可持续的AI解决方案。',
                     ],
                 ]),
                 'remark' => '',

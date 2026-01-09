@@ -15,7 +15,7 @@ enum SocketEventType: string
     // connect
     case Connect = 'connect';
 
-    // login. 以后登录can投一条控制message,来实现上线通知等逻辑
+    // login. 以后登录can投一条控制message,来implement上线notify等逻辑
     case Login = 'login';
 
     // 聊天message

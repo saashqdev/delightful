@@ -28,8 +28,8 @@ use Throwable;
 use function Hyperf\Support\retry;
 
 /**
- * service商model同步应用service.
- * 负责从外部API拉取model并同步到Officialservice商.
+ * service商modelsync应用service.
+ * 负责从外部API拉取model并sync到Officialservice商.
  */
 class ProviderModelSyncAppService
 {
@@ -46,7 +46,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * 从外部API同步model.
+     * 从外部APIsyncmodel.
      * 当service商configurationcreate或update时，如果是Officialservice商且是官方organization，则从外部API拉取model.
      */
     public function syncModelsFromExternalApi(
@@ -59,14 +59,14 @@ class ProviderModelSyncAppService
         $provider = $this->providerConfigDomainService->getProviderById($dataIsolation, $providerConfigEntity->getServiceProviderId());
 
         if (! $provider || $provider->getProviderCode() !== ProviderCode::Official) {
-            $this->logger->debug('不是Officialservice商，跳过同步', [
+            $this->logger->debug('不是Officialservice商，跳过sync', [
                 'config_id' => $providerConfigEntity->getId(),
                 'provider_code' => $provider?->getProviderCode()->value,
             ]);
             return;
         }
 
-        $this->logger->info('开始从外部API同步model', [
+        $this->logger->info('开始从外部APIsyncmodel', [
             'config_id' => $providerConfigEntity->getId(),
             'organization_code' => $organizationCode,
             'provider_code' => $provider->getProviderCode()->value,
@@ -76,7 +76,7 @@ class ProviderModelSyncAppService
             // 3. 解析configuration
             $config = $providerConfigEntity->getConfig();
             if (! $config) {
-                $this->logger->warning('configuration为空，跳过同步', [
+                $this->logger->warning('configuration为空，跳过sync', [
                     'config_id' => $providerConfigEntity->getId(),
                 ]);
                 return;
@@ -93,7 +93,7 @@ class ProviderModelSyncAppService
                 return;
             }
 
-            // 4. 根据category确定typeparameter
+            // 4. according tocategory确定typeparameter
             $types = $this->getModelTypesByCategory($provider->getCategory());
 
             // 5. 从外部API拉取model
@@ -107,15 +107,15 @@ class ProviderModelSyncAppService
                 return;
             }
 
-            // 6. 同步model到database
+            // 6. syncmodel到database
             $this->syncModelsToDatabase($dataIsolation, $providerConfigEntity, $models, $language);
 
-            $this->logger->info('从外部API同步model完成', [
+            $this->logger->info('从外部APIsyncmodel完成', [
                 'config_id' => $providerConfigEntity->getId(),
                 'model_count' => count($models),
             ]);
         } catch (Throwable $e) {
-            $this->logger->error('从外部API同步modelfail', [
+            $this->logger->error('从外部APIsyncmodelfail', [
                 'config_id' => $providerConfigEntity->getId(),
                 'error' => $e->getMessage(),
                 'file' => $e->getFile(),
@@ -126,7 +126,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * 根据service商category确定要拉取的modeltype.
+     * according toservice商category确定要拉取的modeltype.
      */
     private function getModelTypesByCategory(Category $category): array
     {
@@ -210,7 +210,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * 将model同步到database.
+     * 将modelsync到database.
      */
     private function syncModelsToDatabase(
         ProviderDataIsolation $dataIsolation,
@@ -248,7 +248,7 @@ class ProviderModelSyncAppService
                     $this->createModel($dataIsolation, $modelData, $providerConfigEntity, $language);
                 }
             } catch (Throwable $e) {
-                $this->logger->error('同步modelfail', [
+                $this->logger->error('syncmodelfail', [
                     'model_id' => $modelId,
                     'error' => $e->getMessage(),
                 ]);
@@ -374,7 +374,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * 构建modelAPI链接.
+     * buildmodelAPI链接.
      */
     private function buildModelsApiUrl(string $baseUrl): string
     {

@@ -89,7 +89,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
             $dataIsolation,
             array_map(fn ($entity) => $entity->getCode(), $entities['list'])
         );
-        // get文档同步status
+        // get文档syncstatus
         foreach ($entities['list'] as $entity) {
             if (isset($documentCodeFinalSyncStatusMap[$entity->getCode()])) {
                 $entity->setSyncStatus($documentCodeFinalSyncStatusMap[$entity->getCode()]->value);

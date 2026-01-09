@@ -28,7 +28,7 @@ abstract class AbstractAttachmentMessage extends AbstractChatMessageStruct imple
     public function setAttachments(?array $attachments): void
     {
         $chatAttachment = [];
-        // 初始化附件
+        // initialize附件
         if (! empty($attachments)) {
             foreach ($attachments as $attachment) {
                 if ($attachment instanceof ChatAttachment) {

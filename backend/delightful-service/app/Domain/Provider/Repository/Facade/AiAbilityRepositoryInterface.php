@@ -19,7 +19,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 interface AiAbilityRepositoryInterface
 {
     /**
-     * 根据能力代码getAI能力实体.
+     * according to能力代码getAI能力实体.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离info
      * @param AiAbilityCode $code 能力代码
@@ -36,7 +36,7 @@ interface AiAbilityRepositoryInterface
     public function getAll(ProviderDataIsolation $dataIsolation): array;
 
     /**
-     * 根据IDgetAI能力实体.
+     * according toIDgetAI能力实体.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离info
      * @param int $id 能力ID
@@ -61,7 +61,7 @@ interface AiAbilityRepositoryInterface
     public function update(AiAbilityEntity $entity): bool;
 
     /**
-     * 根据codeupdate（支持选择性update）.
+     * according tocodeupdate（支持选择性update）.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离info
      * @param AiAbilityCode $code 能力代码

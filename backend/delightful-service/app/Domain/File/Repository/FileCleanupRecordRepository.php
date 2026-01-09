@@ -42,7 +42,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 根据ID查找record.
+     * according toID查找record.
      */
     public function findById(int $id): ?FileCleanupRecordEntity
     {
@@ -53,7 +53,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 根据文件key和organization编码查找record.
+     * according to文件key和organization编码查找record.
      */
     public function findByFileKey(string $fileKey, string $organizationCode): ?FileCleanupRecordEntity
     {

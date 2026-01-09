@@ -43,7 +43,7 @@ class ModeAppService extends AbstractModeAppService
         $query = new ModeQuery(status: true);
         $modeEnabledList = $this->modeDomainService->getModes($modeDataIsolation, $query, Page::createNoPage())['list'];
 
-        // 批量构建模式聚合根
+        // 批量build模式聚合根
         $modeAggregates = $this->modeDomainService->batchBuildModeAggregates($modeDataIsolation, $modeEnabledList);
 
         // ===== 性能优化：批量预query =====
@@ -80,7 +80,7 @@ class ModeAppService extends AbstractModeAppService
         // 需要升级套餐
         $upgradeRequiredModelIds = [];
 
-        // 使用organizationfilter器进行filter（LLM）
+        // useorganizationfilter器进行filter（LLM）
         if ($this->organizationModelFilter) {
             $providerModels = $this->organizationModelFilter->filterModelsByOrganization(
                 $authorization->getOrganizationCode(),
@@ -92,7 +92,7 @@ class ModeAppService extends AbstractModeAppService
             $providerModels = $allAggregateModels;
         }
 
-        // 使用organizationfilter器进行filter（VLM）
+        // useorganizationfilter器进行filter（VLM）
         if ($this->organizationModelFilter) {
             $providerImageModels = $this->organizationModelFilter->filterModelsByOrganization(
                 $authorization->getOrganizationCode(),
@@ -118,7 +118,7 @@ class ModeAppService extends AbstractModeAppService
         foreach ($allAgents as $agent) {
             $modeAggregateDTO = $modeAggregateDTOs[$agent->getCode()] ?? null;
             if (! $modeAggregateDTO) {
-                // 使用默认的
+                // use默认的
                 $modeAggregateDTO = $modeAggregateDTOs['default'] ?? null;
             }
             if (! $modeAggregateDTO) {

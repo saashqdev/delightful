@@ -130,7 +130,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
         $messageId = $params['event']['message']['message_id'] ?? '';
 
-        // 幂等性handle：使用messageID进行去重
+        // 幂等性handle：usemessageID进行去重
         if (! $this->checkMessageIdLock($messageId)) {
             $this->logger->info('飞书message已handle过，跳过', ['message_id' => $messageId]);
             $chatMessage->setEvent(ThirdPlatformChatEvent::None);
@@ -330,7 +330,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                 return null;
             }
 
-            // 创建user扩展信息object
+            // createuser扩展信息object
             $realName = $userInfo['name'] ?? $openId;
             $nickname = ! empty($userInfo['nickname']) ? $userInfo['nickname'] : $realName;
             $userExtInfo = new TriggerDataUserExtInfo($organizationCode, $openId, $nickname, $realName);
@@ -551,7 +551,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * 创建附件object
+     * create附件object
      *
      * @param string $filePath 文件路径
      * @param string $organizationCode organization代码
@@ -562,7 +562,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         try {
             return (new LocalAttachment($filePath))->getAttachment($organizationCode);
         } catch (Exception $e) {
-            $this->logger->error('创建附件objectfail', [
+            $this->logger->error('create附件objectfail', [
                 'file_path' => $filePath,
                 'organization_code' => $organizationCode,
                 'error' => $e->getMessage(),
@@ -572,7 +572,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * send不支持的messagetype通知.
+     * send不支持的messagetypenotify.
      *
      * @param string $receiverId receive者ID
      */
@@ -587,11 +587,11 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         ];
         $this->application->message->send($data, 'chat_id');
 
-        $this->logger->info('已send不支持messagetype通知', ['receive_id' => $receiverId]);
+        $this->logger->info('已send不支持messagetypenotify', ['receive_id' => $receiverId]);
     }
 
     /**
-     * senderror通知.
+     * senderrornotify.
      *
      * @param string $receiverId receive者ID
      */
@@ -606,7 +606,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         ];
         $this->application->message->send($data, 'chat_id');
 
-        $this->logger->info('已senderror通知', ['receive_id' => $receiverId]);
+        $this->logger->info('已senderrornotify', ['receive_id' => $receiverId]);
     }
 
     /**
@@ -627,7 +627,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $markdown .= "# {$content['title']}\n\n";
         }
 
-        // 优先使用中文内容，如果没有则使用英文内容
+        // 优先use中文内容，如果没有则use英文内容
         $postContent = $content['content'] ?? [];
 
         foreach ($postContent as $paragraph) {
@@ -733,7 +733,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
     /**
      * parseMarkdown内容，convert为飞书富文本格式
-     * 只handle图片，其他内容全部使用md样式.
+     * 只handle图片，其他内容全部usemd样式.
      *
      * @param string $markdown Markdown内容
      * @return array 飞书富文本格式
@@ -746,7 +746,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             'content' => [],
         ];
 
-        // 使用正则表达式匹配Markdown中的图片
+        // use正则表达式匹配Markdown中的图片
         $pattern = '/!\[(.*?)\]\((.*?)\)/';
 
         // 如果没有图片，直接returnmd格式

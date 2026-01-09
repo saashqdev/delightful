@@ -94,7 +94,7 @@ class ProviderConfigAssembler
             $preparedConfig['provider_code'] = $provider['provider_code'] ?? null;
             $preparedConfig['is_models_enable'] = $provider['is_models_enable'] ?? true;
 
-            // 直接使用 provider 的翻译info（config 中只有 ak、sk 等configuration，没有翻译数据）
+            // 直接use provider 的翻译info（config 中只有 ak、sk 等configuration，没有翻译数据）
             if (! empty($provider['translate'])) {
                 $providerTranslate = is_string($provider['translate'])
                     ? Json::decode($provider['translate'])

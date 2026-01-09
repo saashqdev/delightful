@@ -94,7 +94,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 根据IDgetorganization.
+     * according toIDgetorganization.
      */
     public function getById(int $id): ?OrganizationEntity
     {
@@ -102,7 +102,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 根据编码getorganization.
+     * according to编码getorganization.
      */
     public function getByCode(string $delightfulOrganizationCode): ?OrganizationEntity
     {
@@ -110,7 +110,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 根据编码list批量getorganization.
+     * according to编码list批量getorganization.
      * @param string[] $delightfulOrganizationCodes
      * @return OrganizationEntity[]
      */
@@ -130,7 +130,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 根据namegetorganization.
+     * according tonamegetorganization.
      */
     public function getByName(string $name): ?OrganizationEntity
     {

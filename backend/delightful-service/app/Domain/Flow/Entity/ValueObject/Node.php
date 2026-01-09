@@ -76,7 +76,7 @@ class Node extends AbstractValueObject
         $this->nodeDefine = FlowNodeCollector::get($nodeType, $version);
         $this->nodeType = $nodeType;
         $this->nodeVersion = $this->nodeDefine->getVersion();
-        // 初始化configuration
+        // initializeconfiguration
         $this->nodeParamsConfig = NodeParamsConfigFactory::make($this);
         parent::__construct();
     }

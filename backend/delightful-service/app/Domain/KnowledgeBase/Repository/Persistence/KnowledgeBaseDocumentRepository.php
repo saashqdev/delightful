@@ -24,7 +24,7 @@ use Psr\Container\ContainerInterface;
 use function mb_substr;
 
 /**
- * 知识库文档仓库实现.
+ * 知识库文档仓库implement.
  */
 class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository implements KnowledgeBaseDocumentRepositoryInterface
 {
@@ -244,7 +244,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 根据文档编码delete所有片段.
+     * according to文档编码delete所有片段.
      */
     public function destroyFragmentsByDocumentCode(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -256,7 +256,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 重置文档同步status
+     * 重置文档syncstatus
      */
     public function resetSyncStatus(KnowledgeBaseDataIsolation $dataIsolation, string $documentCode): void
     {
@@ -269,7 +269,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * update文档同步status
+     * update文档syncstatus
      */
     public function updateSyncStatus(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentEntity $documentEntity): void
     {
@@ -278,7 +278,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             'sync_status_message' => mb_substr($documentEntity->getSyncStatusMessage(), 0, 900),
         ];
 
-        // 如果是已同步或同步failstatus，同步次数加1
+        // 如果是已sync或syncfailstatus，sync次数加1
         if (in_array($documentEntity->getSyncStatus(), [KnowledgeSyncStatus::Synced->value, KnowledgeSyncStatus::SyncFailed->value])) {
             KnowledgeBaseDocumentModel::withTrashed()
                 ->where('id', $documentEntity->getId())
@@ -310,7 +310,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * createquery构建器.
+     * createquerybuild器.
      */
     protected function createQueryBuilder(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentQuery $query): Builder
     {

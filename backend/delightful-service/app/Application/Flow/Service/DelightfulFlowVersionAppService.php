@@ -56,7 +56,7 @@ class DelightfulFlowVersionAppService extends AbstractFlowAppService
     }
 
     /**
-     * 发布version.
+     * publishversion.
      */
     public function publish(Authenticatable $authorization, DelightfulFlowVersionEntity $delightfulFlowVersionEntity): DelightfulFlowVersionEntity
     {

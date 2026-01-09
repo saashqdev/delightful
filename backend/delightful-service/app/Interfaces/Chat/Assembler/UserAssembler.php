@@ -151,13 +151,13 @@ class UserAssembler
         /** @var array<UserDepartmentDetailDTO> $usersDepartmentDetailDTOList */
         $usersDepartmentDetailDTOList = [];
 
-        // 步骤1: 构建userID到department关系的映射
+        // 步骤1: builduserID到department关系的映射
         $userDepartmentMap = [];
         foreach ($departmentUsers as $departmentUser) {
             $userDepartmentMap[$departmentUser->getUserId()][] = $departmentUser;
         }
 
-        // 步骤2: 为每个user构建详细info
+        // 步骤2: 为每个userbuild详细info
         foreach ($usersDetail as $userInfo) {
             $userId = $userInfo->getUserId();
             $userDepartmentRelations = $userDepartmentMap[$userId] ?? [];
@@ -188,7 +188,7 @@ class UserAssembler
                 }
             }
 
-            // 步骤2.2: 使用默认department关系作为基础info
+            // 步骤2.2: use默认department关系作为基础info
             $defaultDepartmentUser = $userDepartmentRelations[0] ?? [];
 
             // 步骤2.3: update或createuserdepartment详情object

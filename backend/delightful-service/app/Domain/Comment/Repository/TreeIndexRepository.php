@@ -41,7 +41,7 @@ class TreeIndexRepository
 
     /**
      * false设现在的父子级关系是1 -> 2 -> 3 -> 4，现在need在4的后面插入5，那么need做的操作是：
-     * get到4的所有祖先节点，then使用4的所有祖先节点去update5的祖先节点，then再create一条5 -> 5的关系。
+     * get到4的所有祖先节点，thenuse4的所有祖先节点去update5的祖先节点，then再create一条5 -> 5的关系。
      * 1->4
      * 2->4
      * 3->4

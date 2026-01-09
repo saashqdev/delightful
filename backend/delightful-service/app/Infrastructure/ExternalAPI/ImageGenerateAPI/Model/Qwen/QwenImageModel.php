@@ -51,12 +51,12 @@ class QwenImageModel extends AbstractImageGenerate
 
     public function setAK(string $ak)
     {
-        // 通义千问不使用AK/SK认证，此method为nullimplement
+        // 通义千问不useAK/SK认证，此method为nullimplement
     }
 
     public function setSK(string $sk)
     {
-        // 通义千问不使用AK/SK认证，此method为nullimplement
+        // 通义千问不useAK/SK认证，此method为nullimplement
     }
 
     public function setApiKey(string $apiKey)
@@ -76,7 +76,7 @@ class QwenImageModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先创建响应object
+        // 1. 预先create响应object
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -185,7 +185,7 @@ class QwenImageModel extends AbstractImageGenerate
             'count' => $count,
         ]);
 
-        // 使用 Parallel 并行handle
+        // use Parallel 并行handle
         $parallel = new Parallel();
         for ($i = 0; $i < $count; ++$i) {
             $fromCoroutineId = Coroutine::id();
@@ -235,7 +235,7 @@ class QwenImageModel extends AbstractImageGenerate
         }
 
         if (empty($rawResults)) {
-            // 优先使用具体的error码，如果都是通用error则使用 NO_VALID_IMAGE
+            // 优先use具体的error码，如果都是通用error则use NO_VALID_IMAGE
             $finalErrorCode = ImageGenerateErrorCode::NO_VALID_IMAGE;
             $finalErrorMsg = '';
 
@@ -247,7 +247,7 @@ class QwenImageModel extends AbstractImageGenerate
                 }
             }
 
-            // 如果没有找到具体errormessage，使用第一个errormessage
+            // 如果没有找到具体errormessage，use第一个errormessage
             if (empty($finalErrorMsg) && ! empty($errors[0]['message'])) {
                 $finalErrorMsg = $errors[0]['message'];
             }
@@ -282,7 +282,7 @@ class QwenImageModel extends AbstractImageGenerate
                 'size' => $request->getWidth() . '*' . $request->getHeight(),
                 'n' => 1, // 通义千问每次只能generate1张图片
                 'model' => $request->getModel(),
-                'watermark' => false, // 关闭API水印，使用统一PHP水印
+                'watermark' => false, // 关闭API水印，use统一PHP水印
                 'prompt_extend' => $request->isPromptExtend(),
             ];
 
@@ -530,7 +530,7 @@ class QwenImageModel extends AbstractImageGenerate
         array $qwenResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // 使用Redis锁确保并发安全
+        // useRedis锁确保并发安全
         $lockOwner = $this->lockResponse($response);
         try {
             // 从通义千问响应中提取数据
@@ -556,7 +556,7 @@ class QwenImageModel extends AbstractImageGenerate
                             'error' => $e->getMessage(),
                             'url' => $resultItem['url'],
                         ]);
-                        // 水印handlefail时使用原始URL
+                        // 水印handlefail时use原始URL
                         $currentData[] = [
                             'url' => $resultItem['url'],
                         ];

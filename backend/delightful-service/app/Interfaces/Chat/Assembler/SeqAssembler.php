@@ -125,7 +125,7 @@ class SeqAssembler
     }
 
     /**
-     * 根据已经存在的seqEntity,generate已读/已查看/撤回/编辑等messagestatus变更type的回执message.
+     * according to已经存在的seqEntity,generate已读/已查看/撤回/编辑等messagestatus变更type的回执message.
      */
     public static function generateReceiveStatusChangeSeqEntity(DelightfulSeqEntity $originSeqEntity, ControlMessageType $messageType): DelightfulSeqEntity
     {
@@ -155,7 +155,7 @@ class SeqAssembler
     }
 
     /**
-     * 根据已经存在的seqEntity,generate已读/已查看/撤回/编辑等messagestatus变更type的回执message.
+     * according to已经存在的seqEntity,generate已读/已查看/撤回/编辑等messagestatus变更type的回执message.
      * @param string $referMessageId 支持指定引用的messageid,用于给receive方的其他设备推送回执,或者给发件方推送回执
      */
     public static function generateStatusChangeSeqEntity(array $seqData, string $referMessageId): DelightfulSeqEntity
@@ -176,7 +176,7 @@ class SeqAssembler
     }
 
     /**
-     * 根据已经存在的seqEntity,generatetopic变更type的控制message.
+     * according to已经存在的seqEntity,generatetopic变更type的控制message.
      */
     public static function generateTopicChangeSeqEntity(DelightfulSeqEntity $seqEntity, DelightfulTopicEntity $topicEntity, ?DelightfulUserEntity $receiveUserEntity): DelightfulSeqEntity
     {
@@ -208,7 +208,7 @@ class SeqAssembler
     }
 
     /**
-     * 根据array获取message结构.
+     * according toarray获取message结构.
      */
     public static function getSeqStructByArray(string $messageTypeString, array $messageStructArray): MessageInterface
     {
@@ -255,7 +255,7 @@ class SeqAssembler
 
     private static function getClientSequence(DelightfulSeqEntity $seqEntity, ?DelightfulMessageEntity $messageEntity = null): ClientSequence
     {
-        // 由于编辑message可能更改messagetype，因此如果 $messageEntity 不为null，优先使用 $messageEntity 的messagetype
+        // 由于编辑message可能更改messagetype，因此如果 $messageEntity 不为null，优先use $messageEntity 的messagetype
         if ($messageEntity !== null) {
             $messageType = $messageEntity->getContent()->getMessageTypeEnum();
         } else {
@@ -312,7 +312,7 @@ class SeqAssembler
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // send方的messageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),
-            // message所属conversation窗口。 客户端可以根据此value确定message是否要提醒等。如果本地没有发现这个conversationid，主动向服务端queryconversation窗口详情
+            // message所属conversation窗口。 客户端可以according to此value确定message是否要提醒等。如果本地没有发现这个conversationid，主动向服务端queryconversation窗口详情
             'conversation_id' => $seqEntity->getConversationId(),
             // 本条message所属organization
             'organization_code' => $seqEntity->getOrganizationCode(),

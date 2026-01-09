@@ -29,7 +29,7 @@ class AuthenticationApi
 
     public function authCheck(RequestInterface $request): array
     {
-        // 根据登录码，get对应的访问环境，去麦吉/天书校验是否有permission
+        // according to登录码，get对应的访问环境，去麦吉/天书校验是否有permission
         $authorization = (string) $request->input('authorization', '');
         if (empty($authorization)) {
             $authorization = (string) $request->header('authorization');

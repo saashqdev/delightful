@@ -84,7 +84,7 @@ abstract class NodeRunner implements NodeRunnerInterface
         $this->llmAppService = di(LLMAppService::class);
 
         $this->node = $node;
-        // 初始化运行result
+        // initialize运行result
         if (! $this->node->getNodeDebugResult()) {
             $this->node->setNodeDebugResult(new NodeDebugResult($this->node->getNodeVersion()));
         }
@@ -129,7 +129,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 $callback($vertexResult, $executionData, $frontResults);
             } else {
                 $this->node->validate();
-                // 提前get本次的result，如果有，则直接使用
+                // 提前get本次的result，如果有，则直接use
                 $nextExecuteNum = $executeNum + 1;
                 $historyVertexResult = $executionData->getNodeHistoryVertexResult($this->node->getNodeId(), $nextExecuteNum);
                 if ($historyVertexResult) {
@@ -222,8 +222,8 @@ abstract class NodeRunner implements NodeRunnerInterface
     abstract protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void;
 
     /**
-     * todo 这里暂不实现重复上传的issue，均当做新文件上传
-     * record流程所产生的文件，均会同时上传到云端，后续节点需要使用时从执行流程数据中优先匹配.
+     * todo 这里暂不implement重复上传的issue，均当做新文件上传
+     * record流程所产生的文件，均会同时上传到云端，后续节点需要use时从执行流程数据中优先匹配.
      * @return AbstractAttachment[]
      * @throws SSRFException
      */

@@ -69,7 +69,7 @@ class FluxModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先创建响应object
+        // 1. 预先create响应object
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -306,7 +306,7 @@ class FluxModel extends AbstractImageGenerate
         $rawResults = [];
         $errors = [];
 
-        // 使用 Parallel 并行handle
+        // use Parallel 并行handle
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
         for ($i = 0; $i < $count; ++$i) {
@@ -406,7 +406,7 @@ class FluxModel extends AbstractImageGenerate
         array $fluxResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // 使用Redis锁确保并发安全
+        // useRedis锁确保并发安全
         $lockOwner = $this->lockResponse($response);
         try {
             // 从Flux响应中提取数据
@@ -428,7 +428,7 @@ class FluxModel extends AbstractImageGenerate
                     'error' => $e->getMessage(),
                     'url' => $imageUrl,
                 ]);
-                // 水印handlefail时使用原始URL
+                // 水印handlefail时use原始URL
             }
 
             $currentData[] = [

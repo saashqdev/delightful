@@ -12,7 +12,7 @@ namespace App\Application\Speech\Enum;
  *
  * 【作用域】外部系统 - 沙箱音频合并service
  * 【用途】table示沙箱中音频合并task的执行status
- * 【使用场景】
+ * 【use场景】
  * - call沙箱 finishTask 接口的轮询status判断
  * - 判断音频分片合并是否完成
  *

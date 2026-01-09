@@ -35,7 +35,7 @@ class FileGetLinkBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '根据文件 key get文件下载的签名URL。仅能get本流程产生的文件';
+        return 'according to文件 key get文件下载的签名URL。仅能get本流程产生的文件';
     }
 
     public function getCallback(): ?Closure

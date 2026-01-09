@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\MCP\RateLimiter;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * 无限制的速率限制器实现.
+ * 无限制的速率限制器implement.
  * 对任何请求都不进行限制，适用于对性能要求较高或处于开发阶段的system.
  */
 class NoRateLimiter extends AbstractRateLimiter
@@ -22,7 +22,7 @@ class NoRateLimiter extends AbstractRateLimiter
 
     /**
      * getwhen前的限制configuration.
-     * 对于无限制实现，所有限制均设为 PHP_INT_MAX.
+     * 对于无限制implement，所有限制均设为 PHP_INT_MAX.
      */
     public function getLimits(): array
     {
@@ -35,10 +35,10 @@ class NoRateLimiter extends AbstractRateLimiter
     }
 
     /**
-     * 无限制的检查实现，始终允许请求通过.
+     * 无限制的检查implement，始终允许请求通过.
      */
     protected function doCheck(string $clientId, MessageInterface $request): void
     {
-        // null实现，始终允许请求通过
+        // nullimplement，始终允许请求通过
     }
 }

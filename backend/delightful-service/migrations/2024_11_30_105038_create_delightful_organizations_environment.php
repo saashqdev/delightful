@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('delightful_organization_code', 32)->comment('麦吉organization code');
             $table->string('origin_organization_code', 32)->comment('原始organization code');
             // 环境id
-            $table->unsignedBigInteger('environment_id')->comment('delightful_environment表的id。表明这个organization要使用哪个环境');
+            $table->unsignedBigInteger('environment_id')->comment('delightful_environment表的id。表明这个organization要use哪个环境');
             $table->unique('login_code', 'idx_login_code');
             $table->unique('delightful_organization_code', 'idx_delightful_organization_code');
             $table->timestamps();

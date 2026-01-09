@@ -175,7 +175,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
             return $this->departmentRepository->getDepartmentRootId($organizationCode);
         }
 
-        // 根据organization编码和平台typeget根departmentID
+        // according toorganization编码和平台typeget根departmentID
         return $this->thirdPlatformIdMappingRepository->getDepartmentRootId($organizationCode, $platformType);
     }
 

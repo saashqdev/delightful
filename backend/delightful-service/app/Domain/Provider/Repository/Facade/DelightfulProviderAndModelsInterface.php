@@ -24,7 +24,7 @@ interface DelightfulProviderAndModelsInterface
     public function getDelightfulProvider(ProviderDataIsolation $dataIsolation, Category $category, ?Status $status = null): ?ProviderConfigDTO;
 
     /**
-     * 根据organization编码和类别get Delightful service商modellist.
+     * according toorganization编码和类别get Delightful service商modellist.
      *
      * @param string $organizationCode organization编码
      * @param null|Category $category service商类别，为空时return所有分类model
@@ -33,7 +33,7 @@ interface DelightfulProviderAndModelsInterface
     public function getDelightfulEnableModels(string $organizationCode, ?Category $category = null): array;
 
     /**
-     * 根据 modelParentId getorganization Delightful model.
+     * according to modelParentId getorganization Delightful model.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param string $modelParentId model父ID
@@ -42,7 +42,7 @@ interface DelightfulProviderAndModelsInterface
     public function getDelightfulModelByParentId(ProviderDataIsolation $dataIsolation, string $modelParentId): ?ProviderModelEntity;
 
     /**
-     * 根据IDgetorganization Delightful model.
+     * according toIDgetorganization Delightful model.
      *
      * @param int $id modelID`
      * @return null|ProviderModelEntity 找到的model实体，不存在则returnnull

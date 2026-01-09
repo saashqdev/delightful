@@ -29,24 +29,24 @@ class InitDelightfulProviderCommand extends HyperfCommand
     public function configure(): void
     {
         parent::configure();
-        $this->setDescription('初始化Delightful服务商configurationdata');
+        $this->setDescription('initializeDelightful服务商configurationdata');
     }
 
     public function handle(): void
     {
         $this->adminProviderAppService = $this->container->get(AdminProviderAppService::class);
 
-        $this->info('开始初始化Delightful服务商configurationdata...');
+        $this->info('开始initializeDelightful服务商configurationdata...');
 
         try {
             $count = $this->adminProviderAppService->initializeDelightfulProviderConfigs();
-            $this->info("success初始化 {$count} 个服务商configuration");
+            $this->info("successinitialize {$count} 个服务商configuration");
         } catch (Throwable $e) {
-            $this->error('初始化Delightful服务商configurationdatafailed: ' . $e->getMessage());
+            $this->error('initializeDelightful服务商configurationdatafailed: ' . $e->getMessage());
             $this->error($e->getTraceAsString());
             return;
         }
 
-        $this->info('Delightful服务商configurationdata初始化完成');
+        $this->info('Delightful服务商configurationdatainitialize完成');
     }
 }

@@ -18,7 +18,7 @@ return new class extends Migration {
             return;
         }
         Schema::create('delightful_chat_sequences', static function (Blueprint $table) {
-            // 根据上面的建table语句，得出以下代码
+            // according to上面的建table语句，得出以下代码
             $table->bigIncrements('id')->comment('primary keyid,没啥用');
             $table->string('organization_code', 64)->comment('序列号所属的organization编码.')->default('');
             $table->tinyInteger('object_type')->comment('objecttype,0:ai,1:user；2：应用;3:文档;4:多维table格');
@@ -27,9 +27,9 @@ return new class extends Migration {
             $table->string('seq_type', 32)->comment('message大type:控制message,聊天message。');
             $table->text('content')->comment('序列号详情. 一些不可见的控制message,只在seqtable存在详情. 以及写时复制一份messagetablecontent到seqtable用.');
             $table->string('delightful_message_id', 64)->comment('service端生成的唯一messageid,用于message撤回/编辑');
-            $table->string('message_id', 64)->comment('序列号关联的usermessageid,实现已读回执,message撤回/编辑等')->default(0);
+            $table->string('message_id', 64)->comment('序列号关联的usermessageid,implement已读回执,message撤回/编辑等')->default(0);
             // 引用的messageid
-            $table->string('refer_message_id', 64)->comment('引用的messageid,实现已读回执,message撤回/编辑等');
+            $table->string('refer_message_id', 64)->comment('引用的messageid,implement已读回执,message撤回/编辑等');
             // sender_message_id
             $table->string('sender_message_id', 64)->comment('发送方的messageid,用于message撤回/编辑');
             // sessionid
@@ -37,7 +37,7 @@ return new class extends Migration {
             $table->tinyInteger('status')->default(0)->comment('messagestatus,0:unread, 1:seen, 2:read, 3:revoked');
             // message接收人list
             $table->text('receive_list')->comment('message接收人list,全量record未读/已读/已查看userlist');
-            $table->text('extra')->comment('附加field，record一些扩展property。 比如话题id。');
+            $table->text('extra')->comment('附加field，record一些扩展property。 such as话题id。');
             // app_message_id
             $table->string('app_message_id', 64)->default('')->comment('冗余field,客户端生成的messageid,用于防客户端重复');
             # 以下是索引set

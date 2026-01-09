@@ -159,7 +159,7 @@ readonly class FileDomainService
 
     /**
      * 开启 sts 模式.
-     * get临时凭证给前端使用.
+     * get临时凭证给前端use.
      * @todo 安全issue，dir 没有校验，没有organization隔离
      */
     public function getStsTemporaryCredential(
@@ -265,7 +265,7 @@ readonly class FileDomainService
         string $directoryPrefix,
         StorageBucketType $bucketType = StorageBucketType::Private
     ): array {
-        // 使用listObjectsByCredential列出目录文件
+        // uselistObjectsByCredential列出目录文件
         $objectsResponse = $this->cloudFileRepository->listObjectsByCredential(
             $organizationCode,
             $directoryPrefix,
@@ -285,7 +285,7 @@ readonly class FileDomainService
                 key: $objectKey,
                 filename: $filename,
                 size: $object['size'] ?? null,
-                lastModified: null // ASR业务中不使用该field，直接传null
+                lastModified: null // ASR业务中不use该field，直接传null
             );
         }
         return $files;

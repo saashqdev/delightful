@@ -115,8 +115,8 @@ class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
         "use_deep_search": {
             "type": "boolean",
             "key": "use_deep_search",
-            "title": "是否使用深度search",
-            "description": "是否使用深度search",
+            "title": "是否use深度search",
+            "description": "是否use深度search",
             "required": null,
             "value": null,
             "encryption": false,

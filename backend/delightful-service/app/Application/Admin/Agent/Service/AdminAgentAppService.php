@@ -81,7 +81,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         $agentVersionEntity = new DelightfulAgentVersionEntity();
         if ($agentEntity->getAgentVersionId()) {
             $agentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentById($agentEntity->getAgentVersionId());
-            // 只有发布的助理才会有permission管控
+            // 只有publish的助理才会有permission管控
             $resourceAccessDTO = $this->getAgentResource($authorization, $agentId);
             $adminAgentDetail->setResourceAccess($resourceAccessDTO);
         } else {
@@ -158,13 +158,13 @@ class AdminAgentAppService extends AbstractKernelAppService
         $agentVersionIds = array_filter(array_column($delightfulAgentEntities, 'agent_version_id'), fn ($agentVersionId) => $agentVersionId !== null);
         $agentVersions = $this->delightfulAgentVersionDomainService->getAgentByIds($agentVersionIds);
 
-        // 构建create人映射
+        // buildcreate人映射
         $createdUserMap = [];
         foreach ($createdUsers as $user) {
             $createdUserMap[$user->getUserId()] = $user;
         }
 
-        // 构建助理版本映射
+        // build助理版本映射
         $agentVersionMap = [];
         foreach ($agentVersions as $version) {
             $agentVersionMap[$version->getId()] = $version;
@@ -275,7 +275,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         // get启用的机器人list
         $enabledAgents = $this->delightfulAgentDomainService->getEnabledAgents();
 
-        // 根据筛选typefilter
+        // according to筛选typefilter
         $enabledAgents = $this->filterEnableAgentsByType($authorization, $enabledAgents, $type);
 
         // 提取启用机器人list中的 agent_version_id
@@ -338,7 +338,7 @@ class AdminAgentAppService extends AbstractKernelAppService
             }
         }
         $contactDataIsolation = ContactDataIsolation::simpleMake($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
-        // 根据 userid getuserinfo
+        // according to userid getuserinfo
         $users = $this->userDomainService->getByUserIds($contactDataIsolation, $userIds);
         // getuser的 departmentId
         $userDepartmentList = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserIds($contactDataIsolation, $userIds);

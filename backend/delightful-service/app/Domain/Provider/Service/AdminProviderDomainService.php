@@ -101,7 +101,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 根据organization和服务商type获取服务商配置列表.
+     * according toorganization和服务商type获取服务商配置列表.
      * @param string $organizationCode organization编码
      * @param Category $category 服务商type
      * @return ProviderConfigDTO[]
@@ -134,7 +134,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
     /**
      * 获取服务商配置（综合method）
-     * 根据模型版本、模型ID和organization编码获取服务商配置.
+     * according to模型版本、模型ID和organization编码获取服务商配置.
      *
      * @param string $modelOriginId 模型版本
      * @param string $modelId 模型ID
@@ -173,7 +173,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 根据模型ID获取服务商配置.
+     * according to模型ID获取服务商配置.
      * @param string $modelId 模型ID
      * @param string $organizationCode organization编码
      * @throws Exception
@@ -239,11 +239,11 @@ class AdminProviderDomainService extends AbstractProviderDomainService
      */
     public function getOrganizationActiveModelsByIdOrType(string $key, string $orgCode): array
     {
-        // 创建数据隔离object并获取可用模型
+        // create数据隔离object并获取可用模型
         $dataIsolation = ProviderDataIsolation::create($orgCode);
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
-        // 根据key进行filter
+        // according tokey进行filter
         $models = [];
         foreach ($allModels as $model) {
             // filter禁用
@@ -268,7 +268,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     /**
      * 获取超清修复服务商配置。
      * 从ImageGenerateModelType::getMiracleVisionModes()[0]获取模型。
-     * 如果官方和非官方都启用，优先使用非官方配置。
+     * 如果官方和非官方都启用，优先use非官方配置。
      *
      * @param string $modelId 模型版本
      * @param string $organizationCode organization编码
@@ -276,7 +276,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
      */
     public function getMiracleVisionServiceProviderConfig(string $modelId, string $organizationCode): ProviderConfigEntity
     {
-        // 创建数据隔离object
+        // create数据隔离object
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
         // 获取所有分类的可用模型
@@ -326,7 +326,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 获取所有可用的服务商列表（包括官方服务商），不依赖于organization编码.
+     * 获取所有可用的服务商列表（include官方服务商），不依赖于organization编码.
      *
      * @param Category $category 服务商类别
      * @return ProviderConfigModelsDTO[]
@@ -364,7 +364,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             return [];
         }
 
-        // 创建配置ID到配置实体的映射，便于快速查找
+        // create配置ID到配置实体的映射，便于快速查找
         $configMap = [];
         foreach ($serviceProviderConfigEntities as $configEntity) {
             $configMap[$configEntity->getId()] = $configEntity;
@@ -417,13 +417,13 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             $beDelightfulModels[] = $model;
         }
 
-        // 根据 modelId 去重
+        // according to modelId 去重
         $uniqueModels = [];
         foreach ($beDelightfulModels as $model) {
             $uniqueModels[$model->getModelId()] = $model;
         }
 
-        // 根据 sort sort，大到小
+        // according to sort sort，大到小
         usort($uniqueModels, static function ($a, $b) {
             return $b->getSort() <=> $a->getSort();
         });
@@ -472,7 +472,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
                 continue;
             }
 
-            // 创建数据隔离object
+            // create数据隔离object
             $dataIsolation = ProviderDataIsolation::create($officialOrganization);
 
             // 判断该服务商是否已有配置
@@ -489,7 +489,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
                 continue;
             }
 
-            // 创建配置实体
+            // create配置实体
             $configEntity = new ProviderConfigEntity();
             $configEntity->setServiceProviderId($provider->getId());
             $configEntity->setOrganizationCode($officialOrganization);
@@ -500,7 +500,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             $this->providerConfigRepository->save($dataIsolation, $configEntity);
             ++$count;
 
-            $this->logger->info('创建服务商配置success', [
+            $this->logger->info('create服务商配置success', [
                 'category' => $category->value,
                 'provider_id' => $provider->getId(),
             ]);
@@ -573,7 +573,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
                 return $serviceProviderConfigEntity;
             }
 
-            // 如果是官方服务商配置，先save，如果没有找到非官方的再使用
+            // 如果是官方服务商配置，先save，如果没有找到非官方的再use
             if ($officialConfig === null) {
                 $officialConfig = $serviceProviderConfigEntity;
             }
@@ -589,14 +589,14 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 根据模型版本和organization获取模型列表.
+     * according to模型版本和organization获取模型列表.
      * @param string $modelOriginId 模型id
      * @param string $organizationCode organization代码
      * @return ProviderModelEntity[] filter后的模型列表
      */
     private function getModelsByVersionAndOrganization(string $modelOriginId, string $organizationCode): array
     {
-        // 创建数据隔离object
+        // create数据隔离object
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
         // 获取所有分类的可用模型

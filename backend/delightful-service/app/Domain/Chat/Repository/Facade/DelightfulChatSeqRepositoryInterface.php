@@ -35,7 +35,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function getAccountSeqListByDelightfulId(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array;
 
     /**
-     * 根据 app_message_id 拉取message.
+     * according to app_message_id 拉取message.
      * @return ClientSequenceResponse[]
      */
     public function getAccountSeqListByAppMessageId(DataIsolation $dataIsolation, string $appMessageId, string $pageToken, int $pageSize): array;

@@ -29,9 +29,9 @@ return new class extends Migration {
             $table->boolean('enabled')->default(true)->comment('1 启用 0 禁用');
             $table->unsignedInteger('doc_type')->comment('文档type');
             $table->json('doc_metadata')->nullable()->comment('文档元数据');
-            $table->tinyInteger('sync_status')->default(0)->comment('同步status');
-            $table->tinyInteger('sync_times')->default(0)->comment('同步次数');
-            $table->string('sync_status_message', 1000)->default('')->comment('同步statusmessage');
+            $table->tinyInteger('sync_status')->default(0)->comment('syncstatus');
+            $table->tinyInteger('sync_times')->default(0)->comment('sync次数');
+            $table->string('sync_status_message', 1000)->default('')->comment('syncstatusmessage');
             $table->string('organization_code')->comment('organization编码');
             $table->unsignedBigInteger('word_count')->default(0)->comment('字数统计');
 

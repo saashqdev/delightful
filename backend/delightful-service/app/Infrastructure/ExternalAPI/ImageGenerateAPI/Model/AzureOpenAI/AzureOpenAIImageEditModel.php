@@ -98,7 +98,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先创建响应object
+        // 1. 预先create响应object
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -112,7 +112,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
         }
 
         try {
-            // 3. 图像编辑（同步handle）
+            // 3. 图像编辑（synchandle）
             $result = $this->generateImageRaw($imageGenerateRequest);
             $this->validateAzureOpenAIEditResponse($result);
 
@@ -241,13 +241,13 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, 'image_generate.invalid_image_data');
             }
 
-            $this->logger->info('Azure OpenAI图像编辑：success构建响应', [
+            $this->logger->info('Azure OpenAI图像编辑：successbuild响应', [
                 'total_images' => count($images),
             ]);
 
             return new ImageGenerateResponse(ImageGenerateType::BASE_64, $images);
         } catch (Exception $e) {
-            $this->logger->error('Azure OpenAI图像编辑：构建响应fail', [
+            $this->logger->error('Azure OpenAI图像编辑：build响应fail', [
                 'error' => $e->getMessage(),
                 'result' => $result,
             ]);
@@ -344,7 +344,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                 $this->logger->error('Azure OpenAI图像编辑添加图片数据：水印handlefail', [
                     'error' => $e->getMessage(),
                 ]);
-                // 水印handlefail时使用原始base64数据
+                // 水印handlefail时use原始base64数据
             }
 
             // 只returnURL格式，与其他模型保持一致
@@ -356,7 +356,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             $currentUsage->addGeneratedImages(1);
         }
 
-        // 如果Azure OpenAI响应containusage信息，则使用它
+        // 如果Azure OpenAI响应containusage信息，则use它
         if (! empty($azureResult['usage']) && is_array($azureResult['usage'])) {
             $usage = $azureResult['usage'];
             $currentUsage->promptTokens += $usage['input_tokens'] ?? 0;

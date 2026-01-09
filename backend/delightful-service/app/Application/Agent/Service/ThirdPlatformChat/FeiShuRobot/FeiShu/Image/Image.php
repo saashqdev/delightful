@@ -39,7 +39,7 @@ class Image implements ProviderInterface
         $imageInfo = getimagesizefromstring($imageContent);
         $mimeType = $imageInfo['mime'] ?? 'image/jpeg';
 
-        // 构建请求
+        // build请求
         $response = $this->request('POST', 'open-apis/im/v1/images', [
             'multipart' => [
                 [
@@ -66,7 +66,7 @@ class Image implements ProviderInterface
     }
 
     /**
-     * 根据MIMEtypeget文件扩展名.
+     * according toMIMEtypeget文件扩展名.
      *
      * @param string $mimeType MIMEtype
      * @return string 文件扩展名

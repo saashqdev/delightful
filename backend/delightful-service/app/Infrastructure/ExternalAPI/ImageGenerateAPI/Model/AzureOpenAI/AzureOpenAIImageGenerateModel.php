@@ -51,7 +51,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
 
         $this->validateRequest($imageGenerateRequest);
 
-        // 无参考图像，使用原有的generate逻辑
+        // 无参考图像，use原有的generate逻辑
         $this->logger->info('Azure OpenAI图像generate：startcallgenerateAPI', [
             'prompt' => $imageGenerateRequest->getPrompt(),
             'size' => $imageGenerateRequest->getSize(),
@@ -109,7 +109,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先创建响应object
+        // 1. 预先create响应object
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -123,7 +123,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
         }
 
         try {
-            // 3. 图像generate（同步handle，Azure OpenAI API 支持 n parameter一次性generate多张图片）
+            // 3. 图像generate（synchandle，Azure OpenAI API 支持 n parameter一次性generate多张图片）
             if (! empty($imageGenerateRequest->getReferenceImages())) {
                 $editModel = new AzureOpenAIImageEditModel($this->configItem);
                 $editRequest = $this->convertToEditRequest($imageGenerateRequest);
@@ -217,7 +217,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
 
             return new ImageGenerateResponse(ImageGenerateType::BASE_64, $images);
         } catch (Exception $e) {
-            $this->logger->error('Azure OpenAI图像generate：构建响应fail', [
+            $this->logger->error('Azure OpenAI图像generate：build响应fail', [
                 'error' => $e->getMessage(),
                 'result' => $result,
             ]);
@@ -231,7 +231,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
     }
 
     /**
-     * 当有参考图像时，使用图像编辑模型generate图像.
+     * 当有参考图像时，use图像编辑模型generate图像.
      */
     private function generateImageWithReference(AzureOpenAIImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -370,7 +370,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
                 $this->logger->error('Azure OpenAI添加图片数据：水印handlefail', [
                     'error' => $e->getMessage(),
                 ]);
-                // 水印handlefail时使用原始base64数据
+                // 水印handlefail时use原始base64数据
             }
 
             // 只returnURL格式，与其他模型保持一致
@@ -382,7 +382,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
             $currentUsage->addGeneratedImages(1);
         }
 
-        // 如果Azure OpenAI响应containusage信息，则使用它
+        // 如果Azure OpenAI响应containusage信息，则use它
         if (! empty($azureResult['usage']) && is_array($azureResult['usage'])) {
             $usage = $azureResult['usage'];
             $currentUsage->promptTokens += $usage['input_tokens'] ?? 0;

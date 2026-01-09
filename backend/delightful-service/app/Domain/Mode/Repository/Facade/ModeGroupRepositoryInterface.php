@@ -13,12 +13,12 @@ use App\Domain\Mode\Entity\ModeGroupEntity;
 interface ModeGroupRepositoryInterface
 {
     /**
-     * 根据IDget分组.
+     * according toIDget分组.
      */
     public function findById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeGroupEntity;
 
     /**
-     * 根据modeIDget分组列表.
+     * according tomodeIDget分组列表.
      * @return ModeGroupEntity[]
      */
     public function findByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;
@@ -45,7 +45,7 @@ interface ModeGroupRepositoryInterface
     public function delete(ModeDataIsolation $dataIsolation, int|string $id): bool;
 
     /**
-     * 根据modeIDdelete所有分组.
+     * according tomodeIDdelete所有分组.
      */
     public function deleteByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): bool;
 
@@ -55,7 +55,7 @@ interface ModeGroupRepositoryInterface
     public function batchSave(ModeDataIsolation $dataIsolation, array $groupEntities);
 
     /**
-     * 根据多个modeID批量get分组列表.
+     * according to多个modeID批量get分组列表.
      * @param int[]|string[] $modeIds
      * @return ModeGroupEntity[]
      */

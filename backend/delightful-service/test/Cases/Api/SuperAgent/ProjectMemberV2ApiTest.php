@@ -105,7 +105,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest2();
         $this->addTeamMembers($projectId, 51202); // No permission error
 
-        // 3. 项目创建者添加成员 - 应该success
+        // 3. 项目create者添加成员 - 应该success
         $this->switchUserTest1();
         $this->addTeamMembers($projectId);
 

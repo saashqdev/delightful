@@ -38,7 +38,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * 统一的图片生成入口method
-     * 先call子类实现的原始图片生成，再统一添加水印.
+     * 先call子类implement的原始图片生成，再统一添加水印.
      */
     final public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -48,8 +48,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 实现接口要求的带水印原始数据method
-     * 各子类必须根据自己的数据格式实现此method.
+     * implement接口要求的带水印原始数据method
+     * 各子类必须according to自己的数据格式implement此method.
      */
     abstract public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array;
 
@@ -59,14 +59,14 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 子类实现的原始图片生成method
+     * 子类implement的原始图片生成method
      * 只负责call各自API生成图片，不用关心水印处理.
      */
     abstract protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 
     /**
      * get响应object的锁，用于并发安全地操作 OpenAIFormatResponse.
-     * 使用Redis自旋锁实现排队等待.
+     * useRedis自旋锁implement排队等待.
      *
      * @return string return锁的owner，用于释放锁
      */

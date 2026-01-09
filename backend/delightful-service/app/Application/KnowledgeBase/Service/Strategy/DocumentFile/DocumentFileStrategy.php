@@ -61,7 +61,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 预处理文档文件，根据文档文件type，进行不同的处理.
+     * 预处理文档文件，according to文档文件type，进行不同的处理.
      */
     public function preProcessDocumentFiles(KnowledgeBaseDataIsolation $dataIsolation, array $documentFiles): array
     {
@@ -173,7 +173,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 根据MIMEtypeget文件扩展名.
+     * according toMIMEtypeget文件扩展名.
      */
     private function getExtensionFromMimeType(string $mimeType): string
     {

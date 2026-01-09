@@ -159,7 +159,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 $this->fileDomainService->uploadByCredential($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile);
                 // geturl
                 $url = $this->fileDomainService->getLink($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile->getKey())->getUrl();
-                // 同步文件至delightful
+                // sync文件至delightful
                 $fileUploadDTOs = [];
                 $fileType = FileType::getTypeFromFileExtension($uploadFile->getExt());
                 $fileUploadDTO = new DelightfulChatFileEntity();

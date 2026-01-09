@@ -66,7 +66,7 @@ enum ControlMessageType: string
     // update群聊
     case GroupUpdate = 'group_update';
 
-    // 系统通知(xx加入/离开群聊,群温馨提醒等)
+    // 系统notify(xx加入/离开群聊,群温馨提醒等)
     case SystemNotice = 'system_notice';
 
     // 群成员变更

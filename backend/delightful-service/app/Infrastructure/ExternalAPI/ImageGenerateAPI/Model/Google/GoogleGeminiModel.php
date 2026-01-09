@@ -68,7 +68,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先创建响应object
+        // 1. 预先create响应object
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -381,10 +381,10 @@ class GoogleGeminiModel extends AbstractImageGenerate
         array $geminiResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // 使用Redis锁确保并发安全
+        // useRedis锁确保并发安全
         $lockOwner = $this->lockResponse($response);
         try {
-            // 使用现有method提取图像数据
+            // use现有method提取图像数据
             $imageBase64 = $this->extractImageDataFromResponse($geminiResult);
 
             $currentData = $response->getData();
@@ -398,7 +398,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 $this->logger->error('GoogleGemini添加图片数据：水印handlefail', [
                     'error' => $e->getMessage(),
                 ]);
-                // 水印handlefail时使用原始base64数据（但这通常不应该发生）
+                // 水印handlefail时use原始base64数据（但这通常不应该发生）
             }
 
             // 只returnURL格式，与其他模型保持一致

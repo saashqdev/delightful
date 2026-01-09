@@ -85,7 +85,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
             }
         }
         $contactDataIsolation = ContactDataIsolation::simpleMake($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
-        // 根据 userid getuserinformation
+        // according to userid getuserinformation
         $users = $this->delightfulUserDomainService->getByUserIds($contactDataIsolation, $userIds);
         // getuser的 departmentId
         $userDepartmentList = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserIds($contactDataIsolation, $userIds);

@@ -51,7 +51,7 @@ class MiscEmbeddingModel extends OpenAIModel
         $config = $this->config;
         $this->processApiBaseUrl($config);
 
-        // 使用ClientFactorycreateOpenAI客户端
+        // useClientFactorycreateOpenAI客户端
         return $this->createClient(
             $config,
             $this->getApiRequestOptions(),

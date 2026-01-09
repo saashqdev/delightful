@@ -79,7 +79,7 @@ readonly class RoleDomainService
         }
 
         // 1. 校验权限键有效性
-        // 更新 permissionTag 信息：根据权限键提取二级模块标签，用于前端展示分类
+        // 更新 permissionTag 信息：according to权限键提取二级模块标签，用于前端展示分类
         $permissionTags = [];
         foreach ($savingRoleEntity->getPermissions() as $permissionKey) {
             // 校验权限键有效性
@@ -97,7 +97,7 @@ readonly class RoleDomainService
                 $parsed = $this->permission->parsePermission($permissionKey);
                 $resource = $parsed['resource'];
                 $moduleLabel = $this->permission->getResourceModule($resource);
-                $permissionTags[$moduleLabel] = $moduleLabel; // 使用键value去重
+                $permissionTags[$moduleLabel] = $moduleLabel; // use键value去重
             } catch (Throwable $e) {
                 // parsefail时忽略该权限的标签提取，校验已通过，不影响save
             }
@@ -169,7 +169,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * 根据名称获取角色.
+     * according to名称获取角色.
      */
     public function getByName(PermissionDataIsolation $dataIsolation, string $name): ?RoleEntity
     {
@@ -243,11 +243,11 @@ readonly class RoleDomainService
     }
 
     /**
-     * 为指定user创建或维护“organization管理员”角色（拥有全局权限）。
+     * 为指定usercreate或维护“organization管理员”角色（拥有全局权限）。
      *
      * 逻辑：
-     * 1. 根据当前organization查找是否已有同名角色；
-     * 2. 若不存在，则创建新的角色并赋予 DelightfulPermission::ALL_PERMISSIONS；
+     * 1. according to当前organization查找是否已有同名角色；
+     * 2. 若不存在，则create新的角色并赋予 DelightfulPermission::ALL_PERMISSIONS；
      * 3. 若存在，则确保其contain ALL_PERMISSIONS；
      * 4. 将user ID 列表加入角色关联user列表；
      * 5. save角色。
@@ -263,7 +263,7 @@ readonly class RoleDomainService
         $roleEntity = $this->getByName($dataIsolation, self::ORGANIZATION_ADMIN_ROLE_NAME);
 
         if ($roleEntity === null) {
-            // 创建新角色
+            // create新角色
             $roleEntity = new RoleEntity();
             $roleEntity->setName(self::ORGANIZATION_ADMIN_ROLE_NAME);
             $roleEntity->setOrganizationCode($organizationCode);
@@ -309,7 +309,7 @@ readonly class RoleDomainService
 
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // 使用仓库移除user与角色的关联
+        // use仓库移除user与角色的关联
         $this->roleRepository->removeUsers($organizationCode, $roleEntity->getId(), [$userId]);
     }
 }

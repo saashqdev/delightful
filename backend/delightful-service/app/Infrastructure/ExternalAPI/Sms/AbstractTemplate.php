@@ -17,12 +17,12 @@ abstract class AbstractTemplate implements TemplateInterface
     protected array $typeToIdMap = [];
 
     /**
-     * 根据短信type,进行variable短信的适配,还原整条短信文本content.
+     * according to短信type,进行variable短信的适配,还原整条短信文本content.
      */
     protected array $typeContents = [];
 
     /**
-     * 根据模板id,进行variable短信的适配,还原整条短信文本content.
+     * according to模板id,进行variable短信的适配,还原整条短信文本content.
      */
     protected array $idContents = [];
 
@@ -73,7 +73,7 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
-     * 根据短信type,returntype支持的语种list.
+     * according to短信type,returntype支持的语种list.
      * @return string[]
      */
     public function getTemplateLanguagesByType(string $type): array

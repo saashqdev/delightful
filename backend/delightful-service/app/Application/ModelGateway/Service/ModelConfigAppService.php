@@ -30,7 +30,7 @@ class ModelConfigAppService extends AbstractLLMAppService
     }
 
     /**
-     * 根据IDgetmodelconfiguration.
+     * according toIDgetmodelconfiguration.
      */
     public function showById(Authenticatable $authorization, string $id): ModelConfigEntity
     {
@@ -83,7 +83,7 @@ class ModelConfigAppService extends AbstractLLMAppService
             return $modelType;
         }
 
-        // 将可用model转为哈希table，实现O(1)time复杂度的查找
+        // 将可用model转为哈希table，implementO(1)time复杂度的查找
         $availableModels = array_flip($chatModelsName);
 
         // get系统默认的降级链
@@ -100,7 +100,7 @@ class ModelConfigAppService extends AbstractLLMAppService
             }
         }
 
-        // 后备方案：如果没有匹配任何优先model，使用第一个可用model
+        // 后备方案：如果没有匹配任何优先model，use第一个可用model
         return $chatModelsName[0] ?? '';
     }
 }

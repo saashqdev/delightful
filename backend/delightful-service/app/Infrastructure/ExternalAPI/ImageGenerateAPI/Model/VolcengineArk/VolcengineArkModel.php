@@ -34,7 +34,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             throw new Exception('VolcengineArk API Key 配置缺失');
         }
 
-        // 如果没有配置URL，使用默认端点
+        // 如果没有配置URL，use默认端点
         if (empty($apiUrl)) {
             $this->api = new VolcengineArkAPI($apiKey);
         } else {
@@ -49,12 +49,12 @@ class VolcengineArkModel extends AbstractImageGenerate
 
     public function setAK(string $ak)
     {
-        // VolcengineArk 不使用AK/SK，这里为nullimplement
+        // VolcengineArk 不useAK/SK，这里为nullimplement
     }
 
     public function setSK(string $sk)
     {
-        // VolcengineArk 不使用AK/SK，这里为nullimplement
+        // VolcengineArk 不useAK/SK，这里为nullimplement
     }
 
     public function setApiKey(string $apiKey)
@@ -74,7 +74,7 @@ class VolcengineArkModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先创建响应object
+        // 1. 预先create响应object
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -179,7 +179,7 @@ class VolcengineArkModel extends AbstractImageGenerate
         $prompt = $imageGenerateRequest->getPrompt();
         $referImages = $imageGenerateRequest->getReferImages();
 
-        // 构建API payload
+        // buildAPI payload
         $payload = [
             'model' => $imageGenerateRequest->getModel(),
             'prompt' => $prompt,
@@ -220,7 +220,7 @@ class VolcengineArkModel extends AbstractImageGenerate
         $prompt = $imageGenerateRequest->getPrompt();
         $referImages = $imageGenerateRequest->getReferImages();
 
-        // 构建API payload
+        // buildAPI payload
         $payload = [
             'model' => $imageGenerateRequest->getModel(),
             'prompt' => $prompt,
@@ -268,7 +268,7 @@ class VolcengineArkModel extends AbstractImageGenerate
         array $volcengineResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // 使用Redis锁确保并发安全
+        // useRedis锁确保并发安全
         $lockOwner = $this->lockResponse($response);
         try {
             // 从火山方舟响应中提取数据
@@ -290,7 +290,7 @@ class VolcengineArkModel extends AbstractImageGenerate
                             'error' => $e->getMessage(),
                             'url' => $item['url'],
                         ]);
-                        // 水印handlefail时使用原始URL
+                        // 水印handlefail时use原始URL
                     }
 
                     $currentData[] = [
@@ -387,7 +387,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             }
 
             try {
-                // VolcengineArk return的是 URL 格式，使用URL水印handle
+                // VolcengineArk return的是 URL 格式，useURL水印handle
                 foreach ($result['data']['data'] as $i => &$item) {
                     if (isset($item['url'])) {
                         $item['url'] = $this->watermarkProcessor->addWatermarkToUrl($item['url'], $imageGenerateRequest);

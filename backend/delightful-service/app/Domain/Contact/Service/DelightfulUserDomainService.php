@@ -98,7 +98,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 根据 delightfulId 获取user所属的organization列表.
+     * according to delightfulId 获取user所属的organization列表.
      * @return string[]
      */
     public function getUserOrganizationsByDelightfulId(string $delightfulId): array
@@ -162,7 +162,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 批量根据 aiCode（flowCode）+ organization编码获取assistant的 user_id.
+     * 批量according to aiCode（flowCode）+ organization编码获取assistant的 user_id.
      * @return array<string, string> return aiCode => userId 的映射
      */
     public function getByAiCodes(DataIsolation $dataIsolation, array $aiCodes): array
@@ -171,7 +171,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return [];
         }
 
-        // 1. 根据 aiCodes 批量获取 account 信息
+        // 1. according to aiCodes 批量获取 account 信息
         $accounts = $this->accountRepository->getAccountInfoByAiCodes($aiCodes);
         if (empty($accounts)) {
             return [];
@@ -185,13 +185,13 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             $aiCodeToDelightfulIdMap[$account->getAiCode()] = $account->getDelightfulId();
         }
 
-        // 3. 根据 delightful_ids 批量获取user信息
+        // 3. according to delightful_ids 批量获取user信息
         $users = $this->userRepository->getUserByDelightfulIds($delightfulIds);
         if (empty($users)) {
             return [];
         }
 
-        // 4. filterorganization编码并构建 delightfulId => userId 映射
+        // 4. filterorganization编码并build delightfulId => userId 映射
         $delightfulIdToUserIdMap = [];
         foreach ($users as $user) {
             // 只保留当前organization的user
@@ -200,7 +200,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             }
         }
 
-        // 5. 构建最终的 aiCode => userId 映射
+        // 5. build最终的 aiCode => userId 映射
         $result = [];
         foreach ($aiCodeToDelightfulIdMap as $aiCode => $delightfulId) {
             if (isset($delightfulIdToUserIdMap[$delightfulId])) {
@@ -222,7 +222,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 根据userID和userorganization列表queryuser详情，根据userorganization决定filter策略.
+     * according touserID和userorganization列表queryuser详情，according touserorganization决定filter策略.
      * @param array $userIds userIDarray
      * @param array $userOrganizations 当前user拥有的organization编码array
      * @return array<UserDetailDTO>
@@ -241,7 +241,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         // 检查当前user是否拥有官方organization
         $hasOfficialOrganization = in_array($officialOrganizationCode, $userOrganizations, true);
 
-        // 根据user是否拥有官方organization来决定filter策略
+        // according touser是否拥有官方organization来决定filter策略
         if (! $hasOfficialOrganization) {
             // 如果user没有官方organization，filter掉官方organization的非AIuser
             $users = array_filter($users, static function (DelightfulUserEntity $user) use ($officialOrganizationCode) {
@@ -369,7 +369,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_CREATE_ACCOUNT);
             }
 
-            // 构建return结果
+            // buildreturn结果
             $loginResponses = [];
             foreach ($delightfulUserEntities as $delightfulUserEntity) {
                 $currentOrgCode = $delightfulUserEntity->getOrganizationCode();
@@ -417,7 +417,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 根据userID获取user手机号.
+     * according touserID获取user手机号.
      */
     public function getUserPhoneByUserId(string $userId): ?string
     {
@@ -541,7 +541,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     {
         $userIdToFlowCodeMaps = [];
         if (! empty($friendQueryDTO->getAiCodes())) {
-            // 根据 ai code query delightful id
+            // according to ai code query delightful id
             $accounts = $this->accountRepository->getAccountInfoByAiCodes($friendQueryDTO->getAiCodes());
             $delightfulIds = array_column($accounts, 'delightful_id');
             // 转user Id
@@ -562,7 +562,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
     protected function getAgents(array $popular, array $latest): array
     {
-        // 根据delightful_id,查账号详情
+        // according todelightful_id,查账号详情
         $delightfulIds[] = array_column($popular, 'delightful_id');
         $delightfulIds[] = array_column($latest, 'delightful_id');
         $delightfulIds = array_values(array_unique(array_merge(...$delightfulIds)));

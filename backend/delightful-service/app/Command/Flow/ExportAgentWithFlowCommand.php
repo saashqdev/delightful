@@ -81,7 +81,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
         $uploadDir = $orgCode . '/open/' . md5(StorageBucketType::Public->value);
         $uploadFile = new UploadFile($tempFile, $uploadDir, $filename);
 
-        // 使用已有的文件service上传
+        // use已有的文件service上传
         try {
             // 定义上传目录
             $subDir = 'open';
@@ -96,7 +96,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
             $fileLink = $this->fileDomainService->getLink($orgCode, $uploadFile->getKey(), StorageBucketType::Private);
 
             if ($fileLink) {
-                // 使用这种方式点击链接是有效的链接
+                // use这种方式点击链接是有效的链接
                 return 0;
             }
 

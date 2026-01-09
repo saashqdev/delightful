@@ -167,7 +167,7 @@ class ExecutionData
         $this->id = $id ?? 'e_' . IdGenerator::getUniqueId32();
         $this->conversationId = $conversationId ?? 'c_' . IdGenerator::getUniqueId32();
         $this->originConversationId = $originConversationId ?? $this->conversationId;
-        // 初始化全局variable到variable中
+        // initialize全局variable到variable中
         $this->initGlobalVariable();
     }
 

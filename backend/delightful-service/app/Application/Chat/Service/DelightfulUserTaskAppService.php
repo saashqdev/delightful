@@ -74,20 +74,20 @@ class DelightfulUserTaskAppService extends AbstractAppService
         }
         $callbackMethod = $this->getCallbackMethod($userTaskDTO, $userTaskValueDTO);
 
-        // 根据agent_id queryflow_code
+        // according toagent_id queryflow_code
         $flow = $this->delightfulAgentDomainService->getAgentById($userTaskDTO->getAgentId());
         if (empty($flow->getFlowCode())) {
             ExceptionBuilder::throw(UserTaskErrorCode::PARAMETER_INVALID, 'flow_code not found');
         }
         $flowCode = $flow->getFlowCode();
 
-        // 根据conversation_id queryagent_user_id
+        // according toconversation_id queryagent_user_id
         $conversation = $this->delightfulConversationDomainService->getConversationByIdWithoutCheck($userTaskDTO->getConversationId());
         // 兼容flow 中的conversation_id 跟chat 中的conversation_id 不一致issue
         if (empty($conversation)) {
             $dataIsolation = DataIsolation::create();
             $dataIsolation->setCurrentOrganizationCode($flow->getOrganizationCode());
-            // 根据flowCode queryuser_id
+            // according toflowCode queryuser_id
             $delightfulUserEntity = $this->delightfulUserDomainService->getByAiCode($dataIsolation, $flowCode);
             if (empty($delightfulUserEntity->getUserId())) {
                 ExceptionBuilder::throw(UserTaskErrorCode::PARAMETER_INVALID, 'agent_user_id not found');
@@ -215,12 +215,12 @@ class DelightfulUserTaskAppService extends AbstractAppService
             ExceptionBuilder::throw(UserTaskErrorCode::TASK_NOT_FOUND);
         }
 
-        // 根据conversation_id queryagent_user_id
+        // according toconversation_id queryagent_user_id
         $conversation = $this->delightfulConversationDomainService->getConversationByIdWithoutCheck($userTaskDTO->getConversationId());
 
         $userTaskDTO->setAgentUserId($conversation->getReceiveId());
 
-        // 根据agent_id queryflow_code
+        // according toagent_id queryflow_code
         $flow = di(DelightfulAgentDomainService::class)->getAgentById($userTaskDTO->getAgentId());
         if (empty($flow->getFlowCode())) {
             ExceptionBuilder::throw(UserTaskErrorCode::PARAMETER_INVALID, 'flow_code not found');

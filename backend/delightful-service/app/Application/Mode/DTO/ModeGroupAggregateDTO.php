@@ -67,7 +67,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 添加modelID（向后兼容，但不推荐使用）.
+     * 添加modelID（向后兼容，但不推荐use）.
      */
     public function addModelId(string $modelId): void
     {
@@ -123,13 +123,13 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * setmodelIDarray（向后兼容，但不推荐使用）.
+     * setmodelIDarray（向后兼容，但不推荐use）.
      * @param string[] $modelIds
      */
     public function setModelIds(array $modelIds): void
     {
         // 这个method保留用于向后兼容，但实际上需要完整的modelinfo
-        // 建议使用 setModels() method
+        // 建议use setModels() method
         $this->models = [];
         foreach ($modelIds as $modelId) {
             $model = new ModeGroupModelDTO();

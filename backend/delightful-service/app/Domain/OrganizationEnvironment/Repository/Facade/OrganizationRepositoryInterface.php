@@ -21,24 +21,24 @@ interface OrganizationRepositoryInterface
     public function save(OrganizationEntity $organizationEntity): OrganizationEntity;
 
     /**
-     * 根据IDgetorganization.
+     * according toIDgetorganization.
      */
     public function getById(int $id): ?OrganizationEntity;
 
     /**
-     * 根据编码getorganization.
+     * according to编码getorganization.
      */
     public function getByCode(string $code): ?OrganizationEntity;
 
     /**
-     * 根据编码列表批量getorganization.
+     * according to编码列表批量getorganization.
      * @param string[] $codes
      * @return OrganizationEntity[]
      */
     public function getByCodes(array $codes): array;
 
     /**
-     * 根据名称getorganization.
+     * according to名称getorganization.
      */
     public function getByName(string $name): ?OrganizationEntity;
 

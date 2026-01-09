@@ -20,9 +20,9 @@ class SmsStruct
     public string $phone = '';
 
     /**
-     * 短信的type,比如:registration_rewards (订单已发货),arrival_notice(到货通知).
-     * 1.如果搭配 language field,同时使用variable短信,可以实现多语言适配,以及语种兜底
-     * 2.电商的相关短信使用此field,但是没有 language 传入.
+     * 短信的type,such as:registration_rewards (订单已发货),arrival_notice(到货notify).
+     * 1.如果搭配 language field,同时usevariable短信,可以implement多语言适配,以及语种兜底
+     * 2.电商的相关短信use此field,但是没有 language 传入.
      */
     public ?string $type = null;
 
@@ -46,7 +46,7 @@ class SmsStruct
     public SignEnum $sign;
 
     /**
-     * 短信的语种,与typefield和variable短信搭配使用.
+     * 短信的语种,与typefield和variable短信搭配use.
      */
     public ?string $language = null;
 

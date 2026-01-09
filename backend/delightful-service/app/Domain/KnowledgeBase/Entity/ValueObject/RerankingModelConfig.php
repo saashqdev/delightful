@@ -20,14 +20,14 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * 重sortmodelname.
      *
-     * 例如：BAAI/bge-reranker-large
+     * for example：BAAI/bge-reranker-large
      */
     private string $rerankingModelName = '';
 
     /**
      * 重sortmodel提供商name.
      *
-     * 例如：gitee_ai、openai 等
+     * for example：gitee_ai、openai 等
      */
     private string $rerankingProviderName = '';
 
@@ -74,7 +74,7 @@ class RerankingModelConfig extends AbstractValueObject
     private int $batchSize = 16;
 
     /**
-     * 是否使用cache.
+     * 是否usecache.
      *
      * 是否cache重sortresult，用于提高性能
      */
@@ -236,7 +236,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 是否使用cache.
+     * 是否usecache.
      */
     public function isUseCache(): bool
     {
@@ -244,7 +244,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * set是否使用cache.
+     * set是否usecache.
      */
     public function setUseCache(bool $useCache): self
     {

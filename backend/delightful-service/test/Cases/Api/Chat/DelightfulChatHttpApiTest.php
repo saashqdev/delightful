@@ -70,7 +70,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
             ],
         ];
 
-        // 使用assertArrayValueTypesEquals验证响应结构
+        // useassertArrayValueTypesEquals验证响应结构
         $this->assertArrayValueTypesEquals($expectedStructure, $response, '响应结构不符合预期');
 
         // 额外验证role是否是assistant（这个是精确value验证）

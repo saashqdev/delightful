@@ -92,7 +92,7 @@ class AiAbilityAppService extends AbstractKernelAppService
             ExceptionBuilder::throw(ServiceProviderErrorCode::AI_ABILITY_NOT_FOUND);
         }
 
-        // 构建update数据（支持选择性update）
+        // buildupdate数据（支持选择性update）
         $updateData = [];
         if ($request->hasStatus()) {
             $updateData['status'] = $request->getStatus();
@@ -117,10 +117,10 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * 初始化AI能力数据（从configuration文件同步到database）.
+     * initializeAI能力数据（从configuration文件sync到database）.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
-     * @return int 初始化的数量
+     * @return int initialize的数量
      */
     public function initializeAbilities(DelightfulUserAuthorization $authorization): int
     {
@@ -144,7 +144,7 @@ class AiAbilityAppService extends AbstractKernelAppService
         foreach ($frontendConfig as $key => $value) {
             // 如果是 api_key field且包含脱敏标记 ***
             if ($key === 'api_key' && is_string($value) && str_contains($value, '*')) {
-                // 使用database中的原始value
+                // usedatabase中的原始value
                 $result[$key] = $dbConfig[$key] ?? $value;
             }
             // 如果是array，递归处理
@@ -154,7 +154,7 @@ class AiAbilityAppService extends AbstractKernelAppService
                     ? $this->mergeConfigPreservingApiKeys($dbValue, $value)
                     : $value;
             }
-            // 其他情况直接使用前端的value
+            // 其他情况直接use前端的value
             else {
                 $result[$key] = $value;
             }

@@ -77,7 +77,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                     $memoryManager->addMessage($contentMessage);
                 }
             } else {
-                // createone新的，在后续使用
+                // createone新的，在后续use
                 $currentMessage = new UserMessage();
                 $currentMessage->setContent($userPrompt);
             }

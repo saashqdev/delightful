@@ -49,7 +49,7 @@ readonly class ProviderModelDomainService
 
     /**
      * 通过ID或ModelIDquerymodel
-     * 基于可用modellist进行匹配，同时匹配id和model_idfield.
+     * based on可用modellist进行匹配，同时匹配id和model_idfield.
      */
     public function getByIdOrModelId(ProviderDataIsolation $dataIsolation, string $id): ?ProviderModelEntity
     {
@@ -107,7 +107,7 @@ readonly class ProviderModelDomainService
             }
         }
 
-        // 目前保存model的接口只有大model使用，因此强制type是 llm
+        // 目前保存model的接口只有大modeluse，因此强制type是 llm
         $providerModelDTO->setCategory(Category::LLM);
         $modelEntity = $this->providerModelRepository->saveModel($dataIsolation, $providerModelDTO);
 
@@ -133,7 +133,7 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * 批量根据IDgetmodel.
+     * 批量according toIDgetmodel.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param string[] $ids modelIDarray
@@ -150,7 +150,7 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * 批量根据ModelIDgetmodel.
+     * 批量according toModelIDgetmodel.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param string[] $modelIds model标识array
@@ -170,7 +170,7 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * 根据query条件get按modeltype分组的modelIDlist.
+     * according toquery条件get按modeltype分组的modelIDlist.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离object
      * @param ProviderModelQuery $query query条件

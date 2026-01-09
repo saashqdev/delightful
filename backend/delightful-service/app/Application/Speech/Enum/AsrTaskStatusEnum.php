@@ -12,7 +12,7 @@ namespace App\Application\Speech\Enum;
  *
  * 【作用域】内部系统 - delightful-service 业务层
  * 【用途】table示 ASR 录音总结task的全生命周期status
- * 【使用场景】
+ * 【use场景】
  * - taskstatus持久化（Redis/database）
  * - 业务流程控制和幂等性判断
  * - 整体taskstatus追踪（录音 → 合并 → 生成标题 → 发送message）
@@ -26,9 +26,9 @@ namespace App\Application\Speech\Enum;
  */
 enum AsrTaskStatusEnum: string
 {
-    case CREATED = 'created';              // 已create：task初始化完成，等待处理
+    case CREATED = 'created';              // 已create：taskinitialize完成，等待处理
     case PROCESSING = 'processing';        // 处理中：正在执行录音、合并或总结
-    case COMPLETED = 'completed';          // 已完成：整个 ASR 流程全部完成（包括message发送）
+    case COMPLETED = 'completed';          // 已完成：整个 ASR 流程全部完成（includemessage发送）
     case FAILED = 'failed';                // fail：task执行fail
 
     /**

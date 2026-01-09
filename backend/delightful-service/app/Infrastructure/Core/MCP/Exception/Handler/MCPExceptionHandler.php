@@ -55,7 +55,7 @@ class MCPExceptionHandler
             return $exception->getRpcCode();
         }
 
-        // 对于其他type的exception，使用标准映射
+        // 对于其他type的exception，use标准映射
         return match (true) {
             $exception instanceof InvalidArgumentException => -32602, // Invalid params
             $exception instanceof RuntimeException => -32603, // Internal error

@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->text('third_custom_attrs')->comment('自定义field。');
             $table->text('third_department_path')->comment('department路径。');
             $table->text('third_platform_department_users_extra')->comment('额外info');
-            $table->comment('userservice的department与第三方平台userrecordtable.用于与第三方平台实时数据同步,激活record等');
+            $table->comment('userservice的department与第三方平台userrecordtable.用于与第三方平台实时数据sync,激活record等');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['third_platform_type', 'third_department_id', 'delightful_organization_code'], 'org_platform_department_id');

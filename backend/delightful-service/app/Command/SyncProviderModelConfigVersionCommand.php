@@ -54,14 +54,14 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
 
             return 0;
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('同步fail: %s', $e->getMessage()));
+            $this->logger->error(sprintf('syncfail: %s', $e->getMessage()));
             $this->logger->error($e->getTraceAsString());
             return 1;
         }
     }
 
     /**
-     * 同步configuration版本数据.
+     * syncconfiguration版本数据.
      */
     protected function syncConfigVersions(bool $isDryRun, bool $isForce, int $limit): array
     {
@@ -162,7 +162,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 构建版本数据.
+     * build版本数据.
      */
     private function buildVersionData(ProviderModelModel $model, int $version): array
     {
@@ -219,7 +219,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
      */
     private function logHeader(bool $isDryRun, bool $isForce, int $limit): void
     {
-        $this->logger->info('开始同步service商modelconfiguration版本数据...');
+        $this->logger->info('开始syncservice商modelconfiguration版本数据...');
         $this->logger->info(sprintf('模式: %s', $isDryRun ? '试运行（不写入database）' : '正式执行'));
 
         if ($isForce) {
@@ -237,7 +237,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     private function logSummary(array $result): void
     {
         $this->logger->info('=================================');
-        $this->logger->info('同步完成！统计info:');
+        $this->logger->info('sync完成！统计info:');
         $this->logger->info(sprintf('  总model数: %d', $result['total']));
         $this->logger->info(sprintf('  已有版本: %d', $result['skipped']));
         $this->logger->info(sprintf('  新增版本: %d', $result['created']));

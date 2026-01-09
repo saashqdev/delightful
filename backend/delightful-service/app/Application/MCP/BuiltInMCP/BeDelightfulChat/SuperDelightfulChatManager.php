@@ -120,7 +120,7 @@ MARKDOWN;
         }
 
         $usageInstructions = <<<'MARKDOWN'
-使用说明：
+use说明：
 • 必须提供 agent_id 和 message parameter
 • conversation_id 用于保持对话连续性，相同ID的message会共享上下文
 
@@ -133,9 +133,9 @@ MARKDOWN;
             $instructionHelp = <<<'MARKDOWN'
 指令parameter instruction（可选）：
 • 格式：[{"name": "指令name", "value": "指令value"}, ...]
-• 单选type：从可选value中选择一个，例如 "yes", "no"
+• 单选type：从可选value中选择一个，for example "yes", "no"
 • 开关type：只能是 "on" 或 "off"
-• 如果不提供指令parameter，将使用默认value
+• 如果不提供指令parameter，将use默认value
 
 call示例：
 ```json

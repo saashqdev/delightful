@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('description')->default('')->comment('description');
             $table->string('secret_key', 50)->default('')->comment('密钥')->unique();
             $table->boolean('enabled')->default(false)->comment('是否启用');
-            $table->timestamp('last_used')->nullable()->comment('最后使用时间');
+            $table->timestamp('last_used')->nullable()->comment('最后use时间');
             $table->string('created_uid')->default('')->comment('create者userID');
             $table->timestamp('created_at')->nullable()->comment('creation time');
             $table->string('updated_uid')->default('')->comment('update者userID');

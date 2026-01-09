@@ -119,7 +119,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     }
 
     /**
-     * 根据 app_message_id 拉取message.
+     * according to app_message_id 拉取message.
      * @return ClientSequenceResponse[]
      */
     public function getAccountSeqListByAppMessageId(DataIsolation $dataIsolation, string $appMessageId, string $pageToken, int $pageSize): array
@@ -544,7 +544,7 @@ sql;
     // 避免 redis cache序列化的object,占用太多内存
     private function getAccountIdByUserId(string $uid): ?DelightfulUserEntity
     {
-        // 根据uid找到account_id
+        // according touid找到account_id
         return $this->delightfulUserRepository->getUserById($uid);
     }
 

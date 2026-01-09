@@ -185,7 +185,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
 
     /**
      * getdepartment的所有子department的成员总数.
-     * 使用自旋锁避免并发，一次性query所有department数据并cache到 Redis.
+     * use自旋锁避免并发，一次性query所有department数据并cache到 Redis.
      */
     public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int
     {
@@ -200,7 +200,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             return (int) $cachedData;
         }
 
-        // 使用自旋锁避免并发计算
+        // use自旋锁避免并发计算
         $lockKey = sprintf('department_calc_lock:%s', $organizationCode);
         $lockOwner = uniqid('dept_calc_', true);
 
@@ -278,7 +278,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 根据departmentID批量deletedepartment（逻辑delete，set deleted_at field）。
+     * according todepartmentID批量deletedepartment（逻辑delete，set deleted_at field）。
      */
     public function deleteDepartmentsByIds(array $departmentIds, string $organizationCode): int
     {
@@ -426,7 +426,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     {
         $departmentSums = [];
 
-        // 1) 初始化：每个department先放入自身直属人数
+        // 1) initialize：每个department先放入自身直属人数
         foreach ($allDepartments as $department) {
             $deptId = (string) $department['department_id'];
             $departmentSums[$deptId] = (int) ($department['employee_sum'] ?? 0);
@@ -465,7 +465,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
                     $stringDepartmentSums[$deptId] = (string) $sum;
                 }
                 $this->redis->multi();
-                // 使用 hmset 一次性set多个 hash field
+                // use hmset 一次性set多个 hash field
                 $this->redis->hmset($cacheKey, $stringDepartmentSums);
                 // setcache过期time
                 $this->redis->expire($cacheKey, 60 * 5);
@@ -493,7 +493,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 直接计算单个department的员工总数（不使用cache）.
+     * 直接计算单个department的员工总数（不usecache）.
      */
     private function calculateSelfAndChildrenEmployeeSum(string $organizationCode, string $departmentId): int
     {

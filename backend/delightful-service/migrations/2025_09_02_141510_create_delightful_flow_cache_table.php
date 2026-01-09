@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->string('updated_uid', 64)->default('')->comment('update人');
             $table->timestamps();
 
-            // 索引 - 使用MD5哈希值作为主要query索引
+            // 索引 - useMD5哈希值作为主要query索引
             $table->unique('cache_hash', 'uk_cache_hash');
             $table->index('expires_at', 'idx_expires_at');
             $table->index('organization_code', 'idx_organization_code');

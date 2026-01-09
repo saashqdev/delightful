@@ -46,7 +46,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     /**
      * 通过 service_provider_config_id 获取服务商、配置和模型的aggregate信息.
      * 支持传入服务商模板 id.
-     * @param string $configId 可能是模板 id，比如 ProviderConfigIdAssembler
+     * @param string $configId 可能是模板 id，such as ProviderConfigIdAssembler
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId): ?ProviderConfigModelsDTO
     {
@@ -170,7 +170,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 根据ID获取配置实体（不按organizationfilter，全局query）.
+     * according toID获取配置实体（不按organizationfilter，全局query）.
      *
      * @param int $id 配置ID
      * @return null|ProviderConfigEntity 配置实体
@@ -181,7 +181,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 根据IDarray获取配置实体列表（不按organizationfilter，全局query）.
+     * according toIDarray获取配置实体列表（不按organizationfilter，全局query）.
      *
      * @param array<int> $ids 配置IDarray
      * @return array<int, ProviderConfigEntity> return以id为key的配置实体array
@@ -209,7 +209,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             $providerCode = $parsed['providerCode'];
             $category = $parsed['category'];
             if ($providerCode === ProviderCode::Official && OfficialOrganizationUtil::isOfficialOrganization($dataIsolation->getCurrentOrganizationCode())) {
-                // 官方organization不允许使用官方服务商
+                // 官方organization不允许use官方服务商
                 return null;
             }
             // 获取对应的服务商实体
@@ -251,7 +251,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 根据ID获取服务商配置（不filterorganization）.
+     * according toID获取服务商配置（不filterorganization）.
      */
     public function getByIdWithoutOrganizationFilter(int $id): ?ProviderConfigEntity
     {
@@ -259,7 +259,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 创建虚拟的服务商配置实体（支持所有服务商type）.
+     * create虚拟的服务商配置实体（支持所有服务商type）.
      */
     private function createVirtualProviderConfig(ProviderDataIsolation $dataIsolation, ProviderEntity $providerEntity, string $templateId): ProviderConfigEntity
     {
@@ -309,7 +309,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotFound);
         }
 
-        // 4. 使用互斥锁防止并发创建
+        // 4. use互斥锁防止并发create
         $lockName = sprintf(
             'update_template_config_%s_%s_%s',
             $dataIsolation->getCurrentOrganizationCode(),
@@ -330,7 +330,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
                 return $this->updateProviderConfigData($dataIsolation, $existingConfig, $providerConfigEntity);
             }
 
-            // 7. 不存在则创建新配置
+            // 7. 不存在则create新配置
             return $this->createNewTemplateConfig($dataIsolation, $providerEntity, $providerConfigEntity);
         } finally {
             $this->locker->release($lockName, $lockOwner);
@@ -359,16 +359,16 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::SystemError);
         }*/
 
-        // 使用统一的配置更新逻辑
+        // use统一的配置更新逻辑
         return $this->updateProviderConfigData($dataIsolation, $existingConfigEntity, $providerConfigEntity);
     }
 
     /**
-     * 创建新的模板配置.
+     * create新的模板配置.
      */
     private function createNewTemplateConfig(ProviderDataIsolation $dataIsolation, ProviderEntity $providerEntity, ProviderConfigEntity $templateConfigEntity): ProviderConfigEntity
     {
-        // 创建新的配置实体
+        // create新的配置实体
         $newConfigEntity = new ProviderConfigEntity();
         $newConfigEntity->setServiceProviderId($providerEntity->getId());
         $newConfigEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());

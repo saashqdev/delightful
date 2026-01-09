@@ -10,17 +10,17 @@ namespace App\Infrastructure\Core\MCP\Authentication;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * 无认证实现.
- * whensystem设计要求有身份验证但不need实际验证时使用.
+ * 无认证implement.
+ * whensystemdesign要求有身份验证但不need实际验证时use.
  */
 class NoAuthentication implements AuthenticationInterface
 {
     /**
      * 验证请求的身份information.
-     * 在此实现中，始终允许所有请求通过.
+     * 在此implement中，始终允许所有请求通过.
      */
     public function authenticate(MessageInterface $request): void
     {
-        // null实现，始终允许所有请求通过
+        // nullimplement，始终允许所有请求通过
     }
 }

@@ -10,15 +10,15 @@ namespace App\Domain\Provider\Service\ModelFilter;
 use App\Domain\Provider\Entity\ProviderModelEntity;
 
 /**
- * 基于organization编码的modelfilterservice接口.
+ * based onorganization编码的modelfilterservice接口.
  *
- * 用于替代基于modeltable visiblePackages field的filter逻辑
- * 企业包实现此接口，提供给开源包进行modelfilter
+ * 用于替代based onmodeltable visiblePackages field的filter逻辑
+ * 企业包implement此接口，提供给开源包进行modelfilter
  */
 interface OrganizationBasedModelFilterInterface
 {
     /**
-     * 基于organization编码filtermodellist
+     * based onorganization编码filtermodellist
      * 这是企业包提供给开源包的核心filtermethod.
      *
      * @param string $organizationCode organization编码
@@ -37,18 +37,18 @@ interface OrganizationBasedModelFilterInterface
     public function isModelAvailableForOrganization(string $organizationCode, string $modelIdentifier): bool;
 
     /**
-     * getorganization当前订阅产品绑定的所有model标识符.
+     * getorganization当前subscribe产品绑定的所有model标识符.
      *
      * @param string $organizationCode organization编码
-     * @return array model标识符array，例如: ['gpt-4o', 'claude-3', ...]
+     * @return array model标识符array，for example: ['gpt-4o', 'claude-3', ...]
      */
     public function getAvailableModelIdentifiers(string $organizationCode): array;
 
     /**
-     * getorganization需要升级才能使用的modelIDlist.
+     * getorganization需要升级才能use的modelIDlist.
      *
      * @param string $organizationCode organization编码
-     * @return array 需要升级的modelIDarray，例如: ['gpt-4o-advanced', 'claude-3-opus', ...]
+     * @return array 需要升级的modelIDarray，for example: ['gpt-4o-advanced', 'claude-3-opus', ...]
      */
     public function getUpgradeRequiredModelIds(string $organizationCode): array;
 }

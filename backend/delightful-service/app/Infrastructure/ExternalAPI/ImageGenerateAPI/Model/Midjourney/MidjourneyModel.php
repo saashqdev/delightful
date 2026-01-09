@@ -65,7 +65,7 @@ class MidjourneyModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先创建响应object
+        // 1. 预先create响应object
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -78,7 +78,7 @@ class MidjourneyModel extends AbstractImageGenerate
             return $response; // returnnull数据响应
         }
 
-        // 3. 同步handle（Midjourney采用轮询机制）
+        // 3. synchandle（Midjourney采用轮询机制）
         try {
             $result = $this->generateImageRawInternal($imageGenerateRequest);
             $this->validateMidjourneyResponse($result);
@@ -121,7 +121,7 @@ class MidjourneyModel extends AbstractImageGenerate
             return new ImageGenerateResponse(ImageGenerateType::URL, $rawResult['data']['images']);
         }
 
-        // 如果没有 images array，尝试使用 cdnImage
+        // 如果没有 images array，尝试use cdnImage
         if (! empty($rawResult['data']['cdnImage'])) {
             return new ImageGenerateResponse(ImageGenerateType::URL, [$rawResult['data']['cdnImage']]);
         }
@@ -304,7 +304,7 @@ class MidjourneyModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // 构建 prompt
+        // build prompt
         $prompt = $imageGenerateRequest->getPrompt();
         if ($imageGenerateRequest->getRatio()) {
             $prompt .= ' --ar ' . $imageGenerateRequest->getRatio();
@@ -424,7 +424,7 @@ class MidjourneyModel extends AbstractImageGenerate
                         'error' => $e->getMessage(),
                         'url' => $imageUrl,
                     ]);
-                    // 水印handlefail时使用原始URL
+                    // 水印handlefail时use原始URL
                 }
 
                 $currentData[] = [

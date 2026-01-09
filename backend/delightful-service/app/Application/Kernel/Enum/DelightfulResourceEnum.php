@@ -12,7 +12,7 @@ use function Hyperf\Translation\__;
 /**
  * Delightful 资源枚举.
  *
- * 1. 使用 Backed Enum 将每个资源映射为唯一string key。
+ * 1. use Backed Enum 将每个资源映射为唯一string key。
  * 2. 通过method提供 label / parent  等元info，方便后续生成permission树、做 i18n 等。
  * 3. 仅定义资源本身，不涉及操作type（如 query / edit）。
  *
@@ -109,7 +109,7 @@ enum DelightfulResourceEnum: string
 
     /**
      * return与该资源绑定的 Operation Enum 类名。
-     * 默认使用 DelightfulOperationEnum。
+     * 默认use DelightfulOperationEnum。
      * 如需为特定资源自定义操作集，可在此return自定义 Enum::class。
      */
     public function operationEnumClass(): string

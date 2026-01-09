@@ -22,7 +22,7 @@ abstract class AbstractSms implements SmsInterface
 
     public function getContent(SmsStruct $smsStruct): string
     {
-        // 根据短信驱动确定对应的语种,并进行语种兜底
+        // according to短信驱动确定对应的语种,并进行语种兜底
         $language = $this->getContentLanguage($smsStruct);
         if (empty($smsStruct->variables)) {
             return $smsStruct->content ?: '';
@@ -74,7 +74,7 @@ abstract class AbstractSms implements SmsInterface
     }
 
     /**
-     * 根据语种要求和短信支持的签名list,return对应的签名本文.
+     * according to语种要求和短信支持的签名list,return对应的签名本文.
      */
     public function getSign(SmsStruct $smsStruct): string
     {
@@ -93,7 +93,7 @@ abstract class AbstractSms implements SmsInterface
         }
         // 进行variable匹配短信匹配
         if (! empty($variables)) {
-            // 兼容火山模板的variable替换,先将 $message 中的variable解析出来 比如将[123456] 解析为['VerificationCode'=>123456]后,再进行模板content替换
+            // 兼容火山模板的variable替换,先将 $message 中的variable解析出来 such as将[123456] 解析为['VerificationCode'=>123456]后,再进行模板content替换
             $variables = $this->template->getTemplateVariables($templateContent, $variables);
             $i = 1;
             foreach ($variables as $k => $v) {

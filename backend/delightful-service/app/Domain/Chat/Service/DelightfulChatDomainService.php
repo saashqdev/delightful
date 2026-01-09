@@ -109,7 +109,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * 根据 app_message_id 拉取message.
+     * according to app_message_id 拉取message.
      * @return ClientSequenceResponse[]
      */
     public function pullByAppMessageId(DataIsolation $dataIsolation, string $appMessageId, string $pageToken, int $pageSize): array
@@ -156,7 +156,7 @@ class DelightfulChatDomainService extends AbstractDomainService
      * 2.系统applicationmessage,高优先级
      * 3.apimessage(第三方callgenerate)/100~1000人群聊,中优先级
      * 4.控制message/1000人以上的群聊,最低优先级.
-     * 5.部分控制message与聊天强相关的,可以把优先级提到高. 比如conversation窗口的创建.
+     * 5.部分控制message与聊天强相关的,可以把优先级提到高. such asconversation窗口的create.
      */
     public function getChatMessagePriority(ConversationType $conversationType, ?int $receiveUserCount = 1): MessagePriority
     {
@@ -234,7 +234,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * 通知收件方有新message(收件方可能是自己,或者是chatobject).
+     * notify收件方有新message(收件方可能是自己,或者是chatobject).
      * @todo 考虑对 seqIds merge同类项,减少push次数,减轻网络/mq/服务器压力
      */
     public function pushChatSequence(SeqCreatedEvent $seqCreatedEvent): void
@@ -269,7 +269,7 @@ class DelightfulChatDomainService extends AbstractDomainService
 
         $receiveConversationEntity = $this->delightfulConversationRepository->getConversationByUserIdAndReceiveId($receiveConversationDTO);
         if ($receiveConversationEntity === null) {
-            // 自动为收件人创建conversation窗口,但不用触发收件人的窗口打开事件
+            // 自动为收件人createconversation窗口,但不用触发收件人的窗口打开事件
             $receiveConversationEntity = $this->delightfulConversationRepository->addConversation($receiveConversationDTO);
         }
         // 如果收件方已经隐藏了这个conversation窗口，改为正常
@@ -290,7 +290,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         // 节约存储null间,聊天message在seq表不存具体内容,只存messageid
         $content = $this->getSeqContent($messageEntity);
         $receiveAccountId = $this->getAccountId($messageEntity->getReceiveId());
-        // 根据send方的 extra,generatereceive方对应的 extra
+        // according tosend方的 extra,generatereceive方对应的 extra
         $extra = $this->handlerReceiveExtra($senderSeqEntity, $receiveConversationEntity);
         $seqData = [
             'id' => $seqId,
@@ -446,7 +446,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * 分发群conversation创建message.
+     * 分发群conversationcreatemessage.
      * 群聊场景,批量generatemessage序列号.
      * 由于存在序列号merge/删除的场景,所以不需要保证序列号的连续性.
      * @return DelightfulSeqEntity[]
@@ -461,7 +461,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             $this->logger->error(sprintf('messageDispatch 分发群聊messagefail,原因:非聊天message senderSeqEntity:%s', Json::encode($senderSeqEntity->toArray())));
             return [];
         }
-        // 根据conversationidquery一下群信息
+        // according toconversationidquery一下群信息
         $conversationEntity = $this->delightfulConversationRepository->getConversationById($senderSeqEntity->getConversationId());
         if ($conversationEntity === null || $conversationEntity->getReceiveType() !== ConversationType::Group) {
             $this->logger->error(sprintf(
@@ -527,7 +527,7 @@ class DelightfulChatDomainService extends AbstractDomainService
                 // 多个parameter都放在DTO里handle
                 $receiveSeqDTO = clone $senderSeqEntity;
                 $receiveSeqDTO->setReferMessageId($minSeqListByReferMessageId[$user['delightful_id']] ?? '');
-                // 根据发件方的 seq,为群聊的每个成员generate seq
+                // according to发件方的 seq,为群聊的每个成员generate seq
                 $seqEntity = $this->generateGroupSeqEntityByChatSeq(
                     $user,
                     $receiveUserConversationEntity,
@@ -551,7 +551,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * 根据已经存在的聊天相关 seqEntity,给群成员generateconversation窗口.
+     * according to已经存在的聊天相关 seqEntity,给群成员generateconversation窗口.
      */
     public function generateGroupSeqEntityByChatSeq(
         array $userEntity,
@@ -564,7 +564,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         $content = $this->getSeqContent($messageEntity);
         $seqId = (string) IdGenerator::getSnowId();
         // 节约存储null间,聊天message在seq表不存具体内容,只存messageid
-        // 根据send方的 extra,generatereceive方对应的 extra
+        // according tosend方的 extra,generatereceive方对应的 extra
         $extra = $this->handlerReceiveExtra($receiveSeqDTO, $receiveUserConversationEntity);
         $seqData = [
             'id' => $seqId,
@@ -647,7 +647,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         if (empty($userMessages)) {
             return [];
         }
-        // 根据 seq_id 升序排列
+        // according to seq_id 升序排列
         ksort($userMessages);
         return array_values($userMessages);
     }
@@ -688,14 +688,14 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * 1.需要先call createAndSendStreamStartSequence 创建一个 seq ，然后再call streamSendJsonMessage sendmessage.
+     * 1.需要先call createAndSendStreamStartSequence create一个 seq ，然后再call streamSendJsonMessage sendmessage.
      * 2.streamsendJsonmessage,每次更新 json 的某个字段message。
-     * 3.使用本机内存进行message缓存，提升大 json 读写性能。
+     * 3.use本机内存进行message缓存，提升大 json 读写性能。
      * @todo 如果要对外提供stream api，需要改为 redis 缓存，以支持断线重连。
      *
-     *  支持一次推送多个字段的streammessage，如果 json 层级较深，使用 field_1.*.field_2 作为 key。 其中 * 是指array的下标。
+     *  支持一次推送多个字段的streammessage，如果 json 层级较深，use field_1.*.field_2 作为 key。 其中 * 是指array的下标。
      *  服务端会缓存所有stream的数据，并在streamend时一次性推送，以减少丢包的概率，提升message完整性。
-     *  例如：
+     *  for example：
      *  [
      *      'users.0.name' => 'delightful',
      *      'total' => 32,
@@ -775,7 +775,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         $lockOwner = random_bytes(16);
         $this->locker->mutexLock($lockKey, $lockOwner, 10);
         try {
-            // 编辑message时，不创建新的 messageEntity，而是更新原message.delightfulMessageId 不变
+            // 编辑message时，不create新的 messageEntity，而是更新原message.delightfulMessageId 不变
             $oldMessageEntity = $this->getMessageByDelightfulMessageId($messageEntity->getDelightfulMessageId());
             if ($oldMessageEntity === null) {
                 ExceptionBuilder::throw(ChatErrorCode::MESSAGE_NOT_FOUND);
@@ -853,7 +853,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             return [];
         }
 
-        // 直接使用现有的Repositorymethod获取conversation实体
+        // 直接use现有的Repositorymethod获取conversation实体
         $conversationEntities = $this->delightfulConversationRepository->getConversationByIds($conversationIds);
 
         // 以conversationID为键，方便call方快速查找
@@ -867,11 +867,11 @@ class DelightfulChatDomainService extends AbstractDomainService
 
     /**
      * receive客户端产生的message,,generatedelightfulMsgId
-     * 可能是创建conversation,编辑自己nickname等的控制message.
+     * 可能是createconversation,编辑自己nickname等的控制message.
      */
     public function createDelightfulMessageByAppClient(DelightfulMessageEntity $messageDTO, DelightfulConversationEntity $senderConversationEntity): DelightfulMessageEntity
     {
-        // 由于数据库设计有问题，conversation表没有记录 user 的 type，因此这里需要query一遍发件方user信息
+        // 由于数据库design有问题，conversation表没有记录 user 的 type，因此这里需要query一遍发件方user信息
         // todo conversation表应该记录 user 的 type
         $senderUserEntity = $this->delightfulUserRepository->getUserById($senderConversationEntity->getUserId());
         if ($senderUserEntity === null) {
@@ -881,7 +881,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         $delightfulMsgId = empty($delightfulMsgId) ? IdGenerator::getUniqueId32() : $delightfulMsgId;
         $time = date('Y-m-d H:i:s');
         $id = (string) IdGenerator::getSnowId();
-        // 一条message会出现在两个人的conversation窗口里(群聊时出现在几千人的conversation窗口id里),所以直接不存了,需要conversation窗口id时再根据收件人/发件人id去 delightful_user_conversation 取
+        // 一条message会出现在两个人的conversation窗口里(群聊时出现在几千人的conversation窗口id里),所以直接不存了,需要conversation窗口id时再according to收件人/发件人id去 delightful_user_conversation 取
         $messageData = [
             'id' => $id,
             'sender_id' => $senderUserEntity->getUserId(),
@@ -904,8 +904,8 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * 创建一个stream的 seq 并立即推送，由于前端渲染占位。注意，streammessage不能用来更新已经推送完毕的message，避免篡改原始内容！
-     * 如果需要对已经发出的message进行更新，需要使用 editMessage method，编辑message会记录完整的message历史版本。
+     * create一个stream的 seq 并立即推送，由于前端渲染占位。注意，streammessage不能用来更新已经推送完毕的message，避免篡改原始内容！
+     * 如果需要对已经发出的message进行更新，需要use editMessage method，编辑message会记录完整的message历史版本。
      */
     public function createAndSendStreamStartSequence(CreateStreamSeqDTO $createStreamSeqDTO, MessageInterface $messageStruct, DelightfulConversationEntity $senderConversationEntity): DelightfulSeqEntity
     {
@@ -915,19 +915,19 @@ class DelightfulChatDomainService extends AbstractDomainService
             if (! $messageStruct instanceof StreamMessageInterface || $messageStruct->getStreamOptions() === null) {
                 ExceptionBuilder::throw(ChatErrorCode::STREAM_MESSAGE_NOT_FOUND);
             }
-            // 由于数据库设计有问题，conversation表没有记录 user 的 type，因此这里需要query一遍发件方user信息
+            // 由于数据库design有问题，conversation表没有记录 user 的 type，因此这里需要query一遍发件方user信息
             // todo conversation表应该记录 user 的 type
             $senderUserEntity = $this->delightfulUserRepository->getUserById($senderConversationEntity->getUserId());
             if ($senderUserEntity === null) {
                 ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
             }
-            // streamstart时，在stream选项里记录 stream_app_message_id 给前端使用
+            // streamstart时，在stream选项里记录 stream_app_message_id 给前端use
             /** @var StreamOptions $streamOptions */
             $streamOptions = $messageStruct->getStreamOptions();
             $streamOptions->setStreamAppMessageId($createStreamSeqDTO->getAppMessageId());
             $time = date('Y-m-d H:i:s');
             $language = di(TranslatorInterface::class)->getLocale();
-            // 一条message会出现在两个人的conversation窗口里(群聊时出现在几千人的conversation窗口id里),所以直接不存了,需要conversation窗口id时再根据收件人/发件人id去 delightful_user_conversation 取
+            // 一条message会出现在两个人的conversation窗口里(群聊时出现在几千人的conversation窗口id里),所以直接不存了,需要conversation窗口id时再according to收件人/发件人id去 delightful_user_conversation 取
             $messageData = [
                 'id' => (string) IdGenerator::getSnowId(),
                 'sender_id' => $senderUserEntity->getUserId(),
@@ -967,7 +967,7 @@ class DelightfulChatDomainService extends AbstractDomainService
                 ->setSenderMessageId($senderSeqEntity->getMessageId())
                 ->setReceiveMessageId($receiveSeqEntity->getMessageId())
                 ->setLastUpdateDatabaseTime(time())
-                // 只initialize不写入具体内容，后续会根据streammessage的status进行更新
+                // 只initialize不写入具体内容，后续会according tostreammessage的status进行更新
                 ->setContent(['stream_options.status' => StreamMessageStatus::Start->value])
                 ->setDelightfulMessageId($receiveSeqEntity->getDelightfulMessageId())
                 ->setReceiveDelightfulId($receiveSeqEntity->getObjectId());
@@ -1011,10 +1011,10 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * 使用本机内存进行message缓存，提升大 json 读写性能。
+     * use本机内存进行message缓存，提升大 json 读写性能。
      * @todo 如果要对外提供stream api，需要改为 redis 缓存，以支持断线重连。
      *
-     * content的格式  例如：
+     * content的格式  for example：
      *   [
      *       'users.0.name' => 'delightful',
      *       'total' => 32,
@@ -1068,7 +1068,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         // 更新stream数据
         $jsonStreamCachedDTO->setContent($memoryCacheContent);
         $memoryCache['content'] = $memoryCacheContent;
-        // 更新缓存，使用更长的TTL以减少过期重建频率
+        // 更新缓存，use更长的TTL以减少过期重建频率
         $this->memoryDriver->set($cacheKey, $memoryCache, 600); // 设置10分钟过期时间
     }
 
@@ -1140,7 +1140,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         $topicDTO->setDescription('');
         $topicEntity = $this->delightfulChatTopicRepository->getTopicEntity($topicDTO);
         if ($topicEntity === null) {
-            // 为收件方创建话题
+            // 为收件方create话题
             $this->delightfulChatTopicRepository->createTopic($topicDTO);
         }
         return $receiveSeqExtra;

@@ -73,7 +73,7 @@ enum InstructType: int
             return false;
         }
 
-        // 如果是系统指令，使用SystemInstructType的判断
+        // 如果是系统指令，useSystemInstructType的判断
         if ($displayType === InstructDisplayType::SYSTEM) {
             return SystemInstructType::requiresContent($type);
         }
@@ -304,7 +304,7 @@ enum InstructType: int
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_icon_required');
         }
 
-        // 使用 StatusIcon 枚举验证图标value
+        // use StatusIcon 枚举验证图标value
         if (! StatusIcon::isValid($item['icon'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_icon_invalid');
         }
@@ -319,7 +319,7 @@ enum InstructType: int
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_color_required');
         }
 
-        // 使用 TextColor 枚举验证颜色value
+        // use TextColor 枚举验证颜色value
         if (! TextColor::isValid($item['text_color'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_color_invalid');
         }

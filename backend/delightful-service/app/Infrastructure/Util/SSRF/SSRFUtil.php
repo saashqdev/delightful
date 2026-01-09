@@ -12,8 +12,8 @@ use Throwable;
 /**
  * SSRF防御工具类.
  *
- * 使用示例：
- * // 简单使用，默认configuration
+ * use示例：
+ * // 简单use，默认configuration
  * $safeUrl = SSRFUtil::getSafeUrl('https://example.com');
  *
  * // 自定义parameter

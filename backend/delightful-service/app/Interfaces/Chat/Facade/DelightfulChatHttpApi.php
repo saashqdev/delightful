@@ -196,7 +196,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 智能根据话题idget话题name.
+     * 智能according to话题idget话题name.
      */
     public function intelligenceGetTopicName(string $conversationId, string $topicId): array
     {

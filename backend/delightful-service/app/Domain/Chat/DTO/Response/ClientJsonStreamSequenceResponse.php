@@ -20,7 +20,7 @@ class ClientJsonStreamSequenceResponse extends AbstractEntity
     // 要update目标 seqId 的content
     protected string $targetSeqId;
 
-    // 为了实现丢包重传，需要record当前的 $streamId。一定单调递增。
+    // 为了implement丢包重传，需要record当前的 $streamId。一定单调递增。
     protected ?int $streamId;
 
     /**

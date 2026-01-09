@@ -83,7 +83,7 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 根据userIDgetorganization管理员.
+     * according touserIDgetorganization管理员.
      */
     public function getByUserId(DataIsolation $dataIsolation, string $userId): ?OrganizationAdminEntity
     {
@@ -152,7 +152,7 @@ class OrganizationAdminDomainService
         // 授予organization管理员实体
         $organizationAdmin = $this->organizationAdminRepository->grant($dataIsolation, $userId, $grantorUserId, $remarks, $isOrganizationCreator);
 
-        // 同步create / updateorganization管理员角色
+        // synccreate / updateorganization管理员角色
         try {
             $permissionIsolation = PermissionDataIsolation::create(
                 $dataIsolation->getCurrentOrganizationCode(),
@@ -188,7 +188,7 @@ class OrganizationAdminDomainService
 
         $this->organizationAdminRepository->revoke($dataIsolation, $userId);
 
-        // 同步移除organization管理员角色
+        // sync移除organization管理员角色
         try {
             $permissionIsolation = PermissionDataIsolation::create(
                 $dataIsolation->getCurrentOrganizationCode(),

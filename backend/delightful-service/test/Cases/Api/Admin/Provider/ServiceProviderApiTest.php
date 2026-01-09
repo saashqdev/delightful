@@ -40,14 +40,14 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * 测试模型创建和更新的完整流程，包括配置版本validate.
+     * 测试模型create和更新的完整流程，include配置版本validate.
      */
     public function testSaveModelToServiceProviderCreate(): void
     {
         $modelUri = $this->baseUri . '/models';
         $serviceProviderConfigId = '841681476732149761';
 
-        // ========== 步骤1: 创建模型 ==========
+        // ========== 步骤1: create模型 ==========
         $createRequestData = [
             'model_type' => 3,
             'model_id' => 'test-model-' . time(),
@@ -92,10 +92,10 @@ class ServiceProviderApiTest extends BaseTest
 
         $createResponse = $this->post($modelUri, $createRequestData, $this->getCommonHeaders());
 
-        // validate创建响应
+        // validatecreate响应
         $this->assertIsArray($createResponse);
         $this->assertArrayHasKey('code', $createResponse);
-        $this->assertSame(1000, $createResponse['code'], '创建模型应该success');
+        $this->assertSame(1000, $createResponse['code'], 'create模型应该success');
         $this->assertArrayHasKey('data', $createResponse);
         $this->assertArrayHasKey('id', $createResponse['data'], 'return数据应contain模型ID');
 
@@ -110,9 +110,9 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertSame(1000, $detailResponse['code'], '获取详情应该success');
         $this->assertArrayHasKey('data', $detailResponse);
 
-        // 查找创建的模型
+        // 查找create的模型
         $createdModel = $this->findModelInDetailResponse($detailResponse['data'], $modelId);
-        $this->assertNotNull($createdModel, '应该能在详情中找到创建的模型');
+        $this->assertNotNull($createdModel, '应该能在详情中找到create的模型');
 
         // validate4个成本字段存在且value正确
         $this->assertArrayHasKey('config', $createdModel, '模型应该有config字段');
@@ -219,7 +219,7 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * 创建官方服务商.
+     * create官方服务商.
      */
     public function testCreateLLMOfficialProvider(): void
     {
@@ -254,7 +254,7 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * 创建官方服务商.
+     * create官方服务商.
      */
     public function testCreateVLMOfficialProvider(): void
     {
@@ -289,7 +289,7 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * 测试创建和删除模型.
+     * 测试create和删除模型.
      */
     public function testCreateAndDeleteModel()
     {
@@ -312,7 +312,7 @@ class ServiceProviderApiTest extends BaseTest
      */
     private function findModelInDetailResponse(array $detailData, string $modelId): ?array
     {
-        // 详情接口可能return models array或其他结构，这里需要根据实际接口调整
+        // 详情接口可能return models array或其他结构，这里需要according to实际接口调整
         if (isset($detailData['models']) && is_array($detailData['models'])) {
             foreach ($detailData['models'] as $model) {
                 if (isset($model['id']) && (string) $model['id'] === (string) $modelId) {

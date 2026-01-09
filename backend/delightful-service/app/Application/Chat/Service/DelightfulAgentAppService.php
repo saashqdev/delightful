@@ -44,7 +44,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
         $dataIsolation = DataIsolation::create();
         $dataIsolation->setCurrentOrganizationCode($flow->getOrganizationCode());
-        // 根据flowCode queryuser_id
+        // according toflowCode queryuser_id
         $delightfulUserEntity = $this->userDomainService->getByAiCode($dataIsolation, $flowCode);
         if (empty($delightfulUserEntity->getUserId())) {
             ExceptionBuilder::throw(AgentErrorCode::AGENT_NOT_FOUND, 'agent_user_id not found');

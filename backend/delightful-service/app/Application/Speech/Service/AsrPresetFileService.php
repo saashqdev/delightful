@@ -179,7 +179,7 @@ readonly class AsrPresetFileService
         string $fullPrefix,
         string $workDir
     ): TaskFileEntity {
-        // ⚠️ 使用 CoContext 和 di() get正确的语言和翻译
+        // ⚠️ use CoContext 和 di() get正确的语言和翻译
         $language = CoContext::getLanguage();
         $translator = di(TranslatorInterface::class);
         $translator->setLocale($language);
@@ -216,7 +216,7 @@ readonly class AsrPresetFileService
         string $fullPrefix,
         string $workDir
     ): TaskFileEntity {
-        // ⚠️ 使用 CoContext 和 di() get正确的语言和翻译
+        // ⚠️ use CoContext 和 di() get正确的语言和翻译
         $language = CoContext::getLanguage();
         $translator = di(TranslatorInterface::class);
         $translator->setLocale($language);
@@ -300,7 +300,7 @@ readonly class AsrPresetFileService
         // 如果插入被忽略（文件已存在），query现有record
         $existingFile = $this->taskFileDomainService->getByProjectIdAndFileKey($projectId, $fileKey);
         if ($existingFile !== null) {
-            $this->logger->info(sprintf('%s已存在，使用现有record', $logPrefix), [
+            $this->logger->info(sprintf('%s已存在，use现有record', $logPrefix), [
                 'task_key' => $taskKey,
                 'file_id' => $existingFile->getFileId(),
             ]);

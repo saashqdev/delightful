@@ -57,7 +57,7 @@ enum ProviderTemplateId: string
     case Gemini = '22';
 
     /**
-     * 根据ProviderCode和Categoryget对应的模板ID.
+     * according toProviderCode和Categoryget对应的模板ID.
      */
     public static function fromProviderCodeAndCategory(ProviderCode $providerCode, Category $category): ?self
     {

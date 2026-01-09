@@ -58,7 +58,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 构建完整权限标识.
+     * build完整权限标识.
      */
     public function buildPermission(string $resource, string $operation): string
     {
@@ -194,7 +194,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
     /**
      * 获取层级结构的权限树
-     * generate无限极权限树,规则：根据权限资源string（如 Admin.ai.model_management）逐段split，逐层构造树。
+     * generate无限极权限树,规则：according to权限资源string（如 Admin.ai.model_management）逐段split，逐层构造树。
      *
      * return格式：
      * [
@@ -241,7 +241,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 $accumKey .= '.' . $segment;
                 $isLastSegment = $index === array_key_last($segments);
 
-                // 取 label：第一段使用模块中文名，其余按规则
+                // 取 label：第一段use模块中文名，其余按规则
                 $label = match (true) {
                     $index === 0 => $this->getResourceModule($permission['resource']),                // 模块层
                     $isLastSegment => $permission['resource_label'],      // 资源层
@@ -308,7 +308,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
      * 规则：
      *   1. 如直接命中权限键，return true；
      *   2. 如果拥有全局权限 ALL_PERMISSIONS，return true；
-     *   3. 若未命中，则检查由该权限隐式contain的权限集合（例如 *edit* 隐式contain *query*）。
+     *   3. 若未命中，则检查由该权限隐式contain的权限集合（for example *edit* 隐式contain *query*）。
      *
      * @param string $permissionKey 目标权限键
      * @param string[] $userPermissions user已拥有的权限键集合
@@ -430,7 +430,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 根据平台 key 获取显示名称，可按需扩展.
+     * according to平台 key 获取显示名称，可按需扩展.
      */
     private function getPlatformLabel(string $platformKey): string
     {

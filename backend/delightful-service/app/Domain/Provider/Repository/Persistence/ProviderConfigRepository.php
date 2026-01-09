@@ -117,11 +117,11 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     {
         $attributes = $this->getFieldAttributes($providerConfigEntity);
 
-        // 判断是创建还是更新的标志
+        // 判断是create还是更新的标志
         $isNewRecord = ! $providerConfigEntity->getId();
 
         if ($isNewRecord) {
-            // 创建新记录 - 先generateID
+            // create新记录 - 先generateID
             $this->initializeEntityForCreation($providerConfigEntity, $attributes);
         } else {
             // 更新现有记录
@@ -145,7 +145,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
         }
 
         if ($isNewRecord) {
-            // 创建新记录
+            // create新记录
             ProviderConfigModel::query()->insert($attributes);
         } else {
             // 更新现有记录
@@ -200,8 +200,8 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * 根据organization和服务商type获取服务商配置列表.
-     * 新逻辑：以数据库中的实际配置为准，对于数据库中没有的服务商type，使用模板补充
+     * according toorganization和服务商type获取服务商配置列表.
+     * 新逻辑：以数据库中的实际配置为准，对于数据库中没有的服务商type，use模板补充
      * 支持多个相同 provider_code 的配置（organization管理员手动添加的）
      * 最终结果handle时，官方organization会filter掉Delightful服务商，普通organization会将Delightful服务商置顶.
      * @param string $organizationCode organization编码
@@ -357,7 +357,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * 准备移除软删相关功能，临时这样写。创建带有软删除filter的 ProviderConfigModel query构建器.
+     * 准备移除软删相关功能，临时这样写。create带有软删除filter的 ProviderConfigModel querybuild器.
      */
     protected function createConfigQuery(): Builder
     {
@@ -366,7 +366,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * 创建带有软删除filter的 ProviderModel query构建器.
+     * create带有软删除filter的 ProviderModel querybuild器.
      */
     private function createProviderQuery(): Builder
     {
@@ -380,14 +380,14 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
      */
     private function getOrganizationProvidersFromDatabase(string $organizationCode, Category $category, ?Status $status = null): array
     {
-        // 根据分类获取服务商ID列表
+        // according to分类获取服务商ID列表
         $serviceProviderIds = $this->getServiceProviderIdsByCategory($category);
 
         if (empty($serviceProviderIds)) {
             return [];
         }
 
-        // 根据organization编码和服务商ID列表获取配置
+        // according toorganization编码和服务商ID列表获取配置
         $providerConfigQuery = $this->createConfigQuery()
             ->where('organization_code', $organizationCode)
             ->whereIn('service_provider_id', $serviceProviderIds)
@@ -407,7 +407,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * 根据配置数据批量query对应的 provider 信息.
+     * according to配置数据批量query对应的 provider 信息.
      * @param array $configsResult 配置query结果
      * @return array provider ID 到 provider array的映射
      */
@@ -433,7 +433,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             ->whereIn('id', $providerIds);
         $providersResult = Db::select($providerQuery->toSql(), $providerQuery->getBindings());
 
-        // 创建 provider ID 到 provider 数据的映射
+        // create provider ID 到 provider 数据的映射
         $providerMap = [];
         foreach ($providersResult as $provider) {
             $providerMap[$provider['id']] = $provider;
@@ -443,7 +443,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * 根据分类获取服务商ID列表.
+     * according to分类获取服务商ID列表.
      *
      * @param Category $category 服务商分类
      * @return array 服务商IDarray

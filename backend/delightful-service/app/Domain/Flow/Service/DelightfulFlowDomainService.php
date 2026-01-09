@@ -185,7 +185,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
         $startNodeParamsConfig->validate();
         $routineConfigs = $startNodeParamsConfig->getRoutineConfigs();
 
-        // 使用流程的 code 作为外部 id
+        // use流程的 code 作为外部 id
         $externalId = $delightfulFlow->getCode();
         $retryTimes = 2;
         $callbackMethod = [DelightfulFlowExecuteAppService::class, 'routine'];

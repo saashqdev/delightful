@@ -17,7 +17,7 @@ use Hyperf\Contract\TranslatorInterface;
 
 /**
  * 聊天message装配器
- * 负责构建ASR总结相关的聊天message.
+ * 负责buildASR总结相关的聊天message.
  */
 readonly class ChatMessageAssembler
 {
@@ -26,7 +26,7 @@ readonly class ChatMessageAssembler
     }
 
     /**
-     * 构建聊天请求object用于总结task
+     * build聊天请求object用于总结task
      *
      * @param ProcessSummaryTaskDTO $dto 处理总结taskDTO
      * @param AsrFileDataDTO $audioFileData 音频文件数据
@@ -35,13 +35,13 @@ readonly class ChatMessageAssembler
      */
     public function buildSummaryMessage(ProcessSummaryTaskDTO $dto, AsrFileDataDTO $audioFileData, ?AsrFileDataDTO $noteFileData = null): ChatRequest
     {
-        // 在协程环境中，使用 di() get translator 实例以确保协程上下文正确
+        // 在协程环境中，use di() get translator 实例以确保协程上下文正确
         $translator = di(TranslatorInterface::class);
         $translator->setLocale(CoContext::getLanguage());
-        // 构建messagecontent
+        // buildmessagecontent
         $messageContent = $this->buildMessageContent($dto->modelId, $audioFileData, $noteFileData);
 
-        // 构建聊天请求数据
+        // build聊天请求数据
         $chatRequestData = [
             'context' => [
                 'language' => $translator->getLocale(),
@@ -61,7 +61,7 @@ readonly class ChatMessageAssembler
     }
 
     /**
-     * 构建rich_textmessagecontent.
+     * buildrich_textmessagecontent.
      *
      * @param string $modelId modelID
      * @param AsrFileDataDTO $fileData 文件数据
@@ -70,10 +70,10 @@ readonly class ChatMessageAssembler
      */
     public function buildMessageContent(string $modelId, AsrFileDataDTO $fileData, ?AsrFileDataDTO $noteData = null): array
     {
-        // 在协程环境中，使用 di() get translator 实例以确保协程上下文正确
+        // 在协程环境中，use di() get translator 实例以确保协程上下文正确
         $translator = di(TranslatorInterface::class);
         $translator->setLocale(CoContext::getLanguage());
-        // 构建messagecontent
+        // buildmessagecontent
         if ($noteData !== null && ! empty($noteData->fileName) && ! empty($noteData->filePath)) {
             // 有笔记时的messagecontent：同时提到录音文件和笔记文件
 

@@ -50,7 +50,7 @@ class LoopMainNodeRunner extends NodeRunner
         }
 
         $breakVariableKey = "#{$bodyId}_break";
-        // 采用variable来初始化跳出循环configuration
+        // 采用variable来initialize跳出循环configuration
         $executionData->variableSave($breakVariableKey, false);
 
         $params = $this->node->getParams();

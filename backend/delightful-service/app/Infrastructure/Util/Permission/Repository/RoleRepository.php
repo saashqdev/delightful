@@ -17,7 +17,7 @@ use DateTime;
 use function Hyperf\Support\now;
 
 /**
- * 角色仓库实现.
+ * 角色仓库implement.
  */
 class RoleRepository implements RoleRepositoryInterface
 {
@@ -44,7 +44,7 @@ class RoleRepository implements RoleRepositoryInterface
             $model = RoleModel::create($data);
             $roleEntity->setId($model->id);
         } else {
-            // 使用modelupdate以便使用 casts 处理 JSON 与日期field
+            // usemodelupdate以便use casts 处理 JSON 与日期field
             $model = $this->roleQuery($organizationCode)
                 ->where('id', $roleEntity->getId())
                 ->first();
@@ -58,7 +58,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 根据IDget角色.
+     * according toIDget角色.
      */
     public function getById(string $organizationCode, int $id): ?RoleEntity
     {
@@ -70,7 +70,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 根据nameget角色.
+     * according tonameget角色.
      */
     public function getByName(string $organizationCode, string $name): ?RoleEntity
     {
@@ -268,7 +268,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 基于organization编码get RoleModel query构造器.
+     * based onorganization编码get RoleModel query构造器.
      */
     private function roleQuery(string $organizationCode)
     {
@@ -276,7 +276,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 基于organization编码get RoleUserModel query构造器.
+     * based onorganization编码get RoleUserModel query构造器.
      */
     private function roleUserQuery(string $organizationCode)
     {

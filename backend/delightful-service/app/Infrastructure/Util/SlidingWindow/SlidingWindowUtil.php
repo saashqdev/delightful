@@ -15,7 +15,7 @@ use Throwable;
 
 /**
  * 防抖工具类
- * 实现"执行最后一次请求"防抖策略.
+ * implement"执行最后一次请求"防抖策略.
  */
 class SlidingWindowUtil
 {

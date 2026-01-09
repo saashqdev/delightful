@@ -300,7 +300,7 @@ final class LongTermMemoryEntity extends AbstractEntity
 
     /**
      * 内部set启用status（不进行业务规则check）.
-     * 用于数据初始化和内部操作，跳过业务规则限制.
+     * 用于数据initialize和内部操作，跳过业务规则限制.
      */
     public function setEnabledInternal(bool $enabled): void
     {
@@ -445,7 +445,7 @@ final class LongTermMemoryEntity extends AbstractEntity
      */
     protected function set(string $key, mixed $value): void
     {
-        // enabled field在初始化时使用内部method，跳过业务规则check
+        // enabled field在initialize时use内部method，跳过业务规则check
         if (strtolower($key) === 'enabled' && is_bool($value)) {
             $this->setEnabledInternal($value);
             return;
@@ -465,7 +465,7 @@ final class LongTermMemoryEntity extends AbstractEntity
 
         $daysSinceLastAccess = (new DateTime())->diff($this->lastAccessedAt)->days;
 
-        // 根据访问time计算衰减，最多衰减到 0.5
+        // according to访问time计算衰减，最多衰减到 0.5
         return max(0.5, 1.0 - ($daysSinceLastAccess * 0.01));
     }
 

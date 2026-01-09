@@ -29,7 +29,7 @@ class AdminModeGroupApi extends AbstractApi
     }
 
     /**
-     * 根据modeIDget分组列table.
+     * according tomodeIDget分组列table.
      */
     public function getGroupsByModeId(RequestInterface $request, string $modeId): array
     {

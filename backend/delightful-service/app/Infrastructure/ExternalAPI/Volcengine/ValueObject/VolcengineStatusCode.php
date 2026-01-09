@@ -61,7 +61,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否为处理中status（包括处理中和排队中）.
+     * 判断是否为处理中status（include处理中和排队中）.
      */
     public function isProcessing(): bool
     {
@@ -110,7 +110,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 根据status码stringcreate枚举实例.
+     * according tostatus码stringcreate枚举实例.
      */
     public static function fromString(string $statusCode): ?self
     {

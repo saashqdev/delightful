@@ -17,14 +17,14 @@ use App\Infrastructure\Core\ValueObject\Page;
 use App\Interfaces\Provider\Assembler\AiAbilityAssembler;
 
 /**
- * AI 能力仓储实现.
+ * AI 能力仓储implement.
  */
 class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRepositoryInterface
 {
     protected bool $filterOrganizationCode = true;
 
     /**
-     * 根据能力代码getAI能力实体.
+     * according to能力代码getAI能力实体.
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity
     {
@@ -55,7 +55,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * 根据IDgetAI能力实体.
+     * according toIDgetAI能力实体.
      */
     public function getById(ProviderDataIsolation $dataIsolation, int $id): ?AiAbilityEntity
     {
@@ -88,7 +88,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
 
         if ($result) {
             $entity->setId($model->id);
-            // 使用ID加密config并update
+            // useID加密config并update
             $encryptedConfig = AiAbilityAssembler::encodeConfig($entity->getConfig(), (string) $model->id);
             $model->config = $encryptedConfig;
             $model->save();
@@ -123,7 +123,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * 根据codeupdate（支持选择性update）.
+     * according tocodeupdate（支持选择性update）.
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool
     {

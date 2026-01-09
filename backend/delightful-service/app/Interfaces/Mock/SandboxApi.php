@@ -105,7 +105,7 @@ class SandboxApi
             'code' => 1000,
             'message' => 'success',
             'data' => [
-                'status' => WorkspaceStatus::READY, // 初始化完成，工作区完全可用
+                'status' => WorkspaceStatus::READY, // initialize完成，工作区完全可用
                 'sandbox_id' => $sandboxId,
                 'workspace_path' => '/workspace',
                 'is_ready' => true,
@@ -114,7 +114,7 @@ class SandboxApi
     }
 
     /**
-     * 初始化 Agent
+     * initialize Agent
      * POST /api/v1/sandboxes/{sandboxId}/proxy/api/v1/messages/chat.
      */
     public function initAgent(RequestInterface $request): array
@@ -146,7 +146,7 @@ class SandboxApi
     }
 
     /**
-     * 初始化沙箱（简化版，用于 ASR 等无聊天message场景）
+     * initialize沙箱（简化版，用于 ASR 等无聊天message场景）
      * POST /api/v1/sandboxes/{sandboxId}/proxy/v1/messages/chat.
      *
      * 请求体示例：
@@ -193,10 +193,10 @@ class SandboxApi
             ];
         }
 
-        // 模拟沙箱初始化success响应
+        // 模拟沙箱initializesuccess响应
         return [
             'code' => 1000,
-            'message' => '工作区初始化success',
+            'message' => '工作区initializesuccess',
             'data' => null,
         ];
     }

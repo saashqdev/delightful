@@ -14,12 +14,12 @@ use InvalidArgumentException;
 
 /**
  * service商模板ID处理工具类
- * 用于生成和解析service商模板ID（使用固定的数value型string）.
+ * 用于生成和解析service商模板ID（use固定的数value型string）.
  */
 class ProviderConfigIdAssembler
 {
     /**
-     * 根据ProviderCode和Category生成service商模板的config_id.
+     * according toProviderCode和Category生成service商模板的config_id.
      */
     public static function generateProviderTemplate(ProviderCode $providerCode, Category $category): string
     {
@@ -41,7 +41,7 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * 根据模板configurationID解析出ProviderCode和Category.
+     * according to模板configurationID解析出ProviderCode和Category.
      * 支持数value型string格式的模板ID.
      * @return null|array{providerCode: ProviderCode, category: Category}
      */
@@ -62,7 +62,7 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * 根据ProviderTemplateIdget对应的数value型string.
+     * according toProviderTemplateIdget对应的数value型string.
      */
     public static function getTemplateIdValue(ProviderTemplateId $templateId): string
     {
@@ -70,7 +70,7 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * 根据数value型stringget对应的ProviderTemplateId.
+     * according to数value型stringget对应的ProviderTemplateId.
      */
     public static function getTemplateIdFromValue(null|int|string $configId): ?ProviderTemplateId
     {

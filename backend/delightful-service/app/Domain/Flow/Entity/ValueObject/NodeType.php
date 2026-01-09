@@ -10,7 +10,7 @@ namespace App\Domain\Flow\Entity\ValueObject;
 /**
  * 节点type
  * 1 ~ 99 原子节点
- * 100 ~ 199 组合节点的硬编码实现.
+ * 100 ~ 199 组合节点的硬编码implement.
  */
 enum NodeType: int
 {

@@ -14,7 +14,7 @@ use App\Domain\Chat\Entity\ValueObject\InstructionInsertLocation;
 use App\Domain\Chat\Entity\ValueObject\InstructionType;
 
 /**
- * 指令configuration实体类，根据 proto 定义.
+ * 指令configuration实体类，according to proto 定义.
  */
 class InstructionConfig extends AbstractEntity
 {
@@ -227,7 +227,7 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // 如果第一个元素已经是 InstructionValue object，则直接使用
+        // 如果第一个元素已经是 InstructionValue object，则直接use
         if (isset($values[0]) && $values[0] instanceof InstructionValue) {
             $this->values = $values;
             return;
@@ -316,7 +316,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * 根据指令组件typeget对应的name和value.
+     * according to指令组件typeget对应的name和value.
      *
      * type为开关时，name 取的是 开/关，value 取 $instruction->getOn / $instruction->getOff
      * type为单选时, name 取的是 显示name，value：$instructionValue

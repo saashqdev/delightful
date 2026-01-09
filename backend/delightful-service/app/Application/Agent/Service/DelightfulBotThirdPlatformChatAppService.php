@@ -279,7 +279,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         }
         $delightfulFlow->setAgentId((string) $bot->getId());
 
-        // 使用当前流程的organization编码
+        // use当前流程的organization编码
         $dataIsolation->setCurrentOrganizationCode($delightfulFlow->getOrganizationCode());
         return $delightfulFlow;
     }

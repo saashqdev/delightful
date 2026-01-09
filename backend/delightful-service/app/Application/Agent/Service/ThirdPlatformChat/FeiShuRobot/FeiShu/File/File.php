@@ -56,7 +56,7 @@ class File implements ProviderInterface
         }
         // 响应是one二进制文件，保存到本地
         $localFile = tempnam(sys_get_temp_dir(), 'feishu_file_');
-        // 根据 header 中的 content-type setting本地文件名和扩展名
+        // according to header 中的 content-type setting本地文件名和扩展名
         $contentType = $response->getHeader('Content-Type')[0] ?? '';
         $localFile = match ($contentType) {
             'image/jpeg', 'image/jpg' => $localFile . '.jpg',

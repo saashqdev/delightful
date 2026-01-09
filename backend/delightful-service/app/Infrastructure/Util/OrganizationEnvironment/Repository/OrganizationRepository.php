@@ -18,7 +18,7 @@ use Hyperf\Database\Model\Builder;
 use function Hyperf\Support\now;
 
 /**
- * organization仓库实现.
+ * organization仓库implement.
  */
 class OrganizationRepository implements OrganizationRepositoryInterface
 {
@@ -53,7 +53,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
             $model = OrganizationModel::create($data);
             $organizationEntity->setId($model->id);
         } else {
-            // 使用modelupdate以便使用 casts 处理 JSON 与日期field
+            // usemodelupdate以便use casts 处理 JSON 与日期field
             $model = OrganizationModel::query()
                 ->where('id', $organizationEntity->getId())
                 ->first();
@@ -67,7 +67,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 根据IDgetorganization.
+     * according toIDgetorganization.
      */
     public function getById(int $id): ?OrganizationEntity
     {
@@ -79,7 +79,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 根据编码getorganization.
+     * according to编码getorganization.
      */
     public function getByCode(string $code): ?OrganizationEntity
     {
@@ -91,7 +91,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 根据编码list批量getorganization.
+     * according to编码list批量getorganization.
      */
     public function getByCodes(array $codes): array
     {
@@ -112,7 +112,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 根据namegetorganization.
+     * according tonamegetorganization.
      */
     public function getByName(string $name): ?OrganizationEntity
     {
@@ -136,7 +136,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
         // get总数
         $total = $query->count();
 
-        // sort：优先使用filter器中的sortfield，否则默认按createtime倒序
+        // sort：优先usefilter器中的sortfield，否则默认按createtime倒序
         $orderBy = $filters['order_by'] ?? null;
         $orderDirection = strtolower((string) ($filters['order_direction'] ?? '')) === 'asc' ? 'asc' : 'desc';
         if (! empty($orderBy)) {
@@ -218,7 +218,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
             $query->where('type', (int) $filters['type']);
         }
 
-        // 同步status筛选
+        // syncstatus筛选
         if (isset($filters['sync_status'])) {
             $query->where('sync_status', (int) $filters['sync_status']);
         }

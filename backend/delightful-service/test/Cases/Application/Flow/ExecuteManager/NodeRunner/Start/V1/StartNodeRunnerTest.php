@@ -281,7 +281,7 @@ JSON,
     public function testParamCallWithSystemParamKey()
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionMessage('field名 [conversation_id] 与系统保留field冲突，请使用其他name');
+        $this->expectExceptionMessage('field名 [conversation_id] 与系统保留field冲突，请use其他name');
 
         // create一个包含系统保留field的节点configuration，这应该在validate阶段抛出exception
         $node = Node::generateTemplate(NodeType::Start, json_decode(
@@ -337,9 +337,9 @@ JSON,
     public function testParamCallWithSystemParamKeyInCustomSystemOutput()
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionMessage('field名 [message_type] 与系统保留field冲突，请使用其他name');
+        $this->expectExceptionMessage('field名 [message_type] 与系统保留field冲突，请use其他name');
 
-        // test在custom_system_output中使用系统保留field
+        // test在custom_system_output中use系统保留field
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {

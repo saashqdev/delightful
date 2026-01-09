@@ -267,7 +267,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * 初始化系统交互指令.
+     * initialize系统交互指令.
      */
     private function initSystemInstructs(string $organizationCode, string $agentId, string $userId): void
     {

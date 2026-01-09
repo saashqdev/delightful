@@ -425,7 +425,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "你是一个旅行专家，专门负责随机旅游体验，当user提到要去旅游时，你需要先使用get_rand_city获取到一个随机city，然后根据city名称同时callget_foods_by_city，get_place_by_city。最终generate一个旅游方案",
+                    "value": "你是一个旅行专家，专门负责随机旅游体验，当user提到要去旅游时，你需要先useget_rand_city获取到一个随机city，然后according tocity名称同时callget_foods_by_city，get_place_by_city。最终generate一个旅游方案",
                     "name": "",
                     "args": null
                 }

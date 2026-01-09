@@ -26,9 +26,9 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property DocumentFileInterface $document_file 文档文件info
  * @property string $third_platform_type 第三方平台type
  * @property string $third_file_id 第三方文件ID
- * @property int $sync_status 同步status
- * @property int $sync_times 同步次数
- * @property string $sync_status_message 同步statusmessage
+ * @property int $sync_status syncstatus
+ * @property int $sync_times sync次数
+ * @property string $sync_status_message syncstatusmessage
  * @property string $embedding_model 嵌入model
  * @property string $vector_db 向量database
  * @property array $retrieve_config 检索configuration

@@ -30,7 +30,7 @@ class AiAbilityDomainService
     }
 
     /**
-     * 根据能力代码getAI能力实体（用于运行时，不校验organization）.
+     * according to能力代码getAI能力实体（用于运行时，不校验organization）.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离info
      * @param AiAbilityCode $code 能力代码
@@ -100,10 +100,10 @@ class AiAbilityDomainService
     }
 
     /**
-     * 初始化AI能力数据.
+     * initializeAI能力数据.
      *
      * @param ProviderDataIsolation $dataIsolation 数据隔离info
-     * @return int 初始化的数量
+     * @return int initialize的数量
      */
     public function initializeAbilities(ProviderDataIsolation $dataIsolation): int
     {
@@ -116,7 +116,7 @@ class AiAbilityDomainService
             $code = AiAbilityCode::from($abilityConfig['code']);
             $existingEntity = $this->aiAbilityRepository->getByCode($dataIsolation, $code);
 
-            // 构建name和description（确保是多语言格式）
+            // buildname和description（确保是多语言格式）
             $name = $abilityConfig['name'];
             if (is_string($name)) {
                 $name = [

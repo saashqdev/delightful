@@ -115,14 +115,14 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
 
             # 2.searchuser问题.这里一定会split一次关联问题
             $searchDetailItems = $this->searchUserQuestion($dto);
-            # 3.根据原始问题 + search结果，按多个维度拆解关联问题.
+            # 3.according to原始问题 + search结果，按多个维度拆解关联问题.
             // 3.1 generate关联问题并send给前端
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $searchDetailItems);
             $associateQuestions = $this->generateAndSendAssociateQuestions($dto, $associateQuestionsQueryVo, AggregateAISearchCardMessageV2::NULL_PARENT_ID);
-            // 3.2 根据关联问题，发起简单search（不拿网页详情),并filter掉重复或者与问题关联性不高的网页内容
+            // 3.2 according to关联问题，发起简单search（不拿网页详情),并filter掉重复或者与问题关联性不高的网页内容
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
 
-            // 3.4 根据search深度，决定是否continuesearch关联问题的子问题
+            // 3.4 according tosearch深度，决定是否continuesearch关联问题的子问题
             $readPagesDetailChannel = new Channel(count($associateQuestions));
             // 3.4.a 深度search
             if ($dto->getSearchDeepLevel() === SearchDeepLevel::DEEP) {
@@ -132,15 +132,15 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
                 $readPagesDetailChannel = null;
                 $this->simpleSearch($dto, $associateQuestions, $noRepeatSearchContexts);
             }
-            // 使用 channel 通信，精读过程中就推送message给前端
+            // use channel 通信，精读过程中就推送message给前端
             $associateQuestionIds = [];
             foreach ($associateQuestions as $associateQuestion) {
                 $associateQuestionIds[] = $associateQuestion->getQuestionId();
             }
             $this->sendLLMResponseForAssociateQuestions($dto, $associateQuestionIds, $readPagesDetailChannel);
-            // 4. 根据每个关联问题reply，generate总结.
+            // 4. according to每个关联问题reply，generate总结.
             $summarize = $this->generateAndSendSummary($dto, $noRepeatSearchContexts, $associateQuestions);
-            // 5. 根据总结，generate额外内容（思维导图、PPT、事件等）
+            // 5. according to总结，generate额外内容（思维导图、PPT、事件等）
             if ($dto->getSearchDeepLevel() === SearchDeepLevel::DEEP) {
                 $this->generateAndSendExtra($dto, $noRepeatSearchContexts, $summarize);
             }
@@ -186,14 +186,14 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             // 1.searchuser问题.这里一定会split一次关联问题
             $searchDetailItems = $this->searchUserQuestion($dto);
 
-            // 2.根据原始问题 + search结果，按多个维度拆解关联问题.
+            // 2.according to原始问题 + search结果，按多个维度拆解关联问题.
             // 2.1 generate关联问题
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $searchDetailItems);
             $associateQuestions = $this->generateAssociateQuestions($associateQuestionsQueryVo, AggregateAISearchCardMessageV2::NULL_PARENT_ID);
-            // 2.2 根据关联问题，发起简单search（不拿网页详情),并filter掉重复或者与问题关联性不高的网页内容
+            // 2.2 according to关联问题，发起简单search（不拿网页详情),并filter掉重复或者与问题关联性不高的网页内容
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
 
-            // 3. 根据每个关联问题reply，generate总结.
+            // 3. according to每个关联问题reply，generate总结.
             return $this->generateSummary($dto, $noRepeatSearchContexts, $associateQuestions);
         } catch (Throwable $e) {
             // 4. 发生exception时，记录报错
@@ -349,7 +349,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             ->setUserId($dto->getUserId())
             ->setOrganizationCode($dto->getOrganizationCode())
             ->setModel($modelInterface);
-        // 根据user的上下文，拆解子问题。需要理解user想问什么，再去拆search关键词。
+        // according touser的上下文，拆解子问题。需要理解user想问什么，再去拆search关键词。
         $searchKeywords = $this->delightfulLLMDomainService->generateSearchKeywordsByUserInput($dto, $modelInterface);
         $queryVo->setSearchKeywords($searchKeywords);
         $searchDetailItems = $this->delightfulLLMDomainService->getSearchResults($queryVo)['search'] ?? [];
@@ -377,7 +377,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     }
 
     /**
-     * 根据原始问题 + search结果，按多个维度拆解问题.
+     * according to原始问题 + search结果，按多个维度拆解问题.
      * @return QuestionItem[]
      */
     public function generateAssociateQuestions(AISearchCommonQueryVo $queryVo, string $parentQuestionId): array
@@ -398,7 +398,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         }
         $associateQuestions = $this->buildAssociateQuestions($relatedQuestions, $parentQuestionId);
         $this->logger->info(sprintf(
-            'getSearchResults 问题：%s 关联问题: %s .根据原始问题 + search结果，按多个维度拆解关联问题并推送完毕 end计时，耗时 %s 秒',
+            'getSearchResults 问题：%s 关联问题: %s .according to原始问题 + search结果，按多个维度拆解关联问题并推送完毕 end计时，耗时 %s 秒',
             $queryVo->getUserMessage(),
             Json::encode($relatedQuestions, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
             TimeUtil::getMillisecondDiffFromNow($start) / 1000
@@ -414,7 +414,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     public function generateSearchResults(DelightfulChatAggregateSearchReqDTO $dto, array $associateQuestions): array
     {
         $start = microtime(true);
-        // 根据关联问题，发起简单search（不拿网页详情),并filter掉重复或者与问题关联性不高的网页内容
+        // according to关联问题，发起简单search（不拿网页详情),并filter掉重复或者与问题关联性不高的网页内容
         $searchKeywords = $this->getSearchKeywords($associateQuestions);
         $queryVo = (new AISearchCommonQueryVo())
             ->setSearchKeywords($searchKeywords)
@@ -506,7 +506,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             ->setSearchKeywords($searchKeywords)
             ->setUserId($dto->getUserId())
             ->setOrganizationCode($dto->getOrganizationCode());
-        // 深度search的总结使用 deepseek-r1 模型
+        // 深度search的总结use deepseek-r1 模型
         if ($dto->getSearchDeepLevel() === SearchDeepLevel::DEEP) {
             $modelInterface = $this->getChatModel($dto->getOrganizationCode(), $dto->getUserId(), LLMModelEnum::DEEPSEEK_R1->value);
         } else {
@@ -813,7 +813,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
                     $content = mb_substr($content, 0, 2048);
                     $context->setDetail($content);
                     ++$currentDetailReadCount;
-                    // 根据精读进度，推送关联问题search完毕给前端
+                    // according to精读进度，推送关联问题search完毕给前端
                     if (($currentDetailReadCount % $perReadResponseNum === 0) && $readPagesDetailChannel->isAvailable()) {
                         $readPagesDetailChannel->push(1, 5);
                         // 需要推送的次数减少
@@ -892,7 +892,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $timeStart = microtime(true);
         $parallel = new Parallel(2);
         $parallel->add(function () use ($dto, $noRepeatSearchContexts, $associateQuestions) {
-            // 3.4.a.1 并行：根据关联问题和问题的简单search，generate关联问题的子问题.(关联问题的子问题只用于前端展示，目前不会根据子问题再次search+精读)
+            // 3.4.a.1 并行：according to关联问题和问题的简单search，generate关联问题的子问题.(关联问题的子问题只用于前端展示，目前不会according to子问题再次search+精读)
             $this->generateAndSendAssociateSubQuestions($dto, $noRepeatSearchContexts, $associateQuestions);
         });
         $parallel->add(function () use (&$noRepeatSearchContexts, $readPagesDetailChannel, $associateQuestions) {

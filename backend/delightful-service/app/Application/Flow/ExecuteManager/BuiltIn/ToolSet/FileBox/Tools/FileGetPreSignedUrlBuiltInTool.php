@@ -35,7 +35,7 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '根据文件名get文件上传的预签名URL。仅能操作本流程产生的文件';
+        return 'according to文件名get文件上传的预签名URL。仅能操作本流程产生的文件';
     }
 
     public function getCallback(): ?Closure

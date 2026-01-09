@@ -173,7 +173,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     {
         $builder = $this->createProviderQuery();
         $builder->where('category', $category->value);
-        // 不排除任何service商，包括 Official，因为模板需要所有service商
+        // 不排除任何service商，include Official，因为模板需要所有service商
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
         return ProviderAssembler::toEntities($result);
@@ -230,7 +230,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     }
 
     /**
-     * 准备移除软删相关功能，临时这样写。create带有软deletefilter的 ProviderModel query构建器.
+     * 准备移除软删相关功能，临时这样写。create带有软deletefilter的 ProviderModel querybuild器.
      */
     private function createProviderQuery(): Builder
     {

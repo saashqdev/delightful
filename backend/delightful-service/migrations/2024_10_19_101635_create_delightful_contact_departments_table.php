@@ -34,7 +34,7 @@ return new class extends Migration {
             $table->text('path')->comment('department路径')->nullable();
             // department直属user人数
             $table->integer('employee_sum')->comment('department直属user人数')->default(0);
-            $table->comment('userservice的department与第三方平台userrecordtable.用于与第三方平台实时数据同步,激活record等');
+            $table->comment('userservice的department与第三方平台userrecordtable.用于与第三方平台实时数据sync,激活record等');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['organization_code', 'department_id'], 'org_department_id');

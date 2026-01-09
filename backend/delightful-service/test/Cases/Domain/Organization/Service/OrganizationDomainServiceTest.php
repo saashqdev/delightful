@@ -107,7 +107,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
 
         // 尝试create具有相同名称的organization
         $organization2 = $this->createTestOrganizationEntity(1);
-        $organization2->setName('Test Organization 0'); // 使用相同的名称
+        $organization2->setName('Test Organization 0'); // use相同的名称
 
         $this->expectException(Exception::class);
         $this->organizationDomainService->create($organization2);

@@ -15,12 +15,12 @@ use App\Infrastructure\Core\ValueObject\Page;
 interface ModeRepositoryInterface
 {
     /**
-     * 根据IDgetmode.
+     * according toIDgetmode.
      */
     public function findById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeEntity;
 
     /**
-     * 根据标识符getmode.
+     * according to标识符getmode.
      */
     public function findByIdentifier(ModeDataIsolation $dataIsolation, string $identifier): ?ModeEntity;
 
@@ -55,7 +55,7 @@ interface ModeRepositoryInterface
     public function findEnabledModes(ModeDataIsolation $dataIsolation): array;
 
     /**
-     * 根据跟随modeIDgetmode列表.
+     * according to跟随modeIDgetmode列表.
      */
     public function findByFollowModeId(ModeDataIsolation $dataIsolation, string $followModeId): array;
 

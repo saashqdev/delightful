@@ -27,7 +27,7 @@ use Delightful\AsyncEvent\AsyncEventUtil;
 use Hyperf\DbConnection\Db;
 
 /**
- * 助理 service.
+ * assistant service.
  */
 class DelightfulAgentDomainService
 {
@@ -70,7 +70,7 @@ class DelightfulAgentDomainService
             $agent = $this->agentRepository->insert($agentEntity);
             $create = true;
 
-            // create助理o clockaddsystem交互finger令
+            // createassistanto clockaddsystem交互finger令
             $this->initSystemInstructs($agent->getOrganizationCode(), $agent->getId(), $agentEntity->getUpdatedUid());
         } else {
             // whethercanmodify
@@ -164,13 +164,13 @@ class DelightfulAgentDomainService
         // getdataisolationobjectandgetcurrentorganizationorganizationcode
         $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode();
 
-        // getenable助理list
+        // getenableassistantlist
         $enabledAgents = $this->getEnabledAgents();
 
-        // extractenable助理listmiddle agent_version_id
+        // extractenableassistantlistmiddle agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // getfinger定organizationand助理version助理dataanditstotal
+        // getfinger定organizationandassistantversionassistantdataanditstotal
         $page = ((int) ceil((int) $pageToken / $pageSize)) + 1;
         $agents = $this->agentVersionRepository->getAgentsByOrganization($organizationCode, $agentVersionIds, $page, $pageSize, $agentName, $descriptionKeyword);
 
@@ -180,7 +180,7 @@ class DelightfulAgentDomainService
 
         $agents = DelightfulAgentVersionFactory::toArrays($agents);
 
-        // 收collection助理avatarfilekey
+        // 收collectionassistantavatarfilekey
         $fileKeys = array_column($agents, 'agent_avatar');
         // 移exceptemptyvalue
         $validFileKeys = array_filter($fileKeys, static fn ($fileKey) => ! empty($fileKey));
@@ -204,7 +204,7 @@ class DelightfulAgentDomainService
             $links = array_merge(...$links);
         }
 
-        // replaceeach助理avatarlink
+        // replaceeachassistantavatarlink
         foreach ($agents as &$agent) {
             $avatarKey = $agent['agent_avatar'];
             $fileLink = $links[$avatarKey] ?? null;
@@ -222,7 +222,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * save助理交互finger令.
+     * saveassistant交互finger令.
      */
     public function updateInstruct(string $organizationCode, string $agentId, array $instructs, string $userId = '', bool $valid = true): array
     {
@@ -230,7 +230,7 @@ class DelightfulAgentDomainService
             // validationnormal交互finger令
             InstructType::validateInstructs($instructs);
 
-            // ensuresystem交互finger令存in,if缺少thensupplement
+            // ensuresystem交互finger令存in,ifmissingthensupplement
             $instructs = SystemInstructType::ensureSystemInstructs($instructs);
         }
         // save
@@ -244,7 +244,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * queryenterprisedown所have助理,itemitemquery:status,createperson,search.
+     * queryenterprisedown所haveassistant,itemitemquery:status,createperson,search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
@@ -258,7 +258,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * getenterprisedown所have助理create者.
+     * getenterprisedown所haveassistantcreate者.
      * @return array<string>
      */
     public function getOrganizationAgentsCreators(string $organizationCode): array

@@ -29,7 +29,7 @@ class AuthenticationApi
 
     public function authCheck(RequestInterface $request): array
     {
-        // according tologin码,getto应accessenvironment,go麦吉/day书validationwhetherhavepermission
+        // according tologin码,getto应accessenvironment,goMagic/day书validationwhetherhavepermission
         $authorization = (string) $request->input('authorization', '');
         if (empty($authorization)) {
             $authorization = (string) $request->header('authorization');

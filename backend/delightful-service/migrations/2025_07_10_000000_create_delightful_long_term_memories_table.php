@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('memory_type', 50)->default('manual_input')->comment('memorytype');
             $table->string('status', 20)->default('pending')->comment('memorystatus:pending-待accept, active-in effect, pending_revision-待revision');
             $table->tinyInteger('enabled')->default(0)->comment('whetherenable:0-disable,1-enable(only active statusmemorycanset)');
-            $table->decimal('confidence', 3, 2)->unsigned()->default(0.8)->comment('置信degree(0-1)');
+            $table->decimal('confidence', 3, 2)->unsigned()->default(0.8)->comment('confidencedegree(0-1)');
             $table->decimal('importance', 3, 2)->unsigned()->default(0.5)->comment('重wantproperty(0-1)');
             $table->unsignedInteger('access_count')->default(0)->comment('accesscount');
             $table->unsignedInteger('reinforcement_count')->default(0)->comment('strong化count');

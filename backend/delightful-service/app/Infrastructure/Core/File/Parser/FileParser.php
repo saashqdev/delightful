@@ -143,7 +143,7 @@ class FileParser
     /**
      * streamdownloadandcontrolfilesize.
      *
-     * @param resource $fileStream 远程filestreamresource
+     * @param resource $fileStream remotefilestreamresource
      * @param resource $localFile 本groundfilestreamresource
      * @param int $maxSize filesizelimit(字section)
      * @throws Exception whenfilesize超限orwritefailo clock

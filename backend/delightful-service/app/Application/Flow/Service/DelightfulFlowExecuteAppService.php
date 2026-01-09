@@ -444,7 +444,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
      */
     public function testRun(Authenticatable $authorization, DelightfulFlowEntity $delightfulFlowEntity, array $triggerConfig): array
     {
-        // get助理info
+        // getassistantinfo
         if ($delightfulFlowEntity->getType() == Type::Main) {
             $delightfulAgentEntity = $this->delightfulAgentDomainService->getByFlowCode($delightfulFlowEntity->getCode());
             $delightfulFlowEntity->setAgentId($delightfulAgentEntity->getId());

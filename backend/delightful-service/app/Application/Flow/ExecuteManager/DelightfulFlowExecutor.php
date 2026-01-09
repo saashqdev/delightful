@@ -223,13 +223,13 @@ class DelightfulFlowExecutor
             'node_debug_result' => $nodeDebugResult->toDesensitizationArray(),
         ]);
 
-        // 归档
+        // archive
         $this->archiveToCloud($vertexResult);
 
         if (! $nodeDebugResult->isSuccess()) {
             // ifis API request,throwerrorinfo
             if ($this->executionData->getExecutionType()->isApi()) {
-                // ifnotis助理parametercall 才recorderrorinfo
+                // ifnotisassistantparametercall 才recorderrorinfo
                 if (! $this->executionData->getTriggerData()->isAssistantParamCall()) {
                     $errorMessage = new Message([], $this->executionData->getOriginConversationId());
                     $errorMessage->setErrorInformation($nodeDebugResult->getErrorMessage());
@@ -507,11 +507,11 @@ class DelightfulFlowExecutor
 
     private function archiveToCloud(VertexResult $vertexResult): void
     {
-        // already经运linepass,alsonot归档
+        // already经运linepass,alsonotarchive
         if ($vertexResult->hasDebugLog('history_vertex_result')) {
             return;
         }
-        // onlytheonelayerprocess才willconduct归档
+        // onlytheonelayerprocess才willconductarchive
         if (! $this->executionData->isTop() || $this->inLoop) {
             return;
         }

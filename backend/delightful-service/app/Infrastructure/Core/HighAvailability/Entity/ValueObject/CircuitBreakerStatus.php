@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\HighAvailability\Entity\ValueObject;
 use InvalidArgumentException;
 
 /**
- * circuit break器status枚举.
+ * circuit break器statusenum.
  */
 enum CircuitBreakerStatus: string
 {
@@ -50,7 +50,7 @@ enum CircuitBreakerStatus: string
     }
 
     /**
-     * fromstringcreate枚举instance.
+     * fromstringcreateenuminstance.
      */
     public static function fromString(string $status): self
     {

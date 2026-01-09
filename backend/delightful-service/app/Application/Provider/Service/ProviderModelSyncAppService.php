@@ -85,7 +85,7 @@ class ProviderModelSyncAppService
             $url = $config->getUrl();
             $apiKey = $config->getApiKey();
             if (! $url || ! $apiKey) {
-                $this->logger->warning('configurationnotcomplete,缺少urlorapi_key', [
+                $this->logger->warning('configurationnotcomplete,missingurlorapi_key', [
                     'config_id' => $providerConfigEntity->getId(),
                     'has_url' => ! empty($url),
                     'has_api_key' => ! empty($apiKey),

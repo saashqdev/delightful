@@ -29,8 +29,8 @@ class ImportAgentWithFlowCommand extends HyperfCommand
         $this->container = $container;
         $this->exportImportService = $container->get(DelightfulFlowExportImportAppService::class);
         parent::__construct('agent:import');
-        $this->setDescription('fromOSSimport助理(contain主process,tool,子processetc)');
-        $this->addArgument('file_url', InputArgument::REQUIRED, 'export助理datafileURL');
+        $this->setDescription('fromOSSimportassistant(contain主process,tool,子processetc)');
+        $this->addArgument('file_url', InputArgument::REQUIRED, 'exportassistantdatafileURL');
         $this->addArgument('user_id', InputArgument::REQUIRED, 'userid');
         $this->addArgument('organization_code', InputArgument::REQUIRED, 'organizationencoding');
     }
@@ -57,19 +57,19 @@ class ImportAgentWithFlowCommand extends HyperfCommand
             $userId = $this->input->getArgument('user_id');
 
             if (empty($orgCode) || empty($userId)) {
-                $this->output->error('importdatamiddle缺少organizationcodeoruserID');
+                $this->output->error('importdatamiddlemissingorganizationcodeoruserID');
                 return 1;
             }
 
             // createdataisolationobject
             $dataIsolation = new FlowDataIsolation($orgCode, $userId);
 
-            // importprocessand助理info
+            // importprocessandassistantinfo
             $result = $this->exportImportService->importFlowWithAgent($dataIsolation, $importData);
-            $this->output->success('助理importsuccess.' . $result['agent_name']);
+            $this->output->success('assistantimportsuccess.' . $result['agent_name']);
             return 0;
         } catch (Throwable $e) {
-            $this->output->error("import助理fail: {$e->getMessage()}");
+            $this->output->error("importassistantfail: {$e->getMessage()}");
             return 1;
         }
     }

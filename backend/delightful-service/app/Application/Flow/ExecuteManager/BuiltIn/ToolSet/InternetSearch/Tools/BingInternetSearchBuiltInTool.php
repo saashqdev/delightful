@@ -36,7 +36,7 @@ class BingInternetSearchBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'Bing互联网search';
+        return 'Binginternetsearch';
     }
 
     public function getCallback(): ?Closure

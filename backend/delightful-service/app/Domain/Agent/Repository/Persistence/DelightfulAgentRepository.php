@@ -257,10 +257,10 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * minutebatchget助理list.
+     * minutebatchgetassistantlist.
      * @param int $offset offsetquantity
      * @param int $limit eachbatchquantity
-     * @return array 助理list
+     * @return array assistantlist
      */
     public function getAgentsByBatch(int $offset, int $limit): array
     {
@@ -278,7 +278,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * queryenterprisedown所have助理,itemitemquery:status,createperson,search.
+     * queryenterprisedown所haveassistant,itemitemquery:status,createperson,search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
@@ -328,7 +328,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * getenterprisedown所have助理create者.
+     * getenterprisedown所haveassistantcreate者.
      * @return array<string>
      */
     public function getOrganizationAgentsCreators(string $organizationCode): array

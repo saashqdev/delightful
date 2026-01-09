@@ -91,7 +91,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
         }
         $hasMatch = (bool) ($data['whetheridentify'] ?? false);
         if ($hasMatch) {
-            $bestIntent = $data['most佳意graph'] ?? '';
+            $bestIntent = $data['mostbest wishesgraph'] ?? '';
             $vertexResult->setChildrenIds($childrenNodes[$bestIntent] ?? []);
         }
     }
@@ -105,7 +105,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         return <<<MARKDOWN
 '# role
-youisone意graphidentifysectionpoint,useatanalyzeuser意graph,youwilltooneshareuserinputcontent,帮Ianalyzeoutuser意graphand置信degree.
+youisone意graphidentifysectionpoint,useatanalyzeuser意graph,youwilltooneshareuserinputcontent,帮Ianalyzeoutuser意graphandconfidencedegree.
 resultneedin限定意graphrangemiddle.
 
 # 技can - 意graphidentify
@@ -113,19 +113,19 @@ willyouresponseformat化for JSON object,format如down:
 {
     "whetheridentify": true,
     "identifyfailreason": "",
-    "most佳意graph": "吃饭",
+    "mostbest wishesgraph": "吃饭",
     "matchto意graphhave": [
         {
             "意graph": "吃饭",
-            "置信degree": 0.8
+            "confidencedegree": 0.8
         },
         {
             "意graph": "睡觉",
-            "置信degree": 0.1
+            "confidencedegree": 0.1
         },
         {
             "意graph": "打游戏",
-            "置信degree": 0.1
+            "confidencedegree": 0.1
         }
     ],
     "deduceprocedure":"",
@@ -133,9 +133,9 @@ willyouresponseformat化for JSON object,format如down:
 }    
 
 # process
-1. youwilltooneshareuserinputcontent,帮Ianalyzeoutuser意graphand置信degree.
-2. inferenceuser意graph,willinferenceprocedure放to JSON middle deduceprocedure field,explainforwhatwilloutthisthese意graphand置信degree.
-3. ifidentifyto意graph,请fill inmost佳matchandmatchto意graph,whetheridentifyfor true,most佳意graph one定is置信degreemosthigh,itsmiddle matchto意graphhave fieldisaccording to 置信degree frombigtosmallrowcolumn.
+1. youwilltooneshareuserinputcontent,帮Ianalyzeoutuser意graphandconfidencedegree.
+2. inferenceuser意graph,willinferenceprocedure放to JSON middle deduceprocedure field,explainforwhatwilloutthisthese意graphandconfidencedegree.
+3. ifidentifyto意graph,请fill inmost佳matchandmatchto意graph,whetheridentifyfor true,mostbest wishesgraph one定isconfidencedegreemosthigh,itsmiddle matchto意graphhave fieldisaccording to confidencedegree frombigtosmallrowcolumn.
 4. ifincurrentrangenothave找toany意graph,whetheridentifyfor false,请fill inidentifyfailreason,most佳matchandmatchto意graphallshouldisempty.
 5. onlywillreturn JSON format,notwillagainreturnothercontent,ifone定needhavereturn,请放toremarkmiddle,return答contentone定canbe JSON toolparse.
 

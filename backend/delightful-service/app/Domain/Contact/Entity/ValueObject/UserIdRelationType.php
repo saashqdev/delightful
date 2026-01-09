@@ -28,7 +28,7 @@ enum UserIdRelationType: int
     case applicationCreatedOrganizationCode = 2;
 
     /**
-     * will枚举typeconvert:
+     * willenumtypeconvert:
      */
     public static function getCaseFromUserIdType(UserIdType $userIdType): self
     {

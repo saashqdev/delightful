@@ -17,7 +17,7 @@ use Throwable;
 use function Hyperf\Translation\trans;
 
 /**
- * ASR taskstatus仓储
+ * ASR taskstatusstorage
  * 统onemanage Redis middletaskstatus CRUD.
  */
 readonly class AsrTaskRepository

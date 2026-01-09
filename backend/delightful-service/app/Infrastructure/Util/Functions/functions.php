@@ -81,7 +81,7 @@ if (! function_exists('camelize')) {
     /**
      * down划line转camel case.
      * @param string $unCamelizeWords needconvertstring
-     * @param string $separator minute隔符
+     * @param string $separator minuteseparator
      */
     function camelize(string $unCamelizeWords, string $separator = '_'): string
     {
@@ -99,9 +99,9 @@ if (! function_exists('camelize')) {
 
 if (! function_exists('un_camelize')) {
     /**
-     * camel case命名转down划line命名.
+     * camel casenaming转down划linenaming.
      * @param string $camelCaps needconvertstring
-     * @param string $separator minute隔符
+     * @param string $separator minuteseparator
      */
     function un_camelize(string $camelCaps, string $separator = '_'): string
     {
@@ -114,7 +114,7 @@ if (! function_exists('un_camelize')) {
 
 if (! function_exists('string_to_hump')) {
     /**
-     * down划line转becomecamel case命名,defaultsmallcamel case.
+     * down划line转becomecamel casenaming,defaultsmallcamel case.
      * @param string $string wantconvertstring
      * @param bool $firstUp whether首字母big写,defaultno
      */
@@ -127,7 +127,7 @@ if (! function_exists('string_to_hump')) {
 
 if (! function_exists('string_to_line')) {
     /**
-     * camel case命名转down划line
+     * camel casenaming转down划line
      * @param string $string wantconvertstring
      */
     function string_to_line(string $string, string $separator = '_'): string

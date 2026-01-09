@@ -22,7 +22,7 @@ return new class extends Migration {
             // to应SQL: delightful_bots.bot_version_id = delightful_bot_versions.id AND delightful_bots.status = '7'
             $table->index(['bot_version_id', 'status'], 'idx_bot_version_status');
 
-            // 2. optimizeenterprise助理query (queriesAgentsmethod)
+            // 2. optimizeenterpriseassistantquery (queriesAgentsmethod)
             // to应SQL: WHERE organization_code = ? AND status = ?
             $table->index(['organization_code', 'status'], 'idx_organization_status');
         });

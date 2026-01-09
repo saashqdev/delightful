@@ -174,7 +174,7 @@ readonly class KnowledgeBaseDocumentDomainService
         // ifdocumentnot存in,createnewdefaultdocument
         $documentEntity = (new KnowledgeBaseDocumentEntity())
             ->setCode($defaultDocumentCode)
-            ->setName('not命名document.txt')
+            ->setName('notnamingdocument.txt')
             ->setKnowledgeBaseCode($knowledgeBaseEntity->getCode())
             ->setCreatedUid($knowledgeBaseEntity->getCreator())
             ->setUpdatedUid($knowledgeBaseEntity->getCreator())

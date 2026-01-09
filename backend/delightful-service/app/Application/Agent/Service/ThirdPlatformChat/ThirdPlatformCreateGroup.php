@@ -12,7 +12,7 @@ class ThirdPlatformCreateGroup
     // 群名
     private string $name;
 
-    // 群主userid
+    // group owneruserid
     private string $owner;
 
     // memberlist
@@ -30,7 +30,7 @@ class ThirdPlatformCreateGroup
     // @all userange: 0(default):所havepersonallcan@all
     private int $mentionAllAuthority = 0;
 
-    // 群managetype:0(default):所havepersoncanmanage,1:only群主canmanage
+    // 群managetype:0(default):所havepersoncanmanage,1:onlygroup ownercanmanage
     private int $managementType = 0;
 
     // whetherstart群禁言:0(default):not禁言,1:all员禁言

@@ -31,7 +31,7 @@ enum DelightfulTokenType: int
     case TeamshareOpenPlatform = 5;
 
     /**
-     * pass枚举valuenamestringget枚举value.
+     * passenumvaluenamestringgetenumvalue.
      */
     public static function getCaseFromName(string $typeName): ?DelightfulTokenType
     {

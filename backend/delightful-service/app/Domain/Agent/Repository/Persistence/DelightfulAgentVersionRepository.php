@@ -26,7 +26,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * get助理version.
+     * getassistantversion.
      */
     public function getAgentById(string $id): DelightfulAgentVersionEntity
     {
@@ -82,7 +82,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * optimizeversion:directlypassJOINquerygetenable助理version,avoidpass inbigquantityID.
+     * optimizeversion:directlypassJOINquerygetenableassistantversion,avoidpass inbigquantityID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -108,7 +108,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * optimizeversion:getenable助理total.
+     * optimizeversion:getenableassistanttotal.
      */
     public function getEnabledAgentsByOrganizationCount(string $organizationCode, string $agentName): int
     {
@@ -183,7 +183,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
             ->update(['enterprise_release_status' => $status]);
     }
 
-    // according to助理idgetmostbig version_number
+    // according toassistantidgetmostbig version_number
     public function getAgentMaxVersion(string $agentId): string
     {
         // queryfinger定 agent_id and user_id downmostbigversionnumber,thiswithinnotcanuse max 取 version,因forwillout现 0.3 greater than 0.10situation,butisactualis 0.10greater than 0.3
@@ -291,9 +291,9 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * based oncursorpaginationgetfinger定organization助理versionlist.
+     * based oncursorpaginationgetfinger定organizationassistantversionlist.
      * @param string $organizationCode organizationcode
-     * @param array $agentVersionIds 助理versionIDlist
+     * @param array $agentVersionIds assistantversionIDlist
      * @param string $cursor cursorID,ifforemptystringthenfrommostnewstart
      * @param int $pageSize each页quantity
      */
@@ -313,7 +313,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * according toidsget助理version.
+     * according toidsgetassistantversion.
      * @return array<DelightfulAgentVersionEntity>
      */
     public function getAgentByIds(array $ids)

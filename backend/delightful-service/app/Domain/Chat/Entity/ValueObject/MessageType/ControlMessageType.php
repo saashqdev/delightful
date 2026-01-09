@@ -75,16 +75,16 @@ enum ControlMessageType: string
     // 群member变more
     case GroupUsersRemove = 'group_users_remove';
 
-    // 解散group chat
+    // dissolvegroup chat
     case GroupDisband = 'group_disband';
 
     // 群memberrole变more(batchquantitysetadministrator/normalmember)
     case GroupUserRoleChange = 'group_user_role_change';
 
-    // 转let群主
+    // 转letgroup owner
     case GroupOwnerChange = 'group_owner_change';
 
-    // 助理交互finger令
+    // assistant交互finger令
     case AgentInstruct = 'bot_instruct';
 
     // translateconfigurationitem

@@ -9,7 +9,7 @@ namespace App\Domain\Group\Entity\ValueObject;
 
 enum GroupUserRoleEnum: int
 {
-    // 群主
+    // group owner
     case OWNER = 1;
 
     // administrator

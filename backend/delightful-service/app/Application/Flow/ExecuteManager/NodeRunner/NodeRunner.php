@@ -239,7 +239,7 @@ abstract class NodeRunner implements NodeRunnerInterface
             if (! is_string($attachment)) {
                 continue;
             }
-            // ifalready经存in,directlyaddtoresultmiddle
+            // ifalreadyalready existsin,directlyaddtoresultmiddle
             $path = get_path_by_url($attachment);
             if ($attachmentObj = $executionData->getAttachmentRecord($path)) {
                 $flowExecutionAttachments[] = $attachmentObj;

@@ -139,22 +139,22 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.no_user_to_remove')]
     case GROUP_NO_USER_TO_REMOVE = 3028;
 
-    // notcan踢out群主
+    // notcan踢outgroup owner
         // Cannot remove the group owner
     #[ErrorMessage('chat.group.group_cannot_kick_owner')]
     case GROUP_CANNOT_KICK_OWNER = 3029;
 
-    // 请先转let群主againexitgroup chat
+    // 请先转letgroup owneragainexitgroup chat
         // Transfer ownership before leaving the group
     #[ErrorMessage('chat.group.transfer_owner_before_leave')]
     case GROUP_TRANSFER_OWNER_BEFORE_LEAVE = 3030;
 
-    // only群主才can解散group chat
+    // onlygroup owner才candissolvegroup chat
         // Only the owner can disband the group
     #[ErrorMessage('chat.group.only_owner_can_disband')]
     case GROUP_ONLY_OWNER_CAN_DISBAND = 3031;
 
-    // only群主才can转letgroup
+    // onlygroup owner才can转letgroup
         // Only the owner can transfer the group
     #[ErrorMessage('chat.group.only_owner_can_transfer')]
     case GROUP_ONLY_OWNER_CAN_TRANSFER = 3032;

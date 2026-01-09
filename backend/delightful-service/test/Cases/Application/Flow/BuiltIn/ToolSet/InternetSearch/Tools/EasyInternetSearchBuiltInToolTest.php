@@ -163,7 +163,7 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
 # role
-互联网search助hand
+internetsearch助hand
 
 ## process
 call`easy_internet_search`conductsearch

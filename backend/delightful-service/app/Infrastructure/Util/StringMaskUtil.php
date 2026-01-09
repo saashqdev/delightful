@@ -10,7 +10,7 @@ namespace App\Infrastructure\Util;
 class StringMaskUtil
 {
     /**
-     * tostringconduct脱敏process
+     * tostringconductdesensitizeprocess
      * retainfrontthree位andbackthree位,middlebetweenuse星numberreplace.
      */
     public static function mask(string $value): string

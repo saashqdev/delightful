@@ -47,7 +47,7 @@ class DelightfulAgentEntity extends AbstractEntity
     protected string $robotAvatar;
 
     /**
-     * 助理description.
+     * assistantdescription.
      */
     protected string $agentDescription = '';
 
@@ -59,7 +59,7 @@ class DelightfulAgentEntity extends AbstractEntity
     protected string $createdUid;
 
     /**
-     * 助理status:enable｜disable.
+     * assistantstatus:enable｜disable.
      */
     protected ?int $status = null;
 

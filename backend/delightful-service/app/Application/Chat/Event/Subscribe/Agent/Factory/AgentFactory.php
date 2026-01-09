@@ -14,7 +14,7 @@ class AgentFactory
 {
     public static function make(string $aiCode): AgentInterface
     {
-        // 暂noneed硬encoding助理,back续havecan复usethefactorylogiccreate硬encoding助理
+        // 暂noneed硬encodingassistant,back续havecan复usethefactorylogiccreate硬encodingassistant
         /* @phpstan-ignore-next-line */
         return match ($aiCode) {
             default => di(DefaultAgent::class),

@@ -357,7 +357,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * prepare移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderConfigModel querybuild器.
+     * prepare移exceptsoft deleteclosefeature,temporarythishow to write.create带have软deletefilter ProviderConfigModel querybuild器.
      */
     protected function createConfigQuery(): Builder
     {

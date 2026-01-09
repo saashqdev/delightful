@@ -237,7 +237,7 @@ readonly class AdminProviderAppService
         // getsavebackmodel实body
         $modelEntity = $this->providerModelDomainService->getById($dataIsolation, $saveProviderModelDTO->getId());
 
-        // 触hair相应event
+        // 触haircorrespondingevent
         if ($isCreate) {
             $this->eventDispatcher->dispatch(new ProviderModelCreatedEvent(
                 $modelEntity,
@@ -265,7 +265,7 @@ readonly class AdminProviderAppService
      */
     public function getOrganizationProvidersModelsByCategory(string $organizationCode, Category $category): array
     {
-        // calldomainlayero clockpass modelTypes parameter,let仓储layercompletequeryandfilter
+        // calldomainlayero clockpass modelTypes parameter,letstoragelayercompletequeryandfilter
         $serviceProviderModelsDTOs = $this->adminProviderDomainService->getOrganizationProvidersModelsByCategory($organizationCode, $category);
 
         // handlegraph标
@@ -290,7 +290,7 @@ readonly class AdminProviderAppService
             $dataIsolation,
             $modelPrimaryId
         );
-        // according toservicequotienttypeandmodeltypeconduct连通propertytest
+        // according toservicequotienttypeandmodeltypeconductconnectedpropertytest
         return match ($this->getConnectivityTestType($providerModelEntity->getCategory()->value, $providerModelEntity->getModelType()->value)) {
             NaturalLanguageProcessing::EMBEDDING => $this->embeddingConnectivityTest($modelPrimaryId, $authorization),
             NaturalLanguageProcessing::LLM => $this->llmConnectivityTest($modelPrimaryId, $authorization),
@@ -608,7 +608,7 @@ readonly class AdminProviderAppService
         }
         $proxyModelRequest->setModel($modelPrimaryId);
         $proxyModelRequest->setInput('test');
-        $proxyModelRequest->setEnableHighAvailability(false); // 连通propertytesto clocknotenablehighcanuse
+        $proxyModelRequest->setEnableHighAvailability(false); // connectedpropertytesto clocknotenablehighcanuse
         $proxyModelRequest->setBusinessParams([
             'organization_id' => $authorization->getOrganizationCode(),
             'user_id' => $authorization->getId(),
@@ -635,7 +635,7 @@ readonly class AdminProviderAppService
         }
         $completionDTO->setMessages([['role' => 'user', 'content' => 'yougood']]);
         $completionDTO->setModel($modelPrimaryId);
-        $completionDTO->setEnableHighAvailability(false); // 连通propertytesto clocknotenablehighcanuse
+        $completionDTO->setEnableHighAvailability(false); // connectedpropertytesto clocknotenablehighcanuse
         $completionDTO->setBusinessParams([
             'organization_id' => $authorization->getOrganizationCode(),
             'user_id' => $authorization->getId(),

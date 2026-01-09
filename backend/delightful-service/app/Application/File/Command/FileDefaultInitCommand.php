@@ -154,7 +154,7 @@ class FileDefaultInitCommand extends Command
                         $mimeType = mime_content_type($filePath) ?: 'image/png';
                         $base64Content = 'data:' . $mimeType . ';base64,' . base64_encode($fileContent);
 
-                        // 完allreference ImageWatermarkProcessor success做法,butfinger定file名
+                        // 完allreference ImageWatermarkProcessor successpractice,butfinger定file名
                         $uploadFile = new UploadFile($base64Content, 'default-files', $fileName);
                         $this->fileDomainService->uploadByCredential(
                             $organizationCode,
@@ -164,7 +164,7 @@ class FileDefaultInitCommand extends Command
 
                         // immediatelyvalidatefilewhethercanget(closekeyvalidatestep)
                         $actualKey = $uploadFile->getKey();
-                        // from key middleextractorganizationencoding,reference ProviderAppService correct做法
+                        // from key middleextractorganizationencoding,reference ProviderAppService correctpractice
                         $keyOrganizationCode = substr($actualKey, 0, strpos($actualKey, '/'));
                         $fileLink = $this->fileDomainService->getLink($keyOrganizationCode, $actualKey, StorageBucketType::Public);
                         if (! $fileLink || ! $fileLink->getUrl()) {

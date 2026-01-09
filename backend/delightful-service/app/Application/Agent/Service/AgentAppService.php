@@ -74,7 +74,7 @@ class AgentAppService extends AbstractAppService
 
         $data = $this->agentDomainService->queries($agentDataIsolation, $query, $page);
 
-        // ifcontainofficialorganization,according topass inIDorder重newsortresult,maintainofficialorganization助理infront
+        // ifcontainofficialorganization,according topass inIDorder重newsortresult,maintainofficialorganizationassistantinfront
         if ($containOfficialOrganization) {
             $data['list'] = $this->sortAgentsByIdOrder($data['list'], $agentIds);
         }
@@ -100,7 +100,7 @@ class AgentAppService extends AbstractAppService
         $contactDataIsolation = $this->createContactDataIsolationByBase($agentDataIsolation);
         $userDepartmentIds = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserId($contactDataIsolation, $agentDataIsolation->getCurrentUserId(), true);
 
-        // ifneedcontainofficialorganization,thenwillofficialorganization助理rowinmostfrontsurface
+        // ifneedcontainofficialorganization,thenwillofficialorganizationassistantrowinmostfrontsurface
         if ($containOfficialOrganization) {
             $officialAgents = [];
             $nonOfficialAgents = [];
@@ -113,7 +113,7 @@ class AgentAppService extends AbstractAppService
                 }
             }
 
-            // 重newsort:officialorganization助理infront
+            // 重newsort:officialorganizationassistantinfront
             $data['list'] = array_merge($officialAgents, $nonOfficialAgents);
         }
         $visibleAgents = [];
@@ -144,11 +144,11 @@ class AgentAppService extends AbstractAppService
     }
 
     /**
-     * according tofinger定IDorderto助理listconductsort.
+     * according tofinger定IDordertoassistantlistconductsort.
      *
-     * @param array<DelightfulAgentEntity> $agents 助理实bodyarray
+     * @param array<DelightfulAgentEntity> $agents assistant实bodyarray
      * @param array $sortedIds sortIDarray
-     * @return array sortback助理array
+     * @return array sortbackassistantarray
      */
     private function sortAgentsByIdOrder(array $agents, array $sortedIds): array
     {

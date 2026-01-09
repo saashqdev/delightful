@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->bigInteger('root_id')->comment('rootid');
             $table->string('robot_name')->comment('assistant name');
             $table->string('robot_avatar')->comment('assistant avatar');
-            $table->string('robot_description')->comment('助理description');
+            $table->string('robot_description')->comment('assistantdescription');
 
             $table->string('version_description', 255)->default('')->comment('description');
             $table->string('version_number')->nullable()->comment('version number');

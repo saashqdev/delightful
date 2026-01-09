@@ -107,9 +107,9 @@ usersendoriginalmessage如down:
 ## titlegeneraterequire
 
 ### prioritylevel原then(non常重want)
-1. **file名priority**:file名usuallyisuser精core命名,containmost核corethemeinfo,请重pointreferenceusermessagemiddle @ backsurfacefile名
+1. **file名priority**:file名usuallyisuser精corenaming,containmost核corethemeinfo,请重pointreferenceusermessagemiddle @ backsurfacefile名
 2. **智canjudge**:
-   - iffile名语义clear(如"2024yearQ4productplanwill议.mp3","customerrequirementdiscussion.wav"),prioritybased onfile名generatetitle
+   - iffile名semanticclear(如"2024yearQ4productplanwill议.mp3","customerrequirementdiscussion.wav"),prioritybased onfile名generatetitle
    - iffile名isdatetime戳(如"20241112_143025.mp3")ornomeaningcharacter(如"recording001.mp3"),thenuse通usedescription
 3. **extractkeyword**:fromfile名middleextractmost核corekeywordandtheme
 

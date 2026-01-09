@@ -262,7 +262,7 @@ sql;
      */
     public function getMessageReceiveList(string $messageId, string $delightfulId, ConversationType $userType): ?array
     {
-        // messagestatushair生变more
+        // messagestatushairchange occursmore
         $statusChangeSeq = $this->delightfulSeq::query()
             ->where('object_id', $delightfulId)
             ->where('object_type', $userType->value)

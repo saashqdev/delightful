@@ -13,7 +13,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 enum ResourceType: int
 {
     /**
-     * AI 助理.
+     * AI assistant.
      */
     case AgentCode = 1;
 

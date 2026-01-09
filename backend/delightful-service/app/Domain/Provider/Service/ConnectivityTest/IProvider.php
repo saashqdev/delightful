@@ -15,7 +15,7 @@ use App\Domain\Provider\DTO\Item\ProviderConfigItem;
 interface IProvider
 {
     /**
-     * 连通propertytest.
+     * connectedpropertytest.
      */
     public function connectivityTestByModel(ProviderConfigItem $serviceProviderConfig, string $modelVersion): ConnectResponse;
 }

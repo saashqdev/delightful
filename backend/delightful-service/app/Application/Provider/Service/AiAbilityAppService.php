@@ -102,7 +102,7 @@ class AiAbilityAppService extends AbstractKernelAppService
             $entity = $this->aiAbilityDomainService->getByCode($dataIsolation, $code);
             $dbConfig = $entity->getConfig();
 
-            // 智canmergeconfiguration(retainbe脱敏api_key)
+            // 智canmergeconfiguration(retainbedesensitizeapi_key)
             $mergedConfig = $this->mergeConfigPreservingApiKeys($dbConfig, $request->getConfig());
             $updateData['config'] = $mergedConfig;
         }
@@ -130,10 +130,10 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * 智canmergeconfiguration(retainbe脱敏api_keyoriginalvalue).
+     * 智canmergeconfiguration(retainbedesensitizeapi_keyoriginalvalue).
      *
      * @param array $dbConfig databaseoriginalconfiguration
-     * @param array $frontendConfig frontclient transmissioncomeconfiguration(maybecontain脱敏api_key)
+     * @param array $frontendConfig frontclient transmissioncomeconfiguration(maybecontaindesensitizeapi_key)
      * @return array mergebackconfiguration
      */
     private function mergeConfigPreservingApiKeys(array $dbConfig, array $frontendConfig): array
@@ -142,7 +142,7 @@ class AiAbilityAppService extends AbstractKernelAppService
 
         // 遍历front端configuration所havefield
         foreach ($frontendConfig as $key => $value) {
-            // ifis api_key fieldandcontain脱敏mark ***
+            // ifis api_key fieldandcontaindesensitizemark ***
             if ($key === 'api_key' && is_string($value) && str_contains($value, '*')) {
                 // usedatabasemiddleoriginalvalue
                 $result[$key] = $dbConfig[$key] ?? $value;

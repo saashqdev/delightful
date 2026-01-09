@@ -202,7 +202,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             $users = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfo, $withDepartmentFullPath);
         }
 
-        // 通讯录andsearch相closeinterface,filterhiddendepartmentandhiddenuser.
+        // address bookandsearch相closeinterface,filterhiddendepartmentandhiddenuser.
         $users = $this->filterDepartmentOrUserHidden($users);
         return PageListAssembler::pageByMysql($users, (int) $dto->getPageToken(), $pageSize, count($dto->getUserIds()));
     }
@@ -231,7 +231,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $usersDetail = $this->getUsersAvatar($usersDetail, $dataIsolation);
         // organizationuser + departmentdetail
         $userDepartmentDetailDTOS = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfoWithFullPath);
-        // 通讯录andsearch相closeinterface,filterhiddendepartmentandhiddenuser.
+        // address bookandsearch相closeinterface,filterhiddendepartmentandhiddenuser.
         $userDepartmentDetailDTOS = $this->filterDepartmentOrUserHidden($userDepartmentDetailDTOS);
         // byat $usersPageResponseDTO  items limitparametertype,fromcodestandardangledegree,again new one通use PageResponseDTO, 按paginationstructurereturn
         // 另outside,byatfilterlogic存in,maybe本timereturn items quantity少at $limit,butisagainhavedownone页.
@@ -368,7 +368,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * foruseraddAgentinfo(applicationlayer协调器).
+     * foruseraddAgentinfo(applicationlayercoordinator).
      * @param array<UserDetailDTO> $usersDetailDTOList
      */
     public function addAgentInfoToUsers(Authenticatable $authorization, array $usersDetailDTOList): array
@@ -417,7 +417,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 通讯录andsearch相closeinterface,filterhiddendepartmentandhiddenuser.
+     * address bookandsearch相closeinterface,filterhiddendepartmentandhiddenuser.
      * @param UserDepartmentDetailDTO[]|UserDetailDTO[] $usersDepartmentDetails
      */
     private function filterDepartmentOrUserHidden(array $usersDepartmentDetails): array
@@ -446,7 +446,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 读私haveor者公have桶,拿avatar.
+     * read privatehaveorpublichave桶,拿avatar.
      * @return UserDetailDTO[]
      */
     private function getUsersAvatar(array $usersDetail, DataIsolation $dataIsolation): array
@@ -455,7 +455,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 读私haveor者公have桶,拿avatar(applicationlayer协调器).
+     * read privatehaveorpublichave桶,拿avatar(applicationlayercoordinator).
      * @param array<UserDetailDTO> $usersDetail
      * @return array<UserDetailDTO>
      */

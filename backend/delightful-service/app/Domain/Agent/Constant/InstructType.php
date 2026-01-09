@@ -304,7 +304,7 @@ enum InstructType: int
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_icon_required');
         }
 
-        // use StatusIcon 枚举verifygraph标value
+        // use StatusIcon enumverifygraph标value
         if (! StatusIcon::isValid($item['icon'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_icon_invalid');
         }
@@ -319,7 +319,7 @@ enum InstructType: int
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_color_required');
         }
 
-        // use TextColor 枚举verifycolorvalue
+        // use TextColor enumverifycolorvalue
         if (! TextColor::isValid($item['text_color'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_color_invalid');
         }

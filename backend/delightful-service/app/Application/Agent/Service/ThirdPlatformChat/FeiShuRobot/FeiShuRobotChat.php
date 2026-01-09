@@ -30,7 +30,7 @@ use Psr\SimpleCache\CacheInterface;
 class FeiShuRobotChat implements ThirdPlatformChatInterface
 {
     /**
-     * 飞书messagetypeconstant.
+     * Feishumessagetypeconstant.
      */
     private const string MESSAGE_TYPE_TEXT = 'text';
 
@@ -41,14 +41,14 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private const string MESSAGE_TYPE_POST = 'post';
 
     /**
-     * 飞书chattypeconstant.
+     * Feishuchattypeconstant.
      */
     private const string CHAT_TYPE_P2P = 'p2p';
 
     private const string CHAT_TYPE_GROUP = 'group';
 
     /**
-     * 飞书eventtypeconstant.
+     * Feishueventtypeconstant.
      */
     private const string EVENT_TYPE_MESSAGE_RECEIVE = 'im.message.receive_v1';
 
@@ -70,7 +70,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private const int DEFAULT_IMAGE_HEIGHT = 300;
 
     /**
-     * 飞书applicationinstance.
+     * Feishuapplicationinstance.
      */
     private Application $application;
 
@@ -89,13 +89,13 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     /**
      * constructfunction.
      *
-     * @param array $options 飞书configurationoption
+     * @param array $options Feishuconfigurationoption
      * @throws Exception ifconfigurationinvalid
      */
     public function __construct(array $options)
     {
         if (empty($options)) {
-            throw new InvalidArgumentException('飞书机器personconfigurationnotcanfornull');
+            throw new InvalidArgumentException('Feishu机器personconfigurationnotcanfornull');
         }
         $options['http'] = [
             'base_uri' => 'https://open.feishu.cn',
@@ -123,7 +123,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
         // checkmessageparameterwhethervalid
         if (empty($params['event']) || empty($params['header'])) {
-            $this->logger->warning('飞书messageparameterinvalid', ['params' => $params]);
+            $this->logger->warning('Feishumessageparameterinvalid', ['params' => $params]);
             $chatMessage->setEvent(ThirdPlatformChatEvent::None);
             return $chatMessage;
         }
@@ -132,7 +132,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
         // poweretcpropertyhandle:usemessageIDconductgo重
         if (! $this->checkMessageIdLock($messageId)) {
-            $this->logger->info('飞书messagealreadyhandlepass,skip', ['message_id' => $messageId]);
+            $this->logger->info('Feishumessagealreadyhandlepass,skip', ['message_id' => $messageId]);
             $chatMessage->setEvent(ThirdPlatformChatEvent::None);
             return $chatMessage;
         }
@@ -142,7 +142,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             return $this->handleMessageReceive($params, $chatMessage);
         }
 
-        $this->logger->info('unknown飞书eventtype', ['event_type' => $eventType]);
+        $this->logger->info('unknownFeishueventtype', ['event_type' => $eventType]);
         return $chatMessage;
     }
 
@@ -168,7 +168,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
         try {
             $content = $message->getContent();
-            // parse Markdown content,convertfor飞书rich textformat
+            // parse Markdown content,convertforFeishurich textformat
             $postContent = $this->parseMarkdownToFeiShuPost($content);
             $data = [
                 'receive_id' => $thirdPlatformChatMessage->getOriginConversationId(),
@@ -185,7 +185,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
             $this->application->message->send($data, 'chat_id');
         } catch (Exception $e) {
-            $this->logger->error('send飞书messagefail', [
+            $this->logger->error('sendFeishumessagefail', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
                 'receive_id' => $thirdPlatformChatMessage->getOriginConversationId(),
@@ -217,7 +217,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      */
     private function handleChallengeCheck(array $params, ThirdPlatformChatMessage $chatMessage): ThirdPlatformChatMessage
     {
-        $this->logger->info('handle飞书service器validaterequest');
+        $this->logger->info('handleFeishuservice器validaterequest');
 
         $chatMessage->setEvent(ThirdPlatformChatEvent::CheckServer);
         $response = new Response(
@@ -324,7 +324,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                 }
             }
 
-            // from飞书APIgetuserinfo
+            // fromFeishuAPIgetuserinfo
             $userInfo = $this->fetchUserInfoFromFeiShu($openId);
             if (empty($userInfo)) {
                 return null;
@@ -357,7 +357,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * from飞书APIgetuserinfo.
+     * fromFeishuAPIgetuserinfo.
      *
      * @param string $openId userOpenID
      * @return array userinfo
@@ -369,13 +369,13 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $userInfo = $this->application->contact->user($openId);
 
             if (empty($userInfo) || ! isset($userInfo['user'])) {
-                $this->logger->warning('from飞书getuserinfofail', ['open_id' => $openId]);
+                $this->logger->warning('fromFeishugetuserinfofail', ['open_id' => $openId]);
                 return [];
             }
 
             return $userInfo['user'];
         } catch (Exception $e) {
-            $this->logger->error('call飞书APIgetuserinfofail', [
+            $this->logger->error('callFeishuAPIgetuserinfofail', [
                 'open_id' => $openId,
                 'error' => $e->getMessage(),
             ]);
@@ -520,7 +520,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * from飞书getfile.
+     * fromFeishugetfile.
      *
      * @param string $messageId messageID
      * @param string $fileKey fileKey
@@ -540,7 +540,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         try {
             return $this->application->file->getIMFile($messageId, $fileKey, $type);
         } catch (Exception $e) {
-            $this->logger->error('get飞书filefail', [
+            $this->logger->error('getFeishufilefail', [
                 'message_id' => $messageId,
                 'file_key' => $fileKey,
                 'file_type' => $type,
@@ -610,9 +610,9 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * parse飞书rich textcontentforMarkdowntext.
+     * parseFeishurich textcontentforMarkdowntext.
      *
-     * @param array $content 飞书rich textcontent
+     * @param array $content Feishurich textcontent
      * @param string $organizationCode organizationcode
      * @param string $messageId messageID
      * @return array parseresult,containmarkdowntextandattachment
@@ -732,15 +732,15 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * parseMarkdowncontent,convertfor飞书rich textformat
+     * parseMarkdowncontent,convertforFeishurich textformat
      * onlyhandleimage,othercontentall部usemd样type.
      *
      * @param string $markdown Markdowncontent
-     * @return array 飞书rich textformat
+     * @return array Feishurich textformat
      */
     private function parseMarkdownToFeiShuPost(string $markdown): array
     {
-        // initialize飞书rich textstructure
+        // initializeFeishurich textstructure
         $postContent = [
             'title' => '',
             'content' => [],

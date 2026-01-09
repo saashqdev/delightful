@@ -297,7 +297,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 解散group chat.
+     * dissolvegroup chat.
      */
     public function groupDelete(string $id): array
     {

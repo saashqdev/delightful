@@ -176,7 +176,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 // todo one定want做! publishsubscribeuserabbitmqimplement,notagainuseredispub/sub. meanwhile,pushbackneedcustomer端returnack,然backupdateseqstatus
                 // todo one定want做! only推seq_id,publishsubscribe收toseq_idback,againgodatabase查seqdetail,again推givecustomer端
                 $pushData = SeqAssembler::getClientSeqStruct($selfSeqEntity, $messageEntity)->toArray();
-                // notprint敏感info
+                // notprintsensitiveinfo
                 $pushLogData = [
                     'delightful_id' => $pushData['seq']['delightful_id'],
                     'seq_id' => $pushData['seq']['seq_id'],
@@ -327,7 +327,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
     }
 
     /**
-     * 协程calldelightful flow,handleuserhaircomemessage.
+     * coroutinecalldelightful flow,handleuserhaircomemessage.
      */
     private function userCallFlow(AccountEntity $agentAccountEntity, DelightfulUserEntity $agentUserEntity, DelightfulUserEntity $senderUserEntity, DelightfulSeqEntity $seqEntity): void
     {
@@ -342,9 +342,9 @@ class DelightfulSeqDomainService extends AbstractDomainService
         if ($messageType instanceof ChatMessageType || $seqEntity->canTriggerFlow()) {
             // getusertrue名
             $senderAccountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($senderUserEntity->getDelightfulId());
-            // open协程,copy requestId
+            // opencoroutine,copy requestId
             $requestId = CoContext::getRequestId();
-            // 协程透传language
+            // coroutine透传language
             $language = di(TranslatorInterface::class)->getLocale();
 
             $this->logger->info('userCallFlow language: ' . $language);

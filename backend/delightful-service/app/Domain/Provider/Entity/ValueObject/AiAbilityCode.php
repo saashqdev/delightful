@@ -8,16 +8,16 @@ declare(strict_types=1);
 namespace App\Domain\Provider\Entity\ValueObject;
 
 /**
- * AI can力code枚举.
+ * AI can力codeenum.
  */
 enum AiAbilityCode: string
 {
     case Unknown = 'unknown';                          // unknowncan力
     case Ocr = 'ocr';                                      // OCR identify
-    case WebSearch = 'web_search';                         // 互联网search
+    case WebSearch = 'web_search';                         // internetsearch
     case RealtimeSpeechRecognition = 'realtime_speech_recognition';  // 实o clockvoiceidentify
     case AudioFileRecognition = 'audio_file_recognition';  // audiofileidentify
-    case AutoCompletion = 'auto_completion';               // from动补all
+    case AutoCompletion = 'auto_completion';               // fromauto supplementall
     case ContentSummary = 'content_summary';               // contentsummary
     case VisualUnderstanding = 'visual_understanding';     // visualcomprehend
     case SmartRename = 'smart_rename';                     // 智canrename
@@ -30,10 +30,10 @@ enum AiAbilityCode: string
     {
         return match ($this) {
             self::Ocr => 'OCR identify',
-            self::WebSearch => '互联网search',
+            self::WebSearch => 'internetsearch',
             self::RealtimeSpeechRecognition => '实o clockvoiceidentify',
             self::AudioFileRecognition => 'audiofileidentify',
-            self::AutoCompletion => 'from动补all',
+            self::AutoCompletion => 'fromauto supplementall',
             self::ContentSummary => 'contentsummary',
             self::VisualUnderstanding => 'visualcomprehend',
             self::SmartRename => '智canrename',
@@ -48,15 +48,15 @@ enum AiAbilityCode: string
     public function description(): string
     {
         return match ($this) {
-            self::Ocr => '本can力覆盖platform所have OCR applicationscenario,precise捕捉andextract PDF,扫描itemandeachcategoryimagemiddletextinfo.',
-            self::WebSearch => '本can力覆盖platform AI bigmodel互联网searchscenario,precisegetand整合mostnewnew闻,事实anddatainfo.',
-            self::RealtimeSpeechRecognition => '本can力覆盖platform所havevoice转textapplicationscenario,实o clocklisteneraudiostreamand逐步outputaccuratetextcontent.',
-            self::AudioFileRecognition => '本can力覆盖platform所haveaudiofile转textapplicationscenario,preciseidentify说话person,audiotextetcinfo.',
-            self::AutoCompletion => '本can力覆盖platform所haveinputcontentfrom动补allapplicationscenario,according tocomprehendupdown文foruserfrom动补allcontent,byuserchoosewhether采纳.',
-            self::ContentSummary => '本can力覆盖platform所havecontentsummaryapplicationscenario,tolong篇document,reportorwebpage文chapterconduct深degreeanalyze.',
-            self::VisualUnderstanding => '本can力覆盖platform所haveneedletbigmodelconductvisualcomprehendapplicationscenario,precisecomprehendeachtypegraphlikemiddlecontentbyandcomplexclose系.',
-            self::SmartRename => '本can力覆盖platform所havesupport AI renameapplicationscenario,according tocomprehendupdown文foruserfrom动conductcontenttitle命名.',
-            self::AiOptimization => '本can力覆盖platform所havesupport AI optimizecontentapplicationscenario,according tocomprehendupdown文foruserfrom动tocontentconductoptimize.',
+            self::Ocr => '本cancoverageplatform所have OCR applicationscenario,precise捕捉andextract PDF,扫描itemandeachcategoryimagemiddletextinfo.',
+            self::WebSearch => '本cancoverageplatform AI bigmodelinternetsearchscenario,precisegetand整合mostnewnew闻,事实anddatainfo.',
+            self::RealtimeSpeechRecognition => '本cancoverageplatform所havevoice转textapplicationscenario,实o clocklisteneraudiostreamand逐步outputaccuratetextcontent.',
+            self::AudioFileRecognition => '本cancoverageplatform所haveaudiofile转textapplicationscenario,preciseidentify说话person,audiotextetcinfo.',
+            self::AutoCompletion => '本cancoverageplatform所haveinputcontentfromauto supplementallapplicationscenario,according tocomprehendupdown文foruserfromauto supplementallcontent,byuserchoosewhether采纳.',
+            self::ContentSummary => '本cancoverageplatform所havecontentsummaryapplicationscenario,tolong篇document,reportorwebpage文chapterconduct深degreeanalyze.',
+            self::VisualUnderstanding => '本cancoverageplatform所haveneedletbigmodelconductvisualcomprehendapplicationscenario,precisecomprehendeachtypegraphlikemiddlecontentbyandcomplexclose系.',
+            self::SmartRename => '本cancoverageplatform所havesupport AI renameapplicationscenario,according tocomprehendupdown文foruserfrom动conductcontenttitlenaming.',
+            self::AiOptimization => '本cancoverageplatform所havesupport AI optimizecontentapplicationscenario,according tocomprehendupdown文foruserfrom动tocontentconductoptimize.',
             default => 'Unknown',
         };
     }

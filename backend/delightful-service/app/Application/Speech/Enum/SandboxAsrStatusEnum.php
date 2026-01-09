@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\Speech\Enum;
 
 /**
- * sandbox ASR taskstatus枚举.
+ * sandbox ASR taskstatusenum.
  *
  * 【asuse域】outside部system - sandboxaudiomergeservice
  * 【use途】table示sandboxmiddleaudiomergetaskexecutestatus
@@ -16,7 +16,7 @@ namespace App\Application\Speech\Enum;
  * - callsandbox finishTask interfaceround询statusjudge
  * - judgeaudiominuteslicemergewhethercomplete
  *
- * 【andother枚举区别】
+ * 【andotherenum区别】
  * - AsrRecordingStatusEnum: front端recording实o clockstatus(recording交互layer)
  * - AsrTaskStatusEnum: inside部taskallprocessstatus(businessmanagelayer)
  * - SandboxAsrStatusEnum: sandboxmergetaskstatus(infrastructurelayer)✓ current
@@ -75,7 +75,7 @@ enum SandboxAsrStatusEnum: string
     }
 
     /**
-     * fromstringsecuritycreate枚举.
+     * fromstringsecuritycreateenum.
      */
     public static function fromString(string $status): ?self
     {

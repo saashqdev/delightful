@@ -109,8 +109,8 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
         "agent_id": {
             "type": "string",
             "key": "agent_id",
-            "title": "助理ID",
-            "description": "助理ID, ifforempty,thenusecurrent助理D",
+            "title": "assistantID",
+            "description": "assistantID, ifforempty,thenusecurrentassistantD",
             "required": null,
             "value": null,
             "encryption": false,

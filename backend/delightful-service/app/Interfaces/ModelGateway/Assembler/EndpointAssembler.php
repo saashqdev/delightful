@@ -35,7 +35,7 @@ class EndpointAssembler
      */
     public static function extractOriginalModelId(string $formattedModelId): string
     {
-        // 遍历所have HighAvailabilityAppType 枚举value
+        // 遍历所have HighAvailabilityAppType enumvalue
         foreach (HighAvailabilityAppType::cases() as $appType) {
             $prefix = $appType->value . DelimiterType::HIGH_AVAILABILITY->value;
 
@@ -57,7 +57,7 @@ class EndpointAssembler
      */
     public static function isFormattedEndpointType(string $modelId): bool
     {
-        // 遍历所have HighAvailabilityAppType 枚举value
+        // 遍历所have HighAvailabilityAppType enumvalue
         foreach (HighAvailabilityAppType::cases() as $appType) {
             $prefix = $appType->value . DelimiterType::HIGH_AVAILABILITY->value;
             if (str_starts_with($modelId, $prefix)) {

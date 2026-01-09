@@ -85,7 +85,7 @@ class DelightfulAgentApi extends AbstractApi
         return AgentAssembler::createAvailableList($page, $data['total'], $data['list'], $data['icons']);
     }
 
-    // create/modify助理
+    // create/modifyassistant
     public function saveAgent(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -122,7 +122,7 @@ class DelightfulAgentApi extends AbstractApi
         return $entityArray;
     }
 
-    // delete助理
+    // deleteassistant
     public function deleteAgentById(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -131,7 +131,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->deleteAgentById($authorization, $agentId);
     }
 
-    // getcurrentuser助理
+    // getcurrentuserassistant
 
     /**
      * @deprecated
@@ -156,7 +156,7 @@ class DelightfulAgentApi extends AbstractApi
         return $agentsByUserIdPage;
     }
 
-    // getpublishversion助理
+    // getpublishversionassistant
     public function getAgentVersionById(RequestInterface $request, ?string $agentVersionId = null)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -167,7 +167,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAssembler::createAgentV1Response($delightfulAgentVO, $delightfulFlowDTO);
     }
 
-    // getenterpriseinside部助理
+    // getenterpriseinside部assistant
     public function getAgentsByOrganization(RequestInterface $request)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -178,7 +178,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getAgentsByOrganizationPage($authenticatable, $page, $pageSize, $agentName);
     }
 
-    // getapplicationmarket助理
+    // getapplicationmarketassistant
     public function getAgentsFromMarketplace(RequestInterface $request)
     {
         $this->getAuthorization();
@@ -187,7 +187,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getAgentsFromMarketplacePage($page, $pageSize);
     }
 
-    // publish助理version
+    // publishassistantversion
 
     /**
      * @throws Throwable
@@ -232,13 +232,13 @@ class DelightfulAgentApi extends AbstractApi
 
         if ($result['is_add_friend']) {
             $friendId = $userEntity->getUserId();
-            // addgood友,助理defaultagreegood友
+            // addgood友,assistantdefaultagreegood友
             $this->userAppService->addFriend($authorization, $friendId, AddFriendType::PASS);
         }
         return $result;
     }
 
-    // query助理versionrecord
+    // queryassistantversionrecord
     public function getReleaseAgentVersions(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -247,7 +247,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getReleaseAgentVersions($authenticatable, $agentId);
     }
 
-    // get助理mostnewversionnumber
+    // getassistantmostnewversionnumber
     public function getAgentMaxVersion(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -256,7 +256,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getAgentMaxVersion($authorization, $agentId);
     }
 
-    // enable｜disable助理
+    // enable｜disableassistant
     public function updateAgentStatus(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -266,7 +266,7 @@ class DelightfulAgentApi extends AbstractApi
         $this->delightfulAgentAppService->updateAgentStatus($authorization, $agentId, DelightfulAgentVersionStatus::from($status));
     }
 
-    // alter助理publishtoorganizationstatus
+    // alterassistantpublishtoorganizationstatus
     public function updateAgentEnterpriseStatus(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -276,7 +276,7 @@ class DelightfulAgentApi extends AbstractApi
         $this->delightfulAgentAppService->updateAgentEnterpriseStatus($authorization, $agentId, $status, $authorization->getId());
     }
 
-    // get助理detail
+    // getassistantdetail
     public function getAgentDetailByAgentId(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -301,7 +301,7 @@ class DelightfulAgentApi extends AbstractApi
         $aiCode = $delightfulAgentVersionEntity->getFlowCode();
         $userEntity = $this->accountAppService->aiRegister($userDTO, $authorization, $aiCode);
         $friendId = $userEntity->getUserId();
-        // addgood友,助理defaultagreegood友
+        // addgood友,assistantdefaultagreegood友
         $this->userAppService->addFriend($authorization, $friendId, AddFriendType::PASS);
 
         return $userEntity;
@@ -315,7 +315,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->isUpdated($authenticatable, $agentId);
     }
 
-    // according to userId getpublishversion助理detail
+    // according to userId getpublishversionassistantdetail
     public function getDetailByUserId(RequestInterface $request, ?string $userId = null)
     {
         $this->getAuthorization();
@@ -363,7 +363,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->saveInstruct($authenticatable, $agentId, $instructs);
     }
 
-    // getchat模typecanuse助理list
+    // getchat模typecanuseassistantlist
     public function getChatModeAvailableAgents()
     {
         /** @var DelightfulUserAuthorization $authenticatable */

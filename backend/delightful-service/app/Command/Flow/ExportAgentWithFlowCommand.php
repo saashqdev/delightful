@@ -53,23 +53,23 @@ class ExportAgentWithFlowCommand extends HyperfCommand
     {
         $agentId = $this->input->getArgument('agent_id');
 
-        // get助理info
+        // getassistantinfo
         $agent = $this->agentDomainService->getById($agentId);
 
         $flowCode = $agent->getFlowCode();
         if (empty($flowCode)) {
-            $this->output->error('助理nothaveassociateprocess');
+            $this->output->error('assistantnothaveassociateprocess');
             return 1;
         }
 
-        // from助理实bodymiddlegetorganizationcodeanduserID
+        // fromassistant实bodymiddlegetorganizationcodeanduserID
         $orgCode = $agent->getOrganizationCode();
         $userId = $agent->getCreatedUid();
 
         // createdataisolationobject
         $dataIsolation = new FlowDataIsolation($orgCode, $userId);
 
-        // exportprocessand助理info
+        // exportprocessandassistantinfo
         $exportData = $this->exportImportService->exportFlowWithAgent($dataIsolation, $flowCode, $agent);
 
         // willdatasavefortemporaryfile

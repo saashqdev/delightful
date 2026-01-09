@@ -86,7 +86,7 @@ readonly class AsrSandboxResponseHandler
      * fromfilepathextractdirectorypath.
      *
      * @param array $fileInfo fileinfo
-     * @return string directorypath(work区相topath)
+     * @return string directorypath(workregiontopath)
      */
     private function extractDirectoryPath(array $fileInfo): string
     {
@@ -101,7 +101,7 @@ readonly class AsrSandboxResponseHandler
 
     /**
      * according toresponseaudiofile名/filepath,找toaudiofile id,useatback续hairchatmessage.
-     * useround询机制etc待sandboxsyncfiletodatabase(at mostetc待 30 second).
+     * useroundinquiry mechanismetc待sandboxsyncfiletodatabase(at mostetc待 30 second).
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param array $audioFile audiofileinfo
@@ -149,7 +149,7 @@ readonly class AsrSandboxResponseHandler
 
     /**
      * according toresponsenotefilepath,找tonotefile id.
-     * useround询机制etc待sandboxsyncfiletodatabase(at mostetc待 30 second).
+     * useroundinquiry mechanismetc待sandboxsyncfiletodatabase(at mostetc待 30 second).
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param array $noteFile notefileinfo

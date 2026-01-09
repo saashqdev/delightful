@@ -15,17 +15,17 @@ class AvailableAgentDTO extends AbstractDTO
     use StringIdDTOTrait;
 
     /**
-     * 助理name.
+     * assistantname.
      */
     public string $name;
 
     /**
-     * 助理avatar.
+     * assistantavatar.
      */
     public string $avatar;
 
     /**
-     * 助理description.
+     * assistantdescription.
      */
     public string $description;
 

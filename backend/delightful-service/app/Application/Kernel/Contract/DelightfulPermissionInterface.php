@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\Kernel\Contract;
 
 /**
- * permission枚举interface
+ * permissionenuminterface
  * providepermissionmanage统oneabstract
  */
 interface DelightfulPermissionInterface

@@ -854,7 +854,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // trygetlock,timeouttimesettingfor60second
         if (! $this->redisLocker->mutexLock($lockKey, $userId, 60)) {
             $this->logger->warning(sprintf('get initAgents lockfail, orgCode: %s, userId: %s', $orgCode, $userId));
-            // getlockfail,canchoosedirectlyreturnorthrowexception,thiswithinchoosedirectlyreturnavoid阻塞
+            // getlockfail,canchoosedirectlyreturnorthrowexception,thiswithinchoosedirectlyreturnavoidblocking
             return;
         }
 
@@ -888,7 +888,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $loadPresetConfig = $this->loadPresetConfig('chat', ['modelName' => $modelName]);
         // preparebasicconfiguration
         $config = [
-            'agent_name' => '麦吉assistant',
+            'agent_name' => 'Magicassistant',
             'agent_description' => 'Iwillreturn答youone切',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],
@@ -917,7 +917,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // preparebasicconfiguration
         $config = [
             'agent_name' => 'text generationgraph助hand',
-            'agent_description' => 'onestrongbigAItextgenerategraphlike助hand,canaccording to您descriptioncreate精美graphlike.',
+            'agent_description' => 'onestrongbigAItextgenerategraphlike助hand,canaccording to您descriptioncreateexquisitegraphlike.',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],
             'instruct' => $loadPresetConfig['instructs'],

@@ -43,7 +43,7 @@ class DelightfulAgentDTO extends AbstractDTO
     public string $robotAvatar;
 
     /**
-     * 助理description.
+     * assistantdescription.
      */
     public string $agentDescription;
 
@@ -55,7 +55,7 @@ class DelightfulAgentDTO extends AbstractDTO
     public string $createdUid;
 
     /**
-     * 助理status:enable｜disable.
+     * assistantstatus:enable｜disable.
      */
     public ?int $status = null;
 

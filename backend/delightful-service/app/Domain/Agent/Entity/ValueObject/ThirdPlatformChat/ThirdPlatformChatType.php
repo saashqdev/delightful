@@ -20,7 +20,7 @@ enum ThirdPlatformChatType: string
     case WeChatRobot = 'wechat_robot';
 
     /**
-     * 飞书机器person.
+     * Feishu机器person.
      */
     case FeiShuRobot = 'fei_shu_robot';
 

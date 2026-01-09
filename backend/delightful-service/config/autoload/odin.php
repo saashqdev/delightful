@@ -279,7 +279,7 @@ return [
                     'usage.output_tokens',         // outputtokenquantity
                     'usage.total_tokens',          // 总tokenquantity
 
-                    // requestparameter(rowexcept敏感content)
+                    // requestparameter(rowexceptsensitivecontent)
                     'args.temperature',            // 温degreeparameter
                     'args.max_tokens',             // mostbigtokenlimit
                     'args.max_completion_tokens',             // mostbigtokenlimit
@@ -292,9 +292,9 @@ return [
                     'args.seed',                   // randomtype子
 
                     // Token预估info
-                    'token_estimate',              // Token估算detail
-                    'token_estimate.input_tokens', // 估算inputtokens
-                    'token_estimate.output_tokens', // 估算outputtokens
+                    'token_estimate',              // Tokenestimatedetail
+                    'token_estimate.input_tokens', // estimateinputtokens
+                    'token_estimate.output_tokens', // estimateoutputtokens
 
                     // responsecontent(rowexceptspecificcontent)
                     'choices.0.finish_reason',     // completereason

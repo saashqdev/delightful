@@ -131,7 +131,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->pinProject($projectId, true);
         $this->pinProject($projectId, true); // duplicate置top
 
-        // validateproject仍然is置topstatus
+        // validateprojectstillis置topstatus
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
@@ -619,7 +619,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->joinFileEditing($fileId);
         $this->joinFileEditing($fileId); // duplicateadd入
 
-        // validateuserquantity仍然is1
+        // validateuserquantitystillis1
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
@@ -881,10 +881,10 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         // validatecreate者datastructure
         $creator = $response['data'][0];
-        $this->assertArrayHasKey('id', $creator, 'create者应containidfield');
-        $this->assertArrayHasKey('name', $creator, 'create者应containnamefield');
-        $this->assertArrayHasKey('user_id', $creator, 'create者应containuser_idfield');
-        $this->assertArrayHasKey('avatar_url', $creator, 'create者应containavatar_urlfield');
+        $this->assertArrayHasKey('id', $creator, 'createshouldcontainidfield');
+        $this->assertArrayHasKey('name', $creator, 'createshouldcontainnamefield');
+        $this->assertArrayHasKey('user_id', $creator, 'createshouldcontainuser_idfield');
+        $this->assertArrayHasKey('avatar_url', $creator, 'createshouldcontainavatar_urlfield');
 
         // validatefieldtype
         $this->assertIsString($creator['id'], 'idshouldisstring');

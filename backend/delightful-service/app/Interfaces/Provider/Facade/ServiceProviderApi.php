@@ -113,7 +113,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 连通propertytest.
+     * connectedpropertytest.
      * @throws Exception
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]

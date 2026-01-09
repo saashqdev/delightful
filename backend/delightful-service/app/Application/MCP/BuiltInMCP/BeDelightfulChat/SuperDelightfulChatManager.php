@@ -91,9 +91,9 @@ class BeDelightfulChatManager
 
         // 2. generateonesharebigmodelcalltoolcanreaddescription
         $description = <<<'MARKDOWN'
-call麦吉 AI 助理conductconversation
+callMagic AI assistantconductconversation
 
-canuse AI 助理list:
+canuse AI assistantlist:
 
 MARKDOWN;
 
@@ -170,11 +170,11 @@ MARKDOWN;
                     'properties' => [
                         'agent_id' => [
                             'type' => 'string',
-                            'description' => 'wantcall AI 助理 ID',
+                            'description' => 'wantcall AI assistant ID',
                         ],
                         'message' => [
                             'type' => 'string',
-                            'description' => 'sendgive AI 助理messagecontent',
+                            'description' => 'sendgive AI assistantmessagecontent',
                         ],
                         'conversation_id' => [
                             'type' => 'string',
@@ -267,13 +267,13 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => 'finger令parameterarray,useatcontrolAI助理linefor.eachobjectcontain name(finger令name)and value(finger令value)field.single-selecttypefinger令needfromoptionalvaluemiddlechooseone,switchtypefinger令onlycanis "on" or "off".',
+            'description' => 'finger令parameterarray,useatcontrolAIassistantlinefor.eachobjectcontain name(finger令name)and value(finger令value)field.single-selecttypefinger令needfromoptionalvaluemiddlechooseone,switchtypefinger令onlycanis "on" or "off".',
             'items' => [
                 'type' => 'object',
                 'properties' => [
                     'name' => [
                         'type' => 'string',
-                        'description' => 'finger令name,mustandAI助理definitionfinger令name完allmatch',
+                        'description' => 'finger令name,mustandAIassistantdefinitionfinger令name完allmatch',
                     ],
                     'value' => [
                         'type' => 'string',

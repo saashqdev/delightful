@@ -696,7 +696,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     {
         // according toactualsituationimplementcleanuplogic
         // candirectlycalldatabase操asdeletetestdata
-        // or者call相应servicemethod
+        // or者callcorrespondingservicemethod
     }
 
     protected function createKnowledgeBase(array $data = []): array

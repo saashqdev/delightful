@@ -551,7 +551,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * according toalready经存inchat相close seqEntity,give群membergenerateconversationwindow.
+     * according toalreadyalready existsinchat相close seqEntity,give群membergenerateconversationwindow.
      */
     public function generateGroupSeqEntityByChatSeq(
         array $userEntity,

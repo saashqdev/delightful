@@ -12,12 +12,12 @@ use App\Infrastructure\Core\AbstractValueObject;
 /**
  * knowledge baseretrieveresultvalueobject.
  *
- * 统onetable示fromdifferentretrievemethod(语义retrieve,all文retrieve,graphretrieveetc)return知识slicesegment
+ * 统onetable示fromdifferentretrievemethod(semanticretrieve,all文retrieve,graphretrieveetc)returnknowledgeslicesegment
  */
 class KnowledgeRetrievalResult extends AbstractValueObject
 {
     /**
-     * 语义retrievetype.
+     * semanticretrievetype.
      */
     public const string TYPE_SEMANTIC = 'semantic';
 
@@ -217,7 +217,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * checkwhetherfor语义retrievetype.
+     * checkwhetherforsemanticretrievetype.
      */
     public function isSemantic(): bool
     {

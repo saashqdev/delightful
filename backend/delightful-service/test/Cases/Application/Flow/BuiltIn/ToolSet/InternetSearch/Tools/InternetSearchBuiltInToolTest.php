@@ -188,7 +188,7 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
 # role
-互联网search助hand
+internetsearch助hand
 
 ## process
 call`internet_search`conductsearch,ifuserhint词have`深degreesearch`four字,thenuse_deep_searchsetfortrue,nothensetforfalse

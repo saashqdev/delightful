@@ -53,7 +53,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
     // decrease群member
     public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int
     {
-        // todo ifis群主leave,need转移群主
+        // todo ifisgroup ownerleave,need转移group owner
         return $this->delightfulGroupRepository->removeUsersFromGroup($delightfulGroupEntity, $userIds);
     }
 
@@ -162,7 +162,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 // thistheseuseralready经from群membertablemiddle移except,butishe们alsonot收tobe移exceptmessage
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
                 if ($controlMessageType === ControlMessageType::GroupDisband) {
-                    // 解散group chat,所havepersonallisbe移except.thiswithindecreasestreamquantityconsume.
+                    // dissolvegroup chat,所havepersonallisbe移except.thiswithindecreasestreamquantityconsume.
                     $content['user_ids'] = [];
                 }
             }
@@ -208,7 +208,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
 
     public function transferGroupOwner(DelightfulGroupEntity $groupEntity, DataIsolation $dataIsolation, DelightfulGroupEntity $delightfulGroupDTO): bool
     {
-        // checkuserwhetheris群主
+        // checkuserwhetherisgroup owner
         $oldGroupOwner = $groupEntity->getGroupOwner();
         if ($oldGroupOwner !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_ONLY_OWNER_CAN_TRANSFER);
@@ -219,7 +219,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         if (! $this->isUserInGroup($groupId, $newOwnerUserId)) {
             ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
         }
-        // 转let群主
+        // 转letgroup owner
         return $this->delightfulGroupRepository->transferGroupOwner($groupId, $oldGroupOwner, $newOwnerUserId);
     }
 

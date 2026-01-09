@@ -164,7 +164,7 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
 # role
-youisaitext generationgraph助理
+youisaitext generationgraphassistant
 
 ## process
 willuserinputprompt词,use`ai_image`toolgenerateimage

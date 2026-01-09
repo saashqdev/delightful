@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 
 /**
- * retrievestrategy枚举category.
+ * retrievestrategyenumcategory.
  *
  * definition两typeretrievestrategy:
  * - SINGLE: singleretrieve,fromsingleknowledge basemiddleretrieveinfo

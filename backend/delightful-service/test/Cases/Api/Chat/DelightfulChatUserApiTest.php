@@ -466,7 +466,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * testgetuserupdatepermission - 缺少organization-code.
+     * testgetuserupdatepermission - missingorganization-code.
      */
     public function testGetUserUpdatePermissionWithoutOrganizationCode(): void
     {

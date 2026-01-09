@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\Volcengine\ValueObject;
 
 /**
- * Volcanoenginevoiceidentifystatus码枚举.
+ * Volcanoenginevoiceidentifystatus码enum.
  */
 enum VolcengineStatusCode: string
 {
@@ -110,7 +110,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * according tostatus码stringcreate枚举instance.
+     * according tostatus码stringcreateenuminstance.
      */
     public static function fromString(string $statusCode): ?self
     {

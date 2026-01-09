@@ -76,13 +76,13 @@ class ResponseMiddleware implements MiddlewareInterface
             throw $throwable;
         } finally {
             $endTime = microtime(true);
-            // avoid阻塞response
+            // avoidblockingresponse
             defer(function () use ($request, $response, $startTime, $endTime) {
                 $path = $request->getUri()->getPath();
                 if (in_array($path, $this->ignoreUris, true)) {
                     return;
                 }
-                // temporaryaddonedown敏感filter
+                // temporaryaddonedownsensitivefilter
                 if (! str_contains($path, 'aes')) {
                     $this->logger->info('requesttraceinformation', $this->formatMessage($request, $response, $startTime, $endTime));
                 }

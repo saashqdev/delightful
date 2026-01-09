@@ -24,7 +24,7 @@ enum ImageGenerateModelType: string
     case GoogleGemini = 'GoogleGemini';
     case VolcengineArk = 'VolcengineArk';
 
-    // 目front美graphai超清model_id
+    // 目front美graphaiultra clearmodel_id
     case MiracleVisionHightModelId = 'miracleVision_mtlab';
 
     // officialservicequotient

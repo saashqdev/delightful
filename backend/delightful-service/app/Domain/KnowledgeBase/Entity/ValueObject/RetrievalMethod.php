@@ -8,22 +8,22 @@ declare(strict_types=1);
 namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 
 /**
- * retrievemethod枚举category.
+ * retrievemethodenumcategory.
  *
  * definitionfourtyperetrievemethod:
- * - SEMANTIC_SEARCH: 语义retrieve,based ontoquantitysimilardegreeretrievemethod
+ * - SEMANTIC_SEARCH: semanticretrieve,based ontoquantitysimilardegreeretrievemethod
  * - FULL_TEXT_SEARCH: all文retrieve,based onkeywordmatchretrievemethod
- * - HYBRID_SEARCH: 混合retrieve,combine语义retrieveandall文retrievemethod
- * - GRAPH_SEARCH: graphretrieve,based on知识graph谱retrievemethod
+ * - HYBRID_SEARCH: 混合retrieve,combinesemanticretrieveandall文retrievemethod
+ * - GRAPH_SEARCH: graphretrieve,based onknowledgegraph谱retrievemethod
  */
 class RetrievalMethod
 {
     /**
-     * 语义retrieve.
+     * semanticretrieve.
      *
      * based ontoquantitysimilardegreeretrievemethod.
      * willquerytextconvertfortoquantity,然backintoquantitydatabasemiddlefindmostsimilardocument.
-     * 适合comprehend语义close系,多languagecomprehend,processblurdescription.
+     * suitablecomprehendsemanticclose系,多languagecomprehend,processblurdescription.
      */
     public const string SEMANTIC_SEARCH = 'semantic_search';
 
@@ -32,14 +32,14 @@ class RetrievalMethod
      *
      * based onkeywordmatchretrievemethod.
      * indexdocumentmiddle所havesingle词,returncontainquery词textslicesegment.
-     * 适合precisematch(如productname,person名,ID)andlow频词match.
+     * suitableprecisematch(如productname,person名,ID)andlow频词match.
      */
     public const string FULL_TEXT_SEARCH = 'full_text_search';
 
     /**
      * 混合retrieve.
      *
-     * combine语义retrieveandall文retrievemethod.
+     * combinesemanticretrieveandall文retrievemethod.
      * meanwhileexecuteall文retrieveandtoquantityretrieve,然backpass重sortstepchoosemost佳result.
      * combine两typeretrievetechnologyadvantage,弥补eachfromnot足.
      */
@@ -48,8 +48,8 @@ class RetrievalMethod
     /**
      * graphretrieve.
      *
-     * based on知识graph谱retrievemethod.
-     * 利use实bodybetweenclose系conductretrieve,适合processcomplexassociatequery.
+     * based onknowledgegraph谱retrievemethod.
+     * 利use实bodybetweenclose系conductretrieve,suitableprocesscomplexassociatequery.
      * canhair现隐含close系andconnect.
      */
     public const string GRAPH_SEARCH = 'graph_search';

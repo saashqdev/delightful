@@ -19,7 +19,7 @@ use Hyperf\Codec\Json;
  * responsible ASR 相close实bodygroup装andpathconvert.
  *
  * pathformatinstruction:
- * - work区相topath (workspace-relative): .asr_recordings/session_xxx or recordingsummary_xxx
+ * - workregiontopath (workspace-relative): .asr_recordings/session_xxx or recordingsummary_xxx
  * - projectworkdirectory (work directory): project_123/workspace
  * - organization码+APP_ID+bucket_md5front缀 (full prefix): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/
  * - completepath/file_key (full path): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx
@@ -103,7 +103,7 @@ class AsrAssembler
      *
      * @param string $fullPrefix organization码+APP_ID+bucket_md5front缀 (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
      * @param string $workDir projectworkdirectory (如: project_123/workspace)
-     * @param string $relativePath work区相topath (如: .asr_recordings/session_xxx)
+     * @param string $relativePath workregiontopath (如: .asr_recordings/session_xxx)
      * @return string complete file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
      */
     public static function buildFileKey(
@@ -115,17 +115,17 @@ class AsrAssembler
     }
 
     /**
-     * from file_key extractwork区相topath.
+     * from file_key extractworkregiontopath.
      *
-     * willcomplete file_key convertforwork区相topath,useatsandbox API calland界surfaceshow
+     * willcomplete file_key convertforworkregiontopath,useatsandbox API calland界surfaceshow
      * convertclose系: relativePath = extractWorkspaceRelativePath(file_key)
      *
      * @param string $fileKey complete file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
-     * @return string work区相topath (如: .asr_recordings/session_xxx)
+     * @return string workregiontopath (如: .asr_recordings/session_xxx)
      */
     public static function extractWorkspaceRelativePath(string $fileKey): string
     {
-        // standard化pathminute隔符
+        // standard化pathminuteseparator
         $normalizedPath = str_replace('\\', '/', trim($fileKey, '/'));
 
         // find workspace/ position

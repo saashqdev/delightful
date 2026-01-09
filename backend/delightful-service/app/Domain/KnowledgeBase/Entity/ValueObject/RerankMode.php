@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 
 /**
- * 重sort模type枚举category.
+ * 重sort模typeenumcategory.
  *
  * definition两type重sort模type:
  * - RERANKING_MODEL: use重sortmodeltoretrieveresultconduct重sort

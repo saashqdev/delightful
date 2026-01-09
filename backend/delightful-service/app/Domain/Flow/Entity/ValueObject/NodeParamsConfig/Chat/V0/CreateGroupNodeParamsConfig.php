@@ -108,7 +108,7 @@ class CreateGroupNodeParamsConfig extends NodeParamsConfig
         $this->node->setParams([
             // 群name
             'group_name' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
-            // 群主
+            // group owner
             'group_owner' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
             // 群member
             'group_members' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
@@ -116,9 +116,9 @@ class CreateGroupNodeParamsConfig extends NodeParamsConfig
             'group_type' => 0,
             // containwhenfrontuser
             'include_current_user' => $this->includeCurrentUser,
-            // containwhenfront助理
+            // containwhenfrontassistant
             'include_current_assistant' => $this->includeCurrentAssistant,
-            // 助理open场白
+            // assistantopen场白
             'assistant_opening_speech' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
         ]);
     }

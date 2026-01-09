@@ -16,7 +16,7 @@ use App\Interfaces\Provider\Assembler\ProviderConfigIdAssembler;
 use DateTime;
 
 /**
- * servicequotienttemplategenerate仓储
+ * servicequotienttemplategeneratestorage
  * supportfor所have ProviderCode generatetemplateconfiguration.
  */
 readonly class ProviderTemplateRepository

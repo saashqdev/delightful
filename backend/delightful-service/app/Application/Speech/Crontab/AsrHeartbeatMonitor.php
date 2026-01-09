@@ -56,7 +56,7 @@ class AsrHeartbeatMonitor
         try {
             $this->logger->info('startexecute ASR recordingcore跳monitortask');
 
-            // 扫描所havecore跳 key(use RedisUtil::scanKeys prevent阻塞)
+            // scan allhavecore跳 key(use RedisUtil::scanKeys preventblocking)
             $keys = RedisUtil::scanKeys(
                 AsrRedisKeys::HEARTBEAT_SCAN_PATTERN,
                 AsrConfig::REDIS_SCAN_BATCH_SIZE,
@@ -116,7 +116,7 @@ class AsrHeartbeatMonitor
             $this->logger->info('detecttocore跳timeout', ['key' => $key]);
 
             // byat key is MD5 hash,weno法directly反toget task_key and user_id
-            // needfrom Redis middle扫描所have asr:task:* comefindmatchtask
+            // needfrom Redis middlescan allhave asr:task:* comefindmatchtask
             $this->findAndTriggerTimeoutTask($key);
         } catch (Throwable $e) {
             $this->logger->error('processcore跳timeoutfail', [
@@ -131,7 +131,7 @@ class AsrHeartbeatMonitor
      */
     private function findAndTriggerTimeoutTask(string $heartbeatKey): void
     {
-        // 扫描所havetask
+        // scan allhavetask
         $keys = RedisUtil::scanKeys(
             AsrRedisKeys::TASK_SCAN_PATTERN,
             AsrConfig::REDIS_SCAN_BATCH_SIZE,

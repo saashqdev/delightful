@@ -23,7 +23,7 @@ interface FontProviderInterface
     /**
      * detectwhethersupportTTF字bodyrender.
      *
-     * @return bool truetable示supportTTF字body,falsetable示onlysupportinside置字body
+     * @return bool truetable示supportTTF字body,falsetable示onlysupportinsideset fieldbody
      */
     public function supportsTTF(): bool;
 
@@ -36,10 +36,10 @@ interface FontProviderInterface
     public function containsChinese(string $text): bool;
 
     /**
-     * detectgraphlikewhethercontain透明channel.
+     * detectgraphlikewhethercontaintransparentchannel.
      *
      * @param mixed $image GDgraphlikeresource
-     * @return bool truetable示contain透明degree,falsetable示notcontain
+     * @return bool truetable示containtransparentdegree,falsetable示notcontain
      */
     public function hasTransparency($image): bool;
 }

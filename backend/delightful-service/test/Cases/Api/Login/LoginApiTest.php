@@ -78,7 +78,7 @@ class LoginApiTest extends AbstractHttpTest
 
         // sendPOSTrequest
         $response = $this->json(self::API, $requestData);
-        // expecthand机numbernot存ino clockreturn相应error码andmessage
+        // expecthand机numbernot存ino clockreturncorrespondingerror码andmessage
         $expectData = [
             'code' => AuthenticationErrorCode::AccountNotFound->value,
         ];

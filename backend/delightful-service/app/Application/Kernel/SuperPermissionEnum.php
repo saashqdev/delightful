@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\Kernel;
 
 /**
- * 跨organization超levelpermission枚举category.
+ * 跨organization超levelpermissionenumcategory.
  */
 enum SuperPermissionEnum: string
 {
@@ -18,7 +18,7 @@ enum SuperPermissionEnum: string
     // processadministrator,目frontonly queryToolSets useto
     case FLOW_ADMIN = 'flow_admin';
 
-    // (thethree方platform)助理administrator
+    // (thethree方platform)assistantadministrator
     case ASSISTANT_ADMIN = 'assistant_admin';
 
     // bigmodelconfigurationmanage
@@ -30,18 +30,18 @@ enum SuperPermissionEnum: string
     // 特权hairmessage
     case PRIVILEGE_SEND_MESSAGE = 'privilege_send_message';
 
-    // 麦吉多environmentmanage
+    // Magic多environmentmanage
     case DELIGHTFUL_ENV_MANAGEMENT = 'delightful_env_management';
 
     // servicequotientadministrator
     case SERVICE_PROVIDER_ADMIN = 'service_provider_admin';
 
-    // 超level麦吉invitationuseuser
+    // 超levelMagicinvitationuseuser
     case SUPER_INVITE_USER = 'be_delightful_invite_use_user';
 
-    // 超level麦吉看板manageperson员
+    // 超levelMagic看板manageperson员
     case SUPER_DELIGHTFUL_BOARD_ADMIN = 'be_delightful_board_manager';
 
-    // 超level麦吉看板运营person员
+    // 超levelMagic看板运营person员
     case SUPER_DELIGHTFUL_BOARD_OPERATOR = 'be_delightful_board_operator';
 }

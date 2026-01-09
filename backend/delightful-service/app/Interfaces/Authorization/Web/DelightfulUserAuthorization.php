@@ -23,7 +23,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Qbhy\HyperfAuth\Authenticatable;
 
 /**
- * if改thiscategoryname/property/命名emptybetween,请modify WebUserGuard.php  cacheKey ,avoidcacheno法also原
+ * if改thiscategoryname/property/namingemptybetween,请modify WebUserGuard.php  cacheKey ,avoidcacheno法also原
  */
 class DelightfulUserAuthorization extends AbstractAuthorization
 {
@@ -99,7 +99,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
 
         $beDelightfulAgentUserId = $key['beDelightfulAgentUserId'] ?? '';
         if ($beDelightfulAgentUserId) {
-            // process超level麦吉 agent user
+            // process超levelMagic agent user
             $sandboxToken = config('be-delightful.sandbox.token', '');
             if (empty($sandboxToken) || $sandboxToken !== $authorization) {
                 ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND, 'token error');
@@ -120,7 +120,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
                 ExceptionBuilder::throw(ChatErrorCode::Delightful_ENVIRONMENT_NOT_FOUND);
             }
         }
-        // ifis麦吉from己downhair Token,thenbyfrom己validation
+        // ifisMagicfrom己downhair Token,thenbyfrom己validation
         $loginCheckDTO = new LoginCheckDTO();
         $loginCheckDTO->setAuthorization($authorization);
         /** @var LoginResponseDTO[] $currentEnvDelightfulOrganizationUsers */

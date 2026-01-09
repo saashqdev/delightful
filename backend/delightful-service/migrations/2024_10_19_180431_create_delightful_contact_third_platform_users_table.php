@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('delightful_id', 64)->nullable()->comment('delightful_user_account table delightful_id');
             $table->string('delightful_user_id', 64)->nullable()->comment('delightful_user_organization table user_id');
-            $table->string('delightful_organization_code', 32)->comment('麦吉userbody系downorganizationcode');
+            $table->string('delightful_organization_code', 32)->comment('Magicuserbody系downorganizationcode');
             $table->string('third_user_id', 128)->comment('thethree方platformuserid');
             $table->string('third_union_id', 128)->comment('thethree方platformuser union_id');
             $table->string('third_platform_type', 32)->comment('thethree方platformtype dingTalk/lark/weCom/teamShare');
@@ -38,7 +38,7 @@ return new class extends Migration {
             $table->unique(['third_union_id', 'third_platform_type', 'delightful_organization_code'], 'unique_third_id');
             $table->softDeletes();
             $table->timestamps();
-            $table->comment('thethree方platformsyncpasscomeuserinfotable. notpassday书havepointspecial,candirectlyday书userwhen做麦吉user.');
+            $table->comment('thethree方platformsyncpasscomeuserinfotable. notpassday书havepointspecial,candirectlyday书userwhen做Magicuser.');
         });
     }
 

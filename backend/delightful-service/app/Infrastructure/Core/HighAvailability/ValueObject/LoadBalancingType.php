@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\HighAvailability\ValueObject;
 
 /**
- * load balancingstrategytype枚举.
+ * load balancingstrategytypeenum.
  */
 enum LoadBalancingType: int
 {

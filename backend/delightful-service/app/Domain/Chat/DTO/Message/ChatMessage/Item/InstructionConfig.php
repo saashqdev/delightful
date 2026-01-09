@@ -54,7 +54,7 @@ class InstructionConfig extends AbstractEntity
     protected string $name = '';
 
     /**
-     * directlysendfinger令,userpoint击finger令backwilldirectlysendgive助理.
+     * directlysendfinger令,userpoint击finger令backwilldirectlysendgiveassistant.
      */
     protected bool $sendDirectly = false;
 

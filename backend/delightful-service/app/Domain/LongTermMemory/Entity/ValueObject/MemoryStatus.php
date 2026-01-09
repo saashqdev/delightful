@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\LongTermMemory\Entity\ValueObject;
 
 /**
- * memorystatus枚举.
+ * memorystatusenum.
  */
 enum MemoryStatus: string
 {

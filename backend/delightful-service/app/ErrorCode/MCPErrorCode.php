@@ -54,7 +54,7 @@ enum MCPErrorCode: int
     case OAuth2ProviderError = 51534; // OAuth2providequotientreturnerror
 
     #[ErrorMessage(message: 'mcp.oauth2.missing_access_token')]
-    case OAuth2MissingAccessToken = 51535; // OAuth2responsemiddle缺少accesstoken
+    case OAuth2MissingAccessToken = 51535; // OAuth2responsemiddlemissingaccesstoken
 
     // OAuth2bindverify相closeerror码
     #[ErrorMessage(message: 'mcp.oauth2.binding.code_empty')]

@@ -12,6 +12,6 @@ enum GroupStatusEnum: int
     // normal
     case Normal = 1;
 
-    // 解散
+    // dissolve
     case Disband = 2;
 }

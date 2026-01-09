@@ -151,7 +151,7 @@ class DelightfulLLMDomainService
     input: [userquestion + {context}]
     handlestep:
     1.1 实bodyidentify
-       - 显property命名实bodyextract,identify实bodybetweenclose系andproperty
+       - 显propertynaming实bodyextract,identify实bodybetweenclose系andproperty
        - deduceuser隐propertyrequirementand潜in意graph,especiallycloseimplicittime因素
     1.2 dimensiondecompose
        - according toidentifyout实bodyandrequirement,choosesuitableanalyzedimension,for example:policyinterpret,datavalidate,caseresearch,impactevaluate,technology原理,marketfront景,userbody验etc
@@ -218,7 +218,7 @@ class DelightfulLLMDomainService
     ## usermessagefor:
     {question}
     
-    ## based onusersendmessage互联网searchresult:
+    ## based onusersendmessageinternetsearchresult:
     {search_context_details}
     PROMPT;
 

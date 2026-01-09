@@ -63,7 +63,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * delete助理.
+     * deleteassistant.
      */
     public function deleteAgent(DelightfulUserAuthorization $authenticatable, string $agentId)
     {
@@ -71,7 +71,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * get助理detail.
+     * getassistantdetail.
      */
     public function getAgentDetail(DelightfulUserAuthorization $authorization, string $agentId): AdminAgentDetailDTO
     {
@@ -81,7 +81,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         $agentVersionEntity = new DelightfulAgentVersionEntity();
         if ($agentEntity->getAgentVersionId()) {
             $agentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentById($agentEntity->getAgentVersionId());
-            // onlypublish助理才willhavepermission管控
+            // onlypublishassistant才willhavepermission管控
             $resourceAccessDTO = $this->getAgentResource($authorization, $agentId);
             $adminAgentDetail->setResourceAccess($resourceAccessDTO);
         } else {
@@ -104,12 +104,12 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * getenterprisedown所have助理create者.
+     * getenterprisedown所haveassistantcreate者.
      * @return array<array{user_id:string,nickname:string,avatar:string}>
      */
     public function getOrganizationAgentsCreators(DelightfulUserAuthorization $authorization): array
     {
-        // get所have助理
+        // get所haveassistant
         $agentCreators = $this->delightfulAgentDomainService->getOrganizationAgentsCreators($authorization->getOrganizationCode());
         $dataIsolation = DataIsolation::create($authorization->getOrganizationCode(), $authorization->getId());
         $userMap = $this->userDomainService->getByUserIds($dataIsolation, $agentCreators);
@@ -140,7 +140,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * queryenterprisedown所have助理,itemitemquery:status,createperson,search.
+     * queryenterprisedown所haveassistant,itemitemquery:status,createperson,search.
      */
     public function queriesAgents(DelightfulUserAuthorization $authorization, QueryPageAgentDTO $query): PageDTO
     {
@@ -152,7 +152,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         // get所have avatar
         $avatars = array_filter(array_column($delightfulAgentEntities, 'agent_avatar'), fn ($avatar) => ! empty($avatar));
         $fileLinks = $this->fileDomainService->getLinks($authorization->getOrganizationCode(), $avatars);
-        // get助理createperson
+        // getassistantcreateperson
         $createdUids = array_column($delightfulAgentEntities, 'created_uid');
         $createdUsers = $this->userDomainService->getUserByIdsWithoutOrganization($createdUids);
         $agentVersionIds = array_filter(array_column($delightfulAgentEntities, 'agent_version_id'), fn ($agentVersionId) => $agentVersionId !== null);
@@ -164,7 +164,7 @@ class AdminAgentAppService extends AbstractKernelAppService
             $createdUserMap[$user->getUserId()] = $user;
         }
 
-        // build助理versionmapping
+        // buildassistantversionmapping
         $agentVersionMap = [];
         foreach ($agentVersions as $version) {
             $agentVersionMap[$version->getId()] = $version;

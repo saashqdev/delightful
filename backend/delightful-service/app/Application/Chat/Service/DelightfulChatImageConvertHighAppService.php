@@ -218,7 +218,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
 
     private function getErrorMessageFromImageGenerateErrorCode(ImageGenerateErrorCode $case): ?string
     {
-        // get枚举constantreflectionobject
+        // getenumconstantreflectionobject
         $reflectionEnum = new ReflectionEnum($case);
         $reflectionCase = $reflectionEnum->getCase($case->name);
 

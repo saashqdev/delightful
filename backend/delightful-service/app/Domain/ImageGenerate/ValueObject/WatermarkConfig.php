@@ -18,7 +18,7 @@ class WatermarkConfig
 
     protected int $position = 3;
 
-    protected float $opacity = 0.3; // 透明degree
+    protected float $opacity = 0.3; // transparentdegree
 
     protected int $language = 0;
 

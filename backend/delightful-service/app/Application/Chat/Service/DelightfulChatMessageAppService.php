@@ -868,7 +868,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         if (! $delightfulContext->getAuthorization()) {
             $delightfulContext->setAuthorization($userToken);
         }
-        // 协程updown文middlesettinguserinfo,供 WebsocketChatUserGuard use
+        // coroutineupdown文middlesettinguserinfo,供 WebsocketChatUserGuard use
         WebSocketContext::set(DelightfulContext::class, $delightfulContext);
     }
 

@@ -49,7 +49,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         }
 
         $translated = $enum->label();
-        // iflanguagepackagemissing,return仍然isoriginal key,thiso clockthrowexceptionreminder
+        // iflanguagepackagemissing,returnstillisoriginal key,thiso clockthrowexceptionreminder
         if ($translated === $enum->translationKey()) {
             ExceptionBuilder::throw(PermissionErrorCode::BusinessException, 'Missing i18n for key: ' . $enum->translationKey());
         }
@@ -381,7 +381,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * toatnon DelightfulResourceEnum definitionresource,子categorycanoverridethemethodbyparseto相应 Operation Enum.
+     * toatnon DelightfulResourceEnum definitionresource,子categorycanoverridethemethodbyparsetocorresponding Operation Enum.
      * open源default抛错.
      */
     protected function resolveOperationEnumClassFromUnknownResource(string $resource): string

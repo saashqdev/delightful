@@ -31,7 +31,7 @@ class RequestContextMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // notice!foriterationcan控,onlycanin api layerto协程context赋value
+        // notice!foriterationcan控,onlycanin api layertocoroutinecontext赋value
         $accessToken = $request->getHeaderLine('api-key');
 
         if (! empty($accessToken)) {
@@ -39,7 +39,7 @@ class RequestContextMiddleware implements MiddlewareInterface
         } else {
             $delightfulUserAuthorization = $this->getAuthorization();
         }
-        // willuserinformationdeposit协程context,convenient api layerget
+        // willuserinformationdepositcoroutinecontext,convenient api layerget
         RequestCoContext::setUserAuthorization($delightfulUserAuthorization);
         return $handler->handle($request);
     }

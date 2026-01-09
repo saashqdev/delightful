@@ -15,7 +15,7 @@ class QueryPageAgentDTO extends AbstractDTO
 
     protected int $pageSize = 15;
 
-    // 助理status:start/disable
+    // assistantstatus:start/disable
     protected ?int $status = null;
 
     // createperson

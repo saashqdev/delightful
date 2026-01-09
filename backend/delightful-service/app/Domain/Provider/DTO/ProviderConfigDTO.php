@@ -41,12 +41,12 @@ class ProviderConfigDTO extends AbstractDTO
     protected string $serviceProviderId = '';
 
     /**
-     * bigmodelspecificconfiguration,ak,sk,host 之category(already脱敏).
+     * bigmodelspecificconfiguration,ak,sk,host 之category(alreadydesensitize).
      */
     protected ?ProviderConfigItem $config = null;
 
     /**
-     * alreadydecryptconfiguration,notconductdata脱敏process.
+     * alreadydecryptconfiguration,notconductdatadesensitizeprocess.
      */
     protected ?ProviderConfigItem $decryptedConfig = null;
 
@@ -315,7 +315,7 @@ class ProviderConfigDTO extends AbstractDTO
             $config = new ProviderConfigItem($config);
         }
 
-        // data脱敏process
+        // datadesensitizeprocess
         if ($config instanceof ProviderConfigItem) {
             $config->setAk(StringMaskUtil::mask($config->getAk()));
             $config->setApiKey(StringMaskUtil::mask($config->getApiKey()));
@@ -343,7 +343,7 @@ class ProviderConfigDTO extends AbstractDTO
             $this->decryptedConfig = $decryptedConfig;
         }
 
-        // notice:alreadydecryptconfigurationnotconductdata脱敏process
+        // notice:alreadydecryptconfigurationnotconductdatadesensitizeprocess
     }
 
     public function getIsModelsEnable(): bool

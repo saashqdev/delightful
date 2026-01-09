@@ -23,7 +23,7 @@ class DefaultWatermarkConfig implements WatermarkConfigInterface
         return new WatermarkConfig(
             logoTextContent: 'Delightful AI Generated', // defaultwatermarktext
             position: 3, // rightdownangle
-            opacity: 0.3, // 30% 透明degree,
+            opacity: 0.3, // 30% transparentdegree,
         );
     }
 }

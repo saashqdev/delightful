@@ -230,7 +230,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     }
 
     /**
-     * prepare移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderModel querybuild器.
+     * prepare移exceptsoft deleteclosefeature,temporarythishow to write.create带have软deletefilter ProviderModel querybuild器.
      */
     private function createProviderQuery(): Builder
     {

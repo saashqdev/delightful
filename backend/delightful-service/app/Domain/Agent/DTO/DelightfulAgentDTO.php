@@ -20,21 +20,21 @@ class DelightfulAgentDTO extends AbstractEntity
     private ?string $id = '';
 
     /**
-     * 助理name.
+     * assistantname.
      */
     private ?string $agentName = '';
 
     private ?string $robotName = '';
 
     /**
-     * 助理avatar.
+     * assistantavatar.
      */
     private ?string $agentAvatar = '';
 
     private ?string $robotAvatar = '';
 
     /**
-     * 助理description.
+     * assistantdescription.
      */
     private string $agentDescription = '';
 

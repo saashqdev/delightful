@@ -164,7 +164,7 @@ class ByteDanceSTSService
             }
 
             if (! isset($responseData['jwt_token'])) {
-                $this->logger->error('responsemiddle缺少jwt_tokenfield', [
+                $this->logger->error('responsemiddlemissingjwt_tokenfield', [
                     'response' => $responseData,
                 ]);
                 ExceptionBuilder::throw(AsrErrorCode::Error, 'asr.sts_token.missing_jwt_token');

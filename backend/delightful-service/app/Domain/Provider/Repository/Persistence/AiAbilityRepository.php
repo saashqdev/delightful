@@ -17,7 +17,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 use App\Interfaces\Provider\Assembler\AiAbilityAssembler;
 
 /**
- * AI can力仓储implement.
+ * AI can力storageimplement.
  */
 class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRepositoryInterface
 {

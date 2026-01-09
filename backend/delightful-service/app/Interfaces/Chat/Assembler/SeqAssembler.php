@@ -125,7 +125,7 @@ class SeqAssembler
     }
 
     /**
-     * according toalready经存inseqEntity,generatealready读/alreadyview/withdraw/editetcmessagestatus变moretypereturn执message.
+     * according toalreadyalready existsinseqEntity,generatealready读/alreadyview/withdraw/editetcmessagestatus变moretypereturn执message.
      */
     public static function generateReceiveStatusChangeSeqEntity(DelightfulSeqEntity $originSeqEntity, ControlMessageType $messageType): DelightfulSeqEntity
     {
@@ -155,7 +155,7 @@ class SeqAssembler
     }
 
     /**
-     * according toalready经存inseqEntity,generatealready读/alreadyview/withdraw/editetcmessagestatus变moretypereturn执message.
+     * according toalreadyalready existsinseqEntity,generatealready读/alreadyview/withdraw/editetcmessagestatus变moretypereturn执message.
      * @param string $referMessageId supportfinger定quotemessageid,useatgivereceive方otherdevicepushreturn执,or者givehairitem方pushreturn执
      */
     public static function generateStatusChangeSeqEntity(array $seqData, string $referMessageId): DelightfulSeqEntity
@@ -176,7 +176,7 @@ class SeqAssembler
     }
 
     /**
-     * according toalready经存inseqEntity,generatetopic变moretypecontrolmessage.
+     * according toalreadyalready existsinseqEntity,generatetopic变moretypecontrolmessage.
      */
     public static function generateTopicChangeSeqEntity(DelightfulSeqEntity $seqEntity, DelightfulTopicEntity $topicEntity, ?DelightfulUserEntity $receiveUserEntity): DelightfulSeqEntity
     {
@@ -185,7 +185,7 @@ class SeqAssembler
         $time = date('Y-m-d H:i:s');
         // resetseq相closeid
         $seqData['id'] = $messageId;
-        // 序columnbelong tousermaybehair生变more
+        // 序columnbelong tousermaybehairchange occursmore
         if ($receiveUserEntity !== null) {
             $seqData['object_id'] = $receiveUserEntity->getDelightfulId();
             $seqData['object_type'] = $receiveUserEntity->getUserType()->value;
@@ -283,7 +283,7 @@ class SeqAssembler
         $clientMessageData = [
             // service端generatemessage唯oneid,all局唯one.useatwithdraw,editmessage.
             'delightful_message_id' => $seqEntity->getDelightfulMessageId(),
-            // customer端generate,needios/安卓/webthree端共同certainonegeneratealgorithm.useat告知customer端,delightful_message_idbycome
+            // customer端generate,needios/安卓/webthree端共同certainonegeneratealgorithm.useatinformcustomer端,delightful_message_idbycome
             'app_message_id' => $seqEntity->getAppMessageId(),
             // send者
             'sender_id' => (string) $messageEntity?->getSenderId(),

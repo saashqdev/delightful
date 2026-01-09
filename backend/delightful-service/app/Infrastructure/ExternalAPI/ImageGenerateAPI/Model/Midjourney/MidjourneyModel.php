@@ -78,7 +78,7 @@ class MidjourneyModel extends AbstractImageGenerate
             return $response; // returnnulldataresponse
         }
 
-        // 3. synchandle(Midjourney采useround询机制)
+        // 3. synchandle(Midjourney采useroundinquiry mechanism)
         try {
             $result = $this->generateImageRawInternal($imageGenerateRequest);
             $this->validateMidjourneyResponse($result);

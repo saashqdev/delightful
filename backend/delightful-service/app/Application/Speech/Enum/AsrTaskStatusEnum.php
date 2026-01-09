@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\Speech\Enum;
 
 /**
- * ASR taskstatus枚举(inside部businessprocess).
+ * ASR taskstatusenum(inside部businessprocess).
  *
  * 【asuse域】inside部system - delightful-service businesslayer
  * 【use途】table示 ASR recordingsummarytaskall生命periodstatus
@@ -17,7 +17,7 @@ namespace App\Application\Speech\Enum;
  * - businessprocesscontrolandpoweretcpropertyjudge
  * - 整bodytaskstatustrace(recording → merge → generatetitle → sendmessage)
  *
- * 【andother枚举区别】
+ * 【andotherenum区别】
  * - AsrRecordingStatusEnum: front端recording实o clockstatus(recording交互layer)
  * - AsrTaskStatusEnum: inside部taskallprocessstatus(businessmanagelayer)✓ current
  * - SandboxAsrStatusEnum: sandboxmergetaskstatus(infrastructurelayer)
@@ -53,7 +53,7 @@ enum AsrTaskStatusEnum: string
     }
 
     /**
-     * fromstringcreate枚举.
+     * fromstringcreateenum.
      */
     public static function fromString(string $status): self
     {

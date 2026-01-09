@@ -27,7 +27,7 @@ class DefaultFontProvider implements FontProviderInterface
 
     /**
      * detectwhethersupportTTF字bodyrender.
-     * open源versiononlysupportinside置字body.
+     * open源versiononlysupportinsideset fieldbody.
      */
     public function supportsTTF(): bool
     {
@@ -36,7 +36,7 @@ class DefaultFontProvider implements FontProviderInterface
 
     /**
      * detecttextwhethercontainmiddle文character.
-     * open源version视所havetextfornonmiddle文,useinside置字bodyrender.
+     * open源version视所havetextfornonmiddle文,useinsideset fieldbodyrender.
      */
     public function containsChinese(string $text): bool
     {
@@ -44,14 +44,14 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * detectgraphlikewhethercontain透明channel.
-     * provide基础透明degreedetectfeature.
+     * detectgraphlikewhethercontaintransparentchannel.
+     * provide基础transparentdegreedetectfeature.
      * @param mixed $image
      */
     public function hasTransparency($image): bool
     {
         if (! imageistruecolor($image)) {
-            // 调color板graphlikecheck透明colorindex
+            // 调color板graphlikechecktransparentcolorindex
             return imagecolortransparent($image) !== -1;
         }
 
@@ -69,7 +69,7 @@ class DefaultFontProvider implements FontProviderInterface
                 $rgba = imagecolorat($image, $x, $y);
                 $alpha = ($rgba & 0x7F000000) >> 24;
                 if ($alpha > 0) {
-                    return true; // hair现透明like素
+                    return true; // hair现transparentlike素
                 }
             }
         }

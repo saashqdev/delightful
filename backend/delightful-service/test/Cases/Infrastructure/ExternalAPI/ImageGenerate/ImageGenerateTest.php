@@ -66,7 +66,7 @@ class ImageGenerateTest extends BaseTest
         var_dump($fileLink);
     }
 
-    // 转超清
+    // 转ultra clear
     public function testImage2ImagePlus()
     {
         //        $this->markTestSkipped();

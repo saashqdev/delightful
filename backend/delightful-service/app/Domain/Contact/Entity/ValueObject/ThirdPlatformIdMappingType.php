@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * thethird-partyplatformand麦吉department,user,organizationencoding,nullbetweenencodingetcmappingclose系record.
+ * thethird-partyplatformandMagicdepartment,user,organizationencoding,nullbetweenencodingetcmappingclose系record.
  */
 enum ThirdPlatformIdMappingType: string
 {

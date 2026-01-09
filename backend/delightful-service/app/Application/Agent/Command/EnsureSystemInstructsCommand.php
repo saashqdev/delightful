@@ -76,7 +76,7 @@ class EnsureSystemInstructsCommand extends HyperfCommand
             $updated
         ));
 
-        // process助理version
+        // processassistantversion
         $offset = 0;
         $versionTotal = 0;
         $versionUpdated = 0;

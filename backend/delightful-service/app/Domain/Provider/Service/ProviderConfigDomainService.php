@@ -63,7 +63,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             return null;
         }
 
-        // 3. query Provider Models(仓储layeronlyreturnProviderModelEntity[])
+        // 3. query Provider Models(storagelayeronlyreturnProviderModelEntity[])
         $modelEntities = $this->providerModelRepository->getProviderModelsByConfigId($dataIsolation, $configId, $providerEntity);
         // 4. organizationDTOandreturn
         return ProviderAdminAssembler::getProviderModelsDTO($providerEntity, $providerConfigEntity, $modelEntities);
@@ -194,7 +194,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     /**
      * getservicequotientconfiguration实body,统onehandle所havesituation.
      * - templateID(format:providerCode_category)
-     * - 常规databaseconfigurationID.
+     * - conventionaldatabaseconfigurationID.
      */
     public function getProviderConfig(ProviderDataIsolation $dataIsolation, string $configId): ?ProviderConfigEntity
     {
@@ -229,7 +229,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             return $this->createVirtualProviderConfig($dataIsolation, $providerEntity, $configId);
         }
 
-        // 2. 常规configurationquery
+        // 2. conventionalconfigurationquery
         return $this->serviceProviderConfigRepository->getById($dataIsolation, (int) $configId);
     }
 
@@ -383,11 +383,11 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
 
     /**
      * 统oneconfigurationdataupdatelogic.
-     * handle脱敏datamerge,fieldupdateandsave操as.
+     * handledesensitizedatamerge,fieldupdateandsave操as.
      */
     private function updateProviderConfigData(ProviderDataIsolation $dataIsolation, ProviderConfigEntity $existingConfig, ProviderConfigEntity $newConfigData): ProviderConfigEntity
     {
-        // handle脱敏backconfigurationdata
+        // handledesensitizebackconfigurationdata
         $processedConfig = $this->processDesensitizedConfig(
             $newConfigData->getConfig(),
             $existingConfig->getConfig()

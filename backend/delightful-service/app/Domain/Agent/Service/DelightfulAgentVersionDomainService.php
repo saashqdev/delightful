@@ -19,7 +19,7 @@ use App\Infrastructure\Core\Exception\BusinessException;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 
 /**
- * 助理 service.
+ * assistant service.
  */
 class DelightfulAgentVersionDomainService
 {
@@ -45,7 +45,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimizeversion:directlygetenable助理version,avoidpass inbigquantityID.
+     * optimizeversion:directlygetenableassistantversion,avoidpass inbigquantityID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -54,7 +54,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimizeversion:getenable助理total.
+     * optimizeversion:getenableassistanttotal.
      */
     public function getEnabledAgentsByOrganizationCount(string $organizationCode, string $agentName): int
     {
@@ -123,7 +123,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * according toidsget助理version.
+     * according toidsgetassistantversion.
      * @return array<DelightfulAgentVersionEntity>
      */
     public function getAgentByIds(array $ids): array
@@ -177,9 +177,9 @@ class DelightfulAgentVersionDomainService
 
     public function getAgentMaxVersion(string $agentId): string
     {
-        // returnis语义化version,needinreturn基础up+1
+        // returnissemantic化version,needinreturn基础up+1
         $agentMaxVersion = $this->agentVersionRepository->getAgentMaxVersion($agentId);
-        // ifversionnumberisintegerformat(如 1),willitsconvertfor语义化versionnumber(如 1.0.0)
+        // ifversionnumberisintegerformat(如 1),willitsconvertforsemantic化versionnumber(如 1.0.0)
         if (is_numeric($agentMaxVersion) && strpos($agentMaxVersion, '.') === false) {
             $agentMaxVersion = $agentMaxVersion . '.0.0';
         }
@@ -208,7 +208,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * according to助理 id getdefaultversion.
+     * according toassistant id getdefaultversion.
      */
     public function getDefaultVersions(array $agentIds): void
     {
@@ -239,9 +239,9 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * based oncursorpaginationgetfinger定organization助理versionlist.
+     * based oncursorpaginationgetfinger定organizationassistantversionlist.
      * @param string $organizationCode organizationcode
-     * @param array $agentVersionIds 助理versionIDlist
+     * @param array $agentVersionIds assistantversionIDlist
      * @param string $cursor cursorID,ifforemptystringthenfrommostnewstart
      * @param int $pageSize each页quantity
      * @return array<DelightfulAgentVersionEntity>

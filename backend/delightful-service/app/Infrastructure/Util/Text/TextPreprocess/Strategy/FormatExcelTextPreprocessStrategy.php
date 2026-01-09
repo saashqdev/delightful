@@ -62,7 +62,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
                 }
             }
 
-            // useoriginallineminute隔符
+            // useoriginallineminuteseparator
             $originalSeparator = $this->detectSeparator($line);
             $result[] = implode($originalSeparator, $rowResult);
         }
@@ -71,13 +71,13 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
     }
 
     /**
-     * detectCSVlineminute隔符.
+     * detectCSVlineminuteseparator.
      * @param string $line CSVlinecontent
-     * @return string detecttominute隔符
+     * @return string detecttominuteseparator
      */
     private function detectSeparator(string $line): string
     {
-        // commonCSVminute隔符
+        // commonCSVminuteseparator
         $separators = [',', ';', '\t'];
 
         foreach ($separators as $separator) {
@@ -86,7 +86,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             }
         }
 
-        // ifnothave找tominute隔符,defaultuse逗number
+        // ifnothave找tominuteseparator,defaultuse逗number
         return ',';
     }
 

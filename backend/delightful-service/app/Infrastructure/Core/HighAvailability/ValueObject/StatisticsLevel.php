@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\HighAvailability\ValueObject;
 
 /**
- * statisticslevel别枚举category.
+ * statisticslevel别enumcategory.
  */
 enum StatisticsLevel: int
 {
@@ -47,7 +47,7 @@ enum StatisticsLevel: int
 
     /**
      * getstatisticslevel别name(静statemethod,useatcompatibleoldcode).
-     * @deprecated use枚举instance getName() methodreplace
+     * @deprecated useenuminstance getName() methodreplace
      */
     public static function getLevelName(int|self $level): string
     {

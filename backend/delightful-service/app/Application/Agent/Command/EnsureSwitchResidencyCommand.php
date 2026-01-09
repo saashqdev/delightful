@@ -30,7 +30,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
     public function configure()
     {
         parent::configure();
-        $this->setDescription('ensure所have助理switchfinger令allhave residency=true property')
+        $this->setDescription('ensure所haveassistantswitchfinger令allhave residency=true property')
             ->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'test模type:provideJSONformattestdataconductprocess', '')
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'empty运line模type:onlycheckbutnotupdatetodatabase');
     }
@@ -54,10 +54,10 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $total = 0;
         $updated = 0;
 
-        $this->output->writeln('startprocess助理switchfinger令...');
+        $this->output->writeln('startprocessassistantswitchfinger令...');
 
         while (true) {
-            // minutebatchget助理
+            // minutebatchgetassistant
             $agents = $this->agentRepository->getAgentsByBatch($offset, $batchSize);
             if (empty($agents)) {
                 break;
@@ -70,7 +70,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                     continue;
                 }
 
-                // checkand修复switchfinger令 residency property
+                // checkandfixswitchfinger令 residency property
                 $hasChanges = $this->ensureSwitchResidency($instructs);
 
                 // iffinger令havechange,saveupdate
@@ -83,30 +83,30 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         );
                     }
                     ++$updated;
-                    $this->output->writeln(sprintf('already%s助理 [%s] switchfinger令', $isDryRun ? 'detecttoneedupdate' : 'update', $agent['id']));
+                    $this->output->writeln(sprintf('already%sassistant [%s] switchfinger令', $isDryRun ? 'detecttoneedupdate' : 'update', $agent['id']));
                 }
             }
 
             $offset += $batchSize;
-            $this->output->writeln(sprintf('alreadyprocess %d 助理...', $total));
+            $this->output->writeln(sprintf('alreadyprocess %d assistant...', $total));
         }
 
         $this->output->writeln(sprintf(
-            'processcomplete!共process %d 助理,%s %d 助理switchfinger令',
+            'processcomplete!共process %d assistant,%s %d assistantswitchfinger令',
             $total,
             $isDryRun ? 'hair现needupdate' : 'update',
             $updated
         ));
 
-        // process助理version
+        // processassistantversion
         $offset = 0;
         $versionTotal = 0;
         $versionUpdated = 0;
 
-        $this->output->writeln('\nstartprocess助理versionswitchfinger令...');
+        $this->output->writeln('\nstartprocessassistantversionswitchfinger令...');
 
         while (true) {
-            // minutebatchget助理version
+            // minutebatchgetassistantversion
             $versions = $this->agentVersionRepository->getAgentVersionsByBatch($offset, $batchSize);
             if (empty($versions)) {
                 break;
@@ -121,7 +121,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                     continue;
                 }
 
-                // checkand修复switchfinger令 residency property
+                // checkandfixswitchfinger令 residency property
                 $hasChanges = $this->ensureSwitchResidency($instructs);
 
                 // iffinger令havechange,saveupdate
@@ -132,16 +132,16 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         );
                     }
                     ++$versionUpdated;
-                    $this->output->writeln(sprintf('already%s助理version [%s] switchfinger令', $isDryRun ? 'detecttoneedupdate' : 'update', $version['id']));
+                    $this->output->writeln(sprintf('already%sassistantversion [%s] switchfinger令', $isDryRun ? 'detecttoneedupdate' : 'update', $version['id']));
                 }
             }
 
             $offset += $batchSize;
-            $this->output->writeln(sprintf('alreadyprocess %d 助理version...', $versionTotal));
+            $this->output->writeln(sprintf('alreadyprocess %d assistantversion...', $versionTotal));
         }
 
         $this->output->writeln(sprintf(
-            'processcomplete!共process %d 助理version,%s %d 助理versionswitchfinger令',
+            'processcomplete!共process %d assistantversion,%s %d assistantversionswitchfinger令',
             $versionTotal,
             $isDryRun ? 'hair现needupdate' : 'update',
             $versionUpdated
@@ -171,7 +171,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $this->output->writeln('<comment>originalfinger令:</comment>');
         $this->output->writeln(Json::encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-        // checkand修复switchfinger令 residency property
+        // checkandfixswitchfinger令 residency property
         $hasChanges = $this->ensureSwitchResidency($data);
 
         // displayprocessresult
@@ -213,8 +213,8 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         $item['residency'] = true;
                         $hasChanges = true;
                         $this->output->writeln(sprintf(
-                            'hair现switchfinger令 [%s](%s) 缺少 residency property,alreadyadd',
-                            $item['name'] ?? 'not命名',
+                            'hair现switchfinger令 [%s](%s) missing residency property,alreadyadd',
+                            $item['name'] ?? 'notnaming',
                             $item['id'] ?? 'noID'
                         ));
                     }

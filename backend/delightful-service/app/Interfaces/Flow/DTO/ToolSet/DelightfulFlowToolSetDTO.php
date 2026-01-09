@@ -33,7 +33,7 @@ class DelightfulFlowToolSetDTO extends AbstractFlowDTO
 
     /**
      * quotequantity.
-     * be n 助理application.
+     * be n assistantapplication.
      */
     public int $agentUsedCount = 0;
 

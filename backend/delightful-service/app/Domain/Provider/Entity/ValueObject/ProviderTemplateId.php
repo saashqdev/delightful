@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Provider\Entity\ValueObject;
 
 /**
- * servicequotienttemplateID枚举
+ * servicequotienttemplateIDenum
  * willProviderCodeandCategorygroup合mappingforfixed数value型string.
  */
 enum ProviderTemplateId: string

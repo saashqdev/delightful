@@ -69,7 +69,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * fromvaluecreate枚举.
+     * fromvaluecreateenum.
      */
     public static function fromValue(int $value): self
     {

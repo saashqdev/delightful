@@ -18,7 +18,7 @@ class TokenTextSplitter extends TextSplitter
 {
     /**
      * setmostbigcachetextlength(character数)
-     * 超passthislengthtextwillnotwillbecachein协程updown文middle.
+     * 超passthislengthtextwillnotwillbecacheincoroutineupdown文middle.
      */
     private const int MAX_CACHE_TEXT_LENGTH = 1000;
 
@@ -48,13 +48,13 @@ class TokenTextSplitter extends TextSplitter
     private Encoder $defaultEncoder;
 
     /**
-     * @var bool splitbacktextretainminute隔符
+     * @var bool splitbacktextretainminuteseparator
      */
     private bool $preserveSeparator = false;
 
     /**
      * @param null|callable $tokenizer tokencalculatefunction
-     * @param null|array $separators 备选minute隔符list
+     * @param null|array $separators 备选minuteseparatorlist
      * @throws Exception
      */
     public function __construct(
@@ -137,7 +137,7 @@ class TokenTextSplitter extends TextSplitter
      * mergetextpiece.
      *
      * @param array $splits wantmergetextpiece
-     * @param string $separator minute隔符
+     * @param string $separator minuteseparator
      * @return array mergebacktextpiecearray
      */
     protected function mergeSplits(array $splits, string $separator): array
@@ -172,14 +172,14 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * usefinger定minute隔符splittext.
+     * usefinger定minuteseparatorsplittext.
      */
     private function splitBySeparator(string $text, string $separator): array
     {
         if ($separator === ' ') {
             $chunks = preg_split('/\s+/', $text);
         } else {
-            // ifminute隔符contain0x00,replacebecome0x000x00
+            // ifminuteseparatorcontain0x00,replacebecome0x000x00
             $separator = str_replace("\x00", "\x00\x00", $separator);
             $chunks = explode($separator, $text);
             if ($this->preserveSeparator) {
@@ -192,7 +192,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * processminute隔符,willminute隔符splicetoeachminutepiecefrontsurface(exceptfirst).
+     * processminuteseparator,willminuteseparatorsplicetoeachminutepiecefrontsurface(exceptfirst).
      */
     private function preserveSeparator(array $chunks, string $separator): array
     {
@@ -228,7 +228,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * processnominute隔符textsplit.
+     * processnominuteseparatortextsplit.
      */
     private function handleNoSeparatorSplits(array $splits, array $splitLengths): array
     {
@@ -277,7 +277,7 @@ class TokenTextSplitter extends TextSplitter
         $separator = end($this->separators);
         $newSeparators = [];
 
-        // findsuitableminute隔符, from$separatorBeginIndexstart
+        // findsuitableminuteseparator, from$separatorBeginIndexstart
         for ($i = $separatorBeginIndex; $i < count($this->separators); ++$i) {
             $sep = $this->separators[$i];
             if ($sep === '') {
@@ -292,7 +292,7 @@ class TokenTextSplitter extends TextSplitter
         }
         $separatorBeginIndex = min($i + 1, count($this->separators));
 
-        // use选定minute隔符splittext
+        // use选定minuteseparatorsplittext
         if ($separator !== '') {
             $splits = $this->splitBySeparator($text, $separator);
         } else {
@@ -305,7 +305,7 @@ class TokenTextSplitter extends TextSplitter
         }, $splits);
 
         if ($separator !== '') {
-            // processhaveminute隔符situation
+            // processhaveminuteseparatorsituation
             $goodSplits = [];
             $goodSplitsLengths = [];
             $actualSeparator = $this->keepSeparator ? $separator : '';
@@ -374,7 +374,7 @@ class TokenTextSplitter extends TextSplitter
             // generateupdown文key
             $contextKey = 'token_count:' . md5($text);
 
-            // tryfrom协程updown文get
+            // tryfromcoroutineupdown文get
             $count = Context::get($contextKey);
             if ($count !== null) {
                 return $count;
@@ -383,7 +383,7 @@ class TokenTextSplitter extends TextSplitter
             // calculate token quantity
             $count = $this->calculateTokenCount($text);
 
-            // storageto协程updown文
+            // storagetocoroutineupdown文
             Context::set($contextKey, $count);
 
             return $count;

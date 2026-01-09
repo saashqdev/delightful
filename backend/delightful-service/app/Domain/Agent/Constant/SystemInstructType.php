@@ -143,7 +143,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * ensuresystem交互finger令存in,if缺少thensupplement.
+     * ensuresystem交互finger令存in,ifmissingthensupplement.
      * @return array returnsupplementbackfinger令array
      */
     public static function ensureSystemInstructs(array $instructs): array
@@ -197,7 +197,7 @@ enum SystemInstructType: int
             }
         }
 
-        // 按枚举definitionordersortsystemfinger令
+        // 按enumdefinitionordersortsystemfinger令
         ksort($systemInstructs);
 
         // 重newgroup合tool栏group items,systemfinger令infront

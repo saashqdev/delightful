@@ -122,7 +122,7 @@ readonly class AsrSandboxService
         ]);
 
         // callsandboxstarttask
-        // notice:sandbox API onlyacceptwork区相topath (如: .asr_recordings/session_xxx)
+        // notice:sandbox API onlyacceptworkregiontopath (如: .asr_recordings/session_xxx)
         $response = $this->asrRecorder->startTask(
             $actualSandboxId,
             $taskStatus->taskKey,
@@ -424,7 +424,7 @@ readonly class AsrSandboxService
      * checkandhandlesandboxresponsestatus.
      *
      * @param AsrRecorderResponse $response sandboxresponse
-     * @param SandboxAsrStatusEnum $status status枚举
+     * @param SandboxAsrStatusEnum $status statusenum
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $sandboxId sandboxID
      * @param float $finishStartTime starttime
@@ -820,7 +820,7 @@ readonly class AsrSandboxService
     ): TaskEntity {
         // check topicId whether存in
         if (empty($taskStatus->topicId)) {
-            $this->logger->error('ASR task缺少 topicId,no法getorcreate task', [
+            $this->logger->error('ASR taskmissing topicId,no法getorcreate task', [
                 'task_key' => $taskStatus->taskKey,
                 'project_id' => $taskStatus->projectId,
             ]);

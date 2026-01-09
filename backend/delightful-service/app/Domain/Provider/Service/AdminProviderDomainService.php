@@ -85,11 +85,11 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
         if (! empty($configData['config'])) {
             if ($decryptConfig) {
-                // whenneeddecrypto clock,settingalreadydecryptconfiguration(not脱敏)
-                // need new 两timeProviderConfigItemobject,因for setConfig methodwill操asoriginalobjectconduct脱敏
+                // whenneeddecrypto clock,settingalreadydecryptconfiguration(notdesensitize)
+                // need new 两timeProviderConfigItemobject,因for setConfig methodwill操asoriginalobjectconductdesensitize
                 $mergedData['decryptedConfig'] = new ProviderConfigItem($configData['config']);
             }
-            // config field set methodwill脱敏
+            // config field set methodwilldesensitize
             $mergedData['config'] = new ProviderConfigItem($configData['config']);
         }
 
@@ -112,7 +112,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * vlm 连通propertytest. llm/embeddingin app layer.
+     * vlm connectedpropertytest. llm/embeddingin app layer.
      * @throws Exception
      */
     public function vlmConnectivityTest(string $serviceProviderConfigId, string $modelVersion, string $organizationCode): ConnectResponse
@@ -266,7 +266,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get超清修复servicequotientconfiguration.
+     * getultra clearfixservicequotientconfiguration.
      * fromImageGenerateModelType::getMiracleVisionModes()[0]getmodel.
      * ifofficialandnonofficialallenable,priorityusenonofficialconfiguration.
      *

@@ -20,7 +20,7 @@ return new class extends Migration {
         Schema::create('delightful_contact_third_platform_department_users', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('delightful_department_id', 64)->comment('departmentid');
-            $table->string('delightful_organization_code', 32)->comment('麦吉organizationencoding');
+            $table->string('delightful_organization_code', 32)->comment('Magicorganizationencoding');
             $table->string('third_department_id', 64)->comment('thethree方departmentid');
             $table->string('third_union_id')->comment('thethree方platformuserunion_id');
             $table->string('third_platform_type', 32)->comment('thethree方platformtype dingTalk/lark/weCom/teamShare');

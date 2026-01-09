@@ -22,7 +22,7 @@ use Delightful\FlowExprEngine\ComponentFactory;
 
 class TriggerData
 {
-    // 助理encoding
+    // assistantencoding
     private string $agentKey = '';
 
     private TriggerDataUserExtInfo $userExtInfo;

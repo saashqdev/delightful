@@ -37,7 +37,7 @@ enum ConversationType: int
     case App = 7;
 
     /**
-     * will枚举typeconvert.
+     * willenumtypeconvert.
      */
     public static function getCaseFromName(string $typeName): ?ConversationType
     {

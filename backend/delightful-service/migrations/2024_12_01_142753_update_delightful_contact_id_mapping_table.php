@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->string('new_id', 64)->comment('newid');
             // mappingtype:user id,department id,nullbetween id,organizationencoding
             $table->string('mapping_type', 32)->comment('mappingtype(user,department,space,organization)');
-            // thethird-partyplatformtype:enterprise微信,钉钉,飞书
+            // thethird-partyplatformtype:enterprise微信,钉钉,Feishu
             $table->string('third_platform_type', 32)->comment('thethird-partyplatformtype(wechat_work,dingtalk,lark)');
             // delightful body系organizationencoding
             $table->string('delightful_organization_code', 32)->comment('delightful body系organizationencoding');

@@ -10,7 +10,7 @@ namespace App\Application\Kernel\Enum;
 use function Hyperf\Translation\__;
 
 /**
- * Delightful resource枚举.
+ * Delightful resourceenum.
  *
  * 1. use Backed Enum willeachresourcemappingfor唯onestring key.
  * 2. passmethodprovide label / parent  etcyuaninfo,convenientback续generatepermissiontree,做 i18n etc.

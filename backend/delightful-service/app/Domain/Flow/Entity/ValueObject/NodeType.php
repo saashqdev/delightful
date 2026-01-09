@@ -110,7 +110,7 @@ enum NodeType: int
     case KnowledgeFragmentStore = 16;
 
     /*
-     * 知识similardegree
+     * knowledgesimilardegree
      */
     case KnowledgeSimilarity = 17;
 

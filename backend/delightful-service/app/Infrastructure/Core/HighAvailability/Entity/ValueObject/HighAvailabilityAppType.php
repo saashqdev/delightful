@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\HighAvailability\Entity\ValueObject;
 use InvalidArgumentException;
 
 /**
- * highcanuseapplicationtype枚举.
+ * highcanuseapplicationtypeenum.
  */
 enum HighAvailabilityAppType: string
 {
@@ -38,7 +38,7 @@ enum HighAvailabilityAppType: string
     }
 
     /**
-     * fromstringcreate枚举instance.
+     * fromstringcreateenuminstance.
      */
     public static function fromString(string $type): self
     {

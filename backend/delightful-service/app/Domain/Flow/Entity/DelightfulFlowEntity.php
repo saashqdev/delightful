@@ -37,17 +37,17 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $code;
 
     /**
-     * processname(助理name).
+     * processname(assistantname).
      */
     protected string $name;
 
     /**
-     * processdescription (助理description).
+     * processdescription (assistantdescription).
      */
     protected string $description;
 
     /**
-     * processgraph标(助理avatar).
+     * processgraph标(assistantavatar).
      */
     protected string $icon = '';
 
@@ -299,7 +299,7 @@ class DelightfulFlowEntity extends AbstractEntity
                 $result['error_information'] = $nodeDebugResult->getErrorMessage();
             }
             if ($node->isEnd() && $nodeDebugResult && $nodeDebugResult->hasExecute()) {
-                // resultpriority,ifalready经存in,thennotneed
+                // resultpriority,ifalreadyalready existsin,thennotneed
                 if (empty($result)) {
                     $result = $nodeDebugResult->getOutput() ?? [];
                 }

@@ -220,7 +220,7 @@ JSON,
 
     protected function getAssistantAuthorization(string $assistantUserId): DelightfulUserAuthorization
     {
-        // get助理userinfo.generateimageupload者is助理from己.
+        // getassistantuserinfo.generateimageupload者isassistantfrom己.
         $assistantInfoEntity = $this->getDelightfulUserDomainService()->getUserById($assistantUserId);
         if ($assistantInfoEntity === null) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'assistant_not_found');

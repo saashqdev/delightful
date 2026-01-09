@@ -30,7 +30,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
             // definition本time range id,ifis null 代tablealsonotconductlimit
             $rangeIds = null;
             if ($filterType->isAll()) {
-                // ifis所haveitemitemfull足,that么already经存in id setthenis本timerange
+                // ifis所haveitemitemfull足,that么alreadyalready existsin id setthenis本timerange
                 $rangeIds = $allIds;
             }
 

@@ -14,7 +14,7 @@ use App\Domain\Provider\Entity\ValueObject\Query\AiAbilityQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 
 /**
- * AI can力仓储interface.
+ * AI can力storageinterface.
  */
 interface AiAbilityRepositoryInterface
 {

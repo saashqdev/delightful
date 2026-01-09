@@ -26,7 +26,7 @@ use Psr\Log\LoggerInterface;
  */
 class ImageWatermarkProcessor
 {
-    public const WATERMARK_TEXT = '麦吉 AI generate';
+    public const WATERMARK_TEXT = 'Magic AI generate';
 
     #[Inject]
     protected LoggerInterface $logger;
@@ -168,7 +168,7 @@ class ImageWatermarkProcessor
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && ($this->fontProvider->containsChinese($text) || $this->fontProvider->supportsTTF())) {
             // useTTF字bodyrender,supportmiddle文
-            // TTF字bodysizeneedadjust,usuallyratioinside置字bodysmallonethese
+            // TTF字bodysizeneedadjust,usuallyratioinsideset fieldbodysmallonethese
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
 
             // correctcalculateTTF字body基lineposition
@@ -176,14 +176,14 @@ class ImageWatermarkProcessor
                 // directlyusepass inYcoordinateasfor基lineposition
                 $ttfY = $y;
             } else {
-                // ifno法getside界框,directlyusepass inYcoordinate
+                // ifno法getsideboundary box,directlyusepass inYcoordinate
                 $ttfY = $y;
             }
 
             imagettftext($image, $ttfFontSize, 0, $x, $ttfY, $fontColor, $fontFile, $text);
         } else {
-            // 降leveluseinside置字body(onlysupportASCIIcharacter)
-            // inside置字bodyYcoordinateistexttop部,needfrom基linepositionconvert
+            // 降leveluseinsideset fieldbody(onlysupportASCIIcharacter)
+            // insideset fieldbodyYcoordinateistexttop部,needfrom基linepositionconvert
             $builtinY = $y - (int) ($fontSize * 0.8); // from基linepositionconvertfortop部position
             imagestring($image, 5, $x, $builtinY, $text, $fontColor);
 
@@ -205,12 +205,12 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * create透明color.
+     * createtransparentcolor.
      * @param mixed $image
      */
     private function createTransparentColor($image, float $opacity): int
     {
-        // create白colorhalf透明watermark
+        // create白colorhalftransparentwatermark
         $alpha = (int) ((1 - $opacity) * 127);
         return imagecolorallocatealpha($image, 255, 255, 255, $alpha);
     }
@@ -220,10 +220,10 @@ class ImageWatermarkProcessor
      */
     private function calculateWatermarkPosition(int $width, int $height, string $text, int $fontSize, int $position): array
     {
-        // moreprecisetextwidth估算
+        // moreprecisetextwidthestimate
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && $this->fontProvider->supportsTTF() && function_exists('imagettfbbox')) {
-            // useTTF字bodycalculateactualtextside界框
+            // useTTF字bodycalculateactualtextsideboundary box
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
             $bbox = imagettfbbox($ttfFontSize, 0, $fontFile, $text);
             $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // increase20%securityside距
@@ -234,13 +234,13 @@ class ImageWatermarkProcessor
             $ascender = (int) abs($bbox[7]);  // 基linebyup部minute
             $totalTextHeight = $descender + $ascender;
         } else {
-            // 降leveluse估算method
+            // 降leveluseestimatemethod
             // toatmiddle文character,eachcharacterwidth约equal字bodysize
             $chineseCharCount = mb_strlen($text, 'UTF-8');
             $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // increasesecurityside距
             $textHeight = $fontSize;
-            $descender = (int) ($fontSize * 0.2); // inside置字body估算down降部minute
-            $ascender = (int) ($fontSize * 0.8); // inside置字body估算up升部minute
+            $descender = (int) ($fontSize * 0.2); // insideset fieldbodyestimatedown降部minute
+            $ascender = (int) ($fontSize * 0.8); // insideset fieldbodyestimateup升部minute
             $totalTextHeight = $textHeight;
         }
 
@@ -319,9 +319,9 @@ class ImageWatermarkProcessor
         // from动formatdetect
         if ($format === 'auto') {
             if ($this->fontProvider->hasTransparency($image)) {
-                $format = 'png'; // have透明degreeusePNG
+                $format = 'png'; // havetransparentdegreeusePNG
             } else {
-                $format = 'jpeg'; // no透明degreeuseJPEGhighquality
+                $format = 'jpeg'; // notransparentdegreeuseJPEGhighquality
             }
         }
 
@@ -347,7 +347,7 @@ class ImageWatermarkProcessor
                 case 'jpg':
                 default:
                     if ($this->fontProvider->hasTransparency($image)) {
-                        // JPEGnot supported透明degree,from动转PNG
+                        // JPEGnot supportedtransparentdegree,from动转PNG
                         $this->logger->info('JPEG does not support transparency, converting to PNG');
                         imagepng($image, null, 0);
                     } else {

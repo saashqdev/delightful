@@ -19,7 +19,7 @@ class AdminAgentDetailDTO extends AbstractDTO
     // assistant name
     protected string $agentName;
 
-    // 助理description
+    // assistantdescription
     protected string $agentDescription;
 
     // assistant creator

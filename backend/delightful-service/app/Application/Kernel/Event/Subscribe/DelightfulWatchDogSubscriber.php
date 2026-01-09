@@ -41,24 +41,24 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
         }
         $quantum = 10 * 1000 * 1000; // unit:毫second
         $logger = ApplicationContext::getContainer()->get(LoggerFactory::class)?->get('DelightfulWatchDogSubscriber');
-        // 看门狗找同阻塞place
-        $logger->info('麦吉看门狗,start!');
+        // 看门狗找同blockingplace
+        $logger->info('Magic看门狗,start!');
         $alertCountMap = new WeakMap();
         Watchdog::run($quantum * 5, 0, static function () use (&$alertCountMap, $logger) {
             $coroutine = Coroutine::getCurrent();
             $alertCount = ($alertCountMap[$coroutine] ??= 0) + 1;
             $alertCountMap[$coroutine] = $alertCount;
-            // whensingle协程运line超pass $millSeconds o clock,will触hair看门狗,print协程callstack
+            // whensinglecoroutine运line超pass $millSeconds o clock,will触hair看门狗,printcoroutinecallstack
             if ($alertCount > 1) {
                 $trace = str_replace(["\n", "\r"], ' | ', $coroutine->getTraceAsString());
                 $logger->error(sprintf(
-                    '麦吉看门狗 hair现阻塞 协程 id:%s,同协程阻塞count:%s trace :%s ',
+                    'Magic看门狗 hair现blocking coroutine id:%s,同coroutineblockingcount:%s trace :%s ',
                     $coroutine->getId(),
                     $alertCount,
                     $trace
                 ));
             }
-            // letouttimeslice,letother协程have机willexecute
+            // letouttimeslice,letothercoroutinehave机willexecute
             $millSeconds = 10 * 1000; // 10 毫second
             usleep($millSeconds * $alertCount);
         });

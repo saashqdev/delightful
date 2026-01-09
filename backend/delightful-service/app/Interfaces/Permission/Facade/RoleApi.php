@@ -51,7 +51,7 @@ class RoleApi extends AbstractPermissionApi
         // buildqueryobject(from动filter掉paginationfield)
         $query = new SubAdminQuery($this->request->all());
 
-        // convertfor仓储filterarray
+        // convertforstoragefilterarray
         $filters = $query->toFilters();
 
         // queryrolelist

@@ -615,7 +615,7 @@ abstract class AbstractDomainService
             }
             // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
             $data = SeqAssembler::getClientSeqStruct($seqEntity, $messageDTO)->toArray();
-            // notifyuserotherdevice,thiswithineven ifdeliverfailalsonotimpact,所by放协程within,transactionoutside.
+            // notifyuserotherdevice,thiswithineven ifdeliverfailalsonotimpact,所by放coroutinewithin,transactionoutside.
             co(function () use ($seqEntity) {
                 // asyncpushmessagegivefrom己otherdevice
                 $this->pushControlSequence($seqEntity);

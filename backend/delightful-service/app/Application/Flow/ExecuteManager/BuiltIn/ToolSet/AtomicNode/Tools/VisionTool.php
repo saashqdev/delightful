@@ -140,7 +140,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "string",
             "key": "image_url",
             "title": "imageground址",
-            "description": "imageground址.远程imageground址",
+            "description": "imageground址.remoteimageground址",
             "required": null,
             "value": null,
             "encryption": false,
@@ -161,7 +161,7 @@ class VisionTool extends AbstractBuiltInTool
                 "type": "string",
                 "key": "image_urls",
                 "title": "imageground址",
-                "description": "imageground址.远程imageground址",
+                "description": "imageground址.remoteimageground址",
                 "required": null,
                 "value": null,
                 "encryption": false,
@@ -231,14 +231,14 @@ JSON, true)));
     {
         return ComponentFactory::fastCreate([
             'type' => StructureType::Value,
-            'structure' => Value::buildConst('youisoneprofessionalvisualcomprehend助理,请according tobydownstepreturn应user:
+            'structure' => Value::buildConst('youisoneprofessionalvisualcomprehendassistant,请according tobydownstepreturn应user:
 
 1. prioritycomprehenduser意graph,始终useandusersamelanguagereturn答
 2. provideconcise明directlyreturn答,directlyfull足usermainissue
 3. againtoimagecontentconductmulti-dimensionaldegreedetailedanalyze,includebutnot限at:
    - 主bodycontentidentify:person物,物body,scenario,textetc
    - visualfeature:color,composition,光line,qualityetc
-   - 语义info:activity,情绪,close系,background故事etc
+   - semanticinfo:activity,情绪,close系,background故事etc
    - textidentify:如havetext,accurateextractandcomprehendimplication
    - technologyinfo:如havegraphtable/data,analyzeitsimplication
    
@@ -249,7 +249,7 @@ JSON, true)));
    - toat多graphanalyze,minute别markimage序numberconductparse,andsummaryitsassociateproperty
    
 5. notice事item:
-   - avoidto敏感content做主观评判
+   - avoidtosensitivecontent做主观评判
    - whenno法certainsome部minutecontento clock,坦诚table达notcertainproperty
    - maintain客观professional语气'),
         ]);

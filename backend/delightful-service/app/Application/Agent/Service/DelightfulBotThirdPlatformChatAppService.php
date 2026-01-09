@@ -48,7 +48,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.empty', ['label' => 'key']);
         }
 
-        // speciallogic,ifis飞书,andandischallenge
+        // speciallogic,ifisFeishu,andandischallenge
         $platform = $params['platform'] ?? '';
         if ($platform === ThirdPlatformChatType::FeiShuRobot->value && isset($params['challenge'])) {
             $chatMessage = new ThirdPlatformChatMessage();
@@ -195,7 +195,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
 
     public function createChatGroup(string $key, array $groupMemberIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $delightfulGroupDTO): string
     {
-        // get助理configuration
+        // getassistantconfiguration
         if (empty($key)) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.empty', ['label' => 'key']);
         }

@@ -332,7 +332,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 麦吉userbody系downloginvalidation.
+     * Magicuserbody系downloginvalidation.
      * @return LoginResponseDTO[]
      */
     public function delightfulUserLoginCheck(string $authorization, DelightfulEnvironmentEntity $delightfulEnvironmentEntity, ?string $delightfulOrganizationCode = null): array
@@ -351,7 +351,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         $owner = $this->acquireLock($lockKey);
 
         try {
-            // handle麦吉usersystemtoken,getdelightfulIdanduserId
+            // handleMagicusersystemtoken,getdelightfulIdanduserId
             $tokenDTO = new DelightfulTokenEntity();
             $tokenDTO->setType(DelightfulTokenType::Account);
             $tokenDTO->setToken($authorization);
@@ -363,7 +363,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
             $delightfulId = $delightfulUserToken->getTypeRelationValue();
 
-            // queryuserandhandleorganizationclose系,query麦吉user
+            // queryuserandhandleorganizationclose系,queryMagicuser
             $delightfulUserEntities = $this->userRepository->getUserByDelightfulIds([$delightfulId]);
             if (empty($delightfulUserEntities)) {
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_CREATE_ACCOUNT);

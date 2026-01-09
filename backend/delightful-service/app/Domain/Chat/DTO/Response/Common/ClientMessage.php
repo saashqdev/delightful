@@ -21,7 +21,7 @@ class ClientMessage extends AbstractEntity
     // service端generatemessage唯oneid,all局唯one.useatwithdraw,editmessage.
     protected string $delightfulMessageId;
 
-    // customer端generate,needios/安卓/webthree端共同certainonegeneratealgorithm.useat告知customer端,delightful_message_idbycome
+    // customer端generate,needios/安卓/webthree端共同certainonegeneratealgorithm.useatinformcustomer端,delightful_message_idbycome
     protected ?string $appMessageId;
 
     // topicid

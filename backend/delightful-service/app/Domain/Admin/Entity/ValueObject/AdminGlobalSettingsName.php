@@ -12,13 +12,13 @@ enum AdminGlobalSettingsName: string
     // all局defaultgood友
     case DEFAULT_FRIEND = 'default_friend';
 
-    // 助理createmanage
+    // assistantcreatemanage
     case ASSISTANT_CREATE = 'create_management';
 
     // thethird-partypublish管控
     case THIRD_PARTY_PUBLISH = 'third_platform_publish';
 
-    // get助理all局settingtype
+    // getassistantall局settingtype
     public static function getByType(AdminGlobalSettingsType $type): string
     {
         return match ($type) {

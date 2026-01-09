@@ -30,7 +30,7 @@ enum ToolSource: int
     }
 
     /**
-     * pass枚举valueget枚举object.
+     * passenumvaluegetenumobject.
      */
     public static function fromValue(int $value): ?ToolSource
     {

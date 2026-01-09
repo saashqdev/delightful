@@ -31,28 +31,28 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected ?array $instructs = [];
 
     /**
-     * 助理id.
+     * assistantid.
      */
     protected string $agentId = '';
 
     protected string $rootId = '';
 
     /**
-     * 助理name.
+     * assistantname.
      */
     protected string $agentName;
 
     protected string $robotName;
 
     /**
-     * 助理avatar.
+     * assistantavatar.
      */
     protected string $agentAvatar = '';
 
     protected string $robotAvatar;
 
     /**
-     * 助理description.
+     * assistantdescription.
      */
     protected string $agentDescription;
 

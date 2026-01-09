@@ -59,7 +59,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $conversationDTO->setUserOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $conversationDTO->setReceiveId($messageStruct->getReceiveId());
         $conversationDTO->setReceiveType(ConversationType::from($messageStruct->getReceiveType()));
-        // judge uid and receiverId whetheralready经存inconversation
+        // judge uid and receiverId whetheralreadyalready existsinconversation
         $existsConversation = $this->delightfulConversationRepository->getConversationByUserIdAndReceiveId($conversationDTO);
         if ($existsConversation) {
             // altermessagetype,fromcreateconversationwindow,变moreforopenconversationwindow
@@ -137,7 +137,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             // givefrom己messagestreamgenerate序column.
             $seqEntity = $this->generateSenderSequenceByControlMessage($messageDTO, $conversationEntity->getId());
             $seqEntity->setConversationId($conversationEntity->getId());
-            // notifyuserotherdevice,thiswithineven ifdeliverfailalsonotimpact,所by放协程within,transactionoutside.
+            // notifyuserotherdevice,thiswithineven ifdeliverfailalsonotimpact,所by放coroutinewithin,transactionoutside.
             co(function () use ($seqEntity) {
                 // asyncpushmessagegivefrom己otherdevice
                 $this->pushControlSequence($seqEntity);
@@ -185,7 +185,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             // notifyto方所have
             $this->pushControlSequence($seqEntity);
         }
-        // 告知customer端requestsuccess
+        // informcustomer端requestsuccess
         return [];
     }
 
@@ -292,7 +292,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     {
         $users = $this->delightfulUserRepository->getUserByIds($userIds);
         $users = array_column($users, null, 'user_id');
-        // judgethistheseuserwhetheralready经存inconversationwindow,onlyiswindowstatusbemarkfordelete
+        // judgethistheseuserwhetheralreadyalready existsinconversationwindow,onlyiswindowstatusbemarkfordelete
         $conversations = $this->delightfulConversationRepository->batchGetConversations($userIds, $groupEntity->getId(), ConversationType::Group);
         /** @var DelightfulConversationEntity[] $conversations */
         $conversations = array_column($conversations, null, 'user_id');
@@ -338,7 +338,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * for群主and群memberdeleteconversationwindow.
+     * forgroup ownerand群memberdeleteconversationwindow.
      */
     public function batchDeleteGroupConversationByUserIds(DelightfulGroupEntity $groupEntity, array $userIds): int
     {
@@ -385,7 +385,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $conversationDTO->setUserId($senderUserId);
         $conversationDTO->setReceiveId($receiveId);
         $conversationDTO->setReceiveType($receiverType);
-        // judge uid and receiverId whetheralready经存inconversation
+        // judge uid and receiverId whetheralreadyalready existsinconversation
         $conversationEntity = $this->delightfulConversationRepository->getConversationByUserIdAndReceiveId($conversationDTO);
         if ($conversationEntity === null) {
             if (in_array($conversationDTO->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {

@@ -82,7 +82,7 @@ return new class extends Migration {
                 $totalDeleted += $deletedCount;
                 $logger->info("delete service_provider_original_models table软deletedata: {$deletedCount} item");
 
-                $logger->info("service_provider 相closetable软deletedatacleanupcomplete,总共delete: {$totalDeleted} itemrecord");
+                $logger->info("service_provider 相closetable软deletedatacleanupcomplete,totaldelete: {$totalDeleted} itemrecord");
             });
         } catch (Throwable $e) {
             $logger->error('cleanup软deletedataproceduremiddlehair生error: ' . $e->getMessage());
@@ -147,7 +147,7 @@ return new class extends Migration {
                 $totalDeleted += $deletedOfficeModelsCount;
                 $logger->info("deleteofficialorganization Delightful model(is_office=1): {$deletedOfficeModelsCount} item");
 
-                $logger->info("officialorganization Delightful servicequotientdatacleanupcomplete,总共delete: {$totalDeleted} itemrecord");
+                $logger->info("officialorganization Delightful servicequotientdatacleanupcomplete,totaldelete: {$totalDeleted} itemrecord");
             });
         } catch (Throwable $e) {
             $logger->error('cleanupofficialorganization Delightful servicequotientdataproceduremiddlehair生error: ' . $e->getMessage());
@@ -198,7 +198,7 @@ return new class extends Migration {
                     }
                 }
 
-                $logger->info("cleancomplete,总共impactline数: {$updateCount}");
+                $logger->info("cleancomplete,totalimpactline数: {$updateCount}");
                 $logger->info('Official servicequotientdatacleancomplete');
             });
         } catch (Throwable $e) {
@@ -322,7 +322,7 @@ return new class extends Migration {
             $logger->info("alreadyhandle {$processedCount}/{$totalOrgs} organization,累计delete: {$totalDeleted} item");
         }
 
-        $logger->info("service_provider_models table冗remainderdatacleanupcomplete,总共delete: {$totalDeleted} itemrecord");
+        $logger->info("service_provider_models table冗remainderdatacleanupcomplete,totaldelete: {$totalDeleted} itemrecord");
     }
 
     /**

@@ -124,7 +124,7 @@ class UserAssembler
 
             foreach ($user->toArray() as $key => $value) {
                 if (isset($userDetailAdd[$key])) {
-                    // ifalready经存in,skip
+                    // ifalreadyalready existsin,skip
                     continue;
                 }
                 $userDetailAdd[$key] = $value;

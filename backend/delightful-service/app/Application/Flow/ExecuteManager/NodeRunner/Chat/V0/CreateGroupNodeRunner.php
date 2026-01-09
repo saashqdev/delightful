@@ -123,7 +123,7 @@ class CreateGroupNodeRunner extends NodeRunner
         $delightfulGroupDTO->setGroupType($groupType);
         $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
 
-        // pass conversationID getcome源 and 助理 key,andcreategroup chat
+        // pass conversationID getcome源 and assistant key,andcreategroup chat
         $agentKey = $executionData->getTriggerData()->getAgentKey();
         $this->createChatGroup($agentKey, $groupMemberIds, $ownerAuthorization, $delightfulGroupDTO);
 

@@ -21,11 +21,11 @@ class InternetSearchToolSet extends AbstractBuiltInToolSet
 
     public function getName(): string
     {
-        return 'Mage互联网searchtoolcollection';
+        return 'Mageinternetsearchtoolcollection';
     }
 
     public function getDescription(): string
     {
-        return 'Mage互联网searchtoolcollection';
+        return 'Mageinternetsearchtoolcollection';
     }
 }

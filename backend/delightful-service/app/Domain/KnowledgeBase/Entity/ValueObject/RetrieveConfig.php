@@ -28,7 +28,7 @@ class RetrieveConfig extends AbstractValueObject
      * retrievemethod.
      *
      * optionalvalue:
-     * - semantic_search: 语义retrieve
+     * - semantic_search: semanticretrieve
      * - full_text_search: all文retrieve
      * - hybrid_search: 混合retrieve
      * - graph_search: graphretrieve

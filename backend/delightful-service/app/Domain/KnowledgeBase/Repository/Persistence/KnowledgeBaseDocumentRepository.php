@@ -324,7 +324,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             $builder->where('code', $query->getCode());
         }
 
-        // 按name模糊query
+        // 按nameblurquery
         if ($query->getName() !== null && $query->getName() !== '') {
             $builder->where('name', 'like', '%' . $query->getName() . '%');
         }

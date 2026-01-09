@@ -621,7 +621,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
             $this->assertArrayHasKey('doc_type', $result);
             $this->assertArrayHasKey('knowledge_base_code', $result);
 
-            // verifyreturn的contentcontainquery关键词
+            // verifyreturn的contentcontainquerykeyword
             $this->assertStringContainsString('test', $result['content']);
         }
     }

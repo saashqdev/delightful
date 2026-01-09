@@ -886,7 +886,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         $conversationMessagesQueryDTO->setConversationId($conversationId)->setLimit($limit)->setTopicId($topicId);
         // get话题的most近 20 itemconversationrecord
         $clientSeqResponseDTOS = $this->delightfulChatDomainService->getConversationChatMessages($conversationId, $conversationMessagesQueryDTO);
-        // get收hair双方的userinfo，useat补allo clock增强roletype
+        // get收hair双方的userinfo，useat补allo clockenhanceroletype
         $userIds = [];
         foreach ($clientSeqResponseDTOS as $clientSeqResponseDTO) {
             // 收集 user_id

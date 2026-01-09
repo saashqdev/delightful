@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\DTO\Message\StreamMessage;
 
 /**
- * messageapplicationoption：0:覆盖 1：追加（string拼接，arrayin末tail插入）.
+ * messageapplicationoption：0:覆盖 1：追加（stringsplice，arrayin末tail插入）.
  */
 enum MessageAppendOptions: int
 {

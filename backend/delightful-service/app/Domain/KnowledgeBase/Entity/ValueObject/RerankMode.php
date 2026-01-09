@@ -30,7 +30,7 @@ class RerankMode
      * 加权minute数.
      *
      * usedifferent检索method的minute数加权计算finalminute数，对检索resultconduct重sort。
-     * for example，cansettoquantity检索result的权重为 0.7，关键词检索result的权重为 0.3。
+     * for example，cansettoquantity检索result的权重为 0.7，keyword检索result的权重为 0.3。
      * 该模typepassconfigurationparameter `reranking_mode` fieldset，
      * fromdatabasemiddle的 retrieve_config configurationget。
      */

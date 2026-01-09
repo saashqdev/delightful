@@ -190,20 +190,20 @@ class DelightfulAgentVersionDomainService
         // 将 PATCH 部minute加 1
         $patch = (int) $patch + 1;
 
-        // if PATCH 达to 10，进位to MINOR（canaccording to需求调整此rule）
+        // if PATCH 达to 10，进位to MINOR（canaccording to需求adjust此rule）
         if ($patch > 99) {
             $patch = 0;
             $minor = (int) $minor + 1;
         }
 
-        // if MINOR 达to 10，进位to MAJOR（canaccording to需求调整此rule）
+        // if MINOR 达to 10，进位to MAJOR（canaccording to需求adjust此rule）
         if ($minor > 99) {
             // notresetminor，而是直接增大major，避免not必要的reset
             $minor = 0;
             $major = (int) $major + 1;
         }
 
-        // 拼接并returnnewversionnumber
+        // splice并returnnewversionnumber
         return "{$major}.{$minor}.{$patch}";
     }
 

@@ -349,12 +349,12 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             ->setUserId($dto->getUserId())
             ->setOrganizationCode($dto->getOrganizationCode())
             ->setModel($modelInterface);
-        // according touser的updown文，拆解子issue。need理解user想问什么，again去拆search关键词。
+        // according touser的updown文，拆解子issue。need理解user想问什么，again去拆searchkeyword。
         $searchKeywords = $this->delightfulLLMDomainService->generateSearchKeywordsByUserInput($dto, $modelInterface);
         $queryVo->setSearchKeywords($searchKeywords);
         $searchDetailItems = $this->delightfulLLMDomainService->getSearchResults($queryVo)['search'] ?? [];
         $this->logger->info(sprintf(
-            'getSearchResults searchUserQuestion 虚null拆解关键词并searchuserissue end计o clock，耗o clock %s second',
+            'getSearchResults searchUserQuestion 虚null拆解keyword并searchuserissue end计o clock，耗o clock %s second',
             microtime(true) - $start
         ));
         return $searchDetailItems;
@@ -435,7 +435,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
                 ->setSearchContexts($allSearchContexts)
                 ->setUserId($dto->getUserId())
                 ->setOrganizationCode($dto->getOrganizationCode());
-            // 与search关键词associatepropertymost高andnot重复的searchresult
+            // 与searchkeywordassociatepropertymost高andnot重复的searchresult
             $noRepeatSearchContexts = $this->delightfulLLMDomainService->filterSearchContexts($queryVo);
             $costMircoTime = TimeUtil::getMillisecondDiffFromNow($start);
             $this->logger->info(sprintf(

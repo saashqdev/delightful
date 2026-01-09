@@ -41,7 +41,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'useuserissue和关键词，去检索knowledge basemiddle的content，return与userissuesimilardegreemost高的content。';
+        return 'useuserissue和keyword，去检索knowledge basemiddle的content，return与userissuesimilardegreemost高的content。';
     }
 
     public function getAppendSystemPrompt(array $customParams = []): string
@@ -61,9 +61,9 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 > knowledge basename：knowledge basedescription
 {$knowledgePrompt}
 ## process
-1. 结合updown文提炼user的issue，generate多关键词，at mostnot超过 5 ，多关键词use英文逗number"," 隔开，useatusedifferent关键词fromknowledge basemiddle检索most相关的info；
+1. 结合updown文提炼user的issue，generate多keyword，at mostnot超过 5 ，多keyworduse英文逗number"," 隔开，useatusedifferentkeywordfromknowledge basemiddle检索most相关的info；
 2. 结合updown文，analyzeuser的issue，generate `names` parameter，useatfinger定与userissue可能have关的多knowledge basename，按照相关propertysort，相关property需结合updown文、knowledge basename和knowledge basedescriptionconduct判断；
-3. use关键词和userissue，call `{$this->getName()}` tool检索knowledge basemiddle的content，关键词的parameter是 `keyword`，userissue的parameter是 `question`, 请ensureparameterallbecorrect填入，tool将return与userissuesimilardegreemost高的contentslicesegment；
+3. usekeyword和userissue，call `{$this->getName()}` tool检索knowledge basemiddle的content，keyword的parameter是 `keyword`，userissue的parameter是 `question`, 请ensureparameterallbecorrect填入，tool将return与userissuesimilardegreemost高的contentslicesegment；
 4. knowledge base检索出来的contentwithinwillcontain一些customize的 Delightful tag，你要善atuse它们，havebydown几typetag：
     - <DelightfulImage></DelightfulImage> 表示一image，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，eachtagallwillinfront端messagecard渲染出一张image；
     - <DelightfulVideo></DelightfulVideo> 表示一video，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，eachtagallwillinfront端messagecard渲染出一video；
@@ -74,7 +74,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 - fragments: 本time检索to的所haveknowledge baseslicesegment
 - fragments.*.content: slicesegmentcontent
 - fragments.*.metadata.url: currentslicesegment的原文link
-- graph.*.content: 来自知识图谱的data，能增强info，让你more好回答issue
+- graph.*.content: 来自知识图谱的data，能enhanceinfo，让你more好回答issue
 ## 限制
 - 回答的contentmiddlenotallow出现not是Delightfultag的link。
 MARKDOWN;

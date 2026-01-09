@@ -237,8 +237,8 @@ JSON, true)));
 2. 提供简洁明了的直接回答，直接满足user的mainissue
 3. again对imagecontentconduct多维degree详细analyze，includebutnot限at：
    - 主bodycontent识别：人物、物body、场景、文字etc
-   - 视觉特征：color、构图、光line、qualityetc
-   - 语义info：activity、情绪、关系、背景故事etc
+   - 视觉特征：color、composition、光line、qualityetc
+   - 语义info：activity、情绪、关系、background故事etc
    - 文字识别：如have文字，准确提取并理解含义
    - 技术info：如have图table/data，analyze其含义
    

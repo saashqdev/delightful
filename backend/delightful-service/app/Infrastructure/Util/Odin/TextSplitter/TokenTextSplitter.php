@@ -192,7 +192,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * processminute隔符，将minute隔符拼接toeachminutepiece的frontsurface（except了first）.
+     * processminute隔符，将minute隔符splicetoeachminutepiece的frontsurface（except了first）.
      */
     private function preserveSeparator(array $chunks, string $separator): array
     {

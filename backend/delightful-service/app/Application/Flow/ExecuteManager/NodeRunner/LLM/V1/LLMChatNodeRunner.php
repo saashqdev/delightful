@@ -342,7 +342,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             return false;
         }
 
-        // 可能alsohave其他string拼接，暂o clockalsonotinside敛
+        // 可能alsohave其他stringsplice，暂o clockalsonotinside敛
         $items = match ($contentValue->getType()) {
             ValueType::Const => $contentValue->getConstValue()?->getItems() ?? [],
             ValueType::Expression => $contentValue->getExpressionValue()?->getItems() ?? [],

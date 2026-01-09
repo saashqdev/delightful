@@ -40,7 +40,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $created_at createtime
  * @property string $updated_at updatetime
  * @property null|string $deleted_at deletetime
- * @property int $word_count 字数statistics
+ * @property int $word_count word countstatistics
  */
 class KnowledgeBaseDocumentModel extends Model
 {

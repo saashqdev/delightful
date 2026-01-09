@@ -22,7 +22,7 @@ return new class extends Migration {
             }
 
             if (! Schema::hasColumn('delightful_flow_knowledge_fragment', 'word_count')) {
-                $table->unsignedBigInteger('word_count')->default(0)->comment('字数statistics');
+                $table->unsignedBigInteger('word_count')->default(0)->comment('word countstatistics');
             }
         });
     }

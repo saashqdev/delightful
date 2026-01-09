@@ -73,7 +73,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * 权重configuration.
      *
-     * containtoquantity检索和关键词检索的权重configuration
+     * containtoquantity检索和keyword检索的权重configuration
      */
     protected array $weights = [
         'vector_setting' => [

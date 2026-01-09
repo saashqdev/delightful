@@ -33,7 +33,7 @@ return new class extends Migration {
             $table->tinyInteger('sync_times')->default(0)->comment('synccount');
             $table->string('sync_status_message', 1000)->default('')->comment('syncstatusmessage');
             $table->string('organization_code')->comment('organizationencoding');
-            $table->unsignedBigInteger('word_count')->default(0)->comment('字数statistics');
+            $table->unsignedBigInteger('word_count')->default(0)->comment('word countstatistics');
 
             // configurationinfo
             $table->string('embedding_model', 255)->comment('嵌入model');

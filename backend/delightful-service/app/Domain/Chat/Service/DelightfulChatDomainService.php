@@ -1040,7 +1040,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         $memoryCacheContent = $memoryCache['content'] ?? [];
 
         foreach ($jsonContent as $key => $value) {
-            // ifvalue是string，取出旧valueconduct拼接
+            // ifvalue是string，取出旧valueconductsplice
             if (is_string($value)) {
                 $value = Arr::get($memoryCacheContent, $key) . $value;
             } elseif (is_array($value)) {

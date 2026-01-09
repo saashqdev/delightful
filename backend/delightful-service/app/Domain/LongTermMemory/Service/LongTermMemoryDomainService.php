@@ -317,7 +317,7 @@ readonly class LongTermMemoryDomainService
                 ExceptionBuilder::throw(LongTermMemoryErrorCode::MEMORY_NOT_FOUND);
             }
 
-            // ifupdate了pending_content，needaccording to业务rule调整status
+            // ifupdate了pending_content，needaccording to业务ruleadjuststatus
             if ($dto->pendingContent !== null) {
                 $this->adjustMemoryStatusBasedOnPendingContent($memory, $dto->pendingContent);
             }
@@ -648,7 +648,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * according topending_content的变化调整记忆status.
+     * according topending_content的变化adjust记忆status.
      */
     private function adjustMemoryStatusBasedOnPendingContent(LongTermMemoryEntity $memory, ?string $pendingContent): void
     {

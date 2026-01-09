@@ -12,7 +12,7 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
  *
  * 定义了四type检索method：
  * - SEMANTIC_SEARCH: 语义检索，based ontoquantitysimilardegree的检索method
- * - FULL_TEXT_SEARCH: all文检索，based on关键词匹配的检索method
+ * - FULL_TEXT_SEARCH: all文检索，based onkeyword匹配的检索method
  * - HYBRID_SEARCH: 混合检索，结合语义检索和all文检索的method
  * - GRAPH_SEARCH: 图检索，based on知识图谱的检索method
  */
@@ -23,14 +23,14 @@ class RetrievalMethod
      *
      * based ontoquantitysimilardegree的检索method。
      * 将query文本convert为toquantity，然backintoquantitydatabasemiddle查找mostsimilar的document。
-     * 适合理解语义关系、多语言理解、process模糊description。
+     * 适合理解语义关系、多语言理解、processblurdescription。
      */
     public const string SEMANTIC_SEARCH = 'semantic_search';
 
     /**
      * all文检索.
      *
-     * based on关键词匹配的检索method。
+     * based onkeyword匹配的检索method。
      * 索引documentmiddle的所have单词，returncontainquery词的文本slicesegment。
      * 适合精确匹配（如productname、人名、ID）和低频词匹配。
      */

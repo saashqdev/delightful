@@ -28,7 +28,7 @@ enum SocketEventType: string
     case Stream = 'stream';
 
     /**
-     * 实o clockproperty极高的过渡message，nothave seq_id，notwillbe持久化，alsonotwillbecache。
+     * 实o clockproperty极高的transitionmessage，nothave seq_id，notwillbe持久化，alsonotwillbecache。
      */
     case Intermediate = 'intermediate';
 }

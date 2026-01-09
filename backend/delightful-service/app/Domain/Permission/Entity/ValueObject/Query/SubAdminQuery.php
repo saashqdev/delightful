@@ -20,7 +20,7 @@ use App\Infrastructure\Core\AbstractQuery;
  */
 class SubAdminQuery extends AbstractQuery
 {
-    /** 子管理员name（模糊匹配） */
+    /** 子管理员name（blur匹配） */
     private ?string $name = null;
 
     /** enabled status：1-enable 0-disable */

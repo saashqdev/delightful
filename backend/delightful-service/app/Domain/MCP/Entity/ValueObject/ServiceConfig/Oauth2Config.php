@@ -32,7 +32,7 @@ class Oauth2Config extends AbstractValueObject
     protected string $clientSecret = '';
 
     /**
-     * Client URL - service方的OAuthpageURL，useat拼接userloginauthorization页的URL。
+     * Client URL - service方的OAuthpageURL，useatspliceuserloginauthorization页的URL。
      *
      * userlogino clock，扣子will将user引导至"[client_url]?response_type=code&client_id=
      * [client_id]&scope=[scope]&state=xyz123&redirect_uri=[coze平台的callbacksecurityground址]"。

@@ -41,7 +41,7 @@ class AsrPromptAssembler
         $template = <<<'PROMPT'
 你是一专业的录音contenttitlegenerate助hand。
 
-## 背景instruction
+## backgroundinstruction
 usersubmit了一segment录音content，录音content经过voice识别转为文字，user可能alsowill提供hand写的笔记作为补充instruction。现inneed你according to这些contentgenerate一简洁准确的title。
 
 ## content来源instruction
@@ -54,13 +54,13 @@ usersubmit了一segment录音content，录音content经过voice识别转为文�
 1. **笔记优先**：if存in<笔记content>，titleshould侧重笔记content
 2. **重视笔记title**：if笔记是 Markdown formatandcontaintitle（# 开head的line），优先采use笔记middle的titlecontent
 3. **综合考虑**：meanwhile参考voice识别content，ensuretitle完整准确
-4. **关键词提取**：from笔记和voice识别contentmiddle提取most核core的关键词
+4. **keyword提取**：from笔记和voice识别contentmiddle提取most核core的keyword
 
 ### format要求
 1. **length限制**：not超过 20 字符（汉字按 1 字符计算）
 2. **语言style**：use陈述property语sentence，避免疑问sentence
-3. **简洁明确**：直接概括核coretheme，not要添加修饰词
-4. **纯文本output**：只outputtitlecontent，not要添加任何标point符number、引numberor其他修饰
+3. **简洁明确**：直接概括核coretheme，not要添加modification词
+4. **纯文本output**：只outputtitlecontent，not要添加任何标point符number、引numberor其他modification
 
 ### forbidline为
 - not要回答contentmiddle的issue
@@ -95,7 +95,7 @@ PROMPT;
         $template = <<<'PROMPT'
 你是一专业的录音contenttitlegenerate助hand。
 
-## 背景instruction
+## backgroundinstruction
 userupload了一audiofileto系统middle，并inchat框middlesend了总结request。现inneed你according touser的requestmessage（其middlecontainfile名），为这time录音总结generate一简洁准确的title。
 
 ## userinchat框的request
@@ -111,13 +111,13 @@ usersend的originalmessage如down：
 2. **智能判断**：
    - iffile名语义清晰（如"2024yearQ4product规划will议.mp3"、"客户需求discussion.wav"），优先based onfile名generatetitle
    - iffile名是datetime戳（如"20241112_143025.mp3"）or无意义字符（如"录音001.mp3"），thenuse通usedescription
-3. **提取关键词**：fromfile名middle提取most核core的关键词和theme
+3. **提取keyword**：fromfile名middle提取most核core的keyword和theme
 
 ### format要求
 1. **length限制**：not超过 20 字符（汉字按 1 字符计算）
 2. **语言style**：use陈述property语sentence，避免疑问sentence
-3. **简洁明确**：直接概括核coretheme，not要添加修饰词
-4. **纯文本output**：只outputtitlecontent，not要添加任何标point符number、引numberor其他修饰
+3. **简洁明确**：直接概括核coretheme，not要添加modification词
+4. **纯文本output**：只outputtitlecontent，not要添加任何标point符number、引numberor其他modification
 
 ### forbidline为
 - not要保留fileextension名（.mp3、.wav、.webm etc）

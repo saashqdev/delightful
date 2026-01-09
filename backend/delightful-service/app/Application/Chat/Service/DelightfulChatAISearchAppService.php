@@ -314,7 +314,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 $associateQuestionsQueryVo->setMessageHistory(new MessageHistory());
                 $associateSubQuestions = $this->delightfulLLMDomainService->getRelatedQuestions($associateQuestionsQueryVo, 2, 3);
                 // todo 由at这within是对所have维degreesummarybackagain精读，therefore丢失了each维degree的quantity，只能随机generate。
-                // etc待front端调整渲染 ui
+                // etc待front端adjust渲染 ui
                 $pageCount = random_int(30, 60);
                 $onePageWords = random_int(200, 2000);
                 $totalWords = $pageCount * $onePageWords;
@@ -377,12 +377,12 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             ->setUserId($dto->getUserId())
             ->setOrganizationCode($dto->getOrganizationCode())
             ->setModel($modelInterface);
-        // according touser的updown文，拆解子issue。need理解user想问什么，again去拆search关键词。
+        // according touser的updown文，拆解子issue。need理解user想问什么，again去拆searchkeyword。
         $searchKeywords = $this->delightfulLLMDomainService->generateSearchKeywordsByUserInput($dto, $modelInterface);
         $queryVo->setSearchKeywords($searchKeywords);
         $searchResult = $this->delightfulLLMDomainService->getSearchResults($queryVo);
         $this->logger->info(sprintf(
-            'getSearchResults searchUserQuestion 虚null拆解关键词并searchuserissue end计o clock，耗o clock %s second',
+            'getSearchResults searchUserQuestion 虚null拆解keyword并searchuserissue end计o clock，耗o clock %s second',
             microtime(true) - $start
         ));
         return $searchResult;
@@ -477,7 +477,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 ->setSearchContexts($allSearchContexts)
                 ->setUserId($dto->getUserId())
                 ->setOrganizationCode($dto->getOrganizationCode());
-            // 与search关键词associatepropertymost高andnot重复的searchresult
+            // 与searchkeywordassociatepropertymost高andnot重复的searchresult
             $noRepeatSearchContexts = $this->delightfulLLMDomainService->filterSearchContexts($queryVo);
             $costMircoTime = TimeUtil::getMillisecondDiffFromNow($start);
             $this->logger->info(sprintf(

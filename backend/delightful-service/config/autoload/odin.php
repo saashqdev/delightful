@@ -331,7 +331,7 @@ return [
         'model_options' => [
             'error_mapping_rules' => [
                 // example：customizeerrormapping
-                // 'customizeerror关键词' => \Hyperf\Odin\Exception\LLMException\LLMTimeoutError::class,
+                // 'customizeerrorkeyword' => \Hyperf\Odin\Exception\LLMException\LLMTimeoutError::class,
             ],
         ],
         'model_fixed_temperature' => [

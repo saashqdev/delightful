@@ -312,7 +312,7 @@ class ServiceProviderApiTest extends BaseTest
      */
     private function findModelInDetailResponse(array $detailData, string $modelId): ?array
     {
-        // detailinterface可能return models arrayor其他结构，这withinneedaccording toactualinterface调整
+        // detailinterface可能return models arrayor其他结构，这withinneedaccording toactualinterfaceadjust
         if (isset($detailData['models']) && is_array($detailData['models'])) {
             foreach ($detailData['models'] as $model) {
                 if (isset($model['id']) && (string) $model['id'] === (string) $modelId) {

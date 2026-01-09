@@ -403,7 +403,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
             if (! $opEnum) {
                 throw new InvalidArgumentException('Not an operation type: ' . $operation);
             }
-            // 要求customize OperationEnum implement label()/translationKey() 与 DelightfulOperationEnum 对齐
+            // 要求customize OperationEnum implement label()/translationKey() 与 DelightfulOperationEnum alignment
             if (method_exists($opEnum, 'label') && method_exists($opEnum, 'translationKey')) {
                 $translated = $opEnum->label();
                 if ($translated === $opEnum->translationKey()) {

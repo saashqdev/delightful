@@ -177,7 +177,7 @@ class DelightfulLLMDomainService
     ## contextexceptionhandle
     when {context} 为nullo clock：
     1. start备选generatestrategy，application5W1Hframework（Who/What/When/Where/Why/How），并结合user的originalquestionconduct填充
-    2. generatedefaultdimension，for example：政策背景 | most新data | 专家观point | 对ratioanalyze | line业趋势
+    2. generatedefaultdimension，for example：政策background | most新data | 专家观point | 对ratioanalyze | line业趋势
     
     ## outputstandard
     混合bydown三type及more多type的question范type，byensure子question的多样property和overrideproperty：
@@ -239,7 +239,7 @@ class DelightfulLLMDomainService
        - **event定义**：event是searchcontentmiddlemention的、具havetimeassociate（明确or可推测）的独立事实、变化oractivity，includebutnot限atcreate、publish、开业、update、合作、activityetc。
        - according touserquestion，提取与之相关的event，保持description简洁，聚焦specifichair生的事情。
        - **skip无关content**：
-         - 纯静statedescription（如not变的property、背景介绍，无time变化）。
+         - 纯静statedescription（如not变的property、background介绍，无time变化）。
          - datastatisticsor财务information（如营收、利润）。
          - 主观comment、analyzeor推测（unless与event直接相关）。
          - 无timeassociateand与question无关的detail。
@@ -669,7 +669,7 @@ class DelightfulLLMDomainService
             ));
         }
 
-        // record阅读字数
+        // record阅读word count
         $totalWords = 0;
         if (! empty($searchArrayList)) {
             foreach ($searchArrayList as $searchContext) {

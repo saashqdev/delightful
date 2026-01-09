@@ -17,7 +17,7 @@ interface TemplateInterface
     public function getTemplateIdByTypeAndLanguage(string $type, ?string $language): ?string;
 
     /**
-     * according to传入的短信type和语type,确定短信content. 可能will动state调整type对应的templatecontent.
+     * according to传入的短信type和语type,确定短信content. 可能will动stateadjusttype对应的templatecontent.
      */
     public function getContentBySMSTypeAndLanguage(string $type, ?string $language): string;
 

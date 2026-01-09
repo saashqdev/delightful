@@ -168,7 +168,7 @@ class ImageWatermarkProcessor
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && ($this->fontProvider->containsChinese($text) || $this->fontProvider->supportsTTF())) {
             // useTTF字body渲染，supportmiddle文
-            // TTF字bodysizeneed调整，usuallyratioinside置字body小一些
+            // TTF字bodysizeneedadjust，usuallyratioinside置字body小一些
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
 
             // correct计算TTF字body的基lineposition
@@ -199,7 +199,7 @@ class ImageWatermarkProcessor
      */
     private function calculateFontSize(int $width, int $height): int
     {
-        // according toimagesize动state调整字bodysize
+        // according toimagesize动stateadjust字bodysize
         $size = min($width, $height) / 20;
         return max(12, min(36, (int) $size));
     }

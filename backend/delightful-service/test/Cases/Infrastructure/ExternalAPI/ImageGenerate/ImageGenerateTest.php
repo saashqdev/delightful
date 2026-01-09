@@ -95,7 +95,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByVolcengine()
     {
         $volcengineModelRequest = new VolcengineModelRequest();
-        $volcengineModelRequest->setPrompt('摄影作品，真人写真style，一画着万圣section装扮的女人handwithin拿着一南瓜灯，该design冷color调与暖color调结合，冷color调与暖color调过渡自然，color调柔和，电影感，电影海报，高level感，16k，超详细，UHD');
+        $volcengineModelRequest->setPrompt('摄影作品，真人写真style，一画着万圣section装扮的女人handwithin拿着一南瓜灯，该design冷color调与暖color调结合，冷color调与暖color调transition自然，color调柔和，电影感，电影海报，高level感，16k，超详细，UHD');
         $volcengineModelRequest->setGenerateNum(1);
         $volcengineModelRequest->setWidth('1024');
         $volcengineModelRequest->setHeight('1024');
@@ -108,7 +108,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByFluix()
     {
         $FluxModelRequest = new FluxModelRequest();
-        $FluxModelRequest->setPrompt('摄影作品，真人写真style，一画着万圣section装扮的女人handwithin拿着一南瓜灯，该design冷color调与暖color调结合，冷color调与暖color调过渡自然，color调柔和，电影感，电影海报，高level感，16k，超详细，UHD');
+        $FluxModelRequest->setPrompt('摄影作品，真人写真style，一画着万圣section装扮的女人handwithin拿着一南瓜灯，该design冷color调与暖color调结合，冷color调与暖color调transition自然，color调柔和，电影感，电影海报，高level感，16k，超详细，UHD');
         $FluxModelRequest->setGenerateNum(1);
         $FluxModelRequest->setWidth('1024');
         $FluxModelRequest->setHeight('1024');
@@ -121,7 +121,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByMJ()
     {
         $MjModelRequest = new MidjourneyModelRequest();
-        $MjModelRequest->setPrompt('摄影作品，真人写真style，一画着万圣section装扮的女人handwithin拿着一南瓜灯，该design冷color调与暖color调结合，冷color调与暖color调过渡自然，color调柔和，电影感，电影海报，高level感，16k，超详细，UHD');
+        $MjModelRequest->setPrompt('摄影作品，真人写真style，一画着万圣section装扮的女人handwithin拿着一南瓜灯，该design冷color调与暖color调结合，冷color调与暖color调transition自然，color调柔和，电影感，电影海报，高level感，16k，超详细，UHD');
         $MjModelRequest->setGenerateNum(1);
         $MjModelRequest->setModel('relax');
         $MjModel = new MidjourneyModel();
@@ -163,7 +163,7 @@ class ImageGenerateTest extends BaseTest
 
         // createrequest实例
         $gpt4oModelRequest = new GPT4oModelRequest();
-        $gpt4oModelRequest->setPrompt('调整一群女巫handwithin捧着南瓜in膜拜一人');
+        $gpt4oModelRequest->setPrompt('adjust一群女巫handwithin捧着南瓜in膜拜一人');
         $gpt4oModelRequest->setGenerateNum(1);
 
         // set参考image

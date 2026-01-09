@@ -20,11 +20,11 @@ return new class extends Migration {
 
         Schema::create('delightful_ai_abilities', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('code', 50)->comment('能力唯one标识');
+            $table->string('code', 50)->comment('能力唯oneidentifier');
             $table->string('organization_code', 100)->default('')->comment('organizationencoding');
             $table->json('name_i18n')->comment('能力name（多languageJSONformat）');
             $table->json('description_i18n')->comment('能力description（多languageJSONformat）');
-            $table->string('icon', 100)->nullable()->comment('graph标标识');
+            $table->string('icon', 100)->nullable()->comment('graph标identifier');
             $table->integer('sort_order')->default(0)->comment('sort');
             $table->tinyInteger('status')->default(1)->comment('status：0-disable，1-enable');
             $table->json('config')->comment('configurationinformation（provider_code, access_point, api_key, model_idetc）');

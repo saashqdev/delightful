@@ -76,7 +76,7 @@ class ModeAggregateDTO extends AbstractDTO
             $this->groups,
             fn ($groupAggregate) => $groupAggregate->getGroup()->getId() !== $groupId
         );
-        $this->groups = array_values($this->groups); // 重新索引
+        $this->groups = array_values($this->groups); // 重新index
     }
 
     /**

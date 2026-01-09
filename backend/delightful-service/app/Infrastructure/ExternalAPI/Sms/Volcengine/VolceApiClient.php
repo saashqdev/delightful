@@ -41,7 +41,7 @@ class VolceApiClient extends AbstractSms
             return $smsStruct->content ?: '';
         }
         $templateContent = $this->template->getContentByTemplateId($smsStruct->getTemplateId());
-        // 按variable顺序,also原becomecomplete短信text
+        // 按variableorder,also原becomecomplete短信text
         return $this->translateContent($templateContent, $smsStruct->variables);
     }
 
@@ -54,7 +54,7 @@ class VolceApiClient extends AbstractSms
         $smsStruct->language = $this->getContentLanguage($smsStruct);
         // 火山短信只supportvariable短信,according tocomplete $message 适配to应 templatevariable
 
-        // $variables maybefor索引array ["quotient品A","供应quotientA",10],火山短信needalso原becomeassociatearray
+        // $variables maybeforindexarray ["quotient品A","供应quotientA",10],火山短信needalso原becomeassociatearray
         if ($smsStruct->templateId && $this->array_is_list($variables)) {
             // 1.gettemplatecontent,certainvariablekey
             $templateContent = $this->template->getContentByTemplateId($smsStruct->getTemplateId()) ?? '';

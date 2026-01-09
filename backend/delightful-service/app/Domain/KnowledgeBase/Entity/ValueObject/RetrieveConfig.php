@@ -71,9 +71,9 @@ class RetrieveConfig extends AbstractValueObject
     protected bool $rerankingEnable = false;
 
     /**
-     * 权重configuration.
+     * weightconfiguration.
      *
-     * containtoquantityretrieveandkeywordretrieve权重configuration
+     * containtoquantityretrieveandkeywordretrieveweightconfiguration
      */
     protected array $weights = [
         'vector_setting' => [
@@ -242,7 +242,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * get权重configuration.
+     * getweightconfiguration.
      */
     public function getWeights(): array
     {
@@ -250,11 +250,11 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * set权重configuration.
+     * setweightconfiguration.
      */
     public function setWeights(array $weights): self
     {
-        // verify权重configuration
+        // verifyweightconfiguration
         if (! isset($weights['vector_setting']) || ! isset($weights['keyword_setting']) || ! isset($weights['graph_setting'])) {
             throw new InvalidArgumentException('Weights must contain vector_setting, keyword_setting and graph_setting');
         }

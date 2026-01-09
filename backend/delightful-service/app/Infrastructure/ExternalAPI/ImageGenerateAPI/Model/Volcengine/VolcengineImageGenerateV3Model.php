@@ -139,7 +139,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
             }
         }
 
-        // 按索引sortresult
+        // 按indexsortresult
         ksort($imageUrls);
         $imageUrls = array_values($imageUrls);
 
@@ -222,7 +222,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
             ExceptionBuilder::throw($finalErrorCode, $finalErrorMsg);
         }
 
-        // 按索引sortresult
+        // 按indexsortresult
         ksort($rawResults);
         return array_values($rawResults);
     }

@@ -127,7 +127,7 @@ class ChatMemory implements MemoryPersistenceInterface
         if (! empty($messageIds)) {
             $imMessages = $this->delightfulChatDomainService->getMessageEntitiesByMaicMessageIds($messageIds, $memoryQuery->getRangMessageTypes());
             foreach ($imMessages as $imMessage) {
-                // thiswithinisforsortcorrect according to seq 顺序conductrow
+                // thiswithinisforsortcorrect according to seq orderconductrow
                 $index = array_search($imMessage->getDelightfulMessageId(), $messageIds);
                 if ($index !== false) {
                     $messageLists[$index] = $imMessage;
@@ -162,7 +162,7 @@ class ChatMemory implements MemoryPersistenceInterface
             return $messageLists;
         }
 
-        // reset挂载顺序
+        // reset挂载order
         $messages = [];
         foreach ($messageLists as $customMessage) {
             $messages[] = $customMessage;

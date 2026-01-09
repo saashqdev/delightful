@@ -58,7 +58,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * buildcompletepermission标识.
+     * buildcompletepermissionidentifier.
      */
     public function buildPermission(string $resource, string $operation): string
     {
@@ -74,7 +74,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * parsepermission标识.
+     * parsepermissionidentifier.
      */
     public function parsePermission(string $permissionKey): array
     {
@@ -273,12 +273,12 @@ class DelightfulPermission implements DelightfulPermissionInterface
             ];
         }
 
-        // willassociatearray children 转for索引array，保持returnformat
+        // willassociatearray children 转forindexarray，保持returnformat
         return array_values($this->normalizeTree($tree));
     }
 
     /**
-     * checkpermission键whethervalid.
+     * checkpermissionkeywhethervalid.
      */
     public function isValidPermission(string $permissionKey): bool
     {
@@ -306,12 +306,12 @@ class DelightfulPermission implements DelightfulPermissionInterface
      * 判断userpermissionsetmiddlewhether拥havefinger定permission（考虑隐typecontain）。
      *
      * rule：
-     *   1. 如直接命middlepermission键，return true；
+     *   1. 如直接命middlepermissionkey，return true；
      *   2. if拥haveall局permission ALL_PERMISSIONS，return true；
      *   3. 若未命middle，thencheckbythepermission隐typecontainpermissionset（for example *edit* 隐typecontain *query*）。
      *
-     * @param string $permissionKey goalpermission键
-     * @param string[] $userPermissions user已拥havepermission键set
+     * @param string $permissionKey goalpermissionkey
+     * @param string[] $userPermissions user已拥havepermissionkeyset
      * @param bool $isPlatformOrganization whether平台organization
      */
     public function checkPermission(string $permissionKey, array $userPermissions, bool $isPlatformOrganization = false): bool
@@ -403,7 +403,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
             if (! $opEnum) {
                 throw new InvalidArgumentException('Not an operation type: ' . $operation);
             }
-            // 要求customize OperationEnum implement label()/translationKey() and DelightfulOperationEnum alignment
+            // requirecustomize OperationEnum implement label()/translationKey() and DelightfulOperationEnum alignment
             if (method_exists($opEnum, 'label') && method_exists($opEnum, 'translationKey')) {
                 $translated = $opEnum->label();
                 if ($translated === $opEnum->translationKey()) {
@@ -417,7 +417,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * recursionwill child map 转for索引array.
+     * recursionwill child map 转forindexarray.
      */
     private function normalizeTree(array $branch): array
     {

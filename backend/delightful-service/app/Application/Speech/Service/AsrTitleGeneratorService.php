@@ -45,7 +45,7 @@ readonly class AsrTitleGeneratorService
      * @param string $asrStreamContent ASRstream识别content
      * @param null|string $fileId fileID
      * @param null|NoteDTO $note 笔记content
-     * @param string $taskKey task键（useatlog）
+     * @param string $taskKey taskkey（useatlog）
      * @return null|string generatetitle
      */
     public function generateTitleForScenario(
@@ -215,7 +215,7 @@ readonly class AsrTitleGeneratorService
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
      * @param string $fileName file名
-     * @param string $taskKey task键（useatlog）
+     * @param string $taskKey taskkey（useatlog）
      * @return null|string generatetitle
      */
     public function generateTitleForFileUpload(

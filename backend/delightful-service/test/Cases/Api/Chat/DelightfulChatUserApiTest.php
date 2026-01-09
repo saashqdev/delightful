@@ -79,7 +79,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $userData = $response['data'];
 
-        // validateuserdata结构 - checkclose键field存in
+        // validateuserdata结构 - checkclosekeyfield存in
         $this->assertArrayHasKey('id', $userData, 'response应containidfield');
         $this->assertArrayHasKey('avatar_url', $userData, 'response应containavatar_urlfield');
         $this->assertArrayHasKey('nickname', $userData, 'response应containnicknamefield');
@@ -88,7 +88,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $this->assertArrayHasKey('created_at', $userData, 'response应containcreated_atfield');
         $this->assertArrayHasKey('updated_at', $userData, 'response应containupdated_atfield');
 
-        // validateclose键fieldnotfornull
+        // validateclosekeyfieldnotfornull
         $this->assertNotEmpty($userData['id'], 'idfieldnot应fornull');
         $this->assertNotEmpty($userData['organization_code'], 'organization_codefieldnot应fornull');
         $this->assertNotEmpty($userData['user_id'], 'user_idfieldnot应fornull');
@@ -187,14 +187,14 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $userData = $response['data'];
 
-        // validateclose键field存in
+        // validateclosekeyfield存in
         $this->assertArrayHasKey('id', $userData, 'response应containidfield');
         $this->assertArrayHasKey('organization_code', $userData, 'response应containorganization_codefield');
         $this->assertArrayHasKey('user_id', $userData, 'response应containuser_idfield');
         $this->assertArrayHasKey('created_at', $userData, 'response应containcreated_atfield');
         $this->assertArrayHasKey('updated_at', $userData, 'response应containupdated_atfield');
 
-        // validateclose键fieldnotfornull
+        // validateclosekeyfieldnotfornull
         $this->assertNotEmpty($userData['id'], 'idfieldnot应fornull');
         $this->assertNotEmpty($userData['organization_code'], 'organization_codefieldnot应fornull');
         $this->assertNotEmpty($userData['user_id'], 'user_idfieldnot应fornull');

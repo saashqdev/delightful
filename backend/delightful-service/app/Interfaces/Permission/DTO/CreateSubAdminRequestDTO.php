@@ -25,7 +25,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
     public int $status = 1;
 
     /**
-     * permission键list（optional）.
+     * permissionkeylist（optional）.
      */
     public array $permissions = [];
 

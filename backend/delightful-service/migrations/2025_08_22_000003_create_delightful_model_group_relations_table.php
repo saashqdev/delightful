@@ -23,8 +23,8 @@ return new class extends Migration {
             $table->bigInteger('mode_id')->unsigned()->default(0)->comment('modeID');
             $table->bigInteger('group_id')->unsigned()->default(0)->comment('minutegroupID');
             $table->string('model_id')->default('')->comment('modelID');
-            $table->bigInteger('provider_model_id')->unsigned()->default(0)->comment('modeltable主键 id');
-            $table->integer('sort')->default(0)->comment('sort权重');
+            $table->bigInteger('provider_model_id')->unsigned()->default(0)->comment('modeltable主key id');
+            $table->integer('sort')->default(0)->comment('sortweight');
             $table->string('organization_code', 32)->default('')->comment('organizationcode');
             $table->timestamps();
             $table->softDeletes();

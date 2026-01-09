@@ -24,12 +24,12 @@ interface DelightfulPermissionInterface
     public function getResources(): array;
 
     /**
-     * buildpermission标识.
+     * buildpermissionidentifier.
      */
     public function buildPermission(string $resource, string $operation): string;
 
     /**
-     * parsepermission标识.
+     * parsepermissionidentifier.
      */
     public function parsePermission(string $permissionKey): array;
 
@@ -46,7 +46,7 @@ interface DelightfulPermissionInterface
     public function getPermissionTree(bool $isPlatformOrganization = false): array;
 
     /**
-     * checkpermission键whethervalid.
+     * checkpermissionkeywhethervalid.
      */
     public function isValidPermission(string $permissionKey): bool;
 

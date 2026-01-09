@@ -61,7 +61,7 @@ interface ProviderModelRepositoryInterface
      * batchquantityaccording toIDgetmodel.
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $ids modelIDarray
-     * @return ProviderModelEntity[] model实bodyarray，byIDfor键
+     * @return ProviderModelEntity[] model实bodyarray，byIDforkey
      */
     public function getByIds(ProviderDataIsolation $dataIsolation, array $ids): array;
 
@@ -70,8 +70,8 @@ interface ProviderModelRepositoryInterface
     /**
      * batchquantityaccording toModelIDgetmodel.
      * @param ProviderDataIsolation $dataIsolation data隔离object
-     * @param string[] $modelIds model标识array
-     * @return array<string, ProviderModelEntity[]> model实bodyarray，bymodel_idfor键，valueforto应modellist
+     * @param string[] $modelIds modelidentifierarray
+     * @return array<string, ProviderModelEntity[]> model实bodyarray，bymodel_idforkey，valueforto应modellist
      */
     public function getByModelIds(ProviderDataIsolation $dataIsolation, array $modelIds): array;
 

@@ -55,9 +55,9 @@ readonly class AsrTaskRepository
     }
 
     /**
-     * according totask键anduserIDquerytaskstatus.
+     * according totaskkeyanduserIDquerytaskstatus.
      *
-     * @param string $taskKey task键
+     * @param string $taskKey taskkey
      * @param string $userId userID
      * @return null|AsrTaskStatusDTO taskstatus DTO，not存ino clockreturn null
      */
@@ -86,7 +86,7 @@ readonly class AsrTaskRepository
     /**
      * checktaskwhether存in.
      *
-     * @param string $taskKey task键
+     * @param string $taskKey taskkey
      * @param string $userId userID
      * @return bool whether存in
      */
@@ -109,7 +109,7 @@ readonly class AsrTaskRepository
     /**
      * deletetaskstatus.
      *
-     * @param string $taskKey task键
+     * @param string $taskKey taskkey
      * @param string $userId userID
      * @return bool whetherdeletesuccess
      */
@@ -132,7 +132,7 @@ readonly class AsrTaskRepository
     /**
      * deletecore跳 Key.
      *
-     * @param string $taskKey task键
+     * @param string $taskKey taskkey
      * @param string $userId userID
      */
     public function deleteHeartbeat(string $taskKey, string $userId): void
@@ -150,15 +150,15 @@ readonly class AsrTaskRepository
     }
 
     /**
-     * generatetaskstatus Redis 键名.
+     * generatetaskstatus Redis key名.
      *
-     * @param string $taskKey task键
+     * @param string $taskKey taskkey
      * @param string $userId userID
-     * @return string Redis 键名
+     * @return string Redis key名
      */
     private function generateTaskKey(string $taskKey, string $userId): string
     {
-        // 按统onerulegeneratestring，然back MD5 避免键名pass长
+        // 按统onerulegeneratestring，然back MD5 避免key名pass长
         $keyString = sprintf('%s:%s', $userId, $taskKey);
         $keyHash = md5($keyString);
         return sprintf(AsrRedisKeys::TASK_HASH, $keyHash);
@@ -167,9 +167,9 @@ readonly class AsrTaskRepository
     /**
      * generatecore跳 Key.
      *
-     * @param string $taskKey task键
+     * @param string $taskKey taskkey
      * @param string $userId userID
-     * @return string Redis 键名
+     * @return string Redis key名
      */
     private function generateHeartbeatKey(string $taskKey, string $userId): string
     {

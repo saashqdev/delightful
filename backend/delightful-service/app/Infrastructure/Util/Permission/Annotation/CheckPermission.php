@@ -22,12 +22,12 @@ use Hyperf\Di\Annotation\AbstractAnnotation;
 class CheckPermission extends AbstractAnnotation
 {
     /**
-     * resource标识（supportsingleor多）。
+     * resourceidentifier（supportsingleor多）。
      */
     public array|string $resource;
 
     /**
-     * 操as标识（仅supportsingle）。
+     * 操asidentifier（仅supportsingle）。
      */
     public string $operation;
 
@@ -42,18 +42,18 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * group合forcompletepermission键，如 "console.api.assistant.query".
+     * group合forcompletepermissionkey，如 "console.api.assistant.query".
      */
     public function getPermissionKey(): string
     {
-        // forcompatible旧逻辑，returnfirstgroup合键
+        // forcompatible旧逻辑，returnfirstgroup合key
         $keys = $this->getPermissionKeys();
         return $keys[0] ?? '';
     }
 
     /**
-     * return所havepermission键group合（resources x operations 笛卡尔product）。
-     * whenstatement多resourceor多操aso clock，permissionpass任意one键即can。
+     * return所havepermissionkeygroup合（resources x operations 笛卡尔product）。
+     * whenstatement多resourceor多操aso clock，permissionpass任意onekey即can。
      *
      * @return array<string>
      */

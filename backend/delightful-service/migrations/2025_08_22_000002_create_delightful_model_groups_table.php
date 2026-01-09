@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('icon', 255)->default('')->comment('minutegroupgraph标');
             $table->string('color', 10)->default('')->comment('minutegroupcolor');
             $table->text('description')->comment('minutegroupdescription');
-            $table->integer('sort')->default(0)->comment('sort权重');
+            $table->integer('sort')->default(0)->comment('sortweight');
             $table->tinyInteger('status')->default(1)->comment('status 0:disable 1:enable');
             $table->string('organization_code', 32)->default('')->comment('organizationcode');
             $table->string('creator_id', 64)->default('')->comment('createpersonID');

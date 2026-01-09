@@ -239,10 +239,10 @@ class ByteDanceSTSService
     }
 
     /**
-     * generatecache键.
+     * generatecachekey.
      *
      * @param string $delightfulId userDelightful ID
-     * @return string cache键
+     * @return string cachekey
      */
     private function getCacheKey(string $delightfulId): string
     {
@@ -252,7 +252,7 @@ class ByteDanceSTSService
     /**
      * fromcachegetJWT Token.
      *
-     * @param string $cacheKey cache键
+     * @param string $cacheKey cachekey
      * @return null|array cachedataornull
      */
     private function getCachedJwtToken(string $cacheKey): ?array
@@ -285,7 +285,7 @@ class ByteDanceSTSService
     /**
      * cacheJWT Token.
      *
-     * @param string $cacheKey cache键
+     * @param string $cacheKey cachekey
      * @param array $tokenData Tokendata
      * @param int $expiry expiretime（second）
      */

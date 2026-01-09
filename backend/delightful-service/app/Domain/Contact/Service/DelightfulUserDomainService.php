@@ -337,7 +337,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
      */
     public function delightfulUserLoginCheck(string $authorization, DelightfulEnvironmentEntity $delightfulEnvironmentEntity, ?string $delightfulOrganizationCode = null): array
     {
-        // generatecache键andlock键
+        // generatecachekeyandlockkey
         $cacheKey = md5(sprintf('OrganizationUserLogin:auth:%s:env:%s:', $authorization, $delightfulEnvironmentEntity->getId()));
         $lockKey = $this->generateLockKey(PlatformType::Delightful, $authorization);
 
@@ -574,7 +574,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * generatelock键.
+     * generatelockkey.
      */
     protected function generateLockKey(PlatformType $platformType, string $authorization): string
     {
@@ -596,7 +596,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
     /**
      * get互斥lock
-     * @return string lock所have者标识
+     * @return string lock所have者identifier
      */
     protected function acquireLock(string $lockKey): string
     {

@@ -137,7 +137,7 @@ readonly class ProviderModelDomainService
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $ids modelIDarray
-     * @return ProviderModelEntity[] model实bodyarray，byIDfor键
+     * @return ProviderModelEntity[] model实bodyarray，byIDforkey
      */
     public function getModelsByIds(ProviderDataIsolation $dataIsolation, array $ids): array
     {
@@ -153,8 +153,8 @@ readonly class ProviderModelDomainService
      * batchquantityaccording toModelIDgetmodel.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
-     * @param string[] $modelIds model标识array
-     * @return array<string, ProviderModelEntity[]> model实bodyarray，bymodel_idfor键，valueforto应modellist
+     * @param string[] $modelIds modelidentifierarray
+     * @return array<string, ProviderModelEntity[]> model实bodyarray，bymodel_idforkey，valueforto应modellist
      */
     public function getModelsByModelIds(ProviderDataIsolation $dataIsolation, array $modelIds): array
     {

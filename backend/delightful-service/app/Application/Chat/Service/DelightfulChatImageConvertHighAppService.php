@@ -120,7 +120,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             // 计o clockend，outputsecondleveltime
             $end = microtime(true);
             $this->logger->info(sprintf('转高清end，耗o clock: %ssecond。', $end - $start));
-            // will新旧image存入attachment
+            // willageimage存入attachment
             $newFile = $this->upLoadFiles($requestContext, [$response->getUrls()[0]])[0] ?? [];
             $this->aiSendMessage(
                 $reqDTO->getConversationId(),
@@ -242,7 +242,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
         ?string $id,
         ImageConvertHighResponseType $type,
         array $content,
-        // streamresponse，拿tocustomer端传come app_message_id ，asforresponsetime唯one标识
+        // streamresponse，拿tocustomer端传come app_message_id ，asforresponsetime唯oneidentifier
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

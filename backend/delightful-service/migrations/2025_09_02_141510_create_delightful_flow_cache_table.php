@@ -16,10 +16,10 @@ return new class extends Migration {
     {
         Schema::create('delightful_flow_cache', function (Blueprint $table) {
             $table->id();
-            $table->string('cache_hash', 32)->unique()->comment('cache键MD5hashvalue(cache_prefix+cache_key)');
+            $table->string('cache_hash', 32)->unique()->comment('cachekeyMD5hashvalue(cache_prefix+cache_key)');
             $table->string('cache_prefix')->comment('cachefront缀');
-            $table->string('cache_key')->comment('cache键名');
-            $table->string('scope_tag', 10)->comment('asuse域标识');
+            $table->string('cache_key')->comment('cachekey名');
+            $table->string('scope_tag', 10)->comment('asuse域identifier');
             $table->longText('cache_value')->comment('cachevaluecontent');
             $table->unsignedInteger('ttl_seconds')->default(7200)->comment('TTLsecond数（0representpermanentcache）');
             $table->timestamp('expires_at')->comment('expiretime戳');
@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->string('updated_uid', 64)->default('')->comment('updateperson');
             $table->timestamps();
 
-            // 索引 - useMD5hashvalueasformainquery索引
+            // index - useMD5hashvalueasformainqueryindex
             $table->unique('cache_hash', 'uk_cache_hash');
             $table->index('expires_at', 'idx_expires_at');
             $table->index('organization_code', 'idx_organization_code');

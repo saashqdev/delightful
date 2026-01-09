@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('organization_code', 32)->default('')->comment('organizationencoding');
             $table->string('user_id', 64)->comment('userID');
-            $table->string('key', 80)->comment('setting键');
+            $table->string('key', 80)->comment('settingkey');
             $table->json('value')->comment('settingvalue');
             $table->string('creator', 100)->comment('create者');
             $table->timestamp('created_at')->nullable()->comment('createtime');

@@ -593,7 +593,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             return '';
         }
         $prompt = <<<'PROMPT'
-        你isone专业contenttitlegenerate助hand。请严格按照bydown要求forconversationcontentgeneratetitle：
+        你isone专业contenttitlegenerate助hand。请严格按照bydownrequireforconversationcontentgeneratetitle：
 
         ## taskgoal
         according toconversationcontent，generateone简洁、accuratetitle，can概括conversation核coretheme。
@@ -605,7 +605,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         3. ifmostbackthemediscussionmorefor充minute，thenbythisasfortitle核core
         4. ignore早期已经end话题，unless它们andmost新话题密切相close
 
-        ## 严格要求
+        ## 严格require
         1. titlelength：not超pass 15 character。Englishone字母算onecharacter，汉字one字算onecharacter，other语type采useanalogouscountsolution。
         2. content相close：titlemust直接反映conversation核coretheme
         3. languagestyle：use陈述property语sentence，避免疑问sentence
@@ -777,7 +777,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             }
             // givefrom己messagestreamgenerate序column,andcertainmessagereceivepersoncolumn表
             $senderSeqEntity = $this->delightfulChatDomainService->generateSenderSequenceByChatMessage($senderSeqDTO, $messageEntity, $senderConversationEntity);
-            // 避免 seq 表承载too多feature,addtoo多索引,thereforewill话题messagesingle独writeto topic_messages 表middle
+            // 避免 seq 表承载too多feature,addtoo多index,thereforewill话题messagesingle独writeto topic_messages 表middle
             $this->delightfulChatDomainService->createTopicMessage($senderSeqEntity);
             // certainmessage优先level
             $receiveList = $senderSeqEntity->getReceiveList();
@@ -793,7 +793,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             );
             $conversationType = $senderConversationEntity->getReceiveType();
             if (in_array($conversationType, [ConversationType::Ai, ConversationType::User], true)) {
-                // for保证收hairdouble方message顺序one致property，ifisprivate chat，thensyncgenerate seq
+                // for保证收hairdouble方messageorderone致property，ifisprivate chat，thensyncgenerate seq
                 $receiveSeqEntity = $this->syncHandlerSingleChatMessage($senderSeqEntity, $messageEntity);
             } elseif ($conversationType === ConversationType::Group) {
                 // group chatetc场景asyncgive收item方generateSeqandpushgive收item方
@@ -1045,7 +1045,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * for保证收hairdouble方message顺序one致property，ifisprivate chat，thensyncgenerate seq.
+     * for保证收hairdouble方messageorderone致property，ifisprivate chat，thensyncgenerate seq.
      * @throws Throwable
      */
     private function syncHandlerSingleChatMessage(DelightfulSeqEntity $senderSeqEntity, DelightfulMessageEntity $senderMessageEntity): DelightfulSeqEntity
@@ -1053,7 +1053,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         $delightfulSeqStatus = DelightfulMessageStatus::Unread;
         # assistantmaybe参andprivate chat/group chatetc场景,read记忆o clock,needreadfrom己conversationwindowdownmessage.
         $receiveSeqEntity = $this->delightfulChatDomainService->generateReceiveSequenceByChatMessage($senderSeqEntity, $senderMessageEntity, $delightfulSeqStatus);
-        // 避免 seq 表承载too多feature,addtoo多索引,thereforewill话题messagesingle独writeto topic_messages 表middle
+        // 避免 seq 表承载too多feature,addtoo多index,thereforewill话题messagesingle独writeto topic_messages 表middle
         $this->delightfulChatDomainService->createTopicMessage($receiveSeqEntity);
         return $receiveSeqEntity;
     }

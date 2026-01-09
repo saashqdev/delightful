@@ -16,7 +16,7 @@ enum ParentMode: int
     {
         return match ($this) {
             self::PARAGRAPH => 'segment落',
-            self::AUTHORITY => '权重',
+            self::AUTHORITY => 'weight',
         };
     }
 }

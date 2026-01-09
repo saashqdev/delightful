@@ -367,7 +367,7 @@ class ImageGenerateFactory
      * parseeachtype size formatfor [width, height] array.
      * supportformat：1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 etc.
      * @param string $size sizestring
-     * @param null|string $modelKey model键名，iffinger定then优先usethemodelfixedratio例configuration
+     * @param null|string $modelKey modelkey名，iffinger定then优先usethemodelfixedratio例configuration
      */
     private static function parseSizeToWidthHeight(string $size, ?string $modelKey = null): array
     {
@@ -419,8 +419,8 @@ class ImageGenerateFactory
 
     /**
      * getfinger定modelfixedratio例sizeconfiguration.
-     * @param null|string $modelKey model键名
-     * @param string $ratioKey ratio例键名，如 "1:1", "16:9"
+     * @param null|string $modelKey modelkey名
+     * @param string $ratioKey ratio例key名，如 "1:1", "16:9"
      * @return null|array if存infixedconfigurationreturn [width, height] array，否thenreturn null table示needuse换算
      */
     private static function getFixedRatioSize(?string $modelKey, string $ratioKey): ?array

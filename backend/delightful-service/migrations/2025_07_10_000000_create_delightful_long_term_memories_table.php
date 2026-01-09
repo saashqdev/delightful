@@ -40,7 +40,7 @@ return new class extends Migration {
             $table->timestamp('created_at')->useCurrent()->comment('createtime');
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->comment('updatetime');
             $table->softDeletes()->comment('deletetime');
-            // 索引
+            // index
             $table->index(['org_id', 'app_id', 'user_id', 'project_id', 'last_accessed_at'], 'idx_user_last_accessed');
             $table->index(['org_id', 'app_id', 'user_id', 'project_id', 'importance'], 'idx_user_importance');
             $table->index(['expires_at', 'deleted_at'], 'idx_expires_deleted');

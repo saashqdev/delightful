@@ -734,7 +734,7 @@ class DelightfulChatDomainService extends AbstractDomainService
                 });
             } else {
                 # defaultthenis正instreammiddle
-                // if距离uptime落library超pass 3 second，本timeupdatedatabase
+                // ifdistanceuptime落library超pass 3 second，本timeupdatedatabase
                 $newJsonStreamCachedDTO = (new JsonStreamCachedDTO());
                 $lastUpdateDatabaseTime = $jsonStreamCachedData->getLastUpdateDatabaseTime() ?? 0;
                 if (time() - $lastUpdateDatabaseTime >= 3) {
@@ -845,7 +845,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     /**
      * batchquantitygetconversationdetail.
      * @param array $conversationIds conversationIDarray
-     * @return array<string,DelightfulConversationEntity> byconversationIDfor键conversation实bodyarray
+     * @return array<string,DelightfulConversationEntity> byconversationIDforkeyconversation实bodyarray
      */
     public function getConversationsByIds(array $conversationIds): array
     {
@@ -856,7 +856,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         // 直接use现haveRepositorymethodgetconversation实body
         $conversationEntities = $this->delightfulConversationRepository->getConversationByIds($conversationIds);
 
-        // byconversationIDfor键，方便call方快speedfind
+        // byconversationIDforkey，方便call方快speedfind
         $result = [];
         foreach ($conversationEntities as $entity) {
             $result[$entity->getId()] = $entity;
@@ -1027,7 +1027,7 @@ class DelightfulChatDomainService extends AbstractDomainService
 
         // ensure $memoryCache isonearray，handle意outsidetype
         if (! is_array($memoryCache)) {
-            $this->logger->warning(sprintf('cache键 %s datatypeinvalid。resetfornullarray。', $cacheKey));
+            $this->logger->warning(sprintf('cachekey %s datatypeinvalid。resetfornullarray。', $cacheKey));
             $memoryCache = [];
         }
 
@@ -1082,7 +1082,7 @@ class DelightfulChatDomainService extends AbstractDomainService
 
         // ifcachenotisarray，thenreturnnullarray
         if (! is_array($memoryCache)) {
-            $this->logger->warning(sprintf('cache键 %s datatypeinvalid。resetfornullarray。', $cacheKey));
+            $this->logger->warning(sprintf('cachekey %s datatypeinvalid。resetfornullarray。', $cacheKey));
             return null;
         }
         return new JsonStreamCachedDTO($memoryCache);

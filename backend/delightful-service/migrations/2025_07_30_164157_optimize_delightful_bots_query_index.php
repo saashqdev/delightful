@@ -12,7 +12,7 @@ return new class extends Migration {
     /**
      * Run the migrations.
      * optimize delightful_bots and delightful_bot_versions 表多query场景performance
-     * add多复合索引supportdifferentquerymode.
+     * add多复合indexsupportdifferentquerymode.
      */
     public function up(): void
     {
@@ -29,7 +29,7 @@ return new class extends Migration {
 
         // optimize delightful_bot_versions 表
         Schema::table('delightful_bot_versions', function (Blueprint $table) {
-            // 先delete已存insinglefield索引，避免索引冗remainder
+            // 先delete已存insinglefieldindex，避免index冗remainder
             if (Schema::hasIndex('delightful_bot_versions', 'delightful_bot_versions_organization_code_index')) {
                 $table->dropIndex('delightful_bot_versions_organization_code_index');
             }

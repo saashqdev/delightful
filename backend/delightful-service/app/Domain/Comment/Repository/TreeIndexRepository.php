@@ -183,12 +183,12 @@ class TreeIndexRepository
         Builder $builder,
         array $nodeIds
     ): void {
-        // delete祖先sectionpointis nodeIds 索引
+        // delete祖先sectionpointis nodeIds index
         $builder->newModelInstance()->whereIn('ancestor_id', $nodeIds)
             ->where('organization_code', $requestContext->getOrganizationCode())
             ->delete();
 
-        // deleteback代sectionpointis nodeIds 索引
+        // deleteback代sectionpointis nodeIds index
         $builder->newModelInstance()->whereIn('descendant_id', $nodeIds)
             ->where('organization_code', $requestContext->getOrganizationCode())
             ->delete();

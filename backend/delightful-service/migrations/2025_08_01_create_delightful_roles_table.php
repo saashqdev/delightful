@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->softDeletes();
 
-            // 索引
+            // index
             $table->index(['organization_code'], 'idx_organization_code');
 
             $table->comment('RBACrole表');

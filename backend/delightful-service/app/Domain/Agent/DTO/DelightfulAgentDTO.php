@@ -15,7 +15,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 class DelightfulAgentDTO extends AbstractEntity
 {
     /**
-     * 主键.
+     * 主key.
      */
     private ?string $id = '';
 

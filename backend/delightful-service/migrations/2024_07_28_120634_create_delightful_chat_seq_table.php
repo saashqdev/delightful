@@ -40,11 +40,11 @@ return new class extends Migration {
             $table->text('extra')->comment('attachaddfield，recordonetheseextensionproperty。 such as话题id。');
             // app_message_id
             $table->string('app_message_id', 64)->default('')->comment('冗remainderfield,customer端generatemessageid,useat防customer端duplicate');
-            # bydownis索引set
-            // delightful_message_id 索引
+            # bydownisindexset
+            // delightful_message_id index
             $table->index(['delightful_message_id'], 'idx_delightful_message_id');
-            // 因foroftenneed按 seq_id sort，所byincrease联合索引
-            // bydown索引createmovetosingle独migratefilemiddle
+            // 因foroftenneed按 seq_id sort，所byincrease联合index
+            // bydownindexcreatemovetosingle独migratefilemiddle
             $table->timestamps();
             $table->softDeletes();
             $table->comment('账number收item箱序columnnumbertable,each账number所havemessagemustsingle调递增');

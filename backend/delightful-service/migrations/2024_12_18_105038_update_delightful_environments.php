@@ -18,7 +18,7 @@ return new class extends Migration {
             // environment_code
             $table->string('environment_code', 64)->comment('environment code')->default('');
             $table->string('third_platform_type', 64)->comment('thethird-party平台type')->default('');
-            // 索引,theoreticalup唯one，but业务need，notpass mysql 唯one索引come约束
+            // index,theoreticalup唯one，but业务need，notpass mysql 唯oneindexcome约束
             $table->index(['environment_code', 'third_platform_type'], 'idx_environment_code_third_platform_type');
         });
     }

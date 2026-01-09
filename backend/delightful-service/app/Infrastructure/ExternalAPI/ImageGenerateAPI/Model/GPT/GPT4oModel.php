@@ -153,7 +153,7 @@ class GPT4oModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
-        // 按索引sortresult
+        // 按indexsortresult
         ksort($imageUrls);
         $imageUrls = array_values($imageUrls);
 
@@ -381,7 +381,7 @@ class GPT4oModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 
-        // 按索引sortresult
+        // 按indexsortresult
         ksort($rawResults);
         return array_values($rawResults);
     }

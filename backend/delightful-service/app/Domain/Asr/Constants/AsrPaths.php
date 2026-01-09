@@ -31,7 +31,7 @@ class AsrPaths
     /**
      * generatehiddendirectory相topath.
      *
-     * @param string $taskKey task键
+     * @param string $taskKey taskkey
      * @return string format：.asr_recordings/{task_key}
      */
     public static function getHiddenDirPath(string $taskKey): string

@@ -31,7 +31,7 @@ class SlidingWindowUtil
      * 防抖interface - executemostbackonetimerequeststrategy
      * infinger定timewindowinside，onlymostbackonetimerequestwillbeexecute.
      *
-     * @param string $debounceKey 防抖键
+     * @param string $debounceKey 防抖key
      * @param float $delayVerificationSeconds delayverifytime（second），alsoisactual防抖window
      * @return bool whethershouldexecutecurrentrequest
      */
@@ -40,7 +40,7 @@ class SlidingWindowUtil
         float $delayVerificationSeconds = 0.5
     ): bool {
         $uniqueRequestId = uniqid('req_', true) . '_' . getmypid();
-        // 键expiretime应greater thandelayverifytime，byasforsecurity保障
+        // keyexpiretime应greater thandelayverifytime，byasforsecurity保障
         $totalExpirationSeconds = (int) ceil($delayVerificationSeconds) + 1;
         $latestRequestRedisKey = $debounceKey . ':last_req';
 
@@ -66,7 +66,7 @@ LUA;
                 'debounce_key' => $debounceKey,
                 'exception' => $exception,
             ]);
-            // out现exceptiono clockdefaultallowexecute，避免close键业务be阻塞
+            // out现exceptiono clockdefaultallowexecute，避免closekey业务be阻塞
             return true;
         }
     }

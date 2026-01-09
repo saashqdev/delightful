@@ -11,7 +11,7 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
  * noauthenticationimplement.
- * whensystemdesign要求have身shareverifybutnotneedactualverifyo clockuse.
+ * whensystemdesignrequirehave身shareverifybutnotneedactualverifyo clockuse.
  */
 class NoAuthentication implements AuthenticationInterface
 {

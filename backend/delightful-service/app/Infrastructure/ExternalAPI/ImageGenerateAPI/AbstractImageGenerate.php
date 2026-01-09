@@ -48,7 +48,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * implementinterface要求带watermarkoriginaldatamethod
+     * implementinterfacerequire带watermarkoriginaldatamethod
      * each子categorymustaccording tofrom己dataformatimplementthismethod.
      */
     abstract public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array;

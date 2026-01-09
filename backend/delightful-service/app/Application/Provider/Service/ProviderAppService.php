@@ -172,7 +172,7 @@ class ProviderAppService
         bool $isRecommended,
         string $locale
     ): string {
-        // 1. 推荐servicequotient优先
+        // 1. recommendedservicequotient优先
         if ($isRecommended) {
             return $this->translator->trans('common.recommended');
         }

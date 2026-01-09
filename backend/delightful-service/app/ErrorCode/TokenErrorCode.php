@@ -34,7 +34,7 @@ enum TokenErrorCode: int
     #[ErrorMessage(message: 'token.expired_at_must_set')]
     case TokenExpiredAtMustSet = 9004;
 
-    // token必选associateonevalue
+    // tokenrequiredassociateonevalue
     #[ErrorMessage(message: 'token.relation_value_must_set')]
     case TokenRelationValueMustSet = 9005;
 

@@ -31,7 +31,7 @@ class FlowExecutorArchiveCloud
         $tmpFile = "{$tmpDir}/{$name}." . uniqid();
 
         try {
-            // datasizeconform要求，savetotemporaryfile
+            // datasizeconformrequire，savetotemporaryfile
             file_put_contents($tmpFile, $serializedData);
 
             $uploadFile = new UploadFile($tmpFile, dir: 'DelightfulFlowExecutorArchive', name: $name, rename: false);

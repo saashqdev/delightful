@@ -39,7 +39,7 @@ return new class extends Migration {
             // attachaddproperty
             $table->string('extra', 1024)->comment('attachaddproperty.')->default('');
 
-            // 索引set
+            // indexset
             $table->index(['status', 'type'], 'idx_status_type');
             $table->unique(['delightful_id'], 'unq_delightful_id');
             $table->unique(['country_code', 'phone'], 'unq_country_code_phone');

@@ -70,7 +70,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
     - <DelightfulMention></DelightfulMention> indicateoneperson员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，eachtagallwillinfront端messagecardshapebecomeone @somesomeperson effect；
 5. 优先usecontain <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> etchave Delightful tagslicesegment；
 6. 结合knowledge basereturncontent整理back尽maybe丰富groundreturn答userissue。
-## toolmiddleclose键returnvalueinstruction
+## toolmiddleclosekeyreturnvalueinstruction
 - fragments: 本timeretrieveto所haveknowledge baseslicesegment
 - fragments.*.content: slicesegmentcontent
 - fragments.*.metadata.url: currentslicesegment原文link

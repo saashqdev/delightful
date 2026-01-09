@@ -178,7 +178,7 @@ class ServiceProviderApi extends AbstractApi
         $this->adminProviderAppService->deleteProvider($authenticatable, $serviceProviderConfigId);
     }
 
-    // organizationaddmodel标识
+    // organizationaddmodelidentifier
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function addModelIdForOrganization(RequestInterface $request)
     {
@@ -188,7 +188,7 @@ class ServiceProviderApi extends AbstractApi
         $this->adminOriginModelAppService->create($authenticatable, $modelId);
     }
 
-    // organizationdeletemodel标识
+    // organizationdeletemodelidentifier
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function deleteModelIdForOrganization(RequestInterface $request, ?string $modelId = null)
     {

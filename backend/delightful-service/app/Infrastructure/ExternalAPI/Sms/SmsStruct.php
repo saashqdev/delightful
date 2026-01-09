@@ -27,7 +27,7 @@ class SmsStruct
     public ?string $type = null;
 
     /**
-     * variable短信variablecontent. maybeforassociatearray,alsomaybefor索引array.
+     * variable短信variablecontent. maybeforassociatearray,alsomaybeforindexarray.
      * @example {"product_name": "quotient品A", "payer": "供应quotientA","amount": 10}
      * @example ["quotient品A","供应quotientA",10]
      */

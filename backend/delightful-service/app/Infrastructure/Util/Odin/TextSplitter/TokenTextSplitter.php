@@ -371,7 +371,7 @@ class TokenTextSplitter extends TextSplitter
                 return $this->calculateTokenCount($text);
             }
 
-            // generateupdown文键
+            // generateupdown文key
             $contextKey = 'token_count:' . md5($text);
 
             // 尝试from协程updown文get

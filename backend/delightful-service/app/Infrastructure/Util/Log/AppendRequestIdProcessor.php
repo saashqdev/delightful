@@ -22,7 +22,7 @@ class AppendRequestIdProcessor implements ProcessorInterface
         try {
             $coroutineId = Coroutine::id();
         } catch (Throwable $e) {
-            // when协程context未initializeo clock，return -1 asfor标识
+            // when协程context未initializeo clock，return -1 asforidentifier
             $coroutineId = -1;
         }
 

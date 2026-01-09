@@ -16,7 +16,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $organization_code organizationencoding
  * @property string $delightful_id 账numberDelightfulID
  * @property string $user_id userID
- * @property string $key setting键
+ * @property string $key settingkey
  * @property array $value settingvalue
  * @property string $creator create者
  * @property DateTime $created_at createtime

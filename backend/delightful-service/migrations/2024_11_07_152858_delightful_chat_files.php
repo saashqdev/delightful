@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->string('file_key', 256)->comment('filekey');
             // filesize
             $table->unsignedBigInteger('file_size')->comment('filesize');
-            // messageid索引
+            // messageidindex
             $table->index('delightful_message_id', 'idx_delightful_message_id');
             $table->timestamps();
         });

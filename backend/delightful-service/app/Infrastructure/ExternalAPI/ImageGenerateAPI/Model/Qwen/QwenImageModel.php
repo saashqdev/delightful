@@ -256,7 +256,7 @@ class QwenImageModel extends AbstractImageGenerate
             ExceptionBuilder::throw($finalErrorCode, $finalErrorMsg);
         }
 
-        // 按索引sortresult
+        // 按indexsortresult
         ksort($rawResults);
         $rawResults = array_values($rawResults);
 

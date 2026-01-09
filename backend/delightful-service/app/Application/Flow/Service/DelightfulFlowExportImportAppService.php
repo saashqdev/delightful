@@ -88,7 +88,7 @@ class DelightfulFlowExportImportAppService
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.import.missing_main_flow');
         }
 
-        // storage新旧IDmappingclose系
+        // storageageIDmappingclose系
         $idMapping = [
             'flows' => [], // 老ID => 新ID
             'tool_sets' => [], // 老ID => 新ID
@@ -389,7 +389,7 @@ class DelightfulFlowExportImportAppService
         $savedToolSet = $this->delightfulFlowToolSetDomainService->create($dataIsolation, $toolSetEntity);
         $importReport['created'][] = "createtoolcollection: {$savedToolSet->getName()} (ID: {$savedToolSet->getCode()})";
 
-        // record新旧IDmappingclose系
+        // recordageIDmappingclose系
         $idMapping['tool_sets'][$originalCode] = $savedToolSet->getCode();
 
         return $savedToolSet->getCode();

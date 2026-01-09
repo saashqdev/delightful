@@ -180,7 +180,7 @@ class DelightfulAgentDomainService
 
         $agents = DelightfulAgentVersionFactory::toArrays($agents);
 
-        // 收collection助理avatarfile键
+        // 收collection助理avatarfilekey
         $fileKeys = array_column($agents, 'agent_avatar');
         // 移exceptemptyvalue
         $validFileKeys = array_filter($fileKeys, static fn ($fileKey) => ! empty($fileKey));

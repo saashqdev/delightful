@@ -31,7 +31,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
     protected function setUp(): void
     {
-        // cleanupprojectmemberdata，避免唯one键conflict
+        // cleanupprojectmemberdata，避免唯onekeyconflict
         $this->cleanupProjectMembers($this->projectId);
         parent::setUp();
     }

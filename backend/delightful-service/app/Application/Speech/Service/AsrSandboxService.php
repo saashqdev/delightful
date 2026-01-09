@@ -876,7 +876,7 @@ readonly class AsrSandboxService
             'task_id' => '', // databasewillfrom动generate
             'task_mode' => $topicEntity->getTaskMode() ?: 'general',
             'sandbox_id' => $topicEntity->getSandboxId() ?: '',
-            'prompt' => 'ASR Recording Task', // ASR task标识
+            'prompt' => 'ASR Recording Task', // ASR taskidentifier
             'task_status' => 'waiting',
             'work_dir' => $topicEntity->getWorkDir() ?? '',
             'created_at' => date('Y-m-d H:i:s'),

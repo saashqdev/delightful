@@ -46,7 +46,7 @@ readonly class AsrPresetFileService
      * @param int $displayDirId displaydirectoryID
      * @param string $hiddenDir hiddendirectory相topath (如: .asr_recordings/session_xxx)
      * @param int $hiddenDirId hiddendirectoryID
-     * @param string $taskKey task键
+     * @param string $taskKey taskkey
      * @return array{note_file: TaskFileEntity, transcript_file: TaskFileEntity}
      */
     public function createPresetFiles(

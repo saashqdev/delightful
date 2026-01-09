@@ -22,7 +22,7 @@ class TreeIndexEntity
     protected int $descendantId;
 
     /**
-     * 祖先sectionpointtoback代sectionpoint距离.
+     * 祖先sectionpointtoback代sectionpointdistance.
      */
     protected int $distance;
 

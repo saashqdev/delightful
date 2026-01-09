@@ -277,7 +277,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the theme and specific requirements of the PPT, or upload files, Be Delightful will help you create a beautiful PPT. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您caninput PPT themeandspecific要求，oruploadfile，超level麦吉willfor您制as精美 PPT。 Enter send ; Shift + Enter 换line',
+                    'zh_CN' => '您caninput PPT themeandspecificrequire，oruploadfile，超level麦吉willfor您制as精美 PPT。 Enter send ; Shift + Enter 换line',
                 ]),
                 'identifier' => 'ppt',
                 'icon' => 'IconPresentation',

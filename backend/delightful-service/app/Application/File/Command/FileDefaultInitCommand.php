@@ -126,14 +126,14 @@ class FileDefaultInitCommand extends Command
                     $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
                     $fileSize = filesize($filePath);
 
-                    // generate业务唯one标识（useatduplicatecheck）
+                    // generate业务唯oneidentifier（useatduplicatecheck）
                     $businessIdentifier = $moduleName . '/' . $fileName;
 
-                    // correctduplicatecheck：querysame业务typedownwhetherhavesame业务标识
+                    // correctduplicatecheck：querysame业务typedownwhetherhavesame业务identifier
                     $existingFiles = $this->defaultFileDomainService->getByOrganizationCodeAndBusinessType($businessType, $organizationCode);
                     $isDuplicate = false;
                     foreach ($existingFiles as $existingFile) {
-                        // use userId fieldstorage业务标识come判断duplicate
+                        // use userId fieldstorage业务identifiercome判断duplicate
                         if ($existingFile->getUserId() === $businessIdentifier) {
                             $isDuplicate = true;
                             break;
@@ -162,7 +162,7 @@ class FileDefaultInitCommand extends Command
                             StorageBucketType::Public
                         );
 
-                        // immediatelyvalidatefilewhethercanget（close键validatestep）
+                        // immediatelyvalidatefilewhethercanget（closekeyvalidatestep）
                         $actualKey = $uploadFile->getKey();
                         // from key middleextractorganizationencoding，参考 ProviderAppService correct做法
                         $keyOrganizationCode = substr($actualKey, 0, strpos($actualKey, '/'));
@@ -179,7 +179,7 @@ class FileDefaultInitCommand extends Command
                         $defaultFileEntity->setFileSize($fileSize);
                         $defaultFileEntity->setOrganization($organizationCode);
                         $defaultFileEntity->setFileExtension($fileExtension);
-                        $defaultFileEntity->setUserId($businessIdentifier); // use业务标识asfor userId
+                        $defaultFileEntity->setUserId($businessIdentifier); // use业务identifierasfor userId
 
                         // save实body
                         $this->defaultFileDomainService->insert($defaultFileEntity);

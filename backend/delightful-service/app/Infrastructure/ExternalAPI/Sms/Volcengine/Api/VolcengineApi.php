@@ -208,7 +208,7 @@ abstract class VolcengineApi
 
     protected function setHeaders(): void
     {
-        // 研究hair现,document要求inrequestheadmiddle传AccessKey/SecretKey/ServiceName/Region,its实cannot传. Authorizationheadmiddlehave传AccessKey
+        // 研究hair现,documentrequireinrequestheadmiddle传AccessKey/SecretKey/ServiceName/Region,its实cannot传. Authorizationheadmiddlehave传AccessKey
         $this->headers = [
             'Content-Type' => ['application/json;charset=utf-8'],
             'User-Agent' => ['volc-sdk-php/v1.0.87'],

@@ -67,7 +67,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * addmodelID（tobackcompatible，butnot推荐use）.
+     * addmodelID（tobackcompatible，butnotrecommendeduse）.
      */
     public function addModelId(string $modelId): void
     {
@@ -86,7 +86,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
         foreach ($this->models as $key => $model) {
             if ($model->getModelId() === $modelId) {
                 unset($this->models[$key]);
-                $this->models = array_values($this->models); // 重新索引
+                $this->models = array_values($this->models); // 重新index
                 break;
             }
         }
@@ -123,7 +123,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * setmodelIDarray（tobackcompatible，butnot推荐use）.
+     * setmodelIDarray（tobackcompatible，butnotrecommendeduse）.
      * @param string[] $modelIds
      */
     public function setModelIds(array $modelIds): void

@@ -95,7 +95,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         if (! $this->redis->set($antiRepeatKey, '1', ['nx', 'ex' => 2])) {
             return;
         }
-        // delightful-api two期要求传入user id
+        // delightful-api two期require传入user id
         $agentConversationEntity = $this->delightfulConversationDomainService->getConversationByIdWithoutCheck($conversationId);
         if (! $agentConversationEntity) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
@@ -515,7 +515,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     }
 
     /**
-     * pushmostnextassociateissue llm responseend标识.
+     * pushmostnextassociateissue llm responseendidentifier.
      * @throws Throwable
      */
     public function sendAssociateQuestionResponse(DelightfulChatAggregateSearchReqDTO $dto, string $associateQuestionId): void
@@ -967,7 +967,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
 
     private function sleepToFixBug(float $seconds = 0.2): void
     {
-        // !!! byat收item方messagegenerateisasync，maybe乱序，therefore，thiswithin sleep one小will，尽quantity保证收item方messagegenerate顺序
+        // !!! byat收item方messagegenerateisasync，maybe乱序，therefore，thiswithin sleep one小will，尽quantity保证收item方messagegenerateorder
         Coroutine::sleep($seconds);
     }
 
@@ -980,7 +980,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         string $parentId,
         int $type,
         array $content,
-        // todo streamresponse，拿tocustomer端传come app_message_id ，asforresponsetime唯one标识
+        // todo streamresponse，拿tocustomer端传come app_message_id ，asforresponsetime唯oneidentifier
         string $appMessageId = '',
         string $topicId = ''
     ): void {

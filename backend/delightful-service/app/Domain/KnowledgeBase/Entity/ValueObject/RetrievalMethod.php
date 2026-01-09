@@ -31,7 +31,7 @@ class RetrievalMethod
      * all文retrieve.
      *
      * based onkeywordmatchretrievemethod。
-     * 索引documentmiddle所havesingle词，returncontainquery词textslicesegment。
+     * indexdocumentmiddle所havesingle词，returncontainquery词textslicesegment。
      * 适合precisematch（如productname、person名、ID）and低频词match。
      */
     public const string FULL_TEXT_SEARCH = 'full_text_search';

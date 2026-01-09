@@ -365,7 +365,7 @@ class DelightfulAgentAppService extends AbstractAppService
             // add agent_id field，value同 id
             $agentData['agent_id'] = $agentData['id'];
 
-            // addwhetherfor官方organization标识
+            // addwhetherfor官方organizationidentifier
             $agentData['is_office'] = OfficialOrganizationUtil::isOfficialOrganization($agent->getOrganizationCode());
 
             // handleavatarlink

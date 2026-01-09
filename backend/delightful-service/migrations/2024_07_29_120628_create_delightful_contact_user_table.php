@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->string('avatar_url', 128)->comment('useravatarlink')->default('');
             $table->string('extra', 1024)->comment('attachaddproperty')->default('');
             $table->string('user_manual', 64)->comment('userinstruction书(云document)')->default('');
-            // 索引set
+            // indexset
             $table->unique(['user_id'], 'unq_user_organization_id');
             $table->unique(['delightful_id', 'organization_code'], 'unq_delightful_id_organization_code');
             $table->index(['organization_code'], 'idx_organization_code');

@@ -202,17 +202,17 @@ class DelightfulLLMDomainService
     # task
     你needbased onusermessage，according to我提供searchresult，按照总minute总结构，output高quality，结构化detailedreturn答，formatfor markdown。
     
-    in我give你searchresultmiddle，eachresultallis[webpage X begin]...[webpage X end]format，Xrepresenteach篇文chapternumber索引。请in适when情况downinsentence子末tailquotecontext。请按照quote编number[citation:X]formatin答案middleto应部minutequotecontext。ifonesentence话源from多context，请columnout所have相closequote编number，for example[citation:3][citation:5]，切记not要willquotecollectionmiddleinmostbackreturnquote编number，whileisin答案to应部minutecolumnout。
+    in我give你searchresultmiddle，eachresultallis[webpage X begin]...[webpage X end]format，Xrepresenteach篇文chapternumberindex。请in适when情况downinsentence子末tailquotecontext。请按照quote编number[citation:X]formatin答案middleto应部minutequotecontext。ifonesentence话源from多context，请columnout所have相closequote编number，for example[citation:3][citation:5]，切记not要willquotecollectionmiddleinmostbackreturnquote编number，whileisin答案to应部minutecolumnout。
     inreturn答o clock，请注意bydown几point：
     - 今dayis{date_now}。
     - andnonsearchresult所havecontentallanduserquestion密切相close，你need结合question，tosearchresultconduct甄别、filter。
     - toatcolumn举categoryquestion（如column举所have航班information），尽quantitywill答案控制in10要pointbyinside，and告诉usercanviewsearchcome源、获得completeinformation。优先提供informationcomplete、most相closecolumn举item；如non必要，not要主动告诉usersearchresult未提供content。
-    - toat创ascategoryquestion（如写论文），请务必in正文segment落middlequoteto应参考编number，for example[citation:3][citation:5]，not能只in文chapter末tailquote。你need解读and概括user题目要求，choose合适format，充minute利usesearchresultanddraw重要information，generatematchuser要求、极具思想深degree、富have创造力and专业property答案。你创as篇幅need尽maybe延长，toateachone要point论述要speculateduser意graph，giveout尽maybe多angledegreereturn答要point，and务必informationquantity大、论述详尽。
+    - toat创ascategoryquestion（如写论文），请务必in正文segment落middlequoteto应参考编number，for example[citation:3][citation:5]，not能只in文chapter末tailquote。你need解读and概括user题目require，choose合适format，充minute利usesearchresultanddraw重要information，generatematchuserrequire、极具思想深degree、富have创造力and专业property答案。你创as篇幅need尽maybe延长，toateachone要point论述要speculateduser意graph，giveout尽maybe多angledegreereturn答要point，and务必informationquantity大、论述详尽。
     - ifreturn答very长，请尽quantity结构化、minutesegment落总结。ifneedminutepointas答，尽quantity控制in5pointbyinside，andmerge相closecontent。
     - toat客观category问答，ifquestion答案non常简短，can适when补充oneto两sentence相closeinformation，by丰富content。
-    - 你needaccording touser要求andreturn答contentchoose合适、美观return答format，ensurecan读property强。
+    - 你needaccording touserrequireandreturn答contentchoose合适、美观return答format，ensurecan读property强。
     - 你return答should综合多相closewebpagecomereturn答，not能duplicatequoteonewebpage。
-    - unlessuser要求，否then你return答languageneedanduser提问language保持one致。
+    - unlessuserrequire，否then你return答languageneedanduser提问language保持one致。
     - output漂亮markdown format，contentmiddleaddonetheseandtheme相closeemoji表情符number。
     
     ## usermessagefor：
@@ -244,7 +244,7 @@ class DelightfulLLMDomainService
          - 主观comment、analyzeorspeculated（unlessandevent直接相close）。
          - notimeassociateandandquestionnoclosedetail。
        - **保留原then**：as long ascontentandtime相closeandmatchquestiontheme，尽quantity保留forevent。
-    4. **output要求**：
+    4. **outputrequire**：
        - by JSON formatreturn，event按time倒序rowcolumn（from晚to早）。
        - eacheventcontain "name"、"time"、"description" threefield。
        - 若searchcontentnot足bygenerateevent，returnnullarray `[]`，避免凭null臆造。
@@ -266,7 +266,7 @@ class DelightfulLLMDomainService
     ```
     ## useinstruction
     - user需提供searchcontent（containquotemark如 [[citation:x]]）andspecificquestion。
-    - according toquestion，fromsearchcontentmiddleextractmatcheventdefinitioncontent，按要求generateoutput。
+    - according toquestion，fromsearchcontentmiddleextractmatcheventdefinitioncontent，按requiregenerateoutput。
     - 若question涉andcurrenttime，based on {date_now} conduct推算。
     
     ## quote
@@ -284,12 +284,12 @@ class DelightfulLLMDomainService
     {date_now}
     
     ## task
-    return"search contexts"middleand"search keywords"haveassociateproperty 20 to 50  索引。
+    return"search contexts"middleand"search keywords"haveassociateproperty 20 to 50  index。
     
-    ## 要求
-    - forbid直接return答userquestion，one定要returnanduserquestionhaveassociateproperty索引。
-    - search contextsformatfor "[[x]] content" ，itsmiddle x issearch contexts索引。x not能greater than 50
-    - 请bycorrect JSON formatreplyfilterback索引，for example：[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+    ## require
+    - forbid直接return答userquestion，one定要returnanduserquestionhaveassociatepropertyindex。
+    - search contextsformatfor "[[x]] content" ，itsmiddle x issearch contextsindex。x not能greater than 50
+    - 请bycorrect JSON formatreplyfilterbackindex，for example：[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
     - if search keywords andtime相close，重point注意 search contexts middleandcurrenttime相closecontent。andcurrenttimemore近more重要。
 
     

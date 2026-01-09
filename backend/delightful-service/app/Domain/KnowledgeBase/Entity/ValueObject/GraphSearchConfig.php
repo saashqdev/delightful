@@ -18,9 +18,9 @@ use InvalidArgumentException;
 class GraphSearchConfig extends AbstractValueObject
 {
     /**
-     * close系权重.
+     * close系weight.
      *
-     * graphsearchmiddleclose系权重，useatcalculatefinalsimilardegreeminute数
+     * graphsearchmiddleclose系weight，useatcalculatefinalsimilardegreeminute数
      */
     private float $relationWeight = 0.5;
 
@@ -88,7 +88,7 @@ class GraphSearchConfig extends AbstractValueObject
     private int $limit = 10;
 
     /**
-     * getclose系权重.
+     * getclose系weight.
      */
     public function getRelationWeight(): float
     {
@@ -96,7 +96,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * setclose系权重.
+     * setclose系weight.
      */
     public function setRelationWeight(float $relationWeight): self
     {

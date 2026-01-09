@@ -61,7 +61,7 @@ abstract class AbstractTemplate implements TemplateInterface
             return $messages;
         }
         $variables = [];
-        // template$contentmiddlenot存in "${xxx}" or者 {$xxx) typecharacter.then按index顺序match
+        // template$contentmiddlenot存in "${xxx}" or者 {$xxx) typecharacter.then按indexordermatch
         foreach ($matches[1] as $index => $variableKey) {
             if (isset($messages[$variableKey])) {
                 $variables[$variableKey] = $messages[$variableKey];
@@ -97,7 +97,7 @@ abstract class AbstractTemplate implements TemplateInterface
 
         // certainsignature语type,needfrom userfinger定语type,userfinger定兜bottom语type,systemdefault兜bottom语type middlecertainoutcomeonevalue
         $signLanguage = null;
-        // 语type兜bottom顺序
+        // 语type兜bottomorder
         $defaultLanguages = [$language, $defaultLanguage, LanguageEnum::EN_US, LanguageEnum::ZH_CN];
         foreach ($defaultLanguages as $value) {
             if (isset($this->signMap[$sign][$value])) {

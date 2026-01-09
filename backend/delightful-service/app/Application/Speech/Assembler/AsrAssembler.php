@@ -37,7 +37,7 @@ class AsrAssembler
      * @param string $workDir workdirectory
      * @param int $rootDirectoryId rootdirectoryID
      * @param bool $isHidden whetherforhiddendirectory
-     * @param null|string $taskKey task键（仅hiddendirectoryneed）
+     * @param null|string $taskKey taskkey（仅hiddendirectoryneed）
      */
     public static function createDirectoryEntity(
         string $userId,
@@ -148,7 +148,7 @@ class AsrAssembler
             }
         }
 
-        // ifallnot找toworkspace标识，直接returnoriginalpath（maybe已经is相topath）
+        // ifallnot找toworkspaceidentifier，直接returnoriginalpath（maybe已经is相topath）
         return $normalizedPath;
     }
 }

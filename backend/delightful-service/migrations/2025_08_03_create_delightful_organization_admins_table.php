@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->softDeletes();
 
-            // 索引
+            // index
             $table->index(['organization_code', 'user_id'], 'idx_organization_code_user_id');
             $table->index(['organization_code', 'is_organization_creator', 'granted_at'], 'idx_organization_code_queries');
             $table->index(['delightful_id'], 'idx_delightful_id');

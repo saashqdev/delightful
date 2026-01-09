@@ -562,7 +562,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * generatecache键.
+     * generatecachekey.
      */
     private function generateCacheKey(?string $conversationId, ?string $topicId, string $message, string $userId): string
     {

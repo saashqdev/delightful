@@ -242,7 +242,7 @@ JSON, true)));
    - text识别：如havetext，accurateextractand理解含义
    - 技术info：如havegraphtable/data，analyzeits含义
    
-4. analyzeformat要求：
+4. analyzeformatrequire：
    - toat重要analyzeresult，use结构化JSONformat呈现，如：{"category别":"xx", "主body":"xx", "特征":["xx","xx"]}
    - toatnotcertaincontent，explicittable明speculatedpropertyquality，for example："maybeis..."
    - 如imagequalitymore低，fingeroutlimit因素and尽力analyze

@@ -82,7 +82,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * returnmost大message倒数 n item序column.
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
      * @return ClientSequenceResponse[]
      */
     public function pullRecentMessage(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array
@@ -102,7 +102,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * return $userLocalMaxSeqId 之back $limit itemmessage.
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
      * @return ClientSequenceResponse[]
      */
     public function getAccountSeqListByDelightfulId(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array
@@ -150,7 +150,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
      * @return ClientSequenceResponse[]
      * @todo 挪to delightful_chat_topic_messages process
      * sessionwindowscrollloadhistoryrecord.
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
      */
     public function getConversationChatMessages(MessagesQueryDTO $messagesQueryDTO): array
     {
@@ -161,7 +161,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
      * @return ClientSequenceResponse[]
      * @todo 挪to delightful_chat_topic_messages process
      * sessionwindowscrollloadhistoryrecord.
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array
     {
@@ -219,7 +219,7 @@ sql;
 
     /**
      * get收item方messagestatus变morestream.
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
      * @return DelightfulSeqEntity[]
      */
     public function getReceiveMessagesStatusChange(array $referMessageIds, string $userId): array
@@ -233,7 +233,7 @@ sql;
 
     /**
      * gethairitem方messagestatus变morestream.
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
      * @return DelightfulSeqEntity[]
      */
     public function getSenderMessagesStatusChange(string $senderMessageId, string $userId): array
@@ -258,7 +258,7 @@ sql;
     }
 
     /**
-     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id add索引.
+     * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
      */
     public function getMessageReceiveList(string $messageId, string $delightfulId, ConversationType $userType): ?array
     {
@@ -466,7 +466,7 @@ sql;
      */
     private function getMessagesStatusChangeSeq(array $referMessageIds, DelightfulUserEntity $userEntity): array
     {
-        // will orWhereIn 拆minutefor 2 itemquery,避免索引失效
+        // will orWhereIn 拆minutefor 2 itemquery,避免index失效
         $query = $this->delightfulSeq::query()
             ->where('object_type', $userEntity->getUserType()->value)
             ->where('object_id', $userEntity->getDelightfulId())

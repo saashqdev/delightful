@@ -30,7 +30,7 @@ class RerankMode
      * add权minute数.
      *
      * usedifferentretrievemethodminute数add权calculatefinalminute数，toretrieveresultconduct重sort。
-     * for example，cansettoquantityretrieveresult权重for 0.7，keywordretrieveresult权重for 0.3。
+     * for example，cansettoquantityretrieveresultweightfor 0.7，keywordretrieveresultweightfor 0.3。
      * the模typepassconfigurationparameter `reranking_mode` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。
      */

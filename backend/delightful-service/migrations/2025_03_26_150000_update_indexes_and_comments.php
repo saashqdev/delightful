@@ -23,27 +23,27 @@ class UpdateIndexesAndComments extends Migration
             $table->dateTime('statistics_time')->change();
         });
 
-        // modify delightful_api_premium_endpoint_responses 表索引
+        // modify delightful_api_premium_endpoint_responses 表index
         Schema::table('delightful_api_premium_endpoint_responses', function (Blueprint $table) {
-            // delete旧索引
+            // delete旧index
             if (Schema::hasIndex('delightful_api_premium_endpoint_responses', 'endpoint_id_created_at_index')) {
                 $table->dropIndex('endpoint_id_created_at_index');
             }
             if (Schema::hasIndex('delightful_api_premium_endpoint_responses', 'request_id_index')) {
                 $table->dropIndex('request_id_index');
             }
-            // add新索引
+            // add新index
             $table->index(['created_at', 'endpoint_id'], 'endpoint_id_created_at_index');
         });
 
-        // modify delightful_api_premium_endpoint_statistics 表索引
+        // modify delightful_api_premium_endpoint_statistics 表index
         Schema::table('delightful_api_premium_endpoint_statistics', function (Blueprint $table) {
-            // delete旧索引
+            // delete旧index
             if (Schema::hasIndex('delightful_api_premium_endpoint_statistics', 'unique_endpoint_id_statistics_level_time')) {
                 $table->dropIndex('unique_endpoint_id_statistics_level_time');
             }
 
-            // add新索引
+            // add新index
             $table->unique(['statistics_time', 'statistics_level', 'endpoint_id'], 'unique_statistics_time');
         });
     }

@@ -18,12 +18,12 @@ enum LoadBalancingType: int
     case RANDOM = 1;
 
     /**
-     * round询strategy - 按顺序依timechooseback端service
+     * round询strategy - 按order依timechooseback端service
      */
     case ROUND_ROBIN = 2;
 
     /**
-     * add权round询strategy - according to权重ratio例chooseback端service
+     * add权round询strategy - according toweightratio例chooseback端service
      */
     case WEIGHTED_ROUND_ROBIN = 3;
 
@@ -48,9 +48,9 @@ enum LoadBalancingType: int
     }
 
     /**
-     * checkcurrent负载均衡typewhethersupport权重.
+     * checkcurrent负载均衡typewhethersupportweight.
      *
-     * @return bool whethersupport权重
+     * @return bool whethersupportweight
      */
     public function supportsWeight(): bool
     {

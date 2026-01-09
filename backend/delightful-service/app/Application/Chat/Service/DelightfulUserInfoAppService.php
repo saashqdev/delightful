@@ -80,7 +80,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
      *
      * @param array $userIds userIDarray
      * @param ContactDataIsolation $dataIsolation data隔离object
-     * @return array userinfoarray，键foruserID
+     * @return array userinfoarray，keyforuserID
      */
     public function getBatchUserInfo(array $userIds, ContactDataIsolation $dataIsolation): array
     {

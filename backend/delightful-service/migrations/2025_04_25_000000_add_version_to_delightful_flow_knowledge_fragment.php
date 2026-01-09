@@ -22,16 +22,16 @@ return new class extends Migration {
             }
         });
 
-        // deleteduplicate索引
+        // deleteduplicateindex
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
             if (Schema::hasIndex('delightful_flow_knowledge_fragment', 'knowledge_base_fragments_document_code_index')) {
                 $table->dropIndex('knowledge_base_fragments_document_code_index');
             }
         });
 
-        // addnew复合索引
+        // addnew复合index
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
-            // checkwhether已存in索引，避免duplicateadd
+            // checkwhether已存inindex，避免duplicateadd
             if (! Schema::hasIndex('delightful_flow_knowledge_fragment', 'idx_knowledge_document_version')) {
                 $table->index(['knowledge_code', 'document_code', 'version'], 'idx_knowledge_document_version');
             }
@@ -44,12 +44,12 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
-            // delete新add索引
+            // delete新addindex
             if (Schema::hasIndex('delightful_flow_knowledge_fragment', 'idx_knowledge_document_version')) {
                 $table->dropIndex('idx_knowledge_document_version');
             }
 
-            // restore原have索引
+            // restore原haveindex
             if (! Schema::hasIndex('delightful_flow_knowledge_fragment', 'knowledge_base_fragments_document_code_index')) {
                 $table->index(['document_code'], 'knowledge_base_fragments_document_code_index');
             }

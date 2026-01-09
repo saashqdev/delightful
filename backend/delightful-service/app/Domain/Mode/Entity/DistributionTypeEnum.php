@@ -31,7 +31,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * getEnglish标识.
+     * getEnglishidentifier.
      */
     public function getIdentifier(): string
     {

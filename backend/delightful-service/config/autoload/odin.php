@@ -298,7 +298,7 @@ return [
 
                     // responsecontent（rowexceptspecificcontent）
                     'choices.0.finish_reason',     // completereason
-                    'choices.0.index',             // choose索引
+                    'choices.0.index',             // chooseindex
 
                     // errorinfo
                     'error',                       // errordetail
@@ -310,7 +310,7 @@ return [
                     'id',                         // requestID
                     'object',                     // objecttype
                     'system_fingerprint',         // systemfinger纹
-                    'performance_flag',            // performancemark（慢request标识）
+                    'performance_flag',            // performancemark（慢requestidentifier）
 
                     // 注意：bydownfieldberowexcept，notwillprint
                     // - args.messages (usermessagecontent)

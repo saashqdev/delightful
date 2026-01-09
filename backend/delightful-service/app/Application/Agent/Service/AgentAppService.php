@@ -74,7 +74,7 @@ class AgentAppService extends AbstractAppService
 
         $data = $this->agentDomainService->queries($agentDataIsolation, $query, $page);
 
-        // ifcontain官方organization，按照传入ID顺序重新sortresult，保持官方organization助理infront
+        // ifcontain官方organization，按照传入IDorder重新sortresult，保持官方organization助理infront
         if ($containOfficialOrganization) {
             $data['list'] = $this->sortAgentsByIdOrder($data['list'], $agentIds);
         }
@@ -144,7 +144,7 @@ class AgentAppService extends AbstractAppService
     }
 
     /**
-     * 按照finger定ID顺序to助理listconductsort.
+     * 按照finger定IDorderto助理listconductsort.
      *
      * @param array<DelightfulAgentEntity> $agents 助理实bodyarray
      * @param array $sortedIds sortIDarray
@@ -162,7 +162,7 @@ class AgentAppService extends AbstractAppService
             $agentMap[$agent->getId()] = $agent;
         }
 
-        // 按照finger定顺序重新organizationarray
+        // 按照finger定order重新organizationarray
         $sortedAgents = [];
         foreach ($sortedIds as $id) {
             if (isset($agentMap[$id])) {

@@ -45,10 +45,10 @@ class AsrPromptAssembler
 usersubmitonesegment录音content，录音content经passvoice识别转fortext，usermaybealsowill提供hand写笔记asfor补充instruction。现inneed你according tothisthesecontentgenerateone简洁accuratetitle。
 
 ## contentcome源instruction
-- <笔记content>：userhand写笔记content，isto录音重pointrecordand总结，usuallycontainclose键info
+- <笔记content>：userhand写笔记content，isto录音重pointrecordand总结，usuallycontainclosekeyinfo
 - <voice识别content>：passvoice识别技术will录音convertbecometext，反映录音actualcontent
 
-## titlegenerate要求
+## titlegeneraterequire
 
 ### 优先level原then（重要）
 1. **笔记优先**：if存in<笔记content>，titleshould侧重笔记content
@@ -56,7 +56,7 @@ usersubmitonesegment录音content，录音content经passvoice识别转fortext，
 3. **综合考虑**：meanwhile参考voice识别content，ensuretitlecompleteaccurate
 4. **keywordextract**：from笔记andvoice识别contentmiddleextractmost核corekeyword
 
-### format要求
+### formatrequire
 1. **lengthlimit**：not超pass 20 character（汉字按 1 charactercalculate）
 2. **languagestyle**：use陈述property语sentence，避免疑问sentence
 3. **简洁explicit**：直接概括核coretheme，not要addmodification词
@@ -104,7 +104,7 @@ usersendoriginalmessage如down：
 {userRequestMessage}
 ```
 
-## titlegenerate要求
+## titlegeneraterequire
 
 ### 优先level原then（non常重要）
 1. **file名优先**：file名usuallyisuser精core命名，containmost核corethemeinfo，请重point参考usermessagemiddle @ backsurfacefile名
@@ -113,7 +113,7 @@ usersendoriginalmessage如down：
    - iffile名isdatetime戳（如"20241112_143025.mp3"）orno意义character（如"录音001.mp3"），thenuse通usedescription
 3. **extractkeyword**：fromfile名middleextractmost核corekeywordandtheme
 
-### format要求
+### formatrequire
 1. **lengthlimit**：not超pass 20 character（汉字按 1 charactercalculate）
 2. **languagestyle**：use陈述property语sentence，避免疑问sentence
 3. **简洁explicit**：直接概括核coretheme，not要addmodification词

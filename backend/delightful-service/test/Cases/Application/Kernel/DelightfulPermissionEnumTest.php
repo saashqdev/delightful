@@ -114,7 +114,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
 
     public function testIsValidPermissionWithInvalidKeys()
     {
-        // testinvalidpermission键
+        // testinvalidpermissionkey
         $this->assertFalse($this->permissionEnum->isValidPermission('invalid_permission'));
         $this->assertFalse($this->permissionEnum->isValidPermission('Admin.ai.invalid_resource.query'));
         $this->assertFalse($this->permissionEnum->isValidPermission('Admin.ai.model_management.invalid_operation'));

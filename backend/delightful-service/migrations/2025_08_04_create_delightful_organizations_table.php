@@ -34,7 +34,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->softDeletes();
 
-            // 索引
+            // index
             $table->index('delightful_organization_code');
         });
     }

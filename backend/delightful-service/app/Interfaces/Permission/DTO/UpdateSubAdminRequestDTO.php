@@ -30,7 +30,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
     public ?array $permissionTag = null;
 
     /**
-     * permission键list（optional，仅inneedupdateo clock提供）.
+     * permissionkeylist（optional，仅inneedupdateo clock提供）.
      * 注意：if提供thisfield，will替换所have现havepermission.
      */
     public ?array $permissions = null;

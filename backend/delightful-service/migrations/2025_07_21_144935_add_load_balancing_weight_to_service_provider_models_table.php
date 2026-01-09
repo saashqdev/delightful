@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->tinyInteger('load_balancing_weight')
                 ->nullable()
                 ->default(null)
-                ->comment('负载均衡权重(0-100)');
+                ->comment('负载均衡weight(0-100)');
         });
     }
 };

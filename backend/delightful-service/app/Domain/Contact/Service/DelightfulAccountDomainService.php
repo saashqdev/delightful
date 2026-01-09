@@ -153,7 +153,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // certainuser_idgeneraterule
                 $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $userDTO->getOrganizationCode());
                 $userDTO->setUserId($userId);
-                // 1.47x(10**-29) 概ratedown,user_idwillduplicate,willbemysql唯one索引拦截,letuser重新loginonetimethenline.
+                // 1.47x(10**-29) 概ratedown,user_idwillduplicate,willbemysql唯oneindex拦截,letuser重新loginonetimethenline.
                 $this->userRepository->createUser($userDTO);
             }
             Db::commit();

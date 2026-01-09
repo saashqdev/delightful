@@ -16,11 +16,11 @@ use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\HighAvailability
 class EndpointAssembler
 {
     /**
-     * generatestandard化端pointtype标识.
+     * generatestandard化端pointtypeidentifier.
      *
      * @param HighAvailabilityAppType $appType 高canuseapplicationtype
      * @param string $modelId modelID
-     * @return string standard化端pointtype标识
+     * @return string standard化端pointtypeidentifier
      */
     public static function generateEndpointType(HighAvailabilityAppType $appType, string $modelId): string
     {
@@ -28,7 +28,7 @@ class EndpointAssembler
     }
 
     /**
-     * fromformat化端pointtype标识middlealso原originalmodelID.
+     * fromformat化端pointtypeidentifiermiddlealso原originalmodelID.
      *
      * @param string $formattedModelId maybecontainformat化front缀modelID
      * @return string originalmodelID
@@ -50,10 +50,10 @@ class EndpointAssembler
     }
 
     /**
-     * checkgive定stringwhetherforformat化端pointtype标识.
+     * checkgive定stringwhetherforformat化端pointtypeidentifier.
      *
      * @param string $modelId 待checkmodelID
-     * @return bool whetherforformat化端pointtype标识
+     * @return bool whetherforformat化端pointtypeidentifier
      */
     public static function isFormattedEndpointType(string $modelId): bool
     {

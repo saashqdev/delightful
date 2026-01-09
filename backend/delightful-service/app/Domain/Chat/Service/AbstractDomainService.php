@@ -462,7 +462,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 避免 seq 表承载too多feature,addtoo多索引,thereforewill话题messagesingle独writeto topic_messages 表middle.
+     * 避免 seq 表承载too多feature,addtoo多index,thereforewill话题messagesingle独writeto topic_messages 表middle.
      */
     public function createTopicMessage(DelightfulSeqEntity $seqEntity, ?string $topicId = null): ?DelightfulTopicMessageEntity
     {

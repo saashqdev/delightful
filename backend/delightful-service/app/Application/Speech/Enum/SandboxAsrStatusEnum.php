@@ -48,7 +48,7 @@ enum SandboxAsrStatusEnum: string
     }
 
     /**
-     * whetherforcompletestatus（contain新旧两typeformat）.
+     * whetherforcompletestatus（containage两typeformat）.
      */
     public function isCompleted(): bool
     {

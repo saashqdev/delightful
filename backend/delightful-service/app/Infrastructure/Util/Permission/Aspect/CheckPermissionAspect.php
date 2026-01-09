@@ -49,7 +49,7 @@ class CheckPermissionAspect extends AbstractAspect
             ExceptionBuilder::throw(PermissionErrorCode::AccessDenied, 'permission.error.access_denied');
         }
 
-        // buildpermission键（support多，任onefull足即pass）
+        // buildpermissionkey（support多，任onefull足即pass）
         $permissionKeys = method_exists($permissionAnnotation, 'getPermissionKeys')
             ? $permissionAnnotation->getPermissionKeys()
             : [$permissionAnnotation->getPermissionKey()];
@@ -60,7 +60,7 @@ class CheckPermissionAspect extends AbstractAspect
             $authorization->getId()
         );
 
-        // executepermissionvalidation：任意onepermission键passthen放line
+        // executepermissionvalidation：任意onepermissionkeypassthen放line
         $hasPermission = false;
         foreach ($permissionKeys as $permissionKey) {
             if ($this->roleAppService->hasPermission($dataIsolation, $authorization->getId(), $permissionKey)) {

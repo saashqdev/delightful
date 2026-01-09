@@ -123,7 +123,7 @@ readonly class AsrValidationService
     /**
      * verifyandgettaskstatus.
      *
-     * @param string $taskKey task键
+     * @param string $taskKey taskkey
      * @param string $userId userID
      * @return AsrTaskStatusDTO taskstatusDTO
      */

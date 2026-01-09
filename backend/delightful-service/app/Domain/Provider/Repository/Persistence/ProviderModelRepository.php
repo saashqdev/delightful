@@ -211,7 +211,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     {
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // generatecache键
+        // generatecachekey
         $cacheKey = sprintf('provider_models:available:%s:%s', $organizationCode, $category->value ?? 'all');
 
         // 尝试fromcacheget
@@ -307,7 +307,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
 
         $entities = ProviderModelAssembler::toEntities($result);
 
-        // convertforbyIDfor键array
+        // convertforbyIDforkeyarray
         $modelsById = [];
         foreach ($entities as $entity) {
             $modelsById[(string) $entity->getId()] = $entity;
@@ -330,7 +330,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $result = Db::select($builder->toSql(), $builder->getBindings());
         $entities = ProviderModelAssembler::toEntities($result);
 
-        // convertforbymodel_idfor键array，保留所havemodel
+        // convertforbymodel_idforkeyarray，保留所havemodel
         $modelsByModelId = [];
         foreach ($entities as $entity) {
             $modelId = $entity->getModelId();

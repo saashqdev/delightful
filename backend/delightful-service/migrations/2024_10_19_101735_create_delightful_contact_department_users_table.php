@@ -33,7 +33,7 @@ return new class extends Migration {
             $table->string('join_time', 32)->comment('入职time。secondleveltime戳format，table示from 1970 year 1 month 1 daystart所经passsecond数。')->default('');
             $table->string('employee_no', 32)->comment('工number')->default('');
             $table->tinyInteger('employee_type')->comment('员工type。1：正type员工2：实习生3：outsidepackage4：劳务 5：顾问');
-            $table->string('orders', 256)->comment('usersortinfo。useatmark通讯录downorganization架构person员顺序，person员maybe存in多departmentmiddle，andhavedifferentsort')->nullable()->default('');
+            $table->string('orders', 256)->comment('usersortinfo。useatmark通讯录downorganization架构person员order，person员maybe存in多departmentmiddle，andhavedifferentsort')->nullable()->default('');
             $table->text('custom_attrs')->comment('customizefield。');
             $table->tinyInteger('is_frozen')->comment('whetherforpausestatususer。')->default(0);
             $table->comment('麦吉departmentdownuserinfotable');

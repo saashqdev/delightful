@@ -35,7 +35,7 @@ return new class extends Migration {
                 $table->timestamp('sync_time')->nullable()->comment('同time')->after('sync_status');
             }
 
-            // 索引：type（organizationtype）
+            // index：type（organizationtype）
             $table->index('type', 'idx_delightful_org_type');
         });
     }
@@ -50,7 +50,7 @@ return new class extends Migration {
         }
 
         Schema::table('delightful_organizations', function (Blueprint $table) {
-            // 先delete索引
+            // 先deleteindex
             try {
                 $table->dropIndex('idx_delightful_org_sync');
             } catch (Throwable) {

@@ -41,7 +41,7 @@ class RoleEntity extends AbstractEntity
     protected ?DateTime $updatedAt = null;
 
     /**
-     * roleassociatepermission键column表.
+     * roleassociatepermissionkeycolumn表.
      */
     protected array $permissions = [];
 
@@ -93,7 +93,7 @@ class RoleEntity extends AbstractEntity
         $index = array_search($permissionKey, $this->permissions);
         if ($index !== false) {
             unset($this->permissions[$index]);
-            $this->permissions = array_values($this->permissions); // 重新索引
+            $this->permissions = array_values($this->permissions); // 重新index
         }
     }
 

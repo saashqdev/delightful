@@ -116,7 +116,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * 重建knowledge basedocumenttoquantity索引.
+     * 重建knowledge basedocumenttoquantityindex.
      */
     public function rebuild(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $force = false): void
     {

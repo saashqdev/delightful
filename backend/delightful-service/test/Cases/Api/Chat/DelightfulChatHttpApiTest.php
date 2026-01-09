@@ -47,7 +47,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         $response = $this->json('/api/v2/delightful/conversation/chatCompletions', $requestData, $headers);
 
         // verifyresponse码
-        $this->assertEquals(1000, $response['code'] ?? 0, 'response码应for1000');
+        $this->assertEquals(1000, $response['code'] ?? 0, 'responsecode应for1000');
         $this->assertEquals('ok', $response['message'] ?? '', 'responsemessage应forok');
 
         // definitionexpectresponsestructure

@@ -238,7 +238,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             ExceptionBuilder::throw(UserTaskErrorCode::TASK_ALREADY_EXISTS);
         }
 
-        // 先清except待executetask
+        // clear firstexcept待executetask
         $this->taskSchedulerDomainService->clearTaskByExternalId($task->getExternalId());
 
         $enabled = true;

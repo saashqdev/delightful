@@ -99,7 +99,7 @@ class DocumentFileStrategy
         $pattern = '/(!\[.*\]\((.*?)\))/';
         $matches = [];
         preg_match_all($pattern, $content, $matches);
-        $fullMatches = $matches[1] ?? [];  // completemarkdownimage语法
+        $fullMatches = $matches[1] ?? [];  // completemarkdownimagesyntax
         $imageUrls = $matches[2] ?? [];  // imageURLorbase64
 
         foreach ($imageUrls as $index => $imageUrl) {

@@ -28,7 +28,7 @@ class DelightfulFlowPermissionEntity extends AbstractEntity
 
     /**
      * resource.
-     * 例子: process code,user id.
+     * example: process code,user id.
      */
     protected string $resourceId;
 
@@ -39,7 +39,7 @@ class DelightfulFlowPermissionEntity extends AbstractEntity
 
     /**
      * goal.
-     * 例子: processopen放platformapplicationid,api_key.
+     * example: processopen放platformapplicationid,api_key.
      */
     protected string $targetId;
 

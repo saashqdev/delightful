@@ -90,7 +90,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         $key = 'open_chat_notice_' . $executionData->getConversationId();
         $lastNoticeTime = $this->cache->get($key);
 
-        // ifnothaveuptime,or者distanceuptimetimesecondalready经超pass,that么thenneedexecute
+        // ifnothaveuptime,or者distanceuptimetimesecondalreadyalready exceededpass,that么thenneedexecute
         $config = $triggerBranch->getConfig();
         $intervalSeconds = $this->getIntervalSeconds($config['interval'] ?? 0, $config['unit'] ?? '');
         if (! $lastNoticeTime || (Carbon::make($openChatTime)->diffInSeconds(Carbon::make($lastNoticeTime)) > $intervalSeconds)) {

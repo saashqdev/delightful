@@ -80,7 +80,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private LoggerInterface $logger;
 
     /**
-     * lock定器.
+     * lockqualifier.
      */
     private LockerInterface $locker;
 

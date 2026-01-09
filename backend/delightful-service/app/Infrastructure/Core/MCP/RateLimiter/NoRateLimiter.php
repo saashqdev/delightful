@@ -22,7 +22,7 @@ class NoRateLimiter extends AbstractRateLimiter
 
     /**
      * getwhenfrontlimitconfiguration.
-     * toatnolimitimplement,所havelimit均设for PHP_INT_MAX.
+     * toatnolimitimplement,所havelimitall setfor PHP_INT_MAX.
      */
     public function getLimits(): array
     {

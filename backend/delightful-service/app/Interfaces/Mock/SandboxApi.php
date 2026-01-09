@@ -105,7 +105,7 @@ class SandboxApi
             'code' => 1000,
             'message' => 'success',
             'data' => [
-                'status' => WorkspaceStatus::READY, // initializecomplete,work区完allcanuse
+                'status' => WorkspaceStatus::READY, // initializecomplete,workregion completeallcanuse
                 'sandbox_id' => $sandboxId,
                 'workspace_path' => '/workspace',
                 'is_ready' => true,

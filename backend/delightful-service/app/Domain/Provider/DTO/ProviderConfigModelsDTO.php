@@ -14,7 +14,7 @@ use Hyperf\Codec\Json;
  * service_provider_config_id to应servicequotient+modelcolumntable.
  *
  * 同oneservicequotientindifferentorganizationdownhavedifferent service_provider_config_id.
- * oneservice_provider_config_idto应多specificmodel.
+ * oneservice_provider_config_idtoshould be multiplespecificmodel.
  */
 class ProviderConfigModelsDTO extends ProviderConfigDTO
 {

@@ -248,7 +248,7 @@ readonly class RoleDomainService
      * logic:
      * 1. according tocurrentorganizationfindwhetheralreadyhavesame namerole;
      * 2. 若not存in,thencreatenewroleand赋予 DelightfulPermission::ALL_PERMISSIONS;
-     * 3. 若存in,thenensureitscontain ALL_PERMISSIONS;
+     * 3. if existsin,thenensureitscontain ALL_PERMISSIONS;
      * 4. willuser ID columntableadd入roleassociateusercolumntable;
      * 5. saverole.
      *

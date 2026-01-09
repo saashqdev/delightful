@@ -71,7 +71,7 @@ class Template extends AbstractTemplate
 
     /**
      * according to传comeshort信text,parsevariable. onlyvariablevalue,notmatchvariablekey!
-     * needvariableparsereason:Volcanoshort信onlysupportvariableshort信send,whilebusiness方willoutat创蓝short信reason,will传come整short信textcontent,nothavevariable.
+     * needvariableparsereason:Volcanoshort信onlysupportvariableshort信send,whilebusiness方willoutatChuanglanshort信reason,will传come整short信textcontent,nothavevariable.
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
     {

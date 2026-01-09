@@ -29,7 +29,7 @@ return new class extends Migration {
             }
         });
 
-        // addnew复合index
+        // addnewcompositeindex
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
             // checkwhetheralready存inindex,avoidduplicateadd
             if (! Schema::hasIndex('delightful_flow_knowledge_fragment', 'idx_knowledge_document_version')) {

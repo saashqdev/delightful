@@ -32,7 +32,7 @@ class RetrievalMethod
      *
      * based onkeywordmatchretrievemethod.
      * indexdocumentmiddle所havesingle词,returncontainquery词textslicesegment.
-     * suitableprecisematch(如productname,person名,ID)andlow频词match.
+     * suitableprecisematch(如productname,person名,ID)andlowfrequent wordsmatch.
      */
     public const string FULL_TEXT_SEARCH = 'full_text_search';
 
@@ -41,7 +41,7 @@ class RetrievalMethod
      *
      * combinesemanticretrieveandall文retrievemethod.
      * meanwhileexecuteall文retrieveandtoquantityretrieve,然backpass重sortstepchoosemost佳result.
-     * combine两typeretrievetechnologyadvantage,弥补eachfromnot足.
+     * combine两typeretrievetechnologyadvantage,compensateeachfromnot足.
      */
     public const string HYBRID_SEARCH = 'hybrid_search';
 

@@ -257,7 +257,7 @@ if (! function_exists('diff_day')) {
 
 if (! function_exists('swoole_get_local_mac')) {
     /**
-     * useat平替Swoolefunction.
+     * useatalternativeSwoolefunction.
      */
     function swoole_get_local_mac(): array
     {

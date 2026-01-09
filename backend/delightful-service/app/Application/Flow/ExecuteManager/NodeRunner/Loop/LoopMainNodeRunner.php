@@ -133,7 +133,7 @@ class LoopMainNodeRunner extends NodeRunner
     {
         $loopDelightfulFlow = clone $delightfulFlow;
 
-        // 做区minute
+        // make regionminute
         $loopDelightfulFlow->setCode($delightfulFlow->getCode() . '_loop');
         $loopDelightfulFlow->setType(Type::Loop);
 

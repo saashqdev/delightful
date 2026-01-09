@@ -239,7 +239,7 @@ class DelightfulLLMDomainService
        - **eventdefinition**:eventissearchcontentmiddlemention,具havetimeassociate(explicitorcanspeculated)independent事实,changeoractivity,includebutnot限atcreate,publish,open业,update,合as,activityetc.
        - according touserquestion,extractandrelatedcloseevent,maintaindescriptionconcise,focusspecifichair生thing.
        - **skipnoclosecontent**:
-         - pure and quietstatedescription(如not变property,background介绍,notimechange).
+         - pure and quietstatedescription(如not变property,backgroundintroduce,notimechange).
          - datastatisticsorfinanceinformation(like revenue,利润).
          - 主观comment,analyzeorspeculated(unlessandeventdirectly相close).
          - notimeassociateandandquestionnoclosedetail.

@@ -59,7 +59,7 @@ class DefaultFontProvider implements FontProviderInterface
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // 采样check,avoidcheckeachlike素improveperformance
+        // samplingcheck,avoidcheckeachlike素improveperformance
         $sampleSize = min(50, $width, $height);
         $stepX = max(1, (int) ($width / $sampleSize));
         $stepY = max(1, (int) ($height / $sampleSize));

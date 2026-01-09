@@ -33,7 +33,7 @@ class AccountEntity extends AbstractEntity
     protected ?AccountStatus $status = null;
 
     /**
-     * hand机numbercountry冠码
+     * hand机numbercountryprefix code
      */
     protected ?string $countryCode = null;
 

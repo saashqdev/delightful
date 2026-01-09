@@ -39,7 +39,7 @@ class EndpointRequestDTO extends AbstractDTO
 
     /**
      * uptimechooseaccesspointID (optional).
-     * useatconversation延续etcscenario,prioritychooseuptimeuseaccesspoint.
+     * useatconversationcontinueetcscenario,prioritychooseuptimeuseaccesspoint.
      */
     protected ?string $lastSelectedEndpointId = null;
 

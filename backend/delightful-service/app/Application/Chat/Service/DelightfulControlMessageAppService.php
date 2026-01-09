@@ -67,7 +67,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
             // (single聊sessionwindowmiddle)startinput/endinput
             ControlMessageType::StartConversationInput,
             ControlMessageType::EndConversationInput => $this->conversationDomainService->clientOperateConversationStatus($messageDTO, $dataIsolation),
-            // setsessiontopic,prepare废弃
+            // setsessiontopic,preparedeprecated
             ControlMessageType::SetConversationTopic => [],
             default => ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR),
         };

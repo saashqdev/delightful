@@ -94,7 +94,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.user_select_error')]
     case GROUP_USER_SELECT_ERROR = 3019;
 
-    // group chatperson数超outlimit
+    // group chatpersoncount exceedsoutlimit
         // Group size exceeds limit
     #[ErrorMessage('chat.group.user_num_limit_error')]
     case GROUP_USER_NUM_LIMIT_ERROR = 3020;

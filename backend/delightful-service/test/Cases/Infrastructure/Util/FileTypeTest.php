@@ -101,7 +101,7 @@ class FileTypeTest extends TestCase
 
     /**
      * testno法identifyfiletypeo clockthrowexception.
-     * 同样needfunctionmocksupport
+     * sameneedfunctionmocksupport
      */
     public function testInvalidFileType()
     {

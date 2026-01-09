@@ -40,7 +40,7 @@ class TreeIndexRepository
     }
 
     /**
-     * false设现inparent-childlevelclose系is1 -> 2 -> 3 -> 4,现inneedin4backsurfaceinsert5,that么need做操asis:
+     * false設現inparent-childlevelclose系is1 -> 2 -> 3 -> 4,现inneedin4backsurfaceinsert5,that么needdo operationasis:
      * getto4所haveancestorsectionpoint,thenuse4所haveancestorsectionpointgoupdate5ancestorsectionpoint,thenagaincreateoneitem5 -> 5close系.
      * 1->4
      * 2->4

@@ -62,7 +62,7 @@ readonly class OrganizationDomainService
                     $dataIsolation,
                     (string) $creatorId,
                     (string) $creatorId, // grant者alsoiscreate者from己
-                    'organizationcreate者from动获administratorpermission',
+                    'organizationcreate者fromauto getadministratorpermission',
                     true // markfororganizationcreateperson
                 );
             } catch (Throwable $e) {

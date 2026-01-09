@@ -250,7 +250,7 @@ return [
                 // logfieldwhitelistsingleconfiguration
                 // iffornullarrayornotconfiguration,thenprint所havefield
                 // ifconfigurationfieldcolumntable,thenonlyprintfinger定field
-                // support嵌setfield,usepoint语法如 'args.messages'
+                // support嵌setfield,usepointsyntax如 'args.messages'
                 // notice:messages and tools fieldnotinwhitelistsinglemiddle,notwillbeprint
                 'whitelist_fields' => [
                     // basicrequestinfo

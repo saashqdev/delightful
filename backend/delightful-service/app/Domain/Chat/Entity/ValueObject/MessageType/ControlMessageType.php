@@ -66,7 +66,7 @@ enum ControlMessageType: string
     // updategroup chat
     case GroupUpdate = 'group_update';
 
-    // systemnotify(xxadd入/leavegroup chat,群温馨reminderetc)
+    // systemnotify(xxadd入/leavegroup chat,group warmreminderetc)
     case SystemNotice = 'system_notice';
 
     // 群member变more

@@ -203,7 +203,7 @@ class ApiKeyProviderEntity extends AbstractEntity
     public function getSecretKey(bool $isDesensitization = false): string
     {
         if ($isDesensitization) {
-            // onlyretainabout 4 位数,剩downuse * replace
+            // onlyretainabout 4 digits,剩downuse * replace
             return substr($this->secretKey, 0, 4) . str_repeat('*', strlen($this->secretKey) - 8) . substr($this->secretKey, -4);
         }
         return $this->secretKey;

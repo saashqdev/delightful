@@ -15,7 +15,7 @@ enum ThirdPlatformChatType: string
     case DingRobot = 'ding_robot';
 
     /**
-     * enterprise微信machineperson.
+     * enterpriseWeChatmachineperson.
      */
     case WeChatRobot = 'wechat_robot';
 

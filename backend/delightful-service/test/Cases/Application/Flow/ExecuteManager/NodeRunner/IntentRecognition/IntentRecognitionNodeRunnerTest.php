@@ -150,7 +150,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => 'I今daygoGuangzhou看small蛮腰,downtimewant to bringIfriendoneupgo',
+            'intent' => 'I今daygoGuangzhou看smallwaist,downtimewant to bringIfriendoneupgo',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['456'], $vertexResult->getChildrenIds());
@@ -294,7 +294,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => 'I今daygoGuangzhou吃莞城bigpackage,downtimewant to bringIfriendoneupgo',
+            'intent' => 'I今daygoGuangzhoueat Dongguan citybigpackage,downtimewant to bringIfriendoneupgo',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['123'], $vertexResult->getChildrenIds());

@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('type', 255)->comment('accesspointtype.userneedfrom己guaranteenotandotherbusinessduplicate');
             $table->string('provider', 255)->comment('providequotient')->nullable();
             $table->string('name', 255)->comment('accesspointname');
-            $table->text('config')->comment('letuserfrom己存onetheseconfigurationinfo')->nullable();
+            $table->text('config')->comment('letuserfromself-storeonetheseconfigurationinfo')->nullable();
             $table->tinyInteger('enabled')->default(1)->comment('whetherenable: 1=enable, 0=disable');
             $table->string('circuit_breaker_status', 32)
                 ->default(CircuitBreakerStatus::CLOSED->value)

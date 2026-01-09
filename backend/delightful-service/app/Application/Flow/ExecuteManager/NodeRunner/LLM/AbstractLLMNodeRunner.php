@@ -81,7 +81,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
     protected function loadAgentPlugins(FlowDataIsolation $flowDataIsolation, ModelInterface $model, AbstractLLMNodeParamsConfig $LLMNodeParamsConfig, string &$systemPrompt): void
     {
         $mcpServerConfigs = [];
-        // load Agent plugin.generalthenisloadtoolandappendsystemprompt词,先做两
+        // load Agent plugin.generalthenisloadtoolandappendsystemprompt词,do two first
         foreach ($LLMNodeParamsConfig->getAgentPlugins() as $agentPlugin) {
             $appendSystemPrompt = $agentPlugin->getAppendSystemPrompt();
             if ($appendSystemPrompt !== '') {

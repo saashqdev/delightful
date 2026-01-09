@@ -14,7 +14,7 @@ namespace App\Domain\Chat\Entity\ValueObject;
  */
 enum MessagePriority: int
 {
-    // 待定,defaultvalue
+    // pending,defaultvalue
     case Tbd = 0;
 
     // low

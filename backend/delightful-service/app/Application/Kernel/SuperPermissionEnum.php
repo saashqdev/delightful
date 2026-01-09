@@ -42,6 +42,6 @@ enum SuperPermissionEnum: string
     // 超levelMagickanbanmanageperson员
     case SUPER_DELIGHTFUL_BOARD_ADMIN = 'be_delightful_board_manager';
 
-    // 超levelMagickanban运营person员
+    // 超levelMagickanbanoperationperson员
     case SUPER_DELIGHTFUL_BOARD_OPERATOR = 'be_delightful_board_operator';
 }

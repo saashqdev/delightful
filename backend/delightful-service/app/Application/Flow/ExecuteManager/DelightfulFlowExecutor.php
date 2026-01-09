@@ -449,7 +449,7 @@ class DelightfulFlowExecutor
                 // thiswithingeneralcome说notwillfornull,先not管nullsituation
                 $childrenIds = [];
                 foreach ($vertex->children as $childVertex) {
-                    // notcanfrom己连from己
+                    // notcanfromself-connectedfrom己
                     if ($node->getNodeId() == $childVertex->key) {
                         continue;
                     }

@@ -89,7 +89,7 @@ class TokenTextSplitter extends TextSplitter
         // saveoriginaltext,useatalso原tag
         $originalText = $text;
 
-        // 1. 先原文middle0x00replacebecome0x000x00
+        // 1. original text firstmiddle0x00replacebecome0x000x00
         $text = str_replace("\x00", "\x00\x00", $text);
 
         // 2. tagreplacebecome0x00
@@ -292,7 +292,7 @@ class TokenTextSplitter extends TextSplitter
         }
         $separatorBeginIndex = min($i + 1, count($this->separators));
 
-        // use选定minuteseparatorsplittext
+        // useselectedminuteseparatorsplittext
         if ($separator !== '') {
             $splits = $this->splitBySeparator($text, $separator);
         } else {

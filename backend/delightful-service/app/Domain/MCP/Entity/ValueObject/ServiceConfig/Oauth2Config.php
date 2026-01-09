@@ -24,7 +24,7 @@ class Oauth2Config extends AbstractValueObject
     protected string $clientId = '';
 
     /**
-     * Client Secret - customer端key,andcustomer端ID配合use,useatauthapplication身share.
+     * Client Secret - customer端key,andcustomer端IDcooperateuse,useatauthapplication身share.
      * ensureonlyauthorizationapplicationcanrequestpermission.
      *
      * createOAuthapplicationo clockwillminute配client_secret,本exampleinput 8jmSATwI*********

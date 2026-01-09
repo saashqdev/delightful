@@ -73,7 +73,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 ## toolmiddleclosekeyreturnvalueinstruction
 - fragments: 本timeretrieveto所haveknowledge baseslicesegment
 - fragments.*.content: slicesegmentcontent
-- fragments.*.metadata.url: currentslicesegment原文link
+- fragments.*.metadata.url: currentslicesegmentoriginal textlink
 - graph.*.content: comefromknowledgegraph谱data,canenhanceinfo,letyoumoregoodreturn答issue
 ## limit
 - return答contentmiddlenotallowout现notisDelightfultaglink.

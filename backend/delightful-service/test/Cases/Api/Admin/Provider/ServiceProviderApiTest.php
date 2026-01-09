@@ -342,7 +342,7 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertArrayHasKey('cache_write_cost', $config, 'configshouldcontaincache_write_costfield');
         $this->assertArrayHasKey('cache_hit_cost', $config, 'configshouldcontaincache_hit_costfield');
 
-        // validatevaluewhethercorrect(allow浮point数误difference)
+        // validatevaluewhethercorrect(allow浮pointcount errordifference)
         $this->assertEqualsWithDelta(
             $expectedCosts['input_cost'],
             (float) $config['input_cost'],

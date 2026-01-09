@@ -451,7 +451,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * calculatemostbig公约数(from LLMAppService 移passcomelogic).
+     * calculatemostbigcommon divisor(from LLMAppService 移passcomelogic).
      */
     private static function gcd(int $a, int $b): int
     {

@@ -394,7 +394,7 @@ sql;
     // for移except脏data写method
     public function getHasTrashMessageUsers(): array
     {
-        // 按 delightful_id minutegroup,找outhave垃圾messageuser
+        // 按 delightful_id minutegroup,找outhavegarbagemessageuser
         $query = $this->delightfulSeq::query()
             ->select('object_id')
             ->groupBy('object_id')

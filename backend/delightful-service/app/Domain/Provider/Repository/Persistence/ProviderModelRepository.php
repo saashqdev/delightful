@@ -148,7 +148,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             // organizationnotone致:judgemodelbelong toorganizationwhetherisofficialorganization
             if ($this->isOfficialOrganization($modelOrganizationCode)
                 && ! $this->isOfficialOrganization($currentOrganizationCode)) {
-                // model属atofficialorganizationandcurrentorganizationnotisofficialorganization:走写o clockcopylogic
+                // model属atofficialorganizationandcurrentorganizationnotisofficialorganization:walk writeo clockcopylogic
                 $organizationModelId = $this->delightfulProviderAndModels->updateDelightfulModelStatus($dataIsolation, $model);
             } else {
                 // othersituation:nopermission操as

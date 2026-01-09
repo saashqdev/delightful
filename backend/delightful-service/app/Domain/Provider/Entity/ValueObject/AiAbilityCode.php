@@ -52,7 +52,7 @@ enum AiAbilityCode: string
             self::WebSearch => '本cancoverageplatform AI bigmodelinternetsearchscenario,precisegetand整合mostnewnew闻,事实anddatainfo.',
             self::RealtimeSpeechRecognition => '本cancoverageplatform所havevoice转textapplicationscenario,实o clocklisteneraudiostreamand逐步outputaccuratetextcontent.',
             self::AudioFileRecognition => '本cancoverageplatform所haveaudiofile转textapplicationscenario,preciseidentify说话person,audiotextetcinfo.',
-            self::AutoCompletion => '本cancoverageplatform所haveinputcontentfromauto supplementallapplicationscenario,according tocomprehendupdown文foruserfromauto supplementallcontent,byuserchoosewhether采纳.',
+            self::AutoCompletion => '本cancoverageplatform所haveinputcontentfromauto supplementallapplicationscenario,according tocomprehendupdown文foruserfromauto supplementallcontent,byuserchoosewhetheradopt.',
             self::ContentSummary => '本cancoverageplatform所havecontentsummaryapplicationscenario,tolong篇document,reportorwebpage文chapterconduct深degreeanalyze.',
             self::VisualUnderstanding => '本cancoverageplatform所haveneedletbigmodelconductvisualcomprehendapplicationscenario,precisecomprehendeachtypegraphlikemiddlecontentbyandcomplexclose系.',
             self::SmartRename => '本cancoverageplatform所havesupport AI renameapplicationscenario,according tocomprehendupdown文foruserfrom动conductcontenttitlenaming.',

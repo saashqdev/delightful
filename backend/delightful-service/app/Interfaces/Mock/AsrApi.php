@@ -131,7 +131,7 @@ class AsrApi
         $outputFilename = $audioConfig['output_filename'] ?? 'audio';
 
         // mocktrue实sandboxlinefor:according to output_filename renamedirectory
-        // extract原directorymiddletime戳部minute(format:_YYYYMMDD_HHMMSS)
+        // extract原directorymiddletimetimestamp partminute(format:_YYYYMMDD_HHMMSS)
         $timestamp = '';
         if (preg_match('/_(\d{8}_\d{6})$/', $targetDir, $matches)) {
             $timestamp = '_' . $matches[1];

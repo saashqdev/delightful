@@ -238,7 +238,7 @@ JSON, true)));
 3. againtoimagecontentconductmulti-dimensionaldegreedetailedanalyze,includebutnot限at:
    - 主bodycontentidentify:person物,物body,scenario,textetc
    - visualfeature:color,composition,光line,qualityetc
-   - semanticinfo:activity,情绪,close系,background故事etc
+   - semanticinfo:activity,emotion,close系,backgroundstoryetc
    - textidentify:如havetext,accurateextractandcomprehendimplication
    - technologyinfo:如havegraphtable/data,analyzeitsimplication
    

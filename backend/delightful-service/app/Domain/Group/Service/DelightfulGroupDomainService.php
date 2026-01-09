@@ -180,7 +180,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         array $seqContent,
         ControlMessageType $controlMessageType
     ): DelightfulSeqEntity {
-        // returnsessionid,convenientfront端操as
+        // returnsessionid,convenientfrontclient operationas
         $userConversations = $this->getGroupUserConversationsByUserIds([$dataIsolation->getCurrentUserId()], $groupEntity->getId());
         $seqContent['conversation_id'] = $userConversations[$dataIsolation->getCurrentUserId()] ?? '';
         $seqEntity = $this->getGroupChangeSeqEntity($dataIsolation, $groupEntity, $seqContent, $controlMessageType);

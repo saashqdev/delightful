@@ -15,7 +15,7 @@ use Delightful\BeDelightful\Infrastructure\Utils\WorkDirectoryUtil;
 use Hyperf\Codec\Json;
 
 /**
- * ASR group装器
+ * ASR grouploader
  * responsible ASR 相close实bodygroup装andpathconvert.
  *
  * pathformatinstruction:

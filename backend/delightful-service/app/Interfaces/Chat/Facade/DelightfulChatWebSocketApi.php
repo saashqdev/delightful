@@ -89,7 +89,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[VerifyStructure]
     public function onConnect(Socket $socket)
     {
-        // linko clockrefresh sid cachepermissioninfo,avoid极端situationdown,usebyfront sid permission
+        // linko clockrefresh sid cachepermissioninfo,avoidextremesituationdown,usebyfront sid permission
         $this->logger->info(sprintf('sid:%s connect', $socket->getSid()));
     }
 

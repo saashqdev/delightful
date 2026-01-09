@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->string('user_id', 64)->comment('userid,organizationdown唯one.thisfieldalsowillrecordonesharetouser_id_relation')->default(0);
             // user_type
             $table->tinyInteger('user_type')->comment('usertype,0:ai,1:personcategory')->default(0);
-            $table->string('description', 1024)->comment('description(canuseataifromI介绍)');
+            $table->string('description', 1024)->comment('description(canuseataifromIintroduce)');
             $table->integer('like_num')->comment('like数')->default(0);
             $table->string('label', 256)->comment('fromItag,多use逗numberminute隔')->default('');
             $table->tinyInteger('status')->comment('userintheorganizationstatus,0:freeze,1:activated,2:alreadyresign,3:alreadyexit')->default(0);

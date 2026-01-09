@@ -345,7 +345,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
                 );
                 $this->assertNotNull($admin);
                 $this->assertTrue($admin->isOrganizationCreator());
-                $this->assertEquals('organizationcreate者from动获administratorpermission', $admin->getRemarks());
+                $this->assertEquals('organizationcreate者fromauto getadministratorpermission', $admin->getRemarks());
             }
 
             // At minimum verify organization creation succeeded

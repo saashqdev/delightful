@@ -30,7 +30,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
             $builder = $this->createBuilder($dataIsolation, ProviderModelConfigVersionModel::query());
             $latestVersion = $builder
                 ->where('service_provider_model_id', $serviceProviderModelId)
-                ->lockForUpdate()  // 悲观lock,preventandhair
+                ->lockForUpdate()  // pessimisticlock,preventandhair
                 ->max('version');
 
             $newVersion = $latestVersion ? (int) $latestVersion + 1 : 1;

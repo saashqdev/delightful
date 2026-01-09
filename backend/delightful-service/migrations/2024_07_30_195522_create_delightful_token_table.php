@@ -19,9 +19,9 @@ return new class extends Migration {
         }
         Schema::create('delightful_tokens', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('type')->default(0)->comment('tokentype. 0:账number,1:user,2:organization,3:application,4:process');
+            $table->unsignedBigInteger('type')->default(0)->comment('tokentype. 0:accountnumber,1:user,2:organization,3:application,4:process');
             $table->string('type_relation_value', 64)->comment(
-                'tokentypeto应value.typefor0o clock,thisvalueforaccount_id;typefor1o clock,thisvalueforuser_id;typefor2o clock,thisvaluefororganizationencoding;typefor3o clock,thisvalueforapp_id;typefor4o clock,thisvalueforflow_id'
+                'tokentypetoshouldvalue.typefor0o clock,thisvalueforaccount_id;typefor1o clock,thisvalueforuser_id;typefor2o clock,thisvaluefororganizationencoding;typefor3o clock,thisvalueforapp_id;typefor4o clock,thisvalueforflow_id'
             );
             $table->string('token', 256)->comment('tokenvalue,alllocally uniqueone');
             $table->timestamp('expired_at')->comment('expiretime');

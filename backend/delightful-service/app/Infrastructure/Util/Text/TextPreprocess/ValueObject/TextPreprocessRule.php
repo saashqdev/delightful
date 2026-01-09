@@ -9,21 +9,21 @@ namespace App\Infrastructure\Util\Text\TextPreprocess\ValueObject;
 
 enum TextPreprocessRule: int
 {
-    // replace掉continuousnull格/换line符/tab
+    // replacedropcontinuousnullformat/exchangeline符/tab
     case REPLACE_WHITESPACE = 1;
 
-    // delete所haveurlandemailitemground址
+    // delete haveurlandemailitemgroundaddress
     case REMOVE_URL_EMAIL = 2;
 
-    // Exceltitlelinesplice,剔exceptsheetline,linebetween换lineadjustfor\n\n
+    // Exceltitlelinesplice,剔exceptsheetline,linebetweenexchangelineadjustfor\n\n
     case FORMAT_EXCEL = 3;
 
     public function getDescription(): string
     {
         return match ($this) {
-            self::REPLACE_WHITESPACE => 'replace掉continuousnull格/换line符/tab',
-            self::REMOVE_URL_EMAIL => 'delete所haveurlandemailitemground址',
-            self::FORMAT_EXCEL => '剔excepttitleline,willExcelcontentandtitlelinesplicebecome"title:content"format,剔exceptsheetline,linebetween换lineadjustfor\n\n',
+            self::REPLACE_WHITESPACE => 'replacedropcontinuousnullformat/exchangeline符/tab',
+            self::REMOVE_URL_EMAIL => 'delete haveurlandemailitemgroundaddress',
+            self::FORMAT_EXCEL => '剔excepttitleline,willExcelcontentandtitlelinesplicebecome"title:content"format,剔exceptsheetline,linebetweenexchangelineadjustfor\n\n',
         };
     }
 

@@ -15,23 +15,23 @@ class CreateDelightfulChatGroupTable extends Migration
      */
     public function up(): void
     {
-        // judgetablewhether存in
+        // judgetablewhetherexistsin
         if (Schema::hasTable('delightful_chat_groups')) {
             return;
         }
         Schema::create('delightful_chat_groups', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('group_name', 64)->comment('群name')->default('');
-            $table->string('group_avatar', 255)->comment('群avatar')->default('');
-            $table->string('group_notice', 255)->comment('群announcement')->default('');
+            $table->string('group_name', 64)->comment('groupname')->default('');
+            $table->string('group_avatar', 255)->comment('groupavatar')->default('');
+            $table->string('group_notice', 255)->comment('groupannouncement')->default('');
             $table->string('group_owner', 64)->comment('group owner');
-            // 群belong toorganization
-            $table->string('organization_code', 64)->comment('群organizationencoding')->default('');
-            $table->string('group_tag', 64)->comment('群tag:0:notag,1:outsidedepartment group;2:insidedepartment group;3:allmember group')->default('0');
-            $table->tinyInteger('group_type')->default(1)->comment('群type,1:conversation;2:topic');
-            $table->tinyInteger('group_status')->default(1)->comment('群status,1:normal;2:dissolve');
-            // memberup限
-            $table->integer('member_limit')->default(1000)->comment('群memberup限');
+            // groupbelong toorganization
+            $table->string('organization_code', 64)->comment('grouporganizationencoding')->default('');
+            $table->string('group_tag', 64)->comment('grouptag:0:notag,1:outsidedepartment group;2:insidedepartment group;3:allmember group')->default('0');
+            $table->tinyInteger('group_type')->default(1)->comment('grouptype,1:conversation;2:topic');
+            $table->tinyInteger('group_status')->default(1)->comment('groupstatus,1:normal;2:dissolve');
+            // memberuplimit
+            $table->integer('member_limit')->default(1000)->comment('groupmemberuplimit');
             $table->softDeletes();
             $table->timestamps();
             $table->comment('grouptable');

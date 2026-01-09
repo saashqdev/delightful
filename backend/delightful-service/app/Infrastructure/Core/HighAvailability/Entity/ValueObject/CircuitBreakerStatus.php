@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\HighAvailability\Entity\ValueObject;
 use InvalidArgumentException;
 
 /**
- * circuit break器statusenum.
+ * circuit breakdevicestatusenum.
  */
 enum CircuitBreakerStatus: string
 {
@@ -30,7 +30,7 @@ enum CircuitBreakerStatus: string
     case HALF_OPEN = 'half_open';
 
     /**
-     * get所havestatusvaluearray.
+     * get havestatusvaluearray.
      */
     public static function values(): array
     {

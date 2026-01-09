@@ -13,22 +13,22 @@ namespace App\Infrastructure\Core\HighAvailability\ValueObject;
 enum LoadBalancingType: int
 {
     /**
-     * randomstrategy - randomchooseonecanuseback端service
+     * randomstrategy - randomchooseonecanusebackclientservice
      */
     case RANDOM = 1;
 
     /**
-     * round询strategy - 按order依timechooseback端service
+     * roundquerystrategy - 按order依timechoosebackclientservice
      */
     case ROUND_ROBIN = 2;
 
     /**
-     * add权round询strategy - according toweightratio例chooseback端service
+     * add权roundquerystrategy - according toweightratioexamplechoosebackclientservice
      */
     case WEIGHTED_ROUND_ROBIN = 3;
 
     /**
-     * hashstrategy - according torequesthashvaluechooseback端service
+     * hashstrategy - according torequesthashvaluechoosebackclientservice
      */
     case HASH = 4;
 
@@ -41,8 +41,8 @@ enum LoadBalancingType: int
     {
         return match ($this) {
             self::RANDOM => 'random',
-            self::ROUND_ROBIN => 'round询',
-            self::WEIGHTED_ROUND_ROBIN => 'add权round询',
+            self::ROUND_ROBIN => 'roundquery',
+            self::WEIGHTED_ROUND_ROBIN => 'add权roundquery',
             self::HASH => 'hash',
         };
     }
@@ -58,7 +58,7 @@ enum LoadBalancingType: int
     }
 
     /**
-     * get所havecanuseload balancingtype.
+     * get havecanuseload balancingtype.
      *
      * @return array<LoadBalancingType> load balancingtypearray
      */

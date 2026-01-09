@@ -18,7 +18,7 @@ class OfficialProxyRequest extends ImageGenerateRequest
     }
 
     /**
-     * officialproxyrequest,dataoriginal sealnot动pass.
+     * officialproxyrequest,dataoriginal sealnotautopass.
      */
     public function toArray(): array
     {

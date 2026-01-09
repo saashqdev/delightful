@@ -41,24 +41,24 @@ class VolceApiClient extends AbstractSms
             return $smsStruct->content ?: '';
         }
         $templateContent = $this->template->getContentByTemplateId($smsStruct->getTemplateId());
-        // 按variableorder,also原becomecompleteshort信text
+        // 按variableorder,alsooriginalbecomecompleteshortmessagetext
         return $this->translateContent($templateContent, $smsStruct->variables);
     }
 
     /**
-     * parsepass invariablevariableor者textshort信,totemplateshort信variableassociatearray.
+     * parsepass invariablevariableorpersontextshortmessage,totemplateshortmessagevariableassociatearray.
      */
     private function parseVariables(SmsStruct $smsStruct): array
     {
         $variables = $smsStruct->variables;
         $smsStruct->language = $this->getContentLanguage($smsStruct);
-        // Volcanoshort信onlysupportvariableshort信,according tocomplete $message adaptto应 templatevariable
+        // Volcanoshortmessageonlysupportvariableshortmessage,according tocomplete $message adapttoshould templatevariable
 
-        // $variables maybeforindexarray ["quotient品A","supplyquotientA",10],Volcanoshort信needalso原becomeassociatearray
+        // $variables maybeforindexarray ["quotient品A","supplyquotientA",10],Volcanoshortmessageneedalsooriginalbecomeassociatearray
         if ($smsStruct->templateId && $this->array_is_list($variables)) {
             // 1.gettemplatecontent,certainvariablekey
             $templateContent = $this->template->getContentByTemplateId($smsStruct->getTemplateId()) ?? '';
-            // 2.according tovariablekey,also原associatearray
+            // 2.according tovariablekey,alsooriginalassociatearray
             $variables = $this->template->getTemplateVariables($templateContent, $variables);
         }
         return $variables;

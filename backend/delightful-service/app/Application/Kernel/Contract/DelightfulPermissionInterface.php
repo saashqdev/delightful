@@ -9,17 +9,17 @@ namespace App\Application\Kernel\Contract;
 
 /**
  * permissionenuminterface
- * providepermissionmanage统oneabstract
+ * providepermissionmanage統oneabstract
  */
 interface DelightfulPermissionInterface
 {
     /**
-     * get所have操astype.
+     * get haveoperationastype.
      */
     public function getOperations(): array;
 
     /**
-     * get所haveresource.
+     * get haveresource.
      */
     public function getResources(): array;
 
@@ -34,7 +34,7 @@ interface DelightfulPermissionInterface
     public function parsePermission(string $permissionKey): array;
 
     /**
-     * generate所havemaybepermissiongroup合.
+     * generate havemaybepermissiongroup合.
      */
     public function generateAllPermissions(): array;
 
@@ -56,17 +56,17 @@ interface DelightfulPermissionInterface
     public function getResourceLabel(string $resource): string;
 
     /**
-     * get操astag.
+     * getoperationastag.
      */
     public function getOperationLabel(string $operation): string;
 
     /**
-     * getresource模piece.
+     * getresourcemodepiece.
      */
     public function getResourceModule(string $resource): string;
 
     /**
-     * checkuserpermissionsetmiddlewhethercontainfinger定permission(consider隐typecontain).
+     * checkuserpermissionsetmiddlewhethercontainfingersetpermission(considerhiddentypecontain).
      */
     public function checkPermission(string $permissionKey, array $userPermissions, bool $isPlatformOrganization = false): bool;
 }

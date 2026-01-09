@@ -16,7 +16,7 @@ use App\Domain\Chat\Entity\ValueObject\FileType;
 class ChatAttachment extends AbstractEntity
 {
     /**
-     * chatfileneed先uploadto chat fileservice器,then才cansendmessage.
+     * chatfileneedfirstuploadto chat fileservicedevice,then才cansendmessage.
      * this id is delightful_chat_file tableprimary key.
      */
     protected string $fileId = '';

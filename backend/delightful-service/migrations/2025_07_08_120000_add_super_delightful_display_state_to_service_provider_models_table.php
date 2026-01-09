@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         if (! Schema::hasColumn('service_provider_models', 'be_delightful_display_state')) {
             Schema::table('service_provider_models', function (Blueprint $table) {
-                $table->tinyInteger('be_delightful_display_state')->default(0)->comment('超levelMagedisplayswitch:0-close,1-start');
+                $table->tinyInteger('be_delightful_display_state')->default(0)->comment('exceedslevelMagedisplayswitch:0-close,1-start');
             });
         }
     }

@@ -22,7 +22,7 @@ use Throwable;
 class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
 {
     /**
-     * checkknowledge basetoquantitysetwhether存in.
+     * checkknowledge basetoquantitysetwhetherexistsin.
      *
      * @throws BusinessException
      */
@@ -31,7 +31,7 @@ class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
         $vector = $knowledgeBaseEntity->getVectorDBDriver();
         $collection = $vector->getCollection($knowledgeBaseEntity->getCollectionName());
         if (! $collection) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'collectionnot存in');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'collectionnotexistsin');
         }
         return true;
     }
@@ -45,7 +45,7 @@ class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
         KnowledgeBaseDocumentEntity $documentEntity
     ): bool {
         try {
-            // 先get所haveminutesegment
+            // firstget haveminutesegment
             $fragmentQuery = new KnowledgeBaseFragmentQuery();
             $fragmentQuery->setKnowledgeCode($knowledge->getCode());
             $fragmentQuery->setDocumentCode($documentEntity->getCode());
@@ -90,11 +90,11 @@ class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
 
         $documentEntity->setSyncStatus(KnowledgeSyncStatus::Syncing->value);
         $this->knowledgeBaseDocumentDomainService->changeSyncStatus($dataIsolation, $documentEntity);
-        $this->logger->info('justinparsefile,file名:' . $documentFile->getName());
+        $this->logger->info('justinparsefile,filename:' . $documentFile->getName());
         $content = $this->documentFileStrategy->parseContent($dataIsolation, $documentFile, $knowledgeBaseEntity->getCode());
-        $this->logger->info('parsefilecomplete,justinfileminutesegment,file名:' . $documentFile->getName());
+        $this->logger->info('parsefilecomplete,justinfileminutesegment,filename:' . $documentFile->getName());
         $splitText = $this->knowledgeBaseFragmentDomainService->processFragmentsByContent($dataIsolation, $content, $documentEntity->getFragmentConfig());
-        $this->logger->info('fileminutesegmentcomplete,file名:' . $documentFile->getName() . ',minutesegmentquantity:' . count($splitText));
+        $this->logger->info('fileminutesegmentcomplete,filename:' . $documentFile->getName() . ',minutesegmentquantity:' . count($splitText));
 
         foreach ($splitText as $text) {
             $fragmentEntity = (new KnowledgeBaseFragmentEntity())

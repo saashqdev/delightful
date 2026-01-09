@@ -162,11 +162,11 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
         switch (Type::tryFrom($query->getType())) {
             case Type::Main:
-                // not supported主processquery
+                // not supportedmainprocessquery
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_support', ['label' => 'type']);
                 // no break
             case Type::Sub:
-                // onlyget具havepermission子process
+                // onlygetwithhavepermissionchildprocess
                 $subResources = $this->operationPermissionAppService->getResourceOperationByUserIds(
                     $permissionDataIsolation,
                     ResourceType::SubFlowCode,
@@ -178,7 +178,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
                 $query->setSelect(['id', 'code', 'name', 'description', 'icon', 'type', 'tool_set_id', 'enabled', 'version_code', 'organization_code', 'created_uid', 'created_at', 'updated_uid', 'updated_at', 'deleted_at']);
                 break;
             case Type::Tools:
-                // need具havethetoolcollection读permission
+                // needwithhavethetoolcollectionreadpermission
                 if (empty($query->getToolSetId())) {
                     break;
                     //                    ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'tool_set_id']);
@@ -243,7 +243,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
         $query->setType(Type::Tools->value);
-        // one定isfinger定querytool codes
+        // onesetisfingersetquerytool codes
         if (empty($query->getCodes())) {
             return ['total' => 0, 'list' => []];
         }
@@ -269,7 +269,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $query->setEnabled(true);
         $data = $this->delightfulFlowDomainService->queries($dataIsolation, $query, $page);
 
-        // increasesysteminside置tool
+        // increasesysteminsidesettool
         foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
             foreach ($builtInToolSet->getTools() as $builtInTool) {
                 if ($builtInTool->isShow() && in_array($builtInTool->getCode(), $query->getCodes())) {
@@ -308,7 +308,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $toolSetQuery->setOrder(['updated_at' => 'desc']);
         $toolSetData = $this->delightfulFlowToolSetDomainService->queries($dataIsolation, $toolSetQuery, $page);
 
-        // increasesysteminside置toolcollection
+        // increasesysteminsidesettoolcollection
         $builtInTools = [];
         if ($withBuiltInTools) {
             foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
@@ -344,7 +344,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $toolQuery->setOrder(['updated_at' => 'desc']);
         $toolResult = $this->delightfulFlowDomainService->queries($dataIsolation, $toolQuery, $page);
 
-        // increasesysteminside置tool
+        // increasesysteminsidesettool
         /** @var BuiltInToolInterface $builtInTool */
         foreach ($builtInTools as $builtInTool) {
             $toolResult['list'][] = $builtInTool->generateToolFlow($dataIsolation->getCurrentOrganizationCode());
@@ -365,7 +365,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             $toolSetData['list'][$index]->addTool($toolInfo);
         }
 
-        // filter掉nothaveanytooltoolcollection
+        // filterdropnothaveanytooltoolcollection
         $toolSetData['list'] = array_filter($toolSetData['list'], fn (DelightfulFlowToolSetEntity $toolSet) => ! empty($toolSet->getTools()));
         $toolSetData['total'] = count($toolSetData['list']);
 
@@ -396,7 +396,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
 
         $query = new KnowledgeBaseQuery();
         $query->setCodes(array_keys($resources));
-        // 目frontonlygetfrom建textknowledge base
+        // itemfrontonlygetfrom建textknowledge base
         $query->setTypes([KnowledgeType::UserKnowledgeBase->value]);
         $query->setEnabled(true);
         $knowledgeData = $this->delightfulFlowKnowledgeDomainService->queries($this->createKnowledgeBaseDataIsolation($dataIsolation), $query, $page);

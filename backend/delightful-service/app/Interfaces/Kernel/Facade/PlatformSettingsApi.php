@@ -80,7 +80,7 @@ class PlatformSettingsApi
     }
 
     /**
-     * 简single URL andrequireditemvalidation(followrequirement:save URL;size/typevalidationinfileserviceandfront端process).
+     * simplesingle URL andrequireditemvalidation(followrequirement:save URL;size/typevalidationinfileserviceandfrontclientprocess).
      */
     private function validateUrls(array $data): void
     {
@@ -89,7 +89,7 @@ class PlatformSettingsApi
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'platform_settings.validation_failed');
             }
         }
-        // 简single https check
+        // simplesingle https check
         $urls = [];
         $urls[] = $data['favicon_url'] ?? '';
         $urls[] = $data['logo_urls']['zh_CN'] ?? '';

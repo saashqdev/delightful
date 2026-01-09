@@ -39,7 +39,7 @@ readonly class AsrTitleGeneratorService
      * according todifferentscenariogeneratetitle.
      *
      * scenarioone:have asr_stream_content(frontclient implementationo clockrecording),directlyusecontentgeneratetitle
-     * scenariotwo:have file_id(uploadalreadyhavefile),buildhint词generatetitle
+     * scenariotwo:have file_id(uploadalreadyhavefile),buildhintwordgeneratetitle
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
      * @param string $asrStreamContent ASRstreamidentifycontent
@@ -72,7 +72,7 @@ readonly class AsrTitleGeneratorService
             if (! empty($fileId)) {
                 $fileEntity = $this->taskFileDomainService->getById((int) $fileId);
                 if ($fileEntity === null) {
-                    $this->logger->warning('generatetitleo clocknot找tofile', [
+                    $this->logger->warning('generatetitleo clocknotfindtofile', [
                         'file_id' => $fileId,
                         'task_key' => $taskKey,
                     ]);
@@ -82,7 +82,7 @@ readonly class AsrTitleGeneratorService
                 // getaudiofilename
                 $audioFileName = $fileEntity->getFileName();
 
-                // buildnotefile名(ifhave)
+                // buildnotefilename(ifhave)
                 $noteFileName = null;
                 if ($note !== null && $note->hasContent()) {
                     $noteFileName = $note->generateFileName();
@@ -91,7 +91,7 @@ readonly class AsrTitleGeneratorService
                 // builduserrequestmessage(mockuserchatmessage)
                 $userRequestMessage = $this->buildUserRequestMessage($audioFileName, $noteFileName);
 
-                // use AsrPromptAssembler buildhint词
+                // use AsrPromptAssembler buildhintword
                 $customPrompt = AsrPromptAssembler::getTitlePromptForUploadedFile(
                     $userRequestMessage,
                     $language
@@ -124,10 +124,10 @@ readonly class AsrTitleGeneratorService
     public function generateFromTaskStatus(AsrTaskStatusDTO $taskStatus): string
     {
         try {
-            // useup报o clocksave语type,ifnothavethenusecurrent语type
+            // useup报o clocksavelanguagetype,ifnothavethenusecurrentlanguagetype
             $language = $taskStatus->language ?: $this->translator->getLocale() ?: 'zh_CN';
 
-            $this->logger->info('use语typegeneratetitle', [
+            $this->logger->info('uselanguagetypegeneratetitle', [
                 'task_key' => $taskStatus->taskKey,
                 'language' => $language,
                 'has_asr_content' => ! empty($taskStatus->asrStreamContent),
@@ -145,14 +145,14 @@ readonly class AsrTitleGeneratorService
                     );
                 }
 
-                // getcompleterecordingsummaryhint词
+                // getcompleterecordingsummaryhintword
                 $customPrompt = AsrPromptAssembler::getTitlePrompt(
                     $taskStatus->asrStreamContent,
                     $note,
                     $language
                 );
 
-                // usecustomizehint词generatetitle
+                // usecustomizehintwordgeneratetitle
                 $userAuthorization = $this->getUserAuthorizationFromUserId($taskStatus->userId);
                 $title = $this->delightfulChatMessageAppService->summarizeTextWithCustomPrompt(
                     $userAuthorization,
@@ -174,7 +174,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * cleantitle,移exceptfile/directorynotallowcharacterandtruncatelength.
+     * cleantitle,moveexceptfile/directorynotallowcharacterandtruncatelength.
      *
      * @param string $title originaltitle
      * @return string cleanbacktitle
@@ -186,7 +186,7 @@ readonly class AsrTitleGeneratorService
             return '';
         }
 
-        // 移exceptillegalcharacter \/:*?"<>|
+        // moveexceptillegalcharacter \/:*?"<>|
         $title = preg_replace('/[\\\\\/:*?"<>|]/u', '', $title) ?? '';
         // compressnull白
         $title = preg_replace('/\s+/u', ' ', $title) ?? '';
@@ -211,10 +211,10 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * forfiledirect uploadscenariogeneratetitle(onlyaccording tofile名).
+     * forfiledirect uploadscenariogeneratetitle(onlyaccording tofilename).
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
-     * @param string $fileName file名
+     * @param string $fileName filename
      * @param string $taskKey taskkey(useatlog)
      * @return null|string generatetitle
      */
@@ -229,7 +229,7 @@ readonly class AsrTitleGeneratorService
             // builduserrequestmessage(mockuserchatmessage)
             $userRequestMessage = $this->buildUserRequestMessage($fileName, null);
 
-            // use AsrPromptAssembler buildhint词
+            // use AsrPromptAssembler buildhintword
             $customPrompt = AsrPromptAssembler::getTitlePromptForUploadedFile(
                 $userRequestMessage,
                 $language
@@ -261,7 +261,7 @@ readonly class AsrTitleGeneratorService
     private function buildUserRequestMessage(string $audioFileName, ?string $noteFileName): string
     {
         if ($noteFileName !== null) {
-            // havenotesituation:"please helpI @yearwillsolutiondiscussion.webm recordingcontentand @yearwillnote.md contentconversionforoneshare超levelproduct"
+            // havenotesituation:"please helpI @yearwillsolutiondiscussion.webm recordingcontentand @yearwillnote.md contentconversionforoneshareexceedslevelproduct"
             return sprintf(
                 '%s@%s%s@%s%s',
                 $this->translator->trans('asr.messages.summary_prefix_with_note'),
@@ -272,7 +272,7 @@ readonly class AsrTitleGeneratorService
             );
         }
 
-        // onlyaudiofilesituation:"please helpI @yearwillsolutiondiscussion.webm recordingcontentconversionforoneshare超levelproduct"
+        // onlyaudiofilesituation:"please helpI @yearwillsolutiondiscussion.webm recordingcontentconversionforoneshareexceedslevelproduct"
         return sprintf(
             '%s@%s%s',
             $this->translator->trans('asr.messages.summary_prefix'),

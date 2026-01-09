@@ -162,7 +162,7 @@ class StartInputTemplate
                         "extension": {
                             "type": "string",
                             "key": "extension",
-                            "title": "fileextension名",
+                            "title": "fileextensionname",
                             "description": "",
                             "required": null,
                             "value": null,
@@ -225,7 +225,7 @@ class StartInputTemplate
                     "real_name": {
                         "type": "string",
                         "key": "real_name",
-                        "title": "true实name",
+                        "title": "trueactualname",
                         "description": "",
                         "items": null,
                         "properties": null,

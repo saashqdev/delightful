@@ -22,7 +22,7 @@ use Throwable;
 
 /**
  * ASR presetfileservice
- * responsiblecreatepresetnoteandstreamidentifyfile,供front端writecontent.
+ * responsiblecreatepresetnoteandstreamidentifyfile,供frontclientwritecontent.
  */
 readonly class AsrPresetFileService
 {
@@ -42,9 +42,9 @@ readonly class AsrPresetFileService
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
      * @param int $projectId projectID
-     * @param string $displayDir displaydirectory相topath (如: recordingsummary_xxx)
+     * @param string $displayDir displaydirectory相topath (like: recordingsummary_xxx)
      * @param int $displayDirId displaydirectoryID
-     * @param string $hiddenDir hiddendirectory相topath (如: .asr_recordings/session_xxx)
+     * @param string $hiddenDir hiddendirectory相topath (like: .asr_recordings/session_xxx)
      * @param int $hiddenDirId hiddendirectoryID
      * @param string $taskKey taskkey
      * @return array{note_file: TaskFileEntity, transcript_file: TaskFileEntity}
@@ -63,10 +63,10 @@ readonly class AsrPresetFileService
         $projectEntity = $this->projectDomainService->getProject($projectId, $userId);
         $workDir = $projectEntity->getWorkDir();
 
-        // getorganization码+APP_ID+bucket_md5front缀
+        // getorganizationcode+APP_ID+bucket_md5frontsuffix
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($organizationCode);
 
-        // createnotefile(放indisplaydirectory,uservisible)
+        // createnotefile(putindisplaydirectory,uservisible)
         $noteFile = $this->createNoteFile(
             $userId,
             $organizationCode,
@@ -78,7 +78,7 @@ readonly class AsrPresetFileService
             $workDir
         );
 
-        // createstreamidentifyfile(放inhiddendirectory,usernotvisible)
+        // createstreamidentifyfile(putinhiddendirectory,usernotvisible)
         $transcriptFile = $this->createTranscriptFile(
             $userId,
             $organizationCode,
@@ -113,7 +113,7 @@ readonly class AsrPresetFileService
         try {
             $fileEntity = $this->taskFileDomainService->getById((int) $fileId);
             if ($fileEntity === null) {
-                $this->logger->warning('notefilenot存in', ['file_id' => $fileId]);
+                $this->logger->warning('notefilenotexistsin', ['file_id' => $fileId]);
                 return false;
             }
 
@@ -145,7 +145,7 @@ readonly class AsrPresetFileService
         try {
             $fileEntity = $this->taskFileDomainService->getById((int) $fileId);
             if ($fileEntity === null) {
-                $this->logger->warning('streamidentifyfilenot存in', ['file_id' => $fileId]);
+                $this->logger->warning('streamidentifyfilenotexistsin', ['file_id' => $fileId]);
                 return false;
             }
 
@@ -167,7 +167,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * createnotefile(放indisplaydirectory).
+     * createnotefile(putindisplaydirectory).
      */
     private function createNoteFile(
         string $userId,
@@ -204,7 +204,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * createstreamidentifyfile(放inhiddendirectory).
+     * createstreamidentifyfile(putinhiddendirectory).
      */
     private function createTranscriptFile(
         string $userId,
@@ -279,7 +279,7 @@ readonly class AsrPresetFileService
             'file_name' => $fileName,
             'file_extension' => 'md',
             'file_key' => $fileKey,
-            'file_size' => 0, // initialfor0,front端writebackwillupdate
+            'file_size' => 0, // initialfor0,frontclientwritebackwillupdate
             'external_url' => '',
             'storage_type' => 'workspace',
             'is_hidden' => $isHidden,
@@ -297,10 +297,10 @@ readonly class AsrPresetFileService
             return $result;
         }
 
-        // ifinsertbeignore(filealready存in),query现haverecord
+        // ifinsertbeignore(filealreadyexistsin),queryshowhaverecord
         $existingFile = $this->taskFileDomainService->getByProjectIdAndFileKey($projectId, $fileKey);
         if ($existingFile !== null) {
-            $this->logger->info(sprintf('%salready存in,use现haverecord', $logPrefix), [
+            $this->logger->info(sprintf('%salreadyexistsin,useshowhaverecord', $logPrefix), [
                 'task_key' => $taskKey,
                 'file_id' => $existingFile->getFileId(),
             ]);

@@ -148,7 +148,7 @@ class DelightfulFlowExecutor
             $this->addEdges();
             $this->checkCircularDependencies();
         } else {
-            // 具have callback processnot参andretryandasync
+            // withhave callback processnot参andretryandasync
             $this->async = false;
         }
         if ($this->executionData->getExecutionType()->isDebug()) {
@@ -199,7 +199,7 @@ class DelightfulFlowExecutor
             $this->delightfulFlowEntity->getCreator()
         );
 
-        // forin运linemiddle,givehaveneedgetcurrentprocesssectionpointuse
+        // forinrunlinemiddle,givehaveneedgetcurrentprocesssectionpointuse
         ExecutionDataCollector::add($this->executionData);
     }
 
@@ -207,7 +207,7 @@ class DelightfulFlowExecutor
     {
         $nodeDebugResult = $node->getNodeDebugResult();
         if (! $nodeDebugResult->isSuccess()) {
-            // as long ashaveonesectionpointisfail,that么processthenisfail
+            // as long ashaveonesectionpointisfail,thatwhatprocessthenisfail
             $this->success = false;
         }
         $this->logger->info('HandledNode', [
@@ -255,7 +255,7 @@ class DelightfulFlowExecutor
     {
         $result = [];
 
-        // ifisasynccall API or者 executefail
+        // ifisasynccall API orperson executefail
         if ($this->executionData->getExecutionType()->isApi() || ! $this->success) {
             $result = match ($this->executionData->getTriggerType()) {
                 TriggerType::ChatMessage => [
@@ -321,7 +321,7 @@ class DelightfulFlowExecutor
         if ($this->executionData->getStreamStatus() !== FlowStreamStatus::Processing) {
             return;
         }
-        // only主process才canend(thezerolayer)
+        // onlymainprocess才canend(thezerolayer)
         if ($this->executionData->getLevel() !== 0) {
             return;
         }
@@ -340,7 +340,7 @@ class DelightfulFlowExecutor
     {
         $result = $this->delightfulFlowEntity->getCallback()($this->executionData);
         if (is_array($result)) {
-            // result赋valuetoendsectionpointupsurface
+            // resultassignvaluetoendsectionpointupsurface
             $this->executionData->saveNodeContext($this->delightfulFlowEntity->getEndNode()->getNodeId(), $result);
         }
         if (! is_array($result)) {
@@ -426,11 +426,11 @@ class DelightfulFlowExecutor
             if ($node->getParentId()) {
                 continue;
             }
-            // 运linefrontthen先tryconduct所havesectionpointparameterdetect,useat提frontgenerategood NodeParamsConfig
+            // runlinefrontthenfirsttryconduct havesectionpointparameterdetect,useatsubmitfrontgenerategood NodeParamsConfig
             try {
                 $node->validate();
             } catch (Throwable $throwable) {
-                // havetheseisfloatingsectionpoint(即inprocess运linemiddlenotwillbeusesectionpoint),兜bottomwillinexecuteo clockagaintimeconductparameterverify
+                // havetheseisfloatingsectionpoint(即inprocessrunlinemiddlenotwillbeusesectionpoint),fallbackbottomwillinexecuteo clockagaintimeconductparameterverify
             }
 
             $job = function (array $frontResults) use ($node): VertexResult {
@@ -440,22 +440,22 @@ class DelightfulFlowExecutor
                 if (! $executionData) {
                     return $vertexResult;
                 }
-                // ifisdebug sectionpoint,andandnotis debug 模type运line,that么thesectionpointnotallow
+                // ifisdebug sectionpoint,andandnotis debug modetyperunline,thatwhatthesectionpointnotallow
                 if ($node->getDebug() && ! $executionData->isDebug()) {
                     return $vertexResult;
                 }
 
                 $vertex = $this->dag->getVertex($node->getNodeId());
-                // thiswithingeneralcome说notwillfornull,先not管nullsituation
+                // thiswithingeneralcomesaynotwillfornull,firstnot管nullsituation
                 $childrenIds = [];
                 foreach ($vertex->children as $childVertex) {
-                    // notcanfromself-connectedfrom己
+                    // notcanfromself-connectedfromself
                     if ($node->getNodeId() == $childVertex->key) {
                         continue;
                     }
                     $childrenIds[] = $childVertex->key;
                 }
-                // defaultiswant调degreedownonelevel,ifnotneed调degree,inspecificexecutemiddlecansetfor[]
+                // defaultiswant調degreedownonelevel,ifnotneed調degree,inspecificexecutemiddlecansetfor[]
                 $vertexResult->setChildrenIds($childrenIds);
                 // add flow
                 $frontResults['current_flow_entity'] = $this->delightfulFlowEntity;
@@ -468,13 +468,13 @@ class DelightfulFlowExecutor
             $vertex = Vertex::make($job, $node->getNodeId());
             if (is_null($this->rootId)) {
                 if ($this->appointRootId) {
-                    // ifhavefinger定,thenusefinger定
+                    // ifhavefingerset,thenusefingerset
                     if ($node->getNodeId() === $this->appointRootId) {
                         $vertex->markAsRoot();
                         $this->rootId = $this->appointRootId;
                     }
                 } else {
-                    // nothavefinger定mustusestartsectionpoint
+                    // nothavefingersetmustusestartsectionpoint
                     if ($node->isStart()) {
                         $vertex->markAsRoot();
                         $this->rootId = $node->getNodeId();
@@ -497,7 +497,7 @@ class DelightfulFlowExecutor
         foreach ($this->nextNodeIds as $nodeId => $nextNodeIds) {
             foreach ($nextNodeIds as $nextNodeId) {
                 if ($nextNodeId === $this->rootId) {
-                    // root sectionpointnotallowhave父sectionpoint连line
+                    // root sectionpointnotallowhaveparentsectionpoint连line
                     continue;
                 }
                 $this->dag->addEdgeByKey((string) $nodeId, (string) $nextNodeId);
@@ -507,7 +507,7 @@ class DelightfulFlowExecutor
 
     private function archiveToCloud(VertexResult $vertexResult): void
     {
-        // alreadyalready运linepass,alsonotarchive
+        // alreadyalreadyrunlinepass,alsonotarchive
         if ($vertexResult->hasDebugLog('history_vertex_result')) {
             return;
         }

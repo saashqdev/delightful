@@ -74,7 +74,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * getspeedratelimit器instance.
+     * getspeedratelimitdeviceinstance.
      */
     public function getRateLimiter(): RateLimiterInterface
     {
@@ -82,7 +82,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * setspeedratelimit器instance.
+     * setspeedratelimitdeviceinstance.
      */
     public function setRateLimiter(RateLimiterInterface $rateLimiter): self
     {
@@ -152,12 +152,12 @@ class MCPHandler implements MCPHandlerInterface
             // getrequestmethodname
             $method = $request->getMethod();
 
-            // createprocess器instance(shortlifeperiod)
+            // createprocessdeviceinstance(shortlifeperiod)
             $handler = $this->methodHandlerFactory->createHandler($method);
 
             $result = null;
             if ($handler) {
-                // forprocess器setrequiredmanagergroupitem
+                // forprocessdevicesetrequiredmanagergroupitem
                 $handler->setToolManager($this->toolManager)
                     ->setResourceManager($this->resourceManager)
                     ->setPromptManager($this->promptManager);

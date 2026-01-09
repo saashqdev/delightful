@@ -32,14 +32,14 @@ class CloudswaySearch
     /**
      * Execute Cloudsway search.
      *
-     * @param string $query searchquery词
+     * @param string $query searchqueryword
      * @param string $requestUrl complete endpoint URL (from config)
      * @param string $apiKey api key for authorization (from config)
      * @param string $mkt Market code (not used by Cloudsway but kept for interface consistency)
      * @param int $count resultquantity (10/20/30/40/50)
      * @param int $offset paginationoffsetquantity
      * @param string $freshness timefilter (Day/Week/Month)
-     * @param string $setLang languagecode (如 en-US)
+     * @param string $setLang languagecode (like en-US)
      * @return array Cloudsway API response
      * @throws GuzzleException
      */
@@ -79,10 +79,10 @@ class CloudswaySearch
         // buildrequesthead
         $headers = [
             'Authorization' => 'Bearer ' . $apiKey,
-            'Pragma' => 'no-cache',  // notusecache,guarantee实o clockproperty
+            'Pragma' => 'no-cache',  // notusecache,guaranteeactualo clockproperty
         ];
 
-        // create Guzzle customer端
+        // create Guzzle customerclient
         $client = new Client([
             'timeout' => self::DEFAULT_SEARCH_ENGINE_TIMEOUT,
             'headers' => $headers,

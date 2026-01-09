@@ -107,7 +107,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof AzureOpenAIImageEditRequest) {
-            $this->logger->error('Azure OpenAIgraphlikeedit OpenAIformat生graph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Azure OpenAIgraphlikeedit OpenAIformatgenerategraph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
@@ -119,15 +119,15 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             // 4. convertresponseformat
             $this->addImageDataToResponseAzureOpenAIEdit($response, $result, $imageGenerateRequest);
 
-            $this->logger->info('Azure OpenAIgraphlikeedit OpenAIformat生graph:handlecomplete', [
-                'successimage数' => count($response->getData()),
+            $this->logger->info('Azure OpenAIgraphlikeedit OpenAIformatgenerategraph:handlecomplete', [
+                'successimagecount' => count($response->getData()),
             ]);
         } catch (Exception $e) {
             // settingerrorinfotoresponseobject
             $response->setProviderErrorCode($e->getCode());
             $response->setProviderErrorMessage($e->getMessage());
 
-            $this->logger->error('Azure OpenAIgraphlikeedit OpenAIformat生graph:handlefail', [
+            $this->logger->error('Azure OpenAIgraphlikeedit OpenAIformatgenerategraph:handlefail', [
                 'error_code' => $e->getCode(),
                 'error_message' => $e->getMessage(),
             ]);
@@ -169,17 +169,17 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
     private function validateRequest(AzureOpenAIImageEditRequest $request): void
     {
         if (empty($request->getPrompt())) {
-            $this->logger->error('Azure OpenAIgraphlikeedit:missing必wantparameter - prompt');
+            $this->logger->error('Azure OpenAIgraphlikeedit:missingrequiredwantparameter - prompt');
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.prompt_required');
         }
 
         if (empty($request->getReferenceImages())) {
-            $this->logger->error('Azure OpenAIgraphlikeedit:missing必wantparameter - reference images');
+            $this->logger->error('Azure OpenAIgraphlikeedit:missingrequiredwantparameter - reference images');
             ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, 'image_generate.reference_images_required');
         }
 
         if ($request->getN() < 1 || $request->getN() > 10) {
-            $this->logger->error('Azure OpenAIgraphlikeedit:generatequantity超outrange', [
+            $this->logger->error('Azure OpenAIgraphlikeedit:generatequantityexceedsoutrange', [
                 'requested' => $request->getN(),
                 'valid_range' => '1-10',
             ]);
@@ -237,7 +237,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             }
 
             if (empty($images)) {
-                $this->logger->error('Azure OpenAIgraphlikeedit:所havegraphlikedatainvalid');
+                $this->logger->error('Azure OpenAIgraphlikeedit: havegraphlikedatainvalid');
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, 'image_generate.invalid_image_data');
             }
 
@@ -261,7 +261,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * forAzure OpenAIedit模typeoriginaldataaddwatermark.
+     * forAzure OpenAIeditmodetypeoriginaldataaddwatermark.
      */
     private function processAzureOpenAIEditRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -283,7 +283,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledownone张image,currentimagemaintainoriginalstatus
+                // continuehandledownone張image,currentimagemaintainoriginalstatus
             }
         }
 
@@ -347,7 +347,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                 // watermarkhandlefailo clockuseoriginalbase64data
             }
 
-            // onlyreturnURLformat,andothermodelmaintainone致
+            // onlyreturnURLformat,andothermodelmaintainoneto
             $currentData[] = [
                 'url' => $processedUrl,
             ];

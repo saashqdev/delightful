@@ -12,13 +12,13 @@ namespace App\Domain\Contact\Entity\ValueObject;
  */
 enum UserQueryType: int
 {
-    // person员
+    // personmember
     case User = 1;
 
-    // person员 + department
+    // personmember + department
     case UserAndDepartment = 2;
 
-    // person员 + department(completepath)
+    // personmember + department(completepath)
     case UserAndDepartmentFullPath = 3;
 
     /**

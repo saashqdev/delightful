@@ -60,7 +60,7 @@ interface OrganizationAdminRepositoryInterface
     public function getOrganizationCreator(DataIsolation $dataIsolation): ?OrganizationAdminEntity;
 
     /**
-     * getorganizationdown所haveorganizationadministrator.
+     * getorganizationdown haveorganizationadministrator.
      */
     public function getAllOrganizationAdmins(DataIsolation $dataIsolation): array;
 

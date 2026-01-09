@@ -9,12 +9,12 @@ namespace App\Domain\Chat\Entity\ValueObject;
 
 enum InstructionInsertLocation: int
 {
-    // messagecontentfront方
+    // messagecontentfrontside
     case Before = 1;
 
     // messagecontentmiddlecursorposition
     case Cursor = 2;
 
-    // messagecontentback方
+    // messagecontentbackside
     case After = 3;
 }

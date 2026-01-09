@@ -12,17 +12,17 @@ use App\Infrastructure\ExternalAPI\Sms\Enum\LanguageEnum;
 interface TemplateInterface
 {
     /**
-     * according topass inshort信typeand语type,trycertainmaybe存intemplateid.
+     * according topass inshortmessagetypeandlanguagetype,trycertainmaybeexistsintemplateid.
      */
     public function getTemplateIdByTypeAndLanguage(string $type, ?string $language): ?string;
 
     /**
-     * according topass inshort信typeand语type,certainshort信content. maybewill动stateadjusttypeto应templatecontent.
+     * according topass inshortmessagetypeandlanguagetype,certainshortmessagecontent. maybewillautostateadjusttypetoshouldtemplatecontent.
      */
     public function getContentBySMSTypeAndLanguage(string $type, ?string $language): string;
 
     /**
-     * according tofrontpass inshort信templateid,certainshort信content.
+     * according tofrontpass inshortmessagetemplateid,certainshortmessagecontent.
      */
     public function getContentByTemplateId(string $templateId): string;
 
@@ -32,13 +32,13 @@ interface TemplateInterface
     public function getTemplateVariables(string $content, array $messages): array;
 
     /**
-     * according toshort信type,returntypesupport语typelist.
+     * according toshortmessagetype,returntypesupportlanguagetypelist.
      * @return string[]
      */
     public function getTemplateLanguagesByType(string $type): array;
 
     /**
-     * according to语typerequireandshort信supportsignaturelist,returnto应signaturetext.
+     * according tolanguagetyperequireandshortmessagesupportsignaturelist,returntoshouldsignaturetext.
      */
     public function formatSign(string $sign, ?LanguageEnum $language, ?LanguageEnum $defaultLanguage = LanguageEnum::ZH_CN): string;
 }

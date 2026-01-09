@@ -102,7 +102,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             );
             // 计o clockstart
             $start = microtime(true);
-            // round询600time,until拿toimage
+            // roundquery600time,until拿toimage
             $count = 600;
             $response = null;
 
@@ -119,7 +119,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             }
             // 计o clockend,outputsecondleveltime
             $end = microtime(true);
-            $this->logger->info(sprintf('转high清end,耗o clock: %ssecond.', $end - $start));
+            $this->logger->info(sprintf('transferhighclearend,consumeo clock: %ssecond.', $end - $start));
             // willageimagedepositattachment
             $newFile = $this->upLoadFiles($requestContext, [$response->getUrls()[0]])[0] ?? [];
             $this->aiSendMessage(
@@ -137,7 +137,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 $reqDTO->getReferMessageId(),
             );
         } catch (Throwable $e) {
-            // hair生exceptiono clock,sendterminationmessage,andthrowexception
+            // hairgenerateexceptiono clock,sendterminationmessage,andthrowexception
             $this->handleGlobalThrowable($reqDTO, $e);
         }
     }
@@ -222,10 +222,10 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
         $reflectionEnum = new ReflectionEnum($case);
         $reflectionCase = $reflectionEnum->getCase($case->name);
 
-        // getconstant所haveannotation
+        // getconstant haveannotation
         $attributes = $reflectionCase->getAttributes(ErrorMessage::class);
 
-        // checkwhether存in ErrorMessage annotation
+        // checkwhetherexistsin ErrorMessage annotation
         if (! empty($attributes)) {
             // instance化annotationobject
             $errorMessageAttribute = $attributes[0]->newInstance();
@@ -242,7 +242,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
         ?string $id,
         ImageConvertHighResponseType $type,
         array $content,
-        // streamresponse,拿tocustomerclient transmissioncome app_message_id ,asforresponsetime唯oneidentifier
+        // streamresponse,拿tocustomerclient transmissioncome app_message_id ,asforresponsetimeuniqueoneidentifier
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

@@ -70,9 +70,9 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     {
         $referContent = $this->getReferContentForAIImage($reqDTO->getReferMessageId());
         $referText = $this->getReferTextByContentForAIImage($referContent);
-        // ifisgraph生graph,thensizemaintainandoriginalimagesizeone致
+        // ifisgraphgenerategraph,thensizemaintainandoriginalimagesizeoneto
         if ($referContent instanceof AIImageCardMessage || $referContent instanceof ImageConvertHighCardMessage) {
-            // setactualrequestsizeandratio例
+            // setactualrequestsizeandratioexample
             $radio = $referContent->getRadio() ?? Radio::OneToOne->value;
             $enumModel = ImageGenerateModelType::fromModel($reqDTO->getParams()->getModel(), false);
             $reqDTO->getParams()->setRatioForModel($radio, $enumModel);
@@ -106,7 +106,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                 $this->handleGenerateImage($requestContext, $reqDTO);
             }
         } catch (Throwable $e) {
-            // hair生exceptiono clock,sendterminationmessage,andthrowexception
+            // hairgenerateexceptiono clock,sendterminationmessage,andthrowexception
             $this->handleGlobalThrowable($reqDTO, $e);
         }
     }
@@ -157,7 +157,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     private function generateImage(RequestContext $requestContext, AIImageGenerateParamsVO $generateParamsVO): array
     {
         $model = $generateParamsVO->getModel();
-        // according tomodeltypecreateto应service
+        // according tomodeltypecreatetoshouldservice
         $data = $generateParamsVO->toArray();
         $delightfulUserAuthorization = $requestContext->getUserAuthorization();
         $images = $this->llmAppService->imageGenerate($delightfulUserAuthorization, $model, '', $data);
@@ -244,7 +244,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
         ?string $id,
         AIImageCardResponseType $type,
         array $content,
-        // streamresponse,拿tocustomerclient transmissioncome app_message_id ,asforresponsetime唯oneidentifier
+        // streamresponse,拿tocustomerclient transmissioncome app_message_id ,asforresponsetimeuniqueoneidentifier
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

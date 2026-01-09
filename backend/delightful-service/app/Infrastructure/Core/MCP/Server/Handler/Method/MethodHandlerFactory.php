@@ -11,12 +11,12 @@ use InvalidArgumentException;
 use Psr\Container\ContainerInterface;
 
 /**
- * MCPmethodprocess器factory.
+ * MCPmethodprocessdevicefactory.
  */
 class MethodHandlerFactory
 {
     /**
-     * methodprocess器mapping,method名 => process器category名.
+     * methodprocessdevicemapping,methodname => processdevicecategoryname.
      *
      * @var array<string, class-string<MethodHandlerInterface>>
      */
@@ -39,11 +39,11 @@ class MethodHandlerFactory
     }
 
     /**
-     * createfinger定methodprocess器instance.
-     * eachtimecallallcreatenewprocess器instance,ensureshortlifeperiod.
-     * notice:call者needhand动forreturnprocess器setrequiredManagergroupitem.
+     * createfingersetmethodprocessdeviceinstance.
+     * eachtimecallallcreatenewprocessdeviceinstance,ensureshortlifeperiod.
+     * notice:callpersonneedhandautoforreturnprocessdevicesetrequiredManagergroupitem.
      *
-     * @return null|MethodHandlerInterface if找nottoto应methodprocess器thenreturnnull
+     * @return null|MethodHandlerInterface iffindnottotoshouldmethodprocessdevicethenreturnnull
      */
     public function createHandler(string $method): ?MethodHandlerInterface
     {
@@ -57,7 +57,7 @@ class MethodHandlerFactory
     }
 
     /**
-     * checkwhether存infinger定methodprocess器.
+     * checkwhetherexistsinfingersetmethodprocessdevice.
      */
     public function hasHandler(string $method): bool
     {
@@ -65,7 +65,7 @@ class MethodHandlerFactory
     }
 
     /**
-     * get所havesupportmethod.
+     * get havesupportmethod.
      *
      * @return array<string>
      */
@@ -75,10 +75,10 @@ class MethodHandlerFactory
     }
 
     /**
-     * registercustomizemethodprocess器.
+     * registercustomizemethodprocessdevice.
      *
-     * @param string $method method名
-     * @param class-string<MethodHandlerInterface> $handlerClass process器category名
+     * @param string $method methodname
+     * @param class-string<MethodHandlerInterface> $handlerClass processdevicecategoryname
      */
     public function registerCustomHandler(string $method, string $handlerClass): void
     {

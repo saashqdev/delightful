@@ -15,21 +15,21 @@ enum MCPErrorCode: int
     case ValidateFailed = 51500; // verifyfail
 
     #[ErrorMessage(message: 'mcp.not_found')]
-    case NotFound = 51501; // datanot存in
+    case NotFound = 51501; // datanotexistsin
 
-    // MCPservice相closeerror码
+    // MCPservice相closeerrorcode
     #[ErrorMessage(message: 'mcp.service.already_exists')]
-    case ServiceAlreadyExists = 51510; // MCPservicealready存in
+    case ServiceAlreadyExists = 51510; // MCPservicealreadyexistsin
 
     #[ErrorMessage(message: 'mcp.service.not_enabled')]
     case ServiceNotEnabled = 51511; // MCPservicenotenable
 
-    // toolassociate相closeerror码
+    // toolassociate相closeerrorcode
     #[ErrorMessage(message: 'mcp.rel.not_found')]
     case RelNotFound = 51520; // associateresource not found
 
     #[ErrorMessage(message: 'mcp.rel_version.not_found')]
-    case RelVersionNotFound = 51521; // associateresourceversionnot存in
+    case RelVersionNotFound = 51521; // associateresourceversionnotexistsin
 
     #[ErrorMessage(message: 'mcp.rel.not_enabled')]
     case RelNotEnabled = 51522; // associateresourcenotenable
@@ -37,7 +37,7 @@ enum MCPErrorCode: int
     #[ErrorMessage(message: 'mcp.tool.execute_failed')]
     case ToolExecuteFailed = 51523; // toolexecutefail
 
-    // OAuth2auth相closeerror码
+    // OAuth2auth相closeerrorcode
     #[ErrorMessage(message: 'mcp.oauth2.authorization_url_generation_failed')]
     case OAuth2AuthorizationUrlGenerationFailed = 51530; // OAuth2authorizationURLgeneratefail
 
@@ -56,9 +56,9 @@ enum MCPErrorCode: int
     #[ErrorMessage(message: 'mcp.oauth2.missing_access_token')]
     case OAuth2MissingAccessToken = 51535; // OAuth2responsemiddlemissingaccesstoken
 
-    // OAuth2bindverify相closeerror码
+    // OAuth2bindverify相closeerrorcode
     #[ErrorMessage(message: 'mcp.oauth2.binding.code_empty')]
-    case OAuth2BindingCodeEmpty = 51540; // OAuth2bindauthorization码forempty
+    case OAuth2BindingCodeEmpty = 51540; // OAuth2bindauthorizationcodeforempty
 
     #[ErrorMessage(message: 'mcp.oauth2.binding.state_empty')]
     case OAuth2BindingStateEmpty = 51541; // OAuth2bindstatusparameterforempty
@@ -66,21 +66,21 @@ enum MCPErrorCode: int
     #[ErrorMessage(message: 'mcp.oauth2.binding.mcp_server_code_empty')]
     case OAuth2BindingMcpServerCodeEmpty = 51542; // OAuth2bindMCPservicecodeforempty
 
-    // requiredfieldverify相closeerror码
+    // requiredfieldverify相closeerrorcode
     #[ErrorMessage(message: 'mcp.required_fields.missing')]
     case RequiredFieldsMissing = 51550; // requiredfieldmissing
 
     #[ErrorMessage(message: 'mcp.required_fields.empty')]
     case RequiredFieldsEmpty = 51551; // requiredfieldforempty
 
-    // STDIOexecutedevicecloseerror码
+    // STDIOexecutedevicecloseerrorcode
     #[ErrorMessage(message: 'mcp.executor.stdio.connection_failed')]
-    case ExecutorStdioConnectionFailed = 51560; // STDIOexecute器connectfail
+    case ExecutorStdioConnectionFailed = 51560; // STDIOexecutedeviceconnectfail
 
     #[ErrorMessage(message: 'mcp.executor.stdio.access_denied')]
-    case ExecutorStdioAccessDenied = 51561; // STDIOexecute器accessbereject
+    case ExecutorStdioAccessDenied = 51561; // STDIOexecutedeviceaccessbereject
 
-    // HTTPexecutedevicecloseerror码
+    // HTTPexecutedevicecloseerrorcode
     #[ErrorMessage(message: 'mcp.executor.http.connection_failed')]
-    case ExecutorHttpConnectionFailed = 51562; // HTTPexecute器connectfail
+    case ExecutorHttpConnectionFailed = 51562; // HTTPexecutedeviceconnectfail
 }

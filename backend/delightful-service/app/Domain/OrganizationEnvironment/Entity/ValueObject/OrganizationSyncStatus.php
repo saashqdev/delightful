@@ -8,25 +8,25 @@ declare(strict_types=1);
 namespace App\Domain\OrganizationEnvironment\Entity\ValueObject;
 
 /**
- * organization同status.
+ * organizationsamestatus.
  */
 enum OrganizationSyncStatus: int
 {
-    /* not同 */
+    /* notsame */
     case NotSynced = 0;
 
-    /* already同 */
+    /* alreadysame */
     case Synced = 1;
 
-    /* 同failed */
+    /* samefailed */
     case SyncFailed = 2;
 
-    /* 同middle */
+    /* samemiddle */
     case Syncing = 3;
 
     /**
      * whetherneedcompensation.
-     * andknowledge basestatusmaintainone致compensationset.
+     * andknowledge basestatusmaintainonetocompensationset.
      */
     public static function needCompensate(): array
     {

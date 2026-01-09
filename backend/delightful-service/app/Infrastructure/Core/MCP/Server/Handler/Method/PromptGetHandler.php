@@ -11,7 +11,7 @@ use App\Infrastructure\Core\MCP\Exception\InvalidParamsException;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * promptgetmethodprocess器.
+ * promptgetmethodprocessdevice.
  */
 class PromptGetHandler extends AbstractMethodHandler
 {

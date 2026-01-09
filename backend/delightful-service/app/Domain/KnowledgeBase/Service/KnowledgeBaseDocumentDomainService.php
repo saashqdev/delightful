@@ -101,12 +101,12 @@ readonly class KnowledgeBaseDocumentDomainService
         $documentEntity = null;
         Db::transaction(function () use ($dataIsolation, $documentCode, $knowledgeBaseEntity) {
             $knowledgeBaseCode = $knowledgeBaseEntity->getCode();
-            // firstdeletedocumentdown所haveslicesegment
+            // firstdeletedocumentdown haveslicesegment
             $this->destroyFragments($dataIsolation, $knowledgeBaseCode, $documentCode);
             $documentEntity = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode, true);
             // 然backdeletedocumentitself
             $this->knowledgeBaseDocumentRepository->destroy($dataIsolation, $knowledgeBaseCode, $documentCode);
-            // updatecharacter数
+            // updatecharactercount
             $deltaWordCount = -$documentEntity->getWordCount();
             $this->updateWordCount($dataIsolation, $knowledgeBaseCode, $documentEntity->getCode(), $deltaWordCount);
         });
@@ -122,15 +122,15 @@ readonly class KnowledgeBaseDocumentDomainService
     {
         $document = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode);
 
-        // ifforcerebuildor者syncstatusforfail,then重newsync
-        if ($force || $document->getSyncStatus() === 2) { // 2 table示syncfail
-            $document->setSyncStatus(0); // 0 table示notsync
+        // ifforcerebuildorpersonsyncstatusforfail,then重newsync
+        if ($force || $document->getSyncStatus() === 2) { // 2 tableshowsyncfail
+            $document->setSyncStatus(0); // 0 tableshownotsync
             $document->setSyncStatusMessage('');
             $document->setSyncTimes(0);
             $this->knowledgeBaseDocumentRepository->update($dataIsolation, $document);
 
-            // async触hairrebuild(thiswithincansendeventor者add入queue)
-            // TODO: 触hairrebuildtoquantityevent
+            // asynctouchhairrebuild(thiswithincansendeventorpersonadd入queue)
+            // TODO: touchhairrebuildtoquantityevent
         }
     }
 
@@ -151,7 +151,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * @return array<string, KnowledgeBaseDocumentEntity> array<documentcode, document名>
+     * @return array<string, KnowledgeBaseDocumentEntity> array<documentcode, documentname>
      */
     public function getDocumentsByCodes(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, array $documentCodes): array
     {
@@ -171,7 +171,7 @@ readonly class KnowledgeBaseDocumentDomainService
         if ($documentEntity) {
             return $documentEntity;
         }
-        // ifdocumentnot存in,createnewdefaultdocument
+        // ifdocumentnotexistsin,createnewdefaultdocument
         $documentEntity = (new KnowledgeBaseDocumentEntity())
             ->setCode($defaultDocumentCode)
             ->setName('notnamingdocument.txt')
@@ -240,7 +240,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * deletedocumentdown所haveslicesegment.
+     * deletedocumentdown haveslicesegment.
      */
     private function destroyFragments(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -261,7 +261,7 @@ readonly class KnowledgeBaseDocumentDomainService
         }
 
         if (empty($documentEntity->getCreatedUid())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者notcanforempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'createpersonnotcanforempty');
         }
 
         // setdefaultvalue
@@ -272,7 +272,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $documentFile = $documentEntity->getDocumentFile();
         $documentEntity->setUpdatedAt($documentEntity->getCreatedAt());
         $documentEntity->setUpdatedUid($documentEntity->getCreatedUid());
-        $documentEntity->setSyncStatus(0); // 0 table示notsync
+        $documentEntity->setSyncStatus(0); // 0 tableshownotsync
         // bydownproperty均fromdocumentfilemiddleget
         $documentEntity->setDocType($documentFile?->getDocType() ?? DocType::TXT->value);
         $documentEntity->setThirdFileId($documentFile?->getThirdFileId());
@@ -284,7 +284,7 @@ readonly class KnowledgeBaseDocumentDomainService
      */
     private function prepareForUpdate(KnowledgeBaseDocumentEntity $newDocument, KnowledgeBaseDocumentEntity $oldDocument): void
     {
-        // notallowmodifyfieldmaintain原value
+        // notallowmodifyfieldmaintainoriginalvalue
         $newDocument->setId($oldDocument->getId());
         $newDocument->setCode($oldDocument->getCode());
         $newDocument->setKnowledgeBaseCode($oldDocument->getKnowledgeBaseCode());

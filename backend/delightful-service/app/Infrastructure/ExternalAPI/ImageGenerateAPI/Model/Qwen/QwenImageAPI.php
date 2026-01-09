@@ -87,7 +87,7 @@ class QwenImageAPI
     }
 
     /**
-     * submitgraphlikeedittask - 同call.
+     * submitgraphlikeedittask - samecall.
      */
     public function submitEditTask(array $params): array
     {
@@ -98,7 +98,7 @@ class QwenImageAPI
             'Content-Type' => 'application/json',
         ];
 
-        // buildconform阿within云APIdocumentrequestformat
+        // buildconform阿withincloudAPIdocumentrequestformat
         $body = [
             'model' => $params['model'] ?? 'qwen-image-edit',
             'input' => [
@@ -115,7 +115,7 @@ class QwenImageAPI
             ],
         ];
 
-        // addgraphliketocontentmiddle(only取theone张image)
+        // addgraphliketocontentmiddle(onlygettheone張image)
         if (isset($params['image_urls']) && ! empty($params['image_urls'])) {
             $body['input']['messages'][0]['content'][] = [
                 'image' => $params['image_urls'][0],

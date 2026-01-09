@@ -26,7 +26,7 @@ use Hyperf\DbConnection\Db;
 #[FlowNodeDefine(
     type: NodeType::UserSearch->value,
     code: NodeType::UserSearch->name,
-    name: 'person员retrieve',
+    name: 'personmemberretrieve',
     paramsConfig: UserSearchNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,
@@ -72,7 +72,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
             $departmentIds = array_column($departmentUsers, 'department_id');
 
             $departments = $departmentDomain->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
-            // add path goagain查onetime
+            // add path goagaincheckonetime
             foreach ($departments as $department) {
                 $pathDepartments = explode('/', $department->getPath());
                 $departmentIds = array_merge($departmentIds, $pathDepartments);
@@ -81,7 +81,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
             $departments = $departmentDomain->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
 
             $userDepartments = [];
-            // onepersoncanhavevery多department
+            // onepersoncanhaveverymultipledepartment
             foreach ($departmentUsers as $departmentUser) {
                 $userDepartments[$departmentUser['user_id']][] = $departmentUser;
             }
@@ -137,7 +137,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         $executionData->saveNodeContext($this->node->getNodeId(), $result);
     }
 
-    // -------- bydownmethodtenminutebrutal,notsuggestionlearn 🔞🈲 --------  todo etc es or flink cdc 之categoryoutcomeagainoptimize
+    // -------- bydownmethodtenminutebrutal,notsuggestionlearn 🔞🈲 --------  todo etc es or flink cdc ofcategoryoutcomeagainoptimize
 
     private function getUserIdsByUsername(Operator $operator, OperatorType $operatorType, mixed $username, ?array $filterUserIds = null): array
     {
@@ -372,7 +372,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         if (empty($departmentPaths)) {
             return [];
         }
-        // getthisthesedepartment所havedownleveldepartmentid
+        // getthisthesedepartment havedownleveldepartmentid
         $departmentSubIds = $this->getAllChildrenByDepartmentIds($operator, $departmentPaths);
         $departmentIds = array_merge(array_keys($departmentPaths), $departmentSubIds);
         $userDB = Db::table('delightful_contact_department_users')

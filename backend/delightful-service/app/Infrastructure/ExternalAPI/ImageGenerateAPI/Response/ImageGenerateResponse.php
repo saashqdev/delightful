@@ -25,7 +25,7 @@ class ImageGenerateResponse
             $base64Data = [];
             foreach ($data as $base64) {
                 if (! EasyFileTools::isBase64Image($base64)) {
-                    // check base64 formatwhetherconformstandard, tryaddfront缀
+                    // check base64 formatwhetherconformstandard, tryaddfrontsuffix
                     $base64 = 'data:image/jpeg;base64,' . $base64;
                     if (EasyFileTools::isBase64Image($base64)) {
                         $base64Data[] = $base64;

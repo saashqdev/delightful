@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\Dag;
 class VertexResult
 {
     /**
-     * storageneedbe调degree子sectionpoint.
+     * storageneedbe調degreechildsectionpoint.
      * @var array<string>
      */
     protected array $childrenIds = [];
@@ -22,7 +22,7 @@ class VertexResult
 
     /**
      * storagesectionpointnoteinformation.
-     * canuseatonetheselogrecord之category.
+     * canuseatonetheselogrecordofcategory.
      */
     protected mixed $remarkData = null;
 

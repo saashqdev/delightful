@@ -24,7 +24,7 @@ class StringMaskUtil
             return str_repeat('*', $length);
         }
 
-        // retainfrontthree位andbackthree位,middlebetweenuse原characterquantitysame星numberreplace
+        // retainfrontthree位andbackthree位,middlebetweenuseoriginalcharacterquantitysame星numberreplace
         $prefix = mb_substr($value, 0, 3);
         $suffix = mb_substr($value, -3, 3);
         $middleLength = $length - 6; // subtractgofrontthree位andbackthree位

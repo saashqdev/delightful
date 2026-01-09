@@ -79,7 +79,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * getuser所havepermission.
+     * getuser havepermission.
      */
     public function getUserPermissions(PermissionDataIsolation $dataIsolation, string $userId): array
     {
@@ -87,7 +87,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * checkuserwhether拥havefinger定permission.
+     * checkuserwhether拥havefingersetpermission.
      */
     public function hasPermission(PermissionDataIsolation $dataIsolation, string $userId, string $permissionKey): bool
     {

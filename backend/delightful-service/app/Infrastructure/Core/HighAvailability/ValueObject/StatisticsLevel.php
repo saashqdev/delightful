@@ -8,45 +8,45 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\HighAvailability\ValueObject;
 
 /**
- * statisticslevel别enumcategory.
+ * statisticslevelotherenumcategory.
  */
 enum StatisticsLevel: int
 {
     /**
-     * statisticslevel别:secondlevel.
+     * statisticslevelother:secondlevel.
      */
     case LEVEL_SECOND = 0;
 
     /**
-     * statisticslevel别:minute钟level.
+     * statisticslevelother:minutesecondslevel.
      */
     case LEVEL_MINUTE = 1;
 
     /**
-     * statisticslevel别:hourlevel.
+     * statisticslevelother:hourlevel.
      */
     case LEVEL_HOUR = 2;
 
     /**
-     * statisticslevel别:daylevel.
+     * statisticslevelother:daylevel.
      */
     case LEVEL_DAY = 3;
 
     /**
-     * getstatisticslevel别name.
+     * getstatisticslevelothername.
      */
     public function getName(): string
     {
         return match ($this) {
             self::LEVEL_SECOND => 'secondlevel',
-            self::LEVEL_MINUTE => 'minute钟level',
+            self::LEVEL_MINUTE => 'minutesecondslevel',
             self::LEVEL_HOUR => 'hourlevel',
             self::LEVEL_DAY => 'daylevel',
         };
     }
 
     /**
-     * getstatisticslevel别name(静statemethod,useatcompatibleoldcode).
+     * getstatisticslevelothername(静statemethod,useatcompatibleoldcode).
      * @deprecated useenuminstance getName() methodreplace
      */
     public static function getLevelName(int|self $level): string
@@ -54,10 +54,10 @@ enum StatisticsLevel: int
         if (is_int($level)) {
             return match ($level) {
                 self::LEVEL_SECOND->value => 'secondlevel',
-                self::LEVEL_MINUTE->value => 'minute钟level',
+                self::LEVEL_MINUTE->value => 'minutesecondslevel',
                 self::LEVEL_HOUR->value => 'hourlevel',
                 self::LEVEL_DAY->value => 'daylevel',
-                default => 'unknownlevel别',
+                default => 'unknownlevelother',
             };
         }
 

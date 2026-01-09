@@ -11,16 +11,16 @@ use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 
 /**
  * multi-modalstatecontentformat化tool
- * useat统oneprocessdifferentscenariodownmulti-modalstatecontentformat化.
+ * useat統oneprocessdifferentscenariodownmulti-modalstatecontentformat化.
  */
 class MultiModalContentFormatter
 {
     /**
-     * will所haveattachmentformat化totextmiddle.
+     * will haveattachmentformat化totextmiddle.
      *
      * @param string $originalContent originaltextcontent
      * @param string $visionResponse visualanalyzeresult
-     * @param AttachmentInterface[] $attachments 所haveattachmentarray
+     * @param AttachmentInterface[] $attachments  haveattachmentarray
      * @return string format化backtextcontent
      */
     public static function formatAllAttachments(
@@ -53,7 +53,7 @@ class MultiModalContentFormatter
 
     /**
      * format化imagecontenttotext
-     * supportsingle张imageandmultipleimagescenario.
+     * supportsingle張imageandmultipleimagescenario.
      *
      * @param string $originalContent originaltextcontent
      * @param string $visionResponse visualanalyzeresult

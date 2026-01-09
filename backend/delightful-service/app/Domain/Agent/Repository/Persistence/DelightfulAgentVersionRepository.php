@@ -143,7 +143,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function getAgentsFromMarketplaceCount(array $agentIds): int
     {
-        // use count() methodcomestatisticsconformitemitemrecord数
+        // use count() methodcomestatisticsconformitemitemrecordcount
         return $this->agentVersionModel::query()
             ->whereIn('id', $agentIds)
             ->where('app_market_status', DelightfulAgentVersionStatus::APP_MARKET_LISTED)
@@ -177,7 +177,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function setEnterpriseStatus(string $id, int $status): void
     {
-        // tryupdatefinger定 ID record
+        // tryupdatefingerset ID record
         $this->agentVersionModel::query()
             ->where('id', $id)
             ->update(['enterprise_release_status' => $status]);
@@ -186,14 +186,14 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     // according toassistantidgetmostbig version_number
     public function getAgentMaxVersion(string $agentId): string
     {
-        // queryfinger定 agent_id and user_id downmostbigversionnumber,thiswithinnotcanuse max 取 version,因forwillout现 0.3 greater than 0.10situation,butisactualis 0.10greater than 0.3
-        // whileversionnumberonlycanincrement,thereforeusetimereverse order取first即can
+        // queryfingerset agent_id and user_id downmostbigversionnumber,thiswithinnotcanuse max get version,因forwilloutshow 0.3 greater than 0.10situation,butisactualis 0.10greater than 0.3
+        // whileversionnumberonlycanincrement,thereforeusetimereverse ordergetfirst即can
         $maxVersion = $this->agentVersionModel::query()
             ->where('root_id', $agentId)
             ->orderByDesc('id')
             ->limit(1)->first();
 
-        // ifnothave找torecord,return 0.0 asfordefaultvalue
+        // ifnothavefindtorecord,return 0.0 asfordefaultvalue
         if ($maxVersion === null) {
             return '0.0.0';
         }
@@ -203,7 +203,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function deleteByAgentId(string $agentId, string $organizationCode): void
     {
-        // queryfinger定 agent_id and user_id downmostbigversionnumber
+        // queryfingerset agent_id and user_id downmostbigversionnumber
         $this->agentVersionModel::query()
             ->where('root_id', $agentId)
             ->where('organization_code', $organizationCode)
@@ -291,11 +291,11 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * based oncursorpaginationgetfinger定organizationassistantversionlist.
+     * based oncursorpaginationgetfingersetorganizationassistantversionlist.
      * @param string $organizationCode organizationcode
      * @param array $agentVersionIds assistantversionIDlist
      * @param string $cursor cursorID,ifforemptystringthenfrommostnewstart
-     * @param int $pageSize each页quantity
+     * @param int $pageSize eachpagequantity
      */
     public function getAgentsByOrganizationWithCursor(string $organizationCode, array $agentVersionIds, string $cursor, int $pageSize): array
     {

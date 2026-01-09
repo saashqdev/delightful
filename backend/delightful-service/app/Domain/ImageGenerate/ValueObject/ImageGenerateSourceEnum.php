@@ -9,7 +9,7 @@ namespace App\Domain\ImageGenerate\ValueObject;
 
 enum ImageGenerateSourceEnum: string
 {
-    // 超levelMage
+    // exceedslevelMage
     case SUPER_DELIGHTFUL = 'be_delightful';
 
     // agent

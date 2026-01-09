@@ -29,7 +29,7 @@ class SlidingWindowUtil
 
     /**
      * debounceinterface - executemostbackonetimerequeststrategy
-     * infinger定timewindowinside,onlymostbackonetimerequestwillbeexecute.
+     * infingersettimewindowinside,onlymostbackonetimerequestwillbeexecute.
      *
      * @param string $debounceKey debouncekey
      * @param float $delayVerificationSeconds delayverifytime(second),alsoisactualdebouncewindow
@@ -40,7 +40,7 @@ class SlidingWindowUtil
         float $delayVerificationSeconds = 0.5
     ): bool {
         $uniqueRequestId = uniqid('req_', true) . '_' . getmypid();
-        // keyexpiretime应greater thandelayverifytime,byasforsecurityguarantee
+        // keyexpiretimeshouldgreater thandelayverifytime,byasforsecurityguarantee
         $totalExpirationSeconds = (int) ceil($delayVerificationSeconds) + 1;
         $latestRequestRedisKey = $debounceKey . ':last_req';
 
@@ -66,7 +66,7 @@ LUA;
                 'debounce_key' => $debounceKey,
                 'exception' => $exception,
             ]);
-            // out现exceptiono clockdefaultallowexecute,avoidclosekeybusinessbeblocking
+            // outshowexceptiono clockdefaultallowexecute,avoidclosekeybusinessbeblocking
             return true;
         }
     }

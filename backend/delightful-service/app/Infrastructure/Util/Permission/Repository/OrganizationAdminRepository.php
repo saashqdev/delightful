@@ -98,7 +98,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
             $query->where('user_id', $filters['user_id']);
         }
 
-        // sort:first按whetherfororganizationcreate者sort,again按authorizationtimesort,allisdescending
+        // sort:first按whetherfororganizationcreatepersonsort,again按authorizationtimesort,allisdescending
         $query->orderBy('is_organization_creator', 'desc')
             ->orderBy('granted_at', 'desc');
 
@@ -144,7 +144,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
      */
     public function grant(DataIsolation $dataIsolation, string $userId, ?string $grantorUserId, ?string $remarks = null, bool $isOrganizationCreator = false): OrganizationAdminEntity
     {
-        // checkwhetheralready存in
+        // checkwhetheralreadyexistsin
         $existing = $this->getByUserId($dataIsolation, $userId);
         if ($existing) {
             return $existing;
@@ -196,7 +196,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * getorganizationdown所haveorganizationadministrator.
+     * getorganizationdown haveorganizationadministrator.
      */
     public function getAllOrganizationAdmins(DataIsolation $dataIsolation): array
     {
@@ -231,7 +231,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * based ondataisolationget OrganizationAdminModel queryconstruct器.
+     * based ondataisolationget OrganizationAdminModel queryconstructdevice.
      */
     private function organizationAdminQuery(DataIsolation $dataIsolation): Builder
     {
@@ -239,7 +239,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * mappingarraydatato实body.
+     * mappingarraydatatoactualbody.
      * @param mixed $row
      */
     private function mapArrayToEntity($row): OrganizationAdminEntity

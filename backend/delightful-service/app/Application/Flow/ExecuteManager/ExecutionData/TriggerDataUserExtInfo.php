@@ -108,7 +108,7 @@ class TriggerDataUserExtInfo
         $departmentIds = array_column($departmentUserEntities, 'department_id');
 
         $departments = $departmentDomain->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
-        // add path goagain查onetime
+        // add path goagaincheckonetime
         foreach ($departments as $department) {
             $pathDepartments = explode('/', $department->getPath());
             $departmentIds = array_merge($departmentIds, $pathDepartments);

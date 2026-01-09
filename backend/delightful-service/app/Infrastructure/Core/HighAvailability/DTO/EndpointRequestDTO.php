@@ -18,7 +18,7 @@ use App\Infrastructure\Core\HighAvailability\ValueObject\StatisticsLevel;
 class EndpointRequestDTO extends AbstractDTO
 {
     /**
-     * 端pointtype/modelID.
+     * clientpointtype/modelID.
      */
     protected string $endpointType;
 
@@ -33,7 +33,7 @@ class EndpointRequestDTO extends AbstractDTO
     protected ?string $provider = null;
 
     /**
-     * 端pointname (optional).
+     * clientpointname (optional).
      */
     protected ?string $endpointName = null;
 
@@ -49,12 +49,12 @@ class EndpointRequestDTO extends AbstractDTO
     protected LoadBalancingType $balancingType = LoadBalancingType::RANDOM;
 
     /**
-     * statisticslevel别.
+     * statisticslevelother.
      */
     protected StatisticsLevel $statisticsLevel = StatisticsLevel::LEVEL_MINUTE;
 
     /**
-     * statisticstimerange(minute钟).
+     * statisticstimerange(minuteseconds).
      */
     protected int $timeRange = 30;
 
@@ -147,7 +147,7 @@ class EndpointRequestDTO extends AbstractDTO
 
     public function setTimeRange(int $timeRange): static
     {
-        $this->timeRange = max(1, $timeRange); // ensuretimerangeat leastfor1minute钟
+        $this->timeRange = max(1, $timeRange); // ensuretimerangeat leastfor1minuteseconds
         return $this;
     }
 

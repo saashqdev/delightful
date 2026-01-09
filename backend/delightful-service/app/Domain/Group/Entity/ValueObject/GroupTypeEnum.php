@@ -18,10 +18,10 @@ enum GroupTypeEnum: int
     // inside部willdiscussion group
     case InternalMeeting = 3;
 
-    // inside部project群
+    // inside部projectgroup
     case InternalProject = 4;
 
-    // insidedepartment工single群
+    // insidedepartment工singlegroup
     case InternalWorkOrder = 5;
 
     // outsidedepartment group

@@ -106,13 +106,13 @@ class CreateGroupNodeParamsConfig extends NodeParamsConfig
     public function generateTemplate(): void
     {
         $this->node->setParams([
-            // 群name
+            // groupname
             'group_name' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
             // group owner
             'group_owner' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
-            // 群member
+            // groupmember
             'group_members' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
-            // 群type,this处toat \App\Domain\Group\Entity\ValueObject\GroupTypeEnum
+            // grouptype,this处toat \App\Domain\Group\Entity\ValueObject\GroupTypeEnum
             'group_type' => 0,
             // containwhenfrontuser
             'include_current_user' => $this->includeCurrentUser,

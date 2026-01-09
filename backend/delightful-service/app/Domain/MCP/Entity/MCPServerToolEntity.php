@@ -36,7 +36,7 @@ class MCPServerToolEntity extends AbstractEntity
     protected string $description = '';
 
     /**
-     * toolcome源.
+     * toolcomesource.
      */
     protected ToolSource $source;
 
@@ -66,7 +66,7 @@ class MCPServerToolEntity extends AbstractEntity
     protected ToolOptions $options;
 
     /**
-     * associateinformation,useatfront端show.
+     * associateinformation,useatfrontclientshow.
      */
     protected ?array $relInfo = null;
 

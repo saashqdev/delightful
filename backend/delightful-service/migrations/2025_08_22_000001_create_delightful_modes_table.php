@@ -24,46 +24,46 @@ return new class extends Migration {
 
         Schema::create('delightful_modes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->json('name_i18n')->comment('模typenameinternationalization');
-            $table->string('identifier', 50)->default('')->comment('模typeidentifier,唯one');
-            $table->string('icon', 255)->default('')->comment('模typegraph标');
-            $table->string('color', 10)->default('')->comment('模typecolor');
+            $table->json('name_i18n')->comment('modetypenameinternationalization');
+            $table->string('identifier', 50)->default('')->comment('modetypeidentifier,uniqueone');
+            $table->string('icon', 255)->default('')->comment('modetypegraphmark');
+            $table->string('color', 10)->default('')->comment('modetypecolor');
             $table->bigInteger('sort')->default(0)->comment('sort');
-            $table->text('description')->comment('模typedescription');
-            $table->tinyInteger('is_default')->default(0)->comment('whetherdefault模type 0:no 1:is');
+            $table->text('description')->comment('modetypedescription');
+            $table->tinyInteger('is_default')->default(0)->comment('whetherdefaultmodetype 0:no 1:is');
             $table->tinyInteger('status')->default(1)->comment('status 0:disable 1:enable');
-            $table->tinyInteger('distribution_type')->default(1)->comment('minute配method 1:customizeconfiguration 2:followother模type');
-            $table->bigInteger('follow_mode_id')->unsigned()->default(0)->comment('follow模typeID,0table示notfollow');
-            $table->json('restricted_mode_identifiers')->comment('limit模typeidentifierarray');
+            $table->tinyInteger('distribution_type')->default(1)->comment('minute配method 1:customizeconfiguration 2:followothermodetype');
+            $table->bigInteger('follow_mode_id')->unsigned()->default(0)->comment('followmodetypeID,0tableshownotfollow');
+            $table->json('restricted_mode_identifiers')->comment('limitmodetypeidentifierarray');
             $table->string('organization_code', 32)->default('')->comment('organizationcode');
             $table->string('creator_id', 64)->default('')->comment('createpersonID');
             $table->timestamps();
             $table->softDeletes();
 
-            // add唯oneindex
+            // adduniqueoneindex
             $table->unique('identifier', 'idx_identifier');
         });
 
-        // insertdefault模typedata
+        // insertdefaultmodetypedata
         $this->insertDefaultModeData();
     }
 
     /**
-     * insertdefault模typedata.
+     * insertdefaultmodetypedata.
      */
     private function insertDefaultModeData(): void
     {
         $defaultModeData = [
             'id' => IdGenerator::getSnowId(),
             'name_i18n' => json_encode([
-                'zh_CN' => 'default模type',
+                'zh_CN' => 'defaultmodetype',
                 'en_US' => 'Default Mode',
             ]),
             'identifier' => 'default',
             'icon' => '',
             'sort' => 0,
             'color' => '#6366f1',
-            'description' => 'onlyuseatcreateo clockinitialize模typeandreset模typemiddleconfiguration',
+            'description' => 'onlyuseatcreateo clockinitializemodetypeandresetmodetypemiddleconfiguration',
             'is_default' => 1,
             'status' => 1,
             'distribution_type' => 1, // independentconfiguration

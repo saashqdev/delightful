@@ -40,10 +40,10 @@ class DefaultAgent extends AbstractAgent
             'seq' => $seqEntity->toArray(),
             'message' => $logMessageData,
         ]);
-        // get触hairtype
+        // gettouchhairtype
         $triggerType = TriggerType::fromSeqType($seqEntity->getSeqType());
         # pass inparameter:
-        // 1. $userAccountEntity containtrue名,hand机numberetchavesecurityrisk,shouldneedauthauthorizationinformation
+        // 1. $userAccountEntity containtruename,handmachinenumberetchavesecurityrisk,shouldneedauthauthorizationinformation
         // 2. $userEntity userdetail,containuserid,usernickname,useravataretcinformation
         // 3. $seqEntity conversationwindowid,quotemessage_id,messagetype(chatmessage/openconversationwindow)
         // 4. $messageEntity savehavemessagetype,messagespecificcontent,hairitempersonid,sendtime

@@ -27,7 +27,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * getthethree方platformdepartmentIDmappingclose系.
+     * getthethreesideplatformdepartmentIDmappingclose系.
      *
      * @param string[] $thirdDepartmentIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -41,7 +41,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $relationEnvIds = $this->getEnvRelationIds($delightfulEnvironmentEntity);
         $data = $this->delightfulContactIdMappingModel::query();
 
-        // maintain原havequeryfieldorder
+        // maintainoriginalhavequeryfieldorder
         // according toenvironmentIDquantitychoosesuitablequerymethod
         if (count($relationEnvIds) === 1) {
             $data->where('delightful_environment_id', reset($relationEnvIds));
@@ -90,7 +90,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * getthethree方platformuserIDmappingclose系.
+     * getthethreesideplatformuserIDmappingclose系.
      *
      * @param string[] $thirdUserIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -104,7 +104,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $relationEnvIds = $this->getEnvRelationIds($delightfulEnvironmentEntity);
         $query = $this->delightfulContactIdMappingModel::query();
 
-        // maintain原havequeryfieldorder
+        // maintainoriginalhavequeryfieldorder
         // according toenvironmentIDquantitychoosesuitablequerymethod
         if (count($relationEnvIds) === 1) {
             $query->where('delightful_environment_id', reset($relationEnvIds));
@@ -115,7 +115,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query->whereIn('origin_id', $thirdUserIds)
             ->where('mapping_type', ThirdPlatformIdMappingType::User->value);
 
-        // havetheseplatform多organizationuser id one致(such asday书),thereforequeryo clocknot带organizationencoding
+        // havetheseplatformmultipleorganizationuser id oneto(such asdaybook),thereforequeryo clocknotwithorganizationencoding
         $delightfulOrganizationCode && $query->where('delightful_organization_code', $delightfulOrganizationCode);
         $thirdPlatformIdMappingEntities = [];
         $data = $query->where('third_platform_type', $thirdPlatformType->value);
@@ -140,7 +140,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query = $this->delightfulContactIdMappingModel::query()
             ->whereIn('new_id', $delightfulIds)
             ->where('mapping_type', ThirdPlatformIdMappingType::User->value);
-        // havetheseplatform多organizationuser id one致(such asday书),thereforequeryo clocknot带organizationencoding
+        // havetheseplatformmultipleorganizationuser id oneto(such asdaybook),thereforequeryo clocknotwithorganizationencoding
         if ($thirdPlatformType !== PlatformType::Teamshare) {
             $delightfulOrganizationCode && $query->where('delightful_organization_code', $delightfulOrganizationCode);
         }
@@ -180,7 +180,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
             $delightfulThirdPlatformIdMappingEntity->setCreatedAt($time);
             $delightfulThirdPlatformIdMappingEntity->setUpdatedAt($time);
             $thirdPlatformIdMappings[] = [
-                'id' => $id, // 暂o clockprimary key idsetforandnew_idsamevalue,bybackhaveneedcan拆minute
+                'id' => $id, // 暫o clockprimary key idsetforandnew_idsamevalue,bybackhaveneedcan拆minute
                 'delightful_organization_code' => $delightfulThirdPlatformIdMappingEntity->getDelightfulOrganizationCode(),
                 'mapping_type' => $delightfulThirdPlatformIdMappingEntity->getMappingType(),
                 'third_platform_type' => $delightfulThirdPlatformIdMappingEntity->getThirdPlatformType(),
@@ -245,7 +245,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 预publishandproductioncanregard asisoneenvironment,所bythiswithinprocessonedownassociateenvironment ids.
+     * prepublishandproductioncanregard asisoneenvironment, bythiswithinprocessonedownassociateenvironment ids.
      * */
     private function getEnvRelationIds(DelightfulEnvironmentEntity $delightfulEnvironmentEntity): array
     {
@@ -261,7 +261,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * willarraydataconvertfor实bodyobject
+     * willarraydataconvertforactualbodyobject
      * @return DelightfulThirdPlatformIdMappingEntity[]
      */
     private function convertToEntities(array $dataArrays): array

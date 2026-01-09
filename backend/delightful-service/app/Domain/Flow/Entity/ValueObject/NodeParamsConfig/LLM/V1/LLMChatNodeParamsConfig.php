@@ -60,7 +60,7 @@ class LLMChatNodeParamsConfig extends AbstractLLMNodeParamsConfig
         $this->createOptionsToolsByParams($params['option_tools'] ?? []);
 
         $paramsConfig = [
-            // thiswithinconvertbecomestringgivefront端
+            // thiswithinconvertbecomestringgivefrontclient
             'model' => $this->model->getValue()->getResult(),
             'system_prompt' => $this->systemPrompt->toArray(),
             'user_prompt' => $this->userPrompt->toArray(),
@@ -248,7 +248,7 @@ JSON,
                             "type": "string",
                             "key": "elapsed_time",
                             "sort": 5,
-                            "title": "耗o clock",
+                            "title": "consumeo clock",
                             "description": "",
                             "items": null,
                             "properties": null,

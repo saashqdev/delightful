@@ -276,7 +276,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testandline调degreesectionpoint - Test parallel node scheduling with coroutine ID tracking.
+     * testandline調degreesectionpoint - Test parallel node scheduling with coroutine ID tracking.
      */
     public function test1(): void
     {
@@ -326,7 +326,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因forvertex2executetimeratiovertex3long,所byvertex3will先execute,先outputresult
+        // 因forvertex2executetimeratiovertex3long, byvertex3willfirstexecute,firstoutputresult
         $this->assertEquals(['vertex1', 'vertex3', 'vertex2'], array_keys($result));
 
         // Verify concurrent execution - vertex2 and vertex3 should run in different coroutines
@@ -380,7 +380,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因forvertex3executetimeratiovertex2long,所byvertex2will先execute,先outputresult
+        // 因forvertex3executetimeratiovertex2long, byvertex2willfirstexecute,firstoutputresult
         $this->assertEquals(['vertex1', 'vertex2', 'vertex3'], array_keys($result));
 
         // Verify concurrent execution again
@@ -390,7 +390,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testitemitem调degreesectionpoint.
+     * testitemitem調degreesectionpoint.
      */
     public function test2(): void
     {
@@ -399,7 +399,7 @@ class DagTest extends BaseTest
         $root = Vertex::make(function () {
             $vertexResult = new VertexResult();
 
-            // only调degreesectionpoint3
+            // only調degreesectionpoint3
             $vertexResult->setResult('vertex1')->setChildrenIds(['vertex3']);
             return $vertexResult;
         }, 'vertex1');
@@ -434,7 +434,7 @@ class DagTest extends BaseTest
         $root = Vertex::make(function () {
             $vertexResult = new VertexResult();
 
-            // only调degreesectionpoint2
+            // only調degreesectionpoint2
             $vertexResult->setResult('vertex1')->setChildrenIds(['vertex2']);
             return $vertexResult;
         }, 'vertex1');
@@ -466,7 +466,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testandhair调degreeandetcpending parentsectionpointcomplete.
+     * testandhair調degreeandetcpending parentsectionpointcomplete.
      * root -> vertex2
      * root -> vertex3
      * vertex2 -> vertex5
@@ -527,12 +527,12 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testandhair+itemitem调degreesectionpoint.
+     * testandhair+itemitem調degreesectionpoint.
      * root -> vertex2
      * root -> vertex3
      * vertex2 -> vertex5
      * vertex3 -> vertex4
-     * vertex4 -> vertex5 (butisnot调degree).
+     * vertex4 -> vertex5 (butisnot調degree).
      */
     public function test4(): void
     {
@@ -588,7 +588,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testnonandhair模type.
+     * testnonandhairmodetype.
      * vertex1 -> vertex2
      * vertex1 -> vertex3
      * vertex2 -> vertex4
@@ -667,7 +667,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testnonandhair模type.
+     * testnonandhairmodetype.
      * vertex1 -> vertex2
      * vertex2 -> vertex3.
      */
@@ -717,10 +717,10 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testnonandhair模type.
-     * vertex1 -> vertex2(not调degree)
-     * vertex1 -> vertex3(调degree).
-     * vertex1 -> vertex4(not调degree).
+     * testnonandhairmodetype.
+     * vertex1 -> vertex2(not調degree)
+     * vertex1 -> vertex3(調degree).
+     * vertex1 -> vertex4(not調degree).
      *
      * shouldoutput:vertex1, vertex3.
      */
@@ -778,7 +778,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testandline调degreesectionpoint.
+     * testandline調degreesectionpoint.
      */
     public function test8(): void
     {
@@ -839,7 +839,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因forvertex2executetimeratiovertex3long,所byvertex3will先execute,先outputresult
+        // 因forvertex2executetimeratiovertex3long, byvertex3willfirstexecute,firstoutputresult
         $this->assertEquals(['vertex1', 'vertex3', 'vertex5', 'vertex2', 'vertex4', 'vertex6'], array_keys($result));
     }
 

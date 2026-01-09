@@ -12,7 +12,7 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
  *
  * definition两typeretrievestrategy:
  * - SINGLE: singleretrieve,fromsingleknowledge basemiddleretrieveinfo
- * - MULTIPLE: multipleretrieve,meanwhilefrom多knowledge basemiddleretrieveinfo,然backtoresultconduct重newsort
+ * - MULTIPLE: multipleretrieve,meanwhilefrommultipleknowledge basemiddleretrieveinfo,然backtoresultconduct重newsort
  */
 class RetrieveStrategy
 {
@@ -28,15 +28,15 @@ class RetrieveStrategy
     /**
      * multipleretrieve.
      *
-     * meanwhilefrom多knowledge basemiddleretrieveinfo,然backtoresultconduct重newsort.
+     * meanwhilefrommultipleknowledge basemiddleretrieveinfo,然backtoresultconduct重newsort.
      * thestrategypassconfigurationparameter `retrieve_strategy` fieldset,
      * fromdatabasemiddle retrieve_config configurationget.
-     * itsupportdifferent重sortstrategy,如use重sortmodeloradd权minute数.
+     * itsupportdifferent重sortstrategy,likeuse重sortmodeloradd权minutecount.
      */
     public const MULTIPLE = 'multiple';
 
     /**
-     * get所havecanuseretrievestrategy.
+     * get havecanuseretrievestrategy.
      *
      * @return array<string>
      */
@@ -49,7 +49,7 @@ class RetrieveStrategy
     }
 
     /**
-     * checkgive定strategywhethervalid.
+     * checkgivesetstrategywhethervalid.
      */
     public static function isValid(string $strategy): bool
     {

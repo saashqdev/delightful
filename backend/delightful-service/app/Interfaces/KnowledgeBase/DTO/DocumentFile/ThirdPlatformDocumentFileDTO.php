@@ -18,7 +18,7 @@ class ThirdPlatformDocumentFileDTO extends AbstractDocumentFileDTO
     // thethird-partyfiletype,customizefield,bythethird-partyplatformsetting
     public ?string $thirdFileType = null;
 
-    // thethird-partyfileextension名,customizefield,bythethird-partyplatformsetting
+    // thethird-partyfileextensionname,customizefield,bythethird-partyplatformsetting
     public ?string $thirdFileExtensionName = null;
 
     public function getThirdFileId(): string

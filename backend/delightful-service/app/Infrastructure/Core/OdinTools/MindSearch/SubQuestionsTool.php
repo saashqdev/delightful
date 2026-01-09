@@ -19,7 +19,7 @@ class SubQuestionsTool
             'subQuestions' => [
                 'type' => 'array',
                 'items' => ['type' => 'string'],
-                'description' => 'according tooriginalissue拆minuteoutcomeone子issue',
+                'description' => 'according tooriginalissue拆minuteoutcomeonechildissue',
             ],
         ],
         'additionalProperties' => false,

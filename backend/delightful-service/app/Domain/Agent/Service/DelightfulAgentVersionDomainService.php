@@ -81,7 +81,7 @@ class DelightfulAgentVersionDomainService
         $reviewOpen = false;
 
         $msg = '';
-        // ifoldstatusalready经isenterpriseor者market,thennotallowback
+        // ifoldstatusalreadyalreadyisenterpriseorpersonmarket,thennotallowback
         $oldDelightfulAgentVersionEntity = $this->agentVersionRepository->getNewestAgentVersionEntity($delightfulAgentVersionEntity->getAgentId());
         if ($oldDelightfulAgentVersionEntity !== null) {
             $this->validateVersionNumber($delightfulAgentVersionEntity->getVersionNumber(), $oldDelightfulAgentVersionEntity->getVersionNumber());
@@ -179,7 +179,7 @@ class DelightfulAgentVersionDomainService
     {
         // returnissemantic化version,needinreturnfoundationup+1
         $agentMaxVersion = $this->agentVersionRepository->getAgentMaxVersion($agentId);
-        // ifversionnumberisintegerformat(如 1),willitsconvertforsemantic化versionnumber(如 1.0.0)
+        // ifversionnumberisintegerformat(like 1),willitsconvertforsemantic化versionnumber(like 1.0.0)
         if (is_numeric($agentMaxVersion) && strpos($agentMaxVersion, '.') === false) {
             $agentMaxVersion = $agentMaxVersion . '.0.0';
         }
@@ -198,7 +198,7 @@ class DelightfulAgentVersionDomainService
 
         // if MINOR 达to 10,enter位to MAJOR(canaccording torequirementadjustthisrule)
         if ($minor > 99) {
-            // notresetminor,whileisdirectly增bigmajor,avoidnot必wantreset
+            // notresetminor,whileisdirectly增bigmajor,avoidnotrequiredwantreset
             $minor = 0;
             $major = (int) $major + 1;
         }
@@ -239,11 +239,11 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * based oncursorpaginationgetfinger定organizationassistantversionlist.
+     * based oncursorpaginationgetfingersetorganizationassistantversionlist.
      * @param string $organizationCode organizationcode
      * @param array $agentVersionIds assistantversionIDlist
      * @param string $cursor cursorID,ifforemptystringthenfrommostnewstart
-     * @param int $pageSize each页quantity
+     * @param int $pageSize eachpagequantity
      * @return array<DelightfulAgentVersionEntity>
      */
     public function getAgentsByOrganizationWithCursor(string $organizationCode, array $agentVersionIds, string $cursor, int $pageSize): array
@@ -275,7 +275,7 @@ class DelightfulAgentVersionDomainService
             return;
         }
 
-        // checkwhether试graphfrommorehighlevel别publishrangebacktomorelowlevel别
+        // checkwhether试graphfrommorehighlevelotherpublishrangebacktomorelowlevelother
         $errorMessage = match ($oldScope) {
             DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value => 'agent.already_published_to_enterprise_cannot_publish_to_individual',
             DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value => 'agent.already_published_to_market_cannot_publish_to_individual',

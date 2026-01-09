@@ -130,7 +130,7 @@ class KnowledgeSimilarityNodeParamsConfig extends AbstractKnowledgeNodeParamsCon
                 "type": "array",
                 "key": "similarities",
                 "sort": 0,
-                "title": "召returnresultcollection",
+                "title": "callreturnresultcollection",
                 "description": "",
                 "required": null,
                 "value": null,

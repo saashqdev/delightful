@@ -29,7 +29,7 @@ class AgentSendMessageToGroupTool extends AbstractBuiltInTool
         return function (ExecutionData $executionData) {
             $params = $executionData->getTriggerData()->getParams();
             $senderUserId = $executionData->getAgentUserId();
-            // 助handsendmessage
+            // helphandsendmessage
             $assistantMessage = new TextMessage(['content' => $params['content']]);
             $appMessageId = IdGenerator::getUniqueId32();
             $receiveSeqDTO = new DelightfulSeqEntity();
@@ -91,8 +91,8 @@ class AgentSendMessageToGroupTool extends AbstractBuiltInTool
         "group_id": {
             "type": "string",
             "key": "group_id",
-            "title": "receive群id",
-            "description": "receive群id",
+            "title": "receivegroupid",
+            "description": "receivegroupid",
             "required": null,
             "value": null,
             "encryption": false,

@@ -10,11 +10,11 @@ namespace App\ErrorCode;
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 
 /**
- * delightful api error码range:4000, 4999.
+ * delightful api errorcoderange:4000, 4999.
  */
 enum DelightfulApiErrorCode: int
 {
-    // tokennot存in
+    // tokennotexistsin
     #[ErrorMessage(message: 'api.token.not_exist')]
     case TOKEN_NOT_EXIST = 4000;
 
@@ -47,7 +47,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.message.empty')]
     case MESSAGE_EMPTY = 4008;
 
-    // 限stream
+    // limitstream
     #[ErrorMessage(message: 'api.rate_limit')]
     case RATE_LIMIT = 4009;
 
@@ -55,7 +55,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.msg_empty')]
     case MSG_EMPTY = 4010;
 
-    // usernot存in
+    // usernotexistsin
     #[ErrorMessage(message: 'api.user_id_not_exist')]
     case USER_ID_NOT_EXIST = 4011;
 
@@ -67,15 +67,15 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.token.create_error')]
     case TOKEN_CREATE_ERROR = 4013;
 
-    // usercreatetokenquantity超passlimit
+    // usercreatetokenquantityexceedspasslimit
     #[ErrorMessage(message: 'api.user.create_access_token_limit')]
     case USER_CREATE_ACCESS_TOKEN_LIMIT = 4014;
 
-    // userusetokenquantity超passlimit
+    // userusetokenquantityexceedspasslimit
     #[ErrorMessage(message: 'api.user.use_access_token_limit')]
     case USER_USE_ACCESS_TOKEN_LIMIT = 4015;
 
-    // usercreateaccessTokenfrequency限stream
+    // usercreateaccessTokenfrequencylimitstream
     #[ErrorMessage(message: 'api.user.create_access_token_rate_limit')]
     case USER_CREATE_ACCESS_TOKEN_RATE_LIMIT = 4016;
 

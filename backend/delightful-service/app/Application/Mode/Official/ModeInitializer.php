@@ -208,14 +208,14 @@ class ModeInitializer
             'id' => '842103554687242240', // Hardcoded ID (preferred)
             'name_i18n' => json_encode([
                 'en_US' => 'Default Mode',
-                'zh_CN' => 'default模type',
+                'zh_CN' => 'defaultmodetype',
             ]),
             'placeholder_i18n' => json_encode([]),
             'identifier' => 'default',
             'icon' => 'Icon3dCubeSphere',
             'color' => '#999999',
             'sort' => 0,
-            'description' => 'onlyuseatcreateo clockinitialize模typeandreset模typemiddleconfiguration',
+            'description' => 'onlyuseatcreateo clockinitializemodetypeandresetmodetypemiddleconfiguration',
             'is_default' => 1,
             'status' => 1,
             'distribution_type' => 1,
@@ -246,11 +246,11 @@ class ModeInitializer
                 'id' => '821132008052400129',
                 'name_i18n' => json_encode([
                     'en_US' => 'Chat',
-                    'zh_CN' => 'chat模type',
+                    'zh_CN' => 'chatmodetype',
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'Please enter the content to converse with the agent.',
-                    'zh_CN' => '请inputand智canbodyconversationcontent',
+                    'zh_CN' => 'pleaseinputand智canbodyconversationcontent',
                 ]),
                 'identifier' => 'chat',
                 'icon' => 'IconMessages',
@@ -273,11 +273,11 @@ class ModeInitializer
                 'id' => '821139004944207873',
                 'name_i18n' => json_encode([
                     'en_US' => 'Silde',
-                    'zh_CN' => 'PPT 模type',
+                    'zh_CN' => 'PPT modetype',
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the theme and specific requirements of the PPT, or upload files, Be Delightful will help you create a beautiful PPT. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您caninput PPT themeandspecificrequire,oruploadfile,超levelMagicwillforyou制asexquisite PPT. Enter send ; Shift + Enter 换line',
+                    'zh_CN' => '您caninput PPT themeandspecificrequire,oruploadfile,exceedslevelMagicwillforyou制asexquisite PPT. Enter send ; Shift + Enter exchangeline',
                 ]),
                 'identifier' => 'ppt',
                 'icon' => 'IconPresentation',
@@ -304,7 +304,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can select data sources or upload Excel files, and then enter the requirements for analysis. Be Delightful will perform comprehensive data analysis for you. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您optional择data源orupload Excel fileback,inputneedanalyzerequirement,超levelMagicwillfor您conductallsurfacedataanalyze. Enter send ; Shift + Enter 换line',
+                    'zh_CN' => '您optional择datasourceorupload Excel fileback,inputneedanalyzerequirement,exceedslevelMagicwillfor您conductallsurfacedataanalyze. Enter send ; Shift + Enter exchangeline',
                 ]),
                 'identifier' => 'data_analysis',
                 'icon' => 'IconChartBarPopular',
@@ -327,11 +327,11 @@ class ModeInitializer
                 'id' => '821139708794552321',
                 'name_i18n' => json_encode([
                     'en_US' => 'Report Mode',
-                    'zh_CN' => 'research report模type',
+                    'zh_CN' => 'research reportmodetype',
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the theme and specific requirements of your research report, or upload a file, and Super Maggie will write a complete and detailed report for you. Press Enter to send; press Shift + Enter to wrap lines.',
-                    'zh_CN' => '您caninputresearchreportthemeandspecificrequirement,oruploadfile,超levelMagicwillfor您conductcompleteanddetailedreportwrite. Enter send ; Shift + Enter 换line',
+                    'zh_CN' => '您caninputresearchreportthemeandspecificrequirement,oruploadfile,exceedslevelMagicwillfor您conductcompleteanddetailedreportwrite. Enter send ; Shift + Enter exchangeline',
                 ]),
                 'identifier' => 'report',
                 'icon' => 'IconMicroscope',
@@ -358,7 +358,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Be Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您caninputwill议textcontent,oruploadwill议recordingfile,超levelMagicwillfor您conductcompletewill议summary. Enter send ; Shift + Enter 换line',
+                    'zh_CN' => '您caninputwill议textcontent,oruploadwill议recordingfile,exceedslevelMagicwillfor您conductcompletewill议summary. Enter send ; Shift + Enter exchangeline',
                 ]),
                 'identifier' => 'summary',
                 'icon' => 'IconFileDescription',
@@ -381,11 +381,11 @@ class ModeInitializer
                 'id' => '821139958364049409',
                 'name_i18n' => json_encode([
                     'en_US' => 'General',
-                    'zh_CN' => '通use模type',
+                    'zh_CN' => '通usemodetype',
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Be Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '请input您requirement,oruploadfile,超levelMagicwillfor您resolveissue. Enter send ; Shift + Enter 换line',
+                    'zh_CN' => 'pleaseinput您requirement,oruploadfile,exceedslevelMagicwillfor您resolveissue. Enter send ; Shift + Enter exchangeline',
                 ]),
                 'identifier' => 'general',
                 'icon' => 'IconBeDelightful',

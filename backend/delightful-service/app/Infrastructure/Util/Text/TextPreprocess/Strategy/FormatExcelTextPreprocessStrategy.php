@@ -15,7 +15,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
         $content = $this->convertToCsv($content);
         // delete ## openheadline
         $content = preg_replace('/^##.*\n/', '', $content);
-        // usejustthentable达typematchnotin引numberinside换line符
+        // usejustthentable达typematchnotinimportnumberinsideexchangeline符
         return preg_replace('/(?<!")[\r\n]+(?!")/', "\n\n", $content);
     }
 
@@ -26,7 +26,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
      */
     private function convertToCsv(string $content): string
     {
-        // willcontent按linesplit,butretainsingleyuan格inside换line符
+        // willcontent按linesplit,butretainsingleyuanformatinsideexchangeline符
         $lines = preg_split('/(?<!")[\r\n]+(?!")/', $content);
         $result = [];
         $headers = [];
@@ -86,30 +86,30 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             }
         }
 
-        // ifnothave找tominuteseparator,defaultuse逗number
+        // ifnothavefindtominuteseparator,defaultuse逗number
         return ',';
     }
 
     /**
-     * format化CSVsingleyuan格content,tospecialcontentadd引number.
-     * @param string $value singleyuan格content
-     * @return string format化backsingleyuan格content
+     * format化CSVsingleyuanformatcontent,tospecialcontentaddimportnumber.
+     * @param string $value singleyuanformatcontent
+     * @return string format化backsingleyuanformatcontent
      */
     private function formatCsvCell(string $value): string
     {
-        // ifsingleyuan格contentforempty,directlyreturnemptystring
+        // ifsingleyuanformatcontentforempty,directlyreturnemptystring
         if ($value === '') {
             return '';
         }
 
-        // ifsingleyuan格contentcontainbydownanycharacter,needuse引numberpackage围
+        // ifsingleyuanformatcontentcontainbydownanycharacter,needuseimportnumberpackage围
         if (str_contains($value, ',')
             || str_contains($value, '"')
             || str_contains($value, "\n")
             || str_contains($value, "\r")
             || str_starts_with($value, ' ')
             || str_ends_with($value, ' ')) {
-            // escapedouble引number
+            // escapedoubleimportnumber
             $value = str_replace('"', '""', $value);
             return '"' . $value . '"';
         }

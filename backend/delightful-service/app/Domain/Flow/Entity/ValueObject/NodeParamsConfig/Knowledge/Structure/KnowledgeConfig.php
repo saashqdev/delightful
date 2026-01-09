@@ -74,7 +74,7 @@ class KnowledgeConfig
 
     public function setKnowledgeListByData(array $data): void
     {
-        // 实o clockgetknowledge basedata
+        // actualo clockgetknowledge basedata
         $knowledgeCodes = array_column($data, 'knowledge_code');
         if (empty($knowledgeCodes)) {
             return;

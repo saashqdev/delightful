@@ -39,7 +39,7 @@ class EasyInternetSearchBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'MagicInternetsearch简single版,batchquantitytouser多implicationsameordifferentissueconductinternetsearch.';
+        return 'MagicInternetsearchsimplesingleversion,batchquantitytousermultipleimplicationsameordifferentissueconductinternetsearch.';
     }
 
     public function getCallback(): ?Closure

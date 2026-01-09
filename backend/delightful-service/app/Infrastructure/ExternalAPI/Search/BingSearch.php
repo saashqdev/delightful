@@ -54,7 +54,7 @@ class BingSearch
         string $requestUrl = ''
     ): array {
         /*
-         * use bing searchandreturnupdown文.
+         * use bing searchandreturnupdowntext.
          */
         if (empty($requestUrl)) {
             $requestUrl = trim(config('search.drivers.bing.endpoint'));
@@ -85,7 +85,7 @@ class BingSearch
             $queryParams['setLang'] = $setLang;
         }
 
-        // create Guzzle customer端configuration
+        // create Guzzle customerclientconfiguration
         $clientConfig = [
             'base_uri' => $requestUrl,
             'timeout' => self::DEFAULT_SEARCH_ENGINE_TIMEOUT,
@@ -132,7 +132,7 @@ class BingSearch
                         'endpoint' => $requestUrl,
                         'statusCode' => $statusCode,
                     ]);
-                    break; // HTTPerrornotretry,directly跳outloop
+                    break; // HTTPerrornotretry,directlyjumpoutloop
                 }
                 $this->logger->warning('Network error occurred', [
                     'endpoint' => $requestUrl,
@@ -144,7 +144,7 @@ class BingSearch
             }
         }
 
-        // if走tothiswithin,instruction所havetryallfail
+        // if走tothiswithin,instruction havetryallfail
         throw new RuntimeException('Search engine error.');
     }
 }

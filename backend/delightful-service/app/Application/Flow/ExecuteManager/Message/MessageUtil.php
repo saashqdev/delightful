@@ -68,7 +68,7 @@ class MessageUtil
                     $chatAttachments[] = $chatAttachment;
 
                     if ($attachment instanceof ExternalAttachment) {
-                        // asyncdownloadoutside链fileanduploadto本service oss
+                        // asyncdownloadoutsidechainfileanduploadtothisservice oss
                         $imageUploadEvent = new ExternalAttachmentUploadEvent($attachment, $executionData->getDataIsolation()->getCurrentOrganizationCode());
                         AsyncEventUtil::dispatch($imageUploadEvent);
                     }
@@ -77,7 +77,7 @@ class MessageUtil
                 $message = new FilesMessage([]);
                 $linkDesc = $delightfulFlowMessage->getLinkDesc()?->getValue()?->getResult($executionData->getExpressionFieldData());
                 if (is_string($linkDesc) && $linkDesc !== '') {
-                    // if具havedescription,that么shouldisrich textshapetype
+                    // ifwithhavedescription,thatwhatshouldisrich textshapetype
                     $message = new TextMessage([]);
                     $message->setContent($linkDesc);
                 }
@@ -96,7 +96,7 @@ class MessageUtil
                     if (! is_string($linkPath) || ! $attachment = $executionData->getAttachmentRecord($linkPath)) {
                         continue;
                     }
-                    // getfilename.if linkPaths only 1 ,andand linkDesc alsoisonlyone,that么candirectlyuse linkDesc asforfilename
+                    // getfilename.if linkPaths only 1 ,andand linkDesc alsoisonlyone,thatwhatcandirectlyuse linkDesc asforfilename
                     if (count($linkPaths) === 1 && is_string($linkDesc) && $linkDesc !== '') {
                         $attachment->setName($linkDesc);
                     }
@@ -111,7 +111,7 @@ class MessageUtil
                     $chatAttachments[] = $chatAttachment;
 
                     if ($attachment instanceof ExternalAttachment) {
-                        // asyncdownloadoutside链fileanduploadto本service oss
+                        // asyncdownloadoutsidechainfileanduploadtothisservice oss
                         $imageUploadEvent = new ExternalAttachmentUploadEvent($attachment, $executionData->getDataIsolation()->getCurrentOrganizationCode());
                         AsyncEventUtil::dispatch($imageUploadEvent);
                     }

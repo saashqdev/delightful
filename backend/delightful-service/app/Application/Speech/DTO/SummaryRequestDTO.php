@@ -9,7 +9,7 @@ namespace App\Application\Speech\DTO;
 
 /**
  * ASRsummaryrequestDTO
- * savesummaryrequest所haverequired parameterandoptionalparameter.
+ * savesummaryrequest haverequired parameterandoptionalparameter.
  */
 readonly class SummaryRequestDTO
 {

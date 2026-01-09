@@ -36,7 +36,7 @@ class CreateGroupTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'createone具havefinger定person员group chatday';
+        return 'createonewithhavefingersetpersonmembergroup chatday';
     }
 
     public function getCallback(): ?Closure
@@ -99,8 +99,8 @@ class CreateGroupTool extends AbstractBuiltInTool
         "group_name": {
             "type": "string",
             "key": "group_name",
-            "title": "群name",
-            "description": "群name",
+            "title": "groupname",
+            "description": "groupname",
             "required": null,
             "value": null,
             "encryption": false,
@@ -148,8 +148,8 @@ class CreateGroupTool extends AbstractBuiltInTool
         "group_members": {
             "type": "array",
             "key": "group_members",
-            "title": "群member",
-            "description": "群member",
+            "title": "groupmember",
+            "description": "groupmember",
             "required": null,
             "value": null,
             "encryption": false,
@@ -158,7 +158,7 @@ class CreateGroupTool extends AbstractBuiltInTool
                 "type": "object",
                 "key": "group_member",
                 "sort": 0,
-                "title": "群member",
+                "title": "groupmember",
                 "description": "",
                 "required": null,
                 "value": null,
@@ -197,8 +197,8 @@ class CreateGroupTool extends AbstractBuiltInTool
         "group_type": {
             "type": "number",
             "key": "group_type",
-            "title": "群type",
-            "description": "群type.1 insidedepartment group;2 training group;3 willdiscussion group;4 project群;5 工single群;6 outsidedepartment group;",
+            "title": "grouptype",
+            "description": "grouptype.1 insidedepartment group;2 training group;3 willdiscussion group;4 projectgroup;5 工singlegroup;6 outsidedepartment group;",
             "required": null,
             "value": null,
             "encryption": false,
@@ -210,7 +210,7 @@ class CreateGroupTool extends AbstractBuiltInTool
             "type": "string",
             "key": "opening_speech",
             "title": "openfield",
-            "description": "alreadycurrentassistant身sharesendonetimegroup chatopenfield.defaultnot传thevalue,unlessfinger定needsendopenfield.",
+            "description": "alreadycurrentassistant身sharesendonetimegroup chatopenfield.defaultnot传thevalue,unlessfingersetneedsendopenfield.",
             "required": null,
             "value": null,
             "encryption": false,

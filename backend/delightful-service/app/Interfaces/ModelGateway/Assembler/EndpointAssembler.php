@@ -28,36 +28,36 @@ class EndpointAssembler
     }
 
     /**
-     * fromformatclientpointtypeidentifiermiddlealso原originalmodelID.
+     * fromformatclientpointtypeidentifiermiddlealsooriginaloriginalmodelID.
      *
-     * @param string $formattedModelId maybecontainformat化front缀modelID
+     * @param string $formattedModelId maybecontainformat化frontsuffixmodelID
      * @return string originalmodelID
      */
     public static function extractOriginalModelId(string $formattedModelId): string
     {
-        // traverse所have HighAvailabilityAppType enumvalue
+        // traverse have HighAvailabilityAppType enumvalue
         foreach (HighAvailabilityAppType::cases() as $appType) {
             $prefix = $appType->value . DelimiterType::HIGH_AVAILABILITY->value;
 
-            // ifmatchtofront缀,then移exceptfront缀returnoriginal modelId
+            // ifmatchtofrontsuffix,thenmoveexceptfrontsuffixreturnoriginal modelId
             if (str_starts_with($formattedModelId, $prefix)) {
                 return substr($formattedModelId, strlen($prefix));
             }
         }
 
-        // ifnothavematchtoanyfront缀,thendirectlyreturnoriginalvalue
+        // ifnothavematchtoanyfrontsuffix,thendirectlyreturnoriginalvalue
         return $formattedModelId;
     }
 
     /**
-     * checkgive定stringwhetherforformatclientpointtypeidentifier.
+     * checkgivesetstringwhetherforformatclientpointtypeidentifier.
      *
      * @param string $modelId 待checkmodelID
      * @return bool whetherforformatclientpointtypeidentifier
      */
     public static function isFormattedEndpointType(string $modelId): bool
     {
-        // traverse所have HighAvailabilityAppType enumvalue
+        // traverse have HighAvailabilityAppType enumvalue
         foreach (HighAvailabilityAppType::cases() as $appType) {
             $prefix = $appType->value . DelimiterType::HIGH_AVAILABILITY->value;
             if (str_starts_with($modelId, $prefix)) {

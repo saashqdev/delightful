@@ -44,7 +44,7 @@ use function Hyperf\Translation\trans;
 
 /**
  * ASR sandboxservice
- * responsiblesandboxtaskstart,merge,round询andfilerecordcreate.
+ * responsiblesandboxtaskstart,merge,roundqueryandfilerecordcreate.
  */
 readonly class AsrSandboxService
 {
@@ -83,7 +83,7 @@ readonly class AsrSandboxService
         );
         $taskStatus->sandboxId = $sandboxId;
 
-        // settinguserupdown文
+        // settinguserupdowntext
         $this->sandboxGateway->setUserContext($userId, $organizationCode);
 
         // getcompleteworkdirectorypath
@@ -91,7 +91,7 @@ readonly class AsrSandboxService
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($organizationCode);
         $fullWorkdir = WorkDirectoryUtil::getFullWorkdir($fullPrefix, $projectEntity->getWorkDir());
 
-        // createsandboxandetc待work区canuse
+        // createsandboxandetc待workregioncanuse
         $actualSandboxId = $this->ensureSandboxWorkspaceReady(
             $taskStatus,
             $sandboxId,
@@ -122,11 +122,11 @@ readonly class AsrSandboxService
         ]);
 
         // callsandboxstarttask
-        // notice:sandbox API onlyacceptworkregiontopath (如: .asr_recordings/session_xxx)
+        // notice:sandbox API onlyacceptworkregiontopath (like: .asr_recordings/session_xxx)
         $response = $this->asrRecorder->startTask(
             $actualSandboxId,
             $taskStatus->taskKey,
-            $taskStatus->tempHiddenDirectory,  // 如: .asr_recordings/session_xxx
+            $taskStatus->tempHiddenDirectory,  // like: .asr_recordings/session_xxx
             '.workspace',
             $noteFileConfig,
             $transcriptFileConfig
@@ -187,7 +187,7 @@ readonly class AsrSandboxService
      * mergeaudiofile.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
-     * @param string $fileTitle filetitle(not containextension名)
+     * @param string $fileTitle filetitle(not containextensionname)
      * @param string $organizationCode organizationencoding
      * @return AsrSandboxMergeResultDTO mergeresult
      */
@@ -213,7 +213,7 @@ readonly class AsrSandboxService
             $taskStatus->sandboxId = $sandboxId;
         }
 
-        // settinguserupdown文
+        // settinguserupdowntext
         $this->sandboxGateway->setUserContext($taskStatus->userId, $organizationCode);
 
         // getcompleteworkdirectorypath
@@ -231,9 +231,9 @@ readonly class AsrSandboxService
             $organizationCode
         );
 
-        // updateactualsandboxID(maybealready经change)
+        // updateactualsandboxID(maybealreadyalreadychange)
         if ($actualSandboxId !== $requestedSandboxId) {
-            $this->logger->warning('sandboxIDhair生change,maybeissandboxrestart', [
+            $this->logger->warning('sandboxIDhairgeneratechange,maybeissandboxrestart', [
                 'task_key' => $taskStatus->taskKey,
                 'old_sandbox_id' => $requestedSandboxId,
                 'new_sandbox_id' => $actualSandboxId,
@@ -246,7 +246,7 @@ readonly class AsrSandboxService
             'full_workdir' => $fullWorkdir,
         ]);
 
-        // callsandbox finish andround询etc待complete(willpassresponsehandle器from动create/updatefilerecord)
+        // callsandbox finish androundqueryetc待complete(willpassresponsehandledevicefromautocreate/updatefilerecord)
         $mergeResult = $this->callSandboxFinishAndWait($taskStatus, $fileTitle);
 
         $this->logger->info('sandboxreturnfileinfo', [
@@ -256,7 +256,7 @@ readonly class AsrSandboxService
             'note_file_id' => $taskStatus->noteFileId,
         ]);
 
-        // updatetaskstatus(filerecordalreadybyresponsehandle器create)
+        // updatetaskstatus(filerecordalreadybyresponsehandledevicecreate)
         $taskStatus->updateStatus(AsrTaskStatusEnum::COMPLETED);
 
         $this->logger->info('sandboxaudiohandlecomplete', [
@@ -270,7 +270,7 @@ readonly class AsrSandboxService
     }
 
     /**
-     * callsandbox finish andround询etc待complete.
+     * callsandbox finish androundqueryetc待complete.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $intelligentTitle 智cantitle(useatrename)
@@ -288,9 +288,9 @@ readonly class AsrSandboxService
 
         // buildaudioconfigurationobject
         $audioConfig = new AsrAudioConfig(
-            sourceDir: $taskStatus->tempHiddenDirectory,  // 如: .asr_recordings/session_xxx
-            targetDir: $taskStatus->displayDirectory,     // 如: recordingsummary_20251027_230949
-            outputFilename: $intelligentTitle              // 如: behate courage
+            sourceDir: $taskStatus->tempHiddenDirectory,  // like: .asr_recordings/session_xxx
+            targetDir: $taskStatus->displayDirectory,     // like: recordingsummary_20251027_230949
+            outputFilename: $intelligentTitle              // like: behate courage
         );
 
         // buildnotefileconfigurationobject(needrename)
@@ -324,7 +324,7 @@ readonly class AsrSandboxService
             $transcriptFileConfig
         );
 
-        // round询etc待complete(based onpresettimeandsleepbetween隔)
+        // roundqueryetc待complete(based onpresettimeandsleepbetweenseparator)
         $timeoutSeconds = AsrConfig::SANDBOX_MERGE_TIMEOUT;
         $pollingInterval = AsrConfig::POLLING_INTERVAL;
         $attempt = 0;
@@ -356,7 +356,7 @@ readonly class AsrSandboxService
                 return $result;
             }
 
-            // middlebetweenstatus(waiting, running, finalizing):continueround询and按between隔recordenterdegree
+            // middlebetweenstatus(waiting, running, finalizing):continueroundqueryand按betweenseparatorrecordenterdegree
             $currentTime = microtime(true);
             $elapsedSeconds = (int) ($currentTime - $finishStartTime);
             if ($attempt % AsrConfig::SANDBOX_MERGE_LOG_FREQUENCY === 0 || ($currentTime - $lastLogTime) >= $logInterval) {
@@ -380,7 +380,7 @@ readonly class AsrSandboxService
 
             sleep($pollingInterval);
 
-            // continueround询
+            // continueroundquery
             $response = $this->asrRecorder->finishTask(
                 $sandboxId,
                 $taskStatus->taskKey,
@@ -480,7 +480,7 @@ readonly class AsrSandboxService
 
     /**
      * etc待sandboxstart(canresponseinterface).
-     * ASR featurenotneedwork区initialize,onlyneedsandboxcanresponse getWorkspaceStatus interface即can.
+     * ASR featurenotneedworkregioninitialize,onlyneedsandboxcanresponse getWorkspaceStatus interface即can.
      *
      * @param string $sandboxId sandboxID
      * @param string $taskKey taskKey(useatlog)
@@ -502,7 +502,7 @@ readonly class AsrSandboxService
 
         while (time() < $endTime) {
             try {
-                // trygetwork区status,as long asinterfacecansuccessreturntheninstructionsandboxalreadystart
+                // trygetworkregionstatus,as long asinterfacecansuccessreturntheninstructionsandboxalreadystart
                 $response = $this->agentDomainService->getWorkspaceStatus($sandboxId);
                 $status = $response->getDataValue('status');
 
@@ -525,7 +525,7 @@ readonly class AsrSandboxService
                     'elapsed_seconds' => time() - $startTime,
                 ]);
 
-                // etc待downonetimeround询
+                // etc待downonetimeroundquery
                 sleep(AsrConfig::POLLING_INTERVAL);
             }
         }
@@ -545,7 +545,7 @@ readonly class AsrSandboxService
     }
 
     /**
-     * pass AgentDomainService createsandboxandetc待work区then绪.
+     * pass AgentDomainService createsandboxandetc待workregionthen绪.
      */
     private function ensureSandboxWorkspaceReady(
         AsrTaskStatusDTO $taskStatus,
@@ -561,29 +561,29 @@ readonly class AsrSandboxService
 
         $projectIdString = (string) $projectId;
         if ($projectIdString === '') {
-            ExceptionBuilder::throw(AsrErrorCode::SandboxTaskCreationFailed, '', ['message' => 'projectIDfornull,no法createsandbox']);
+            ExceptionBuilder::throw(AsrErrorCode::SandboxTaskCreationFailed, '', ['message' => 'projectIDfornull,nomethodcreatesandbox']);
         }
 
-        // trygetwork区status
+        // trygetworkregionstatus
         $workspaceStatusResponse = null;
         try {
             $workspaceStatusResponse = $this->agentDomainService->getWorkspaceStatus($requestedSandboxId);
         } catch (Throwable $throwable) {
-            $this->logger->warning('getsandboxwork区statusfail,sandboxmaybenotstart,willcreatenewsandbox', [
+            $this->logger->warning('getsandboxworkregionstatusfail,sandboxmaybenotstart,willcreatenewsandbox', [
                 'task_key' => $taskStatus->taskKey,
                 'sandbox_id' => $requestedSandboxId,
                 'error' => $throwable->getMessage(),
             ]);
         }
 
-        // ifwork区statusresponse存in,checkwhetherneedinitialize
+        // ifworkregionstatusresponseexistsin,checkwhetherneedinitialize
         if ($workspaceStatusResponse !== null) {
             $responseCode = $workspaceStatusResponse->getCode();
             $workspaceStatus = (int) $workspaceStatusResponse->getDataValue('status');
 
-            // ifresponsesuccess(code 1000)andwork区alreadythen绪,directlyreturn
+            // ifresponsesuccess(code 1000)andworkregionalreadythen绪,directlyreturn
             if ($responseCode === ResponseCode::SUCCESS && WorkspaceStatus::isReady($workspaceStatus)) {
-                $this->logger->info('detecttosandboxwork区alreadythen绪,no需initialize', [
+                $this->logger->info('detecttosandboxworkregionalreadythen绪,no需initialize', [
                     'task_key' => $taskStatus->taskKey,
                     'sandbox_id' => $requestedSandboxId,
                     'status' => $workspaceStatus,
@@ -595,8 +595,8 @@ readonly class AsrSandboxService
                 return $requestedSandboxId;
             }
 
-            // ifresponsesuccessbutwork区notinitialize,orresponsefail,needinitializework区
-            $this->logger->info('detecttosandboxwork区notinitializeorresponseexception,needinitializework区', [
+            // ifresponsesuccessbutworkregionnotinitialize,orresponsefail,needinitializeworkregion
+            $this->logger->info('detecttosandboxworkregionnotinitializeorresponseexception,needinitializeworkregion', [
                 'task_key' => $taskStatus->taskKey,
                 'sandbox_id' => $requestedSandboxId,
                 'response_code' => $responseCode,
@@ -610,7 +610,7 @@ readonly class AsrSandboxService
             return $requestedSandboxId;
         }
 
-        // work区statusresponsenot存in,sandboxnotstart,needcreatesandbox
+        // workregionstatusresponsenotexistsin,sandboxnotstart,needcreatesandbox
         $dataIsolation = DataIsolation::simpleMake($organizationCode, $userId);
 
         $this->logger->info('preparecall AgentDomainService createsandbox', [
@@ -638,15 +638,15 @@ readonly class AsrSandboxService
 
         $taskStatus->sandboxId = $actualSandboxId;
 
-        // initializework区
+        // initializeworkregion
         $this->initializeWorkspace($taskStatus, $actualSandboxId, $userId, $organizationCode);
 
         return $actualSandboxId;
     }
 
     /**
-     * initializework区.
-     * 复use AgentDomainService::initializeAgent method,ensureinitializeconfigurationone致.
+     * initializeworkregion.
+     * 复use AgentDomainService::initializeAgent method,ensureinitializeconfigurationoneto.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $actualSandboxId actualsandboxID
@@ -677,21 +677,21 @@ readonly class AsrSandboxService
         // create DataIsolation
         $dataIsolation = DataIsolation::simpleMake($organizationCode, $userId);
 
-        // get topic 实body(useatget workspaceId etcinfo)
+        // get topic actualbody(useatget workspaceId etcinfo)
         $topicEntity = $this->topicDomainService->getTopicById((int) $taskStatus->topicId);
         if (! $topicEntity) {
             ExceptionBuilder::throw(
                 AsrErrorCode::SandboxTaskCreationFailed,
                 '',
-                ['message' => 'topicnot存in']
+                ['message' => 'topicnotexistsin']
             );
         }
 
-        // getproject实body(useatgetprojectorganizationencoding)
+        // getprojectactualbody(useatgetprojectorganizationencoding)
         $projectEntity = $this->projectDomainService->getProject((int) $taskStatus->projectId, $userId);
         $projectOrganizationCode = $projectEntity->getUserOrganizationCode();
 
-        // certain agentUserId:use topic create者ID,ifnothavethenuse topic userID(reference AgentAppService)
+        // certain agentUserId:use topic createpersonID,ifnothavethenuse topic userID(reference AgentAppService)
         $agentUserId = $topicEntity->getCreatedUid() ?: $topicEntity->getUserId();
 
         // build TaskContext(ASR scenariomiddle chatConversationId,chatTopicId usenullstring)
@@ -700,7 +700,7 @@ readonly class AsrSandboxService
             dataIsolation: $dataIsolation,
             chatConversationId: '', // ASR scenarionotneedchatconversationID
             chatTopicId: '', // ASR scenarionotneedchatthemeID
-            agentUserId: $agentUserId, // use topic create者IDoruserID
+            agentUserId: $agentUserId, // use topic createpersonIDoruserID
             sandboxId: $actualSandboxId,
             taskId: (string) $taskEntity->getId(),
             instruction: ChatInstruction::Normal,
@@ -709,32 +709,32 @@ readonly class AsrSandboxService
             isFirstTask: false, // ASR scenariousuallynotis首timetask
         );
 
-        // 复use initializeAgent method(willfrom动build message_subscription_config and delightful_service_host)
+        // 复use initializeAgent method(willfromautobuild message_subscription_config and delightful_service_host)
         // pass inprojectorganizationencoding,useatgetcorrect STS Token
         // ASR scenariosetting skip_init_messages = true,letsandboxnotsendchatmessagepasscome
         $initMetadata = (new InitializationMetadataDTO(skipInitMessages: true));
         $this->agentDomainService->initializeAgent($dataIsolation, $taskContext, null, $projectOrganizationCode, $initMetadata);
 
-        $this->logger->info('sandboxinitializemessagealreadysend,etc待work区initializecomplete', [
+        $this->logger->info('sandboxinitializemessagealreadysend,etc待workregioninitializecomplete', [
             'task_key' => $taskStatus->taskKey,
             'actual_sandbox_id' => $actualSandboxId,
             'task_id' => $taskEntity->getId(),
         ]);
 
-        // etc待work区initializecomplete(includefilesync)
+        // etc待workregioninitializecomplete(includefilesync)
         $this->agentDomainService->waitForWorkspaceReady(
             $actualSandboxId,
             AsrConfig::WORKSPACE_INIT_TIMEOUT,
             AsrConfig::POLLING_INTERVAL
         );
 
-        $this->logger->info('sandboxwork区alreadyinitializecomplete,filealreadysync,canstartuse', [
+        $this->logger->info('sandboxworkregionalreadyinitializecomplete,filealreadysync,canstartuse', [
             'task_key' => $taskStatus->taskKey,
             'actual_sandbox_id' => $actualSandboxId,
             'task_id' => $taskEntity->getId(),
         ]);
 
-        // updatetopicstatusforalreadycomplete(match DDD minutelayer,pass Domain Service 操as)
+        // updatetopicstatusforalreadycomplete(match DDD minutelayer,pass Domain Service operationas)
         $this->topicDomainService->updateTopicStatus(
             (int) $taskStatus->topicId,
             $taskEntity->getId(),
@@ -752,7 +752,7 @@ readonly class AsrSandboxService
      * buildnotefileconfigurationobject.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
-     * @param null|string $targetDirectory goaldirectory(optional,defaultand源directorysame)
+     * @param null|string $targetDirectory goaldirectory(optional,defaultandsourcedirectorysame)
      * @param null|string $intelligentTitle 智cantitle(optional,useatrename)
      */
     private function buildNoteFileConfig(
@@ -766,7 +766,7 @@ readonly class AsrSandboxService
 
         $workspaceRelativePath = AsrAssembler::extractWorkspaceRelativePath($taskStatus->presetNoteFilePath);
 
-        // ifnotfinger定goaldirectory,use源path(notrename)
+        // ifnotfingersetgoaldirectory,usesourcepath(notrename)
         if ($targetDirectory === null || $intelligentTitle === null) {
             return new AsrNoteFileConfig(
                 sourcePath: $workspaceRelativePath,
@@ -774,7 +774,7 @@ readonly class AsrSandboxService
             );
         }
 
-        // needrename:use智cantitleandinternationalizationnoteback缀buildgoalpath
+        // needrename:use智cantitleandinternationalizationnotebacksuffixbuildgoalpath
         $fileExtension = pathinfo($workspaceRelativePath, PATHINFO_EXTENSION);
         $noteSuffix = trans('asr.file_names.note_suffix'); // according tolanguagegetinternationalization"note"/"Note"
         $noteFilename = sprintf('%s-%s.%s', $intelligentTitle, $noteSuffix, $fileExtension);
@@ -818,30 +818,30 @@ readonly class AsrSandboxService
         string $userId,
         string $organizationCode
     ): TaskEntity {
-        // check topicId whether存in
+        // check topicId whetherexistsin
         if (empty($taskStatus->topicId)) {
-            $this->logger->error('ASR taskmissing topicId,no法getorcreate task', [
+            $this->logger->error('ASR taskmissing topicId,nomethodgetorcreate task', [
                 'task_key' => $taskStatus->taskKey,
                 'project_id' => $taskStatus->projectId,
             ]);
             ExceptionBuilder::throw(
                 AsrErrorCode::SandboxTaskCreationFailed,
                 '',
-                ['message' => 'Topic ID fornull,no法createsandboxtask']
+                ['message' => 'Topic ID fornull,nomethodcreatesandboxtask']
             );
         }
 
-        // get topic 实body
+        // get topic actualbody
         $topicEntity = $this->topicDomainService->getTopicById((int) $taskStatus->topicId);
         if (! $topicEntity) {
-            $this->logger->error('ASR taskassociate topic not存in', [
+            $this->logger->error('ASR taskassociate topic notexistsin', [
                 'task_key' => $taskStatus->taskKey,
                 'topic_id' => $taskStatus->topicId,
             ]);
             ExceptionBuilder::throw(
                 AsrErrorCode::SandboxTaskCreationFailed,
                 '',
-                ['message' => 'topicnot存in']
+                ['message' => 'topicnotexistsin']
             );
         }
 
@@ -873,7 +873,7 @@ readonly class AsrSandboxService
             'workspace_id' => $topicEntity->getWorkspaceId(),
             'project_id' => $topicEntity->getProjectId(),
             'topic_id' => $topicEntity->getId(),
-            'task_id' => '', // databasewillfrom动generate
+            'task_id' => '', // databasewillfromautogenerate
             'task_mode' => $topicEntity->getTaskMode() ?: 'general',
             'sandbox_id' => $topicEntity->getSandboxId() ?: '',
             'prompt' => 'ASR Recording Task', // ASR taskidentifier

@@ -81,7 +81,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
         $message = '';
         $attachments = [];
-        // 目frontonlyparse text,image,rich text
+        // itemfrontonlyparse text,image,rich text
         switch ($params['msgtype']) {
             case 'text':
                 $message = $params['text']['content'] ?? '';
@@ -117,7 +117,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
     public function sendMessage(ThirdPlatformChatMessage $thirdPlatformChatMessage, MessageInterface $message): void
     {
-        // 目frontonlysendtextoutgo
+        // itemfrontonlysendtextoutgo
         if (! $message instanceof TextMessage) {
             return;
         }
@@ -134,7 +134,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendOneOnOneChatMessages($param);
             } catch (Throwable $throwable) {
-                // DingTalk downloadimagetimemorelong,超pass3000ms,网closedirectlyreturntimeouterror.sendmessagethiso clockskip
+                // DingTalk downloadimagetimemorelong,exceedspass3000ms,网closedirectlyreturntimeouterror.sendmessagethiso clockskip
                 simple_log('SendOneOnOneChatMessagesError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -152,7 +152,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendGroupMessage($param);
             } catch (Throwable $throwable) {
-                // DingTalk downloadimagetimemorelong,超pass3000ms,网closedirectlyreturntimeouterror.sendmessagethiso clockskip
+                // DingTalk downloadimagetimemorelong,exceedspass3000ms,网closedirectlyreturntimeouterror.sendmessagethiso clockskip
                 simple_log('SendGroupMessageError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -161,9 +161,9 @@ class DingRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * passhand机numbergetthethree方userid.
-     * @param string $mobile hand机number码
-     * @return string thethree方userid,returnformat
+     * passhandmachinenumbergetthethreesideuserid.
+     * @param string $mobile handmachinenumbercode
+     * @return string thethreesideuserid,returnformat
      */
     public function getThirdPlatformUserIdByMobiles(string $mobile): string
     {
@@ -185,7 +185,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * createscenario群.
+     * createscenariogroup.
      */
     public function createSceneGroup(ThirdPlatformCreateSceneGroup $params): string
     {
@@ -265,7 +265,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             realName: $userInfo->getName(),
         );
 
-        // getuser所havedepartmentuplevel
+        // getuser havedepartmentuplevel
         $param = new GetAllParentDepartmentByUserParameter($this->openDevFactory->accessTokenEndpoint->get());
         $param->setUserId($thirdPlatformChatMessage->getUserId());
         $list = $this->openDevFactory->departmentEndpoint->getAllParentDepartmentByUser($param);

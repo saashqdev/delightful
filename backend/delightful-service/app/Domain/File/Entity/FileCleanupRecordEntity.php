@@ -137,7 +137,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * getcome源type.
+     * getcomesourcetype.
      */
     public function getSourceType(): string
     {
@@ -145,7 +145,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * setcome源type.
+     * setcomesourcetype.
      */
     public function setSourceType(string $sourceType): self
     {
@@ -154,7 +154,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * getcome源ID.
+     * getcomesourceID.
      */
     public function getSourceId(): ?string
     {
@@ -162,7 +162,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * setcome源ID.
+     * setcomesourceID.
      */
     public function setSourceId(?string $sourceId): self
     {

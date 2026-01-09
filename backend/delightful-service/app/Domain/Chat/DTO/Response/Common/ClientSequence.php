@@ -12,28 +12,28 @@ use App\Domain\Chat\Entity\AbstractEntity;
 use App\Domain\Chat\Entity\ValueObject\MessageType\MessageOptionsEnum;
 
 /**
- * customerclient receivetomessage序columnstructure.
+ * customerclient receivetomessagesequencecolumnstructure.
  */
 class ClientSequence extends AbstractEntity
 {
     use EditMessageOptionsTrait;
 
-    // 序columnnumberbelong to账numberid
+    // sequencecolumnnumberbelong toaccountnumberid
     protected string $delightfulId;
 
-    // 序columnnumber,one定notduplicate,one定growth,butisnotguaranteecontinuous.
+    // sequencecolumnnumber,onesetnotduplicate,onesetgrowth,butisnotguaranteecontinuous.
     protected string $seqId;
 
-    // usermessageid,userdown唯one.
+    // usermessageid,userdownuniqueone.
     protected string $messageId;
 
-    // 本itemmessagefingertodelightful_message_id. useatimplementalready读return执scenario.存inquoteclose系o clock,send_msg_idfieldnotagainreturn,因forsend方messageidnothavealter.
+    // thisitemmessagefingertodelightful_message_id. useatimplementalreadyreadreturn执scenario.existsinquoteclose系o clock,send_msg_idfieldnotagainreturn,因forsendsidemessageidnothavealter.
     protected ?string $referMessageId;
 
-    // send方messageid
+    // sendsidemessageid
     protected ?string $senderMessageId;
 
-    // messagebelong tosessionwindow. customer端canaccording tothisvaluecertainmessagewhetherwantreminderetc.if本groundnothavehair现thissessionid,activetoservice端querysessionwindowdetail
+    // messagebelong tosessionwindow. customerclientcanaccording tothisvaluecertainmessagewhetherwantreminderetc.ifthisgroundnothavehairshowthissessionid,activetoserviceclientquerysessionwindowdetail
     protected ?string $conversationId;
 
     protected string $organizationCode;

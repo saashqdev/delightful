@@ -54,14 +54,14 @@ class UserDepartmentDetailDTO extends AbstractDTO
     protected string $userManual;
 
     /**
-     * userin多departmento clockdepartmentinformation,notcontaincompletepath.
+     * userinmultipledepartmento clockdepartmentinformation,notcontaincompletepath.
      * @var array<DepartmentPathNodeDTO>
      */
     protected array $pathNodes;
 
     /**
      * @var array
-     *            userin多departmento clockdepartmentinformation,containcompletepath
+     *            userinmultipledepartmento clockdepartmentinformation,containcompletepath
      * @var null|array<string,DepartmentPathNodeDTO[]>
      */
     protected ?array $fullPathNodes;
@@ -326,7 +326,7 @@ class UserDepartmentDetailDTO extends AbstractDTO
     }
 
     /**
-     * userin多departmento clockdepartmentinformation,containcompletepath.
+     * userinmultipledepartmento clockdepartmentinformation,containcompletepath.
      * @param array<string,array>|array<string,DepartmentPathNodeDTO[]> $fullPathNodes
      */
     public function setFullPathNodes(array $fullPathNodes): UserDepartmentDetailDTO

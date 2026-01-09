@@ -33,9 +33,9 @@ class GetFragmentListRequestDTO extends AbstractRequestDTO
     {
         return [
             'knowledge_base_code.required' => 'knowledge baseencodingcannotfornull',
-            'knowledge_base_code.max' => 'knowledge baseencodinglengthcannot超pass255character',
+            'knowledge_base_code.max' => 'knowledge baseencodinglengthcannotexceedspass255character',
             'document_code.required' => 'documentencodingcannotfornull',
-            'document_code.max' => 'documentencodinglengthcannot超pass255character',
+            'document_code.max' => 'documentencodinglengthcannotexceedspass255character',
         ];
     }
 

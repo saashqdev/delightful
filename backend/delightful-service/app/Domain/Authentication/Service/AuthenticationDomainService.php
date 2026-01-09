@@ -28,7 +28,7 @@ readonly class AuthenticationDomainService
     }
 
     /**
-     * verify账numbervoucher
+     * verifyaccountnumbervoucher
      */
     public function verifyAccountCredentials(string $email, string $password): ?AccountEntity
     {
@@ -55,9 +55,9 @@ readonly class AuthenticationDomainService
     }
 
     /**
-     * generate账numbertoken.
+     * generateaccountnumbertoken.
      *
-     * byatMagicsupportother账numberbody系access,thereforefront端processis,先gosome账numberbody系login,againbyMagic做loginvalidation.
+     * byatMagicsupportotheraccountnumberbody系access,thereforefrontclientprocessis,firstgosomeaccountnumberbody系login,againbyMagicmakeloginvalidation.
      * therefore,even ifuseMagicfromown accountnumberbody系,alsoneedcomplythisprocess.
      */
     public function generateAccountToken(string $delightfulId): string

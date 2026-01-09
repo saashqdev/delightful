@@ -110,7 +110,7 @@ class UserSearchNodeParamsConfig extends AbstractSearchNodeParamsConfig
                         "type": "string",
                         "key": "phone",
                         "sort": 4,
-                        "title": "hand机number码",
+                        "title": "handmachinenumbercode",
                         "description": "",
                         "items": null,
                         "properties": null,

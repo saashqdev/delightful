@@ -46,7 +46,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
      *
      * @param VertexResult $vertexResult sectionpointexecuteresult
      * @param ExecutionData $executionData executedata
-     * @param array $frontResults front置sectionpointresult
+     * @param array $frontResults frontsetsectionpointresult
      */
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void
     {
@@ -58,12 +58,12 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         $dataIsolation = ModelGatewayDataIsolation::createByOrganizationCodeWithoutSubscription($executionData->getDataIsolation()->getCurrentOrganizationCode(), $executionData->getDataIsolation()->getCurrentUserId());
         $model = $this->modelGatewayMapper->getChatModelProxy($dataIsolation, $modelName);
 
-        // defaultvisualmodelconfigurationthenisfrom己
+        // defaultvisualmodelconfigurationthenisfromself
         if ($paramsConfig->getModelConfig()->getVisionModel() === '') {
             $paramsConfig->getModelConfig()->setVisionModel($modelName);
         }
 
-        // ifactiveclosevisualcan力.or者 currentmodelsupport,butischoose别model,alsois相whenatwantclosecurrentmodelvisualcan力
+        // ifactiveclosevisualcan力.orperson currentmodelsupport,butischooseothermodel,alsois相whenatwantclosecurrentmodelvisualcan力
         if (! $paramsConfig->getModelConfig()->isVision() || ($model->getModelOptions()->isMultiModal() && $paramsConfig->getModelConfig()->getVisionModel() !== $modelName)) {
             $model->getModelOptions()->setMultiModal(false);
         }
@@ -87,11 +87,11 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         // loadmemory
         $memoryManager = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), $paramsConfig->getMessages(), $ignoreMessageIds);
 
-        // onlyfrom动memoryneedprocessbydownmulti-modalstatemessage
+        // onlyfromautomemoryneedprocessbydownmulti-modalstatemessage
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId();
             $contentMessage = null;
-            // tryinmemorymiddle找to content message
+            // tryinmemorymiddlefindto content message
             foreach ($memoryManager->getMessages() as $message) {
                 if ($message->getIdentifier() === $contentMessageId) {
                     $contentMessage = $message;
@@ -119,7 +119,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                         $memoryManager->addMessage($contentMessage);
                     }
                 } else {
-                    // createonenew,inback续use
+                    // createonenew,inback続use
                     $currentMessage = new UserMessage();
                     $currentMessage->setContent($userPrompt);
                     $memoryManager->addMessage($currentMessage);
@@ -132,7 +132,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 $currentModel = $model->getModelName();
                 $visionModel = $paramsConfig->getModelConfig()->getVisionModel();
 
-                // only currentmodelandvisualmodelnotone致,or者 currentmodelnot supportedmulti-modalstate o clock.invisualmodeltoolmiddle,currentmodelequalvisualmodelandand具havevisualcan力,thennotwillproduce死loop
+                // only currentmodelandvisualmodelnotoneto,orperson currentmodelnot supportedmulti-modalstate o clock.invisualmodeltoolmiddle,currentmodelequalvisualmodelandandwithhavevisualcan力,thennotwillproduce死loop
                 if ($currentModel !== $visionModel || ! $model->getModelOptions()->isMultiModal()) {
                     $multiModalLoglog = MultiModalBuilder::vision(
                         executionData: $executionData,
@@ -192,7 +192,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             }
         } else {
             if ($userPrompt !== '') {
-                // createonenew,inback续use
+                // createonenew,inback続use
                 $currentMessage = new UserMessage();
                 $currentMessage->setContent($userPrompt);
                 $memoryManager->addMessage($currentMessage);
@@ -312,7 +312,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
 
     private function isIntrovertedReplyMessageNode(VertexResult $vertexResult, ExecutionData $executionData): bool
     {
-        // onlyone子sectionpoint
+        // onlyonechildsectionpoint
         if (count($vertexResult->getChildrenIds()) !== 1) {
             return false;
         }
@@ -342,7 +342,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             return false;
         }
 
-        // maybealsohaveotherstringsplice,暂o clockalsonotinside敛
+        // maybealsohaveotherstringsplice,暫o clockalsonotinside敛
         $items = match ($contentValue->getType()) {
             ValueType::Const => $contentValue->getConstValue()?->getItems() ?? [],
             ValueType::Expression => $contentValue->getExpressionValue()?->getItems() ?? [],

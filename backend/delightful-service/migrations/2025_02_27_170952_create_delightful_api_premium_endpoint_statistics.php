@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // table存inthennotexecute
+        // tableexistsinthennotexecute
         if (Schema::hasTable('delightful_api_premium_endpoint_statistics')) {
             return;
         }
@@ -27,14 +27,14 @@ return new class extends Migration {
             $table->integer('request_count')->nullable()->default(null)->comment('requestcount');
             $table->integer('request_success_count')->nullable()->default(null)->comment('requestsuccesscount');
             $table->integer('request_error_count')->nullable()->default(null)->comment('requestfailcount');
-            $table->double('request_success_rate')->nullable()->default(null)->comment('requestsuccessrate,mostbigvaluefor 100,not带%');
-            $table->integer('request_average_time')->nullable()->default(null)->comment('requestaveragetime,unit毫second');
-            $table->integer('request_max_time')->nullable()->default(null)->comment('requestconsumemostbigtime,unit毫second');
-            $table->integer('request_min_time')->nullable()->default(null)->comment('requestconsumemostsmalltime,unit毫second');
+            $table->double('request_success_rate')->nullable()->default(null)->comment('requestsuccessrate,mostbigvaluefor 100,notwith%');
+            $table->integer('request_average_time')->nullable()->default(null)->comment('requestaveragetime,unitmillisecondssecond');
+            $table->integer('request_max_time')->nullable()->default(null)->comment('requestconsumemostbigtime,unitmillisecondssecond');
+            $table->integer('request_min_time')->nullable()->default(null)->comment('requestconsumemostsmalltime,unitmillisecondssecond');
             // statisticstimesegment
             $table->bigInteger('statistics_time')->nullable()->default(null)->comment('statisticstimesegment');
-            // statisticslevel别:0-secondlevel,1-minute钟level,2-hourlevel,3-daylevel
-            $table->tinyInteger('statistics_level')->nullable()->default(null)->comment('statisticslevel别:0-secondlevel,1-minute钟level,2-hourlevel,3-daylevel');
+            // statisticslevelother:0-secondlevel,1-minutesecondslevel,2-hourlevel,3-daylevel
+            $table->tinyInteger('statistics_level')->nullable()->default(null)->comment('statisticslevelother:0-secondlevel,1-minutesecondslevel,2-hourlevel,3-daylevel');
             $table->datetimes();
             $table->unique(['endpoint_id', 'statistics_time', 'statistics_level'], 'unique_endpoint_id_statistics_level_time');
             $table->comment('accesspointrequeststatisticstable');

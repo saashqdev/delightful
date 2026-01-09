@@ -41,7 +41,7 @@ class ModeDomainService
     }
 
     /**
-     * according toIDget模typeaggregateroot(contain模typedetail,group,modelclose系).
+     * according toIDgetmodetypeaggregateroot(containmodetypedetail,group,modelclose系).
      */
     public function getModeDetailById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeAggregate
     {
@@ -50,11 +50,11 @@ class ModeDomainService
             return null;
         }
 
-        // ifisfollow模type,getbefollow模typegroupconfiguration
+        // ifisfollowmodetype,getbefollowmodetypegroupconfiguration
         if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
             $followModeAggregate = $this->getModeDetailById($dataIsolation, $mode->getFollowModeId());
             if ($followModeAggregate) {
-                // usecurrent模typebasicinfo + befollow模typegroupconfiguration
+                // usecurrentmodetypebasicinfo + befollowmodetypegroupconfiguration
                 return new ModeAggregate($mode, $followModeAggregate->getGroupAggregates());
             }
         }
@@ -73,7 +73,7 @@ class ModeDomainService
     }
 
     /**
-     * according toIDget模type实body(onlyget模typebasicinfo).
+     * according toIDgetmodetypeactualbody(onlygetmodetypebasicinfo).
      */
     public function getModeById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeEntity
     {
@@ -81,7 +81,7 @@ class ModeDomainService
     }
 
     /**
-     * according toidentifierget模type.
+     * according toidentifiergetmodetype.
      */
     public function getModeDetailByIdentifier(ModeDataIsolation $dataIsolation, string $identifier): ?ModeAggregate
     {
@@ -90,11 +90,11 @@ class ModeDomainService
             return null;
         }
 
-        // ifisfollow模type,getbefollow模typegroupconfiguration
+        // ifisfollowmodetype,getbefollowmodetypegroupconfiguration
         if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
             $followModeAggregate = $this->getModeDetailById($dataIsolation, $mode->getFollowModeId());
             if ($followModeAggregate) {
-                // usecurrent模typebasicinfo + befollow模typegroupconfiguration
+                // usecurrentmodetypebasicinfo + befollowmodetypegroupconfiguration
                 return new ModeAggregate($mode, $followModeAggregate->getGroupAggregates());
             }
         }
@@ -104,7 +104,7 @@ class ModeDomainService
     }
 
     /**
-     * getdefault模type.
+     * getdefaultmodetype.
      */
     public function getDefaultMode(ModeDataIsolation $dataIsolation): ?ModeAggregate
     {
@@ -117,7 +117,7 @@ class ModeDomainService
     }
 
     /**
-     * create模type.
+     * createmodetype.
      */
     public function createMode(ModeDataIsolation $dataIsolation, ModeEntity $modeEntity): ModeEntity
     {
@@ -126,11 +126,11 @@ class ModeDomainService
     }
 
     /**
-     * update模type.
+     * updatemodetype.
      */
     public function updateMode(ModeDataIsolation $dataIsolation, ModeEntity $modeEntity): ModeEntity
     {
-        // ifisfollow模type,validatefollowgoal模type存in todo xhy usebusinessexception
+        // ifisfollowmodetype,validatefollowgoalmodetypeexistsin todo xhy usebusinessexception
         if ($modeEntity->isInheritedConfiguration() && $modeEntity->hasFollowMode()) {
             $followMode = $this->modeRepository->findById($dataIsolation, $modeEntity->getFollowModeId());
             if (! $followMode) {
@@ -147,7 +147,7 @@ class ModeDomainService
     }
 
     /**
-     * update模typestatus
+     * updatemodetypestatus
      */
     public function updateModeStatus(ModeDataIsolation $dataIsolation, string $id, bool $status): bool
     {
@@ -157,7 +157,7 @@ class ModeDomainService
         }
         $mode = $modeAggregate->getMode();
 
-        // default模typenotcanbedisable
+        // defaultmodetypenotcanbedisable
         if ($mode->isDefaultMode() && ! $status) {
             ExceptionBuilder::throw(ModeErrorCode::MODE_IN_USE_CANNOT_DELETE);
         }
@@ -166,7 +166,7 @@ class ModeDomainService
     }
 
     /**
-     * save模typeconfiguration.
+     * savemodetypeconfiguration.
      */
     public function saveModeConfig(ModeDataIsolation $dataIsolation, ModeAggregate $modeAggregate): ModeAggregate
     {
@@ -180,18 +180,18 @@ class ModeDomainService
 
         $this->updateMode($dataIsolation, $modeEntity);
 
-        // ifisinheritconfiguration模type
+        // ifisinheritconfigurationmodetype
         if ($mode->getDistributionType() === DistributionTypeEnum::INHERITED) {
             return $this->getModeDetailById($dataIsolation, $id);
         }
 
-        // directlydeletethe模type所have现haveconfiguration
+        // directlydeletethemodetype haveshowhaveconfiguration
         $this->relationRepository->deleteByModeId($dataIsolation, $id);
 
-        // deletethe模type所have现havegroup
+        // deletethemodetype haveshowhavegroup
         $this->groupRepository->deleteByModeId($dataIsolation, $id);
 
-        // save模typebasicinfo
+        // savemodetypebasicinfo
         $this->modeRepository->save($dataIsolation, $mode);
 
         // batchquantitycreategroupcopy
@@ -200,7 +200,7 @@ class ModeDomainService
         foreach ($modeAggregate->getGroupAggregates() as $index => $groupAggregate) {
             $group = $groupAggregate->getGroup();
 
-            // createnewgroup实body(提frontgenerateID)
+            // createnewgroupactualbody(submitfrontgenerateID)
             $newGroup = new ModeGroupEntity();
             $newGroup->setId(IdGenerator::getSnowId());
             $newGroup->setModeId((int) $id);
@@ -223,7 +223,7 @@ class ModeDomainService
             $this->groupRepository->batchSave($dataIsolation, $newGroupEntities);
         }
 
-        // batchquantitybuildgroup实bodyandclose系實body
+        // batchquantitybuildgroupactualbodyandclose系實body
         $relationEntities = [];
 
         foreach ($modeAggregate->getGroupAggregates() as $groupAggregate) {
@@ -248,7 +248,7 @@ class ModeDomainService
     }
 
     /**
-     * batchquantitybuild模typeaggregateroot(optimizeversion,avoidN+1query).
+     * batchquantitybuildmodetypeaggregateroot(optimizeversion,avoidN+1query).
      * @param ModeEntity[] $modes
      * @return ModeAggregate[]
      */
@@ -258,22 +258,22 @@ class ModeDomainService
             return [];
         }
 
-        // theone步:establishfollowclose系mapping followMap[follow者ID] = befollow者ID
+        // theone步:establishfollowclose系mapping followMap[followpersonID] = befollowpersonID
         $followMap = [];
         $modeIds = [];
 
         foreach ($modes as $mode) {
             $modeIds[] = $mode->getId();
 
-            // ifisfollow模type,establishmappingclose系
+            // ifisfollowmodetype,establishmappingclose系
             if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
                 $followMap[$mode->getId()] = $mode->getFollowModeId();
-                $modeIds[] = $mode->getFollowModeId(); // alsowant收collectionbefollow模typeID
+                $modeIds[] = $mode->getFollowModeId(); // alsowantreceivecollectionbefollowmodetypeID
             }
         }
         $modeIds = array_unique($modeIds);
 
-        // thetwo步:batchquantityget所havegroupandclose系
+        // thetwo步:batchquantityget havegroupandclose系
         $allGroups = $this->groupRepository->findByModeIds($dataIsolation, $modeIds);
         $allRelations = $this->relationRepository->findByModeIds($dataIsolation, $modeIds);
 
@@ -302,7 +302,7 @@ class ModeDomainService
             // buildgroupaggregaterootarray
             $groupAggregates = [];
             foreach ($groups as $group) {
-                // getthegroupdown所haveassociateclose系
+                // getthegroupdown haveassociateclose系
                 $groupRelations = array_filter($relations, fn ($relation) => $relation->getGroupId() === $group->getId());
                 usort($groupRelations, fn ($a, $b) => $a->getSort() <=> $b->getSort());
 
@@ -316,7 +316,7 @@ class ModeDomainService
     }
 
     /**
-     * build模typeaggregateroot.
+     * buildmodetypeaggregateroot.
      */
     private function buildModeAggregate(ModeDataIsolation $dataIsolation, ModeEntity $mode): ModeAggregate
     {
@@ -332,7 +332,7 @@ class ModeDomainService
                 ExceptionBuilder::throw(ModeErrorCode::VALIDATE_FAILED);
             }
 
-            // getthegroupdown所haveassociateclose系
+            // getthegroupdown haveassociateclose系
             $groupRelations = array_filter($relations, fn ($relation) => $relation->getGroupId() === $group->getId());
             usort($groupRelations, fn ($a, $b) => $a->getSort() <=> $b->getSort());
 
@@ -343,7 +343,7 @@ class ModeDomainService
     }
 
     /**
-     * checkwhether存inloopfollow.
+     * checkwhetherexistsinloopfollow.
      */
     private function hasCircularFollow(ModeDataIsolation $dataIsolation, int|string $modeId, int|string $followModeId, array $visited = []): bool
     {
@@ -367,7 +367,7 @@ class ModeDomainService
 
     private function valid(ModeDataIsolation $dataIsolation, ModeEntity $modeEntity)
     {
-        // validateidentifier唯oneproperty
+        // validateidentifieruniqueoneproperty
         if (! $this->modeRepository->isIdentifierUnique($dataIsolation, $modeEntity->getIdentifier())) {
             ExceptionBuilder::throw(ModeErrorCode::MODE_IDENTIFIER_ALREADY_EXISTS);
         }
@@ -375,8 +375,8 @@ class ModeDomainService
 
     /**
      * according tofollowclose系mappingrecursionfindfinalsource modetypeID.
-     * @param int $modeId current模typeID
-     * @param array $followMap followclose系mapping [follow者ID => befollow者ID]
+     * @param int $modeId currentmodetypeID
+     * @param array $followMap followclose系mapping [followpersonID => befollowpersonID]
      * @param array $visited preventloopfollow
      * @return int finalsource modetypeID
      */
@@ -387,14 +387,14 @@ class ModeDomainService
             return $modeId;
         }
 
-        // ifthe模typenothavefollowclose系,instructionitthenisfinal源
+        // ifthemodetypenothavefollowclose系,instructionitthenisfinalsource
         if (! isset($followMap[$modeId])) {
             return $modeId;
         }
 
         $visited[] = $modeId;
 
-        // recursionfindfollowgoalfinal源
+        // recursionfindfollowgoalfinalsource
         return $this->findUltimateSourceId($followMap[$modeId], $followMap, $visited);
     }
 }

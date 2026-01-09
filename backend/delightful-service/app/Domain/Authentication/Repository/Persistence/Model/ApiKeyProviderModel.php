@@ -13,7 +13,7 @@ use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
- * whenfronttabledelay firstuse之fronttable,thenmappingto通use实bodymiddle,allsurfaceuplineback,needreturncomemore改field名.
+ * whenfronttabledelay firstuseoffronttable,thenmappingto通useactualbodymiddle,allsurfaceuplineback,needreturncomemorechangefieldname.
  * @property int $id
  * @property string $organization_code
  * @property string $code

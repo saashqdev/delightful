@@ -19,12 +19,12 @@ return new class extends Migration {
         }
         Schema::create('delightful_comments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->tinyInteger('type')->comment('type,for examplecomment,动state');
+            $table->tinyInteger('type')->comment('type,for examplecomment,autostate');
             $table->json('attachments')->comment('attachment');
-            $table->string('description')->comment('tocomment简shortdescription,mainisgive动stateuse,for examplecreatetodo,uploadimageetcsystem动state');
-            $table->unsignedBigInteger('resource_id')->index()->comment('commentresourceid,for example云documentid,sheettableid');
-            $table->tinyInteger('resource_type')->comment('commentresourcetype,for example云document,sheettable');
-            $table->unsignedBigInteger('parent_id')->index()->comment('父levelcommentprimary keyid');
+            $table->string('description')->comment('tocommentsimpleshortdescription,mainisgiveautostateuse,for examplecreatetodo,uploadimageetcsystemautostate');
+            $table->unsignedBigInteger('resource_id')->index()->comment('commentresourceid,for exampleclouddocumentid,sheettableid');
+            $table->tinyInteger('resource_type')->comment('commentresourcetype,for exampleclouddocument,sheettable');
+            $table->unsignedBigInteger('parent_id')->index()->comment('parentlevelcommentprimary keyid');
             $table->text('message')->comment('commentcontent');
             $table->string('creator')->index()->comment('createperson');
             $table->string('organization_code')->index()->comment('organizationcode');

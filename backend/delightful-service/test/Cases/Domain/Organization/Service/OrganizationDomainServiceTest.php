@@ -105,7 +105,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
         $savedOrganization1 = $this->organizationDomainService->create($organization1);
         $this->testOrganizationIds[] = $savedOrganization1->getId();
 
-        // trycreate具havesamenameorganization
+        // trycreatewithhavesamenameorganization
         $organization2 = $this->createTestOrganizationEntity(1);
         $organization2->setName('Test Organization 0'); // usesamename
 
@@ -345,7 +345,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
                 );
                 $this->assertNotNull($admin);
                 $this->assertTrue($admin->isOrganizationCreator());
-                $this->assertEquals('organizationcreate者fromauto getadministratorpermission', $admin->getRemarks());
+                $this->assertEquals('organizationcreatepersonfromauto getadministratorpermission', $admin->getRemarks());
             }
 
             // At minimum verify organization creation succeeded

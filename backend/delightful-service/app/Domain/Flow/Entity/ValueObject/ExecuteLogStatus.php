@@ -9,10 +9,10 @@ namespace App\Domain\Flow\Entity\ValueObject;
 
 enum ExecuteLogStatus: int
 {
-    // prepare运line
+    // preparerunline
     case Pending = 1;
 
-    // 运linemiddle
+    // runlinemiddle
     case Running = 2;
 
     // complete

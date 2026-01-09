@@ -22,7 +22,7 @@ class RoleApiTest extends AbstractHttpTest
     public const string SUB_ADMIN_API = '/api/v1/admin/roles/sub-admins/';
 
     /**
-     * test子administratorlistquery.
+     * testchildadministratorlistquery.
      */
     public function testGetSubAdminListAndById(): void
     {
@@ -35,7 +35,7 @@ class RoleApiTest extends AbstractHttpTest
 
     public function testCreateSubAdminSuccess(): void
     {
-        // === testcreate子administrator ===
+        // === testcreatechildadministrator ===
         $delightfulPermission = new DelightfulPermission();
         $testPermissions = [
             $delightfulPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_MODEL->value, DelightfulOperationEnum::EDIT->value),
@@ -43,7 +43,7 @@ class RoleApiTest extends AbstractHttpTest
             $delightfulPermission->buildPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN->value, DelightfulOperationEnum::EDIT->value),
         ];
         $requestData = [
-            'name' => 'test子administratorrole',
+            'name' => 'testchildadministratorrole',
             'status' => 1,
             'permissions' => $testPermissions,
             'user_ids' => ['usi_343adbdbe8a026226311c67bdea152ea', 'usi_71f7b56bec00b0cd9f9daba18caa7a4c'],
@@ -66,9 +66,9 @@ class RoleApiTest extends AbstractHttpTest
             $this->assertEquals($requestData['name'], $response['data']['name']);
             $this->assertEquals($requestData['status'], $response['data']['status']);
         }
-        // === testcreate子administratorEND ===
+        // === testcreatechildadministratorEND ===
 
-        // === testupdate子administrator ===
+        // === testupdatechildadministrator ===
         $id = $response['data']['id'];
 
         $testPermissions = [
@@ -77,7 +77,7 @@ class RoleApiTest extends AbstractHttpTest
         ];
 
         $requestData = [
-            'name' => 'update子administratorrole' . rand(100, 999),
+            'name' => 'updatechildadministratorrole' . rand(100, 999),
             'status' => 0,
             'permissions' => $testPermissions,
             'user_ids' => ['usi_343adbdbe8a026226311c67bdea152ea'],
@@ -99,9 +99,9 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertArrayHasKey('name', $response['data']);
         $this->assertEquals($requestData['name'], $response['data']['name']);
         $this->assertEquals($requestData['status'], $response['data']['status']);
-        // === testupdate子administratorEND ===
+        // === testupdatechildadministratorEND ===
 
-        // === testquery子administrator ===
+        // === testquerychildadministrator ===
         $detailResp = $this->get(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
         // assertdetailinterfaceresponsestructureanddata
         $this->assertIsArray($detailResp);
@@ -120,7 +120,7 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertArrayValueTypesEquals(
             $expectedDetailStructure,
             $detailResp['data'] ?? [],
-            '子administratordetailinterfaceresponsestructurenotconformexpected',
+            'childadministratordetailinterfaceresponsestructurenotconformexpected',
             false,
             false
         );
@@ -130,19 +130,19 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertEquals($requestData['name'], $detailResp['data']['name'] ?? null);
         $this->assertEquals($requestData['status'], $detailResp['data']['status'] ?? null);
 
-        // === testquery子administratorEND ===
+        // === testquerychildadministratorEND ===
 
-        // === testdelete子administrator ===
+        // === testdeletechildadministrator ===
         // calldeleteinterface
         $deleteResp = $this->delete(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
         $this->assertIsArray($deleteResp);
         $this->assertEquals(1000, $deleteResp['code']);
 
-        // againtimequery应whenreturnrolenot存inorempty
+        // againtimequeryshouldwhenreturnrolenotexistsinorempty
         $detailResp = $this->get(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
-        // expectedthiswithinwillreturnerror码,specificaccording tobusinesswhile定,as long asnon1000即can
+        // expectedthiswithinwillreturnerrorcode,specificaccording tobusinesswhileset,as long asnon1000即can
         $this->assertNotEquals(1000, $detailResp['code'] ?? null);
-        // === testdelete子administratorEND ===
+        // === testdeletechildadministratorEND ===
     }
 
     /**
@@ -161,11 +161,11 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertIsArray($response);
         $this->assertEquals(1000, $response['code'] ?? null);
 
-        // assert data field存inandforarray
+        // assert data fieldexistsinandforarray
         $this->assertArrayHasKey('data', $response);
         $this->assertIsArray($response['data']);
 
-        // if data nonempty,简singlevalidationsectionpointstructure
+        // if data nonempty,simplesinglevalidationsectionpointstructure
         if (! empty($response['data'])) {
             $this->assertArrayHasKey('permission_key', $response['data']);
         }

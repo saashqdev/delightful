@@ -33,7 +33,7 @@ final class DelightfulChatFileEntity extends AbstractEntity
 
     protected ?string $updatedAt = null;
 
-    // outside链
+    // outsidechain
     protected ?string $externalUrl = '';
 
     /**

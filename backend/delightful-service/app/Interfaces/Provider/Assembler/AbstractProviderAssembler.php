@@ -16,9 +16,9 @@ use Hyperf\Contract\TranslatorInterface;
 abstract class AbstractProviderAssembler
 {
     /**
-     * batchquantityconvertarrayto实body.
+     * batchquantityconvertarraytoactualbody.
      * @template T of object
-     * @param class-string<T> $entityClass 实bodycategory名
+     * @param class-string<T> $entityClass actualbodycategoryname
      * @param array $dataArray dataarray
      * @return T[]
      */
@@ -36,8 +36,8 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * batchquantityconvert实bodytoarray.
-     * @param array $entities 实bodyarray
+     * batchquantityconvertactualbodytoarray.
+     * @param array $entities actualbodyarray
      */
     protected static function batchToArrays(array $entities): array
     {
@@ -53,9 +53,9 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * create带internationalizationsupport实body.
+     * createwithinternationalizationsupportactualbody.
      * @template T of object
-     * @param class-string<T> $entityClass 实bodycategory名
+     * @param class-string<T> $entityClass actualbodycategoryname
      * @param array $data dataarray
      * @param bool $enableI18n whetherenableinternationalization
      * @return T
@@ -73,7 +73,7 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * nullvaluecheck助handmethod.
+     * nullvaluecheckhelphandmethod.
      */
     protected static function isEmptyArray(?array $data): bool
     {

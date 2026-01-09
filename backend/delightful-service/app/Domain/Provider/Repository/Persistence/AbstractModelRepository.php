@@ -52,7 +52,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * according toconfigurationIDarraygetconfiguration实bodylist.
+     * according toconfigurationIDarraygetconfigurationactualbodylist.
      * @return ProviderConfigEntity[]
      */
     public function getConfigsByIds(array $configIds): array
@@ -66,7 +66,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * according to多servicequotientconfigurationIDgetmodellist.
+     * according tomultipleservicequotientconfigurationIDgetmodellist.
      * @param array $configIds servicequotientconfigurationIDarray
      * @return ProviderModelEntity[]
      */
@@ -83,7 +83,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * initialize实bodyIDandtime戳(fornewcreate实bodyset).
+     * initializeactualbodyIDandtimestamp(fornewcreateactualbodyset).
      * @param mixed $entity
      */
     protected function initializeEntityForCreation($entity, array &$attributes): void
@@ -92,7 +92,7 @@ abstract class AbstractModelRepository extends AbstractRepository
         $nowString = $now->format('Y-m-d H:i:s');
         $id = IdGenerator::getSnowId();
 
-        // set实bodyproperty
+        // setactualbodyproperty
         $entity->setId($id);
         $entity->setCreatedAt($now);
         $entity->setUpdatedAt($now);
@@ -132,7 +132,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * prepare移exceptsoft deleteclosefeature,temporarythishow to write.create带have软deletefilter ProviderConfigModel querybuild器.
+     * preparemoveexceptsoft deleteclosefeature,temporarythishow to write.createwithhavesoftdeletefilter ProviderConfigModel querybuilddevice.
      */
     private function createConfigQuery(): Builder
     {
@@ -140,7 +140,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * prepare移exceptsoft deleteclosefeature,temporarythishow to write.create带have软deletefilter ProviderModelModel querybuild器.
+     * preparemoveexceptsoft deleteclosefeature,temporarythishow to write.createwithhavesoftdeletefilter ProviderModelModel querybuilddevice.
      */
     private function createProviderModelQuery(): Builder
     {

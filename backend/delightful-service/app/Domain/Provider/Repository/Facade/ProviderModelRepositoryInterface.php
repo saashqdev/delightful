@@ -50,9 +50,9 @@ interface ProviderModelRepositoryInterface
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId, ProviderEntity $providerEntity): array;
 
     /**
-     * getorganizationcanusemodellist(containorganizationfrom己modelandDelightfulmodel).
+     * getorganizationcanusemodellist(containorganizationfromselfmodelandDelightfulmodel).
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
-     * @param null|Category $category modelcategory,foremptyo clockreturn所havecategorymodel
+     * @param null|Category $category modelcategory,foremptyo clockreturn havecategorymodel
      * @return ProviderModelEntity[] 按sortdescendingsortmodellist,containorganizationmodelandDelightfulmodel(notgo重)
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, Status $status = Status::Enabled): array;
@@ -61,7 +61,7 @@ interface ProviderModelRepositoryInterface
      * batchquantityaccording toIDgetmodel.
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param string[] $ids modelIDarray
-     * @return ProviderModelEntity[] model实bodyarray,byIDforkey
+     * @return ProviderModelEntity[] modelactualbodyarray,byIDforkey
      */
     public function getByIds(ProviderDataIsolation $dataIsolation, array $ids): array;
 
@@ -71,7 +71,7 @@ interface ProviderModelRepositoryInterface
      * batchquantityaccording toModelIDgetmodel.
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param string[] $modelIds modelidentifierarray
-     * @return array<string, ProviderModelEntity[]> model实bodyarray,bymodel_idforkey,valueforto应modellist
+     * @return array<string, ProviderModelEntity[]> modelactualbodyarray,bymodel_idforkey,valuefortoshouldmodellist
      */
     public function getByModelIds(ProviderDataIsolation $dataIsolation, array $modelIds): array;
 

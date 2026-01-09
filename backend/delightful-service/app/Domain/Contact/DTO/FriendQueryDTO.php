@@ -15,14 +15,14 @@ class FriendQueryDTO extends AbstractEntity
     // friend_type
     protected UserType $friendType = UserType::Ai;
 
-    // finger定user ids,checkwhetherisgood友
+    // fingersetuser ids,checkwhetherisgoodfriend
     protected array $userIds = [];
 
-    // finger定 ai codes,checkwhetherisgood友
+    // fingerset ai codes,checkwhetherisgoodfriend
     protected array $aiCodes = [];
 
     /**
-     * upone页token. toatmysqlcome说,return累productoffsetquantity;toatescome说,returncursor.
+     * uponepagetoken. toatmysqlcomesay,return累productoffsetquantity;toatescomesay,returncursor.
      */
     protected string $pageToken = '';
 

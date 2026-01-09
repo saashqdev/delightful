@@ -14,7 +14,7 @@ use DateTime;
 use Hyperf\Codec\Json;
 
 /**
- * long-termmemory实body.
+ * long-termmemoryactualbody.
  */
 final class LongTermMemoryEntity extends AbstractEntity
 {
@@ -386,12 +386,12 @@ final class LongTermMemoryEntity extends AbstractEntity
         ++$this->reinforcementCount;
         $this->lastReinforcedAt = new DateTime();
 
-        // strong化willenhance重wantproperty,buthaveup限
+        // strong化willenhance重wantproperty,buthaveuplimit
         $this->importance = min(1.0, $this->importance + 0.1);
     }
 
     /**
-     * calculatecurrentmemoryvalidminute数(consider衰subtract).
+     * calculatecurrentmemoryvalidminutecount(consider衰subtract).
      */
     public function getEffectiveScore(): float
     {
@@ -417,7 +417,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 移excepttag.
+     * moveexcepttag.
      */
     public function removeTag(string $tag): void
     {
@@ -478,7 +478,7 @@ final class LongTermMemoryEntity extends AbstractEntity
             return 0.0;
         }
 
-        // accesscountto数addbecome,avoidpassdegreereward
+        // accesscounttocountaddbecome,avoidpassdegreereward
         return min(0.3, log($this->accessCount + 1) * 0.1);
     }
 }

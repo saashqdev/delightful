@@ -23,7 +23,7 @@ enum MemoryCategory: string
     case GENERAL = 'general';
 
     /**
-     * getcategorymiddle文name.
+     * getcategorymiddletextname.
      */
     public function getDisplayName(): string
     {

@@ -82,7 +82,7 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'createonenewuserlevel别scheduletask';
+        return 'createonenewuserlevelotherscheduletask';
     }
 
     public function getInput(): ?NodeInput

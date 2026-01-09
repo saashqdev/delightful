@@ -57,7 +57,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * convertforarray(useatcompatible现havecode).
+     * convertforarray(useatcompatibleshowhavecode).
      */
     public function toArray(): array
     {

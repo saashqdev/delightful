@@ -37,7 +37,7 @@ class InternetSearchBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'MagicInternetsearch,batchquantitytouser多implicationsameordifferentissueconductinternetsearch.';
+        return 'MagicInternetsearch,batchquantitytousermultipleimplicationsameordifferentissueconductinternetsearch.';
     }
 
     public function getCallback(): ?Closure
@@ -112,8 +112,8 @@ class InternetSearchBuiltInTool extends AbstractBuiltInTool
         "use_deep_search": {
             "type": "boolean",
             "key": "use_deep_search",
-            "title": "whetheruse深degreesearch",
-            "description": "whetheruse深degreesearch",
+            "title": "whetherusedeepdegreesearch",
+            "description": "whetherusedeepdegreesearch",
             "required": null,
             "value": null,
             "encryption": false,

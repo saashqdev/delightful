@@ -140,7 +140,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
             ->select($columns)
             ->where('group_id', $groupId);
         $userList = Db::select($userList->toSql(), $userList->getBindings());
-        // willtimealso原becometime戳
+        // willtimealsooriginalbecometimestamp
         foreach ($userList as &$user) {
             ! empty($user['created_at']) && $user['created_at'] = strtotime($user['created_at']);
             ! empty($user['updated_at']) && $user['updated_at'] = strtotime($user['updated_at']);
@@ -193,7 +193,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
     }
 
     /**
-     * willuserfromgroupmiddle移except.
+     * willuserfromgroupmiddlemoveexcept.
      */
     public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int
     {

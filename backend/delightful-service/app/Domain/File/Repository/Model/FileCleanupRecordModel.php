@@ -17,7 +17,7 @@ class FileCleanupRecordModel extends AbstractModel
     protected ?string $table = 'delightful_file_cleanup_records';
 
     /**
-     * canbatchquantity赋valueproperty.
+     * canbatchquantityassignvalueproperty.
      */
     protected array $fillable = [
         'id', 'organization_code', 'file_key', 'file_name', 'file_size', 'bucket_type',

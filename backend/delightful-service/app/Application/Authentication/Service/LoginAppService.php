@@ -40,7 +40,7 @@ readonly class LoginAppService
         // verifyaccountinfoandgetaccount
         $account = $this->verifyAndGetAccount($request);
 
-        // verifyuserinorganizationinsidewhether存in
+        // verifyuserinorganizationinsidewhetherexistsin
         $user = $this->verifyAndGetUserInOrganization($account, $request->getOrganizationCode());
 
         // generatetoken
@@ -51,7 +51,7 @@ readonly class LoginAppService
     }
 
     /**
-     * according tologintypeverifyaccountinfoandreturnaccount实body.
+     * according tologintypeverifyaccountinfoandreturnaccountactualbody.
      */
     private function verifyAndGetAccount(CheckLoginRequest $request): AccountEntity
     {
@@ -62,7 +62,7 @@ readonly class LoginAppService
     }
 
     /**
-     * verifyhand机numberlogin.
+     * verifyhandmachinenumberlogin.
      */
     private function verifyPhoneAccount(CheckLoginRequest $request): AccountEntity
     {
@@ -102,7 +102,7 @@ readonly class LoginAppService
     }
 
     /**
-     * verifyuserinorganizationinsidewhether存in.
+     * verifyuserinorganizationinsidewhetherexistsin.
      */
     private function verifyAndGetUserInOrganization(AccountEntity $account, string $organizationCode): DelightfulUserEntity
     {

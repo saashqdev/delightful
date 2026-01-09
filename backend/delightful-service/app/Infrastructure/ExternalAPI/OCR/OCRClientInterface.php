@@ -10,9 +10,9 @@ namespace App\Infrastructure\ExternalAPI\OCR;
 interface OCRClientInterface
 {
     /**
-     *  OCR request,目frontonlysupport pdf and image.
+     *  OCR request,itemfrontonlysupport pdf and image.
      *
-     * @param null|string $url graphlike URL ground址|graphlike Base64 encoding
+     * @param null|string $url graphlike URL groundaddress|graphlike Base64 encoding
      * @return string OCR processbackresult
      */
     public function ocr(?string $url = null): string;

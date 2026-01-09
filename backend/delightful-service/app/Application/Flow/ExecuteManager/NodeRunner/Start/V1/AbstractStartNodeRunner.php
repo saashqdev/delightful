@@ -39,7 +39,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
         $result = $this->getChatMessageResult($executionData);
 
-        // content or者 files meanwhileforempty
+        // content orperson files meanwhileforempty
         if ($result['message_content'] === '' && empty($executionData->getTriggerData()->getAttachments())) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.start.content_empty');
         }
@@ -86,11 +86,11 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             'open_time' => $openChatTime->format('Y-m-d H:i:s'),
         ];
 
-        // getuptimeopen触hairtime
+        // getuptimeopentouchhairtime
         $key = 'open_chat_notice_' . $executionData->getConversationId();
         $lastNoticeTime = $this->cache->get($key);
 
-        // ifnothaveuptime,or者distanceuptimetimesecondalreadyalready exceededpass,that么thenneedexecute
+        // ifnothaveuptime,orpersondistanceuptimetimesecondalreadyalready exceededpass,thatwhatthenneedexecute
         $config = $triggerBranch->getConfig();
         $intervalSeconds = $this->getIntervalSeconds($config['interval'] ?? 0, $config['unit'] ?? '');
         if (! $lastNoticeTime || (Carbon::make($openChatTime)->diffInSeconds(Carbon::make($lastNoticeTime)) > $intervalSeconds)) {
@@ -163,10 +163,10 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
     protected function routine(VertexResult $vertexResult, ExecutionData $executionData, StartNodeParamsConfig $startNodeParamsConfig): array
     {
-        // scheduleinput parameter,allbyoutside部call,judgeis哪branch
+        // scheduleinput parameter,allbyoutside部call,judgeiswhichbranch
         $branchId = $executionData->getTriggerData()->getParams()['branch_id'] ?? '';
         if (empty($branchId)) {
-            // nothave找toanybranch,directly运line
+            // nothavefindtoanybranch,directlyrunline
             $vertexResult->setChildrenIds([]);
             return [];
         }
@@ -254,13 +254,13 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         if (! $delightfulFlowEntity || ! $delightfulFlowEntity->getType()->isMain()) {
             return;
         }
-        // 兜bottom,ifnothave agent processfinger令,try实o clockget
+        // fallbackbottom,ifnothave agent processfingercommand,tryactualo clockget
         if (empty($executionData->getInstructionConfigs())) {
             $instructs = di(DelightfulAgentDomainService::class)->getAgentById($executionData->getAgentId())->getInstructs();
             $executionData->setInstructionConfigs($instructs);
         }
 
-        // getcurrentmessagebodyfinger令value
+        // getcurrentmessagebodyfingercommandvalue
         $messageChatInstructions = $messageEntity->getChatInstructions();
         $messageChatInstructionIdMaps = [];
         $messageChatInstructionNameMaps = [];
@@ -274,7 +274,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         }
 
         $instructions = [];
-        // only放current agent configurationprocessfinger令
+        // onlyputcurrent agent configurationprocessfingercommand
         foreach ($executionData->getInstructionConfigs() as $instructionConfig) {
             if (! $instructionConfig->isFlowInstructionType()) {
                 continue;
@@ -290,7 +290,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             if ($messageChatInstruction) {
                 $value = $messageChatInstruction->getValue();
             } else {
-                // ifmessagebodymiddlenothavefinger令value,usedefaultvalue
+                // ifmessagebodymiddlenothavefingercommandvalue,usedefaultvalue
                 $value = $instructionConfig->getDefaultValue();
             }
             $instructions[$instructionConfig->getId()] = $instructionConfig->getNameAndValueByType($value);

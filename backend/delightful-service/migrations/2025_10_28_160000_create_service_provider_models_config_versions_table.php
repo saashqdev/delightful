@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('service_provider_model_id')->comment('modelID,associateservice_provider_models.id');
 
             $table->decimal('creativity', 3, 2)->default(0.5)->comment('create力parameter');
-            $table->integer('max_tokens')->nullable()->comment('mostbigtoken数');
+            $table->integer('max_tokens')->nullable()->comment('mostbigtokencount');
             $table->decimal('temperature', 3, 2)->nullable()->comment('温degreeparameter');
             $table->integer('vector_size')->default(2048)->comment('toquantity维degree');
             $table->string('billing_type', 50)->nullable()->comment('billingtype');
@@ -33,9 +33,9 @@ return new class extends Migration {
             $table->string('billing_currency', 10)->nullable()->comment('billingcurrency');
             $table->boolean('support_function')->default(false)->comment('whethersupportfunctioncall');
             $table->decimal('cache_hit_pricing', 10, 4)->nullable()->comment('cache命middlepricing');
-            $table->integer('max_output_tokens')->nullable()->comment('mostbigoutputtoken数');
+            $table->integer('max_output_tokens')->nullable()->comment('mostbigoutputtokencount');
             $table->boolean('support_embedding')->default(false)->comment('whethersupportembedding');
-            $table->boolean('support_deep_think')->default(false)->comment('whethersupport深degreethink');
+            $table->boolean('support_deep_think')->default(false)->comment('whethersupportdeepdegreethink');
             $table->decimal('cache_write_pricing', 10, 4)->nullable()->comment('cachewritepricing');
             $table->boolean('support_multi_modal')->default(false)->comment('whethersupportmulti-modalstate');
             $table->boolean('official_recommended')->default(false)->comment('whetherofficialrecommended');

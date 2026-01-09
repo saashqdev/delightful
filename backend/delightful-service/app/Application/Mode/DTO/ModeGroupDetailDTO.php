@@ -24,7 +24,7 @@ class ModeGroupDetailDTO extends AbstractDTO
     protected int $sort;
 
     /**
-     * @var ModeGroupModelDTO[] theminutegroupto应modeldetailedinfoarray
+     * @var ModeGroupModelDTO[] theminutegrouptoshouldmodeldetailedinfoarray
      */
     protected array $models = [];
 

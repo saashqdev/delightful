@@ -171,7 +171,7 @@ JSON, true));
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());
         $this->assertEquals(['node_2'], $vertexResult->getChildrenIds());
 
-        // 10sinside,所bynotwillexecute
+        // 10sinside, bynotwillexecute
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEmpty($vertexResult->getChildrenIds());
     }
@@ -281,7 +281,7 @@ JSON,
     public function testParamCallWithSystemParamKey()
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionMessage('field名 [conversation_id] andsystemretainfieldconflict,请useothername');
+        $this->expectExceptionMessage('fieldname [conversation_id] andsystemretainfieldconflict,pleaseuseothername');
 
         // createonecontainsystemretainfieldsectionpointconfiguration,thisshouldinvalidate阶segmentthrowexception
         $node = Node::generateTemplate(NodeType::Start, json_decode(
@@ -337,7 +337,7 @@ JSON,
     public function testParamCallWithSystemParamKeyInCustomSystemOutput()
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionMessage('field名 [message_type] andsystemretainfieldconflict,请useothername');
+        $this->expectExceptionMessage('fieldname [message_type] andsystemretainfieldconflict,pleaseuseothername');
 
         // testincustom_system_outputmiddleusesystemretainfield
         $node = Node::generateTemplate(NodeType::Start, json_decode(
@@ -509,7 +509,7 @@ JSON,
                                 "type": "string",
                                 "key": "trigger_time",
                                 "sort": 0,
-                                "title": "触hairtime",
+                                "title": "touchhairtime",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -520,7 +520,7 @@ JSON,
                                 "type": "number",
                                 "key": "trigger_timestamp",
                                 "sort": 1,
-                                "title": "触hairtime戳",
+                                "title": "touchhairtimestamp",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -570,7 +570,7 @@ JSON,
                                 "type": "string",
                                 "key": "trigger_time",
                                 "sort": 0,
-                                "title": "触hairtime",
+                                "title": "touchhairtime",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -581,7 +581,7 @@ JSON,
                                 "type": "number",
                                 "key": "trigger_timestamp",
                                 "sort": 1,
-                                "title": "触hairtime戳",
+                                "title": "touchhairtimestamp",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -647,7 +647,7 @@ JSON,
                                 "type": "string",
                                 "key": "trigger_time",
                                 "sort": 0,
-                                "title": "触hairtime",
+                                "title": "touchhairtime",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -658,7 +658,7 @@ JSON,
                                 "type": "number",
                                 "key": "trigger_timestamp",
                                 "sort": 1,
-                                "title": "触hairtime戳",
+                                "title": "touchhairtimestamp",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -708,7 +708,7 @@ JSON,
                                 "type": "string",
                                 "key": "trigger_time",
                                 "sort": 0,
-                                "title": "触hairtime",
+                                "title": "touchhairtime",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -719,7 +719,7 @@ JSON,
                                 "type": "number",
                                 "key": "trigger_timestamp",
                                 "sort": 1,
-                                "title": "触hairtime戳",
+                                "title": "touchhairtimestamp",
                                 "description": "",
                                 "required": null,
                                 "value": null,

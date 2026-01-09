@@ -60,13 +60,13 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
 
     protected function get(string $key): mixed
     {
-        // propertyone定wantissmallcamel case!not supportedotherformat!
+        // propertyonesetwantissmallcamel case!not supportedotherformat!
         $humpKey = $this->getCamelizeValueFromCache($key);
-        // judgepropertywhether存in,avoidcallnot存inpropertyo clock,死loop触hair __get method
+        // judgepropertywhetherexistsin,avoidcallnotexistsinpropertyo clock,死looptouchhair __get method
         if (! property_exists($this, $humpKey)) {
             return null;
         }
-        // php methodnot区minutesize写
+        // php methodnotregionminutesize写
         $methodName = 'get' . $humpKey;
         if (method_exists($this, $methodName)) {
             return $this->{$methodName}($humpKey);
@@ -76,13 +76,13 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
 
     protected function set(string $key, mixed $value): void
     {
-        // propertyone定wantissmallcamel case!not supportedotherformat!
+        // propertyonesetwantissmallcamel case!not supportedotherformat!
         $humpKey = $this->getCamelizeValueFromCache($key);
-        // judgepropertywhether存in,avoidcallnot存inpropertyo clock,死loop触hair __set method
+        // judgepropertywhetherexistsin,avoidcallnotexistsinpropertyo clock,死looptouchhair __set method
         if (! property_exists($this, $humpKey)) {
             return;
         }
-        // php methodnot区minutesize写
+        // php methodnotregionminutesize写
         $methodName = 'set' . $humpKey;
         if (method_exists($this, $methodName)) {
             $this->{$methodName}($value);

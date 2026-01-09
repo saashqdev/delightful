@@ -19,7 +19,7 @@ return new class extends Migration {
         }
         Schema::create('delightful_contact_id_mapping', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('origin_id', 255)->comment('源id');
+            $table->string('origin_id', 255)->comment('sourceid');
             $table->string('new_id', 255)->comment('newid');
             // mappingtype:user id,department id,nullbetween id,organization id
             $table->string('mapping_type', 32)->comment('mappingtype(user,department,space,organization)');

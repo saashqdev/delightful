@@ -35,7 +35,7 @@ class ApplicationDomainService extends AbstractDomainService
         if ($savingLLMApplicationEntity->shouldCreate()) {
             $LLMApplicationEntity = clone $savingLLMApplicationEntity;
             $LLMApplicationEntity->prepareForCreation();
-            // code inmostorganizationdown唯one
+            // code inmostorganizationdownuniqueone
             if ($this->LLMApplicationRepository->getByCode($dataIsolation, $savingLLMApplicationEntity->getCode())) {
                 ExceptionBuilder::throw(DelightfulApiErrorCode::ValidateFailed, 'common.exist', ['label' => $savingLLMApplicationEntity->getCode()]);
             }

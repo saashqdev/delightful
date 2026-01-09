@@ -61,22 +61,22 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 > knowledge basename:knowledge basedescription
 {$knowledgePrompt}
 ## process
-1. combineupdowntext extractionuserissue,generate多keyword,at mostnot超pass 5 ,多keyworduseEnglish逗number"," 隔open,useatusedifferentkeywordfromknowledge basemiddleretrievemost相closeinfo;
-2. combineupdown文,analyzeuserissue,generate `names` parameter,useatfinger定anduserissuemaybehaveclose多knowledge basename,according to相closepropertysort,相closeproperty需combineupdown文,knowledge basenameandknowledge basedescriptionconductjudge;
-3. usekeywordanduserissue,call `{$this->getName()}` toolretrieveknowledge basemiddlecontent,keywordparameteris `keyword`,userissueparameteris `question`, 请ensureparameterallbecorrectfill in,toolwillreturnanduserissuesimilardegreemosthighcontentslicesegment;
+1. combineupdowntext extractionuserissue,generatemultiplekeyword,at mostnotexceedspass 5 ,multiplekeyworduseEnglish逗number"," separatoropen,useatusedifferentkeywordfromknowledge basemiddleretrievemost相closeinfo;
+2. combineupdowntext,analyzeuserissue,generate `names` parameter,useatfingersetanduserissuemaybehaveclosemultipleknowledge basename,according to相closepropertysort,相closeproperty需combineupdowntext,knowledge basenameandknowledge basedescriptionconductjudge;
+3. usekeywordanduserissue,call `{$this->getName()}` toolretrieveknowledge basemiddlecontent,keywordparameteris `keyword`,userissueparameteris `question`, pleaseensureparameterallbecorrectfill in,toolwillreturnanduserissuesimilardegreemosthighcontentslicesegment;
 4. knowledge baseretrieveoutcomecontentwithinwillcontainonethesecustomize Delightful tag,youwant善atuseit们,havebydown几typetag:
-    - <DelightfulImage></DelightfulImage> indicateoneimage,如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>,eachtagallwillinfront端messagecardrenderoutone张image;
-    - <DelightfulVideo></DelightfulVideo> indicateonevideo,如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>,eachtagallwillinfront端messagecardrenderoutonevideo;
-    - <DelightfulMention></DelightfulMention> indicateoneperson员info,如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>,eachtagallwillinfront端messagecardshapebecomeone @somesomeperson effect;
+    - <DelightfulImage></DelightfulImage> indicateoneimage,like <DelightfulImage>cp_xxxxxxx</DelightfulImage>,eachtagallwillinfrontclientmessagecardrenderoutone張image;
+    - <DelightfulVideo></DelightfulVideo> indicateonevideo,like <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>,eachtagallwillinfrontclientmessagecardrenderoutonevideo;
+    - <DelightfulMention></DelightfulMention> indicateonepersonmemberinfo,like <DelightfulMention>cp_xxxxxxx</DelightfulMention>,eachtagallwillinfrontclientmessagecardshapebecomeone @somesomeperson effect;
 5. priorityusecontain <DelightfulImage></DelightfulImage>,<DelightfulVideo></DelightfulVideo>,<DelightfulMention></DelightfulMention> etchave Delightful tagslicesegment;
 6. combineknowledge basereturncontentorganizeback尽mayberichgroundreturn答userissue.
 ## toolmiddleclosekeyreturnvalueinstruction
-- fragments: 本timeretrieveto所haveknowledge baseslicesegment
+- fragments: thistimeretrieveto haveknowledge baseslicesegment
 - fragments.*.content: slicesegmentcontent
 - fragments.*.metadata.url: currentslicesegmentoriginal textlink
 - graph.*.content: comefromknowledgegraph谱data,canenhanceinfo,letyoumoregoodreturn答issue
 ## limit
-- return答contentmiddlenotallowout现notisDelightfultaglink.
+- return答contentmiddlenotallowoutshownotisDelightfultaglink.
 MARKDOWN;
     }
 
@@ -248,7 +248,7 @@ JSON,
             "type": "string",
             "key": "content",
             "sort": 0,
-            "title": "retrieveto所havecontent",
+            "title": "retrieveto havecontent",
             "description": "",
             "required": null,
             "value": null,
@@ -337,7 +337,7 @@ JSON,
          "limit": {
             "type": "number",
             "key": "limit",
-            "title": "mostbig召returnquantity",
+            "title": "mostbigcallreturnquantity",
             "description": "",
             "required": null,
             "value": null,

@@ -109,7 +109,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         ];
         $this->put($this->putUrl, $initialPayload, $this->getCommonHeaders());
 
-        // 部minuteupdate:onlyupdatemiddle文 logo
+        // 部minuteupdate:onlyupdatemiddletext logo
         $partialPayload = [
             'logo_zh_url' => 'https://example.com/updated_logo_zh.png',
         ];
@@ -117,11 +117,11 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // verifymiddle文 logo alreadyupdate
+        // verifymiddletext logo alreadyupdate
         $this->assertSame('https://example.com/updated_logo_zh.png', $data['logo']['zh_CN']['url']);
-        // verifyEnglish logo maintainnot变
+        // verifyEnglish logo maintainnotchange
         $this->assertSame('https://example.com/initial_logo_en.png', $data['logo']['en_US']['url']);
-        // verify favicon maintainnot变
+        // verify favicon maintainnotchange
         $this->assertSame('https://example.com/initial_favicon.ico', $data['favicon']['url']);
     }
 
@@ -157,7 +157,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         ];
         $this->put($this->putUrl, $initialPayload, $this->getCommonHeaders());
 
-        // tryclear favicon (pass inemptystringnotwillupdate,所bynotshouldfail)
+        // tryclear favicon (pass inemptystringnotwillupdate, bynotshouldfail)
         $payload = [
             'favicon_url' => '', // emptystring
             'default_language' => 'zh_CN',
@@ -165,7 +165,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
-        // favicon shouldmaintain原value(因foremptystringnotwillupdate)
+        // favicon shouldmaintainoriginalvalue(因foremptystringnotwillupdate)
         $data = $response['data'];
         $this->assertSame('https://example.com/favicon.ico', $data['favicon']['url']);
     }

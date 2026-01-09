@@ -32,7 +32,7 @@ class MCPServerToolDTO extends AbstractDTO
     public string $description = '';
 
     /**
-     * toolcome源.
+     * toolcomesource.
      */
     public int $source = 0;
 
@@ -64,7 +64,7 @@ class MCPServerToolDTO extends AbstractDTO
     public array $sourceVersion = [];
 
     /**
-     * associateinformation,givefront端use,nobusinesslogic.
+     * associateinformation,givefrontclientuse,nobusinesslogic.
      */
     public ?array $relInfo = null;
 

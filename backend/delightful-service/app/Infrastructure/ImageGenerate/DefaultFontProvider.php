@@ -10,15 +10,15 @@ namespace App\Infrastructure\ImageGenerate;
 use App\Domain\ImageGenerate\Contract\FontProviderInterface;
 
 /**
- * default字bodyprovide者implement
- * open源projectmiddledefaultimplement,providefoundation字bodyfeature
+ * default字bodyprovidepersonimplement
+ * opensourceprojectmiddledefaultimplement,providefoundation字bodyfeature
  * enterpriseprojectcanpassdependencyinjectioncoveragethisimplementcomeprovidehighlevel字bodyfeature.
  */
 class DefaultFontProvider implements FontProviderInterface
 {
     /**
      * getTTF字bodyfilepath.
-     * open源versionnotprovideTTF字bodyfile.
+     * opensourceversionnotprovideTTF字bodyfile.
      */
     public function getFontPath(): ?string
     {
@@ -27,7 +27,7 @@ class DefaultFontProvider implements FontProviderInterface
 
     /**
      * detectwhethersupportTTF字bodyrender.
-     * open源versiononlysupportinsideset fieldbody.
+     * opensourceversiononlysupportinsideset fieldbody.
      */
     public function supportsTTF(): bool
     {
@@ -35,8 +35,8 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * detecttextwhethercontainmiddle文character.
-     * open源version視所havetextfornonmiddle文,useinsideset fieldbodyrender.
+     * detecttextwhethercontainmiddletextcharacter.
+     * opensourceversion視 havetextfornonmiddletext,useinsideset fieldbodyrender.
      */
     public function containsChinese(string $text): bool
     {
@@ -51,7 +51,7 @@ class DefaultFontProvider implements FontProviderInterface
     public function hasTransparency($image): bool
     {
         if (! imageistruecolor($image)) {
-            // 调color板graphlikechecktransparentcolorindex
+            // 調color板graphlikechecktransparentcolorindex
             return imagecolortransparent($image) !== -1;
         }
 
@@ -69,7 +69,7 @@ class DefaultFontProvider implements FontProviderInterface
                 $rgba = imagecolorat($image, $x, $y);
                 $alpha = ($rgba & 0x7F000000) >> 24;
                 if ($alpha > 0) {
-                    return true; // hair现transparentlike素
+                    return true; // hairshowtransparentlike素
                 }
             }
         }

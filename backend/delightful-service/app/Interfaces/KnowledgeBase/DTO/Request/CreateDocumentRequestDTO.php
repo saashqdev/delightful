@@ -40,9 +40,9 @@ class CreateDocumentRequestDTO extends AbstractRequestDTO
     {
         return [
             'knowledge_base_code.required' => 'knowledge baseencodingcannotfornull',
-            'knowledge_base_code.max' => 'knowledge baseencodinglengthcannot超pass64character',
+            'knowledge_base_code.max' => 'knowledge baseencodinglengthcannotexceedspass64character',
             'name.required' => 'documentnamecannotfornull',
-            'name.max' => 'documentnamelengthcannot超pass255character',
+            'name.max' => 'documentnamelengthcannotexceedspass255character',
             'doc_type.required' => 'documenttypecannotfornull',
             'doc_type.integer' => 'documenttypemustforinteger',
             'doc_type.min' => 'documenttypemustgreater thanequal0',

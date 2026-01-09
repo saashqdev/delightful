@@ -90,7 +90,7 @@ class ToolsExecutor extends AbstractTool
             return [];
         }
         $list = [];
-        // prioritytryinside置tool
+        // prioritytryinsidesettool
         foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
             foreach ($builtInToolSet->getTools() as $tool) {
                 if (in_array($tool->getCode(), $codes)) {
@@ -248,7 +248,7 @@ class ToolsExecutor extends AbstractTool
         if (! $form) {
             return;
         }
-        // 暂o clockonlyprocess object data
+        // 暫o clockonlyprocess object data
         if (! $form->getType()->isObject()) {
             return;
         }
@@ -263,7 +263,7 @@ class ToolsExecutor extends AbstractTool
         $args = $parameters;
         // isolationdata
         $flow = DelightfulFlowFactory::arrayToEntity($this->delightfulFlowEntity->toArray());
-        // inside置toolspecialvalue
+        // insidesettoolspecialvalue
         if ($this->delightfulFlowEntity->hasCallback()) {
             $flow->setCallback($this->delightfulFlowEntity->getCallback());
             $flow->setEndNode($this->delightfulFlowEntity->getEndNode());

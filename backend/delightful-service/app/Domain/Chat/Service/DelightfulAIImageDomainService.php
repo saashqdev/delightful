@@ -18,7 +18,7 @@ use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request\MiracleVisionModelRe
  */
 class DelightfulAIImageDomainService extends AbstractDomainService
 {
-    // image转high清
+    // imagetransferhighclear
     public function imageConvertHigh(string $url, MiracleVisionModel $imageGenerateService): string
     {
         if (empty($url)) {

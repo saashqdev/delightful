@@ -34,7 +34,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     protected MCPServerAppService $mcpServerAppService;
 
     /**
-     * get所havesectionpointversion.
+     * get havesectionpointversion.
      */
     public function nodeVersions()
     {
@@ -100,7 +100,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
         $delightfulFlowDO = DelightfulFlowAssembler::createDelightfulFlowDO($delightfulFlowDTO);
         $delightfulFlowDO->setCode($flowId);
 
-        // 触hairmethod,触hairdata
+        // touchhairmethod,touchhairdata
         $triggerConfig = $this->request->input('trigger_config', []);
 
         return $this->delightfulFlowExecuteAppService->testRun($authorization, $delightfulFlowDO, $triggerConfig);
@@ -192,7 +192,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
      */
     public function changeEnable(string $flowId)
     {
-        // fromrequestmiddlegetenableparameter,ifnothavepassthennotimpact原havelogic
+        // fromrequestmiddlegetenableparameter,ifnothavepassthennotimpactoriginalhavelogic
         $enable = $this->request->has('enable') ? (bool) $this->request->input('enable') : null;
         $this->delightfulFlowAppService->changeEnable($this->getAuthorization(), $flowId, $enable);
     }

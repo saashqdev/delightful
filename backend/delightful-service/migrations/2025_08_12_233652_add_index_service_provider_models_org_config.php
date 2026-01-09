@@ -16,32 +16,32 @@ return new class extends Migration {
     {
         // add service_provider_models tableindex
         Schema::table('service_provider_models', function (Blueprint $table) {
-            // deleteold model_parent_id_status index(if存in)
+            // deleteold model_parent_id_status index(ifexistsin)
             if (Schema::hasIndex('service_provider_models', 'service_provider_models_model_parent_id_status_index')) {
                 $table->dropIndex('service_provider_models_model_parent_id_status_index');
             }
 
-            // deleteold idx_organization_code_status_model_version index(if存in)
+            // deleteold idx_organization_code_status_model_version index(ifexistsin)
             if (Schema::hasIndex('service_provider_models', 'idx_organization_code_status_model_version')) {
                 $table->dropIndex('idx_organization_code_status_model_version');
             }
 
-            // deleteold idx_model_id_status_organization_code index(if存in)
+            // deleteold idx_model_id_status_organization_code index(ifexistsin)
             if (Schema::hasIndex('service_provider_models', 'idx_model_id_status_organization_code')) {
                 $table->dropIndex('idx_model_id_status_organization_code');
             }
 
-            // addorganization+status+category别index(ifnot存in)
+            // addorganization+status+categoryotherindex(ifnotexistsin)
             if (! Schema::hasIndex('service_provider_models', 'idx_organization_status_category')) {
                 $table->index(['organization_code', 'status', 'category'], 'idx_organization_status_category');
             }
 
-            // addorganization+configurationIDindex(ifnot存in)
+            // addorganization+configurationIDindex(ifnotexistsin)
             if (! Schema::hasIndex('service_provider_models', 'idx_organization_code_config_id')) {
                 $table->index(['organization_code', 'service_provider_config_id'], 'idx_organization_code_config_id');
             }
 
-            // addnewgroup合index:organization_code, model_parent_id(ifnot存in)
+            // addnewgroup合index:organization_code, model_parent_id(ifnotexistsin)
             if (! Schema::hasIndex('service_provider_models', 'idx_org_model_parent')) {
                 $table->index(['organization_code', 'model_parent_id'], 'idx_org_model_parent');
             }
@@ -49,12 +49,12 @@ return new class extends Migration {
 
         // add service_provider_configs tableindex
         Schema::table('service_provider_configs', function (Blueprint $table) {
-            // organization+statusunionindex(ifnot存in)
+            // organization+statusunionindex(ifnotexistsin)
             if (! Schema::hasIndex('service_provider_configs', 'idx_org_status')) {
                 $table->index(['organization_code', 'status'], 'idx_org_status');
             }
 
-            // organization+servicequotientIDunionindex(ifnot存in)
+            // organization+servicequotientIDunionindex(ifnotexistsin)
             if (! Schema::hasIndex('service_provider_configs', 'idx_org_provider_id')) {
                 $table->index(['organization_code', 'service_provider_id'], 'idx_org_provider_id');
             }
@@ -62,12 +62,12 @@ return new class extends Migration {
 
         // add service_provider_original_models tableindex
         Schema::table('service_provider_original_models', function (Blueprint $table) {
-            // 核coregroup合index(ifnot存in)
+            // 核coregroup合index(ifnotexistsin)
             if (! Schema::hasIndex('service_provider_original_models', 'idx_org_type')) {
                 $table->index(['organization_code', 'type'], 'idx_org_type');
             }
 
-            // type+organization+modelIDunionindex(ifnot存in)
+            // type+organization+modelIDunionindex(ifnotexistsin)
             if (! Schema::hasIndex('service_provider_original_models', 'idx_type_org_id')) {
                 $table->index(['type', 'organization_code', 'model_id'], 'idx_type_org_id');
             }

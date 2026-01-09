@@ -105,19 +105,19 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest2();
         $this->addTeamMembers($projectId, 51202); // No permission error
 
-        // 3. projectcreate者addmember - shouldsuccess
+        // 3. projectcreatepersonaddmember - shouldsuccess
         $this->switchUserTest1();
         $this->addTeamMembers($projectId);
 
-        // 4. 现intest2userbecomeformember,butpermissionnot足 - addmembershouldfail
+        // 4. showintest2userbecomeformember,butpermissionnot足 - addmembershouldfail
         $this->switchUserTest2();
-        $this->addTeamMembers($projectId, 51202); // stillnopermission,因fornotismanage者
+        $this->addTeamMembers($projectId, 51202); // stillnopermission,因fornotismanageperson
 
         // 5. givetest2usermanagepermission
         $this->switchUserTest1();
         $this->updateMemberToManager($projectId, $this->testUserId2);
 
-        // 6. 现intest2usercanaddmember
+        // 6. showintest2usercanaddmember
         $this->switchUserTest2();
         $this->addMoreTeamMembers($projectId);
     }
@@ -152,7 +152,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * testbatchquantity操aspermissioncontrol.
+     * testbatchquantityoperationaspermissioncontrol.
      */
     public function testBatchOperationsPermissionControl(): void
     {
@@ -163,14 +163,14 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->enableCollaboration($projectId);
         $this->addTeamMembers($projectId);
 
-        // 2. nonmanage者trybatchquantityupdatepermission - shouldfail
+        // 2. nonmanagepersontrybatchquantityupdatepermission - shouldfail
         $this->switchUserTest2();
         $this->batchUpdateMemberPermissions($projectId, 51202);
 
-        // 3. nonmanage者trybatchquantitydeletemember - shouldfail
+        // 3. nonmanagepersontrybatchquantitydeletemember - shouldfail
         $this->batchDeleteMembers($projectId, 51202);
 
-        // 4. manage者canconductbatchquantity操as
+        // 4. managepersoncanconductbatchquantityoperationas
         $this->switchUserTest1();
         $this->batchUpdateMemberPermissions($projectId);
         $this->batchDeleteMembers($projectId);
@@ -203,7 +203,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        // shouldreturnmembernot存inerror
+        // shouldreturnmembernotexistsinerror
         $this->assertNotEquals(1000, $response['code']);
     }
 
@@ -224,10 +224,10 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->addTeamMembers($projectId);
         //        $this->addTeamMembers($projectId); // duplicateadd
 
-        // 3. testinvalidpermissionlevel别
+        // 3. testinvalidpermissionlevelother
         $this->addMembersWithInvalidPermission($projectId, 5003);
 
-        // 4. testnotcandeletefrom己
+        // 4. testnotcandeletefromself
         $this->switchUserTest2();
         $this->cannotDeleteSelf($projectId);
 
@@ -239,13 +239,13 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * test多languageerrormessage.
+     * testmultiplelanguageerrormessage.
      */
     public function testMultiLanguageErrorMessages(): void
     {
         $projectId = $this->projectId;
 
-        // 1. testmiddle文errormessage
+        // 1. testmiddletexterrormessage
         $this->switchUserTest2(); // nopermissionuser
         $response = $this->addTeamMembers($projectId, 51202);
         $this->assertStringContainsString('permission', $response['message']);
@@ -363,7 +363,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * addmore多teammember(testmanage者permission).
+     * addmoremultipleteammember(testmanagepersonpermission).
      */
     public function addMoreTeamMembers(string $projectId, int $expectedCode = 1000): array
     {
@@ -501,7 +501,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * updatememberformanage者.
+     * updatememberformanageperson.
      */
     public function updateMemberToManager(string $projectId, string $userId): array
     {
@@ -526,14 +526,14 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * testnotcandeletefrom己.
+     * testnotcandeletefromself.
      */
     public function cannotDeleteSelf(string $projectId): void
     {
-        // 先addcurrentuserformember
+        // firstaddcurrentuserformember
         //        $this->addTeamMembers($projectId);
 
-        // trydeletefrom己
+        // trydeletefromself
         $currentUserId = $this->testUserId2; // test2user
         $requestData = [
             'members' => [
@@ -550,7 +550,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        // shouldreturnnotcandeletefrom己error
+        // shouldreturnnotcandeletefromselferror
         $this->assertNotEquals(1000, $response['code']);
     }
 
@@ -583,7 +583,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->assertEquals(1000, $response['code']);
         $this->assertGreaterThan(0, count($response['data']['members']));
 
-        // validateaddmember存in
+        // validateaddmemberexistsin
         $memberIds = array_column($response['data']['members'], 'user_id');
         $departmentIds = array_column($response['data']['members'], 'department_id');
 
@@ -604,7 +604,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->assertEquals(1000, $response['code']);
 
-        // findfinger定userpermission
+        // findfingersetuserpermission
         $members = $response['data']['members'];
         foreach ($members as $member) {
             if (isset($member['user_id']) && $member['user_id'] === $this->testUserId2) {
@@ -627,7 +627,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->assertEquals(1000, $response['code']);
 
-        // validatedeletemembernot存in
+        // validatedeletemembernotexistsin
         $memberIds = array_column($response['data']['members'], 'user_id');
         $this->assertNotContains($this->testUserId2, array_filter($memberIds));
     }

@@ -89,7 +89,7 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-youisonecansendmessage助hand
+youisonecansendmessagehelphand
 
 
 ## process
@@ -97,7 +97,7 @@ youisonecansendmessage助hand
 2,currenttimeis:{$currentDateTime}
 -receiver_user_idsis:usi_3715ce50bc02d7e72ba7891649b7f1da
 
-# updown文
+# updowntext
 
 
 usernicknameis:currentusernickname
@@ -105,8 +105,8 @@ usernicknameis:currentusernickname
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮Icreateonescheduletask,taskname:reminderIcook,from明daystart,eachday早up9pointexecute,displayoneitemreminderIcookmessage',
-            'user_prompt' => '帮Isendoneitemmessage,contentis:you今daytruegood看',
+            // 'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,from明daystart,eachday早up9pointexecute,displayoneitemreminderIcookmessage',
+            'user_prompt' => 'helpIsendoneitemmessage,contentis:you今daytruegood看',
         ]);
 
         $runner->execute($vertexResult, $executionData);
@@ -183,7 +183,7 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-youisonecansendmessage助hand
+youisonecansendmessagehelphand
 
 
 ## process
@@ -192,7 +192,7 @@ youisonecansendmessage助hand
 -agent_idis:737330322528899073
 -group_idis:748917386027667456
 
-# updown文
+# updowntext
 
 
 usernicknameis:currentusernickname
@@ -200,8 +200,8 @@ usernicknameis:currentusernickname
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮Icreateonescheduletask,taskname:reminderIcook,from明daystart,eachday早up9pointexecute,displayoneitemreminderIcookmessage',
-            'user_prompt' => '帮Isendoneitemmessage,contentis:you今daytruegood看',
+            // 'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,from明daystart,eachday早up9pointexecute,displayoneitemreminderIcookmessage',
+            'user_prompt' => 'helpIsendoneitemmessage,contentis:you今daytruegood看',
         ]);
 
         $runner->execute($vertexResult, $executionData);

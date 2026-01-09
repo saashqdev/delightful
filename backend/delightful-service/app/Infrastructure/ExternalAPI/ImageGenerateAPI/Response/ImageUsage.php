@@ -12,9 +12,9 @@ use Hyperf\Odin\Api\Response\Usage;
 class ImageUsage extends Usage
 {
     /**
-     * @param int $promptTokens prompt词tokenquantity
+     * @param int $promptTokens promptwordtokenquantity
      * @param int $completionTokens completecontenttokenquantity
-     * @param int $totalTokens use总tokenquantity
+     * @param int $totalTokens usetotaltokenquantity
      * @param int $generatedImages generateimagequantity
      * @param array $completionTokensDetails completetokendetailedinformation
      * @param array $promptTokensDetails prompttokendetailedinformation

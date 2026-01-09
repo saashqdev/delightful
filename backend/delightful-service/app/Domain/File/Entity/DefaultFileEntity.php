@@ -123,7 +123,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * getfileback缀
+     * getfilebacksuffix
      */
     public function getFileExtension(): string
     {
@@ -131,7 +131,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * setfileback缀
+     * setfilebacksuffix
      */
     public function setFileExtension(string $fileExtension): self
     {
@@ -140,7 +140,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * getupload者ID.
+     * getuploadpersonID.
      */
     public function getUserId(): string
     {
@@ -148,7 +148,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * setupload者ID.
+     * setuploadpersonID.
      */
     public function setUserId(string $userId): self
     {

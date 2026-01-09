@@ -28,7 +28,7 @@ class VectorProgress
     }
 
     /**
-     * appendcomplete数.
+     * appendcompletecount.
      */
     public function additionalComplete(string $key, int $num): void
     {

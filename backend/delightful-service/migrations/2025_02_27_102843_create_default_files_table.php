@@ -16,13 +16,13 @@ return new class extends Migration {
     {
         Schema::create('default_files', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('business_type')->comment('模piecetype,file属atwhich modepiece');
+            $table->string('business_type')->comment('modepiecetype,filebelongatwhich modepiece');
             $table->integer('file_type')->comment('filetype:0:officialadd,1:organizationadd');
             $table->string('key')->comment('filekey');
             $table->bigInteger('file_size')->comment('filesize');
             $table->string('organization')->index()->comment('organizationencoding');
-            $table->string('file_extension')->index()->comment('fileback缀');
-            $table->string('user_id')->comment('upload者');
+            $table->string('file_extension')->index()->comment('filebacksuffix');
+            $table->string('user_id')->comment('uploadperson');
             $table->timestamps();
             $table->softDeletes();
         });

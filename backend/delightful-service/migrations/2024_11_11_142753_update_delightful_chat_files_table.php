@@ -16,19 +16,19 @@ return new class extends Migration {
     {
         Schema::table('delightful_chat_files', static function (Blueprint $table) {
             if (Schema::hasColumn('delightful_chat_files', 'file_name')) {
-                // file名
-                $table->string('file_name', 256)->comment('file名')->change();
+                // filename
+                $table->string('file_name', 256)->comment('filename')->change();
             } else {
-                // file名
-                $table->string('file_name', 256)->comment('file名');
+                // filename
+                $table->string('file_name', 256)->comment('filename');
             }
 
             if (Schema::hasColumn('delightful_chat_files', 'file_extension')) {
-                // fileextension名
-                $table->string('file_extension', 64)->comment('fileback缀')->change();
+                // fileextensionname
+                $table->string('file_extension', 64)->comment('filebacksuffix')->change();
             } else {
-                // fileextension名
-                $table->string('file_extension', 64)->comment('fileback缀');
+                // fileextensionname
+                $table->string('file_extension', 64)->comment('filebacksuffix');
             }
 
             if (Schema::hasColumn('delightful_chat_files', 'file_type')) {

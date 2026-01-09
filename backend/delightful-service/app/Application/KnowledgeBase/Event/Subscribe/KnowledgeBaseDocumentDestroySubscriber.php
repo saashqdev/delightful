@@ -46,7 +46,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
         $knowledge = $event->knowledgeBaseEntity;
         $document = $event->knowledgeBaseDocumentEntity;
         $dataIsolation = $event->dataIsolation;
-        // ifisfoundationknowledge basetype,then传knowledge basecreate者,avoidpermissionnot足
+        // ifisfoundationknowledge basetype,then传knowledge basecreateperson,avoidpermissionnot足
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }
@@ -59,7 +59,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
 
         $knowledgeBaseEntity = $knowledgeBaseDomainService->show($dataIsolation, $document->getKnowledgeBaseCode());
 
-        // thiswithinneeddelete所haveslicesegment,indeletedocument
+        // thiswithinneeddelete haveslicesegment,indeletedocument
         $query = new KnowledgeBaseFragmentQuery()->setDocumentCode($document->getCode());
         /** @var KnowledgeBaseFragmentEntity[][] $fragments */
         $fragments = [];
@@ -75,7 +75,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
         /** @var KnowledgeBaseFragmentEntity[] $fragments */
         $fragments = array_merge(...$fragments);
         $documentSyncStatus = KnowledgeSyncStatus::Deleted;
-        // 先deleteslicesegment
+        // firstdeleteslicesegment
         $pointIds = array_column($fragments, 'point_id');
         $fragmentSyncStatus = KnowledgeSyncStatus::Deleted;
         $fragmentSyncMessage = '';
@@ -91,7 +91,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
         }
         $knowledgeBaseFragmentDomainService->batchChangeSyncStatus(array_column($fragments, 'id'), $fragmentSyncStatus, $fragmentSyncMessage);
 
-        // deleteslicesegmentcompleteback,willdocument同markforalreadydelete
+        // deleteslicesegmentcompleteback,willdocumentsamemarkforalreadydelete
         $knowledgeBaseDataIsolation = KnowledgeBaseDataIsolation::createByBaseDataIsolation($dataIsolation);
         $documentDomainService->changeSyncStatus($knowledgeBaseDataIsolation, $document->setSyncStatus($documentSyncStatus->value));
     }

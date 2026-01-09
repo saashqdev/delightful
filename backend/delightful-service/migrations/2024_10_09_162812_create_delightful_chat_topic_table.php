@@ -21,7 +21,7 @@ return new class extends Migration {
         Schema::create('delightful_chat_topics', static function (Blueprint $table) {
             $table->bigIncrements('id');
             // topic id
-            $table->string('topic_id', 64)->comment('topic id. differentconversationwindowmiddle,topicidone致');
+            $table->string('topic_id', 64)->comment('topic id. differentconversationwindowmiddle,topicidoneto');
             // topicname
             $table->string('name', 50)->comment('topicname');
             // topicdescription
@@ -30,8 +30,8 @@ return new class extends Migration {
             $table->bigInteger('conversation_id')->comment('belong toconversationID');
             // organizationencoding
             $table->string('organization_code', 64)->comment('organizationencoding');
-            // topiccome源
-            $table->string('source_id', 64)->default('')->comment('topiccome源. such as甲createonetopic,乙topicidthencomefromat甲.need同update.');
+            // topiccomesource
+            $table->string('source_id', 64)->default('')->comment('topiccomesource. such as甲createonetopic,乙topicidthencomefromat甲.needsameupdate.');
             # index
             $table->index(['conversation_id'], 'idx_conversation_id');
             $table->index(['topic_id'], 'idx_topic_id');

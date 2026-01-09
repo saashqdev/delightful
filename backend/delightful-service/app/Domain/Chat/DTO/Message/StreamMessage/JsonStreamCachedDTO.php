@@ -11,19 +11,19 @@ use App\Domain\Chat\Entity\AbstractEntity;
 
 class JsonStreamCachedDTO extends AbstractEntity
 {
-    // avoidfrequent operationasdatalibrary,ininside存middlecachesendmessage sender_message_id
+    // avoidfrequent operationasdatalibrary,ininsideexistsmiddlecachesendmessage sender_message_id
     protected string $senderMessageId;
 
-    // avoidfrequent operationasdatalibrary,ininside存middlecachereceivemessage receive_message_id
+    // avoidfrequent operationasdatalibrary,ininsideexistsmiddlecachereceivemessage receive_message_id
     protected string $receiveMessageId;
 
     /**
-     * 收hairdouble方 message_id different,but delightful_message_id same.
+     * receivehairdoubleside message_id different,but delightful_message_id same.
      */
     protected string $delightfulMessageId;
 
     /**
-     * 收itemperson delightful_id.
+     * receiveitemperson delightful_id.
      */
     protected string $receiveDelightfulId;
 

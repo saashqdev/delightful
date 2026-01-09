@@ -44,7 +44,7 @@ interface DelightfulUserRepositoryInterface
     public function getByUserIds(string $organizationCode, array $userIds): array;
 
     /**
-     * according to userIdType,generateto应typevalue.
+     * according to userIdType,generatetoshouldtypevalue.
      */
     public function getUserIdByType(UserIdType $userIdType, string $addStr): string;
 

@@ -23,7 +23,7 @@ class UserQueryDTO extends AbstractEntity
     protected string $departmentId = '';
 
     /**
-     * upone页token. toatmysqlcome说,return累productoffsetquantity;toatescome说,returncursor.
+     * uponepagetoken. toatmysqlcomesay,return累productoffsetquantity;toatescomesay,returncursor.
      */
     protected string $pageToken = '';
 
@@ -31,8 +31,8 @@ class UserQueryDTO extends AbstractEntity
     protected bool $isRecursive = false;
 
     /**
-     * 1: person员
-     * 2: person员 + department.
+     * 1: personmember
+     * 2: personmember + department.
      */
     protected UserQueryType $queryType = UserQueryType::User;
 

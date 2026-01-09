@@ -24,14 +24,14 @@ enum ImageGenerateModelType: string
     case GoogleGemini = 'GoogleGemini';
     case VolcengineArk = 'VolcengineArk';
 
-    // 目front美graphaiultra clearmodel_id
+    // itemfront美graphaiultra clearmodel_id
     case MiracleVisionHightModelId = 'miracleVision_mtlab';
 
     // officialservicequotient
     case Official = 'Official';
 
     /**
-     * frommodelnamegetto应type.
+     * frommodelnamegettoshouldtype.
      */
     public static function fromModel(string $model, bool $throw = true): self
     {
@@ -53,7 +53,7 @@ enum ImageGenerateModelType: string
     }
 
     /**
-     * Midjourney所havemode.
+     * Midjourney havemode.
      * @return string[]
      */
     public static function getMidjourneyModes(): array
@@ -62,7 +62,7 @@ enum ImageGenerateModelType: string
     }
 
     /**
-     * Flux所havemode.
+     * Flux havemode.
      * @return string[]
      */
     public static function getFluxModes(): array
@@ -71,7 +71,7 @@ enum ImageGenerateModelType: string
     }
 
     /**
-     * Volecengin所havemode.
+     * Volecengin havemode.
      * @return string[]
      */
     public static function getVolcengineModes(): array

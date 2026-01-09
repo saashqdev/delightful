@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Domain\ImageGenerate\Contract;
 
 /**
- * 字bodyprovide者interface
- * useatinopen源projectmiddledefinition字bodymanagestandard,byenterpriseprojectimplementspecificlogic.
+ * 字bodyprovidepersoninterface
+ * useatinopensourceprojectmiddledefinition字bodymanagestandard,byenterpriseprojectimplementspecificlogic.
  */
 interface FontProviderInterface
 {
@@ -23,15 +23,15 @@ interface FontProviderInterface
     /**
      * detectwhethersupportTTF字bodyrender.
      *
-     * @return bool truetable示supportTTF字body,falsetable示onlysupportinsideset fieldbody
+     * @return bool truetableshowsupportTTF字body,falsetableshowonlysupportinsideset fieldbody
      */
     public function supportsTTF(): bool;
 
     /**
-     * detecttextwhethercontainmiddle文character.
+     * detecttextwhethercontainmiddletextcharacter.
      *
      * @param string $text wantdetecttext
-     * @return bool truetable示containmiddle文character,falsetable示notcontain
+     * @return bool truetableshowcontainmiddletextcharacter,falsetableshownotcontain
      */
     public function containsChinese(string $text): bool;
 
@@ -39,7 +39,7 @@ interface FontProviderInterface
      * detectgraphlikewhethercontaintransparentchannel.
      *
      * @param mixed $image GDgraphlikeresource
-     * @return bool truetable示containtransparentdegree,falsetable示notcontain
+     * @return bool truetableshowcontaintransparentdegree,falsetableshownotcontain
      */
     public function hasTransparency($image): bool;
 }

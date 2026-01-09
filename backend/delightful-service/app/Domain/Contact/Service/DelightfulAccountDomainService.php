@@ -45,14 +45,14 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
      */
     public function sendVerificationCode(string $stateCode, string $phone, string $type): array
     {
-        // hand机numberwhethercanusecheck
+        // handmachinenumberwhethercanusecheck
         $this->checkPhoneStatus($type, $stateCode, $phone);
-        // short信frequencycheck
+        // shortmessagefrequencycheck
         $this->checkSmsLimit($stateCode, $phone);
         $code = (string) random_int(100000, 999999);
         $variables = ['timeout' => 10, 'verification_code' => $code];
         $sign = SignEnum::DENG_TA;
-        // willbusinessscenariotype 转for short信type
+        // willbusinessscenariotype transferfor shortmessagetype
         $smsType = match ($type) {
             SmsSceneType::BIND_PHONE,
             SmsSceneType::CHANGE_PHONE,
@@ -61,14 +61,14 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             SmsSceneType::ACCOUNT_LOGIN_ACTIVE => SmsTypeEnum::VERIFICATION_WITH_EXPIRATION->value,
             default => ''
         };
-        // according to type certainshort信templateid
+        // according to type certainshortmessagetemplateid
         $templateId = $this->template->getTemplateIdByTypeAndLanguage($smsType, LanguageEnum::ZH_CN->value);
         $sms = new SmsStruct($stateCode . $phone, $variables, $sign, $templateId);
         $sendResult = $this->sms->send($sms);
         //        $sendResult = new SendResult();
         //        $sendResult->setResult(0, $code);
         $key = $this->getSmsVerifyCodeKey($stateCode . $phone, $type);
-        // cacheverify码,back续verifyuse
+        // cacheverifycode,back続verifyuse
         $this->redis->setex($key, 10 * 60, $code);
         return $sendResult->toArray();
     }
@@ -78,7 +78,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
      */
     public function humanRegister(string $stateCode, string $phone, string $verifyCode, string $password): array
     {
-        // hand机numbercheck
+        // handmachinenumbercheck
         $this->checkPhoneStatus(SmsSceneType::REGISTER_ACCOUNT, $stateCode, $phone);
         $key = $this->getSmsVerifyCodeKey($stateCode . $phone, SmsSceneType::REGISTER_ACCOUNT);
         $code = $this->redis->get($key);
@@ -111,7 +111,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
 
     public function addUserAndAccount(DelightfulUserEntity $userDTO, AccountEntity $accountDTO): void
     {
-        // judge账numberwhether存in
+        // judgeaccountnumberwhetherexistsin
         $delightfulId = $accountDTO->getDelightfulId();
         if (empty($delightfulId) || empty($userDTO->getOrganizationCode())) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
@@ -119,7 +119,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         $existsAccount = $this->accountRepository->getAccountInfoByDelightfulId($delightfulId);
         if ($existsAccount !== null) {
             $userEntity = $this->userRepository->getUserByAccountAndOrganization($delightfulId, $userDTO->getOrganizationCode());
-            // 账number存in,andintheorganizationdownalready经generateuserinfo,directlyreturn
+            // accountnumberexistsin,andintheorganizationdownalreadyalreadygenerateuserinfo,directlyreturn
             if ($userEntity !== null) {
                 $userDTO->setUserId($userEntity->getUserId());
                 $userDTO->setNickname($userEntity->getNickname());
@@ -135,13 +135,13 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         Db::beginTransaction();
         try {
             if (! $existsAccount) {
-                // 账numbernot存in,new账number
+                // accountnumbernotexistsin,newaccountnumber
                 $accountEntity = $this->accountRepository->createAccount($accountDTO);
             } else {
-                // 账number存in,butistheorganizationdownnothaveuserinfo
+                // accountnumberexistsin,butistheorganizationdownnothaveuserinfo
                 $accountEntity = $existsAccount;
             }
-            // willgenerate账numberinfoassociatetouserEntity
+            // willgenerateaccountnumberinfoassociatetouserEntity
             $userDTO->setDelightfulId($accountEntity->getDelightfulId());
             $userEntity = $this->userRepository->getUserByAccountAndOrganization($delightfulId, $userDTO->getOrganizationCode());
             if ($userEntity && $userEntity->getUserId()) {
@@ -153,7 +153,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // certainuser_idgeneraterule
                 $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $userDTO->getOrganizationCode());
                 $userDTO->setUserId($userId);
-                // 1.47x(10**-29) 概ratedown,user_idwillduplicate,willbemysql唯oneindexintercept,letuser重newloginonetimethenline.
+                // 1.47x(10**-29) 概ratedown,user_idwillduplicate,willbemysqluniqueoneindexintercept,letuser重newloginonetimethenline.
                 $this->userRepository->createUser($userDTO);
             }
             Db::commit();
@@ -181,19 +181,19 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 $userDTO->setDelightfulId($accountEntity->getDelightfulId());
                 // update ai nickname
                 $accountEntity->setRealName($userDTO->getNickname());
-                // update账numberinfo
+                // updateaccountnumberinfo
                 if ($accountDTO->getStatus() !== null) {
                     // enable/disable智canbody
                     $accountEntity->setStatus($accountDTO->getStatus());
                 }
                 $this->accountRepository->saveAccount($accountEntity);
-                // update账numberintheorganizationdownuserinfo
+                // updateaccountnumberintheorganizationdownuserinfo
                 $userEntity = $this->userRepository->getUserByAccountAndOrganization($accountEntity->getDelightfulId(), $dataIsolation->getCurrentOrganizationCode());
                 if ($userEntity === null) {
-                    # 账number存in,butistheorganizationdownnothaveuserinfo. generateuserinfo
+                    # accountnumberexistsin,butistheorganizationdownnothaveuserinfo. generateuserinfo
                     $userEntity = $this->createUser($userDTO, $dataIsolation);
                 } else {
-                    // 账numberanduserinfoall存in,updateonedownuserinfo
+                    // accountnumberanduserinfoallexistsin,updateonedownuserinfo
                     $userEntity->setNickname($userDTO->getNickname());
                     $userEntity->setAvatarUrl($userDTO->getAvatarUrl());
                     $userEntity->setDescription($userDTO->getDescription());
@@ -202,7 +202,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 Db::commit();
                 return $userEntity;
             }
-            // create账number
+            // createaccountnumber
             $extra = [
                 'like_num' => 0,
                 'friend_num' => 0,
@@ -215,12 +215,12 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             $accountDTO->setGender(GenderType::Unknown);
             $accountDTO->setPhone($accountDTO->getAiCode());
             $accountDTO->setType(UserType::Ai);
-            # 账numbernot存in(usercertainalsonot存in),generate账numberanduserinfo
+            # accountnumbernotexistsin(usercertainalsonotexistsin),generateaccountnumberanduserinfo
             $delightfulId = (string) IdGenerator::getSnowId();
             $accountDTO->setDelightfulId($delightfulId);
             $this->accountRepository->createAccount($accountDTO);
             $userDTO->setDelightfulId($delightfulId);
-            // for账numberincurrentorganizationcreateuser
+            // foraccountnumberincurrentorganizationcreateuser
             $result = $this->createUser($userDTO, $dataIsolation);
             Db::commit();
             return $result;
@@ -329,7 +329,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
      */
     private function checkSmsLimit(string $stateCode, string $phone): void
     {
-        // short信sendfrequencycontrol
+        // shortmessagesendfrequencycontrol
         $timeInterval = config('sms.time_interval') ?: 60;
         $lastSendTimeKey = $this->getSmsLastSendTimeKey($stateCode . $phone);
         $setSuccess = $this->redis->set($lastSendTimeKey, '1', ['nx', 'ex' => $timeInterval]);

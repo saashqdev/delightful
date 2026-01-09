@@ -20,7 +20,7 @@ return new class extends Migration {
         Schema::create('delightful_role_users', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('role_id')->comment('roleID');
-            $table->string('user_id', 64)->comment('userID,to应delightful_contact_users.user_id');
+            $table->string('user_id', 64)->comment('userID,toshoulddelightful_contact_users.user_id');
             $table->string('organization_code', 64)->comment('organizationencoding');
             $table->string('assigned_by', 64)->nullable()->comment('minuteallocatoruserID');
             $table->timestamp('assigned_at')->nullable()->comment('minute配time');

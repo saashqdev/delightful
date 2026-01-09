@@ -17,9 +17,9 @@ return new class extends Migration {
         Schema::table('delightful_flow_execute_logs', function (Blueprint $table) {
             $table->string('organization_code')->default('')->comment('organizationcode');
             $table->string('flow_type')->default('')->comment('processtype');
-            $table->string('parent_flow_code')->default('')->comment('父processcode');
-            $table->string('operator_id')->default('')->comment('操as员ID');
-            $table->integer('level')->default(0)->comment('level别');
+            $table->string('parent_flow_code')->default('')->comment('parentprocesscode');
+            $table->string('operator_id')->default('')->comment('operationasmemberID');
+            $table->integer('level')->default(0)->comment('levelother');
             $table->string('execution_type')->default('')->comment('executetype');
         });
     }

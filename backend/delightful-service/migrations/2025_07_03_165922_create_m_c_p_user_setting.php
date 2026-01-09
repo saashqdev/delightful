@@ -22,9 +22,9 @@ return new class extends Migration {
             $table->json('require_fields')->nullable()->comment('requiredfield');
             $table->json('oauth2_auth_result')->nullable()->comment('OAuth2authenticationresult');
             $table->json('additional_config')->nullable()->comment('attachaddconfiguration');
-            $table->string('creator', 64)->default('')->comment('create者');
+            $table->string('creator', 64)->default('')->comment('createperson');
             $table->dateTime('created_at')->comment('creation time');
-            $table->string('modifier', 64)->default('')->comment('modify者');
+            $table->string('modifier', 64)->default('')->comment('modifyperson');
             $table->dateTime('updated_at')->comment('update time');
 
             $table->index(['organization_code', 'user_id', 'mcp_server_id'], 'idx_org_user_mcp');

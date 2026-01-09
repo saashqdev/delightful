@@ -19,11 +19,11 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $name rolename
  * @property array $permission_key rolepermissionlist
  * @property string $organization_code organizationencoding
- * @property null|array $permission_tag permissiontag,useatfront端showcategory
+ * @property null|array $permission_tag permissiontag,useatfrontclientshowcategory
  * @property int $is_display whetherdisplay
  * @property int $status status: 0=disable, 1=enable
- * @property null|string $created_uid create者userID
- * @property null|string $updated_uid update者userID
+ * @property null|string $created_uid createpersonuserID
+ * @property null|string $updated_uid updatepersonuserID
  * @property Carbon $created_at createtime
  * @property Carbon $updated_at updatetime
  * @property null|Carbon $deleted_at deletetime
@@ -41,12 +41,12 @@ class RoleModel extends AbstractModel
     public const int STATUS_ENABLED = 1;
 
     /**
-     * andmodelassociatetable名.
+     * andmodelassociatetablename.
      */
     protected ?string $table = 'delightful_roles';
 
     /**
-     * canbatchquantity赋valueproperty.
+     * canbatchquantityassignvalueproperty.
      */
     protected array $fillable = [
         'id',

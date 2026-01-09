@@ -59,7 +59,7 @@ abstract class AbstractOpenApi
     }
 
     /**
-     * fromfinger定requestheadcolumntablemiddle按ordergettoken.
+     * fromfingersetrequestheadcolumntablemiddle按ordergettoken.
      */
     protected function getTokenFromHeaders(array $headerNames): string
     {

@@ -45,8 +45,8 @@ class DelightfulTopicDomainService extends AbstractDomainService
     }
 
     /**
-     * customer端active操asback,minutehairthis操asgivereceive方.
-     * noticethiso clockmessagestructure(eachtypeidetc)allishairup方value.
+     * customerclientactiveoperationasback,minutehairthisoperationasgivereceiveside.
+     * noticethiso clockmessagestructure(eachtypeidetc)allishairupsidevalue.
      * @throws Throwable
      */
     public function dispatchMQTopicOperation(DelightfulSeqEntity $senderSeqEntity): ?DelightfulSeqEntity
@@ -58,11 +58,11 @@ class DelightfulTopicDomainService extends AbstractDomainService
             $receiveConversationEntity = null;
             switch ($controlMessageType) {
                 case ControlMessageType::CreateTopic:
-                    # forto方createonenewtopic
+                    # fortosidecreateonenewtopic
                     /** @var TopicCreateMessage $senderTopicCreateMessage */
                     $senderTopicCreateMessage = $senderSeqEntity->getContent();
                     $conversationId = $senderTopicCreateMessage->getConversationId();
-                    // sessiondoublehairtopic id maintainone致
+                    // sessiondoublehairtopic id maintainoneto
                     $topicId = $senderTopicCreateMessage->getId();
                     $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($conversationId);
                     if ($receiveConversationEntity === null) {
@@ -71,15 +71,15 @@ class DelightfulTopicDomainService extends AbstractDomainService
                     $receiveTopicDTO = new DelightfulTopicEntity();
                     $receiveTopicDTO->setTopicId($topicId);
                     $receiveTopicDTO->setConversationId($receiveConversationEntity->getId());
-                    // query收item方topicwhether存in
+                    // queryreceiveitemsidetopicwhetherexistsin
                     $receiveTopicEntity = $this->delightfulChatTopicRepository->getTopicEntity($receiveTopicDTO);
-                    // ifnot存in,for收item方createtopic
+                    // ifnotexistsin,forreceiveitemsidecreatetopic
                     if ($receiveTopicEntity === null) {
                         $receiveTopicEntity = $this->createReceiveTopic($topicId, senderConversationId: $conversationId);
                     }
                     break;
                 case ControlMessageType::UpdateTopic:
-                    // updateto方topic
+                    // updatetosidetopic
                     /** @var TopicUpdateMessage $senderTopicUpdateMessage */
                     $senderTopicUpdateMessage = $senderSeqEntity->getContent();
                     $receiveTopicEntity = $this->delightfulChatTopicRepository->getPrivateChatReceiveTopicEntity(
@@ -94,7 +94,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                     $receiveTopicEntity = $this->delightfulChatTopicRepository->updateTopic($receiveTopicEntity);
                     break;
                 case ControlMessageType::DeleteTopic:
-                    // deletedouble方topic
+                    // deletedoublesidetopic
                     /** @var TopicDeleteMessage $senderTopicDeleteMessage */
                     $senderTopicDeleteMessage = $senderSeqEntity->getContent();
                     $receiveTopicEntity = $this->delightfulChatTopicRepository->getPrivateChatReceiveTopicEntity(
@@ -113,14 +113,14 @@ class DelightfulTopicDomainService extends AbstractDomainService
                 $receiveConversationEntity = $this->delightfulConversationRepository->getConversationById($receiveTopicEntity->getConversationId());
             }
             if ($receiveTopicEntity && $receiveConversationEntity) {
-                // get收item方 delightful_id
+                // getreceiveitemside delightful_id
                 $receiveUserId = $receiveConversationEntity->getUserId();
                 $receiveUserEntity = $this->delightfulUserRepository->getUserById($receiveUserId);
                 if (! $receiveUserEntity?->getDelightfulId()) {
                     return null;
                 }
                 $senderSeqEntity = SeqAssembler::generateTopicChangeSeqEntity($senderSeqEntity, $receiveTopicEntity, $receiveUserEntity);
-                // for收item方generateoneseq,inform收item方,topichavechange
+                // forreceiveitemsidegenerateoneseq,informreceiveitemside,topichavechange
                 $receiveSeqEntity = $this->delightfulSeqRepository->createSequence($senderSeqEntity->toArray());
             }
             return $receiveSeqEntity ?? null;
@@ -135,7 +135,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
     }
 
     /**
-     * active操astopic.
+     * activeoperationastopic.
      * @return string sessionid
      * @throws Throwable
      */
@@ -158,9 +158,9 @@ class DelightfulTopicDomainService extends AbstractDomainService
             case ControlMessageType::CreateTopic:
                 /** @var TopicCreateMessage $messageStruct */
                 $messageStruct = $messageDTO->getContent();
-                // judgesessionwhether存in,whether属atcurrentuser
+                // judgesessionwhetherexistsin,whetherbelongatcurrentuser
                 $this->checkAndGetSelfConversation($messageStruct->getConversationId(), $dataIsolation);
-                // todo topicnamecreateo clockallowforempty,back续 ai summarytopicname,pushgivecustomer端
+                // todo topicnamecreateo clockallowforempty,back続 ai summarytopicname,pushgivecustomerclient
                 $topicEntity = $this->userCreateTopicHandler($messageStruct, $dataIsolation);
                 break;
             case ControlMessageType::UpdateTopic:
@@ -192,7 +192,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                 'name' => $topicEntity->getName(),
             ];
         }
-        // return写entercontrolmessagemiddle,便atcustomer端process
+        // return写entercontrolmessagemiddle,便atcustomerclientprocess
         $contentChange = MessageAssembler::getControlMessageStruct($messageDTO->getMessageType(), $seqContent);
         $messageDTO->setContent($contentChange);
         $messageDTO->setMessageType($contentChange->getMessageTypeEnum());
@@ -200,11 +200,11 @@ class DelightfulTopicDomainService extends AbstractDomainService
     }
 
     /**
-     * according to收item方or者hairitem方session id + topic id,for收item方createonenewtopic.
+     * according toreceiveitemsideorpersonhairitemsidesession id + topic id,forreceiveitemsidecreateonenewtopic.
      */
     public function createReceiveTopic(string $topicId, string $senderConversationId = '', string $receiveConversationId = ''): ?DelightfulTopicEntity
     {
-        // formessagereceive方createtopic
+        // formessagereceivesidecreatetopic
         if ($senderConversationId) {
             $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($senderConversationId);
         }
@@ -220,7 +220,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
         $receiveTopicDTO->setConversationId($receiveConversationEntity->getId());
         $receiveTopicDTO->setOrganizationCode($receiveConversationEntity->getUserOrganizationCode());
         $receiveTopicDTO->setDescription('');
-        // for收item方createonenewtopic
+        // forreceiveitemsidecreateonenewtopic
         return $this->delightfulChatTopicRepository->createTopic($receiveTopicDTO);
     }
 
@@ -239,13 +239,13 @@ class DelightfulTopicDomainService extends AbstractDomainService
 
     /**
      * agent sendmessageo clockgettopic id.
-     * @param int $getType todo 0:defaulttopic 1:most近topic 2:智cancertaintopic,暂o clockonlysupportdefaulttopic 3 newtopic
+     * @param int $getType todo 0:defaulttopic 1:most近topic 2:智cancertaintopic,暫o clockonlysupportdefaulttopic 3 newtopic
      * @throws Throwable
      */
     public function agentSendMessageGetTopicId(DelightfulConversationEntity $senderConversationEntity, int $getType): string
     {
         $receiverConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($senderConversationEntity->getId());
-        // for收item方createsession,butisnotagain触hair ConversationCreatedEvent event,avoideventloop
+        // forreceiveitemsidecreatesession,butisnotagaintouchhair ConversationCreatedEvent event,avoideventloop
         if (($receiverConversationEntity === null) && in_array($senderConversationEntity->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {
             $conversationDTO = new DelightfulConversationEntity();
             $conversationDTO->setUserId($senderConversationEntity->getReceiveId());
@@ -262,11 +262,11 @@ class DelightfulTopicDomainService extends AbstractDomainService
         if ($getType === 3) {
             $senderTopicId = '';
         }
-        // 收hairdouble方as long ashaveonedefaulttopicnot存in,or者notin同onedefaulttopic,thenneedcreate
+        // receivehairdoublesideas long ashaveonedefaulttopicnotexistsin,orpersonnotinsameonedefaulttopic,thenneedcreate
         if (empty($senderTopicId) || empty($receiverTopicId) || $senderTopicId !== $receiverTopicId) {
             Db::beginTransaction();
             try {
-                // for收hairdouble方meanwhilecreateonedefaulttopic
+                // forreceivehairdoublesidemeanwhilecreateonedefaulttopic
                 $defaultTopicId = (string) IdGenerator::getSnowId();
                 $this->createAndUpdateDefaultTopic($senderConversationEntity, $defaultTopicId);
                 $this->createAndUpdateDefaultTopic($receiverConversationEntity, $defaultTopicId);
@@ -290,7 +290,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
     }
 
     /**
-     * checkdefaulttopicwhether存in.
+     * checkdefaulttopicwhetherexistsin.
      */
     private function checkDefaultTopicExist(DelightfulConversationEntity $conversationEntity): ?string
     {

@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->integer('status')->comment('assistantstatus:enable｜disable');
             $table->string('created_uid')->default('')->comment('publishperson');
             $table->timestamp('created_at')->nullable()->comment('creation time');
-            $table->string('updated_uid')->default('')->comment('update者userID');
+            $table->string('updated_uid')->default('')->comment('updatepersonuserID');
             $table->timestamp('updated_at')->nullable()->comment('update time');
             $table->timestamp('deleted_at')->nullable()->comment('deletion time');
         });

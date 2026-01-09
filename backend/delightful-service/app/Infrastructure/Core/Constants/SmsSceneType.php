@@ -20,37 +20,37 @@ class SmsSceneType
     public const CHANGE_PASSWORD = 'change_password';
 
     /**
-     * bindhand机.
+     * bindhandmachine.
      */
     public const BIND_PHONE = 'bind_phone';
 
     /**
-     * modifyhand机.
+     * modifyhandmachine.
      */
     public const CHANGE_PHONE = 'change_phone';
 
     /**
-     * 账numberregister.
+     * accountnumberregister.
      */
     public const REGISTER_ACCOUNT = 'register_account';
 
     /**
-     * 账numberloginactivate.
+     * accountnumberloginactivate.
      */
     public const ACCOUNT_LOGIN_ACTIVE = 'account_login_active';
 
     /**
-     * 账numberregisteractivate.
+     * accountnumberregisteractivate.
      */
     public const ACCOUNT_REGISTER_ACTIVE = 'account_register_active';
 
     /**
-     * 账numberlogin.
+     * accountnumberlogin.
      */
     public const ACCOUNT_LOGIN = 'account_login';
 
     /**
-     * 账numberloginbindthethird-partyplatform.
+     * accountnumberloginbindthethird-partyplatform.
      */
     public const ACCOUNT_LOGIN_BIND_THIRD_PLATFORM = 'account_login_bind_third_platform';
 

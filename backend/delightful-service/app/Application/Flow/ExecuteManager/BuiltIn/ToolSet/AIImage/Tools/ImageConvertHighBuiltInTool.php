@@ -37,7 +37,7 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return 'image转high清tool';
+        return 'imagetransferhighcleartool';
     }
 
     public function getCallback(): ?Closure
@@ -93,8 +93,8 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
         "user_prompt": {
             "type": "string",
             "key": "user_prompt",
-            "title": "userprompt词",
-            "description": "userprompt词",
+            "title": "userpromptword",
+            "description": "userpromptword",
             "required": null,
             "value": null,
             "encryption": false,
@@ -141,7 +141,7 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
                         "type": "string",
                         "key": "file_url",
                         "sort": 1,
-                        "title": "fileground址",
+                        "title": "filegroundaddress",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -154,7 +154,7 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
                         "type": "string",
                         "key": "file_ext",
                         "sort": 2,
-                        "title": "fileback缀",
+                        "title": "filebacksuffix",
                         "description": "",
                         "required": null,
                         "value": null,

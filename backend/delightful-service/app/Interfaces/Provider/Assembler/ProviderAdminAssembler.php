@@ -27,7 +27,7 @@ class ProviderAdminAssembler
     }
 
     /**
-     * 实bodyconvertforconfiguration DTO.
+     * actualbodyconvertforconfiguration DTO.
      */
     public static function entityToModelsDTO(ProviderConfigEntity $entity): ProviderConfigModelsDTO
     {
@@ -42,7 +42,7 @@ class ProviderAdminAssembler
     }
 
     /**
-     * model实bodyconvertfor DTO.
+     * modelactualbodyconvertfor DTO.
      */
     public static function modelEntityToDTO(ProviderModelEntity $entity): ProviderModelDetailDTO
     {
@@ -50,7 +50,7 @@ class ProviderAdminAssembler
     }
 
     /**
-     * originalmodel实bodyconvertfor DTO.
+     * originalmodelactualbodyconvertfor DTO.
      */
     public static function originalModelEntityToDTO(ProviderOriginalModelEntity $entity): ProviderOriginalModelDTO
     {
@@ -58,7 +58,7 @@ class ProviderAdminAssembler
     }
 
     /**
-     * batchquantityoriginalmodel实bodyconvertfor DTO.
+     * batchquantityoriginalmodelactualbodyconvertfor DTO.
      *
      * @param array<ProviderOriginalModelEntity> $entities
      * @return array<ProviderOriginalModelDTO>

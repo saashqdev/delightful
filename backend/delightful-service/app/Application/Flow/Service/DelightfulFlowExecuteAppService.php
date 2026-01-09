@@ -100,7 +100,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             executionType: ExecutionType::IMChat,
         );
 
-        // ifis conversation,forcestart stream 模type
+        // ifis conversation,forcestart stream modetype
         if ($triggerType === TriggerType::ChatMessage) {
             $executionData->setStream(true);
         }
@@ -142,7 +142,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $flowData = $this->getFlow($flowDataIsolation, $apiChatDTO->getFlowCode(), [Type::Main]);
         $delightfulFlow = $flowData['flow'];
 
-        // setfinger令
+        // setfingercommand
         $messageEntity = new TextMessage(['content' => $apiChatDTO->getMessage()]);
         if (! empty($apiChatDTO->getInstruction())) {
             $msgInstruct = $this->generateChatInstruction($apiChatDTO);
@@ -211,7 +211,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $flowData = $this->getFlow($flowDataIsolation, $apiChatDTO->getFlowCode(), [Type::Sub, Type::Tools], operationValidate: $operationValidate);
         $delightfulFlow = $flowData['flow'];
 
-        // setfinger令
+        // setfingercommand
         $messageEntity = new TextMessage(['content' => $apiChatDTO->getMessage()]);
 
         $triggerData = new TriggerData(
@@ -374,18 +374,18 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $apiChatDTO->getTaskId()]);
         }
 
-        // checkwhether具havetheprocesspermission
+        // checkwhetherwithhavetheprocesspermission
         $this->getFlow($flowDataIsolation, $log->getFlowCode(), operationValidate: 'read');
 
         return $log;
     }
 
     /**
-     * scheduletask触hair.
+     * scheduletasktouchhair.
      */
     public static function routine(string $flowCode, string $branchId, array $routineConfig = []): void
     {
-        // 暂o clockonlysystemlevel别scheduletask
+        // 暫o clockonlysystemlevelotherscheduletask
         $dataIsolation = FlowDataIsolation::create();
         $delightfulFlow = di(DelightfulFlowDomainService::class)->getByCode($dataIsolation, $flowCode);
         if (! $delightfulFlow) {
@@ -481,7 +481,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             messageInfo: ['message_entity' => TriggerData::createMessageEntity(new TextMessage(['content' => $triggerConfig['trigger_data']['content'] ?? '']))],
             params: $triggerConfig['trigger_data'] ?? [],
             paramsForm: $triggerConfig['trigger_data_form'] ?? [],
-            // trial operationlineo clock,all局variableforhand动pass in
+            // trial operationlineo clock,alllocalvariableforhandautopass in
             globalVariable: ComponentFactory::fastCreate($triggerConfig['global_variable'] ?? []) ?? $delightfulFlowEntity->getGlobalVariable(),
             attachments: AttachmentUtil::getByApiArray($triggerConfig['trigger_data']['files'] ?? []),
         );
@@ -503,11 +503,11 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $executionData->setTopicId($topicId);
         $executionData->setAgentId($delightfulFlowEntity->getAgentId());
         $executionData->setDebug((bool) ($triggerConfig['debug'] ?? false));
-        // 运lineprocessgraph,detectwhethercan运line
+        // runlineprocessgraph,detectwhethercanrunline
         $executor = new DelightfulFlowExecutor($delightfulFlowEntity, $executionData);
         $executor->execute();
 
-        // get node 运lineresult
+        // get node runlineresult
         foreach ($delightfulFlowEntity->getNodes() as $node) {
             if ($node->getNodeDebugResult()) {
                 // haveonefailthendetermineforfail

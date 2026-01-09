@@ -32,44 +32,44 @@ interface ProviderConfigRepositoryInterface
     public function delete(ProviderDataIsolation $dataIsolation, string $id): void;
 
     /**
-     * passconfigurationIDandorganizationencodinggetservicequotientconfiguration实body.
+     * passconfigurationIDandorganizationencodinggetservicequotientconfigurationactualbody.
      *
      * @param string $serviceProviderConfigId servicequotientconfigurationID
      * @param string $organizationCode organizationencoding
-     * @return null|ProviderConfigEntity servicequotientconfiguration实body
+     * @return null|ProviderConfigEntity servicequotientconfigurationactualbody
      */
     public function getProviderConfigEntityById(string $serviceProviderConfigId, string $organizationCode): ?ProviderConfigEntity;
 
     /**
-     * according toservicequotientIDfindconfiguration(按IDascending取first).
+     * according toservicequotientIDfindconfiguration(按IDascendinggetfirst).
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param int $serviceProviderId servicequotientID
-     * @return null|ProviderConfigEntity configuration实body
+     * @return null|ProviderConfigEntity configurationactualbody
      */
     public function findFirstByServiceProviderId(ProviderDataIsolation $dataIsolation, int $serviceProviderId): ?ProviderConfigEntity;
 
     /**
-     * according toIDgetconfiguration实body(not按organizationfilter,all局query).
+     * according toIDgetconfigurationactualbody(not按organizationfilter,alllocalquery).
      *
      * @param int $id configurationID
-     * @return null|ProviderConfigEntity configuration实body
+     * @return null|ProviderConfigEntity configurationactualbody
      */
     public function getByIdWithoutOrganizationFilter(int $id): ?ProviderConfigEntity;
 
     /**
-     * according toIDarraygetconfiguration实bodylist(not按organizationfilter,all局query).
+     * according toIDarraygetconfigurationactualbodylist(not按organizationfilter,alllocalquery).
      *
      * @param array<int> $ids configurationIDarray
-     * @return array<int, ProviderConfigEntity> returnbyidforkeyconfiguration实bodyarray
+     * @return array<int, ProviderConfigEntity> returnbyidforkeyconfigurationactualbodyarray
      */
     public function getByIdsWithoutOrganizationFilter(array $ids): array;
 
     /**
-     * getorganizationdown所haveenableservicequotientconfiguration.
+     * getorganizationdown haveenableservicequotientconfiguration.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
-     * @return array<ProviderConfigEntity> servicequotientconfiguration实bodyarray
+     * @return array<ProviderConfigEntity> servicequotientconfigurationactualbodyarray
      */
     public function getAllByOrganization(ProviderDataIsolation $dataIsolation): array;
 }

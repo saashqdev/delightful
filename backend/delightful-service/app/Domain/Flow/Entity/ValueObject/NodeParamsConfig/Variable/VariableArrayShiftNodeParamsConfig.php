@@ -64,7 +64,7 @@ class VariableArrayShiftNodeParamsConfig extends NodeParamsConfig
             "type": "string",
             "key": "variable_name",
             "sort": 0,
-            "title": "变quantity名",
+            "title": "changequantityname",
             "description": "",
             "required": null,
             "value": null,

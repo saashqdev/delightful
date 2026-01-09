@@ -46,7 +46,7 @@ readonly class KnowledgeBaseDocumentSyncSubscriber implements ListenerInterface
         $knowledge = $event->knowledgeBaseEntity;
         $documentEntity = $event->knowledgeBaseDocumentEntity;
         $dataIsolation = $event->dataIsolation;
-        // ifisfoundationknowledge basetype,then传knowledge basecreate者,avoidpermissionnot足
+        // ifisfoundationknowledge basetype,then传knowledge basecreateperson,avoidpermissionnot足
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }
@@ -58,9 +58,9 @@ readonly class KnowledgeBaseDocumentSyncSubscriber implements ListenerInterface
         $knowledgeBaseVectorAppService = di(KnowledgeBaseVectorAppService::class);
 
         try {
-            // checksetwhether存in
+            // checksetwhetherexistsin
             $knowledgeBaseVectorAppService->checkCollectionExists($knowledge);
-            // 同document
+            // samedocument
             $knowledgeBaseVectorAppService->syncDocument($dataIsolation, $knowledge, $documentEntity);
         } catch (Throwable $throwable) {
             $logger->error($throwable->getMessage() . PHP_EOL . $throwable->getTraceAsString());

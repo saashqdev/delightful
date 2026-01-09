@@ -10,8 +10,8 @@ namespace App\Domain\ImageGenerate\Contract;
 use App\Domain\ImageGenerate\ValueObject\ImplicitWatermark;
 
 /**
- * imageenhanceprocess器interface
- * useatforimageembeddingenhanceinformation(如隱typewatermarketc).
+ * imageenhanceprocessdeviceinterface
+ * useatforimageembeddingenhanceinformation(like隱typewatermarketc).
  */
 interface ImageEnhancementProcessorInterface
 {

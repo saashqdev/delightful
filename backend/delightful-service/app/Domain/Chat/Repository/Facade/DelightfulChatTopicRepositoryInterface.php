@@ -66,7 +66,7 @@ interface DelightfulChatTopicRepositoryInterface
     /**
      * Get topics by topic ID.
      * @param string $topicId topicID
-     * @return DelightfulTopicEntity[] topic实bodyarray
+     * @return DelightfulTopicEntity[] topicactualbodyarray
      */
     public function getTopicsByTopicId(string $topicId): array;
 
@@ -74,8 +74,8 @@ interface DelightfulChatTopicRepositoryInterface
      * Get topic messages by conversation ID, topic ID and max seq ID.
      * @param string $conversationId conversationID
      * @param string $topicId topicID
-     * @param int $maxSeqId mostbig序columnID(containtheID)
-     * @return DelightfulTopicMessageEntity[] topicmessage实bodyarray
+     * @param int $maxSeqId mostbigsequencecolumnID(containtheID)
+     * @return DelightfulTopicMessageEntity[] topicmessageactualbodyarray
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array;
 }

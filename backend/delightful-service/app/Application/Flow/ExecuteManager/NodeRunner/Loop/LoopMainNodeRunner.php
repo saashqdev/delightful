@@ -27,7 +27,7 @@ use Throwable;
 #[FlowNodeDefine(
     type: NodeType::LoopMain->value,
     code: NodeType::LoopMain->name,
-    name: 'loop / 主loop',
+    name: 'loop / mainloop',
     paramsConfig: LoopMainNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,
@@ -50,7 +50,7 @@ class LoopMainNodeRunner extends NodeRunner
         }
 
         $breakVariableKey = "#{$bodyId}_break";
-        // 采usevariablecomeinitialize跳outloopconfiguration
+        // 采usevariablecomeinitializejumpoutloopconfiguration
         $executionData->variableSave($breakVariableKey, false);
 
         $params = $this->node->getParams();
@@ -143,18 +143,18 @@ class LoopMainNodeRunner extends NodeRunner
             return null;
         }
 
-        // get所have 父 id isthisloopbodysectionpoint
+        // get have parent id isthisloopbodysectionpoint
         $childNodes = $delightfulFlow->getNodesByParentId($bodyId);
         if (empty($childNodes)) {
             return null;
         }
-        // goexcept父 id property,not然willbefilter
+        // goexceptparent id property,not然willbefilter
         foreach ($childNodes as $node) {
             $meta = $node->getMeta();
             $meta['parent_id'] = '';
             $node->setMeta($meta);
         }
-        // more换executesectionpoint
+        // moreexchangeexecutesectionpoint
         $loopDelightfulFlow->setNodes($childNodes);
 
         return $loopDelightfulFlow;

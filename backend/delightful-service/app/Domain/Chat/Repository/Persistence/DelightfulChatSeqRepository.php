@@ -64,7 +64,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     {
         $insertData = [];
         foreach ($seqList as $seqEntity) {
-            // willentitymiddlearray转forstring
+            // willentitymiddlearraytransferforstring
             $seqInfo = $seqEntity->toArray();
             $seqInfo['content'] = Json::encode($seqInfo['content']);
             $seqInfo['receive_list'] = Json::encode($seqInfo['receive_list']);
@@ -81,7 +81,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     }
 
     /**
-     * returnmostbigmessagecountdown n item序column.
+     * returnmostbigmessagecountdown n itemsequencecolumn.
      * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
      * @return ClientSequenceResponse[]
      */
@@ -101,7 +101,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     }
 
     /**
-     * return $userLocalMaxSeqId 之back $limit itemmessage.
+     * return $userLocalMaxSeqId ofback $limit itemmessage.
      * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
      * @return ClientSequenceResponse[]
      */
@@ -179,7 +179,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
         $limit = $messagesQueryDTO->getLimit();
         $query = $this->delightfulSeq::query()->whereIn('conversation_id', $conversationIds);
         if (! empty($pageToken)) {
-            // currentsessionhistorymessagemiddlemostsmall seq id. willusecome查ratioitalsosmallvalue
+            // currentsessionhistorymessagemiddlemostsmall seq id. willusecomecheckratioitalsosmallvalue
             $query->where('seq_id', $operator, $pageToken);
         }
         if ($timeStart !== null) {
@@ -218,7 +218,7 @@ sql;
     }
 
     /**
-     * get收item方messagestatus变morestream.
+     * getreceiveitemsidemessagestatuschangemorestream.
      * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
      * @return DelightfulSeqEntity[]
      */
@@ -232,7 +232,7 @@ sql;
     }
 
     /**
-     * gethairitem方messagestatus变morestream.
+     * gethairitemsidemessagestatuschangemorestream.
      * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
      * @return DelightfulSeqEntity[]
      */
@@ -272,7 +272,7 @@ sql;
             ->orderBy('seq_id', 'desc');
         $statusChangeSeq = Db::select($statusChangeSeq->toSql(), $statusChangeSeq->getBindings())[0] ?? null;
         if (empty($statusChangeSeq)) {
-            // nothavestatus变moremessage
+            // nothavestatuschangemoremessage
             $statusChangeSeq = $this->delightfulSeq::query()
                 ->where('id', $messageId)
                 ->orderBy('id', 'desc');
@@ -333,7 +333,7 @@ sql;
         return SeqAssembler::getSeqEntity($seqInfo);
     }
 
-    // todo 移to delightful_chat_topic_messages process
+    // todo moveto delightful_chat_topic_messages process
     public function getConversationSeqByType(string $delightfulId, string $conversationId, ControlMessageType $seqType): ?DelightfulSeqEntity
     {
         $query = $this->delightfulSeq::query()
@@ -381,7 +381,7 @@ sql;
         return (int) $this->delightfulSeq::query()->whereIn('id', $seqIds)->delete();
     }
 
-    // for移except脏data写method
+    // formoveexcept脏data写method
     public function getSeqByDelightfulId(string $delightfulId, int $limit): array
     {
         $query = $this->delightfulSeq::query()
@@ -391,10 +391,10 @@ sql;
         return Db::select($query->toSql(), $query->getBindings());
     }
 
-    // for移except脏data写method
+    // formoveexcept脏data写method
     public function getHasTrashMessageUsers(): array
     {
-        // 按 delightful_id minutegroup,找outhavegarbagemessageuser
+        // 按 delightful_id minutegroup,findouthavegarbagemessageuser
         $query = $this->delightfulSeq::query()
             ->select('object_id')
             ->groupBy('object_id')
@@ -442,8 +442,8 @@ sql;
     /**
      * Get sequences by conversation ID and seq IDs.
      * @param string $conversationId sessionID
-     * @param array $seqIds 序columnIDarray
-     * @return DelightfulSeqEntity[] 序column实bodyarray
+     * @param array $seqIds sequencecolumnIDarray
+     * @return DelightfulSeqEntity[] sequencecolumnactualbodyarray
      */
     public function getSequencesByConversationIdAndSeqIds(string $conversationId, array $seqIds): array
     {
@@ -461,7 +461,7 @@ sql;
     }
 
     /**
-     * getmessagestatus变morestream.
+     * getmessagestatuschangemorestream.
      * @return DelightfulSeqEntity[]
      */
     private function getMessagesStatusChangeSeq(array $referMessageIds, DelightfulUserEntity $userEntity): array
@@ -474,7 +474,7 @@ sql;
             ->forceIndex('idx_object_type_id_refer_message_id')
             ->orderBy('seq_id', 'desc');
         $referMessages = Db::select($query->toSql(), $query->getBindings());
-        // from refer_message_id middle找outmessagemostnewstatus
+        // from refer_message_id middlefindoutmessagemostnewstatus
         $query = $this->delightfulSeq::query()
             ->where('object_type', $userEntity->getUserType()->value)
             ->where('object_id', $userEntity->getDelightfulId())
@@ -482,7 +482,7 @@ sql;
             ->forceIndex('idx_object_type_id_seq_id')
             ->orderBy('seq_id', 'desc');
         $seqList = Db::select($query->toSql(), $query->getBindings());
-        // mergebackagaindescendingrowcolumn,fastspeed找outmessagemostnewstatus
+        // mergebackagaindescendingrowcolumn,fastspeedfindoutmessagemostnewstatus
         $seqList = array_merge($seqList, $referMessages);
         $seqList = array_column($seqList, null, 'id');
         krsort($seqList);
@@ -496,7 +496,7 @@ sql;
     private function getClientSequencesResponse(array $seqInfos): array
     {
         $delightfulMessageIds = [];
-        // chatmessage,查messagetablegetmessagecontent
+        // chatmessage,checkmessagetablegetmessagecontent
         foreach ($seqInfos as $seqInfo) {
             $seqType = MessageAssembler::getMessageType($seqInfo['seq_type']);
             if ($seqType instanceof ChatMessageType) {
@@ -529,7 +529,7 @@ sql;
     }
 
     /**
-     * batchquantityreturncustomer端needSeqstructure.
+     * batchquantityreturncustomerclientneedSeqstructure.
      * @return ClientSequenceResponse[]
      */
     private function getMessagesBySeqList(array $seqList, Order $order = Order::Desc): array
@@ -541,10 +541,10 @@ sql;
         return SeqAssembler::sortSeqList($clientSequenceResponses, $order);
     }
 
-    // avoid redis cacheserializeobject,占usetoo多inside存
+    // avoid redis cacheserializeobject,占usetoomultipleinsideexists
     private function getAccountIdByUserId(string $uid): ?DelightfulUserEntity
     {
-        // according touid找toaccount_id
+        // according touidfindtoaccount_id
         return $this->delightfulUserRepository->getUserById($uid);
     }
 

@@ -85,7 +85,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 转letorganizationcreateperson身share.
+     * transferletorganizationcreateperson身share.
      */
     public function transferOwnership(DataIsolation $dataIsolation, string $newOwnerUserId, string $currentOwnerUserId): void
     {
@@ -93,12 +93,12 @@ class OrganizationAdminAppService extends AbstractKernelAppService
             $dataIsolation,
             $currentOwnerUserId,
             $newOwnerUserId,
-            $currentOwnerUserId // 操authortheniscurrentcreate者
+            $currentOwnerUserId // operationauthortheniscurrentcreateperson
         );
     }
 
     /**
-     * richorganizationadministrator实bodyuserinfo.
+     * richorganizationadministratoractualbodyuserinfo.
      */
     private function enrichOrganizationAdminWithUserInfo(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdmin): array
     {

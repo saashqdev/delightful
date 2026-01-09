@@ -17,8 +17,8 @@ use Throwable;
 
 #[Aspect]
 /**
- * 1.fornotletuser看toonethesesql/codeexception,thereforewillin config/api-response.php  error_exception configurationmiddle,will意outsideexceptionconvertfor统onesysteminside部errorexception.
- * 2.logrecordexceptioninfo,便atrow查issue.
+ * 1.fornotletuser看toonethesesql/codeexception,thereforewillin config/api-response.php  error_exception configurationmiddle,will意outsideexceptionconvertfor統onesysteminside部errorexception.
+ * 2.logrecordexceptioninfo,便atrowcheckissue.
  */
 class ApiResponseExceptionLogAspect extends AbstractAspect
 {
@@ -42,9 +42,9 @@ class ApiResponseExceptionLogAspect extends AbstractAspect
         try {
             return $proceedingJoinPoint->process();
         } catch (Throwable $exception) {
-            // onethese兜bottomexceptionlogprint,maybe存induplicatelogprint,butisforguaranteeexceptioninfonotlost,所bythiswithinnot做judge.
+            // onethesefallbackbottomexceptionlogprint,maybeexistsinduplicatelogprint,butisforguaranteeexceptioninfonotlost, bythiswithinnotmakejudge.
             $this->logger->error(
-                __CLASS__ . ' hair生exception message:{message}, code:{code}, file:{file}, line:{line}, trace:{trace}',
+                __CLASS__ . ' hairgenerateexception message:{message}, code:{code}, file:{file}, line:{line}, trace:{trace}',
                 [
                     'message' => $exception->getMessage(),
                     'code' => $exception->getCode(),

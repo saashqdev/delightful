@@ -76,7 +76,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $permissions = $this->permissionEnum->generateAllPermissions();
 
         $this->assertIsArray($permissions);
-        // shouldhave 2 resource × 2 操as = 4 permission(rowexceptexport操as)
+        // shouldhave 2 resource × 2 operationas = 4 permission(rowexceptexportoperationas)
         $this->assertCount(4, $permissions);
 
         // checkpermissionstructure
@@ -92,7 +92,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
             $this->assertContains($permission['operation'], $this->permissionEnum->getOperations());
         }
 
-        // checkspecificpermissionwhether存in
+        // checkspecificpermissionwhetherexistsin
         $permissionKeys = array_column($permissions, 'permission_key');
         $this->assertContains('admin.ai.model_management.query', $permissionKeys);
         $this->assertContains('admin.ai.model_management.manage', $permissionKeys);
@@ -102,7 +102,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
 
     public function testIsValidPermissionWithValidKeys()
     {
-        // testall局permission
+        // testalllocalpermission
         $this->assertTrue($this->permissionEnum->isValidPermission(DelightfulPermission::ALL_PERMISSIONS));
 
         // testvalidpermissiongroup合
@@ -129,7 +129,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $this->assertIsArray($tree);
         $this->assertGreaterThanOrEqual(1, count($tree));
 
-        // 找to Admin platformsectionpointconductenterone步validation
+        // findto Admin platformsectionpointconductenterone步validation
         $platformsByKey = [];
         foreach ($tree as $node) {
             $platformsByKey[$node['permission_key']] = $node;
@@ -138,7 +138,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $this->assertArrayNotHasKey('platform', $platformsByKey);
         $platform = $platformsByKey['admin'];
 
-        $this->assertEquals('manageback台', $platform['label']);
+        $this->assertEquals('managebackplatform', $platform['label']);
         $this->assertArrayHasKey('children', $platform);
         $this->assertNotEmpty($platform['children']);
 
@@ -162,7 +162,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     {
         $permissions = $this->permissionEnum->generateAllPermissions();
 
-        // ensurenothaveexport操aspermission
+        // ensurenothaveexportoperationaspermission
         foreach ($permissions as $permission) {
             $this->assertNotEquals('export', $permission['operation']);
         }

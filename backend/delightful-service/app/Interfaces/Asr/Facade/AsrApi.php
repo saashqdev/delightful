@@ -89,7 +89,7 @@ class AsrApi extends AbstractApi
     }
 
     /**
-     * 清exceptcurrentuserASR JWT Tokencache
+     * clearexceptcurrentuserASR JWT Tokencache
      * DELETE /api/v1/asr/tokens.
      */
     public function destroy(): array
@@ -131,7 +131,7 @@ class AsrApi extends AbstractApi
                     ExceptionBuilder::throw(AsrErrorCode::TaskAlreadyCanceled);
                 }
 
-                // statuscheck 2:taskalreadycomplete(onlyinthiswithinrecordlog,allow重newsummarybymore换model)
+                // statuscheck 2:taskalreadycomplete(onlyinthiswithinrecordlog,allow重newsummarybymoreexchangemodel)
                 if ($taskStatus->isSummaryCompleted()) {
                     $this->logger->info('taskalreadycomplete,allowusenewmodel重newsummary', [
                         'task_key' => $summaryRequest->taskKey,
@@ -198,35 +198,35 @@ class AsrApi extends AbstractApi
         }
 
         try {
-            // 3. create .asr_recordings 父directory(所haverecordingtypeallneed)
+            // 3. create .asr_recordings parentdirectory( haverecordingtypeallneed)
             try {
                 $recordingsDir = $this->directoryService->createRecordingsDirectory($organizationCode, $projectId, $userId);
-                $this->logger->info('.asr_recordings 父directorycreateorconfirm存in', [
+                $this->logger->info('.asr_recordings parentdirectorycreateorconfirmexistsin', [
                     'task_key' => $taskKey,
                     'recording_type' => $recordingType->value,
                     'recordings_dir_id' => $recordingsDir->directoryId,
                     'recordings_dir_path' => $recordingsDir->directoryPath,
                 ]);
             } catch (Throwable $e) {
-                // .asr_recordings directorycreatefailnotimpact主process
-                $this->logger->warning('create .asr_recordings 父directoryfail', [
+                // .asr_recordings directorycreatefailnotimpactmainprocess
+                $this->logger->warning('create .asr_recordings parentdirectoryfail', [
                     'task_key' => $taskKey,
                     'recording_type' => $recordingType->value,
                     'error' => $e->getMessage(),
                 ]);
             }
 
-            // 4. create .asr_states directory(所haverecordingtypeallneed)
+            // 4. create .asr_states directory( haverecordingtypeallneed)
             try {
                 $statesDir = $this->directoryService->createStatesDirectory($organizationCode, $projectId, $userId);
-                $this->logger->info('.asr_states directorycreateorconfirm存in', [
+                $this->logger->info('.asr_states directorycreateorconfirmexistsin', [
                     'task_key' => $taskKey,
                     'recording_type' => $recordingType->value,
                     'states_dir_id' => $statesDir->directoryId,
                     'states_dir_path' => $statesDir->directoryPath,
                 ]);
             } catch (Throwable $e) {
-                // .asr_states directorycreatefailnotimpact主process
+                // .asr_states directorycreatefailnotimpactmainprocess
                 $this->logger->warning('create .asr_states directoryfail', [
                     'task_key' => $taskKey,
                     'recording_type' => $recordingType->value,
@@ -236,7 +236,7 @@ class AsrApi extends AbstractApi
 
             // 5. in advancegeneratetitle(forincreatedirectoryo clockuse)
             $generatedTitle = null;
-            // getcurrentstatusbycheckwhetheralready存intitle
+            // getcurrentstatusbycheckwhetheralreadyexistsintitle
             $currentTaskStatus = $this->asrFileAppService->getTaskStatusFromRedis($taskKey, $userId);
 
             if (
@@ -259,7 +259,7 @@ class AsrApi extends AbstractApi
                         ]);
                     }
                 } catch (Throwable $e) {
-                    // titlegeneratefailnotimpact主process
+                    // titlegeneratefailnotimpactmainprocess
                     $this->logger->warning('filedirect uploadtitlegeneratefail', [
                         'task_key' => $taskKey,
                         'file_name' => $fileName,
@@ -314,7 +314,7 @@ class AsrApi extends AbstractApi
                         'transcript_file_path' => $taskStatus->presetTranscriptFilePath,
                     ]);
                 } catch (Throwable $e) {
-                    // presetfilecreatefailnotimpact主process
+                    // presetfilecreatefailnotimpactmainprocess
                     $this->logger->warning('createpresetfilefail', [
                         'task_key' => $taskKey,
                         'error' => $e->getMessage(),
@@ -351,7 +351,7 @@ class AsrApi extends AbstractApi
         $asrStreamContent = $request->input('asr_stream_content', '');
         $noteData = $request->input('note');
 
-        // get语type
+        // getlanguagetype
         $language = CoContext::getLanguage();
 
         $this->logger->info('reportStatus starthandle', [
@@ -378,7 +378,7 @@ class AsrApi extends AbstractApi
         $taskStatus = $this->asrFileAppService->getTaskStatusFromRedis($taskKey, $userId);
         if (! $taskStatus->isEmpty()) {
             if ($taskStatus->hasServerSummaryLock()) {
-                $this->logger->info('reportStatus service端summaryconductmiddle,rejectstatusup报', [
+                $this->logger->info('reportStatus serviceclientsummaryconductmiddle,rejectstatusup报', [
                     'task_key' => $taskKey,
                     'user_id' => $userId,
                     'retry_count' => $taskStatus->serverSummaryRetryCount,
@@ -399,7 +399,7 @@ class AsrApi extends AbstractApi
                 ExceptionBuilder::throw(AsrErrorCode::TaskAlreadyCanceled);
             }
 
-            // statuscheck 3:recordingalreadystopandalreadymerge,notallowagain start/recording(maybeiscore跳timeoutfrom动stop)
+            // statuscheck 3:recordingalreadystopandalreadymerge,notallowagain start/recording(maybeiscorejumptimeoutfromautostop)
             if (
                 $taskStatus->recordingStatus === AsrRecordingStatusEnum::STOPPED->value
                 && ! empty($taskStatus->audioFileId)
@@ -491,7 +491,7 @@ class AsrApi extends AbstractApi
             }
         }
 
-        // 2. ifnothavefrom Redis gettotitle,then重newgenerate(front端recordingoroldlogic)
+        // 2. ifnothavefrom Redis gettotitle,then重newgenerate(frontclientrecordingoroldlogic)
         if (empty($generatedTitle)) {
             $generatedTitle = $this->titleGeneratorService->generateTitleForScenario(
                 $userAuthorization,
@@ -603,7 +603,7 @@ class AsrApi extends AbstractApi
 
         $projectId = $this->asrFileAppService->getProjectIdFromTopic((int) $topicId, $userId);
 
-        // getfile名(onlyin file_upload typeo clockuse)
+        // getfilename(onlyin file_upload typeo clockuse)
         $fileName = $request->input('file_name', '');
 
         return [$taskKey, $topicId, $projectId, $recordingType, $fileName];
@@ -628,7 +628,7 @@ class AsrApi extends AbstractApi
         }
 
         if ($taskStatus->hasServerSummaryLock()) {
-            $this->logger->info('getUploadToken service端summaryconductmiddle,rejecthair放uploadvoucher', [
+            $this->logger->info('getUploadToken serviceclientsummaryconductmiddle,rejecthairputuploadvoucher', [
                 'task_key' => $taskKey,
                 'user_id' => $userId,
                 'retry_count' => $taskStatus->serverSummaryRetryCount,
@@ -646,7 +646,7 @@ class AsrApi extends AbstractApi
             ExceptionBuilder::throw(AsrErrorCode::TaskAlreadyCanceled);
         }
 
-        // statuscheck 3:recordingalreadystop,notallowupload(maybeiscore跳timeoutfrom动stop)
+        // statuscheck 3:recordingalreadystop,notallowupload(maybeiscorejumptimeoutfromautostop)
         if (
             $taskStatus->recordingStatus === AsrRecordingStatusEnum::STOPPED->value
             && ! empty($taskStatus->audioFileId)
@@ -654,12 +654,12 @@ class AsrApi extends AbstractApi
             ExceptionBuilder::throw(AsrErrorCode::TaskAutoStoppedByTimeout);
         }
 
-        // back续call:update必wantfield
+        // back続call:updaterequiredwantfield
         $this->asrFileAppService->validateProjectAccess($projectId, $userId, $organizationCode);
         $taskStatus->projectId = $projectId;
         $taskStatus->topicId = $topicId;
 
-        $this->logger->info('back续call getUploadToken,usealreadyhavedirectory', [
+        $this->logger->info('back続call getUploadToken,usealreadyhavedirectory', [
             'task_key' => $taskKey,
             'hidden_directory' => $taskStatus->tempHiddenDirectory,
             'display_directory' => $taskStatus->displayDirectory,
@@ -764,7 +764,7 @@ class AsrApi extends AbstractApi
             'directories' => $directories,
         ];
 
-        // onlywhenpresetfile存ino clock才addtoreturnmiddle
+        // onlywhenpresetfileexistsino clock才addtoreturnmiddle
         if (! empty($presetFiles)) {
             $response['preset_files'] = $presetFiles;
         }
@@ -835,7 +835,7 @@ class AsrApi extends AbstractApi
     }
 
     /**
-     * fromdirectoryarraymiddlefindfinger定typedirectory.
+     * fromdirectoryarraymiddlefindfingersettypedirectory.
      */
     private function findDirectoryByType(array $directories, bool $hidden): ?AsrRecordingDirectoryDTO
     {

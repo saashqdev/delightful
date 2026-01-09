@@ -124,7 +124,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
     }
 
     /**
-     * (minuteorganization)getuserandfinger定usersessionwindowinfo.
+     * (minuteorganization)getuserandfingersetusersessionwindowinfo.
      * @return array<DelightfulConversationEntity>
      */
     public function getConversationsByReceiveIds(string $userId, array $receiveIds, ?string $userOrganizationCode = null): array
@@ -140,12 +140,12 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
 
     public function getReceiveConversationBySenderConversationId(string $senderConversationId): ?DelightfulConversationEntity
     {
-        // gethairitem方info
+        // gethairitemsideinfo
         $senderConversationEntity = $this->getConversationById($senderConversationId);
         if ($senderConversationEntity === null) {
             return null;
         }
-        // get收item方sessionwindow
+        // getreceiveitemsidesessionwindow
         $receiveConversationDTO = new DelightfulConversationEntity();
         $receiveConversationDTO->setUserId($senderConversationEntity->getReceiveId());
         $receiveConversationDTO->setReceiveId($senderConversationEntity->getUserId());
@@ -200,7 +200,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
     }
 
     /**
-     * batchquantity移exceptsessionwindow.
+     * batchquantitymoveexceptsessionwindow.
      */
     public function batchRemoveConversations(array $userIds, string $receiveId, ConversationType $receiveType): int
     {
@@ -250,7 +250,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
     }
 
     /**
-     * batchquantityupdatesessionwindowinteractionfinger令.
+     * batchquantityupdatesessionwindowinteractionfingercommand.
      * @param array $updateData formatfor:[['conversation_id' => 'xxx', 'instructs' => [...]], ...]
      */
     public function batchUpdateInstructs(array $updateData): void
@@ -327,7 +327,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
             ->when($conversation->hasReceiveType(), function ($query) use ($conversation) {
                 $query->where('receive_type', $conversation->getReceiveType()->value);
             });
-        // receive_type +  receive_id its实isalllocally uniqueone,cancertainorganizationencoding. butisifneedqueryo clockfinger定organization,alsoisaddup
+        // receive_type +  receive_id itsactualisalllocally uniqueone,cancertainorganizationencoding. butisifneedqueryo clockfingersetorganization,alsoisaddup
         if ($conversation->getUserOrganizationCode()) {
             $query->where('user_organization_code', $conversation->getUserOrganizationCode());
         }
@@ -341,7 +341,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
         return $result;
     }
 
-    // avoid redis cacheserializeobject,占usetoo多inside存
+    // avoid redis cacheserializeobject,占usetoomultipleinsideexists
     #[Cacheable(prefix: 'conversation', value: '_#{conversationId}', ttl: 10)]
     private function getConversationArrayById(string $conversationId): array
     {

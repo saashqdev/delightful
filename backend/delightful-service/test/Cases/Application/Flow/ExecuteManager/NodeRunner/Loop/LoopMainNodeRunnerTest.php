@@ -260,7 +260,7 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
         },
         {
             "node_id": "DELIGHTFUL-FLOW-NODE-66dfddf5198532-03952904",
-            "name": "变quantitysetting",
+            "name": "changequantitysetting",
             "description": "",
             "node_type": 21,
             "meta": {

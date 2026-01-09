@@ -91,7 +91,7 @@ class FileCleanupRecordRepository
         $models = FileCleanupRecordModel::query()
             ->where('status', 2) // failstatus
             ->where('retry_count', '<', $maxRetries)
-            ->where('updated_at', '<=', date('Y-m-d H:i:s', time() - 300)) // 5minute钟frontupdaterecord
+            ->where('updated_at', '<=', date('Y-m-d H:i:s', time() - 300)) // 5minutesecondsfrontupdaterecord
             ->orderBy('updated_at', 'asc')
             ->limit($limit)
             ->get();
@@ -247,7 +247,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * will多ModelconvertforEntityarray.
+     * willmultipleModelconvertforEntityarray.
      */
     private function modelsToEntities(Collection $models): array
     {

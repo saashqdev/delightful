@@ -36,7 +36,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getCallback(): ?Closure
     {
-        // canacceptparameterfinger定any model,defaultisVolcano.
+        // canacceptparameterfingersetany model,defaultisVolcano.
         return function (ExecutionData $executionData) {
             $args = $executionData->getTriggerData()?->getParams();
             $model = $args['model'] ?? ImageGenerateModelType::Volcengine->value;
@@ -64,7 +64,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "model": {
             "type": "string",
             "key": "model",
-            "title": "所usetext generationgraphmodel",
+            "title": " usetext generationgraphmodel",
             "description": "optional:Volcengine,Midjourney,Flux1-Schnell,defaultVolcengine,TTAPI-GPT4o",
             "required": null,
             "value": null,
@@ -76,7 +76,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "radio": {
             "type": "string",
             "key": "radio",
-            "title": "generateimageratio例",
+            "title": "generateimageratioexample",
             "description": "optional:\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",default\"1:1\"",
             "required": null,
             "value": null,
@@ -88,8 +88,8 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "user_prompt": {
             "type": "string",
             "key": "user_prompt",
-            "title": "userprompt词",
-            "description": "userprompt词",
+            "title": "userpromptword",
+            "description": "userpromptword",
             "required": null,
             "value": null,
             "encryption": false,
@@ -160,7 +160,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
                         "type": "string",
                         "key": "file_url",
                         "sort": 1,
-                        "title": "fileground址",
+                        "title": "filegroundaddress",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -173,7 +173,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
                         "type": "string",
                         "key": "file_ext",
                         "sort": 2,
-                        "title": "fileback缀",
+                        "title": "filebacksuffix",
                         "description": "",
                         "required": null,
                         "value": null,

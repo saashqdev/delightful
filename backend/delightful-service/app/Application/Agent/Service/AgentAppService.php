@@ -47,7 +47,7 @@ class AgentAppService extends AbstractAppService
             // getorganizationinsidecanuse Agent Ids
             $orgAgentIds = $this->getOrgAvailableAgentIds($agentDataIsolation, $containOfficialOrganization);
 
-            // getfrom己havepermission id
+            // getfromselfhavepermission id
             $permissionDataIsolation = new PermissionDataIsolation($agentDataIsolation->getCurrentOrganizationCode(), $agentDataIsolation->getCurrentUserId());
             $agentResources = $this->operationPermissionAppService->getResourceOperationByUserIds(
                 $permissionDataIsolation,
@@ -61,7 +61,7 @@ class AgentAppService extends AbstractAppService
 
             // cacheresult(onlywhennotforemptyo clock)
             if (! empty($agentIds)) {
-                $this->redis->setex($cacheKey, 180, Json::encode($agentIds)); // cache 3 minute钟
+                $this->redis->setex($cacheKey, 180, Json::encode($agentIds)); // cache 3 minuteseconds
             }
         }
 
@@ -144,9 +144,9 @@ class AgentAppService extends AbstractAppService
     }
 
     /**
-     * according tofinger定IDordertoassistantlistconductsort.
+     * according tofingersetIDordertoassistantlistconductsort.
      *
-     * @param array<DelightfulAgentEntity> $agents assistant实bodyarray
+     * @param array<DelightfulAgentEntity> $agents assistantactualbodyarray
      * @param array $sortedIds sortIDarray
      * @return array sortbackassistantarray
      */
@@ -156,13 +156,13 @@ class AgentAppService extends AbstractAppService
             return $agents;
         }
 
-        // fastspeedcreate ID to实bodymapping
+        // fastspeedcreate ID toactualbodymapping
         $agentMap = [];
         foreach ($agents as $agent) {
             $agentMap[$agent->getId()] = $agent;
         }
 
-        // according tofinger定order重neworganizationarray
+        // according tofingersetorder重neworganizationarray
         $sortedAgents = [];
         foreach ($sortedIds as $id) {
             if (isset($agentMap[$id])) {

@@ -32,8 +32,8 @@ class FileParser
     /**
      * parsefilecontent.
      *
-     * @param string $fileUrl fileURLground址
-     * @param bool $textPreprocess whetherconducttext预process
+     * @param string $fileUrl fileURLgroundaddress
+     * @param bool $textPreprocess whetherconducttextpreprocess
      * @return string parsebackfilecontent
      * @throws Exception whenfileparsefailo clock
      */
@@ -41,7 +41,7 @@ class FileParser
     {
         // usemd5asforcachekey
         $cacheKey = 'file_parser:parse_' . md5($fileUrl) . '_' . ($textPreprocess ? 1 : 0);
-        // checkcache,if存inthenreturncachecontent
+        // checkcache,ifexistsinthenreturncachecontent
         if ($this->cache->has($cacheKey)) {
             return $this->cache->get($cacheKey, '');
         }
@@ -55,7 +55,7 @@ class FileParser
             $extension = FileType::getType($fileUrl);
 
             $interface = match ($extension) {
-                // more多filetypesupport
+                // moremultiplefiletypesupport
                 'png', 'jpeg', 'jpg' => OcrFileParserDriverInterface::class,
                 'pdf' => PdfFileParserDriverInterface::class,
                 'xlsx', 'xls', 'xlsm' => ExcelFileParserDriverInterface::class,
@@ -72,7 +72,7 @@ class FileParser
             /** @var FileParserDriverInterface $driver */
             $driver = di($interface);
             $res = $driver->parse($tempFile, $fileUrl, $extension);
-            // ifiscsv,xlsx,xlsfile,needconduct额outsideprocess
+            // ifiscsv,xlsx,xlsfile,needconductquotaoutsideprocess
             if ($textPreprocess && in_array($extension, ['csv', 'xlsx', 'xls'])) {
                 $res = TextPreprocessUtil::preprocess([TextPreprocessRule::FORMAT_EXCEL], $res);
             }
@@ -92,19 +92,19 @@ class FileParser
     /**
      * downloadfiletotemporaryposition.
      *
-     * @param string $url fileURLground址
+     * @param string $url fileURLgroundaddress
      * @param string $tempFile temporaryfilepath
-     * @param int $maxSize filesizelimit(字section),0table示notlimit
+     * @param int $maxSize filesizelimit(字section),0tableshownotlimit
      * @throws Exception whendownloadfailorfileexceed limito clock
      */
     private static function downloadFile(string $url, string $tempFile, int $maxSize = 0): void
     {
-        // ifis本groundfilepath,directlyreturn
+        // ifisthisgroundfilepath,directlyreturn
         if (file_exists($url)) {
             return;
         }
 
-        // ifurlis本groundfileagreement,convertforactualpath
+        // ifurlisthisgroundfileagreement,convertforactualpath
         if (str_starts_with($url, 'file://')) {
             $localPath = substr($url, 7);
             if (file_exists($localPath)) {
@@ -125,7 +125,7 @@ class FileParser
         $localFile = fopen($tempFile, 'w');
 
         if (! $fileStream || ! $localFile) {
-            ExceptionBuilder::throw(FlowErrorCode::Error, message: 'no法openfilestream');
+            ExceptionBuilder::throw(FlowErrorCode::Error, message: 'nomethodopenfilestream');
         }
 
         // iffilesizeunknown,needindownloadproceduremiddlecontrolsize
@@ -144,7 +144,7 @@ class FileParser
      * streamdownloadandcontrolfilesize.
      *
      * @param resource $fileStream remotefilestreamresource
-     * @param resource $localFile 本groundfilestreamresource
+     * @param resource $localFile thisgroundfilestreamresource
      * @param int $maxSize filesizelimit(字section)
      * @throws Exception whenfilesizeexceed limitorwritefailo clock
      */
@@ -164,7 +164,7 @@ class FileParser
 
             // Check if size limit exceeded
             if ($downloadedBytes > $maxSize) {
-                ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesize超passlimit');
+                ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesizeexceedspasslimit');
             }
 
             // Write buffer to local file
@@ -177,22 +177,22 @@ class FileParser
     /**
      * checkfilesizewhetherexceed limit.
      *
-     * @param string $fileUrl fileURLground址
-     * @param int $maxSize filesizelimit(字section),0table示notlimit
-     * @return bool truetable示alreadychecksizeandinlimitinside,falsetable示ischunkedtransmissionneedstreamdownload
-     * @throws Exception whenfilesize超passlimitorfilesizeunknownandnonchunkedtransmissiono clock
+     * @param string $fileUrl fileURLgroundaddress
+     * @param int $maxSize filesizelimit(字section),0tableshownotlimit
+     * @return bool truetableshowalreadychecksizeandinlimitinside,falsetableshowischunkedtransmissionneedstreamdownload
+     * @throws Exception whenfilesizeexceedspasslimitorfilesizeunknownandnonchunkedtransmissiono clock
      */
     private static function checkUrlFileSize(string $fileUrl, int $maxSize = 0): bool
     {
         if ($maxSize <= 0) {
             return true;
         }
-        // download之front,detectfilesize
+        // downloadoffront,detectfilesize
         $headers = get_headers($fileUrl, true);
         if (isset($headers['Content-Length'])) {
             $fileSize = (int) $headers['Content-Length'];
             if ($fileSize > $maxSize) {
-                ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesize超passlimit');
+                ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesizeexceedspasslimit');
             }
             return true;
         }

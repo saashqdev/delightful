@@ -11,16 +11,16 @@ enum Type: int
 {
     case None = 0;
 
-    // 主process(directlyuseasassistant)
+    // mainprocess(directlyuseasassistant)
     case Main = 1;
 
-    // 子process
+    // childprocess
     case Sub = 2;
 
     // tool
     case Tools = 3;
 
-    // group合sectionpoint,运linemethodhavepointanalogousat子process
+    // group合sectionpoint,runlinemethodhavepointanalogousatchildprocess
     case CombinedNode = 4;
 
     // loopsectionpoint

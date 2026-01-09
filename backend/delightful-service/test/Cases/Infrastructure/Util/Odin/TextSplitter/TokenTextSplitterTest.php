@@ -83,7 +83,7 @@ class TokenTextSplitterTest extends BaseTest
 
     public function testLongTextSplitting()
     {
-        $text = str_repeat('thisisonetestsentence子.', 100);
+        $text = str_repeat('thisisonetestsentencechild.', 100);
         $chunks = $this->splitter->splitText($text);
 
         $this->assertIsArray($chunks);
@@ -119,7 +119,7 @@ class TokenTextSplitterTest extends BaseTest
         );
 
         $text = <<<'EOT'
-# 主title
+# maintitle
 
 thisistheonesegmentcontent.
 
@@ -144,8 +144,8 @@ EOT;
         $this->assertNotEmpty($chunks);
         $this->assertCount(4, $chunks);
 
-        // validatefirstpiececontain主titleandtheonesegmentcontent
-        $this->assertStringContainsString('# 主title', $chunks[0]);
+        // validatefirstpiececontainmaintitleandtheonesegmentcontent
+        $this->assertStringContainsString('# maintitle', $chunks[0]);
         $this->assertStringContainsString('thisistheonesegmentcontent', $chunks[0]);
 
         // validatethetwopiececontaintwoleveltitle1anditscontent
@@ -172,7 +172,7 @@ EOT;
         );
 
         $text = <<<'EOT'
-** 主title **
+** maintitle **
 
 thisistheonesegmentcontent.
 
@@ -197,8 +197,8 @@ EOT;
         $this->assertNotEmpty($chunks);
         $this->assertCount(4, $chunks);
 
-        // validatefirstpiececontain主titleandtheonesegmentcontent
-        $this->assertStringContainsString('** 主title **', $chunks[0]);
+        // validatefirstpiececontainmaintitleandtheonesegmentcontent
+        $this->assertStringContainsString('** maintitle **', $chunks[0]);
         $this->assertStringContainsString('thisistheonesegmentcontent', $chunks[0]);
 
         // validatethetwopiececontaintwoleveltitle1anditscontent
@@ -263,7 +263,7 @@ EOT;
         $this->assertIsArray($chunks);
         $this->assertNotEmpty($chunks);
 
-        // validate所havetagcontentallbecompleteretain
+        // validate havetagcontentallbecompleteretain
         $this->assertStringContainsString('theonesegmenttext', $chunks[0]);
         $this->assertStringContainsString('thetwosegmenttext', $chunks[1]);
         $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">image2.png</DelightfulCompressibleContent>', $chunks[1]);
@@ -273,8 +273,8 @@ EOT;
     public function testTaggedContentWithChinese()
     {
         $text = <<<'EOT'
-middle文test
-<DelightfulCompressibleContent Type="Image">middle文path/image.png</DelightfulCompressibleContent>
+middletexttest
+<DelightfulCompressibleContent Type="Image">middletextpath/image.png</DelightfulCompressibleContent>
 continuetest
 EOT;
 
@@ -291,9 +291,9 @@ EOT;
         $this->assertNotEmpty($chunks);
         $this->assertCount(2, $chunks);
 
-        // validatemiddle文contentbecorrecthandle
-        $this->assertStringContainsString('middle文test', $chunks[0]);
-        $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">middle文path/image.png</DelightfulCompressibleContent>', $chunks[0]);
+        // validatemiddletextcontentbecorrecthandle
+        $this->assertStringContainsString('middletexttest', $chunks[0]);
+        $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">middletextpath/image.png</DelightfulCompressibleContent>', $chunks[0]);
         $this->assertStringContainsString('continuetest', $chunks[1]);
     }
 }

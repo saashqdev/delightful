@@ -18,7 +18,7 @@ interface MCPUserSettingRepositoryInterface
 
     /**
      * @param array<int> $ids
-     * @return array<int, MCPUserSettingEntity> returnbyidforkey实bodyobjectarray
+     * @return array<int, MCPUserSettingEntity> returnbyidforkeyactualbodyobjectarray
      */
     public function getByIds(MCPDataIsolation $dataIsolation, array $ids): array;
 
@@ -28,14 +28,14 @@ interface MCPUserSettingRepositoryInterface
     public function getByUserAndMcpServer(MCPDataIsolation $dataIsolation, string $userId, string $mcpServerId): ?MCPUserSettingEntity;
 
     /**
-     * according touserIDget所haveMCPusersetting.
+     * according touserIDget haveMCPusersetting.
      *
      * @return array<MCPUserSettingEntity>
      */
     public function getByUserId(MCPDataIsolation $dataIsolation, string $userId): array;
 
     /**
-     * according toMCPserviceIDget所haveusersetting.
+     * according toMCPserviceIDget haveusersetting.
      *
      * @return array<MCPUserSettingEntity>
      */
@@ -57,7 +57,7 @@ interface MCPUserSettingRepositoryInterface
     public function delete(MCPDataIsolation $dataIsolation, int $id): bool;
 
     /**
-     * deleteuserfinger定MCPservicesetting.
+     * deleteuserfingersetMCPservicesetting.
      */
     public function deleteByUserAndMcpServer(MCPDataIsolation $dataIsolation, string $userId, string $mcpServerId): bool;
 

@@ -19,9 +19,9 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property null|array $require_fields requiredfield
  * @property null|array $oauth2_auth_result OAuth2authenticationresult
  * @property null|array $additional_config attachaddconfiguration
- * @property string $creator create者
+ * @property string $creator createperson
  * @property DateTime $created_at creation time
- * @property string $modifier modify者
+ * @property string $modifier modifyperson
  * @property DateTime $updated_at update time
  */
 class MCPUserSettingModel extends AbstractModel

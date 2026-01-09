@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         // modifytablestructure,addnewfield
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
-            // checkwhetheralready存infield,avoidduplicateadd
+            // checkwhetheralreadyexistsinfield,avoidduplicateadd
             if (! Schema::hasColumn('delightful_flow_knowledge_fragment', 'version')) {
                 $table->unsignedInteger('version')->default(1)->comment('version number');
             }
@@ -31,7 +31,7 @@ return new class extends Migration {
 
         // addnewcompositeindex
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
-            // checkwhetheralready存inindex,avoidduplicateadd
+            // checkwhetheralreadyexistsinindex,avoidduplicateadd
             if (! Schema::hasIndex('delightful_flow_knowledge_fragment', 'idx_knowledge_document_version')) {
                 $table->index(['knowledge_code', 'document_code', 'version'], 'idx_knowledge_document_version');
             }
@@ -49,12 +49,12 @@ return new class extends Migration {
                 $table->dropIndex('idx_knowledge_document_version');
             }
 
-            // restore原haveindex
+            // restoreoriginalhaveindex
             if (! Schema::hasIndex('delightful_flow_knowledge_fragment', 'knowledge_base_fragments_document_code_index')) {
                 $table->index(['document_code'], 'knowledge_base_fragments_document_code_index');
             }
 
-            // checkwhetheralready存infield,avoidduplicatedelete
+            // checkwhetheralreadyexistsinfield,avoidduplicatedelete
             if (Schema::hasColumn('delightful_flow_knowledge_fragment', 'version')) {
                 $table->dropColumn('version');
             }

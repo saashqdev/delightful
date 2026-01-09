@@ -16,7 +16,7 @@ interface DelightfulDepartmentRepositoryInterface
 {
     public function getDepartmentById(string $departmentId, string $organizationCode): ?DelightfulDepartmentEntity;
 
-    // get父departmentdownone子department
+    // getparentdepartmentdownonechilddepartment
     public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?DelightfulDepartmentEntity;
 
     /**
@@ -39,7 +39,7 @@ interface DelightfulDepartmentRepositoryInterface
      */
     public function getSubDepartmentsByLevel(int $level, string $organizationCode, int $depth, int $size, int $offset): DepartmentsPageResponseDTO;
 
-    // give定departmentidwhetherhavedownleveldepartment
+    // givesetdepartmentidwhetherhavedownleveldepartment
     #[ArrayShape([
         [
             'parent_department_id' => 'string',
@@ -53,18 +53,18 @@ interface DelightfulDepartmentRepositoryInterface
     public function searchDepartments(string $departmentName, string $organizationCode, string $pageToken = '', ?int $pageSize = null): array;
 
     /**
-     * getorganization所havedepartment.
+     * getorganization havedepartment.
      * @return DelightfulDepartmentEntity[]
      */
     public function getOrganizationDepartments(string $organizationCode, array $fields = ['*'], bool $keyById = false): array;
 
     /**
-     * increasedepartmentinstruction书.
+     * increasedepartmentinstructionbook.
      */
     public function addDepartmentDocument(string $departmentId, string $documentId): void;
 
     /**
-     * getdepartment所have子departmentmembertotal.
+     * getdepartment havechilddepartmentmembertotal.
      */
     public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int;
 
@@ -89,9 +89,9 @@ interface DelightfulDepartmentRepositoryInterface
     public function getDepartmentRootId(string $organizationCode): ?string;
 
     /**
-     * batchquantityget多organizationrootdepartmentinfo.
+     * batchquantitygetmultipleorganizationrootdepartmentinfo.
      * @param array $organizationCodes organizationcodearray
-     * @return DelightfulDepartmentEntity[] rootdepartment实bodyarray
+     * @return DelightfulDepartmentEntity[] rootdepartmentactualbodyarray
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array;
 

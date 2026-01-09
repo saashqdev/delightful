@@ -42,7 +42,7 @@ class DelightfulAILocalModelTest extends TestCase
         $modelGatewayMapper = di(ModelGatewayMapper::class);
         $model = $modelGatewayMapper->getChatModelProxy('gpt-4o-global');
         $messages = [
-            new UserMessage('yougood youis谁'),
+            new UserMessage('yougood youiswho'),
         ];
         $response = $model->chat(
             messages: $messages,

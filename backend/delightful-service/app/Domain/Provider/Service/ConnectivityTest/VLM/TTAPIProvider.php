@@ -34,8 +34,8 @@ class TTAPIProvider implements IProvider
         }
 
         try {
-            // TTAPI anytest即can,andnotneed生graph,因for VLM modelis超leveladministratoradd,inusefrontwecertaintestsuccess
-            // 所byonlyneedtestonecostlowinterface即can
+            // TTAPI anytest即can,andnotneedgenerategraph,因for VLM modelisexceedsleveladministratoradd,inusefrontwecertaintestsuccess
+            //  byonlyneedtestonecostlowinterface即can
             $fluxAPI = new FluxAPI($apiKey);
             $fluxAPI->getAccountInfo();
         } catch (Exception $e) {

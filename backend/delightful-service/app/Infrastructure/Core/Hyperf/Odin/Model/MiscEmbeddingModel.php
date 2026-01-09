@@ -51,7 +51,7 @@ class MiscEmbeddingModel extends OpenAIModel
         $config = $this->config;
         $this->processApiBaseUrl($config);
 
-        // useClientFactorycreateOpenAIcustomer端
+        // useClientFactorycreateOpenAIcustomerclient
         return $this->createClient(
             $config,
             $this->getApiRequestOptions(),
@@ -74,7 +74,7 @@ class MiscEmbeddingModel extends OpenAIModel
      */
     private function createClient(array $config, ApiOptions $apiOptions, LoggerInterface $logger): Client
     {
-        // verify必wantconfigurationparameter
+        // verifyrequiredwantconfigurationparameter
         $apiKey = $config['api_key'] ?? '';
         $baseUrl = $config['base_url'] ?? '';
 

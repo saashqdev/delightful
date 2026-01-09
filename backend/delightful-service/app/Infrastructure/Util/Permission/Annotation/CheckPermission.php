@@ -22,18 +22,18 @@ use Hyperf\Di\Annotation\AbstractAnnotation;
 class CheckPermission extends AbstractAnnotation
 {
     /**
-     * resourceidentifier(supportsingleor多).
+     * resourceidentifier(supportsingleormultiple).
      */
     public array|string $resource;
 
     /**
-     * 操asidentifier(onlysupportsingle).
+     * operationasidentifier(onlysupportsingle).
      */
     public string $operation;
 
     /**
      * @param array|BackedEnum|string $resource resource,string/enumoritsarray
-     * @param BackedEnum|string $operation 操as,onlystringorenum
+     * @param BackedEnum|string $operation operationas,onlystringorenum
      */
     public function __construct(array|BackedEnum|string $resource, BackedEnum|string $operation)
     {
@@ -42,7 +42,7 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * group合forcompletepermissionkey,如 "console.api.assistant.query".
+     * group合forcompletepermissionkey,like "console.api.assistant.query".
      */
     public function getPermissionKey(): string
     {
@@ -52,8 +52,8 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * return所havepermissionkeygroup合(resources x operations Cartesianproduct).
-     * whenstatement多resourceormultiple operationsaso clock,permissionpassanyonekey即can.
+     * return havepermissionkeygroup合(resources x operations Cartesianproduct).
+     * whenstatementmultipleresourceormultiple operationsaso clock,permissionpassanyonekey即can.
      *
      * @return array<string>
      */
@@ -72,7 +72,7 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * willstring/enumoritsarray统oneforstringarray.
+     * willstring/enumoritsarray統oneforstringarray.
      * @return array<string>
      */
     private function normalizeToValues(array|BackedEnum|string $input): array

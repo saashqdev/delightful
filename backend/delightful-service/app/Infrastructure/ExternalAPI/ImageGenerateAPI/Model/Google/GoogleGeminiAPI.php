@@ -70,7 +70,7 @@ class GoogleGeminiAPI
     public function editLocalImage(string $imagePath, string $instructions): array
     {
         if (! file_exists($imagePath)) {
-            throw new Exception("graphlikefilenot存in: {$imagePath}");
+            throw new Exception("graphlikefilenotexistsin: {$imagePath}");
         }
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -100,7 +100,7 @@ class GoogleGeminiAPI
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,
-            'responseModalities' => ['TEXT', 'IMAGE'], // closekey:finger定weneedgraphlikeresponse
+            'responseModalities' => ['TEXT', 'IMAGE'], // closekey:fingersetweneedgraphlikeresponse
             'topP' => 0.95,
         ];
 
@@ -154,7 +154,7 @@ class GoogleGeminiAPI
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,
-            'responseModalities' => ['TEXT', 'IMAGE'], // closekey:finger定weneedgraphlikeresponse
+            'responseModalities' => ['TEXT', 'IMAGE'], // closekey:fingersetweneedgraphlikeresponse
             'topP' => 0.95,
         ];
 

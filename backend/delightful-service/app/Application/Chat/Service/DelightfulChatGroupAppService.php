@@ -96,7 +96,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
             Db::rollBack();
             ExceptionBuilder::throw(ChatErrorCode::GROUP_CREATE_ERROR, throwable: $exception);
         }
-        // for操authorando clockreturn seq
+        // foroperationauthorando clockreturn seq
         return $this->noticeGroupChangeSeq($createGroupSeq);
     }
 
@@ -106,21 +106,21 @@ class DelightfulChatGroupAppService extends AbstractAppService
     public function groupAddUsers(array $groupAddUserIds, array $inputDepartmentIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $delightfulGroupDTO): array
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        // checkgroup chatwhether存in
+        // checkgroup chatwhetherexistsin
         $groupId = $delightfulGroupDTO->getId();
         $groupEntity = $this->delightfulGroupDomainService->getGroupInfoById($groupId, $dataIsolation);
         if ($groupEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NOT_FOUND);
         }
-        // currentgroup chatperson数
+        // currentgroup chatpersoncount
         $groupUserCount = $this->delightfulGroupDomainService->getGroupUserCount($groupId);
-        // mostbigperson数limitsubtractgocurrentperson数
+        // mostbigpersoncountlimitsubtractgocurrentpersoncount
         $chatGroupUserNumLimit = GroupLimitEnum::NormalGroup->value;
         $chatGroupUserNumLimit -= $groupUserCount;
-        // get本timeneedadd群member (comprehensive finger定user_id + departmentiddownuser)
+        // getthistimeneedaddgroupmember (comprehensive fingersetuser_id + departmentiddownuser)
         $wantJoinUsers = $this->getGroupAddUsers($groupAddUserIds, $dataIsolation, $inputDepartmentIds, $chatGroupUserNumLimit);
         $wantJoinUserIds = array_column($wantJoinUsers, 'user_id');
-        // judge哪theseuseralready经ingroup chatmiddle
+        // judgewhichtheseuseralreadyalreadyingroup chatmiddle
         $groupUsers = $this->delightfulGroupDomainService->getGroupUserList($groupId, '', $dataIsolation, ['user_id']);
         // alreadyalready existsinatgroup chatmiddleuserid
         $existUserIds = array_column($groupUsers, 'user_id');
@@ -147,7 +147,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
             Db::rollBack();
             ExceptionBuilder::throw(ChatErrorCode::GROUP_UPDATE_ERROR, throwable: $exception);
         }
-        // for操authorando clockreturn seq
+        // foroperationauthorando clockreturn seq
         return $this->noticeGroupChangeSeq($addUsersSeq);
     }
 
@@ -158,7 +158,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         ControlMessageType $controlMessageType
     ): array {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        // checkgroup chatwhether存in
+        // checkgroup chatwhetherexistsin
         $groupId = $delightfulGroupDTO->getId();
         $groupEntity = $this->delightfulGroupDomainService->getGroupInfoById($groupId, $dataIsolation);
         if ($groupEntity === null) {
@@ -180,13 +180,13 @@ class DelightfulChatGroupAppService extends AbstractAppService
         ControlMessageType $controlMessageType
     ): array {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        // checkgroup chatwhether存in
+        // checkgroup chatwhetherexistsin
         $groupId = $delightfulGroupDTO->getId();
         $groupEntity = $this->delightfulGroupDomainService->getGroupInfoById($groupId, $dataIsolation);
         if ($groupEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NOT_FOUND);
         }
-        // group ownernotcanexitgroup chat,need先transfergroup owner身share
+        // group ownernotcanexitgroup chat,needfirsttransfergroup owner身share
         $groupOwner = $groupEntity->getGroupOwner();
         if ($groupOwner === $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_TRANSFER_OWNER_BEFORE_LEAVE);
@@ -207,7 +207,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
 
     public function deleteGroup(DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $delightfulGroupDTO): array
     {
-        // get所have群member
+        // get havegroupmember
         $groupUsers = $this->delightfulGroupDomainService->getGroupUserList(
             $delightfulGroupDTO->getId(),
             '',
@@ -217,7 +217,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $userIds = array_column($groupUsers, 'user_id');
         $controlMessageType = ControlMessageType::GroupDisband;
-        // checkgroup chatwhether存in
+        // checkgroup chatwhetherexistsin
         $groupId = $delightfulGroupDTO->getId();
         $groupEntity = $this->delightfulGroupDomainService->getGroupInfoById($groupId, $dataIsolation);
         if ($groupEntity === null) {
@@ -225,7 +225,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         }
         // checkgroupwhetheralreadydissolve
         if ($groupEntity->getGroupStatus() === GroupStatusEnum::Disband) {
-            // 找totheuserdissolvegroupseq
+            // findtotheuserdissolvegroupseq
             $seqEntity = $this->delightfulGroupDomainService->getGroupControlSeq($groupEntity, $dataIsolation, ControlMessageType::GroupDisband);
             // ifalreadyalready existsingroup chatdissolve seq,thendirectlyreturn
             if (isset($seqEntity)) {
@@ -262,7 +262,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR, 'chat.common.param_error', ['param' => 'group_name, group_avatar']);
         }
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        // checkgroup chatwhether存in
+        // checkgroup chatwhetherexistsin
         $groupId = $delightfulGroupDTO->getId();
         $groupEntity = $this->delightfulGroupDomainService->getGroupInfoById($groupId, $dataIsolation);
         if ($groupEntity === null) {
@@ -272,9 +272,9 @@ class DelightfulChatGroupAppService extends AbstractAppService
         $groupEntity->setGroupName($delightfulGroupDTO->getGroupName());
         Db::beginTransaction();
         try {
-            // update群info
+            // updategroupinfo
             $groupEntity = $this->delightfulGroupDomainService->GroupUpdateInfo($delightfulGroupDTO, $dataIsolation);
-            // generate群morenew seq andminutehair
+            // generategroupmorenew seq andminutehair
             $seqContent = [
                 'operate_user_id' => $dataIsolation->getCurrentUserId(),
                 'group_id' => $groupEntity->getId(),
@@ -307,7 +307,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
     }
 
     /**
-     * get群membercolumntable.
+     * getgroupmembercolumntable.
      */
     public function getGroupUserList(string $groupId, string $pageToken, DelightfulUserAuthorization $userAuthorization): array
     {
@@ -316,7 +316,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
     }
 
     /**
-     * getuser群columntable.
+     * getusergroupcolumntable.
      */
     public function getUserGroupList(string $pageToken, DelightfulUserAuthorization $userAuthorization, int $pageSize): GroupsPageResponseDTO
     {
@@ -326,7 +326,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
 
     public function groupTransferOwner(DelightfulGroupEntity $delightfulGroupDTO, DelightfulUserAuthorization $userAuthorization): array
     {
-        // checkgroup chatwhether存in
+        // checkgroup chatwhetherexistsin
         $groupId = $delightfulGroupDTO->getId();
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $groupEntity = $this->delightfulGroupDomainService->getGroupInfoById($groupId, $dataIsolation);
@@ -335,9 +335,9 @@ class DelightfulChatGroupAppService extends AbstractAppService
         }
         Db::beginTransaction();
         try {
-            // 转letgroup owner
+            // transferletgroup owner
             $this->delightfulGroupDomainService->transferGroupOwner($groupEntity, $dataIsolation, $delightfulGroupDTO);
-            // generategroup owner转let seq
+            // generategroup ownertransferlet seq
             $seqContent = [
                 'operate_user_id' => $dataIsolation->getCurrentUserId(),
                 'group_id' => $groupEntity->getId(),
@@ -345,7 +345,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
                 'new_owner_user_id' => $delightfulGroupDTO->getGroupOwner(),
             ];
             $userSeq = $this->createAndDispatchOperateGroupUsersSeq(
-                $seqContent,// all员notify
+                $seqContent,// allmembernotify
                 $groupEntity,
                 $dataIsolation,
                 ControlMessageType::GroupOwnerChange
@@ -355,7 +355,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
             Db::rollBack();
             ExceptionBuilder::throw(ChatErrorCode::GROUP_UPDATE_ERROR, throwable: $exception);
         }
-        // for操authorando clockreturn seq
+        // foroperationauthorando clockreturn seq
         return $this->noticeGroupChangeSeq($userSeq);
     }
 
@@ -371,7 +371,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         // querygroup chatmiddleuser
         $groupUsers = $this->delightfulGroupDomainService->getGroupUserList($groupEntity->getId(), '', $dataIsolation, ['user_id']);
         $groupUsers = array_column($groupUsers, 'user_id');
-        // judgewant移exceptuserwhetheringroup chatmiddle
+        // judgewantmoveexceptuserwhetheringroup chatmiddle
         $removeUserIds = array_intersect($userIds, $groupUsers);
         if (empty($removeUserIds)) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NO_USER_TO_REMOVE);
@@ -380,9 +380,9 @@ class DelightfulChatGroupAppService extends AbstractAppService
         try {
             // togroup chatmiddledecreaseuser
             $this->delightfulGroupDomainService->removeUsersFromGroup($groupEntity, $removeUserIds);
-            // 移exceptthistheseuserconversationwindow
+            // moveexceptthistheseuserconversationwindow
             $this->delightfulConversationDomainService->batchDeleteGroupConversationByUserIds($groupEntity, $removeUserIds);
-            // generate群memberdecreaseseq
+            // generategroupmemberdecreaseseq
             $seqContent = ['user_ids' => $removeUserIds, 'group_id' => $groupEntity->getId(), 'operate_user_id' => $dataIsolation->getCurrentUserId()];
             $groupUserRemoveSeq = $this->createAndDispatchOperateGroupUsersSeq($seqContent, $groupEntity, $dataIsolation, $controlMessageType);
             Db::commit();
@@ -390,12 +390,12 @@ class DelightfulChatGroupAppService extends AbstractAppService
             Db::rollBack();
             ExceptionBuilder::throw(ChatErrorCode::GROUP_UPDATE_ERROR, throwable: $exception);
         }
-        // for操authorando clockreturn seq
+        // foroperationauthorando clockreturn seq
         return $groupUserRemoveSeq;
     }
 
     /**
-     * get本timeneedadd群member.
+     * getthistimeneedaddgroupmember.
      * @return DelightfulUserEntity[]
      */
     private function getGroupAddUsers(array $needAddGroupUserIds, DataIsolation $dataIsolation, array $inputDepartmentIds, int $chatGroupUserNumLimit): array
@@ -405,7 +405,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         } else {
             $departmentIds = [];
         }
-        // 目frontonlysupportadd同organizationuser
+        // itemfrontonlysupportaddsameorganizationuser
         $groupAddUsers = $this->delightfulUserDomainService->getUserByIds($needAddGroupUserIds, $dataIsolation, ['user_id', 'nickname']);
         // 按departmentgetuser
         if (! empty($departmentIds)) {
@@ -428,19 +428,19 @@ class DelightfulChatGroupAppService extends AbstractAppService
 
     private function getGroupName(DelightfulGroupEntity $delightfulGroupDTO, array $userIds, DataIsolation $dataIsolation): string
     {
-        // ifgroup chatnamefornull,getgroup owner + 20 群membernickname
+        // ifgroup chatnamefornull,getgroup owner + 20 groupmembernickname
         if (empty($delightfulGroupDTO->getGroupName())) {
             $someUserIds = array_slice($userIds, 0, 20);
             $someUserIds[] = $dataIsolation->getCurrentUserId();
             $someUsers = $this->delightfulUserDomainService->getUserByIds($someUserIds, $dataIsolation, ['user_id', 'nickname']);
             $someUsers = array_column($someUsers, null, 'user_id');
-            // willgroup ownernickname放infirst
+            // willgroup ownernicknameputinfirst
             $ownerNickname = $someUsers[$dataIsolation->getCurrentUserId()]['nickname'] ?? '';
             unset($someUsers[$dataIsolation->getCurrentUserId()]);
             $nicknames = array_column($someUsers, 'nickname');
             array_unshift($nicknames, $ownerNickname);
             $groupName = implode(',', $nicknames);
-            // length超pass20characterback,use...replace
+            // lengthexceedspass20characterback,use...replace
             if (mb_strlen($groupName) > 20) {
                 $groupName = mb_substr($groupName, 0, 20) . '...';
             }
@@ -464,7 +464,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
     }
 
     /**
-     * createandminutehair操as群member seq.
+     * createandminutehairoperationasgroupmember seq.
      */
     private function createAndDispatchOperateGroupUsersSeq(
         array $seqContent,
@@ -472,7 +472,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         DataIsolation $dataIsolation,
         ControlMessageType $controlMessageType
     ): DelightfulSeqEntity {
-        // forcurrent操author,generate群member变moreSeq,and经by mq minutehairgive群member
+        // forcurrentoperationauthor,generategroupmemberchangemoreSeq,andalreadyby mq minutehairgivegroupmember
         $groupUserChangeSeq = $this->delightfulGroupDomainService->createGroupUserChangeSeq($dataIsolation, $groupEntity, $seqContent, $controlMessageType);
         $seqCreateEvent = $this->delightfulControlDomainService->getControlSeqCreatedEvent($groupUserChangeSeq);
         $this->delightfulControlDomainService->dispatchSeq($seqCreateEvent);
@@ -481,11 +481,11 @@ class DelightfulChatGroupAppService extends AbstractAppService
 
     private function noticeGroupChangeSeq(DelightfulSeqEntity $seqEntity): array
     {
-        // coroutinenotifyuserotherdevice,放intransactionoutsidesurface
+        // coroutinenotifyuserotherdevice,putintransactionoutsidesurface
         co(function () use ($seqEntity) {
             $this->delightfulControlDomainService->pushControlSequence($seqEntity);
         });
-        // returnforcurrent操authorgenerate seq
+        // returnforcurrentoperationauthorgenerate seq
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 }

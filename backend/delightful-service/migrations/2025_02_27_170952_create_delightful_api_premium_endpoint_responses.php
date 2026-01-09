@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // table存inthennotexecute
+        // tableexistsinthennotexecute
         if (Schema::hasTable('delightful_api_premium_endpoint_responses')) {
             return;
         }
@@ -27,12 +27,12 @@ return new class extends Migration {
             $table->string('endpoint_id', 64)->nullable()->default(null)->comment('accesspointid');
             // requestparameterlength
             $table->integer('request_length')->nullable()->default(null)->comment('requestparameterlength');
-            // responseconsumetime,unit:毫second
-            $table->integer('response_time')->nullable()->default(null)->comment('responseconsumetime,unit:毫second');
-            // response http status码
-            $table->integer('http_status_code')->nullable()->default(null)->comment('response http status码');
-            // responsebusinessstatus码
-            $table->integer('business_status_code')->nullable()->default(null)->comment('responsebusinessstatus码');
+            // responseconsumetime,unit:millisecondssecond
+            $table->integer('response_time')->nullable()->default(null)->comment('responseconsumetime,unit:millisecondssecond');
+            // response http statuscode
+            $table->integer('http_status_code')->nullable()->default(null)->comment('response http statuscode');
+            // responsebusinessstatuscode
+            $table->integer('business_status_code')->nullable()->default(null)->comment('responsebusinessstatuscode');
             // whetherrequestsuccess
             $table->boolean('is_success')->nullable()->default(null)->comment('whetherrequestsuccess');
             // exceptiontype
@@ -41,7 +41,7 @@ return new class extends Migration {
             $table->text('exception_message')->comment('exceptioninfo')->nullable();
             $table->datetimes();
             $table->index(['request_id'], 'request_id_index');
-            // for endpoint_id and created_at addunionindex,useat按timerangequeryspecific端pointresponse
+            // for endpoint_id and created_at addunionindex,useat按timerangequeryspecificclientpointresponse
             $table->index(['endpoint_id', 'created_at'], 'endpoint_id_created_at_index');
             $table->comment('accesspointresponserecordtable');
         });

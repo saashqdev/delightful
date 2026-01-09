@@ -20,7 +20,7 @@ enum HighAvailabilityAppType: string
     case MODEL_GATEWAY = 'modelGateway';
 
     /**
-     * get所haveapplicationtypevaluearray.
+     * get haveapplicationtypevaluearray.
      */
     public static function values(): array
     {

@@ -36,7 +36,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
 
     /**
      * @param array<int> $ids
-     * @return array<int, ProviderEntity> returnbyidforkey实bodyobjectarray
+     * @return array<int, ProviderEntity> returnbyidforkeyactualbodyobjectarray
      */
     public function getByIds(array $ids): array
     {
@@ -47,7 +47,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
             return [];
         }
 
-        // onlypullfinger定 ID,avoidalltablescan
+        // onlypullfingerset ID,avoidalltablescan
         $builder->whereIn('id', $ids);
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
@@ -151,9 +151,9 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     }
 
     /**
-     * getfinger定category别nonofficialservicequotient (Legacy).
+     * getfingersetcategoryothernonofficialservicequotient (Legacy).
      *
-     * @param Category $category servicequotientcategory别
+     * @param Category $category servicequotientcategoryother
      * @return ProviderEntity[] nonofficialservicequotientlist
      */
     public function getNonOfficialByCategory(Category $category): array
@@ -173,7 +173,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     {
         $builder = $this->createProviderQuery();
         $builder->where('category', $category->value);
-        // notrowexceptanyservicequotient,include Official,因fortemplateneed所haveservicequotient
+        // notrowexceptanyservicequotient,include Official,因fortemplateneed haveservicequotient
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
         return ProviderAssembler::toEntities($result);
@@ -215,7 +215,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
             return [];
         }
 
-        // onlypullfinger定 ID,avoidalltablescan
+        // onlypullfingerset ID,avoidalltablescan
         $builder->whereIn('id', $ids);
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
@@ -230,7 +230,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     }
 
     /**
-     * prepare移exceptsoft deleteclosefeature,temporarythishow to write.create带have软deletefilter ProviderModel querybuild器.
+     * preparemoveexceptsoft deleteclosefeature,temporarythishow to write.createwithhavesoftdeletefilter ProviderModel querybuilddevice.
      */
     private function createProviderQuery(): Builder
     {

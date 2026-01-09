@@ -13,7 +13,7 @@ use InvalidArgumentException;
 /**
  * 重sortmodelconfigurationvalueobject
  *
- * contain重sortmodel相closeconfigurationparameter,如modelname,providequotient,API 端pointetc
+ * contain重sortmodel相closeconfigurationparameter,likemodelname,providequotient,API clientpointetc
  */
 class RerankingModelConfig extends AbstractValueObject
 {
@@ -32,9 +32,9 @@ class RerankingModelConfig extends AbstractValueObject
     private string $rerankingProviderName = '';
 
     /**
-     * API 端point.
+     * API clientpoint.
      *
-     * 重sortservice API 端point
+     * 重sortservice API clientpoint
      */
     private string $apiEndpoint = '';
 
@@ -122,7 +122,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * get API 端point.
+     * get API clientpoint.
      */
     public function getApiEndpoint(): string
     {
@@ -130,7 +130,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * set API 端point.
+     * set API clientpoint.
      */
     public function setApiEndpoint(string $apiEndpoint): self
     {

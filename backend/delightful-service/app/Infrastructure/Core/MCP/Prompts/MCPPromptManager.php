@@ -24,7 +24,7 @@ class MCPPromptManager
      */
     public function registerPrompt(array $prompt): void
     {
-        // nullimplement,暂notregisteranyprompt
+        // nullimplement,暫notregisteranyprompt
     }
 
     /**
@@ -39,7 +39,7 @@ class MCPPromptManager
     }
 
     /**
-     * getfinger定IDprompt.
+     * getfingersetIDprompt.
      * whenfrontfornullimplement,alwaysreturnnull.
      */
     public function getPrompt(string $id): ?array
@@ -48,7 +48,7 @@ class MCPPromptManager
     }
 
     /**
-     * checkfinger定IDpromptwhether存in.
+     * checkfingersetIDpromptwhetherexistsin.
      */
     public function hasPrompt(string $id): bool
     {

@@ -30,14 +30,14 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
     public function configure()
     {
         parent::configure();
-        $this->setDescription('ensure所haveassistantswitchfinger令allhave residency=true property')
-            ->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'test模type:provideJSONformattestdataconductprocess', '')
-            ->addOption('dry-run', null, InputOption::VALUE_NONE, 'empty运line模type:onlycheckbutnotupdatetodatabase');
+        $this->setDescription('ensure haveassistantswitchfingercommandallhave residency=true property')
+            ->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'testmodetype:provideJSONformattestdataconductprocess', '')
+            ->addOption('dry-run', null, InputOption::VALUE_NONE, 'emptyrunlinemodetype:onlycheckbutnotupdatetodatabase');
     }
 
     public function handle()
     {
-        // checkwhether运lineintest模type
+        // checkwhetherrunlineintestmodetype
         $testData = $this->input->getOption('test');
         $isDryRun = $this->input->getOption('dry-run');
 
@@ -46,7 +46,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         if ($isDryRun) {
-            $this->output->writeln('<info>运lineinempty运line模type,willnotwillactualupdatedatabase</info>');
+            $this->output->writeln('<info>runlineinemptyrunlinemodetype,willnotwillactualupdatedatabase</info>');
         }
 
         $batchSize = 20;
@@ -54,7 +54,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $total = 0;
         $updated = 0;
 
-        $this->output->writeln('startprocessassistantswitchfinger令...');
+        $this->output->writeln('startprocessassistantswitchfingercommand...');
 
         while (true) {
             // minutebatchgetassistant
@@ -64,16 +64,16 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
             }
             foreach ($agents as $agent) {
                 ++$total;
-                // getcurrentfinger令
+                // getcurrentfingercommand
                 $instructs = $agent['instructs'] ?? [];
                 if (empty($instructs)) {
                     continue;
                 }
 
-                // checkandfixswitchfinger令 residency property
+                // checkandfixswitchfingercommand residency property
                 $hasChanges = $this->ensureSwitchResidency($instructs);
 
-                // iffinger令havechange,saveupdate
+                // iffingercommandhavechange,saveupdate
                 if ($hasChanges) {
                     if (! $isDryRun) {
                         $this->agentRepository->updateInstruct(
@@ -83,7 +83,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         );
                     }
                     ++$updated;
-                    $this->output->writeln(sprintf('already%sassistant [%s] switchfinger令', $isDryRun ? 'detecttoneedupdate' : 'update', $agent['id']));
+                    $this->output->writeln(sprintf('already%sassistant [%s] switchfingercommand', $isDryRun ? 'detecttoneedupdate' : 'update', $agent['id']));
                 }
             }
 
@@ -92,9 +92,9 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         $this->output->writeln(sprintf(
-            'processcomplete!共process %d assistant,%s %d assistantswitchfinger令',
+            'processcomplete!共process %d assistant,%s %d assistantswitchfingercommand',
             $total,
-            $isDryRun ? 'hair现needupdate' : 'update',
+            $isDryRun ? 'hairshowneedupdate' : 'update',
             $updated
         ));
 
@@ -103,7 +103,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $versionTotal = 0;
         $versionUpdated = 0;
 
-        $this->output->writeln('\nstartprocessassistantversionswitchfinger令...');
+        $this->output->writeln('\nstartprocessassistantversionswitchfingercommand...');
 
         while (true) {
             // minutebatchgetassistantversion
@@ -115,16 +115,16 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
             foreach ($versions as $version) {
                 ++$versionTotal;
 
-                // getcurrentfinger令
+                // getcurrentfingercommand
                 $instructs = $version['instructs'] ?? [];
                 if (empty($instructs)) {
                     continue;
                 }
 
-                // checkandfixswitchfinger令 residency property
+                // checkandfixswitchfingercommand residency property
                 $hasChanges = $this->ensureSwitchResidency($instructs);
 
-                // iffinger令havechange,saveupdate
+                // iffingercommandhavechange,saveupdate
                 if ($hasChanges) {
                     if (! $isDryRun) {
                         $this->agentVersionRepository->updateById(
@@ -132,7 +132,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         );
                     }
                     ++$versionUpdated;
-                    $this->output->writeln(sprintf('already%sassistantversion [%s] switchfinger令', $isDryRun ? 'detecttoneedupdate' : 'update', $version['id']));
+                    $this->output->writeln(sprintf('already%sassistantversion [%s] switchfingercommand', $isDryRun ? 'detecttoneedupdate' : 'update', $version['id']));
                 }
             }
 
@@ -141,22 +141,22 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         $this->output->writeln(sprintf(
-            'processcomplete!共process %d assistantversion,%s %d assistantversionswitchfinger令',
+            'processcomplete!共process %d assistantversion,%s %d assistantversionswitchfingercommand',
             $versionTotal,
-            $isDryRun ? 'hair现needupdate' : 'update',
+            $isDryRun ? 'hairshowneedupdate' : 'update',
             $versionUpdated
         ));
     }
 
     /**
-     * processtest模type.
+     * processtestmodetype.
      *
      * @param string $testData JSONformattestdata
-     * @param bool $isDryRun whetherforempty运line模type
+     * @param bool $isDryRun whetherforemptyrunlinemodetype
      */
     private function handleTestMode(string $testData, bool $isDryRun): int
     {
-        $this->output->writeln('<info>运lineintest模type</info>');
+        $this->output->writeln('<info>runlineintestmodetype</info>');
 
         try {
             $data = Json::decode($testData);
@@ -167,19 +167,19 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
 
         $this->output->writeln('testdataprocessstart...');
 
-        // displayoriginalfinger令
-        $this->output->writeln('<comment>originalfinger令:</comment>');
+        // displayoriginalfingercommand
+        $this->output->writeln('<comment>originalfingercommand:</comment>');
         $this->output->writeln(Json::encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-        // checkandfixswitchfinger令 residency property
+        // checkandfixswitchfingercommand residency property
         $hasChanges = $this->ensureSwitchResidency($data);
 
         // displayprocessresult
-        $this->output->writeln('<comment>processbackfinger令:</comment>');
+        $this->output->writeln('<comment>processbackfingercommand:</comment>');
         $this->output->writeln(Json::encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         $this->output->writeln(sprintf(
-            'processcomplete!finger令collection%supdate',
+            'processcomplete!fingercommandcollection%supdate',
             $hasChanges ? 'already' : 'no需'
         ));
 
@@ -187,8 +187,8 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
     }
 
     /**
-     * ensureswitchfinger令allhave residency=true property.
-     * @param array &$instructs finger令array
+     * ensureswitchfingercommandallhave residency=true property.
+     * @param array &$instructs fingercommandarray
      * @return bool whetherhavemodify
      */
     private function ensureSwitchResidency(array &$instructs): bool
@@ -201,19 +201,19 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
             }
 
             foreach ($group['items'] as &$item) {
-                // skipsystemfinger令process
+                // skipsystemfingercommandprocess
                 if (isset($item['display_type']) && (int) $item['display_type'] === InstructDisplayType::SYSTEM) {
                     continue;
                 }
 
-                // checkwhetherisswitchfinger令(type = 2)
+                // checkwhetherisswitchfingercommand(type = 2)
                 if (isset($item['type']) && (int) $item['type'] === InstructType::SWITCH->value) {
                     // ifnothave residency property,add residency = true
                     if (! isset($item['residency'])) {
                         $item['residency'] = true;
                         $hasChanges = true;
                         $this->output->writeln(sprintf(
-                            'hair现switchfinger令 [%s](%s) missing residency property,alreadyadd',
+                            'hairshowswitchfingercommand [%s](%s) missing residency property,alreadyadd',
                             $item['name'] ?? 'notnaming',
                             $item['id'] ?? 'noID'
                         ));

@@ -30,12 +30,12 @@ class AiAbilityDomainService
     }
 
     /**
-     * according tocan力codegetAIcanimplementationbody(useat运lineo clock,notvalidationorganization).
+     * according tocan力codegetAIcanimplementationbody(useatrunlineo clock,notvalidationorganization).
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @param AiAbilityCode $code can力code
      * @return AiAbilityEntity AIcanimplementationbody
-     * @throws Exception whencan力not存inornotenableo clockthrowexception
+     * @throws Exception whencan力notexistsinornotenableo clockthrowexception
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): AiAbilityEntity
     {
@@ -49,7 +49,7 @@ class AiAbilityDomainService
     }
 
     /**
-     * get所haveAIcan力list(nopagination).
+     * get haveAIcan力list(nopagination).
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @return array<AiAbilityEntity> AIcanimplementationbodylist
@@ -82,11 +82,11 @@ class AiAbilityDomainService
      * @param AiAbilityCode $code can力code
      * @param array $data updatedata
      * @return bool whetherupdatesuccess
-     * @throws Exception whencan力not存ino clockthrowexception
+     * @throws Exception whencan力notexistsino clockthrowexception
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool
     {
-        // checkcan力whether存in
+        // checkcan力whetherexistsin
         $entity = $this->aiAbilityRepository->getByCode($dataIsolation, $code);
         if ($entity === null) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::AI_ABILITY_NOT_FOUND);
@@ -112,11 +112,11 @@ class AiAbilityDomainService
         $count = 0;
 
         foreach ($abilities as $abilityConfig) {
-            // checkdatabasemiddlewhetheralready存in
+            // checkdatabasemiddlewhetheralreadyexistsin
             $code = AiAbilityCode::from($abilityConfig['code']);
             $existingEntity = $this->aiAbilityRepository->getByCode($dataIsolation, $code);
 
-            // buildnameanddescription(ensureis多languageformat)
+            // buildnameanddescription(ensureismultiplelanguageformat)
             $name = $abilityConfig['name'];
             if (is_string($name)) {
                 $name = [
@@ -134,7 +134,7 @@ class AiAbilityDomainService
             }
 
             if ($existingEntity === null) {
-                // not存inthencreate
+                // notexistsinthencreate
                 $entity = new AiAbilityEntity();
                 $entity->setCode($abilityConfig['code']);
                 $entity->setOrganizationCode($organizationCode);

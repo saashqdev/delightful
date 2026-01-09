@@ -21,7 +21,7 @@ class Message extends AbstractEntity
 
     /**
      * controlmessageorchatmessagetype.
-     * according to type comecertainmessagetypeis哪one.
+     * according to type comecertainmessagetypeiswhichone.
      */
     protected string $type;
 

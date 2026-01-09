@@ -34,7 +34,7 @@ abstract class UnderlineObjectJsonSerializable implements JsonSerializable, Arra
     }
 
     /**
-     * getcategoryproperty,notinclude动stateproperty.
+     * getcategoryproperty,notincludeautostateproperty.
      */
     public function toArray(): array
     {
@@ -43,7 +43,7 @@ abstract class UnderlineObjectJsonSerializable implements JsonSerializable, Arra
 
     public function toJsonString(): string
     {
-        // avoidcall toArray methodcall本methodo clock,againcall hyperf  Json::encode method造become死loop
+        // avoidcall toArray methodcallthismethodo clock,againcall hyperf  Json::encode method造become死loop
         try {
             $json = json_encode($this, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         } catch (Throwable $exception) {

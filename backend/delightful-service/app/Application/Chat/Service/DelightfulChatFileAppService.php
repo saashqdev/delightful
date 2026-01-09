@@ -27,7 +27,7 @@ class DelightfulChatFileAppService extends AbstractAppService
 
     /**
      * passfile_keysaveorupdatefile
-     * iffilealready存inthenupdate,not存inthencreate.
+     * iffilealreadyexistsinthenupdate,notexistsinthencreate.
      *
      * @param string $fileKey filekey
      * @param DataIsolation $dataIsolation dataisolationobject
@@ -36,7 +36,7 @@ class DelightfulChatFileAppService extends AbstractAppService
      */
     public function saveOrUpdateByFileKey(string $fileKey, DataIsolation $dataIsolation, array $fileData): array
     {
-        // 1. preparefile实body
+        // 1. preparefileactualbody
         $fileEntity = new DelightfulChatFileEntity();
         $fileEntity->setFileKey($fileKey);
         $fileEntity->setFileExtension($fileData['file_extension'] ?? '');
@@ -77,7 +77,7 @@ class DelightfulChatFileAppService extends AbstractAppService
      */
     public function getFileInfo(string $fileId): ?array
     {
-        // passIDgetfile实body
+        // passIDgetfileactualbody
         $fileEntities = $this->delightfulChatFileDomainService->getFileEntitiesByFileIds([$fileId], null, null, true);
         if (empty($fileEntities)) {
             return null;

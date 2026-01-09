@@ -9,7 +9,7 @@ namespace App\Domain\Admin\Entity\ValueObject;
 
 enum AdminGlobalSettingsName: string
 {
-    // all局defaultgood友
+    // alllocaldefaultgoodfriend
     case DEFAULT_FRIEND = 'default_friend';
 
     // assistantcreatemanage
@@ -18,7 +18,7 @@ enum AdminGlobalSettingsName: string
     // thethird-partypublishcontrol
     case THIRD_PARTY_PUBLISH = 'third_platform_publish';
 
-    // getassistantall局settingtype
+    // getassistantalllocalsettingtype
     public static function getByType(AdminGlobalSettingsType $type): string
     {
         return match ($type) {

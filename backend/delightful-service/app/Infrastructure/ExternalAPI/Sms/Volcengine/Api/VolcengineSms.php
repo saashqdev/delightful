@@ -16,7 +16,7 @@ use Hyperf\Di\Annotation\Inject;
 use Throwable;
 
 /**
- * Volcano引upshort信categoryinterface.
+ * Volcanoimportupshortmessagecategoryinterface.
  * @see https://www.volcengine.com/docs/6361/171579
  */
 class VolcengineSms extends VolcengineApi
@@ -39,19 +39,19 @@ class VolcengineSms extends VolcengineApi
     protected Template $template;
 
     /**
-     * sendverify码,Volcanoverify码short信not supportedpass infinger定number.
+     * sendverifycode,Volcanoverifycodeshortmessagenot supportedpass infingersetnumber.
      */
     public function request(string $phone, array $templateVariables, SignEnum $sign, string $templateId): SendResult
     {
-        // go掉hand机numberspecialformat
+        // godrophandmachinenumberspecialformat
         $phone = str_replace(['+00', '-'], '', $phone);
         $sendResult = new SendResult();
         $signStr = SignEnum::format($sign, LanguageEnum::EN_US);
         if (empty($templateVariables)) {
-            return $sendResult->setResult(-1, 'notmatchtoto应short信template!');
+            return $sendResult->setResult(-1, 'notmatchtotoshouldshortmessagetemplate!');
         }
         if (! in_array($signStr, Template::$signToMessageGroup, true)) {
-            return $sendResult->setResult(-1, 'short信signature:' . $signStr . ' not supported!');
+            return $sendResult->setResult(-1, 'shortmessagesignature:' . $signStr . ' not supported!');
         }
 
         $errCode = 0;
@@ -60,7 +60,7 @@ class VolcengineSms extends VolcengineApi
             $groupId = $this->template->getMessageGroupId($templateId);
             // initialize,setpublicrequestparameter
             $this->init($groupId, $signStr, $templateId);
-            // setverify码shortmessage specialhavebodystructure
+            // setverifycodeshortmessage specialhavebodystructure
             $body = [
                 'SmsAccount' => $this->getMessageGroupId(),
                 'Sign' => $this->getSign(),
@@ -69,16 +69,16 @@ class VolcengineSms extends VolcengineApi
                 'PhoneNumbers' => $phone,
             ];
             $this->setBody($body);
-            // ifissingleyuantest,nothairshort信,onlyverifyvariableparse/short信content&&short信signaturemulti-languagetypeadapt/international区numbercorrectparse
+            // ifissingleyuantest,nothairshortmessage,onlyverifyvariableparse/shortmessagecontent&&shortmessagesignaturemulti-languagetypeadapt/internationalregionnumbercorrectparse
             if (defined('IN_UNIT_TEST')) {
-                // singleyuantest,nottruehairshort信
+                // singleyuantest,nottruehairshortmessage
                 return $sendResult->setResult($errCode, $msg);
             }
             $this->sendRequest();
         } catch (Throwable$exception) {
             $errCode = -1;
-            $msg = 'short信sendfail';
-            $this->logger->error('short信sendfail:' . $exception->getMessage() . ',trace:' . $exception->getTraceAsString());
+            $msg = 'shortmessagesendfail';
+            $this->logger->error('shortmessagesendfail:' . $exception->getMessage() . ',trace:' . $exception->getTraceAsString());
         }
         // willreturnresultandChuanglan systemone,avoidbug
         return $sendResult->setResult($errCode, $msg);

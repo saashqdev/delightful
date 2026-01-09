@@ -28,7 +28,7 @@ class DelightfulFlowWaitMessageDomainService extends AbstractDomainService
             $waitMessageEntity = clone $savingWaitMessageEntity;
             $waitMessageEntity->prepareForCreation();
         } else {
-            // 暂o clockonlysupportcreate
+            // 暫o clockonlysupportcreate
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'unsupported update');
         }
 
@@ -42,7 +42,7 @@ class DelightfulFlowWaitMessageDomainService extends AbstractDomainService
 
     public function getLastWaitMessage(FlowDataIsolation $dataIsolation, string $conversationId, string $flowCode, string $flowVersion): ?DelightfulFlowWaitMessageEntity
     {
-        // shouldnotwillvery多,directlyfetch所have
+        // shouldnotwillverymultiple,directlyfetch have
         $waitMessages = $this->listByUnhandledConversationId($dataIsolation, $conversationId);
         foreach ($waitMessages as $waitMessage) {
             // iftimeout
@@ -50,7 +50,7 @@ class DelightfulFlowWaitMessageDomainService extends AbstractDomainService
             if (! empty($waitMessage->getTimeout())) {
                 $isTimeout = $waitMessage->getTimeout() < time();
             }
-            // ifversion变more
+            // ifversionchangemore
             $isVersionChanged = $waitMessage->getFlowCode() !== $flowCode || $waitMessage->getFlowVersion() !== $flowVersion;
             if ($isTimeout || $isVersionChanged) {
                 $this->handled($dataIsolation, $waitMessage->getId());

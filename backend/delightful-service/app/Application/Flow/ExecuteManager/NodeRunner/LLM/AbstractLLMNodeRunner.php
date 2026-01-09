@@ -54,7 +54,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
 
         $systemPrompt = trim($systemPrompt);
         $systemPrompt = trim($systemPrompt, "\n");
-        // loadsystemprompt词
+        // loadsystempromptword
         if ($systemPrompt !== '') {
             $memoryManager->addSystemMessage(new SystemMessage($systemPrompt));
         }
@@ -81,7 +81,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
     protected function loadAgentPlugins(FlowDataIsolation $flowDataIsolation, ModelInterface $model, AbstractLLMNodeParamsConfig $LLMNodeParamsConfig, string &$systemPrompt): void
     {
         $mcpServerConfigs = [];
-        // load Agent plugin.generalthenisloadtoolandappendsystemprompt词,do two first
+        // load Agent plugin.generalthenisloadtoolandappendsystempromptword,do two first
         foreach ($LLMNodeParamsConfig->getAgentPlugins() as $agentPlugin) {
             $appendSystemPrompt = $agentPlugin->getAppendSystemPrompt();
             if ($appendSystemPrompt !== '') {
@@ -124,13 +124,13 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
                 topicId: $executionData->getTopicId(),
                 limit: $modelConfig->getMaxRecord(),
             );
-            // ifcome源isthethird-partychattool,onlygetmost近 3 hourmemory
+            // ifcomesourceisthethird-partychattool,onlygetmost近 3 hourmemory
             if ($executionData->isThirdPlatformChat()) {
                 $memoryQuery->setStartTime(new DateTime('-3 hours'));
             }
             $memoryManager = $this->flowMemoryManager->createMemoryManagerByAuto($memoryQuery, $ignoreMessageIds);
         } else {
-            // hand动memory
+            // handautomemory
             $messages = $messagesComponent?->getForm()?->getKeyValue($executionData->getExpressionFieldData()) ?? [];
             $memoryManager = $this->flowMemoryManager->createMemoryManagerByArray($messages);
         }

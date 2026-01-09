@@ -9,7 +9,7 @@ namespace App\Infrastructure\Util\Time;
 
 class TimeUtil
 {
-    // according topass instarttime,returnandwhenfronttime毫secondleveltimedifference
+    // according topass instarttime,returnandwhenfronttimemillisecondssecondleveltimedifference
     public static function getMillisecondDiffFromNow(float $startTime): int
     {
         return (int) ((microtime(true) - $startTime) * 1000);

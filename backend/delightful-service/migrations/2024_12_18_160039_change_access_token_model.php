@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('type', 20)->default('user')->comment('type')->after('access_token');
             $table->string('relation_id', 255)->default('')->comment('associateID')->after('type');
             $table->string('description', 255)->default('')->comment('description');
-            $table->integer('rpm')->default(0)->comment('限stream');
+            $table->integer('rpm')->default(0)->comment('limitstream');
         });
     }
 

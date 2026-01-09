@@ -11,7 +11,7 @@ enum UserSettingKey: string
 {
     case None = 'none';
 
-    // all局 mcp userconfiguration
+    // alllocal mcp userconfiguration
     case BeDelightfulMCPServers = 'be_delightful_mcp_servers';
 
     // project mcp userconfiguration
@@ -23,7 +23,7 @@ enum UserSettingKey: string
     // userwhenfrontorganization
     case CurrentOrganization = 'CurrentOrganization';
 
-    // all局configuration
+    // alllocalconfiguration
     case GlobalConfig = 'GlobalConfig';
 
     // platformsetting(platforminformation,Logo,Favicon,i18n etc)

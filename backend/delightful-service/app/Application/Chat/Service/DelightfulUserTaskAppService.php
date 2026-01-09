@@ -83,7 +83,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
 
         // according toconversation_id queryagent_user_id
         $conversation = $this->delightfulConversationDomainService->getConversationByIdWithoutCheck($userTaskDTO->getConversationId());
-        // compatibleflow middleconversation_id 跟chat middleconversation_id notone致issue
+        // compatibleflow middleconversation_id 跟chat middleconversation_id notonetoissue
         if (empty($conversation)) {
             $dataIsolation = DataIsolation::create();
             $dataIsolation->setCurrentOrganizationCode($flow->getOrganizationCode());
@@ -99,7 +99,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
 
         $callbackParams = $this->getCallbackParams($userTaskDTO, $userTaskValueDTO, $flowCode);
         $enabled = true;
-        // ifisnotduplicate,that么isdirectlycreate调degreetask
+        // ifisnotduplicate,thatwhatisdirectlycreate調degreetask
         if ($taskConfigDomainService->getType() === TaskType::NoRepeat) {
             $taskScheduler = new TaskScheduler();
             $taskScheduler->setExternalId($externalId);
@@ -114,7 +114,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // ifiscustomizeduplicate,that么directlycreate调degreetask,meanwhilecloseschedulegenerate调degreetask
+        // ifiscustomizeduplicate,thatwhatdirectlycreate調degreetask,meanwhilecloseschedulegenerate調degreetask
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;
@@ -242,7 +242,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
         $this->taskSchedulerDomainService->clearTaskByExternalId($task->getExternalId());
 
         $enabled = true;
-        // ifisnotduplicate,that么isdirectlycreate调degreetask
+        // ifisnotduplicate,thatwhatisdirectlycreate調degreetask
         if ($taskConfigDomainService->getType() === TaskType::NoRepeat) {
             $taskScheduler = new TaskScheduler();
             $taskScheduler->setExternalId($externalId);
@@ -257,7 +257,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // ifiscustomizeduplicate,that么directlycreate调degreetask,meanwhilecloseschedulegenerate调degreetask
+        // ifiscustomizeduplicate,thatwhatdirectlycreate調degreetask,meanwhilecloseschedulegenerate調degreetask
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;
@@ -339,7 +339,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
         di(DelightfulChatMessageAppService::class)->userSendMessageToAgent($receiveSeqDTO, $senderUserId, $receiveUserId, $appMessageId, false, null, ConversationType::Ai, $topicId);
     }
 
-    // back台task,notwillmockusersendmessage,  reservemethod,暂o clocknothaveuseto
+    // backplatformtask,notwillmockusersendmessage,  reservemethod,暫o clocknothaveuseto
     // public static function asyncCallback(string $flow_code, array $user_task)
     // {
     //     $triggerConfig = [
@@ -378,7 +378,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     //     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_found', ['label' => 'trigger_type']);
     //     // }
 
-    //     // 改for静statecall
+    //     // changefor静statecall
     //     $flowDataIsolation = self::createFlowDataIsolationStaticMethod($authorization);
 
     //     // $flowDataIsolation = FlowDataIsolation::create();
@@ -426,7 +426,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //         messageInfo: ['message_entity' => TriggerData::createMessageEntity(new TextMessage(['content' => $triggerConfig['trigger_data']['content']]))],
     //         params: $triggerConfig['trigger_data'],
     //         paramsForm: $triggerConfig['trigger_data_form'],
-    //         // trial operationlineo clock,all局variableforhand动pass in
+    //         // trial operationlineo clock,alllocalvariableforhandautopass in
     //         globalVariable: ComponentFactory::fastCreate($globalVariable) ?? $delightfulFlow->getGlobalVariable(),
     //     );
 
@@ -445,7 +445,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     );
     //     $executionData->setTopicId($topicId);
     //     $executionData->setDebug($triggerConfig['debug']);
-    //     // 运lineprocessgraph,detectwhethercan运line
+    //     // runlineprocessgraph,detectwhethercanrunline
     //     $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
     //     $executor->execute();
 
@@ -456,7 +456,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //         }
     //     }
 
-    //     // get node 运lineresult
+    //     // get node runlineresult
     //     foreach ($delightfulFlow->getNodes() as $node) {
     //         if ($node->getNodeDebugResult()) {
     //             // haveonefailthendetermineforfail

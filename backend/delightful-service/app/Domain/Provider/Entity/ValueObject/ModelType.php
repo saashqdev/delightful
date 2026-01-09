@@ -10,7 +10,7 @@ namespace App\Domain\Provider\Entity\ValueObject;
 enum ModelType: int
 {
     case TEXT_TO_IMAGE = 0; // text generationgraph
-    case IMAGE_TO_IMAGE = 1; // graph生graph
+    case IMAGE_TO_IMAGE = 1; // graphgenerategraph
     case IMAGE_ENHANCE = 2; // imageenhance
     case LLM = 3; // bigmodel
     case EMBEDDING = 4; // embedding
@@ -19,7 +19,7 @@ enum ModelType: int
     {
         return match ($this) {
             self::TEXT_TO_IMAGE => 'text generationgraph',
-            self::IMAGE_TO_IMAGE => 'graph生graph',
+            self::IMAGE_TO_IMAGE => 'graphgenerategraph',
             self::IMAGE_ENHANCE => 'imageenhance',
             self::LLM => 'bigmodel',
             self::EMBEDDING => 'embedding',

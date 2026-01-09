@@ -92,10 +92,10 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * checkuserwhether存in.
+     * checkuserwhetherexistsin.
      *
      * @param string $userId userID
-     * @return bool userwhether存in
+     * @return bool userwhetherexistsin
      */
     public function userExists(string $userId): bool
     {

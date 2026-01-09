@@ -10,7 +10,7 @@ namespace App\ErrorCode;
 use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
 
 /**
- * error码range: 45000-45999.
+ * errorcoderange: 45000-45999.
  */
 enum LongTermMemoryErrorCode: int
 {

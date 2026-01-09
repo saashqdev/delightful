@@ -32,7 +32,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private const STATUS_NOT_FOUND = -1;
 
-    // comment掉is目frontusenotto
+    // commentdropisitemfrontusenotto
     //    private const STYLE_PORTRAIT = 25;
     private const STYLE_GENERAL = 26;
     //    private const STYLE_LANDSCAPE = 28;
@@ -49,7 +49,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     public function generateImageRaw(ImageGenerateRequest $imageGenerateRequest): array
     {
-        throw new BadMethodCallException('themethod暂not supported');
+        throw new BadMethodCallException('themethod暫not supported');
     }
 
     public function imageConvertHigh(ImageGenerateRequest $imageGenerateRequest): string
@@ -153,7 +153,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array
     {
-        throw new BadMethodCallException('themethod暂not supported');
+        throw new BadMethodCallException('themethod暫not supported');
     }
 
     public function getProviderName(): string
@@ -163,7 +163,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
-        throw new BadMethodCallException('themethod暂not supported');
+        throw new BadMethodCallException('themethod暫not supported');
     }
 
     private function handleTaskStatus(int $status, array $result, MiracleVisionModelResponse $response): MiracleVisionModelResponse
@@ -202,7 +202,7 @@ class MiracleVisionModel extends AbstractImageGenerate
                 $response->setFinishStatus(false);
                 $response->setError($result['message'] ?? 'unknownerror');
                 $this->logger->error(
-                    $status === self::STATUS_NOT_FOUND ? '美graphultra clearconvert:tasknot存in' : '美graphultra clearconvert:taskprocessfail',
+                    $status === self::STATUS_NOT_FOUND ? '美graphultra clearconvert:tasknotexistsin' : '美graphultra clearconvert:taskprocessfail',
                     ['status' => $status, 'response' => $result]
                 );
         }
@@ -226,7 +226,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
         $type = FileType::getType($url);
         if (empty($type)) {
-            $this->logger->error('美graphultra clearconvert:no法identifyimagetype', ['url' => $url]);
+            $this->logger->error('美graphultra clearconvert:nomethodidentifyimagetype', ['url' => $url]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -263,7 +263,7 @@ class MiracleVisionModel extends AbstractImageGenerate
         $this->logger->info('美graphAPI:responsedataverifypass');
     }
 
-    // todo xhy 目frontonlycanforcereturn 26 ,因forno法toimagescenario做match
+    // todo xhy itemfrontonlycanforcereturn 26 ,因fornomethodtoimagescenariomakematch
     private function determineStyleId(array $styles): int
     {
         if (empty($styles['data']['style_list'])) {

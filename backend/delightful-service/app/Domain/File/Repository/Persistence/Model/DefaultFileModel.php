@@ -14,13 +14,13 @@ use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
  * @property int $id primary keyID
- * @property int $business_type 模piecetype,file属atwhich modepiece
+ * @property int $business_type modepiecetype,filebelongatwhich modepiece
  * @property int $file_type filetype:0:officialadd,1:organizationadd
  * @property string $key filekey
  * @property int $file_size filesize
  * @property string $organization organizationencoding
- * @property string $file_extension fileback缀
- * @property string $user_id upload者ID
+ * @property string $file_extension filebacksuffix
+ * @property string $user_id uploadpersonID
  * @property DateTime $created_at creation time
  * @property DateTime $updated_at update time
  * @property DateTime $deleted_at deletion time
@@ -31,12 +31,12 @@ class DefaultFileModel extends Model
     use SoftDeletes;
 
     /**
-     * andmodelassociatetable名.
+     * andmodelassociatetablename.
      */
     protected ?string $table = 'default_files';
 
     /**
-     * canbatchquantity赋valueproperty.
+     * canbatchquantityassignvalueproperty.
      */
     protected array $fillable = [
         'id',

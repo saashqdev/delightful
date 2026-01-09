@@ -14,7 +14,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
 /**
- * organization实body.
+ * organizationactualbody.
  */
 class OrganizationEntity extends AbstractEntity
 {
@@ -52,11 +52,11 @@ class OrganizationEntity extends AbstractEntity
 
     protected ?int $seats = null; // seat count
 
-    protected ?string $syncType = null; // 同type
+    protected ?string $syncType = null; // sametype
 
-    protected ?OrganizationSyncStatus $syncStatus = null; // 同status
+    protected ?OrganizationSyncStatus $syncStatus = null; // samestatus
 
-    protected ?DateTime $syncTime = null; // 同time
+    protected ?DateTime $syncTime = null; // sametime
 
     public function shouldCreate(): bool
     {

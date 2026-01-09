@@ -26,7 +26,7 @@ readonly class FlowMemoryManager
     {
         $messages = $this->queries($memoryQuery, $ignoreMessageIds);
 
-        // eachtimeallisnewmemory,thiswithinifwantinprocessmiddle共useonesharememory,willimpacttoothersectionpoint,暂o clockeachtimeallisnew
+        // eachtimeallisnewmemory,thiswithinifwantinprocessmiddle共useonesharememory,willimpacttoothersectionpoint,暫o clockeachtimeallisnew
         $memoryManager = new MemoryManager(policy: new LimitCountPolicy(['max_count' => $memoryQuery->getLimit()]));
 
         foreach ($messages as $message) {

@@ -22,7 +22,7 @@ class EasyFileTools
 
     public static function mergeWavFiles(string $file1, string $blob): void
     {
-        // iffilenot存in,directlywill blob writefornewfile
+        // iffilenotexistsin,directlywill blob writefornewfile
         if (! file_exists($file1)) {
             self::saveFile($file1, $blob);
             return;
@@ -33,7 +33,7 @@ class EasyFileTools
         if (! $wav1) {
             throw new InvalidArgumentException('Failed to open the base file.');
         }
-        // go掉blobhead
+        // godropblobhead
         $blob = substr($blob, 44);
 
         // willnewdataappendtofile末tail
@@ -42,11 +42,11 @@ class EasyFileTools
         fwrite($wav1, $blob);
         $fileSize = ftell($wav1);
 
-        // 修just RIFF piecesize(file总size - 8)
+        // 修just RIFF piecesize(filetotalsize - 8)
         fseek($wav1, 4);
         fwrite($wav1, pack('V', $fileSize - 8));
 
-        // 修just data piecesize(file总size - 44)
+        // 修just data piecesize(filetotalsize - 44)
         fseek($wav1, 40);
         fwrite($wav1, pack('V', $fileSize - 44));
 

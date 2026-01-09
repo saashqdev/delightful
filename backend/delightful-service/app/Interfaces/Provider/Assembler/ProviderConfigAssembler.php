@@ -79,7 +79,7 @@ class ProviderConfigAssembler
         $translator = di(TranslatorInterface::class);
         $locale = $translator->getLocale();
 
-        // from providerMap middlegetto应 provider info
+        // from providerMap middlegettoshould provider info
         $providerId = $serviceProviderConfig['service_provider_id'];
         if (isset($providerMap[$providerId])) {
             $provider = $providerMap[$providerId];
@@ -140,7 +140,7 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 预processservicequotientconfigurationdata,extractcommonlogic.
+     * preprocessservicequotientconfigurationdata,extractcommonlogic.
      * @return array [$preparedConfig, $decodeConfig]
      */
     private static function prepareServiceProviderConfig(array $serviceProviderConfig): array

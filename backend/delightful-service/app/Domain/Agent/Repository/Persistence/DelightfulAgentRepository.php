@@ -132,7 +132,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
 
     public function getAgentById(string $agentId): DelightfulAgentEntity
     {
-        // querydatabase,getfinger定 agentId and userId data
+        // querydatabase,getfingerset agentId and userId data
         $agent = $this->agentModel::query()
             ->where('id', $agentId)
             ->first();
@@ -278,7 +278,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * queryenterprisedown所haveassistant,itemitemquery:status,createperson,search.
+     * queryenterprisedown haveassistant,itemitemquery:status,createperson,search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
@@ -294,7 +294,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
         }
 
         if ($queryPageAgentDTO->getQuery()) {
-            // nameor者description
+            // nameorpersondescription
             $query->where('robot_name', 'like', "%{$queryPageAgentDTO->getQuery()}%")
                 ->orWhere('robot_description', 'like', "%{$queryPageAgentDTO->getQuery()}%");
         }
@@ -316,7 +316,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
         }
 
         if ($queryPageAgentDTO->getQuery()) {
-            // nameor者description
+            // nameorpersondescription
             $query->where('robot_name', 'like', "%{$queryPageAgentDTO->getQuery()}%")
                 ->orWhere('robot_description', 'like', "%{$queryPageAgentDTO->getQuery()}%");
         }
@@ -328,7 +328,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * getenterprisedown所haveassistantcreate者.
+     * getenterprisedown haveassistantcreateperson.
      * @return array<string>
      */
     public function getOrganizationAgentsCreators(string $organizationCode): array

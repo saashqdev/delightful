@@ -77,7 +77,7 @@ class QwenImageEditModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof QwenImageEditRequest) {
-            $this->logger->error('QwenEdit OpenAIformat生graph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('QwenEdit OpenAIformatgenerategraph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
@@ -93,17 +93,17 @@ class QwenImageEditModel extends AbstractImageGenerate
             $response->setProviderErrorCode($e->getCode());
             $response->setProviderErrorMessage($e->getMessage());
 
-            $this->logger->error('QwenEdit OpenAIformat生graph:requestfail', [
+            $this->logger->error('QwenEdit OpenAIformatgenerategraph:requestfail', [
                 'error_code' => $e->getCode(),
                 'error_message' => $e->getMessage(),
             ]);
         }
 
         // 4. recordfinalresult
-        $this->logger->info('QwenEdit OpenAIformat生graph:handlecomplete', [
-            'successimage数' => count($response->getData()),
+        $this->logger->info('QwenEdit OpenAIformatgenerategraph:handlecomplete', [
+            'successimagecount' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
-            'error码' => $response->getProviderErrorCode(),
+            'errorcode' => $response->getProviderErrorCode(),
             'errormessage' => $response->getProviderErrorMessage(),
         ]);
 
@@ -129,7 +129,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                         foreach ($choice['message']['content'] as $content) {
                             if (isset($content['image']) && ! empty($content['image'])) {
                                 $imageUrls[$index] = $content['image'];
-                                break 2; // only取firstimageURL
+                                break 2; // onlygetfirstimageURL
                             }
                         }
                     }
@@ -150,7 +150,7 @@ class QwenImageEditModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // validation必wantparameter
+        // validationrequiredwantparameter
         $this->validateEditRequest($imageGenerateRequest);
 
         $this->logger->info('general meaningthousand问graphlikeedit:startedit', [
@@ -158,7 +158,7 @@ class QwenImageEditModel extends AbstractImageGenerate
             'image_count' => count($imageGenerateRequest->getImageUrls()),
         ]);
 
-        // directlyhandlesinglerequest,graphlikeeditonlyhandleone张image
+        // directlyhandlesinglerequest,graphlikeeditonlyhandleone張image
         try {
             $result = $this->callSyncEditAPI($imageGenerateRequest);
             $rawResults = [
@@ -235,7 +235,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * forgeneral meaningthousand问edit模typeoriginaldataaddwatermark - adaptnewchoicesformat.
+     * forgeneral meaningthousand问editmodetypeoriginaldataaddwatermark - adaptnewchoicesformat.
      */
     private function processQwenEditRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -265,7 +265,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                             'contentIndex' => $contentIndex,
                             'error' => $e->getMessage(),
                         ]);
-                        // continuehandledownone张image,currentimagemaintainoriginalstatus
+                        // continuehandledownone張image,currentimagemaintainoriginalstatus
                     }
                 }
             }
@@ -346,7 +346,7 @@ class QwenImageEditModel extends AbstractImageGenerate
 
         // accumulatedusageinfo - general meaningthousand问editusageformatadapt
         if (! empty($qwenResult['usage']) && is_array($qwenResult['usage'])) {
-            $currentUsage->addGeneratedImages(1); // editgenerate1张image
+            $currentUsage->addGeneratedImages(1); // editgenerate1張image
             $currentUsage->promptTokens += $qwenResult['usage']['input_tokens'] ?? 0;
             $currentUsage->completionTokens += $qwenResult['usage']['output_tokens'] ?? 0;
             $currentUsage->totalTokens += $qwenResult['usage']['total_tokens'] ?? 0;

@@ -52,7 +52,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
      */
     public function getServiceProviderConfigDetail(string $serviceProviderConfigId, string $organizationCode, bool $decryptConfig = false): ProviderConfigDTO
     {
-        // 1. getservicequotientconfiguration实body
+        // 1. getservicequotientconfigurationactualbody
         $providerConfigEntity = $this->providerConfigRepository->getProviderConfigEntityById($serviceProviderConfigId, $organizationCode);
 
         if ($providerConfigEntity === null) {
@@ -86,7 +86,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         if (! empty($configData['config'])) {
             if ($decryptConfig) {
                 // whenneeddecrypto clock,settingalreadydecryptconfiguration(notdesensitize)
-                // need new 两timeProviderConfigItemobject,因for setConfig methodwill操asoriginalobjectconductdesensitize
+                // need new 两timeProviderConfigItemobject,因for setConfig methodwilloperationasoriginalobjectconductdesensitize
                 $mergedData['decryptedConfig'] = new ProviderConfigItem($configData['config']);
             }
             // config field set methodwilldesensitize
@@ -153,12 +153,12 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             return $this->getServiceProviderConfigByModelId($modelId, $organizationCode, $throw);
         }
 
-        // 2. ifonly modelOriginId,先tryfindto应model
+        // 2. ifonly modelOriginId,firsttryfindtoshouldmodel
         if (! empty($modelOriginId)) {
             $models = $this->getModelsByVersionAndOrganization($modelOriginId, $organizationCode);
             if (! empty($models)) {
-                // if找tomodel,notdirectlyreturnofficialservicequotientconfiguration,whileisconductenterone步judge
-                $this->logger->info('找toto应model,judgeservicequotientconfiguration', [
+                // iffindtomodel,notdirectlyreturnofficialservicequotientconfiguration,whileisconductenterone步judge
+                $this->logger->info('findtotoshouldmodel,judgeservicequotientconfiguration', [
                     'modelVersion' => $modelOriginId,
                     'organizationCode' => $organizationCode,
                 ]);
@@ -168,7 +168,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             }
         }
 
-        // 3. ifallnot找to,throwexception
+        // 3. ifallnotfindto,throwexception
         ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
     }
 
@@ -197,7 +197,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         }
 
         if ($serviceProviderModelEntity->getIsOffice()) {
-            // get父levelmodelservicequotient id
+            // getparentlevelmodelservicequotient id
             $serviceProviderConfigId = $this->getModelById((string) $serviceProviderModelEntity->getModelParentId())->getServiceProviderConfigId();
         } else {
             $serviceProviderConfigId = $serviceProviderModelEntity->getServiceProviderConfigId();
@@ -279,7 +279,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // createdataisolationobject
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
-        // get所havecategorycanusemodel
+        // get havecategorycanusemodel
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
         // 按model_idfilter
@@ -291,12 +291,12 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         }
 
         if (empty($models)) {
-            $this->logger->warning('美graphmodelnot找to' . $modelId);
-            // ifnothave找tomodel,throwexception
+            $this->logger->warning('美graphmodelnotfindto' . $modelId);
+            // ifnothavefindtomodel,throwexception
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
         }
 
-        // 收collection所haveactivatemodel
+        // receivecollection haveactivatemodel
         $activeModels = [];
         foreach ($models as $model) {
             if ($model->getStatus() === Status::Enabled) {
@@ -314,9 +314,9 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get所havenonofficialservicequotientcolumntable,notdependencyatorganizationencoding
+     * get havenonofficialservicequotientcolumntable,notdependencyatorganizationencoding
      *
-     * @param Category $category servicequotientcategory别
+     * @param Category $category servicequotientcategoryother
      * @return ProviderConfigModelsDTO[]
      */
     public function getAllNonOfficialProviders(Category $category): array
@@ -326,9 +326,9 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get所havecanuseservicequotientcolumntable(includeofficialservicequotient),notdependencyatorganizationencoding.
+     * get havecanuseservicequotientcolumntable(includeofficialservicequotient),notdependencyatorganizationencoding.
      *
-     * @param Category $category servicequotientcategory别
+     * @param Category $category servicequotientcategoryother
      * @return ProviderConfigModelsDTO[]
      */
     public function getAllAvailableProviders(Category $category): array
@@ -348,7 +348,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * getofficialactivatemodelconfiguration(supportreturn多).
+     * getofficialactivatemodelconfiguration(supportreturnmultiple).
      * @param string $modelOriginId model
      * @return ProviderConfigItem[] servicequotientconfigurationarray
      */
@@ -360,17 +360,17 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         $filteredModels = $this->getModelsByVersionAndOrganization($modelOriginId, OfficialOrganizationUtil::getOfficialOrganizationCode());
 
         if (empty($filteredModels)) {
-            // ifnothave找tomatchactivatemodel,returnnullarray
+            // ifnothavefindtomatchactivatemodel,returnnullarray
             return [];
         }
 
-        // createconfigurationIDtoconfiguration实bodymapping,便atfastspeedfind
+        // createconfigurationIDtoconfigurationactualbodymapping,便atfastspeedfind
         $configMap = [];
         foreach ($serviceProviderConfigEntities as $configEntity) {
             $configMap[$configEntity->getId()] = $configEntity;
         }
 
-        // 收collection所havematchservicequotientconfiguration
+        // receivecollection havematchservicequotientconfiguration
         $result = [];
         foreach ($filteredModels as $activeModel) {
             $targetConfigId = $activeModel->getServiceProviderConfigId();
@@ -384,7 +384,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             }
         }
 
-        // ifnothave找toanyvalidconfiguration,returnnullarray
+        // ifnothavefindtoanyvalidconfiguration,returnnullarray
         return $result;
     }
 
@@ -397,7 +397,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     {
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
-        // get所havecategorycanusemodel
+        // get havecategorycanusemodel
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
         // 按be_delightful_display_statefilter
@@ -435,7 +435,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     {
         $providerModelEntities = $this->providerModelRepository->getModelsForOrganization($dataIsolation, $providerModelQuery->getCategory(), $providerModelQuery->getStatus());
 
-        // modelId 经passfilter,go重选one
+        // modelId alreadypassfilter,go重选one
         if ($providerModelQuery->isModelIdFilter()) {
             $uniqueModels = [];
             foreach ($providerModelEntities as $model) {
@@ -468,7 +468,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             );
 
             if ($provider === null) {
-                $this->logger->warning('not找toOfficialservicequotient', ['category' => $category->value]);
+                $this->logger->warning('notfindtoOfficialservicequotient', ['category' => $category->value]);
                 continue;
             }
 
@@ -482,14 +482,14 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             );
 
             if ($existingConfig !== null) {
-                $this->logger->info('servicequotientconfigurationalready存in,skip', [
+                $this->logger->info('servicequotientconfigurationalreadyexistsin,skip', [
                     'category' => $category->value,
                     'provider_id' => $provider->getId(),
                 ]);
                 continue;
             }
 
-            // createconfiguration实body
+            // createconfigurationactualbody
             $configEntity = new ProviderConfigEntity();
             $configEntity->setServiceProviderId($provider->getId());
             $configEntity->setOrganizationCode($officialOrganization);
@@ -521,24 +521,24 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotActive);
         }
 
-        // 1. 收collection所haveneedquery serviceProviderConfigId
+        // 1. receivecollection haveneedquery serviceProviderConfigId
         $configIds = [];
         foreach ($activeModels as $model) {
             $configIds[] = $model->getServiceProviderConfigId();
         }
         $configIds = array_unique($configIds);
 
-        // 2. batchquantityquery所haveconfiguration
+        // 2. batchquantityquery haveconfiguration
         $configMap = $this->providerConfigRepository->getByIdsWithoutOrganizationFilter($configIds);
 
-        // 3. 收collection所haveneedquery serviceProviderId
+        // 3. receivecollection haveneedquery serviceProviderId
         $providerIds = [];
         foreach ($configMap as $config) {
             $providerIds[] = $config->getServiceProviderId();
         }
         $providerIds = array_unique($providerIds);
 
-        // 4. batchquantityquery所haveservicequotient
+        // 4. batchquantityquery haveservicequotient
         $providerMap = $this->serviceProviderRepository->getByIds($providerIds);
 
         // 5. rebuildprioritylevelhandlelogic
@@ -547,13 +547,13 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         foreach ($activeModels as $model) {
             $configId = $model->getServiceProviderConfigId();
 
-            // checkconfigurationwhether存in
+            // checkconfigurationwhetherexistsin
             if (! isset($configMap[$configId])) {
                 continue;
             }
             $serviceProviderConfigEntity = $configMap[$configId];
             $serviceProviderConfigEntity->getConfig()->setModelVersion($model->getModelVersion());
-            // checkservicequotientwhether存in
+            // checkservicequotientwhetherexistsin
             $serviceProviderId = $serviceProviderConfigEntity->getServiceProviderId();
             if (! isset($providerMap[$serviceProviderId])) {
                 continue;
@@ -569,22 +569,22 @@ class AdminProviderDomainService extends AbstractProviderDomainService
                 if ($serviceProviderConfigEntity->getStatus() !== Status::Enabled) {
                     continue;
                 }
-                // 找toactivatenonofficialconfiguration,immediatelyreturn(prioritylevelmosthigh)
+                // findtoactivatenonofficialconfiguration,immediatelyreturn(prioritylevelmosthigh)
                 return $serviceProviderConfigEntity;
             }
 
-            // ifisofficialservicequotientconfiguration,先save,ifnothave找tononofficialagainuse
+            // ifisofficialservicequotientconfiguration,firstsave,ifnothavefindtononofficialagainuse
             if ($officialConfig === null) {
                 $officialConfig = $serviceProviderConfigEntity;
             }
         }
 
-        // if找toofficialconfiguration,thenreturn
+        // iffindtoofficialconfiguration,thenreturn
         if ($officialConfig !== null) {
             return $officialConfig;
         }
 
-        // ifofficialandnonofficialallnothave找toactivateconfiguration,throwexception
+        // ifofficialandnonofficialallnothavefindtoactivateconfiguration,throwexception
         ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotActive);
     }
 
@@ -599,7 +599,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // createdataisolationobject
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
-        // get所havecategorycanusemodel
+        // get havecategorycanusemodel
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
         // 按model_versionfilter

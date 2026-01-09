@@ -43,7 +43,7 @@ readonly class KnowledgeBaseSyncSubscriber implements ListenerInterface
         }
         $knowledge = $event->delightfulFlowKnowledgeEntity;
         $dataIsolation = $event->dataIsolation;
-        // ifisfoundationknowledge basetype,then传knowledge basecreate者,avoidpermissionnot足
+        // ifisfoundationknowledge basetype,then传knowledge basecreateperson,avoidpermissionnot足
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }
@@ -73,7 +73,7 @@ readonly class KnowledgeBaseSyncSubscriber implements ListenerInterface
                 $knowledge->setSyncStatus(KnowledgeSyncStatus::Synced);
                 $changed = true;
             }
-            // 预processdocumentFile
+            // preprocessdocumentFile
             $processedDocumentFiles = $documentFileStrategy->preProcessDocumentFiles($dataIsolation, $event->documentFiles);
 
             // according tofilesbatchquantitycreatedocument
@@ -95,7 +95,7 @@ readonly class KnowledgeBaseSyncSubscriber implements ListenerInterface
             $logger->error($throwable->getMessage() . PHP_EOL . $throwable->getTraceAsString());
             $knowledge->setSyncStatus(KnowledgeSyncStatus::SyncFailed);
             $knowledge->setSyncStatusMessage($throwable->getMessage());
-            // 同failed,backversion
+            // samefailed,backversion
             $knowledge->setVersion(max(1, $knowledge->getVersion() - 1));
             $changed = true;
         }

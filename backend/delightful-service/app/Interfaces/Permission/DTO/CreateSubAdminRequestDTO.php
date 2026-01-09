@@ -10,7 +10,7 @@ namespace App\Interfaces\Permission\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * create子administratorrolerequestDTO.
+ * createchildadministratorrolerequestDTO.
  */
 class CreateSubAdminRequestDTO extends AbstractDTO
 {
@@ -84,7 +84,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
             return false;
         }
 
-        // verifyrolenamelengthnot超pass255character
+        // verifyrolenamelengthnotexceedspass255character
         if (strlen($this->name) > 255) {
             return false;
         }
@@ -117,7 +117,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
 
     /**
      * getverifyerrorinfo.
-     * TODO: needconfiguration多language
+     * TODO: needconfigurationmultiplelanguage
      */
     public function getValidationErrors(): array
     {
@@ -128,7 +128,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
         }
 
         if (strlen($this->name) > 255) {
-            $errors[] = 'rolenamelengthnotcan超pass255character';
+            $errors[] = 'rolenamelengthnotcanexceedspass255character';
         }
 
         if (! in_array($this->status, [0, 1])) {

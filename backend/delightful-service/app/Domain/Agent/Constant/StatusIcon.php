@@ -57,7 +57,7 @@ enum StatusIcon: string
     case IconWand = 'IconWand';
 
     /**
-     * fromstringgetgraph标instance.
+     * fromstringgetgraphmarkinstance.
      */
     public static function fromString(string $icon): self
     {
@@ -110,7 +110,7 @@ enum StatusIcon: string
     }
 
     /**
-     * verifygraph标valuewhethervalid.
+     * verifygraphmarkvaluewhethervalid.
      */
     public static function isValid(string $icon): bool
     {
@@ -162,8 +162,8 @@ enum StatusIcon: string
     }
 
     /**
-     * get所havecanusegraph标value.
-     * @return array<string> return所havegraph标value
+     * get havecanusegraphmarkvalue.
+     * @return array<string> return havegraphmarkvalue
      */
     public static function getValues(): array
     {

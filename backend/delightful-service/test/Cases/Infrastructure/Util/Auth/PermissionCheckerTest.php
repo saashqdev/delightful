@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 class PermissionCheckerTest extends TestCase
 {
     /**
-     * testall局administratorpermissioncheck.
+     * testalllocaladministratorpermissioncheck.
      */
     public function testGlobalAdminHasPermission(): void
     {
@@ -30,7 +30,7 @@ class PermissionCheckerTest extends TestCase
             SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003', '13800000004'],
         ];
 
-        // all局administratorshouldhave所havepermission
+        // alllocaladministratorshouldhave havepermission
         $this->assertTrue(PermissionChecker::checkPermission(
             '13800000001',
             SuperPermissionEnum::FLOW_ADMIN,
@@ -63,7 +63,7 @@ class PermissionCheckerTest extends TestCase
             $permissions
         ));
 
-        // oneusercanhave多permission
+        // oneusercanhavemultiplepermission
         $this->assertTrue(PermissionChecker::checkPermission(
             '13800000004',
             SuperPermissionEnum::FLOW_ADMIN,
@@ -102,7 +102,7 @@ class PermissionCheckerTest extends TestCase
             $permissions
         ));
 
-        // permissionnot存insituation
+        // permissionnotexistsinsituation
         $this->assertFalse(PermissionChecker::checkPermission(
             '13800000003',
             SuperPermissionEnum::HIDE_USER_OR_DEPT,
@@ -111,7 +111,7 @@ class PermissionCheckerTest extends TestCase
     }
 
     /**
-     * usedataprovide者testpermissioncheck.
+     * usedataprovidepersontestpermissioncheck.
      */
     #[DataProvider('permissionCheckDataProvider')]
     public function testPermissionCheckWithDataProvider(
@@ -127,16 +127,16 @@ class PermissionCheckerTest extends TestCase
     }
 
     /**
-     * testdataprovide者method.
+     * testdataprovidepersonmethod.
      */
     public static function permissionCheckDataProvider(): array
     {
         return [
-            'all局administrator' => ['13800000001', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => []], true],
+            'alllocaladministrator' => ['13800000001', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => []], true],
             'specificpermissionuser' => ['13800000003', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], true],
             'nopermissionuser' => ['13800000099', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
-            'permissionnot存in' => ['13800000003', SuperPermissionEnum::HIDE_USER_OR_DEPT, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
-            'emptyhand机number' => ['', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
+            'permissionnotexistsin' => ['13800000003', SuperPermissionEnum::HIDE_USER_OR_DEPT, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
+            'emptyhandmachinenumber' => ['', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
         ];
     }
 }

@@ -9,8 +9,8 @@ namespace App\Domain\Chat\Entity\ValueObject;
 
 /**
  * messageprioritylevel.
- * according to rabbitmq suggestion,mostbigprioritylevelnot超pass5
- * differentprioritylevelmessagewillbedelivertoto应queuemiddle.
+ * according to rabbitmq suggestion,mostbigprioritylevelnotexceedspass5
+ * differentprioritylevelmessagewillbedelivertotoshouldqueuemiddle.
  */
 enum MessagePriority: int
 {

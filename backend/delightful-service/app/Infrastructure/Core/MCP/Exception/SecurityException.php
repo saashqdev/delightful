@@ -12,8 +12,8 @@ use Throwable;
 class SecurityException extends MCPException
 {
     /**
-     * JSON-RPCerror码.
-     * usecustomizeerror码range: -32000 to -32099.
+     * JSON-RPCerrorcode.
+     * usecustomizeerrorcoderange: -32000 to -32099.
      */
     protected int $rpcCode = -32050;
 

@@ -28,7 +28,7 @@ interface AiAbilityRepositoryInterface
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity;
 
     /**
-     * get所haveAIcan力list.
+     * get haveAIcan力list.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @return array<AiAbilityEntity> AIcanimplementationbodylist

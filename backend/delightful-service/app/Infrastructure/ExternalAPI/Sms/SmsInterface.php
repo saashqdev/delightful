@@ -10,27 +10,27 @@ namespace App\Infrastructure\ExternalAPI\Sms;
 interface SmsInterface
 {
     /**
-     * getshort信templateid. andnotonefixed depositintemplateid.
+     * getshortmessagetemplateid. andnotonefixed depositintemplateid.
      */
     public function getTemplateId(SmsStruct $smsStruct): ?string;
 
     /**
-     * sendshort信,forcerequire所haveshortmessage drivenreturnstructuresame.
+     * sendshortmessage,forcerequire haveshortmessage drivenreturnstructuresame.
      */
     public function send(SmsStruct $smsStruct): SendResult;
 
     /**
-     * parse变quantityshort信,returncompleteshort信text.
+     * parsechangequantityshortmessage,returncompleteshortmessagetext.
      */
     public function getContent(SmsStruct $smsStruct): string;
 
     /**
-     * getshortmessage copy languagetype,andsignaturenoclose. maybeshort信contentisIndonesian,signatureisEnglish.
+     * getshortmessage copy languagetype,andsignaturenoclose. maybeshortmessagecontentisIndonesian,signatureisEnglish.
      */
     public function getContentLanguage(SmsStruct $smsStruct): string;
 
     /**
-     * getshort信signature. needmulti-languagetypeadapt,语type兜bottom!
+     * getshortmessagesignature. needmulti-languagetypeadapt,languagetypefallbackbottom!
      */
     public function getSign(SmsStruct $smsStruct): string;
 }

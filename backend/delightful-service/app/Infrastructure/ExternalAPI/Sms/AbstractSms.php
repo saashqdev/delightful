@@ -22,7 +22,7 @@ abstract class AbstractSms implements SmsInterface
 
     public function getContent(SmsStruct $smsStruct): string
     {
-        // according toshortmessage drivencertaintoresponse languagetype,andconduct语type兜bottom
+        // according toshortmessage drivencertaintoresponse languagetype,andconductlanguagetypefallbackbottom
         $language = $this->getContentLanguage($smsStruct);
         if (empty($smsStruct->variables)) {
             return $smsStruct->content ?: '';
@@ -48,8 +48,8 @@ abstract class AbstractSms implements SmsInterface
     }
 
     /**
-     *  toat $smsStruct , if language intemplatemiddlenot存in,thenuse default_language conductdetect
-     *  if default_language alsonothaveto应template,then按 type intemplatemiddlematch存in语type,if存in多type,byzh_CNpriority.
+     *  toat $smsStruct , if language intemplatemiddlenotexistsin,thenuse default_language conductdetect
+     *  if default_language alsonothavetoshouldtemplate,then按 type intemplatemiddlematchexistsinlanguagetype,ifexistsinmultipletype,byzh_CNpriority.
      */
     public function getContentLanguage(SmsStruct $smsStruct): string
     {
@@ -74,7 +74,7 @@ abstract class AbstractSms implements SmsInterface
     }
 
     /**
-     * according to语typerequireandshort信supportsignaturelist,returnto应signaturethis article.
+     * according tolanguagetyperequireandshortmessagesupportsignaturelist,returntoshouldsignaturethis article.
      */
     public function getSign(SmsStruct $smsStruct): string
     {
@@ -83,17 +83,17 @@ abstract class AbstractSms implements SmsInterface
     }
 
     /**
-     * willvariablevalueandvariable名associate,also原short信content.
-     * @param array $variables short信variable部minute,maybeis valuearray,alsomaybeis key=>valuearray,need按$templateContentcontent,统onealso原becomekey=>valuearray
+     * willvariablevalueandvariablenameassociate,alsooriginalshortmessagecontent.
+     * @param array $variables shortmessagevariable部minute,maybeis valuearray,alsomaybeis key=>valuearray,need按$templateContentcontent,統onealsooriginalbecomekey=>valuearray
      */
     protected function translateContent(string $templateContent, array $variables): string
     {
         if (empty($templateContent)) {
             return Json::encode($variables);
         }
-        // conductvariablematchshort信match
+        // conductvariablematchshortmessagematch
         if (! empty($variables)) {
-            // compatibleVolcanotemplatevariablereplace,先will $message middlevariableparseoutcome such aswill[123456] parsefor['VerificationCode'=>123456]back,againconducttemplatecontentreplace
+            // compatibleVolcanotemplatevariablereplace,firstwill $message middlevariableparseoutcome such aswill[123456] parsefor['VerificationCode'=>123456]back,againconducttemplatecontentreplace
             $variables = $this->template->getTemplateVariables($templateContent, $variables);
             $i = 1;
             foreach ($variables as $k => $v) {

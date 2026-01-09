@@ -78,11 +78,11 @@ class FluxModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof FluxModelRequest) {
-            $this->logger->error('Flux OpenAIformat生graph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Flux OpenAIformatgenerategraph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
-        // 3. andhairhandle - directly操asresponseobject
+        // 3. andhairhandle - directlyoperationasresponseobject
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
@@ -91,7 +91,7 @@ class FluxModel extends AbstractImageGenerate
             $parallel->add(function () use ($imageGenerateRequest, $response, $fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
                 try {
-                    // submittaskandround询result
+                    // submittaskandroundqueryresult
                     $jobId = $this->requestImageGeneration($imageGenerateRequest);
                     $result = $this->pollTaskResultForRaw($jobId);
 
@@ -106,7 +106,7 @@ class FluxModel extends AbstractImageGenerate
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('Flux OpenAIformat生graph:singlerequestfail', [
+                    $this->logger->error('Flux OpenAIformatgenerategraph:singlerequestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -117,11 +117,11 @@ class FluxModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 4. recordfinalresult
-        $this->logger->info('Flux OpenAIformat生graph:andhairhandlecomplete', [
-            '总request数' => $count,
-            'successimage数' => count($response->getData()),
+        $this->logger->info('Flux OpenAIformatgenerategraph:andhairhandlecomplete', [
+            'totalrequestcount' => $count,
+            'successimagecount' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
-            'error码' => $response->getProviderErrorCode(),
+            'errorcode' => $response->getProviderErrorCode(),
             'errormessage' => $response->getProviderErrorMessage(),
         ]);
 
@@ -145,9 +145,9 @@ class FluxModel extends AbstractImageGenerate
             }
         }
 
-        // checkwhetherat leasthaveone张imagegeneratesuccess
+        // checkwhetherat leasthaveone張imagegeneratesuccess
         if (empty($imageUrls)) {
-            $this->logger->error('Fluxtext generationgraph:所haveimagegenerate均fail', ['rawResults' => $rawResults]);
+            $this->logger->error('Fluxtext generationgraph: haveimagegenerate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
@@ -177,7 +177,7 @@ class FluxModel extends AbstractImageGenerate
         $size = $imageGenerateRequest->getWidth() . 'x' . $imageGenerateRequest->getHeight();
         $mode = $imageGenerateRequest->getModel();
         // recordrequeststart
-        $this->logger->info('Fluxtext generationgraph:start生graph', [
+        $this->logger->info('Fluxtext generationgraph:startgenerategraph', [
             'prompt' => $prompt,
             'size' => $size,
             'mode' => $mode,
@@ -207,7 +207,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * round询taskresult.
+     * roundquerytaskresult.
      */
     #[RateLimit(create: 40, consume: 1, capacity: 40, key: self::IMAGE_GENERATE_KEY_PREFIX . self::IMAGE_GENERATE_POLL_KEY_PREFIX . ImageGenerateModelType::Flux->value, waitTimeout: 60)]
     #[Retry(
@@ -227,7 +227,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * round询taskresultandreturnnativedata.
+     * roundquerytaskresultandreturnnativedata.
      */
     #[RateLimit(create: 40, consume: 1, capacity: 40, key: self::IMAGE_GENERATE_KEY_PREFIX . self::IMAGE_GENERATE_POLL_KEY_PREFIX . ImageGenerateModelType::Flux->value, waitTimeout: 60)]
     #[Retry(
@@ -255,7 +255,7 @@ class FluxModel extends AbstractImageGenerate
                 ++$retryCount;
                 sleep(self::RETRY_INTERVAL);
             } catch (Exception $e) {
-                $this->logger->warning('Fluxtext generationgraph:round询taskresultfail', ['error' => $e->getMessage(), 'jobId' => $jobId]);
+                $this->logger->warning('Fluxtext generationgraph:roundquerytaskresultfail', ['error' => $e->getMessage(), 'jobId' => $jobId]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::POLLING_FAILED);
             }
         }
@@ -285,7 +285,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * getalertmessagefront缀
+     * getalertmessagefrontsuffix
      */
     protected function getAlertPrefix(): string
     {
@@ -334,7 +334,7 @@ class FluxModel extends AbstractImageGenerate
             });
         }
 
-        // get所haveandlinetaskresult
+        // get haveandlinetaskresult
         $results = $parallel->wait();
 
         // handleresult,maintainnativeformat
@@ -346,10 +346,10 @@ class FluxModel extends AbstractImageGenerate
             }
         }
 
-        // checkwhetherat leasthaveone张imagegeneratesuccess
+        // checkwhetherat leasthaveone張imagegeneratesuccess
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('Fluxtext generationgraph:所haveimagegenerate均fail', ['errors' => $errors]);
+            $this->logger->error('Fluxtext generationgraph: haveimagegenerate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 
@@ -377,7 +377,7 @@ class FluxModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledownone张image,currentimagemaintainoriginalstatus
+                // continuehandledownone張image,currentimagemaintainoriginalstatus
             }
         }
 
@@ -442,7 +442,7 @@ class FluxModel extends AbstractImageGenerate
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // ensurelockone定willberelease
+            // ensurelockonesetwillberelease
             $this->unlockResponse($response, $lockOwner);
         }
     }

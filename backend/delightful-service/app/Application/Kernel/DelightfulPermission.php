@@ -19,11 +19,11 @@ use InvalidArgumentException;
 
 class DelightfulPermission implements DelightfulPermissionInterface
 {
-    // ========== all局permission ==========
+    // ========== alllocalpermission ==========
     public const string ALL_PERMISSIONS = DelightfulAdminResourceEnum::ORGANIZATION_ADMIN->value;
 
     /**
-     * get所have操astype.
+     * get haveoperationastype.
      */
     public function getOperations(): array
     {
@@ -31,7 +31,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * get所haveresource.
+     * get haveresource.
      */
     public function getResources(): array
     {
@@ -101,7 +101,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * checkwhetherfor操astype.
+     * checkwhetherforoperationastype.
      */
     public function isOperation(string $value): bool
     {
@@ -109,7 +109,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * get操asinternationalizationtag.
+     * getoperationasinternationalizationtag.
      */
     public function getOperationLabel(string $operation): string
     {
@@ -127,7 +127,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * getresource模piece.
+     * getresourcemodepiece.
      */
     public function getResourceModule(string $resource): string
     {
@@ -136,24 +136,24 @@ class DelightfulPermission implements DelightfulPermissionInterface
             throw new InvalidArgumentException('Not a resource type: ' . $resource);
         }
 
-        // 模piecelayerdefinitionfortwolevelresource(即platformdirectly子resource)
+        // modepiecelayerdefinitionfortwolevelresource(即platformdirectlychildresource)
         if ($enum->parent() === null) {
             // toplevelresource(platformitself)
             $moduleEnum = $enum;
         } else {
             $parent = $enum->parent();
             if ($parent->parent() === null) {
-                // currentresourcealready经istwolevellayerlevel,directlyasfor模piece
+                // currentresourcealreadyalreadyistwolevellayerlevel,directlyasformodepiece
                 $moduleEnum = $enum;
             } else {
-                // more深layerlevel,模piece取父level(twolevel)
+                // moredeeplayerlevel,modepiecegetparentlevel(twolevel)
                 $moduleEnum = $parent;
             }
         }
 
         $moduleLabel = $moduleEnum->label();
         if ($moduleLabel === $moduleEnum->translationKey()) {
-            // ifmissingtranslate,hand动compatibleknown模piece
+            // ifmissingtranslate,handautocompatibleknownmodepiece
             return match ($moduleEnum) {
                 DelightfulResourceEnum::ADMIN_AI => 'AImanage',
                 default => $moduleEnum->value,
@@ -164,7 +164,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * generate所havemaybepermissiongroup合.
+     * generate havemaybepermissiongroup合.
      */
     public function generateAllPermissions(): array
     {
@@ -173,7 +173,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         $operations = $this->getOperations();
 
         foreach ($resources as $resource) {
-            // onlyhandlethreelevelandbyupresource,filterplatformand模piecelevel
+            // onlyhandlethreelevelandbyupresource,filterplatformandmodepiecelevel
             if (substr_count($resource, '.') < 2) {
                 continue;
             }
@@ -194,12 +194,12 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
     /**
      * getlayerlevelstructurepermissiontree
-     * generateno限极permissiontree,rule:according topermissionresourcestring(如 Admin.ai.model_management)逐segmentsplit,逐layerconstructtree.
+     * generatenolimit极permissiontree,rule:according topermissionresourcestring(like Admin.ai.model_management)逐segmentsplit,逐layerconstructtree.
      *
      * returnformat:
      * [
      *   [
-     *     'label' => 'manageback台',
+     *     'label' => 'managebackplatform',
      *     'permission_key' => 'Admin',
      *     'children' => [ ... ]
      *   ],
@@ -215,13 +215,13 @@ class DelightfulPermission implements DelightfulPermissionInterface
             // willresourcepath按 '.' split
             $segments = explode('.', $permission['resource']);
             if (count($segments) < 2) {
-                // at least应containplatform + resource两level,若not足thenskip
+                // at leastshouldcontainplatform + resource两level,若not足thenskip
                 continue;
             }
 
-            $platformKey = array_shift($segments); // platform,如 Admin
+            $platformKey = array_shift($segments); // platform,like Admin
 
-            // platformorganization独have:nonplatformorganizationo clock,filter掉 platform platformresource
+            // platformorganization独have:nonplatformorganizationo clock,filterdrop platform platformresource
             if ($platformKey === DelightfulResourceEnum::PLATFORM->value && ! $isPlatformOrganization) {
                 continue;
             }
@@ -241,14 +241,14 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 $accumKey .= '.' . $segment;
                 $isLastSegment = $index === array_key_last($segments);
 
-                // 取 label:theonesegmentuse模piecemiddledocument name,itsremainder按rule
+                // get label:theonesegmentusemodepiecemiddledocument name,itsremainder按rule
                 $label = match (true) {
-                    $index === 0 => $this->getResourceModule($permission['resource']),                // 模piecelayer
+                    $index === 0 => $this->getResourceModule($permission['resource']),                // modepiecelayer
                     $isLastSegment => $permission['resource_label'],      // resourcelayer
                     default => ucfirst($segment),                        // othermiddlebetweenlayer
                 };
 
-                // ensure children array存inandcheck segment
+                // ensure children arrayexistsinandcheck segment
                 if (! isset($current['children'])) {
                     $current['children'] = [];
                 }
@@ -264,7 +264,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 $current = &$current['children'][$segment];
             }
 
-            // thiso clock $current fingertoresourcesectionpoint,foritsadd操asleaf子
+            // thiso clock $current fingertoresourcesectionpoint,foritsaddoperationasleafchild
             $current['children'][] = [
                 'label' => $permission['operation_label'],
                 'permission_key' => $permission['permission_key'],
@@ -273,7 +273,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
             ];
         }
 
-        // willassociatearray children 转forindexarray,maintainreturnformat
+        // willassociatearray children transferforindexarray,maintainreturnformat
         return array_values($this->normalizeTree($tree));
     }
 
@@ -282,7 +282,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
      */
     public function isValidPermission(string $permissionKey): bool
     {
-        // all局permissionspecialhandle
+        // alllocalpermissionspecialhandle
         if ($permissionKey === self::ALL_PERMISSIONS) {
             return true;
         }
@@ -290,10 +290,10 @@ class DelightfulPermission implements DelightfulPermissionInterface
         try {
             $parsed = $this->parsePermission($permissionKey);
 
-            // checkresourcewhether存in
+            // checkresourcewhetherexistsin
             $resourceExists = in_array($parsed['resource'], $this->getResources());
 
-            // check操aswhether存in(按resource)
+            // checkoperationaswhetherexistsin(按resource)
             $operationExists = in_array($parsed['operation'], $this->getOperationsByResource($parsed['resource']), true);
 
             return $resourceExists && $operationExists;
@@ -303,12 +303,12 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * judgeuserpermissionsetmiddlewhether拥havefinger定permission(consider隐typecontain).
+     * judgeuserpermissionsetmiddlewhether拥havefingersetpermission(considerhiddentypecontain).
      *
      * rule:
-     *   1. 如directly命middlepermissionkey,return true;
-     *   2. if拥haveall局permission ALL_PERMISSIONS,return true;
-     *   3. 若not命middle,thencheckbythepermission隐typecontainpermissionset(for example *edit* 隐typecontain *query*).
+     *   1. likedirectly命middlepermissionkey,return true;
+     *   2. if拥havealllocalpermission ALL_PERMISSIONS,return true;
+     *   3. 若not命middle,thencheckbythepermissionhiddentypecontainpermissionset(for example *edit* hiddentypecontain *query*).
      *
      * @param string $permissionKey goalpermissionkey
      * @param string[] $userPermissions useralready拥havepermissionkeyset
@@ -323,7 +323,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
             return false;
         }
 
-        // 命middleall局permissiondirectly放line
+        // 命middlealllocalpermissiondirectlyputline
         if (in_array(self::ALL_PERMISSIONS, $userPermissions, true)) {
             return true;
         }
@@ -334,7 +334,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         }
 
         $parsed = $this->parsePermission($permissionKey);
-        // default隐type:edit -> query(if two operationsas均存in)
+        // defaulthiddentype:edit -> query(if two operationsas均existsin)
         $ops = $this->getOperationsByResource($parsed['resource']);
         if (in_array(DelightfulOperationEnum::EDIT->value, $ops, true) && in_array(DelightfulOperationEnum::QUERY->value, $ops, true)) {
             if ($parsed['operation'] === DelightfulOperationEnum::QUERY->value) {
@@ -349,7 +349,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * parseresourcebind Operation Enum,returntheresourcecanuse操asset(stringarray).
+     * parseresourcebind Operation Enum,returntheresourcecanuseoperationasset(stringarray).
      */
     protected function getOperationsByResource(string $resource): array
     {
@@ -360,7 +360,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         if (! enum_exists($opEnumClass)) {
             throw new InvalidArgumentException('Operation enum not found for resource: ' . $resource);
         }
-        // onlysupport BackedEnum,因forback续needread ->value
+        // onlysupport BackedEnum,因forback続needread ->value
         if (! is_subclass_of($opEnumClass, BackedEnum::class)) {
             throw new InvalidArgumentException('Operation enum for resource must be BackedEnum: ' . $opEnumClass);
         }
@@ -372,8 +372,8 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * returnresourcebind Operation Enum category名,defaultread `DelightfulResourceEnum::operationEnumClass()`.
-     * enterprise版canoverride本method,willenterpriseresourcemappingtocustomize Operation Enum.
+     * returnresourcebind Operation Enum categoryname,defaultread `DelightfulResourceEnum::operationEnumClass()`.
+     * enterpriseversioncanoverridethismethod,willenterpriseresourcemappingtocustomize Operation Enum.
      */
     protected function resolveOperationEnumClass(DelightfulResourceEnum $resourceEnum): string
     {
@@ -381,8 +381,8 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * toatnon DelightfulResourceEnum definitionresource,子categorycanoverridethemethodbyparsetocorresponding Operation Enum.
-     * open源default抛错.
+     * toatnon DelightfulResourceEnum definitionresource,childcategorycanoverridethemethodbyparsetocorresponding Operation Enum.
+     * opensourcedefault抛错.
      */
     protected function resolveOperationEnumClassFromUnknownResource(string $resource): string
     {
@@ -390,7 +390,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * get按resource操astag.
+     * get按resourceoperationastag.
      */
     protected function getOperationLabelByResource(string $resource, string $operation): string
     {
@@ -417,7 +417,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * recursionwill child map 转forindexarray.
+     * recursionwill child map transferforindexarray.
      */
     private function normalizeTree(array $branch): array
     {

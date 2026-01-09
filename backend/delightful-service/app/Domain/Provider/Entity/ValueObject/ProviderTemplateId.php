@@ -9,7 +9,7 @@ namespace App\Domain\Provider\Entity\ValueObject;
 
 /**
  * servicequotienttemplateIDenum
- * willProviderCodeandCategorygroup合mappingforfixed数value型string.
+ * willProviderCodeandCategorygroup合mappingforfixedcountvalue型string.
  */
 enum ProviderTemplateId: string
 {
@@ -57,7 +57,7 @@ enum ProviderTemplateId: string
     case Gemini = '22';
 
     /**
-     * according toProviderCodeandCategorygetto应templateID.
+     * according toProviderCodeandCategorygettoshouldtemplateID.
      */
     public static function fromProviderCodeAndCategory(ProviderCode $providerCode, Category $category): ?self
     {
@@ -90,7 +90,7 @@ enum ProviderTemplateId: string
     }
 
     /**
-     * parsetemplateID,returnto应ProviderCodeandCategory.
+     * parsetemplateID,returntoshouldProviderCodeandCategory.
      *
      * @return array{providerCode: ProviderCode, category: Category}
      */

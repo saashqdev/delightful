@@ -14,28 +14,28 @@ interface ProviderModelConfigVersionRepositoryInterface
 {
     /**
      * savemodelconfigurationversion(containversionnumberincrementandmarkcurrentversioncompletelogic).
-     * usetransactionensuredataone致property.
+     * usetransactionensuredataonetoproperty.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
-     * @param ProviderModelConfigVersionEntity $entity configurationversion实body
+     * @param ProviderModelConfigVersionEntity $entity configurationversionactualbody
      */
     public function saveVersionWithTransaction(ProviderDataIsolation $dataIsolation, ProviderModelConfigVersionEntity $entity): void;
 
     /**
-     * getfinger定modelmostnewversionID.
+     * getfingersetmodelmostnewversionID.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param int $serviceProviderModelId modelID
-     * @return null|int mostnewversionID,ifnot存inthenreturnnull
+     * @return null|int mostnewversionID,ifnotexistsinthenreturnnull
      */
     public function getLatestVersionId(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?int;
 
     /**
-     * getfinger定modelmostnewconfigurationversion实body.
+     * getfingersetmodelmostnewconfigurationversionactualbody.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param int $serviceProviderModelId modelID
-     * @return null|ProviderModelConfigVersionEntity mostnewversion实body,ifnot存inthenreturnnull
+     * @return null|ProviderModelConfigVersionEntity mostnewversionactualbody,ifnotexistsinthenreturnnull
      */
     public function getLatestVersionEntity(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?ProviderModelConfigVersionEntity;
 }

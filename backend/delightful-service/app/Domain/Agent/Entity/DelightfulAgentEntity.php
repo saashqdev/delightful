@@ -18,7 +18,7 @@ class DelightfulAgentEntity extends AbstractEntity
     protected string $id;
 
     /**
-     * finger定versionid.
+     * fingersetversionid.
      */
     protected ?string $agentVersionId = null;
 
@@ -74,7 +74,7 @@ class DelightfulAgentEntity extends AbstractEntity
     protected ?string $createdAt = null;
 
     /**
-     * update者userID.
+     * updatepersonuserID.
      */
     protected ?string $updatedUid = '';
 

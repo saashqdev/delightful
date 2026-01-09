@@ -46,10 +46,10 @@ class DelightfulDepartmentAppService extends AbstractAppService
         }
     }
 
-    // querydepartmentdetail,needreturnwhetherhave子department
+    // querydepartmentdetail,needreturnwhetherhavechilddepartment
     public function getDepartmentById(DepartmentQueryDTO $queryDTO, DelightfulUserAuthorization $userAuthorization): ?DelightfulDepartmentEntity
     {
-        // toatfront端come说, -1 table示rootdepartmentinfo.
+        // toatfrontclientcomesay, -1 tableshowrootdepartmentinfo.
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $departmentEntity = $this->delightfulDepartmentDomainService->getDepartmentById($dataIsolation, $queryDTO->getDepartmentId());
         if ($departmentEntity === null) {
@@ -67,7 +67,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
      */
     public function getDepartmentByIds(DepartmentQueryDTO $queryDTO, DelightfulUserAuthorization $userAuthorization): array
     {
-        // toatfront端come说, -1 table示rootdepartmentinfo.
+        // toatfrontclientcomesay, -1 tableshowrootdepartmentinfo.
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $departmentEntities = $this->delightfulDepartmentDomainService->getDepartmentByIds($dataIsolation, $queryDTO->getDepartmentIds(), true);
         return $this->filterDepartmentsHidden($departmentEntities);
@@ -83,7 +83,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
             $offset = (int) $pageToken;
         }
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        // departmentId for-1 table示getrootdepartmentdowntheoneleveldepartment
+        // departmentId for-1 tableshowgetrootdepartmentdowntheoneleveldepartment
         if ($departmentId === PlatformRootDepartmentId::Delightful) {
             $departmentsPageResponseDTO = $this->delightfulDepartmentDomainService->getSubDepartmentsByLevel($dataIsolation, 0, 1, $pageSize, $offset);
         } else {
@@ -91,7 +91,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
             $departmentsPageResponseDTO = $this->delightfulDepartmentDomainService->getSubDepartmentsById($dataIsolation, $departmentId, $pageSize, $offset);
         }
         $departments = $departmentsPageResponseDTO->getItems();
-        // setdepartmentbyand所have子departmentperson员quantity.
+        // setdepartmentbyand havechilddepartmentpersonmemberquantity.
         foreach ($departments as $delightfulDepartmentEntity) {
             $this->setChildrenEmployeeSum($queryDTO, $delightfulDepartmentEntity);
         }
@@ -112,7 +112,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
         }
         // address bookandsearch相closeinterface,filterhiddendepartmentandhiddenuser.
         $departments = $this->filterDepartmentsHidden($departments);
-        // allquantityfind,nothavemore多
+        // allquantityfind,nothavemoremultiple
         return PageListAssembler::pageByMysql($departments);
     }
 
@@ -136,11 +136,11 @@ class DelightfulDepartmentAppService extends AbstractAppService
     }
 
     /**
-     * setdepartmentbyand所have子departmentperson员quantity.
+     * setdepartmentbyand havechilddepartmentpersonmemberquantity.
      */
     protected function setChildrenEmployeeSum(DepartmentQueryDTO $queryDTO, DelightfulDepartmentEntity $departmentEntity): void
     {
-        // departmentbyand所have子departmentperson员quantity
+        // departmentbyand havechilddepartmentpersonmemberquantity
         if ($queryDTO->getSumType() === DepartmentSumType::All) {
             $employeeSum = $this->delightfulDepartmentDomainService->getDepartmentChildrenEmployeeSum($departmentEntity);
             $departmentEntity->setEmployeeSum($employeeSum);

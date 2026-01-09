@@ -22,11 +22,11 @@ interface KnowledgeBaseStrategyInterface
     public function getOrCreateDefaultDocument(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $knowledgeBaseEntity): void;
 
     /**
-     * getorcreatedefaultknowledge basedata源type.
+     * getorcreatedefaultknowledge basedatasourcetype.
      *
-     * @param KnowledgeBaseEntity $knowledgeBaseEntity knowledge base实body
+     * @param KnowledgeBaseEntity $knowledgeBaseEntity knowledge baseactualbody
      *
-     * @return null|int data源type
+     * @return null|int datasourcetype
      */
     public function getOrCreateDefaultSourceType(KnowledgeBaseEntity $knowledgeBaseEntity): ?int;
 }

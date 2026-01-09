@@ -10,24 +10,24 @@ namespace App\Infrastructure\ExternalAPI\Sms;
 use App\Infrastructure\ExternalAPI\Sms\Enum\SignEnum;
 
 /**
- * 所haveshortmessage drivenreturnresultmustconvertforthisobject
+ *  haveshortmessage drivenreturnresultmustconvertforthisobject
  */
 class SmsStruct
 {
     /**
-     * hand机number.
+     * handmachinenumber.
      */
     public string $phone = '';
 
     /**
-     * short信type,such as:registration_rewards (orderalreadyhair货),arrival_notice(to货notify).
-     * 1.ifmatch language field,meanwhileusevariableshort信,canimplement多languageadapt,byand语type兜bottom
-     * 2.电quotient相closeshort信usethisfield,butisnothave language pass in.
+     * shortmessagetype,such as:registration_rewards (orderalreadyhair货),arrival_notice(to货notify).
+     * 1.ifmatch language field,meanwhileusevariableshortmessage,canimplementmultiplelanguageadapt,byandlanguagetypefallbackbottom
+     * 2.电quotient相closeshortmessageusethisfield,butisnothave language pass in.
      */
     public ?string $type = null;
 
     /**
-     * variableshort信variablecontent. maybeforassociatearray,alsomaybeforindexarray.
+     * variableshortmessagevariablecontent. maybeforassociatearray,alsomaybeforindexarray.
      * @example {"product_name": "quotient品A", "payer": "supplyquotientA","amount": 10}
      * @example ["quotient品A","supplyquotientA",10]
      */
@@ -35,12 +35,12 @@ class SmsStruct
 
     /**
      * normalshortpure messagetextcontent.
-     * 如: lighthousejustininvitationyouadd入enterprise,point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
+     * like: lighthousejustininvitationyouadd入enterprise,point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
      */
     public ?string $content = null;
 
     /**
-     * short信signature.
+     * shortmessagesignature.
      * @example lighthouseengine
      */
     public SignEnum $sign;
@@ -51,12 +51,12 @@ class SmsStruct
     public ?string $language = null;
 
     /**
-     * short信default语type,supportbusiness方customize. not传givedefaultvaluezh_CN.
+     * shortmessagedefaultlanguagetype,supportbusinesssidecustomize. not传givedefaultvaluezh_CN.
      */
     public ?string $defaultLanguage = null;
 
     /**
-     * short信variabletemplateid.
+     * shortmessagevariabletemplateid.
      */
     public ?string $templateId = null;
 

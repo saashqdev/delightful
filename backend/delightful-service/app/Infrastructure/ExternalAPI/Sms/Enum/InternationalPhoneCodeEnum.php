@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\Sms\Enum;
 
 /**
- * phoneinternational区numbercode
+ * phoneinternationalregionnumbercode
  */
 enum InternationalPhoneCodeEnum: string
 {
@@ -21,7 +21,7 @@ enum InternationalPhoneCodeEnum: string
     case CHINA = '86';
 
     /**
-     * 所haveinternational区number.
+     *  haveinternationalregionnumber.
      * @return string[]
      */
     public static function InternationalCodes(): array
@@ -287,8 +287,8 @@ enum InternationalPhoneCodeEnum: string
     }
 
     /**
-     * allowtothisthesecountrysendshort信.
-     * middle国number码notallowuseinternationalshort信interfaceconductsend
+     * allowtothisthesecountrysendshortmessage.
+     * middlecountrynumbercodenotallowuseinternationalshortmessageinterfaceconductsend
      */
     public static function allowCountryCodes(): array
     {
@@ -303,7 +303,7 @@ enum InternationalPhoneCodeEnum: string
     }
 
     /**
-     * go掉hand机number"+"number,byandmaybe存in"-","00".
+     * godrophandmachinenumber"+"number,byandmaybeexistsin"-","00".
      * @example +8613104871111
      * @example +86-13104871111
      * @example +0086-13104871111
@@ -315,14 +315,14 @@ enum InternationalPhoneCodeEnum: string
     }
 
     /**
-     * judgewhethernonmiddle国hand机number.
+     * judgewhethernonmiddlecountryhandmachinenumber.
      */
     public static function isInternationalPhone(string $phone): bool
     {
         if (str_starts_with($phone, '+' . self::CHINA->value) || str_starts_with($phone, self::CHINA->value)) {
             return false;
         }
-        // judgeinternational区number
+        // judgeinternationalregionnumber
         if (str_contains($phone, '+') || str_contains($phone, '-')) {
             return true;
         }

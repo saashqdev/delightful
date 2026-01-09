@@ -58,7 +58,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * get所havetype.
+     * get havetype.
      */
     public static function getAllTypes(): array
     {
@@ -77,7 +77,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * getoptionarray(useatfront端show).
+     * getoptionarray(useatfrontclientshow).
      */
     public static function getOptions(): array
     {

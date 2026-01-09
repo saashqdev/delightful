@@ -42,13 +42,13 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * handlegroupDTOarraymiddlegraph标,willpathconvertforcompleteURL.
+     * handlegroupDTOarraymiddlegraphmark,willpathconvertforcompleteURL.
      *
      * @param ModeGroupDTO[] $groups
      */
     protected function processGroupIcons(array $groups): void
     {
-        // 收collection所haveneedhandleiconpath
+        // receivecollection haveneedhandleiconpath
         $iconPaths = [];
 
         foreach ($groups as $group) {
@@ -79,21 +79,21 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * handle模typeaggregaterootmiddlegraph标,willpathconvertforcompleteURL.
+     * handlemodetypeaggregaterootmiddlegraphmark,willpathconvertforcompleteURL.
      */
     protected function processModeAggregateIcons(AdminModeAggregateDTO|ModeAggregate|ModeAggregateDTO $modeAggregateDTO): void
     {
-        // 收collection所haveneedhandleiconpath
+        // receivecollection haveneedhandleiconpath
         $iconPaths = [];
 
-        // 收collectiongroupiconpath
+        // receivecollectiongroupiconpath
         foreach ($modeAggregateDTO->getGroups() as $groupAggregate) {
             $groupIcon = $groupAggregate->getGroup()->getIcon();
             if (! empty($groupIcon) && ! is_url($groupIcon)) {
                 $iconPaths[] = $groupIcon;
             }
 
-            // 收collectionmodeliconpath
+            // receivecollectionmodeliconpath
             foreach ($groupAggregate->getModels() as $model) {
                 $modelIcon = $model->getModelIcon();
                 if (! empty($modelIcon) && ! is_url($modelIcon)) {
@@ -101,7 +101,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
                 }
             }
 
-            // 收collectiongraphlikemodeliconpath
+            // receivecollectiongraphlikemodeliconpath
             foreach ($groupAggregate->getImageModels() as $imageModel) {
                 $modelIcon = $imageModel->getModelIcon();
                 if (! empty($modelIcon) && ! is_url($modelIcon)) {
@@ -156,23 +156,23 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * handleModeGroupDetailDTOarraymiddlegraph标,willpathconvertforcompleteURL.
+     * handleModeGroupDetailDTOarraymiddlegraphmark,willpathconvertforcompleteURL.
      *
      * @param ModeGroupDetailDTO[] $modeGroupDetails
      */
     protected function processModeGroupDetailIcons(DelightfulUserAuthorization $authorization, array $modeGroupDetails): void
     {
-        // 收collection所haveneedhandleiconpath
+        // receivecollection haveneedhandleiconpath
         $iconPaths = [];
 
         foreach ($modeGroupDetails as $groupDetail) {
-            // 收collectiongroupiconpath
+            // receivecollectiongroupiconpath
             $groupIcon = $groupDetail->getIcon();
             if (! empty($groupIcon) && ! is_url($groupIcon)) {
                 $iconPaths[] = $groupIcon;
             }
 
-            // 收collectionmodeliconpath
+            // receivecollectionmodeliconpath
             foreach ($groupDetail->getModels() as $model) {
                 $modelIcon = $model->getModelIcon();
                 if (! empty($modelIcon) && ! is_url($modelIcon)) {
@@ -216,7 +216,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
      */
     protected function getModels(ModeAggregate $modeAggregate): array
     {
-        // get所havemodelID (usemodel_idwhilenotisprovider_model_id)
+        // get havemodelID (usemodel_idwhilenotisprovider_model_id)
         $allModelIds = [];
         foreach ($modeAggregate->getGroupAggregates() as $groupAggregate) {
             foreach ($groupAggregate->getRelations() as $relation) {
@@ -233,7 +233,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // batchquantitygetmodel
         $allModels = $this->providerModelDomainService->getModelsByModelIds($providerDataIsolation, array_unique($allModelIds));
 
-        // extract所haveservicequotientID
+        // extract haveservicequotientID
         $providerConfigIds = [];
         foreach ($allModels as $models) {
             foreach ($models as $model) {
@@ -263,12 +263,12 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * getdetailedmodelinfo(useatmanageback台,considerservicequotientlevel联status).
+     * getdetailedmodelinfo(useatmanagebackplatform,considerservicequotientlevel联status).
      * @return array<string, array{best: null|ProviderModelEntity, all: ProviderModelEntity[], status: ModelStatus}>
      */
     protected function getDetailedModels(ModeAggregate $modeAggregate): array
     {
-        // get所havemodelID
+        // get havemodelID
         $allModelIds = [];
         foreach ($modeAggregate->getGroupAggregates() as $groupAggregate) {
             foreach ($groupAggregate->getRelations() as $relation) {
@@ -285,7 +285,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // singletimequerygetcompletemodelinfo
         $allModels = $this->providerModelDomainService->getModelsByModelIds($providerDataIsolation, array_unique($allModelIds));
 
-        // extract所haveservicequotientID
+        // extract haveservicequotientID
         $providerConfigIds = [];
         foreach ($allModels as $models) {
             foreach ($models as $model) {
@@ -331,7 +331,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return null;
         }
 
-        // ifnothaveprovideservicequotientstatus,use原havelogic(tobackcompatible)
+        // ifnothaveprovideservicequotientstatus,useoriginalhavelogic(tobackcompatible)
         if (empty($providerStatuses)) {
             foreach ($models as $model) {
                 if ($model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
@@ -373,7 +373,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return ModelStatus::Deleted;
         }
 
-        // ifnothaveprovideservicequotientstatus,use原havelogic(tobackcompatible)
+        // ifnothaveprovideservicequotientstatus,useoriginalhavelogic(tobackcompatible)
         if (empty($providerStatuses)) {
             foreach ($models as $model) {
                 if ($model->getStatus() && $model->getStatus() === Status::Enabled) {

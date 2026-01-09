@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\BuiltIn\ToolSet\InternetSearch\Tools;
 
 /*
- * 本file属atlighthouseenginecopyrighthave,leaks will be prosecuted.
+ * thisfilebelongatlighthouseenginecopyrighthave,leaks will be prosecuted.
  */
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunnerFactory;
 use App\Domain\Flow\Entity\ValueObject\Node;
@@ -59,8 +59,8 @@ class TravilyInternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
             "search_keyword": {
                 "type": "string",
                 "key": "search_keyword",
-                "title": "usersearch词",
-                "description": "usersearch词",
+                "title": "usersearchword",
+                "description": "usersearchword",
                 "required": null,
                 "value": {
                     "type": "const",

@@ -70,7 +70,7 @@ class ModelConfigDomainService extends AbstractDomainService
     }
 
     /**
-     * according toIDgetmodelconfiguration, not存inthenthrowexception.
+     * according toIDgetmodelconfiguration, notexistsinthenthrowexception.
      */
     public function showById(string $id): ModelConfigEntity
     {

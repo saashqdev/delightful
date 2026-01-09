@@ -31,7 +31,7 @@ class SessionAppService implements SessionInterface
         $loginResponses = $this->delightfulUserDomainService->delightfulUserLoginCheck($loginCheck->getAuthorization(), $delightfulEnvironmentEntity, $delightfulOrganizationCode);
         // increaseorganizationnameandavatar
         if (! empty($loginResponses)) {
-            // 收collection所haveorganizationcode
+            // receivecollection haveorganizationcode
             $orgCodes = [];
             foreach ($loginResponses as $loginResponse) {
                 $orgCode = $loginResponse->getDelightfulOrganizationCode();
@@ -40,9 +40,9 @@ class SessionAppService implements SessionInterface
                 }
             }
 
-            // ifhaveorganizationcode,batchquantityget所haveorganizationrootdepartmentinformation
+            // ifhaveorganizationcode,batchquantityget haveorganizationrootdepartmentinformation
             if (! empty($orgCodes)) {
-                // onetimepropertybatchquantityget所haveorganizationrootdepartmentinformation
+                // onetimepropertybatchquantityget haveorganizationrootdepartmentinformation
                 $rootDepartments = $this->delightfulDepartmentDomainService->getOrganizationsRootDepartment($orgCodes);
 
                 // populateloginresponseinformation

@@ -75,7 +75,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $query->setIds($agentIds);
         $query->setWithLastVersionInfo(true);
 
-        // querycurrent具havepermission
+        // querycurrentwithhavepermission
         $data = $this->delightfulAgentDomainService->queries($query, $page);
         $avatars = [];
         foreach ($data['list'] as $agent) {
@@ -134,7 +134,7 @@ class DelightfulAgentAppService extends AbstractAppService
         return $this->delightfulAgentDomainService->deleteAgentById($id, $authorization->getOrganizationCode());
     }
 
-    // getfinger定userassistant
+    // getfingersetuserassistant
     #[Deprecated]
     public function getAgentsByUserIdPage(string $userId, int $page, int $pageSize, string $agentName, DelightfulAgentQueryStatus $queryStatus): array
     {
@@ -268,7 +268,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $friendDataIsolation->setCurrentUserId($authorization->getId());
         $friendDataIsolation->setCurrentOrganizationCode($organizationCode);
 
-        // getuserproxygood友columntable
+        // getuserproxygoodfriendcolumntable
         $userAgentFriends = $this->delightfulUserDomainService->getUserAgentFriendsList($friendQueryDTO, $friendDataIsolation);
 
         $delightfulAgentVO->setIsAdd(isset($userAgentFriends[$delightfulAgentVersionEntity->getFlowCode()]));
@@ -310,10 +310,10 @@ class DelightfulAgentAppService extends AbstractAppService
         // getassistanttotal
         $totalAgentsCount = $this->getTotalAgentsCount($organizationCode, $agentName);
 
-        // handlecreate者info
+        // handlecreatepersoninfo
         $this->enrichCreatorInfo($agentVersions);
 
-        // handleavatarandgood友status
+        // handleavatarandgoodfriendstatus
         $this->enrichAgentAvatarAndFriendStatus($agentVersions, $authorization);
 
         return [
@@ -325,7 +325,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * getchat模typecanuseassistantcolumntable(allquantitydata,notpagination).
+     * getchatmodetypecanuseassistantcolumntable(allquantitydata,notpagination).
      * @param Authenticatable $authorization userauthorization
      * @param DelightfulAgentQuery $query querycondition
      * @return array assistantcolumntableandconversationID
@@ -346,7 +346,7 @@ class DelightfulAgentAppService extends AbstractAppService
             return ['total' => 0, 'list' => []];
         }
 
-        // getallquantityassistant实body
+        // getallquantityassistantactualbody
         $totalCount = $fullData['total'];
         /** @var DelightfulAgentEntity[] $agentEntities */
         $agentEntities = $fullData['list'];
@@ -362,7 +362,7 @@ class DelightfulAgentAppService extends AbstractAppService
         foreach ($agentEntities as $agent) {
             $agentData = $agent->toArray();
 
-            // add agent_id field,value同 id
+            // add agent_id field,valuesame id
             $agentData['agent_id'] = $agentData['id'];
 
             // addwhetherforofficialorganizationidentifier
@@ -378,7 +378,7 @@ class DelightfulAgentAppService extends AbstractAppService
                 $userId = $flowCodeToUserIdMap[$flowCode];
                 $agentData['user_id'] = $userId;
 
-                // addconversationID(if存in)
+                // addconversationID(ifexistsin)
                 if (isset($conversationMap[$userId])) {
                     $agentData['conversation_id'] = $conversationMap[$userId];
                 }
@@ -396,7 +396,7 @@ class DelightfulAgentAppService extends AbstractAppService
     // getapplicationmarketassistant
     public function getAgentsFromMarketplacePage(int $page, int $pageSize): array
     {
-        // 查outenableassistant
+        // checkoutenableassistant
         $agents = $this->delightfulAgentDomainService->getEnabledAgents();
         // use array_column extract agent_version_id
         $agentIds = array_column($agents, 'agent_version_id');
@@ -426,7 +426,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
         $agentVersionDTO->check();
 
-        // onlypublishtoenterprise才from己giveadd
+        // onlypublishtoenterprise才fromselfgiveadd
         if ($agentVersionDTO->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
             $visibilityConfig = $agentVersionDTO->getVisibilityConfig();
             if (! $visibilityConfig) {
@@ -475,14 +475,14 @@ class DelightfulAgentAppService extends AbstractAppService
         // publishassistant
         $result = $this->delightfulAgentVersionDomainService->releaseAgentVersion($delightfulAgentVersionEntity);
 
-        // ifpublishisperson,that么notcan操asthethree方assistant
+        // ifpublishisperson,thatwhatnotcanoperationasthethreesideassistant
         if ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PERSONAL_USE->value) {
             $thirdPlatformList = null;
         }
-        // syncthethree方assistant
+        // syncthethreesideassistant
         $this->delightfulBotThirdPlatformChatDomainService->syncBotThirdPlatformList($agent->getId(), $thirdPlatformList);
 
-        // 首timepublishaddforgood友
+        // 首timepublishaddforgoodfriend
         $result['is_add_friend'] = $isAddFriend;
 
         $delightfulAgentVersionEntity = $result['data'];
@@ -569,7 +569,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // getassistant
         $delightfulAgentEntity = $this->delightfulAgentDomainService->getAgentById($agentId);
 
-        // whetherisfrom己assistant
+        // whetherisfromselfassistant
         if ($delightfulAgentEntity->getCreatedUid() !== $userId) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.illegal_operation');
         }
@@ -598,7 +598,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $flowDataIsolation = new FlowDataIsolation($authenticatable->getOrganizationCode(), $authenticatable->getId());
         $userId = $authenticatable->getId();
 
-        // judgewhether具havepermission
+        // judgewhetherwithhavepermission
         $agentOperation = $this->operationPermissionAppService->getOperationByResourceAndUser(
             new PermissionDataIsolation($authenticatable->getOrganizationCode(), $authenticatable->getId()),
             ResourceType::AgentCode,
@@ -641,7 +641,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $friendDataIsolation->setCurrentUserId($authenticatable->getId());
             $friendDataIsolation->setCurrentOrganizationCode($authenticatable->getOrganizationCode());
 
-            // getuserproxygood友columntable
+            // getuserproxygoodfriendcolumntable
             $userAgentFriends = $this->delightfulUserDomainService->getUserAgentFriendsList($friendQueryDTO, $friendDataIsolation);
 
             $delightfulAgentVO->setIsAdd(isset($userAgentFriends[$delightfulAgentVersionEntity->getFlowCode()]));
@@ -705,7 +705,7 @@ class DelightfulAgentAppService extends AbstractAppService
             return true;
         }
 
-        // judgeinteractionfinger令,ifnotone致thenneedreturn true
+        // judgeinteractionfingercommand,ifnotonetothenneedreturn true
         $oldInstruct = $delightfulAgentVersionEntity->getInstructs();
         $newInstruct = $delightfulAgentEntity->getInstructs();
 
@@ -738,7 +738,7 @@ class DelightfulAgentAppService extends AbstractAppService
         foreach ($defaultConversationAICodes as $aiCode) {
             $aiUserEntity = $this->delightfulUserDomainService->getByAiCode($dataIsolation, $aiCode);
             $agentName = $aiUserEntity?->getNickname();
-            // judgeconversationwhetheralready经initialize,ifalreadyinitializethenskip
+            // judgeconversationwhetheralreadyalreadyinitialize,ifalreadyinitializethenskip
             if ($this->delightfulAgentDomainService->isDefaultAssistantConversationExist($userEntity->getUserId(), $aiCode)) {
                 continue;
             }
@@ -747,10 +747,10 @@ class DelightfulAgentAppService extends AbstractAppService
                 Db::transaction(function () use ($dataIsolation, $aiUserEntity, $aiCode, $userEntity) {
                     // insertdefaultconversationrecord
                     $this->delightfulAgentDomainService->insertDefaultAssistantConversation($userEntity->getUserId(), $aiCode);
-                    // addgood友,assistantdefaultagreegood友
+                    // addgoodfriend,assistantdefaultagreegoodfriend
                     $friendId = $aiUserEntity->getUserId();
                     $this->delightfulUserDomainService->addFriend($dataIsolation, $friendId);
-                    // sendaddgood友controlmessage
+                    // sendaddgoodfriendcontrolmessage
                     $friendUserEntity = new DelightfulUserEntity();
                     $friendUserEntity->setUserId($friendId);
                     di(DelightfulUserContactAppService::class)->sendAddFriendControlMessage($dataIsolation, $friendUserEntity);
@@ -799,11 +799,11 @@ class DelightfulAgentAppService extends AbstractAppService
             $authorization->getId()
         );
 
-        // handlememberinfo,移exceptcurrentuser
+        // handlememberinfo,moveexceptcurrentuser
         $users = $visibilityConfig->getUsers();
         if (! empty($users)) {
             $currentUserId = $authorization->getId();
-            // filter掉currentuser
+            // filterdropcurrentuser
             $filteredUsers = [];
             foreach ($users as $user) {
                 if ($user->getId() !== $currentUserId) {
@@ -817,7 +817,7 @@ class DelightfulAgentAppService extends AbstractAppService
                     $userMap[$userEntity->getUserId()] = $userEntity;
                 }
 
-                // 先settingfornull
+                // firstsettingfornull
                 $visibilityConfig->setUsers([]);
 
                 foreach ($filteredUsers as $user) {
@@ -916,8 +916,8 @@ class DelightfulAgentAppService extends AbstractAppService
         $loadPresetConfig = $this->loadPresetConfig('generate_image', ['modelName' => $modelName]);
         // preparebasicconfiguration
         $config = [
-            'agent_name' => 'text generationgraph助hand',
-            'agent_description' => 'onestrongbigAItextgenerategraphlike助hand,canaccording to您descriptioncreateexquisitegraphlike.',
+            'agent_name' => 'text generationgraphhelphand',
+            'agent_description' => 'onestrongbigAItextgenerategraphlikehelphand,canaccording to您descriptioncreateexquisitegraphlike.',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],
             'instruct' => $loadPresetConfig['instructs'],
@@ -944,8 +944,8 @@ class DelightfulAgentAppService extends AbstractAppService
 
         // preparebasicconfiguration
         $config = [
-            'agent_name' => 'documentparse助hand',
-            'agent_description' => 'documentparse助hand',
+            'agent_name' => 'documentparsehelphand',
+            'agent_description' => 'documentparsehelphand',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $this->loadPresetConfig('document', ['modelName' => $modelName])['flow'],
         ];
@@ -959,7 +959,7 @@ class DelightfulAgentAppService extends AbstractAppService
      *
      * @param $authorization DelightfulUserAuthorization userauthorizationinfo
      * @param array $config containAgentconfigurationarray
-     * @return DelightfulAgentEntity createmachineperson实body
+     * @return DelightfulAgentEntity createmachinepersonactualbody
      * @throws Throwable whenconfigurationinvalidorinitializefailo clockthrowexception
      */
     #[Transactional]
@@ -1030,11 +1030,11 @@ class DelightfulAgentAppService extends AbstractAppService
 
     /**
      * getenableassistantversioncolumntable.
-     * optimize:directlyindomainservicelayerconductJOINquery,avoidpass inpass多ID.
+     * optimize:directlyindomainservicelayerconductJOINquery,avoidpass inpassmultipleID.
      */
     private function getEnabledAgentVersions(string $organizationCode, int $page, int $pageSize, string $agentName): array
     {
-        // directlycalldomainservicegettheorganizationdownenableassistantversion,avoid先get所haveIDagainquery
+        // directlycalldomainservicegettheorganizationdownenableassistantversion,avoidfirstget haveIDagainquery
         return $this->delightfulAgentVersionDomainService->getEnabledAgentsByOrganization($organizationCode, $page, $pageSize, $agentName);
     }
 
@@ -1060,7 +1060,7 @@ class DelightfulAgentAppService extends AbstractAppService
         if (empty($directDepartmentIds)) {
             $userDepartmentIds = [];
         } else {
-            // batchquantityget所have相closedepartmentinfo
+            // batchquantityget have相closedepartmentinfo
             $departments = $this->delightfulDepartmentDomainService->getDepartmentByIds($dataIsolation, $directDepartmentIds);
             $departmentsMap = [];
             foreach ($departments as $department) {
@@ -1081,7 +1081,7 @@ class DelightfulAgentAppService extends AbstractAppService
                 $allDepartmentIds[] = [$departmentId];
             }
             $allDepartmentIds = array_merge(...$allDepartmentIds);
-            // go重,ensure所havedepartmentID唯one
+            // go重,ensure havedepartmentIDuniqueone
             $userDepartmentIds = array_unique($allDepartmentIds);
         }
 
@@ -1137,7 +1137,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * handlecreate者info.
+     * handlecreatepersoninfo.
      */
     private function enrichCreatorInfo(array &$agentVersions): void
     {
@@ -1152,11 +1152,11 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * handleassistantavatarandgood友status
+     * handleassistantavatarandgoodfriendstatus
      */
     private function enrichAgentAvatarAndFriendStatus(array &$agentVersions, DelightfulUserAuthorization $authorization): void
     {
-        // batchquantity收collectionneedgetlinkfilepathandflow_code
+        // batchquantityreceivecollectionneedgetlinkfilepathandflow_code
         $avatarPaths = [];
         $flowCodes = [];
         foreach ($agentVersions as $agent) {
@@ -1213,10 +1213,10 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * handlefinger令middleimagepath.
-     * @param null|array $instructs finger令array
+     * handlefingercommandmiddleimagepath.
+     * @param null|array $instructs fingercommandarray
      * @param string $organizationCode organizationcode
-     * @return array handlebackfinger令array
+     * @return array handlebackfingercommandarray
      */
     private function processInstructionsImages(?array $instructs, string $organizationCode): array
     {
@@ -1224,7 +1224,7 @@ class DelightfulAgentAppService extends AbstractAppService
             return [];
         }
 
-        // 收collection所haveneedhandleimagepath
+        // receivecollection haveneedhandleimagepath
         $imagePaths = [];
         foreach ($instructs as $instruct) {
             $hasValidItems = isset($instruct['items']) && is_array($instruct['items']);
@@ -1233,14 +1233,14 @@ class DelightfulAgentAppService extends AbstractAppService
             }
 
             foreach ($instruct['items'] as $item) {
-                // handlenormalfinger令image
+                // handlenormalfingercommandimage
                 $explanation = $item['instruction_explanation'] ?? [];
                 $hasValidImage = is_array($explanation) && ! empty($explanation['image']);
                 if ($hasValidImage) {
                     $imagePaths[] = $explanation['image'];
                 }
 
-                // handleoptiontypefinger令image
+                // handleoptiontypefingercommandimage
                 $values = $item['values'] ?? [];
                 $hasValidValues = is_array($values);
                 if (! $hasValidValues) {
@@ -1261,14 +1261,14 @@ class DelightfulAgentAppService extends AbstractAppService
             return $instructs;
         }
 
-        // get所haveimagelink
+        // get haveimagelink
         $fileLinks = $this->fileDomainService->getLinks($organizationCode, array_unique($imagePaths));
         $imageUrlMap = [];
         foreach ($fileLinks as $fileLink) {
             $imageUrlMap[$fileLink->getPath()] = $fileLink->getUrl();
         }
 
-        // handlefinger令arraymiddleimagepath
+        // handlefingercommandarraymiddleimagepath
         foreach ($instructs as &$instruct) {
             $hasValidItems = isset($instruct['items']) && is_array($instruct['items']);
             if (! $hasValidItems) {
@@ -1276,14 +1276,14 @@ class DelightfulAgentAppService extends AbstractAppService
             }
 
             foreach ($instruct['items'] as &$item) {
-                // handlenormalfinger令image
+                // handlenormalfingercommandimage
                 $explanation = &$item['instruction_explanation'];
                 $hasValidImagePath = is_array($explanation) && isset($explanation['image']);
                 if ($hasValidImagePath) {
                     $explanation['image'] = $imageUrlMap[$explanation['image']] ?? '';
                 }
 
-                // handleoptiontypefinger令image
+                // handleoptiontypefingercommandimage
                 $values = &$item['values'];
                 $hasValidValues = is_array($values);
                 if (! $hasValidValues) {
@@ -1347,7 +1347,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $config = $this->readJsonToArray($presetPath, $variables);
 
         if (empty($config)) {
-            ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, "no法loadpresetconfiguration: {$presetName}");
+            ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, "nomethodloadpresetconfiguration: {$presetName}");
         }
 
         return $config;
@@ -1356,7 +1356,7 @@ class DelightfulAgentAppService extends AbstractAppService
     /**
      * minute离officialorganizationanduserorganizationassistant.
      *
-     * @param array $agentEntities assistant实bodyarray
+     * @param array $agentEntities assistantactualbodyarray
      * @return array return [officialAgents, userOrgAgents]
      */
     private function separateOfficialAndUserAgents(array $agentEntities): array
@@ -1378,7 +1378,7 @@ class DelightfulAgentAppService extends AbstractAppService
     /**
      * getassistantconversationmapping.
      *
-     * @param DelightfulAgentEntity[] $agentEntities assistant实bodyarray
+     * @param DelightfulAgentEntity[] $agentEntities assistantactualbodyarray
      * @param DelightfulUserAuthorization $authorization userauthorizationobject
      * @return array return [flowCodeToUserIdMap, conversationMap]
      */
@@ -1391,7 +1391,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $officialFlowCodes = array_map(static fn ($agent) => $agent->getFlowCode(), $officialAgents);
         $userOrgFlowCodes = array_map(static fn ($agent) => $agent->getFlowCode(), $userOrgAgents);
 
-        // 4. minute别queryofficialanduserorganizationassistantuserID
+        // 4. minuteotherqueryofficialanduserorganizationassistantuserID
         $flowCodeToUserIdMap = [];
 
         // 4.1 queryofficialassistantuserID
@@ -1414,7 +1414,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $flowCodeToUserIdMap = array_merge($flowCodeToUserIdMap, $userOrgUserIdMap);
         }
 
-        // 5. 收collection所haveassistantuserID
+        // 5. receivecollection haveassistantuserID
         $agentUserIds = array_values($flowCodeToUserIdMap);
 
         // 6. queryuserandthistheseassistantconversationID
@@ -1432,7 +1432,7 @@ class DelightfulAgentAppService extends AbstractAppService
     /**
      * batchquantitygetassistantavatarURL.
      *
-     * @param DelightfulAgentEntity[] $agentEntities assistant实bodyarray
+     * @param DelightfulAgentEntity[] $agentEntities assistantactualbodyarray
      * @param DelightfulUserAuthorization $authorization userauthorizationobject
      * @return array avatarpathtoURLmapping
      */
@@ -1480,8 +1480,8 @@ class DelightfulAgentAppService extends AbstractAppService
      * will DelightfulAgentEntity convertfor DelightfulAgentVersionEntity.
      * useathandle私personassistantnothavepublishversionsituation.
      *
-     * @param DelightfulAgentEntity $agentEntity assistant实body
-     * @return DelightfulAgentVersionEntity assistantversion实body
+     * @param DelightfulAgentEntity $agentEntity assistantactualbody
+     * @return DelightfulAgentVersionEntity assistantversionactualbody
      */
     private function convertAgentToAgentVersion(DelightfulAgentEntity $agentEntity): DelightfulAgentVersionEntity
     {

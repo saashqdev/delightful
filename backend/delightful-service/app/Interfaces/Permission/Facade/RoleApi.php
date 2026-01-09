@@ -39,7 +39,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdataisolationupdown文
+        // createdataisolationupdowntext
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -48,7 +48,7 @@ class RoleApi extends AbstractPermissionApi
         // createpaginationobject
         $page = $this->createPage();
 
-        // buildqueryobject(from动filter掉paginationfield)
+        // buildqueryobject(fromautofilterdroppaginationfield)
         $query = new SubAdminQuery($this->request->all());
 
         // convertforstoragefilterarray
@@ -57,13 +57,13 @@ class RoleApi extends AbstractPermissionApi
         // queryrolelist
         $result = $this->roleAppService->queries($dataIsolation, $page, $filters);
 
-        // batchquantitygetuserdetail(eachroleonly取front5userId)
+        // batchquantitygetuserdetail(eachroleonlygetfront5userId)
         $contactIsolation = ContactDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
         );
 
-        // 收collectionneedqueryuserID
+        // receivecollectionneedqueryuserID
         $roleUserIdsMap = [];
         $allNeedUserIds = [];
         foreach ($result['list'] as $index => $roleEntity) {
@@ -104,7 +104,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdataisolationupdown文
+        // createdataisolationupdowntext
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -132,7 +132,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdataisolationupdown文
+        // createdataisolationupdowntext
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -145,7 +145,7 @@ class RoleApi extends AbstractPermissionApi
             throw new InvalidArgumentException('requestparameterverifyfail: ' . implode(', ', $errors));
         }
 
-        // createrole实body
+        // createroleactualbody
         $roleEntity = new RoleEntity();
         $roleEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $roleEntity->setCreatedUid($dataIsolation->getCurrentUserId());
@@ -168,7 +168,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdataisolationupdown文
+        // createdataisolationupdowntext
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -188,7 +188,7 @@ class RoleApi extends AbstractPermissionApi
             throw new InvalidArgumentException('at leastneedprovideonewantupdatefield');
         }
 
-        // get现haverole
+        // getshowhaverole
         $roleEntity = $this->roleAppService->show($dataIsolation, $roleId);
 
         $updateFields = $requestDTO->getUpdateFields();
@@ -216,7 +216,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdataisolationupdown文
+        // createdataisolationupdowntext
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -225,7 +225,7 @@ class RoleApi extends AbstractPermissionApi
         // deleterole
         $this->roleAppService->destroy($dataIsolation, $id);
 
-        // returnemptyarrayby触hair统one ApiResponse encapsulation
+        // returnemptyarraybytouchhair統one ApiResponse encapsulation
         return [];
     }
 }

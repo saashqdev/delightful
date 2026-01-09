@@ -35,7 +35,7 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'according tofile名getfileupload预signatureURL.onlycan操as本processproducefile';
+        return 'according tofilenamegetfileuploadpresignatureURL.onlycanoperationasthisprocessproducefile';
     }
 
     public function getCallback(): ?Closure
@@ -49,7 +49,7 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
             }
             $organizationCode = $executionData->getDataIsolation()->getCurrentOrganizationCode();
 
-            // permissionissue,目frontonlyallow操as本processproducefile.因forcurrenttoolalsoisone flow,所byneedget父process code
+            // permissionissue,itemfrontonlyallowoperationasthisprocessproducefile.因forcurrenttoolalsoisone flow, byneedgetparentprocess code
             $name = $executionData->getParentFlowCode() . '/' . ltrim($name, '/');
 
             $fileDomain = di(FileDomainService::class);
@@ -87,7 +87,7 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
         "name": {
             "type": "string",
             "key": "name",
-            "title": "file名",
+            "title": "filename",
             "description": "filename",
             "required": null,
             "value": null,
@@ -129,7 +129,7 @@ JSON,
             "type": "string",
             "key": "url",
             "title": "URL",
-            "description": "fileupload预signatureURL",
+            "description": "fileuploadpresignatureURL",
             "required": null,
             "value": null,
             "encryption": false,
@@ -141,7 +141,7 @@ JSON,
             "type": "object",
             "key": "headers",
             "title": "Headers",
-            "description": "fileupload预signatureURLHeaders",
+            "description": "fileuploadpresignatureURLHeaders",
             "required": null,
             "value": null,
             "encryption": false,
@@ -153,7 +153,7 @@ JSON,
             "type": "number",
             "key": "expires",
             "title": "expiretime",
-            "description": "fileupload预signatureURLexpiretime",
+            "description": "fileuploadpresignatureURLexpiretime",
             "required": null,
             "value": null,
             "encryption": false,
@@ -176,8 +176,8 @@ JSON,
         "name": {
             "type": "string",
             "key": "name",
-            "title": "file名",
-            "description": "file名",
+            "title": "filename",
+            "description": "filename",
             "required": null,
             "value": null,
             "encryption": false,

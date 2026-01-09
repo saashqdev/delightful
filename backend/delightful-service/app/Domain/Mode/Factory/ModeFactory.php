@@ -15,7 +15,7 @@ use Hyperf\Database\Model\Model;
 class ModeFactory
 {
     /**
-     * willmodelconvertfor实body.
+     * willmodelconvertforactualbody.
      */
     public static function modelToEntity(Model|ModeModel $model): ModeEntity
     {

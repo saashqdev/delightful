@@ -18,7 +18,7 @@ class AccountEntity extends AbstractEntity
     protected ?string $delightfulId = null;
 
     /**
-     * 账numbertype:0:ai 1:personcategory 2:application.
+     * accountnumbertype:0:ai 1:personcategory 2:application.
      */
     protected ?UserType $type = null;
 
@@ -28,17 +28,17 @@ class AccountEntity extends AbstractEntity
     protected ?string $aiCode = null;
 
     /**
-     * 账numberstatus,0:normal,1:disable.
+     * accountnumberstatus,0:normal,1:disable.
      */
     protected ?AccountStatus $status = null;
 
     /**
-     * hand机numbercountryprefix code
+     * handmachinenumbercountryprefix code
      */
     protected ?string $countryCode = null;
 
     /**
-     * hand机number.
+     * handmachinenumber.
      */
     protected ?string $phone = null;
 
@@ -64,7 +64,7 @@ class AccountEntity extends AbstractEntity
 
     protected ?string $createdAt = null;
 
-    // fortrace哪withincreate账number,留downthisconstructfunction
+    // fortracewhichwithincreateaccountnumber,留downthisconstructfunction
     public function __construct(array $data = [])
     {
         parent::__construct($data);

@@ -59,7 +59,7 @@ readonly class KnowledgeBaseFragmentDomainService
     {
         $delightfulFlowKnowledgeFragmentEntity = $this->knowledgeBaseFragmentRepository->getById($dataIsolation, $id, $selectForUpdate);
         if (empty($delightfulFlowKnowledgeFragmentEntity) && $throw) {
-            ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$id}] not存in");
+            ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$id}] notexistsin");
         }
         return $delightfulFlowKnowledgeFragmentEntity;
     }
@@ -74,7 +74,7 @@ readonly class KnowledgeBaseFragmentDomainService
         $savingDelightfulFlowKnowledgeFragmentEntity->setDocumentCode($knowledgeBaseDocumentEntity->getCode());
         $savingDelightfulFlowKnowledgeFragmentEntity->setCreator($dataIsolation->getCurrentUserId());
 
-        // ifhavebusinessid,andandbusiness ID 存in,alsocan相whenatupdate
+        // ifhavebusinessid,andandbusiness ID existsin,alsocan相whenatupdate
         $knowledgeBaseFragmentEntity = null;
         if (! empty($savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId()) && empty($savingDelightfulFlowKnowledgeFragmentEntity->getId())) {
             $knowledgeBaseFragmentEntity = $this->knowledgeBaseFragmentRepository->getByBusinessId($dataIsolation, $savingDelightfulFlowKnowledgeFragmentEntity->getKnowledgeCode(), $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId());
@@ -89,7 +89,7 @@ readonly class KnowledgeBaseFragmentDomainService
         } else {
             $knowledgeBaseFragmentEntity = $knowledgeBaseFragmentEntity ?? $this->knowledgeBaseFragmentRepository->getById($dataIsolation, $savingDelightfulFlowKnowledgeFragmentEntity->getId());
             if (empty($knowledgeBaseFragmentEntity)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$savingDelightfulFlowKnowledgeFragmentEntity->getId()}] nothave找to");
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$savingDelightfulFlowKnowledgeFragmentEntity->getId()}] nothavefindto");
             }
             // ifnothavechange,thennotneedupdate
             if (! $knowledgeBaseFragmentEntity->hasModify($savingDelightfulFlowKnowledgeFragmentEntity)) {
@@ -126,7 +126,7 @@ readonly class KnowledgeBaseFragmentDomainService
     {
         $delightfulFlowKnowledgeFragmentEntity = $this->knowledgeBaseFragmentRepository->getByBusinessId($dataIsolation, $knowledgeCode, $businessId);
         if (empty($delightfulFlowKnowledgeFragmentEntity)) {
-            ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$businessId}] not存in");
+            ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$businessId}] notexistsin");
         }
         return $delightfulFlowKnowledgeFragmentEntity;
     }
@@ -136,7 +136,7 @@ readonly class KnowledgeBaseFragmentDomainService
         Db::transaction(function () use ($dataIsolation, $knowledgeBaseFragmentEntity) {
             $oldKnowledgeBaseFragmentEntity = $this->knowledgeBaseFragmentRepository->getById($dataIsolation, $knowledgeBaseFragmentEntity->getId(), true);
             $this->knowledgeBaseFragmentRepository->destroy($dataIsolation, $knowledgeBaseFragmentEntity);
-            // needupdatecharacter数
+            // needupdatecharactercount
             $deltaWordCount = -$oldKnowledgeBaseFragmentEntity->getWordCount();
             $this->updateWordCount($dataIsolation, $oldKnowledgeBaseFragmentEntity, $deltaWordCount);
         });
@@ -158,7 +158,7 @@ readonly class KnowledgeBaseFragmentDomainService
     }
 
     /**
-     * according to point_id get所have相closeslicesegment,按 version reverse ordersort.
+     * according to point_id get have相closeslicesegment,按 version reverse ordersort.
      * @return array<KnowledgeBaseFragmentEntity>
      */
     public function getFragmentsByPointId(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, string $pointId, bool $lock = false): array
@@ -194,13 +194,13 @@ readonly class KnowledgeBaseFragmentDomainService
             default => ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed),
         };
         $preprocessRule = $selectedFragmentConfig->getTextPreprocessRule();
-        // 先conduct预process
+        // firstconductpreprocess
         // needfilterREPLACE_WHITESPACErule,REPLACE_WHITESPACEruleinminutesegmentbackconductprocess
         $filterPreprocessRule = array_filter($preprocessRule, fn (TextPreprocessRule $rule) => $rule !== TextPreprocessRule::REPLACE_WHITESPACE);
         $start = microtime(true);
-        $this->logger->info('front置text预processstart.');
+        $this->logger->info('frontsettextpreprocessstart.');
         $content = TextPreprocessUtil::preprocess($filterPreprocessRule, $content);
-        $this->logger->info('front置text预processend,耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
+        $this->logger->info('frontsettextpreprocessend,consumeo clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
         // againconductminutesegment
         // processescapeminuteseparator
@@ -215,19 +215,19 @@ readonly class KnowledgeBaseFragmentDomainService
         );
 
         $fragments = $splitter->splitText($content);
-        $this->logger->info('textminutesegmentend,耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
+        $this->logger->info('textminutesegmentend,consumeo clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
-        // need额outsideconductprocessrule
+        // needquotaoutsideconductprocessrule
         $start = microtime(true);
-        $this->logger->info('back置text预processstart.');
+        $this->logger->info('backsettextpreprocessstart.');
         if (in_array(TextPreprocessRule::REPLACE_WHITESPACE, $preprocessRule)) {
             foreach ($fragments as &$fragment) {
                 $fragment = TextPreprocessUtil::preprocess([TextPreprocessRule::REPLACE_WHITESPACE], $fragment);
             }
         }
-        $this->logger->info('back置text预processend,耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
+        $this->logger->info('backsettextpreprocessend,consumeo clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
-        // filter掉emptystring
+        // filterdropemptystring
         return array_values(array_filter($fragments, function ($fragment) {
             return trim($fragment) !== '';
         }));

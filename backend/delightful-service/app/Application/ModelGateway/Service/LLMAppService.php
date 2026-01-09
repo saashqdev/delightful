@@ -617,13 +617,13 @@ class LLMAppService extends AbstractLLMAppService
         $size = $textGenerateImageDTO->getSize();
         [$width, $height] = explode('x', $size);
 
-        // calculatestringformatratio例,如 "1:1", "3:4"
+        // calculatestringformatratioexample,like "1:1", "3:4"
         $ratio = $this->calculateRatio((int) $width, (int) $height);
         $imageGenerateParamsVO->setRatio($ratio);
         $imageGenerateParamsVO->setWidth($width);
         $imageGenerateParamsVO->setHeight($height);
 
-        // fromservicequotientconfigurationarraymiddle取firstconductprocess
+        // fromservicequotientconfigurationarraymiddlegetfirstconductprocess
         if (empty($serviceProviderConfigs)) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
         }
@@ -656,12 +656,12 @@ class LLMAppService extends AbstractLLMAppService
                 if (! empty($generateImageRaw)) {
                     $this->recordImageGenerateMessageLog($modelVersion, $creator, $organizationCode);
                     $n = $textGenerateImageDTO->getN();
-                    // except mj is 1 time之outside,otherallcount by sheet
+                    // except mj is 1 timeofoutside,otherallcount by sheet
                     if (in_array($modelVersion, ImageGenerateModelType::getMidjourneyModes())) {
                         $n = 1;
                     }
 
-                    // 统one触hairevent
+                    // 統onetouchhairevent
                     $this->dispatchImageGeneratedEvent(
                         $creator,
                         $organizationCode,
@@ -708,7 +708,7 @@ class LLMAppService extends AbstractLLMAppService
         $data['organization_code'] = $organizationCode;
         $imageGenerateRequest = ImageGenerateFactory::createRequestType($imageGenerateType, $data);
         $implicitWatermark = new ImplicitWatermark();
-        $imageGenerateRequest->setGenerateNum(1); // graph生graphdefaultonlycan 1
+        $imageGenerateRequest->setGenerateNum(1); // graphgenerategraphdefaultonlycan 1
         $implicitWatermark->setOrganizationCode($organizationCode)
             ->setUserId($creator)
             ->setTopicId($imageEditDTO->getTopicId());
@@ -718,7 +718,7 @@ class LLMAppService extends AbstractLLMAppService
 
         [$width, $height] = explode('x', $size);
 
-        // calculatestringformatratio例,如 "1:1", "3:4"
+        // calculatestringformatratioexample,like "1:1", "3:4"
         $imageGenerateRequest->setWidth($width);
         $imageGenerateRequest->setHeight($height);
 
@@ -731,7 +731,7 @@ class LLMAppService extends AbstractLLMAppService
                 $imageGenerateRequest->setModel($serviceProviderConfig->getModelVersion());
                 $generateImageRaw = $imageGenerateService->generateImageRawWithWatermark($imageGenerateRequest);
                 if (! empty($generateImageRaw)) {
-                    // 统one触hairevent(graph生graphdefault 1 张)
+                    // 統onetouchhairevent(graphgenerategraphdefault 1 張)
                     $this->dispatchImageGeneratedEvent(
                         $creator,
                         $organizationCode,
@@ -1139,7 +1139,7 @@ class LLMAppService extends AbstractLLMAppService
         $imageGenerateParamsVO->setSequentialImageGenerationOptions($proxyModelRequest->getSequentialImageGenerationOptions());
         $imageGenerateParamsVO->setReferenceImages($proxyModelRequest->getImages());
 
-        // directlytransparent transmissionoriginal size parameter,leteachservicequotientaccording tofrom己requirementprocess
+        // directlytransparent transmissionoriginal size parameter,leteachservicequotientaccording tofromselfrequirementprocess
         $imageGenerateParamsVO->setSize($proxyModelRequest->getSize());
 
         $data = $imageGenerateParamsVO->toArray();
@@ -1169,12 +1169,12 @@ class LLMAppService extends AbstractLLMAppService
 
             // calculatebillingquantity
             $n = $proxyModelRequest->getN();
-            // except mjand graph生graph is 1 time之outside,otherallcount by sheet
+            // except mjand graphgenerategraph is 1 timeofoutside,otherallcount by sheet
             if (in_array($modelVersion, ImageGenerateModelType::getMidjourneyModes())) {
                 $n = 1;
             }
 
-            // 统one触hairevent
+            // 統onetouchhairevent
             $this->dispatchImageGeneratedEvent(
                 $creator,
                 $organizationCode,
@@ -1707,16 +1707,16 @@ class LLMAppService extends AbstractLLMAppService
     }
 
     /**
-     * 统one触hairimagegenerateevent.
+     * 統onetouchhairimagegenerateevent.
      *
-     * @param string $creator create者ID
+     * @param string $creator createpersonID
      * @param string $organizationCode organizationencoding
      * @param AbstractRequestDTO $requestDTO requestDTO
      * @param int $imageCount imagequantity
      * @param string $providerModelId servicequotientmodelID
      * @param string $callTime calltime
      * @param float $startTime starttime(微second)
-     * @param null|AccessTokenEntity $accessTokenEntity accesstoken实body
+     * @param null|AccessTokenEntity $accessTokenEntity accesstokenactualbody
      */
     private function dispatchImageGeneratedEvent(
         string $creator,
@@ -1728,7 +1728,7 @@ class LLMAppService extends AbstractLLMAppService
         float $startTime,
         ?AccessTokenEntity $accessTokenEntity = null
     ): void {
-        // calculateresponsetime(毫second)
+        // calculateresponsetime(millisecondssecond)
         $responseTime = (int) ((microtime(true) - $startTime) * 1000);
 
         // convert providerModelId forinteger

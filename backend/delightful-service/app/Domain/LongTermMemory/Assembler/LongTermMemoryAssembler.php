@@ -16,7 +16,7 @@ use App\Domain\LongTermMemory\Entity\LongTermMemoryEntity;
 class LongTermMemoryAssembler
 {
     /**
-     * use UpdateMemoryDTO updatememory实body.
+     * use UpdateMemoryDTO updatememoryactualbody.
      */
     public static function updateEntityFromDTO(LongTermMemoryEntity $entity, UpdateMemoryDTO $dto): void
     {
@@ -47,7 +47,7 @@ class LongTermMemoryAssembler
         if ($dto->metadata !== null) {
             $entity->setMetadata($dto->metadata);
         }
-        // enabled 放inmostbacksetting,ensure status already经correctsetting
+        // enabled putinmostbacksetting,ensure status alreadyalreadycorrectsetting
         if ($dto->enabled !== null) {
             $entity->setEnabled($dto->enabled);
         }

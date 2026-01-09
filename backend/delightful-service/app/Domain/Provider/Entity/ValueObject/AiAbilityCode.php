@@ -15,7 +15,7 @@ enum AiAbilityCode: string
     case Unknown = 'unknown';                          // unknowncan力
     case Ocr = 'ocr';                                      // OCR identify
     case WebSearch = 'web_search';                         // internetsearch
-    case RealtimeSpeechRecognition = 'realtime_speech_recognition';  // 实o clockvoiceidentify
+    case RealtimeSpeechRecognition = 'realtime_speech_recognition';  // actualo clockvoiceidentify
     case AudioFileRecognition = 'audio_file_recognition';  // audiofileidentify
     case AutoCompletion = 'auto_completion';               // fromauto supplementall
     case ContentSummary = 'content_summary';               // contentsummary
@@ -31,7 +31,7 @@ enum AiAbilityCode: string
         return match ($this) {
             self::Ocr => 'OCR identify',
             self::WebSearch => 'internetsearch',
-            self::RealtimeSpeechRecognition => '实o clockvoiceidentify',
+            self::RealtimeSpeechRecognition => 'actualo clockvoiceidentify',
             self::AudioFileRecognition => 'audiofileidentify',
             self::AutoCompletion => 'fromauto supplementall',
             self::ContentSummary => 'contentsummary',
@@ -48,15 +48,15 @@ enum AiAbilityCode: string
     public function description(): string
     {
         return match ($this) {
-            self::Ocr => '本cancoverageplatform所have OCR applicationscenario,precisecaptureandextract PDF,scanitemandeachcategoryimagemiddletextinfo.',
-            self::WebSearch => '本cancoverageplatform AI bigmodelinternetsearchscenario,precisegetandintegrationmostnewnew闻,factanddatainfo.',
-            self::RealtimeSpeechRecognition => '本cancoverageplatform所havevoice转textapplicationscenario,实o clocklisteneraudiostreamandgraduallyoutputaccuratetextcontent.',
-            self::AudioFileRecognition => '本cancoverageplatform所haveaudiofile转textapplicationscenario,preciseidentifyspeakperson,audiotextetcinfo.',
-            self::AutoCompletion => '本cancoverageplatform所haveinputcontentfromauto supplementallapplicationscenario,according tocomprehendupdown文foruserfromauto supplementallcontent,byuserchoosewhetheradopt.',
-            self::ContentSummary => '本cancoverageplatform所havecontentsummaryapplicationscenario,tolong篇document,reportorwebpage文chapterconduct深degreeanalyze.',
-            self::VisualUnderstanding => '本cancoverageplatform所haveneedletbigmodelconductvisualcomprehendapplicationscenario,precisecomprehendeachtypegraphlikemiddlecontentbyandcomplexclose系.',
-            self::SmartRename => '本cancoverageplatform所havesupport AI renameapplicationscenario,according tocomprehendupdown文foruserfrom动conductcontenttitlenaming.',
-            self::AiOptimization => '本cancoverageplatform所havesupport AI optimizecontentapplicationscenario,according tocomprehendupdown文foruserfrom动tocontentconductoptimize.',
+            self::Ocr => 'thiscancoverageplatform have OCR applicationscenario,precisecaptureandextract PDF,scanitemandeachcategoryimagemiddletextinfo.',
+            self::WebSearch => 'thiscancoverageplatform AI bigmodelinternetsearchscenario,precisegetandintegrationmostnewnew闻,factanddatainfo.',
+            self::RealtimeSpeechRecognition => 'thiscancoverageplatform havevoicetransfertextapplicationscenario,actualo clocklisteneraudiostreamandgraduallyoutputaccuratetextcontent.',
+            self::AudioFileRecognition => 'thiscancoverageplatform haveaudiofiletransfertextapplicationscenario,preciseidentifyspeakperson,audiotextetcinfo.',
+            self::AutoCompletion => 'thiscancoverageplatform haveinputcontentfromauto supplementallapplicationscenario,according tocomprehendupdowntextforuserfromauto supplementallcontent,byuserchoosewhetheradopt.',
+            self::ContentSummary => 'thiscancoverageplatform havecontentsummaryapplicationscenario,tolong篇document,reportorwebpagetextchapterconductdeepdegreeanalyze.',
+            self::VisualUnderstanding => 'thiscancoverageplatform haveneedletbigmodelconductvisualcomprehendapplicationscenario,precisecomprehendeachtypegraphlikemiddlecontentbyandcomplexclose系.',
+            self::SmartRename => 'thiscancoverageplatform havesupport AI renameapplicationscenario,according tocomprehendupdowntextforuserfromautoconductcontenttitlenaming.',
+            self::AiOptimization => 'thiscancoverageplatform havesupport AI optimizecontentapplicationscenario,according tocomprehendupdowntextforuserfromautotocontentconductoptimize.',
             default => 'Unknown',
         };
     }

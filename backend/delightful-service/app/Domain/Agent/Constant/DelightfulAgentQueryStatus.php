@@ -11,5 +11,5 @@ enum DelightfulAgentQueryStatus: int
 {
     case UNPUBLISHED = 1; // notpublish
     case PUBLISHED = 2; // alreadypublish
-    case ALL = 3; // 所have
+    case ALL = 3; //  have
 }

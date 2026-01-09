@@ -14,57 +14,57 @@ use App\Domain\Chat\Entity\ValueObject\InstructionInsertLocation;
 use App\Domain\Chat\Entity\ValueObject\InstructionType;
 
 /**
- * finger令configuration实bodycategory,according to proto definition.
+ * fingercommandconfigurationactualbodycategory,according to proto definition.
  */
 class InstructionConfig extends AbstractEntity
 {
     /**
-     * finger令content.
+     * fingercommandcontent.
      */
     protected string $content = '';
 
     /**
-     * finger令description.
+     * fingercommanddescription.
      */
     protected string $description = '';
 
     /**
-     * finger令property,1 normalfinger令 2 systemfinger令.
+     * fingercommandproperty,1 normalfingercommand 2 systemfingercommand.
      */
     protected int $displayType = InstructionDisplayType::Normal->value;
 
     /**
-     * finger令ID.
+     * fingercommandID.
      */
     protected string $id = '';
 
     /**
-     * finger令insertposition,1 messagecontentfront方,2 messagecontentmiddlecursorposition,3 messagecontentback方.
+     * fingercommandinsertposition,1 messagecontentfrontside,2 messagecontentmiddlecursorposition,3 messagecontentbackside.
      */
     protected int $insertLocation = InstructionInsertLocation::Cursor->value;
 
     /**
-     * finger令type, 取value 1 forprocessfinger令,取value 2 forconversationfinger令,defaultfor conversationfinger令.
+     * fingercommandtype, getvalue 1 forprocessfingercommand,getvalue 2 forconversationfingercommand,defaultfor conversationfingercommand.
      */
     protected int $instructionType = InstructionType::Conversation->value;
 
     /**
-     * finger令name.
+     * fingercommandname.
      */
     protected string $name = '';
 
     /**
-     * directlysendfinger令,userpoint击finger令backwilldirectlysendgiveassistant.
+     * directlysendfingercommand,userpoint击fingercommandbackwilldirectlysendgiveassistant.
      */
     protected bool $sendDirectly = false;
 
     /**
-     * finger令groupitemtype,1 singleoption 2 switch 3 texttype 4 statustype.
+     * fingercommandgroupitemtype,1 singleoption 2 switch 3 texttype 4 statustype.
      */
     protected int $type = InstructionComponentType::Radio->value;
 
     /**
-     * finger令value.
+     * fingercommandvalue.
      *
      * @var InstructionValue[]
      */
@@ -81,7 +81,7 @@ class InstructionConfig extends AbstractEntity
     protected string $off = '';
 
     /**
-     * residentfinger令,defaultonly读.
+     * residentfingercommand,defaultonlyread.
      */
     protected bool $residency = true;
 
@@ -221,13 +221,13 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // processfinger令valuearray
+        // processfingercommandvaluearray
         if (empty($values)) {
             $this->values = [];
             return;
         }
 
-        // iffirstyuan素already经is InstructionValue object,thendirectlyuse
+        // iffirstyuan素alreadyalreadyis InstructionValue object,thendirectlyuse
         if (isset($values[0]) && $values[0] instanceof InstructionValue) {
             $this->values = $values;
             return;
@@ -316,14 +316,14 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * according tofinger令groupitemtypegetto应nameandvalue.
+     * according tofingercommandgroupitemtypegettoshouldnameandvalue.
      *
-     * typeforswitcho clock,name 取is open/close,value 取 $instruction->getOn / $instruction->getOff
-     * typeforsingle-selecto clock, name 取is displayname,value:$instructionValue
-     * typeforstatusbuttono clock,name 取isstatustext,value: $instructionValue
+     * typeforswitcho clock,name getis open/close,value get $instruction->getOn / $instruction->getOff
+     * typeforsingle-selecto clock, name getis displayname,value:$instructionValue
+     * typeforstatusbuttono clock,name getisstatustext,value: $instructionValue
      * default name forempty, value = $instructionValue
      *
-     * @param string $instructionValue finger令value
+     * @param string $instructionValue fingercommandvalue
      * @return array returncontain name and value array
      */
     public function getNameAndValueByType(string $instructionValue): array
@@ -339,7 +339,7 @@ class InstructionConfig extends AbstractEntity
                 break;
             case InstructionComponentType::Radio->value:
                 // single-selecttype
-                // findto应 InstructionValue object
+                // findtoshould InstructionValue object
                 foreach ($this->values as $instructionValueObj) {
                     if ($instructionValueObj->getId() === $instructionValue || $instructionValueObj->getValue() === $value) {
                         $name = $instructionValueObj->getName();
@@ -350,7 +350,7 @@ class InstructionConfig extends AbstractEntity
                 break;
             case InstructionComponentType::Status->value:
                 // statusbuttontype
-                // findto应 InstructionValue object
+                // findtoshould InstructionValue object
                 foreach ($this->values as $instructionValueObj) {
                     if ($instructionValueObj->getValue() === $instructionValue) {
                         $name = $instructionValueObj->getName();

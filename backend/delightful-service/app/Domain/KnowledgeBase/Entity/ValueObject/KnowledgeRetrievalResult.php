@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 /**
  * knowledge baseretrieveresultvalueobject.
  *
- * 统onetable示fromdifferentretrievemethod(semanticretrieve,all文retrieve,graphretrieveetc)returnknowledgeslicesegment
+ * 統onetableshowfromdifferentretrievemethod(semanticretrieve,alltextretrieve,graphretrieveetc)returnknowledgeslicesegment
  */
 class KnowledgeRetrievalResult extends AbstractValueObject
 {
@@ -22,7 +22,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     public const string TYPE_SEMANTIC = 'semantic';
 
     /**
-     * all文retrievetype.
+     * alltextretrievetype.
      */
     public const string TYPE_FULLTEXT = 'fulltext';
 
@@ -37,7 +37,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     public const string TYPE_HYBRID = 'hybrid';
 
     /**
-     * 唯oneidentifier.
+     * uniqueoneidentifier.
      */
     private string $id = '';
 
@@ -64,9 +64,9 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     private float $score = 0;
 
     /**
-     * fromknowledge baseslicesegment实bodycreateretrieveresult.
+     * fromknowledge baseslicesegmentactualbodycreateretrieveresult.
      *
-     * @param string $id 唯oneidentifier
+     * @param string $id uniqueoneidentifier
      * @param string $content content
      * @param string $businessId businessID
      * @param array $metadata yuandata
@@ -92,7 +92,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     /**
      * fromgraphdatacreateretrieveresult.
      *
-     * @param string $id 唯oneidentifier
+     * @param string $id uniqueoneidentifier
      * @param string $content content
      * @param string $businessId businessID
      * @param array $metadata yuandata
@@ -122,7 +122,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * get唯oneidentifier.
+     * getuniqueoneidentifier.
      */
     public function getId(): string
     {
@@ -130,9 +130,9 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * set唯oneidentifier.
+     * setuniqueoneidentifier.
      *
-     * @param string $id 唯oneidentifier
+     * @param string $id uniqueoneidentifier
      */
     public function setId(string $id): self
     {
@@ -225,7 +225,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * checkwhetherforall文retrievetype.
+     * checkwhetherforalltextretrievetype.
      */
     public function isFulltext(): bool
     {

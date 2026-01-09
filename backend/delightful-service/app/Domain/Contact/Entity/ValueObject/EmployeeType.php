@@ -12,7 +12,7 @@ namespace App\Domain\Contact\Entity\ValueObject;
  */
 enum EmployeeType: int
 {
-    // unknown(such asisperson版user)
+    // unknown(such asispersonversionuser)
     case Unknown = 0;
 
     // justtypeemployee

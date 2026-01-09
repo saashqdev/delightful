@@ -75,7 +75,7 @@ readonly class AdminProviderAppService
             return null;
         }
 
-        // ProviderModelsDTO already经contain所haveneeddata,统onehandle provider and models  icon andreturn
+        // ProviderModelsDTO alreadyalreadycontain haveneeddata,統onehandle provider and models  icon andreturn
         $this->processProviderAndModelsIcons($providerModels);
         return $providerModels;
     }
@@ -92,7 +92,7 @@ readonly class AdminProviderAppService
 
         $providerConfigEntity = $this->providerConfigDomainService->updateProviderConfig($dataIsolation, $providerConfigEntity);
 
-        // 触hairservicequotientconfigurationupdateevent
+        // touchhairservicequotientconfigurationupdateevent
         $this->eventDispatcher->dispatch(new ProviderConfigUpdatedEvent(
             $providerConfigEntity,
             $authorization->getOrganizationCode(),
@@ -114,7 +114,7 @@ readonly class AdminProviderAppService
 
         $providerConfigEntity = $this->providerConfigDomainService->createProviderConfig($dataIsolation, $providerConfigEntity);
 
-        // 触hairservicequotientconfigurationcreateevent
+        // touchhairservicequotientconfigurationcreateevent
         $this->eventDispatcher->dispatch(new ProviderConfigCreatedEvent(
             $providerConfigEntity,
             $authorization->getOrganizationCode(),
@@ -180,7 +180,7 @@ readonly class AdminProviderAppService
             $authorization->getId(),
         );
 
-        // getmodelinfo,useat触hairevent
+        // getmodelinfo,useattouchhairevent
         $modelEntity = $this->providerModelDomainService->getById($dataIsolation, $id);
 
         Db::beginTransaction();
@@ -192,7 +192,7 @@ readonly class AdminProviderAppService
             }
             $this->providerModelDomainService->deleteById($dataIsolation, $id);
 
-            // 触hairmodeldeleteevent
+            // touchhairmodeldeleteevent
             $this->eventDispatcher->dispatch(new ProviderModelDeletedEvent(
                 $id,
                 $modelEntity->getServiceProviderConfigId(),
@@ -234,10 +234,10 @@ readonly class AdminProviderAppService
 
         $saveProviderModelDTO = $this->providerModelDomainService->saveModel($dataIsolation, $saveProviderModelDTO);
 
-        // getsavebackmodel实body
+        // getsavebackmodelactualbody
         $modelEntity = $this->providerModelDomainService->getById($dataIsolation, $saveProviderModelDTO->getId());
 
-        // 触haircorrespondingevent
+        // touchhaircorrespondingevent
         if ($isCreate) {
             $this->eventDispatcher->dispatch(new ProviderModelCreatedEvent(
                 $modelEntity,
@@ -252,7 +252,7 @@ readonly class AdminProviderAppService
 
         $saveProviderModelData = $saveProviderModelDTO->toArray();
         // iconpass inis url,returnalsoneedis url,butissaveindatabaseis file_key
-        // 所by SaveProviderModelDTO  setIcon 做 url to file_keyconvert
+        //  by SaveProviderModelDTO  setIcon make url to file_keyconvert
         $saveProviderModelData['icon'] = $this->getFileUrl($saveProviderModelDTO->getIcon());
         return $saveProviderModelData;
     }
@@ -268,7 +268,7 @@ readonly class AdminProviderAppService
         // calldomainlayero clockpass modelTypes parameter,letstoragelayercompletequeryandfilter
         $serviceProviderModelsDTOs = $this->adminProviderDomainService->getOrganizationProvidersModelsByCategory($organizationCode, $category);
 
-        // handlegraph标
+        // handlegraphmark
         $this->processProviderConfigIcons($serviceProviderModelsDTOs);
 
         return array_values($serviceProviderModelsDTOs);
@@ -299,7 +299,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * get所havenonofficialservicequotientcolumntable,notdependencyatorganization.
+     * get havenonofficialservicequotientcolumntable,notdependencyatorganization.
      *
      * @param Category $category servicequotientcategory
      * @param string $organizationCode organizationencoding
@@ -307,36 +307,36 @@ readonly class AdminProviderAppService
      */
     public function getAllNonOfficialProviders(Category $category, string $organizationCode): array
     {
-        // get所havenonofficialservicequotient
+        // get havenonofficialservicequotient
         $serviceProviders = $this->adminProviderDomainService->getAllNonOfficialProviders($category);
 
         if (empty($serviceProviders)) {
             return [];
         }
 
-        // handlegraph标
+        // handlegraphmark
         $this->processServiceProviderEntityListIcons($serviceProviders, $organizationCode);
 
         return $serviceProviders;
     }
 
     /**
-     * get所havecanuseservicequotientcolumntable(includeofficialservicequotient),notdependencyatorganization.
+     * get havecanuseservicequotientcolumntable(includeofficialservicequotient),notdependencyatorganization.
      *
      * @param Category $category servicequotientcategory
      * @param string $organizationCode organizationencoding
-     * @return ProviderConfigModelsDTO[] 所havecanuseservicequotientcolumntable
+     * @return ProviderConfigModelsDTO[]  havecanuseservicequotientcolumntable
      */
     public function getAllAvailableLlmProviders(Category $category, string $organizationCode): array
     {
-        // get所haveservicequotient(includeOfficial)
+        // get haveservicequotient(includeOfficial)
         $serviceProviders = $this->adminProviderDomainService->getAllAvailableProviders($category);
 
         if (empty($serviceProviders)) {
             return [];
         }
 
-        // handlegraph标
+        // handlegraphmark
         $this->processServiceProviderEntityListIcons($serviceProviders, $organizationCode);
 
         return $serviceProviders;
@@ -355,7 +355,7 @@ readonly class AdminProviderAppService
             return [];
         }
 
-        // 收collection所havegraph标path按organizationencodinggroup
+        // receivecollection havegraphmarkpath按organizationencodinggroup
         $iconsByOrg = [];
         $iconToModelMap = [];
 
@@ -376,14 +376,14 @@ readonly class AdminProviderAppService
             }
         }
 
-        // batchquantitygetgraph标URL
+        // batchquantitygetgraphmarkURL
         $iconUrlMap = [];
         foreach ($iconsByOrg as $iconOrganizationCode => $icons) {
             $links = $this->fileDomainService->getLinks($iconOrganizationCode, array_unique($icons));
             $iconUrlMap[] = $links;
         }
         ! empty($iconUrlMap) && $iconUrlMap = array_merge(...$iconUrlMap);
-        // createDTOandsettinggraph标URL
+        // createDTOandsettinggraphmarkURL
         $modelDTOs = [];
         foreach ($models as $model) {
             $modelDTO = new ProviderModelDetailDTO($model->toArray());
@@ -403,7 +403,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * getofficialorganizationdown所havecanusemodel.
+     * getofficialorganizationdown havecanusemodel.
      * @return ProviderModelDetailDTO[]
      */
     public function queriesModels(DelightfulUserAuthorization $authorization, ProviderModelQuery $providerModelQuery): array
@@ -438,7 +438,7 @@ readonly class AdminProviderAppService
             return;
         }
 
-        // 收collection所havegraph标path按organizationencodinggroup
+        // receivecollection havegraphmarkpath按organizationencodinggroup
         $iconsByOrg = [];
         $iconToModelMap = [];
 
@@ -462,14 +462,14 @@ readonly class AdminProviderAppService
             $iconToModelMap[$icon][] = $model;
         }
 
-        // batchquantitygetgraph标URL
+        // batchquantitygetgraphmarkURL
         $iconUrlMap = [];
         foreach ($iconsByOrg as $organizationCode => $icons) {
             $links = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
             $iconUrlMap = array_merge($iconUrlMap, $links);
         }
 
-        // settinggraph标URL
+        // settinggraphmarkURL
         foreach ($iconUrlMap as $icon => $fileLink) {
             if (isset($iconToModelMap[$icon])) {
                 $url = $fileLink ? $fileLink->getUrl() : '';
@@ -510,16 +510,16 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 统onehandle Provider and Models graph标,convertforcompleteURL.
+     * 統onehandle Provider and Models graphmark,convertforcompleteURL.
      */
     private function processProviderAndModelsIcons(ProviderConfigModelsDTO $providerDTO): void
     {
-        // 收collection所havegraph标pathandto应organizationencoding
+        // receivecollection havegraphmarkpathandtoshouldorganizationencoding
         $iconsByOrg = [];
-        $providerIconMap = [];  // providergraph标mapping
-        $modelIconMap = [];     // modelgraph标mapping
+        $providerIconMap = [];  // providergraphmarkmapping
+        $modelIconMap = [];     // modelgraphmarkmapping
 
-        // handle provider graph标
+        // handle provider graphmark
         $providerIcon = $providerDTO->getIcon();
         if (! empty($providerIcon)) {
             $providerIcon = FileAssembler::formatPath($providerIcon);
@@ -532,7 +532,7 @@ readonly class AdminProviderAppService
             $providerIconMap[$providerIcon] = $providerDTO;
         }
 
-        // handlemodelgraph标
+        // handlemodelgraphmark
         $modelEntities = $providerDTO->getModels();
         if (! empty($modelEntities)) {
             foreach ($modelEntities as $modelEntity) {
@@ -549,7 +549,7 @@ readonly class AdminProviderAppService
                 }
                 $iconsByOrg[$organizationCode][] = $icon;
 
-                // recordgraph标tomodelmappingclose系
+                // recordgraphmarktomodelmappingclose系
                 if (! isset($modelIconMap[$icon])) {
                     $modelIconMap[$icon] = [];
                 }
@@ -557,20 +557,20 @@ readonly class AdminProviderAppService
             }
         }
 
-        // 按organizationencodingbatchquantitygetgraph标URL
+        // 按organizationencodingbatchquantitygetgraphmarkURL
         foreach ($iconsByOrg as $organizationCode => $icons) {
             $iconUrlMap = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
 
-            // settinggraph标URL
+            // settinggraphmarkURL
             foreach ($iconUrlMap as $icon => $fileLink) {
                 $url = $fileLink ? $fileLink->getUrl() : '';
 
-                // setting provider graph标URL
+                // setting provider graphmarkURL
                 if (isset($providerIconMap[$icon])) {
                     $providerIconMap[$icon]->setIcon($url);
                 }
 
-                // settingmodelgraph标URL
+                // settingmodelgraphmarkURL
                 if (isset($modelIconMap[$icon])) {
                     foreach ($modelIconMap[$icon] as $modelEntity) {
                         $modelEntity->setIcon($url);
@@ -655,23 +655,23 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * handleserviceprovidequotient实bodycolumntablegraph标.
+     * handleserviceprovidequotientactualbodycolumntablegraphmark.
      *
-     * @param ProviderConfigModelsDTO[] $serviceProviders serviceprovidequotient实bodycolumntable
+     * @param ProviderConfigModelsDTO[] $serviceProviders serviceprovidequotientactualbodycolumntable
      * @param string $organizationCode organizationencoding
      */
     private function processServiceProviderEntityListIcons(array $serviceProviders, string $organizationCode): void
     {
-        // 收collection所havegraph标
+        // receivecollection havegraphmark
         $icons = [];
         foreach ($serviceProviders as $serviceProvider) {
             $icons[] = $serviceProvider->getIcon();
         }
 
-        // batchquantityget所havegraph标link
+        // batchquantityget havegraphmarklink
         $iconUrlMap = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
 
-        // onlyhandlegraph标URL,directlyreturn实bodyobject
+        // onlyhandlegraphmarkURL,directlyreturnactualbodyobject
         foreach ($serviceProviders as $serviceProvider) {
             $icon = $serviceProvider->getIcon();
 
@@ -683,7 +683,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * handleservicequotientconfigurationgraph标.
+     * handleservicequotientconfigurationgraphmark.
      *
      * @param ProviderConfigDTO[] $providerConfigs servicequotientconfigurationDTOcolumntable
      */
@@ -695,17 +695,17 @@ readonly class AdminProviderAppService
 
         $iconMappings = [];
 
-        // 收collectionservicequotientgraph标
+        // receivecollectionservicequotientgraphmark
         foreach ($providerConfigs as $configDTO) {
             $this->collectProviderIcon($configDTO, $iconMappings);
         }
 
-        // batchquantityhandlegraph标URL
+        // batchquantityhandlegraphmarkURL
         $this->batchProcessIcons($iconMappings);
     }
 
     /**
-     * 收collectionservicequotientgraph标info.
+     * receivecollectionservicequotientgraphmarkinfo.
      */
     private function collectProviderIcon(ProviderConfigDTO|ProviderConfigModelsDTO $provider, array &$iconMappings): void
     {
@@ -733,7 +733,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * batchquantityhandlegraph标URL.
+     * batchquantityhandlegraphmarkURL.
      */
     private function batchProcessIcons(array $iconMappings): void
     {
@@ -746,7 +746,7 @@ readonly class AdminProviderAppService
                 /** @var string $icon */
                 $url = $fileLink ? $fileLink->getUrl() : '';
 
-                // settingservicequotientgraph标URL
+                // settingservicequotientgraphmarkURL
                 $providerMap = $mapping['providerMap'];
                 if (isset($providerMap[$icon])) {
                     $providers = $providerMap[$icon];
@@ -756,7 +756,7 @@ readonly class AdminProviderAppService
                     }
                 }
 
-                // settingmodelgraph标URL
+                // settingmodelgraphmarkURL
                 $modelMap = $mapping['modelMap'];
                 if (isset($modelMap[$icon])) {
                     $models = $modelMap[$icon];

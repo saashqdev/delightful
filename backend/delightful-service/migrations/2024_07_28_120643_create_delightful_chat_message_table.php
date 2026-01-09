@@ -19,19 +19,19 @@ class CreateDelightfulChatMessageTable extends Migration
             return;
         }
         Schema::create('delightful_chat_messages', static function (Blueprint $table) {
-            // according toupsurface建table语sentence,outbydowncode
+            // according toupsurface建tablelanguagesentence,outbydowncode
             $table->bigIncrements('id');
-            // hairitem方belong toorganization
-            $table->string('sender_id', 64)->comment('hairitem方id');
-            $table->tinyInteger('sender_type')->comment('hairitem方usertype,1:user(aialsobe认forisuser);2:application;3:document;4:multi-dimensionaltable格');
-            $table->string('sender_organization_code', 64)->comment('hairitem方organizationencoding,maybeforemptystring')->default('');
-            // receive方belong toorganization
-            $table->string('receive_id', 64)->comment('receive方id,maybeispersoncategory,aior者application/document/multi-dimensionaltable格etc');
-            $table->tinyInteger('receive_type')->comment('receive方type,1:user(aialsobe认forisuser);2:application;3:document;4:multi-dimensionaltable格');
-            $table->string('receive_organization_code', 64)->comment('receive方organizationencoding,maybeforemptystring')->default('');
+            // hairitemsidebelong toorganization
+            $table->string('sender_id', 64)->comment('hairitemsideid');
+            $table->tinyInteger('sender_type')->comment('hairitemsideusertype,1:user(aialsobe认forisuser);2:application;3:document;4:multi-dimensionaltableformat');
+            $table->string('sender_organization_code', 64)->comment('hairitemsideorganizationencoding,maybeforemptystring')->default('');
+            // receivesidebelong toorganization
+            $table->string('receive_id', 64)->comment('receivesideid,maybeispersoncategory,aiorpersonapplication/document/multi-dimensionaltableformatetc');
+            $table->tinyInteger('receive_type')->comment('receivesidetype,1:user(aialsobe认forisuser);2:application;3:document;4:multi-dimensionaltableformat');
+            $table->string('receive_organization_code', 64)->comment('receivesideorganizationencoding,maybeforemptystring')->default('');
             // message相closeid
-            $table->string('app_message_id', 64)->comment('customer端generatemessageid,useat防customer端duplicate');
-            $table->string('delightful_message_id', 64)->comment('service端generate唯onemessageid,useatmessagewithdraw/edit');
+            $table->string('app_message_id', 64)->comment('customerclientgeneratemessageid,useat防customerclientduplicate');
+            $table->string('delightful_message_id', 64)->comment('serviceclientgenerateuniqueonemessageid,useatmessagewithdraw/edit');
             # ## messagestructure
             // messageprioritylevel,byatsystemstablepropertymanage
             $table->tinyInteger('priority')->default(0)->comment('messageprioritylevel,0~255,0mostlow,255mosthigh');
@@ -42,7 +42,7 @@ class CreateDelightfulChatMessageTable extends Migration
             $table->index(['receive_id', 'receive_type', 'receive_organization_code'], 'idx_receive_id_type');
             $table->unique(['delightful_message_id'], 'unq_delightful_message_id');
             $table->timestamps();
-            $table->comment('messagedetailtable,recordoneitemmessageroot本info');
+            $table->comment('messagedetailtable,recordoneitemmessagerootthisinfo');
             $table->softDeletes();
         });
     }

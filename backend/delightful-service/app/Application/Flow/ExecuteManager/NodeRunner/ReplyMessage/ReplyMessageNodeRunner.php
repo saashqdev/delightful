@@ -57,7 +57,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         /** @var ReplyMessageNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        // if具have bigmodelstreamresponsebody,that么directlystart
+        // ifwithhave bigmodelstreamresponsebody,thatwhatdirectlystart
         if ($executionData->getExecutionType()->isSupportStream() && ! empty($frontResults['chat_completion_choice_generator'])) {
             $streamResponse = $this->sendMessageForStream($executionData, $frontResults);
             // generatebigmodelsectionpointresponsegivereturngo
@@ -73,10 +73,10 @@ class ReplyMessageNodeRunner extends NodeRunner
             $paramsConfig->getLinkDesc()
         );
 
-        // ifisresourcecategorydata,that么need提frontupload
+        // ifisresourcecategorydata,thatwhatneedsubmitfrontupload
         $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
-        // byatwithinsurfacewillconductrename,所bythiswithindirectlygetto应namepass inentergo
+        // byatwithinsurfacewillconductrename, bythiswithindirectlygettoshouldnamepass inentergo
         $linkPaths = array_map(function (AbstractAttachment $attachment) {
             return $attachment->getPath();
         }, $attachments);
@@ -225,7 +225,7 @@ class ReplyMessageNodeRunner extends NodeRunner
 
         $outputCall = function (string $data, array $compressibleContent, array $params) use ($id, $conversationId, $version) {
             if (! empty($compressibleContent)) {
-                // ifhavecompresscontent,that么decompressdataagainoutput
+                // ifhavecompresscontent,thatwhatdecompressdataagainoutput
                 $data = CompressibleContent::deCompress($data, false);
             }
 
@@ -311,7 +311,7 @@ class ReplyMessageNodeRunner extends NodeRunner
 
         $outputCall = function (string $data, array $compressibleContent, array $params) use ($chatAppService, $appMessageId, $aiUserId, $receiveUserId) {
             if (! empty($compressibleContent)) {
-                // ifhavecompresscontent,that么decompressdataagainoutput
+                // ifhavecompresscontent,thatwhatdecompressdataagainoutput
                 $data = CompressibleContent::deCompress($data, false);
             }
 
@@ -371,7 +371,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                 'line' => $throwable->getLine(),
                 'trace' => $throwable->getTraceAsString(),
             ]);
-            // errorpush兜bottommessage
+            // errorpushfallbackbottommessage
             $streamOptions->setStatus(StreamMessageStatus::Processing);
             $messageContent = new TextMessage();
             $messageContent->setStreamOptions($streamOptions);
@@ -412,7 +412,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                     }
                     continue;
                 }
-                // introduce多time
+                // introducemultipletime
                 foreach ($recipient as $item) {
                     if (is_string($item)) {
                         $userIds[] = $item;
@@ -437,7 +437,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $userIds = array_merge($userIds, $this->getUserIdsByDepartmentIds($executionData, $departmentIds));
         }
 
-        // ifforempty,兜bottomcurrentuser
+        // ifforempty,fallbackbottomcurrentuser
         if (empty($userIds)) {
             $userIds[] = $executionData->getOperator()->getUid();
         }

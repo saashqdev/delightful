@@ -119,7 +119,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
             return [];
         }
         $sqlQuery = $this->accountModel::query();
-        // judge $query whetherall部ismiddle文,orlengthgreater than3
+        // judge $query whetherall部ismiddletext,orlengthgreater than3
         if (preg_match('/^[\x{4e00}-\x{9fa5}]+$/u', $query) || strlen($query) > 3) {
             $sqlQuery->where('real_name', 'like', "%{$query}%");
         }
@@ -142,14 +142,14 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
     public function saveAccount(AccountEntity $accountDTO): AccountEntity
     {
         $account = $this->getDelightfulEntityWithoutCache($accountDTO->getDelightfulId());
-        // not存inthencreate
+        // notexistsinthencreate
         if (! $account) {
             return $this->createAccount($accountDTO);
         }
         // update
         $accountData = $accountDTO->toArray();
         $this->updateAccount($accountDTO->getDelightfulId(), $accountData);
-        # prevent $accountDTO middleparameternotall,again查onetimelibrary
+        # prevent $accountDTO middleparameternotall,againcheckonetimelibrary
         return $this->getDelightfulEntityWithoutCache($accountDTO->getDelightfulId());
     }
 
@@ -187,7 +187,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
 
     private function getDelightfulEntityWithoutCache(string $delightfulId): ?AccountEntity
     {
-        # prevent $accountDTO middleparameternotall,again查onetimelibrary
+        # prevent $accountDTO middleparameternotall,againcheckonetimelibrary
         $account = $this->accountModel::query()->where('delightful_id', $delightfulId);
         $account = Db::select($account->toSql(), $account->getBindings())[0] ?? null;
         if (empty($account)) {
@@ -196,7 +196,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
         return UserAssembler::getAccountEntity($account);
     }
 
-    // avoid redis cacheserializeobject,占usetoo多inside存
+    // avoid redis cacheserializeobject,占usetoomultipleinsideexists
     #[Cacheable(prefix: 'accountDelightfulId', ttl: 60)]
     private function getAccountInfo(string $delightfulId): ?array
     {
@@ -204,7 +204,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
         return Db::select($query->toSql(), $query->getBindings())[0] ?? null;
     }
 
-    // avoid redis cacheserializeobject,占usetoo多inside存
+    // avoid redis cacheserializeobject,占usetoomultipleinsideexists
     #[Cacheable(prefix: 'accountAiCode', ttl: 60)]
     private function getAccountArrayByAiCode(string $aiCode): ?array
     {

@@ -32,7 +32,7 @@ class ImageGenerateRequest
     // displaywatermark
     protected ?WatermarkConfig $watermarkConfig = null;
 
-    // 隐typewatermark
+    // hiddentypewatermark
     protected ?ImplicitWatermark $implicitWatermark = null;
 
     // valid期

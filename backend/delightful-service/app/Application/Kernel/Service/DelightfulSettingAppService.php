@@ -25,8 +25,8 @@ class DelightfulSettingAppService extends AbstractKernelAppService
     }
 
     /**
-     * saveall局configuration
-     * all局configurationnot属atany账number,organizationoruser.
+     * savealllocalconfiguration
+     * alllocalconfigurationnotbelongatanyaccountnumber,organizationoruser.
      */
     public function save(GlobalConfig $config): GlobalConfig
     {
@@ -43,7 +43,7 @@ class DelightfulSettingAppService extends AbstractKernelAppService
     }
 
     /**
-     * getall局configuration.
+     * getalllocalconfiguration.
      */
     public function get(): GlobalConfig
     {

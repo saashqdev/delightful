@@ -13,7 +13,7 @@ use App\Infrastructure\Core\MCP\Tools\MCPToolManager;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * MCPmethodprocess器interface.
+ * MCPmethodprocessdeviceinterface.
  */
 interface MethodHandlerInterface
 {

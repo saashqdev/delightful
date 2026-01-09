@@ -12,6 +12,6 @@ enum PermissionRange: int
     // all部
     case ALL = 1;
 
-    // finger定
+    // fingerset
     case SELECT = 2;
 }

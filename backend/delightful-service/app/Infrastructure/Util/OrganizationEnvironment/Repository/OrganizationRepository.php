@@ -136,7 +136,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
         // gettotal
         $total = $query->count();
 
-        // sort:priorityusefilter器middlesortfield,nothendefault按createtimereverse order
+        // sort:priorityusefilterdevicemiddlesortfield,nothendefault按createtimereverse order
         $orderBy = $filters['order_by'] ?? null;
         $orderDirection = strtolower((string) ($filters['order_direction'] ?? '')) === 'asc' ? 'asc' : 'desc';
         if (! empty($orderBy)) {
@@ -176,7 +176,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * checkencodingwhetheralready存in.
+     * checkencodingwhetheralreadyexistsin.
      */
     public function existsByCode(string $code, ?int $excludeId = null): bool
     {
@@ -223,7 +223,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
             $query->where('sync_status', (int) $filters['sync_status']);
         }
 
-        // createtime区betweenfilter
+        // createtimeregionbetweenfilter
         if (! empty($filters['created_at_start'])) {
             $query->where('created_at', '>=', $filters['created_at_start'] . ' 00:00:00');
         }
@@ -233,7 +233,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * willmodelmappingfor实body.
+     * willmodelmappingforactualbody.
      */
     private function mapToEntity(OrganizationModel $model): OrganizationEntity
     {

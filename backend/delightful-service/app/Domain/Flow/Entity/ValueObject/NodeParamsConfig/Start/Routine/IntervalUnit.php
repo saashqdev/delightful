@@ -10,22 +10,22 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Routine;
 enum IntervalUnit: string
 {
     /**
-     * between隔executeunit:day.
+     * betweenseparatorexecuteunit:day.
      */
     case Day = 'day';
 
     /**
-     * between隔executeunit:week.
+     * betweenseparatorexecuteunit:week.
      */
     case Week = 'week';
 
     /**
-     * between隔executeunit:month.
+     * betweenseparatorexecuteunit:month.
      */
     case Month = 'month';
 
     /**
-     * between隔executeunit:year.
+     * betweenseparatorexecuteunit:year.
      */
     case Year = 'year';
 }

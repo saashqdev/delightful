@@ -36,7 +36,7 @@ class ReplyMessageTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'replyonesegmentfinger定contentgiveuser';
+        return 'replyonesegmentfingersetcontentgiveuser';
     }
 
     public function getCallback(): ?Closure

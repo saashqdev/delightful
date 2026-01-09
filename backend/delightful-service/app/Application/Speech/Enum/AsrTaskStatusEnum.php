@@ -11,18 +11,18 @@ namespace App\Application\Speech\Enum;
  * ASR taskstatusenum(inside部businessprocess).
  *
  * 【asuse域】inside部system - delightful-service businesslayer
- * 【use途】table示 ASR recordingsummarytaskalllifeperiodstatus
+ * 【use途】tableshow ASR recordingsummarytaskalllifeperiodstatus
  * 【usescenario】
  * - taskstatuspersistence(Redis/database)
  * - businessprocesscontrolandpoweretcpropertyjudge
  * - 整bodytaskstatustrace(recording → merge → generatetitle → sendmessage)
  *
  * 【andotherenumdifference】
- * - AsrRecordingStatusEnum: front端recording实o clockstatus(recordinginteractionlayer)
+ * - AsrRecordingStatusEnum: frontclientrecordingactualo clockstatus(recordinginteractionlayer)
  * - AsrTaskStatusEnum: inside部taskallprocessstatus(businessmanagelayer)✓ current
  * - SandboxAsrStatusEnum: sandboxmergetaskstatus(infrastructurelayer)
  *
- * 【statusstream转】created → processing → completed | failed
+ * 【statusstreamtransfer】created → processing → completed | failed
  */
 enum AsrTaskStatusEnum: string
 {

@@ -26,7 +26,7 @@ class ToolNodeRunner extends AbstractLLMNodeRunner
         /** @var ToolNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        // 实o clockget
+        // actualo clockget
         $toolFlow = ToolsExecutor::getToolFlows($executionData->getDataIsolation(), [$paramsConfig->getToolId()])[0] ?? null;
         if (! $toolFlow) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.tool.flow_not_found', ['flow_code' => $paramsConfig->getToolId()]);
@@ -65,7 +65,7 @@ class ToolNodeRunner extends AbstractLLMNodeRunner
         $systemPrompt = $this->buildSystemPrompt($delightfulFlowEntity);
         $paramsConfig->setSystemPrompt($systemPrompt);
 
-        // one定isignorewhenfrontmessage
+        // onesetisignorewhenfrontmessage
         $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
 
         $memoryManager = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), ignoreMessageIds: $ignoreMessageIds);

@@ -11,12 +11,12 @@ use App\Infrastructure\Core\MCP\Exception\InvalidParamsException;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * resourcereadmethodprocess器.
+ * resourcereadmethodprocessdevice.
  */
 class ResourceReadHandler extends AbstractMethodHandler
 {
     /**
-     * gettheprocess器supportmethodname.
+     * gettheprocessdevicesupportmethodname.
      */
     public function getMethod(): string
     {

@@ -76,14 +76,14 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * @param string $friendId good友userid. good友maybeisai
+     * @param string $friendId goodfrienduserid. goodfriendmaybeisai
      * @throws Throwable
      */
     public function addFriend(DelightfulUserAuthorization $userAuthorization, string $friendId, AddFriendType $addFriendType): bool
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // checkwhetheralready经isgood友
+        // checkwhetheralreadyalreadyisgoodfriend
         if ($this->userDomainService->isFriend($dataIsolation->getCurrentUserId(), $friendId)) {
             return true;
         }
@@ -91,9 +91,9 @@ class DelightfulUserContactAppService extends AbstractAppService
         if (! $this->userDomainService->addFriend($dataIsolation, $friendId)) {
             return false;
         }
-        // sendaddgood友message.addgood友splitfor:good友apply/good友agree/good友reject
+        // sendaddgoodfriendmessage.addgoodfriendsplitfor:goodfriendapply/goodfriendagree/goodfriendreject
         if ($addFriendType === AddFriendType::PASS) {
-            // sendaddgood友controlmessage
+            // sendaddgoodfriendcontrolmessage
             $friendUserEntity = new DelightfulUserEntity();
             $friendUserEntity->setUserId($friendId);
             $this->sendAddFriendControlMessage($dataIsolation, $friendUserEntity);
@@ -102,12 +102,12 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * toAIassistantsendaddgood友controlmessage.
+     * toAIassistantsendaddgoodfriendcontrolmessage.
      * @throws Throwable
      */
     public function sendAddFriendControlMessage(DataIsolation $dataIsolation, DelightfulUserEntity $friendUserEntity): bool
     {
-        // checkwhetheralready经isgood友
+        // checkwhetheralreadyalreadyisgoodfriend
         if ($this->userDomainService->isFriend($dataIsolation->getCurrentUserId(), $friendUserEntity->getUserId())) {
             return true;
         }
@@ -161,7 +161,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * batchquantityqueryorganizationarchitecture,ai ,or者person版user.
+     * batchquantityqueryorganizationarchitecture,ai ,orpersonpersonversionuser.
      */
     public function getUserDetailByIds(UserQueryDTO $dto, DelightfulUserAuthorization $authorization): array
     {
@@ -185,7 +185,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $this->addAgentInfoToUsers($authorization, $usersDetail);
 
         if ($queryType === UserQueryType::User) {
-            // only查person员info
+            // onlycheckpersonmemberinfo
             $users = $usersDetail;
         } else {
             // querydepartmentinfo
@@ -210,7 +210,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     public function getUsersDetailByDepartmentId(UserQueryDTO $dto, DelightfulUserAuthorization $authorization): array
     {
         $dataIsolation = $this->createDataIsolation($authorization);
-        // rootdepartmentbeabstractfor -1,所bythiswithinneedconvert
+        // rootdepartmentbeabstractfor -1, bythiswithinneedconvert
         if ($dto->getDepartmentId() === PlatformRootDepartmentId::Delightful) {
             $departmentId = $this->departmentChartDomainService->getDepartmentRootId($dataIsolation);
             $dto->setDepartmentId($departmentId);
@@ -225,7 +225,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         foreach ($departmentsInfo as $departmentInfo) {
             $departmentsInfoWithFullPath[$departmentInfo->getDepartmentId()] = [$departmentInfo];
         }
-        // getusertrue名/nickname/hand机number/avataretcinfo
+        // getusertruename/nickname/handmachinenumber/avataretcinfo
         $userIds = array_values(array_unique(array_column($departmentUsers, 'user_id')));
         $usersDetail = $this->userDomainService->getUserDetailByUserIds($userIds, $dataIsolation);
         $usersDetail = $this->getUsersAvatar($usersDetail, $dataIsolation);
@@ -234,7 +234,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         // address bookandsearch相closeinterface,filterhiddendepartmentandhiddenuser.
         $userDepartmentDetailDTOS = $this->filterDepartmentOrUserHidden($userDepartmentDetailDTOS);
         // byat $usersPageResponseDTO  items limitparametertype,fromcodestandardangledegree,again new one通use PageResponseDTO, 按paginationstructurereturn
-        // 另outside,byatfilterlogic存in,maybe本timereturn items quantity少at $limit,butisagainhavedownone页.
+        // anotheroutside,byatfilterlogicexistsin,maybethistimereturn items quantity少at $limit,butisagainhavedownonepage.
         $pageResponseDTO = new PageResponseDTO();
         $pageResponseDTO->setPageToken($usersPageResponseDTO->getpageToken());
         $pageResponseDTO->setHasMore($usersPageResponseDTO->getHasMore());
@@ -243,7 +243,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 按 usernickname/true名/hand机number/email/departmentpath/position searchuser.
+     * 按 usernickname/truename/handmachinenumber/email/departmentpath/position searchuser.
      */
     public function searchDepartmentUser(UserQueryDTO $queryDTO, DelightfulUserAuthorization $authorization): array
     {
@@ -253,7 +253,7 @@ class DelightfulUserContactAppService extends AbstractAppService
 
         $usersForQueryDepartmentPath = [];
         $usersForQueryJobTitle = [];
-        // searchpositioncontainsearch词person
+        // searchpositioncontainsearchwordperson
         if ($queryDTO->isQueryByJobTitle()) {
             $departmentUsers = $this->departmentUserDomainService->searchDepartmentUsersByJobTitle($queryDTO->getQuery(), $dataIsolation);
             // getuserdetailedinfo
@@ -264,7 +264,7 @@ class DelightfulUserContactAppService extends AbstractAppService
 
         // 按nicknamesearch
         $usersByNickname = $this->userDomainService->searchUserByNickName($queryDTO->getQuery(), $dataIsolation);
-        // 按hand机number/true名search
+        // 按handmachinenumber/truenamesearch
         $usersByPhoneOrRealName = $this->accountDomainService->searchUserByPhoneOrRealName($queryDTO->getQuery(), $dataIsolation);
 
         // mergeresult
@@ -336,7 +336,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     public function getLoginCodeEnv(string $loginCode): DelightfulEnvironmentEntity
     {
         if (empty($loginCode)) {
-            // ifnothave传,that么default取currentenvironment
+            // ifnothave传,thatwhatdefaultgetcurrentenvironment
             $delightfulEnvironmentEntity = $this->delightfulOrganizationEnvDomainService->getCurrentDefaultDelightfulEnv();
         } else {
             $delightfulEnvironmentEntity = $this->delightfulOrganizationEnvDomainService->getEnvironmentEntityByLoginCode($loginCode);
@@ -374,7 +374,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     public function addAgentInfoToUsers(Authenticatable $authorization, array $usersDetailDTOList): array
     {
         $aiCodes = [];
-        // ifis AI assistant,that么return AI assistant相closeinfoandtoitpermission
+        // ifis AI assistant,thatwhatreturn AI assistant相closeinfoandtoitpermission
         foreach ($usersDetailDTOList as $userDetailDTO) {
             if (! empty($userDetailDTO->getAiCode())) {
                 $aiCodes[] = $userDetailDTO->getAiCode();
@@ -434,7 +434,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             }
             $userPathNodes = [];
             foreach ($userDepartmentDetail->getPathNodes() as $pathNode) {
-                // user所indepartmentwhetherhidden
+                // user indepartmentwhetherhidden
                 if ($pathNode->getOption() === DepartmentOption::Hidden) {
                     continue;
                 }
@@ -462,7 +462,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     private function getUsersAvatarCoordinator(array $usersDetail, DataIsolation $dataIsolation): array
     {
         $fileKeys = array_column($usersDetail, 'avatar_url');
-        // 移exceptnullvalue/httpor者 httpsopenhead/lengthless than 32
+        // moveexceptnullvalue/httporperson httpsopenhead/lengthless than 32
         $validFileKeys = [];
         foreach ($fileKeys as $fileKey) {
             if (! empty($fileKey) && mb_strlen($fileKey) >= 32 && ! str_starts_with($fileKey, 'http')) {

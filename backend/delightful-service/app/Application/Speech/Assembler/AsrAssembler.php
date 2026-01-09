@@ -16,24 +16,24 @@ use Hyperf\Codec\Json;
 
 /**
  * ASR grouploader
- * responsible ASR 相close实bodygroup装andpathconvert.
+ * responsible ASR 相closeactualbodygroup装andpathconvert.
  *
  * pathformatinstruction:
  * - workregiontopath (workspace-relative): .asr_recordings/session_xxx or recordingsummary_xxx
  * - projectworkdirectory (work directory): project_123/workspace
- * - organization码+APP_ID+bucket_md5front缀 (full prefix): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/
+ * - organizationcode+APP_ID+bucket_md5frontsuffix (full prefix): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/
  * - completepath/file_key (full path): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx
  */
 class AsrAssembler
 {
     /**
-     * createdirectory实body.
+     * createdirectoryactualbody.
      *
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
      * @param int $projectId projectID
-     * @param string $relativePath 相topath(如:.asr_recordings/task_123 or recordingsummary_xxx)
-     * @param string $fullPrefix completefront缀(organization码+APP_ID+bucket_md5,如:DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
+     * @param string $relativePath 相topath(like:.asr_recordings/task_123 or recordingsummary_xxx)
+     * @param string $fullPrefix completefrontsuffix(organizationcode+APP_ID+bucket_md5,like:DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
      * @param string $workDir workdirectory
      * @param int $rootDirectoryId rootdirectoryID
      * @param bool $isHidden whetherforhiddendirectory
@@ -69,7 +69,7 @@ class AsrAssembler
         $fileKey = WorkDirectoryUtil::getFullFileKey($fullPrefix, $workDir, $relativePath);
         $fileKey = rtrim($fileKey, '/') . '/';
 
-        // certainfile名:hiddendirectoryuse basename,displaydirectoryusecompletepath
+        // certainfilename:hiddendirectoryuse basename,displaydirectoryusecompletepath
         $fileName = $isHidden ? basename($relativePath) : $relativePath;
 
         return new TaskFileEntity([
@@ -101,10 +101,10 @@ class AsrAssembler
      *
      * convertclose系: file_key = fullPrefix + workDir + "/" + relativePath
      *
-     * @param string $fullPrefix organization码+APP_ID+bucket_md5front缀 (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
-     * @param string $workDir projectworkdirectory (如: project_123/workspace)
-     * @param string $relativePath workregiontopath (如: .asr_recordings/session_xxx)
-     * @return string complete file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
+     * @param string $fullPrefix organizationcode+APP_ID+bucket_md5frontsuffix (like: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
+     * @param string $workDir projectworkdirectory (like: project_123/workspace)
+     * @param string $relativePath workregiontopath (like: .asr_recordings/session_xxx)
+     * @return string complete file_key (like: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
      */
     public static function buildFileKey(
         string $fullPrefix,
@@ -120,8 +120,8 @@ class AsrAssembler
      * willcomplete file_key convertforworkregiontopath,useatsandbox API calland界surfaceshow
      * convertclose系: relativePath = extractWorkspaceRelativePath(file_key)
      *
-     * @param string $fileKey complete file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
-     * @return string workregiontopath (如: .asr_recordings/session_xxx)
+     * @param string $fileKey complete file_key (like: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
+     * @return string workregiontopath (like: .asr_recordings/session_xxx)
      */
     public static function extractWorkspaceRelativePath(string $fileKey): string
     {
@@ -140,15 +140,15 @@ class AsrAssembler
             }
         }
 
-        // ifnothave找to /workspace/,tryfind workspace/ openheadsituation
+        // ifnothavefindto /workspace/,tryfind workspace/ openheadsituation
         if (str_starts_with($normalizedPath, 'workspace/')) {
-            $relativePath = substr($normalizedPath, 10); // 移except 'workspace/' front缀
+            $relativePath = substr($normalizedPath, 10); // moveexcept 'workspace/' frontsuffix
             if (! empty($relativePath)) {
                 return $relativePath;
             }
         }
 
-        // ifallnot找toworkspaceidentifier,directlyreturnoriginalpath(maybealready经is相topath)
+        // ifallnotfindtoworkspaceidentifier,directlyreturnoriginalpath(maybealreadyalreadyis相topath)
         return $normalizedPath;
     }
 }

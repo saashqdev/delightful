@@ -13,7 +13,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // will现have 'accepted' statusupdatefor 'active' status
+        // willshowhave 'accepted' statusupdatefor 'active' status
         Db::table('delightful_long_term_memories')
             ->where('status', 'accepted')
             ->update(['status' => 'active']);
@@ -24,7 +24,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // rollback:will 'active' status改return 'accepted' status
+        // rollback:will 'active' statuschangereturn 'accepted' status
         Db::table('delightful_long_term_memories')
             ->where('status', 'active')
             ->update(['status' => 'accepted']);

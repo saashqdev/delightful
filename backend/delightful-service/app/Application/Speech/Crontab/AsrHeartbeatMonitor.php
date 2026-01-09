@@ -24,14 +24,14 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * ASR recordingcore跳monitorscheduletask.
+ * ASR recordingcorejumpmonitorscheduletask.
  */
 #[Crontab(
-    rule: '* * * * *',                    // eachminute钟executeonetime
+    rule: '* * * * *',                    // eachminutesecondsexecuteonetime
     name: 'AsrHeartbeatMonitor',
     singleton: true,                      // singleexample modetypepreventduplicateexecute
-    mutexExpires: 60,                     // mutually exclusivelockexpiretime(second),to应 AsrConfig::HEARTBEAT_MONITOR_MUTEX_EXPIRES
-    onOneServer: true,                    // onlyinone台service器upexecute
+    mutexExpires: 60,                     // mutually exclusivelockexpiretime(second),toshould AsrConfig::HEARTBEAT_MONITOR_MUTEX_EXPIRES
+    onOneServer: true,                    // onlyinoneplatformservicedeviceupexecute
     callback: 'execute',
     memo: 'ASR recording heartbeat monitoring task'
 )]
@@ -49,14 +49,14 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * executecore跳monitortask.
+     * executecorejumpmonitortask.
      */
     public function execute(): void
     {
         try {
-            $this->logger->info('startexecute ASR recordingcore跳monitortask');
+            $this->logger->info('startexecute ASR recordingcorejumpmonitortask');
 
-            // scan allhavecore跳 key(use RedisUtil::scanKeys preventblocking)
+            // scan allhavecorejump key(use RedisUtil::scanKeys preventblocking)
             $keys = RedisUtil::scanKeys(
                 AsrRedisKeys::HEARTBEAT_SCAN_PATTERN,
                 AsrConfig::REDIS_SCAN_BATCH_SIZE,
@@ -70,18 +70,18 @@ class AsrHeartbeatMonitor
                         ++$timeoutCount;
                     }
                 } catch (Throwable $e) {
-                    $this->logger->error('checkcore跳timeoutfail', [
+                    $this->logger->error('checkcorejumptimeoutfail', [
                         'key' => $key,
                         'error' => $e->getMessage(),
                     ]);
                 }
             }
 
-            $this->logger->info('ASR recordingcore跳monitortaskexecutecomplete', [
+            $this->logger->info('ASR recordingcorejumpmonitortaskexecutecomplete', [
                 'timeout_count' => $timeoutCount,
             ]);
         } catch (Throwable $e) {
-            $this->logger->error('ASR recordingcore跳monitortaskexecutefail', [
+            $this->logger->error('ASR recordingcorejumpmonitortaskexecutefail', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -89,37 +89,37 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * checkcore跳whethertimeout.
+     * checkcorejumpwhethertimeout.
      */
     private function checkHeartbeatTimeout(string $key): bool
     {
-        // readcore跳time戳
+        // readcorejumptimestamp
         $last = (int) $this->redis->get($key);
         // timeout阈value:90 second
         if (($last > 0) && (time() - $last) <= AsrConfig::HEARTBEAT_TIMEOUT) {
             return false;
         }
 
-        // Key not存inortime戳timeout,触hairprocess
+        // Key notexistsinortimestamptimeout,touchhairprocess
         $this->handleHeartbeatTimeout($key);
         return true;
     }
 
     /**
-     * processcore跳timeout.
+     * processcorejumptimeout.
      */
     private function handleHeartbeatTimeout(string $key): void
     {
         try {
             // from key middleextract task_key and user_id
             // Key format:asr:heartbeat:{md5(user_id:task_key)}
-            $this->logger->info('detecttocore跳timeout', ['key' => $key]);
+            $this->logger->info('detecttocorejumptimeout', ['key' => $key]);
 
-            // byat key is MD5 hash,weno法directly反toget task_key and user_id
+            // byat key is MD5 hash,wenomethoddirectly反toget task_key and user_id
             // needfrom Redis middlescan allhave asr:task:* comefindmatchtask
             $this->findAndTriggerTimeoutTask($key);
         } catch (Throwable $e) {
-            $this->logger->error('processcore跳timeoutfail', [
+            $this->logger->error('processcorejumptimeoutfail', [
                 'key' => $key,
                 'error' => $e->getMessage(),
             ]);
@@ -127,7 +127,7 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * findand触hairtimeouttaskfrom动summary.
+     * findandtouchhairtimeouttaskfromautosummary.
      */
     private function findAndTriggerTimeoutTask(string $heartbeatKey): void
     {
@@ -147,14 +147,14 @@ class AsrHeartbeatMonitor
 
                 $taskStatus = AsrTaskStatusDTO::fromArray($taskData);
 
-                // checkwhethermatchcurrentcore跳 key
+                // checkwhethermatchcurrentcorejump key
                 $expectedHeartbeatKey = sprintf(
                     AsrRedisKeys::HEARTBEAT,
                     md5($taskStatus->userId . ':' . $taskStatus->taskKey)
                 );
 
                 if ($expectedHeartbeatKey === $heartbeatKey) {
-                    // 找tomatchtask,checkwhetherneed触hairfrom动summary
+                    // findtomatchtask,checkwhetherneedtouchhairfromautosummary
                     if ($this->shouldTriggerAutoSummary($taskStatus)) {
                         $this->triggerAutoSummary($taskStatus);
                     }
@@ -170,21 +170,21 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * judgewhethershould触hairfrom动summary.
+     * judgewhethershouldtouchhairfromautosummary.
      */
     private function shouldTriggerAutoSummary(AsrTaskStatusDTO $taskStatus): bool
     {
-        // ifalreadycancel,not触hair
+        // ifalreadycancel,nottouchhair
         if ($taskStatus->recordingStatus === AsrRecordingStatusEnum::CANCELED->value) {
             return false;
         }
 
-        // if处atpausestatus,not触hair
+        // if处atpausestatus,nottouchhair
         if ($taskStatus->isPaused) {
             return false;
         }
 
-        // ifrecordingstatusnotis start or recording,not触hair
+        // ifrecordingstatusnotis start or recording,nottouchhair
         if (! in_array($taskStatus->recordingStatus, [
             AsrRecordingStatusEnum::START->value,
             AsrRecordingStatusEnum::RECORDING->value,
@@ -192,12 +192,12 @@ class AsrHeartbeatMonitor
             return false;
         }
 
-        // ifnothaveprojectIDortopicID,not触hair
+        // ifnothaveprojectIDortopicID,nottouchhair
         if (empty($taskStatus->projectId) || empty($taskStatus->topicId)) {
             return false;
         }
 
-        // ifsandboxtasknotcreate,not触hair
+        // ifsandboxtasknotcreate,nottouchhair
         if (! $taskStatus->sandboxTaskCreated) {
             return false;
         }
@@ -206,14 +206,14 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * 触hairfrom动summary.
+     * touchhairfromautosummary.
      */
     private function triggerAutoSummary(AsrTaskStatusDTO $taskStatus): void
     {
         try {
             // poweretcpropertycheck:iftaskalreadycomplete,skipprocess
             if ($taskStatus->isSummaryCompleted()) {
-                $this->logger->info('taskalreadycomplete,skipcore跳timeoutprocess', [
+                $this->logger->info('taskalreadycomplete,skipcorejumptimeoutprocess', [
                     'task_key' => $taskStatus->taskKey,
                     'audio_file_id' => $taskStatus->audioFileId,
                     'status' => $taskStatus->status->value,
@@ -221,14 +221,14 @@ class AsrHeartbeatMonitor
                 return;
             }
 
-            $this->logger->info('触haircore跳timeoutfrom动summary', [
+            $this->logger->info('touchhaircorejumptimeoutfromautosummary', [
                 'task_key' => $taskStatus->taskKey,
                 'user_id' => $taskStatus->userId,
                 'project_id' => $taskStatus->projectId,
                 'topic_id' => $taskStatus->topicId,
             ]);
 
-            // getuser实body
+            // getuseractualbody
             $userEntity = $this->delightfulUserDomainService->getUserById($taskStatus->userId);
             if ($userEntity === null) {
                 ExceptionBuilder::throw(AsrErrorCode::UserNotExist);
@@ -237,15 +237,15 @@ class AsrHeartbeatMonitor
             $userAuthorization = DelightfulUserAuthorization::fromUserEntity($userEntity);
             $organizationCode = $taskStatus->organizationCode ?? $userAuthorization->getOrganizationCode();
 
-            // directlycallfrom动summarymethod(willinmethodinside部updatestatus)
+            // directlycallfromautosummarymethod(willinmethodinside部updatestatus)
             $this->asrFileAppService->autoTriggerSummary($taskStatus, $taskStatus->userId, $organizationCode);
 
-            $this->logger->info('core跳timeoutfrom动summaryalready触hair', [
+            $this->logger->info('corejumptimeoutfromautosummaryalreadytouchhair', [
                 'task_key' => $taskStatus->taskKey,
                 'user_id' => $taskStatus->userId,
             ]);
         } catch (Throwable $e) {
-            $this->logger->error('触hairfrom动summaryfail', [
+            $this->logger->error('touchhairfromautosummaryfail', [
                 'task_key' => $taskStatus->taskKey,
                 'user_id' => $taskStatus->userId,
                 'error' => $e->getMessage(),

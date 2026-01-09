@@ -44,7 +44,7 @@ interface KnowledgeBaseDocumentRepositoryInterface
     public function getDocumentCountByKnowledgeBaseCode(KnowledgeBaseDataIsolation $dataIsolation, array $knowledgeBaseCodes): array;
 
     /**
-     * @return array<string, KnowledgeBaseDocumentEntity> array<documentcode, document名>
+     * @return array<string, KnowledgeBaseDocumentEntity> array<documentcode, documentname>
      */
     public function getDocumentsByCodes(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, array $knowledgeBaseDocumentCodes): array;
 
@@ -73,7 +73,7 @@ interface KnowledgeBaseDocumentRepositoryInterface
     public function destroy(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void;
 
     /**
-     * according todocumentencodingdelete所haveslicesegment.
+     * according todocumentencodingdelete haveslicesegment.
      */
     public function destroyFragmentsByDocumentCode(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void;
 

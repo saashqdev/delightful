@@ -101,7 +101,7 @@ class ModeGroupRelationRepository extends AbstractRepository implements ModeGrou
     }
 
     /**
-     * according to多modeIDbatchquantitygetassociateclose系.
+     * according tomultiplemodeIDbatchquantitygetassociateclose系.
      * @param int[]|string[] $modeIds
      * @return ModeGroupRelationEntity[]
      */

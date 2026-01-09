@@ -20,16 +20,16 @@ return new class extends Migration {
             $table->string('mcp_server_code', 80)->comment('associate mcp service code')->index();
             $table->string('name', 64)->default('')->comment('toolname');
             $table->string('description', 512)->default('')->comment('tooldescription');
-            $table->tinyInteger('source')->default(0)->comment('toolcome源');
+            $table->tinyInteger('source')->default(0)->comment('toolcomesource');
             $table->string('rel_code', 80)->default('')->comment('associatetool code');
             $table->string('rel_version_code', 80)->default('')->comment('associatetoolversion code');
             $table->json('rel_info')->nullable()->comment('associateinformation');
             $table->string('version', 80)->default('')->comment('toolversion');
             $table->boolean('enabled')->default(false)->comment('whetherenable: 0-disable, 1-enable');
             $table->json('options')->nullable()->comment('toolconfiguration name,description,inputSchema');
-            $table->string('creator', 64)->default('')->comment('create者');
+            $table->string('creator', 64)->default('')->comment('createperson');
             $table->dateTime('created_at')->comment('creation time');
-            $table->string('modifier', 64)->default('')->comment('modify者');
+            $table->string('modifier', 64)->default('')->comment('modifyperson');
             $table->dateTime('updated_at')->comment('update time');
         });
     }

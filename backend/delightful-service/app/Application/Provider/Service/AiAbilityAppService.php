@@ -34,7 +34,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * get所haveAIcan力list.
+     * get haveAIcan力list.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @return array<AiAbilityListDTO>
@@ -140,7 +140,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     {
         $result = [];
 
-        // traversefront端configuration所havefield
+        // traversefrontclientconfiguration havefield
         foreach ($frontendConfig as $key => $value) {
             // ifis api_key fieldandcontaindesensitizemark ***
             if ($key === 'api_key' && is_string($value) && str_contains($value, '*')) {
@@ -154,13 +154,13 @@ class AiAbilityAppService extends AbstractKernelAppService
                     ? $this->mergeConfigPreservingApiKeys($dbValue, $value)
                     : $value;
             }
-            // othersituationdirectlyusefront端value
+            // othersituationdirectlyusefrontclientvalue
             else {
                 $result[$key] = $value;
             }
         }
 
-        // front端not传field, thendatabasemiddlefieldfordefaultvalue ''
+        // frontclientnot传field, thendatabasemiddlefieldfordefaultvalue ''
         foreach ($dbConfig as $key => $value) {
             if (! array_key_exists($key, $result)) {
                 $result[$key] = '';

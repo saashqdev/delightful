@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // table存inthennotexecute
+        // tableexistsinthennotexecute
         if (Schema::hasTable('delightful_api_premium_resources')) {
             return;
         }
@@ -23,12 +23,12 @@ return new class extends Migration {
             $table->string('endpoint_id', 64)->comment('accesspointID');
             $table->string('resource_name', 64)->comment('resourcename');
             $table->integer('billing_cycle_value')->default(0)->comment('billingperiodvalue');
-            $table->tinyInteger('billing_cycle_type')->default(0)->comment('0: 总quantity, 1:second, 2:minute钟, 3:hour, 4:day');
-            $table->integer('total_usage')->default(0)->comment('总quantity');
+            $table->tinyInteger('billing_cycle_type')->default(0)->comment('0: totalquantity, 1:second, 2:minuteseconds, 3:hour, 4:day');
+            $table->integer('total_usage')->default(0)->comment('totalquantity');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['endpoint_id', 'id'], 'index_endpoint_id');
-            $table->comment('APIresourcebillingruletable,support总quantityorspeedratebilling');
+            $table->comment('APIresourcebillingruletable,supporttotalquantityorspeedratebilling');
         });
     }
 

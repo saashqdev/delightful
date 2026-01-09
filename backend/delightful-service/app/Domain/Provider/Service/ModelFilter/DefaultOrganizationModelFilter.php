@@ -8,15 +8,15 @@ declare(strict_types=1);
 namespace App\Domain\Provider\Service\ModelFilter;
 
 /**
- * defaultorganizationmodelfilter器implement.
+ * defaultorganizationmodelfilterdeviceimplement.
  *
  * notconductanyfilter,directlyreturnoriginalmodellist
- * useatopen源versionorenterprisepackagenotconfigurationo clockbacksolution
+ * useatopensourceversionorenterprisepackagenotconfigurationo clockbacksolution
  */
 class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInterface
 {
     /**
-     * defaultimplement:notconductfilter,return所havepass inmodel.
+     * defaultimplement:notconductfilter,return havepass inmodel.
      */
     public function filterModelsByOrganization(string $organizationCode, array $models): array
     {
@@ -24,7 +24,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement:所havemodelallcanuse.
+     * defaultimplement: havemodelallcanuse.
      */
     public function isModelAvailableForOrganization(string $organizationCode, string $modelIdentifier): bool
     {
@@ -32,7 +32,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement:returnemptyarray,table示nothavespecificmodelbind.
+     * defaultimplement:returnemptyarray,tableshownothavespecificmodelbind.
      */
     public function getAvailableModelIdentifiers(string $organizationCode): array
     {
@@ -40,7 +40,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement:returnemptyarray,table示nothavemodelneed升level.
+     * defaultimplement:returnemptyarray,tableshownothavemodelneed升level.
      */
     public function getUpgradeRequiredModelIds(string $organizationCode): array
     {

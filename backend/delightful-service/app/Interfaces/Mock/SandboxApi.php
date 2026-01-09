@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * sandboxmanage Mock service
- * mocksandboxcreate,statusquery,work区statusetcmanageinterface.
+ * mocksandboxcreate,statusquery,workregionstatusetcmanageinterface.
  */
 class SandboxApi
 {
@@ -44,7 +44,7 @@ class SandboxApi
             'sandbox_id' => $sandboxId,
         ]);
 
-        // mocksandboxalready存inand运linemiddle
+        // mocksandboxalreadyexistsinandrunlinemiddle
         return [
             'code' => 1000,
             'message' => 'Success',
@@ -88,7 +88,7 @@ class SandboxApi
     }
 
     /**
-     * getwork区status
+     * getworkregionstatus
      * GET /api/v1/sandboxes/{sandboxId}/proxy/api/v1/workspace/status.
      */
     public function getWorkspaceStatus(RequestInterface $request): array
@@ -99,8 +99,8 @@ class SandboxApi
             'sandbox_id' => $sandboxId,
         ]);
 
-        // mockwork区then绪status
-        // notice:status mustreturnintegertype,to应 WorkspaceStatus constant
+        // mockworkregionthen绪status
+        // notice:status mustreturnintegertype,toshould WorkspaceStatus constant
         return [
             'code' => 1000,
             'message' => 'success',
@@ -146,7 +146,7 @@ class SandboxApi
     }
 
     /**
-     * initializesandbox(simplify版,useat ASR etcnochatmessagescenario)
+     * initializesandbox(simplifyversion,useat ASR etcnochatmessagescenario)
      * POST /api/v1/sandboxes/{sandboxId}/proxy/v1/messages/chat.
      *
      * requestbodyexample:
@@ -196,7 +196,7 @@ class SandboxApi
         // mocksandboxinitializesuccessresponse
         return [
             'code' => 1000,
-            'message' => 'work区initializesuccess',
+            'message' => 'workregioninitializesuccess',
             'data' => null,
         ];
     }

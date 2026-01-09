@@ -29,7 +29,7 @@ class ModeAppService extends AbstractModeAppService
         $modeDataIsolation = $this->getModeDataIsolation($authorization);
         $modeDataIsolation->disabled();
 
-        // get目front所havecanuse agent
+        // getitemfront havecanuse agent
         $beDelightfulAgentAppService = di(BeDelightfulAgentAppService::class);
         $agentData = $beDelightfulAgentAppService->queries($authorization, new BeDelightfulAgentQuery(), Page::createNoPage());
         // merge常useandall部 agent list,常useinfront
@@ -39,16 +39,16 @@ class ModeAppService extends AbstractModeAppService
             return [];
         }
 
-        // getbackplatformhave模type,useatencapsulationdatato Agent middle
+        // getbackplatformhavemodetype,useatencapsulationdatato Agent middle
         $query = new ModeQuery(status: true);
         $modeEnabledList = $this->modeDomainService->getModes($modeDataIsolation, $query, Page::createNoPage())['list'];
 
-        // batchquantitybuild模typeaggregateroot
+        // batchquantitybuildmodetypeaggregateroot
         $modeAggregates = $this->modeDomainService->batchBuildModeAggregates($modeDataIsolation, $modeEnabledList);
 
-        // ===== performanceoptimize:batchquantity预query =====
+        // ===== performanceoptimize:batchquantityprequery =====
 
-        // step1:pre-receivecollection所haveneedmodelId
+        // step1:pre-receivecollection haveneedmodelId
         $allModelIds = [];
         foreach ($modeAggregates as $aggregate) {
             foreach ($aggregate->getGroupAggregates() as $groupAggregate) {
@@ -58,19 +58,19 @@ class ModeAppService extends AbstractModeAppService
             }
         }
 
-        // step2:batchquantityquery所havemodelandservicequotientstatus
+        // step2:batchquantityquery havemodelandservicequotientstatus
         $allProviderModelsWithStatus = $this->getModelsBatch(array_unique($allModelIds));
 
         // step3:organizationmodelfilter
 
-        // first收collection所haveneedfiltermodel(LLM)
+        // firstreceivecollection haveneedfiltermodel(LLM)
         $allAggregateModels = [];
         foreach ($modeAggregates as $aggregate) {
             $aggregateModels = $this->getModelsForAggregate($aggregate, $allProviderModelsWithStatus);
             $allAggregateModels = array_merge($allAggregateModels, $aggregateModels);
         }
 
-        // 收collection所haveneedfiltergraphlikemodel(VLM)
+        // receivecollection haveneedfiltergraphlikemodel(VLM)
         $allAggregateImageModels = [];
         foreach ($modeAggregates as $aggregate) {
             $aggregateImageModels = $this->getImageModelsForAggregate($aggregate, $allProviderModelsWithStatus);
@@ -80,7 +80,7 @@ class ModeAppService extends AbstractModeAppService
         // need升levelset餐
         $upgradeRequiredModelIds = [];
 
-        // useorganizationfilter器conductfilter(LLM)
+        // useorganizationfilterdeviceconductfilter(LLM)
         if ($this->organizationModelFilter) {
             $providerModels = $this->organizationModelFilter->filterModelsByOrganization(
                 $authorization->getOrganizationCode(),
@@ -88,18 +88,18 @@ class ModeAppService extends AbstractModeAppService
             );
             $upgradeRequiredModelIds = $this->organizationModelFilter->getUpgradeRequiredModelIds($authorization->getOrganizationCode());
         } else {
-            // ifnothaveorganizationfilter器,return所havemodel(open源versionlinefor)
+            // ifnothaveorganizationfilterdevice,return havemodel(opensourceversionlinefor)
             $providerModels = $allAggregateModels;
         }
 
-        // useorganizationfilter器conductfilter(VLM)
+        // useorganizationfilterdeviceconductfilter(VLM)
         if ($this->organizationModelFilter) {
             $providerImageModels = $this->organizationModelFilter->filterModelsByOrganization(
                 $authorization->getOrganizationCode(),
                 $allAggregateImageModels
             );
         } else {
-            // ifnothaveorganizationfilter器,return所havemodel(open源versionlinefor)
+            // ifnothaveorganizationfilterdevice,return havemodel(opensourceversionlinefor)
             $providerImageModels = $allAggregateImageModels;
         }
 
@@ -109,7 +109,7 @@ class ModeAppService extends AbstractModeAppService
             $modeAggregateDTOs[$aggregate->getMode()->getIdentifier()] = ModeAssembler::aggregateToDTO($aggregate, $providerModels, $upgradeRequiredModelIds, $providerImageModels);
         }
 
-        // processgraph标URLconvert
+        // processgraphmarkURLconvert
         foreach ($modeAggregateDTOs as $aggregateDTO) {
             $this->processModeAggregateIcons($aggregateDTO);
         }
@@ -167,7 +167,7 @@ class ModeAppService extends AbstractModeAppService
         $providerModels = $this->getModels($modeAggregate);
         $modeGroupDetailDTOS = ModeAssembler::aggregateToFlatGroupsDTO($modeAggregate, $providerModels);
 
-        // processgraph标pathconvertforcompleteURL
+        // processgraphmarkpathconvertforcompleteURL
         $this->processModeGroupDetailIcons($authorization, $modeGroupDetailDTOS);
 
         return $modeGroupDetailDTOS;
@@ -175,7 +175,7 @@ class ModeAppService extends AbstractModeAppService
 
     /**
      * batchquantitygetmodelandservicequotientstatus(performanceoptimizeversion).
-     * @param array $allModelIds 所haveneedquerymodelId
+     * @param array $allModelIds  haveneedquerymodelId
      * @return array<string, ProviderModelEntity> alreadypasslevel联statusfiltercanusemodel
      */
     private function getModelsBatch(array $allModelIds): array
@@ -189,7 +189,7 @@ class ModeAppService extends AbstractModeAppService
         // batchquantitygetmodel
         $allModels = $this->providerModelDomainService->getModelsByModelIds($providerDataIsolation, $allModelIds);
 
-        // extract所haveservicequotientID
+        // extract haveservicequotientID
         $providerConfigIds = [];
         foreach ($allModels as $models) {
             foreach ($models as $model) {
@@ -250,8 +250,8 @@ class ModeAppService extends AbstractModeAppService
 
     /**
      * frombatchquantityqueryresultmiddleextractspecificaggregaterootmodel(LLM).
-     * @param ModeAggregate $aggregate 模typeaggregateroot
-     * @param array<string, ProviderModelEntity> $allProviderModels batchquantityquery所havemodelresult
+     * @param ModeAggregate $aggregate modetypeaggregateroot
+     * @param array<string, ProviderModelEntity> $allProviderModels batchquantityquery havemodelresult
      * @return array<string, ProviderModelEntity> theaggregateroot相closemodel
      */
     private function getModelsForAggregate(ModeAggregate $aggregate, array $allProviderModels): array
@@ -277,8 +277,8 @@ class ModeAppService extends AbstractModeAppService
 
     /**
      * frombatchquantityqueryresultmiddleextractspecificaggregaterootgraphlikemodel(VLM).
-     * @param ModeAggregate $aggregate 模typeaggregateroot
-     * @param array<string, ProviderModelEntity> $allProviderModels batchquantityquery所havemodelresult
+     * @param ModeAggregate $aggregate modetypeaggregateroot
+     * @param array<string, ProviderModelEntity> $allProviderModels batchquantityquery havemodelresult
      * @return array<string, ProviderModelEntity> theaggregateroot相closegraphlikemodel
      */
     private function getImageModelsForAggregate(ModeAggregate $aggregate, array $allProviderModels): array

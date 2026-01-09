@@ -39,27 +39,27 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
         if ((bool) env('ENABLE_DELIGHTFUL_WATCHDOG', true) !== true) {
             return;
         }
-        $quantum = 10 * 1000 * 1000; // unit:毫second
+        $quantum = 10 * 1000 * 1000; // unit:millisecondssecond
         $logger = ApplicationContext::getContainer()->get(LoggerFactory::class)?->get('DelightfulWatchDogSubscriber');
-        // watchdogfind同blockingplace
+        // watchdogfindsameblockingplace
         $logger->info('Magicwatchdog,start!');
         $alertCountMap = new WeakMap();
         Watchdog::run($quantum * 5, 0, static function () use (&$alertCountMap, $logger) {
             $coroutine = Coroutine::getCurrent();
             $alertCount = ($alertCountMap[$coroutine] ??= 0) + 1;
             $alertCountMap[$coroutine] = $alertCount;
-            // whensinglecoroutine运line超pass $millSeconds o clock,will触hairwatchdog,printcoroutinecallstack
+            // whensinglecoroutinerunlineexceedspass $millSeconds o clock,willtouchhairwatchdog,printcoroutinecallstack
             if ($alertCount > 1) {
                 $trace = str_replace(["\n", "\r"], ' | ', $coroutine->getTraceAsString());
                 $logger->error(sprintf(
-                    'Magicwatchdog hair现blocking coroutine id:%s,同coroutineblockingcount:%s trace :%s ',
+                    'Magicwatchdog hairshowblocking coroutine id:%s,samecoroutineblockingcount:%s trace :%s ',
                     $coroutine->getId(),
                     $alertCount,
                     $trace
                 ));
             }
-            // letouttimeslice,letothercoroutinehave机willexecute
-            $millSeconds = 10 * 1000; // 10 毫second
+            // letouttimeslice,letothercoroutinehavemachinewillexecute
+            $millSeconds = 10 * 1000; // 10 millisecondssecond
             usleep($millSeconds * $alertCount);
         });
     }

@@ -105,14 +105,14 @@ readonly class FileDomainService
     }
 
     /**
-     * batchquantitygetfilelink(from动frompathextractorganizationencodingandminutegroupprocess).
+     * batchquantitygetfilelink(fromautofrompathextractorganizationencodingandminutegroupprocess).
      * @param string[] $filePaths containorganizationencodingfilepatharray,format:orgCode/path/file.ext
      * @param null|StorageBucketType $bucketType storage桶type,defaultforPublic
      * @return array<string,FileLink> filepathtoFileLinkmapping
      */
     public function getBatchLinksByOrgPaths(array $filePaths, ?StorageBucketType $bucketType = null): array
     {
-        // filteremptypathandalready经isURLpath
+        // filteremptypathandalreadyalreadyisURLpath
         $validPaths = array_filter($filePaths, static fn ($path) => ! empty($path) && ! is_url($path));
 
         if (empty($validPaths)) {
@@ -158,8 +158,8 @@ readonly class FileDomainService
     }
 
     /**
-     * start sts 模type.
-     * gettemporaryvouchergivefront端use.
+     * start sts modetype.
+     * gettemporaryvouchergivefrontclientuse.
      * @todo securityissue,dir nothavevalidation,nothaveorganizationisolation
      */
     public function getStsTemporaryCredential(
@@ -234,7 +234,7 @@ readonly class FileDomainService
     public function getFullWorkDir(string $organizationCode, string $userId, int $projectId, string $code = 'be-delightful', string $lastPath = 'project'): string
     {
         $prefix = $this->getFullPrefix($organizationCode);
-        # judgemostnextcharacterwhetheris /,ifis,go掉
+        # judgemostnextcharacterwhetheris /,ifis,godrop
         if (substr($prefix, -1) === '/') {
             $prefix = substr($prefix, 0, -1);
         }
@@ -253,10 +253,10 @@ readonly class FileDomainService
     }
 
     /**
-     * from云storagegetfilelist.
+     * fromcloudstoragegetfilelist.
      *
      * @param string $organizationCode organizationencoding
-     * @param string $directoryPrefix directoryfront缀
+     * @param string $directoryPrefix directoryfrontsuffix
      * @param StorageBucketType $bucketType storage桶type
      * @return CloudFileInfoDTO[] fileDTOobjectarray
      */

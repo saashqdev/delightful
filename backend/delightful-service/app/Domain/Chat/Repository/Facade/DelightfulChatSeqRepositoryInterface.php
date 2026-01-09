@@ -29,7 +29,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function batchCreateSeq(array $seqList): array;
 
     /**
-     * return $userLocalMaxSeqId 之back $limit itemmessage.
+     * return $userLocalMaxSeqId ofback $limit itemmessage.
      * @return ClientSequenceResponse[]
      */
     public function getAccountSeqListByDelightfulId(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array;
@@ -41,7 +41,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function getAccountSeqListByAppMessageId(DataIsolation $dataIsolation, string $appMessageId, string $pageToken, int $pageSize): array;
 
     /**
-     * returnmostbigmessagecountdown n item序column.
+     * returnmostbigmessagecountdown n itemsequencecolumn.
      * @return ClientSequenceResponse[]
      */
     public function pullRecentMessage(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array;
@@ -67,13 +67,13 @@ interface DelightfulChatSeqRepositoryInterface
     public function getConversationsMessagesGroupById(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
 
     /**
-     * get收item方messagestatus变morestream.
+     * getreceiveitemsidemessagestatuschangemorestream.
      * @return DelightfulSeqEntity[]
      */
     public function getReceiveMessagesStatusChange(array $referMessageIds, string $userId): array;
 
     /**
-     * gethairitem方messagestatus变morestream.
+     * gethairitemsidemessagestatuschangemorestream.
      * @return DelightfulSeqEntity[]
      */
     public function getSenderMessagesStatusChange(string $senderMessageId, string $userId): array;
@@ -112,10 +112,10 @@ interface DelightfulChatSeqRepositoryInterface
 
     public function deleteSeqMessageByIds(array $seqIds): int;
 
-    // for移except脏data写method
+    // formoveexcept脏data写method
     public function getSeqByDelightfulId(string $delightfulId, int $limit): array;
 
-    // for移except脏data写method
+    // formoveexcept脏data写method
     public function getHasTrashMessageUsers(): array;
 
     public function updateSeqExtra(string $seqId, SeqExtra $seqExtra): bool;
@@ -132,8 +132,8 @@ interface DelightfulChatSeqRepositoryInterface
     /**
      * Get sequences by conversation ID and seq IDs.
      * @param string $conversationId sessionID
-     * @param array $seqIds 序columnIDarray
-     * @return DelightfulSeqEntity[] 序column实bodyarray
+     * @param array $seqIds sequencecolumnIDarray
+     * @return DelightfulSeqEntity[] sequencecolumnactualbodyarray
      */
     public function getSequencesByConversationIdAndSeqIds(string $conversationId, array $seqIds): array;
 }

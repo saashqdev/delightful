@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         // modifytablestructure,addnewfield
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
-            // checkwhetheralready存infield,avoidduplicateadd
+            // checkwhetheralreadyexistsinfield,avoidduplicateadd
             if (! Schema::hasColumn('delightful_flow_knowledge_fragment', 'document_code')) {
                 $table->string('document_code', 255)->default('')->comment('associatedocumentcode')->index();
             }
@@ -32,7 +32,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // 移exceptaddfield
+        // moveexceptaddfield
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
             if (Schema::hasColumn('delightful_flow_knowledge_fragment', 'document_code')) {
                 $table->dropColumn('document_code');
@@ -43,7 +43,7 @@ return new class extends Migration {
             }
         });
 
-        // restoretable名
+        // restoretablename
         Schema::rename('delightful_flow_knowledge_fragment', 'delightful_flow_knowledge_fragment');
     }
 };

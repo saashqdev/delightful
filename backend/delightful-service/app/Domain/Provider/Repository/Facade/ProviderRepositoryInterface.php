@@ -20,7 +20,7 @@ interface ProviderRepositoryInterface
 
     /**
      * @param array<int> $ids
-     * @return array<int, ProviderEntity> returnbyidforkey实bodyobjectarray
+     * @return array<int, ProviderEntity> returnbyidforkeyactualbodyobjectarray
      */
     public function getByIds(array $ids): array;
 
@@ -32,9 +32,9 @@ interface ProviderRepositoryInterface
     public function getAllNonOfficialProviders(Category $category): array;
 
     /**
-     * according tocategoryget所haveservicequotient.
+     * according tocategoryget haveservicequotient.
      * @param Category $category category
-     * @return ProviderEntity[] servicequotient实bodylist
+     * @return ProviderEntity[] servicequotientactualbodylist
      */
     public function getByCategory(Category $category): array;
 
@@ -42,23 +42,23 @@ interface ProviderRepositoryInterface
      * according toProviderCodeandCategorygetservicequotient.
      * @param ProviderCode $providerCode servicequotientencoding
      * @param Category $category category
-     * @return null|ProviderEntity servicequotient实body
+     * @return null|ProviderEntity servicequotientactualbody
      */
     public function getByCodeAndCategory(ProviderCode $providerCode, Category $category): ?ProviderEntity;
 
     /**
-     * according toIDgetservicequotient实body(not按organizationfilter,all局query).
+     * according toIDgetservicequotientactualbody(not按organizationfilter,alllocalquery).
      *
      * @param int $id servicequotientID
-     * @return null|ProviderEntity servicequotient实body
+     * @return null|ProviderEntity servicequotientactualbody
      */
     public function getByIdWithoutOrganizationFilter(int $id): ?ProviderEntity;
 
     /**
-     * according toIDarraygetservicequotient实bodylist(not按organizationfilter,all局query).
+     * according toIDarraygetservicequotientactualbodylist(not按organizationfilter,alllocalquery).
      *
      * @param array<int> $ids servicequotientIDarray
-     * @return array<int, ProviderEntity> returnbyidforkeyservicequotient实bodyarray
+     * @return array<int, ProviderEntity> returnbyidforkeyservicequotientactualbodyarray
      */
     public function getByIdsWithoutOrganizationFilter(array $ids): array;
 }

@@ -64,7 +64,7 @@ readonly class RoleDomainService
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
         $savingRoleEntity->setOrganizationCode($organizationCode);
 
-        // validationpass inuserIDwhether属atcurrentorganization
+        // validationpass inuserIDwhetherbelongatcurrentorganization
         $inputUserIds = $savingRoleEntity->getUserIds();
         if (! empty($inputUserIds)) {
             $validUsers = $this->userRepository->getByUserIds($organizationCode, $inputUserIds);
@@ -79,7 +79,7 @@ readonly class RoleDomainService
         }
 
         // 1. validationpermissionkeyvalidproperty
-        // update permissionTag info:according topermissionkeyextracttwolevel模piecetag,useatfront端showcategory
+        // update permissionTag info:according topermissionkeyextracttwolevelmodepiecetag,useatfrontclientshowcategory
         $permissionTags = [];
         foreach ($savingRoleEntity->getPermissions() as $permissionKey) {
             // validationpermissionkeyvalidproperty
@@ -87,12 +87,12 @@ readonly class RoleDomainService
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.invalid_permission_key', ['key' => $permissionKey]);
             }
 
-            // skipall局permissionconstant,noneed参andtagextract
+            // skipalllocalpermissionconstant,noneed参andtagextract
             if ($permissionKey === DelightfulPermission::ALL_PERMISSIONS) {
                 continue;
             }
 
-            // parsepermissionkey,getresourceandextractitstwolevel模piecetag
+            // parsepermissionkey,getresourceandextractitstwolevelmodepiecetag
             try {
                 $parsed = $this->permission->parsePermission($permissionKey);
                 $resource = $parsed['resource'];
@@ -112,7 +112,7 @@ readonly class RoleDomainService
             $roleEntity = clone $savingRoleEntity;
             $roleEntity->prepareForCreation($dataIsolation->getCurrentUserId());
 
-            // checknameinorganizationdownwhether唯one
+            // checknameinorganizationdownwhetheruniqueone
             if ($this->roleRepository->getByName($organizationCode, $savingRoleEntity->getName())) {
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.role_name_exists', ['name' => $savingRoleEntity->getName()]);
             }
@@ -175,7 +175,7 @@ readonly class RoleDomainService
     {
         $roleEntity = $this->roleRepository->getByName($dataIsolation->getCurrentOrganizationCode(), $name);
 
-        // supplementroleassociateuserIDinfo,avoidcall方getnotto userIds
+        // supplementroleassociateuserIDinfo,avoidcallsidegetnotto userIds
         if ($roleEntity !== null) {
             $userIds = $this->roleRepository->getRoleUsers($dataIsolation->getCurrentOrganizationCode(), $roleEntity->getId());
             $roleEntity->setUserIds($userIds);
@@ -194,7 +194,7 @@ readonly class RoleDomainService
         // checkrolewhetheralsohaveuserassociate
         $roleUsers = $this->roleRepository->getRoleUsers($organizationCode, $roleEntity->getId());
         if (! empty($roleUsers)) {
-            // 先deleteroleanduserassociateclose系
+            // firstdeleteroleanduserassociateclose系
             $this->roleRepository->removeUsers($organizationCode, $roleEntity->getId(), $roleUsers);
         }
 
@@ -210,7 +210,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * getuser所havepermission.
+     * getuser havepermission.
      */
     public function getUserPermissions(PermissionDataIsolation $dataIsolation, string $userId): array
     {
@@ -218,7 +218,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * checkuserwhether拥havefinger定permission.
+     * checkuserwhether拥havefingersetpermission.
      */
     public function hasPermission(PermissionDataIsolation $dataIsolation, string $userId, string $permissionKey): bool
     {
@@ -243,23 +243,23 @@ readonly class RoleDomainService
     }
 
     /**
-     * forfinger定usercreateormaintain“organizationadministrator”role(拥haveall局permission).
+     * forfingersetusercreateormaintain“organizationadministrator”role(拥havealllocalpermission).
      *
      * logic:
      * 1. according tocurrentorganizationfindwhetheralreadyhavesame namerole;
-     * 2. 若not存in,thencreatenewroleandgrant DelightfulPermission::ALL_PERMISSIONS;
+     * 2. 若notexistsin,thencreatenewroleandgrant DelightfulPermission::ALL_PERMISSIONS;
      * 3. if existsin,thenensureitscontain ALL_PERMISSIONS;
      * 4. willuser ID columntableadd入roleassociateusercolumntable;
      * 5. saverole.
      *
-     * exceptionbycall方fromlinehandle,avoidimpact主process.
+     * exceptionbycallsidefromlinehandle,avoidimpactmainprocess.
      */
     public function addOrganizationAdmin(PermissionDataIsolation $dataIsolation, array $userIds): RoleEntity
     {
         // getcurrentorganizationencoding
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // 1. trygetalready存inorganizationadministratorrole
+        // 1. trygetalreadyexistsinorganizationadministratorrole
         $roleEntity = $this->getByName($dataIsolation, self::ORGANIZATION_ADMIN_ROLE_NAME);
 
         if ($roleEntity === null) {
@@ -271,7 +271,7 @@ readonly class RoleDomainService
             $roleEntity->setIsDisplay(0);
         }
 
-        // 2. ensure拥haveall局permission ALL_PERMISSIONS
+        // 2. ensure拥havealllocalpermission ALL_PERMISSIONS
         $permissions = $roleEntity->getPermissions();
         if (! in_array(DelightfulPermission::ALL_PERMISSIONS, $permissions, true)) {
             $permissions[] = DelightfulPermission::ALL_PERMISSIONS;
@@ -289,13 +289,13 @@ readonly class RoleDomainService
     }
 
     /**
-     * 移exceptuser“organizationadministrator”role.
+     * moveexceptuser“organizationadministrator”role.
      *
      * logic:
-     * 1. getcurrentorganizationdown名for ORGANIZATION_ADMIN_ROLE_NAME role;
-     * 2. 若not存indirectlyreturn;
-     * 3. call仓library移exceptuserandtheroleassociateclose系;
-     * 4. ifrolenotagainassociateanyuser,maintainroleitselfnot变(如haveneed,canconsiderback续cleanup).
+     * 1. getcurrentorganizationdownnamefor ORGANIZATION_ADMIN_ROLE_NAME role;
+     * 2. 若notexistsindirectlyreturn;
+     * 3. call仓librarymoveexceptuserandtheroleassociateclose系;
+     * 4. ifrolenotagainassociateanyuser,maintainroleitselfnotchange(likehaveneed,canconsiderback続cleanup).
      */
     public function removeOrganizationAdmin(PermissionDataIsolation $dataIsolation, string $userId): void
     {
@@ -303,13 +303,13 @@ readonly class RoleDomainService
         $roleEntity = $this->getByName($dataIsolation, self::ORGANIZATION_ADMIN_ROLE_NAME);
 
         if ($roleEntity === null) {
-            // rolenot存in,no需handle
+            // rolenotexistsin,no需handle
             return;
         }
 
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // use仓library移exceptuserandroleassociate
+        // use仓librarymoveexceptuserandroleassociate
         $this->roleRepository->removeUsers($organizationCode, $roleEntity->getId(), [$userId]);
     }
 }

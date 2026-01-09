@@ -12,14 +12,14 @@ use App\Domain\ImageGenerate\ValueObject\WatermarkConfig;
 
 /**
  * defaultwatermarkconfigurationimplement
- * open源projectmiddledefaultimplement,notenablewatermark
+ * opensourceprojectmiddledefaultimplement,notenablewatermark
  * enterpriseprojectcanpassinheritor重newimplementcomeprovidespecificwatermarklogic.
  */
 class DefaultWatermarkConfig implements WatermarkConfigInterface
 {
     public function getWatermarkConfig(?string $orgCode = null): ?WatermarkConfig
     {
-        // open源versiondefaultnotenablewatermark
+        // opensourceversiondefaultnotenablewatermark
         return new WatermarkConfig(
             logoTextContent: 'Delightful AI Generated', // defaultwatermarktext
             position: 3, // rightdownangle

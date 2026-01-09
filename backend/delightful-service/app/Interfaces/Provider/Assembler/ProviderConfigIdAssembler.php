@@ -14,7 +14,7 @@ use InvalidArgumentException;
 
 /**
  * servicequotienttemplateIDprocesstoolcategory
- * useatgenerateandparseservicequotienttemplateID(usefixed数value型string).
+ * useatgenerateandparseservicequotienttemplateID(usefixedcountvalue型string).
  */
 class ProviderConfigIdAssembler
 {
@@ -32,8 +32,8 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * checkgive定configurationIDwhetherforanyservicequotienttemplate.
-     * support数value型stringformattemplateID.
+     * checkgivesetconfigurationIDwhetherforanyservicequotienttemplate.
+     * supportcountvalue型stringformattemplateID.
      */
     public static function isAnyProviderTemplate(null|int|string $configId): bool
     {
@@ -42,7 +42,7 @@ class ProviderConfigIdAssembler
 
     /**
      * according totemplateconfigurationIDparseoutProviderCodeandCategory.
-     * support数value型stringformattemplateID.
+     * supportcountvalue型stringformattemplateID.
      * @return null|array{providerCode: ProviderCode, category: Category}
      */
     public static function parseProviderTemplate(null|int|string $configId): ?array
@@ -62,7 +62,7 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * according toProviderTemplateIdgetto应數value型string.
+     * according toProviderTemplateIdgettoshould數value型string.
      */
     public static function getTemplateIdValue(ProviderTemplateId $templateId): string
     {
@@ -70,7 +70,7 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * according to数value型stringgetto应ProviderTemplateId.
+     * according tocountvalue型stringgettoshouldProviderTemplateId.
      */
     public static function getTemplateIdFromValue(null|int|string $configId): ?ProviderTemplateId
     {

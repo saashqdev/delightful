@@ -8,23 +8,23 @@ declare(strict_types=1);
 namespace App\Domain\MCP\Entity\ValueObject;
 
 /**
- * toolcome源: 0:unknowncome源, 1:FlowTool.
+ * toolcomesource: 0:unknowncomesource, 1:FlowTool.
  */
 enum ToolSource: int
 {
-    // unknowncome源
+    // unknowncomesource
     case Unknown = 0;
 
     // FlowTool
     case FlowTool = 1;
 
     /**
-     * get标signature称.
+     * getmarksignature称.
      */
     public function getLabel(): string
     {
         return match ($this) {
-            self::Unknown => 'unknowncome源',
+            self::Unknown => 'unknowncomesource',
             self::FlowTool => 'FlowTool',
         };
     }

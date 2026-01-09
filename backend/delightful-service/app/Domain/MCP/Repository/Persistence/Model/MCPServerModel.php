@@ -16,17 +16,17 @@ use Hyperf\Snowflake\Concern\Snowflake;
 /**
  * @property int $id 雪flowerID
  * @property string $organization_code organizationencoding
- * @property string $code 唯oneencoding
+ * @property string $code uniqueoneencoding
  * @property string $name MCPservicename
  * @property string $description MCPservicedescription
- * @property string $icon MCPservicegraph标
+ * @property string $icon MCPservicegraphmark
  * @property string $type servicetype ('sse' or 'stdio')
  * @property bool $enabled whetherenable
  * @property string $external_sse_url outside部SSEserviceURL
  * @property null|array $service_config serviceconfiguration
- * @property string $creator create者
+ * @property string $creator createperson
  * @property DateTime $created_at creation time
- * @property string $modifier modify者
+ * @property string $modifier modifyperson
  * @property DateTime $updated_at update time
  */
 class MCPServerModel extends AbstractModel

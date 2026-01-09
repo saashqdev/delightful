@@ -68,7 +68,7 @@ class OfficialProxyModel extends AbstractImageGenerate
             $statusCode = $response->getStatusCode();
             $responseBody = $response->getBody()->getContents();
 
-            $this->logger->info('officialproxy:收toresponse', [
+            $this->logger->info('officialproxy:receivetoresponse', [
                 'status_code' => $statusCode,
                 'response_length' => strlen($responseBody),
             ]);

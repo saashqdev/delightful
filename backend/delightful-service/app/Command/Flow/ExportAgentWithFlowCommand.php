@@ -62,7 +62,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
             return 1;
         }
 
-        // fromassistant实bodymiddlegetorganizationcodeanduserID
+        // fromassistantactualbodymiddlegetorganizationcodeanduserID
         $orgCode = $agent->getOrganizationCode();
         $userId = $agent->getCreatedUid();
 
@@ -86,10 +86,10 @@ class ExportAgentWithFlowCommand extends HyperfCommand
             // definitionuploaddirectory
             $subDir = 'open';
 
-            // createuploadfileobject(notfrom动rename)
+            // createuploadfileobject(notfromautorename)
             $uploadFile = new UploadFile($tempFile, $subDir, '', false);
 
-            // uploadfile(finger定notfrom动createdirectory)
+            // uploadfile(fingersetnotfromautocreatedirectory)
             $this->fileDomainService->uploadByCredential($orgCode, $uploadFile);
 
             // generatecanaccesslink

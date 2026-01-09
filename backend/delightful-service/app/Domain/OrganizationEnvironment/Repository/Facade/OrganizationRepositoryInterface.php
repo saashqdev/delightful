@@ -54,7 +54,7 @@ interface OrganizationRepositoryInterface
     public function delete(OrganizationEntity $organizationEntity): void;
 
     /**
-     * checkencodingwhetheralready存in.
+     * checkencodingwhetheralreadyexistsin.
      */
     public function existsByCode(string $code, ?int $excludeId = null): bool;
 }

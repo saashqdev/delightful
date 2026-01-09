@@ -76,12 +76,12 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
 
         $response = $this->put(self::SET_CURRENT_ORGANIZATION_API, $requestData, $headers);
 
-        // verifyresponsestatus - shouldreturnerrorstatus码
+        // verifyresponsestatus - shouldreturnerrorstatuscode
         $this->assertNotEquals(200, $response['code'] ?? 200);
     }
 
     /**
-     * testget账numberdowncanswitchorganizationlist.
+     * testgetaccountnumberdowncanswitchorganizationlist.
      */
     public function testListOrganizationsViaHttp(): void
     {

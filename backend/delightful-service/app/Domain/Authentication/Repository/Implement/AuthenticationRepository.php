@@ -29,12 +29,12 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     }
 
     /**
-     * passmailboxfind账number.
+     * passmailboxfindaccountnumber.
      */
     public function findAccountByEmail(string $email): ?AccountEntity
     {
         $query = $this->accountModel::getQuery()->where('email', $email)
-            ->where('type', 1) // personcategory账number
+            ->where('type', 1) // personcategoryaccountnumber
             ->where('status', 0); // normalstatus
         $accountData = Db::select($query->toSql(), $query->getBindings())[0] ?? null;
         if (! $accountData) {
@@ -45,7 +45,7 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     }
 
     /**
-     * passhand机numberfind账number.
+     * passhandmachinenumberfindaccountnumber.
      */
     public function findAccountByPhone(string $stateCode, string $phone): ?AccountEntity
     {
@@ -53,7 +53,7 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
             ->where('country_code', $stateCode)
             ->where('phone', $phone)
             ->where('status', 0) // normalstatus
-            ->where('type', 1); // personcategory账number
+            ->where('type', 1); // personcategoryaccountnumber
 
         $accountData = Db::select($query->toSql(), $query->getBindings())[0] ?? null;
         if (! $accountData) {

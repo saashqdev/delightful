@@ -37,7 +37,7 @@ trait DelightfulCacheTrait
     }
 
     /**
-     * categorypropertyinframework运lineo clockisnot变,所bythiswithinusecache,avoidduplicatecalculate.
+     * categorypropertyinframeworkrunlineo clockisnotchange, bythiswithinusecache,avoidduplicatecalculate.
      * ifhasContaineris false,theninstructionnothaveusecontainer,notquerycache.
      */
     protected function getUnCamelizeValueFromCache(string $key): string
@@ -60,7 +60,7 @@ trait DelightfulCacheTrait
     }
 
     /**
-     * categorypropertyinframework运lineo clockisnot变,所bythiswithinusecache,avoidduplicatecalculate.
+     * categorypropertyinframeworkrunlineo clockisnotchange, bythiswithinusecache,avoidduplicatecalculate.
      */
     protected function getCamelizeValueFromCache(string $key): string
     {

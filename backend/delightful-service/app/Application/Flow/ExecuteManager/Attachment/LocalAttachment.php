@@ -12,7 +12,7 @@ use App\Infrastructure\Util\FileType;
 use Delightful\CloudFile\Kernel\Struct\UploadFile;
 
 /**
- * 本groundfile.
+ * thisgroundfile.
  */
 class LocalAttachment extends AbstractAttachment
 {

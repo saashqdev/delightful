@@ -20,20 +20,20 @@ class AsrTaskStatusDTO
 
     public string $userId = '';
 
-    public ?string $organizationCode = null; // organizationencoding(useatfrom动summary)
+    public ?string $organizationCode = null; // organizationencoding(useatfromautosummary)
 
     // analogous:project_821749697183776769/workspace/recordingsummary_20250910_174251/originalrecordingfile.webm
-    public ?string $filePath = null; // work区filepath
+    public ?string $filePath = null; // workregionfilepath
 
     // fileID(databasemiddleactualID)
     public ?string $audioFileId = null; // audiofileID(writedelightful_super_agent_task_filestablebackreturnID)
 
     // note fileinfo
-    public ?string $noteFileName = null; // notefile名(andaudiofilein同onedirectory,fornullindicatenonotefile)
+    public ?string $noteFileName = null; // notefilename(andaudiofileinsameonedirectory,fornullindicatenonotefile)
 
     public ?string $noteFileId = null; // notefileID(useatchatmessagemiddlefilequote)
 
-    // presetfileinfo(useatfront端write)
+    // presetfileinfo(useatfrontclientwrite)
     public ?string $presetNoteFileId = null; // presetnotefileID
 
     public ?string $presetTranscriptFileId = null; // presetstreamidentifyfileID
@@ -59,7 +59,7 @@ class AsrTaskStatusDTO
     public AsrTaskStatusEnum $status = AsrTaskStatusEnum::FAILED;
 
     // recordingstatusmanagefield
-    public ?string $modelId = null; // AI modelID,useatfrom动summary
+    public ?string $modelId = null; // AI modelID,useatfromautosummary
 
     public ?string $recordingStatus = null; // recordingstatus:start|recording|paused|stopped
 
@@ -71,9 +71,9 @@ class AsrTaskStatusDTO
 
     public int $sandboxRetryCount = 0; // sandboxstartretrycount
 
-    public int $serverSummaryRetryCount = 0; // service端summary触hairretrycount
+    public int $serverSummaryRetryCount = 0; // serviceclientsummarytouchhairretrycount
 
-    public bool $serverSummaryLocked = false; // service端summarywhetherlock定customer端
+    public bool $serverSummaryLocked = false; // serviceclientsummarywhetherlocksetcustomerclient
 
     // ASR contentandnote(useatgeneratetitle)
     public ?string $asrStreamContent = null; // ASR streamidentifycontent
@@ -82,7 +82,7 @@ class AsrTaskStatusDTO
 
     public ?string $noteFileType = null; // notefiletype(md,txt,json)
 
-    public ?string $language = null; // 语type(zh_CN,en_USetc),useatgeneratetitleo clockuse
+    public ?string $language = null; // languagetype(zh_CN,en_USetc),useatgeneratetitleo clockuse
 
     public ?string $uploadGeneratedTitle = null; // upload-tokens generatetitle(useat summary 复use)
 
@@ -102,7 +102,7 @@ class AsrTaskStatusDTO
         $this->projectId = self::getStringValue($data, ['project_id', 'projectId']);
         $this->topicId = self::getStringValue($data, ['topic_id', 'topicId']);
 
-        // recordingdirectoryinfo(from动cleanfor相topath)
+        // recordingdirectoryinfo(fromautocleanfor相topath)
         $this->tempHiddenDirectory = self::extractRelativePath(
             self::getStringValue($data, ['temp_hidden_directory', 'tempHiddenDirectory'])
         );
@@ -187,7 +187,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * checkwhetherfornull(not存in).
+     * checkwhetherfornull(notexistsin).
      */
     public function isEmpty(): bool
     {
@@ -204,7 +204,7 @@ class AsrTaskStatusDTO
 
     /**
      * checksummarywhetheralreadycomplete(poweretcpropertyjudge).
-     * judgestandard:audiofilealreadymerge(audioFileId 存in)andrecordingalreadystop.
+     * judgestandard:audiofilealreadymerge(audioFileId existsin)andrecordingalreadystop.
      */
     public function isSummaryCompleted(): bool
     {
@@ -214,7 +214,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * judgeservice端summarywhethertocustomer端addlock.
+     * judgeserviceclientsummarywhethertocustomerclientaddlock.
      */
     public function hasServerSummaryLock(): bool
     {
@@ -222,7 +222,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * recordonetimeservice端summarytry.
+     * recordonetimeserviceclientsummarytry.
      */
     public function markServerSummaryAttempt(): void
     {
@@ -231,7 +231,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * inonetimeservice端summaryendbackupdatestatus.
+     * inonetimeserviceclientsummaryendbackupdatestatus.
      */
     public function finishServerSummaryAttempt(bool $success): void
     {
@@ -268,7 +268,7 @@ class AsrTaskStatusDTO
      * fromarraymiddle按prioritylevelgetstringvalue(support snake_case and camelCase).
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys key名columntable(按prioritylevelsort)
+     * @param array<string> $keys keynamecolumntable(按prioritylevelsort)
      * @param null|string $default defaultvalue
      */
     private static function getStringValue(array $data, array $keys, ?string $default = null): ?string
@@ -285,7 +285,7 @@ class AsrTaskStatusDTO
      * fromarraymiddle按prioritylevelgetintegervalue(support snake_case and camelCase).
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys key名columntable(按prioritylevelsort)
+     * @param array<string> $keys keynamecolumntable(按prioritylevelsort)
      * @param null|int $default defaultvalue
      */
     private static function getIntValue(array $data, array $keys, ?int $default = null): ?int
@@ -299,10 +299,10 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarraymiddle按prioritylevelgetbooleanvalue(support多typeformat:true/false,1/0,'1'/'0').
+     * fromarraymiddle按prioritylevelgetbooleanvalue(supportmultipletypeformat:true/false,1/0,'1'/'0').
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys key名columntable(按prioritylevelsort)
+     * @param array<string> $keys keynamecolumntable(按prioritylevelsort)
      */
     private static function getBoolValue(array $data, array $keys): bool
     {

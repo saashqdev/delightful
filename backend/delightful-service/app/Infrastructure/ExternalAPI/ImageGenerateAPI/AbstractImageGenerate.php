@@ -18,9 +18,9 @@ use Hyperf\Redis\Redis;
 use Psr\Log\LoggerInterface;
 
 /**
- * imagegenerate统oneabstractcategory
+ * imagegenerate統oneabstractcategory
  * integrationwatermarkprocessandDingTalkalertfeature
- * 所haveimagegenerateProviderallshouldinheritthiscategory.
+ *  haveimagegenerateProviderallshouldinheritthiscategory.
  */
 abstract class AbstractImageGenerate implements ImageGenerate
 {
@@ -37,8 +37,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     protected RedisLocker $redisLocker;
 
     /**
-     * 统oneimagegenerateentrymethod
-     * 先call子categoryimplementoriginalimagegenerate,again统oneaddwatermark.
+     * 統oneimagegenerateentrymethod
+     * firstcallchildcategoryimplementoriginalimagegenerate,again統oneaddwatermark.
      */
     final public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -48,8 +48,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * implementinterfacerequire带watermarkoriginaldatamethod
-     * each子categorymustaccording tofrom己dataformatimplementthismethod.
+     * implementinterfacerequirewithwatermarkoriginaldatamethod
+     * eachchildcategorymustaccording tofromselfdataformatimplementthismethod.
      */
     abstract public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array;
 
@@ -59,13 +59,13 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 子categoryimplementoriginalimagegeneratemethod
+     * childcategoryimplementoriginalimagegeneratemethod
      * onlyresponsiblecalleachfromAPIgenerateimage,notuseclosecorewatermarkprocess.
      */
     abstract protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 
     /**
-     * getresponseobjectlock,useatandhairsecurityground操as OpenAIFormatResponse.
+     * getresponseobjectlock,useatandhairsecuritygroundoperationas OpenAIFormatResponse.
      * useRedisfrom旋lockimplementrow队etc待.
      *
      * @return string returnlockowner,useatreleaselock
@@ -75,7 +75,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
         $lockKey = 'img_response_' . spl_object_id($response);
         $owner = bin2hex(random_bytes(8)); // 16位randomstringasforowner
 
-        // spinLockwillfrom动etc待,untilgetsuccessortimeout(30second)
+        // spinLockwillfromautoetc待,untilgetsuccessortimeout(30second)
         if (! $this->redisLocker->spinLock($lockKey, $owner, 30)) {
             $this->logger->error('getgraphlikeresponseRedislocktimeout', [
                 'lock_key' => $lockKey,
@@ -119,7 +119,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 统onewatermarkprocesslogic
+     * 統onewatermarkprocesslogic
      * supportURLandbase64两typeformatimagewatermarkprocess.
      */
     private function applyWatermark(ImageGenerateResponse $response, ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse

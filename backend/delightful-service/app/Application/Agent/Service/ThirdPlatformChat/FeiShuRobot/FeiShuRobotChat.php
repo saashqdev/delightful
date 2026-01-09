@@ -53,7 +53,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private const string EVENT_TYPE_MESSAGE_RECEIVE = 'im.message.receive_v1';
 
     /**
-     * lock定front缀
+     * locksetfrontsuffix
      */
     private const string LOCK_PREFIX = 'feishu_message_';
 
@@ -75,7 +75,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private Application $application;
 
     /**
-     * logrecord器.
+     * logrecorddevice.
      */
     private LoggerInterface $logger;
 
@@ -116,7 +116,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     {
         $chatMessage = new ThirdPlatformChatMessage();
 
-        // handleservice器validaterequest
+        // handleservicedevicevalidaterequest
         if (isset($params['challenge'])) {
             return $this->handleChallengeCheck($params, $chatMessage);
         }
@@ -209,7 +209,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * handleservice器validaterequest
+     * handleservicedevicevalidaterequest
      *
      * @param array $params requestparameter
      * @param ThirdPlatformChatMessage $chatMessage chatmessageobject
@@ -217,7 +217,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      */
     private function handleChallengeCheck(array $params, ThirdPlatformChatMessage $chatMessage): ThirdPlatformChatMessage
     {
-        $this->logger->info('handleFeishuservice器validaterequest');
+        $this->logger->info('handleFeishuservicedevicevalidaterequest');
 
         $chatMessage->setEvent(ThirdPlatformChatEvent::CheckServer);
         $response = new Response(
@@ -234,12 +234,12 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      * checkmessageIDlock
      *
      * @param string $messageId messageID
-     * @return bool whethersuccesslock定
+     * @return bool whethersuccesslockset
      */
     private function checkMessageIdLock(string $messageId): bool
     {
         if (empty($messageId)) {
-            $this->logger->warning('messageIDfornull,no法lock定');
+            $this->logger->warning('messageIDfornull,nomethodlockset');
             return false;
         }
 
@@ -277,7 +277,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         // settingconversationID
         $this->setConversationId($params, $chatMessage);
 
-        // setting额outsideparameter
+        // settingquotaoutsideparameter
         $chatMessage->setParams([
             'message_id' => $messageId,
         ]);
@@ -311,7 +311,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         try {
             $openId = $params['event']['sender']['sender_id']['open_id'] ?? '';
             if (empty($openId)) {
-                $this->logger->warning('userOpenIDfornull,no法getuserinfo');
+                $this->logger->warning('userOpenIDfornull,nomethodgetuserinfo');
                 return null;
             }
 
@@ -421,7 +421,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $chatMessage->setRobotCode($params['header']['app_id'] ?? '');
         $chatMessage->setUserId($openId);
         $chatMessage->setOriginConversationId($chatId);
-        $chatMessage->setNickname($openId); // initialsettingforOpenID,back续willpassuserinfoupdate
+        $chatMessage->setNickname($openId); // initialsettingforOpenID,back続willpassuserinfoupdate
     }
 
     /**
@@ -574,7 +574,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     /**
      * sendnot supportedmessagetypenotify.
      *
-     * @param string $receiverId receive者ID
+     * @param string $receiverId receivepersonID
      */
     private function sendUnsupportedMessageTypeNotice(string $receiverId): void
     {
@@ -582,7 +582,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             'receive_id' => $receiverId,
             'msg_type' => 'text',
             'content' => [
-                'text' => '暂not supportedmessagetype',
+                'text' => '暫not supportedmessagetype',
             ],
         ];
         $this->application->message->send($data, 'chat_id');
@@ -593,7 +593,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     /**
      * senderrornotify.
      *
-     * @param string $receiverId receive者ID
+     * @param string $receiverId receivepersonID
      */
     private function sendErrorNotice(string $receiverId): void
     {
@@ -601,7 +601,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             'receive_id' => $receiverId,
             'msg_type' => 'text',
             'content' => [
-                'text' => 'handlemessageo clockhair生error,please waitbackagain试',
+                'text' => 'handlemessageo clockhairgenerateerror,please waitbackagain试',
             ],
         ];
         $this->application->message->send($data, 'chat_id');
@@ -627,7 +627,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $markdown .= "# {$content['title']}\n\n";
         }
 
-        // priorityusemiddle文content,ifnothavethenuseEnglishcontent
+        // priorityusemiddletextcontent,ifnothavethenuseEnglishcontent
         $postContent = $content['content'] ?? [];
 
         foreach ($postContent as $paragraph) {
@@ -764,7 +764,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $lastPosition = 0;
         $contentBlocks = [];
 
-        // traverse所havematchtoimage
+        // traverse havematchtoimage
         foreach ($matches[0] as $index => $match) {
             $fullMatch = $match[0];
             $position = $match[1];

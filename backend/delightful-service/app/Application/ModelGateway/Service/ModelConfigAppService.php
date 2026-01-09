@@ -59,41 +59,41 @@ class ModelConfigAppService extends AbstractLLMAppService
     }
 
     /**
-     * getmodel降level链,mergeuserpass in降level链andsystemdefault降level链.
+     * getmodel降levelchain,mergeuserpass in降levelchainandsystemdefault降levelchain.
      *
      * @param string $orgCode organizationencoding
      * @param string $userId userID
-     * @param string $modelType finger定modeltype
-     * @param string[] $modelFallbackChain userpass in降level链
+     * @param string $modelType fingersetmodeltype
+     * @param string[] $modelFallbackChain userpass in降levelchain
      *
      * @return string finalmodeltype
      */
     public function getChatModelTypeByFallbackChain(string $orgCode, string $userId, string $modelType = '', array $modelFallbackChain = []): string
     {
         $dataIsolation = ModelGatewayDataIsolation::createByOrganizationCodeWithoutSubscription($orgCode, $userId);
-        // fromorganizationcanusemodellistmiddleget所havecanchatmodel
+        // fromorganizationcanusemodellistmiddleget havecanchatmodel
         $odinModels = di(ModelGatewayMapper::class)->getChatModels($dataIsolation) ?? [];
         $chatModelsName = array_keys($odinModels);
         if (empty($chatModelsName)) {
             return '';
         }
 
-        // iffinger定modeltypeandthemodel存inatcanusemodellistmiddle,thendirectlyreturn
+        // iffingersetmodeltypeandthemodelexistsinatcanusemodellistmiddle,thendirectlyreturn
         if (! empty($modelType) && in_array($modelType, $chatModelsName)) {
             return $modelType;
         }
 
-        // willcanusemodel转forhashtable,implementO(1)timecomplexdegreefind
+        // willcanusemodeltransferforhashtable,implementO(1)timecomplexdegreefind
         $availableModels = array_flip($chatModelsName);
 
-        // getsystemdefault降level链
+        // getsystemdefault降levelchain
         $systemFallbackChain = config('delightful-api.model_fallback_chain.chat', []);
 
-        // mergeuserpass in降level链andsystemdefault降level链
-        // userpass in降level链prioritylevelmorehigh
+        // mergeuserpass in降levelchainandsystemdefault降levelchain
+        // userpass in降levelchainprioritylevelmorehigh
         $mergedFallbackChain = array_merge($systemFallbackChain, $modelFallbackChain);
 
-        // 按prioritylevelordertraversemergeback降level链
+        // 按prioritylevelordertraversemergeback降levelchain
         foreach ($mergedFallbackChain as $modelName) {
             if (isset($availableModels[$modelName])) {
                 return $modelName;

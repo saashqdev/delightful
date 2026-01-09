@@ -26,9 +26,9 @@ return new class extends Migration {
             $table->string('secret_key', 50)->default('')->comment('key')->unique();
             $table->boolean('enabled')->default(false)->comment('whetherenable');
             $table->timestamp('last_used')->nullable()->comment('mostbackusetime');
-            $table->string('created_uid')->default('')->comment('create者userID');
+            $table->string('created_uid')->default('')->comment('createpersonuserID');
             $table->timestamp('created_at')->nullable()->comment('creation time');
-            $table->string('updated_uid')->default('')->comment('update者userID');
+            $table->string('updated_uid')->default('')->comment('updatepersonuserID');
             $table->timestamp('updated_at')->nullable()->comment('update time');
             $table->timestamp('deleted_at')->nullable()->comment('deletion time');
         });

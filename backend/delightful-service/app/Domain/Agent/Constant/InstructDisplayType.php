@@ -27,7 +27,7 @@ class InstructDisplayType
     }
 
     /**
-     * get所havedisplaytypeanditsinternationalizationtag.
+     * get havedisplaytypeanditsinternationalizationtag.
      * @return array<int, string>
      */
     public static function getTypeOptions(): array

@@ -35,7 +35,7 @@ class DelightfulFlowTriggerTestcaseDomainService extends AbstractDomainService
         } else {
             $delightfulFlowTriggerTestcaseEntity = $this->delightfulFlowTriggerTestcaseRepository->getByFlowCodeAndCode($dataIsolation, $savingDelightfulFlowTriggerTestcaseEntity->getFlowCode(), $savingDelightfulFlowTriggerTestcaseEntity->getCode());
             if (! $delightfulFlowTriggerTestcaseEntity) {
-                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$savingDelightfulFlowTriggerTestcaseEntity->getCode()} not存in");
+                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$savingDelightfulFlowTriggerTestcaseEntity->getCode()} notexistsin");
             }
             $savingDelightfulFlowTriggerTestcaseEntity->prepareForModification($delightfulFlowTriggerTestcaseEntity);
         }
@@ -67,7 +67,7 @@ class DelightfulFlowTriggerTestcaseDomainService extends AbstractDomainService
     {
         $testcase = $this->delightfulFlowTriggerTestcaseRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $testcaseCode);
         if (! $testcase) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$testcaseCode} not存in");
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$testcaseCode} notexistsin");
         }
         return $testcase;
     }

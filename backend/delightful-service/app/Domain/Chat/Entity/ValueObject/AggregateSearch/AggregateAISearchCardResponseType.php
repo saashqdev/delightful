@@ -13,7 +13,7 @@ namespace App\Domain\Chat\Entity\ValueObject\AggregateSearch;
 class AggregateAISearchCardResponseType
 {
     /**
-     *associateissuesearchresult,include子issue(search_keywords), webpagesearchresult(search), 总word count(total_words), matchword count(match_count), page count(page_count).
+     *associateissuesearchresult,includechildissue(search_keywords), webpagesearchresult(search), totalword count(total_words), matchword count(match_count), page count(page_count).
      */
     public const int SEARCH = 0;
 
@@ -38,7 +38,7 @@ class AggregateAISearchCardResponseType
     // PPT
     public const int PPT = 7;
 
-    // search深degree
+    // searchdeepdegree
     public const int SEARCH_DEEP_LEVEL = 8;
 
     public static function getNameFromType(int $type): string
@@ -52,7 +52,7 @@ class AggregateAISearchCardResponseType
             self::PING_PONG => 'ping_pong',
             self::TERMINATE => 'exceptiontermination',
             self::PPT => 'PPT',
-            self::SEARCH_DEEP_LEVEL => 'search深degree',
+            self::SEARCH_DEEP_LEVEL => 'searchdeepdegree',
         ];
         return $typeNames[$type] ?? 'unknowntype';
     }

@@ -25,7 +25,7 @@ class PageResponseDTO extends AbstractDTO
     protected array $items = [];
 
     /**
-     * whetheralsohavemore多data.
+     * whetheralsohavemoremultipledata.
      */
     protected bool $hasMore = false;
 

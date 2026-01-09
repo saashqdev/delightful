@@ -52,7 +52,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
 
         $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId();
         $contentMessage = $currentMessage = null;
-        // tryinmemorymiddle找to content message
+        // tryinmemorymiddlefindto content message
         foreach ($memoryManager->getMessages() as $message) {
             if ($message->getIdentifier() === $contentMessageId) {
                 $contentMessage = $message;
@@ -77,7 +77,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                     $memoryManager->addMessage($contentMessage);
                 }
             } else {
-                // createonenew,inback续use
+                // createonenew,inback続use
                 $currentMessage = new UserMessage();
                 $currentMessage->setContent($userPrompt);
             }

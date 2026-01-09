@@ -75,7 +75,7 @@ class OdinQdrantVectorStore implements VectorStoreInterface
             ExceptionBuilder::throw(GenericErrorCode::AccessDenied, "Collection [{$collectionName}] not found");
         }
         if ($collection->vectorSize !== count($embeddings)) {
-            ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'embeddingmodelandtoquantitylibrarylengthnotone致');
+            ExceptionBuilder::throw(GenericErrorCode::IllegalOperation, 'embeddingmodelandtoquantitylibrarylengthnotoneto');
         }
 
         $pointId = new ExtendedPointId($pointId);

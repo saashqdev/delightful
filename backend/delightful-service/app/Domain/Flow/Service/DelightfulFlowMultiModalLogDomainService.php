@@ -44,7 +44,7 @@ class DelightfulFlowMultiModalLogDomainService extends AbstractDomainService
     }
 
     /**
-     * batchquantityget多messageIDto应multi-modalstatelogrecord.
+     * batchquantitygetmultiplemessageIDtoshouldmulti-modalstatelogrecord.
      *
      * @param array<string> $messageIds
      * @return array<DelightfulFlowMultiModalLogEntity>

@@ -28,29 +28,29 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     public const string NULL_PARENT_ID = '0';
 
     /**
-     * associate_questions keyfront缀,avoidfrom动willstring 0 转 int 0.
+     * associate_questions keyfrontsuffix,avoidfromautowillstring 0 transfer int 0.
      */
     public const string QUESTION_DELIMITER = 'question_';
 
-    # searchlevel别:简single/search
+    # searchlevelother:simplesingle/search
     protected SearchDeepLevel $searchDeepLevel;
 
     /**
-     * 子issueassociateissue.supportassociateissueagainproduce子issue,butiswillbeflattenbecometwo维array.
+     * childissueassociateissue.supportassociateissueagainproducechildissue,butiswillbeflattenbecometwo维array.
      * @var array<string,QuestionItem[]>
      * @example according touserinputissue,generateassociateissue.
      */
     protected ?array $associateQuestions;
 
     /**
-     * (所have子issue)searchwebpagelist.
+     * ( havechildissue)searchwebpagelist.
      *
      * @var QuestionSearchResult[]
      */
     protected array $searchWebPages;
 
     /**
-     * byat多time子issuesearcho clock,willoutmultipleduplicatesearchresult,所byneed ai go重back,again丢givebigmodelsummary.
+     * byatmultipletimechildissuesearcho clock,willoutmultipleduplicatesearchresult, byneed ai go重back,again丢givebigmodelsummary.
      *
      * @var SearchDetailItem[]
      */
@@ -77,9 +77,9 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected string $ppt;
 
     /**
-     * get本timeneedstreampushfield.
-     * supportonetimepush多fieldstreammessage,if json layerlevelmore深,use field_1.*.field_2 asfor key. itsmiddle * isfingerarraydown标.
-     * service端willcache所havestreamdata,andinstreamendo clockonetimepropertypush,bydecrease丢package概rate,enhancemessagecompleteproperty.
+     * getthistimeneedstreampushfield.
+     * supportonetimepushmultiplefieldstreammessage,if json layerlevelmoredeep,use field_1.*.field_2 asfor key. itsmiddle * isfingerarraydownmark.
+     * serviceclientwillcache havestreamdata,andinstreamendo clockonetimepropertypush,bydecrease丢package概rate,enhancemessagecompleteproperty.
      * for example:
      * [
      *     'users.0.name' => 'delightful',
@@ -113,7 +113,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
         //            {
         //                "parent_question_id": "0",
         //                "question_id": "1",
-        //                "question": "small米collectionteam flagdownhave哪thesebrand"
+        //                "question": "small米collectionteam flagdownhavewhichthesebrand"
         //            }
         //        ],
         //        "question_1": [

@@ -34,7 +34,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     }
 
     /**
-     * judgeusermessagemiddle,whethercontain本timehe想downloadfile.
+     * judgeusermessagemiddle,whethercontainthistimehe想downloadfile.
      * @param DelightfulChatFileEntity[] $fileDTOs
      * @return DelightfulChatFileEntity[]
      */
@@ -44,7 +44,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
         $seqIds = array_column($fileDTOs, 'message_id');
         $seqList = $this->delightfulSeqRepository->batchGetSeqByMessageIds($seqIds);
         $delightfulMessageIdsMap = [];
-        // checkuserwhether收tothisthesemessage
+        // checkuserwhetherreceivetothisthesemessage
         foreach ($seqList as $seq) {
             if ($seq->getObjectId() !== $dataIsolation->getCurrentDelightfulId()) {
                 continue;
@@ -73,7 +73,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
             }
         }
 
-        // judgeusermessagemiddle,whethercontain本timehe想downloadfile
+        // judgeusermessagemiddle,whethercontainthistimehe想downloadfile
         $fileMaps = [];
         foreach ($fileDTOs as $fileDTO) {
             $delightfulMessageId = $fileDTO->getDelightfulMessageId();
@@ -114,26 +114,26 @@ class DelightfulChatFileDomainService extends AbstractDomainService
 
     /**
      * saveorupdatefile
-     * iffile_keyalready存in,thenupdatefileinfo
-     * iffile_keynot存in,thencreatenewfile.
+     * iffile_keyalreadyexistsin,thenupdatefileinfo
+     * iffile_keynotexistsin,thencreatenewfile.
      *
-     * @param DelightfulChatFileEntity $fileEntity file实body
+     * @param DelightfulChatFileEntity $fileEntity fileactualbody
      * @param DataIsolation $dataIsolation dataisolation
-     * @return DelightfulChatFileEntity saveorupdatebackfile实body
+     * @return DelightfulChatFileEntity saveorupdatebackfileactualbody
      */
     public function saveOrUpdateByFileKey(DelightfulChatFileEntity $fileEntity, DataIsolation $dataIsolation): DelightfulChatFileEntity
     {
-        // passfile_keyfindfilewhether存in
+        // passfile_keyfindfilewhetherexistsin
         $existingFile = $this->delightfulFileRepository->getChatFileByFileKey($fileEntity->getFileKey());
 
-        // iffile存in,updatefileinfo
+        // iffileexistsin,updatefileinfo
         if ($existingFile) {
             $fileEntity->setFileId($existingFile->getFileId());
             $this->updateFile($fileEntity);
             return $fileEntity;
         }
 
-        // iffilenot存in,createnewfile
+        // iffilenotexistsin,createnewfile
         $time = date('Y-m-d H:i:s');
         $fileEntity->setUserId($dataIsolation->getCurrentUserId());
         $fileEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
@@ -145,7 +145,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     }
 
     /**
-     * judgeusermessagemiddleattachmentisnotishefrom己upload.
+     * judgeusermessagemiddleattachmentisnotishefromselfupload.
      * @param ChatAttachment[] $attachments
      * @return ChatAttachment[]
      */
@@ -154,7 +154,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
         $fileIds = array_column($attachments, 'file_id');
         $fileEntities = $this->getFileEntitiesByFileIds($fileIds);
         $fileEntities = array_column($fileEntities, null, 'file_id');
-        // todo ifmessagemiddlehavefile:1.judgefile所have者whetheriscurrentuser;2.judgeuserwhetherreceivepassthisthesefile.
+        // todo ifmessagemiddlehavefile:1.judgefile havepersonwhetheriscurrentuser;2.judgeuserwhetherreceivepassthisthesefile.
         //        foreach ($fileEntities as $fileEntity) {
         //            if ($fileEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
         //                ExceptionBuilder::throw(ChatErrorCode::FILE_NOT_FOUND);

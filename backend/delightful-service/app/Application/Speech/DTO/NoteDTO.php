@@ -32,7 +32,7 @@ readonly class NoteDTO
     }
 
     /**
-     * getfileextension名.
+     * getfileextensionname.
      */
     public function getFileExtension(): string
     {
@@ -40,7 +40,7 @@ readonly class NoteDTO
     }
 
     /**
-     * generatefile名.
+     * generatefilename.
      *
      * @param null|string $generatedTitle generatetitle,ifprovidethenuse {title}-note.{ext} format
      */

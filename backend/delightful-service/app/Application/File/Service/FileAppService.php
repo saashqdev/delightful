@@ -44,7 +44,7 @@ class FileAppService extends AbstractAppService
             $contentType,
             $sts
         );
-        // ifis本grounddriven,that么increaseonetemporary key
+        // ifisthisgrounddriven,thatwhatincreaseonetemporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $this->cache->set(
@@ -164,7 +164,7 @@ class FileAppService extends AbstractAppService
         // checkfilewhetheralreadyalready existsinatthebusinesstypedown
         $existingFile = $this->defaultFileDomainService->getByKeyAndBusinessType($fileKey, $businessType, $organizationCode);
         if ($existingFile) {
-            // iffilealready存in,directlyreturnfilelink
+            // iffilealreadyexistsin,directlyreturnfilelink
             return $this->fileDomainService->getLink($organizationCode, $fileKey)->getUrl();
         }
 
@@ -222,7 +222,7 @@ class FileAppService extends AbstractAppService
             $autoBucket,
         );
 
-        // ifis本grounddriven,that么increaseonetemporary key
+        // ifisthisgrounddriven,thatwhatincreaseonetemporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $data['temporary_credential']['dir'] = $organizationCode . '/' . $data['temporary_credential']['dir'];
@@ -232,7 +232,7 @@ class FileAppService extends AbstractAppService
             $this->cache->set($localCredential, ['organization_code' => $organizationCode], (int) ($data['expires'] - time()));
         }
 
-        // delightful service serviceground址
+        // delightful service servicegroundaddress
         $data['delightful_service_host'] = config('be-delightful.sandbox.callback_host', '');
 
         return $data;
@@ -249,7 +249,7 @@ class FileAppService extends AbstractAppService
             $autoBucket,
         );
 
-        // ifis本grounddriven,that么increaseonetemporary key
+        // ifisthisgrounddriven,thatwhatincreaseonetemporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $data['temporary_credential']['dir'] = $organizationCode . '/' . $data['temporary_credential']['dir'];
@@ -259,7 +259,7 @@ class FileAppService extends AbstractAppService
             $this->cache->set($localCredential, ['organization_code' => $organizationCode], (int) ($data['expires'] - time()));
         }
 
-        // delightful service serviceground址
+        // delightful service servicegroundaddress
         $data['delightful_service_host'] = config('be-delightful.sandbox.callback_host', '');
 
         return $data;

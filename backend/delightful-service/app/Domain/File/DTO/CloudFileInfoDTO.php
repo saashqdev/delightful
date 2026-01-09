@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\File\DTO;
 
 /**
- * 云storagefileinformationDTO.
+ * cloudstoragefileinformationDTO.
  */
 readonly class CloudFileInfoDTO
 {
@@ -29,7 +29,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * getfile名.
+     * getfilename.
      */
     public function getFilename(): string
     {

@@ -18,7 +18,7 @@ use function Hyperf\Translation\trans;
 
 /**
  * ASR taskstatusstorage
- * 统onemanage Redis middletaskstatus CRUD.
+ * 統onemanage Redis middletaskstatus CRUD.
  */
 readonly class AsrTaskRepository
 {
@@ -45,7 +45,7 @@ readonly class AsrTaskRepository
             // setexpiretime
             $this->redis->expire($redisKey, $ttl);
         } catch (Throwable $e) {
-            // Redis 操asfailo clockrecordbutnotthrowexception
+            // Redis operationasfailo clockrecordbutnotthrowexception
             $this->logger->warning(trans('asr.api.redis.save_task_status_failed'), [
                 'task_key' => $taskStatus->taskKey ?? 'unknown',
                 'user_id' => $taskStatus->userId ?? 'unknown',
@@ -59,7 +59,7 @@ readonly class AsrTaskRepository
      *
      * @param string $taskKey taskkey
      * @param string $userId userID
-     * @return null|AsrTaskStatusDTO taskstatus DTO,not存ino clockreturn null
+     * @return null|AsrTaskStatusDTO taskstatus DTO,notexistsino clockreturn null
      */
     public function findByTaskKey(string $taskKey, string $userId): ?AsrTaskStatusDTO
     {
@@ -84,11 +84,11 @@ readonly class AsrTaskRepository
     }
 
     /**
-     * checktaskwhether存in.
+     * checktaskwhetherexistsin.
      *
      * @param string $taskKey taskkey
      * @param string $userId userID
-     * @return bool whether存in
+     * @return bool whetherexistsin
      */
     public function exists(string $taskKey, string $userId): bool
     {
@@ -97,7 +97,7 @@ readonly class AsrTaskRepository
             $result = $this->redis->exists($redisKey);
             return is_int($result) && $result > 0;
         } catch (Throwable $e) {
-            $this->logger->warning('checktaskwhether存infail', [
+            $this->logger->warning('checktaskwhetherexistsinfail', [
                 'task_key' => $taskKey,
                 'user_id' => $userId,
                 'error' => $e->getMessage(),
@@ -130,7 +130,7 @@ readonly class AsrTaskRepository
     }
 
     /**
-     * deletecore跳 Key.
+     * deletecorejump Key.
      *
      * @param string $taskKey taskkey
      * @param string $userId userID
@@ -141,7 +141,7 @@ readonly class AsrTaskRepository
             $key = $this->generateHeartbeatKey($taskKey, $userId);
             $this->redis->del($key);
         } catch (Throwable $e) {
-            $this->logger->warning('deletecore跳 Key fail', [
+            $this->logger->warning('deletecorejump Key fail', [
                 'task_key' => $taskKey,
                 'user_id' => $userId,
                 'error' => $e->getMessage(),
@@ -150,26 +150,26 @@ readonly class AsrTaskRepository
     }
 
     /**
-     * generatetaskstatus Redis key名.
+     * generatetaskstatus Redis keyname.
      *
      * @param string $taskKey taskkey
      * @param string $userId userID
-     * @return string Redis key名
+     * @return string Redis keyname
      */
     private function generateTaskKey(string $taskKey, string $userId): string
     {
-        // by统onerulegeneratestring,然back MD5 avoidkey名passlong
+        // by統onerulegeneratestring,然back MD5 avoidkeynamepasslong
         $keyString = sprintf('%s:%s', $userId, $taskKey);
         $keyHash = md5($keyString);
         return sprintf(AsrRedisKeys::TASK_HASH, $keyHash);
     }
 
     /**
-     * generatecore跳 Key.
+     * generatecorejump Key.
      *
      * @param string $taskKey taskkey
      * @param string $userId userID
-     * @return string Redis key名
+     * @return string Redis keyname
      */
     private function generateHeartbeatKey(string $taskKey, string $userId): string
     {

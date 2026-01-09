@@ -12,18 +12,18 @@ namespace App\Domain\LongTermMemory\Entity\ValueObject;
  */
 enum MemoryType: string
 {
-    case MANUAL_INPUT = 'manual_input';           // hand动input
+    case MANUAL_INPUT = 'manual_input';           // handautoinput
     case CONVERSATION_ANALYSIS = 'conversation_analysis';  // conversationanalyze
     case USER_NOTE = 'user_note';                // usernote
     case SYSTEM_KNOWLEDGE = 'system_knowledge';  // systemknowledge
 
     /**
-     * getmiddle文description.
+     * getmiddletextdescription.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::MANUAL_INPUT => 'hand动input',
+            self::MANUAL_INPUT => 'handautoinput',
             self::CONVERSATION_ANALYSIS => 'conversationanalyze',
             self::USER_NOTE => 'usernote',
             self::SYSTEM_KNOWLEDGE => 'systemknowledge',

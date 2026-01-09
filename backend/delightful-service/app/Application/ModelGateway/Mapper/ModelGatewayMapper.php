@@ -35,7 +35,7 @@ use InvalidArgumentException;
 use Throwable;
 
 /**
- * setprojectitself多set ModelGatewayMapper - finalall部convertfor odin model parameterformat.
+ * setprojectitselfmultipleset ModelGatewayMapper - finalall部convertfor odin model parameterformat.
  */
 class ModelGatewayMapper extends ModelMapper
 {
@@ -80,8 +80,8 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * inside部use chat o clock,one定isusethemethod.
-     * willfromauto replacefor本groundproxymodel.
+     * inside部use chat o clock,onesetisusethemethod.
+     * willfromauto replaceforthisgroundproxymodel.
      */
     public function getChatModelProxy(BaseDataIsolation $dataIsolation, string $model, bool $useOfficialAccessToken = false): DelightfulAILocalModel
     {
@@ -97,8 +97,8 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * inside部use embedding o clock,one定isusethemethod.
-     * willfromauto replacefor本groundproxymodel.
+     * inside部use embedding o clock,onesetisusethemethod.
+     * willfromauto replaceforthisgroundproxymodel.
      */
     public function getEmbeddingModelProxy(BaseDataIsolation $dataIsolation, string $model): DelightfulAILocalModel
     {
@@ -116,9 +116,9 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * themethodgettoone定istrue实callmodel.
+     * themethodgettoonesetistrueactualcallmodel.
      * only ModelGateway domainuse.
-     * @param string $model expectedismanageback台 model_id,passdegree阶segmentacceptpass in model_version
+     * @param string $model expectedismanagebackplatform model_id,passdegree阶segmentacceptpass in model_version
      */
     public function getOrganizationChatModel(BaseDataIsolation $dataIsolation, string $model): ModelInterface|OdinModel
     {
@@ -131,9 +131,9 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * themethodgettoone定istrue实callmodel.
+     * themethodgettoonesetistrueactualcallmodel.
      * only ModelGateway domainuse.
-     * @param string $model modelname expectedismanageback台 model_id,passdegree阶segmentaccept model_version
+     * @param string $model modelname expectedismanagebackplatform model_id,passdegree阶segmentaccept model_version
      */
     public function getOrganizationEmbeddingModel(BaseDataIsolation $dataIsolation, string $model): EmbeddingInterface|OdinModel
     {
@@ -159,7 +159,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * getcurrentorganizationdown所havecanuse chat model.
+     * getcurrentorganizationdown havecanuse chat model.
      * @return OdinModel[]
      */
     public function getChatModels(BaseDataIsolation $dataIsolation): array
@@ -169,7 +169,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * getcurrentorganizationdown所havecanuse embedding model.
+     * getcurrentorganizationdown havecanuse embedding model.
      * @return OdinModel[]
      */
     public function getEmbeddingModels(BaseDataIsolation $dataIsolation): array
@@ -267,7 +267,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * getcurrentorganizationdownfinger定type所havecanusemodel.
+     * getcurrentorganizationdownfingersettype havecanusemodel.
      * @return OdinModel[]
      */
     private function getModelsByType(ModelGatewayDataIsolation $dataIsolation, ModelType $modelType): array
@@ -289,7 +289,7 @@ class ModelGatewayMapper extends ModelMapper
                     }
                     break;
                 default:
-                    // ifnothavefinger定type,thenall部add
+                    // ifnothavefingersettype,thenall部add
                     break;
             }
             $list[$name] = new OdinModel(key: $name, model: $model, attributes: $this->attributes[$name]);
@@ -397,14 +397,14 @@ class ModelGatewayMapper extends ModelMapper
         $implementationConfig = $providerEntity->getProviderCode()->getImplementationConfig($providerConfigItem, $providerModelEntity->getModelVersion());
 
         if ($providerEntity->getProviderType()->isCustom()) {
-            // customizeservicequotient统onedisplayalias,ifnothavealiasthendisplay“customizeservicequotient”(needconsider多language)
+            // customizeservicequotient統onedisplayalias,ifnothavealiasthendisplay“customizeservicequotient”(needconsidermultiplelanguage)
             $providerName = $providerConfigEntity->getLocalizedAlias($providerDataIsolation->getLanguage());
         } else {
-            // inside置servicequotient统onedisplay servicequotientname,notusedisplayalias(needconsider多language)
+            // insidesetservicequotient統onedisplay servicequotientname,notusedisplayalias(needconsidermultiplelanguage)
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 
-        // ifnotisofficialorganization,butismodelisofficialorganization,统onedisplay Delightful
+        // ifnotisofficialorganization,butismodelisofficialorganization,統onedisplay Delightful
         if (! $providerDataIsolation->isOfficialOrganization()
             && in_array($providerConfigEntity->getOrganizationCode(), $providerDataIsolation->getOfficialOrganizationCodes())) {
             $providerName = 'Delightful';
@@ -427,7 +427,7 @@ class ModelGatewayMapper extends ModelMapper
             return new ImageModel($providerConfigItem->toArray(), $providerModelEntity->getModelVersion(), (string) $providerModelEntity->getId(), $providerEntity->getProviderCode());
         }
 
-        // toatLLM/Embeddingmodel,maintain原havelogic
+        // toatLLM/Embeddingmodel,maintainoriginalhavelogic
         return new OdinModel(
             key: $key,
             model: $this->createModel($providerModelEntity->getModelVersion(), [
@@ -476,7 +476,7 @@ class ModelGatewayMapper extends ModelMapper
         // getmodel
         $providerModelEntity = $this->providerManager->getAvailableByModelIdOrId($providerDataIsolation, $model, $checkStatus);
         if (! $providerModelEntity) {
-            $this->logger->info('modelnot存in', ['model' => $model]);
+            $this->logger->info('modelnotexistsin', ['model' => $model]);
             return null;
         }
         if (! $dataIsolation->isOfficialOrganization() && ! $providerModelEntity->getStatus()->isEnabled()) {
@@ -484,10 +484,10 @@ class ModelGatewayMapper extends ModelMapper
             return null;
         }
 
-        // checkcurrentset餐whetherhavethismodelusepermission - 目frontonly LLM modelhavethislimit
+        // checkcurrentset餐whetherhavethismodelusepermission - itemfrontonly LLM modelhavethislimit
         if ($providerModelEntity->getModelType()->isLLM()) {
             if (! $dataIsolation->isOfficialOrganization() && ! $dataIsolation->getSubscriptionManager()->isValidModelAvailable($providerModelEntity->getModelId(), $modelType)) {
-                $this->logger->info('modelnotincanuse名single', ['model' => $providerModelEntity->getModelId(), 'model_type' => $modelType?->value]);
+                $this->logger->info('modelnotincanusenamesingle', ['model' => $providerModelEntity->getModelId(), 'model_type' => $modelType?->value]);
                 return null;
             }
         }
@@ -495,7 +495,7 @@ class ModelGatewayMapper extends ModelMapper
         // getconfiguration
         $providerConfigEntity = $this->providerManager->getProviderConfigsByIds($providerDataIsolation, [$providerModelEntity->getServiceProviderConfigId()])[$providerModelEntity->getServiceProviderConfigId()] ?? null;
         if (! $providerConfigEntity) {
-            $this->logger->info('servicequotientconfigurationnot存in', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
+            $this->logger->info('servicequotientconfigurationnotexistsin', ['model' => $model, 'provider_config_id' => $providerModelEntity->getServiceProviderConfigId()]);
             return null;
         }
         if (! $dataIsolation->isOfficialOrganization() && ! $providerConfigEntity->getStatus()->isEnabled()) {
@@ -507,7 +507,7 @@ class ModelGatewayMapper extends ModelMapper
         $providerEntity = $this->providerManager->getProvidersByIds($providerDataIsolation, [$providerConfigEntity->getServiceProviderId()])[$providerConfigEntity->getServiceProviderId()] ?? null;
 
         if (! $providerEntity) {
-            $this->logger->info('servicequotientnot存in', ['model' => $model, 'provider_id' => $providerConfigEntity->getServiceProviderId()]);
+            $this->logger->info('servicequotientnotexistsin', ['model' => $model, 'provider_id' => $providerConfigEntity->getServiceProviderId()]);
             return null;
         }
 

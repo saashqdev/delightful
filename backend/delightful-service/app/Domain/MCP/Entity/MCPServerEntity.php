@@ -22,7 +22,7 @@ class MCPServerEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯oneencoding,onlyincreateo clockgenerate,useasgivefront端id.
+     * uniqueoneencoding,onlyincreateo clockgenerate,useasgivefrontclientid.
      */
     protected string $code;
 
@@ -37,7 +37,7 @@ class MCPServerEntity extends AbstractEntity
     protected string $description = '';
 
     /**
-     * MCPservicegraph标.
+     * MCPservicegraphmark.
      */
     protected string $icon = '';
 

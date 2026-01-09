@@ -23,9 +23,9 @@ return new class extends Migration {
             $table->string('knowledge_base_document_code', 255)->comment('associateknowledge basedocumentcode');
             $table->string('organization_code')->comment('organizationencoding');
 
-            // 操asrecord
-            $table->string('created_uid', 255)->comment('create者ID');
-            $table->string('updated_uid', 255)->comment('update者ID');
+            // operationasrecord
+            $table->string('created_uid', 255)->comment('createpersonID');
+            $table->string('updated_uid', 255)->comment('updatepersonID');
 
             // statustimepoint
             $table->datetimes();

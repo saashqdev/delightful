@@ -24,8 +24,8 @@ class CommentRepository
     /**
      * createonenewcommentandmaintain相closeindexandattachment.
      *
-     * @param CommentEntity $commentEntity comment实body
-     * @return CommentEntity createbackcomment实body
+     * @param CommentEntity $commentEntity commentactualbody
+     * @return CommentEntity createbackcommentactualbody
      */
     public function create(string $organizationCode, CommentEntity $commentEntity): CommentEntity
     {
@@ -57,10 +57,10 @@ class CommentRepository
     }
 
     /**
-     * updatefinger定commentcontentandattachment.
+     * updatefingersetcommentcontentandattachment.
      *
-     * @param RequestContext $requestContext requestupdown文
-     * @param CommentEntity $commentEntity wantupdatecomment实body
+     * @param RequestContext $requestContext requestupdowntext
+     * @param CommentEntity $commentEntity wantupdatecommentactualbody
      */
     public function updateComment(
         RequestContext $requestContext,
@@ -83,9 +83,9 @@ class CommentRepository
     /**
      * according toitemitemgetcommentlist.
      *
-     * @param RequestContext $requestContext requestupdown文
+     * @param RequestContext $requestContext requestupdowntext
      * @param GetCommentsWhereVo $whereVo queryitemitemvalueobject
-     * @return array<CommentEntity> comment实bodyarray
+     * @return array<CommentEntity> commentactualbodyarray
      */
     public function getCommentsByConditions(
         RequestContext $requestContext,
@@ -104,11 +104,11 @@ class CommentRepository
     }
 
     /**
-     * according tocommentIDarraygetto应commentlist.
+     * according tocommentIDarraygettoshouldcommentlist.
      *
-     * @param RequestContext $requestContext requestupdown文
+     * @param RequestContext $requestContext requestupdowntext
      * @param array $commentIds commentIDarray
-     * @return array<CommentEntity> comment实bodyarray
+     * @return array<CommentEntity> commentactualbodyarray
      */
     public function getCommentsByIds(
         RequestContext $requestContext,
@@ -120,11 +120,11 @@ class CommentRepository
     }
 
     /**
-     * according tocommentIDgetsinglecomment实body.
+     * according tocommentIDgetsinglecommentactualbody.
      *
-     * @param RequestContext $requestContext requestupdown文
+     * @param RequestContext $requestContext requestupdowntext
      * @param int $commentId commentID
-     * @return ?CommentEntity comment实body,ifnot存inthenreturnnull
+     * @return ?CommentEntity commentactualbody,ifnotexistsinthenreturnnull
      */
     public function getCommentById(
         RequestContext $requestContext,
@@ -145,9 +145,9 @@ class CommentRepository
     }
 
     /**
-     * deletefinger定comment.
+     * deletefingersetcomment.
      *
-     * @param RequestContext $requestContext requestupdown文
+     * @param RequestContext $requestContext requestupdowntext
      * @param int $commentId commentID
      * @return array deletecommentIDarray
      */
@@ -157,9 +157,9 @@ class CommentRepository
     }
 
     /**
-     * batchquantitydeletefinger定commentandits所have子comment.
+     * batchquantitydeletefingersetcommentandits havechildcomment.
      *
-     * @param RequestContext $requestContext requestupdown文
+     * @param RequestContext $requestContext requestupdowntext
      * @param array $commentIds wantdeletecommentIDarray
      * @return array deletecommentIDarray
      */
@@ -167,7 +167,7 @@ class CommentRepository
         RequestContext $requestContext,
         array $commentIds
     ): array {
-        // getthisitemcommentdown所have子comment
+        // getthisitemcommentdown havechildcomment
         $descendantIds = $this->treeIndexRepository->getDescendantIdsByAncestorIds(
             $requestContext,
             CommentTreeIndexModel::query(),
@@ -176,7 +176,7 @@ class CommentRepository
 
         $deletedCommentIds = array_unique([...$commentIds, ...$descendantIds]);
 
-        // deletethisitemcommentbyand所have子comment
+        // deletethisitemcommentbyand havechildcomment
         CommentModel::query()->whereIn('id', $deletedCommentIds)
             ->where('organization_code', $requestContext->getOrganizationCode())
             ->delete();
@@ -187,7 +187,7 @@ class CommentRepository
     /**
      * batchquantityrestorealreadydeletecomment.
      *
-     * @param RequestContext $requestContext requestupdown文
+     * @param RequestContext $requestContext requestupdowntext
      * @param array $commentIds wantrestorecommentIDarray
      */
     public function batchRestore(
@@ -200,10 +200,10 @@ class CommentRepository
     }
 
     /**
-     * according toresourceIDget所have相closecomment.
+     * according toresourceIDget have相closecomment.
      *
      * @param int $resourceId resourceID
-     * @return array<CommentEntity> comment实bodyarray
+     * @return array<CommentEntity> commentactualbodyarray
      */
     public function getCommentsByResourceId(string $organizationCode, int $resourceId): array
     {
@@ -217,9 +217,9 @@ class CommentRepository
     /**
      * according toqueryitemitemgetcommentlist.
      *
-     * @param RequestContext $requestContext requestupdown文
+     * @param RequestContext $requestContext requestupdowntext
      * @param GetCommentsWhereVo $commentsWhereVo queryitemitemvalueobject
-     * @return array<CommentEntity> comment实bodyarray
+     * @return array<CommentEntity> commentactualbodyarray
      */
     public function query(RequestContext $requestContext, GetCommentsWhereVo $commentsWhereVo): array
     {
@@ -268,7 +268,7 @@ class CommentRepository
      * willCommentModelconvertforCommentEntity.
      *
      * @param CommentModel $model commentmodel
-     * @return CommentEntity convertbackcomment实body
+     * @return CommentEntity convertbackcommentactualbody
      */
     private function modelToEntity(CommentModel $model): CommentEntity
     {
@@ -292,10 +292,10 @@ class CommentRepository
     }
 
     /**
-     * will多CommentModelconvertforCommentEntityarray.
+     * willmultipleCommentModelconvertforCommentEntityarray.
      *
      * @param mixed $models commentmodelset
-     * @return array<CommentEntity> comment实bodyarray
+     * @return array<CommentEntity> commentactualbodyarray
      */
     private function modelsToEntities(mixed $models): array
     {

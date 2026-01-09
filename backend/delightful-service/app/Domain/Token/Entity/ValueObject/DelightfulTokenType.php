@@ -8,14 +8,14 @@ declare(strict_types=1);
 namespace App\Domain\Token\Entity\ValueObject;
 
 /**
- * tokentype:0:账number,1:user,2:organization,3:application,4:process.
+ * tokentype:0:accountnumber,1:user,2:organization,3:application,4:process.
  */
 enum DelightfulTokenType: int
 {
     // user(organizationdownoneuser),type_relation_valueforuserid
     case User = 0;
 
-    // 账number,type_relation_valuefor账numberid
+    // accountnumber,type_relation_valueforaccountnumberid
     case Account = 1;
 
     // organization,type_relation_valuefororganizationid
@@ -27,7 +27,7 @@ enum DelightfulTokenType: int
     // process,type_relation_valueforprocessid
     case Flow = 4;
 
-    // day书open放platform
+    // daybookopenputplatform
     case TeamshareOpenPlatform = 5;
 
     /**

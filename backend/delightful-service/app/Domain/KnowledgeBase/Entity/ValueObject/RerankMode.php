@@ -8,36 +8,36 @@ declare(strict_types=1);
 namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 
 /**
- * 重sort模typeenumcategory.
+ * 重sortmodetypeenumcategory.
  *
- * definition两type重sort模type:
+ * definition两type重sortmodetype:
  * - RERANKING_MODEL: use重sortmodeltoretrieveresultconduct重sort
- * - WEIGHTED_SCORE: useadd权minute数toretrieveresultconduct重sort
+ * - WEIGHTED_SCORE: useadd权minutecounttoretrieveresultconduct重sort
  */
 class RerankMode
 {
     /**
      * 重sortmodel.
      *
-     * usespecialized重sortmodel(如 BAAI/bge-reranker-large)toretrieveresultconduct重sort.
+     * usespecialized重sortmodel(like BAAI/bge-reranker-large)toretrieveresultconduct重sort.
      * 重sortmodelwillaccording toqueryanddocument相closepropertygiveoutmoreaccuratesort.
-     * the模typepassconfigurationparameter `reranking_mode` fieldset,
+     * themodetypepassconfigurationparameter `reranking_mode` fieldset,
      * fromdatabasemiddle retrieve_config configurationget.
      */
     public const RERANKING_MODEL = 'reranking_model';
 
     /**
-     * add权minute数.
+     * add权minutecount.
      *
-     * usedifferentretrievemethodminute数add权calculatefinalminute数,toretrieveresultconduct重sort.
+     * usedifferentretrievemethodminutecountadd权calculatefinalminutecount,toretrieveresultconduct重sort.
      * for example,cansettoquantityretrieveresultweightfor 0.7,keywordretrieveresultweightfor 0.3.
-     * the模typepassconfigurationparameter `reranking_mode` fieldset,
+     * themodetypepassconfigurationparameter `reranking_mode` fieldset,
      * fromdatabasemiddle retrieve_config configurationget.
      */
     public const WEIGHTED_SCORE = 'weighted_score';
 
     /**
-     * get所havecanuse重sort模type.
+     * get havecanuse重sortmodetype.
      *
      * @return array<string>
      */
@@ -50,7 +50,7 @@ class RerankMode
     }
 
     /**
-     * checkgive定重sort模typewhethervalid.
+     * checkgiveset重sortmodetypewhethervalid.
      */
     public static function isValid(string $mode): bool
     {

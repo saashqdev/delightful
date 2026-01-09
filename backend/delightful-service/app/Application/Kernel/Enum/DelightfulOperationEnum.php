@@ -23,7 +23,7 @@ enum DelightfulOperationEnum: string
     }
 
     /**
-     * to应 i18n translation key.
+     * toshould i18n translation key.
      */
     public function translationKey(): string
     {

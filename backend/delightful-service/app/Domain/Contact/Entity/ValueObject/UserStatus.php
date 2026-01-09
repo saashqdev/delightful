@@ -12,7 +12,7 @@ namespace App\Domain\Contact\Entity\ValueObject;
  */
 enum UserStatus: int
 {
-    // 0:freeze (just同passcomenotactivate)
+    // 0:freeze (justsamepasscomenotactivate)
     case Frozen = 0;
 
     // 1:activated

@@ -25,7 +25,7 @@ class CreateTaskSchedulerLog extends Migration
             $table->dateTime('expect_time')->comment('expectedexecutetime');
             $table->dateTime('actual_time')->nullable()->comment('actualexecutetime');
             $table->tinyInteger('type')->default(2)->comment('type');
-            $table->integer('cost_time')->default(0)->comment('耗o clock');
+            $table->integer('cost_time')->default(0)->comment('consumeo clock');
             $table->tinyInteger('status')->default(0)->comment('status');
             $table->json('callback_method')->comment('callbackmethod');
             $table->json('callback_params')->comment('callbackparameter');

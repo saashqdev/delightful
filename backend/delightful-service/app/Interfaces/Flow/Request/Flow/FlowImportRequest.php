@@ -36,12 +36,12 @@ class FlowImportRequest extends FormRequest
     {
         return [
             'import_data' => 'importdata',
-            'import_data.main_flow' => '主process',
-            'import_data.main_flow.code' => '主processencoding',
-            'import_data.main_flow.name' => '主processname',
-            'import_data.main_flow.nodes' => '主processsectionpoint',
-            'import_data.main_flow.edges' => '主processside缘',
-            'import_data.sub_flows' => '子process',
+            'import_data.main_flow' => 'mainprocess',
+            'import_data.main_flow.code' => 'mainprocessencoding',
+            'import_data.main_flow.name' => 'mainprocessname',
+            'import_data.main_flow.nodes' => 'mainprocesssectionpoint',
+            'import_data.main_flow.edges' => 'mainprocessside缘',
+            'import_data.sub_flows' => 'childprocess',
             'import_data.tool_flows' => 'toolprocess',
             'import_data.tool_sets' => 'toolcollection',
         ];

@@ -15,12 +15,12 @@ class AdminModeGroupAggregateDTO extends AbstractDTO
     protected ?AdminModeGroupDTO $group = null;
 
     /**
-     * @var ModeGroupModelDTO[] theminutegroupto应modeldetailedinfoarray
+     * @var ModeGroupModelDTO[] theminutegrouptoshouldmodeldetailedinfoarray
      */
     protected array $models = [];
 
     /**
-     * @var ModeGroupModelDTO[] theminutegroupto应graphlikemodeldetailedinfoarray(VLM)
+     * @var ModeGroupModelDTO[] theminutegrouptoshouldgraphlikemodeldetailedinfoarray(VLM)
      */
     protected array $imageModels = [];
 

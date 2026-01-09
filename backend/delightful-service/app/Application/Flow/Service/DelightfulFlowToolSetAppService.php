@@ -75,7 +75,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = PermissionDataIsolation::create($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
 
-        // onlyquery目frontuser具havepermissiontoolcollection
+        // onlyqueryitemfrontuserwithhavepermissiontoolcollection
         $resources = $this->operationPermissionAppService->getResourceOperationByUserIds(
             $permissionDataIsolation,
             ResourceType::ToolSet,
@@ -83,7 +83,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         )[$authorization->getId()] ?? [];
         $resourceIds = array_keys($resources);
 
-        // its实nottoosuitable whereIn 暂o clocknot想toothergoodway
+        // itsactualnottoosuitable whereIn 暫o clocknot想toothergoodway
         $query->setCodes($resourceIds);
 
         $data = $this->delightfulFlowToolSetDomainService->queries($dataIsolation, $query, $page);

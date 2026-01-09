@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_contact_third_platform_id_mapping', static function (Blueprint $table) {
             $table->dropIndex('unique_origin_id_mapping_type');
-            // forcheckdifferentthethird-partyplatformorganizationuserwhetheralready经mappingpass,needadjustindex keyorder
+            // forcheckdifferentthethird-partyplatformorganizationuserwhetheralreadyalreadymappingpass,needadjustindex keyorder
             $table->unique(['origin_id', 'mapping_type', 'delightful_organization_code', 'third_platform_type'], 'unique_origin_id_mapping_type');
         });
     }

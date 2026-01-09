@@ -34,12 +34,12 @@ class EndNodeRunner extends NodeRunner
             $result = $output->getKeyValue($executionData->getExpressionFieldData());
         }
 
-        // endsectionpointback,notexecuteback续sectionpoint
+        // endsectionpointback,notexecuteback続sectionpoint
         $vertexResult->setChildrenIds([]);
         $vertexResult->setResult($result);
         $executionData->saveNodeContext($this->node->getNodeId(), $result);
 
-        // 动statesettingendsectionpoint id
+        // autostatesettingendsectionpoint id
         $executionData->getDelightfulFlowEntity()?->setEndNode($this->node);
     }
 }

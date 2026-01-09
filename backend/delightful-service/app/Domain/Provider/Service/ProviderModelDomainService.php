@@ -53,10 +53,10 @@ readonly class ProviderModelDomainService
      */
     public function getByIdOrModelId(ProviderDataIsolation $dataIsolation, string $id): ?ProviderModelEntity
     {
-        // get所havecategorycanusemodel
+        // get havecategorycanusemodel
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
-        // loopjudge id equal $id or者 model_id equal $id
+        // loopjudge id equal $id orperson model_id equal $id
         foreach ($allModels as $model) {
             if ((string) $model->getId() === $id || $model->getModelId() === $id) {
                 return $model;
@@ -93,13 +93,13 @@ readonly class ProviderModelDomainService
         }
 
         if ($providerModelDTO->getId()) {
-            // updatemodel:verifymodelwhether存in(getByIdwillinnot存ino clockthrowexception)
+            // updatemodel:verifymodelwhetherexistsin(getByIdwillinnotexistsino clockthrowexception)
             $this->providerModelRepository->getById($dataIsolation, $providerModelDTO->getId());
         } else {
             // createmodelo clockdefaultenable
             $providerModelDTO->setStatus(Status::Enabled);
         }
-        // verify service_provider_config_id whether存in
+        // verify service_provider_config_id whetherexistsin
         if ($providerModelDTO->getServiceProviderConfigId()) {
             $providerConfigEntity = $this->providerConfigRepository->getById($dataIsolation, (int) $providerModelDTO->getServiceProviderConfigId());
             if ($providerConfigEntity === null) {
@@ -107,7 +107,7 @@ readonly class ProviderModelDomainService
             }
         }
 
-        // 目frontsavemodelinterfaceonlybigmodeluse,thereforeforcetypeis llm
+        // itemfrontsavemodelinterfaceonlybigmodeluse,thereforeforcetypeis llm
         $providerModelDTO->setCategory(Category::LLM);
         $modelEntity = $this->providerModelRepository->saveModel($dataIsolation, $providerModelDTO);
 
@@ -137,7 +137,7 @@ readonly class ProviderModelDomainService
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param string[] $ids modelIDarray
-     * @return ProviderModelEntity[] model实bodyarray,byIDforkey
+     * @return ProviderModelEntity[] modelactualbodyarray,byIDforkey
      */
     public function getModelsByIds(ProviderDataIsolation $dataIsolation, array $ids): array
     {
@@ -154,7 +154,7 @@ readonly class ProviderModelDomainService
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param string[] $modelIds modelidentifierarray
-     * @return array<string, ProviderModelEntity[]> model实bodyarray,bymodel_idforkey,valueforto应modellist
+     * @return array<string, ProviderModelEntity[]> modelactualbodyarray,bymodel_idforkey,valuefortoshouldmodellist
      */
     public function getModelsByModelIds(ProviderDataIsolation $dataIsolation, array $modelIds): array
     {
@@ -182,11 +182,11 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * getfinger定modelmostnewconfigurationversionID.
+     * getfingersetmodelmostnewconfigurationversionID.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param int $serviceProviderModelId modelID
-     * @return null|int mostnewversionID,ifnot存inthenreturnnull
+     * @return null|int mostnewversionID,ifnotexistsinthenreturnnull
      */
     public function getLatestConfigVersionId(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?int
     {
@@ -194,11 +194,11 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * getfinger定modelmostnewconfigurationversion实body.
+     * getfingersetmodelmostnewconfigurationversionactualbody.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param int $serviceProviderModelId modelID
-     * @return null|ProviderModelConfigVersionEntity mostnewversion实body,ifnot存inthenreturnnull
+     * @return null|ProviderModelConfigVersionEntity mostnewversionactualbody,ifnotexistsinthenreturnnull
      */
     public function getLatestConfigVersionEntity(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?ProviderModelConfigVersionEntity
     {
@@ -215,7 +215,7 @@ readonly class ProviderModelDomainService
             return;
         }
 
-        // convertforconfigurationversion实bodyandsave(transaction,versionnumberincrement,markcurrentversionallin Repository insidecomplete)
+        // convertforconfigurationversionactualbodyandsave(transaction,versionnumberincrement,markcurrentversionallin Repository insidecomplete)
         $versionEntity = ProviderModelAssembler::toConfigVersionEntity($modelEntity);
         $this->providerModelConfigVersionRepository->saveVersionWithTransaction($dataIsolation, $versionEntity);
     }

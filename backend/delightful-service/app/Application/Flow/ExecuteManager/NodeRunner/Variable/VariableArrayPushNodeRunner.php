@@ -20,7 +20,7 @@ use Delightful\FlowExprEngine\ComponentFactory;
 #[FlowNodeDefine(
     type: NodeType::VariableArrayPush->value,
     code: NodeType::VariableArrayPush->name,
-    name: '变quantity / arraytail部append',
+    name: 'changequantity / arraytail部append',
     paramsConfig: VariableArrayPushNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,
@@ -40,7 +40,7 @@ class VariableArrayPushNodeRunner extends NodeRunner
         $result = $inputFields->getForm()->getKeyValue($executionData->getExpressionFieldData());
         $variableName = $result['variable_name'];
 
-        // detect原comedatawhether存in,andisarray
+        // detectoriginalcomedatawhetherexistsin,andisarray
         $variableElementList = $executionData->variableGet($variableName);
         if (is_null($variableElementList)) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.variable.variable_not_exist', ['var_name' => $variableName]);
@@ -49,7 +49,7 @@ class VariableArrayPushNodeRunner extends NodeRunner
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.variable.variable_not_array', ['var_name' => $variableName]);
         }
         $elementList = $result['element_list'];
-        // if变quantityvalueispasstable达typeget,iswhen做one整body
+        // ifchangequantityvalueispasstable达typeget,iswhenmakeone整body
         if ($inputFields->getForm()->getProperties()['element_list']->getExecuteValue()?->isExpression()) {
             $elementList = [$elementList];
         }

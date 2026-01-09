@@ -644,7 +644,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $this->assertSame(1000, $res['code'], $res['message']);
     }
 
-    // delete所haveknowledge base
+    // delete haveknowledge base
     public function deleteAllKnowledgeBase()
     {
         // getknowledge baselist
@@ -695,8 +695,8 @@ class KnowledgeBaseApiTest extends HttpTestCase
     protected function clearTestKnowledgeBaseData()
     {
         // according toactualsituationimplementcleanuplogic
-        // candirectlycalldatabase操asdeletetestdata
-        // or者callcorrespondingservicemethod
+        // candirectlycalldatabaseoperationasdeletetestdata
+        // orpersoncallcorrespondingservicemethod
     }
 
     protected function createKnowledgeBase(array $data = []): array

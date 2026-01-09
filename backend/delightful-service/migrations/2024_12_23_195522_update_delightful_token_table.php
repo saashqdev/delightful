@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_tokens', static function (Blueprint $table) {
             // extra
-            $table->text('extra')->nullable()->comment('额outsideinformation');
+            $table->text('extra')->nullable()->comment('quotaoutsideinformation');
         });
     }
 

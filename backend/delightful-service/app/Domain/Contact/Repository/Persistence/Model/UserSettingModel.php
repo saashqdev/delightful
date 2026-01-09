@@ -14,13 +14,13 @@ use Hyperf\Snowflake\Concern\Snowflake;
 /**
  * @property int $id 雪flowerID
  * @property string $organization_code organizationencoding
- * @property string $delightful_id 账numberDelightfulID
+ * @property string $delightful_id accountnumberDelightfulID
  * @property string $user_id userID
  * @property string $key settingkey
  * @property array $value settingvalue
- * @property string $creator create者
+ * @property string $creator createperson
  * @property DateTime $created_at createtime
- * @property string $modifier modify者
+ * @property string $modifier modifyperson
  * @property DateTime $updated_at updatetime
  */
 class UserSettingModel extends AbstractModel

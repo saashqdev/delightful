@@ -26,7 +26,7 @@ use function di;
 
 #[BuiltInToolDefine]
 /**
- * 采useone seq push所havesearch相closecontent,front端notagain多 seq mergebecomeonerender.
+ * 采useone seq push havesearch相closecontent,frontclientnotagainmultiple seq mergebecomeonerender.
  */
 class EasyInternetSearchV2BuiltInTool extends AbstractBuiltInTool
 {
@@ -42,7 +42,7 @@ class EasyInternetSearchV2BuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'MagicInternetsearch简single版,batchquantitytouser多implicationsameor者differentissueconductinternetsearch.';
+        return 'MagicInternetsearchsimplesingleversion,batchquantitytousermultipleimplicationsameorpersondifferentissueconductinternetsearch.';
     }
 
     public function getCallback(): ?Closure

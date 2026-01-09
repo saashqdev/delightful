@@ -12,7 +12,7 @@ use Throwable;
 class MethodNotFoundException extends MCPException
 {
     /**
-     * JSON-RPCerror码.
+     * JSON-RPCerrorcode.
      */
     protected int $rpcCode = -32601;
 

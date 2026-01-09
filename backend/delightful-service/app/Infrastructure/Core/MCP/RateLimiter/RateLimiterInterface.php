@@ -11,14 +11,14 @@ use App\Infrastructure\Core\MCP\Exception\InvalidParamsException;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * speedratelimit器interface.
+ * speedratelimitdeviceinterface.
  */
 interface RateLimiterInterface
 {
     /**
-     * checkcustomer端whetherallowexecuterequest.
+     * checkcustomerclientwhetherallowexecuterequest.
      *
-     * @throws InvalidParamsException whenrequest超passspeedratelimito clock
+     * @throws InvalidParamsException whenrequestexceedspassspeedratelimito clock
      */
     public function check(string $clientId, MessageInterface $request): void;
 

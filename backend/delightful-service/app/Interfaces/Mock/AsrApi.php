@@ -63,7 +63,7 @@ class AsrApi
             'transcript_file_config' => $transcriptFileConfig,
         ]);
 
-        // initializetaskstatus(resetround询count)
+        // initializetaskstatus(resetroundquerycount)
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $this->redis->del($countKey);
 
@@ -84,7 +84,7 @@ class AsrApi
     }
 
     /**
-     * complete ASR task(supportround询)- V2 structure化version
+     * complete ASR task(supportroundquery)- V2 structure化version
      * POST /api/v1/sandboxes/{sandboxId}/proxy/api/asr/task/finish.
      */
     public function finishTask(RequestInterface $request): array
@@ -98,10 +98,10 @@ class AsrApi
         $noteFileConfig = $request->input('note_file');
         $transcriptFileConfig = $request->input('transcript_file');
 
-        // use Redis count器mockround询enterdegree
+        // use Redis countdevicemockroundqueryenterdegree
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $count = (int) $this->redis->incr($countKey);
-        $this->redis->expire($countKey, AsrConfig::MOCK_POLLING_TTL); // 10minute钟expire
+        $this->redis->expire($countKey, AsrConfig::MOCK_POLLING_TTL); // 10minutesecondsexpire
 
         // recordcalllog
         $this->logger->info('[Mock Sandbox ASR] Finish task called (V2)', [
@@ -130,14 +130,14 @@ class AsrApi
         $targetDir = $audioConfig['target_dir'] ?? '';
         $outputFilename = $audioConfig['output_filename'] ?? 'audio';
 
-        // mocktrue实sandboxlinefor:according to output_filename renamedirectory
-        // extract原directorymiddletimetimestamp partminute(format:_YYYYMMDD_HHMMSS)
+        // mocktrueactualsandboxlinefor:according to output_filename renamedirectory
+        // extractoriginaldirectorymiddletimetimestamp partminute(format:_YYYYMMDD_HHMMSS)
         $timestamp = '';
         if (preg_match('/_(\d{8}_\d{6})$/', $targetDir, $matches)) {
             $timestamp = '_' . $matches[1];
         }
 
-        // buildnewdirectory名:智cantitle + time戳
+        // buildnewdirectoryname:智cantitle + timestamp
         $renamedDir = $outputFilename . $timestamp;
 
         // buildaudiofileinfo
@@ -148,7 +148,7 @@ class AsrApi
         $responseData = [
             'status' => SandboxAsrStatusEnum::COMPLETED->value,
             'task_key' => $taskKey,
-            'intelligent_title' => $outputFilename, // useoutputfile名asfor智cantitle
+            'intelligent_title' => $outputFilename, // useoutputfilenameasfor智cantitle
             'error_message' => null,
             'files' => [
                 'audio_file' => [
@@ -159,7 +159,7 @@ class AsrApi
                     'action_performed' => 'merged_and_created',
                     'source_path' => null,
                 ],
-                'note_file' => null, // defaultfor null,table示notefileforemptyornot存in
+                'note_file' => null, // defaultfor null,tableshownotefileforemptyornotexistsin
             ],
             'deleted_files' => [],
             'operations' => [
@@ -169,15 +169,15 @@ class AsrApi
             ],
         ];
 
-        // ifhavenotefileconfigurationandfilesize > 0,addtoreturnmiddle(mocktrue实sandboxnotefilecontentcheck)
+        // ifhavenotefileconfigurationandfilesize > 0,addtoreturnmiddle(mocktrueactualsandboxnotefilecontentcheck)
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
-            // userequestmiddleprovide target_path,whilenotis硬encodingfile名
-            // this样cancorrectsupportinternationalizationfile名
+            // userequestmiddleprovide target_path,whilenotis硬encodingfilename
+            // this样cancorrectsupportinternationalizationfilename
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 
-            // mocktrue实sandboxlinefor:onlywhennotefilehavecontento clock才returndetailedinfo
-            // thiswithinsimplifyprocess,defaultfalse设havecontent(true实sandboxwillcheckfilecontentwhetherforempty)
+            // mocktrueactualsandboxlinefor:onlywhennotefilehavecontento clock才returndetailedinfo
+            // thiswithinsimplifyprocess,defaultfalse设havecontent(trueactualsandboxwillcheckfilecontentwhetherforempty)
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
                 'path' => $noteFilePath, // userequestmiddle target_path
@@ -188,7 +188,7 @@ class AsrApi
             ];
         }
 
-        // ifhavestreamidentifyfileconfiguration,recorddelete操as
+        // ifhavestreamidentifyfileconfiguration,recorddeleteoperationas
         if ($transcriptFileConfig !== null && isset($transcriptFileConfig['source_path'])) {
             $responseData['deleted_files'][] = [
                 'path' => $transcriptFileConfig['source_path'],

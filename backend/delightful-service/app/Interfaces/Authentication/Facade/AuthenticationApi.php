@@ -29,7 +29,7 @@ class AuthenticationApi
 
     public function authCheck(RequestInterface $request): array
     {
-        // according tologin码,getto应accessenvironment,goMagic/day书validationwhetherhavepermission
+        // according tologincode,gettoshouldaccessenvironment,goMagic/daybookvalidationwhetherhavepermission
         $authorization = (string) $request->input('authorization', '');
         if (empty($authorization)) {
             $authorization = (string) $request->header('authorization');
@@ -45,7 +45,7 @@ class AuthenticationApi
     }
 
     /**
-     * front端from身businessuse,get authorization to应privateidentify码
+     * frontclientfrom身businessuse,get authorization toshouldprivateidentifycode
      */
     public function authEnvironment(RequestInterface $request): array
     {

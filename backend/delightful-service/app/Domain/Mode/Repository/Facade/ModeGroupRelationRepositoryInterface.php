@@ -18,7 +18,7 @@ interface ModeGroupRelationRepositoryInterface
     public function findById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeGroupRelationEntity;
 
     /**
-     * according tomodeIDget所haveassociateclose系.
+     * according tomodeIDget haveassociateclose系.
      * @return ModeGroupRelationEntity[]
      */
     public function findByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;
@@ -40,7 +40,7 @@ interface ModeGroupRelationRepositoryInterface
     public function deleteByGroupId(ModeDataIsolation $dataIsolation, int|string $groupId): bool;
 
     /**
-     * according tomodeIDdelete所haveassociateclose系.
+     * according tomodeIDdelete haveassociateclose系.
      */
     public function deleteByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): bool;
 
@@ -50,7 +50,7 @@ interface ModeGroupRelationRepositoryInterface
     public function batchSave(ModeDataIsolation $dataIsolation, array $relationEntities);
 
     /**
-     * according to多modeIDbatchquantitygetassociateclose系.
+     * according tomultiplemodeIDbatchquantitygetassociateclose系.
      * @param int[]|string[] $modeIds
      * @return ModeGroupRelationEntity[]
      */

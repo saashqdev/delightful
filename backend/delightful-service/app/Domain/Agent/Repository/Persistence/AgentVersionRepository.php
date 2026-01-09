@@ -33,7 +33,7 @@ class AgentVersionRepository extends AbstractRepository implements AgentVersionR
         $builder = $this->createBuilder($dataIsolation, DelightfulAgentModel::query());
         $versionBuilder = $this->createBuilder($dataIsolation, DelightfulAgentVersionModel::query());
 
-        // query所haveenableversion id
+        // query haveenableversion id
         $botVersionIds = $builder
             ->where('status', '=', DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value)
             ->whereNotNull('bot_version_id')

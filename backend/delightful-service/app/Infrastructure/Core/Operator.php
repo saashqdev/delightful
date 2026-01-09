@@ -25,7 +25,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * get操authorID.
+     * getoperationauthorID.
      */
     public function getUid(): string
     {
@@ -33,7 +33,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * get操authorname.
+     * getoperationauthorname.
      */
     public function getName(): string
     {
@@ -41,7 +41,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * get操astime.
+     * getoperationastime.
      */
     public function getTime(): DateTime
     {
@@ -49,7 +49,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * setting操authorID.
+     * settingoperationauthorID.
      */
     public function setUid(string $uid): self
     {
@@ -58,7 +58,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * setting操authorname.
+     * settingoperationauthorname.
      */
     public function setName(string $name): self
     {
@@ -67,7 +67,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * setting操astime.
+     * settingoperationastime.
      */
     public function setTime(DateTime $time): self
     {

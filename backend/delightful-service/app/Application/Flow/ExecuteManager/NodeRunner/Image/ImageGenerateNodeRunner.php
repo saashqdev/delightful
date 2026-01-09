@@ -80,9 +80,9 @@ class ImageGenerateNodeRunner extends NodeRunner
         $data['source_type'] = ImageGenerateSourceEnum::FLOW_NODE;
         $data['source_id'] = $executionData->getAgentId() ?? $executionData->getFlowCode();
         $images = $this->llmAppService->imageGenerate($delightfulUserAuthorization, $model, '', $data);
-        // processonly取one
+        // processonlygetone
         $image = $images[0];
-        // thiswithinmaybeis url,base64,均recordtoprocessexecuteattachmentmiddle(thiso clockwillconductuploadto云service端).uploadfailedfilewilldirectlyskip
+        // thiswithinmaybeis url,base64,均recordtoprocessexecuteattachmentmiddle(thiso clockwillconductuploadtocloudserviceclient).uploadfailedfilewilldirectlyskip
         $attachments = $this->recordFlowExecutionAttachments($executionData, [$image], true);
         $vertexResult->addDebugLog('attachments', array_map(fn (AbstractAttachment $attachment) => $attachment->toArray(), $attachments));
 

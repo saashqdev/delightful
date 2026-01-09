@@ -84,7 +84,7 @@ class ModelConfigEntity extends AbstractEntity
 
     public function checkRpm(): void
     {
-        // 目frontnotlimit
+        // itemfrontnotlimit
     }
 
     public function calculateInputCost(int $inputTokens, int $outputTokens): string

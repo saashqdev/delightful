@@ -48,7 +48,7 @@ class AccessTokenAppService extends AbstractLLMAppService
     {
         $dataIsolation = $this->createLLMDataIsolation($authorization);
         if ($savingAccessTokenEntity->getType()->isUser()) {
-            // person版increaseassociate
+            // personversionincreaseassociate
             $savingAccessTokenEntity->setRelationId($dataIsolation->getCurrentUserId());
         }
         if ($savingAccessTokenEntity->getType()->isApplication()) {

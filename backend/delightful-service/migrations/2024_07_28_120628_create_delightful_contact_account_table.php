@@ -19,23 +19,23 @@ return new class extends Migration {
         }
         Schema::create('delightful_contact_accounts', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('delightful_id', 64)->comment('账numberid,cross-tenant(organization)唯one. foravoidanduser_id(organizationinside唯one)conceptobfuscate,thereforeup名delightful_id')->default('');
-            // 账numbertype
-            $table->tinyInteger('type')->comment('账numbertype,0:ai,1:personcategory')->default(0);
+            $table->string('delightful_id', 64)->comment('accountnumberid,cross-tenant(organization)uniqueone. foravoidanduser_id(organizationinsideuniqueone)conceptobfuscate,thereforeupnamedelightful_id')->default('');
+            // accountnumbertype
+            $table->tinyInteger('type')->comment('accountnumbertype,0:ai,1:personcategory')->default(0);
             // ai_code
             $table->string('ai_code', 64)->comment('aiencoding')->default('');
-            // 账numberstatus
-            $table->tinyInteger('status')->comment('账numberstatus,0:normal,1:disable')->default(0);
+            // accountnumberstatus
+            $table->tinyInteger('status')->comment('accountnumberstatus,0:normal,1:disable')->default(0);
             // international prefix
             $table->string('country_code', 16)->comment('international prefix')->default('');
-            // hand机number
-            $table->string('phone', 64)->comment('hand机number')->default('');
+            // handmachinenumber
+            $table->string('phone', 64)->comment('handmachinenumber')->default('');
             // mailbox
             $table->string('email', 64)->comment('mailbox')->default('');
-            // true名
-            $table->string('real_name', 64)->comment('true名')->default('');
-            // property别
-            $table->tinyInteger('gender')->comment('property别,0:unknown;1:男;2:女')->default(0);
+            // truename
+            $table->string('real_name', 64)->comment('truename')->default('');
+            // propertyother
+            $table->tinyInteger('gender')->comment('propertyother,0:unknown;1:男;2:女')->default(0);
             // attachaddproperty
             $table->string('extra', 1024)->comment('attachaddproperty.')->default('');
 
@@ -45,7 +45,7 @@ return new class extends Migration {
             $table->unique(['country_code', 'phone'], 'unq_country_code_phone');
             $table->timestamps();
             $table->softDeletes();
-            $table->comment('user账numbertable,recorduser跨organization唯oneinfo,such ashand机number/true名/property别/usertypeetc');
+            $table->comment('useraccountnumbertable,recordusercrossorganizationuniqueoneinfo,such ashandmachinenumber/truename/propertyother/usertypeetc');
         });
     }
 

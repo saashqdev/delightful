@@ -41,14 +41,14 @@ class DelightfulUserDomainService extends AbstractContactDomainService
      */
     public function addFriend(DataIsolation $dataIsolation, string $friendId): bool
     {
-        // check uid and friendId whether存in
+        // check uid and friendId whetherexistsin
         $uid = $dataIsolation->getCurrentUserId();
         $usersInfo = $this->userRepository->getUserByIdsAndOrganizations([$uid, $friendId]);
         $usersInfo = array_column($usersInfo, null, 'user_id');
         if (! isset($usersInfo[$uid], $usersInfo[$friendId])) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
-        // detectwhetheralready经isgood友
+        // detectwhetheralreadyalreadyisgoodfriend
         if ($this->friendRepository->isFriend($uid, $friendId)) {
             return true;
         }
@@ -59,10 +59,10 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             // ifis ai ,directlyagree
             $friendStatus = FriendStatus::Agree;
         } else {
-            // ifispersoncategory,checkhe们whether处at同oneorganization
+            // ifispersoncategory,checkhe们whether处atsameoneorganization
             $this->assertUserInOrganization($friendId, $dataIsolation->getCurrentOrganizationCode());
         }
-        // willgood友close系write friend table.
+        // willgoodfriendclose系write friend table.
         $this->friendRepository->insertFriend([
             'id' => IdGenerator::getSnowId(),
             'user_id' => $uid,
@@ -78,7 +78,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * checkcurrentuserwhetherincurrentorganizationinside,andand账numberisactivatedstatus
+     * checkcurrentuserwhetherincurrentorganizationinside,andandaccountnumberisactivatedstatus
      */
     public function assertUserInOrganization(string $userId, string $currentOrganizationCode): void
     {
@@ -135,9 +135,9 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
     public function searchFriend(string $keyword): array
     {
-        // check uid and friendId whether存in
+        // check uid and friendId whetherexistsin
         [$popular, $latest] = $this->userRepository->searchByKeyword($keyword);
-        // 按mostpopularandmostnewadd入each取frontthree
+        // 按mostpopularandmostnewadd入eachgetfrontthree
         return $this->getAgents($popular, $latest);
     }
 
@@ -177,7 +177,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return [];
         }
 
-        // 2. 收collection delightful_ids
+        // 2. receivecollection delightful_ids
         $delightfulIds = [];
         $aiCodeToDelightfulIdMap = [];
         foreach ($accounts as $account) {
@@ -235,7 +235,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         // mergeuserorganizationandofficialorganization
         $orgCodes = array_filter(array_unique(array_merge($userOrganizations, [$officialOrganizationCode])));
 
-        // from usertable拿basicinfo,support多organizationquery
+        // from usertable拿basicinfo,supportmultipleorganizationquery
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds, $orgCodes);
 
         // checkcurrentuserwhether拥haveofficialorganization
@@ -243,7 +243,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
         // according touserwhether拥haveofficialorganizationcomedecidefilterstrategy
         if (! $hasOfficialOrganization) {
-            // ifusernothaveofficialorganization,filter掉officialorganizationnonAIuser
+            // ifusernothaveofficialorganization,filterdropofficialorganizationnonAIuser
             $users = array_filter($users, static function (DelightfulUserEntity $user) use ($officialOrganizationCode) {
                 // ifnotisofficialorganization,directlyretain
                 if ($user->getOrganizationCode() !== $officialOrganizationCode) {
@@ -260,7 +260,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
         // parseavataretcinfo
         $delightfulIds = array_column($users, 'delightful_id');
-        // from account table拿hand机numbertrue名etcinfo
+        // from account table拿handmachinenumbertruenameetcinfo
         $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($delightfulIds);
         return UserAssembler::getUsersDetail($users, $accounts);
     }
@@ -282,7 +282,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * will flowCodes settingto friendQueryDTO middle,andreturn flowCodewhetheristheusergood友.
+     * will flowCodes settingto friendQueryDTO middle,andreturn flowCodewhetheristheusergoodfriend.
      * @return array<string, DelightfulFriendEntity>
      */
     public function getUserAgentFriendsList(FriendQueryDTO $friendQueryDTO, DataIsolation $dataIsolation): array
@@ -401,7 +401,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds);
         // parseavataretcinfo
         $delightfulIds = array_column($users, 'delightful_id');
-        // from account table拿hand机numbertrue名etcinfo
+        // from account table拿handmachinenumbertruenameetcinfo
         $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($delightfulIds);
         return UserAssembler::getUsersDetail($users, $accounts);
     }
@@ -417,17 +417,17 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * according touserIDgetuserhand机number.
+     * according touserIDgetuserhandmachinenumber.
      */
     public function getUserPhoneByUserId(string $userId): ?string
     {
-        // 先getuserinfo
+        // firstgetuserinfo
         $user = $this->userRepository->getUserById($userId);
         if ($user === null) {
             return null;
         }
 
-        // pass delightful_id get账numberinfo
+        // pass delightful_id getaccountnumberinfo
         $account = $this->accountRepository->getAccountInfoByDelightfulId($user->getDelightfulId());
         if ($account === null) {
             return null;
@@ -530,7 +530,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * check两userwhetherisgood友close系.
+     * check两userwhetherisgoodfriendclose系.
      */
     public function isFriend(string $userId, string $friendId): bool
     {
@@ -544,7 +544,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             // according to ai code query delightful id
             $accounts = $this->accountRepository->getAccountInfoByAiCodes($friendQueryDTO->getAiCodes());
             $delightfulIds = array_column($accounts, 'delightful_id');
-            // 转user Id
+            // transferuser Id
             $users = $this->userRepository->getUserByAccountsAndOrganization($delightfulIds, $dataIsolation->getCurrentOrganizationCode());
             $userIds = array_column($users, 'user_id');
             $friendQueryDTO->setUserIds($userIds);
@@ -596,7 +596,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
     /**
      * getmutually exclusivelock
-     * @return string lock所have者identifier
+     * @return string lock havepersonidentifier
      */
     protected function acquireLock(string $lockKey): string
     {

@@ -27,7 +27,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
      */
     protected string $flowVersion;
 
-    // interactionfinger令
+    // interactionfingercommand
     protected ?array $instructs = [];
 
     /**
@@ -109,7 +109,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected ?string $createdAt = null;
 
     /**
-     * update者userID.
+     * updatepersonuserID.
      */
     protected ?string $updatedUid = '';
 

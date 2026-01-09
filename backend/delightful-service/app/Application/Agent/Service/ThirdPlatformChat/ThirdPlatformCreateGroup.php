@@ -27,13 +27,13 @@ class ThirdPlatformCreateGroup
     // join groupwhetherneedverify:0(default):notverify 1:join groupverify
     private int $validationType = 0;
 
-    // @all userange: 0(default):所havepersonallcan@all
+    // @all userange: 0(default): havepersonallcan@all
     private int $mentionAllAuthority = 0;
 
-    // 群managetype:0(default):所havepersoncanmanage,1:onlygroup ownercanmanage
+    // groupmanagetype:0(default): havepersoncanmanage,1:onlygroup ownercanmanage
     private int $managementType = 0;
 
-    // whetherstart群mute:0(default):notmute,1:allmember muted
+    // whetherstartgroupmute:0(default):notmute,1:allmember muted
     private int $chatBannedType = 0;
 
     public function setName(string $name): void

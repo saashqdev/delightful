@@ -18,7 +18,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  *
  * @property int $id primary keyID
  * @property int $role_id roleID
- * @property string $user_id userID,to应delightful_contact_users.user_id
+ * @property string $user_id userID,toshoulddelightful_contact_users.user_id
  * @property string $organization_code organizationencoding
  * @property null|string $assigned_by minuteallocatoruserID
  * @property null|Carbon $assigned_at minute配time
@@ -32,12 +32,12 @@ class RoleUserModel extends AbstractModel
     use SoftDeletes;
 
     /**
-     * andmodelassociatetable名.
+     * andmodelassociatetablename.
      */
     protected ?string $table = 'delightful_role_users';
 
     /**
-     * canbatchquantity赋valueproperty.
+     * canbatchquantityassignvalueproperty.
      */
     protected array $fillable = [
         'id',

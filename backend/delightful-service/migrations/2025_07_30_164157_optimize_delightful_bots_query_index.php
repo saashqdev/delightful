@@ -11,7 +11,7 @@ use Hyperf\Database\Schema\Schema;
 return new class extends Migration {
     /**
      * Run the migrations.
-     * optimize delightful_bots and delightful_bot_versions table多queryscenarioperformance
+     * optimize delightful_bots and delightful_bot_versions tablemultiplequeryscenarioperformance
      * addmulti-compositeindexsupportdifferentquerymode.
      */
     public function up(): void
@@ -19,23 +19,23 @@ return new class extends Migration {
         // optimize delightful_bots table
         Schema::table('delightful_bots', function (Blueprint $table) {
             // 1. optimize chat-mode/available interface JOIN query
-            // to应SQL: delightful_bots.bot_version_id = delightful_bot_versions.id AND delightful_bots.status = '7'
+            // toshouldSQL: delightful_bots.bot_version_id = delightful_bot_versions.id AND delightful_bots.status = '7'
             $table->index(['bot_version_id', 'status'], 'idx_bot_version_status');
 
             // 2. optimizeenterpriseassistantquery (queriesAgentsmethod)
-            // to应SQL: WHERE organization_code = ? AND status = ?
+            // toshouldSQL: WHERE organization_code = ? AND status = ?
             $table->index(['organization_code', 'status'], 'idx_organization_status');
         });
 
         // optimize delightful_bot_versions table
         Schema::table('delightful_bot_versions', function (Blueprint $table) {
-            // 先deletealready存insinglefieldindex,avoidindex冗remainder
+            // firstdeletealreadyexistsinsinglefieldindex,avoidindexredundantremainder
             if (Schema::hasIndex('delightful_bot_versions', 'delightful_bot_versions_organization_code_index')) {
                 $table->dropIndex('delightful_bot_versions_organization_code_index');
             }
 
             // 3. optimizeenterprisepublishstatusquery
-            // to应SQL: WHERE organization_code = ? AND enterprise_release_status = ?
+            // toshouldSQL: WHERE organization_code = ? AND enterprise_release_status = ?
             $table->index(['organization_code', 'enterprise_release_status'], 'idx_organization_enterprise_status');
         });
     }

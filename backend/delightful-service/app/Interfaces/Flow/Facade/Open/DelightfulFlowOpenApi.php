@@ -84,7 +84,7 @@ class DelightfulFlowOpenApi extends AbstractOpenApi
         $apiChatDTO->setApiKey($this->request->header('api-key', ''));
         $apiChatDTO->setAuthorization($this->request->header('authorization', ''));
 
-        // if environment_code 存inand header middle
+        // if environment_code existsinand header middle
         if (empty($apiChatDTO->getEnvironmentCode())
             && ($this->request->hasHeader('environment-code') || $this->request->hasHeader('environment_code') || $this->request->hasHeader('teamshare_environment_code'))) {
             $apiChatDTO->setEnvironmentCode(

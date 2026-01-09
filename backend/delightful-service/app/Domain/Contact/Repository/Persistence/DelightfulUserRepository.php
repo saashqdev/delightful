@@ -67,7 +67,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             ->orderBy('created_at', 'desc')
             ->limit(3);
         $latest = Db::select($latest->toSql(), $latest->getBindings());
-        // todo statisticsgood友quantity
+        // todo statisticsgoodfriendquantity
         return [$popular, $latest];
     }
 
@@ -200,7 +200,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
 
         $delightfulId = $userEntity->getDelightfulId();
 
-        // thetwotimequery:according to delightful_id query所havethe账numberindifferentorganizationmiddleuserrecord
+        // thetwotimequery:according to delightful_id query havetheaccountnumberindifferentorganizationmiddleuserrecord
         $query = $this->userModel::query()
             ->select('organization_code')
             ->where('delightful_id', $delightfulId)
@@ -270,7 +270,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             ->orderBy('created_at', 'desc')
             ->limit(3);
         $latest = Db::select($latest->toSql(), $latest->getBindings());
-        // todo statisticsgood友quantity
+        // todo statisticsgoodfriendquantity
         return [$popular, $latest];
     }
 
@@ -398,7 +398,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         }
         // update
         $userData = $userDTO->toArray();
-        // 移exceptfor null data
+        // moveexceptfor null data
         foreach ($userData as $key => $value) {
             if ($value === null) {
                 unset($userData[$key]);
@@ -478,7 +478,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         return UserModel::query()->whereIn('user_id', $userIds)->pluck('delightful_id')->toArray();
     }
 
-    // avoid redis cacheserializeobject,占usetoo多inside存
+    // avoid redis cacheserializeobject,占usetoomultipleinsideexists
     #[Cacheable(prefix: 'userEntity', value: '_#{id}', ttl: 60)]
     private function getUser(string $id): ?array
     {
@@ -488,7 +488,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         return Db::select($query->toSql(), $query->getBindings())[0] ?? null;
     }
 
-    // avoid redis cacheserializeobject,占usetoo多inside存
+    // avoid redis cacheserializeobject,占usetoomultipleinsideexists
     #[Cacheable(prefix: 'userAccount', ttl: 60)]
     private function getUserArrayByAccountAndOrganization(string $accountId, string $organizationCode): ?array
     {
@@ -499,7 +499,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     }
 
     /**
-     * deliverinitializedefault助handsessioneventtoMQ.
+     * deliverinitializedefaulthelphandsessioneventtoMQ.
      */
     private function publishInitDefaultAssistantConversationEventForMQ(DelightfulUserEntity $userEntity): void
     {

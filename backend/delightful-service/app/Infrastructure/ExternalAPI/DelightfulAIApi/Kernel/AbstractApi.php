@@ -38,7 +38,7 @@ abstract class AbstractApi
     protected function getResponseData(ResponseInterface $response, bool $isExposeRealError = false): array
     {
         if ($response->getStatusCode() !== 200) {
-            throw new DelightfulAIApiException('requestDelightfulApifail,HTTP status码: ' . $response->getStatusCode());
+            throw new DelightfulAIApiException('requestDelightfulApifail,HTTP statuscode: ' . $response->getStatusCode());
         }
         $originContent = $response->getBody()->getContents();
         $response->getBody()->rewind();

@@ -13,12 +13,12 @@ use App\Domain\Contact\Entity\DelightfulUserEntity;
 interface AuthenticationRepositoryInterface
 {
     /**
-     * passmailboxfind账number.
+     * passmailboxfindaccountnumber.
      */
     public function findAccountByEmail(string $email): ?AccountEntity;
 
     /**
-     * passhand机numberfind账number.
+     * passhandmachinenumberfindaccountnumber.
      */
     public function findAccountByPhone(string $stateCode, string $phone): ?AccountEntity;
 

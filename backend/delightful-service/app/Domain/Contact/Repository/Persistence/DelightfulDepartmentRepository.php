@@ -107,7 +107,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     {
         $departments = $this->getSubDepartmentsByLevelCache($level, $organizationCode, $depth, $size, $offset);
         $delightfulDepartmentEntities = $this->getDepartmentsEntity($departments);
-        // downonelevel子departmenthavenotcanpredictionquantity,thereforeas long asreturnquantityandlimitone致,then认forhavedownone页
+        // downonelevelchilddepartmenthavenotcanpredictionquantity,thereforeas long asreturnquantityandlimitoneto,then认forhavedownonepage
         $hasMore = count($delightfulDepartmentEntities) === $size;
         $pageToken = $hasMore ? (string) ($offset + $size) : '';
         return new DepartmentsPageResponseDTO([
@@ -117,7 +117,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
         ]);
     }
 
-    // give定departmentidwhetherhavedownleveldepartment
+    // givesetdepartmentidwhetherhavedownleveldepartment
     #[ArrayShape([
         'parent_department_id' => 'string',
     ])]
@@ -133,7 +133,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
 
     public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?DelightfulDepartmentEntity
     {
-        // toatfront端come说, -1 table示rootdepartmentinfo.
+        // toatfrontclientcomesay, -1 tableshowrootdepartmentinfo.
         $query = $this->model->newQuery()->where('organization_code', $organizationCode);
         if ($departmentId === PlatformRootDepartmentId::Delightful) {
             $query->where(function (Builder $query) {
@@ -160,7 +160,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             ->limit(100)
             /* @phpstan-ignore-next-line */
             ->when($pageSize, function (Builder $query) use ($pageToken, $pageSize) {
-                // $pageToken forquery总quantity
+                // $pageToken forquerytotalquantity
                 $page = ((int) ceil((int) $pageToken / $pageSize)) + 1;
                 $query->forPage($page, $pageSize);
             });
@@ -169,7 +169,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * getorganization所havedepartment.
+     * getorganization havedepartment.
      * @return DelightfulDepartmentEntity[]
      */
     public function getOrganizationDepartments(string $organizationCode, array $fields = ['*'], bool $keyById = false): array
@@ -184,15 +184,15 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * getdepartment所have子departmentmembertotal.
-     * usefrom旋lockavoidandhair,onetimepropertyquery所havedepartmentdataandcacheto Redis.
+     * getdepartment havechilddepartmentmembertotal.
+     * usefrom旋lockavoidandhair,onetimepropertyquery havedepartmentdataandcacheto Redis.
      */
     public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int
     {
         $organizationCode = $delightfulDepartmentEntity->getOrganizationCode();
         $departmentId = $delightfulDepartmentEntity->getDepartmentId();
 
-        // 先tryfrom Redis cacheget
+        // firsttryfrom Redis cacheget
         $cacheKey = sprintf('department_employee_sum:%s', $organizationCode);
 
         $cachedData = $this->redis->hget($cacheKey, $departmentId);
@@ -209,7 +209,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
         }
 
         try {
-            // onetimepropertygetorganizationdown所havedepartmentdata
+            // onetimepropertygetorganizationdown havedepartmentdata
             $allDepartments = $this->getAllDepartmentsForCalculation($organizationCode);
 
             // calculateeachdepartmentemployeetotalandcacheto Redis
@@ -224,7 +224,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
-            // hair生exceptiono clockdirectlycalculatenot走cache
+            // hairgenerateexceptiono clockdirectlycalculatenot走cache
             return $this->calculateSelfAndChildrenEmployeeSum($organizationCode, $departmentId);
         } finally {
             $this->locker->release($lockKey, $lockOwner);
@@ -302,9 +302,9 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * batchquantityget多organizationrootdepartmentinfo.
+     * batchquantitygetmultipleorganizationrootdepartmentinfo.
      * @param array $organizationCodes organizationcodearray
-     * @return DelightfulDepartmentEntity[] rootdepartment实bodyarray
+     * @return DelightfulDepartmentEntity[] rootdepartmentactualbodyarray
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array
     {
@@ -408,7 +408,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * onetimepropertygetorganizationdown所havedepartmentdata,useatemployee数calculate.
+     * onetimepropertygetorganizationdown havedepartmentdata,useatemployeecountcalculate.
      */
     private function getAllDepartmentsForCalculation(string $organizationCode): array
     {
@@ -420,19 +420,19 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * calculateandcache所havedepartmentemployeetotal.
+     * calculateandcache havedepartmentemployeetotal.
      */
     private function calculateAndCacheAllDepartmentEmployeeSums(string $organizationCode, array $allDepartments, string $cacheKey): void
     {
         $departmentSums = [];
 
-        // 1) initialize:eachdepartment先put intofrom身directly underperson数
+        // 1) initialize:eachdepartmentfirstput intofrom身directly underpersoncount
         foreach ($allDepartments as $department) {
             $deptId = (string) $department['department_id'];
             $departmentSums[$deptId] = (int) ($department['employee_sum'] ?? 0);
         }
 
-        // 2) frombottomtoup:按 level frombigtosmall,子departmentaccumulatedvalueaddto父department
+        // 2) frombottomtoup:按 level frombigtosmall,childdepartmentaccumulatedvalueaddtoparentdepartment
         usort($allDepartments, static function (array $a, array $b): int {
             return (int) ($b['level'] ?? 0) <=> (int) ($a['level'] ?? 0);
         });
@@ -442,7 +442,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             $parentId = (string) ($department['parent_department_id'] ?? '');
 
             if ($parentId === '' || $parentId === '-1') {
-                continue; // skipno父levelorrootsectionpoint
+                continue; // skipnoparentlevelorrootsectionpoint
             }
 
             $childSum = (int) ($departmentSums[$deptId] ?? 0);
@@ -459,13 +459,13 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
         // batchquantitywrite Redis cache
         try {
             if (! empty($departmentSums)) {
-                // ensure所havevalueallisstringformat
+                // ensure havevalueallisstringformat
                 $stringDepartmentSums = [];
                 foreach ($departmentSums as $deptId => $sum) {
                     $stringDepartmentSums[$deptId] = (string) $sum;
                 }
                 $this->redis->multi();
-                // use hmset onetimepropertyset多 hash field
+                // use hmset onetimepropertysetmultiple hash field
                 $this->redis->hmset($cacheKey, $stringDepartmentSums);
                 // setcacheexpiretime
                 $this->redis->expire($cacheKey, 60 * 5);

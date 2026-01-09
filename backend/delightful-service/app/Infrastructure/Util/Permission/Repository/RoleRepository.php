@@ -144,11 +144,11 @@ class RoleRepository implements RoleRepositoryInterface
             ->pluck('user_id')
             ->toArray();
 
-        // calculateneedaddand移exceptuser
+        // calculateneedaddandmoveexceptuser
         $toAdd = array_diff($userIds, $existingUserIds);
         $toRemove = array_diff($existingUserIds, $userIds);
 
-        // 移exceptnotagain属attheroleuser
+        // moveexceptnotagainbelongattheroleuser
         if (! empty($toRemove)) {
             $this->roleUserQuery($organizationCode)
                 ->where('role_id', $roleId)
@@ -176,7 +176,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 移exceptroleuser.
+     * moveexceptroleuser.
      */
     public function removeUsers(string $organizationCode, int $roleId, array $userIds): void
     {
@@ -217,7 +217,7 @@ class RoleRepository implements RoleRepositoryInterface
             $map[$rid][] = $row['user_id'];
         }
 
-        // ensure所have roleIds allhave key
+        // ensure have roleIds allhave key
         foreach ($roleIds as $rid) {
             $map[$rid] = $map[$rid] ?? [];
         }
@@ -253,7 +253,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * getuser所havepermission.
+     * getuser havepermission.
      */
     public function getUserPermissions(string $organizationCode, string $userId): array
     {
@@ -268,7 +268,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * based onorganizationencodingget RoleModel queryconstruct器.
+     * based onorganizationencodingget RoleModel queryconstructdevice.
      */
     private function roleQuery(string $organizationCode)
     {
@@ -276,7 +276,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * based onorganizationencodingget RoleUserModel queryconstruct器.
+     * based onorganizationencodingget RoleUserModel queryconstructdevice.
      */
     private function roleUserQuery(string $organizationCode)
     {
@@ -284,7 +284,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * mappingmodelto实body.
+     * mappingmodeltoactualbody.
      */
     private function mapToEntity(RoleModel $model): RoleEntity
     {

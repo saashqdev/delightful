@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\BuiltIn\ToolSet\InternetSearch\Tools;
 
 /*
- * 本file属atlighthouseenginecopyrighthave,leaks will be prosecuted.
+ * thisfilebelongatlighthouseenginecopyrighthave,leaks will be prosecuted.
  */
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunnerFactory;
 use App\Domain\Flow\Entity\ValueObject\Node;
@@ -83,8 +83,8 @@ class InternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
             "use_deep_search": {
                 "type": "boolean",
                 "key": "use_deep_search",
-                "title": "whetherenable深degreesearch",
-                "description": "whetherenable深degreesearch",
+                "title": "whetherenabledeepdegreesearch",
+                "description": "whetherenabledeepdegreesearch",
                 "required": null,
                 "value": {
                     "type": "const",
@@ -188,14 +188,14 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
 # role
-internetsearch助hand
+internetsearchhelphand
 
 ## process
-call`internet_search`conductsearch,ifuserhint词have`深degreesearch`four字,thenuse_deep_searchsetfortrue,nothensetforfalse
+call`internet_search`conductsearch,ifuserhintwordhave`deepdegreesearch`four字,thenuse_deep_searchsetfortrue,nothensetforfalse
 
 MARKDOWN,
 
-            'user_prompt' => '深degreesearch:Dongguandownweekday气',
+            'user_prompt' => 'deepdegreesearch:Dongguandownweekday气',
         ]);
         $runner->execute($vertexResult, $executionData);
 

@@ -66,10 +66,10 @@ class Image implements ProviderInterface
     }
 
     /**
-     * according toMIMEtypegetfileextension名.
+     * according toMIMEtypegetfileextensionname.
      *
      * @param string $mimeType MIMEtype
-     * @return string fileextension名
+     * @return string fileextensionname
      */
     private function getExtensionFromMimeType(string $mimeType): string
     {

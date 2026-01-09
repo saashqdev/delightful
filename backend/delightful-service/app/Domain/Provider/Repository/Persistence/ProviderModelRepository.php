@@ -123,7 +123,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             if ($success === 0) {
                 ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
             }
-            // 先querydatabase现have实body
+            // firstquerydatabaseshowhaveactualbody
             return $this->getById($dataIsolation, $dto->getId());
         }
         return $this->create($dataIsolation, $entity);
@@ -134,7 +134,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
      */
     public function updateStatus(ProviderDataIsolation $dataIsolation, string $id, Status $status): void
     {
-        // 1. 按 id querymodelwhether存in(notlimitorganization)
+        // 1. 按 id querymodelwhetherexistsin(notlimitorganization)
         $model = $this->getModelByIdWithoutOrgFilter($id);
         if (! $model) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
@@ -143,15 +143,15 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $currentOrganizationCode = $dataIsolation->getCurrentOrganizationCode();
         $modelOrganizationCode = $model->getOrganizationCode();
 
-        // 2. judgemodelbelong toorganizationwhetherandcurrentorganizationone致
+        // 2. judgemodelbelong toorganizationwhetherandcurrentorganizationoneto
         if ($modelOrganizationCode !== $currentOrganizationCode) {
-            // organizationnotone致:judgemodelbelong toorganizationwhetherisofficialorganization
+            // organizationnotoneto:judgemodelbelong toorganizationwhetherisofficialorganization
             if ($this->isOfficialOrganization($modelOrganizationCode)
                 && ! $this->isOfficialOrganization($currentOrganizationCode)) {
-                // model属atofficialorganizationandcurrentorganizationnotisofficialorganization:walk writeo clockcopylogic
+                // modelbelongatofficialorganizationandcurrentorganizationnotisofficialorganization:walk writeo clockcopylogic
                 $organizationModelId = $this->delightfulProviderAndModels->updateDelightfulModelStatus($dataIsolation, $model);
             } else {
-                // othersituation:nopermission操as
+                // othersituation:nopermissionoperationas
                 ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
             }
         } else {
@@ -189,7 +189,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             return $this->delightfulProviderAndModels->getDelightfulEnableModels($dataIsolation->getCurrentOrganizationCode(), $providerEntity->getCategory());
         }
 
-        // nonofficialservicequotient,by originallogicqueryfinger定configurationdownmodel
+        // nonofficialservicequotient,by originallogicqueryfingersetconfigurationdownmodel
         if (! is_numeric($configId)) {
             return [];
         }
@@ -202,9 +202,9 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * getorganizationcanusemodelcolumntable(containorganizationfrom己modelandDelightfulmodel).
+     * getorganizationcanusemodelcolumntable(containorganizationfromselfmodelandDelightfulmodel).
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
-     * @param null|Category $category modelcategory,fornullo clockreturn所havecategorymodel
+     * @param null|Category $category modelcategory,fornullo clockreturn havecategorymodel
      * @return ProviderModelEntity[] 按sortdescendingsortmodelcolumntable,containorganizationmodelandDelightfulmodel(notgo重)
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, ?Status $status = Status::Enabled): array
@@ -219,7 +219,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $cachedData = $redis->get($cacheKey);
 
         if ($cachedData !== false) {
-            // fromcacherestore实bodyobject
+            // fromcacherestoreactualbodyobject
             $modelsArray = Json::decode($cachedData);
             $allModels = [];
             foreach ($modelsArray as $modelData) {
@@ -228,8 +228,8 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             return $allModels;
         }
 
-        // cachenot命middle,execute原logic
-        // 1. 先queryorganizationdownenableservicequotientconfigurationID
+        // cachenot命middle,executeoriginallogic
+        // 1. firstqueryorganizationdownenableservicequotientconfigurationID
         $builder = ProviderConfigModel::query();
 
         if ($status !== null) {
@@ -243,17 +243,17 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $enabledConfigIds = Db::select($enabledConfigQuery->toSql(), $enabledConfigQuery->getBindings());
         $enabledConfigIdArray = array_column($enabledConfigIds, 'id');
 
-        // 2. useenableconfigurationIDqueryorganizationfrom己enablemodel
+        // 2. useenableconfigurationIDqueryorganizationfromselfenablemodel
         $organizationModels = [];
         if (! empty($enabledConfigIdArray)) {
             $organizationModelsBuilder = $this->createProviderModelQuery()
                 ->where('organization_code', $organizationCode)
                 ->whereIn('service_provider_config_id', $enabledConfigIdArray);
             if (! OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
-                // querynormalorganizationfrom己model. officialorganizationmodel现in model_parent_id equalitfrom己,need洗data.
+                // querynormalorganizationfromselfmodel. officialorganizationmodelshowin model_parent_id equalitfromself,need洗data.
                 $organizationModelsBuilder->where('model_parent_id', 0);
             }
-            // iffinger定category,addcategoryfiltercondition
+            // iffingersetcategory,addcategoryfiltercondition
             if ($category !== null) {
                 $organizationModelsBuilder->where('category', $category->value);
             }
@@ -285,7 +285,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
                 return $model->getStatus() === $status;
             });
         }
-        // 7. 转forarrayandcacheresult,cache10second
+        // 7. transferforarrayandcacheresult,cache10second
         $modelsArray = [];
         foreach ($allModels as $model) {
             $modelsArray[] = $model->toArray();
@@ -325,12 +325,12 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $builder = $this->createBuilder($dataIsolation, ProviderModelModel::query())
             ->whereIn('model_id', $modelIds)
             ->orderBy('status', 'desc') // prioritysort:enablestatusinfront
-            ->orderBy('id'); // itstime按IDsort,guaranteeresultone致property
+            ->orderBy('id'); // itstime按IDsort,guaranteeresultonetoproperty
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
         $entities = ProviderModelAssembler::toEntities($result);
 
-        // convertforbymodel_idforkeyarray,retain所havemodel
+        // convertforbymodel_idforkeyarray,retain havemodel
         $modelsByModelId = [];
         foreach ($entities as $entity) {
             $modelId = $entity->getModelId();
@@ -453,7 +453,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * prepare移exceptsoft deleteclosefeature,temporarythishow to write.create带have软deletefilter ProviderModelModel querybuild器.
+     * preparemoveexceptsoft deleteclosefeature,temporarythishow to write.createwithhavesoftdeletefilter ProviderModelModel querybuilddevice.
      */
     private function createProviderModelQuery(): Builder
     {

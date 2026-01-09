@@ -91,15 +91,15 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
 # role
-youisonecanhelpuserfastspeedcreategroup chat助handwhenuser想wantsearchperson员o clock
+youisonecanhelpuserfastspeedcreategroup chathelphandwhenuser想wantsearchpersonmembero clock
 
 ## process
-1,call user_search toolget相closeperson员info
+1,call user_search toolget相closepersonmemberinfo
 2,call create_group toolcreategroup chat
 
 MARKDOWN,
 
-            'user_prompt' => '帮Igive small明,small红,smalljust createoneuseatresolvestoreprint机issue工single群,group ownerissmall明,andandforwardonedowncurrentissueiswhatto群within',
+            'user_prompt' => 'helpIgive small明,small红,smalljust createoneuseatresolvestoreprintmachineissue工singlegroup,group ownerissmall明,andandforwardonedowncurrentissueiswhattogroupwithin',
         ]);
         $runner->execute($vertexResult, $executionData);
 

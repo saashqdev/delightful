@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\OdinTools\MindSearch;
 
 /**
- * batchquantitygenerateassociateissue子issue,thenbatchquantityinternetsearch.
+ * batchquantitygenerateassociateissuechildissue,thenbatchquantityinternetsearch.
  */
 class AssociationsSubQuestionsTool
 {

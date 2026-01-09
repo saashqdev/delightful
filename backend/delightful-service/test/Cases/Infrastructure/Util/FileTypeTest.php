@@ -91,16 +91,16 @@ class FileTypeTest extends TestCase
      * testfromHTTPheadinfogettype(needmockHTTPresponse).
      *
      * notice:thistestmaybeneedusefunctionmock,ifprojectmiddlenothaveconfigurationfunctionmock,
-     * canwillthistestmarkforskiporusetrue实URLconducttest
+     * canwillthistestmarkforskiporusetrueactualURLconducttest
      */
     public function testGetTypeFromHeaders()
     {
-        // markthistestforskip,因forneedmockall局function
+        // markthistestforskip,因forneedmockalllocalfunction
         $this->markTestSkipped('needfunctionmockfeature才cancompletetest');
     }
 
     /**
-     * testno法identifyfiletypeo clockthrowexception.
+     * testnomethodidentifyfiletypeo clockthrowexception.
      * sameneedfunctionmocksupport
      */
     public function testInvalidFileType()

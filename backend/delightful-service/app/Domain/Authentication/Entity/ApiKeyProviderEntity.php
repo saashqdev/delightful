@@ -33,7 +33,7 @@ class ApiKeyProviderEntity extends AbstractEntity
     protected string $secretKey;
 
     /**
-     * conversation ID(canis子conversation,如topic),and sk onetoonebind.
+     * conversation ID(canischildconversation,liketopic),and sk onetoonebind.
      */
     protected string $conversationId = '';
 

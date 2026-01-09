@@ -9,17 +9,17 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR path常quantity
- * 统onemanage ASR 相closedirectoryandfilepath.
+ * 統onemanage ASR 相closedirectoryandfilepath.
  */
 class AsrPaths
 {
     /**
-     * work区directory名.
+     * workregiondirectoryname.
      */
     public const WORKSPACE_DIR = '.workspace';
 
     /**
-     * hiddenrecordingdirectoryfront缀.
+     * hiddenrecordingdirectoryfrontsuffix.
      */
     public const HIDDEN_DIR_PREFIX = '.asr_recordings';
 
@@ -50,7 +50,7 @@ class AsrPaths
     }
 
     /**
-     * getrecordingdirectory相topath(父directory).
+     * getrecordingdirectory相topath(parentdirectory).
      *
      * @return string format:.asr_recordings
      */

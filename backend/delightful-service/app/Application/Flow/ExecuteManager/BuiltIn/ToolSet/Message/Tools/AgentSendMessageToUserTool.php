@@ -30,7 +30,7 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
             $params = $executionData->getTriggerData()->getParams();
             // $delightfulAgentAppService = di(DelightfulAgentAppService::class);
             $senderUserId = $executionData->getAgentUserId();
-            // 助handsendmessage
+            // helphandsendmessage
             $assistantMessage = new TextMessage(['content' => $params['content']]);
             $appMessageId = IdGenerator::getUniqueId32();
             $receiveSeqDTO = new DelightfulSeqEntity();

@@ -38,7 +38,7 @@ interface LoginResponseInterface
     /**
      * convertforarrayformat.
      *
-     * @return array<string, mixed> contain所havepropertyarray
+     * @return array<string, mixed> contain havepropertyarray
      */
     public function toArray(): array;
 }

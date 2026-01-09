@@ -13,7 +13,7 @@ use App\Infrastructure\Util\IdGenerator\IdGenerator;
 class SearchDetailItem extends AbstractObject
 {
     /**
-     * @var string issue id,oneissuewillwillhave多searchresult
+     * @var string issue id,oneissuewillwillhavemultiplesearchresult
      */
     protected string $questionId;
 
@@ -70,7 +70,7 @@ class SearchDetailItem extends AbstractObject
 
     public function setId(string $id): void
     {
-        // 应front端require,改for唯one id
+        // shouldfrontclientrequire,changeforuniqueone id
         $this->id = (string) IdGenerator::getSnowId();
     }
 

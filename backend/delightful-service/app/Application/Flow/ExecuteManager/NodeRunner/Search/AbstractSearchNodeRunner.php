@@ -22,19 +22,19 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
         $filterType = $paramsConfig->getFilterType();
         foreach ($paramsConfig->getFilters() as $filter) {
             $rightValue = $filter->getRightValue()->getValue()->getResult($executionData->getExpressionFieldData());
-            // null,'',0,[],false  directlyskip,谁notsearch事thisthese.right侧not填valuenotconductsearch
+            // null,'',0,[],false  directlyskip,whonotsearch事thisthese.right侧not填valuenotconductsearch
             if (empty($rightValue)) {
                 continue;
             }
 
-            // definition本time range id,ifis null 代tablealsonotconductlimit
+            // definitionthistime range id,ifis null 代tablealsonotconductlimit
             $rangeIds = null;
             if ($filterType->isAll()) {
-                // ifis所haveitemitemfull足,that么alreadyalready existsin id setthenis本timerange
+                // ifis haveitemitemfull足,thatwhatalreadyalready existsin id setthenisthistimerange
                 $rangeIds = $allIds;
             }
 
-            // ifrange id bedefinitionbecomeemptyarray,代tablealready经nothaveconformitemitemdata,directly跳outloop
+            // ifrange id bedefinitionbecomeemptyarray,代tablealreadyalreadynothaveconformitemitemdata,directlyjumpoutloop
             if (is_array($rangeIds) && empty($rangeIds)) {
                 break;
             }
@@ -51,10 +51,10 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 continue;
             }
             if ($filterType->isAny()) {
-                // ifisanyitemitemfull足,that么will本time id andalreadyhave id conductmerge
+                // ifisanyitemitemfull足,thatwhatwillthistime id andalreadyhave id conductmerge
                 $allIds = array_merge($allIds ?? [], $currentIds);
             } else {
-                // ifis所haveitemitemfull足,that么will本time id andalreadyhave id conduct交collection
+                // ifis haveitemitemfull足,thatwhatwillthistime id andalreadyhave id conduct交collection
                 $allIds = $allIds === null ? $currentIds : array_intersect($allIds, $currentIds);
             }
         }

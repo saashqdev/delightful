@@ -13,21 +13,21 @@ use InvalidArgumentException;
 /**
  * graphsearchconfigurationvalueobject
  *
- * containgraphsearch相closeconfigurationparameter,如 API 端point,authinfo,timeoutsetetc
+ * containgraphsearch相closeconfigurationparameter,like API clientpoint,authinfo,timeoutsetetc
  */
 class GraphSearchConfig extends AbstractValueObject
 {
     /**
      * close系weight.
      *
-     * graphsearchmiddleclose系weight,useatcalculatefinalsimilardegreeminute数
+     * graphsearchmiddleclose系weight,useatcalculatefinalsimilardegreeminutecount
      */
     private float $relationWeight = 0.5;
 
     /**
-     * mostbigsearch深degree.
+     * mostbigsearchdeepdegree.
      *
-     * graphsearchmostbig深degree,即fromup始sectionpointstart,at mostsearchseveral hopsclose系
+     * graphsearchmostbigdeepdegree,即fromup始sectionpointstart,at mostsearchseveral hopsclose系
      */
     private int $maxDepth = 2;
 
@@ -39,9 +39,9 @@ class GraphSearchConfig extends AbstractValueObject
     private bool $includeProperties = true;
 
     /**
-     * API 端point.
+     * API clientpoint.
      *
-     * graphsearchservice API 端point
+     * graphsearchservice API clientpoint
      */
     private string $apiEndpoint = '';
 
@@ -108,7 +108,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * getmostbigsearch深degree.
+     * getmostbigsearchdeepdegree.
      */
     public function getMaxDepth(): int
     {
@@ -116,7 +116,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * setmostbigsearch深degree.
+     * setmostbigsearchdeepdegree.
      */
     public function setMaxDepth(int $maxDepth): self
     {
@@ -145,7 +145,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * get API 端point.
+     * get API clientpoint.
      */
     public function getApiEndpoint(): string
     {
@@ -153,7 +153,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * set API 端point.
+     * set API clientpoint.
      */
     public function setApiEndpoint(string $apiEndpoint): self
     {

@@ -17,17 +17,17 @@ use PhpAmqpLib\Message\AMQPMessage;
 use Throwable;
 
 /**
- * messagepush模piece.
+ * messagepushmodepiece.
  * according togenerateseqbyanditprioritylevel,uselongconnectpushgiveuser.
- * eachseqmaybewant推giveuser1to几tencustomer端.
+ * eachseqmaybewant推giveuser1to几tencustomerclient.
  */
 abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
 {
     protected AmqpTopicType $topic = AmqpTopicType::Seq;
 
     /**
-     * 1.本groundopenhairo clocknotstart,avoidconsumetestenvironmentdata,causetestenvironmentuser收nottomessage
-     * 2.if本groundopenhairo clock想debug,请fromlinein本groundbuildfront端environment,more换mqhost. or者applyonedevenvironment,isolationmq.
+     * 1.thisgroundopenhairo clocknotstart,avoidconsumetestenvironmentdata,causetestenvironmentuserreceivenottomessage
+     * 2.ifthisgroundopenhairo clock想debug,pleasefromlineinthisgroundbuildfrontclientenvironment,moreexchangemqhost. orpersonapplyonedevenvironment,isolationmq.
      */
     public function isEnable(): bool
     {
@@ -35,7 +35,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
     }
 
     /**
-     * according to序columnnumberprioritylevel.实o clocknotify收item方. thismaybeneedpublishsubscribe.
+     * according tosequencecolumnnumberprioritylevel.actualo clocknotifyreceiveitemside. thismaybeneedpublishsubscribe.
      * @param SeqCreatedEvent $data
      */
     public function consumeMessage($data, AMQPMessage $message): Result
@@ -45,12 +45,12 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
             return Result::ACK;
         }
 
-        // notify收item方
-        $this->logger->info(sprintf('messagePush 收tomessage data:%s', Json::encode($data)));
+        // notifyreceiveitemside
+        $this->logger->info(sprintf('messagePush receivetomessage data:%s', Json::encode($data)));
         try {
             foreach ($seqIds as $seqId) {
                 $seqId = (string) $seqId;
-                // useredisdetectseqwhetheralready经try多time,if超pass n time,thennotagainpush
+                // useredisdetectseqwhetheralreadyalreadytrymultipletime,ifexceedspass n time,thennotagainpush
                 $seqRetryKey = sprintf('messagePush:seqRetry:%s', $seqId);
                 $seqRetryCount = $this->redis->get($seqRetryKey);
                 if ($seqRetryCount >= 3) {
@@ -58,7 +58,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                     return Result::ACK;
                 }
                 $this->addSeqRetryNumber($seqRetryKey);
-                // recordseqtrypushcount,useatback续judgewhetherneedretry
+                // recordseqtrypushcount,useatback続judgewhetherneedretry
                 $this->delightfulSeqAppService->pushSeq($seqId);
                 // noterror,notagainre-push
                 $this->setSeqCanNotRetry($seqRetryKey);
@@ -71,7 +71,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessagequalityguarantee模piece,ifisservice器stressbigcausefail,thenput intodelayretryqueue,andfinger数level延longretrytimebetween隔
+            // todo callmessagequalityguaranteemodepiece,ifisservicedevicestressbigcausefail,thenput intodelayretryqueue,andfingercountlevel延longretrytimebetweenseparator
             return Result::REQUEUE;
         }
         return Result::ACK;

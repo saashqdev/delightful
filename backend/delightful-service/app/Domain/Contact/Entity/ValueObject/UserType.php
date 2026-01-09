@@ -19,7 +19,7 @@ enum UserType: int
     case Human = 1;
 
     /**
-     * willenumtypeconvert:0转forai,1转for user.
+     * willenumtypeconvert:0transferforai,1transferfor user.
      */
     public static function getCaseFromName(string $typeName): ?self
     {

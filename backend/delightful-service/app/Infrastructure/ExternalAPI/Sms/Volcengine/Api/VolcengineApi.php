@@ -23,18 +23,18 @@ use RuntimeException;
 use function Hyperf\Config\config;
 
 /**
- * Volcanoshortmessage所have api foundationcategory.
+ * Volcanoshortmessage have api foundationcategory.
  * @see https://www.volcengine.com/docs/6361/171579
  */
 abstract class VolcengineApi
 {
     /**
-     * 国insideshort信requestground址
+     * countryinsideshortmessagerequestgroundaddress
      */
     private const CHINA_HOST = 'https://sms.volcengineapi.com';
 
     /**
-     * 国outsideshort信requestground址
+     * countryoutsideshortmessagerequestgroundaddress
      */
     private const SINGAPORE_HOST = 'https://sms.byteplusapi.com';
 
@@ -59,7 +59,7 @@ abstract class VolcengineApi
     protected string $version;
 
     /**
-     * requestground址
+     * requestgroundaddress
      */
     protected string $host;
 
@@ -68,17 +68,17 @@ abstract class VolcengineApi
     protected string $secretKey = '';
 
     /**
-     * short信signature. such as[lighthouseengine].
+     * shortmessagesignature. such as[lighthouseengine].
      */
     protected string $sign = '';
 
     /**
-     * short信messagegroupid.
+     * shortmessagemessagegroupid.
      */
     protected string $messageGroupId = '';
 
     /**
-     * short信templateId.
+     * shortmessagetemplateId.
      */
     protected string $templateId = '';
 
@@ -129,10 +129,10 @@ abstract class VolcengineApi
             ];
             $response = $this->client->request($this->method, $this->getPath(), $options);
             $responseBody = Json::decode($response->getBody()->getContents());
-            // conducterror码judge
+            // conducterrorcodejudge
             if (isset($responseBody['ResponseMetadata']['Error'])) {
                 $this->logger->error('sendSmsError ' . Json::encode($responseBody));
-                throw new RuntimeException('short信sendfail');
+                throw new RuntimeException('shortmessagesendfail');
             }
             $this->logger->info(sprintf('volce sendRequest %s response %s', Json::encode($options), Json::encode($responseBody)));
             return $responseBody;
@@ -149,7 +149,7 @@ abstract class VolcengineApi
     }
 
     /**
-     * acceptdifferentshort信typesend
+     * acceptdifferentshortmessagetypesend
      */
     protected function init(string $messageGroupId, string $sign, string $templateId): void
     {
@@ -165,7 +165,7 @@ abstract class VolcengineApi
 
     protected function addHeader(string $key, $value): void
     {
-        // 字section方requestheadvalueisarray,才can参andback续signature
+        // 字sectionsiderequestheadvalueisarray,才can参andback続signature
         $value = is_array($value) ? $value : [$value];
         $this->headers[$key] = $value;
     }
@@ -195,7 +195,7 @@ abstract class VolcengineApi
         $req->setIsSignUrl(false);
         $req->setMethod($this->getMethod());
         $req->setQueryList($this->getQuery());
-        // !!! notice,thiswithinnotcanaddup JSON_UNESCAPED_UNICODE,addwillcausebodyhavemiddle文o clocksignaturenotcorrect!
+        // !!! notice,thiswithinnotcanaddup JSON_UNESCAPED_UNICODE,addwillcausebodyhavemiddletexto clocksignaturenotcorrect!
         $bodyStream = Utils::streamFor(Json::encode($this->getBody(), JSON_THROW_ON_ERROR));
         $req->setPayloadHash(Utils::hash($bodyStream, 'sha256'));
         $result = $sign->signOnly($req, $credentials);
@@ -208,7 +208,7 @@ abstract class VolcengineApi
 
     protected function setHeaders(): void
     {
-        // researchhair现,documentrequireinrequestheadmiddle传AccessKey/SecretKey/ServiceName/Region,its实cannot传. Authorizationheadmiddlehave传AccessKey
+        // researchhairshow,documentrequireinrequestheadmiddle传AccessKey/SecretKey/ServiceName/Region,itsactualcannot传. Authorizationheadmiddlehave传AccessKey
         $this->headers = [
             'Content-Type' => ['application/json;charset=utf-8'],
             'User-Agent' => ['volc-sdk-php/v1.0.87'],
@@ -311,7 +311,7 @@ abstract class VolcengineApi
 
     private function setRegion(string $region): void
     {
-        // regiononlysupportmiddle国andnewadd坡,defaultmiddle国
+        // regiononlysupportmiddlecountryandnewadd坡,defaultmiddlecountry
         if ($region === self::SINGAPORE_REGION) {
             $this->setHost(self::SINGAPORE_HOST);
         } else {

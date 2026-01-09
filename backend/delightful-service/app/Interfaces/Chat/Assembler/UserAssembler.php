@@ -55,7 +55,7 @@ class UserAssembler
 
     public static function getUserInfos(array $userInfos): array
     {
-        // strong转user id typefor string
+        // strongtransferuser id typefor string
         foreach ($userInfos as &$user) {
             // notreturn delightful_id and id
             unset($user['delightful_id'], $user['id']);
@@ -105,10 +105,10 @@ class UserAssembler
         foreach ($users as $user) {
             $account = $accounts[$user['delightful_id']] ?? null;
             if (empty($account)) {
-                $logger->warning("user[delightful_id: {$user['delightful_id']} ]not存in, skip!");
+                $logger->warning("user[delightful_id: {$user['delightful_id']} ]notexistsin, skip!");
                 continue;
             }
-            // if存inhand机number,willhand机numbermiddlebetweenfour位replacefor*
+            // ifexistsinhandmachinenumber,willhandmachinenumbermiddlebetweenfour位replacefor*
             $phone = $account->getPhone();
             if (! empty($phone)) {
                 $phone = substr_replace($phone, '****', 3, 4);
@@ -135,7 +135,7 @@ class UserAssembler
     }
 
     /**
-     * oneusermaybe存inat多department.
+     * oneusermaybeexistsinatmultipledepartment.
      * @param DelightfulDepartmentUserEntity[] $departmentUsers
      * @param UserDetailDTO[] $usersDetail
      * @param array<string, DelightfulDepartmentEntity[]> $departmentsInfo
@@ -162,7 +162,7 @@ class UserAssembler
             $userId = $userInfo->getUserId();
             $userDepartmentRelations = $userDepartmentMap[$userId] ?? [];
 
-            // step2.1: 收collectiondepartmentpathinfo
+            // step2.1: receivecollectiondepartmentpathinfo
             $allPathNodes = [];
             $fullPathNodes = [];
 
@@ -173,14 +173,14 @@ class UserAssembler
 
                 if (! empty($departments)) {
                     if ($withDepartmentFullPath) {
-                        // completepath模type: foreachdepartmentsavecompletelayerlevelstructure
+                        // completepathmodetype: foreachdepartmentsavecompletelayerlevelstructure
                         $pathNodes = array_map(
                             fn (DelightfulDepartmentEntity $department) => self::assemblePathNodeByDepartmentInfo($department),
                             $departments
                         );
                         $fullPathNodes[$userDepartmentId] = $pathNodes;
                     } else {
-                        // brief模type: only取eachdepartmentmostnextsectionpoint
+                        // briefmodetype: onlygeteachdepartmentmostnextsectionpoint
                         $departmentInfo = end($departments);
                         $pathNode = self::assemblePathNodeByDepartmentInfo($departmentInfo);
                         $allPathNodes[] = $pathNode;
@@ -193,7 +193,7 @@ class UserAssembler
 
             // step2.3: updateorcreateuserdepartmentdetailobject
             if (! empty($usersDepartmentDetailDTOList[$userId])) {
-                // updatealready存inuserdepartmentdetail
+                // updatealreadyexistsinuserdepartmentdetail
                 $userDepartmentDetailDTO = $usersDepartmentDetailDTOList[$userId];
 
                 if ($withDepartmentFullPath && ! empty($fullPathNodes)) {

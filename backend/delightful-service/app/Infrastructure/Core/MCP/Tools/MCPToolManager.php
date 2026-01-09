@@ -23,7 +23,7 @@ class MCPToolManager
     }
 
     /**
-     * get所haveregistertool.
+     * get haveregistertool.
      *
      * @return array<string, MCPTool>
      */
@@ -47,7 +47,7 @@ class MCPToolManager
     }
 
     /**
-     * getfinger定nametool.
+     * getfingersetnametool.
      */
     public function getTool(string $name): ?MCPTool
     {
@@ -55,7 +55,7 @@ class MCPToolManager
     }
 
     /**
-     * checkfinger定nametoolwhether存in.
+     * checkfingersetnametoolwhetherexistsin.
      */
     public function hasTool(string $name): bool
     {

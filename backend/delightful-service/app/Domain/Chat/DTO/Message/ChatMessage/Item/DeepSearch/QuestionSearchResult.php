@@ -25,7 +25,7 @@ class QuestionSearchResult extends AbstractObject
     protected array $search;
 
     /**
-     * 总word count.
+     * totalword count.
      */
     protected int $totalWords;
 
@@ -60,7 +60,7 @@ class QuestionSearchResult extends AbstractObject
             if (! $item instanceof SearchDetailItem) {
                 $item = new SearchDetailItem($item);
             }
-            // 移exceptdetail
+            // moveexceptdetail
             $item->setDetail(null);
             $search[$key] = $item;
         }

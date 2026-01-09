@@ -70,7 +70,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
         $models = $this->fetchModels($limit);
         $stats['total'] = $models->count();
 
-        $this->logger->info(sprintf('找to %d servicequotientmodelneedprocess', $stats['total']));
+        $this->logger->info(sprintf('findto %d servicequotientmodelneedprocess', $stats['total']));
 
         foreach ($models as $model) {
             try {
@@ -117,7 +117,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * getalready存inversionquantity.
+     * getalreadyexistsinversionquantity.
      */
     private function getExistingVersionCount(ProviderModelModel $model): int
     {
@@ -220,10 +220,10 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     private function logHeader(bool $isDryRun, bool $isForce, int $limit): void
     {
         $this->logger->info('startsyncservicequotientmodelconfigurationversiondata...');
-        $this->logger->info(sprintf('模type: %s', $isDryRun ? 'trial operationline(notwritedatabase)' : 'justtypeexecute'));
+        $this->logger->info(sprintf('modetype: %s', $isDryRun ? 'trial operationline(notwritedatabase)' : 'justtypeexecute'));
 
         if ($isForce) {
-            $this->logger->warning('force模typealreadyenable:willfor所havemodelcreatenewversion');
+            $this->logger->warning('forcemodetypealreadyenable:willfor havemodelcreatenewversion');
         }
 
         if ($limit > 0) {
@@ -238,7 +238,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     {
         $this->logger->info('=================================');
         $this->logger->info('synccomplete!statisticsinfo:');
-        $this->logger->info(sprintf('  总model数: %d', $result['total']));
+        $this->logger->info(sprintf('  totalmodelcount: %d', $result['total']));
         $this->logger->info(sprintf('  alreadyhaveversion: %d', $result['skipped']));
         $this->logger->info(sprintf('  newversion: %d', $result['created']));
         $this->logger->info(sprintf('  failquantity: %d', $result['failed']));

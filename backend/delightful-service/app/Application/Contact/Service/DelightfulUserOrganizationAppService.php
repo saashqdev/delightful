@@ -56,7 +56,7 @@ class DelightfulUserOrganizationAppService
      */
     public function setCurrentOrganizationCode(string $delightfulId, string $delightfulOrganizationCode): array
     {
-        // 1. queryuserwhetherinfinger定organizationmiddle
+        // 1. queryuserwhetherinfingersetorganizationmiddle
         $userOrganizations = $this->userDomainService->getUserOrganizationsByDelightfulId($delightfulId);
         if (! in_array($delightfulOrganizationCode, $userOrganizations, true)) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
@@ -81,7 +81,7 @@ class DelightfulUserOrganizationAppService
     }
 
     /**
-     * get账numberdowncanuseorganizationcolumntable(onlycontainenabled statusorganization).
+     * getaccountnumberdowncanuseorganizationcolumntable(onlycontainenabled statusorganization).
      *
      * @throws Throwable
      */

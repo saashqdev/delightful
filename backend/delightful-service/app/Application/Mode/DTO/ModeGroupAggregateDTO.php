@@ -14,12 +14,12 @@ class ModeGroupAggregateDTO extends AbstractDTO
     protected ModeGroupDTO $group;
 
     /**
-     * @var ModeGroupModelDTO[] theminutegroupto应modeldetailedinfoarray
+     * @var ModeGroupModelDTO[] theminutegrouptoshouldmodeldetailedinfoarray
      */
     protected array $models = [];
 
     /**
-     * @var ModeGroupModelDTO[] theminutegroupto应graphlikemodeldetailedinfoarray(VLM)
+     * @var ModeGroupModelDTO[] theminutegrouptoshouldgraphlikemodeldetailedinfoarray(VLM)
      */
     protected array $imageModels = [];
 
@@ -79,7 +79,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 移exceptmodel.
+     * moveexceptmodel.
      */
     public function removeModelId(string $modelId): void
     {
@@ -93,7 +93,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * checkwhethercontainfinger定modelID.
+     * checkwhethercontainfingersetmodelID.
      */
     public function hasModelId(string $modelId): bool
     {

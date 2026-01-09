@@ -32,7 +32,7 @@ class ConversationCreatedListener implements ListenerInterface
 
         $conversation = $event->getConversation();
 
-        // onlyforAIconversationfrom动createtopic
+        // onlyforAIconversationfromautocreatetopic
         if ($conversation->getReceiveType() === ConversationType::Ai) {
             $topicDomainService = di(DelightfulTopicDomainService::class);
             $topicDomainService->agentSendMessageGetTopicId($conversation, 0);

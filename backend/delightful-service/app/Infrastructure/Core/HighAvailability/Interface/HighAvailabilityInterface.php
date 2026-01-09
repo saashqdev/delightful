@@ -46,13 +46,13 @@ interface HighAvailabilityInterface
     public function getAvailableEndpoint(EndpointRequestDTO $request): ?EndpointDTO;
 
     /**
-     * recordaccesspointresponseandfrom动processsuccess/failedstatus,byanduseatback续dataanalyze.
+     * recordaccesspointresponseandfromautoprocesssuccess/failedstatus,byanduseatback続dataanalyze.
      *
      * themethodwill:
      * 1. recordrequeststatisticsdata
-     * 2. according torequestsuccessorfailedstatusfromtriggerhaircircuit break器feedback
+     * 2. according torequestsuccessorfailedstatusfromtriggerhaircircuit breakdevicefeedback
      *
-     * @param EndpointResponseDTO $response accesspointresponse实body
+     * @param EndpointResponseDTO $response accesspointresponseactualbody
      */
     public function recordResponse(EndpointResponseDTO $response): bool;
 }

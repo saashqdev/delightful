@@ -11,22 +11,22 @@ namespace App\Application\Speech\Enum;
  * sandbox ASR taskstatusenum.
  *
  * 【asuse域】outside部system - sandboxaudiomergeservice
- * 【use途】table示sandboxmiddleaudiomergetaskexecutestatus
+ * 【use途】tableshowsandboxmiddleaudiomergetaskexecutestatus
  * 【usescenario】
- * - callsandbox finishTask interfaceround询statusjudge
+ * - callsandbox finishTask interfaceroundquerystatusjudge
  * - judgeaudiominuteslicemergewhethercomplete
  *
  * 【andotherenumdifference】
- * - AsrRecordingStatusEnum: front端recording实o clockstatus(recordinginteractionlayer)
+ * - AsrRecordingStatusEnum: frontclientrecordingactualo clockstatus(recordinginteractionlayer)
  * - AsrTaskStatusEnum: inside部taskallprocessstatus(businessmanagelayer)
  * - SandboxAsrStatusEnum: sandboxmergetaskstatus(infrastructurelayer)✓ current
  *
- * 【statusstream转】waiting → running → finalizing → completed/finished | error
+ * 【statusstreamtransfer】waiting → running → finalizing → completed/finished | error
  */
 enum SandboxAsrStatusEnum: string
 {
     case WAITING = 'waiting';           // etc待middle:taskalreadysubmit,etc待sandboxprocess
-    case RUNNING = 'running';           // 运linemiddle:sandboxjustinprocessaudiominuteslice
+    case RUNNING = 'running';           // runlinemiddle:sandboxjustinprocessaudiominuteslice
     case FINALIZING = 'finalizing';     // justinexecutefinalmerge:sandboxjustinmergeaudioandprocessnotefile
     case COMPLETED = 'completed';       // taskcomplete(V2 newformat):audiomergeandfileprocessall部complete
     case FINISHED = 'finished';         // taskcomplete(tobackcompatibleoldformat):retainuseatcompatibleoldversionsandbox
@@ -39,7 +39,7 @@ enum SandboxAsrStatusEnum: string
     {
         return match ($this) {
             self::WAITING => 'etc待middle',
-            self::RUNNING => '运linemiddle',
+            self::RUNNING => 'runlinemiddle',
             self::FINALIZING => 'justinmerge',
             self::COMPLETED => 'alreadycomplete',
             self::FINISHED => 'alreadycomplete(old)',
@@ -64,7 +64,7 @@ enum SandboxAsrStatusEnum: string
     }
 
     /**
-     * whetherformiddlebetweenstatus(needcontinueround询).
+     * whetherformiddlebetweenstatus(needcontinueroundquery).
      */
     public function isInProgress(): bool
     {

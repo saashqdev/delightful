@@ -15,9 +15,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_chat_sequences', function (Blueprint $table) {
-            // checkdeleted_atfieldwhether存in,ifnot存inthenadd软deletefield
+            // checkdeleted_atfieldwhetherexistsin,ifnotexistsinthenaddsoftdeletefield
             if (! Schema::hasColumn('delightful_chat_sequences', 'deleted_at')) {
-                $table->softDeletes()->comment('软deletion time');
+                $table->softDeletes()->comment('softdeletion time');
             }
         });
     }
@@ -28,7 +28,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('delightful_chat_sequences', function (Blueprint $table) {
-            // rollbacko clockdeletedeleted_atfield(onlyinfield存ino clock)
+            // rollbacko clockdeletedeleted_atfield(onlyinfieldexistsino clock)
             if (Schema::hasColumn('delightful_chat_sequences', 'deleted_at')) {
                 $table->dropSoftDeletes();
             }

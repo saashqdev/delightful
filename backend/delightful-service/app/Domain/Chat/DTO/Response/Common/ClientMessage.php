@@ -18,29 +18,29 @@ use Throwable;
  */
 class ClientMessage extends AbstractEntity
 {
-    // service端generatemessage唯oneid,alllocally uniqueone.useatwithdraw,editmessage.
+    // serviceclientgeneratemessageuniqueoneid,alllocally uniqueone.useatwithdraw,editmessage.
     protected string $delightfulMessageId;
 
-    // customer端generate,needios/Android/webthreeclient commoncertainonegeneratealgorithm.useatinformcustomer端,delightful_message_idbycome
+    // customerclientgenerate,needios/Android/webthreeclient commoncertainonegeneratealgorithm.useatinformcustomerclient,delightful_message_idbycome
     protected ?string $appMessageId;
 
     // topicid
     protected ?string $topicId;
 
-    // messagesmallcategory.controlmessagesmallcategory:already读return执;withdraw;edit;join group/leave group;organizationarchitecture change; . showmessage:text,voice,img,file,videoetc
+    // messagesmallcategory.controlmessagesmallcategory:alreadyreadreturn执;withdraw;edit;join group/leave group;organizationarchitecture change; . showmessage:text,voice,img,file,videoetc
 
     protected string $type;
 
-    // return显not读person数,ifuserpoint击detail,againrequestspecificmessagecontent
+    // returndisplaynotreadpersoncount,ifuserpoint击detail,againrequestspecificmessagecontent
     protected ?int $unreadCount;
 
-    // messagesend者,from己or者heperson
+    // messagesendperson,fromselforpersonheperson
     protected string $senderId;
 
-    // messagesendtime,and delightful_message_id oneup,useatwithdraw,editmessageo clock唯onepropertyvalidation.
+    // messagesendtime,and delightful_message_id oneup,useatwithdraw,editmessageo clockuniqueonepropertyvalidation.
     protected int $sendTime;
 
-    // chatmessagestatus:unread | seen | read |revoked  .to应middletext explanation:not读|already读|alreadyview(non纯textcomplextypemessage,userpoint击detail)  | withdraw
+    // chatmessagestatus:unread | seen | read |revoked  .toshouldmiddletext explanation:notread|alreadyread|alreadyview(non纯textcomplextypemessage,userpoint击detail)  | withdraw
     protected ?string $status;
 
     protected MessageInterface $content;
@@ -48,7 +48,7 @@ class ClientMessage extends AbstractEntity
     public function __construct(array $data)
     {
         if (! $data['content'] instanceof MessageInterface) {
-            // avoideachtype bug causeuser完allnoFarahmessage,thiswithin做onedown兜bottom
+            // avoideachtype bug causeuser完allnoFarahmessage,thiswithinmakeonedownfallbackbottom
             try {
                 $data['content'] = MessageAssembler::getMessageStructByArray($data['type'], $data['content']);
             } catch (Throwable) {
@@ -69,7 +69,7 @@ class ClientMessage extends AbstractEntity
             'sender_id' => $this->getSenderId(),
             'send_time' => $this->getSendTime(),
             'status' => $this->getStatus(),
-            // thiswithin key is $this->getType() to应messagetype,value ismessagecontent
+            // thiswithin key is $this->getType() toshouldmessagetype,value ismessagecontent
             $this->type => $this->content->toArray($filterNull),
         ];
     }

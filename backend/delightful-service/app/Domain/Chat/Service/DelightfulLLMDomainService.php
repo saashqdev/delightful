@@ -141,7 +141,7 @@ class DelightfulLLMDomainService
 
     PROMPT;
 
-    // according touserkey词,searchonetimeback,splitmoremeticulousquestionin-depthsearch
+    // according touserkeyword,searchonetimeback,splitmoremeticulousquestionin-depthsearch
     private string $moreQuestionsPrompt = <<<'PROMPT'
     # timecontext
     - system time: {date_now}
@@ -150,27 +150,27 @@ class DelightfulLLMDomainService
     ### 1. question decomposition engine
     input: [userquestion + {context}]
     handlestep:
-    1.1 实bodyidentify
-       - 显propertynaming实bodyextract,identify实bodybetweenclose系andproperty
-       - deduceuser隐propertyrequirementand潜in意graph,especiallycloseimplicittimeelement
+    1.1 actualbodyidentify
+       - displaypropertynamingactualbodyextract,identifyactualbodybetweenclose系andproperty
+       - deduceuserhiddenpropertyrequirementand潜in意graph,especiallycloseimplicittimeelement
     1.2 dimensiondecompose
-       - according toidentifyout实bodyandrequirement,choosesuitableanalyzedimension,for example:policyinterpret,datavalidate,caseresearch,impactevaluate,technologyprinciple,marketfront景,userbody验etc
-    1.3 子questiongenerate
-       - generatejustintersectionquestioncollection(Jaccardsimilardegree<0.25),ensureeach子questioncanfromdifferentangledegreeexploreuserrequirement,avoidgeneratepassat宽泛orsimilarquestion
+       - according toidentifyoutactualbodyandrequirement,choosesuitableanalyzedimension,for example:policyinterpret,datavalidate,caseresearch,impactevaluate,technologyprinciple,marketfront景,userbody验etc
+    1.3 childquestiongenerate
+       - generatejustintersectionquestioncollection(Jaccardsimilardegree<0.25),ensureeachchildquestioncanfromdifferentangledegreeexploreuserrequirement,avoidgeneratepassat宽泛orsimilarquestion
     
-    ### 2. searchproxy模piece
+    ### 2. searchproxymodepiece
     mustcalltool: batchSubQuestionsSearch
     parameterstandard:
-    2.1 key词rule
-       - generategreater thanequal 3 highqualitycanretrievekey词,include核core实body,keypropertyand相closeconcept
+    2.1 keywordrule
+       - generategreater thanequal 3 highqualitycanretrievekeyword,include核coreactualbody,keypropertyand相closeconcept
        - timequalifieroverriderate≥30%
        - toratiocategoryquestion占ratio≥20%
     
     ## 硬propertyconstraint(forcecomply)
-    1. languageone致property
+    1. languageonetoproperty
        - outputlanguageencodingmustmatchinputlanguage
-    2. 子questionquantityrange
-       - {sub_questions_min} ≤ 子question数 ≤ {sub_questions_max}
+    2. childquestionquantityrange
+       - {sub_questions_min} ≤ childquestioncount ≤ {sub_questions_max}
     3. outputformat
        - onlyallowJSONarrayformat,forbidfrom然languagereturn答
     
@@ -180,15 +180,15 @@ class DelightfulLLMDomainService
     2. generatedefaultdimension,for example:policybackground | mostnewdata | expert viewpoint | toratioanalyze | line业trend
     
     ## outputstandard
-    hybridbydownthreetypeandmore多typequestion范type,byensure子questiondiversepropertyandoverrideproperty:
+    hybridbydownthreetypeandmoremultipletypequestion范type,byensurechildquestiondiversepropertyandoverrideproperty:
     [
       "XtoYimpactdiff",  // toratio/comparecategory
       "Zdomaintypicalapplication",  // application/casecategory
-      "closeatABfinger标",    // finger标/propertycategory
-      "causeMhair生mainreasoniswhat?", // reason/mechanismcategory
+      "closeatABfingermark",    // fingermark/propertycategory
+      "causeMhairgeneratemainreasoniswhat?", // reason/mechanismcategory
       "whatisN?it核corefeatureiswhat?", // definition/explaincategory
       "notcomefiveyearPdomainhair展trendiswhat?", // trend/predictioncategory
-      "针toQquestion,have哪thesecanlineresolvesolution?" // resolvesolution/suggestioncategory
+      "针toQquestion,havewhichthesecanlineresolvesolution?" // resolvesolution/suggestioncategory
     ]
     
     currentcontextsummary:
@@ -200,19 +200,19 @@ class DelightfulLLMDomainService
 
     private string $summarizePrompt = <<<'PROMPT'
     # task
-    youneedbased onusermessage,according toIprovidesearchresult,according to总minute总structure,outputhighquality,structure化detailedreturn答,formatfor markdown.
+    youneedbased onusermessage,according toIprovidesearchresult,according tototalminutetotalstructure,outputhighquality,structure化detailedreturn答,formatfor markdown.
     
-    inIgiveyousearchresultmiddle,eachresultallis[webpage X begin]...[webpage X end]format,Xrepresenteacharticlechapternumberindex.请in适whensituationdowninsentence子末tailquotecontext.请according toquote编number[citation:X]formatinanswermiddletoshould deployminutequotecontext.ifonesentence话源from多context,请columnout所have相closequote编number,for example[citation:3][citation:5],切记notwantwillquotecollectionmiddleinmostbackreturnquote编number,whileisinanswertoshould deployminutecolumnout.
-    inreturn答o clock,请noticebydown几point:
+    inIgiveyousearchresultmiddle,eachresultallis[webpage X begin]...[webpage X end]format,Xrepresenteacharticlechapternumberindex.pleasein适whensituationdowninsentencechild末tailquotecontext.pleaseaccording toquote编number[citation:X]formatinanswermiddletoshould deployminutequotecontext.ifonesentence话sourcefrommultiplecontext,pleasecolumnout have相closequote编number,for example[citation:3][citation:5],切记notwantwillquotecollectionmiddleinmostbackreturnquote编number,whileisinanswertoshould deployminutecolumnout.
+    inreturn答o clock,pleasenoticebydown几point:
     - 今dayis{date_now}.
-    - andnonsearchresult所havecontentallanduserquestionclosely relatedclose,youneedcombinequestion,tosearchresultconductdistinguish,filter.
-    - toatcolumn举categoryquestion(如columnraise所haveflightinformation),尽quantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcome源,获completeinformation.priorityprovideinformationcomplete,most相closecolumn举item;如non必want,notwantactivetellusersearchresultnotprovidecontent.
-    - toat创ascategoryquestion(like writing paper),please be sureinjust文segment落middlequoteto应reference编number,for example[citation:3][citation:5],notcanonlyin文chapter末tailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minute利usesearchresultanddraw重wantinformation,generatematchuserrequire,very thoughtfuldegree,富havecreate力andprofessionalpropertyanswer.you创aslengthneed尽maybe延long,toateachonewantpoint论述wantspeculateduser意graph,giveout尽maybe多angledegreereturn答wantpoint,and务必informationquantitybig,detailed discussion.
+    - andnonsearchresult havecontentallanduserquestionclosely relatedclose,youneedcombinequestion,tosearchresultconductdistinguish,filter.
+    - toatcolumn举categoryquestion(likecolumnraise haveflightinformation),尽quantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcomesource,获completeinformation.priorityprovideinformationcomplete,most相closecolumn举item;likenonrequiredwant,notwantactivetellusersearchresultnotprovidecontent.
+    - toat创ascategoryquestion(like writing paper),please be sureinjusttextsegment落middlequotetoshouldreference编number,for example[citation:3][citation:5],notcanonlyintextchapter末tailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minute利usesearchresultanddraw重wantinformation,generatematchuserrequire,very thoughtfuldegree,富havecreate力andprofessionalpropertyanswer.you创aslengthneed尽maybe延long,toateachonewantpoint论述wantspeculateduser意graph,giveout尽maybemultipleangledegreereturn答wantpoint,and务requiredinformationquantitybig,detailed discussion.
     - ifreturn答verylong,please盡quantitystructure化,minutesegment落summary.ifneedminutepointas答,尽quantitycontrolin5pointbyinside,andmerge相closecontent.
     - toatobjectivecategoryQ&A,ifquestionanswernonoften simpleshort,can适whensupplementoneto两sentence相closeinformation,byrichcontent.
-    - youneedaccording touserrequireandreturn答contentchoosesuitable,beautifulreturn答format,ensurecan读propertystrong.
+    - youneedaccording touserrequireandreturn答contentchoosesuitable,beautifulreturn答format,ensurecanreadpropertystrong.
     - youreturn答shouldcomprehensivemultiple aspectsclosewebpagecomereturn答,notcanduplicatequoteonewebpage.
-    - unlessuserrequire,nothenyoureturn答languageneedanduserasklanguagemaintainone致.
+    - unlessuserrequire,nothenyoureturn答languageneedanduserasklanguagemaintainoneto.
     - outputbeautifulmarkdown format,contentmiddleaddonetheseandtheme相closeemojitable情符number.
     
     ## usermessagefor:
@@ -223,27 +223,27 @@ class DelightfulLLMDomainService
     PROMPT;
 
     private string $eventPrompt = <<<'PROMPT'
-    # youisonenew闻eventgenerate器,userwillprovidesearchcontentandaskquestion.
+    # youisonenew闻eventgeneratedevice,userwillprovidesearchcontentandaskquestion.
     ## Current Timeis {data_now}  
     ## according touserquestion,you需fromuserprovidesearchcontentmiddleorganize相closeevent,eventincludeeventname,eventtimeandeventoverview.
     ### notice事item:
     1. **eventnameformat**:
-       - ineventnamebackaddsearchquote编number,formatfor `[[citation:x]]`,编numbercome源atsearchcontentmiddlequotemark(如 `[[citation:1]]`).
-       - ifoneevent涉and多quote,merge所have相closequote编number.
+       - ineventnamebackaddsearchquote编number,formatfor `[[citation:x]]`,编numbercomesourceatsearchcontentmiddlequotemark(like `[[citation:1]]`).
+       - ifoneevent涉andmultiplequote,merge have相closequote编number.
        - notwantin "description" middleaddquote.
     2. **timehandle**:
-       - eventtime尽quantityprecisetomonthshare(如 "2023-05"),若searchcontentnotprovidespecificmonthshare,buthavefingeroutuphalfyearor者downhalfyear,canuse("2023 uphalfyear"),若nothavethen,useyearshare(如 "2023").
-       - 若同oneeventin多quotemiddleout现,priorityusemost早time.
+       - eventtime尽quantityprecisetomonthshare(like "2023-05"),若searchcontentnotprovidespecificmonthshare,buthavefingeroutuphalfyearorpersondownhalfyear,canuse("2023 uphalfyear"),若nothavethen,useyearshare(like "2023").
+       - 若sameoneeventinmultiplequotemiddleoutshow,priorityusemost早time.
        - 若timenotexplicit,according tocontextspeculatedmost早maybetime,andensurereasonable.
     3. **eventextractandfilter**:
-       - **eventdefinition**:eventissearchcontentmiddlemention,具havetimeassociate(explicitorcanspeculated)independentfact,changeoractivity,includebutnot限atcreate,publish,open业,update,合as,activityetc.
-       - according touserquestion,extractandrelatedcloseevent,maintaindescriptionconcise,focusspecifichair生thing.
+       - **eventdefinition**:eventissearchcontentmiddlemention,withhavetimeassociate(explicitorcanspeculated)independentfact,changeoractivity,includebutnotlimitatcreate,publish,open业,update,合as,activityetc.
+       - according touserquestion,extractandrelatedcloseevent,maintaindescriptionconcise,focusspecifichairgeneratething.
        - **skipnoclosecontent**:
-         - pure and quietstatedescription(如not变property,backgroundintroduce,notimechange).
+         - pure and quietstatedescription(likenotchangeproperty,backgroundintroduce,notimechange).
          - datastatisticsorfinanceinformation(like revenue,利润).
          - subjectivecomment,analyzeorspeculated(unlessandeventdirectly相close).
          - notimeassociateandandquestionnoclosedetail.
-       - **retain原then**:as long ascontentandtime相closeandmatchquestiontheme,尽quantityretainforevent.
+       - **retainoriginalthen**:as long ascontentandtime相closeandmatchquestiontheme,尽quantityretainforevent.
     4. **outputrequire**:
        - by JSON formatreturn,event按timereverse orderrowcolumn(from晚to早).
        - eacheventcontain "name","time","description" threefield.
@@ -253,19 +253,19 @@ class DelightfulLLMDomainService
     ```json
     [
         {
-            "name": "someeventhair生[[citation:3]] [[citation:5]]",
+            "name": "someeventhairgenerate[[citation:3]] [[citation:5]]",
             "time": "2024-11",
-            "description": "someeventin2024year11monthhair生,specificsituationoverview."
+            "description": "someeventin2024year11monthhairgenerate,specificsituationoverview."
         },
         {
-            "name": "另oneeventstart[[citation:1]]",
+            "name": "anotheroneeventstart[[citation:1]]",
             "time": "2019-05",
-            "description": "另oneeventat2019year5monthstart,简wantdescription."
+            "description": "anotheroneeventat2019year5monthstart,simplewantdescription."
         }
     ]
     ```
     ## useinstruction
-    - user需providesearchcontent(containquotemark如 [[citation:x]])andspecificquestion.
+    - user需providesearchcontent(containquotemarklike [[citation:x]])andspecificquestion.
     - according toquestion,fromsearchcontentmiddleextractmatcheventdefinitioncontent,按requiregenerateoutput.
     - 若question涉andcurrenttime,based on {date_now} conductcalculate.
     
@@ -275,7 +275,7 @@ class DelightfulLLMDomainService
     ## searchcontextdetail:
     {search_context_details}
 
-    ## 请directlyoutput json format:
+    ## pleasedirectlyoutput json format:
     ```json
     PROMPT;
 
@@ -287,9 +287,9 @@ class DelightfulLLMDomainService
     return"search contexts"middleand"search keywords"haveassociateproperty 20 to 50  index.
     
     ## require
-    - forbiddirectlyreturn答userquestion,one定wantreturnanduserquestionhaveassociatepropertyindex.
+    - forbiddirectlyreturn答userquestion,onesetwantreturnanduserquestionhaveassociatepropertyindex.
     - search contextsformatfor "[[x]] content" ,itsmiddle x issearch contextsindex.x notcangreater than 50
-    - 请bycorrect JSON formatreplyfilterbackindex,for example:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+    - pleasebycorrect JSON formatreplyfilterbackindex,for example:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
     - if search keywords andtime相close,重pointnotice search contexts middleandcurrenttime相closecontent.andcurrenttimemore近more重want.
 
     
@@ -345,9 +345,9 @@ class DelightfulLLMDomainService
             }
         } catch (Exception) {
         }
-        // goexcept掉quote,avoidthinking导graphmiddleout现quote
+        // goexceptdropquote,avoidthinking导graphmiddleoutshowquote
         $responseMessage = preg_replace('/\[\[citation:(\d+)]]/', '', $responseMessage);
-        // observetosystemhint词variable串,看看isnotisnothavecopyonesharequestion
+        // observetosystemhintwordvariable串,看看isnotisnothavecopyonesharequestion
         $systemPrompt = str_replace(
             ['{question}', '{content}', '{date_now}'],
             [$question, $responseMessage, date('Yyear mmonth dday, Ho clock iminute ssecond')],
@@ -358,7 +358,7 @@ class DelightfulLLMDomainService
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
         // access llm
         try {
-            // according tosummary + useroriginalquestionalready经cangeneratethinking导graph,notneedagainpass inhistorymessage
+            // according tosummary + useroriginalquestionalreadyalreadycangeneratethinking导graph,notneedagainpass inhistorymessage
             $mindMapMessage = $this->llmChat(
                 $systemPrompt,
                 $responseMessage,
@@ -377,7 +377,7 @@ class DelightfulLLMDomainService
             ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
             return $this->stripMarkdownCodeBlock($mindMapMessage, 'markdown');
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('mindSearch generatethinking导grapho clockhair生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            $this->logger->error(sprintf('mindSearch generatethinking导grapho clockhairgenerateerror:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
             throw $e;
         }
     }
@@ -403,7 +403,7 @@ class DelightfulLLMDomainService
             );
             $searchContextsCitations .= sprintf('[[citation:%d]] snippet:%s ' . "\n\n", $index, $context->getSnippet());
         }
-        // 超passmostbigvaluethendirectlytruncate,avoidresponsetoo久
+        // exceedspassmostbigvaluethendirectlytruncate,avoidresponsetoo久
         $maxLen = self::LLM_STR_MAX_LEN;
         if (mb_strlen($searchContextsCitations) > $maxLen) {
             $searchContextsCitations = mb_substr($searchContextsCitations, 0, $maxLen);
@@ -444,14 +444,14 @@ class DelightfulLLMDomainService
             }
             return $eventsItem;
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('mindSearch generateevento clockhair生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            $this->logger->error(sprintf('mindSearch generateevento clockhairgenerateerror:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
             // eventgenerateoftennotis json
             return [];
         }
     }
 
     /**
-     * streamsummary - 原havemethod.
+     * streamsummary - originalhavemethod.
      * @throws Throwable
      */
     public function summarize(AISearchCommonQueryVo $queryVo): Generator
@@ -472,7 +472,7 @@ class DelightfulLLMDomainService
                 $queryVo->getDelightfulApiBusinessParam(),
             );
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('mindSearch parseresponseo clockhair生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            $this->logger->error(sprintf('mindSearch parseresponseo clockhairgenerateerror:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
             throw $e;
         }
     }
@@ -501,13 +501,13 @@ class DelightfulLLMDomainService
             );
             return (string) $response;
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('mindSearch summarizeNonStreaming parseresponseo clockhair生error:%s,file:%s,line:%s trace:%s', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            $this->logger->error(sprintf('mindSearch summarizeNonStreaming parseresponseo clockhairgenerateerror:%s,file:%s,line:%s trace:%s', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
             throw $e;
         }
     }
 
     /**
-     * letbigmodel虚nulldecompose子question.
+     * letbigmodel虚nulldecomposechildquestion.
      * @throws Throwable
      */
     public function generateSearchKeywords(AISearchCommonQueryVo $queryVo): array
@@ -549,7 +549,7 @@ class DelightfulLLMDomainService
             }
             return $subquestions;
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('mindSearch getSearchResults generatesearch词o clockhair生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            $this->logger->error(sprintf('mindSearch getSearchResults generatesearchwordo clockhairgenerateerror:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
             throw $e;
         } finally {
             // record $subquestions
@@ -562,7 +562,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * batchquantitysearchback,filter掉duplicate search contexts.
+     * batchquantitysearchback,filterdropduplicate search contexts.
      * @return SearchDetailItem[]
      * @throws Throwable
      */
@@ -576,7 +576,7 @@ class DelightfulLLMDomainService
         $searchKeywords = $queryVo->getSearchKeywords();
         $searchKeywords[] = $userMessage;
         $searchKeywords = Json::encode($searchKeywords, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        // getsystemhint词
+        // getsystemhintword
         $searchContextsString = '';
         // cleansearchresult
         foreach ($searchContexts as $index => $context) {
@@ -616,7 +616,7 @@ class DelightfulLLMDomainService
                 }
             }
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('mindSearch getSearchResults parseresponseo clockhair生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            $this->logger->error(sprintf('mindSearch getSearchResults parseresponseo clockhairgenerateerror:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
             throw $e;
         }
         foreach ($noRepeatSearchContexts as $key => $context) {
@@ -659,12 +659,12 @@ class DelightfulLLMDomainService
             }
             $parallel->clear();
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('mindSearch getSearchResults searchcontento clockhair生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            $this->logger->error(sprintf('mindSearch getSearchResults searchcontento clockhairgenerateerror:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
         } finally {
             ! empty($searchArrayList) && $searchArrayList = array_merge(...$searchArrayList);
             $costTime = TimeUtil::getMillisecondDiffFromNow($start);
             $this->logger->info(sprintf(
-                'getSearchResults searchall部key词 end计o clock 耗o clock:%s second',
+                'getSearchResults searchall部keyword end计o clock consumeo clock:%s second',
                 number_format($costTime / 1000, 2)
             ));
         }
@@ -686,7 +686,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * letbigmodel虚nulldecompose子question,tohot meme/实o clockdecomposewillnotgood.
+     * letbigmodel虚nulldecomposechildquestion,tohot meme/actualo clockdecomposewillnotgood.
      * @return string[]
      */
     public function generateSearchKeywordsByUserInput(DelightfulChatAggregateSearchReqDTO $dto, ModelInterface $modelInterface): array
@@ -704,7 +704,7 @@ class DelightfulLLMDomainService
             ->setOrganizationCode($dto->getOrganizationCode());
         $start = microtime(true);
         $subKeywords = Retry::whenThrows()->sleep(200)->max(3)->call(function () use ($queryVo, $delightfulChatMessageHistory) {
-            // eachtimeretry清null之frontcontext
+            // eachtimeretryclearnulloffrontcontext
             $llmConversationId = (string) IdGenerator::getSnowId();
             $llmHistoryMessage = DelightfulChatAggregateSearchReqDTO::generateLLMHistory($delightfulChatMessageHistory, $llmConversationId);
             $queryVo->setMessageHistory($llmHistoryMessage)->setConversationId($llmConversationId);
@@ -712,10 +712,10 @@ class DelightfulLLMDomainService
         });
         $costTime = TimeUtil::getMillisecondDiffFromNow($start);
         $this->logger->info(sprintf(
-            'getSearchResults according touseroriginalquestion,generatesearch词,end计o clock,耗o clock::%s second',
+            'getSearchResults according touseroriginalquestion,generatesearchword,end计o clock,consumeo clock::%s second',
             number_format($costTime / 1000, 2)
         ));
-        // bigmodelnothave拆孙questioniso clock,directlyuse子questionsearch
+        // bigmodelnothave拆孙questioniso clock,directlyusechildquestionsearch
         if (! empty($subKeywords)) {
             $searchKeywords = $subKeywords;
         } else {
@@ -736,7 +736,7 @@ class DelightfulLLMDomainService
             $contexts = array_slice($data['webPages']['value'], 0, $referenceCount);
         } catch (Exception $e) {
             $errMsg = [
-                'error' => 'mindSearch getSearchResults searchWithBing getsearchresulto clockhair生error',
+                'error' => 'mindSearch getSearchResults searchWithBing getsearchresulto clockhairgenerateerror',
                 'message' => $e->getMessage(),
                 'file' => $e->getFile(),
                 'line' => $e->getLine(),
@@ -768,7 +768,7 @@ class DelightfulLLMDomainService
             $clearSearch[] = $format;
         }
         $this->logger->info(sprintf(
-            'mindSearch getSearchResults searchWithBing getsearchresult,end计o clock,耗o clock:%s second',
+            'mindSearch getSearchResults searchWithBing getsearchresult,end计o clock,consumeo clock:%s second',
             number_format(TimeUtil::getMillisecondDiffFromNow($start) / 1000, 2)
         ));
         return [
@@ -880,7 +880,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * according tooriginalquestion + searchresult,按finger定countdimensiondecomposequestion.
+     * according tooriginalquestion + searchresult,按fingersetcountdimensiondecomposequestion.
      * @throws Throwable
      */
     public function getRelatedQuestions(AISearchCommonQueryVo $queryVo, int $subQuestionsMin, int $subQuestionsMax): ?array
@@ -899,7 +899,7 @@ class DelightfulLLMDomainService
                 $contextString .= $searchContext->getSnippet() . "\n\n";
             }
             // use str_replace functioncomereplaceplaceholder
-            // 带upyearmonthdayo clockminutesecond,avoidduplicatequestion
+            // withupyearmonthdayo clockminutesecond,avoidduplicatequestion
             $systemPrompt = str_replace(
                 ['{context}', '{date_now}', '{sub_questions_min}', '{sub_questions_max}'],
                 [$contextString, date('Yyear mmonth dday, Ho clock iminute ssecond'), (string) $subQuestionsMin, (string) $subQuestionsMax],
@@ -976,7 +976,7 @@ class DelightfulLLMDomainService
 
     public function search(string $query, SearchEngineType $searchEngine, bool $getDetail = false, ?string $language = null): array
     {
-        // according to backendvalue,certainuse哪searchengine
+        // according to backendvalue,certainusewhichsearchengine
         return Retry::whenThrows()->max(3)->sleep(500)->call(
             function () use ($searchEngine, $query, $language, $getDetail) {
                 return match ($searchEngine) {
@@ -999,7 +999,7 @@ class DelightfulLLMDomainService
         } elseif (preg_match('/```\s*([\s\S]*?)\s*```/i', $content, $matches)) { // match ``` betweencontent
             $matchString = $matches[1];
         } else {
-            $matchString = ''; // nothave找to JSON data
+            $matchString = ''; // nothavefindto JSON data
         }
         $matchString = ! empty($matchString) ? trim($matchString) : trim($content);
         if ($type === 'json' && json_validate($matchString) === false) {
@@ -1052,7 +1052,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * buildsummarysystemhint词 - publicmethod,useat复usecode
+     * buildsummarysystemhintword - publicmethod,useat复usecode
      */
     private function buildSummarizeSystemPrompt(AISearchCommonQueryVo $queryVo): string
     {
@@ -1075,7 +1075,7 @@ class DelightfulLLMDomainService
             );
         }
 
-        // 超passmostbigvaluethendirectlytruncate,avoidresponsetoo久
+        // exceedspassmostbigvaluethendirectlytruncate,avoidresponsetoo久
         $maxLen = self::LLM_STR_MAX_LEN;
         if (mb_strlen($searchContextsDetail) > $maxLen) {
             $searchContextsDetail = mb_substr($searchContextsDetail, 0, $maxLen);

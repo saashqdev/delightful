@@ -23,7 +23,7 @@ class GlobalSearchApplicationDomainServiceTest extends BaseTest
         $userAuthorization = (new DelightfulUserAuthorization())->setId('')->setOrganizationCode('DT001');
         $requestContext = new RequestContext();
         $requestContext->setUserAuthorization($userAuthorization);
-        $queryVo = (new GlobalSearchQueryVo())->setKeyWord('supply链');
+        $queryVo = (new GlobalSearchQueryVo())->setKeyWord('supplychain');
         $res = $this->getGlobalSearchApplicationDomainService()->globalSearch($requestContext, $queryVo);
         $res = array_map(fn ($item) => $item->toArray(), $res->getData());
         $this->assertCount(1, $res);

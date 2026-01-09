@@ -80,14 +80,14 @@ class StartNodeParamsConfig extends NodeParamsConfig
             $systemOutput = null;
             $customSystemOutput = null;
             $config = $branch['config'] ?? [];
-            // canmeanwhilechoose多typemethod触hair,所byheinput parameterandoutparametertothiswithincomeprocess
+            // canmeanwhilechoosemultipletypemethodtouchhair, byheinput parameterandoutparametertothiswithincomeprocess
             switch ($triggerType) {
                 case TriggerType::ChatMessage:
                     $output = $this->getChatMessageOutputTemplate();
                     break;
                 case TriggerType::OpenChatWindow:
                     $output = $this->getOpenChatWindowOutputTemplate();
-                    // ifhavedown游sectionpoint,that么between隔timethennotcanforempty
+                    // ifhavedown游sectionpoint,thatwhatbetweenseparatortimethennotcanforempty
                     if (! empty($nextNodes) && ! empty($branch['config'])) {
                         // second
                         $interval = $branch['config']['interval'] ?? 0;
@@ -109,7 +109,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     break;
                 case TriggerType::ParamCall:
                     $outputComponent = ComponentFactory::fastCreate($branch['output']['form'] ?? []);
-                    // parametercallcannoparameter触hair,for example触haironeevent
+                    // parametercallcannoparametertouchhair,for exampletouchhaironeevent
                     if ($outputComponent) {
                         $output = new NodeOutput();
                         $output->setForm($outputComponent);
@@ -353,7 +353,7 @@ JSON;
                 "type": "string",
                 "key": "trigger_time",
                 "sort": 0,
-                "title": "触hairtime",
+                "title": "touchhairtime",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -364,7 +364,7 @@ JSON;
                 "type": "number",
                 "key": "trigger_timestamp",
                 "sort": 1,
-                "title": "触hairtime戳",
+                "title": "touchhairtimestamp",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -433,7 +433,7 @@ JSON;
                 "real_name": {
                     "type": "string",
                     "key": "real_name",
-                    "title": "true实name",
+                    "title": "trueactualname",
                     "description": "",
                     "items": null,
                     "properties": null,

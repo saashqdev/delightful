@@ -115,7 +115,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * create带signaturerequest
+     * createwithsignaturerequest
      */
     private function createSignedRequest(string $url, string $method, array $headers = [], string $body = ''): Request
     {

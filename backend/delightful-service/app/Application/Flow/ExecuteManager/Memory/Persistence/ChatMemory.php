@@ -78,16 +78,16 @@ class ChatMemory implements MemoryPersistenceInterface
     }
 
     /**
-     * already经isrowgoodsequence所havemessage.
+     * alreadyalreadyisrowgoodsequence havemessage.
      * @return array<DelightfulMessageEntity>
      */
     public function getImChatMessages(MemoryQuery $memoryQuery): array
     {
         $seqLimit = $memoryQuery->getLimit();
 
-        // todo back续inquery侧optimize
+        // todo back続inquery侧optimize
         // whenfor ai_card message,samemessagehave 20 item,needgo重,butisinquerytime,isnotknowhaveduplicate
-        // inthiswithinfirst放quantityquery,at mostquery 200 item,然backagainconduct重.
+        // inthiswithinfirstputquantityquery,at mostquery 200 item,然backagainconduct重.
         $seqLimit = ($seqLimit * 20 <= 200) ? $seqLimit * 20 : 200;
 
         $messagesQueryDTO = (new MessagesQueryDTO());
@@ -105,7 +105,7 @@ class ChatMemory implements MemoryPersistenceInterface
         $messageIds = [];
 
         foreach ($clientSeq as $seqResponseDTO) {
-            // cardinfoonly取bigmodelreturn,bigmodelreturnfeaturehave type = 1, parent_id = 0
+            // cardinfoonlygetbigmodelreturn,bigmodelreturnfeaturehave type = 1, parent_id = 0
             if ($seqResponseDTO->getSeq()?->getMessage()?->getContent() instanceof AggregateAISearchCardMessage) {
                 /** @var AggregateAISearchCardMessage $aggregateAISearchCardMessage */
                 $aggregateAISearchCardMessage = $seqResponseDTO->getSeq()?->getMessage()?->getContent();
@@ -118,7 +118,7 @@ class ChatMemory implements MemoryPersistenceInterface
             if ($messageId) {
                 $messageIds[] = $messageId;
             }
-            // specialprocess, whenstartgo重,andreturnitem数greater thanequal limit,thennotagaincontinuequery
+            // specialprocess, whenstartgo重,andreturnitemcountgreater thanequal limit,thennotagaincontinuequery
             if (count($messageIds) >= $memoryQuery->getLimit()) {
                 break;
             }

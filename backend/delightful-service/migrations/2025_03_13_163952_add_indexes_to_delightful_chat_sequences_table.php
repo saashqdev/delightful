@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // onlywhentable存ino clock才executeindex操as
+        // onlywhentableexistsino clock才executeindexoperationas
         if (Schema::hasTable('delightful_chat_sequences')) {
             // checkandcreate idx_object_type_id_refer_message_id index
             $this->createIndexIfNotExists(
@@ -56,21 +56,21 @@ return new class extends Migration {
     }
 
     /**
-     * checkindexwhether存in,ifnot存inthencreateindex.
+     * checkindexwhetherexistsin,ifnotexistsinthencreateindex.
      *
-     * @param string $table table名
+     * @param string $table tablename
      * @param string $indexName indexname
-     * @param string $createStatement createindexSQL语sentence
+     * @param string $createStatement createindexSQLlanguagesentence
      */
     private function createIndexIfNotExists(string $table, string $indexName, string $createStatement): void
     {
-        // checkindexwhether存in
+        // checkindexwhetherexistsin
         $indexExists = Db::select(
             "SHOW INDEX FROM `{$table}` WHERE Key_name = ?",
             [$indexName]
         );
 
-        // onlywhenindexnot存ino clock才create
+        // onlywhenindexnotexistsino clock才create
         if (empty($indexExists)) {
             // createindex
             Db::statement($createStatement);
@@ -78,21 +78,21 @@ return new class extends Migration {
     }
 
     /**
-     * ifindex存inthendelete.
+     * ifindexexistsinthendelete.
      *
-     * @param string $table table名
+     * @param string $table tablename
      * @param string $indexName indexname
      */
     private function dropIndexIfExists(string $table, string $indexName): void
     {
-        // checkindexwhether存in
+        // checkindexwhetherexistsin
         $indexExists = Db::select(
             "SHOW INDEX FROM `{$table}` WHERE Key_name = ?",
             [$indexName]
         );
 
         if (! empty($indexExists)) {
-            // delete现haveindex
+            // deleteshowhaveindex
             Db::statement("DROP INDEX `{$indexName}` ON `{$table}`");
         }
     }

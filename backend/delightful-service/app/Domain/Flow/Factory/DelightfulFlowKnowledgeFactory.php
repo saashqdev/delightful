@@ -45,7 +45,7 @@ class DelightfulFlowKnowledgeFactory
 
         // processretrieveconfiguration
         if (! empty($model->retrieve_config)) {
-            // ifisstring(JSON string),先decoding
+            // ifisstring(JSON string),firstdecoding
             $config = json_decode($model->retrieve_config, true);
 
             if (is_array($config)) {
@@ -63,7 +63,7 @@ class DelightfulFlowKnowledgeFactory
     }
 
     /**
-     * will实bodyconvertformodelpropertyarray.
+     * willactualbodyconvertformodelpropertyarray.
      */
     public static function entityToAttributes(KnowledgeBaseEntity $entity): array
     {

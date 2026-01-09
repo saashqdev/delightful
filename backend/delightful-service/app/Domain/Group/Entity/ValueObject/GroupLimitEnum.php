@@ -9,6 +9,6 @@ namespace App\Domain\Group\Entity\ValueObject;
 
 enum GroupLimitEnum: int
 {
-    // normalgroup chatmostbigperson数limit
+    // normalgroup chatmostbigpersoncountlimit
     case NormalGroup = 1000;
 }

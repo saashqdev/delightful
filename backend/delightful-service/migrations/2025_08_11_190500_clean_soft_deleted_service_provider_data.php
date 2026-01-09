@@ -20,16 +20,16 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 清nullofficialorganization Delightful servicequotientconfigurationandmodel(放indelete软deletedata之front)
+        // clearnullofficialorganization Delightful servicequotientconfigurationandmodel(putindeletesoftdeletedataoffront)
         $this->cleanOfficialDelightfulProviderData();
 
-        // cleanup service_provider 相closefour张tablemiddle软deletedata
+        // cleanup service_provider 相closefour張tablemiddlesoftdeletedata
         $this->cleanSoftDeletedData();
 
         // clean service_provider tablemiddle provider_code='Official' record
         $this->cleanOfficialProviderData();
 
-        // cleanup service_provider_models tablemiddle冗remainderdata
+        // cleanup service_provider_models tablemiddleredundantremainderdata
         $this->cleanServiceProviderModelsData();
     }
 
@@ -38,68 +38,68 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // 软deletedataoneonce physicaldeletethenno法restore,所by down methodfornull
+        // softdeletedataoneonce physicaldeletethennomethodrestore, by down methodfornull
     }
 
     /**
-     * cleanup service_provider 相closetablemiddle软deletedata.
+     * cleanup service_provider 相closetablemiddlesoftdeletedata.
      */
     private function cleanSoftDeletedData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('startcleanup service_provider 相closetable软deletedata');
+        $logger->info('startcleanup service_provider 相closetablesoftdeletedata');
 
         try {
-            // usetransactionensuredataone致property
+            // usetransactionensuredataonetoproperty
             Db::transaction(function () use ($logger) {
                 $totalDeleted = 0;
 
-                // 1. delete service_provider tablemiddle软deletedata
+                // 1. delete service_provider tablemiddlesoftdeletedata
                 $deletedCount = Db::table('service_provider')
                     ->whereNotNull('deleted_at')
                     ->delete();
                 $totalDeleted += $deletedCount;
-                $logger->info("delete service_provider table软deletedata: {$deletedCount} item");
+                $logger->info("delete service_provider tablesoftdeletedata: {$deletedCount} item");
 
-                // 2. delete service_provider_configs tablemiddle软deletedata
+                // 2. delete service_provider_configs tablemiddlesoftdeletedata
                 $deletedCount = Db::table('service_provider_configs')
                     ->whereNotNull('deleted_at')
                     ->delete();
                 $totalDeleted += $deletedCount;
-                $logger->info("delete service_provider_configs table软deletedata: {$deletedCount} item");
+                $logger->info("delete service_provider_configs tablesoftdeletedata: {$deletedCount} item");
 
-                // 3. delete service_provider_models tablemiddle软deletedata
+                // 3. delete service_provider_models tablemiddlesoftdeletedata
                 $deletedCount = Db::table('service_provider_models')
                     ->whereNotNull('deleted_at')
                     ->delete();
                 $totalDeleted += $deletedCount;
-                $logger->info("delete service_provider_models table软deletedata: {$deletedCount} item");
+                $logger->info("delete service_provider_models tablesoftdeletedata: {$deletedCount} item");
 
-                // 4. delete service_provider_original_models tablemiddle软deletedata
+                // 4. delete service_provider_original_models tablemiddlesoftdeletedata
                 $deletedCount = Db::table('service_provider_original_models')
                     ->whereNotNull('deleted_at')
                     ->delete();
                 $totalDeleted += $deletedCount;
-                $logger->info("delete service_provider_original_models table软deletedata: {$deletedCount} item");
+                $logger->info("delete service_provider_original_models tablesoftdeletedata: {$deletedCount} item");
 
-                $logger->info("service_provider 相closetable软deletedatacleanupcomplete,totaldelete: {$totalDeleted} itemrecord");
+                $logger->info("service_provider 相closetablesoftdeletedatacleanupcomplete,totaldelete: {$totalDeleted} itemrecord");
             });
         } catch (Throwable $e) {
-            $logger->error('cleanup软deletedataproceduremiddlehair生error: ' . $e->getMessage());
+            $logger->error('cleanupsoftdeletedataproceduremiddlehairgenerateerror: ' . $e->getMessage());
             throw $e;
         }
     }
 
     /**
-     * 清nullofficialorganization Delightful servicequotientconfigurationandmodel.
+     * clearnullofficialorganization Delightful servicequotientconfigurationandmodel.
      */
     private function cleanOfficialDelightfulProviderData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('start清nullofficialorganization Delightful servicequotientconfigurationandmodel');
+        $logger->info('startclearnullofficialorganization Delightful servicequotientconfigurationandmodel');
 
         try {
-            // usetransactionensuredataone致property
+            // usetransactionensuredataonetoproperty
             Db::transaction(function () use ($logger) {
                 // getofficialorganizationencoding
                 $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
@@ -118,7 +118,7 @@ return new class extends Migration {
                 $delightfulConfigIds = array_column($delightfulProviderConfigs, 'id');
 
                 if (! empty($delightfulConfigIds)) {
-                    $logger->info('找to Delightful servicequotientconfigurationquantity: ' . count($delightfulConfigIds));
+                    $logger->info('findto Delightful servicequotientconfigurationquantity: ' . count($delightfulConfigIds));
 
                     // 2. deleteofficialorganizationmiddle Delightful servicequotientdownmodel
                     $deletedModelsCount = Db::table('service_provider_models')
@@ -136,10 +136,10 @@ return new class extends Migration {
                     $totalDeleted += $deletedConfigsCount;
                     $logger->info("deleteofficialorganization Delightful servicequotientconfiguration: {$deletedConfigsCount} item");
                 } else {
-                    $logger->info('not找toneedcleanup Delightful servicequotientconfiguration');
+                    $logger->info('notfindtoneedcleanup Delightful servicequotientconfiguration');
                 }
 
-                // 4. 额outsidecleanup:delete所have is_office=1 officialorganizationmodel
+                // 4. quotaoutsidecleanup:delete have is_office=1 officialorganizationmodel
                 $deletedOfficeModelsCount = Db::table('service_provider_models')
                     ->where('organization_code', $officialOrganizationCode)
                     ->where('is_office', 1)
@@ -150,7 +150,7 @@ return new class extends Migration {
                 $logger->info("officialorganization Delightful servicequotientdatacleanupcomplete,totaldelete: {$totalDeleted} itemrecord");
             });
         } catch (Throwable $e) {
-            $logger->error('cleanupofficialorganization Delightful servicequotientdataproceduremiddlehair生error: ' . $e->getMessage());
+            $logger->error('cleanupofficialorganization Delightful servicequotientdataproceduremiddlehairgenerateerror: ' . $e->getMessage());
             throw $e;
         }
     }
@@ -164,7 +164,7 @@ return new class extends Migration {
         $logger->info('startclean Official servicequotient description and translate field');
 
         try {
-            // usetransactionensuredataone致property
+            // usetransactionensuredataonetoproperty
             Db::transaction(function () use ($logger) {
                 // queryneedclean Official servicequotientrecord
                 $query = Db::table('service_provider')
@@ -198,22 +198,22 @@ return new class extends Migration {
                     }
                 }
 
-                $logger->info("cleancomplete,totalimpactline数: {$updateCount}");
+                $logger->info("cleancomplete,totalimpactlinecount: {$updateCount}");
                 $logger->info('Official servicequotientdatacleancomplete');
             });
         } catch (Throwable $e) {
-            $logger->error('datacleanproceduremiddlehair生error: ' . $e->getMessage());
+            $logger->error('datacleanproceduremiddlehairgenerateerror: ' . $e->getMessage());
             throw $e;
         }
     }
 
     /**
-     * cleanup service_provider_models tablemiddle冗remainderdata.
+     * cleanup service_provider_models tablemiddleredundantremainderdata.
      */
     private function cleanServiceProviderModelsData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('startcleanup service_provider_models table冗remainderdata');
+        $logger->info('startcleanup service_provider_models tableredundantremainderdata');
 
         try {
             // 1. getofficialorganizationencoding
@@ -223,7 +223,7 @@ return new class extends Migration {
             // 2. single独transaction:resetofficialorganizationmodel model_parent_id
             $this->resetOfficialModelsParentId($officialOrganizationCode, $logger);
 
-            // 3. getofficialorganization所haveenablemodel(notneedtransaction)
+            // 3. getofficialorganization haveenablemodel(notneedtransaction)
             $officialEnabledModels = Db::table('service_provider_models')
                 ->where('organization_code', $officialOrganizationCode)
                 ->where('status', Status::Enabled->value)
@@ -236,7 +236,7 @@ return new class extends Migration {
             $officialModelIds = array_keys($officialEnabledModels);
             $logger->info('getofficialorganizationenablemodelquantity: ' . count($officialModelIds));
 
-            // 4. get所havenonofficialorganizationencoding(notneedtransaction)
+            // 4. get havenonofficialorganizationencoding(notneedtransaction)
             $allOrganizationCodes = Db::table('service_provider_models')
                 ->where('organization_code', '!=', $officialOrganizationCode)
                 ->whereNull('deleted_at')
@@ -249,7 +249,7 @@ return new class extends Migration {
             // 5. 按organizationhandlecleanupwork(smalltransaction)
             $this->cleanOrganizationsInBatches($allOrganizationCodes, $officialModelIds, $officialEnabledModels, $logger);
         } catch (Throwable $e) {
-            $logger->error('cleanup service_provider_models 冗remainderdataproceduremiddlehair生error: ' . $e->getMessage());
+            $logger->error('cleanup service_provider_models redundantremainderdataproceduremiddlehairgenerateerror: ' . $e->getMessage());
             throw $e;
         }
     }
@@ -301,13 +301,13 @@ return new class extends Migration {
             // handleresult
             foreach ($results as $orgCode => $result) {
                 if (isset($result['error'])) {
-                    $logger->error("cleanuporganization {$orgCode} o clockhair生error: " . $result['error']->getMessage());
+                    $logger->error("cleanuporganization {$orgCode} o clockhairgenerateerror: " . $result['error']->getMessage());
                 } else {
                     $deletedCount = $result['deleted_count'];
                     $totalDeleted += $deletedCount;
 
                     if ($deletedCount > 0) {
-                        $logger->info("organization {$orgCode} delete冗remaindermodel: {$deletedCount} item");
+                        $logger->info("organization {$orgCode} deleteredundantremaindermodel: {$deletedCount} item");
                     }
                 }
             }
@@ -322,7 +322,7 @@ return new class extends Migration {
             $logger->info("alreadyhandle {$processedCount}/{$totalOrgs} organization,accumulateddelete: {$totalDeleted} item");
         }
 
-        $logger->info("service_provider_models table冗remainderdatacleanupcomplete,totaldelete: {$totalDeleted} itemrecord");
+        $logger->info("service_provider_models tableredundantremainderdatacleanupcomplete,totaldelete: {$totalDeleted} itemrecord");
     }
 
     /**
@@ -341,7 +341,7 @@ return new class extends Migration {
 
             $totalDeletedCount = 0;
 
-            // 1. delete所have is_office = 1 data(guard:nonofficialorganization)
+            // 1. delete have is_office = 1 data(guard:nonofficialorganization)
             $isOfficeDeletedCount = Db::table('service_provider_models')
                 ->where('organization_code', $organizationCode)
                 ->where('organization_code', '!=', $officialOrganizationCode) // double重guard
@@ -350,11 +350,11 @@ return new class extends Migration {
                 ->delete();
             $totalDeletedCount += $isOfficeDeletedCount;
 
-            // 2. deletequotenot存inconfigurationmodel(batchquantityqueryandbatchquantitydelete)
+            // 2. deletequotenotexistsinconfigurationmodel(batchquantityqueryandbatchquantitydelete)
             $invalidConfigDeletedCount = $this->cleanModelsWithInvalidConfig($organizationCode, $officialOrganizationCode);
             $totalDeletedCount += $invalidConfigDeletedCount;
 
-            // 3. deleteconfigurationinvalidmodel(configurationdecryptbackfornullor所havevalueallisnull)
+            // 3. deleteconfigurationinvalidmodel(configurationdecryptbackfornullor havevalueallisnull)
             $invalidConfigDataDeletedCount = $this->cleanModelsWithInvalidConfigData($organizationCode, $officialOrganizationCode);
             $totalDeletedCount += $invalidConfigDataDeletedCount;
 
@@ -374,23 +374,23 @@ return new class extends Migration {
 
                 // check model_parent_id whetherinofficialorganizationmodel id middle
                 if (! in_array($parentId, $officialModelIds)) {
-                    // model_parent_id inofficialorganization找notto,markdelete
+                    // model_parent_id inofficialorganizationfindnotto,markdelete
                     $deleteIds[] = $model['id'];
                     continue;
                 }
 
-                // if model_parent_id 存in,butstatusandofficialorganizationone致,alsodelete
+                // if model_parent_id existsin,butstatusandofficialorganizationoneto,alsodelete
                 $officialModel = $officialEnabledModels[$parentId] ?? null;
                 if ($officialModel && $model['status'] == $officialModel['status']) {
                     $deleteIds[] = $model['id'];
                 }
             }
 
-            // 5. batchquantitydelete冗remainderdata(带guard)
+            // 5. batchquantitydeleteredundantremainderdata(withguard)
             if (! empty($deleteIds)) {
                 $redundantDeletedCount = Db::table('service_provider_models')
                     ->whereIn('id', $deleteIds)
-                    ->where('organization_code', '!=', $officialOrganizationCode) // 额outsideguard
+                    ->where('organization_code', '!=', $officialOrganizationCode) // quotaoutsideguard
                     ->delete();
                 $totalDeletedCount += $redundantDeletedCount;
             }
@@ -400,11 +400,11 @@ return new class extends Migration {
     }
 
     /**
-     * cleanupquotenot存inconfigurationmodel(batchquantityqueryandbatchquantitydelete).
+     * cleanupquotenotexistsinconfigurationmodel(batchquantityqueryandbatchquantitydelete).
      */
     private function cleanModelsWithInvalidConfig(string $organizationCode, string $officialOrganizationCode): int
     {
-        // 1. batchquantityquerytheorganizationdown所havemodel service_provider_config_id
+        // 1. batchquantityquerytheorganizationdown havemodel service_provider_config_id
         $modelConfigs = Db::table('service_provider_models')
             ->where('organization_code', $organizationCode)
             ->where('organization_code', '!=', $officialOrganizationCode) // guard
@@ -417,28 +417,28 @@ return new class extends Migration {
             return 0;
         }
 
-        // 2. extract所have唯one config_id
+        // 2. extract haveuniqueone config_id
         $configIds = $modelConfigs->pluck('service_provider_config_id')->unique()->filter()->toArray();
 
         if (empty($configIds)) {
             return 0;
         }
 
-        // 3. batchquantityquery存in config_id
+        // 3. batchquantityqueryexistsin config_id
         $existingConfigIds = Db::table('service_provider_configs')
             ->whereIn('id', $configIds)
             ->whereNull('deleted_at')
             ->pluck('id')
             ->toArray();
 
-        // 4. 找outnot存in config_id
+        // 4. findoutnotexistsin config_id
         $invalidConfigIds = array_diff($configIds, $existingConfigIds);
 
         if (empty($invalidConfigIds)) {
             return 0;
         }
 
-        // 5. batchquantitydeletequotenot存inconfigurationmodel
+        // 5. batchquantitydeletequotenotexistsinconfigurationmodel
         return Db::table('service_provider_models')
             ->where('organization_code', $organizationCode)
             ->where('organization_code', '!=', $officialOrganizationCode) // double重guard
@@ -447,11 +447,11 @@ return new class extends Migration {
     }
 
     /**
-     * cleanupconfigurationdatainvalidmodel(configurationdecryptbackfornullor所havevalueallisnull).
+     * cleanupconfigurationdatainvalidmodel(configurationdecryptbackfornullor havevalueallisnull).
      */
     private function cleanModelsWithInvalidConfigData(string $organizationCode, string $officialOrganizationCode): int
     {
-        // 1. querytheorganizationdown所haveconfiguration
+        // 1. querytheorganizationdown haveconfiguration
         $configs = Db::table('service_provider_configs')
             ->where('organization_code', $organizationCode)
             ->where('organization_code', '!=', $officialOrganizationCode) // guard
@@ -505,7 +505,7 @@ return new class extends Migration {
             return true;
         }
 
-        // checkarraymiddle所havekeyvaluewhetherallfornull
+        // checkarraymiddle havekeyvaluewhetherallfornull
         foreach ($decodedConfig as $key => $value) {
             // ifhaveanyonevaluenotfornull,thenconfigurationvalid
             if (! empty($value)) {
@@ -513,12 +513,12 @@ return new class extends Migration {
             }
         }
 
-        // 所havevalueallisnull,configurationinvalid
+        //  havevalueallisnull,configurationinvalid
         return true;
     }
 
     /**
-     * getlogrecord器.
+     * getlogrecorddevice.
      */
     private function getLogger(): LoggerInterface
     {

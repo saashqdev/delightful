@@ -24,7 +24,7 @@ enum ConversationType: int
     // systemmessage
     case System = 3;
 
-    // 云document
+    // clouddocument
     case CloudDocument = 4;
 
     // multidimensional table

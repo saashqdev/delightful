@@ -17,15 +17,15 @@ return new class extends Migration {
         Schema::create('delightful_mcp_servers', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code', 32)->comment('organizationencoding');
-            $table->string('code', 80)->unique()->comment('唯oneencoding');
+            $table->string('code', 80)->unique()->comment('uniqueoneencoding');
             $table->string('name', 64)->default('')->comment('MCPservicename');
             $table->string('description', 255)->default('')->comment('MCPservicedescription');
-            $table->string('icon', 255)->default('')->comment('MCPservicegraph标');
+            $table->string('icon', 255)->default('')->comment('MCPservicegraphmark');
             $table->string('type', 16)->default('sse')->comment('servicetype: sseorstdio');
             $table->boolean('enabled')->default(false)->comment('whetherenable: 0-disable, 1-enable');
-            $table->string('creator', 64)->default('')->comment('create者');
+            $table->string('creator', 64)->default('')->comment('createperson');
             $table->dateTime('created_at')->comment('creation time');
-            $table->string('modifier', 64)->default('')->comment('modify者');
+            $table->string('modifier', 64)->default('')->comment('modifyperson');
             $table->dateTime('updated_at')->comment('update time');
             $table->softDeletes();
 

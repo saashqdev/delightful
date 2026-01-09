@@ -15,29 +15,29 @@ use App\Infrastructure\Util\SSRF\SSRFUtil;
 class Oauth2Config extends AbstractValueObject
 {
     /**
-     * Client ID - customer端ID,isapplicationinauthorizationservice器middle唯oneidentifier.
-     * authorizationservice器passcustomer端IDcomeidentifydifferentthree方application.
+     * Client ID - customerclientID,isapplicationinauthorizationservicedevicemiddleuniqueoneidentifier.
+     * authorizationservicedevicepasscustomerclientIDcomeidentifydifferentthreesideapplication.
      *
-     * createOAuthapplicationo clockwillminute配client_id,本exampleinput
+     * createOAuthapplicationo clockwillminute配client_id,thisexampleinput
      * 813924812101982004357116497xxxx.app.coze
      */
     protected string $clientId = '';
 
     /**
-     * Client Secret - customer端key,andcustomer端IDcooperateuse,useatauthapplication身share.
+     * Client Secret - customerclientkey,andcustomerclientIDcooperateuse,useatauthapplication身share.
      * ensureonlyauthorizationapplicationcanrequestpermission.
      *
-     * createOAuthapplicationo clockwillminute配client_secret,本exampleinput 8jmSATwI*********
+     * createOAuthapplicationo clockwillminute配client_secret,thisexampleinput 8jmSATwI*********
      */
     protected string $clientSecret = '';
 
     /**
-     * Client URL - service方OAuthpageURL,useatspliceuserloginauthorization页URL.
+     * Client URL - servicesideOAuthpageURL,useatspliceuserloginauthorizationpageURL.
      *
      * userlogino clock,buttonwillwilluserguideto"[client_url]?response_type=code&client_id=
-     * [client_id]&scope=[scope]&state=xyz123&redirect_uri=[cozeplatformcallbacksecurityground址]".
+     * [client_id]&scope=[scope]&state=xyz123&redirect_uri=[cozeplatformcallbacksecuritygroundaddress]".
      *
-     * referenceservice方authorizationdocumentgetclient_url,本examplereferencebuttonopenhairguidedocument,input
+     * referenceservicesideauthorizationdocumentgetclient_url,thisexamplereferencebuttonopenhairguidedocument,input
      * https://www.coze.cn/api/permission/oauth2/authorize
      */
     protected string $clientUrl = '';
@@ -45,25 +45,25 @@ class Oauth2Config extends AbstractValueObject
     /**
      * Scope - allowapplicationprocedurerequestaccessuserdatarange.
      *
-     * referenceservice方authorizationdocumentinputscope.
+     * referenceservicesideauthorizationdocumentinputscope.
      */
     protected string $scope = '';
 
     /**
-     * Authorization URL - getuseraccess_tokenURLground址.
+     * Authorization URL - getuseraccess_tokenURLgroundaddress.
      *
-     * userpassclient_urlauthorizationsuccessback,three方servicewillreturnusergettokencode,
-     * and转tocallbackground址.thiso clock,service器provide方willpassto应datatoauthorization_urlhairuprequest,
+     * userpassclient_urlauthorizationsuccessback,threesideservicewillreturnusergettokencode,
+     * andtransfertocallbackgroundaddress.thiso clock,servicedeviceprovidesidewillpasstoshoulddatatoauthorization_urlhairuprequest,
      * getuseraccess_token.
      *
-     * referenceservice方authorizationdocumentgetauthorization_url,本examplereferencebuttonopenhairguidedocument,input
+     * referenceservicesideauthorizationdocumentgetauthorization_url,thisexamplereferencebuttonopenhairguidedocument,input
      * https://api.coze.cn/api/permission/oauth2/token
      */
     protected string $authorizationUrl = '';
 
     /**
-     * Authorization Content Type - toOAuthprovide者senddatacontenttype.
-     * 目frontonlysupportapplication/jsontype.
+     * Authorization Content Type - toOAuthprovidepersonsenddatacontenttype.
+     * itemfrontonlysupportapplication/jsontype.
      */
     protected string $authorizationContentType = 'application/json';
 

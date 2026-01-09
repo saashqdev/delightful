@@ -54,7 +54,7 @@ class FileDefaultInitCommand extends Command
 
         // ifis local driven,notneedinitialize
         if ($publicBucketConfig['adapter'] === 'local') {
-            $this->info('本grounddriven,notneedinitialize');
+            $this->info('thisgrounddriven,notneedinitialize');
             return;
         }
 
@@ -65,7 +65,7 @@ class FileDefaultInitCommand extends Command
     }
 
     /**
-     * initialize所havefile.
+     * initialize havefile.
      */
     protected function initFiles(): void
     {
@@ -75,9 +75,9 @@ class FileDefaultInitCommand extends Command
         $baseFileDir = BASE_PATH . '/storage/files';
         $defaultModulesDir = $baseFileDir . '/DELIGHTFUL/open/default';
 
-        // checkdefault模piecedirectorywhether存in
+        // checkdefaultmodepiecedirectorywhetherexistsin
         if (! is_dir($defaultModulesDir)) {
-            $this->error('default模piecedirectorynot存in: ' . $defaultModulesDir);
+            $this->error('defaultmodepiecedirectorynotexistsin: ' . $defaultModulesDir);
             return;
         }
 
@@ -85,36 +85,36 @@ class FileDefaultInitCommand extends Command
         $skippedFiles = 0;
         $organizationCode = CloudFileRepository::DEFAULT_ICON_ORGANIZATION_CODE;
 
-        // get所have模piecedirectory
+        // get havemodepiecedirectory
         $moduleDirs = array_filter(glob($defaultModulesDir . '/*'), 'is_dir');
 
         if (empty($moduleDirs)) {
-            $this->warn('nothave找toany模piecedirectory');
+            $this->warn('nothavefindtoanymodepiecedirectory');
             return;
         }
 
-        $this->line('handle模piecefile:');
+        $this->line('handlemodepiecefile:');
 
-        // traverseeach模piecedirectory
+        // traverseeachmodepiecedirectory
         foreach ($moduleDirs as $moduleDir) {
             $moduleName = basename($moduleDir);
 
             try {
-                // trywill模piece名mappingtoto应businesstype
+                // trywillmodepiecenamemappingtotoshouldbusinesstype
                 $businessType = $this->mapModuleToBusinessType($moduleName);
 
                 if ($businessType === null) {
-                    $this->warn("  - skipunknown模piece: {$moduleName}");
+                    $this->warn("  - skipunknownmodepiece: {$moduleName}");
                     continue;
                 }
 
-                $this->line("  - handle模piece: {$moduleName} (businesstype: {$businessType->value})");
+                $this->line("  - handlemodepiece: {$moduleName} (businesstype: {$businessType->value})");
 
-                // getthe模piecedirectorydown所havefile
+                // getthemodepiecedirectorydown havefile
                 $files = array_filter(glob($moduleDir . '/*'), 'is_file');
 
                 if (empty($files)) {
-                    $this->line('    - nothave找toanyfile');
+                    $this->line('    - nothavefindtoanyfile');
                     continue;
                 }
 
@@ -126,7 +126,7 @@ class FileDefaultInitCommand extends Command
                     $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
                     $fileSize = filesize($filePath);
 
-                    // generatebusiness唯oneidentifier(useatduplicatecheck)
+                    // generatebusinessuniqueoneidentifier(useatduplicatecheck)
                     $businessIdentifier = $moduleName . '/' . $fileName;
 
                     // correctduplicatecheck:querysamebusinesstypedownwhetherhavesamebusinessidentifier
@@ -149,12 +149,12 @@ class FileDefaultInitCommand extends Command
                     $this->line("    - handlefile: {$fileName}");
 
                     try {
-                        // readfilecontentand转for base64 format
+                        // readfilecontentandtransferfor base64 format
                         $fileContent = file_get_contents($filePath);
                         $mimeType = mime_content_type($filePath) ?: 'image/png';
                         $base64Content = 'data:' . $mimeType . ';base64,' . base64_encode($fileContent);
 
-                        // 完allreference ImageWatermarkProcessor successpractice,butfinger定file名
+                        // 完allreference ImageWatermarkProcessor successpractice,butfingersetfilename
                         $uploadFile = new UploadFile($base64Content, 'default-files', $fileName);
                         $this->fileDomainService->uploadByCredential(
                             $organizationCode,
@@ -168,7 +168,7 @@ class FileDefaultInitCommand extends Command
                         $keyOrganizationCode = substr($actualKey, 0, strpos($actualKey, '/'));
                         $fileLink = $this->fileDomainService->getLink($keyOrganizationCode, $actualKey, StorageBucketType::Public);
                         if (! $fileLink || ! $fileLink->getUrl()) {
-                            throw new Exception('fileuploadfail,no法getaccesslink');
+                            throw new Exception('fileuploadfail,nomethodgetaccesslink');
                         }
 
                         // validatesuccessback才createdatabaserecord,useactualupload key
@@ -181,31 +181,31 @@ class FileDefaultInitCommand extends Command
                         $defaultFileEntity->setFileExtension($fileExtension);
                         $defaultFileEntity->setUserId($businessIdentifier); // usebusinessidentifierasfor userId
 
-                        // save实body
+                        // saveactualbody
                         $this->defaultFileDomainService->insert($defaultFileEntity);
 
                         ++$fileCount;
                     } catch (Exception $e) {
                         $this->error("  - handlefile {$fileName} fail: {$e->getMessage()}");
-                        continue; // notimpactback续filehandle
+                        continue; // notimpactback続filehandle
                     }
                 }
 
                 $this->line("    - successhandle {$fileCount} file");
                 $totalFiles += $fileCount;
             } catch (Exception $e) {
-                $this->error("  - handle模piece {$moduleName} o clockout错: {$e->getMessage()}");
+                $this->error("  - handlemodepiece {$moduleName} o clockout错: {$e->getMessage()}");
             }
         }
 
-        // meanwhilehandleoriginaldefaultgraph标file(ifneed话)
+        // meanwhilehandleoriginaldefaultgraphmarkfile(ifneed话)
         $this->processDefaultIcons($baseFileDir, $organizationCode, $totalFiles, $skippedFiles);
 
-        $this->info("fileinitializecomplete,共handle {$totalFiles} file,skip {$skippedFiles} already存infile");
+        $this->info("fileinitializecomplete,共handle {$totalFiles} file,skip {$skippedFiles} alreadyexistsinfile");
     }
 
     /**
-     * will模piece名mappingtoto应businesstype.
+     * willmodepiecenamemappingtotoshouldbusinesstype.
      */
     protected function mapModuleToBusinessType(string $moduleName): ?DefaultFileBusinessType
     {
@@ -224,11 +224,11 @@ class FileDefaultInitCommand extends Command
     }
 
     /**
-     * handledefaultgraph标file.
+     * handledefaultgraphmarkfile.
      */
     protected function processDefaultIcons(string $baseFileDir, string $organizationCode, int &$totalFiles, int &$skippedFiles): void
     {
-        // ifhaveneedsingle独handledefaultgraph标,caninthiswithinimplement
-        // for examplehandle Midjourney etcdefaultgraph标
+        // ifhaveneedsingle独handledefaultgraphmark,caninthiswithinimplement
+        // for examplehandle Midjourney etcdefaultgraphmark
     }
 }

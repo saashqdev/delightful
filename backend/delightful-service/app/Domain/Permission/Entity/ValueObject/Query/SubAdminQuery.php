@@ -10,7 +10,7 @@ namespace App\Domain\Permission\Entity\ValueObject\Query;
 use App\Infrastructure\Core\AbstractQuery;
 
 /**
- * 子administratorcolumntablequeryobject.
+ * childadministratorcolumntablequeryobject.
  *
  * useexample:
  * $query = new SubAdminQuery([
@@ -20,7 +20,7 @@ use App\Infrastructure\Core\AbstractQuery;
  */
 class SubAdminQuery extends AbstractQuery
 {
-    /** 子administratorname(blurmatch) */
+    /** childadministratorname(blurmatch) */
     private ?string $name = null;
 
     /** enabled status:1-enable 0-disable */

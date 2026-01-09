@@ -17,27 +17,27 @@ class CommentEntity extends AbstractEntity
     protected int $id;
 
     /**
-     * type,for examplecomment,动state.
+     * type,for examplecomment,autostate.
      */
     protected int $type;
 
     /**
-     * commentresourceid,for example云documentid,sheettableid.
+     * commentresourceid,for exampleclouddocumentid,sheettableid.
      */
     protected int $resourceId;
 
     /**
-     * commentresourcetype,for example云document,sheettable.
+     * commentresourcetype,for exampleclouddocument,sheettable.
      */
     protected int $resourceType;
 
     /**
-     * 父levelcommentprimary keyid.
+     * parentlevelcommentprimary keyid.
      */
     protected int $parentId;
 
     /**
-     * tocomment简shortdescription,mainisgive动stateuse,for examplecreatetodo,uploadimageetcsystem动state.
+     * tocommentsimpleshortdescription,mainisgiveautostateuse,for examplecreatetodo,uploadimageetcsystemautostate.
      */
     protected string $description = '';
 

@@ -19,22 +19,22 @@ return new class extends Migration {
         }
         Schema::create('delightful_contact_users', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('delightful_id', 64)->comment('账numberid,冗remainderfield')->default('');
+            $table->string('delightful_id', 64)->comment('accountnumberid,redundantremainderfield')->default('');
             // organizationencoding
             $table->string('organization_code', 64)->comment('organizationencoding')->default('');
             // user_id
-            $table->string('user_id', 64)->comment('userid,organizationdown唯one.thisfieldalsowillrecordonesharetouser_id_relation')->default(0);
+            $table->string('user_id', 64)->comment('userid,organizationdownuniqueone.thisfieldalsowillrecordonesharetouser_id_relation')->default(0);
             // user_type
             $table->tinyInteger('user_type')->comment('usertype,0:ai,1:personcategory')->default(0);
             $table->string('description', 1024)->comment('description(canuseataifromIintroduce)');
-            $table->integer('like_num')->comment('like数')->default(0);
-            $table->string('label', 256)->comment('fromItag,多use逗numberminute隔')->default('');
+            $table->integer('like_num')->comment('likecount')->default(0);
+            $table->string('label', 256)->comment('fromItag,multipleuse逗numberminuteseparator')->default('');
             $table->tinyInteger('status')->comment('userintheorganizationstatus,0:freeze,1:activated,2:alreadyresign,3:alreadyexit')->default(0);
             $table->string('nickname', 64)->comment('nickname')->default('');
             $table->text('i18n_name')->comment('internationalizationusername');
             $table->string('avatar_url', 128)->comment('useravatarlink')->default('');
             $table->string('extra', 1024)->comment('attachaddproperty')->default('');
-            $table->string('user_manual', 64)->comment('userinstruction书(云document)')->default('');
+            $table->string('user_manual', 64)->comment('userinstructionbook(clouddocument)')->default('');
             // indexset
             $table->unique(['user_id'], 'unq_user_organization_id');
             $table->unique(['delightful_id', 'organization_code'], 'unq_delightful_id_organization_code');

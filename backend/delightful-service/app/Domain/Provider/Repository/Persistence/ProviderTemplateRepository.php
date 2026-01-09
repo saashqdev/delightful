@@ -17,7 +17,7 @@ use DateTime;
 
 /**
  * servicequotienttemplategeneratestorage
- * supportfor所have ProviderCode generatetemplateconfiguration.
+ * supportfor have ProviderCode generatetemplateconfiguration.
  */
 readonly class ProviderTemplateRepository
 {
@@ -27,7 +27,7 @@ readonly class ProviderTemplateRepository
     }
 
     /**
-     * get所haveservicequotienttemplatecolumntable.
+     * get haveservicequotienttemplatecolumntable.
      * @param Category $category servicequotientcategory
      * @return ProviderConfigDTO[] servicequotienttemplatecolumntable
      */
@@ -35,7 +35,7 @@ readonly class ProviderTemplateRepository
     {
         $templates = [];
 
-        // getfinger定categorydown所haveenableservicequotient
+        // getfingersetcategorydown haveenableservicequotient
         $providers = $this->providerRepository->getByCategory($category);
 
         foreach ($providers as $provider) {

@@ -31,7 +31,7 @@ class ResponseMiddleware implements MiddlewareInterface
         'api-key',
     ];
 
-    // finger定 uri notprintrequestandresponsedetail
+    // fingerset uri notprintrequestandresponsedetail
     private array $desensitizeUris = [
         '/conversation/chatCompletions',
         '/message',
@@ -58,7 +58,7 @@ class ResponseMiddleware implements MiddlewareInterface
     {
         $path = $request->getUri()->getPath();
         if (! in_array($path, $this->ignoreUris, true)) {
-            // 提frontrecordrequestlog,request url,requesthead
+            // submitfrontrecordrequestlog,request url,requesthead
             $this->logger->info('requesttracestart', [
                 'url' => $request->getRequestTarget(),
                 'method' => $request->getMethod(),

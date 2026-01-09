@@ -44,22 +44,22 @@ class ProviderAppService
         // builddataisolationobject
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
-        // 收collection所have唯oneservicequotientconfigurationID
+        // receivecollection haveuniqueoneservicequotientconfigurationID
         $configIds = array_unique(array_map(fn ($model) => $model->getServiceProviderConfigId(), $models));
 
-        // batchquantitygetservicequotient实body(avoid嵌setquery)
+        // batchquantitygetservicequotientactualbody(avoid嵌setquery)
         $providerEntities = $this->providerConfigDomainService->getProviderEntitiesByConfigIds($dataIsolation, $configIds);
 
-        // batchquantitygetservicequotientconfiguration实body(useatgetalias)
+        // batchquantitygetservicequotientconfigurationactualbody(useatgetalias)
         $configEntities = $this->providerConfigDomainService->getConfigByIdsWithoutOrganizationFilter($configIds);
 
-        // 收collection所havegraph标path按organizationencodingminutegroup(includemodelgraph标andservicequotientgraph标)
+        // receivecollection havegraphmarkpath按organizationencodingminutegroup(includemodelgraphmarkandservicequotientgraphmark)
         $iconsByOrg = [];
         $iconToModelMap = [];
         $iconToProviderMap = [];
 
         foreach ($models as $model) {
-            // processmodelgraph标
+            // processmodelgraphmark
             $modelIcon = $model->getIcon();
             if (empty($modelIcon)) {
                 continue;
@@ -74,7 +74,7 @@ class ProviderAppService
             }
             $iconToModelMap[$modelIcon][] = $model;
 
-            // processservicequotientgraph标
+            // processservicequotientgraphmark
             $configId = $model->getServiceProviderConfigId();
             if (! isset($providerEntities[$configId])) {
                 continue;
@@ -94,7 +94,7 @@ class ProviderAppService
             $iconToProviderMap[$providerIcon][] = $configId;
         }
 
-        // batchquantitygetgraph标URL
+        // batchquantitygetgraphmarkURL
         $iconUrlMap = [];
         foreach ($iconsByOrg as $iconOrganizationCode => $icons) {
             $links = $this->fileDomainService->getLinks($iconOrganizationCode, array_unique($icons));
@@ -102,7 +102,7 @@ class ProviderAppService
         }
         ! empty($iconUrlMap) && $iconUrlMap = array_merge(...$iconUrlMap);
 
-        // updateservicequotientgraph标URLmapping
+        // updateservicequotientgraphmarkURLmapping
         $providerIconUrls = [];
         foreach ($iconToProviderMap as $icon => $configIds) {
             if (! isset($iconUrlMap[$icon])) {
@@ -116,7 +116,7 @@ class ProviderAppService
             }
         }
         $locale = $this->translator->getLocale();
-        // createDTOandsetgraph标URL
+        // createDTOandsetgraphmarkURL
         $modelDTOs = [];
         foreach ($models as $model) {
             $modelDTO = new BeDelightfulModelDTO($model->toArray());
@@ -124,13 +124,13 @@ class ProviderAppService
             $localizedModelName = $model->getLocalizedName($locale);
             $localizedModelDescription = $model->getLocalizedDescription($locale);
 
-            // ifhaveinternationalizationnamethenuse,nothenmaintain原name
+            // ifhaveinternationalizationnamethenuse,nothenmaintainoriginalname
             if (! empty($localizedModelName)) {
                 $modelDTO->setName($localizedModelName);
             }
             $modelDTO->setDescription($localizedModelDescription);
 
-            // setmodelgraph标URL
+            // setmodelgraphmarkURL
             $modelIcon = $model->getIcon();
             if (! empty($modelIcon) && isset($iconUrlMap[$modelIcon])) {
                 $fileLink = $iconUrlMap[$modelIcon];

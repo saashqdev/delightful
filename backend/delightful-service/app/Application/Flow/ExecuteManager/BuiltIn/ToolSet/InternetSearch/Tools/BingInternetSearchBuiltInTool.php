@@ -79,8 +79,8 @@ class BingInternetSearchBuiltInTool extends AbstractBuiltInTool
         "search_keyword": {
             "type": "string",
             "key": "search_keyword",
-            "title": "search词",
-            "description": "search词",
+            "title": "searchword",
+            "description": "searchword",
             "required": null,
             "value": null,
             "encryption": false,

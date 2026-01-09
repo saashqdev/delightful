@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\BuiltIn\ToolSet\AIImage\Tools;
 
 /*
- * 本file属atlighthouseenginecopyrighthave,leaks will be prosecuted.
+ * thisfilebelongatlighthouseenginecopyrighthave,leaks will be prosecuted.
  */
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunnerFactory;
 use App\Domain\Flow\Entity\ValueObject\Node;
@@ -59,8 +59,8 @@ class AIImageBuiltInToolTest extends ExecuteManagerBaseTest
             "user_prompt": {
                 "type": "string",
                 "key": "user_prompt",
-                "title": "userprompt词",
-                "description": "userprompt词",
+                "title": "userpromptword",
+                "description": "userpromptword",
                 "required": null,
                 "value": {
                     "type": "const",
@@ -166,7 +166,7 @@ JSON, true));
 youisaitext generationgraphassistant
 
 ## process
-willuserinputprompt词,use`ai_image`toolgenerateimage
+willuserinputpromptword,use`ai_image`toolgenerateimage
 
 MARKDOWN,
 

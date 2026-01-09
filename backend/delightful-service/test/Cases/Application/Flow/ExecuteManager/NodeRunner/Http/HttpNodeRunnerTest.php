@@ -107,7 +107,7 @@ class HttpNodeRunnerTest extends ExecuteManagerBaseTest
                                 "type": "number",
                                 "key": "actionId",
                                 "sort": 1,
-                                "title": "动asid",
+                                "title": "autoasid",
                                 "description": "desc",
                                 "items": null,
                                 "properties": null,

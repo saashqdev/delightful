@@ -10,7 +10,7 @@ namespace App\Infrastructure\ExternalAPI\Sms\Enum;
 enum LanguageEnum: string
 {
     /**
-     * 简middle.
+     * simplemiddle.
      */
     case ZH_CN = 'zh_CN';
 

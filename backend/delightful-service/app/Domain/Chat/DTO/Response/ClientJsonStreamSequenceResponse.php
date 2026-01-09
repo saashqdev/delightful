@@ -13,14 +13,14 @@ use App\Domain\Chat\Entity\AbstractEntity;
 use Hyperf\Codec\Json;
 
 /**
- * todo forcompatibleold版streammessage,needwill content/reasoning_content/status field放tomostoutsidelayer.
+ * todo forcompatibleoldversionstreammessage,needwill content/reasoning_content/status fieldputtomostoutsidelayer.
  */
 class ClientJsonStreamSequenceResponse extends AbstractEntity
 {
     // wantupdategoal seqId content
     protected string $targetSeqId;
 
-    // forimplement丢packageretransmit,needrecordcurrent $streamId.one定singleincrement.
+    // forimplement丢packageretransmit,needrecordcurrent $streamId.onesetsingleincrement.
     protected ?int $streamId;
 
     /**
@@ -31,22 +31,22 @@ class ClientJsonStreamSequenceResponse extends AbstractEntity
     protected ?StreamOptions $streamOptions;
 
     /**
-     * @deprecated forcompatibleold版streammessage,needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
+     * @deprecated forcompatibleoldversionstreammessage,needwill content/reasoning_content/status/llm_response fieldputtomostoutsidelayer
      */
     protected ?string $content;
 
     /**
-     * @deprecated forcompatibleold版streammessage,needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
+     * @deprecated forcompatibleoldversionstreammessage,needwill content/reasoning_content/status/llm_response fieldputtomostoutsidelayer
      */
     protected ?string $reasoningContent;
 
     /**
-     * @deprecated forcompatibleold版streammessage,needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
+     * @deprecated forcompatibleoldversionstreammessage,needwill content/reasoning_content/status/llm_response fieldputtomostoutsidelayer
      */
     protected ?int $status;
 
     /**
-     * @deprecated forcompatibleold版streammessage,needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
+     * @deprecated forcompatibleoldversionstreammessage,needwill content/reasoning_content/status/llm_response fieldputtomostoutsidelayer
      */
     protected ?string $llmResponse;
 

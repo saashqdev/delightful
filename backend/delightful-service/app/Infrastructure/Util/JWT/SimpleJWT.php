@@ -28,8 +28,8 @@ class SimpleJWT
     public function issueToken(array $data, int $expires = 7200): array
     {
         $token = [
-            'iss' => app_name(), // 签hair者 optional
-            'aud' => '', // receivetheJWTone方,optional
+            'iss' => app_name(), // 签hairperson optional
+            'aud' => '', // receivetheJWToneside,optional
             'exp' => time() + $expires, // expiretime
             'data' => $data, // customizedata
         ];

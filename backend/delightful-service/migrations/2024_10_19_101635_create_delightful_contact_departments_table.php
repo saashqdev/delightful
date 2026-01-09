@@ -20,21 +20,21 @@ return new class extends Migration {
         Schema::create('delightful_contact_departments', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('department_id', 64)->comment('Magicdepartmentid');
-            $table->string('parent_department_id', 64)->comment('父departmentdepartment ID')->nullable();
+            $table->string('parent_department_id', 64)->comment('parentdepartmentdepartment ID')->nullable();
             $table->string('name', 64)->comment('departmentname');
             $table->text('i18n_name')->comment('internationalizationdepartmentname');
-            $table->string('order', 64)->comment('departmentsort,即departmentinits同leveldepartmentshoworder.取valuemoresmallsortmore靠front.')->nullable()->default('');
+            $table->string('order', 64)->comment('departmentsort,即departmentinitssameleveldepartmentshoworder.getvaluemoresmallsortmore靠front.')->nullable()->default('');
             $table->string('leader_user_id', 64)->comment('departmentsupervisoruser ID')->nullable()->default('');
             $table->string('organization_code', 64)->comment('Magicorganizationencoding');
-            $table->text('status')->comment('departmentstatus,jsonformat,目frontsupport is_deleted:whetherdelete');
-            $table->string('document_id', 64)->comment('departmentinstruction书(云documentid)');
+            $table->text('status')->comment('departmentstatus,jsonformat,itemfrontsupport is_deleted:whetherdelete');
+            $table->string('document_id', 64)->comment('departmentinstructionbook(clouddocumentid)');
             // level
             $table->integer('level')->comment('departmentlayerlevel')->default(0);
             // path
             $table->text('path')->comment('departmentpath')->nullable();
-            // departmentdirectly underuserperson数
-            $table->integer('employee_sum')->comment('departmentdirectly underuserperson数')->default(0);
-            $table->comment('userservicedepartmentandthethree方platformuserrecordtable.useatandthethree方platform实o clockdatasync,activaterecordetc');
+            // departmentdirectly underuserpersoncount
+            $table->integer('employee_sum')->comment('departmentdirectly underuserpersoncount')->default(0);
+            $table->comment('userservicedepartmentandthethreesideplatformuserrecordtable.useatandthethreesideplatformactualo clockdatasync,activaterecordetc');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['organization_code', 'department_id'], 'org_department_id');

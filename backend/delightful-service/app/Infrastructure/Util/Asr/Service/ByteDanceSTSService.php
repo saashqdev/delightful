@@ -25,19 +25,19 @@ use Psr\Log\LoggerInterface;
  */
 class ByteDanceSTSService
 {
-    /** service端requestJWT tokenAPI端point */
+    /** serviceclientrequestJWT tokenAPIclientpoint */
     private const string STS_TOKEN_URL = 'https://openspeech.bytedance.com/api/v1/sts/token';
 
-    /** JWT Tokencachefront缀 */
+    /** JWT Tokencachefrontsuffix */
     private const string JWT_CACHE_PREFIX = 'asr:jwt_token:';
 
-    /** logrecord器 */
+    /** logrecorddevice */
     protected LoggerInterface $logger;
 
-    /** HTTPcustomer端 */
+    /** HTTPcustomerclient */
     private Client $client;
 
-    /** Rediscustomer端 */
+    /** Rediscustomerclient */
     private Redis $redis;
 
     public function __construct()
@@ -49,7 +49,7 @@ class ByteDanceSTSService
     }
 
     /**
-     * according touserDelightful IDgetJWT Token(带cache).
+     * according touserDelightful IDgetJWT Token(withcache).
      *
      * @param string $delightfulId userDelightful ID
      * @param int $duration valid期(second),default7200second
@@ -82,7 +82,7 @@ class ByteDanceSTSService
             }
         }
 
-        // cachemiddlenothaveoralreadyexpire,or者forcerefresh,getnewJWT Token
+        // cachemiddlenothaveoralreadyexpire,orpersonforcerefresh,getnewJWT Token
         $appId = config('asr.volcengine.app_id');
         $accessToken = config('asr.volcengine.token');
 
@@ -102,7 +102,7 @@ class ByteDanceSTSService
             'delightful_id' => $delightfulId,
         ];
 
-        // cacheJWT Token,提front30secondexpirebyavoidside界issue
+        // cacheJWT Token,submitfront30secondexpirebyavoidside界issue
         $cacheExpiry = max(1, $duration - 30);
         $this->cacheJwtToken($cacheKey, $tokenData, $cacheExpiry);
 
@@ -212,10 +212,10 @@ class ByteDanceSTSService
     }
 
     /**
-     * 清exceptuserJWT Tokencache.
+     * clearexceptuserJWT Tokencache.
      *
      * @param string $delightfulId userDelightful ID
-     * @return bool whethersuccess清except
+     * @return bool whethersuccessclearexcept
      */
     public function clearUserJwtTokenCache(string $delightfulId): bool
     {
@@ -223,14 +223,14 @@ class ByteDanceSTSService
             $cacheKey = $this->getCacheKey($delightfulId);
             $result = $this->redis->del($cacheKey);
 
-            $this->logger->info('清exceptuserJWT Tokencache', [
+            $this->logger->info('clearexceptuserJWT Tokencache', [
                 'delightful_id' => $delightfulId,
                 'result' => $result,
             ]);
 
             return is_int($result) && $result > 0;
         } catch (Exception $e) {
-            $this->logger->error('清exceptJWT Tokencachefail', [
+            $this->logger->error('clearexceptJWT Tokencachefail', [
                 'delightful_id' => $delightfulId,
                 'error' => $e->getMessage(),
             ]);
@@ -266,7 +266,7 @@ class ByteDanceSTSService
 
             $data = Json::decode($cachedData);
 
-            // checkwhetheralreadyexpire(额outsidesecuritycheck)
+            // checkwhetheralreadyexpire(quotaoutsidesecuritycheck)
             if (isset($data['expires_at']) && $data['expires_at'] <= time()) {
                 $this->redis->del($cacheKey);
                 return null;

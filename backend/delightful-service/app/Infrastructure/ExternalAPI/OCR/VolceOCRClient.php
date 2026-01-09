@@ -28,7 +28,7 @@ class VolceOCRClient implements OCRClientInterface
 
     public function ocr(?string $url = null): string
     {
-        // configurationspecific OCR customer端
+        // configurationspecific OCR customerclient
         $client = Visual::getInstance();
         $client->setAccessKey(config('volce_cv.ocr_pdf.ak'));
         $client->setSecretKey(config('volce_cv.ocr_pdf.sk'));
@@ -51,7 +51,7 @@ class VolceOCRClient implements OCRClientInterface
         $result = Json::decode($content);
         $code = $result['code'] ?? 0; // ifnothave 'code',thenusedefaulterrorcode
         if ($code !== 10000) {
-            $message = $result['Message'] ?? 'VolcanoOCR遇toerror,message not存in'; // ifnothave 'message',thenusedefaultmessage
+            $message = $result['Message'] ?? 'VolcanoOCR遇toerror,message notexistsin'; // ifnothave 'message',thenusedefaultmessage
             $this->logger->error(sprintf(
                 'VolcanoOCR遇toerror:%s,',
                 $message,
@@ -81,7 +81,7 @@ class VolceOCRClient implements OCRClientInterface
 
         // checkwhethersuccessgethead部info
         if ($headers === false || ! isset($headers['Content-Type'])) {
-            return null; // no法getfiletype
+            return null; // nomethodgetfiletype
         }
 
         // parse Content-Type
@@ -95,6 +95,6 @@ class VolceOCRClient implements OCRClientInterface
             return 'image';
         }
 
-        return null; // 既notis PDF alsonotisfinger定imageformat
+        return null; // 既notis PDF alsonotisfingersetimageformat
     }
 }

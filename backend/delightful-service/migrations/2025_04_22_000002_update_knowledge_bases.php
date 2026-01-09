@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         // modifytablestructure,addnewfield
         Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
-            // checkwhetheralready存infield,avoidduplicateadd
+            // checkwhetheralreadyexistsinfield,avoidduplicateadd
             if (! Schema::hasColumn('delightful_flow_knowledge', 'fragment_config')) {
                 $table->string('fragment_config', 2000)->nullable()->comment('minutesegmentconfiguration');
             }
@@ -35,7 +35,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
-            // checkwhetheralready存infield,avoidduplicatedelete
+            // checkwhetheralreadyexistsinfield,avoidduplicatedelete
             if (Schema::hasColumn('delightful_flow_knowledge', 'fragment_config')) {
                 $table->dropColumn('fragment_config');
             }

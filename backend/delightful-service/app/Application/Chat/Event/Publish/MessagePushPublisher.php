@@ -14,8 +14,8 @@ use Hyperf\Amqp\Annotation\Producer;
 use Hyperf\Amqp\Message\ProducerMessage;
 
 /**
- * messagepush模piece.
- * directlypushseqgivecustomer端.
+ * messagepushmodepiece.
+ * directlypushseqgivecustomerclient.
  */
 #[Producer]
 class MessagePushPublisher extends ProducerMessage

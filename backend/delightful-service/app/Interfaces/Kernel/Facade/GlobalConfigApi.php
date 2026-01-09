@@ -34,7 +34,7 @@ class GlobalConfigApi
             $platform = $platformSettingsAppService->get();
             $result = array_merge($result, self::platformSettingsToResponse($platform->toArray()));
         } catch (Throwable $e) {
-            // ignoreplatformsettingexception,avoidimpactall局configurationread
+            // ignoreplatformsettingexception,avoidimpactalllocalconfigurationread
         }
 
         return $result;
@@ -56,7 +56,7 @@ class GlobalConfigApi
 
     private static function platformSettingsToResponse(array $settings): array
     {
-        // will logo_urls convertforfront端examplestructure
+        // will logo_urls convertforfrontclientexamplestructure
         $logo = [];
         foreach (($settings['logo_urls'] ?? []) as $locale => $url) {
             $logo[$locale] = $url;

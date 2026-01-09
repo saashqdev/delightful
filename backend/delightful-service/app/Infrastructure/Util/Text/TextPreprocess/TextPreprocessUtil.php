@@ -14,12 +14,12 @@ use App\Infrastructure\Util\Text\TextPreprocess\Strategy\TextPreprocessStrategyI
 use App\Infrastructure\Util\Text\TextPreprocess\ValueObject\TextPreprocessRule;
 
 /**
- * text预processtool.
+ * textpreprocesstool.
  */
 class TextPreprocessUtil
 {
     /**
-     * according totext预processruleconduct预process.
+     * according totextpreprocessruleconductpreprocess.
      * @param array<TextPreprocessRule> $rules
      */
     public static function preprocess(array $rules, string $text): string
@@ -36,7 +36,7 @@ class TextPreprocessUtil
             $text
         );
 
-        // willFORMAT_EXCELrule放toarrayfrontsurface
+        // willFORMAT_EXCELruleputtoarrayfrontsurface
         $excelSheetLineRemoveRule = array_filter($rules, fn (TextPreprocessRule $rule) => $rule === TextPreprocessRule::FORMAT_EXCEL);
         $otherRules = array_filter(
             $rules,

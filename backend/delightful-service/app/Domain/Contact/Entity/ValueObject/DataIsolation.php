@@ -12,13 +12,13 @@ use App\Infrastructure\Core\AbstractObject;
 
 /**
  * dataisolation SaaS化
- * 目frontonlyhaveorganizationisolation
- * 显typepass in,prevent隐typepass in,causenotknow哪theseplaceneed做isolation.
+ * itemfrontonlyhaveorganizationisolation
+ * displaytypepass in,preventhiddentypepass in,causenotknowwhichtheseplaceneedmakeisolation.
  */
 class DataIsolation extends AbstractObject
 {
     /**
-     * whenfront账numberid. 所have账number统onenoticeprivacyprotected,nottothethird-partyreturn.
+     * whenfrontaccountnumberid.  haveaccountnumber統onenoticeprivacyprotected,nottothethird-partyreturn.
      */
     protected string $currentDelightfulId = '';
 

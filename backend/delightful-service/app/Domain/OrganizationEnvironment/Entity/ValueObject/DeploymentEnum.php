@@ -9,7 +9,7 @@ namespace App\Domain\OrganizationEnvironment\Entity\ValueObject;
 
 enum DeploymentEnum: string
 {
-    // 国inside saas
+    // countryinside saas
     case SaaS = 'saas';
 
     // international saas

@@ -21,8 +21,8 @@ use Hyperf\Di\Annotation\Inject;
 use Psr\Log\LoggerInterface;
 
 /**
- * imagewatermarkhandle器
- * 统onehandleeachtypeformatimagewatermarkadd.
+ * imagewatermarkhandledevice
+ * 統onehandleeachtypeformatimagewatermarkadd.
  */
 class ImageWatermarkProcessor
 {
@@ -52,12 +52,12 @@ class ImageWatermarkProcessor
         $detectedFormat = $this->detectImageFormat($imageData);
         $targetFormat = $originalFormat !== 'jpeg' ? $originalFormat : $detectedFormat;
 
-        // use统onewatermarkhandlemethod
+        // use統onewatermarkhandlemethod
         if ($imageGenerateRequest->isAddWatermark()) {
             $imageData = $this->addWaterMarkHandler($imageData, $imageGenerateRequest, $targetFormat);
         }
 
-        // immediatelyaddXMP隐typewatermark
+        // immediatelyaddXMPhiddentypewatermark
         $implicitWatermark = $imageGenerateRequest->getImplicitWatermark();
         $xmpWatermarkedData = $this->imageEnhancementProcessor->enhanceImageData(
             $imageData,
@@ -81,14 +81,14 @@ class ImageWatermarkProcessor
             $imageData = $this->addWaterMarkHandler($imageData, $imageGenerateRequest);
         }
 
-        // immediatelyaddXMP隐typewatermark
+        // immediatelyaddXMPhiddentypewatermark
         $implicitWatermark = $imageGenerateRequest->getImplicitWatermark();
         $xmpWatermarkedData = $this->imageEnhancementProcessor->enhanceImageData(
             $imageData,
             $implicitWatermark
         );
 
-        // according toactualoutputformatgeneratecorrectbase64front缀
+        // according toactualoutputformatgeneratecorrectbase64frontsuffix
         $outputPrefix = $this->generateBase64Prefix($imageData);
         return $this->processBase64Images($outputPrefix . base64_encode($xmpWatermarkedData), $imageGenerateRequest);
     }
@@ -114,7 +114,7 @@ class ImageWatermarkProcessor
 
         $image = imagecreatefromstring($imageData);
         if ($image === false) {
-            throw new Exception('no法parseURLimagedata: ');
+            throw new Exception('nomethodparseURLimagedata: ');
         }
         $watermarkConfig = $imageGenerateRequest->getWatermarkConfig();
         // addvisualwatermark
@@ -126,7 +126,7 @@ class ImageWatermarkProcessor
         $watermarkedData = ob_get_contents();
         ob_end_clean();
 
-        // cleanupinside存
+        // cleanupinsideexists
         imagedestroy($image);
         imagedestroy($watermarkedImage);
         return $watermarkedData;
@@ -141,7 +141,7 @@ class ImageWatermarkProcessor
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // createnewimageresourcebyavoidmodify原graph
+        // createnewimageresourcebyavoidmodifyoriginalgraph
         $watermarkedImage = imagecreatetruecolor($width, $height);
         imagecopy($watermarkedImage, $image, 0, 0, 0, 0, $width, $height);
 
@@ -164,10 +164,10 @@ class ImageWatermarkProcessor
         // calculatewatermarkposition
         [$x, $y] = $this->calculateWatermarkPosition($width, $height, $text, $fontSize, $config->getPosition());
 
-        // priorityuseTTF字body,especiallyistoatmiddle文text
+        // priorityuseTTF字body,especiallyistoatmiddletexttext
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && ($this->fontProvider->containsChinese($text) || $this->fontProvider->supportsTTF())) {
-            // useTTF字bodyrender,supportmiddle文
+            // useTTF字bodyrender,supportmiddletext
             // TTF字bodysizeneedadjust,usuallyratioinsideset fieldbodysmallonethese
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
 
@@ -176,7 +176,7 @@ class ImageWatermarkProcessor
                 // directlyusepass inYcoordinateasfor基lineposition
                 $ttfY = $y;
             } else {
-                // ifno法getsideboundary box,directlyusepass inYcoordinate
+                // ifnomethodgetsideboundary box,directlyusepass inYcoordinate
                 $ttfY = $y;
             }
 
@@ -187,7 +187,7 @@ class ImageWatermarkProcessor
             $builtinY = $y - (int) ($fontSize * 0.8); // from基linepositionconvertfortop部position
             imagestring($image, 5, $x, $builtinY, $text, $fontColor);
 
-            // iftextcontainmiddle文butnothaveTTF字body,recordwarning
+            // iftextcontainmiddletextbutnothaveTTF字body,recordwarning
             if ($this->fontProvider->containsChinese($text)) {
                 $this->logger->warning('Chinese text detected but TTF font not available, may display incorrectly');
             }
@@ -199,7 +199,7 @@ class ImageWatermarkProcessor
      */
     private function calculateFontSize(int $width, int $height): int
     {
-        // according toimagesize动stateadjust字bodysize
+        // according toimagesizeautostateadjust字bodysize
         $size = min($width, $height) / 20;
         return max(12, min(36, (int) $size));
     }
@@ -235,7 +235,7 @@ class ImageWatermarkProcessor
             $totalTextHeight = $descender + $ascender;
         } else {
             // 降leveluseestimatemethod
-            // toatmiddle文character,eachcharacterwidth约equal字bodysize
+            // toatmiddletextcharacter,eachcharacterwidth约equal字bodysize
             $chineseCharCount = mb_strlen($text, 'UTF-8');
             $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // increasesecurityside距
             $textHeight = $fontSize;
@@ -244,13 +244,13 @@ class ImageWatermarkProcessor
             $totalTextHeight = $textHeight;
         }
 
-        // 动stateside距:based on字bodysizecalculate,ensure足够nullbetween
+        // autostateside距:based on字bodysizecalculate,ensure足够nullbetween
         $margin = max(20, (int) ($fontSize * 0.8));
 
         switch ($position) {
             case 1: // leftupangle
                 return [$margin, $margin + $ascender];
-            case 2: // up方middle央
+            case 2: // upsidemiddle央
                 return [max($margin, (int) (($width - $textWidth) / 2)), $margin + $ascender];
             case 3: // rightupangle
                 return [max($margin, $width - $textWidth - $margin), $margin + $ascender];
@@ -262,7 +262,7 @@ class ImageWatermarkProcessor
                 return [max($margin, $width - $textWidth - $margin), (int) (($height + $ascender - $descender) / 2)];
             case 7: // leftdownangle
                 return [$margin, $height - $margin - $descender];
-            case 8: // down方middle央
+            case 8: // downsidemiddle央
                 return [max($margin, (int) (($width - $textWidth) / 2)), $height - $margin - $descender];
             case 9: // rightdownangle
                 return [max($margin, $width - $textWidth - $margin), $height - $margin - $descender];
@@ -276,7 +276,7 @@ class ImageWatermarkProcessor
      */
     private function decodeBase64Image(string $base64Image): string
     {
-        // 移exceptdata URLfront缀
+        // moveexceptdata URLfrontsuffix
         if (str_contains($base64Image, ',')) {
             $base64Image = substr($base64Image, strpos($base64Image, ',') + 1);
         }
@@ -303,7 +303,7 @@ class ImageWatermarkProcessor
 
         $imageData = file_get_contents($url, false, $context);
         if ($imageData === false) {
-            throw new Exception('no法downloadimage: ' . $url);
+            throw new Exception('nomethoddownloadimage: ' . $url);
         }
 
         return $imageData;
@@ -316,7 +316,7 @@ class ImageWatermarkProcessor
      */
     private function outputImage($image, string $format = 'auto'): void
     {
-        // from动formatdetect
+        // fromautoformatdetect
         if ($format === 'auto') {
             if ($this->fontProvider->hasTransparency($image)) {
                 $format = 'png'; // havetransparentdegreeusePNG
@@ -332,14 +332,14 @@ class ImageWatermarkProcessor
                     break;
                 case 'webp':
                     if (function_exists('imagewebp')) {
-                        imagewebp($image, null, 100); // WebPno損模type
+                        imagewebp($image, null, 100); // WebPno損modetype
                     } else {
                         $this->logger->warning('WebP not supported, falling back to PNG');
                         imagepng($image, null, 0);
                     }
                     break;
                 case 'gif':
-                    // GIFlimitmore多,suggestion升levelforPNG
+                    // GIFlimitmoremultiple,suggestion升levelforPNG
                     $this->logger->info('Converting GIF to PNG for better quality');
                     imagepng($image, null, 0);
                     break;
@@ -347,7 +347,7 @@ class ImageWatermarkProcessor
                 case 'jpg':
                 default:
                     if ($this->fontProvider->hasTransparency($image)) {
-                        // JPEGnot supportedtransparentdegree,from动转PNG
+                        // JPEGnot supportedtransparentdegree,fromautotransferPNG
                         $this->logger->info('JPEG does not support transparency, converting to PNG');
                         imagepng($image, null, 0);
                     } else {
@@ -356,7 +356,7 @@ class ImageWatermarkProcessor
                     break;
             }
         } catch (Exception $e) {
-            // encodingfailo clockusePNG兜bottom
+            // encodingfailo clockusePNGfallbackbottom
             $this->logger->error('Image encoding failed, falling back to PNG', [
                 'format' => $format,
                 'error' => $e->getMessage(),
@@ -386,7 +386,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * frombase64front缀extractgraphlikeformat.
+     * frombase64frontsuffixextractgraphlikeformat.
      */
     private function extractBase64Format(string $base64Image): string
     {
@@ -412,7 +412,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * according toformatgeneratebase64front缀.
+     * according toformatgeneratebase64frontsuffix.
      */
     private function generateBase64Prefix(string $format): string
     {

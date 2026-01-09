@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_flow_ai_models', function (Blueprint $table) {
             $table->boolean('support_multi_modal')->default(true)->comment('whethersupportmulti-modalstate')->after('support_embedding');
-            $table->bigInteger('max_tokens')->default(0)->comment('mostbigtoken数')->after('vector_size');
+            $table->bigInteger('max_tokens')->default(0)->comment('mostbigtokencount')->after('vector_size');
         });
     }
 

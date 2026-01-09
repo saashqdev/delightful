@@ -15,14 +15,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // table存inthennotexecute
+        // tableexistsinthennotexecute
         if (Schema::hasTable('delightful_api_premium_endpoints')) {
             return;
         }
 
         Schema::create('delightful_api_premium_endpoints', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('type', 255)->comment('accesspointtype.userneedfrom己guaranteenotandotherbusinessduplicate');
+            $table->string('type', 255)->comment('accesspointtype.userneedfromselfguaranteenotandotherbusinessduplicate');
             $table->string('provider', 255)->comment('providequotient')->nullable();
             $table->string('name', 255)->comment('accesspointname');
             $table->text('config')->comment('letuserfromself-storeonetheseconfigurationinfo')->nullable();
@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->string('circuit_breaker_status', 32)
                 ->default(CircuitBreakerStatus::CLOSED->value)
                 ->comment('circuit breakstatus: closed=normalservicemiddle, open=circuit breakmiddle, half_open=tryrestoremiddle');
-            $table->string('resources', 255)->comment('resourceconsume id list,onetimerequestmaybeconsume多typeresource')->nullable();
+            $table->string('resources', 255)->comment('resourceconsume id list,onetimerequestmaybeconsumemultipletyperesource')->nullable();
             $table->datetimes();
             $table->unique(['enabled', 'type', 'provider', 'name'], 'unique_enabled_type_provider_name');
             $table->comment('APIaccesspointtable,associateaccesspointcanconsumeresourceinfo');

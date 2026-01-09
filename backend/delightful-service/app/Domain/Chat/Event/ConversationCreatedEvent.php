@@ -12,14 +12,14 @@ use App\Domain\Chat\Entity\DelightfulConversationEntity;
 class ConversationCreatedEvent
 {
     /**
-     * @param DelightfulConversationEntity $conversation createconversation实body
+     * @param DelightfulConversationEntity $conversation createconversationactualbody
      */
     public function __construct(private readonly DelightfulConversationEntity $conversation)
     {
     }
 
     /**
-     * getcreateconversation实body.
+     * getcreateconversationactualbody.
      */
     public function getConversation(): DelightfulConversationEntity
     {

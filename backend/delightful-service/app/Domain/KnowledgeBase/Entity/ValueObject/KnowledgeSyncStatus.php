@@ -10,22 +10,22 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 enum KnowledgeSyncStatus: int
 {
     /*
-     * not同
+     * notsame
      */
     case NotSynced = 0;
 
     /*
-     * 同middle
+     * samemiddle
      */
     case Syncing = 3;
 
     /*
-     * already同
+     * alreadysame
      */
     case Synced = 1;
 
     /*
-     * 同failed
+     * samefailed
      */
     case SyncFailed = 2;
 

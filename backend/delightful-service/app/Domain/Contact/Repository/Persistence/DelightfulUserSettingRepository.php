@@ -86,7 +86,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * pass delightfulId + key getusersetting(跨organization).
+     * pass delightfulId + key getusersetting(crossorganization).
      */
     public function getByDelightfulId(string $delightfulId, string $key): ?DelightfulUserSettingEntity
     {
@@ -100,14 +100,14 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * pass delightfulId saveusersetting(跨organization),若already存insame key thenupdate.
+     * pass delightfulId saveusersetting(crossorganization),若alreadyexistsinsame key thenupdate.
      */
     public function saveByDelightfulId(string $delightfulId, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
         // write delightfulId
         $delightfulUserSettingEntity->setDelightfulId($delightfulId);
 
-        // find现haverecord
+        // findshowhaverecord
         $model = UserSettingModel::query()
             ->where('delightful_id', $delightfulId)
             ->where('key', $delightfulUserSettingEntity->getKey())
@@ -127,7 +127,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * getall局configuration(organization_code/user_id/delightful_id 均for NULL).
+     * getalllocalconfiguration(organization_code/user_id/delightful_id 均for NULL).
      */
     public function getGlobal(string $key): ?DelightfulUserSettingEntity
     {
@@ -143,11 +143,11 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * saveall局configuration.
+     * savealllocalconfiguration.
      */
     public function saveGlobal(DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
-        // find现haverecord
+        // findshowhaverecord
         /** @var null|UserSettingModel $model */
         $model = UserSettingModel::query()
             ->whereNull('organization_code')
@@ -162,7 +162,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
             $delightfulUserSettingEntity->setId($model->id);
         }
 
-        // usefactorygeneratedatabackhand动coverage NULL field
+        // usefactorygeneratedatabackhandautocoverage NULL field
         $delightfulUserSettingEntity->setOrganizationCode(null);
         $delightfulUserSettingEntity->setUserId(null);
         $delightfulUserSettingEntity->setDelightfulId(null);

@@ -61,7 +61,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 预processdocumentfile,according todocumentfiletype,conductdifferentprocess.
+     * preprocessdocumentfile,according todocumentfiletype,conductdifferentprocess.
      */
     public function preProcessDocumentFiles(KnowledgeBaseDataIsolation $dataIsolation, array $documentFiles): array
     {
@@ -73,7 +73,7 @@ class DocumentFileStrategy
         }
 
         $result = [];
-        // toeachminutegroupminute别process
+        // toeachminutegroupminuteotherprocess
         foreach ($groupedFiles as $class => $files) {
             $driver = $this->getImplement($files[0]);
             if ($driver) {
@@ -95,7 +95,7 @@ class DocumentFileStrategy
      */
     private function replaceImages(string $content, KnowledgeBaseDataIsolation $dataIsolation, ?string $knowledgeBaseCode = null): string
     {
-        // match所haveimage
+        // match haveimage
         $pattern = '/(!\[.*\]\((.*?)\))/';
         $matches = [];
         preg_match_all($pattern, $content, $matches);
@@ -129,7 +129,7 @@ class DocumentFileStrategy
                     $tempFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid();
                     file_put_contents($tempFile, $imageContent);
 
-                    // getfileextension名
+                    // getfileextensionname
                     $finfo = finfo_open(FILEINFO_MIME_TYPE);
                     $mimeType = finfo_file($finfo, $tempFile);
                     finfo_close($finfo);
@@ -173,7 +173,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * according toMIMEtypegetfileextension名.
+     * according toMIMEtypegetfileextensionname.
      */
     private function getExtensionFromMimeType(string $mimeType): string
     {

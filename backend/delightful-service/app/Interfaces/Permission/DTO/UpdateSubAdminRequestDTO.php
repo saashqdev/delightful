@@ -10,7 +10,7 @@ namespace App\Interfaces\Permission\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * update子administratorrolerequestDTO.
+ * updatechildadministratorrolerequestDTO.
  */
 class UpdateSubAdminRequestDTO extends AbstractDTO
 {
@@ -25,19 +25,19 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
     public ?int $status = null;
 
     /**
-     * permissiontag,useatfront端showcategory(optional,onlyinneedupdateo clockprovide).
+     * permissiontag,useatfrontclientshowcategory(optional,onlyinneedupdateo clockprovide).
      */
     public ?array $permissionTag = null;
 
     /**
      * permissionkeylist(optional,onlyinneedupdateo clockprovide).
-     * notice:ifprovidethisfield,willreplace所have现havepermission.
+     * notice:ifprovidethisfield,willreplace haveshowhavepermission.
      */
     public ?array $permissions = null;
 
     /**
      * userIDlist(optional,onlyinneedupdateo clockprovide).
-     * notice:ifprovidethisfield,willreplace所have现haveuserassociate.
+     * notice:ifprovidethisfield,willreplace haveshowhaveuserassociate.
      */
     public ?array $userIds = null;
 
@@ -158,7 +158,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
             }
 
             if (strlen($this->name) > 255) {
-                $errors[] = 'rolenamelengthnotcan超pass255character';
+                $errors[] = 'rolenamelengthnotcanexceedspass255character';
             }
         }
 
@@ -186,7 +186,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
     }
 
     /**
-     * get所havealreadysetupdatefield.
+     * get havealreadysetupdatefield.
      */
     public function getUpdateFields(): array
     {

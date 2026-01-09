@@ -24,11 +24,11 @@ interface DelightfulProviderAndModelsInterface
     public function getDelightfulProvider(ProviderDataIsolation $dataIsolation, Category $category, ?Status $status = null): ?ProviderConfigDTO;
 
     /**
-     * according toorganizationencodingandcategory别get Delightful servicequotientmodellist.
+     * according toorganizationencodingandcategoryotherget Delightful servicequotientmodellist.
      *
      * @param string $organizationCode organizationencoding
-     * @param null|Category $category servicequotientcategory别,foremptyo clockreturn所havecategorymodel
-     * @return array<ProviderModelEntity> Delightful servicequotientmodel实bodyarray
+     * @param null|Category $category servicequotientcategoryother,foremptyo clockreturn havecategorymodel
+     * @return array<ProviderModelEntity> Delightful servicequotientmodelactualbodyarray
      */
     public function getDelightfulEnableModels(string $organizationCode, ?Category $category = null): array;
 
@@ -36,8 +36,8 @@ interface DelightfulProviderAndModelsInterface
      * according to modelParentId getorganization Delightful model.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
-     * @param string $modelParentId model父ID
-     * @return null|ProviderModelEntity 找toorganizationmodel实body,not存inthenreturnnull
+     * @param string $modelParentId modelparentID
+     * @return null|ProviderModelEntity findtoorganizationmodelactualbody,notexistsinthenreturnnull
      */
     public function getDelightfulModelByParentId(ProviderDataIsolation $dataIsolation, string $modelParentId): ?ProviderModelEntity;
 
@@ -45,7 +45,7 @@ interface DelightfulProviderAndModelsInterface
      * according toIDgetorganization Delightful model.
      *
      * @param int $id modelID`
-     * @return null|ProviderModelEntity 找tomodel实body,not存inthenreturnnull
+     * @return null|ProviderModelEntity findtomodelactualbody,notexistsinthenreturnnull
      */
     public function getDelightfulModelById(int $id): ?ProviderModelEntity;
 
@@ -53,7 +53,7 @@ interface DelightfulProviderAndModelsInterface
      * nonofficialorganizationupdate Delightful modelstatus(写o clockcopylogic).
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
-     * @param ProviderModelEntity $officialModel officialmodel实body
+     * @param ProviderModelEntity $officialModel officialmodelactualbody
      * @return string organizationmodelID
      */
     public function updateDelightfulModelStatus(

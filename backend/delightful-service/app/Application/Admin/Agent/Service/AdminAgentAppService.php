@@ -104,17 +104,17 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * getenterprisedown所haveassistantcreate者.
+     * getenterprisedown haveassistantcreateperson.
      * @return array<array{user_id:string,nickname:string,avatar:string}>
      */
     public function getOrganizationAgentsCreators(DelightfulUserAuthorization $authorization): array
     {
-        // get所haveassistant
+        // get haveassistant
         $agentCreators = $this->delightfulAgentDomainService->getOrganizationAgentsCreators($authorization->getOrganizationCode());
         $dataIsolation = DataIsolation::create($authorization->getOrganizationCode(), $authorization->getId());
         $userMap = $this->userDomainService->getByUserIds($dataIsolation, $agentCreators);
 
-        // 收collectionuseravatarkey
+        // receivecollectionuseravatarkey
         $avatars = array_filter(array_map(function ($user) {
             return $user->getAvatarUrl();
         }, $userMap), fn ($avatar) => ! empty($avatar));
@@ -140,7 +140,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * queryenterprisedown所haveassistant,itemitemquery:status,createperson,search.
+     * queryenterprisedown haveassistant,itemitemquery:status,createperson,search.
      */
     public function queriesAgents(DelightfulUserAuthorization $authorization, QueryPageAgentDTO $query): PageDTO
     {
@@ -149,7 +149,7 @@ class AdminAgentAppService extends AbstractKernelAppService
             return new PageDTO();
         }
         $delightfulAgentEntityCount = $this->delightfulAgentDomainService->queriesAgentsCount($authorization->getOrganizationCode(), $query);
-        // get所have avatar
+        // get have avatar
         $avatars = array_filter(array_column($delightfulAgentEntities, 'agent_avatar'), fn ($avatar) => ! empty($avatar));
         $fileLinks = $this->fileDomainService->getLinks($authorization->getOrganizationCode(), $avatars);
         // getassistantcreateperson
@@ -212,16 +212,16 @@ class AdminAgentAppService extends AbstractKernelAppService
         $dataIsolation = $this->createAdminDataIsolation($authorization);
         $allSettings = [];
 
-        // get所have Agent 相closesettype
+        // get have Agent 相closesettype
         $agentSettingsTypes = AdminGlobalSettingsType::getAssistantGlobalSettingsType();
 
-        // onetimepropertyget所haveset
+        // onetimepropertyget haveset
         $settings = $this->globalSettingsDomainService->getSettingsByTypes(
             $agentSettingsTypes,
             $dataIsolation
         );
 
-        // process所haveset
+        // process haveset
         foreach ($settings as $setting) {
             $settingDTO = (new AgentGlobalSettingsDTO($setting->toArray()));
             ExtraDetailAppenderFactory::createStrategy($settingDTO->getExtra())->appendExtraDetail($settingDTO->getExtra(), $authorization);
@@ -249,7 +249,7 @@ class AdminAgentAppService extends AbstractKernelAppService
             return isset($agentSettingsTypes[$setting->getType()->value]);
         });
 
-        // convertfor实bodyobject
+        // convertforactualbodyobject
         $entities = array_map(function ($setting) {
             /** @var AbstractSettingExtraDTO $extra */
             $extra = $setting->getExtra();
@@ -259,7 +259,7 @@ class AdminAgentAppService extends AbstractKernelAppService
                 ->setExtra(AbstractSettingExtra::fromDataByType($extra->toArray(), $setting->getType()));
         }, $settingsToUpdate);
 
-        // onetimepropertyupdate所haveset
+        // onetimepropertyupdate haveset
         $updatedSettings = $this->globalSettingsDomainService->updateSettingsBatch($entities, $dataIsolation);
 
         // convertforDTOreturn
@@ -281,7 +281,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         // extractenablemachinepersonlistmiddle agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // getfinger定organizationandmachinepersonversionmachinepersondataanditstotal
+        // getfingersetorganizationandmachinepersonversionmachinepersondataanditstotal
         $agentVersions = $this->delightfulAgentVersionDomainService->getAgentsByOrganizationWithCursor(
             $organizationCode,
             $agentVersionIds,
@@ -362,13 +362,13 @@ class AdminAgentAppService extends AbstractKernelAppService
         }
 
         $selectedDefaultFriendRootIds = array_flip($this->getSelectedDefaultFriendRootIds($authorization));
-        // iftypeforSELECTED_DEFAULT_FRIEND,thenonlyreturn选middledefaultgood友
+        // iftypeforSELECTED_DEFAULT_FRIEND,thenonlyreturn选middledefaultgoodfriend
         if ($type === AgentFilterType::SELECTED_DEFAULT_FRIEND) {
             return array_filter($enabledAgents, function ($agent) use ($selectedDefaultFriendRootIds) {
                 return isset($selectedDefaultFriendRootIds[$agent->getId()]);
             });
         }
-        // iftypeforNOT_SELECTED_DEFAULT_FRIEND,thenonlyreturnnot选middledefaultgood友
+        // iftypeforNOT_SELECTED_DEFAULT_FRIEND,thenonlyreturnnot选middledefaultgoodfriend
         /* @phpstan-ignore-next-line */
         if ($type === AgentFilterType::NOT_SELECTED_DEFAULT_FRIEND) {
             return array_filter($enabledAgents, function ($agent) use ($selectedDefaultFriendRootIds) {

@@ -126,7 +126,7 @@ class MessageAssembler
         // messagetypeandcontentabstractoutcome
         $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setSenderId($conversationEntity->getUserId());
-        // TODO sessiontableshould冗remainderrecord收hairdouble方usertype,目frontonlyrecord收item方,needsupplement
+        // TODO sessiontableshouldredundantremainderrecordreceivehairdoublesideusertype,itemfrontonlyrecordreceiveitemside,needsupplement
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
         $messageDTO->setSenderType($senderType);
         $messageDTO->setSenderOrganizationCode($conversationEntity->getUserOrganizationCode());
@@ -155,7 +155,7 @@ class MessageAssembler
         // messagetypeandcontentabstractoutcome
         $messageDTO = new DelightfulMessageDTO();
         $messageDTO->setSenderId($conversationEntity->getUserId());
-        // TODO sessiontableshould冗remainderrecord收hairdouble方usertype,目frontonlyrecord收item方,needsupplement
+        // TODO sessiontableshouldredundantremainderrecordreceivehairdoublesideusertype,itemfrontonlyrecordreceiveitemside,needsupplement
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
         $messageDTO->setSenderType($senderType);
         $messageDTO->setSenderOrganizationCode($conversationEntity->getUserOrganizationCode());
@@ -174,13 +174,13 @@ class MessageAssembler
     }
 
     /**
-     * according to protobuf messagestructure,getto应messageobject.
+     * according to protobuf messagestructure,gettoshouldmessageobject.
      */
     public static function getControlMessageDTOByRequest(ControlRequest $controlRequest, DelightfulUserAuthorization $userAuthorization, ConversationType $conversationType): DelightfulMessageEntity
     {
         $appMessageId = $controlRequest->getData()->getMessage()->getAppMessageId();
         $messageStruct = $controlRequest->getData()->getMessage()->getDelightfulMessage();
-        # willprotobufmessageconvertforto应object
+        # willprotobufmessageconvertfortoshouldobject
         $messageEntity = new DelightfulMessageEntity();
         $messageEntity->setSenderId($userAuthorization->getId());
         $messageEntity->setSenderType($conversationType);
@@ -227,7 +227,7 @@ class MessageAssembler
      */
     public static function getControlMessageStruct(ControlMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
-        // its实candirectlyuse protobuf generate php object,butis暂o clocknothavetimeallquantityreplace,bybackagain说.
+        // itsactualcandirectlyuse protobuf generate php object,butis暫o clocknothavetimeallquantityreplace,bybackagainsay.
         return match ($messageTypeEnum) {
             # controlmessage
             ControlMessageType::CreateConversation => new ConversationWindowCreateMessage($messageStructArray),
@@ -235,7 +235,7 @@ class MessageAssembler
             ControlMessageType::TopConversation => new ConversationTopMessage($messageStructArray),
             ControlMessageType::HideConversation => new ConversationHideMessage($messageStructArray),
             ControlMessageType::MuteConversation => new ConversationMuteMessage($messageStructArray),
-            ControlMessageType::SeenMessages => new MessagesSeen($messageStructArray), // already读
+            ControlMessageType::SeenMessages => new MessagesSeen($messageStructArray), // alreadyread
             ControlMessageType::RevokeMessage => new MessageRevoked($messageStructArray), // withdraw
             ControlMessageType::CreateTopic => new TopicCreateMessage($messageStructArray),
             ControlMessageType::UpdateTopic => new TopicUpdateMessage($messageStructArray),
@@ -294,7 +294,7 @@ class MessageAssembler
                 continue;
             }
 
-            // ifnotiscurrentusermessage,andcontent超pass500character,thentruncate
+            // ifnotiscurrentusermessage,andcontentexceedspass500character,thentruncate
             if (! empty($currentUserNickname) && $role !== $currentUserNickname && mb_strlen($content, 'UTF-8') > 500) {
                 $content = mb_substr($content, 0, 500, 'UTF-8') . '...';
             }
@@ -302,7 +302,7 @@ class MessageAssembler
             $formattedMessage = sprintf("%s: %s\n", $role, $content);
             $messageLength = mb_strlen($formattedMessage, 'UTF-8');
 
-            // ifistheoneitemmessage,even if超passlengthlimitalsowantcontain
+            // ifistheoneitemmessage,even ifexceedspasslengthlimitalsowantcontain
             if ($messageCount === 0) {
                 array_unshift($limitedMessages, $formattedMessage);
                 $currentLength += $messageLength;

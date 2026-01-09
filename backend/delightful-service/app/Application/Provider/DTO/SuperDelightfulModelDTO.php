@@ -10,7 +10,7 @@ namespace App\Application\Provider\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * BeDelightful modelsimplify DTO,onlycontain必wantfield.
+ * BeDelightful modelsimplify DTO,onlycontainrequiredwantfield.
  */
 class BeDelightfulModelDTO extends AbstractDTO
 {

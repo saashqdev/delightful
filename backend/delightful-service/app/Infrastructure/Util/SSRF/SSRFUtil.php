@@ -13,7 +13,7 @@ use Throwable;
  * SSRFdefensetoolcategory.
  *
  * useexample:
- * // 简singleuse,defaultconfiguration
+ * // simplesingleuse,defaultconfiguration
  * $safeUrl = SSRFUtil::getSafeUrl('https://example.com');
  *
  * // customizeparameter
@@ -89,10 +89,10 @@ class SSRFUtil
     }
 
     /**
-     * getURLto应IP.
+     * getURLtoshouldIP.
      *
      * @param string $url URL
-     * @return null|string IPground址ornull(ifparsefail)
+     * @return null|string IPgroundaddressornull(ifparsefail)
      */
     public static function getUrlIp(string $url): ?string
     {

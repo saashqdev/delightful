@@ -46,9 +46,9 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         // sendPOSTrequesttocorrectinterfacepath
         $response = $this->json('/api/v2/delightful/conversation/chatCompletions', $requestData, $headers);
 
-        // verifyresponse码
-        $this->assertEquals(1000, $response['code'] ?? 0, 'responsecode应for1000');
-        $this->assertEquals('ok', $response['message'] ?? '', 'responsemessage应forok');
+        // verifyresponsecode
+        $this->assertEquals(1000, $response['code'] ?? 0, 'responsecodeshouldfor1000');
+        $this->assertEquals('ok', $response['message'] ?? '', 'responsemessageshouldforok');
 
         // definitionexpectresponsestructure
         $expectedStructure = [
@@ -73,8 +73,8 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         // useassertArrayValueTypesEqualsverifyresponsestructure
         $this->assertArrayValueTypesEquals($expectedStructure, $response, 'responsestructurenotconformexpected');
 
-        // 额outsideverifyrolewhetherisassistant(thisisprecisevalueverify)
-        $this->assertEquals('assistant', $response['data']['choices'][0]['message']['role'], 'role应forassistant');
+        // quotaoutsideverifyrolewhetherisassistant(thisisprecisevalueverify)
+        $this->assertEquals('assistant', $response['data']['choices'][0]['message']['role'], 'roleshouldforassistant');
     }
 
     /**
@@ -82,7 +82,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
      */
     public function testConversationChatCompletionsWithInvalidParams(): void
     {
-        // constructmissing必wantparameterrequest
+        // constructmissingrequiredwantparameterrequest
         $requestData = [
             // missing conversation_id
             'topic_id' => 'test_topic_id',
@@ -100,12 +100,12 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
 
         // definitionexpecterrorresponsestructure
         $expectedErrorStructure = [
-            'code' => 0, // expectednotis1000code,butspecific数valuemaybenotcertain,所bythiswithinonlyisplaceholder
-            'message' => '', // onlyverify存inmessagefield,specificcontentmaybenotcertain
+            'code' => 0, // expectednotis1000code,butspecificcountvaluemaybenotcertain, bythiswithinonlyisplaceholder
+            'message' => '', // onlyverifyexistsinmessagefield,specificcontentmaybenotcertain
         ];
 
         // verifyresponseshouldisparameterverifyerror
-        $this->assertNotEquals(1000, $response['code'] ?? 0, 'missing必wantparametero clock,response码not应for1000');
+        $this->assertNotEquals(1000, $response['code'] ?? 0, 'missingrequiredwantparametero clock,responsecodenotshouldfor1000');
         $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'errorresponsestructurenotconformexpected');
     }
 
@@ -131,12 +131,12 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
 
         // definitionexpecterrorresponsestructure
         $expectedErrorStructure = [
-            'code' => 0, // expectednotis1000code,specific数valuemaybenotcertain
-            'message' => '', // onlyverify存inmessagefield,specificcontentmaybenotcertain
+            'code' => 0, // expectednotis1000code,specificcountvaluemaybenotcertain
+            'message' => '', // onlyverifyexistsinmessagefield,specificcontentmaybenotcertain
         ];
 
         // verifyresponseshouldisauthorizationerror
-        $this->assertNotEquals(1000, $response['code'] ?? 0, 'invalidauthorizationo clock,response码not应for1000');
+        $this->assertNotEquals(1000, $response['code'] ?? 0, 'invalidauthorizationo clock,responsecodenotshouldfor1000');
         $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'authorizationerrorresponsestructurenotconformexpected');
     }
 }

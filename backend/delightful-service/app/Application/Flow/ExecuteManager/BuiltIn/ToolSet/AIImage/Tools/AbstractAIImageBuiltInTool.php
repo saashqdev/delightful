@@ -49,7 +49,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
         "radio": {
             "type": "string",
             "key": "radio",
-            "title": "generateimageratio例",
+            "title": "generateimageratioexample",
             "description": "optional:\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",default\"1:1\"",
             "required": null,
             "value": null,
@@ -61,8 +61,8 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
         "user_prompt": {
             "type": "string",
             "key": "user_prompt",
-            "title": "userhint词",
-            "description": "userhint词",
+            "title": "userhintword",
+            "description": "userhintword",
             "required": null,
             "value": null,
             "encryption": false,
@@ -133,7 +133,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "file_url",
                         "sort": 1,
-                        "title": "fileground址",
+                        "title": "filegroundaddress",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -146,7 +146,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "file_ext",
                         "sort": 2,
-                        "title": "fileback缀",
+                        "title": "filebacksuffix",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -183,7 +183,7 @@ JSON,
     protected function executeCallback(ExecutionData $executionData, string $modelVersion): array
     {
         if ($executionData->getExecutionType()->isDebug()) {
-            // debug 模type
+            // debug modetype
             return ['ai_image : current not support debug model'];
         }
 
@@ -206,7 +206,7 @@ JSON,
             ->setUserMessage($textMessage)
             ->setAttachments($executionData->getTriggerData()?->getAttachments())
             ->setReferMessageId($executionData->getTriggerData()?->getSeqEntity()?->getSeqId());
-        // setactualrequestsizeandratio例
+        // setactualrequestsizeandratioexample
         $enumModel = ImageGenerateModelType::fromModel($model, false);
         $imageGenerateParamsVO = $reqDto->getParams();
         $imageGenerateParamsVO->setSourceId($this->getCode());
@@ -220,7 +220,7 @@ JSON,
 
     protected function getAssistantAuthorization(string $assistantUserId): DelightfulUserAuthorization
     {
-        // getassistantuserinfo.generateimageupload者isassistantfrom己.
+        // getassistantuserinfo.generateimageuploadpersonisassistantfromself.
         $assistantInfoEntity = $this->getDelightfulUserDomainService()->getUserById($assistantUserId);
         if ($assistantInfoEntity === null) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'assistant_not_found');

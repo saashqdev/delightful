@@ -119,7 +119,7 @@ final class DelightfulConversationEntity extends AbstractEntity
     }
 
     /**
-     * judgereceiveTypewhether存in.
+     * judgereceiveTypewhetherexistsin.
      */
     public function hasReceiveType(): bool
     {

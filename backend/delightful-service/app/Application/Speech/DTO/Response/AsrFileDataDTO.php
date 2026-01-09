@@ -28,7 +28,7 @@ readonly class AsrFileDataDTO
     /**
      * from TaskFileEntity create DTO.
      *
-     * @param TaskFileEntity $fileEntity taskfile实body
+     * @param TaskFileEntity $fileEntity taskfileactualbody
      * @param string $workspaceRelativePath workregiontopath
      */
     public static function fromTaskFileEntity(TaskFileEntity $fileEntity, string $workspaceRelativePath): self

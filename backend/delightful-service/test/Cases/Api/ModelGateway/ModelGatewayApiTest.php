@@ -50,10 +50,10 @@ class ModelGatewayApiTest extends AbstractHttpTest
             ],
         ];
 
-        // createone Parallel instance,setmostbigandhair数for 10
+        // createone Parallel instance,setmostbigandhaircountfor 10
         $parallel = new Parallel(10);
 
-        // definition多differentrequestscenario
+        // definitionmultipledifferentrequestscenario
         $scenario = $this->buildRequestData([
             'business_params' => [
                 'organization_id' => '000',
@@ -90,7 +90,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
             });
             ++$index;
         }
-        // execute所haveandhairtaskandgetresult
+        // execute haveandhairtaskandgetresult
         $results = $parallel->wait();
         // statisticssuccessandfailrequest
         $successCount = 0;
@@ -205,7 +205,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
         return [
             [
                 'role' => 'system',
-                'content' => 'youisone助hand',
+                'content' => 'youisonehelphand',
             ],
             [
                 'role' => 'user',

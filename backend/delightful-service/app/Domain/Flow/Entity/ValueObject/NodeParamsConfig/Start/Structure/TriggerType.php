@@ -12,7 +12,7 @@ use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 
 enum TriggerType: int
 {
-    // no触hair
+    // notouchhair
     case None = 0;
 
     // newmessageo clock
@@ -33,17 +33,17 @@ enum TriggerType: int
     // etc待message
     case WaitMessage = 6;
 
-    // addgood友o clock
+    // addgoodfriendo clock
     case AddFriend = 7;
 
     public static function fromSeqType(ChatMessageType|ControlMessageType $seqType): TriggerType
     {
         $triggerType = TriggerType::None;
         if ($seqType instanceof ChatMessageType) {
-            // chat触hair
+            // chattouchhair
             $triggerType = TriggerType::ChatMessage;
         } elseif ($seqType === ControlMessageType::OpenConversation) {
-            // openchatwindow触hair
+            // openchatwindowtouchhair
             $triggerType = TriggerType::OpenChatWindow;
         } elseif ($seqType === ControlMessageType::AddFriendSuccess) {
             // addgoodfriend triggerhair

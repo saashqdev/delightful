@@ -11,7 +11,7 @@ use Hyperf\Snowflake\MetaGeneratorInterface;
 // useatcalculate WorkerId  Key key,avoid跟otherproject混use.
 $snowflakeRedisKey = env('SNOWFLAKE_REDIS_KEY', 'delightful:snowflake:workerId');
 # initDataCenterIdAndWorkerId methodmiddle,workerId and dataCenterId calculatemethodnotreasonable,causemeanwhilemostbigonlycanhave 31 pod.
-# not如decrease \Hyperf\Snowflake\Configuration middle $dataCenterIdBits and $workerIdBits size,增big $sequenceBits,by便single台machineeach毫secondcangeneratemoresnowyflowerid,decrease特highandhairdownetc待time
+# notlikedecrease \Hyperf\Snowflake\Configuration middle $dataCenterIdBits and $workerIdBits size,增big $sequenceBits,by便singleplatformmachineeachmillisecondssecondcangeneratemoresnowyflowerid,decrease特highandhairdownetc待time
 return [
     'begin_second' => MetaGeneratorInterface::DEFAULT_BEGIN_SECOND,
     RedisMilliSecondMetaGenerator::class => [

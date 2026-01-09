@@ -12,22 +12,22 @@ namespace App\Domain\Chat\Entity\ValueObject\MessageType;
  */
 enum ControlMessageType: string
 {
-    // queueetcscenariocore跳
+    // queueetcscenariocorejump
     case Ping = 'ping';
 
     // createsessionwindow
     case CreateConversation = 'create_conversation';
 
-    // 移exceptsessionwindow(listnotdisplay)
+    // moveexceptsessionwindow(listnotdisplay)
     case HideConversation = 'hide_conversation';
 
-    // 置topsessionwindow
+    // settopsessionwindow
     case TopConversation = 'top_conversation';
 
     // sessiondo not disturb
     case MuteConversation = 'mute_conversation';
 
-    // already读
+    // alreadyread
     case SeenMessages = 'seen_messages';
 
     // alreadyviewmessage
@@ -57,7 +57,7 @@ enum ControlMessageType: string
     // deletetopic
     case DeleteTopic = 'delete_topic';
 
-    // setsessiontopic(setforemptytable示leavetopic)
+    // setsessiontopic(setforemptytableshowleavetopic)
     case SetConversationTopic = 'set_conversation_topic';
 
     // creategroup chat
@@ -69,22 +69,22 @@ enum ControlMessageType: string
     // systemnotify(xxadd入/leavegroup chat,group warmreminderetc)
     case SystemNotice = 'system_notice';
 
-    // 群member变more
+    // groupmemberchangemore
     case GroupUsersAdd = 'group_users_add';
 
-    // 群member变more
+    // groupmemberchangemore
     case GroupUsersRemove = 'group_users_remove';
 
     // dissolvegroup chat
     case GroupDisband = 'group_disband';
 
-    // 群memberrole变more(batchquantitysetadministrator/normalmember)
+    // groupmemberrolechangemore(batchquantitysetadministrator/normalmember)
     case GroupUserRoleChange = 'group_user_role_change';
 
-    // 转letgroup owner
+    // transferletgroup owner
     case GroupOwnerChange = 'group_owner_change';
 
-    // assistantinteractionfinger令
+    // assistantinteractionfingercommand
     case AgentInstruct = 'bot_instruct';
 
     // translateconfigurationitem
@@ -93,15 +93,15 @@ enum ControlMessageType: string
     // translate
     case Translate = 'translate';
 
-    // addgood友success
+    // addgoodfriendsuccess
     case AddFriendSuccess = 'add_friend_success';
 
-    // addgood友apply
+    // addgoodfriendapply
     case AddFriendApply = 'add_friend_apply';
 
     /**
      * unknownmessage.
-     * byatversioniteration,hair版timediffetcreason,maybeproduceunknowntypemessage.
+     * byatversioniteration,hairversiontimediffetcreason,maybeproduceunknowntypemessage.
      */
     case Unknown = 'unknown';
 
@@ -115,7 +115,7 @@ enum ControlMessageType: string
      */
     public static function getMessageStatusChangeType(): array
     {
-        // notcontaineditmessagestatus变more!
+        // notcontaineditmessagestatuschangemore!
         // editmessagenotwillaltermessagestatus,onlywillaltermessagecontent.
         return [
             self::RevokeMessage,

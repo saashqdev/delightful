@@ -33,7 +33,7 @@ class Template extends AbstractTemplate
     ];
 
     protected array $idContents = [
-        VolcengineTemplateIdEnum::ST_79E262F3->value => '您verify码is:${verification_code},valid期 ${timeout} minute钟.请inpagemiddleinputverify码completeverify.如non本person操as,请ignore.',
+        VolcengineTemplateIdEnum::ST_79E262F3->value => '您verifycodeis:${verification_code},valid期 ${timeout} minuteseconds.pleaseinpagemiddleinputverifycodecompleteverify.likenonthispersonoperationas,pleaseignore.',
     ];
 
     /**
@@ -46,7 +46,7 @@ class Template extends AbstractTemplate
     ];
 
     /**
-     * Volcano云short信signature暂notsupportinternationalization.
+     * Volcanocloudshortmessagesignature暫notsupportinternationalization.
      */
     protected array $signMap = [
         'lighthouseengine' => [
@@ -70,29 +70,29 @@ class Template extends AbstractTemplate
     }
 
     /**
-     * according to传comeshort信text,parsevariable. onlyvariablevalue,notmatchvariablekey!
-     * needvariableparsereason:Volcanoshort信onlysupportvariableshort信send,whilebusiness方willoutatChuanglanshort信reason,will传come整short信textcontent,nothavevariable.
+     * according to传comeshortmessagetext,parsevariable. onlyvariablevalue,notmatchvariablekey!
+     * needvariableparsereason:Volcanoshortmessageonlysupportvariableshortmessagesend,whilebusinesssidewilloutatChuanglanshortmessagereason,will传come整shortmessagetextcontent,nothavevariable.
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
     {
-        // 找tofinger定templatevariablejustthenparserule. ifnottemplateid,loopjustthenmatchwilldecreasematchspeeddegreeandaccuratedegree
+        // findtofingersettemplatevariablejustthenparserule. ifnottemplateid,loopjustthenmatchwilldecreasematchspeeddegreeandaccuratedegree
         if ($templateId) {
-            // judgetemplatewhether存in
+            // judgetemplatewhetherexistsin
             if (! isset($this->idContents[$templateId])) {
                 throw new RuntimeException('notmatchtotemplateid:' . $templateId);
             }
             $pregMatch = $this->variablePregAnalyse[$language][$templateId] ?? '';
-            // ifaccording toshort信contentmatchtotemplateid,then变morepass intemplateidvalue
+            // ifaccording toshortmessagecontentmatchtotemplateid,thenchangemorepass intemplateidvalue
             $pregMatch && [$templateId, $matchedVariables] = $this->variablePregMatch([$templateId => $pregMatch], $message);
         } elseif (isset($this->variablePregAnalyse[$language])) {
-            // Volcanonormalshort信,andno法according totype + language certaintemplateid,tryaccording toshort信textcontent + language certaintemplateidandvariable
+            // Volcanonormalshortmessage,andnomethodaccording totype + language certaintemplateid,tryaccording toshortmessagetextcontent + language certaintemplateidandvariable
             [$templateId, $matchedVariables] = $this->variablePregMatch($this->variablePregAnalyse[$language], $message);
         }
         if (empty($templateId)) {
             throw new RuntimeException('notmatchtotemplateid');
         }
         if (empty($matchedVariables)) {
-            throw new RuntimeException('short信templatevariableparsefail');
+            throw new RuntimeException('shortmessagetemplatevariableparsefail');
         }
         return [$templateId, $matchedVariables];
     }

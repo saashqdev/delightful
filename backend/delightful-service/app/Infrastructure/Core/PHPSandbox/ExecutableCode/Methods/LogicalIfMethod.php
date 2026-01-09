@@ -19,7 +19,7 @@ class LogicalIfMethod extends AbstractMethod
 
     protected string $group = 'logic';
 
-    protected string $desc = 'according tofinger定itemitemcomereturndifferentresult';
+    protected string $desc = 'according tofingersetitemitemcomereturndifferentresult';
 
     protected array $args = [
         [

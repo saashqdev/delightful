@@ -84,7 +84,7 @@ abstract class NodeRunner implements NodeRunnerInterface
         $this->llmAppService = di(LLMAppService::class);
 
         $this->node = $node;
-        // initialize运lineresult
+        // initializerunlineresult
         if (! $this->node->getNodeDebugResult()) {
             $this->node->setNodeDebugResult(new NodeDebugResult($this->node->getNodeVersion()));
         }
@@ -92,7 +92,7 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     public function execute(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults = []): void
     {
-        // sectionpoint运linemostbigcountlimit,prevent死loop
+        // sectionpointrunlinemostbigcountlimit,prevent死loop
         $max = 10000;
         $executeNum = $executionData->getExecuteNum($this->node->getNodeId());
         if ($executeNum >= $max) {
@@ -129,7 +129,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 $callback($vertexResult, $executionData, $frontResults);
             } else {
                 $this->node->validate();
-                // 提frontget本timeresult,ifhave,thendirectlyuse
+                // submitfrontgetthistimeresult,ifhave,thendirectlyuse
                 $nextExecuteNum = $executeNum + 1;
                 $historyVertexResult = $executionData->getNodeHistoryVertexResult($this->node->getNodeId(), $nextExecuteNum);
                 if ($historyVertexResult) {
@@ -148,7 +148,7 @@ abstract class NodeRunner implements NodeRunnerInterface
             $debugResult->setSuccess(false);
             $debugResult->setErrorCode((int) $throwable->getCode());
             $debugResult->setErrorMessage($throwable->getMessage());
-            // out现exceptiono clocknot运lineback续sectionpoint
+            // outshowexceptiono clocknotrunlineback続sectionpoint
             $vertexResult->setChildrenIds([]);
             $this->logger->warning('NodeRunnerFailed', [
                 'node_id' => $this->node->getNodeId(),
@@ -206,7 +206,7 @@ abstract class NodeRunner implements NodeRunnerInterface
         }
         $response = trim($response, '\\');
         $response = str_replace('\\\\\"', '\"', $response);
-        // if $response itselfthenis JSON format,that么directlyreturn
+        // if $response itselfthenis JSON format,thatwhatdirectlyreturn
         $data = json_decode(trim($response), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             return [];
@@ -222,8 +222,8 @@ abstract class NodeRunner implements NodeRunnerInterface
     abstract protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void;
 
     /**
-     * todo thiswithin暂notimplementduplicateuploadissue,均when做newfileupload
-     * recordprocess所producefile,均willmeanwhileuploadtocloud,back续sectionpointneeduseo clockfromexecuteprocessdatamiddleprioritymatch.
+     * todo thiswithin暫notimplementduplicateuploadissue,均whenmakenewfileupload
+     * recordprocess producefile,均willmeanwhileuploadtocloud,back続sectionpointneeduseo clockfromexecuteprocessdatamiddleprioritymatch.
      * @return AbstractAttachment[]
      * @throws SSRFException
      */
@@ -245,7 +245,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 $flowExecutionAttachments[] = $attachmentObj;
                 continue;
             }
-            // ifisonelink,that么needto url conductlimit
+            // ifisonelink,thatwhatneedto url conductlimit
             if (EasyFileTools::isUrl($attachment)) {
                 SSRFUtil::getSafeUrl($attachment, replaceIp: false);
             }

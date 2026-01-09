@@ -26,7 +26,7 @@ class DelightfulAccessToken
         $llmDataIsolation = new LLMDataIsolation('', 'system');
         $llmDataIsolation->setCurrentOrganizationCode($llmDataIsolation->getOfficialOrganizationCode());
 
-        // checkapplicationwhetheralready经create
+        // checkapplicationwhetheralreadyalreadycreate
         $applicationDomainService = di(ApplicationDomainService::class);
         $application = $applicationDomainService->getByCodeWithNull($llmDataIsolation, ModelGatewayOfficialApp::APP_CODE);
         if (! $application) {
@@ -39,7 +39,7 @@ class DelightfulAccessToken
             $application = $applicationDomainService->save($llmDataIsolation, $application);
         }
 
-        // thiswithin常quantity AccessToken not落library,only存inatinside存middle,guaranteeinside部callo clockuseone致
+        // thiswithin常quantity AccessToken not落library,onlyexistsinatinsideexistsmiddle,guaranteeinside部callo clockuseoneto
         $accessToken = new AccessTokenEntity();
         $accessToken->setId(1);
         $accessToken->setName($application->getCode());

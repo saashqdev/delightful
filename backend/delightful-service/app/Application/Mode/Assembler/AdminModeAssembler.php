@@ -28,7 +28,7 @@ use Hyperf\Contract\TranslatorInterface;
 class AdminModeAssembler
 {
     /**
-     * 实bodyconvertformanageback台DTO (containcompletei18nfield).
+     * actualbodyconvertformanagebackplatformDTO (containcompletei18nfield).
      */
     public static function modeToAdminDTO(ModeEntity $entity): AdminModeDTO
     {
@@ -42,7 +42,7 @@ class AdminModeAssembler
     }
 
     /**
-     * associate实bodyconvertforDTO.
+     * associateactualbodyconvertforDTO.
      */
     public static function relationEntityToDTO(ModeGroupRelationEntity $entity): ModeGroupRelationDTO
     {
@@ -52,7 +52,7 @@ class AdminModeAssembler
     /**
      * aggregaterootconvertforDTO.
      *
-     * @param ModeAggregate $aggregate 模typeaggregateroot
+     * @param ModeAggregate $aggregate modetypeaggregateroot
      * @param array $providerModels optionalmodelinfomapping [modelId => ProviderModelEntity]
      */
     public static function aggregateToAdminDTO(ModeAggregate $aggregate, array $providerModels = []): AdminModeAggregateDTO
@@ -91,7 +91,7 @@ class AdminModeAssembler
             $modelInfo = $providerModels[$modelId] ?? null;
 
             if ($modelInfo && $modelInfo['best']) {
-                // 找tocanusemodel,usemost佳modelinfo
+                // findtocanusemodel,usemost佳modelinfo
                 $providerModel = $modelInfo['best'];
                 $modelDTO->setModelName($providerModel->getName());
                 $modelDTO->setModelIcon($providerModel->getIcon());
@@ -108,7 +108,7 @@ class AdminModeAssembler
                 // maintaintobackcompatible,set providerModelId forfindtomodelID
                 $modelDTO->setProviderModelId((string) $providerModel->getId());
             } else {
-                // back台manageneeddisplay所havestatus,includenocanusemodelsituation
+                // backplatformmanageneeddisplay havestatus,includenocanusemodelsituation
                 $status = $modelInfo['status'] ?? ModelStatus::Deleted;
                 $modelDTO->setModelStatus($status);
                 $modelDTO->setModelStatus($status);
@@ -123,7 +123,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 实bodyarrayconvertformanageback台DTOarray.
+     * actualbodyarrayconvertformanagebackplatformDTOarray.
      */
     public static function entitiesToAdminDTOs(array $entities): array
     {
@@ -131,7 +131,7 @@ class AdminModeAssembler
     }
 
     /**
-     * minutegroup实bodyarrayconvertformanageback台DTOarray.
+     * minutegroupactualbodyarrayconvertformanagebackplatformDTOarray.
      */
     public static function groupEntitiesToAdminDTOs(array $entities): array
     {
@@ -139,7 +139,7 @@ class AdminModeAssembler
     }
 
     /**
-     * associate实bodyarrayconvertforDTOarray.
+     * associateactualbodyarrayconvertforDTOarray.
      */
     public static function relationEntitiesToDTOs(array $entities): array
     {
@@ -152,7 +152,7 @@ class AdminModeAssembler
     }
 
     /**
-     * ModeAggregateDTOconvertforModeAggregate实body.
+     * ModeAggregateDTOconvertforModeAggregateactualbody.
      */
     public static function aggregateDTOToEntity(AdminModeAggregateDTO $dto): ModeAggregate
     {
@@ -167,7 +167,7 @@ class AdminModeAssembler
     }
 
     /**
-     * ModeGroupAggregateDTOconvertforModeGroupAggregate实body.
+     * ModeGroupAggregateDTOconvertforModeGroupAggregateactualbody.
      */
     public static function groupAggregateDTOToEntity(AdminModeGroupAggregateDTO $dto): ModeGroupAggregate
     {
@@ -184,7 +184,7 @@ class AdminModeAssembler
     }
 
     /**
-     * ModeGroupDTOconvertforModeGroupEntity实body.
+     * ModeGroupDTOconvertforModeGroupEntityactualbody.
      */
     public static function groupDTOToEntity(AdminModeGroupDTO $dto): ModeGroupEntity
     {
@@ -200,7 +200,7 @@ class AdminModeAssembler
     }
 
     /**
-     * willUpdateModeRequestdataapplicationto现haveModeEntity(部minuteupdate).
+     * willUpdateModeRequestdataapplicationtoshowhaveModeEntity(部minuteupdate).
      */
     public static function applyUpdateRequestToEntity(UpdateModeRequest $request, ModeEntity $existingEntity): void
     {

@@ -45,12 +45,12 @@ interface ModeRepositoryInterface
     public function delete(ModeDataIsolation $dataIsolation, string $id): bool;
 
     /**
-     * checkidentifierwhether唯one
+     * checkidentifierwhetheruniqueone
      */
     public function isIdentifierUnique(ModeDataIsolation $dataIsolation, string $identifier, ?string $excludeId = null): bool;
 
     /**
-     * get所haveenablemode.
+     * get haveenablemode.
      */
     public function findEnabledModes(ModeDataIsolation $dataIsolation): array;
 

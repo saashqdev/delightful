@@ -51,7 +51,7 @@ class SeqAssembler
     }
 
     /**
-     * batchquantityreturncustomer端needSeqstructure,toresultcollectionforce重newdescendingrowcolumn.
+     * batchquantityreturncustomerclientneedSeqstructure,toresultcollectionforce重newdescendingrowcolumn.
      * @return ClientSequenceResponse[]
      */
     public static function getClientSeqStructs(array $seqInfos, array $messageInfos): array
@@ -75,14 +75,14 @@ class SeqAssembler
     }
 
     /**
-     * Json streammessagecustomer端 seq structure.
+     * Json streammessagecustomerclient seq structure.
      */
     public static function getClientJsonStreamSeqStruct(
         string $seqId,
         ?array $thisTimeStreamMessages = null
     ): ?ClientJsonStreamSequenceResponse {
-        // todo forcompatibleold版streammessage,needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer.
-        // todo etcfront端uplineback,then移except content/reasoning_content/status/llm_response 多remainderpush
+        // todo forcompatibleoldversionstreammessage,needwill content/reasoning_content/status/llm_response fieldputtomostoutsidelayer.
+        // todo etcfrontclientuplineback,thenmoveexcept content/reasoning_content/status/llm_response multipleremainderpush
         $response = (new ClientJsonStreamSequenceResponse())->setTargetSeqId($seqId);
         $content = $thisTimeStreamMessages['content'] ?? null;
         $reasoningContent = $thisTimeStreamMessages['reasoning_content'] ?? null;
@@ -90,7 +90,7 @@ class SeqAssembler
         // stronglinedelete $streamOptions middlestream_app_message_id/streamfield
         unset($thisTimeStreamMessages['stream_options']['stream_app_message_id'], $thisTimeStreamMessages['stream_options']['stream']);
         $streamOptions = $thisTimeStreamMessages['stream_options'] ?? null;
-        // 0 willbewhen做 false handle,所bythiswithinwantjudgewhetherfor null or者 ''
+        // 0 willbewhenmake false handle, bythiswithinwantjudgewhetherfor null orperson ''
         if ($content !== null && $content !== '') {
             $response->setContent($content);
         }
@@ -111,7 +111,7 @@ class SeqAssembler
     }
 
     /**
-     * generatecustomer端needSeqstructure.
+     * generatecustomerclientneedSeqstructure.
      */
     public static function getClientSeqStruct(
         DelightfulSeqEntity $seqEntity,
@@ -125,29 +125,29 @@ class SeqAssembler
     }
 
     /**
-     * according toalreadyalready existsinseqEntity,generatealready读/alreadyview/withdraw/editetcmessagestatus变moretypereturn执message.
+     * according toalreadyalready existsinseqEntity,generatealreadyread/alreadyview/withdraw/editetcmessagestatuschangemoretypereturn执message.
      */
     public static function generateReceiveStatusChangeSeqEntity(DelightfulSeqEntity $originSeqEntity, ControlMessageType $messageType): DelightfulSeqEntity
     {
-        // edit/withdraw/quotereturn执,allis refer isfrom己chatmessage id
+        // edit/withdraw/quotereturn执,allis refer isfromselfchatmessage id
         if ($originSeqEntity->getSeqType() instanceof ChatMessageType) {
             $referMessageId = $originSeqEntity->getMessageId();
         } else {
             $referMessageId = $originSeqEntity->getReferMessageId();
         }
         $statusChangeSeqEntity = clone $originSeqEntity;
-        // messagereceive方notneedrecord收itempersoncolumntable,清nullthefieldinfo
+        // messagereceivesidenotneedrecordreceiveitempersoncolumntable,clearnullthefieldinfo
         $statusChangeSeqEntity->setReceiveList(null);
         $statusChangeSeqEntity->setSeqType($messageType);
         $seqData = $statusChangeSeqEntity->toArray();
         if ($messageType === ControlMessageType::SeenMessages) {
-            // 变morestatusforalready读
+            // changemorestatusforalreadyread
             $seqData['status'] = DelightfulMessageStatus::Seen->value;
-            // return写o clockwill $referMessageIds 拆open,eachitemmessagegenerateoneitemalready读message
+            // return写o clockwill $referMessageIds 拆open,eachitemmessagegenerateoneitemalreadyreadmessage
             $seqData['content'] = Json::encode(['refer_message_ids' => [$referMessageId]], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
         if ($messageType === ControlMessageType::RevokeMessage) {
-            // 变morestatusforalreadywithdraw
+            // changemorestatusforalreadywithdraw
             $seqData['status'] = DelightfulMessageStatus::Revoked->value;
             $seqData['content'] = Json::encode(['refer_message_id' => $referMessageId], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
@@ -155,8 +155,8 @@ class SeqAssembler
     }
 
     /**
-     * according toalreadyalready existsinseqEntity,generatealready读/alreadyview/withdraw/editetcmessagestatus变moretypereturn执message.
-     * @param string $referMessageId supportfinger定quotemessageid,useatgivereceive方otherdevicepushreturn执,or者givehairitem方pushreturn执
+     * according toalreadyalready existsinseqEntity,generatealreadyread/alreadyview/withdraw/editetcmessagestatuschangemoretypereturn执message.
+     * @param string $referMessageId supportfingersetquotemessageid,useatgivereceivesideotherdevicepushreturn执,orpersongivehairitemsidepushreturn执
      */
     public static function generateStatusChangeSeqEntity(array $seqData, string $referMessageId): DelightfulSeqEntity
     {
@@ -166,7 +166,7 @@ class SeqAssembler
         $seqData['id'] = $messageId;
         $seqData['message_id'] = $messageId;
         $seqData['seq_id'] = $messageId;
-        // generateonenewmessage_id,andreferto原comemessage_id
+        // generateonenewmessage_id,andrefertooriginalcomemessage_id
         $seqData['refer_message_id'] = $referMessageId;
         $seqData['created_at'] = $time;
         $seqData['updated_at'] = $time;
@@ -176,7 +176,7 @@ class SeqAssembler
     }
 
     /**
-     * according toalreadyalready existsinseqEntity,generatetopic变moretypecontrolmessage.
+     * according toalreadyalready existsinseqEntity,generatetopicchangemoretypecontrolmessage.
      */
     public static function generateTopicChangeSeqEntity(DelightfulSeqEntity $seqEntity, DelightfulTopicEntity $topicEntity, ?DelightfulUserEntity $receiveUserEntity): DelightfulSeqEntity
     {
@@ -185,18 +185,18 @@ class SeqAssembler
         $time = date('Y-m-d H:i:s');
         // resetseq相closeid
         $seqData['id'] = $messageId;
-        // 序columnbelong tousermaybehairchange occursmore
+        // sequencecolumnbelong tousermaybehairchange occursmore
         if ($receiveUserEntity !== null) {
             $seqData['object_id'] = $receiveUserEntity->getDelightfulId();
             $seqData['object_type'] = $receiveUserEntity->getUserType()->value;
         }
         $seqData['message_id'] = $messageId;
         $seqData['seq_id'] = $messageId;
-        // generateonenewmessage_id,andreferto原comemessage_id
+        // generateonenewmessage_id,andrefertooriginalcomemessage_id
         $seqData['refer_message_id'] = '';
         $seqData['created_at'] = $time;
         $seqData['updated_at'] = $time;
-        // update content middleconversation id forreceive方from己
+        // update content middleconversation id forreceivesidefromself
         $seqData['content'] = Json::encode($topicEntity->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         $seqData['conversation_id'] = $topicEntity->getConversationId();
         $extra = new SeqExtra();
@@ -255,7 +255,7 @@ class SeqAssembler
 
     private static function getClientSequence(DelightfulSeqEntity $seqEntity, ?DelightfulMessageEntity $messageEntity = null): ClientSequence
     {
-        // byateditmessagemaybemore改messagetype,thereforeif $messageEntity notfornull,priorityuse $messageEntity messagetype
+        // byateditmessagemaybemorechangemessagetype,thereforeif $messageEntity notfornull,priorityuse $messageEntity messagetype
         if ($messageEntity !== null) {
             $messageType = $messageEntity->getContent()->getMessageTypeEnum();
         } else {
@@ -271,7 +271,7 @@ class SeqAssembler
             // ifischatmessage,messagespecificcontentfrommessageEntitymiddleget
             $messageData = $messageEntity?->getContent()->toArray();
         }
-        // chatstatisticsnot读person数
+        // chatstatisticsnotreadpersoncount
         $receiveList = $seqEntity->getReceiveList();
         $unreadCount = $receiveList === null ? 0 : count($receiveList->getUnreadList());
         if (empty($messageData)) {
@@ -279,42 +279,42 @@ class SeqAssembler
         }
         $carbon = Carbon::parse($seqEntity->getCreatedAt());
         $messageTopicId = (string) $seqEntity->getExtra()?->getTopicId();
-        // generatecustomer端messagestructure
+        // generatecustomerclientmessagestructure
         $clientMessageData = [
-            // service端generatemessage唯oneid,alllocally uniqueone.useatwithdraw,editmessage.
+            // serviceclientgeneratemessageuniqueoneid,alllocally uniqueone.useatwithdraw,editmessage.
             'delightful_message_id' => $seqEntity->getDelightfulMessageId(),
-            // customer端generate,needios/Android/webthreeclient commoncertainonegeneratealgorithm.useatinformcustomer端,delightful_message_idbycome
+            // customerclientgenerate,needios/Android/webthreeclient commoncertainonegeneratealgorithm.useatinformcustomerclient,delightful_message_idbycome
             'app_message_id' => $seqEntity->getAppMessageId(),
-            // send者
+            // sendperson
             'sender_id' => (string) $messageEntity?->getSenderId(),
             'topic_id' => $messageTopicId,
-            // messagesmallcategory.controlmessagesmallcategory:already读return执;withdraw;edit;join group/leave group;organizationarchitecture change; . showmessage:text,voice,img,file,videoetc
+            // messagesmallcategory.controlmessagesmallcategory:alreadyreadreturn执;withdraw;edit;join group/leave group;organizationarchitecture change; . showmessage:text,voice,img,file,videoetc
             'type' => $messageTypeName,
-            // return显not读person数,ifuserpoint击detail,againrequestspecificmessagecontent
+            // returndisplaynotreadpersoncount,ifuserpoint击detail,againrequestspecificmessagecontent
             'unread_count' => $unreadCount,
-            // messagesendtime,and delightful_message_id oneup,useatwithdraw,editmessageo clock唯onepropertyvalidation.
+            // messagesendtime,and delightful_message_id oneup,useatwithdraw,editmessageo clockuniqueonepropertyvalidation.
             'send_time' => $carbon->getTimestamp(),
-            // chatmessagestatus:unread | seen | read |revoked  .to应middletext explanation:not读|already读|alreadyview(non纯textcomplextypemessage,userpoint击detail)  | withdraw
+            // chatmessagestatus:unread | seen | read |revoked  .toshouldmiddletext explanation:notread|alreadyread|alreadyview(non纯textcomplextypemessage,userpoint击detail)  | withdraw
             'status' => $messageStatus ?: '',
             'content' => $messageData,
         ];
         $clientSeqMessage = new ClientMessage($clientMessageData);
 
-        // generatecustomer端seqstructure
+        // generatecustomerclientseqstructure
         $clientSequenceData = [
-            // 序columnnumberbelong to账numberid
+            // sequencecolumnnumberbelong toaccountnumberid
             'delightful_id' => $seqEntity->getObjectId(),
-            // 序columnnumber,one定notduplicate,one定growth,butisnotguaranteecontinuous.
+            // sequencecolumnnumber,onesetnotduplicate,onesetgrowth,butisnotguaranteecontinuous.
             'seq_id' => $seqEntity->getSeqId(),
-            // usermessageid,userdown唯one.
+            // usermessageid,userdownuniqueone.
             'message_id' => $seqEntity->getMessageId(),
-            // 本itemmessagefingertodelightful_message_id. useatimplementalready读return执scenario.存inquoteclose系o clock,send_msg_idfieldnotagainreturn,因forsend方messageidnothavealter.
+            // thisitemmessagefingertodelightful_message_id. useatimplementalreadyreadreturn执scenario.existsinquoteclose系o clock,send_msg_idfieldnotagainreturn,因forsendsidemessageidnothavealter.
             'refer_message_id' => $seqEntity->getReferMessageId(),
-            // send方messageid
+            // sendsidemessageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),
-            // messagebelong toconversationwindow. customer端canaccording tothisvaluecertainmessagewhetherwantreminderetc.if本groundnothavehair现thisconversationid,activetoservice端queryconversationwindowdetail
+            // messagebelong toconversationwindow. customerclientcanaccording tothisvaluecertainmessagewhetherwantreminderetc.ifthisgroundnothavehairshowthisconversationid,activetoserviceclientqueryconversationwindowdetail
             'conversation_id' => $seqEntity->getConversationId(),
-            // 本itemmessagebelong toorganization
+            // thisitemmessagebelong toorganization
             'organization_code' => $seqEntity->getOrganizationCode(),
             'message' => $clientSeqMessage,
             // editmessageoption

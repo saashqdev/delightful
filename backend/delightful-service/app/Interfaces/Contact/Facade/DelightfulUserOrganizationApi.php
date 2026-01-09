@@ -69,7 +69,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
     }
 
     /**
-     * get账numberdown所havecanswitchorganizationlist.
+     * getaccountnumberdown havecanswitchorganizationlist.
      */
     public function listOrganizations(RequestInterface $request): array
     {
@@ -87,7 +87,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
         if (empty($userDetails)) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
-        // 同one账numberdown delightful_id alllocally uniqueone,thiswithin取first即can
+        // sameoneaccountnumberdown delightful_id alllocally uniqueone,thiswithingetfirst即can
         return $userDetails[0]->getDelightfulId();
     }
 }

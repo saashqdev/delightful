@@ -33,7 +33,7 @@ class KnowledgeBaseDocumentAssembler
     }
 
     /**
-     * fromcreateDTOcreate实body.
+     * fromcreateDTOcreateactualbody.
      */
     public static function createDTOToEntity(CreateDocumentRequestDTO $dto, DelightfulUserAuthorization $auth): KnowledgeBaseDocumentEntity
     {
@@ -46,7 +46,7 @@ class KnowledgeBaseDocumentAssembler
     }
 
     /**
-     * fromupdateDTOcreate实body.
+     * fromupdateDTOcreateactualbody.
      */
     public static function updateDTOToEntity(UpdateDocumentRequestDTO $dto, DelightfulUserAuthorization $auth): KnowledgeBaseDocumentEntity
     {

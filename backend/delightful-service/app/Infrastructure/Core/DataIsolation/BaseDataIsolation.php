@@ -31,7 +31,7 @@ class BaseDataIsolation implements DataIsolationInterface
     private bool $enabled = true;
 
     /**
-     * 多organizationdownenvironment ID.
+     * multipleorganizationdownenvironment ID.
      */
     private int $envId = 0;
 
@@ -70,7 +70,7 @@ class BaseDataIsolation implements DataIsolationInterface
         $this->subscriptionManager = \Hyperf\Support\make(SubscriptionManagerInterface::class);
 
         if (config('office_organization')) {
-            // 目frontonly 1 officialorganization
+            // itemfrontonly 1 officialorganization
             $this->officialOrganizationCodes = [config('office_organization')];
         }
     }

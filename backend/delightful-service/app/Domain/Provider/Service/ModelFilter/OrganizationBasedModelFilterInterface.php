@@ -13,13 +13,13 @@ use App\Domain\Provider\Entity\ProviderModelEntity;
  * based onorganizationencodingmodelfilterserviceinterface.
  *
  * useatsubstitutebased onmodeltable visiblePackages fieldfilterlogic
- * enterprisepackageimplementthisinterface,providegiveopen源packageconductmodelfilter
+ * enterprisepackageimplementthisinterface,providegiveopensourcepackageconductmodelfilter
  */
 interface OrganizationBasedModelFilterInterface
 {
     /**
      * based onorganizationencodingfiltermodellist
-     * thisisenterprisepackageprovidegiveopen源package核corefiltermethod.
+     * thisisenterprisepackageprovidegiveopensourcepackage核corefiltermethod.
      *
      * @param string $organizationCode organizationencoding
      * @param array $models 待filtermodellist [modelId => ProviderModelEntity]
@@ -28,16 +28,16 @@ interface OrganizationBasedModelFilterInterface
     public function filterModelsByOrganization(string $organizationCode, array $models): array;
 
     /**
-     * checkfinger定modelwhethertoorganizationcanuse.
+     * checkfingersetmodelwhethertoorganizationcanuse.
      *
      * @param string $organizationCode organizationencoding
-     * @param string $modelIdentifier modelidentifier (如: gpt-4o)
+     * @param string $modelIdentifier modelidentifier (like: gpt-4o)
      * @return bool whethercanuse
      */
     public function isModelAvailableForOrganization(string $organizationCode, string $modelIdentifier): bool;
 
     /**
-     * getorganizationcurrentsubscribeproductbind所havemodelidentifier.
+     * getorganizationcurrentsubscribeproductbind havemodelidentifier.
      *
      * @param string $organizationCode organizationencoding
      * @return array modelidentifierarray,for example: ['gpt-4o', 'claude-3', ...]

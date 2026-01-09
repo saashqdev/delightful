@@ -45,8 +45,8 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'file_name' => 'out师table.pdf',
-            'file_url' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/out师table.pdf',
+            'file_name' => 'out師table.pdf',
+            'file_url' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/out師table.pdf',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());
@@ -87,8 +87,8 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'file_name' => 'out师table.txt',
-            'file_url' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/out师table.txt',
+            'file_name' => 'out師table.txt',
+            'file_url' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/out師table.txt',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());
@@ -101,7 +101,7 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'file_name' => 'out师table.docx',
+            'file_name' => 'out師table.docx',
             'file_url' => '',
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -116,8 +116,8 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'file_name' => 'out师table.doc',
-            'file_url' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/out师table.doc',
+            'file_name' => 'out師table.doc',
+            'file_url' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/out師table.doc',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());
@@ -168,7 +168,7 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
                         "type": "string",
                         "key": "content",
                         "sort": 1,
-                        "title": "fileground址",
+                        "title": "filegroundaddress",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -217,7 +217,7 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
                             "type": "string",
                             "key": "content",
                             "sort": 1,
-                            "title": "fileground址",
+                            "title": "filegroundaddress",
                             "description": "",
                             "required": null,
                             "value": {
@@ -307,7 +307,7 @@ JSON,
                             "type": "string",
                             "key": "content",
                             "sort": 1,
-                            "title": "fileground址",
+                            "title": "filegroundaddress",
                             "description": "",
                             "required": null,
                             "value": null,
@@ -318,7 +318,7 @@ JSON,
                             "type": "string",
                             "key": "file_extension",
                             "sort": 2,
-                            "title": "fileextension名",
+                            "title": "fileextensionname",
                             "description": "",
                             "required": null,
                             "value": null,

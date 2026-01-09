@@ -32,9 +32,9 @@ return [
         ],
         SearchEngineType::Google->value => [
             'class_name' => GoogleSearchAdapter::class,
-            // ifyouuseGOOGLE,youneedfinger定searchAPIkey.noticeyoualsoshouldinenvmiddlefinger定cx.
+            // ifyouuseGOOGLE,youneedfingersetsearchAPIkey.noticeyoualsoshouldinenvmiddlefingersetcx.
             'api_key' => env('GOOGLE_SEARCH_API_KEY', ''),
-            // ifyouinusegoogle,请finger定searchcx,alsothenisGOOGLE_SEARCH_ENGINE_ID
+            // ifyouinusegoogle,pleasefingersetsearchcx,alsothenisGOOGLE_SEARCH_ENGINE_ID
             'cx' => env('GOOGLE_SEARCH_CX', ''),
         ],
         SearchEngineType::Bing->value => [

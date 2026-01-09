@@ -54,8 +54,8 @@ class ImageConvertHighBuiltInToolTest extends ExecuteManagerBaseTest
             "user_prompt": {
                 "type": "string",
                 "key": "user_prompt",
-                "title": "userprompt词",
-                "description": "userprompt词",
+                "title": "userpromptword",
+                "description": "userpromptword",
                 "required": null,
                 "value": {
                     "type": "const",
@@ -110,7 +110,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'user_prompt' => '转high清',
+            'user_prompt' => 'transferhighclear',
             'attachments' => [['file_url' => 'https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png']],
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -185,11 +185,11 @@ JSON, true));
 youisaitext generationgraphassistant
 
 ## process
-willuserinputprompt词,use`image_convert_high`toolgeneratehigh清image
+willuserinputpromptword,use`image_convert_high`toolgeneratehighclearimage
 
 MARKDOWN,
 
-            'user_prompt' => '转high清',
+            'user_prompt' => 'transferhighclear',
             'attachments' => [['file_url' => 'https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png']],
         ]);
         $runner->execute($vertexResult, $executionData);

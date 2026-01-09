@@ -50,12 +50,12 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId): ?ProviderConfigModelsDTO
     {
-        // 1. getservicequotientconfiguration实body,containtemplateIDandvirtualDelightfulservicequotient统onehandle
+        // 1. getservicequotientconfigurationactualbody,containtemplateIDandvirtualDelightfulservicequotient統onehandle
         $providerConfigEntity = $this->getProviderConfig($dataIsolation, $configId);
         if (! $providerConfigEntity) {
             return null;
         }
-        // 存intemplatevirtual configId andalready经writedatabase configId,thereforethiswithinuse getProviderConfig returnservicequotient id replacepass invalue
+        // existsintemplatevirtual configId andalreadyalreadywritedatabase configId,thereforethiswithinuse getProviderConfig returnservicequotient id replacepass invalue
         $configId = (string) $providerConfigEntity->getId();
         // 2. query Provider
         $providerEntity = $this->getProviderById($dataIsolation, $providerConfigEntity->getServiceProviderId());
@@ -79,9 +79,9 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * batchquantitygetservicequotient实body,passservicequotientconfigurationIDmapping.
+     * batchquantitygetservicequotientactualbody,passservicequotientconfigurationIDmapping.
      * @param array<int> $configIds servicequotientconfigurationIDarray
-     * @return array<int, ProviderEntity> configurationIDtoservicequotient实bodymapping
+     * @return array<int, ProviderEntity> configurationIDtoservicequotientactualbodymapping
      */
     public function getProviderEntitiesByConfigIds(ProviderDataIsolation $dataIsolation, array $configIds): array
     {
@@ -89,27 +89,27 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             return [];
         }
 
-        // batchquantitygetconfiguration实body(notneedorganizationencodingfilter)
+        // batchquantitygetconfigurationactualbody(notneedorganizationencodingfilter)
         $configEntities = $this->serviceProviderConfigRepository->getByIdsWithoutOrganizationFilter($configIds);
         if (empty($configEntities)) {
             return [];
         }
 
         // extractservicequotientID
-        // $configEntities 现inisby config_id for key array
+        // $configEntities showinisby config_id for key array
         $providerIds = [];
         foreach ($configEntities as $configId => $config) {
             $providerIds[] = $config->getServiceProviderId();
         }
         $providerIds = array_unique($providerIds);
 
-        // batchquantitygetservicequotient实body(notneedorganizationencodingfilter)
+        // batchquantitygetservicequotientactualbody(notneedorganizationencodingfilter)
         $providerEntities = $this->providerRepository->getByIdsWithoutOrganizationFilter($providerIds);
         if (empty($providerEntities)) {
             return [];
         }
 
-        // establishconfigurationIDtoservicequotient实bodymapping
+        // establishconfigurationIDtoservicequotientactualbodymapping
         // 两arrayallisby id for key,candirectlyaccess
         $configToProviderMap = [];
         foreach ($configEntities as $configId => $config) {
@@ -129,7 +129,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         if (ProviderConfigIdAssembler::isAnyProviderTemplate($configId)) {
             return $this->handleTemplateConfigUpdate($dataIsolation, $providerConfigEntity);
         }
-        // 2. normalconfigurationupdatelogic(原havelogic)
+        // 2. normalconfigurationupdatelogic(originalhavelogic)
         return $this->handleNormalConfigUpdate($dataIsolation, $providerConfigEntity);
     }
 
@@ -170,10 +170,10 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * according toIDgetconfiguration实body(not按organizationfilter,all局query).
+     * according toIDgetconfigurationactualbody(not按organizationfilter,alllocalquery).
      *
      * @param int $id configurationID
-     * @return null|ProviderConfigEntity configuration实body
+     * @return null|ProviderConfigEntity configurationactualbody
      */
     public function getConfigByIdWithoutOrganizationFilter(int $id): ?ProviderConfigEntity
     {
@@ -181,10 +181,10 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * according toIDarraygetconfiguration实bodycolumntable(not按organizationfilter,all局query).
+     * according toIDarraygetconfigurationactualbodycolumntable(not按organizationfilter,alllocalquery).
      *
      * @param array<int> $ids configurationIDarray
-     * @return array<int, ProviderConfigEntity> returnbyidforkeyconfiguration实bodyarray
+     * @return array<int, ProviderConfigEntity> returnbyidforkeyconfigurationactualbodyarray
      */
     public function getConfigByIdsWithoutOrganizationFilter(array $ids): array
     {
@@ -192,7 +192,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * getservicequotientconfiguration实body,统onehandle所havesituation.
+     * getservicequotientconfigurationactualbody,統onehandle havesituation.
      * - templateID(format:providerCode_category)
      * - conventionaldatabaseconfigurationID.
      */
@@ -212,20 +212,20 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
                 // officialorganizationnotallowuseofficialservicequotient
                 return null;
             }
-            // getto应servicequotient实body
+            // gettoshouldservicequotientactualbody
             $providerEntity = $this->providerRepository->getByCodeAndCategory($providerCode, $category);
             if (! $providerEntity) {
                 return null;
             }
 
-            // 先checkorganizationdownwhetheralready存into应configuration
+            // firstcheckorganizationdownwhetheralreadyexistsintoshouldconfiguration
             $existingConfig = $this->serviceProviderConfigRepository->findFirstByServiceProviderId($dataIsolation, $providerEntity->getId());
             if ($existingConfig) {
-                // if存intrue实configuration,returntrue实configuration
+                // ifexistsintrueactualconfiguration,returntrueactualconfiguration
                 return $existingConfig;
             }
 
-            // not存ino clock才constructvirtualservicequotientconfiguration实body
+            // notexistsino clock才constructvirtualservicequotientconfigurationactualbody
             return $this->createVirtualProviderConfig($dataIsolation, $providerEntity, $configId);
         }
 
@@ -242,7 +242,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * getorganizationdown所haveservicequotientconfiguration.
+     * getorganizationdown haveservicequotientconfiguration.
      * @return ProviderConfigEntity[]
      */
     public function getAllByOrganization(ProviderDataIsolation $dataIsolation): array
@@ -259,7 +259,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * createvirtualservicequotientconfiguration实body(support所haveservicequotienttype).
+     * createvirtualservicequotientconfigurationactualbody(support haveservicequotienttype).
      */
     private function createVirtualProviderConfig(ProviderDataIsolation $dataIsolation, ProviderEntity $providerEntity, string $templateId): ProviderConfigEntity
     {
@@ -303,7 +303,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderConfigError);
         }
 
-        // 3. getto应servicequotient实body
+        // 3. gettoshouldservicequotientactualbody
         $providerEntity = $this->providerRepository->getByCodeAndCategory($providerCode, $category);
         if (! $providerEntity) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotFound);
@@ -323,14 +323,14 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         }
 
         try {
-            // 5. find本organizationdownsame provider_code and category configuration
+            // 5. findthisorganizationdownsame provider_code and category configuration
             $existingConfig = $this->serviceProviderConfigRepository->findFirstByServiceProviderId($dataIsolation, $providerEntity->getId());
             if ($existingConfig) {
-                // 6. 存inthenupdate
+                // 6. existsinthenupdate
                 return $this->updateProviderConfigData($dataIsolation, $existingConfig, $providerConfigEntity);
             }
 
-            // 7. not存inthencreatenewconfiguration
+            // 7. notexistsinthencreatenewconfiguration
             return $this->createNewTemplateConfig($dataIsolation, $providerEntity, $providerConfigEntity);
         } finally {
             $this->locker->release($lockName, $lockOwner);
@@ -338,17 +338,17 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * handlenormalconfigurationupdatelogic(原havelogic).
+     * handlenormalconfigurationupdatelogic(originalhavelogic).
      */
     private function handleNormalConfigUpdate(ProviderDataIsolation $dataIsolation, ProviderConfigEntity $providerConfigEntity): ProviderConfigEntity
     {
-        // get现haveconfiguration实body
+        // getshowhaveconfigurationactualbody
         $existingConfigEntity = $this->serviceProviderConfigRepository->getById($dataIsolation, $providerConfigEntity->getId());
         if ($existingConfigEntity === null) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderConfigError);
         }
 
-        // getto应 Provider infoconductbusinessrulevalidate
+        // gettoshould Provider infoconductbusinessrulevalidate
         $provider = $this->getProviderById($dataIsolation, $existingConfigEntity->getServiceProviderId());
         if ($provider === null) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotFound);
@@ -359,7 +359,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::SystemError);
         }*/
 
-        // use统oneconfigurationupdatelogic
+        // use統oneconfigurationupdatelogic
         return $this->updateProviderConfigData($dataIsolation, $existingConfigEntity, $providerConfigEntity);
     }
 
@@ -368,7 +368,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
      */
     private function createNewTemplateConfig(ProviderDataIsolation $dataIsolation, ProviderEntity $providerEntity, ProviderConfigEntity $templateConfigEntity): ProviderConfigEntity
     {
-        // createnewconfiguration实body
+        // createnewconfigurationactualbody
         $newConfigEntity = new ProviderConfigEntity();
         $newConfigEntity->setServiceProviderId($providerEntity->getId());
         $newConfigEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
@@ -382,8 +382,8 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 统oneconfigurationdataupdatelogic.
-     * handledesensitizedatamerge,fieldupdateandsave操as.
+     * 統oneconfigurationdataupdatelogic.
+     * handledesensitizedatamerge,fieldupdateandsaveoperationas.
      */
     private function updateProviderConfigData(ProviderDataIsolation $dataIsolation, ProviderConfigEntity $existingConfig, ProviderConfigEntity $newConfigData): ProviderConfigEntity
     {
@@ -412,11 +412,11 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * checkProviderConfigItemconfigurationwhetherfornull(所havefieldallisnullvalue).
+     * checkProviderConfigItemconfigurationwhetherfornull( havefieldallisnullvalue).
      */
     private function isProviderConfigEmpty(ProviderConfigItem $config): bool
     {
-        // check所haveconfigurationfieldwhetherallfornull
+        // check haveconfigurationfieldwhetherallfornull
         return empty($config->getAk())
                && empty($config->getSk())
                && empty($config->getApiKey())

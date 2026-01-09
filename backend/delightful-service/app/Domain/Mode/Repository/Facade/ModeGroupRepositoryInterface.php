@@ -45,7 +45,7 @@ interface ModeGroupRepositoryInterface
     public function delete(ModeDataIsolation $dataIsolation, int|string $id): bool;
 
     /**
-     * according tomodeIDdelete所haveminutegroup.
+     * according tomodeIDdelete haveminutegroup.
      */
     public function deleteByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): bool;
 
@@ -55,7 +55,7 @@ interface ModeGroupRepositoryInterface
     public function batchSave(ModeDataIsolation $dataIsolation, array $groupEntities);
 
     /**
-     * according to多modeIDbatchquantitygetminutegroupcolumntable.
+     * according tomultiplemodeIDbatchquantitygetminutegroupcolumntable.
      * @param int[]|string[] $modeIds
      * @return ModeGroupEntity[]
      */

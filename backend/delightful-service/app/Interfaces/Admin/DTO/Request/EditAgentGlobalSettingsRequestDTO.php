@@ -65,15 +65,15 @@ class EditAgentGlobalSettingsRequestDTO extends AbstractDTO
     public function messages(): array
     {
         return [
-            '*.required' => 'Agentall局settingcannotfornull',
-            '*.array' => 'Agentall局settingmustisarray',
+            '*.required' => 'Agentalllocalsettingcannotfornull',
+            '*.array' => 'Agentalllocalsettingmustisarray',
             '*.type.required' => 'typecannotfornull',
             '*.type.integer' => 'typemustforinteger',
             '*.type.in' => 'typevalueinvalid',
             '*.status.required' => 'statuscannotfornull',
             '*.status.integer' => 'statusmustforinteger',
             '*.status.in' => 'statusvalueinvalid',
-            '*.extra.array' => '额outsideparametermustisarray',
+            '*.extra.array' => 'quotaoutsideparametermustisarray',
         ];
     }
 

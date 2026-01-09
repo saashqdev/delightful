@@ -62,7 +62,7 @@ class OperationPermissionAssembler
             $targetOperationDTO->setTargetInfo($targetInfo);
 
             if ($operationPermission->getOperation()->isOwner()) {
-                // 放tomostfrontsurface
+                // puttomostfrontsurface
                 array_unshift($targets, $targetOperationDTO);
             } else {
                 $targets[] = $targetOperationDTO;

@@ -49,12 +49,12 @@ class OrganizationModel extends AbstractModel
     public const int STATUS_DISABLED = 2;
 
     /**
-     * andmodelassociatetable名.
+     * andmodelassociatetablename.
      */
     protected ?string $table = 'delightful_organizations';
 
     /**
-     * canbatchquantity赋valueproperty.
+     * canbatchquantityassignvalueproperty.
      */
     protected array $fillable = [
         'id',

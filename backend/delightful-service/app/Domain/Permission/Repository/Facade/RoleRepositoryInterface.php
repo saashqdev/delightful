@@ -44,7 +44,7 @@ interface RoleRepositoryInterface
     public function assignUsers(string $organizationCode, int $roleId, array $userIds, ?string $assignedBy = null): void;
 
     /**
-     * 移exceptroleuser.
+     * moveexceptroleuser.
      */
     public function removeUsers(string $organizationCode, int $roleId, array $userIds): void;
 
@@ -54,7 +54,7 @@ interface RoleRepositoryInterface
     public function getRoleUsers(string $organizationCode, int $roleId): array;
 
     /**
-     * batchquantityget多roleusercolumntable.
+     * batchquantitygetmultipleroleusercolumntable.
      * returnformatfor [roleId => userId[]].
      *
      * @param string $organizationCode organizationencoding
@@ -70,7 +70,7 @@ interface RoleRepositoryInterface
     public function getUserRoles(string $organizationCode, string $userId): array;
 
     /**
-     * getuser所havepermission.
+     * getuser havepermission.
      */
     public function getUserPermissions(string $organizationCode, string $userId): array;
 }

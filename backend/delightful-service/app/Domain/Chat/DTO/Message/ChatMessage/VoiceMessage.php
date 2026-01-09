@@ -255,7 +255,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
             $chatFileRepository = $container->get(DelightfulChatFileRepositoryInterface::class);
             $cloudFileRepository = $container->get(CloudFileRepositoryInterface::class);
 
-            // getfile实body
+            // getfileactualbody
             $fileEntities = $chatFileRepository->getChatFileByIds([$fileId]);
             if (empty($fileEntities)) {
                 return '';
@@ -263,7 +263,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
 
             $fileEntity = $fileEntities[0];
 
-            // ifhaveoutside链URL,directlyuse
+            // ifhaveoutsidechainURL,directlyuse
             if (! empty($fileEntity->getExternalUrl())) {
                 return $fileEntity->getExternalUrl();
             }

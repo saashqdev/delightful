@@ -39,7 +39,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * get所haveAIcan力list.
+     * get haveAIcan力list.
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array
     {
@@ -131,7 +131,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
             return false;
         }
 
-        // ifneedupdateconfig,先getrecordIDconductencrypt
+        // ifneedupdateconfig,firstgetrecordIDconductencrypt
         if (! empty($data['config'])) {
             $builder = $this->createBuilder($dataIsolation, AiAbilityModel::query());
             $model = $builder->where('code', $code->value)->first();

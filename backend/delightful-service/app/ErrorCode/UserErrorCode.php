@@ -59,14 +59,14 @@ enum UserErrorCode: int
     #[ErrorMessage('user.create_id_relation_too_frequently')]
     case CREATE_ID_RELATION_TOO_FREQUENTLY = 2175;
 
-    // hand机numberexception
+    // handmachinenumberexception
     #[ErrorMessage('user.phone_error')]
     case PHONE_ERROR = 2177;
 
     #[ErrorMessage('user.phone_login_is_exist')]
     case PHONE_INVALID = 2178;
 
-    // auth_token not存in
+    // auth_token notexistsin
     #[ErrorMessage('user.token_not_found')]
     case TOKEN_NOT_FOUND = 2179;
 
@@ -74,11 +74,11 @@ enum UserErrorCode: int
     #[ErrorMessage('user.input_param_error')]
     case INPUT_PARAM_ERROR = 2180;
 
-    // 收itempersontypeexception
+    // receiveitempersontypeexception
     #[ErrorMessage('user.receive_type_error')]
     case RECEIVE_TYPE_ERROR = 2181;
 
-    // user所inorganizationnot存in
+    // user inorganizationnotexistsin
     #[ErrorMessage('user.organization_not_exist')]
     case ORGANIZATION_NOT_EXIST = 2182;
 

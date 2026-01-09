@@ -14,22 +14,22 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // judgetablewhether存in
+        // judgetablewhetherexistsin
         if (Schema::hasTable('delightful_chat_conversations')) {
             return;
         }
         Schema::create('delightful_chat_conversations', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id', 64)->comment('userid.thissessionwindow属attheuser.');
+            $table->string('user_id', 64)->comment('userid.thissessionwindowbelongattheuser.');
             $table->string('user_organization_code', 64)->comment('userorganizationencoding');
-            // 收itempersonorganizationencoding
-            $table->tinyInteger('receive_type')->comment('sessiontype.1:private chat,2:group chat,3:systemmessage,4:云document,5:multi-dimensionaltable格 6:topic 7:applicationmessage');
-            $table->string('receive_id', '64')->comment('session另one方id.differentconversation type,idimplicationdifferent.');
-            $table->string('receive_organization_code', 64)->comment('收itempersonorganizationencoding');
+            // receiveitempersonorganizationencoding
+            $table->tinyInteger('receive_type')->comment('sessiontype.1:private chat,2:group chat,3:systemmessage,4:clouddocument,5:multi-dimensionaltableformat 6:topic 7:applicationmessage');
+            $table->string('receive_id', '64')->comment('sessionanotheronesideid.differentconversation type,idimplicationdifferent.');
+            $table->string('receive_organization_code', 64)->comment('receiveitempersonorganizationencoding');
             // whetherdo not disturb
             $table->tinyInteger('is_not_disturb')->default(0)->comment('whetherdo not disturb 0no 1is');
-            // whether置top
-            $table->tinyInteger('is_top')->default(0)->comment('whether置top 0no 1is');
+            // whethersettop
+            $table->tinyInteger('is_top')->default(0)->comment('whethersettop 0no 1is');
             // whethermark
             $table->tinyInteger('is_mark')->default(0)->comment('whethermark 0no 1is');
             // status
@@ -41,7 +41,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->softDeletes();
             $table->unique(['user_id', 'receive_id', 'receive_type', 'user_organization_code', 'receive_organization_code'], 'unq_user_conversation');
-            $table->comment('usersessionlist.sessionmaybeisprivate chat,group chat,systemmessage,one云documentor者multi-dimensionaltable格etc.');
+            $table->comment('usersessionlist.sessionmaybeisprivate chat,group chat,systemmessage,oneclouddocumentorpersonmulti-dimensionaltableformatetc.');
         });
     }
 

@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_bots', function (Blueprint $table) {
             if (! Schema::hasColumn('delightful_bots', 'start_page')) {
-                $table->boolean('start_page')->default(false)->comment('start页switch');
+                $table->boolean('start_page')->default(false)->comment('startpageswitch');
             }
         });
     }

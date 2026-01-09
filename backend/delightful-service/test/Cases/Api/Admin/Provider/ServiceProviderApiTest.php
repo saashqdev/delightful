@@ -97,10 +97,10 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertArrayHasKey('code', $createResponse);
         $this->assertSame(1000, $createResponse['code'], 'createmodelshouldsuccess');
         $this->assertArrayHasKey('data', $createResponse);
-        $this->assertArrayHasKey('id', $createResponse['data'], 'returndata应containmodelID');
+        $this->assertArrayHasKey('id', $createResponse['data'], 'returndatashouldcontainmodelID');
 
         $modelId = $createResponse['data']['id'];
-        $this->assertNotEmpty($modelId, 'modelIDnot应fornull');
+        $this->assertNotEmpty($modelId, 'modelIDnotshouldfornull');
 
         // ========== step2: calldetailinterfacevalidate4costfield ==========
         $detailUri = $this->baseUri . '/' . $serviceProviderConfigId;
@@ -112,9 +112,9 @@ class ServiceProviderApiTest extends BaseTest
 
         // findcreatemodel
         $createdModel = $this->findModelInDetailResponse($detailResponse['data'], $modelId);
-        $this->assertNotNull($createdModel, 'shouldcanindetailmiddle找tocreatemodel');
+        $this->assertNotNull($createdModel, 'shouldcanindetailmiddlefindtocreatemodel');
 
-        // validate4costfield存inandvaluecorrect
+        // validate4costfieldexistsinandvaluecorrect
         $this->assertArrayHasKey('config', $createdModel, 'modelshouldhaveconfigfield');
         $this->verifyConfigCostFields($createdModel['config'], [
             'input_cost' => 0.001,
@@ -175,7 +175,7 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertIsArray($updateResponse);
         $this->assertSame(1000, $updateResponse['code'], 'updatemodelshouldsuccess');
         $this->assertArrayHasKey('data', $updateResponse);
-        $this->assertSame($modelId, $updateResponse['data']['id'], 'updatebackmodelID应maintainnot变');
+        $this->assertSame($modelId, $updateResponse['data']['id'], 'updatebackmodelIDshouldmaintainnotchange');
 
         // ========== step5: againtimecalldetailinterfacevalidateupdateback4costfield ==========
         $updatedDetailResponse = $this->get($detailUri, [], $this->getCommonHeaders());
@@ -185,7 +185,7 @@ class ServiceProviderApiTest extends BaseTest
 
         // findupdatebackmodel
         $updatedModel = $this->findModelInDetailResponse($updatedDetailResponse['data'], $modelId);
-        $this->assertNotNull($updatedModel, 'shouldcanindetailmiddle找toupdatebackmodel');
+        $this->assertNotNull($updatedModel, 'shouldcanindetailmiddlefindtoupdatebackmodel');
 
         // validateupdateback4costfield
         $this->assertArrayHasKey('config', $updatedModel, 'updatebackmodelshouldhaveconfigfield');
@@ -228,7 +228,7 @@ class ServiceProviderApiTest extends BaseTest
             'config' => [
                 // internationalaccesspoint
                 'url' => 'international_access_point',
-                // 国insideaccesspoint
+                // countryinsideaccesspoint
                 //                'url' => 'domestic_access_points',
                 'api_key' => '****',
                 'priority' => 100,
@@ -263,7 +263,7 @@ class ServiceProviderApiTest extends BaseTest
             'config' => [
                 // internationalaccesspoint
                 'proxy_url' => 'international_access_point',
-                // 国insideaccesspoint
+                // countryinsideaccesspoint
                 //                'proxy_url' => 'domestic_access_points',
                 'api_key' => 'sk-1111',
                 'priority' => 100,
@@ -304,11 +304,11 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * indetailresponsemiddlefindfinger定IDmodel.
+     * indetailresponsemiddlefindfingersetIDmodel.
      *
      * @param array $detailData detailresponsedata
      * @param string $modelId modelID
-     * @return null|array 找tomodeldata,not找toreturnnull
+     * @return null|array findtomodeldata,notfindtoreturnnull
      */
     private function findModelInDetailResponse(array $detailData, string $modelId): ?array
     {
@@ -391,7 +391,7 @@ class ServiceProviderApiTest extends BaseTest
         // getmostnewconfigurationversion
         $versionEntity = $domainService->getLatestConfigVersionEntity($dataIsolation, $modelId);
 
-        $this->assertNotNull($versionEntity, 'configurationversionshould存in');
+        $this->assertNotNull($versionEntity, 'configurationversionshouldexistsin');
 
         // validate int typefield(stringshouldbeconvertfor int)
         if (isset($expectedConfig['max_output_tokens'])) {

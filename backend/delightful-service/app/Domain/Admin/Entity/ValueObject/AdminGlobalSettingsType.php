@@ -9,7 +9,7 @@ namespace App\Domain\Admin\Entity\ValueObject;
 
 enum AdminGlobalSettingsType: int
 {
-    // all局defaultgood友
+    // alllocaldefaultgoodfriend
     case DEFAULT_FRIEND = 1;
 
     // assistantcreatemanage
@@ -18,7 +18,7 @@ enum AdminGlobalSettingsType: int
     // thethird-partypublishcontrol
     case THIRD_PARTY_PUBLISH = 3;
 
-    // getassistantall局settingtype
+    // getassistantalllocalsettingtype
     public static function getAssistantGlobalSettingsType(): array
     {
         return [

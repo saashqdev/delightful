@@ -86,7 +86,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
                 ],
                 $attributes
             );
-        // ifis软delete,thenrestore
+        // ifissoftdelete,thenrestore
         if ($model->trashed()) {
             $model->restore();
             $model->fill($attributes)->save();
@@ -156,11 +156,11 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * @return array<string, KnowledgeBaseDocumentEntity> array<documentcode, document名>
+     * @return array<string, KnowledgeBaseDocumentEntity> array<documentcode, documentname>
      */
     public function getDocumentsByCodes(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, array $knowledgeBaseDocumentCodes): array
     {
-        // geteachdocumentdocument名
+        // geteachdocumentdocumentname
         $res = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query())
             ->where('knowledge_base_code', $knowledgeBaseCode)
             ->whereIn('code', $knowledgeBaseDocumentCodes)
@@ -244,7 +244,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * according todocumentencodingdelete所haveslicesegment.
+     * according todocumentencodingdelete haveslicesegment.
      */
     public function destroyFragmentsByDocumentCode(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -310,7 +310,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * createquerybuild器.
+     * createquerybuilddevice.
      */
     protected function createQueryBuilder(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentQuery $query): Builder
     {
@@ -339,12 +339,12 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             $builder->where('doc_type', $query->getDocType());
         }
 
-        // 按create者filter
+        // 按createpersonfilter
         if ($query->getCreatedUid() !== null) {
             $builder->where('created_uid', $query->getCreatedUid());
         }
 
-        // 按update者filter
+        // 按updatepersonfilter
         if ($query->getUpdatedUid() !== null) {
             $builder->where('updated_uid', $query->getUpdatedUid());
         }
@@ -358,7 +358,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * generate唯onedocumentencoding
+     * generateuniqueonedocumentencoding
      */
     protected function generateDocumentCode(): string
     {

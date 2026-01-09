@@ -13,7 +13,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
 /**
- * RBACrole实body.
+ * RBACroleactualbody.
  */
 class RoleEntity extends AbstractEntity
 {
@@ -23,10 +23,10 @@ class RoleEntity extends AbstractEntity
 
     protected string $organizationCode;
 
-    protected ?array $permissionTag = null; // permissiontag,useatfront端showcategory
+    protected ?array $permissionTag = null; // permissiontag,useatfrontclientshowcategory
 
     /**
-     * whetherinfront端columntablemiddleshow:1=is 0=no.
+     * whetherinfrontclientcolumntablemiddleshow:1=is 0=no.
      */
     protected int $isDisplay = 1;
 

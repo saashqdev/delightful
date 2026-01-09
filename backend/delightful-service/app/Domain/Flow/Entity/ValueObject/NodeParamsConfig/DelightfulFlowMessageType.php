@@ -22,7 +22,7 @@ enum DelightfulFlowMessageType: string
     case Audio = 'audio';
     case File = 'file';
 
-    // thisis暂o clock,itselfshouldnotwill存inthis,利usecardmessageshapetypecomeimplement才to
+    // thisis暫o clock,itselfshouldnotwillexistsinthis,利usecardmessageshapetypecomeimplement才to
     case AIMessage = 'ai_message';
 
     public function isAttachment(): bool

@@ -15,9 +15,9 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('delightful_long_term_memories', function (Blueprint $table) {
-            $table->string('id', 36)->primary()->comment('memory唯oneID');
+            $table->string('id', 36)->primary()->comment('memoryuniqueoneID');
             $table->text('content')->comment('memorycontent');
-            $table->text('pending_content')->nullable()->comment('pending changemorememorycontent,etc待useraccept变more');
+            $table->text('pending_content')->nullable()->comment('pending changemorememorycontent,etc待useracceptchangemore');
             $table->text('explanation')->nullable()->comment('memoryexplain,instructionthisitemmemoryforwhatvaluerecord');
             $table->text('origin_text')->nullable()->comment('originaltextcontent');
             $table->string('memory_type', 50)->default('manual_input')->comment('memorytype');

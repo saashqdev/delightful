@@ -63,7 +63,7 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
             $this->initializeEntityForCreation($providerOriginalModelEntity, $attributes);
             ProviderOriginalModelModel::query()->insert($attributes);
         } else {
-            // update现haverecord
+            // updateshowhaverecord
             $now = new DateTime();
             $providerOriginalModelEntity->setUpdatedAt($now);
             $attributes['updated_at'] = $now->format('Y-m-d H:i:s');
@@ -89,7 +89,7 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
     {
         $systemType = ProviderOriginalModelType::System;
 
-        // theonetimequery:getsystemdefaultmodel(所haveorganizationallvisible)
+        // theonetimequery:getsystemdefaultmodel( haveorganizationallvisible)
         $systemBuilder = $this->createProviderOriginalModelQuery()
             ->where('type', $systemType->value);
         $systemModels = Db::select($systemBuilder->toSql(), $systemBuilder->getBindings());
@@ -120,7 +120,7 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
     }
 
     /**
-     * prepare移exceptsoft deleteclosefeature,temporarythishow to write.create带have软deletefilter ProviderOriginalModelModel querybuild器.
+     * preparemoveexceptsoft deleteclosefeature,temporarythishow to write.createwithhavesoftdeletefilter ProviderOriginalModelModel querybuilddevice.
      * @param null|ProviderDataIsolation $dataIsolation ifpass inthenaddorganizationcodefilter
      */
     private function createProviderOriginalModelQuery(?ProviderDataIsolation $dataIsolation = null): Builder

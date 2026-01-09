@@ -64,7 +64,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     public function updateTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity
     {
         $name = $delightfulTopicEntity->getName();
-        // lengthnotcan超pass 50
+        // lengthnotcanexceedspass 50
         if (mb_strlen($name) > 50) {
             ExceptionBuilder::throw(
                 ChatErrorCode::INPUT_PARAM_ERROR,
@@ -266,7 +266,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     /**
      * Get topics by topic ID.
      * @param string $topicId topicID
-     * @return DelightfulTopicEntity[] topic实bodyarray
+     * @return DelightfulTopicEntity[] topicactualbodyarray
      */
     public function getTopicsByTopicId(string $topicId): array
     {
@@ -279,8 +279,8 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
      * Get topic messages by conversation ID, topic ID and max seq ID.
      * @param string $conversationId sessionID
      * @param string $topicId topicID
-     * @param int $maxSeqId mostbig序columnID(containtheID)
-     * @return DelightfulTopicMessageEntity[] topicmessage实bodyarray
+     * @param int $maxSeqId mostbigsequencecolumnID(containtheID)
+     * @return DelightfulTopicMessageEntity[] topicmessageactualbodyarray
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array
     {
@@ -294,7 +294,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
         return TopicAssembler::getTopicMessageEntities($topicMessages);
     }
 
-    // avoid redis cacheserializeobject,占usetoo多inside存
+    // avoid redis cacheserializeobject,占usetoomultipleinsideexists
     #[Cacheable(prefix: 'topic:id:conversation', value: '_#{delightfulTopicDTO.topicId}_#{delightfulTopicDTO.conversationId}', ttl: 60)]
     private function getTopicArray(DelightfulTopicEntity $delightfulTopicDTO): ?array
     {

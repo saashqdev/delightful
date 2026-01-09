@@ -18,9 +18,9 @@ use App\Infrastructure\Util\StringMaskUtil;
 use Hyperf\Codec\Json;
 
 /**
- * service_provider_config_id to应servicequotient+modellist.
+ * service_provider_config_id toshouldservicequotient+modellist.
  *
- * 同oneservicequotientindifferentorganizationdownhavedifferent service_provider_config_id.
+ * sameoneservicequotientindifferentorganizationdownhavedifferent service_provider_config_id.
  * oneservice_provider_config_idtoshould be multiplespecificmodel.
  */
 class ProviderConfigDTO extends AbstractDTO
@@ -41,7 +41,7 @@ class ProviderConfigDTO extends AbstractDTO
     protected string $serviceProviderId = '';
 
     /**
-     * bigmodelspecificconfiguration,ak,sk,host 之category(alreadydesensitize).
+     * bigmodelspecificconfiguration,ak,sk,host ofcategory(alreadydesensitize).
      */
     protected ?ProviderConfigItem $config = null;
 

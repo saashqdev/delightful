@@ -32,7 +32,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯oneencoding,onlyincreateo clockgenerate,useasgivefront端id.
+     * uniqueoneencoding,onlyincreateo clockgenerate,useasgivefrontclientid.
      */
     protected string $code;
 
@@ -47,7 +47,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $description;
 
     /**
-     * processgraph标(assistantavatar).
+     * processgraphmark(assistantavatar).
      */
     protected string $icon = '';
 
@@ -59,7 +59,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $toolSetId = '';
 
     /**
-     * onlyfront端need,process编row放to node sectionpointconfiguration next_nodes middle.
+     * onlyfrontclientneed,process编rowputto node sectionpointconfiguration next_nodes middle.
      */
     protected array $edges;
 
@@ -107,7 +107,7 @@ class DelightfulFlowEntity extends AbstractEntity
     private int $userOperation = 0;
 
     /**
-     * processcallbackfunction,ifhavethevalue,that么willdirectlyexecutethechoose,whilenotispassNodeRunnercomeexecute.
+     * processcallbackfunction,ifhavethevalue,thatwhatwilldirectlyexecutethechoose,whilenotispassNodeRunnercomeexecute.
      */
     private ?Closure $callback = null;
 
@@ -128,7 +128,7 @@ class DelightfulFlowEntity extends AbstractEntity
         // trial operationlineiswantaccording tostarto clockcalculate
         $this->enabled = true;
 
-        // processtrial operationlineits实onlyneed nodes
+        // processtrial operationlineitsactualonlyneed nodes
         if (empty($this->nodes)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow.fields.nodes']);
         }
@@ -238,21 +238,21 @@ class DelightfulFlowEntity extends AbstractEntity
             }
 
             if ($node->isStart() && ! $node->getParentId()) {
-                // ifalready经haveone,that么iserrorprocess,outmultiplestartsectionpoint
+                // ifalreadyalreadyhaveone,thatwhatiserrorprocess,outmultiplestartsectionpoint
                 if ($this->startNode) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.only_one');
                 }
                 $this->startNode = $node;
             }
             if ($node->isEnd() && ! $node->getParentId()) {
-                // 多endsectionpointo clock,暂o clock取first,shouldwant做becomeonlycanhaveoneendsectionpoint
+                // multipleendsectionpointo clock,暫o clockgetfirst,shouldwantmakebecomeonlycanhaveoneendsectionpoint
                 if (! $this->endNode) {
                     $this->endNode = $node;
                 }
             }
         }
 
-        // already经ispublishstatus才needdetect
+        // alreadyalreadyispublishstatus才needdetect
         if ($this->enabled) {
             //            if (! $this->startNode) {
             //                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.must_exist');
@@ -678,8 +678,8 @@ class DelightfulFlowEntity extends AbstractEntity
             if (! preg_match('/^[a-zA-Z0-9_]+$/', $this->name)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.tool.name.invalid_format');
             }
-            // todo want唯one
-            // todo inside置tool名allowbeuse
+            // todo wantuniqueone
+            // todo insidesettoolnameallowbeuse
         }
     }
 

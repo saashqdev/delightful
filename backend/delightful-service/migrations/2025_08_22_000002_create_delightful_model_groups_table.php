@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->bigInteger('mode_id')->unsigned()->default(0)->comment('modeID');
             $table->json('name_i18n')->comment('minutegroupnameinternationalization');
-            $table->string('icon', 255)->default('')->comment('minutegroupgraph标');
+            $table->string('icon', 255)->default('')->comment('minutegroupgraphmark');
             $table->string('color', 10)->default('')->comment('minutegroupcolor');
             $table->text('description')->comment('minutegroupdescription');
             $table->integer('sort')->default(0)->comment('sortweight');

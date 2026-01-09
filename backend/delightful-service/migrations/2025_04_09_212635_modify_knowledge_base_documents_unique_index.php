@@ -15,10 +15,10 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('knowledge_base_documents', function (Blueprint $table) {
-            // deleteold唯oneindex
+            // deleteolduniqueoneindex
             $table->dropUnique('unique_code_version');
 
-            // addnew唯oneindex
+            // addnewuniqueoneindex
             $table->unique(['knowledge_base_code', 'code', 'version'], 'unique_knowledge_base_code_code_version');
         });
     }
@@ -29,10 +29,10 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('knowledge_base_documents', function (Blueprint $table) {
-            // deletenew唯oneindex
+            // deletenewuniqueoneindex
             $table->dropUnique('unique_code_version');
 
-            // restoreold唯oneindex
+            // restoreolduniqueoneindex
             $table->unique(['code', 'version'], 'unique_code_version');
         });
     }

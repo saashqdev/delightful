@@ -17,16 +17,16 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $mcp_server_code associatemcpservicecode
  * @property string $name toolname
  * @property string $description tooldescription
- * @property int $source toolcome源
+ * @property int $source toolcomesource
  * @property string $rel_code associatetoolcode
  * @property string $rel_version_code associatetoolversioncode
  * @property string $version toolversion
  * @property bool $enabled whetherenable
  * @property array $options toolconfiguration
  * @property array $rel_info associateinformation
- * @property string $creator create者
+ * @property string $creator createperson
  * @property DateTime $created_at creation time
- * @property string $modifier modify者
+ * @property string $modifier modifyperson
  * @property DateTime $updated_at update time
  */
 class MCPServerToolModel extends AbstractModel

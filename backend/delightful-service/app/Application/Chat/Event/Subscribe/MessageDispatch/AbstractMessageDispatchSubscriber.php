@@ -24,16 +24,16 @@ use Throwable;
 use function Hyperf\Support\retry;
 
 /**
- * messageminutehair模piece.
- * processdifferentprioritylevelmessageconsumer,useatwrite收item方seq.
+ * messageminutehairmodepiece.
+ * processdifferentprioritylevelmessageconsumer,useatwritereceiveitemsideseq.
  */
 abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
 {
     protected AmqpTopicType $topic = AmqpTopicType::Message;
 
     /**
-     * 1.本groundopenhairo clocknotstart,avoidconsumetestenvironmentdata,causetestenvironmentuser收nottomessage
-     * 2.if本groundopenhairo clock想debug,请fromlinein本groundbuildfront端environment,more换mqhost. or者applyonedevenvironment,isolationmq.
+     * 1.thisgroundopenhairo clocknotstart,avoidconsumetestenvironmentdata,causetestenvironmentuserreceivenottomessage
+     * 2.ifthisgroundopenhairo clock想debug,pleasefromlineinthisgroundbuildfrontclientenvironment,moreexchangemqhost. orpersonapplyonedevenvironment,isolationmq.
      */
     public function isEnable(): bool
     {
@@ -41,7 +41,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
     }
 
     /**
-     * according tomessageprioritylevel.will收item方messagegenerate序columnnumber.
+     * according tomessageprioritylevel.willreceiveitemsidemessagegeneratesequencecolumnnumber.
      * @param SeqCreatedEvent $data
      */
     public function consumeMessage($data, AMQPMessage $message): Result
@@ -51,8 +51,8 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
             return Result::ACK;
         }
         $conversationId = $data['conversationId'] ?? null;
-        // generate收item方seq
-        $this->logger->info(sprintf('messageDispatch 收tomessage data:%s', Json::encode($data)));
+        // generatereceiveitemsideseq
+        $this->logger->info(sprintf('messageDispatch receivetomessage data:%s', Json::encode($data)));
         $lock = di(LockerInterface::class);
         try {
             if ($conversationId) {
@@ -62,7 +62,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
             }
             foreach ($seqIds as $seqId) {
                 $seqId = (string) $seqId;
-                // useredisdetectseqwhetheralready经try多time,if超pass n time,thennotagainpush
+                // useredisdetectseqwhetheralreadyalreadytrymultipletime,ifexceedspass n time,thennotagainpush
                 $seqRetryKey = sprintf('messageDispatch:seqRetry:%s', $seqId);
                 $seqRetryCount = $this->redis->get($seqRetryKey);
                 if ($seqRetryCount >= 3) {
@@ -71,15 +71,15 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 }
                 $this->addSeqRetryNumber($seqRetryKey);
                 $userSeqEntity = null;
-                // 查seq,faildelaybackretry3time
+                // checkseq,faildelaybackretry3time
                 retry(3, function () use ($seqId, &$userSeqEntity) {
                     $userSeqEntity = $this->delightfulChatSeqRepository->getSeqByMessageId($seqId);
                     if ($userSeqEntity === null) {
-                        // maybeistransactionalsonotsubmit,mqalready经consume,delayretry
+                        // maybeistransactionalsonotsubmit,mqalreadyalreadyconsume,delayretry
                         ExceptionBuilder::throw(ChatErrorCode::SEQ_NOT_FOUND);
                     }
                 }, 100);
-                // send方seq
+                // sendsideseq
                 if ($userSeqEntity === null) {
                     $this->logger->error('messageDispatch seq not found:{seq_id} ', ['seq_id' => $seqId]);
                     $this->setSeqCanNotRetry($seqRetryKey);
@@ -116,7 +116,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessagequalityguarantee模piece,ifisservice器stressbigcausefail,thenput intodelayretryqueue,andfinger数level延longretrytimebetween隔
+            // todo callmessagequalityguaranteemodepiece,ifisservicedevicestressbigcausefail,thenput intodelayretryqueue,andfingercountlevel延longretrytimebetweenseparator
             return Result::REQUEUE;
         } finally {
             if (isset($lockKey, $owner)) {

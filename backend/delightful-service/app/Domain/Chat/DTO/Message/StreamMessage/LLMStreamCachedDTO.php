@@ -11,13 +11,13 @@ use App\Domain\Chat\Entity\AbstractEntity;
 
 class LLMStreamCachedDTO extends AbstractEntity
 {
-    // avoidfrequent operationasdatalibrary,ininside存middlecachesendmessage sender_message_id
+    // avoidfrequent operationasdatalibrary,ininsideexistsmiddlecachesendmessage sender_message_id
     protected string $senderMessageId;
 
-    // avoidfrequent operationasdatalibrary,ininside存middlecachereceivemessage receive_message_id
+    // avoidfrequent operationasdatalibrary,ininsideexistsmiddlecachereceivemessage receive_message_id
     protected string $receiveMessageId;
 
-    // avoidfrequent operationasdatalibrary,ininside存middlecachecompletestreammessagecontent
+    // avoidfrequent operationasdatalibrary,ininsideexistsmiddlecachecompletestreammessagecontent
     protected ?string $reasoningContent;
 
     protected string $content;

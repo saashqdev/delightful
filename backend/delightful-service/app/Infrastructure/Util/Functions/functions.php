@@ -79,7 +79,7 @@ if (! function_exists('is_unit_test')) {
 
 if (! function_exists('camelize')) {
     /**
-     * down划line转camel case.
+     * down划linetransfercamel case.
      * @param string $unCamelizeWords needconvertstring
      * @param string $separator minuteseparator
      */
@@ -89,7 +89,7 @@ if (! function_exists('camelize')) {
             return '';
         }
         if (! str_contains($unCamelizeWords, $separator)) {
-            // 认foralready经issmallcamel case
+            // 认foralreadyalreadyissmallcamel case
             return $unCamelizeWords;
         }
         $unCamelizeWords = $separator . str_replace($separator, ' ', strtolower($unCamelizeWords));
@@ -99,7 +99,7 @@ if (! function_exists('camelize')) {
 
 if (! function_exists('un_camelize')) {
     /**
-     * camel casenaming转down划linenaming.
+     * camel casenamingtransferdown划linenaming.
      * @param string $camelCaps needconvertstring
      * @param string $separator minuteseparator
      */
@@ -114,7 +114,7 @@ if (! function_exists('un_camelize')) {
 
 if (! function_exists('string_to_hump')) {
     /**
-     * down划line转becomecamel casenaming,defaultsmallcamel case.
+     * down划linetransferbecomecamel casenaming,defaultsmallcamel case.
      * @param string $string wantconvertstring
      * @param bool $firstUp whetherinitialbig写,defaultno
      */
@@ -127,7 +127,7 @@ if (! function_exists('string_to_hump')) {
 
 if (! function_exists('string_to_line')) {
     /**
-     * camel casenaming转down划line
+     * camel casenamingtransferdown划line
      * @param string $string wantconvertstring
      */
     function string_to_line(string $string, string $separator = '_'): string
@@ -247,7 +247,7 @@ if (! function_exists('calculate_elapsed_time')) {
 
 if (! function_exists('diff_day')) {
     /**
-     * fromstarttimeto现inisthe几day.
+     * fromstarttimetoshowinisthe几day.
      */
     function diff_day(DateTime $startTime): int
     {

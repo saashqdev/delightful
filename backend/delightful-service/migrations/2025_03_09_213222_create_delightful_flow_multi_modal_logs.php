@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('message_id', 64)->default('')->comment('messageID')->index();
             $table->tinyInteger('type')->default(0)->comment('multi-modalstatetype.1 image');
-            $table->string('model', 128)->default('')->comment('identify所usemodel');
+            $table->string('model', 128)->default('')->comment('identify usemodel');
             $table->text('analysis_result')->comment('analyzeresult');
             $table->datetimes();
         });

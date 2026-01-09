@@ -78,7 +78,7 @@ class BeDelightfulChatManager
      */
     private static function getAgents(FlowDataIsolation $flowDataIsolation, array $agentIds): array
     {
-        // 1. query所havecanuse agent
+        // 1. query havecanuse agent
         $agents = di(DelightfulAgentDomainService::class)->getAgentByIds($agentIds);
 
         // ifnothavecanuse agents,directlyreturnemptyarray
@@ -107,11 +107,11 @@ MARKDOWN;
                 "• ID: %s\n  name: %s\n  description: %s%s\n\n",
                 $agent->getId(),
                 $agent->getAgentName(),
-                $agent->getAgentDescription() ?: '暂nodescription',
-                $instructionDescription ? "\n  canusefinger令: {$instructionDescription}" : ''
+                $agent->getAgentDescription() ?: '暫nodescription',
+                $instructionDescription ? "\n  canusefingercommand: {$instructionDescription}" : ''
             );
 
-            // 收collection所havefinger令infouseatgenerate schema
+            // receivecollection havefingercommandinfouseatgenerate schema
             if ($instruction) {
                 $allInstructions[$agent->getId()] = $instruction;
             }
@@ -122,20 +122,20 @@ MARKDOWN;
         $usageInstructions = <<<'MARKDOWN'
 useinstruction:
 • mustprovide agent_id and message parameter
-• conversation_id useatmaintainconversationcontinuousproperty,sameIDmessagewillsharedupdown文
+• conversation_id useatmaintainconversationcontinuousproperty,sameIDmessagewillsharedupdowntext
 
 MARKDOWN;
 
         $description .= $usageInstructions;
 
-        // addfinger令parameterinstruction
+        // addfingercommandparameterinstruction
         if (! empty($allInstructions)) {
             $instructionHelp = <<<'MARKDOWN'
-finger令parameter instruction(optional):
-• format:[{"name": "finger令name", "value": "finger令value"}, ...]
+fingercommandparameter instruction(optional):
+• format:[{"name": "fingercommandname", "value": "fingercommandvalue"}, ...]
 • single-selecttype:fromoptionalvaluemiddlechooseone,for example "yes", "no"
 • switchtype:onlycanis "on" or "off"
-• ifnotprovidefinger令parameter,willusedefaultvalue
+• ifnotprovidefingercommandparameter,willusedefaultvalue
 
 callexample:
 ```json
@@ -159,7 +159,7 @@ MARKDOWN;
             return [];
         }
 
-        // generatefinger令 JSON Schema
+        // generatefingercommand JSON Schema
         $instructionSchema = self::generateInstructionSchema($allInstructions);
 
         $registeredAgent = new RegisteredTool(
@@ -178,7 +178,7 @@ MARKDOWN;
                         ],
                         'conversation_id' => [
                             'type' => 'string',
-                            'description' => 'sessionID,useatmemoryfeature,samesessionIDmessagewill具havesharedupdown文',
+                            'description' => 'sessionID,useatmemoryfeature,samesessionIDmessagewillwithhavesharedupdowntext',
                         ],
                         'instruction' => $instructionSchema,
                     ],
@@ -267,17 +267,17 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => 'finger令parameterarray,useatcontrolAIassistantlinefor.eachobjectcontain name(finger令name)and value(finger令value)field.single-selecttypefinger令needfromoptionalvaluemiddlechooseone,switchtypefinger令onlycanis "on" or "off".',
+            'description' => 'fingercommandparameterarray,useatcontrolAIassistantlinefor.eachobjectcontain name(fingercommandname)and value(fingercommandvalue)field.single-selecttypefingercommandneedfromoptionalvaluemiddlechooseone,switchtypefingercommandonlycanis "on" or "off".',
             'items' => [
                 'type' => 'object',
                 'properties' => [
                     'name' => [
                         'type' => 'string',
-                        'description' => 'finger令name,mustandAIassistantdefinitionfinger令name完allmatch',
+                        'description' => 'fingercommandname,mustandAIassistantdefinitionfingercommandname完allmatch',
                     ],
                     'value' => [
                         'type' => 'string',
-                        'description' => 'finger令value,single-selecttypefromoptionalvaluemiddlechoose,switchtypeonlycanis "on" or "off"',
+                        'description' => 'fingercommandvalue,single-selecttypefromoptionalvaluemiddlechoose,switchtypeonlycanis "on" or "off"',
                     ],
                 ],
                 'required' => ['name', 'value'],
@@ -285,7 +285,7 @@ MARKDOWN;
             ],
         ];
 
-        // ifhavespecificfinger令info,generatemoredetailed schema
+        // ifhavespecificfingercommandinfo,generatemoredetailed schema
         if (! empty($allInstructions)) {
             $examples = [];
             foreach ($allInstructions as $instructions) {

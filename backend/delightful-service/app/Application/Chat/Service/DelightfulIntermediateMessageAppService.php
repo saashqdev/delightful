@@ -41,7 +41,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
     }
 
     /**
-     * according tocustomer端haircomecontrolmessagetype,minutehairtoto应process模piece.
+     * according tocustomerclienthaircomecontrolmessagetype,minutehairtotoshouldprocessmodepiece.
      * @throws Throwable
      */
     public function dispatchClientIntermediateMessage(ChatRequest $chatRequest, DelightfulUserAuthorization $userAuthorization): ?array
@@ -79,7 +79,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
 
     public function checkSendMessageAuth(DelightfulConversationEntity $conversationEntity, DataIsolation $dataIsolation): void
     {
-        // checkconversation idbelong toorganization,andwhenfrontpass inorganizationencodingone致property
+        // checkconversation idbelong toorganization,andwhenfrontpass inorganizationencodingonetoproperty
         if ($conversationEntity->getUserOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }

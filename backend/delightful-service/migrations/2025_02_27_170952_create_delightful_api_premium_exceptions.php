@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // table存inthennotexecute
+        // tableexistsinthennotexecute
         if (Schema::hasTable('delightful_api_premium_exceptions')) {
             return;
         }
@@ -24,9 +24,9 @@ return new class extends Migration {
             $table->string('exception_type', 255)->comment('exceptiontype');
             $table->boolean('can_retry')->comment('whethercanretry')->nullable();
             $table->integer('retry_max_times')->comment('retrymostbigcount')->nullable();
-            $table->integer('retry_interval')->comment('retrytimebetween隔')->nullable();
+            $table->integer('retry_interval')->comment('retrytimebetweenseparator')->nullable();
             $table->datetimes();
-            $table->comment('exceptioninformationtable,saveexceptiontype,whethercanretry,retrymostbigcount,retrytimebetween隔');
+            $table->comment('exceptioninformationtable,saveexceptiontype,whethercanretry,retrymostbigcount,retrytimebetweenseparator');
         });
     }
 

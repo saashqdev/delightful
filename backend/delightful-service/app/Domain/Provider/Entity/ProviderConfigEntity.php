@@ -123,7 +123,7 @@ class ProviderConfigEntity extends AbstractEntity
     }
 
     /**
-     * get本ground化servicequotientname.
+     * getthisground化servicequotientname.
      */
     public function getLocalizedAlias(string $locale): string
     {

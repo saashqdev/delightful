@@ -14,7 +14,7 @@ use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
  */
 enum TokenErrorCode: int
 {
-    // tokennot存in
+    // tokennotexistsin
     #[ErrorMessage(message: 'token.not_found')]
     case TokenNotFound = 9000;
 
@@ -38,7 +38,7 @@ enum TokenErrorCode: int
     #[ErrorMessage(message: 'token.relation_value_must_set')]
     case TokenRelationValueMustSet = 9005;
 
-    // tokennot唯one
+    // tokennotuniqueone
     #[ErrorMessage(message: 'token.not_unique')]
     case TokenNotUnique = 9006;
 

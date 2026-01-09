@@ -22,7 +22,7 @@ enum SystemInstructType: int
     case RECORD = 5;
 
     /**
-     * fromtypevaluegetsystemfinger令typeinstance.
+     * fromtypevaluegetsystemfingercommandtypeinstance.
      */
     public static function fromType(int $type): self
     {
@@ -37,7 +37,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * getsystemfinger令typeoption.
+     * getsystemfingercommandtypeoption.
      * @return array<int, mixed>
      */
     public static function getTypeOptions(): array
@@ -52,7 +52,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * getsystemfinger令to应graph标.
+     * getsystemfingercommandtoshouldgraphmark.
      */
     public function getIcon(): string
     {
@@ -66,7 +66,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * getdefaultsysteminteractionfinger令configuration.
+     * getdefaultsysteminteractionfingercommandconfiguration.
      */
     public static function getDefaultInstructs(): array
     {
@@ -116,7 +116,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * get所havesystemfinger令typevalue.
+     * get havesystemfingercommandtypevalue.
      * @return array<int>
      */
     public static function getAllTypes(): array
@@ -131,12 +131,12 @@ enum SystemInstructType: int
     }
 
     /**
-     * judgesystemfinger令typewhetherneedcontentfield.
+     * judgesystemfingercommandtypewhetherneedcontentfield.
      */
     public static function requiresContent(int $type): bool
     {
-        // 目front所havesystemfinger令allnotneedcontent
-        // ifnotcomehavesystemfinger令needcontent,caninthiswithinaddjudge
+        // itemfront havesystemfingercommandallnotneedcontent
+        // ifnotcomehavesystemfingercommandneedcontent,caninthiswithinaddjudge
         return match (self::fromType($type)) {
             self::EMOJI, self::FILE, self::NEW_TOPIC, self::SCHEDULE, self::RECORD => false,
         };
@@ -144,7 +144,7 @@ enum SystemInstructType: int
 
     /**
      * ensuresysteminteractionfingertoken storagein,ifmissingthensupplement.
-     * @return array returnsupplementbackfinger令array
+     * @return array returnsupplementbackfingercommandarray
      */
     public static function ensureSystemInstructs(array $instructs): array
     {
@@ -153,7 +153,7 @@ enum SystemInstructType: int
         $toolbarGroupIndex = null;
         $toolbarGroup = null;
 
-        // findtool栏groupand现havesystemfinger令
+        // findtool栏groupandshowhavesystemfingercommand
         foreach ($instructs as $index => $group) {
             if (isset($group['position']) && $group['position'] === InstructGroupPosition::TOOLBAR->value) {
                 $hasSystemGroup = true;
@@ -172,7 +172,7 @@ enum SystemInstructType: int
             ];
         }
 
-        // minute离systemfinger令andnonsystemfinger令
+        // minute离systemfingercommandandnonsystemfingercommand
         $systemInstructs = [];
         $normalInstructs = [];
         foreach ($toolbarGroup['items'] as $item) {
@@ -184,7 +184,7 @@ enum SystemInstructType: int
             }
         }
 
-        // checkmissingsystemfinger令typeandsupplement
+        // checkmissingsystemfingercommandtypeandsupplement
         foreach (self::cases() as $case) {
             if (! in_array($case->value, $systemTypes)) {
                 $systemInstructs[$case->value] = [
@@ -197,10 +197,10 @@ enum SystemInstructType: int
             }
         }
 
-        // 按enumdefinitionordersortsystemfinger令
+        // 按enumdefinitionordersortsystemfingercommand
         ksort($systemInstructs);
 
-        // 重newgroup合tool栏group items,systemfinger令infront
+        // 重newgroup合tool栏group items,systemfingercommandinfront
         $toolbarGroup['items'] = array_merge(array_values($systemInstructs), $normalInstructs);
 
         // updateoraddtool栏group

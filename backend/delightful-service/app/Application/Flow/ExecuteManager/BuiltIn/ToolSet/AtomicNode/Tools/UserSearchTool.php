@@ -36,7 +36,7 @@ class UserSearchTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'usersearch.notallowsearchall部person员,one定is具havefinger定filtervalue';
+        return 'usersearch.notallowsearchall部personmember,onesetiswithhavefingersetfiltervalue';
     }
 
     public function getCallback(): ?Closure
@@ -93,7 +93,7 @@ class UserSearchTool extends AbstractBuiltInTool
             "type": "string",
             "key": "filter_type",
             "title": "filtertype",
-            "description": "filtertype.supportfiltertypehave:all,any.minutealternativetable 所haveitemitem,anyitemitem.defaultis all",
+            "description": "filtertype.supportfiltertypehave:all,any.minutealternativetable  haveitemitem,anyitemitem.defaultis all",
             "required": null,
             "value": null,
             "encryption": false,
@@ -126,7 +126,7 @@ class UserSearchTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "field",
                         "title": "filterfield",
-                        "description": "filterfield.optionalenumhave:username,work_number,position,position,department_name,group_name.minutealternativetable  username,user工number,userpost,userhand机number,departmentname,group chatname",
+                        "description": "filterfield.optionalenumhave:username,work_number,position,position,department_name,group_name.minutealternativetable  username,user工number,userpost,userhandmachinenumber,departmentname,group chatname",
                         "required": null,
                         "value": null,
                         "encryption": false,

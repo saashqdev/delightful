@@ -9,7 +9,7 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR configurationconstant
- * 统onemanage ASR 相close所haveconfigurationconstant,includetimeouttime,round询between隔,retrycountetc.
+ * 統onemanage ASR 相close haveconfigurationconstant,includetimeouttime,roundquerybetweenseparator,retrycountetc.
  */
 class AsrConfig
 {
@@ -21,7 +21,7 @@ class AsrConfig
     public const int SUMMARY_LOCK_TTL = 120;
 
     /**
-     * core跳detecttimeout阈value(second).
+     * corejumpdetecttimeout阈value(second).
      */
     public const int HEARTBEAT_TIMEOUT = 600;
 
@@ -31,7 +31,7 @@ class AsrConfig
     public const int TASK_STATUS_TTL = 604800;
 
     /**
-     * Mock round询status TTL(second)- onlytestuse.
+     * Mock roundquerystatus TTL(second)- onlytestuse.
      */
     public const int MOCK_POLLING_TTL = 600;
 
@@ -51,21 +51,21 @@ class AsrConfig
     public const int SANDBOX_STARTUP_TIMEOUT = 121;
 
     /**
-     * work区initializetimeout(second).
+     * workregioninitializetimeout(second).
      */
     public const int WORKSPACE_INIT_TIMEOUT = 60;
 
-    // ==================== round询between隔configuration ====================
+    // ==================== roundquerybetweenseparatorconfiguration ====================
 
     /**
-     * round询between隔(second).
+     * roundquerybetweenseparator(second).
      */
     public const int POLLING_INTERVAL = 2;
 
     // ==================== retryconfiguration ====================
 
     /**
-     * service端from动summarymostbigretrycount.
+     * serviceclientfromautosummarymostbigretrycount.
      */
     public const int SERVER_SUMMARY_MAX_RETRY = 10;
 
@@ -77,7 +77,7 @@ class AsrConfig
     // ==================== logrecordconfiguration ====================
 
     /**
-     * sandboxaudiomergelogrecordbetween隔(second).
+     * sandboxaudiomergelogrecordbetweenseparator(second).
      */
     public const int SANDBOX_MERGE_LOG_INTERVAL = 10;
 
@@ -106,7 +106,7 @@ class AsrConfig
     // ==================== scheduletaskconfiguration ====================
 
     /**
-     * core跳monitorscheduletaskmutually exclusivelockexpiretime(second).
+     * corejumpmonitorscheduletaskmutually exclusivelockexpiretime(second).
      */
     public const int HEARTBEAT_MONITOR_MUTEX_EXPIRES = 60;
 }

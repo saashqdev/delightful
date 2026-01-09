@@ -26,13 +26,13 @@ return new class extends Migration {
 
             // same phaseclosefield
             if (! Schema::hasColumn('delightful_organizations', 'sync_type')) {
-                $table->string('sync_type', 32)->default('')->comment('同type')->after('seats');
+                $table->string('sync_type', 32)->default('')->comment('sametype')->after('seats');
             }
             if (! Schema::hasColumn('delightful_organizations', 'sync_status')) {
-                $table->tinyInteger('sync_status')->default(0)->comment('同status')->after('sync_type');
+                $table->tinyInteger('sync_status')->default(0)->comment('samestatus')->after('sync_type');
             }
             if (! Schema::hasColumn('delightful_organizations', 'sync_time')) {
-                $table->timestamp('sync_time')->nullable()->comment('同time')->after('sync_status');
+                $table->timestamp('sync_time')->nullable()->comment('sametime')->after('sync_status');
             }
 
             // index:type(organizationtype)
@@ -50,7 +50,7 @@ return new class extends Migration {
         }
 
         Schema::table('delightful_organizations', function (Blueprint $table) {
-            // 先deleteindex
+            // firstdeleteindex
             try {
                 $table->dropIndex('idx_delightful_org_sync');
             } catch (Throwable) {

@@ -29,7 +29,7 @@ class MiscClient extends Client
         try {
             $response = $this->client->post($url, $options);
             $endTime = microtime(true);
-            $duration = round(($endTime - $startTime) * 1000); // 毫second
+            $duration = round(($endTime - $startTime) * 1000); // millisecondssecond
 
             // thiswithin response  content is ['embedding' => '', 'count' => '']
             $content = json_decode($response->getBody()->getContents(), true);

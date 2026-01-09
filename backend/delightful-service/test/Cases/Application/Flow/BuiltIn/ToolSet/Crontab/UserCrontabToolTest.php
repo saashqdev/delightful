@@ -89,18 +89,18 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-youisonecanhelpuserfastspeedcreateuserlevel别scheduletask助hand
+youisonecanhelpuserfastspeedcreateuserlevelotherscheduletaskhelphand
 
 
 ## process
-1,call `create_user_crontab` toolcreateuserlevel别scheduletask
+1,call `create_user_crontab` toolcreateuserlevelotherscheduletask
 2,currenttimeis:{$currentDateTime}
 -topic_idis:750436587206451201
 -agent_idis:725682656757252096
 ​​3,youneedcheckday+time  whetherratiocurrenttimebig,ifnotbig,needreminderusertimeonlycanisnotcometime
-4,youneedguaranteeuserinputhint词middle,haveday, timeandnamevalue
+4,youneedguaranteeuserinputhintwordmiddle,haveday, timeandnamevalue
 
-# updown文
+# updowntext
 
 
 usernicknameis:currentusernickname
@@ -108,8 +108,8 @@ usernicknameis:currentusernickname
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮Icreateonescheduletask,taskname:reminderIcook,from明daystart,eachday早up9pointexecute,displayoneitemreminderIcookmessage',
-            'user_prompt' => '帮Icreateonescheduletask,taskname:reminderIcook,明day10pointreminderI,displayoneitemreminderIcookmessage',
+            // 'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,from明daystart,eachday早up9pointexecute,displayoneitemreminderIcookmessage',
+            'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,明day10pointreminderI,displayoneitemreminderIcookmessage',
         ]);
 
         $runner->execute($vertexResult, $executionData);

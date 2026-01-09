@@ -12,7 +12,7 @@ use InvalidArgumentException;
 
 enum PlatformType: string
 {
-    // day书
+    // daybook
     case Teamshare = 'teamshare';
     case Delightful = 'delightful';
     case DingTalk = 'ding_talk';

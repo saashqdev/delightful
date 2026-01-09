@@ -13,9 +13,9 @@ use App\Infrastructure\Util\Auth\Permission\PermissionInterface;
 class PermissionChecker
 {
     /**
-     * checkhand机numberwhetherhavepermissionaccessfinger定permission.
+     * checkhandmachinenumberwhetherhavepermissionaccessfingersetpermission.
      *
-     * @param string $mobile hand机number
+     * @param string $mobile handmachinenumber
      * @param SuperPermissionEnum $permissionEnum wantcheckpermissiontype
      * @return bool whetherhavepermission
      */
@@ -32,7 +32,7 @@ class PermissionChecker
     /**
      * inside部permissioncheckmethod,便attest.
      *
-     * @param string $mobile hand机number
+     * @param string $mobile handmachinenumber
      * @param SuperPermissionEnum $permission wantcheckpermission
      * @param array $permissions permissionconfiguration
      * @return bool whetherhavepermission
@@ -46,7 +46,7 @@ class PermissionChecker
             return false;
         }
 
-        // judgewhetherall局administrator
+        // judgewhetheralllocaladministrator
         $globalAdminsEnum = SuperPermissionEnum::GLOBAL_ADMIN->value;
         if (isset($permissions[$globalAdminsEnum]) && in_array($mobile, $permissions[$globalAdminsEnum])) {
             return true;

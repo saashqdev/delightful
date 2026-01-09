@@ -20,9 +20,9 @@ return new class extends Migration {
             $table->string('user_id', 64)->comment('userID');
             $table->string('key', 80)->comment('settingkey');
             $table->json('value')->comment('settingvalue');
-            $table->string('creator', 100)->comment('create者');
+            $table->string('creator', 100)->comment('createperson');
             $table->timestamp('created_at')->nullable()->comment('createtime');
-            $table->string('modifier', 100)->comment('modify者');
+            $table->string('modifier', 100)->comment('modifyperson');
             $table->timestamp('updated_at')->nullable()->comment('updatetime');
 
             $table->index(['organization_code', 'user_id'], 'idx_org_user');

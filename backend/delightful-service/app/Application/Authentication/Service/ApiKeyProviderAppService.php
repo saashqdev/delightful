@@ -53,7 +53,7 @@ class ApiKeyProviderAppService extends AbstractAuthenticationKernelAppService
         if (empty($query->getRelType())) {
             ExceptionBuilder::throw(AuthenticationErrorCode::ValidateFailed, 'common.empty', ['label' => 'rel_type']);
         }
-        // onlycan查from己
+        // onlycancheckfromself
         $query->setCreator($dataIsolation->getCurrentUserId());
         return $this->apiKeyProviderDomainService->queries($dataIsolation, $query, $page);
     }

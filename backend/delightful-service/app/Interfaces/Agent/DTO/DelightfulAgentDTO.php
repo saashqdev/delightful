@@ -14,7 +14,7 @@ class DelightfulAgentDTO extends AbstractDTO
     public string $id;
 
     /**
-     * finger定versionid.
+     * fingersetversionid.
      */
     public ?string $agentVersionId = null;
 
@@ -65,7 +65,7 @@ class DelightfulAgentDTO extends AbstractDTO
     public ?string $createdAt = null;
 
     /**
-     * update者userID.
+     * updatepersonuserID.
      */
     public ?string $updatedUid = '';
 

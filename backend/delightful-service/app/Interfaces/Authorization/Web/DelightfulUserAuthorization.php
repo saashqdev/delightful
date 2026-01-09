@@ -23,12 +23,12 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Qbhy\HyperfAuth\Authenticatable;
 
 /**
- * if改thiscategoryname/property/namingemptybetween,请modify WebUserGuard.php  cacheKey ,avoidcacheno法also原
+ * ifchangethiscategoryname/property/namingemptybetween,pleasemodify WebUserGuard.php  cacheKey ,avoidcachenomethodalsooriginal
  */
 class DelightfulUserAuthorization extends AbstractAuthorization
 {
     /**
-     * 账numberinsomeorganizationdownid,即user_id.
+     * accountnumberinsomeorganizationdownid,即user_id.
      */
     protected string $id = '';
 
@@ -58,12 +58,12 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected string $applicationCode = '';
 
     /**
-     * hand机number,not带international prefix
+     * handmachinenumber,notwithinternational prefix
      */
     protected string $mobile = '';
 
     /**
-     * hand机numberinternational prefix
+     * handmachinenumberinternational prefix
      */
     protected string $countryCode = '';
 
@@ -72,13 +72,13 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     // currentuserlocatedenvironmentid
     protected int $delightfulEnvId = 0;
 
-    // thethree方platformoriginalorganizationencoding
+    // thethreesideplatformoriginalorganizationencoding
     protected string $thirdPlatformOrganizationCode = '';
 
-    // thethree方platformoriginaluser ID
+    // thethreesideplatformoriginaluser ID
     protected ?string $thirdPlatformUserId = '';
 
-    // thethree方platformtype
+    // thethreesideplatformtype
     protected ?PlatformType $thirdPlatformType = null;
 
     public function __construct()
@@ -99,7 +99,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
 
         $beDelightfulAgentUserId = $key['beDelightfulAgentUserId'] ?? '';
         if ($beDelightfulAgentUserId) {
-            // process超levelMagic agent user
+            // processexceedslevelMagic agent user
             $sandboxToken = config('be-delightful.sandbox.token', '');
             if (empty($sandboxToken) || $sandboxToken !== $authorization) {
                 ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND, 'token error');
@@ -111,7 +111,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
             goto create_user;
         }
 
-        // 多environmentdown $authorization maybeduplicate,willhaveissue(概rateapproachinfinitesmall)
+        // multipleenvironmentdown $authorization maybeduplicate,willhaveissue(概rateapproachinfinitesmall)
         $delightfulEnvEntity = $delightfulEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
         if ($delightfulEnvEntity === null) {
             $delightfulEnvEntity = $delightfulEnvDomainService->getCurrentDefaultDelightfulEnv();
@@ -120,7 +120,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
                 ExceptionBuilder::throw(ChatErrorCode::Delightful_ENVIRONMENT_NOT_FOUND);
             }
         }
-        // ifisMagicfrom己downhair Token,thenbyfrom己validation
+        // ifisMagicfromselfdownhair Token,thenbyfromselfvalidation
         $loginCheckDTO = new LoginCheckDTO();
         $loginCheckDTO->setAuthorization($authorization);
         /** @var LoginResponseDTO[] $currentEnvDelightfulOrganizationUsers */

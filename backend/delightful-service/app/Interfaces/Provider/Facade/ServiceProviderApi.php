@@ -199,7 +199,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * get所havenonofficialLLMservicequotientlist
+     * get havenonofficialLLMservicequotientlist
      * directlyfromdatabasemiddlequerycategoryforllmandprovider_typenotforOFFICIALservicequotient
      * notdependencyatcurrentorganization,适useatneedaddservicequotientscenario.
      */
@@ -207,18 +207,18 @@ class ServiceProviderApi extends AbstractApi
     public function getNonOfficialLlmProviders()
     {
         $authenticatable = $this->getAuthorization();
-        // directlyget所haveLLMtypenonofficialservicequotient
+        // directlyget haveLLMtypenonofficialservicequotient
         return $this->adminProviderAppService->getAllNonOfficialProviders(Category::LLM, $authenticatable->getOrganizationCode());
     }
 
     /**
-     * get所havecanuseLLMservicequotientlist(includeofficialservicequotient).
+     * get havecanuseLLMservicequotientlist(includeofficialservicequotient).
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getAllAvailableLlmProviders()
     {
         $authenticatable = $this->getAuthorization();
-        // get所haveLLMtypeservicequotient(includeOfficial)
+        // get haveLLMtypeservicequotient(includeOfficial)
         return $this->adminProviderAppService->getAllAvailableLlmProviders(Category::LLM, $authenticatable->getOrganizationCode());
     }
 
@@ -280,7 +280,7 @@ class ServiceProviderApi extends AbstractApi
             return $data;
         }
 
-        // will provider_config contentenhancetorootlevel别,andadd alias and models
+        // will provider_config contentenhancetorootlevelother,andadd alias and models
         return array_merge($data['provider_config'], [
             'alias' => $data['provider_config']['translate']['alias']['zh_CN'] ?? '',
             'models' => $data['models'] ?? [],

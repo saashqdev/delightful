@@ -35,12 +35,12 @@ readonly class OrganizationDomainService
      */
     public function create(OrganizationEntity $organizationEntity): OrganizationEntity
     {
-        // checkencodingwhetheralready存in
+        // checkencodingwhetheralreadyexistsin
         if ($this->organizationRepository->existsByCode($organizationEntity->getDelightfulOrganizationCode())) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_EXISTS);
         }
 
-        // checkcreate者whether存in
+        // checkcreatepersonwhetherexistsin
         $creatorId = $organizationEntity->getCreatorId();
         if ($creatorId !== null) {
             $creator = $this->userDomainService->getUserById((string) $creatorId);
@@ -55,14 +55,14 @@ readonly class OrganizationDomainService
 
         if ($creatorId !== null && $savedOrganization->getType() !== 1) {
             // personorganizationnotaddorganizationadministrator
-            // forcreate者addorganizationadministratorpermissionandmarkfororganizationcreateperson
+            // forcreatepersonaddorganizationadministratorpermissionandmarkfororganizationcreateperson
             try {
                 $dataIsolation = DataIsolation::simpleMake($savedOrganization->getDelightfulOrganizationCode(), (string) $creatorId);
                 $this->organizationAdminDomainService->grant(
                     $dataIsolation,
                     (string) $creatorId,
-                    (string) $creatorId, // grant者alsoiscreate者from己
-                    'organizationcreate者fromauto getadministratorpermission',
+                    (string) $creatorId, // grantpersonalsoiscreatepersonfromself
+                    'organizationcreatepersonfromauto getadministratorpermission',
                     true // markfororganizationcreateperson
                 );
             } catch (Throwable $e) {
@@ -83,7 +83,7 @@ readonly class OrganizationDomainService
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_NOT_EXISTS);
         }
 
-        // checkencodingwhetheralready存in(rowexceptcurrentorganization)
+        // checkencodingwhetheralreadyexistsin(rowexceptcurrentorganization)
         if ($this->organizationRepository->existsByCode($organizationEntity->getDelightfulOrganizationCode(), $organizationEntity->getId())) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_EXISTS);
         }

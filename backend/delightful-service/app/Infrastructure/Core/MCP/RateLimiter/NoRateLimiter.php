@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\MCP\RateLimiter;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * nolimitspeedratelimit器implement.
+ * nolimitspeedratelimitdeviceimplement.
  * toanyrequestallnotconductlimit,适useattoperformancerequiremorehighor处atopenhair阶segmentsystem.
  */
 class NoRateLimiter extends AbstractRateLimiter
@@ -22,7 +22,7 @@ class NoRateLimiter extends AbstractRateLimiter
 
     /**
      * getwhenfrontlimitconfiguration.
-     * toatnolimitimplement,所havelimitall setfor PHP_INT_MAX.
+     * toatnolimitimplement, havelimitall setfor PHP_INT_MAX.
      */
     public function getLimits(): array
     {

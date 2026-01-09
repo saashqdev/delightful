@@ -73,10 +73,10 @@ readonly class OCRService
         // getremotefileheadinfo
         $headers = get_headers($url, true, $context);
         if ($headers === false) {
-            throw new RuntimeException("no法getheadinfo: {$url}");
+            throw new RuntimeException("nomethodgetheadinfo: {$url}");
         }
 
-        // extract `Last-Modified`,`ETag` and `Content-Length`(if存in)
+        // extract `Last-Modified`,`ETag` and `Content-Length`(ifexistsin)
         $lastModified = $headers['Last-Modified'] ?? null;
         $etag = $headers['Etag'] ?? null;
         $contentLength = $headers['Content-Length'] ?? null;

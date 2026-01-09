@@ -19,7 +19,7 @@ use Delightful\FlowExprEngine\ComponentFactory;
 #[FlowNodeDefine(
     type: NodeType::VariableSet->value,
     code: NodeType::VariableSet->name,
-    name: '变quantity / datastorage',
+    name: 'changequantity / datastorage',
     paramsConfig: VariableSetNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,

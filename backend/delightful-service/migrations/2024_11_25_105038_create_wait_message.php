@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('wait_node_id', 80)->comment('etc待sectionpointID');
             $table->string('flow_code', 80)->comment('processencoding');
             $table->string('flow_version', 80)->comment('processversion');
-            $table->integer('timeout')->default(0)->comment('timeouttime戳');
+            $table->integer('timeout')->default(0)->comment('timeouttimestamp');
             $table->boolean('handled')->default(false)->comment('whetheralreadyprocess');
             $table->json('persistent_data')->nullable()->comment('persistencedata');
             $table->string('created_uid', 80)->comment('createperson');

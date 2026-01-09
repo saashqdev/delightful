@@ -39,7 +39,7 @@ use InvalidArgumentException;
 class ImageGenerateFactory
 {
     /**
-     * eachmodelsupportfixedratio例mappingtable.
+     * eachmodelsupportfixedratioexamplemappingtable.
      */
     private const SIZE_FIXED_RATIOS = [
         'VolcengineArk' => [
@@ -138,11 +138,11 @@ class ImageGenerateFactory
         $mode = strtolower(explode('-', $model, limit: 2)[1] ?? 'fast');
 
         // Midjourney notuse宽highparameter,onlyneed prompt and mode,butis Request categoryinheritneedthistheseparameter
-        // 所bywegivedefaultvalue即can
+        //  bywegivedefaultvalue即can
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
 
-        // Midjourney notclosecorespecific宽highratio例,butweretainthisfieldby防willcomeneed
+        // Midjourney notclosecorespecific宽highratioexample,butweretainthisfieldby防willcomeneed
         if (isset($data['size'])) {
             [$width, $height] = self::parseSizeToWidthHeight($data['size']);
             $ratio = self::calculateRatio((int) $width, (int) $height);
@@ -321,7 +321,7 @@ class ImageGenerateFactory
 
     private static function createVolcengineArkRequest(array $data): VolcengineArkRequest
     {
-        // parse size parameterfor width and height(use VolcengineArk fixedratio例configuration)
+        // parse size parameterfor width and height(use VolcengineArk fixedratioexampleconfiguration)
         [$width, $height] = self::parseSizeToWidthHeight($data['size'] ?? '1024x1024', ImageGenerateModelType::VolcengineArk->value);
 
         $request = new VolcengineArkRequest(
@@ -367,7 +367,7 @@ class ImageGenerateFactory
      * parseeachtype size formatfor [width, height] array.
      * supportformat:1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 etc.
      * @param string $size sizestring
-     * @param null|string $modelKey modelkey名,iffinger定thenpriorityusethemodelfixedratio例configuration
+     * @param null|string $modelKey modelkeyname,iffingersetthenpriorityusethemodelfixedratioexampleconfiguration
      */
     private static function parseSizeToWidthHeight(string $size, ?string $modelKey = null): array
     {
@@ -389,12 +389,12 @@ class ImageGenerateFactory
             return [(string) $resolution, (string) $resolution];
         }
 
-        // processratio例format:16:9, 1:1, 3:4 etc
+        // processratioexampleformat:16:9, 1:1, 3:4 etc
         if (preg_match('/^(\d+):(\d+)$/', $size, $matches)) {
             $width = (int) $matches[1];
             $height = (int) $matches[2];
 
-            // trygetfixedratio例configuration
+            // trygetfixedratioexampleconfiguration
             $fixedSize = self::getFixedRatioSize($modelKey, $size);
             if ($fixedSize !== null) {
                 return $fixedSize;
@@ -418,29 +418,29 @@ class ImageGenerateFactory
     }
 
     /**
-     * getfinger定modelfixedratio例sizeconfiguration.
-     * @param null|string $modelKey modelkey名
-     * @param string $ratioKey ratio例key名,如 "1:1", "16:9"
-     * @return null|array if存infixedconfigurationreturn [width, height] array,nothenreturn null table示needuseconvert
+     * getfingersetmodelfixedratioexamplesizeconfiguration.
+     * @param null|string $modelKey modelkeyname
+     * @param string $ratioKey ratioexamplekeyname,like "1:1", "16:9"
+     * @return null|array ifexistsinfixedconfigurationreturn [width, height] array,nothenreturn null tableshowneeduseconvert
      */
     private static function getFixedRatioSize(?string $modelKey, string $ratioKey): ?array
     {
-        // ifnothavefinger定model,directlyreturn null
+        // ifnothavefingersetmodel,directlyreturn null
         if ($modelKey === null) {
             return null;
         }
 
-        // checkwhether存inthemodelfixedratio例configuration
+        // checkwhetherexistsinthemodelfixedratioexampleconfiguration
         if (isset(self::SIZE_FIXED_RATIOS[$modelKey])) {
             return self::SIZE_FIXED_RATIOS[$modelKey][$ratioKey] ?? self::SIZE_FIXED_RATIOS[$modelKey]['1:1'];
         }
 
-        // ifnot存in,return null table示needuseconvert
+        // ifnotexistsin,return null tableshowneeduseconvert
         return null;
     }
 
     /**
-     * calculate宽highratio例(from LLMAppService 移passcomelogic).
+     * calculate宽highratioexample(from LLMAppService movepasscomelogic).
      */
     private static function calculateRatio(int $width, int $height): string
     {
@@ -451,7 +451,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * calculatemostbigcommon divisor(from LLMAppService 移passcomelogic).
+     * calculatemostbigcommon divisor(from LLMAppService movepasscomelogic).
      */
     private static function gcd(int $a, int $b): int
     {

@@ -80,7 +80,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     public function updateMappingEnvId(int $envId): int;
 
     /**
-     * according to origin_id batchquantity软deletethethird-partyplatformmappingrecord.
+     * according to origin_id batchquantitysoftdeletethethird-partyplatformmappingrecord.
      *
      * @param string[] $originIds thethird-partyplatformoriginalIDcolumntable
      */

@@ -120,7 +120,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
         }
         $savingDelightfulFlow->prepareForSaveNode($delightfulFlow);
 
-        // todo detect子processloopcall
+        // todo detectchildprocessloopcall
 
         $this->delightfulFlowRepository->save($dataIsolation, $delightfulFlow);
 
@@ -159,7 +159,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
             }
             $delightfulFlow->setEnabled($enable);
         } else {
-            // nothenmaintain原havefrom动switchlogic
+            // nothenmaintainoriginalhavefromautoswitchlogic
             $delightfulFlow->prepareForChangeEnable();
         }
 
@@ -193,7 +193,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
             'flowCode' => $delightfulFlow->getCode(),
         ];
 
-        // 先cleanuponedownhistoryscheduletaskand调degreerule
+        // firstcleanuponedownhistoryscheduletaskand調degreerule
         $this->taskSchedulerDomainService->clearByExternalId($externalId);
 
         foreach ($routineConfigs as $branchId => $routineConfig) {
@@ -210,7 +210,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
 
             $callbackParams['branchId'] = $branchId;
             $callbackParams['routineConfig'] = $routineConfig->toConfigArray();
-            // ifisnotduplicate,that么isdirectlycreate调degreetask
+            // ifisnotduplicate,thatwhatisdirectlycreate調degreetask
             if ($routineConfig->getType() === RoutineType::NoRepeat) {
                 $taskScheduler = new TaskScheduler();
                 $taskScheduler->setExternalId($externalId);

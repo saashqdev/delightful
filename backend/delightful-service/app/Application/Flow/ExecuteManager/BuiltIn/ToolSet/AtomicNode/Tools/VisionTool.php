@@ -70,7 +70,7 @@ class VisionTool extends AbstractBuiltInTool
             $node->setParams([
                 'model' => $model,
                 'system_prompt' => $this->createSystemPrompt(),
-                // notagain具have user,directly采usefromlinegroup装 messages
+                // notagainwithhave user,directly采usefromlinegroup装 messages
                 'messages' => $this->createMessages($executionData, $params),
                 'user_prompt' => ComponentFactory::generateTemplate(StructureType::Value),
                 'model_config' => [
@@ -139,8 +139,8 @@ class VisionTool extends AbstractBuiltInTool
         "image_url": {
             "type": "string",
             "key": "image_url",
-            "title": "imageground址",
-            "description": "imageground址.remoteimageground址",
+            "title": "imagegroundaddress",
+            "description": "imagegroundaddress.remoteimagegroundaddress",
             "required": null,
             "value": null,
             "encryption": false,
@@ -152,7 +152,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "array",
             "key": "image_urls",
             "title": "file",
-            "description": "imagelinklist.多imageo clockuse",
+            "description": "imagelinklist.multipleimageo clockuse",
             "required": null,
             "value": null,
             "encryption": false,
@@ -160,8 +160,8 @@ class VisionTool extends AbstractBuiltInTool
             "items": {
                 "type": "string",
                 "key": "image_urls",
-                "title": "imageground址",
-                "description": "imageground址.remoteimageground址",
+                "title": "imagegroundaddress",
+                "description": "imagegroundaddress.remoteimagegroundaddress",
                 "required": null,
                 "value": null,
                 "encryption": false,
@@ -231,27 +231,27 @@ JSON, true)));
     {
         return ComponentFactory::fastCreate([
             'type' => StructureType::Value,
-            'structure' => Value::buildConst('youisoneprofessionalvisualcomprehendassistant,请according tobydownstepreturn应user:
+            'structure' => Value::buildConst('youisoneprofessionalvisualcomprehendassistant,pleaseaccording tobydownstepreturnshoulduser:
 
 1. prioritycomprehenduser意graph,alwaysuseandusersamelanguagereturn答
 2. provideconcise明directlyreturn答,directlyfull足usermainissue
-3. againtoimagecontentconductmulti-dimensionaldegreedetailedanalyze,includebutnot限at:
-   - 主bodycontentidentify:person物,物body,scenario,textetc
+3. againtoimagecontentconductmulti-dimensionaldegreedetailedanalyze,includebutnotlimitat:
+   - mainbodycontentidentify:person物,物body,scenario,textetc
    - visualfeature:color,composition,光line,qualityetc
    - semanticinfo:activity,emotion,close系,backgroundstoryetc
-   - textidentify:如havetext,accurateextractandcomprehendimplication
-   - technologyinfo:如havegraphtable/data,analyzeitsimplication
+   - textidentify:likehavetext,accurateextractandcomprehendimplication
+   - technologyinfo:likehavegraphtable/data,analyzeitsimplication
    
 4. analyzeformatrequire:
-   - toat重wantanalyzeresult,usestructure化JSONformatpresent,如:{"category别":"xx", "主body":"xx", "feature":["xx","xx"]}
+   - toat重wantanalyzeresult,usestructure化JSONformatpresent,like:{"categoryother":"xx", "mainbody":"xx", "feature":["xx","xx"]}
    - toatnotcertaincontent,explicittable明speculatedpropertyquality,for example:"maybeis..."
-   - 如imagequalitymorelow,fingeroutlimitelementanddo one's bestanalyze
-   - toat多graphanalyze,minute别markimage序numberconductparse,andsummaryitsassociateproperty
+   - likeimagequalitymorelow,fingeroutlimitelementanddo one's bestanalyze
+   - toatmultiplegraphanalyze,minuteothermarkimagesequencenumberconductparse,andsummaryitsassociateproperty
    
 5. notice事item:
    - avoidtosensitivecontentmake subjective judgment
-   - whenno法certainsome部minutecontento clock,坦诚table达notcertainproperty
-   - maintainobjectiveprofessional语气'),
+   - whennomethodcertainsome部minutecontento clock,坦诚table达notcertainproperty
+   - maintainobjectiveprofessionallanguage气'),
         ]);
     }
 

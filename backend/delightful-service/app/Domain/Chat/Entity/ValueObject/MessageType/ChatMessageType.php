@@ -42,12 +42,12 @@ enum ChatMessageType: string
     case Location = 'location';
 
     /**
-     * compare low push多time seq,front端mergebecomeonerender.
+     * compare low pushmultipletime seq,frontclientmergebecomeonerender.
      */
     case AggregateAISearchCard = 'aggregate_ai_search_card';
 
     /**
-     * 多timestreamresponseback,finalmergebecomeoneitemmessage入library.
+     * multipletimestreamresponseback,finalmergebecomeoneitemmessage入library.
      */
     case AggregateAISearchCardV2 = 'aggregate_ai_search_card_v2';
 
@@ -62,7 +62,7 @@ enum ChatMessageType: string
     // AItext generationgraphcard
     case AIImageCard = 'ai_image_card';
 
-    // image转high清
+    // imagetransferhighclear
     case ImageConvertHighCard = 'image_convert_high_card';
 
     // 通use agent message
@@ -70,7 +70,7 @@ enum ChatMessageType: string
 
     /**
      * unknownmessage.
-     * byatversioniteration,hair版timediffetcreason,maybeproduceunknowntypemessage.
+     * byatversioniteration,hairversiontimediffetcreason,maybeproduceunknowntypemessage.
      */
     case Unknown = 'unknown';
 

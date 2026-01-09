@@ -24,7 +24,7 @@ class MCPResourceManager
      */
     public function registerResource(array $resource): void
     {
-        // nullimplement,暂notregisteranyresource
+        // nullimplement,暫notregisteranyresource
     }
 
     /**
@@ -39,7 +39,7 @@ class MCPResourceManager
     }
 
     /**
-     * getfinger定IDresource.
+     * getfingersetIDresource.
      * whenfrontfornullimplement,alwaysreturnnull.
      */
     public function getResource(string $id): ?array
@@ -48,7 +48,7 @@ class MCPResourceManager
     }
 
     /**
-     * checkfinger定IDresourcewhether存in.
+     * checkfingersetIDresourcewhetherexistsin.
      */
     public function hasResource(string $id): bool
     {

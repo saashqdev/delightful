@@ -142,7 +142,7 @@ class ProviderModelSyncAppService
      */
     private function fetchModelsFromApi(string $url, string $apiKey, array $types, string $language): array
     {
-        // getAPIground址
+        // getAPIgroundaddress
         $apiUrl = $this->buildModelsApiUrl($url);
 
         $allModels = [];
@@ -220,7 +220,7 @@ class ProviderModelSyncAppService
     ): void {
         $configId = $providerConfigEntity->getId();
 
-        // get现have所havemodel
+        // getshowhave havemodel
         $existingModels = $this->providerModelDomainService->getByProviderConfigId($dataIsolation, (string) $configId);
 
         // establishmodel_id -> entitymapping
@@ -241,7 +241,7 @@ class ProviderModelSyncAppService
 
             try {
                 if (isset($existingModelMap[$modelId])) {
-                    // update现havemodel
+                    // updateshowhavemodel
                     $this->updateModel($dataIsolation, $existingModelMap[$modelId], $modelData, $providerConfigEntity, $language);
                 } else {
                     // createnewmodel
@@ -256,7 +256,7 @@ class ProviderModelSyncAppService
             }
         }
 
-        // deletenotagain存inmodel
+        // deletenotagainexistsinmodel
         foreach ($existingModelMap as $modelId => $existingModel) {
             if (! in_array($modelId, $newModelIds)) {
                 try {
@@ -296,7 +296,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * update现havemodel.
+     * updateshowhavemodel.
      */
     private function updateModel(
         ProviderDataIsolation $dataIsolation,
@@ -308,7 +308,7 @@ class ProviderModelSyncAppService
         $saveDTO = $this->modelToReqDTO($dataIsolation, $modelData, $providerConfigEntity, $language);
 
         $saveDTO->setId($existingModel->getId());
-        $saveDTO->setStatus($existingModel->getStatus()); // maintain原havestatus
+        $saveDTO->setStatus($existingModel->getStatus()); // maintainoriginalhavestatus
 
         // savemodel
         $this->providerModelDomainService->saveModel($dataIsolation, $saveDTO);
@@ -325,7 +325,7 @@ class ProviderModelSyncAppService
         ProviderConfigEntity $providerConfigEntity,
         string $language
     ): SaveProviderModelDTO {
-        // ifisonelink,that么needto url conductlimit
+        // ifisonelink,thatwhatneedto url conductlimit
         $iconUrl = $modelData['info']['attributes']['icon'] ?? '';
         try {
             $iconUrl = str_replace(' ', '%20', $iconUrl);

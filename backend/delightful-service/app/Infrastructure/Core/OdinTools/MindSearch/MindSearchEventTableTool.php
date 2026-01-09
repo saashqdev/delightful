@@ -23,11 +23,11 @@ class MindSearchEventTableTool
                     'properties' => [
                         'event_name' => [
                             'type' => 'string',
-                            'description' => 'associateevent名',
+                            'description' => 'associateeventname',
                         ],
                         'event_time' => [
                             'type' => 'string',
-                            'description' => 'associateeventhair生time',
+                            'description' => 'associateeventhairgeneratetime',
                         ],
                         'event_description' => [
                             'type' => 'string',

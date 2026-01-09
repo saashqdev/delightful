@@ -12,12 +12,12 @@ use RuntimeException;
 class MCPException extends RuntimeException
 {
     /**
-     * JSON-RPCerror码.
+     * JSON-RPCerrorcode.
      */
     protected int $rpcCode = -32000;
 
     /**
-     * getJSON-RPCerror码.
+     * getJSON-RPCerrorcode.
      */
     public function getRpcCode(): int
     {
@@ -25,7 +25,7 @@ class MCPException extends RuntimeException
     }
 
     /**
-     * settingJSON-RPCerror码.
+     * settingJSON-RPCerrorcode.
      */
     public function setRpcCode(int $code): self
     {

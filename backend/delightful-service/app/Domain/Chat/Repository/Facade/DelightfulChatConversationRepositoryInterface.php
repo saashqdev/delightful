@@ -29,7 +29,7 @@ interface DelightfulChatConversationRepositoryInterface
     public function addConversation(DelightfulConversationEntity $conversation): DelightfulConversationEntity;
 
     /**
-     * (minuteorganization)getuserandfinger定userconversationwindowinformation.
+     * (minuteorganization)getuserandfingersetuserconversationwindowinformation.
      * @return array<DelightfulConversationEntity>
      */
     public function getConversationsByReceiveIds(string $userId, array $receiveIds, ?string $userOrganizationCode = null): array;
@@ -43,7 +43,7 @@ interface DelightfulChatConversationRepositoryInterface
      */
     public function batchGetConversations(array $userIds, string $receiveId, ConversationType $receiveType): array;
 
-    // batchquantity移exceptconversationwindow
+    // batchquantitymoveexceptconversationwindow
     public function batchRemoveConversations(array $userIds, string $receiveId, ConversationType $receiveType): int;
 
     // batchquantityupdateconversationwindow

@@ -105,7 +105,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
     public function setLlmResponse(?string $llmResponse): self
     {
         $this->llmResponse = $llmResponse;
-        // outside部implementalsois读 content,thiswithinalso同give content 赋value
+        // outside部implementalsoisread content,thiswithinalsosamegive content assignvalue
         isset($llmResponse) && $this->content = $llmResponse;
         return $this;
     }
@@ -225,7 +225,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
     }
 
     /**
-     * onlyreturnbigmodelreturntextcontent, andignoreinvalidcontent,如: "already经foryou are looking fortoanswer,请etc待generatesummary“.
+     * onlyreturnbigmodelreturntextcontent, andignoreinvalidcontent,like: "alreadyalreadyforyou are looking fortoanswer,pleaseetc待generatesummary“.
      */
     public function getTextContent(): string
     {
@@ -243,7 +243,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
     public function setContent(string $content): static
     {
         $this->setLlmResponse($content);
-        // outside部implementalsois读 content,thiswithinalso同give content 赋value
+        // outside部implementalsoisread content,thiswithinalsosamegive content assignvalue
         $this->content = $content;
         return $this;
     }

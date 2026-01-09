@@ -49,12 +49,12 @@ readonly class KnowledgeBaseFragmentSyncSubscriber implements ListenerInterface
         /** @var KnowledgeBaseVectorAppService $knowledgeBaseVectorService */
         $knowledgeBaseVectorService = di(KnowledgeBaseVectorAppService::class);
 
-        // todo 做becomequeue限stream
+        // todo makebecomequeuelimitstream
 
         try {
             $knowledgeBaseVectorService->checkCollectionExists($knowledge);
 
-            // if具havetoquantity,thennot重newembedding
+            // ifwithhavetoquantity,thennot重newembedding
             if (empty($fragment->getVector())) {
                 $fragment->setSyncStatus(KnowledgeSyncStatus::Syncing);
                 $delightfulFlowKnowledgeDomainService->changeSyncStatus($fragment);

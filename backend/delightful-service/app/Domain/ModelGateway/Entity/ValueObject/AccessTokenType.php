@@ -9,22 +9,22 @@ namespace App\Domain\ModelGateway\Entity\ValueObject;
 
 /**
  * accesstokentype: user,organization,application.
- * application/useris跨organization.
+ * application/useriscrossorganization.
  */
 enum AccessTokenType: string
 {
     /**
-     * person版.
+     * personversion.
      */
     case User = 'user';
 
     /**
-     * enterprise版. itsimplementinalsonothave.
+     * enterpriseversion. itsimplementinalsonothave.
      */
     case Organization = 'organization';
 
     /**
-     * application版.
+     * applicationversion.
      */
     case Application = 'application';
 

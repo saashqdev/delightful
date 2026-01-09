@@ -21,7 +21,7 @@ class DelightfulFlowToolSetEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯oneencoding,onlyincreateo clockgenerate,useasgivefront端id.
+     * uniqueoneencoding,onlyincreateo clockgenerate,useasgivefrontclientid.
      */
     protected string $code;
 
@@ -36,7 +36,7 @@ class DelightfulFlowToolSetEntity extends AbstractEntity
     protected string $description = '';
 
     /**
-     * toolcollectiongraph标.
+     * toolcollectiongraphmark.
      */
     protected string $icon = '';
 
@@ -51,7 +51,7 @@ class DelightfulFlowToolSetEntity extends AbstractEntity
     protected DateTime $updatedAt;
 
     /**
-     * useat冗remaindertoolinformationcolumntable.
+     * useatredundantremaindertoolinformationcolumntable.
      * with query.
      */
     private array $tools = [];

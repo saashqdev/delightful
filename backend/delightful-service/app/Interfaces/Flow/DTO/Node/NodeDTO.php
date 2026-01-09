@@ -25,12 +25,12 @@ class NodeDTO extends AbstractFlowDTO
     public string $nodeVersion = '';
 
     /**
-     * sectionpointyuandata,canuseasgivefront端locate,back端onlystorageandshow,nothaveanylogic.
+     * sectionpointyuandata,canuseasgivefrontclientlocate,backclientonlystorageandshow,nothaveanylogic.
      */
     public array $meta = [];
 
     /**
-     * sectionpointparameterconfiguration,目frontrely onarraycomedatapass.
+     * sectionpointparameterconfiguration,itemfrontrely onarraycomedatapass.
      */
     public array $params = [];
 
@@ -60,7 +60,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * getwhetherfordebug模type.
+     * getwhetherfordebugmodetype.
      */
     public function isDebug(): bool
     {
@@ -73,7 +73,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * setwhetherfordebug模type.
+     * setwhetherfordebugmodetype.
      */
     public function setDebug(?bool $debug): self
     {

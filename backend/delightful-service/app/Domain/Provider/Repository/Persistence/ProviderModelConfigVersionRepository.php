@@ -15,7 +15,7 @@ use Hyperf\DbConnection\Db;
 
 class ProviderModelConfigVersionRepository extends AbstractProviderModelRepository implements ProviderModelConfigVersionRepositoryInterface
 {
-    // configurationversiontablenotneedorganizationisolation(pass service_provider_model_id associatealready经isolation)
+    // configurationversiontablenotneedorganizationisolation(pass service_provider_model_id associatealreadyalreadyisolation)
     protected bool $filterOrganizationCode = false;
 
     /**
@@ -35,7 +35,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
 
             $newVersion = $latestVersion ? (int) $latestVersion + 1 : 1;
 
-            // 2. willthemodel所haveoldversionmarkfornoncurrentversion
+            // 2. willthemodel haveoldversionmarkfornoncurrentversion
             $updateBuilder = $this->createBuilder($dataIsolation, ProviderModelConfigVersionModel::query());
             $updateBuilder
                 ->where('service_provider_model_id', $serviceProviderModelId)
@@ -46,7 +46,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
             $entity->setVersion($newVersion);
             $entity->setIsCurrentVersion(true);
 
-            // convertforarrayand移except null  created_at,let Model from动processtime戳
+            // convertforarrayandmoveexcept null  created_at,let Model fromautoprocesstimestamp
             $data = $entity->toArray();
 
             ProviderModelConfigVersionModel::query()->create($data);
@@ -54,7 +54,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
     }
 
     /**
-     * getfinger定modelmostnewversionID.
+     * getfingersetmodelmostnewversionID.
      */
     public function getLatestVersionId(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?int
     {
@@ -66,7 +66,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
     }
 
     /**
-     * getfinger定modelmostnewconfigurationversion实body.
+     * getfingersetmodelmostnewconfigurationversionactualbody.
      */
     public function getLatestVersionEntity(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?ProviderModelConfigVersionEntity
     {

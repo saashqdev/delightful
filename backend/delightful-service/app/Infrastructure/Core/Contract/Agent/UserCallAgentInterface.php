@@ -17,15 +17,15 @@ interface UserCallAgentInterface
     public function process(UserCallAgentEvent $event): void;
 
     /**
-     * judgewhenfrontprocess器whethercanprocessthe AI Code.
+     * judgewhenfrontprocessdevicewhethercanprocessthe AI Code.
      */
     public function canHandle(string $aiCode): bool;
 
     /**
-     * getprocess器prioritylevel.
+     * getprocessdeviceprioritylevel.
      *
      * numbermorebigprioritylevelmorehigh,defaultfor0
-     * enterprise版canreturnmorehighprioritylevelbycoveragedefaultimplement
+     * enterpriseversioncanreturnmorehighprioritylevelbycoveragedefaultimplement
      */
     public static function getPriority(): int;
 }

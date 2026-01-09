@@ -77,7 +77,7 @@ class DelightfulAccountAppService extends AbstractAppService
                 $authorization->setOrganizationCode($delightfulInfo?->getOrganizationCode());
             }
             // pass aiCode query delightful_flows tablegetbelong toorganization.
-            // notice超levelMagicwhenfrontisasforonenothavewrite delightful_flows datalibrary flow 存in. SUPER_DELIGHTFUL_CODE write accounts table.
+            // noticeexceedslevelMagicwhenfrontisasforonenothavewrite delightful_flows datalibrary flow existsin. SUPER_DELIGHTFUL_CODE write accounts table.
             if ($aiCode !== AgentConstant::SUPER_DELIGHTFUL_CODE) {
                 $disabledDataIsolation = FlowDataIsolation::create()->disabled();
                 $delightfulFlowEntity = $this->delightfulFlowDomainService->getByCode($disabledDataIsolation, $aiCode);
@@ -88,7 +88,7 @@ class DelightfulAccountAppService extends AbstractAppService
             }
 
             $dataIsolation = $this->createDataIsolation($authorization);
-            // 智canbody账numberinformation
+            // 智canbodyaccountnumberinformation
             if (! isset($accountDTO)) {
                 $accountDTO = new AccountEntity();
             }
@@ -103,7 +103,7 @@ class DelightfulAccountAppService extends AbstractAppService
 
     public function loginByPhoneAndCode(string $mobile, string $code)
     {
-        // checkverify码whethercorrect
+        // checkverifycodewhethercorrect
     }
 
     public function getAccountInfoByDelightfulId(string $delightfulId): ?AccountEntity

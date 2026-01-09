@@ -15,8 +15,8 @@ class StreamOptions extends AbstractEntity
 
     protected bool $stream;
 
-    // useatidentifierstreammessageassociateproperty.多segmentstreammessage stream_app_message_id same
-    // ai searchcardmessage多segmentresponse,already经will app_message_id asforassociate id,streamresponseneed另outside id come做associate
+    // useatidentifierstreammessageassociateproperty.multiplesegmentstreammessage stream_app_message_id same
+    // ai searchcardmessagemultiplesegmentresponse,alreadyalreadywill app_message_id asforassociate id,streamresponseneedanotheroutside id comemakeassociate
     protected string $streamAppMessageId;
 
     /**
@@ -25,7 +25,7 @@ class StreamOptions extends AbstractEntity
     protected MessageAppendOptions $append;
 
     /**
-     * issuesearchendidentifier,useatfrontclient renderingendanimation.or者pushexceptioninfo.
+     * issuesearchendidentifier,useatfrontclient renderingendanimation.orpersonpushexceptioninfo.
      * @var StepFinishedDTO[]
      */
     protected array $stepsFinished;

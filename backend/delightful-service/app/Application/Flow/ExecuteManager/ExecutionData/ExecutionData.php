@@ -53,7 +53,7 @@ class ExecutionData
     private string $parentFlowCode = '';
 
     /**
-     * sectionpointupdown文.
+     * sectionpointupdowntext.
      * @var array {nodeId: {context}}
      */
     private array $nodeContext = [];
@@ -78,13 +78,13 @@ class ExecutionData
     private array $variables = [];
 
     /**
-     * attachment.processexecuteo clockproduce所havefilerecord.
+     * attachment.processexecuteo clockproduce havefilerecord.
      * @var array<string, AbstractAttachment>
      */
     private array $attachmentRecords = [];
 
     /**
-     * true实sessionID.
+     * trueactualsessionID.
      */
     private string $conversationId;
 
@@ -104,7 +104,7 @@ class ExecutionData
     private array $ext = [];
 
     /**
-     * current操asperson.
+     * currentoperationasperson.
      */
     private Operator $operator;
 
@@ -128,9 +128,9 @@ class ExecutionData
 
     /**
      * sendredundantremainderinfo.
-     * $userEntity. send方userinfo.
-     * $seqEntity. send方sessionwindowinfo.
-     * $messageEntity. send方messageinfo.
+     * $userEntity. sendsideuserinfo.
+     * $seqEntity. sendsidesessionwindowinfo.
+     * $messageEntity. sendsidemessageinfo.
      */
     private array $senderEntities = [];
 
@@ -143,7 +143,7 @@ class ExecutionData
     private ?DelightfulFlowEntity $delightfulFlowEntity = null;
 
     /**
-     * current agent finger令configurationlist.
+     * current agent fingercommandconfigurationlist.
      * @var array<InstructionConfig>
      */
     private array $instructionConfigs = [];
@@ -167,7 +167,7 @@ class ExecutionData
         $this->id = $id ?? 'e_' . IdGenerator::getUniqueId32();
         $this->conversationId = $conversationId ?? 'c_' . IdGenerator::getUniqueId32();
         $this->originConversationId = $originConversationId ?? $this->conversationId;
-        // initializeall局variabletovariablemiddle
+        // initializealllocalvariabletovariablemiddle
         $this->initGlobalVariable();
     }
 

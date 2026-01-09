@@ -17,8 +17,8 @@ class EndpointDTO extends AbstractDTO
 {
     /**
      * getEndpointList interfacereturn id.
-     * differentbusinessimplicationdifferent.toatmodel网closecome说,thiswithin id is service_provider_models table id.
-     * front端maybenot supported bigint,所bythiswithinuse string.
+     * differentbusinessimplicationdifferent.toatmodel网closecomesay,thiswithin id is service_provider_models table id.
+     * frontclientmaybenot supported bigint, bythiswithinuse string.
      */
     protected ?string $businessId = null;
 
@@ -48,7 +48,7 @@ class EndpointDTO extends AbstractDTO
     protected ?string $config = null;
 
     /**
-     * resourceconsume id list. onetimerequestmaybewillconsume多resource.
+     * resourceconsume id list. onetimerequestmaybewillconsumemultipleresource.
      * @var null|string[]
      */
     protected ?array $resources = null;
@@ -83,7 +83,7 @@ class EndpointDTO extends AbstractDTO
         parent::__construct($data);
     }
 
-    // 原have EndpointDTO 所havemethod
+    // originalhave EndpointDTO  havemethod
     public function getResources(): ?array
     {
         return $this->resources ?? null;
@@ -239,7 +239,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * checkwhether存inatdatabasemiddle.
+     * checkwhetherexistsinatdatabasemiddle.
      */
     public function hasEndpointId(): bool
     {

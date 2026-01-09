@@ -44,7 +44,7 @@ class DelightfulDepartmentEntity extends AbstractEntity
     protected ?int $employeeSum = null;
 
     /**
-     * databasemiddlenothavethisfield,lazy write.batchquantitywritedatabaseo clock,toArray() backneedhand动 unset 掉.
+     * databasemiddlenothavethisfield,lazy write.batchquantitywritedatabaseo clock,toArray() backneedhandauto unset drop.
      */
     protected ?bool $hasChild = null;
 

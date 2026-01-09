@@ -10,13 +10,13 @@ namespace App\Domain\Chat\Entity\ValueObject;
 use App\Infrastructure\Core\AbstractValueObject;
 
 /**
- * voice转textresultvalueobject
- * support多languagetranscriptionresultstorage.
+ * voicetransfertextresultvalueobject
+ * supportmultiplelanguagetranscriptionresultstorage.
  */
 class VoiceTranscription extends AbstractValueObject
 {
     /**
-     * 多languagetranscriptionresult
+     * multiplelanguagetranscriptionresult
      * format: ['zh_CN' => 'transcriptiontext', 'en_US' => 'Transcription text', ...].
      * @var null|array<string, string>
      */
@@ -28,7 +28,7 @@ class VoiceTranscription extends AbstractValueObject
     private ?string $errorMessage;
 
     /**
-     * transcriptiontime戳.
+     * transcriptiontimestamp.
      */
     private ?int $transcribedAt;
 
@@ -38,7 +38,7 @@ class VoiceTranscription extends AbstractValueObject
     private ?string $primaryLanguage;
 
     /**
-     * get所havetranscriptionresult.
+     * get havetranscriptionresult.
      * @return array<string, string>
      */
     public function getTranscriptions(): array
@@ -69,7 +69,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * getfinger定languagetranscriptionresult.
+     * getfingersetlanguagetranscriptionresult.
      */
     public function getTranscription(string $language): ?string
     {
@@ -90,7 +90,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * checkwhetherhavefinger定languagetranscriptionresult.
+     * checkwhetherhavefingersetlanguagetranscriptionresult.
      */
     public function hasTranscription(string $language): bool
     {
@@ -98,7 +98,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * get所havesupportlanguagecode
+     * get havesupportlanguagecode
      * @return string[]
      */
     public function getSupportedLanguages(): array
@@ -124,7 +124,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * gettranscriptiontime戳.
+     * gettranscriptiontimestamp.
      */
     public function getTranscribedAt(): ?int
     {
@@ -132,7 +132,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * settranscriptiontime戳.
+     * settranscriptiontimestamp.
      */
     public function setTranscribedAt(?int $transcribedAt): self
     {
@@ -174,7 +174,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * clear所havetranscriptionresult.
+     * clear havetranscriptionresult.
      */
     public function clear(): self
     {

@@ -10,10 +10,10 @@ namespace App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request;
 class VolcengineModelRequest extends ImageGenerateRequest
 {
     // insideset exceedsminutefeature,startbackcanwillupdescription widthhigh均multiplyby2return,thisparameteropenbackdelaywillhaveincrease
-    // 如updescription widthhigh均for512and512,thisparametercloseoutgraph 512*512 ,thisparameteropenoutgraph1024 * 1024
+    // likeupdescription widthhigh均for512and512,thisparametercloseoutgraph 512*512 ,thisparameteropenoutgraph1024 * 1024
     private bool $useSr = false;
 
-    // 目frontonlysupport url
+    // itemfrontonlysupport url
     private array $referenceImages = [];
 
     public function __construct(string $width = '512', string $height = '512', string $prompt = '', string $negativePrompt = '')

@@ -39,9 +39,9 @@ class UpdateDocumentRequestDTO extends AbstractRequestDTO
     {
         return [
             'code.required' => 'documentencodingcannotfornull',
-            'code.max' => 'documentencodinglengthcannot超pass64character',
+            'code.max' => 'documentencodinglengthcannotexceedspass64character',
             'name.required' => 'documentnamecannotfornull',
-            'name.max' => 'documentnamelengthcannot超pass255character',
+            'name.max' => 'documentnamelengthcannotexceedspass255character',
             'enabled.boolean' => 'enabled statusmustforbooleanvalue',
         ];
     }

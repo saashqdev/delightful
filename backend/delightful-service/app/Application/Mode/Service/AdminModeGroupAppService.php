@@ -19,7 +19,7 @@ use InvalidArgumentException;
 class AdminModeGroupAppService extends AbstractModeAppService
 {
     /**
-     * according tomodeIDgetminutegroupcolumntable (manageback台use,containcompletei18nfield).
+     * according tomodeIDgetminutegroupcolumntable (managebackplatformuse,containcompletei18nfield).
      */
     public function getGroupsByModeId(DelightfulUserAuthorization $authorization, string $modeId): array
     {
@@ -28,14 +28,14 @@ class AdminModeGroupAppService extends AbstractModeAppService
 
         $groupDTOs = AdminModeAssembler::groupEntitiesToAdminDTOs($groups);
 
-        // processminutegroupgraph标
+        // processminutegroupgraphmark
         $this->processGroupIcons($groupDTOs);
 
         return $groupDTOs;
     }
 
     /**
-     * getminutegroupdetail (manageback台use).
+     * getminutegroupdetail (managebackplatformuse).
      */
     public function getGroupById(DelightfulUserAuthorization $authorization, string $groupId): ?array
     {
@@ -57,7 +57,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * createminutegroup (manageback台use).
+     * createminutegroup (managebackplatformuse).
      */
     public function createGroup(DelightfulUserAuthorization $authorization, CreateModeGroupRequest $request): AdminModeGroupDTO
     {
@@ -88,7 +88,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * updateminutegroup (manageback台use).
+     * updateminutegroup (managebackplatformuse).
      */
     public function updateGroup(DelightfulUserAuthorization $authorization, string $groupId, UpdateModeGroupRequest $request): AdminModeGroupDTO
     {
@@ -96,7 +96,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // fromrequestobjectdirectlyconvertfor实body
+            // fromrequestobjectdirectlyconvertforactualbody
             $groupEntity = AdminModeAssembler::updateModeGroupRequestToEntity($request, $groupId);
 
             $updatedGroup = $this->groupDomainService->updateGroup($dataIsolation, $groupEntity);

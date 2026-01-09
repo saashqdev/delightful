@@ -16,7 +16,7 @@ enum NodeType: int
 {
     /*
      * Start Node
-     * useas触hair器.windowopeno clock,havenewmessageo clock,schedule;parametercall(only子processcanuse)
+     * useastouchhairdevice.windowopeno clock,havenewmessageo clock,schedule;parametercall(onlychildprocesscanuse)
      */
     case Start = 1;
 
@@ -46,7 +46,7 @@ enum NodeType: int
 
     /*
      * Vector
-     * text转toquantity
+     * texttransfertoquantity
      * datamatch
      * toquantitydatastorage
      */
@@ -61,7 +61,7 @@ enum NodeType: int
 
     /*
      * Loader
-     * dataload.come源:toquantitydatabase,file,network
+     * dataload.comesource:toquantitydatabase,file,network
      */
     case Loader = 8;
 
@@ -78,7 +78,7 @@ enum NodeType: int
     case Http = 10;
 
     /*
-     * 子process
+     * childprocess
      */
     case Sub = 11;
 
@@ -165,7 +165,7 @@ enum NodeType: int
     case KnowledgeFragmentRemove = 27;
 
     /**
-     * person员retrieve.
+     * personmemberretrieve.
      */
     case UserSearch = 28;
 
@@ -190,7 +190,7 @@ enum NodeType: int
     case LoopStop = 32;
 
     /**
-     * Excel fileload器.
+     * Excel fileloaddevice.
      */
     case ExcelLoader = 51;
 

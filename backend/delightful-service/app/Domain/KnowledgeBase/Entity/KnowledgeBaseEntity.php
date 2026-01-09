@@ -130,7 +130,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'organizationencoding notcanforempty');
         }
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 notcanforempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'createperson notcanforempty');
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
@@ -159,7 +159,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basename notcanforempty');
         }
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 notcanforempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'createperson notcanforempty');
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
@@ -186,7 +186,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function prepareForModifyProcess(KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void
     {
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 notcanforempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'createperson notcanforempty');
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
@@ -204,7 +204,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     {
         $driver = VectorStoreDriver::tryFrom($this->vectorDB);
         if ($driver === null) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "toquantitydatabase [{$this->vectorDB}] not存in");
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "toquantitydatabase [{$this->vectorDB}] notexistsin");
         }
         return $driver->get();
     }
@@ -517,7 +517,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     /**
      * getorcreateretrieveconfiguration.
      *
-     * ifretrieveconfigurationnot存in,thencreatedefaultconfiguration
+     * ifretrieveconfigurationnotexistsin,thencreatedefaultconfiguration
      */
     public function getOrCreateRetrieveConfig(): RetrieveConfig
     {

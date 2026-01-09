@@ -23,7 +23,7 @@ class MidjourneyModel extends AbstractImageGenerate
     // mostbigretrycount
     protected const MAX_RETRIES = 20;
 
-    // retrybetween隔(second)
+    // retrybetweenseparator(second)
     protected const RETRY_INTERVAL = 10;
 
     protected MidjourneyAPI $api;
@@ -74,7 +74,7 @@ class MidjourneyModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof MidjourneyModelRequest) {
-            $this->logger->error('Midjourney OpenAIformat生graph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Midjourney OpenAIformatgenerategraph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
@@ -90,17 +90,17 @@ class MidjourneyModel extends AbstractImageGenerate
             $response->setProviderErrorCode($e->getCode());
             $response->setProviderErrorMessage($e->getMessage());
 
-            $this->logger->error('Midjourney OpenAIformat生graph:requestfail', [
+            $this->logger->error('Midjourney OpenAIformatgenerategraph:requestfail', [
                 'error_code' => $e->getCode(),
                 'error_message' => $e->getMessage(),
             ]);
         }
 
         // 4. recordfinalresult
-        $this->logger->info('Midjourney OpenAIformat生graph:handlecomplete', [
-            'successimage数' => count($response->getData()),
+        $this->logger->info('Midjourney OpenAIformatgenerategraph:handlecomplete', [
+            'successimagecount' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
-            'error码' => $response->getProviderErrorCode(),
+            'errorcode' => $response->getProviderErrorCode(),
             'errormessage' => $response->getProviderErrorMessage(),
         ]);
 
@@ -133,7 +133,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * round询taskresultandreturnnativedata.
+     * roundquerytaskresultandreturnnativedata.
      * @throws Exception
      */
     protected function pollTaskResultForRaw(string $jobId): array
@@ -145,14 +145,14 @@ class MidjourneyModel extends AbstractImageGenerate
                 $result = $this->api->getTaskResult($jobId);
 
                 if (! isset($result['status'])) {
-                    $this->logger->error('MJtext generationgraph:round询responseformaterror', [
+                    $this->logger->error('MJtext generationgraph:roundqueryresponseformaterror', [
                         'jobId' => $jobId,
                         'response' => $result,
                     ]);
                     ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR);
                 }
 
-                $this->logger->info('MJtext generationgraph:round询status', [
+                $this->logger->info('MJtext generationgraph:roundquerystatus', [
                     'jobId' => $jobId,
                     'status' => $result['status'],
                     'retryCount' => $retryCount,
@@ -171,11 +171,11 @@ class MidjourneyModel extends AbstractImageGenerate
                     ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
                 }
 
-                // ifisotherstatus(如 PENDING_QUEUE or ON_QUEUE),continueetc待
+                // ifisotherstatus(like PENDING_QUEUE or ON_QUEUE),continueetc待
                 ++$retryCount;
                 sleep(self::RETRY_INTERVAL);
             } catch (Exception $e) {
-                $this->logger->error('MJtext generationgraph:round询taskresultfail', [
+                $this->logger->error('MJtext generationgraph:roundquerytaskresultfail', [
                     'jobId' => $jobId,
                     'error' => $e->getMessage(),
                     'retryCount' => $retryCount,
@@ -285,7 +285,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * getalertmessagefront缀
+     * getalertmessagefrontsuffix
      */
     protected function getAlertPrefix(): string
     {
@@ -316,7 +316,7 @@ class MidjourneyModel extends AbstractImageGenerate
         $prompt .= ' --v 7.0';
 
         // recordrequeststart
-        $this->logger->info('MJtext generationgraph:start生graph', [
+        $this->logger->info('MJtext generationgraph:startgenerategraph', [
             'prompt' => $prompt,
             'ratio' => $imageGenerateRequest->getRatio(),
             'negativePrompt' => $imageGenerateRequest->getNegativePrompt(),

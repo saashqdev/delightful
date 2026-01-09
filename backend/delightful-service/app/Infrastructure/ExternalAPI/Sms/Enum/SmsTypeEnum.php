@@ -10,7 +10,7 @@ namespace App\Infrastructure\ExternalAPI\Sms\Enum;
 enum SmsTypeEnum: string
 {
     /*
-     * verify码,customizevalid期
+     * verifycode,customizevalid期
      */
     case VERIFICATION_WITH_EXPIRATION = 'verification_with_expiration';
 

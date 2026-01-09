@@ -39,7 +39,7 @@ class DelightfulOrganizationEnvDomainService
         $owner = random_bytes(8);
         $this->lock->spinLock($spinLockKey, $owner);
         try {
-            // organization所inenvironment
+            // organization inenvironment
             $orgEnvEntity = $this->delightfulOrganizationsEnvironmentRepository->getOrganizationEnvironmentByOrganizationCode(
                 $originOrganizationCode,
                 $delightfulEnvEntity
@@ -78,13 +78,13 @@ class DelightfulOrganizationEnvDomainService
 
     public function getDelightfulEnvironmentById(int $envId): ?DelightfulEnvironmentEntity
     {
-        // organization所inenvironment
+        // organization inenvironment
         return $this->delightfulEnvironmentsRepository->getEnvById((string) $envId);
     }
 
     public function getOrganizationsEnvironmentDTO(string $delightfulOrganizationCode): ?DelightfulOrganizationEnvDTO
     {
-        // organization所inenvironment id
+        // organization inenvironment id
         $organizationEnvEntity = $this->delightfulOrganizationsEnvironmentRepository->getOrganizationEnvironmentByDelightfulOrganizationCode(
             $delightfulOrganizationCode
         );
@@ -117,7 +117,7 @@ class DelightfulOrganizationEnvDomainService
      */
     public function getEnvironmentEntities(): array
     {
-        // 所have存inopen放platformenvironment
+        //  haveexistsinopenputplatformenvironment
         return $this->delightfulEnvironmentsRepository->getDelightfulEnvironments();
     }
 
@@ -153,7 +153,7 @@ class DelightfulOrganizationEnvDomainService
         if ($data) {
             return new DelightfulEnvironmentEntity(Json::decode($data));
         }
-        // query token whetheralready经bind (call delightful/auth/check)
+        // query token whetheralreadyalreadybind (call delightful/auth/check)
         $tokenDTO = new DelightfulTokenEntity();
         $tokenDTO->setType(DelightfulTokenType::Account);
         $tokenDTO->setToken($tokenDTO->getDelightfulShortToken($authorization));
@@ -175,7 +175,7 @@ class DelightfulOrganizationEnvDomainService
     }
 
     /**
-     * currentenvironmentdefault env configuration. access saas o clockallowfront端not传environment id,usedefaultenvironmentconfiguration.
+     * currentenvironmentdefault env configuration. access saas o clockallowfrontclientnot传environment id,usedefaultenvironmentconfiguration.
      */
     public function getCurrentDefaultDelightfulEnv(): ?DelightfulEnvironmentEntity
     {
@@ -202,7 +202,7 @@ class DelightfulOrganizationEnvDomainService
     }
 
     /**
-     * get所haveorganizationencoding
+     * get haveorganizationencoding
      * @return string[]
      */
     public function getAllOrganizationCodes(): array

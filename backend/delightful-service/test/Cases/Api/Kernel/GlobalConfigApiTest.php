@@ -25,7 +25,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertArrayValueTypesEquals([
             'is_maintenance' => false,
             'maintenance_description' => '',
-        ], $data, 'defaultall局configurationstructurenot符', false, true);
+        ], $data, 'defaultalllocalconfigurationstructurenot符', false, true);
     }
 
     public function testUpdateGlobalConfig(): void
@@ -38,7 +38,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $putResponse = $this->put($this->url, $payload, $this->getCommonHeaders());
         $this->assertSame(1000, $putResponse['code']);
         $putData = $putResponse['data'];
-        $this->assertArrayEquals($payload, $putData, 'PUT returndatanotone致');
+        $this->assertArrayEquals($payload, $putData, 'PUT returndatanotoneto');
 
         // againtime GET verifycacheandpersistence
         $getResponse = $this->get($this->url, [], $this->getCommonHeaders());
@@ -64,12 +64,12 @@ class GlobalConfigApiTest extends AbstractHttpTest
         // passplatformsetinterfaceset
         $this->put('/api/v1/platform/setting', $platformPayload, $this->getCommonHeaders());
 
-        // getall局configuration,shouldcontainplatformset
+        // getalllocalconfiguration,shouldcontainplatformset
         $response = $this->get($this->url, [], $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // verifycontainmaintain模typeconfiguration
+        // verifycontainmaintainmodetypeconfiguration
         $this->assertArrayHasKey('is_maintenance', $data);
         $this->assertArrayHasKey('maintenance_description', $data);
 

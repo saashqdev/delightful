@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_bot_versions', function (Blueprint $table) {
-            // 先will原have instruct fieldrenamefor instructs
+            // firstwilloriginalhave instruct fieldrenamefor instructs
             $table->renameColumn('instruct', 'instructs');
         });
     }
@@ -26,7 +26,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('delightful_bot_versions', function (Blueprint $table) {
-            // rollback操as:will instructs 改return instruct
+            // rollbackoperationas:will instructs changereturn instruct
             $table->renameColumn('instructs', 'instruct');
         });
     }

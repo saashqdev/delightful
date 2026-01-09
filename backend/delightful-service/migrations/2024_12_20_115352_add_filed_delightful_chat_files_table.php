@@ -17,7 +17,7 @@ return new class extends Migration {
         Schema::table('delightful_chat_files', function (Blueprint $table) {
             $table->string('external_url', 1024)
                 ->default('')
-                ->comment('outside链ground址');
+                ->comment('outsidechaingroundaddress');
         });
     }
 

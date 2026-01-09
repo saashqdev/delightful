@@ -29,7 +29,7 @@ function processConfigValue(&$value): void
             processConfigValue($item);
         }
     }
-    // othertype(如 int, bool etc):retain原value,notconductparse
+    // othertype(like int, bool etc):retainoriginalvalue,notconductparse
 }
 
 // handleconfigurationmiddleenvironmentvariable
@@ -240,7 +240,7 @@ return [
                 'connection' => 5.0,  // connecttimeout(second)
                 'write' => 10.0,      // writetimeout(second)
                 'read' => 300.0,      // readtimeout(second)
-                'total' => 350.0,     // 总bodytimeout(second)
+                'total' => 350.0,     // totalbodytimeout(second)
                 'thinking' => 120.0,  // thinktimeout(second)
                 'stream_chunk' => 30.0, // streampiecebetweentimeout(second)
                 'stream_first' => 60.0, // 首streampiecetimeout(second)
@@ -248,18 +248,18 @@ return [
             'custom_error_mapping_rules' => [],
             'logging' => [
                 // logfieldwhitelistsingleconfiguration
-                // iffornullarrayornotconfiguration,thenprint所havefield
-                // ifconfigurationfieldcolumntable,thenonlyprintfinger定field
-                // support嵌setfield,usepointsyntax如 'args.messages'
+                // iffornullarrayornotconfiguration,thenprint havefield
+                // ifconfigurationfieldcolumntable,thenonlyprintfingersetfield
+                // support嵌setfield,usepointsyntaxlike 'args.messages'
                 // notice:messages and tools fieldnotinwhitelistsinglemiddle,notwillbeprint
                 'whitelist_fields' => [
                     // basicrequestinfo
                     'request_id',                  // requestID
                     'model_id',                    // modelID
                     'model',                       // modelname
-                    'duration_ms',                 // request耗o clock
+                    'duration_ms',                 // requestconsumeo clock
                     'url',                         // requestURL
-                    'status_code',                 // responsestatus码
+                    'status_code',                 // responsestatuscode
 
                     // options info
                     'options.headers',
@@ -277,7 +277,7 @@ return [
                     'usage',                       // completeusageobject
                     'usage.input_tokens',          // inputtokenquantity
                     'usage.output_tokens',         // outputtokenquantity
-                    'usage.total_tokens',          // 总tokenquantity
+                    'usage.total_tokens',          // totaltokenquantity
 
                     // requestparameter(rowexceptsensitivecontent)
                     'args.temperature',            // 温degreeparameter
@@ -286,10 +286,10 @@ return [
                     'args.top_p',                  // Top-pparameter
                     'args.top_k',                  // Top-kparameter
                     'args.frequency_penalty',      // frequencypenalty
-                    'args.presence_penalty',       // 存inpenalty
+                    'args.presence_penalty',       // existsinpenalty
                     'args.stream',                 // streamresponseflag
-                    'args.stop',                   // stop词
-                    'args.seed',                   // randomtype子
+                    'args.stop',                   // stopword
+                    'args.seed',                   // randomtypechild
 
                     // Tokenestimateinfo
                     'token_estimate',              // Tokenestimatedetail
@@ -306,7 +306,7 @@ return [
                     'error.message',               // errormessage(notcontainspecificcontent)
 
                     // otheryuandata
-                    'created',                     // createtime戳
+                    'created',                     // createtimestamp
                     'id',                         // requestID
                     'object',                     // objecttype
                     'system_fingerprint',         // systemfinger纹
@@ -321,13 +321,13 @@ return [
                 ],
                 // whetherenablefieldwhitelistsinglefilter,defaulttrue(enablefilter)
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
-                // mostbigstringlengthlimit,超passthislengthstringwillbereplacefor [Long Text],settingfor 0 indicatenotlimit
+                // mostbigstringlengthlimit,exceedspassthislengthstringwillbereplacefor [Long Text],settingfor 0 indicatenotlimit
                 'max_text_length' => env('ODIN_LOG_MAX_TEXT_LENGTH', 0),
             ],
             'network_retry_count' => 1,
         ],
         'models' => $models,
-        // all局model options,canbemodelitself options override
+        // alllocalmodel options,canbemodelitself options override
         'model_options' => [
             'error_mapping_rules' => [
                 // example:customizeerrormapping

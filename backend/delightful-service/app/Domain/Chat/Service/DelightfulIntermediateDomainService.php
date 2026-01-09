@@ -25,7 +25,7 @@ use Throwable;
  */
 class DelightfulIntermediateDomainService extends AbstractDomainService
 {
-    // 超levelMagicinteractionfinger令temporarymessageprocess
+    // exceedslevelMagicinteractionfingercommandtemporarymessageprocess
     /**
      * @throws Throwable
      */
@@ -35,7 +35,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
         DelightfulConversationEntity $userConversationEntity,
     ): void {
         try {
-            // 1. getsend者(currentuser)info
+            // 1. getsendperson(currentuser)info
             $senderUserId = $dataIsolation->getCurrentUserId();
             if (empty($senderUserId)) {
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
@@ -51,7 +51,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
             }
 
-            // 2. get超levelMagic(receive者)info
+            // 2. getexceedslevelMagic(receiveperson)info
             $agentUserId = $messageDTO->getReceiveId();
             $agentUserEntity = $this->delightfulUserRepository->getUserById($agentUserId);
             if (! $agentUserEntity) {
@@ -74,19 +74,19 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
 
             $agentConversationId = $agentConversationEntity->getId();
 
-            // 4. create序column实body (temporarymessagenotneedpersistence序column)
+            // 4. createsequencecolumnactualbody (temporarymessagenotneedpersistencesequencecolumn)
             $seqEntity = new DelightfulSeqEntity();
             $seqEntity->setAppMessageId($messageDTO->getAppMessageId());
             $seqEntity->setConversationId($agentConversationId);
             $seqEntity->setObjectId($agentAccountEntity->getDelightfulId());
             $seqEntity->setContent($messageDTO->getContent());
 
-            // set额outsideinfo (include topicId)
+            // setquotaoutsideinfo (include topicId)
             $seqExtra = new SeqExtra();
             // from messageDTO middleget topicId
             $topicId = $messageDTO->getTopicId() ?? '';
 
-            // if topicId notforempty,verifytopicwhether属atcurrentuser
+            // if topicId notforempty,verifytopicwhetherbelongatcurrentuser
             if (empty($topicId)) {
                 ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
             }
@@ -95,7 +95,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             $seqExtra->setTopicId($topicId);
             $seqEntity->setExtra($seqExtra);
 
-            // 5. createmessage实body (convertDTOforEntity,butnotpersistence)
+            // 5. createmessageactualbody (convertDTOforEntity,butnotpersistence)
             $messageEntity = new DelightfulMessageEntity();
             $messageEntity->setSenderId($messageDTO->getSenderId());
             $messageEntity->setSenderType($messageDTO->getSenderType());
@@ -113,7 +113,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             // temporarymessagemaybenotneedenvironmentID,usedefaultvalue
             $senderExtraDTO->setDelightfulEnvId(null);
 
-            // 7. 触hairusercall超levelMagicevent
+            // 7. touchhairusercallexceedslevelMagicevent
             event_dispatch(new UserCallAgentEvent(
                 $agentAccountEntity,
                 $agentUserEntity,
@@ -135,7 +135,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
     }
 
     /**
-     * verifytopicwhether属atcurrentuser.
+     * verifytopicwhetherbelongatcurrentuser.
      */
     private function validateTopicOwnership(string $topicId, string $conversationId, DataIsolation $dataIsolation): void
     {
@@ -144,13 +144,13 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
         $topicDTO->setTopicId($topicId);
         $topicDTO->setConversationId($conversationId);
 
-        // gettopic实body
+        // gettopicactualbody
         $topicEntity = $this->delightfulChatTopicRepository->getTopicEntity($topicDTO);
         if ($topicEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
         }
 
-        // verifytopicbelong tosessionwhether属atcurrentuser
+        // verifytopicbelong tosessionwhetherbelongatcurrentuser
         $this->checkAndGetSelfConversation($topicEntity->getConversationId(), $dataIsolation);
     }
 }

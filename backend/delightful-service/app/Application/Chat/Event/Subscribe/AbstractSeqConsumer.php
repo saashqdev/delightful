@@ -31,7 +31,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
 {
     use ChatAmqpTrait;
 
-    // 子categoryneedfinger明 topic type
+    // childcategoryneedfinger明 topic type
     protected AmqpTopicType $topic;
 
     protected LoggerInterface $logger;
@@ -40,7 +40,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
      * settingqueueprioritylevelparameter.
      */
     protected AMQPTable|array $arguments = [
-        'x-ha-policy' => ['S', 'all'], // willqueuemirrorto所havesectionpoint,hyperf defaultconfiguration
+        'x-ha-policy' => ['S', 'all'], // willqueuemirrorto havesectionpoint,hyperf defaultconfiguration
     ];
 
     protected MessagePriority $priority;
@@ -92,7 +92,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
 
     protected function setRequestId(string $appMsgId): void
     {
-        // use app_msg_id 做 request_id
+        // use app_msg_id make request_id
         $requestId = empty($appMsgId) ? IdGenerator::getSnowId() : $appMsgId;
         CoContext::setRequestId((string) $requestId);
     }

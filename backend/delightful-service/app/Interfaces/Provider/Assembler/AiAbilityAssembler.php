@@ -42,7 +42,7 @@ class AiAbilityAssembler
         // getoriginalconfiguration
         $config = $entity->getConfig();
 
-        // recursiondesensitize所have api_key field(supportany嵌setstructure)
+        // recursiondesensitize have api_key field(supportany嵌setstructure)
         $maskedConfig = self::maskConfigRecursively($config);
 
         return new AiAbilityDetailDTO(
@@ -73,7 +73,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * AIcan力listDTO转array.
+     * AIcan力listDTOtransferarray.
      *
      * @param array<AiAbilityListDTO> $dtos
      */
@@ -116,7 +116,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * recursiondesensitizeconfigurationmiddle所have api_key field.
+     * recursiondesensitizeconfigurationmiddle have api_key field.
      *
      * @param array $config configurationarray
      * @return array desensitizebackconfigurationarray
@@ -134,7 +134,7 @@ class AiAbilityAssembler
             elseif (is_array($value)) {
                 $result[$key] = self::maskConfigRecursively($value);
             }
-            // othervaluedirectly赋value
+            // othervaluedirectlyassignvalue
             else {
                 $result[$key] = $value;
             }

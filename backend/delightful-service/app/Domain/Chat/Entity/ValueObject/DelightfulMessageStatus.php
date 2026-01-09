@@ -11,10 +11,10 @@ use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 
 enum DelightfulMessageStatus: int
 {
-    // not读
+    // notread
     case Unread = 0;
 
-    // already读
+    // alreadyread
     case Seen = 1;
 
     // alreadyview(non纯textcomplextypemessage,userpoint击detail)

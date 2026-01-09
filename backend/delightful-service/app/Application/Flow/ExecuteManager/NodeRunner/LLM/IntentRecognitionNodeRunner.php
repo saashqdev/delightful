@@ -65,12 +65,12 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
             $childrenNodes[$title] = $branch['next_nodes'] ?? [];
         }
 
-        // at leastis兜bottombranch
+        // at leastisfallbackbottombranch
         $vertexResult->setChildrenIds($elseBranch['next_nodes'] ?? []);
 
         $systemPrompt = $this->createSystemPrompt($intentPrompts);
 
-        // if意graphidentifystartfrom动loadmemory,that么need剔exceptcurrentmessage
+        // if意graphidentifystartfromautoloadmemory,thatwhatneed剔exceptcurrentmessage
         $ignoreMessageIds = [];
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
@@ -105,11 +105,11 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         return <<<MARKDOWN
 '# role
-youisone意graphidentifysectionpoint,useatanalyzeuser意graph,youwilltooneshareuserinputcontent,帮Ianalyzeoutuser意graphandconfidencedegree.
+youisone意graphidentifysectionpoint,useatanalyzeuser意graph,youwilltooneshareuserinputcontent,helpIanalyzeoutuser意graphandconfidencedegree.
 resultneedinqualifier意graphrangemiddle.
 
 # 技can - 意graphidentify
-willyouresponseformat化for JSON object,format如down:
+willyouresponseformat化for JSON object,formatlikedown:
 {
     "whetheridentify": true,
     "identifyfailreason": "",
@@ -133,17 +133,17 @@ willyouresponseformat化for JSON object,format如down:
 }    
 
 # process
-1. youwilltooneshareuserinputcontent,帮Ianalyzeoutuser意graphandconfidencedegree.
-2. inferenceuser意graph,willinferenceprocedure放to JSON middle deduceprocedure field,explainforwhatwilloutthisthese意graphandconfidencedegree.
-3. ifidentifyto意graph,请fill inmost佳matchandmatchto意graph,whetheridentifyfor true,mostbest wishesgraph one定isconfidencedegreemosthigh,itsmiddle matchto意graphhave fieldisaccording to confidencedegree frombigtosmallrowcolumn.
-4. ifincurrentrangenothave找toany意graph,whetheridentifyfor false,请fill inidentifyfailreason,most佳matchandmatchto意graphallshouldisempty.
-5. onlywillreturn JSON format,notwillagainreturnothercontent,ifone定needhavereturn,please releasetoremarkmiddle,return答contentone定canbe JSON toolparse.
+1. youwilltooneshareuserinputcontent,helpIanalyzeoutuser意graphandconfidencedegree.
+2. inferenceuser意graph,willinferenceprocedureputto JSON middle deduceprocedure field,explainforwhatwilloutthisthese意graphandconfidencedegree.
+3. ifidentifyto意graph,pleasefill inmost佳matchandmatchto意graph,whetheridentifyfor true,mostbest wishesgraph onesetisconfidencedegreemosthigh,itsmiddle matchto意graphhave fieldisaccording to confidencedegree frombigtosmallrowcolumn.
+4. ifincurrentrangenothavefindtoany意graph,whetheridentifyfor false,pleasefill inidentifyfailreason,most佳matchandmatchto意graphallshouldisempty.
+5. onlywillreturn JSON format,notwillagainreturnothercontent,ifonesetneedhavereturn,please releasetoremarkmiddle,return答contentonesetcanbe JSON toolparse.
 
 # limit
-- 意graphrangeformatis '意graph':'意graphdescription'.itsmiddle意graphdescriptioncanforempty.意graphand意graphdescriptionone定isuse '' package裹data.
+- 意graphrangeformatis '意graph':'意graphdescription'.itsmiddle意graphdescriptioncanforempty.意graphand意graphdescriptiononesetisuse '' package裹data.
 - notcanreturn答otherissue,onlycanreturnanswer意graphidentifyissue.
 
-# needanalyze意graphrange如down
+# needanalyze意graphrangelikedown
 {$content}
 MARKDOWN;
     }

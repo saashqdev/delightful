@@ -17,8 +17,8 @@ use Yethee\Tiktoken\EncoderProvider;
 class TokenTextSplitter extends TextSplitter
 {
     /**
-     * setmostbigcachetextlength(character数)
-     * 超passthislengthtextwillnotwillbecacheincoroutineupdown文middle.
+     * setmostbigcachetextlength(charactercount)
+     * exceedspassthislengthtextwillnotwillbecacheincoroutineupdowntextmiddle.
      */
     private const int MAX_CACHE_TEXT_LENGTH = 1000;
 
@@ -86,7 +86,7 @@ class TokenTextSplitter extends TextSplitter
     {
         $text = $this->ensureUtf8Encoding($text);
 
-        // saveoriginaltext,useatalso原tag
+        // saveoriginaltext,useatalsooriginaltag
         $originalText = $text;
 
         // 1. original text firstmiddle0x00replacebecome0x000x00
@@ -117,16 +117,16 @@ class TokenTextSplitter extends TextSplitter
             }
         }
 
-        // 4. also原text
-        // 先get所havetag
+        // 4. alsooriginaltext
+        // firstget havetag
         preg_match_all('/<DelightfulCompressibleContent.*?<\/DelightfulCompressibleContent>/s', $originalText, $matches);
         $tags = $matches[0];
         $tagIndex = 0;
 
         return array_map(function ($chunk) use ($tags, &$tagIndex) {
-            // also原0x000x00for0x00
+            // alsooriginal0x000x00for0x00
             $chunk = str_replace("\x00\x00", "\x00", $chunk);
-            // also原tag
+            // alsooriginaltag
             return preg_replace_callback('/\x00/', function () use ($tags, &$tagIndex) {
                 return $tags[$tagIndex++] ?? '';
             }, $chunk);
@@ -172,7 +172,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * usefinger定minuteseparatorsplittext.
+     * usefingersetminuteseparatorsplittext.
      */
     private function splitBySeparator(string $text, string $separator): array
     {
@@ -366,15 +366,15 @@ class TokenTextSplitter extends TextSplitter
     private function getDefaultTokenizer(): callable
     {
         return function (string $text) {
-            // iftextlength超passlimit,directlycalculatenotcache
+            // iftextlengthexceedspasslimit,directlycalculatenotcache
             if (mb_strlen($text) > self::MAX_CACHE_TEXT_LENGTH) {
                 return $this->calculateTokenCount($text);
             }
 
-            // generateupdown文key
+            // generateupdowntextkey
             $contextKey = 'token_count:' . md5($text);
 
-            // tryfromcoroutineupdown文get
+            // tryfromcoroutineupdowntextget
             $count = Context::get($contextKey);
             if ($count !== null) {
                 return $count;
@@ -383,7 +383,7 @@ class TokenTextSplitter extends TextSplitter
             // calculate token quantity
             $count = $this->calculateTokenCount($text);
 
-            // storagetocoroutineupdown文
+            // storagetocoroutineupdowntext
             Context::set($contextKey, $count);
 
             return $count;
@@ -409,7 +409,7 @@ class TokenTextSplitter extends TextSplitter
         // trydetectencoding
         $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], true);
         if ($encoding === false) {
-            // ifno法detecttoencoding,tryuse iconv detect
+            // ifnomethoddetecttoencoding,tryuse iconv detect
             $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], false);
             if ($encoding === false) {
                 return 'UTF-8'; // defaultuse UTF-8

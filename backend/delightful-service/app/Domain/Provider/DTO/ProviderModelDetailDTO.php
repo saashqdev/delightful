@@ -24,7 +24,7 @@ class ProviderModelDetailDTO extends AbstractDTO
 
     protected string $serviceProviderConfigId; // servicequotientconfigurationID
 
-    protected string $modelId = ''; // modeltrue实ID
+    protected string $modelId = ''; // modeltrueactualID
 
     protected string $name;
 
@@ -42,7 +42,7 @@ class ProviderModelDetailDTO extends AbstractDTO
 
     protected Status $status;
 
-    protected ?DisabledByType $disabledBy = null; // disablecome源:official-officialdisable,user-userdisable,NULL-notdisable
+    protected ?DisabledByType $disabledBy = null; // disablecomesource:official-officialdisable,user-userdisable,NULL-notdisable
 
     protected int $beDelightfulDisplayState = 0;
 

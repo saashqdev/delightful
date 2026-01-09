@@ -14,7 +14,7 @@ use Hyperf\Amqp\Annotation\Producer;
 use Hyperf\Amqp\Message\ProducerMessage;
 
 /**
- * messageminutehair模piece,maybeneedaccording tooneseq,generateoneor多seq.
+ * messageminutehairmodepiece,maybeneedaccording tooneseq,generateoneormultipleseq.
  */
 #[Producer]
 class MessageDispatchPublisher extends ProducerMessage

@@ -28,11 +28,11 @@ abstract class AbstractKnowledgeNodeRunner extends NodeRunner
         if ($vectorDatabaseIdComponent) {
             $vectorDatabaseId = $vectorDatabaseIdComponent->getValue()->getResult($executionData->getExpressionFieldData());
             if (is_string($vectorDatabaseId) && ! empty($vectorDatabaseId)) {
-                // ifitselfthenalready经is id ,that么directlyreturn
+                // ifitselfthenalreadyalreadyis id ,thatwhatdirectlyreturn
                 $knowledgeCode = $vectorDatabaseId;
             } elseif (is_array($vectorDatabaseId)) {
-                // thiswithin采use names groupitemshapetype,that么structureisonemulti-select
-                // only取theone id
+                // thiswithin采use names groupitemshapetype,thatwhatstructureisonemulti-select
+                // onlygettheone id
                 $knowledgeCode = $vectorDatabaseId[0]['id'] ?? '';
             }
         }

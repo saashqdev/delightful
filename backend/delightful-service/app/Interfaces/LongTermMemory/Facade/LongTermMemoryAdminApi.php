@@ -33,7 +33,7 @@ use Psr\Log\LoggerInterface;
 use function Hyperf\Translation\trans;
 
 /**
- * long-termmemoryback台manage API.
+ * long-termmemorybackplatformmanage API.
  */
 #[ApiResponse('low_code')]
 class LongTermMemoryAdminApi extends AbstractApi
@@ -71,7 +71,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         $validatedParams = $this->checkParams($params, $rules);
 
-        // hand动checkcontentlength
+        // handautocheckcontentlength
         $contentLength = mb_strlen($validatedParams['content']);
         if ($contentLength > 5000) {
             ExceptionBuilder::throw(
@@ -302,7 +302,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     {
         $authorization = $this->getAuthorization();
 
-        // batchquantityverifymemorywhether属atcurrentuser
+        // batchquantityverifymemorywhetherbelongatcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             [$memoryId],
             $authorization->getOrganizationCode(),
@@ -310,7 +310,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             $authorization->getId()
         );
 
-        // checkwhetherhavenot属atusermemory
+        // checkwhetherhavenotbelongatusermemory
         if (! $allMemoriesBelongToUser) {
             return [
                 'success' => false,
@@ -340,7 +340,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $validatedParams = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
 
-        // batchquantityverify所havememoryall属atcurrentuser
+        // batchquantityverify havememoryallbelongatcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             $validatedParams['memory_ids'],
             $authorization->getOrganizationCode(),
@@ -348,7 +348,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             $authorization->getId()
         );
 
-        // checkwhetherhavenot属atusermemory
+        // checkwhetherhavenotbelongatusermemory
         if (! $allMemoriesBelongToUser) {
             return [
                 'success' => false,
@@ -381,7 +381,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $validatedParams = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
 
-        // batchquantityverify所havememoryall属atcurrentuser
+        // batchquantityverify havememoryallbelongatcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             $validatedParams['memory_ids'],
             $authorization->getOrganizationCode(),
@@ -389,7 +389,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             $authorization->getId()
         );
 
-        // checkwhetherhavenot属atusermemory
+        // checkwhetherhavenotbelongatusermemory
         if (! $allMemoriesBelongToUser) {
             return [
                 'success' => false,
@@ -399,7 +399,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         $action = $validatedParams['action'];
         $memoryIds = $validatedParams['memory_ids'];
-        $scenarioString = $validatedParams['scenario'] ?? 'admin_panel'; // defaultformanageback台
+        $scenarioString = $validatedParams['scenario'] ?? 'admin_panel'; // defaultformanagebackplatform
         $scenario = MemoryOperationScenario::from($scenarioString);
 
         // verifywhen scenario is memory_card_quick o clock,delightful_message_id mustprovide
@@ -412,7 +412,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         try {
             if ($action === 'accept') {
-                // batchquantityacceptmemorysuggestion:status 改for accept,enabled for true
+                // batchquantityacceptmemorysuggestion:status changefor accept,enabled for true
                 $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::ACCEPT, $scenario, $validatedParams['delightful_message_id'] ?? null);
 
                 return [
@@ -423,7 +423,7 @@ class LongTermMemoryAdminApi extends AbstractApi
                     'scenario' => $scenario->value,
                 ];
             }
-            // deletememoryor者rejectupdatememory
+            // deletememoryorpersonrejectupdatememory
             $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::REJECT, $scenario, $validatedParams['delightful_message_id'] ?? null);
 
             return [
@@ -497,7 +497,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * getmemoryhint词.
+     * getmemoryhintword.
      */
     public function getMemoryPrompt(RequestInterface $request): array
     {
@@ -599,7 +599,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             );
         }
 
-        // hand动checkcontentlength
+        // handautocheckcontentlength
         if (isset($validatedParams['content'])) {
             $contentLength = mb_strlen($validatedParams['content']);
             if ($contentLength > 5000) {
@@ -610,7 +610,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             }
         }
 
-        // hand动check pending_content length
+        // handautocheck pending_content length
         if (isset($validatedParams['pending_content'])) {
             $contentLength = mb_strlen($validatedParams['pending_content']);
             if ($contentLength > 5000) {
@@ -625,7 +625,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * verifymemory所have权.
+     * verifymemory have权.
      *
      * @param mixed $authorization
      * @return array{success: bool, message?: string}

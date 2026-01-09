@@ -20,7 +20,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * currentconfigurationversion.
      *
-     * useatconfigurationstructure变moreo clockcompatiblepropertyprocess
+     * useatconfigurationstructurechangemoreo clockcompatiblepropertyprocess
      */
     public const int CURRENT_VERSION = 1;
 
@@ -29,7 +29,7 @@ class RetrieveConfig extends AbstractValueObject
      *
      * optionalvalue:
      * - semantic_search: semanticretrieve
-     * - full_text_search: all文retrieve
+     * - full_text_search: alltextretrieve
      * - hybrid_search: hybridretrieve
      * - graph_search: graphretrieve
      *
@@ -45,7 +45,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * minutethreshold countvalue
      *
-     * onlyreturnsimilardegreeminute数greater thanthe阈valueresult
+     * onlyreturnsimilardegreeminutecountgreater thanthe阈valueresult
      */
     protected float $scoreThreshold = 0.5;
 
@@ -55,11 +55,11 @@ class RetrieveConfig extends AbstractValueObject
     protected bool $scoreThresholdEnabled = false;
 
     /**
-     * 重sort模type.
+     * 重sortmodetype.
      *
      * optionalvalue:
      * - reranking_model: use重sortmodel
-     * - weighted_score: useadd权minute数
+     * - weighted_score: useadd权minutecount
      *
      * @see RerankMode
      */
@@ -106,7 +106,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * configurationversion.
      *
-     * useatconfigurationstructure变moreo clockcompatiblepropertyprocess
+     * useatconfigurationstructurechangemoreo clockcompatiblepropertyprocess
      */
     private int $version = self::CURRENT_VERSION;
 
@@ -205,7 +205,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * get重sort模type.
+     * get重sortmodetype.
      */
     public function getRerankingMode(): string
     {
@@ -213,7 +213,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * set重sort模type.
+     * set重sortmodetype.
      */
     public function setRerankingMode(string $rerankingMode): self
     {
@@ -264,7 +264,7 @@ class RetrieveConfig extends AbstractValueObject
             throw new InvalidArgumentException('Vector setting must contain vector_weight and keyword setting must contain keyword_weight');
         }
 
-        // verify graph_setting mustcontain必wantfield
+        // verify graph_setting mustcontainrequiredwantfield
         if (! isset($weights['graph_setting']['relation_weight'])
             || ! isset($weights['graph_setting']['max_depth'])
             || ! isset($weights['graph_setting']['include_properties'])) {

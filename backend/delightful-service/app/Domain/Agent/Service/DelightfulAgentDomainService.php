@@ -70,7 +70,7 @@ class DelightfulAgentDomainService
             $agent = $this->agentRepository->insert($agentEntity);
             $create = true;
 
-            // createassistanto clockaddsysteminteractionfinger令
+            // createassistanto clockaddsysteminteractionfingercommand
             $this->initSystemInstructs($agent->getOrganizationCode(), $agent->getId(), $agentEntity->getUpdatedUid());
         } else {
             // whethercanmodify
@@ -158,7 +158,7 @@ class DelightfulAgentDomainService
         return $this->agentRepository->isDefaultAssistantConversationExist($userId, $aiCode);
     }
 
-    // quotient业code目frontalsodependency
+    // quotient业codeitemfrontalsodependency
     public function getBotsByOrganization(RequestContext $requestContext, string $agentName, ?string $pageToken = null, int $pageSize = 50, ?string $descriptionKeyword = null): array
     {
         // getdataisolationobjectandgetcurrentorganizationorganizationcode
@@ -170,7 +170,7 @@ class DelightfulAgentDomainService
         // extractenableassistantlistmiddle agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // getfinger定organizationandassistantversionassistantdataanditstotal
+        // getfingersetorganizationandassistantversionassistantdataanditstotal
         $page = ((int) ceil((int) $pageToken / $pageSize)) + 1;
         $agents = $this->agentVersionRepository->getAgentsByOrganization($organizationCode, $agentVersionIds, $page, $pageSize, $agentName, $descriptionKeyword);
 
@@ -180,9 +180,9 @@ class DelightfulAgentDomainService
 
         $agents = DelightfulAgentVersionFactory::toArrays($agents);
 
-        // 收collectionassistantavatarfilekey
+        // receivecollectionassistantavatarfilekey
         $fileKeys = array_column($agents, 'agent_avatar');
-        // 移exceptemptyvalue
+        // moveexceptemptyvalue
         $validFileKeys = array_filter($fileKeys, static fn ($fileKey) => ! empty($fileKey));
 
         // 按organizationminutegroupfileKeys
@@ -222,12 +222,12 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * saveassistantinteractionfinger令.
+     * saveassistantinteractionfingercommand.
      */
     public function updateInstruct(string $organizationCode, string $agentId, array $instructs, string $userId = '', bool $valid = true): array
     {
         if ($valid) {
-            // validationnormalinteractionfinger令
+            // validationnormalinteractionfingercommand
             InstructType::validateInstructs($instructs);
 
             // ensuresysteminteractionfingertoken storagein,ifmissingthensupplement
@@ -244,7 +244,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * queryenterprisedown所haveassistant,itemitemquery:status,createperson,search.
+     * queryenterprisedown haveassistant,itemitemquery:status,createperson,search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
@@ -258,7 +258,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * getenterprisedown所haveassistantcreate者.
+     * getenterprisedown haveassistantcreateperson.
      * @return array<string>
      */
     public function getOrganizationAgentsCreators(string $organizationCode): array
@@ -267,7 +267,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * initializesysteminteractionfinger令.
+     * initializesysteminteractionfingercommand.
      */
     private function initSystemInstructs(string $organizationCode, string $agentId, string $userId): void
     {

@@ -19,7 +19,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Hyperf\Codec\Json;
 
 /**
- * 账number收itembox sequencecolumnnumbertable,each账number所havemessagemustsingleincrement.
+ * accountnumberreceiveitembox sequencecolumnnumbertable,eachaccountnumber havemessagemustsingleincrement.
  */
 final class DelightfulSeqEntity extends AbstractEntity
 {
@@ -29,16 +29,16 @@ final class DelightfulSeqEntity extends AbstractEntity
 
     protected ConversationType $objectType;
 
-    // object_type for0or者1o clock,thisprocess generationtable delightful_id
+    // object_type for0orperson1o clock,thisprocess generationtable delightful_id
     protected string $objectId = '';
 
     protected string $seqId = '';
 
-    // 序columnnumbertype
+    // sequencecolumnnumbertype
     protected ChatMessageType|ControlMessageType $seqType;
 
     /**
-     * 序columnnumbercontent.
+     * sequencecolumnnumbercontent.
      */
     protected MessageInterface $content;
 
@@ -288,7 +288,7 @@ final class DelightfulSeqEntity extends AbstractEntity
         if (is_string($receiveList) && $receiveList !== '') {
             $receiveList = Json::decode($receiveList);
         }
-        // toat收itempersoncome说,notneedrecordmessagereceivepersonlist
+        // toatreceiveitempersoncomesay,notneedrecordmessagereceivepersonlist
         if (empty($receiveList)) {
             $receiveListObj = null;
         } elseif (is_array($receiveList)) {
@@ -355,7 +355,7 @@ final class DelightfulSeqEntity extends AbstractEntity
 
     public function canTriggerFlow(): bool
     {
-        // ifischatmessage,or者isaddgood友/opensessionwindowcontrolmessage,thencan触hair flow
+        // ifischatmessage,orpersonisaddgoodfriend/opensessionwindowcontrolmessage,thencantouchhair flow
         return $this->seqType instanceof ChatMessageType || in_array($this->seqType, [ControlMessageType::AddFriendSuccess, ControlMessageType::OpenConversation], true);
     }
 }

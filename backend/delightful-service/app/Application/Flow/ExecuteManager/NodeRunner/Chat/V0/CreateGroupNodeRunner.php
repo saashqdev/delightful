@@ -68,7 +68,7 @@ class CreateGroupNodeRunner extends NodeRunner
         }
         $vertexResult->addDebugLog('group_owner_delightful_id', $groupOwnerInfo->getDelightfulId());
 
-        // 群member,allisuser ID
+        // groupmember,allisuser ID
         $groupMembers = $paramsConfig->getGroupMembers()?->getValue()->getResult($executionData->getExpressionFieldData());
         $groupMemberIds = [];
         foreach ($groupMembers as $groupMember) {
@@ -123,12 +123,12 @@ class CreateGroupNodeRunner extends NodeRunner
         $delightfulGroupDTO->setGroupType($groupType);
         $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
 
-        // pass conversationID getcome源 and assistant key,andcreategroup chat
+        // pass conversationID getcomesource and assistant key,andcreategroup chat
         $agentKey = $executionData->getTriggerData()->getAgentKey();
         $this->createChatGroup($agentKey, $groupMemberIds, $ownerAuthorization, $delightfulGroupDTO);
 
         if (! empty($assistantOpeningSpeech)) {
-            // 助handsendgroup chatmessage
+            // helphandsendgroup chatmessage
             $assistantMessage = new TextMessage(['content' => $assistantOpeningSpeech]);
             $appMessageId = IdGenerator::getUniqueId32();
             $receiveSeqDTO = new DelightfulSeqEntity();

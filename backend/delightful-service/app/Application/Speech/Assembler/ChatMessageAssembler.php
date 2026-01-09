@@ -35,7 +35,7 @@ readonly class ChatMessageAssembler
      */
     public function buildSummaryMessage(ProcessSummaryTaskDTO $dto, AsrFileDataDTO $audioFileData, ?AsrFileDataDTO $noteFileData = null): ChatRequest
     {
-        // incoroutineenvironmentmiddle,use di() get translator instancebyensurecoroutineupdown文correct
+        // incoroutineenvironmentmiddle,use di() get translator instancebyensurecoroutineupdowntextcorrect
         $translator = di(TranslatorInterface::class);
         $translator->setLocale(CoContext::getLanguage());
         // buildmessagecontent
@@ -70,12 +70,12 @@ readonly class ChatMessageAssembler
      */
     public function buildMessageContent(string $modelId, AsrFileDataDTO $fileData, ?AsrFileDataDTO $noteData = null): array
     {
-        // incoroutineenvironmentmiddle,use di() get translator instancebyensurecoroutineupdown文correct
+        // incoroutineenvironmentmiddle,use di() get translator instancebyensurecoroutineupdowntextcorrect
         $translator = di(TranslatorInterface::class);
         $translator->setLocale(CoContext::getLanguage());
         // buildmessagecontent
         if ($noteData !== null && ! empty($noteData->fileName) && ! empty($noteData->filePath)) {
-            // havenoteo clockmessagecontent:meanwhile提torecordingfileandnotefile
+            // havenoteo clockmessagecontent:meanwhilesubmittorecordingfileandnotefile
 
             $messageContent = [
                 [
@@ -112,7 +112,7 @@ readonly class ChatMessageAssembler
                 ],
             ];
         } else {
-            // nonoteo clockmessagecontent:only提torecordingfile
+            // nonoteo clockmessagecontent:onlysubmittorecordingfile
             $messageContent = [
                 [
                     'type' => 'text',

@@ -12,7 +12,7 @@ use Hyperf\Amqp\Annotation\Producer;
 use Hyperf\Amqp\Message\ProducerMessage;
 
 /**
- * initializedefault助handconversationminutehair模piece.
+ * initializedefaulthelphandconversationminutehairmodepiece.
  */
 #[Producer(exchange: 'init_default_assistant_conversation', routingKey: 'init_default_assistant_conversation')]
 class InitDefaultAssistantConversationDispatchPublisher extends ProducerMessage

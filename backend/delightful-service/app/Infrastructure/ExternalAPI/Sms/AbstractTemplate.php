@@ -12,17 +12,17 @@ use App\Infrastructure\ExternalAPI\Sms\Enum\LanguageEnum;
 abstract class AbstractTemplate implements TemplateInterface
 {
     /**
-     * short信typeandtemplateidmappingclose系.
+     * shortmessagetypeandtemplateidmappingclose系.
      */
     protected array $typeToIdMap = [];
 
     /**
-     * according toshort信type,conductvariableshort信adapt,alsooriginal completeitemshort信textcontent.
+     * according toshortmessagetype,conductvariableshortmessageadapt,alsooriginal completeitemshortmessagetextcontent.
      */
     protected array $typeContents = [];
 
     /**
-     * according totemplateid,conductvariableshort信adapt,alsooriginal completeitemshort信textcontent.
+     * according totemplateid,conductvariableshortmessageadapt,alsooriginal completeitemshortmessagetextcontent.
      */
     protected array $idContents = [];
 
@@ -61,7 +61,7 @@ abstract class AbstractTemplate implements TemplateInterface
             return $messages;
         }
         $variables = [];
-        // template$contentmiddlenot存in "${xxx}" or者 {$xxx) typecharacter.then按indexordermatch
+        // template$contentmiddlenotexistsin "${xxx}" orperson {$xxx) typecharacter.then按indexordermatch
         foreach ($matches[1] as $index => $variableKey) {
             if (isset($messages[$variableKey])) {
                 $variables[$variableKey] = $messages[$variableKey];
@@ -73,7 +73,7 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
-     * according toshort信type,returntypesupport语typelist.
+     * according toshortmessagetype,returntypesupportlanguagetypelist.
      * @return string[]
      */
     public function getTemplateLanguagesByType(string $type): array
@@ -91,13 +91,13 @@ abstract class AbstractTemplate implements TemplateInterface
             $sign = $this->getTemplateDefaultSignType($sign);
         }
         if (empty($this->signMap[$sign])) {
-            // signaturetypenot存in,directlyreturn
+            // signaturetypenotexistsin,directlyreturn
             return $sign;
         }
 
-        // certainsignature语type,needfrom userfingerattributivetype,userfingerfixedbottom语type,systemdefault兜bottom语type middlecertainoutcomeonevalue
+        // certainsignaturelanguagetype,needfrom userfingerattributivetype,userfingerfixedbottomlanguagetype,systemdefaultfallbackbottomlanguagetype middlecertainoutcomeonevalue
         $signLanguage = null;
-        // 语type兜bottomorder
+        // languagetypefallbackbottomorder
         $defaultLanguages = [$language, $defaultLanguage, LanguageEnum::EN_US, LanguageEnum::ZH_CN];
         foreach ($defaultLanguages as $value) {
             if (isset($this->signMap[$sign][$value])) {
@@ -105,7 +105,7 @@ abstract class AbstractTemplate implements TemplateInterface
                 break;
             }
         }
-        // if $sign in $defaultLanguages not存invalue,thengiveonetypesupport语type
+        // if $sign in $defaultLanguages notexistsinvalue,thengiveonetypesupportlanguagetype
         $firstLanguage = null;
         if (isset($this->signMap[$sign]) && is_array($this->signMap[$sign])) {
             $firstLanguage = array_key_first($this->signMap[$sign]);
@@ -115,7 +115,7 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
-     * whenpass insignaturetypenot存ino clock,getshort信defaultsignaturetype.
+     * whenpass insignaturetypenotexistsino clock,getshortmessagedefaultsignaturetype.
      */
     abstract protected function getTemplateDefaultSignType(string $sign): string;
 

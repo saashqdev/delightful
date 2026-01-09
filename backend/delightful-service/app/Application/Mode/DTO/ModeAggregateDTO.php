@@ -68,7 +68,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 移exceptminutegroupaggregateroot.
+     * moveexceptminutegroupaggregateroot.
      */
     public function removeGroupAggregateByGroupId(string $groupId): void
     {
@@ -80,7 +80,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * get所havemodelID.
+     * get havemodelID.
      *
      * @return string[]
      */
@@ -102,7 +102,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * get总modelquantity.
+     * gettotalmodelquantity.
      */
     public function getTotalModelCount(): int
     {

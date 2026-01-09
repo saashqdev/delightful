@@ -24,8 +24,8 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property int $doc_type documenttype
  * @property array $doc_metadata documentyuandata
  * @property DocumentFileInterface $document_file documentfileinfo
- * @property string $third_platform_type thethree方platformtype
- * @property string $third_file_id thethree方fileID
+ * @property string $third_platform_type thethreesideplatformtype
+ * @property string $third_file_id thethreesidefileID
  * @property int $sync_status syncstatus
  * @property int $sync_times synccount
  * @property string $sync_status_message syncstatusmessage
@@ -35,8 +35,8 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property array $fragment_config slicesegmentconfiguration
  * @property array $embedding_config embeddingconfiguration
  * @property array $vector_db_config toquantitydatabaseconfiguration
- * @property string $created_uid create者UID
- * @property string $updated_uid update者UID
+ * @property string $created_uid createpersonUID
+ * @property string $updated_uid updatepersonUID
  * @property string $created_at createtime
  * @property string $updated_at updatetime
  * @property null|string $deleted_at deletetime
@@ -53,12 +53,12 @@ class KnowledgeBaseDocumentModel extends Model
     public bool $incrementing = true;
 
     /**
-     * table名.
+     * tablename.
      */
     protected ?string $table = 'knowledge_base_documents';
 
     /**
-     * primary key名.
+     * primary keyname.
      */
     protected string $primaryKey = 'id';
 

@@ -232,7 +232,7 @@ class DelightfulAgentApi extends AbstractApi
 
         if ($result['is_add_friend']) {
             $friendId = $userEntity->getUserId();
-            // addgood友,assistantdefaultagreegood友
+            // addgoodfriend,assistantdefaultagreegoodfriend
             $this->userAppService->addFriend($authorization, $friendId, AddFriendType::PASS);
         }
         return $result;
@@ -301,7 +301,7 @@ class DelightfulAgentApi extends AbstractApi
         $aiCode = $delightfulAgentVersionEntity->getFlowCode();
         $userEntity = $this->accountAppService->aiRegister($userDTO, $authorization, $aiCode);
         $friendId = $userEntity->getUserId();
-        // addgood友,assistantdefaultagreegood友
+        // addgoodfriend,assistantdefaultagreegoodfriend
         $this->userAppService->addFriend($authorization, $friendId, AddFriendType::PASS);
 
         return $userEntity;
@@ -327,13 +327,13 @@ class DelightfulAgentApi extends AbstractApi
         return $delightfulAgentVersionEntity->toArray();
     }
 
-    // getinteractionfinger令type
+    // getinteractionfingercommandtype
     public function getInstructTypeOptions()
     {
         return InstructType::getTypeOptions();
     }
 
-    // getinteractionfinger令grouptype
+    // getinteractionfingercommandgrouptype
     public function getInstructGroupTypeOptions()
     {
         return InstructGroupPosition::getTypeOptions();
@@ -363,7 +363,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->saveInstruct($authenticatable, $agentId, $instructs);
     }
 
-    // getchat模typecanuseassistantlist
+    // getchatmodetypecanuseassistantlist
     public function getChatModeAvailableAgents()
     {
         /** @var DelightfulUserAuthorization $authenticatable */

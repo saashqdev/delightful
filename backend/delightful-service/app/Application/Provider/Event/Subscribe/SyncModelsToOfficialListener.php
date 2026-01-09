@@ -19,8 +19,8 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * 同modeltoOfficialservicequotientlisten器.
- * listenservicequotientconfigurationcreate/updateevent,fromoutside部APIpullmodeland同toOfficialservicequotient.
+ * samemodeltoOfficialservicequotientlistendevice.
+ * listenservicequotientconfigurationcreate/updateevent,fromoutside部APIpullmodelandsametoOfficialservicequotient.
  */
 #[AsyncListener]
 #[Listener]
@@ -53,7 +53,7 @@ class SyncModelsToOfficialListener implements ListenerInterface
                 default => null,
             };
         } catch (Throwable $e) {
-            $this->logger->error('fromoutside部API同modelfailed', [
+            $this->logger->error('fromoutside部APIsamemodelfailed', [
                 'event' => get_class($event),
                 'error' => $e->getMessage(),
                 'file' => $e->getFile(),
@@ -65,14 +65,14 @@ class SyncModelsToOfficialListener implements ListenerInterface
 
     /**
      * processservicequotientconfigurationcreateorupdateevent.
-     * ifisOfficialservicequotientandisofficialorganization,thenfromoutside部APIpullmodeland同.
+     * ifisOfficialservicequotientandisofficialorganization,thenfromoutside部APIpullmodelandsame.
      */
     private function handleProviderConfig(
         ProviderConfigCreatedEvent|ProviderConfigUpdatedEvent $event,
         ProviderModelSyncAppService $syncService,
         string $action
     ): void {
-        $this->logger->info("收toservicequotientconfiguration{$action}event", [
+        $this->logger->info("receivetoservicequotientconfiguration{$action}event", [
             'config_id' => $event->providerConfigEntity->getId(),
             'organization_code' => $event->organizationCode,
             'action' => $action,

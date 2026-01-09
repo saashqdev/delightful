@@ -15,10 +15,10 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_api_msg_logs', function (Blueprint $table) {
-            $table->integer('prompt_tokens')->default(0)->comment('prompt词token数');
-            $table->integer('completion_tokens')->default(0)->comment('completecontenttoken数');
-            $table->integer('cache_write_tokens')->default(0)->comment('writecachetoken数');
-            $table->integer('cache_read_tokens')->default(0)->comment('fromcachereadtoken数');
+            $table->integer('prompt_tokens')->default(0)->comment('promptwordtokencount');
+            $table->integer('completion_tokens')->default(0)->comment('completecontenttokencount');
+            $table->integer('cache_write_tokens')->default(0)->comment('writecachetokencount');
+            $table->integer('cache_read_tokens')->default(0)->comment('fromcachereadtokencount');
         });
     }
 

@@ -38,12 +38,12 @@ readonly class AsrValidationService
     }
 
     /**
-     * verifyprojectpermission - ensureproject属atcurrentuserandorganization.
+     * verifyprojectpermission - ensureprojectbelongatcurrentuserandorganization.
      *
      * @param string $projectId projectID
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
-     * @return ProjectEntity project实body
+     * @return ProjectEntity projectactualbody
      */
     public function validateProjectAccess(string $projectId, string $userId, string $organizationCode): ProjectEntity
     {
@@ -54,12 +54,12 @@ readonly class AsrValidationService
                 ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND);
             }
 
-            // validationprojectwhether属atcurrentorganization
+            // validationprojectwhetherbelongatcurrentorganization
             if ($projectEntity->getUserOrganizationCode() !== $organizationCode) {
                 ExceptionBuilder::throw(AsrErrorCode::ProjectAccessDeniedOrganization);
             }
 
-            // validationprojectwhether属atcurrentuser
+            // validationprojectwhetherbelongatcurrentuser
             if ($projectEntity->getUserId() === $userId) {
                 return $projectEntity;
             }
@@ -69,7 +69,7 @@ readonly class AsrValidationService
                 return $projectEntity;
             }
 
-            // checkuser所indepartmentwhetherhaveprojectpermission
+            // checkuser indepartmentwhetherhaveprojectpermission
             $dataIsolation = DataIsolation::create($organizationCode, $userId);
             $departmentIds = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserId($dataIsolation, $userId, true);
 
@@ -77,7 +77,7 @@ readonly class AsrValidationService
                 return $projectEntity;
             }
 
-            // 所havepermissioncheckallfail
+            //  havepermissioncheckallfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessDeniedUser);
         } catch (BusinessException $e) {
             // process ExceptionBuilder::throw throwbusinessexception
@@ -85,14 +85,14 @@ readonly class AsrValidationService
                 ExceptionBuilder::throw(AsrErrorCode::ProjectNotFound);
             }
             if ($e->getCode() >= 43000 && $e->getCode() < 44000) {
-                // already经is AsrErrorCode,directly重newthrow
+                // alreadyalreadyis AsrErrorCode,directly重newthrow
                 throw $e;
             }
 
             // otherbusinessexceptionconvertforpermissionverifyfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         } catch (Throwable $e) {
-            // otherexception统oneprocessforpermissionverifyfail
+            // otherexception統oneprocessforpermissionverifyfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         }
     }
@@ -102,7 +102,7 @@ readonly class AsrValidationService
      *
      * @param int $topicId topicID
      * @param string $userId userID
-     * @return TopicEntity topic实body
+     * @return TopicEntity topicactualbody
      */
     public function validateTopicOwnership(int $topicId, string $userId): TopicEntity
     {
@@ -112,7 +112,7 @@ readonly class AsrValidationService
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND);
         }
 
-        // verifytopic属atcurrentuser
+        // verifytopicbelongatcurrentuser
         if ($topicEntity->getUserId() !== $userId) {
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND);
         }

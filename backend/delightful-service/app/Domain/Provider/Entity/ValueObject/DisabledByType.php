@@ -10,5 +10,5 @@ namespace App\Domain\Provider\Entity\ValueObject;
 enum DisabledByType: string
 {
     case OFFICIAL = 'OFFICIAL'; // 官方禁用
-    case USER = 'USER'; // 用户禁用
+    case USER = 'USER'; // user禁用
 }

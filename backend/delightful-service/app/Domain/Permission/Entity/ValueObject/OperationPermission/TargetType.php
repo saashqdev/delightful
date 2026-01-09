@@ -13,7 +13,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 enum TargetType: int
 {
     /**
-     * 用户.
+     * user.
      */
     case UserId = 1;
 

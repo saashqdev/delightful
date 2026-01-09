@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\Kernel\Enum;
 
 /**
- * Delightful 组织管理员资源.
+ * Delightful 组织管理员资source.
  */
 enum DelightfulAdminResourceEnum: string
 {

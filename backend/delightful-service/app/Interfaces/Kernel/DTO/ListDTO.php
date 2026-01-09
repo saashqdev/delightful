@@ -18,7 +18,7 @@ class ListDTO extends AbstractDTO
     }
 
     /**
-     * 获取列表数据.
+     * 获取列表data.
      */
     public function getList(): array
     {
@@ -26,7 +26,7 @@ class ListDTO extends AbstractDTO
     }
 
     /**
-     * 设置列表数据.
+     * 设置列表data.
      */
     public function setList(array $list): self
     {

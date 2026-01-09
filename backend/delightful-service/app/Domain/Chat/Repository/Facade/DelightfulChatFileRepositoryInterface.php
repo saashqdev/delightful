@@ -11,7 +11,7 @@ use App\Domain\Chat\Entity\DelightfulChatFileEntity;
 
 interface DelightfulChatFileRepositoryInterface
 {
-    // 用户上传了文件
+    // user上传了文件
     public function uploadFile(DelightfulChatFileEntity $delightfulFileDTO): DelightfulChatFileEntity;
 
     /**

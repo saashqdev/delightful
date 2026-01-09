@@ -12,10 +12,10 @@ class StartApprovalDTO extends AbstractFlowDTO
     // 审批模板编码
     public string $templateCode = '';
 
-    // 审批表单数据
+    // 审批表单data
     public array $formData = [];
 
-    // 审批流数据
+    // 审批流data
     public array $approvalData = [];
 
     // 部门ID

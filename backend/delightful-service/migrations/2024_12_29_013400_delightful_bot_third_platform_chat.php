@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('key', 64)->comment('唯一标识')->unique();
             $table->string('type', 64)->default('')->comment('平台类型');
             $table->boolean('enabled')->default(true)->comment('是否启用');
-            $table->text('options')->comment('配置');
+            $table->text('options')->comment('configuration');
             $table->softDeletes();
         });
     }

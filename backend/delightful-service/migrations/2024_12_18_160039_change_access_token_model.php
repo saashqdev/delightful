@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_api_access_tokens', function (Blueprint $table) {
-            $table->string('user_id')->default('')->comment('用户id')->change();
+            $table->string('user_id')->default('')->comment('userid')->change();
             $table->string('type', 20)->default('user')->comment('类型')->after('access_token');
             $table->string('relation_id', 255)->default('')->comment('关联ID')->after('type');
             $table->string('description', 255)->default('')->comment('描述');

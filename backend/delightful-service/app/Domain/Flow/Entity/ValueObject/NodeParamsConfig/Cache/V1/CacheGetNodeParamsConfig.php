@@ -81,7 +81,7 @@ class CacheGetNodeParamsConfig extends NodeParamsConfig
             "type": "string",
             "key": "value",
             "sort": 0,
-            "title": "数据值",
+            "title": "data值",
             "description": "",
             "items": null,
             "properties": null,

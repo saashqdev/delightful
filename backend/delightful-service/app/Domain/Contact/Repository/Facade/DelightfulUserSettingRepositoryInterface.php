@@ -24,12 +24,12 @@ interface DelightfulUserSettingRepositoryInterface
     public function getByDelightfulId(string $delightfulId, string $key): ?DelightfulUserSettingEntity;
 
     /**
-     * 全局配置：organization_code/user_id/delightful_id 全部为 null.
+     * 全局configuration：organization_code/user_id/delightful_id 全部为 null.
      */
     public function getGlobal(string $key): ?DelightfulUserSettingEntity;
 
     /**
-     * 保存全局配置。
+     * 保存全局configuration。
      */
     public function saveGlobal(DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity;
 

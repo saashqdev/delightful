@@ -29,10 +29,10 @@ class OrganizationMiddleware implements MiddlewareInterface
         }
 
         $requestContext = RequestContext::getRequestContext($request);
-        // todo 获取用户id
+        // todo 获取userid
         $userId = $requestContext->getUserId();
 
-        // todo 检查用户是否在当前组织
+        // todo 检查user是否在当前组织
         //        $this->userAppService->assertUserInCurrentOrganization($requestContext, $organizationCode);
         $requestContext->setOrganizationCode($organizationCode);
         return $handler->handle($request);

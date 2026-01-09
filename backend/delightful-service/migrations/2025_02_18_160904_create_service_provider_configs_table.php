@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('service_provider_id')->comment('服务商ID');
             $table->string('organization_code', 50)->comment('组织编码');
-            $table->longText('config')->nullable()->comment('配置信息JSON');
+            $table->longText('config')->nullable()->comment('configurationinformationJSON');
             $table->tinyInteger('status')->default(0)->comment('状态：0-未启用，1-启用');
             $table->timestamps();
             $table->softDeletes();

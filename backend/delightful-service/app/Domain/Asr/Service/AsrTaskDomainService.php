@@ -13,8 +13,8 @@ use App\Domain\Asr\Repository\AsrTaskRepository;
 use Hyperf\Redis\Redis;
 
 /**
- * ASR 任务领域服务
- * 负责 ASR 任务状态的业务逻辑.
+ * ASR task domain service
+ * Responsible for ASR task status business logic.
  */
 readonly class AsrTaskDomainService
 {
@@ -25,10 +25,10 @@ readonly class AsrTaskDomainService
     }
 
     /**
-     * 保存任务状态.
+     * Save task status.
      *
-     * @param AsrTaskStatusDTO $taskStatus 任务状态 DTO
-     * @param int $ttl 过期时间（秒），默认 7 天
+     * @param AsrTaskStatusDTO $taskStatus task status DTO
+     * @param int $ttl expiration time (seconds), default 7 days
      */
     public function saveTaskStatus(AsrTaskStatusDTO $taskStatus, int $ttl = 604800): void
     {
@@ -36,11 +36,11 @@ readonly class AsrTaskDomainService
     }
 
     /**
-     * 根据任务键和用户ID查询任务状态.
+     * Query task status by task key and user ID.
      *
-     * @param string $taskKey 任务键
-     * @param string $userId 用户ID
-     * @return null|AsrTaskStatusDTO 任务状态 DTO，不存在时返回 null
+     * @param string $taskKey task key
+     * @param string $userId user ID
+     * @return null|AsrTaskStatusDTO task status DTO, return null if not exists
      */
     public function findTaskByKey(string $taskKey, string $userId): ?AsrTaskStatusDTO
     {
@@ -48,10 +48,10 @@ readonly class AsrTaskDomainService
     }
 
     /**
-     * 删除心跳 Key.
+     * Delete heartbeat key.
      *
-     * @param string $taskKey 任务键
-     * @param string $userId 用户ID
+     * @param string $taskKey task key
+     * @param string $userId user ID
      */
     public function deleteTaskHeartbeat(string $taskKey, string $userId): void
     {
@@ -59,12 +59,12 @@ readonly class AsrTaskDomainService
     }
 
     /**
-     * 原子操作：保存任务状态并设置心跳
-     * 使用 Redis MULTI/EXEC 确保原子性.
+     * Atomic operation: save task status and set heartbeat
+     * Use Redis MULTI/EXEC to ensure atomicity.
      *
-     * @param AsrTaskStatusDTO $taskStatus 任务状态 DTO
-     * @param int $taskTtl 任务状态过期时间（秒），默认 7 天
-     * @param int $heartbeatTtl 心跳过期时间（秒），默认 5 分钟
+     * @param AsrTaskStatusDTO $taskStatus task status DTO
+     * @param int $taskTtl task status expiration time (seconds), default 7 days
+     * @param int $heartbeatTtl heartbeat expiration time (seconds), default 5 minutes
      */
     public function saveTaskStatusWithHeartbeat(
         AsrTaskStatusDTO $taskStatus,
@@ -73,7 +73,7 @@ readonly class AsrTaskDomainService
     ): void {
         [$taskKey, $heartbeatKey] = $this->getRedisKeys($taskStatus);
 
-        // 使用 MULTI/EXEC 确保原子性
+        // Use MULTI/EXEC to ensure atomicity
         $this->redis->multi();
         $this->redis->hMSet($taskKey, $taskStatus->toArray());
         $this->redis->expire($taskKey, $taskTtl);
@@ -82,11 +82,11 @@ readonly class AsrTaskDomainService
     }
 
     /**
-     * 原子操作：保存任务状态并删除心跳
-     * 使用 Redis MULTI/EXEC 确保原子性.
+     * Atomic operation: save task status and delete heartbeat
+     * Use Redis MULTI/EXEC to ensure atomicity.
      *
-     * @param AsrTaskStatusDTO $taskStatus 任务状态 DTO
-     * @param int $taskTtl 任务状态过期时间（秒），默认 7 天
+     * @param AsrTaskStatusDTO $taskStatus task status DTO
+     * @param int $taskTtl task status expiration time (seconds), default 7 days
      */
     public function saveTaskStatusAndDeleteHeartbeat(
         AsrTaskStatusDTO $taskStatus,
@@ -94,7 +94,7 @@ readonly class AsrTaskDomainService
     ): void {
         [$taskKey, $heartbeatKey] = $this->getRedisKeys($taskStatus);
 
-        // 使用 MULTI/EXEC 确保原子性
+        // Use MULTI/EXEC to ensure atomicity
         $this->redis->multi();
         $this->redis->hMSet($taskKey, $taskStatus->toArray());
         $this->redis->expire($taskKey, $taskTtl);
@@ -103,10 +103,10 @@ readonly class AsrTaskDomainService
     }
 
     /**
-     * 生成 Redis 键（任务状态和心跳）.
+     * Generate Redis keys (task status and heartbeat).
      *
-     * @param AsrTaskStatusDTO $taskStatus 任务状态 DTO
-     * @return array{0: string, 1: string} [任务键, 心跳键]
+     * @param AsrTaskStatusDTO $taskStatus task status DTO
+     * @return array{0: string, 1: string} [task key, heartbeat key]
      */
     private function getRedisKeys(AsrTaskStatusDTO $taskStatus): array
     {

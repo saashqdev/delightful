@@ -90,7 +90,7 @@
     parentElement.style.width = '100%';          // Parent element fills available width
   }
 
-  // 设置目标元素自身样式
+  // Set target element's own style
   Object.assign(contentElement.style, {
     display: 'block',
     width: '90%',            // Slightly wider to accommodate parent element left/right padding

@@ -47,7 +47,7 @@ class OfficialAccessTokenInitializer
                 $application = new ApplicationEntity();
                 $application->setCode(ModelGatewayOfficialApp::APP_CODE);
                 $application->setName('灯塔引擎');
-                $application->setDescription('灯塔引擎官方应用');
+                $application->setDescription('灯塔引擎官方application');
                 $application->setOrganizationCode($orgCode);
                 $application->setCreator('system');
                 $application = $applicationDomainService->save($llmDataIsolation, $application);

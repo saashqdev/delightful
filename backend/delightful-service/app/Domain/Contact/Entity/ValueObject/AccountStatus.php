@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * 用户状态
+ * user状态
  */
 enum AccountStatus: int
 {

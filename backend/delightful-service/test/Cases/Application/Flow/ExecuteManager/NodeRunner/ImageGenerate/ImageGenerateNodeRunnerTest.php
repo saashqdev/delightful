@@ -116,7 +116,7 @@ JSON, true));
                 "type": "array",
                 "key": "images",
                 "sort": 0,
-                "title": "图片数据",
+                "title": "图片data",
                 "description": "",
                 "items": {
                     "type": "string",
@@ -244,7 +244,7 @@ JSON, true));
                 "type": "array",
                 "key": "images",
                 "sort": 0,
-                "title": "图片数据",
+                "title": "图片data",
                 "description": "",
                 "items": {
                     "type": "string",

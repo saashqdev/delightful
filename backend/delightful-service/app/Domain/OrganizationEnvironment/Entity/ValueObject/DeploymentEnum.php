@@ -15,7 +15,7 @@ enum DeploymentEnum: string
     // 国际 saas
     case InternationalSaaS = 'international_saas';
 
-    // 开源
+    // 开source
     case OpenSource = 'open_source';
 
     // 未知

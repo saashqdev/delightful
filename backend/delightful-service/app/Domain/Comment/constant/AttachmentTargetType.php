@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Comment\constant;
 
 /**
- * 附件来源.
+ * 附件来source.
  */
 class AttachmentTargetType
 {

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * 用户查询类型。
+ * user查询类型。
  */
 enum UserQueryType: int
 {

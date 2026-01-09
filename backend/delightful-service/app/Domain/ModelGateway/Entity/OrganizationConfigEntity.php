@@ -15,8 +15,8 @@ class OrganizationConfigEntity extends AbstractEntity
     protected ?int $id = null;
 
     /**
-     * 目前只有应用具有组织.
-     * 所属应用 code.
+     * 目前只有application具有组织.
+     * 所属application code.
      */
     protected string $appCode;
 

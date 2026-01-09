@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('service_provider_models', function (Blueprint $table) {
-            $table->json('visible_packages')->nullable()->comment('可见套餐配置');
+            $table->json('visible_packages')->nullable()->comment('可见套餐configuration');
         });
     }
 };

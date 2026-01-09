@@ -286,7 +286,7 @@ class DelightfulFlowAIModelEntity extends AbstractEntity
         if (! is_null($this->actualImplementationConfig)) {
             return $this->actualImplementationConfig;
         }
-        // 从配置中获取实际的配置
+        // 从configuration中获取实际的configuration
         $configs = [];
         foreach ($this->implementationConfig as $index => $item) {
             $item = explode('|', $item);

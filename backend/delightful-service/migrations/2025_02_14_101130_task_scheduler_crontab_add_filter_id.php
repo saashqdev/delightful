@@ -18,7 +18,7 @@ class TaskSchedulerCrontabAddFilterId extends Migration
     public function up(): void
     {
         Schema::table(config('task_scheduler.table_names.task_scheduler_crontab', 'task_scheduler_crontab'), function (Blueprint $table) {
-            $table->string('filter_id', 255)->default('')->comment('过滤数据的id');
+            $table->string('filter_id', 255)->default('')->comment('过滤data的id');
         });
     }
 

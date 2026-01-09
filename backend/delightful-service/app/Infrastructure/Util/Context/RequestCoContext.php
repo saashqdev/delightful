@@ -13,7 +13,7 @@ use Hyperf\Context\Context;
 class RequestCoContext
 {
     /**
-     * 从父协程获取用户信息。
+     * 从父协程获取userinformation。
      */
     public static function getUserAuthorization(): ?DelightfulUserAuthorization
     {

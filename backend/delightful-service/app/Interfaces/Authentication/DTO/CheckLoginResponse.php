@@ -10,27 +10,27 @@ namespace App\Interfaces\Authentication\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 登录响应DTO.
+ * Login response DTO.
  */
 class CheckLoginResponse extends AbstractDTO
 {
     /**
-     * 状态码
+     * Status code
      */
     protected int $code = 1000;
 
     /**
-     * 消息.
+     * Message.
      */
-    protected string $message = '请求成功';
+    protected string $message = 'Request successful';
 
     /**
-     * 返回数据.
+     * Return data.
      */
     protected array $data;
 
     /**
-     * 设置返回数据.
+     * Set return data.
      */
     public function setData(array $data): void
     {
@@ -38,7 +38,7 @@ class CheckLoginResponse extends AbstractDTO
     }
 
     /**
-     * 获取返回数据.
+     * Get return data.
      */
     public function getData(): array
     {
@@ -46,7 +46,7 @@ class CheckLoginResponse extends AbstractDTO
     }
 
     /**
-     * 设置状态码
+     * Set status code
      */
     public function setCode(int $code): void
     {
@@ -54,7 +54,7 @@ class CheckLoginResponse extends AbstractDTO
     }
 
     /**
-     * 获取状态码
+     * Get status code
      */
     public function getCode(): int
     {
@@ -62,7 +62,7 @@ class CheckLoginResponse extends AbstractDTO
     }
 
     /**
-     * 设置消息.
+     * Set message.
      */
     public function setMessage(string $message): void
     {
@@ -70,7 +70,7 @@ class CheckLoginResponse extends AbstractDTO
     }
 
     /**
-     * 获取消息.
+     * Get message.
      */
     public function getMessage(): string
     {

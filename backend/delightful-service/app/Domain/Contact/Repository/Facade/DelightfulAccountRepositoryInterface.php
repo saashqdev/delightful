@@ -11,7 +11,7 @@ use App\Domain\Contact\Entity\AccountEntity;
 
 interface DelightfulAccountRepositoryInterface
 {
-    // 查询账号信息
+    // 查询账号information
     public function getAccountInfoByDelightfulId(string $delightfulId): ?AccountEntity;
 
     /**

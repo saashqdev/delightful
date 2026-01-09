@@ -16,7 +16,7 @@ class AddDocumentFileToKnowledgeBaseDocuments extends Migration
     public function up(): void
     {
         Schema::table('knowledge_base_documents', function (Blueprint $table) {
-            $table->json('document_file')->nullable()->comment('文档文件信息');
+            $table->json('document_file')->nullable()->comment('文档文件information');
         });
     }
 

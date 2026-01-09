@@ -18,7 +18,7 @@ return new class extends Migration {
             if (Schema::hasColumn('delightful_chat_conversations', 'translate_config')) {
                 return;
             }
-            $table->json('translate_config')->nullable()->comment('翻译配置项');
+            $table->json('translate_config')->nullable()->comment('翻译configuration项');
         });
     }
 

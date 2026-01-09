@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_environments', function (Blueprint $table) {
-            $table->json('private_config')->comment('麦吉自己的一些配置');
+            $table->json('private_config')->comment('麦吉自己的一些configuration');
             // 重命名 config 字段为 open_platform_config
             $table->renameColumn('config', 'open_platform_config');
             $table->timestamp('deleted_at')->nullable()->comment('删除时间');

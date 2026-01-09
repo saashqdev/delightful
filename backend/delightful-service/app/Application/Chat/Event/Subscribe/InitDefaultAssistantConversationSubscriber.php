@@ -50,19 +50,19 @@ class InitDefaultAssistantConversationSubscriber extends ConsumerMessage
             $userEntity = new DelightfulUserEntity($data['user_entity']);
             /** @var array<string> $defaultConversationAICodes */
             $defaultConversationAICodes = $data['default_conversation_ai_codes'];
-            // 先批量注册，防止组织下没有该助理用户.
+            // Batch register first to prevent missing assistant users in the organization.
             $this->batchAiRegister($userEntity, $defaultConversationAICodes);
-            // 初始化默认会话
+            // Initialize default conversation
             $this->delightfulAgentAppService->initDefaultAssistantConversation($userEntity, $defaultConversationAICodes);
             return Result::ACK;
         } catch (Throwable $exception) {
-            $this->logger->error("初始化默认会话失败，错误信息: {$exception->getMessage()}, 堆栈: {$exception->getTraceAsString()}");
+            $this->logger->error("Initialize default conversation failed, error: {$exception->getMessage()}, Stack: {$exception->getTraceAsString()}");
             return Result::ACK;
         }
     }
 
     /**
-     * 注册助理，防止组织下没有该助理用户.
+     * Register assistant to prevent missing assistant users in the organization.
      */
     public function batchAiRegister(DelightfulUserEntity $userEntity, ?array $defaultConversationAICodes = null): void
     {
@@ -71,15 +71,15 @@ class InitDefaultAssistantConversationSubscriber extends ConsumerMessage
         foreach ($defaultConversationAICodes as $aiCode) {
             $delightfulAgentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentByFlowCode($aiCode);
             $agentName = $delightfulAgentVersionEntity->getAgentName();
-            $this->logger->info("注册助理，aiCode: {$aiCode}, 名称: {$agentName}");
+            $this->logger->info("Register assistant, aiCode: {$aiCode}, name: {$agentName}");
             try {
                 $aiUserDTO = DelightfulUserEntity::fromDelightfulAgentVersionEntity($delightfulAgentVersionEntity);
                 $this->delightfulAccountAppService->aiRegister($aiUserDTO, $authorization, $aiCode);
-                $this->logger->info("注册助理成功，aiCode: {$aiCode}, 名称: {$agentName}");
+                $this->logger->info("Assistant registered successfully, aiCode: {$aiCode}, name: {$agentName}");
             } catch (Throwable $e) {
                 $errorMessage = $e->getMessage();
                 $trace = $e->getTraceAsString();
-                $this->logger->error("注册助理失败，aiCode: {$aiCode}, 名称: {$agentName}\n错误信息: {$errorMessage}\n堆栈: {$trace} ");
+                $this->logger->error("Failed to register assistant, aiCode: {$aiCode}, name: {$agentName}\nError: {$errorMessage}\nStack: {$trace} ");
             }
         }
     }

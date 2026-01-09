@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_tokens', static function (Blueprint $table) {
             // extra
-            $table->text('extra')->nullable()->comment('额外信息');
+            $table->text('extra')->nullable()->comment('额外information');
         });
     }
 

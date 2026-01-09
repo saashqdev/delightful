@@ -10,9 +10,9 @@ namespace App\Infrastructure\Util\SSRF;
 class SSRFDefenseOptions
 {
     private array $blackList = [
-        '169.254.169.254',  // 华为云元数据
-        '100.100.100.200',  // 阿里云元数据
-        '100.96.0.96',      // 火山云元数据
+        '169.254.169.254',  // 华为云元data
+        '100.100.100.200',  // 阿里云元data
+        '100.96.0.96',      // 火山云元data
     ];
 
     private array $whiteList;

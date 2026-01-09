@@ -200,14 +200,14 @@ readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInter
     {
         $labelNames = [];
 
-        // 查询 agent 信息
+        // 查询 agent information
         $agentDataIsolation = AgentDataIsolation::createByBaseDataIsolation($dataIsolation);
         $agentQuery = new DelightfulAgentQuery();
         $agentQuery->setIds($agentIds);
         $agents = $this->agentDomainService->queries($agentDataIsolation->disabled(), $agentQuery, Page::createNoPage())['list'] ?? [];
         $agentInfos = [];
 
-        // 查询 tool 信息
+        // 查询 tool information
         $flowDataIsolation = FlowDataIsolation::createByBaseDataIsolation($dataIsolation);
         $flowQuery = new DelightfulFLowQuery();
         $flowQuery->setCodes($toolIds);

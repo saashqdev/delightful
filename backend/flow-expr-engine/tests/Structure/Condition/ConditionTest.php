@@ -370,7 +370,7 @@ JSON,
                                 "const_value":[
                                     {
                                         "type":"input",
-                                        "value":"默认值",
+                                        "value":"default value",
                                         "name":"name",
                                         "args":null
                                     }
@@ -411,7 +411,7 @@ JSON,
                                 "const_value":[
                                     {
                                         "type":"input",
-                                        "value":"默认值",
+                                        "value":"default value",
                                         "name":"name",
                                         "args":null
                                     }
@@ -452,7 +452,7 @@ JSON,
                                 "const_value":[
                                     {
                                         "type":"input",
-                                        "value":"默认值",
+                                        "value":"default value",
                                         "name":"name",
                                         "args":null
                                     }

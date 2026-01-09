@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\ImageGenerate\ValueObject;
 
 /**
- * 水印配置值对象
+ * 水印configuration值对象
  */
 class WatermarkConfig
 {

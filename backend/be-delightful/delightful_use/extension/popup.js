@@ -126,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function handleExtract() {
     disableButtons(true);
     showProgress(true, 0);
-    showStatus("正在提取数据...", 'warning');
+    showStatus("Extracting data...", 'warning');
 
     try {
       const activeTab = await getActiveTab();
@@ -134,12 +134,12 @@ document.addEventListener('DOMContentLoaded', () => {
       const tabUrl = activeTab.url;
 
       if (!tabUrl || !tabId) {
-        throw new Error("无法获取有效的标签页信息。");
+        throw new Error("Unable to get valid tab information.");
       }
 
       // Ensure URL is http/https for cookie/scripting access
       if (!tabUrl.startsWith('http://') && !tabUrl.startsWith('https://')) {
-          throw new Error("此插件只能在 HTTP 或 HTTPS 页面上运行。");
+          throw new Error("This extension can only run on HTTP or HTTPS pages.");
       }
 
       let localStorageData = {};
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
           // Format for storage_state
           localStorageData = Object.entries(response.data || {}).map(([name, value]) => ({ name, value }));
         } else {
-          console.warn("从内容脚本获取 localStorage 失败:", response ? response.error : '未知错误');
+          console.warn("Failed to get localStorage from content script:", response ? response.error : 'Unknown error');
           // Proceed without localStorage, maybe show warning later
         }
       } else {
@@ -183,8 +183,8 @@ document.addEventListener('DOMContentLoaded', () => {
               sameSite: mapChromeSameSiteToPlaywright(cookie.sameSite)
             }));
          } catch (cookieError) {
-             console.error("获取 Cookies 时出错:", cookieError);
-             throw new Error(`获取 Cookies 失败: ${cookieError.message}`);
+             console.error("Error getting Cookies:", cookieError);
+             throw new Error(`Failed to get Cookies:  ${cookieError.message}`);
          }
       } else {
           cookieItems = []; // Ensure it's an empty array if not checked
@@ -222,18 +222,18 @@ document.addEventListener('DOMContentLoaded', () => {
           // Note: We don't revokeObjectURL here immediately,
           // as the download might take time. Browser usually handles it.
           showProgress(true, 100);
-          showStatus(`成功提取 ${localStorageData.length} 个 localStorage 项和 ${cookieItems.length} 个 cookie。已开始下载文件。`, 'success');
+          showStatus(`Successfully extracted ${localStorageData.length} localStorage items and ${cookieItems.length} cookies. File download started.`, 'success');
 
       } catch (downloadError) {
-          console.error("下载文件时出错:", downloadError);
-          showStatus(`提取数据成功，但下载文件失败: ${downloadError.message}`, 'error');
+          console.error("Error downloading file:", downloadError);
+          showStatus(`Extraction successful, but file download failed: ${downloadError.message}`, 'error');
           // Clean up blob URL if download fails
           URL.revokeObjectURL(downloadUrl);
       }
 
     } catch (error) {
-      console.error("提取处理过程中出错:", error);
-      showStatus(`提取失败: ${error.message}`, 'error');
+      console.error("Error in extraction process:", error);
+      showStatus(`Extraction failed: ${error.message}`, 'error');
       showProgress(false);
     } finally {
       disableButtons(false);
@@ -247,11 +247,11 @@ document.addEventListener('DOMContentLoaded', () => {
   async function handleImport(dataStr) {
      disableButtons(true);
      showProgress(true, 0);
-     showStatus("正在导入数据...", 'warning');
+     showStatus("Importing data...", 'warning');
      console.log("Import requested...");
 
      if (!dataStr) {
-        showStatus("没有可导入的数据。", 'error');
+        showStatus("No data to import.", 'error');
         disableButtons(false);
         showProgress(false);
         return;
@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
          const currentOrigin = new URL(tabUrl).origin;
 
          if (!tabUrl || !tabId || (!tabUrl.startsWith('http://') && !tabUrl.startsWith('https://'))) {
-             throw new Error("无法在当前标签页导入数据 (需要 HTTP/HTTPS 页面)。");
+             throw new Error("Cannot import data on current tab (requires HTTP/HTTPS page).");
          }
 
          let totalOperations = 0;
@@ -281,10 +281,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 localStorageToImport = originData.localStorage;
                 totalOperations += localStorageToImport.length;
             } else {
-                warnings.push(`未找到与当前源 ${currentOrigin} 匹配的 localStorage 数据进行导入。`);
+                warnings.push(`No localStorage data matching current origin ${currentOrigin} found for import.`);
             }
          } else {
-             warnings.push("数据格式错误：缺少 'origins' 数组。");
+             warnings.push("Data format error: missing origins array.");
          }
 
          if (localStorageToImport.length > 0) {
@@ -295,11 +295,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 completedOperations += response.count || 0;
                 showProgress(true, (completedOperations / totalOperations) * 100 * 0.5); // LS is 50% of progress
             } else {
-                errors.push(...(response.errors || ['设置 localStorage 时发生未知错误。']));
+                errors.push(...(response.errors || ['Unknown error setting localStorage.']));
                 completedOperations += response.count || 0; // Count successful ones even if some failed
             }
             if (response && response.errors && response.errors.length > 0) {
-                warnings.push(...response.errors.map(e => `LocalStorage 设置失败: ${e}`));
+                warnings.push(...response.errors.map(e => `LocalStorage setting failed: ${e}`));
             }
          }
 
@@ -309,12 +309,12 @@ document.addEventListener('DOMContentLoaded', () => {
              cookiesToImport = browserData.cookies;
              totalOperations += cookiesToImport.length;
          } else {
-             warnings.push("数据格式错误：缺少 'cookies' 数组。");
+             warnings.push("Data format error: missing cookies array.");
          }
 
          for (const cookie of cookiesToImport) {
             if (typeof cookie !== 'object' || cookie === null || !cookie.name) {
-                warnings.push(`跳过无效的 Cookie 对象: ${JSON.stringify(cookie)}`);
+                warnings.push(`Skipping invalid Cookie object: ${JSON.stringify(cookie)}`);
                 completedOperations++; // Count as processed
                 continue;
             }
@@ -350,7 +350,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (removeError) {
                 // Ignore error if cookie didn't exist
                 if (!removeError.message.includes("No cookie found")) {
-                    console.warn(`移除旧 cookie '${cookieDetails.name}' 时出错 (可能不存在):`, removeError);
+                    console.warn(`Error removing old cookie '${cookieDetails.name}' (may not exist):`, removeError);
                 }
             }
 
@@ -359,8 +359,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 console.log("Setting cookie:", cookieDetails);
                 await chrome.cookies.set(cookieDetails);
             } catch (setCookieError) {
-                console.error(`设置 cookie '${cookieDetails.name}' 时出错:`, setCookieError, "Details:", cookieDetails);
-                errors.push(`设置 Cookie '${cookieDetails.name}' 失败: ${setCookieError.message}`);
+                console.error(`Error setting cookie '${cookieDetails.name}' error:`, setCookieError, "Details:", cookieDetails);
+                errors.push(`Failed to set Cookie '${cookieDetails.name}' error: ${setCookieError.message}`);
             }
             completedOperations++;
             showProgress(true, 50 + (completedOperations / totalOperations) * 100 * 0.5); // Cookies are second 50%
@@ -368,27 +368,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
          // 3. Final Status
          showProgress(true, 100);
-         let finalMessage = `导入完成。`;
+         let finalMessage = `Import complete.`;
          let finalType = 'success';
 
          if (warnings.length > 0) {
-             finalMessage += ` (${warnings.length} 个警告)`;
+             finalMessage += ` (${warnings.length} warnings)`;
              finalType = 'warning';
-             console.warn("导入警告:", warnings);
+             console.warn("Import warnings:", warnings);
          }
          if (errors.length > 0) {
-             finalMessage = `导入过程中遇到 ${errors.length} 个错误。请检查控制台。`;
+             finalMessage = `Encountered ${errors.length} errors during import. Check console.`;
              finalType = 'error';
-             console.error("导入错误:", errors);
+             console.error("Import errors:", errors);
          }
          showStatus(finalMessage, finalType);
 
      } catch (error) {
-         console.error("导入处理过程中出错:", error);
-         showStatus(`导入失败: ${error.message}`, 'error');
+         console.error("Error in import process:", error);
+         showStatus(`Import failed: ${error.message}`, 'error');
          showProgress(false);
          if (error instanceof SyntaxError) {
-             showStatus(`导入失败: 无效的 JSON 数据。`, 'error');
+             showStatus(`Import failed: Invalid JSON data.`, 'error');
          }
      } finally {
          disableButtons(false);
@@ -423,11 +423,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const reader = new FileReader();
         reader.onload = (e) => {
           importArea.value = e.target.result; // Load file content into textarea
-          showStatus('文件已加载到文本框，点击"导入数据"继续', 'success');
+          showStatus('File loaded into text box. Click \"Import Data\" to continue', 'success');
         };
         reader.onerror = (e) => {
-          console.error("文件读取错误:", e);
-          showStatus(`读取文件失败: ${e.target.error}`, 'error');
+          console.error("File read error:", e);
+          showStatus(`Failed to read file: ${e.target.error}`, 'error');
         };
         reader.readAsText(file);
       }

@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('deployment', '32')->comment('部署类型.官方：saas|southeastAsia,私有：private');
             $table->string('environment', '32')->comment('环境类型：test/production');
-            $table->json('config')->comment('环境配置详情');
+            $table->json('config')->comment('环境configuration详情');
             $table->timestamps();
             $table->unique(['deployment', 'environment'], 'unq_deployment_environment');
         });

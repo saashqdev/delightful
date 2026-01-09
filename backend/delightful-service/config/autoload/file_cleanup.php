@@ -39,20 +39,20 @@ return [
     // Default configuration for different source types
     'source_types' => [
         'batch_compress' => [
-            'expire_seconds' => 7200,        // 2小时
-            'description' => '批量压缩文件',
+            'expire_seconds' => 7200,        // 2 hours
+            'description' => 'Batch compress files',
         ],
         'temp_upload' => [
-            'expire_seconds' => 3600,        // 1小时
-            'description' => '临时上传文件',
+            'expire_seconds' => 3600,        // 1 hour
+            'description' => 'Temporary upload files',
         ],
         'ai_generated' => [
-            'expire_seconds' => 86400,       // 24小时
-            'description' => 'AI生成文件',
+            'expire_seconds' => 86400,       // 24 hours
+            'description' => 'AI generated files',
         ],
         'preview_cache' => [
-            'expire_seconds' => 1800,        // 30分钟
-            'description' => '预览缓存文件',
+            'expire_seconds' => 1800,        // 30 minutes
+            'description' => 'Preview cache files',
         ],
     ],
 ];

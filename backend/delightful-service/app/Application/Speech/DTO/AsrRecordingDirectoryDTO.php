@@ -10,7 +10,7 @@ namespace App\Application\Speech\DTO;
 use App\Application\Speech\Enum\AsrDirectoryTypeEnum;
 
 /**
- * 录音目录信息 DTO.
+ * 录音目录information DTO.
  */
 readonly class AsrRecordingDirectoryDTO
 {

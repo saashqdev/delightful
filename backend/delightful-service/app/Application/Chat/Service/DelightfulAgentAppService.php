@@ -30,7 +30,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
     public function square(): array
     {
-        // 返回 agent 列表信息
+        // 返回 agent 列表information
         return $this->userDomainService->getAgentList();
     }
 
@@ -58,7 +58,7 @@ class DelightfulAgentAppService extends AbstractAppService
      */
     public function getAgentsForAdmin(array $agentIds, Authenticatable $authenticatable): array
     {
-        // 获取机器人信息
+        // 获取机器人information
         $delightfulAgentEntities = $this->delightfulAgentDomainService->getAgentByIds($agentIds);
 
         $filePaths = array_column($delightfulAgentEntities, 'agent_avatar');

@@ -64,7 +64,7 @@
     parent = parent.parentElement;
   }
 
-  // 居中定位目标元素
+  // Center the target element
   contentElement.style.position = 'absolute';
   contentElement.style.left = '50%';
   contentElement.style.transform = 'translate(-50%, 0)';

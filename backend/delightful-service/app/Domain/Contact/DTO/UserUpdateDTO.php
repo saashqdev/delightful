@@ -12,12 +12,12 @@ use App\Domain\Contact\Entity\AbstractEntity;
 class UserUpdateDTO extends AbstractEntity
 {
     /**
-     * 用户头像URL.
+     * user头像URL.
      */
     protected ?string $avatarUrl = null;
 
     /**
-     * 用户昵称.
+     * user昵称.
      */
     protected ?string $nickname = null;
 

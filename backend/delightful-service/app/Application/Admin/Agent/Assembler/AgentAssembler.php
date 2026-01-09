@@ -14,7 +14,7 @@ use App\Domain\Agent\Entity\DelightfulAgentVersionEntity;
 
 class AgentAssembler
 {
-    // entity 转 dto
+    // entity to dto
     public static function entityToDTO(DelightfulAgentEntity $entity): AdminAgentDTO
     {
         return new AdminAgentDTO($entity->toArray());

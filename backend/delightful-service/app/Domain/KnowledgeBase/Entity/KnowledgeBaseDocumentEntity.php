@@ -239,7 +239,7 @@ class KnowledgeBaseDocumentEntity extends AbstractKnowledgeBaseEntity
 
     public function setFragmentConfig(null|array|FragmentConfig $fragmentConfig): self
     {
-        // 默认配置
+        // 默认configuration
         empty($fragmentConfig) && $fragmentConfig = $this->getDefaultFragmentConfig();
         is_array($fragmentConfig) && $fragmentConfig = FragmentConfig::fromArray($fragmentConfig);
         $this->fragmentConfig = $fragmentConfig;
@@ -365,7 +365,7 @@ class KnowledgeBaseDocumentEntity extends AbstractKnowledgeBaseEntity
     {
         $driver = VectorStoreDriver::tryFrom($this->vectorDb);
         if ($driver === null) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "向量数据库 [{$this->vectorDb}] 不存在");
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "向量data库 [{$this->vectorDb}] 不存在");
         }
         return $driver->get();
     }

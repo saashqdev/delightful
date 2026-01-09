@@ -17,6 +17,6 @@ interface DelightfulUserIdRelationRepositoryInterface
     // 查询
     public function getRelationIdExists(DelightfulUserIdRelationEntity $userIdRelationEntity): array;
 
-    // id_type,relation_type,relation_value 查询 user_id,然后去查询用户信息
+    // id_type,relation_type,relation_value 查询 user_id,然后去查询userinformation
     public function getUerIdByRelation(DelightfulUserIdRelationEntity $userIdRelationEntity): string;
 }

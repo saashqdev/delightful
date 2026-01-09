@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->longText('message_content')->comment('消息内容');
             $table->index(['delightful_message_id', 'version_id'], 'idx_delightful_message_id_version_id');
             $table->timestamps();
-            $table->comment('消息版本表,记录消息的版本信息');
+            $table->comment('消息版本表,记录消息的版本information');
             $table->softDeletes();
         });
     }

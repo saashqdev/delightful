@@ -21,7 +21,7 @@ enum SignEnum: string
     ];
 
     /**
-     * 短信signature多language适配.
+     * short信signature多language适配.
      */
     public static function format(SignEnum $type, ?LanguageEnum $language, LanguageEnum $defaultLanguage = LanguageEnum::ZH_CN): string
     {

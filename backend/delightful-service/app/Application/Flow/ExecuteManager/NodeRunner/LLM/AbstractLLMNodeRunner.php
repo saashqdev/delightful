@@ -124,7 +124,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
                 topicId: $executionData->getTopicId(),
                 limit: $modelConfig->getMaxRecord(),
             );
-            // ifcome源isthethird-partychattool，仅getmost近 3 hour记忆
+            // ifcome源isthethird-partychattool，onlygetmost近 3 hour记忆
             if ($executionData->isThirdPlatformChat()) {
                 $memoryQuery->setStartTime(new DateTime('-3 hours'));
             }
@@ -184,7 +184,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
 
     private function createTools(ExecutionData $executionData, array $optionTools = [], array $tools = []): array
     {
-        // compatible旧data
+        // compatibleolddata
         foreach ($tools as $toolId) {
             if (is_string($toolId)) {
                 $optionTools[$toolId] = new OptionTool($toolId);

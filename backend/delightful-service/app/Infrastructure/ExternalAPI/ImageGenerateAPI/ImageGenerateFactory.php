@@ -137,12 +137,12 @@ class ImageGenerateFactory
         $model = $data['model'];
         $mode = strtolower(explode('-', $model, limit: 2)[1] ?? 'fast');
 
-        // Midjourney notuse宽高parameter，只need prompt and mode，butis Request categoryinheritneedthistheseparameter
+        // Midjourney notuse宽highparameter，onlyneed prompt and mode，butis Request categoryinheritneedthistheseparameter
         // 所bywegivedefaultvalue即can
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
 
-        // Midjourney notclosecorespecific宽高ratio例，butwe保留thisfieldby防willcomeneed
+        // Midjourney notclosecorespecific宽highratio例，butwe保留thisfieldby防willcomeneed
         if (isset($data['size'])) {
             [$width, $height] = self::parseSizeToWidthHeight($data['size']);
             $ratio = self::calculateRatio((int) $width, (int) $height);
@@ -440,7 +440,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * calculate宽高ratio例（from LLMAppService 移passcome逻辑）.
+     * calculate宽highratio例（from LLMAppService 移passcome逻辑）.
      */
     private static function calculateRatio(int $width, int $height): string
     {
@@ -451,7 +451,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * calculatemost大公约数（from LLMAppService 移passcome逻辑）.
+     * calculatemostbig公约数（from LLMAppService 移passcome逻辑）.
      */
     private static function gcd(int $a, int $b): int
     {

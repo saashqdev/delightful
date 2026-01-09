@@ -57,7 +57,7 @@ class RoleApi extends AbstractPermissionApi
         // queryrolelist
         $result = $this->roleAppService->queries($dataIsolation, $page, $filters);
 
-        // batchquantitygetuserdetail（eachrole仅取front5userId）
+        // batchquantitygetuserdetail（eachroleonly取front5userId）
         $contactIsolation = ContactDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -81,7 +81,7 @@ class RoleApi extends AbstractPermissionApi
             $allUserInfo = $this->userInfoAppService->getBatchUserInfo($allNeedUserIds, $contactIsolation);
         }
 
-        // 重新group装listdata
+        // 重newgroup装listdata
         $list = [];
         foreach ($result['list'] as $index => $roleEntity) {
             $limitedIds = $roleUserIdsMap[$index] ?? [];

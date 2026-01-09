@@ -229,10 +229,10 @@ class ProviderModelSyncAppService
             $existingModelMap[$model->getModelId()] = $model;
         }
 
-        // extract新modelmodel_id
+        // extractnewmodelmodel_id
         $newModelIds = array_column($models, 'id');
 
-        // 遍历新model，createorupdate
+        // 遍历newmodel，createorupdate
         foreach ($models as $modelData) {
             $modelId = $modelData['id'] ?? null;
             if (! $modelId) {
@@ -244,7 +244,7 @@ class ProviderModelSyncAppService
                     // update现havemodel
                     $this->updateModel($dataIsolation, $existingModelMap[$modelId], $modelData, $providerConfigEntity, $language);
                 } else {
-                    // create新model
+                    // createnewmodel
                     $this->createModel($dataIsolation, $modelData, $providerConfigEntity, $language);
                 }
             } catch (Throwable $e) {
@@ -276,7 +276,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * create新model.
+     * createnewmodel.
      */
     private function createModel(
         ProviderDataIsolation $dataIsolation,
@@ -289,7 +289,7 @@ class ProviderModelSyncAppService
         // savemodel
         $this->providerModelDomainService->saveModel($dataIsolation, $saveDTO);
 
-        $this->logger->info('create新model', [
+        $this->logger->info('createnewmodel', [
             'model_id' => $modelData['id'],
             'name' => $saveDTO->getName(),
         ]);

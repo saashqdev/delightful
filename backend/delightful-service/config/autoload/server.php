@@ -47,7 +47,7 @@ $servers = [
         ],
     ],
 ];
-// ！！！notice，openscheduletask pod thennotstart websocket service，只start http service
+// ！！！notice，openscheduletask pod thennotstart websocket service，onlystart http service
 $enableCrontab = (bool) env('CRONTAB_ENABLE', true);
 $enableCrontab && $servers = [$servers[0]];
 return [

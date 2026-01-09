@@ -56,7 +56,7 @@ class ChatMemory implements MemoryPersistenceInterface
 
     public function store(LLMMemoryMessage $LLMMemoryMessage): void
     {
-        // 只process挂载
+        // onlyprocess挂载
         if (empty($LLMMemoryMessage->getMountId())) {
             return;
         }
@@ -78,7 +78,7 @@ class ChatMemory implements MemoryPersistenceInterface
     }
 
     /**
-     * already经isrow好序所havemessage.
+     * already经isrowgood序所havemessage.
      * @return array<DelightfulMessageEntity>
      */
     public function getImChatMessages(MemoryQuery $memoryQuery): array
@@ -105,7 +105,7 @@ class ChatMemory implements MemoryPersistenceInterface
         $messageIds = [];
 
         foreach ($clientSeq as $seqResponseDTO) {
-            // cardinfo只取大modelreturn，大modelreturn特征have type = 1, parent_id = 0
+            // cardinfoonly取bigmodelreturn，bigmodelreturn特征have type = 1, parent_id = 0
             if ($seqResponseDTO->getSeq()?->getMessage()?->getContent() instanceof AggregateAISearchCardMessage) {
                 /** @var AggregateAISearchCardMessage $aggregateAISearchCardMessage */
                 $aggregateAISearchCardMessage = $seqResponseDTO->getSeq()?->getMessage()?->getContent();

@@ -55,7 +55,7 @@ class UserAssembler
 
     public static function getUserInfos(array $userInfos): array
     {
-        // 强转user id typefor string
+        // strong转user id typefor string
         foreach ($userInfos as &$user) {
             // notreturn delightful_id and id
             unset($user['delightful_id'], $user['id']);
@@ -180,7 +180,7 @@ class UserAssembler
                         );
                         $fullPathNodes[$userDepartmentId] = $pathNodes;
                     } else {
-                        // brief模type: 只取eachdepartmentmostnextsectionpoint
+                        // brief模type: only取eachdepartmentmostnextsectionpoint
                         $departmentInfo = end($departments);
                         $pathNode = self::assemblePathNodeByDepartmentInfo($departmentInfo);
                         $allPathNodes[] = $pathNode;

@@ -28,7 +28,7 @@ enum VolcengineStatusCode: string
     case QUEUED = '20000002';
 
     /**
-     * muteaudio - no需重新query，直接重新submit.
+     * muteaudio - no需重newquery，直接重newsubmit.
      */
     case SILENT_AUDIO = '20000003';
 
@@ -85,7 +85,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * judgewhetherneed重新submittask
+     * judgewhetherneed重newsubmittask
      */
     public function needsResubmit(): bool
     {

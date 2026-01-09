@@ -120,7 +120,7 @@ class LoopMainNodeRunner extends NodeRunner
                     if ($loopCount >= $maxLoopCount) {
                         break;
                     }
-                    // eachtime重新calculateitemitem
+                    // eachtime重newcalculateitemitem
                     $condition = $conditionComponent->getCondition()->getResult($executionData->getExpressionFieldData());
                 }
                 break;

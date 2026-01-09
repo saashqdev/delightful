@@ -22,20 +22,20 @@ interface ProviderModelConfigVersionRepositoryInterface
     public function saveVersionWithTransaction(ProviderDataIsolation $dataIsolation, ProviderModelConfigVersionEntity $entity): void;
 
     /**
-     * getfinger定modelmost新versionID.
+     * getfinger定modelmostnewversionID.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param int $serviceProviderModelId modelID
-     * @return null|int most新versionID，ifnot存inthenreturnnull
+     * @return null|int mostnewversionID，ifnot存inthenreturnnull
      */
     public function getLatestVersionId(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?int;
 
     /**
-     * getfinger定modelmost新configurationversion实body.
+     * getfinger定modelmostnewconfigurationversion实body.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param int $serviceProviderModelId modelID
-     * @return null|ProviderModelConfigVersionEntity most新version实body，ifnot存inthenreturnnull
+     * @return null|ProviderModelConfigVersionEntity mostnewversion实body，ifnot存inthenreturnnull
      */
     public function getLatestVersionEntity(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?ProviderModelConfigVersionEntity;
 }

@@ -19,13 +19,13 @@ class ClientStreamSequenceResponse extends AbstractEntity
     // forimplement丢package重传，needrecordwhenfrontseqId。one定single调递增。
     protected ?int $seqId;
 
-    // 大model总结
+    // bigmodel总结
     protected ?string $content;
 
-    // havethesemessage大modelresponsefieldnotis content，thiswithin特殊process
+    // havethesemessagebigmodelresponsefieldnotis content，thiswithin特殊process
     protected ?string $llmResponse;
 
-    // 大model推理content
+    // bigmodel推理content
     protected ?string $reasoningContent;
 
     protected StreamMessageStatus $status;

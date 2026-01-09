@@ -31,12 +31,12 @@ class AsrConfig
     public const int TASK_STATUS_TTL = 604800;
 
     /**
-     * Mock round询status TTL（second）- 仅testuse.
+     * Mock round询status TTL（second）- onlytestuse.
      */
     public const int MOCK_POLLING_TTL = 600;
 
     /**
-     * 沙箱audiomergemost长etc待time（second）.
+     * 沙箱audiomergemostlongetc待time（second）.
      */
     public const int SANDBOX_MERGE_TIMEOUT = 1200;
 
@@ -65,12 +65,12 @@ class AsrConfig
     // ==================== retryconfiguration ====================
 
     /**
-     * service端from动总结most大retrycount.
+     * service端from动总结mostbigretrycount.
      */
     public const int SERVER_SUMMARY_MAX_RETRY = 10;
 
     /**
-     * 沙箱startmost大retrycount.
+     * 沙箱startmostbigretrycount.
      */
     public const int SANDBOX_STARTUP_MAX_RETRY = 3;
 
@@ -99,7 +99,7 @@ class AsrConfig
     public const int REDIS_SCAN_BATCH_SIZE = 200;
 
     /**
-     * Redis 扫描most大quantity.
+     * Redis 扫描mostbigquantity.
      */
     public const int REDIS_SCAN_MAX_COUNT = 2000;
 

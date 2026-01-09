@@ -60,7 +60,7 @@ usersubmitonesegment录音content，录音content经passvoiceidentify转fortext�
 1. **lengthlimit**：not超pass 20 character（汉字按 1 charactercalculate）
 2. **languagestyle**：use陈述property语sentence，avoid疑问sentence
 3. **简洁explicit**：直接概括核coretheme，notwantaddmodification词
-4. **纯textoutput**：只outputtitlecontent，notwantaddany标point符number、引numberorothermodification
+4. **纯textoutput**：onlyoutputtitlecontent，notwantaddany标point符number、引numberorothermodification
 
 ### forbidlinefor
 - notwantreturn答contentmiddleissue
@@ -109,7 +109,7 @@ usersendoriginalmessage如down：
 ### 优先level原then（non常重want）
 1. **file名优先**：file名usuallyisuser精core命名，containmost核corethemeinfo，请重point参考usermessagemiddle @ backsurfacefile名
 2. **智canjudge**：
-   - iffile名语义清晰（如"2024yearQ4product规划will议.mp3"、"customer需求discussion.wav"），优先based onfile名generatetitle
+   - iffile名语义clear（如"2024yearQ4product规划will议.mp3"、"customer需求discussion.wav"），优先based onfile名generatetitle
    - iffile名isdatetime戳（如"20241112_143025.mp3"）ornomeaningcharacter（如"录音001.mp3"），thenuse通usedescription
 3. **extractkeyword**：fromfile名middleextractmost核corekeywordandtheme
 
@@ -117,7 +117,7 @@ usersendoriginalmessage如down：
 1. **lengthlimit**：not超pass 20 character（汉字按 1 charactercalculate）
 2. **languagestyle**：use陈述property语sentence，avoid疑问sentence
 3. **简洁explicit**：直接概括核coretheme，notwantaddmodification词
-4. **纯textoutput**：只outputtitlecontent，notwantaddany标point符number、引numberorothermodification
+4. **纯textoutput**：onlyoutputtitlecontent，notwantaddany标point符number、引numberorothermodification
 
 ### forbidlinefor
 - notwant保留fileextension名（.mp3、.wav、.webm etc）

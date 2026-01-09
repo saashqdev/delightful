@@ -61,7 +61,7 @@ class KnowledgeSearchNodeRunnerTest extends ExecuteManagerBaseTest
                     "expression_value": [
                         {
                             "type": "input",
-                            "value": "小明",
+                            "value": "small明",
                             "name": "",
                             "args": null
                         }

@@ -83,14 +83,14 @@ class ModelConfigAppService extends AbstractLLMAppService
             return $modelType;
         }
 
-        // willcanusemodel转forhashtable，implementO(1)time复杂degreefind
+        // willcanusemodel转forhashtable，implementO(1)timecomplexdegreefind
         $availableModels = array_flip($chatModelsName);
 
         // getsystemdefault降level链
         $systemFallbackChain = config('delightful-api.model_fallback_chain.chat', []);
 
         // mergeuser传入降level链andsystemdefault降level链
-        // user传入降level链优先levelmore高
+        // user传入降level链优先levelmorehigh
         $mergedFallbackChain = array_merge($systemFallbackChain, $modelFallbackChain);
 
         // 按优先levelorder遍历mergeback降level链

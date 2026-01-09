@@ -60,7 +60,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * 子categoryimplementoriginalimagegeneratemethod
-     * 只负责calleachfromAPIgenerateimage，notuseclosecorewatermarkprocess.
+     * only负责calleachfromAPIgenerateimage，notuseclosecorewatermarkprocess.
      */
     abstract protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 

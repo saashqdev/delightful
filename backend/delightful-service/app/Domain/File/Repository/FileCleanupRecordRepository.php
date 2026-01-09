@@ -166,7 +166,7 @@ class FileCleanupRecordRepository
         return FileCleanupRecordModel::query()
             ->where('file_key', $fileKey)
             ->where('organization_code', $organizationCode)
-            ->where('status', 0) // 只cancancel待cleanupstatusrecord
+            ->where('status', 0) // onlycancancel待cleanupstatusrecord
             ->delete() > 0;
     }
 
@@ -203,13 +203,13 @@ class FileCleanupRecordRepository
         $cutoffDate = date('Y-m-d H:i:s', time() - ($daysToKeep * 24 * 3600));
 
         return FileCleanupRecordModel::query()
-            ->where('status', 1) // 只cleanupalreadysuccessrecord
+            ->where('status', 1) // onlycleanupalreadysuccessrecord
             ->where('updated_at', '<', $cutoffDate)
             ->delete();
     }
 
     /**
-     * cleanup长timefailrecord.
+     * cleanuplongtimefailrecord.
      */
     public function cleanupFailedRecords(int $maxRetries = 3, int $daysToKeep = 7): int
     {

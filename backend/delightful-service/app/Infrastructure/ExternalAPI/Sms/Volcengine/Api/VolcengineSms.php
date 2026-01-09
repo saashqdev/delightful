@@ -16,7 +16,7 @@ use Hyperf\Di\Annotation\Inject;
 use Throwable;
 
 /**
- * 火山引up短信categoryinterface.
+ * 火山引upshort信categoryinterface.
  * @see https://www.volcengine.com/docs/6361/171579
  */
 class VolcengineSms extends VolcengineApi
@@ -39,7 +39,7 @@ class VolcengineSms extends VolcengineApi
     protected Template $template;
 
     /**
-     * sendverify码,火山verify码短信not supported传入finger定number.
+     * sendverify码,火山verify码short信not supported传入finger定number.
      */
     public function request(string $phone, array $templateVariables, SignEnum $sign, string $templateId): SendResult
     {
@@ -48,10 +48,10 @@ class VolcengineSms extends VolcengineApi
         $sendResult = new SendResult();
         $signStr = SignEnum::format($sign, LanguageEnum::EN_US);
         if (empty($templateVariables)) {
-            return $sendResult->setResult(-1, 'notmatchtoto应短信template!');
+            return $sendResult->setResult(-1, 'notmatchtoto应short信template!');
         }
         if (! in_array($signStr, Template::$signToMessageGroup, true)) {
-            return $sendResult->setResult(-1, '短信signature:' . $signStr . ' not supported!');
+            return $sendResult->setResult(-1, 'short信signature:' . $signStr . ' not supported!');
         }
 
         $errCode = 0;
@@ -60,7 +60,7 @@ class VolcengineSms extends VolcengineApi
             $groupId = $this->template->getMessageGroupId($templateId);
             // initialize,setpublicrequestparameter
             $this->init($groupId, $signStr, $templateId);
-            // setverify码短信特havebody结构
+            // setverify码short信特havebody结构
             $body = [
                 'SmsAccount' => $this->getMessageGroupId(),
                 'Sign' => $this->getSign(),
@@ -69,16 +69,16 @@ class VolcengineSms extends VolcengineApi
                 'PhoneNumbers' => $phone,
             ];
             $this->setBody($body);
-            // ifissingleyuantest,nothair短信,只verifyvariableparse/短信content&&短信signature多语type适配/国际区numbercorrectparse
+            // ifissingleyuantest,nothairshort信,onlyverifyvariableparse/short信content&&short信signature多语type适配/国际区numbercorrectparse
             if (defined('IN_UNIT_TEST')) {
-                // singleyuantest,nottruehair短信
+                // singleyuantest,nottruehairshort信
                 return $sendResult->setResult($errCode, $msg);
             }
             $this->sendRequest();
         } catch (Throwable$exception) {
             $errCode = -1;
-            $msg = '短信sendfail';
-            $this->logger->error('短信sendfail：' . $exception->getMessage() . ',trace:' . $exception->getTraceAsString());
+            $msg = 'short信sendfail';
+            $this->logger->error('short信sendfail：' . $exception->getMessage() . ',trace:' . $exception->getTraceAsString());
         }
         // willreturnresultand创蓝统one,avoidbug
         return $sendResult->setResult($errCode, $msg);

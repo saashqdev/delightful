@@ -124,7 +124,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             // 3.1 generateassociateissueandsendgivefront端
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $simpleSearchResults['search'] ?? []);
             $associateQuestions = $this->generateAndSendAssociateQuestions($dto, $associateQuestionsQueryVo, '0');
-            // 3.2 according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉duplicateor者andissueassociatepropertynot高webpagecontent
+            // 3.2 according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉duplicateor者andissueassociatepropertynothighwebpagecontent
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
             $this->sleepToFixBug();
             // 3.4 according tosearch深degree，decidewhethercontinuesearchassociateissue子issue
@@ -173,7 +173,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     }
 
     /**
-     * 麦吉互联网search简single版，适配process，仅support简singlesearch.
+     * 麦吉互联网search简single版，适配process，onlysupport简singlesearch.
      * @throws Throwable
      * @throws RedisException
      */
@@ -201,7 +201,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             // 2.1 generateassociateissue
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $simpleSearchResults['search'] ?? []);
             $associateQuestions = $this->generateAssociateQuestions($associateQuestionsQueryVo);
-            // 2.2 according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉duplicateor者andissueassociatepropertynot高webpagecontent
+            // 2.2 according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉duplicateor者andissueassociatepropertynothighwebpagecontent
             $this->sleepToFixBug();
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
 
@@ -259,7 +259,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                     AggregateAISearchCardResponseType::SEARCH,
                     [
                         'search_keywords' => [],
-                        // pushfront 5 searchresult。 andcompatiblehistorydata，key use小驼峰
+                        // pushfront 5 searchresult。 andcompatiblehistorydata，key usesmall驼峰
                         'search' => $this->getSearchData($currentContextChunk),
                         'total_words' => $totalWords,
                         // all网资料total
@@ -286,7 +286,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     }
 
     /**
-     * according toassociateissueandissue简singlesearch，generateassociateissue子issue.(associateissue子issue目front只useatfront端show，notwillaccording to子issueagaintimesearch+精读).
+     * according toassociateissueandissue简singlesearch，generateassociateissue子issue.(associateissue子issue目frontonlyuseatfront端show，notwillaccording to子issueagaintimesearch+精读).
      * @param SearchDetailItem[] $noRepeatSearchContexts
      */
     public function generateAndSendAssociateSubQuestions(
@@ -313,7 +313,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $noRepeatSearchContexts, $associateQuestion['title']);
                 $associateQuestionsQueryVo->setMessageHistory(new MessageHistory());
                 $associateSubQuestions = $this->delightfulLLMDomainService->getRelatedQuestions($associateQuestionsQueryVo, 2, 3);
-                // todo byatthiswithinisto所have维degreesummarybackagain精读，therefore丢失each维degreequantity，只can随机generate。
+                // todo byatthiswithinisto所have维degreesummarybackagain精读，therefore丢失each维degreequantity，onlycan随机generate。
                 // etc待front端adjust渲染 ui
                 $pageCount = random_int(30, 60);
                 $onePageWords = random_int(200, 2000);
@@ -455,7 +455,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     public function generateSearchResults(DelightfulChatAggregateSearchReqDTO $dto, array $associateQuestions): array
     {
         $start = microtime(true);
-        // according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉duplicateor者andissueassociatepropertynot高webpagecontent
+        // according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉duplicateor者andissueassociatepropertynothighwebpagecontent
         $searchKeywords = array_column($associateQuestions, 'title');
         $queryVo = (new AISearchCommonQueryVo())
             ->setSearchKeywords($searchKeywords)
@@ -477,7 +477,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 ->setSearchContexts($allSearchContexts)
                 ->setUserId($dto->getUserId())
                 ->setOrganizationCode($dto->getOrganizationCode());
-            // andsearchkeywordassociatepropertymost高andnotduplicatesearchresult
+            // andsearchkeywordassociatepropertymosthighandnotduplicatesearchresult
             $noRepeatSearchContexts = $this->delightfulLLMDomainService->filterSearchContexts($queryVo);
             $costMircoTime = TimeUtil::getMillisecondDiffFromNow($start);
             $this->logger->info(sprintf(
@@ -709,7 +709,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             $extraContentParallel->wait();
         } catch (ParallelExecutionException $parallelExecutionException) {
             foreach ($parallelExecutionException->getThrowables() as $throwable) {
-                // 仅record
+                // onlyrecord
                 $this->logger->error('error_during_tool_call', [
                     'function' => 'generateAndSendExtraError',
                     'error_message' => $throwable->getMessage(),
@@ -821,7 +821,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     {
         $searchList = [];
         foreach ($noRepeatSearchContexts as $search) { // $search already经is切slicebackyuan素
-            // compatiblehistorydata，key use小驼峰
+            // compatiblehistorydata，key usesmall驼峰
             $searchList[] = [
                 'id' => $search->getId(),
                 'name' => $search->getName(),
@@ -861,7 +861,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 if (str_contains($context->getCachedPageUrl(), 'zhihu.com')) {
                     return;
                 }
-                // 只取finger定quantitywebpagedetailedcontent
+                // only取finger定quantitywebpagedetailedcontent
                 if ($currentDetailReadCount > $detailReadMaxNum) {
                     return;
                 }
@@ -951,7 +951,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         $timeStart = microtime(true);
         $parallel = new Parallel(2);
         $parallel->add(function () use ($dto, $noRepeatSearchContexts, $associateQuestions) {
-            // 3.4.a.1 andline：according toassociateissueandissue简singlesearch，generateassociateissue子issue.(associateissue子issue只useatfront端show，目frontnotwillaccording to子issueagaintimesearch+精读)
+            // 3.4.a.1 andline：according toassociateissueandissue简singlesearch，generateassociateissue子issue.(associateissue子issueonlyuseatfront端show，目frontnotwillaccording to子issueagaintimesearch+精读)
             $this->generateAndSendAssociateSubQuestions($dto, $noRepeatSearchContexts, $associateQuestions);
         });
         $parallel->add(function () use (&$noRepeatSearchContexts, $readPagesDetailChannel, $associateQuestions) {
@@ -967,7 +967,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
 
     private function sleepToFixBug(float $seconds = 0.2): void
     {
-        // !!! byat收item方messagegenerateisasync，maybe乱序，therefore，thiswithin sleep one小will，尽quantityguarantee收item方messagegenerateorder
+        // !!! byat收item方messagegenerateisasync，maybe乱序，therefore，thiswithin sleep onesmallwill，尽quantityguarantee收item方messagegenerateorder
         Coroutine::sleep($seconds);
     }
 

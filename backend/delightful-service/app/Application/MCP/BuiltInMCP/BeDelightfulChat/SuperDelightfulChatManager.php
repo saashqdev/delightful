@@ -89,7 +89,7 @@ class BeDelightfulChatManager
         $hasAgents = false;
         $allInstructions = [];
 
-        // 2. generateoneshare大modelcalltoolcan阅读description
+        // 2. generateonesharebigmodelcalltoolcan阅读description
         $description = <<<'MARKDOWN'
 call麦吉 AI 助理conductconversation
 
@@ -134,14 +134,14 @@ MARKDOWN;
 finger令parameter instruction（optional）：
 • format：[{"name": "finger令name", "value": "finger令value"}, ...]
 • single-selecttype：fromoptionalvaluemiddlechooseone，for example "yes", "no"
-• switchtype：只canis "on" or "off"
+• switchtype：onlycanis "on" or "off"
 • ifnotprovidefinger令parameter，willusedefaultvalue
 
 callexample：
 ```json
 {
   "agent_id": "123456",
-  "message": "you好，请帮Ianalyzeonedown...",
+  "message": "yougood，请帮Ianalyzeonedown...",
   "conversation_id": "conv_001",
   "instruction": [
     {"name": "switch", "value": "on"},
@@ -267,7 +267,7 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => 'finger令parameterarray，useatcontrolAI助理linefor。eachobjectcontain name（finger令name）and value（finger令value）field。single-selecttypefinger令needfromoptionalvaluemiddlechooseone，switchtypefinger令只canis "on" or "off"。',
+            'description' => 'finger令parameterarray，useatcontrolAI助理linefor。eachobjectcontain name（finger令name）and value（finger令value）field。single-selecttypefinger令needfromoptionalvaluemiddlechooseone，switchtypefinger令onlycanis "on" or "off"。',
             'items' => [
                 'type' => 'object',
                 'properties' => [
@@ -277,7 +277,7 @@ MARKDOWN;
                     ],
                     'value' => [
                         'type' => 'string',
-                        'description' => 'finger令value，single-selecttypefromoptionalvaluemiddlechoose，switchtype只canis "on" or "off"',
+                        'description' => 'finger令value，single-selecttypefromoptionalvaluemiddlechoose，switchtypeonlycanis "on" or "off"',
                     ],
                 ],
                 'required' => ['name', 'value'],

@@ -60,9 +60,9 @@ class RerankingModelConfig extends AbstractValueObject
     private int $retryCount = 2;
 
     /**
-     * returnmost大resultquantity.
+     * returnmostbigresultquantity.
      *
-     * 重sortbackreturnmost大resultquantity
+     * 重sortbackreturnmostbigresultquantity
      */
     private int $topN = 3;
 
@@ -196,7 +196,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * getreturnmost大resultquantity.
+     * getreturnmostbigresultquantity.
      */
     public function getTopN(): int
     {
@@ -204,7 +204,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * setreturnmost大resultquantity.
+     * setreturnmostbigresultquantity.
      */
     public function setTopN(int $topN): self
     {

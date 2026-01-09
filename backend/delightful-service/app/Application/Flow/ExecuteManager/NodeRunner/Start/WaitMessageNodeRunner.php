@@ -41,7 +41,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
             return;
         }
 
-        // ifisasfor运linesectionpoint 仅record，thenendwhenfrontexecute
+        // ifisasfor运linesectionpoint onlyrecord，thenendwhenfrontexecute
         $waitMessageEntity = new DelightfulFlowWaitMessageEntity();
         $waitMessageEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $waitMessageEntity->setConversationId($executionData->getConversationId());

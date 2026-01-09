@@ -18,7 +18,7 @@ class EndpointAssembler
     /**
      * generatestandard化端pointtypeidentifier.
      *
-     * @param HighAvailabilityAppType $appType 高canuseapplicationtype
+     * @param HighAvailabilityAppType $appType highcanuseapplicationtype
      * @param string $modelId modelID
      * @return string standard化端pointtypeidentifier
      */

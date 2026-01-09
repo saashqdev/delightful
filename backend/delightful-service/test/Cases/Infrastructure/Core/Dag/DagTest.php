@@ -326,7 +326,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因forvertex2executetimeratiovertex3长，所byvertex3will先execute，先outputresult
+        // 因forvertex2executetimeratiovertex3long，所byvertex3will先execute，先outputresult
         $this->assertEquals(['vertex1', 'vertex3', 'vertex2'], array_keys($result));
 
         // Verify concurrent execution - vertex2 and vertex3 should run in different coroutines
@@ -380,7 +380,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因forvertex3executetimeratiovertex2长，所byvertex2will先execute，先outputresult
+        // 因forvertex3executetimeratiovertex2long，所byvertex2will先execute，先outputresult
         $this->assertEquals(['vertex1', 'vertex2', 'vertex3'], array_keys($result));
 
         // Verify concurrent execution again
@@ -399,7 +399,7 @@ class DagTest extends BaseTest
         $root = Vertex::make(function () {
             $vertexResult = new VertexResult();
 
-            // 只调degreesectionpoint3
+            // only调degreesectionpoint3
             $vertexResult->setResult('vertex1')->setChildrenIds(['vertex3']);
             return $vertexResult;
         }, 'vertex1');
@@ -434,7 +434,7 @@ class DagTest extends BaseTest
         $root = Vertex::make(function () {
             $vertexResult = new VertexResult();
 
-            // 只调degreesectionpoint2
+            // only调degreesectionpoint2
             $vertexResult->setResult('vertex1')->setChildrenIds(['vertex2']);
             return $vertexResult;
         }, 'vertex1');
@@ -839,7 +839,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因forvertex2executetimeratiovertex3长，所byvertex3will先execute，先outputresult
+        // 因forvertex2executetimeratiovertex3long，所byvertex3will先execute，先outputresult
         $this->assertEquals(['vertex1', 'vertex3', 'vertex5', 'vertex2', 'vertex4', 'vertex6'], array_keys($result));
     }
 

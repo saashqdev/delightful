@@ -50,7 +50,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected array $searchWebPages;
 
     /**
-     * byat多time子issuesearcho clock，willout现多duplicatesearchresult，所byneed ai go重back，again丢give大model总结。
+     * byat多time子issuesearcho clock，willout现多duplicatesearchresult，所byneed ai go重back，again丢givebigmodel总结。
      *
      * @var SearchDetailItem[]
      */
@@ -113,7 +113,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
         //            {
         //                "parent_question_id": "0",
         //                "question_id": "1",
-        //                "question": "小米collection团旗downhave哪these品牌"
+        //                "question": "small米collection团旗downhave哪these品牌"
         //            }
         //        ],
         //        "question_1": [

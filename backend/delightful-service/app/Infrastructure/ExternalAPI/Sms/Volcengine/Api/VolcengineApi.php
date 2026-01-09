@@ -23,18 +23,18 @@ use RuntimeException;
 use function Hyperf\Config\config;
 
 /**
- * 火山短信所have api 基础category.
+ * 火山short信所have api 基础category.
  * @see https://www.volcengine.com/docs/6361/171579
  */
 abstract class VolcengineApi
 {
     /**
-     * 国inside短信requestground址
+     * 国insideshort信requestground址
      */
     private const CHINA_HOST = 'https://sms.volcengineapi.com';
 
     /**
-     * 国outside短信requestground址
+     * 国outsideshort信requestground址
      */
     private const SINGAPORE_HOST = 'https://sms.byteplusapi.com';
 
@@ -68,17 +68,17 @@ abstract class VolcengineApi
     protected string $secretKey = '';
 
     /**
-     * 短信signature. such as[灯塔engine].
+     * short信signature. such as[灯塔engine].
      */
     protected string $sign = '';
 
     /**
-     * 短信messagegroupid.
+     * short信messagegroupid.
      */
     protected string $messageGroupId = '';
 
     /**
-     * 短信templateId.
+     * short信templateId.
      */
     protected string $templateId = '';
 
@@ -132,7 +132,7 @@ abstract class VolcengineApi
             // conducterror码judge
             if (isset($responseBody['ResponseMetadata']['Error'])) {
                 $this->logger->error('sendSmsError ' . Json::encode($responseBody));
-                throw new RuntimeException('短信sendfail');
+                throw new RuntimeException('short信sendfail');
             }
             $this->logger->info(sprintf('volce sendRequest %s response %s', Json::encode($options), Json::encode($responseBody)));
             return $responseBody;
@@ -149,7 +149,7 @@ abstract class VolcengineApi
     }
 
     /**
-     * acceptdifferent短信typesend
+     * acceptdifferentshort信typesend
      */
     protected function init(string $messageGroupId, string $sign, string $templateId): void
     {
@@ -311,7 +311,7 @@ abstract class VolcengineApi
 
     private function setRegion(string $region): void
     {
-        // region只supportmiddle国and新add坡,defaultmiddle国
+        // regiononlysupportmiddle国andnewadd坡,defaultmiddle国
         if ($region === self::SINGAPORE_REGION) {
             $this->setHost(self::SINGAPORE_HOST);
         } else {

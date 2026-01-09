@@ -9,7 +9,7 @@ namespace App\Infrastructure\Core\MCP\Resources;
 
 /**
  * MCPresourcemanager.
- * whenfrontversionfornullimplement，仅returnnullcolumn表.
+ * whenfrontversionfornullimplement，onlyreturnnullcolumn表.
  */
 class MCPResourceManager
 {

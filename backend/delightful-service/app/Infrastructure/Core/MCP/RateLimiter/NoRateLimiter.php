@@ -11,7 +11,7 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
  * nolimitspeedratelimit器implement.
- * toanyrequestallnotconductlimit，适useattoperformancerequiremore高or处atopenhair阶segmentsystem.
+ * toanyrequestallnotconductlimit，适useattoperformancerequiremorehighor处atopenhair阶segmentsystem.
  */
 class NoRateLimiter extends AbstractRateLimiter
 {

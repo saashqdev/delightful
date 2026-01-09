@@ -54,7 +54,7 @@ class MiscClient extends Client
                 ];
             }
 
-            // 重新createresponseobject
+            // 重newcreateresponseobject
             $responseBody = json_encode($compatibleContent);
             $response = $response->withBody(Utils::streamFor($responseBody));
 

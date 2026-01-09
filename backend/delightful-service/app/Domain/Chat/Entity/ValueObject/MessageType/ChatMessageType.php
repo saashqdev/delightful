@@ -62,7 +62,7 @@ enum ChatMessageType: string
     // AI文生graphcard
     case AIImageCard = 'ai_image_card';
 
-    // image转高清
+    // image转high清
     case ImageConvertHighCard = 'image_convert_high_card';
 
     // 通use agent message

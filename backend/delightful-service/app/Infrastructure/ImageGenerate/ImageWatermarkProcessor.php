@@ -64,7 +64,7 @@ class ImageWatermarkProcessor
             $implicitWatermark
         );
 
-        // 重新encodingforbase64andupload
+        // 重newencodingforbase64andupload
         $outputPrefix = $this->generateBase64Prefix($targetFormat);
         return $this->processBase64Images($outputPrefix . base64_encode($xmpWatermarkedData), $imageGenerateRequest);
     }
@@ -141,7 +141,7 @@ class ImageWatermarkProcessor
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // create新imageresourcebyavoidmodify原graph
+        // createnewimageresourcebyavoidmodify原graph
         $watermarkedImage = imagecreatetruecolor($width, $height);
         imagecopy($watermarkedImage, $image, 0, 0, 0, 0, $width, $height);
 
@@ -168,7 +168,7 @@ class ImageWatermarkProcessor
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && ($this->fontProvider->containsChinese($text) || $this->fontProvider->supportsTTF())) {
             // useTTF字body渲染，supportmiddle文
-            // TTF字bodysizeneedadjust，usuallyratioinside置字body小onethese
+            // TTF字bodysizeneedadjust，usuallyratioinside置字bodysmallonethese
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
 
             // correctcalculateTTF字body基lineposition
@@ -182,7 +182,7 @@ class ImageWatermarkProcessor
 
             imagettftext($image, $ttfFontSize, 0, $x, $ttfY, $fontColor, $fontFile, $text);
         } else {
-            // 降leveluseinside置字body（仅supportASCIIcharacter）
+            // 降leveluseinside置字body（onlysupportASCIIcharacter）
             // inside置字bodyYcoordinateistexttop部，needfrom基linepositionconvert
             $builtinY = $y - (int) ($fontSize * 0.8); // from基linepositionconvertfortop部position
             imagestring($image, 5, $x, $builtinY, $text, $fontColor);
@@ -321,7 +321,7 @@ class ImageWatermarkProcessor
             if ($this->fontProvider->hasTransparency($image)) {
                 $format = 'png'; // have透明degreeusePNG
             } else {
-                $format = 'jpeg'; // no透明degreeuseJPEG高quality
+                $format = 'jpeg'; // no透明degreeuseJPEGhighquality
             }
         }
 
@@ -351,7 +351,7 @@ class ImageWatermarkProcessor
                         $this->logger->info('JPEG does not support transparency, converting to PNG');
                         imagepng($image, null, 0);
                     } else {
-                        imagejpeg($image, null, 100); // JPEGmost高quality
+                        imagejpeg($image, null, 100); // JPEGmosthighquality
                     }
                     break;
             }

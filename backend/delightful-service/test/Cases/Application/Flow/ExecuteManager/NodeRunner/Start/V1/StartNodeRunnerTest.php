@@ -83,7 +83,7 @@ class StartNodeRunnerTest extends ExecuteManagerBaseTest
             "file_type": 4,
             "file_extension": "xlsx",
             "file_size": 9180,
-            "file_name": "you好.xlsx"
+            "file_name": "yougood.xlsx"
         }
     ]
 }

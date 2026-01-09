@@ -22,7 +22,7 @@ use Throwable;
  */
 class ApiResponseExceptionLogAspect extends AbstractAspect
 {
-    // 优先level,valuemore小优先levelmore高
+    // 优先level,valuemoresmall优先levelmorehigh
     public ?int $priority = 1;
 
     public array $annotations = [

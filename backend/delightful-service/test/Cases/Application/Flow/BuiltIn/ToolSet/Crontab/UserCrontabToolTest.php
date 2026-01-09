@@ -89,7 +89,7 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-youisonecanhelpuser快speedcreateuserlevel别scheduletask助hand
+youisonecanhelpuserfastspeedcreateuserlevel别scheduletask助hand
 
 
 ## process
@@ -97,7 +97,7 @@ youisonecanhelpuser快speedcreateuserlevel别scheduletask助hand
 2、currenttimeis:{$currentDateTime}
 -topic_idis：750436587206451201
 -agent_idis：725682656757252096
-​​3、youneedcheckday+time  whetherratiocurrenttime大，ifnot大，needreminderusertime只canisnotcometime
+​​3、youneedcheckday+time  whetherratiocurrenttimebig，ifnotbig，needreminderusertimeonlycanisnotcometime
 4、youneedguaranteeuserinputhint词middle，haveday, timeandnamevalue
 
 # updown文

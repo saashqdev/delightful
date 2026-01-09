@@ -204,7 +204,7 @@ class AdminModeAssembler
      */
     public static function applyUpdateRequestToEntity(UpdateModeRequest $request, ModeEntity $existingEntity): void
     {
-        // 只updaterequestmiddlecontainallowmodifyfield
+        // onlyupdaterequestmiddlecontainallowmodifyfield
         $existingEntity->setNameI18n($request->getNameI18n());
         $existingEntity->setPlaceholderI18n($request->getPlaceholderI18n());
         $existingEntity->setIdentifier($request->getIdentifier());

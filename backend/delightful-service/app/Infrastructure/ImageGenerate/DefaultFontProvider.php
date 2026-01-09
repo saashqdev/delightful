@@ -12,7 +12,7 @@ use App\Domain\ImageGenerate\Contract\FontProviderInterface;
 /**
  * default字bodyprovide者implement
  * open源projectmiddledefaultimplement，provide基础字bodyfeature
- * 企业projectcanpassdependencyinjection覆盖thisimplementcomeprovide高level字bodyfeature.
+ * 企业projectcanpassdependencyinjection覆盖thisimplementcomeprovidehighlevel字bodyfeature.
  */
 class DefaultFontProvider implements FontProviderInterface
 {
@@ -27,7 +27,7 @@ class DefaultFontProvider implements FontProviderInterface
 
     /**
      * detectwhethersupportTTF字body渲染.
-     * open源version仅supportinside置字body.
+     * open源versiononlysupportinside置字body.
      */
     public function supportsTTF(): bool
     {

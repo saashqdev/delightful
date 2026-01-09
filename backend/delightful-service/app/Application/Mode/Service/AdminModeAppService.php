@@ -118,14 +118,14 @@ class AdminModeAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // willupdaterequestapplicationto现have实body（只updateallowmodifyfield）
+            // willupdaterequestapplicationto现have实body（onlyupdateallowmodifyfield）
             AdminModeAssembler::applyUpdateRequestToEntity($request, $existingMode);
 
             $updatedMode = $this->modeDomainService->updateMode($dataIsolation, $existingMode);
 
             Db::commit();
 
-            // 重新getaggregaterootinfo
+            // 重newgetaggregaterootinfo
             $updatedModeAggregate = $this->modeDomainService->getModeDetailById($dataIsolation, $updatedMode->getId());
             return AdminModeAssembler::aggregateToAdminDTO($updatedModeAggregate);
         } catch (Exception $exception) {

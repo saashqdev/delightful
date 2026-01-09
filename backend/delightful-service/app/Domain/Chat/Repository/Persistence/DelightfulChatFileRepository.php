@@ -121,7 +121,7 @@ class DelightfulChatFileRepository implements DelightfulChatFileRepositoryInterf
 
     public function updateFileById(string $fileId, DelightfulChatFileEntity $entity)
     {
-        // fileupdate需谨慎，暂o clock只allowupdatefile_name
+        // fileupdate需谨慎，暂o clockonlyallowupdatefile_name
         $model = new DelightfulChatFileModel();
         $updateData = [];
         if ($entity->getFileKey()) {

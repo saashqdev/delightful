@@ -81,7 +81,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     }
 
     /**
-     * returnmost大message倒数 n item序column.
+     * returnmostbigmessage倒数 n item序column.
      * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
      * @return ClientSequenceResponse[]
      */
@@ -179,7 +179,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
         $limit = $messagesQueryDTO->getLimit();
         $query = $this->delightfulSeq::query()->whereIn('conversation_id', $conversationIds);
         if (! empty($pageToken)) {
-            // currentsessionhistorymessagemiddlemost小 seq id. willusecome查ratioitalso小value
+            // currentsessionhistorymessagemiddlemostsmall seq id. willusecome查ratioitalsosmallvalue
             $query->where('seq_id', $operator, $pageToken);
         }
         if ($timeStart !== null) {
@@ -474,7 +474,7 @@ sql;
             ->forceIndex('idx_object_type_id_refer_message_id')
             ->orderBy('seq_id', 'desc');
         $referMessages = Db::select($query->toSql(), $query->getBindings());
-        // from refer_message_id middle找outmessagemost新status
+        // from refer_message_id middle找outmessagemostnewstatus
         $query = $this->delightfulSeq::query()
             ->where('object_type', $userEntity->getUserType()->value)
             ->where('object_id', $userEntity->getDelightfulId())
@@ -482,7 +482,7 @@ sql;
             ->forceIndex('idx_object_type_id_seq_id')
             ->orderBy('seq_id', 'desc');
         $seqList = Db::select($query->toSql(), $query->getBindings());
-        // mergebackagain降序rowcolumn,快speed找outmessagemost新status
+        // mergebackagain降序rowcolumn,fastspeed找outmessagemostnewstatus
         $seqList = array_merge($seqList, $referMessages);
         $seqList = array_column($seqList, null, 'id');
         krsort($seqList);
@@ -490,7 +490,7 @@ sql;
     }
 
     /**
-     * toresultcollectionforce重新降序rowcolumn.
+     * toresultcollectionforce重new降序rowcolumn.
      * @return ClientSequenceResponse[]
      */
     private function getClientSequencesResponse(array $seqInfos): array

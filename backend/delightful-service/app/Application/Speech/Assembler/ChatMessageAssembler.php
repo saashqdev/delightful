@@ -112,7 +112,7 @@ readonly class ChatMessageAssembler
                 ],
             ];
         } else {
-            // no笔记o clockmessagecontent：只提to录音file
+            // no笔记o clockmessagecontent：only提to录音file
             $messageContent = [
                 [
                     'type' => 'text',

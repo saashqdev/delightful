@@ -285,7 +285,7 @@ JSON,
         if (! empty($endTime) && strtotime($endTime) !== false) {
             $memoryQuery->setEndTime(new DateTime($endTime));
         }
-        // 只getfile
+        // onlygetfile
         $memoryQuery->setRangMessageTypes([
             ChatMessageType::Text,
             ChatMessageType::RichText,

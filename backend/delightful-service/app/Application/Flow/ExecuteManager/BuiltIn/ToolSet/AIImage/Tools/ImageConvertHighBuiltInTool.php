@@ -37,7 +37,7 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return 'image转高清tool';
+        return 'image转high清tool';
     }
 
     public function getCallback(): ?Closure

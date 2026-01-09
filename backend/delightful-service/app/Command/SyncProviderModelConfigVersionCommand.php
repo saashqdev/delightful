@@ -135,7 +135,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * update旧version（ifneed）.
+     * updateoldversion（ifneed）.
      */
     private function updateOldVersionsIfNeeded(ProviderModelModel $model, int $existingVersionCount, bool $isForce): void
     {
@@ -150,7 +150,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * create新version.
+     * createnewversion.
      */
     private function createNewVersion(ProviderModelModel $model, int $nextVersion): void
     {
@@ -223,7 +223,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
         $this->logger->info(sprintf('模type: %s', $isDryRun ? '试运line（notwritedatabase）' : 'justtypeexecute'));
 
         if ($isForce) {
-            $this->logger->warning('force模typealreadyenable：willfor所havemodelcreate新version');
+            $this->logger->warning('force模typealreadyenable：willfor所havemodelcreatenewversion');
         }
 
         if ($limit > 0) {

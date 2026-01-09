@@ -59,8 +59,8 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'file_name' => 'you好.xlsx',
-            'file_url' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/you好.xlsx',
+            'file_name' => 'yougood.xlsx',
+            'file_url' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/yougood.xlsx',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());

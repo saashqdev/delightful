@@ -205,7 +205,7 @@ if (env('AWS_CLAUDE_ENABLED', false)) {
     ];
 }
 
-// loaddefaultmodelconfiguration（优先levelmost低）
+// loaddefaultmodelconfiguration（优先levelmostlow）
 $models = [];
 
 // loaddefaultmodelconfiguration
@@ -214,7 +214,7 @@ foreach ($envModelConfigs as $modelKey => $config) {
     $models[$modelKey] = $config;
 }
 
-// load odin_models.json configuration（优先levelmore高，willoverridedefaultconfiguration）
+// load odin_models.json configuration（优先levelmorehigh，willoverridedefaultconfiguration）
 if (file_exists(BASE_PATH . '/odin_models.json')) {
     $customModels = json_decode(file_get_contents(BASE_PATH . '/odin_models.json'), true);
     if (is_array($customModels)) {
@@ -249,7 +249,7 @@ return [
             'logging' => [
                 // logfield白名singleconfiguration
                 // iffornullarrayornotconfiguration，thenprint所havefield
-                // ifconfigurationfieldcolumn表，then只printfinger定field
+                // ifconfigurationfieldcolumn表，thenonlyprintfinger定field
                 // support嵌setfield，usepoint语法如 'args.messages'
                 // notice：messages and tools fieldnotin白名singlemiddle，notwillbeprint
                 'whitelist_fields' => [
@@ -281,8 +281,8 @@ return [
 
                     // requestparameter（rowexcept敏感content）
                     'args.temperature',            // 温degreeparameter
-                    'args.max_tokens',             // most大tokenlimit
-                    'args.max_completion_tokens',             // most大tokenlimit
+                    'args.max_tokens',             // mostbigtokenlimit
+                    'args.max_completion_tokens',             // mostbigtokenlimit
                     'args.top_p',                  // Top-pparameter
                     'args.top_k',                  // Top-kparameter
                     'args.frequency_penalty',      // frequency惩罚
@@ -310,7 +310,7 @@ return [
                     'id',                         // requestID
                     'object',                     // objecttype
                     'system_fingerprint',         // systemfinger纹
-                    'performance_flag',            // performancemark（慢requestidentifier）
+                    'performance_flag',            // performancemark（slowrequestidentifier）
 
                     // notice：bydownfieldberowexcept，notwillprint
                     // - args.messages (usermessagecontent)
@@ -321,7 +321,7 @@ return [
                 ],
                 // whetherenablefield白名singlefilter，defaulttrue（enablefilter）
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
-                // most大stringlengthlimit，超passthislengthstringwillbereplacefor [Long Text]，settingfor 0 indicatenotlimit
+                // mostbigstringlengthlimit，超passthislengthstringwillbereplacefor [Long Text]，settingfor 0 indicatenotlimit
                 'max_text_length' => env('ODIN_LOG_MAX_TEXT_LENGTH', 0),
             ],
             'network_retry_count' => 1,

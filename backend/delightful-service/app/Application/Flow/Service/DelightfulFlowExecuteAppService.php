@@ -369,7 +369,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         if (! $log) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $apiChatDTO->getTaskId()]);
         }
-        // 只canquerytheonelayerdata
+        // onlycanquerytheonelayerdata
         if (! $log->isTop()) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $apiChatDTO->getTaskId()]);
         }
@@ -571,7 +571,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         switch ($delightfulFlow->getType()) {
             case Type::Main:
                 $agent = $this->delightfulAgentDomainService->getByFlowCode($delightfulFlow->getCode());
-                // 仅allowcreatepersoncanindisablestatusdowncall
+                // onlyallowcreatepersoncanindisablestatusdowncall
                 if ($agent->getCreatedUid() !== $dataIsolation->getCurrentUserId() && ! $agent->isAvailable()) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.agent_disabled');
                 }

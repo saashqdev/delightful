@@ -51,7 +51,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         $documentEntity->setEmbeddingModel($knowledgeBaseEntity->getModel());
         $documentEntity->setVectorDb(VectorStoreDriver::default()->value);
         if (! $documentEntity->getCode()) {
-            // 新建document
+            // new建document
             if ($documentEntity->getDocumentFile()) {
                 $documentFile = $this->documentFileStrategy->preProcessDocumentFile($dataIsolation, $documentEntity->getDocumentFile());
                 $documentEntity->setDocumentFile($documentFile);
@@ -73,7 +73,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         // verifyknowledge basepermission
         $this->checkKnowledgeBaseOperation($dataIsolation, 'r', $query->getKnowledgeBaseCode(), $query->getCode());
 
-        // compatible旧data，newdefaultdocument
+        // compatibleolddata，newdefaultdocument
         $fragmentQuery = new KnowledgeBaseFragmentQuery();
         $fragmentQuery->setKnowledgeCode($query->getKnowledgeBaseCode());
         $fragmentQuery->setIsDefaultDocumentCode(true);
@@ -144,21 +144,21 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * 重新toquantity化.
+     * 重newtoquantity化.
      */
     public function reVectorized(Authenticatable $authorization, string $knowledgeBaseCode, string $documentCode): void
     {
         $dataIsolation = $this->createKnowledgeBaseDataIsolation($authorization);
         $this->checkKnowledgeBaseOperation($dataIsolation, 'manage', $knowledgeBaseCode, $documentCode);
 
-        // call领域service重新toquantity化
+        // call领域service重newtoquantity化
         $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $knowledgeBaseCode);
         $documentEntity = $this->knowledgeBaseDocumentDomainService->show($dataIsolation, $knowledgeBaseCode, $documentCode);
-        // byathistorydocumentnothave document_file field，notcanbe重新toquantity化
+        // byathistorydocumentnothave document_file field，notcanbe重newtoquantity化
         if (! $documentEntity->getDocumentFile()) {
             ExceptionBuilder::throw(PermissionErrorCode::Error, 'flow.knowledge_base.re_vectorized_not_support');
         }
-        // minutehairevent，重新toquantity化
+        // minutehairevent，重newtoquantity化
         $documentSavedEvent = new KnowledgeBaseDocumentSavedEvent(
             $dataIsolation,
             $knowledgeBaseEntity,

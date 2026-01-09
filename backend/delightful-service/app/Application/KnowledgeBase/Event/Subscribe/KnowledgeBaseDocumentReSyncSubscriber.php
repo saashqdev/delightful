@@ -84,9 +84,9 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
 
         // from增versionnumber(抢lock)
         $affectedRows = $knowledgeBaseDocumentDomainService->increaseVersion($dataIsolation, $documentEntity);
-        // iffrom增fail，instructionalready经重新toquantity化pass，提frontend
+        // iffrom增fail，instructionalready经重newtoquantity化pass，提frontend
         if ($affectedRows === 0) {
-            $logger->info('documentalready重新toquantity化，skipsync');
+            $logger->info('documentalready重newtoquantity化，skipsync');
             return;
         }
 
@@ -101,7 +101,7 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
             return;
         }
 
-        // 销毁旧minutesegment
+        // 销毁oldminutesegment
         try {
             $knowledgeBaseVectorAppService->destroyOldFragments($dataIsolation, $knowledge, $documentEntity);
         } catch (Throwable $throwable) {

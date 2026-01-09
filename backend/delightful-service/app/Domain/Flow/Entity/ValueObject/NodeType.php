@@ -16,13 +16,13 @@ enum NodeType: int
 {
     /*
      * Start Node
-     * useas触hair器。windowopeno clock、have新messageo clock、schedule;parametercall（仅子processcanuse）
+     * useas触hair器。windowopeno clock、havenewmessageo clock、schedule;parametercall（only子processcanuse）
      */
     case Start = 1;
 
     /*
      * LLM Chat thiswithinishistoryreasongroup合sectionpoint
-     * 大languagemodel optionalmodel、prompt、temperature
+     * biglanguagemodel optionalmodel、prompt、temperature
      */
     case LLM = 2;
 

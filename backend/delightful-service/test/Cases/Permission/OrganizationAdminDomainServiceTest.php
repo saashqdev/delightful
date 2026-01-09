@@ -145,7 +145,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         // callmethodgettestorganizationadministrator
         $testOrgResult = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($this->testOrganizationCode));
 
-        // verify只returntestorganizationadministrator
+        // verifyonlyreturntestorganizationadministrator
         $this->assertIsArray($testOrgResult);
         $this->assertCount(1, $testOrgResult);
         $this->assertEquals($this->testUserIds[0], $testOrgResult[0]->getUserId());
@@ -154,7 +154,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         // callmethodget另oneorganizationadministrator
         $anotherOrgResult = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($this->anotherOrganizationCode));
 
-        // verify只return另oneorganizationadministrator
+        // verifyonlyreturn另oneorganizationadministrator
         $this->assertIsArray($anotherOrgResult);
         $this->assertCount(1, $anotherOrgResult);
         $this->assertEquals($this->testUserIds[1], $anotherOrgResult[0]->getUserId());

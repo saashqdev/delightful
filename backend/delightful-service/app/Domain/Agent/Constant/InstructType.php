@@ -195,7 +195,7 @@ enum InstructType: int
         }
 
         $totalItems = count($items['values']);
-        // verifystatusitemmost小quantity
+        // verifystatusitemmostsmallquantity
         if ($totalItems < 2) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_items_min_count');
         }

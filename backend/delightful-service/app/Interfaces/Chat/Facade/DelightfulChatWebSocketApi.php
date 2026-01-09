@@ -344,7 +344,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
      */
     private function keepSubscribeAlive(): void
     {
-        // 只needoneenter程canschedulepublishmessage,letsubscriberedislink保活即can.
+        // onlyneedoneenter程canschedulepublishmessage,letsubscriberedislink保活即can.
         // notlock放inmostoutsidelayer,isforpreventpod频繁restarto clock,nothaveanyoneenter程canpublishmessage
         co(function () {
             // each 5 second推onetimemessage
@@ -364,7 +364,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
                         $seqCreatedEvent->setPriority($priority);
                         // messageminutehair. oneitemseqmaybewillgenerate多itemseq
                         $messageDispatch = new MessageDispatchPublisher($seqCreatedEvent);
-                        // messagepush. oneitemseq只willpushgiveoneuser(多设备)
+                        // messagepush. oneitemseqonlywillpushgiveoneuser(多设备)
                         $messagePush = new MessagePushPublisher($seqCreatedEvent);
                         $producer->produce($messageDispatch);
                         $producer->produce($messagePush);

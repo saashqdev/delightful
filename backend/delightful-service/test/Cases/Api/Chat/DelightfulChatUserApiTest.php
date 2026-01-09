@@ -49,7 +49,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $requestData = [
             'avatar_url' => 'https://example.com/avatar/new-avatar.jpg',
-            'nickname' => '新nickname',
+            'nickname' => 'newnickname',
         ];
 
         $headers = $this->getTestHeaders();
@@ -101,7 +101,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * test仅updateavatar.
+     * testonlyupdateavatar.
      */
     public function testUpdateUserInfoWithAvatarOnly(): void
     {
@@ -132,7 +132,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * test仅updatenickname.
+     * testonlyupdatenickname.
      */
     public function testUpdateUserInfoWithNicknameOnly(): void
     {
@@ -263,7 +263,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * test长stringhandle.
+     * testlongstringhandle.
      */
     public function testUpdateUserInfoWithLongStrings(): void
     {
@@ -271,14 +271,14 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $this->performLogin();
 
         $requestData = [
-            'nickname' => str_repeat('very长nickname', 10), // 50character
+            'nickname' => str_repeat('verylongnickname', 10), // 50character
             'avatar_url' => 'https://example.com/very/long/path/to/avatar/' . str_repeat('long-filename', 5) . '.jpg',
         ];
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // validate长stringwhetherbecorrecthandle（maybebetruncateorreject）
-        $this->assertIsArray($response, '长string应becorrecthandle');
+        // validatelongstringwhetherbecorrecthandle（maybebetruncateorreject）
+        $this->assertIsArray($response, 'longstring应becorrecthandle');
 
         // ifisauthenticationerror，skiptest
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
@@ -325,7 +325,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         // 先logingettoken
         $this->performLogin();
 
-        // theonetimeupdate：只updatenickname
+        // theonetimeupdate：onlyupdatenickname
         $firstUpdateData = [
             'nickname' => 'theonetimemorenewnickname',
         ];
@@ -345,7 +345,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $firstUserData = $firstResponse['data'];
         $originalAvatarUrl = $firstUserData['avatar_url'] ?? null;
 
-        // thetwotimeupdate：只updateavatar
+        // thetwotimeupdate：onlyupdateavatar
         $secondUpdateData = [
             'avatar_url' => 'https://example.com/new-avatar-2.jpg',
         ];
@@ -440,7 +440,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $this->assertArrayHasKey('code', $response, 'notauthorizationrequest应returnerror码');
         $this->assertNotEquals(1000, $response['code'] ?? 1000, 'notauthorizationrequestnot应returnsuccess码');
 
-        // 常见notauthorizationerror码
+        // commonnotauthorizationerror码
         $unauthorizedCodes = [2179, 3035, 401, 403];
         $this->assertContains($response['code'] ?? 0, $unauthorizedCodes, 'shouldreturnnotauthorizationerror码');
     }

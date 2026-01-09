@@ -131,9 +131,9 @@ class AsrApi extends AbstractApi
                     ExceptionBuilder::throw(AsrErrorCode::TaskAlreadyCanceled);
                 }
 
-                // statuscheck 2：taskalreadycomplete（只inthiswithinrecordlog，allow重新总结bymore换model）
+                // statuscheck 2：taskalreadycomplete（onlyinthiswithinrecordlog，allow重new总结bymore换model）
                 if ($taskStatus->isSummaryCompleted()) {
-                    $this->logger->info('taskalreadycomplete，allowuse新model重新总结', [
+                    $this->logger->info('taskalreadycomplete，allowusenewmodel重new总结', [
                         'task_key' => $summaryRequest->taskKey,
                         'old_model_id' => $taskStatus->modelId,
                         'new_model_id' => $summaryRequest->modelId,
@@ -491,7 +491,7 @@ class AsrApi extends AbstractApi
             }
         }
 
-        // 2. ifnothavefrom Redis gettotitle，then重新generate（front端录音or旧逻辑）
+        // 2. ifnothavefrom Redis gettotitle，then重newgenerate（front端录音orold逻辑）
         if (empty($generatedTitle)) {
             $generatedTitle = $this->titleGeneratorService->generateTitleForScenario(
                 $userAuthorization,
@@ -603,7 +603,7 @@ class AsrApi extends AbstractApi
 
         $projectId = $this->asrFileAppService->getProjectIdFromTopic((int) $topicId, $userId);
 
-        // getfile名（仅in file_upload typeo clockuse）
+        // getfile名（onlyin file_upload typeo clockuse）
         $fileName = $request->input('file_name', '');
 
         return [$taskKey, $topicId, $projectId, $recordingType, $fileName];
@@ -623,7 +623,7 @@ class AsrApi extends AbstractApi
         $taskStatus = $this->asrFileAppService->getTaskStatusFromRedis($taskKey, $userId);
 
         if ($taskStatus->isEmpty()) {
-            // theonetimecall：create新taskstatus
+            // theonetimecall：createnewtaskstatus
             return $this->createNewTaskStatus($taskKey, $topicId, $projectId, $userId, $organizationCode, $generatedTitle);
         }
 
@@ -670,7 +670,7 @@ class AsrApi extends AbstractApi
     }
 
     /**
-     * create新taskstatus.
+     * createnewtaskstatus.
      */
     private function createNewTaskStatus(
         string $taskKey,
@@ -680,7 +680,7 @@ class AsrApi extends AbstractApi
         string $organizationCode,
         ?string $generatedTitle = null
     ): AsrTaskStatusDTO {
-        $this->logger->info('theonetimecall getUploadToken，create新directory', [
+        $this->logger->info('theonetimecall getUploadToken，createnewdirectory', [
             'task_key' => $taskKey,
             'project_id' => $projectId,
             'topic_id' => $topicId,

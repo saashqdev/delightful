@@ -95,7 +95,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByVolcengine()
     {
         $volcengineModelRequest = new VolcengineModelRequest();
-        $volcengineModelRequest->setPrompt('摄影as品，trueperson写truestyle，one画ten thousand圣section装扮女personhandwithin拿one南瓜灯，thedesign冷color调and暖color调结合，冷color调and暖color调transitionfrom然，color调柔and，电影感，电影海报，高level感，16k，超detailed，UHD');
+        $volcengineModelRequest->setPrompt('摄影as品，trueperson写truestyle，one画ten thousand圣section装扮女personhandwithin拿one南瓜灯，thedesign冷color调and暖color调结合，冷color调and暖color调transitionfrom然，color调柔and，电影感，电影海报，highlevel感，16k，超detailed，UHD');
         $volcengineModelRequest->setGenerateNum(1);
         $volcengineModelRequest->setWidth('1024');
         $volcengineModelRequest->setHeight('1024');
@@ -108,7 +108,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByFluix()
     {
         $FluxModelRequest = new FluxModelRequest();
-        $FluxModelRequest->setPrompt('摄影as品，trueperson写truestyle，one画ten thousand圣section装扮女personhandwithin拿one南瓜灯，thedesign冷color调and暖color调结合，冷color调and暖color调transitionfrom然，color调柔and，电影感，电影海报，高level感，16k，超detailed，UHD');
+        $FluxModelRequest->setPrompt('摄影as品，trueperson写truestyle，one画ten thousand圣section装扮女personhandwithin拿one南瓜灯，thedesign冷color调and暖color调结合，冷color调and暖color调transitionfrom然，color调柔and，电影感，电影海报，highlevel感，16k，超detailed，UHD');
         $FluxModelRequest->setGenerateNum(1);
         $FluxModelRequest->setWidth('1024');
         $FluxModelRequest->setHeight('1024');
@@ -121,7 +121,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByMJ()
     {
         $MjModelRequest = new MidjourneyModelRequest();
-        $MjModelRequest->setPrompt('摄影as品，trueperson写truestyle，one画ten thousand圣section装扮女personhandwithin拿one南瓜灯，thedesign冷color调and暖color调结合，冷color调and暖color调transitionfrom然，color调柔and，电影感，电影海报，高level感，16k，超detailed，UHD');
+        $MjModelRequest->setPrompt('摄影as品，trueperson写truestyle，one画ten thousand圣section装扮女personhandwithin拿one南瓜灯，thedesign冷color调and暖color调结合，冷color调and暖color调transitionfrom然，color调柔and，电影感，电影海报，highlevel感，16k，超detailed，UHD');
         $MjModelRequest->setGenerateNum(1);
         $MjModelRequest->setModel('relax');
         $MjModel = new MidjourneyModel();
@@ -137,7 +137,7 @@ class ImageGenerateTest extends BaseTest
 
         // createrequestinstance
         $gpt4oModelRequest = new GPT4oModelRequest();
-        $gpt4oModelRequest->setPrompt('one只小金毛justin草原up欢快奔跑');
+        $gpt4oModelRequest->setPrompt('oneonlysmall金毛justin草原up欢fast奔跑');
         $gpt4oModelRequest->setGenerateNum(4);
 
         // generateimage
@@ -202,7 +202,7 @@ class ImageGenerateTest extends BaseTest
         //
         //        // createrequestinstance
         //        $qwenImageRequest = new QwenImageModelRequest();
-        //        $qwenImageRequest->setPrompt('one只can爱小猫咪inflower园within玩耍，阳光明媚，color彩丰富，高quality摄影');
+        //        $qwenImageRequest->setPrompt('oneonlycan爱small猫咪inflower园within玩耍，阳光明媚，color彩丰富，highquality摄影');
         //        $qwenImageRequest->setHeight('1328');
         //        $qwenImageRequest->setWidth('1328');
         //        $qwenImageRequest->setGenerateNum(1);

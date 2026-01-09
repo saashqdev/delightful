@@ -268,7 +268,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $friendDataIsolation->setCurrentUserId($authorization->getId());
         $friendDataIsolation->setCurrentOrganizationCode($organizationCode);
 
-        // getuserproxy好友column表
+        // getuserproxygood友column表
         $userAgentFriends = $this->delightfulUserDomainService->getUserAgentFriendsList($friendQueryDTO, $friendDataIsolation);
 
         $delightfulAgentVO->setIsAdd(isset($userAgentFriends[$delightfulAgentVersionEntity->getFlowCode()]));
@@ -313,7 +313,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // handlecreate者info
         $this->enrichCreatorInfo($agentVersions);
 
-        // handleavatarand好友status
+        // handleavatarandgood友status
         $this->enrichAgentAvatarAndFriendStatus($agentVersions, $authorization);
 
         return [
@@ -451,7 +451,7 @@ class DelightfulAgentAppService extends AbstractAppService
         }
         $delightfulAgentVersionEntity = $this->buildAgentVersion($agent, $agentVersionDTO);
 
-        // publishmost新connectstream
+        // publishmostnewconnectstream
         $flowDataIsolation = $this->createFlowDataIsolation($authorization);
         if ($publishDelightfulFlowEntity && ! $publishDelightfulFlowEntity->shouldCreate()) {
             $publishDelightfulFlowEntity->setCode($agent->getFlowCode());
@@ -482,7 +482,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // syncthethree方assistant
         $this->delightfulBotThirdPlatformChatDomainService->syncBotThirdPlatformList($agent->getId(), $thirdPlatformList);
 
-        // 首timepublishaddfor好友
+        // 首timepublishaddforgood友
         $result['is_add_friend'] = $isAddFriend;
 
         $delightfulAgentVersionEntity = $result['data'];
@@ -533,7 +533,7 @@ class DelightfulAgentAppService extends AbstractAppService
         return $releaseAgentVersions;
     }
 
-    // getassistantmost新versionnumber
+    // getassistantmostnewversionnumber
 
     /**
      * @param DelightfulUserAuthorization $authorization
@@ -641,7 +641,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $friendDataIsolation->setCurrentUserId($authenticatable->getId());
             $friendDataIsolation->setCurrentOrganizationCode($authenticatable->getOrganizationCode());
 
-            // getuserproxy好友column表
+            // getuserproxygood友column表
             $userAgentFriends = $this->delightfulUserDomainService->getUserAgentFriendsList($friendQueryDTO, $friendDataIsolation);
 
             $delightfulAgentVO->setIsAdd(isset($userAgentFriends[$delightfulAgentVersionEntity->getFlowCode()]));
@@ -747,10 +747,10 @@ class DelightfulAgentAppService extends AbstractAppService
                 Db::transaction(function () use ($dataIsolation, $aiUserEntity, $aiCode, $userEntity) {
                     // insertdefaultconversationrecord
                     $this->delightfulAgentDomainService->insertDefaultAssistantConversation($userEntity->getUserId(), $aiCode);
-                    // add好友，assistantdefaultagree好友
+                    // addgood友，assistantdefaultagreegood友
                     $friendId = $aiUserEntity->getUserId();
                     $this->delightfulUserDomainService->addFriend($dataIsolation, $friendId);
-                    // sendadd好友controlmessage
+                    // sendaddgood友controlmessage
                     $friendUserEntity = new DelightfulUserEntity();
                     $friendUserEntity->setUserId($friendId);
                     di(DelightfulUserContactAppService::class)->sendAddFriendControlMessage($dataIsolation, $friendUserEntity);
@@ -871,7 +871,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * for新registerorganizationcreatepersoninitializeoneChat.
+     * fornewregisterorganizationcreatepersoninitializeoneChat.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      */
@@ -899,7 +899,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * for新registerorganizationcreatepersoninitializeone文生graphAgent.
+     * fornewregisterorganizationcreatepersoninitializeone文生graphAgent.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      */
@@ -917,7 +917,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // 准备基本configuration
         $config = [
             'agent_name' => '文生graph助hand',
-            'agent_description' => 'one强大AItextgenerategraphlike助hand，canaccording to您descriptioncreate精美graphlike。',
+            'agent_description' => 'onestrongbigAItextgenerategraphlike助hand，canaccording to您descriptioncreate精美graphlike。',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],
             'instruct' => $loadPresetConfig['instructs'],
@@ -928,7 +928,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * for新registerorganizationcreatepersoninitializeonedocumentparseAgent.
+     * fornewregisterorganizationcreatepersoninitializeonedocumentparseAgent.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      */
@@ -1095,7 +1095,7 @@ class DelightfulAgentAppService extends AbstractAppService
             }
 
             // 特定visible - this处no需againtimecheckvisibilityType，因forfrontsurfacealreadyrowexceptnullandAlltype
-            // 剩down只maybeisSPECIFICtype
+            // 剩downonlymaybeisSPECIFICtype
             if ($this->isUserVisible($visibilityConfig, $currentUserId, $userDepartmentIds)) {
                 $visibleAgentVersions[] = $agentVersion;
             }
@@ -1128,8 +1128,8 @@ class DelightfulAgentAppService extends AbstractAppService
 
     /**
      * getassistanttotal.
-     * optimize：useJOINqueryavoid传入大quantityID.
-     * optimize：useJOINqueryavoid传入大quantityID.
+     * optimize：useJOINqueryavoid传入bigquantityID.
+     * optimize：useJOINqueryavoid传入bigquantityID.
      */
     private function getTotalAgentsCount(string $organizationCode, string $agentName): int
     {
@@ -1152,7 +1152,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * handleassistantavatarand好友status
+     * handleassistantavatarandgood友status
      */
     private function enrichAgentAvatarAndFriendStatus(array &$agentVersions, DelightfulUserAuthorization $authorization): void
     {

@@ -18,7 +18,7 @@ class ThirdPlatformCreateGroup
     // memberlist
     private array $useridlist = [];
 
-    // 新memberwhethercanviewhistorymessage：1（default）：canview，0：notcanview
+    // newmemberwhethercanviewhistorymessage：1（default）：canview，0：notcanview
     private int $showHistoryType = 1;
 
     // whethercansearchgroup chat, 0（default）：notcansearch 1：cansearch
@@ -30,7 +30,7 @@ class ThirdPlatformCreateGroup
     // @all userange： 0（default）：所havepersonallcan@all
     private int $mentionAllAuthority = 0;
 
-    // 群managetype：0（default）：所havepersoncanmanage，1：仅群主canmanage
+    // 群managetype：0（default）：所havepersoncanmanage，1：only群主canmanage
     private int $managementType = 0;
 
     // whetherstart群禁言：0（default）：not禁言，1：all员禁言

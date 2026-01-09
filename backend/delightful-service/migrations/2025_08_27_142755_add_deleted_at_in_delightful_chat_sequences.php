@@ -28,7 +28,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('delightful_chat_sequences', function (Blueprint $table) {
-            // rollbacko clockdeletedeleted_atfield（仅infield存ino clock）
+            // rollbacko clockdeletedeleted_atfield（onlyinfield存ino clock）
             if (Schema::hasColumn('delightful_chat_sequences', 'deleted_at')) {
                 $table->dropSoftDeletes();
             }

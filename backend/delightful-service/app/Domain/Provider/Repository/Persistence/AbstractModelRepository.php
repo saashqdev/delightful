@@ -83,7 +83,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * initialize实bodyIDandtime戳（for新create实bodyset）.
+     * initialize实bodyIDandtime戳（fornewcreate实bodyset）.
      * @param mixed $entity
      */
     protected function initializeEntityForCreation($entity, array &$attributes): void
@@ -106,14 +106,14 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * override getAttributes methodbycorrectprocess复杂fieldserialize.
+     * override getAttributes methodbycorrectprocesscomplexfieldserialize.
      */
     protected function getFieldAttributes(AbstractEntity $entity): array
     {
         $attributes = [];
         $array = $entity->toArray();
         foreach ($array as $key => $value) {
-            // to复杂fieldconduct特殊process
+            // tocomplexfieldconduct特殊process
             if (in_array($key, ['config', 'translate'], true) && (is_array($value) || is_object($value))) {
                 $value = Json::encode($value);
             }

@@ -79,7 +79,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.user.create_access_token_rate_limit')]
     case USER_CREATE_ACCESS_TOKEN_RATE_LIMIT = 4016;
 
-    // 大modelresponsefailed
+    // bigmodelresponsefailed
     #[ErrorMessage(message: 'api.model.response_fail')]
     case MODEL_RESPONSE_FAIL = 4017;
 

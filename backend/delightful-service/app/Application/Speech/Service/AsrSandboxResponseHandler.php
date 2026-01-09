@@ -138,7 +138,7 @@ readonly class AsrSandboxResponseHandler
                 'error' => $e->getMessage(),
             ]);
 
-            // ifiswefrom己throwexception，直接重新throw
+            // ifiswefrom己throwexception，直接重newthrow
             if ($e instanceof BusinessException) {
                 throw $e;
             }

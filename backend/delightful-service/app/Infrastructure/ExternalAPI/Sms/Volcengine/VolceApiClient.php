@@ -31,7 +31,7 @@ class VolceApiClient extends AbstractSms
             $smsStruct->setTemplateId($templateId);
         }
         $variables = $this->parseVariables($smsStruct);
-        // VolcengineSms needeachtime短信重新 new
+        // VolcengineSms needeachtimeshort信重new new
         return make(VolcengineSms::class)->request($smsStruct->phone, $variables, $smsStruct->sign, $smsStruct->templateId);
     }
 
@@ -41,20 +41,20 @@ class VolceApiClient extends AbstractSms
             return $smsStruct->content ?: '';
         }
         $templateContent = $this->template->getContentByTemplateId($smsStruct->getTemplateId());
-        // 按variableorder,also原becomecomplete短信text
+        // 按variableorder,also原becomecompleteshort信text
         return $this->translateContent($templateContent, $smsStruct->variables);
     }
 
     /**
-     * parse传入variablevariableor者text短信,totemplate短信variableassociatearray.
+     * parse传入variablevariableor者textshort信,totemplateshort信variableassociatearray.
      */
     private function parseVariables(SmsStruct $smsStruct): array
     {
         $variables = $smsStruct->variables;
         $smsStruct->language = $this->getContentLanguage($smsStruct);
-        // 火山短信只supportvariable短信,according tocomplete $message 适配to应 templatevariable
+        // 火山short信onlysupportvariableshort信,according tocomplete $message 适配to应 templatevariable
 
-        // $variables maybeforindexarray ["quotient品A","供应quotientA",10],火山短信needalso原becomeassociatearray
+        // $variables maybeforindexarray ["quotient品A","供应quotientA",10],火山short信needalso原becomeassociatearray
         if ($smsStruct->templateId && $this->array_is_list($variables)) {
             // 1.gettemplatecontent,certainvariablekey
             $templateContent = $this->template->getContentByTemplateId($smsStruct->getTemplateId()) ?? '';

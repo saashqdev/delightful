@@ -156,7 +156,7 @@ class AiAbilityAssembler
         $length = mb_strlen($apiKey);
         $minLength = $prefixLength + $suffixLength;
 
-        // if key too短，all部脱敏
+        // if key tooshort，all部脱敏
         if ($length <= $minLength) {
             return str_repeat('*', $length);
         }

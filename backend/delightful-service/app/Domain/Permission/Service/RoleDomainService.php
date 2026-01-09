@@ -263,7 +263,7 @@ readonly class RoleDomainService
         $roleEntity = $this->getByName($dataIsolation, self::ORGANIZATION_ADMIN_ROLE_NAME);
 
         if ($roleEntity === null) {
-            // create新role
+            // createnewrole
             $roleEntity = new RoleEntity();
             $roleEntity->setName(self::ORGANIZATION_ADMIN_ROLE_NAME);
             $roleEntity->setOrganizationCode($organizationCode);

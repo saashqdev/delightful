@@ -81,7 +81,7 @@ class InstructionConfig extends AbstractEntity
     protected string $off = '';
 
     /**
-     * 常驻finger令，default只读.
+     * 常驻finger令，defaultonly读.
      */
     protected bool $residency = true;
 

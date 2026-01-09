@@ -59,7 +59,7 @@ class AgentAppService extends AbstractAppService
             // merge
             $agentIds = array_unique(array_merge($orgAgentIds, $selfAgentIds));
 
-            // cacheresult（仅whennotforemptyo clock）
+            // cacheresult（onlywhennotforemptyo clock）
             if (! empty($agentIds)) {
                 $this->redis->setex($cacheKey, 180, Json::encode($agentIds)); // cache 3 minute钟
             }
@@ -74,7 +74,7 @@ class AgentAppService extends AbstractAppService
 
         $data = $this->agentDomainService->queries($agentDataIsolation, $query, $page);
 
-        // ifcontain官方organization，按照传入IDorder重新sortresult，maintain官方organization助理infront
+        // ifcontain官方organization，按照传入IDorder重newsortresult，maintain官方organization助理infront
         if ($containOfficialOrganization) {
             $data['list'] = $this->sortAgentsByIdOrder($data['list'], $agentIds);
         }
@@ -113,7 +113,7 @@ class AgentAppService extends AbstractAppService
                 }
             }
 
-            // 重新sort：官方organization助理infront
+            // 重newsort：官方organization助理infront
             $data['list'] = array_merge($officialAgents, $nonOfficialAgents);
         }
         $visibleAgents = [];
@@ -156,13 +156,13 @@ class AgentAppService extends AbstractAppService
             return $agents;
         }
 
-        // 快speedcreate ID to实bodymapping
+        // fastspeedcreate ID to实bodymapping
         $agentMap = [];
         foreach ($agents as $agent) {
             $agentMap[$agent->getId()] = $agent;
         }
 
-        // 按照finger定order重新organizationarray
+        // 按照finger定order重neworganizationarray
         $sortedAgents = [];
         foreach ($sortedIds as $id) {
             if (isset($agentMap[$id])) {

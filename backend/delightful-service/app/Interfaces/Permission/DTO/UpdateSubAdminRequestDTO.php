@@ -15,28 +15,28 @@ use App\Infrastructure\Core\AbstractDTO;
 class UpdateSubAdminRequestDTO extends AbstractDTO
 {
     /**
-     * rolename（optional，仅inneedupdateo clockprovide）.
+     * rolename（optional，onlyinneedupdateo clockprovide）.
      */
     public ?string $name = null;
 
     /**
-     * rolestatus：0=disable, 1=enable（optional，仅inneedupdateo clockprovide）.
+     * rolestatus：0=disable, 1=enable（optional，onlyinneedupdateo clockprovide）.
      */
     public ?int $status = null;
 
     /**
-     * permissiontag，useatfront端showcategory（optional，仅inneedupdateo clockprovide）.
+     * permissiontag，useatfront端showcategory（optional，onlyinneedupdateo clockprovide）.
      */
     public ?array $permissionTag = null;
 
     /**
-     * permissionkeylist（optional，仅inneedupdateo clockprovide）.
+     * permissionkeylist（optional，onlyinneedupdateo clockprovide）.
      * notice：ifprovidethisfield，willreplace所have现havepermission.
      */
     public ?array $permissions = null;
 
     /**
-     * userIDlist（optional，仅inneedupdateo clockprovide）.
+     * userIDlist（optional，onlyinneedupdateo clockprovide）.
      * notice：ifprovidethisfield，willreplace所have现haveuserassociate.
      */
     public ?array $userIds = null;
@@ -163,7 +163,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
         }
 
         if ($this->status !== null && ! in_array($this->status, [0, 1])) {
-            $errors[] = 'rolestatusvalueinvalid，只canis0or1';
+            $errors[] = 'rolestatusvalueinvalid，onlycanis0or1';
         }
 
         if ($this->permissions !== null) {

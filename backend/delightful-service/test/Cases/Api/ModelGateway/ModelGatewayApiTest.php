@@ -22,7 +22,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     private const DEFAULT_MODEL = 'deepseek-v3';
 
     /**
-     * test chatCompletions method高canuseproperty.
+     * test chatCompletions methodhighcanuseproperty.
      */
     public function testHighAvaiable()
     {
@@ -50,7 +50,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
             ],
         ];
 
-        // createone Parallel instance，setmost大andhair数for 10
+        // createone Parallel instance，setmostbigandhair数for 10
         $parallel = new Parallel(10);
 
         // definition多differentrequest场景
@@ -209,7 +209,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
             ],
             [
                 'role' => 'user',
-                'content' => 'you好',
+                'content' => 'yougood',
             ],
         ];
     }

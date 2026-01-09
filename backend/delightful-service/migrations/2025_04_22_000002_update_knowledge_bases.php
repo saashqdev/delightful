@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // modify表结构，add新field
+        // modify表结构，addnewfield
         Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
             // checkwhetheralready存infield，avoidduplicateadd
             if (! Schema::hasColumn('delightful_flow_knowledge', 'fragment_config')) {

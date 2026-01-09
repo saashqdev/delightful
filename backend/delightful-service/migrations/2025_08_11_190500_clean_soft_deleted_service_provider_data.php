@@ -246,7 +246,7 @@ return new class extends Migration {
 
             $logger->info('needcleanuporganizationquantity: ' . count($allOrganizationCodes));
 
-            // 5. 按organizationhandlecleanupwork（小transaction）
+            // 5. 按organizationhandlecleanupwork（smalltransaction）
             $this->cleanOrganizationsInBatches($allOrganizationCodes, $officialModelIds, $officialEnabledModels, $logger);
         } catch (Throwable $e) {
             $logger->error('cleanup service_provider_models 冗remainderdataproceduremiddlehair生error: ' . $e->getMessage());
@@ -269,7 +269,7 @@ return new class extends Migration {
     }
 
     /**
-     * minutebatchandhaircleanupeachorganizationdata（eachorganization独立小transaction）.
+     * minutebatchandhaircleanupeachorganizationdata（eachorganization独立smalltransaction）.
      */
     private function cleanOrganizationsInBatches(array $organizationCodes, array $officialModelIds, array $officialEnabledModels, LoggerInterface $logger): void
     {

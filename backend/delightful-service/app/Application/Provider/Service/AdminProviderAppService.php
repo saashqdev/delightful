@@ -608,7 +608,7 @@ readonly class AdminProviderAppService
         }
         $proxyModelRequest->setModel($modelPrimaryId);
         $proxyModelRequest->setInput('test');
-        $proxyModelRequest->setEnableHighAvailability(false); // 连通propertytesto clocknotenable高canuse
+        $proxyModelRequest->setEnableHighAvailability(false); // 连通propertytesto clocknotenablehighcanuse
         $proxyModelRequest->setBusinessParams([
             'organization_id' => $authorization->getOrganizationCode(),
             'user_id' => $authorization->getId(),
@@ -633,9 +633,9 @@ readonly class AdminProviderAppService
         if (defined('DELIGHTFUL_ACCESS_TOKEN')) {
             $completionDTO->setAccessToken(DELIGHTFUL_ACCESS_TOKEN);
         }
-        $completionDTO->setMessages([['role' => 'user', 'content' => 'you好']]);
+        $completionDTO->setMessages([['role' => 'user', 'content' => 'yougood']]);
         $completionDTO->setModel($modelPrimaryId);
-        $completionDTO->setEnableHighAvailability(false); // 连通propertytesto clocknotenable高canuse
+        $completionDTO->setEnableHighAvailability(false); // 连通propertytesto clocknotenablehighcanuse
         $completionDTO->setBusinessParams([
             'organization_id' => $authorization->getOrganizationCode(),
             'user_id' => $authorization->getId(),
@@ -671,7 +671,7 @@ readonly class AdminProviderAppService
         // batchquantityget所havegraph标link
         $iconUrlMap = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
 
-        // 只handlegraph标URL，直接return实bodyobject
+        // onlyhandlegraph标URL，直接return实bodyobject
         foreach ($serviceProviders as $serviceProvider) {
             $icon = $serviceProvider->getIcon();
 

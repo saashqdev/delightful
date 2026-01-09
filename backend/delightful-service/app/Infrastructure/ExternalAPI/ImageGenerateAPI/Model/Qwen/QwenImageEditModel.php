@@ -129,7 +129,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                         foreach ($choice['message']['content'] as $content) {
                             if (isset($content['image']) && ! empty($content['image'])) {
                                 $imageUrls[$index] = $content['image'];
-                                break 2; // 只取firstimageURL
+                                break 2; // only取firstimageURL
                             }
                         }
                     }
@@ -158,7 +158,7 @@ class QwenImageEditModel extends AbstractImageGenerate
             'image_count' => count($imageGenerateRequest->getImageUrls()),
         ]);
 
-        // 直接handlesinglerequest，graphlikeedit只handleone张image
+        // 直接handlesinglerequest，graphlikeeditonlyhandleone张image
         try {
             $result = $this->callSyncEditAPI($imageGenerateRequest);
             $rawResults = [

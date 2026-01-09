@@ -19,7 +19,7 @@ use Throwable;
  * // customizeparameter
  * $safeUrl = SSRFUtil::getSafeUrl('https://example.com', replaceIp: false, allowRedirect: true);
  *
- * // 高levelconfiguration
+ * // highlevelconfiguration
  * $safeUrl = SSRFUtil::getSafeUrl(
  *     'https://example.com',
  *     blackList: ['192.168.1.1'],

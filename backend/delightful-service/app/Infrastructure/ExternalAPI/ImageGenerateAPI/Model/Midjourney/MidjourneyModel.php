@@ -20,7 +20,7 @@ use Exception;
 
 class MidjourneyModel extends AbstractImageGenerate
 {
-    // most大retrycount
+    // mostbigretrycount
     protected const MAX_RETRIES = 20;
 
     // retrybetween隔（second）
@@ -379,7 +379,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * validateMidjourney APIresponsedataformat（仅checkimagesfield）.
+     * validateMidjourney APIresponsedataformat（onlycheckimagesfield）.
      */
     private function validateMidjourneyResponse(array $result): void
     {
@@ -397,7 +397,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * willMidjourneyimagedataaddtoOpenAIresponseobjectmiddle（仅handleimagesfield）.
+     * willMidjourneyimagedataaddtoOpenAIresponseobjectmiddle（onlyhandleimagesfield）.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
@@ -412,7 +412,7 @@ class MidjourneyModel extends AbstractImageGenerate
         $currentData = $response->getData();
         $currentUsage = $response->getUsage() ?? new ImageUsage();
 
-        // 仅handle images arraymiddleURL
+        // onlyhandle images arraymiddleURL
         foreach ($midjourneyResult['data']['images'] as $imageUrl) {
             if (! empty($imageUrl)) {
                 // handlewatermark

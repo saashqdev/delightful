@@ -232,7 +232,7 @@ class DelightfulAgentApi extends AbstractApi
 
         if ($result['is_add_friend']) {
             $friendId = $userEntity->getUserId();
-            // add好友，助理defaultagree好友
+            // addgood友，助理defaultagreegood友
             $this->userAppService->addFriend($authorization, $friendId, AddFriendType::PASS);
         }
         return $result;
@@ -247,7 +247,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getReleaseAgentVersions($authenticatable, $agentId);
     }
 
-    // get助理most新versionnumber
+    // get助理mostnewversionnumber
     public function getAgentMaxVersion(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -301,7 +301,7 @@ class DelightfulAgentApi extends AbstractApi
         $aiCode = $delightfulAgentVersionEntity->getFlowCode();
         $userEntity = $this->accountAppService->aiRegister($userDTO, $authorization, $aiCode);
         $friendId = $userEntity->getUserId();
-        // add好友，助理defaultagree好友
+        // addgood友，助理defaultagreegood友
         $this->userAppService->addFriend($authorization, $friendId, AddFriendType::PASS);
 
         return $userEntity;

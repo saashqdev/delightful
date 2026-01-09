@@ -107,7 +107,7 @@ readonly class ProviderModelDomainService
             }
         }
 
-        // 目frontsavemodelinterfaceonly大modeluse，thereforeforcetypeis llm
+        // 目frontsavemodelinterfaceonlybigmodeluse，thereforeforcetypeis llm
         $providerModelDTO->setCategory(Category::LLM);
         $modelEntity = $this->providerModelRepository->saveModel($dataIsolation, $providerModelDTO);
 
@@ -182,11 +182,11 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * getfinger定modelmost新configurationversionID.
+     * getfinger定modelmostnewconfigurationversionID.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param int $serviceProviderModelId modelID
-     * @return null|int most新versionID，ifnot存inthenreturnnull
+     * @return null|int mostnewversionID，ifnot存inthenreturnnull
      */
     public function getLatestConfigVersionId(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?int
     {
@@ -194,11 +194,11 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * getfinger定modelmost新configurationversion实body.
+     * getfinger定modelmostnewconfigurationversion实body.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param int $serviceProviderModelId modelID
-     * @return null|ProviderModelConfigVersionEntity most新version实body，ifnot存inthenreturnnull
+     * @return null|ProviderModelConfigVersionEntity mostnewversion实body，ifnot存inthenreturnnull
      */
     public function getLatestConfigVersionEntity(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?ProviderModelConfigVersionEntity
     {

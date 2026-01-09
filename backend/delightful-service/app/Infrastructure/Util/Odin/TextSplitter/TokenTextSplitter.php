@@ -17,7 +17,7 @@ use Yethee\Tiktoken\EncoderProvider;
 class TokenTextSplitter extends TextSplitter
 {
     /**
-     * setmost大cachetextlength（character数）
+     * setmostbigcachetextlength（character数）
      * 超passthislengthtextwillnotwillbecachein协程updown文middle.
      */
     private const int MAX_CACHE_TEXT_LENGTH = 1000;
@@ -110,7 +110,7 @@ class TokenTextSplitter extends TextSplitter
         $finalChunks = [];
         foreach ($chunks as $i => $chunk) {
             if ($chunksLengths[$i] > $this->chunkSize) {
-                // ifchunktoo大，conductrecursionsplit
+                // ifchunktoobig，conductrecursionsplit
                 $finalChunks = array_merge($finalChunks, $this->recursiveSplitText($chunk));
             } else {
                 $finalChunks[] = $chunk;
@@ -218,7 +218,7 @@ class TokenTextSplitter extends TextSplitter
      */
     private function splitByFixedLength(string $text): array
     {
-        $chunkSize = (int) floor($this->chunkSize / 2); // usemore小piecesize
+        $chunkSize = (int) floor($this->chunkSize / 2); // usemoresmallpiecesize
         $length = mb_strlen($text);
         $splits = [];
         for ($i = 0; $i < $length; $i += $chunkSize) {

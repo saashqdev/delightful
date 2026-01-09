@@ -375,7 +375,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // cleanuptestdata
         $this->getResourceShareDomainService()->deleteShareByResource($projectId, ResourceType::ProjectInvitation->value);
 
-        // 连续快speedstart/close邀请link
+        // 连续fastspeedstart/close邀请link
         $this->toggleInvitationLink($projectId, true);
         $this->toggleInvitationLink($projectId, false);
         $this->toggleInvitationLink($projectId, true);
@@ -412,7 +412,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // validate密码lengthandformat
         $password = $password3['data']['password'];
         $this->assertEquals(5, strlen($password)); // 密码lengthshouldis5位
-        $this->assertMatchesRegularExpression('/^\d{5}$/', $password); // 只contain5位number
+        $this->assertMatchesRegularExpression('/^\d{5}$/', $password); // onlycontain5位number
     }
 
     /**
@@ -450,13 +450,13 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->assertEquals(1000, $linkInfo['code']);
         $this->assertFalse($linkInfo['data']['requires_password']);
 
-        // 5. 重新start密码protected
+        // 5. 重newstart密码protected
         $enableResponse = $this->setInvitationPassword($projectId, true);
         $this->assertEquals(1000, $enableResponse['code']);
 
         // 6. validate密码maintainnot变
         $restoredPassword = $enableResponse['data']['password'];
-        $this->assertEquals($originalPassword, $restoredPassword, '重新start密码protectedback，密码shouldmaintainnot变');
+        $this->assertEquals($originalPassword, $restoredPassword, '重newstart密码protectedback，密码shouldmaintainnot变');
 
         // 7. validatestartstatusdownaccesslinkneed密码
         $linkInfo = $this->getInvitationByToken($token);
@@ -515,7 +515,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         );
         $this->assertEquals(51220, $response['code'], 'error密码shouldreturn51220error码');
 
-        // 5. validate新密码cannormaluse
+        // 5. validatenew密码cannormaluse
         $joinResult = $this->joinProjectSuccess($token, $customPassword);
         $this->assertEquals(1000, $joinResult['code']);
         $this->assertEquals('viewer', $joinResult['data']['user_role']);
@@ -523,7 +523,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 6. cleanuptestdata
         $this->cleanupTestData($projectId);
 
-        // 7. testinvalid密码format（nullstringand超长密码）
+        // 7. testinvalid密码format（nullstringand超long密码）
         $this->switchUserTest1();
         $this->toggleInvitationLink($projectId, true);
 
@@ -531,7 +531,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $response = $this->changeInvitationPassword($projectId, '', 51220);
         $this->assertEquals(51220, $response['code']);
 
-        // test超长密码（19位）
+        // test超long密码（19位）
         $response = $this->changeInvitationPassword($projectId, str_repeat('1', 19), 51220);
         $this->assertEquals(51220, $response['code']);
 

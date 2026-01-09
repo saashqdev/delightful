@@ -85,7 +85,7 @@ readonly class AsrValidationService
                 ExceptionBuilder::throw(AsrErrorCode::ProjectNotFound);
             }
             if ($e->getCode() >= 43000 && $e->getCode() < 44000) {
-                // already经is AsrErrorCode，直接重新throw
+                // already经is AsrErrorCode，直接重newthrow
                 throw $e;
             }
 

@@ -115,7 +115,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     /**
      * saveorupdatefile
      * iffile_keyalready存in，thenupdatefileinfo
-     * iffile_keynot存in，thencreate新file.
+     * iffile_keynot存in，thencreatenewfile.
      *
      * @param DelightfulChatFileEntity $fileEntity file实body
      * @param DataIsolation $dataIsolation data隔离
@@ -133,7 +133,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
             return $fileEntity;
         }
 
-        // iffilenot存in，create新file
+        // iffilenot存in，createnewfile
         $time = date('Y-m-d H:i:s');
         $fileEntity->setUserId($dataIsolation->getCurrentUserId());
         $fileEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());

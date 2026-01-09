@@ -173,7 +173,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         $operations = $this->getOperations();
 
         foreach ($resources as $resource) {
-            // 仅handlethreelevelandbyupresource，filter平台and模piecelevel
+            // onlyhandlethreelevelandbyupresource，filter平台and模piecelevel
             if (substr_count($resource, '.') < 2) {
                 continue;
             }
@@ -205,7 +205,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
      *   ],
      * ]
      *
-     * @param bool $isPlatformOrganization whether平台organization；仅whenfor true o clock，contain platform 平台resourcetree
+     * @param bool $isPlatformOrganization whether平台organization；onlywhenfor true o clock，contain platform 平台resourcetree
      */
     public function getPermissionTree(bool $isPlatformOrganization = false): array
     {
@@ -360,7 +360,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         if (! enum_exists($opEnumClass)) {
             throw new InvalidArgumentException('Operation enum not found for resource: ' . $resource);
         }
-        // 仅support BackedEnum，因forback续needread ->value
+        // onlysupport BackedEnum，因forback续needread ->value
         if (! is_subclass_of($opEnumClass, BackedEnum::class)) {
             throw new InvalidArgumentException('Operation enum for resource must be BackedEnum: ' . $opEnumClass);
         }

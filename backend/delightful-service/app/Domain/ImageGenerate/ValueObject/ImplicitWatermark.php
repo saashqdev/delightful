@@ -44,7 +44,7 @@ class ImplicitWatermark
         $currentSign = $this->getSign(); // 先decryptgetoriginalsignature
         $this->userId = $userId;
         if (! empty($currentSign)) {
-            $this->setSign($currentSign); // 重新encryptsignature
+            $this->setSign($currentSign); // 重newencryptsignature
         }
         return $this;
     }
@@ -59,7 +59,7 @@ class ImplicitWatermark
         $currentSign = $this->getSign(); // 先decryptgetoriginalsignature
         $this->organizationCode = $organizationCode;
         if (! empty($currentSign)) {
-            $this->setSign($currentSign); // 重新encryptsignature
+            $this->setSign($currentSign); // 重newencryptsignature
         }
         return $this;
     }

@@ -28,7 +28,7 @@ class JsonStreamCachedDTO extends AbstractEntity
     protected string $receiveDelightfulId;
 
     /**
-     * cache大 json data.
+     * cachebig json data.
      */
     protected array $content;
 

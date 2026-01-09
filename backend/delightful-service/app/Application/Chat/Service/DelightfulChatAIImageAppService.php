@@ -99,7 +99,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                 $reqDTO->getReferMessageId(),
             );
             if (! empty($reqDTO->getAttachments())) {
-                // toquotecontent重新文生graph
+                // toquotecontent重new文生graph
                 $this->handleGenerateImageByReference($requestContext, $reqDTO);
             } else {
                 // 文生graph
@@ -112,7 +112,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     }
 
     /**
-     * toquotecontent重新文生graph.
+     * toquotecontent重new文生graph.
      */
     private function handleGenerateImageByReference(RequestContext $requestContext, DelightfulChatAIImageReqDTO $reqDTO): void
     {

@@ -41,7 +41,7 @@ class ProviderConfigDTO extends AbstractDTO
     protected string $serviceProviderId = '';
 
     /**
-     * 大modelspecificconfiguration，ak,sk,host 之category（already脱敏）.
+     * bigmodelspecificconfiguration，ak,sk,host 之category（already脱敏）.
      */
     protected ?ProviderConfigItem $config = null;
 

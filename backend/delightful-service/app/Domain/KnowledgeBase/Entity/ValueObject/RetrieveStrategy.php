@@ -12,7 +12,7 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
  *
  * definition两typeretrievestrategy：
  * - SINGLE: singleretrieve，fromsingleknowledge basemiddleretrieveinfo
- * - MULTIPLE: 多重retrieve，meanwhilefrom多knowledge basemiddleretrieveinfo，然backtoresultconduct重新sort
+ * - MULTIPLE: 多重retrieve，meanwhilefrom多knowledge basemiddleretrieveinfo，然backtoresultconduct重newsort
  */
 class RetrieveStrategy
 {
@@ -28,7 +28,7 @@ class RetrieveStrategy
     /**
      * 多重retrieve.
      *
-     * meanwhilefrom多knowledge basemiddleretrieveinfo，然backtoresultconduct重新sort。
+     * meanwhilefrom多knowledge basemiddleretrieveinfo，然backtoresultconduct重newsort。
      * thestrategypassconfigurationparameter `retrieve_strategy` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。
      * itsupportdifferent重sortstrategy，如use重sortmodeloradd权minute数。

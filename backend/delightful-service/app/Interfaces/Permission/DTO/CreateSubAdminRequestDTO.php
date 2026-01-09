@@ -132,7 +132,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
         }
 
         if (! in_array($this->status, [0, 1])) {
-            $errors[] = 'rolestatusvalueinvalid，只canis0or1';
+            $errors[] = 'rolestatusvalueinvalid，onlycanis0or1';
         }
 
         if (! empty($this->permissions)) {

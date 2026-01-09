@@ -91,7 +91,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
 
     /**
      * openconversationwindow.
-     * controlmessage,只inseq表writedata,notinmessage表写.
+     * controlmessage,onlyinseq表writedata,notinmessage表写.
      * @throws Throwable
      */
     public function openConversationWindow(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
@@ -153,7 +153,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * justininputmiddlestatus只needpushgiveto方,notneed推givefrom己设备.
+     * justininputmiddlestatusonlyneedpushgiveto方,notneed推givefrom己设备.
      */
     public function clientOperateConversationStatus(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
@@ -292,7 +292,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     {
         $users = $this->delightfulUserRepository->getUserByIds($userIds);
         $users = array_column($users, null, 'user_id');
-        // judgethistheseuserwhetheralready经存inconversationwindow,只iswindowstatusbemarkfordelete
+        // judgethistheseuserwhetheralready经存inconversationwindow,onlyiswindowstatusbemarkfordelete
         $conversations = $this->delightfulConversationRepository->batchGetConversations($userIds, $groupEntity->getId(), ConversationType::Group);
         /** @var DelightfulConversationEntity[] $conversations */
         $conversations = array_column($conversations, null, 'user_id');

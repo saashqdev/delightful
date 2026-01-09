@@ -190,7 +190,7 @@ readonly class AsrTitleGeneratorService
         $title = preg_replace('/[\\\\\/:*?"<>|]/u', '', $title) ?? '';
         // compressnull白
         $title = preg_replace('/\s+/u', ' ', $title) ?? '';
-        // limitlength，avoidpass长path
+        // limitlength，avoidpasslongpath
         if (mb_strlen($title) > 50) {
             $title = mb_substr($title, 0, 50);
         }
@@ -211,7 +211,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * forfile直传场景generatetitle（仅according tofile名）.
+     * forfile直传场景generatetitle（onlyaccording tofile名）.
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
      * @param string $fileName file名

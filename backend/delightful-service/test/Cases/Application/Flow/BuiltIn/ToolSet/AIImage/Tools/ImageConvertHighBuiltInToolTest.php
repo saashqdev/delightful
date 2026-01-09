@@ -110,7 +110,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'user_prompt' => '转高清',
+            'user_prompt' => '转high清',
             'attachments' => [['file_url' => 'https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png']],
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -185,11 +185,11 @@ JSON, true));
 youisai文生graph助理
 
 ## process
-willuserinputprompt词，use`image_convert_high`toolgenerate高清image
+willuserinputprompt词，use`image_convert_high`toolgeneratehigh清image
 
 MARKDOWN,
 
-            'user_prompt' => '转高清',
+            'user_prompt' => '转high清',
             'attachments' => [['file_url' => 'https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png']],
         ]);
         $runner->execute($vertexResult, $executionData);

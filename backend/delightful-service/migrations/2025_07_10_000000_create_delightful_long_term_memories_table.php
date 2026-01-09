@@ -22,11 +22,11 @@ return new class extends Migration {
             $table->text('origin_text')->nullable()->comment('originaltextcontent');
             $table->string('memory_type', 50)->default('manual_input')->comment('记忆type');
             $table->string('status', 20)->default('pending')->comment('记忆status：pending-待accept, active-in effect, pending_revision-待修订');
-            $table->tinyInteger('enabled')->default(0)->comment('whetherenable：0-disable，1-enable（仅 active status记忆canset）');
+            $table->tinyInteger('enabled')->default(0)->comment('whetherenable：0-disable，1-enable（only active status记忆canset）');
             $table->decimal('confidence', 3, 2)->unsigned()->default(0.8)->comment('置信degree(0-1)');
             $table->decimal('importance', 3, 2)->unsigned()->default(0.5)->comment('重wantproperty(0-1)');
             $table->unsignedInteger('access_count')->default(0)->comment('accesscount');
-            $table->unsignedInteger('reinforcement_count')->default(0)->comment('强化count');
+            $table->unsignedInteger('reinforcement_count')->default(0)->comment('strong化count');
             $table->decimal('decay_factor', 3, 2)->unsigned()->default(1.0)->comment('衰subtract因子(0-1)');
             $table->json('tags')->nullable()->comment('taglist');
             $table->json('metadata')->nullable()->comment('yuandata');
@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->string('project_id', 36)->nullable()->default(null)->comment('projectID');
             $table->string('user_id', 36)->comment('userID');
             $table->timestamp('last_accessed_at')->nullable()->comment('mostbackaccesstime');
-            $table->timestamp('last_reinforced_at')->nullable()->comment('mostback强化time');
+            $table->timestamp('last_reinforced_at')->nullable()->comment('mostbackstrong化time');
             $table->timestamp('expires_at')->nullable()->comment('expiretime');
             $table->timestamp('created_at')->useCurrent()->comment('createtime');
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->comment('updatetime');

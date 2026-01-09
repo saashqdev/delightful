@@ -59,7 +59,7 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
         $attributes = $this->getFieldAttributes($providerOriginalModelEntity);
 
         if (! $providerOriginalModelEntity->getId()) {
-            // create新record
+            // createnewrecord
             $this->initializeEntityForCreation($providerOriginalModelEntity, $attributes);
             ProviderOriginalModelModel::query()->insert($attributes);
         } else {

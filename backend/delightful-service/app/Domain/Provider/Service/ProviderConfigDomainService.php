@@ -63,7 +63,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             return null;
         }
 
-        // 3. query Provider Models（仓储layer只returnProviderModelEntity[]）
+        // 3. query Provider Models（仓储layeronlyreturnProviderModelEntity[]）
         $modelEntities = $this->providerModelRepository->getProviderModelsByConfigId($dataIsolation, $configId, $providerEntity);
         // 4. organizationDTOandreturn
         return ProviderAdminAssembler::getProviderModelsDTO($providerEntity, $providerConfigEntity, $modelEntities);
@@ -330,7 +330,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
                 return $this->updateProviderConfigData($dataIsolation, $existingConfig, $providerConfigEntity);
             }
 
-            // 7. not存inthencreate新configuration
+            // 7. not存inthencreatenewconfiguration
             return $this->createNewTemplateConfig($dataIsolation, $providerEntity, $providerConfigEntity);
         } finally {
             $this->locker->release($lockName, $lockOwner);

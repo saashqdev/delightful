@@ -87,7 +87,7 @@ class RoleRepository implements RoleRepositoryInterface
     public function queries(string $organizationCode, Page $page, ?array $filters = null): array
     {
         $query = $this->roleQuery($organizationCode);
-        // default只queryneedshowrole
+        // defaultonlyqueryneedshowrole
         $query->where('is_display', 1);
 
         // applicationfilteritemitem
@@ -241,7 +241,7 @@ class RoleRepository implements RoleRepositoryInterface
 
         $models = $this->roleQuery($organizationCode)
             ->whereIn('id', $roleIds)
-            ->where('status', RoleModel::STATUS_ENABLED) // 只returnenablerole
+            ->where('status', RoleModel::STATUS_ENABLED) // onlyreturnenablerole
             ->get();
 
         $roles = [];

@@ -274,7 +274,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         }
 
         $instructions = [];
-        // 只放current agent configurationprocessfinger令
+        // only放current agent configurationprocessfinger令
         foreach ($executionData->getInstructionConfigs() as $instructionConfig) {
             if (! $instructionConfig->isFlowInstructionType()) {
                 continue;

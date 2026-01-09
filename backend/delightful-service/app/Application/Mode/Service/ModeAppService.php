@@ -292,7 +292,7 @@ class ModeAppService extends AbstractModeAppService
                 if (! $providerModel = $allProviderModels[$modelId] ?? null) {
                     continue;
                 }
-                // 只return VLM typemodel
+                // onlyreturn VLM typemodel
                 if ($providerModel->getCategory() !== Category::VLM) {
                     continue;
                 }

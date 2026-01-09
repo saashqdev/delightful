@@ -27,7 +27,7 @@ return new class extends Migration {
         Schema::create('delightful_contact_third_platform_id_mapping', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('origin_id', 128)->comment('源id');
-            $table->string('new_id', 64)->comment('新id');
+            $table->string('new_id', 64)->comment('newid');
             // mappingtype：user id、department id、nullbetween id，organizationencoding
             $table->string('mapping_type', 32)->comment('mappingtype（user、department、space、organization）');
             // thethird-party平台type：企业微信、钉钉、飞书

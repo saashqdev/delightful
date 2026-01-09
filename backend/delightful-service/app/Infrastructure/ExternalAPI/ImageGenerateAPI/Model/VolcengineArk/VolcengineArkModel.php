@@ -102,7 +102,7 @@ class VolcengineArkModel extends AbstractImageGenerate
                     // success：settingimagedatatoresponseobject
                     $this->addImageDataToResponse($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：settingerrorinfotoresponseobject（只settingfirsterror）
+                    // fail：settingerrorinfotoresponseobject（onlysettingfirsterror）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
@@ -323,7 +323,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // VolcengineArk APIeachtime只cangenerateone张graph，passandhaircallimplement多graphgenerate
+        // VolcengineArk APIeachtimeonlycangenerateone张graph，passandhaircallimplement多graphgenerate
         $count = $imageGenerateRequest->getGenerateNum();
         $rawResults = [];
         $errors = [];

@@ -106,7 +106,7 @@ class KnowledgeBaseFragmentRepository extends KnowledgeBaseAbstractRepository im
         }
         if ($query->getDocumentCode() || $query->isDefaultDocumentCode()) {
             $documentCodes = [$query->getDocumentCode()];
-            // compatible旧knowledge baseslicesegment，因foroldknowledge basenothavedocument概念，ifisdefaultdocument，then旧knowledge baseslicesegmentoneup查outcome
+            // compatibleoldknowledge baseslicesegment，因foroldknowledge basenothavedocument概念，ifisdefaultdocument，thenoldknowledge baseslicesegmentoneup查outcome
             $query->isDefaultDocumentCode() && $documentCodes[] = '';
             $builder->whereIn('document_code', $documentCodes);
         }

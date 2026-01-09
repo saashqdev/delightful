@@ -77,7 +77,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
      */
     private function detectSeparator(string $line): string
     {
-        // 常见CSVminute隔符
+        // commonCSVminute隔符
         $separators = [',', ';', '\t'];
 
         foreach ($separators as $separator) {

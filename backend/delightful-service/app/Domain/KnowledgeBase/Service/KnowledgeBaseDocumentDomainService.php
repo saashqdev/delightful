@@ -122,7 +122,7 @@ readonly class KnowledgeBaseDocumentDomainService
     {
         $document = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode);
 
-        // ifforce重建or者syncstatusforfail，then重新sync
+        // ifforce重建or者syncstatusforfail，then重newsync
         if ($force || $document->getSyncStatus() === 2) { // 2 table示syncfail
             $document->setSyncStatus(0); // 0 table示notsync
             $document->setSyncStatusMessage('');

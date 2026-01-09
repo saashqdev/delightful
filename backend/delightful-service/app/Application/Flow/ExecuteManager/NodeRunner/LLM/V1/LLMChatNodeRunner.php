@@ -32,7 +32,7 @@ use Hyperf\Odin\Tool\Definition\ToolDefinition;
 #[FlowNodeDefine(
     type: NodeType::LLM->value,
     code: NodeType::LLM->name,
-    name: '大modelcall',
+    name: 'bigmodelcall',
     paramsConfig: LLMChatNodeParamsConfig::class,
     version: 'v1',
     singleDebug: true,
@@ -104,7 +104,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                         $contentMessage = new UserMessage();
                         $contentMessage->setContent($userPrompt);
                         $contentMessage->setIdentifier($contentMessageId);
-                        // 仅仅addattachment
+                        // onlyonlyaddattachment
                         $imageUrls = $executionData->getTriggerData()->getAttachmentImageUrls();
                         if ($imageUrls) {
                             // havecontentandhaveattachment，addtextandimagecontent
@@ -171,7 +171,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                     $lastMessage = clone $message;
                     $message->setContent($content);
                     $message->setContents(null);
-                    // 重新organization多模state
+                    // 重neworganization多模state
                     if ($model->getModelOptions()->isMultiModal()) {
                         $message->addContent(UserMessageContent::text($content));
                         // 补充多模state
@@ -326,7 +326,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         }
         /** @var ReplyMessageNodeParamsConfig $paramsConfig */
         $paramsConfig = $nextNode->getNodeParamsConfig();
-        // 只support text and markdown
+        // onlysupport text and markdown
         if (! in_array($paramsConfig->getType(), [DelightfulFlowMessageType::Text, DelightfulFlowMessageType::Markdown], true)) {
             return false;
         }

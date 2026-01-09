@@ -248,7 +248,7 @@ class ToolsExecutor extends AbstractTool
         if (! $form) {
             return;
         }
-        // 暂o clock只process object data
+        // 暂o clockonlyprocess object data
         if (! $form->getType()->isObject()) {
             return;
         }

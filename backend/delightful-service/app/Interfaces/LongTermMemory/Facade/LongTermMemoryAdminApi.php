@@ -296,7 +296,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 强化记忆.
+     * strong化记忆.
      */
     public function reinforceMemory(string $memoryId): array
     {
@@ -327,7 +327,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * batchquantity强化记忆.
+     * batchquantitystrong化记忆.
      */
     public function reinforceMemories(RequestInterface $request): array
     {
@@ -581,7 +581,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         $validatedParams = $this->checkParams($params, $rules);
 
-        // verifycontentandpending_content只cantwo选one
+        // verifycontentandpending_contentonlycantwo选one
         $hasContent = ! empty($validatedParams['content']);
         $hasPendingContent = ! empty($validatedParams['pending_content']);
 

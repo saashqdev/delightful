@@ -22,7 +22,7 @@ abstract class AbstractSms implements SmsInterface
 
     public function getContent(SmsStruct $smsStruct): string
     {
-        // according to短信驱动certainto应语type,andconduct语type兜bottom
+        // according toshort信驱动certainto应语type,andconduct语type兜bottom
         $language = $this->getContentLanguage($smsStruct);
         if (empty($smsStruct->variables)) {
             return $smsStruct->content ?: '';
@@ -74,7 +74,7 @@ abstract class AbstractSms implements SmsInterface
     }
 
     /**
-     * according to语typerequireand短信supportsignaturelist,returnto应signature本文.
+     * according to语typerequireandshort信supportsignaturelist,returnto应signature本文.
      */
     public function getSign(SmsStruct $smsStruct): string
     {
@@ -83,15 +83,15 @@ abstract class AbstractSms implements SmsInterface
     }
 
     /**
-     * willvariablevalueandvariable名associate,also原短信content.
-     * @param array $variables 短信variable部minute,maybeis valuearray,alsomaybeis key=>valuearray,need按$templateContentcontent,统onealso原becomekey=>valuearray
+     * willvariablevalueandvariable名associate,also原short信content.
+     * @param array $variables short信variable部minute,maybeis valuearray,alsomaybeis key=>valuearray,need按$templateContentcontent,统onealso原becomekey=>valuearray
      */
     protected function translateContent(string $templateContent, array $variables): string
     {
         if (empty($templateContent)) {
             return Json::encode($variables);
         }
-        // conductvariablematch短信match
+        // conductvariablematchshort信match
         if (! empty($variables)) {
             // compatible火山templatevariablereplace,先will $message middlevariableparseoutcome such aswill[123456] parsefor['VerificationCode'=>123456]back,againconducttemplatecontentreplace
             $variables = $this->template->getTemplateVariables($templateContent, $variables);

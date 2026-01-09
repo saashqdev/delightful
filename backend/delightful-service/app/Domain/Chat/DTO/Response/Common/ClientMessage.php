@@ -27,7 +27,7 @@ class ClientMessage extends AbstractEntity
     // 话题id
     protected ?string $topicId;
 
-    // message小category。controlmessage小category：already读return执；withdraw；edit；入群/退群；organization架构变动; 。 showmessage：text,voice,img,file,videoetc
+    // messagesmallcategory。controlmessagesmallcategory：already读return执；withdraw；edit；入群/退群；organization架构变动; 。 showmessage：text,voice,img,file,videoetc
 
     protected string $type;
 
@@ -40,7 +40,7 @@ class ClientMessage extends AbstractEntity
     // messagesendtime，and delightful_message_id oneup，useatwithdraw、editmessageo clock唯onepropertyvalidation。
     protected int $sendTime;
 
-    // chatmessagestatus:unread | seen | read |revoked  .to应middle文释义：not读|already读|alreadyview（non纯text复杂typemessage，userpoint击detail）  | withdraw
+    // chatmessagestatus:unread | seen | read |revoked  .to应middle文释义：not读|already读|alreadyview（non纯textcomplextypemessage，userpoint击detail）  | withdraw
     protected ?string $status;
 
     protected MessageInterface $content;

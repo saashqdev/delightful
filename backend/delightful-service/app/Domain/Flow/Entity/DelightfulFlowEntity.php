@@ -32,7 +32,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯oneencoding，仅increateo clockgenerate，useasgivefront端id.
+     * 唯oneencoding，onlyincreateo clockgenerate，useasgivefront端id.
      */
     protected string $code;
 
@@ -59,7 +59,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $toolSetId = '';
 
     /**
-     * 仅front端need，process编row放to node sectionpointconfiguration next_nodes middle.
+     * onlyfront端need，process编row放to node sectionpointconfiguration next_nodes middle.
      */
     protected array $edges;
 
@@ -128,7 +128,7 @@ class DelightfulFlowEntity extends AbstractEntity
         // 试运lineiswant按照starto clockcalculate
         $this->enabled = true;
 
-        // process试运lineits实只need nodes
+        // process试运lineits实onlyneed nodes
         if (empty($this->nodes)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow.fields.nodes']);
         }
@@ -245,7 +245,7 @@ class DelightfulFlowEntity extends AbstractEntity
                 $this->startNode = $node;
             }
             if ($node->isEnd() && ! $node->getParentId()) {
-                // 多endsectionpointo clock，暂o clock取first，shouldwant做become只canhaveoneendsectionpoint
+                // 多endsectionpointo clock，暂o clock取first，shouldwant做becomeonlycanhaveoneendsectionpoint
                 if (! $this->endNode) {
                     $this->endNode = $node;
                 }
@@ -674,7 +674,7 @@ class DelightfulFlowEntity extends AbstractEntity
         }
 
         if ($this->type === Type::Tools) {
-            // name只cancontain 字母、number、down划line
+            // nameonlycancontain 字母、number、down划line
             if (! preg_match('/^[a-zA-Z0-9_]+$/', $this->name)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.tool.name.invalid_format');
             }

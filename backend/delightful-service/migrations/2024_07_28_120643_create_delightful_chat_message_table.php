@@ -34,7 +34,7 @@ class CreateDelightfulChatMessageTable extends Migration
             $table->string('delightful_message_id', 64)->comment('service端generate唯onemessageid,useatmessagewithdraw/edit');
             # ## message结构
             // message优先level,byatsystemstablepropertymanage
-            $table->tinyInteger('priority')->default(0)->comment('message优先level,0~255,0most低,255most高');
+            $table->tinyInteger('priority')->default(0)->comment('message优先level,0~255,0mostlow,255mosthigh');
             $table->string('message_type', 32)->comment('messagetype:text/table情/file/markdownetc');
             $table->text('content')->comment('messagedetail');
             $table->timestamp('send_time')->comment('messagesendtime');

@@ -41,7 +41,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function getAccountSeqListByAppMessageId(DataIsolation $dataIsolation, string $appMessageId, string $pageToken, int $pageSize): array;
 
     /**
-     * returnmost大message倒数 n item序column.
+     * returnmostbigmessage倒数 n item序column.
      * @return ClientSequenceResponse[]
      */
     public function pullRecentMessage(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array;

@@ -109,7 +109,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         ];
         $this->put($this->putUrl, $initialPayload, $this->getCommonHeaders());
 
-        // 部minuteupdate：仅updatemiddle文 logo
+        // 部minuteupdate：onlyupdatemiddle文 logo
         $partialPayload = [
             'logo_zh_url' => 'https://example.com/updated_logo_zh.png',
         ];

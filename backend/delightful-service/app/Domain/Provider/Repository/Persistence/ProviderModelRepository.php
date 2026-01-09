@@ -113,7 +113,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $entity = new ProviderModelEntity($data);
 
         if ($dto->getId()) {
-            // 准备updatedata，只containhavechangefield
+            // 准备updatedata，onlycontainhavechangefield
             $updateData = $this->serializeEntityToArray($entity);
             $updateData['updated_at'] = date('Y-m-d H:i:s');
             $success = ProviderModelModel::query()

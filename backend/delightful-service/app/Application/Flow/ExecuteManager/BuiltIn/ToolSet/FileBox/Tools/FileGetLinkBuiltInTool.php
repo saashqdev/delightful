@@ -35,7 +35,7 @@ class FileGetLinkBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'according tofile key getfiledownloadsignatureURL。仅canget本processproducefile';
+        return 'according tofile key getfiledownloadsignatureURL。onlycanget本processproducefile';
     }
 
     public function getCallback(): ?Closure

@@ -29,7 +29,7 @@ use Hyperf\Retry\Annotation\Retry;
 
 class VolcengineModel extends AbstractImageGenerate
 {
-    // most大round询retrycount
+    // mostbiground询retrycount
     private const MAX_RETRY_COUNT = 30;
 
     // round询retrybetween隔（second）
@@ -115,7 +115,7 @@ class VolcengineModel extends AbstractImageGenerate
                     // success：settingimagedatatoresponseobject
                     $this->addImageDataToResponse($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：settingerrorinfotoresponseobject（只settingfirsterror）
+                    // fail：settingerrorinfotoresponseobject（onlysettingfirsterror）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
@@ -591,7 +591,7 @@ class VolcengineModel extends AbstractImageGenerate
             $currentData = $response->getData();
             $currentUsage = $response->getUsage() ?? new ImageUsage();
 
-            // 优先handle URL formatimage，参考现have逻辑只取firstimage
+            // 优先handle URL formatimage，参考现have逻辑only取firstimage
             if (! empty($data['image_urls']) && ! empty($data['image_urls'][0])) {
                 $imageUrl = $data['image_urls'][0];
                 try {
@@ -611,7 +611,7 @@ class VolcengineModel extends AbstractImageGenerate
                     ];
                 }
             } elseif (! empty($data['binary_data_base64']) && ! empty($data['binary_data_base64'][0])) {
-                // 备选：handle base64 formatimage，只取firstimage
+                // 备选：handle base64 formatimage，only取firstimage
                 $base64Image = $data['binary_data_base64'][0];
                 try {
                     // handlewatermark
@@ -661,7 +661,7 @@ class VolcengineModel extends AbstractImageGenerate
         $imageDimensions = $this->getImageDimensions($referenceImageUrl);
 
         if (! $imageDimensions) {
-            $this->logger->warning('火山graph生graph：no法get参考graphsize，skip长宽ratio例validation', ['image_url' => $referenceImageUrl]);
+            $this->logger->warning('火山graph生graph：no法get参考graphsize，skiplong宽ratio例validation', ['image_url' => $referenceImageUrl]);
             return; // Skip validation and continue execution
         }
 
@@ -674,14 +674,14 @@ class VolcengineModel extends AbstractImageGenerate
         $maxDimension = max($width, $height);
 
         if ($minDimension <= 0) {
-            $this->logger->warning('火山graph生graph：imagesizeinvalid，skip长宽ratio例validation', ['width' => $width, 'height' => $height]);
+            $this->logger->warning('火山graph生graph：imagesizeinvalid，skiplong宽ratio例validation', ['width' => $width, 'height' => $height]);
             return; // Skip validation and continue execution
         }
 
         $aspectRatio = $maxDimension / $minDimension;
 
         if ($aspectRatio > $maxAspectRatio) {
-            $this->logger->error('火山graph生graph：长宽ratio例超outlimit', [
+            $this->logger->error('火山graph生graph：long宽ratio例超outlimit', [
                 'width' => $width,
                 'height' => $height,
                 'aspect_ratio' => $aspectRatio,

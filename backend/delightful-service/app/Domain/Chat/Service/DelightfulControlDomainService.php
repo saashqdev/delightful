@@ -51,7 +51,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             ));
             return;
         }
-        // passreturn执send者quotemessageid,找tosend者messageid. (notcan直接usereceive者 sender_message_id field,thisisonenot好design,随o clockcancel)
+        // passreturn执send者quotemessageid,找tosend者messageid. (notcan直接usereceive者 sender_message_id field,thisisonenotgooddesign,随o clockcancel)
         $senderMessageId = $this->delightfulSeqRepository->getSeqByMessageId($receiveDelightfulSeqEntity->getReferMessageId())?->getSenderMessageId();
         if ($senderMessageId === null) {
             $this->logger->error(sprintf(
@@ -117,7 +117,7 @@ class DelightfulControlDomainService extends AbstractDomainService
 
             switch ($controlMessageType) {
                 case ControlMessageType::SeenMessages:
-                    # already读return执(扫oneeyemessage,toatnontext复杂typemessage,nothaveviewdetail).
+                    # already读return执(扫oneeyemessage,toatnontextcomplextypemessage,nothaveviewdetail).
                     $senderReceiveList = $senderLatestSeq->getReceiveList();
                     if ($senderReceiveList === null) {
                         $this->logger->error(sprintf(
@@ -156,7 +156,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $senderSeqData = $senderLatestSeq->toArray();
                     $senderSeqData['content'] = ['refer_message_ids' => [$senderMessageId]];
                     $senderSeenSeqEntity = SeqAssembler::generateStatusChangeSeqEntity($senderSeqData, $senderMessageId);
-                    // byat存inbatchquantitywrite情况,thiswithin只generateentity,notcallcreatemethod
+                    // byat存inbatchquantitywrite情况,thiswithinonlygenerateentity,notcallcreatemethod
                     $seqData = SeqAssembler::getInsertDataByEntity($senderSeenSeqEntity);
                     $seqData['app_message_id'] = $receiveDelightfulSeqEntity->getAppMessageId();
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {
@@ -195,7 +195,7 @@ class DelightfulControlDomainService extends AbstractDomainService
     public function handlerMQUserSelfMessageChange(DelightfulSeqEntity $changeMessageStatusSeqEntity): void
     {
         $controlMessageType = $changeMessageStatusSeqEntity->getSeqType();
-        // passreturn执send者quotemessageid,找tosend者messageid. (notcan直接usereceive者 sender_message_id field,thisisonenot好design,随o clockcancel)
+        // passreturn执send者quotemessageid,找tosend者messageid. (notcan直接usereceive者 sender_message_id field,thisisonenotgooddesign,随o clockcancel)
         $needChangeSeqEntity = $this->delightfulSeqRepository->getSeqByMessageId($changeMessageStatusSeqEntity->getReferMessageId());
         if ($needChangeSeqEntity === null) {
             $this->logger->error(sprintf(

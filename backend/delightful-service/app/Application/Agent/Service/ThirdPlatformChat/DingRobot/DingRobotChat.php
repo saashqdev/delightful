@@ -81,7 +81,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
         $message = '';
         $attachments = [];
-        // 目front只parse text、image、rich text
+        // 目frontonlyparse text、image、rich text
         switch ($params['msgtype']) {
             case 'text':
                 $message = $params['text']['content'] ?? '';
@@ -117,7 +117,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
     public function sendMessage(ThirdPlatformChatMessage $thirdPlatformChatMessage, MessageInterface $message): void
     {
-        // 目front仅sendtextoutgo
+        // 目frontonlysendtextoutgo
         if (! $message instanceof TextMessage) {
             return;
         }
@@ -134,7 +134,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendOneOnOneChatMessages($param);
             } catch (Throwable $throwable) {
-                // 钉钉 downloadimagetimemore长，超pass3000ms，网close直接returntimeouterror。sendmessagethiso clockskip
+                // 钉钉 downloadimagetimemorelong，超pass3000ms，网close直接returntimeouterror。sendmessagethiso clockskip
                 simple_log('SendOneOnOneChatMessagesError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -152,7 +152,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendGroupMessage($param);
             } catch (Throwable $throwable) {
-                // 钉钉 downloadimagetimemore长，超pass3000ms，网close直接returntimeouterror。sendmessagethiso clockskip
+                // 钉钉 downloadimagetimemorelong，超pass3000ms，网close直接returntimeouterror。sendmessagethiso clockskip
                 simple_log('SendGroupMessageError', [
                     'error' => $throwable->getMessage(),
                 ]);

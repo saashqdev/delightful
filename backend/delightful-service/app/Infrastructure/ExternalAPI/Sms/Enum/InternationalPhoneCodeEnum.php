@@ -287,8 +287,8 @@ enum InternationalPhoneCodeEnum: string
     }
 
     /**
-     * allowtothisthese国家send短信.
-     * middle国number码notallowuse国际短信interfaceconductsend
+     * allowtothisthese国家sendshort信.
+     * middle国number码notallowuse国际short信interfaceconductsend
      */
     public static function allowCountryCodes(): array
     {

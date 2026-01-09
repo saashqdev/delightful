@@ -166,7 +166,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_support', ['label' => 'type']);
                 // no break
             case Type::Sub:
-                // 仅get具havepermission子process
+                // onlyget具havepermission子process
                 $subResources = $this->operationPermissionAppService->getResourceOperationByUserIds(
                     $permissionDataIsolation,
                     ResourceType::SubFlowCode,
@@ -314,7 +314,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
                 $toolSetData['list'][] = $builtInToolSet->generateToolSet();
                 foreach ($builtInToolSet->getTools() as $builtInTool) {
-                    // 私havetool，needhave高levelgraphlikeconvertURIpermission才candisplay
+                    // 私havetool，needhavehighlevelgraphlikeconvertURIpermission才candisplay
                     if ($builtInTool->getCode() === 'ai_image_image_convert_high'
                         && ! PermissionChecker::mobileHasPermission($authorization->getMobile(), SuperPermissionEnum::FLOW_ADMIN)
                     ) {
@@ -396,7 +396,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
 
         $query = new KnowledgeBaseQuery();
         $query->setCodes(array_keys($resources));
-        // 目front仅getfrom建textknowledge base
+        // 目frontonlygetfrom建textknowledge base
         $query->setTypes([KnowledgeType::UserKnowledgeBase->value]);
         $query->setEnabled(true);
         $knowledgeData = $this->delightfulFlowKnowledgeDomainService->queries($this->createKnowledgeBaseDataIsolation($dataIsolation), $query, $page);
@@ -418,7 +418,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         }
         $knowledgeData['users'] = $this->delightfulUserDomainService->getByUserIds($this->createContactDataIsolation($dataIsolation), $userIds);
 
-        // 重新calculatetotal
+        // 重newcalculatetotal
         $knowledgeData['total'] = count($knowledgeData['list']);
 
         return $knowledgeData;

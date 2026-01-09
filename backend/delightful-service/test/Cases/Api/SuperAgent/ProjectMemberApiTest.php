@@ -519,7 +519,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 5. testleaveedit
         $this->leaveFileEditing($fileId);
 
-        // 6. getedituserquantity - should只剩1user
+        // 6. getedituserquantity - shouldonly剩1user
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
@@ -682,7 +682,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, false);
 
-        // 5. 重新置topprojectbytestsort
+        // 5. 重new置topprojectbytestsort
         $this->pinProject($projectId, true);
 
         // 6. validate置topprojectrowinfrontsurface
@@ -844,7 +844,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals($response1['code'], $response2['code']);
         $this->assertEquals(count($response1['data']), count($response2['data']));
 
-        // 2. validatecreate者go重 - 同onecreate者只shouldout现onetime
+        // 2. validatecreate者go重 - 同onecreate者onlyshouldout现onetime
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListDeduplication($response);
     }

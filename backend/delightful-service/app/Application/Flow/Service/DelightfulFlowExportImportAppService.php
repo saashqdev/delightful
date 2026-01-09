@@ -78,7 +78,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * importassistantprocess
-     * 遇toduplicatetoolorprocesswillcreate新instance，andpassname区minute.
+     * 遇toduplicatetoolorprocesswillcreatenewinstance，andpassname区minute.
      */
     public function importFlow(FlowDataIsolation $dataIsolation, array $importData, string $agentId = ''): DelightfulFlowEntity
     {
@@ -90,9 +90,9 @@ class DelightfulFlowExportImportAppService
 
         // storageageIDmappingclose系
         $idMapping = [
-            'flows' => [], // 老ID => 新ID
-            'tool_sets' => [], // 老ID => 新ID
-            'nodes' => [], // 老ID => 新ID
+            'flows' => [], // 老ID => newID
+            'tool_sets' => [], // 老ID => newID
+            'nodes' => [], // 老ID => newID
         ];
 
         // import报告，recordcreate、renameanderrorinfo
@@ -293,7 +293,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * importsingleprocess
-     * generate新IDandchecknameduplicate.
+     * generatenewIDandchecknameduplicate.
      */
     private function importSingleFlow(FlowDataIsolation $dataIsolation, array $flowData, array &$idMapping, array &$importReport): string
     {
@@ -301,7 +301,7 @@ class DelightfulFlowExportImportAppService
         $originalName = $flowData['name'] ?? '';
         $originalCode = $flowData['code'] ?? '';
 
-        // generate新ID
+        // generatenewID
         $flowData['code'] = Code::DelightfulFlow->gen();
 
         // checkwhether存in同名process，if存inthenrename
@@ -340,8 +340,8 @@ class DelightfulFlowExportImportAppService
             $flowEntity->setAgentId($agentId);
         }
 
-        // ensuresettingfor新建process
-        $flowEntity->setId(0); // settingIDfor0indicate新建
+        // ensuresettingfornew建process
+        $flowEntity->setId(0); // settingIDfor0indicatenew建
         $flowEntity->setId(null);
         $savedFlow = $this->delightfulFlowDomainService->create($dataIsolation, $flowEntity);
         $importReport['created'][] = "createprocess: {$savedFlow->getName()} (ID: {$savedFlow->getCode()})";
@@ -351,7 +351,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * importtoolcollection
-     * generate新IDandchecknameduplicate.
+     * generatenewIDandchecknameduplicate.
      */
     private function importToolSet(FlowDataIsolation $dataIsolation, array $toolSetData, array &$idMapping, array &$importReport): string
     {
@@ -359,7 +359,7 @@ class DelightfulFlowExportImportAppService
         $originalName = $toolSetData['name'] ?? '';
         $originalCode = $toolSetData['code'] ?? '';
 
-        // generate新ID
+        // generatenewID
         $toolSetData['code'] = Code::DelightfulFlowToolSet->gen();
 
         // checkwhether存in同名toolcollection，if存inthenrename
@@ -378,7 +378,7 @@ class DelightfulFlowExportImportAppService
         unset($toolSetData['created_at'], $toolSetData['updated_at'], $toolSetData['id']);
 
         // settingcreate实body必wantfield
-        $toolSetData['id'] = 0; // ensuresettingfor新建
+        $toolSetData['id'] = 0; // ensuresettingfornew建
         $toolSetData['created_at'] = new DateTime();
         $toolSetData['updated_at'] = new DateTime();
 
@@ -453,7 +453,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * updatesectionpointIDmapping
-     * for所havesectionpointgenerate新IDand维护mappingclose系.
+     * for所havesectionpointgeneratenewIDand维护mappingclose系.
      */
     private function updateNodeIdsMapping(array &$flowData, array &$idMapping): void
     {
@@ -583,7 +583,7 @@ class DelightfulFlowExportImportAppService
                         $oldIdStr = (string) $oldId;
                         $newIdStr = (string) $newId;
 
-                        // usejustthen表达typeensure只replacecompleteID
+                        // usejustthen表达typeensureonlyreplacecompleteID
                         if (preg_match('/^' . preg_quote($oldIdStr, '/') . '_/', $edge['sourceHandle'])) {
                             $edge['sourceHandle'] = preg_replace('/^' . preg_quote($oldIdStr, '/') . '/', $newIdStr, $edge['sourceHandle']);
                         }
@@ -620,7 +620,7 @@ class DelightfulFlowExportImportAppService
                     $oldNodeIdStr = (string) $oldNodeId;
                     $newNodeIdStr = (string) $newNodeId;
 
-                    // usejustthen表达typeensure只replacecompletesectionpointID
+                    // usejustthen表达typeensureonlyreplacecompletesectionpointID
                     if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $item)) {
                         $fieldName = substr($item, strlen($oldNodeIdStr));
                         $item = $newNodeIdStr . $fieldName;
@@ -656,11 +656,11 @@ class DelightfulFlowExportImportAppService
 
     /**
      * judgewhetherforinside置tool
-     * inside置toolnotneed重新create，can直接use.
+     * inside置toolnotneed重newcreate，can直接use.
      */
     private function isBuiltInTool(string $toolId, string $toolSetId): bool
     {
-        // 常见inside置toolcollectionfront缀
+        // commoninside置toolcollectionfront缀
         $builtInToolSetPrefixes = [
             'file_box',      // file盒toolcollection
             'search_engine', // searchenginetoolcollection
@@ -676,7 +676,7 @@ class DelightfulFlowExportImportAppService
             }
         }
 
-        // judgetoolIDwhetherbytoolcollectionIDopenhead，thisisinside置tool常见模type
+        // judgetoolIDwhetherbytoolcollectionIDopenhead，thisisinside置toolcommon模type
         if (! empty($toolSetId) && strpos($toolId, $toolSetId . '_') === 0) {
             return true;
         }
@@ -758,7 +758,7 @@ class DelightfulFlowExportImportAppService
             $oldNodeIdStr = (string) $oldNodeId;
             $newNodeIdStr = (string) $newNodeId;
 
-            // usejustthen表达typeensure只replacecompletesectionpointID
+            // usejustthen表达typeensureonlyreplacecompletesectionpointID
             if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $str)) {
                 $fieldName = substr($str, strlen($oldNodeIdStr));
                 $str = $newNodeIdStr . $fieldName;

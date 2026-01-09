@@ -162,7 +162,7 @@ class DelightfulLLMDomainService
     mustcalltool: batchSubQuestionsSearch
     parameterstandard：
     2.1 key词rule
-       - generategreater thanequal 3 高qualitycanretrievekey词，include核core实body、keypropertyand相close概念
+       - generategreater thanequal 3 highqualitycanretrievekey词，include核core实body、keypropertyand相close概念
        - time限定符overriderate≥30%
        - toratiocategoryquestion占ratio≥20%
     
@@ -172,12 +172,12 @@ class DelightfulLLMDomainService
     2. 子questionquantityrange
        - {sub_questions_min} ≤ 子question数 ≤ {sub_questions_max}
     3. outputformat
-       - 仅allowJSONarrayformat，forbidfrom然languagereturn答
+       - onlyallowJSONarrayformat，forbidfrom然languagereturn答
     
     ## contextexceptionhandle
     when {context} fornullo clock：
     1. start备选generatestrategy，application5W1Hframework（Who/What/When/Where/Why/How），and结合useroriginalquestionconduct填充
-    2. generatedefaultdimension，for example：policybackground | most新data | 专家观point | toratioanalyze | line业trend
+    2. generatedefaultdimension，for example：policybackground | mostnewdata | 专家观point | toratioanalyze | line业trend
     
     ## outputstandard
     混合bydownthreetypeandmore多typequestion范type，byensure子question多样propertyandoverrideproperty：
@@ -200,17 +200,17 @@ class DelightfulLLMDomainService
 
     private string $summarizePrompt = <<<'PROMPT'
     # task
-    youneedbased onusermessage，according toIprovidesearchresult，按照总minute总结构，output高quality，结构化detailedreturn答，formatfor markdown。
+    youneedbased onusermessage，according toIprovidesearchresult，按照总minute总结构，outputhighquality，结构化detailedreturn答，formatfor markdown。
     
     inIgiveyousearchresultmiddle，eachresultallis[webpage X begin]...[webpage X end]format，Xrepresenteach篇文chapternumberindex。请in适when情况downinsentence子末tailquotecontext。请按照quote编number[citation:X]formatin答案middleto应部minutequotecontext。ifonesentence话源from多context，请columnout所have相closequote编number，for example[citation:3][citation:5]，切记notwantwillquotecollectionmiddleinmostbackreturnquote编number，whileisin答案to应部minutecolumnout。
     inreturn答o clock，请noticebydown几point：
     - 今dayis{date_now}。
     - andnonsearchresult所havecontentallanduserquestion密切相close，youneed结合question，tosearchresultconduct甄别、filter。
     - toatcolumn举categoryquestion（如column举所have航班information），尽quantitywill答案controlin10wantpointbyinside，and告诉usercanviewsearchcome源、获completeinformation。优先provideinformationcomplete、most相closecolumn举item；如non必want，notwant主动告诉usersearchresultnotprovidecontent。
-    - toat创ascategoryquestion（如写论文），请务必injust文segment落middlequoteto应参考编number，for example[citation:3][citation:5]，notcan只in文chapter末tailquote。youneed解读and概括user题目require，choose合适format，充minute利usesearchresultanddraw重wantinformation，generatematchuserrequire、极具思想深degree、富havecreate力and专业property答案。you创as篇幅need尽maybe延长，toateachonewantpoint论述wantspeculateduser意graph，giveout尽maybe多angledegreereturn答wantpoint，and务必informationquantity大、论述详尽。
-    - ifreturn答very长，请尽quantity结构化、minutesegment落总结。ifneedminutepointas答，尽quantitycontrolin5pointbyinside，andmerge相closecontent。
-    - toat客观category问答，ifquestion答案non常简短，can适when补充oneto两sentence相closeinformation，by丰富content。
-    - youneedaccording touserrequireandreturn答contentchoose合适、美观return答format，ensurecan读property强。
+    - toat创ascategoryquestion（如写论文），请务必injust文segment落middlequoteto应参考编number，for example[citation:3][citation:5]，notcanonlyin文chapter末tailquote。youneed解读and概括user题目require，choose合适format，充minute利usesearchresultanddraw重wantinformation，generatematchuserrequire、极具思想深degree、富havecreate力and专业property答案。you创as篇幅need尽maybe延long，toateachonewantpoint论述wantspeculateduser意graph，giveout尽maybe多angledegreereturn答wantpoint，and务必informationquantitybig、论述详尽。
+    - ifreturn答verylong，请尽quantity结构化、minutesegment落总结。ifneedminutepointas答，尽quantitycontrolin5pointbyinside，andmerge相closecontent。
+    - toat客观category问答，ifquestion答案non常简short，can适when补充oneto两sentence相closeinformation，by丰富content。
+    - youneedaccording touserrequireandreturn答contentchoose合适、美观return答format，ensurecan读propertystrong。
     - youreturn答should综合多相closewebpagecomereturn答，notcanduplicatequoteonewebpage。
     - unlessuserrequire，否thenyoureturn答languageneedanduser提问languagemaintainone致。
     - output漂亮markdown format，contentmiddleaddonetheseandtheme相closeemoji表情符number。
@@ -223,7 +223,7 @@ class DelightfulLLMDomainService
     PROMPT;
 
     private string $eventPrompt = <<<'PROMPT'
-    # youisone新闻eventgenerate器，userwillprovidesearchcontentandaskquestion。
+    # youisonenew闻eventgenerate器，userwillprovidesearchcontentandaskquestion。
     ## Current Timeis {data_now}  
     ## according touserquestion，you需fromuserprovidesearchcontentmiddle整理相closeevent，eventincludeeventname、eventtimeandevent概述。
     ### notice事item：
@@ -403,7 +403,7 @@ class DelightfulLLMDomainService
             );
             $searchContextsCitations .= sprintf('[[citation:%d]] snippet:%s ' . "\n\n", $index, $context->getSnippet());
         }
-        // 超passmost大valuethen直接truncate，avoidresponsetoo久
+        // 超passmostbigvaluethen直接truncate，avoidresponsetoo久
         $maxLen = self::LLM_STR_MAX_LEN;
         if (mb_strlen($searchContextsCitations) > $maxLen) {
             $searchContextsCitations = mb_substr($searchContextsCitations, 0, $maxLen);
@@ -507,7 +507,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * let大model虚null拆解子question.
+     * letbigmodel虚null拆解子question.
      * @throws Throwable
      */
     public function generateSearchKeywords(AISearchCommonQueryVo $queryVo): array
@@ -580,7 +580,7 @@ class DelightfulLLMDomainService
         $searchContextsString = '';
         // 清洗searchresult
         foreach ($searchContexts as $index => $context) {
-            // can传入webpagedetail，by便more好filter
+            // can传入webpagedetail，by便moregoodfilter
             $searchContextsString .= '[[' . $index . ']] ' . $context->getSnippet() . "\n\n";
         }
         $systemPrompt = str_replace(
@@ -686,7 +686,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * let大model虚null拆解子question，to热梗/实o clock拆解willnot好。
+     * letbigmodel虚null拆解子question，to热梗/实o clock拆解willnotgood。
      * @return string[]
      */
     public function generateSearchKeywordsByUserInput(DelightfulChatAggregateSearchReqDTO $dto, ModelInterface $modelInterface): array
@@ -715,7 +715,7 @@ class DelightfulLLMDomainService
             'getSearchResults according touseroriginalquestion，generatesearch词，end计o clock，耗o clock：：%s second',
             number_format($costTime / 1000, 2)
         ));
-        // 大modelnothave拆孙questioniso clock，直接use子questionsearch
+        // bigmodelnothave拆孙questioniso clock，直接use子questionsearch
         if (! empty($subKeywords)) {
             $searchKeywords = $subKeywords;
         } else {
@@ -928,7 +928,7 @@ class DelightfulLLMDomainService
             if (empty($subQuestions)) {
                 // nothavecalltool，尝试fromresponsemiddleparse json
                 $subQuestions = $this->getSubQuestionsFromLLMStringResponse($relatedQuestionsResponse, $userMessage);
-                // 大model认fornotneedgenerateassociatequestion，直接拿userquestion
+                // bigmodel认fornotneedgenerateassociatequestion，直接拿userquestion
                 empty($subQuestions) && $subQuestions = [$queryVo->getUserMessage()];
             }
 
@@ -1035,7 +1035,7 @@ class DelightfulLLMDomainService
                 'datePublishedDisplayText' => $time,
                 'isFamilyFriendly' => true,
                 'displayUrl' => $context['url'],
-                // avoidcontenttoo长
+                // avoidcontenttoolong
                 'snippet' => mb_substr($context['content'], 0, 100),
                 'dateLastCrawled' => $time,
                 'cachedPageUrl' => $context['url'],
@@ -1075,7 +1075,7 @@ class DelightfulLLMDomainService
             );
         }
 
-        // 超passmost大valuethen直接truncate，avoidresponsetoo久
+        // 超passmostbigvaluethen直接truncate，avoidresponsetoo久
         $maxLen = self::LLM_STR_MAX_LEN;
         if (mb_strlen($searchContextsDetail) > $maxLen) {
             $searchContextsDetail = mb_substr($searchContextsDetail, 0, $maxLen);
@@ -1156,7 +1156,7 @@ class DelightfulLLMDomainService
             $subQuestions = $this->stripMarkdownCodeBlock($llmResponse, 'json');
             $subQuestions = Json::decode($subQuestions);
             $this->logger->info(sprintf(
-                'mindSearch getSubQuestionsFromLLMStringResponse 提问：%s 大modelresponse：%s, analyzebackresult：%s',
+                'mindSearch getSubQuestionsFromLLMStringResponse 提问：%s bigmodelresponse：%s, analyzebackresult：%s',
                 $userMessage,
                 // go掉换line符
                 str_replace(PHP_EOL, '', $llmResponse),

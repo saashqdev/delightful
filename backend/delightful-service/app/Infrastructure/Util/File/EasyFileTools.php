@@ -14,7 +14,7 @@ class EasyFileTools
     public static function saveFile(string $path, string $stream): void
     {
         $file = fopen($path, 'wb');
-        // stream切割become1000kb小piece，eachtimewritefile
+        // stream切割become1000kbsmallpiece，eachtimewritefile
 
         fwrite($file, $stream);
         fclose($file);
@@ -36,7 +36,7 @@ class EasyFileTools
         // go掉blobhead
         $blob = substr($blob, 44);
 
-        // will新dataappendtofile末tail
+        // willnewdataappendtofile末tail
         // getfilesize
         fseek($wav1, 0, SEEK_END);
         fwrite($wav1, $blob);

@@ -27,13 +27,13 @@ class CheckPermission extends AbstractAnnotation
     public array|string $resource;
 
     /**
-     * 操asidentifier（仅supportsingle）。
+     * 操asidentifier（onlysupportsingle）。
      */
     public string $operation;
 
     /**
      * @param array|BackedEnum|string $resource resource，string/枚举oritsarray
-     * @param BackedEnum|string $operation 操as，仅stringor枚举
+     * @param BackedEnum|string $operation 操as，onlystringor枚举
      */
     public function __construct(array|BackedEnum|string $resource, BackedEnum|string $operation)
     {
@@ -46,7 +46,7 @@ class CheckPermission extends AbstractAnnotation
      */
     public function getPermissionKey(): string
     {
-        // forcompatible旧逻辑，returnfirstgroup合key
+        // forcompatibleold逻辑，returnfirstgroup合key
         $keys = $this->getPermissionKeys();
         return $keys[0] ?? '';
     }

@@ -23,15 +23,15 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         $requestData = [
             'conversation_id' => 'test_conversation_id',
             'topic_id' => 'test_topic_id',
-            'message' => 'you好，testmessage',
+            'message' => 'yougood，testmessage',
             'history' => [
                 [
                     'role' => 'user',
-                    'content' => 'you好',
+                    'content' => 'yougood',
                 ],
                 [
                     'role' => 'assistant',
-                    'content' => 'you好，have什么canhelpyou？',
+                    'content' => 'yougood，have什么canhelpyou？',
                 ],
             ],
         ];
@@ -64,7 +64,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
                 'request_info' => [
                     'conversation_id' => 'test_conversation_id',
                     'topic_id' => 'test_topic_id',
-                    'message' => 'you好，testmessage',
+                    'message' => 'yougood，testmessage',
                     'history' => [],
                 ],
             ],
@@ -86,7 +86,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         $requestData = [
             // 缺少 conversation_id
             'topic_id' => 'test_topic_id',
-            'message' => 'you好，testmessage',
+            'message' => 'yougood，testmessage',
         ];
 
         // setrequesthead
@@ -100,8 +100,8 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
 
         // definitionexpecterrorresponse结构
         $expectedErrorStructure = [
-            'code' => 0, // expectednotis1000code，butspecific数valuemaybenotcertain，所bythiswithin只is占位
-            'message' => '', // 只verify存inmessagefield，specificcontentmaybenotcertain
+            'code' => 0, // expectednotis1000code，butspecific数valuemaybenotcertain，所bythiswithinonlyis占位
+            'message' => '', // onlyverify存inmessagefield，specificcontentmaybenotcertain
         ];
 
         // verifyresponseshouldisparameterverifyerror
@@ -117,7 +117,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         // constructrequestparameter
         $requestData = [
             'conversation_id' => 'test_conversation_id',
-            'message' => 'you好，testmessage',
+            'message' => 'yougood，testmessage',
         ];
 
         // setinvalidrequesthead
@@ -132,7 +132,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         // definitionexpecterrorresponse结构
         $expectedErrorStructure = [
             'code' => 0, // expectednotis1000code，specific数valuemaybenotcertain
-            'message' => '', // 只verify存inmessagefield，specificcontentmaybenotcertain
+            'message' => '', // onlyverify存inmessagefield，specificcontentmaybenotcertain
         ];
 
         // verifyresponseshouldisauthorizationerror

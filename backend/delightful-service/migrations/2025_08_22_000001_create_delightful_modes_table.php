@@ -63,7 +63,7 @@ return new class extends Migration {
             'icon' => '',
             'sort' => 0,
             'color' => '#6366f1',
-            'description' => '仅useatcreateo clockinitialize模typeandreset模typemiddleconfiguration',
+            'description' => 'onlyuseatcreateo clockinitialize模typeandreset模typemiddleconfiguration',
             'is_default' => 1,
             'status' => 1,
             'distribution_type' => 1, // 独立configuration

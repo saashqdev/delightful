@@ -28,8 +28,8 @@ enum SandboxAsrStatusEnum: string
     case WAITING = 'waiting';           // etc待middle：taskalreadysubmit，etc待沙箱process
     case RUNNING = 'running';           // 运linemiddle：沙箱justinprocessaudiominuteslice
     case FINALIZING = 'finalizing';     // justinexecutefinalmerge：沙箱justinmergeaudioandprocess笔记file
-    case COMPLETED = 'completed';       // taskcomplete（V2 新format）：audiomergeandfileprocessall部complete
-    case FINISHED = 'finished';         // taskcomplete（tobackcompatible旧format）：保留useatcompatible旧version沙箱
+    case COMPLETED = 'completed';       // taskcomplete（V2 newformat）：audiomergeandfileprocessall部complete
+    case FINISHED = 'finished';         // taskcomplete（tobackcompatibleoldformat）：保留useatcompatibleoldversion沙箱
     case ERROR = 'error';               // error：沙箱processfail
 
     /**
@@ -42,7 +42,7 @@ enum SandboxAsrStatusEnum: string
             self::RUNNING => '运linemiddle',
             self::FINALIZING => 'justinmerge',
             self::COMPLETED => 'alreadycomplete',
-            self::FINISHED => 'alreadycomplete（旧）',
+            self::FINISHED => 'alreadycomplete（old）',
             self::ERROR => 'error',
         };
     }

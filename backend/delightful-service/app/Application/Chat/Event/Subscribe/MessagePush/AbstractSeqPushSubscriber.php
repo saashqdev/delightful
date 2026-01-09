@@ -18,7 +18,7 @@ use Throwable;
 
 /**
  * messagepush模piece.
- * according togenerateseqbyandit优先level,use长connectpushgiveuser.
+ * according togenerateseqbyandit优先level,uselongconnectpushgiveuser.
  * eachseqmaybewant推giveuser1to几tencustomer端.
  */
 abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
@@ -71,7 +71,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessagequalityguarantee模piece,ifisservice器stress大导致fail,then放入delayretryqueue,andfinger数level延长retrytimebetween隔
+            // todo callmessagequalityguarantee模piece,ifisservice器stressbig导致fail,then放入delayretryqueue,andfinger数level延longretrytimebetween隔
             return Result::REQUEUE;
         }
         return Result::ACK;

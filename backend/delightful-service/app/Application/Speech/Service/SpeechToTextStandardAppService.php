@@ -71,7 +71,7 @@ class SpeechToTextStandardAppService
     }
 
     /**
-     * query大modelvoiceidentifyresult.
+     * querybigmodelvoiceidentifyresult.
      */
     public function queryLargeModelResult(SpeechQueryDTO $speechQueryDTO): SpeechRecognitionResultDTO
     {

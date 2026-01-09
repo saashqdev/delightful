@@ -12,17 +12,17 @@ use App\Infrastructure\ExternalAPI\Sms\Enum\LanguageEnum;
 abstract class AbstractTemplate implements TemplateInterface
 {
     /**
-     * 短信typeandtemplateidmappingclose系.
+     * short信typeandtemplateidmappingclose系.
      */
     protected array $typeToIdMap = [];
 
     /**
-     * according to短信type,conductvariable短信适配,also原整item短信textcontent.
+     * according toshort信type,conductvariableshort信适配,also原整itemshort信textcontent.
      */
     protected array $typeContents = [];
 
     /**
-     * according totemplateid,conductvariable短信适配,also原整item短信textcontent.
+     * according totemplateid,conductvariableshort信适配,also原整itemshort信textcontent.
      */
     protected array $idContents = [];
 
@@ -73,7 +73,7 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
-     * according to短信type,returntypesupport语typelist.
+     * according toshort信type,returntypesupport语typelist.
      * @return string[]
      */
     public function getTemplateLanguagesByType(string $type): array
@@ -115,7 +115,7 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
-     * when传入signaturetypenot存ino clock,get短信defaultsignaturetype.
+     * when传入signaturetypenot存ino clock,getshort信defaultsignaturetype.
      */
     abstract protected function getTemplateDefaultSignType(string $sign): string;
 

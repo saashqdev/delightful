@@ -30,7 +30,7 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
 
     public function search(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeSimilarityFilter $filter, KnowledgeBaseEntity $knowledgeBaseEntity, RetrieveConfig $retrieveConfig): array
     {
-        // 场景verify， ifstart重新sort，can多召returndata，然backaccording tominuteconductsort，取 limit ，at mostnot超pass 20 or者 limit up限
+        // 场景verify， ifstart重newsort，can多召returndata，然backaccording tominuteconductsort，取 limit ，at mostnot超pass 20 or者 limit up限
         $queryNum = $filter->getLimit();
         if ($retrieveConfig->isRerankingEnable()) {
             // ifstart重sort，increase召returnquantity，butnot超pass20ororiginallimit3times
@@ -83,12 +83,12 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
         //            }
         //            $rerankGenerator = di(RerankGeneratorInterface::class);
         //            $rerankResult = $rerankGenerator->rerank($rerankModel->createRerank(), $filter->getQuestion(), $documents);
-        //            // 按 relevance_score from大to小sort
+        //            // 按 relevance_score frombigtosmallsort
         //            usort($rerankResult, function ($a, $b) {
         //                return $b['relevance_score'] <=> $a['relevance_score'];
         //            });
         //
-        //            // according tosortbackresult重新rowcolumn $result array
+        //            // according tosortbackresult重newrowcolumn $result array
         //            $sortedResult = [];
         //            foreach ($rerankResult as $item) {
         //                $sortedResult[] = $result[$item['index']];

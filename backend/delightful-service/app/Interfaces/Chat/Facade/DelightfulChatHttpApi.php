@@ -65,7 +65,7 @@ class DelightfulChatHttpApi extends AbstractApi
     {
         $params = $request->all();
         $rules = [
-            'page_token' => 'string', // private chat本groundmost大 seq_id
+            'page_token' => 'string', // private chat本groundmostbig seq_id
         ];
         $params = $this->checkParams($params, $rules);
         $this->logger->info('pullMessage:' . Json::encode($params));
@@ -77,7 +77,7 @@ class DelightfulChatHttpApi extends AbstractApi
     {
         $params = $request->all();
         $rules = [
-            'page_token' => 'string', // private chat本groundmost大 seq_id
+            'page_token' => 'string', // private chat本groundmostbig seq_id
         ];
         $params = $this->checkParams($params, $rules);
         $this->logger->info('pullMessageByAppMessageId:' . $appMessageId);
@@ -176,7 +176,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * （front端performancehaveissuetemporarysolution）按session id minutegroupget几itemmost新message.
+     * （front端performancehaveissuetemporarysolution）按session id minutegroupget几itemmostnewmessage.
      */
     public function conversationsMessagesGroupQueries(RequestInterface $request): array
     {

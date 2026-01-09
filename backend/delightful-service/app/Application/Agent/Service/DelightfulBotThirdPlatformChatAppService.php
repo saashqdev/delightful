@@ -141,7 +141,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             'code' => $exception->getCode(),
                             'trace' => $exception->getTraceAsString(),
                         ]);
-                        $message = new TextMessage(['content' => 'not好meaning，meanwhile问Iissuepersontoo多啦，havepoint忙notpasscome，youcanonewill儿againcome问I？感谢谅解！']);
+                        $message = new TextMessage(['content' => 'notgoodmeaning，meanwhile问Iissuepersontoo多啦，havepoint忙notpasscome，youcanonewill儿againcome问I？感谢谅解！']);
                         $thirdPlatformChat->sendMessage($thirdPlatformChatMessage, $message);
                     }
                 });
@@ -256,7 +256,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
 
     private function clearMemory(string $conversationId): void
     {
-        // cleanup flow from身记忆，仅more改原sessionforbackupsession
+        // cleanup flow from身记忆，onlymore改原sessionforbackupsession
         di(DelightfulFlowMemoryHistoryDomainService::class)->removeByConversationId(
             FlowDataIsolation::create('', ''),
             $conversationId

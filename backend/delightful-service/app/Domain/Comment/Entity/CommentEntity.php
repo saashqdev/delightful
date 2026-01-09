@@ -37,7 +37,7 @@ class CommentEntity extends AbstractEntity
     protected int $parentId;
 
     /**
-     * tocomment简短description，mainisgive动stateuse，for examplecreate待办、uploadimageetcsystem动state.
+     * tocomment简shortdescription，mainisgive动stateuse，for examplecreate待办、uploadimageetcsystem动state.
      */
     protected string $description = '';
 

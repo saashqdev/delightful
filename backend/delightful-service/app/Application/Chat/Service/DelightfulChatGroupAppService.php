@@ -114,7 +114,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         }
         // currentgroup chatperson数
         $groupUserCount = $this->delightfulGroupDomainService->getGroupUserCount($groupId);
-        // most大person数limitsubtractgocurrentperson数
+        // mostbigperson数limitsubtractgocurrentperson数
         $chatGroupUserNumLimit = GroupLimitEnum::NormalGroup->value;
         $chatGroupUserNumLimit -= $groupUserCount;
         // get本timeneedadd群member (综合 finger定user_id + departmentiddownuser)
@@ -232,7 +232,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
                 return $this->noticeGroupChangeSeq($seqEntity);
             }
         }
-        // 只can群主解散group chat
+        // onlycan群主解散group chat
         $groupOwner = $groupEntity->getGroupOwner();
         if ($groupOwner !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_ONLY_OWNER_CAN_DISBAND);
@@ -405,7 +405,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         } else {
             $departmentIds = [];
         }
-        // 目front只supportadd同organizationuser
+        // 目frontonlysupportadd同organizationuser
         $groupAddUsers = $this->delightfulUserDomainService->getUserByIds($needAddGroupUserIds, $dataIsolation, ['user_id', 'nickname']);
         // 按departmentgetuser
         if (! empty($departmentIds)) {

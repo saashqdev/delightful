@@ -21,7 +21,7 @@ use Hyperf\Codec\Json;
 
 class VolcengineImageGenerateV3Model extends AbstractImageGenerate
 {
-    // most大round询retrycount
+    // mostbiground询retrycount
     private const MAX_RETRY_COUNT = 30;
 
     // round询retrybetween隔（second）
@@ -93,7 +93,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                 // success：settingimagedatatoresponseobject
                 $this->addImageDataToResponseV3($response, $result, $imageGenerateRequest);
             } catch (Exception $e) {
-                // fail：settingerrorinfotoresponseobject（只settingfirsterror）
+                // fail：settingerrorinfotoresponseobject（onlysettingfirsterror）
                 if (! $response->hasError()) {
                     $response->setProviderErrorCode($e->getCode());
                     $response->setProviderErrorMessage($e->getMessage());
@@ -419,7 +419,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
             $currentData = $response->getData();
             $currentUsage = $response->getUsage() ?? new ImageUsage();
 
-            // 优先handle URL formatimage，参考现have逻辑只取firstimage
+            // 优先handle URL formatimage，参考现have逻辑only取firstimage
             if (! empty($data['image_urls']) && ! empty($data['image_urls'][0])) {
                 $imageUrl = $data['image_urls'][0];
                 try {
@@ -439,7 +439,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                     ];
                 }
             } elseif (! empty($data['binary_data_base64']) && ! empty($data['binary_data_base64'][0])) {
-                // 备选：handle base64 formatimage，只取firstimage
+                // 备选：handle base64 formatimage，only取firstimage
                 $base64Image = $data['binary_data_base64'][0];
                 try {
                     // handlewatermark

@@ -215,7 +215,7 @@ class ModeInitializer
             'icon' => 'Icon3dCubeSphere',
             'color' => '#999999',
             'sort' => 0,
-            'description' => '仅useatcreateo clockinitialize模typeandreset模typemiddleconfiguration',
+            'description' => 'onlyuseatcreateo clockinitialize模typeandreset模typemiddleconfiguration',
             'is_default' => 1,
             'status' => 1,
             'distribution_type' => 1,

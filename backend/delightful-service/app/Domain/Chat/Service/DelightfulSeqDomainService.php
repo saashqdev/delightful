@@ -88,7 +88,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
      */
     public function pushControlSeq(DelightfulSeqEntity $seqEntity, DelightfulUserEntity $seqUserEntity, ?DelightfulMessageEntity $messageEntity = null): void
     {
-        // havethesecontrolmessage,not仅controlfrom己设备,alsoneedcontrolto方设备
+        // havethesecontrolmessage,notonlycontrolfrom己设备,alsoneedcontrolto方设备
         // controlmessagepush. todo:待optimize,mergepushalready读controlmessage
         if ($seqEntity->getObjectType() === ConversationType::User && ($seqEntity->getSeqType() instanceof ControlMessageType)) {
             SocketIOUtil::sendSequenceId($seqEntity);
@@ -112,7 +112,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 }
                 $senderUserEntity = $this->delightfulUserRepository->getUserById($conversationEntity->getReceiveId());
             } elseif ($seqEntity->getSeqType() === ControlMessageType::AddFriendSuccess) {
-                // 因foradd好友nothaveconversationwindow，所byneedaccording tomessagesendid查outto方 user_entity
+                // 因foraddgood友nothaveconversationwindow，所byneedaccording tomessagesendid查outto方 user_entity
                 /** @var AddFriendMessage $seqContent */
                 $seqContent = $seqEntity->getContent();
                 $senderUserEntity = $this->delightfulUserRepository->getUserById($seqContent->getUserId());
@@ -174,7 +174,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 break;
             case ConversationType::User:
                 // todo one定want做! publishsubscribeuserabbitmqimplement,notagainuseredispub/sub. meanwhile,pushbackneedcustomer端returnack,然backupdateseqstatus
-                // todo one定want做! 只推seq_id,publishsubscribe收toseq_idback,againgodatabase查seqdetail,again推givecustomer端
+                // todo one定want做! only推seq_id,publishsubscribe收toseq_idback,againgodatabase查seqdetail,again推givecustomer端
                 $pushData = SeqAssembler::getClientSeqStruct($selfSeqEntity, $messageEntity)->toArray();
                 // notprint敏感info
                 $pushLogData = [

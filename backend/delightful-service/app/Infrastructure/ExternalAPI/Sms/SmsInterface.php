@@ -10,27 +10,27 @@ namespace App\Infrastructure\ExternalAPI\Sms;
 interface SmsInterface
 {
     /**
-     * get短信templateid. andnotone定存intemplateid.
+     * getshort信templateid. andnotone定存intemplateid.
      */
     public function getTemplateId(SmsStruct $smsStruct): ?string;
 
     /**
-     * send短信,forcerequire所have短信驱动return结构same.
+     * sendshort信,forcerequire所haveshort信驱动return结构same.
      */
     public function send(SmsStruct $smsStruct): SendResult;
 
     /**
-     * parse变quantity短信,returncomplete短信text.
+     * parse变quantityshort信,returncompleteshort信text.
      */
     public function getContent(SmsStruct $smsStruct): string;
 
     /**
-     * get短信文案语type,andsignaturenoclose. maybe短信contentis印尼语,signatureisEnglish.
+     * getshort信文案语type,andsignaturenoclose. maybeshort信contentis印尼语,signatureisEnglish.
      */
     public function getContentLanguage(SmsStruct $smsStruct): string;
 
     /**
-     * get短信signature. need多语type适配,语type兜bottom!
+     * getshort信signature. need多语type适配,语type兜bottom!
      */
     public function getSign(SmsStruct $smsStruct): string;
 }

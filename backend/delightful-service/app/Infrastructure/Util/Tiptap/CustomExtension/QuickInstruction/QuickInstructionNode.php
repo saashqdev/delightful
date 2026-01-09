@@ -14,7 +14,7 @@ use App\Infrastructure\Util\Tiptap\CustomExtension\ValueObject\SwitchStatus;
 use Hyperf\Codec\Json;
 
 /**
- * rich text快捷instruction.
+ * rich textfast捷instruction.
  */
 class QuickInstructionNode extends AbstractCustomNode
 {

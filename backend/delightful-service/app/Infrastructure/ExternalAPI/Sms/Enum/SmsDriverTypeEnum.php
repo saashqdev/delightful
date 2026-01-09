@@ -9,6 +9,6 @@ namespace App\Infrastructure\ExternalAPI\Sms\Enum;
 
 enum SmsDriverTypeEnum: string
 {
-    // 火山短信
+    // 火山short信
     case VOLCENGINE = 'volcengine';
 }

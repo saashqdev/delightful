@@ -116,7 +116,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessagequalityguarantee模piece,ifisservice器stress大导致fail,then放入delayretryqueue,andfinger数level延长retrytimebetween隔
+            // todo callmessagequalityguarantee模piece,ifisservice器stressbig导致fail,then放入delayretryqueue,andfinger数level延longretrytimebetween隔
             return Result::REQUEUE;
         } finally {
             if (isset($lockKey, $owner)) {

@@ -15,17 +15,17 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 abstract class AbstractRateLimiter implements RateLimiterInterface
 {
     /**
-     * eachminute钟most大request数.
+     * eachminute钟mostbigrequest数.
      */
     protected int $maxRequestsPerMinute = 60;
 
     /**
-     * eachhourmost大request数.
+     * eachhourmostbigrequest数.
      */
     protected int $maxRequestsPerHour = 1000;
 
     /**
-     * eachdaymost大request数.
+     * eachdaymostbigrequest数.
      */
     protected int $maxRequestsPerDay = 5000;
 

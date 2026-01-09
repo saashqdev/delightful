@@ -130,10 +130,10 @@ class MCPServerAppService extends AbstractMCPAppService
             $resourceIds = array_merge($resourceIds, $officialCodes);
         } else {
             if ($office) {
-                // 只查官方data
+                // only查官方data
                 $resourceIds = $this->mcpServerDomainService->getOfficialMCPServerCodes($dataIsolation);
             } else {
-                // 只查organizationinsidedata
+                // only查organizationinsidedata
                 $resources = $this->operationPermissionAppService->getResourceOperationByUserIds(
                     $dataIsolation,
                     ResourceType::MCPServer,

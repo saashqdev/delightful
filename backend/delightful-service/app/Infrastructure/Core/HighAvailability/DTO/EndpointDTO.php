@@ -11,7 +11,7 @@ use App\Infrastructure\Core\AbstractDTO;
 use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\CircuitBreakerStatus;
 
 /**
- * useatinbusinessprocessmiddlemeanwhilesavebusinessIDand高canusegroupitem接入pointdatabaseID.
+ * useatinbusinessprocessmiddlemeanwhilesavebusinessIDandhighcanusegroupitem接入pointdatabaseID.
  */
 class EndpointDTO extends AbstractDTO
 {
@@ -23,7 +23,7 @@ class EndpointDTO extends AbstractDTO
     protected ?string $businessId = null;
 
     /**
-     * database接入pointID（高canusetableprimary key）.
+     * database接入pointID（highcanusetableprimary key）.
      */
     protected ?string $endpointId = null;
 

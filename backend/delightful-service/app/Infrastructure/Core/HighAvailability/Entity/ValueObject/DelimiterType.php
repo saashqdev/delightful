@@ -15,7 +15,7 @@ use InvalidArgumentException;
 enum DelimiterType: string
 {
     /**
-     * 高canuseapplicationtype+modeltype+organizationencodingminute隔符.
+     * highcanuseapplicationtype+modeltype+organizationencodingminute隔符.
      */
     case HIGH_AVAILABILITY = '||';
 

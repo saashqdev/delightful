@@ -31,7 +31,7 @@ use Throwable;
     name: 'AsrHeartbeatMonitor',
     singleton: true,                      // single例模typepreventduplicateexecute
     mutexExpires: 60,                     // 互斥lockexpiretime（second），to应 AsrConfig::HEARTBEAT_MONITOR_MUTEX_EXPIRES
-    onOneServer: true,                    // 仅inone台service器upexecute
+    onOneServer: true,                    // onlyinone台service器upexecute
     callback: 'execute',
     memo: 'ASR recording heartbeat monitoring task'
 )]

@@ -47,7 +47,7 @@ class BaseDataIsolation implements DataIsolationInterface
     private bool $containOfficialOrganization = false;
 
     /**
-     * whether仅仅contain官方organization.
+     * whetheronlyonlycontain官方organization.
      */
     private bool $onlyOfficialOrganization = false;
 

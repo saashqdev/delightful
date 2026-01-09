@@ -76,14 +76,14 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * @param string $friendId 好友userid. 好友maybeisai
+     * @param string $friendId good友userid. good友maybeisai
      * @throws Throwable
      */
     public function addFriend(DelightfulUserAuthorization $userAuthorization, string $friendId, AddFriendType $addFriendType): bool
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // checkwhetheralready经is好友
+        // checkwhetheralready经isgood友
         if ($this->userDomainService->isFriend($dataIsolation->getCurrentUserId(), $friendId)) {
             return true;
         }
@@ -91,9 +91,9 @@ class DelightfulUserContactAppService extends AbstractAppService
         if (! $this->userDomainService->addFriend($dataIsolation, $friendId)) {
             return false;
         }
-        // sendadd好友message。add好友splitfor：好友apply/好友agree/好友reject
+        // sendaddgood友message。addgood友splitfor：good友apply/good友agree/good友reject
         if ($addFriendType === AddFriendType::PASS) {
-            // sendadd好友controlmessage
+            // sendaddgood友controlmessage
             $friendUserEntity = new DelightfulUserEntity();
             $friendUserEntity->setUserId($friendId);
             $this->sendAddFriendControlMessage($dataIsolation, $friendUserEntity);
@@ -102,12 +102,12 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * toAIassistantsendadd好友controlmessage.
+     * toAIassistantsendaddgood友controlmessage.
      * @throws Throwable
      */
     public function sendAddFriendControlMessage(DataIsolation $dataIsolation, DelightfulUserEntity $friendUserEntity): bool
     {
-        // checkwhetheralready经is好友
+        // checkwhetheralready经isgood友
         if ($this->userDomainService->isFriend($dataIsolation->getCurrentUserId(), $friendUserEntity->getUserId())) {
             return true;
         }
@@ -185,7 +185,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $this->addAgentInfoToUsers($authorization, $usersDetail);
 
         if ($queryType === UserQueryType::User) {
-            // 只查person员info
+            // only查person员info
             $users = $usersDetail;
         } else {
             // querydepartmentinfo

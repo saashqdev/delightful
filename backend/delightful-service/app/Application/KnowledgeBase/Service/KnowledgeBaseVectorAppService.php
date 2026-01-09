@@ -37,7 +37,7 @@ class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * 销毁旧minutesegment.
+     * 销毁oldminutesegment.
      */
     public function destroyOldFragments(
         KnowledgeBaseDataIsolation $dataIsolation,

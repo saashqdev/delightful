@@ -17,7 +17,7 @@ enum DelightfulMessageStatus: int
     // already读
     case Seen = 1;
 
-    // alreadyview（non纯text复杂typemessage，userpoint击detail）
+    // alreadyview（non纯textcomplextypemessage，userpoint击detail）
     case Read = 2;
 
     // alreadywithdraw

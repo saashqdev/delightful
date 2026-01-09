@@ -10,7 +10,7 @@ namespace App\Infrastructure\ExternalAPI\Sms;
 use App\Infrastructure\ExternalAPI\Sms\Enum\SignEnum;
 
 /**
- * 所have短信驱动returnresultmustconvertforthisobject
+ * 所haveshort信驱动returnresultmustconvertforthisobject
  */
 class SmsStruct
 {
@@ -20,43 +20,43 @@ class SmsStruct
     public string $phone = '';
 
     /**
-     * 短信type,such as:registration_rewards (orderalreadyhair货),arrival_notice(to货notify).
-     * 1.if搭配 language field,meanwhileusevariable短信,canimplement多language适配,byand语type兜bottom
-     * 2.电quotient相close短信usethisfield,butisnothave language 传入.
+     * short信type,such as:registration_rewards (orderalreadyhair货),arrival_notice(to货notify).
+     * 1.if搭配 language field,meanwhileusevariableshort信,canimplement多language适配,byand语type兜bottom
+     * 2.电quotient相closeshort信usethisfield,butisnothave language 传入.
      */
     public ?string $type = null;
 
     /**
-     * variable短信variablecontent. maybeforassociatearray,alsomaybeforindexarray.
+     * variableshort信variablecontent. maybeforassociatearray,alsomaybeforindexarray.
      * @example {"product_name": "quotient品A", "payer": "供应quotientA","amount": 10}
      * @example ["quotient品A","供应quotientA",10]
      */
     public ?array $variables = null;
 
     /**
-     * 普通短信纯textcontent.
+     * 普通short信纯textcontent.
      * 如: 灯塔justin邀请youadd入企业，point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
      */
     public ?string $content = null;
 
     /**
-     * 短信signature.
+     * short信signature.
      * @example 灯塔engine
      */
     public SignEnum $sign;
 
     /**
-     * 短信语type,andtypefieldandvariable短信搭配use.
+     * short信语type,andtypefieldandvariableshort信搭配use.
      */
     public ?string $language = null;
 
     /**
-     * 短信default语type,supportbusiness方customize. not传givedefaultvaluezh_CN.
+     * short信default语type,supportbusiness方customize. not传givedefaultvaluezh_CN.
      */
     public ?string $defaultLanguage = null;
 
     /**
-     * 短信variabletemplateid.
+     * short信variabletemplateid.
      */
     public ?string $templateId = null;
 

@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->unsignedBigInteger('service_provider_model_id')->comment('modelID，associateservice_provider_models.id');
 
             $table->decimal('creativity', 3, 2)->default(0.5)->comment('create力parameter');
-            $table->integer('max_tokens')->nullable()->comment('most大token数');
+            $table->integer('max_tokens')->nullable()->comment('mostbigtoken数');
             $table->decimal('temperature', 3, 2)->nullable()->comment('温degreeparameter');
             $table->integer('vector_size')->default(2048)->comment('toquantity维degree');
             $table->string('billing_type', 50)->nullable()->comment('计费type');
@@ -33,7 +33,7 @@ return new class extends Migration {
             $table->string('billing_currency', 10)->nullable()->comment('计费货币');
             $table->boolean('support_function')->default(false)->comment('whethersupportfunctioncall');
             $table->decimal('cache_hit_pricing', 10, 4)->nullable()->comment('cache命middle定价');
-            $table->integer('max_output_tokens')->nullable()->comment('most大outputtoken数');
+            $table->integer('max_output_tokens')->nullable()->comment('mostbigoutputtoken数');
             $table->boolean('support_embedding')->default(false)->comment('whethersupport嵌入');
             $table->boolean('support_deep_think')->default(false)->comment('whethersupport深degree思考');
             $table->decimal('cache_write_pricing', 10, 4)->nullable()->comment('cachewrite定价');

@@ -93,7 +93,7 @@ class RoleEntity extends AbstractEntity
         $index = array_search($permissionKey, $this->permissions);
         if ($index !== false) {
             unset($this->permissions[$index]);
-            $this->permissions = array_values($this->permissions); // 重新index
+            $this->permissions = array_values($this->permissions); // 重newindex
         }
     }
 

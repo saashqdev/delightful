@@ -14,7 +14,7 @@ use function Hyperf\Translation\__;
  *
  * 1. use Backed Enum willeachresourcemappingfor唯onestring key。
  * 2. passmethodprovide label / parent  etcyuaninfo，方便back续generatepermissiontree、做 i18n etc。
- * 3. 仅definitionresourceitself，not涉and操astype（如 query / edit）。
+ * 3. onlydefinitionresourceitself，not涉and操astype（如 query / edit）。
  *
  * notice：ifyoumodifythisfile，请executesingleyuantest PermissionApiTest.testGetPermissionTree.
  */

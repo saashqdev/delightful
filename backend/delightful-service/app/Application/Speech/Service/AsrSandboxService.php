@@ -122,7 +122,7 @@ readonly class AsrSandboxService
         ]);
 
         // call沙箱starttask
-        // notice：沙箱 API 只acceptwork区相topath (如: .asr_recordings/session_xxx)
+        // notice：沙箱 API onlyacceptwork区相topath (如: .asr_recordings/session_xxx)
         $response = $this->asrRecorder->startTask(
             $actualSandboxId,
             $taskStatus->taskKey,
@@ -480,7 +480,7 @@ readonly class AsrSandboxService
 
     /**
      * etc待沙箱start（canresponseinterface）.
-     * ASR featurenotneedwork区initialize，只need沙箱canresponse getWorkspaceStatus interface即can.
+     * ASR featurenotneedwork区initialize，onlyneed沙箱canresponse getWorkspaceStatus interface即can.
      *
      * @param string $sandboxId 沙箱ID
      * @param string $taskKey taskKey（useatlog）
@@ -569,7 +569,7 @@ readonly class AsrSandboxService
         try {
             $workspaceStatusResponse = $this->agentDomainService->getWorkspaceStatus($requestedSandboxId);
         } catch (Throwable $throwable) {
-            $this->logger->warning('get沙箱work区statusfail，沙箱maybenotstart，willcreate新沙箱', [
+            $this->logger->warning('get沙箱work区statusfail，沙箱maybenotstart，willcreatenew沙箱', [
                 'task_key' => $taskStatus->taskKey,
                 'sandbox_id' => $requestedSandboxId,
                 'error' => $throwable->getMessage(),
@@ -859,8 +859,8 @@ readonly class AsrSandboxService
             }
         }
 
-        // topic nothavecurrenttask，for ASR 场景createone新task
-        $this->logger->info('ASR taskassociate topic nothavecurrenttask，准备create新task', [
+        // topic nothavecurrenttask，for ASR 场景createonenewtask
+        $this->logger->info('ASR taskassociate topic nothavecurrenttask，准备createnewtask', [
             'task_key' => $taskStatus->taskKey,
             'topic_id' => $taskStatus->topicId,
             'project_id' => $taskStatus->projectId,

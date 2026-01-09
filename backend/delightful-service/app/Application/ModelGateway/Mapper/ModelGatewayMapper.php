@@ -117,7 +117,7 @@ class ModelGatewayMapper extends ModelMapper
 
     /**
      * themethodgettoone定istrue实callmodel.
-     * 仅 ModelGateway 领域use.
+     * only ModelGateway 领域use.
      * @param string $model expectedismanageback台 model_id，passdegree阶segmentaccept传入 model_version
      */
     public function getOrganizationChatModel(BaseDataIsolation $dataIsolation, string $model): ModelInterface|OdinModel
@@ -132,7 +132,7 @@ class ModelGatewayMapper extends ModelMapper
 
     /**
      * themethodgettoone定istrue实callmodel.
-     * 仅 ModelGateway 领域use.
+     * only ModelGateway 领域use.
      * @param string $model modelname expectedismanageback台 model_id，passdegree阶segmentaccept model_version
      */
     public function getOrganizationEmbeddingModel(BaseDataIsolation $dataIsolation, string $model): EmbeddingInterface|OdinModel
@@ -150,7 +150,7 @@ class ModelGatewayMapper extends ModelMapper
         $dataIsolation = ModelGatewayDataIsolation::createByBaseDataIsolation($dataIsolation);
         $result = $this->getByAdmin($dataIsolation, $model);
 
-        // 只return ImageGenerationModelWrapper typeresult
+        // onlyreturn ImageGenerationModelWrapper typeresult
         if ($result instanceof ImageModel) {
             return $result;
         }

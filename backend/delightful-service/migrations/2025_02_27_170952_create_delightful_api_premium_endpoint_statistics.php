@@ -27,10 +27,10 @@ return new class extends Migration {
             $table->integer('request_count')->nullable()->default(null)->comment('requestcount');
             $table->integer('request_success_count')->nullable()->default(null)->comment('requestsuccesscount');
             $table->integer('request_error_count')->nullable()->default(null)->comment('requestfailcount');
-            $table->double('request_success_rate')->nullable()->default(null)->comment('requestsuccessrate,most大valuefor 100，not带%');
+            $table->double('request_success_rate')->nullable()->default(null)->comment('requestsuccessrate,mostbigvaluefor 100，not带%');
             $table->integer('request_average_time')->nullable()->default(null)->comment('requestaveragetime，unit毫second');
-            $table->integer('request_max_time')->nullable()->default(null)->comment('requestconsumemost大time，unit毫second');
-            $table->integer('request_min_time')->nullable()->default(null)->comment('requestconsumemost小time，unit毫second');
+            $table->integer('request_max_time')->nullable()->default(null)->comment('requestconsumemostbigtime，unit毫second');
+            $table->integer('request_min_time')->nullable()->default(null)->comment('requestconsumemostsmalltime，unit毫second');
             // statisticstimesegment
             $table->bigInteger('statistics_time')->nullable()->default(null)->comment('statisticstimesegment');
             // statisticslevel别：0-secondlevel，1-minute钟level，2-hourlevel，3-daylevel

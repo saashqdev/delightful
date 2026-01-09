@@ -9,7 +9,7 @@ namespace App\Infrastructure\Core\MCP\Prompts;
 
 /**
  * MCPpromptmanager.
- * whenfrontversionfornullimplement，仅returnnullcolumn表.
+ * whenfrontversionfornullimplement，onlyreturnnullcolumn表.
  */
 class MCPPromptManager
 {

@@ -34,7 +34,7 @@ abstract class AbstractProviderModelRepository extends AbstractRepository
     public function create(ProviderDataIsolation $dataIsolation, ProviderModelEntity $modelEntity): ProviderModelEntity
     {
         $modelEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
-        // create新record
+        // createnewrecord
         if ($modelEntity->getId() === null) {
             $modelEntity->setId(IdGenerator::getSnowId());
         }
@@ -47,13 +47,13 @@ abstract class AbstractProviderModelRepository extends AbstractRepository
 
         $data = $modelEntity->toArray();
         $data['disabled_by'] = $data['disabled_by'] ?? '';
-        // create新record
+        // createnewrecord
         ProviderModelModel::query()->create($data);
         return $modelEntity;
     }
 
     /**
-     * will实bodyserializeforarray，containJSONserialize复杂field.
+     * will实bodyserializeforarray，containJSONserializecomplexfield.
      */
     protected function serializeEntityToArray(ProviderModelEntity $entity): array
     {

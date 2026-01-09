@@ -96,7 +96,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                     // success：settingimagedatatoresponseobject
                     $this->addImageDataToResponseGemini($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：settingerrorinfotoresponseobject（只settingfirsterror）
+                    // fail：settingerrorinfotoresponseobject（onlysettingfirsterror）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
@@ -252,7 +252,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // Google Gemini APIeachtime只cangenerateone张graph，passandhaircallimplement多graphgenerate
+        // Google Gemini APIeachtimeonlycangenerateone张graph，passandhaircallimplement多graphgenerate
         $count = $imageGenerateRequest->getGenerateNum();
         $rawResults = [];
         $errors = [];
@@ -401,7 +401,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 // watermarkhandlefailo clockuseoriginalbase64data（butthisusuallynotshouldhair生）
             }
 
-            // 只returnURLformat，andothermodelmaintainone致
+            // onlyreturnURLformat，andothermodelmaintainone致
             $currentData[] = [
                 'url' => $processedUrl,
             ];

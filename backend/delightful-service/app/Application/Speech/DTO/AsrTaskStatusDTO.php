@@ -244,7 +244,7 @@ class AsrTaskStatusDTO
     /**
      * extract相toat workspace 相topath
      * ifpathcontain workspace/，extractitsback部minute
-     * this样canfrom动修just Redis middlestorage旧formatdata（completepath）.
+     * this样canfrom动修just Redis middlestorageoldformatdata（completepath）.
      *
      * @param null|string $path originalpath
      * @return null|string 相topath

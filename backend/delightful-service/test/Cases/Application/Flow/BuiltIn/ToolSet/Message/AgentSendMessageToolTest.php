@@ -106,7 +106,7 @@ user昵称is：currentuser昵称
 MARKDOWN,
 
             // 'user_prompt' => '帮Icreateonescheduletask，taskname：reminderI做饭，from明daystart，eachday早up9pointexecute，displayoneitemreminderI做饭message',
-            'user_prompt' => '帮Isendoneitemmessage,contentis：you今daytrue好看',
+            'user_prompt' => '帮Isendoneitemmessage,contentis：you今daytruegood看',
         ]);
 
         $runner->execute($vertexResult, $executionData);
@@ -201,7 +201,7 @@ user昵称is：currentuser昵称
 MARKDOWN,
 
             // 'user_prompt' => '帮Icreateonescheduletask，taskname：reminderI做饭，from明daystart，eachday早up9pointexecute，displayoneitemreminderI做饭message',
-            'user_prompt' => '帮Isendoneitemmessage,contentis：you今daytrue好看',
+            'user_prompt' => '帮Isendoneitemmessage,contentis：you今daytruegood看',
         ]);
 
         $runner->execute($vertexResult, $executionData);

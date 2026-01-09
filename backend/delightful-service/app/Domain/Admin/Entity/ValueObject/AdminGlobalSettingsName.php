@@ -9,7 +9,7 @@ namespace App\Domain\Admin\Entity\ValueObject;
 
 enum AdminGlobalSettingsName: string
 {
-    // all局default好友
+    // all局defaultgood友
     case DEFAULT_FRIEND = 'default_friend';
 
     // 助理createmanage

@@ -100,7 +100,7 @@ class FluxModel extends AbstractImageGenerate
                     // success：settingimagedatatoresponseobject
                     $this->addImageDataToResponseFlux($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：settingerrorinfotoresponseobject（只settingfirsterror）
+                    // fail：settingerrorinfotoresponseobject（onlysettingfirsterror）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());

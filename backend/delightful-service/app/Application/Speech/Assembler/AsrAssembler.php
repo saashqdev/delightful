@@ -37,7 +37,7 @@ class AsrAssembler
      * @param string $workDir workdirectory
      * @param int $rootDirectoryId rootdirectoryID
      * @param bool $isHidden whetherforhiddendirectory
-     * @param null|string $taskKey taskkey（仅hiddendirectoryneed）
+     * @param null|string $taskKey taskkey（onlyhiddendirectoryneed）
      */
     public static function createDirectoryEntity(
         string $userId,

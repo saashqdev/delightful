@@ -73,7 +73,7 @@ class ModeDomainService
     }
 
     /**
-     * according toIDget模type实body（仅get模type基本info）.
+     * according toIDget模type实body（onlyget模type基本info）.
      */
     public function getModeById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeEntity
     {
@@ -200,7 +200,7 @@ class ModeDomainService
         foreach ($modeAggregate->getGroupAggregates() as $index => $groupAggregate) {
             $group = $groupAggregate->getGroup();
 
-            // create新group实body（提frontgenerateID）
+            // createnewgroup实body（提frontgenerateID）
             $newGroup = new ModeGroupEntity();
             $newGroup->setId(IdGenerator::getSnowId());
             $newGroup->setModeId((int) $id);
@@ -231,7 +231,7 @@ class ModeDomainService
                 $relation->setModeId((string) $id);
                 $relation->setOrganizationCode($mode->getOrganizationCode());
 
-                // settingfor新creategroupID
+                // settingfornewcreategroupID
                 $relation->setGroupId($groupAggregate->getGroup()->getId());
 
                 $relationEntities[] = $relation;

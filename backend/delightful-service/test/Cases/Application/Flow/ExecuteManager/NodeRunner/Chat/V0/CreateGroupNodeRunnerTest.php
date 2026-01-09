@@ -55,7 +55,7 @@ class CreateGroupNodeRunnerTest extends ExecuteManagerBaseTest
                     "member_value": [
                         {
                             "id": "usi_123456789abcdef123456789abcdef12",
-                            "name": "小just"
+                            "name": "smalljust"
                         }
                     ]
                 }
@@ -78,15 +78,15 @@ class CreateGroupNodeRunnerTest extends ExecuteManagerBaseTest
                     "member_value": [
                         {
                             "id": "usi_123456789abcdef123456789abcdef13",
-                            "name": "小红"
+                            "name": "small红"
                         },
                         {
                             "id": "usi_123456789abcdef123456789abcdef14",
-                            "name": "小明"
+                            "name": "small明"
                         },
                         {
                             "id": "usi_123456789abcdef123456789abcdef12",
-                            "name": "小just"
+                            "name": "smalljust"
                         }
                     ]
                 }

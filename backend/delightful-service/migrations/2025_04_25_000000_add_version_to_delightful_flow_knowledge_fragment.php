@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // modify表结构，add新field
+        // modify表结构，addnewfield
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
             // checkwhetheralready存infield，avoidduplicateadd
             if (! Schema::hasColumn('delightful_flow_knowledge_fragment', 'version')) {
@@ -44,7 +44,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
-            // delete新addindex
+            // deletenewaddindex
             if (Schema::hasIndex('delightful_flow_knowledge_fragment', 'idx_knowledge_document_version')) {
                 $table->dropIndex('idx_knowledge_document_version');
             }

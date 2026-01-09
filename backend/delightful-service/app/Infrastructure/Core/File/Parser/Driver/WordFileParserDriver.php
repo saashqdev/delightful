@@ -22,7 +22,7 @@ class WordFileParserDriver implements WordFileParserDriverInterface
     {
         try {
             /*
-             * phpword not supported旧format.doc
+             * phpword not supportedoldformat.doc
              * Throw an exception since making further calls on the ZipArchive would cause a fatal error.
              * This prevents fatal errors on corrupt archives and attempts to open old "doc" files.
              */

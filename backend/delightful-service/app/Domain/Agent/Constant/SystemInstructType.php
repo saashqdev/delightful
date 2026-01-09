@@ -200,7 +200,7 @@ enum SystemInstructType: int
         // 按枚举definitionordersortsystemfinger令
         ksort($systemInstructs);
 
-        // 重新group合tool栏group items，systemfinger令infront
+        // 重newgroup合tool栏group items，systemfinger令infront
         $toolbarGroup['items'] = array_merge(array_values($systemInstructs), $normalInstructs);
 
         // updateoraddtool栏group

@@ -23,7 +23,7 @@ interface FontProviderInterface
     /**
      * detectwhethersupportTTF字body渲染.
      *
-     * @return bool truetable示supportTTF字body，falsetable示仅supportinside置字body
+     * @return bool truetable示supportTTF字body，falsetable示onlysupportinside置字body
      */
     public function supportsTTF(): bool;
 

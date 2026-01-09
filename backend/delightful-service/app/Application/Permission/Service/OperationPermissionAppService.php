@@ -123,7 +123,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * getusertosomeresourcemost高permission.
+     * getusertosomeresourcemosthighpermission.
      */
     public function getOperationByResourceAndUser(PermissionDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, string $userId): Operation
     {
@@ -134,7 +134,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * getusertosomeonecategoryresourcemost高操aspermission.
+     * getusertosomeonecategoryresourcemosthigh操aspermission.
      */
     #[ArrayShape([
         // userId => [resourceId => Operation]

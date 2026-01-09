@@ -24,8 +24,8 @@ interface UserCallAgentInterface
     /**
      * getprocess器优先level.
      *
-     * numbermore大优先levelmore高，defaultfor0
-     * 企业版canreturnmore高优先levelby覆盖defaultimplement
+     * numbermorebig优先levelmorehigh，defaultfor0
+     * 企业版canreturnmorehigh优先levelby覆盖defaultimplement
      */
     public static function getPriority(): int;
 }

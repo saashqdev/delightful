@@ -48,7 +48,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         if (! isset($usersInfo[$uid], $usersInfo[$friendId])) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
-        // detectwhetheralready经is好友
+        // detectwhetheralready经isgood友
         if ($this->friendRepository->isFriend($uid, $friendId)) {
             return true;
         }
@@ -62,7 +62,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             // ifispersoncategory，checkhe们whether处at同oneorganization
             $this->assertUserInOrganization($friendId, $dataIsolation->getCurrentOrganizationCode());
         }
-        // will好友close系write friend 表.
+        // willgood友close系write friend 表.
         $this->friendRepository->insertFriend([
             'id' => IdGenerator::getSnowId(),
             'user_id' => $uid,
@@ -137,7 +137,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     {
         // check uid and friendId whether存in
         [$popular, $latest] = $this->userRepository->searchByKeyword($keyword);
-        // 按most受欢迎andmost新add入each取frontthree
+        // 按most受欢迎andmostnewadd入each取frontthree
         return $this->getAgents($popular, $latest);
     }
 
@@ -194,7 +194,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         // 4. filterorganizationencodingandbuild delightfulId => userId mapping
         $delightfulIdToUserIdMap = [];
         foreach ($users as $user) {
-            // 只保留currentorganizationuser
+            // only保留currentorganizationuser
             if ($user->getOrganizationCode() === $dataIsolation->getCurrentOrganizationCode()) {
                 $delightfulIdToUserIdMap[$user->getDelightfulId()] = $user->getUserId();
             }
@@ -249,7 +249,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
                 if ($user->getOrganizationCode() !== $officialOrganizationCode) {
                     return true;
                 }
-                // ifis官方organization，只保留AIuser
+                // ifis官方organization，only保留AIuser
                 return $user->getUserType() === UserType::Ai;
             });
         }
@@ -282,7 +282,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * will flowCodes settingto friendQueryDTO middle,andreturn flowCodewhetheristheuser好友.
+     * will flowCodes settingto friendQueryDTO middle,andreturn flowCodewhetheristheusergood友.
      * @return array<string, DelightfulFriendEntity>
      */
     public function getUserAgentFriendsList(FriendQueryDTO $friendQueryDTO, DataIsolation $dataIsolation): array
@@ -530,7 +530,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * check两userwhetheris好友close系.
+     * check两userwhetherisgood友close系.
      */
     public function isFriend(string $userId, string $friendId): bool
     {

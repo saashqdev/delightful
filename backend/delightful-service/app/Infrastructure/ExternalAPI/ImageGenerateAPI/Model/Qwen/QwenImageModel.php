@@ -26,7 +26,7 @@ use Hyperf\Retry\Annotation\Retry;
 
 class QwenImageModel extends AbstractImageGenerate
 {
-    // most大round询retrycount
+    // mostbiground询retrycount
     private const MAX_RETRY_COUNT = 30;
 
     // round询retrybetween隔（second）
@@ -107,7 +107,7 @@ class QwenImageModel extends AbstractImageGenerate
                     // success：settingimagedatatoresponseobject
                     $this->addImageDataToResponseQwen($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：settingerrorinfotoresponseobject（只settingfirsterror）
+                    // fail：settingerrorinfotoresponseobject（onlysettingfirsterror）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
@@ -152,7 +152,7 @@ class QwenImageModel extends AbstractImageGenerate
                 foreach ($output['results'] as $resultItem) {
                     if (! empty($resultItem['url'])) {
                         $imageUrls[$index] = $resultItem['url'];
-                        break; // 只取firstimageURL
+                        break; // only取firstimageURL
                     }
                 }
             }
@@ -280,7 +280,7 @@ class QwenImageModel extends AbstractImageGenerate
             $params = [
                 'prompt' => $prompt,
                 'size' => $request->getWidth() . '*' . $request->getHeight(),
-                'n' => 1, // 通义thousand问eachtime只cangenerate1张image
+                'n' => 1, // 通义thousand问eachtimeonlycangenerate1张image
                 'model' => $request->getModel(),
                 'watermark' => false, // closeAPIwatermark，use统onePHPwatermark
                 'prompt_extend' => $request->isPromptExtend(),
@@ -561,7 +561,7 @@ class QwenImageModel extends AbstractImageGenerate
                             'url' => $resultItem['url'],
                         ];
                     }
-                    break; // 只取firstimage
+                    break; // only取firstimage
                 }
             }
 

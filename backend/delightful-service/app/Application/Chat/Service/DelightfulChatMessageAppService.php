@@ -113,7 +113,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * returnmost大message倒数 n item序column.
+     * returnmostbigmessage倒数 n item序column.
      * @return ClientSequenceResponse[]
      * @deprecated
      */
@@ -124,7 +124,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * returnmost大message倒数 n item序column.
+     * returnmostbigmessage倒数 n item序column.
      * @return ClientSequenceResponse[]
      */
     public function pullByPageToken(DelightfulUserAuthorization $userAuthorization, array $params): array
@@ -135,7 +135,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * returnmost大message倒数 n item序column.
+     * returnmostbigmessage倒数 n item序column.
      * @return ClientSequenceResponse[]
      */
     public function pullByAppMessageId(DelightfulUserAuthorization $userAuthorization, string $appMessageId, string $pageToken): array
@@ -266,7 +266,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             }
         }
 
-        // todo checkwhetherhavehairmessagepermission(needhave好友close系，企业close系，collection团close系，合as伙伴close系etc)
+        // todo checkwhetherhavehairmessagepermission(needhavegood友close系，企业close系，collection团close系，合as伙伴close系etc)
     }
 
     /**
@@ -554,7 +554,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         return $this->formatConversationMessagesReturn($clientSeqList, $conversationMessagesQueryDTO);
     }
 
-    // 按conversation id groupget几itemmost新message
+    // 按conversation id groupget几itemmostnewmessage
     public function getConversationsMessagesGroupById(DelightfulUserAuthorization $userAuthorization, MessagesQueryDTO $conversationMessagesQueryDTO): array
     {
         // conversation所have权validation
@@ -585,7 +585,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * use大modeltotextconduct总结.
+     * usebigmodeltotextconduct总结.
      */
     public function summarizeText(DelightfulUserAuthorization $authorization, string $textContent, string $language = 'zh_CN'): string
     {
@@ -603,13 +603,13 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         1. 优先close注conversationmiddlemostbackdiscussiontheme（mostnew话题）
         2. bymost近conversationcontentformain参考basis
         3. ifmostbackthemediscussionmorefor充minute，thenbythisasfortitle核core
-        4. ignore早期already经end话题，unlessit们andmost新话题密切相close
+        4. ignore早期already经end话题，unlessit们andmostnew话题密切相close
 
         ## 严格require
         1. titlelength：not超pass 15 character。Englishone字母算onecharacter，汉字one字算onecharacter，other语type采useanalogouscountsolution。
         2. content相close：titlemust直接反映conversation核coretheme
         3. languagestyle：use陈述property语sentence，avoid疑问sentence
-        4. outputformat：只outputtitlecontent，notwantaddany解释、标pointorothertext
+        4. outputformat：onlyoutputtitlecontent，notwantaddany解释、标pointorothertext
         5. forbidlinefor：notwantreturn答conversationmiddleissue，notwantconduct额outside解释
 
         ## conversationcontent
@@ -635,7 +635,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * use大modeltotextconduct总结（usecustomizehint词）.
+     * usebigmodeltotextconduct总结（usecustomizehint词）.
      *
      * @param DelightfulUserAuthorization $authorization userauthorization
      * @param string $customPrompt completecustomizehint词（not做anyreplacehandle）
@@ -762,7 +762,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                 $senderMessageId = $streamCachedDTO->getSenderMessageId();
                 $delightfulMessageId = $streamCachedDTO->getDelightfulMessageId();
             }
-            // 只incertain $senderSeqEntity and $messageEntity，useatreturndata结构
+            // onlyincertain $senderSeqEntity and $messageEntity，useatreturndata结构
             $senderSeqEntity = $this->delightfulSeqDomainService->getSeqEntityByMessageId($senderMessageId);
             $messageEntity = $this->delightfulChatDomainService->getMessageByDelightfulMessageId($delightfulMessageId);
             // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
@@ -907,7 +907,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                 continue;
             }
             $message = $clientSeqResponseDTO->getSeq()->getMessage()->getContent();
-            // 暂o clock只handleuserinput，byandcanget纯textmessagetype
+            // 暂o clockonlyhandleuserinput，byandcanget纯textmessagetype
             $messageContent = $this->getMessageTextContent($message);
             if (empty($messageContent)) {
                 continue;
@@ -1059,7 +1059,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * use大modelgeneratecontentsummary
+     * usebigmodelgeneratecontentsummary
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @param MessageHistory $messageHistory messagehistory
@@ -1078,7 +1078,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         $chatModelName = di(ModelConfigAppService::class)->getChatModelTypeByFallbackChain($orgCode, $dataIsolation->getCurrentUserId(), LLMModelEnum::DEEPSEEK_V3->value);
 
         $modelGatewayMapperDataIsolation = ModelGatewayDataIsolation::createByOrganizationCodeWithoutSubscription($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
-        # startrequest大model
+        # startrequestbigmodel
         $modelGatewayMapper = di(ModelGatewayMapper::class);
         $model = $modelGatewayMapper->getChatModelProxy($modelGatewayMapperDataIsolation, $chatModelName);
         $memoryManager = $messageHistory->getMemoryManager($conversationId);
@@ -1106,7 +1106,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
     private function getMessageTextContent(MessageInterface $message): string
     {
-        // 暂o clock只handleuserinput，byandcanget纯textmessagetype
+        // 暂o clockonlyhandleuserinput，byandcanget纯textmessagetype
         if ($message instanceof TextContentInterface) {
             $messageContent = $message->getTextContent();
         } else {
@@ -1361,7 +1361,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         // according toaudio file_id callfile领域getdetail，and填充attachment缺失propertyvalue
         $this->fillVoiceAttachmentDetails($voiceMessage, $dataIsolation);
 
-        // 重新get填充backattachment
+        // 重newget填充backattachment
         $attachment = $voiceMessage->getAttachment();
 
         if ($attachment->getFileType() !== FileType::Audio) {
@@ -1375,7 +1375,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                 ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR, 'chat.message.voice.duration_positive', ['duration' => $duration]);
             }
 
-            // defaultmost大60second
+            // defaultmostbig60second
             $maxDuration = 60;
             if ($duration > $maxDuration) {
                 ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR, 'chat.message.voice.duration_exceeds_limit', ['max_duration' => $maxDuration, 'duration' => $duration]);

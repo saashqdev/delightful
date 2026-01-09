@@ -432,7 +432,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             $departmentSums[$deptId] = (int) ($department['employee_sum'] ?? 0);
         }
 
-        // 2) frombottomtoup：按 level from大to小，子department累计valueaddto父department
+        // 2) frombottomtoup：按 level frombigtosmall，子department累计valueaddto父department
         usort($allDepartments, static function (array $a, array $b): int {
             return (int) ($b['level'] ?? 0) <=> (int) ($a['level'] ?? 0);
         });

@@ -279,7 +279,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
      * Get topic messages by conversation ID, topic ID and max seq ID.
      * @param string $conversationId sessionID
      * @param string $topicId 话题ID
-     * @param int $maxSeqId most大序columnID（containtheID）
+     * @param int $maxSeqId mostbig序columnID（containtheID）
      * @return DelightfulTopicMessageEntity[] 话题message实bodyarray
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array

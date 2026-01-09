@@ -57,10 +57,10 @@ class ReplyMessageNodeRunner extends NodeRunner
         /** @var ReplyMessageNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        // if具have 大modelstreamresponsebody，that么直接start
+        // if具have bigmodelstreamresponsebody，that么直接start
         if ($executionData->getExecutionType()->isSupportStream() && ! empty($frontResults['chat_completion_choice_generator'])) {
             $streamResponse = $this->sendMessageForStream($executionData, $frontResults);
-            // generate大modelsectionpointresponsegivereturngo
+            // generatebigmodelsectionpointresponsegivereturngo
             $vertexResult->addDebugLog('llm_stream_response', $streamResponse->getLlmStreamResponse());
             $vertexResult->addDebugLog('llm_stream_reasoning_response', $streamResponse->getLlmStreamReasoningResponse());
             return;
@@ -108,7 +108,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $this->sendMessageForStreamApi($executionData, $chatCompletionChoiceGenerator, $streamResponse);
         }
 
-        // Chat call，eachtimestreamallisoneitem新message
+        // Chat call，eachtimestreamallisoneitemnewmessage
         if ($executionData->getExecutionType()->isImChat()) {
             $this->sendMessageForStreamIMChat($executionData, $chatCompletionChoiceGenerator, $streamResponse);
         }

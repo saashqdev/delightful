@@ -47,7 +47,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
             return [];
         }
 
-        // 仅pullfinger定 ID，avoidalltable扫描
+        // onlypullfinger定 ID，avoidalltable扫描
         $builder->whereIn('id', $ids);
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
@@ -215,7 +215,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
             return [];
         }
 
-        // 仅pullfinger定 ID，avoidalltable扫描
+        // onlypullfinger定 ID，avoidalltable扫描
         $builder->whereIn('id', $ids);
 
         $result = Db::select($builder->toSql(), $builder->getBindings());

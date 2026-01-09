@@ -41,7 +41,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'useuserissueandkeyword，goretrieveknowledge basemiddlecontent，returnanduserissuesimilardegreemost高content。';
+        return 'useuserissueandkeyword，goretrieveknowledge basemiddlecontent，returnanduserissuesimilardegreemosthighcontent。';
     }
 
     public function getAppendSystemPrompt(array $customParams = []): string
@@ -63,7 +63,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 ## process
 1. 结合updown文提炼userissue，generate多keyword，at mostnot超pass 5 ，多keyworduseEnglish逗number"," 隔open，useatusedifferentkeywordfromknowledge basemiddleretrievemost相closeinfo；
 2. 结合updown文，analyzeuserissue，generate `names` parameter，useatfinger定anduserissuemaybehaveclose多knowledge basename，按照相closepropertysort，相closeproperty需结合updown文、knowledge basenameandknowledge basedescriptionconductjudge；
-3. usekeywordanduserissue，call `{$this->getName()}` toolretrieveknowledge basemiddlecontent，keywordparameteris `keyword`，userissueparameteris `question`, 请ensureparameterallbecorrect填入，toolwillreturnanduserissuesimilardegreemost高contentslicesegment；
+3. usekeywordanduserissue，call `{$this->getName()}` toolretrieveknowledge basemiddlecontent，keywordparameteris `keyword`，userissueparameteris `question`, 请ensureparameterallbecorrect填入，toolwillreturnanduserissuesimilardegreemosthighcontentslicesegment；
 4. knowledge baseretrieveoutcomecontentwithinwillcontainonethesecustomize Delightful tag，youwant善atuseit们，havebydown几typetag：
     - <DelightfulImage></DelightfulImage> indicateoneimage，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，eachtagallwillinfront端messagecard渲染outone张image；
     - <DelightfulVideo></DelightfulVideo> indicateonevideo，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，eachtagallwillinfront端messagecard渲染outonevideo；
@@ -74,7 +74,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 - fragments: 本timeretrieveto所haveknowledge baseslicesegment
 - fragments.*.content: slicesegmentcontent
 - fragments.*.metadata.url: currentslicesegment原文link
-- graph.*.content: comefrom知识graph谱data，canenhanceinfo，letyoumore好return答issue
+- graph.*.content: comefrom知识graph谱data，canenhanceinfo，letyoumoregoodreturn答issue
 ## limit
 - return答contentmiddlenotallowout现notisDelightfultaglink。
 MARKDOWN;
@@ -337,7 +337,7 @@ JSON,
          "limit": {
             "type": "number",
             "key": "limit",
-            "title": "most大召returnquantity",
+            "title": "mostbig召returnquantity",
             "description": "",
             "required": null,
             "value": null,

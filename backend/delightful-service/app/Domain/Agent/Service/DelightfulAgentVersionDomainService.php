@@ -45,7 +45,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimizeversion：直接getenable助理version，avoid传入大quantityID.
+     * optimizeversion：直接getenable助理version，avoid传入bigquantityID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -81,7 +81,7 @@ class DelightfulAgentVersionDomainService
         $reviewOpen = false;
 
         $msg = '';
-        // if旧statusalready经is企业or者市场，thennotallowback
+        // ifoldstatusalready经is企业or者市场，thennotallowback
         $oldDelightfulAgentVersionEntity = $this->agentVersionRepository->getNewestAgentVersionEntity($delightfulAgentVersionEntity->getAgentId());
         if ($oldDelightfulAgentVersionEntity !== null) {
             $this->validateVersionNumber($delightfulAgentVersionEntity->getVersionNumber(), $oldDelightfulAgentVersionEntity->getVersionNumber());
@@ -198,7 +198,7 @@ class DelightfulAgentVersionDomainService
 
         // if MINOR 达to 10，enter位to MAJOR（canaccording to需求adjustthisrule）
         if ($minor > 99) {
-            // notresetminor，whileis直接增大major，avoidnot必wantreset
+            // notresetminor，whileis直接增bigmajor，avoidnot必wantreset
             $minor = 0;
             $major = (int) $major + 1;
         }
@@ -242,7 +242,7 @@ class DelightfulAgentVersionDomainService
      * based on游标paginationgetfinger定organization助理versionlist.
      * @param string $organizationCode organizationcode
      * @param array $agentVersionIds 助理versionIDlist
-     * @param string $cursor 游标ID，ifforemptystringthenfrommost新start
+     * @param string $cursor 游标ID，ifforemptystringthenfrommostnewstart
      * @param int $pageSize each页quantity
      * @return array<DelightfulAgentVersionEntity>
      */
@@ -253,7 +253,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * verify新versionnumberwhetherlegal.
+     * verifynewversionnumberwhetherlegal.
      * @throws BusinessException
      */
     private function validateVersionNumber(string $newVersion, string $oldVersion): void
@@ -275,7 +275,7 @@ class DelightfulAgentVersionDomainService
             return;
         }
 
-        // checkwhether试graphfrommore高level别publishrangebacktomore低level别
+        // checkwhether试graphfrommorehighlevel别publishrangebacktomorelowlevel别
         $errorMessage = match ($oldScope) {
             DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value => 'agent.already_published_to_enterprise_cannot_publish_to_individual',
             DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value => 'agent.already_published_to_market_cannot_publish_to_individual',

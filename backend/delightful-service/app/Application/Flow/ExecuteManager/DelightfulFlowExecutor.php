@@ -171,7 +171,7 @@ class DelightfulFlowExecutor
 
     protected function begin(array $args): void
     {
-        // meanwhile只canhaveoneprocessidinexecute
+        // meanwhileonlycanhaveoneprocessidinexecute
         if (! $this->locker->mutexLock($this->getLockerKey(), $this->executorId)) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, "{$this->executorId} is running");
         }
@@ -426,7 +426,7 @@ class DelightfulFlowExecutor
             if ($node->getParentId()) {
                 continue;
             }
-            // 运linefrontthen先尝试conduct所havesectionpointparameterdetect，useat提frontgenerate好 NodeParamsConfig
+            // 运linefrontthen先尝试conduct所havesectionpointparameterdetect，useat提frontgenerategood NodeParamsConfig
             try {
                 $node->validate();
             } catch (Throwable $throwable) {

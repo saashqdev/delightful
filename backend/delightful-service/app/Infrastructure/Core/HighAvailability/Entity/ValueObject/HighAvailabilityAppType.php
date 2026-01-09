@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\HighAvailability\Entity\ValueObject;
 use InvalidArgumentException;
 
 /**
- * 高canuseapplicationtype枚举.
+ * highcanuseapplicationtype枚举.
  */
 enum HighAvailabilityAppType: string
 {
@@ -44,7 +44,7 @@ enum HighAvailabilityAppType: string
     {
         return match ($type) {
             self::MODEL_GATEWAY->value => self::MODEL_GATEWAY,
-            default => throw new InvalidArgumentException("invalid高canuseapplicationtype: {$type}"),
+            default => throw new InvalidArgumentException("invalidhighcanuseapplicationtype: {$type}"),
         };
     }
 

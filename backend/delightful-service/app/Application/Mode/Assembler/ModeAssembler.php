@@ -157,7 +157,7 @@ class ModeAssembler
             }
         }
 
-        // tominutegroupsort（降序，more大morefront）
+        // tominutegroupsort（降序，morebigmorefront）
         usort($flatGroups, function ($a, $b) {
             return $b->getSort() <=> $a->getSort();
         });

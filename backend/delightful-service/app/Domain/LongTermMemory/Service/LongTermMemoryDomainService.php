@@ -45,7 +45,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * batchquantity强化记忆.
+     * batchquantitystrong化记忆.
      */
     public function reinforceMemories(array $memoryIds): void
     {
@@ -76,7 +76,7 @@ readonly class LongTermMemoryDomainService
                 return;
             }
 
-            // batchquantity强化
+            // batchquantitystrong化
             foreach ($memories as $memory) {
                 $memory->reinforce();
             }
@@ -579,12 +579,12 @@ readonly class LongTermMemoryDomainService
             return true;
         }
 
-        // validminute数pass低
+        // validminute数passlow
         if ($memory->getEffectiveScore() < 0.1) {
             return true;
         }
 
-        // 长timenotaccessand重wantpropertyvery低
+        // longtimenotaccessand重wantpropertyverylow
         if ($memory->getLastAccessedAt() && $memory->getImportance() < 0.2) {
             $daysSinceLastAccess = new DateTime()->diff($memory->getLastAccessedAt())->days;
             if ($daysSinceLastAccess > 30) {
@@ -655,17 +655,17 @@ readonly class LongTermMemoryDomainService
         $currentStatus = $memory->getStatus();
         $hasPendingContent = ! empty($pendingContent);
 
-        // get新status
+        // getnewstatus
         $newStatus = $this->determineNewMemoryStatus($currentStatus, $hasPendingContent);
 
-        // 只instatusneedaltero clock才update
+        // onlyinstatusneedaltero clock才update
         if ($newStatus !== $currentStatus) {
             $memory->setStatus($newStatus);
         }
     }
 
     /**
-     * according tocurrentstatusandpending_content存incertain新status.
+     * according tocurrentstatusandpending_content存incertainnewstatus.
      */
     private function determineNewMemoryStatus(MemoryStatus $currentStatus, bool $hasPendingContent): MemoryStatus
     {

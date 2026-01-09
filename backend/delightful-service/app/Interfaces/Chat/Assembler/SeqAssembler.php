@@ -51,7 +51,7 @@ class SeqAssembler
     }
 
     /**
-     * batchquantityreturncustomer端needSeq结构,toresultcollectionforce重新降序rowcolumn.
+     * batchquantityreturncustomer端needSeq结构,toresultcollectionforce重new降序rowcolumn.
      * @return ClientSequenceResponse[]
      */
     public static function getClientSeqStructs(array $seqInfos, array $messageInfos): array
@@ -69,7 +69,7 @@ class SeqAssembler
             }
             $seqStructs[$seqEntity->getSeqId()] = self::getClientSeqStruct($seqEntity, $messageEntity);
         }
-        // toresultcollectionforce重新降序rowcolumn
+        // toresultcollectionforce重new降序rowcolumn
         krsort($seqStructs);
         return array_values($seqStructs);
     }
@@ -81,13 +81,13 @@ class SeqAssembler
         string $seqId,
         ?array $thisTimeStreamMessages = null
     ): ?ClientJsonStreamSequenceResponse {
-        // todo forcompatible旧版streammessage，needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer。
+        // todo forcompatibleold版streammessage，needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer。
         // todo etcfront端uplineback，then移except content/reasoning_content/status/llm_response 多remainderpush
         $response = (new ClientJsonStreamSequenceResponse())->setTargetSeqId($seqId);
         $content = $thisTimeStreamMessages['content'] ?? null;
         $reasoningContent = $thisTimeStreamMessages['reasoning_content'] ?? null;
         $llmResponse = $thisTimeStreamMessages['llm_response'] ?? null;
-        // 强linedelete $streamOptions middlestream_app_message_id/streamfield
+        // stronglinedelete $streamOptions middlestream_app_message_id/streamfield
         unset($thisTimeStreamMessages['stream_options']['stream_app_message_id'], $thisTimeStreamMessages['stream_options']['stream']);
         $streamOptions = $thisTimeStreamMessages['stream_options'] ?? null;
         // 0 willbewhen做 false handle，所bythiswithinwantjudgewhetherfor null or者 ''
@@ -288,13 +288,13 @@ class SeqAssembler
             // send者
             'sender_id' => (string) $messageEntity?->getSenderId(),
             'topic_id' => $messageTopicId,
-            // message小category。controlmessage小category：already读return执；withdraw；edit；入群/退群；organization架构变动; 。 showmessage：text,voice,img,file,videoetc
+            // messagesmallcategory。controlmessagesmallcategory：already读return执；withdraw；edit；入群/退群；organization架构变动; 。 showmessage：text,voice,img,file,videoetc
             'type' => $messageTypeName,
             // return显not读person数,ifuserpoint击detail,againrequestspecificmessagecontent
             'unread_count' => $unreadCount,
             // messagesendtime，and delightful_message_id oneup，useatwithdraw、editmessageo clock唯onepropertyvalidation。
             'send_time' => $carbon->getTimestamp(),
-            // chatmessagestatus:unread | seen | read |revoked  .to应middle文释义：not读|already读|alreadyview（non纯text复杂typemessage，userpoint击detail）  | withdraw
+            // chatmessagestatus:unread | seen | read |revoked  .to应middle文释义：not读|already读|alreadyview（non纯textcomplextypemessage，userpoint击detail）  | withdraw
             'status' => $messageStatus ?: '',
             'content' => $messageData,
         ];

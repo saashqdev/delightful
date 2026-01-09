@@ -231,10 +231,10 @@ class OrganizationAdminDomainService
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.current_user_not_organization_creator', ['userId' => $currentCreatorUserId]);
         }
 
-        // check新createpersonwhetheralready经isorganizationadministrator
+        // checknewcreatepersonwhetheralready经isorganizationadministrator
         $newCreator = $this->getByUserId($dataIsolation, $newCreatorUserId);
         if (! $newCreator) {
-            // if新createpersonalsonotisadministrator，先授予administratorpermission
+            // ifnewcreatepersonalsonotisadministrator，先授予administratorpermission
             $newCreator = $this->grant($dataIsolation, $newCreatorUserId, $operatorUserId, '转letorganizationcreateperson身shareo clockfrom动授予administratorpermission');
         }
 
@@ -243,7 +243,7 @@ class OrganizationAdminDomainService
         $currentCreator->prepareForModification();
         $this->organizationAdminRepository->save($dataIsolation, $currentCreator);
 
-        // 授予新createpersoncreateperson身share
+        // 授予newcreatepersoncreateperson身share
         $newCreator->markAsOrganizationCreator();
         $newCreator->prepareForModification();
         $this->organizationAdminRepository->save($dataIsolation, $newCreator);

@@ -93,7 +93,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             $builder->whereIn('id', $query->getIds());
         }
 
-        // addsort（numbermore大more靠front）
+        // addsort（numbermorebigmore靠front）
         $builder->orderBy('sort', 'DESC')->orderBy('id', 'ASC');
 
         $result = $this->getByPage($builder, $page, $query);
@@ -121,7 +121,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
         $isNewRecord = ! $providerConfigEntity->getId();
 
         if ($isNewRecord) {
-            // create新record - 先generateID
+            // createnewrecord - 先generateID
             $this->initializeEntityForCreation($providerConfigEntity, $attributes);
         } else {
             // update现haverecord
@@ -145,7 +145,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
         }
 
         if ($isNewRecord) {
-            // create新record
+            // createnewrecord
             ProviderConfigModel::query()->insert($attributes);
         } else {
             // update现haverecord
@@ -201,7 +201,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
 
     /**
      * according toorganizationandservicequotienttypegetservicequotientconfigurationcolumn表.
-     * 新逻辑：bydatabasemiddleactualconfigurationfor准，toatdatabasemiddlenothaveservicequotienttype，usetemplate补充
+     * new逻辑：bydatabasemiddleactualconfigurationfor准，toatdatabasemiddlenothaveservicequotienttype，usetemplate补充
      * support多same provider_code configuration（organizationadministratorhand动add）
      * finalresulthandleo clock，官方organizationwillfilter掉Delightfulservicequotient，普通organizationwillwillDelightfulservicequotient置top.
      * @param string $organizationCode organizationencoding
@@ -255,12 +255,12 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             }
         }
 
-        // tootherservicequotient按 sort fieldsort（numbermore大more靠front）
+        // tootherservicequotient按 sort fieldsort（numbermorebigmore靠front）
         usort($otherProviders, function ($a, $b) {
             if ($a->getSort() === $b->getSort()) {
                 return strcmp($a->getId(), $b->getId()); // same sort valueo clock按 ID sort
             }
-            return $b->getSort() <=> $a->getSort(); // 降序rowcolumn，number大infront
+            return $b->getSort() <=> $a->getSort(); // 降序rowcolumn，numberbiginfront
         });
 
         // if找to Delightful servicequotient，willits放intheone位（non官方organization才willhave Delightful servicequotient）

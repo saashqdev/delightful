@@ -25,9 +25,9 @@ class GraphSearchConfig extends AbstractValueObject
     private float $relationWeight = 0.5;
 
     /**
-     * most大search深degree.
+     * mostbigsearch深degree.
      *
-     * graphsearchmost大深degree，即fromup始sectionpointstart，at mostsearch几跳close系
+     * graphsearchmostbig深degree，即fromup始sectionpointstart，at mostsearch几跳close系
      */
     private int $maxDepth = 2;
 
@@ -83,7 +83,7 @@ class GraphSearchConfig extends AbstractValueObject
     /**
      * resultlimit.
      *
-     * returnmost大resultquantity
+     * returnmostbigresultquantity
      */
     private int $limit = 10;
 
@@ -108,7 +108,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * getmost大search深degree.
+     * getmostbigsearch深degree.
      */
     public function getMaxDepth(): int
     {
@@ -116,7 +116,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * setmost大search深degree.
+     * setmostbigsearch深degree.
      */
     public function setMaxDepth(int $maxDepth): self
     {

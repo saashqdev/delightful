@@ -162,7 +162,7 @@ class SSRFDefense
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_NOBODY, true);              // 只getHTTPhead，notdownloadbody
+        curl_setopt($ch, CURLOPT_NOBODY, true);              // onlygetHTTPhead，notdownloadbody
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);

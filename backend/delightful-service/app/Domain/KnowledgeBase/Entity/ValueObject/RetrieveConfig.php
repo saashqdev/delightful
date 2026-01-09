@@ -38,14 +38,14 @@ class RetrieveConfig extends AbstractValueObject
     protected string $searchMethod = RetrievalMethod::SEMANTIC_SEARCH;
 
     /**
-     * returnmost大resultquantity.
+     * returnmostbigresultquantity.
      */
     protected int $topK = 3;
 
     /**
      * minute数阈value
      *
-     * 只returnsimilardegreeminute数greater thanthe阈valueresult
+     * onlyreturnsimilardegreeminute数greater thanthe阈valueresult
      */
     protected float $scoreThreshold = 0.5;
 
@@ -148,7 +148,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * getreturnmost大resultquantity.
+     * getreturnmostbigresultquantity.
      */
     public function getTopK(): int
     {
@@ -156,7 +156,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * setreturnmost大resultquantity.
+     * setreturnmostbigresultquantity.
      */
     public function setTopK(int $topK): self
     {

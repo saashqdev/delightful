@@ -362,7 +362,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         ProviderDataIsolation $dataIsolation,
         ProviderModelEntity $officialModel
     ): ProviderModelEntity {
-        // create新modelrecord(avoidnewfield导致copy报错，直接allquantity copy 然back set 新value)
+        // createnewmodelrecord(avoidnewfield导致copy报错，直接allquantity copy 然back set newvalue)
         $organizationModel = new ProviderModelEntity($officialModel->toArray());
         $organizationModel->setServiceProviderConfigId(0);
         $organizationModel->setModelParentId($officialModel->getId());

@@ -43,7 +43,7 @@ class PlatformSettingsApi
 
         $payload = $request->validated();
 
-        // allow部minutefieldupdate：仅when传入nonnullo clockreplace
+        // allow部minutefieldupdate：onlywhen传入nonnullo clockreplace
         if (array_key_exists('logo_zh_url', $payload) && $payload['logo_zh_url'] !== null) {
             $data['logo_urls']['zh_CN'] = (string) $payload['logo_zh_url'];
         }

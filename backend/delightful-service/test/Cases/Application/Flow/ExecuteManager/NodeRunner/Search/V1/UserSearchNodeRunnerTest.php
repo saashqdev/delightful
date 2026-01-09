@@ -40,7 +40,7 @@ class UserSearchNodeRunnerTest extends ExecuteManagerBaseTest
                     "expression_value": [
                         {
                             "type": "input",
-                            "value": "小明",
+                            "value": "small明",
                             "name": "",
                             "args": null
                         }
@@ -215,7 +215,7 @@ JSON,
                     "expression_value": [
                         {
                             "type": "input",
-                            "value": "小华",
+                            "value": "small华",
                             "name": "",
                             "args": null
                         }

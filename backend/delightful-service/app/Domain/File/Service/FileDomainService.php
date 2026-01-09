@@ -54,7 +54,7 @@ readonly class FileDomainService
             return null;
         }
         if (is_url($filePath)) {
-            // 只needpath
+            // onlyneedpath
             $filePath = ltrim(parse_url($filePath, PHP_URL_PATH), '/');
         }
         return $this->cloudFileRepository->getLinks($organizationCode, [$filePath], $bucketType, $downloadNames, $options)[$filePath] ?? null;

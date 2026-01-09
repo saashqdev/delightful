@@ -47,12 +47,12 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
     {
         // hand机numberwhethercanusecheck
         $this->checkPhoneStatus($type, $stateCode, $phone);
-        // 短信frequencycheck
+        // short信frequencycheck
         $this->checkSmsLimit($stateCode, $phone);
         $code = (string) random_int(100000, 999999);
         $variables = ['timeout' => 10, 'verification_code' => $code];
         $sign = SignEnum::DENG_TA;
-        // willbusiness场景type 转for 短信type
+        // willbusiness场景type 转for short信type
         $smsType = match ($type) {
             SmsSceneType::BIND_PHONE,
             SmsSceneType::CHANGE_PHONE,
@@ -61,7 +61,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             SmsSceneType::ACCOUNT_LOGIN_ACTIVE => SmsTypeEnum::VERIFICATION_WITH_EXPIRATION->value,
             default => ''
         };
-        // according to type certain短信templateid
+        // according to type certainshort信templateid
         $templateId = $this->template->getTemplateIdByTypeAndLanguage($smsType, LanguageEnum::ZH_CN->value);
         $sms = new SmsStruct($stateCode . $phone, $variables, $sign, $templateId);
         $sendResult = $this->sms->send($sms);
@@ -153,7 +153,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // certainuser_idgeneraterule
                 $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $userDTO->getOrganizationCode());
                 $userDTO->setUserId($userId);
-                // 1.47x(10**-29) 概ratedown,user_idwillduplicate,willbemysql唯oneindex拦截,letuser重新loginonetimethenline.
+                // 1.47x(10**-29) 概ratedown,user_idwillduplicate,willbemysql唯oneindex拦截,letuser重newloginonetimethenline.
                 $this->userRepository->createUser($userDTO);
             }
             Db::commit();
@@ -329,7 +329,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
      */
     private function checkSmsLimit(string $stateCode, string $phone): void
     {
-        // 短信sendfrequencycontrol
+        // short信sendfrequencycontrol
         $timeInterval = config('sms.time_interval') ?: 60;
         $lastSendTimeKey = $this->getSmsLastSendTimeKey($stateCode . $phone);
         $setSuccess = $this->redis->set($lastSendTimeKey, '1', ['nx', 'ex' => $timeInterval]);

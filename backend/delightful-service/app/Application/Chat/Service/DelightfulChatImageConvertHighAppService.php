@@ -119,7 +119,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             }
             // 计o clockend，outputsecondleveltime
             $end = microtime(true);
-            $this->logger->info(sprintf('转高清end，耗o clock: %ssecond。', $end - $start));
+            $this->logger->info(sprintf('转high清end，耗o clock: %ssecond。', $end - $start));
             // willageimage存入attachment
             $newFile = $this->upLoadFiles($requestContext, [$response->getUrls()[0]])[0] ?? [];
             $this->aiSendMessage(

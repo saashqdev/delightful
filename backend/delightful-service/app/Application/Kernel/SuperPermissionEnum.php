@@ -21,7 +21,7 @@ enum SuperPermissionEnum: string
     // （thethree方平台）助理administrator
     case ASSISTANT_ADMIN = 'assistant_admin';
 
-    // 大modelconfigurationmanage
+    // bigmodelconfigurationmanage
     case MODEL_CONFIG_ADMIN = 'model_config_admin';
 
     // hiddendepartmentor者user

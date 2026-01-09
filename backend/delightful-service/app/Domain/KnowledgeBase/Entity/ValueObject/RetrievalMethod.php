@@ -32,7 +32,7 @@ class RetrievalMethod
      *
      * based onkeywordmatchretrievemethod。
      * indexdocumentmiddle所havesingle词，returncontainquery词textslicesegment。
-     * 适合precisematch（如productname、person名、ID）and低频词match。
+     * 适合precisematch（如productname、person名、ID）andlow频词match。
      */
     public const string FULL_TEXT_SEARCH = 'full_text_search';
 
@@ -49,7 +49,7 @@ class RetrievalMethod
      * graphretrieve.
      *
      * based on知识graph谱retrievemethod。
-     * 利use实bodybetweenclose系conductretrieve，适合process复杂associatequery。
+     * 利use实bodybetweenclose系conductretrieve，适合processcomplexassociatequery。
      * canhair现隐含close系andconnect。
      */
     public const string GRAPH_SEARCH = 'graph_search';

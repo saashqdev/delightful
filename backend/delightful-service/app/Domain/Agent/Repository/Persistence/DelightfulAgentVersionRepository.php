@@ -82,7 +82,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * optimizeversion：直接passJOINquerygetenable助理version，avoid传入大quantityID.
+     * optimizeversion：直接passJOINquerygetenable助理version，avoid传入bigquantityID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -183,11 +183,11 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
             ->update(['enterprise_release_status' => $status]);
     }
 
-    // according to助理idgetmost大 version_number
+    // according to助理idgetmostbig version_number
     public function getAgentMaxVersion(string $agentId): string
     {
-        // queryfinger定 agent_id and user_id downmost大versionnumber,thiswithinnotcanuse max 取 version，因forwillout现 0.3 greater than 0.10情况，butisactualis 0.10greater than 0.3
-        // whileversionnumber只can递增，thereforeusetime倒序取first即can
+        // queryfinger定 agent_id and user_id downmostbigversionnumber,thiswithinnotcanuse max 取 version，因forwillout现 0.3 greater than 0.10情况，butisactualis 0.10greater than 0.3
+        // whileversionnumberonlycan递增，thereforeusetime倒序取first即can
         $maxVersion = $this->agentVersionModel::query()
             ->where('root_id', $agentId)
             ->orderByDesc('id')
@@ -203,7 +203,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function deleteByAgentId(string $agentId, string $organizationCode): void
     {
-        // queryfinger定 agent_id and user_id downmost大versionnumber
+        // queryfinger定 agent_id and user_id downmostbigversionnumber
         $this->agentVersionModel::query()
             ->where('root_id', $agentId)
             ->where('organization_code', $organizationCode)
@@ -294,7 +294,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
      * based on游标paginationgetfinger定organization助理versionlist.
      * @param string $organizationCode organizationcode
      * @param array $agentVersionIds 助理versionIDlist
-     * @param string $cursor 游标ID，ifforemptystringthenfrommost新start
+     * @param string $cursor 游标ID，ifforemptystringthenfrommostnewstart
      * @param int $pageSize each页quantity
      */
     public function getAgentsByOrganizationWithCursor(string $organizationCode, array $agentVersionIds, string $cursor, int $pageSize): array

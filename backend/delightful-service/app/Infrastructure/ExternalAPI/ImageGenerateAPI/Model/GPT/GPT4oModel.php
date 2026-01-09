@@ -26,7 +26,7 @@ use Hyperf\Retry\Annotation\Retry;
 
 class GPT4oModel extends AbstractImageGenerate
 {
-    // most大round询count
+    // mostbiground询count
     private const MAX_POLL_ATTEMPTS = 60;
 
     // round询between隔（second）
@@ -102,7 +102,7 @@ class GPT4oModel extends AbstractImageGenerate
                     // success：settingimagedatatoresponseobject
                     $this->addImageDataToResponseGPT4o($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：settingerrorinfotoresponseobject（只settingfirsterror）
+                    // fail：settingerrorinfotoresponseobject（onlysettingfirsterror）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());

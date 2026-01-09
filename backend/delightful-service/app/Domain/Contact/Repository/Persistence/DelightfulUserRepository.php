@@ -47,7 +47,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         $this->logger = $loggerFactory->get('user');
     }
 
-    // returnmost受欢迎andmost新add入 agent list
+    // returnmost受欢迎andmostnewadd入 agent list
     public function getSquareAgentList(): array
     {
         // most受欢迎
@@ -59,7 +59,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             ->limit(3);
         $popular = Db::select($popular->toSql(), $popular->getBindings());
         $popularIds = array_column($popular, 'id');
-        // most新
+        // mostnew
         $latest = $this->userModel::query()
             ->where('status', UserStatus::Activated->value)
             ->where('user_type', UserType::Ai->value)
@@ -67,7 +67,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             ->orderBy('created_at', 'desc')
             ->limit(3);
         $latest = Db::select($latest->toSql(), $latest->getBindings());
-        // todo statistics好友quantity
+        // todo statisticsgood友quantity
         return [$popular, $latest];
     }
 
@@ -257,7 +257,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             ->limit(3);
         $popular = Db::select($popular->toSql(), $popular->getBindings());
         $popularIds = array_column($popular, 'id');
-        // most新
+        // mostnew
         $latest = $this->userModel::query()
             ->where('status', AccountStatus::Normal->value)
             ->where('user_type', UserType::Ai->value)
@@ -270,7 +270,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             ->orderBy('created_at', 'desc')
             ->limit(3);
         $latest = Db::select($latest->toSql(), $latest->getBindings());
-        // todo statistics好友quantity
+        // todo statisticsgood友quantity
         return [$popular, $latest];
     }
 
@@ -405,7 +405,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             }
         }
         $this->updateDataById($userDTO->getUserId(), $userData);
-        // returnmost新data
+        // returnmostnewdata
         return $this->getUserById($userDTO->getUserId());
     }
 

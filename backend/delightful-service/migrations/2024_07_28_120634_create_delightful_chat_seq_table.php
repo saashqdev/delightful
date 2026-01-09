@@ -23,9 +23,9 @@ return new class extends Migration {
             $table->string('organization_code', 64)->comment('序columnnumber所属organizationencoding.')->default('');
             $table->tinyInteger('object_type')->comment('objecttype,0:ai,1:user；2：application;3:document;4:多维table格');
             $table->string('object_id', 64)->comment('objectid. ifisusero clock,table示delightful_id');
-            $table->string('seq_id', 64)->comment('message序columnnumber id，each账number所havemessagemustgradually增大');
-            $table->string('seq_type', 32)->comment('message大type:controlmessage,chatmessage。');
-            $table->text('content')->comment('序columnnumberdetail. onethesenotvisiblecontrolmessage,只inseqtable存indetail. byand写o clockcopyonesharemessagetablecontenttoseqtableuse.');
+            $table->string('seq_id', 64)->comment('message序columnnumber id，each账number所havemessagemustgradually增big');
+            $table->string('seq_type', 32)->comment('messagebigtype:controlmessage,chatmessage。');
+            $table->text('content')->comment('序columnnumberdetail. onethesenotvisiblecontrolmessage,onlyinseqtable存indetail. byand写o clockcopyonesharemessagetablecontenttoseqtableuse.');
             $table->string('delightful_message_id', 64)->comment('service端generate唯onemessageid,useatmessagewithdraw/edit');
             $table->string('message_id', 64)->comment('序columnnumberassociateusermessageid,implementalready读return执,messagewithdraw/editetc')->default(0);
             // quotemessageid

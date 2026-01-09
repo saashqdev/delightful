@@ -23,7 +23,7 @@ class FlowExecutorArchiveCloud
         $maxSize = 100 * 1024 * 1024; // 100MB
 
         if ($dataSize > $maxSize) {
-            // datapass大，notupload，直接returnnullstring
+            // datapassbig，notupload，直接returnnullstring
             return '';
         }
 

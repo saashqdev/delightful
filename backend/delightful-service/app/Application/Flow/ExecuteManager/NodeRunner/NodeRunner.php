@@ -92,7 +92,7 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     public function execute(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults = []): void
     {
-        // sectionpoint运linemost大countlimit，prevent死loop
+        // sectionpoint运linemostbigcountlimit，prevent死loop
         $max = 10000;
         $executeNum = $executionData->getExecuteNum($this->node->getNodeId());
         if ($executeNum >= $max) {
@@ -222,7 +222,7 @@ abstract class NodeRunner implements NodeRunnerInterface
     abstract protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void;
 
     /**
-     * todo thiswithin暂notimplementduplicateuploadissue，均when做新fileupload
+     * todo thiswithin暂notimplementduplicateuploadissue，均when做newfileupload
      * recordprocess所producefile，均willmeanwhileuploadto云端，back续sectionpointneeduseo clockfromexecuteprocessdatamiddle优先match.
      * @return AbstractAttachment[]
      * @throws SSRFException

@@ -364,7 +364,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             return [];
         }
 
-        // createconfigurationIDtoconfiguration实bodymapping，便at快speedfind
+        // createconfigurationIDtoconfiguration实bodymapping，便atfastspeedfind
         $configMap = [];
         foreach ($serviceProviderConfigEntities as $configEntity) {
             $configMap[$configEntity->getId()] = $configEntity;
@@ -423,7 +423,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             $uniqueModels[$model->getModelId()] = $model;
         }
 
-        // according to sort sort，大to小
+        // according to sort sort，bigtosmall
         usort($uniqueModels, static function ($a, $b) {
             return $b->getSort() <=> $a->getSort();
         });
@@ -569,7 +569,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
                 if ($serviceProviderConfigEntity->getStatus() !== Status::Enabled) {
                     continue;
                 }
-                // 找toactivatenon官方configuration，immediatelyreturn（优先levelmost高）
+                // 找toactivatenon官方configuration，immediatelyreturn（优先levelmosthigh）
                 return $serviceProviderConfigEntity;
             }
 

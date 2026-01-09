@@ -892,7 +892,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertIsString($creator['user_id'], 'user_idshouldisstring');
         $this->assertIsString($creator['avatar_url'], 'avatar_urlshouldisstring');
 
-        // validate必填fieldnotfornull
+        // validaterequiredfieldnotfornull
         $this->assertNotEmpty($creator['id'], 'idnotshouldfornull');
         $this->assertNotEmpty($creator['user_id'], 'user_idnotshouldfornull');
     }

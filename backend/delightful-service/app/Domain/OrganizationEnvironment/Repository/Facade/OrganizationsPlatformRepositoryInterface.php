@@ -13,7 +13,7 @@ interface OrganizationsPlatformRepositoryInterface
 {
     /**
      * getorganizationbelong to(thethird-party)platform.
-     * Magicsupportfromotherplatform同organization架构, 所byneedknoworganizationbelong toplatform.
+     * Magicsupportfromotherplatform同organizationarchitecture, 所byneedknoworganizationbelong toplatform.
      */
     public function getOrganizationPlatformType(string $delightfulOrganizationCode): PlatformType;
 }

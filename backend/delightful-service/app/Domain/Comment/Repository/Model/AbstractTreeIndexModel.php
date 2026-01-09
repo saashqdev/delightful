@@ -11,9 +11,9 @@ use App\Infrastructure\Core\AbstractModel;
 
 /**
  * @property int $id
- * @property int $ancestor_id 祖先sectionpointid, commentstable主keyid
+ * @property int $ancestor_id ancestorsectionpointid, commentstable主keyid
  * @property int $descendant_id back代sectionpointid, commentstable主keyid
- * @property int $distance 祖先sectionpointtoback代sectionpointdistance
+ * @property int $distance ancestorsectionpointtoback代sectionpointdistance
  * @property string $organization_code organizationcode
  * @property string $created_at
  * @property string $updated_at

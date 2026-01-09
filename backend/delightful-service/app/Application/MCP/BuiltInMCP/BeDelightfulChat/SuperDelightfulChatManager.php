@@ -141,7 +141,7 @@ callexample:
 ```json
 {
   "agent_id": "123456",
-  "message": "yougood,请帮Ianalyzeonedown...",
+  "message": "yougood,please helpIanalyzeonedown...",
   "conversation_id": "conv_001",
   "instruction": [
     {"name": "switch", "value": "on"},

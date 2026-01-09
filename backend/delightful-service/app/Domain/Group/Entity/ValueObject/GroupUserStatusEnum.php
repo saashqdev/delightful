@@ -12,6 +12,6 @@ enum GroupUserStatusEnum: int
     // normal
     case Normal = 1;
 
-    // be禁言
+    // bemute
     case Mute = 2;
 }

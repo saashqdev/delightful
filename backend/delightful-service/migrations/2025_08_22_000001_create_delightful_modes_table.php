@@ -66,7 +66,7 @@ return new class extends Migration {
             'description' => 'onlyuseatcreateo clockinitialize模typeandreset模typemiddleconfiguration',
             'is_default' => 1,
             'status' => 1,
-            'distribution_type' => 1, // 独立configuration
+            'distribution_type' => 1, // independentconfiguration
             'follow_mode_id' => 0,
             'restricted_mode_identifiers' => json_encode([]),
             'organization_code' => '',

@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('name', 255)->comment('enterprisename');
             $table->string('display_id', 255)->comment('enterprise编number,platforminside唯one');
-            $table->tinyInteger('tenant_tag')->default(0)->comment('person版/team版标志. 1:team版 2:person版');
+            $table->tinyInteger('tenant_tag')->default(0)->comment('person版/team版flag. 1:team版 2:person版');
             $table->string('tenant_key', 32)->comment('enterpriseidentifier');
             $table->text('avatar')->comment('enterpriseavatar');
             $table->timestamps();

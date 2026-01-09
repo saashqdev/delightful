@@ -192,7 +192,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
      */
     public function changeEnable(string $flowId)
     {
-        // fromrequestmiddlegetenableparameter,ifnothave传递thennotimpact原havelogic
+        // fromrequestmiddlegetenableparameter,ifnothavepassthennotimpact原havelogic
         $enable = $this->request->has('enable') ? (bool) $this->request->input('enable') : null;
         $this->delightfulFlowAppService->changeEnable($this->getAuthorization(), $flowId, $enable);
     }

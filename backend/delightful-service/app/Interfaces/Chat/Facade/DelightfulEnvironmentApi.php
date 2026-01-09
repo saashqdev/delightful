@@ -17,7 +17,7 @@ use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**
- * processandday书organization架构同.
+ * processandday书organizationarchitecture同.
  */
 #[ApiResponse('low_code')]
 class DelightfulEnvironmentApi extends AbstractApi

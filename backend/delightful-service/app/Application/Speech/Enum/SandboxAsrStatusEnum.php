@@ -16,7 +16,7 @@ namespace App\Application\Speech\Enum;
  * - callsandbox finishTask interfaceround询statusjudge
  * - judgeaudiominuteslicemergewhethercomplete
  *
- * 【andotherenum区别】
+ * 【andotherenumdifference】
  * - AsrRecordingStatusEnum: front端recording实o clockstatus(recordinginteractionlayer)
  * - AsrTaskStatusEnum: inside部taskallprocessstatus(businessmanagelayer)
  * - SandboxAsrStatusEnum: sandboxmergetaskstatus(infrastructurelayer)✓ current

@@ -246,7 +246,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             'status' => $status,
             'enabled' => $enabled,
             'pageToken' => $validatedParams['page_token'] ?? null,
-            'limit' => (int) $pageSize, // 传递originalpagesize,letapplicationservicelayerprocesspaginationlogic
+            'limit' => (int) $pageSize, // passoriginalpagesize,letapplicationservicelayerprocesspaginationlogic
         ]);
         // parse pageToken
         $dto->parsePageToken();

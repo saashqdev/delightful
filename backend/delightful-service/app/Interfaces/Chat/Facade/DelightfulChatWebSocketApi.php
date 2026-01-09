@@ -265,7 +265,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     public function onIntermediateMessage(Socket $socket, array $params)
     {
         try {
-            // viewwhether混淆
+            // viewwhetherobfuscate
             $isConfusion = $params['obfuscated'] ?? false;
             if ($isConfusion) {
                 $rawData = ShadowCode::unShadow($params['shadow'] ?? '');

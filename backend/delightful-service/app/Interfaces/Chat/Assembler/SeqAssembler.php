@@ -283,12 +283,12 @@ class SeqAssembler
         $clientMessageData = [
             // service端generatemessage唯oneid,alllocally uniqueone.useatwithdraw,editmessage.
             'delightful_message_id' => $seqEntity->getDelightfulMessageId(),
-            // customer端generate,needios/安卓/webthreeclient commoncertainonegeneratealgorithm.useatinformcustomer端,delightful_message_idbycome
+            // customer端generate,needios/Android/webthreeclient commoncertainonegeneratealgorithm.useatinformcustomer端,delightful_message_idbycome
             'app_message_id' => $seqEntity->getAppMessageId(),
             // send者
             'sender_id' => (string) $messageEntity?->getSenderId(),
             'topic_id' => $messageTopicId,
-            // messagesmallcategory.controlmessagesmallcategory:already读return执;withdraw;edit;入群/退群;organizationarchitecture change; . showmessage:text,voice,img,file,videoetc
+            // messagesmallcategory.controlmessagesmallcategory:already读return执;withdraw;edit;join group/退群;organizationarchitecture change; . showmessage:text,voice,img,file,videoetc
             'type' => $messageTypeName,
             // return显not读person数,ifuserpoint击detail,againrequestspecificmessagecontent
             'unread_count' => $unreadCount,
@@ -302,7 +302,7 @@ class SeqAssembler
 
         // generatecustomer端seqstructure
         $clientSequenceData = [
-            // 序columnnumber归属账numberid
+            // 序columnnumberbelong to账numberid
             'delightful_id' => $seqEntity->getObjectId(),
             // 序columnnumber,one定notduplicate,one定growth,butisnotguaranteecontinuous.
             'seq_id' => $seqEntity->getSeqId(),

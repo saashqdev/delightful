@@ -88,7 +88,7 @@ class DelightfulChatAdminContactApi extends AbstractApi
     }
 
     /**
-     * querydepartment直属userlist.
+     * querydepartmentdirectly underuserlist.
      */
     public function departmentUserList(string $id, RequestInterface $request): array
     {

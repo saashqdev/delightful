@@ -117,7 +117,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     {
         $attributes = $this->getFieldAttributes($providerConfigEntity);
 
-        // judgeiscreatealsoismorenew标志
+        // judgeiscreatealsoismorenewflag
         $isNewRecord = ! $providerConfigEntity->getId();
 
         if ($isNewRecord) {

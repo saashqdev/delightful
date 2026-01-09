@@ -47,10 +47,10 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         $this->logger = $loggerFactory->get('user');
     }
 
-    // returnmost受欢迎andmostnewadd入 agent list
+    // returnmostpopularandmostnewadd入 agent list
     public function getSquareAgentList(): array
     {
-        // most受欢迎
+        // mostpopular
         $popular = $this->userModel::query()
             ->where('status', UserStatus::Activated->value)
             ->where('user_type', UserType::Ai->value)
@@ -243,7 +243,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         if (empty($keyword)) {
             return [[], []];
         }
-        // most受欢迎
+        // mostpopular
         $popular = $this->userModel::query()
             ->where('status', AccountStatus::Normal->value)
             ->where('user_type', UserType::Ai->value)

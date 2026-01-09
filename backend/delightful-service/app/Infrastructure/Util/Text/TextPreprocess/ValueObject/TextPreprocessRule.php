@@ -12,7 +12,7 @@ enum TextPreprocessRule: int
     // replace掉continuousnull格/换line符/tab
     case REPLACE_WHITESPACE = 1;
 
-    // delete所haveurland电子邮itemground址
+    // delete所haveurlandemailitemground址
     case REMOVE_URL_EMAIL = 2;
 
     // Exceltitlelinesplice,剔exceptsheetline,linebetween换lineadjustfor\n\n
@@ -22,7 +22,7 @@ enum TextPreprocessRule: int
     {
         return match ($this) {
             self::REPLACE_WHITESPACE => 'replace掉continuousnull格/换line符/tab',
-            self::REMOVE_URL_EMAIL => 'delete所haveurland电子邮itemground址',
+            self::REMOVE_URL_EMAIL => 'delete所haveurlandemailitemground址',
             self::FORMAT_EXCEL => '剔excepttitleline,willExcelcontentandtitlelinesplicebecome"title:content"format,剔exceptsheetline,linebetween换lineadjustfor\n\n',
         };
     }

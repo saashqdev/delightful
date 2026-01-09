@@ -52,9 +52,9 @@ class FileDefaultInitCommand extends Command
         $publicBucketConfig = config('cloudfile.storages.' . StorageBucketType::Public->value);
         $this->line('公have桶configuration:' . json_encode($publicBucketConfig, JSON_UNESCAPED_UNICODE));
 
-        // ifis local 驱动,notneedinitialize
+        // ifis local driven,notneedinitialize
         if ($publicBucketConfig['adapter'] === 'local') {
-            $this->info('本ground驱动,notneedinitialize');
+            $this->info('本grounddriven,notneedinitialize');
             return;
         }
 
@@ -95,7 +95,7 @@ class FileDefaultInitCommand extends Command
 
         $this->line('handle模piecefile:');
 
-        // 遍历each模piecedirectory
+        // traverseeach模piecedirectory
         foreach ($moduleDirs as $moduleDir) {
             $moduleName = basename($moduleDir);
 

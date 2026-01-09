@@ -12,7 +12,7 @@ enum DeploymentEnum: string
     // 国inside saas
     case SaaS = 'saas';
 
-    // 国际 saas
+    // international saas
     case InternationalSaaS = 'international_saas';
 
     // opensource

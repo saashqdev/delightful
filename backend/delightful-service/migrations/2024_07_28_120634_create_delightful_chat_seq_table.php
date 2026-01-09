@@ -47,7 +47,7 @@ return new class extends Migration {
             // bydownindexcreatemovetosingle独migratefilemiddle
             $table->timestamps();
             $table->softDeletes();
-            $table->comment('账number收item箱序columnnumbertable,each账number所havemessagemustsingle调递增');
+            $table->comment('账number收item箱序columnnumbertable,each账number所havemessagemustsingleincrement');
         });
     }
 

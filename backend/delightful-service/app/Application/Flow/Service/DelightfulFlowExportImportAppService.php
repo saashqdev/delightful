@@ -184,7 +184,7 @@ class DelightfulFlowExportImportAppService
             return false; // processnot存in,not构becomeloop
         }
 
-        // 遍历所havesectionpointcheckdependency
+        // traverse所havesectionpointcheckdependency
         foreach ($flow->getNodes() as $node) {
             // check子processsectionpoint
             if ($node->getNodeType() === NodeType::Sub->value) {

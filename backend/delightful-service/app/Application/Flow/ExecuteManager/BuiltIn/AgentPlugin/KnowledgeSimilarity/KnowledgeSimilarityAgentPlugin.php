@@ -13,7 +13,7 @@ use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Knowledge\Structure\Know
 use App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Knowledge\Structure\KnowledgeOperator;
 use App\Infrastructure\Core\Collector\ExecuteManager\Annotation\AgentPluginDefine;
 
-#[AgentPluginDefine(code: 'knowledge_similarity', name: 'knowledge basedata', description: '挂载knowledgedata,useat RAG retrieve')]
+#[AgentPluginDefine(code: 'knowledge_similarity', name: 'knowledge basedata', description: 'mountknowledgedata,useat RAG retrieve')]
 class KnowledgeSimilarityAgentPlugin extends AbstractAgentPlugin
 {
     private KnowledgeConfig $knowledgeConfig;

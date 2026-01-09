@@ -12,7 +12,7 @@ use App\Domain\Provider\Entity\ValueObject\Status;
 use App\Infrastructure\Core\AbstractEntity;
 
 /**
- * AI can力实body.
+ * AI canimplementationbody.
  */
 class AiAbilityEntity extends AbstractEntity
 {

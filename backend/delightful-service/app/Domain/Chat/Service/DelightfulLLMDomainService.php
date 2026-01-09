@@ -236,7 +236,7 @@ class DelightfulLLMDomainService
        - 若同oneeventin多quotemiddleout现,priorityusemost早time.
        - 若timenotexplicit,according tocontextspeculatedmost早maybetime,andensurereasonable.
     3. **eventextractandfilter**:
-       - **eventdefinition**:eventissearchcontentmiddlemention,具havetimeassociate(explicitorcanspeculated)独立事实,changeoractivity,includebutnot限atcreate,publish,open业,update,合as,activityetc.
+       - **eventdefinition**:eventissearchcontentmiddlemention,具havetimeassociate(explicitorcanspeculated)independent事实,changeoractivity,includebutnot限atcreate,publish,open业,update,合as,activityetc.
        - according touserquestion,extractandrelatedcloseevent,maintaindescriptionconcise,focusspecifichair生thing.
        - **skipnoclosecontent**:
          - pure and quietstatedescription(如not变property,background介绍,notimechange).

@@ -235,7 +235,7 @@ class StartInputTemplate
                     "position": {
                         "type": "string",
                         "key": "position",
-                        "title": "岗位",
+                        "title": "post",
                         "description": "",
                         "items": null,
                         "properties": null,

@@ -137,7 +137,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     {
         // check uid and friendId whether存in
         [$popular, $latest] = $this->userRepository->searchByKeyword($keyword);
-        // 按most受欢迎andmostnewadd入each取frontthree
+        // 按mostpopularandmostnewadd入each取frontthree
         return $this->getAgents($popular, $latest);
     }
 

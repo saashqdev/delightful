@@ -40,7 +40,7 @@ enum KnowledgeSyncStatus: int
     case DeleteFailed = 5;
 
     /*
-     * 重建middle
+     * rebuildmiddle
      */
     case Rebuilding = 6;
 

@@ -1139,7 +1139,7 @@ class LLMAppService extends AbstractLLMAppService
         $imageGenerateParamsVO->setSequentialImageGenerationOptions($proxyModelRequest->getSequentialImageGenerationOptions());
         $imageGenerateParamsVO->setReferenceImages($proxyModelRequest->getImages());
 
-        // directly透传original size parameter,leteachservicequotientaccording tofrom己requirementprocess
+        // directlytransparent transmissionoriginal size parameter,leteachservicequotientaccording tofrom己requirementprocess
         $imageGenerateParamsVO->setSize($proxyModelRequest->getSize());
 
         $data = $imageGenerateParamsVO->toArray();
@@ -1167,7 +1167,7 @@ class LLMAppService extends AbstractLLMAppService
             // recordlog
             $this->recordImageGenerateMessageLog($modelVersion, $creator, $organizationCode);
 
-            // calculate计费quantity
+            // calculatebillingquantity
             $n = $proxyModelRequest->getN();
             // except mjand graph生graph is 1 time之outside,otherallcount by sheet
             if (in_array($modelVersion, ImageGenerateModelType::getMidjourneyModes())) {

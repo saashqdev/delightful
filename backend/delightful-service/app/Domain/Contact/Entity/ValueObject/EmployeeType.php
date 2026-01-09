@@ -18,7 +18,7 @@ enum EmployeeType: int
     // justtypeemployee
     case Formal = 1;
 
-    // 实习生
+    // intern
     case Intern = 2;
 
     // outsidepackage

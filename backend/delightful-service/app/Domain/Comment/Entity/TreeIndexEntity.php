@@ -12,7 +12,7 @@ class TreeIndexEntity
     protected int $id;
 
     /**
-     * 祖先sectionpointid.
+     * ancestorsectionpointid.
      */
     protected int $ancestorId;
 
@@ -22,7 +22,7 @@ class TreeIndexEntity
     protected int $descendantId;
 
     /**
-     * 祖先sectionpointtoback代sectionpointdistance.
+     * ancestorsectionpointtoback代sectionpointdistance.
      */
     protected int $distance;
 

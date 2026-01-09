@@ -19,7 +19,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Hyperf\Codec\Json;
 
 /**
- * 账number收item箱序columnnumbertable,each账number所havemessagemustsingle调递增.
+ * 账number收item箱序columnnumbertable,each账number所havemessagemustsingleincrement.
  */
 final class DelightfulSeqEntity extends AbstractEntity
 {

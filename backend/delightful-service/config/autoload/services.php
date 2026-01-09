@@ -9,7 +9,7 @@ return [
     'domestic_delightful_service' => [
         'host' => env('DOMESTIC_DELIGHTFUL_HOST'),
     ],
-    // 国际delightful
+    // internationaldelightful
     'international_delightful_service' => [
         'host' => env('INTERNATIONAL_DELIGHTFUL_HOST'),
     ],

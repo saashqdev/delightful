@@ -16,7 +16,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $organization_code organizationencoding
  * @property string $user_id userID
  * @property string $mcp_server_id MCPserviceID
- * @property null|array $require_fields 必填field
+ * @property null|array $require_fields requiredfield
  * @property null|array $oauth2_auth_result OAuth2authenticationresult
  * @property null|array $additional_config attachaddconfiguration
  * @property string $creator create者

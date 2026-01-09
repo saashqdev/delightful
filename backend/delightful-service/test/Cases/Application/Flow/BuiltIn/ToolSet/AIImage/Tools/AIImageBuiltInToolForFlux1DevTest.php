@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\BuiltIn\ToolSet\AIImage\Tools;
 
 /*
- * 本file属atlighthouseengine版权所have,泄漏必究.
+ * 本file属atlighthouseenginecopyrighthave,leaks will be prosecuted.
  */
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunnerFactory;
 use App\Domain\Flow\Entity\ValueObject\Node;
@@ -171,7 +171,7 @@ willuserinputprompt词,use`ai_image`toolgenerateimage
 
 MARKDOWN,
 
-            'user_prompt' => '多啦A梦',
+            'user_prompt' => 'DoraA梦',
         ]);
         $runner->execute($vertexResult, $executionData);
 

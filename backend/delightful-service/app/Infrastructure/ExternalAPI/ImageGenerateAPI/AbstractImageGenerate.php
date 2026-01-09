@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * imagegenerate统oneabstractcategory
- * integrationwatermarkprocessand钉钉alertfeature
+ * integrationwatermarkprocessandDingTalkalertfeature
  * 所haveimagegenerateProviderallshouldinheritthiscategory.
  */
 abstract class AbstractImageGenerate implements ImageGenerate
@@ -37,7 +37,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
     protected RedisLocker $redisLocker;
 
     /**
-     * 统oneimagegenerate入口method
+     * 统oneimagegenerateentrymethod
      * 先call子categoryimplementoriginalimagegenerate,again统oneaddwatermark.
      */
     final public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse

@@ -14,20 +14,20 @@ use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Throwable;
 
 /**
- * customer端收tomessagestructurebody.
+ * customerclient receivetomessagestructurebody.
  */
 class ClientMessage extends AbstractEntity
 {
     // service端generatemessage唯oneid,alllocally uniqueone.useatwithdraw,editmessage.
     protected string $delightfulMessageId;
 
-    // customer端generate,needios/安卓/webthreeclient commoncertainonegeneratealgorithm.useatinformcustomer端,delightful_message_idbycome
+    // customer端generate,needios/Android/webthreeclient commoncertainonegeneratealgorithm.useatinformcustomer端,delightful_message_idbycome
     protected ?string $appMessageId;
 
     // topicid
     protected ?string $topicId;
 
-    // messagesmallcategory.controlmessagesmallcategory:already读return执;withdraw;edit;入群/退群;organizationarchitecture change; . showmessage:text,voice,img,file,videoetc
+    // messagesmallcategory.controlmessagesmallcategory:already读return执;withdraw;edit;join group/退群;organizationarchitecture change; . showmessage:text,voice,img,file,videoetc
 
     protected string $type;
 

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\Sms;
 
 /**
- * 所haveshort信驱动returnresultmustconvertforthisobject
+ * 所haveshortmessage drivenreturnresultmustconvertforthisobject
  */
 class SendResult
 {

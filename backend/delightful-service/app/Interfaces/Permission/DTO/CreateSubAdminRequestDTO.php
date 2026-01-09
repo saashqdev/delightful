@@ -15,7 +15,7 @@ use App\Infrastructure\Core\AbstractDTO;
 class CreateSubAdminRequestDTO extends AbstractDTO
 {
     /**
-     * rolename(必填).
+     * rolename(required).
      */
     public string $name = '';
 

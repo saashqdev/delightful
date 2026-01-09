@@ -426,7 +426,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     {
         $departmentSums = [];
 
-        // 1) initialize:eachdepartment先put intofrom身直属person数
+        // 1) initialize:eachdepartment先put intofrom身directly underperson数
         foreach ($allDepartments as $department) {
             $deptId = (string) $department['department_id'];
             $departmentSums[$deptId] = (int) ($department['employee_sum'] ?? 0);

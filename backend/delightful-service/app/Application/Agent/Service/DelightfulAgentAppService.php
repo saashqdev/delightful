@@ -684,7 +684,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
         $delightfulAgentVersionEntity = $this->delightfulAgentVersionDomainService->getById($agentVersionId);
 
-        // 任意oneitemdifferentallneedmodify
+        // anyoneitemdifferentallneedmodify
         if (
             $delightfulAgentEntity->getAgentAvatar() !== $delightfulAgentVersionEntity->getAgentAvatar()
             || $delightfulAgentEntity->getAgentDescription() !== $delightfulAgentVersionEntity->getAgentDescription()

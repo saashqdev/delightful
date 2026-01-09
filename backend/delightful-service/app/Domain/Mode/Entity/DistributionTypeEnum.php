@@ -10,7 +10,7 @@ namespace App\Domain\Mode\Entity;
 enum DistributionTypeEnum: int
 {
     /**
-     * 独立configurationmode.
+     * independentconfigurationmode.
      */
     case INDEPENDENT = 1;
 
@@ -25,7 +25,7 @@ enum DistributionTypeEnum: int
     public function getDescription(): string
     {
         return match ($this) {
-            self::INDEPENDENT => '独立configuration',
+            self::INDEPENDENT => 'independentconfiguration',
             self::INHERITED => 'inheritconfiguration',
         };
     }
@@ -42,7 +42,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * whetherfor独立configuration.
+     * whetherforindependentconfiguration.
      */
     public function isIndependent(): bool
     {

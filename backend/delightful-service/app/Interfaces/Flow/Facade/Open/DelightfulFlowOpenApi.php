@@ -92,7 +92,7 @@ class DelightfulFlowOpenApi extends AbstractOpenApi
             );
         }
 
-        // compatible openai  messages 入参
+        // compatible openai  messages input parameter
         $params = $this->request->all();
         if (isset($params['messages'])) {
             foreach ($params['messages'] as $messageArr) {

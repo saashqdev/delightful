@@ -10,7 +10,7 @@ namespace App\Infrastructure\ExternalAPI\Sms;
 use App\Infrastructure\ExternalAPI\Sms\Enum\SignEnum;
 
 /**
- * 所haveshort信驱动returnresultmustconvertforthisobject
+ * 所haveshortmessage drivenreturnresultmustconvertforthisobject
  */
 class SmsStruct
 {

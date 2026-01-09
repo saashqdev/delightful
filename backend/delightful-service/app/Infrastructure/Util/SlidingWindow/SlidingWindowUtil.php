@@ -14,8 +14,8 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * 防抖toolcategory
- * implement"executemostbackonetimerequest"防抖strategy.
+ * debouncetoolcategory
+ * implement"executemostbackonetimerequest"debouncestrategy.
  */
 class SlidingWindowUtil
 {
@@ -28,11 +28,11 @@ class SlidingWindowUtil
     }
 
     /**
-     * 防抖interface - executemostbackonetimerequeststrategy
+     * debounceinterface - executemostbackonetimerequeststrategy
      * infinger定timewindowinside,onlymostbackonetimerequestwillbeexecute.
      *
-     * @param string $debounceKey 防抖key
-     * @param float $delayVerificationSeconds delayverifytime(second),alsoisactual防抖window
+     * @param string $debounceKey debouncekey
+     * @param float $delayVerificationSeconds delayverifytime(second),alsoisactualdebouncewindow
      * @return bool whethershouldexecutecurrentrequest
      */
     public function shouldExecuteWithDebounce(

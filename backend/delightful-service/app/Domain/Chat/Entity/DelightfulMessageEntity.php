@@ -21,7 +21,7 @@ use Hyperf\Codec\Json;
 use InvalidArgumentException;
 
 /**
- * messagecontentdetail. oneitemmessagemaybebe多session/序columnnumberassociate,所bymessagecontentis独立.
+ * messagecontentdetail. oneitemmessagemaybebe多session/序columnnumberassociate,所bymessagecontentisindependent.
  */
 class DelightfulMessageEntity extends AbstractEntity
 {

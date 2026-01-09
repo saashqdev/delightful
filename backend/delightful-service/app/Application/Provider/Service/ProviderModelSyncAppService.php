@@ -232,7 +232,7 @@ class ProviderModelSyncAppService
         // extractnewmodelmodel_id
         $newModelIds = array_column($models, 'id');
 
-        // 遍历newmodel,createorupdate
+        // traversenewmodel,createorupdate
         foreach ($models as $modelData) {
             $modelId = $modelData['id'] ?? null;
             if (! $modelId) {

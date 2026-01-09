@@ -9,7 +9,7 @@ namespace App\Application\Agent\Service\ThirdPlatformChat;
 
 class ThirdPlatformCreateSceneGroup
 {
-    // 群名
+    // group name
     private string $title;
 
     // 群所have者userid
@@ -30,7 +30,7 @@ class ThirdPlatformCreateSceneGroup
     // whethercansearchgroup chat, 0(default):notcansearch 1 search
     private int $searchable = 0;
 
-    // 入群whetherneedverify:0(default):notverify 1:入群verify
+    // join groupwhetherneedverify:0(default):notverify 1:join groupverify
     private int $validationType = 0;
 
     // @all userange: 0(default):所havepersonallcan@all
@@ -39,7 +39,7 @@ class ThirdPlatformCreateSceneGroup
     // 群managetype:0(default):所havepersoncanmanage,1:onlygroup ownercanmanage
     private int $managementType = 0;
 
-    // whetherstart群禁言:0(default):not禁言,1:all员禁言
+    // whetherstart群mute:0(default):notmute,1:allmember muted
     private int $chatBannedType;
 
     // group唯oneidentifier

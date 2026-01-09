@@ -19,7 +19,7 @@ return new class extends Migration {
         }
         Schema::create('delightful_contact_accounts', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('delightful_id', 64)->comment('账numberid,跨租户(organization)唯one. foravoidanduser_id(organizationinside唯one)concept混淆,thereforeup名delightful_id')->default('');
+            $table->string('delightful_id', 64)->comment('账numberid,跨租户(organization)唯one. foravoidanduser_id(organizationinside唯one)conceptobfuscate,thereforeup名delightful_id')->default('');
             // 账numbertype
             $table->tinyInteger('type')->comment('账numbertype,0:ai,1:personcategory')->default(0);
             // ai_code

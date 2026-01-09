@@ -51,7 +51,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 continue;
             }
             if ($filterType->isAny()) {
-                // ifis任意itemitemfull足,that么will本time id andalreadyhave id conductmerge
+                // ifisanyitemitemfull足,that么will本time id andalreadyhave id conductmerge
                 $allIds = array_merge($allIds ?? [], $currentIds);
             } else {
                 // ifis所haveitemitemfull足,that么will本time id andalreadyhave id conduct交collection

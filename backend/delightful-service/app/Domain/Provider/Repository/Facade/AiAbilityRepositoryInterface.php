@@ -19,11 +19,11 @@ use App\Infrastructure\Core\ValueObject\Page;
 interface AiAbilityRepositoryInterface
 {
     /**
-     * according tocan力codegetAIcan力实body.
+     * according tocan力codegetAIcanimplementationbody.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @param AiAbilityCode $code can力code
-     * @return null|AiAbilityEntity AIcan力实body
+     * @return null|AiAbilityEntity AIcanimplementationbody
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity;
 
@@ -31,31 +31,31 @@ interface AiAbilityRepositoryInterface
      * get所haveAIcan力list.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
-     * @return array<AiAbilityEntity> AIcan力实bodylist
+     * @return array<AiAbilityEntity> AIcanimplementationbodylist
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array;
 
     /**
-     * according toIDgetAIcan力实body.
+     * according toIDgetAIcanimplementationbody.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @param int $id can力ID
-     * @return null|AiAbilityEntity AIcan力实body
+     * @return null|AiAbilityEntity AIcanimplementationbody
      */
     public function getById(ProviderDataIsolation $dataIsolation, int $id): ?AiAbilityEntity;
 
     /**
-     * saveAIcan力实body.
+     * saveAIcanimplementationbody.
      *
-     * @param AiAbilityEntity $entity AIcan力实body
+     * @param AiAbilityEntity $entity AIcanimplementationbody
      * @return bool whethersavesuccess
      */
     public function save(AiAbilityEntity $entity): bool;
 
     /**
-     * updateAIcan力实body.
+     * updateAIcanimplementationbody.
      *
-     * @param AiAbilityEntity $entity AIcan力实body
+     * @param AiAbilityEntity $entity AIcanimplementationbody
      * @return bool whetherupdatesuccess
      */
     public function update(AiAbilityEntity $entity): bool;

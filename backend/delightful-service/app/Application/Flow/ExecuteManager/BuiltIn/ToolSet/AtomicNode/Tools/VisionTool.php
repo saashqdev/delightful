@@ -116,7 +116,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "string",
             "key": "model",
             "title": "model",
-            "description": "canusemodel.non必填",
+            "description": "canusemodel.nonrequired",
             "required": null,
             "value": null,
             "encryption": false,

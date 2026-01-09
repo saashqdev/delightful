@@ -94,12 +94,12 @@ class AsrConfig
     // ==================== Redis configuration ====================
 
     /**
-     * Redis 扫描batchtimesize.
+     * Redis scanbatchtimesize.
      */
     public const int REDIS_SCAN_BATCH_SIZE = 200;
 
     /**
-     * Redis 扫描mostbigquantity.
+     * Redis scanmostbigquantity.
      */
     public const int REDIS_SCAN_MAX_COUNT = 2000;
 

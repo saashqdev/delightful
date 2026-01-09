@@ -152,7 +152,7 @@ class MCPHandler implements MCPHandlerInterface
             // getrequestmethodname
             $method = $request->getMethod();
 
-            // createprocess器instance(short生命period)
+            // createprocess器instance(shortlifeperiod)
             $handler = $this->methodHandlerFactory->createHandler($method);
 
             $result = null;

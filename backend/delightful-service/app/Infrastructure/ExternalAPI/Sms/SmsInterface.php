@@ -15,7 +15,7 @@ interface SmsInterface
     public function getTemplateId(SmsStruct $smsStruct): ?string;
 
     /**
-     * sendshort信,forcerequire所haveshort信驱动returnstructuresame.
+     * sendshort信,forcerequire所haveshortmessage drivenreturnstructuresame.
      */
     public function send(SmsStruct $smsStruct): SendResult;
 
@@ -30,7 +30,7 @@ interface SmsInterface
     public function getContentLanguage(SmsStruct $smsStruct): string;
 
     /**
-     * getshort信signature. need多语typeadapt,语type兜bottom!
+     * getshort信signature. needmulti-languagetypeadapt,语type兜bottom!
      */
     public function getSign(SmsStruct $smsStruct): string;
 }

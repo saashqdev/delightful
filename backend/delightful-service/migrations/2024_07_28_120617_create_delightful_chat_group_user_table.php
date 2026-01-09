@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->string('user_id', 64)->comment('userid');
             $table->tinyInteger('user_role')->default(1)->comment('userrole,1:normaluser;2:administrator 3:group owner');
             $table->tinyInteger('user_type')->default(1)->comment('usertype,0:ai;1:personcategory. 冗remainderfield');
-            $table->tinyInteger('status')->default(1)->comment('status,1:normal;2:禁言');
+            $table->tinyInteger('status')->default(1)->comment('status,1:normal;2:mute');
             $table->string('organization_code', 64)->comment('enter群o clock,user所inorganizationencoding');
             $table->unique(['group_id', 'user_id', 'organization_code'], 'uniq_idx_group_user');
             $table->softDeletes();

@@ -85,7 +85,7 @@ class DelightfulFlowEntity extends AbstractEntity
     private bool $isCollectingNodes = false;
 
     /**
-     * process入口.
+     * processentry.
      */
     private ?NodeInput $input = null;
 
@@ -238,7 +238,7 @@ class DelightfulFlowEntity extends AbstractEntity
             }
 
             if ($node->isStart() && ! $node->getParentId()) {
-                // ifalready经haveone,that么iserrorprocess,out现多startsectionpoint
+                // ifalready经haveone,that么iserrorprocess,outmultiplestartsectionpoint
                 if ($this->startNode) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.only_one');
                 }

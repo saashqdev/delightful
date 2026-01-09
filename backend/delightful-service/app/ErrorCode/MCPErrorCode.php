@@ -66,21 +66,21 @@ enum MCPErrorCode: int
     #[ErrorMessage(message: 'mcp.oauth2.binding.mcp_server_code_empty')]
     case OAuth2BindingMcpServerCodeEmpty = 51542; // OAuth2bindMCPservicecodeforempty
 
-    // 必填fieldverify相closeerror码
+    // requiredfieldverify相closeerror码
     #[ErrorMessage(message: 'mcp.required_fields.missing')]
-    case RequiredFieldsMissing = 51550; // 必填fieldmissing
+    case RequiredFieldsMissing = 51550; // requiredfieldmissing
 
     #[ErrorMessage(message: 'mcp.required_fields.empty')]
-    case RequiredFieldsEmpty = 51551; // 必填fieldforempty
+    case RequiredFieldsEmpty = 51551; // requiredfieldforempty
 
-    // STDIOexecute器相closeerror码
+    // STDIOexecutedevicecloseerror码
     #[ErrorMessage(message: 'mcp.executor.stdio.connection_failed')]
     case ExecutorStdioConnectionFailed = 51560; // STDIOexecute器connectfail
 
     #[ErrorMessage(message: 'mcp.executor.stdio.access_denied')]
     case ExecutorStdioAccessDenied = 51561; // STDIOexecute器accessbereject
 
-    // HTTPexecute器相closeerror码
+    // HTTPexecutedevicecloseerror码
     #[ErrorMessage(message: 'mcp.executor.http.connection_failed')]
     case ExecutorHttpConnectionFailed = 51562; // HTTPexecute器connectfail
 }

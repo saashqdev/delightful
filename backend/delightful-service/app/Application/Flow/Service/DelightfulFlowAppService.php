@@ -350,7 +350,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             $toolResult['list'][] = $builtInTool->generateToolFlow($dataIsolation->getCurrentOrganizationCode());
         }
 
-        // 挂载totoolupsurface
+        // mounttotoolupsurface
         foreach ($toolResult['list'] as $tool) {
             $index = array_search($tool->getToolSetId(), $toolSetIds);
             if ($index === false) {

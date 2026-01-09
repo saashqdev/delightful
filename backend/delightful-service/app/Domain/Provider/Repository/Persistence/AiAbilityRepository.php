@@ -24,7 +24,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     protected bool $filterOrganizationCode = true;
 
     /**
-     * according tocan力codegetAIcan力实body.
+     * according tocan力codegetAIcanimplementationbody.
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity
     {
@@ -55,7 +55,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * according toIDgetAIcan力实body.
+     * according toIDgetAIcanimplementationbody.
      */
     public function getById(ProviderDataIsolation $dataIsolation, int $id): ?AiAbilityEntity
     {
@@ -70,7 +70,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * saveAIcan力实body.
+     * saveAIcanimplementationbody.
      */
     public function save(AiAbilityEntity $entity): bool
     {
@@ -98,7 +98,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * updateAIcan力实body.
+     * updateAIcanimplementationbody.
      */
     public function update(AiAbilityEntity $entity): bool
     {

@@ -22,13 +22,13 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('endpoint_id', 64)->comment('accesspointID');
             $table->string('resource_name', 64)->comment('resourcename');
-            $table->integer('billing_cycle_value')->default(0)->comment('计费periodvalue');
+            $table->integer('billing_cycle_value')->default(0)->comment('billingperiodvalue');
             $table->tinyInteger('billing_cycle_type')->default(0)->comment('0: 总quantity, 1:second, 2:minute钟, 3:hour, 4:day');
             $table->integer('total_usage')->default(0)->comment('总quantity');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['endpoint_id', 'id'], 'index_endpoint_id');
-            $table->comment('APIresource计费ruletable,support总quantityorspeedrate计费');
+            $table->comment('APIresourcebillingruletable,support总quantityorspeedratebilling');
         });
     }
 

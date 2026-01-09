@@ -93,7 +93,7 @@ class ModelConfigAppService extends AbstractLLMAppService
         // userpass in降level链prioritylevelmorehigh
         $mergedFallbackChain = array_merge($systemFallbackChain, $modelFallbackChain);
 
-        // 按prioritylevelorder遍历mergeback降level链
+        // 按prioritylevelordertraversemergeback降level链
         foreach ($mergedFallbackChain as $modelName) {
             if (isset($availableModels[$modelName])) {
                 return $modelName;

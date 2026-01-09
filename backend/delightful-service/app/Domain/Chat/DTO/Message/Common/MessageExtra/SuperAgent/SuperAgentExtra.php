@@ -45,7 +45,7 @@ class BeAgentExtra extends AbstractDTO
     protected ?string $queueId;
 
     /**
-     * 动stateparameter(useattosandbox传递额outsideparameter,如 task_key etc).
+     * 动stateparameter(useattosandboxpass额outsideparameter,如 task_key etc).
      */
     protected ?array $dynamicParams;
 

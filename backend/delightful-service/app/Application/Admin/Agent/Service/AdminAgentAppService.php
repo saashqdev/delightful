@@ -81,7 +81,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         $agentVersionEntity = new DelightfulAgentVersionEntity();
         if ($agentEntity->getAgentVersionId()) {
             $agentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentById($agentEntity->getAgentVersionId());
-            // onlypublishassistant才willhavepermission管控
+            // onlypublishassistant才willhavepermissioncontrol
             $resourceAccessDTO = $this->getAgentResource($authorization, $agentId);
             $adminAgentDetail->setResourceAccess($resourceAccessDTO);
         } else {

@@ -143,7 +143,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * ensuresysteminteractionfinger令存in,ifmissingthensupplement.
+     * ensuresysteminteractionfingertoken storagein,ifmissingthensupplement.
      * @return array returnsupplementbackfinger令array
      */
     public static function ensureSystemInstructs(array $instructs): array

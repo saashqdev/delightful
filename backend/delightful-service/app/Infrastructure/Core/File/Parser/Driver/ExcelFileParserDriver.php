@@ -140,7 +140,7 @@ class ExcelFileParserDriver implements ExcelFileParserDriverInterface
             return '';
         }
 
-        // ifsingleyuan格contentcontainbydown任意character,needuse引numberpackage围
+        // ifsingleyuan格contentcontainbydownanycharacter,needuse引numberpackage围
         if (str_contains($value, ',')
             || str_contains($value, '"')
             || str_contains($value, "\n")

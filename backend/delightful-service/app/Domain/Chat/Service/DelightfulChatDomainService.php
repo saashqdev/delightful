@@ -706,7 +706,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         array $thisTimeStreamMessages,
         ?StreamMessageStatus $streamMessageStatus = null
     ): JsonStreamCachedDTO {
-        // from旋lock,avoiddata竞争.另outsidealsoneedonescheduletask扫描 redis ,toattimeoutstreammessage,updatedatabase.
+        // from旋lock,avoiddata竞争.另outsidealsoneedonescheduletaskscan redis ,toattimeoutstreammessage,updatedatabase.
         $lockKey = 'delightful_stream_message:' . $appMessageId;
         $lockOwner = random_bytes(16);
         $this->locker->spinLock($lockKey, $lockOwner);
@@ -1068,7 +1068,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         // updatestreamdata
         $jsonStreamCachedDTO->setContent($memoryCacheContent);
         $memoryCache['content'] = $memoryCacheContent;
-        // updatecache,usemorelongTTLbydecreaseexpire重建frequency
+        // updatecache,usemorelongTTLbydecreaseexpirerebuildfrequency
         $this->memoryDriver->set($cacheKey, $memoryCache, 600); // setting10minute钟expiretime
     }
 

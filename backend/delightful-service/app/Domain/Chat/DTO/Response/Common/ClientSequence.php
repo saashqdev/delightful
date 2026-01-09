@@ -12,13 +12,13 @@ use App\Domain\Chat\Entity\AbstractEntity;
 use App\Domain\Chat\Entity\ValueObject\MessageType\MessageOptionsEnum;
 
 /**
- * customer端收tomessage序columnstructure.
+ * customerclient receivetomessage序columnstructure.
  */
 class ClientSequence extends AbstractEntity
 {
     use EditMessageOptionsTrait;
 
-    // 序columnnumber归属账numberid
+    // 序columnnumberbelong to账numberid
     protected string $delightfulId;
 
     // 序columnnumber,one定notduplicate,one定growth,butisnotguaranteecontinuous.

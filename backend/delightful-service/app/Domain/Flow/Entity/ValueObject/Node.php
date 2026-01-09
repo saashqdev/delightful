@@ -36,7 +36,7 @@ class Node extends AbstractValueObject
     protected array $meta = [];
 
     /**
-     * sectionpointparameterconfiguration,目front依靠arraycomedata传递.
+     * sectionpointparameterconfiguration,目front依靠arraycomedatapass.
      */
     protected array $params = [];
 

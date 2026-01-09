@@ -84,7 +84,7 @@ class UserSearchNodeParamsConfig extends AbstractSearchNodeParamsConfig
                         "type": "string",
                         "key": "position",
                         "sort": 2,
-                        "title": "岗位",
+                        "title": "post",
                         "description": "",
                         "items": null,
                         "properties": null,

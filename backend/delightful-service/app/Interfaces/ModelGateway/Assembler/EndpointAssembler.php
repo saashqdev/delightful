@@ -16,11 +16,11 @@ use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\HighAvailability
 class EndpointAssembler
 {
     /**
-     * generatestandard化端pointtypeidentifier.
+     * generatestandardclientpointtypeidentifier.
      *
      * @param HighAvailabilityAppType $appType highcanuseapplicationtype
      * @param string $modelId modelID
-     * @return string standard化端pointtypeidentifier
+     * @return string standardclientpointtypeidentifier
      */
     public static function generateEndpointType(HighAvailabilityAppType $appType, string $modelId): string
     {
@@ -28,14 +28,14 @@ class EndpointAssembler
     }
 
     /**
-     * fromformat化端pointtypeidentifiermiddlealso原originalmodelID.
+     * fromformatclientpointtypeidentifiermiddlealso原originalmodelID.
      *
      * @param string $formattedModelId maybecontainformat化front缀modelID
      * @return string originalmodelID
      */
     public static function extractOriginalModelId(string $formattedModelId): string
     {
-        // 遍历所have HighAvailabilityAppType enumvalue
+        // traverse所have HighAvailabilityAppType enumvalue
         foreach (HighAvailabilityAppType::cases() as $appType) {
             $prefix = $appType->value . DelimiterType::HIGH_AVAILABILITY->value;
 
@@ -50,14 +50,14 @@ class EndpointAssembler
     }
 
     /**
-     * checkgive定stringwhetherforformat化端pointtypeidentifier.
+     * checkgive定stringwhetherforformatclientpointtypeidentifier.
      *
      * @param string $modelId 待checkmodelID
-     * @return bool whetherforformat化端pointtypeidentifier
+     * @return bool whetherforformatclientpointtypeidentifier
      */
     public static function isFormattedEndpointType(string $modelId): bool
     {
-        // 遍历所have HighAvailabilityAppType enumvalue
+        // traverse所have HighAvailabilityAppType enumvalue
         foreach (HighAvailabilityAppType::cases() as $appType) {
             $prefix = $appType->value . DelimiterType::HIGH_AVAILABILITY->value;
             if (str_starts_with($modelId, $prefix)) {

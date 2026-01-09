@@ -27,7 +27,7 @@ enum DelightfulResourceEnum: string
 
     // ===== twolevel:模piece =====
     case ADMIN_AI = 'admin.ai'; # platformmanageback台-AImanage
-    case ADMIN_SAFE = 'admin.safe'; # security管控
+    case ADMIN_SAFE = 'admin.safe'; # securitycontrol
     case PLATFORM_AI = 'platform.ai'; # platformmanageback台-AImanage
     case PLATFORM_SETTING = 'platform.setting'; # systemset
     case PLATFORM_ORGANIZATION = 'platform.organization'; # organizationmanage
@@ -38,7 +38,7 @@ enum DelightfulResourceEnum: string
     case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AImanage-智can绘graphmanage
     case ADMIN_AI_MODE = 'platform.ai.mode_management'; # AImanage-模typemanagemanage
     case ADMIN_AI_ABILITY = 'platform.ai.ability'; # AImanage-can力manage
-    case SAFE_SUB_ADMIN = 'admin.safe.sub_admin';  # security管控-子administrator
+    case SAFE_SUB_ADMIN = 'admin.safe.sub_admin';  # securitycontrol-子administrator
     case PLATFORM_SETTING_PLATFORM_INFO = 'platform.setting.platform_info'; # platformmanage - systemset - platforminfo
     case PLATFORM_SETTING_MAINTENANCE = 'platform.setting.maintenance'; # platformmanage - systeminfo - maintainmanage
     case PLATFORM_ORGANIZATION_LIST = 'platform.organization.list'; # platformmanage - organizationmanage - organizationlist

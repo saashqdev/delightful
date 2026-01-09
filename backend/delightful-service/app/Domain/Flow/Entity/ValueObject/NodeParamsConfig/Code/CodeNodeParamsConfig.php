@@ -76,7 +76,7 @@ class CodeNodeParamsConfig extends NodeParamsConfig
         }
         if ($codeMode === CodeMode::Normal) {
             $code = $params['code'] ?? '';
-            // thiswithin code maybeis混淆back
+            // thiswithin code maybeisobfuscateback
             is_string($code) && $this->code = ShadowCode::unShadow($code);
         }
 

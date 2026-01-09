@@ -24,7 +24,7 @@ use Throwable;
 
 /**
  * ASR verifyservice
- * responsibleprojectpermission,topic归属,taskstatusetcverifylogic.
+ * responsibleprojectpermission,topicbelong to,taskstatusetcverifylogic.
  */
 readonly class AsrValidationService
 {
@@ -98,7 +98,7 @@ readonly class AsrValidationService
     }
 
     /**
-     * verifytopic归属.
+     * verifytopicbelong to.
      *
      * @param int $topicId topicID
      * @param string $userId userID
@@ -144,7 +144,7 @@ readonly class AsrValidationService
     }
 
     /**
-     * fromtopicgetprojectID(containtopic归属verify).
+     * fromtopicgetprojectID(containtopicbelong toverify).
      *
      * @param int $topicId topicID
      * @param string $userId userID

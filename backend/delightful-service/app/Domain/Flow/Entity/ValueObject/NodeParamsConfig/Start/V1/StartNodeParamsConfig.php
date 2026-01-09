@@ -83,7 +83,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
             $systemOutput = null;
             $customSystemOutput = null;
             $config = $branch['config'] ?? [];
-            // canmeanwhilechoose多typemethod触hair,所byhe入参andout参放tothiswithincomeprocess
+            // canmeanwhilechoose多typemethod触hair,所byheinput parameterandoutparametertothiswithincomeprocess
             switch ($triggerType) {
                 case TriggerType::ChatMessage:
                     $output = $this->getChatMessageOutputTemplate();
@@ -361,7 +361,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     "position": {
                         "type": "string",
                         "key": "position",
-                        "title": "岗位",
+                        "title": "post",
                         "description": "",
                         "items": null,
                         "properties": null,
@@ -587,7 +587,7 @@ JSON;
                 "position": {
                         "type": "string",
                         "key": "position",
-                        "title": "岗位",
+                        "title": "post",
                         "description": "",
                         "items": null,
                         "properties": null,

@@ -287,7 +287,7 @@ return [
                     'args.top_k',                  // Top-kparameter
                     'args.frequency_penalty',      // frequencypenalty
                     'args.presence_penalty',       // 存inpenalty
-                    'args.stream',                 // streamresponse标志
+                    'args.stream',                 // streamresponseflag
                     'args.stop',                   // stop词
                     'args.seed',                   // randomtype子
 

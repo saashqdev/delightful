@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\BuiltIn\ToolSet\InternetSearch\Tools;
 
 /*
- * 本file属atlighthouseengine版权所have,泄漏必究.
+ * 本file属atlighthouseenginecopyrighthave,leaks will be prosecuted.
  */
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunnerFactory;
 use App\Domain\Flow\Entity\ValueObject\Node;
@@ -116,7 +116,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'questions' => ['明day北京day气', 'want穿what衣服'],
+            'questions' => ['明dayBeijingday气', 'want穿whatclothes'],
             'use_deep_search' => true,
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -195,7 +195,7 @@ call`internet_search`conductsearch,ifuserhint词have`深degreesearch`four字,the
 
 MARKDOWN,
 
-            'user_prompt' => '深degreesearch:东莞downweekday气',
+            'user_prompt' => '深degreesearch:Dongguandownweekday气',
         ]);
         $runner->execute($vertexResult, $executionData);
 

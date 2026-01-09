@@ -269,7 +269,7 @@ return new class extends Migration {
     }
 
     /**
-     * minutebatchandhaircleanupeachorganizationdata(eachorganization独立smalltransaction).
+     * minutebatchandhaircleanupeachorganizationdata(eachorganizationindependentsmalltransaction).
      */
     private function cleanOrganizationsInBatches(array $organizationCodes, array $officialModelIds, array $officialEnabledModels, LoggerInterface $logger): void
     {

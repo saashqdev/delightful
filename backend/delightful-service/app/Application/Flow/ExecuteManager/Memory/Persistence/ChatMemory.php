@@ -56,12 +56,12 @@ class ChatMemory implements MemoryPersistenceInterface
 
     public function store(LLMMemoryMessage $LLMMemoryMessage): void
     {
-        // onlyprocess挂载
+        // onlyprocessmount
         if (empty($LLMMemoryMessage->getMountId())) {
             return;
         }
 
-        // thiswithinstorageis historymessagestoragesectionpoint 挂载message
+        // thiswithinstorageis historymessagestoragesectionpoint mountmessage
         $history = new DelightfulFlowMemoryHistoryEntity();
         $history->setType(MemoryType::Mount);
         $history->setConversationId($LLMMemoryMessage->getConversationId());
@@ -140,7 +140,7 @@ class ChatMemory implements MemoryPersistenceInterface
     }
 
     /**
-     * add挂载memory,即in Chat o clockcall historymessagestoragesectionpoint.
+     * addmountmemory,即in Chat o clockcall historymessagestoragesectionpoint.
      * @return array<LLMMemoryMessage>
      */
     private function mountMessages(array $moundIds, array $messageLists): array
@@ -162,7 +162,7 @@ class ChatMemory implements MemoryPersistenceInterface
             return $messageLists;
         }
 
-        // reset挂载order
+        // resetmountorder
         $messages = [];
         foreach ($messageLists as $customMessage) {
             $messages[] = $customMessage;

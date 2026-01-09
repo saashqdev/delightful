@@ -230,7 +230,7 @@ class DelightfulAgentDomainService
             // validationnormalinteractionfinger令
             InstructType::validateInstructs($instructs);
 
-            // ensuresysteminteractionfinger令存in,ifmissingthensupplement
+            // ensuresysteminteractionfingertoken storagein,ifmissingthensupplement
             $instructs = SystemInstructType::ensureSystemInstructs($instructs);
         }
         // save

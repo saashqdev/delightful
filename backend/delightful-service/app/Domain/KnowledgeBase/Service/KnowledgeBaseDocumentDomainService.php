@@ -116,21 +116,21 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * 重建knowledge basedocumenttoquantityindex.
+     * rebuildknowledge basedocumenttoquantityindex.
      */
     public function rebuild(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $force = false): void
     {
         $document = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode);
 
-        // ifforce重建or者syncstatusforfail,then重newsync
+        // ifforcerebuildor者syncstatusforfail,then重newsync
         if ($force || $document->getSyncStatus() === 2) { // 2 table示syncfail
             $document->setSyncStatus(0); // 0 table示notsync
             $document->setSyncStatusMessage('');
             $document->setSyncTimes(0);
             $this->knowledgeBaseDocumentRepository->update($dataIsolation, $document);
 
-            // async触hair重建(thiswithincansendeventor者add入queue)
-            // TODO: 触hair重建toquantityevent
+            // async触hairrebuild(thiswithincansendeventor者add入queue)
+            // TODO: 触hairrebuildtoquantityevent
         }
     }
 

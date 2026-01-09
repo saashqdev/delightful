@@ -140,7 +140,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     {
         $result = [];
 
-        // 遍历front端configuration所havefield
+        // traversefront端configuration所havefield
         foreach ($frontendConfig as $key => $value) {
             // ifis api_key fieldandcontaindesensitizemark ***
             if ($key === 'api_key' && is_string($value) && str_contains($value, '*')) {

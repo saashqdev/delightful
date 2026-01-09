@@ -29,11 +29,11 @@ return new class extends Migration {
             $table->string('leader_user_id', 64)->comment('inthisdepartmentdirect supervisor user_id')->nullable()->default('');
             $table->string('organization_code', 32)->comment('Magicorganizationencoding');
             $table->string('city', 64)->comment('workcity')->default('');
-            $table->string('country', 32)->comment('countryorground区 Code 缩写')->default('');
+            $table->string('country', 32)->comment('countryorground区 Code abbreviation')->default('');
             $table->string('join_time', 32)->comment('入职time.secondleveltime戳format,table示from 1970 year 1 month 1 daystartpassed throughpasssecond数.')->default('');
             $table->string('employee_no', 32)->comment('工number')->default('');
-            $table->tinyInteger('employee_type')->comment('employeetype.1:justtypeemployee2:实习生3:outsidepackage4:劳务 5:consultant');
-            $table->string('orders', 256)->comment('usersortinfo.useatmarkaddress bookdownorganization架构person员order,person员maybe存in多departmentmiddle,andhavedifferentsort')->nullable()->default('');
+            $table->tinyInteger('employee_type')->comment('employeetype.1:justtypeemployee2:intern3:outsidepackage4:劳务 5:consultant');
+            $table->string('orders', 256)->comment('usersortinfo.useatmarkaddress bookdownorganizationarchitectureperson员order,person员maybe存in多departmentmiddle,andhavedifferentsort')->nullable()->default('');
             $table->text('custom_attrs')->comment('customizefield.');
             $table->tinyInteger('is_frozen')->comment('whetherforpausestatususer.')->default(0);
             $table->comment('Magicdepartmentdownuserinfotable');

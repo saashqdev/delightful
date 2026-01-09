@@ -48,7 +48,7 @@ enum AiAbilityCode: string
     public function description(): string
     {
         return match ($this) {
-            self::Ocr => '本cancoverageplatform所have OCR applicationscenario,precise捕捉andextract PDF,扫描itemandeachcategoryimagemiddletextinfo.',
+            self::Ocr => '本cancoverageplatform所have OCR applicationscenario,precise捕捉andextract PDF,scanitemandeachcategoryimagemiddletextinfo.',
             self::WebSearch => '本cancoverageplatform AI bigmodelinternetsearchscenario,precisegetand整合mostnewnew闻,事实anddatainfo.',
             self::RealtimeSpeechRecognition => '本cancoverageplatform所havevoice转textapplicationscenario,实o clocklisteneraudiostreamand逐步outputaccuratetextcontent.',
             self::AudioFileRecognition => '本cancoverageplatform所haveaudiofile转textapplicationscenario,preciseidentify说话person,audiotextetcinfo.',

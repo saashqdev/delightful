@@ -129,9 +129,9 @@ class DelightfulSeqDomainService extends AbstractDomainService
      */
     public function pushChatSeq(DelightfulSeqEntity $selfSeqEntity, DelightfulUserEntity $userEntity, DelightfulMessageEntity $messageEntity): void
     {
-        // if序columnnumber归属at ai,andhairitempersonis ai,notneedpush
+        // if序columnnumberbelong toat ai,andhairitempersonis ai,notneedpush
         if ($selfSeqEntity->getObjectType() === ConversationType::Ai && $messageEntity->getSenderType() === ConversationType::Ai) {
-            $this->logger->error(sprintf('UserCallAgentEventError seq:%s 序columnnumber归属at ai,andhairitempersonis ai,notneedpush', Json::encode($selfSeqEntity->toArray())));
+            $this->logger->error(sprintf('UserCallAgentEventError seq:%s 序columnnumberbelong toat ai,andhairitempersonis ai,notneedpush', Json::encode($selfSeqEntity->toArray())));
             return;
         }
         $receiveConversationType = $selfSeqEntity->getObjectType();
@@ -344,7 +344,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
             $senderAccountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($senderUserEntity->getDelightfulId());
             // opencoroutine,copy requestId
             $requestId = CoContext::getRequestId();
-            // coroutine透传language
+            // coroutinetransparent transmissionlanguage
             $language = di(TranslatorInterface::class)->getLocale();
 
             $this->logger->info('userCallFlow language: ' . $language);

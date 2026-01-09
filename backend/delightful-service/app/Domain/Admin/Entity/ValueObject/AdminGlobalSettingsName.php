@@ -15,7 +15,7 @@ enum AdminGlobalSettingsName: string
     // assistantcreatemanage
     case ASSISTANT_CREATE = 'create_management';
 
-    // thethird-partypublish管控
+    // thethird-partypublishcontrol
     case THIRD_PARTY_PUBLISH = 'third_platform_publish';
 
     // getassistantall局settingtype

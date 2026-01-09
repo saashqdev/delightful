@@ -44,7 +44,7 @@ class FileAppService extends AbstractAppService
             $contentType,
             $sts
         );
-        // ifis本ground驱动,that么increaseonetemporary key
+        // ifis本grounddriven,that么increaseonetemporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $this->cache->set(
@@ -222,7 +222,7 @@ class FileAppService extends AbstractAppService
             $autoBucket,
         );
 
-        // ifis本ground驱动,that么increaseonetemporary key
+        // ifis本grounddriven,that么increaseonetemporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $data['temporary_credential']['dir'] = $organizationCode . '/' . $data['temporary_credential']['dir'];
@@ -249,7 +249,7 @@ class FileAppService extends AbstractAppService
             $autoBucket,
         );
 
-        // ifis本ground驱动,that么increaseonetemporary key
+        // ifis本grounddriven,that么increaseonetemporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $data['temporary_credential']['dir'] = $organizationCode . '/' . $data['temporary_credential']['dir'];

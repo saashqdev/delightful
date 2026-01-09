@@ -226,7 +226,7 @@ class ServiceProviderApiTest extends BaseTest
         $provider = [
             'alias' => 'officialservicequotientsingleyuantest',
             'config' => [
-                // 国际accesspoint
+                // internationalaccesspoint
                 'url' => 'international_access_point',
                 // 国insideaccesspoint
                 //                'url' => 'domestic_access_points',
@@ -261,7 +261,7 @@ class ServiceProviderApiTest extends BaseTest
         $provider = [
             'alias' => 'officialservicequotientsingleyuantest',
             'config' => [
-                // 国际accesspoint
+                // internationalaccesspoint
                 'proxy_url' => 'international_access_point',
                 // 国insideaccesspoint
                 //                'proxy_url' => 'domestic_access_points',

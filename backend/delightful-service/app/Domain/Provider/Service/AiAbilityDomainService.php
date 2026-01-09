@@ -30,11 +30,11 @@ class AiAbilityDomainService
     }
 
     /**
-     * according tocan力codegetAIcan力实body(useat运lineo clock,notvalidationorganization).
+     * according tocan力codegetAIcanimplementationbody(useat运lineo clock,notvalidationorganization).
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @param AiAbilityCode $code can力code
-     * @return AiAbilityEntity AIcan力实body
+     * @return AiAbilityEntity AIcanimplementationbody
      * @throws Exception whencan力not存inornotenableo clockthrowexception
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): AiAbilityEntity
@@ -52,7 +52,7 @@ class AiAbilityDomainService
      * get所haveAIcan力list(nopagination).
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
-     * @return array<AiAbilityEntity> AIcan力实bodylist
+     * @return array<AiAbilityEntity> AIcanimplementationbodylist
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array
     {

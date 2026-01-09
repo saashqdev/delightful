@@ -53,7 +53,7 @@ class CheckPermission extends AbstractAnnotation
 
     /**
      * return所havepermissionkeygroup合(resources x operations 笛卡尔product).
-     * whenstatement多resourceor多操aso clock,permissionpass任意onekey即can.
+     * whenstatement多resourceor多操aso clock,permissionpassanyonekey即can.
      *
      * @return array<string>
      */

@@ -764,7 +764,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $lastPosition = 0;
         $contentBlocks = [];
 
-        // 遍历所havematchtoimage
+        // traverse所havematchtoimage
         foreach ($matches[0] as $index => $match) {
             $fullMatch = $match[0];
             $position = $match[1];

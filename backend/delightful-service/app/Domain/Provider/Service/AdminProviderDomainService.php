@@ -541,7 +541,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // 4. batchquantityquery所haveservicequotient
         $providerMap = $this->serviceProviderRepository->getByIds($providerIds);
 
-        // 5. 重建prioritylevelhandlelogic
+        // 5. rebuildprioritylevelhandlelogic
         $officialConfig = null;
 
         foreach ($activeModels as $model) {

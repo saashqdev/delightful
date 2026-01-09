@@ -32,8 +32,8 @@ return new class extends Migration {
             $table->integer('level')->comment('departmentlayerlevel')->default(0);
             // path
             $table->text('path')->comment('departmentpath')->nullable();
-            // department直属userperson数
-            $table->integer('employee_sum')->comment('department直属userperson数')->default(0);
+            // departmentdirectly underuserperson数
+            $table->integer('employee_sum')->comment('departmentdirectly underuserperson数')->default(0);
             $table->comment('userservicedepartmentandthethree方platformuserrecordtable.useatandthethree方platform实o clockdatasync,activaterecordetc');
             $table->timestamps();
             $table->softDeletes();

@@ -12,7 +12,7 @@ enum LoopType: string
     // count
     case Count = 'count';
 
-    // 遍历array
+    // traversearray
     case Array = 'array';
 
     // itemitemcompare

@@ -22,7 +22,7 @@ return new class extends Migration {
         Schema::table('delightful_contact_department_users', static function (Blueprint $table) {
             // Increase the job_title column length from 64 to 256
             $table->string('job_title', 256)
-                ->comment('in此department职位')
+                ->comment('inthisdepartment职位')
                 ->default('')
                 ->change();
         });
@@ -40,7 +40,7 @@ return new class extends Migration {
 
         Schema::table('delightful_contact_department_users', static function (Blueprint $table) {
             $table->string('job_title', 64)
-                ->comment('in此department职位')
+                ->comment('inthisdepartment职位')
                 ->default('')
                 ->change();
         });

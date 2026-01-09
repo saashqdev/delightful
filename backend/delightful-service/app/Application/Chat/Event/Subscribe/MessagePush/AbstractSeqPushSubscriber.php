@@ -35,7 +35,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
     }
 
     /**
-     * according to序columnnumber优先level.实o clocknotify收item方. 这maybeneedpublishsubscribe.
+     * according to序columnnumber优先level.实o clocknotify收item方. thismaybeneedpublishsubscribe.
      * @param SeqCreatedEvent $data
      */
     public function consumeMessage($data, AMQPMessage $message): Result

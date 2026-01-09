@@ -227,7 +227,7 @@ class MessageAssembler
      */
     public static function getControlMessageStruct(ControlMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
-        // 其实can直接use protobuf generate php object,butis暂o clocknothavetimeallquantity替换,bybackagain说.
+        // its实can直接use protobuf generate php object,butis暂o clocknothavetimeallquantity替换,bybackagain说.
         return match ($messageTypeEnum) {
             # 控制message
             ControlMessageType::CreateConversation => new ConversationWindowCreateMessage($messageStructArray),
@@ -302,7 +302,7 @@ class MessageAssembler
             $formattedMessage = sprintf("%s: %s\n", $role, $content);
             $messageLength = mb_strlen($formattedMessage, 'UTF-8');
 
-            // ifistheoneitemmessage，even if超passlength限制also要contain
+            // ifistheoneitemmessage，even if超passlengthlimitalso要contain
             if ($messageCount === 0) {
                 array_unshift($limitedMessages, $formattedMessage);
                 $currentLength += $messageLength;

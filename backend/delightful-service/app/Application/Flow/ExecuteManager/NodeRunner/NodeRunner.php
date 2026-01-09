@@ -92,7 +92,7 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     public function execute(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults = []): void
     {
-        // sectionpoint运linemost大count限制，防止死loop
+        // sectionpoint运linemost大countlimit，防止死loop
         $max = 10000;
         $executeNum = $executionData->getExecuteNum($this->node->getNodeId());
         if ($executeNum >= $max) {
@@ -206,7 +206,7 @@ abstract class NodeRunner implements NodeRunnerInterface
         }
         $response = trim($response, '\\');
         $response = str_replace('\\\\\"', '\"', $response);
-        // if $response 本身thenis JSON format，那么直接return
+        // if $response 本身thenis JSON format，that么直接return
         $data = json_decode(trim($response), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             return [];
@@ -222,7 +222,7 @@ abstract class NodeRunner implements NodeRunnerInterface
     abstract protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void;
 
     /**
-     * todo 这within暂notimplement重复uploadissue，均when做新fileupload
+     * todo thiswithin暂notimplementduplicateuploadissue，均when做新fileupload
      * recordprocess所产生file，均willmeanwhileuploadto云端，back续sectionpointneeduseo clockfromexecuteprocessdatamiddle优先match.
      * @return AbstractAttachment[]
      * @throws SSRFException
@@ -245,7 +245,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 $flowExecutionAttachments[] = $attachmentObj;
                 continue;
             }
-            // ifisonelink，那么needto url conduct限制
+            // ifisonelink，that么needto url conductlimit
             if (EasyFileTools::isUrl($attachment)) {
                 SSRFUtil::getSafeUrl($attachment, replaceIp: false);
             }

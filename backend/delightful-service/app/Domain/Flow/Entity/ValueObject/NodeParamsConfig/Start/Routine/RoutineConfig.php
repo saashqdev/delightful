@@ -29,7 +29,7 @@ class RoutineConfig
         private ?int $interval = null,
         // unit=weeko clockfor[1~7]，unit=montho clockfor[1~31]
         private ?array $values = null,
-        // enddate，该datebacknotgeneratedata
+        // enddate，thedatebacknotgeneratedata
         private readonly ?DateTime $deadline = null,
         // 话题configuration
         private readonly ?TopicConfig $topicConfig = null
@@ -138,7 +138,7 @@ class RoutineConfig
             if (empty($this->interval)) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency not能forempty');
             }
-            // onlyeachdaytime，才能customize interval，其remainderallis 1
+            // onlyeachdaytime，才能customize interval，itsremainderallis 1
             if (in_array($this->unit, [IntervalUnit::Week, IntervalUnit::Month, IntervalUnit::Year])) {
                 $this->interval = 1;
             }
@@ -201,7 +201,7 @@ class RoutineConfig
             $this->day = (string) ((int) $this->day);
         }
 
-        // not重复、eachyear、eachmonthtime，day table示date
+        // notduplicate、eachyear、eachmonthtime，day table示date
         if (in_array($this->type, [RoutineType::NoRepeat, RoutineType::AnnuallyRepeat])) {
             if (! is_string($this->day) || empty($this->day) || ! strtotime($this->day)) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date formaterror');

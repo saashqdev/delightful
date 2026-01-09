@@ -17,7 +17,7 @@ class ChatAttachment extends AbstractEntity
 {
     /**
      * chatfileneed先uploadto chat fileservice器，then才能sendmessage.
-     * 这 id is delightful_chat_file 表primary key.
+     * this id is delightful_chat_file 表primary key.
      */
     protected string $fileId = '';
 

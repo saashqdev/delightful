@@ -84,7 +84,7 @@ class ServiceProviderApiTest extends BaseTest
                     'en_US' => 'Test Model',
                 ],
                 'description' => [
-                    'zh_CN' => '这isonetestmodel',
+                    'zh_CN' => 'thisisonetestmodel',
                     'en_US' => 'This is a test model',
                 ],
             ],
@@ -163,7 +163,7 @@ class ServiceProviderApiTest extends BaseTest
                     'en_US' => 'Updated Test Model',
                 ],
                 'description' => [
-                    'zh_CN' => '这isupdatebacktestmodel',
+                    'zh_CN' => 'thisisupdatebacktestmodel',
                     'en_US' => 'This is an updated test model',
                 ],
             ],
@@ -312,7 +312,7 @@ class ServiceProviderApiTest extends BaseTest
      */
     private function findModelInDetailResponse(array $detailData, string $modelId): ?array
     {
-        // detailinterfacemaybereturn models arrayor其他结构，这withinneedaccording toactualinterfaceadjust
+        // detailinterfacemaybereturn models arrayorother结构，thiswithinneedaccording toactualinterfaceadjust
         if (isset($detailData['models']) && is_array($detailData['models'])) {
             foreach ($detailData['models'] as $model) {
                 if (isset($model['id']) && (string) $model['id'] === (string) $modelId) {
@@ -321,7 +321,7 @@ class ServiceProviderApiTest extends BaseTest
             }
         }
 
-        // ifis其他结构，continuefind
+        // ifisother结构，continuefind
         if (isset($detailData['id']) && (string) $detailData['id'] === (string) $modelId) {
             return $detailData;
         }

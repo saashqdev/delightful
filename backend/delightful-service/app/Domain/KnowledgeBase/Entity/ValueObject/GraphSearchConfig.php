@@ -81,7 +81,7 @@ class GraphSearchConfig extends AbstractValueObject
     private array $nodeTypes = [];
 
     /**
-     * result限制.
+     * resultlimit.
      *
      * returnmost大resultquantity
      */
@@ -253,7 +253,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * getresult限制.
+     * getresultlimit.
      */
     public function getLimit(): int
     {
@@ -261,7 +261,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * setresult限制.
+     * setresultlimit.
      */
     public function setLimit(int $limit): self
     {

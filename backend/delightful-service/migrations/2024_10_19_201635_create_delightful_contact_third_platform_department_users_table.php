@@ -25,8 +25,8 @@ return new class extends Migration {
             $table->string('third_union_id')->comment('thethree方平台userunion_id');
             $table->string('third_platform_type', 32)->comment('thethree方平台type dingTalk/lark/weCom/teamShare');
             $table->tinyInteger('third_is_leader')->comment('whetherisdepartment领导 0-否 1-is')->default(0);
-            $table->string('third_job_title', 64)->comment('in此department职位')->default('');
-            $table->string('third_leader_user_id', 64)->comment('in此department直属领导 user_id')->default('');
+            $table->string('third_job_title', 64)->comment('inthisdepartment职位')->default('');
+            $table->string('third_leader_user_id', 64)->comment('inthisdepartment直属领导 user_id')->default('');
             $table->string('third_city', 64)->comment('work城市')->default('');
             $table->string('third_country', 32)->comment('国家orground区 Code 缩写')->default('CN');
             $table->string('third_join_time', 64)->comment('入职time。secondleveltime戳format，table示from 1970 year 1 month 1 daystart所经passsecond数。');

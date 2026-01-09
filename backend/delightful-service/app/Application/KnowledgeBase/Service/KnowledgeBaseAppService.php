@@ -35,7 +35,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
         $delightfulFlowKnowledgeEntity->setCreator($dataIsolation->getCurrentUserId());
 
         $oldKnowledge = null;
-        // if具have业务 id，那么thenisupdate，need先queryoutcome
+        // if具have业务 id，that么thenisupdate，need先queryoutcome
         if (! empty($delightfulFlowKnowledgeEntity->getBusinessId())) {
             $oldKnowledge = $this->getByBusinessId($authorization, $delightfulFlowKnowledgeEntity->getBusinessId());
             if ($oldKnowledge) {
@@ -160,7 +160,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
             [$authorization->getId()]
         )[$authorization->getId()] ?? [];
         $resourceIds = array_keys($resources);
-        // in这oneheapmiddlefindone
+        // inthisoneheapmiddlefindone
         $query = new KnowledgeBaseQuery();
         $query->setCodes($resourceIds);
         $query->setBusinessId($businessId);

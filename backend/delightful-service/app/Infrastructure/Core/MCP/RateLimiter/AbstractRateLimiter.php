@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\MCP\RateLimiter;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * abstractspeedrate限制器基category.
+ * abstractspeedratelimit器基category.
  */
 abstract class AbstractRateLimiter implements RateLimiterInterface
 {
@@ -30,7 +30,7 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
     protected int $maxRequestsPerDay = 5000;
 
     /**
-     * whetherenablespeedrate限制.
+     * whetherenablespeedratelimit.
      */
     protected bool $enabled = true;
 
@@ -43,17 +43,17 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
             return;
         }
 
-        // initializerequestnotconduct限制
+        // initializerequestnotconductlimit
         if ($request->getMethod() === 'initialize') {
             return;
         }
 
-        // executespecificspeedrate限制check
+        // executespecificspeedratelimitcheck
         $this->doCheck($clientId, $request);
     }
 
     /**
-     * getcurrent限制configuration.
+     * getcurrentlimitconfiguration.
      */
     public function getLimits(): array
     {
@@ -66,7 +66,7 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
     }
 
     /**
-     * actualexecutespeedrate限制check.
+     * actualexecutespeedratelimitcheck.
      * by子categoryimplementspecific逻辑.
      */
     abstract protected function doCheck(string $clientId, MessageInterface $request): void;

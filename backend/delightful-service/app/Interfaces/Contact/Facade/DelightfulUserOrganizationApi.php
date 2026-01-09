@@ -87,7 +87,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
         if (empty($userDetails)) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
-        // 同one账numberdown delightful_id all局唯one，这within取first即can
+        // 同one账numberdown delightful_id all局唯one，thiswithin取first即can
         return $userDetails[0]->getDelightfulId();
     }
 }

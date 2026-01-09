@@ -67,11 +67,11 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.token.create_error')]
     case TOKEN_CREATE_ERROR = 4013;
 
-    // usercreatetokenquantity超pass限制
+    // usercreatetokenquantity超passlimit
     #[ErrorMessage(message: 'api.user.create_access_token_limit')]
     case USER_CREATE_ACCESS_TOKEN_LIMIT = 4014;
 
-    // userusetokenquantity超pass限制
+    // userusetokenquantity超passlimit
     #[ErrorMessage(message: 'api.user.use_access_token_limit')]
     case USER_USE_ACCESS_TOKEN_LIMIT = 4015;
 

@@ -43,7 +43,7 @@ class StartNodeRunner extends AbstractStartNodeRunner
 
         $triggerBranch = $paramsConfig->getBranchByTriggerType($triggerType);
         if (empty($triggerBranch)) {
-            // ifnothave找to任何触hairmethod，直接endthen好
+            // ifnothave找toany触hairmethod，直接endthen好
             $vertexResult->clearChildren();
             return;
         }

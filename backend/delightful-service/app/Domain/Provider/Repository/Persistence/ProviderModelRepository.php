@@ -134,7 +134,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
      */
     public function updateStatus(ProviderDataIsolation $dataIsolation, string $id, Status $status): void
     {
-        // 1. 按 id querymodelwhether存in（not限制organization）
+        // 1. 按 id querymodelwhether存in（notlimitorganization）
         $model = $this->getModelByIdWithoutOrgFilter($id);
         if (! $model) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
@@ -151,7 +151,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
                 // model属at官方organizationandcurrentorganizationnotis官方organization：走写o clockcopy逻辑
                 $organizationModelId = $this->delightfulProviderAndModels->updateDelightfulModelStatus($dataIsolation, $model);
             } else {
-                // 其他情况：nopermission操as
+                // other情况：nopermission操as
                 ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
             }
         } else {
@@ -325,7 +325,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $builder = $this->createBuilder($dataIsolation, ProviderModelModel::query())
             ->whereIn('model_id', $modelIds)
             ->orderBy('status', 'desc') // 优先sort：enablestatusinfront
-            ->orderBy('id'); // 其time按IDsort，保证resultone致property
+            ->orderBy('id'); // itstime按IDsort，保证resultone致property
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
         $entities = ProviderModelAssembler::toEntities($result);
@@ -344,7 +344,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * according toIDquerymodel（not限制organization）.
+     * according toIDquerymodel（notlimitorganization）.
      */
     public function getModelByIdWithoutOrgFilter(string $id): ?ProviderModelEntity
     {
@@ -434,7 +434,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
                 $groupedResults[$modelType] = [];
             }
 
-            // 避免重复modelID
+            // 避免duplicatemodelID
             if (! in_array($modelId, $groupedResults[$modelType], true)) {
                 $groupedResults[$modelType][] = $modelId;
             }
@@ -453,7 +453,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 准备移except软删相closefeature，temporary这样写。create带have软deletefilter ProviderModelModel querybuild器.
+     * 准备移except软删相closefeature，temporarythis样写。create带have软deletefilter ProviderModelModel querybuild器.
      */
     private function createProviderModelQuery(): Builder
     {

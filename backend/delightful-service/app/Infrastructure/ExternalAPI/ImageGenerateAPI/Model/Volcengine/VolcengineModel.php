@@ -35,7 +35,7 @@ class VolcengineModel extends AbstractImageGenerate
     // round询retrybetween隔（second）
     private const RETRY_INTERVAL = 2;
 
-    // graph生graphquantity限制
+    // graph生graphquantitylimit
     private const IMAGE_TO_IMAGE_IMAGE_COUNT = 1;
 
     private VolcengineAPI $api;
@@ -681,7 +681,7 @@ class VolcengineModel extends AbstractImageGenerate
         $aspectRatio = $maxDimension / $minDimension;
 
         if ($aspectRatio > $maxAspectRatio) {
-            $this->logger->error('火山graph生graph：长宽ratio例超out限制', [
+            $this->logger->error('火山graph生graph：长宽ratio例超outlimit', [
                 'width' => $width,
                 'height' => $height,
                 'aspect_ratio' => $aspectRatio,

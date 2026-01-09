@@ -31,13 +31,13 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
 
     /**
      * permission键list（optional，仅inneedupdateo clock提供）.
-     * 注意：if提供此field，will替换所have现havepermission.
+     * 注意：if提供thisfield，will替换所have现havepermission.
      */
     public ?array $permissions = null;
 
     /**
      * userIDlist（optional，仅inneedupdateo clock提供）.
-     * 注意：if提供此field，will替换所have现haveuserassociate.
+     * 注意：if提供thisfield，will替换所have现haveuserassociate.
      */
     public ?array $userIds = null;
 

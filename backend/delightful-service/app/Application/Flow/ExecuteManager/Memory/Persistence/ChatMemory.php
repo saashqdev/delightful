@@ -61,7 +61,7 @@ class ChatMemory implements MemoryPersistenceInterface
             return;
         }
 
-        // 这withinstorageis historymessagestoragesectionpoint 挂载message
+        // thiswithinstorageis historymessagestoragesectionpoint 挂载message
         $history = new DelightfulFlowMemoryHistoryEntity();
         $history->setType(MemoryType::Mount);
         $history->setConversationId($LLMMemoryMessage->getConversationId());
@@ -86,8 +86,8 @@ class ChatMemory implements MemoryPersistenceInterface
         $seqLimit = $memoryQuery->getLimit();
 
         // todo back续inquery侧optimize
-        // whenfor ai_card message，samemessagehave 20 item，needgo重，butisinquerytime，isnot知道have重复
-        // in这within先放quantityquery，at mostquery 200 item，然backagainconduct重。
+        // whenfor ai_card message，samemessagehave 20 item，needgo重，butisinquerytime，isnot知道haveduplicate
+        // inthiswithin先放quantityquery，at mostquery 200 item，然backagainconduct重。
         $seqLimit = ($seqLimit * 20 <= 200) ? $seqLimit * 20 : 200;
 
         $messagesQueryDTO = (new MessagesQueryDTO());
@@ -127,7 +127,7 @@ class ChatMemory implements MemoryPersistenceInterface
         if (! empty($messageIds)) {
             $imMessages = $this->delightfulChatDomainService->getMessageEntitiesByMaicMessageIds($messageIds, $memoryQuery->getRangMessageTypes());
             foreach ($imMessages as $imMessage) {
-                // 这withinisforsortcorrect according to seq 顺序conductrow
+                // thiswithinisforsortcorrect according to seq 顺序conductrow
                 $index = array_search($imMessage->getDelightfulMessageId(), $messageIds);
                 if ($index !== false) {
                     $messageLists[$index] = $imMessage;

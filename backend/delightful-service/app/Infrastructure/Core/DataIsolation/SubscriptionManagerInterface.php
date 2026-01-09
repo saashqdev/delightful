@@ -31,7 +31,7 @@ interface SubscriptionManagerInterface
     public function getCurrentSubscriptionInfo(): array;
 
     /**
-     * getwhenfrontcanusemodelIDcolumn表, ifreturnnullindicatenot限制.
+     * getwhenfrontcanusemodelIDcolumn表, ifreturnnullindicatenotlimit.
      *
      * @return null|array<string>
      */

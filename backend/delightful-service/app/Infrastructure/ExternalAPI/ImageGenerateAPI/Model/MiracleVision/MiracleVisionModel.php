@@ -49,7 +49,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     public function generateImageRaw(ImageGenerateRequest $imageGenerateRequest): array
     {
-        throw new BadMethodCallException('该method暂not supported');
+        throw new BadMethodCallException('themethod暂not supported');
     }
 
     public function imageConvertHigh(ImageGenerateRequest $imageGenerateRequest): string
@@ -153,7 +153,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array
     {
-        throw new BadMethodCallException('该method暂not supported');
+        throw new BadMethodCallException('themethod暂not supported');
     }
 
     public function getProviderName(): string
@@ -163,7 +163,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
-        throw new BadMethodCallException('该method暂not supported');
+        throw new BadMethodCallException('themethod暂not supported');
     }
 
     private function handleTaskStatus(int $status, array $result, MiracleVisionModelResponse $response): MiracleVisionModelResponse

@@ -12,7 +12,7 @@ use Hyperf\Odin\Model\OpenAIModel;
 
 use function Hyperf\Support\env;
 
-// 递归handleconfigurationvaluemiddleenvironmentvariable
+// recursionhandleconfigurationvaluemiddleenvironmentvariable
 function processConfigValue(&$value): void
 {
     if (is_string($value)) {
@@ -24,12 +24,12 @@ function processConfigValue(&$value): void
             $value = env($parts[0], $parts[0]);
         }
     } elseif (is_array($value)) {
-        // arraytype：递归handleeachyuan素，保留array结构
+        // arraytype：recursionhandleeachyuan素，保留array结构
         foreach ($value as &$item) {
             processConfigValue($item);
         }
     }
-    // 其他type（如 int, bool etc）：保留原value，notconductparse
+    // othertype（如 int, bool etc）：保留原value，notconductparse
 }
 
 // handleconfigurationmiddleenvironmentvariable
@@ -281,8 +281,8 @@ return [
 
                     // requestparameter（rowexcept敏感content）
                     'args.temperature',            // 温degreeparameter
-                    'args.max_tokens',             // most大token限制
-                    'args.max_completion_tokens',             // most大token限制
+                    'args.max_tokens',             // most大tokenlimit
+                    'args.max_completion_tokens',             // most大tokenlimit
                     'args.top_p',                  // Top-pparameter
                     'args.top_k',                  // Top-kparameter
                     'args.frequency_penalty',      // frequency惩罚
@@ -305,7 +305,7 @@ return [
                     'error.type',                  // errortype
                     'error.message',               // errormessage（notcontainspecificcontent）
 
-                    // 其他yuandata
+                    // otheryuandata
                     'created',                     // createtime戳
                     'id',                         // requestID
                     'object',                     // objecttype
@@ -321,7 +321,7 @@ return [
                 ],
                 // whetherenablefield白名singlefilter，defaulttrue（enablefilter）
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
-                // most大stringlength限制，超pass此lengthstringwillbe替换for [Long Text]，settingfor 0 indicatenot限制
+                // most大stringlengthlimit，超passthislengthstringwillbe替换for [Long Text]，settingfor 0 indicatenotlimit
                 'max_text_length' => env('ODIN_LOG_MAX_TEXT_LENGTH', 0),
             ],
             'network_retry_count' => 1,

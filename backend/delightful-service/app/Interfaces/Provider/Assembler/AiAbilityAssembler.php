@@ -42,7 +42,7 @@ class AiAbilityAssembler
         // getoriginalconfiguration
         $config = $entity->getConfig();
 
-        // 递归脱敏所have api_key field（support任意嵌set结构）
+        // recursion脱敏所have api_key field（support任意嵌set结构）
         $maskedConfig = self::maskConfigRecursively($config);
 
         return new AiAbilityDetailDTO(
@@ -116,7 +116,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * 递归脱敏configurationmiddle所have api_key field.
+     * recursion脱敏configurationmiddle所have api_key field.
      *
      * @param array $config configurationarray
      * @return array 脱敏backconfigurationarray
@@ -130,11 +130,11 @@ class AiAbilityAssembler
             if ($key === 'api_key' && is_string($value) && ! empty($value)) {
                 $result[$key] = self::maskApiKey($value);
             }
-            // ifisarray，递归process
+            // ifisarray，recursionprocess
             elseif (is_array($value)) {
                 $result[$key] = self::maskConfigRecursively($value);
             }
-            // 其他value直接赋value
+            // othervalue直接赋value
             else {
                 $result[$key] = $value;
             }

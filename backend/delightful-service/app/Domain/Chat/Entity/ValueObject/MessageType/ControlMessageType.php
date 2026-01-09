@@ -101,7 +101,7 @@ enum ControlMessageType: string
 
     /**
      * unknownmessage。
-     * byatversion迭代，hair版timediffetcreason，maybe产生unknowntypemessage。
+     * byatversioniteration，hair版timediffetcreason，maybe产生unknowntypemessage。
      */
     case Unknown = 'unknown';
 

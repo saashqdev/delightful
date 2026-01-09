@@ -76,7 +76,7 @@ class PermissionCheckerTest extends TestCase
             $permissions
         ));
 
-        // nothave此permissionuser
+        // nothavethispermissionuser
         $this->assertFalse(PermissionChecker::checkPermission(
             '13800000003',
             SuperPermissionEnum::MODEL_CONFIG_ADMIN,

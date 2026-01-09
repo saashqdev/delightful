@@ -23,9 +23,9 @@ return new class extends Migration {
             $table->string('organization_code', 64)->comment('序columnnumber所属organizationencoding.')->default('');
             $table->tinyInteger('object_type')->comment('objecttype,0:ai,1:user；2：application;3:document;4:多维table格');
             $table->string('object_id', 64)->comment('objectid. ifisusero clock,table示delightful_id');
-            $table->string('seq_id', 64)->comment('message序columnnumber id，each账number所havemessagemust逐渐增大');
+            $table->string('seq_id', 64)->comment('message序columnnumber id，each账number所havemessagemustgradually增大');
             $table->string('seq_type', 32)->comment('message大type:控制message,chatmessage。');
-            $table->text('content')->comment('序columnnumberdetail. one些notvisible控制message,只inseqtable存indetail. byand写o clockcopyonesharemessagetablecontenttoseqtableuse.');
+            $table->text('content')->comment('序columnnumberdetail. onethesenotvisible控制message,只inseqtable存indetail. byand写o clockcopyonesharemessagetablecontenttoseqtableuse.');
             $table->string('delightful_message_id', 64)->comment('service端generate唯onemessageid,useatmessagewithdraw/edit');
             $table->string('message_id', 64)->comment('序columnnumberassociateusermessageid,implement已读return执,messagewithdraw/editetc')->default(0);
             // quotemessageid
@@ -37,13 +37,13 @@ return new class extends Migration {
             $table->tinyInteger('status')->default(0)->comment('messagestatus,0:unread, 1:seen, 2:read, 3:revoked');
             // messagereceivepersonlist
             $table->text('receive_list')->comment('messagereceivepersonlist,allquantityrecord未读/已读/已viewuserlist');
-            $table->text('extra')->comment('attachaddfield，recordone些extensionproperty。 such as话题id。');
+            $table->text('extra')->comment('attachaddfield，recordonetheseextensionproperty。 such as话题id。');
             // app_message_id
-            $table->string('app_message_id', 64)->default('')->comment('冗remainderfield,customer端generatemessageid,useat防customer端重复');
+            $table->string('app_message_id', 64)->default('')->comment('冗remainderfield,customer端generatemessageid,useat防customer端duplicate');
             # bydownis索引set
             // delightful_message_id 索引
             $table->index(['delightful_message_id'], 'idx_delightful_message_id');
-            // 因for经常need按 seq_id sort，所byincrease联合索引
+            // 因foroftenneed按 seq_id sort，所byincrease联合索引
             // bydown索引createmovetosingle独migratefilemiddle
             $table->timestamps();
             $table->softDeletes();

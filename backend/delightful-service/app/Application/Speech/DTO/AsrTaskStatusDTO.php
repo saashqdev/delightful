@@ -12,7 +12,7 @@ use App\Application\Speech\Enum\AsrTaskStatusEnum;
 
 /**
  * ASRtaskstatusDTO - 管理Redis Hashfieldmapping.
- * 这notisfrom JSON response结构come，whileisuseat管理taskstatus
+ * thisnotisfrom JSON response结构come，whileisuseat管理taskstatus
  */
 class AsrTaskStatusDTO
 {
@@ -243,8 +243,8 @@ class AsrTaskStatusDTO
 
     /**
      * extract相toat workspace 相topath
-     * ifpathcontain workspace/，extract其back部minute
-     * 这样canfrom动修正 Redis middlestorage旧formatdata（completepath）.
+     * ifpathcontain workspace/，extractitsback部minute
+     * this样canfrom动修正 Redis middlestorage旧formatdata（completepath）.
      *
      * @param null|string $path originalpath
      * @return null|string 相topath
@@ -327,7 +327,7 @@ class AsrTaskStatusDTO
                 return false;
             }
 
-            // 其他value按truevalue判断
+            // othervalue按truevalue判断
             return (bool) $value;
         }
 

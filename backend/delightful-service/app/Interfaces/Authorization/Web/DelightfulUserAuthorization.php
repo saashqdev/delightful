@@ -23,7 +23,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Qbhy\HyperfAuth\Authenticatable;
 
 /**
- * if改这categoryname/property/命名emptybetween，请modify WebUserGuard.php  cacheKey ，避免cacheno法also原
+ * if改thiscategoryname/property/命名emptybetween，请modify WebUserGuard.php  cacheKey ，避免cacheno法also原
  */
 class DelightfulUserAuthorization extends AbstractAuthorization
 {
@@ -40,7 +40,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected UserType $userType;
 
     /**
-     * userin该organizationdownstatus:0:freeze,1:activated,2:已离职,3:已exit.
+     * userintheorganizationdownstatus:0:freeze,1:activated,2:已离职,3:已exit.
      */
     protected string $status;
 
@@ -111,7 +111,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
             goto create_user;
         }
 
-        // 多environmentdown $authorization maybe重复，willhaveissue（概rate趋近infinite小）
+        // 多environmentdown $authorization maybeduplicate，willhaveissue（概rate趋近infinite小）
         $delightfulEnvEntity = $delightfulEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
         if ($delightfulEnvEntity === null) {
             $delightfulEnvEntity = $delightfulEnvDomainService->getCurrentDefaultDelightfulEnv();

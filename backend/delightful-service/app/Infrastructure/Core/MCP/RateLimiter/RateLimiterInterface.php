@@ -11,21 +11,21 @@ use App\Infrastructure\Core\MCP\Exception\InvalidParamsException;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * speedrate限制器interface.
+ * speedratelimit器interface.
  */
 interface RateLimiterInterface
 {
     /**
      * checkcustomer端whetherallowexecuterequest.
      *
-     * @throws InvalidParamsException whenrequest超passspeedrate限制o clock
+     * @throws InvalidParamsException whenrequest超passspeedratelimito clock
      */
     public function check(string $clientId, MessageInterface $request): void;
 
     /**
-     * getwhenfront限制configuration.
+     * getwhenfrontlimitconfiguration.
      *
-     * @return array<string, bool|int> contain限制configurationarray
+     * @return array<string, bool|int> containlimitconfigurationarray
      */
     public function getLimits(): array;
 }

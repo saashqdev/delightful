@@ -58,7 +58,7 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
                     $trace
                 ));
             }
-            // letouttimeslice，let其他协程have机willexecute
+            // letouttimeslice，letother协程have机willexecute
             $millSeconds = 10 * 1000; // 10 毫second
             usleep($millSeconds * $alertCount);
         });

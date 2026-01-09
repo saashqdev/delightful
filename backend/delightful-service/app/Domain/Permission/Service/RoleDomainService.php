@@ -92,14 +92,14 @@ readonly class RoleDomainService
                 continue;
             }
 
-            // parsepermission键，getresourceandextract其twolevel模piecetag
+            // parsepermission键，getresourceandextractitstwolevel模piecetag
             try {
                 $parsed = $this->permission->parsePermission($permissionKey);
                 $resource = $parsed['resource'];
                 $moduleLabel = $this->permission->getResourceModule($resource);
                 $permissionTags[$moduleLabel] = $moduleLabel; // use键valuego重
             } catch (Throwable $e) {
-                // parsefailo clockignore该permissiontagextract，validation已pass，not影响save
+                // parsefailo clockignorethepermissiontagextract，validation已pass，not影响save
             }
         }
 
@@ -248,7 +248,7 @@ readonly class RoleDomainService
      * 逻辑：
      * 1. according tocurrentorganizationfindwhether已have同名role；
      * 2. 若not存in，thencreatenewroleand赋予 DelightfulPermission::ALL_PERMISSIONS；
-     * 3. 若存in，thenensure其contain ALL_PERMISSIONS；
+     * 3. 若存in，thenensureitscontain ALL_PERMISSIONS；
      * 4. willuser ID column表add入roleassociateusercolumn表；
      * 5. saverole。
      *
@@ -294,8 +294,8 @@ readonly class RoleDomainService
      * 逻辑：
      * 1. getcurrentorganizationdown名for ORGANIZATION_ADMIN_ROLE_NAME role；
      * 2. 若not存in直接return；
-     * 3. call仓library移exceptuserand该roleassociateclose系；
-     * 4. ifrolenotagainassociate任何user，保持role本身not变（如haveneed，can考虑back续cleanup）。
+     * 3. call仓library移exceptuserandtheroleassociateclose系；
+     * 4. ifrolenotagainassociateanyuser，保持role本身not变（如haveneed，can考虑back续cleanup）。
      */
     public function removeOrganizationAdmin(PermissionDataIsolation $dataIsolation, string $userId): void
     {

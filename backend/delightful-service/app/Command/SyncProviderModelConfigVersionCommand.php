@@ -227,7 +227,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
         }
 
         if ($limit > 0) {
-            $this->logger->info(sprintf('限制processquantity: %d', $limit));
+            $this->logger->info(sprintf('limitprocessquantity: %d', $limit));
         }
     }
 

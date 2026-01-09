@@ -73,7 +73,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         // useassertArrayValueTypesEqualsverifyresponse结构
         $this->assertArrayValueTypesEquals($expectedStructure, $response, 'response结构notconformexpected');
 
-        // 额outsideverifyrolewhetherisassistant（这isprecisevalueverify）
+        // 额outsideverifyrolewhetherisassistant（thisisprecisevalueverify）
         $this->assertEquals('assistant', $response['data']['choices'][0]['message']['role'], 'role应forassistant');
     }
 
@@ -100,7 +100,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
 
         // definitionexpecterrorresponse结构
         $expectedErrorStructure = [
-            'code' => 0, // expectednotis1000code，butspecific数valuemaybenotcertain，所by这within只is占位
+            'code' => 0, // expectednotis1000code，butspecific数valuemaybenotcertain，所bythiswithin只is占位
             'message' => '', // 只verify存inmessagefield，specificcontentmaybenotcertain
         ];
 

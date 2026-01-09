@@ -294,7 +294,7 @@ class ServiceProviderInitializer
                 'id' => '771078297613344768',
                 'name' => 'Amazon Bedrock',
                 'provider_code' => 'AWSBedrock',
-                'description' => 'Amazon Bedrock is亚马逊 AWS 提供oneitemservice，专注atfor企业提供先enter AI languagemodeland视觉model。其model家族include Anthropic  Claude 系column、Meta  Llama 3.1 系columnetc，涵盖from轻quantitylevelto高performance多typechoose，supporttextgenerate、conversation、graphlikehandleetc多typetask，适useatdifferent规模and需求企业application。',
+                'description' => 'Amazon Bedrock is亚马逊 AWS 提供oneitemservice，专注atfor企业提供先enter AI languagemodeland视觉model。itsmodel家族include Anthropic  Claude 系column、Meta  Llama 3.1 系columnetc，涵盖from轻quantitylevelto高performance多typechoose，supporttextgenerate、conversation、graphlikehandleetc多typetask，适useatdifferent规模and需求企业application。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/awsAvatars.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -310,7 +310,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => "Amazon Bedrock is a service offered by Amazon AWS that focuses on advanced AI language models and visual models for businesses. Its model family, including Anthropic's Claude series and Meta's Llama 3.1 series, covers a variety of options from lightweight to high-performance, supporting a variety of tasks such as text generation, dialogue, image processing, and suitable for enterprise applications of different sizes and needs.",
-                        'zh_CN' => 'Amazon Bedrock is亚马逊 AWS 提供oneitemservice，专注atfor企业提供先enter AI languagemodeland视觉model。其model家族include Anthropic  Claude 系column、Meta  Llama 3.1 系columnetc，涵盖from轻quantitylevelto高performance多typechoose，supporttextgenerate、conversation、graphlikehandleetc多typetask，适useatdifferent规模and需求企业application。',
+                        'zh_CN' => 'Amazon Bedrock is亚马逊 AWS 提供oneitemservice，专注atfor企业提供先enter AI languagemodeland视觉model。itsmodel家族include Anthropic  Claude 系column、Meta  Llama 3.1 系columnetc，涵盖from轻quantitylevelto高performance多typechoose，supporttextgenerate、conversation、graphlikehandleetc多typetask，适useatdifferent规模and需求企业application。',
                     ],
                 ]),
                 'remark' => '',

@@ -60,7 +60,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             return null;
         }
 
-        // 3. querycurrentorganizationwhether已have该servicequotientconfiguration
+        // 3. querycurrentorganizationwhether已havetheservicequotientconfiguration
         $configBuilder = $this->createConfigQuery()->where('organization_code', $organizationCode);
         $configBuilder->where('service_provider_id', $delightfulProvider->getId());
 
@@ -320,7 +320,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
                 continue;
             }
 
-            // ifconfigurationvisibleset餐，checkcurrentset餐whetherin其middle
+            // ifconfigurationvisibleset餐，checkcurrentset餐whetherinitsmiddle
             if ($currentPackage && in_array($currentPackage, $visiblePackages)) {
                 $filteredModels[] = $model;
             }
@@ -338,7 +338,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * 准备移except软删相closefeature，temporary这样写。create带have软deletefilter ProviderConfigModel querybuild器.
+     * 准备移except软删相closefeature，temporarythis样写。create带have软deletefilter ProviderConfigModel querybuild器.
      */
     private function createConfigQuery(): Builder
     {
@@ -347,7 +347,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * 准备移except软删相closefeature，temporary这样写。create带have软deletefilter ProviderModelModel querybuild器.
+     * 准备移except软删相closefeature，temporarythis样写。create带have软deletefilter ProviderModelModel querybuild器.
      */
     private function createProviderModelQuery(): Builder
     {

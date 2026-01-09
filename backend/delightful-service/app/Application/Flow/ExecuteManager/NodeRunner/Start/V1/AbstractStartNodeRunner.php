@@ -90,7 +90,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         $key = 'open_chat_notice_' . $executionData->getConversationId();
         $lastNoticeTime = $this->cache->get($key);
 
-        // ifnothaveuptime，or者距离uptimetimesecond已经超pass，那么thenneedexecute
+        // ifnothaveuptime，or者距离uptimetimesecond已经超pass，that么thenneedexecute
         $config = $triggerBranch->getConfig();
         $intervalSeconds = $this->getIntervalSeconds($config['interval'] ?? 0, $config['unit'] ?? '');
         if (! $lastNoticeTime || (Carbon::make($openChatTime)->diffInSeconds(Carbon::make($lastNoticeTime)) > $intervalSeconds)) {
@@ -166,7 +166,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         // schedule入参，allbyoutside部call，判断is哪branch
         $branchId = $executionData->getTriggerData()->getParams()['branch_id'] ?? '';
         if (empty($branchId)) {
-            // nothave找to任何branch，直接运line
+            // nothave找toanybranch，直接运line
             $vertexResult->setChildrenIds([]);
             return [];
         }

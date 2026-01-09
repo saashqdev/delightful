@@ -23,13 +23,13 @@ return new class extends Migration {
             // organizationencoding
             $table->string('organization_code', 64)->comment('organizationencoding')->default('');
             // user_id
-            $table->string('user_id', 64)->comment('userid,organizationdown唯one.此fieldalsowillrecordonesharetouser_id_relation')->default(0);
+            $table->string('user_id', 64)->comment('userid,organizationdown唯one.thisfieldalsowillrecordonesharetouser_id_relation')->default(0);
             // user_type
             $table->tinyInteger('user_type')->comment('usertype,0:ai,1:personcategory')->default(0);
             $table->string('description', 1024)->comment('description(canuseataifrom我介绍)');
             $table->integer('like_num')->comment('like数')->default(0);
             $table->string('label', 256)->comment('from我tag，多use逗numberminute隔')->default('');
-            $table->tinyInteger('status')->comment('userin该organizationstatus,0:freeze,1:activated,2:已离职,3:已exit')->default(0);
+            $table->tinyInteger('status')->comment('userintheorganizationstatus,0:freeze,1:activated,2:已离职,3:已exit')->default(0);
             $table->string('nickname', 64)->comment('昵称')->default('');
             $table->text('i18n_name')->comment('国际化username');
             $table->string('avatar_url', 128)->comment('useravatarlink')->default('');

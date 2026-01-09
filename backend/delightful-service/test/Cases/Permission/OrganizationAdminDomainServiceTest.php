@@ -163,7 +163,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsWithEmptyOrganizationCodeReturnsEmptyArray(): void
     {
-        // createone些administrator
+        // createonetheseadministrator
         $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -180,7 +180,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsWithNonExistentOrganizationCodeReturnsEmptyArray(): void
     {
-        // createone些administrator
+        // createonetheseadministrator
         $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -275,7 +275,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetOrganizationCreatorReturnsCorrectEntity(): void
     {
-        // create多administrator，其middleoneisorganizationcreate者
+        // create多administrator，itsmiddleoneisorganizationcreate者
         $normalAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],

@@ -68,7 +68,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
             // ifisauthenticationerror，我们canacceptandskiptest
             if ($response['code'] === 2179 || $response['code'] === 3035) {
-                $this->markTestSkipped('interfaceauthenticationfail，maybeneed其他authenticationconfiguration - interface路byvalidatenormal');
+                $this->markTestSkipped('interfaceauthenticationfail，maybeneedotherauthenticationconfiguration - interface路byvalidatenormal');
                 return;
             }
         }
@@ -162,7 +162,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * testnullparameterupdate - not传任何field.
+     * testnullparameterupdate - not传anyfield.
      */
     public function testUpdateUserInfoWithEmptyData(): void
     {
@@ -308,7 +308,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // according to业务逻辑，maybeaccept任何stringasforavatar_url，orconductvalidate
+        // according to业务逻辑，maybeacceptanystringasforavatar_url，orconductvalidate
         $this->assertIsArray($response, 'invalidURLformat应be妥善handle');
 
         // ifisauthenticationerror，skiptest
@@ -407,7 +407,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
             // ifisauthenticationerror，我们canacceptandskiptest
             if ($response['code'] === 2179 || $response['code'] === 3035) {
-                $this->markTestSkipped('interfaceauthenticationfail，maybeneed其他authenticationconfiguration - interface路byvalidatenormal');
+                $this->markTestSkipped('interfaceauthenticationfail，maybeneedotherauthenticationconfiguration - interface路byvalidatenormal');
                 return;
             }
         }

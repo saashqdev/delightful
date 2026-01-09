@@ -163,7 +163,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * rootdepartmentbeabstractfor -1，所by这withinneedconvertforactualrootdepartment id.
+     * rootdepartmentbeabstractfor -1，所bythiswithinneedconvertforactualrootdepartment id.
      */
     public function getDepartmentRootId(DataIsolation $dataIsolation): string
     {

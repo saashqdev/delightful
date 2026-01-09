@@ -35,7 +35,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
 
             $newVersion = $latestVersion ? (int) $latestVersion + 1 : 1;
 
-            // 2. will该model所have旧versionmarkfornoncurrentversion
+            // 2. willthemodel所have旧versionmarkfornoncurrentversion
             $updateBuilder = $this->createBuilder($dataIsolation, ProviderModelConfigVersionModel::query());
             $updateBuilder
                 ->where('service_provider_model_id', $serviceProviderModelId)

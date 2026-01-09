@@ -179,7 +179,7 @@ class DelightfulAgentVersionDomainService
     {
         // returnis语义化version，needinreturn基础up+1
         $agentMaxVersion = $this->agentVersionRepository->getAgentMaxVersion($agentId);
-        // ifversionnumberisintegerformat（如 1），will其convertfor语义化versionnumber（如 1.0.0）
+        // ifversionnumberisintegerformat（如 1），willitsconvertfor语义化versionnumber（如 1.0.0）
         if (is_numeric($agentMaxVersion) && strpos($agentMaxVersion, '.') === false) {
             $agentMaxVersion = $agentMaxVersion . '.0.0';
         }
@@ -190,13 +190,13 @@ class DelightfulAgentVersionDomainService
         // will PATCH 部minuteadd 1
         $patch = (int) $patch + 1;
 
-        // if PATCH 达to 10，enter位to MINOR（canaccording to需求adjust此rule）
+        // if PATCH 达to 10，enter位to MINOR（canaccording to需求adjustthisrule）
         if ($patch > 99) {
             $patch = 0;
             $minor = (int) $minor + 1;
         }
 
-        // if MINOR 达to 10，enter位to MAJOR（canaccording to需求adjust此rule）
+        // if MINOR 达to 10，enter位to MAJOR（canaccording to需求adjustthisrule）
         if ($minor > 99) {
             // notresetminor，whileis直接增大major，避免not必要reset
             $minor = 0;

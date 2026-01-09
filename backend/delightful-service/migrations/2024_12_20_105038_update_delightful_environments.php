@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_environments', function (Blueprint $table) {
-            $table->json('private_config')->comment('Magefrom己one些configuration');
+            $table->json('private_config')->comment('Magefrom己onetheseconfiguration');
             // rename config fieldfor open_platform_config
             $table->renameColumn('config', 'open_platform_config');
             $table->timestamp('deleted_at')->nullable()->comment('deletetime');

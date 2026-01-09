@@ -87,7 +87,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         );
         $this->logger->info(sprintf('mindSearch aggregateSearch startaggregatesearch  searchKeyword：%s searchtype：%s', $searchKeyword, $dto->getSearchDeepLevel()->name));
         $antiRepeatKey = md5($conversationId . $topicId);
-        // 防重:if同oneconversation同one话题down,2secondinsidehave重复message,not触hairprocess
+        // 防重:if同oneconversation同one话题down,2secondinsidehaveduplicatemessage,not触hairprocess
         if (! $this->redis->set($antiRepeatKey, '1', ['nx', 'ex' => 2])) {
             return;
         }
@@ -113,13 +113,13 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             $rawHistoryMessages = $this->getDelightfulChatMessages($dto->getConversationId(), $dto->getTopicId());
             $dto->setDelightfulChatMessageHistory($rawHistoryMessages);
 
-            # 2.searchuserissue.这withinone定willsplitonetimeassociateissue
+            # 2.searchuserissue.thiswithinone定willsplitonetimeassociateissue
             $searchDetailItems = $this->searchUserQuestion($dto);
             # 3.according tooriginalissue + searchresult，按多维degree拆解associateissue.
             // 3.1 generateassociateissueandsendgivefront端
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $searchDetailItems);
             $associateQuestions = $this->generateAndSendAssociateQuestions($dto, $associateQuestionsQueryVo, AggregateAISearchCardMessageV2::NULL_PARENT_ID);
-            // 3.2 according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉重复or者andissueassociatepropertynot高webpagecontent
+            // 3.2 according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉duplicateor者andissueassociatepropertynot高webpagecontent
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
 
             // 3.4 according tosearch深degree，决定whethercontinuesearchassociateissue子issue
@@ -172,7 +172,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $topicId = $dto->getTopicId();
         $searchKeyword = $dto->getUserMessage();
         $antiRepeatKey = md5($conversationId . $topicId . $searchKeyword);
-        // 防重(not知道哪comebug):if同oneconversation同one话题down,2secondinsidehave重复message,not触hairprocess
+        // 防重(not知道哪comebug):if同oneconversation同one话题down,2secondinsidehaveduplicatemessage,not触hairprocess
         if (! $this->redis->set($antiRepeatKey, '1', ['nx', 'ex' => 2])) {
             return null;
         }
@@ -183,14 +183,14 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $dto->setAppMessageId((string) $this->idGenerator->generate());
 
         try {
-            // 1.searchuserissue.这withinone定willsplitonetimeassociateissue
+            // 1.searchuserissue.thiswithinone定willsplitonetimeassociateissue
             $searchDetailItems = $this->searchUserQuestion($dto);
 
             // 2.according tooriginalissue + searchresult，按多维degree拆解associateissue.
             // 2.1 generateassociateissue
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $searchDetailItems);
             $associateQuestions = $this->generateAssociateQuestions($associateQuestionsQueryVo, AggregateAISearchCardMessageV2::NULL_PARENT_ID);
-            // 2.2 according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉重复or者andissueassociatepropertynot高webpagecontent
+            // 2.2 according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉duplicateor者andissueassociatepropertynot高webpagecontent
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
 
             // 3. according toeachassociateissuereply，generate总结.
@@ -241,7 +241,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
                 $start = microtime(true);
                 CoContext::setRequestId($dto->getRequestId());
                 // 已generateassociateissue，准备sendsearchresult
-                // byat这withinisto所have维degreesummarybackagain精读，therefore丢失each维degreequantity，只能随机generate。
+                // byatthiswithinisto所have维degreesummarybackagain精读，therefore丢失each维degreequantity，只能随机generate。
                 $pageCount = random_int(30, 60);
                 $webSearchItem = new QuestionSearchResult([
                     'question_id' => $questionId,
@@ -303,7 +303,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
                 $pageCount = random_int(30, 60);
                 $onePageWords = random_int(200, 2000);
                 $totalWords = $pageCount * $onePageWords;
-                // todo byat这withinisto所have维degreesummarybackagain精读，therefore丢失each维degreequantity，只能随机generate。
+                // todo byatthiswithinisto所have维degreesummarybackagain精读，therefore丢失each维degreequantity，只能随机generate。
                 $webSearchItem = new QuestionSearchResult([
                     'question_id' => $questionId,
                     'search_keywords' => $associateSubQuestions,
@@ -330,7 +330,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     }
 
     /**
-     * @return array searchDetailItem objecttwo维arrayshapetype，这withinforcompatibleand方便，notconductobjectconvert
+     * @return array searchDetailItem objecttwo维arrayshapetype，thiswithinforcompatibleand方便，notconductobjectconvert
      */
     public function searchUserQuestion(DelightfulChatAggregateSearchReqDTO $dto): array
     {
@@ -414,17 +414,17 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     public function generateSearchResults(DelightfulChatAggregateSearchReqDTO $dto, array $associateQuestions): array
     {
         $start = microtime(true);
-        // according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉重复or者andissueassociatepropertynot高webpagecontent
+        // according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉duplicateor者andissueassociatepropertynot高webpagecontent
         $searchKeywords = $this->getSearchKeywords($associateQuestions);
         $queryVo = (new AISearchCommonQueryVo())
             ->setSearchKeywords($searchKeywords)
             ->setSearchEngine($dto->getSearchEngine())
             ->setLanguage($dto->getLanguage());
         $allSearchContexts = $this->delightfulLLMDomainService->getSearchResults($queryVo)['search'] ?? [];
-        // filter重复content
+        // filterduplicatecontent
         $noRepeatSearchContexts = [];
         if (! empty($allSearchContexts)) {
-            // 清洗searchresultmiddle重复item
+            // 清洗searchresultmiddleduplicateitem
             $modelInterface = $this->getChatModel($dto->getOrganizationCode(), $dto->getUserId());
             $queryVo = (new AISearchCommonQueryVo())
                 ->setSearchKeywords($searchKeywords)
@@ -435,11 +435,11 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
                 ->setSearchContexts($allSearchContexts)
                 ->setUserId($dto->getUserId())
                 ->setOrganizationCode($dto->getOrganizationCode());
-            // andsearchkeywordassociatepropertymost高andnot重复searchresult
+            // andsearchkeywordassociatepropertymost高andnotduplicatesearchresult
             $noRepeatSearchContexts = $this->delightfulLLMDomainService->filterSearchContexts($queryVo);
             $costMircoTime = TimeUtil::getMillisecondDiffFromNow($start);
             $this->logger->info(sprintf(
-                'mindSearch getSearchResults filterSearchContexts 清洗searchresultmiddle重复item 清洗front：%s 清洗back:%s end计o clock 累计耗o clock %s second',
+                'mindSearch getSearchResults filterSearchContexts 清洗searchresultmiddleduplicateitem 清洗front：%s 清洗back:%s end计o clock 累计耗o clock %s second',
                 count($allSearchContexts),
                 count($noRepeatSearchContexts),
                 $costMircoTime / 1000
@@ -790,7 +790,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $questionsNum = count($associateQuestions);
         $detailReadMaxNum = max(20, $questionsNum);
         $perReadResponseNum = intdiv($detailReadMaxNum, $questionsNum);
-        // 限制andhairrequestquantity
+        // limitandhairrequestquantity
         $parallel = new Parallel(5);
         $timeStart = microtime(true);
         $currentDetailReadCount = 0;

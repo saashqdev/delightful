@@ -17,7 +17,7 @@ class NoAuthentication implements AuthenticationInterface
 {
     /**
      * verifyrequest身shareinformation.
-     * in此implementmiddle，始终allow所haverequestpass.
+     * inthisimplementmiddle，始终allow所haverequestpass.
      */
     public function authenticate(MessageInterface $request): void
     {

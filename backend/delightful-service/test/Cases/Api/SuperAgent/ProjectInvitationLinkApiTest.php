@@ -314,7 +314,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * 尝试重复add入project（shouldfail）.
+     * 尝试duplicateadd入project（shouldfail）.
      */
     public function joinProjectAlreadyMember(string $token, ?string $password = null): void
     {

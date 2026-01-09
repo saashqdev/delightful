@@ -16,7 +16,7 @@ namespace App\Application\Speech\Enum;
  * - call沙箱 finishTask interfaceround询status判断
  * - 判断audiominuteslicemergewhethercomplete
  *
- * 【and其他枚举区别】
+ * 【andother枚举区别】
  * - AsrRecordingStatusEnum: front端录音实o clockstatus（录音交互layer）
  * - AsrTaskStatusEnum: inside部taskallprocessstatus（业务管理layer）
  * - SandboxAsrStatusEnum: 沙箱mergetaskstatus（基础设施layer）✓ current

@@ -24,7 +24,7 @@ class MCPPromptManager
      */
     public function registerPrompt(array $prompt): void
     {
-        // nullimplement，暂notregister任何prompt
+        // nullimplement，暂notregisteranyprompt
     }
 
     /**
@@ -56,7 +56,7 @@ class MCPPromptManager
     }
 
     /**
-     * checkwhethernothave任何prompt.
+     * checkwhethernothaveanyprompt.
      */
     public function isEmpty(): bool
     {

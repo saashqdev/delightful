@@ -17,7 +17,7 @@ namespace App\Application\Speech\Enum;
  * - 业务process控制andpoweretcproperty判断
  * - 整bodytaskstatustrace（录音 → merge → generatetitle → sendmessage）
  *
- * 【and其他枚举区别】
+ * 【andother枚举区别】
  * - AsrRecordingStatusEnum: front端录音实o clockstatus（录音交互layer）
  * - AsrTaskStatusEnum: inside部taskallprocessstatus（业务管理layer）✓ current
  * - SandboxAsrStatusEnum: 沙箱mergetaskstatus（基础设施layer）

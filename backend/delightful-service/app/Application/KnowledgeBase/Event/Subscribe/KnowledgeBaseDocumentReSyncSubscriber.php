@@ -54,7 +54,7 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
         // getminute布typelock
         $lockKey = "document_re_sync:{$documentEntity->getKnowledgeBaseCode()}:{$documentEntity->getCode()}";
         if (! $lock->mutexLock($lockKey, $event->knowledgeBaseDocumentEntity->getCreatedUid(), 300)) { // 5minute钟timeout
-            $logger->info('document[' . $documentEntity->getCode() . ']正inbe其他enter程process，skipsync');
+            $logger->info('document[' . $documentEntity->getCode() . ']正inbeotherenter程process，skipsync');
             return;
         }
 

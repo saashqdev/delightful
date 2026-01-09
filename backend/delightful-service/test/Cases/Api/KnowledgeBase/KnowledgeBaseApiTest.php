@@ -704,7 +704,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $data = array_merge([
             'source_type' => SourceType::EXTERNAL_FILE->value,
             'name' => 'testknowledge base',
-            'description' => '这isonetestknowledge basedescription',
+            'description' => 'thisisonetestknowledge basedescription',
             'icon' => 'qqqq',
             'enabled' => true,
             'is_draft' => true,
@@ -760,7 +760,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         }
 
         $defaultData = [
-            'content' => '这isonetestslicesegmentcontent',
+            'content' => 'thisisonetestslicesegmentcontent',
             'metadata' => ['page' => 1],
             'embedding_model' => 'test-model',
             'vector_db' => 'test-db',

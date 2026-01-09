@@ -78,7 +78,7 @@ class ModelConfigAppService extends AbstractLLMAppService
             return '';
         }
 
-        // iffinger定modeltypeand该model存inatcanusemodellistmiddle，then直接return
+        // iffinger定modeltypeandthemodel存inatcanusemodellistmiddle，then直接return
         if (! empty($modelType) && in_array($modelType, $chatModelsName)) {
             return $modelType;
         }
@@ -100,7 +100,7 @@ class ModelConfigAppService extends AbstractLLMAppService
             }
         }
 
-        // back备solution：ifnothavematch任何优先model，usefirstcanusemodel
+        // back备solution：ifnothavematchany优先model，usefirstcanusemodel
         return $chatModelsName[0] ?? '';
     }
 }

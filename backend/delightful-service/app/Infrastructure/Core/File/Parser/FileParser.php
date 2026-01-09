@@ -94,7 +94,7 @@ class FileParser
      *
      * @param string $url fileURLground址
      * @param string $tempFile temporaryfilepath
-     * @param int $maxSize filesize限制（字section），0table示not限制
+     * @param int $maxSize filesizelimit（字section），0table示notlimit
      * @throws Exception whendownloadfailorfile超限o clock
      */
     private static function downloadFile(string $url, string $tempFile, int $maxSize = 0): void
@@ -132,7 +132,7 @@ class FileParser
         if (! $sizeKnown && $maxSize > 0) {
             self::downloadWithSizeControl($fileStream, $localFile, $maxSize);
         } else {
-            // filesizeknownorno需限制，直接copy
+            // filesizeknownorno需limit，直接copy
             stream_copy_to_stream($fileStream, $localFile);
         }
 
@@ -145,7 +145,7 @@ class FileParser
      *
      * @param resource $fileStream 远程filestreamresource
      * @param resource $localFile 本groundfilestreamresource
-     * @param int $maxSize filesize限制（字section）
+     * @param int $maxSize filesizelimit（字section）
      * @throws Exception whenfilesize超限orwritefailo clock
      */
     private static function downloadWithSizeControl($fileStream, $localFile, int $maxSize): void
@@ -164,7 +164,7 @@ class FileParser
 
             // Check if size limit exceeded
             if ($downloadedBytes > $maxSize) {
-                ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesize超pass限制');
+                ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesize超passlimit');
             }
 
             // Write buffer to local file
@@ -178,9 +178,9 @@ class FileParser
      * checkfilesizewhether超限.
      *
      * @param string $fileUrl fileURLground址
-     * @param int $maxSize filesize限制（字section），0table示not限制
-     * @return bool truetable示已checksizeandin限制inside，falsetable示ischunked传输needstreamdownload
-     * @throws Exception whenfilesize超pass限制orfilesizeunknownandnonchunked传输o clock
+     * @param int $maxSize filesizelimit（字section），0table示notlimit
+     * @return bool truetable示已checksizeandinlimitinside，falsetable示ischunked传输needstreamdownload
+     * @throws Exception whenfilesize超passlimitorfilesizeunknownandnonchunked传输o clock
      */
     private static function checkUrlFileSize(string $fileUrl, int $maxSize = 0): bool
     {
@@ -192,7 +192,7 @@ class FileParser
         if (isset($headers['Content-Length'])) {
             $fileSize = (int) $headers['Content-Length'];
             if ($fileSize > $maxSize) {
-                ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesize超pass限制');
+                ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesize超passlimit');
             }
             return true;
         }

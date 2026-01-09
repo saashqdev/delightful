@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Entity\ValueObject;
 
 /**
  * model管理back台 model_id maybesupporttype枚举value。
- * not要枚举servicequotient接入point，这withinisandservicequotientnocloseconfiguration.
+ * not要枚举servicequotient接入point，thiswithinisandservicequotientnocloseconfiguration.
  */
 enum LLMModelEnum: string
 {

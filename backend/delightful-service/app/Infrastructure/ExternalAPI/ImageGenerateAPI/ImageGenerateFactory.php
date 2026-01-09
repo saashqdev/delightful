@@ -137,12 +137,12 @@ class ImageGenerateFactory
         $model = $data['model'];
         $mode = strtolower(explode('-', $model, limit: 2)[1] ?? 'fast');
 
-        // Midjourney notuse宽高parameter，只need prompt and mode，butis Request categoryinheritneed这些parameter
+        // Midjourney notuse宽高parameter，只need prompt and mode，butis Request categoryinheritneedthistheseparameter
         // 所by我们givedefaultvalue即can
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
 
-        // Midjourney notclosecorespecific宽高ratio例，but我们保留这fieldby防willcomeneed
+        // Midjourney notclosecorespecific宽高ratio例，but我们保留thisfieldby防willcomeneed
         if (isset($data['size'])) {
             [$width, $height] = self::parseSizeToWidthHeight($data['size']);
             $ratio = self::calculateRatio((int) $width, (int) $height);
@@ -367,7 +367,7 @@ class ImageGenerateFactory
      * parseeachtype size formatfor [width, height] array.
      * supportformat：1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 etc.
      * @param string $size sizestring
-     * @param null|string $modelKey model键名，iffinger定then优先use该modelfixedratio例configuration
+     * @param null|string $modelKey model键名，iffinger定then优先usethemodelfixedratio例configuration
      */
     private static function parseSizeToWidthHeight(string $size, ?string $modelKey = null): array
     {
@@ -430,7 +430,7 @@ class ImageGenerateFactory
             return null;
         }
 
-        // checkwhether存in该modelfixedratio例configuration
+        // checkwhether存inthemodelfixedratio例configuration
         if (isset(self::SIZE_FIXED_RATIOS[$modelKey])) {
             return self::SIZE_FIXED_RATIOS[$modelKey][$ratioKey] ?? self::SIZE_FIXED_RATIOS[$modelKey]['1:1'];
         }

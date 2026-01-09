@@ -207,7 +207,7 @@ class DelightfulFlowExecutor
     {
         $nodeDebugResult = $node->getNodeDebugResult();
         if (! $nodeDebugResult->isSuccess()) {
-            // as long ashaveonesectionpointisfail，那么processthenisfail
+            // as long ashaveonesectionpointisfail，that么processthenisfail
             $this->success = false;
         }
         $this->logger->info('HandledNode', [
@@ -304,7 +304,7 @@ class DelightfulFlowExecutor
         /** @var TriggerType $appointTriggerType */
         $appointTriggerType = $args['appoint_trigger_type'];
         if ($appointTriggerType === TriggerType::LoopStart) {
-            // loopo clock，not能delete该data
+            // loopo clock，not能deletethedata
             return;
         }
 
@@ -328,7 +328,7 @@ class DelightfulFlowExecutor
 
         $this->executionData->setStreamStatus(FlowStreamStatus::Finished);
 
-        // only api layersurfaceneed这样
+        // only api layersurfaceneedthis样
         if ($this->executionData->getExecutionType()->isApi()) {
             FlowEventStreamManager::write('data: [DONE]' . "\n\n");
             FlowEventStreamManager::get()->end();
@@ -430,7 +430,7 @@ class DelightfulFlowExecutor
             try {
                 $node->validate();
             } catch (Throwable $throwable) {
-                // have些is悬浮sectionpoint（即inprocess运linemiddlenotwillbeusesectionpoint)，兜bottomwillinexecuteo clockagaintimeconductparameterverify
+                // havetheseis悬浮sectionpoint（即inprocess运linemiddlenotwillbeusesectionpoint)，兜bottomwillinexecuteo clockagaintimeconductparameterverify
             }
 
             $job = function (array $frontResults) use ($node): VertexResult {
@@ -440,13 +440,13 @@ class DelightfulFlowExecutor
                 if (! $executionData) {
                     return $vertexResult;
                 }
-                // ifisdebug sectionpoint，andandnotis debug 模type运line，那么该sectionpointnotallow
+                // ifisdebug sectionpoint，andandnotis debug 模type运line，that么thesectionpointnotallow
                 if ($node->getDebug() && ! $executionData->isDebug()) {
                     return $vertexResult;
                 }
 
                 $vertex = $this->dag->getVertex($node->getNodeId());
-                // 这withingeneralcome说notwillfornull，先not管null情况
+                // thiswithingeneralcome说notwillfornull，先not管null情况
                 $childrenIds = [];
                 foreach ($vertex->children as $childVertex) {
                     // not能from己连from己

@@ -55,7 +55,7 @@ class MCPExceptionHandler
             return $exception->getRpcCode();
         }
 
-        // toat其他typeexception，usestandardmapping
+        // toatothertypeexception，usestandardmapping
         return match (true) {
             $exception instanceof InvalidArgumentException => -32602, // Invalid params
             $exception instanceof RuntimeException => -32603, // Internal error

@@ -281,7 +281,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         // extractenable机器personlistmiddle agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // getfinger定organizationand机器personversion机器persondataand其total
+        // getfinger定organizationand机器personversion机器persondataanditstotal
         $agentVersions = $this->delightfulAgentVersionDomainService->getAgentsByOrganizationWithCursor(
             $organizationCode,
             $agentVersionIds,

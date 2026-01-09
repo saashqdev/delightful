@@ -374,7 +374,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $apiChatDTO->getTaskId()]);
         }
 
-        // checkwhether具have该processpermission
+        // checkwhether具havetheprocesspermission
         $this->getFlow($flowDataIsolation, $log->getFlowCode(), operationValidate: 'read');
 
         return $log;

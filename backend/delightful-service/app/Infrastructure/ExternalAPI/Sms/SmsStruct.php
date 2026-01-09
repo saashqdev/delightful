@@ -10,7 +10,7 @@ namespace App\Infrastructure\ExternalAPI\Sms;
 use App\Infrastructure\ExternalAPI\Sms\Enum\SignEnum;
 
 /**
- * 所have短信驱动returnresultmustconvertfor此object
+ * 所have短信驱动returnresultmustconvertforthisobject
  */
 class SmsStruct
 {
@@ -22,7 +22,7 @@ class SmsStruct
     /**
      * 短信type,such as:registration_rewards (order已hair货),arrival_notice(to货notify).
      * 1.if搭配 language field,meanwhileusevariable短信,canimplement多language适配,byand语type兜bottom
-     * 2.电quotient相close短信use此field,butisnothave language 传入.
+     * 2.电quotient相close短信usethisfield,butisnothave language 传入.
      */
     public ?string $type = null;
 

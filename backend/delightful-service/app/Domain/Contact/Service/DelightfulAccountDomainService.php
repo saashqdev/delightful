@@ -119,7 +119,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         $existsAccount = $this->accountRepository->getAccountInfoByDelightfulId($delightfulId);
         if ($existsAccount !== null) {
             $userEntity = $this->userRepository->getUserByAccountAndOrganization($delightfulId, $userDTO->getOrganizationCode());
-            // 账number存in,andin该organizationdown已经generateuserinfo,直接return
+            // 账number存in,andintheorganizationdown已经generateuserinfo,直接return
             if ($userEntity !== null) {
                 $userDTO->setUserId($userEntity->getUserId());
                 $userDTO->setNickname($userEntity->getNickname());
@@ -138,7 +138,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // 账numbernot存in,new账number
                 $accountEntity = $this->accountRepository->createAccount($accountDTO);
             } else {
-                // 账number存in,butis该organizationdownnothaveuserinfo
+                // 账number存in,butistheorganizationdownnothaveuserinfo
                 $accountEntity = $existsAccount;
             }
             // willgenerate账numberinfoassociatetouserEntity
@@ -153,7 +153,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // certainuser_idgeneraterule
                 $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $userDTO->getOrganizationCode());
                 $userDTO->setUserId($userId);
-                // 1.47x(10**-29) 概ratedown,user_idwill重复,willbemysql唯one索引拦截,letuser重新loginonetimethenline.
+                // 1.47x(10**-29) 概ratedown,user_idwillduplicate,willbemysql唯one索引拦截,letuser重新loginonetimethenline.
                 $this->userRepository->createUser($userDTO);
             }
             Db::commit();
@@ -187,10 +187,10 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                     $accountEntity->setStatus($accountDTO->getStatus());
                 }
                 $this->accountRepository->saveAccount($accountEntity);
-                // update账numberin该organizationdownuserinfo
+                // update账numberintheorganizationdownuserinfo
                 $userEntity = $this->userRepository->getUserByAccountAndOrganization($accountEntity->getDelightfulId(), $dataIsolation->getCurrentOrganizationCode());
                 if ($userEntity === null) {
-                    # 账number存in,butis该organizationdownnothaveuserinfo. generateuserinfo
+                    # 账number存in,butistheorganizationdownnothaveuserinfo. generateuserinfo
                     $userEntity = $this->createUser($userDTO, $dataIsolation);
                 } else {
                     // 账numberanduserinfoall存in,updateonedownuserinfo

@@ -14,7 +14,7 @@ use DateTime;
 use Hyperf\Codec\Json;
 
 /**
- * 长期记忆实body.
+ * long-term记忆实body.
  */
 final class LongTermMemoryEntity extends AbstractEntity
 {
@@ -300,7 +300,7 @@ final class LongTermMemoryEntity extends AbstractEntity
 
     /**
      * inside部setenablestatus（notconduct业务rulecheck）.
-     * useatdatainitializeandinside部操as，skip业务rule限制.
+     * useatdatainitializeandinside部操as，skip业务rulelimit.
      */
     public function setEnabledInternal(bool $enabled): void
     {

@@ -186,7 +186,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->enableCollaboration($projectId);
 
-        // 尝试add其他organizationuser - shouldfail
+        // 尝试addotherorganizationuser - shouldfail
         $requestData = [
             'members' => [
                 [
@@ -220,9 +220,9 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         // 1. testaddnullmembercolumn表
         $this->addEmptyMembersList($projectId, 5003);
 
-        // 2. test重复addsamemember
+        // 2. testduplicateaddsamemember
         $this->addTeamMembers($projectId);
-        //        $this->addTeamMembers($projectId); // 重复add
+        //        $this->addTeamMembers($projectId); // duplicateadd
 
         // 3. testinvalidpermissionlevel别
         $this->addMembersWithInvalidPermission($projectId, 5003);

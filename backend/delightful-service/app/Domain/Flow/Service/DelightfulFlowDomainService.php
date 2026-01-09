@@ -210,7 +210,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
 
             $callbackParams['branchId'] = $branchId;
             $callbackParams['routineConfig'] = $routineConfig->toConfigArray();
-            // ifisnot重复，那么is直接create调degreetask
+            // ifisnotduplicate，that么is直接create调degreetask
             if ($routineConfig->getType() === RoutineType::NoRepeat) {
                 $taskScheduler = new TaskScheduler();
                 $taskScheduler->setExternalId($externalId);

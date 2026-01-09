@@ -733,7 +733,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
     /**
      * parseMarkdowncontent，convertfor飞书rich textformat
-     * 只handleimage，其他contentall部usemd样type.
+     * 只handleimage，othercontentall部usemd样type.
      *
      * @param string $markdown Markdowncontent
      * @return array 飞书rich textformat

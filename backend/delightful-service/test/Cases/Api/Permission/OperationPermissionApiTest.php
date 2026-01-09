@@ -34,7 +34,7 @@ class OperationPermissionApiTest extends AbstractHttpTest
 
         // ifreturnautherror，skiptest
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003])) {
-            $this->markTestSkipped('interfaceauthfail，maybeneed其他authconfiguration - interfacerouteverifynormal');
+            $this->markTestSkipped('interfaceauthfail，maybeneedotherauthconfiguration - interfacerouteverifynormal');
             return;
         }
 

@@ -346,7 +346,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
 
-            // servicequotientdisable，skip该model
+            // servicequotientdisable，skipthemodel
             if ($providerStatus === Status::Disabled) {
                 continue;
             }

@@ -25,8 +25,8 @@ return new class extends Migration {
             $table->string('user_id', 64)->comment('delightful_contact_user table user_id')->default('');
             $table->string('department_id', 64)->comment('departmentid');
             $table->tinyInteger('is_leader')->comment('whetherisdepartment领导 0-否 1-is')->default(0);
-            $table->string('job_title', 64)->comment('in此department职位')->default('');
-            $table->string('leader_user_id', 64)->comment('in此department直属领导 user_id')->nullable()->default('');
+            $table->string('job_title', 64)->comment('inthisdepartment职位')->default('');
+            $table->string('leader_user_id', 64)->comment('inthisdepartment直属领导 user_id')->nullable()->default('');
             $table->string('organization_code', 32)->comment('麦吉organizationencoding');
             $table->string('city', 64)->comment('work城市')->default('');
             $table->string('country', 32)->comment('国家orground区 Code 缩写')->default('');

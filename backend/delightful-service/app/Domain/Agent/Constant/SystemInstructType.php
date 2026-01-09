@@ -136,7 +136,7 @@ enum SystemInstructType: int
     public static function requiresContent(int $type): bool
     {
         // 目front所havesystemfinger令allnotneedcontent
-        // if未comehavesystemfinger令needcontent，canin这withinadd判断
+        // if未comehavesystemfinger令needcontent，caninthiswithinadd判断
         return match (self::fromType($type)) {
             self::EMOJI, self::FILE, self::NEW_TOPIC, self::SCHEDULE, self::RECORD => false,
         };

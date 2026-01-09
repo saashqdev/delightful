@@ -475,7 +475,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // publishassistant
         $result = $this->delightfulAgentVersionDomainService->releaseAgentVersion($delightfulAgentVersionEntity);
 
-        // ifpublishisperson，那么not能操asthethree方assistant
+        // ifpublishisperson，that么not能操asthethree方assistant
         if ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PERSONAL_USE->value) {
             $thirdPlatformList = null;
         }
@@ -854,7 +854,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // 尝试getlock，timeouttimesettingfor60second
         if (! $this->redisLocker->mutexLock($lockKey, $userId, 60)) {
             $this->logger->warning(sprintf('get initAgents lockfail, orgCode: %s, userId: %s', $orgCode, $userId));
-            // getlockfail，canchoose直接returnorthrowexception，这withinchoose直接return避免阻塞
+            // getlockfail，canchoose直接returnorthrowexception，thiswithinchoose直接return避免阻塞
             return;
         }
 
@@ -999,7 +999,7 @@ class DelightfulAgentAppService extends AbstractAppService
      * readJSONfileand替换templatevariable.
      *
      * @param string $filepath JSONfilepath
-     * @param array $variables 替换variable ['modelName' => 'gpt-4', 'otherVar' => '其他value']
+     * @param array $variables 替换variable ['modelName' => 'gpt-4', 'otherVar' => 'othervalue']
      * @return null|array parsebackarrayorfailo clockreturnnull
      */
     public function readJsonToArray(string $filepath, array $variables = []): ?array
@@ -1034,7 +1034,7 @@ class DelightfulAgentAppService extends AbstractAppService
      */
     private function getEnabledAgentVersions(string $organizationCode, int $page, int $pageSize, string $agentName): array
     {
-        // 直接call领域serviceget该organizationdownenableassistantversion，避免先get所haveIDagainquery
+        // 直接call领域servicegettheorganizationdownenableassistantversion，避免先get所haveIDagainquery
         return $this->delightfulAgentVersionDomainService->getEnabledAgentsByOrganization($organizationCode, $page, $pageSize, $agentName);
     }
 
@@ -1094,7 +1094,7 @@ class DelightfulAgentAppService extends AbstractAppService
                 continue;
             }
 
-            // 特定visible - 此处no需againtimecheckvisibilityType，因forfrontsurface已rowexceptnullandAlltype
+            // 特定visible - this处no需againtimecheckvisibilityType，因forfrontsurface已rowexceptnullandAlltype
             // 剩down只maybeisSPECIFICtype
             if ($this->isUserVisible($visibilityConfig, $currentUserId, $userDepartmentIds)) {
                 $visibleAgentVersions[] = $agentVersion;
@@ -1417,7 +1417,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // 5. 收collection所haveassistantuserID
         $agentUserIds = array_values($flowCodeToUserIdMap);
 
-        // 6. queryuserand这些assistantconversationID
+        // 6. queryuserandthistheseassistantconversationID
         $conversationMap = [];
         if (! empty($agentUserIds)) {
             $conversationMap = $this->delightfulConversationDomainService->getConversationIdMappingByReceiveIds(

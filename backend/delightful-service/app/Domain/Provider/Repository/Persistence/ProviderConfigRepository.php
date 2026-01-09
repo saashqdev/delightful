@@ -219,7 +219,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
         // 3. firstadddatabasemiddle所haveactualconfiguration（保留多same provider_code configuration）
         $result = $organizationProviders;
 
-        // 4. check哪些servicequotienttypeindatabasemiddlenothaveconfiguration，for这些addtemplate
+        // 4. check哪theseservicequotienttypeindatabasemiddlenothaveconfiguration，forthistheseaddtemplate
         $existingProviderCodes = [];
         foreach ($organizationProviders as $config) {
             if ($config->getProviderCode()) {
@@ -255,7 +255,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             }
         }
 
-        // to其他servicequotient按 sort fieldsort（numbermore大more靠front）
+        // tootherservicequotient按 sort fieldsort（numbermore大more靠front）
         usort($otherProviders, function ($a, $b) {
             if ($a->getSort() === $b->getSort()) {
                 return strcmp($a->getId(), $b->getId()); // same sort valueo clock按 ID sort
@@ -263,7 +263,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             return $b->getSort() <=> $a->getSort(); // 降序rowcolumn，number大infront
         });
 
-        // if找to Delightful servicequotient，will其放intheone位（non官方organization才willhave Delightful servicequotient）
+        // if找to Delightful servicequotient，willits放intheone位（non官方organization才willhave Delightful servicequotient）
         if ($delightfulProvider !== null) {
             $result = array_merge([$delightfulProvider], $otherProviders);
         } else {
@@ -357,7 +357,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * 准备移except软删相closefeature，temporary这样写。create带have软deletefilter ProviderConfigModel querybuild器.
+     * 准备移except软删相closefeature，temporarythis样写。create带have软deletefilter ProviderConfigModel querybuild器.
      */
     protected function createConfigQuery(): Builder
     {

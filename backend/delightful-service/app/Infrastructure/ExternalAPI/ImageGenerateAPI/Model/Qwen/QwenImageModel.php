@@ -51,12 +51,12 @@ class QwenImageModel extends AbstractImageGenerate
 
     public function setAK(string $ak)
     {
-        // 通义thousand问notuseAK/SKauthentication，此methodfornullimplement
+        // 通义thousand问notuseAK/SKauthentication，thismethodfornullimplement
     }
 
     public function setSK(string $sk)
     {
-        // 通义thousand问notuseAK/SKauthentication，此methodfornullimplement
+        // 通义thousand问notuseAK/SKauthentication，thismethodfornullimplement
     }
 
     public function setApiKey(string $apiKey)
@@ -171,7 +171,7 @@ class QwenImageModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // 其他文生graphis x ，阿withinis * ，保持up游one致，final传入alsois *
+        // other文生graphis x ，阿withinis * ，保持up游one致，final传入alsois *
         $size = $imageGenerateRequest->getWidth() . 'x' . $imageGenerateRequest->getHeight();
 
         // validationimagesize
@@ -390,7 +390,7 @@ class QwenImageModel extends AbstractImageGenerate
                 $this->validateWan22FlashSize($size);
                 break;
             default:
-                // 其他model暂notvalidation
+                // othermodel暂notvalidation
                 break;
         }
     }

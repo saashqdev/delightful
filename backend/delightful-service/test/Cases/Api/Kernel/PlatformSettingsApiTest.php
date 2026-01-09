@@ -54,7 +54,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
                 'en_US' => 'AI,Test',
             ],
             'description_i18n' => [
-                'zh_CN' => '这isonetest平台',
+                'zh_CN' => 'thisisonetest平台',
                 'en_US' => 'This is a test platform',
             ],
         ];
@@ -77,7 +77,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         // verify favicon
         $this->assertSame('https://example.com/favicon.ico', $data['favicon']['url']);
 
-        // verify其他field
+        // verifyotherfield
         $this->assertSame('en_US', $data['default_language']);
         $this->assertArrayEquals($payload['name_i18n'], $data['name_i18n'], 'name_i18n notmatch');
         $this->assertArrayEquals($payload['title_i18n'], $data['title_i18n'], 'title_i18n notmatch');

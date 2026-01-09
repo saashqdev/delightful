@@ -282,7 +282,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * will flowCodes settingto friendQueryDTO middle,andreturn flowCodewhetheris该user好友.
+     * will flowCodes settingto friendQueryDTO middle,andreturn flowCodewhetheristheuser好友.
      * @return array<string, DelightfulFriendEntity>
      */
     public function getUserAgentFriendsList(FriendQueryDTO $friendQueryDTO, DataIsolation $dataIsolation): array

@@ -88,7 +88,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
      */
     public function pushControlSeq(DelightfulSeqEntity $seqEntity, DelightfulUserEntity $seqUserEntity, ?DelightfulMessageEntity $messageEntity = null): void
     {
-        // have些控制message,not仅控制from己设备,alsoneed控制to方设备
+        // havethese控制message,not仅控制from己设备,alsoneed控制to方设备
         // 控制messagepush. todo:待optimize,mergepush已读控制message
         if ($seqEntity->getObjectType() === ConversationType::User && ($seqEntity->getSeqType() instanceof ControlMessageType)) {
             SocketIOUtil::sendSequenceId($seqEntity);
@@ -96,7 +96,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
 
         if ($seqEntity->getObjectType() === ConversationType::Ai && ($seqEntity->getSeqType() instanceof ControlMessageType)) {
             // ifisgiveAIneed触hairflowprocess控制message，触hairflowprocess
-            $agentUserEntity = $seqUserEntity; // 此o clock seqUserEntity is AI
+            $agentUserEntity = $seqUserEntity; // thiso clock seqUserEntity is AI
             $agentAccountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($agentUserEntity->getDelightfulId());
             if ($agentAccountEntity === null) {
                 $this->logger->error('UserCallAgentEventError delightful_id:{delightful_id} ai not found', ['delightful_id' => $agentUserEntity->getDelightfulId()]);
@@ -104,7 +104,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
             }
             $senderUserEntity = null; // （personcategory）send方 user_entity
             if ($seqEntity->getConversationId()) {
-                // 这withinconversationwindowis aifrom己，那么to方ispersoncategory（alsomaybeis另one ai，if存in ai 互撩话）
+                // thiswithinconversationwindowis aifrom己，that么to方ispersoncategory（alsomaybeis另one ai，if存in ai 互撩话）
                 $conversationEntity = $this->delightfulConversationRepository->getConversationById($seqEntity->getConversationId());
                 if ($conversationEntity === null) {
                     $this->logger->error('UserCallAgentEventError delightful_conversation_id:{delightful_conversation_id} conversation not found', ['delightful_conversation_id' => $seqEntity->getConversationId()]);
@@ -309,7 +309,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         );
         $content = $ControlRequestData->getMessage()->getDelightfulMessage();
         $messageType = $ControlRequestData->getMessage()->getDelightfulMessage()->getMessageTypeEnum();
-        // 控制messagereceive方,needaccording to控制messagetypeagaincertain,thereforenotin此处handle
+        // 控制messagereceive方,needaccording to控制messagetypeagaincertain,thereforenotinthis处handle
         $time = date('Y-m-d H:i:s');
         $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setSenderId($userAuth->getId());

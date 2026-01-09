@@ -95,7 +95,7 @@ class DelightfulChatAdminContactApi extends AbstractApi
         // departmentid
         // upone页token. toatmysqlcome说,return累productoffsetquantity;toatescome说,return游标
         $pageToken = (string) $request->input('page_token', '');
-        // whether递归
+        // whetherrecursion
         $recursive = (bool) $request->input('recursive', false);
         $listQuery = new UserQueryDTO();
         $listQuery->setDepartmentId($id);

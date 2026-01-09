@@ -116,7 +116,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
     {
         $groupPageResponseDTO = $this->delightfulGroupRepository->getUserGroupList($pageToken, $dataIsolation->getCurrentUserId(), $pageSize);
         $groupDTOS = $groupPageResponseDTO->getItems();
-        // userin这些group chatmiddlesessionid
+        // userinthisthesegroup chatmiddlesessionid
         $groupIds = array_column($groupDTOS, 'id');
         $conversations = $this->delightfulConversationRepository->getConversationsByReceiveIds($dataIsolation->getCurrentUserId(), $groupIds);
         /** @var DelightfulConversationEntity[] $conversations */
@@ -159,10 +159,10 @@ class DelightfulGroupDomainService extends AbstractDomainService
             $content = $content->toArray();
             // pass protobuf message结构,createdelightful chatobject,for弃use protobuf 做准备
             if (in_array($controlMessageType, [ControlMessageType::GroupUsersRemove, ControlMessageType::GroupDisband], true)) {
-                // 这些user已经from群membertablemiddle移except,butis他们also未收tobe移exceptmessage
+                // thistheseuser已经from群membertablemiddle移except,butis他们also未收tobe移exceptmessage
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
                 if ($controlMessageType === ControlMessageType::GroupDisband) {
-                    // 解散group chat,所havepersonallisbe移except.这withindecreasestreamquantityconsume.
+                    // 解散group chat,所havepersonallisbe移except.thiswithindecreasestreamquantityconsume.
                     $content['user_ids'] = [];
                 }
             }
@@ -284,7 +284,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             if (empty($userId)) {
                 continue;
             }
-            // notfor操author重复generateseq. 因forin投mq之front,已经for操authorgenerateseq
+            // notfor操authorduplicategenerateseq. 因forin投mq之front,已经for操authorgenerateseq
             if ($userId === $operateUserId) {
                 continue;
             }

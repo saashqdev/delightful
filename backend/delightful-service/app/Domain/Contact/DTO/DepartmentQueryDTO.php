@@ -25,7 +25,7 @@ class DepartmentQueryDTO extends AbstractEntity
      */
     protected string $pageToken = '';
 
-    // is_recursive whether递归query
+    // is_recursive whetherrecursionquery
     protected bool $isRecursive = false;
 
     // departmentmember求andtype

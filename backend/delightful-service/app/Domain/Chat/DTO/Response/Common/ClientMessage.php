@@ -48,7 +48,7 @@ class ClientMessage extends AbstractEntity
     public function __construct(array $data)
     {
         if (! $data['content'] instanceof MessageInterface) {
-            // 避免eachtype bug 导致user完allno法拉message，这within做onedown兜bottom
+            // 避免eachtype bug 导致user完allno法拉message，thiswithin做onedown兜bottom
             try {
                 $data['content'] = MessageAssembler::getMessageStructByArray($data['type'], $data['content']);
             } catch (Throwable) {
@@ -69,7 +69,7 @@ class ClientMessage extends AbstractEntity
             'sender_id' => $this->getSenderId(),
             'send_time' => $this->getSendTime(),
             'status' => $this->getStatus(),
-            // 这within key is $this->getType() to应messagetype，value ismessagecontent
+            // thiswithin key is $this->getType() to应messagetype，value ismessagecontent
             $this->type => $this->content->toArray($filterNull),
         ];
     }

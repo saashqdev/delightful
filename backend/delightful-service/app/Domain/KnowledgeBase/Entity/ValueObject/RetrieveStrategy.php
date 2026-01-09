@@ -20,7 +20,7 @@ class RetrieveStrategy
      * singleretrieve.
      *
      * fromsingleknowledge basemiddleretrieveinfo。
-     * 该strategypassconfigurationparameter `retrieve_strategy` fieldset，
+     * thestrategypassconfigurationparameter `retrieve_strategy` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。
      */
     public const SINGLE = 'single';
@@ -29,7 +29,7 @@ class RetrieveStrategy
      * 多重retrieve.
      *
      * meanwhilefrom多knowledge basemiddleretrieveinfo，然backtoresultconduct重新sort。
-     * 该strategypassconfigurationparameter `retrieve_strategy` fieldset，
+     * thestrategypassconfigurationparameter `retrieve_strategy` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。
      * 它supportdifferent重sortstrategy，如use重sortmodeloradd权minute数。
      */

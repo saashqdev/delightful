@@ -166,7 +166,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * checkwhetherforempty（nothave任何转录result）.
+     * checkwhetherforempty（nothaveany转录result）.
      */
     public function isEmpty(): bool
     {

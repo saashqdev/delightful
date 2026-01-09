@@ -131,7 +131,7 @@ class AsrApi extends AbstractApi
                     ExceptionBuilder::throw(AsrErrorCode::TaskAlreadyCanceled);
                 }
 
-                // statuscheck 2：task已complete（只in这withinrecordlog，allow重新总结bymore换model）
+                // statuscheck 2：task已complete（只inthiswithinrecordlog，allow重新总结bymore换model）
                 if ($taskStatus->isSummaryCompleted()) {
                     $this->logger->info('task已complete，allowuse新model重新总结', [
                         'task_key' => $summaryRequest->taskKey,
@@ -142,7 +142,7 @@ class AsrApi extends AbstractApi
             }
         }
 
-        // applicationlayer已haveminute布typelock，这withinno需againaddlock，直接call
+        // applicationlayer已haveminute布typelock，thiswithinno需againaddlock，直接call
         try {
             // handle总结task
             $result = $this->asrFileAppService->processSummaryWithChat($summaryRequest, $userAuthorization);
@@ -391,7 +391,7 @@ class AsrApi extends AbstractApi
                 ExceptionBuilder::throw(AsrErrorCode::TaskAlreadyCompleted);
             }
 
-            // statuscheck 2：task已cancel，notallowagain报告其他status
+            // statuscheck 2：task已cancel，notallowagain报告otherstatus
             if (
                 $taskStatus->recordingStatus === AsrRecordingStatusEnum::CANCELED->value
                 && $statusEnum !== AsrRecordingStatusEnum::CANCELED
@@ -446,7 +446,7 @@ class AsrApi extends AbstractApi
         $noteData = $request->input('note');
         $asrStreamContent = $request->input('asr_stream_content', '');
 
-        // 限制contentlength
+        // limitcontentlength
         if (! empty($asrStreamContent) && mb_strlen($asrStreamContent) > 10000) {
             $asrStreamContent = mb_substr($asrStreamContent, 0, 10000);
         }

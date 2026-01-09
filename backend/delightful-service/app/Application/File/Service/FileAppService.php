@@ -44,7 +44,7 @@ class FileAppService extends AbstractAppService
             $contentType,
             $sts
         );
-        // ifis本ground驱动，那么increaseonetemporary key
+        // ifis本ground驱动，that么increaseonetemporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $this->cache->set(
@@ -161,7 +161,7 @@ class FileAppService extends AbstractAppService
         $defaultFileBusinessType = DefaultFileBusinessType::from($businessType);
         $organizationCode = $authorization->getOrganizationCode();
 
-        // checkfilewhether已经存inat该业务typedown
+        // checkfilewhether已经存inatthe业务typedown
         $existingFile = $this->defaultFileDomainService->getByKeyAndBusinessType($fileKey, $businessType, $organizationCode);
         if ($existingFile) {
             // iffile已存in，直接returnfilelink
@@ -222,7 +222,7 @@ class FileAppService extends AbstractAppService
             $autoBucket,
         );
 
-        // ifis本ground驱动，那么increaseonetemporary key
+        // ifis本ground驱动，that么increaseonetemporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $data['temporary_credential']['dir'] = $organizationCode . '/' . $data['temporary_credential']['dir'];
@@ -249,7 +249,7 @@ class FileAppService extends AbstractAppService
             $autoBucket,
         );
 
-        // ifis本ground驱动，那么increaseonetemporary key
+        // ifis本ground驱动，that么increaseonetemporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $data['temporary_credential']['dir'] = $organizationCode . '/' . $data['temporary_credential']['dir'];

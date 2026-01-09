@@ -32,7 +32,7 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * checkgive定configurationIDwhetherfor任何servicequotienttemplate.
+     * checkgive定configurationIDwhetherforanyservicequotienttemplate.
      * support数value型stringformattemplateID.
      */
     public static function isAnyProviderTemplate(null|int|string $configId): bool

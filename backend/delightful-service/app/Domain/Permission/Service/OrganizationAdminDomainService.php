@@ -95,7 +95,7 @@ class OrganizationAdminDomainService
      */
     public function destroy(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdminEntity): void
     {
-        // indeleteorganizationadministratorrecord之front，先移except其inpermissionsystemmiddle role_user associate
+        // indeleteorganizationadministratorrecord之front，先移exceptitsinpermissionsystemmiddle role_user associate
         try {
             // createpermission隔离object，useat操asroleservice
             $permissionIsolation = PermissionDataIsolation::create(
@@ -127,7 +127,7 @@ class OrganizationAdminDomainService
      */
     public function grant(DataIsolation $dataIsolation, string $userId, ?string $grantorUserId, ?string $remarks = null, bool $isOrganizationCreator = false): OrganizationAdminEntity
     {
-        // organizationvalidationand限制
+        // organizationvalidationandlimit
         $orgCode = $dataIsolation->getCurrentOrganizationCode();
         $organization = $this->organizationRepository->getByCode($orgCode);
         if (! $organization) {

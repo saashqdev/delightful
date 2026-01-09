@@ -18,7 +18,7 @@ class TokenTextSplitter extends TextSplitter
 {
     /**
      * setmost大cachetextlength（character数）
-     * 超pass此lengthtextwillnotwillbecachein协程updown文middle.
+     * 超passthislengthtextwillnotwillbecachein协程updown文middle.
      */
     private const int MAX_CACHE_TEXT_LENGTH = 1000;
 
@@ -110,7 +110,7 @@ class TokenTextSplitter extends TextSplitter
         $finalChunks = [];
         foreach ($chunks as $i => $chunk) {
             if ($chunksLengths[$i] > $this->chunkSize) {
-                // ifchunktoo大，conduct递归split
+                // ifchunktoo大，conductrecursionsplit
                 $finalChunks = array_merge($finalChunks, $this->recursiveSplitText($chunk));
             } else {
                 $finalChunks[] = $chunk;
@@ -266,7 +266,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 递归splittext.
+     * recursionsplittext.
      *
      * @param string $text 要splittext
      * @return array splitbacktextpiecearray
@@ -366,7 +366,7 @@ class TokenTextSplitter extends TextSplitter
     private function getDefaultTokenizer(): callable
     {
         return function (string $text) {
-            // iftextlength超pass限制，直接calculatenotcache
+            // iftextlength超passlimit，直接calculatenotcache
             if (mb_strlen($text) > self::MAX_CACHE_TEXT_LENGTH) {
                 return $this->calculateTokenCount($text);
             }

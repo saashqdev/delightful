@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 /**
  * imagegenerate统oneabstractcategory
  * integrationwatermarkprocessand钉钉alertfeature
- * 所haveimagegenerateProviderallshouldinherit此category.
+ * 所haveimagegenerateProviderallshouldinheritthiscategory.
  */
 abstract class AbstractImageGenerate implements ImageGenerate
 {
@@ -49,7 +49,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * implementinterface要求带watermarkoriginaldatamethod
-     * each子categorymustaccording tofrom己dataformatimplement此method.
+     * each子categorymustaccording tofrom己dataformatimplementthismethod.
      */
     abstract public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array;
 
@@ -101,7 +101,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
         try {
             $result = $this->redisLocker->release($lockKey, $owner);
             if (! $result) {
-                $this->logger->warning('Redislockreleasefail，maybe已be其他enter程release', [
+                $this->logger->warning('Redislockreleasefail，maybe已beotherenter程release', [
                     'lock_key' => $lockKey,
                     'owner' => $owner,
                 ]);

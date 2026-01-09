@@ -29,13 +29,13 @@ class DelightfulControlDomainService extends AbstractDomainService
     public function getSenderMessageLatestReadStatus(string $senderMessageId, string $senderUserId): ?DelightfulSeqEntity
     {
         $senderSeqList = $this->delightfulSeqRepository->getSenderMessagesStatusChange($senderMessageId, $senderUserId);
-        // toatreceive方come说,one sender_message_id byatstatuschange,maybewillhave多itemrecord,此处needmostbackstatus
+        // toatreceive方come说,one sender_message_id byatstatuschange,maybewillhave多itemrecord,this处needmostbackstatus
         $userMessagesReadStatus = $this->getMessageLatestStatus([$senderMessageId], $senderSeqList);
         return $userMessagesReadStatus[$senderMessageId] ?? null;
     }
 
     /**
-     * handle mq middleminutehairmessage已读/已viewmessage. 这些messageneed操asmessagesend者seq.
+     * handle mq middleminutehairmessage已读/已viewmessage. thisthesemessageneed操asmessagesend者seq.
      */
     public function handlerMQReceiptSeq(DelightfulSeqEntity $receiveDelightfulSeqEntity): void
     {
@@ -51,7 +51,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             ));
             return;
         }
-        // passreturn执send者quotemessageid,找tosend者messageid. (notcan直接usereceive者 sender_message_id field,这isonenot好design,随o clockcancel)
+        // passreturn执send者quotemessageid,找tosend者messageid. (notcan直接usereceive者 sender_message_id field,thisisonenot好design,随o clockcancel)
         $senderMessageId = $this->delightfulSeqRepository->getSeqByMessageId($receiveDelightfulSeqEntity->getReferMessageId())?->getSenderMessageId();
         if ($senderMessageId === null) {
             $this->logger->error(sprintf(
@@ -78,7 +78,7 @@ class DelightfulControlDomainService extends AbstractDomainService
 
         $senderUserId = $senderConversationEntity->getUserId();
         $senderMessageId = $receiveDelightfulSeqEntity->getSenderMessageId();
-        # 这withinaddonedownminute布typelinelock,防止andhairmodifymessagereceivepersoncolumn表,造becomedataoverride.
+        # thiswithinaddonedownminute布typelinelock,防止andhairmodifymessagereceivepersoncolumn表,造becomedataoverride.
         $spinLockKey = 'chat:seq:lock:' . $senderMessageId;
         $spinLockKeyOwner = random_bytes(8);
         try {
@@ -130,7 +130,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $unreadList = $senderReceiveList->getUnreadList();
                     if (! in_array($receiveUserEntity->getUserId(), $unreadList, true)) {
                         $this->logger->error(sprintf(
-                            'messageDispatch usernotinmessage未读column表middle（maybe其他设备已读） $unreadList:%s $delightfulSeqEntity:%s',
+                            'messageDispatch usernotinmessage未读column表middle（maybeother设备已读） $unreadList:%s $delightfulSeqEntity:%s',
                             Json::encode($unreadList),
                             Json::encode($receiveDelightfulSeqEntity->toArray())
                         ));
@@ -156,11 +156,11 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $senderSeqData = $senderLatestSeq->toArray();
                     $senderSeqData['content'] = ['refer_message_ids' => [$senderMessageId]];
                     $senderSeenSeqEntity = SeqAssembler::generateStatusChangeSeqEntity($senderSeqData, $senderMessageId);
-                    // byat存inbatchquantitywrite情况,这within只generateentity,notcallcreatemethod
+                    // byat存inbatchquantitywrite情况,thiswithin只generateentity,notcallcreatemethod
                     $seqData = SeqAssembler::getInsertDataByEntity($senderSeenSeqEntity);
                     $seqData['app_message_id'] = $receiveDelightfulSeqEntity->getAppMessageId();
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {
-                        // 写database,updatemessagesend方已读column表。这isfor复usemessage收hairchannel，notifycustomer端havenew已读return执。
+                        // 写database,updatemessagesend方已读column表。thisisfor复usemessage收hairchannel，notifycustomer端havenew已读return执。
                         $this->delightfulSeqRepository->createSequence($seqData);
                         // updateoriginal chat_seq messagereceivepersoncolumn表。 避免pullhistorymessageo clock，to方已读messagealsoisdisplay未读。
                         $originalSeq = $this->delightfulSeqRepository->getSeqByMessageId($senderMessageId);
@@ -189,13 +189,13 @@ class DelightfulControlDomainService extends AbstractDomainService
     }
 
     /**
-     * handle mq middleminutehairwithdraw/editmessage. 这些messageis操asuserfrom己seq.
+     * handle mq middleminutehairwithdraw/editmessage. thisthesemessageis操asuserfrom己seq.
      * @throws Throwable
      */
     public function handlerMQUserSelfMessageChange(DelightfulSeqEntity $changeMessageStatusSeqEntity): void
     {
         $controlMessageType = $changeMessageStatusSeqEntity->getSeqType();
-        // passreturn执send者quotemessageid,找tosend者messageid. (notcan直接usereceive者 sender_message_id field,这isonenot好design,随o clockcancel)
+        // passreturn执send者quotemessageid,找tosend者messageid. (notcan直接usereceive者 sender_message_id field,thisisonenot好design,随o clockcancel)
         $needChangeSeqEntity = $this->delightfulSeqRepository->getSeqByMessageId($changeMessageStatusSeqEntity->getReferMessageId());
         if ($needChangeSeqEntity === null) {
             $this->logger->error(sprintf(
@@ -204,7 +204,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             ));
             return;
         }
-        # 这withinaddonedownminute布typelinelock,防止andhair.
+        # thiswithinaddonedownminute布typelinelock,防止andhair.
         $revokeMessageId = $needChangeSeqEntity->getSeqId();
         $spinLockKey = 'chat:seq:lock:' . $revokeMessageId;
         try {

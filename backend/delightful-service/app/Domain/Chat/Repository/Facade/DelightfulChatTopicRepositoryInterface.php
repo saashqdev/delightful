@@ -74,7 +74,7 @@ interface DelightfulChatTopicRepositoryInterface
      * Get topic messages by conversation ID, topic ID and max seq ID.
      * @param string $conversationId conversationID
      * @param string $topicId 话题ID
-     * @param int $maxSeqId most大序columnID（contain该ID）
+     * @param int $maxSeqId most大序columnID（containtheID）
      * @return DelightfulTopicMessageEntity[] 话题message实bodyarray
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array;

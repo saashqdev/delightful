@@ -22,7 +22,7 @@ class VertexResult
 
     /**
      * storagesectionpointnoteinformation.
-     * canuseatone些logrecord之category.
+     * canuseatonetheselogrecord之category.
      */
     protected mixed $remarkData = null;
 

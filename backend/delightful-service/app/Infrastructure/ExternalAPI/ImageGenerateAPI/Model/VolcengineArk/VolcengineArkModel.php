@@ -49,12 +49,12 @@ class VolcengineArkModel extends AbstractImageGenerate
 
     public function setAK(string $ak)
     {
-        // VolcengineArk notuseAK/SK，这withinfornullimplement
+        // VolcengineArk notuseAK/SK，thiswithinfornullimplement
     }
 
     public function setSK(string $sk)
     {
-        // VolcengineArk notuseAK/SK，这withinfornullimplement
+        // VolcengineArk notuseAK/SK，thiswithinfornullimplement
     }
 
     public function setApiKey(string $apiKey)

@@ -12,7 +12,7 @@ use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 interface SessionInterface
 {
     /**
-     * 麦吉to其他service端hairuploginvalidation。if想复use已haveuserbody系,needimplement该interface.
+     * 麦吉tootherservice端hairuploginvalidation。if想复use已haveuserbody系,needimplementtheinterface.
      *
      * implementprocess：front端tonon麦吉from建账numberbody系conductloginrequest,thenagainrequest麦吉loginvalidationinterface。
      *

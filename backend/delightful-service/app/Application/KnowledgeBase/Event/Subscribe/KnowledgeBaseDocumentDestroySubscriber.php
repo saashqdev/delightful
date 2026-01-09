@@ -59,7 +59,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
 
         $knowledgeBaseEntity = $knowledgeBaseDomainService->show($dataIsolation, $document->getKnowledgeBaseCode());
 
-        // 这withinneeddelete所haveslicesegment，indeletedocument
+        // thiswithinneeddelete所haveslicesegment，indeletedocument
         $query = new KnowledgeBaseFragmentQuery()->setDocumentCode($document->getCode());
         /** @var KnowledgeBaseFragmentEntity[][] $fragments */
         $fragments = [];

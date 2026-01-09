@@ -195,7 +195,7 @@ abstract class VolcengineApi
         $req->setIsSignUrl(false);
         $req->setMethod($this->getMethod());
         $req->setQueryList($this->getQuery());
-        // !!! 注意,这withinnot能addup JSON_UNESCAPED_UNICODE,addwill导致bodyhavemiddle文o clocksignaturenotcorrect!
+        // !!! 注意,thiswithinnot能addup JSON_UNESCAPED_UNICODE,addwill导致bodyhavemiddle文o clocksignaturenotcorrect!
         $bodyStream = Utils::streamFor(Json::encode($this->getBody(), JSON_THROW_ON_ERROR));
         $req->setPayloadHash(Utils::hash($bodyStream, 'sha256'));
         $result = $sign->signOnly($req, $credentials);
@@ -208,7 +208,7 @@ abstract class VolcengineApi
 
     protected function setHeaders(): void
     {
-        // 研究hair现,document要求inrequestheadmiddle传AccessKey/SecretKey/ServiceName/Region,其实cannot传. Authorizationheadmiddlehave传AccessKey
+        // 研究hair现,document要求inrequestheadmiddle传AccessKey/SecretKey/ServiceName/Region,its实cannot传. Authorizationheadmiddlehave传AccessKey
         $this->headers = [
             'Content-Type' => ['application/json;charset=utf-8'],
             'User-Agent' => ['volc-sdk-php/v1.0.87'],

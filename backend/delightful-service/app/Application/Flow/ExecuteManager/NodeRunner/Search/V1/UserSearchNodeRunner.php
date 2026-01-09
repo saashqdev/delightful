@@ -377,7 +377,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         if (empty($departmentPaths)) {
             return [];
         }
-        // get这些department所havedownleveldepartmentid
+        // getthisthesedepartment所havedownleveldepartmentid
         $departmentSubIds = $this->getAllChildrenByDepartmentIds($operator, $departmentPaths);
         $departmentIds = array_merge(array_keys($departmentPaths), $departmentSubIds);
         $userDB = DepartmentUserModel::query()

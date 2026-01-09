@@ -137,9 +137,9 @@ class DelightfulConversationDomainService extends AbstractDomainService
             // givefrom己messagestreamgenerate序column.
             $seqEntity = $this->generateSenderSequenceByControlMessage($messageDTO, $conversationEntity->getId());
             $seqEntity->setConversationId($conversationEntity->getId());
-            // notifyuser其他设备,这withineven if投递failalsonot影响,所by放协程within,transactionoutside.
+            // notifyuserother设备,thiswithineven if投递failalsonot影响,所by放协程within,transactionoutside.
             co(function () use ($seqEntity) {
-                // asyncpushmessagegivefrom己其他设备
+                // asyncpushmessagegivefrom己other设备
                 $this->pushControlSequence($seqEntity);
             });
             // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
@@ -292,11 +292,11 @@ class DelightfulConversationDomainService extends AbstractDomainService
     {
         $users = $this->delightfulUserRepository->getUserByIds($userIds);
         $users = array_column($users, null, 'user_id');
-        // 判断这些userwhether已经存inconversationwindow,只iswindowstatusbemarkfordelete
+        // 判断thistheseuserwhether已经存inconversationwindow,只iswindowstatusbemarkfordelete
         $conversations = $this->delightfulConversationRepository->batchGetConversations($userIds, $groupEntity->getId(), ConversationType::Group);
         /** @var DelightfulConversationEntity[] $conversations */
         $conversations = array_column($conversations, null, 'user_id');
-        // give这些群memberbatchquantitygeneratecreateconversationwindowmessage
+        // givethisthese群memberbatchquantitygeneratecreateconversationwindowmessage
         $conversationsCreateDTO = [];
         $conversationsUpdateIds = [];
         foreach ($users as $user) {

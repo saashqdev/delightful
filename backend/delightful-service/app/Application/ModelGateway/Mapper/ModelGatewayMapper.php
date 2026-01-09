@@ -80,7 +80,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * inside部use chat o clock，one定isuse该method.
+     * inside部use chat o clock，one定isusethemethod.
      * willfrom动替代for本groundproxymodel.
      */
     public function getChatModelProxy(BaseDataIsolation $dataIsolation, string $model, bool $useOfficialAccessToken = false): DelightfulAILocalModel
@@ -97,7 +97,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * inside部use embedding o clock，one定isuse该method.
+     * inside部use embedding o clock，one定isusethemethod.
      * willfrom动替代for本groundproxymodel.
      */
     public function getEmbeddingModelProxy(BaseDataIsolation $dataIsolation, string $model): DelightfulAILocalModel
@@ -116,7 +116,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 该methodgettoone定istrue实callmodel.
+     * themethodgettoone定istrue实callmodel.
      * 仅 ModelGateway 领域use.
      * @param string $model expectedis管理back台 model_id，passdegree阶segmentaccept传入 model_version
      */
@@ -131,7 +131,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 该methodgettoone定istrue实callmodel.
+     * themethodgettoone定istrue实callmodel.
      * 仅 ModelGateway 领域use.
      * @param string $model modelname expectedis管理back台 model_id，passdegree阶segmentaccept model_version
      */
@@ -484,7 +484,7 @@ class ModelGatewayMapper extends ModelMapper
             return null;
         }
 
-        // checkcurrentset餐whetherhave这modelusepermission - 目frontonly LLM modelhave这限制
+        // checkcurrentset餐whetherhavethismodelusepermission - 目frontonly LLM modelhavethislimit
         if ($providerModelEntity->getModelType()->isLLM()) {
             if (! $dataIsolation->isOfficialOrganization() && ! $dataIsolation->getSubscriptionManager()->isValidModelAvailable($providerModelEntity->getModelId(), $modelType)) {
                 $this->logger->info('modelnotincanuse名single', ['model' => $providerModelEntity->getModelId(), 'model_type' => $modelType?->value]);

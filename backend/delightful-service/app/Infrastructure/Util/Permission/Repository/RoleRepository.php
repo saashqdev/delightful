@@ -148,7 +148,7 @@ class RoleRepository implements RoleRepositoryInterface
         $toAdd = array_diff($userIds, $existingUserIds);
         $toRemove = array_diff($existingUserIds, $userIds);
 
-        // 移exceptnotagain属at该roleuser
+        // 移exceptnotagain属attheroleuser
         if (! empty($toRemove)) {
             $this->roleUserQuery($organizationCode)
                 ->where('role_id', $roleId)

@@ -237,7 +237,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         // ifiseditmessage，checkbeeditmessagelegalproperty(from己hairmessage，andincurrentconversationmiddle)
         $this->checkEditMessageLegality($senderSeqDTO, $dataIsolation);
         return;
-        // todo ifmessagemiddlehavefile:1.判断file所have者whetheriscurrentuser;2.判断userwhetherreceivepass这些file。
+        // todo ifmessagemiddlehavefile:1.判断file所have者whetheriscurrentuser;2.判断userwhetherreceivepassthisthesefile。
         /* @phpstan-ignore-next-line */
         $messageContent = $senderMessageDTO->getContent();
         if ($messageContent instanceof ChatFileInterface) {
@@ -496,7 +496,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                 case ConversationType::Group:
                     $seqListCreateDTO = $this->delightfulChatDomainService->generateGroupReceiveSequence($senderSeqEntity, $senderMessageEntity, $delightfulSeqStatus);
                     // todo 群withinsurface话题messagealsowrite topic_messages 表middle
-                    // will这些 seq_id mergeforoneitem mq messageconductpush/消费
+                    // willthisthese seq_id mergeforoneitem mq messageconductpush/消费
                     $seqIds = array_keys($seqListCreateDTO);
                     $messagePriority = $this->delightfulChatDomainService->getChatMessagePriority(ConversationType::Group, count($seqIds));
                     ! empty($seqIds) && $this->delightfulChatDomainService->batchPushSeq($seqIds, $messagePriority);
@@ -602,14 +602,14 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         whenconversation涉and多differentthemeo clock：
         1. 优先close注conversationmiddlemostbackdiscussiontheme（mostnew话题）
         2. bymost近conversationcontentformain参考依据
-        3. ifmostbackthemediscussionmorefor充minute，thenby此asfortitle核core
+        3. ifmostbackthemediscussionmorefor充minute，thenbythisasfortitle核core
         4. ignore早期已经end话题，unless它们andmost新话题密切相close
 
         ## 严格要求
-        1. titlelength：not超pass 15 character。Englishone字母算onecharacter，汉字one字算onecharacter，其他语type采useanalogouscountsolution。
+        1. titlelength：not超pass 15 character。Englishone字母算onecharacter，汉字one字算onecharacter，other语type采useanalogouscountsolution。
         2. content相close：titlemust直接反映conversation核coretheme
         3. languagestyle：use陈述property语sentence，避免疑问sentence
-        4. outputformat：只outputtitlecontent，not要add任何解释、标pointor其他text
+        4. outputformat：只outputtitlecontent，not要addany解释、标pointorothertext
         5. forbidlinefor：not要return答conversationmiddleissue，not要conduct额outside解释
 
         ## conversationcontent
@@ -638,7 +638,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
      * use大modeltotextconduct总结（usecustomizehint词）.
      *
      * @param DelightfulUserAuthorization $authorization userauthorization
-     * @param string $customPrompt completecustomizehint词（not做任何替换handle）
+     * @param string $customPrompt completecustomizehint词（not做any替换handle）
      * @return string generatetitle
      */
     public function summarizeTextWithCustomPrompt(DelightfulUserAuthorization $authorization, string $customPrompt): string
@@ -731,12 +731,12 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             $messageVersionEntity = $this->delightfulChatDomainService->editMessage($senderMessageDTO);
             $editMessageOptions->setMessageVersionId($messageVersionEntity->getVersionId());
             $senderSeqDTO->setExtra($extra->setEditMessageOptions($editMessageOptions));
-            // again查onetime $messageEntity ，避免重复create
+            // again查onetime $messageEntity ，避免duplicatecreate
             $messageEntity = $this->delightfulChatDomainService->getMessageByDelightfulMessageId($senderMessageDTO->getDelightfulMessageId());
             $messageEntity && $messageEntity->setLanguage($language);
         }
 
-        // ifquotemessagebeeditpass，那么modify referMessageId fororiginalmessage id
+        // ifquotemessagebeeditpass，that么modify referMessageId fororiginalmessage id
         $this->checkAndUpdateReferMessageId($senderSeqDTO);
 
         $senderMessageDTO->setLanguage($language);
@@ -808,7 +808,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         }
         // use mq pushmessagegive收item方
         isset($receiveSeqEntity) && $this->pushReceiveChatSequence($messageEntity, $receiveSeqEntity);
-        // asyncpushmessagegivefrom己其他设备
+        // asyncpushmessagegivefrom己other设备
         if ($messageEntity->getSenderType() !== ConversationType::Ai) {
             co(function () use ($senderChatSeqCreatedEvent) {
                 $this->delightfulChatDomainService->pushChatSequence($senderChatSeqCreatedEvent);
@@ -816,7 +816,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         }
 
         // ifiseditmessage，andisusereditassistanthaircomeapprovalformo clock，returnnullarray。
-        // 因for此o clockcreate seq_id isassistant，notisuser，returnwill造become困扰。
+        // 因forthiso clockcreate seq_id isassistant，notisuser，returnwill造become困扰。
         // 经by mq minutehairmessageback，userwillasync收to属at他from己messagepush。
         if (isset($editMessageOptions) && ! empty($editMessageOptions->getDelightfulMessageId())
             && $messageEntity->getSenderId() !== $senderMessageDTO->getSenderId()) {
@@ -828,7 +828,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * ifquotemessagebeeditpass，那么modify referMessageId fororiginalmessage id.
+     * ifquotemessagebeeditpass，that么modify referMessageId fororiginalmessage id.
      */
     public function checkAndUpdateReferMessageId(DelightfulSeqEntity $senderSeqDTO): void
     {
@@ -873,7 +873,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * chatwindow打字o clock补alluserinput。for适配group chat，这within role 其实isusernickname，whilenotisroletype。
+     * chatwindow打字o clock补alluserinput。for适配group chat，thiswithin role its实isusernickname，whilenotisroletype。
      */
     public function getConversationChatCompletionsHistory(
         DelightfulUserAuthorization $userAuthorization,

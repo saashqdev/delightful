@@ -252,7 +252,7 @@ class ProviderModelSyncAppService
                     'model_id' => $modelId,
                     'error' => $e->getMessage(),
                 ]);
-                // continueprocess其他model
+                // continueprocessothermodel
             }
         }
 
@@ -325,7 +325,7 @@ class ProviderModelSyncAppService
         ProviderConfigEntity $providerConfigEntity,
         string $language
     ): SaveProviderModelDTO {
-        // ifisonelink，那么needto url conduct限制
+        // ifisonelink，that么needto url conductlimit
         $iconUrl = $modelData['info']['attributes']['icon'] ?? '';
         try {
             $iconUrl = str_replace(' ', '%20', $iconUrl);

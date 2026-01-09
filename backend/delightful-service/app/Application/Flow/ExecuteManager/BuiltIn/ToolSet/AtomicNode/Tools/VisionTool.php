@@ -240,13 +240,13 @@ JSON, true)));
    - 视觉特征：color、composition、光line、qualityetc
    - 语义info：activity、情绪、close系、background故事etc
    - text识别：如havetext，accurateextractand理解含义
-   - 技术info：如havegraphtable/data，analyze其含义
+   - 技术info：如havegraphtable/data，analyzeits含义
    
 4. analyzeformat要求：
    - toat重要analyzeresult，use结构化JSONformat呈现，如：{"category别":"xx", "主body":"xx", "特征":["xx","xx"]}
    - toatnotcertaincontent，explicittable明speculatedpropertyquality，for example："maybeis..."
-   - 如imagequalitymore低，fingerout限制因素and尽力analyze
-   - toat多graphanalyze，minute别markimage序numberconductparse，and总结其associateproperty
+   - 如imagequalitymore低，fingeroutlimit因素and尽力analyze
+   - toat多graphanalyze，minute别markimage序numberconductparse，and总结itsassociateproperty
    
 5. 注意事item：
    - 避免to敏感content做主观评判

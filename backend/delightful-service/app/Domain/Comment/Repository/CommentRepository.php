@@ -157,7 +157,7 @@ class CommentRepository
     }
 
     /**
-     * batchquantitydeletefinger定commentand其所have子comment。
+     * batchquantitydeletefinger定commentandits所have子comment。
      *
      * @param RequestContext $requestContext requestupdown文
      * @param array $commentIds 要deletecommentIDarray
@@ -167,7 +167,7 @@ class CommentRepository
         RequestContext $requestContext,
         array $commentIds
     ): array {
-        // get这itemcommentdown所have子comment
+        // getthisitemcommentdown所have子comment
         $descendantIds = $this->treeIndexRepository->getDescendantIdsByAncestorIds(
             $requestContext,
             CommentTreeIndexModel::query(),
@@ -176,7 +176,7 @@ class CommentRepository
 
         $deletedCommentIds = array_unique([...$commentIds, ...$descendantIds]);
 
-        // delete这itemcommentbyand所have子comment
+        // deletethisitemcommentbyand所have子comment
         CommentModel::query()->whereIn('id', $deletedCommentIds)
             ->where('organization_code', $requestContext->getOrganizationCode())
             ->delete();

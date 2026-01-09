@@ -23,7 +23,7 @@ class PermissionApiTest extends AbstractHttpTest
 
         // ifreturnauthenticationerror，skiptest（仅verify路bycanuse）
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003])) {
-            $this->markTestSkipped('interfaceauthenticationfailed，maybeneed其他authenticationconfiguration - 路byvalidationpass');
+            $this->markTestSkipped('interfaceauthenticationfailed，maybeneedotherauthenticationconfiguration - 路byvalidationpass');
             return;
         }
 

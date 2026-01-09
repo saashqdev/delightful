@@ -172,12 +172,12 @@ class AsrApi
         // ifhave笔记fileconfigurationandfilesize > 0，addtoreturnmiddle（模拟true实沙箱笔记filecontentcheck）
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
             // userequestmiddle提供 target_path，whilenotis硬encodingfile名
-            // 这样cancorrectsupport国际化file名
+            // this样cancorrectsupport国际化file名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 
             // 模拟true实沙箱linefor：onlywhen笔记filehavecontento clock才returndetailedinfo
-            // 这withinsimplifyprocess，defaultfalse设havecontent（true实沙箱willcheckfilecontentwhetherforempty）
+            // thiswithinsimplifyprocess，defaultfalse设havecontent（true实沙箱willcheckfilecontentwhetherforempty）
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
                 'path' => $noteFilePath, // userequestmiddle target_path

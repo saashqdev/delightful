@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractObject;
 class QuestionItem extends AbstractObject
 {
     /**
-     * @var null|string bysomeissue引申outissue。if parentQuestionId fornull(0)，thenindicate该associateissueisbyuserinputissue产生。
+     * @var null|string bysomeissue引申outissue。if parentQuestionId fornull(0)，thenindicatetheassociateissueisbyuserinputissue产生。
      */
     protected ?string $parentQuestionId = null;
 

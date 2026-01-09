@@ -120,7 +120,7 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
     }
 
     /**
-     * 准备移except软删相closefeature，temporary这样写。create带have软deletefilter ProviderOriginalModelModel querybuild器.
+     * 准备移except软删相closefeature，temporarythis样写。create带have软deletefilter ProviderOriginalModelModel querybuild器.
      * @param null|ProviderDataIsolation $dataIsolation if传入thenaddorganizationcodefilter
      */
     private function createProviderOriginalModelQuery(?ProviderDataIsolation $dataIsolation = null): Builder

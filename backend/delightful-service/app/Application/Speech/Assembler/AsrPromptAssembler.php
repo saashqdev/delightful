@@ -42,7 +42,7 @@ class AsrPromptAssembler
 你isone专业录音contenttitlegenerate助hand。
 
 ## backgroundinstruction
-usersubmitonesegment录音content，录音content经passvoice识别转fortext，usermaybealsowill提供hand写笔记asfor补充instruction。现inneed你according to这些contentgenerateone简洁accuratetitle。
+usersubmitonesegment录音content，录音content经passvoice识别转fortext，usermaybealsowill提供hand写笔记asfor补充instruction。现inneed你according tothisthesecontentgenerateone简洁accuratetitle。
 
 ## contentcome源instruction
 - <笔记content>：userhand写笔记content，isto录音重pointrecordand总结，usuallycontainclose键info
@@ -57,16 +57,16 @@ usersubmitonesegment录音content，录音content经passvoice识别转fortext，
 4. **keywordextract**：from笔记andvoice识别contentmiddleextractmost核corekeyword
 
 ### format要求
-1. **length限制**：not超pass 20 character（汉字按 1 charactercalculate）
+1. **lengthlimit**：not超pass 20 character（汉字按 1 charactercalculate）
 2. **languagestyle**：use陈述property语sentence，避免疑问sentence
 3. **简洁explicit**：直接概括核coretheme，not要addmodification词
-4. **纯textoutput**：只outputtitlecontent，not要add任何标point符number、引numberor其他modification
+4. **纯textoutput**：只outputtitlecontent，not要addany标point符number、引numberorothermodification
 
 ### forbidlinefor
 - not要return答contentmiddleissue
 - not要conduct额outside解释
 - not要add"录音"、"笔记"etcfront缀词
-- not要outputtitlebyoutside任何content
+- not要outputtitlebyoutsideanycontent
 
 ## 录音content
 {textContent}
@@ -96,7 +96,7 @@ PROMPT;
 你isone专业录音contenttitlegenerate助hand。
 
 ## backgroundinstruction
-useruploadoneaudiofiletosystemmiddle，andinchat框middlesend总结request。现inneed你according touserrequestmessage（其middlecontainfile名），for这time录音总结generateone简洁accuratetitle。
+useruploadoneaudiofiletosystemmiddle，andinchat框middlesend总结request。现inneed你according touserrequestmessage（itsmiddlecontainfile名），forthistime录音总结generateone简洁accuratetitle。
 
 ## userinchat框request
 usersendoriginalmessage如down：
@@ -114,14 +114,14 @@ usersendoriginalmessage如down：
 3. **extractkeyword**：fromfile名middleextractmost核corekeywordandtheme
 
 ### format要求
-1. **length限制**：not超pass 20 character（汉字按 1 charactercalculate）
+1. **lengthlimit**：not超pass 20 character（汉字按 1 charactercalculate）
 2. **languagestyle**：use陈述property语sentence，避免疑问sentence
 3. **简洁explicit**：直接概括核coretheme，not要addmodification词
-4. **纯textoutput**：只outputtitlecontent，not要add任何标point符number、引numberor其他modification
+4. **纯textoutput**：只outputtitlecontent，not要addany标point符number、引numberorothermodification
 
 ### forbidlinefor
 - not要保留fileextension名（.mp3、.wav、.webm etc）
-- not要outputtitlebyoutside任何content
+- not要outputtitlebyoutsideanycontent
 - not要add引number、书名numberetc标point符number
 
 ## outputlanguage

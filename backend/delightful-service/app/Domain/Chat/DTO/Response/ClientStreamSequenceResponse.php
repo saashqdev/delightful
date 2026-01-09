@@ -22,7 +22,7 @@ class ClientStreamSequenceResponse extends AbstractEntity
     // 大model总结
     protected ?string $content;
 
-    // have些message大modelresponsefieldnotis content，这within特殊process
+    // havethesemessage大modelresponsefieldnotis content，thiswithin特殊process
     protected ?string $llmResponse;
 
     // 大model推理content

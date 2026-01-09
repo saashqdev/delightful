@@ -30,7 +30,7 @@ class CreateDelightfulChatMessageTable extends Migration
             $table->tinyInteger('receive_type')->comment('receive方type,1:user(aialsobe认forisuser)；2：application;3:document;4:多维table格');
             $table->string('receive_organization_code', 64)->comment('receive方organizationencoding,maybeforemptystring')->default('');
             // message相closeid
-            $table->string('app_message_id', 64)->comment('customer端generatemessageid,useat防customer端重复');
+            $table->string('app_message_id', 64)->comment('customer端generatemessageid,useat防customer端duplicate');
             $table->string('delightful_message_id', 64)->comment('service端generate唯onemessageid,useatmessagewithdraw/edit');
             # ## message结构
             // message优先level,byatsystemstableproperty管理

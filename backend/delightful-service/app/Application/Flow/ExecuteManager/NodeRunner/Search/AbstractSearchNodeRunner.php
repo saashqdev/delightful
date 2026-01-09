@@ -22,15 +22,15 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
         $filterType = $paramsConfig->getFilterType();
         foreach ($paramsConfig->getFilters() as $filter) {
             $rightValue = $filter->getRightValue()->getValue()->getResult($executionData->getExpressionFieldData());
-            // null、''、0、[]、false  直接skip吧，谁not事搜这些啊。right侧not填valuenotconductsearch
+            // null、''、0、[]、false  直接skip吧，谁not事搜thisthese啊。right侧not填valuenotconductsearch
             if (empty($rightValue)) {
                 continue;
             }
 
-            // definition本time range id，ifis null 代tablealso未conduct限制
+            // definition本time range id，ifis null 代tablealso未conductlimit
             $rangeIds = null;
             if ($filterType->isAll()) {
-                // ifis所haveitemitemfull足，那么已经存in id setthenis本timerange
+                // ifis所haveitemitemfull足，that么已经存in id setthenis本timerange
                 $rangeIds = $allIds;
             }
 
@@ -51,10 +51,10 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 continue;
             }
             if ($filterType->isAny()) {
-                // ifis任意itemitemfull足，那么will本time id and已have id conductmerge
+                // ifis任意itemitemfull足，that么will本time id and已have id conductmerge
                 $allIds = array_merge($allIds ?? [], $currentIds);
             } else {
-                // ifis所haveitemitemfull足，那么will本time id and已have id conduct交collection
+                // ifis所haveitemitemfull足，that么will本time id and已have id conduct交collection
                 $allIds = $allIds === null ? $currentIds : array_intersect($allIds, $currentIds);
             }
         }

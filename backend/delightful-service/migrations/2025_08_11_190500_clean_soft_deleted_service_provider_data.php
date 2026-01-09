@@ -404,7 +404,7 @@ return new class extends Migration {
      */
     private function cleanModelsWithInvalidConfig(string $organizationCode, string $officialOrganizationCode): int
     {
-        // 1. batchquantityquery该organizationdown所havemodel service_provider_config_id
+        // 1. batchquantityquerytheorganizationdown所havemodel service_provider_config_id
         $modelConfigs = Db::table('service_provider_models')
             ->where('organization_code', $organizationCode)
             ->where('organization_code', '!=', $officialOrganizationCode) // 防护
@@ -451,7 +451,7 @@ return new class extends Migration {
      */
     private function cleanModelsWithInvalidConfigData(string $organizationCode, string $officialOrganizationCode): int
     {
-        // 1. query该organizationdown所haveconfiguration
+        // 1. querytheorganizationdown所haveconfiguration
         $configs = Db::table('service_provider_configs')
             ->where('organization_code', $organizationCode)
             ->where('organization_code', '!=', $officialOrganizationCode) // 防护
@@ -507,7 +507,7 @@ return new class extends Migration {
 
         // checkarraymiddle所havekeyvaluewhetherallfornull
         foreach ($decodedConfig as $key => $value) {
-            // ifhave任何onevaluenotfornull，thenconfigurationvalid
+            // ifhaveanyonevaluenotfornull，thenconfigurationvalid
             if (! empty($value)) {
                 return false;
             }

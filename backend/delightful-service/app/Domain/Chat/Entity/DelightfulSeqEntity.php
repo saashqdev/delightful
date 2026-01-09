@@ -29,7 +29,7 @@ final class DelightfulSeqEntity extends AbstractEntity
 
     protected ConversationType $objectType;
 
-    // object_type for0or者1o clock,此处代table delightful_id
+    // object_type for0or者1o clock,this处代table delightful_id
     protected string $objectId = '';
 
     protected string $seqId = '';

@@ -107,7 +107,7 @@ class DelightfulFlowEntity extends AbstractEntity
     private int $userOperation = 0;
 
     /**
-     * processcallbackfunction，ifhave该value，那么will直接execute该choose，whilenotispassNodeRunnercomeexecute.
+     * processcallbackfunction，ifhavethevalue，that么will直接executethechoose，whilenotispassNodeRunnercomeexecute.
      */
     private ?Closure $callback = null;
 
@@ -128,7 +128,7 @@ class DelightfulFlowEntity extends AbstractEntity
         // 试运lineis要按照starto clockcalculate
         $this->enabled = true;
 
-        // process试运line其实只need nodes
+        // process试运lineits实只need nodes
         if (empty($this->nodes)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow.fields.nodes']);
         }
@@ -238,7 +238,7 @@ class DelightfulFlowEntity extends AbstractEntity
             }
 
             if ($node->isStart() && ! $node->getParentId()) {
-                // if已经haveone，那么iserrorprocess，out现多startsectionpoint
+                // if已经haveone，that么iserrorprocess，out现多startsectionpoint
                 if ($this->startNode) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.only_one');
                 }

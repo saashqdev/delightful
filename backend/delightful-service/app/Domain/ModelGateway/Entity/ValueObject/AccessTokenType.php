@@ -19,7 +19,7 @@ enum AccessTokenType: string
     case User = 'user';
 
     /**
-     * 企业版. 其implementinalsonothave.
+     * 企业版. itsimplementinalsonothave.
      */
     case Organization = 'organization';
 

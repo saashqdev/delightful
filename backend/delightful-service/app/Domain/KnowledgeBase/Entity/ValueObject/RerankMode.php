@@ -21,7 +21,7 @@ class RerankMode
      *
      * use专门重sortmodel（如 BAAI/bge-reranker-large）toretrieveresultconduct重sort。
      * 重sortmodelwillaccording toqueryanddocument相closepropertygiveoutmoreaccuratesort。
-     * 该模typepassconfigurationparameter `reranking_mode` fieldset，
+     * the模typepassconfigurationparameter `reranking_mode` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。
      */
     public const RERANKING_MODEL = 'reranking_model';
@@ -31,7 +31,7 @@ class RerankMode
      *
      * usedifferentretrievemethodminute数add权calculatefinalminute数，toretrieveresultconduct重sort。
      * for example，cansettoquantityretrieveresult权重for 0.7，keywordretrieveresult权重for 0.3。
-     * 该模typepassconfigurationparameter `reranking_mode` fieldset，
+     * the模typepassconfigurationparameter `reranking_mode` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。
      */
     public const WEIGHTED_SCORE = 'weighted_score';

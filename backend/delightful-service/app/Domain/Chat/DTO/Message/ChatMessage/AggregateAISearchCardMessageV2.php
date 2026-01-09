@@ -50,7 +50,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected array $searchWebPages;
 
     /**
-     * byat多time子issuesearcho clock，willout现多重复searchresult，所byneed ai go重back，again丢give大model总结。
+     * byat多time子issuesearcho clock，willout现多duplicatesearchresult，所byneed ai go重back，again丢give大model总结。
      *
      * @var SearchDetailItem[]
      */
@@ -78,7 +78,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
 
     /**
      * get本timeneedstreampushfield。
-     * supportonetimepush多fieldstreammessage，if json layerlevelmore深，use field_1.*.field_2 asfor key。 其middle * isfingerarraydown标。
+     * supportonetimepush多fieldstreammessage，if json layerlevelmore深，use field_1.*.field_2 asfor key。 itsmiddle * isfingerarraydown标。
      * service端willcache所havestreamdata，andinstreamendo clockonetimepropertypush，bydecrease丢package概rate，提升messagecompleteproperty。
      * for example：
      * [
@@ -113,7 +113,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
         //            {
         //                "parent_question_id": "0",
         //                "question_id": "1",
-        //                "question": "小米collection团旗downhave哪些品牌"
+        //                "question": "小米collection团旗downhave哪these品牌"
         //            }
         //        ],
         //        "question_1": [

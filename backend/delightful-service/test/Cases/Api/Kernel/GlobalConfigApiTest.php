@@ -106,7 +106,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertIsBool($data['is_maintenance']);
         $this->assertIsString($data['maintenance_description']);
 
-        // ifhave平台set，verify其结构
+        // ifhave平台set，verifyits结构
         if (isset($data['logo'])) {
             $this->assertIsArray($data['logo']);
         }

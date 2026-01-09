@@ -210,7 +210,7 @@ class CreateGroupTool extends AbstractBuiltInTool
             "type": "string",
             "key": "opening_speech",
             "title": "open场白",
-            "description": "已current助理身sharesendonetimegroup chatopen场白。defaultnot传该value，unlessfinger定needsendopen场白。",
+            "description": "已current助理身sharesendonetimegroup chatopen场白。defaultnot传thevalue，unlessfinger定needsendopen场白。",
             "required": null,
             "value": null,
             "encryption": false,

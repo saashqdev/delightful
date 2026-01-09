@@ -272,7 +272,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             // from动for收itempersoncreateconversationwindow,butnotuse触hair收itempersonwindowopenevent
             $receiveConversationEntity = $this->delightfulConversationRepository->addConversation($receiveConversationDTO);
         }
-        // if收item方已经hidden这conversationwindow，改fornormal
+        // if收item方已经hiddenthisconversationwindow，改fornormal
         if ($receiveConversationEntity->getStatus() !== ConversationStatus::Normal) {
             $this->delightfulConversationRepository->updateConversationById(
                 $receiveConversationEntity->getId(),
@@ -386,7 +386,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             return $this->delightfulSeqRepository->getConversationChatMessages($messagesQueryDTO);
         }
         if ($messagesQueryDTO->getTopicId() === '') {
-            // todo get本conversationwindowmiddle,notcontain任何话题message.
+            // todo get本conversationwindowmiddle,notcontainany话题message.
             return $this->delightfulSeqRepository->getConversationChatMessages($messagesQueryDTO);
         }
         return $this->delightfulChatTopicRepository->getTopicMessages($messagesQueryDTO);
@@ -405,7 +405,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         if ($messagesQueryDTO->getLimit() > 1000) {
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR, 'chat.common.param_error', ['param' => 'limit']);
         }
-        // todo get本conversationwindowmiddle,notcontain任何话题message.
+        // todo get本conversationwindowmiddle,notcontainany话题message.
         return $this->delightfulSeqRepository->getConversationsChatMessages($messagesQueryDTO, $messagesQueryDTO->getConversationIds());
     }
 
@@ -497,9 +497,9 @@ class DelightfulChatDomainService extends AbstractDomainService
             $groupUserConversations = array_column($groupUserConversations, null, 'user_id');
             // 找tobehiddenconversation，more改status
             $this->handlerGroupReceiverConversation($groupUserConversations);
-            // 这itemmessagewhetherhavequote其他message
+            // thisitemmessagewhetherhavequoteothermessage
             $minSeqListByReferMessageId = $this->getMinSeqListByReferMessageId($senderSeqEntity);
-            // give这些群memberbatchquantitygeneratechatmessage seq. toatten thousandperson群,shouldeachbatchonethousanditemseq.
+            // givethisthese群memberbatchquantitygeneratechatmessage seq. toatten thousandperson群,shouldeachbatchonethousanditemseq.
             $seqListCreateDTO = [];
             foreach ($groupUsers as $groupUser) {
                 $user = $users[$groupUser['user_id']] ?? null;
@@ -693,7 +693,7 @@ class DelightfulChatDomainService extends AbstractDomainService
      * 3.use本机inside存conductmessagecache，提升大 json 读写performance。
      * @todo if要tooutside提供stream api，need改for redis cache，bysupport断line重连。
      *
-     *  supportonetimepush多fieldstreammessage，if json layerlevelmore深，use field_1.*.field_2 asfor key。 其middle * isfingerarraydown标。
+     *  supportonetimepush多fieldstreammessage，if json layerlevelmore深，use field_1.*.field_2 asfor key。 itsmiddle * isfingerarraydown标。
      *  service端willcache所havestreamdata，andinstreamendo clockonetimepropertypush，bydecrease丢package概rate，提升messagecompleteproperty。
      *  for example：
      *  [
@@ -782,7 +782,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             }
             Db::beginTransaction();
             try {
-                // if这ismessagefirstversion，needbyfrontmessage copy oneshareto message_version 表middle，方便审计
+                // ifthisismessagefirstversion，needbyfrontmessage copy oneshareto message_version 表middle，方便审计
                 if (empty($oldMessageEntity->getCurrentVersionId())) {
                     $messageVersionEntity = (new DelightfulMessageVersionEntity())
                         ->setDelightfulMessageId($oldMessageEntity->getDelightfulMessageId())
@@ -803,7 +803,7 @@ class DelightfulChatDomainService extends AbstractDomainService
                         $seqExtra->setEditMessageOptions(
                             (new EditMessageOptions())->setMessageVersionId(null)->setDelightfulMessageId($messageEntity->getDelightfulMessageId())
                         );
-                        // 这within要update收hairdouble方 seq eachonetime，and $seqExtra valuemaybedifferent，loopmiddleupdate 2 timedatabaseshouldis能accept。
+                        // thiswithin要update收hairdouble方 seq eachonetime，and $seqExtra valuemaybedifferent，loopmiddleupdate 2 timedatabaseshouldis能accept。
                         $this->delightfulSeqRepository->updateSeqExtra((string) $seqData['id'], $seqExtra);
                     }
                 }
@@ -871,7 +871,7 @@ class DelightfulChatDomainService extends AbstractDomainService
      */
     public function createDelightfulMessageByAppClient(DelightfulMessageEntity $messageDTO, DelightfulConversationEntity $senderConversationEntity): DelightfulMessageEntity
     {
-        // byatdatabasedesignhaveissue，conversation表nothaverecord user  type，therefore这withinneedqueryone遍hairitem方userinfo
+        // byatdatabasedesignhaveissue，conversation表nothaverecord user  type，thereforethiswithinneedqueryone遍hairitem方userinfo
         // todo conversation表shouldrecord user  type
         $senderUserEntity = $this->delightfulUserRepository->getUserById($senderConversationEntity->getUserId());
         if ($senderUserEntity === null) {
@@ -904,7 +904,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * createonestream seq and立即push，byatfront端渲染占位。注意，streammessagenot能usecomeupdate已经push完毕message，避免篡改originalcontent！
+     * createonestream seq andimmediatelypush，byatfront端渲染占位。注意，streammessagenot能usecomeupdate已经push完毕message，避免篡改originalcontent！
      * ifneedto已经hairoutmessageconductupdate，needuse editMessage method，editmessagewillrecordcompletemessagehistoryversion。
      */
     public function createAndSendStreamStartSequence(CreateStreamSeqDTO $createStreamSeqDTO, MessageInterface $messageStruct, DelightfulConversationEntity $senderConversationEntity): DelightfulSeqEntity
@@ -915,7 +915,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             if (! $messageStruct instanceof StreamMessageInterface || $messageStruct->getStreamOptions() === null) {
                 ExceptionBuilder::throw(ChatErrorCode::STREAM_MESSAGE_NOT_FOUND);
             }
-            // byatdatabasedesignhaveissue，conversation表nothaverecord user  type，therefore这withinneedqueryone遍hairitem方userinfo
+            // byatdatabasedesignhaveissue，conversation表nothaverecord user  type，thereforethiswithinneedqueryone遍hairitem方userinfo
             // todo conversation表shouldrecord user  type
             $senderUserEntity = $this->delightfulUserRepository->getUserById($senderConversationEntity->getUserId());
             if ($senderUserEntity === null) {
@@ -955,7 +955,7 @@ class DelightfulChatDomainService extends AbstractDomainService
                 ->setAppMessageId($createStreamSeqDTO->getAppMessageId())
                 ->setExtra((new SeqExtra())->setTopicId($createStreamSeqDTO->getTopicId()));
             $senderSeqEntity = $this->generateSenderSequenceByChatMessage($senderSeqDTO, $messageEntity, $senderConversationEntity);
-            // 立即give收item方generate seq
+            // immediatelygive收item方generate seq
             $receiveSeqEntity = $this->generateReceiveSequenceByChatMessage($senderSeqEntity, $messageEntity);
             // hairitem方话题message
             $this->createTopicMessage($senderSeqEntity);
@@ -1056,10 +1056,10 @@ class DelightfulChatDomainService extends AbstractDomainService
             Arr::set($memoryCacheContent, $key, $value);
         }
 
-        // 移exceptcontentfield，避免backsurface重复handle
+        // 移exceptcontentfield，避免backsurfaceduplicatehandle
         unset($jsonStreamCachedData['content']);
 
-        // 直接update其他所havenonnullfield
+        // 直接updateother所havenonnullfield
         foreach ($jsonStreamCachedData as $key => $value) {
             if ($value !== null) {
                 $memoryCache[$key] = $value;
@@ -1099,7 +1099,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     private function handlerGroupReceiverConversation(array $groupUserConversations): void
     {
         $needUpdateIds = [];
-        // ifconversationwindowbehidden，那么againtimeopen
+        // ifconversationwindowbehidden，that么againtimeopen
         foreach ($groupUserConversations as $groupUserConversation) {
             if ($groupUserConversation->getStatus() !== ConversationStatus::Normal) {
                 $needUpdateIds[] = $groupUserConversation->getId();

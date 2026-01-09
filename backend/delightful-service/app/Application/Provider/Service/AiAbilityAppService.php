@@ -147,14 +147,14 @@ class AiAbilityAppService extends AbstractKernelAppService
                 // usedatabasemiddleoriginalvalue
                 $result[$key] = $dbConfig[$key] ?? $value;
             }
-            // ifisarray，递归process
+            // ifisarray，recursionprocess
             elseif (is_array($value)) {
                 $dbValue = $dbConfig[$key] ?? [];
                 $result[$key] = is_array($dbValue)
                     ? $this->mergeConfigPreservingApiKeys($dbValue, $value)
                     : $value;
             }
-            // 其他情况直接usefront端value
+            // other情况直接usefront端value
             else {
                 $result[$key] = $value;
             }

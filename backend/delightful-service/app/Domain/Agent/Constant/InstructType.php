@@ -36,7 +36,7 @@ enum InstructType: int
     }
 
     /**
-     * get所havefinger令typeand其国际化tag.
+     * get所havefinger令typeandits国际化tag.
      * @return array<string, int> returntypenameandto应value
      */
     public static function getTypeOptions(): array
@@ -54,7 +54,7 @@ enum InstructType: int
      */
     public function validate(array &$items): void
     {
-        // 其他typeverify
+        // othertypeverify
         match ($this) {
             self::SINGLE_CHOICE => $this->validateSingleChoice($items),
             self::SWITCH => $this->validateSwitch($items),
@@ -81,7 +81,7 @@ enum InstructType: int
         // 普通finger令判断
         return match (self::fromType($type)) {
             self::STATUS => false,  // statustypenotneedcontent
-            self::SINGLE_CHOICE, self::SWITCH, self::TEXT => true,  // 其他typeneedcontent
+            self::SINGLE_CHOICE, self::SWITCH, self::TEXT => true,  // othertypeneedcontent
         };
     }
 

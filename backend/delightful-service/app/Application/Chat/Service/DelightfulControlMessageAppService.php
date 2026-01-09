@@ -84,7 +84,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         switch ($controlMessageType) {
             case ControlMessageType::SeenMessages:
             case ControlMessageType::ReadMessage:
-                // 已读return执etc场景,according tooneitem控制message,generate其他personseq.
+                // 已读return执etc场景,according tooneitem控制message,generateotherpersonseq.
                 $this->controlDomainService->handlerMQReceiptSeq($delightfulSeqEntity);
                 break;
             case ControlMessageType::RevokeMessage:
@@ -114,7 +114,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
     {
         // givefrom己messagestreamgenerate序column.
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageEntity, $conversationId);
-        // asyncwillgeneratemessagestreamnotifyuser其他设备.
+        // asyncwillgeneratemessagestreamnotifyuserother设备.
         $this->controlDomainService->pushControlSequence($seqEntity);
         // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
@@ -125,7 +125,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         $conversationId = $this->topicDomainService->clientOperateTopic($messageDTO, $dataIsolation);
         // givefrom己messagestreamgenerate序column.
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageDTO, $conversationId);
-        // asyncwillgeneratemessagestreamnotifyuser其他设备.
+        // asyncwillgeneratemessagestreamnotifyuserother设备.
         $seqCreatedEvent = $this->controlDomainService->pushControlSequence($seqEntity);
         // asyncminutehair控制message,to方操assession话题
         $this->controlDomainService->dispatchSeq($seqCreatedEvent);

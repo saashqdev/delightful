@@ -32,7 +32,7 @@ class CheckPermission extends AbstractAnnotation
     public string $operation;
 
     /**
-     * @param array|BackedEnum|string $resource resource，string/枚举or其array
+     * @param array|BackedEnum|string $resource resource，string/枚举oritsarray
      * @param BackedEnum|string $operation 操as，仅stringor枚举
      */
     public function __construct(array|BackedEnum|string $resource, BackedEnum|string $operation)
@@ -72,7 +72,7 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * willstring/枚举or其array统oneforstringarray。
+     * willstring/枚举oritsarray统oneforstringarray。
      * @return array<string>
      */
     private function normalizeToValues(array|BackedEnum|string $input): array

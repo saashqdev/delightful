@@ -20,7 +20,7 @@ return new class extends Migration {
         }
         Schema::create('delightful_chat_conversations', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id', 64)->comment('userid。此sessionwindow属at该user。');
+            $table->string('user_id', 64)->comment('userid。thissessionwindow属attheuser。');
             $table->string('user_organization_code', 64)->comment('userorganizationencoding');
             // 收itempersonorganizationencoding
             $table->tinyInteger('receive_type')->comment('sessiontype。1：private chat，2：group chat，3：systemmessage，4：云document，5：多维table格 6：话题 7：applicationmessage');

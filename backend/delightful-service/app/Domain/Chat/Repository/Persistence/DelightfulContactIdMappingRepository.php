@@ -115,7 +115,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query->whereIn('origin_id', $thirdUserIds)
             ->where('mapping_type', ThirdPlatformIdMappingType::User->value);
 
-        // have些平台多organizationuser id one致（such asday书），thereforequeryo clocknot带organizationencoding
+        // havethese平台多organizationuser id one致（such asday书），thereforequeryo clocknot带organizationencoding
         $delightfulOrganizationCode && $query->where('delightful_organization_code', $delightfulOrganizationCode);
         $thirdPlatformIdMappingEntities = [];
         $data = $query->where('third_platform_type', $thirdPlatformType->value);
@@ -140,7 +140,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query = $this->delightfulContactIdMappingModel::query()
             ->whereIn('new_id', $delightfulIds)
             ->where('mapping_type', ThirdPlatformIdMappingType::User->value);
-        // have些平台多organizationuser id one致（such asday书），thereforequeryo clocknot带organizationencoding
+        // havethese平台多organizationuser id one致（such asday书），thereforequeryo clocknot带organizationencoding
         if ($thirdPlatformType !== PlatformType::Teamshare) {
             $delightfulOrganizationCode && $query->where('delightful_organization_code', $delightfulOrganizationCode);
         }
@@ -245,7 +245,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 预publishand生产can看做isoneenvironment，所by这withinprocessonedownassociateenvironment ids.
+     * 预publishand生产can看做isoneenvironment，所bythiswithinprocessonedownassociateenvironment ids.
      * */
     private function getEnvRelationIds(DelightfulEnvironmentEntity $delightfulEnvironmentEntity): array
     {

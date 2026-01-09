@@ -259,7 +259,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[Event('intermediate')]
     #[VerifyStructure]
     /**
-     * not存入database实o clockmessage，useatone些temporarymessage场景。
+     * not存入database实o clockmessage，useatonethesetemporarymessage场景。
      * @throws Throwable
      */
     public function onIntermediateMessage(Socket $socket, array $params)
@@ -345,7 +345,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     private function keepSubscribeAlive(): void
     {
         // 只needoneenter程能schedulepublishmessage,letsubscriberedislink保活即can.
-        // notlock放inmostoutsidelayer,isfor防止pod频繁restarto clock,nothave任何oneenter程canpublishmessage
+        // notlock放inmostoutsidelayer,isfor防止pod频繁restarto clock,nothaveanyoneenter程canpublishmessage
         co(function () {
             // each 5 second推onetimemessage
             $this->timer->tick(

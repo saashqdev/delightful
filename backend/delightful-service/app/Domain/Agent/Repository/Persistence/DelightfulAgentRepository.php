@@ -33,7 +33,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
      */
     public function queries(DelightfulAgentQuery $query, Page $page): array
     {
-        // todo 这withinat leastneedorganization隔离
+        // todo thiswithinat leastneedorganization隔离
         $builder = DelightfulAgentModel::query();
 
         if (! is_null($query->getIds())) {

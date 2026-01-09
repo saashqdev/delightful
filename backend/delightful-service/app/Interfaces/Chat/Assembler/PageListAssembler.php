@@ -13,7 +13,7 @@ class PageListAssembler
     public static function pageByMysql(array $data, int $currentOffset = 0, int $currentLimit = 0, ?int $maxRecords = null): array
     {
         if ($currentLimit === 0) {
-            // not限制item数，所bynothavedownone页
+            // notlimititem数，所bynothavedownone页
             $hasMore = false;
         } elseif ($maxRecords !== null) {
             // if知道总record数，then直接compare

@@ -57,7 +57,7 @@ class ImageWatermarkProcessor
             $imageData = $this->addWaterMarkHandler($imageData, $imageGenerateRequest, $targetFormat);
         }
 
-        // 立即addXMP隐typewatermark
+        // immediatelyaddXMP隐typewatermark
         $implicitWatermark = $imageGenerateRequest->getImplicitWatermark();
         $xmpWatermarkedData = $this->imageEnhancementProcessor->enhanceImageData(
             $imageData,
@@ -81,7 +81,7 @@ class ImageWatermarkProcessor
             $imageData = $this->addWaterMarkHandler($imageData, $imageGenerateRequest);
         }
 
-        // 立即addXMP隐typewatermark
+        // immediatelyaddXMP隐typewatermark
         $implicitWatermark = $imageGenerateRequest->getImplicitWatermark();
         $xmpWatermarkedData = $this->imageEnhancementProcessor->enhanceImageData(
             $imageData,
@@ -168,7 +168,7 @@ class ImageWatermarkProcessor
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && ($this->fontProvider->containsChinese($text) || $this->fontProvider->supportsTTF())) {
             // useTTF字body渲染，supportmiddle文
-            // TTF字bodysizeneedadjust，usuallyratioinside置字body小one些
+            // TTF字bodysizeneedadjust，usuallyratioinside置字body小onethese
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
 
             // correctcalculateTTF字body基lineposition
@@ -339,7 +339,7 @@ class ImageWatermarkProcessor
                     }
                     break;
                 case 'gif':
-                    // GIF限制more多，suggestion升levelforPNG
+                    // GIFlimitmore多，suggestion升levelforPNG
                     $this->logger->info('Converting GIF to PNG for better quality');
                     imagepng($image, null, 0);
                     break;

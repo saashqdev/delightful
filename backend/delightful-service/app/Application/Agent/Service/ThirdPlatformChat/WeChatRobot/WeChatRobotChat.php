@@ -72,9 +72,9 @@ class WeChatRobotChat implements ThirdPlatformChatInterface
             return;
         }
         $content = $message->getContent();
-        // byat微信not supportedrich textor markdown middlesupportimage，所byneedin这withinwill markdown middleimageandvideo直接移except，notneedshow
+        // byat微信not supportedrich textor markdown middlesupportimage，所byneedinthiswithinwill markdown middleimageandvideo直接移except，notneedshow
         $content = preg_replace('/!\[.*?\]\((.*?)\)/', '', $content);
-        $content = preg_replace('/\[这withinhaveonevideo]\((.*?)\)/', '', $content);
+        $content = preg_replace('/\[thiswithinhaveonevideo]\((.*?)\)/', '', $content);
 
         $api = $this->workApplication->getClient();
         $options = [

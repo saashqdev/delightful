@@ -124,7 +124,7 @@ class ModeAppService extends AbstractModeAppService
             if (! $modeAggregateDTO) {
                 continue;
             }
-            // ifnothaveconfiguration任何model，要befilter
+            // ifnothaveconfigurationanymodel，要befilter
             if (empty($modeAggregateDTO->getAllModelIds())) {
                 continue;
             }
@@ -234,7 +234,7 @@ class ModeAppService extends AbstractModeAppService
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
 
-            // servicequotientdisable，skip该model
+            // servicequotientdisable，skipthemodel
             if ($providerStatus === Status::Disabled) {
                 continue;
             }
@@ -252,7 +252,7 @@ class ModeAppService extends AbstractModeAppService
      * frombatchquantityqueryresultmiddleextract特定aggregaterootmodel（LLM）.
      * @param ModeAggregate $aggregate 模typeaggregateroot
      * @param array<string, ProviderModelEntity> $allProviderModels batchquantityquery所havemodelresult
-     * @return array<string, ProviderModelEntity> 该aggregateroot相closemodel
+     * @return array<string, ProviderModelEntity> theaggregateroot相closemodel
      */
     private function getModelsForAggregate(ModeAggregate $aggregate, array $allProviderModels): array
     {
@@ -279,7 +279,7 @@ class ModeAppService extends AbstractModeAppService
      * frombatchquantityqueryresultmiddleextract特定aggregaterootgraphlikemodel（VLM）.
      * @param ModeAggregate $aggregate 模typeaggregateroot
      * @param array<string, ProviderModelEntity> $allProviderModels batchquantityquery所havemodelresult
-     * @return array<string, ProviderModelEntity> 该aggregateroot相closegraphlikemodel
+     * @return array<string, ProviderModelEntity> theaggregateroot相closegraphlikemodel
      */
     private function getImageModelsForAggregate(ModeAggregate $aggregate, array $allProviderModels): array
     {

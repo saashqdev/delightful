@@ -398,10 +398,10 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 $this->logger->error('GoogleGeminiaddimagedata：watermarkhandlefail', [
                     'error' => $e->getMessage(),
                 ]);
-                // watermarkhandlefailo clockuseoriginalbase64data（but这usuallynotshouldhair生）
+                // watermarkhandlefailo clockuseoriginalbase64data（butthisusuallynotshouldhair生）
             }
 
-            // 只returnURLformat，and其他model保持one致
+            // 只returnURLformat，andothermodel保持one致
             $currentData[] = [
                 'url' => $processedUrl,
             ];

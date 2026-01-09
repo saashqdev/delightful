@@ -11,7 +11,7 @@ use Hyperf\Contract\TranslatorInterface;
 
 /**
  * Provider Assemblerabstract基category
- * extractpublicconvert逻辑，decreasecode重复.
+ * extractpublicconvert逻辑，decreasecodeduplicate.
  */
 abstract class AbstractProviderAssembler
 {

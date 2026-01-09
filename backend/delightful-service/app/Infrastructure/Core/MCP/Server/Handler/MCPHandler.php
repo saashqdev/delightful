@@ -74,7 +74,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * getspeedrate限制器instance.
+     * getspeedratelimit器instance.
      */
     public function getRateLimiter(): RateLimiterInterface
     {
@@ -82,7 +82,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * setspeedrate限制器instance.
+     * setspeedratelimit器instance.
      */
     public function setRateLimiter(RateLimiterInterface $rateLimiter): self
     {

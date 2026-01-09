@@ -178,7 +178,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
                 $query->setSelect(['id', 'code', 'name', 'description', 'icon', 'type', 'tool_set_id', 'enabled', 'version_code', 'organization_code', 'created_uid', 'created_at', 'updated_uid', 'updated_at', 'deleted_at']);
                 break;
             case Type::Tools:
-                // need具have该toolcollection读permission
+                // need具havethetoolcollection读permission
                 if (empty($query->getToolSetId())) {
                     break;
                     //                    ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'tool_set_id']);
@@ -365,7 +365,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             $toolSetData['list'][$index]->addTool($toolInfo);
         }
 
-        // filter掉nothave任何tooltoolcollection
+        // filter掉nothaveanytooltoolcollection
         $toolSetData['list'] = array_filter($toolSetData['list'], fn (DelightfulFlowToolSetEntity $toolSet) => ! empty($toolSet->getTools()));
         $toolSetData['total'] = count($toolSetData['list']);
 

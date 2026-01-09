@@ -83,7 +83,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         )[$authorization->getId()] ?? [];
         $resourceIds = array_keys($resources);
 
-        // 其实nottoo适合 whereIn 暂o clocknot想to其他好way
+        // its实nottoo适合 whereIn 暂o clocknot想toother好way
         $query->setCodes($resourceIds);
 
         $data = $this->delightfulFlowToolSetDomainService->queries($dataIsolation, $query, $page);

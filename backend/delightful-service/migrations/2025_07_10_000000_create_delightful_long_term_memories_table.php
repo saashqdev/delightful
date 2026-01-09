@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('id', 36)->primary()->comment('记忆唯oneID');
             $table->text('content')->comment('记忆content');
             $table->text('pending_content')->nullable()->comment('待变more记忆content，etc待useraccept变more');
-            $table->text('explanation')->nullable()->comment('记忆解释，instruction这item记忆for什么value得record');
+            $table->text('explanation')->nullable()->comment('记忆解释，instructionthisitem记忆for什么value得record');
             $table->text('origin_text')->nullable()->comment('originaltextcontent');
             $table->string('memory_type', 50)->default('manual_input')->comment('记忆type');
             $table->string('status', 20)->default('pending')->comment('记忆status：pending-待accept, active-in effect, pending_revision-待修订');

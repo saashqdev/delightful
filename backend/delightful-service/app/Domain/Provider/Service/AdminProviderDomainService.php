@@ -384,7 +384,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             }
         }
 
-        // ifnothave找to任何validconfiguration，returnnullarray
+        // ifnothave找toanyvalidconfiguration，returnnullarray
         return $result;
     }
 
@@ -440,7 +440,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             $uniqueModels = [];
             foreach ($providerModelEntities as $model) {
                 $modelId = $model->getModelId();
-                // if这 modelId alsonothavebeadd，thenadd
+                // ifthis modelId alsonothavebeadd，thenadd
                 if (! isset($uniqueModels[$modelId])) {
                     $uniqueModels[$modelId] = $model;
                 }
@@ -475,7 +475,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             // createdata隔离object
             $dataIsolation = ProviderDataIsolation::create($officialOrganization);
 
-            // 判断该servicequotientwhether已haveconfiguration
+            // 判断theservicequotientwhether已haveconfiguration
             $existingConfig = $this->providerConfigRepository->findFirstByServiceProviderId(
                 $dataIsolation,
                 $provider->getId()
@@ -563,13 +563,13 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             // getservicequotienttype
             $providerType = $serviceProviderEntity->getProviderType();
 
-            // toatnon官方servicequotient，check其whetheractivate
+            // toatnon官方servicequotient，checkitswhetheractivate
             if ($providerType !== ProviderType::Official) {
                 // ifisnon官方servicequotientbut未activate，thenskip
                 if ($serviceProviderConfigEntity->getStatus() !== Status::Enabled) {
                     continue;
                 }
-                // 找toactivatenon官方configuration，立即return（优先levelmost高）
+                // 找toactivatenon官方configuration，immediatelyreturn（优先levelmost高）
                 return $serviceProviderConfigEntity;
             }
 

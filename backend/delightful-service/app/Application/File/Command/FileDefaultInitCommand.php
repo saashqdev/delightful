@@ -89,7 +89,7 @@ class FileDefaultInitCommand extends Command
         $moduleDirs = array_filter(glob($defaultModulesDir . '/*'), 'is_dir');
 
         if (empty($moduleDirs)) {
-            $this->warn('nothave找to任何模piecedirectory');
+            $this->warn('nothave找toany模piecedirectory');
             return;
         }
 
@@ -110,11 +110,11 @@ class FileDefaultInitCommand extends Command
 
                 $this->line("  - handle模piece: {$moduleName} (业务type: {$businessType->value})");
 
-                // get该模piecedirectorydown所havefile
+                // getthe模piecedirectorydown所havefile
                 $files = array_filter(glob($moduleDir . '/*'), 'is_file');
 
                 if (empty($files)) {
-                    $this->line('    - nothave找to任何file');
+                    $this->line('    - nothave找toanyfile');
                     continue;
                 }
 
@@ -126,14 +126,14 @@ class FileDefaultInitCommand extends Command
                     $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
                     $fileSize = filesize($filePath);
 
-                    // generate业务唯one标识（useat重复check）
+                    // generate业务唯one标识（useatduplicatecheck）
                     $businessIdentifier = $moduleName . '/' . $fileName;
 
-                    // correct重复check：querysame业务typedownwhetherhavesame业务标识
+                    // correctduplicatecheck：querysame业务typedownwhetherhavesame业务标识
                     $existingFiles = $this->defaultFileDomainService->getByOrganizationCodeAndBusinessType($businessType, $organizationCode);
                     $isDuplicate = false;
                     foreach ($existingFiles as $existingFile) {
-                        // use userId fieldstorage业务标识come判断重复
+                        // use userId fieldstorage业务标识come判断duplicate
                         if ($existingFile->getUserId() === $businessIdentifier) {
                             $isDuplicate = true;
                             break;
@@ -141,7 +141,7 @@ class FileDefaultInitCommand extends Command
                     }
 
                     if ($isDuplicate) {
-                        $this->line("    - skip重复file: {$fileName}");
+                        $this->line("    - skipduplicatefile: {$fileName}");
                         ++$skippedFiles;
                         continue;
                     }
@@ -162,7 +162,7 @@ class FileDefaultInitCommand extends Command
                             StorageBucketType::Public
                         );
 
-                        // 立即validatefilewhethercanget（close键validatestep）
+                        // immediatelyvalidatefilewhethercanget（close键validatestep）
                         $actualKey = $uploadFile->getKey();
                         // from key middleextractorganizationencoding，参考 ProviderAppService correct做法
                         $keyOrganizationCode = substr($actualKey, 0, strpos($actualKey, '/'));
@@ -228,7 +228,7 @@ class FileDefaultInitCommand extends Command
      */
     protected function processDefaultIcons(string $baseFileDir, string $organizationCode, int &$totalFiles, int &$skippedFiles): void
     {
-        // ifhaveneedsingle独handledefaultgraph标，canin这withinimplement
+        // ifhaveneedsingle独handledefaultgraph标，caninthiswithinimplement
         // for examplehandle Midjourney etcdefaultgraph标
     }
 }

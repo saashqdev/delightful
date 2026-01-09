@@ -48,7 +48,7 @@ interface HighAvailabilityInterface
     /**
      * record接入pointresponseandfrom动processsuccess/failedstatus，byanduseatback续dataanalyze。
      *
-     * 该methodwill:
+     * themethodwill:
      * 1. recordrequeststatisticsdata
      * 2. according torequestsuccessorfailedstatusfrom动触haircircuit break器feedback
      *

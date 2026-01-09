@@ -96,7 +96,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             return;
                         }
 
-                        // 这withiniseach平台user id，notis delightful  user_id
+                        // thiswithiniseach平台user id，notis delightful  user_id
                         $userId = $thirdPlatformChatMessage->getUserId();
                         $dataIsolation->setCurrentUserId($userId);
                         EnvManager::initDataIsolationEnv($dataIsolation);

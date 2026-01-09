@@ -373,7 +373,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
                 // watermarkhandlefailo clockuseoriginalbase64data
             }
 
-            // 只returnURLformat，and其他model保持one致
+            // 只returnURLformat，andothermodel保持one致
             $currentData[] = [
                 'url' => $processedUrl,
             ];

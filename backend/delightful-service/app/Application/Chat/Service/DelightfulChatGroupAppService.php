@@ -114,13 +114,13 @@ class DelightfulChatGroupAppService extends AbstractAppService
         }
         // currentgroup chatperson数
         $groupUserCount = $this->delightfulGroupDomainService->getGroupUserCount($groupId);
-        // most大person数限制subtractgocurrentperson数
+        // most大person数limitsubtractgocurrentperson数
         $chatGroupUserNumLimit = GroupLimitEnum::NormalGroup->value;
         $chatGroupUserNumLimit -= $groupUserCount;
         // get本timeneedadd群member (综合 finger定user_id + departmentiddownuser)
         $wantJoinUsers = $this->getGroupAddUsers($groupAddUserIds, $dataIsolation, $inputDepartmentIds, $chatGroupUserNumLimit);
         $wantJoinUserIds = array_column($wantJoinUsers, 'user_id');
-        // 判断哪些user已经ingroup chatmiddle
+        // 判断哪theseuser已经ingroup chatmiddle
         $groupUsers = $this->delightfulGroupDomainService->getGroupUserList($groupId, '', $dataIsolation, ['user_id']);
         // 已经存inatgroup chatmiddleuserid
         $existUserIds = array_column($groupUsers, 'user_id');
@@ -225,7 +225,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         }
         // checkgroupwhether已解散
         if ($groupEntity->getGroupStatus() === GroupStatusEnum::Disband) {
-            // 找to该user解散groupseq
+            // 找totheuser解散groupseq
             $seqEntity = $this->delightfulGroupDomainService->getGroupControlSeq($groupEntity, $dataIsolation, ControlMessageType::GroupDisband);
             // if已经存ingroup chat解散 seq,then直接return
             if (isset($seqEntity)) {
@@ -380,7 +380,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         try {
             // togroup chatmiddledecreaseuser
             $this->delightfulGroupDomainService->removeUsersFromGroup($groupEntity, $removeUserIds);
-            // 移except这些userconversationwindow
+            // 移exceptthistheseuserconversationwindow
             $this->delightfulConversationDomainService->batchDeleteGroupConversationByUserIds($groupEntity, $removeUserIds);
             // generate群memberdecreaseseq
             $seqContent = ['user_ids' => $removeUserIds, 'group_id' => $groupEntity->getId(), 'operate_user_id' => $dataIsolation->getCurrentUserId()];
@@ -481,7 +481,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
 
     private function noticeGroupChangeSeq(DelightfulSeqEntity $seqEntity): array
     {
-        // 协程notifyuser其他设备,放intransactionoutsidesurface
+        // 协程notifyuserother设备,放intransactionoutsidesurface
         co(function () use ($seqEntity) {
             $this->delightfulControlDomainService->pushControlSequence($seqEntity);
         });

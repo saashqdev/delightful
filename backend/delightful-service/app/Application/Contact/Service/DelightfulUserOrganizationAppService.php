@@ -62,7 +62,7 @@ class DelightfulUserOrganizationAppService
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
 
-        // 2. query这organization相closeinformation：delightful_organizations_environment
+        // 2. querythisorganization相closeinformation：delightful_organizations_environment
         $organizationEnvEntity = $this->organizationEnvDomainService->getOrganizationEnvironmentByDelightfulOrganizationCode($delightfulOrganizationCode);
         if (! $organizationEnvEntity) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);

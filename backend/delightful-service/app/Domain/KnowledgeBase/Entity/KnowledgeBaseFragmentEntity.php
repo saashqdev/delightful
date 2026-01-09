@@ -368,7 +368,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
         return $this->wordCount;
     }
 
-    // 这withinnotusesetting，直接according tocontentcalculateoutcomethenline
+    // thiswithinnotusesetting，直接according tocontentcalculateoutcomethenline
     public function setWordCount(int $wordCount): KnowledgeBaseFragmentEntity
     {
         $this->wordCount = $wordCount;

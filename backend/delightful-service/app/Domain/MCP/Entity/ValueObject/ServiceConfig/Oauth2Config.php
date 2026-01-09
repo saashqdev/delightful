@@ -53,7 +53,7 @@ class Oauth2Config extends AbstractValueObject
      * Authorization URL - getuseraccess_tokenURLground址。
      *
      * userpassclient_urlauthorizationsuccessback，three方servicewillreturnusergettokencode，
-     * and转tocallbackground址。此o clock，service器提供方willpassto应datatoauthorization_urlhairuprequest，
+     * and转tocallbackground址。thiso clock，service器提供方willpassto应datatoauthorization_urlhairuprequest，
      * getuseraccess_token。
      *
      * 参考service方authorizationdocumentgetauthorization_url，本example参考扣子openhairguidedocument，input

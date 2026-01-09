@@ -24,7 +24,7 @@ class MCPResourceManager
      */
     public function registerResource(array $resource): void
     {
-        // nullimplement，暂notregister任何resource
+        // nullimplement，暂notregisteranyresource
     }
 
     /**
@@ -56,7 +56,7 @@ class MCPResourceManager
     }
 
     /**
-     * checkwhethernothave任何resource.
+     * checkwhethernothaveanyresource.
      */
     public function isEmpty(): bool
     {

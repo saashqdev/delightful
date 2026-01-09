@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('parent_department_id', 64)->comment('父departmentdepartment ID')->nullable();
             $table->string('name', 64)->comment('departmentname');
             $table->text('i18n_name')->comment('国际化departmentname');
-            $table->string('order', 64)->comment('departmentsort，即departmentin其同leveldepartmentshow顺序。取valuemore小sortmore靠front。')->nullable()->default('');
+            $table->string('order', 64)->comment('departmentsort，即departmentinits同leveldepartmentshow顺序。取valuemore小sortmore靠front。')->nullable()->default('');
             $table->string('leader_user_id', 64)->comment('department主管user ID')->nullable()->default('');
             $table->string('organization_code', 64)->comment('麦吉organizationencoding');
             $table->text('status')->comment('departmentstatus,jsonformat,目frontsupport is_deleted:whetherdelete');

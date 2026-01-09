@@ -171,7 +171,7 @@ class MidjourneyModel extends AbstractImageGenerate
                     ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
                 }
 
-                // ifis其他status（如 PENDING_QUEUE or ON_QUEUE），continueetc待
+                // ifisotherstatus（如 PENDING_QUEUE or ON_QUEUE），continueetc待
                 ++$retryCount;
                 sleep(self::RETRY_INTERVAL);
             } catch (Exception $e) {

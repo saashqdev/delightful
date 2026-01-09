@@ -31,7 +31,7 @@ class MiscClient extends Client
             $endTime = microtime(true);
             $duration = round(($endTime - $startTime) * 1000); // 毫second
 
-            // 这within response  content is ['embedding' => '', 'count' => '']
+            // thiswithin response  content is ['embedding' => '', 'count' => '']
             $content = json_decode($response->getBody()->getContents(), true);
 
             // convertresponseformatbycompatibleEmbeddingResponse

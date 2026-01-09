@@ -90,7 +90,7 @@ class SeqAssembler
         // 强linedelete $streamOptions middlestream_app_message_id/streamfield
         unset($thisTimeStreamMessages['stream_options']['stream_app_message_id'], $thisTimeStreamMessages['stream_options']['stream']);
         $streamOptions = $thisTimeStreamMessages['stream_options'] ?? null;
-        // 0 willbewhen做 false handle，所by这within要判断whetherfor null or者 ''
+        // 0 willbewhen做 false handle，所bythiswithin要判断whetherfor null or者 ''
         if ($content !== null && $content !== '') {
             $response->setContent($content);
         }
@@ -136,7 +136,7 @@ class SeqAssembler
             $referMessageId = $originSeqEntity->getReferMessageId();
         }
         $statusChangeSeqEntity = clone $originSeqEntity;
-        // messagereceive方notneedrecord收itempersoncolumn表,清null该fieldinfo
+        // messagereceive方notneedrecord收itempersoncolumn表,清nullthefieldinfo
         $statusChangeSeqEntity->setReceiveList(null);
         $statusChangeSeqEntity->setSeqType($messageType);
         $seqData = $statusChangeSeqEntity->toArray();
@@ -156,7 +156,7 @@ class SeqAssembler
 
     /**
      * according to已经存inseqEntity,generate已读/已view/withdraw/editetcmessagestatus变moretypereturn执message.
-     * @param string $referMessageId supportfinger定quotemessageid,useatgivereceive方其他设备pushreturn执,or者givehairitem方pushreturn执
+     * @param string $referMessageId supportfinger定quotemessageid,useatgivereceive方other设备pushreturn执,or者givehairitem方pushreturn执
      */
     public static function generateStatusChangeSeqEntity(array $seqData, string $referMessageId): DelightfulSeqEntity
     {
@@ -304,7 +304,7 @@ class SeqAssembler
         $clientSequenceData = [
             // 序columnnumber归属账numberid
             'delightful_id' => $seqEntity->getObjectId(),
-            // 序columnnumber，one定not重复，one定growth，butisnot保证连续。
+            // 序columnnumber，one定notduplicate，one定growth，butisnot保证连续。
             'seq_id' => $seqEntity->getSeqId(),
             // usermessageid，userdown唯one。
             'message_id' => $seqEntity->getMessageId(),
@@ -312,7 +312,7 @@ class SeqAssembler
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // send方messageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),
-            // message所属conversationwindow。 customer端canaccording to此valuecertainmessagewhether要reminderetc。if本groundnothavehair现这conversationid，主动toservice端queryconversationwindowdetail
+            // message所属conversationwindow。 customer端canaccording tothisvaluecertainmessagewhether要reminderetc。if本groundnothavehair现thisconversationid，主动toservice端queryconversationwindowdetail
             'conversation_id' => $seqEntity->getConversationId(),
             // 本itemmessage所属organization
             'organization_code' => $seqEntity->getOrganizationCode(),

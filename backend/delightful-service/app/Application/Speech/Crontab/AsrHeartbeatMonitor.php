@@ -29,7 +29,7 @@ use Throwable;
 #[Crontab(
     rule: '* * * * *',                    // eachminute钟executeonetime
     name: 'AsrHeartbeatMonitor',
-    singleton: true,                      // single例模type防止重复execute
+    singleton: true,                      // single例模type防止duplicateexecute
     mutexExpires: 60,                     // 互斥lockexpiretime（second），to应 AsrConfig::HEARTBEAT_MONITOR_MUTEX_EXPIRES
     onOneServer: true,                    // 仅inone台service器upexecute
     callback: 'execute',

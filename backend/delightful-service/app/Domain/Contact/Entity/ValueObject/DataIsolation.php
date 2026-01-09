@@ -13,7 +13,7 @@ use App\Infrastructure\Core\AbstractObject;
 /**
  * data隔离 SaaS化
  * 目front仅haveorganization隔离
- * 显type传入，防止隐type传入，导致not知道哪些placeneed做隔离.
+ * 显type传入，防止隐type传入，导致not知道哪theseplaceneed做隔离.
  */
 class DataIsolation extends AbstractObject
 {

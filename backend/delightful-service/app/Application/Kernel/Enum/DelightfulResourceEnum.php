@@ -16,7 +16,7 @@ use function Hyperf\Translation\__;
  * 2. passmethod提供 label / parent  etcyuaninfo，方便back续generatepermissiontree、做 i18n etc。
  * 3. 仅definitionresource本身，not涉and操astype（如 query / edit）。
  *
- * 注意：if你modify这file，请executesingleyuantest PermissionApiTest.testGetPermissionTree.
+ * 注意：if你modifythisfile，请executesingleyuantest PermissionApiTest.testGetPermissionTree.
  */
 enum DelightfulResourceEnum: string
 {
@@ -73,7 +73,7 @@ enum DelightfulResourceEnum: string
 
     /**
      * uplevelresource.
-     * 注意：new操asresourceback要补充这configuration.
+     * 注意：new操asresourceback要补充thisconfiguration.
      */
     public function parent(): ?self
     {
@@ -108,9 +108,9 @@ enum DelightfulResourceEnum: string
     }
 
     /**
-     * returnand该resourcebind Operation Enum category名。
+     * returnandtheresourcebind Operation Enum category名。
      * defaultuse DelightfulOperationEnum。
-     * 如需for特定resourcecustomize操ascollection，canin此returncustomize Enum::class。
+     * 如需for特定resourcecustomize操ascollection，caninthisreturncustomize Enum::class。
      */
     public function operationEnumClass(): string
     {

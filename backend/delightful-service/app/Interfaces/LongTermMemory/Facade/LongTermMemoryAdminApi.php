@@ -33,7 +33,7 @@ use Psr\Log\LoggerInterface;
 use function Hyperf\Translation\trans;
 
 /**
- * 长期记忆back台管理 API.
+ * long-term记忆back台管理 API.
  */
 #[ApiResponse('low_code')]
 class LongTermMemoryAdminApi extends AbstractApi

@@ -40,11 +40,11 @@ class DelightfulChatFileDomainService extends AbstractDomainService
      */
     public function checkAndGetFilePaths(array $fileDTOs, DataIsolation $dataIsolation): array
     {
-        // check message_id whetherhave此file
+        // check message_id whetherhavethisfile
         $seqIds = array_column($fileDTOs, 'message_id');
         $seqList = $this->delightfulSeqRepository->batchGetSeqByMessageIds($seqIds);
         $delightfulMessageIdsMap = [];
-        // checkuserwhether收to这些message
+        // checkuserwhether收tothisthesemessage
         foreach ($seqList as $seq) {
             if ($seq->getObjectId() !== $dataIsolation->getCurrentDelightfulId()) {
                 continue;
@@ -154,7 +154,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
         $fileIds = array_column($attachments, 'file_id');
         $fileEntities = $this->getFileEntitiesByFileIds($fileIds);
         $fileEntities = array_column($fileEntities, null, 'file_id');
-        // todo ifmessagemiddlehavefile:1.判断file所have者whetheriscurrentuser;2.判断userwhetherreceivepass这些file。
+        // todo ifmessagemiddlehavefile:1.判断file所have者whetheriscurrentuser;2.判断userwhetherreceivepassthisthesefile。
         //        foreach ($fileEntities as $fileEntity) {
         //            if ($fileEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
         //                ExceptionBuilder::throw(ChatErrorCode::FILE_NOT_FOUND);

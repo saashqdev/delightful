@@ -127,17 +127,17 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateMembers($projectId);
         $this->switchUserTest2();
 
-        // 1. 重复置top同oneproject - shouldnormalhandle
+        // 1. duplicate置top同oneproject - shouldnormalhandle
         $this->pinProject($projectId, true);
-        $this->pinProject($projectId, true); // 重复置top
+        $this->pinProject($projectId, true); // duplicate置top
 
         // validateproject仍然is置topstatus
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
-        // 2. 重复cancel置top - shouldnormalhandle
+        // 2. duplicatecancel置top - shouldnormalhandle
         $this->pinProject($projectId, false);
-        $this->pinProject($projectId, false); // 重复cancel置top
+        $this->pinProject($projectId, false); // duplicatecancel置top
 
         // validateprojectnotis置topstatus
         $response = $this->collaborationProjectsWithPinCheck();
@@ -615,17 +615,17 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $this->switchUserTest1();
 
-        // 1. 重复add入edit - shouldnormalhandle
+        // 1. duplicateadd入edit - shouldnormalhandle
         $this->joinFileEditing($fileId);
-        $this->joinFileEditing($fileId); // 重复add入
+        $this->joinFileEditing($fileId); // duplicateadd入
 
         // validateuserquantity仍然is1
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 2. 重复leaveedit - shouldnormalhandle
+        // 2. duplicateleaveedit - shouldnormalhandle
         $this->leaveFileEditing($fileId);
-        $this->leaveFileEditing($fileId); // 重复leave
+        $this->leaveFileEditing($fileId); // duplicateleave
 
         // validateuserquantityis0
         $editingCount = $this->getEditingUsers($fileId);
@@ -920,7 +920,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals(
             count($userIds),
             count($uniqueUserIds),
-            'create者column表middlenotshouldhave重复user_id'
+            'create者column表middlenotshouldhaveduplicateuser_id'
         );
     }
 

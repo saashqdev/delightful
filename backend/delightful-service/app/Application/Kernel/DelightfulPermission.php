@@ -49,7 +49,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         }
 
         $translated = $enum->label();
-        // iflanguagepackage缺失，return仍然isoriginal key，此o clockthrowexceptionreminder
+        // iflanguagepackage缺失，return仍然isoriginal key，thiso clockthrowexceptionreminder
         if ($translated === $enum->translationKey()) {
             ExceptionBuilder::throw(PermissionErrorCode::BusinessException, 'Missing i18n for key: ' . $enum->translationKey());
         }
@@ -241,11 +241,11 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 $accumKey .= '.' . $segment;
                 $isLastSegment = $index === array_key_last($segments);
 
-                // 取 label：theonesegmentuse模piecemiddle文名，其remainder按rule
+                // 取 label：theonesegmentuse模piecemiddle文名，itsremainder按rule
                 $label = match (true) {
                     $index === 0 => $this->getResourceModule($permission['resource']),                // 模piecelayer
                     $isLastSegment => $permission['resource_label'],      // resourcelayer
-                    default => ucfirst($segment),                        // 其他middlebetweenlayer
+                    default => ucfirst($segment),                        // othermiddlebetweenlayer
                 };
 
                 // ensure children array存inandcheck segment
@@ -264,7 +264,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 $current = &$current['children'][$segment];
             }
 
-            // 此o clock $current fingertoresourcesectionpoint，for其add操asleaf子
+            // thiso clock $current fingertoresourcesectionpoint，foritsadd操asleaf子
             $current['children'][] = [
                 'label' => $permission['operation_label'],
                 'permission_key' => $permission['permission_key'],
@@ -308,7 +308,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
      * rule：
      *   1. 如直接命middlepermission键，return true；
      *   2. if拥haveall局permission ALL_PERMISSIONS，return true；
-     *   3. 若未命middle，thencheckby该permission隐typecontainpermissionset（for example *edit* 隐typecontain *query*）。
+     *   3. 若未命middle，thencheckbythepermission隐typecontainpermissionset（for example *edit* 隐typecontain *query*）。
      *
      * @param string $permissionKey goalpermission键
      * @param string[] $userPermissions user已拥havepermission键set
@@ -349,7 +349,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * parseresourcebind Operation Enum，return该resourcecanuse操asset（stringarray）。
+     * parseresourcebind Operation Enum，returntheresourcecanuse操asset（stringarray）。
      */
     protected function getOperationsByResource(string $resource): array
     {
@@ -381,7 +381,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * toatnon DelightfulResourceEnum definitionresource，子categorycanoverride该methodbyparseto相应 Operation Enum。
+     * toatnon DelightfulResourceEnum definitionresource，子categorycanoverridethemethodbyparseto相应 Operation Enum。
      * open源default抛错。
      */
     protected function resolveOperationEnumClassFromUnknownResource(string $resource): string
@@ -417,7 +417,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 递归will child map 转for索引array.
+     * recursionwill child map 转for索引array.
      */
     private function normalizeTree(array $branch): array
     {

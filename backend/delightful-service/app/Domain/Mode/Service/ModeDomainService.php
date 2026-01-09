@@ -185,16 +185,16 @@ class ModeDomainService
             return $this->getModeDetailById($dataIsolation, $id);
         }
 
-        // 直接delete该模type所have现haveconfiguration
+        // 直接deletethe模type所have现haveconfiguration
         $this->relationRepository->deleteByModeId($dataIsolation, $id);
 
-        // delete该模type所have现havegroup
+        // deletethe模type所have现havegroup
         $this->groupRepository->deleteByModeId($dataIsolation, $id);
 
         // save模type基本info
         $this->modeRepository->save($dataIsolation, $mode);
 
-        // batchquantitycreategroup副本
+        // batchquantitycreategroupcopy
         $newGroupEntities = [];
         $maxSort = count($modeAggregate->getGroupAggregates());
         foreach ($modeAggregate->getGroupAggregates() as $index => $groupAggregate) {
@@ -293,7 +293,7 @@ class ModeDomainService
         foreach ($modes as $mode) {
             $modeId = $mode->getId();
 
-            // findfinal源模typeID（递归find跟随链）
+            // findfinal源模typeID（recursionfind跟随链）
             $ultimateSourceId = $this->findUltimateSourceId($modeId, $followMap);
 
             $groups = $groupsByModeId[$ultimateSourceId] ?? [];
@@ -302,7 +302,7 @@ class ModeDomainService
             // buildgroupaggregaterootarray
             $groupAggregates = [];
             foreach ($groups as $group) {
-                // get该groupdown所haveassociateclose系
+                // getthegroupdown所haveassociateclose系
                 $groupRelations = array_filter($relations, fn ($relation) => $relation->getGroupId() === $group->getId());
                 usort($groupRelations, fn ($a, $b) => $a->getSort() <=> $b->getSort());
 
@@ -332,7 +332,7 @@ class ModeDomainService
                 ExceptionBuilder::throw(ModeErrorCode::VALIDATE_FAILED);
             }
 
-            // get该groupdown所haveassociateclose系
+            // getthegroupdown所haveassociateclose系
             $groupRelations = array_filter($relations, fn ($relation) => $relation->getGroupId() === $group->getId());
             usort($groupRelations, fn ($a, $b) => $a->getSort() <=> $b->getSort());
 
@@ -374,7 +374,7 @@ class ModeDomainService
     }
 
     /**
-     * according to跟随close系mapping递归findfinal源模typeID.
+     * according to跟随close系mappingrecursionfindfinal源模typeID.
      * @param int $modeId current模typeID
      * @param array $followMap 跟随close系mapping [跟随者ID => be跟随者ID]
      * @param array $visited 防止loop跟随
@@ -387,14 +387,14 @@ class ModeDomainService
             return $modeId;
         }
 
-        // if该模typenothave跟随close系，instruction它thenisfinal源
+        // ifthe模typenothave跟随close系，instruction它thenisfinal源
         if (! isset($followMap[$modeId])) {
             return $modeId;
         }
 
         $visited[] = $modeId;
 
-        // 递归find跟随goalfinal源
+        // recursionfind跟随goalfinal源
         return $this->findUltimateSourceId($followMap[$modeId], $followMap, $visited);
     }
 }

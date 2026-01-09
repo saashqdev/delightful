@@ -99,7 +99,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
 
         $callbackParams = $this->getCallbackParams($userTaskDTO, $userTaskValueDTO, $flowCode);
         $enabled = true;
-        // ifisnot重复，那么is直接create调degreetask
+        // ifisnotduplicate，that么is直接create调degreetask
         if ($taskConfigDomainService->getType() === TaskType::NoRepeat) {
             $taskScheduler = new TaskScheduler();
             $taskScheduler->setExternalId($externalId);
@@ -114,7 +114,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // ifiscustomize重复，那么直接create调degreetask,meanwhilecloseschedulegenerate调degreetask
+        // ifiscustomizeduplicate，that么直接create调degreetask,meanwhilecloseschedulegenerate调degreetask
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;
@@ -242,7 +242,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
         $this->taskSchedulerDomainService->clearTaskByExternalId($task->getExternalId());
 
         $enabled = true;
-        // ifisnot重复，那么is直接create调degreetask
+        // ifisnotduplicate，that么is直接create调degreetask
         if ($taskConfigDomainService->getType() === TaskType::NoRepeat) {
             $taskScheduler = new TaskScheduler();
             $taskScheduler->setExternalId($externalId);
@@ -257,7 +257,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // ifiscustomize重复，那么直接create调degreetask,meanwhilecloseschedulegenerate调degreetask
+        // ifiscustomizeduplicate，that么直接create调degreetask,meanwhilecloseschedulegenerate调degreetask
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;

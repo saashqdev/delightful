@@ -188,7 +188,7 @@ class DelightfulLLMDomainService
       "导致Mhair生mainreasonis什么？", // reason/机制category
       "什么isN？它核core特征is什么？", // definition/解释category
       "未comefiveyearP领域hair展trendis什么？", // trend/预测category
-      "针toQquestion，have哪些canlineresolvesolution？" // resolvesolution/suggestioncategory
+      "针toQquestion，have哪thesecanlineresolvesolution？" // resolvesolution/suggestioncategory
     ]
     
     currentcontextsummary：
@@ -211,9 +211,9 @@ class DelightfulLLMDomainService
     - ifreturn答very长，请尽quantity结构化、minutesegment落总结。ifneedminutepointas答，尽quantity控制in5pointbyinside，andmerge相closecontent。
     - toat客观category问答，ifquestion答案non常简短，can适when补充oneto两sentence相closeinformation，by丰富content。
     - 你needaccording touser要求andreturn答contentchoose合适、美观return答format，ensurecan读property强。
-    - 你return答should综合多相closewebpagecomereturn答，not能重复quoteonewebpage。
+    - 你return答should综合多相closewebpagecomereturn答，not能duplicatequoteonewebpage。
     - unlessuser要求，否then你return答languageneedanduser提问language保持one致。
-    - output漂亮markdown format，contentmiddleaddone些andtheme相closeemoji表情符number。
+    - output漂亮markdown format，contentmiddleaddonetheseandtheme相closeemoji表情符number。
     
     ## usermessagefor：
     {question}
@@ -288,7 +288,7 @@ class DelightfulLLMDomainService
     
     ## 要求
     - forbid直接return答userquestion，one定要returnanduserquestionhaveassociateproperty索引。
-    - search contextsformatfor "[[x]] content" ，其middle x issearch contexts索引。x not能greater than 50
+    - search contextsformatfor "[[x]] content" ，itsmiddle x issearch contexts索引。x not能greater than 50
     - 请bycorrect JSON formatreplyfilterback索引，for example：[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
     - if search keywords andtime相close，重point注意 search contexts middleandcurrenttime相closecontent。andcurrenttimemore近more重要。
 
@@ -445,7 +445,7 @@ class DelightfulLLMDomainService
             return $eventsItem;
         } catch (Throwable $e) {
             $this->logger->error(sprintf('mindSearch generateevento clockhair生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
-            // eventgenerate经常notis json
+            // eventgenerateoftennotis json
             return [];
         }
     }
@@ -562,7 +562,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * batchquantitysearchback，filter掉重复 search contexts.
+     * batchquantitysearchback，filter掉duplicate search contexts.
      * @return SearchDetailItem[]
      * @throws Throwable
      */
@@ -848,7 +848,7 @@ class DelightfulLLMDomainService
 
     public function searchWithGoogle(string $query): array
     {
-        // bybackcanfromuserconfigurationmiddleread这些value
+        // bybackcanfromuserconfigurationmiddlereadthisthesevalue
         $subscriptionKey = config('search.drivers.google.api_key');
         $cx = config('search.drivers.google.cx');
         $data = make(GoogleSearch::class)->search($query, $subscriptionKey, $cx);
@@ -899,7 +899,7 @@ class DelightfulLLMDomainService
                 $contextString .= $searchContext->getSnippet() . "\n\n";
             }
             // use str_replace functioncome替换占位符
-            // 带upyearmonthdayo clockminutesecond，避免重复question
+            // 带upyearmonthdayo clockminutesecond，避免duplicatequestion
             $systemPrompt = str_replace(
                 ['{context}', '{date_now}', '{sub_questions_min}', '{sub_questions_max}'],
                 [$contextString, date('Yyear mmonth dday, Ho clock iminute ssecond'), (string) $subQuestionsMin, (string) $subQuestionsMax],
@@ -1162,7 +1162,7 @@ class DelightfulLLMDomainService
                 str_replace(PHP_EOL, '', $llmResponse),
                 Json::encode($subQuestions)
             ));
-            // haveo clockwillreturn多维array，in这withinfilter
+            // haveo clockwillreturn多维array，inthiswithinfilter
             $returnQuestions = [];
             foreach ($subQuestions as $subQuestion) {
                 if (is_string($subQuestion)) {

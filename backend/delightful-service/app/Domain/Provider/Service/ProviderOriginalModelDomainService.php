@@ -24,7 +24,7 @@ readonly class ProviderOriginalModelDomainService
 
     public function create(ProviderDataIsolation $dataIsolation, ProviderOriginalModelEntity $providerOriginalModelEntity): ProviderOriginalModelEntity
     {
-        // notcan重复add，byorganization纬degree+modelId+type判断，因for其他organizationmaybealsowilladd，use额outsidemethod
+        // notcanduplicateadd，byorganization纬degree+modelId+type判断，因forotherorganizationmaybealsowilladd，use额outsidemethod
         if ($this->providerOriginalModelRepository->exist($dataIsolation, $providerOriginalModelEntity->getModelId(), $providerOriginalModelEntity->getType())) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::InvalidParameter, __('service_provider.original_model_already_exists'));
         }

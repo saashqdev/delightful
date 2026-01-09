@@ -32,7 +32,7 @@ use Throwable;
 use function Hyperf\Translation\trans;
 
 /**
- * 长期记忆领域service
+ * long-term记忆领域service
  */
 readonly class LongTermMemoryDomainService
 {
@@ -125,7 +125,7 @@ readonly class LongTermMemoryDomainService
 
                 // batchquantityaccept记忆suggestion：willpending_contentmovetocontent，settingstatusfor已accept，enable记忆
                 foreach ($memories as $memory) {
-                    // ifhavepending_content，thenwill其movetocontent
+                    // ifhavepending_content，thenwillitsmovetocontent
                     if ($memory->getPendingContent() !== null) {
                         // willpending_contentvaluecopytocontentfield
                         $memory->setContent($memory->getPendingContent());
@@ -258,7 +258,7 @@ readonly class LongTermMemoryDomainService
         }
 
         try {
-            // validateuser记忆quantity限制
+            // validateuser记忆quantitylimit
             $count = $this->countByUser($dto->orgId, $dto->appId, $dto->userId);
             if ($count >= 40) {
                 throw new InvalidArgumentException(trans('long_term_memory.entity.user_memory_limit_exceeded'));
@@ -417,7 +417,7 @@ readonly class LongTermMemoryDomainService
             return $b->getEffectiveScore() <=> $a->getEffectiveScore();
         });
 
-        // 限制总length
+        // limit总length
         $selectedMemories = [];
         $totalLength = 0;
 
@@ -446,7 +446,7 @@ readonly class LongTermMemoryDomainService
             return '';
         }
 
-        $prompt = '<user长期记忆>';
+        $prompt = '<userlong-term记忆>';
 
         foreach ($selectedMemories as $memory) {
             $memoryId = $memory->getId();
@@ -454,7 +454,7 @@ readonly class LongTermMemoryDomainService
             $prompt .= sprintf("\n[记忆ID: %s] %s", $memoryId, $memoryText);
         }
 
-        $prompt .= "\n</user长期记忆>";
+        $prompt .= "\n</userlong-term记忆>";
 
         return $prompt;
     }
@@ -556,7 +556,7 @@ readonly class LongTermMemoryDomainService
                 return 0;
             }
 
-            // ifisenable记忆，conductquantity限制check
+            // ifisenable记忆，conductquantitylimitcheck
             if ($enabled) {
                 $this->validateMemoryEnablementLimits($validMemoryIds, $orgId, $appId, $userId);
             }
@@ -596,12 +596,12 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * validate记忆enablequantity限制.
+     * validate记忆enablequantitylimit.
      * @param array $memoryIds 要enable记忆IDcolumn表
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID
-     * @throws BusinessException whenenablequantity超pass限制o clockthrowexception
+     * @throws BusinessException whenenablequantity超passlimito clockthrowexception
      */
     private function validateMemoryEnablementLimits(array $memoryIds, string $orgId, string $appId, string $userId): void
     {
@@ -635,7 +635,7 @@ readonly class LongTermMemoryDomainService
             }
         }
 
-        // checkwhether超pass限制
+        // checkwhether超passlimit
         foreach ($projectedCounts as $categoryKey => $projectedCount) {
             $category = MemoryCategory::from($categoryKey);
             $limit = $category->getEnabledLimit();
@@ -676,7 +676,7 @@ readonly class LongTermMemoryDomainService
             [MemoryStatus::PENDING, false], [MemoryStatus::PENDING, true] => MemoryStatus::PENDING,                 // 待acceptstatus保持not变
             // pending_contentnotfornullo clockstatusconvert
             [MemoryStatus::ACTIVE, true], [MemoryStatus::PENDING_REVISION, true] => MemoryStatus::PENDING_REVISION,         // 生效记忆have修订 → 待修订
-            // default情况（notshouldto达这within）
+            // default情况（notshouldto达thiswithin）
             default => $currentStatus,
         };
     }

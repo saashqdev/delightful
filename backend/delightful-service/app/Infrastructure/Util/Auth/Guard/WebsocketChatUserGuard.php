@@ -47,7 +47,7 @@ class WebsocketChatUserGuard extends WebUserGuard
             }
             ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND);
         }
-        // downsurface这segmentactualcallis DelightfulUserAuthorization  retrieveById method
+        // downsurfacethissegmentactualcallis DelightfulUserAuthorization  retrieveById method
         /** @var DelightfulUserAuthorization $user */
         $user = $this->userProvider->retrieveByCredentials([
             'authorization' => $userAuthToken,

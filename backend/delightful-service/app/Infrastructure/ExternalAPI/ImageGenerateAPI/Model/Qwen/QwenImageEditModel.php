@@ -43,12 +43,12 @@ class QwenImageEditModel extends AbstractImageGenerate
 
     public function setAK(string $ak)
     {
-        // 通义thousand问notuseAK/SKauthentication，此methodfornullimplement
+        // 通义thousand问notuseAK/SKauthentication，thismethodfornullimplement
     }
 
     public function setSK(string $sk)
     {
-        // 通义thousand问notuseAK/SKauthentication，此methodfornullimplement
+        // 通义thousand问notuseAK/SKauthentication，thismethodfornullimplement
     }
 
     public function setApiKey(string $apiKey)

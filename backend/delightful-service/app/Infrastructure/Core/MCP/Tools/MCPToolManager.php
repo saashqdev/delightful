@@ -63,7 +63,7 @@ class MCPToolManager
     }
 
     /**
-     * checkwhethernothave任何tool.
+     * checkwhethernothaveanytool.
      */
     public function isEmpty(): bool
     {

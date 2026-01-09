@@ -10,7 +10,7 @@ namespace App\Domain\Provider\Service\ModelFilter;
 /**
  * defaultorganizationmodelfilter器implement.
  *
- * notconduct任何filter，直接returnoriginalmodellist
+ * notconductanyfilter，直接returnoriginalmodellist
  * useatopen源versionor企业package未configurationo clockbacksolution
  */
 class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInterface

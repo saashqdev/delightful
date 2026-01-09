@@ -140,7 +140,7 @@ class RoleApiTest extends AbstractHttpTest
 
         // againtimequery应whenreturnrolenot存inorempty
         $detailResp = $this->get(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
-        // expected这withinwillreturnerror码，specificaccording to业务while定，as long asnon1000即can
+        // expectedthiswithinwillreturnerror码，specificaccording to业务while定，as long asnon1000即can
         $this->assertNotEquals(1000, $detailResp['code'] ?? null);
         // === testdelete子administratorEND ===
     }

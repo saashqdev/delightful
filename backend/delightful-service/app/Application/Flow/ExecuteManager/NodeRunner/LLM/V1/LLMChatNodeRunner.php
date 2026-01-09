@@ -126,7 +126,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 }
             }
 
-            // processcurrent多模statemessage - only content need立刻callgoprocess
+            // processcurrent多模statemessage - only content needinstantlycallgoprocess
             /** @var null|UserMessage $contentMessage */
             if ($contentMessage?->hasImageMultiModal() && $paramsConfig->getModelConfig()->isVision()) {
                 $currentModel = $model->getModelName();
@@ -147,7 +147,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 }
             }
 
-            // 永远processcurrentsectionpointhistoryattachmentmessage
+            // foreverprocesscurrentsectionpointhistoryattachmentmessage
             $delightfulMessageIds = [];
             foreach ($memoryManager->getMessages() as $message) {
                 $delightfulMessageIds[] = $message->getIdentifier();
@@ -342,7 +342,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             return false;
         }
 
-        // maybealsohave其他stringsplice，暂o clockalsonotinside敛
+        // maybealsohaveotherstringsplice，暂o clockalsonotinside敛
         $items = match ($contentValue->getType()) {
             ValueType::Const => $contentValue->getConstValue()?->getItems() ?? [],
             ValueType::Expression => $contentValue->getExpressionValue()?->getItems() ?? [],

@@ -26,10 +26,10 @@ use Hyperf\Retry\Annotation\Retry;
 
 class QwenImageModel extends AbstractImageGenerate
 {
-    // mostbiground询retrycount
+    // mostbigroundretrycount
     private const MAX_RETRY_COUNT = 30;
 
-    // round询retrybetween隔（second）
+    // roundretrybetween(second)
     private const RETRY_INTERVAL = 2;
 
     private QwenImageAPI $api;
@@ -51,12 +51,12 @@ class QwenImageModel extends AbstractImageGenerate
 
     public function setAK(string $ak)
     {
-        // 通义thousand问notuseAK/SKauthentication，thismethodfornullimplement
+        // thousandnotuseAK/SKauthentication,thismethodfornullimplement
     }
 
     public function setSK(string $sk)
     {
-        // 通义thousand问notuseAK/SKauthentication，thismethodfornullimplement
+        // thousandnotuseAK/SKauthentication,thismethodfornullimplement
     }
 
     public function setApiKey(string $apiKey)
@@ -76,7 +76,7 @@ class QwenImageModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先createresponseobject
+        // 1. createresponseobject
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -85,11 +85,11 @@ class QwenImageModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof QwenImageModelRequest) {
-            $this->logger->error('Qwen OpenAIformat生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Qwen OpenAIformatgraph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
-        // 3. andhairhandle - 直接操asresponseobject
+        // 3. andhairhandle - asresponseobject
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
@@ -98,22 +98,22 @@ class QwenImageModel extends AbstractImageGenerate
             $parallel->add(function () use ($imageGenerateRequest, $response, $fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
                 try {
-                    // submittaskandround询result
+                    // submittaskandroundresult
                     $taskId = $this->submitAsyncTask($imageGenerateRequest);
                     $result = $this->pollTaskResult($taskId, $imageGenerateRequest);
 
                     $this->validateQwenResponse($result);
 
-                    // success：settingimagedatatoresponseobject
+                    // success:settingimagedatatoresponseobject
                     $this->addImageDataToResponseQwen($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：settingerrorinfotoresponseobject（onlysettingfirsterror）
+                    // fail:settingerrorinfotoresponseobject(onlysettingfirsterror)
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('Qwen OpenAIformat生graph：singlerequestfail', [
+                    $this->logger->error('Qwen OpenAIformatgraph:singlerequestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -124,11 +124,11 @@ class QwenImageModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 4. recordfinalresult
-        $this->logger->info('Qwen OpenAIformat生graph：andhairhandlecomplete', [
-            '总request数' => $count,
-            'successimage数' => count($response->getData()),
+        $this->logger->info('Qwen OpenAIformatgraph:andhairhandlecomplete', [
+            'request' => $count,
+            'successimage' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
-            'error码' => $response->getProviderErrorCode(),
+            'error' => $response->getProviderErrorCode(),
             'errormessage' => $response->getProviderErrorMessage(),
         ]);
 
@@ -152,7 +152,7 @@ class QwenImageModel extends AbstractImageGenerate
                 foreach ($output['results'] as $resultItem) {
                     if (! empty($resultItem['url'])) {
                         $imageUrls[$index] = $resultItem['url'];
-                        break; // only取firstimageURL
+                        break; // onlyfirstimageURL
                     }
                 }
             }
@@ -162,16 +162,16 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraphlike核core逻辑，returnnativeresult.
+     * generategraphlikecore,returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof QwenImageModelRequest) {
-            $this->logger->error('通义thousand问文生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('thousandgraph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // other文生graphis x ，阿withinis * ，maintainup游one致，final传入alsois *
+        // othergraphis x ,withinis * ,maintainupone,finalalsois *
         $size = $imageGenerateRequest->getWidth() . 'x' . $imageGenerateRequest->getHeight();
 
         // validationimagesize
@@ -179,7 +179,7 @@ class QwenImageModel extends AbstractImageGenerate
 
         $count = $imageGenerateRequest->getGenerateNum();
 
-        $this->logger->info('通义thousand问文生graph：start生graph', [
+        $this->logger->info('thousandgraph:startgraph', [
             'prompt' => $imageGenerateRequest->getPrompt(),
             'size' => $size,
             'count' => $count,
@@ -192,9 +192,9 @@ class QwenImageModel extends AbstractImageGenerate
             $parallel->add(function () use ($imageGenerateRequest, $i, $fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
                 try {
-                    // submittask（带retry）
+                    // submittask(retry)
                     $taskId = $this->submitAsyncTask($imageGenerateRequest);
-                    // round询result（带retry）
+                    // roundresult(retry)
                     $result = $this->pollTaskResult($taskId, $imageGenerateRequest);
 
                     return [
@@ -203,7 +203,7 @@ class QwenImageModel extends AbstractImageGenerate
                         'index' => $i,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('通义thousand问文生graph：fail', [
+                    $this->logger->error('thousandgraph:fail', [
                         'error' => $e->getMessage(),
                         'index' => $i,
                     ]);
@@ -217,12 +217,12 @@ class QwenImageModel extends AbstractImageGenerate
             });
         }
 
-        // get所haveandlinetaskresult
+        // gethaveandlinetaskresult
         $results = $parallel->wait();
         $rawResults = [];
         $errors = [];
 
-        // handleresult，maintainnativeformat
+        // handleresult,maintainnativeformat
         foreach ($results as $result) {
             if ($result['success']) {
                 $rawResults[$result['index']] = $result;
@@ -235,7 +235,7 @@ class QwenImageModel extends AbstractImageGenerate
         }
 
         if (empty($rawResults)) {
-            // 优先usespecificerror码，ifallis通useerrorthenuse NO_VALID_IMAGE
+            // usespecificerror,ifallisuseerrorthenuse NO_VALID_IMAGE
             $finalErrorCode = ImageGenerateErrorCode::NO_VALID_IMAGE;
             $finalErrorMsg = '';
 
@@ -247,20 +247,20 @@ class QwenImageModel extends AbstractImageGenerate
                 }
             }
 
-            // ifnothave找tospecificerrormessage，usefirsterrormessage
+            // ifnothavetospecificerrormessage,usefirsterrormessage
             if (empty($finalErrorMsg) && ! empty($errors[0]['message'])) {
                 $finalErrorMsg = $errors[0]['message'];
             }
 
-            $this->logger->error('通义thousand问文生graph：所haveimagegenerate均fail', ['errors' => $errors]);
+            $this->logger->error('thousandgraph:haveimagegeneratefail', ['errors' => $errors]);
             ExceptionBuilder::throw($finalErrorCode, $finalErrorMsg);
         }
 
-        // 按indexsortresult
+        // indexsortresult
         ksort($rawResults);
         $rawResults = array_values($rawResults);
 
-        $this->logger->info('通义thousand问文生graph：generateend', [
+        $this->logger->info('thousandgraph:generateend', [
             'imagequantity' => $count,
         ]);
 
@@ -280,9 +280,9 @@ class QwenImageModel extends AbstractImageGenerate
             $params = [
                 'prompt' => $prompt,
                 'size' => $request->getWidth() . '*' . $request->getHeight(),
-                'n' => 1, // 通义thousand问eachtimeonlycangenerate1张image
+                'n' => 1, // thousandeachtimeonlycangenerate1image
                 'model' => $request->getModel(),
-                'watermark' => false, // closeAPIwatermark，use统onePHPwatermark
+                'watermark' => false, // closeAPIwatermark,useonePHPwatermark
                 'prompt_extend' => $request->isPromptExtend(),
             ];
 
@@ -291,19 +291,19 @@ class QwenImageModel extends AbstractImageGenerate
             // checkresponseformat
             if (! isset($response['output']['task_id'])) {
                 $errorMsg = $response['message'] ?? 'unknownerror';
-                $this->logger->warning('通义thousand问文生graph：responsemiddle缺少taskID', ['response' => $response]);
+                $this->logger->warning('thousandgraph:responsemiddletaskID', ['response' => $response]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR, $errorMsg);
             }
 
             $taskId = $response['output']['task_id'];
 
-            $this->logger->info('通义thousand问文生graph：submittasksuccess', [
+            $this->logger->info('thousandgraph:submittasksuccess', [
                 'taskId' => $taskId,
             ]);
 
             return $taskId;
         } catch (Exception $e) {
-            $this->logger->error('通义thousand问文生graph：tasksubmitexception', [
+            $this->logger->error('thousandgraph:tasksubmitexception', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -327,14 +327,14 @@ class QwenImageModel extends AbstractImageGenerate
 
                 // checkresponseformat
                 if (! isset($response['output'])) {
-                    $this->logger->warning('通义thousand问文生graph：querytaskresponseformaterror', ['response' => $response]);
+                    $this->logger->warning('thousandgraph:querytaskresponseformaterror', ['response' => $response]);
                     ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR);
                 }
 
                 $output = $response['output'];
                 $taskStatus = $output['task_status'] ?? '';
 
-                $this->logger->info('通义thousand问文生graph：taskstatus', [
+                $this->logger->info('thousandgraph:taskstatus', [
                     'taskId' => $taskId,
                     'status' => $taskStatus,
                 ]);
@@ -344,7 +344,7 @@ class QwenImageModel extends AbstractImageGenerate
                         if (! empty($output['results'])) {
                             return $response;
                         }
-                        $this->logger->error('通义thousand问文生graph：taskcompletebut缺少imagedata', ['response' => $response]);
+                        $this->logger->error('thousandgraph:taskcompletebutimagedata', ['response' => $response]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
                         // no break
                     case 'PENDING':
@@ -352,18 +352,18 @@ class QwenImageModel extends AbstractImageGenerate
                         break;
                     case 'FAILED':
                         $errorMsg = $output['message'] ?? 'taskexecutefail';
-                        $this->logger->error('通义thousand问文生graph：taskexecutefail', ['taskId' => $taskId, 'error' => $errorMsg]);
+                        $this->logger->error('thousandgraph:taskexecutefail', ['taskId' => $taskId, 'error' => $errorMsg]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $errorMsg);
                         // no break
                     default:
-                        $this->logger->error('通义thousand问文生graph：unknowntaskstatus', ['status' => $taskStatus, 'response' => $response]);
+                        $this->logger->error('thousandgraph:unknowntaskstatus', ['status' => $taskStatus, 'response' => $response]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT_WITH_REASON);
                 }
 
                 ++$retryCount;
                 sleep(self::RETRY_INTERVAL);
             } catch (Exception $e) {
-                $this->logger->error('通义thousand问文生graph：querytaskexception', [
+                $this->logger->error('thousandgraph:querytaskexception', [
                     'error' => $e->getMessage(),
                     'trace' => $e->getTraceAsString(),
                     'taskId' => $taskId,
@@ -373,12 +373,12 @@ class QwenImageModel extends AbstractImageGenerate
             }
         }
 
-        $this->logger->error('通义thousand问文生graph：taskquerytimeout', ['taskId' => $taskId]);
+        $this->logger->error('thousandgraph:taskquerytimeout', ['taskId' => $taskId]);
         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT);
     }
 
     /**
-     * validationimagesizewhethermatch通义thousand问model规格
+     * validationimagesizewhethermatchthousandmodel
      */
     private function validateImageSize(string $size, string $model): void
     {
@@ -390,17 +390,17 @@ class QwenImageModel extends AbstractImageGenerate
                 $this->validateWan22FlashSize($size);
                 break;
             default:
-                // othermodel暂notvalidation
+                // othermodelnotvalidation
                 break;
         }
     }
 
     /**
-     * validationqwen-imagemodelfixedsizecolumn表.
+     * validationqwen-imagemodelfixedsizecolumn.
      */
     private function validateQwenImageSize(string $size): void
     {
-        // qwen-imagesupportfixedsizecolumn表
+        // qwen-imagesupportfixedsizecolumn
         $supportedSizes = [
             '1664x928',   // 16:9
             '1472x1140',  // 4:3
@@ -410,7 +410,7 @@ class QwenImageModel extends AbstractImageGenerate
         ];
 
         if (! in_array($size, $supportedSizes, true)) {
-            $this->logger->error('通义thousand问文生graph：qwen-imagenot supportedimagesize', [
+            $this->logger->error('thousandgraph:qwen-imagenot supportedimagesize', [
                 'requested_size' => $size,
                 'supported_sizes' => $supportedSizes,
                 'model' => 'qwen-image',
@@ -428,13 +428,13 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * validationwan2.2-t2i-flashmodel区betweensize.
+     * validationwan2.2-t2i-flashmodelbetweensize.
      */
     private function validateWan22FlashSize(string $size): void
     {
         $dimensions = explode('x', $size);
         if (count($dimensions) !== 2) {
-            $this->logger->error('通义thousand问文生graph：wan2.2-t2i-flashsizeformaterror', [
+            $this->logger->error('thousandgraph:wan2.2-t2i-flashsizeformaterror', [
                 'requested_size' => $size,
                 'model' => 'wan2.2-t2i-flash',
             ]);
@@ -445,12 +445,12 @@ class QwenImageModel extends AbstractImageGenerate
         $width = (int) $dimensions[0];
         $height = (int) $dimensions[1];
 
-        // wan2.2-t2i-flashsupport512-1440like素区between
+        // wan2.2-t2i-flashsupport512-1440likebetween
         $minSize = 512;
         $maxSize = 1440;
 
         if ($width < $minSize || $width > $maxSize || $height < $minSize || $height > $maxSize) {
-            $this->logger->error('通义thousand问文生graph：wan2.2-t2i-flashsize超outsupportrange', [
+            $this->logger->error('thousandgraph:wan2.2-t2i-flashsizeoutsupportrange', [
                 'requested_size' => $size,
                 'width' => $width,
                 'height' => $height,
@@ -472,7 +472,7 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * for通义thousand问originaldataaddwatermark.
+     * forthousandoriginaldataaddwatermark.
      */
     private function processQwenRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -490,12 +490,12 @@ class QwenImageModel extends AbstractImageGenerate
                 }
                 unset($resultItem);
             } catch (Exception $e) {
-                // watermarkhandlefailo clock，recorderrorbutnotimpactimagereturn
-                $this->logger->error('通义thousand问imagewatermarkhandlefail', [
+                // watermarkhandlefailo clock,recorderrorbutnotimpactimagereturn
+                $this->logger->error('thousandimagewatermarkhandlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledownone张image，currentimagemaintainoriginalstatus
+                // continuehandledownoneimage,currentimagemaintainoriginalstatus
             }
         }
 
@@ -503,27 +503,27 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * validate通义thousand问APIresponsedataformat.
+     * validatethousandAPIresponsedataformat.
      */
     private function validateQwenResponse(array $result): void
     {
         if (empty($result['output']) || ! is_array($result['output'])) {
-            throw new Exception('通义thousand问responsedataformaterror：缺少outputfield');
+            throw new Exception('thousandresponsedataformaterror:outputfield');
         }
 
         $output = $result['output'];
         if (empty($output['results']) || ! is_array($output['results'])) {
-            throw new Exception('通义thousand问responsedataformaterror：缺少resultsfield');
+            throw new Exception('thousandresponsedataformaterror:resultsfield');
         }
 
         // checkfirstresultwhetherhaveURL
         if (empty($output['results'][0]['url'])) {
-            throw new Exception('通义thousand问responsedataformaterror：缺少imageURL');
+            throw new Exception('thousandresponsedataformaterror:imageURL');
         }
     }
 
     /**
-     * will通义thousand问imagedataaddtoOpenAIresponseobjectmiddle.
+     * willthousandimagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponseQwen(
         OpenAIFormatResponse $response,
@@ -533,7 +533,7 @@ class QwenImageModel extends AbstractImageGenerate
         // useRedislockensureandhairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
-            // from通义thousand问responsemiddleextractdata
+            // fromthousandresponsemiddleextractdata
             if (empty($qwenResult['output']['results']) || ! is_array($qwenResult['output']['results'])) {
                 return;
             }
@@ -552,7 +552,7 @@ class QwenImageModel extends AbstractImageGenerate
                             'url' => $processedUrl,
                         ];
                     } catch (Exception $e) {
-                        $this->logger->error('Qwenaddimagedata：URLwatermarkhandlefail', [
+                        $this->logger->error('Qwenaddimagedata:URLwatermarkhandlefail', [
                             'error' => $e->getMessage(),
                             'url' => $resultItem['url'],
                         ]);
@@ -561,16 +561,16 @@ class QwenImageModel extends AbstractImageGenerate
                             'url' => $resultItem['url'],
                         ];
                     }
-                    break; // only取firstimage
+                    break; // onlyfirstimage
                 }
             }
 
-            // 累计usageinfo
+            // usageinfo
             if (! empty($qwenResult['usage']) && is_array($qwenResult['usage'])) {
                 $currentUsage->addGeneratedImages($qwenResult['usage']['image_count'] ?? 1);
-            // 通义thousand问nothavetokeninfo，maintaindefaultvalue
+            // thousandnothavetokeninfo,maintaindefaultvalue
             } else {
-                // ifnothaveusageinfo，defaultincrease1张image
+                // ifnothaveusageinfo,defaultincrease1image
                 $currentUsage->addGeneratedImages(1);
             }
 
@@ -578,7 +578,7 @@ class QwenImageModel extends AbstractImageGenerate
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // ensurelockone定willberelease
+            // ensurelockonewillberelease
             $this->unlockResponse($response, $lockOwner);
         }
     }

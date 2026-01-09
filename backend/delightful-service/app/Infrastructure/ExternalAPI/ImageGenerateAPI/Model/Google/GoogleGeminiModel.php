@@ -77,7 +77,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof GoogleGeminiRequest) {
-            $this->logger->error('GoogleGemini OpenAIformat生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('GoogleGemini OpenAIformat生graph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
@@ -93,16 +93,16 @@ class GoogleGeminiModel extends AbstractImageGenerate
                     $result = $this->requestImageGeneration($imageGenerateRequest);
                     $this->validateGoogleGeminiResponse($result);
 
-                    // success：settingimagedatatoresponseobject
+                    // success:settingimagedatatoresponseobject
                     $this->addImageDataToResponseGemini($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：settingerrorinfotoresponseobject（onlysettingfirsterror）
+                    // fail:settingerrorinfotoresponseobject(onlysettingfirsterror)
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('GoogleGemini OpenAIformat生graph：singlerequestfail', [
+                    $this->logger->error('GoogleGemini OpenAIformat生graph:singlerequestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -113,7 +113,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 4. recordfinalresult
-        $this->logger->info('GoogleGemini OpenAIformat生graph：andhairhandlecomplete', [
+        $this->logger->info('GoogleGemini OpenAIformat生graph:andhairhandlecomplete', [
             '总request数' => $count,
             'successimage数' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
@@ -141,7 +141,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         }
 
         if (empty($imageData)) {
-            $this->logger->error('Google Gemini文生graph：所haveimagegenerate均fail', ['rawResults' => $rawResults]);
+            $this->logger->error('Google Gemini文生graph:所haveimagegenerate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
@@ -158,7 +158,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
     protected function checkBalance(): float
     {
-        // Google Gemini API 目frontnothavebalancequeryinterface，returndefaultvalue
+        // Google Gemini API 目frontnothavebalancequeryinterface,returndefaultvalue
         return 999.0;
     }
 
@@ -172,13 +172,13 @@ class GoogleGeminiModel extends AbstractImageGenerate
         $modelId = $imageGenerateRequest->getModel();
         $referImages = $imageGenerateRequest->getReferImages();
 
-        // ifrequestmiddlefinger定model，then动statesetting
+        // ifrequestmiddlefinger定model,then动statesetting
         if (! empty($modelId)) {
             $this->api->setModelId($modelId);
         }
 
         try {
-            // ifhave参考graphlike，thenexecutegraphlikeedit
+            // ifhave参考graphlike,thenexecutegraphlikeedit
             if (! empty($referImages)) {
                 // 取theone张参考graphlikeconductedit
                 $referImage = $referImages[0];
@@ -193,7 +193,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
             return $result;
         } catch (Exception $e) {
-            $this->logger->warning('Google Geminiimagegenerate：callimagegenerateinterfacefail', ['error' => $e->getMessage()]);
+            $this->logger->warning('Google Geminiimagegenerate:callimagegenerateinterfacefail', ['error' => $e->getMessage()]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $e->getMessage());
         }
     }
@@ -214,7 +214,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             $response = $client->get($url);
 
             if ($response->getStatusCode() !== 200) {
-                throw new Exception("no法downloadgraphlike，HTTPstatus码: {$response->getStatusCode()}");
+                throw new Exception("no法downloadgraphlike,HTTPstatus码: {$response->getStatusCode()}");
             }
 
             $imageContent = $response->getBody()->getContents();
@@ -224,7 +224,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
             return base64_encode($imageContent);
         } catch (Exception $e) {
-            $this->logger->error('Google Geminigraph生graph：graphlikedownloadfail', [
+            $this->logger->error('Google Geminigraph生graph:graphlikedownloadfail', [
                 'url' => $url,
                 'error' => $e->getMessage(),
             ]);
@@ -248,11 +248,11 @@ class GoogleGeminiModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof GoogleGeminiRequest) {
-            $this->logger->error('Google Gemini文生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Google Gemini文生graph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // Google Gemini APIeachtimeonlycangenerateone张graph，passandhaircallimplement多graphgenerate
+        // Google Gemini APIeachtimeonlycangenerateone张graph,passandhaircallimplement多graphgenerate
         $count = $imageGenerateRequest->getGenerateNum();
         $rawResults = [];
         $errors = [];
@@ -273,7 +273,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                         'index' => $i,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('Google Gemini文生graph：imagegeneratefail', [
+                    $this->logger->error('Google Gemini文生graph:imagegeneratefail', [
                         'error' => $e->getMessage(),
                         'index' => $i,
                     ]);
@@ -298,7 +298,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('Google Gemini文生graph：所haveimagegenerate均fail', ['errors' => $errors]);
+            $this->logger->error('Google Gemini文生graph:所haveimagegenerate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 
@@ -309,7 +309,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
     private function extractImageDataFromResponse(array $result): string
     {
         if (! isset($result['candidates']) || ! is_array($result['candidates'])) {
-            throw new Exception('responsemiddle缺少candidatesfield');
+            throw new Exception('responsemiddlemissingcandidatesfield');
         }
 
         foreach ($result['candidates'] as $candidate) {
@@ -353,7 +353,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
     private function validateGoogleGeminiResponse(array $result): void
     {
         if (! isset($result['candidates']) || ! is_array($result['candidates'])) {
-            throw new Exception('Google Geminiresponsedataformaterror：缺少candidatesfield');
+            throw new Exception('Google Geminiresponsedataformaterror:missingcandidatesfield');
         }
 
         $hasValidImage = false;
@@ -369,12 +369,12 @@ class GoogleGeminiModel extends AbstractImageGenerate
         }
 
         if (! $hasValidImage) {
-            throw new Exception('Google Geminiresponsedataformaterror：缺少graphlikedata');
+            throw new Exception('Google Geminiresponsedataformaterror:missinggraphlikedata');
         }
     }
 
     /**
-     * willGoogle GeminiimagedataaddtoOpenAIresponseobjectmiddle（convertforURLformat）.
+     * willGoogle GeminiimagedataaddtoOpenAIresponseobjectmiddle(convertforURLformat).
      */
     private function addImageDataToResponseGemini(
         OpenAIFormatResponse $response,
@@ -390,18 +390,18 @@ class GoogleGeminiModel extends AbstractImageGenerate
             $currentData = $response->getData();
             $currentUsage = $response->getUsage() ?? new ImageUsage();
 
-            // watermarkhandle（willwillbase64convertforURL）
+            // watermarkhandle(willwillbase64convertforURL)
             $processedUrl = $imageBase64;
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToBase64($imageBase64, $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('GoogleGeminiaddimagedata：watermarkhandlefail', [
+                $this->logger->error('GoogleGeminiaddimagedata:watermarkhandlefail', [
                     'error' => $e->getMessage(),
                 ]);
-                // watermarkhandlefailo clockuseoriginalbase64data（butthisusuallynotshouldhair生）
+                // watermarkhandlefailo clockuseoriginalbase64data(butthisusuallynotshouldhair生)
             }
 
-            // onlyreturnURLformat，andothermodelmaintainone致
+            // onlyreturnURLformat,andothermodelmaintainone致
             $currentData[] = [
                 'url' => $processedUrl,
             ];
@@ -414,7 +414,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 $currentUsage->completionTokens += $usageMetadata['candidatesTokenCount'] ?? 0;
                 $currentUsage->totalTokens += $usageMetadata['totalTokenCount'] ?? 0;
             } else {
-                // ifnothaveusageinfo，defaultincrease1张image
+                // ifnothaveusageinfo,defaultincrease1张image
                 $currentUsage->addGeneratedImages(1);
             }
 

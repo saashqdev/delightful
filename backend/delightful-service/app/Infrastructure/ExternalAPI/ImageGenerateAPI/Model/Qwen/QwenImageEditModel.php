@@ -43,12 +43,12 @@ class QwenImageEditModel extends AbstractImageGenerate
 
     public function setAK(string $ak)
     {
-        // 通义thousand问notuseAK/SKauthentication，thismethodfornullimplement
+        // 通义thousand问notuseAK/SKauthentication,thismethodfornullimplement
     }
 
     public function setSK(string $sk)
     {
-        // 通义thousand问notuseAK/SKauthentication，thismethodfornullimplement
+        // 通义thousand问notuseAK/SKauthentication,thismethodfornullimplement
     }
 
     public function setApiKey(string $apiKey)
@@ -77,30 +77,30 @@ class QwenImageEditModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof QwenImageEditRequest) {
-            $this->logger->error('QwenEdit OpenAIformat生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('QwenEdit OpenAIformat生graph:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
-        // 3. synchandlegraphlikeedit（singlegraph）
+        // 3. synchandlegraphlikeedit(singlegraph)
         try {
             $result = $this->callSyncEditAPI($imageGenerateRequest);
             $this->validateQwenEditResponse($result);
 
-            // success：settingimagedatatoresponseobject
+            // success:settingimagedatatoresponseobject
             $this->addImageDataToResponseQwenEdit($response, $result, $imageGenerateRequest);
         } catch (Exception $e) {
-            // fail：settingerrorinfotoresponseobject
+            // fail:settingerrorinfotoresponseobject
             $response->setProviderErrorCode($e->getCode());
             $response->setProviderErrorMessage($e->getMessage());
 
-            $this->logger->error('QwenEdit OpenAIformat生graph：requestfail', [
+            $this->logger->error('QwenEdit OpenAIformat生graph:requestfail', [
                 'error_code' => $e->getCode(),
                 'error_message' => $e->getMessage(),
             ]);
         }
 
         // 4. recordfinalresult
-        $this->logger->info('QwenEdit OpenAIformat生graph：handlecomplete', [
+        $this->logger->info('QwenEdit OpenAIformat生graph:handlecomplete', [
             'successimage数' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
             'error码' => $response->getProviderErrorCode(),
@@ -141,24 +141,24 @@ class QwenImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraphlike核core逻辑，returnnativeresult - synccall.
+     * generategraphlike核core逻辑,returnnativeresult - synccall.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof QwenImageEditRequest) {
-            $this->logger->error('通义thousand问graphlikeedit：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('通义thousand问graphlikeedit:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
         // validation必wantparameter
         $this->validateEditRequest($imageGenerateRequest);
 
-        $this->logger->info('通义thousand问graphlikeedit：startedit', [
+        $this->logger->info('通义thousand问graphlikeedit:startedit', [
             'prompt' => $imageGenerateRequest->getPrompt(),
             'image_count' => count($imageGenerateRequest->getImageUrls()),
         ]);
 
-        // 直接handlesinglerequest，graphlikeeditonlyhandleone张image
+        // 直接handlesinglerequest,graphlikeeditonlyhandleone张image
         try {
             $result = $this->callSyncEditAPI($imageGenerateRequest);
             $rawResults = [
@@ -168,7 +168,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                 ],
             ];
         } catch (Exception $e) {
-            $this->logger->error('通义thousand问graphlikeedit：fail', [
+            $this->logger->error('通义thousand问graphlikeedit:fail', [
                 'error' => $e->getMessage(),
             ]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::from($e->getCode()) ?? ImageGenerateErrorCode::GENERAL_ERROR, $e->getMessage());
@@ -184,7 +184,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     {
         // checkwhetherhaveinputgraphlike
         if (empty($request->getImageUrls())) {
-            $this->logger->error('通义thousand问graphlikeedit：缺少inputgraphlike');
+            $this->logger->error('通义thousand问graphlikeedit:missinginputgraphlike');
             ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, 'image_generate.reference_images_required');
         }
     }
@@ -208,24 +208,24 @@ class QwenImageEditModel extends AbstractImageGenerate
             // checkresponseformat - 适配newsyncresponseformat
             if (! isset($response['output']['choices'])) {
                 $errorMsg = $response['message'] ?? 'unknownerror';
-                $this->logger->warning('通义thousand问graphlikeedit：responseformaterror', ['response' => $response]);
+                $this->logger->warning('通义thousand问graphlikeedit:responseformaterror', ['response' => $response]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR, $errorMsg);
             }
 
             // checkwhetherhavegraphlikedata
             $choices = $response['output']['choices'];
             if (empty($choices)) {
-                $this->logger->error('通义thousand问graphlikeedit：responsemiddle缺少graphlikedata', ['response' => $response]);
+                $this->logger->error('通义thousand问graphlikeedit:responsemiddlemissinggraphlikedata', ['response' => $response]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
             }
 
-            $this->logger->info('通义thousand问graphlikeedit：callsuccess', [
+            $this->logger->info('通义thousand问graphlikeedit:callsuccess', [
                 'choices_count' => count($choices),
             ]);
 
             return $response;
         } catch (Exception $e) {
-            $this->logger->error('通义thousand问graphlikeedit：callexception', [
+            $this->logger->error('通义thousand问graphlikeedit:callexception', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -258,14 +258,14 @@ class QwenImageEditModel extends AbstractImageGenerate
                         // handleURLformatimage
                         $content['image'] = $this->watermarkProcessor->addWatermarkToUrl($content['image'], $imageGenerateRequest);
                     } catch (Exception $e) {
-                        // watermarkhandlefailo clock，recorderrorbutnotimpactimagereturn
+                        // watermarkhandlefailo clock,recorderrorbutnotimpactimagereturn
                         $this->logger->error('通义thousand问graphlikeeditwatermarkhandlefail', [
                             'index' => $index,
                             'choiceIndex' => $choiceIndex,
                             'contentIndex' => $contentIndex,
                             'error' => $e->getMessage(),
                         ]);
-                        // continuehandledownone张image，currentimagemaintainoriginalstatus
+                        // continuehandledownone张image,currentimagemaintainoriginalstatus
                     }
                 }
             }
@@ -280,7 +280,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     private function validateQwenEditResponse(array $result): void
     {
         if (empty($result['output']['choices']) || ! is_array($result['output']['choices'])) {
-            throw new Exception('通义thousand问editresponsedataformaterror：缺少choicesdata');
+            throw new Exception('通义thousand问editresponsedataformaterror:missingchoicesdata');
         }
 
         $hasValidImage = false;
@@ -296,7 +296,7 @@ class QwenImageEditModel extends AbstractImageGenerate
         }
 
         if (! $hasValidImage) {
-            throw new Exception('通义thousand问editresponsedataformaterror：缺少graphlikedata');
+            throw new Exception('通义thousand问editresponsedataformaterror:missinggraphlikedata');
         }
     }
 
@@ -331,7 +331,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                 try {
                     $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($content['image'], $imageGenerateRequest);
                 } catch (Exception $e) {
-                    $this->logger->error('QwenEditaddimagedata：watermarkhandlefail', [
+                    $this->logger->error('QwenEditaddimagedata:watermarkhandlefail', [
                         'error' => $e->getMessage(),
                         'url' => $content['image'],
                     ]);

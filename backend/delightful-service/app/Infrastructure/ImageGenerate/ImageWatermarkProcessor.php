@@ -48,7 +48,7 @@ class ImageWatermarkProcessor
         // decodingbase64image
         $imageData = $this->decodeBase64Image($base64Image);
 
-        // double重检测ensureformat准确
+        // double重检测ensureformataccurate
         $detectedFormat = $this->detectImageFormat($imageData);
         $targetFormat = $originalFormat !== 'jpeg' ? $originalFormat : $detectedFormat;
 
@@ -114,13 +114,13 @@ class ImageWatermarkProcessor
 
         $image = imagecreatefromstring($imageData);
         if ($image === false) {
-            throw new Exception('无法parseURLimagedata: ');
+            throw new Exception('no法parseURLimagedata: ');
         }
         $watermarkConfig = $imageGenerateRequest->getWatermarkConfig();
         // add视觉watermark
         $watermarkedImage = $this->addWatermarkToImageResource($image, $watermarkConfig);
 
-        // use检测toformatconduct无损output
+        // use检测toformatconductno损output
         ob_start();
         $this->outputImage($watermarkedImage, $detectedFormat);
         $watermarkedData = ob_get_contents();
@@ -176,7 +176,7 @@ class ImageWatermarkProcessor
                 // 直接use传入Ycoordinateasfor基lineposition
                 $ttfY = $y;
             } else {
-                // if无法getside界框，直接use传入Ycoordinate
+                // ifno法getside界框，直接use传入Ycoordinate
                 $ttfY = $y;
             }
 
@@ -220,7 +220,7 @@ class ImageWatermarkProcessor
      */
     private function calculateWatermarkPosition(int $width, int $height, string $text, int $fontSize, int $position): array
     {
-        // more精确textwidth估算
+        // moreprecisetextwidth估算
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && $this->fontProvider->supportsTTF() && function_exists('imagettfbbox')) {
             // useTTF字body计算actualtextside界框
@@ -303,14 +303,14 @@ class ImageWatermarkProcessor
 
         $imageData = file_get_contents($url, false, $context);
         if ($imageData === false) {
-            throw new Exception('无法downloadimage: ' . $url);
+            throw new Exception('no法downloadimage: ' . $url);
         }
 
         return $imageData;
     }
 
     /**
-     * outputimage（无损version）.
+     * outputimage（no损version）.
      * @param mixed $image
      * @param string $format goalformat (png/jpeg/webp/gif)
      */
@@ -321,18 +321,18 @@ class ImageWatermarkProcessor
             if ($this->fontProvider->hasTransparency($image)) {
                 $format = 'png'; // have透明degreeusePNG
             } else {
-                $format = 'jpeg'; // 无透明degreeuseJPEG高quality
+                $format = 'jpeg'; // no透明degreeuseJPEG高quality
             }
         }
 
         try {
             switch (strtolower($format)) {
                 case 'png':
-                    imagepng($image, null, 0); // PNG无损compress
+                    imagepng($image, null, 0); // PNGno损compress
                     break;
                 case 'webp':
                     if (function_exists('imagewebp')) {
-                        imagewebp($image, null, 100); // WebP无损模type
+                        imagewebp($image, null, 100); // WebPno损模type
                     } else {
                         $this->logger->warning('WebP not supported, falling back to PNG');
                         imagepng($image, null, 0);

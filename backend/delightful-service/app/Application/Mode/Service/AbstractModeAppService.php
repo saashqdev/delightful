@@ -263,7 +263,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * get详细modelinfo（useat管理back台，考虑servicequotientlevel联status）.
+     * getdetailedmodelinfo（useat管理back台，考虑servicequotientlevel联status）.
      * @return array<string, array{best: null|ProviderModelEntity, all: ProviderModelEntity[], status: ModelStatus}>
      */
     protected function getDetailedModels(ModeAggregate $modeAggregate): array
@@ -361,7 +361,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * according tomodelcolumn表确定status（考虑servicequotientlevel联status）.
+     * according tomodelcolumn表certainstatus（考虑servicequotientlevel联status）.
      *
      * @param ProviderModelEntity[] $models modelcolumn表
      * @param array<int, Status> $providerStatuses servicequotientstatusmapping

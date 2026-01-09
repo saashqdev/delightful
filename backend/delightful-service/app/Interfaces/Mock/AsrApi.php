@@ -144,7 +144,7 @@ class AsrApi
         $audioFileName = $outputFilename . '.webm';
         $audioPath = rtrim($renamedDir, '/') . '/' . $audioFileName;
 
-        // buildreturndata (V2 详细version)
+        // buildreturndata (V2 detailedversion)
         $responseData = [
             'status' => SandboxAsrStatusEnum::COMPLETED->value,
             'task_key' => $taskKey,
@@ -176,7 +176,7 @@ class AsrApi
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 
-            // 模拟true实沙箱linefor：onlywhen笔记filehavecontento clock才return详细info
+            // 模拟true实沙箱linefor：onlywhen笔记filehavecontento clock才returndetailedinfo
             // 这withinsimplifyprocess，defaultfalse设havecontent（true实沙箱willcheckfilecontentwhetherforempty）
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,

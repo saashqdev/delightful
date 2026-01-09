@@ -144,7 +144,7 @@ class AccessTokenEntity extends AbstractEntity
         }
         if (! empty($ips)) {
             foreach ($ips as $ip) {
-                // as long ashaveone符合thenline
+                // as long ashaveoneconformthenline
                 if (in_array($ip, $this->ipLimit, true)) {
                     return;
                 }

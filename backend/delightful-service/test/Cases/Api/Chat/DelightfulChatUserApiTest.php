@@ -62,7 +62,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         // checkresponsewhetherforarray
         $this->assertIsArray($response, 'responseshouldisarrayformat');
 
-        // ifresponsecontainerrorinfo，output详细info
+        // ifresponsecontainerrorinfo，outputdetailedinfo
         if (isset($response['code']) && $response['code'] !== 1000) {
             echo "\ninterfacereturnerror: code=" . $response['code'] . ', message=' . ($response['message'] ?? 'unknown') . "\n";
 
@@ -401,7 +401,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         // checkresponsewhetherforarray
         $this->assertIsArray($response, 'responseshouldisarrayformat');
 
-        // ifresponsecontainerrorinfo，output详细info
+        // ifresponsecontainerrorinfo，outputdetailedinfo
         if (isset($response['code']) && $response['code'] !== 1000) {
             echo "\ninterfacereturnerror: code=" . $response['code'] . ', message=' . ($response['message'] ?? 'unknown') . "\n";
 

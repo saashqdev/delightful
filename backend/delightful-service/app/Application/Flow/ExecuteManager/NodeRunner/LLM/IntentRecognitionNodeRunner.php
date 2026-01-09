@@ -114,7 +114,7 @@ will你responseformat化for JSON object，format如down：
     "whether识别": true,
     "识别failreason": "",
     "most佳意graph": "吃饭",
-    "匹配to意graphhave": [
+    "matchto意graphhave": [
         {
             "意graph": "吃饭",
             "置信degree": 0.8
@@ -135,8 +135,8 @@ will你responseformat化for JSON object，format如down：
 # process
 1. 你will得tooneshareuserinputcontent，帮我analyzeoutuser意graphand置信degree。
 2. 推理user意graph，will推理procedure放to JSON middle 推导procedure field，解释for什么will得out这些意graphand置信degree。
-3. if识别to意graph，请填写most佳匹配and匹配to意graph，whether识别for true，most佳意graph one定is置信degreemost高，其middle 匹配to意graphhave fieldisaccording to 置信degree from大to小rowcolumn。
-4. ifincurrentrangenothave找to任何意graph，whether识别for false，请填写识别failreason，most佳匹配and匹配to意graphallshouldisempty。
+3. if识别to意graph，请填写most佳matchandmatchto意graph，whether识别for true，most佳意graph one定is置信degreemost高，其middle matchto意graphhave fieldisaccording to 置信degree from大to小rowcolumn。
+4. ifincurrentrangenothave找to任何意graph，whether识别for false，请填写识别failreason，most佳matchandmatchto意graphallshouldisempty。
 5. 只willreturn JSON format，notwillagainreturn其他content，ifone定needhavereturn，请放toremarkmiddle，return答contentone定能be JSON toolparse。
 
 # 限制

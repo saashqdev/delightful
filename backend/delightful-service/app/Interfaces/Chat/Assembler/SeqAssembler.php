@@ -283,7 +283,7 @@ class SeqAssembler
         $clientMessageData = [
             // service端generatemessage唯oneid，all局唯one。useatwithdraw、editmessage。
             'delightful_message_id' => $seqEntity->getDelightfulMessageId(),
-            // customer端generate，needios/安卓/webthree端共同确定onegenerate算法。useat告知customer端，delightful_message_idbycome
+            // customer端generate，needios/安卓/webthree端共同certainonegenerate算法。useat告知customer端，delightful_message_idbycome
             'app_message_id' => $seqEntity->getAppMessageId(),
             // send者
             'sender_id' => (string) $messageEntity?->getSenderId(),
@@ -312,7 +312,7 @@ class SeqAssembler
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // send方messageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),
-            // message所属conversationwindow。 customer端canaccording to此value确定messagewhether要reminderetc。if本groundnothavehair现这conversationid，主动toservice端queryconversationwindowdetail
+            // message所属conversationwindow。 customer端canaccording to此valuecertainmessagewhether要reminderetc。if本groundnothavehair现这conversationid，主动toservice端queryconversationwindowdetail
             'conversation_id' => $seqEntity->getConversationId(),
             // 本itemmessage所属organization
             'organization_code' => $seqEntity->getOrganizationCode(),

@@ -56,7 +56,7 @@ class VolceApiClient extends AbstractSms
 
         // $variables maybefor索引array ["quotient品A","供应quotientA",10],火山短信needalso原becomeassociatearray
         if ($smsStruct->templateId && $this->array_is_list($variables)) {
-            // 1.gettemplatecontent,确定variablekey
+            // 1.gettemplatecontent,certainvariablekey
             $templateContent = $this->template->getContentByTemplateId($smsStruct->getTemplateId()) ?? '';
             // 2.according tovariablekey,also原associatearray
             $variables = $this->template->getTemplateVariables($templateContent, $variables);

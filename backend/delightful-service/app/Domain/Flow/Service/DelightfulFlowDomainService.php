@@ -151,9 +151,9 @@ class DelightfulFlowDomainService extends AbstractDomainService
      */
     public function changeEnable(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow, ?bool $enable = null): void
     {
-        // if传入明确statusvalue，then直接set
+        // if传入explicitstatusvalue，then直接set
         if ($enable !== null) {
-            // ifcurrentstatusand要setstatussame，then无需操as
+            // ifcurrentstatusand要setstatussame，thenno需操as
             if ($delightfulFlow->isEnabled() === $enable) {
                 return;
             }

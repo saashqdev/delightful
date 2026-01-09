@@ -12,17 +12,17 @@ use App\Infrastructure\ExternalAPI\Sms\Enum\LanguageEnum;
 interface TemplateInterface
 {
     /**
-     * according to传入短信typeand语type,尝试确定maybe存intemplateid.
+     * according to传入短信typeand语type,尝试certainmaybe存intemplateid.
      */
     public function getTemplateIdByTypeAndLanguage(string $type, ?string $language): ?string;
 
     /**
-     * according to传入短信typeand语type,确定短信content. maybewill动stateadjusttypeto应templatecontent.
+     * according to传入短信typeand语type,certain短信content. maybewill动stateadjusttypeto应templatecontent.
      */
     public function getContentBySMSTypeAndLanguage(string $type, ?string $language): string;
 
     /**
-     * according tofront传入短信templateid,确定短信content.
+     * according tofront传入短信templateid,certain短信content.
      */
     public function getContentByTemplateId(string $templateId): string;
 

@@ -153,7 +153,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
         $moduleLabel = $moduleEnum->label();
         if ($moduleLabel === $moduleEnum->translationKey()) {
-            // if缺失翻译，hand动compatible已知模piece
+            // if缺失翻译，hand动compatibleknown模piece
             return match ($moduleEnum) {
                 DelightfulResourceEnum::ADMIN_AI => 'AI管理',
                 default => $moduleEnum->value,
@@ -194,7 +194,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
     /**
      * getlayerlevel结构permissiontree
-     * generate无限极permissiontree,rule：according topermissionresourcestring（如 Admin.ai.model_management）逐segmentsplit，逐layer构造tree。
+     * generateno限极permissiontree,rule：according topermissionresourcestring（如 Admin.ai.model_management）逐segmentsplit，逐layer构造tree。
      *
      * returnformat：
      * [

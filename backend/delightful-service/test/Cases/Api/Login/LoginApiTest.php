@@ -71,7 +71,7 @@ class LoginApiTest extends AbstractHttpTest
         // 构造requestparameter - testhand机numbernot存in
         $requestData = [
             'state_code' => '+86',
-            'phone' => '19999999999', // useone确定not存inhand机number
+            'phone' => '19999999999', // useonecertainnot存inhand机number
             'password' => '123456',
             'type' => 'phone_password',
         ];

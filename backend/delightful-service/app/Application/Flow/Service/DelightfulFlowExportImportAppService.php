@@ -341,7 +341,7 @@ class DelightfulFlowExportImportAppService
         }
 
         // ensuresettingfor新建process
-        $flowEntity->setId(0); // settingIDfor0表示新建
+        $flowEntity->setId(0); // settingIDfor0indicate新建
         $flowEntity->setId(null);
         $savedFlow = $this->delightfulFlowDomainService->create($dataIsolation, $flowEntity);
         $importReport['created'][] = "createprocess: {$savedFlow->getName()} (ID: {$savedFlow->getCode()})";
@@ -624,7 +624,7 @@ class DelightfulFlowExportImportAppService
                     if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $item)) {
                         $fieldName = substr($item, strlen($oldNodeIdStr));
                         $item = $newNodeIdStr . $fieldName;
-                        break; // 找to匹配backexitloop
+                        break; // 找tomatchbackexitloop
                     }
                 }
             }
@@ -762,7 +762,7 @@ class DelightfulFlowExportImportAppService
             if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $str)) {
                 $fieldName = substr($str, strlen($oldNodeIdStr));
                 $str = $newNodeIdStr . $fieldName;
-                break; // 找to匹配backexitloop
+                break; // 找tomatchbackexitloop
             }
         }
     }

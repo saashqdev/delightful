@@ -39,13 +39,13 @@ class EndpointAssembler
         foreach (HighAvailabilityAppType::cases() as $appType) {
             $prefix = $appType->value . DelimiterType::HIGH_AVAILABILITY->value;
 
-            // if匹配tofront缀，then移exceptfront缀returnoriginal modelId
+            // ifmatchtofront缀，then移exceptfront缀returnoriginal modelId
             if (str_starts_with($formattedModelId, $prefix)) {
                 return substr($formattedModelId, strlen($prefix));
             }
         }
 
-        // ifnothave匹配to任何front缀，then直接returnoriginalvalue
+        // ifnothavematchto任何front缀，then直接returnoriginalvalue
         return $formattedModelId;
     }
 

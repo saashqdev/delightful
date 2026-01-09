@@ -79,10 +79,10 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
         // verify其他field
         $this->assertSame('en_US', $data['default_language']);
-        $this->assertArrayEquals($payload['name_i18n'], $data['name_i18n'], 'name_i18n not匹配');
-        $this->assertArrayEquals($payload['title_i18n'], $data['title_i18n'], 'title_i18n not匹配');
-        $this->assertArrayEquals($payload['keywords_i18n'], $data['keywords_i18n'], 'keywords_i18n not匹配');
-        $this->assertArrayEquals($payload['description_i18n'], $data['description_i18n'], 'description_i18n not匹配');
+        $this->assertArrayEquals($payload['name_i18n'], $data['name_i18n'], 'name_i18n notmatch');
+        $this->assertArrayEquals($payload['title_i18n'], $data['title_i18n'], 'title_i18n notmatch');
+        $this->assertArrayEquals($payload['keywords_i18n'], $data['keywords_i18n'], 'keywords_i18n notmatch');
+        $this->assertArrayEquals($payload['description_i18n'], $data['description_i18n'], 'description_i18n notmatch');
 
         // againtime GET verify持久化
         $getResponse = $this->get($this->getUrl, [], $this->getCommonHeaders());
@@ -190,8 +190,8 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
         $this->assertArrayHasKey('name_i18n', $data);
         $this->assertArrayHasKey('title_i18n', $data);
-        $this->assertArrayEquals($payload['name_i18n'], $data['name_i18n'], 'name_i18n not匹配');
-        $this->assertArrayEquals($payload['title_i18n'], $data['title_i18n'], 'title_i18n not匹配');
+        $this->assertArrayEquals($payload['name_i18n'], $data['name_i18n'], 'name_i18n notmatch');
+        $this->assertArrayEquals($payload['title_i18n'], $data['title_i18n'], 'title_i18n notmatch');
     }
 
     public function testUpdatePlatformSettingsWithLogoUrls(): void

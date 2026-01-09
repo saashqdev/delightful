@@ -104,7 +104,7 @@ class FileDefaultInitCommand extends Command
                 $businessType = $this->mapModuleToBusinessType($moduleName);
 
                 if ($businessType === null) {
-                    $this->warn("  - skip未知模piece: {$moduleName}");
+                    $this->warn("  - skipunknown模piece: {$moduleName}");
                     continue;
                 }
 
@@ -168,7 +168,7 @@ class FileDefaultInitCommand extends Command
                         $keyOrganizationCode = substr($actualKey, 0, strpos($actualKey, '/'));
                         $fileLink = $this->fileDomainService->getLink($keyOrganizationCode, $actualKey, StorageBucketType::Public);
                         if (! $fileLink || ! $fileLink->getUrl()) {
-                            throw new Exception('fileuploadfail，无法getaccesslink');
+                            throw new Exception('fileuploadfail，no法getaccesslink');
                         }
 
                         // validatesuccessback才createdatabaserecord，useactualupload key
@@ -213,7 +213,7 @@ class FileDefaultInitCommand extends Command
         try {
             return DefaultFileBusinessType::from($moduleName);
         } catch (ValueError) {
-            // if直接mappingfail，尝试passname匹配
+            // if直接mappingfail，尝试passnamematch
             return match (strtolower($moduleName)) {
                 'service_provider', 'serviceprovider', 'service-provider' => DefaultFileBusinessType::SERVICE_PROVIDER,
                 'flow', 'workflow' => DefaultFileBusinessType::FLOW,

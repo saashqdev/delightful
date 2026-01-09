@@ -166,7 +166,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 if ($result['status'] === 'FAILED') {
                     $this->logger->error('MJ文生graph：taskexecutefail', [
                         'jobId' => $jobId,
-                        'message' => $result['message'] ?? '未知error',
+                        'message' => $result['message'] ?? 'unknownerror',
                     ]);
                     ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
                 }
@@ -206,7 +206,7 @@ class MidjourneyModel extends AbstractImageGenerate
 
             if ($result['status'] !== 'SUCCESS') {
                 $this->logger->error('MJ文生graph：submitfail', [
-                    'message' => $result['message'] ?? '未知error',
+                    'message' => $result['message'] ?? 'unknownerror',
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
             }
@@ -250,7 +250,7 @@ class MidjourneyModel extends AbstractImageGenerate
 
             if ($result['status'] !== 'SUCCESS') {
                 $this->logger->warning('MJ文生graph：Prompt校验fail', [
-                    'message' => $result['message'] ?? '未知error',
+                    'message' => $result['message'] ?? 'unknownerror',
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::INVALID_PROMPT);
             }
@@ -275,7 +275,7 @@ class MidjourneyModel extends AbstractImageGenerate
             $result = $this->api->getAccountInfo();
 
             if ($result['status'] !== 'SUCCESS') {
-                throw new Exception('checkbalancefail: ' . ($result['message'] ?? '未知error'));
+                throw new Exception('checkbalancefail: ' . ($result['message'] ?? 'unknownerror'));
             }
 
             return (float) $result['data']['balance'];

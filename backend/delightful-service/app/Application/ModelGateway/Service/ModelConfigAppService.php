@@ -100,7 +100,7 @@ class ModelConfigAppService extends AbstractLLMAppService
             }
         }
 
-        // back备solution：ifnothave匹配任何优先model，usefirstcanusemodel
+        // back备solution：ifnothavematch任何优先model，usefirstcanusemodel
         return $chatModelsName[0] ?? '';
     }
 }

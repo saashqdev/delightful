@@ -38,7 +38,7 @@ class CheckPermissionAspect extends AbstractAspect
         /** @var null|CheckPermission $permissionAnnotation */
         $permissionAnnotation = $annotationMetadata->method[CheckPermission::class] ?? $annotationMetadata->class[CheckPermission::class] ?? null;
 
-        // 若无annotation，直接放line
+        // 若noannotation，直接放line
         if ($permissionAnnotation === null) {
             return $proceedingJoinPoint->process();
         }

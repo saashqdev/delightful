@@ -57,7 +57,7 @@ enum StatisticsLevel: int
                 self::LEVEL_MINUTE->value => 'minute钟level',
                 self::LEVEL_HOUR->value => 'hourlevel',
                 self::LEVEL_DAY->value => 'daylevel',
-                default => '未知level别',
+                default => 'unknownlevel别',
             };
         }
 

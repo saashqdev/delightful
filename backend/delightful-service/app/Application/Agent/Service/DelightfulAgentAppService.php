@@ -783,7 +783,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * getvisiblepropertyconfigurationmiddlememberanddepartment详细info.
+     * getvisiblepropertyconfigurationmiddlememberanddepartmentdetailedinfo.
      *
      * @param null|VisibilityConfig $visibilityConfig visiblepropertyconfiguration
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
@@ -1088,13 +1088,13 @@ class DelightfulAgentAppService extends AbstractAppService
         foreach ($agentVersions as $agentVersion) {
             $visibilityConfig = $agentVersion->getVisibilityConfig();
 
-            // all部visibleor无visiblepropertyconfiguration
+            // all部visibleornovisiblepropertyconfiguration
             if ($visibilityConfig === null || $visibilityConfig->getVisibilityType() === VisibilityType::All->value) {
                 $visibleAgentVersions[] = $agentVersion;
                 continue;
             }
 
-            // 特定visible - 此处无需againtimecheckvisibilityType，因forfrontsurface已rowexceptnullandAlltype
+            // 特定visible - 此处no需againtimecheckvisibilityType，因forfrontsurface已rowexceptnullandAlltype
             // 剩down只maybeisSPECIFICtype
             if ($this->isUserVisible($visibilityConfig, $currentUserId, $userDepartmentIds)) {
                 $visibleAgentVersions[] = $agentVersion;
@@ -1347,7 +1347,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $config = $this->readJsonToArray($presetPath, $variables);
 
         if (empty($config)) {
-            ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, "无法loadpresetconfiguration: {$presetName}");
+            ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, "no法loadpresetconfiguration: {$presetName}");
         }
 
         return $config;
@@ -1498,7 +1498,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $delightfulAgentVersionEntity->setInstructs($agentEntity->getInstructs());
         $delightfulAgentVersionEntity->setStartPage($agentEntity->getStartPage());
 
-        // version相closeinfo设fornull，表示nothavepublishversion
+        // version相closeinfo设fornull，indicatenothavepublishversion
         $delightfulAgentVersionEntity->setVersionNumber(null);
         $delightfulAgentVersionEntity->setVersionDescription(null);
 

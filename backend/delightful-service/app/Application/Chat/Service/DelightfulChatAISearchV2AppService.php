@@ -144,7 +144,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             if ($dto->getSearchDeepLevel() === SearchDeepLevel::DEEP) {
                 $this->generateAndSendExtra($dto, $noRepeatSearchContexts, $summarize);
             }
-            // 6. sendping pongresponse,代表endreply
+            // 6. sendping pongresponse,representendreply
             $this->streamSendDeepSearchMessages($dto, [], StreamMessageStatus::Completed);
         } catch (Throwable $e) {
             // 7. hair生exceptiono clock，sendterminationmessage，andthrowexception
@@ -801,7 +801,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
                 if (str_contains($context->getCachedPageUrl(), 'zhihu.com')) {
                     return;
                 }
-                // 只取finger定quantitywebpage详细content
+                // 只取finger定quantitywebpagedetailedcontent
                 if ($currentDetailReadCount > $detailReadMaxNum) {
                     return;
                 }
@@ -821,7 +821,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
                     }
                 } catch (Throwable $e) {
                     $this->logger->error(sprintf(
-                        'mindSearch getSearchResults get详细contento clockhair生error:%s,file:%s,line:%s trace:%s',
+                        'mindSearch getSearchResults getdetailedcontento clockhair生error:%s,file:%s,line:%s trace:%s',
                         $e->getMessage(),
                         $e->getFile(),
                         $e->getLine(),

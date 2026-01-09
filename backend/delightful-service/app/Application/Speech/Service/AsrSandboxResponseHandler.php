@@ -113,7 +113,7 @@ readonly class AsrSandboxResponseHandler
         $relativePath = $audioFile['path'] ?? '';
 
         if (empty($relativePath)) {
-            $this->logger->warning('audiofilepathfornull，无法queryfilerecord', [
+            $this->logger->warning('audiofilepathfornull，no法queryfilerecord', [
                 'task_key' => $taskStatus->taskKey,
                 'audio_file' => $audioFile,
             ]);
@@ -226,7 +226,7 @@ readonly class AsrSandboxResponseHandler
     ): ?TaskFileEntity {
         // check必要taskstatusfield
         if (empty($taskStatus->projectId) || empty($taskStatus->userId) || empty($taskStatus->organizationCode)) {
-            $this->logger->error('taskstatusinfonotcomplete，无法queryfilerecord', [
+            $this->logger->error('taskstatusinfonotcomplete，no法queryfilerecord', [
                 'task_key' => $taskStatus->taskKey,
                 'file_type' => $fileTypeName,
                 'project_id' => $taskStatus->projectId,
@@ -339,7 +339,7 @@ readonly class AsrSandboxResponseHandler
     {
         $noteFileId = $taskStatus->presetNoteFileId;
         if (empty($noteFileId)) {
-            $this->logger->debug('preset笔记fileIDfornull，无需delete', [
+            $this->logger->debug('preset笔记fileIDfornull，no需delete', [
                 'task_key' => $taskStatus->taskKey,
             ]);
             return;

@@ -70,26 +70,26 @@ class Template extends AbstractTemplate
     }
 
     /**
-     * according to传come短信text,parsevariable. onlyvariablevalue,未匹配variablekey!
+     * according to传come短信text,parsevariable. onlyvariablevalue,未matchvariablekey!
      * needvariableparsereason:火山短信只supportvariable短信send,while业务方willoutat创蓝短信reason,will传come整短信textcontent,nothavevariable.
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
     {
-        // 找tofinger定templatevariable正thenparserule. ifnot传模版id,loop正then匹配will降低匹配speeddegreeand准确degree
+        // 找tofinger定templatevariable正thenparserule. ifnot传模版id,loop正thenmatchwill降低matchspeeddegreeandaccuratedegree
         if ($templateId) {
             // 判断templatewhether存in
             if (! isset($this->idContents[$templateId])) {
-                throw new RuntimeException('未匹配totemplateid:' . $templateId);
+                throw new RuntimeException('未matchtotemplateid:' . $templateId);
             }
             $pregMatch = $this->variablePregAnalyse[$language][$templateId] ?? '';
-            // ifaccording to短信content匹配totemplateid,then变more传入templateidvalue
+            // ifaccording to短信contentmatchtotemplateid,then变more传入templateidvalue
             $pregMatch && [$templateId, $matchedVariables] = $this->variablePregMatch([$templateId => $pregMatch], $message);
         } elseif (isset($this->variablePregAnalyse[$language])) {
-            // 火山普通短信,and无法according totype + language 确定templateid,尝试according to短信textcontent + language 确定templateidandvariable
+            // 火山普通短信,andno法according totype + language certaintemplateid,尝试according to短信textcontent + language certaintemplateidandvariable
             [$templateId, $matchedVariables] = $this->variablePregMatch($this->variablePregAnalyse[$language], $message);
         }
         if (empty($templateId)) {
-            throw new RuntimeException('未匹配totemplateid');
+            throw new RuntimeException('未matchtotemplateid');
         }
         if (empty($matchedVariables)) {
             throw new RuntimeException('短信templatevariableparsefail');

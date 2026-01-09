@@ -214,7 +214,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             $response = $client->get($url);
 
             if ($response->getStatusCode() !== 200) {
-                throw new Exception("无法downloadgraphlike，HTTPstatus码: {$response->getStatusCode()}");
+                throw new Exception("no法downloadgraphlike，HTTPstatus码: {$response->getStatusCode()}");
             }
 
             $imageContent = $response->getBody()->getContents();
@@ -292,7 +292,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             if ($result['success']) {
                 $rawResults[$result['index']] = $result['data'];
             } else {
-                $errors[] = $result['error'] ?? '未知error';
+                $errors[] = $result['error'] ?? 'unknownerror';
             }
         }
 

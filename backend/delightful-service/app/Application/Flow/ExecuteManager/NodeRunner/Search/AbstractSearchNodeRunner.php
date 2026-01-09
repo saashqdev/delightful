@@ -34,7 +34,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 $rangeIds = $allIds;
             }
 
-            // ifrange id bedefinitionbecomeemptyarray，代table已经nothave符合itemitemdata，直接跳outloop
+            // ifrange id bedefinitionbecomeemptyarray，代table已经nothaveconformitemitemdata，直接跳outloop
             if (is_array($rangeIds) && empty($rangeIds)) {
                 break;
             }

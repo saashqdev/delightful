@@ -27,7 +27,7 @@ class ServiceProviderApiTest extends BaseTest
 
         // ifreturnauthenticationorpermission相closeerror，skiptest（仅validate路bycanuse）
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003], true)) {
-            $this->markTestSkipped('interfaceauthenticationfailor无permission，路by校验pass');
+            $this->markTestSkipped('interfaceauthenticationfailornopermission，路by校验pass');
             return;
         }
 
@@ -347,28 +347,28 @@ class ServiceProviderApiTest extends BaseTest
             $expectedCosts['input_cost'],
             (float) $config['input_cost'],
             0.0001,
-            'input_costvalueshould匹配'
+            'input_costvalueshouldmatch'
         );
 
         $this->assertEqualsWithDelta(
             $expectedCosts['output_cost'],
             (float) $config['output_cost'],
             0.0001,
-            'output_costvalueshould匹配'
+            'output_costvalueshouldmatch'
         );
 
         $this->assertEqualsWithDelta(
             $expectedCosts['cache_write_cost'],
             (float) $config['cache_write_cost'],
             0.0001,
-            'cache_write_costvalueshould匹配'
+            'cache_write_costvalueshouldmatch'
         );
 
         $this->assertEqualsWithDelta(
             $expectedCosts['cache_hit_cost'],
             (float) $config['cache_hit_cost'],
             0.0001,
-            'cache_hit_costvalueshould匹配'
+            'cache_hit_costvalueshouldmatch'
         );
     }
 
@@ -398,7 +398,7 @@ class ServiceProviderApiTest extends BaseTest
             $this->assertSame(
                 (int) $expectedConfig['max_output_tokens'],
                 $versionEntity->getMaxOutputTokens(),
-                'max_output_tokens should匹配'
+                'max_output_tokens shouldmatch'
             );
         }
 
@@ -406,7 +406,7 @@ class ServiceProviderApiTest extends BaseTest
             $this->assertSame(
                 (int) $expectedConfig['max_tokens'],
                 $versionEntity->getMaxTokens(),
-                'max_tokens should匹配'
+                'max_tokens shouldmatch'
             );
         }
 
@@ -414,7 +414,7 @@ class ServiceProviderApiTest extends BaseTest
             $this->assertSame(
                 (int) $expectedConfig['vector_size'],
                 $versionEntity->getVectorSize(),
-                'vector_size should匹配'
+                'vector_size shouldmatch'
             );
         }
 
@@ -424,7 +424,7 @@ class ServiceProviderApiTest extends BaseTest
                 (float) $expectedConfig['input_pricing'],
                 $versionEntity->getInputPricing(),
                 0.0001,
-                'input_pricing should匹配'
+                'input_pricing shouldmatch'
             );
         }
 
@@ -433,7 +433,7 @@ class ServiceProviderApiTest extends BaseTest
                 (float) $expectedConfig['output_pricing'],
                 $versionEntity->getOutputPricing(),
                 0.0001,
-                'output_pricing should匹配'
+                'output_pricing shouldmatch'
             );
         }
 
@@ -442,7 +442,7 @@ class ServiceProviderApiTest extends BaseTest
                 (float) $expectedConfig['cache_write_pricing'],
                 $versionEntity->getCacheWritePricing(),
                 0.0001,
-                'cache_write_pricing should匹配'
+                'cache_write_pricing shouldmatch'
             );
         }
 
@@ -451,7 +451,7 @@ class ServiceProviderApiTest extends BaseTest
                 (float) $expectedConfig['cache_hit_pricing'],
                 $versionEntity->getCacheHitPricing(),
                 0.0001,
-                'cache_hit_pricing should匹配'
+                'cache_hit_pricing shouldmatch'
             );
         }
 
@@ -460,7 +460,7 @@ class ServiceProviderApiTest extends BaseTest
                 (float) $expectedConfig['input_cost'],
                 $versionEntity->getInputCost(),
                 0.0001,
-                'input_cost should匹配'
+                'input_cost shouldmatch'
             );
         }
 
@@ -469,7 +469,7 @@ class ServiceProviderApiTest extends BaseTest
                 (float) $expectedConfig['output_cost'],
                 $versionEntity->getOutputCost(),
                 0.0001,
-                'output_cost should匹配'
+                'output_cost shouldmatch'
             );
         }
 
@@ -478,7 +478,7 @@ class ServiceProviderApiTest extends BaseTest
                 (float) $expectedConfig['cache_write_cost'],
                 $versionEntity->getCacheWriteCost(),
                 0.0001,
-                'cache_write_cost should匹配'
+                'cache_write_cost shouldmatch'
             );
         }
 
@@ -487,7 +487,7 @@ class ServiceProviderApiTest extends BaseTest
                 (float) $expectedConfig['cache_hit_cost'],
                 $versionEntity->getCacheHitCost(),
                 0.0001,
-                'cache_hit_cost should匹配'
+                'cache_hit_cost shouldmatch'
             );
         }
 
@@ -496,7 +496,7 @@ class ServiceProviderApiTest extends BaseTest
                 (float) $expectedConfig['creativity'],
                 $versionEntity->getCreativity(),
                 0.0001,
-                'creativity should匹配'
+                'creativity shouldmatch'
             );
         }
 
@@ -505,7 +505,7 @@ class ServiceProviderApiTest extends BaseTest
                 (float) $expectedConfig['time_cost'],
                 $versionEntity->getTimeCost(),
                 50,
-                'time_cost should匹配'
+                'time_cost shouldmatch'
             );
         }
 
@@ -517,7 +517,7 @@ class ServiceProviderApiTest extends BaseTest
                     (float) $expectedConfig['temperature'],
                     $versionEntity->getTemperature(),
                     0.0001,
-                    'temperature should匹配'
+                    'temperature shouldmatch'
                 );
             }
         }
@@ -527,7 +527,7 @@ class ServiceProviderApiTest extends BaseTest
             $this->assertSame(
                 (bool) $expectedConfig['support_function'],
                 $versionEntity->isSupportFunction(),
-                'support_function should匹配'
+                'support_function shouldmatch'
             );
         }
 
@@ -535,7 +535,7 @@ class ServiceProviderApiTest extends BaseTest
             $this->assertSame(
                 (bool) $expectedConfig['support_multi_modal'],
                 $versionEntity->isSupportMultiModal(),
-                'support_multi_modal should匹配'
+                'support_multi_modal shouldmatch'
             );
         }
 
@@ -543,7 +543,7 @@ class ServiceProviderApiTest extends BaseTest
             $this->assertSame(
                 (bool) $expectedConfig['support_deep_think'],
                 $versionEntity->isSupportDeepThink(),
-                'support_deep_think should匹配'
+                'support_deep_think shouldmatch'
             );
         }
 
@@ -552,7 +552,7 @@ class ServiceProviderApiTest extends BaseTest
             $this->assertSame(
                 $expectedConfig['billing_currency'],
                 $versionEntity->getBillingCurrency(),
-                'billing_currency should匹配'
+                'billing_currency shouldmatch'
             );
         }
 

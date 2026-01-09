@@ -142,7 +142,7 @@ class AsrApi extends AbstractApi
             }
         }
 
-        // applicationlayer已haveminute布typelock，这within无需againaddlock，直接call
+        // applicationlayer已haveminute布typelock，这withinno需againaddlock，直接call
         try {
             // handle总结task
             $result = $this->asrFileAppService->processSummaryWithChat($summaryRequest, $userAuthorization);

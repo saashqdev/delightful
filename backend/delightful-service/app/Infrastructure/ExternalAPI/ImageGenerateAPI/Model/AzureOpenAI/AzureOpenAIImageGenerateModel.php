@@ -51,7 +51,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
 
         $this->validateRequest($imageGenerateRequest);
 
-        // 无参考graphlike，use原havegenerate逻辑
+        // no参考graphlike，use原havegenerate逻辑
         $this->logger->info('Azure OpenAIgraphlikegenerate：startcallgenerateAPI', [
             'prompt' => $imageGenerateRequest->getPrompt(),
             'size' => $imageGenerateRequest->getSize(),
@@ -211,7 +211,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
             $images = array_filter($images);
 
             if (empty($images)) {
-                $this->logger->error('Azure OpenAIgraphlikegenerate：filterback无validgraphlikedata');
+                $this->logger->error('Azure OpenAIgraphlikegenerate：filterbacknovalidgraphlikedata');
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, 'image_generate.no_valid_image_data');
             }
 

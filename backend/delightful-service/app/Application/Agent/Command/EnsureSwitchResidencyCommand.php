@@ -180,7 +180,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
 
         $this->output->writeln(sprintf(
             'processcomplete！finger令collection%supdate',
-            $hasChanges ? '已' : '无需'
+            $hasChanges ? '已' : 'no需'
         ));
 
         return 0;
@@ -215,7 +215,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         $this->output->writeln(sprintf(
                             'hair现switchfinger令 [%s](%s) 缺少 residency property，已add',
                             $item['name'] ?? '未命名',
-                            $item['id'] ?? '无ID'
+                            $item['id'] ?? 'noID'
                         ));
                     }
                 }

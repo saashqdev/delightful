@@ -38,7 +38,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // 软deletedataone旦物理deletethen无法restore，所by down methodfornull
+        // 软deletedataone旦物理deletethenno法restore，所by down methodfornull
     }
 
     /**

@@ -68,11 +68,11 @@ class MCPExceptionHandler
      */
     protected function getErrorMessage(Throwable $exception): string
     {
-        return $exception->getMessage() ?: '未知error';
+        return $exception->getMessage() ?: 'unknownerror';
     }
 
     /**
-     * record详细errorinformation.
+     * recorddetailederrorinformation.
      */
     private function logError(Throwable $exception, array $context = []): void
     {

@@ -239,7 +239,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
 
     /**
      * agent sendmessageo clockget话题 id.
-     * @param int $getType todo 0:default话题 1:most近话题 2:智能确定话题，暂o clock只supportdefault话题 3 new话题
+     * @param int $getType todo 0:default话题 1:most近话题 2:智能certain话题，暂o clock只supportdefault话题 3 new话题
      * @throws Throwable
      */
     public function agentSendMessageGetTopicId(DelightfulConversationEntity $senderConversationEntity, int $getType): string

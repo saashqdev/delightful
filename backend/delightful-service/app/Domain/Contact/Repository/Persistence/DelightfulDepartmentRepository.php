@@ -442,7 +442,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             $parentId = (string) ($department['parent_department_id'] ?? '');
 
             if ($parentId === '' || $parentId === '-1') {
-                continue; // skip无父levelorrootsectionpoint
+                continue; // skipno父levelorrootsectionpoint
             }
 
             $childSum = (int) ($departmentSums[$deptId] ?? 0);

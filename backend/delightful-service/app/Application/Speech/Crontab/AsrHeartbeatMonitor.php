@@ -115,8 +115,8 @@ class AsrHeartbeatMonitor
             // Key format：asr:heartbeat:{md5(user_id:task_key)}
             $this->logger->info('检测tocore跳timeout', ['key' => $key]);
 
-            // byat key is MD5 hash，我们无法直接反toget task_key and user_id
-            // needfrom Redis middle扫描所have asr:task:* comefind匹配task
+            // byat key is MD5 hash，我们no法直接反toget task_key and user_id
+            // needfrom Redis middle扫描所have asr:task:* comefindmatchtask
             $this->findAndTriggerTimeoutTask($key);
         } catch (Throwable $e) {
             $this->logger->error('processcore跳timeoutfail', [
@@ -147,14 +147,14 @@ class AsrHeartbeatMonitor
 
                 $taskStatus = AsrTaskStatusDTO::fromArray($taskData);
 
-                // checkwhether匹配currentcore跳 key
+                // checkwhethermatchcurrentcore跳 key
                 $expectedHeartbeatKey = sprintf(
                     AsrRedisKeys::HEARTBEAT,
                     md5($taskStatus->userId . ':' . $taskStatus->taskKey)
                 );
 
                 if ($expectedHeartbeatKey === $heartbeatKey) {
-                    // 找to匹配task，checkwhetherneed触hairfrom动总结
+                    // 找tomatchtask，checkwhetherneed触hairfrom动总结
                     if ($this->shouldTriggerAutoSummary($taskStatus)) {
                         $this->triggerAutoSummary($taskStatus);
                     }

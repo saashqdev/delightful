@@ -21,7 +21,7 @@ return new class extends Migration {
         Schema::create('service_provider', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 50)->comment('servicequotientname');
-            $table->string('provider_code', 50)->comment('servicequotientencoding，表示属at哪 AI servicequotient。如：官方，DS，阿within云etc');
+            $table->string('provider_code', 50)->comment('servicequotientencoding，indicate属at哪 AI servicequotient。如：官方，DS，阿within云etc');
             $table->string('description', 255)->nullable()->comment('servicequotientdescription');
             $table->string('icon', 255)->nullable()->comment('servicequotientgraph标');
             $table->tinyInteger('provider_type')->default(0)->comment('servicequotienttype：0-普通，1-官方');

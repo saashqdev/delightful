@@ -176,7 +176,7 @@ class GPT4oModel extends AbstractImageGenerate
             $result = $this->api->getAccountInfo();
 
             if ($result['status'] !== 'SUCCESS') {
-                throw new Exception('checkbalancefail: ' . ($result['message'] ?? '未知error'));
+                throw new Exception('checkbalancefail: ' . ($result['message'] ?? 'unknownerror'));
             }
 
             return (float) $result['data']['balance'];
@@ -208,7 +208,7 @@ class GPT4oModel extends AbstractImageGenerate
             $result = $this->api->submitGPT4oTask($prompt, $referImages);
 
             if ($result['status'] !== 'SUCCESS') {
-                $this->logger->warning('GPT4o文生graph：generaterequestfail', ['message' => $result['message'] ?? '未知error']);
+                $this->logger->warning('GPT4o文生graph：generaterequestfail', ['message' => $result['message'] ?? 'unknownerror']);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $result['message']);
             }
 
@@ -261,7 +261,7 @@ class GPT4oModel extends AbstractImageGenerate
                     continue;
                 }
 
-                throw new Exception('未知taskstatus：' . $result['status']);
+                throw new Exception('unknowntaskstatus：' . $result['status']);
             } catch (Exception $e) {
                 $this->logger->error('GPT4o文生graph：round询taskfail', [
                     'jobId' => $jobId,
@@ -307,7 +307,7 @@ class GPT4oModel extends AbstractImageGenerate
                     continue;
                 }
 
-                throw new Exception('未知taskstatus：' . $result['status']);
+                throw new Exception('unknowntaskstatus：' . $result['status']);
             } catch (Exception $e) {
                 $this->logger->error('GPT4o文生graph：round询taskfail', [
                     'jobId' => $jobId,
@@ -370,7 +370,7 @@ class GPT4oModel extends AbstractImageGenerate
             if ($result['success']) {
                 $rawResults[$result['index']] = $result['data'];
             } else {
-                $errors[] = $result['error'] ?? '未知error';
+                $errors[] = $result['error'] ?? 'unknownerror';
             }
         }
 
@@ -459,7 +459,7 @@ class GPT4oModel extends AbstractImageGenerate
                 'url' => $processedUrl,
             ];
 
-            // 累计usageinfo - GPT4onothave详细tokenstatistics
+            // 累计usageinfo - GPT4onothavedetailedtokenstatistics
             $currentUsage->addGeneratedImages(1);
 
             // updateresponseobject

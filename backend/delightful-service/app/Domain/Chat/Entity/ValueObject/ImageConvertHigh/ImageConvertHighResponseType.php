@@ -24,7 +24,7 @@ enum ImageConvertHighResponseType: int
             self::START_GENERATE => 'startgenerate',
             self::GENERATED => 'generatecomplete',
             self::TERMINATE => 'exceptiontermination',
-            default => '未知type',
+            default => 'unknowntype',
         };
     }
 }

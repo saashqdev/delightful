@@ -519,7 +519,7 @@ class VolcengineModel extends AbstractImageGenerate
                         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT_WITH_REASON);
                         // no break
                     default:
-                        $this->logger->error('火山文生graph：未知taskstatus', ['status' => $status, 'response' => $response]);
+                        $this->logger->error('火山文生graph：unknowntaskstatus', ['status' => $status, 'response' => $response]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT_WITH_REASON);
                 }
 
@@ -661,7 +661,7 @@ class VolcengineModel extends AbstractImageGenerate
         $imageDimensions = $this->getImageDimensions($referenceImageUrl);
 
         if (! $imageDimensions) {
-            $this->logger->warning('火山graph生graph：无法get参考graphsize，skip长宽ratio例校验', ['image_url' => $referenceImageUrl]);
+            $this->logger->warning('火山graph生graph：no法get参考graphsize，skip长宽ratio例校验', ['image_url' => $referenceImageUrl]);
             return; // Skip validation and continue execution
         }
 

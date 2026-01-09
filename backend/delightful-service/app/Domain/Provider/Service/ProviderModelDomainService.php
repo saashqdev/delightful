@@ -49,7 +49,7 @@ readonly class ProviderModelDomainService
 
     /**
      * passIDorModelIDquerymodel
-     * based oncanusemodellistconduct匹配，meanwhile匹配idandmodel_idfield.
+     * based oncanusemodellistconductmatch，meanwhilematchidandmodel_idfield.
      */
     public function getByIdOrModelId(ProviderDataIsolation $dataIsolation, string $id): ?ProviderModelEntity
     {

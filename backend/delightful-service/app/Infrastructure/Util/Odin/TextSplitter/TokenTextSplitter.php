@@ -228,7 +228,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * process无minute隔符textsplit.
+     * processnominute隔符textsplit.
      */
     private function handleNoSeparatorSplits(array $splits, array $splitLengths): array
     {
@@ -358,7 +358,7 @@ class TokenTextSplitter extends TextSplitter
             }
             return count($this->defaultEncoder->encode($text));
         } catch (Throwable $e) {
-            // if计算tokenfail，returnone估计value
+            // if计算tokenfail，returnoneestimatedvalue
             return (int) ceil(mb_strlen($text) / 4);
         }
     }
@@ -409,7 +409,7 @@ class TokenTextSplitter extends TextSplitter
         // 尝试检测encoding
         $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], true);
         if ($encoding === false) {
-            // if无法检测toencoding，尝试use iconv 检测
+            // ifno法检测toencoding，尝试use iconv 检测
             $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], false);
             if ($encoding === false) {
                 return 'UTF-8'; // defaultuse UTF-8

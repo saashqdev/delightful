@@ -93,7 +93,7 @@ class ProviderModelSyncAppService
                 return;
             }
 
-            // 4. according tocategory确定typeparameter
+            // 4. according tocategorycertaintypeparameter
             $types = $this->getModelTypesByCategory($provider->getCategory());
 
             // 5. fromoutside部APIpullmodel
@@ -126,7 +126,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * according toservicequotientcategory确定要pullmodeltype.
+     * according toservicequotientcategorycertain要pullmodeltype.
      */
     private function getModelTypesByCategory(Category $category): array
     {

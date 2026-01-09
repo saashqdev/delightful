@@ -665,7 +665,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * according tocurrentstatusandpending_content存in确定新status.
+     * according tocurrentstatusandpending_content存incertain新status.
      */
     private function determineNewMemoryStatus(MemoryStatus $currentStatus, bool $hasPendingContent): MemoryStatus
     {

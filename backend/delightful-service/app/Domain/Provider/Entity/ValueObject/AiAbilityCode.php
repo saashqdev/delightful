@@ -12,7 +12,7 @@ namespace App\Domain\Provider\Entity\ValueObject;
  */
 enum AiAbilityCode: string
 {
-    case Unknown = 'unknown';                          // 未知能力
+    case Unknown = 'unknown';                          // unknown能力
     case Ocr = 'ocr';                                      // OCR 识别
     case WebSearch = 'web_search';                         // 互联网search
     case RealtimeSpeechRecognition = 'realtime_speech_recognition';  // 实o clockvoice识别
@@ -50,7 +50,7 @@ enum AiAbilityCode: string
         return match ($this) {
             self::Ocr => '本能力覆盖平台所have OCR application场景，精准捕捉andextract PDF、扫描itemandeachcategoryimagemiddletextinfo。',
             self::WebSearch => '本能力覆盖平台 AI 大model互联网search场景，精准getand整合mostnew新闻、事实anddatainfo。',
-            self::RealtimeSpeechRecognition => '本能力覆盖平台所havevoice转textapplication场景，实o clocklisteneraudiostreamand逐步output准确textcontent。',
+            self::RealtimeSpeechRecognition => '本能力覆盖平台所havevoice转textapplication场景，实o clocklisteneraudiostreamand逐步outputaccuratetextcontent。',
             self::AudioFileRecognition => '本能力覆盖平台所haveaudiofile转textapplication场景，精准识别说话person、audiotextetcinfo。',
             self::AutoCompletion => '本能力覆盖平台所haveinputcontentfrom动补allapplication场景，according to理解updown文foruserfrom动补allcontent，byuserchoosewhether采纳。',
             self::ContentSummary => '本能力覆盖平台所havecontent总结application场景，to长篇document、报告orwebpage文chapterconduct深degreeanalyze。',

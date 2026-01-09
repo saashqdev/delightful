@@ -207,7 +207,7 @@ class QwenImageEditModel extends AbstractImageGenerate
 
             // checkresponseformat - 适配newsyncresponseformat
             if (! isset($response['output']['choices'])) {
-                $errorMsg = $response['message'] ?? '未知error';
+                $errorMsg = $response['message'] ?? 'unknownerror';
                 $this->logger->warning('通义thousand问graphlikeedit：responseformaterror', ['response' => $response]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR, $errorMsg);
             }

@@ -21,7 +21,7 @@ class ClientMessage extends AbstractEntity
     // service端generatemessage唯oneid，all局唯one。useatwithdraw、editmessage。
     protected string $delightfulMessageId;
 
-    // customer端generate，needios/安卓/webthree端共同确定onegenerate算法。useat告知customer端，delightful_message_idbycome
+    // customer端generate，needios/安卓/webthree端共同certainonegenerate算法。useat告知customer端，delightful_message_idbycome
     protected ?string $appMessageId;
 
     // 话题id
@@ -48,7 +48,7 @@ class ClientMessage extends AbstractEntity
     public function __construct(array $data)
     {
         if (! $data['content'] instanceof MessageInterface) {
-            // 避免eachtype bug 导致user完all无法拉message，这within做onedown兜bottom
+            // 避免eachtype bug 导致user完allno法拉message，这within做onedown兜bottom
             try {
                 $data['content'] = MessageAssembler::getMessageStructByArray($data['type'], $data['content']);
             } catch (Throwable) {

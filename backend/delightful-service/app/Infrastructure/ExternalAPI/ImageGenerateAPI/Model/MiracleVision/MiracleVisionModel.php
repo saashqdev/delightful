@@ -200,7 +200,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             case self::STATUS_NOT_FOUND:
             default:
                 $response->setFinishStatus(false);
-                $response->setError($result['message'] ?? '未知error');
+                $response->setError($result['message'] ?? 'unknownerror');
                 $this->logger->error(
                     $status === self::STATUS_NOT_FOUND ? '美graph超清convert：tasknot存in' : '美graph超清convert：taskprocessfail',
                     ['status' => $status, 'response' => $result]
@@ -213,7 +213,7 @@ class MiracleVisionModel extends AbstractImageGenerate
     private function validateRequest(ImageGenerateRequest $request): void
     {
         if (! $request instanceof MiracleVisionModelRequest) {
-            $this->logger->error('美graph超清convert：requesttypenot匹配', ['class' => get_class($request)]);
+            $this->logger->error('美graph超清convert：requesttypenotmatch', ['class' => get_class($request)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -226,7 +226,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
         $type = FileType::getType($url);
         if (empty($type)) {
-            $this->logger->error('美graph超清convert：无法识别imagetype', ['url' => $url]);
+            $this->logger->error('美graph超清convert：no法识别imagetype', ['url' => $url]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -263,7 +263,7 @@ class MiracleVisionModel extends AbstractImageGenerate
         $this->logger->info('美graphAPI：responsedataverifypass');
     }
 
-    // todo xhy 目front只能forcereturn 26 ，因for无法toimage场景做匹配
+    // todo xhy 目front只能forcereturn 26 ，因forno法toimage场景做match
     private function determineStyleId(array $styles): int
     {
         if (empty($styles['data']['style_list'])) {

@@ -114,7 +114,7 @@ class DelightfulThirdPlatformDepartmentRepository implements DelightfulThirdPlat
 
     public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?DelightfulThirdPlatformDepartmentEntity
     {
-        // toatfront端come说, -1 表示rootdepartmentinformation.
+        // toatfront端come说, -1 indicaterootdepartmentinformation.
         $query = $this->model::query()->where('delightful_organization_code', $organizationCode);
         if ($departmentId === PlatformRootDepartmentId::Delightful) {
             $query->where(function (Builder $query) {

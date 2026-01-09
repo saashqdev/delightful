@@ -107,7 +107,7 @@ class OfficialProxyModel extends AbstractImageGenerate
                 message: is_array($errorBody) ? $errorBody['error']['message'] : $errorBody,
             );
         } catch (Throwable $e) {
-            $this->logger->error('官方代理：未知error', [
+            $this->logger->error('官方代理：unknownerror', [
                 'url' => $fullUrl,
                 'error' => $e->getMessage(),
                 'code' => $e->getCode(),

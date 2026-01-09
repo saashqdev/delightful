@@ -13,7 +13,7 @@ namespace App\Domain\Comment\constant;
 class AttachmentTargetType
 {
     /**
-     * 未知.
+     * unknown.
      */
     public const NONE = 0;
 

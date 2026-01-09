@@ -20,7 +20,7 @@ class RerankMode
      * 重sortmodel.
      *
      * use专门重sortmodel（如 BAAI/bge-reranker-large）to检索resultconduct重sort。
-     * 重sortmodelwillaccording toqueryanddocument相closepropertygiveoutmore准确sort。
+     * 重sortmodelwillaccording toqueryanddocument相closepropertygiveoutmoreaccuratesort。
      * 该模typepassconfigurationparameter `reranking_mode` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。
      */

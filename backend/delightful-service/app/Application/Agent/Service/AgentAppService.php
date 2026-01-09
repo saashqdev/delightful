@@ -120,7 +120,7 @@ class AgentAppService extends AbstractAppService
         foreach ($data['list'] as $agentVersion) {
             $visibilityConfig = $agentVersion->getVisibilityConfig();
 
-            // all部visibleor无visiblepropertyconfiguration
+            // all部visibleornovisiblepropertyconfiguration
             if ($visibilityConfig === null || $visibilityConfig->getVisibilityType() === VisibilityType::All->value) {
                 $visibleAgents[] = $agentVersion->getAgentId();
                 continue;

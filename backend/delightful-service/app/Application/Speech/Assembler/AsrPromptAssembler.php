@@ -25,7 +25,7 @@ class AsrPromptAssembler
      */
     public static function getTitlePrompt(string $asrStreamContent, ?NoteDTO $note, string $language): string
     {
-        // buildcontent：use XML tagformat明确区minutevoice识别contentand笔记content
+        // buildcontent：use XML tagformatexplicit区minutevoice识别contentand笔记content
         $contentParts = [];
 
         // ifhave笔记，先add笔记content
@@ -42,7 +42,7 @@ class AsrPromptAssembler
 你isone专业录音contenttitlegenerate助hand。
 
 ## backgroundinstruction
-usersubmitonesegment录音content，录音content经passvoice识别转fortext，usermaybealsowill提供hand写笔记asfor补充instruction。现inneed你according to这些contentgenerateone简洁准确title。
+usersubmitonesegment录音content，录音content经passvoice识别转fortext，usermaybealsowill提供hand写笔记asfor补充instruction。现inneed你according to这些contentgenerateone简洁accuratetitle。
 
 ## contentcome源instruction
 - <笔记content>：userhand写笔记content，isto录音重pointrecordand总结，usuallycontainclose键info
@@ -53,13 +53,13 @@ usersubmitonesegment录音content，录音content经passvoice识别转fortext，
 ### 优先level原then（重要）
 1. **笔记优先**：if存in<笔记content>，titleshould侧重笔记content
 2. **重视笔记title**：if笔记is Markdown formatandcontaintitle（# openheadline），优先采use笔记middletitlecontent
-3. **综合考虑**：meanwhile参考voice识别content，ensuretitlecomplete准确
+3. **综合考虑**：meanwhile参考voice识别content，ensuretitlecompleteaccurate
 4. **keywordextract**：from笔记andvoice识别contentmiddleextractmost核corekeyword
 
 ### format要求
 1. **length限制**：not超pass 20 character（汉字按 1 character计算）
 2. **languagestyle**：use陈述property语sentence，避免疑问sentence
-3. **简洁明确**：直接概括核coretheme，not要addmodification词
+3. **简洁explicit**：直接概括核coretheme，not要addmodification词
 4. **纯textoutput**：只outputtitlecontent，not要add任何标point符number、引numberor其他modification
 
 ### forbidlinefor
@@ -96,7 +96,7 @@ PROMPT;
 你isone专业录音contenttitlegenerate助hand。
 
 ## backgroundinstruction
-useruploadoneaudiofiletosystemmiddle，andinchat框middlesend总结request。现inneed你according touserrequestmessage（其middlecontainfile名），for这time录音总结generateone简洁准确title。
+useruploadoneaudiofiletosystemmiddle，andinchat框middlesend总结request。现inneed你according touserrequestmessage（其middlecontainfile名），for这time录音总结generateone简洁accuratetitle。
 
 ## userinchat框request
 usersendoriginalmessage如down：
@@ -110,13 +110,13 @@ usersendoriginalmessage如down：
 1. **file名优先**：file名usuallyisuser精core命名，containmost核corethemeinfo，请重point参考usermessagemiddle @ backsurfacefile名
 2. **智能判断**：
    - iffile名语义清晰（如"2024yearQ4product规划will议.mp3"、"customer需求discussion.wav"），优先based onfile名generatetitle
-   - iffile名isdatetime戳（如"20241112_143025.mp3"）or无意义character（如"录音001.mp3"），thenuse通usedescription
+   - iffile名isdatetime戳（如"20241112_143025.mp3"）orno意义character（如"录音001.mp3"），thenuse通usedescription
 3. **extractkeyword**：fromfile名middleextractmost核corekeywordandtheme
 
 ### format要求
 1. **length限制**：not超pass 20 character（汉字按 1 character计算）
 2. **languagestyle**：use陈述property语sentence，避免疑问sentence
-3. **简洁明确**：直接概括核coretheme，not要addmodification词
+3. **简洁explicit**：直接概括核coretheme，not要addmodification词
 4. **纯textoutput**：只outputtitlecontent，not要add任何标point符number、引numberor其他modification
 
 ### forbidlinefor

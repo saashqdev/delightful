@@ -362,7 +362,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             if ($result['success']) {
                 $rawResults[$result['index']] = $result;
             } else {
-                $errors[] = $result['error'] ?? '未知error';
+                $errors[] = $result['error'] ?? 'unknownerror';
             }
         }
 

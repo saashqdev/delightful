@@ -27,7 +27,7 @@ class ModelConfigRepository extends AbstractRepository implements ModelConfigRep
                 $model = new ModelConfigModel();
             }
             $attributes = $this->getAttributes($modelConfigEntity);
-            // 无法bemodifyfield
+            // no法bemodifyfield
             unset($attributes['use_amount']);
             $model->fill($attributes);
             $model->save();

@@ -47,7 +47,7 @@ enum NodeType: int
     /*
      * Vector
      * text转toquantity
-     * data匹配
+     * datamatch
      * toquantitydatastorage
      */
     //    case Vector = 6;

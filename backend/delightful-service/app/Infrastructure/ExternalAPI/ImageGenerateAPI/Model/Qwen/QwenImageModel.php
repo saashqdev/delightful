@@ -290,7 +290,7 @@ class QwenImageModel extends AbstractImageGenerate
 
             // checkresponseformat
             if (! isset($response['output']['task_id'])) {
-                $errorMsg = $response['message'] ?? '未知error';
+                $errorMsg = $response['message'] ?? 'unknownerror';
                 $this->logger->warning('通义thousand问文生graph：responsemiddle缺少taskID', ['response' => $response]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR, $errorMsg);
             }
@@ -356,7 +356,7 @@ class QwenImageModel extends AbstractImageGenerate
                         ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $errorMsg);
                         // no break
                     default:
-                        $this->logger->error('通义thousand问文生graph：未知taskstatus', ['status' => $taskStatus, 'response' => $response]);
+                        $this->logger->error('通义thousand问文生graph：unknowntaskstatus', ['status' => $taskStatus, 'response' => $response]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT_WITH_REASON);
                 }
 

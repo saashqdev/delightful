@@ -73,7 +73,7 @@ readonly class OCRService
         // get远程fileheadinfo
         $headers = get_headers($url, true, $context);
         if ($headers === false) {
-            throw new RuntimeException("无法getheadinfo: {$url}");
+            throw new RuntimeException("no法getheadinfo: {$url}");
         }
 
         // extract `Last-Modified`、`ETag` and `Content-Length`（if存in）

@@ -13,7 +13,7 @@ namespace App\Domain\Chat\Entity\ValueObject\AggregateSearch;
 class AggregateAISearchCardResponseType
 {
     /**
-     *associateissuesearchresult，include子issue(search_keywords), webpagesearchresult(search), 总词数(total_words), 匹配词数(match_count), 页数(page_count).
+     *associateissuesearchresult，include子issue(search_keywords), webpagesearchresult(search), 总词数(total_words), match词数(match_count), 页数(page_count).
      */
     public const int SEARCH = 0;
 
@@ -54,6 +54,6 @@ class AggregateAISearchCardResponseType
             self::PPT => 'PPT',
             self::SEARCH_DEEP_LEVEL => 'search深degree',
         ];
-        return $typeNames[$type] ?? '未知type';
+        return $typeNames[$type] ?? 'unknowntype';
     }
 }

@@ -360,7 +360,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         $filteredModels = $this->getModelsByVersionAndOrganization($modelOriginId, OfficialOrganizationUtil::getOfficialOrganizationCode());
 
         if (empty($filteredModels)) {
-            // ifnothave找to匹配activatemodel，returnnullarray
+            // ifnothave找tomatchactivatemodel，returnnullarray
             return [];
         }
 
@@ -370,7 +370,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             $configMap[$configEntity->getId()] = $configEntity;
         }
 
-        // 收collection所have匹配servicequotientconfiguration
+        // 收collection所havematchservicequotientconfiguration
         $result = [];
         foreach ($filteredModels as $activeModel) {
             $targetConfigId = $activeModel->getServiceProviderConfigId();

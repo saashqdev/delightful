@@ -150,7 +150,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * systemstableproperty保障模piece之one:message优先level确定
+     * systemstableproperty保障模piece之one:message优先levelcertain
      * 优先levelrule:
      * 1.private chat/100personbyinsidegroup chat,优先levelmost高
      * 2.systemapplicationmessage,高优先level
@@ -505,7 +505,7 @@ class DelightfulChatDomainService extends AbstractDomainService
                 $user = $users[$groupUser['user_id']] ?? null;
                 if (empty($groupUser['user_id']) || empty($users[$groupUser['user_id']]) || empty($user['delightful_id'])) {
                     $this->logger->error(sprintf(
-                        'messageDispatch handlerConversationCreated 群membernothave匹配to $groupUser:%s $users:%s seq:%s',
+                        'messageDispatch handlerConversationCreated 群membernothavematchto $groupUser:%s $users:%s seq:%s',
                         Json::encode($groupUser),
                         Json::encode($users),
                         Json::encode($senderSeqEntity->toArray())
@@ -612,7 +612,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             return [];
         }
         $userEntity = $this->getUserInfo($conversationEntity->getUserId());
-        // 确定from己sendmessageroletype. onlywhenfrom己is ai o clock，from己sendmessage才is assistant。（两 ai 互相conversation暂not考虑）
+        // certainfrom己sendmessageroletype. onlywhenfrom己is ai o clock，from己sendmessage才is assistant。（两 ai 互相conversation暂not考虑）
         if ($userEntity->getUserType() === UserType::Ai) {
             $selfSendMessageRoleType = 'assistant';
             $otherSendMessageRoleType = 'user';
@@ -628,7 +628,7 @@ class DelightfulChatDomainService extends AbstractDomainService
 
         $userMessages = [];
         foreach ($clientSeqResponseDTOS as $clientSeqResponseDTO) {
-            // 确定messageroletype
+            // certainmessageroletype
             if (empty($clientSeqResponseDTO->getSeq()->getSenderMessageId())) {
                 $roleType = $selfSendMessageRoleType;
             } else {
@@ -950,7 +950,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             if ($messageEntity === null) {
                 ExceptionBuilder::throw(ChatErrorCode::STREAM_MESSAGE_NOT_FOUND);
             }
-            // givefrom己messagestreamgenerate序column,and确定messagereceivepersoncolumn表
+            // givefrom己messagestreamgenerate序column,andcertainmessagereceivepersoncolumn表
             $senderSeqDTO = (new DelightfulSeqEntity())
                 ->setAppMessageId($createStreamSeqDTO->getAppMessageId())
                 ->setExtra((new SeqExtra())->setTopicId($createStreamSeqDTO->getTopicId()));

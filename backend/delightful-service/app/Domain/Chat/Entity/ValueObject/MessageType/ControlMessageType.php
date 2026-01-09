@@ -100,8 +100,8 @@ enum ControlMessageType: string
     case AddFriendApply = 'add_friend_apply';
 
     /**
-     * 未知message。
-     * byatversion迭代，hair版timediffetcreason，maybe产生未知typemessage。
+     * unknownmessage。
+     * byatversion迭代，hair版timediffetcreason，maybe产生unknowntypemessage。
      */
     case Unknown = 'unknown';
 

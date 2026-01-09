@@ -22,7 +22,7 @@ abstract class AbstractSms implements SmsInterface
 
     public function getContent(SmsStruct $smsStruct): string
     {
-        // according to短信驱动确定to应语type,andconduct语type兜bottom
+        // according to短信驱动certainto应语type,andconduct语type兜bottom
         $language = $this->getContentLanguage($smsStruct);
         if (empty($smsStruct->variables)) {
             return $smsStruct->content ?: '';
@@ -49,7 +49,7 @@ abstract class AbstractSms implements SmsInterface
 
     /**
      *  toat $smsStruct , if language intemplatemiddlenot存in,thenuse default_language conduct检测
-     *  if default_language alsonothaveto应template,then按 type intemplatemiddle匹配存in语type,if存in多type,byzh_CN优先.
+     *  if default_language alsonothaveto应template,then按 type intemplatemiddlematch存in语type,if存in多type,byzh_CN优先.
      */
     public function getContentLanguage(SmsStruct $smsStruct): string
     {
@@ -91,7 +91,7 @@ abstract class AbstractSms implements SmsInterface
         if (empty($templateContent)) {
             return Json::encode($variables);
         }
-        // conductvariable匹配短信匹配
+        // conductvariablematch短信match
         if (! empty($variables)) {
             // compatible火山templatevariable替换,先will $message middlevariableparseoutcome such aswill[123456] parsefor['VerificationCode'=>123456]back,againconducttemplatecontent替换
             $variables = $this->template->getTemplateVariables($templateContent, $variables);

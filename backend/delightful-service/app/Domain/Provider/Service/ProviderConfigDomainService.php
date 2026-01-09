@@ -50,12 +50,12 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId): ?ProviderConfigModelsDTO
     {
-        // 1. getservicequotientconfiguration实body，containtemplateIDand虚拟Delightfulservicequotient统onehandle
+        // 1. getservicequotientconfiguration实body，containtemplateIDandvirtualDelightfulservicequotient统onehandle
         $providerConfigEntity = $this->getProviderConfig($dataIsolation, $configId);
         if (! $providerConfigEntity) {
             return null;
         }
-        // 存intemplate虚拟 configId and已经writedatabase configId，therefore这withinuse getProviderConfig returnservicequotient id 替换传入value
+        // 存intemplatevirtual configId and已经writedatabase configId，therefore这withinuse getProviderConfig returnservicequotient id 替换传入value
         $configId = (string) $providerConfigEntity->getId();
         // 2. query Provider
         $providerEntity = $this->getProviderById($dataIsolation, $providerConfigEntity->getServiceProviderId());
@@ -225,7 +225,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
                 return $existingConfig;
             }
 
-            // not存ino clock才构造虚拟servicequotientconfiguration实body
+            // not存ino clock才构造virtualservicequotientconfiguration实body
             return $this->createVirtualProviderConfig($dataIsolation, $providerEntity, $configId);
         }
 
@@ -259,7 +259,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * create虚拟servicequotientconfiguration实body（support所haveservicequotienttype）.
+     * createvirtualservicequotientconfiguration实body（support所haveservicequotienttype）.
      */
     private function createVirtualProviderConfig(ProviderDataIsolation $dataIsolation, ProviderEntity $providerEntity, string $templateId): ProviderConfigEntity
     {

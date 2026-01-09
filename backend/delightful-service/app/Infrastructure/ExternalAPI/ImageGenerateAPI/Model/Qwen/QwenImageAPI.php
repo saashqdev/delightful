@@ -98,7 +98,7 @@ class QwenImageAPI
             'Content-Type' => 'application/json',
         ];
 
-        // build符合阿within云APIdocumentrequestformat
+        // buildconform阿within云APIdocumentrequestformat
         $body = [
             'model' => $params['model'] ?? 'qwen-image-edit',
             'input' => [

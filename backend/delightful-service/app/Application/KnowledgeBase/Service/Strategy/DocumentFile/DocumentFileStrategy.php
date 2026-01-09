@@ -95,7 +95,7 @@ class DocumentFileStrategy
      */
     private function replaceImages(string $content, KnowledgeBaseDataIsolation $dataIsolation, ?string $knowledgeBaseCode = null): string
     {
-        // 匹配所haveimage
+        // match所haveimage
         $pattern = '/(!\[.*\]\((.*?)\))/';
         $matches = [];
         preg_match_all($pattern, $content, $matches);
@@ -208,7 +208,7 @@ class DocumentFileStrategy
             return $driver;
         }
 
-        $this->logger->warning('nothaveand[' . get_class($documentFile) . ']匹配textparsestrategy！willreturnemptyvalue！');
+        $this->logger->warning('nothaveand[' . get_class($documentFile) . ']matchtextparsestrategy！willreturnemptyvalue！');
         return null;
     }
 }

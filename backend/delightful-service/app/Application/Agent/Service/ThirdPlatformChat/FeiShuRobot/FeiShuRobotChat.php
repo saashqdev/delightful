@@ -142,7 +142,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             return $this->handleMessageReceive($params, $chatMessage);
         }
 
-        $this->logger->info('未知飞书eventtype', ['event_type' => $eventType]);
+        $this->logger->info('unknown飞书eventtype', ['event_type' => $eventType]);
         return $chatMessage;
     }
 
@@ -239,7 +239,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private function checkMessageIdLock(string $messageId): bool
     {
         if (empty($messageId)) {
-            $this->logger->warning('messageIDfornull，无法lock定');
+            $this->logger->warning('messageIDfornull，no法lock定');
             return false;
         }
 
@@ -311,7 +311,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         try {
             $openId = $params['event']['sender']['sender_id']['open_id'] ?? '';
             if (empty($openId)) {
-                $this->logger->warning('userOpenIDfornull，无法getuserinfo');
+                $this->logger->warning('userOpenIDfornull，no法getuserinfo');
                 return null;
             }
 
@@ -447,7 +447,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                 "{$robotCode}-{$originConversationId}_feishu_group_chat"
             );
         } else {
-            $this->logger->warning('未知chattype', ['chat_type' => $chatType]);
+            $this->logger->warning('unknownchattype', ['chat_type' => $chatType]);
         }
     }
 
@@ -687,7 +687,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                     $text = $element['text'] ?? '';
                     return "{$text}\n";
                 default:
-                    // toat未知tag，尝试extracttextcontent
+                    // toatunknowntag，尝试extracttextcontent
                     return $element['text'] ?? '';
             }
         } catch (Exception $e) {
@@ -746,7 +746,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             'content' => [],
         ];
 
-        // use正then表达type匹配Markdownmiddleimage
+        // use正then表达typematchMarkdownmiddleimage
         $pattern = '/!\[(.*?)\]\((.*?)\)/';
 
         // ifnothaveimage，直接returnmdformat
@@ -764,7 +764,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $lastPosition = 0;
         $contentBlocks = [];
 
-        // 遍历所have匹配toimage
+        // 遍历所havematchtoimage
         foreach ($matches[0] as $index => $match) {
             $fullMatch = $match[0];
             $position = $match[1];

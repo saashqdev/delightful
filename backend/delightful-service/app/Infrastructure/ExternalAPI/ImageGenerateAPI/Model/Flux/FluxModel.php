@@ -187,7 +187,7 @@ class FluxModel extends AbstractImageGenerate
             $result = $this->api->submitTask($prompt, $size, $mode);
 
             if ($result['status'] !== 'SUCCESS') {
-                $this->logger->warning('Flux文生graph：generaterequestfail', ['message' => $result['message'] ?? '未知error']);
+                $this->logger->warning('Flux文生graph：generaterequestfail', ['message' => $result['message'] ?? 'unknownerror']);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $result['message']);
             }
 
@@ -248,7 +248,7 @@ class FluxModel extends AbstractImageGenerate
                 }
 
                 if ($result['status'] === 'FAILED') {
-                    $this->logger->error('Flux文生graph：taskexecutefail', ['message' => $result['message'] ?? '未知error']);
+                    $this->logger->error('Flux文生graph：taskexecutefail', ['message' => $result['message'] ?? 'unknownerror']);
                     ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $result['message']);
                 }
 
@@ -275,7 +275,7 @@ class FluxModel extends AbstractImageGenerate
             $result = $this->api->getAccountInfo();
 
             if ($result['status'] !== 'SUCCESS') {
-                throw new Exception('checkbalancefail: ' . ($result['message'] ?? '未知error'));
+                throw new Exception('checkbalancefail: ' . ($result['message'] ?? 'unknownerror'));
             }
 
             return (float) $result['data']['balance'];

@@ -76,12 +76,12 @@ class QuickInstructionNode extends AbstractCustomNode
 
                 // usearrayfilterand键valuefind替代loop
                 if (! empty($values) && is_array($values)) {
-                    // find匹配 id instructionvalue
+                    // findmatch id instructionvalue
                     $matchedValues = array_filter($values, function ($item) use ($value) {
                         return isset($item['id']) && $item['id'] == $value;
                     });
 
-                    // if找to匹配item，取theone匹配item value
+                    // if找tomatchitem，取theonematchitem value
                     if (! empty($matchedValues)) {
                         $firstMatch = reset($matchedValues);
                         $value = $firstMatch['value'] ?? $value;

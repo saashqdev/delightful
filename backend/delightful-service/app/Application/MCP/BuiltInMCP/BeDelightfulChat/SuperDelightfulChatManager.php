@@ -107,7 +107,7 @@ MARKDOWN;
                 "• ID: %s\n  name: %s\n  description: %s%s\n\n",
                 $agent->getId(),
                 $agent->getAgentName(),
-                $agent->getAgentDescription() ?: '暂无description',
+                $agent->getAgentDescription() ?: '暂nodescription',
                 $instructionDescription ? "\n  canusefinger令: {$instructionDescription}" : ''
             );
 
@@ -273,7 +273,7 @@ MARKDOWN;
                 'properties' => [
                     'name' => [
                         'type' => 'string',
-                        'description' => 'finger令name，mustandAI助理definitionfinger令name完all匹配',
+                        'description' => 'finger令name，mustandAI助理definitionfinger令name完allmatch',
                     ],
                     'value' => [
                         'type' => 'string',
@@ -285,7 +285,7 @@ MARKDOWN;
             ],
         ];
 
-        // ifhavespecificfinger令info，generatemore详细 schema
+        // ifhavespecificfinger令info，generatemoredetailed schema
         if (! empty($allInstructions)) {
             $examples = [];
             foreach ($allInstructions as $instructions) {

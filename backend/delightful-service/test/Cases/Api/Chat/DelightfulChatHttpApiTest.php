@@ -71,9 +71,9 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         ];
 
         // useassertArrayValueTypesEqualsverifyresponse结构
-        $this->assertArrayValueTypesEquals($expectedStructure, $response, 'response结构not符合expected');
+        $this->assertArrayValueTypesEquals($expectedStructure, $response, 'response结构notconformexpected');
 
-        // 额outsideverifyrolewhetherisassistant（这is精确valueverify）
+        // 额outsideverifyrolewhetherisassistant（这isprecisevalueverify）
         $this->assertEquals('assistant', $response['data']['choices'][0]['message']['role'], 'role应forassistant');
     }
 
@@ -100,13 +100,13 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
 
         // definitionexpecterrorresponse结构
         $expectedErrorStructure = [
-            'code' => 0, // expectednotis1000code，butspecific数valuemaybenot确定，所by这within只is占位
-            'message' => '', // 只verify存inmessagefield，specificcontentmaybenot确定
+            'code' => 0, // expectednotis1000code，butspecific数valuemaybenotcertain，所by这within只is占位
+            'message' => '', // 只verify存inmessagefield，specificcontentmaybenotcertain
         ];
 
         // verifyresponseshouldisparameterverifyerror
         $this->assertNotEquals(1000, $response['code'] ?? 0, '缺少必要parametero clock，response码not应for1000');
-        $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'errorresponse结构not符合expected');
+        $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'errorresponse结构notconformexpected');
     }
 
     /**
@@ -131,12 +131,12 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
 
         // definitionexpecterrorresponse结构
         $expectedErrorStructure = [
-            'code' => 0, // expectednotis1000code，specific数valuemaybenot确定
-            'message' => '', // 只verify存inmessagefield，specificcontentmaybenot确定
+            'code' => 0, // expectednotis1000code，specific数valuemaybenotcertain
+            'message' => '', // 只verify存inmessagefield，specificcontentmaybenotcertain
         ];
 
         // verifyresponseshouldisauthorizationerror
         $this->assertNotEquals(1000, $response['code'] ?? 0, 'invalidauthorizationo clock，response码not应for1000');
-        $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'authorizationerrorresponse结构not符合expected');
+        $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'authorizationerrorresponse结构notconformexpected');
     }
 }

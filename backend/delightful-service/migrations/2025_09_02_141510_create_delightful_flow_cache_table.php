@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('cache_key')->comment('cache键名');
             $table->string('scope_tag', 10)->comment('asuse域标识');
             $table->longText('cache_value')->comment('cachevaluecontent');
-            $table->unsignedInteger('ttl_seconds')->default(7200)->comment('TTLsecond数（0代表permanentcache）');
+            $table->unsignedInteger('ttl_seconds')->default(7200)->comment('TTLsecond数（0representpermanentcache）');
             $table->timestamp('expires_at')->comment('expiretime戳');
             $table->string('organization_code', 64)->comment('organization隔离');
             $table->string('created_uid', 64)->default('')->comment('createperson');

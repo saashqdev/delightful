@@ -275,7 +275,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * systemstableproperty保障模piece之one:message优先level确定
+     * systemstableproperty保障模piece之one:message优先levelcertain
      * 优先levelrule:
      * 1.private chat/100personbyinsidegroup chat,优先levelmost高
      * 2.systemapplicationmessage,高优先level
@@ -599,7 +599,7 @@ abstract class AbstractDomainService
             $seqEntity->setConversationId($conversationEntity->getId());
             // group chatneedgive群membercreateconversationwindow
             if ($conversationEntity->getReceiveType() === ConversationType::Group || $messageDTO->getReceiveType() === ConversationType::Ai) {
-                // 确定message优先level
+                // certainmessage优先level
                 $seqCreatedEvent = $this->getControlSeqCreatedEvent($seqEntity);
                 // asyncgive收item方(其他群member)generateSeqandpush
                 $this->dispatchSeq($seqCreatedEvent);
@@ -608,7 +608,7 @@ abstract class AbstractDomainService
             if ($receiverConversationEntity) {
                 // givereceive方messagestreamgenerate序column.
                 $receiverSeqEntity = $this->generateReceiveSequenceByControlMessage($messageDTO, $receiverConversationEntity);
-                // 确定message优先level
+                // certainmessage优先level
                 $receiverSeqCreatedEvent = $this->getControlSeqCreatedEvent($receiverSeqEntity);
                 // giveto方sendmessage
                 $this->dispatchSeq($receiverSeqCreatedEvent);
@@ -655,7 +655,7 @@ abstract class AbstractDomainService
         if ($senderConversation->getUserId() !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
-        // organizationencodingwhether匹配
+        // organizationencodingwhethermatch
         if ($senderConversation->getUserOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }

@@ -104,7 +104,7 @@ JSON, true));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'content' => 'Q: 如何做to好汇报？ A: can阅读 [述职思维导graphv1.1.2](https://xxxxx.com/docx/605565507182194688) orcontinue阅读down文； 即，我passreturn答哪些issuecan达become「说清楚我做什么、做得怎么样」 issue清single (青春版) 1. ingoyear/up季degree，你main负责or参andproject，ineach阶segment原定planis怎样？这些planmiddle你所负责部minuteall按o clockcomplete吗？finalactual落ground情况如何？ a. ifprojectcompletevery好，这好resultand你所做哪些努力haveclose？ b. ifprojectcompletenot好，存inissueand你反思is什么？你is如何improvement？improvementresult如何？ 2. passgooneyearwithin，你allfor你team做什么事情？付out什么？这些事情and付outresultis如何？好in哪within？not好is什么reason？for什么？ 3. passgooneyearwithin，你allfor你from己all做什么事情？付out什么？这些事情and付outresultis如何？好in哪within？not好is什么reason？for什么？ 4. 明yearuphalfyearplanis什么？',
+            'content' => 'Q: 如何做to好汇报？ A: can阅读 [述职思维导graphv1.1.2](https://xxxxx.com/docx/605565507182194688) orcontinue阅读down文； 即，我passreturn答哪些issuecan达become「说clear我做什么、做得怎么样」 issue清single (青春版) 1. ingoyear/up季degree，你main负责or参andproject，ineach阶segment原定planis怎样？这些planmiddle你所负责部minuteall按o clockcomplete吗？finalactual落ground情况如何？ a. ifprojectcompletevery好，这好resultand你所做哪些努力haveclose？ b. ifprojectcompletenot好，存inissueand你反思is什么？你is如何improvement？improvementresult如何？ 2. passgooneyearwithin，你allfor你team做什么事情？付out什么？这些事情and付outresultis如何？好in哪within？not好is什么reason？for什么？ 3. passgooneyearwithin，你allfor你from己all做什么事情？付out什么？这些事情and付outresultis如何？好in哪within？not好is什么reason？for什么？ 4. 明yearuphalfyearplanis什么？',
             'business_id' => '',
         ]);
         $runner->execute($vertexResult, $executionData, []);

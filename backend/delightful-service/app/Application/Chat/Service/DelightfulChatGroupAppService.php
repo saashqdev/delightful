@@ -68,7 +68,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         $groupUserIds = array_values(array_unique($groupUserIds));
         $users = $this->getGroupAddUsers($groupUserIds, $dataIsolation, $inputDepartmentIds, $chatGroupUserNumLimit);
         $userIds = array_column($users, 'user_id');
-        // 确定group chatname
+        // certaingroup chatname
         $groupName = $this->getGroupName($delightfulGroupDTO, $userIds, $dataIsolation);
         $delightfulGroupDTO->setGroupName($groupName);
         $delightfulGroupDTO->setMemberLimit($chatGroupUserNumLimit);

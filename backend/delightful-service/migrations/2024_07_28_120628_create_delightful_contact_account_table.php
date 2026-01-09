@@ -35,7 +35,7 @@ return new class extends Migration {
             // true名
             $table->string('real_name', 64)->comment('true名')->default('');
             // property别
-            $table->tinyInteger('gender')->comment('property别，0:未知；1:男；2:女')->default(0);
+            $table->tinyInteger('gender')->comment('property别，0:unknown；1:男；2:女')->default(0);
             // attachaddproperty
             $table->string('extra', 1024)->comment('attachaddproperty.')->default('');
 

@@ -33,7 +33,7 @@ class ClientSequence extends AbstractEntity
     // send方messageid
     protected ?string $senderMessageId;
 
-    // message所属sessionwindow。 customer端canaccording to此value确定messagewhether要reminderetc。if本groundnothavehair现这sessionid，主动toservice端querysessionwindowdetail
+    // message所属sessionwindow。 customer端canaccording to此valuecertainmessagewhether要reminderetc。if本groundnothavehair现这sessionid，主动toservice端querysessionwindowdetail
     protected ?string $conversationId;
 
     protected string $organizationCode;

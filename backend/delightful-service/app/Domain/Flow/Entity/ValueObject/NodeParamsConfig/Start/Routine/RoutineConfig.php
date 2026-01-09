@@ -64,7 +64,7 @@ class RoutineConfig
             return $this->crontabRule;
         }
         if ($this->type === RoutineType::NoRepeat) {
-            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'currenttype无需generateschedulerule');
+            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'currenttypeno需generateschedulerule');
         }
         $minute = $hour = $dayOfMonth = $month = $dayOfWeek = '*';
         if (! empty($this->time)) {

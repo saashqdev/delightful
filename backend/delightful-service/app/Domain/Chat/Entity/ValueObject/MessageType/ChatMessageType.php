@@ -69,8 +69,8 @@ enum ChatMessageType: string
     case BeAgentCard = 'general_agent_card';
 
     /**
-     * 未知message。
-     * byatversion迭代，hair版timediffetcreason，maybe产生未知typemessage。
+     * unknownmessage。
+     * byatversion迭代，hair版timediffetcreason，maybe产生unknowntypemessage。
      */
     case Unknown = 'unknown';
 

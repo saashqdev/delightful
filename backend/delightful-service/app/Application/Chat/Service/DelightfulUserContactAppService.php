@@ -256,7 +256,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         // searchpositioncontainsearch词person
         if ($queryDTO->isQueryByJobTitle()) {
             $departmentUsers = $this->departmentUserDomainService->searchDepartmentUsersByJobTitle($queryDTO->getQuery(), $dataIsolation);
-            // getuser详细info
+            // getuserdetailedinfo
             $userIds = array_column($departmentUsers, 'user_id');
             $userEntities = $this->userDomainService->getUserDetailByUserIds($userIds, $dataIsolation);
             $usersForQueryJobTitle = array_map(static fn ($entity) => $entity->toArray(), $userEntities);
@@ -277,7 +277,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             $usersForQueryDepartmentPath = array_filter($usersForQueryDepartmentPath, static fn ($user) => $user['user_type'] !== UserType::Ai->value);
         }
 
-        // settinguserIDsuseatquery详细info
+        // settinguserIDsuseatquerydetailedinfo
         $userIds = array_column($usersForQueryDepartmentPath, 'user_id');
         $queryDTO->setUserIds($userIds);
 

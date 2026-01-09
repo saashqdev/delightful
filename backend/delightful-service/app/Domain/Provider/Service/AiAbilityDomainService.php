@@ -49,7 +49,7 @@ class AiAbilityDomainService
     }
 
     /**
-     * get所haveAI能力list（无pagination）.
+     * get所haveAI能力list（nopagination）.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @return array<AiAbilityEntity> AI能力实bodylist

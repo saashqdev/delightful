@@ -348,7 +348,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     ): array {
         // 1.判断 $senderUserId and $receiverUserIdconversationwhether存in（参考getOrCreateConversationmethod）
         $senderConversationEntity = $this->delightfulConversationDomainService->getOrCreateConversation($senderUserId, $receiverId, $receiverType);
-        // also要createreceive方conversationwindow，要not然无法create话题
+        // also要createreceive方conversationwindow，要not然no法create话题
         $this->delightfulConversationDomainService->getOrCreateConversation($receiverId, $senderUserId);
 
         // 2.if $seqExtra notfor null，校验whetherhave topic id，ifnothave，参考 agentSendMessageGetTopicId method，得to话题 id
@@ -596,7 +596,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         你isone专业contenttitlegenerate助hand。请严格按照bydown要求forconversationcontentgeneratetitle：
 
         ## taskgoal
-        according toconversationcontent，generateone简洁、准确title，can概括conversation核coretheme。
+        according toconversationcontent，generateone简洁、accuratetitle，can概括conversation核coretheme。
 
         ## theme优先level原then
         whenconversation涉and多differentthemeo clock：
@@ -762,7 +762,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                 $senderMessageId = $streamCachedDTO->getSenderMessageId();
                 $delightfulMessageId = $streamCachedDTO->getDelightfulMessageId();
             }
-            // 只in确定 $senderSeqEntity and $messageEntity，useatreturndata结构
+            // 只incertain $senderSeqEntity and $messageEntity，useatreturndata结构
             $senderSeqEntity = $this->delightfulSeqDomainService->getSeqEntityByMessageId($senderMessageId);
             $messageEntity = $this->delightfulChatDomainService->getMessageByDelightfulMessageId($delightfulMessageId);
             // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
@@ -775,11 +775,11 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             if (! isset($messageEntity)) {
                 $messageEntity = $this->delightfulChatDomainService->createDelightfulMessageByAppClient($senderMessageDTO, $senderConversationEntity);
             }
-            // givefrom己messagestreamgenerate序column,and确定messagereceivepersoncolumn表
+            // givefrom己messagestreamgenerate序column,andcertainmessagereceivepersoncolumn表
             $senderSeqEntity = $this->delightfulChatDomainService->generateSenderSequenceByChatMessage($senderSeqDTO, $messageEntity, $senderConversationEntity);
             // 避免 seq 表承载too多feature,addtoo多索引,thereforewill话题messagesingle独writeto topic_messages 表middle
             $this->delightfulChatDomainService->createTopicMessage($senderSeqEntity);
-            // 确定message优先level
+            // certainmessage优先level
             $receiveList = $senderSeqEntity->getReceiveList();
             if ($receiveList === null) {
                 $receiveUserCount = 0;
@@ -1305,7 +1305,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         $userEntities = $this->delightfulUserDomainService->getUserByIdsWithoutOrganization($userIds);
         $userMap = array_column($userEntities, 'delightful_id', 'user_id');
 
-        // checkeachconversationwhether属atcurrentuser（passdelightful_id匹配）
+        // checkeachconversationwhether属atcurrentuser（passdelightful_idmatch）
         $currentDelightfulId = $userAuthorization->getDelightfulId();
         foreach ($conversationIds as $id) {
             $conversationEntity = $conversations[$id] ?? null;

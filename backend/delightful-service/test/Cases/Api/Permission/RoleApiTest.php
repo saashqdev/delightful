@@ -120,7 +120,7 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertArrayValueTypesEquals(
             $expectedDetailStructure,
             $detailResp['data'] ?? [],
-            '子administratordetailinterfaceresponse结构not符合expected',
+            '子administratordetailinterfaceresponse结构notconformexpected',
             false,
             false
         );

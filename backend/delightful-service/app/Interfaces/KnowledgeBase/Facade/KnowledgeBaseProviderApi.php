@@ -29,7 +29,7 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
         $dto->setDescription('官方提供重sortservice');
         $dto->setIcon('');
         $dto->setCategory('rerank');
-        $dto->setStatus(1); // 1 表示enable
+        $dto->setStatus(1); // 1 indicateenable
         $dto->setCreatedAt(date('Y-m-d H:i:s'));
 
         // settingmodelcolumn表

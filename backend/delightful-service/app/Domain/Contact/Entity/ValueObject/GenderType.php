@@ -12,7 +12,7 @@ namespace App\Domain\Contact\Entity\ValueObject;
  */
 enum GenderType: int
 {
-    // 未知
+    // unknown
     case Unknown = 0;
 
     // 男

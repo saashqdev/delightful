@@ -27,7 +27,7 @@ enum AIImageCardResponseType: int
             self::START_GENERATE => 'startgenerate',
             self::GENERATED => 'generatecomplete',
             self::REFERENCE_IMAGE => 'quoteimage',
-            default => '未知type',
+            default => 'unknowntype',
         };
     }
 }

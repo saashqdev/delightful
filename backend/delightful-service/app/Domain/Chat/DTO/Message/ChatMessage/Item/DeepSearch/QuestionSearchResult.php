@@ -30,7 +30,7 @@ class QuestionSearchResult extends AbstractObject
     protected int $totalWords;
 
     /**
-     * 匹配词数.
+     * match词数.
      */
     protected int $matchCount;
 

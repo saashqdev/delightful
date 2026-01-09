@@ -30,7 +30,7 @@ class NullImageEnhancementProcessor implements ImageEnhancementProcessorInterfac
 
     public function extractEnhancementFromImageData(string $imageData): ?array
     {
-        // open源version无法extractenhanceinformation
+        // open源versionno法extractenhanceinformation
         return null;
     }
 }

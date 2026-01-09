@@ -151,7 +151,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
                 // model属at官方organizationandcurrentorganizationnotis官方organization：走写o clockcopy逻辑
                 $organizationModelId = $this->delightfulProviderAndModels->updateDelightfulModelStatus($dataIsolation, $model);
             } else {
-                // 其他情况：无permission操as
+                // 其他情况：nopermission操as
                 ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
             }
         } else {

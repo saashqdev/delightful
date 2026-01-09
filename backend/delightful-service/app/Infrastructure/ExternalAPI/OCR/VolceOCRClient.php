@@ -81,7 +81,7 @@ class VolceOCRClient implements OCRClientInterface
 
         // checkwhethersuccessgethead部info
         if ($headers === false || ! isset($headers['Content-Type'])) {
-            return null; // 无法getfiletype
+            return null; // no法getfiletype
         }
 
         // parse Content-Type

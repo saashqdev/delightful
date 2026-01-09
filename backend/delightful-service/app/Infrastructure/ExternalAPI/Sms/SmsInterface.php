@@ -25,7 +25,7 @@ interface SmsInterface
     public function getContent(SmsStruct $smsStruct): string;
 
     /**
-     * get短信文案语type,andsignature无close. maybe短信contentis印尼语,signatureisEnglish.
+     * get短信文案语type,andsignaturenoclose. maybe短信contentis印尼语,signatureisEnglish.
      */
     public function getContentLanguage(SmsStruct $smsStruct): string;
 

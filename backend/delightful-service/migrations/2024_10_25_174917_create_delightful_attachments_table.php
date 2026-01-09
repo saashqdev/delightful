@@ -20,11 +20,11 @@ return new class extends Migration {
         Schema::create('delightful_attachments', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
             $table->unsignedBigInteger('target_id');
-            $table->unsignedTinyInteger('target_type')->comment('0-未知1-待办');
+            $table->unsignedTinyInteger('target_type')->comment('0-unknown1-待办');
             $table->string('uid', 64);
             $table->text('key');
             $table->text('name');
-            $table->unsignedTinyInteger('origin_type')->comment('uploadcomesource：0-无1-imagegroupitem2-filegroupitem')->default(0);
+            $table->unsignedTinyInteger('origin_type')->comment('uploadcomesource：0-no1-imagegroupitem2-filegroupitem')->default(0);
             $table->timestamps();
             $table->softDeletes();
             $table->string('organization_code')->index()->comment('organizationcode');

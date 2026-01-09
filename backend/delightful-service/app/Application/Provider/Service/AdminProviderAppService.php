@@ -57,7 +57,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * according toservicequotientconfigurationIDgetservicequotient详细info.
+     * according toservicequotientconfigurationIDgetservicequotientdetailedinfo.
      */
     public function getProviderModelsByConfigId(
         DelightfulUserAuthorization $authorization,
@@ -258,7 +258,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * according toorganizationencodingandservicequotientcategoryget活跃servicequotientconfiguration.
+     * according toorganizationencodingandservicequotientcategorygetactiveservicequotientconfiguration.
      * @param string $organizationCode organizationencoding
      * @param Category $category servicequotientcategory
      * @return ProviderConfigDTO[]

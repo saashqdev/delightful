@@ -111,7 +111,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         // 4. 现intest2userbecomeformember，butpermissionnot足 - addmembershouldfail
         $this->switchUserTest2();
-        $this->addTeamMembers($projectId, 51202); // 仍然无permission，因fornotis管理者
+        $this->addTeamMembers($projectId, 51202); // 仍然nopermission，因fornotis管理者
 
         // 5. givetest2user管理permission
         $this->switchUserTest1();
@@ -246,7 +246,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $projectId = $this->projectId;
 
         // 1. testmiddle文errormessage
-        $this->switchUserTest2(); // 无permissionuser
+        $this->switchUserTest2(); // nopermissionuser
         $response = $this->addTeamMembers($projectId, 51202);
         $this->assertStringContainsString('permission', $response['message']);
 

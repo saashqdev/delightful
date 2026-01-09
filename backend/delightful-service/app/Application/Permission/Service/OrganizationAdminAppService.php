@@ -156,7 +156,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
 
             $departmentUser = $departmentUsers[0];
 
-            // getdepartment详细info
+            // getdepartmentdetailedinfo
             $department = $this->departmentDomainService->getDepartmentById(
                 $dataIsolation,
                 $departmentUser->getDepartmentId()

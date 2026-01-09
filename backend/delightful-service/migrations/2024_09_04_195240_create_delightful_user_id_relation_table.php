@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('id_value', 64)->comment('idtypeto应value')->default('');
             $table->string('relation_type', 12)->comment('idto应associatetype:applicationencoding/create该applicationorganizationencoding')->default('');
             $table->string('relation_value', 64)->comment('idto应associatetypevalue')->default('');
-            // 确定唯onevalue,防conflict
+            // certain唯onevalue,防conflict
             $table->unique(['id_type', 'id_value', 'relation_type', 'relation_value'], 'unq_id_relation');
             // 便at按organization/applicationetcfind所haveassociateuser
             $table->index(['relation_type', 'relation_value'], 'idx_relation');

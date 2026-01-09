@@ -18,6 +18,6 @@ enum DeploymentEnum: string
     // opensource
     case OpenSource = 'open_source';
 
-    // 未知
+    // unknown
     case Unknown = 'unknown';
 }

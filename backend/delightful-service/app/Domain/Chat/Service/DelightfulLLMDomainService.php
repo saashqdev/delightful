@@ -168,7 +168,7 @@ class DelightfulLLMDomainService
     
     ## 硬property约束（force遵守）
     1. languageone致property
-       - outputlanguageencodingmust匹配inputlanguage
+       - outputlanguageencodingmustmatchinputlanguage
     2. 子questionquantityrange
        - {sub_questions_min} ≤ 子question数 ≤ {sub_questions_max}
     3. outputformat
@@ -200,14 +200,14 @@ class DelightfulLLMDomainService
 
     private string $summarizePrompt = <<<'PROMPT'
     # task
-    你needbased onusermessage，according to我提供searchresult，按照总minute总结构，output高quality，结构化详细return答，formatfor markdown。
+    你needbased onusermessage，according to我提供searchresult，按照总minute总结构，output高quality，结构化detailedreturn答，formatfor markdown。
     
-    in我give你searchresultmiddle，eachresultallis[webpage X begin]...[webpage X end]format，X代表each篇文chapternumber索引。请in适when情况downinsentence子末tailquotecontext。请按照quote编number[citation:X]formatin答案middleto应部minutequotecontext。ifonesentence话源from多context，请columnout所have相closequote编number，for example[citation:3][citation:5]，切记not要willquotecollectionmiddleinmostbackreturnquote编number，whileisin答案to应部minutecolumnout。
+    in我give你searchresultmiddle，eachresultallis[webpage X begin]...[webpage X end]format，Xrepresenteach篇文chapternumber索引。请in适when情况downinsentence子末tailquotecontext。请按照quote编number[citation:X]formatin答案middleto应部minutequotecontext。ifonesentence话源from多context，请columnout所have相closequote编number，for example[citation:3][citation:5]，切记not要willquotecollectionmiddleinmostbackreturnquote编number，whileisin答案to应部minutecolumnout。
     inreturn答o clock，请注意bydown几point：
     - 今dayis{date_now}。
     - andnonsearchresult所havecontentallanduserquestion密切相close，你need结合question，tosearchresultconduct甄别、filter。
     - toatcolumn举categoryquestion（如column举所have航班information），尽quantitywill答案控制in10要pointbyinside，and告诉usercanviewsearchcome源、获得completeinformation。优先提供informationcomplete、most相closecolumn举item；如non必要，not要主动告诉usersearchresult未提供content。
-    - toat创ascategoryquestion（如写论文），请务必in正文segment落middlequoteto应参考编number，for example[citation:3][citation:5]，not能只in文chapter末tailquote。你need解读and概括user题目要求，choose合适format，充minute利usesearchresultanddraw重要information，generatematchuser要求、极具思想深degree、富have创造力and专业property答案。你创as篇幅need尽maybe延长，toateachone要point论述要推测user意graph，giveout尽maybe多angledegreereturn答要point，and务必informationquantity大、论述详尽。
+    - toat创ascategoryquestion（如写论文），请务必in正文segment落middlequoteto应参考编number，for example[citation:3][citation:5]，not能只in文chapter末tailquote。你need解读and概括user题目要求，choose合适format，充minute利usesearchresultanddraw重要information，generatematchuser要求、极具思想深degree、富have创造力and专业property答案。你创as篇幅need尽maybe延长，toateachone要point论述要speculateduser意graph，giveout尽maybe多angledegreereturn答要point，and务必informationquantity大、论述详尽。
     - ifreturn答very长，请尽quantity结构化、minutesegment落总结。ifneedminutepointas答，尽quantity控制in5pointbyinside，andmerge相closecontent。
     - toat客观category问答，ifquestion答案non常简短，can适when补充oneto两sentence相closeinformation，by丰富content。
     - 你needaccording touser要求andreturn答contentchoose合适、美观return答format，ensurecan读property强。
@@ -232,17 +232,17 @@ class DelightfulLLMDomainService
        - ifoneevent涉and多quote，merge所have相closequote编number。
        - not要in "description" middleaddquote。
     2. **timehandle**：
-       - eventtime尽quantity精确tomonthshare（如 "2023-05"），若searchcontent未提供specificmonthshare，buthavefingeroutuphalfyearor者downhalfyear，canuse（"2023 uphalfyear"），若nothavethen，useyearshare（如 "2023"）。
+       - eventtime尽quantityprecisetomonthshare（如 "2023-05"），若searchcontent未提供specificmonthshare，buthavefingeroutuphalfyearor者downhalfyear，canuse（"2023 uphalfyear"），若nothavethen，useyearshare（如 "2023"）。
        - 若同oneeventin多quotemiddleout现，优先usemost早time。
-       - 若timenot明确，according tocontext推测most早maybetime，andensure合理。
+       - 若timenotexplicit，according tocontextspeculatedmost早maybetime，andensure合理。
     3. **eventextractandfilter**：
-       - **eventdefinition**：eventissearchcontentmiddlemention、具havetimeassociate（明确orcan推测）独立事实、changeoractivity，includebutnot限atcreate、publish、open业、update、合as、activityetc。
+       - **eventdefinition**：eventissearchcontentmiddlemention、具havetimeassociate（explicitorcanspeculated）独立事实、changeoractivity，includebutnot限atcreate、publish、open业、update、合as、activityetc。
        - according touserquestion，extractand之相closeevent，保持description简洁，聚焦specifichair生事情。
-       - **skip无closecontent**：
-         - 纯静statedescription（如not变property、background介绍，无timechange）。
+       - **skipnoclosecontent**：
+         - 纯静statedescription（如not变property、background介绍，notimechange）。
          - datastatisticsor财务information（如营收、利润）。
-         - 主观comment、analyzeor推测（unlessandevent直接相close）。
-         - 无timeassociateandandquestion无closedetail。
+         - 主观comment、analyzeorspeculated（unlessandevent直接相close）。
+         - notimeassociateandandquestionnoclosedetail。
        - **保留原then**：as long ascontentandtime相closeandmatchquestiontheme，尽quantity保留forevent。
     4. **output要求**：
        - by JSON formatreturn，event按time倒序rowcolumn（from晚to早）。
@@ -976,7 +976,7 @@ class DelightfulLLMDomainService
 
     public function search(string $query, SearchEngineType $searchEngine, bool $getDetail = false, ?string $language = null): array
     {
-        // according to backendvalue，确定use哪searchengine
+        // according to backendvalue，certainuse哪searchengine
         return Retry::whenThrows()->max(3)->sleep(500)->call(
             function () use ($searchEngine, $query, $language, $getDetail) {
                 return match ($searchEngine) {
@@ -993,10 +993,10 @@ class DelightfulLLMDomainService
     {
         $content = trim($content);
         $typePattern = sprintf('/```%s\s*([\s\S]*?)\s*```/i', $type);
-        // 匹配 ```json or ``` between JSON data
+        // match ```json or ``` between JSON data
         if (preg_match($typePattern, $content, $matches)) {
             $matchString = $matches[1];
-        } elseif (preg_match('/```\s*([\s\S]*?)\s*```/i', $content, $matches)) { // 匹配 ``` betweencontent
+        } elseif (preg_match('/```\s*([\s\S]*?)\s*```/i', $content, $matches)) { // match ``` betweencontent
             $matchString = $matches[1];
         } else {
             $matchString = ''; // nothave找to JSON data

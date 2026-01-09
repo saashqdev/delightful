@@ -16,8 +16,8 @@ class ImageUsage extends Usage
      * @param int $completionTokens completecontenttokenquantity
      * @param int $totalTokens use总tokenquantity
      * @param int $generatedImages generateimagequantity
-     * @param array $completionTokensDetails completetoken详细information
-     * @param array $promptTokensDetails prompttoken详细information
+     * @param array $completionTokensDetails completetokendetailedinformation
+     * @param array $promptTokensDetails prompttokendetailedinformation
      */
     public function __construct(
         public int $promptTokens = 0,

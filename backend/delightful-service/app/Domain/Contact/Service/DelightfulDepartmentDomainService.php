@@ -79,7 +79,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
         $orgCode = $dataIsolation->getCurrentOrganizationCode();
         $departmentsPageResponseDTO = $this->departmentRepository->getSubDepartmentsByLevel($level, $orgCode, $depth, $size, $offset);
         $departments = $departmentsPageResponseDTO->getItems();
-        // 确定downleveldepartmentwhetheralsohave子department
+        // certaindownleveldepartmentwhetheralsohave子department
         $items = $this->getDepartmentsHasChild($departments, $orgCode);
         $departmentsPageResponseDTO->setItems($items);
         return $departmentsPageResponseDTO;
@@ -90,7 +90,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
         $orgCode = $dataIsolation->getCurrentOrganizationCode();
         $departmentsPageResponseDTO = $this->departmentRepository->getSubDepartmentsById($departmentId, $orgCode, $size, $offset);
         $departments = $departmentsPageResponseDTO->getItems();
-        // 确定downleveldepartmentwhetheralsohave子department
+        // certaindownleveldepartmentwhetheralsohave子department
         $items = $this->getDepartmentsHasChild($departments, $orgCode);
         $departmentsPageResponseDTO->setItems($items);
         return $departmentsPageResponseDTO;

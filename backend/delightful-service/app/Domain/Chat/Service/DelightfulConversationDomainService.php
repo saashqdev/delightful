@@ -304,7 +304,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             $delightfulId = $user['delightful_id'] ?? null;
             if (empty($userId) || empty($delightfulId)) {
                 $this->logger->error(sprintf(
-                    'batchCreateGroupConversations 群membernothave匹配to $users:%s $groupEntity:%s',
+                    'batchCreateGroupConversations 群membernothavematchto $users:%s $groupEntity:%s',
                     Json::encode($users),
                     Json::encode($groupEntity->toArray()),
                 ));

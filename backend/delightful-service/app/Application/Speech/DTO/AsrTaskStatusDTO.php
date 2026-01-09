@@ -29,7 +29,7 @@ class AsrTaskStatusDTO
     public ?string $audioFileId = null; // audiofileID（writedelightful_super_agent_task_files表backreturnID）
 
     // note fileinfo
-    public ?string $noteFileName = null; // notefile名（andaudiofilein同onedirectory，fornull表示无笔记file）
+    public ?string $noteFileName = null; // notefile名（andaudiofilein同onedirectory，fornullindicateno笔记file）
 
     public ?string $noteFileId = null; // notefileID（useatchatmessagemiddlefilequote）
 

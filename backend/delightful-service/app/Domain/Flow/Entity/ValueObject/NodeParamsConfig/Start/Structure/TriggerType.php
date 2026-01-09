@@ -12,7 +12,7 @@ use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 
 enum TriggerType: int
 {
-    // 无触hair
+    // no触hair
     case None = 0;
 
     // 新messageo clock

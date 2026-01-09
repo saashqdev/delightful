@@ -48,7 +48,7 @@ class VolcengineSms extends VolcengineApi
         $sendResult = new SendResult();
         $signStr = SignEnum::format($sign, LanguageEnum::EN_US);
         if (empty($templateVariables)) {
-            return $sendResult->setResult(-1, '未匹配toto应短信template!');
+            return $sendResult->setResult(-1, '未matchtoto应短信template!');
         }
         if (! in_array($signStr, Template::$signToMessageGroup, true)) {
             return $sendResult->setResult(-1, '短信signature:' . $signStr . ' not supported!');

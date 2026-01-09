@@ -61,7 +61,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
             $position = $firstDepartmentUser->getJobTitle() ?? '';
         }
 
-        // getdepartment详细info
+        // getdepartmentdetailedinfo
         $departments = $this->getDepartmentsInfo($departmentUserEntities, $dataIsolation);
 
         return [

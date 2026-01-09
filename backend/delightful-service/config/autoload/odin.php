@@ -321,7 +321,7 @@ return [
                 ],
                 // whetherenablefield白名singlefilter，defaulttrue（enablefilter）
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
-                // most大stringlength限制，超pass此lengthstringwillbe替换for [Long Text]，settingfor 0 表示not限制
+                // most大stringlength限制，超pass此lengthstringwillbe替换for [Long Text]，settingfor 0 indicatenot限制
                 'max_text_length' => env('ODIN_LOG_MAX_TEXT_LENGTH', 0),
             ],
             'network_retry_count' => 1,

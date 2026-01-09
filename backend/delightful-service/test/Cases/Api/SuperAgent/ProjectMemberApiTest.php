@@ -598,13 +598,13 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $this->switchUserTest2();
 
-        // test无permissionadd入edit - shouldreturnerror
-        $this->joinFileEditing($unauthorizedFileId, 51202); // false设51200is无permissionerror码
+        // testnopermissionadd入edit - shouldreturnerror
+        $this->joinFileEditing($unauthorizedFileId, 51202); // false设51200isnopermissionerror码
 
-        // test无permissionleaveedit - shouldreturnerror
+        // testnopermissionleaveedit - shouldreturnerror
         $this->leaveFileEditing($unauthorizedFileId, 51202);
 
-        // test无permissionqueryedituser - shouldreturnerror
+        // testnopermissionqueryedituser - shouldreturnerror
         $this->getEditingUsers($unauthorizedFileId, 51202);
     }
 
@@ -788,11 +788,11 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
 
-        // 2. testpermission控制 - 清nullmemberback无permission
+        // 2. testpermission控制 - 清nullmemberbacknopermission
         $this->switchUserTest1(); // 切换toproject所have者
         $this->updateEmptyMembers($this->projectId); // 清nullprojectmember
 
-        $this->switchUserTest2(); // 切换to无permissionuser
+        $this->switchUserTest2(); // 切换tonopermissionuser
         $emptyResponse = $this->getCollaborationProjectCreators();
         $this->verifyEmptyCreatorListResponse($emptyResponse);
 
@@ -905,7 +905,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals(1000, $response['code']);
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data'], 'responsedatashouldisarray');
-        $this->assertEquals(0, count($response['data']), '无permissiono clockshouldreturnnullarray');
+        $this->assertEquals(0, count($response['data']), 'nopermissiono clockshouldreturnnullarray');
     }
 
     /**

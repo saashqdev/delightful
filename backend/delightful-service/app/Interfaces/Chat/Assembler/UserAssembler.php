@@ -157,7 +157,7 @@ class UserAssembler
             $userDepartmentMap[$departmentUser->getUserId()][] = $departmentUser;
         }
 
-        // step2: foreachuserbuild详细info
+        // step2: foreachuserbuilddetailedinfo
         foreach ($usersDetail as $userInfo) {
             $userId = $userInfo->getUserId();
             $userDepartmentRelations = $userDepartmentMap[$userId] ?? [];
@@ -180,7 +180,7 @@ class UserAssembler
                         );
                         $fullPathNodes[$userDepartmentId] = $pathNodes;
                     } else {
-                        // 简略模type: 只取eachdepartmentmostnextsectionpoint
+                        // brief模type: 只取eachdepartmentmostnextsectionpoint
                         $departmentInfo = end($departments);
                         $pathNode = self::assemblePathNodeByDepartmentInfo($departmentInfo);
                         $allPathNodes[] = $pathNode;

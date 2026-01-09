@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\MCP\Authentication;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * 无authenticationimplement.
+ * noauthenticationimplement.
  * whensystemdesign要求have身shareverifybutnotneedactualverifyo clockuse.
  */
 class NoAuthentication implements AuthenticationInterface

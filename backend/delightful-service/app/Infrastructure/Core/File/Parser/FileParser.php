@@ -125,14 +125,14 @@ class FileParser
         $localFile = fopen($tempFile, 'w');
 
         if (! $fileStream || ! $localFile) {
-            ExceptionBuilder::throw(FlowErrorCode::Error, message: '无法openfilestream');
+            ExceptionBuilder::throw(FlowErrorCode::Error, message: 'no法openfilestream');
         }
 
-        // iffilesize未知，needindownloadproceduremiddle控制size
+        // iffilesizeunknown，needindownloadproceduremiddle控制size
         if (! $sizeKnown && $maxSize > 0) {
             self::downloadWithSizeControl($fileStream, $localFile, $maxSize);
         } else {
-            // filesize已知or无需限制，直接copy
+            // filesizeknownorno需限制，直接copy
             stream_copy_to_stream($fileStream, $localFile);
         }
 
@@ -180,7 +180,7 @@ class FileParser
      * @param string $fileUrl fileURLground址
      * @param int $maxSize filesize限制（字section），0table示not限制
      * @return bool truetable示已checksizeandin限制inside，falsetable示ischunked传输needstreamdownload
-     * @throws Exception whenfilesize超pass限制orfilesize未知andnonchunked传输o clock
+     * @throws Exception whenfilesize超pass限制orfilesizeunknownandnonchunked传输o clock
      */
     private static function checkUrlFileSize(string $fileUrl, int $maxSize = 0): bool
     {
@@ -209,6 +209,6 @@ class FileParser
         }
 
         // 既nothaveContent-Length，alsonotischunked传输，rejectdownload
-        ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesize未知，forbiddownload');
+        ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesizeunknown，forbiddownload');
     }
 }

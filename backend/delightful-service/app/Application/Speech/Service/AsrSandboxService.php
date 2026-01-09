@@ -561,7 +561,7 @@ readonly class AsrSandboxService
 
         $projectIdString = (string) $projectId;
         if ($projectIdString === '') {
-            ExceptionBuilder::throw(AsrErrorCode::SandboxTaskCreationFailed, '', ['message' => 'projectIDfornull，无法create沙箱']);
+            ExceptionBuilder::throw(AsrErrorCode::SandboxTaskCreationFailed, '', ['message' => 'projectIDfornull，no法create沙箱']);
         }
 
         // 尝试getwork区status
@@ -583,7 +583,7 @@ readonly class AsrSandboxService
 
             // ifresponsesuccess（code 1000）andwork区已then绪，直接return
             if ($responseCode === ResponseCode::SUCCESS && WorkspaceStatus::isReady($workspaceStatus)) {
-                $this->logger->info('检测to沙箱work区已then绪，无需initialize', [
+                $this->logger->info('检测to沙箱work区已then绪，no需initialize', [
                     'task_key' => $taskStatus->taskKey,
                     'sandbox_id' => $requestedSandboxId,
                     'status' => $workspaceStatus,
@@ -691,7 +691,7 @@ readonly class AsrSandboxService
         $projectEntity = $this->projectDomainService->getProject((int) $taskStatus->projectId, $userId);
         $projectOrganizationCode = $projectEntity->getUserOrganizationCode();
 
-        // 确定 agentUserId：use topic create者ID，ifnothavethenuse topic userID（参考 AgentAppService）
+        // certain agentUserId：use topic create者ID，ifnothavethenuse topic userID（参考 AgentAppService）
         $agentUserId = $topicEntity->getCreatedUid() ?: $topicEntity->getUserId();
 
         // build TaskContext（ASR 场景middle chatConversationId、chatTopicId usenullstring）
@@ -820,14 +820,14 @@ readonly class AsrSandboxService
     ): TaskEntity {
         // check topicId whether存in
         if (empty($taskStatus->topicId)) {
-            $this->logger->error('ASR task缺少 topicId，无法getorcreate task', [
+            $this->logger->error('ASR task缺少 topicId，no法getorcreate task', [
                 'task_key' => $taskStatus->taskKey,
                 'project_id' => $taskStatus->projectId,
             ]);
             ExceptionBuilder::throw(
                 AsrErrorCode::SandboxTaskCreationFailed,
                 '',
-                ['message' => 'Topic ID fornull，无法create沙箱task']
+                ['message' => 'Topic ID fornull，no法create沙箱task']
             );
         }
 

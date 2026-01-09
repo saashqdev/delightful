@@ -61,7 +61,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             SmsSceneType::ACCOUNT_LOGIN_ACTIVE => SmsTypeEnum::VERIFICATION_WITH_EXPIRATION->value,
             default => ''
         };
-        // according to type 确定短信templateid
+        // according to type certain短信templateid
         $templateId = $this->template->getTemplateIdByTypeAndLanguage($smsType, LanguageEnum::ZH_CN->value);
         $sms = new SmsStruct($stateCode . $phone, $variables, $sign, $templateId);
         $sendResult = $this->sms->send($sms);
@@ -150,7 +150,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             }
             // generateorganizationdownuserinfo
             if (empty($userDTO->getUserId())) {
-                // 确定user_idgeneraterule
+                // certainuser_idgeneraterule
                 $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $userDTO->getOrganizationCode());
                 $userDTO->setUserId($userId);
                 // 1.47x(10**-29) 概ratedown,user_idwill重复,willbemysql唯one索引拦截,letuser重新loginonetimethenline.

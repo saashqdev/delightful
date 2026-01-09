@@ -445,7 +445,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     );
     //     $executionData->setTopicId($topicId);
     //     $executionData->setDebug($triggerConfig['debug']);
-    //     // 运lineprocessgraph，检测whethercan运line
+    //     // 运lineprocessgraph，detectwhethercan运line
     //     $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
     //     $executor->execute();
 

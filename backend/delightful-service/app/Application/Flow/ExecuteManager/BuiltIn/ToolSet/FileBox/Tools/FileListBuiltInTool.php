@@ -83,7 +83,7 @@ class FileListBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'columnoutusercurrentsession产生file';
+        return 'columnoutusercurrentsessionproducefile';
     }
 
     public function getInput(): ?NodeInput

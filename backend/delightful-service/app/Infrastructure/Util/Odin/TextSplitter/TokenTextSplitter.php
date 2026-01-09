@@ -202,7 +202,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 检测andconverttextencoding
+     * detectandconverttextencoding
      */
     private function ensureUtf8Encoding(string $text): string
     {
@@ -391,7 +391,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 检测filecontentencoding
+     * detectfilecontentencoding
      */
     private function detectEncoding(string $content): string
     {
@@ -406,10 +406,10 @@ class TokenTextSplitter extends TextSplitter
             return 'UTF-16BE';
         }
 
-        // 尝试检测encoding
+        // 尝试detectencoding
         $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], true);
         if ($encoding === false) {
-            // ifno法检测toencoding，尝试use iconv 检测
+            // ifno法detecttoencoding，尝试use iconv detect
             $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], false);
             if ($encoding === false) {
                 return 'UTF-8'; // defaultuse UTF-8

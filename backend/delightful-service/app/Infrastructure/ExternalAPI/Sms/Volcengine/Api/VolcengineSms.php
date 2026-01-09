@@ -80,7 +80,7 @@ class VolcengineSms extends VolcengineApi
             $msg = '短信sendfail';
             $this->logger->error('短信sendfail：' . $exception->getMessage() . ',trace:' . $exception->getTraceAsString());
         }
-        // willreturnresultand创蓝统one,避免bug
+        // willreturnresultand创蓝统one,avoidbug
         return $sendResult->setResult($errCode, $msg);
     }
 }

@@ -239,8 +239,8 @@ JSON, true)));
    - 主bodycontent识别：person物、物body、场景、textetc
    - 视觉特征：color、composition、光line、qualityetc
    - 语义info：activity、情绪、close系、background故事etc
-   - text识别：如havetext，accurateextractand理解含义
-   - 技术info：如havegraphtable/data，analyzeits含义
+   - text识别：如havetext，accurateextractand理解implication
+   - 技术info：如havegraphtable/data，analyzeitsimplication
    
 4. analyzeformatrequire：
    - toat重wantanalyzeresult，use结构化JSONformat呈现，如：{"category别":"xx", "主body":"xx", "特征":["xx","xx"]}
@@ -249,7 +249,7 @@ JSON, true)));
    - toat多graphanalyze，minute别markimage序numberconductparse，and总结itsassociateproperty
    
 5. 注意事item：
-   - 避免to敏感content做主观评判
+   - avoidto敏感content做主观评判
    - whenno法certainsome部minutecontento clock，坦诚table达notcertainproperty
    - 保持客观专业语气'),
         ]);

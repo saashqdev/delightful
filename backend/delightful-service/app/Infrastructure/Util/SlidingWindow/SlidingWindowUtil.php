@@ -66,7 +66,7 @@ LUA;
                 'debounce_key' => $debounceKey,
                 'exception' => $exception,
             ]);
-            // out现exceptiono clockdefaultallowexecute，避免closekey业务be阻塞
+            // out现exceptiono clockdefaultallowexecute，avoidclosekeybusinessbe阻塞
             return true;
         }
     }

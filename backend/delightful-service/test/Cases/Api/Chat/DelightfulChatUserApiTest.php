@@ -308,7 +308,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // according to业务逻辑，maybeacceptanystringasforavatar_url，orconductvalidate
+        // according tobusiness逻辑，maybeacceptanystringasforavatar_url，orconductvalidate
         $this->assertIsArray($response, 'invalidURLformat应be妥善handle');
 
         // ifisauthenticationerror，skiptest
@@ -482,7 +482,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->get(self::GET_USER_UPDATE_PERMISSION_API, $headers);
 
-        // maybereturnerrororsuccess，取决at业务逻辑
+        // maybereturnerrororsuccess，取决atbusiness逻辑
         $this->assertIsArray($response, 'responseshouldisarrayformat');
         $this->assertArrayHasKey('code', $response, 'response应containcodefield');
 

@@ -66,7 +66,7 @@ class DelightfulFlowExportImportAppService
             'tool_sets' => [],
         ];
 
-        // alreadyhandleprocessencoding，防止duplicatehandle
+        // alreadyhandleprocessencoding，preventduplicatehandle
         $processedFlowCodes = [$flowCode];
         $processedToolSetIds = [];
 
@@ -166,7 +166,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * validatewhether存inloopdependency
-     * use深degree优先search检测loopquote.
+     * use深degree优先searchdetectloopquote.
      */
     public function checkCircularDependency(FlowDataIsolation $dataIsolation, string $flowCode, array $visited = []): bool
     {
@@ -211,7 +211,7 @@ class DelightfulFlowExportImportAppService
             }
         }
 
-        return false; // nothave检测toloopdependency
+        return false; // nothavedetecttoloopdependency
     }
 
     /**
@@ -244,7 +244,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * importprocessandassistantinfo
-     * fromexportdatamiddlecreatenewprocessandassistant，and建立associate.
+     * fromexportdatamiddlecreatenewprocessandassistant，andestablishassociate.
      */
     public function importFlowWithAgent(FlowDataIsolation $dataIsolation, array $importData): array
     {
@@ -374,7 +374,7 @@ class DelightfulFlowExportImportAppService
         $toolSetData['created_uid'] = $dataIsolation->getCurrentUserId();
         $toolSetData['updated_uid'] = $dataIsolation->getCurrentUserId();
 
-        // 移exceptmaybe影响create逻辑field
+        // 移exceptmaybeimpactcreate逻辑field
         unset($toolSetData['created_at'], $toolSetData['updated_at'], $toolSetData['id']);
 
         // settingcreate实body必wantfield
@@ -397,7 +397,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * generate唯oneprocessname
-     * when检测to同名processo clock，add(n)back缀
+     * whendetectto同名processo clock，add(n)back缀
      */
     private function generateUniqueName(FlowDataIsolation $dataIsolation, string $name, Type $type): string
     {
@@ -419,7 +419,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * generate唯onetoolcollectionname
-     * when检测to同名toolcollectiono clock，add(n)back缀
+     * whendetectto同名toolcollectiono clock，add(n)back缀
      */
     private function generateUniqueToolSetName(FlowDataIsolation $dataIsolation, string $name): string
     {

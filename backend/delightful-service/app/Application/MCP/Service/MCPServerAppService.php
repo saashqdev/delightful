@@ -302,7 +302,7 @@ class MCPServerAppService extends AbstractMCPAppService
                 ];
             }, $toolsResult?->getTools() ?? []);
 
-            // eachtime检测success，all存downonetimetoolcolumn表
+            // eachtimedetectsuccess，all存downonetimetoolcolumn表
             $this->mcpUserSettingDomainService->updateAdditionalConfig(
                 $dataIsolation,
                 $code,

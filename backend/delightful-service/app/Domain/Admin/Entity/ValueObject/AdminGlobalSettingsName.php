@@ -12,7 +12,7 @@ enum AdminGlobalSettingsName: string
     // all局default好友
     case DEFAULT_FRIEND = 'default_friend';
 
-    // 助理create管理
+    // 助理createmanage
     case ASSISTANT_CREATE = 'create_management';
 
     // thethird-partypublish管控

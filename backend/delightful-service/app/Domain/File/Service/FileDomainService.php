@@ -159,7 +159,7 @@ readonly class FileDomainService
 
     /**
      * start sts 模type.
-     * gettemporary凭证givefront端use.
+     * gettemporaryvouchergivefront端use.
      * @todo securityissue，dir nothavevalidation，nothaveorganization隔离
      */
     public function getStsTemporaryCredential(
@@ -285,7 +285,7 @@ readonly class FileDomainService
                 key: $objectKey,
                 filename: $filename,
                 size: $object['size'] ?? null,
-                lastModified: null // ASR业务middlenotusethefield，直接传null
+                lastModified: null // ASRbusinessmiddlenotusethefield，直接传null
             );
         }
         return $files;

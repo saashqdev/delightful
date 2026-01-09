@@ -47,7 +47,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     private string $content = '';
 
     /**
-     * 业务ID.
+     * businessID.
      */
     private string $businessId = '';
 
@@ -68,7 +68,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
      *
      * @param string $id 唯oneidentifier
      * @param string $content content
-     * @param string $businessId 业务ID
+     * @param string $businessId businessID
      * @param array $metadata yuandata
      */
     public static function fromFragment(
@@ -94,7 +94,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
      *
      * @param string $id 唯oneidentifier
      * @param string $content content
-     * @param string $businessId 业务ID
+     * @param string $businessId businessID
      * @param array $metadata yuandata
      */
     public static function fromGraphData(
@@ -160,7 +160,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * get业务ID.
+     * getbusinessID.
      */
     public function getBusinessId(): string
     {
@@ -168,9 +168,9 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * set业务ID.
+     * setbusinessID.
      *
-     * @param string $businessId 业务ID
+     * @param string $businessId businessID
      */
     public function setBusinessId(string $businessId): self
     {

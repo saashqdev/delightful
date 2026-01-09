@@ -46,7 +46,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * set业务type.
+     * setbusinesstype.
      */
     public function setBusinessType(string $businessType): self
     {

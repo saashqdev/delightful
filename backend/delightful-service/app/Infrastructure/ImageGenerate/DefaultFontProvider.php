@@ -26,7 +26,7 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * 检测whethersupportTTF字body渲染.
+     * detectwhethersupportTTF字body渲染.
      * open源version仅supportinside置字body.
      */
     public function supportsTTF(): bool
@@ -35,7 +35,7 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * 检测textwhethercontainmiddle文character.
+     * detecttextwhethercontainmiddle文character.
      * open源version视所havetextfornonmiddle文，useinside置字body渲染.
      */
     public function containsChinese(string $text): bool
@@ -44,8 +44,8 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * 检测graphlikewhethercontain透明channel.
-     * 提供基础透明degree检测feature.
+     * detectgraphlikewhethercontain透明channel.
+     * 提供基础透明degreedetectfeature.
      * @param mixed $image
      */
     public function hasTransparency($image): bool
@@ -59,7 +59,7 @@ class DefaultFontProvider implements FontProviderInterface
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // 采样check，避免checkeachlike素提高performance
+        // 采样check，avoidcheckeachlike素提高performance
         $sampleSize = min(50, $width, $height);
         $stepX = max(1, (int) ($width / $sampleSize));
         $stepY = max(1, (int) ($height / $sampleSize));

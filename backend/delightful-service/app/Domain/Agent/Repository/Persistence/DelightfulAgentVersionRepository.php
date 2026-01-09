@@ -82,7 +82,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * optimizeversion：直接passJOINquerygetenable助理version，避免传入大quantityID.
+     * optimizeversion：直接passJOINquerygetenable助理version，avoid传入大quantityID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array

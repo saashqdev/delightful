@@ -39,7 +39,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
     protected array $metadata = [];
 
     /**
-     * 业务 ID，canuseat业务方recordfrom己 ID usecomeconductupdatedata.
+     * business ID，canuseatbusiness方recordfrom己 ID usecomeconductupdatedata.
      */
     protected string $businessId = '';
 

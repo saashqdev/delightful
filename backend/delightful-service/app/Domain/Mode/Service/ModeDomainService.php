@@ -130,14 +130,14 @@ class ModeDomainService
      */
     public function updateMode(ModeDataIsolation $dataIsolation, ModeEntity $modeEntity): ModeEntity
     {
-        // ifis跟随模type，validate跟随goal模type存in todo xhy use业务exception
+        // ifis跟随模type，validate跟随goal模type存in todo xhy usebusinessexception
         if ($modeEntity->isInheritedConfiguration() && $modeEntity->hasFollowMode()) {
             $followMode = $this->modeRepository->findById($dataIsolation, $modeEntity->getFollowModeId());
             if (! $followMode) {
                 ExceptionBuilder::throw(ModeErrorCode::FOLLOW_MODE_NOT_FOUND);
             }
 
-            // 防止loop跟随
+            // preventloop跟随
             if ($this->hasCircularFollow($dataIsolation, $modeEntity->getId(), $modeEntity->getFollowModeId())) {
                 ExceptionBuilder::throw(ModeErrorCode::CANNOT_FOLLOW_SELF);
             }
@@ -248,7 +248,7 @@ class ModeDomainService
     }
 
     /**
-     * batchquantitybuild模typeaggregateroot（optimizeversion，避免N+1query）.
+     * batchquantitybuild模typeaggregateroot（optimizeversion，avoidN+1query）.
      * @param ModeEntity[] $modes
      * @return ModeAggregate[]
      */
@@ -258,14 +258,14 @@ class ModeDomainService
             return [];
         }
 
-        // theone步：建立跟随close系mapping followMap[跟随者ID] = be跟随者ID
+        // theone步：establish跟随close系mapping followMap[跟随者ID] = be跟随者ID
         $followMap = [];
         $modeIds = [];
 
         foreach ($modes as $mode) {
             $modeIds[] = $mode->getId();
 
-            // ifis跟随模type，建立mappingclose系
+            // ifis跟随模type，establishmappingclose系
             if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
                 $followMap[$mode->getId()] = $mode->getFollowModeId();
                 $modeIds[] = $mode->getFollowModeId(); // alsowant收collectionbe跟随模typeID
@@ -377,12 +377,12 @@ class ModeDomainService
      * according to跟随close系mappingrecursionfindfinal源模typeID.
      * @param int $modeId current模typeID
      * @param array $followMap 跟随close系mapping [跟随者ID => be跟随者ID]
-     * @param array $visited 防止loop跟随
+     * @param array $visited preventloop跟随
      * @return int final源模typeID
      */
     private function findUltimateSourceId(int $modeId, array $followMap, array $visited = []): int
     {
-        // 防止loop跟随
+        // preventloop跟随
         if (in_array($modeId, $visited)) {
             return $modeId;
         }

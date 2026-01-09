@@ -42,7 +42,7 @@ class EasyInternetSearchV2BuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '麦吉互联网search简single版，batchquantitytouser多含义sameor者differentissueconduct互联网search。';
+        return '麦吉互联网search简single版，batchquantitytouser多implicationsameor者differentissueconduct互联网search。';
     }
 
     public function getCallback(): ?Closure

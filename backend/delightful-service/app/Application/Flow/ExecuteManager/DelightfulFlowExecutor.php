@@ -89,7 +89,7 @@ class DelightfulFlowExecutor
 
     public function execute(?TriggerType $appointTriggerType = null): array
     {
-        // trulystartexecuteo clock，才will产生execute id
+        // trulystartexecuteo clock，才willproduceexecute id
         $this->createExecuteLog();
         $this->executorId = (string) $this->delightfulFlowExecuteLogEntity->getId();
 
@@ -283,7 +283,7 @@ class DelightfulFlowExecutor
             $this->updateStatus(ExecuteLogStatus::Failed, $result);
         }
 
-        // willcurrentprocess产生 api executeresult传递giveuponelayerdata
+        // willcurrentprocessproduce api executeresult传递giveuponelayerdata
         if ($parentExecutionData = ExecutionDataCollector::get($this->executionData->getUniqueParentId())) {
             foreach ($this->executionData->getReplyMessages() as $replyMessage) {
                 $parentExecutionData->addReplyMessage($replyMessage);
@@ -426,7 +426,7 @@ class DelightfulFlowExecutor
             if ($node->getParentId()) {
                 continue;
             }
-            // 运linefrontthen先尝试conduct所havesectionpointparameter检测，useat提frontgenerate好 NodeParamsConfig
+            // 运linefrontthen先尝试conduct所havesectionpointparameterdetect，useat提frontgenerate好 NodeParamsConfig
             try {
                 $node->validate();
             } catch (Throwable $throwable) {
@@ -520,7 +520,7 @@ class DelightfulFlowExecutor
             Coroutine::create(function () use ($fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
 
-                // 利usefrom旋lockcome控制onlyoneinsave
+                // 利usefrom旋lockcomecontrolonlyoneinsave
                 if (! $this->locker->spinLock($this->getLockerKey() . ':archive', $this->delightfulFlowExecuteLogEntity->getExecuteDataId(), 20)) {
                     ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'archive file failed');
                 }

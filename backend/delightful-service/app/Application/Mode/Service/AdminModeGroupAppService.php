@@ -19,7 +19,7 @@ use InvalidArgumentException;
 class AdminModeGroupAppService extends AbstractModeAppService
 {
     /**
-     * according tomodeIDgetminutegroupcolumn表 (管理back台use，containcompletei18nfield).
+     * according tomodeIDgetminutegroupcolumn表 (manageback台use，containcompletei18nfield).
      */
     public function getGroupsByModeId(DelightfulUserAuthorization $authorization, string $modeId): array
     {
@@ -35,7 +35,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * getminutegroupdetail (管理back台use).
+     * getminutegroupdetail (manageback台use).
      */
     public function getGroupById(DelightfulUserAuthorization $authorization, string $groupId): ?array
     {
@@ -57,7 +57,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * createminutegroup (管理back台use).
+     * createminutegroup (manageback台use).
      */
     public function createGroup(DelightfulUserAuthorization $authorization, CreateModeGroupRequest $request): AdminModeGroupDTO
     {
@@ -88,7 +88,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * updateminutegroup (管理back台use).
+     * updateminutegroup (manageback台use).
      */
     public function updateGroup(DelightfulUserAuthorization $authorization, string $groupId, UpdateModeGroupRequest $request): AdminModeGroupDTO
     {

@@ -11,20 +11,20 @@ use App\Domain\Chat\Entity\AbstractEntity;
 
 class LLMStreamCachedDTO extends AbstractEntity
 {
-    // 避免频繁操asdatalibrary，ininside存middlecachesendmessage sender_message_id
+    // avoid频繁操asdatalibrary，ininside存middlecachesendmessage sender_message_id
     protected string $senderMessageId;
 
-    // 避免频繁操asdatalibrary，ininside存middlecachereceivemessage receive_message_id
+    // avoid频繁操asdatalibrary，ininside存middlecachereceivemessage receive_message_id
     protected string $receiveMessageId;
 
-    // 避免频繁操asdatalibrary，ininside存middlecachecompletestreammessagecontent
+    // avoid频繁操asdatalibrary，ininside存middlecachecompletestreammessagecontent
     protected ?string $reasoningContent;
 
     protected string $content;
 
     protected StreamMessageStatus $status;
 
-    // 避免频繁操asdatalibrary，recordmostbackonetimeupdatedatalibrarytime
+    // avoid频繁操asdatalibrary，recordmostbackonetimeupdatedatalibrarytime
     protected ?int $lastUpdateDatabaseTime;
 
     public function getLastUpdateDatabaseTime(): ?int

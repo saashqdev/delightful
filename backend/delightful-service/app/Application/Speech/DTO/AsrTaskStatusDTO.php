@@ -11,8 +11,8 @@ use App\Application\Speech\Enum\AsrRecordingStatusEnum;
 use App\Application\Speech\Enum\AsrTaskStatusEnum;
 
 /**
- * ASRtaskstatusDTO - 管理Redis Hashfieldmapping.
- * thisnotisfrom JSON response结构come，whileisuseat管理taskstatus
+ * ASRtaskstatusDTO - manageRedis Hashfieldmapping.
+ * thisnotisfrom JSON response结构come，whileisuseatmanagetaskstatus
  */
 class AsrTaskStatusDTO
 {
@@ -58,7 +58,7 @@ class AsrTaskStatusDTO
 
     public AsrTaskStatusEnum $status = AsrTaskStatusEnum::FAILED;
 
-    // 录音status管理field
+    // 录音statusmanagefield
     public ?string $modelId = null; // AI modelID，useatfrom动总结
 
     public ?string $recordingStatus = null; // 录音status：start|recording|paused|stopped
@@ -112,7 +112,7 @@ class AsrTaskStatusDTO
         $this->tempHiddenDirectoryId = self::getIntValue($data, ['temp_hidden_directory_id', 'tempHiddenDirectoryId']);
         $this->displayDirectoryId = self::getIntValue($data, ['display_directory_id', 'displayDirectoryId']);
 
-        // 录音status管理field
+        // 录音statusmanagefield
         $this->modelId = self::getStringValue($data, ['model_id', 'modelId']);
         $this->recordingStatus = self::getStringValue($data, ['recording_status', 'recordingStatus']);
         $this->sandboxTaskCreated = self::getBoolValue($data, ['sandbox_task_created', 'sandboxTaskCreated']);

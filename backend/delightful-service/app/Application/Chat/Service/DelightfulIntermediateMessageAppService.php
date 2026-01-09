@@ -30,7 +30,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Throwable;
 
 /**
- * 控制message相close.
+ * controlmessage相close.
  */
 class DelightfulIntermediateMessageAppService extends AbstractAppService
 {
@@ -41,7 +41,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
     }
 
     /**
-     * according tocustomer端haircome控制messagetype,minutehairtoto应process模piece.
+     * according tocustomer端haircomecontrolmessagetype,minutehairtoto应process模piece.
      * @throws Throwable
      */
     public function dispatchClientIntermediateMessage(ChatRequest $chatRequest, DelightfulUserAuthorization $userAuthorization): ?array

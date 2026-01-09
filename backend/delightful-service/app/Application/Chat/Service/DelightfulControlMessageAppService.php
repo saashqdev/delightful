@@ -23,7 +23,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Throwable;
 
 /**
- * 控制message相close.
+ * controlmessage相close.
  */
 class DelightfulControlMessageAppService extends DelightfulSeqAppService
 {
@@ -38,7 +38,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * according tocustomer端haircome控制messagetype,minutehairtoto应process模piece.
+     * according tocustomer端haircomecontrolmessagetype,minutehairtoto应process模piece.
      * @throws Throwable
      */
     public function dispatchClientControlMessage(DelightfulMessageEntity $messageDTO, DelightfulUserAuthorization $userAuthorization): ?array
@@ -84,7 +84,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         switch ($controlMessageType) {
             case ControlMessageType::SeenMessages:
             case ControlMessageType::ReadMessage:
-                // already读return执etc场景,according tooneitem控制message,generateotherpersonseq.
+                // already读return执etc场景,according tooneitemcontrolmessage,generateotherpersonseq.
                 $this->controlDomainService->handlerMQReceiptSeq($delightfulSeqEntity);
                 break;
             case ControlMessageType::RevokeMessage:
@@ -127,7 +127,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageDTO, $conversationId);
         // asyncwillgeneratemessagestreamnotifyuserother设备.
         $seqCreatedEvent = $this->controlDomainService->pushControlSequence($seqEntity);
-        // asyncminutehair控制message,to方操assession话题
+        // asyncminutehaircontrolmessage,to方操assession话题
         $this->controlDomainService->dispatchSeq($seqCreatedEvent);
         // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();

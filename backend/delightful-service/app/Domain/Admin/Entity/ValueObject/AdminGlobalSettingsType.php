@@ -12,7 +12,7 @@ enum AdminGlobalSettingsType: int
     // all局default好友
     case DEFAULT_FRIEND = 1;
 
-    // 助理create管理
+    // 助理createmanage
     case ASSISTANT_CREATE = 2;
 
     // thethird-partypublish管控

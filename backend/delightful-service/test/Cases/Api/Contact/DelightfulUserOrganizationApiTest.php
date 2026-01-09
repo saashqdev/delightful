@@ -11,7 +11,7 @@ use HyperfTest\Cases\Api\AbstractHttpTest;
 
 /**
  * @internal
- * usercurrentorganization管理APItest
+ * usercurrentorganizationmanageAPItest
  */
 class DelightfulUserOrganizationApiTest extends AbstractHttpTest
 {

@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('service_provider_model_id')->comment('modelID，associateservice_provider_models.id');
 
-            $table->decimal('creativity', 3, 2)->default(0.5)->comment('创造力parameter');
+            $table->decimal('creativity', 3, 2)->default(0.5)->comment('create力parameter');
             $table->integer('max_tokens')->nullable()->comment('most大token数');
             $table->decimal('temperature', 3, 2)->nullable()->comment('温degreeparameter');
             $table->integer('vector_size')->default(2048)->comment('toquantity维degree');

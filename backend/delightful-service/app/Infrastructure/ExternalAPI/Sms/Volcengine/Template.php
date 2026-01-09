@@ -71,7 +71,7 @@ class Template extends AbstractTemplate
 
     /**
      * according to传come短信text,parsevariable. onlyvariablevalue,notmatchvariablekey!
-     * needvariableparsereason:火山短信只supportvariable短信send,while业务方willoutat创蓝短信reason,will传come整短信textcontent,nothavevariable.
+     * needvariableparsereason:火山短信只supportvariable短信send,whilebusiness方willoutat创蓝短信reason,will传come整短信textcontent,nothavevariable.
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
     {

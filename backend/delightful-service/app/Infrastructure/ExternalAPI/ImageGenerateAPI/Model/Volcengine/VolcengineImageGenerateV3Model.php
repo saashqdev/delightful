@@ -506,7 +506,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                     unset($imageUrl);
                 }
             } catch (Exception $e) {
-                // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
+                // watermarkhandlefailo clock，recorderrorbutnotimpactimagereturn
                 $this->logger->error('火山engineV3imagewatermarkhandlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),

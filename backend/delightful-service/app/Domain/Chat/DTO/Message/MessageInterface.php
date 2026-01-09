@@ -12,7 +12,7 @@ use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 use App\Domain\Chat\Entity\ValueObject\MessageType\IntermediateMessageType;
 
 /**
- * chatmessage/控制messageallneedimplementinterface.
+ * chatmessage/controlmessageallneedimplementinterface.
  *
  * @method mixed getContent() getmessagecontent
  * @method ?array getAttachments() getmessageattachment

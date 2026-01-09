@@ -19,7 +19,7 @@ use Hyperf\DbConnection\Db;
 use Throwable;
 
 /**
- * handle控制message相close.
+ * handlecontrolmessage相close.
  */
 class DelightfulControlDomainService extends AbstractDomainService
 {
@@ -78,7 +78,7 @@ class DelightfulControlDomainService extends AbstractDomainService
 
         $senderUserId = $senderConversationEntity->getUserId();
         $senderMessageId = $receiveDelightfulSeqEntity->getSenderMessageId();
-        # thiswithinaddonedownminute布typelinelock,防止andhairmodifymessagereceivepersoncolumn表,造becomedataoverride.
+        # thiswithinaddonedownminute布typelinelock,preventandhairmodifymessagereceivepersoncolumn表,造becomedataoverride.
         $spinLockKey = 'chat:seq:lock:' . $senderMessageId;
         $spinLockKeyOwner = random_bytes(8);
         try {
@@ -162,7 +162,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {
                         // 写database,updatemessagesend方already读column表。thisisfor复usemessage收hairchannel，notifycustomer端havenewalready读return执。
                         $this->delightfulSeqRepository->createSequence($seqData);
-                        // updateoriginal chat_seq messagereceivepersoncolumn表。 避免pullhistorymessageo clock，to方already读messagealsoisdisplaynot读。
+                        // updateoriginal chat_seq messagereceivepersoncolumn表。 avoidpullhistorymessageo clock，to方already读messagealsoisdisplaynot读。
                         $originalSeq = $this->delightfulSeqRepository->getSeqByMessageId($senderMessageId);
                         if ($originalSeq !== null) {
                             $originalSeq->setReceiveList($senderReceiveList);
@@ -204,7 +204,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             ));
             return;
         }
-        # thiswithinaddonedownminute布typelinelock,防止andhair.
+        # thiswithinaddonedownminute布typelinelock,preventandhair.
         $revokeMessageId = $needChangeSeqEntity->getSeqId();
         $spinLockKey = 'chat:seq:lock:' . $revokeMessageId;
         try {

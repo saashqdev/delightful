@@ -31,8 +31,8 @@ return new class extends Migration {
             $table->integer('response_time')->nullable()->default(null)->comment('responseconsumetime，unit：毫second');
             // response http status码
             $table->integer('http_status_code')->nullable()->default(null)->comment('response http status码');
-            // response业务status码
-            $table->integer('business_status_code')->nullable()->default(null)->comment('response业务status码');
+            // responsebusinessstatus码
+            $table->integer('business_status_code')->nullable()->default(null)->comment('responsebusinessstatus码');
             // whetherrequestsuccess
             $table->boolean('is_success')->nullable()->default(null)->comment('whetherrequestsuccess');
             // exceptiontype

@@ -28,7 +28,7 @@ use Hyperf\Contract\TranslatorInterface;
 class AdminModeAssembler
 {
     /**
-     * 实bodyconvertfor管理back台DTO (containcompletei18nfield).
+     * 实bodyconvertformanageback台DTO (containcompletei18nfield).
      */
     public static function modeToAdminDTO(ModeEntity $entity): AdminModeDTO
     {
@@ -108,7 +108,7 @@ class AdminModeAssembler
                 // 保持tobackcompatible，set providerModelId forfindtomodelID
                 $modelDTO->setProviderModelId((string) $providerModel->getId());
             } else {
-                // back台管理needdisplay所havestatus，includenocanusemodel情况
+                // back台manageneeddisplay所havestatus，includenocanusemodel情况
                 $status = $modelInfo['status'] ?? ModelStatus::Deleted;
                 $modelDTO->setModelStatus($status);
                 $modelDTO->setModelStatus($status);
@@ -123,7 +123,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 实bodyarrayconvertfor管理back台DTOarray.
+     * 实bodyarrayconvertformanageback台DTOarray.
      */
     public static function entitiesToAdminDTOs(array $entities): array
     {
@@ -131,7 +131,7 @@ class AdminModeAssembler
     }
 
     /**
-     * minutegroup实bodyarrayconvertfor管理back台DTOarray.
+     * minutegroup实bodyarrayconvertformanageback台DTOarray.
      */
     public static function groupEntitiesToAdminDTOs(array $entities): array
     {

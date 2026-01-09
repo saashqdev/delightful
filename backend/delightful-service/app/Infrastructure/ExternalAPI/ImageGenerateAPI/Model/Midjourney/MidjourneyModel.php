@@ -368,7 +368,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 $rawData['data']['cdnImage'] = $this->watermarkProcessor->addWatermarkToUrl($rawData['data']['cdnImage'], $imageGenerateRequest);
             }
         } catch (Exception $e) {
-            // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
+            // watermarkhandlefailo clock，recorderrorbutnotimpactimagereturn
             $this->logger->error('Midjourneyimagewatermarkhandlefail', [
                 'error' => $e->getMessage(),
             ]);

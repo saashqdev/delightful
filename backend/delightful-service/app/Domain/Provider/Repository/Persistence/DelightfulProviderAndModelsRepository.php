@@ -230,7 +230,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         );
         $lockOwner = uniqid('copy_model_', true);
 
-        // get互斥lock，防止andhaircreatesamemodel
+        // get互斥lock，preventandhaircreatesamemodel
         if (! $this->locker->mutexLock($lockName, $lockOwner, 30)) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelOperationLocked);
         }
@@ -362,14 +362,14 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         ProviderDataIsolation $dataIsolation,
         ProviderModelEntity $officialModel
     ): ProviderModelEntity {
-        // create新modelrecord(避免newfield导致copy报错，直接allquantity copy 然back set 新value)
+        // create新modelrecord(avoidnewfield导致copy报错，直接allquantity copy 然back set 新value)
         $organizationModel = new ProviderModelEntity($officialModel->toArray());
         $organizationModel->setServiceProviderConfigId(0);
         $organizationModel->setModelParentId($officialModel->getId());
         $organizationModel->setIsOffice(true); // Delightfulservicequotientdownmodel
         $organizationModel->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $organizationModel->setId(IdGenerator::getSnowId());
-        // 避免errorcopy config
+        // avoiderrorcopy config
         $organizationModel->setConfig(new ModelConfigItem());
         return $this->create($dataIsolation, $organizationModel);
     }

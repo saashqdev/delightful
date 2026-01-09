@@ -33,7 +33,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         parent::setUp();
         $this->organizationAdminDomainService = $this->getContainer()->get(OrganizationAdminDomainService::class);
 
-        // foreachtestgenerate唯oneuserID，避免testbetweendataconflict
+        // foreachtestgenerate唯oneuserID，avoidtestbetweendataconflict
         $this->testUserIds = [
             'test_domain_user_' . uniqid(),
             'test_domain_user_' . uniqid(),

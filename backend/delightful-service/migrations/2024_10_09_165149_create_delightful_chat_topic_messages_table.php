@@ -18,10 +18,10 @@ return new class extends Migration {
             return;
         }
         // 话题相closemessagetable
-        // 话题contain message_id list. notinseqtableadd话题idfield,避免seq承载featuretoo多,needaddtoo多index
+        // 话题contain message_id list. notinseqtableadd话题idfield,avoidseq承载featuretoo多,needaddtoo多index
         Schema::create('delightful_chat_topic_messages', static function (Blueprint $table) {
             // messageid
-            $table->bigIncrements('seq_id')->comment('message序columnid.notinseqtableadd话题idfield,避免seq承载featuretoo多,needaddtoo多index');
+            $table->bigIncrements('seq_id')->comment('message序columnid.notinseqtableadd话题idfield,avoidseq承载featuretoo多,needaddtoo多index');
             // sessionid. 冗remainderfield
             $table->string('conversation_id', 64)->comment('message所属sessionid');
             // organizationencoding. 冗remainderfield

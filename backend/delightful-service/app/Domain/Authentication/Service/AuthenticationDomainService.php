@@ -28,7 +28,7 @@ readonly class AuthenticationDomainService
     }
 
     /**
-     * verify账number凭证
+     * verify账numbervoucher
      */
     public function verifyAccountCredentials(string $email, string $password): ?AccountEntity
     {

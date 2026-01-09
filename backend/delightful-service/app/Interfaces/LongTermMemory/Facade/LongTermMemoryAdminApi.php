@@ -33,7 +33,7 @@ use Psr\Log\LoggerInterface;
 use function Hyperf\Translation\trans;
 
 /**
- * long-term记忆back台管理 API.
+ * long-term记忆back台manage API.
  */
 #[ApiResponse('low_code')]
 class LongTermMemoryAdminApi extends AbstractApi
@@ -399,7 +399,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         $action = $validatedParams['action'];
         $memoryIds = $validatedParams['memory_ids'];
-        $scenarioString = $validatedParams['scenario'] ?? 'admin_panel'; // defaultfor管理back台
+        $scenarioString = $validatedParams['scenario'] ?? 'admin_panel'; // defaultformanageback台
         $scenario = MemoryOperationScenario::from($scenarioString);
 
         // verifywhen scenario is memory_card_quick o clock，delightful_message_id must提供
@@ -525,7 +525,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 评估conversationcontentbycreate记忆.
+     * evaluateconversationcontentbycreate记忆.
      */
     public function evaluateConversation(RequestInterface $request): array
     {

@@ -180,7 +180,7 @@ class DelightfulFlowEntity extends AbstractEntity
     {
         $this->enabled = ! $this->enabled;
         if ($this->enabled) {
-            // ifiswantstart，need检测whetherhave nodes configuration
+            // ifiswantstart，needdetectwhetherhave nodes configuration
             if (empty($this->nodes)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
             }
@@ -252,7 +252,7 @@ class DelightfulFlowEntity extends AbstractEntity
             }
         }
 
-        // already经ispublishstatus才need检测
+        // already经ispublishstatus才needdetect
         if ($this->enabled) {
             //            if (! $this->startNode) {
             //                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.must_exist');

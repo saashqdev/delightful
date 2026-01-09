@@ -71,9 +71,9 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
     }
 
     /**
-     * 检测CSVlineminute隔符.
+     * detectCSVlineminute隔符.
      * @param string $line CSVlinecontent
-     * @return string 检测tominute隔符
+     * @return string detecttominute隔符
      */
     private function detectSeparator(string $line): string
     {

@@ -43,7 +43,7 @@ readonly class RoleDomainService
         // queryrolecolumn表
         $result = $this->roleRepository->queries($organizationCode, $page, $filters);
 
-        // batchquantityqueryuserID，避免 N+1 query
+        // batchquantityqueryuserID，avoid N+1 query
         $roleIds = array_map(static fn (RoleEntity $r) => $r->getId(), $result['list']);
         $roleUsersMap = $this->roleRepository->getRoleUsersMap($organizationCode, $roleIds);
 
@@ -99,7 +99,7 @@ readonly class RoleDomainService
                 $moduleLabel = $this->permission->getResourceModule($resource);
                 $permissionTags[$moduleLabel] = $moduleLabel; // usekeyvaluego重
             } catch (Throwable $e) {
-                // parsefailo clockignorethepermissiontagextract，validationalreadypass，not影响save
+                // parsefailo clockignorethepermissiontagextract，validationalreadypass，notimpactsave
             }
         }
 
@@ -175,7 +175,7 @@ readonly class RoleDomainService
     {
         $roleEntity = $this->roleRepository->getByName($dataIsolation->getCurrentOrganizationCode(), $name);
 
-        // 补充roleassociateuserIDinfo，避免call方getnotto userIds
+        // 补充roleassociateuserIDinfo，avoidcall方getnotto userIds
         if ($roleEntity !== null) {
             $userIds = $this->roleRepository->getRoleUsers($dataIsolation->getCurrentOrganizationCode(), $roleEntity->getId());
             $roleEntity->setUserIds($userIds);
@@ -252,7 +252,7 @@ readonly class RoleDomainService
      * 4. willuser ID column表add入roleassociateusercolumn表；
      * 5. saverole。
      *
-     * exceptionbycall方fromlinehandle，避免影响主process。
+     * exceptionbycall方fromlinehandle，avoidimpact主process。
      */
     public function addOrganizationAdmin(PermissionDataIsolation $dataIsolation, array $userIds): RoleEntity
     {

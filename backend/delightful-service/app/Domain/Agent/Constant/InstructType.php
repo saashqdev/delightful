@@ -121,7 +121,7 @@ enum InstructType: int
             }
         }
 
-        // processfinger令notcanconfiguration sendfinger令检测
+        // processfinger令notcanconfiguration sendfinger令detect
         if ($instructionType == InstructCategory::FLOW && isset($item['send_directly']) && $item['send_directly']) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.send_directly_only_allow_flow_instruction');
         }

@@ -204,8 +204,8 @@ abstract class AbstractDomainService
     }
 
     /**
-     * generatehairitem方控制message序column.(控制isnonchatmessage).
-     * byat存in序columnnumbermerge/delete场景,所bynotneed保证序columnnumber连续property.
+     * generatehairitem方controlmessage序column.(controlisnonchatmessage).
+     * byat存in序columnnumbermerge/delete场景,所bynotneedguarantee序columnnumber连续property.
      */
     public function generateSenderSequenceByControlMessage(DelightfulMessageEntity $messageDTO, string $conversationId = ''): DelightfulSeqEntity
     {
@@ -223,7 +223,7 @@ abstract class AbstractDomainService
             'seq_type' => $messageDTO->getMessageType()->getName(),
             'content' => $content,
             'receive_list' => '',
-            'delightful_message_id' => '', // 控制messagenotcanhave delightful_message_id
+            'delightful_message_id' => '', // controlmessagenotcanhave delightful_message_id
             'message_id' => $seqId,
             'refer_message_id' => '',
             'sender_message_id' => '',
@@ -237,8 +237,8 @@ abstract class AbstractDomainService
     }
 
     /**
-     * generatehairitem方控制message序column.(notis控制chatmessage).
-     * byat存in序columnnumbermerge/delete场景,所bynotneed保证序columnnumber连续property.
+     * generatehairitem方controlmessage序column.(notiscontrolchatmessage).
+     * byat存in序columnnumbermerge/delete场景,所bynotneedguarantee序columnnumber连续property.
      */
     public function generateReceiveSequenceByControlMessage(DelightfulMessageEntity $messageDTO, DelightfulConversationEntity $receiveConversationEntity): DelightfulSeqEntity
     {
@@ -266,7 +266,7 @@ abstract class AbstractDomainService
             'refer_message_id' => '',
             'sender_message_id' => '',
             'conversation_id' => $receiveConversationEntity->getId(),
-            'status' => DelightfulMessageStatus::Read->value, // 控制messagenotneedalready读return执
+            'status' => DelightfulMessageStatus::Read->value, // controlmessagenotneedalready读return执
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => $messageDTO->getAppMessageId(),
@@ -280,13 +280,13 @@ abstract class AbstractDomainService
      * 1.private chat/100personbyinsidegroup chat,优先levelmost高
      * 2.systemapplicationmessage,高优先level
      * 3.apimessage(thethree方callgenerate)/100~1000persongroup chat,middle优先level
-     * 4.控制message/1000personbyupgroup chat,most低优先level.
-     * 5.部minute控制messageandchat强相close,can优先level提to高. such asconversationwindowcreate.
+     * 4.controlmessage/1000personbyupgroup chat,most低优先level.
+     * 5.部minutecontrolmessageandchat强相close,can优先level提to高. such asconversationwindowcreate.
      */
     public function getControlMessagePriority(DelightfulSeqEntity $seqEntity, ?int $receiveUserCount = 1): MessagePriority
     {
         $messagePriority = MessagePriority::Low;
-        // 部minute控制messageandchat强相close,can优先level提to高. such asprivate chatandperson数less than100already读return执
+        // 部minutecontrolmessageandchat强相close,can优先level提to高. such asprivate chatandperson数less than100already读return执
         $seqType = $seqEntity->getSeqType();
         if (! in_array($seqType, ControlMessageType::getMessageStatusChangeType(), true)) {
             return $messagePriority;
@@ -338,7 +338,7 @@ abstract class AbstractDomainService
                     try {
                         // batchquantitygivefrom己generatestatus变moremessagestream序column
                         $this->delightfulSeqRepository->batchCreateSeq($userMessageStatusChangeSeqEntities);
-                        // more改databasemiddlemessagestatus，避免新设备logino clockdisplaynot读
+                        // more改databasemiddlemessagestatus，avoid新设备logino clockdisplaynot读
                         if (! empty($needUpdateStatusSeqIds)) {
                             $this->delightfulSeqRepository->batchUpdateSeqStatus($needUpdateStatusSeqIds, DelightfulMessageStatus::Seen);
                         }
@@ -409,7 +409,7 @@ abstract class AbstractDomainService
                             // batchquantitygivefrom己generatestatus变moremessagestream序column
                             $this->delightfulSeqRepository->batchCreateSeq([$userRevokedSeqEntity]);
                             $messagePriority = $this->getControlMessagePriority($userRevokedSeqEntity);
-                            // more改databasemiddlemessagestatus，避免新设备logino clockdisplaynot读
+                            // more改databasemiddlemessagestatus，avoid新设备logino clockdisplaynot读
                             $this->delightfulSeqRepository->batchUpdateSeqStatus([$messageStruct->getReferMessageId()], DelightfulMessageStatus::Revoked);
                             // asyncwillgeneratemessagestreamnotifyuserother设备.
                             $seqIds = [$userRevokedSeqEntity->getId()];
@@ -462,7 +462,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 避免 seq 表承载too多feature,addtoo多index,thereforewill话题messagesingle独writeto topic_messages 表middle.
+     * avoid seq 表承载too多feature,addtoo多index,thereforewill话题messagesingle独writeto topic_messages 表middle.
      */
     public function createTopicMessage(DelightfulSeqEntity $seqEntity, ?string $topicId = null): ?DelightfulTopicMessageEntity
     {
@@ -585,7 +585,7 @@ abstract class AbstractDomainService
             // according to appMsgId,givethisitemmessagecreate delightfulMsgId
             $messageDTO->setReceiveId($conversationEntity->getReceiveId());
             $messageDTO->setReceiveType($conversationEntity->getReceiveType());
-            // willconversationidreturn写enter控制messagemiddle,便atcustomer端handle
+            // willconversationidreturn写entercontrolmessagemiddle,便atcustomer端handle
             $content = $messageDTO->getContent()->toArray();
             $content['id'] = $conversationEntity->getId();
             $contentChange = MessageAssembler::getMessageStructByArray(
@@ -615,7 +615,7 @@ abstract class AbstractDomainService
             }
             // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
             $data = SeqAssembler::getClientSeqStruct($seqEntity, $messageDTO)->toArray();
-            // notifyuserother设备,thiswithineven if投递failalsonot影响,所by放协程within,transactionoutside.
+            // notifyuserother设备,thiswithineven if投递failalsonotimpact,所by放协程within,transactionoutside.
             co(function () use ($seqEntity) {
                 // asyncpushmessagegivefrom己other设备
                 $this->pushControlSequence($seqEntity);

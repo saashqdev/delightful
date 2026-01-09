@@ -192,7 +192,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                 'name' => $topicEntity->getName(),
             ];
         }
-        // return写enter控制messagemiddle,便atcustomer端process
+        // return写entercontrolmessagemiddle,便atcustomer端process
         $contentChange = MessageAssembler::getControlMessageStruct($messageDTO->getMessageType(), $seqContent);
         $messageDTO->setContent($contentChange);
         $messageDTO->setMessageType($contentChange->getMessageTypeEnum());
@@ -245,7 +245,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
     public function agentSendMessageGetTopicId(DelightfulConversationEntity $senderConversationEntity, int $getType): string
     {
         $receiverConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($senderConversationEntity->getId());
-        // for收item方createsession，butisnotagain触hair ConversationCreatedEvent event，避免eventloop
+        // for收item方createsession，butisnotagain触hair ConversationCreatedEvent event，avoideventloop
         if (($receiverConversationEntity === null) && in_array($senderConversationEntity->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {
             $conversationDTO = new DelightfulConversationEntity();
             $conversationDTO->setUserId($senderConversationEntity->getReceiveId());

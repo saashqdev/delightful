@@ -362,7 +362,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
                 'transcription_length' => strlen($voiceMessage->getTranscriptionText() ?? ''),
             ]);
         } catch (Throwable $e) {
-            // 静默processupdatefail，not影响mainprocess
+            // 静默processupdatefail，notimpactmainprocess
             $this->logger->warning('Failed to update voice message content (V1)', [
                 'delightful_message_id' => $delightfulMessageId,
                 'error' => $e->getMessage(),

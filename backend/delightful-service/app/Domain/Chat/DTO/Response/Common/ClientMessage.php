@@ -27,7 +27,7 @@ class ClientMessage extends AbstractEntity
     // 话题id
     protected ?string $topicId;
 
-    // message小category。控制message小category：already读return执；withdraw；edit；入群/退群；organization架构变动; 。 showmessage：text,voice,img,file,videoetc
+    // message小category。controlmessage小category：already读return执；withdraw；edit；入群/退群；organization架构变动; 。 showmessage：text,voice,img,file,videoetc
 
     protected string $type;
 
@@ -48,7 +48,7 @@ class ClientMessage extends AbstractEntity
     public function __construct(array $data)
     {
         if (! $data['content'] instanceof MessageInterface) {
-            // 避免eachtype bug 导致user完allno法拉message，thiswithin做onedown兜bottom
+            // avoideachtype bug 导致user完allno法拉message，thiswithin做onedown兜bottom
             try {
                 $data['content'] = MessageAssembler::getMessageStructByArray($data['type'], $data['content']);
             } catch (Throwable) {

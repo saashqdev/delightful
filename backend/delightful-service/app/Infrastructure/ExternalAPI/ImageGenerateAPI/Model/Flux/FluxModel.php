@@ -372,7 +372,7 @@ class FluxModel extends AbstractImageGenerate
                 // handleimageURL
                 $result['data']['imageUrl'] = $this->watermarkProcessor->addWatermarkToUrl($result['data']['imageUrl'], $imageGenerateRequest);
             } catch (Exception $e) {
-                // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
+                // watermarkhandlefailo clock，recorderrorbutnotimpactimagereturn
                 $this->logger->error('Fluximagewatermarkhandlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),

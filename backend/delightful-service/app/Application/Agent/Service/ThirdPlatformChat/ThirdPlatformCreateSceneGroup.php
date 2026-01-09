@@ -36,7 +36,7 @@ class ThirdPlatformCreateSceneGroup
     // @all userange： 0（default）：所havepersonallcan@all
     private int $mentionAllAuthority = 0;
 
-    // 群管理type：0（default）：所havepersoncan管理，1：仅群主can管理
+    // 群managetype：0（default）：所havepersoncanmanage，1：仅群主canmanage
     private int $managementType = 0;
 
     // whetherstart群禁言：0（default）：not禁言，1：all员禁言

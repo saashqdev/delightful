@@ -26,11 +26,11 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
         Db::transaction(function () use ($dataIsolation, $entity) {
             $serviceProviderModelId = $entity->getServiceProviderModelId();
 
-            // 1. getmost新versionnumberandcalculate新versionnumber（use FOR UPDATE linelock防止andhairissue）
+            // 1. getmost新versionnumberandcalculate新versionnumber（use FOR UPDATE linelockpreventandhairissue）
             $builder = $this->createBuilder($dataIsolation, ProviderModelConfigVersionModel::query());
             $latestVersion = $builder
                 ->where('service_provider_model_id', $serviceProviderModelId)
-                ->lockForUpdate()  // 悲观lock，防止andhair
+                ->lockForUpdate()  // 悲观lock，preventandhair
                 ->max('version');
 
             $newVersion = $latestVersion ? (int) $latestVersion + 1 : 1;

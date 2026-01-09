@@ -28,7 +28,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     public const string NULL_PARENT_ID = '0';
 
     /**
-     * associate_questions keyfront缀，避免from动willstring 0 转 int 0.
+     * associate_questions keyfront缀，avoidfrom动willstring 0 转 int 0.
      */
     public const string QUESTION_DELIMITER = 'question_';
 
@@ -36,7 +36,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected SearchDeepLevel $searchDeepLevel;
 
     /**
-     * 子issueassociateissue。supportassociateissueagain产生子issue，butiswillbe拍平becometwo维array。
+     * 子issueassociateissue。supportassociateissueagainproduce子issue，butiswillbe拍平becometwo维array。
      * @var array<string,QuestionItem[]>
      * @example according touserinputissue，generateassociateissue。
      */

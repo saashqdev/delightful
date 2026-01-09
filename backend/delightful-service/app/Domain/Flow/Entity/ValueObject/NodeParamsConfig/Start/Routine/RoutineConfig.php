@@ -34,7 +34,7 @@ class RoutineConfig
         // 话题configuration
         private readonly ?TopicConfig $topicConfig = null
     ) {
-        // saveconfigurationo clocknotagain强line检测，放togeneraterule处检测
+        // saveconfigurationo clocknotagain强linedetect，放togeneraterule处detect
     }
 
     public function toConfigArray(): array

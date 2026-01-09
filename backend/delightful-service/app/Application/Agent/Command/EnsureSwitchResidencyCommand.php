@@ -83,7 +83,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         );
                     }
                     ++$updated;
-                    $this->output->writeln(sprintf('already%s助理 [%s] switchfinger令', $isDryRun ? '检测toneedupdate' : 'update', $agent['id']));
+                    $this->output->writeln(sprintf('already%s助理 [%s] switchfinger令', $isDryRun ? 'detecttoneedupdate' : 'update', $agent['id']));
                 }
             }
 
@@ -132,7 +132,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         );
                     }
                     ++$versionUpdated;
-                    $this->output->writeln(sprintf('already%s助理version [%s] switchfinger令', $isDryRun ? '检测toneedupdate' : 'update', $version['id']));
+                    $this->output->writeln(sprintf('already%s助理version [%s] switchfinger令', $isDryRun ? 'detecttoneedupdate' : 'update', $version['id']));
                 }
             }
 

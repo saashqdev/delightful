@@ -37,7 +37,7 @@ class InternetSearchBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '麦吉互联网search，batchquantitytouser多含义sameordifferentissueconduct互联网search。';
+        return '麦吉互联网search，batchquantitytouser多implicationsameordifferentissueconduct互联网search。';
     }
 
     public function getCallback(): ?Closure

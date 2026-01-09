@@ -23,7 +23,7 @@ use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**
- * 管理back台通讯录interface,andopen放平台interfacereturnformatdifferent.
+ * manageback台通讯录interface,andopen放平台interfacereturnformatdifferent.
  */
 #[ApiResponse('low_code')]
 class DelightfulChatAdminContactApi extends AbstractApi

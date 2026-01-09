@@ -466,7 +466,7 @@ sql;
      */
     private function getMessagesStatusChangeSeq(array $referMessageIds, DelightfulUserEntity $userEntity): array
     {
-        // will orWhereIn 拆minutefor 2 itemquery,避免index失效
+        // will orWhereIn 拆minutefor 2 itemquery,avoidindex失效
         $query = $this->delightfulSeq::query()
             ->where('object_type', $userEntity->getUserType()->value)
             ->where('object_id', $userEntity->getDelightfulId())
@@ -507,7 +507,7 @@ sql;
         if (! empty($delightfulMessageIds)) {
             $messages = $this->delightfulMessageRepository->getMessages($delightfulMessageIds);
         }
-        // will控制message/chatmessageoneup放入usermessagestreammiddle
+        // willcontrolmessage/chatmessageoneup放入usermessagestreammiddle
         return SeqAssembler::getClientSeqStructs($seqInfos, $messages);
     }
 
@@ -541,7 +541,7 @@ sql;
         return SeqAssembler::sortSeqList($clientSequenceResponses, $order);
     }
 
-    // 避免 redis cacheserializeobject,占usetoo多inside存
+    // avoid redis cacheserializeobject,占usetoo多inside存
     private function getAccountIdByUserId(string $uid): ?DelightfulUserEntity
     {
         // according touid找toaccount_id

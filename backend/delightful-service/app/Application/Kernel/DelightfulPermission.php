@@ -155,7 +155,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         if ($moduleLabel === $moduleEnum->translationKey()) {
             // if缺失翻译，hand动compatibleknown模piece
             return match ($moduleEnum) {
-                DelightfulResourceEnum::ADMIN_AI => 'AI管理',
+                DelightfulResourceEnum::ADMIN_AI => 'AImanage',
                 default => $moduleEnum->value,
             };
         }
@@ -199,7 +199,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
      * returnformat：
      * [
      *   [
-     *     'label' => '管理back台',
+     *     'label' => 'manageback台',
      *     'permission_key' => 'Admin',
      *     'children' => [ ... ]
      *   ],

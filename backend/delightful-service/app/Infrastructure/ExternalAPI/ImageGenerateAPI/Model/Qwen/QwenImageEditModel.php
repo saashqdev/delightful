@@ -258,7 +258,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                         // handleURLformatimage
                         $content['image'] = $this->watermarkProcessor->addWatermarkToUrl($content['image'], $imageGenerateRequest);
                     } catch (Exception $e) {
-                        // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
+                        // watermarkhandlefailo clock，recorderrorbutnotimpactimagereturn
                         $this->logger->error('通义thousand问graphlikeeditwatermarkhandlefail', [
                             'index' => $index,
                             'choiceIndex' => $choiceIndex,

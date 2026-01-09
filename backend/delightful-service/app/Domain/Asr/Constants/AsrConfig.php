@@ -9,7 +9,7 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR configurationconstant
- * 统one管理 ASR 相close所haveconfigurationconstant，includetimeouttime、round询between隔、retrycountetc.
+ * 统onemanage ASR 相close所haveconfigurationconstant，includetimeouttime、round询between隔、retrycountetc.
  */
 class AsrConfig
 {
@@ -21,7 +21,7 @@ class AsrConfig
     public const int SUMMARY_LOCK_TTL = 120;
 
     /**
-     * core跳检测timeout阈value（second）.
+     * core跳detecttimeout阈value（second）.
      */
     public const int HEARTBEAT_TIMEOUT = 600;
 

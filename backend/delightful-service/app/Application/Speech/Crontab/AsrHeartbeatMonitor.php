@@ -29,7 +29,7 @@ use Throwable;
 #[Crontab(
     rule: '* * * * *',                    // eachminute钟executeonetime
     name: 'AsrHeartbeatMonitor',
-    singleton: true,                      // single例模type防止duplicateexecute
+    singleton: true,                      // single例模typepreventduplicateexecute
     mutexExpires: 60,                     // 互斥lockexpiretime（second），to应 AsrConfig::HEARTBEAT_MONITOR_MUTEX_EXPIRES
     onOneServer: true,                    // 仅inone台service器upexecute
     callback: 'execute',
@@ -56,7 +56,7 @@ class AsrHeartbeatMonitor
         try {
             $this->logger->info('startexecute ASR 录音core跳monitortask');
 
-            // 扫描所havecore跳 key（use RedisUtil::scanKeys 防止阻塞）
+            // 扫描所havecore跳 key（use RedisUtil::scanKeys prevent阻塞）
             $keys = RedisUtil::scanKeys(
                 AsrRedisKeys::HEARTBEAT_SCAN_PATTERN,
                 AsrConfig::REDIS_SCAN_BATCH_SIZE,
@@ -113,7 +113,7 @@ class AsrHeartbeatMonitor
         try {
             // from key middleextract task_key and user_id
             // Key format：asr:heartbeat:{md5(user_id:task_key)}
-            $this->logger->info('检测tocore跳timeout', ['key' => $key]);
+            $this->logger->info('detecttocore跳timeout', ['key' => $key]);
 
             // byat key is MD5 hash，我们no法直接反toget task_key and user_id
             // needfrom Redis middle扫描所have asr:task:* comefindmatchtask

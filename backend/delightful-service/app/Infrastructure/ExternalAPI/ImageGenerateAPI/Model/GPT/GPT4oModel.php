@@ -400,7 +400,7 @@ class GPT4oModel extends AbstractImageGenerate
                 // handleimageURL
                 $result['imageUrl'] = $this->watermarkProcessor->addWatermarkToUrl($result['imageUrl'], $imageGenerateRequest);
             } catch (Exception $e) {
-                // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
+                // watermarkhandlefailo clock，recorderrorbutnotimpactimagereturn
                 $this->logger->error('GPT4oimagewatermarkhandlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),

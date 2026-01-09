@@ -198,7 +198,7 @@ return new class extends Migration {
                     }
                 }
 
-                $logger->info("清洗complete，总共影响line数: {$updateCount}");
+                $logger->info("清洗complete，总共impactline数: {$updateCount}");
                 $logger->info('Official servicequotientdata清洗complete');
             });
         } catch (Throwable $e) {
@@ -331,20 +331,20 @@ return new class extends Migration {
     private function cleanSingleOrganization(string $organizationCode, array $officialModelIds, array $officialEnabledModels): array
     {
         return Db::transaction(function () use ($organizationCode, $officialModelIds, $officialEnabledModels) {
-            // get官方organizationencodinguseatsecurity防护
+            // get官方organizationencodinguseatsecurityguard
             $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
-            // 防护check：ensurenothandle官方organization
+            // guardcheck：ensurenothandle官方organization
             if ($organizationCode === $officialOrganizationCode) {
                 return ['deleted_count' => 0];
             }
 
             $totalDeletedCount = 0;
 
-            // 1. delete所have is_office = 1 data（防护：non官方organization）
+            // 1. delete所have is_office = 1 data（guard：non官方organization）
             $isOfficeDeletedCount = Db::table('service_provider_models')
                 ->where('organization_code', $organizationCode)
-                ->where('organization_code', '!=', $officialOrganizationCode) // double重防护
+                ->where('organization_code', '!=', $officialOrganizationCode) // double重guard
                 ->where('is_office', 1)
                 ->whereNull('deleted_at')
                 ->delete();
@@ -362,7 +362,7 @@ return new class extends Migration {
             $modelsWithParent = Db::table('service_provider_models')
                 ->where('organization_code', $organizationCode)
                 ->where('model_parent_id', '!=', 0)
-                ->where('organization_code', '!=', $officialOrganizationCode) // 防护
+                ->where('organization_code', '!=', $officialOrganizationCode) // guard
                 ->whereNull('deleted_at')
                 ->select(['id', 'model_parent_id', 'status'])
                 ->get();
@@ -386,11 +386,11 @@ return new class extends Migration {
                 }
             }
 
-            // 5. batchquantitydelete冗remainderdata（带防护）
+            // 5. batchquantitydelete冗remainderdata（带guard）
             if (! empty($deleteIds)) {
                 $redundantDeletedCount = Db::table('service_provider_models')
                     ->whereIn('id', $deleteIds)
-                    ->where('organization_code', '!=', $officialOrganizationCode) // 额outside防护
+                    ->where('organization_code', '!=', $officialOrganizationCode) // 额outsideguard
                     ->delete();
                 $totalDeletedCount += $redundantDeletedCount;
             }
@@ -407,7 +407,7 @@ return new class extends Migration {
         // 1. batchquantityquerytheorganizationdown所havemodel service_provider_config_id
         $modelConfigs = Db::table('service_provider_models')
             ->where('organization_code', $organizationCode)
-            ->where('organization_code', '!=', $officialOrganizationCode) // 防护
+            ->where('organization_code', '!=', $officialOrganizationCode) // guard
             ->whereNull('deleted_at')
             ->whereNotNull('service_provider_config_id')
             ->select(['id', 'service_provider_config_id'])
@@ -441,7 +441,7 @@ return new class extends Migration {
         // 5. batchquantitydeletequotenot存inconfigurationmodel
         return Db::table('service_provider_models')
             ->where('organization_code', $organizationCode)
-            ->where('organization_code', '!=', $officialOrganizationCode) // double重防护
+            ->where('organization_code', '!=', $officialOrganizationCode) // double重guard
             ->whereIn('service_provider_config_id', $invalidConfigIds)
             ->delete();
     }
@@ -454,7 +454,7 @@ return new class extends Migration {
         // 1. querytheorganizationdown所haveconfiguration
         $configs = Db::table('service_provider_configs')
             ->where('organization_code', $organizationCode)
-            ->where('organization_code', '!=', $officialOrganizationCode) // 防护
+            ->where('organization_code', '!=', $officialOrganizationCode) // guard
             ->whereNull('deleted_at')
             ->select(['id', 'config'])
             ->get();
@@ -484,7 +484,7 @@ return new class extends Migration {
         // 3. batchquantitydeleteuseinvalidconfigurationmodel
         return Db::table('service_provider_models')
             ->where('organization_code', $organizationCode)
-            ->where('organization_code', '!=', $officialOrganizationCode) // double重防护
+            ->where('organization_code', '!=', $officialOrganizationCode) // double重guard
             ->whereIn('service_provider_config_id', $invalidConfigIds)
             ->delete();
     }

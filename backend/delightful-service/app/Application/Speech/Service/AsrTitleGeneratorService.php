@@ -190,7 +190,7 @@ readonly class AsrTitleGeneratorService
         $title = preg_replace('/[\\\\\/:*?"<>|]/u', '', $title) ?? '';
         // compressnull白
         $title = preg_replace('/\s+/u', ' ', $title) ?? '';
-        // limitlength，避免pass长path
+        // limitlength，avoidpass长path
         if (mb_strlen($title) > 50) {
             $title = mb_substr($title, 0, 50);
         }

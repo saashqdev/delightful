@@ -39,7 +39,7 @@ class DelightfulAccessToken
             $application = $applicationDomainService->save($llmDataIsolation, $application);
         }
 
-        // thiswithin常quantity AccessToken not落library，仅存inatinside存middle，保证inside部callo clockuseone致
+        // thiswithin常quantity AccessToken not落library，仅存inatinside存middle，guaranteeinside部callo clockuseone致
         $accessToken = new AccessTokenEntity();
         $accessToken->setId(1);
         $accessToken->setName($application->getCode());

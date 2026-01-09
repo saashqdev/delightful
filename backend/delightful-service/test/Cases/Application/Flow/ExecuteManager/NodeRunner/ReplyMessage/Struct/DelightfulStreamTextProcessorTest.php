@@ -142,7 +142,7 @@ class DelightfulStreamTextProcessorTest extends ExecuteManagerBaseTest
 
     public function testHtml()
     {
-        $text = ['<title>管理', 'bb</title>'];
+        $text = ['<title>manage', 'bb</title>'];
         $processor = new DelightfulStreamTextProcessor(function (string $data) use (&$result) {
             $result[] = $data;
         });

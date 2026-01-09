@@ -102,7 +102,7 @@ class ByteDanceSTSService
             'delightful_id' => $delightfulId,
         ];
 
-        // cacheJWT Token，提front30secondexpireby避免side界issue
+        // cacheJWT Token，提front30secondexpirebyavoidside界issue
         $cacheExpiry = max(1, $duration - 30);
         $this->cacheJwtToken($cacheKey, $tokenData, $cacheExpiry);
 

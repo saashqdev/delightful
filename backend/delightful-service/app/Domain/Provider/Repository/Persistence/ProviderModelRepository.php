@@ -325,7 +325,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $builder = $this->createBuilder($dataIsolation, ProviderModelModel::query())
             ->whereIn('model_id', $modelIds)
             ->orderBy('status', 'desc') // 优先sort：enablestatusinfront
-            ->orderBy('id'); // itstime按IDsort，保证resultone致property
+            ->orderBy('id'); // itstime按IDsort，guaranteeresultone致property
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
         $entities = ProviderModelAssembler::toEntities($result);
@@ -434,7 +434,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
                 $groupedResults[$modelType] = [];
             }
 
-            // 避免duplicatemodelID
+            // avoidduplicatemodelID
             if (! in_array($modelId, $groupedResults[$modelType], true)) {
                 $groupedResults[$modelType][] = $modelId;
             }

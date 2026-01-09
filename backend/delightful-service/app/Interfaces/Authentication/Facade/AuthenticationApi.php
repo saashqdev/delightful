@@ -45,7 +45,7 @@ class AuthenticationApi
     }
 
     /**
-     * front端from身业务use，get authorization to应private识别码
+     * front端from身businessuse，get authorization to应private识别码
      */
     public function authEnvironment(RequestInterface $request): array
     {

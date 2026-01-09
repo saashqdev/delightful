@@ -188,7 +188,7 @@ class AsrApi extends AbstractApi
             'has_file_name' => ! empty($fileName),
         ]);
 
-        // 2. getminute布typelock（防止andhaircreatedirectory）
+        // 2. getminute布typelock（preventandhaircreatedirectory）
         $lockName = sprintf('asr:upload_token:lock:%s:%s', $userId, $taskKey);
         $lockOwner = sprintf('%s:%s', $userId, microtime(true));
         $locked = $this->locker->spinLock($lockName, $lockOwner);
@@ -208,7 +208,7 @@ class AsrApi extends AbstractApi
                     'recordings_dir_path' => $recordingsDir->directoryPath,
                 ]);
             } catch (Throwable $e) {
-                // .asr_recordings directorycreatefailnot影响主process
+                // .asr_recordings directorycreatefailnotimpact主process
                 $this->logger->warning('create .asr_recordings 父directoryfail', [
                     'task_key' => $taskKey,
                     'recording_type' => $recordingType->value,
@@ -226,7 +226,7 @@ class AsrApi extends AbstractApi
                     'states_dir_path' => $statesDir->directoryPath,
                 ]);
             } catch (Throwable $e) {
-                // .asr_states directorycreatefailnot影响主process
+                // .asr_states directorycreatefailnotimpact主process
                 $this->logger->warning('create .asr_states directoryfail', [
                     'task_key' => $taskKey,
                     'recording_type' => $recordingType->value,
@@ -259,7 +259,7 @@ class AsrApi extends AbstractApi
                         ]);
                     }
                 } catch (Throwable $e) {
-                    // titlegeneratefailnot影响主process
+                    // titlegeneratefailnotimpact主process
                     $this->logger->warning('file直传titlegeneratefail', [
                         'task_key' => $taskKey,
                         'file_name' => $fileName,
@@ -314,7 +314,7 @@ class AsrApi extends AbstractApi
                         'transcript_file_path' => $taskStatus->presetTranscriptFilePath,
                     ]);
                 } catch (Throwable $e) {
-                    // presetfilecreatefailnot影响主process
+                    // presetfilecreatefailnotimpact主process
                     $this->logger->warning('createpresetfilefail', [
                         'task_key' => $taskKey,
                         'error' => $e->getMessage(),
@@ -628,7 +628,7 @@ class AsrApi extends AbstractApi
         }
 
         if ($taskStatus->hasServerSummaryLock()) {
-            $this->logger->info('getUploadToken service端总结conductmiddle，rejecthair放upload凭证', [
+            $this->logger->info('getUploadToken service端总结conductmiddle，rejecthair放uploadvoucher', [
                 'task_key' => $taskKey,
                 'user_id' => $userId,
                 'retry_count' => $taskStatus->serverSummaryRetryCount,

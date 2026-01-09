@@ -74,7 +74,7 @@ readonly class KnowledgeBaseFragmentDomainService
         $savingDelightfulFlowKnowledgeFragmentEntity->setDocumentCode($knowledgeBaseDocumentEntity->getCode());
         $savingDelightfulFlowKnowledgeFragmentEntity->setCreator($dataIsolation->getCurrentUserId());
 
-        // ifhave业务id，andand业务 ID 存in，alsocan相whenatupdate
+        // ifhavebusinessid，andandbusiness ID 存in，alsocan相whenatupdate
         $knowledgeBaseFragmentEntity = null;
         if (! empty($savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId()) && empty($savingDelightfulFlowKnowledgeFragmentEntity->getId())) {
             $knowledgeBaseFragmentEntity = $this->knowledgeBaseFragmentRepository->getByBusinessId($dataIsolation, $savingDelightfulFlowKnowledgeFragmentEntity->getKnowledgeCode(), $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId());

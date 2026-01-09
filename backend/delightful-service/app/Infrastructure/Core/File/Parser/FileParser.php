@@ -46,7 +46,7 @@ class FileParser
             return $this->cache->get($cacheKey, '');
         }
         try {
-            // / 检测filesecurityproperty
+            // / detectfilesecurityproperty
             $safeUrl = SSRFUtil::getSafeUrl($fileUrl, replaceIp: false);
             $tempFile = tempnam(sys_get_temp_dir(), 'downloaded_');
 
@@ -128,7 +128,7 @@ class FileParser
             ExceptionBuilder::throw(FlowErrorCode::Error, message: 'no法openfilestream');
         }
 
-        // iffilesizeunknown，needindownloadproceduremiddle控制size
+        // iffilesizeunknown，needindownloadproceduremiddlecontrolsize
         if (! $sizeKnown && $maxSize > 0) {
             self::downloadWithSizeControl($fileStream, $localFile, $maxSize);
         } else {
@@ -141,7 +141,7 @@ class FileParser
     }
 
     /**
-     * streamdownloadand控制filesize.
+     * streamdownloadandcontrolfilesize.
      *
      * @param resource $fileStream 远程filestreamresource
      * @param resource $localFile 本groundfilestreamresource
@@ -187,7 +187,7 @@ class FileParser
         if ($maxSize <= 0) {
             return true;
         }
-        // download之front，检测filesize
+        // download之front，detectfilesize
         $headers = get_headers($fileUrl, true);
         if (isset($headers['Content-Length'])) {
             $fileSize = (int) $headers['Content-Length'];

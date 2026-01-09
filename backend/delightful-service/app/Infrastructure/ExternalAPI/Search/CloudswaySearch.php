@@ -79,7 +79,7 @@ class CloudswaySearch
         // buildrequesthead
         $headers = [
             'Authorization' => 'Bearer ' . $apiKey,
-            'Pragma' => 'no-cache',  // notusecache，保证实o clockproperty
+            'Pragma' => 'no-cache',  // notusecache，guarantee实o clockproperty
         ];
 
         // create Guzzle customer端

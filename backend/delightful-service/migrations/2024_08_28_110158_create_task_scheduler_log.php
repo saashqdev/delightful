@@ -20,7 +20,7 @@ class CreateTaskSchedulerLog extends Migration
         Schema::create(config('task_scheduler.table_names.task_scheduler_log', 'task_scheduler_log'), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('task_id')->unsigned()->comment('taskID')->index();
-            $table->string('external_id', 64)->comment('业务identifier')->index();
+            $table->string('external_id', 64)->comment('businessidentifier')->index();
             $table->string('name', 64)->comment('name');
             $table->dateTime('expect_time')->comment('expectedexecutetime');
             $table->dateTime('actual_time')->nullable()->comment('actualexecutetime');

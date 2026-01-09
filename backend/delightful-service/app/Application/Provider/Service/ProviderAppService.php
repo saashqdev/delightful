@@ -47,7 +47,7 @@ class ProviderAppService
         // 收collection所have唯oneservicequotientconfigurationID
         $configIds = array_unique(array_map(fn ($model) => $model->getServiceProviderConfigId(), $models));
 
-        // batchquantitygetservicequotient实body（避免嵌setquery）
+        // batchquantitygetservicequotient实body（avoid嵌setquery）
         $providerEntities = $this->providerConfigDomainService->getProviderEntitiesByConfigIds($dataIsolation, $configIds);
 
         // batchquantitygetservicequotientconfiguration实body（useatget别名）

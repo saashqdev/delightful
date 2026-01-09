@@ -317,7 +317,7 @@ readonly class LongTermMemoryDomainService
                 ExceptionBuilder::throw(LongTermMemoryErrorCode::MEMORY_NOT_FOUND);
             }
 
-            // ifupdatepending_content，needaccording to业务ruleadjuststatus
+            // ifupdatepending_content，needaccording tobusinessruleadjuststatus
             if ($dto->pendingContent !== null) {
                 $this->adjustMemoryStatusBasedOnPendingContent($memory, $dto->pendingContent);
             }
@@ -715,7 +715,7 @@ readonly class LongTermMemoryDomainService
             $updatedContent = $superAgentMessage->toArray();
             $this->messageRepository->updateMessageContent($delightfulMessageId, $updatedContent);
         } catch (Throwable $e) {
-            // 静默handleupdatefail，not影响mainprocess
+            // 静默handleupdatefail，notimpactmainprocess
             $this->logger->warning('Failed to update message with memory operation', [
                 'delightful_message_id' => $delightfulMessageId,
                 'action' => $action->value,

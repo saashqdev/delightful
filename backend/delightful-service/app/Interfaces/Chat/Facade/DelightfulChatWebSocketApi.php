@@ -89,7 +89,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[VerifyStructure]
     public function onConnect(Socket $socket)
     {
-        // linko clockrefresh sid cachepermissioninfo，避免极端情况down，usebyfront sid permission
+        // linko clockrefresh sid cachepermissioninfo，avoid极端情况down，usebyfront sid permission
         $this->logger->info(sprintf('sid:%s connect', $socket->getSid()));
     }
 
@@ -157,7 +157,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[Event('control')]
     #[VerifyStructure]
     /**
-     * 控制message.
+     * controlmessage.
      * @throws Throwable
      */
     public function onControlMessage(Socket $socket, array $params)
@@ -216,7 +216,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
      */
     public function onChatMessage(Socket $socket, array $params)
     {
-        // 判断messagetype,ifis控制message,minutehairtoto应process模piece
+        // 判断messagetype,ifiscontrolmessage,minutehairtoto应process模piece
         try {
             $appendRules = [
                 'data.conversation_id' => 'required|string',
@@ -345,7 +345,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     private function keepSubscribeAlive(): void
     {
         // 只needoneenter程canschedulepublishmessage,letsubscriberedislink保活即can.
-        // notlock放inmostoutsidelayer,isfor防止pod频繁restarto clock,nothaveanyoneenter程canpublishmessage
+        // notlock放inmostoutsidelayer,isforpreventpod频繁restarto clock,nothaveanyoneenter程canpublishmessage
         co(function () {
             // each 5 second推onetimemessage
             $this->timer->tick(

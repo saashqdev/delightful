@@ -64,12 +64,12 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     protected DateTime $updatedAt;
 
     /**
-     * 业务维护expecttotal.
+     * business维护expecttotal.
      */
     protected int $expectedNum = 0;
 
     /**
-     * 业务维护alreadycompletequantity.
+     * business维护alreadycompletequantity.
      */
     protected int $completedNum = 0;
 

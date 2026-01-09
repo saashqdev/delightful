@@ -18,7 +18,7 @@ use function Hyperf\Translation\trans;
 
 /**
  * ASR taskstatus仓储
- * 统one管理 Redis middletaskstatus CRUD.
+ * 统onemanage Redis middletaskstatus CRUD.
  */
 readonly class AsrTaskRepository
 {
@@ -158,7 +158,7 @@ readonly class AsrTaskRepository
      */
     private function generateTaskKey(string $taskKey, string $userId): string
     {
-        // 按统onerulegeneratestring，然back MD5 避免key名pass长
+        // 按统onerulegeneratestring，然back MD5 avoidkey名pass长
         $keyString = sprintf('%s:%s', $userId, $taskKey);
         $keyHash = md5($keyString);
         return sprintf(AsrRedisKeys::TASK_HASH, $keyHash);

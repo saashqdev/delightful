@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
-            $table->string('business_id', 128)->default('')->comment('业务ID')->after('enabled');
+            $table->string('business_id', 128)->default('')->comment('businessID')->after('enabled');
         });
     }
 

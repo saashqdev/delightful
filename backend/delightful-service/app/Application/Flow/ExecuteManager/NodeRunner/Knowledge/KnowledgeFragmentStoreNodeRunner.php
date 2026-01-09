@@ -61,7 +61,7 @@ class KnowledgeFragmentStoreNodeRunner extends AbstractKnowledgeNodeRunner
         $dataIsolation = $executionData->getDataIsolation();
         $knowledgeBaseDataIsolation = KnowledgeBaseDataIsolation::create($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId(), $dataIsolation->getDelightfulId());
         $knowledgeBaseEntity = $knowledgeBaseDomainService->show($knowledgeBaseDataIsolation, $knowledgeCode);
-        // thiswithinwant建立one归纳document
+        // thiswithinwantestablishone归纳document
         $documentEntity = $documentDomainService->getOrCreateDefaultDocument($knowledgeBaseDataIsolation, $knowledgeBaseEntity);
 
         $savingDelightfulFlowKnowledgeFragmentEntity = new KnowledgeBaseFragmentEntity();

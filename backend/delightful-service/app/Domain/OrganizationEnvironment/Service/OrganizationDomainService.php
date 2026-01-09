@@ -66,7 +66,7 @@ readonly class OrganizationDomainService
                     true // markfororganizationcreateperson
                 );
             } catch (Throwable $e) {
-                // if授予administratorpermissionfail，recordlogbutnot影响organizationcreate
+                // if授予administratorpermissionfail，recordlogbutnotimpactorganizationcreate
                 error_log("Failed to grant organization admin permission for creator {$creatorId}: " . $e->getMessage());
             }
         }

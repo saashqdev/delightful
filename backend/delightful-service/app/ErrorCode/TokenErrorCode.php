@@ -26,7 +26,7 @@ enum TokenErrorCode: int
     #[ErrorMessage(message: 'token.type_error')]
     case TokenTypeError = 9002;
 
-    // nothave检测toTokenassociatedata
+    // nothavedetecttoTokenassociatedata
     #[ErrorMessage(message: 'token.relation_not_found')]
     case TokenRelationNotFound = 9003;
 

@@ -17,7 +17,7 @@ return new class extends Migration {
         Schema::table('delightful_api_msg_logs', function (Blueprint $table) {
             $table->text('msg')->nullable()->change();
             $table->string('app_code', 64)->default('')->comment('applicationencoding');
-            $table->string('business_id', 64)->default('')->comment('业务 id');
+            $table->string('business_id', 64)->default('')->comment('business id');
             $table->integer('use_token')->default(0);
         });
     }

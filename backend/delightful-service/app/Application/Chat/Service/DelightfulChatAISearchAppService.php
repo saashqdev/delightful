@@ -643,7 +643,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                     $messageContent,
                     $senderConversationEntity
                 );
-                // pushonetime parent_id/id/type data，useatupdatestreamcache，避免final落libraryo clock，parent_id/id/type data丢失
+                // pushonetime parent_id/id/type data，useatupdatestreamcache，avoidfinal落libraryo clock，parent_id/id/type data丢失
                 $this->delightfulChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [
                     'parent_id' => '0',
                     'id' => $summaryMessageId,
@@ -685,7 +685,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         $extraContentParallel = new Parallel(3);
         $modelInterface = $this->getChatModel($dto->getOrganizationCode(), $dto->getUserId());
         $extraContentParallel->add(function () use ($summarize, $dto, $modelInterface) {
-            // odin willmodify vo objectmiddlevalue，避免污染，copyagain传入
+            // odin willmodify vo objectmiddlevalue，avoid污染，copyagain传入
             CoContext::setRequestId($dto->getRequestId());
             // 思维导graph
             $mindMapQueryVo = $this->getSearchVOByAggregateSearchDTO($dto, $summarize);
@@ -967,7 +967,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
 
     private function sleepToFixBug(float $seconds = 0.2): void
     {
-        // !!! byat收item方messagegenerateisasync，maybe乱序，therefore，thiswithin sleep one小will，尽quantity保证收item方messagegenerateorder
+        // !!! byat收item方messagegenerateisasync，maybe乱序，therefore，thiswithin sleep one小will，尽quantityguarantee收item方messagegenerateorder
         Coroutine::sleep($seconds);
     }
 

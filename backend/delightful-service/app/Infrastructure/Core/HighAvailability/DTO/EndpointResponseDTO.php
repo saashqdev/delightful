@@ -43,7 +43,7 @@ class EndpointResponseDTO extends AbstractDTO
     protected int $httpStatusCode;
 
     /**
-     * response业务status码
+     * responsebusinessstatus码
      */
     protected int $businessStatusCode;
 

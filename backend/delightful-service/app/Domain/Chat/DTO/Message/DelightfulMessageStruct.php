@@ -16,7 +16,7 @@ use App\Domain\Chat\Entity\ValueObject\MessageType\IntermediateMessageType;
 use Hyperf\Codec\Json;
 
 /**
- * chatand控制message基category.
+ * chatandcontrolmessage基category.
  */
 abstract class DelightfulMessageStruct extends AbstractEntity implements MessageInterface
 {

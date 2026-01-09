@@ -490,7 +490,7 @@ class QwenImageModel extends AbstractImageGenerate
                 }
                 unset($resultItem);
             } catch (Exception $e) {
-                // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
+                // watermarkhandlefailo clock，recorderrorbutnotimpactimagereturn
                 $this->logger->error('通义thousand问imagewatermarkhandlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),

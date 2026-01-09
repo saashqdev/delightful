@@ -161,7 +161,7 @@ class FileAppService extends AbstractAppService
         $defaultFileBusinessType = DefaultFileBusinessType::from($businessType);
         $organizationCode = $authorization->getOrganizationCode();
 
-        // checkfilewhetheralready经存inatthe业务typedown
+        // checkfilewhetheralready经存inatthebusinesstypedown
         $existingFile = $this->defaultFileDomainService->getByKeyAndBusinessType($fileKey, $businessType, $organizationCode);
         if ($existingFile) {
             // iffilealready存in，直接returnfilelink

@@ -42,7 +42,7 @@ class ApiResponseExceptionLogAspect extends AbstractAspect
         try {
             return $proceedingJoinPoint->process();
         } catch (Throwable $exception) {
-            // onethese兜bottomexceptionlogprint,maybe存induplicatelogprint,butisfor保证exceptioninfonot丢失,所bythiswithinnot做判断.
+            // onethese兜bottomexceptionlogprint,maybe存induplicatelogprint,butisforguaranteeexceptioninfonot丢失,所bythiswithinnot做判断.
             $this->logger->error(
                 __CLASS__ . ' hair生exception message:{message}, code:{code}, file:{file}, line:{line}, trace:{trace}',
                 [

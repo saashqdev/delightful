@@ -100,7 +100,7 @@ class FileDefaultInitCommand extends Command
             $moduleName = basename($moduleDir);
 
             try {
-                // 尝试will模piece名mappingtoto应业务type
+                // 尝试will模piece名mappingtoto应businesstype
                 $businessType = $this->mapModuleToBusinessType($moduleName);
 
                 if ($businessType === null) {
@@ -108,7 +108,7 @@ class FileDefaultInitCommand extends Command
                     continue;
                 }
 
-                $this->line("  - handle模piece: {$moduleName} (业务type: {$businessType->value})");
+                $this->line("  - handle模piece: {$moduleName} (businesstype: {$businessType->value})");
 
                 // getthe模piecedirectorydown所havefile
                 $files = array_filter(glob($moduleDir . '/*'), 'is_file');
@@ -126,14 +126,14 @@ class FileDefaultInitCommand extends Command
                     $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
                     $fileSize = filesize($filePath);
 
-                    // generate业务唯oneidentifier（useatduplicatecheck）
+                    // generatebusiness唯oneidentifier（useatduplicatecheck）
                     $businessIdentifier = $moduleName . '/' . $fileName;
 
-                    // correctduplicatecheck：querysame业务typedownwhetherhavesame业务identifier
+                    // correctduplicatecheck：querysamebusinesstypedownwhetherhavesamebusinessidentifier
                     $existingFiles = $this->defaultFileDomainService->getByOrganizationCodeAndBusinessType($businessType, $organizationCode);
                     $isDuplicate = false;
                     foreach ($existingFiles as $existingFile) {
-                        // use userId fieldstorage业务identifiercome判断duplicate
+                        // use userId fieldstoragebusinessidentifiercome判断duplicate
                         if ($existingFile->getUserId() === $businessIdentifier) {
                             $isDuplicate = true;
                             break;
@@ -179,7 +179,7 @@ class FileDefaultInitCommand extends Command
                         $defaultFileEntity->setFileSize($fileSize);
                         $defaultFileEntity->setOrganization($organizationCode);
                         $defaultFileEntity->setFileExtension($fileExtension);
-                        $defaultFileEntity->setUserId($businessIdentifier); // use业务identifierasfor userId
+                        $defaultFileEntity->setUserId($businessIdentifier); // usebusinessidentifierasfor userId
 
                         // save实body
                         $this->defaultFileDomainService->insert($defaultFileEntity);
@@ -187,7 +187,7 @@ class FileDefaultInitCommand extends Command
                         ++$fileCount;
                     } catch (Exception $e) {
                         $this->error("  - handlefile {$fileName} fail: {$e->getMessage()}");
-                        continue; // not影响back续filehandle
+                        continue; // notimpactback续filehandle
                     }
                 }
 
@@ -205,7 +205,7 @@ class FileDefaultInitCommand extends Command
     }
 
     /**
-     * will模piece名mappingtoto应业务type.
+     * will模piece名mappingtoto应businesstype.
      */
     protected function mapModuleToBusinessType(string $moduleName): ?DefaultFileBusinessType
     {

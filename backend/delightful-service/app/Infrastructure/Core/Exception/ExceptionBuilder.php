@@ -45,7 +45,7 @@ class ExceptionBuilder
 
     /**
      * @param string $message allow传入customizeerrorinformation
-     * @return never-return // forphpstan检测
+     * @return never-return // forphpstandetect
      */
     public static function throw(BackedEnum $error, string $message = '', array $replace = [], ?string $locale = null, ?Throwable $throwable = null): void
     {

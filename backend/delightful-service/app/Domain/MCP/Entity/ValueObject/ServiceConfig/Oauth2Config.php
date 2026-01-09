@@ -43,7 +43,7 @@ class Oauth2Config extends AbstractValueObject
     protected string $clientUrl = '';
 
     /**
-     * Scope - allowapplication程序requestaccessuserdatarange。
+     * Scope - allowapplicationprocedurerequestaccessuserdatarange。
      *
      * 参考service方authorizationdocumentinputscope。
      */

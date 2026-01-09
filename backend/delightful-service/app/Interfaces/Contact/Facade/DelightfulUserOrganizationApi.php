@@ -17,7 +17,7 @@ use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**
- * usercurrentorganization管理API.
+ * usercurrentorganizationmanageAPI.
  */
 #[ApiResponse('low_code')]
 class DelightfulUserOrganizationApi extends AbstractApi

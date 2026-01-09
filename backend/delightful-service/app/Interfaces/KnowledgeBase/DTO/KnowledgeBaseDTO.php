@@ -56,12 +56,12 @@ class KnowledgeBaseDTO extends AbstractFlowDTO
     public int $userOperation = 0;
 
     /**
-     * 业务维护expecttotal.
+     * business维护expecttotal.
      */
     public int $expectedNum = 0;
 
     /**
-     * 业务维护alreadycompletequantity.
+     * business维护alreadycompletequantity.
      */
     public int $completedNum = 0;
 

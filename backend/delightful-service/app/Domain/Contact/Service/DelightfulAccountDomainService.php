@@ -52,7 +52,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         $code = (string) random_int(100000, 999999);
         $variables = ['timeout' => 10, 'verification_code' => $code];
         $sign = SignEnum::DENG_TA;
-        // will业务场景type 转for 短信type
+        // willbusiness场景type 转for 短信type
         $smsType = match ($type) {
             SmsSceneType::BIND_PHONE,
             SmsSceneType::CHANGE_PHONE,
@@ -127,7 +127,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 return;
             }
         }
-        // addlock防止andhair
+        // addlockpreventandhair
         $key = sprintf('addUserAndAccount:%s', $delightfulId);
         if (! $this->locker->mutexLock($key, $delightfulId, 5)) {
             ExceptionBuilder::throw(UserErrorCode::CREATE_USER_TOO_FREQUENTLY);
@@ -329,7 +329,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
      */
     private function checkSmsLimit(string $stateCode, string $phone): void
     {
-        // 短信sendfrequency控制
+        // 短信sendfrequencycontrol
         $timeInterval = config('sms.time_interval') ?: 60;
         $lastSendTimeKey = $this->getSmsLastSendTimeKey($stateCode . $phone);
         $setSuccess = $this->redis->set($lastSendTimeKey, '1', ['nx', 'ex' => $timeInterval]);

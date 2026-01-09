@@ -42,13 +42,13 @@ class ImageWatermarkProcessor
      */
     public function addWatermarkToBase64(string $base64Image, ImageGenerateRequest $imageGenerateRequest): string
     {
-        // 检测originalformat
+        // detectoriginalformat
         $originalFormat = $this->extractBase64Format($base64Image);
 
         // decodingbase64image
         $imageData = $this->decodeBase64Image($base64Image);
 
-        // double重检测ensureformataccurate
+        // double重detectensureformataccurate
         $detectedFormat = $this->detectImageFormat($imageData);
         $targetFormat = $originalFormat !== 'jpeg' ? $originalFormat : $detectedFormat;
 
@@ -109,7 +109,7 @@ class ImageWatermarkProcessor
 
     protected function addWaterMarkHandler(string $imageData, ImageGenerateRequest $imageGenerateRequest, ?string $format = null): string
     {
-        // 检测imageformat，优先use传入format
+        // detectimageformat，优先use传入format
         $detectedFormat = $format ?? $this->detectImageFormat($imageData);
 
         $image = imagecreatefromstring($imageData);
@@ -120,7 +120,7 @@ class ImageWatermarkProcessor
         // add视觉watermark
         $watermarkedImage = $this->addWatermarkToImageResource($image, $watermarkConfig);
 
-        // use检测toformatconductno损output
+        // usedetecttoformatconductno损output
         ob_start();
         $this->outputImage($watermarkedImage, $detectedFormat);
         $watermarkedData = ob_get_contents();
@@ -141,7 +141,7 @@ class ImageWatermarkProcessor
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // create新imageresourceby避免modify原graph
+        // create新imageresourcebyavoidmodify原graph
         $watermarkedImage = imagecreatetruecolor($width, $height);
         imagecopy($watermarkedImage, $image, 0, 0, 0, 0, $width, $height);
 
@@ -316,7 +316,7 @@ class ImageWatermarkProcessor
      */
     private function outputImage($image, string $format = 'auto'): void
     {
-        // from动format检测
+        // from动formatdetect
         if ($format === 'auto') {
             if ($this->fontProvider->hasTransparency($image)) {
                 $format = 'png'; // have透明degreeusePNG
@@ -366,7 +366,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 检测graphlikedataformat.
+     * detectgraphlikedataformat.
      */
     private function detectImageFormat(string $imageData): string
     {

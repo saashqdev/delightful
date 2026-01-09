@@ -223,7 +223,7 @@ class ProviderModelSyncAppService
         // get现have所havemodel
         $existingModels = $this->providerModelDomainService->getByProviderConfigId($dataIsolation, (string) $configId);
 
-        // 建立model_id -> entitymapping
+        // establishmodel_id -> entitymapping
         $existingModelMap = [];
         foreach ($existingModels as $model) {
             $existingModelMap[$model->getModelId()] = $model;

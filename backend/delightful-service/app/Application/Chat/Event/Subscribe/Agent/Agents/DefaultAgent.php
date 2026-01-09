@@ -43,7 +43,7 @@ class DefaultAgent extends AbstractAgent
         // get触hairtype
         $triggerType = TriggerType::fromSeqType($seqEntity->getSeqType());
         # 传入parameter:
-        // 1. $userAccountEntity containtrue名,hand机numberetchavesecurity风险,shouldneedauthauthorizationinformation
+        // 1. $userAccountEntity containtrue名,hand机numberetchavesecurityrisk,shouldneedauthauthorizationinformation
         // 2. $userEntity userdetail,containuserid,user昵称,useravataretcinformation
         // 3. $seqEntity conversationwindowid,quotemessage_id,messagetype(chatmessage/openconversationwindow)
         // 4. $messageEntity savehavemessagetype,messagespecificcontent,hairitempersonid,sendtime

@@ -92,23 +92,23 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * test邀请linkpermission控制.
+     * test邀请linkpermissioncontrol.
      */
     public function testInvitationLinkPermissions(): void
     {
         $projectId = $this->projectId;
 
-        // 1. nonprojectmember尝试管理邀请link（shouldfail）
+        // 1. nonprojectmember尝试manage邀请link（shouldfail）
         $this->switchUserTest2();
         $this->getInvitationLink($projectId, 51202); // permissionnot足
 
-        // 2. project所have者can管理邀请link
+        // 2. project所have者canmanage邀请link
         $this->switchUserTest1();
         $this->getInvitationLink($projectId, 1000); // success
     }
 
     /**
-     * testpermissionlevel别管理.
+     * testpermissionlevel别manage.
      */
     public function testPermissionLevelManagement(): void
     {
@@ -119,7 +119,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 1. start邀请link
         $this->toggleInvitationLink($projectId, true);
 
-        // 2. testmodifypermissionlevel别for管理permission
+        // 2. testmodifypermissionlevel别formanagepermission
         $this->updateInvitationPermission($projectId, 'manage');
 
         // 3. testmodifypermissionlevel别foreditpermission

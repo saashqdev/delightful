@@ -138,7 +138,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $this->assertArrayNotHasKey('platform', $platformsByKey);
         $platform = $platformsByKey['admin'];
 
-        $this->assertEquals('管理back台', $platform['label']);
+        $this->assertEquals('manageback台', $platform['label']);
         $this->assertArrayHasKey('children', $platform);
         $this->assertNotEmpty($platform['children']);
 

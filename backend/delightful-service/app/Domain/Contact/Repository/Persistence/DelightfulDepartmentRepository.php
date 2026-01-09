@@ -185,7 +185,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
 
     /**
      * getdepartment所have子departmentmembertotal.
-     * usefrom旋lock避免andhair，onetimepropertyquery所havedepartmentdataandcacheto Redis.
+     * usefrom旋lockavoidandhair，onetimepropertyquery所havedepartmentdataandcacheto Redis.
      */
     public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int
     {
@@ -200,7 +200,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             return (int) $cachedData;
         }
 
-        // usefrom旋lock避免andhaircalculate
+        // usefrom旋lockavoidandhaircalculate
         $lockKey = sprintf('department_calc_lock:%s', $organizationCode);
         $lockOwner = uniqid('dept_calc_', true);
 
@@ -484,7 +484,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
                 ]);
             }
         } catch (Throwable $e) {
-            // Redis exceptiono clockrecordlog，butnot影响业务process
+            // Redis exceptiono clockrecordlog，butnotimpactbusinessprocess
             $this->logger->warning('calculateAndCacheAllDepartmentEmployeeSums Failed to cache department employee sums', [
                 'organization_code' => $organizationCode,
                 'error' => $e->getMessage(),

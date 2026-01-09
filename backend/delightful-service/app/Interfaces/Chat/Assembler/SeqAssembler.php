@@ -64,7 +64,7 @@ class SeqAssembler
                 $messageInfo = $messageInfos[$seqInfo['delightful_message_id']] ?? [];
                 $messageEntity = MessageAssembler::getMessageEntity($messageInfo);
             } else {
-                // 控制messagenothavechatmessagestatus
+                // controlmessagenothavechatmessagestatus
                 $messageEntity = null;
             }
             $seqStructs[$seqEntity->getSeqId()] = self::getClientSeqStruct($seqEntity, $messageEntity);
@@ -170,13 +170,13 @@ class SeqAssembler
         $seqData['refer_message_id'] = $referMessageId;
         $seqData['created_at'] = $time;
         $seqData['updated_at'] = $time;
-        $seqData['delightful_message_id'] = ''; // 控制messagenothave delightful_message_id
+        $seqData['delightful_message_id'] = ''; // controlmessagenothave delightful_message_id
         $seqData['receive_list'] = Json::encode($seqData['receive_list'] ?: [], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         return self::getSeqEntity($seqData);
     }
 
     /**
-     * according toalready经存inseqEntity,generatetopic变moretype控制message.
+     * according toalready经存inseqEntity,generatetopic变moretypecontrolmessage.
      */
     public static function generateTopicChangeSeqEntity(DelightfulSeqEntity $seqEntity, DelightfulTopicEntity $topicEntity, ?DelightfulUserEntity $receiveUserEntity): DelightfulSeqEntity
     {
@@ -203,7 +203,7 @@ class SeqAssembler
         $extra->setTopicId($topicEntity->getTopicId());
         $seqData['extra'] = Json::encode($extra->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         $seqData['receive_list'] = '';
-        $seqData['delightful_message_id'] = ''; // 控制messagenothave delightful_message_id
+        $seqData['delightful_message_id'] = ''; // controlmessagenothave delightful_message_id
         return self::getSeqEntity($seqData);
     }
 
@@ -263,9 +263,9 @@ class SeqAssembler
         }
         $messageTypeName = $messageType->getName();
         $messageStatus = $seqEntity->getStatus()?->getStatusName();
-        // forsection约storagenullbetween,控制messagespecificcontentstorageinseqEntitymiddle,chatmessagespecificcontentstorageinmessageEntitymiddle
+        // forsection约storagenullbetween,controlmessagespecificcontentstorageinseqEntitymiddle,chatmessagespecificcontentstorageinmessageEntitymiddle
         if ($messageType instanceof ControlMessageType) {
-            // ifis控制message,messagespecificcontentfromseqEntitymiddleget
+            // ifiscontrolmessage,messagespecificcontentfromseqEntitymiddleget
             $messageData = $seqEntity->getContent()->toArray();
         } else {
             // ifischatmessage,messagespecificcontentfrommessageEntitymiddleget
@@ -288,7 +288,7 @@ class SeqAssembler
             // send者
             'sender_id' => (string) $messageEntity?->getSenderId(),
             'topic_id' => $messageTopicId,
-            // message小category。控制message小category：already读return执；withdraw；edit；入群/退群；organization架构变动; 。 showmessage：text,voice,img,file,videoetc
+            // message小category。controlmessage小category：already读return执；withdraw；edit；入群/退群；organization架构变动; 。 showmessage：text,voice,img,file,videoetc
             'type' => $messageTypeName,
             // return显not读person数,ifuserpoint击detail,againrequestspecificmessagecontent
             'unread_count' => $unreadCount,
@@ -304,7 +304,7 @@ class SeqAssembler
         $clientSequenceData = [
             // 序columnnumber归属账numberid
             'delightful_id' => $seqEntity->getObjectId(),
-            // 序columnnumber，one定notduplicate，one定growth，butisnot保证连续。
+            // 序columnnumber，one定notduplicate，one定growth，butisnotguarantee连续。
             'seq_id' => $seqEntity->getSeqId(),
             // usermessageid，userdown唯one。
             'message_id' => $seqEntity->getMessageId(),

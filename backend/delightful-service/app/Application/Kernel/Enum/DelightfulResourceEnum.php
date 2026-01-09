@@ -21,28 +21,28 @@ use function Hyperf\Translation\__;
 enum DelightfulResourceEnum: string
 {
     // ===== toplevel =====
-    case PLATFORM = 'platform'; # 平台管理back台
-    case ADMIN = 'admin'; # organization管理back台
-    case ADMINPLUS = 'admin_plus'; # organization管理back台plus
+    case PLATFORM = 'platform'; # 平台manageback台
+    case ADMIN = 'admin'; # organizationmanageback台
+    case ADMINPLUS = 'admin_plus'; # organizationmanageback台plus
 
     // ===== twolevel：模piece =====
-    case ADMIN_AI = 'admin.ai'; # 平台管理back台-AI管理
+    case ADMIN_AI = 'admin.ai'; # 平台manageback台-AImanage
     case ADMIN_SAFE = 'admin.safe'; # security管控
-    case PLATFORM_AI = 'platform.ai'; # 平台管理back台-AI管理
+    case PLATFORM_AI = 'platform.ai'; # 平台manageback台-AImanage
     case PLATFORM_SETTING = 'platform.setting'; # systemset
-    case PLATFORM_ORGANIZATION = 'platform.organization'; # organization管理
-    case ADMINPLUS_AI = 'admin_plus.ai'; # organization管理back台plus-AI管理
+    case PLATFORM_ORGANIZATION = 'platform.organization'; # organizationmanage
+    case ADMINPLUS_AI = 'admin_plus.ai'; # organizationmanageback台plus-AImanage
 
     // ===== threelevel：specificresource (useatspecificbindinterface）=====
-    case ADMIN_AI_MODEL = 'platform.ai.model_management'; # AI管理-model管理
-    case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AI管理-智can绘graph管理
-    case ADMIN_AI_MODE = 'platform.ai.mode_management'; # AI管理-模type管理管理
-    case ADMIN_AI_ABILITY = 'platform.ai.ability'; # AI管理-can力管理
+    case ADMIN_AI_MODEL = 'platform.ai.model_management'; # AImanage-modelmanage
+    case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AImanage-智can绘graphmanage
+    case ADMIN_AI_MODE = 'platform.ai.mode_management'; # AImanage-模typemanagemanage
+    case ADMIN_AI_ABILITY = 'platform.ai.ability'; # AImanage-can力manage
     case SAFE_SUB_ADMIN = 'admin.safe.sub_admin';  # security管控-子administrator
-    case PLATFORM_SETTING_PLATFORM_INFO = 'platform.setting.platform_info'; # 平台管理 - systemset - 平台info
-    case PLATFORM_SETTING_MAINTENANCE = 'platform.setting.maintenance'; # 平台管理 - systeminfo - 维护管理
-    case PLATFORM_ORGANIZATION_LIST = 'platform.organization.list'; # 平台管理 - organization管理 - organizationlist
-    case ADMINPLUS_AI_MODEL = 'admin_plus.ai.model_management'; # organization管理back台plus-AI管理-model管理
+    case PLATFORM_SETTING_PLATFORM_INFO = 'platform.setting.platform_info'; # 平台manage - systemset - 平台info
+    case PLATFORM_SETTING_MAINTENANCE = 'platform.setting.maintenance'; # 平台manage - systeminfo - 维护manage
+    case PLATFORM_ORGANIZATION_LIST = 'platform.organization.list'; # 平台manage - organizationmanage - organizationlist
+    case ADMINPLUS_AI_MODEL = 'admin_plus.ai.model_management'; # organizationmanageback台plus-AImanage-modelmanage
 
     /**
      * to应 i18n key.

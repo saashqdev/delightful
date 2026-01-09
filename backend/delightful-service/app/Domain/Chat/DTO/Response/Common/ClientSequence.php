@@ -21,7 +21,7 @@ class ClientSequence extends AbstractEntity
     // 序columnnumber归属账numberid
     protected string $delightfulId;
 
-    // 序columnnumber，one定notduplicate，one定growth，butisnot保证连续。
+    // 序columnnumber，one定notduplicate，one定growth，butisnotguarantee连续。
     protected string $seqId;
 
     // usermessageid，userdown唯one。

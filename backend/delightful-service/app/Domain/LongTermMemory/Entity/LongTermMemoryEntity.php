@@ -299,8 +299,8 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * inside部setenablestatus（notconduct业务rulecheck）.
-     * useatdatainitializeandinside部操as，skip业务rulelimit.
+     * inside部setenablestatus（notconductbusinessrulecheck）.
+     * useatdatainitializeandinside部操as，skipbusinessrulelimit.
      */
     public function setEnabledInternal(bool $enabled): void
     {
@@ -367,7 +367,7 @@ final class LongTermMemoryEntity extends AbstractEntity
         $this->deletedAt = $this->createDatetime($deletedAt);
     }
 
-    // 业务method
+    // businessmethod
 
     /**
      * access记忆（updateaccesscountandtime）.
@@ -445,7 +445,7 @@ final class LongTermMemoryEntity extends AbstractEntity
      */
     protected function set(string $key, mixed $value): void
     {
-        // enabled fieldininitializeo clockuseinside部method，skip业务rulecheck
+        // enabled fieldininitializeo clockuseinside部method，skipbusinessrulecheck
         if (strtolower($key) === 'enabled' && is_bool($value)) {
             $this->setEnabledInternal($value);
             return;
@@ -478,7 +478,7 @@ final class LongTermMemoryEntity extends AbstractEntity
             return 0.0;
         }
 
-        // accesscountto数addbecome，避免passdegreereward
+        // accesscountto数addbecome，avoidpassdegreereward
         return min(0.3, log($this->accessCount + 1) * 0.1);
     }
 }

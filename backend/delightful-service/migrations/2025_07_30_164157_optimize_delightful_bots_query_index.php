@@ -29,7 +29,7 @@ return new class extends Migration {
 
         // optimize delightful_bot_versions 表
         Schema::table('delightful_bot_versions', function (Blueprint $table) {
-            // 先deletealready存insinglefieldindex，避免index冗remainder
+            // 先deletealready存insinglefieldindex，avoidindex冗remainder
             if (Schema::hasIndex('delightful_bot_versions', 'delightful_bot_versions_organization_code_index')) {
                 $table->dropIndex('delightful_bot_versions_organization_code_index');
             }

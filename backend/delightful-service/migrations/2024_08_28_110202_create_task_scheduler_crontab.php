@@ -19,7 +19,7 @@ class CreateTaskSchedulerCrontab extends Migration
     {
         Schema::create(config('task_scheduler.table_names.task_scheduler_crontab', 'task_scheduler_crontab'), function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('external_id', 64)->comment('业务 id')->index();
+            $table->string('external_id', 64)->comment('business id')->index();
             $table->string('name', 64)->comment('name');
             $table->string('crontab', 64)->comment('crontab表达type');
             $table->dateTime('last_gen_time')->nullable()->comment('mostbackgeneratetime');

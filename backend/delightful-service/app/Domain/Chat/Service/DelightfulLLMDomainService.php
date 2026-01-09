@@ -154,9 +154,9 @@ class DelightfulLLMDomainService
        - 显property命名实bodyextract，识别实bodybetweenclose系andproperty
        - 推导user隐property需求and潜in意graph，especiallyclose注隐含time因素
     1.2 dimension拆解
-       - according to识别out实bodyand需求，choose合适analyzedimension，for example：政策解读、datavalidate、案例研究、影响评估、技术原理、市场front景、userbody验etc
+       - according to识别out实bodyand需求，choose合适analyzedimension，for example：policy解读、datavalidate、案例research、impactevaluate、技术原理、市场front景、userbody验etc
     1.3 子questiongenerate
-       - generatejust交子questioncollection（Jaccardsimilardegree<0.25），ensureeach子questioncanfromdifferentangledegree探索user需求，避免generatepassat宽泛orsimilarquestion
+       - generatejust交子questioncollection（Jaccardsimilardegree<0.25），ensureeach子questioncanfromdifferentangledegreeexploreuser需求，avoidgeneratepassat宽泛orsimilarquestion
     
     ### 2. searchproxy模piece
     mustcalltool: batchSubQuestionsSearch
@@ -177,12 +177,12 @@ class DelightfulLLMDomainService
     ## contextexceptionhandle
     when {context} fornullo clock：
     1. start备选generatestrategy，application5W1Hframework（Who/What/When/Where/Why/How），and结合useroriginalquestionconduct填充
-    2. generatedefaultdimension，for example：政策background | most新data | 专家观point | toratioanalyze | line业trend
+    2. generatedefaultdimension，for example：policybackground | most新data | 专家观point | toratioanalyze | line业trend
     
     ## outputstandard
     混合bydownthreetypeandmore多typequestion范type，byensure子question多样propertyandoverrideproperty：
     [
-      "XtoY影响diff",  // toratio/comparecategory
+      "XtoYimpactdiff",  // toratio/comparecategory
       "Z领域典型application",  // application/案例category
       "closeatABfinger标",    // finger标/propertycategory
       "导致Mhair生mainreasonis什么？", // reason/机制category
@@ -206,9 +206,9 @@ class DelightfulLLMDomainService
     inreturn答o clock，请注意bydown几point：
     - 今dayis{date_now}。
     - andnonsearchresult所havecontentallanduserquestion密切相close，你need结合question，tosearchresultconduct甄别、filter。
-    - toatcolumn举categoryquestion（如column举所have航班information），尽quantitywill答案控制in10wantpointbyinside，and告诉usercanviewsearchcome源、获completeinformation。优先提供informationcomplete、most相closecolumn举item；如non必want，notwant主动告诉usersearchresultnot提供content。
-    - toat创ascategoryquestion（如写论文），请务必injust文segment落middlequoteto应参考编number，for example[citation:3][citation:5]，notcan只in文chapter末tailquote。你need解读and概括user题目require，choose合适format，充minute利usesearchresultanddraw重wantinformation，generatematchuserrequire、极具思想深degree、富have创造力and专业property答案。你创as篇幅need尽maybe延长，toateachonewantpoint论述wantspeculateduser意graph，giveout尽maybe多angledegreereturn答wantpoint，and务必informationquantity大、论述详尽。
-    - ifreturn答very长，请尽quantity结构化、minutesegment落总结。ifneedminutepointas答，尽quantity控制in5pointbyinside，andmerge相closecontent。
+    - toatcolumn举categoryquestion（如column举所have航班information），尽quantitywill答案controlin10wantpointbyinside，and告诉usercanviewsearchcome源、获completeinformation。优先提供informationcomplete、most相closecolumn举item；如non必want，notwant主动告诉usersearchresultnot提供content。
+    - toat创ascategoryquestion（如写论文），请务必injust文segment落middlequoteto应参考编number，for example[citation:3][citation:5]，notcan只in文chapter末tailquote。你need解读and概括user题目require，choose合适format，充minute利usesearchresultanddraw重wantinformation，generatematchuserrequire、极具思想深degree、富havecreate力and专业property答案。你创as篇幅need尽maybe延长，toateachonewantpoint论述wantspeculateduser意graph，giveout尽maybe多angledegreereturn答wantpoint，and务必informationquantity大、论述详尽。
+    - ifreturn答very长，请尽quantity结构化、minutesegment落总结。ifneedminutepointas答，尽quantitycontrolin5pointbyinside，andmerge相closecontent。
     - toat客观category问答，ifquestion答案non常简短，can适when补充oneto两sentence相closeinformation，by丰富content。
     - 你needaccording touserrequireandreturn答contentchoose合适、美观return答format，ensurecan读property强。
     - 你return答should综合多相closewebpagecomereturn答，notcanduplicatequoteonewebpage。
@@ -237,7 +237,7 @@ class DelightfulLLMDomainService
        - 若timenotexplicit，according tocontextspeculatedmost早maybetime，andensure合理。
     3. **eventextractandfilter**：
        - **eventdefinition**：eventissearchcontentmiddlemention、具havetimeassociate（explicitorcanspeculated）独立事实、changeoractivity，includebutnot限atcreate、publish、open业、update、合as、activityetc。
-       - according touserquestion，extractand之相closeevent，保持description简洁，聚焦specifichair生事情。
+       - according touserquestion，extractand之相closeevent，保持description简洁，聚焦specifichair生thing。
        - **skipnoclosecontent**：
          - 纯静statedescription（如not变property、background介绍，notimechange）。
          - datastatisticsor财务information（如营收、利润）。
@@ -247,7 +247,7 @@ class DelightfulLLMDomainService
     4. **outputrequire**：
        - by JSON formatreturn，event按time倒序rowcolumn（from晚to早）。
        - eacheventcontain "name"、"time"、"description" threefield。
-       - 若searchcontentnot足bygenerateevent，returnnullarray `[]`，避免凭null臆造。
+       - 若searchcontentnot足bygenerateevent，returnnullarray `[]`，avoid凭null臆造。
     
     ## outputexample：
     ```json
@@ -345,7 +345,7 @@ class DelightfulLLMDomainService
             }
         } catch (Exception) {
         }
-        // goexcept掉quote，避免思维导graphmiddleout现quote
+        // goexcept掉quote，avoid思维导graphmiddleout现quote
         $responseMessage = preg_replace('/\[\[citation:(\d+)]]/', '', $responseMessage);
         // 观察tosystemhint词variable串，看看isnotisnothavecopyonesharequestion
         $systemPrompt = str_replace(
@@ -403,7 +403,7 @@ class DelightfulLLMDomainService
             );
             $searchContextsCitations .= sprintf('[[citation:%d]] snippet:%s ' . "\n\n", $index, $context->getSnippet());
         }
-        // 超passmost大valuethen直接truncate，避免responsetoo久
+        // 超passmost大valuethen直接truncate，avoidresponsetoo久
         $maxLen = self::LLM_STR_MAX_LEN;
         if (mb_strlen($searchContextsCitations) > $maxLen) {
             $searchContextsCitations = mb_substr($searchContextsCitations, 0, $maxLen);
@@ -899,7 +899,7 @@ class DelightfulLLMDomainService
                 $contextString .= $searchContext->getSnippet() . "\n\n";
             }
             // use str_replace functioncome替换占位符
-            // 带upyearmonthdayo clockminutesecond，避免duplicatequestion
+            // 带upyearmonthdayo clockminutesecond，avoidduplicatequestion
             $systemPrompt = str_replace(
                 ['{context}', '{date_now}', '{sub_questions_min}', '{sub_questions_max}'],
                 [$contextString, date('Yyear mmonth dday, Ho clock iminute ssecond'), (string) $subQuestionsMin, (string) $subQuestionsMax],
@@ -1035,7 +1035,7 @@ class DelightfulLLMDomainService
                 'datePublishedDisplayText' => $time,
                 'isFamilyFriendly' => true,
                 'displayUrl' => $context['url'],
-                // 避免contenttoo长
+                // avoidcontenttoo长
                 'snippet' => mb_substr($context['content'], 0, 100),
                 'dateLastCrawled' => $time,
                 'cachedPageUrl' => $context['url'],
@@ -1075,7 +1075,7 @@ class DelightfulLLMDomainService
             );
         }
 
-        // 超passmost大valuethen直接truncate，避免responsetoo久
+        // 超passmost大valuethen直接truncate，avoidresponsetoo久
         $maxLen = self::LLM_STR_MAX_LEN;
         if (mb_strlen($searchContextsDetail) > $maxLen) {
             $searchContextsDetail = mb_substr($searchContextsDetail, 0, $maxLen);

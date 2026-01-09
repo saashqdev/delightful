@@ -62,7 +62,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         }
         $this->setRequestId($seqEntity->getAppMessageId());
         $this->logger->info(sprintf('messagePush 准备startpush seq:%s seqEntity:%s ', $seqId, Json::encode($seqEntity->toArray())));
-        // 判断messagetype,is控制message,alsoischatmessage
+        // 判断messagetype,iscontrolmessage,alsoischatmessage
         $seqUserEntity = $this->delightfulUserRepository->getUserByAccountAndOrganization($seqEntity->getObjectId(), $seqEntity->getOrganizationCode());
         if ($seqUserEntity === null) {
             $this->logger->error('messagePush delightful_id:{delightful_id} user not found', ['delightful_id' => $seqEntity->getObjectId()]);
@@ -70,7 +70,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         }
 
         if ($seqEntity->getSeqType() instanceof ControlMessageType) {
-            // push控制message. 控制messagegeneralnothave messageEntity (chatmessage实body)
+            // pushcontrolmessage. controlmessagegeneralnothave messageEntity (chatmessage实body)
             $this->pushControlSeq($seqEntity, $seqUserEntity);
         } else {
             $messageEntity = $this->delightfulMessageRepository->getMessageByDelightfulMessageId($seqEntity->getDelightfulMessageId());
@@ -88,14 +88,14 @@ class DelightfulSeqDomainService extends AbstractDomainService
      */
     public function pushControlSeq(DelightfulSeqEntity $seqEntity, DelightfulUserEntity $seqUserEntity, ?DelightfulMessageEntity $messageEntity = null): void
     {
-        // havethese控制message,not仅控制from己设备,alsoneed控制to方设备
-        // 控制messagepush. todo:待optimize,mergepushalready读控制message
+        // havethesecontrolmessage,not仅controlfrom己设备,alsoneedcontrolto方设备
+        // controlmessagepush. todo:待optimize,mergepushalready读controlmessage
         if ($seqEntity->getObjectType() === ConversationType::User && ($seqEntity->getSeqType() instanceof ControlMessageType)) {
             SocketIOUtil::sendSequenceId($seqEntity);
         }
 
         if ($seqEntity->getObjectType() === ConversationType::Ai && ($seqEntity->getSeqType() instanceof ControlMessageType)) {
-            // ifisgiveAIneed触hairflowprocess控制message，触hairflowprocess
+            // ifisgiveAIneed触hairflowprocesscontrolmessage，触hairflowprocess
             $agentUserEntity = $seqUserEntity; // thiso clock seqUserEntity is AI
             $agentAccountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($agentUserEntity->getDelightfulId());
             if ($agentAccountEntity === null) {
@@ -309,7 +309,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         );
         $content = $ControlRequestData->getMessage()->getDelightfulMessage();
         $messageType = $ControlRequestData->getMessage()->getDelightfulMessage()->getMessageTypeEnum();
-        // 控制messagereceive方,needaccording to控制messagetypeagaincertain,thereforenotinthis处handle
+        // controlmessagereceive方,needaccording tocontrolmessagetypeagaincertain,thereforenotinthis处handle
         $time = date('Y-m-d H:i:s');
         $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setSenderId($userAuth->getId());

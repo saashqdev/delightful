@@ -583,7 +583,7 @@ readonly class AsrSandboxService
 
             // ifresponsesuccess（code 1000）andwork区alreadythen绪，直接return
             if ($responseCode === ResponseCode::SUCCESS && WorkspaceStatus::isReady($workspaceStatus)) {
-                $this->logger->info('检测to沙箱work区alreadythen绪，no需initialize', [
+                $this->logger->info('detectto沙箱work区alreadythen绪，no需initialize', [
                     'task_key' => $taskStatus->taskKey,
                     'sandbox_id' => $requestedSandboxId,
                     'status' => $workspaceStatus,
@@ -596,7 +596,7 @@ readonly class AsrSandboxService
             }
 
             // ifresponsesuccessbutwork区notinitialize，orresponsefail，needinitializework区
-            $this->logger->info('检测to沙箱work区notinitializeorresponseexception，needinitializework区', [
+            $this->logger->info('detectto沙箱work区notinitializeorresponseexception，needinitializework区', [
                 'task_key' => $taskStatus->taskKey,
                 'sandbox_id' => $requestedSandboxId,
                 'response_code' => $responseCode,

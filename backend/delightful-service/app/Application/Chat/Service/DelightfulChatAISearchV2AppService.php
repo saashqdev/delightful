@@ -579,7 +579,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $extraContentParallel = new Parallel(3);
         $modelInterface = $this->getChatModel($dto->getOrganizationCode(), $dto->getUserId());
         $extraContentParallel->add(function () use ($summarize, $dto, $modelInterface) {
-            // odin willmodify vo objectmiddlevalue，避免污染，copyagain传入
+            // odin willmodify vo objectmiddlevalue，avoid污染，copyagain传入
             CoContext::setRequestId($dto->getRequestId());
             // 思维导graph
             $mindMapQueryVo = $this->getSearchVOByAggregateSearchDTO($dto, $summarize);

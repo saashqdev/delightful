@@ -76,7 +76,7 @@ class ResponseMiddleware implements MiddlewareInterface
             throw $throwable;
         } finally {
             $endTime = microtime(true);
-            // 避免阻塞response
+            // avoid阻塞response
             defer(function () use ($request, $response, $startTime, $endTime) {
                 $path = $request->getUri()->getPath();
                 if (in_array($path, $this->ignoreUris, true)) {

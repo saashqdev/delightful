@@ -241,7 +241,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             'refer_message_id' => '',
             'sender_message_id' => '',
             'conversation_id' => $seqContent['conversation_id'] ?? '',
-            'status' => DelightfulMessageStatus::Read->value, // 控制messagenotneedalready读return执
+            'status' => DelightfulMessageStatus::Read->value, // controlmessagenotneedalready读return执
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => '',
@@ -303,7 +303,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 'seq_type' => $controlMessageType->value,
                 'content' => Json::encode($userContent, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
                 'receive_list' => '',
-                'delightful_message_id' => '', // 控制messagenotcanhave delightful_message_id
+                'delightful_message_id' => '', // controlmessagenotcanhave delightful_message_id
                 'message_id' => $seqId,
                 'refer_message_id' => '',
                 'sender_message_id' => '',

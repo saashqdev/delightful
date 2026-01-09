@@ -35,7 +35,7 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'according tofile名getfileupload预signatureURL。仅can操as本process产生file';
+        return 'according tofile名getfileupload预signatureURL。仅can操as本processproducefile';
     }
 
     public function getCallback(): ?Closure
@@ -49,7 +49,7 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
             }
             $organizationCode = $executionData->getDataIsolation()->getCurrentOrganizationCode();
 
-            // permissionissue，目front仅allow操as本process产生file。因forcurrenttoolalsoisone flow，所byneedget父process code
+            // permissionissue，目front仅allow操as本processproducefile。因forcurrenttoolalsoisone flow，所byneedget父process code
             $name = $executionData->getParentFlowCode() . '/' . ltrim($name, '/');
 
             $fileDomain = di(FileDomainService::class);

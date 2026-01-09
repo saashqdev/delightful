@@ -109,7 +109,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             return [];
         }
 
-        // 建立configurationIDtoservicequotient实bodymapping
+        // establishconfigurationIDtoservicequotient实bodymapping
         // 两arrayallisby id for key，can直接access
         $configToProviderMap = [];
         foreach ($configEntities as $configId => $config) {
@@ -309,7 +309,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotFound);
         }
 
-        // 4. use互斥lock防止andhaircreate
+        // 4. use互斥lockpreventandhaircreate
         $lockName = sprintf(
             'update_template_config_%s_%s_%s',
             $dataIsolation->getCurrentOrganizationCode(),
@@ -348,7 +348,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderConfigError);
         }
 
-        // getto应 Provider infoconduct业务rulevalidate
+        // getto应 Provider infoconductbusinessrulevalidate
         $provider = $this->getProviderById($dataIsolation, $existingConfigEntity->getServiceProviderId());
         if ($provider === null) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotFound);

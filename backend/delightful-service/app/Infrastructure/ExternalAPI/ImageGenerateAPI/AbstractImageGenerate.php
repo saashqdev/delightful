@@ -114,7 +114,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
                 'owner' => $owner,
                 'error' => $e->getMessage(),
             ]);
-            // lockreleasefailnot影响业务逻辑，butwantrecordlog
+            // lockreleasefailnotimpactbusiness逻辑，butwantrecordlog
         }
     }
 
@@ -137,7 +137,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
                     $processedData[$index] = $this->watermarkProcessor->addWatermarkToUrl($imageData, $imageGenerateRequest);
                 }
             } catch (Exception $e) {
-                // watermarkprocessfailo clock，recorderrorbutnot影响imagereturn
+                // watermarkprocessfailo clock，recorderrorbutnotimpactimagereturn
                 $this->logger->error('imagewatermarkprocessfail', [
                     'index' => $index,
                     'error' => $e->getMessage(),

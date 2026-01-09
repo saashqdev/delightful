@@ -23,7 +23,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Qbhy\HyperfAuth\Authenticatable;
 
 /**
- * if改thiscategoryname/property/命名emptybetween，请modify WebUserGuard.php  cacheKey ，避免cacheno法also原
+ * if改thiscategoryname/property/命名emptybetween，请modify WebUserGuard.php  cacheKey ，avoidcacheno法also原
  */
 class DelightfulUserAuthorization extends AbstractAuthorization
 {

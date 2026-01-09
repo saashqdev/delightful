@@ -267,7 +267,7 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => 'finger令parameterarray，useat控制AI助理linefor。eachobjectcontain name（finger令name）and value（finger令value）field。single-selecttypefinger令needfromoptionalvaluemiddlechooseone，switchtypefinger令只canis "on" or "off"。',
+            'description' => 'finger令parameterarray，useatcontrolAI助理linefor。eachobjectcontain name（finger令name）and value（finger令value）field。single-selecttypefinger令needfromoptionalvaluemiddlechooseone，switchtypefinger令只canis "on" or "off"。',
             'items' => [
                 'type' => 'object',
                 'properties' => [

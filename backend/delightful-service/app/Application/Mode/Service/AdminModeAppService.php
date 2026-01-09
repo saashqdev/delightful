@@ -23,12 +23,12 @@ use Hyperf\DbConnection\Db;
 class AdminModeAppService extends AbstractModeAppService
 {
     /**
-     * get模typelist (管理back台use，containcompletei18nfield).
+     * get模typelist (manageback台use，containcompletei18nfield).
      */
     public function getModes(DelightfulUserAuthorization $authorization, Page $page): array
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
-        // 管理back台query：sort降序，notfilterdefault模type
+        // manageback台query：sort降序，notfilterdefault模type
         $query = new ModeQuery('desc', false);
         $result = $this->modeDomainService->getModes($dataIsolation, $query, $page);
 
@@ -79,7 +79,7 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * create模type (管理back台use).
+     * create模type (manageback台use).
      */
     public function createMode(DelightfulUserAuthorization $authorization, CreateModeRequest $request): AdminModeDTO
     {

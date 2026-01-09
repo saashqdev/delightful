@@ -111,9 +111,9 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         // 4. 现intest2userbecomeformember，butpermissionnot足 - addmembershouldfail
         $this->switchUserTest2();
-        $this->addTeamMembers($projectId, 51202); // 仍然nopermission，因fornotis管理者
+        $this->addTeamMembers($projectId, 51202); // 仍然nopermission，因fornotismanage者
 
-        // 5. givetest2user管理permission
+        // 5. givetest2usermanagepermission
         $this->switchUserTest1();
         $this->updateMemberToManager($projectId, $this->testUserId2);
 
@@ -123,7 +123,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * test协assetting管理.
+     * test协assettingmanage.
      */
     public function testCollaborationSettings(): void
     {
@@ -152,7 +152,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * testbatchquantity操aspermission控制.
+     * testbatchquantity操aspermissioncontrol.
      */
     public function testBatchOperationsPermissionControl(): void
     {
@@ -163,21 +163,21 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->enableCollaboration($projectId);
         $this->addTeamMembers($projectId);
 
-        // 2. non管理者尝试batchquantityupdatepermission - shouldfail
+        // 2. nonmanage者尝试batchquantityupdatepermission - shouldfail
         $this->switchUserTest2();
         $this->batchUpdateMemberPermissions($projectId, 51202);
 
-        // 3. non管理者尝试batchquantitydeletemember - shouldfail
+        // 3. nonmanage者尝试batchquantitydeletemember - shouldfail
         $this->batchDeleteMembers($projectId, 51202);
 
-        // 4. 管理者canconductbatchquantity操as
+        // 4. manage者canconductbatchquantity操as
         $this->switchUserTest1();
         $this->batchUpdateMemberPermissions($projectId);
         $this->batchDeleteMembers($projectId);
     }
 
     /**
-     * testorganizationside界控制.
+     * testorganizationside界control.
      */
     public function testOrganizationBoundaryControl(): void
     {
@@ -363,7 +363,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * addmore多teammember（test管理者permission）.
+     * addmore多teammember（testmanage者permission）.
      */
     public function addMoreTeamMembers(string $projectId, int $expectedCode = 1000): array
     {
@@ -501,7 +501,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * updatememberfor管理者.
+     * updatememberformanage者.
      */
     public function updateMemberToManager(string $projectId, string $userId): array
     {

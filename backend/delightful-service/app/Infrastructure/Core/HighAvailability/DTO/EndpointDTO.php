@@ -11,13 +11,13 @@ use App\Infrastructure\Core\AbstractDTO;
 use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\CircuitBreakerStatus;
 
 /**
- * useatin业务processmiddlemeanwhilesave业务IDand高canusegroupitem接入pointdatabaseID.
+ * useatinbusinessprocessmiddlemeanwhilesavebusinessIDand高canusegroupitem接入pointdatabaseID.
  */
 class EndpointDTO extends AbstractDTO
 {
     /**
      * getEndpointList interfacereturn id。
-     * different业务含义different。toatmodel网closecome说，thiswithin id is service_provider_models table id。
+     * differentbusinessimplicationdifferent。toatmodel网closecome说，thiswithin id is service_provider_models table id。
      * front端maybenot supported bigint，所bythiswithinuse string.
      */
     protected ?string $businessId = null;
@@ -219,7 +219,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * get业务ID.
+     * getbusinessID.
      */
     public function getBusinessId(): ?string
     {
@@ -227,7 +227,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * set业务ID.
+     * setbusinessID.
      */
     public function setBusinessId(null|int|string $businessId): static
     {

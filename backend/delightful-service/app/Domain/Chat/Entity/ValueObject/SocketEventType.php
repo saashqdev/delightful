@@ -15,13 +15,13 @@ enum SocketEventType: string
     // connect
     case Connect = 'connect';
 
-    // login. bybacklogincan投oneitem控制message,comeimplementuplinenotifyetc逻辑
+    // login. bybacklogincan投oneitemcontrolmessage,comeimplementuplinenotifyetc逻辑
     case Login = 'login';
 
     // chatmessage
     case Chat = 'chat';
 
-    // 控制message
+    // controlmessage
     case Control = 'control';
 
     // streammessage

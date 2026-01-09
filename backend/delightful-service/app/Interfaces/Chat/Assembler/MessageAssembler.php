@@ -223,13 +223,13 @@ class MessageAssembler
     }
 
     /**
-     * get控制message结构.
+     * getcontrolmessage结构.
      */
     public static function getControlMessageStruct(ControlMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
         // its实can直接use protobuf generate php object,butis暂o clocknothavetimeallquantity替换,bybackagain说.
         return match ($messageTypeEnum) {
-            # 控制message
+            # controlmessage
             ControlMessageType::CreateConversation => new ConversationWindowCreateMessage($messageStructArray),
             ControlMessageType::OpenConversation => new ConversationWindowOpenMessage($messageStructArray),
             ControlMessageType::TopConversation => new ConversationTopMessage($messageStructArray),

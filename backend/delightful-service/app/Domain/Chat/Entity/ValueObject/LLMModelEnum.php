@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject;
 
 /**
- * model管理back台 model_id maybesupporttype枚举value。
+ * modelmanageback台 model_id maybesupporttype枚举value。
  * notwant枚举servicequotient接入point，thiswithinisandservicequotientnocloseconfiguration.
  */
 enum LLMModelEnum: string

@@ -304,7 +304,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
                 // handlebase64formatimage
                 $item['b64_json'] = $this->watermarkProcessor->addWatermarkToBase64($item['b64_json'], $imageGenerateRequest);
             } catch (Exception $e) {
-                // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
+                // watermarkhandlefailo clock，recorderrorbutnotimpactimagereturn
                 $this->logger->error('Azure OpenAIimagewatermarkhandlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),

@@ -93,7 +93,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         }
         // sendadd好友message。add好友splitfor：好友申请/好友agree/好友reject
         if ($addFriendType === AddFriendType::PASS) {
-            // sendadd好友控制message
+            // sendadd好友controlmessage
             $friendUserEntity = new DelightfulUserEntity();
             $friendUserEntity->setUserId($friendId);
             $this->sendAddFriendControlMessage($dataIsolation, $friendUserEntity);
@@ -102,7 +102,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * toAIassistantsendadd好友控制message.
+     * toAIassistantsendadd好友controlmessage.
      * @throws Throwable
      */
     public function sendAddFriendControlMessage(DataIsolation $dataIsolation, DelightfulUserEntity $friendUserEntity): bool
@@ -143,7 +143,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $receiverConversationEntity = new DelightfulConversationEntity();
         $receiverConversationEntity->setUserId($messageStruct->getReceiveId());
         $receiverConversationEntity->setUserOrganizationCode($dataIsolation->getCurrentOrganizationCode());
-        // 通use控制messagehandle逻辑
+        // 通usecontrolmessagehandle逻辑
         $this->delightfulChatDomainService->handleCommonControlMessage($messageDTO, $conversationEntity, $receiverConversationEntity);
 
         return true;

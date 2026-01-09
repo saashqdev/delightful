@@ -17,8 +17,8 @@ use Psr\Container\NotFoundExceptionInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * 沙箱管理 Mock service
- * 模拟沙箱create、statusquery、work区statusetc管理interface.
+ * 沙箱manage Mock service
+ * 模拟沙箱create、statusquery、work区statusetcmanageinterface.
  */
 class SandboxApi
 {

@@ -118,7 +118,7 @@ class ModelGatewayMapper extends ModelMapper
     /**
      * themethodgettoone定istrue实callmodel.
      * 仅 ModelGateway 领域use.
-     * @param string $model expectedis管理back台 model_id，passdegree阶segmentaccept传入 model_version
+     * @param string $model expectedismanageback台 model_id，passdegree阶segmentaccept传入 model_version
      */
     public function getOrganizationChatModel(BaseDataIsolation $dataIsolation, string $model): ModelInterface|OdinModel
     {
@@ -133,7 +133,7 @@ class ModelGatewayMapper extends ModelMapper
     /**
      * themethodgettoone定istrue实callmodel.
      * 仅 ModelGateway 领域use.
-     * @param string $model modelname expectedis管理back台 model_id，passdegree阶segmentaccept model_version
+     * @param string $model modelname expectedismanageback台 model_id，passdegree阶segmentaccept model_version
      */
     public function getOrganizationEmbeddingModel(BaseDataIsolation $dataIsolation, string $model): EmbeddingInterface|OdinModel
     {

@@ -48,7 +48,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         if (! isset($usersInfo[$uid], $usersInfo[$friendId])) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
-        // 检测whetheralready经is好友
+        // detectwhetheralready经is好友
         if ($this->friendRepository->isFriend($uid, $friendId)) {
             return true;
         }
@@ -347,7 +347,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return $cachedResult;
         }
 
-        // addlockhandle，防止andhairrequest
+        // addlockhandle，preventandhairrequest
         $owner = $this->acquireLock($lockKey);
 
         try {

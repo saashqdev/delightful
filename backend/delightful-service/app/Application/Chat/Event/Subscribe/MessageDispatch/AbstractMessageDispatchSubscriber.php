@@ -32,7 +32,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
     protected AmqpTopicType $topic = AmqpTopicType::Message;
 
     /**
-     * 1.本groundopenhairo clocknotstart,避免消费testenvironmentdata,导致testenvironmentuser收nottomessage
+     * 1.本groundopenhairo clocknotstart,avoid消费testenvironmentdata,导致testenvironmentuser收nottomessage
      * 2.if本groundopenhairo clock想debug,请fromlinein本ground搭建front端environment,more换mqhost. or者申请onedevenvironment,隔离mq.
      */
     public function isEnable(): bool
@@ -62,7 +62,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
             }
             foreach ($seqIds as $seqId) {
                 $seqId = (string) $seqId;
-                // useredis检测seqwhetheralready经尝试多time,if超pass n time,thennotagainpush
+                // useredisdetectseqwhetheralready经尝试多time,if超pass n time,thennotagainpush
                 $seqRetryKey = sprintf('messageDispatch:seqRetry:%s', $seqId);
                 $seqRetryCount = $this->redis->get($seqRetryKey);
                 if ($seqRetryCount >= 3) {
@@ -86,7 +86,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 }
                 $this->setRequestId($userSeqEntity->getAppMessageId());
                 $this->logger->info(sprintf('messageDispatch startminutehairmessage seq:%s seqEntity:%s ', $seqId, Json::encode($userSeqEntity->toArray())));
-                // ifis控制message,checkwhetherisneedminutehair控制message
+                // ifiscontrolmessage,checkwhetherisneedminutehaircontrolmessage
                 if ($userSeqEntity->getSeqType() instanceof ControlMessageType) {
                     $this->delightfulControlMessageAppService->dispatchMQControlMessage($userSeqEntity);
                     $this->setSeqCanNotRetry($seqRetryKey);
@@ -116,7 +116,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessagequality保证模piece,ifisservice器stress大导致fail,then放入delayretryqueue,andfinger数level延长retrytimebetween隔
+            // todo callmessagequalityguarantee模piece,ifisservice器stress大导致fail,then放入delayretryqueue,andfinger数level延长retrytimebetween隔
             return Result::REQUEUE;
         } finally {
             if (isset($lockKey, $owner)) {

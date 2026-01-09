@@ -17,7 +17,7 @@ use Mockery;
 
 /**
  * @internal
- * projectmember管理APItest
+ * projectmembermanageAPItest
  */
 class ProjectMemberApiTest extends AbstractApiTest
 {
@@ -31,7 +31,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
     protected function setUp(): void
     {
-        // cleanupprojectmemberdata，避免唯onekeyconflict
+        // cleanupprojectmemberdata，avoid唯onekeyconflict
         $this->cleanupProjectMembers($this->projectId);
         parent::setUp();
     }
@@ -80,14 +80,14 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         $this->updateMembers($projectId);
 
-        // 10. testfileeditstatus管理feature
+        // 10. testfileeditstatusmanagefeature
         $this->fileEditingStatusManagement($fileId);
 
         $this->fileEditingEdgeCases($fileId);
     }
 
     /**
-     * testproject置toppermission控制.
+     * testproject置toppermissioncontrol.
      */
     public function testProjectPinPermission(): void
     {
@@ -109,7 +109,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
-        // 5. 切换tonothavepermissionusertestpermission控制
+        // 5. 切换tonothavepermissionusertestpermissioncontrol
         $this->switchUserTest2();
         // testnonprojectmembernotcan置top - shouldreturnpermissionerror
         $this->pinProject($projectId, true, 51202); // false设51202ispermissionerror码
@@ -181,7 +181,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateProject($workspaceId, $projectId);
         $this->updateProject($workspaceId, $projectId);
 
-        // ensurenotwillto原havefeature造become影响
+        // ensurenotwillto原havefeature造becomeimpact
         // create话题
         $topicId = $this->createTopic($workspaceId, $projectId);
         // 话题column表
@@ -495,7 +495,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * testfileeditstatus管理 - completeprocesstest.
+     * testfileeditstatusmanage - completeprocesstest.
      */
     public function fileEditingStatusManagement(string $fileId): void
     {
@@ -592,7 +592,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * testfileeditpermission控制.
+     * testfileeditpermissioncontrol.
      */
     public function fileEditingPermissionControl(string $unauthorizedFileId): void
     {
@@ -788,7 +788,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
 
-        // 2. testpermission控制 - 清nullmemberbacknopermission
+        // 2. testpermissioncontrol - 清nullmemberbacknopermission
         $this->switchUserTest1(); // 切换toproject所have者
         $this->updateEmptyMembers($this->projectId); // 清nullprojectmember
 
@@ -796,13 +796,13 @@ class ProjectMemberApiTest extends AbstractApiTest
         $emptyResponse = $this->getCollaborationProjectCreators();
         $this->verifyEmptyCreatorListResponse($emptyResponse);
 
-        // 3. restoreprojectmemberstatus，by免影响back续test
+        // 3. restoreprojectmemberstatus，by免impactback续test
         $this->switchUserTest1();
         $this->updateMembers($this->projectId);
     }
 
     /**
-     * test协asprojectcreate者column表permission控制.
+     * test协asprojectcreate者column表permissioncontrol.
      */
     public function testCollaborationProjectCreatorsPermission(): void
     {
@@ -821,7 +821,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
-        // 4. 切换tonothavepermissionusertestpermission控制
+        // 4. 切换tonothavepermissionusertestpermissioncontrol
         $this->switchUserTest2();
         $emptyResponse = $this->getCollaborationProjectCreators();
         //        $this->verifyEmptyCreatorListResponse($emptyResponse);

@@ -45,7 +45,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimizeversion：直接getenable助理version，避免传入大quantityID.
+     * optimizeversion：直接getenable助理version，avoid传入大quantityID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -198,7 +198,7 @@ class DelightfulAgentVersionDomainService
 
         // if MINOR 达to 10，enter位to MAJOR（canaccording to需求adjustthisrule）
         if ($minor > 99) {
-            // notresetminor，whileis直接增大major，避免not必wantreset
+            // notresetminor，whileis直接增大major，avoidnot必wantreset
             $minor = 0;
             $major = (int) $major + 1;
         }

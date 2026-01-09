@@ -132,7 +132,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 $currentModel = $model->getModelName();
                 $visionModel = $paramsConfig->getModelConfig()->getVisionModel();
 
-                // only currentmodeland视觉modelnotone致，or者 currentmodelnot supported多模state o clock。in视觉modeltoolmiddle，currentmodelequal视觉modelandand具have视觉can力，thennotwill产生死loop
+                // only currentmodeland视觉modelnotone致，or者 currentmodelnot supported多模state o clock。in视觉modeltoolmiddle，currentmodelequal视觉modelandand具have视觉can力，thennotwillproduce死loop
                 if ($currentModel !== $visionModel || ! $model->getModelOptions()->isMultiModal()) {
                     $multiModalLoglog = MultiModalBuilder::vision(
                         executionData: $executionData,

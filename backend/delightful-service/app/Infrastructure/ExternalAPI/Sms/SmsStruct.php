@@ -51,7 +51,7 @@ class SmsStruct
     public ?string $language = null;
 
     /**
-     * 短信default语type,support业务方customize. not传givedefaultvaluezh_CN.
+     * 短信default语type,supportbusiness方customize. not传givedefaultvaluezh_CN.
      */
     public ?string $defaultLanguage = null;
 

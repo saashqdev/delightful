@@ -750,7 +750,7 @@ class DelightfulAgentAppService extends AbstractAppService
                     // add好友，assistantdefaultagree好友
                     $friendId = $aiUserEntity->getUserId();
                     $this->delightfulUserDomainService->addFriend($dataIsolation, $friendId);
-                    // sendadd好友控制message
+                    // sendadd好友controlmessage
                     $friendUserEntity = new DelightfulUserEntity();
                     $friendUserEntity->setUserId($friendId);
                     di(DelightfulUserContactAppService::class)->sendAddFriendControlMessage($dataIsolation, $friendUserEntity);
@@ -854,7 +854,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // 尝试getlock，timeouttimesettingfor60second
         if (! $this->redisLocker->mutexLock($lockKey, $userId, 60)) {
             $this->logger->warning(sprintf('get initAgents lockfail, orgCode: %s, userId: %s', $orgCode, $userId));
-            // getlockfail，canchoose直接returnorthrowexception，thiswithinchoose直接return避免阻塞
+            // getlockfail，canchoose直接returnorthrowexception，thiswithinchoose直接returnavoid阻塞
             return;
         }
 
@@ -1030,11 +1030,11 @@ class DelightfulAgentAppService extends AbstractAppService
 
     /**
      * getenableassistantversioncolumn表.
-     * optimize：直接in领域servicelayerconductJOINquery，避免传入pass多ID.
+     * optimize：直接in领域servicelayerconductJOINquery，avoid传入pass多ID.
      */
     private function getEnabledAgentVersions(string $organizationCode, int $page, int $pageSize, string $agentName): array
     {
-        // 直接call领域servicegettheorganizationdownenableassistantversion，避免先get所haveIDagainquery
+        // 直接call领域servicegettheorganizationdownenableassistantversion，avoid先get所haveIDagainquery
         return $this->delightfulAgentVersionDomainService->getEnabledAgentsByOrganization($organizationCode, $page, $pageSize, $agentName);
     }
 
@@ -1128,8 +1128,8 @@ class DelightfulAgentAppService extends AbstractAppService
 
     /**
      * getassistanttotal.
-     * optimize：useJOINquery避免传入大quantityID.
-     * optimize：useJOINquery避免传入大quantityID.
+     * optimize：useJOINqueryavoid传入大quantityID.
+     * optimize：useJOINqueryavoid传入大quantityID.
      */
     private function getTotalAgentsCount(string $organizationCode, string $agentName): int
     {
@@ -1166,7 +1166,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $flowCodes[] = $agent['flow_code'];
         }
 
-        // batchquantitygetavatarlink，避免loopcallgetLink
+        // batchquantitygetavatarlink，avoidloopcallgetLink
         $fileLinks = [];
         if (! empty($avatarPaths)) {
             $fileLinks = $this->fileDomainService->getLinks($authorization->getOrganizationCode(), array_unique($avatarPaths));

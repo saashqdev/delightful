@@ -40,7 +40,7 @@ class VariableArrayPushNodeRunner extends NodeRunner
         $result = $inputFields->getForm()->getKeyValue($executionData->getExpressionFieldData());
         $variableName = $result['variable_name'];
 
-        // 检测原comedatawhether存in，andisarray
+        // detect原comedatawhether存in，andisarray
         $variableElementList = $executionData->variableGet($variableName);
         if (is_null($variableElementList)) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.variable.variable_not_exist', ['var_name' => $variableName]);

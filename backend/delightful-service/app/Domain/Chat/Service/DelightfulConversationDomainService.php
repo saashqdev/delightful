@@ -91,7 +91,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
 
     /**
      * openconversationwindow.
-     * 控制message,只inseq表writedata,notinmessage表写.
+     * controlmessage,只inseq表writedata,notinmessage表写.
      * @throws Throwable
      */
     public function openConversationWindow(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
@@ -137,7 +137,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             // givefrom己messagestreamgenerate序column.
             $seqEntity = $this->generateSenderSequenceByControlMessage($messageDTO, $conversationEntity->getId());
             $seqEntity->setConversationId($conversationEntity->getId());
-            // notifyuserother设备,thiswithineven if投递failalsonot影响,所by放协程within,transactionoutside.
+            // notifyuserother设备,thiswithineven if投递failalsonotimpact,所by放协程within,transactionoutside.
             co(function () use ($seqEntity) {
                 // asyncpushmessagegivefrom己other设备
                 $this->pushControlSequence($seqEntity);
@@ -171,7 +171,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
                 return [];
             }
             $this->checkAndGetSelfConversation($messageStruct->getConversationId(), $dataIsolation);
-            // generate控制message,pushgive收hairdoublehair
+            // generatecontrolmessage,pushgive收hairdoublehair
             $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($messageStruct->getConversationId());
             if ($receiveConversationEntity === null) {
                 // checkto方whether存inconversation,ifnot存in直接return
@@ -218,7 +218,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $messageDTO->setContent($content);
         /** @var ConversationEndInputMessage|ConversationStartInputMessage $messageStruct */
         $messageStruct = $messageDTO->getContent();
-        // generate控制message,push收item方
+        // generatecontrolmessage,push收item方
         $messageStruct->setConversationId($receiveConversationEntity->getId());
         $messageDTO->setContent($messageStruct);
         // generatemessagestreamgenerate序column.
@@ -256,7 +256,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $messageDTO->setContent($content);
         /** @var ConversationEndInputMessage|ConversationStartInputMessage $messageStruct */
         $messageStruct = $messageDTO->getContent();
-        // generate控制message,push收item方
+        // generatecontrolmessage,push收item方
         $messageStruct->setConversationId($receiveConversationEntity->getId());
         $messageStruct->setTopicId($topicId);
         $messageDTO->setContent($messageStruct);
@@ -269,7 +269,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             'seq_type' => $messageDTO->getMessageType()->getName(),
             'content' => $content->toArray(),
             'conversation_id' => $receiveConversationEntity->getId(),
-            'status' => DelightfulMessageStatus::Read->value, // 控制messagenotneedalready读return执
+            'status' => DelightfulMessageStatus::Read->value, // controlmessagenotneedalready读return执
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => $messageDTO->getAppMessageId(),

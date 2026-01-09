@@ -199,7 +199,7 @@ class KnowledgeSimilarityNodeParamsConfig extends AbstractKnowledgeNodeParamsCon
                             "type": "string",
                             "key": "business_id",
                             "sort": 0,
-                            "title": "业务 ID",
+                            "title": "business ID",
                             "description": "",
                             "required": null,
                             "value": null,

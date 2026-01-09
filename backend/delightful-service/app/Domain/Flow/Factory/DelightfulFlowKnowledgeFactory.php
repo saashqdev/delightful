@@ -45,7 +45,7 @@ class DelightfulFlowKnowledgeFactory
 
         // process检索configuration
         if (! empty($model->retrieve_config)) {
-            // if是string（JSON string），先解码
+            // if是string（JSON string），先decoding
             $config = json_decode($model->retrieve_config, true);
 
             if (is_array($config)) {

@@ -76,7 +76,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $permissions = $this->permissionEnum->generateAllPermissions();
 
         $this->assertIsArray($permissions);
-        // shouldhave 2 资源 × 2 操作 = 4 permission（rowexceptexport操作）
+        // shouldhave 2 resource × 2 操作 = 4 permission（rowexceptexport操作）
         $this->assertCount(4, $permissions);
 
         // checkpermission结构

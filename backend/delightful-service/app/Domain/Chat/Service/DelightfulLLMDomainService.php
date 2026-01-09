@@ -152,7 +152,7 @@ class DelightfulLLMDomainService
     handle步骤：
     1.1 实body识别
        - 显property命名实body提取，识别实bodybetween的关系与property
-       - 推导user的隐property需求和潜in意图，especially关注隐含的time因素
+       - 推导user的隐property需求和潜in意graph，especially关注隐含的time因素
     1.2 dimension拆解
        - according to识别出的实body和需求，选择合适的analyzedimension，for example：政策解读、datavalidate、案例研究、影响评估、技术原理、市场front景、userbody验etc
     1.3 子questiongenerate
@@ -186,7 +186,7 @@ class DelightfulLLMDomainService
       "Z领域的典型application",  // application/案例category
       "关atA的Bfinger标",    // finger标/propertycategory
       "导致Mhair生的mainreason是什么？", // reason/机制category
-      "什么是N？它的核core特征是什么？", // 定义/解释category
+      "什么是N？它的核core特征是什么？", // definition/解释category
       "未来五yearP领域的hair展趋势是什么？", // 趋势/预测category
       "针对Qquestion，have哪些可line的resolvesolution？" // resolvesolution/suggestioncategory
     ]
@@ -207,7 +207,7 @@ class DelightfulLLMDomainService
     - 今day是{date_now}。
     - 并nonsearchresult的所havecontentall与user的question密切相关，你need结合question，对searchresultconduct甄别、filter。
     - 对atcolumn举category的question（如column举所have航班information），尽quantity将答案控制in10要pointbyinside，并告诉usercan查看search来源、获得完整information。优先提供information完整、most相关的column举item；如non必要，not要主动告诉usersearchresult未提供的content。
-    - 对at创作category的question（如写论文），请务必in正文的segment落middlequote对应的参考编number，for example[citation:3][citation:5]，not能只in文chapter末tailquote。你need解读并概括user的题目要求，选择合适的format，充minute利usesearchresult并抽取重要information，generatematchuser要求、极具思想深degree、富have创造力与专业property的答案。你的创作篇幅need尽可能延长，对ateach一要point的论述要推测user的意图，给出尽可能多angledegree的回答要point，and务必informationquantity大、论述详尽。
+    - 对at创作category的question（如写论文），请务必in正文的segment落middlequote对应的参考编number，for example[citation:3][citation:5]，not能只in文chapter末tailquote。你need解读并概括user的题目要求，选择合适的format，充minute利usesearchresult并抽取重要information，generatematchuser要求、极具思想深degree、富have创造力与专业property的答案。你的创作篇幅need尽可能延长，对ateach一要point的论述要推测user的意graph，给出尽可能多angledegree的回答要point，and务必informationquantity大、论述详尽。
     - if回答very长，请尽quantity结构化、minutesegment落总结。ifneedminutepoint作答，尽quantity控制in5pointbyinside，并merge相关的content。
     - 对at客观category的问答，ifquestion的答案non常简短，can适when补充一to两sentence相关information，by丰富content。
     - 你needaccording touser要求和回答content选择合适、美观的回答format，ensure可读property强。
@@ -236,7 +236,7 @@ class DelightfulLLMDomainService
        - 若同一eventin多quotemiddle出现，优先usemost早的time。
        - 若timenot明确，according tocontext推测most早可能的time，并ensure合理。
     3. **event提取与filter**：
-       - **event定义**：event是searchcontentmiddlemention的、具havetimeassociate（明确or可推测）的独立事实、变化oractivity，includebutnot限atcreate、publish、开业、update、合作、activityetc。
+       - **eventdefinition**：event是searchcontentmiddlemention的、具havetimeassociate（明确or可推测）的独立事实、变化oractivity，includebutnot限atcreate、publish、开业、update、合作、activityetc。
        - according touserquestion，提取与之相关的event，保持description简洁，聚焦specifichair生的事情。
        - **skip无关content**：
          - 纯静statedescription（如not变的property、background介绍，无time变化）。
@@ -266,7 +266,7 @@ class DelightfulLLMDomainService
     ```
     ## useinstruction
     - user需提供searchcontent（containquotemark如 [[citation:x]]）和specificquestion。
-    - according toquestion，fromsearchcontentmiddle提取matchevent定义的content，按要求generateoutput。
+    - according toquestion，fromsearchcontentmiddle提取matcheventdefinition的content，按要求generateoutput。
     - 若question涉及currenttime，based on {date_now} conduct推算。
     
     ## quote
@@ -321,7 +321,7 @@ class DelightfulLLMDomainService
 
     public function generatePPTFromMindMap(AISearchCommonQueryVo $queryVo, string $mindMap): string
     {
-        // 直接use思维导图generate ppt
+        // 直接use思维导graphgenerate ppt
         return $mindMap;
     }
 
@@ -345,7 +345,7 @@ class DelightfulLLMDomainService
             }
         } catch (Exception) {
         }
-        // 去except掉quote，避免思维导图middle出现quote
+        // 去except掉quote，避免思维导graphmiddle出现quote
         $responseMessage = preg_replace('/\[\[citation:(\d+)]]/', '', $responseMessage);
         // 观察to系统hint词variable串了，看看是not是nothave复制一share的question
         $systemPrompt = str_replace(
@@ -358,7 +358,7 @@ class DelightfulLLMDomainService
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
         // access llm
         try {
-            // according to总结 + useroriginalquestion已经能generate思维导图了，notneedagain传入historymessage
+            // according to总结 + useroriginalquestion已经能generate思维导graph了，notneedagain传入historymessage
             $mindMapMessage = $this->llmChat(
                 $systemPrompt,
                 $responseMessage,
@@ -377,7 +377,7 @@ class DelightfulLLMDomainService
             ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
             return $this->stripMarkdownCodeBlock($mindMapMessage, 'markdown');
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('mindSearch generate思维导图o clockhair生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            $this->logger->error(sprintf('mindSearch generate思维导grapho clockhair生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
             throw $e;
         }
     }
@@ -893,12 +893,12 @@ class DelightfulLLMDomainService
         $subQuestions = [];
         // based onquery和contextget相关question
         try {
-            // use array_map 和 join 函数来模拟 Python middle的 join method
+            // use array_map 和 join function来模拟 Python middle的 join method
             $contextString = '';
             foreach ($searchContexts as $searchContext) {
                 $contextString .= $searchContext->getSnippet() . "\n\n";
             }
-            // use str_replace 函数来替换占位符
+            // use str_replace function来替换占位符
             // 带upyearmonthdayo clockminutesecond，避免重复question
             $systemPrompt = str_replace(
                 ['{context}', '{date_now}', '{sub_questions_min}', '{sub_questions_max}'],

@@ -59,7 +59,7 @@ class ResponseMiddleware implements MiddlewareInterface
         $path = $request->getUri()->getPath();
         if (! in_array($path, $this->ignoreUris, true)) {
             // 提frontrecordrequestlog、request url、requesthead
-            $this->logger->info('request跟踪start', [
+            $this->logger->info('requesttracestart', [
                 'url' => $request->getRequestTarget(),
                 'method' => $request->getMethod(),
                 'headers' => $this->desensitizeRequestHeaders($request->getHeaders()),
@@ -84,7 +84,7 @@ class ResponseMiddleware implements MiddlewareInterface
                 }
                 // temporary加一down敏感filter
                 if (! str_contains($path, 'aes')) {
-                    $this->logger->info('request跟踪information', $this->formatMessage($request, $response, $startTime, $endTime));
+                    $this->logger->info('requesttraceinformation', $this->formatMessage($request, $response, $startTime, $endTime));
                 }
             });
         }

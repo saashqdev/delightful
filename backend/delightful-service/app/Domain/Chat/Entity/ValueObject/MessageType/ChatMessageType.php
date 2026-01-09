@@ -59,7 +59,7 @@ enum ChatMessageType: string
     // rich text
     case RichText = 'rich_text';
 
-    // AI文生图card
+    // AI文生graphcard
     case AIImageCard = 'ai_image_card';
 
     // image转高清

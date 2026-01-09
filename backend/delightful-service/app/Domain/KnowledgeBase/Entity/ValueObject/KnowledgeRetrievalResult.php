@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 /**
  * knowledge base检索resultvalueobject.
  *
- * 统一table示fromdifferent检索method（语义检索、all文检索、图检索etc）return的知识slicesegment
+ * 统一table示fromdifferent检索method（语义检索、all文检索、graph检索etc）return的知识slicesegment
  */
 class KnowledgeRetrievalResult extends AbstractValueObject
 {
@@ -27,7 +27,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     public const string TYPE_FULLTEXT = 'fulltext';
 
     /**
-     * 图检索type.
+     * graph检索type.
      */
     public const string TYPE_GRAPH = 'graph';
 
@@ -37,7 +37,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     public const string TYPE_HYBRID = 'hybrid';
 
     /**
-     * 唯一标识符.
+     * 唯一identifier.
      */
     private string $id = '';
 
@@ -66,7 +66,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     /**
      * fromknowledge baseslicesegment实bodycreate检索result.
      *
-     * @param string $id 唯一标识符
+     * @param string $id 唯一identifier
      * @param string $content content
      * @param string $businessId 业务ID
      * @param array $metadata yuandata
@@ -90,9 +90,9 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * from图datacreate检索result.
+     * fromgraphdatacreate检索result.
      *
-     * @param string $id 唯一标识符
+     * @param string $id 唯一identifier
      * @param string $content content
      * @param string $businessId 业务ID
      * @param array $metadata yuandata
@@ -122,7 +122,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * get唯一标识符.
+     * get唯一identifier.
      */
     public function getId(): string
     {
@@ -130,9 +130,9 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * set唯一标识符.
+     * set唯一identifier.
      *
-     * @param string $id 唯一标识符
+     * @param string $id 唯一identifier
      */
     public function setId(string $id): self
     {
@@ -233,7 +233,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * checkwhether为图检索type.
+     * checkwhether为graph检索type.
      */
     public function isGraph(): bool
     {

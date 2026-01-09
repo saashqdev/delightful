@@ -54,7 +54,7 @@ enum AiAbilityCode: string
             self::AudioFileRecognition => '本能力覆盖平台所haveaudiofile转文字的application场景，精准识别说话人、audio文字etcinfo。',
             self::AutoCompletion => '本能力覆盖平台所haveinputcontent自动补all的application场景，according to理解updown文为user自动补allcontent，由user选择whether采纳。',
             self::ContentSummary => '本能力覆盖平台所havecontent总结的application场景，对长篇document、报告or网页文chapterconduct深degreeanalyze。',
-            self::VisualUnderstanding => '本能力覆盖平台所haveneed让大modelconduct视觉理解的application场景，精准理解eachtype图像middle的contentby及复杂关系。',
+            self::VisualUnderstanding => '本能力覆盖平台所haveneed让大modelconduct视觉理解的application场景，精准理解eachtypegraph像middle的contentby及复杂关系。',
             self::SmartRename => '本能力覆盖平台所havesupport AI 重命名的application场景，according to理解updown文为user自动conductcontenttitle的命名。',
             self::AiOptimization => '本能力覆盖平台所havesupport AI optimizecontent的application场景，according to理解updown文为user自动对contentconductoptimize。',
             default => 'Unknown',

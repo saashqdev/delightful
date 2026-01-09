@@ -22,12 +22,12 @@ class CommentEntity extends AbstractEntity
     protected int $type;
 
     /**
-     * comment的资源id，for example云documentid、sheet表id.
+     * comment的resourceid，for example云documentid、sheet表id.
      */
     protected int $resourceId;
 
     /**
-     * comment的资源type，for example云document、sheet表.
+     * comment的resourcetype，for example云document、sheet表.
      */
     protected int $resourceType;
 

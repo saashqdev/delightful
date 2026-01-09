@@ -128,7 +128,7 @@ class FileParser
             ExceptionBuilder::throw(FlowErrorCode::Error, message: '无法openfilestream');
         }
 
-        // iffilesize未知，needindownload过程middle控制size
+        // iffilesize未知，needindownloadproceduremiddle控制size
         if (! $sizeKnown && $maxSize > 0) {
             self::downloadWithSizeControl($fileStream, $localFile, $maxSize);
         } else {
@@ -143,8 +143,8 @@ class FileParser
     /**
      * streamdownload并控制filesize.
      *
-     * @param resource $fileStream 远程filestream资源
-     * @param resource $localFile 本groundfilestream资源
+     * @param resource $fileStream 远程filestreamresource
+     * @param resource $localFile 本groundfilestreamresource
      * @param int $maxSize filesize限制（字section）
      * @throws Exception whenfilesize超限orwritefailo clock
      */

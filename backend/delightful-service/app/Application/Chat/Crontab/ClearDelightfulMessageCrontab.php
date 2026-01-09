@@ -11,7 +11,7 @@ use Carbon\Carbon;
 use Hyperf\Crontab\Annotation\Crontab;
 use Psr\Log\LoggerInterface;
 
-// #[Crontab(rule: '*/1 * * * *', name: 'ClearDelightfulMessageCrontab', singleton: true, mutexExpires: 600, onOneServer: true, callback: 'execute', memo: '清理delightfulMessage')]
+// #[Crontab(rule: '*/1 * * * *', name: 'ClearDelightfulMessageCrontab', singleton: true, mutexExpires: 600, onOneServer: true, callback: 'execute', memo: 'cleanupdelightfulMessage')]
 readonly class ClearDelightfulMessageCrontab
 {
     public function __construct(
@@ -29,7 +29,7 @@ readonly class ClearDelightfulMessageCrontab
 
     public function clearDelightfulMessage(string $time): void
     {
-        // 录音feature已移except，此method保留为nullimplement，可according toneed添加其他清理逻辑
+        // 录音feature已移except，此method保留为nullimplement，可according toneed添加其他cleanup逻辑
         $this->logger->info(sprintf('ClearDelightfulMessageCrontab time: %s - recording functionality removed', $time));
     }
 }

@@ -200,9 +200,9 @@ class CommentRepository
     }
 
     /**
-     * according to资源IDget所have相关的comment。
+     * according toresourceIDget所have相关的comment。
      *
-     * @param int $resourceId 资源ID
+     * @param int $resourceId resourceID
      * @return array<CommentEntity> comment实bodyarray
      */
     public function getCommentsByResourceId(string $organizationCode, int $resourceId): array
@@ -294,7 +294,7 @@ class CommentRepository
     /**
      * 将多CommentModelconvert为CommentEntityarray。
      *
-     * @param mixed $models commentmodel集合
+     * @param mixed $models commentmodelset
      * @return array<CommentEntity> comment实bodyarray
      */
     private function modelsToEntities(mixed $models): array

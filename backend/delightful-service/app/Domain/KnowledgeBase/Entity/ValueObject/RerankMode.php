@@ -10,7 +10,7 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 /**
  * 重sort模type枚举category.
  *
- * 定义了两type重sort模type：
+ * definition了两type重sort模type：
  * - RERANKING_MODEL: use重sortmodel对检索resultconduct重sort
  * - WEIGHTED_SCORE: use加权minute数对检索resultconduct重sort
  */

@@ -31,7 +31,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return '文生图tool';
+        return '文生graphtool';
     }
 
     public function getCallback(): ?Closure
@@ -64,7 +64,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "model": {
             "type": "string",
             "key": "model",
-            "title": "所use的文生图model",
+            "title": "所use的文生graphmodel",
             "description": "optional：Volcengine,Midjourney,Flux1-Schnell,defaultVolcengine,TTAPI-GPT4o",
             "required": null,
             "value": null,

@@ -38,7 +38,7 @@ class QwenImageAPI
     }
 
     /**
-     * submit文生图task
+     * submit文生graphtask
      */
     public function submitTask(array $params): array
     {
@@ -87,7 +87,7 @@ class QwenImageAPI
     }
 
     /**
-     * submit图像edittask - 同call.
+     * submitgraph像edittask - 同call.
      */
     public function submitEditTask(array $params): array
     {
@@ -115,7 +115,7 @@ class QwenImageAPI
             ],
         ];
 
-        // 添加图像tocontentmiddle（只取the一张image）
+        // 添加graph像tocontentmiddle（只取the一张image）
         if (isset($params['image_urls']) && ! empty($params['image_urls'])) {
             $body['input']['messages'][0]['content'][] = [
                 'image' => $params['image_urls'][0],

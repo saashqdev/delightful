@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('name', 50)->comment('service商name');
             $table->string('provider_code', 50)->comment('service商encoding，表示属at哪 AI service商。如：官方，DS，阿within云etc');
             $table->string('description', 255)->nullable()->comment('service商description');
-            $table->string('icon', 255)->nullable()->comment('service商图标');
+            $table->string('icon', 255)->nullable()->comment('service商graph标');
             $table->tinyInteger('provider_type')->default(0)->comment('service商type：0-普通，1-官方');
             $table->string('category', 20)->comment('category：llm-大model，vlm-视觉model');
             $table->tinyInteger('status')->default(0)->comment('status：0-未enable，1-enable');

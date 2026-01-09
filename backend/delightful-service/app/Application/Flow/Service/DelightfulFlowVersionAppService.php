@@ -72,7 +72,7 @@ class DelightfulFlowVersionAppService extends AbstractFlowAppService
     }
 
     /**
-     * 回滚version.
+     * rollbackversion.
      */
     public function rollback(Authenticatable $authorization, string $flowCode, string $versionCode): DelightfulFlowVersionEntity
     {

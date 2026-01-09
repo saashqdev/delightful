@@ -20,7 +20,7 @@ interface ModeRepositoryInterface
     public function findById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeEntity;
 
     /**
-     * according to标识符getmode.
+     * according toidentifiergetmode.
      */
     public function findByIdentifier(ModeDataIsolation $dataIsolation, string $identifier): ?ModeEntity;
 
@@ -45,7 +45,7 @@ interface ModeRepositoryInterface
     public function delete(ModeDataIsolation $dataIsolation, string $id): bool;
 
     /**
-     * check标识符whether唯一
+     * checkidentifierwhether唯一
      */
     public function isIdentifierUnique(ModeDataIsolation $dataIsolation, string $identifier, ?string $excludeId = null): bool;
 

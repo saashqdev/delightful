@@ -14,7 +14,7 @@ use App\Domain\Chat\Entity\ValueObject\InstructionInsertLocation;
 use App\Domain\Chat\Entity\ValueObject\InstructionType;
 
 /**
- * finger令configuration实bodycategory，according to proto 定义.
+ * finger令configuration实bodycategory，according to proto definition.
  */
 class InstructionConfig extends AbstractEntity
 {

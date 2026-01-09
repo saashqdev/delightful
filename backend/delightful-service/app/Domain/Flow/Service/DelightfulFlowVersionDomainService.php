@@ -84,7 +84,7 @@ class DelightfulFlowVersionDomainService extends AbstractDomainService
     }
 
     /**
-     * 回滚version.
+     * rollbackversion.
      */
     public function rollback(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow, string $versionCode): DelightfulFlowVersionEntity
     {

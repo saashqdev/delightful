@@ -44,7 +44,7 @@ use function Hyperf\Translation\__;
 use function mb_strlen;
 
 /**
- * AI文生图.
+ * AI文生graph.
  */
 class DelightfulChatAIImageAppService extends AbstractAIImageAppService
 {
@@ -70,7 +70,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     {
         $referContent = $this->getReferContentForAIImage($reqDTO->getReferMessageId());
         $referText = $this->getReferTextByContentForAIImage($referContent);
-        // if是图生图，thensize保持和originalimagesize一致
+        // if是graph生graph，thensize保持和originalimagesize一致
         if ($referContent instanceof AIImageCardMessage || $referContent instanceof ImageConvertHighCardMessage) {
             // setactualrequest的size和ratio例
             $radio = $referContent->getRadio() ?? Radio::OneToOne->value;
@@ -99,20 +99,20 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                 $reqDTO->getReferMessageId(),
             );
             if (! empty($reqDTO->getAttachments())) {
-                // 对quotecontent重新文生图
+                // 对quotecontent重新文生graph
                 $this->handleGenerateImageByReference($requestContext, $reqDTO);
             } else {
-                // 文生图
+                // 文生graph
                 $this->handleGenerateImage($requestContext, $reqDTO);
             }
         } catch (Throwable $e) {
-            // hair生exceptiono clock，send终止message，并throwexception
+            // hair生exceptiono clock，sendterminationmessage，并throwexception
             $this->handleGlobalThrowable($reqDTO, $e);
         }
     }
 
     /**
-     * 对quotecontent重新文生图.
+     * 对quotecontent重新文生graph.
      */
     private function handleGenerateImageByReference(RequestContext $requestContext, DelightfulChatAIImageReqDTO $reqDTO): void
     {
@@ -124,7 +124,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     }
 
     /**
-     * 文生图.
+     * 文生graph.
      */
     private function handleGenerateImage(RequestContext $requestContext, DelightfulChatAIImageReqDTO $reqDTO): void
     {

@@ -35,12 +35,12 @@ interface MethodHandlerInterface
     public function getToolManager(): MCPToolManager;
 
     /**
-     * setting资源manager.
+     * settingresourcemanager.
      */
     public function setResourceManager(MCPResourceManager $resourceManager): self;
 
     /**
-     * get资源manager.
+     * getresourcemanager.
      */
     public function getResourceManager(): MCPResourceManager;
 

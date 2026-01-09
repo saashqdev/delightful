@@ -20,7 +20,7 @@ class AggregateAISearchCardResponseType
     // LLM response
     public const int LLM_RESPONSE = 1;
 
-    // 思维导图
+    // 思维导graph
     public const int MIND_MAP = 2;
 
     // associateissue
@@ -32,7 +32,7 @@ class AggregateAISearchCardResponseType
     // ping pong
     public const int PING_PONG = 5;
 
-    // exception终止
+    // exceptiontermination
     public const int TERMINATE = 6;
 
     // PPT
@@ -46,11 +46,11 @@ class AggregateAISearchCardResponseType
         $typeNames = [
             self::SEARCH => 'searchresult',
             self::LLM_RESPONSE => 'LLMresponse',
-            self::MIND_MAP => '思维导图',
+            self::MIND_MAP => '思维导graph',
             self::ASSOCIATE_QUESTIONS => 'associateissue',
             self::EVENT => 'event',
             self::PING_PONG => 'ping_pong',
-            self::TERMINATE => 'exception终止',
+            self::TERMINATE => 'exceptiontermination',
             self::PPT => 'PPT',
             self::SEARCH_DEEP_LEVEL => 'search深degree',
         ];

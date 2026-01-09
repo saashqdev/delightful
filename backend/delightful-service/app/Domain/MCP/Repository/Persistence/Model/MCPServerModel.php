@@ -19,7 +19,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $code 唯一encoding
  * @property string $name MCPservicename
  * @property string $description MCPservicedescription
- * @property string $icon MCPservice图标
+ * @property string $icon MCPservicegraph标
  * @property string $type servicetype ('sse' or 'stdio')
  * @property bool $enabled whetherenable
  * @property string $external_sse_url outside部SSEserviceURL

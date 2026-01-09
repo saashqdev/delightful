@@ -183,7 +183,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                     break;
             }
         } finally {
-            // 释放lock
+            // releaselock
             $this->redisLocker->release($spinLockKey, $spinLockKeyOwner);
         }
     }
@@ -225,7 +225,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             // rowexceptuser自己,因为已经提front
             $this->batchPushControlSeqList($notifyAllReceiveSeqList);
         } finally {
-            // 释放lock
+            // releaselock
             $this->redisLocker->release($spinLockKey, $revokeMessageId);
         }
     }

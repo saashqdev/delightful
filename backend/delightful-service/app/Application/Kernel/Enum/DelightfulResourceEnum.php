@@ -10,11 +10,11 @@ namespace App\Application\Kernel\Enum;
 use function Hyperf\Translation\__;
 
 /**
- * Delightful 资源枚举.
+ * Delightful resource枚举.
  *
- * 1. use Backed Enum 将each资源mapping为唯一string key。
- * 2. passmethod提供 label / parent  etcyuaninfo，方便back续generatepermission树、做 i18n etc。
- * 3. 仅定义资源本身，not涉及操作type（如 query / edit）。
+ * 1. use Backed Enum 将eachresourcemapping为唯一string key。
+ * 2. passmethod提供 label / parent  etcyuaninfo，方便back续generatepermissiontree、做 i18n etc。
+ * 3. 仅definitionresource本身，not涉及操作type（如 query / edit）。
  *
  * 注意：if你修改了这file，请execute单yuantest PermissionApiTest.testGetPermissionTree.
  */
@@ -33,9 +33,9 @@ enum DelightfulResourceEnum: string
     case PLATFORM_ORGANIZATION = 'platform.organization'; # organization管理
     case ADMINPLUS_AI = 'admin_plus.ai'; # organization管理back台plus-AI管理
 
-    // ===== 三level：specific资源 (useatspecificbindinterface）=====
+    // ===== 三level：specificresource (useatspecificbindinterface）=====
     case ADMIN_AI_MODEL = 'platform.ai.model_management'; # AI管理-model管理
-    case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AI管理-智能绘图管理
+    case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AI管理-智能绘graph管理
     case ADMIN_AI_MODE = 'platform.ai.mode_management'; # AI管理-模type管理管理
     case ADMIN_AI_ABILITY = 'platform.ai.ability'; # AI管理-能力管理
     case SAFE_SUB_ADMIN = 'admin.safe.sub_admin';  # security管控-子管理员
@@ -72,8 +72,8 @@ enum DelightfulResourceEnum: string
     }
 
     /**
-     * uplevel资源.
-     * 注意：新增操作资源back要补充这configuration.
+     * uplevelresource.
+     * 注意：新增操作resourceback要补充这configuration.
      */
     public function parent(): ?self
     {
@@ -89,7 +89,7 @@ enum DelightfulResourceEnum: string
             self::ADMIN_AI,
             self::ADMIN_SAFE => self::ADMIN,
             self::ADMINPLUS_AI => self::ADMINPLUS,
-            // 操作资源
+            // 操作resource
             self::ADMIN_AI_MODEL,
             self::ADMIN_AI_IMAGE,
             self::ADMIN_AI_MODE => self::PLATFORM_AI,
@@ -108,9 +108,9 @@ enum DelightfulResourceEnum: string
     }
 
     /**
-     * return与该资源bind的 Operation Enum category名。
+     * return与该resourcebind的 Operation Enum category名。
      * defaultuse DelightfulOperationEnum。
-     * 如需为特定资源customize操作集，可in此returncustomize Enum::class。
+     * 如需为特定resourcecustomize操作集，可in此returncustomize Enum::class。
      */
     public function operationEnumClass(): string
     {

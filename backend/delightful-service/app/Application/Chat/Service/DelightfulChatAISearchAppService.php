@@ -137,20 +137,20 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 $readPagesDetailChannel = null;
                 $this->simpleSearch($dto, $associateQuestions, $noRepeatSearchContexts);
             }
-            // use channel 通信，精读过程middlethenpushmessage给front端
+            // use channel 通信，精读proceduremiddlethenpushmessage给front端
             $associateQuestionIds = array_keys($associateQuestions);
             $this->sendLLMResponseForAssociateQuestions($dto, $associateQuestionIds, $readPagesDetailChannel);
             $this->sleepToFixBug(0.3);
             // 4. according toeachassociateissuereply，generate总结.
             $summarize = $this->generateAndSendSummary($dto, $noRepeatSearchContexts, $associateQuestions);
-            // 5. according to总结，generate额outsidecontent（思维导图、PPT、eventetc）
+            // 5. according to总结，generate额outsidecontent（思维导graph、PPT、eventetc）
             if ($dto->getSearchDeepLevel() === SearchDeepLevel::DEEP) {
                 $this->generateAndSendExtra($dto, $noRepeatSearchContexts, $summarize);
             }
             // 6. sendping pongresponse,代表endreply
             $this->sendPingPong($dto);
         } catch (Throwable $e) {
-            // 7. hair生exceptiono clock，send终止message，并throwexception
+            // 7. hair生exceptiono clock，sendterminationmessage，并throwexception
             $this->aiSendMessage(
                 $dto->getConversationId(),
                 (string) $this->idGenerator->generate(),
@@ -533,7 +533,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     }
 
     /**
-     * 精读的过程middle，隔随机timepush一timeassociateissuesearch完毕给front端。
+     * 精读的proceduremiddle，隔随机timepush一timeassociateissuesearch完毕给front端。
      * 完all精读完毕o clock，mostbackagain推一time
      * @throws Throwable
      */
@@ -681,13 +681,13 @@ class DelightfulChatAISearchAppService extends AbstractAppService
      */
     public function generateAndSendExtra(DelightfulChatAggregateSearchReqDTO $dto, array $noRepeatSearchContexts, DelightfulAggregateSearchSummaryDTO $summarize): void
     {
-        // generate思维导图和PPT
+        // generate思维导graph和PPT
         $extraContentParallel = new Parallel(3);
         $modelInterface = $this->getChatModel($dto->getOrganizationCode(), $dto->getUserId());
         $extraContentParallel->add(function () use ($summarize, $dto, $modelInterface) {
             // odin will修改 vo objectmiddle的value，避免污染，复制again传入
             CoContext::setRequestId($dto->getRequestId());
-            // 思维导图
+            // 思维导graph
             $mindMapQueryVo = $this->getSearchVOByAggregateSearchDTO($dto, $summarize);
             $mindMapQueryVo->setModel($modelInterface);
             $mindMap = $this->generateAndSendMindMap($dto, $mindMapQueryVo);
@@ -751,7 +751,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     {
         $start = microtime(true);
         $mindMap = $this->delightfulLLMDomainService->generateMindMapFromMessage($queryVo);
-        $this->logger->info(sprintf('getSearchResults generate思维导图，end计o clock，耗o clock: %s second', microtime(true) - $start));
+        $this->logger->info(sprintf('getSearchResults generate思维导graph，end计o clock，耗o clock: %s second', microtime(true) - $start));
         $messageId = (string) $this->idGenerator->generate();
         $messageType = AggregateAISearchCardResponseType::MIND_MAP;
         $this->aiSendMessage(

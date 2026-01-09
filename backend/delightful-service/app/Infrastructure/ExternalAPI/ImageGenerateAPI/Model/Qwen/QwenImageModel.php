@@ -72,7 +72,7 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像并returnOpenAIformatresponse - Qwenversion.
+     * generategraph像并returnOpenAIformatresponse - Qwenversion.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
@@ -85,7 +85,7 @@ class QwenImageModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof QwenImageModelRequest) {
-            $this->logger->error('Qwen OpenAIformat生图：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Qwen OpenAIformat生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
@@ -113,7 +113,7 @@ class QwenImageModel extends AbstractImageGenerate
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('Qwen OpenAIformat生图：单requestfail', [
+                    $this->logger->error('Qwen OpenAIformat生graph：单requestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -124,7 +124,7 @@ class QwenImageModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 4. recordfinalresult
-        $this->logger->info('Qwen OpenAIformat生图：并hairhandlecomplete', [
+        $this->logger->info('Qwen OpenAIformat生graph：并hairhandlecomplete', [
             '总request数' => $count,
             'successimage数' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
@@ -162,16 +162,16 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像的核core逻辑，returnnativeresult.
+     * generategraph像的核core逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof QwenImageModelRequest) {
-            $this->logger->error('通义千问文生图：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('通义千问文生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // 其他文生图是 x ，阿within是 * ，保持up游一致，final传入also是 *
+        // 其他文生graph是 x ，阿within是 * ，保持up游一致，final传入also是 *
         $size = $imageGenerateRequest->getWidth() . 'x' . $imageGenerateRequest->getHeight();
 
         // 校验imagesize
@@ -179,7 +179,7 @@ class QwenImageModel extends AbstractImageGenerate
 
         $count = $imageGenerateRequest->getGenerateNum();
 
-        $this->logger->info('通义千问文生图：start生图', [
+        $this->logger->info('通义千问文生graph：start生graph', [
             'prompt' => $imageGenerateRequest->getPrompt(),
             'size' => $size,
             'count' => $count,
@@ -203,7 +203,7 @@ class QwenImageModel extends AbstractImageGenerate
                         'index' => $i,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('通义千问文生图：fail', [
+                    $this->logger->error('通义千问文生graph：fail', [
                         'error' => $e->getMessage(),
                         'index' => $i,
                     ]);
@@ -252,7 +252,7 @@ class QwenImageModel extends AbstractImageGenerate
                 $finalErrorMsg = $errors[0]['message'];
             }
 
-            $this->logger->error('通义千问文生图：所haveimagegenerate均fail', ['errors' => $errors]);
+            $this->logger->error('通义千问文生graph：所haveimagegenerate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw($finalErrorCode, $finalErrorMsg);
         }
 
@@ -260,7 +260,7 @@ class QwenImageModel extends AbstractImageGenerate
         ksort($rawResults);
         $rawResults = array_values($rawResults);
 
-        $this->logger->info('通义千问文生图：generateend', [
+        $this->logger->info('通义千问文生graph：generateend', [
             'imagequantity' => $count,
         ]);
 
@@ -291,19 +291,19 @@ class QwenImageModel extends AbstractImageGenerate
             // checkresponseformat
             if (! isset($response['output']['task_id'])) {
                 $errorMsg = $response['message'] ?? '未知error';
-                $this->logger->warning('通义千问文生图：responsemiddle缺少taskID', ['response' => $response]);
+                $this->logger->warning('通义千问文生graph：responsemiddle缺少taskID', ['response' => $response]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR, $errorMsg);
             }
 
             $taskId = $response['output']['task_id'];
 
-            $this->logger->info('通义千问文生图：submittasksuccess', [
+            $this->logger->info('通义千问文生graph：submittasksuccess', [
                 'taskId' => $taskId,
             ]);
 
             return $taskId;
         } catch (Exception $e) {
-            $this->logger->error('通义千问文生图：tasksubmitexception', [
+            $this->logger->error('通义千问文生graph：tasksubmitexception', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -327,14 +327,14 @@ class QwenImageModel extends AbstractImageGenerate
 
                 // checkresponseformat
                 if (! isset($response['output'])) {
-                    $this->logger->warning('通义千问文生图：querytaskresponseformaterror', ['response' => $response]);
+                    $this->logger->warning('通义千问文生graph：querytaskresponseformaterror', ['response' => $response]);
                     ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR);
                 }
 
                 $output = $response['output'];
                 $taskStatus = $output['task_status'] ?? '';
 
-                $this->logger->info('通义千问文生图：taskstatus', [
+                $this->logger->info('通义千问文生graph：taskstatus', [
                     'taskId' => $taskId,
                     'status' => $taskStatus,
                 ]);
@@ -344,7 +344,7 @@ class QwenImageModel extends AbstractImageGenerate
                         if (! empty($output['results'])) {
                             return $response;
                         }
-                        $this->logger->error('通义千问文生图：taskcompletebut缺少imagedata', ['response' => $response]);
+                        $this->logger->error('通义千问文生graph：taskcompletebut缺少imagedata', ['response' => $response]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
                         // no break
                     case 'PENDING':
@@ -352,18 +352,18 @@ class QwenImageModel extends AbstractImageGenerate
                         break;
                     case 'FAILED':
                         $errorMsg = $output['message'] ?? 'taskexecutefail';
-                        $this->logger->error('通义千问文生图：taskexecutefail', ['taskId' => $taskId, 'error' => $errorMsg]);
+                        $this->logger->error('通义千问文生graph：taskexecutefail', ['taskId' => $taskId, 'error' => $errorMsg]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $errorMsg);
                         // no break
                     default:
-                        $this->logger->error('通义千问文生图：未知的taskstatus', ['status' => $taskStatus, 'response' => $response]);
+                        $this->logger->error('通义千问文生graph：未知的taskstatus', ['status' => $taskStatus, 'response' => $response]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT_WITH_REASON);
                 }
 
                 ++$retryCount;
                 sleep(self::RETRY_INTERVAL);
             } catch (Exception $e) {
-                $this->logger->error('通义千问文生图：querytaskexception', [
+                $this->logger->error('通义千问文生graph：querytaskexception', [
                     'error' => $e->getMessage(),
                     'trace' => $e->getTraceAsString(),
                     'taskId' => $taskId,
@@ -373,7 +373,7 @@ class QwenImageModel extends AbstractImageGenerate
             }
         }
 
-        $this->logger->error('通义千问文生图：taskquerytimeout', ['taskId' => $taskId]);
+        $this->logger->error('通义千问文生graph：taskquerytimeout', ['taskId' => $taskId]);
         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT);
     }
 
@@ -410,7 +410,7 @@ class QwenImageModel extends AbstractImageGenerate
         ];
 
         if (! in_array($size, $supportedSizes, true)) {
-            $this->logger->error('通义千问文生图：qwen-imagenot supported的imagesize', [
+            $this->logger->error('通义千问文生graph：qwen-imagenot supported的imagesize', [
                 'requested_size' => $size,
                 'supported_sizes' => $supportedSizes,
                 'model' => 'qwen-image',
@@ -434,7 +434,7 @@ class QwenImageModel extends AbstractImageGenerate
     {
         $dimensions = explode('x', $size);
         if (count($dimensions) !== 2) {
-            $this->logger->error('通义千问文生图：wan2.2-t2i-flashsizeformaterror', [
+            $this->logger->error('通义千问文生graph：wan2.2-t2i-flashsizeformaterror', [
                 'requested_size' => $size,
                 'model' => 'wan2.2-t2i-flash',
             ]);
@@ -450,7 +450,7 @@ class QwenImageModel extends AbstractImageGenerate
         $maxSize = 1440;
 
         if ($width < $minSize || $width > $maxSize || $height < $minSize || $height > $maxSize) {
-            $this->logger->error('通义千问文生图：wan2.2-t2i-flashsize超出supportrange', [
+            $this->logger->error('通义千问文生graph：wan2.2-t2i-flashsize超出supportrange', [
                 'requested_size' => $size,
                 'width' => $width,
                 'height' => $height,
@@ -578,7 +578,7 @@ class QwenImageModel extends AbstractImageGenerate
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // ensurelock一定willbe释放
+            // ensurelock一定willberelease
             $this->unlockResponse($response, $lockOwner);
         }
     }

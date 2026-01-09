@@ -27,14 +27,14 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 continue;
             }
 
-            // 定义本time的 range id，if是 null 代tablealso未conduct限制
+            // definition本time的 range id，if是 null 代tablealso未conduct限制
             $rangeIds = null;
             if ($filterType->isAll()) {
-                // if是所haveitemitem满足，那么已经存in的 id 集合then是本time的range
+                // if是所haveitemitem满足，那么已经存in的 id setthen是本time的range
                 $rangeIds = $allIds;
             }
 
-            // ifrange id be定义become了空array，代table已经nothave符合itemitem的data了，直接跳出循环
+            // ifrange id bedefinitionbecome了空array，代table已经nothave符合itemitem的data了，直接跳出循环
             if (is_array($rangeIds) && empty($rangeIds)) {
                 break;
             }

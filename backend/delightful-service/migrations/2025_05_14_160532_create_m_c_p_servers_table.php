@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('code', 80)->unique()->comment('唯一encoding');
             $table->string('name', 64)->default('')->comment('MCPservicename');
             $table->string('description', 255)->default('')->comment('MCPservicedescription');
-            $table->string('icon', 255)->default('')->comment('MCPservice图标');
+            $table->string('icon', 255)->default('')->comment('MCPservicegraph标');
             $table->string('type', 16)->default('sse')->comment('servicetype: sseorstdio');
             $table->boolean('enabled')->default(false)->comment('whetherenable: 0-disable, 1-enable');
             $table->string('creator', 64)->default('')->comment('create者');

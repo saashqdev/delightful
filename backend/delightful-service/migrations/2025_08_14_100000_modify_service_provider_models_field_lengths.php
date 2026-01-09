@@ -32,12 +32,12 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // 回滚 service_provider 表的 name fieldlength
+        // rollback service_provider 表的 name fieldlength
         Schema::table('service_provider', function (Blueprint $table) {
             $table->string('name', 50)->comment('service商name')->change();
         });
 
-        // 回滚 service_provider_models 表的相关fieldlength
+        // rollback service_provider_models 表的相关fieldlength
         Schema::table('service_provider_models', function (Blueprint $table) {
             $table->string('name', 50)->comment('modelname')->change();
             $table->string('model_version', 50)->comment('modelinservice商down的name')->change();

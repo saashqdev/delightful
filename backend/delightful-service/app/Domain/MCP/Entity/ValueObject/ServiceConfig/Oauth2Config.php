@@ -15,7 +15,7 @@ use App\Infrastructure\Util\SSRF\SSRFUtil;
 class Oauth2Config extends AbstractValueObject
 {
     /**
-     * Client ID - 客户端ID，是applicationinauthorizationservice器middle的唯一标识符。
+     * Client ID - 客户端ID，是applicationinauthorizationservice器middle的唯一identifier。
      * authorizationservice器pass客户端ID来识别different的三方application。
      *
      * createOAuthapplicationo clockwillminute配client_id，本exampleinput

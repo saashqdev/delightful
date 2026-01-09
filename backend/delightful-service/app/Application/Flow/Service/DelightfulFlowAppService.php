@@ -314,7 +314,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
                 $toolSetData['list'][] = $builtInToolSet->generateToolSet();
                 foreach ($builtInToolSet->getTools() as $builtInTool) {
-                    // 私havetool，needhave高level图像convertURIpermission才能显示
+                    // 私havetool，needhave高levelgraph像convertURIpermission才能显示
                     if ($builtInTool->getCode() === 'ai_image_image_convert_high'
                         && ! PermissionChecker::mobileHasPermission($authorization->getMobile(), SuperPermissionEnum::FLOW_ADMIN)
                     ) {

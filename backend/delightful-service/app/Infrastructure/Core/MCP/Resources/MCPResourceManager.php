@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\MCP\Resources;
 
 /**
- * MCP资源manager.
+ * MCPresourcemanager.
  * whenfrontversion为nullimplement，仅returnnullcolumn表.
  */
 class MCPResourceManager
@@ -19,16 +19,16 @@ class MCPResourceManager
     private array $resources = [];
 
     /**
-     * register资源.
+     * registerresource.
      * whenfront为nullimplement.
      */
     public function registerResource(array $resource): void
     {
-        // nullimplement，暂notregister任何资源
+        // nullimplement，暂notregister任何resource
     }
 
     /**
-     * get资源column表.
+     * getresourcecolumn表.
      * whenfront为nullimplement，returnnullarray.
      *
      * @return array<int, array<string, mixed>>
@@ -39,7 +39,7 @@ class MCPResourceManager
     }
 
     /**
-     * getfinger定ID的资源.
+     * getfinger定ID的resource.
      * whenfront为nullimplement，始终returnnull.
      */
     public function getResource(string $id): ?array
@@ -48,7 +48,7 @@ class MCPResourceManager
     }
 
     /**
-     * checkfinger定ID的资源whether存in.
+     * checkfinger定ID的resourcewhether存in.
      */
     public function hasResource(string $id): bool
     {
@@ -56,7 +56,7 @@ class MCPResourceManager
     }
 
     /**
-     * checkwhethernothave任何资源.
+     * checkwhethernothave任何resource.
      */
     public function isEmpty(): bool
     {

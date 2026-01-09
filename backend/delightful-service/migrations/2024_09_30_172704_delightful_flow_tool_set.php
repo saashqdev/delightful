@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('code', 80)->comment('tool集encoding');
             $table->string('name', 64)->comment('tool集name');
             $table->string('description', 255)->comment('tool集description');
-            $table->string('icon', 255)->comment('tool集图标');
+            $table->string('icon', 255)->comment('tool集graph标');
             $table->boolean('enabled')->default(true)->comment('whetherenable');
             $table->string('created_uid', 80)->comment('create人');
             $table->dateTime('created_at')->comment('creation time');

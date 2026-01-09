@@ -268,7 +268,7 @@ readonly class AdminProviderAppService
         // call领域layero clockpass modelTypes parameter，让仓储layercompletequery和filter
         $serviceProviderModelsDTOs = $this->adminProviderDomainService->getOrganizationProvidersModelsByCategory($organizationCode, $category);
 
-        // handle图标
+        // handlegraph标
         $this->processProviderConfigIcons($serviceProviderModelsDTOs);
 
         return array_values($serviceProviderModelsDTOs);
@@ -314,7 +314,7 @@ readonly class AdminProviderAppService
             return [];
         }
 
-        // handle图标
+        // handlegraph标
         $this->processServiceProviderEntityListIcons($serviceProviders, $organizationCode);
 
         return $serviceProviders;
@@ -336,7 +336,7 @@ readonly class AdminProviderAppService
             return [];
         }
 
-        // handle图标
+        // handlegraph标
         $this->processServiceProviderEntityListIcons($serviceProviders, $organizationCode);
 
         return $serviceProviders;
@@ -355,7 +355,7 @@ readonly class AdminProviderAppService
             return [];
         }
 
-        // 收集所have图标path按organizationencodinggroup
+        // 收集所havegraph标path按organizationencodinggroup
         $iconsByOrg = [];
         $iconToModelMap = [];
 
@@ -376,14 +376,14 @@ readonly class AdminProviderAppService
             }
         }
 
-        // 批quantityget图标URL
+        // 批quantitygetgraph标URL
         $iconUrlMap = [];
         foreach ($iconsByOrg as $iconOrganizationCode => $icons) {
             $links = $this->fileDomainService->getLinks($iconOrganizationCode, array_unique($icons));
             $iconUrlMap[] = $links;
         }
         ! empty($iconUrlMap) && $iconUrlMap = array_merge(...$iconUrlMap);
-        // createDTO并setting图标URL
+        // createDTO并settinggraph标URL
         $modelDTOs = [];
         foreach ($models as $model) {
             $modelDTO = new ProviderModelDetailDTO($model->toArray());
@@ -438,7 +438,7 @@ readonly class AdminProviderAppService
             return;
         }
 
-        // 收集所have图标path按organizationencodinggroup
+        // 收集所havegraph标path按organizationencodinggroup
         $iconsByOrg = [];
         $iconToModelMap = [];
 
@@ -462,14 +462,14 @@ readonly class AdminProviderAppService
             $iconToModelMap[$icon][] = $model;
         }
 
-        // 批quantityget图标URL
+        // 批quantitygetgraph标URL
         $iconUrlMap = [];
         foreach ($iconsByOrg as $organizationCode => $icons) {
             $links = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
             $iconUrlMap = array_merge($iconUrlMap, $links);
         }
 
-        // setting图标URL
+        // settinggraph标URL
         foreach ($iconUrlMap as $icon => $fileLink) {
             if (isset($iconToModelMap[$icon])) {
                 $url = $fileLink ? $fileLink->getUrl() : '';
@@ -510,16 +510,16 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 统一handle Provider 和 Models 的图标，convert为完整URL.
+     * 统一handle Provider 和 Models 的graph标，convert为完整URL.
      */
     private function processProviderAndModelsIcons(ProviderConfigModelsDTO $providerDTO): void
     {
-        // 收集所have图标path和对应的organizationencoding
+        // 收集所havegraph标path和对应的organizationencoding
         $iconsByOrg = [];
-        $providerIconMap = [];  // provider图标mapping
-        $modelIconMap = [];     // model图标mapping
+        $providerIconMap = [];  // providergraph标mapping
+        $modelIconMap = [];     // modelgraph标mapping
 
-        // handle provider 图标
+        // handle provider graph标
         $providerIcon = $providerDTO->getIcon();
         if (! empty($providerIcon)) {
             $providerIcon = FileAssembler::formatPath($providerIcon);
@@ -532,7 +532,7 @@ readonly class AdminProviderAppService
             $providerIconMap[$providerIcon] = $providerDTO;
         }
 
-        // handlemodel图标
+        // handlemodelgraph标
         $modelEntities = $providerDTO->getModels();
         if (! empty($modelEntities)) {
             foreach ($modelEntities as $modelEntity) {
@@ -549,7 +549,7 @@ readonly class AdminProviderAppService
                 }
                 $iconsByOrg[$organizationCode][] = $icon;
 
-                // record图标tomodel的mapping关系
+                // recordgraph标tomodel的mapping关系
                 if (! isset($modelIconMap[$icon])) {
                     $modelIconMap[$icon] = [];
                 }
@@ -557,20 +557,20 @@ readonly class AdminProviderAppService
             }
         }
 
-        // 按organizationencoding批quantityget图标URL
+        // 按organizationencoding批quantitygetgraph标URL
         foreach ($iconsByOrg as $organizationCode => $icons) {
             $iconUrlMap = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
 
-            // setting图标URL
+            // settinggraph标URL
             foreach ($iconUrlMap as $icon => $fileLink) {
                 $url = $fileLink ? $fileLink->getUrl() : '';
 
-                // setting provider 图标URL
+                // setting provider graph标URL
                 if (isset($providerIconMap[$icon])) {
                     $providerIconMap[$icon]->setIcon($url);
                 }
 
-                // settingmodel图标URL
+                // settingmodelgraph标URL
                 if (isset($modelIconMap[$icon])) {
                     foreach ($modelIconMap[$icon] as $modelEntity) {
                         $modelEntity->setIcon($url);
@@ -655,23 +655,23 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * handleservice提供商实bodycolumn表的图标.
+     * handleservice提供商实bodycolumn表的graph标.
      *
      * @param ProviderConfigModelsDTO[] $serviceProviders service提供商实bodycolumn表
      * @param string $organizationCode organizationencoding
      */
     private function processServiceProviderEntityListIcons(array $serviceProviders, string $organizationCode): void
     {
-        // 收集所have图标
+        // 收集所havegraph标
         $icons = [];
         foreach ($serviceProviders as $serviceProvider) {
             $icons[] = $serviceProvider->getIcon();
         }
 
-        // 批quantityget所have图标的link
+        // 批quantityget所havegraph标的link
         $iconUrlMap = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
 
-        // 只handle图标URL，直接return实bodyobject
+        // 只handlegraph标URL，直接return实bodyobject
         foreach ($serviceProviders as $serviceProvider) {
             $icon = $serviceProvider->getIcon();
 
@@ -683,7 +683,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * handleservice商configuration图标.
+     * handleservice商configurationgraph标.
      *
      * @param ProviderConfigDTO[] $providerConfigs service商configurationDTOcolumn表
      */
@@ -695,17 +695,17 @@ readonly class AdminProviderAppService
 
         $iconMappings = [];
 
-        // 收集service商图标
+        // 收集service商graph标
         foreach ($providerConfigs as $configDTO) {
             $this->collectProviderIcon($configDTO, $iconMappings);
         }
 
-        // 批quantityhandle图标URL
+        // 批quantityhandlegraph标URL
         $this->batchProcessIcons($iconMappings);
     }
 
     /**
-     * 收集service商图标info.
+     * 收集service商graph标info.
      */
     private function collectProviderIcon(ProviderConfigDTO|ProviderConfigModelsDTO $provider, array &$iconMappings): void
     {
@@ -733,7 +733,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 批quantityhandle图标URL.
+     * 批quantityhandlegraph标URL.
      */
     private function batchProcessIcons(array $iconMappings): void
     {
@@ -746,7 +746,7 @@ readonly class AdminProviderAppService
                 /** @var string $icon */
                 $url = $fileLink ? $fileLink->getUrl() : '';
 
-                // settingservice商图标URL
+                // settingservice商graph标URL
                 $providerMap = $mapping['providerMap'];
                 if (isset($providerMap[$icon])) {
                     $providers = $providerMap[$icon];
@@ -756,7 +756,7 @@ readonly class AdminProviderAppService
                     }
                 }
 
-                // settingmodel图标URL
+                // settingmodelgraph标URL
                 $modelMap = $mapping['modelMap'];
                 if (isset($modelMap[$icon])) {
                     $models = $modelMap[$icon];

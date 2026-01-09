@@ -83,7 +83,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
 
         // use已have的fileserviceupload
         try {
-            // 定义uploaddirectory
+            // definitionuploaddirectory
             $subDir = 'open';
 
             // createuploadfileobject（not自动重命名）
@@ -110,7 +110,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
             if (file_exists($tempFile)) {
                 unlink($tempFile);
             }
-            // 释放uploadfile资源
+            // releaseuploadfileresource
             $uploadFile->release();
         }
     }

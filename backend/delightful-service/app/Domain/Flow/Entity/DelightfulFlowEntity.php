@@ -47,7 +47,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $description;
 
     /**
-     * process图标（助理avatar）.
+     * processgraph标（助理avatar）.
      */
     protected string $icon = '';
 

@@ -29,10 +29,10 @@ enum MCPErrorCode: int
     case RelNotFound = 51520; // associateresource not found
 
     #[ErrorMessage(message: 'mcp.rel_version.not_found')]
-    case RelVersionNotFound = 51521; // associate资源versionnot存in
+    case RelVersionNotFound = 51521; // associateresourceversionnot存in
 
     #[ErrorMessage(message: 'mcp.rel.not_enabled')]
-    case RelNotEnabled = 51522; // associate资源未enable
+    case RelNotEnabled = 51522; // associateresource未enable
 
     #[ErrorMessage(message: 'mcp.tool.execute_failed')]
     case ToolExecuteFailed = 51523; // toolexecutefail

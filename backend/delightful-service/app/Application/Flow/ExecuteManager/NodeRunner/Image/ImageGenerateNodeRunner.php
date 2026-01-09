@@ -20,7 +20,7 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 #[FlowNodeDefine(
     type: NodeType::ImageGenerate->value,
     code: NodeType::ImageGenerate->name,
-    name: '图像generate',
+    name: 'graph像generate',
     paramsConfig: ImageGenerateNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,

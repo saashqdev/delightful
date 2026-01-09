@@ -16,7 +16,7 @@ use App\Domain\Chat\Entity\ValueObject\AIImage\AIImageGenerateParamsVO;
 use Exception;
 
 /**
- * AI文生图chatrequestparameter.
+ * AI文生graphchatrequestparameter.
  */
 class DelightfulChatAIImageReqDTO
 {

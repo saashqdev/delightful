@@ -70,7 +70,7 @@ class ModeAppService extends AbstractModeAppService
             $allAggregateModels = array_merge($allAggregateModels, $aggregateModels);
         }
 
-        // 收集所haveneedfilter的图像model（VLM）
+        // 收集所haveneedfilter的graph像model（VLM）
         $allAggregateImageModels = [];
         foreach ($modeAggregates as $aggregate) {
             $aggregateImageModels = $this->getImageModelsForAggregate($aggregate, $allProviderModelsWithStatus);
@@ -109,7 +109,7 @@ class ModeAppService extends AbstractModeAppService
             $modeAggregateDTOs[$aggregate->getMode()->getIdentifier()] = ModeAssembler::aggregateToDTO($aggregate, $providerModels, $upgradeRequiredModelIds, $providerImageModels);
         }
 
-        // process图标URLconvert
+        // processgraph标URLconvert
         foreach ($modeAggregateDTOs as $aggregateDTO) {
             $this->processModeAggregateIcons($aggregateDTO);
         }
@@ -167,7 +167,7 @@ class ModeAppService extends AbstractModeAppService
         $providerModels = $this->getModels($modeAggregate);
         $modeGroupDetailDTOS = ModeAssembler::aggregateToFlatGroupsDTO($modeAggregate, $providerModels);
 
-        // process图标pathconvert为完整URL
+        // processgraph标pathconvert为完整URL
         $this->processModeGroupDetailIcons($authorization, $modeGroupDetailDTOS);
 
         return $modeGroupDetailDTOS;
@@ -276,10 +276,10 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * from批quantityqueryresultmiddle提取特定聚合root的图像model（VLM）.
+     * from批quantityqueryresultmiddle提取特定聚合root的graph像model（VLM）.
      * @param ModeAggregate $aggregate 模type聚合root
      * @param array<string, ProviderModelEntity> $allProviderModels 批quantityquery的所havemodelresult
-     * @return array<string, ProviderModelEntity> 该聚合root相关的图像model
+     * @return array<string, ProviderModelEntity> 该聚合root相关的graph像model
      */
     private function getImageModelsForAggregate(ModeAggregate $aggregate, array $allProviderModels): array
     {

@@ -45,7 +45,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * get美图超清convertsupport的样typecolumn表.
+     * get美graph超清convertsupport的样typecolumn表.
      */
     public function getStyle(): array
     {

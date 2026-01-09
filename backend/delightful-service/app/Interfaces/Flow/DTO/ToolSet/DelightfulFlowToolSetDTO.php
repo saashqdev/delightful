@@ -22,7 +22,7 @@ class DelightfulFlowToolSetDTO extends AbstractFlowDTO
     public string $description = '';
 
     /**
-     * tool集图标.
+     * tool集graph标.
      */
     public string $icon = '';
 

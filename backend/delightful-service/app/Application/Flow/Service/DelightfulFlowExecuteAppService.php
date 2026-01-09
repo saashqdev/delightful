@@ -503,7 +503,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $executionData->setTopicId($topicId);
         $executionData->setAgentId($delightfulFlowEntity->getAgentId());
         $executionData->setDebug((bool) ($triggerConfig['debug'] ?? false));
-        // 运lineprocess图，检测whethercan运line
+        // 运lineprocessgraph，检测whethercan运line
         $executor = new DelightfulFlowExecutor($delightfulFlowEntity, $executionData);
         $executor->execute();
 

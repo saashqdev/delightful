@@ -42,7 +42,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * handlegroupDTOarraymiddle的图标，将pathconvert为完整的URL.
+     * handlegroupDTOarraymiddle的graph标，将pathconvert为完整的URL.
      *
      * @param ModeGroupDTO[] $groups
      */
@@ -79,7 +79,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * handle模typeaggregaterootmiddle的图标，将pathconvert为完整的URL.
+     * handle模typeaggregaterootmiddle的graph标，将pathconvert为完整的URL.
      */
     protected function processModeAggregateIcons(AdminModeAggregateDTO|ModeAggregate|ModeAggregateDTO $modeAggregateDTO): void
     {
@@ -101,7 +101,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
                 }
             }
 
-            // 收集图像model的iconpath
+            // 收集graph像model的iconpath
             foreach ($groupAggregate->getImageModels() as $imageModel) {
                 $modelIcon = $imageModel->getModelIcon();
                 if (! empty($modelIcon) && ! is_url($modelIcon)) {
@@ -137,7 +137,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
                 }
             }
 
-            // 替换图像model的icon
+            // 替换graph像model的icon
             foreach ($groupAggregate->getImageModels() as $imageModel) {
                 $modelIcon = $imageModel->getModelIcon();
                 if (! empty($modelIcon) && ! is_url($modelIcon) && isset($iconUrls[$modelIcon])) {
@@ -156,7 +156,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * handleModeGroupDetailDTOarraymiddle的图标，将pathconvert为完整的URL.
+     * handleModeGroupDetailDTOarraymiddle的graph标，将pathconvert为完整的URL.
      *
      * @param ModeGroupDetailDTO[] $modeGroupDetails
      */

@@ -26,7 +26,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('delightful_bot_versions', function (Blueprint $table) {
-            // 回滚操作：将 instructs 改回 instruct
+            // rollback操作：将 instructs 改回 instruct
             $table->renameColumn('instructs', 'instruct');
         });
     }

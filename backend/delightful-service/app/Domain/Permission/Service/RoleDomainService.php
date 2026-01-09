@@ -92,7 +92,7 @@ readonly class RoleDomainService
                 continue;
             }
 
-            // parsepermission键，get资源并提取其二level模piecetag
+            // parsepermission键，getresource并提取其二level模piecetag
             try {
                 $parsed = $this->permission->parsePermission($permissionKey);
                 $resource = $parsed['resource'];
@@ -232,7 +232,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * getpermission资源树结构.
+     * getpermissionresourcetree结构.
      *
      * @param bool $isPlatformOrganization whether平台organization
      */
@@ -295,7 +295,7 @@ readonly class RoleDomainService
      * 1. getcurrentorganizationdown名为 ORGANIZATION_ADMIN_ROLE_NAME 的role；
      * 2. 若not存in直接return；
      * 3. call仓library移exceptuser与该role的associate关系；
-     * 4. ifrolenotagainassociate任何user，保持role本身not变（如haveneed，可考虑back续清理）。
+     * 4. ifrolenotagainassociate任何user，保持role本身not变（如haveneed，可考虑back续cleanup）。
      */
     public function removeOrganizationAdmin(PermissionDataIsolation $dataIsolation, string $userId): void
     {

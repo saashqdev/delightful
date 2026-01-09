@@ -40,13 +40,13 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             'test_domain_user_' . uniqid(),
         ];
 
-        // 清理可能存in的testdata
+        // cleanup可能存in的testdata
         $this->cleanUpTestData();
     }
 
     protected function tearDown(): void
     {
-        // 清理testdata
+        // cleanuptestdata
         $this->cleanUpTestData();
 
         parent::tearDown();
@@ -310,13 +310,13 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
     private function cleanUpTestData(): void
     {
         try {
-            // 清理testorganization的data
+            // cleanuptestorganization的data
             $this->cleanUpOrganizationAdmins($this->testOrganizationCode);
 
-            // 清理另一organization的data
+            // cleanup另一organization的data
             $this->cleanUpOrganizationAdmins($this->anotherOrganizationCode);
         } catch (Exception $e) {
-            // ignore清理error
+            // ignorecleanuperror
         }
     }
 
@@ -329,7 +329,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
                 $this->organizationAdminDomainService->destroy($this->createDataIsolation($organizationCode), $admin);
             }
 
-            // 清理特定testuserID
+            // cleanup特定testuserID
             foreach ($this->testUserIds as $userId) {
                 $organizationAdmin = $this->organizationAdminDomainService->getByUserId($this->createDataIsolation($organizationCode), $userId);
                 if ($organizationAdmin) {
@@ -337,7 +337,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
                 }
             }
         } catch (Exception $e) {
-            // ignore清理error
+            // ignorecleanuperror
         }
     }
 }

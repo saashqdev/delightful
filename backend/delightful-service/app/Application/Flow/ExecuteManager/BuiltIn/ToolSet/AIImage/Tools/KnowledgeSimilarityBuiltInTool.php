@@ -74,7 +74,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 - fragments: 本time检索to的所haveknowledge baseslicesegment
 - fragments.*.content: slicesegmentcontent
 - fragments.*.metadata.url: currentslicesegment的原文link
-- graph.*.content: 来自知识图谱的data，能enhanceinfo，让你more好回答issue
+- graph.*.content: 来自知识graph谱的data，能enhanceinfo，让你more好回答issue
 ## 限制
 - 回答的contentmiddlenotallow出现not是Delightfultag的link。
 MARKDOWN;
@@ -171,8 +171,8 @@ MARKDOWN;
             "type": "string",
             "key": "keyword",
             "sort": 0,
-            "title": "search关键字",
-            "description": "search关键字",
+            "title": "searchkeyword",
+            "description": "searchkeyword",
             "required": null,
             "value": null,
             "encryption": false,

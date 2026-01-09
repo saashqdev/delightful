@@ -15,7 +15,7 @@ use Hyperf\DbConnection\Db;
 class FileCleanupRecordRepository
 {
     /**
-     * createfile清理record.
+     * createfilecleanuprecord.
      */
     public function create(FileCleanupRecordEntity $entity): FileCleanupRecordEntity
     {
@@ -67,14 +67,14 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * getexpire的待清理record.
+     * getexpire的待cleanuprecord.
      */
     public function getExpiredRecords(int $limit = 50): array
     {
         /** @var Collection<FileCleanupRecordModel> $models */
         $models = FileCleanupRecordModel::query()
             ->where('expire_at', '<=', date('Y-m-d H:i:s'))
-            ->where('status', 0) // 待清理status
+            ->where('status', 0) // 待cleanupstatus
             ->orderBy('expire_at', 'asc')
             ->limit($limit)
             ->get();
@@ -159,19 +159,19 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * cancel清理(iffileneed保留).
+     * cancelcleanup(iffileneed保留).
      */
     public function cancelCleanup(string $fileKey, string $organizationCode): bool
     {
         return FileCleanupRecordModel::query()
             ->where('file_key', $fileKey)
             ->where('organization_code', $organizationCode)
-            ->where('status', 0) // 只能cancel待清理status的record
+            ->where('status', 0) // 只能cancel待cleanupstatus的record
             ->delete() > 0;
     }
 
     /**
-     * get清理statisticsdata.
+     * getcleanupstatisticsdata.
      */
     public function getCleanupStats(?string $sourceType = null): array
     {
@@ -196,20 +196,20 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 清理oldsuccessrecord.
+     * cleanupoldsuccessrecord.
      */
     public function cleanupOldRecords(int $daysToKeep = 7): int
     {
         $cutoffDate = date('Y-m-d H:i:s', time() - ($daysToKeep * 24 * 3600));
 
         return FileCleanupRecordModel::query()
-            ->where('status', 1) // 只清理已success的record
+            ->where('status', 1) // 只cleanup已success的record
             ->where('updated_at', '<', $cutoffDate)
             ->delete();
     }
 
     /**
-     * 清理长timefail的record.
+     * cleanup长timefail的record.
      */
     public function cleanupFailedRecords(int $maxRetries = 3, int $daysToKeep = 7): int
     {

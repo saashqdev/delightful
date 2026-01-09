@@ -108,7 +108,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * get资源manager实例.
+     * getresourcemanager实例.
      */
     public function getResourceManager(): MCPResourceManager
     {
@@ -116,7 +116,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * set资源manager实例.
+     * setresourcemanager实例.
      */
     public function setResourceManager(MCPResourceManager $resourceManager): self
     {

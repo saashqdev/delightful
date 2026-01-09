@@ -23,13 +23,13 @@ return new class extends Migration {
         // 清null官方organization的 Delightful service商configuration和model（放indelete软deletedata之front）
         $this->cleanOfficialDelightfulProviderData();
 
-        // 清理 service_provider 相关四张表middle的软deletedata
+        // cleanup service_provider 相关四张表middle的软deletedata
         $this->cleanSoftDeletedData();
 
         // 清洗 service_provider 表middle provider_code='Official' 的record
         $this->cleanOfficialProviderData();
 
-        // 清理 service_provider_models 表middle的冗余data
+        // cleanup service_provider_models 表middle的冗余data
         $this->cleanServiceProviderModelsData();
     }
 
@@ -42,12 +42,12 @@ return new class extends Migration {
     }
 
     /**
-     * 清理 service_provider 相关表middle的软deletedata.
+     * cleanup service_provider 相关表middle的软deletedata.
      */
     private function cleanSoftDeletedData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('start清理 service_provider 相关表的软deletedata');
+        $logger->info('startcleanup service_provider 相关表的软deletedata');
 
         try {
             // usetransactionensuredata一致property
@@ -82,10 +82,10 @@ return new class extends Migration {
                 $totalDeleted += $deletedCount;
                 $logger->info("delete service_provider_original_models 表软deletedata: {$deletedCount} item");
 
-                $logger->info("service_provider 相关表软deletedata清理complete，总共delete: {$totalDeleted} itemrecord");
+                $logger->info("service_provider 相关表软deletedatacleanupcomplete，总共delete: {$totalDeleted} itemrecord");
             });
         } catch (Throwable $e) {
-            $logger->error('清理软deletedata过程middlehair生error: ' . $e->getMessage());
+            $logger->error('cleanup软deletedataproceduremiddlehair生error: ' . $e->getMessage());
             throw $e;
         }
     }
@@ -136,10 +136,10 @@ return new class extends Migration {
                     $totalDeleted += $deletedConfigsCount;
                     $logger->info("delete官方organization Delightful service商configuration: {$deletedConfigsCount} item");
                 } else {
-                    $logger->info('未找toneed清理的 Delightful service商configuration');
+                    $logger->info('未找toneedcleanup的 Delightful service商configuration');
                 }
 
-                // 4. 额outside清理：delete所have is_office=1 的官方organizationmodel
+                // 4. 额outsidecleanup：delete所have is_office=1 的官方organizationmodel
                 $deletedOfficeModelsCount = Db::table('service_provider_models')
                     ->where('organization_code', $officialOrganizationCode)
                     ->where('is_office', 1)
@@ -147,10 +147,10 @@ return new class extends Migration {
                 $totalDeleted += $deletedOfficeModelsCount;
                 $logger->info("delete官方organization Delightful model(is_office=1): {$deletedOfficeModelsCount} item");
 
-                $logger->info("官方organization Delightful service商data清理complete，总共delete: {$totalDeleted} itemrecord");
+                $logger->info("官方organization Delightful service商datacleanupcomplete，总共delete: {$totalDeleted} itemrecord");
             });
         } catch (Throwable $e) {
-            $logger->error('清理官方organization Delightful service商data过程middlehair生error: ' . $e->getMessage());
+            $logger->error('cleanup官方organization Delightful service商dataproceduremiddlehair生error: ' . $e->getMessage());
             throw $e;
         }
     }
@@ -202,18 +202,18 @@ return new class extends Migration {
                 $logger->info('Official service商data清洗complete');
             });
         } catch (Throwable $e) {
-            $logger->error('data清洗过程middlehair生error: ' . $e->getMessage());
+            $logger->error('data清洗proceduremiddlehair生error: ' . $e->getMessage());
             throw $e;
         }
     }
 
     /**
-     * 清理 service_provider_models 表middle的冗余data.
+     * cleanup service_provider_models 表middle的冗余data.
      */
     private function cleanServiceProviderModelsData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('start清理 service_provider_models 表的冗余data');
+        $logger->info('startcleanup service_provider_models 表的冗余data');
 
         try {
             // 1. get官方organizationencoding
@@ -244,12 +244,12 @@ return new class extends Migration {
                 ->pluck('organization_code')
                 ->toArray();
 
-            $logger->info('need清理的organizationquantity: ' . count($allOrganizationCodes));
+            $logger->info('needcleanup的organizationquantity: ' . count($allOrganizationCodes));
 
-            // 5. 按organizationhandle清理工作（小transaction）
+            // 5. 按organizationhandlecleanup工作（小transaction）
             $this->cleanOrganizationsInBatches($allOrganizationCodes, $officialModelIds, $officialEnabledModels, $logger);
         } catch (Throwable $e) {
-            $logger->error('清理 service_provider_models 冗余data过程middlehair生error: ' . $e->getMessage());
+            $logger->error('cleanup service_provider_models 冗余dataproceduremiddlehair生error: ' . $e->getMessage());
             throw $e;
         }
     }
@@ -269,7 +269,7 @@ return new class extends Migration {
     }
 
     /**
-     * minute批并hair清理eachorganization的data（eachorganization独立小transaction）.
+     * minute批并haircleanupeachorganization的data（eachorganization独立小transaction）.
      */
     private function cleanOrganizationsInBatches(array $organizationCodes, array $officialModelIds, array $officialEnabledModels, LoggerInterface $logger): void
     {
@@ -301,7 +301,7 @@ return new class extends Migration {
             // handleresult
             foreach ($results as $orgCode => $result) {
                 if (isset($result['error'])) {
-                    $logger->error("清理organization {$orgCode} o clockhair生error: " . $result['error']->getMessage());
+                    $logger->error("cleanuporganization {$orgCode} o clockhair生error: " . $result['error']->getMessage());
                 } else {
                     $deletedCount = $result['deleted_count'];
                     $totalDeleted += $deletedCount;
@@ -322,11 +322,11 @@ return new class extends Migration {
             $logger->info("已handle {$processedCount}/{$totalOrgs} organization，累计delete: {$totalDeleted} item");
         }
 
-        $logger->info("service_provider_models 表冗余data清理complete，总共delete: {$totalDeleted} itemrecord");
+        $logger->info("service_provider_models 表冗余datacleanupcomplete，总共delete: {$totalDeleted} itemrecord");
     }
 
     /**
-     * 清理单organization的data（单独transaction）.
+     * cleanup单organization的data（单独transaction）.
      */
     private function cleanSingleOrganization(string $organizationCode, array $officialModelIds, array $officialEnabledModels): array
     {
@@ -400,7 +400,7 @@ return new class extends Migration {
     }
 
     /**
-     * 清理quotenot存inconfiguration的model（批quantityquery和批quantitydelete）.
+     * cleanupquotenot存inconfiguration的model（批quantityquery和批quantitydelete）.
      */
     private function cleanModelsWithInvalidConfig(string $organizationCode, string $officialOrganizationCode): int
     {
@@ -447,7 +447,7 @@ return new class extends Migration {
     }
 
     /**
-     * 清理configurationdatainvalid的model（configurationdecryptback为nullor所havevalueall是null）.
+     * cleanupconfigurationdatainvalid的model（configurationdecryptback为nullor所havevalueall是null）.
      */
     private function cleanModelsWithInvalidConfigData(string $organizationCode, string $officialOrganizationCode): int
     {

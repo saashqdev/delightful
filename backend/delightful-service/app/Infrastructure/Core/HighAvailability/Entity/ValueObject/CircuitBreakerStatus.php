@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\HighAvailability\Entity\ValueObject;
 use InvalidArgumentException;
 
 /**
- * 熔断器status枚举.
+ * circuit break器status枚举.
  */
 enum CircuitBreakerStatus: string
 {
@@ -20,7 +20,7 @@ enum CircuitBreakerStatus: string
     case CLOSED = 'closed';
 
     /**
-     * 开启status - 熔断middle.
+     * 开启status - circuit breakmiddle.
      */
     case OPEN = 'open';
 

@@ -314,7 +314,7 @@ return [
 
                     // 注意：bydownfieldberowexcept，notwill打印
                     // - args.messages (usermessagecontent)
-                    // - args.tools (tool定义)
+                    // - args.tools (tooldefinition)
                     // - choices.0.message (responsemessagecontent)
                     // - choices.0.delta (streamresponse增quantitycontent)
                     // - content (responsecontent)

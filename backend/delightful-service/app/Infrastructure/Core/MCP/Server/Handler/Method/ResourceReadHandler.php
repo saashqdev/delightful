@@ -11,7 +11,7 @@ use App\Infrastructure\Core\MCP\Exception\InvalidParamsException;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * 资源readmethodprocess器.
+ * resourcereadmethodprocess器.
  */
 class ResourceReadHandler extends AbstractMethodHandler
 {
@@ -24,7 +24,7 @@ class ResourceReadHandler extends AbstractMethodHandler
     }
 
     /**
-     * process资源readrequest.
+     * processresourcereadrequest.
      */
     public function handle(MessageInterface $request): ?array
     {

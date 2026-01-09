@@ -708,7 +708,7 @@ class LLMAppService extends AbstractLLMAppService
         $data['organization_code'] = $organizationCode;
         $imageGenerateRequest = ImageGenerateFactory::createRequestType($imageGenerateType, $data);
         $implicitWatermark = new ImplicitWatermark();
-        $imageGenerateRequest->setGenerateNum(1); // 图生图default只能 1
+        $imageGenerateRequest->setGenerateNum(1); // graph生graphdefault只能 1
         $implicitWatermark->setOrganizationCode($organizationCode)
             ->setUserId($creator)
             ->setTopicId($imageEditDTO->getTopicId());
@@ -731,7 +731,7 @@ class LLMAppService extends AbstractLLMAppService
                 $imageGenerateRequest->setModel($serviceProviderConfig->getModelVersion());
                 $generateImageRaw = $imageGenerateService->generateImageRawWithWatermark($imageGenerateRequest);
                 if (! empty($generateImageRaw)) {
-                    // 统一触hairevent（图生图default 1 张）
+                    // 统一触hairevent（graph生graphdefault 1 张）
                     $this->dispatchImageGeneratedEvent(
                         $creator,
                         $organizationCode,
@@ -1169,7 +1169,7 @@ class LLMAppService extends AbstractLLMAppService
 
             // 计算计费quantity
             $n = $proxyModelRequest->getN();
-            // except了 mj和 图生图 是 1 time之outside，其他all按张数算
+            // except了 mj和 graph生graph 是 1 time之outside，其他all按张数算
             if (in_array($modelVersion, ImageGenerateModelType::getMidjourneyModes())) {
                 $n = 1;
             }

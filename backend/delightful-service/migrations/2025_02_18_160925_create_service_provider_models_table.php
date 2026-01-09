@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->json('config')->comment('model的configurationinformation');
             $table->string('description', 255)->nullable()->comment('modeldescription');
             $table->integer('sort')->default(0)->comment('sort');
-            $table->string('icon')->default('')->comment('图标');
+            $table->string('icon')->default('')->comment('graph标');
             $table->string('organization_code')->comment('organizationencoding');
             $table->tinyInteger('status')->default(0)->comment('status：0-未enable，1-enable');
             $table->timestamps();

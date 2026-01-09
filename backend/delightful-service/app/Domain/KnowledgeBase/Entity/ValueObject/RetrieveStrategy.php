@@ -10,7 +10,7 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 /**
  * 检索strategy枚举category.
  *
- * 定义了两type检索strategy：
+ * definition了两type检索strategy：
  * - SINGLE: 单一检索，from单knowledge basemiddle检索info
  * - MULTIPLE: 多重检索，meanwhilefrom多knowledge basemiddle检索info，然back对resultconduct重新sort
  */

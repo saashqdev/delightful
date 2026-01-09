@@ -146,7 +146,7 @@ class RoleApiTest extends AbstractHttpTest
     }
 
     /**
-     * testgetuserpermission树interface.
+     * testgetuserpermissiontreeinterface.
      */
     public function testGetUserPermissionTree(): void
     {

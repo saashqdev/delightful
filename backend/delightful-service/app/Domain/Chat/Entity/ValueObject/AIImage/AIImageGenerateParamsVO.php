@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\ImageGenerateModelType;
 
 /**
- * AI文生图requestparameter.
+ * AI文生graphrequestparameter.
  */
 class AIImageGenerateParamsVO extends AbstractValueObject
 {

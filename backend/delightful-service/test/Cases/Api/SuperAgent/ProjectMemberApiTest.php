@@ -31,7 +31,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
     protected function setUp(): void
     {
-        // 清理projectmemberdata，避免唯一键conflict
+        // cleanupprojectmemberdata，避免唯一键conflict
         $this->cleanupProjectMembers($this->projectId);
         parent::setUp();
     }
@@ -925,7 +925,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 清理projectmemberdata（直接databasedelete）.
+     * cleanupprojectmemberdata（直接databasedelete）.
      */
     private function cleanupProjectMembers(string $projectId): void
     {
@@ -946,9 +946,9 @@ class ProjectMemberApiTest extends AbstractApiTest
             $memberEntity->setStatus(MemberStatus::ACTIVE);
 
             $projectMemberDomainService->addInternalMembers([$memberEntity], $this->getOrganizationCode());
-            echo "清理projectmemberdatacomplete: {$projectId}\n";
+            echo "cleanupprojectmemberdatacomplete: {$projectId}\n";
         } catch (Exception $e) {
-            echo '清理projectmemberdatafail: ' . $e->getMessage() . "\n";
+            echo 'cleanupprojectmemberdatafail: ' . $e->getMessage() . "\n";
         }
     }
 }

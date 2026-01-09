@@ -52,7 +52,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * get系统finger令对应的图标.
+     * get系统finger令对应的graph标.
      */
     public function getIcon(): string
     {
@@ -197,7 +197,7 @@ enum SystemInstructType: int
             }
         }
 
-        // 按枚举定义顺序sort系统finger令
+        // 按枚举definition顺序sort系统finger令
         ksort($systemInstructs);
 
         // 重新group合tool栏group的 items，系统finger令infront

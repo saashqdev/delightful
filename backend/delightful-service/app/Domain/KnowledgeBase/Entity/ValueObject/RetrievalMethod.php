@@ -10,11 +10,11 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 /**
  * 检索method枚举category.
  *
- * 定义了四type检索method：
+ * definition了四type检索method：
  * - SEMANTIC_SEARCH: 语义检索，based ontoquantitysimilardegree的检索method
  * - FULL_TEXT_SEARCH: all文检索，based onkeyword匹配的检索method
  * - HYBRID_SEARCH: 混合检索，结合语义检索和all文检索的method
- * - GRAPH_SEARCH: 图检索，based on知识图谱的检索method
+ * - GRAPH_SEARCH: graph检索，based on知识graph谱的检索method
  */
 class RetrievalMethod
 {
@@ -46,9 +46,9 @@ class RetrievalMethod
     public const string HYBRID_SEARCH = 'hybrid_search';
 
     /**
-     * 图检索.
+     * graph检索.
      *
-     * based on知识图谱的检索method。
+     * based on知识graph谱的检索method。
      * 利use实bodybetween的关系conduct检索，适合process复杂的associatequery。
      * canhair现隐含的关系和connect。
      */

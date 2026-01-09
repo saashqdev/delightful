@@ -22,12 +22,12 @@ class DelightfulFlowPermissionEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 资源type.
+     * resourcetype.
      */
     protected ResourceType $resourceType;
 
     /**
-     * 资源。
+     * resource。
      * 例子： process code、user id.
      */
     protected string $resourceId;

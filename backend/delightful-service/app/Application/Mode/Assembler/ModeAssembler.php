@@ -31,7 +31,7 @@ class ModeAssembler
         $groupAggregatesDTOs = [];
         foreach ($aggregate->getGroupAggregates() as $groupAggregate) {
             $groupDTO = self::groupAggregateToDTO($groupAggregate, $providerModels, $upgradeRequiredModelIds, $providerImageModels);
-            // onlywhenminutegroupdownhavemodelor图像modelo clock才添加（front台filter空minutegroup）
+            // onlywhenminutegroupdownhavemodelorgraph像modelo clock才添加（front台filter空minutegroup）
             if (! empty($groupDTO->getModels()) || ! empty($groupDTO->getImageModels())) {
                 $groupAggregatesDTOs[] = $groupDTO;
             }
@@ -72,7 +72,7 @@ class ModeAssembler
             }
         }
 
-        // process VLM 图像model
+        // process VLM graph像model
         $imageModels = [];
         foreach ($groupAggregate->getRelations() as $relation) {
             $modelDTO = new ModeGroupModelDTO($relation->toArray());
@@ -130,7 +130,7 @@ class ModeAssembler
             foreach ($groupAggregate->getRelations() as $relation) {
                 $modelDTO = new ModeGroupModelDTO($relation->toArray());
 
-                // if提供了modelinfo，then填充modelname和图标
+                // if提供了modelinfo，then填充modelname和graph标
                 $providerModelId = $relation->getModelId();
                 if (isset($providerModels[$providerModelId])) {
                     $providerModel = $providerModels[$providerModelId];

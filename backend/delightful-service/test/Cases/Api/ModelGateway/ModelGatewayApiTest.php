@@ -53,7 +53,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
         // create一 Parallel 实例，setmost大并hair数为 10
         $parallel = new Parallel(10);
 
-        // 定义多different的request场景
+        // definition多different的request场景
         $scenario = $this->buildRequestData([
             'business_params' => [
                 'organization_id' => '000',

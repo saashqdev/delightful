@@ -132,7 +132,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
                 $readPagesDetailChannel = null;
                 $this->simpleSearch($dto, $associateQuestions, $noRepeatSearchContexts);
             }
-            // use channel 通信，精读过程middlethenpushmessage给front端
+            // use channel 通信，精读proceduremiddlethenpushmessage给front端
             $associateQuestionIds = [];
             foreach ($associateQuestions as $associateQuestion) {
                 $associateQuestionIds[] = $associateQuestion->getQuestionId();
@@ -140,14 +140,14 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             $this->sendLLMResponseForAssociateQuestions($dto, $associateQuestionIds, $readPagesDetailChannel);
             // 4. according toeachassociateissuereply，generate总结.
             $summarize = $this->generateAndSendSummary($dto, $noRepeatSearchContexts, $associateQuestions);
-            // 5. according to总结，generate额outsidecontent（思维导图、PPT、eventetc）
+            // 5. according to总结，generate额outsidecontent（思维导graph、PPT、eventetc）
             if ($dto->getSearchDeepLevel() === SearchDeepLevel::DEEP) {
                 $this->generateAndSendExtra($dto, $noRepeatSearchContexts, $summarize);
             }
             // 6. sendping pongresponse,代表endreply
             $this->streamSendDeepSearchMessages($dto, [], StreamMessageStatus::Completed);
         } catch (Throwable $e) {
-            // 7. hair生exceptiono clock，send终止message，并throwexception
+            // 7. hair生exceptiono clock，sendterminationmessage，并throwexception
             $this->streamSendDeepSearchMessages($dto, [], StreamMessageStatus::Completed);
             $errMsg = [
                 'function' => 'aggregateSearchError',
@@ -538,7 +538,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             $assistantMessage = $choice->getMessage();
             // streamcontent
             if ($assistantMessage->hasReasoningContent()) {
-                // streampush思考or者总结过程
+                // streampush思考or者总结procedure
                 $this->streamSendDeepSearchMessages($dto, ['summary.reasoning_content' => $assistantMessage->getReasoningContent()]);
                 $hasReasoningContent = true;
             } else {
@@ -554,7 +554,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             }
             // 先push思考end，againpush总结
             if ($hasSummaryContent && $assistantMessage->getContent() !== '') {
-                // streampush思考or者总结过程
+                // streampush思考or者总结procedure
                 $this->streamSendDeepSearchMessages($dto, ['summary.content' => $assistantMessage->getContent()]);
             }
         }
@@ -575,13 +575,13 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
      */
     public function generateAndSendExtra(DelightfulChatAggregateSearchReqDTO $dto, array $noRepeatSearchContexts, DelightfulAggregateSearchSummaryDTO $summarize): void
     {
-        // generate思维导图和PPT
+        // generate思维导graph和PPT
         $extraContentParallel = new Parallel(3);
         $modelInterface = $this->getChatModel($dto->getOrganizationCode(), $dto->getUserId());
         $extraContentParallel->add(function () use ($summarize, $dto, $modelInterface) {
             // odin will修改 vo objectmiddle的value，避免污染，复制again传入
             CoContext::setRequestId($dto->getRequestId());
-            // 思维导图
+            // 思维导graph
             $mindMapQueryVo = $this->getSearchVOByAggregateSearchDTO($dto, $summarize);
             $mindMapQueryVo->setModel($modelInterface);
             $mindMap = $this->generateAndSendMindMap($dto, $mindMapQueryVo);
@@ -685,7 +685,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     {
         $start = microtime(true);
         $mindMap = $this->delightfulLLMDomainService->generateMindMapFromMessage($queryVo);
-        $this->logger->info(sprintf('getSearchResults generate思维导图，end计o clock，耗o clock: %s second', microtime(true) - $start));
+        $this->logger->info(sprintf('getSearchResults generate思维导graph，end计o clock，耗o clock: %s second', microtime(true) - $start));
         # streammessagepush
         $this->streamSendDeepSearchMessages($dto, ['mind_map' => $mindMap]);
         return $mindMap;
@@ -758,7 +758,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     }
 
     /**
-     * 精读的过程middle，隔随机timepush一timeassociateissuesearch完毕给front端。
+     * 精读的proceduremiddle，隔随机timepush一timeassociateissuesearch完毕给front端。
      * 完all精读完毕o clock，mostbackagain推一time
      */
     private function sendLLMResponseForAssociateQuestions(
@@ -768,14 +768,14 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     ): void {
         foreach ($associateQuestionIds as $questionId) {
             $readPagesDetailChannel && $readPagesDetailChannel->pop(15);
-            # pusheach子issue的searchend终止标识
+            # pusheach子issue的searchendtermination标识
             $questionKey = AggregateAISearchCardMessageV2::QUESTION_DELIMITER . $questionId;
             $streamMessageKey = 'stream_options.steps_finished.associate_questions.' . $questionKey;
             $this->streamSendDeepSearchMessages($dto, [$streamMessageKey => [
                 'finished_reason' => FinishedReasonEnum::Finished,
             ]]);
         }
-        // push父issue的searchend终止标识
+        // push父issue的searchendtermination标识
         $streamMessageKey = 'stream_options.steps_finished.associate_questions.' . AggregateAISearchCardMessageV2::QUESTION_DELIMITER . '0';
         $this->streamSendDeepSearchMessages($dto, [$streamMessageKey => [
             'finished_reason' => FinishedReasonEnum::Finished,

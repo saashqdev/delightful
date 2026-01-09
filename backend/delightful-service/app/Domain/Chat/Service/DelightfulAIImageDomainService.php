@@ -14,7 +14,7 @@ use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Model\MiracleVision\MiracleV
 use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request\MiracleVisionModelRequest;
 
 /**
- * AI文生图.
+ * AI文生graph.
  */
 class DelightfulAIImageDomainService extends AbstractDomainService
 {

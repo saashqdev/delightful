@@ -31,7 +31,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * get所have资源.
+     * get所haveresource.
      */
     public function getResources(): array
     {
@@ -39,7 +39,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * get资源的国际化tag（由 DelightfulResourceEnum 提供）.
+     * getresource的国际化tag（由 DelightfulResourceEnum 提供）.
      */
     public function getResourceLabel(string $resource): string
     {
@@ -93,7 +93,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * checkwhether为资源type.
+     * checkwhether为resourcetype.
      */
     public function isResource(string $value): bool
     {
@@ -127,7 +127,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * get资源的模piece.
+     * getresource的模piece.
      */
     public function getResourceModule(string $resource): string
     {
@@ -136,14 +136,14 @@ class DelightfulPermission implements DelightfulPermissionInterface
             throw new InvalidArgumentException('Not a resource type: ' . $resource);
         }
 
-        // 模piecelayer定义为二level资源（即平台的直接子资源）
+        // 模piecelayerdefinition为二levelresource（即平台的直接子resource）
         if ($enum->parent() === null) {
-            // toplevel资源（平台本身）
+            // toplevelresource（平台本身）
             $moduleEnum = $enum;
         } else {
             $parent = $enum->parent();
             if ($parent->parent() === null) {
-                // current资源已经是二levellayerlevel，直接作为模piece
+                // currentresource已经是二levellayerlevel，直接作为模piece
                 $moduleEnum = $enum;
             } else {
                 // more深layerlevel，模piece取父level（二level）
@@ -173,7 +173,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         $operations = $this->getOperations();
 
         foreach ($resources as $resource) {
-            // 仅handle三level及byup资源，filter平台和模piecelevel
+            // 仅handle三level及byupresource，filter平台和模piecelevel
             if (substr_count($resource, '.') < 2) {
                 continue;
             }
@@ -193,8 +193,8 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * getlayerlevel结构的permission树
-     * generate无限极permission树,rule：according topermission资源string（如 Admin.ai.model_management）逐segmentsplit，逐layer构造树。
+     * getlayerlevel结构的permissiontree
+     * generate无限极permissiontree,rule：according topermissionresourcestring（如 Admin.ai.model_management）逐segmentsplit，逐layer构造tree。
      *
      * returnformat：
      * [
@@ -205,23 +205,23 @@ class DelightfulPermission implements DelightfulPermissionInterface
      *   ],
      * ]
      *
-     * @param bool $isPlatformOrganization whether平台organization；仅when为 true o clock，contain platform 平台的资源树
+     * @param bool $isPlatformOrganization whether平台organization；仅when为 true o clock，contain platform 平台的resourcetree
      */
     public function getPermissionTree(bool $isPlatformOrganization = false): array
     {
         $tree = [];
 
         foreach ($this->generateAllPermissions() as $permission) {
-            // 将资源path按 '.' split
+            // 将resourcepath按 '.' split
             $segments = explode('.', $permission['resource']);
             if (count($segments) < 2) {
-                // at least应contain平台 + 资源两level，若not足thenskip
+                // at least应contain平台 + resource两level，若not足thenskip
                 continue;
             }
 
             $platformKey = array_shift($segments); // 平台，如 Admin
 
-            // 平台organization独have：non平台organizationo clock，filter掉 platform 平台的资源
+            // 平台organization独have：non平台organizationo clock，filter掉 platform 平台的resource
             if ($platformKey === DelightfulResourceEnum::PLATFORM->value && ! $isPlatformOrganization) {
                 continue;
             }
@@ -244,7 +244,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 // 取 label：the一segmentuse模piecemiddle文名，其余按rule
                 $label = match (true) {
                     $index === 0 => $this->getResourceModule($permission['resource']),                // 模piecelayer
-                    $isLastSegment => $permission['resource_label'],      // 资源layer
+                    $isLastSegment => $permission['resource_label'],      // resourcelayer
                     default => ucfirst($segment),                        // 其他middlebetweenlayer
                 };
 
@@ -264,7 +264,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 $current = &$current['children'][$segment];
             }
 
-            // 此o clock $current fingerto资源sectionpoint，为其添加操作leaf子
+            // 此o clock $current fingertoresourcesectionpoint，为其添加操作leaf子
             $current['children'][] = [
                 'label' => $permission['operation_label'],
                 'permission_key' => $permission['permission_key'],
@@ -290,10 +290,10 @@ class DelightfulPermission implements DelightfulPermissionInterface
         try {
             $parsed = $this->parsePermission($permissionKey);
 
-            // check资源whether存in
+            // checkresourcewhether存in
             $resourceExists = in_array($parsed['resource'], $this->getResources());
 
-            // check操作whether存in（按资源）
+            // check操作whether存in（按resource）
             $operationExists = in_array($parsed['operation'], $this->getOperationsByResource($parsed['resource']), true);
 
             return $resourceExists && $operationExists;
@@ -303,20 +303,20 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 判断userpermission集合middlewhether拥havefinger定permission（考虑隐typecontain）。
+     * 判断userpermissionsetmiddlewhether拥havefinger定permission（考虑隐typecontain）。
      *
      * rule：
      *   1. 如直接命middlepermission键，return true；
      *   2. if拥haveall局permission ALL_PERMISSIONS，return true；
-     *   3. 若未命middle，thencheck由该permission隐typecontain的permission集合（for example *edit* 隐typecontain *query*）。
+     *   3. 若未命middle，thencheck由该permission隐typecontain的permissionset（for example *edit* 隐typecontain *query*）。
      *
      * @param string $permissionKey goalpermission键
-     * @param string[] $userPermissions user已拥have的permission键集合
+     * @param string[] $userPermissions user已拥have的permission键set
      * @param bool $isPlatformOrganization whether平台organization
      */
     public function checkPermission(string $permissionKey, array $userPermissions, bool $isPlatformOrganization = false): bool
     {
-        // 平台organization校验：non平台organizationnotallowaccess platform 平台资源
+        // 平台organization校验：non平台organizationnotallowaccess platform 平台resource
         $parsed = $this->parsePermission($permissionKey);
         $platformKey = explode('.', $parsed['resource'])[0];
         if ($platformKey === DelightfulResourceEnum::PLATFORM->value && ! $isPlatformOrganization) {
@@ -349,7 +349,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * parse资源bind的 Operation Enum，return该资源可use的操作集合（stringarray）。
+     * parseresourcebind的 Operation Enum，return该resource可use的操作set（stringarray）。
      */
     protected function getOperationsByResource(string $resource): array
     {
@@ -372,8 +372,8 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * return资源bind的 Operation Enum category名，defaultread `DelightfulResourceEnum::operationEnumClass()`。
-     * 企业版可override本method，将企业资源mappingtocustomize的 Operation Enum。
+     * returnresourcebind的 Operation Enum category名，defaultread `DelightfulResourceEnum::operationEnumClass()`。
+     * 企业版可override本method，将企业resourcemappingtocustomize的 Operation Enum。
      */
     protected function resolveOperationEnumClass(DelightfulResourceEnum $resourceEnum): string
     {
@@ -381,7 +381,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 对atnon DelightfulResourceEnum 定义的资源，子category可override该methodbyparseto相应的 Operation Enum。
+     * 对atnon DelightfulResourceEnum definition的resource，子category可override该methodbyparseto相应的 Operation Enum。
      * 开源default抛错。
      */
     protected function resolveOperationEnumClassFromUnknownResource(string $resource): string
@@ -390,7 +390,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * get按资源的操作tag。
+     * get按resource的操作tag。
      */
     protected function getOperationLabelByResource(string $resource, string $operation): string
     {

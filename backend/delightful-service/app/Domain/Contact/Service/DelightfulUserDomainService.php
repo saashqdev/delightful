@@ -387,7 +387,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
             return $loginResponses;
         } finally {
-            // 释放lock
+            // releaselock
             $this->locker->release($lockKey, $owner);
         }
     }
@@ -610,7 +610,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 释放互斥lock
+     * release互斥lock
      */
     protected function releaseLock(string $lockKey, string $owner): void
     {

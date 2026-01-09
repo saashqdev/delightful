@@ -22,7 +22,7 @@ class ToolOptions extends AbstractValueObject
     protected string $description;
 
     /**
-     * inputmode定义.
+     * inputmodedefinition.
      */
     protected array $inputSchema = [];
 

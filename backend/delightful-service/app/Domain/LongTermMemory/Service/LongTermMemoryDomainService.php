@@ -89,7 +89,7 @@ readonly class LongTermMemoryDomainService
 
             $this->logger->info('Batch reinforced memories successfully', ['count' => count($memories)]);
         } finally {
-            // ensure释放lock
+            // ensurereleaselock
             $this->locker->release($lockName, $lockOwner);
         }
     }
@@ -191,7 +191,7 @@ readonly class LongTermMemoryDomainService
                 $this->updateMessageWithMemoryOperation($delightfulMessageId, $action, $memoryIds);
             }
         } finally {
-            // ensure释放lock
+            // ensurereleaselock
             $this->locker->release($lockName, $lockOwner);
         }
     }
@@ -291,7 +291,7 @@ readonly class LongTermMemoryDomainService
 
             return $memory->getId();
         } finally {
-            // ensure释放lock
+            // ensurereleaselock
             $this->locker->release($lockName, $lockOwner);
         }
     }
@@ -330,7 +330,7 @@ readonly class LongTermMemoryDomainService
 
             $this->logger->info('Memory updated successfully: {id}', ['id' => $memoryId]);
         } finally {
-            // ensure释放lock
+            // ensurereleaselock
             $this->locker->release($lockName, $lockOwner);
         }
     }
@@ -362,7 +362,7 @@ readonly class LongTermMemoryDomainService
 
             $this->logger->info('Memory deleted successfully: {id}', ['id' => $memoryId]);
         } finally {
-            // ensure释放lock
+            // ensurereleaselock
             $this->locker->release($lockName, $lockOwner);
         }
     }
@@ -564,7 +564,7 @@ readonly class LongTermMemoryDomainService
             // execute批quantityupdate
             return $this->repository->batchUpdateEnabled($validMemoryIds, $enabled, $orgId, $appId, $userId);
         } finally {
-            // ensure释放lock
+            // ensurereleaselock
             $this->locker->release($lockName, $lockOwner);
         }
     }

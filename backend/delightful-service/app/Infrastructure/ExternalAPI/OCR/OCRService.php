@@ -54,7 +54,7 @@ readonly class OCRService
 
     private function get(string $url, OCRClientInterface $OCRClient): string
     {
-        // 定义 Redis cache键
+        // definition Redis cache键
         $cacheKey = 'file_cache:' . md5($url);
 
         // 尝试fromcachegetdata

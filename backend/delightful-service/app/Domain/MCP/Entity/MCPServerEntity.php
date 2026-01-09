@@ -37,7 +37,7 @@ class MCPServerEntity extends AbstractEntity
     protected string $description = '';
 
     /**
-     * MCPservice图标.
+     * MCPservicegraph标.
      */
     protected string $icon = '';
 

@@ -44,18 +44,18 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * 检测图像whethercontain透明通道.
+     * 检测graph像whethercontain透明通道.
      * 提供基础的透明degree检测feature.
      * @param mixed $image
      */
     public function hasTransparency($image): bool
     {
         if (! imageistruecolor($image)) {
-            // 调color板图像check透明color索引
+            // 调color板graph像check透明color索引
             return imagecolortransparent($image) !== -1;
         }
 
-        // 真彩color图像checkalpha通道
+        // 真彩colorgraph像checkalpha通道
         $width = imagesx($image);
         $height = imagesy($image);
 

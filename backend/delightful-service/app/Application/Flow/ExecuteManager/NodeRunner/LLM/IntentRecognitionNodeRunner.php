@@ -17,7 +17,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Delightful\FlowExprEngine\Component;
 use Hyperf\Odin\Message\UserMessage;
 
-#[FlowNodeDefine(type: NodeType::IntentRecognition->value, code: NodeType::IntentRecognition->name, name: '意图识别', paramsConfig: IntentRecognitionNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: true, needOutput: false)]
+#[FlowNodeDefine(type: NodeType::IntentRecognition->value, code: NodeType::IntentRecognition->name, name: '意graph识别', paramsConfig: IntentRecognitionNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: true, needOutput: false)]
 class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 {
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void
@@ -25,7 +25,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
         /** @var IntentRecognitionNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        // 意图
+        // 意graph
         $input = $this->node->getInput()?->getForm()?->getForm()?->getKeyValue($executionData->getExpressionFieldData(), true) ?? [];
         $vertexResult->setInput($input);
         $intent = $input['intent'] ?? '';
@@ -52,7 +52,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
             $title = $titleComponent?->getValue()?->getResult($executionData->getExpressionFieldData());
             if (! is_string($title) || $title === '') {
-                ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'common.empty', ['label' => '意图name']);
+                ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'common.empty', ['label' => '意graphname']);
             }
             $desc = $descComponent?->getValue()?->getResult($executionData->getExpressionFieldData()) ?? '';
             if (! is_string($desc)) {
@@ -70,7 +70,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         $systemPrompt = $this->createSystemPrompt($intentPrompts);
 
-        // if意图识别开启了自动load记忆，那么need剔exceptcurrentmessage
+        // if意graph识别开启了自动load记忆，那么need剔exceptcurrentmessage
         $ignoreMessageIds = [];
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
@@ -91,7 +91,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
         }
         $hasMatch = (bool) ($data['whether识别'] ?? false);
         if ($hasMatch) {
-            $bestIntent = $data['most佳意图'] ?? '';
+            $bestIntent = $data['most佳意graph'] ?? '';
             $vertexResult->setChildrenIds($childrenNodes[$bestIntent] ?? []);
         }
     }
@@ -105,45 +105,45 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         return <<<MARKDOWN
 '# role
-你是一意图识别sectionpoint，useatanalyzeuser的意图，你将得to一shareuserinput的content，帮我analyze出user的意图和置信degree。
-resultneedin限定的意图rangemiddle。
+你是一意graph识别sectionpoint，useatanalyzeuser的意graph，你将得to一shareuserinput的content，帮我analyze出user的意graph和置信degree。
+resultneedin限定的意graphrangemiddle。
 
-# 技能 - 意图识别
+# 技能 - 意graph识别
 将你的responseformat化为 JSON object，format如down：
 {
     "whether识别": true,
     "识别failreason": "",
-    "most佳意图": "吃饭",
-    "匹配to的意图have": [
+    "most佳意graph": "吃饭",
+    "匹配to的意graphhave": [
         {
-            "意图": "吃饭",
+            "意graph": "吃饭",
             "置信degree": 0.8
         },
         {
-            "意图": "睡觉",
+            "意graph": "睡觉",
             "置信degree": 0.1
         },
         {
-            "意图": "打游戏",
+            "意graph": "打游戏",
             "置信degree": 0.1
         }
     ],
-    "推导过程":"",
+    "推导procedure":"",
     "remark":""
 }    
 
 # process
-1. 你将得to一shareuserinput的content，帮我analyze出user的意图和置信degree。
-2. 推理user的意图，将推理过程放to JSON middle的 推导过程 field，解释为什么will得出这些意图和置信degree。
-3. if识别to了意图，请填写most佳匹配和匹配to的意图，whether识别为 true，most佳意图 一定是置信degreemost高的，其middle 匹配to的意图have field是according to 置信degree from大to小rowcolumn。
-4. ifincurrentrangenothave找to任何意图，whether识别为 false，请填写识别failreason，most佳匹配和匹配to的意图allshould是空的。
+1. 你将得to一shareuserinput的content，帮我analyze出user的意graph和置信degree。
+2. 推理user的意graph，将推理procedure放to JSON middle的 推导procedure field，解释为什么will得出这些意graph和置信degree。
+3. if识别to了意graph，请填写most佳匹配和匹配to的意graph，whether识别为 true，most佳意graph 一定是置信degreemost高的，其middle 匹配to的意graphhave field是according to 置信degree from大to小rowcolumn。
+4. ifincurrentrangenothave找to任何意graph，whether识别为 false，请填写识别failreason，most佳匹配和匹配to的意graphallshould是空的。
 5. 只willreturn JSON format，notwillagainreturn其他content，if一定needhavereturn，请放toremarkmiddle，回答的content一定能be JSON toolparse。
 
 # 限制
-- 意图range的format是 '意图'：'意图description'。其middle意图descriptioncan为空。意图和意图description一定是use '' package裹的data。
-- notcan回答其他issue，只能回答意图识别的issue。
+- 意graphrange的format是 '意graph'：'意graphdescription'。其middle意graphdescriptioncan为空。意graph和意graphdescription一定是use '' package裹的data。
+- notcan回答其他issue，只能回答意graph识别的issue。
 
-# needanalyze的意图range如down
+# needanalyze的意graphrange如down
 {$content}
 MARKDOWN;
     }

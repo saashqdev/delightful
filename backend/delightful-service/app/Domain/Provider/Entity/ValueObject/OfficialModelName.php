@@ -12,6 +12,6 @@ namespace App\Domain\Provider\Entity\ValueObject;
  */
 enum OfficialModelName: string
 {
-    // 美图AI超清
+    // 美graphAI超清
     case IMAGE_HEIGHT_MEI_TU = 'image_height_mei_tu';
 }

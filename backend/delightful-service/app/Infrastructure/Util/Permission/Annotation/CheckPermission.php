@@ -22,7 +22,7 @@ use Hyperf\Di\Annotation\AbstractAnnotation;
 class CheckPermission extends AbstractAnnotation
 {
     /**
-     * 资源标识（support单or多）。
+     * resource标识（support单or多）。
      */
     public array|string $resource;
 
@@ -32,7 +32,7 @@ class CheckPermission extends AbstractAnnotation
     public string $operation;
 
     /**
-     * @param array|BackedEnum|string $resource 资源，string/枚举or其array
+     * @param array|BackedEnum|string $resource resource，string/枚举or其array
      * @param BackedEnum|string $operation 操作，仅stringor枚举
      */
     public function __construct(array|BackedEnum|string $resource, BackedEnum|string $operation)
@@ -53,7 +53,7 @@ class CheckPermission extends AbstractAnnotation
 
     /**
      * return所havepermission键group合（resources x operations 的笛卡尔积）。
-     * whenstatement了多资源or多操作o clock，permissionpass任意一键即可。
+     * whenstatement了多resourceor多操作o clock，permissionpass任意一键即可。
      *
      * @return array<string>
      */

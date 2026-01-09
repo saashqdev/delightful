@@ -68,7 +68,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
      * getresponseobject的lock，useat并hairsecurityground操作 OpenAIFormatResponse.
      * useRedis自旋lockimplementrow队etc待.
      *
-     * @return string returnlock的owner，useat释放lock
+     * @return string returnlock的owner，useatreleaselock
      */
     protected function lockResponse(OpenAIFormatResponse $response): string
     {
@@ -77,11 +77,11 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
         // spinLockwill自动etc待，untilgetsuccessortimeout（30second）
         if (! $this->redisLocker->spinLock($lockKey, $owner, 30)) {
-            $this->logger->error('get图像responseRedislocktimeout', [
+            $this->logger->error('getgraph像responseRedislocktimeout', [
                 'lock_key' => $lockKey,
                 'timeout' => 30,
             ]);
-            throw new Exception('get图像responselocktimeout，请稍backretry');
+            throw new Exception('getgraph像responselocktimeout，请稍backretry');
         }
 
         $this->logger->debug('Redislockgetsuccess', ['lock_key' => $lockKey, 'owner' => $owner]);
@@ -89,7 +89,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 释放responseobject的lock.
+     * releaseresponseobject的lock.
      *
      * @param OpenAIFormatResponse $response responseobject
      * @param string $owner lock的owner
@@ -101,20 +101,20 @@ abstract class AbstractImageGenerate implements ImageGenerate
         try {
             $result = $this->redisLocker->release($lockKey, $owner);
             if (! $result) {
-                $this->logger->warning('Redislock释放fail，可能已be其他进程释放', [
+                $this->logger->warning('Redislockreleasefail，可能已be其他进程release', [
                     'lock_key' => $lockKey,
                     'owner' => $owner,
                 ]);
             } else {
-                $this->logger->debug('Redislock释放success', ['lock_key' => $lockKey, 'owner' => $owner]);
+                $this->logger->debug('Redislockreleasesuccess', ['lock_key' => $lockKey, 'owner' => $owner]);
             }
         } catch (Exception $e) {
-            $this->logger->error('Redislock释放exception', [
+            $this->logger->error('Redislockreleaseexception', [
                 'lock_key' => $lockKey,
                 'owner' => $owner,
                 'error' => $e->getMessage(),
             ]);
-            // lock释放failnot影响业务逻辑，but要recordlog
+            // lockreleasefailnot影响业务逻辑，but要recordlog
         }
     }
 

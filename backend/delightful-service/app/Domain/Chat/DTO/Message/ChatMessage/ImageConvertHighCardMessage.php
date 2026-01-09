@@ -12,7 +12,7 @@ use App\Domain\Chat\Entity\ValueObject\ImageConvertHigh\ImageConvertHighResponse
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * AI文生图的cardmessage.
+ * AI文生graph的cardmessage.
  */
 class ImageConvertHighCardMessage extends AbstractChatMessageStruct implements ChatFileInterface
 {

@@ -95,7 +95,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * getpermission资源树结构.
+     * getpermissionresourcetree结构.
      *
      * @param bool $isPlatformOrganization whether平台organization
      */

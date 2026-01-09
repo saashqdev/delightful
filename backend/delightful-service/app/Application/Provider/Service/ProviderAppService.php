@@ -53,13 +53,13 @@ class ProviderAppService
         // 批quantitygetservice商configuration实body（useatget别名）
         $configEntities = $this->providerConfigDomainService->getConfigByIdsWithoutOrganizationFilter($configIds);
 
-        // 收集所have图标path按organizationencodingminutegroup（includemodel图标和service商图标）
+        // 收集所havegraph标path按organizationencodingminutegroup（includemodelgraph标和service商graph标）
         $iconsByOrg = [];
         $iconToModelMap = [];
         $iconToProviderMap = [];
 
         foreach ($models as $model) {
-            // processmodel图标
+            // processmodelgraph标
             $modelIcon = $model->getIcon();
             if (empty($modelIcon)) {
                 continue;
@@ -74,7 +74,7 @@ class ProviderAppService
             }
             $iconToModelMap[$modelIcon][] = $model;
 
-            // processservice商图标
+            // processservice商graph标
             $configId = $model->getServiceProviderConfigId();
             if (! isset($providerEntities[$configId])) {
                 continue;
@@ -94,7 +94,7 @@ class ProviderAppService
             $iconToProviderMap[$providerIcon][] = $configId;
         }
 
-        // 批quantityget图标URL
+        // 批quantitygetgraph标URL
         $iconUrlMap = [];
         foreach ($iconsByOrg as $iconOrganizationCode => $icons) {
             $links = $this->fileDomainService->getLinks($iconOrganizationCode, array_unique($icons));
@@ -102,7 +102,7 @@ class ProviderAppService
         }
         ! empty($iconUrlMap) && $iconUrlMap = array_merge(...$iconUrlMap);
 
-        // updateservice商图标URLmapping
+        // updateservice商graph标URLmapping
         $providerIconUrls = [];
         foreach ($iconToProviderMap as $icon => $configIds) {
             if (! isset($iconUrlMap[$icon])) {
@@ -116,7 +116,7 @@ class ProviderAppService
             }
         }
         $locale = $this->translator->getLocale();
-        // createDTO并set图标URL
+        // createDTO并setgraph标URL
         $modelDTOs = [];
         foreach ($models as $model) {
             $modelDTO = new BeDelightfulModelDTO($model->toArray());
@@ -130,7 +130,7 @@ class ProviderAppService
             }
             $modelDTO->setDescription($localizedModelDescription);
 
-            // setmodel图标URL
+            // setmodelgraph标URL
             $modelIcon = $model->getIcon();
             if (! empty($modelIcon) && isset($iconUrlMap[$modelIcon])) {
                 $fileLink = $iconUrlMap[$modelIcon];

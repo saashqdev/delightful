@@ -28,7 +28,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
 
         $groupDTOs = AdminModeAssembler::groupEntitiesToAdminDTOs($groups);
 
-        // processminutegroup图标
+        // processminutegroupgraph标
         $this->processGroupIcons($groupDTOs);
 
         return $groupDTOs;

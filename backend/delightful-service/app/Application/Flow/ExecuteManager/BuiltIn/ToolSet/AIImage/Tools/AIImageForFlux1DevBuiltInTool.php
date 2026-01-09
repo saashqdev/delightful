@@ -27,7 +27,7 @@ class AIImageForFlux1DevBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return '文生图tool-Flux1-Devmodel';
+        return '文生graphtool-Flux1-Devmodel';
     }
 
     public function getCallback(): ?Closure

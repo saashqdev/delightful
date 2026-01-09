@@ -10,12 +10,12 @@ namespace App\Application\KnowledgeBase\Crontab;
 use Hyperf\Crontab\Annotation\Crontab;
 use Hyperf\DbConnection\Db;
 
-#[Crontab(rule: '0 3 * * *', name: 'DelightfulFlowKnowledgeFragmentClearCrontab', singleton: true, mutexExpires: 600, onOneServer: true, callback: 'execute', memo: 'schedule清理knowledge base')]
+#[Crontab(rule: '0 3 * * *', name: 'DelightfulFlowKnowledgeFragmentClearCrontab', singleton: true, mutexExpires: 600, onOneServer: true, callback: 'execute', memo: 'schedulecleanupknowledge base')]
 readonly class DelightfulFlowKnowledgeFragmentClearCrontab
 {
     public function execute(): void
     {
-        // schedule清理软删的knowledge base和slicesegment 仅保留 1 day
+        // schedulecleanup软删的knowledge base和slicesegment 仅保留 1 day
 
         $this->clearKnowledge();
         $this->clearDocument();

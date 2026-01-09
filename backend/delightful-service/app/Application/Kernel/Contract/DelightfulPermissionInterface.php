@@ -19,7 +19,7 @@ interface DelightfulPermissionInterface
     public function getOperations(): array;
 
     /**
-     * get所have资源.
+     * get所haveresource.
      */
     public function getResources(): array;
 
@@ -39,9 +39,9 @@ interface DelightfulPermissionInterface
     public function generateAllPermissions(): array;
 
     /**
-     * getpermission树结构.
+     * getpermissiontree结构.
      *
-     * @param bool $isPlatformOrganization whether平台organization，平台organizationdown才contain platform 平台的资源树
+     * @param bool $isPlatformOrganization whether平台organization，平台organizationdown才contain platform 平台的resourcetree
      */
     public function getPermissionTree(bool $isPlatformOrganization = false): array;
 
@@ -51,7 +51,7 @@ interface DelightfulPermissionInterface
     public function isValidPermission(string $permissionKey): bool;
 
     /**
-     * get资源tag.
+     * getresourcetag.
      */
     public function getResourceLabel(string $resource): string;
 
@@ -61,12 +61,12 @@ interface DelightfulPermissionInterface
     public function getOperationLabel(string $operation): string;
 
     /**
-     * get资源的模piece.
+     * getresource的模piece.
      */
     public function getResourceModule(string $resource): string;
 
     /**
-     * checkuserpermission集合middlewhethercontainfinger定permission（考虑隐typecontain）。
+     * checkuserpermissionsetmiddlewhethercontainfinger定permission（考虑隐typecontain）。
      */
     public function checkPermission(string $permissionKey, array $userPermissions, bool $isPlatformOrganization = false): bool;
 }

@@ -254,7 +254,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
 
             return $organizationModelId;
         } finally {
-            // ensure释放lock
+            // ensurereleaselock
             $this->locker->release($lockName, $lockOwner);
         }
     }

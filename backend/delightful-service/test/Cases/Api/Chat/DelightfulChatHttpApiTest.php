@@ -50,7 +50,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         $this->assertEquals(1000, $response['code'] ?? 0, 'response码应为1000');
         $this->assertEquals('ok', $response['message'] ?? '', 'responsemessage应为ok');
 
-        // 定义expect的response结构
+        // definitionexpect的response结构
         $expectedStructure = [
             'data' => [
                 'choices' => [
@@ -98,7 +98,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         // sendPOSTrequesttocorrect的interfacepath
         $response = $this->json('/api/v2/delightful/chat/chatCompletions', $requestData, $headers);
 
-        // 定义expect的errorresponse结构
+        // definitionexpect的errorresponse结构
         $expectedErrorStructure = [
             'code' => 0, // expectednot是1000的code，butspecific数value可能not确定，所by这within只是占位
             'message' => '', // 只verify存inmessagefield，specificcontent可能not确定
@@ -129,7 +129,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         // sendPOSTrequesttocorrect的interfacepath
         $response = $this->json('/api/v2/delightful/chat/chatCompletions', $requestData, $headers);
 
-        // 定义expect的errorresponse结构
+        // definitionexpect的errorresponse结构
         $expectedErrorStructure = [
             'code' => 0, // expectednot是1000的code，specific数value可能not确定
             'message' => '', // 只verify存inmessagefield，specificcontent可能not确定

@@ -81,7 +81,7 @@ class ModeDomainService
     }
 
     /**
-     * according to标识符get模type.
+     * according toidentifierget模type.
      */
     public function getModeDetailByIdentifier(ModeDataIsolation $dataIsolation, string $identifier): ?ModeAggregate
     {
@@ -367,7 +367,7 @@ class ModeDomainService
 
     private function valid(ModeDataIsolation $dataIsolation, ModeEntity $modeEntity)
     {
-        // validate标识符唯一property
+        // validateidentifier唯一property
         if (! $this->modeRepository->isIdentifierUnique($dataIsolation, $modeEntity->getIdentifier())) {
             ExceptionBuilder::throw(ModeErrorCode::MODE_IDENTIFIER_ALREADY_EXISTS);
         }

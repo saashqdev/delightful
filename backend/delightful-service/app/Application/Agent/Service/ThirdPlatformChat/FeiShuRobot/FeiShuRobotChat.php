@@ -87,7 +87,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private CacheInterface $cache;
 
     /**
-     * 构造函数.
+     * 构造function.
      *
      * @param array $options 飞书configurationoption
      * @throws Exception ifconfigurationinvalid

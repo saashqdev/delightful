@@ -64,7 +64,7 @@ class AccountEntity extends AbstractEntity
 
     protected ?string $createdAt = null;
 
-    // 为了trace哪withincreate的账number，留down这构造函数
+    // 为了trace哪withincreate的账number，留down这构造function
     public function __construct(array $data = [])
     {
         parent::__construct($data);

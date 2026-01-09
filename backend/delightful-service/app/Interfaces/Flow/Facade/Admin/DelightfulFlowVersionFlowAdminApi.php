@@ -63,7 +63,7 @@ class DelightfulFlowVersionFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 回滚version.
+     * rollbackversion.
      */
     public function rollback(string $flowId, string $versionId)
     {

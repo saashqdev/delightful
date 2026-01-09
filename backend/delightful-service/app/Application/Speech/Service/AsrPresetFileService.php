@@ -103,7 +103,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * delete笔记file（笔记content为空o clock清理）.
+     * delete笔记file（笔记content为空o clockcleanup）.
      *
      * @param string $fileId fileID
      * @return bool whetherdeletesuccess
@@ -135,7 +135,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * deletestream识别file（总结completeback清理）.
+     * deletestream识别file（总结completebackcleanup）.
      *
      * @param string $fileId fileID
      * @return bool whetherdeletesuccess

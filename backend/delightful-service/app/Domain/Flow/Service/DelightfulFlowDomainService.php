@@ -193,7 +193,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
             'flowCode' => $delightfulFlow->getCode(),
         ];
 
-        // 先清理一downhistoryscheduletask和调degreerule
+        // 先cleanup一downhistoryscheduletask和调degreerule
         $this->taskSchedulerDomainService->clearByExternalId($externalId);
 
         foreach ($routineConfigs as $branchId => $routineConfig) {

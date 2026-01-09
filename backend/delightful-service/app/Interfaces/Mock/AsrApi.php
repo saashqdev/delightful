@@ -220,7 +220,7 @@ class AsrApi
             'workspace_dir' => $workspaceDir,
         ]);
 
-        // 清理task相关的 Redis status
+        // cleanuptask相关的 Redis status
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $this->redis->del($countKey);
 

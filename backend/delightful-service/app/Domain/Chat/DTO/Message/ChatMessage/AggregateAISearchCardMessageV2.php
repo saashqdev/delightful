@@ -57,7 +57,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected array $noRepeatSearchDetails;
 
     /**
-     * 总结,minute为思考过程和总结两部minute.
+     * 总结,minute为思考procedure和总结两部minute.
      */
     protected SummaryItem $summary;
 
@@ -67,7 +67,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected array $events;
 
     /**
-     * @var string 思维导图。markdown format的string
+     * @var string 思维导graph。markdown format的string
      */
     protected string $mindMap;
 

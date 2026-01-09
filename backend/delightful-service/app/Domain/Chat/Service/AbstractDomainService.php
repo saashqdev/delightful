@@ -145,7 +145,7 @@ abstract class AbstractDomainService
 
     /**
      * notify收item方have新message(收item方可能是自己,or者是chatobject).
-     * @todo 考虑对 seqIds merge同categoryitem,减少pushcount,减轻网络/mq/service器stress
+     * @todo 考虑对 seqIds merge同categoryitem,减少pushcount,减轻network/mq/service器stress
      */
     public function pushControlSequence(DelightfulSeqEntity $seqEntity): SeqCreatedEvent
     {
@@ -428,7 +428,7 @@ abstract class AbstractDomainService
                     // format化response结构
                     $batchResponse[] = SeqAssembler::getClientSeqStruct($userRevokedSeqEntity, $messageDTO)->toArray();
                 } finally {
-                    // 释放lock
+                    // releaselock
                     $this->redisLocker->release($mutexLockKey, $messageStruct->getReferMessageId());
                 }
                 break;

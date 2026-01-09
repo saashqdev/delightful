@@ -291,7 +291,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         }
 
         if (empty($models)) {
-            $this->logger->warning('美图model未找to' . $modelId);
+            $this->logger->warning('美graphmodel未找to' . $modelId);
             // ifnothave找tomodel，throwexception
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
         }

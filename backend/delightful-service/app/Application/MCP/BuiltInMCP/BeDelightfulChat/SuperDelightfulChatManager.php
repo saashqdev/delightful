@@ -273,7 +273,7 @@ MARKDOWN;
                 'properties' => [
                     'name' => [
                         'type' => 'string',
-                        'description' => 'finger令name，must与AI助理定义的finger令name完all匹配',
+                        'description' => 'finger令name，must与AI助理definition的finger令name完all匹配',
                     ],
                     'value' => [
                         'type' => 'string',

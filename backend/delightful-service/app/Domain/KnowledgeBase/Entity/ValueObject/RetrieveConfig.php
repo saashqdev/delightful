@@ -31,7 +31,7 @@ class RetrieveConfig extends AbstractValueObject
      * - semantic_search: 语义检索
      * - full_text_search: all文检索
      * - hybrid_search: 混合检索
-     * - graph_search: 图检索
+     * - graph_search: graph检索
      *
      * @see RetrievalMethod
      */

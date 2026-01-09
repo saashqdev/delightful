@@ -22,8 +22,8 @@ return new class extends Migration {
             $table->tinyInteger('type')->comment('type，for examplecomment、动state');
             $table->json('attachments')->comment('attachment');
             $table->string('description')->comment('对comment的简短description，main是给动stateuse的，for examplecreate待办、uploadimageetcsystem动state');
-            $table->unsignedBigInteger('resource_id')->index()->comment('comment的资源id，for example云documentid、sheet表id');
-            $table->tinyInteger('resource_type')->comment('comment的资源type，for example云document、sheet表');
+            $table->unsignedBigInteger('resource_id')->index()->comment('comment的resourceid，for example云documentid、sheet表id');
+            $table->tinyInteger('resource_type')->comment('comment的resourcetype，for example云document、sheet表');
             $table->unsignedBigInteger('parent_id')->index()->comment('父levelcomment的primary keyid');
             $table->text('message')->comment('comment的content');
             $table->string('creator')->index()->comment('create人');

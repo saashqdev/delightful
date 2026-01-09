@@ -45,7 +45,7 @@ class ImageWatermarkProcessor
         // 检测originalformat
         $originalFormat = $this->extractBase64Format($base64Image);
 
-        // 解码base64image
+        // decodingbase64image
         $imageData = $this->decodeBase64Image($base64Image);
 
         // 双重检测ensureformat准确
@@ -126,14 +126,14 @@ class ImageWatermarkProcessor
         $watermarkedData = ob_get_contents();
         ob_end_clean();
 
-        // 清理inside存
+        // cleanupinside存
         imagedestroy($image);
         imagedestroy($watermarkedImage);
         return $watermarkedData;
     }
 
     /**
-     * 为image资源添加水印.
+     * 为imageresource添加水印.
      * @param mixed $image
      */
     private function addWatermarkToImageResource($image, WatermarkConfig $config)
@@ -141,7 +141,7 @@ class ImageWatermarkProcessor
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // create新image资源by避免修改原图
+        // create新imageresourceby避免修改原graph
         $watermarkedImage = imagecreatetruecolor($width, $height);
         imagecopy($watermarkedImage, $image, 0, 0, 0, 0, $width, $height);
 
@@ -272,7 +272,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 解码base64imagedata.
+     * decodingbase64imagedata.
      */
     private function decodeBase64Image(string $base64Image): string
     {
@@ -290,7 +290,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * download网络image.
+     * downloadnetworkimage.
      */
     private function downloadImage(string $url): string
     {
@@ -366,7 +366,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 检测图像data的format.
+     * 检测graph像data的format.
      */
     private function detectImageFormat(string $imageData): string
     {
@@ -386,7 +386,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * frombase64front缀提取图像format.
+     * frombase64front缀提取graph像format.
      */
     private function extractBase64Format(string $base64Image): string
     {

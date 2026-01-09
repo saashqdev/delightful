@@ -73,7 +73,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $paramsConfig->getLinkDesc()
         );
 
-        // if是资源category的data，那么need提frontupload了
+        // if是resourcecategory的data，那么need提frontupload了
         $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
         // 由atwithinsurfacewillconduct重命名，所by这within直接get对应的name传入进去

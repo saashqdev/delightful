@@ -19,7 +19,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     protected array $models = [];
 
     /**
-     * @var ModeGroupModelDTO[] 该minutegroup对应的图像model详细infoarray（VLM）
+     * @var ModeGroupModelDTO[] 该minutegroup对应的graph像model详细infoarray（VLM）
      */
     protected array $imageModels = [];
 

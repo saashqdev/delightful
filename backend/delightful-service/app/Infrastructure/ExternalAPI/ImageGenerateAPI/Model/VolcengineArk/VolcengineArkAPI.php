@@ -33,7 +33,7 @@ class VolcengineArkAPI
     }
 
     /**
-     * generate图像 - 完all透传payload给API.
+     * generategraph像 - 完all透传payload给API.
      */
     public function generateImage(array $payload): array
     {

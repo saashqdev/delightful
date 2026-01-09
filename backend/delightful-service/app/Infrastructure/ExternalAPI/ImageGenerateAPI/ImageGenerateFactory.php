@@ -166,7 +166,7 @@ class ImageGenerateFactory
         $width = (int) $widthStr;
         $height = (int) $heightStr;
 
-        // todo xhy 先兜bottom，因为整文生图alsonothave闭环
+        // todo xhy 先兜bottom，因为整文生graphalsonothave闭环
         if (
             ! ($width === 1024 && $height === 1024)
             && ! ($width === 1024 && $height === 1792)
@@ -350,12 +350,12 @@ class ImageGenerateFactory
             $request->setResponseFormat($data['response_format']);
         }
 
-        // processgroup图featureparameter
+        // processgroupgraphfeatureparameter
         if (isset($data['sequential_image_generation'])) {
             $request->setSequentialImageGeneration($data['sequential_image_generation']);
         }
 
-        // processgroup图featureoptionparameter
+        // processgroupgraphfeatureoptionparameter
         if (isset($data['sequential_image_generation_options']) && is_array($data['sequential_image_generation_options'])) {
             $request->setSequentialImageGenerationOptions($data['sequential_image_generation_options']);
         }

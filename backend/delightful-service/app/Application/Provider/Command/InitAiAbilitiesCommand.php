@@ -48,7 +48,7 @@ class InitAiAbilitiesCommand extends HyperfCommand
         $this->info("start为organization {$organizationCode} initializeAI能力data...");
 
         try {
-            // createonetemporary的 Authorization objectuseat命令line
+            // createonetemporary的 Authorization objectuseatcommandline
             $authorization = new DelightfulUserAuthorization();
             $authorization->setOrganizationCode($organizationCode);
 

@@ -11,23 +11,23 @@ use App\Infrastructure\Core\AbstractValueObject;
 use InvalidArgumentException;
 
 /**
- * 图searchconfigurationvalueobject
+ * graphsearchconfigurationvalueobject
  *
- * contain图search的相关configurationparameter，如 API 端point、authinfo、timeoutsetetc
+ * containgraphsearch的相关configurationparameter，如 API 端point、authinfo、timeoutsetetc
  */
 class GraphSearchConfig extends AbstractValueObject
 {
     /**
      * 关系权重.
      *
-     * 图searchmiddle关系的权重，useat计算finalsimilardegreeminute数
+     * graphsearchmiddle关系的权重，useat计算finalsimilardegreeminute数
      */
     private float $relationWeight = 0.5;
 
     /**
      * most大search深degree.
      *
-     * 图search的most大深degree，即from起始sectionpointstart，at mostsearch几跳关系
+     * graphsearch的most大深degree，即from起始sectionpointstart，at mostsearch几跳关系
      */
     private int $maxDepth = 2;
 
@@ -41,14 +41,14 @@ class GraphSearchConfig extends AbstractValueObject
     /**
      * API 端point.
      *
-     * 图searchservice的 API 端point
+     * graphsearchservice的 API 端point
      */
     private string $apiEndpoint = '';
 
     /**
      * API key.
      *
-     * access图searchservice的 API key
+     * accessgraphsearchservice的 API key
      */
     private string $apiKey = '';
 

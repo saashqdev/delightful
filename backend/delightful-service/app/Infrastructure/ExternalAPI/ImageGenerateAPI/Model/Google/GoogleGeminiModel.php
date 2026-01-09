@@ -64,7 +64,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像并returnOpenAIformatresponse - Google Geminiversion.
+     * generategraph像并returnOpenAIformatresponse - Google Geminiversion.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
@@ -77,7 +77,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof GoogleGeminiRequest) {
-            $this->logger->error('GoogleGemini OpenAIformat生图：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('GoogleGemini OpenAIformat生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
@@ -102,7 +102,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('GoogleGemini OpenAIformat生图：单requestfail', [
+                    $this->logger->error('GoogleGemini OpenAIformat生graph：单requestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -113,7 +113,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 4. recordfinalresult
-        $this->logger->info('GoogleGemini OpenAIformat生图：并hairhandlecomplete', [
+        $this->logger->info('GoogleGemini OpenAIformat生graph：并hairhandlecomplete', [
             '总request数' => $count,
             'successimage数' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
@@ -141,7 +141,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         }
 
         if (empty($imageData)) {
-            $this->logger->error('Google Gemini文生图：所haveimagegenerate均fail', ['rawResults' => $rawResults]);
+            $this->logger->error('Google Gemini文生graph：所haveimagegenerate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
@@ -178,9 +178,9 @@ class GoogleGeminiModel extends AbstractImageGenerate
         }
 
         try {
-            // ifhave参考图像，thenexecute图像edit
+            // ifhave参考graph像，thenexecutegraph像edit
             if (! empty($referImages)) {
-                // 取the一张参考图像conductedit
+                // 取the一张参考graph像conductedit
                 $referImage = $referImages[0];
                 $result = $this->processImageEdit($referImage, $prompt);
             } else {
@@ -200,7 +200,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
     private function processImageEdit(string $referImageUrl, string $instructions): array
     {
-        // 直接handleURL图像
+        // 直接handleURLgraph像
         $imageBase64 = $this->downloadImageAsBase64($referImageUrl);
         $mimeType = $this->detectMimeTypeFromUrl($referImageUrl);
 
@@ -214,21 +214,21 @@ class GoogleGeminiModel extends AbstractImageGenerate
             $response = $client->get($url);
 
             if ($response->getStatusCode() !== 200) {
-                throw new Exception("无法download图像，HTTPstatus码: {$response->getStatusCode()}");
+                throw new Exception("无法downloadgraph像，HTTPstatus码: {$response->getStatusCode()}");
             }
 
             $imageContent = $response->getBody()->getContents();
             if (empty($imageContent)) {
-                throw new Exception('download的图像content为null');
+                throw new Exception('download的graph像content为null');
             }
 
             return base64_encode($imageContent);
         } catch (Exception $e) {
-            $this->logger->error('Google Gemini图生图：图像downloadfail', [
+            $this->logger->error('Google Geminigraph生graph：graph像downloadfail', [
                 'url' => $url,
                 'error' => $e->getMessage(),
             ]);
-            throw new Exception("download图像fail: {$e->getMessage()}");
+            throw new Exception("downloadgraph像fail: {$e->getMessage()}");
         }
     }
 
@@ -248,11 +248,11 @@ class GoogleGeminiModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof GoogleGeminiRequest) {
-            $this->logger->error('Google Gemini文生图：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Google Gemini文生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // Google Gemini APIeachtime只能generate一张图，pass并haircallimplement多图generate
+        // Google Gemini APIeachtime只能generate一张graph，pass并haircallimplement多graphgenerate
         $count = $imageGenerateRequest->getGenerateNum();
         $rawResults = [];
         $errors = [];
@@ -273,7 +273,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                         'index' => $i,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('Google Gemini文生图：imagegeneratefail', [
+                    $this->logger->error('Google Gemini文生graph：imagegeneratefail', [
                         'error' => $e->getMessage(),
                         'index' => $i,
                     ]);
@@ -298,7 +298,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('Google Gemini文生图：所haveimagegenerate均fail', ['errors' => $errors]);
+            $this->logger->error('Google Gemini文生graph：所haveimagegenerate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 
@@ -369,7 +369,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         }
 
         if (! $hasValidImage) {
-            throw new Exception('Google Geminiresponsedataformaterror：缺少图像data');
+            throw new Exception('Google Geminiresponsedataformaterror：缺少graph像data');
         }
     }
 
@@ -384,7 +384,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         // useRedislockensure并hairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
-            // use现havemethod提取图像data
+            // use现havemethod提取graph像data
             $imageBase64 = $this->extractImageDataFromResponse($geminiResult);
 
             $currentData = $response->getData();
@@ -422,7 +422,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // ensurelock一定willbe释放
+            // ensurelock一定willberelease
             $this->unlockResponse($response, $lockOwner);
         }
     }

@@ -50,7 +50,7 @@ interface HighAvailabilityInterface
      *
      * 该method将:
      * 1. recordrequeststatisticsdata
-     * 2. according torequestsuccessorfailedstatus自动触hair熔断器feedback
+     * 2. according torequestsuccessorfailedstatus自动触haircircuit break器feedback
      *
      * @param EndpointResponseDTO $response 接入pointresponse实body
      */

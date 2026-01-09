@@ -61,7 +61,7 @@ enum NodeType: int
 
     /*
      * Loader
-     * dataload。来源：toquantitydatabase、file、网络
+     * dataload。来源：toquantitydatabase、file、network
      */
     case Loader = 8;
 
@@ -145,7 +145,7 @@ enum NodeType: int
     case VariableArrayPush = 23;
 
     /*
-     * 意图识别
+     * 意graph识别
      */
     case IntentRecognition = 24;
 
@@ -200,7 +200,7 @@ enum NodeType: int
     case KnowledgeSearch = 52;
 
     /**
-     * 图像generate.
+     * graph像generate.
      */
     case ImageGenerate = 53;
 

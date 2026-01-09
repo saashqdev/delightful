@@ -759,7 +759,7 @@ class DelightfulAgentAppService extends AbstractAppService
             } catch (Throwable $e) {
                 $errorMessage = $e->getMessage();
                 $trace = $e->getTraceAsString();
-                $this->logger->error("initializeassistantconversationfail，aiCode: {$aiCode}, name: {$agentName}\nerrorinfo: {$errorMessage}\n堆栈: {$trace} ");
+                $this->logger->error("initializeassistantconversationfail，aiCode: {$aiCode}, name: {$agentName}\nerrorinfo: {$errorMessage}\n堆stack: {$trace} ");
             }
         }
     }
@@ -864,9 +864,9 @@ class DelightfulAgentAppService extends AbstractAppService
             $this->initImageGenerationAgent($authenticatable);
             $this->initDocAnalysisAgent($authenticatable);
         } finally {
-            // ensurelockbe释放
+            // ensurelockberelease
             $this->redisLocker->release($lockKey, $userId);
-            $this->logger->info(sprintf('释放 initAgents lock, orgCode: %s, userId: %s', $orgCode, $userId));
+            $this->logger->info(sprintf('release initAgents lock, orgCode: %s, userId: %s', $orgCode, $userId));
         }
     }
 
@@ -899,7 +899,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * 为新register的organizationcreate人initialize一文生图Agent.
+     * 为新register的organizationcreate人initialize一文生graphAgent.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      */
@@ -916,8 +916,8 @@ class DelightfulAgentAppService extends AbstractAppService
         $loadPresetConfig = $this->loadPresetConfig('generate_image', ['modelName' => $modelName]);
         // 准备基本configuration
         $config = [
-            'agent_name' => '文生图助hand',
-            'agent_description' => '一强大的AI文本generate图像助hand，canaccording to您的descriptioncreate精美图像。',
+            'agent_name' => '文生graph助hand',
+            'agent_description' => '一强大的AI文本generategraph像助hand，canaccording to您的descriptioncreate精美graph像。',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],
             'instruct' => $loadPresetConfig['instructs'],

@@ -25,7 +25,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
 
     private string $projectId = '816065897791012866';
 
-    // test过程middlegenerate的邀请linkinfo
+    // testproceduremiddlegenerate的邀请linkinfo
     private ?string $invitationToken = null;
 
     private ?string $invitationPassword = null;
@@ -48,7 +48,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 0. 清理testdata - ensuretest2usernot是projectmember
+        // 0. cleanuptestdata - ensuretest2usernot是projectmember
         $this->cleanupTestData($projectId);
 
         // 1. project所have者开启邀请link
@@ -372,7 +372,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $projectId = $this->projectId;
         $this->switchUserTest1();
 
-        // 清理testdata
+        // cleanuptestdata
         $this->getResourceShareDomainService()->deleteShareByResource($projectId, ResourceType::ProjectInvitation->value);
 
         // 连续快speed开启/close邀请link
@@ -423,7 +423,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $projectId = $this->projectId;
         $this->switchUserTest1();
 
-        // 0. 清理testdata
+        // 0. cleanuptestdata
         $this->cleanupTestData($projectId);
 
         // 1. 开启邀请link
@@ -478,7 +478,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $projectId = $this->projectId;
         $this->switchUserTest1();
 
-        // 0. 清理testdata并reset邀请link
+        // 0. cleanuptestdata并reset邀请link
         $this->cleanupTestData($projectId);
 
         // pass领域servicedelete现have的邀请link
@@ -520,7 +520,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->assertEquals(1000, $joinResult['code']);
         $this->assertEquals('viewer', $joinResult['data']['user_role']);
 
-        // 6. 清理testdata
+        // 6. cleanuptestdata
         $this->cleanupTestData($projectId);
 
         // 7. testinvalid密码format（nullstring和超长密码）
@@ -551,7 +551,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 0. ensure切换totest1user并清理testdata
+        // 0. ensure切换totest1user并cleanuptestdata
         $this->switchUserTest1();
         $this->cleanupTestData($projectId);
         $this->getResourceShareDomainService()->deleteShareByResource($projectId, ResourceType::ProjectInvitation->value, '', true);
@@ -623,7 +623,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
             $this->assertArrayHasKey($field, $data, "responsedata应containfield: {$field}");
         }
 
-        // 7. 清理testdata并切换回test1user
+        // 7. cleanuptestdata并切换回test1user
         $this->switchUserTest1();
         $this->cleanupTestData($projectId);
         $this->getResourceShareDomainService()->deleteShareByResource($projectId, ResourceType::ProjectInvitation->value);
@@ -694,7 +694,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * 清理testdata.
+     * cleanuptestdata.
      */
     private function cleanupTestData(string $projectId): void
     {
@@ -703,7 +703,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * get资源share领域service.
+     * getresourceshare领域service.
      */
     private function getResourceShareDomainService(): ResourceShareDomainService
     {

@@ -198,7 +198,7 @@ class FileDefaultInitCommand extends Command
             }
         }
 
-        // meanwhilehandleoriginal的default图标file（ifneed的话）
+        // meanwhilehandleoriginal的defaultgraph标file（ifneed的话）
         $this->processDefaultIcons($baseFileDir, $organizationCode, $totalFiles, $skippedFiles);
 
         $this->info("fileinitializecomplete，共handle {$totalFiles} file，skip {$skippedFiles} 已存in的file");
@@ -224,11 +224,11 @@ class FileDefaultInitCommand extends Command
     }
 
     /**
-     * handledefault图标file.
+     * handledefaultgraph标file.
      */
     protected function processDefaultIcons(string $baseFileDir, string $organizationCode, int &$totalFiles, int &$skippedFiles): void
     {
-        // ifhaveneed单独handle的default图标，canin这withinimplement
-        // for examplehandle Midjourney etcdefault图标
+        // ifhaveneed单独handle的defaultgraph标，canin这withinimplement
+        // for examplehandle Midjourney etcdefaultgraph标
     }
 }

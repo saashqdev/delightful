@@ -41,7 +41,7 @@ class VisionTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '提供视觉能力。useat识别user对image的意图，并return识别result';
+        return '提供视觉能力。useat识别user对image的意graph，并return识别result';
     }
 
     /**
@@ -127,8 +127,8 @@ class VisionTool extends AbstractBuiltInTool
         "intent": {
             "type": "string",
             "key": "intent",
-            "title": "意图",
-            "description": "意图。user对image的意图",
+            "title": "意graph",
+            "description": "意graph。user对image的意graph",
             "required": null,
             "value": null,
             "encryption": false,
@@ -233,20 +233,20 @@ JSON, true)));
             'type' => StructureType::Value,
             'structure' => Value::buildConst('你是一专业的视觉理解助理，请按照bydown步骤回应user：
 
-1. 优先理解user的意图，始终use与usersame的语言回答
+1. 优先理解user的意graph，始终use与usersame的语言回答
 2. 提供简洁明了的直接回答，直接满足user的mainissue
 3. again对imagecontentconduct多维degree详细analyze，includebutnot限at：
    - 主bodycontent识别：人物、物body、场景、文字etc
    - 视觉特征：color、composition、光line、qualityetc
    - 语义info：activity、情绪、关系、background故事etc
    - 文字识别：如have文字，准确提取并理解含义
-   - 技术info：如have图table/data，analyze其含义
+   - 技术info：如havegraphtable/data，analyze其含义
    
 4. analyzeformat要求：
    - 对at重要analyzeresult，use结构化JSONformat呈现，如：{"category别":"xx", "主body":"xx", "特征":["xx","xx"]}
    - 对atnot确定content，明确table明推测propertyquality，for example："可能是..."
    - 如imagequalitymore低，finger出限制因素并尽力analyze
-   - 对at多图analyze，minute别markimage序numberconductparse，并总结其associateproperty
+   - 对at多graphanalyze，minute别markimage序numberconductparse，并总结其associateproperty
    
 5. 注意事item：
    - 避免对敏感content做主观评判

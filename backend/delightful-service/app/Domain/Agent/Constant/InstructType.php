@@ -299,12 +299,12 @@ enum InstructType: int
      */
     private function validateStatus(array &$item): void
     {
-        // verify图标
+        // verifygraph标
         if (! isset($item['icon'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_icon_required');
         }
 
-        // use StatusIcon 枚举verify图标value
+        // use StatusIcon 枚举verifygraph标value
         if (! StatusIcon::isValid($item['icon'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_icon_invalid');
         }

@@ -49,7 +49,7 @@ class AppExceptionHandler extends ExceptionHandler
             ],
         ];
         $this->logger->error($throwable->getMessage(), $errInfo);
-        $this->logger->info('error跟踪information', [
+        $this->logger->info('errortraceinformation', [
             'trace_as_string' => $throwable->getTrace(),
         ]);
 

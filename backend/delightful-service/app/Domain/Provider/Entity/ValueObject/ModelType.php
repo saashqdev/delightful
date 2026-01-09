@@ -9,8 +9,8 @@ namespace App\Domain\Provider\Entity\ValueObject;
 
 enum ModelType: int
 {
-    case TEXT_TO_IMAGE = 0; // 文生图
-    case IMAGE_TO_IMAGE = 1; // 图生图
+    case TEXT_TO_IMAGE = 0; // 文生graph
+    case IMAGE_TO_IMAGE = 1; // graph生graph
     case IMAGE_ENHANCE = 2; // imageenhance
     case LLM = 3; // 大model
     case EMBEDDING = 4; // 嵌入
@@ -18,8 +18,8 @@ enum ModelType: int
     public function label(): string
     {
         return match ($this) {
-            self::TEXT_TO_IMAGE => '文生图',
-            self::IMAGE_TO_IMAGE => '图生图',
+            self::TEXT_TO_IMAGE => '文生graph',
+            self::IMAGE_TO_IMAGE => 'graph生graph',
             self::IMAGE_ENHANCE => 'imageenhance',
             self::LLM => '大model',
             self::EMBEDDING => '嵌入',

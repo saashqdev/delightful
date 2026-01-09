@@ -58,7 +58,7 @@ readonly class KnowledgeBaseDocumentSyncSubscriber implements ListenerInterface
         $knowledgeBaseVectorAppService = di(KnowledgeBaseVectorAppService::class);
 
         try {
-            // check集合whether存in
+            // checksetwhether存in
             $knowledgeBaseVectorAppService->checkCollectionExists($knowledge);
             // 同document
             $knowledgeBaseVectorAppService->syncDocument($dataIsolation, $knowledge, $documentEntity);

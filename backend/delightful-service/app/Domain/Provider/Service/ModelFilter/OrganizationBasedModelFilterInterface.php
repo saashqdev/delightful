@@ -31,16 +31,16 @@ interface OrganizationBasedModelFilterInterface
      * checkfinger定modelwhether对organization可use.
      *
      * @param string $organizationCode organizationencoding
-     * @param string $modelIdentifier model标识符 (如: gpt-4o)
+     * @param string $modelIdentifier modelidentifier (如: gpt-4o)
      * @return bool whether可use
      */
     public function isModelAvailableForOrganization(string $organizationCode, string $modelIdentifier): bool;
 
     /**
-     * getorganizationcurrentsubscribeproductbind的所havemodel标识符.
+     * getorganizationcurrentsubscribeproductbind的所havemodelidentifier.
      *
      * @param string $organizationCode organizationencoding
-     * @return array model标识符array，for example: ['gpt-4o', 'claude-3', ...]
+     * @return array modelidentifierarray，for example: ['gpt-4o', 'claude-3', ...]
      */
     public function getAvailableModelIdentifiers(string $organizationCode): array;
 

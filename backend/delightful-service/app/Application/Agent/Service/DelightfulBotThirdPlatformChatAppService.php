@@ -256,7 +256,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
 
     private function clearMemory(string $conversationId): void
     {
-        // 清理 flow 的自身记忆，仅more改原session为backupsession
+        // cleanup flow 的自身记忆，仅more改原session为backupsession
         di(DelightfulFlowMemoryHistoryDomainService::class)->removeByConversationId(
             FlowDataIsolation::create('', ''),
             $conversationId

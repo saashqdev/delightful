@@ -45,7 +45,7 @@ use function Hyperf\Translation\__;
 use function mb_strlen;
 
 /**
- * AI文生图.
+ * AI文生graph.
  */
 class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
 {
@@ -137,7 +137,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 $reqDTO->getReferMessageId(),
             );
         } catch (Throwable $e) {
-            // hair生exceptiono clock，send终止message，并throwexception
+            // hair生exceptiono clock，sendterminationmessage，并throwexception
             $this->handleGlobalThrowable($reqDTO, $e);
         }
     }

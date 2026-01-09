@@ -22,7 +22,7 @@ return new class extends Migration {
         Schema::create('delightful_api_premium_endpoint_statistics', function (Blueprint $table) {
             $table->bigIncrements('id');
             // 这withincanimplement对接入pointrequest的statistics逻辑
-            // for example：recordrequestcount、requesttype、资源consumeetc
+            // for example：recordrequestcount、requesttype、resourceconsumeetc
             $table->string('endpoint_id', 64)->nullable()->default(null)->comment('接入pointid');
             $table->integer('request_count')->nullable()->default(null)->comment('requestcount');
             $table->integer('request_success_count')->nullable()->default(null)->comment('requestsuccesscount');

@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->json('name_i18n')->comment('模typename国际化');
             $table->string('identifier', 50)->default('')->comment('模type标识，唯一');
-            $table->string('icon', 255)->default('')->comment('模type图标');
+            $table->string('icon', 255)->default('')->comment('模typegraph标');
             $table->string('color', 10)->default('')->comment('模typecolor');
             $table->bigInteger('sort')->default(0)->comment('sort');
             $table->text('description')->comment('模typedescription');

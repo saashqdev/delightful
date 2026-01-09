@@ -36,7 +36,7 @@ class DelightfulFlowToolSetEntity extends AbstractEntity
     protected string $description = '';
 
     /**
-     * tool集图标.
+     * tool集graph标.
      */
     protected string $icon = '';
 

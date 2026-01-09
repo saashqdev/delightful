@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->string('organization_code', 100)->default('')->comment('organizationencoding');
             $table->json('name_i18n')->comment('能力name（多语言JSONformat）');
             $table->json('description_i18n')->comment('能力description（多语言JSONformat）');
-            $table->string('icon', 100)->nullable()->comment('图标标识');
+            $table->string('icon', 100)->nullable()->comment('graph标标识');
             $table->integer('sort_order')->default(0)->comment('sort');
             $table->tinyInteger('status')->default(1)->comment('status：0-disable，1-enable');
             $table->json('config')->comment('configurationinformation（provider_code, access_point, api_key, model_idetc）');

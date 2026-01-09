@@ -281,7 +281,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * checkwhether待清理status.
+     * checkwhether待cleanupstatus.
      */
     public function isPending(): bool
     {
@@ -289,7 +289,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * checkwhether已清理.
+     * checkwhether已cleanup.
      */
     public function isCleaned(): bool
     {
@@ -297,7 +297,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * checkwhether清理fail.
+     * checkwhethercleanupfail.
      */
     public function isFailed(): bool
     {

@@ -48,7 +48,7 @@ class EndpointDTO extends AbstractDTO
     protected ?string $config = null;
 
     /**
-     * 资源的consume的 id list. 一timerequest可能willconsume多资源。
+     * resource的consume的 id list. 一timerequest可能willconsume多resource。
      * @var null|string[]
      */
     protected ?array $resources = null;
@@ -59,7 +59,7 @@ class EndpointDTO extends AbstractDTO
     protected bool $enabled = true;
 
     /**
-     * 熔断status.
+     * circuit breakstatus.
      */
     protected CircuitBreakerStatus $circuitBreakerStatus;
 

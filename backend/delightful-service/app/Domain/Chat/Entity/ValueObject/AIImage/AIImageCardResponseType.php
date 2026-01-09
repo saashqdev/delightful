@@ -18,7 +18,7 @@ enum AIImageCardResponseType: int
     // quoteimage
     case REFERENCE_IMAGE = 3;
 
-    // exception终止
+    // exceptiontermination
     case TERMINATE = 4;
 
     public static function getNameFromType(AIImageCardResponseType $type): string

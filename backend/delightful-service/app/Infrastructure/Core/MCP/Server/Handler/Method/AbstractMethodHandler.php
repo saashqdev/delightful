@@ -57,7 +57,7 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
     }
 
     /**
-     * set资源manager.
+     * setresourcemanager.
      */
     public function setResourceManager(MCPResourceManager $resourceManager): self
     {
@@ -66,13 +66,13 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
     }
 
     /**
-     * get资源manager.
-     * @throws InternalErrorException when资源manager未seto clockthrow
+     * getresourcemanager.
+     * @throws InternalErrorException whenresourcemanager未seto clockthrow
      */
     public function getResourceManager(): MCPResourceManager
     {
         if (! isset($this->resourceManager)) {
-            throw new InternalErrorException('资源manager(ResourceManager)未set');
+            throw new InternalErrorException('resourcemanager(ResourceManager)未set');
         }
         return $this->resourceManager;
     }

@@ -1,212 +1,212 @@
-# Go 版 API 网关服务
+# Go API Gateway Service
 
-这是一个用于 Docker 容器的高性能 API 网关服务，使用 Go 语言实现，可以安全地管理环境变量并提供临时访问令牌。
+This is a high-performance API gateway service for Docker containers, implemented in Go language, which can securely manage environment variables and provide temporary access tokens.
 
-注意事项：该网关仅支持替换header内容和url的域名, 不支持替换body 的内容
+Note: This gateway only supports replacing header content and URL domains, not body content.
 
-## 功能特点
+## Features
 
-- **高性能**：使用 Go 语言实现，相比 Python 版本有显著的性能提升
-- **认证服务**：为容器生成临时访问令牌
-- **环境变量保护**：容器不能直接获取环境变量值，只能通过API代理间接使用
-- **多服务支持**：可同时支持多个API服务（如OpenAI、DeepSeek、Delightful等）
-- **环境变量名称路由**：通过环境变量名称直接访问对应的服务
-- **API 代理**：自动替换请求中的环境变量引用
-- **支持多种环境变量引用格式**：`env:VAR`、`${VAR}`、`$VAR`、`OPENAI_*` 等
-- **多环境部署**：支持测试(test)、预发布(pre)和生产(production)三套环境独立部署
+- **High Performance**: Implemented in Go language with significant performance improvements compared to Python version
+- **Authentication Service**: Generates temporary access tokens for containers
+- **Environment Variable Protection**: Containers cannot directly access environment variable values, only use them indirectly through API proxy
+- **Multi-Service Support**: Can simultaneously support multiple API services (such as OpenAI, DeepSeek, Delightful, etc.)
+- **Environment Variable Name Routing**: Directly access corresponding services through environment variable names
+- **API Proxy**: Automatically replaces environment variable references in requests
+- **Multiple Environment Variable Reference Formats**: `env:VAR`, `${VAR}`, `$VAR`, `OPENAI_*`, etc.
+- **Multi-Environment Deployment**: Supports independent deployment of three environments: test, pre-release (pre), and production
 
-## 项目结构
+## Project Structure
 
 ```
 delightful-gateway/
-├── main.go            # 主程序入口
-├── .env               # 环境变量配置文件
-├── README.md          # 项目说明文档
-├── deploy.sh          # 多环境部署脚本
-├── docker-compose.yml # Docker编排配置
-├── Dockerfile         # Docker构建文件
-├── config/            # 多环境配置目录
-│   ├── test/          # 测试环境配置
-│   ├── pre/           # 预发布环境配置
-│   └── prod/          # 生产环境配置
-├── docs/              # 文档目录
-│   └── multi-environment-deployment.md # 多环境部署详细说明
-├── tests/             # 单元测试和功能测试目录
-│   ├── auth_test_client.go  # 认证接口测试客户端
-│   ├── auth_key_test.go     # API Key 验证测试
-│   └── test_api_key.go      # API Key 功能测试
-└── test_client/       # 测试客户端工具
-    └── test_client.go # 通用测试客户端
+├── main.go            # Main program entry
+├── .env               # Environment variable configuration file
+├── README.md          # Project documentation
+├── deploy.sh          # Multi-environment deployment script
+├── docker-compose.yml # Docker orchestration configuration
+├── Dockerfile         # Docker build file
+├── config/            # Multi-environment configuration directory
+│   ├── test/          # Test environment configuration
+│   ├── pre/           # Pre-release environment configuration
+│   └── prod/          # Production environment configuration
+├── docs/              # Documentation directory
+│   └── multi-environment-deployment.md # Multi-environment deployment detailed guide
+├── tests/             # Unit test and functional test directory
+│   ├── auth_test_client.go  # Authentication interface test client
+│   ├── auth_key_test.go     # API Key verification test
+│   └── test_api_key.go      # API Key functional test
+└── test_client/       # Test client tools
+    └── test_client.go # General test client
 ```
 
-## 快速开始
+## Quick Start
 
-### 依赖条件
+### Prerequisites
 
-- Go 1.18+ (用于本地构建)
-- Docker & Docker Compose (用于容器化部署)
+- Go 1.18+ (for local builds)
+- Docker & Docker Compose (for containerized deployment)
 
-### 使用脚本启动
+### Start with Script
 
 ```bash
-# 使服务启动脚本可执行
+# Make the service startup script executable
 chmod +x start.sh
 
-# 启动服务
+# Start the service
 ./start.sh
 ```
 
-### 使用 Docker Compose
+### Using Docker Compose
 
 ```bash
-# 启动服务
+# Start the service
 docker-compose up -d
 
-# 查看日志
+# View logs
 docker-compose logs -f
 ```
 
-### 多环境部署
+### Multi-Environment Deployment
 
-API网关支持测试(test)、预发布(pre)和生产(production)三套环境的独立部署，每个环境使用不同的配置和端口：
+The API gateway supports independent deployment of three environments: test, pre-release (pre), and production. Each environment uses different configurations and ports:
 
 ```bash
-# 首先确保部署脚本有执行权限
+# First ensure the deployment script has execution permissions
 chmod +x deploy.sh
 
-# 启动测试环境 (端口 8001)
+# Start test environment (port 8001)
 ./deploy.sh test start
 
-# 启动预发布环境 (端口 8002)
+# Start pre-release environment (port 8002)
 ./deploy.sh pre start
 
-# 启动生产环境 (端口 8003)
+# Start production environment (port 8003)
 ./deploy.sh prod start
 
-# 同时启动所有环境
+# Start all environments simultaneously
 ./deploy.sh all start
 
-# 查看指定环境日志
+# View specified environment logs
 ./deploy.sh test logs
 
-# 检查环境状态
+# Check environment status
 ./deploy.sh pre status
 
-# 停止指定环境
+# Stop specified environment
 ./deploy.sh prod stop
 
-# 重启指定环境
+# Restart specified environment
 ./deploy.sh test restart
 ```
 
-部署脚本会自动创建环境配置目录和文件。每个环境的配置存放在 `config/<环境>/.env` 文件中，可以根据需要进行修改。
+The deployment script will automatically create environment configuration directories and files. Each environment's configuration is stored in the `config/<environment>/.env` file and can be modified as needed.
 
-环境访问端口:
-- 测试环境: http://localhost:8001
-- 预发布环境: http://localhost:8002
-- 生产环境: http://localhost:8003
+Environment access ports:
+- Test environment: http://localhost:8001
+- Pre-release environment: http://localhost:8002
+- Production environment: http://localhost:8003
 
-更多关于多环境部署的详细信息，请参考 [多环境部署指南](docs/multi-environment-deployment.md)。
+For more detailed information about multi-environment deployment, please refer to [Multi-Environment Deployment Guide](docs/multi-environment-deployment.md).
 
-## 配置说明
+## Configuration Guide
 
-### 环境变量
+### Environment Variables
 
-在 `.env` 文件中配置以下环境变量：
+Configure the following environment variables in the `.env` file:
 
-#### 目标URL白名单配置
+#### Target URL Whitelist Configuration
 
-`DELIGHTFUL_GATEWAY_ALLOWED_TARGET_URLS` 用于配置允许访问的目标URL白名单规则。
+`DELIGHTFUL_GATEWAY_ALLOWED_TARGET_URLS` is used to configure whitelist rules for allowed target URLs.
 
-**格式说明：**
-- 使用 `|` 分隔多个规则
-- 每个规则格式：`type:pattern@description`（`@description` 为可选）
-- 规则类型：
-  - `exact`: 精确URL匹配
-  - `domain`: 域名及所有子域名
-  - `prefix`: URL前缀匹配
-  - `regex`: 正则表达式匹配
+**Format Description:**
+- Use `|` to separate multiple rules
+- Each rule format: `type:pattern@description` (`@description` is optional)
+- Rule types:
+  - `exact`: Exact URL match
+  - `domain`: Domain and all subdomains
+  - `prefix`: URL prefix match
+  - `regex`: Regular expression match
 
-**示例：**
+**Examples:**
 ```bash
-# 允许特定域名
-DELIGHTFUL_GATEWAY_ALLOWED_TARGET_URLS=domain:example.com@示例服务|domain:openai.com@OpenAI API
+# Allow specific domains
+DELIGHTFUL_GATEWAY_ALLOWED_TARGET_URLS=domain:example.com@Example Service|domain:openai.com@OpenAI API
 
-# 混合规则
-DELIGHTFUL_GATEWAY_ALLOWED_TARGET_URLS=domain:xxxx.cn@内部服务|prefix:https://api.github.com/@GitHub API
+# Mixed rules
+DELIGHTFUL_GATEWAY_ALLOWED_TARGET_URLS=domain:xxxx.cn@Internal Service|prefix:https://api.github.com/@GitHub API
 ```
 
-**安全特性：**
-- 自动阻止内网IP（127.x, 10.x, 192.168.x等）
-- 仅允许 http/https 协议
-- 阻止常见的管理端口（22, 23, 25, 3306等）
+**Security Features:**
+- Automatically blocks private IPs (127.x, 10.x, 192.168.x, etc.)
+- Only allows http/https protocols
+- Blocks common management ports (22, 23, 25, 3306, etc.)
 
-#### 允许的内网IP配置
+#### Allowed Private IP Configuration
 
-`DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP` 用于在多节点部署场景下，允许部分内网IP通过验证。
+`DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP` is used in multi-node deployment scenarios to allow certain private IPs to pass validation.
 
-**格式说明：**
-- 支持多种分隔符：逗号（`,`）、分号（`;`）、换行符（`\n`）、空格（` `）
-- 支持单个IP地址和CIDR格式
-- 支持IPv4和IPv6
+**Format Description:**
+- Supports multiple separators: comma (`,`), semicolon (`;`), newline (`\n`), space (` `)
+- Supports single IP addresses and CIDR format
+- Supports IPv4 and IPv6
 
-**使用场景：**
-- 单节点部署：允许特定内网服务
-- 多节点部署：允许集群内各节点的IP段
+**Use Cases:**
+- Single-node deployment: Allow specific private network services
+- Multi-node deployment: Allow IP ranges of nodes within the cluster
 
-**示例：**
+**Examples:**
 
 ```bash
-# 单节点部署 - 允许特定IP和网段
+# Single-node deployment - Allow specific IPs and subnets
 DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP=192.168.1.1,10.0.0.0/8
 
-# 多节点部署 - 逗号分隔（推荐）
+# Multi-node deployment - Comma separated (recommended)
 DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP=10.0.1.0/24,10.0.2.0/24,10.0.3.0/24,192.168.1.0/24
 
-# 多节点部署 - 换行符分隔（适合配置文件）
+# Multi-node deployment - Newline separated (suitable for config files)
 DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP="10.0.1.0/24
 10.0.2.0/24
 10.0.3.0/24
 192.168.1.0/24"
 
-# 混合格式
+# Mixed format
 DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP=192.168.1.1,10.0.0.0/8;172.16.0.0/12 192.168.2.0/24
 
-# 支持IPv6
+# Support IPv6
 DELIGHTFUL_GATEWAY_ALLOWED_TARGET_IP=10.0.0.0/8,2001:db8::/32,::1
 ```
 
-**注意事项：**
-- 如果不配置此变量，所有内网IP将被禁止访问
-- 配置的IP会在私有IP检查之前进行白名单验证
-- 系统会自动去重，避免重复的IP/CIDR规则
-- 在调试模式下会显示详细的加载日志和统计信息
+**Notes:**
+- If this variable is not configured, all private IPs will be blocked
+- Configured IPs will be validated against the whitelist before private IP checking
+- System automatically deduplicates to avoid repeated IP/CIDR rules
+- In debug mode, detailed loading logs and statistics will be displayed
 
-### 其他环境变量
+### Other Environment Variables
 
 ```
-# 通用配置
+# General configuration
 JWT_SECRET=your-secret-key-change-me
 API_GATEWAY_VERSION=1.0.0
 DEFAULT_API_URL=https://api.default-service.com
 DELIGHTFUL_GATEWAY_API_KEY=your-gateway-api-key-here
 
-# OpenAI 服务配置
+# OpenAI service configuration
 OPENAI_API_KEY=sk-xxxx
 OPENAI_API_BASE_URL=https://api.openai.com/v1
 OPENAI_MODEL=gpt-4
 
-# Delightful 服务配置
+# Delightful service configuration
 DELIGHTFUL_API_KEY=xxx
 DELIGHTFUL_API_BASE_URL=https://api.delightful.com/v1
 DELIGHTFUL_MODEL=gpt-4o-global
 
-# DeepSeek 服务配置
+# DeepSeek service configuration
 DEEPSEEK_API_KEY=xxxxx
 DEEPSEEK_API_BASE_URL=https://api.deepseek.com/v1
 DEEPSEEK_MODEL=deepseek-coder
 
-# Azure OpenAI 服务配置
+# Azure OpenAI service configuration
 AZURE_OPENAI_EMBEDDING_API_KEY=xxxx
 AZURE_OPENAI_EMBEDDING_ENDPOINT=https://example.openai.azure.com/
 AZURE_OPENAI_EMBEDDING_MODEL=text-embedding-3-large
@@ -214,11 +214,11 @@ AZURE_OPENAI_EMBEDDING_DEPLOYMENT=example-text-embedding
 AZURE_OPENAI_EMBEDDING_API_VERSION=2023-05-15
 ```
 
-**重要：** `DELIGHTFUL_GATEWAY_API_KEY` 是一个关键安全凭证，仅用于 `/auth` 接口的认证。只有获取令牌时需要提供此API密钥，获取令牌后的其他请求都使用获得的令牌进行认证，不需要再提供此API密钥。
+**Important:** `DELIGHTFUL_GATEWAY_API_KEY` is a critical security credential, used only for authentication at the `/auth` endpoint. This API key is only required when obtaining tokens; all other requests after obtaining a token use the acquired token for authentication and do not require this API key again.
 
-### 容器环境变量
+### Container Environment Variables
 
-在容器中，可以使用相同的环境变量名称，但不包含实际值。例如在容器的 `.env` 文件中：
+In containers, you can use the same environment variable names, but without actual values. For example, in the container's `.env` file:
 
 ```
 OPENAI_API_KEY="OPENAI_API_KEY"
@@ -230,13 +230,13 @@ DELIGHTFUL_API_BASE_URL="DELIGHTFUL_API_BASE_URL"
 DELIGHTFUL_MODEL="DELIGHTFUL_MODEL"
 ```
 
-## API 使用说明
+## API Usage Guide
 
-### 1. 获取临时令牌
+### 1. Obtain Temporary Token
 
-**重要提示：**
-1. 获取临时令牌的请求**只能**从宿主机本地（localhost/127.0.0.1）发起，容器内无法直接获取令牌。这是出于安全考虑设计的。
-2. 获取令牌时**必须**提供有效的 `X-Gateway-API-Key` 请求头，其值必须与环境变量中的 `DELIGHTFUL_GATEWAY_API_KEY` 匹配。
+**Important Notes:**
+1. Requests to obtain temporary tokens **can only** be initiated from the host machine locally (localhost/127.0.0.1). Containers cannot directly obtain tokens. This is designed for security considerations.
+2. When obtaining a token, you **must** provide a valid `X-Gateway-API-Key` request header whose value must match the `DELIGHTFUL_GATEWAY_API_KEY` in environment variables.
 
 ```bash
 curl -X POST http://localhost:8000/auth \
@@ -245,7 +245,7 @@ curl -X POST http://localhost:8000/auth \
   -H "X-Gateway-API-Key: your-gateway-api-key-here"
 ```
 
-响应示例：
+Response example:
 ```json
 {
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
@@ -254,36 +254,36 @@ curl -X POST http://localhost:8000/auth \
 }
 ```
 
-临时令牌现在**永久有效**，没有过期时间限制。你只需获取一次令牌，可以长期使用。在容器运行时，应该在启动容器时将宿主机获取的令牌通过环境变量注入到容器中。请注意使用`Delightful-Authorization`头部而不是标准的`Authorization`头部发送请求。
+Temporary tokens are now **permanently valid** with no expiration time limit. You only need to obtain the token once and can use it long-term. When running containers, the token obtained from the host machine should be injected into the container via environment variables when starting the container. Please note to use the `Delightful-Authorization` header instead of the standard `Authorization` header to send requests.
 
-### 2. 查询可用环境变量
+### 2. Query Available Environment Variables
 
 ```bash
-# 获取所有允许的环境变量名称
+# Get all allowed environment variable names
 curl  http://host.docker.internal:8000/env \
   -H "Delightful-Authorization: Bearer YOUR_TOKEN"
 
-# 查询特定环境变量是否可用
+# Query whether specific environment variables are available
 curl "http://host.docker.internal:8000/env?vars=OPENAI_API_KEY,OPENAI_MODEL" \
   -H "Delightful-Authorization: Bearer YOUR_TOKEN"
 ```
 
-响应示例：
+Response example:
 ```json
 {
   "available_vars": ["OPENAI_API_KEY", "OPENAI_MODEL", "OPENAI_API_BASE_URL", "DELIGHTFUL_API_KEY", "DELIGHTFUL_MODEL", "API_GATEWAY_VERSION"],
-  "message": "不允许直接获取环境变量值，请通过API代理请求使用这些变量"
+  "message": "Direct access to environment variable values is not allowed, please use these variables through API proxy requests"
 }
 ```
 
-### 3. 查询可用服务
+### 3. Query Available Services
 
 ```bash
 curl http://localhost:8000/services \
   -H "Delightful-Authorization: Bearer YOUR_TOKEN"
 ```
 
-响应示例：
+Response example:
 ```json
 {
   "available_services": [
@@ -303,18 +303,18 @@ curl http://localhost:8000/services \
       "default_model": "deepseek-coder"
     }
   ],
-  "message": "可以通过API代理请求使用这些服务，使用格式: /{service}/path 或 使用 env: 引用"
+  "message": "These services can be used through API proxy requests, using format: /{service}/path or using env: reference"
 }
 ```
 
-### 4. 使用 API 代理并替换环境变量
+### 4. Use API Proxy and Replace Environment Variables
 
-有多种方式可以调用不同的服务：
+There are multiple ways to call different services:
 
-#### 方式1：直接使用环境变量名称访问（推荐）
+#### Method 1: Direct Access Using Environment Variable Names (Recommended)
 
 ```bash
-# 直接通过环境变量名称访问
+# Access directly through environment variable names
 curl -X POST http://host.docker.internal:8000/OPENAI_API_BASE_URL/v1/chat/completions \
   -H "Delightful-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
@@ -325,7 +325,7 @@ curl -X POST http://host.docker.internal:8000/OPENAI_API_BASE_URL/v1/chat/comple
     ]
   }'
 
-# 也可以直接使用环境变量名称作为值（当字符串完全匹配时）
+# Can also directly use environment variable names as values (when string matches exactly)
 curl -X POST http://host.docker.internal:8000/OPENAI_API_BASE_URL/v1/chat/completions \
   -H "Delightful-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
@@ -336,7 +336,7 @@ curl -X POST http://host.docker.internal:8000/OPENAI_API_BASE_URL/v1/chat/comple
     ]
   }'
 
-# 使用 Delightful 服务
+# Using Delightful service
 curl -X POST http://host.docker.internal:8000/DELIGHTFUL_API_BASE_URL/v1/chat/completions \
   -H "Delightful-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
@@ -348,10 +348,10 @@ curl -X POST http://host.docker.internal:8000/DELIGHTFUL_API_BASE_URL/v1/chat/co
   }'
 ```
 
-#### 方式2：通过服务名称访问
+#### Method 2: Access Through Service Name
 
 ```bash
-# 调用 OpenAI 服务
+# Call OpenAI service
 curl -X POST http://host.docker.internal:8000/openai/v1/chat/completions \
   -H "Delightful-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
@@ -362,7 +362,7 @@ curl -X POST http://host.docker.internal:8000/openai/v1/chat/completions \
     ]
   }'
 
-# 调用 Delightful 服务
+# Call Delightful service
 curl -X POST http://host.docker.internal:8000/delightful/v1/chat/completions \
   -H "Delightful-Authorization: Bearer YOUR_TOKEN" \
   -H "Content-Type: application/json" \
@@ -374,7 +374,7 @@ curl -X POST http://host.docker.internal:8000/delightful/v1/chat/completions \
   }'
 ```
 
-#### 方式3：使用查询参数指定服务
+#### Method 3: Specify Service Using Query Parameters
 
 ```bash
 curl -X POST "http://host.docker.internal:8000/v1/chat/completions?service=deepseek" \
@@ -388,7 +388,7 @@ curl -X POST "http://host.docker.internal:8000/v1/chat/completions?service=deeps
   }'
 ```
 
-#### 方式4：使用环境变量引用
+#### Method 4: Use Environment Variable References
 
 ```bash
 curl -X POST http://host.docker.internal:8000/v1/chat/completions \
@@ -403,35 +403,35 @@ curl -X POST http://host.docker.internal:8000/v1/chat/completions \
   }'
 ```
 
-## Docker 容器集成
+## Docker Container Integration
 
-在 Docker 容器中，由于安全限制，无法直接获取临时令牌。请按照以下步骤在宿主机上获取令牌，然后将其注入到容器中：
+In Docker containers, due to security restrictions, temporary tokens cannot be obtained directly. Please follow these steps to obtain tokens on the host machine and inject them into containers:
 
-### 1. 在宿主机上获取临时令牌
+### 1. Obtain Temporary Token on Host Machine
 
-#### 单环境模式
+#### Single Environment Mode
 
 ```bash
-# 在宿主机上执行
+# Execute on host machine
 USER_ID="your-user-id"
 GATEWAY_API_KEY="your-gateway-api-key"
 
-# 获取临时令牌（只能在本地执行）
+# Obtain temporary token (can only be executed locally)
 TOKEN=$(curl -s -X POST "http://localhost:8000/auth" \
   -H "X-USER-ID: $USER_ID" \
   -H "X-Gateway-API-Key: $GATEWAY_API_KEY" | jq -r '.token')
 
-echo "获取到的令牌: $TOKEN"
+echo "Obtained token: $TOKEN"
 ```
 
-#### 多环境模式
+#### Multi-Environment Mode
 
 ```bash
-# 在宿主机上执行 - 指定环境(test, pre, prod)
-ENV="test"  # 可选值: test, pre, prod
+# Execute on host machine - Specify environment (test, pre, prod)
+ENV="test"  # Optional values: test, pre, prod
 USER_ID="your-user-id"
 
-# 根据环境选择端口和API密钥
+# Select port and API key based on environment
 case $ENV in
   test)
     PORT=8001
@@ -447,50 +447,50 @@ case $ENV in
     ;;
 esac
 
-# 获取指定环境的临时令牌
+# Obtain temporary token for specified environment
 TOKEN=$(curl -s -X POST "http://localhost:$PORT/auth" \
   -H "X-USER-ID: $USER_ID" \
   -H "X-Gateway-API-Key: $GATEWAY_API_KEY" | jq -r '.token')
 
-echo "获取到 $ENV 环境的令牌: $TOKEN"
+echo "Obtained token for $ENV environment: $TOKEN"
 ```
 
-### 2. 启动容器时注入令牌
+### 2. Inject Token When Starting Container
 
-#### 单环境模式
+#### Single Environment Mode
 
 ```bash
-# 使用获取到的令牌启动容器
+# Start container with obtained token
 docker run -e API_TOKEN="$TOKEN" \
   -e API_GATEWAY_URL="http://host.docker.internal:8000" \
   your-image
 ```
 
-#### 多环境模式
+#### Multi-Environment Mode
 
 ```bash
-# 使用获取到的令牌启动容器，指定环境
+# Start container with obtained token, specify environment
 docker run -e API_TOKEN="$TOKEN" \
   -e API_GATEWAY_URL="http://host.docker.internal:$PORT" \
   -e API_GATEWAY_ENV="$ENV" \
   your-image
 ```
 
-### 3. 在容器内使用注入的令牌
+### 3. Use Injected Token Inside Container
 
 ```bash
-# 容器内的应用程序可以从环境变量中获取令牌
+# Applications inside container can get token from environment variables
 TOKEN=$API_TOKEN
 GATEWAY_URL=$API_GATEWAY_URL
 
-# 查询可用服务
+# Query available services
 curl -s "$GATEWAY_URL/services" \
   -H "Delightful-Authorization: Bearer $TOKEN"
 ```
 
-### 4. 使用Docker Compose配置多环境
+### 4. Configure Multi-Environment Using Docker Compose
 
-可以在docker-compose.yml文件中配置应用容器以连接到特定环境的API网关：
+You can configure application containers in docker-compose.yml file to connect to API gateway for specific environments:
 
 ```yaml
 version: '3'
@@ -506,63 +506,63 @@ services:
       - "host.docker.internal:host-gateway"
 ```
 
-然后使用环境变量启动容器：
+Then start containers using environment variables:
 
 ```bash
-# 注入环境变量启动应用容器
+# Start application container with injected environment variables
 ENV=test PORT=8001 API_TOKEN=$TOKEN docker-compose up -d
 ```
 
-## 安全特性
+## Security Features
 
-1. **环境变量保护**：容器无法直接获取宿主机环境变量的值，只能通过API代理请求间接使用
-2. **环境变量替换**：API网关自动替换请求中的环境变量引用，容器无需知道实际值
-3. **自定义认证头**：使用Delightful-Authorization头避免与其他服务的Authorization产生冲突
-4. **多服务隔离**：各服务的API密钥由网关管理，不会泄露给容器
-5. **临时令牌**：所有请求需要有效的认证令牌，令牌有时效限制
-6. **容器隔离**：每个容器使用独立的令牌，无法访问其他容器的令牌
-7. **网关API密钥**：获取令牌必须提供有效的网关API密钥（`X-Gateway-API-Key`），增加了额外的安全层
+1. **Environment Variable Protection**: Containers cannot directly access host machine environment variable values, can only use them indirectly through API proxy requests
+2. **Environment Variable Replacement**: API gateway automatically replaces environment variable references in requests, containers don't need to know actual values
+3. **Custom Authentication Header**: Uses Delightful-Authorization header to avoid conflicts with other services' Authorization
+4. **Multi-Service Isolation**: API keys for each service are managed by the gateway and not exposed to containers
+5. **Temporary Tokens**: All requests require valid authentication tokens with time limits
+6. **Container Isolation**: Each container uses independent tokens, cannot access other containers' tokens
+7. **Gateway API Key**: Obtaining tokens requires providing a valid gateway API key (`X-Gateway-API-Key`), adding an extra security layer
 
-## 性能比较
+## Performance Comparison
 
-与 Python 版本相比，Go 版本的 API 网关有以下性能优势：
+Compared to the Python version, the Go version of the API gateway has the following performance advantages:
 
-1. **更低的内存占用**：Go 版本通常比 Python 版本占用更少的内存
-2. **更高的并发处理能力**：Go 的并发模型使其能够更有效地处理大量请求
-3. **更快的启动时间**：Go 编译为单一可执行文件，启动速度更快
-4. **更低的延迟**：请求处理延迟明显降低
+1. **Lower Memory Usage**: Go version typically uses less memory than Python version
+2. **Higher Concurrency Handling**: Go's concurrency model enables more efficient handling of large numbers of requests
+3. **Faster Startup Time**: Go compiles to a single executable file with faster startup speed
+4. **Lower Latency**: Request processing latency is significantly reduced
 
-## 构建说明
+## Build Instructions
 
-如果需要手动构建：
+If manual building is needed:
 
 ```bash
-# 获取依赖
+# Get dependencies
 go mod tidy
 
-# 构建可执行文件
+# Build executable
 go build -o api-gateway
 ```
 
-## 安全建议
+## Security Recommendations
 
-1. 在生产环境中更改 `JWT_SECRET`
-2. 在需要时添加 HTTPS 代理层
-3. 限制允许访问的容器
-4. 定期轮换 API 密钥
+1. Change `JWT_SECRET` in production environment
+2. Add HTTPS proxy layer when needed
+3. Restrict containers allowed to access
+4. Regularly rotate API keys
 
-## 环境变量替换功能
+## Environment Variable Replacement Feature
 
-API网关提供了强大的环境变量替换功能，可以在不同位置替换环境变量引用：
+The API gateway provides powerful environment variable replacement functionality, allowing replacement of environment variable references in different locations:
 
-1. **请求体替换** - 在JSON请求体中替换以下格式的环境变量引用：
-   - 完全匹配环境变量名：`"model": "OPENAI_MODEL"`
-   - `env:`前缀：`"model": "env:OPENAI_MODEL"`
-   - `${VAR}`格式：`"url": "https://example.com/${SERVICE_URL}"`
-   - `$VAR`格式：`"key": "$OPENAI_API_KEY"`
+1. **Request Body Replacement** - Replaces environment variable references in the following formats in JSON request body:
+   - Exact environment variable name match: `"model": "OPENAI_MODEL"`
+   - `env:` prefix: `"model": "env:OPENAI_MODEL"`
+   - `${VAR}` format: `"url": "https://example.com/${SERVICE_URL}"`
+   - `$VAR` format: `"key": "$OPENAI_API_KEY"`
 
-2. **请求头替换** - 在自定义请求头中替换环境变量引用
+2. **Request Header Replacement** - Replaces environment variable references in custom request headers
 
-3. **URL路径替换** - 使用环境变量作为URL路径前缀：`/OPENAI_API_BASE_URL/v1/chat/completions`
+3. **URL Path Replacement** - Uses environment variables as URL path prefix: `/OPENAI_API_BASE_URL/v1/chat/completions`
 
-这使得容器可以安全地使用环境变量，而无需知道实际值。API网关会自动检测和替换请求中的环境变量引用，所有替换都在代理端完成，确保敏感信息不会暴露给容器。
+This allows containers to safely use environment variables without knowing actual values. The API gateway automatically detects and replaces environment variable references in requests, with all replacements completed on the proxy side, ensuring sensitive information is not exposed to containers.

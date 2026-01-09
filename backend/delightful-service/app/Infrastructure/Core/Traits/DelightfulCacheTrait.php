@@ -15,7 +15,7 @@ use Throwable;
 trait DelightfulCacheTrait
 {
     /**
-     * cacheobjectpropertydown划lineandcamel casenaming,avoidfrequentcalculate.
+     * cacheobjectpropertydownplanlineandcamel casenaming,avoidfrequentcalculate.
      */
     protected static ?DriverInterface $propertyCacheDriver = null;
 

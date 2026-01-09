@@ -15,7 +15,7 @@ namespace App\Application\Speech\Enum;
  * 【usescenario】
  * - taskstatuspersistence(Redis/database)
  * - businessprocesscontrolandpoweretcpropertyjudge
- * - 整bodytaskstatustrace(recording → merge → generatetitle → sendmessage)
+ * - organizebodytaskstatustrace(recording → merge → generatetitle → sendmessage)
  *
  * 【andotherenumdifference】
  * - AsrRecordingStatusEnum: frontclientrecordingactualo clockstatus(recordinginteractionlayer)
@@ -28,7 +28,7 @@ enum AsrTaskStatusEnum: string
 {
     case CREATED = 'created';              // alreadycreate:taskinitializecomplete,etcpendingprocess
     case PROCESSING = 'processing';        // processmiddle:justinexecuterecording,mergeorsummary
-    case COMPLETED = 'completed';          // alreadycomplete:整 ASR processalldepartmentcomplete(includemessagesend)
+    case COMPLETED = 'completed';          // alreadycomplete:organize ASR processalldepartmentcomplete(includemessagesend)
     case FAILED = 'failed';                // fail:taskexecutefail
 
     /**

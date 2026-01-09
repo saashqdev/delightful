@@ -50,7 +50,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected array $searchWebPages;
 
     /**
-     * byatmultipletimechildissuesearcho clock,willoutmultipleduplicatesearchresult, byneed ai goreloadback,again丢givebigmodelsummary.
+     * byatmultipletimechildissuesearcho clock,willoutmultipleduplicatesearchresult, byneed ai goreloadback,againdiscardgivebigmodelsummary.
      *
      * @var SearchDetailItem[]
      */
@@ -79,7 +79,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     /**
      * getthistimeneedstreampushfield.
      * supportonetimepushmultiplefieldstreammessage,if json layerlevelmoredeep,use field_1.*.field_2 asfor key. itsmiddle * isfingerarraydownmark.
-     * serviceclientwillcache havestreamdata,andinstreamendo clockonetimepropertypush,bydecrease丢packagegenerallyrate,enhancemessagecompleteproperty.
+     * serviceclientwillcache havestreamdata,andinstreamendo clockonetimepropertypush,bydecreasediscardpackagegenerallyrate,enhancemessagecompleteproperty.
      * for example:
      * [
      *     'users.0.name' => 'delightful',

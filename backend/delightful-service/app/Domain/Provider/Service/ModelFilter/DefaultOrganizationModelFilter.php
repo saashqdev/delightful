@@ -40,7 +40,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement:returnemptyarray,tableshownothavemodelneed升level.
+     * defaultimplement:returnemptyarray,tableshownothavemodelneedupgradelevel.
      */
     public function getUpgradeRequiredModelIds(string $organizationCode): array
     {

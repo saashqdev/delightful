@@ -166,7 +166,7 @@ class ImageGenerateFactory
         $width = (int) $widthStr;
         $height = (int) $heightStr;
 
-        // todo xhy first fallbackbottom,factorfor整text generationgraphalsonothaveclosed loop
+        // todo xhy first fallbackbottom,factorfororganizetext generationgraphalsonothaveclosed loop
         if (
             ! ($width === 1024 && $height === 1024)
             && ! ($width === 1024 && $height === 1792)

@@ -332,14 +332,14 @@ class ImageWatermarkProcessor
                     break;
                 case 'webp':
                     if (function_exists('imagewebp')) {
-                        imagewebp($image, null, 100); // WebPno損modetype
+                        imagewebp($image, null, 100); // WebPnolossmodetype
                     } else {
                         $this->logger->warning('WebP not supported, falling back to PNG');
                         imagepng($image, null, 0);
                     }
                     break;
                 case 'gif':
-                    // GIFlimitmoremultiple,suggestion升levelforPNG
+                    // GIFlimitmoremultiple,suggestionupgradelevelforPNG
                     $this->logger->info('Converting GIF to PNG for better quality');
                     imagepng($image, null, 0);
                     break;

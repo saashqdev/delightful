@@ -15,7 +15,7 @@ use HyperfTest\Cases\Api\AbstractHttpTest;
 class DelightfulChatHttpApiTest extends AbstractHttpTest
 {
     /**
-     * testsessionwindowmiddlechat补allfeature.
+     * testsessionwindowmiddlechatsupplementallfeature.
      */
     public function testConversationChatCompletions(): void
     {
@@ -78,7 +78,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
     }
 
     /**
-     * testsessionwindowmiddlechat补allfeature - parameterverifyfail.
+     * testsessionwindowmiddlechatsupplementallfeature - parameterverifyfail.
      */
     public function testConversationChatCompletionsWithInvalidParams(): void
     {
@@ -110,7 +110,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
     }
 
     /**
-     * testsessionwindowmiddlechat补allfeature - authorizationverifyfail.
+     * testsessionwindowmiddlechatsupplementallfeature - authorizationverifyfail.
      */
     public function testConversationChatCompletionsWithInvalidAuth(): void
     {

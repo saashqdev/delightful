@@ -606,7 +606,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         4. ignoreearlyalreadyalreadyendtopic,unlessitusandmostnewtopicclosely relatedclose
 
         ## strictrequire
-        1. titlelength:notexceedspass 15 character.Englishoneletter算onecharacter,Chinese charactersonecharacter countonecharacter,otherlanguagetypecollectuseanalogouscountsolution.
+        1. titlelength:notexceedspass 15 character.Englishonelettercalculateonecharacter,Chinese charactersonecharacter countonecharacter,otherlanguagetypecollectuseanalogouscountsolution.
         2. contentrelatedclose:titlemustdirectlyreflectconversationcorecoretheme
         3. languagestyle:usestatementpropertylanguagesentence,avoidquestionsentence
         4. outputformat:onlyoutputtitlecontent,notwantaddanyexplain,markpointorothertext
@@ -873,7 +873,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * chatwindowhitfieldo clock补alluserinput.foradaptgroup chat,thiswithin role itsactualisusernickname,whilenotisroletype.
+     * chatwindowhitfieldo clocksupplementalluserinput.foradaptgroup chat,thiswithin role itsactualisusernickname,whilenotisroletype.
      */
     public function getConversationChatCompletionsHistory(
         DelightfulUserAuthorization $userAuthorization,
@@ -886,7 +886,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         $conversationMessagesQueryDTO->setConversationId($conversationId)->setLimit($limit)->setTopicId($topicId);
         // gettopicmostnear 20 itemconversationrecord
         $clientSeqResponseDTOS = $this->delightfulChatDomainService->getConversationChatMessages($conversationId, $conversationMessagesQueryDTO);
-        // getreceivehairdoublesideuserinfo,useat补allo clockenhanceroletype
+        // getreceivehairdoublesideuserinfo,useatsupplementallo clockenhanceroletype
         $userIds = [];
         foreach ($clientSeqResponseDTOS as $clientSeqResponseDTO) {
             // receivecollection user_id

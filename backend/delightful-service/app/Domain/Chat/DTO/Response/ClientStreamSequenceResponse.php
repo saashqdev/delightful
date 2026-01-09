@@ -16,7 +16,7 @@ class ClientStreamSequenceResponse extends AbstractEntity
     // wantupdategoal seqId content
     protected string $targetSeqId;
 
-    // forimplement丢packageretransmit,needrecordwhenfrontseqId.onesetsingleincrement.
+    // forimplementdiscardpackageretransmit,needrecordwhenfrontseqId.onesetsingleincrement.
     protected ?int $seqId;
 
     // bigmodelsummary

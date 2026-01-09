@@ -16,7 +16,7 @@ class AsrConfig
     // ==================== timeoutconfiguration ====================
 
     /**
-     * summarytaskminute布typelock TTL(second).
+     * summarytaskminutedistributetypelock TTL(second).
      */
     public const int SUMMARY_LOCK_TTL = 120;
 

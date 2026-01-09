@@ -382,7 +382,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         $queryVo->setSearchKeywords($searchKeywords);
         $searchResult = $this->delightfulLLMDomainService->getSearchResults($queryVo);
         $this->logger->info(sprintf(
-            'getSearchResults searchUserQuestion 虚nulldecomposekeywordandsearchuserissue endcalculateo clock,consumeo clock %s second',
+            'getSearchResults searchUserQuestion virtualnulldecomposekeywordandsearchuserissue endcalculateo clock,consumeo clock %s second',
             microtime(true) - $start
         ));
         return $searchResult;
@@ -663,7 +663,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 $this->delightfulChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [
                     'llm_response' => $assistantMessage->getContent(),
                 ]);
-                // 累addstreamcontent,useasmostbackreturn
+                // accumulateaddstreamcontent,useasmostbackreturn
                 $summarizeStreamResponse .= $assistantMessage->getContent();
             }
         }

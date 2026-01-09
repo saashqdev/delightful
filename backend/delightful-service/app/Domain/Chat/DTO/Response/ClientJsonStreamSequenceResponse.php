@@ -20,7 +20,7 @@ class ClientJsonStreamSequenceResponse extends AbstractEntity
     // wantupdategoal seqId content
     protected string $targetSeqId;
 
-    // forimplement丢packageretransmit,needrecordcurrent $streamId.onesetsingleincrement.
+    // forimplementdiscardpackageretransmit,needrecordcurrent $streamId.onesetsingleincrement.
     protected ?int $streamId;
 
     /**

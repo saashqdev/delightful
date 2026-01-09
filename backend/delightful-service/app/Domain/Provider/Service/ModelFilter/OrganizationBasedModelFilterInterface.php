@@ -45,10 +45,10 @@ interface OrganizationBasedModelFilterInterface
     public function getAvailableModelIdentifiers(string $organizationCode): array;
 
     /**
-     * getorganizationneed升levelonlycanusemodelIDlist.
+     * getorganizationneedupgradelevelonlycanusemodelIDlist.
      *
      * @param string $organizationCode organizationencoding
-     * @return array need升levelmodelIDarray,for example: ['gpt-4o-advanced', 'claude-3-opus', ...]
+     * @return array needupgradelevelmodelIDarray,for example: ['gpt-4o-advanced', 'claude-3-opus', ...]
      */
     public function getUpgradeRequiredModelIds(string $organizationCode): array;
 }

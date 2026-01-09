@@ -78,7 +78,7 @@ class DelightfulControlDomainService extends AbstractDomainService
 
         $senderUserId = $senderConversationEntity->getUserId();
         $senderMessageId = $receiveDelightfulSeqEntity->getSenderMessageId();
-        # thiswithinaddonedownminute布typelinelock,preventandhairmodifymessagereceivepersoncolumntable,createbecomedataoverride.
+        # thiswithinaddonedownminutedistributetypelinelock,preventandhairmodifymessagereceivepersoncolumntable,createbecomedataoverride.
         $spinLockKey = 'chat:seq:lock:' . $senderMessageId;
         $spinLockKeyOwner = random_bytes(8);
         try {
@@ -204,7 +204,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             ));
             return;
         }
-        # thiswithinaddonedownminute布typelinelock,preventandhair.
+        # thiswithinaddonedownminutedistributetypelinelock,preventandhair.
         $revokeMessageId = $needChangeSeqEntity->getSeqId();
         $spinLockKey = 'chat:seq:lock:' . $revokeMessageId;
         try {

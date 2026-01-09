@@ -223,7 +223,7 @@ class ModeDomainService
             $this->groupRepository->batchSave($dataIsolation, $newGroupEntities);
         }
 
-        // batchquantitybuildgroupactualbodyandclosesystem實body
+        // batchquantitybuildgroupactualbodyandclosesystemactualbody
         $relationEntities = [];
 
         foreach ($modeAggregate->getGroupAggregates() as $groupAggregate) {

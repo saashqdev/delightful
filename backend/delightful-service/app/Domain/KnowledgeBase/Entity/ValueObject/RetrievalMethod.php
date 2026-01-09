@@ -49,7 +49,7 @@ class RetrievalMethod
      * graphretrieve.
      *
      * based onknowledgegraphspectrumretrievemethod.
-     * 利useactualbodybetweenclosesystemconductretrieve,suitableprocesscomplexassociatequery.
+     * profituseactualbodybetweenclosesystemconductretrieve,suitableprocesscomplexassociatequery.
      * canhairshow implicitclosesystemandconnect.
      */
     public const string GRAPH_SEARCH = 'graph_search';

@@ -77,7 +77,7 @@ class ModeAppService extends AbstractModeAppService
             $allAggregateImageModels = array_merge($allAggregateImageModels, $aggregateImageModels);
         }
 
-        // need升levelsetmeal
+        // needupgradelevelsetmeal
         $upgradeRequiredModelIds = [];
 
         // useorganizationfilterdeviceconductfilter(LLM)

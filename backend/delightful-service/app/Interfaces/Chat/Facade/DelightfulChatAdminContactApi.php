@@ -72,7 +72,7 @@ class DelightfulChatAdminContactApi extends AbstractApi
     public function userGetByIds(RequestInterface $request): array
     {
         $ids = $request->input('user_ids', '');
-        // uponepagetoken. toatmysqlcomesay,return累productoffsetquantity;toatescomesay,returncursor
+        // uponepagetoken. toatmysqlcomesay,returnaccumulateproductoffsetquantity;toatescomesay,returncursor
         $pageToken = (string) $request->input('page_token', '');
         $queryType = (int) ($request->input('query_type') ?: UserQueryType::User->value);
         if (! in_array($queryType, UserQueryType::types())) {
@@ -93,7 +93,7 @@ class DelightfulChatAdminContactApi extends AbstractApi
     public function departmentUserList(string $id, RequestInterface $request): array
     {
         // departmentid
-        // uponepagetoken. toatmysqlcomesay,return累productoffsetquantity;toatescomesay,returncursor
+        // uponepagetoken. toatmysqlcomesay,returnaccumulateproductoffsetquantity;toatescomesay,returncursor
         $pageToken = (string) $request->input('page_token', '');
         // whetherrecursion
         $recursive = (bool) $request->input('recursive', false);
@@ -109,7 +109,7 @@ class DelightfulChatAdminContactApi extends AbstractApi
     {
         $authorization = $this->getAuthorization();
         $query = (string) $request->input('query', '');
-        // uponepagetoken. toatmysqlcomesay,return累productoffsetquantity;toatescomesay,returncursor
+        // uponepagetoken. toatmysqlcomesay,returnaccumulateproductoffsetquantity;toatescomesay,returncursor
         $pageToken = (string) $request->input('page_token', '');
         if (empty($query)) {
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR, 'chat.common.param_error', ['param' => 'query']);

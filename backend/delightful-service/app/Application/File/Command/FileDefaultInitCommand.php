@@ -198,7 +198,7 @@ class FileDefaultInitCommand extends Command
             }
         }
 
-        // meanwhilehandleoriginaldefaultgraphmarkfile(ifneed话)
+        // meanwhilehandleoriginaldefaultgraphmarkfile(ifneedwords)
         $this->processDefaultIcons($baseFileDir, $organizationCode, $totalFiles, $skippedFiles);
 
         $this->info("fileinitializecomplete,sharedhandle {$totalFiles} file,skip {$skippedFiles} alreadyexistsinfile");

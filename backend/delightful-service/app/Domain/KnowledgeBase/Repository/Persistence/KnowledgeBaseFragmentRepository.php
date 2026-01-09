@@ -247,7 +247,7 @@ class KnowledgeBaseFragmentRepository extends KnowledgeBaseAbstractRepository im
             $groupedResults[$result->document_code][] = $result->sync_status;
         }
 
-        // judgeeachdocument整bodystatus
+        // judgeeachdocumentorganizebodystatus
         $statusMap = [];
         foreach ($groupedResults as $documentCode => $statuses) {
             if (in_array(KnowledgeSyncStatus::Syncing->value, $statuses)) {

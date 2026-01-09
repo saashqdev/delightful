@@ -202,12 +202,12 @@ class DelightfulLLMDomainService
     # task
     youneedbased onusermessage,according toIprovidesearchresult,according tototalminutetotalstructure,outputhighquality,structureizationdetailedreturnanswer,formatfor markdown.
     
-    inIgiveyousearchresultmiddle,eachresultallis[webpage X begin]...[webpage X end]format,Xrepresenteacharticlechapternumberindex.pleaseinfitwhensituationdowninsentencechildendtailquotecontext.pleaseaccording toquotecodenumber[citation:X]formatinanswermiddletoshould deployminutequotecontext.ifonesentence话sourcefrommultiplecontext,pleasecolumnout haverelatedclosequotecodenumber,for example[citation:3][citation:5],remembernotwantwillquotecollectionmiddleinmostbackreturnquotecodenumber,whileisinanswertoshould deployminutecolumnout.
+    inIgiveyousearchresultmiddle,eachresultallis[webpage X begin]...[webpage X end]format,Xrepresenteacharticlechapternumberindex.pleaseinfitwhensituationdowninsentencechildendtailquotecontext.pleaseaccording toquotecodenumber[citation:X]formatinanswermiddletoshould deployminutequotecontext.ifonesentencewordssourcefrommultiplecontext,pleasecolumnout haverelatedclosequotecodenumber,for example[citation:3][citation:5],remembernotwantwillquotecollectionmiddleinmostbackreturnquotecodenumber,whileisinanswertoshould deployminutecolumnout.
     inreturnanswero clock,pleasenoticebydownseveralpoint:
     - todaydayis{date_now}.
     - andnonsearchresult havecontentallanduserquestionclosely relatedclose,youneedcombinequestion,tosearchresultconductdistinguish,filter.
-    - toatcolumn举categoryquestion(likecolumnraise haveflightinformation),exhaustedquantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcomesource,获completeinformation.priorityprovideinformationcomplete,mostrelatedclosecolumn举item;likenonrequiredwant,notwantactivetellusersearchresultnotprovidecontent.
-    - toatcreateascategoryquestion(like writing paper),please be sureinjusttextsegmentfallmiddlequotetoshouldreferencecodenumber,for example[citation:3][citation:5],notcanonlyintextchapterendtailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minute利usesearchresultanddrawreloadwantinformation,generatematchuserrequire,very thoughtfuldegree,richhavecreatecapabilityandprofessionalpropertyanswer.youcreateaslengthneedexhaustedmaybe延long,toateachonewantpointdiscussionwantspeculateduserintentiongraph,giveoutexhaustedmaybemultipleangledegreereturnanswerwantpoint,and务requiredinformationquantitybig,detailed discussion.
+    - toatcolumn舉categoryquestion(likecolumnraise haveflightinformation),exhaustedquantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcomesource,获completeinformation.priorityprovideinformationcomplete,mostrelatedclosecolumn舉item;likenonrequiredwant,notwantactivetellusersearchresultnotprovidecontent.
+    - toatcreateascategoryquestion(like writing paper),please be sureinjusttextsegmentfallmiddlequotetoshouldreferencecodenumber,for example[citation:3][citation:5],notcanonlyintextchapterendtailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minuteprofitusesearchresultanddrawreloadwantinformation,generatematchuserrequire,very thoughtfuldegree,richhavecreatecapabilityandprofessionalpropertyanswer.youcreateaslengthneedexhaustedmaybe延long,toateachonewantpointdiscussionwantspeculateduserintentiongraph,giveoutexhaustedmaybemultipleangledegreereturnanswerwantpoint,and务requiredinformationquantitybig,detailed discussion.
     - ifreturnanswerverylong,please盡quantitystructureization,minutesegmentfallsummary.ifneedminutepointasanswer,exhaustedquantitycontrolin5pointbyinside,andmergerelatedclosecontent.
     - toatobjectivecategoryQ&A,ifquestionanswernonoften simpleshort,canfitwhensupplementonetotwosentencerelatedcloseinformation,byrichcontent.
     - youneedaccording touserrequireandreturnanswercontentchoosesuitable,beautifulreturnanswerformat,ensurecanreadpropertystrong.
@@ -507,7 +507,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * letbigmodel虚nulldecomposechildquestion.
+     * letbigmodelvirtualnulldecomposechildquestion.
      * @throws Throwable
      */
     public function generateSearchKeywords(AISearchCommonQueryVo $queryVo): array
@@ -686,7 +686,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * letbigmodel虚nulldecomposechildquestion,tohot meme/actualo clockdecomposewillnotgood.
+     * letbigmodelvirtualnulldecomposechildquestion,tohot meme/actualo clockdecomposewillnotgood.
      * @return string[]
      */
     public function generateSearchKeywordsByUserInput(DelightfulChatAggregateSearchReqDTO $dto, ModelInterface $modelInterface): array

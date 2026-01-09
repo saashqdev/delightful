@@ -24,7 +24,7 @@ class CreateDelightfulApiModelConfigTable extends Migration
             $table->integer('rpm')->comment('limitstream');
             $table->unsignedDecimal('exchange_rate')->comment('gatherrate');
             $table->unsignedDecimal('input_cost_per_1000', 40, 6)->comment('1000 token input feeuse');
-            $table->unsignedDecimal('output_cost_per_1000', 40, 6)->comment('1000 token 輸out費use');
+            $table->unsignedDecimal('output_cost_per_1000', 40, 6)->comment('1000 token inputoutfeeuse');
             $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('creation time');
             $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('modification time')->nullable();
             $table->timestamp('deleted_at')->comment('logicdelete')->nullable();

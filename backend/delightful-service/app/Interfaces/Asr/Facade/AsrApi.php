@@ -142,7 +142,7 @@ class AsrApi extends AbstractApi
             }
         }
 
-        // applicationlayeralreadyhaveminute布typelock,thiswithinnoneedagainaddlock,directlycall
+        // applicationlayeralreadyhaveminutedistributetypelock,thiswithinnoneedagainaddlock,directlycall
         try {
             // handlesummarytask
             $result = $this->asrFileAppService->processSummaryWithChat($summaryRequest, $userAuthorization);
@@ -188,7 +188,7 @@ class AsrApi extends AbstractApi
             'has_file_name' => ! empty($fileName),
         ]);
 
-        // 2. getminute布typelock(preventandhaircreatedirectory)
+        // 2. getminutedistributetypelock(preventandhaircreatedirectory)
         $lockName = sprintf('asr:upload_token:lock:%s:%s', $userId, $taskKey);
         $lockOwner = sprintf('%s:%s', $userId, microtime(true));
         $locked = $this->locker->spinLock($lockName, $lockOwner);

@@ -22,7 +22,7 @@ class FriendQueryDTO extends AbstractEntity
     protected array $aiCodes = [];
 
     /**
-     * uponepagetoken. toatmysqlcomesay,return累productoffsetquantity;toatescomesay,returncursor.
+     * uponepagetoken. toatmysqlcomesay,returnaccumulateproductoffsetquantity;toatescomesay,returncursor.
      */
     protected string $pageToken = '';
 

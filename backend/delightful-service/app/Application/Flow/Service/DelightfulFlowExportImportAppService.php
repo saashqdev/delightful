@@ -328,7 +328,7 @@ class DelightfulFlowExportImportAppService
         // updateorganizationinfo
         $flowData['organization_code'] = $dataIsolation->getCurrentOrganizationCode();
 
-        // retainagentIdfield,ifexistsin话
+        // retainagentIdfield,ifexistsinwords
         $agentId = $flowData['agent_id'] ?? '';
         // createprocessactualbodyandsave
         $flowEntity = DelightfulFlowFactory::arrayToEntity($flowData);

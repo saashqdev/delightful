@@ -79,7 +79,7 @@ if (! function_exists('is_unit_test')) {
 
 if (! function_exists('camelize')) {
     /**
-     * down划linetransfercamel case.
+     * downplanlinetransfercamel case.
      * @param string $unCamelizeWords needconvertstring
      * @param string $separator minuteseparator
      */
@@ -99,7 +99,7 @@ if (! function_exists('camelize')) {
 
 if (! function_exists('un_camelize')) {
     /**
-     * camel casenamingtransferdown划linenaming.
+     * camel casenamingtransferdownplanlinenaming.
      * @param string $camelCaps needconvertstring
      * @param string $separator minuteseparator
      */
@@ -114,7 +114,7 @@ if (! function_exists('un_camelize')) {
 
 if (! function_exists('string_to_hump')) {
     /**
-     * down划linetransferbecomecamel casenaming,defaultsmallcamel case.
+     * downplanlinetransferbecomecamel casenaming,defaultsmallcamel case.
      * @param string $string wantconvertstring
      * @param bool $firstUp whetherinitialbigwrite,defaultno
      */
@@ -127,7 +127,7 @@ if (! function_exists('string_to_hump')) {
 
 if (! function_exists('string_to_line')) {
     /**
-     * camel casenamingtransferdown划line
+     * camel casenamingtransferdownplanline
      * @param string $string wantconvertstring
      */
     function string_to_line(string $string, string $separator = '_'): string
@@ -138,7 +138,7 @@ if (! function_exists('string_to_line')) {
 
 if (! function_exists('array_key_to_line')) {
     /**
-     * convertarraykeybecomedown划line
+     * convertarraykeybecomedownplanline
      * @param array $array wantconvertarray
      */
     function array_key_to_line(array $array): array

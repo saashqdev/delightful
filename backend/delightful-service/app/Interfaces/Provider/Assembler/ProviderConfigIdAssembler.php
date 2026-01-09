@@ -62,7 +62,7 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * according toProviderTemplateIdgettoshould數valuetypestring.
+     * according toProviderTemplateIdgettoshouldnumbervaluetypestring.
      */
     public static function getTemplateIdValue(ProviderTemplateId $templateId): string
     {

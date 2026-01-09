@@ -128,7 +128,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
 
         // sendPOSTrequest
         $response = $this->json('/v1/chat/completions', $requestData, $this->getTestHeaders());
-        // verify整responsestructure
+        // verifyorganizeresponsestructure
         $expectedResponse = [
             'id' => '',
             'object' => 'chat.completion',

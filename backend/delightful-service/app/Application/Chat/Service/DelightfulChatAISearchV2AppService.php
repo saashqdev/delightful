@@ -354,7 +354,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $queryVo->setSearchKeywords($searchKeywords);
         $searchDetailItems = $this->delightfulLLMDomainService->getSearchResults($queryVo)['search'] ?? [];
         $this->logger->info(sprintf(
-            'getSearchResults searchUserQuestion 虚nulldecomposekeywordandsearchuserissue endcalculateo clock,consumeo clock %s second',
+            'getSearchResults searchUserQuestion virtualnulldecomposekeywordandsearchuserissue endcalculateo clock,consumeo clock %s second',
             microtime(true) - $start
         ));
         return $searchDetailItems;

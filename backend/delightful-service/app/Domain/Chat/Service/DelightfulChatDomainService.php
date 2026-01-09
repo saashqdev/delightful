@@ -192,7 +192,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         }
         # ai replyo clockquotemessagerule:
         // 1. thistimereplyfront,usercontinuoushair2itemandbyupmessage
-        // 2. 算upthistimereply.aicontinuoushair2itemandbyupmessage
+        // 2. calculateupthistimereply.aicontinuoushair2itemandbyupmessage
         $conversationMessagesQueryDTO = new MessagesQueryDTO();
         $conversationMessagesQueryDTO->setConversationId($aiConversationEntity->getId())->setLimit(2)->setTopicId($aiSeqDTO->getExtra()?->getTopicId());
         $messages = $this->getConversationChatMessages($aiConversationEntity->getId(), $conversationMessagesQueryDTO);
@@ -694,7 +694,7 @@ class DelightfulChatDomainService extends AbstractDomainService
      * @todo ifwanttooutsideprovidestream api,needchangefor redis cache,bysupport断linereconnect.
      *
      *  supportonetimepushmultiplefieldstreammessage,if json layerlevelmoredeep,use field_1.*.field_2 asfor key. itsmiddle * isfingerarraydownmark.
-     *  serviceclientwillcache havestreamdata,andinstreamendo clockonetimepropertypush,bydecrease丢packagegenerallyrate,enhancemessagecompleteproperty.
+     *  serviceclientwillcache havestreamdata,andinstreamendo clockonetimepropertypush,bydecreasediscardpackagegenerallyrate,enhancemessagecompleteproperty.
      *  for example:
      *  [
      *      'users.0.name' => 'delightful',

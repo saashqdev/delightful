@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Maiji DongFang Caifuhao Page Cleaner
-// @namespace    https://dtyq.com/
+// @namespace    https://bedelightful.ai/
 // @version      1.1
 // @description  Clean DongFang Caifuhao website pages, focus on article content, remove distraction elements.
 // @author       cc, cc@delightful.ai

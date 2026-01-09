@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Delightful Sohu Ultra Clean
-// @namespace    https://dtyq.com/
+// @namespace    https://bedelightful.ai/
 // @version      1.0
 // @description  Clean Sohu website pages, keep only article content, remove ads and other distracting elements
 // @author       cc, cc@delightful.ai

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Delightful East Money Finance Ultra Clean
-// @namespace    https://dtyq.com/
+// @namespace    https://bedelightful.ai/
 // @version      1.6
 // @description  Clean East Money Finance website pages, focus on article content and title, remove distracting elements. Auto-close specific popups.
 // @author       Gemini & DTYQ

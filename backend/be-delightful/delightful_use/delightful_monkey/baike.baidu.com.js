@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Delightful Baidu Baike Ultra Clean
-// @namespace    https://dtyq.com/
+// @namespace    https://bedelightful.ai/
 // @version      1.0
 // @description  Clean Baidu Baike pages, keep only main content area, provide a clean and refreshing reading experience
 // @author       cc, cc@delightful.ai

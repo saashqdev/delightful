@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Delightful CSDN Blog Ultra Clean
-// @namespace    https://dtyq.com/
+// @namespace    https://bedelightful.ai/
 // @version      1.0
 // @description  Clean up CSDN blog pages, remove ads, login prompts and other distracting content, provide pure reading experience
 // @author       cc, cc@delightful.ai

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Delightful 36Kr Ultra Clean
-// @namespace    https://dtyq.com/
+// @namespace    https://bedelightful.ai/
 // @version      1.0
 // @description  Clean 36Kr website pages, keep only article content area, provide a cleaner reading experience
 // @author       cc, cc@delightful.ai

@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name         Delightful Baidu Search Ultra Clean
-// @namespace    https://dtyq.com/
+// @namespace    https://bedelightful.ai/
 // @version      1.0
 // @description  Clean Baidu search pages, remove right-side ads, bottom user info bar and footer, provide a pure search experience
 // @author       cc, cc@delightful.ai

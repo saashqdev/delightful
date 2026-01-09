@@ -50,7 +50,7 @@ class DelightfulFlowToolSetFactory
         $entity->setEnabled($toolSetData['enabled'] ?? true);
         $entity->setOrganizationCode($toolSetData['organization_code'] ?? '');
 
-        // settingtoolcolumn表
+        // settingtoolcolumntable
         if (! empty($toolSetData['tools'])) {
             $entity->setTools($toolSetData['tools']);
         }

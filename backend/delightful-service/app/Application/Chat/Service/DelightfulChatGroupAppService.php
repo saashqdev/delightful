@@ -307,7 +307,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
     }
 
     /**
-     * get群membercolumn表.
+     * get群membercolumntable.
      */
     public function getGroupUserList(string $groupId, string $pageToken, DelightfulUserAuthorization $userAuthorization): array
     {
@@ -316,7 +316,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
     }
 
     /**
-     * getuser群column表.
+     * getuser群columntable.
      */
     public function getUserGroupList(string $pageToken, DelightfulUserAuthorization $userAuthorization, int $pageSize): GroupsPageResponseDTO
     {

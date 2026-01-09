@@ -135,7 +135,7 @@ readonly class ProviderModelDomainService
     /**
      * batchquantityaccording toIDgetmodel.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param string[] $ids modelIDarray
      * @return ProviderModelEntity[] model实bodyarray,byIDforkey
      */
@@ -152,7 +152,7 @@ readonly class ProviderModelDomainService
     /**
      * batchquantityaccording toModelIDgetmodel.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param string[] $modelIds modelidentifierarray
      * @return array<string, ProviderModelEntity[]> model实bodyarray,bymodel_idforkey,valueforto应modellist
      */
@@ -172,7 +172,7 @@ readonly class ProviderModelDomainService
     /**
      * according toqueryitemitemget按modeltypeminutegroupmodelIDlist.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param ProviderModelQuery $query queryitemitem
      * @return array<string, array<string>> 按modeltypeminutegroupmodelIDarray,format: [modelType => [model_id, model_id]]
      */
@@ -184,7 +184,7 @@ readonly class ProviderModelDomainService
     /**
      * getfinger定modelmostnewconfigurationversionID.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param int $serviceProviderModelId modelID
      * @return null|int mostnewversionID,ifnot存inthenreturnnull
      */
@@ -196,7 +196,7 @@ readonly class ProviderModelDomainService
     /**
      * getfinger定modelmostnewconfigurationversion实body.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param int $serviceProviderModelId modelID
      * @return null|ProviderModelConfigVersionEntity mostnewversion实body,ifnot存inthenreturnnull
      */

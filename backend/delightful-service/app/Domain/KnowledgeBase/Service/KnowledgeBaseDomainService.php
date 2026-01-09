@@ -86,7 +86,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * queryknowledge basecolumn表.
+     * queryknowledge basecolumntable.
      * @return array{total: int, list: array<KnowledgeBaseEntity>}
      */
     public function queries(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseQuery $query, Page $page): array

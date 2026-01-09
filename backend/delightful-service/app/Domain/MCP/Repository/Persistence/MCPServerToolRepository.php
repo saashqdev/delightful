@@ -124,7 +124,7 @@ class MCPServerToolRepository extends MCPAbstractRepository implements MCPServer
     }
 
     /**
-     * according toIDandmcpServerCode联合querytool.
+     * according toIDandmcpServerCodeunionquerytool.
      */
     public function getByIdAndMcpServerCode(MCPDataIsolation $dataIsolation, int $id, string $mcpServerCode): ?MCPServerToolEntity
     {

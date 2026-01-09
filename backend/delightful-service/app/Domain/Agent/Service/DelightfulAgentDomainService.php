@@ -161,7 +161,7 @@ class DelightfulAgentDomainService
     // quotient业code目frontalsodependency
     public function getBotsByOrganization(RequestContext $requestContext, string $agentName, ?string $pageToken = null, int $pageSize = 50, ?string $descriptionKeyword = null): array
     {
-        // getdata隔离objectandgetcurrentorganizationorganizationcode
+        // getdataisolationobjectandgetcurrentorganizationorganizationcode
         $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode();
 
         // getenable助理list

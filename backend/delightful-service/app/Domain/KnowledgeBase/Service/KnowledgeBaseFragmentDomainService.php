@@ -203,7 +203,7 @@ readonly class KnowledgeBaseFragmentDomainService
         $this->logger->info('front置text预processend,耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
         // againconductminutesegment
-        // process转义minute隔符
+        // processescapeminute隔符
         $start = microtime(true);
         $this->logger->info('textminutesegmentstart.');
         $separator = stripcslashes($selectedFragmentConfig->getSegmentRule()->getSeparator());

@@ -62,7 +62,7 @@ readonly class AuthenticationDomainService
      */
     public function generateAccountToken(string $delightfulId): string
     {
-        // write token 表
+        // write token table
         $authorization = IdGenerator::getUniqueIdSha256();
         $delightfulTokenEntity = new DelightfulTokenEntity();
         $delightfulTokenEntity->setType(DelightfulTokenType::Account);

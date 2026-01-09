@@ -14,9 +14,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // delete delightful_contact_id_mapping 表名
+        // delete delightful_contact_id_mapping table名
         Schema::dropIfExists('delightful_contact_id_mapping');
-        // delete delightful_contact_third_platform_department_users/delightful_contact_third_platform_departments/delightful_contact_third_platform_users 表
+        // delete delightful_contact_third_platform_department_users/delightful_contact_third_platform_departments/delightful_contact_third_platform_users table
         Schema::dropIfExists('delightful_contact_third_platform_department_users');
         Schema::dropIfExists('delightful_contact_third_platform_departments');
         Schema::dropIfExists('delightful_contact_third_platform_users');

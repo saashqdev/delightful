@@ -16,7 +16,7 @@ interface ProviderModelConfigVersionRepositoryInterface
      * savemodelconfigurationversion(containversionnumber递增andmarkcurrentversioncompletelogic).
      * usetransactionensuredataone致property.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param ProviderModelConfigVersionEntity $entity configurationversion实body
      */
     public function saveVersionWithTransaction(ProviderDataIsolation $dataIsolation, ProviderModelConfigVersionEntity $entity): void;
@@ -24,7 +24,7 @@ interface ProviderModelConfigVersionRepositoryInterface
     /**
      * getfinger定modelmostnewversionID.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param int $serviceProviderModelId modelID
      * @return null|int mostnewversionID,ifnot存inthenreturnnull
      */
@@ -33,7 +33,7 @@ interface ProviderModelConfigVersionRepositoryInterface
     /**
      * getfinger定modelmostnewconfigurationversion实body.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param int $serviceProviderModelId modelID
      * @return null|ProviderModelConfigVersionEntity mostnewversion实body,ifnot存inthenreturnnull
      */

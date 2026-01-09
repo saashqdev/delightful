@@ -55,7 +55,7 @@ class BeAgentExtra extends AbstractDTO
     protected ?bool $enableWebSearch = null;
 
     /**
-     * get mentions  JSON 结构array.
+     * get mentions  JSON structurearray.
      */
     public function getMentionsJsonStruct(): ?array
     {

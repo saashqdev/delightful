@@ -13,17 +13,17 @@ class UpdateIndexesAndComments extends Migration
 {
     public function up(): void
     {
-        // 清null delightful_api_premium_endpoint_statistics 表data
+        // 清null delightful_api_premium_endpoint_statistics tabledata
         Db::table('delightful_api_premium_endpoint_statistics')->truncate();
 
-        // modify delightful_api_premium_endpoint_statistics 表 statistics_level comment
+        // modify delightful_api_premium_endpoint_statistics table statistics_level comment
         Schema::table('delightful_api_premium_endpoint_statistics', function (Blueprint $table) {
             $table->integer('statistics_level')->comment('statisticslevel别:0-secondlevel,1-minute钟level,2-hourlevel,3-daylevel')->change();
             // modify statistics_time datatypefor datetime
             $table->dateTime('statistics_time')->change();
         });
 
-        // modify delightful_api_premium_endpoint_responses 表index
+        // modify delightful_api_premium_endpoint_responses tableindex
         Schema::table('delightful_api_premium_endpoint_responses', function (Blueprint $table) {
             // deleteoldindex
             if (Schema::hasIndex('delightful_api_premium_endpoint_responses', 'endpoint_id_created_at_index')) {
@@ -36,7 +36,7 @@ class UpdateIndexesAndComments extends Migration
             $table->index(['created_at', 'endpoint_id'], 'endpoint_id_created_at_index');
         });
 
-        // modify delightful_api_premium_endpoint_statistics 表index
+        // modify delightful_api_premium_endpoint_statistics tableindex
         Schema::table('delightful_api_premium_endpoint_statistics', function (Blueprint $table) {
             // deleteoldindex
             if (Schema::hasIndex('delightful_api_premium_endpoint_statistics', 'unique_endpoint_id_statistics_level_time')) {

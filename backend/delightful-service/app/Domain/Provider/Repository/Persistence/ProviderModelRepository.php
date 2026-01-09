@@ -106,7 +106,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
 
     public function saveModel(ProviderDataIsolation $dataIsolation, SaveProviderModelDTO $dto): ProviderModelEntity
     {
-        // settingorganizationencoding(优先useDTOmiddleorganizationencoding,nothenusecurrentdata隔离middle)
+        // settingorganizationencoding(优先useDTOmiddleorganizationencoding,nothenusecurrentdataisolationmiddle)
         $dto->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
 
         $data = $dto->toArray();
@@ -178,7 +178,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * pass service_provider_config_id getmodelcolumn表.
+     * pass service_provider_config_id getmodelcolumntable.
      * @param string $configId maybeistemplate id,such as ProviderConfigIdAssembler
      * @return ProviderModelEntity[]
      */
@@ -202,10 +202,10 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * getorganizationcanusemodelcolumn表(containorganizationfrom己modelandDelightfulmodel).
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * getorganizationcanusemodelcolumntable(containorganizationfrom己modelandDelightfulmodel).
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param null|Category $category modelcategory,fornullo clockreturn所havecategorymodel
-     * @return ProviderModelEntity[] 按sort降序sortmodelcolumn表,containorganizationmodelandDelightfulmodel(notgo重)
+     * @return ProviderModelEntity[] 按sort降序sortmodelcolumntable,containorganizationmodelandDelightfulmodel(notgo重)
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, ?Status $status = Status::Enabled): array
     {
@@ -272,7 +272,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             $delightfulModels = $this->delightfulProviderAndModels->getDelightfulEnableModels($organizationCode, $category);
         }
 
-        // 4. 直接mergemodelcolumn表,notgo重
+        // 4. 直接mergemodelcolumntable,notgo重
         $allModels = array_merge($organizationModels, $delightfulModels);
 
         // 5. 按sort降序sort
@@ -391,9 +391,9 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * according toqueryconditionget按modeltypegroupmodelIDcolumn表.
+     * according toqueryconditionget按modeltypegroupmodelIDcolumntable.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param ProviderModelQuery $query querycondition
      * @return array<string, array<string>> 按modeltypegroupmodelIDarray,format: [modelType => [model_id, model_id]]
      */

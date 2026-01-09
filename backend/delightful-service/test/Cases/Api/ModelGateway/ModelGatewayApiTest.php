@@ -128,7 +128,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
 
         // sendPOSTrequest
         $response = $this->json('/v1/chat/completions', $requestData, $this->getTestHeaders());
-        // verify整response结构
+        // verify整responsestructure
         $expectedResponse = [
             'id' => '',
             'object' => 'chat.completion',
@@ -151,7 +151,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
                 'prompt_tokens_details' => [],
             ],
         ];
-        $this->assertArrayValueTypesEquals($expectedResponse, $response, 'response结构andtypeverifyfail');
+        $this->assertArrayValueTypesEquals($expectedResponse, $response, 'responsestructureandtypeverifyfail');
     }
 
     /**
@@ -173,7 +173,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
         // sendPOSTrequest
         $response = $this->json('/v1/embeddings', $requestData, $this->getTestHeaders());
 
-        // verifyresponse结构
+        // verifyresponsestructure
         $expectedResponse = [
             'object' => 'list',
             'data' => [
@@ -194,7 +194,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
                 'total_tokens' => 0,
             ],
         ];
-        $this->assertArrayValueTypesEquals($expectedResponse, $response, 'response结构andtypeverifyfail');
+        $this->assertArrayValueTypesEquals($expectedResponse, $response, 'responsestructureandtypeverifyfail');
     }
 
     /**

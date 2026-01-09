@@ -101,7 +101,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * according toorganizationandservicequotienttypegetservicequotientconfigurationcolumn表.
+     * according toorganizationandservicequotienttypegetservicequotientconfigurationcolumntable.
      * @param string $organizationCode organizationencoding
      * @param Category $category servicequotienttype
      * @return ProviderConfigDTO[]
@@ -233,13 +233,13 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * returnmodelandservicequotientallbeactivate接入pointcolumn表.
+     * returnmodelandservicequotientallbeactivate接入pointcolumntable.
      * wantjudge model_parent_id modelandservicequotientwhetheractivate.
      * @return ProviderModelEntity[]
      */
     public function getOrganizationActiveModelsByIdOrType(string $key, string $orgCode): array
     {
-        // createdata隔离objectandgetcanusemodel
+        // createdataisolationobjectandgetcanusemodel
         $dataIsolation = ProviderDataIsolation::create($orgCode);
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
@@ -276,7 +276,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
      */
     public function getMiracleVisionServiceProviderConfig(string $modelId, string $organizationCode): ProviderConfigEntity
     {
-        // createdata隔离object
+        // createdataisolationobject
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
         // get所havecategorycanusemodel
@@ -314,7 +314,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get所havenon官方servicequotientcolumn表,notdependencyatorganizationencoding
+     * get所havenon官方servicequotientcolumntable,notdependencyatorganizationencoding
      *
      * @param Category $category servicequotientcategory别
      * @return ProviderConfigModelsDTO[]
@@ -326,7 +326,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get所havecanuseservicequotientcolumn表(include官方servicequotient),notdependencyatorganizationencoding.
+     * get所havecanuseservicequotientcolumntable(include官方servicequotient),notdependencyatorganizationencoding.
      *
      * @param Category $category servicequotientcategory别
      * @return ProviderConfigModelsDTO[]
@@ -472,7 +472,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
                 continue;
             }
 
-            // createdata隔离object
+            // createdataisolationobject
             $dataIsolation = ProviderDataIsolation::create($officialOrganization);
 
             // judgetheservicequotientwhetheralreadyhaveconfiguration
@@ -513,7 +513,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
      * fromactivatemodelmiddlefindcanuseservicequotientconfiguration
      * 优先returnnon官方configuration,ifnothavethenreturn官方configuration.
      *
-     * @param ProviderModelEntity[] $activeModels activatemodelcolumn表
+     * @param ProviderModelEntity[] $activeModels activatemodelcolumntable
      */
     private function findAvailableServiceProviderFromModels(array $activeModels): ProviderConfigEntity
     {
@@ -589,14 +589,14 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * according tomodelversionandorganizationgetmodelcolumn表.
+     * according tomodelversionandorganizationgetmodelcolumntable.
      * @param string $modelOriginId modelid
      * @param string $organizationCode organizationcode
-     * @return ProviderModelEntity[] filterbackmodelcolumn表
+     * @return ProviderModelEntity[] filterbackmodelcolumntable
      */
     private function getModelsByVersionAndOrganization(string $modelOriginId, string $organizationCode): array
     {
-        // createdata隔离object
+        // createdataisolationobject
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
         // get所havecategorycanusemodel

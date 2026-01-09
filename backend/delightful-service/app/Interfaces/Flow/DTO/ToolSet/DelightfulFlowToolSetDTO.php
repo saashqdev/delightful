@@ -27,7 +27,7 @@ class DelightfulFlowToolSetDTO extends AbstractFlowDTO
     public string $icon = '';
 
     /**
-     * useat冗remaindertoolinformationcolumn表.
+     * useat冗remaindertoolinformationcolumntable.
      */
     public array $tools = [];
 

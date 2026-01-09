@@ -12,7 +12,7 @@ use App\Application\Speech\Enum\AsrTaskStatusEnum;
 
 /**
  * ASRtaskstatusDTO - manageRedis Hashfieldmapping.
- * thisnotisfrom JSON response结构come,whileisuseatmanagetaskstatus
+ * thisnotisfrom JSON responsestructurecome,whileisuseatmanagetaskstatus
  */
 class AsrTaskStatusDTO
 {
@@ -26,7 +26,7 @@ class AsrTaskStatusDTO
     public ?string $filePath = null; // work区filepath
 
     // fileID(databasemiddleactualID)
-    public ?string $audioFileId = null; // audiofileID(writedelightful_super_agent_task_files表backreturnID)
+    public ?string $audioFileId = null; // audiofileID(writedelightful_super_agent_task_filestablebackreturnID)
 
     // note fileinfo
     public ?string $noteFileName = null; // notefile名(andaudiofilein同onedirectory,fornullindicateno笔记file)
@@ -268,7 +268,7 @@ class AsrTaskStatusDTO
      * fromarraymiddle按优先levelgetstringvalue(support snake_case and camelCase).
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys key名column表(按优先levelsort)
+     * @param array<string> $keys key名columntable(按优先levelsort)
      * @param null|string $default defaultvalue
      */
     private static function getStringValue(array $data, array $keys, ?string $default = null): ?string
@@ -285,7 +285,7 @@ class AsrTaskStatusDTO
      * fromarraymiddle按优先levelgetintegervalue(support snake_case and camelCase).
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys key名column表(按优先levelsort)
+     * @param array<string> $keys key名columntable(按优先levelsort)
      * @param null|int $default defaultvalue
      */
     private static function getIntValue(array $data, array $keys, ?int $default = null): ?int
@@ -302,7 +302,7 @@ class AsrTaskStatusDTO
      * fromarraymiddle按优先levelgetbooleanvalue(support多typeformat:true/false,1/0,'1'/'0').
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys key名column表(按优先levelsort)
+     * @param array<string> $keys key名columntable(按优先levelsort)
      */
     private static function getBoolValue(array $data, array $keys): bool
     {

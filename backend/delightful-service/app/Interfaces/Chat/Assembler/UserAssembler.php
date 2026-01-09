@@ -173,7 +173,7 @@ class UserAssembler
 
                 if (! empty($departments)) {
                     if ($withDepartmentFullPath) {
-                        // completepath模type: foreachdepartmentsavecompletelayerlevel结构
+                        // completepath模type: foreachdepartmentsavecompletelayerlevelstructure
                         $pathNodes = array_map(
                             fn (DelightfulDepartmentEntity $department) => self::assemblePathNodeByDepartmentInfo($department),
                             $departments

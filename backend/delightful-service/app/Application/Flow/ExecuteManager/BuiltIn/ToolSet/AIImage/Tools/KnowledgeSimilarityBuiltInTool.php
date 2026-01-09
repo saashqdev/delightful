@@ -57,7 +57,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
         }
         return <<<MARKDOWN
 # allowbeusecan力: knowledge baseretrieve
-## knowledge basecolumn表
+## knowledge basecolumntable
 > knowledge basename:knowledge basedescription
 {$knowledgePrompt}
 ## process
@@ -314,7 +314,7 @@ JSON,
         "knowledge_list": {
             "type": "array",
             "key": "knowledge_list",
-            "title": "knowledge basecolumn表",
+            "title": "knowledge basecolumntable",
             "description": "",
             "required": null,
             "value": null,

@@ -11,12 +11,12 @@ use Hyperf\Database\Schema\Schema;
 return new class extends Migration {
     /**
      * Run the migrations.
-     * optimize delightful_bots and delightful_bot_versions 表多query场景performance
+     * optimize delightful_bots and delightful_bot_versions table多query场景performance
      * add多复合indexsupportdifferentquerymode.
      */
     public function up(): void
     {
-        // optimize delightful_bots 表
+        // optimize delightful_bots table
         Schema::table('delightful_bots', function (Blueprint $table) {
             // 1. optimize chat-mode/available interface JOIN query
             // to应SQL: delightful_bots.bot_version_id = delightful_bot_versions.id AND delightful_bots.status = '7'
@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->index(['organization_code', 'status'], 'idx_organization_status');
         });
 
-        // optimize delightful_bot_versions 表
+        // optimize delightful_bot_versions table
         Schema::table('delightful_bot_versions', function (Blueprint $table) {
             // 先deletealready存insinglefieldindex,avoidindex冗remainder
             if (Schema::hasIndex('delightful_bot_versions', 'delightful_bot_versions_organization_code_index')) {

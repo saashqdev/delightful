@@ -73,13 +73,13 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             }
         }
 
-        // validateresponse结构 - checkwhetherhavedatafield
+        // validateresponsestructure - checkwhetherhavedatafield
         $this->assertArrayHasKey('data', $response, 'response应containdatafield');
         $this->assertEquals(1000, $response['code'], 'shouldreturnsuccessresponse码');
 
         $userData = $response['data'];
 
-        // validateuserdata结构 - checkclosekeyfield存in
+        // validateuserdatastructure - checkclosekeyfield存in
         $this->assertArrayHasKey('id', $userData, 'response应containidfield');
         $this->assertArrayHasKey('avatar_url', $userData, 'response应containavatar_urlfield');
         $this->assertArrayHasKey('nickname', $userData, 'response应containnicknamefield');
@@ -412,13 +412,13 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             }
         }
 
-        // validateresponse结构
+        // validateresponsestructure
         $this->assertArrayHasKey('data', $response, 'response应containdatafield');
         $this->assertEquals(1000, $response['code'], 'shouldreturnsuccessresponse码');
 
         $permissionData = $response['data'];
 
-        // validatepermissiondata结构
+        // validatepermissiondatastructure
         $this->assertArrayHasKey('permission', $permissionData, 'response应containpermissionfield');
         $this->assertIsNotArray($permissionData['permission'], 'permissionfieldnotshouldisarray');
         $this->assertNotNull($permissionData['permission'], 'permissionfieldnotshouldfornull');
@@ -486,7 +486,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $this->assertIsArray($response, 'responseshouldisarrayformat');
         $this->assertArrayHasKey('code', $response, 'response应containcodefield');
 
-        // ifsuccess,validatedata结构
+        // ifsuccess,validatedatastructure
         if ($response['code'] === 1000) {
             $this->assertArrayHasKey('data', $response, 'successresponse应containdatafield');
             $permissionData = $response['data'];

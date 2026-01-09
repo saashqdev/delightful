@@ -27,9 +27,9 @@ readonly class ProviderTemplateRepository
     }
 
     /**
-     * get所haveservicequotienttemplatecolumn表.
+     * get所haveservicequotienttemplatecolumntable.
      * @param Category $category servicequotientcategory
-     * @return ProviderConfigDTO[] servicequotienttemplatecolumn表
+     * @return ProviderConfigDTO[] servicequotienttemplatecolumntable
      */
     public function getAllProviderTemplates(Category $category): array
     {

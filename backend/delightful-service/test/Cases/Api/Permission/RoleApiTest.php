@@ -57,7 +57,7 @@ class RoleApiTest extends AbstractHttpTest
 
         $this->assertIsArray($response);
 
-        // checksuccessresponse结构
+        // checksuccessresponsestructure
         if (isset($response['code']) && $response['code'] === 1000) {
             $this->assertArrayHasKey('data', $response);
             $this->assertIsArray($response['data']);
@@ -92,7 +92,7 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertIsArray($response);
         $this->assertEquals(1000, $response['code']);
 
-        // checksuccessresponse结构
+        // checksuccessresponsestructure
         $this->assertArrayHasKey('data', $response);
         $this->assertIsArray($response['data']);
         $this->assertArrayHasKey('id', $response['data']);
@@ -103,7 +103,7 @@ class RoleApiTest extends AbstractHttpTest
 
         // === testquery子administrator ===
         $detailResp = $this->get(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
-        // assertdetailinterfaceresponse结构anddata
+        // assertdetailinterfaceresponsestructureanddata
         $this->assertIsArray($detailResp);
         $this->assertEquals(1000, $detailResp['code'] ?? null);
 
@@ -120,7 +120,7 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertArrayValueTypesEquals(
             $expectedDetailStructure,
             $detailResp['data'] ?? [],
-            '子administratordetailinterfaceresponse结构notconformexpected',
+            '子administratordetailinterfaceresponsestructurenotconformexpected',
             false,
             false
         );
@@ -157,7 +157,7 @@ class RoleApiTest extends AbstractHttpTest
             $this->getCommonHeaders()
         );
 
-        // assert基础response结构
+        // assert基础responsestructure
         $this->assertIsArray($response);
         $this->assertEquals(1000, $response['code'] ?? null);
 
@@ -165,7 +165,7 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertArrayHasKey('data', $response);
         $this->assertIsArray($response['data']);
 
-        // if data nonempty,简singlevalidationsectionpoint结构
+        // if data nonempty,简singlevalidationsectionpointstructure
         if (! empty($response['data'])) {
             $this->assertArrayHasKey('permission_key', $response['data']);
         }

@@ -63,7 +63,7 @@ readonly class AdminProviderAppService
         DelightfulUserAuthorization $authorization,
         string $configId
     ): ?ProviderConfigModelsDTO {
-        // builddata隔离object
+        // builddataisolationobject
         $dataIsolation = ProviderDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId(),
@@ -279,7 +279,7 @@ readonly class AdminProviderAppService
      */
     public function connectivityTest(string $serviceProviderConfigId, string $modelVersion, string $modelPrimaryId, DelightfulUserAuthorization $authorization): ConnectResponse
     {
-        // builddata隔离object
+        // builddataisolationobject
         $dataIsolation = ProviderDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId(),
@@ -299,11 +299,11 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * get所havenon官方servicequotientcolumn表,notdependencyatorganization.
+     * get所havenon官方servicequotientcolumntable,notdependencyatorganization.
      *
      * @param Category $category servicequotientcategory
      * @param string $organizationCode organizationencoding
-     * @return ProviderConfigModelsDTO[] non官方servicequotientcolumn表
+     * @return ProviderConfigModelsDTO[] non官方servicequotientcolumntable
      */
     public function getAllNonOfficialProviders(Category $category, string $organizationCode): array
     {
@@ -321,11 +321,11 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * get所havecanuseservicequotientcolumn表(include官方servicequotient),notdependencyatorganization.
+     * get所havecanuseservicequotientcolumntable(include官方servicequotient),notdependencyatorganization.
      *
      * @param Category $category servicequotientcategory
      * @param string $organizationCode organizationencoding
-     * @return ProviderConfigModelsDTO[] 所havecanuseservicequotientcolumn表
+     * @return ProviderConfigModelsDTO[] 所havecanuseservicequotientcolumntable
      */
     public function getAllAvailableLlmProviders(Category $category, string $organizationCode): array
     {
@@ -481,13 +481,13 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 填充 provider infoandhandle icon.
+     * populate provider infoandhandle icon.
      */
     private function fillProviderInfoAndIcon(
         ProviderEntity $provider,
         ProviderConfigModelsDTO $providerModelsDTO
     ): void {
-        // 填充 provider 基本info
+        // populate provider 基本info
         $providerModelsDTO->setName($provider->getName());
         $providerModelsDTO->setDescription($provider->getDescription());
         $providerModelsDTO->setServiceProviderId((string) $provider->getId());
@@ -655,9 +655,9 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * handleserviceprovidequotient实bodycolumn表graph标.
+     * handleserviceprovidequotient实bodycolumntablegraph标.
      *
-     * @param ProviderConfigModelsDTO[] $serviceProviders serviceprovidequotient实bodycolumn表
+     * @param ProviderConfigModelsDTO[] $serviceProviders serviceprovidequotient实bodycolumntable
      * @param string $organizationCode organizationencoding
      */
     private function processServiceProviderEntityListIcons(array $serviceProviders, string $organizationCode): void
@@ -685,7 +685,7 @@ readonly class AdminProviderAppService
     /**
      * handleservicequotientconfigurationgraph标.
      *
-     * @param ProviderConfigDTO[] $providerConfigs servicequotientconfigurationDTOcolumn表
+     * @param ProviderConfigDTO[] $providerConfigs servicequotientconfigurationDTOcolumntable
      */
     private function processProviderConfigIcons(array $providerConfigs): void
     {

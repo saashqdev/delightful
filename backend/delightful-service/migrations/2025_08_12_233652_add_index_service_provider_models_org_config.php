@@ -49,12 +49,12 @@ return new class extends Migration {
 
         // add service_provider_configs tableindex
         Schema::table('service_provider_configs', function (Blueprint $table) {
-            // organization+status联合index(ifnot存in)
+            // organization+statusunionindex(ifnot存in)
             if (! Schema::hasIndex('service_provider_configs', 'idx_org_status')) {
                 $table->index(['organization_code', 'status'], 'idx_org_status');
             }
 
-            // organization+servicequotientID联合index(ifnot存in)
+            // organization+servicequotientIDunionindex(ifnot存in)
             if (! Schema::hasIndex('service_provider_configs', 'idx_org_provider_id')) {
                 $table->index(['organization_code', 'service_provider_id'], 'idx_org_provider_id');
             }
@@ -67,7 +67,7 @@ return new class extends Migration {
                 $table->index(['organization_code', 'type'], 'idx_org_type');
             }
 
-            // type+organization+modelID联合index(ifnot存in)
+            // type+organization+modelIDunionindex(ifnot存in)
             if (! Schema::hasIndex('service_provider_original_models', 'idx_type_org_id')) {
                 $table->index(['type', 'organization_code', 'model_id'], 'idx_type_org_id');
             }

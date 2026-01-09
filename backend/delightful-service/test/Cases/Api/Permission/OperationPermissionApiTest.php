@@ -38,11 +38,11 @@ class OperationPermissionApiTest extends AbstractHttpTest
             return;
         }
 
-        // assertresponse结构
+        // assertresponsestructure
         $this->assertIsArray($response, 'responseshouldisarrayformat');
         $this->assertArrayHasKey('data', $response, 'response应containdatafield');
 
-        // verifydata结构
+        // verifydatastructure
         $data = $response['data'];
         $this->assertArrayHasKey('organization_codes', $data, 'data应containorganization_codesfield');
         $this->assertArrayHasKey('total', $data, 'data应containtotalfield');

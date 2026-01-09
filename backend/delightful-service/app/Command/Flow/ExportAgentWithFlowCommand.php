@@ -66,7 +66,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
         $orgCode = $agent->getOrganizationCode();
         $userId = $agent->getCreatedUid();
 
-        // createdata隔离object
+        // createdataisolationobject
         $dataIsolation = new FlowDataIsolation($orgCode, $userId);
 
         // exportprocessand助理info

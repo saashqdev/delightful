@@ -134,7 +134,7 @@ abstract class AbstractDomainService
 
     public function getSeqContent(DelightfulMessageEntity $messageEntity): array
     {
-        // section约storagenullbetween,chatmessageinseq表not存specificcontent,only存messageid
+        // section约storagenullbetween,chatmessageinseqtablenot存specificcontent,only存messageid
         if ($messageEntity->getMessageType() instanceof ControlMessageType) {
             $content = $messageEntity->getContent()->toArray();
         } else {
@@ -210,7 +210,7 @@ abstract class AbstractDomainService
     public function generateSenderSequenceByControlMessage(DelightfulMessageEntity $messageDTO, string $conversationId = ''): DelightfulSeqEntity
     {
         $time = date('Y-m-d H:i:s');
-        // section约storagenullbetween,chatmessageinseq表not存specificcontent,only存messageid
+        // section约storagenullbetween,chatmessageinseqtablenot存specificcontent,only存messageid
         $content = $this->getSeqContent($messageDTO);
         $seqId = (string) IdGenerator::getSnowId();
         $senderAccountId = $this->getAccountId($messageDTO->getSenderId());
@@ -248,7 +248,7 @@ abstract class AbstractDomainService
         if ($receiveUserEntity === null) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
-        // section约storagenullbetween,chatmessageinseq表not存specificcontent,only存messageid
+        // section约storagenullbetween,chatmessageinseqtablenot存specificcontent,only存messageid
         $content = $this->getSeqContent($messageDTO);
         $seqId = (string) IdGenerator::getSnowId();
         $receiverAccountId = $receiveUserEntity->getDelightfulId();
@@ -361,7 +361,7 @@ abstract class AbstractDomainService
                 // geteachitemmessagefinalstatus
                 $messageStatusSeqEntities = $this->getReceiveMessageLatestReadStatus($referMessageIds, $dataIsolation);
                 foreach ($messageStatusSeqEntities as $userSeqEntity) {
-                    // format化response结构
+                    // format化responsestructure
                     $batchResponse[] = SeqAssembler::getClientSeqStruct($userSeqEntity, $messageDTO)->toArray();
                 }
                 break;
@@ -425,7 +425,7 @@ abstract class AbstractDomainService
                         $this->batchPushSeq($seqIds, $messagePriority);
                     }
                     // poweretc,get refer_message_ids 实o clockstatus,ando clockresponsecustomer端
-                    // format化response结构
+                    // format化responsestructure
                     $batchResponse[] = SeqAssembler::getClientSeqStruct($userRevokedSeqEntity, $messageDTO)->toArray();
                 } finally {
                     // releaselock
@@ -462,7 +462,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * avoid seq 表承载too多feature,addtoo多index,thereforewill话题messagesingle独writeto topic_messages 表middle.
+     * avoid seq table承载too多feature,addtoo多index,thereforewill话题messagesingle独writeto topic_messages tablemiddle.
      */
     public function createTopicMessage(DelightfulSeqEntity $seqEntity, ?string $topicId = null): ?DelightfulTopicMessageEntity
     {

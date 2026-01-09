@@ -25,7 +25,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertArrayValueTypesEquals([
             'is_maintenance' => false,
             'maintenance_description' => '',
-        ], $data, 'defaultall局configuration结构not符', false, true);
+        ], $data, 'defaultall局configurationstructurenot符', false, true);
     }
 
     public function testUpdateGlobalConfig(): void
@@ -40,7 +40,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $putData = $putResponse['data'];
         $this->assertArrayEquals($payload, $putData, 'PUT returndatanotone致');
 
-        // againtime GET verifycacheand持久化
+        // againtime GET verifycacheandpersistence
         $getResponse = $this->get($this->url, [], $this->getCommonHeaders());
         $this->assertSame(1000, $getResponse['code']);
         $getData = $getResponse['data'];
@@ -97,7 +97,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // verify基本结构
+        // verify基本structure
         $this->assertIsArray($data);
         $this->assertArrayHasKey('is_maintenance', $data);
         $this->assertArrayHasKey('maintenance_description', $data);
@@ -106,7 +106,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertIsBool($data['is_maintenance']);
         $this->assertIsString($data['maintenance_description']);
 
-        // ifhaveplatformset,verifyits结构
+        // ifhaveplatformset,verifyitsstructure
         if (isset($data['logo'])) {
             $this->assertIsArray($data['logo']);
         }

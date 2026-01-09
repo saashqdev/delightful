@@ -61,7 +61,7 @@ class ImportAgentWithFlowCommand extends HyperfCommand
                 return 1;
             }
 
-            // createdata隔离object
+            // createdataisolationobject
             $dataIsolation = new FlowDataIsolation($orgCode, $userId);
 
             // importprocessand助理info

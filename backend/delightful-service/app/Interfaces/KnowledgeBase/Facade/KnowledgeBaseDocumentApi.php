@@ -49,7 +49,7 @@ class KnowledgeBaseDocumentApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * getdocumentcolumn表.
+     * getdocumentcolumntable.
      */
     public function queries(string $knowledgeBaseCode)
     {

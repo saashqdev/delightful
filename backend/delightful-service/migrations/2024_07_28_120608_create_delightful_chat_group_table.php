@@ -15,7 +15,7 @@ class CreateDelightfulChatGroupTable extends Migration
      */
     public function up(): void
     {
-        // judge表whether存in
+        // judgetablewhether存in
         if (Schema::hasTable('delightful_chat_groups')) {
             return;
         }
@@ -34,7 +34,7 @@ class CreateDelightfulChatGroupTable extends Migration
             $table->integer('member_limit')->default(1000)->comment('群memberup限');
             $table->softDeletes();
             $table->timestamps();
-            $table->comment('group表');
+            $table->comment('grouptable');
         });
     }
 

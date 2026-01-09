@@ -34,7 +34,7 @@ class CreateDelightfulChatFriendTable extends Migration
             $table->unique(['user_id', 'friend_id'], 'uk_user_id_friend_id');
             $table->timestamps();
             $table->softDeletes();
-            $table->comment('good友表');
+            $table->comment('good友table');
         });
     }
 

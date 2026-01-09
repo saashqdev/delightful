@@ -109,7 +109,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             || str_contains($value, "\r")
             || str_starts_with($value, ' ')
             || str_ends_with($value, ' ')) {
-            // 转义double引number
+            // escapedouble引number
             $value = str_replace('"', '""', $value);
             return '"' . $value . '"';
         }

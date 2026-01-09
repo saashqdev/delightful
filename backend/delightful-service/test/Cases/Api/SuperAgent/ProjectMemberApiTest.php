@@ -174,7 +174,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertSame(1000, $response['code']);
         $projectId = $response['data']['project']['id'];*/
 
-        // 话题column表
+        // 话题columntable
         $workspaceId = $this->workspaceId;
         $projectId = $this->projectId;
 
@@ -184,7 +184,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         // ensurenotwillto原havefeature造becomeimpact
         // create话题
         $topicId = $this->createTopic($workspaceId, $projectId);
-        // 话题column表
+        // 话题columntable
         $this->topicList($workspaceId, $projectId);
         // update话题
         $this->renameTopic($workspaceId, $projectId, $topicId);
@@ -220,13 +220,13 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         // 7. viewprojectmember
         $this->projectMember($projectId);
-        // 8. view协asprojectcolumn表
+        // 8. view协asprojectcolumntable
         $this->collaborationProjects();
         $this->collaborationProjects('test');
 
         // create话题
         $topicId = $this->createTopic($workspaceId, $projectId);
-        // 话题column表
+        // 话题columntable
         $this->topicList($workspaceId, $projectId);
         // update话题
         $this->renameTopic($workspaceId, $projectId, $topicId);
@@ -245,7 +245,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 9. testproject置topfeature
         $this->projectPinFeature($projectId);
 
-        // 10. test协asprojectcreate者column表feature
+        // 10. test协asprojectcreate者columntablefeature
         //        $this->collaborationProjectCreatorFeature();
 
         // 11. 清nullnullmember
@@ -323,7 +323,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data']);
 
-        // validateresponse结构
+        // validateresponsestructure
         $this->assertArrayHasKey('list', $response['data'], 'response应containlistfield');
         $this->assertArrayHasKey('total', $response['data'], 'response应containtotalfield');
         if (! is_null($count)) {
@@ -359,7 +359,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data']);
 
-        // validateresponse结构
+        // validateresponsestructure
         $this->assertArrayHasKey('list', $response['data'], 'response应containlistfield');
         $this->assertArrayHasKey('total', $response['data'], 'response应containtotalfield');
         if (! is_null($count)) {
@@ -671,14 +671,14 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 1. test置topproject
         $this->pinProject($projectId, true);
 
-        // 2. validate协asprojectcolumn表middleprojectbe置top
+        // 2. validate协asprojectcolumntablemiddleprojectbe置top
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
         // 3. testcancel置top
         $this->pinProject($projectId, false);
 
-        // 4. validate协asprojectcolumn表middleprojectnotagain置top
+        // 4. validate协asprojectcolumntablemiddleprojectnotagain置top
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, false);
 
@@ -714,7 +714,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * get协asprojectcolumn表andreturncomplete响applicationat置topvalidate.
+     * get协asprojectcolumntableandreturncomplete响applicationat置topvalidate.
      */
     public function collaborationProjectsWithPinCheck(): array
     {
@@ -725,7 +725,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data']);
 
-        // validateresponse结构contain置top相closefield
+        // validateresponsestructurecontain置top相closefield
         $this->assertArrayHasKey('list', $response['data'], 'response应containlistfield');
         $this->assertArrayHasKey('total', $response['data'], 'response应containtotalfield');
 
@@ -753,7 +753,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             }
         }
 
-        $this->assertNotNull($targetProject, "project {$projectId} shouldin协asprojectcolumn表middle");
+        $this->assertNotNull($targetProject, "project {$projectId} shouldin协asprojectcolumntablemiddle");
         $this->assertEquals(
             $expectedPinned,
             $targetProject['is_pinned'],
@@ -762,7 +762,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * validate置topprojectrowincolumn表frontsurface.
+     * validate置topprojectrowincolumntablefrontsurface.
      */
     public function verifyPinnedProjectsAtTop(array $response): void
     {
@@ -779,11 +779,11 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test协asprojectcreate者column表feature - completeprocesstest.
+     * test协asprojectcreate者columntablefeature - completeprocesstest.
      */
     public function collaborationProjectCreatorFeature(): void
     {
-        // 1. testhavepermissionusergetcreate者column表
+        // 1. testhavepermissionusergetcreate者columntable
         $this->switchUserTest2(); // ensureishavepermission协asuser
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
@@ -802,7 +802,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test协asprojectcreate者column表permissioncontrol.
+     * test协asprojectcreate者columntablepermissioncontrol.
      */
     public function testCollaborationProjectCreatorsPermission(): void
     {
@@ -812,7 +812,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
-        // 2. switchtohavepermissionusertestgetcreate者column表success
+        // 2. switchtohavepermissionusertestgetcreate者columntablesuccess
         $this->switchUserTest2();
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
@@ -828,7 +828,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test协asprojectcreate者column表side界情况.
+     * test协asprojectcreate者columntableside界情况.
      */
     public function testCollaborationProjectCreatorsEdgeCases(): void
     {
@@ -850,7 +850,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * get协asprojectcreate者column表.
+     * get协asprojectcreate者columntable.
      */
     public function getCollaborationProjectCreators(int $expectedCode = 1000): array
     {
@@ -868,7 +868,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * validatecreate者column表response结构.
+     * validatecreate者columntableresponsestructure.
      */
     public function verifyCreatorListResponse(array $response): void
     {
@@ -879,7 +879,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         // validateat leasthaveonecreate者
         $this->assertGreaterThan(0, count($response['data']), 'shouldat leasthaveonecreate者');
 
-        // validatecreate者data结构
+        // validatecreate者datastructure
         $creator = $response['data'][0];
         $this->assertArrayHasKey('id', $creator, 'create者应containidfield');
         $this->assertArrayHasKey('name', $creator, 'create者应containnamefield');
@@ -898,7 +898,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * validatenullcreate者column表response.
+     * validatenullcreate者columntableresponse.
      */
     public function verifyEmptyCreatorListResponse(array $response): void
     {
@@ -909,7 +909,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * validatecreate者column表go重.
+     * validatecreate者columntablego重.
      */
     public function verifyCreatorListDeduplication(array $response): void
     {
@@ -920,7 +920,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals(
             count($userIds),
             count($uniqueUserIds),
-            'create者column表middlenotshouldhaveduplicateuser_id'
+            'create者columntablemiddlenotshouldhaveduplicateuser_id'
         );
     }
 

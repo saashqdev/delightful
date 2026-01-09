@@ -17,7 +17,7 @@ return new class extends Migration {
         if (Schema::hasTable('delightful_chat_topics')) {
             return;
         }
-        // 话题表
+        // 话题table
         Schema::create('delightful_chat_topics', static function (Blueprint $table) {
             $table->bigIncrements('id');
             // 话题 id
@@ -37,7 +37,7 @@ return new class extends Migration {
             $table->index(['topic_id'], 'idx_topic_id');
             $table->timestamps();
             $table->softDeletes();
-            $table->comment('话题表');
+            $table->comment('话题table');
         });
     }
 

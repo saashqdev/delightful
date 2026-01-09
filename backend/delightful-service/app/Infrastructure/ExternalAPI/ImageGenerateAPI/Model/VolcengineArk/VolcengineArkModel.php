@@ -142,7 +142,7 @@ class VolcengineArkModel extends AbstractImageGenerate
         // fromnativeresultmiddleextractimageURL
         $imageData = [];
         foreach ($rawResults as $index => $result) {
-            // check嵌setdata结构:result['data']['data'][0]['url']
+            // check嵌setdatastructure:result['data']['data'][0]['url']
             if (! empty($result['data']['data']) && ! empty($result['data']['data'][0]['url'])) {
                 $imageData[$index] = $result['data']['data'][0]['url'];
             }

@@ -39,7 +39,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdata隔离updown文
+        // createdataisolationupdown文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -104,7 +104,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdata隔离updown文
+        // createdataisolationupdown文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -132,7 +132,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdata隔离updown文
+        // createdataisolationupdown文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -168,7 +168,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdata隔离updown文
+        // createdataisolationupdown文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -216,7 +216,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdata隔离updown文
+        // createdataisolationupdown文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()

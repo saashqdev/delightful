@@ -24,7 +24,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
     }
 
     /**
-     * querydraftcolumn表.
+     * querydraftcolumntable.
      * @return array{total: int, list: array<DelightfulFlowDraftEntity>}
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowDraftQuery $query, Page $page): array

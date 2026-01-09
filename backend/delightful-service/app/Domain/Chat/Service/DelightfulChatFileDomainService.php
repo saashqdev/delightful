@@ -118,7 +118,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
      * iffile_keynot存in,thencreatenewfile.
      *
      * @param DelightfulChatFileEntity $fileEntity file实body
-     * @param DataIsolation $dataIsolation data隔离
+     * @param DataIsolation $dataIsolation dataisolation
      * @return DelightfulChatFileEntity saveorupdatebackfile实body
      */
     public function saveOrUpdateByFileKey(DelightfulChatFileEntity $fileEntity, DataIsolation $dataIsolation): DelightfulChatFileEntity

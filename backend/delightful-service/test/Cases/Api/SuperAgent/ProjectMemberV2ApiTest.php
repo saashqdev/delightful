@@ -217,7 +217,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->enableCollaboration($projectId);
 
-        // 1. testaddnullmembercolumn表
+        // 1. testaddnullmembercolumntable
         $this->addEmptyMembersList($projectId, 5003);
 
         // 2. testduplicateaddsamemember
@@ -390,7 +390,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * addnullmembercolumn表.
+     * addnullmembercolumntable.
      */
     public function addEmptyMembersList(string $projectId, int $expectedCode = 1000): array
     {

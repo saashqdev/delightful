@@ -91,7 +91,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
 
     /**
      * openconversationwindow.
-     * controlmessage,onlyinseq表writedata,notinmessage表写.
+     * controlmessage,onlyinseqtablewritedata,notinmessagetable写.
      * @throws Throwable
      */
     public function openConversationWindow(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
@@ -229,7 +229,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * use intermediate eventconductmiddlebetweenstatemessagepush,not持久化message. support话题level别“justininputmiddle”
+     * use intermediate eventconductmiddlebetweenstatemessagepush,notpersistencemessage. support话题level别“justininputmiddle”
      * 直接操asto方conversationwindow,whilenotismessagehairinfrom己conversationwindow然backagain经bymessageminutehair模pieceforwardtoto方conversationwindow.
      */
     public function agentOperateConversationStatusV2(ControlMessageType $controlMessageType, string $agentConversationId, ?string $topicId = null): bool

@@ -91,8 +91,8 @@ class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
         "questions": {
             "type": "array",
             "key": "questions",
-            "title": "userissuecolumn表",
-            "description": "userissuecolumn表",
+            "title": "userissuecolumntable",
+            "description": "userissuecolumntable",
             "required": null,
             "value": null,
             "encryption": false,

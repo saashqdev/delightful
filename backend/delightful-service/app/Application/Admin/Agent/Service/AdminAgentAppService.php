@@ -268,7 +268,7 @@ class AdminAgentAppService extends AbstractKernelAppService
 
     public function getPublishedAgents(Authenticatable $authorization, string $pageToken, int $pageSize, AgentFilterType $type): GetPublishedAgentsResponseDTO
     {
-        // getdata隔离objectandgetcurrentorganizationorganizationcode
+        // getdataisolationobjectandgetcurrentorganizationorganizationcode
         /** @var DelightfulUserAuthorization $authorization */
         $organizationCode = $authorization->getOrganizationCode();
 

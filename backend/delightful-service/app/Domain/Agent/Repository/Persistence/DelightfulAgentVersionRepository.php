@@ -291,10 +291,10 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * based on游标paginationgetfinger定organization助理versionlist.
+     * based oncursorpaginationgetfinger定organization助理versionlist.
      * @param string $organizationCode organizationcode
      * @param array $agentVersionIds 助理versionIDlist
-     * @param string $cursor 游标ID,ifforemptystringthenfrommostnewstart
+     * @param string $cursor cursorID,ifforemptystringthenfrommostnewstart
      * @param int $pageSize each页quantity
      */
     public function getAgentsByOrganizationWithCursor(string $organizationCode, array $agentVersionIds, string $cursor, int $pageSize): array

@@ -196,7 +196,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         if ($editMessageOptions !== null) {
             $seqExtra->setEditMessageOptions($editMessageOptions);
         }
-        // seq extensioninfo. ifneedretrieve话题message,请query topic_messages 表
+        // seq extensioninfo. ifneedretrieve话题message,请query topic_messages table
         $topicId && $seqExtra->setTopicId($topicId);
         $seqDTO->setExtra($seqExtra);
         // ifis跟assistantprivate chat,andnothave话题 id,from动createone话题
@@ -495,7 +495,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             switch ($receiveConversationType) {
                 case ConversationType::Group:
                     $seqListCreateDTO = $this->delightfulChatDomainService->generateGroupReceiveSequence($senderSeqEntity, $senderMessageEntity, $delightfulSeqStatus);
-                    // todo 群withinsurface话题messagealsowrite topic_messages 表middle
+                    // todo 群withinsurface话题messagealsowrite topic_messages tablemiddle
                     // willthisthese seq_id mergeforoneitem mq messageconductpush/消费
                     $seqIds = array_keys($seqListCreateDTO);
                     $messagePriority = $this->delightfulChatDomainService->getChatMessagePriority(ConversationType::Group, count($seqIds));
@@ -722,7 +722,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         }
 
         $language = CoContext::getLanguage();
-        // audit需求:ifiseditmessage,writemessageversion表,andupdate原messageversion_id
+        // audit需求:ifiseditmessage,writemessageversiontable,andupdate原messageversion_id
         $extra = $senderSeqDTO->getExtra();
         // settinglanguageinfo
         $editMessageOptions = $extra?->getEditMessageOptions();
@@ -762,7 +762,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                 $senderMessageId = $streamCachedDTO->getSenderMessageId();
                 $delightfulMessageId = $streamCachedDTO->getDelightfulMessageId();
             }
-            // onlyincertain $senderSeqEntity and $messageEntity,useatreturndata结构
+            // onlyincertain $senderSeqEntity and $messageEntity,useatreturndatastructure
             $senderSeqEntity = $this->delightfulSeqDomainService->getSeqEntityByMessageId($senderMessageId);
             $messageEntity = $this->delightfulChatDomainService->getMessageByDelightfulMessageId($delightfulMessageId);
             // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
@@ -775,9 +775,9 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             if (! isset($messageEntity)) {
                 $messageEntity = $this->delightfulChatDomainService->createDelightfulMessageByAppClient($senderMessageDTO, $senderConversationEntity);
             }
-            // givefrom己messagestreamgenerate序column,andcertainmessagereceivepersoncolumn表
+            // givefrom己messagestreamgenerate序column,andcertainmessagereceivepersoncolumntable
             $senderSeqEntity = $this->delightfulChatDomainService->generateSenderSequenceByChatMessage($senderSeqDTO, $messageEntity, $senderConversationEntity);
-            // avoid seq 表承载too多feature,addtoo多index,thereforewill话题messagesingle独writeto topic_messages 表middle
+            // avoid seq table承载too多feature,addtoo多index,thereforewill话题messagesingle独writeto topic_messages tablemiddle
             $this->delightfulChatDomainService->createTopicMessage($senderSeqEntity);
             // certainmessage优先level
             $receiveList = $senderSeqEntity->getReceiveList();
@@ -1053,7 +1053,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         $delightfulSeqStatus = DelightfulMessageStatus::Unread;
         # assistantmaybe参andprivate chat/group chatetc场景,read记忆o clock,needreadfrom己conversationwindowdownmessage.
         $receiveSeqEntity = $this->delightfulChatDomainService->generateReceiveSequenceByChatMessage($senderSeqEntity, $senderMessageEntity, $delightfulSeqStatus);
-        // avoid seq 表承载too多feature,addtoo多index,thereforewill话题messagesingle独writeto topic_messages 表middle
+        // avoid seq table承载too多feature,addtoo多index,thereforewill话题messagesingle独writeto topic_messages tablemiddle
         $this->delightfulChatDomainService->createTopicMessage($receiveSeqEntity);
         return $receiveSeqEntity;
     }
@@ -1223,7 +1223,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * validationattachmentmiddlefilewhether属atcurrentuser,and填充attachmentinfo.(file名/typeetcfield).
+     * validationattachmentmiddlefilewhether属atcurrentuser,andpopulateattachmentinfo.(file名/typeetcfield).
      */
     private function checkAndFillAttachments(DelightfulMessageEntity $senderMessageDTO, DataIsolation $dataIsolation): DelightfulMessageEntity
     {
@@ -1358,10 +1358,10 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR, 'chat.message.voice.attachment_empty');
         }
 
-        // according toaudio file_id callfile领域getdetail,and填充attachment缺失propertyvalue
+        // according toaudio file_id callfile领域getdetail,andpopulateattachment缺失propertyvalue
         $this->fillVoiceAttachmentDetails($voiceMessage, $dataIsolation);
 
-        // 重newget填充backattachment
+        // 重newgetpopulatebackattachment
         $attachment = $voiceMessage->getAttachment();
 
         if ($attachment->getFileType() !== FileType::Audio) {
@@ -1384,7 +1384,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * according toaudio file_id callfile领域getdetail,and填充 VoiceMessage inherit ChatAttachment 缺失propertyvalue.
+     * according toaudio file_id callfile领域getdetail,andpopulate VoiceMessage inherit ChatAttachment 缺失propertyvalue.
      */
     private function fillVoiceAttachmentDetails(VoiceMessage $voiceMessage, DataIsolation $dataIsolation): void
     {
@@ -1393,7 +1393,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             return;
         }
 
-        // callfile领域service填充attachmentdetail
+        // callfile领域servicepopulateattachmentdetail
         $filledAttachments = $this->delightfulChatFileDomainService->checkAndFillAttachments($attachments, $dataIsolation);
 
         // updatevoicemessageattachmentinfo

@@ -43,7 +43,7 @@ interface ProviderConfigRepositoryInterface
     /**
      * according toservicequotientIDfindconfiguration(按ID升序取first).
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param int $serviceProviderId servicequotientID
      * @return null|ProviderConfigEntity configuration实body
      */
@@ -68,7 +68,7 @@ interface ProviderConfigRepositoryInterface
     /**
      * getorganizationdown所haveenableservicequotientconfiguration.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @return array<ProviderConfigEntity> servicequotientconfiguration实bodyarray
      */
     public function getAllByOrganization(ProviderDataIsolation $dataIsolation): array;

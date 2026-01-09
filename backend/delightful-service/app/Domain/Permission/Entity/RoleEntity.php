@@ -26,7 +26,7 @@ class RoleEntity extends AbstractEntity
     protected ?array $permissionTag = null; // permissiontag,useatfront端showcategory
 
     /**
-     * whetherinfront端column表middleshow:1=is 0=no.
+     * whetherinfront端columntablemiddleshow:1=is 0=no.
      */
     protected int $isDisplay = 1;
 
@@ -41,12 +41,12 @@ class RoleEntity extends AbstractEntity
     protected ?DateTime $updatedAt = null;
 
     /**
-     * roleassociatepermissionkeycolumn表.
+     * roleassociatepermissionkeycolumntable.
      */
     protected array $permissions = [];
 
     /**
-     * roleassociateuserIDcolumn表.
+     * roleassociateuserIDcolumntable.
      */
     protected array $userIds = [];
 

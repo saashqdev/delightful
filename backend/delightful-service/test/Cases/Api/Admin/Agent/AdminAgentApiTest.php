@@ -26,7 +26,7 @@ class AdminAgentApiTest extends BaseTest
         $this->assertSame(1000, $response['code']);
         $this->assertIsArray($response['data']);
 
-        // verifyreturndata结构
+        // verifyreturndatastructure
         $data = $response['data'];
         $this->assertArrayHasKey('page_token', $data);
         $this->assertArrayHasKey('has_more', $data);

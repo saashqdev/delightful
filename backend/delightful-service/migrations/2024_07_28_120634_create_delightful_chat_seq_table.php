@@ -43,7 +43,7 @@ return new class extends Migration {
             # bydownisindexset
             // delightful_message_id index
             $table->index(['delightful_message_id'], 'idx_delightful_message_id');
-            // 因foroftenneed按 seq_id sort,所byincrease联合index
+            // 因foroftenneed按 seq_id sort,所byincreaseunionindex
             // bydownindexcreatemovetosingle独migratefilemiddle
             $table->timestamps();
             $table->softDeletes();

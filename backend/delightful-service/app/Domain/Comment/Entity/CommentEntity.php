@@ -22,12 +22,12 @@ class CommentEntity extends AbstractEntity
     protected int $type;
 
     /**
-     * commentresourceid,for example云documentid,sheet表id.
+     * commentresourceid,for example云documentid,sheettableid.
      */
     protected int $resourceId;
 
     /**
-     * commentresourcetype,for example云document,sheet表.
+     * commentresourcetype,for example云document,sheettable.
      */
     protected int $resourceType;
 

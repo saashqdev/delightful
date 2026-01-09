@@ -368,11 +368,11 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * according toprojectIDcolumn表batchquantitydelete记忆.
+     * according toprojectIDcolumntablebatchquantitydelete记忆.
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID
-     * @param array $projectIds projectIDcolumn表
+     * @param array $projectIds projectIDcolumntable
      * @return int deleterecordquantity
      */
     public function deleteMemoriesByProjectIds(string $orgId, string $appId, string $userId, array $projectIds): int
@@ -524,7 +524,7 @@ readonly class LongTermMemoryDomainService
 
     /**
      * batchquantityenableordisable记忆.
-     * @param array $memoryIds 记忆IDcolumn表
+     * @param array $memoryIds 记忆IDcolumntable
      * @param bool $enabled enablestatus
      * @param string $orgId organizationID
      * @param string $appId applicationID
@@ -597,7 +597,7 @@ readonly class LongTermMemoryDomainService
 
     /**
      * validate记忆enablequantitylimit.
-     * @param array $memoryIds wantenable记忆IDcolumn表
+     * @param array $memoryIds wantenable记忆IDcolumntable
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID

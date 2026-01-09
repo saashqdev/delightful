@@ -21,7 +21,7 @@ interface AiAbilityRepositoryInterface
     /**
      * according tocan力codegetAIcan力实body.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离info
+     * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @param AiAbilityCode $code can力code
      * @return null|AiAbilityEntity AIcan力实body
      */
@@ -30,7 +30,7 @@ interface AiAbilityRepositoryInterface
     /**
      * get所haveAIcan力list.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离info
+     * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @return array<AiAbilityEntity> AIcan力实bodylist
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array;
@@ -38,7 +38,7 @@ interface AiAbilityRepositoryInterface
     /**
      * according toIDgetAIcan力实body.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离info
+     * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @param int $id can力ID
      * @return null|AiAbilityEntity AIcan力实body
      */
@@ -63,7 +63,7 @@ interface AiAbilityRepositoryInterface
     /**
      * according tocodeupdate(supportchoosepropertyupdate).
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离info
+     * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @param AiAbilityCode $code can力code
      * @param array $data updatedata(status,configetc)
      * @return bool whetherupdatesuccess
@@ -73,7 +73,7 @@ interface AiAbilityRepositoryInterface
     /**
      * paginationqueryAIcan力list.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离info
+     * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @param AiAbilityQuery $query queryitemitem
      * @param Page $page paginationinfo
      * @return array{total: int, list: array<AiAbilityEntity>}

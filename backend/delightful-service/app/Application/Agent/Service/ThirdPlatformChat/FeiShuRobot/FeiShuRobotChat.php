@@ -649,7 +649,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      *
      * @param string $tag yuan素tag
      * @param array $element yuan素content
-     * @param array &$attachments attachmentcolumn表
+     * @param array &$attachments attachmentcolumntable
      * @param string $organizationCode organizationcode
      * @param string $messageId messageID
      * @return string handlebackMarkdowntext
@@ -703,7 +703,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      * handleimageyuan素.
      *
      * @param array $element yuan素content
-     * @param array &$attachments attachmentcolumn表
+     * @param array &$attachments attachmentcolumntable
      * @param string $organizationCode organizationcode
      * @param string $messageId messageID
      * @return string handlebackMarkdowntext
@@ -740,13 +740,13 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      */
     private function parseMarkdownToFeiShuPost(string $markdown): array
     {
-        // initialize飞书rich text结构
+        // initialize飞书rich textstructure
         $postContent = [
             'title' => '',
             'content' => [],
         ];
 
-        // usejustthen表达typematchMarkdownmiddleimage
+        // usejustthentable达typematchMarkdownmiddleimage
         $pattern = '/!\[(.*?)\]\((.*?)\)/';
 
         // ifnothaveimage,直接returnmdformat

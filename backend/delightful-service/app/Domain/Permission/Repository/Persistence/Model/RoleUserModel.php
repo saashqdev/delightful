@@ -32,7 +32,7 @@ class RoleUserModel extends AbstractModel
     use SoftDeletes;
 
     /**
-     * andmodelassociate表名.
+     * andmodelassociatetable名.
      */
     protected ?string $table = 'delightful_role_users';
 

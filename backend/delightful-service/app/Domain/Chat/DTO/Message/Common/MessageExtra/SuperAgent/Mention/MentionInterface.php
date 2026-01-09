@@ -20,7 +20,7 @@ interface MentionInterface extends JsonSerializable
     public function getMentionTextStruct(): string;
 
     /**
-     * get Mention object JSON 结构.
+     * get Mention object JSON structure.
      */
     public function getMentionJsonStruct(): array;
 }

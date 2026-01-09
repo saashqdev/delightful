@@ -231,7 +231,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * based ondata隔离get OrganizationAdminModel queryconstruct器.
+     * based ondataisolationget OrganizationAdminModel queryconstruct器.
      */
     private function organizationAdminQuery(DataIsolation $dataIsolation): Builder
     {

@@ -26,7 +26,7 @@ return new class extends Migration {
             // 便at按organization/applicationetcfind所haveassociateuser
             $table->index(['relation_type', 'relation_value'], 'idx_relation');
             $table->index(['user_id'], 'idx_user_id');
-            $table->comment('useridassociate表. record user_id and open_id/union_idetcassociate');
+            $table->comment('useridassociatetable. record user_id and open_id/union_idetcassociate');
             $table->datetimes();
             $table->softDeletes();
         });

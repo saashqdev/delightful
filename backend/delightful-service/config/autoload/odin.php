@@ -24,7 +24,7 @@ function processConfigValue(&$value): void
             $value = env($parts[0], $parts[0]);
         }
     } elseif (is_array($value)) {
-        // arraytype:recursionhandleeachyuan素,保留array结构
+        // arraytype:recursionhandleeachyuan素,保留arraystructure
         foreach ($value as &$item) {
             processConfigValue($item);
         }
@@ -249,7 +249,7 @@ return [
             'logging' => [
                 // logfield白名singleconfiguration
                 // iffornullarrayornotconfiguration,thenprint所havefield
-                // ifconfigurationfieldcolumn表,thenonlyprintfinger定field
+                // ifconfigurationfieldcolumntable,thenonlyprintfinger定field
                 // support嵌setfield,usepoint语法如 'args.messages'
                 // notice:messages and tools fieldnotin白名singlemiddle,notwillbeprint
                 'whitelist_fields' => [

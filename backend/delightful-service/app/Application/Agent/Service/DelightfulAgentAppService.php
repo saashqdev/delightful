@@ -196,7 +196,7 @@ class DelightfulAgentAppService extends AbstractAppService
             // first尝试asfor agent_version_id fromalreadypublishversionmiddleget
             $delightfulAgentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentById($agentVersionId);
         } catch (Throwable $e) {
-            // iffail,from delightful_bots 表getoriginalassistantdata,andconvertfor DelightfulAgentVersionEntity(versionnumberfor null)
+            // iffail,from delightful_bots tablegetoriginalassistantdata,andconvertfor DelightfulAgentVersionEntity(versionnumberfor null)
             try {
                 $delightfulAgentEntity = $this->delightfulAgentDomainService->getById($agentVersionId);
                 $delightfulAgentVersionEntity = $this->convertAgentToAgentVersion($delightfulAgentEntity);
@@ -263,12 +263,12 @@ class DelightfulAgentAppService extends AbstractAppService
         $friendQueryDTO = new FriendQueryDTO();
         $friendQueryDTO->setAiCodes([$delightfulAgentVersionEntity->getFlowCode()]);
 
-        // data隔离handle
+        // dataisolationhandle
         $friendDataIsolation = new ContactDataIsolation();
         $friendDataIsolation->setCurrentUserId($authorization->getId());
         $friendDataIsolation->setCurrentOrganizationCode($organizationCode);
 
-        // getuserproxygood友column表
+        // getuserproxygood友columntable
         $userAgentFriends = $this->delightfulUserDomainService->getUserAgentFriendsList($friendQueryDTO, $friendDataIsolation);
 
         $delightfulAgentVO->setIsAdd(isset($userAgentFriends[$delightfulAgentVersionEntity->getFlowCode()]));
@@ -292,7 +292,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $organizationCode = $authorization->getOrganizationCode();
         $currentUserId = $authorization->getId();
 
-        // getenableassistantversioncolumn表
+        // getenableassistantversioncolumntable
         $agentVersions = $this->getEnabledAgentVersions($organizationCode, $page, $pageSize, $agentName);
         if (empty($agentVersions)) {
             return $this->getEmptyPageResult($page, $pageSize);
@@ -325,10 +325,10 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * getchat模typecanuseassistantcolumn表(allquantitydata,notpagination).
+     * getchat模typecanuseassistantcolumntable(allquantitydata,notpagination).
      * @param Authenticatable $authorization userauthorization
      * @param DelightfulAgentQuery $query querycondition
-     * @return array assistantcolumn表andconversationID
+     * @return array assistantcolumntableandconversationID
      */
     public function getChatModeAvailableAgents(Authenticatable $authorization, DelightfulAgentQuery $query): array
     {
@@ -636,12 +636,12 @@ class DelightfulAgentAppService extends AbstractAppService
             $friendQueryDTO = new FriendQueryDTO();
             $friendQueryDTO->setAiCodes([$delightfulAgentVersionEntity->getFlowCode()]);
 
-            // data隔离handle
+            // dataisolationhandle
             $friendDataIsolation = new ContactDataIsolation();
             $friendDataIsolation->setCurrentUserId($authenticatable->getId());
             $friendDataIsolation->setCurrentOrganizationCode($authenticatable->getOrganizationCode());
 
-            // getuserproxygood友column表
+            // getuserproxygood友columntable
             $userAgentFriends = $this->delightfulUserDomainService->getUserAgentFriendsList($friendQueryDTO, $friendDataIsolation);
 
             $delightfulAgentVO->setIsAdd(isset($userAgentFriends[$delightfulAgentVersionEntity->getFlowCode()]));
@@ -1029,7 +1029,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * getenableassistantversioncolumn表.
+     * getenableassistantversioncolumntable.
      * optimize:直接in领域servicelayerconductJOINquery,avoid传入pass多ID.
      */
     private function getEnabledAgentVersions(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -1040,8 +1040,8 @@ class DelightfulAgentAppService extends AbstractAppService
 
     /**
      * according tovisiblepropertyconfigurationfilterassistant.
-     * @param array $agentVersions assistantversioncolumn表
-     * @return array filterbackassistantversioncolumn表
+     * @param array $agentVersions assistantversioncolumntable
+     * @return array filterbackassistantversioncolumntable
      */
     private function filterVisibleAgents(array $agentVersions, string $currentUserId, string $organizationCode): array
     {
@@ -1109,14 +1109,14 @@ class DelightfulAgentAppService extends AbstractAppService
      */
     private function isUserVisible(VisibilityConfig $visibilityConfig, string $currentUserId, array $userDepartmentIds): bool
     {
-        // checkuserwhetherinvisibleusercolumn表middle
+        // checkuserwhetherinvisibleusercolumntablemiddle
         foreach ($visibilityConfig->getUsers() as $visibleUser) {
             if ($visibleUser->getId() === $currentUserId) {
                 return true;
             }
         }
 
-        // checkuserdepartmentwhetherinvisibledepartmentcolumn表middle
+        // checkuserdepartmentwhetherinvisibledepartmentcolumntablemiddle
         foreach ($visibilityConfig->getDepartments() as $visibleDepartment) {
             if (in_array($visibleDepartment->getId(), $userDepartmentIds)) {
                 return true;

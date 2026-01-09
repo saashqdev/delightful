@@ -160,7 +160,7 @@ readonly class FileDomainService
     /**
      * start sts 模type.
      * gettemporaryvouchergivefront端use.
-     * @todo securityissue,dir nothavevalidation,nothaveorganization隔离
+     * @todo securityissue,dir nothavevalidation,nothaveorganizationisolation
      */
     public function getStsTemporaryCredential(
         string $organizationCode,
@@ -274,7 +274,7 @@ readonly class FileDomainService
 
         $files = [];
 
-        // correctparseobjectlistdata结构
+        // correctparseobjectlistdatastructure
         $objectsList = $objectsResponse['objects'] ?? $objectsResponse;
 
         foreach ($objectsList as $object) {

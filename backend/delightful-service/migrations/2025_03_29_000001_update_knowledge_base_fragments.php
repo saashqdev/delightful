@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // modify表结构,addnewfield
+        // modifytablestructure,addnewfield
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
             // checkwhetheralready存infield,avoidduplicateadd
             if (! Schema::hasColumn('delightful_flow_knowledge_fragment', 'document_code')) {
@@ -43,7 +43,7 @@ return new class extends Migration {
             }
         });
 
-        // restore表名
+        // restoretable名
         Schema::rename('delightful_flow_knowledge_fragment', 'delightful_flow_knowledge_fragment');
     }
 };

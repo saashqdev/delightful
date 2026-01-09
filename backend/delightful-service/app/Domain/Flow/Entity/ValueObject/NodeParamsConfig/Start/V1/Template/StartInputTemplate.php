@@ -113,7 +113,7 @@ class StartInputTemplate
             "files": {
                 "type": "array",
                 "key": "files",
-                "title": "filecolumn表",
+                "title": "filecolumntable",
                 "description": "",
                 "required": null,
                 "value": null,

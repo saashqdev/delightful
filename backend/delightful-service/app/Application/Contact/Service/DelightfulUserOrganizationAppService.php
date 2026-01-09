@@ -81,7 +81,7 @@ class DelightfulUserOrganizationAppService
     }
 
     /**
-     * get账numberdowncanuseorganizationcolumn表(onlycontainenabled statusorganization).
+     * get账numberdowncanuseorganizationcolumntable(onlycontainenabled statusorganization).
      *
      * @throws Throwable
      */

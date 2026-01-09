@@ -74,7 +74,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
 
             $agentConversationId = $agentConversationEntity->getId();
 
-            // 4. create序column实body (temporarymessagenotneed持久化序column)
+            // 4. create序column实body (temporarymessagenotneedpersistence序column)
             $seqEntity = new DelightfulSeqEntity();
             $seqEntity->setAppMessageId($messageDTO->getAppMessageId());
             $seqEntity->setConversationId($agentConversationId);
@@ -95,7 +95,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             $seqExtra->setTopicId($topicId);
             $seqEntity->setExtra($seqExtra);
 
-            // 5. createmessage实body (convertDTOforEntity,butnot持久化)
+            // 5. createmessage实body (convertDTOforEntity,butnotpersistence)
             $messageEntity = new DelightfulMessageEntity();
             $messageEntity->setSenderId($messageDTO->getSenderId());
             $messageEntity->setSenderType($messageDTO->getSenderType());

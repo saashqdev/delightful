@@ -84,7 +84,7 @@ class AsrApi
     }
 
     /**
-     * complete ASR task(supportround询)- V2 结构化version
+     * complete ASR task(supportround询)- V2 structure化version
      * POST /api/v1/sandboxes/{sandboxId}/proxy/api/asr/task/finish.
      */
     public function finishTask(RequestInterface $request): array
@@ -93,7 +93,7 @@ class AsrApi
         $taskKey = $request->input('task_key', '');
         $workspaceDir = $request->input('workspace_dir', '.workspace');
 
-        // V2 结构化parameter
+        // V2 structure化parameter
         $audioConfig = $request->input('audio', []);
         $noteFileConfig = $request->input('note_file');
         $transcriptFileConfig = $request->input('transcript_file');

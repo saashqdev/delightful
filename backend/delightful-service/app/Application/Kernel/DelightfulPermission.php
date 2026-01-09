@@ -193,7 +193,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * getlayerlevel结构permissiontree
+     * getlayerlevelstructurepermissiontree
      * generateno限极permissiontree,rule:according topermissionresourcestring(如 Admin.ai.model_management)逐segmentsplit,逐layerconstructtree.
      *
      * returnformat:

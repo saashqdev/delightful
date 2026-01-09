@@ -181,7 +181,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setSendDirectly($sendDirectly): void
     {
-        // ensure send_directly is布尔type
+        // ensure send_directly isbooleantype
         $this->sendDirectly = filter_var($sendDirectly, FILTER_VALIDATE_BOOLEAN);
     }
 

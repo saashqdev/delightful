@@ -31,7 +31,7 @@ interface OrganizationRepositoryInterface
     public function getByCode(string $code): ?OrganizationEntity;
 
     /**
-     * according toencodingcolumn表batchquantitygetorganization.
+     * according toencodingcolumntablebatchquantitygetorganization.
      * @param string[] $codes
      * @return OrganizationEntity[]
      */
@@ -43,7 +43,7 @@ interface OrganizationRepositoryInterface
     public function getByName(string $name): ?OrganizationEntity;
 
     /**
-     * queryorganizationcolumn表.
+     * queryorganizationcolumntable.
      * @return array{total: int, list: OrganizationEntity[]}
      */
     public function queries(Page $page, ?array $filters = null): array;

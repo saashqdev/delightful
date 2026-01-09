@@ -62,7 +62,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             // ifispersoncategory,checkhe们whether处at同oneorganization
             $this->assertUserInOrganization($friendId, $dataIsolation->getCurrentOrganizationCode());
         }
-        // willgood友close系write friend 表.
+        // willgood友close系write friend table.
         $this->friendRepository->insertFriend([
             'id' => IdGenerator::getSnowId(),
             'user_id' => $uid,
@@ -89,7 +89,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * getuser所属organizationcolumn表.
+     * getuser所属organizationcolumntable.
      * @return string[]
      */
     public function getUserOrganizations(string $userId): array
@@ -98,7 +98,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * according to delightfulId getuser所属organizationcolumn表.
+     * according to delightfulId getuser所属organizationcolumntable.
      * @return string[]
      */
     public function getUserOrganizationsByDelightfulId(string $delightfulId): array
@@ -222,7 +222,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * according touserIDanduserorganizationcolumn表queryuserdetail,according touserorganizationdecidefilterstrategy.
+     * according touserIDanduserorganizationcolumntablequeryuserdetail,according touserorganizationdecidefilterstrategy.
      * @param array $userIds userIDarray
      * @param array $userOrganizations currentuser拥haveorganizationencodingarray
      * @return array<UserDetailDTO>
@@ -235,7 +235,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         // mergeuserorganizationand官方organization
         $orgCodes = array_filter(array_unique(array_merge($userOrganizations, [$officialOrganizationCode])));
 
-        // from user表拿基本info,support多organizationquery
+        // from usertable拿基本info,support多organizationquery
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds, $orgCodes);
 
         // checkcurrentuserwhether拥have官方organization
@@ -260,7 +260,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
         // parseavataretcinfo
         $delightfulIds = array_column($users, 'delightful_id');
-        // from account 表拿hand机numbertrue名etcinfo
+        // from account table拿hand机numbertrue名etcinfo
         $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($delightfulIds);
         return UserAssembler::getUsersDetail($users, $accounts);
     }
@@ -397,11 +397,11 @@ class DelightfulUserDomainService extends AbstractContactDomainService
      */
     public function getUserDetailByUserIdsInDelightful(array $userIds): array
     {
-        // from user表拿基本info
+        // from usertable拿基本info
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds);
         // parseavataretcinfo
         $delightfulIds = array_column($users, 'delightful_id');
-        // from account 表拿hand机numbertrue名etcinfo
+        // from account table拿hand机numbertrue名etcinfo
         $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($delightfulIds);
         return UserAssembler::getUsersDetail($users, $accounts);
     }

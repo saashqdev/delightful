@@ -17,7 +17,7 @@ use Delightful\ApiResponse\Annotation\ApiResponse;
 class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
 {
     /**
-     * get官方重sortprovidequotientcolumn表.
+     * get官方重sortprovidequotientcolumntable.
      * @return array<ProviderConfigModelsDTO>
      */
     public function getOfficialRerankProviderList(): array
@@ -32,7 +32,7 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
         $dto->setStatus(1); // 1 indicateenable
         $dto->setCreatedAt(date('Y-m-d H:i:s'));
 
-        // settingmodelcolumn表
+        // settingmodelcolumntable
         $models = [];
 
         // 基础重sortmodel
@@ -55,7 +55,7 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * get嵌入providequotientcolumn表.
+     * get嵌入providequotientcolumntable.
      * @return array<ProviderConfigModelsDTO>
      */
     public function getEmbeddingProviderList(): array

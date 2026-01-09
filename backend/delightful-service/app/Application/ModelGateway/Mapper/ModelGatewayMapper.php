@@ -40,7 +40,7 @@ use Throwable;
 class ModelGatewayMapper extends ModelMapper
 {
     /**
-     * 持久化customizedata.
+     * persistencecustomizedata.
      * @var array<string, OdinModelAttributes>
      */
     protected array $attributes = [];
@@ -274,7 +274,7 @@ class ModelGatewayMapper extends ModelMapper
     {
         $list = [];
 
-        // getalready持久化configuration
+        // getalreadypersistenceconfiguration
         $models = $this->getModels($modelType->isLLM() ? 'chat' : 'embedding');
         foreach ($models as $name => $model) {
             switch ($modelType) {

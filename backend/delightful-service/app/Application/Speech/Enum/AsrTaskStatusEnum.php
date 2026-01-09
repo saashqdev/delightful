@@ -13,7 +13,7 @@ namespace App\Application\Speech\Enum;
  * 【asuse域】inside部system - delightful-service businesslayer
  * 【use途】table示 ASR 录音总结taskall生命periodstatus
  * 【use场景】
- * - taskstatus持久化(Redis/database)
+ * - taskstatuspersistence(Redis/database)
  * - businessprocesscontrolandpoweretcpropertyjudge
  * - 整bodytaskstatustrace(录音 → merge → generatetitle → sendmessage)
  *

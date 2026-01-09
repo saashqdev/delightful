@@ -51,7 +51,7 @@ class DelightfulFlowToolSetEntity extends AbstractEntity
     protected DateTime $updatedAt;
 
     /**
-     * useat冗remaindertoolinformationcolumn表.
+     * useat冗remaindertoolinformationcolumntable.
      * with query.
      */
     private array $tools = [];

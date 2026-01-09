@@ -94,7 +94,7 @@ class StartInputTemplate
                 "type": "array",
                 "key": "root",
                 "sort": 5,
-                "title": "filecolumn表",
+                "title": "filecolumntable",
                 "description": "",
                 "required": null,
                 "value": null,

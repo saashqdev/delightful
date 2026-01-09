@@ -49,14 +49,14 @@ interface KnowledgeBaseDocumentRepositoryInterface
     public function getDocumentsByCodes(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, array $knowledgeBaseDocumentCodes): array;
 
     /**
-     * queryknowledge basedocumentcolumn表.
+     * queryknowledge basedocumentcolumntable.
      *
      * @return array{total: int, list: array<KnowledgeBaseDocumentEntity>}
      */
     public function queries(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentQuery $query, Page $page): array;
 
     /**
-     * passthethird-partyfileidqueryknowledge basedocumentcolumn表.
+     * passthethird-partyfileidqueryknowledge basedocumentcolumntable.
      *
      * @return array<KnowledgeBaseDocumentEntity>
      */

@@ -85,7 +85,7 @@ class DelightfulChatUserApi extends AbstractApi
         $pageToken = (string) $request->query('page_token', '');
         // 0:ai 1:personcategory 2: aiandpersoncategory
         $friendType = (int) $request->query('friend_type', '');
-        // will flow_codes when做 data表middle ai_code process
+        // will flow_codes when做 datatablemiddle ai_code process
         $aiCodes = (array) $request->input('flow_codes', []);
         $friendQueryDTO = new FriendQueryDTO();
         $friendType = UserType::from($friendType);

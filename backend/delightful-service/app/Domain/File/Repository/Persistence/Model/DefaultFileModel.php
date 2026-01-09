@@ -31,7 +31,7 @@ class DefaultFileModel extends Model
     use SoftDeletes;
 
     /**
-     * andmodelassociate表名.
+     * andmodelassociatetable名.
      */
     protected ?string $table = 'default_files';
 

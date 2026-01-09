@@ -312,7 +312,7 @@ class ServiceProviderApiTest extends BaseTest
      */
     private function findModelInDetailResponse(array $detailData, string $modelId): ?array
     {
-        // detailinterfacemaybereturn models arrayorother结构,thiswithinneedaccording toactualinterfaceadjust
+        // detailinterfacemaybereturn models arrayorotherstructure,thiswithinneedaccording toactualinterfaceadjust
         if (isset($detailData['models']) && is_array($detailData['models'])) {
             foreach ($detailData['models'] as $model) {
                 if (isset($model['id']) && (string) $model['id'] === (string) $modelId) {
@@ -321,7 +321,7 @@ class ServiceProviderApiTest extends BaseTest
             }
         }
 
-        // ifisother结构,continuefind
+        // ifisotherstructure,continuefind
         if (isset($detailData['id']) && (string) $detailData['id'] === (string) $modelId) {
             return $detailData;
         }
@@ -384,7 +384,7 @@ class ServiceProviderApiTest extends BaseTest
         // get Domain Service
         $domainService = $this->getContainer()->get(ProviderModelDomainService::class);
 
-        // constructdata隔离object
+        // constructdataisolationobject
         $organizationCode = env('TEST_ORGANIZATION_CODE');
         $dataIsolation = new ProviderDataIsolation($organizationCode, '', '');
 

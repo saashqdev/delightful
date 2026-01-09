@@ -610,7 +610,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $this->assertSame(1000, $res['code'], $res['message']);
         $this->assertIsArray($res['data']);
 
-        // verifyreturnresult结构
+        // verifyreturnresultstructure
         if (! empty($res['data'])) {
             $result = $res['data']['list'][0];
             $this->assertArrayHasKey('id', $result);

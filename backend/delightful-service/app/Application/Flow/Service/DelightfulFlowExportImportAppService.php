@@ -58,7 +58,7 @@ class DelightfulFlowExportImportAppService
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.export.circular_dependency_detected');
         }
 
-        // 准备exportdata结构
+        // 准备exportdatastructure
         $exportData = [
             'main_flow' => $mainFlow->toArray(),
             'sub_flows' => [],
@@ -524,7 +524,7 @@ class DelightfulFlowExportImportAppService
                     }
                 }
 
-                // handleparametermiddle表达type
+                // handleparametermiddletable达type
                 $this->updateExpressionReferences($nodeData['params'], $idMapping);
             }
 
@@ -583,7 +583,7 @@ class DelightfulFlowExportImportAppService
                         $oldIdStr = (string) $oldId;
                         $newIdStr = (string) $newId;
 
-                        // usejustthen表达typeensureonlyreplacecompleteID
+                        // usejustthentable达typeensureonlyreplacecompleteID
                         if (preg_match('/^' . preg_quote($oldIdStr, '/') . '_/', $edge['sourceHandle'])) {
                             $edge['sourceHandle'] = preg_replace('/^' . preg_quote($oldIdStr, '/') . '/', $newIdStr, $edge['sourceHandle']);
                         }
@@ -599,8 +599,8 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * recursionhandlearraymiddle表达typequote
-     * findandupdate所havecontainsectionpointID表达typefield.
+     * recursionhandlearraymiddletable达typequote
+     * findandupdate所havecontainsectionpointIDtable达typefield.
      */
     private function updateExpressionReferences(array &$data, array $idMapping): void
     {
@@ -620,7 +620,7 @@ class DelightfulFlowExportImportAppService
                     $oldNodeIdStr = (string) $oldNodeId;
                     $newNodeIdStr = (string) $newNodeId;
 
-                    // usejustthen表达typeensureonlyreplacecompletesectionpointID
+                    // usejustthentable达typeensureonlyreplacecompletesectionpointID
                     if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $item)) {
                         $fieldName = substr($item, strlen($oldNodeIdStr));
                         $item = $newNodeIdStr . $fieldName;
@@ -630,7 +630,7 @@ class DelightfulFlowExportImportAppService
             }
         }
 
-        // handleobjectshapetype表达typevalue(如form结构middlefield)
+        // handleobjectshapetypetable达typevalue(如formstructuremiddlefield)
         if (isset($data['field'])) {
             $field = $data['field'];
             if (is_string($field)) {
@@ -681,7 +681,7 @@ class DelightfulFlowExportImportAppService
             return true;
         }
 
-        // getconfigurationmiddleinside置toolcolumn表(ifhave)
+        // getconfigurationmiddleinside置toolcolumntable(ifhave)
         $builtInTools = $this->config->get('flow.built_in_tools', []);
         if (in_array($toolId, $builtInTools)) {
             return true;
@@ -706,7 +706,7 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * handle特殊表达typevaluefield.
+     * handle特殊table达typevaluefield.
      */
     private function processSpecialNodeFieldValue(array &$value, array $idMapping): void
     {
@@ -758,7 +758,7 @@ class DelightfulFlowExportImportAppService
             $oldNodeIdStr = (string) $oldNodeId;
             $newNodeIdStr = (string) $newNodeId;
 
-            // usejustthen表达typeensureonlyreplacecompletesectionpointID
+            // usejustthentable达typeensureonlyreplacecompletesectionpointID
             if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $str)) {
                 $fieldName = substr($str, strlen($oldNodeIdStr));
                 $str = $newNodeIdStr . $fieldName;
@@ -768,7 +768,7 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * handle表达typevaluemiddlesectionpointquote.
+     * handletable达typevaluemiddlesectionpointquote.
      */
     private function processExpressionValue(array &$expressionValue, array $idMapping): void
     {
@@ -782,7 +782,7 @@ class DelightfulFlowExportImportAppService
             }
         }
 
-        // handleobjectshapetype表达typevalue(如form结构middlefield)
+        // handleobjectshapetypetable达typevalue(如formstructuremiddlefield)
         if (isset($expressionValue['field'])) {
             $field = $expressionValue['field'];
             if (is_string($field)) {
@@ -796,17 +796,17 @@ class DelightfulFlowExportImportAppService
             $this->processExpressionValue($expressionValue['value'], $idMapping);
         }
 
-        // handleconst_valuetype嵌set结构
+        // handleconst_valuetype嵌setstructure
         if (isset($expressionValue['const_value']) && is_array($expressionValue['const_value'])) {
             $this->processExpressionValue($expressionValue['const_value'], $idMapping);
         }
 
-        // handleexpression_valuetype嵌set结构
+        // handleexpression_valuetype嵌setstructure
         if (isset($expressionValue['expression_value']) && is_array($expressionValue['expression_value'])) {
             $this->processExpressionValue($expressionValue['expression_value'], $idMapping);
         }
 
-        // handleform结构middlefieldarray
+        // handleformstructuremiddlefieldarray
         if (isset($expressionValue['form']) && is_array($expressionValue['form'])) {
             foreach ($expressionValue['form'] as &$formItem) {
                 if (isset($formItem['field']) && is_string($formItem['field'])) {

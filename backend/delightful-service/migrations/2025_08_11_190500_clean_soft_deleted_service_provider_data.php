@@ -23,13 +23,13 @@ return new class extends Migration {
         // 清null官方organization Delightful servicequotientconfigurationandmodel(放indelete软deletedata之front)
         $this->cleanOfficialDelightfulProviderData();
 
-        // cleanup service_provider 相closefour张表middle软deletedata
+        // cleanup service_provider 相closefour张tablemiddle软deletedata
         $this->cleanSoftDeletedData();
 
-        // 清洗 service_provider 表middle provider_code='Official' record
+        // 清洗 service_provider tablemiddle provider_code='Official' record
         $this->cleanOfficialProviderData();
 
-        // cleanup service_provider_models 表middle冗remainderdata
+        // cleanup service_provider_models tablemiddle冗remainderdata
         $this->cleanServiceProviderModelsData();
     }
 
@@ -42,47 +42,47 @@ return new class extends Migration {
     }
 
     /**
-     * cleanup service_provider 相close表middle软deletedata.
+     * cleanup service_provider 相closetablemiddle软deletedata.
      */
     private function cleanSoftDeletedData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('startcleanup service_provider 相close表软deletedata');
+        $logger->info('startcleanup service_provider 相closetable软deletedata');
 
         try {
             // usetransactionensuredataone致property
             Db::transaction(function () use ($logger) {
                 $totalDeleted = 0;
 
-                // 1. delete service_provider 表middle软deletedata
+                // 1. delete service_provider tablemiddle软deletedata
                 $deletedCount = Db::table('service_provider')
                     ->whereNotNull('deleted_at')
                     ->delete();
                 $totalDeleted += $deletedCount;
-                $logger->info("delete service_provider 表软deletedata: {$deletedCount} item");
+                $logger->info("delete service_provider table软deletedata: {$deletedCount} item");
 
-                // 2. delete service_provider_configs 表middle软deletedata
+                // 2. delete service_provider_configs tablemiddle软deletedata
                 $deletedCount = Db::table('service_provider_configs')
                     ->whereNotNull('deleted_at')
                     ->delete();
                 $totalDeleted += $deletedCount;
-                $logger->info("delete service_provider_configs 表软deletedata: {$deletedCount} item");
+                $logger->info("delete service_provider_configs table软deletedata: {$deletedCount} item");
 
-                // 3. delete service_provider_models 表middle软deletedata
+                // 3. delete service_provider_models tablemiddle软deletedata
                 $deletedCount = Db::table('service_provider_models')
                     ->whereNotNull('deleted_at')
                     ->delete();
                 $totalDeleted += $deletedCount;
-                $logger->info("delete service_provider_models 表软deletedata: {$deletedCount} item");
+                $logger->info("delete service_provider_models table软deletedata: {$deletedCount} item");
 
-                // 4. delete service_provider_original_models 表middle软deletedata
+                // 4. delete service_provider_original_models tablemiddle软deletedata
                 $deletedCount = Db::table('service_provider_original_models')
                     ->whereNotNull('deleted_at')
                     ->delete();
                 $totalDeleted += $deletedCount;
-                $logger->info("delete service_provider_original_models 表软deletedata: {$deletedCount} item");
+                $logger->info("delete service_provider_original_models table软deletedata: {$deletedCount} item");
 
-                $logger->info("service_provider 相close表软deletedatacleanupcomplete,总共delete: {$totalDeleted} itemrecord");
+                $logger->info("service_provider 相closetable软deletedatacleanupcomplete,总共delete: {$totalDeleted} itemrecord");
             });
         } catch (Throwable $e) {
             $logger->error('cleanup软deletedataproceduremiddlehair生error: ' . $e->getMessage());
@@ -208,12 +208,12 @@ return new class extends Migration {
     }
 
     /**
-     * cleanup service_provider_models 表middle冗remainderdata.
+     * cleanup service_provider_models tablemiddle冗remainderdata.
      */
     private function cleanServiceProviderModelsData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('startcleanup service_provider_models 表冗remainderdata');
+        $logger->info('startcleanup service_provider_models table冗remainderdata');
 
         try {
             // 1. get官方organizationencoding
@@ -322,7 +322,7 @@ return new class extends Migration {
             $logger->info("alreadyhandle {$processedCount}/{$totalOrgs} organization,累计delete: {$totalDeleted} item");
         }
 
-        $logger->info("service_provider_models 表冗remainderdatacleanupcomplete,总共delete: {$totalDeleted} itemrecord");
+        $logger->info("service_provider_models table冗remainderdatacleanupcomplete,总共delete: {$totalDeleted} itemrecord");
     }
 
     /**

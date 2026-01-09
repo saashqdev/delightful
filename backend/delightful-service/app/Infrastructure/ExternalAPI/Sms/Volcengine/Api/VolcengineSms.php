@@ -60,7 +60,7 @@ class VolcengineSms extends VolcengineApi
             $groupId = $this->template->getMessageGroupId($templateId);
             // initialize,setpublicrequestparameter
             $this->init($groupId, $signStr, $templateId);
-            // setverify码short信特havebody结构
+            // setverify码short信特havebodystructure
             $body = [
                 'SmsAccount' => $this->getMessageGroupId(),
                 'Sign' => $this->getSign(),

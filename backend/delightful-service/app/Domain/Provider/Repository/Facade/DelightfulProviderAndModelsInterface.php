@@ -35,7 +35,7 @@ interface DelightfulProviderAndModelsInterface
     /**
      * according to modelParentId getorganization Delightful model.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param string $modelParentId model父ID
      * @return null|ProviderModelEntity 找toorganizationmodel实body,not存inthenreturnnull
      */
@@ -52,7 +52,7 @@ interface DelightfulProviderAndModelsInterface
     /**
      * non官方organizationupdate Delightful modelstatus(写o clockcopylogic).
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param ProviderModelEntity $officialModel 官方model实body
      * @return string organizationmodelID
      */

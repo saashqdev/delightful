@@ -18,7 +18,7 @@ interface ModeGroupRepositoryInterface
     public function findById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeGroupEntity;
 
     /**
-     * according tomodeIDgetminutegroupcolumn表.
+     * according tomodeIDgetminutegroupcolumntable.
      * @return ModeGroupEntity[]
      */
     public function findByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;
@@ -34,7 +34,7 @@ interface ModeGroupRepositoryInterface
     public function update(ModeDataIsolation $dataIsolation, ModeGroupEntity $groupEntity): ModeGroupEntity;
 
     /**
-     * getmodedownenableminutegroupcolumn表.
+     * getmodedownenableminutegroupcolumntable.
      * @return ModeGroupEntity[]
      */
     public function findEnabledByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;
@@ -55,7 +55,7 @@ interface ModeGroupRepositoryInterface
     public function batchSave(ModeDataIsolation $dataIsolation, array $groupEntities);
 
     /**
-     * according to多modeIDbatchquantitygetminutegroupcolumn表.
+     * according to多modeIDbatchquantitygetminutegroupcolumntable.
      * @param int[]|string[] $modeIds
      * @return ModeGroupEntity[]
      */

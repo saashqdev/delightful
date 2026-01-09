@@ -33,7 +33,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
         // verifyresponsestatus
         $this->assertEquals(1000, $response['code'] ?? -1);
 
-        // verifyresponse结构(according toactualAPIreturn结构adjust)
+        // verifyresponsestructure(according toactualAPIreturnstructureadjust)
         if (isset($response['data'])) {
             $this->assertIsArray($response['data']);
         }
@@ -54,7 +54,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
         // verifyresponsestatus
         $this->assertEquals(1000, $response['code'] ?? -1);
 
-        // verifyresponse结构
+        // verifyresponsestructure
         if (isset($response['data'])) {
             $this->assertIsArray($response['data']);
             // verifyreturnorganizationcode

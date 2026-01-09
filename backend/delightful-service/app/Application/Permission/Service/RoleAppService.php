@@ -21,7 +21,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * queryrolecolumn表.
+     * queryrolecolumntable.
      * @return array{total: int, list: RoleEntity[]}
      */
     public function queries(PermissionDataIsolation $dataIsolation, Page $page, ?array $filters = null): array
@@ -71,7 +71,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * getuserrolecolumn表.
+     * getuserrolecolumntable.
      */
     public function getUserRoles(PermissionDataIsolation $dataIsolation, string $userId): array
     {
@@ -95,7 +95,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * getpermissionresourcetree结构.
+     * getpermissionresourcetreestructure.
      *
      * @param bool $isPlatformOrganization whetherplatformorganization
      */

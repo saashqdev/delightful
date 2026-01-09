@@ -15,7 +15,7 @@ interface SmsInterface
     public function getTemplateId(SmsStruct $smsStruct): ?string;
 
     /**
-     * sendshort信,forcerequire所haveshort信驱动return结构same.
+     * sendshort信,forcerequire所haveshort信驱动returnstructuresame.
      */
     public function send(SmsStruct $smsStruct): SendResult;
 

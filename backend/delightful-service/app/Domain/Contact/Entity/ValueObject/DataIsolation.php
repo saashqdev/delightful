@@ -11,9 +11,9 @@ use App\Domain\Contact\Repository\Facade\DelightfulUserRepositoryInterface;
 use App\Infrastructure\Core\AbstractObject;
 
 /**
- * data隔离 SaaS化
- * 目frontonlyhaveorganization隔离
- * 显type传入,prevent隐type传入,导致notknow哪theseplaceneed做隔离.
+ * dataisolation SaaS化
+ * 目frontonlyhaveorganizationisolation
+ * 显type传入,prevent隐type传入,导致notknow哪theseplaceneed做isolation.
  */
 class DataIsolation extends AbstractObject
 {

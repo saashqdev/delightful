@@ -45,7 +45,7 @@ class SessionAppService implements SessionInterface
                 // onetimepropertybatchquantityget所haveorganizationrootdepartmentinformation
                 $rootDepartments = $this->delightfulDepartmentDomainService->getOrganizationsRootDepartment($orgCodes);
 
-                // 填充loginresponseinformation
+                // populateloginresponseinformation
                 foreach ($loginResponses as $loginResponse) {
                     $orgCode = $loginResponse->getDelightfulOrganizationCode();
                     if (! empty($orgCode) && isset($rootDepartments[$orgCode])) {

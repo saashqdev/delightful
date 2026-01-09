@@ -51,7 +51,7 @@ class UserCallAgentFailSubscriber implements ListenerInterface
             // message防重
             $appMessageId = 'system-' . IdGenerator::getUniqueId32();
             $seqDTO = new DelightfulSeqEntity();
-            // 表明quoteclose系
+            // table明quoteclose系
             $seqDTO->setReferMessageId($seqEntity->getMessageId());
             $seqDTO->setConversationId($conversationId);
             $messageInterface = MessageAssembler::getMessageStructByArray(ChatMessageType::Text->getName(), $messageStruct);

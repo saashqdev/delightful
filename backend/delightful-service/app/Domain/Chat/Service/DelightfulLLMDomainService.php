@@ -176,7 +176,7 @@ class DelightfulLLMDomainService
     
     ## contextexceptionhandle
     when {context} fornullo clock:
-    1. start备选generatestrategy,application5W1Hframework(Who/What/When/Where/Why/How),and结合useroriginalquestionconduct填充
+    1. start备选generatestrategy,application5W1Hframework(Who/What/When/Where/Why/How),and结合useroriginalquestionconductpopulate
     2. generatedefaultdimension,for example:policybackground | mostnewdata | 专家观point | toratioanalyze | line业trend
     
     ## outputstandard
@@ -200,7 +200,7 @@ class DelightfulLLMDomainService
 
     private string $summarizePrompt = <<<'PROMPT'
     # task
-    youneedbased onusermessage,according toIprovidesearchresult,按照总minute总结构,outputhighquality,结构化detailedreturn答,formatfor markdown.
+    youneedbased onusermessage,according toIprovidesearchresult,按照总minute总structure,outputhighquality,structure化detailedreturn答,formatfor markdown.
     
     inIgiveyousearchresultmiddle,eachresultallis[webpage X begin]...[webpage X end]format,Xrepresenteach篇文chapternumberindex.请in适when情况downinsentence子末tailquotecontext.请按照quote编number[citation:X]formatin答案middleto应部minutequotecontext.ifonesentence话源from多context,请columnout所have相closequote编number,for example[citation:3][citation:5],切记notwantwillquotecollectionmiddleinmostbackreturnquote编number,whileisin答案to应部minutecolumnout.
     inreturn答o clock,请noticebydown几point:
@@ -208,12 +208,12 @@ class DelightfulLLMDomainService
     - andnonsearchresult所havecontentallanduserquestion密切相close,youneed结合question,tosearchresultconduct甄别,filter.
     - toatcolumn举categoryquestion(如column举所have航班information),尽quantitywill答案controlin10wantpointbyinside,and告诉usercanviewsearchcome源,获completeinformation.优先provideinformationcomplete,most相closecolumn举item;如non必want,notwant主动告诉usersearchresultnotprovidecontent.
     - toat创ascategoryquestion(如写论文),请务必injust文segment落middlequoteto应参考编number,for example[citation:3][citation:5],notcanonlyin文chapter末tailquote.youneed解读and概括user题目require,choose合适format,充minute利usesearchresultanddraw重wantinformation,generatematchuserrequire,极具思想深degree,富havecreate力and专业property答案.you创as篇幅need尽maybe延long,toateachonewantpoint论述wantspeculateduser意graph,giveout尽maybe多angledegreereturn答wantpoint,and务必informationquantitybig,论述详尽.
-    - ifreturn答verylong,请尽quantity结构化,minutesegment落总结.ifneedminutepointas答,尽quantitycontrolin5pointbyinside,andmerge相closecontent.
+    - ifreturn答verylong,请尽quantitystructure化,minutesegment落总结.ifneedminutepointas答,尽quantitycontrolin5pointbyinside,andmerge相closecontent.
     - toat客观category问答,ifquestion答案non常简short,can适when补充oneto两sentence相closeinformation,by丰富content.
     - youneedaccording touserrequireandreturn答contentchoose合适,美观return答format,ensurecan读propertystrong.
     - youreturn答should综合多相closewebpagecomereturn答,notcanduplicatequoteonewebpage.
     - unlessuserrequire,nothenyoureturn答languageneedanduser提问languagemaintainone致.
-    - output漂亮markdown format,contentmiddleaddonetheseandtheme相closeemoji表情符number.
+    - output漂亮markdown format,contentmiddleaddonetheseandtheme相closeemojitable情符number.
     
     ## usermessagefor:
     {question}

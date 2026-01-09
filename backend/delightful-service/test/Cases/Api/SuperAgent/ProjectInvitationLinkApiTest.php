@@ -567,7 +567,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $invitationInfo = $this->getInvitationByToken($token);
 
-        // check基本response结构
+        // check基本responsestructure
         $this->assertEquals(1000, $invitationInfo['code'], 'get邀请infoshouldsuccess');
         $this->assertIsArray($invitationInfo['data'], 'responsedatashouldisarray');
 

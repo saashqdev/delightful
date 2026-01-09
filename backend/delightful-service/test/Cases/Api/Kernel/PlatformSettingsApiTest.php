@@ -25,7 +25,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // verifyresponse结构
+        // verifyresponsestructure
         $this->assertArrayHasKey('logo', $data);
         $this->assertArrayHasKey('favicon', $data);
         $this->assertArrayHasKey('default_language', $data);
@@ -63,7 +63,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // verifyresponse结构
+        // verifyresponsestructure
         $this->assertArrayHasKey('logo', $data);
         $this->assertArrayHasKey('favicon', $data);
         $this->assertArrayHasKey('default_language', $data);
@@ -84,7 +84,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $this->assertArrayEquals($payload['keywords_i18n'], $data['keywords_i18n'], 'keywords_i18n notmatch');
         $this->assertArrayEquals($payload['description_i18n'], $data['description_i18n'], 'description_i18n notmatch');
 
-        // againtime GET verify持久化
+        // againtime GET verifypersistence
         $getResponse = $this->get($this->getUrl, [], $this->getCommonHeaders());
         $this->assertSame(1000, $getResponse['code']);
         $getData = $getResponse['data'];

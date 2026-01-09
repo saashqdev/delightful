@@ -10,8 +10,8 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 
 /**
- * data隔离 SaaS化
- * 显type传入,prevent隐type传入,导致notknow哪theseplaceneed做隔离.
+ * dataisolation SaaS化
+ * 显type传入,prevent隐type传入,导致notknow哪theseplaceneed做isolation.
  */
 class KnowledgeBaseDataIsolation extends BaseDataIsolation
 {

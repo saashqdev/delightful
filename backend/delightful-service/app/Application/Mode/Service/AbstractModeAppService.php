@@ -148,7 +148,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * getdata隔离object
+     * getdataisolationobject
      */
     protected function getModeDataIsolation(DelightfulUserAuthorization $authorization): ModeDataIsolation
     {
@@ -319,9 +319,9 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * frommodelcolumn表middlechoosemost佳model(考虑servicequotientlevel联status).
+     * frommodelcolumntablemiddlechoosemost佳model(考虑servicequotientlevel联status).
      *
-     * @param ProviderModelEntity[] $models modelcolumn表
+     * @param ProviderModelEntity[] $models modelcolumntable
      * @param array<int, Status> $providerStatuses servicequotientstatusmapping
      * @return null|ProviderModelEntity choosemost佳model,ifnothavecanusemodelthenreturnnull
      */
@@ -361,9 +361,9 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * according tomodelcolumn表certainstatus(考虑servicequotientlevel联status).
+     * according tomodelcolumntablecertainstatus(考虑servicequotientlevel联status).
      *
-     * @param ProviderModelEntity[] $models modelcolumn表
+     * @param ProviderModelEntity[] $models modelcolumntable
      * @param array<int, Status> $providerStatuses servicequotientstatusmapping
      * @return ModelStatus status:Normal,Disabled,Deleted
      */

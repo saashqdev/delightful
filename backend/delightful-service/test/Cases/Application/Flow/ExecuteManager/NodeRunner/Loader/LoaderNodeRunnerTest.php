@@ -45,8 +45,8 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'file_name' => 'out师表.pdf',
-            'file_url' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/out师表.pdf',
+            'file_name' => 'out师table.pdf',
+            'file_url' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/out师table.pdf',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());
@@ -87,8 +87,8 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'file_name' => 'out师表.txt',
-            'file_url' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/out师表.txt',
+            'file_name' => 'out师table.txt',
+            'file_url' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/out师table.txt',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());
@@ -101,7 +101,7 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'file_name' => 'out师表.docx',
+            'file_name' => 'out师table.docx',
             'file_url' => '',
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -116,8 +116,8 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'file_name' => 'out师表.doc',
-            'file_url' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/out师表.doc',
+            'file_name' => 'out师table.doc',
+            'file_url' => 'https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/out师table.doc',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());
@@ -136,7 +136,7 @@ class LoaderNodeRunnerTest extends ExecuteManagerBaseTest
             "type": "array",
             "key": "root",
             "sort": 0,
-            "title": "filecolumn表",
+            "title": "filecolumntable",
             "description": "",
             "required": null,
             "value": null,

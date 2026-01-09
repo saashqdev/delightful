@@ -78,7 +78,7 @@ class MessageAssembler
     }
 
     /**
-     * according toarraygetmessage结构.
+     * according toarraygetmessagestructure.
      */
     public static function getMessageStructByArray(ChatMessageType|ControlMessageType|string $messageTypeString, array $messageStructArray): MessageInterface
     {
@@ -174,7 +174,7 @@ class MessageAssembler
     }
 
     /**
-     * according to protobuf message结构,getto应messageobject.
+     * according to protobuf messagestructure,getto应messageobject.
      */
     public static function getControlMessageDTOByRequest(ControlRequest $controlRequest, DelightfulUserAuthorization $userAuthorization, ConversationType $conversationType): DelightfulMessageEntity
     {
@@ -198,7 +198,7 @@ class MessageAssembler
     }
 
     /**
-     * getchatmessage结构.
+     * getchatmessagestructure.
      */
     public static function getChatMessageStruct(ChatMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
@@ -223,7 +223,7 @@ class MessageAssembler
     }
 
     /**
-     * getcontrolmessage结构.
+     * getcontrolmessagestructure.
      */
     public static function getControlMessageStruct(ControlMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
@@ -257,7 +257,7 @@ class MessageAssembler
     }
 
     /**
-     * gettemporarymessage结构.
+     * gettemporarymessagestructure.
      */
     public static function getIntermediateMessageStruct(IntermediateMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {

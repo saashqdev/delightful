@@ -14,7 +14,7 @@ use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Throwable;
 
 /**
- * customer端收tomessage结构body.
+ * customer端收tomessagestructurebody.
  */
 class ClientMessage extends AbstractEntity
 {

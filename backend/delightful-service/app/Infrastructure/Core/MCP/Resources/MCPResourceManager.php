@@ -9,7 +9,7 @@ namespace App\Infrastructure\Core\MCP\Resources;
 
 /**
  * MCPresourcemanager.
- * whenfrontversionfornullimplement,onlyreturnnullcolumn表.
+ * whenfrontversionfornullimplement,onlyreturnnullcolumntable.
  */
 class MCPResourceManager
 {
@@ -28,7 +28,7 @@ class MCPResourceManager
     }
 
     /**
-     * getresourcecolumn表.
+     * getresourcecolumntable.
      * whenfrontfornullimplement,returnnullarray.
      *
      * @return array<int, array<string, mixed>>

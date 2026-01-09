@@ -82,7 +82,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     /**
      * according to origin_id batchquantity软deletethethird-partyplatformmappingrecord.
      *
-     * @param string[] $originIds thethird-partyplatformoriginalIDcolumn表
+     * @param string[] $originIds thethird-partyplatformoriginalIDcolumntable
      */
     public function deleteThirdPlatformIdsMapping(
         array $originIds,

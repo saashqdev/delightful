@@ -33,7 +33,7 @@ class MCPToolManager
     }
 
     /**
-     * gettoolcolumn表Schemashapetype.
+     * gettoolcolumntableSchemashapetype.
      *
      * @return array<int, array<string, mixed>>
      */

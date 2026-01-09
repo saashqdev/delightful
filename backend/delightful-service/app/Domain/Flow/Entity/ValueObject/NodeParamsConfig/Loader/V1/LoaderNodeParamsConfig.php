@@ -49,7 +49,7 @@ class LoaderNodeParamsConfig extends NodeParamsConfig
     "type": "array",
     "key": "root",
     "sort": 0,
-    "title": "filecolumn表",
+    "title": "filecolumntable",
     "description": "",
     "required": null,
     "value": null,

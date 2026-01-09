@@ -24,7 +24,7 @@ interface DelightfulChatTopicRepositoryInterface
     public function deleteTopic(DelightfulTopicEntity $delightfulTopicDTO): int;
 
     /**
-     * getconversationconversationcolumn表.
+     * getconversationconversationcolumntable.
      * @param string[] $topicIds
      * @return array<DelightfulTopicEntity>
      */

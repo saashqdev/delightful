@@ -12,7 +12,7 @@ use App\Domain\Chat\Entity\AbstractEntity;
 use App\Domain\Chat\Entity\ValueObject\MessageType\MessageOptionsEnum;
 
 /**
- * customer端收tomessage序column结构.
+ * customer端收tomessage序columnstructure.
  */
 class ClientSequence extends AbstractEntity
 {

@@ -40,7 +40,7 @@ class LLMMemoryMessage
     private string $mountId = '';
 
     /**
-     * @var AttachmentInterface[] attachmentcolumn表
+     * @var AttachmentInterface[] attachmentcolumntable
      */
     private array $attachments = [];
 

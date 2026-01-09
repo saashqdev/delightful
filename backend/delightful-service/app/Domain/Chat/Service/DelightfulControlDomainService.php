@@ -78,20 +78,20 @@ class DelightfulControlDomainService extends AbstractDomainService
 
         $senderUserId = $senderConversationEntity->getUserId();
         $senderMessageId = $receiveDelightfulSeqEntity->getSenderMessageId();
-        # thiswithinaddonedownminute布typelinelock,preventandhairmodifymessagereceivepersoncolumn表,造becomedataoverride.
+        # thiswithinaddonedownminute布typelinelock,preventandhairmodifymessagereceivepersoncolumntable,造becomedataoverride.
         $spinLockKey = 'chat:seq:lock:' . $senderMessageId;
         $spinLockKeyOwner = random_bytes(8);
         try {
             if (! $this->redisLocker->spinLock($spinLockKey, $spinLockKeyOwner)) {
                 // from旋fail
                 $this->logger->error(sprintf(
-                    'messageDispatch getmessagereceivepersoncolumn表from旋locktimeout $spinLockKey:%s $delightfulSeqEntity:%s',
+                    'messageDispatch getmessagereceivepersoncolumntablefrom旋locktimeout $spinLockKey:%s $delightfulSeqEntity:%s',
                     $spinLockKey,
                     Json::encode($receiveDelightfulSeqEntity->toArray())
                 ));
                 ExceptionBuilder::throw(ChatErrorCode::DATA_WRITE_FAILED);
             }
-            // geteachitemmessagefinalstatus,parseoutcomereceivepersoncolumn表,
+            // geteachitemmessagefinalstatus,parseoutcomereceivepersoncolumntable,
             $senderLatestSeq = $this->getSenderMessageLatestReadStatus($senderMessageId, $senderUserId);
             $receiveUserEntity = $this->delightfulUserRepository->getUserByAccountAndOrganization(
                 $receiveDelightfulSeqEntity->getObjectId(),
@@ -121,16 +121,16 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $senderReceiveList = $senderLatestSeq->getReceiveList();
                     if ($senderReceiveList === null) {
                         $this->logger->error(sprintf(
-                            'messageDispatch messagereceivepersoncolumn表fornull $delightfulSeqEntity:%s',
+                            'messageDispatch messagereceivepersoncolumntablefornull $delightfulSeqEntity:%s',
                             Json::encode($receiveDelightfulSeqEntity->toArray())
                         ));
                         return;
                     }
-                    // 1.judgeuserwhetherinnot读column表middle.
+                    // 1.judgeuserwhetherinnot读columntablemiddle.
                     $unreadList = $senderReceiveList->getUnreadList();
                     if (! in_array($receiveUserEntity->getUserId(), $unreadList, true)) {
                         $this->logger->error(sprintf(
-                            'messageDispatch usernotinmessagenot读column表middle(maybeother设备already读) $unreadList:%s $delightfulSeqEntity:%s',
+                            'messageDispatch usernotinmessagenot读columntablemiddle(maybeother设备already读) $unreadList:%s $delightfulSeqEntity:%s',
                             Json::encode($unreadList),
                             Json::encode($receiveDelightfulSeqEntity->toArray())
                         ));
@@ -142,14 +142,14 @@ class DelightfulControlDomainService extends AbstractDomainService
                         unset($unreadList[$key]);
                         $unreadList = array_values($unreadList);
                     }
-                    // updatealready读column表
+                    // updatealready读columntable
                     $seenList = $senderReceiveList->getSeenList();
                     $seenList[] = $receiveUserEntity->getUserId();
                     $senderReceiveList->setUnreadList($unreadList);
                     $senderReceiveList->setSeenList($seenList);
-                    // formessagesend者generatenewseq,useatupdatemessagereceivepersoncolumn表
+                    // formessagesend者generatenewseq,useatupdatemessagereceivepersoncolumntable
                     $senderLatestSeq->setReceiveList($senderReceiveList);
-                    # updatealready读column表end
+                    # updatealready读columntableend
 
                     $senderLatestSeq->setSeqType($controlMessageType);
                     $senderLatestSeq->setStatus($messageStatus);
@@ -160,9 +160,9 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $seqData = SeqAssembler::getInsertDataByEntity($senderSeenSeqEntity);
                     $seqData['app_message_id'] = $receiveDelightfulSeqEntity->getAppMessageId();
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {
-                        // 写database,updatemessagesend方already读column表.thisisfor复usemessage收hairchannel,notifycustomer端havenewalready读return执.
+                        // 写database,updatemessagesend方already读columntable.thisisfor复usemessage收hairchannel,notifycustomer端havenewalready读return执.
                         $this->delightfulSeqRepository->createSequence($seqData);
-                        // updateoriginal chat_seq messagereceivepersoncolumn表. avoidpullhistorymessageo clock,to方already读messagealsoisdisplaynot读.
+                        // updateoriginal chat_seq messagereceivepersoncolumntable. avoidpullhistorymessageo clock,to方already读messagealsoisdisplaynot读.
                         $originalSeq = $this->delightfulSeqRepository->getSeqByMessageId($senderMessageId);
                         if ($originalSeq !== null) {
                             $originalSeq->setReceiveList($senderReceiveList);

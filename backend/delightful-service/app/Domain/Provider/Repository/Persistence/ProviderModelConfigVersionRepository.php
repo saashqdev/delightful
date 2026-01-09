@@ -15,7 +15,7 @@ use Hyperf\DbConnection\Db;
 
 class ProviderModelConfigVersionRepository extends AbstractProviderModelRepository implements ProviderModelConfigVersionRepositoryInterface
 {
-    // configurationversiontablenotneedorganization隔离(pass service_provider_model_id associatealready经隔离)
+    // configurationversiontablenotneedorganizationisolation(pass service_provider_model_id associatealready经isolation)
     protected bool $filterOrganizationCode = false;
 
     /**

@@ -50,7 +50,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         $this->assertEquals(1000, $response['code'] ?? 0, 'response码应for1000');
         $this->assertEquals('ok', $response['message'] ?? '', 'responsemessage应forok');
 
-        // definitionexpectresponse结构
+        // definitionexpectresponsestructure
         $expectedStructure = [
             'data' => [
                 'choices' => [
@@ -70,8 +70,8 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
             ],
         ];
 
-        // useassertArrayValueTypesEqualsverifyresponse结构
-        $this->assertArrayValueTypesEquals($expectedStructure, $response, 'response结构notconformexpected');
+        // useassertArrayValueTypesEqualsverifyresponsestructure
+        $this->assertArrayValueTypesEquals($expectedStructure, $response, 'responsestructurenotconformexpected');
 
         // 额outsideverifyrolewhetherisassistant(thisisprecisevalueverify)
         $this->assertEquals('assistant', $response['data']['choices'][0]['message']['role'], 'role应forassistant');
@@ -98,7 +98,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         // sendPOSTrequesttocorrectinterfacepath
         $response = $this->json('/api/v2/delightful/chat/chatCompletions', $requestData, $headers);
 
-        // definitionexpecterrorresponse结构
+        // definitionexpecterrorresponsestructure
         $expectedErrorStructure = [
             'code' => 0, // expectednotis1000code,butspecific数valuemaybenotcertain,所bythiswithinonlyis占位
             'message' => '', // onlyverify存inmessagefield,specificcontentmaybenotcertain
@@ -106,7 +106,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
 
         // verifyresponseshouldisparameterverifyerror
         $this->assertNotEquals(1000, $response['code'] ?? 0, '缺少必wantparametero clock,response码not应for1000');
-        $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'errorresponse结构notconformexpected');
+        $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'errorresponsestructurenotconformexpected');
     }
 
     /**
@@ -129,7 +129,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         // sendPOSTrequesttocorrectinterfacepath
         $response = $this->json('/api/v2/delightful/chat/chatCompletions', $requestData, $headers);
 
-        // definitionexpecterrorresponse结构
+        // definitionexpecterrorresponsestructure
         $expectedErrorStructure = [
             'code' => 0, // expectednotis1000code,specific数valuemaybenotcertain
             'message' => '', // onlyverify存inmessagefield,specificcontentmaybenotcertain
@@ -137,6 +137,6 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
 
         // verifyresponseshouldisauthorizationerror
         $this->assertNotEquals(1000, $response['code'] ?? 0, 'invalidauthorizationo clock,response码not应for1000');
-        $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'authorizationerrorresponse结构notconformexpected');
+        $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'authorizationerrorresponsestructurenotconformexpected');
     }
 }

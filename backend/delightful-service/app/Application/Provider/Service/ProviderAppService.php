@@ -41,7 +41,7 @@ class ProviderAppService
             return [];
         }
 
-        // builddata隔离object
+        // builddataisolationobject
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
         // 收collection所have唯oneservicequotientconfigurationID

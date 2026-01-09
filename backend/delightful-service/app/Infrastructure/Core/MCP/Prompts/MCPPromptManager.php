@@ -9,7 +9,7 @@ namespace App\Infrastructure\Core\MCP\Prompts;
 
 /**
  * MCPpromptmanager.
- * whenfrontversionfornullimplement,onlyreturnnullcolumn表.
+ * whenfrontversionfornullimplement,onlyreturnnullcolumntable.
  */
 class MCPPromptManager
 {
@@ -28,7 +28,7 @@ class MCPPromptManager
     }
 
     /**
-     * getpromptcolumn表.
+     * getpromptcolumntable.
      * whenfrontfornullimplement,returnnullarray.
      *
      * @return array<int, array<string, mixed>>

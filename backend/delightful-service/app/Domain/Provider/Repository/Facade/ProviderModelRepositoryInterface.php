@@ -51,7 +51,7 @@ interface ProviderModelRepositoryInterface
 
     /**
      * getorganizationcanusemodellist(containorganizationfrom己modelandDelightfulmodel).
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param null|Category $category modelcategory,foremptyo clockreturn所havecategorymodel
      * @return ProviderModelEntity[] 按sort降序sortmodellist,containorganizationmodelandDelightfulmodel(notgo重)
      */
@@ -59,7 +59,7 @@ interface ProviderModelRepositoryInterface
 
     /**
      * batchquantityaccording toIDgetmodel.
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param string[] $ids modelIDarray
      * @return ProviderModelEntity[] model实bodyarray,byIDforkey
      */
@@ -69,7 +69,7 @@ interface ProviderModelRepositoryInterface
 
     /**
      * batchquantityaccording toModelIDgetmodel.
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param string[] $modelIds modelidentifierarray
      * @return array<string, ProviderModelEntity[]> model实bodyarray,bymodel_idforkey,valueforto应modellist
      */
@@ -83,7 +83,7 @@ interface ProviderModelRepositoryInterface
     /**
      * according toqueryitemitemget按modeltypeminutegroupmodelIDlist.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离object
+     * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param ProviderModelQuery $query queryitemitem
      * @return array<string, array<string>> 按modeltypeminutegroupmodelIDarray,format: [modelType => [model_id, model_id]]
      */

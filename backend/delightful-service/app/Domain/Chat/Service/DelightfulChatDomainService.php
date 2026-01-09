@@ -287,7 +287,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         $minSeqListByReferMessageId = $this->getMinSeqListByReferMessageId($senderSeqEntity);
         $receiverReferMessageId = $minSeqListByReferMessageId[$receiveUserEntity->getDelightfulId()] ?? '';
         $seqId = (string) IdGenerator::getSnowId();
-        // section约storagenullbetween,chatmessageinseq表not存specificcontent,only存messageid
+        // section约storagenullbetween,chatmessageinseqtablenot存specificcontent,only存messageid
         $content = $this->getSeqContent($messageEntity);
         $receiveAccountId = $this->getAccountId($messageEntity->getReceiveId());
         // according tosend方 extra,generatereceive方to应 extra
@@ -299,7 +299,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             'object_id' => $receiveAccountId,
             'seq_id' => $seqId,
             'seq_type' => $messageEntity->getMessageType()->getName(),
-            // 收item方contentnotneedrecordnot读/already读/alreadyviewcolumn表
+            // 收item方contentnotneedrecordnot读/already读/alreadyviewcolumntable
             'content' => $content,
             'receive_list' => '',
             'delightful_message_id' => $messageEntity->getDelightfulMessageId(),
@@ -326,7 +326,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         }
         $time = date('Y-m-d H:i:s');
         $conversationId = $conversationEntity === null ? '' : $conversationEntity->getId();
-        // section约storagenullbetween,chatmessageinseq表not存specificcontent,only存messageid
+        // section约storagenullbetween,chatmessageinseqtablenot存specificcontent,only存messageid
         $content = $this->getSeqContent($messageEntity);
         $receiveList = new ReceiveList();
         if ($conversationEntity) {
@@ -342,9 +342,9 @@ class DelightfulChatDomainService extends AbstractDomainService
             'object_id' => $senderAccountId,
             'seq_id' => $seqId,
             'seq_type' => $messageEntity->getMessageType()->getName(),
-            // chatmessageseqonlyrecordnot读/already读/alreadyviewcolumn表
+            // chatmessageseqonlyrecordnot读/already读/alreadyviewcolumntable
             'content' => $content,
-            // receivepersoncolumn表
+            // receivepersoncolumntable
             'receive_list' => $receiveList->toArray(),
             'delightful_message_id' => $messageEntity->getDelightfulMessageId(),
             'message_id' => $seqId,
@@ -563,7 +563,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         $time = date('Y-m-d H:i:s');
         $content = $this->getSeqContent($messageEntity);
         $seqId = (string) IdGenerator::getSnowId();
-        // section约storagenullbetween,chatmessageinseq表not存specificcontent,only存messageid
+        // section约storagenullbetween,chatmessageinseqtablenot存specificcontent,only存messageid
         // according tosend方 extra,generatereceive方to应 extra
         $extra = $this->handlerReceiveExtra($receiveSeqDTO, $receiveUserConversationEntity);
         $seqData = [
@@ -573,7 +573,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             'object_id' => $userEntity['delightful_id'],
             'seq_id' => $seqId,
             'seq_type' => $receiveSeqDTO->getSeqType()->value,
-            // 收item方contentnotneedrecordnot读/already读/alreadyviewcolumn表
+            // 收item方contentnotneedrecordnot读/already读/alreadyviewcolumntable
             'content' => $content,
             'receive_list' => '',
             'delightful_message_id' => $messageEntity->getDelightfulMessageId(),
@@ -782,13 +782,13 @@ class DelightfulChatDomainService extends AbstractDomainService
             }
             Db::beginTransaction();
             try {
-                // ifthisismessagefirstversion,needbyfrontmessage copy oneshareto message_version 表middle,方便audit
+                // ifthisismessagefirstversion,needbyfrontmessage copy oneshareto message_version tablemiddle,方便audit
                 if (empty($oldMessageEntity->getCurrentVersionId())) {
                     $messageVersionEntity = (new DelightfulMessageVersionEntity())
                         ->setDelightfulMessageId($oldMessageEntity->getDelightfulMessageId())
                         ->setMessageType($oldMessageEntity->getMessageType()->value)
                         ->setMessageContent(Json::encode($oldMessageEntity->getContent()->toArray()));
-                    // 先firstversionmessage存入 message_version 表
+                    // 先firstversionmessage存入 message_version table
                     $this->delightfulChatMessageVersionsRepository->createMessageVersion($messageVersionEntity);
                     // 初timeedito clock,update收hairdoublehairmessageinitial seq,markmessagealreadyedit,方便front端渲染
                     $seqList = $this->delightfulSeqRepository->getBothSeqListByDelightfulMessageId($messageEntity->getDelightfulMessageId());
@@ -871,8 +871,8 @@ class DelightfulChatDomainService extends AbstractDomainService
      */
     public function createDelightfulMessageByAppClient(DelightfulMessageEntity $messageDTO, DelightfulConversationEntity $senderConversationEntity): DelightfulMessageEntity
     {
-        // byatdatabasedesignhaveissue,conversation表nothaverecord user  type,thereforethiswithinneedqueryone遍hairitem方userinfo
-        // todo conversation表shouldrecord user  type
+        // byatdatabasedesignhaveissue,conversationtablenothaverecord user  type,thereforethiswithinneedqueryone遍hairitem方userinfo
+        // todo conversationtableshouldrecord user  type
         $senderUserEntity = $this->delightfulUserRepository->getUserById($senderConversationEntity->getUserId());
         if ($senderUserEntity === null) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
@@ -915,8 +915,8 @@ class DelightfulChatDomainService extends AbstractDomainService
             if (! $messageStruct instanceof StreamMessageInterface || $messageStruct->getStreamOptions() === null) {
                 ExceptionBuilder::throw(ChatErrorCode::STREAM_MESSAGE_NOT_FOUND);
             }
-            // byatdatabasedesignhaveissue,conversation表nothaverecord user  type,thereforethiswithinneedqueryone遍hairitem方userinfo
-            // todo conversation表shouldrecord user  type
+            // byatdatabasedesignhaveissue,conversationtablenothaverecord user  type,thereforethiswithinneedqueryone遍hairitem方userinfo
+            // todo conversationtableshouldrecord user  type
             $senderUserEntity = $this->delightfulUserRepository->getUserById($senderConversationEntity->getUserId());
             if ($senderUserEntity === null) {
                 ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
@@ -950,7 +950,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             if ($messageEntity === null) {
                 ExceptionBuilder::throw(ChatErrorCode::STREAM_MESSAGE_NOT_FOUND);
             }
-            // givefrom己messagestreamgenerate序column,andcertainmessagereceivepersoncolumn表
+            // givefrom己messagestreamgenerate序column,andcertainmessagereceivepersoncolumntable
             $senderSeqDTO = (new DelightfulSeqEntity())
                 ->setAppMessageId($createStreamSeqDTO->getAppMessageId())
                 ->setExtra((new SeqExtra())->setTopicId($createStreamSeqDTO->getTopicId()));
@@ -1147,7 +1147,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * not读usercolumn表.
+     * not读usercolumntable.
      */
     private function getUnreadList(DelightfulConversationEntity $conversationEntity): array
     {

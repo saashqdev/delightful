@@ -51,7 +51,7 @@ class SeqAssembler
     }
 
     /**
-     * batchquantityreturncustomer端needSeq结构,toresultcollectionforce重new降序rowcolumn.
+     * batchquantityreturncustomer端needSeqstructure,toresultcollectionforce重new降序rowcolumn.
      * @return ClientSequenceResponse[]
      */
     public static function getClientSeqStructs(array $seqInfos, array $messageInfos): array
@@ -75,7 +75,7 @@ class SeqAssembler
     }
 
     /**
-     * Json streammessagecustomer端 seq 结构.
+     * Json streammessagecustomer端 seq structure.
      */
     public static function getClientJsonStreamSeqStruct(
         string $seqId,
@@ -111,7 +111,7 @@ class SeqAssembler
     }
 
     /**
-     * generatecustomer端needSeq结构.
+     * generatecustomer端needSeqstructure.
      */
     public static function getClientSeqStruct(
         DelightfulSeqEntity $seqEntity,
@@ -136,7 +136,7 @@ class SeqAssembler
             $referMessageId = $originSeqEntity->getReferMessageId();
         }
         $statusChangeSeqEntity = clone $originSeqEntity;
-        // messagereceive方notneedrecord收itempersoncolumn表,清nullthefieldinfo
+        // messagereceive方notneedrecord收itempersoncolumntable,清nullthefieldinfo
         $statusChangeSeqEntity->setReceiveList(null);
         $statusChangeSeqEntity->setSeqType($messageType);
         $seqData = $statusChangeSeqEntity->toArray();
@@ -208,13 +208,13 @@ class SeqAssembler
     }
 
     /**
-     * according toarraygetmessage结构.
+     * according toarraygetmessagestructure.
      */
     public static function getSeqStructByArray(string $messageTypeString, array $messageStructArray): MessageInterface
     {
         $messageTypeEnum = MessageAssembler::getMessageType($messageTypeString);
         if ($messageTypeEnum instanceof ChatMessageType) {
-            // chatmessageinseq表middlenotstoragespecificmessagedetail
+            // chatmessageinseqtablemiddlenotstoragespecificmessagedetail
             return new EmptyMessage();
         }
         try {
@@ -279,7 +279,7 @@ class SeqAssembler
         }
         $carbon = Carbon::parse($seqEntity->getCreatedAt());
         $messageTopicId = (string) $seqEntity->getExtra()?->getTopicId();
-        // generatecustomer端message结构
+        // generatecustomer端messagestructure
         $clientMessageData = [
             // service端generatemessage唯oneid,all局唯one.useatwithdraw,editmessage.
             'delightful_message_id' => $seqEntity->getDelightfulMessageId(),
@@ -300,7 +300,7 @@ class SeqAssembler
         ];
         $clientSeqMessage = new ClientMessage($clientMessageData);
 
-        // generatecustomer端seq结构
+        // generatecustomer端seqstructure
         $clientSequenceData = [
             // 序columnnumber归属账numberid
             'delightful_id' => $seqEntity->getObjectId(),

@@ -30,7 +30,7 @@ class DelightfulChatFileAppService extends AbstractAppService
      * iffilealready存inthenupdate,not存inthencreate.
      *
      * @param string $fileKey filekey
-     * @param DataIsolation $dataIsolation data隔离object
+     * @param DataIsolation $dataIsolation dataisolationobject
      * @param array $fileData filedata
      * @return array returncontainfileinfoarray
      */

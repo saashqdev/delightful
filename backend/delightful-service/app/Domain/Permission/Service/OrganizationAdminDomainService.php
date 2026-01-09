@@ -97,7 +97,7 @@ class OrganizationAdminDomainService
     {
         // indeleteorganizationadministratorrecord之front,先移exceptitsinpermissionsystemmiddle role_user associate
         try {
-            // createpermission隔离object,useat操asroleservice
+            // createpermissionisolationobject,useat操asroleservice
             $permissionIsolation = PermissionDataIsolation::create(
                 $dataIsolation->getCurrentOrganizationCode(),
                 $dataIsolation->getCurrentUserId() ?? ''

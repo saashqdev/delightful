@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->tinyInteger('provider_type')->default(0)->comment('servicequotienttype:0-normal,1-官方');
             $table->string('category', 20)->comment('category:llm-bigmodel,vlm-视觉model');
             $table->tinyInteger('status')->default(0)->comment('status:0-notenable,1-enable');
-            $table->tinyInteger('is_models_enable')->default(0)->comment('modelcolumn表get:0-notenable,1-enable');
+            $table->tinyInteger('is_models_enable')->default(0)->comment('modelcolumntableget:0-notenable,1-enable');
             $table->timestamps();
             $table->softDeletes();
             $table->index('category', 'idx_category');

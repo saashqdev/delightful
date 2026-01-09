@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // judge表whether存in
+        // judgetablewhether存in
         if (Schema::hasTable('delightful_chat_group_users')) {
             return;
         }
@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->unique(['group_id', 'user_id', 'organization_code'], 'uniq_idx_group_user');
             $table->softDeletes();
             $table->timestamps();
-            $table->comment('群member表');
+            $table->comment('群membertable');
         });
     }
 

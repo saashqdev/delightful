@@ -10,7 +10,7 @@ namespace App\Domain\Permission\Entity\ValueObject\Query;
 use App\Infrastructure\Core\AbstractQuery;
 
 /**
- * 子administratorcolumn表queryobject.
+ * 子administratorcolumntablequeryobject.
  *
  * useexample:
  * $query = new SubAdminQuery([

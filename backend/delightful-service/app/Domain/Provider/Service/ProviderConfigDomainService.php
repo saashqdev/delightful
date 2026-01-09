@@ -181,7 +181,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * according toIDarraygetconfiguration实bodycolumn表(not按organizationfilter,all局query).
+     * according toIDarraygetconfiguration实bodycolumntable(not按organizationfilter,all局query).
      *
      * @param array<int> $ids configurationIDarray
      * @return array<int, ProviderConfigEntity> returnbyidforkeyconfiguration实bodyarray

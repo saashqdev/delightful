@@ -62,7 +62,7 @@ class SSRFUtil
     }
 
     /**
-     * checkURLwhethersecurity(not抛exception,return布尔value).
+     * checkURLwhethersecurity(not抛exception,returnbooleanvalue).
      *
      * @param string $url needcheckURL
      * @param array $blackList blacklistIPor域名

@@ -59,8 +59,8 @@ class EasyInternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
             "questions": {
                 "type": "array",
                 "key": "questions",
-                "title": "userissuecolumn表",
-                "description": "userissuecolumn表",
+                "title": "userissuecolumntable",
+                "description": "userissuecolumntable",
                 "required": null,
                 "value": {
                     "type": "expression",

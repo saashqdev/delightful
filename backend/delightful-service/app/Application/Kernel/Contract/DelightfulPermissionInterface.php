@@ -39,7 +39,7 @@ interface DelightfulPermissionInterface
     public function generateAllPermissions(): array;
 
     /**
-     * getpermissiontree结构.
+     * getpermissiontreestructure.
      *
      * @param bool $isPlatformOrganization whetherplatformorganization,platformorganizationdown才contain platform platformresourcetree
      */

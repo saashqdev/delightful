@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 表存inthennotexecute
+        // table存inthennotexecute
         if (Schema::hasTable('delightful_api_premium_resources')) {
             return;
         }
@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->softDeletes();
             $table->index(['endpoint_id', 'id'], 'index_endpoint_id');
-            $table->comment('APIresource计费rule表,support总quantityorspeedrate计费');
+            $table->comment('APIresource计费ruletable,support总quantityorspeedrate计费');
         });
     }
 

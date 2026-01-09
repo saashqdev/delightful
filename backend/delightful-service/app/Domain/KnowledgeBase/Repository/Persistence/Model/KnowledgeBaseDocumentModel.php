@@ -63,7 +63,7 @@ class KnowledgeBaseDocumentModel extends Model
     protected string $primaryKey = 'id';
 
     /**
-     * can填充field.
+     * canpopulatefield.
      */
     protected array $fillable = [
         'organization_code',

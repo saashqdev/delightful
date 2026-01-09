@@ -106,7 +106,7 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
             "type": "array",
             "key": "attachments",
             "title": "attachmentarray",
-            "description": "传入filecolumn表array",
+            "description": "传入filecolumntablearray",
             "required": null,
             "value": null,
             "encryption": false,

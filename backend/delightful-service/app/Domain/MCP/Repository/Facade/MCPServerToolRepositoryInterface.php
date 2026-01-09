@@ -21,7 +21,7 @@ interface MCPServerToolRepositoryInterface
     public function getByMcpServerCode(MCPDataIsolation $dataIsolation, string $mcpServerCode): array;
 
     /**
-     * according toIDandmcpServerCode联合querytool.
+     * according toIDandmcpServerCodeunionquerytool.
      */
     public function getByIdAndMcpServerCode(MCPDataIsolation $dataIsolation, int $id, string $mcpServerCode): ?MCPServerToolEntity;
 

@@ -31,7 +31,7 @@ abstract class AbstractKnowledgeNodeRunner extends NodeRunner
                 // ifitselfthenalready经is id ,that么直接return
                 $knowledgeCode = $vectorDatabaseId;
             } elseif (is_array($vectorDatabaseId)) {
-                // thiswithin采use names groupitemshapetype,that么结构isonemulti-select
+                // thiswithin采use names groupitemshapetype,that么structureisonemulti-select
                 // only取theone id
                 $knowledgeCode = $vectorDatabaseId[0]['id'] ?? '';
             }

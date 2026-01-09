@@ -79,7 +79,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         // shouldhave 2 resource × 2 操as = 4 permission(rowexceptexport操as)
         $this->assertCount(4, $permissions);
 
-        // checkpermission结构
+        // checkpermissionstructure
         foreach ($permissions as $permission) {
             $this->assertArrayHasKey('permission_key', $permission);
             $this->assertArrayHasKey('resource', $permission);

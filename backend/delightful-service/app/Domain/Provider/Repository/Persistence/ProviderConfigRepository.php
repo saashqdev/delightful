@@ -200,7 +200,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * according toorganizationandservicequotienttypegetservicequotientconfigurationcolumn表.
+     * according toorganizationandservicequotienttypegetservicequotientconfigurationcolumntable.
      * newlogic:bydatabasemiddleactualconfigurationfor准,toatdatabasemiddlenothaveservicequotienttype,usetemplate补充
      * support多same provider_code configuration(organizationadministratorhand动add)
      * finalresulthandleo clock,官方organizationwillfilter掉Delightfulservicequotient,normalorganizationwillwillDelightfulservicequotient置top.
@@ -210,7 +210,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
      */
     public function getOrganizationProviders(string $organizationCode, Category $category, ?Status $status = null): array
     {
-        // 1. getallquantityservicequotienttemplatecolumn表
+        // 1. getallquantityservicequotienttemplatecolumntable
         $templateProviders = $this->providerTemplateRepository->getAllProviderTemplates($category);
 
         // 2. getorganizationdownalreadyconfigurationservicequotient
@@ -380,14 +380,14 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
      */
     private function getOrganizationProvidersFromDatabase(string $organizationCode, Category $category, ?Status $status = null): array
     {
-        // according tocategorygetservicequotientIDcolumn表
+        // according tocategorygetservicequotientIDcolumntable
         $serviceProviderIds = $this->getServiceProviderIdsByCategory($category);
 
         if (empty($serviceProviderIds)) {
             return [];
         }
 
-        // according toorganizationencodingandservicequotientIDcolumn表getconfiguration
+        // according toorganizationencodingandservicequotientIDcolumntablegetconfiguration
         $providerConfigQuery = $this->createConfigQuery()
             ->where('organization_code', $organizationCode)
             ->whereIn('service_provider_id', $serviceProviderIds)
@@ -443,7 +443,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * according tocategorygetservicequotientIDcolumn表.
+     * according tocategorygetservicequotientIDcolumntable.
      *
      * @param Category $category servicequotientcategory
      * @return array servicequotientIDarray

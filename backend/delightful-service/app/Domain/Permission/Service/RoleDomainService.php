@@ -33,14 +33,14 @@ readonly class RoleDomainService
     }
 
     /**
-     * queryrolecolumn表.
+     * queryrolecolumntable.
      * @return array{total: int, list: RoleEntity[]}
      */
     public function queries(PermissionDataIsolation $dataIsolation, Page $page, ?array $filters = null): array
     {
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // queryrolecolumn表
+        // queryrolecolumntable
         $result = $this->roleRepository->queries($organizationCode, $page, $filters);
 
         // batchquantityqueryuserID,avoid N+1 query
@@ -103,7 +103,7 @@ readonly class RoleDomainService
             }
         }
 
-        // willtagcolumn表write RoleEntity
+        // willtagcolumntablewrite RoleEntity
         if (! empty($permissionTags)) {
             $savingRoleEntity->setPermissionTag(array_values($permissionTags));
         }
@@ -202,7 +202,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * getuserrolecolumn表.
+     * getuserrolecolumntable.
      */
     public function getUserRoles(PermissionDataIsolation $dataIsolation, string $userId): array
     {
@@ -232,7 +232,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * getpermissionresourcetree结构.
+     * getpermissionresourcetreestructure.
      *
      * @param bool $isPlatformOrganization whetherplatformorganization
      */
@@ -249,7 +249,7 @@ readonly class RoleDomainService
      * 1. according tocurrentorganizationfindwhetheralreadyhave同名role;
      * 2. 若not存in,thencreatenewroleand赋予 DelightfulPermission::ALL_PERMISSIONS;
      * 3. 若存in,thenensureitscontain ALL_PERMISSIONS;
-     * 4. willuser ID column表add入roleassociateusercolumn表;
+     * 4. willuser ID columntableadd入roleassociateusercolumntable;
      * 5. saverole.
      *
      * exceptionbycall方fromlinehandle,avoidimpact主process.
@@ -278,7 +278,7 @@ readonly class RoleDomainService
             $roleEntity->setPermissions($permissions);
         }
 
-        // 3. willusercolumn表add入roleusercolumn表
+        // 3. willusercolumntableadd入roleusercolumntable
         $existingUserIds = $roleEntity->getUserIds();
         // mergeandgo重
         $mergedUserIds = array_unique(array_merge($existingUserIds, $userIds));

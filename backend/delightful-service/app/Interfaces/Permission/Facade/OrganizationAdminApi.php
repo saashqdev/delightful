@@ -27,7 +27,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     protected OrganizationAdminAppService $organizationAdminAppService;
 
     /**
-     * getorganizationadministratorcolumn表.
+     * getorganizationadministratorcolumntable.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::QUERY)]
     public function list(): array

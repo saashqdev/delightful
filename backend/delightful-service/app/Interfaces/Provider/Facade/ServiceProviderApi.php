@@ -275,7 +275,7 @@ class ServiceProviderApi extends AbstractApi
         }
         $data = $aggregateDTO->toArray();
 
-        // ifnotisnewformat结构,直接return
+        // ifnotisnewformatstructure,直接return
         if (! isset($data['provider_config'])) {
             return $data;
         }

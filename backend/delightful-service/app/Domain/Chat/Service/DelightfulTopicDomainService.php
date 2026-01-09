@@ -46,7 +46,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
 
     /**
      * customer端主动操asback,minutehairthis操asgivereceive方.
-     * noticethiso clockmessage结构(eachtypeidetc)allishairup方value.
+     * noticethiso clockmessagestructure(eachtypeidetc)allishairup方value.
      * @throws Throwable
      */
     public function dispatchMQTopicOperation(DelightfulSeqEntity $senderSeqEntity): ?DelightfulSeqEntity

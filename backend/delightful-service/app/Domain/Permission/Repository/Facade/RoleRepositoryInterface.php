@@ -28,7 +28,7 @@ interface RoleRepositoryInterface
     public function getByName(string $organizationCode, string $name): ?RoleEntity;
 
     /**
-     * queryrolecolumn表.
+     * queryrolecolumntable.
      * @return array{total: int, list: RoleEntity[]}
      */
     public function queries(string $organizationCode, Page $page, ?array $filters = null): array;
@@ -49,23 +49,23 @@ interface RoleRepositoryInterface
     public function removeUsers(string $organizationCode, int $roleId, array $userIds): void;
 
     /**
-     * getroleusercolumn表.
+     * getroleusercolumntable.
      */
     public function getRoleUsers(string $organizationCode, int $roleId): array;
 
     /**
-     * batchquantityget多roleusercolumn表.
+     * batchquantityget多roleusercolumntable.
      * returnformatfor [roleId => userId[]].
      *
      * @param string $organizationCode organizationencoding
-     * @param int[] $roleIds role ID column表
+     * @param int[] $roleIds role ID columntable
      *
      * @return array<int, array>
      */
     public function getRoleUsersMap(string $organizationCode, array $roleIds): array;
 
     /**
-     * getuserrolecolumn表.
+     * getuserrolecolumntable.
      */
     public function getUserRoles(string $organizationCode, string $userId): array;
 

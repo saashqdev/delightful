@@ -53,7 +53,7 @@ class ModeGroupDomainService
     }
 
     /**
-     * according tomodeIDgetminutegroupcolumn表.
+     * according tomodeIDgetminutegroupcolumntable.
      */
     public function getGroupsByModeId(ModeDataIsolation $dataIsolation, string $modeId): array
     {

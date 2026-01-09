@@ -529,7 +529,7 @@ sql;
     }
 
     /**
-     * batchquantityreturncustomer端needSeq结构.
+     * batchquantityreturncustomer端needSeqstructure.
      * @return ClientSequenceResponse[]
      */
     private function getMessagesBySeqList(array $seqList, Order $order = Order::Desc): array

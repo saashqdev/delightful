@@ -20,7 +20,7 @@ use Hyperf\Context\ApplicationContext;
 #[FlowNodeDefine(
     type: NodeType::CacheSet->value,
     code: NodeType::CacheSet->name,
-    name: '持久化datalibrary / datastorage',
+    name: 'persistencedatalibrary / datastorage',
     paramsConfig: CacheSetNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,

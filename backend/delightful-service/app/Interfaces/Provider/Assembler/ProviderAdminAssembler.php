@@ -84,7 +84,7 @@ class ProviderAdminAssembler
     ): ProviderConfigModelsDTO {
         $dto = new ProviderConfigModelsDTO();
 
-        // from Provider 填充基础information
+        // from Provider populate基础information
         $dto->setId($providerConfig->getId());
         $dto->setProviderCode($provider->getProviderCode());
         $dto->setName($provider->getName());
@@ -97,7 +97,7 @@ class ProviderAdminAssembler
         $dto->setTranslate(array_merge($provider->getTranslate(), $providerConfig->getTranslate()));
         $dto->setCreatedAt($provider->getCreatedAt()->format('Y-m-d H:i:s'));
 
-        // from ProviderConfig 填充configurationinformation
+        // from ProviderConfig populateconfigurationinformation
         $dto->setAlias($providerConfig->getAlias());
         $dto->setServiceProviderId($providerConfig->getServiceProviderId());
         $dto->setConfig($providerConfig->getConfig());

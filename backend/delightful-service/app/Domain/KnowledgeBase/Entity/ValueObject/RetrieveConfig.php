@@ -20,7 +20,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * currentconfigurationversion.
      *
-     * useatconfiguration结构变moreo clockcompatiblepropertyprocess
+     * useatconfigurationstructure变moreo clockcompatiblepropertyprocess
      */
     public const int CURRENT_VERSION = 1;
 
@@ -106,7 +106,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * configurationversion.
      *
-     * useatconfiguration结构变moreo clockcompatiblepropertyprocess
+     * useatconfigurationstructure变moreo clockcompatiblepropertyprocess
      */
     private int $version = self::CURRENT_VERSION;
 

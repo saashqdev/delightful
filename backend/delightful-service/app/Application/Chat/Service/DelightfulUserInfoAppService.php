@@ -32,7 +32,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
      * getcompleteuserinfo.
      *
      * @param string $userId userID
-     * @param ContactDataIsolation $dataIsolation data隔离object
+     * @param ContactDataIsolation $dataIsolation dataisolationobject
      * @return array containusercompleteinfoarray
      */
     public function getUserInfo(string $userId, ContactDataIsolation $dataIsolation): array
@@ -79,7 +79,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
      * batchquantitygetuserinfo.
      *
      * @param array $userIds userIDarray
-     * @param ContactDataIsolation $dataIsolation data隔离object
+     * @param ContactDataIsolation $dataIsolation dataisolationobject
      * @return array userinfoarray,keyforuserID
      */
     public function getBatchUserInfo(array $userIds, ContactDataIsolation $dataIsolation): array
@@ -107,7 +107,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
      * getusermaindepartmentinfo.
      *
      * @param string $userId userID
-     * @param ContactDataIsolation $dataIsolation data隔离object
+     * @param ContactDataIsolation $dataIsolation dataisolationobject
      * @return null|array maindepartmentinfo,ifnothavethenreturnnull
      */
     public function getUserPrimaryDepartment(string $userId, ContactDataIsolation $dataIsolation): ?array
@@ -120,7 +120,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
      * getdepartmentinfo.
      *
      * @param array $departmentUserEntities departmentuserassociateinfo
-     * @param ContactDataIsolation $dataIsolation data隔离object
+     * @param ContactDataIsolation $dataIsolation dataisolationobject
      * @return array departmentinfoarray
      */
     private function getDepartmentsInfo(array $departmentUserEntities, ContactDataIsolation $dataIsolation): array

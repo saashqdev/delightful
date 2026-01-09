@@ -20,7 +20,7 @@ return new class extends Migration {
         Schema::create('delightful_roles', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 255)->comment('rolename');
-            $table->json('permission_key')->nullable()->comment('rolepermissioncolumn表');
+            $table->json('permission_key')->nullable()->comment('rolepermissioncolumntable');
             $table->string('organization_code', 64)->comment('organizationencoding');
             $table->tinyInteger('is_display')->default(1)->comment('whethershow: 0=no, 1=is');
             $table->json('permission_tag')->nullable()->comment('permissiontag,useatfront端showcategory');
@@ -33,7 +33,7 @@ return new class extends Migration {
             // index
             $table->index(['organization_code'], 'idx_organization_code');
 
-            $table->comment('RBACrole表');
+            $table->comment('RBACroletable');
         });
     }
 

@@ -32,7 +32,7 @@ class AiAbilityDomainService
     /**
      * according tocan力codegetAIcan力实body(useat运lineo clock,notvalidationorganization).
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离info
+     * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @param AiAbilityCode $code can力code
      * @return AiAbilityEntity AIcan力实body
      * @throws Exception whencan力not存inornotenableo clockthrowexception
@@ -51,7 +51,7 @@ class AiAbilityDomainService
     /**
      * get所haveAIcan力list(nopagination).
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离info
+     * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @return array<AiAbilityEntity> AIcan力实bodylist
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array
@@ -65,7 +65,7 @@ class AiAbilityDomainService
     /**
      * paginationqueryAIcan力list.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离info
+     * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @param AiAbilityQuery $query queryitemitem
      * @param Page $page paginationinfo
      * @return array{total: int, list: array<AiAbilityEntity>}
@@ -78,7 +78,7 @@ class AiAbilityDomainService
     /**
      * updateAIcan力.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离info
+     * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @param AiAbilityCode $code can力code
      * @param array $data updatedata
      * @return bool whetherupdatesuccess
@@ -102,7 +102,7 @@ class AiAbilityDomainService
     /**
      * initializeAIcan力data.
      *
-     * @param ProviderDataIsolation $dataIsolation data隔离info
+     * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @return int initializequantity
      */
     public function initializeAbilities(ProviderDataIsolation $dataIsolation): int

@@ -299,7 +299,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * inside部setenablestatus(notconductbusinessrulecheck).
+     * insidedepartmentsetenablestatus(notconductbusinessrulecheck).
      * useatdatainitializeandinsidedepartment operationas,skipbusinessrulelimit.
      */
     public function setEnabledInternal(bool $enabled): void
@@ -379,14 +379,14 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * strong化memory(updatestrong化countandtime,enhance重wantproperty).
+     * strong化memory(updatestrong化countandtime,enhancereloadwantproperty).
      */
     public function reinforce(): void
     {
         ++$this->reinforcementCount;
         $this->lastReinforcedAt = new DateTime();
 
-        // strong化willenhance重wantproperty,buthaveuplimit
+        // strong化willenhancereloadwantproperty,buthaveuplimit
         $this->importance = min(1.0, $this->importance + 0.1);
     }
 
@@ -445,7 +445,7 @@ final class LongTermMemoryEntity extends AbstractEntity
      */
     protected function set(string $key, mixed $value): void
     {
-        // enabled fieldininitializeo clockuseinside部method,skipbusinessrulecheck
+        // enabled fieldininitializeo clockuseinsidedepartmentmethod,skipbusinessrulecheck
         if (strtolower($key) === 'enabled' && is_bool($value)) {
             $this->setEnabledInternal($value);
             return;

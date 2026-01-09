@@ -426,13 +426,13 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     {
         $departmentSums = [];
 
-        // 1) initialize:eachdepartmentfirstput intofrom身directly underpersoncount
+        // 1) initialize:eachdepartmentfirstput intofrombodydirectly underpersoncount
         foreach ($allDepartments as $department) {
             $deptId = (string) $department['department_id'];
             $departmentSums[$deptId] = (int) ($department['employee_sum'] ?? 0);
         }
 
-        // 2) frombottomtoup:按 level frombigtosmall,childdepartmentaccumulatedvalueaddtoparentdepartment
+        // 2) frombottomtoup:by level frombigtosmall,childdepartmentaccumulatedvalueaddtoparentdepartment
         usort($allDepartments, static function (array $a, array $b): int {
             return (int) ($b['level'] ?? 0) <=> (int) ($a['level'] ?? 0);
         });

@@ -12,7 +12,7 @@ use Hyperf\Contract\Arrayable;
 
 /**
  * fastspeedpropertyaccess基category
- * othercategorycaninheritthiscategory,convenient accesspropertysetandaccesscan力.
+ * othercategorycaninheritthiscategory,convenient accesspropertysetandaccesscancapability.
  */
 abstract class BaseObject extends UnderlineObjectJsonSerializable implements ArrayAccess, Arrayable
 {
@@ -62,11 +62,11 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
     {
         // propertyonesetwantissmallcamel case!not supportedotherformat!
         $humpKey = $this->getCamelizeValueFromCache($key);
-        // judgepropertywhetherexistsin,avoidcallnotexistsinpropertyo clock,死looptouchhair __get method
+        // judgepropertywhetherexistsin,avoidcallnotexistsinpropertyo clock,deadlooptouchhair __get method
         if (! property_exists($this, $humpKey)) {
             return null;
         }
-        // php methodnotregionminutesize写
+        // php methodnotregionminutesizewrite
         $methodName = 'get' . $humpKey;
         if (method_exists($this, $methodName)) {
             return $this->{$methodName}($humpKey);
@@ -78,11 +78,11 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
     {
         // propertyonesetwantissmallcamel case!not supportedotherformat!
         $humpKey = $this->getCamelizeValueFromCache($key);
-        // judgepropertywhetherexistsin,avoidcallnotexistsinpropertyo clock,死looptouchhair __set method
+        // judgepropertywhetherexistsin,avoidcallnotexistsinpropertyo clock,deadlooptouchhair __set method
         if (! property_exists($this, $humpKey)) {
             return;
         }
-        // php methodnotregionminutesize写
+        // php methodnotregionminutesizewrite
         $methodName = 'set' . $humpKey;
         if (method_exists($this, $methodName)) {
             $this->{$methodName}($value);

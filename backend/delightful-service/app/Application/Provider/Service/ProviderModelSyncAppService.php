@@ -29,7 +29,7 @@ use function Hyperf\Support\retry;
 
 /**
  * servicequotientmodelsyncapplicationservice.
- * responsiblefromoutside部APIpullmodelandsynctoOfficialservicequotient.
+ * responsiblefromoutsidedepartmentAPIpullmodelandsynctoOfficialservicequotient.
  */
 class ProviderModelSyncAppService
 {
@@ -46,8 +46,8 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * fromoutside部APIsyncmodel.
-     * whenservicequotientconfigurationcreateorupdateo clock,ifisOfficialservicequotientandisofficialorganization,thenfromoutside部APIpullmodel.
+     * fromoutsidedepartmentAPIsyncmodel.
+     * whenservicequotientconfigurationcreateorupdateo clock,ifisOfficialservicequotientandisofficialorganization,thenfromoutsidedepartmentAPIpullmodel.
      */
     public function syncModelsFromExternalApi(
         ProviderConfigEntity $providerConfigEntity,
@@ -66,7 +66,7 @@ class ProviderModelSyncAppService
             return;
         }
 
-        $this->logger->info('startfromoutside部APIsyncmodel', [
+        $this->logger->info('startfromoutsidedepartmentAPIsyncmodel', [
             'config_id' => $providerConfigEntity->getId(),
             'organization_code' => $organizationCode,
             'provider_code' => $provider->getProviderCode()->value,
@@ -96,11 +96,11 @@ class ProviderModelSyncAppService
             // 4. according tocategorycertaintypeparameter
             $types = $this->getModelTypesByCategory($provider->getCategory());
 
-            // 5. fromoutside部APIpullmodel
+            // 5. fromoutsidedepartmentAPIpullmodel
             $models = $this->fetchModelsFromApi($url, $apiKey, $types, $language);
 
             if (empty($models)) {
-                $this->logger->warning('notfromoutside部APIgettomodel', [
+                $this->logger->warning('notfromoutsidedepartmentAPIgettomodel', [
                     'config_id' => $providerConfigEntity->getId(),
                     'url' => $url,
                 ]);
@@ -110,12 +110,12 @@ class ProviderModelSyncAppService
             // 6. syncmodeltodatabase
             $this->syncModelsToDatabase($dataIsolation, $providerConfigEntity, $models, $language);
 
-            $this->logger->info('fromoutside部APIsyncmodelcomplete', [
+            $this->logger->info('fromoutsidedepartmentAPIsyncmodelcomplete', [
                 'config_id' => $providerConfigEntity->getId(),
                 'model_count' => count($models),
             ]);
         } catch (Throwable $e) {
-            $this->logger->error('fromoutside部APIsyncmodelfail', [
+            $this->logger->error('fromoutsidedepartmentAPIsyncmodelfail', [
                 'config_id' => $providerConfigEntity->getId(),
                 'error' => $e->getMessage(),
                 'file' => $e->getFile(),
@@ -138,7 +138,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * fromoutside部APIpullmodel.
+     * fromoutsidedepartmentAPIpullmodel.
      */
     private function fetchModelsFromApi(string $url, string $apiKey, array $types, string $language): array
     {
@@ -167,7 +167,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * calloutside部APIgetmodellist.
+     * calloutsidedepartmentAPIgetmodellist.
      */
     private function callModelsApi(string $apiUrl, string $apiKey, string $type, string $language): array
     {

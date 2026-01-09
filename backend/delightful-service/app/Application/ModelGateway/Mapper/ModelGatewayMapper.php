@@ -35,7 +35,7 @@ use InvalidArgumentException;
 use Throwable;
 
 /**
- * setprojectitselfmultipleset ModelGatewayMapper - finalall部convertfor odin model parameterformat.
+ * setprojectitselfmultipleset ModelGatewayMapper - finalalldepartmentconvertfor odin model parameterformat.
  */
 class ModelGatewayMapper extends ModelMapper
 {
@@ -80,7 +80,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * inside部use chat o clock,onesetisusethemethod.
+     * insidedepartmentuse chat o clock,onesetisusethemethod.
      * willfromauto replaceforthisgroundproxymodel.
      */
     public function getChatModelProxy(BaseDataIsolation $dataIsolation, string $model, bool $useOfficialAccessToken = false): DelightfulAILocalModel
@@ -97,7 +97,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * inside部use embedding o clock,onesetisusethemethod.
+     * insidedepartmentuse embedding o clock,onesetisusethemethod.
      * willfromauto replaceforthisgroundproxymodel.
      */
     public function getEmbeddingModelProxy(BaseDataIsolation $dataIsolation, string $model): DelightfulAILocalModel
@@ -289,13 +289,13 @@ class ModelGatewayMapper extends ModelMapper
                     }
                     break;
                 default:
-                    // ifnothavefingersettype,thenall部add
+                    // ifnothavefingersettype,thenalldepartmentadd
                     break;
             }
             $list[$name] = new OdinModel(key: $name, model: $model, attributes: $this->attributes[$name]);
         }
 
-        // getcurrentset餐downcanusemodel
+        // getcurrentsetmealdowncanusemodel
         $availableModelIds = $dataIsolation->getSubscriptionManager()->getAvailableModelIds($modelType);
 
         // needcontainofficialorganizationdata
@@ -397,14 +397,14 @@ class ModelGatewayMapper extends ModelMapper
         $implementationConfig = $providerEntity->getProviderCode()->getImplementationConfig($providerConfigItem, $providerModelEntity->getModelVersion());
 
         if ($providerEntity->getProviderType()->isCustom()) {
-            // customizeservicequotient統onedisplayalias,ifnothavealiasthendisplay“customizeservicequotient”(needconsidermultiplelanguage)
+            // customizeservicequotient统onedisplayalias,ifnothavealiasthendisplay“customizeservicequotient”(needconsidermultiplelanguage)
             $providerName = $providerConfigEntity->getLocalizedAlias($providerDataIsolation->getLanguage());
         } else {
-            // insidesetservicequotient統onedisplay servicequotientname,notusedisplayalias(needconsidermultiplelanguage)
+            // insidesetservicequotient统onedisplay servicequotientname,notusedisplayalias(needconsidermultiplelanguage)
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 
-        // ifnotisofficialorganization,butismodelisofficialorganization,統onedisplay Delightful
+        // ifnotisofficialorganization,butismodelisofficialorganization,统onedisplay Delightful
         if (! $providerDataIsolation->isOfficialOrganization()
             && in_array($providerConfigEntity->getOrganizationCode(), $providerDataIsolation->getOfficialOrganizationCodes())) {
             $providerName = 'Delightful';
@@ -484,7 +484,7 @@ class ModelGatewayMapper extends ModelMapper
             return null;
         }
 
-        // checkcurrentset餐whetherhavethismodelusepermission - itemfrontonly LLM modelhavethislimit
+        // checkcurrentsetmealwhetherhavethismodelusepermission - itemfrontonly LLM modelhavethislimit
         if ($providerModelEntity->getModelType()->isLLM()) {
             if (! $dataIsolation->isOfficialOrganization() && ! $dataIsolation->getSubscriptionManager()->isValidModelAvailable($providerModelEntity->getModelId(), $modelType)) {
                 $this->logger->info('modelnotincanusenamesingle', ['model' => $providerModelEntity->getModelId(), 'model_type' => $modelType?->value]);

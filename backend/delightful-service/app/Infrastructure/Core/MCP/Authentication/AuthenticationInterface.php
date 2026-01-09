@@ -11,12 +11,12 @@ use App\Infrastructure\Core\MCP\Exception\InvalidParamsException;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * MCP身shareverifyinterface.
+ * MCPbodyshareverifyinterface.
  */
 interface AuthenticationInterface
 {
     /**
-     * verifyrequest身shareinfo.
+     * verifyrequestbodyshareinfo.
      *
      * @throws InvalidParamsException whenverifyfailo clockthrow
      */

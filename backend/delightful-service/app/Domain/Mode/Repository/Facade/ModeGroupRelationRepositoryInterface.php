@@ -13,34 +13,34 @@ use App\Domain\Mode\Entity\ModeGroupRelationEntity;
 interface ModeGroupRelationRepositoryInterface
 {
     /**
-     * according toIDgetassociateclose系.
+     * according toIDgetassociateclosesystem.
      */
     public function findById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeGroupRelationEntity;
 
     /**
-     * according tomodeIDget haveassociateclose系.
+     * according tomodeIDget haveassociateclosesystem.
      * @return ModeGroupRelationEntity[]
      */
     public function findByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;
 
     /**
-     * according tominutegroupIDgetassociateclose系.
+     * according tominutegroupIDgetassociateclosesystem.
      * @return ModeGroupRelationEntity[]
      */
     public function findByGroupId(ModeDataIsolation $dataIsolation, int|string $groupId): array;
 
     /**
-     * saveassociateclose系.
+     * saveassociateclosesystem.
      */
     public function save(ModeGroupRelationEntity $relationEntity): ModeGroupRelationEntity;
 
     /**
-     * according tominutegroupIDdeleteassociateclose系.
+     * according tominutegroupIDdeleteassociateclosesystem.
      */
     public function deleteByGroupId(ModeDataIsolation $dataIsolation, int|string $groupId): bool;
 
     /**
-     * according tomodeIDdelete haveassociateclose系.
+     * according tomodeIDdelete haveassociateclosesystem.
      */
     public function deleteByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): bool;
 
@@ -50,7 +50,7 @@ interface ModeGroupRelationRepositoryInterface
     public function batchSave(ModeDataIsolation $dataIsolation, array $relationEntities);
 
     /**
-     * according tomultiplemodeIDbatchquantitygetassociateclose系.
+     * according tomultiplemodeIDbatchquantitygetassociateclosesystem.
      * @param int[]|string[] $modeIds
      * @return ModeGroupRelationEntity[]
      */

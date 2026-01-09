@@ -33,7 +33,7 @@ class VolcengineArkAPI
     }
 
     /**
-     * generategraphlike - 完alltransparent transmissionpayloadgiveAPI.
+     * generategraphlike - completealltransparent transmissionpayloadgiveAPI.
      */
     public function generateImage(array $payload): array
     {

@@ -161,7 +161,7 @@ class ToolsExecutor extends AbstractTool
                 return null;
             }
             $toolsExecutor->execute();
-            // sectionpointinside部exceptionin node  debug informationmiddlerecord
+            // sectionpointinsidedepartmentexceptionin node  debug informationmiddlerecord
             foreach ($toolFlow->getNodes() as $node) {
                 if ($node->getNodeDebugResult() && ! $node->getNodeDebugResult()->isSuccess()) {
                     $logger->warning(
@@ -248,7 +248,7 @@ class ToolsExecutor extends AbstractTool
         if (! $form) {
             return;
         }
-        // 暫o clockonlyprocess object data
+        // temporaryo clockonlyprocess object data
         if (! $form->getType()->isObject()) {
             return;
         }

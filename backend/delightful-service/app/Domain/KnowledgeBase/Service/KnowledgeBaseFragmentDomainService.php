@@ -74,7 +74,7 @@ readonly class KnowledgeBaseFragmentDomainService
         $savingDelightfulFlowKnowledgeFragmentEntity->setDocumentCode($knowledgeBaseDocumentEntity->getCode());
         $savingDelightfulFlowKnowledgeFragmentEntity->setCreator($dataIsolation->getCurrentUserId());
 
-        // ifhavebusinessid,andandbusiness ID existsin,alsocan相whenatupdate
+        // ifhavebusinessid,andandbusiness ID existsin,alsocanrelatedwhenatupdate
         $knowledgeBaseFragmentEntity = null;
         if (! empty($savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId()) && empty($savingDelightfulFlowKnowledgeFragmentEntity->getId())) {
             $knowledgeBaseFragmentEntity = $this->knowledgeBaseFragmentRepository->getByBusinessId($dataIsolation, $savingDelightfulFlowKnowledgeFragmentEntity->getKnowledgeCode(), $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId());
@@ -158,7 +158,7 @@ readonly class KnowledgeBaseFragmentDomainService
     }
 
     /**
-     * according to point_id get have相closeslicesegment,按 version reverse ordersort.
+     * according to point_id get haverelatedcloseslicesegment,by version reverse ordersort.
      * @return array<KnowledgeBaseFragmentEntity>
      */
     public function getFragmentsByPointId(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, string $pointId, bool $lock = false): array

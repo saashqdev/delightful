@@ -49,7 +49,7 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
             }
             $organizationCode = $executionData->getDataIsolation()->getCurrentOrganizationCode();
 
-            // permissionissue,itemfrontonlyallowoperationasthisprocessproducefile.因forcurrenttoolalsoisone flow, byneedgetparentprocess code
+            // permissionissue,itemfrontonlyallowoperationasthisprocessproducefile.factorforcurrenttoolalsoisone flow, byneedgetparentprocess code
             $name = $executionData->getParentFlowCode() . '/' . ltrim($name, '/');
 
             $fileDomain = di(FileDomainService::class);

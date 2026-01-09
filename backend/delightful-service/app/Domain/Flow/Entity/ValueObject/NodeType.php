@@ -10,7 +10,7 @@ namespace App\Domain\Flow\Entity\ValueObject;
 /**
  * sectionpointtype
  * 1 ~ 99 atomicsectionpoint
- * 100 ~ 199 group合sectionpoint硬encodingimplement.
+ * 100 ~ 199 group合sectionpointhardencodingimplement.
  */
 enum NodeType: int
 {
@@ -145,7 +145,7 @@ enum NodeType: int
     case VariableArrayPush = 23;
 
     /*
-     * 意graphidentify
+     * intentiongraphidentify
      */
     case IntentRecognition = 24;
 
@@ -170,7 +170,7 @@ enum NodeType: int
     case UserSearch = 28;
 
     /**
-     * etc待message.
+     * etcpendingmessage.
      */
     case WaitMessage = 29;
 

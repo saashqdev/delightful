@@ -373,7 +373,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     "work_number": {
                         "type": "string",
                         "key": "work_number",
-                        "title": "工number",
+                        "title": "workernumber",
                         "description": "",
                         "items": null,
                         "properties": null,
@@ -600,7 +600,7 @@ JSON;
                         "type": "string",
                         "key": "work_number",
                         "sort": 4,
-                        "title": "工number",
+                        "title": "workernumber",
                         "description": "",
                         "items": null,
                         "properties": null,

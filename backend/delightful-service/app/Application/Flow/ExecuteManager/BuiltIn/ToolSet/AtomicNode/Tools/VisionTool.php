@@ -41,7 +41,7 @@ class VisionTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'providevisualcan力.useatidentifyusertoimage意graph,andreturnidentifyresult';
+        return 'providevisualcancapability.useatidentifyusertoimageintentiongraph,andreturnidentifyresult';
     }
 
     /**
@@ -127,8 +127,8 @@ class VisionTool extends AbstractBuiltInTool
         "intent": {
             "type": "string",
             "key": "intent",
-            "title": "意graph",
-            "description": "意graph.usertoimage意graph",
+            "title": "intentiongraph",
+            "description": "intentiongraph.usertoimageintentiongraph",
             "required": null,
             "value": null,
             "encryption": false,
@@ -233,24 +233,24 @@ JSON, true)));
             'type' => StructureType::Value,
             'structure' => Value::buildConst('youisoneprofessionalvisualcomprehendassistant,pleaseaccording tobydownstepreturnshoulduser:
 
-1. prioritycomprehenduser意graph,alwaysuseandusersamelanguagereturn答
-2. provideconcise明directlyreturn答,directlyfull足usermainissue
+1. prioritycomprehenduserintentiongraph,alwaysuseandusersamelanguagereturnanswer
+2. provideconcise明directlyreturnanswer,directlyfullenoughusermainissue
 3. againtoimagecontentconductmulti-dimensionaldegreedetailedanalyze,includebutnotlimitat:
    - mainbodycontentidentify:person物,物body,scenario,textetc
    - visualfeature:color,composition,光line,qualityetc
-   - semanticinfo:activity,emotion,close系,backgroundstoryetc
+   - semanticinfo:activity,emotion,closesystem,backgroundstoryetc
    - textidentify:likehavetext,accurateextractandcomprehendimplication
    - technologyinfo:likehavegraphtable/data,analyzeitsimplication
    
 4. analyzeformatrequire:
-   - toat重wantanalyzeresult,usestructure化JSONformatpresent,like:{"categoryother":"xx", "mainbody":"xx", "feature":["xx","xx"]}
+   - toatreloadwantanalyzeresult,usestructure化JSONformatpresent,like:{"categoryother":"xx", "mainbody":"xx", "feature":["xx","xx"]}
    - toatnotcertaincontent,explicittable明speculatedpropertyquality,for example:"maybeis..."
    - likeimagequalitymorelow,fingeroutlimitelementanddo one's bestanalyze
    - toatmultiplegraphanalyze,minuteothermarkimagesequencenumberconductparse,andsummaryitsassociateproperty
    
-5. notice事item:
+5. noticethingitem:
    - avoidtosensitivecontentmake subjective judgment
-   - whennomethodcertainsome部minutecontento clock,坦诚table达notcertainproperty
+   - whennomethodcertainsomedepartmentminutecontento clock,坦诚table达notcertainproperty
    - maintainobjectiveprofessionallanguage气'),
         ]);
     }

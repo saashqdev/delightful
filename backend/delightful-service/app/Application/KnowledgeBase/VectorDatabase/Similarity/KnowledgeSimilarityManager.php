@@ -107,7 +107,7 @@ class KnowledgeSimilarityManager
                     $knowledgeBaseEntity,
                     $pointIds
                 );
-                // alsoneeddeletesame point_id content,因foritemfrontallowduplicate
+                // alsoneeddeletesame point_id content,factorforitemfrontallowduplicate
                 $knowledgeBaseEntity->getVectorDBDriver()->removeByFilter(
                     $knowledgeBaseEntity->getCollectionName(),
                     $filter->getMetadataFilter(),

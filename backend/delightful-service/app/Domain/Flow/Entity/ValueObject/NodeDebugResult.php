@@ -276,7 +276,7 @@ class NodeDebugResult extends AbstractValueObject
     public function toArray(): array
     {
         $loopDebugResults = $this->loopDebugResults ?? [];
-        // havemultipleresulto clock,才needhave loop_debug_results
+        // havemultipleresulto clock,onlyneedhave loop_debug_results
         if (count($loopDebugResults) <= 1) {
             $loopDebugResults = [];
         }
@@ -303,7 +303,7 @@ class NodeDebugResult extends AbstractValueObject
     public function toDesensitizationArray(): array
     {
         $loopDebugResults = $this->loopDebugResults ?? [];
-        // havemultipleresulto clock,才needhave loop_debug_results
+        // havemultipleresulto clock,onlyneedhave loop_debug_results
         if (count($loopDebugResults) <= 1) {
             $loopDebugResults = [];
         }

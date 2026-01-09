@@ -280,7 +280,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * getenterpriseinside部assistant.
+     * getenterpriseinsidedepartmentassistant.
      * @param DelightfulUserAuthorization $authorization
      */
     public function getAgentsByOrganizationPage(Authenticatable $authorization, int $page, int $pageSize, string $agentName): array
@@ -426,7 +426,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
         $agentVersionDTO->check();
 
-        // onlypublishtoenterprise才fromselfgiveadd
+        // onlypublishtoenterpriseonlyfromselfgiveadd
         if ($agentVersionDTO->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
             $visibilityConfig = $agentVersionDTO->getVisibilityConfig();
             if (! $visibilityConfig) {
@@ -632,7 +632,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $delightfulFlowVersionEntity = $this->delightfulFlowVersionDomainService->show($flowDataIsolation, $delightfulAgentVersionEntity->getFlowCode(), $delightfulAgentVersionEntity->getFlowVersion());
             $delightfulFlowEntity = $delightfulFlowVersionEntity->getDelightfulFlow();
 
-            // onlypublish才willhavestatus
+            // onlypublishonlywillhavestatus
             $friendQueryDTO = new FriendQueryDTO();
             $friendQueryDTO->setAiCodes([$delightfulAgentVersionEntity->getFlowCode()]);
 
@@ -889,12 +889,12 @@ class DelightfulAgentAppService extends AbstractAppService
         // preparebasicconfiguration
         $config = [
             'agent_name' => 'Magicassistant',
-            'agent_description' => 'Iwillreturn答youone切',
+            'agent_description' => 'Iwillreturnansweryouone切',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],
         ];
 
-        // call通useinitializemethod
+        // callcommonuseinitializemethod
         $this->initAgentFromConfig($authorization, $config);
     }
 
@@ -917,13 +917,13 @@ class DelightfulAgentAppService extends AbstractAppService
         // preparebasicconfiguration
         $config = [
             'agent_name' => 'text generationgraphhelphand',
-            'agent_description' => 'onestrongbigAItextgenerategraphlikehelphand,canaccording to您descriptioncreateexquisitegraphlike.',
+            'agent_description' => 'onestrongbigAItextgenerategraphlikehelphand,canaccording toyoudescriptioncreateexquisitegraphlike.',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],
             'instruct' => $loadPresetConfig['instructs'],
         ];
 
-        // call通useinitializemethod
+        // callcommonuseinitializemethod
         $this->initAgentFromConfig($authorization, $config);
     }
 
@@ -950,7 +950,7 @@ class DelightfulAgentAppService extends AbstractAppService
             'flow' => $this->loadPresetConfig('document', ['modelName' => $modelName])['flow'],
         ];
 
-        // call通useinitializemethod
+        // callcommonuseinitializemethod
         $this->initAgentFromConfig($authorization, $config);
     }
 
@@ -1060,14 +1060,14 @@ class DelightfulAgentAppService extends AbstractAppService
         if (empty($directDepartmentIds)) {
             $userDepartmentIds = [];
         } else {
-            // batchquantityget have相closedepartmentinfo
+            // batchquantityget haverelatedclosedepartmentinfo
             $departments = $this->delightfulDepartmentDomainService->getDepartmentByIds($dataIsolation, $directDepartmentIds);
             $departmentsMap = [];
             foreach ($departments as $department) {
                 $departmentsMap[$department->getDepartmentId()] = $department;
             }
 
-            // handledepartmentlayerlevelclose系
+            // handledepartmentlayerlevelclosesystem
             $allDepartmentIds = [];
             foreach ($directDepartmentIds as $departmentId) {
                 if (isset($departmentsMap[$departmentId])) {
@@ -1081,20 +1081,20 @@ class DelightfulAgentAppService extends AbstractAppService
                 $allDepartmentIds[] = [$departmentId];
             }
             $allDepartmentIds = array_merge(...$allDepartmentIds);
-            // go重,ensure havedepartmentIDuniqueone
+            // goreload,ensure havedepartmentIDuniqueone
             $userDepartmentIds = array_unique($allDepartmentIds);
         }
 
         foreach ($agentVersions as $agentVersion) {
             $visibilityConfig = $agentVersion->getVisibilityConfig();
 
-            // all部visibleornovisiblepropertyconfiguration
+            // alldepartmentvisibleornovisiblepropertyconfiguration
             if ($visibilityConfig === null || $visibilityConfig->getVisibilityType() === VisibilityType::All->value) {
                 $visibleAgentVersions[] = $agentVersion;
                 continue;
             }
 
-            // specificvisible - this处no需againtimecheckvisibilityType,因forfrontsurfacealreadyrowexceptnullandAlltype
+            // specificvisible - this处noneedagaintimecheckvisibilityType,factorforfrontsurfacealreadyrowexceptnullandAlltype
             // 剩downonlymaybeisSPECIFICtype
             if ($this->isUserVisible($visibilityConfig, $currentUserId, $userDepartmentIds)) {
                 $visibleAgentVersions[] = $agentVersion;
@@ -1478,7 +1478,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
     /**
      * will DelightfulAgentEntity convertfor DelightfulAgentVersionEntity.
-     * useathandle私personassistantnothavepublishversionsituation.
+     * useathandleprivatepersonassistantnothavepublishversionsituation.
      *
      * @param DelightfulAgentEntity $agentEntity assistantactualbody
      * @return DelightfulAgentVersionEntity assistantversionactualbody
@@ -1498,7 +1498,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $delightfulAgentVersionEntity->setInstructs($agentEntity->getInstructs());
         $delightfulAgentVersionEntity->setStartPage($agentEntity->getStartPage());
 
-        // version相closeinfo设fornull,indicatenothavepublishversion
+        // versionrelatedcloseinfosetfornull,indicatenothavepublishversion
         $delightfulAgentVersionEntity->setVersionNumber(null);
         $delightfulAgentVersionEntity->setVersionDescription(null);
 

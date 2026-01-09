@@ -41,7 +41,7 @@ class ModeDomainService
     }
 
     /**
-     * according toIDgetmodetypeaggregateroot(containmodetypedetail,group,modelclose系).
+     * according toIDgetmodetypeaggregateroot(containmodetypedetail,group,modelclosesystem).
      */
     public function getModeDetailById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeAggregate
     {
@@ -223,7 +223,7 @@ class ModeDomainService
             $this->groupRepository->batchSave($dataIsolation, $newGroupEntities);
         }
 
-        // batchquantitybuildgroupactualbodyandclose系實body
+        // batchquantitybuildgroupactualbodyandclosesystem實body
         $relationEntities = [];
 
         foreach ($modeAggregate->getGroupAggregates() as $groupAggregate) {
@@ -238,7 +238,7 @@ class ModeDomainService
             }
         }
 
-        // batchquantitysaveclose系
+        // batchquantitysaveclosesystem
         if (! empty($relationEntities)) {
             $this->relationRepository->batchSave($dataIsolation, $relationEntities);
         }
@@ -258,14 +258,14 @@ class ModeDomainService
             return [];
         }
 
-        // theone步:establishfollowclose系mapping followMap[followpersonID] = befollowpersonID
+        // theonestep:establishfollowclosesystemmapping followMap[followpersonID] = befollowpersonID
         $followMap = [];
         $modeIds = [];
 
         foreach ($modes as $mode) {
             $modeIds[] = $mode->getId();
 
-            // ifisfollowmodetype,establishmappingclose系
+            // ifisfollowmodetype,establishmappingclosesystem
             if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
                 $followMap[$mode->getId()] = $mode->getFollowModeId();
                 $modeIds[] = $mode->getFollowModeId(); // alsowantreceivecollectionbefollowmodetypeID
@@ -273,11 +273,11 @@ class ModeDomainService
         }
         $modeIds = array_unique($modeIds);
 
-        // thetwo步:batchquantityget havegroupandclose系
+        // thetwostep:batchquantityget havegroupandclosesystem
         $allGroups = $this->groupRepository->findByModeIds($dataIsolation, $modeIds);
         $allRelations = $this->relationRepository->findByModeIds($dataIsolation, $modeIds);
 
-        // thethree步:by modetypeIDgroupdata
+        // thethreestep:by modetypeIDgroupdata
         $groupsByModeId = [];
         foreach ($allGroups as $group) {
             $groupsByModeId[$group->getModeId()][] = $group;
@@ -288,7 +288,7 @@ class ModeDomainService
             $relationsByModeId[$relation->getModeId()][] = $relation;
         }
 
-        // thefour步:buildaggregaterootarray
+        // thefourstep:buildaggregaterootarray
         $aggregates = [];
         foreach ($modes as $mode) {
             $modeId = $mode->getId();
@@ -302,7 +302,7 @@ class ModeDomainService
             // buildgroupaggregaterootarray
             $groupAggregates = [];
             foreach ($groups as $group) {
-                // getthegroupdown haveassociateclose系
+                // getthegroupdown haveassociateclosesystem
                 $groupRelations = array_filter($relations, fn ($relation) => $relation->getGroupId() === $group->getId());
                 usort($groupRelations, fn ($a, $b) => $a->getSort() <=> $b->getSort());
 
@@ -320,7 +320,7 @@ class ModeDomainService
      */
     private function buildModeAggregate(ModeDataIsolation $dataIsolation, ModeEntity $mode): ModeAggregate
     {
-        // getgroupandassociateclose系
+        // getgroupandassociateclosesystem
         $groups = $this->groupRepository->findByModeId($dataIsolation, $mode->getId());
         $relations = $this->relationRepository->findByModeId($dataIsolation, $mode->getId());
 
@@ -332,7 +332,7 @@ class ModeDomainService
                 ExceptionBuilder::throw(ModeErrorCode::VALIDATE_FAILED);
             }
 
-            // getthegroupdown haveassociateclose系
+            // getthegroupdown haveassociateclosesystem
             $groupRelations = array_filter($relations, fn ($relation) => $relation->getGroupId() === $group->getId());
             usort($groupRelations, fn ($a, $b) => $a->getSort() <=> $b->getSort());
 
@@ -374,9 +374,9 @@ class ModeDomainService
     }
 
     /**
-     * according tofollowclose系mappingrecursionfindfinalsource modetypeID.
+     * according tofollowclosesystemmappingrecursionfindfinalsource modetypeID.
      * @param int $modeId currentmodetypeID
-     * @param array $followMap followclose系mapping [followpersonID => befollowpersonID]
+     * @param array $followMap followclosesystemmapping [followpersonID => befollowpersonID]
      * @param array $visited preventloopfollow
      * @return int finalsource modetypeID
      */
@@ -387,7 +387,7 @@ class ModeDomainService
             return $modeId;
         }
 
-        // ifthemodetypenothavefollowclose系,instructionitthenisfinalsource
+        // ifthemodetypenothavefollowclosesystem,instructionitthenisfinalsource
         if (! isset($followMap[$modeId])) {
             return $modeId;
         }

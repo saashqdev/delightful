@@ -87,7 +87,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * checkuserwhether拥havefingersetpermission.
+     * checkuserwhetherownhavefingersetpermission.
      */
     public function hasPermission(PermissionDataIsolation $dataIsolation, string $userId, string $permissionKey): bool
     {

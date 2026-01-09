@@ -14,21 +14,21 @@ use App\Domain\Provider\Entity\ValueObject\Query\AiAbilityQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 
 /**
- * AI can力storageinterface.
+ * AI cancapabilitystorageinterface.
  */
 interface AiAbilityRepositoryInterface
 {
     /**
-     * according tocan力codegetAIcanimplementationbody.
+     * according tocancapabilitycodegetAIcanimplementationbody.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
-     * @param AiAbilityCode $code can力code
+     * @param AiAbilityCode $code cancapabilitycode
      * @return null|AiAbilityEntity AIcanimplementationbody
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity;
 
     /**
-     * get haveAIcan力list.
+     * get haveAIcancapabilitylist.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @return array<AiAbilityEntity> AIcanimplementationbodylist
@@ -39,7 +39,7 @@ interface AiAbilityRepositoryInterface
      * according toIDgetAIcanimplementationbody.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
-     * @param int $id can力ID
+     * @param int $id cancapabilityID
      * @return null|AiAbilityEntity AIcanimplementationbody
      */
     public function getById(ProviderDataIsolation $dataIsolation, int $id): ?AiAbilityEntity;
@@ -64,14 +64,14 @@ interface AiAbilityRepositoryInterface
      * according tocodeupdate(supportchoosepropertyupdate).
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
-     * @param AiAbilityCode $code can力code
+     * @param AiAbilityCode $code cancapabilitycode
      * @param array $data updatedata(status,configetc)
      * @return bool whetherupdatesuccess
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool;
 
     /**
-     * paginationqueryAIcan力list.
+     * paginationqueryAIcancapabilitylist.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @param AiAbilityQuery $query queryitemitem

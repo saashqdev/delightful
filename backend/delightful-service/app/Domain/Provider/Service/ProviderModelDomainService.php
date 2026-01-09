@@ -170,11 +170,11 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * according toqueryitemitemget按modeltypeminutegroupmodelIDlist.
+     * according toqueryitemitemgetbymodeltypeminutegroupmodelIDlist.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param ProviderModelQuery $query queryitemitem
-     * @return array<string, array<string>> 按modeltypeminutegroupmodelIDarray,format: [modelType => [model_id, model_id]]
+     * @return array<string, array<string>> bymodeltypeminutegroupmodelIDarray,format: [modelType => [model_id, model_id]]
      */
     public function getModelIdsGroupByType(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query): array
     {

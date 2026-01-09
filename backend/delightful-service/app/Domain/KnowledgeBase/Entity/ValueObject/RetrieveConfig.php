@@ -13,7 +13,7 @@ use InvalidArgumentException;
 /**
  * knowledge baseretrieveconfigurationvalueobject
  *
- * containretrievestrategy,retrievemethod,重sortconfigurationetcparameter
+ * containretrievestrategy,retrievemethod,reloadsortconfigurationetcparameter
  */
 class RetrieveConfig extends AbstractValueObject
 {
@@ -55,18 +55,18 @@ class RetrieveConfig extends AbstractValueObject
     protected bool $scoreThresholdEnabled = false;
 
     /**
-     * 重sortmodetype.
+     * reloadsortmodetype.
      *
      * optionalvalue:
-     * - reranking_model: use重sortmodel
-     * - weighted_score: useadd权minutecount
+     * - reranking_model: usereloadsortmodel
+     * - weighted_score: useaddpermissionminutecount
      *
      * @see RerankMode
      */
     protected string $rerankingMode = RerankMode::WEIGHTED_SCORE;
 
     /**
-     * whetherenable重sort.
+     * whetherenablereloadsort.
      */
     protected bool $rerankingEnable = false;
 
@@ -94,9 +94,9 @@ class RetrieveConfig extends AbstractValueObject
     ];
 
     /**
-     * 重sortmodelconfiguration.
+     * reloadsortmodelconfiguration.
      *
-     * contain重sortmodel相closeconfigurationparameter
+     * containreloadsortmodelrelatedcloseconfigurationparameter
      */
     protected array $rerankingModel = [
         'reranking_model_name' => '',
@@ -205,7 +205,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * get重sortmodetype.
+     * getreloadsortmodetype.
      */
     public function getRerankingMode(): string
     {
@@ -213,7 +213,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * set重sortmodetype.
+     * setreloadsortmodetype.
      */
     public function setRerankingMode(string $rerankingMode): self
     {
@@ -225,7 +225,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * whetherenable重sort.
+     * whetherenablereloadsort.
      */
     public function isRerankingEnable(): bool
     {
@@ -233,7 +233,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * setwhetherenable重sort.
+     * setwhetherenablereloadsort.
      */
     public function setRerankingEnable(bool $rerankingEnable): self
     {
@@ -284,7 +284,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * get重sortmodelconfiguration.
+     * getreloadsortmodelconfiguration.
      */
     public function getRerankingModel(): array
     {
@@ -292,7 +292,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * set重sortmodelconfiguration.
+     * setreloadsortmodelconfiguration.
      */
     public function setRerankingModel(array $rerankingModel): self
     {

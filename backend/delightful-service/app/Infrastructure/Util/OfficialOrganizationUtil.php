@@ -9,7 +9,7 @@ namespace App\Infrastructure\Util;
 
 /**
  * officialorganizationtoolcategory
- * 統onemanageofficialorganization相closeconfigurationandjudgelogic.
+ * 统onemanageofficialorganizationrelatedcloseconfigurationandjudgelogic.
  */
 class OfficialOrganizationUtil
 {
@@ -32,7 +32,7 @@ class OfficialOrganizationUtil
     /**
      * getcontainofficialorganizationininsideorganizationencodingarray.
      * @param string $currentOrganizationCode whenfrontorganizationencoding
-     * @return array go重backorganizationencodingarray
+     * @return array goreloadbackorganizationencodingarray
      */
     public static function getOrganizationCodesWithOfficial(string $currentOrganizationCode): array
     {

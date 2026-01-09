@@ -39,7 +39,7 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * according toIDgetmodetypeaggregateroot(containmodetypedetail,minutegroup,modelclose系).
+     * according toIDgetmodetypeaggregateroot(containmodetypedetail,minutegroup,modelclosesystem).
      */
     public function getModeById(DelightfulUserAuthorization $authorization, string $id): AdminModeAggregateDTO
     {
@@ -125,7 +125,7 @@ class AdminModeAppService extends AbstractModeAppService
 
             Db::commit();
 
-            // 重newgetaggregaterootinfo
+            // reloadnewgetaggregaterootinfo
             $updatedModeAggregate = $this->modeDomainService->getModeDetailById($dataIsolation, $updatedMode->getId());
             return AdminModeAssembler::aggregateToAdminDTO($updatedModeAggregate);
         } catch (Exception $exception) {

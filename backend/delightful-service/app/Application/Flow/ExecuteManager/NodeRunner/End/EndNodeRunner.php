@@ -34,7 +34,7 @@ class EndNodeRunner extends NodeRunner
             $result = $output->getKeyValue($executionData->getExpressionFieldData());
         }
 
-        // endsectionpointback,notexecuteback続sectionpoint
+        // endsectionpointback,notexecutebackcontinuesectionpoint
         $vertexResult->setChildrenIds([]);
         $vertexResult->setResult($result);
         $executionData->saveNodeContext($this->node->getNodeId(), $result);

@@ -82,7 +82,7 @@ class ImageGenerateNodeRunner extends NodeRunner
         $images = $this->llmAppService->imageGenerate($delightfulUserAuthorization, $model, '', $data);
         // processonlygetone
         $image = $images[0];
-        // thiswithinmaybeis url,base64,均recordtoprocessexecuteattachmentmiddle(thiso clockwillconductuploadtocloudserviceclient).uploadfailedfilewilldirectlyskip
+        // thiswithinmaybeis url,base64,averagerecordtoprocessexecuteattachmentmiddle(thiso clockwillconductuploadtocloudserviceclient).uploadfailedfilewilldirectlyskip
         $attachments = $this->recordFlowExecutionAttachments($executionData, [$image], true);
         $vertexResult->addDebugLog('attachments', array_map(fn (AbstractAttachment $attachment) => $attachment->toArray(), $attachments));
 

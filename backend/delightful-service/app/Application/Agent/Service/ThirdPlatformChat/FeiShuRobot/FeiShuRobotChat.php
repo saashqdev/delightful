@@ -130,7 +130,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
         $messageId = $params['event']['message']['message_id'] ?? '';
 
-        // poweretcpropertyhandle:usemessageIDconductgo重
+        // poweretcpropertyhandle:usemessageIDconductgoreload
         if (! $this->checkMessageIdLock($messageId)) {
             $this->logger->info('Feishumessagealreadyhandlepass,skip', ['message_id' => $messageId]);
             $chatMessage->setEvent(ThirdPlatformChatEvent::None);
@@ -335,7 +335,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $nickname = ! empty($userInfo['nickname']) ? $userInfo['nickname'] : $realName;
             $userExtInfo = new TriggerDataUserExtInfo($organizationCode, $openId, $nickname, $realName);
 
-            // setting工numberandposition
+            // settingworkernumberandposition
             if (isset($userInfo['employee_no'])) {
                 $userExtInfo->setWorkNumber($userInfo['employee_no']);
             }
@@ -421,7 +421,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $chatMessage->setRobotCode($params['header']['app_id'] ?? '');
         $chatMessage->setUserId($openId);
         $chatMessage->setOriginConversationId($chatId);
-        $chatMessage->setNickname($openId); // initialsettingforOpenID,back続willpassuserinfoupdate
+        $chatMessage->setNickname($openId); // initialsettingforOpenID,backcontinuewillpassuserinfoupdate
     }
 
     /**
@@ -582,7 +582,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             'receive_id' => $receiverId,
             'msg_type' => 'text',
             'content' => [
-                'text' => '暫not supportedmessagetype',
+                'text' => 'temporarynot supportedmessagetype',
             ],
         ];
         $this->application->message->send($data, 'chat_id');
@@ -733,7 +733,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
     /**
      * parseMarkdowncontent,convertforFeishurich textformat
-     * onlyhandleimage,othercontentall部usemd样type.
+     * onlyhandleimage,othercontentalldepartmentusemd样type.
      *
      * @param string $markdown Markdowncontent
      * @return array Feishurich textformat

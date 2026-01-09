@@ -67,14 +67,14 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * getexpire待cleanuprecord.
+     * getexpirependingcleanuprecord.
      */
     public function getExpiredRecords(int $limit = 50): array
     {
         /** @var Collection<FileCleanupRecordModel> $models */
         $models = FileCleanupRecordModel::query()
             ->where('expire_at', '<=', date('Y-m-d H:i:s'))
-            ->where('status', 0) // 待cleanupstatus
+            ->where('status', 0) // pendingcleanupstatus
             ->orderBy('expire_at', 'asc')
             ->limit($limit)
             ->get();
@@ -166,7 +166,7 @@ class FileCleanupRecordRepository
         return FileCleanupRecordModel::query()
             ->where('file_key', $fileKey)
             ->where('organization_code', $organizationCode)
-            ->where('status', 0) // onlycancancel待cleanupstatusrecord
+            ->where('status', 0) // onlycancancelpendingcleanupstatusrecord
             ->delete() > 0;
     }
 

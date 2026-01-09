@@ -50,7 +50,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected array $searchWebPages;
 
     /**
-     * byatmultipletimechildissuesearcho clock,willoutmultipleduplicatesearchresult, byneed ai go重back,again丢givebigmodelsummary.
+     * byatmultipletimechildissuesearcho clock,willoutmultipleduplicatesearchresult, byneed ai goreloadback,again丢givebigmodelsummary.
      *
      * @var SearchDetailItem[]
      */

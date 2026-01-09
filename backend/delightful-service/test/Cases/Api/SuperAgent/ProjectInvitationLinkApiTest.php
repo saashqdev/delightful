@@ -62,12 +62,12 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 3. settingpasswordprotected
         $this->assertSetPasswordProtection($projectId, true);
 
-        // 4. outside部userpassTokengetinvitationinfo
+        // 4. outsidedepartmentuserpassTokengetinvitationinfo
         $this->switchUserTest2();
         $invitationInfo = $this->getInvitationByToken($this->invitationToken);
         $this->assertTrue($invitationInfo['data']['requires_password']);
 
-        // 5. outside部usertryadd入project(passworderror)
+        // 5. outsidedepartmentusertryadd入project(passworderror)
         $this->joinProjectWithWrongPassword($this->invitationToken);
 
         // 6. project havepersonresetpassword
@@ -75,7 +75,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $passwordInfo = $this->resetInvitationPassword($projectId);
         $this->invitationPassword = $passwordInfo['data']['password'];
 
-        // 7. outside部userusecorrectpasswordadd入project
+        // 7. outsidedepartmentuserusecorrectpasswordadd入project
         $this->switchUserTest2();
         $this->joinProjectSuccess($this->invitationToken, $this->invitationPassword);
 
@@ -86,7 +86,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->assertToggleInvitationLinkOff($projectId);
 
-        // 10. outside部usertryaccessalreadycloseinvitationlink
+        // 10. outsidedepartmentusertryaccessalreadycloseinvitationlink
         $this->switchUserTest2();
         $this->getInvitationByTokenDisabled($this->invitationToken);
     }
@@ -100,7 +100,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
 
         // 1. nonprojectmembertrymanageinvitationlink(shouldfail)
         $this->switchUserTest2();
-        $this->getInvitationLink($projectId, 51202); // permissionnot足
+        $this->getInvitationLink($projectId, 51202); // permissionnotenough
 
         // 2. project havepersoncanmanageinvitationlink
         $this->switchUserTest1();
@@ -411,8 +411,8 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
 
         // validatepasswordlengthandformat
         $password = $password3['data']['password'];
-        $this->assertEquals(5, strlen($password)); // passwordlengthshouldis5位
-        $this->assertMatchesRegularExpression('/^\d{5}$/', $password); // onlycontain5位number
+        $this->assertEquals(5, strlen($password)); // passwordlengthshouldis5position
+        $this->assertMatchesRegularExpression('/^\d{5}$/', $password); // onlycontain5positionnumber
     }
 
     /**
@@ -450,13 +450,13 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->assertEquals(1000, $linkInfo['code']);
         $this->assertFalse($linkInfo['data']['requires_password']);
 
-        // 5. 重newstartpasswordprotected
+        // 5. reloadnewstartpasswordprotected
         $enableResponse = $this->setInvitationPassword($projectId, true);
         $this->assertEquals(1000, $enableResponse['code']);
 
         // 6. validatepasswordmaintainnotchange
         $restoredPassword = $enableResponse['data']['password'];
-        $this->assertEquals($originalPassword, $restoredPassword, '重newstartpasswordprotectedback,passwordshouldmaintainnotchange');
+        $this->assertEquals($originalPassword, $restoredPassword, 'reloadnewstartpasswordprotectedback,passwordshouldmaintainnotchange');
 
         // 7. validatestartstatusdownaccesslinkneedpassword
         $linkInfo = $this->getInvitationByToken($token);
@@ -492,8 +492,8 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->assertEquals(1000, $initialPasswordResponse['code']);
 
         $originalPassword = $initialPasswordResponse['data']['password'];
-        $this->assertEquals(5, strlen($originalPassword)); // validatepasswordlengthfor5位
-        $this->assertMatchesRegularExpression('/^\d{5}$/', $originalPassword); // validateis5位number
+        $this->assertEquals(5, strlen($originalPassword)); // validatepasswordlengthfor5position
+        $this->assertMatchesRegularExpression('/^\d{5}$/', $originalPassword); // validateis5positionnumber
 
         // 3. modifypasswordforcustomizepassword
         $customPassword = 'mypass123';
@@ -531,7 +531,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $response = $this->changeInvitationPassword($projectId, '', 51220);
         $this->assertEquals(51220, $response['code']);
 
-        // testexceedslongpassword(19位)
+        // testexceedslongpassword(19position)
         $response = $this->changeInvitationPassword($projectId, str_repeat('1', 19), 51220);
         $this->assertEquals(51220, $response['code']);
 
@@ -630,7 +630,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * startinvitationlink (私haveassistmethod).
+     * startinvitationlink (privatehaveassistmethod).
      */
     private function assertToggleInvitationLinkOn(string $projectId): void
     {
@@ -647,7 +647,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * closeinvitationlink (私haveassistmethod).
+     * closeinvitationlink (privatehaveassistmethod).
      */
     private function assertToggleInvitationLinkOff(string $projectId): void
     {
@@ -661,7 +661,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * settingpasswordprotected (私haveassistmethod).
+     * settingpasswordprotected (privatehaveassistmethod).
      */
     private function assertSetPasswordProtection(string $projectId, bool $enabled): void
     {
@@ -677,7 +677,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * modifyinvitationlinkpassword (私haveassistmethod).
+     * modifyinvitationlinkpassword (privatehaveassistmethod).
      */
     private function changeInvitationPassword(string $projectId, string $password, int $expectedCode = 1000): array
     {
@@ -698,7 +698,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
      */
     private function cleanupTestData(string $projectId): void
     {
-        // passdomainservicedeletetest2userprojectmemberclose系(ifexistsin)
+        // passdomainservicedeletetest2userprojectmemberclosesystem(ifexistsin)
         $this->getProjectMemberDomainService()->removeMemberByUser((int) $projectId, 'usi_e9d64db5b986d062a342793013f682e8');
     }
 

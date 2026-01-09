@@ -75,7 +75,7 @@ readonly class AdminProviderAppService
             return null;
         }
 
-        // ProviderModelsDTO alreadyalreadycontain haveneeddata,統onehandle provider and models  icon andreturn
+        // ProviderModelsDTO alreadyalreadycontain haveneeddata,统onehandle provider and models  icon andreturn
         $this->processProviderAndModelsIcons($providerModels);
         return $providerModels;
     }
@@ -355,7 +355,7 @@ readonly class AdminProviderAppService
             return [];
         }
 
-        // receivecollection havegraphmarkpath按organizationencodinggroup
+        // receivecollection havegraphmarkpathbyorganizationencodinggroup
         $iconsByOrg = [];
         $iconToModelMap = [];
 
@@ -438,7 +438,7 @@ readonly class AdminProviderAppService
             return;
         }
 
-        // receivecollection havegraphmarkpath按organizationencodinggroup
+        // receivecollection havegraphmarkpathbyorganizationencodinggroup
         $iconsByOrg = [];
         $iconToModelMap = [];
 
@@ -510,7 +510,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 統onehandle Provider and Models graphmark,convertforcompleteURL.
+     * 统onehandle Provider and Models graphmark,convertforcompleteURL.
      */
     private function processProviderAndModelsIcons(ProviderConfigModelsDTO $providerDTO): void
     {
@@ -549,7 +549,7 @@ readonly class AdminProviderAppService
                 }
                 $iconsByOrg[$organizationCode][] = $icon;
 
-                // recordgraphmarktomodelmappingclose系
+                // recordgraphmarktomodelmappingclosesystem
                 if (! isset($modelIconMap[$icon])) {
                     $modelIconMap[$icon] = [];
                 }
@@ -557,7 +557,7 @@ readonly class AdminProviderAppService
             }
         }
 
-        // 按organizationencodingbatchquantitygetgraphmarkURL
+        // byorganizationencodingbatchquantitygetgraphmarkURL
         foreach ($iconsByOrg as $organizationCode => $icons) {
             $iconUrlMap = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
 
@@ -588,7 +588,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * get联通testtype.
+     * get联commontesttype.
      */
     private function getConnectivityTestType(string $category, int $modelType): NaturalLanguageProcessing
     {

@@ -19,7 +19,7 @@ class CreateDelightfulChatMessageTable extends Migration
             return;
         }
         Schema::create('delightful_chat_messages', static function (Blueprint $table) {
-            // according toupsurface建tablelanguagesentence,outbydowncode
+            // according toupsurfacebuildtablelanguagesentence,outbydowncode
             $table->bigIncrements('id');
             // hairitemsidebelong toorganization
             $table->string('sender_id', 64)->comment('hairitemsideid');
@@ -29,7 +29,7 @@ class CreateDelightfulChatMessageTable extends Migration
             $table->string('receive_id', 64)->comment('receivesideid,maybeispersoncategory,aiorpersonapplication/document/multi-dimensionaltableformatetc');
             $table->tinyInteger('receive_type')->comment('receivesidetype,1:user(aialsobe认forisuser);2:application;3:document;4:multi-dimensionaltableformat');
             $table->string('receive_organization_code', 64)->comment('receivesideorganizationencoding,maybeforemptystring')->default('');
-            // message相closeid
+            // messagerelatedcloseid
             $table->string('app_message_id', 64)->comment('customerclientgeneratemessageid,useat防customerclientduplicate');
             $table->string('delightful_message_id', 64)->comment('serviceclientgenerateuniqueonemessageid,useatmessagewithdraw/edit');
             # ## messagestructure

@@ -318,7 +318,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * test部minutefieldupdatebackdatacompleteproperty.
+     * testdepartmentminutefieldupdatebackdatacompleteproperty.
      */
     public function testUpdateUserInfoDataIntegrity(): void
     {

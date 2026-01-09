@@ -32,7 +32,7 @@ class ModeAppService extends AbstractModeAppService
         // getitemfront havecanuse agent
         $beDelightfulAgentAppService = di(BeDelightfulAgentAppService::class);
         $agentData = $beDelightfulAgentAppService->queries($authorization, new BeDelightfulAgentQuery(), Page::createNoPage());
-        // merge常useandall部 agent list,常useinfront
+        // merge常useandalldepartment agent list,常useinfront
         /** @var array<BeDelightfulAgentEntity> $allAgents */
         $allAgents = array_merge($agentData['frequent'], $agentData['all']);
         if (empty($allAgents)) {
@@ -77,7 +77,7 @@ class ModeAppService extends AbstractModeAppService
             $allAggregateImageModels = array_merge($allAggregateImageModels, $aggregateImageModels);
         }
 
-        // need升levelset餐
+        // need升levelsetmeal
         $upgradeRequiredModelIds = [];
 
         // useorganizationfilterdeviceconductfilter(LLM)
@@ -252,7 +252,7 @@ class ModeAppService extends AbstractModeAppService
      * frombatchquantityqueryresultmiddleextractspecificaggregaterootmodel(LLM).
      * @param ModeAggregate $aggregate modetypeaggregateroot
      * @param array<string, ProviderModelEntity> $allProviderModels batchquantityquery havemodelresult
-     * @return array<string, ProviderModelEntity> theaggregateroot相closemodel
+     * @return array<string, ProviderModelEntity> theaggregaterootrelatedclosemodel
      */
     private function getModelsForAggregate(ModeAggregate $aggregate, array $allProviderModels): array
     {
@@ -279,7 +279,7 @@ class ModeAppService extends AbstractModeAppService
      * frombatchquantityqueryresultmiddleextractspecificaggregaterootgraphlikemodel(VLM).
      * @param ModeAggregate $aggregate modetypeaggregateroot
      * @param array<string, ProviderModelEntity> $allProviderModels batchquantityquery havemodelresult
-     * @return array<string, ProviderModelEntity> theaggregateroot相closegraphlikemodel
+     * @return array<string, ProviderModelEntity> theaggregaterootrelatedclosegraphlikemodel
      */
     private function getImageModelsForAggregate(ModeAggregate $aggregate, array $allProviderModels): array
     {

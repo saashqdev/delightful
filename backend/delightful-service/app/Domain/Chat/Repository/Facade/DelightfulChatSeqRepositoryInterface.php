@@ -62,7 +62,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
 
     /**
-     * minutegroupgetsessiondownmostnew几itemmessage.
+     * minutegroupgetsessiondownmostnewseveralitemmessage.
      */
     public function getConversationsMessagesGroupById(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
 
@@ -100,7 +100,7 @@ interface DelightfulChatSeqRepositoryInterface
      */
     public function getMessageRevokedSeq(string $messageId, DelightfulUserEntity $userEntity, ControlMessageType $controlMessageType): ?DelightfulSeqEntity;
 
-    // 按typegetsessionmiddleseq
+    // bytypegetsessionmiddleseq
     public function getConversationSeqByType(string $delightfulId, string $conversationId, ControlMessageType $seqType): ?DelightfulSeqEntity;
 
     /**
@@ -112,10 +112,10 @@ interface DelightfulChatSeqRepositoryInterface
 
     public function deleteSeqMessageByIds(array $seqIds): int;
 
-    // formoveexcept脏data写method
+    // formoveexcept脏datawritemethod
     public function getSeqByDelightfulId(string $delightfulId, int $limit): array;
 
-    // formoveexcept脏data写method
+    // formoveexcept脏datawritemethod
     public function getHasTrashMessageUsers(): array;
 
     public function updateSeqExtra(string $seqId, SeqExtra $seqExtra): bool;

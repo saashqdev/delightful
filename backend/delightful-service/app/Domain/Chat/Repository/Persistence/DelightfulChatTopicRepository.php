@@ -188,7 +188,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     /**
-     * 按timerangegetsessiondownsometopicmessage.
+     * bytimerangegetsessiondownsometopicmessage.
      * @return ClientSequenceResponse[]
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array

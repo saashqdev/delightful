@@ -129,7 +129,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $this->assertIsArray($tree);
         $this->assertGreaterThanOrEqual(1, count($tree));
 
-        // findto Admin platformsectionpointconductenterone步validation
+        // findto Admin platformsectionpointconductenteronestepvalidation
         $platformsByKey = [];
         foreach ($tree as $node) {
             $platformsByKey[$node['permission_key']] = $node;
@@ -155,7 +155,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     }
 
     /**
-     * test私havemethodisValidCombinationlinefor
+     * testprivatehavemethodisValidCombinationlinefor
      * passgenerateAllPermissionsbetween接test.
      */
     public function testIsValidCombinationThroughGenerateAllPermissions()

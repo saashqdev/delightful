@@ -173,7 +173,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     {
         $builder = $this->createProviderQuery();
         $builder->where('category', $category->value);
-        // notrowexceptanyservicequotient,include Official,因fortemplateneed haveservicequotient
+        // notrowexceptanyservicequotient,include Official,factorfortemplateneed haveservicequotient
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
         return ProviderAssembler::toEntities($result);

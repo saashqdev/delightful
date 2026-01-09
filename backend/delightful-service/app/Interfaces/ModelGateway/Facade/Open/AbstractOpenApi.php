@@ -20,7 +20,7 @@ abstract class AbstractOpenApi
     {
         // allsurfacecompatible openai  api_key format
 
-        // 1. 按ordertryfromrequestheadmiddleget
+        // 1. byordertryfromrequestheadmiddleget
         $headers = [
             'api-key',
             'llm-access-token',
@@ -59,7 +59,7 @@ abstract class AbstractOpenApi
     }
 
     /**
-     * fromfingersetrequestheadcolumntablemiddle按ordergettoken.
+     * fromfingersetrequestheadcolumntablemiddlebyordergettoken.
      */
     protected function getTokenFromHeaders(array $headerNames): string
     {

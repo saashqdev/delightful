@@ -18,7 +18,7 @@ use Hyperf\Redis\Redis;
 use Psr\Log\LoggerInterface;
 
 /**
- * imagegenerate統oneabstractcategory
+ * imagegenerate统oneabstractcategory
  * integrationwatermarkprocessandDingTalkalertfeature
  *  haveimagegenerateProviderallshouldinheritthiscategory.
  */
@@ -37,8 +37,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     protected RedisLocker $redisLocker;
 
     /**
-     * 統oneimagegenerateentrymethod
-     * firstcallchildcategoryimplementoriginalimagegenerate,again統oneaddwatermark.
+     * 统oneimagegenerateentrymethod
+     * firstcallchildcategoryimplementoriginalimagegenerate,again统oneaddwatermark.
      */
     final public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -66,16 +66,16 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * getresponseobjectlock,useatandhairsecuritygroundoperationas OpenAIFormatResponse.
-     * useRedisfrom旋lockimplementrow队etc待.
+     * useRedisfrom旋lockimplementrow队etcpending.
      *
      * @return string returnlockowner,useatreleaselock
      */
     protected function lockResponse(OpenAIFormatResponse $response): string
     {
         $lockKey = 'img_response_' . spl_object_id($response);
-        $owner = bin2hex(random_bytes(8)); // 16位randomstringasforowner
+        $owner = bin2hex(random_bytes(8)); // 16positionrandomstringasforowner
 
-        // spinLockwillfromautoetc待,untilgetsuccessortimeout(30second)
+        // spinLockwillfromautoetcpending,untilgetsuccessortimeout(30second)
         if (! $this->redisLocker->spinLock($lockKey, $owner, 30)) {
             $this->logger->error('getgraphlikeresponseRedislocktimeout', [
                 'lock_key' => $lockKey,
@@ -119,8 +119,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 統onewatermarkprocesslogic
-     * supportURLandbase64两typeformatimagewatermarkprocess.
+     * 统onewatermarkprocesslogic
+     * supportURLandbase64twotypeformatimagewatermarkprocess.
      */
     private function applyWatermark(ImageGenerateResponse $response, ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {

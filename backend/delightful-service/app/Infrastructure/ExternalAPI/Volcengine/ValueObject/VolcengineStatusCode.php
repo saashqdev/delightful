@@ -28,7 +28,7 @@ enum VolcengineStatusCode: string
     case QUEUED = '20000002';
 
     /**
-     * muteaudio - noneed重newquery,directly重newsubmit.
+     * muteaudio - noneedreloadnewquery,directlyreloadnewsubmit.
      */
     case SILENT_AUDIO = '20000003';
 
@@ -85,7 +85,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * judgewhetherneed重newsubmittask
+     * judgewhetherneedreloadnewsubmittask
      */
     public function needsResubmit(): bool
     {
@@ -118,7 +118,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * judgewhetherforserviceinside部error(550xxxx系column).
+     * judgewhetherforserviceinsidedepartmenterror(550xxxxsystemcolumn).
      */
     public static function isInternalServerError(string $statusCode): bool
     {

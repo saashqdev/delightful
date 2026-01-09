@@ -45,7 +45,7 @@ class AuthenticationApi
     }
 
     /**
-     * frontclientfrom身businessuse,get authorization toshouldprivateidentifycode
+     * frontclientfrombodybusinessuse,get authorization toshouldprivateidentifycode
      */
     public function authEnvironment(RequestInterface $request): array
     {

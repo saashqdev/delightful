@@ -92,7 +92,7 @@ class DelightfulAgentVersionDomainService
             // personuse
             $msg = 'publishsuccess';
         } elseif ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
-            // publishtoenterpriseinside部
+            // publishtoenterpriseinsidedepartment
             /* @phpstan-ignore-next-line */
             if ($approvalOpen) {
                 $delightfulAgentVersionEntity->setApprovalStatus(DelightfulAgentVersionStatus::APPROVAL_PENDING->value);
@@ -187,16 +187,16 @@ class DelightfulAgentVersionDomainService
         // parseversionnumber,for example "0.0.1" => ['0', '0', '1']
         [$major, $minor, $patch] = explode('.', $agentMaxVersion);
 
-        // will PATCH 部minuteadd 1
+        // will PATCH departmentminuteadd 1
         $patch = (int) $patch + 1;
 
-        // if PATCH 达to 10,enter位to MINOR(canaccording torequirementadjustthisrule)
+        // if PATCH 达to 10,enterpositionto MINOR(canaccording torequirementadjustthisrule)
         if ($patch > 99) {
             $patch = 0;
             $minor = (int) $minor + 1;
         }
 
-        // if MINOR 达to 10,enter位to MAJOR(canaccording torequirementadjustthisrule)
+        // if MINOR 达to 10,enterpositionto MAJOR(canaccording torequirementadjustthisrule)
         if ($minor > 99) {
             // notresetminor,whileisdirectly增bigmajor,avoidnotrequiredwantreset
             $minor = 0;

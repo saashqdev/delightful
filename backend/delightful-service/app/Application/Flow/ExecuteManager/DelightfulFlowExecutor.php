@@ -89,7 +89,7 @@ class DelightfulFlowExecutor
 
     public function execute(?TriggerType $appointTriggerType = null): array
     {
-        // trulystartexecuteo clock,才willproduceexecute id
+        // trulystartexecuteo clock,onlywillproduceexecute id
         $this->createExecuteLog();
         $this->executorId = (string) $this->delightfulFlowExecuteLogEntity->getId();
 
@@ -229,7 +229,7 @@ class DelightfulFlowExecutor
         if (! $nodeDebugResult->isSuccess()) {
             // ifis API request,throwerrorinfo
             if ($this->executionData->getExecutionType()->isApi()) {
-                // ifnotisassistantparametercall 才recorderrorinfo
+                // ifnotisassistantparametercall onlyrecorderrorinfo
                 if (! $this->executionData->getTriggerData()->isAssistantParamCall()) {
                     $errorMessage = new Message([], $this->executionData->getOriginConversationId());
                     $errorMessage->setErrorInformation($nodeDebugResult->getErrorMessage());
@@ -321,7 +321,7 @@ class DelightfulFlowExecutor
         if ($this->executionData->getStreamStatus() !== FlowStreamStatus::Processing) {
             return;
         }
-        // onlymainprocess才canend(thezerolayer)
+        // onlymainprocessonlycanend(thezerolayer)
         if ($this->executionData->getLevel() !== 0) {
             return;
         }
@@ -430,7 +430,7 @@ class DelightfulFlowExecutor
             try {
                 $node->validate();
             } catch (Throwable $throwable) {
-                // havetheseisfloatingsectionpoint(即inprocessrunlinemiddlenotwillbeusesectionpoint),fallbackbottomwillinexecuteo clockagaintimeconductparameterverify
+                // havetheseisfloatingsectionpoint(immediatelyinprocessrunlinemiddlenotwillbeusesectionpoint),fallbackbottomwillinexecuteo clockagaintimeconductparameterverify
             }
 
             $job = function (array $frontResults) use ($node): VertexResult {
@@ -455,7 +455,7 @@ class DelightfulFlowExecutor
                     }
                     $childrenIds[] = $childVertex->key;
                 }
-                // defaultiswant調degreedownonelevel,ifnotneed調degree,inspecificexecutemiddlecansetfor[]
+                // defaultiswant调degreedownonelevel,ifnotneed调degree,inspecificexecutemiddlecansetfor[]
                 $vertexResult->setChildrenIds($childrenIds);
                 // add flow
                 $frontResults['current_flow_entity'] = $this->delightfulFlowEntity;
@@ -511,7 +511,7 @@ class DelightfulFlowExecutor
         if ($vertexResult->hasDebugLog('history_vertex_result')) {
             return;
         }
-        // onlytheonelayerprocess才willconductarchive
+        // onlytheonelayerprocessonlywillconductarchive
         if (! $this->executionData->isTop() || $this->inLoop) {
             return;
         }

@@ -87,7 +87,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
         if (empty($userDetails)) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
-        // sameoneaccountnumberdown delightful_id alllocally uniqueone,thiswithingetfirst即can
+        // sameoneaccountnumberdown delightful_id alllocally uniqueone,thiswithingetfirstimmediatelycan
         return $userDetails[0]->getDelightfulId();
     }
 }

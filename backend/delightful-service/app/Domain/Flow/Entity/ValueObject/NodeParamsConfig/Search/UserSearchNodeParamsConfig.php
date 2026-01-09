@@ -123,7 +123,7 @@ class UserSearchNodeParamsConfig extends AbstractSearchNodeParamsConfig
                         "type": "string",
                         "key": "work_number",
                         "sort": 5,
-                        "title": "工number",
+                        "title": "workernumber",
                         "description": "",
                         "items": null,
                         "properties": null,

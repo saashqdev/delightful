@@ -90,7 +90,7 @@ class CreateGroupNodeRunner extends NodeRunner
         if ($paramsConfig->isIncludeCurrentAssistant()) {
             if ($agentUserId = $executionData->getAgentUserId()) {
                 $groupMemberIds[] = $agentUserId;
-                // only assistant start,才willhaveopenfield
+                // only assistant start,onlywillhaveopenfield
                 $assistantOpeningSpeech = $paramsConfig->getAssistantOpeningSpeech()?->getValue()->getResult($executionData->getExpressionFieldData()) ?? '';
             }
         }
@@ -98,7 +98,7 @@ class CreateGroupNodeRunner extends NodeRunner
         $vertexResult->addDebugLog('group_members', $groupMemberIds);
         $vertexResult->addDebugLog('assistant_opening_speech', $assistantOpeningSpeech);
 
-        // only IM chat才willcreate
+        // only IM chatonlywillcreate
         if (! $executionData->getExecutionType()->isImChat()) {
             $delightfulGroup = [
                 'group_id' => 'test_group_id',
@@ -110,7 +110,7 @@ class CreateGroupNodeRunner extends NodeRunner
             return;
         }
 
-        // by owner 身sharegocreate
+        // by owner bodysharegocreate
         $ownerAuthorization = new DelightfulUserAuthorization();
         $ownerAuthorization->setId($groupOwnerInfo->getUserId());
         $ownerAuthorization->setOrganizationCode($groupOwnerInfo->getOrganizationCode());

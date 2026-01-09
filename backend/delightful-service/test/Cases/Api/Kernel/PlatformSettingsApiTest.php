@@ -109,7 +109,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         ];
         $this->put($this->putUrl, $initialPayload, $this->getCommonHeaders());
 
-        // 部minuteupdate:onlyupdatemiddletext logo
+        // departmentminuteupdate:onlyupdatemiddletext logo
         $partialPayload = [
             'logo_zh_url' => 'https://example.com/updated_logo_zh.png',
         ];
@@ -165,7 +165,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
-        // favicon shouldmaintainoriginalvalue(因foremptystringnotwillupdate)
+        // favicon shouldmaintainoriginalvalue(factorforemptystringnotwillupdate)
         $data = $response['data'];
         $this->assertSame('https://example.com/favicon.ico', $data['favicon']['url']);
     }

@@ -22,7 +22,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
         $filterType = $paramsConfig->getFilterType();
         foreach ($paramsConfig->getFilters() as $filter) {
             $rightValue = $filter->getRightValue()->getValue()->getResult($executionData->getExpressionFieldData());
-            // null,'',0,[],false  directlyskip,whonotsearch事thisthese.right侧not填valuenotconductsearch
+            // null,'',0,[],false  directlyskip,whonotsearchthingthisthese.right侧not填valuenotconductsearch
             if (empty($rightValue)) {
                 continue;
             }
@@ -30,7 +30,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
             // definitionthistime range id,ifis null 代tablealsonotconductlimit
             $rangeIds = null;
             if ($filterType->isAll()) {
-                // ifis haveitemitemfull足,thatwhatalreadyalready existsin id setthenisthistimerange
+                // ifis haveitemitemfullenough,thatwhatalreadyalready existsin id setthenisthistimerange
                 $rangeIds = $allIds;
             }
 
@@ -51,10 +51,10 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 continue;
             }
             if ($filterType->isAny()) {
-                // ifisanyitemitemfull足,thatwhatwillthistime id andalreadyhave id conductmerge
+                // ifisanyitemitemfullenough,thatwhatwillthistime id andalreadyhave id conductmerge
                 $allIds = array_merge($allIds ?? [], $currentIds);
             } else {
-                // ifis haveitemitemfull足,thatwhatwillthistime id andalreadyhave id conduct交collection
+                // ifis haveitemitemfullenough,thatwhatwillthistime id andalreadyhave id conduct交collection
                 $allIds = $allIds === null ? $currentIds : array_intersect($allIds, $currentIds);
             }
         }

@@ -106,7 +106,7 @@ class KnowledgeBaseFragmentRepository extends KnowledgeBaseAbstractRepository im
         }
         if ($query->getDocumentCode() || $query->isDefaultDocumentCode()) {
             $documentCodes = [$query->getDocumentCode()];
-            // compatibleoldknowledge baseslicesegment,因foroldknowledge basenothavedocumentconcept,ifisdefaultdocument,thenoldknowledge baseslicesegmentoneupcheckoutcome
+            // compatibleoldknowledge baseslicesegment,factorforoldknowledge basenothavedocumentconcept,ifisdefaultdocument,thenoldknowledge baseslicesegmentoneupcheckoutcome
             $query->isDefaultDocumentCode() && $documentCodes[] = '';
             $builder->whereIn('document_code', $documentCodes);
         }
@@ -238,7 +238,7 @@ class KnowledgeBaseFragmentRepository extends KnowledgeBaseAbstractRepository im
             ->whereIn('document_code', $documentCodes)
             ->get();
 
-        // 按document_codeminutegroup
+        // bydocument_codeminutegroup
         $groupedResults = [];
         foreach ($results as $result) {
             if (! isset($groupedResults[$result->document_code])) {

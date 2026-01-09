@@ -119,7 +119,7 @@ JSON,
                             "type": "string",
                             "key": "intent",
                             "sort": 0,
-                            "title": "意graph",
+                            "title": "intentiongraph",
                             "description": "",
                             "required": null,
                             "value": {
@@ -150,7 +150,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => 'I今daygoGuangzhou看smallwaist,downtimewant to bringIfriendoneupgo',
+            'intent' => 'ItodaydaygoGuangzhoulooksmallwaist,downtimewant to bringIfriendoneupgo',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['456'], $vertexResult->getChildrenIds());
@@ -158,7 +158,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => 'I今dayeat sweet and sourrowbone',
+            'intent' => 'Itodaydayeat sweet and sourrowbone',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['123'], $vertexResult->getChildrenIds());
@@ -263,7 +263,7 @@ JSON,
                             "type": "string",
                             "key": "intent",
                             "sort": 0,
-                            "title": "意graph",
+                            "title": "intentiongraph",
                             "description": "",
                             "required": null,
                             "value": {
@@ -294,7 +294,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => 'I今daygoGuangzhoueat Dongguan citybigpackage,downtimewant to bringIfriendoneupgo',
+            'intent' => 'ItodaydaygoGuangzhoueat Dongguan citybigpackage,downtimewant to bringIfriendoneupgo',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['123'], $vertexResult->getChildrenIds());

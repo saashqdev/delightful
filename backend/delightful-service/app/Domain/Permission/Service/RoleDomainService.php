@@ -97,7 +97,7 @@ readonly class RoleDomainService
                 $parsed = $this->permission->parsePermission($permissionKey);
                 $resource = $parsed['resource'];
                 $moduleLabel = $this->permission->getResourceModule($resource);
-                $permissionTags[$moduleLabel] = $moduleLabel; // usekeyvaluego重
+                $permissionTags[$moduleLabel] = $moduleLabel; // usekeyvaluegoreload
             } catch (Throwable $e) {
                 // parsefailo clockignorethepermissiontagextract,validationalreadypass,notimpactsave
             }
@@ -137,7 +137,7 @@ readonly class RoleDomainService
         // saveroleitself
         $savedRoleEntity = $this->roleRepository->save($organizationCode, $roleEntity);
 
-        // 2. maintainroleanduserassociateclose系
+        // 2. maintainroleanduserassociateclosesystem
         $userIds = $savedRoleEntity->getUserIds();
         if (! empty($userIds)) {
             $this->roleRepository->assignUsers(
@@ -194,7 +194,7 @@ readonly class RoleDomainService
         // checkrolewhetheralsohaveuserassociate
         $roleUsers = $this->roleRepository->getRoleUsers($organizationCode, $roleEntity->getId());
         if (! empty($roleUsers)) {
-            // firstdeleteroleanduserassociateclose系
+            // firstdeleteroleanduserassociateclosesystem
             $this->roleRepository->removeUsers($organizationCode, $roleEntity->getId(), $roleUsers);
         }
 
@@ -218,7 +218,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * checkuserwhether拥havefingersetpermission.
+     * checkuserwhetherownhavefingersetpermission.
      */
     public function hasPermission(PermissionDataIsolation $dataIsolation, string $userId, string $permissionKey): bool
     {
@@ -243,11 +243,11 @@ readonly class RoleDomainService
     }
 
     /**
-     * forfingersetusercreateormaintain“organizationadministrator”role(拥havealllocalpermission).
+     * forfingersetusercreateormaintain“organizationadministrator”role(ownhavealllocalpermission).
      *
      * logic:
      * 1. according tocurrentorganizationfindwhetheralreadyhavesame namerole;
-     * 2. 若notexistsin,thencreatenewroleandgrant DelightfulPermission::ALL_PERMISSIONS;
+     * 2. ifnotexistsin,thencreatenewroleandgrant DelightfulPermission::ALL_PERMISSIONS;
      * 3. if existsin,thenensureitscontain ALL_PERMISSIONS;
      * 4. willuser ID columntableadd入roleassociateusercolumntable;
      * 5. saverole.
@@ -271,7 +271,7 @@ readonly class RoleDomainService
             $roleEntity->setIsDisplay(0);
         }
 
-        // 2. ensure拥havealllocalpermission ALL_PERMISSIONS
+        // 2. ensureownhavealllocalpermission ALL_PERMISSIONS
         $permissions = $roleEntity->getPermissions();
         if (! in_array(DelightfulPermission::ALL_PERMISSIONS, $permissions, true)) {
             $permissions[] = DelightfulPermission::ALL_PERMISSIONS;
@@ -280,7 +280,7 @@ readonly class RoleDomainService
 
         // 3. willusercolumntableadd入roleusercolumntable
         $existingUserIds = $roleEntity->getUserIds();
-        // mergeandgo重
+        // mergeandgoreload
         $mergedUserIds = array_unique(array_merge($existingUserIds, $userIds));
         $roleEntity->setUserIds($mergedUserIds);
 
@@ -293,9 +293,9 @@ readonly class RoleDomainService
      *
      * logic:
      * 1. getcurrentorganizationdownnamefor ORGANIZATION_ADMIN_ROLE_NAME role;
-     * 2. 若notexistsindirectlyreturn;
-     * 3. call仓librarymoveexceptuserandtheroleassociateclose系;
-     * 4. ifrolenotagainassociateanyuser,maintainroleitselfnotchange(likehaveneed,canconsiderback続cleanup).
+     * 2. ifnotexistsindirectlyreturn;
+     * 3. call仓librarymoveexceptuserandtheroleassociateclosesystem;
+     * 4. ifrolenotagainassociateanyuser,maintainroleitselfnotchange(likehaveneed,canconsiderbackcontinuecleanup).
      */
     public function removeOrganizationAdmin(PermissionDataIsolation $dataIsolation, string $userId): void
     {
@@ -303,7 +303,7 @@ readonly class RoleDomainService
         $roleEntity = $this->getByName($dataIsolation, self::ORGANIZATION_ADMIN_ROLE_NAME);
 
         if ($roleEntity === null) {
-            // rolenotexistsin,no需handle
+            // rolenotexistsin,noneedhandle
             return;
         }
 

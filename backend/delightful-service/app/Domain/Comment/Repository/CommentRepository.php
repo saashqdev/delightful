@@ -22,7 +22,7 @@ class CommentRepository
     }
 
     /**
-     * createonenewcommentandmaintain相closeindexandattachment.
+     * createonenewcommentandmaintainrelatedcloseindexandattachment.
      *
      * @param CommentEntity $commentEntity commentactualbody
      * @return CommentEntity createbackcommentactualbody
@@ -200,7 +200,7 @@ class CommentRepository
     }
 
     /**
-     * according toresourceIDget have相closecomment.
+     * according toresourceIDget haverelatedclosecomment.
      *
      * @param int $resourceId resourceID
      * @return array<CommentEntity> commentactualbodyarray

@@ -32,13 +32,13 @@ return new class extends Migration {
             $table->string('mapping_type', 32)->comment('mappingtype(user,department,space,organization)');
             // thethird-partyplatformtype:enterpriseWeChat,DingTalk,Feishu
             $table->string('third_platform_type', 32)->comment('thethird-partyplatformtype(wechat_work,dingtalk,lark)');
-            // delightful body系organizationencoding
-            $table->string('delightful_organization_code', 32)->comment('delightful body系organizationencoding');
+            // delightful bodysystemorganizationencoding
+            $table->string('delightful_organization_code', 32)->comment('delightful bodysystemorganizationencoding');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['new_id', 'mapping_type'], 'new_id_mapping_type');
             $table->unique(['delightful_organization_code', 'third_platform_type', 'mapping_type', 'origin_id'], 'unique_origin_id_mapping_type');
-            $table->comment('department,user,nullbetweenencodingetcmappingclose系record');
+            $table->comment('department,user,nullbetweenencodingetcmappingclosesystemrecord');
         });
     }
 

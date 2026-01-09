@@ -85,14 +85,14 @@ readonly class AsrValidationService
                 ExceptionBuilder::throw(AsrErrorCode::ProjectNotFound);
             }
             if ($e->getCode() >= 43000 && $e->getCode() < 44000) {
-                // alreadyalreadyis AsrErrorCode,directly重newthrow
+                // alreadyalreadyis AsrErrorCode,directlyreloadnewthrow
                 throw $e;
             }
 
             // otherbusinessexceptionconvertforpermissionverifyfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         } catch (Throwable $e) {
-            // otherexception統oneprocessforpermissionverifyfail
+            // otherexception统oneprocessforpermissionverifyfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         }
     }

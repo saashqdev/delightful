@@ -11,7 +11,7 @@ use App\Domain\Chat\Service\DelightfulSeqDomainService;
 use Throwable;
 
 /**
- * chatmessage相close.
+ * chatmessagerelatedclose.
  */
 class DelightfulSeqAppService extends AbstractAppService
 {

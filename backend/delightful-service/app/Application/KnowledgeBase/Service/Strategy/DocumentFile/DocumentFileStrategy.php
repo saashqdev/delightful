@@ -65,7 +65,7 @@ class DocumentFileStrategy
      */
     public function preProcessDocumentFiles(KnowledgeBaseDataIsolation $dataIsolation, array $documentFiles): array
     {
-        // 按categoryminutegroup
+        // bycategoryminutegroup
         $groupedFiles = [];
         foreach ($documentFiles as $file) {
             $class = get_class($file);

@@ -91,7 +91,7 @@ readonly class AsrSandboxService
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($organizationCode);
         $fullWorkdir = WorkDirectoryUtil::getFullWorkdir($fullPrefix, $projectEntity->getWorkDir());
 
-        // createsandboxandetc待workregioncanuse
+        // createsandboxandetcpendingworkregioncanuse
         $actualSandboxId = $this->ensureSandboxWorkspaceReady(
             $taskStatus,
             $sandboxId,
@@ -246,7 +246,7 @@ readonly class AsrSandboxService
             'full_workdir' => $fullWorkdir,
         ]);
 
-        // callsandbox finish androundqueryetc待complete(willpassresponsehandledevicefromautocreate/updatefilerecord)
+        // callsandbox finish androundqueryetcpendingcomplete(willpassresponsehandledevicefromautocreate/updatefilerecord)
         $mergeResult = $this->callSandboxFinishAndWait($taskStatus, $fileTitle);
 
         $this->logger->info('sandboxreturnfileinfo', [
@@ -270,7 +270,7 @@ readonly class AsrSandboxService
     }
 
     /**
-     * callsandbox finish androundqueryetc待complete.
+     * callsandbox finish androundqueryetcpendingcomplete.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $intelligentTitle 智cantitle(useatrename)
@@ -324,7 +324,7 @@ readonly class AsrSandboxService
             $transcriptFileConfig
         );
 
-        // roundqueryetc待complete(based onpresettimeandsleepbetweenseparator)
+        // roundqueryetcpendingcomplete(based onpresettimeandsleepbetweenseparator)
         $timeoutSeconds = AsrConfig::SANDBOX_MERGE_TIMEOUT;
         $pollingInterval = AsrConfig::POLLING_INTERVAL;
         $attempt = 0;
@@ -356,12 +356,12 @@ readonly class AsrSandboxService
                 return $result;
             }
 
-            // middlebetweenstatus(waiting, running, finalizing):continueroundqueryand按betweenseparatorrecordenterdegree
+            // middlebetweenstatus(waiting, running, finalizing):continueroundqueryandbybetweenseparatorrecordenterdegree
             $currentTime = microtime(true);
             $elapsedSeconds = (int) ($currentTime - $finishStartTime);
             if ($attempt % AsrConfig::SANDBOX_MERGE_LOG_FREQUENCY === 0 || ($currentTime - $lastLogTime) >= $logInterval) {
                 $remainingSeconds = max(0, $timeoutSeconds - $elapsedSeconds);
-                $this->logger->info('etc待sandboxaudiomerge', [
+                $this->logger->info('etcpendingsandboxaudiomerge', [
                     'task_key' => $taskStatus->taskKey,
                     'sandbox_id' => $sandboxId,
                     'attempt' => $attempt,
@@ -373,7 +373,7 @@ readonly class AsrSandboxService
                 $lastLogTime = $currentTime;
             }
 
-            // timenot足,notagain sleep,directlyconductmostbackonetime finishTask
+            // timenotenough,notagain sleep,directlyconductmostbackonetime finishTask
             if (($elapsedSeconds + $pollingInterval) >= $timeoutSeconds) {
                 break;
             }
@@ -391,7 +391,7 @@ readonly class AsrSandboxService
             );
         }
 
-        // time即willexhausted,conductmostbackonetimecheck
+        // timeimmediatelywillexhausted,conductmostbackonetimecheck
         $statusString = $response->getStatus();
         $status = SandboxAsrStatusEnum::from($statusString);
         $result = $this->checkAndHandleResponseStatus(
@@ -479,8 +479,8 @@ readonly class AsrSandboxService
     }
 
     /**
-     * etc待sandboxstart(canresponseinterface).
-     * ASR featurenotneedworkregioninitialize,onlyneedsandboxcanresponse getWorkspaceStatus interface即can.
+     * etcpendingsandboxstart(canresponseinterface).
+     * ASR featurenotneedworkregioninitialize,onlyneedsandboxcanresponse getWorkspaceStatus interfaceimmediatelycan.
      *
      * @param string $sandboxId sandboxID
      * @param string $taskKey taskKey(useatlog)
@@ -490,7 +490,7 @@ readonly class AsrSandboxService
         string $sandboxId,
         string $taskKey
     ): void {
-        $this->logger->info('ASR recording:etc待sandboxstart', [
+        $this->logger->info('ASR recording:etcpendingsandboxstart', [
             'task_key' => $taskKey,
             'sandbox_id' => $sandboxId,
             'timeout_seconds' => AsrConfig::SANDBOX_STARTUP_TIMEOUT,
@@ -517,21 +517,21 @@ readonly class AsrSandboxService
                 // interfacesuccessreturn,sandboxalreadystart
                 return;
             } catch (Throwable $e) {
-                // interfacecallfail,instructionsandboxalsonotstart,continueetc待
-                $this->logger->debug('ASR recording:sandbox尚notstart,continueetc待', [
+                // interfacecallfail,instructionsandboxalsonotstart,continueetcpending
+                $this->logger->debug('ASR recording:sandbox尚notstart,continueetcpending', [
                     'task_key' => $taskKey,
                     'sandbox_id' => $sandboxId,
                     'error' => $e->getMessage(),
                     'elapsed_seconds' => time() - $startTime,
                 ]);
 
-                // etc待downonetimeroundquery
+                // etcpendingdownonetimeroundquery
                 sleep(AsrConfig::POLLING_INTERVAL);
             }
         }
 
         // timeout
-        $this->logger->error('ASR recording:etc待sandboxstarttimeout', [
+        $this->logger->error('ASR recording:etcpendingsandboxstarttimeout', [
             'task_key' => $taskKey,
             'sandbox_id' => $sandboxId,
             'timeout_seconds' => AsrConfig::SANDBOX_STARTUP_TIMEOUT,
@@ -540,12 +540,12 @@ readonly class AsrSandboxService
         ExceptionBuilder::throw(
             AsrErrorCode::SandboxTaskCreationFailed,
             '',
-            ['message' => 'etc待sandboxstarttimeout(' . AsrConfig::SANDBOX_STARTUP_TIMEOUT . 'second)']
+            ['message' => 'etcpendingsandboxstarttimeout(' . AsrConfig::SANDBOX_STARTUP_TIMEOUT . 'second)']
         );
     }
 
     /**
-     * pass AgentDomainService createsandboxandetc待workregionthen绪.
+     * pass AgentDomainService createsandboxandetcpendingworkregionthen绪.
      */
     private function ensureSandboxWorkspaceReady(
         AsrTaskStatusDTO $taskStatus,
@@ -583,7 +583,7 @@ readonly class AsrSandboxService
 
             // ifresponsesuccess(code 1000)andworkregionalreadythen绪,directlyreturn
             if ($responseCode === ResponseCode::SUCCESS && WorkspaceStatus::isReady($workspaceStatus)) {
-                $this->logger->info('detecttosandboxworkregionalreadythen绪,no需initialize', [
+                $this->logger->info('detecttosandboxworkregionalreadythen绪,noneedinitialize', [
                     'task_key' => $taskStatus->taskKey,
                     'sandbox_id' => $requestedSandboxId,
                     'status' => $workspaceStatus,
@@ -627,13 +627,13 @@ readonly class AsrSandboxService
             $fullWorkdir
         );
 
-        $this->logger->info('sandboxcreaterequestcomplete,etc待sandboxstart', [
+        $this->logger->info('sandboxcreaterequestcomplete,etcpendingsandboxstart', [
             'task_key' => $taskStatus->taskKey,
             'requested_sandbox_id' => $requestedSandboxId,
             'actual_sandbox_id' => $actualSandboxId,
         ]);
 
-        // etc待sandboxstart(canresponseinterface)
+        // etcpendingsandboxstart(canresponseinterface)
         $this->waitForSandboxStartup($actualSandboxId, $taskStatus->taskKey);
 
         $taskStatus->sandboxId = $actualSandboxId;
@@ -715,13 +715,13 @@ readonly class AsrSandboxService
         $initMetadata = (new InitializationMetadataDTO(skipInitMessages: true));
         $this->agentDomainService->initializeAgent($dataIsolation, $taskContext, null, $projectOrganizationCode, $initMetadata);
 
-        $this->logger->info('sandboxinitializemessagealreadysend,etc待workregioninitializecomplete', [
+        $this->logger->info('sandboxinitializemessagealreadysend,etcpendingworkregioninitializecomplete', [
             'task_key' => $taskStatus->taskKey,
             'actual_sandbox_id' => $actualSandboxId,
             'task_id' => $taskEntity->getId(),
         ]);
 
-        // etc待workregioninitializecomplete(includefilesync)
+        // etcpendingworkregioninitializecomplete(includefilesync)
         $this->agentDomainService->waitForWorkspaceReady(
             $actualSandboxId,
             AsrConfig::WORKSPACE_INIT_TIMEOUT,

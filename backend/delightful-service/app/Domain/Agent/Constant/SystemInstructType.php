@@ -197,10 +197,10 @@ enum SystemInstructType: int
             }
         }
 
-        // 按enumdefinitionordersortsystemfingercommand
+        // byenumdefinitionordersortsystemfingercommand
         ksort($systemInstructs);
 
-        // 重newgroup合tool栏group items,systemfingercommandinfront
+        // reloadnewgroup合tool栏group items,systemfingercommandinfront
         $toolbarGroup['items'] = array_merge(array_values($systemInstructs), $normalInstructs);
 
         // updateoraddtool栏group

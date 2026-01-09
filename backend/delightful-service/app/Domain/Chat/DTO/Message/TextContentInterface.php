@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\DTO\Message;
 
 /**
- * frommessagemiddlegettextcontent,useatbigmodelhistorymessagerecordetcneed纯textscenario.
+ * frommessagemiddlegettextcontent,useatbigmodelhistorymessagerecordetcneedpuretextscenario.
  */
 interface TextContentInterface extends MessageInterface
 {

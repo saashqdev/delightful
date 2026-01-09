@@ -19,7 +19,7 @@ use Exception;
 use Hyperf\Contract\ConfigInterface;
 
 /**
- * AI can力domainservice.
+ * AI cancapabilitydomainservice.
  */
 class AiAbilityDomainService
 {
@@ -30,12 +30,12 @@ class AiAbilityDomainService
     }
 
     /**
-     * according tocan力codegetAIcanimplementationbody(useatrunlineo clock,notvalidationorganization).
+     * according tocancapabilitycodegetAIcanimplementationbody(useatrunlineo clock,notvalidationorganization).
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
-     * @param AiAbilityCode $code can力code
+     * @param AiAbilityCode $code cancapabilitycode
      * @return AiAbilityEntity AIcanimplementationbody
-     * @throws Exception whencan力notexistsinornotenableo clockthrowexception
+     * @throws Exception whencancapabilitynotexistsinornotenableo clockthrowexception
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): AiAbilityEntity
     {
@@ -49,7 +49,7 @@ class AiAbilityDomainService
     }
 
     /**
-     * get haveAIcan力list(nopagination).
+     * get haveAIcancapabilitylist(nopagination).
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @return array<AiAbilityEntity> AIcanimplementationbodylist
@@ -63,7 +63,7 @@ class AiAbilityDomainService
     }
 
     /**
-     * paginationqueryAIcan力list.
+     * paginationqueryAIcancapabilitylist.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @param AiAbilityQuery $query queryitemitem
@@ -76,17 +76,17 @@ class AiAbilityDomainService
     }
 
     /**
-     * updateAIcan力.
+     * updateAIcancapability.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
-     * @param AiAbilityCode $code can力code
+     * @param AiAbilityCode $code cancapabilitycode
      * @param array $data updatedata
      * @return bool whetherupdatesuccess
-     * @throws Exception whencan力notexistsino clockthrowexception
+     * @throws Exception whencancapabilitynotexistsino clockthrowexception
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool
     {
-        // checkcan力whetherexistsin
+        // checkcancapabilitywhetherexistsin
         $entity = $this->aiAbilityRepository->getByCode($dataIsolation, $code);
         if ($entity === null) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::AI_ABILITY_NOT_FOUND);
@@ -100,7 +100,7 @@ class AiAbilityDomainService
     }
 
     /**
-     * initializeAIcan力data.
+     * initializeAIcancapabilitydata.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationinfo
      * @return int initializequantity

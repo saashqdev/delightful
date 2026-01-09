@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::create('delightful_environments', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('deployment', '32')->comment('deploytype.official:saas|southeastAsia,私have:private');
+            $table->string('deployment', '32')->comment('deploytype.official:saas|southeastAsia,privatehave:private');
             $table->string('environment', '32')->comment('environmenttype:test/production');
             $table->json('config')->comment('environmentconfigurationdetail');
             $table->timestamps();

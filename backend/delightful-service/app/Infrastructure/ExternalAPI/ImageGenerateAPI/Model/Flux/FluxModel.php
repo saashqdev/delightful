@@ -145,13 +145,13 @@ class FluxModel extends AbstractImageGenerate
             }
         }
 
-        // checkwhetherat leasthaveone張imagegeneratesuccess
+        // checkwhetherat leasthaveone张imagegeneratesuccess
         if (empty($imageUrls)) {
-            $this->logger->error('Fluxtext generationgraph: haveimagegenerate均fail', ['rawResults' => $rawResults]);
+            $this->logger->error('Fluxtext generationgraph: haveimagegenerateaveragefail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
-        // 按indexsortresult
+        // byindexsortresult
         ksort($imageUrls);
         $imageUrls = array_values($imageUrls);
 
@@ -346,14 +346,14 @@ class FluxModel extends AbstractImageGenerate
             }
         }
 
-        // checkwhetherat leasthaveone張imagegeneratesuccess
+        // checkwhetherat leasthaveone张imagegeneratesuccess
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('Fluxtext generationgraph: haveimagegenerate均fail', ['errors' => $errors]);
+            $this->logger->error('Fluxtext generationgraph: haveimagegenerateaveragefail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 
-        // 按indexsortresult
+        // byindexsortresult
         ksort($rawResults);
         return array_values($rawResults);
     }
@@ -377,7 +377,7 @@ class FluxModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledownone張image,currentimagemaintainoriginalstatus
+                // continuehandledownone张image,currentimagemaintainoriginalstatus
             }
         }
 

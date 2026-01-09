@@ -21,7 +21,7 @@ use function Hyperf\Config\config;
 class AiAbilityAssembler
 {
     /**
-     * AIcan力EntityconvertforListDTO.
+     * AIcancapabilityEntityconvertforListDTO.
      */
     public static function entityToListDTO(AiAbilityEntity $entity, string $locale = 'zh_CN'): AiAbilityListDTO
     {
@@ -35,7 +35,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * AIcan力EntityconvertforDetailDTO.
+     * AIcancapabilityEntityconvertforDetailDTO.
      */
     public static function entityToDetailDTO(AiAbilityEntity $entity, string $locale = 'zh_CN'): AiAbilityDetailDTO
     {
@@ -58,7 +58,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * AIcan力EntitylistconvertforListDTOlist.
+     * AIcancapabilityEntitylistconvertforListDTOlist.
      *
      * @param array<AiAbilityEntity> $entities
      * @return array<AiAbilityListDTO>
@@ -73,7 +73,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * AIcan力listDTOtransferarray.
+     * AIcancapabilitylistDTOtransferarray.
      *
      * @param array<AiAbilityListDTO> $dtos
      */
@@ -90,7 +90,7 @@ class AiAbilityAssembler
      * toconfigurationdataconductdecrypt.
      *
      * @param string $config encryptconfigurationstring
-     * @param string $salt 盐value(usuallyisrecordID)
+     * @param string $salt saltvalue(usuallyisrecordID)
      * @return array decryptbackconfigurationarray
      */
     public static function decodeConfig(string $config, string $salt): array
@@ -106,7 +106,7 @@ class AiAbilityAssembler
      * toconfigurationdataconductencoding(JSONencoding + AESencrypt).
      *
      * @param array $config configurationarray
-     * @param string $salt 盐value(usuallyisrecordID)
+     * @param string $salt saltvalue(usuallyisrecordID)
      * @return string encryptbackconfigurationstring
      */
     public static function encodeConfig(array $config, string $salt): string
@@ -156,12 +156,12 @@ class AiAbilityAssembler
         $length = mb_strlen($apiKey);
         $minLength = $prefixLength + $suffixLength;
 
-        // if key tooshort,all部desensitize
+        // if key tooshort,alldepartmentdesensitize
         if ($length <= $minLength) {
             return str_repeat('*', $length);
         }
 
-        // displayfrontN位andbackN位
+        // displayfrontNpositionandbackNposition
         $prefix = mb_substr($apiKey, 0, $prefixLength);
         $suffix = mb_substr($apiKey, -$suffixLength);
         $maskLength = $length - $minLength;
@@ -170,9 +170,9 @@ class AiAbilityAssembler
     }
 
     /**
-     * generateAESencryptkey(foundationkey + 盐value).
+     * generateAESencryptkey(foundationkey + saltvalue).
      *
-     * @param string $salt 盐value
+     * @param string $salt saltvalue
      * @return string AESkey
      */
     private static function _getAesKey(string $salt): string

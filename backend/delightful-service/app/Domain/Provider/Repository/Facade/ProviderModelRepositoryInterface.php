@@ -53,7 +53,7 @@ interface ProviderModelRepositoryInterface
      * getorganizationcanusemodellist(containorganizationfromselfmodelandDelightfulmodel).
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param null|Category $category modelcategory,foremptyo clockreturn havecategorymodel
-     * @return ProviderModelEntity[] 按sortdescendingsortmodellist,containorganizationmodelandDelightfulmodel(notgo重)
+     * @return ProviderModelEntity[] bysortdescendingsortmodellist,containorganizationmodelandDelightfulmodel(notgoreload)
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, Status $status = Status::Enabled): array;
 
@@ -81,11 +81,11 @@ interface ProviderModelRepositoryInterface
     public function queries(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query, Page $page): array;
 
     /**
-     * according toqueryitemitemget按modeltypeminutegroupmodelIDlist.
+     * according toqueryitemitemgetbymodeltypeminutegroupmodelIDlist.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param ProviderModelQuery $query queryitemitem
-     * @return array<string, array<string>> 按modeltypeminutegroupmodelIDarray,format: [modelType => [model_id, model_id]]
+     * @return array<string, array<string>> bymodeltypeminutegroupmodelIDarray,format: [modelType => [model_id, model_id]]
      */
     public function getModelIdsGroupByType(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query): array;
 }

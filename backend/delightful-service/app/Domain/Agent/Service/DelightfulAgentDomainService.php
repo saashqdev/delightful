@@ -185,7 +185,7 @@ class DelightfulAgentDomainService
         // moveexceptemptyvalue
         $validFileKeys = array_filter($fileKeys, static fn ($fileKey) => ! empty($fileKey));
 
-        // 按organizationminutegroupfileKeys
+        // byorganizationminutegroupfileKeys
         $orgFileKeys = [];
         foreach ($validFileKeys as $fileKey) {
             $orgCode = explode('/', $fileKey, 2)[0] ?? '';
@@ -194,7 +194,7 @@ class DelightfulAgentDomainService
             }
         }
 
-        // 按organizationbatchquantitygetlink
+        // byorganizationbatchquantitygetlink
         $links = [];
         foreach ($orgFileKeys as $orgCode => $fileKeys) {
             $orgLinks = $this->cloudFileRepository->getLinks($orgCode, $fileKeys);

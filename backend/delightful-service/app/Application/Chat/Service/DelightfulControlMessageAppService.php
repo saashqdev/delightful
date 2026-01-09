@@ -23,7 +23,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Throwable;
 
 /**
- * controlmessage相close.
+ * controlmessagerelatedclose.
  */
 class DelightfulControlMessageAppService extends DelightfulSeqAppService
 {
@@ -55,7 +55,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
             ControlMessageType::HideConversation,
             ControlMessageType::MuteConversation,
             ControlMessageType::TopConversation => $this->conversationDomainService->conversationOptionChange($messageDTO, $dataIsolation),
-            // withdraw,alreadyread,alreadyreadreturn执,editmessage
+            // withdraw,alreadyread,alreadyreadreturnexecute,editmessage
             ControlMessageType::SeenMessages,
             ControlMessageType::ReadMessage,
             ControlMessageType::RevokeMessage,
@@ -84,7 +84,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         switch ($controlMessageType) {
             case ControlMessageType::SeenMessages:
             case ControlMessageType::ReadMessage:
-                // alreadyreadreturn执etcscenario,according tooneitemcontrolmessage,generateotherpersonseq.
+                // alreadyreadreturnexecuteetcscenario,according tooneitemcontrolmessage,generateotherpersonseq.
                 $this->controlDomainService->handlerMQReceiptSeq($delightfulSeqEntity);
                 break;
             case ControlMessageType::RevokeMessage:

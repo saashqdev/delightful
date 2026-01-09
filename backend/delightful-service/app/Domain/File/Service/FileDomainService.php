@@ -107,7 +107,7 @@ readonly class FileDomainService
     /**
      * batchquantitygetfilelink(fromautofrompathextractorganizationencodingandminutegroupprocess).
      * @param string[] $filePaths containorganizationencodingfilepatharray,format:orgCode/path/file.ext
-     * @param null|StorageBucketType $bucketType storage桶type,defaultforPublic
+     * @param null|StorageBucketType $bucketType storagebuckettype,defaultforPublic
      * @return array<string,FileLink> filepathtoFileLinkmapping
      */
     public function getBatchLinksByOrgPaths(array $filePaths, ?StorageBucketType $bucketType = null): array
@@ -119,7 +119,7 @@ readonly class FileDomainService
             return [];
         }
 
-        // 按organizationcodeminutegroupfilepath
+        // byorganizationcodeminutegroupfilepath
         $pathsByOrg = [];
         foreach ($validPaths as $filePath) {
             $orgCode = explode('/', $filePath, 2)[0] ?? '';
@@ -257,7 +257,7 @@ readonly class FileDomainService
      *
      * @param string $organizationCode organizationencoding
      * @param string $directoryPrefix directoryfrontsuffix
-     * @param StorageBucketType $bucketType storage桶type
+     * @param StorageBucketType $bucketType storagebuckettype
      * @return CloudFileInfoDTO[] fileDTOobjectarray
      */
     public function getFilesFromCloudStorage(

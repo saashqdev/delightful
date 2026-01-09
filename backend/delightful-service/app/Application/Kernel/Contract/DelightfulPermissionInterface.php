@@ -9,7 +9,7 @@ namespace App\Application\Kernel\Contract;
 
 /**
  * permissionenuminterface
- * providepermissionmanage統oneabstract
+ * providepermissionmanage统oneabstract
  */
 interface DelightfulPermissionInterface
 {
@@ -41,7 +41,7 @@ interface DelightfulPermissionInterface
     /**
      * getpermissiontreestructure.
      *
-     * @param bool $isPlatformOrganization whetherplatformorganization,platformorganizationdown才contain platform platformresourcetree
+     * @param bool $isPlatformOrganization whetherplatformorganization,platformorganizationdownonlycontain platform platformresourcetree
      */
     public function getPermissionTree(bool $isPlatformOrganization = false): array;
 

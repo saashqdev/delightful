@@ -38,9 +38,9 @@ class AsrTaskStatusDTO
 
     public ?string $presetTranscriptFileId = null; // presetstreamidentifyfileID
 
-    public ?string $presetNoteFilePath = null; // presetnotefile相topath
+    public ?string $presetNoteFilePath = null; // presetnotefilerelatedtopath
 
-    public ?string $presetTranscriptFilePath = null; // presetstreamidentifyfile相topath
+    public ?string $presetTranscriptFilePath = null; // presetstreamidentifyfilerelatedtopath
 
     // projectandtopicinfo
     public ?string $projectId = null; // projectID
@@ -102,7 +102,7 @@ class AsrTaskStatusDTO
         $this->projectId = self::getStringValue($data, ['project_id', 'projectId']);
         $this->topicId = self::getStringValue($data, ['topic_id', 'topicId']);
 
-        // recordingdirectoryinfo(fromautocleanfor相topath)
+        // recordingdirectoryinfo(fromautocleanforrelatedtopath)
         $this->tempHiddenDirectory = self::extractRelativePath(
             self::getStringValue($data, ['temp_hidden_directory', 'tempHiddenDirectory'])
         );
@@ -242,12 +242,12 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * extract相toat workspace 相topath
-     * ifpathcontain workspace/,extractitsback部minute
+     * extractrelatedtoat workspace relatedtopath
+     * ifpathcontain workspace/,extractitsbackdepartmentminute
      * this样canfromauto modifyjust Redis middlestorageoldformatdata(completepath).
      *
      * @param null|string $path originalpath
-     * @return null|string 相topath
+     * @return null|string relatedtopath
      */
     private static function extractRelativePath(?string $path): ?string
     {
@@ -255,7 +255,7 @@ class AsrTaskStatusDTO
             return $path;
         }
 
-        // ifpathcontain workspace/,extract workspace/ backsurface部minute
+        // ifpathcontain workspace/,extract workspace/ backsurfacedepartmentminute
         if (str_contains($path, 'workspace/')) {
             $parts = explode('workspace/', $path, 2);
             return $parts[1] ?? $path;
@@ -265,10 +265,10 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarraymiddle按prioritylevelgetstringvalue(support snake_case and camelCase).
+     * fromarraymiddlebyprioritylevelgetstringvalue(support snake_case and camelCase).
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys keynamecolumntable(按prioritylevelsort)
+     * @param array<string> $keys keynamecolumntable(byprioritylevelsort)
      * @param null|string $default defaultvalue
      */
     private static function getStringValue(array $data, array $keys, ?string $default = null): ?string
@@ -282,10 +282,10 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarraymiddle按prioritylevelgetintegervalue(support snake_case and camelCase).
+     * fromarraymiddlebyprioritylevelgetintegervalue(support snake_case and camelCase).
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys keynamecolumntable(按prioritylevelsort)
+     * @param array<string> $keys keynamecolumntable(byprioritylevelsort)
      * @param null|int $default defaultvalue
      */
     private static function getIntValue(array $data, array $keys, ?int $default = null): ?int
@@ -299,10 +299,10 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarraymiddle按prioritylevelgetbooleanvalue(supportmultipletypeformat:true/false,1/0,'1'/'0').
+     * fromarraymiddlebyprioritylevelgetbooleanvalue(supportmultipletypeformat:true/false,1/0,'1'/'0').
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys keynamecolumntable(按prioritylevelsort)
+     * @param array<string> $keys keynamecolumntable(byprioritylevelsort)
      */
     private static function getBoolValue(array $data, array $keys): bool
     {
@@ -327,7 +327,7 @@ class AsrTaskStatusDTO
                 return false;
             }
 
-            // othervalue按truevaluejudge
+            // othervaluebytruevaluejudge
             return (bool) $value;
         }
 

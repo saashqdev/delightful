@@ -186,7 +186,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         if ($groupEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NOT_FOUND);
         }
-        // group ownernotcanexitgroup chat,needfirsttransfergroup owner身share
+        // group ownernotcanexitgroup chat,needfirsttransfergroup ownerbodyshare
         $groupOwner = $groupEntity->getGroupOwner();
         if ($groupOwner === $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_TRANSFER_OWNER_BEFORE_LEAVE);
@@ -407,7 +407,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         }
         // itemfrontonlysupportaddsameorganizationuser
         $groupAddUsers = $this->delightfulUserDomainService->getUserByIds($needAddGroupUserIds, $dataIsolation, ['user_id', 'nickname']);
-        // 按departmentgetuser
+        // bydepartmentgetuser
         if (! empty($departmentIds)) {
             $departmentUsers = $this->delightfulDepartmentUserDomainService->getDepartmentUsersByDepartmentIds(
                 $departmentIds,
@@ -418,7 +418,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         } else {
             $departmentUsers = [];
         }
-        // go重
+        // goreload
         $groupAddUsers = array_values(array_column(array_merge($departmentUsers, $groupAddUsers), null, 'user_id'));
         if (count($groupAddUsers) > $chatGroupUserNumLimit) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_NUM_LIMIT_ERROR);

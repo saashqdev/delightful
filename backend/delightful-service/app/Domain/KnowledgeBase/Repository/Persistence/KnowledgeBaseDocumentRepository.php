@@ -316,40 +316,40 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     {
         $builder = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query());
 
-        // 按knowledge baseencodingfilter
+        // byknowledge baseencodingfilter
         $builder->where('knowledge_base_code', $query->getKnowledgeBaseCode());
 
-        // 按documentencodingfilter
+        // bydocumentencodingfilter
         if ($query->getCode() !== null) {
             $builder->where('code', $query->getCode());
         }
 
-        // 按nameblurquery
+        // bynameblurquery
         if ($query->getName() !== null && $query->getName() !== '') {
             $builder->where('name', 'like', '%' . $query->getName() . '%');
         }
 
-        // 按enablestatusfilter
+        // byenablestatusfilter
         if ($query->getEnabled() !== null) {
             $builder->where('enabled', $query->getEnabled());
         }
 
-        // 按documenttypefilter
+        // bydocumenttypefilter
         if ($query->getDocType() !== null) {
             $builder->where('doc_type', $query->getDocType());
         }
 
-        // 按createpersonfilter
+        // bycreatepersonfilter
         if ($query->getCreatedUid() !== null) {
             $builder->where('created_uid', $query->getCreatedUid());
         }
 
-        // 按updatepersonfilter
+        // byupdatepersonfilter
         if ($query->getUpdatedUid() !== null) {
             $builder->where('updated_uid', $query->getUpdatedUid());
         }
 
-        // 按documentencodingarraybatchquantityquery
+        // bydocumentencodingarraybatchquantityquery
         if ($query->getCodes() !== null && ! empty($query->getCodes())) {
             $builder->whereIn('code', $query->getCodes());
         }

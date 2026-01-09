@@ -13,7 +13,7 @@ use function Hyperf\Translation\__;
  * Delightful resourceenum.
  *
  * 1. use Backed Enum willeachresourcemappingforuniqueonestring key.
- * 2. passmethodprovide label / parent  etcyuaninfo,convenientback続generatepermissiontree,make i18n etc.
+ * 2. passmethodprovide label / parent  etcyuaninfo,convenientbackcontinuegeneratepermissiontree,make i18n etc.
  * 3. onlydefinitionresourceitself,not涉andoperationastype(like query / edit).
  *
  * notice:ifyoumodifythisfile,pleaseexecutesingleyuantest PermissionApiTest.testGetPermissionTree.
@@ -37,7 +37,7 @@ enum DelightfulResourceEnum: string
     case ADMIN_AI_MODEL = 'platform.ai.model_management'; # AImanage-modelmanage
     case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AImanage-智can绘graphmanage
     case ADMIN_AI_MODE = 'platform.ai.mode_management'; # AImanage-modetypemanagemanage
-    case ADMIN_AI_ABILITY = 'platform.ai.ability'; # AImanage-can力manage
+    case ADMIN_AI_ABILITY = 'platform.ai.ability'; # AImanage-cancapabilitymanage
     case SAFE_SUB_ADMIN = 'admin.safe.sub_admin';  # securitycontrol-childadministrator
     case PLATFORM_SETTING_PLATFORM_INFO = 'platform.setting.platform_info'; # platformmanage - systemset - platforminfo
     case PLATFORM_SETTING_MAINTENANCE = 'platform.setting.maintenance'; # platformmanage - systeminfo - maintainmanage

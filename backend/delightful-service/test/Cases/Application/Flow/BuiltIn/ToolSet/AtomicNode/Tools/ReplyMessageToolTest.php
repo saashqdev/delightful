@@ -83,7 +83,7 @@ JSON, true));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'system_prompt' => 'toatusersubmitoutissuemakeoutreturn答,meanwhilecall reply_message toolcomegenerateonereplygivetouser',
+            'system_prompt' => 'toatusersubmitoutissuemakeoutreturnanswer,meanwhilecall reply_message toolcomegenerateonereplygivetouser',
             'user_prompt' => 'helpIcalculateonedown 1+1',
         ]);
         $runner->execute($vertexResult, $executionData);

@@ -243,7 +243,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
                 continue;
             }
 
-            // ifisofficialorganization,filterdrop Delightful servicequotient(Official),因for delightful servicequotientthenisofficialorganizationconfigurationmodeltotaland
+            // ifisofficialorganization,filterdrop Delightful servicequotient(Official),factorfor delightful servicequotientthenisofficialorganizationconfigurationmodeltotaland
             /*if ($isOfficialOrganization && $provider->getProviderCode() === ProviderCode::Official) {
                 continue;
             }*/
@@ -255,15 +255,15 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             }
         }
 
-        // tootherservicequotient按 sort fieldsort(numbermorebigmore靠front)
+        // tootherservicequotientby sort fieldsort(numbermorebigmore靠front)
         usort($otherProviders, function ($a, $b) {
             if ($a->getSort() === $b->getSort()) {
-                return strcmp($a->getId(), $b->getId()); // same sort valueo clock按 ID sort
+                return strcmp($a->getId(), $b->getId()); // same sort valueo clockby ID sort
             }
             return $b->getSort() <=> $a->getSort(); // descendingrowcolumn,numberbiginfront
         });
 
-        // iffindto Delightful servicequotient,willitsputintheone位(nonofficialorganization才willhave Delightful servicequotient)
+        // iffindto Delightful servicequotient,willitsputintheoneposition(nonofficialorganizationonlywillhave Delightful servicequotient)
         if ($delightfulProvider !== null) {
             $result = array_merge([$delightfulProvider], $otherProviders);
         } else {
@@ -457,7 +457,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * aes keyadd盐.
+     * aes keyaddsalt.
      */
     private function _getAesKey(string $salt): string
     {

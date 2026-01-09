@@ -17,14 +17,14 @@ return new class extends Migration {
         Schema::create('delightful_long_term_memories', function (Blueprint $table) {
             $table->string('id', 36)->primary()->comment('memoryuniqueoneID');
             $table->text('content')->comment('memorycontent');
-            $table->text('pending_content')->nullable()->comment('pending changemorememorycontent,etc待useracceptchangemore');
+            $table->text('pending_content')->nullable()->comment('pending changemorememorycontent,etcpendinguseracceptchangemore');
             $table->text('explanation')->nullable()->comment('memoryexplain,instructionthisitemmemoryforwhatvaluerecord');
             $table->text('origin_text')->nullable()->comment('originaltextcontent');
             $table->string('memory_type', 50)->default('manual_input')->comment('memorytype');
-            $table->string('status', 20)->default('pending')->comment('memorystatus:pending-待accept, active-in effect, pending_revision-待revision');
+            $table->string('status', 20)->default('pending')->comment('memorystatus:pending-pendingaccept, active-in effect, pending_revision-pendingrevision');
             $table->tinyInteger('enabled')->default(0)->comment('whetherenable:0-disable,1-enable(only active statusmemorycanset)');
             $table->decimal('confidence', 3, 2)->unsigned()->default(0.8)->comment('confidencedegree(0-1)');
-            $table->decimal('importance', 3, 2)->unsigned()->default(0.5)->comment('重wantproperty(0-1)');
+            $table->decimal('importance', 3, 2)->unsigned()->default(0.5)->comment('reloadwantproperty(0-1)');
             $table->unsignedInteger('access_count')->default(0)->comment('accesscount');
             $table->unsignedInteger('reinforcement_count')->default(0)->comment('strong化count');
             $table->decimal('decay_factor', 3, 2)->unsigned()->default(1.0)->comment('衰subtractfactor(0-1)');

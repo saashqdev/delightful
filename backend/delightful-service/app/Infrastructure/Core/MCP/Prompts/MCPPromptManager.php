@@ -24,7 +24,7 @@ class MCPPromptManager
      */
     public function registerPrompt(array $prompt): void
     {
-        // nullimplement,暫notregisteranyprompt
+        // nullimplement,temporarynotregisteranyprompt
     }
 
     /**

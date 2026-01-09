@@ -52,7 +52,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
         // getdepartmentuserassociateinfo
         $departmentUserEntities = $this->departmentUserDomainService->getDepartmentUsersByUserIds([$userId], $dataIsolation);
 
-        // extract工numberandposition
+        // extractworkernumberandposition
         $workNumber = '';
         $position = '';
         if (! empty($departmentUserEntities)) {

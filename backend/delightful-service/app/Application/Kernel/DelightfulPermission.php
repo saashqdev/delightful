@@ -136,7 +136,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
             throw new InvalidArgumentException('Not a resource type: ' . $resource);
         }
 
-        // modepiecelayerdefinitionfortwolevelresource(即platformdirectlychildresource)
+        // modepiecelayerdefinitionfortwolevelresource(immediatelyplatformdirectlychildresource)
         if ($enum->parent() === null) {
             // toplevelresource(platformitself)
             $moduleEnum = $enum;
@@ -212,10 +212,10 @@ class DelightfulPermission implements DelightfulPermissionInterface
         $tree = [];
 
         foreach ($this->generateAllPermissions() as $permission) {
-            // willresourcepath按 '.' split
+            // willresourcepathby '.' split
             $segments = explode('.', $permission['resource']);
             if (count($segments) < 2) {
-                // at leastshouldcontainplatform + resource两level,若not足thenskip
+                // at leastshouldcontainplatform + resourcetwolevel,ifnotenoughthenskip
                 continue;
             }
 
@@ -241,7 +241,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 $accumKey .= '.' . $segment;
                 $isLastSegment = $index === array_key_last($segments);
 
-                // get label:theonesegmentusemodepiecemiddledocument name,itsremainder按rule
+                // get label:theonesegmentusemodepiecemiddledocument name,itsremainderbyrule
                 $label = match (true) {
                     $index === 0 => $this->getResourceModule($permission['resource']),                // modepiecelayer
                     $isLastSegment => $permission['resource_label'],      // resourcelayer
@@ -293,7 +293,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
             // checkresourcewhetherexistsin
             $resourceExists = in_array($parsed['resource'], $this->getResources());
 
-            // checkoperationaswhetherexistsin(按resource)
+            // checkoperationaswhetherexistsin(byresource)
             $operationExists = in_array($parsed['operation'], $this->getOperationsByResource($parsed['resource']), true);
 
             return $resourceExists && $operationExists;
@@ -303,15 +303,15 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * judgeuserpermissionsetmiddlewhether拥havefingersetpermission(considerhiddentypecontain).
+     * judgeuserpermissionsetmiddlewhetherownhavefingersetpermission(considerhiddentypecontain).
      *
      * rule:
      *   1. likedirectly命middlepermissionkey,return true;
-     *   2. if拥havealllocalpermission ALL_PERMISSIONS,return true;
-     *   3. 若not命middle,thencheckbythepermissionhiddentypecontainpermissionset(for example *edit* hiddentypecontain *query*).
+     *   2. ifownhavealllocalpermission ALL_PERMISSIONS,return true;
+     *   3. ifnot命middle,thencheckbythepermissionhiddentypecontainpermissionset(for example *edit* hiddentypecontain *query*).
      *
      * @param string $permissionKey goalpermissionkey
-     * @param string[] $userPermissions useralready拥havepermissionkeyset
+     * @param string[] $userPermissions useralreadyownhavepermissionkeyset
      * @param bool $isPlatformOrganization whetherplatformorganization
      */
     public function checkPermission(string $permissionKey, array $userPermissions, bool $isPlatformOrganization = false): bool
@@ -334,7 +334,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         }
 
         $parsed = $this->parsePermission($permissionKey);
-        // defaulthiddentype:edit -> query(if two operationsas均existsin)
+        // defaulthiddentype:edit -> query(if two operationsasaverageexistsin)
         $ops = $this->getOperationsByResource($parsed['resource']);
         if (in_array(DelightfulOperationEnum::EDIT->value, $ops, true) && in_array(DelightfulOperationEnum::QUERY->value, $ops, true)) {
             if ($parsed['operation'] === DelightfulOperationEnum::QUERY->value) {
@@ -360,7 +360,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         if (! enum_exists($opEnumClass)) {
             throw new InvalidArgumentException('Operation enum not found for resource: ' . $resource);
         }
-        // onlysupport BackedEnum,因forback続needread ->value
+        // onlysupport BackedEnum,factorforbackcontinueneedread ->value
         if (! is_subclass_of($opEnumClass, BackedEnum::class)) {
             throw new InvalidArgumentException('Operation enum for resource must be BackedEnum: ' . $opEnumClass);
         }
@@ -390,7 +390,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * get按resourceoperationastag.
+     * getbyresourceoperationastag.
      */
     protected function getOperationLabelByResource(string $resource, string $operation): string
     {
@@ -411,7 +411,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 }
                 return $translated;
             }
-            // compatible:若notimplement label/translationKey,then退return通use getOperationLabel logic
+            // compatible:ifnotimplement label/translationKey,then退returncommonuse getOperationLabel logic
         }
         return $this->getOperationLabel($operation);
     }

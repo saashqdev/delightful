@@ -51,7 +51,7 @@ interface DelightfulChatTopicRepositoryInterface
     public function getTopicMessagesByConversationId(string $conversationId): array;
 
     /**
-     * 按timerangegetconversationdownsometopicmessage.
+     * bytimerangegetconversationdownsometopicmessage.
      * @return ClientSequenceResponse[]
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array;

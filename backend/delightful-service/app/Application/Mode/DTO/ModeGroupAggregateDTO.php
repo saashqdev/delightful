@@ -86,7 +86,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
         foreach ($this->models as $key => $model) {
             if ($model->getModelId() === $modelId) {
                 unset($this->models[$key]);
-                $this->models = array_values($this->models); // 重newindex
+                $this->models = array_values($this->models); // reloadnewindex
                 break;
             }
         }

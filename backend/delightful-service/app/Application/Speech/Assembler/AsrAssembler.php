@@ -16,7 +16,7 @@ use Hyperf\Codec\Json;
 
 /**
  * ASR grouploader
- * responsible ASR 相closeactualbodygroup装andpathconvert.
+ * responsible ASR relatedcloseactualbodygroup装andpathconvert.
  *
  * pathformatinstruction:
  * - workregiontopath (workspace-relative): .asr_recordings/session_xxx or recordingsummary_xxx
@@ -32,7 +32,7 @@ class AsrAssembler
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
      * @param int $projectId projectID
-     * @param string $relativePath 相topath(like:.asr_recordings/task_123 or recordingsummary_xxx)
+     * @param string $relativePath relatedtopath(like:.asr_recordings/task_123 or recordingsummary_xxx)
      * @param string $fullPrefix completefrontsuffix(organizationcode+APP_ID+bucket_md5,like:DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
      * @param string $workDir workdirectory
      * @param int $rootDirectoryId rootdirectoryID
@@ -99,7 +99,7 @@ class AsrAssembler
     /**
      * buildcomplete file_key.
      *
-     * convertclose系: file_key = fullPrefix + workDir + "/" + relativePath
+     * convertclosesystem: file_key = fullPrefix + workDir + "/" + relativePath
      *
      * @param string $fullPrefix organizationcode+APP_ID+bucket_md5frontsuffix (like: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
      * @param string $workDir projectworkdirectory (like: project_123/workspace)
@@ -118,7 +118,7 @@ class AsrAssembler
      * from file_key extractworkregiontopath.
      *
      * willcomplete file_key convertforworkregiontopath,useatsandbox API calland界surfaceshow
-     * convertclose系: relativePath = extractWorkspaceRelativePath(file_key)
+     * convertclosesystem: relativePath = extractWorkspaceRelativePath(file_key)
      *
      * @param string $fileKey complete file_key (like: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
      * @return string workregiontopath (like: .asr_recordings/session_xxx)
@@ -131,10 +131,10 @@ class AsrAssembler
         // find workspace/ position
         $workspacePos = strpos($normalizedPath, '/workspace/');
         if ($workspacePos !== false) {
-            // extract workspace/ backsurface部minute
+            // extract workspace/ backsurfacedepartmentminute
             $relativePath = substr($normalizedPath, $workspacePos + 11); // 11 = strlen('/workspace/')
 
-            // if相topathnotforempty,return相topath
+            // ifrelatedtopathnotforempty,returnrelatedtopath
             if (! empty($relativePath)) {
                 return $relativePath;
             }
@@ -148,7 +148,7 @@ class AsrAssembler
             }
         }
 
-        // ifallnotfindtoworkspaceidentifier,directlyreturnoriginalpath(maybealreadyalreadyis相topath)
+        // ifallnotfindtoworkspaceidentifier,directlyreturnoriginalpath(maybealreadyalreadyisrelatedtopath)
         return $normalizedPath;
     }
 }

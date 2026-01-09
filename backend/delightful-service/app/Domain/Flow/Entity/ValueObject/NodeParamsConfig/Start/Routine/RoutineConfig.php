@@ -64,7 +64,7 @@ class RoutineConfig
             return $this->crontabRule;
         }
         if ($this->type === RoutineType::NoRepeat) {
-            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'currenttypeno需generateschedulerule');
+            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'currenttypenoneedgenerateschedulerule');
         }
         $minute = $hour = $dayOfMonth = $month = $dayOfWeek = '*';
         if (! empty($this->time)) {
@@ -138,14 +138,14 @@ class RoutineConfig
             if (empty($this->interval)) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetweenseparatorfrequency notcanforempty');
             }
-            // onlyeachdaytime,才cancustomize interval,itsremainderallis 1
+            // onlyeachdaytime,onlycancustomize interval,itsremainderallis 1
             if (in_array($this->unit, [IntervalUnit::Week, IntervalUnit::Month, IntervalUnit::Year])) {
                 $this->interval = 1;
             }
             if ($this->interval < 1 || $this->interval > 30) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetweenseparatorfrequency onlycanin1~30between');
             }
-            // onlyisweekorpersonmonthtime,才canhave values
+            // onlyisweekorpersonmonthtime,onlycanhave values
             if (in_array($this->unit, [IntervalUnit::Week, IntervalUnit::Month])) {
                 if (empty($this->values)) {
                     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetweenseparatorfrequency notcanforempty');
@@ -185,7 +185,7 @@ class RoutineConfig
             ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'time notcanforempty');
         }
 
-        // eachweektime,day tableshowweek几 0-6  0isweekone
+        // eachweektime,day tableshowweekseveral 0-6  0isweekone
         if ($this->type === RoutineType::WeeklyRepeat) {
             if (! is_numeric($this->day) || $this->day < 0 || $this->day > 6) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date onlycanin0~6between');
@@ -193,7 +193,7 @@ class RoutineConfig
             $this->day = (string) ((int) $this->day);
         }
 
-        // eachmonthtime,day tableshowthe几day
+        // eachmonthtime,day tableshowtheseveralday
         if ($this->type === RoutineType::MonthlyRepeat) {
             if (! is_numeric($this->day) || $this->day < 1 || $this->day > 31) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date onlycanin1~31between');

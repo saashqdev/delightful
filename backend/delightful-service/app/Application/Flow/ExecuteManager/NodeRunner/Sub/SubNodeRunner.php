@@ -29,7 +29,7 @@ class SubNodeRunner extends NodeRunner
     {
         $subFlowId = $this->node->getParams()['sub_flow_id'] ?? '';
 
-        // runlineo clock才getchildprocessdata,thiswithinshouldinrunlineo clockthenloadgood,thiswithinforconvenientfirstthishow to write
+        // runlineo clockonlygetchildprocessdata,thiswithinshouldinrunlineo clockthenloadgood,thiswithinforconvenientfirstthishow to write
         $subFlow = $this->delightfulFlowDomainService->getByCode($executionData->getDataIsolation(), $subFlowId);
         if (! $subFlow || $subFlow->getType() !== Type::Sub) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.sub.flow_not_found', ['flow_code' => $subFlowId]);
@@ -75,7 +75,7 @@ class SubNodeRunner extends NodeRunner
                 ['flow_name' => $subFlow->getName(), 'error' => $throwable->getMessage()]
             );
         }
-        // sectionpointinside部exceptionin node  debug informationmiddlerecord
+        // sectionpointinsidedepartmentexceptionin node  debug informationmiddlerecord
         foreach ($subFlow->getNodes() as $node) {
             if ($node->getNodeDebugResult() && ! $node->getNodeDebugResult()->isSuccess()) {
                 ExceptionBuilder::throw(

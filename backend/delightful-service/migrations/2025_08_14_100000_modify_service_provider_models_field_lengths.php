@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('name', 255)->comment('servicequotientname')->change();
         });
 
-        // modify service_provider_models table相closefieldlength
+        // modify service_provider_models tablerelatedclosefieldlength
         Schema::table('service_provider_models', function (Blueprint $table) {
             $table->string('name', 255)->comment('modelname')->change();
             $table->string('model_version', 255)->comment('modelinservicequotientdownname')->change();
@@ -37,7 +37,7 @@ return new class extends Migration {
             $table->string('name', 50)->comment('servicequotientname')->change();
         });
 
-        // rollback service_provider_models table相closefieldlength
+        // rollback service_provider_models tablerelatedclosefieldlength
         Schema::table('service_provider_models', function (Blueprint $table) {
             $table->string('name', 50)->comment('modelname')->change();
             $table->string('model_version', 50)->comment('modelinservicequotientdownname')->change();

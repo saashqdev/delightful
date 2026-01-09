@@ -180,7 +180,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
 
         $this->output->writeln(sprintf(
             'processcomplete!fingercommandcollection%supdate',
-            $hasChanges ? 'already' : 'no需'
+            $hasChanges ? 'already' : 'noneed'
         ));
 
         return 0;

@@ -112,7 +112,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 5. switchtonothavepermissionusertestpermissioncontrol
         $this->switchUserTest2();
         // testnonprojectmembernotcansettop - shouldreturnpermissionerror
-        $this->pinProject($projectId, true, 51202); // false设51202ispermissionerrorcode
+        $this->pinProject($projectId, true, 51202); // falseset51202ispermissionerrorcode
     }
 
     /**
@@ -599,7 +599,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest2();
 
         // testnopermissionadd入edit - shouldreturnerror
-        $this->joinFileEditing($unauthorizedFileId, 51202); // false设51200isnopermissionerrorcode
+        $this->joinFileEditing($unauthorizedFileId, 51202); // falseset51200isnopermissionerrorcode
 
         // testnopermissionleaveedit - shouldreturnerror
         $this->leaveFileEditing($unauthorizedFileId, 51202);
@@ -633,7 +633,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         // 3. testinvalidfileIDformat
         $invalidFileId = 'invalid_file_id';
-        $this->joinFileEditing($invalidFileId, 51202); // false设400isparametererror
+        $this->joinFileEditing($invalidFileId, 51202); // falseset400isparametererror
     }
 
     public function updateFileContent(int $fileId, string $content, int $expectedCode): void
@@ -682,7 +682,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, false);
 
-        // 5. 重newsettopprojectbytestsort
+        // 5. reloadnewsettopprojectbytestsort
         $this->pinProject($projectId, true);
 
         // 6. validatesettopprojectrowinfrontsurface
@@ -725,7 +725,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data']);
 
-        // validateresponsestructurecontainsettop相closefield
+        // validateresponsestructurecontainsettoprelatedclosefield
         $this->assertArrayHasKey('list', $response['data'], 'responseshouldcontainlistfield');
         $this->assertArrayHasKey('total', $response['data'], 'responseshouldcontaintotalfield');
 
@@ -796,7 +796,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $emptyResponse = $this->getCollaborationProjectCreators();
         $this->verifyEmptyCreatorListResponse($emptyResponse);
 
-        // 3. restoreprojectmemberstatus,by免impactback続test
+        // 3. restoreprojectmemberstatus,by免impactbackcontinuetest
         $this->switchUserTest1();
         $this->updateMembers($this->projectId);
     }
@@ -844,7 +844,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals($response1['code'], $response2['code']);
         $this->assertEquals(count($response1['data']), count($response2['data']));
 
-        // 2. validatecreatepersongo重 - sameonecreatepersononlyshouldoutshowonetime
+        // 2. validatecreatepersongoreload - sameonecreatepersononlyshouldoutshowonetime
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListDeduplication($response);
     }
@@ -909,7 +909,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * validatecreatepersoncolumntablego重.
+     * validatecreatepersoncolumntablegoreload.
      */
     public function verifyCreatorListDeduplication(array $response): void
     {

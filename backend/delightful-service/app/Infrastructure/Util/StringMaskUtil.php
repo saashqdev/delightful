@@ -11,7 +11,7 @@ class StringMaskUtil
 {
     /**
      * tostringconductdesensitizeprocess
-     * retainfrontthree位andbackthree位,middlebetweenuse星numberreplace.
+     * retainfrontthreepositionandbackthreeposition,middlebetweenuse星numberreplace.
      */
     public static function mask(string $value): string
     {
@@ -24,10 +24,10 @@ class StringMaskUtil
             return str_repeat('*', $length);
         }
 
-        // retainfrontthree位andbackthree位,middlebetweenuseoriginalcharacterquantitysame星numberreplace
+        // retainfrontthreepositionandbackthreeposition,middlebetweenuseoriginalcharacterquantitysame星numberreplace
         $prefix = mb_substr($value, 0, 3);
         $suffix = mb_substr($value, -3, 3);
-        $middleLength = $length - 6; // subtractgofrontthree位andbackthree位
+        $middleLength = $length - 6; // subtractgofrontthreepositionandbackthreeposition
         $maskedMiddle = str_repeat('*', $middleLength);
         return $prefix . $maskedMiddle . $suffix;
     }

@@ -47,7 +47,7 @@ interface ProviderRepositoryInterface
     public function getByCodeAndCategory(ProviderCode $providerCode, Category $category): ?ProviderEntity;
 
     /**
-     * according toIDgetservicequotientactualbody(not按organizationfilter,alllocalquery).
+     * according toIDgetservicequotientactualbody(notbyorganizationfilter,alllocalquery).
      *
      * @param int $id servicequotientID
      * @return null|ProviderEntity servicequotientactualbody
@@ -55,7 +55,7 @@ interface ProviderRepositoryInterface
     public function getByIdWithoutOrganizationFilter(int $id): ?ProviderEntity;
 
     /**
-     * according toIDarraygetservicequotientactualbodylist(not按organizationfilter,alllocalquery).
+     * according toIDarraygetservicequotientactualbodylist(notbyorganizationfilter,alllocalquery).
      *
      * @param array<int> $ids servicequotientIDarray
      * @return array<int, ProviderEntity> returnbyidforkeyservicequotientactualbodyarray

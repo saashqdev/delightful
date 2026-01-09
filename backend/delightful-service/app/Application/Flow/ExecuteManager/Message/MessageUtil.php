@@ -142,7 +142,7 @@ class MessageUtil
      */
     private static function report2ChatFile(AbstractAttachment $attachment, ExecutionData $executionData): DelightfulChatFileEntity
     {
-        // thiswithinshouldis相whenat agent uploadfile
+        // thiswithinshouldisrelatedwhenat agent uploadfile
         $dataIsolation = ContactDataIsolation::create(
             $executionData->getDataIsolation()->getCurrentOrganizationCode(),
             $executionData->getAgentUserId() ?: $executionData->getDataIsolation()->getCurrentUserId()

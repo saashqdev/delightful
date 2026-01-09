@@ -58,7 +58,7 @@ class Node extends AbstractValueObject
 
     /**
      * sectionpointexecutecallbackfunction,ifhavethevalue,thatwhatwilldirectlyexecutethechoose,whilenotispassNodeRunnercomeexecute.
-     * thiswithin暫o clock想toisforsingle测convenient.
+     * thiswithintemporaryo clock想toisforsingletestconvenient.
      */
     private ?Closure $callback = null;
 

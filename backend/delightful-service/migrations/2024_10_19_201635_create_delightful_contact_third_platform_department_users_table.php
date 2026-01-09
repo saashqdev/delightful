@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->string('third_city', 64)->comment('workcity')->default('');
             $table->string('third_country', 32)->comment('countryorgroundregion Code abbreviation')->default('CN');
             $table->string('third_join_time', 64)->comment('onboardtime.secondleveltimestampformat,tableshowfrom 1970 year 1 month 1 daystartpassed throughpasssecondcount.');
-            $table->string('third_employee_no', 32)->comment('工number')->default('');
+            $table->string('third_employee_no', 32)->comment('workernumber')->default('');
             $table->tinyInteger('third_employee_type')->comment('employeetype.1:justtypeemployee2:intern3:outsidepackage4:labor 5:consultant')->default(1);
             $table->text('third_custom_attrs')->comment('customizefield.');
             $table->text('third_department_path')->comment('departmentpath.');

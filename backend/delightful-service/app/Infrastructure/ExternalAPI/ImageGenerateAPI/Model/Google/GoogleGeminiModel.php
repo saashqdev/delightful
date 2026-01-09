@@ -141,7 +141,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         }
 
         if (empty($imageData)) {
-            $this->logger->error('Google Geminitext generationgraph: haveimagegenerate均fail', ['rawResults' => $rawResults]);
+            $this->logger->error('Google Geminitext generationgraph: haveimagegenerateaveragefail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
@@ -180,7 +180,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         try {
             // ifhavereferencegraphlike,thenexecutegraphlikeedit
             if (! empty($referImages)) {
-                // gettheone張referencegraphlikeconductedit
+                // gettheone张referencegraphlikeconductedit
                 $referImage = $referImages[0];
                 $result = $this->processImageEdit($referImage, $prompt);
             } else {
@@ -252,7 +252,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // Google Gemini APIeachtimeonlycangenerateone張graph,passandhaircallimplementmultiplegraphgenerate
+        // Google Gemini APIeachtimeonlycangenerateone张graph,passandhaircallimplementmultiplegraphgenerate
         $count = $imageGenerateRequest->getGenerateNum();
         $rawResults = [];
         $errors = [];
@@ -298,7 +298,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('Google Geminitext generationgraph: haveimagegenerate均fail', ['errors' => $errors]);
+            $this->logger->error('Google Geminitext generationgraph: haveimagegenerateaveragefail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 
@@ -414,7 +414,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 $currentUsage->completionTokens += $usageMetadata['candidatesTokenCount'] ?? 0;
                 $currentUsage->totalTokens += $usageMetadata['totalTokenCount'] ?? 0;
             } else {
-                // ifnothaveusageinfo,defaultincrease1張image
+                // ifnothaveusageinfo,defaultincrease1张image
                 $currentUsage->addGeneratedImages(1);
             }
 

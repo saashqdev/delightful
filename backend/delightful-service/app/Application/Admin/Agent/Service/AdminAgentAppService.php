@@ -81,7 +81,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         $agentVersionEntity = new DelightfulAgentVersionEntity();
         if ($agentEntity->getAgentVersionId()) {
             $agentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentById($agentEntity->getAgentVersionId());
-            // onlypublishassistant才willhavepermissioncontrol
+            // onlypublishassistantonlywillhavepermissioncontrol
             $resourceAccessDTO = $this->getAgentResource($authorization, $agentId);
             $adminAgentDetail->setResourceAccess($resourceAccessDTO);
         } else {
@@ -212,7 +212,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         $dataIsolation = $this->createAdminDataIsolation($authorization);
         $allSettings = [];
 
-        // get have Agent 相closesettype
+        // get have Agent relatedclosesettype
         $agentSettingsTypes = AdminGlobalSettingsType::getAssistantGlobalSettingsType();
 
         // onetimepropertyget haveset

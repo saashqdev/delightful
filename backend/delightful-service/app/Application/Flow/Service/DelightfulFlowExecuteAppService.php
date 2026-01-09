@@ -385,7 +385,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
      */
     public static function routine(string $flowCode, string $branchId, array $routineConfig = []): void
     {
-        // 暫o clockonlysystemlevelotherscheduletask
+        // temporaryo clockonlysystemlevelotherscheduletask
         $dataIsolation = FlowDataIsolation::create();
         $delightfulFlow = di(DelightfulFlowDomainService::class)->getByCode($dataIsolation, $flowCode);
         if (! $delightfulFlow) {

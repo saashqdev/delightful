@@ -104,7 +104,7 @@ readonly class KnowledgeBaseDocumentDomainService
             // firstdeletedocumentdown haveslicesegment
             $this->destroyFragments($dataIsolation, $knowledgeBaseCode, $documentCode);
             $documentEntity = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode, true);
-            // 然backdeletedocumentitself
+            // thenbackdeletedocumentitself
             $this->knowledgeBaseDocumentRepository->destroy($dataIsolation, $knowledgeBaseCode, $documentCode);
             // updatecharactercount
             $deltaWordCount = -$documentEntity->getWordCount();
@@ -122,7 +122,7 @@ readonly class KnowledgeBaseDocumentDomainService
     {
         $document = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode);
 
-        // ifforcerebuildorpersonsyncstatusforfail,then重newsync
+        // ifforcerebuildorpersonsyncstatusforfail,thenreloadnewsync
         if ($force || $document->getSyncStatus() === 2) { // 2 tableshowsyncfail
             $document->setSyncStatus(0); // 0 tableshownotsync
             $document->setSyncStatusMessage('');
@@ -273,7 +273,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $documentEntity->setUpdatedAt($documentEntity->getCreatedAt());
         $documentEntity->setUpdatedUid($documentEntity->getCreatedUid());
         $documentEntity->setSyncStatus(0); // 0 tableshownotsync
-        // bydownproperty均fromdocumentfilemiddleget
+        // bydownpropertyaveragefromdocumentfilemiddleget
         $documentEntity->setDocType($documentFile?->getDocType() ?? DocType::TXT->value);
         $documentEntity->setThirdFileId($documentFile?->getThirdFileId());
         $documentEntity->setThirdPlatformType($documentFile?->getPlatformType());

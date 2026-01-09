@@ -57,7 +57,7 @@ readonly class ProviderManager
      * getcanusemodelIDcolumntable.
      *
      * @param ProviderDataIsolation $providerDataIsolation dataisolationobject
-     * @return array<string, array<string>> 按modeltypeminutegroupmodelIDarray,format: [modelType => [model_id, model_id]]
+     * @return array<string, array<string>> bymodeltypeminutegroupmodelIDarray,format: [modelType => [model_id, model_id]]
      */
     public function getModelIdsGroupByType(ProviderDataIsolation $providerDataIsolation): array
     {

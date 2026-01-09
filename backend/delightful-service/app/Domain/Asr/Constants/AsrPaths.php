@@ -9,7 +9,7 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR path常quantity
- * 統onemanage ASR 相closedirectoryandfilepath.
+ * 统onemanage ASR relatedclosedirectoryandfilepath.
  */
 class AsrPaths
 {
@@ -29,7 +29,7 @@ class AsrPaths
     public const STATES_DIR = '.asr_states';
 
     /**
-     * generatehiddendirectory相topath.
+     * generatehiddendirectoryrelatedtopath.
      *
      * @param string $taskKey taskkey
      * @return string format:.asr_recordings/{task_key}
@@ -40,7 +40,7 @@ class AsrPaths
     }
 
     /**
-     * getstatusdirectory相topath.
+     * getstatusdirectoryrelatedtopath.
      *
      * @return string format:.asr_states
      */
@@ -50,7 +50,7 @@ class AsrPaths
     }
 
     /**
-     * getrecordingdirectory相topath(parentdirectory).
+     * getrecordingdirectoryrelatedtopath(parentdirectory).
      *
      * @return string format:.asr_recordings
      */

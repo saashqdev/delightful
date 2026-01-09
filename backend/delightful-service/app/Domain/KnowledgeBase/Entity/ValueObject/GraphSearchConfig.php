@@ -13,28 +13,28 @@ use InvalidArgumentException;
 /**
  * graphsearchconfigurationvalueobject
  *
- * containgraphsearch相closeconfigurationparameter,like API clientpoint,authinfo,timeoutsetetc
+ * containgraphsearchrelatedcloseconfigurationparameter,like API clientpoint,authinfo,timeoutsetetc
  */
 class GraphSearchConfig extends AbstractValueObject
 {
     /**
-     * close系weight.
+     * closesystemweight.
      *
-     * graphsearchmiddleclose系weight,useatcalculatefinalsimilardegreeminutecount
+     * graphsearchmiddleclosesystemweight,useatcalculatefinalsimilardegreeminutecount
      */
     private float $relationWeight = 0.5;
 
     /**
      * mostbigsearchdeepdegree.
      *
-     * graphsearchmostbigdeepdegree,即fromup始sectionpointstart,at mostsearchseveral hopsclose系
+     * graphsearchmostbigdeepdegree,immediatelyfromup始sectionpointstart,at mostsearchseveral hopsclosesystem
      */
     private int $maxDepth = 2;
 
     /**
      * whethercontainproperty.
      *
-     * whetherinsearchresultmiddlecontainsectionpointandclose系property
+     * whetherinsearchresultmiddlecontainsectionpointandclosesystemproperty
      */
     private bool $includeProperties = true;
 
@@ -67,9 +67,9 @@ class GraphSearchConfig extends AbstractValueObject
     private int $retryCount = 3;
 
     /**
-     * close系type.
+     * closesystemtype.
      *
-     * searcho clockconsiderclose系typelist,foremptytabledisplayhavetype
+     * searcho clockconsiderclosesystemtypelist,foremptytabledisplayhavetype
      */
     private array $relationTypes = [];
 
@@ -88,7 +88,7 @@ class GraphSearchConfig extends AbstractValueObject
     private int $limit = 10;
 
     /**
-     * getclose系weight.
+     * getclosesystemweight.
      */
     public function getRelationWeight(): float
     {
@@ -96,7 +96,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * setclose系weight.
+     * setclosesystemweight.
      */
     public function setRelationWeight(float $relationWeight): self
     {
@@ -219,7 +219,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * getclose系type.
+     * getclosesystemtype.
      */
     public function getRelationTypes(): array
     {
@@ -227,7 +227,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * setclose系type.
+     * setclosesystemtype.
      */
     public function setRelationTypes(array $relationTypes): self
     {

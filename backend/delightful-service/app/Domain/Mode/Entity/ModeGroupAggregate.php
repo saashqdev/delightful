@@ -12,7 +12,7 @@ class ModeGroupAggregate
     private ModeGroupEntity $group;
 
     /**
-     * @var ModeGroupRelationEntity[] theminutegrouptoshouldmodelassociateclose系array
+     * @var ModeGroupRelationEntity[] theminutegrouptoshouldmodelassociateclosesystemarray
      */
     private array $relations = [];
 

@@ -26,6 +26,6 @@ class CrontabToolSet extends AbstractBuiltInToolSet
 
     public function getDescription(): string
     {
-        return 'provideuserlevelotherscheduletask相closetool,includecreateeachday,eachweek,eachmonthetcduplicateandnotduplicatescheduletask';
+        return 'provideuserlevelotherscheduletaskrelatedclosetool,includecreateeachday,eachweek,eachmonthetcduplicateandnotduplicatescheduletask';
     }
 }

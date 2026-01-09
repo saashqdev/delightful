@@ -26,11 +26,11 @@ return new class extends Migration {
 
             $table->string('version_description', 255)->default('')->comment('description');
             $table->string('version_number')->nullable()->comment('version number');
-            $table->integer('release_scope')->nullable()->comment('publishrange.1:publishtoenterpriseinside部 2:publishtoapplicationmarket');
+            $table->integer('release_scope')->nullable()->comment('publishrange.1:publishtoenterpriseinsidedepartment 2:publishtoapplicationmarket');
 
             $table->integer('approval_status')->default(3)->nullable(false)->comment('approvalstatus');
             $table->integer('review_status')->default(0)->nullable(false)->comment('reviewstatus');
-            $table->integer('enterprise_release_status')->default(0)->nullable(false)->comment('publishtoenterpriseinside部status');
+            $table->integer('enterprise_release_status')->default(0)->nullable(false)->comment('publishtoenterpriseinsidedepartmentstatus');
             $table->integer('app_market_status')->default(0)->nullable(false)->comment('publishtoapplicationmarketstatus');
 
             $table->string('organization_code')->comment('organizationencoding');

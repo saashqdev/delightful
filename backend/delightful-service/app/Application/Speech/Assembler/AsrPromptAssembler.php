@@ -11,7 +11,7 @@ use App\Application\Speech\DTO\NoteDTO;
 
 /**
  * ASRhintwordassembler
- * responsiblebuildASR相closehintwordtemplate.
+ * responsiblebuildASRrelatedclosehintwordtemplate.
  */
 class AsrPromptAssembler
 {
@@ -42,16 +42,16 @@ class AsrPromptAssembler
 youisoneprofessionalrecordingcontenttitlegeneratehelphand.
 
 ## backgroundinstruction
-usersubmitonesegmentrecordingcontent,recordingcontentalreadypassvoiceidentifytransferfortext,usermaybealsowillprovidehand写noteasforsupplementinstruction.showinneedyouaccording tothisthesecontentgenerateoneconciseaccuratetitle.
+usersubmitonesegmentrecordingcontent,recordingcontentalreadypassvoiceidentifytransferfortext,usermaybealsowillprovidehandwritenoteasforsupplementinstruction.showinneedyouaccording tothisthesecontentgenerateoneconciseaccuratetitle.
 
 ## contentcomesourceinstruction
-- <notecontent>:userhand写notecontent,istorecording重pointrecordandsummary,usuallycontainclosekeyinfo
+- <notecontent>:userhandwritenotecontent,istorecordingreloadpointrecordandsummary,usuallycontainclosekeyinfo
 - <voiceidentifycontent>:passvoiceidentifytechnologywillrecordingconvertbecometext,reflectrecordingactualcontent
 
 ## titlegeneraterequire
 
-### priorityleveloriginalthen(重want)
-1. **notepriority**:ifexistsin<notecontent>,titleshould侧重notecontent
+### priorityleveloriginalthen(reloadwant)
+1. **notepriority**:ifexistsin<notecontent>,titleshould侧reloadnotecontent
 2. **attach importancenotetitle**:ifnoteis Markdown formatandcontaintitle(# openheadline),priority采usenotemiddletitlecontent
 3. **comprehensiveconsider**:meanwhilereferencevoiceidentifycontent,ensuretitlecompleteaccurate
 4. **keywordextract**:fromnoteandvoiceidentifycontentmiddleextractmost核corekeyword
@@ -60,10 +60,10 @@ usersubmitonesegmentrecordingcontent,recordingcontentalreadypassvoiceidentifytra
 1. **lengthlimit**:notexceedspass 20 character(Chinese characters by 1 charactercalculate)
 2. **languagestyle**:usestatementpropertylanguagesentence,avoidquestionsentence
 3. **conciseexplicit**:directlysummarize核coretheme,notwantaddmodificationword
-4. **纯textoutput**:onlyoutputtitlecontent,notwantaddanymarkpoint符number,importnumberorothermodification
+4. **puretextoutput**:onlyoutputtitlecontent,notwantaddanymarkpoint符number,importnumberorothermodification
 
 ### forbidlinefor
-- notwantreturn答contentmiddleissue
+- notwantreturnanswercontentmiddleissue
 - notwantconductquotaoutsideexplain
 - notwantadd"recording","note"etcfrontconjunction
 - notwantoutputtitlebyoutsideanycontent
@@ -82,7 +82,7 @@ PROMPT;
     }
 
     /**
-     * generatefileuploadscenariorecordingtitlehintword(emphasizefilename重wantproperty).
+     * generatefileuploadscenariorecordingtitlehintword(emphasizefilenamereloadwantproperty).
      *
      * @param string $userRequestMessage userinchat框sendrequestmessage
      * @param string $language outputlanguage(like:zh_CN, en_US)
@@ -106,18 +106,18 @@ usersendoriginalmessagelikedown:
 
 ## titlegeneraterequire
 
-### priorityleveloriginalthen(nonoften重want)
-1. **filenamepriority**:filenameusuallyisuser精corenaming,containmost核corethemeinfo,please重pointreferenceusermessagemiddle @ backsurfacefilename
+### priorityleveloriginalthen(nonoftenreloadwant)
+1. **filenamepriority**:filenameusuallyisuser精corenaming,containmost核corethemeinfo,pleasereloadpointreferenceusermessagemiddle @ backsurfacefilename
 2. **智canjudge**:
    - iffilenamesemanticclear(like"2024yearQ4productplanwill议.mp3","customerrequirementdiscussion.wav"),prioritybased onfilenamegeneratetitle
-   - iffilenameisdatetimestamp(like"20241112_143025.mp3")ornomeaningcharacter(like"recording001.mp3"),thenuse通usedescription
+   - iffilenameisdatetimestamp(like"20241112_143025.mp3")ornomeaningcharacter(like"recording001.mp3"),thenusecommonusedescription
 3. **extractkeyword**:fromfilenamemiddleextractmost核corekeywordandtheme
 
 ### formatrequire
 1. **lengthlimit**:notexceedspass 20 character(Chinese characters by 1 charactercalculate)
 2. **languagestyle**:usestatementpropertylanguagesentence,avoidquestionsentence
 3. **conciseexplicit**:directlysummarize核coretheme,notwantaddmodificationword
-4. **纯textoutput**:onlyoutputtitlecontent,notwantaddanymarkpoint符number,importnumberorothermodification
+4. **puretextoutput**:onlyoutputtitlecontent,notwantaddanymarkpoint符number,importnumberorothermodification
 
 ### forbidlinefor
 - notwantretainfileextensionname(.mp3,.wav,.webm etc)

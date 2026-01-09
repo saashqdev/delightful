@@ -283,7 +283,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledownone張image,currentimagemaintainoriginalstatus
+                // continuehandledownone张image,currentimagemaintainoriginalstatus
             }
         }
 

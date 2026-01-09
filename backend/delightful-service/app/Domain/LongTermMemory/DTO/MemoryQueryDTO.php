@@ -39,7 +39,7 @@ class MemoryQueryDTO extends AbstractDTO
 
     public string $orderDirection = 'desc';
 
-    // pagination相close
+    // paginationrelatedclose
     public ?string $pageToken = null;
 
     public int $offset = 0; // offsetquantity

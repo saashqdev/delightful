@@ -71,7 +71,7 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
         $knowledge = $event->knowledgeBaseEntity;
         $documentEntity = $event->knowledgeBaseDocumentEntity;
         $dataIsolation = $event->dataIsolation;
-        // ifisfoundationknowledge basetype,then传knowledge basecreateperson,avoidpermissionnot足
+        // ifisfoundationknowledge basetype,then传knowledge basecreateperson,avoidpermissionnotenough
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }
@@ -84,9 +84,9 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
 
         // from增versionnumber(抢lock)
         $affectedRows = $knowledgeBaseDocumentDomainService->increaseVersion($dataIsolation, $documentEntity);
-        // iffrom增fail,instructionalreadyalready重newtoquantity化pass,submitfrontend
+        // iffrom增fail,instructionalreadyalreadyreloadnewtoquantity化pass,submitfrontend
         if ($affectedRows === 0) {
-            $logger->info('documentalready重newtoquantity化,skipsync');
+            $logger->info('documentalreadyreloadnewtoquantity化,skipsync');
             return;
         }
 

@@ -48,9 +48,9 @@ class FileDefaultInitCommand extends Command
         $this->fileDomainService = $this->container->get(FileDomainService::class);
         $this->defaultFileDomainService = $this->container->get(DefaultFileDomainService::class);
 
-        // get公have桶configuration
+        // get公havebucketconfiguration
         $publicBucketConfig = config('cloudfile.storages.' . StorageBucketType::Public->value);
-        $this->line('公have桶configuration:' . json_encode($publicBucketConfig, JSON_UNESCAPED_UNICODE));
+        $this->line('公havebucketconfiguration:' . json_encode($publicBucketConfig, JSON_UNESCAPED_UNICODE));
 
         // ifis local driven,notneedinitialize
         if ($publicBucketConfig['adapter'] === 'local') {
@@ -154,7 +154,7 @@ class FileDefaultInitCommand extends Command
                         $mimeType = mime_content_type($filePath) ?: 'image/png';
                         $base64Content = 'data:' . $mimeType . ';base64,' . base64_encode($fileContent);
 
-                        // 完allreference ImageWatermarkProcessor successpractice,butfingersetfilename
+                        // completeallreference ImageWatermarkProcessor successpractice,butfingersetfilename
                         $uploadFile = new UploadFile($base64Content, 'default-files', $fileName);
                         $this->fileDomainService->uploadByCredential(
                             $organizationCode,
@@ -171,7 +171,7 @@ class FileDefaultInitCommand extends Command
                             throw new Exception('fileuploadfail,nomethodgetaccesslink');
                         }
 
-                        // validatesuccessback才createdatabaserecord,useactualupload key
+                        // validatesuccessbackonlycreatedatabaserecord,useactualupload key
                         $defaultFileEntity = new DefaultFileEntity();
                         $defaultFileEntity->setBusinessType($businessType->value);
                         $defaultFileEntity->setFileType(DefaultFileType::DEFAULT->value);
@@ -187,7 +187,7 @@ class FileDefaultInitCommand extends Command
                         ++$fileCount;
                     } catch (Exception $e) {
                         $this->error("  - handlefile {$fileName} fail: {$e->getMessage()}");
-                        continue; // notimpactback続filehandle
+                        continue; // notimpactbackcontinuefilehandle
                     }
                 }
 

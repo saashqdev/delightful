@@ -167,7 +167,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAssembler::createAgentV1Response($delightfulAgentVO, $delightfulFlowDTO);
     }
 
-    // getenterpriseinside部assistant
+    // getenterpriseinsidedepartmentassistant
     public function getAgentsByOrganization(RequestInterface $request)
     {
         /** @var DelightfulUserAuthorization $authenticatable */

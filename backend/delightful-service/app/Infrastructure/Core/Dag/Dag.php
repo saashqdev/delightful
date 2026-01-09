@@ -17,12 +17,12 @@ use SplStack;
 class Dag implements Runner
 {
     /**
-     * etc待mode.(sectionpointonlyallowrunlineonetime).
+     * etcpendingmode.(sectionpointonlyallowrunlineonetime).
      */
     public const int WAITING_MODE = 1;
 
     /**
-     * nonetc待mode.(sectionpointallowrunlinemultipletime).
+     * nonetcpendingmode.(sectionpointallowrunlinemultipletime).
      */
     public const int NON_WAITING_MODE = 2;
 
@@ -42,7 +42,7 @@ class Dag implements Runner
     protected array $vertexes = [];
 
     /**
-     * sectionpointetc待mode.
+     * sectionpointetcpendingmode.
      */
     protected int $nodeWaitingMode = self::WAITING_MODE;
 

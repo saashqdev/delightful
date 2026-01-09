@@ -165,7 +165,7 @@ class DelightfulEnvironmentEntity extends AbstractEntity
         } else {
             $relationEnvIds[] = $this->getId();
         }
-        // go重
+        // goreload
         return array_values(array_unique($relationEnvIds));
     }
 

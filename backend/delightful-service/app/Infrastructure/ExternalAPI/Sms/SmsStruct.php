@@ -22,14 +22,14 @@ class SmsStruct
     /**
      * shortmessagetype,such as:registration_rewards (orderalreadyhair货),arrival_notice(to货notify).
      * 1.ifmatch language field,meanwhileusevariableshortmessage,canimplementmultiplelanguageadapt,byandlanguagetypefallbackbottom
-     * 2.电quotient相closeshortmessageusethisfield,butisnothave language pass in.
+     * 2.电quotientrelatedcloseshortmessageusethisfield,butisnothave language pass in.
      */
     public ?string $type = null;
 
     /**
      * variableshortmessagevariablecontent. maybeforassociatearray,alsomaybeforindexarray.
-     * @example {"product_name": "quotient品A", "payer": "supplyquotientA","amount": 10}
-     * @example ["quotient品A","supplyquotientA",10]
+     * @example {"product_name": "quotientproductA", "payer": "supplyquotientA","amount": 10}
+     * @example ["quotientproductA","supplyquotientA",10]
      */
     public ?array $variables = null;
 

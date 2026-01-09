@@ -38,7 +38,7 @@ class KnowledgeSimilarityNodeRunnerTest extends ExecuteManagerBaseTest
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "币type",
+                    "value": "currencytype",
                     "name": "",
                     "args": null
                 }
@@ -169,7 +169,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "币type",
+                    "value": "currencytype",
                     "name": "",
                     "args": null
                 }
@@ -316,7 +316,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "币type",
+                    "value": "currencytype",
                     "name": "",
                     "args": null
                 }
@@ -473,7 +473,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "币type",
+                    "value": "currencytype",
                     "name": "",
                     "args": null
                 }
@@ -621,7 +621,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "币type",
+                    "value": "currencytype",
                     "name": "",
                     "args": null
                 }

@@ -72,7 +72,7 @@ class BaseKnowledgeBaseStrategy extends AbstractKernelAppService implements Know
      */
     public function getOrCreateDefaultSourceType(KnowledgeBaseEntity $knowledgeBaseEntity): ?int
     {
-        // ifsource_typefornull,thensettingforfromoutside部fileimport
+        // ifsource_typefornull,thensettingforfromoutsidedepartmentfileimport
         if ($knowledgeBaseEntity->getSourceType() === null) {
             return SourceType::EXTERNAL_FILE->value;
         }

@@ -120,7 +120,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * getstorage桶type.
+     * getstoragebuckettype.
      */
     public function getBucketType(): string
     {
@@ -128,7 +128,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * setstorage桶type.
+     * setstoragebuckettype.
      */
     public function setBucketType(string $bucketType): self
     {
@@ -281,7 +281,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * checkwhether待cleanupstatus.
+     * checkwhetherpendingcleanupstatus.
      */
     public function isPending(): bool
     {

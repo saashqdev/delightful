@@ -104,7 +104,7 @@ class ModelConfigModel extends Model
     }
 
     /**
-     * aes keyadd盐.
+     * aes keyaddsalt.
      */
     private function _getAesKey(string $salt): string
     {

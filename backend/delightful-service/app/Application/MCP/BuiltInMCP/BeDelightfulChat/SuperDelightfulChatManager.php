@@ -107,7 +107,7 @@ MARKDOWN;
                 "• ID: %s\n  name: %s\n  description: %s%s\n\n",
                 $agent->getId(),
                 $agent->getAgentName(),
-                $agent->getAgentDescription() ?: '暫nodescription',
+                $agent->getAgentDescription() ?: 'temporarynodescription',
                 $instructionDescription ? "\n  canusefingercommand: {$instructionDescription}" : ''
             );
 
@@ -273,7 +273,7 @@ MARKDOWN;
                 'properties' => [
                     'name' => [
                         'type' => 'string',
-                        'description' => 'fingercommandname,mustandAIassistantdefinitionfingercommandname完allmatch',
+                        'description' => 'fingercommandname,mustandAIassistantdefinitionfingercommandnamecompleteallmatch',
                     ],
                     'value' => [
                         'type' => 'string',

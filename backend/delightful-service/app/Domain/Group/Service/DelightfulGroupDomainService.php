@@ -241,7 +241,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             'refer_message_id' => '',
             'sender_message_id' => '',
             'conversation_id' => $seqContent['conversation_id'] ?? '',
-            'status' => DelightfulMessageStatus::Read->value, // controlmessagenotneedalreadyreadreturn执
+            'status' => DelightfulMessageStatus::Read->value, // controlmessagenotneedalreadyreadreturnexecute
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => '',
@@ -284,7 +284,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             if (empty($userId)) {
                 continue;
             }
-            // notforoperationauthorduplicategenerateseq. 因forin投mqoffront,alreadyalreadyforoperationauthorgenerateseq
+            // notforoperationauthorduplicategenerateseq. factorforin投mqoffront,alreadyalreadyforoperationauthorgenerateseq
             if ($userId === $operateUserId) {
                 continue;
             }

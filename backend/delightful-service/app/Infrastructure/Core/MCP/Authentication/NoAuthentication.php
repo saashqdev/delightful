@@ -11,12 +11,12 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
  * noauthenticationimplement.
- * whensystemdesignrequirehave身shareverifybutnotneedactualverifyo clockuse.
+ * whensystemdesignrequirehavebodyshareverifybutnotneedactualverifyo clockuse.
  */
 class NoAuthentication implements AuthenticationInterface
 {
     /**
-     * verifyrequest身shareinformation.
+     * verifyrequestbodyshareinformation.
      * inthisimplementmiddle,alwaysallow haverequestpass.
      */
     public function authenticate(MessageInterface $request): void

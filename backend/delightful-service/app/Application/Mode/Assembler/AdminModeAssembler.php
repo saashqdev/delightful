@@ -200,7 +200,7 @@ class AdminModeAssembler
     }
 
     /**
-     * willUpdateModeRequestdataapplicationtoshowhaveModeEntity(部minuteupdate).
+     * willUpdateModeRequestdataapplicationtoshowhaveModeEntity(departmentminuteupdate).
      */
     public static function applyUpdateRequestToEntity(UpdateModeRequest $request, ModeEntity $existingEntity): void
     {

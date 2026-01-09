@@ -14,7 +14,7 @@ use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 use App\Domain\Provider\Entity\ValueObject\Status;
 
 /**
- * organizationdown Delightful servicequotientandmodel相closeinterface(nonofficialorganization才have Delightful servicequotient).
+ * organizationdown Delightful servicequotientandmodelrelatedcloseinterface(nonofficialorganizationonlyhave Delightful servicequotient).
  */
 interface DelightfulProviderAndModelsInterface
 {
@@ -50,7 +50,7 @@ interface DelightfulProviderAndModelsInterface
     public function getDelightfulModelById(int $id): ?ProviderModelEntity;
 
     /**
-     * nonofficialorganizationupdate Delightful modelstatus(写o clockcopylogic).
+     * nonofficialorganizationupdate Delightful modelstatus(writeo clockcopylogic).
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param ProviderModelEntity $officialModel officialmodelactualbody

@@ -63,7 +63,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             $paramsConfig->getModelConfig()->setVisionModel($modelName);
         }
 
-        // ifactiveclosevisualcan力.orperson currentmodelsupport,butischooseothermodel,alsois相whenatwantclosecurrentmodelvisualcan力
+        // ifactiveclosevisualcancapability.orperson currentmodelsupport,butischooseothermodel,alsoisrelatedwhenatwantclosecurrentmodelvisualcancapability
         if (! $paramsConfig->getModelConfig()->isVision() || ($model->getModelOptions()->isMultiModal() && $paramsConfig->getModelConfig()->getVisionModel() !== $modelName)) {
             $model->getModelOptions()->setMultiModal(false);
         }
@@ -119,7 +119,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                         $memoryManager->addMessage($contentMessage);
                     }
                 } else {
-                    // createonenew,inback続use
+                    // createonenew,inbackcontinueuse
                     $currentMessage = new UserMessage();
                     $currentMessage->setContent($userPrompt);
                     $memoryManager->addMessage($currentMessage);
@@ -132,7 +132,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 $currentModel = $model->getModelName();
                 $visionModel = $paramsConfig->getModelConfig()->getVisionModel();
 
-                // only currentmodelandvisualmodelnotoneto,orperson currentmodelnot supportedmulti-modalstate o clock.invisualmodeltoolmiddle,currentmodelequalvisualmodelandandwithhavevisualcan力,thennotwillproduce死loop
+                // only currentmodelandvisualmodelnotoneto,orperson currentmodelnot supportedmulti-modalstate o clock.invisualmodeltoolmiddle,currentmodelequalvisualmodelandandwithhavevisualcancapability,thennotwillproducedeadloop
                 if ($currentModel !== $visionModel || ! $model->getModelOptions()->isMultiModal()) {
                     $multiModalLoglog = MultiModalBuilder::vision(
                         executionData: $executionData,
@@ -171,7 +171,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                     $lastMessage = clone $message;
                     $message->setContent($content);
                     $message->setContents(null);
-                    // 重neworganizationmulti-modalstate
+                    // reloadneworganizationmulti-modalstate
                     if ($model->getModelOptions()->isMultiModal()) {
                         $message->addContent(UserMessageContent::text($content));
                         // supplementmulti-modalstate
@@ -192,7 +192,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             }
         } else {
             if ($userPrompt !== '') {
-                // createonenew,inback続use
+                // createonenew,inbackcontinueuse
                 $currentMessage = new UserMessage();
                 $currentMessage->setContent($userPrompt);
                 $memoryManager->addMessage($currentMessage);
@@ -342,7 +342,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             return false;
         }
 
-        // maybealsohaveotherstringsplice,暫o clockalsonotinside敛
+        // maybealsohaveotherstringsplice,temporaryo clockalsonotinside敛
         $items = match ($contentValue->getType()) {
             ValueType::Const => $contentValue->getConstValue()?->getItems() ?? [],
             ValueType::Expression => $contentValue->getExpressionValue()?->getItems() ?? [],

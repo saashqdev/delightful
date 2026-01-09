@@ -149,12 +149,12 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.transfer_owner_before_leave')]
     case GROUP_TRANSFER_OWNER_BEFORE_LEAVE = 3030;
 
-    // onlygroup owner才candissolvegroup chat
+    // onlygroup owneronlycandissolvegroup chat
         // Only the owner can disband the group
     #[ErrorMessage('chat.group.only_owner_can_disband')]
     case GROUP_ONLY_OWNER_CAN_DISBAND = 3031;
 
-    // onlygroup owner才cantransferletgroup
+    // onlygroup owneronlycantransferletgroup
         // Only the owner can transfer the group
     #[ErrorMessage('chat.group.only_owner_can_transfer')]
     case GROUP_ONLY_OWNER_CAN_TRANSFER = 3032;

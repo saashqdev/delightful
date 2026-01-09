@@ -30,10 +30,10 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
 
     public function search(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeSimilarityFilter $filter, KnowledgeBaseEntity $knowledgeBaseEntity, RetrieveConfig $retrieveConfig): array
     {
-        // scenarioverify, ifstart重newsort,canmultiple callsreturndata,然backaccording tominuteconductsort,get limit ,at mostnotexceedspass 20 orperson limit uplimit
+        // scenarioverify, ifstartreloadnewsort,canmultiple callsreturndata,thenbackaccording tominuteconductsort,get limit ,at mostnotexceedspass 20 orperson limit uplimit
         $queryNum = $filter->getLimit();
         if ($retrieveConfig->isRerankingEnable()) {
-            // ifstart重sort,increasecallreturnquantity,butnotexceedspass20ororiginallimit3times
+            // ifstartreloadsort,increasecallreturnquantity,butnotexceedspass20ororiginallimit3times
             $maxLimit = min(20, $queryNum * 3);
             $filter->setLimit($maxLimit);
         }
@@ -73,7 +73,7 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
         }
 
         // todo optimize
-        //        // conduct重sort
+        //        // conductreloadsort
         //        if (count($result) > 1 && $retrieveConfig->isRerankingEnable() && container()->has(RerankGeneratorInterface::class)) {
         //            $rerankModelName = $retrieveConfig->getRerankingModel()["reranking_model_name'"];
         //            $rerankModel = OdinModelFactory::getFlowModelEntity($rerankModelName, $dataIsolation->getCurrentOrganizationCode());
@@ -83,12 +83,12 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
         //            }
         //            $rerankGenerator = di(RerankGeneratorInterface::class);
         //            $rerankResult = $rerankGenerator->rerank($rerankModel->createRerank(), $filter->getQuestion(), $documents);
-        //            // 按 relevance_score frombigtosmallsort
+        //            // by relevance_score frombigtosmallsort
         //            usort($rerankResult, function ($a, $b) {
         //                return $b['relevance_score'] <=> $a['relevance_score'];
         //            });
         //
-        //            // according tosortbackresult重newrowcolumn $result array
+        //            // according tosortbackresultreloadnewrowcolumn $result array
         //            $sortedResult = [];
         //            foreach ($rerankResult as $item) {
         //                $sortedResult[] = $result[$item['index']];

@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 use function Hyperf\Translation\__;
 
 /**
- * general meaningthousand问servicequotient.
+ * general meaningthousandquestionservicequotient.
  */
 class QwenProvider implements IProvider
 {
@@ -61,7 +61,7 @@ class QwenProvider implements IProvider
                 return $connectResponse;
             }
 
-            // connectedpropertytestsuccess,notneedetc待taskcomplete
+            // connectedpropertytestsuccess,notneedetcpendingtaskcomplete
             $connectResponse->setStatus(true);
             $connectResponse->setMessage('connecttestsuccess');
         } catch (Exception $e) {

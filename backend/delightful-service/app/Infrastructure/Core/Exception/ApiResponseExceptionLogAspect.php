@@ -17,7 +17,7 @@ use Throwable;
 
 #[Aspect]
 /**
- * 1.fornotletuser看toonethesesql/codeexception,thereforewillin config/api-response.php  error_exception configurationmiddle,will意outsideexceptionconvertfor統onesysteminside部errorexception.
+ * 1.fornotletuserlooktoonethesesql/codeexception,thereforewillin config/api-response.php  error_exception configurationmiddle,willintentionoutsideexceptionconvertfor统onesysteminsidedepartmenterrorexception.
  * 2.logrecordexceptioninfo,便atrowcheckissue.
  */
 class ApiResponseExceptionLogAspect extends AbstractAspect

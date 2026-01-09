@@ -138,7 +138,7 @@ class ImageGenerateFactory
         $mode = strtolower(explode('-', $model, limit: 2)[1] ?? 'fast');
 
         // Midjourney notuse宽highparameter,onlyneed prompt and mode,butis Request categoryinheritneedthistheseparameter
-        //  bywegivedefaultvalue即can
+        //  bywegivedefaultvalueimmediatelycan
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
 
@@ -166,7 +166,7 @@ class ImageGenerateFactory
         $width = (int) $widthStr;
         $height = (int) $heightStr;
 
-        // todo xhy first fallbackbottom,因for整text generationgraphalsonothaveclosed loop
+        // todo xhy first fallbackbottom,factorfor整text generationgraphalsonothaveclosed loop
         if (
             ! ($width === 1024 && $height === 1024)
             && ! ($width === 1024 && $height === 1792)

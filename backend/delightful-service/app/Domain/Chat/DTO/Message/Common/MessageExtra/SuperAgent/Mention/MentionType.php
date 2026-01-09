@@ -13,7 +13,7 @@ enum MentionType: string
     case PROJECT_FILE = 'project_file';
 
     /**
-     * thistimemessagemiddletemporaryuploadfile,back続will統oneto project_file middle.
+     * thistimemessagemiddletemporaryuploadfile,backcontinuewill统oneto project_file middle.
      */
     case UPLOAD_FILE = 'upload_file';
 

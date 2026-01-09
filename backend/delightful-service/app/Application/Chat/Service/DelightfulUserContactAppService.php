@@ -143,7 +143,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $receiverConversationEntity = new DelightfulConversationEntity();
         $receiverConversationEntity->setUserId($messageStruct->getReceiveId());
         $receiverConversationEntity->setUserOrganizationCode($dataIsolation->getCurrentOrganizationCode());
-        // 通usecontrolmessagehandlelogic
+        // commonusecontrolmessagehandlelogic
         $this->delightfulChatDomainService->handleCommonControlMessage($messageDTO, $conversationEntity, $receiverConversationEntity);
 
         return true;
@@ -173,10 +173,10 @@ class DelightfulUserContactAppService extends AbstractAppService
         $queryType = $dto->getQueryType();
         $dataIsolation = $this->createDataIsolation($authorization);
 
-        // getcurrentuser拥haveorganizationcolumntable
+        // getcurrentuserownhaveorganizationcolumntable
         $userOrganizations = $this->userDomainService->getUserOrganizations($dataIsolation->getCurrentUserId());
 
-        // basicuserinfoquery - pass inuser拥haveorganizationcolumntable
+        // basicuserinfoquery - pass inuserownhaveorganizationcolumntable
         $usersDetailDTOList = $this->userDomainService->getUserDetailByUserIdsWithOrgCodes($userIds, $userOrganizations);
         // handleuseravatar
         $usersDetail = $this->getUsersAvatarCoordinator($usersDetailDTOList, $dataIsolation);
@@ -202,7 +202,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             $users = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfo, $withDepartmentFullPath);
         }
 
-        // address bookandsearch相closeinterface,filterhiddendepartmentandhiddenuser.
+        // address bookandsearchrelatedcloseinterface,filterhiddendepartmentandhiddenuser.
         $users = $this->filterDepartmentOrUserHidden($users);
         return PageListAssembler::pageByMysql($users, (int) $dto->getPageToken(), $pageSize, count($dto->getUserIds()));
     }
@@ -231,9 +231,9 @@ class DelightfulUserContactAppService extends AbstractAppService
         $usersDetail = $this->getUsersAvatar($usersDetail, $dataIsolation);
         // organizationuser + departmentdetail
         $userDepartmentDetailDTOS = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfoWithFullPath);
-        // address bookandsearch相closeinterface,filterhiddendepartmentandhiddenuser.
+        // address bookandsearchrelatedcloseinterface,filterhiddendepartmentandhiddenuser.
         $userDepartmentDetailDTOS = $this->filterDepartmentOrUserHidden($userDepartmentDetailDTOS);
-        // byat $usersPageResponseDTO  items limitparametertype,fromcodestandardangledegree,again new one通use PageResponseDTO, 按paginationstructurereturn
+        // byat $usersPageResponseDTO  items limitparametertype,fromcodestandardangledegree,again new onecommonuse PageResponseDTO, bypaginationstructurereturn
         // anotheroutside,byatfilterlogicexistsin,maybethistimereturn items quantity少at $limit,butisagainhavedownonepage.
         $pageResponseDTO = new PageResponseDTO();
         $pageResponseDTO->setPageToken($usersPageResponseDTO->getpageToken());
@@ -243,7 +243,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 按 usernickname/truename/handmachinenumber/email/departmentpath/position searchuser.
+     * by usernickname/truename/handmachinenumber/email/departmentpath/position searchuser.
      */
     public function searchDepartmentUser(UserQueryDTO $queryDTO, DelightfulUserAuthorization $authorization): array
     {
@@ -262,14 +262,14 @@ class DelightfulUserContactAppService extends AbstractAppService
             $usersForQueryJobTitle = array_map(static fn ($entity) => $entity->toArray(), $userEntities);
         }
 
-        // 按nicknamesearch
+        // bynicknamesearch
         $usersByNickname = $this->userDomainService->searchUserByNickName($queryDTO->getQuery(), $dataIsolation);
-        // 按handmachinenumber/truenamesearch
+        // byhandmachinenumber/truenamesearch
         $usersByPhoneOrRealName = $this->accountDomainService->searchUserByPhoneOrRealName($queryDTO->getQuery(), $dataIsolation);
 
         // mergeresult
         $usersForQueryDepartmentPath = array_merge($usersForQueryJobTitle, $usersForQueryDepartmentPath, $usersByNickname, $usersByPhoneOrRealName);
-        // go重
+        // goreload
         $usersForQueryDepartmentPath = array_values(array_column($usersForQueryDepartmentPath, null, 'user_id'));
 
         // goexceptAIassistant
@@ -374,7 +374,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     public function addAgentInfoToUsers(Authenticatable $authorization, array $usersDetailDTOList): array
     {
         $aiCodes = [];
-        // ifis AI assistant,thatwhatreturn AI assistant相closeinfoandtoitpermission
+        // ifis AI assistant,thatwhatreturn AI assistantrelatedcloseinfoandtoitpermission
         foreach ($usersDetailDTOList as $userDetailDTO) {
             if (! empty($userDetailDTO->getAiCode())) {
                 $aiCodes[] = $userDetailDTO->getAiCode();
@@ -417,7 +417,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * address bookandsearch相closeinterface,filterhiddendepartmentandhiddenuser.
+     * address bookandsearchrelatedcloseinterface,filterhiddendepartmentandhiddenuser.
      * @param UserDepartmentDetailDTO[]|UserDetailDTO[] $usersDepartmentDetails
      */
     private function filterDepartmentOrUserHidden(array $usersDepartmentDetails): array
@@ -446,7 +446,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * read privatehaveorpublichave桶,拿avatar.
+     * read privatehaveorpublichavebucket,getavatar.
      * @return UserDetailDTO[]
      */
     private function getUsersAvatar(array $usersDetail, DataIsolation $dataIsolation): array
@@ -455,7 +455,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * read privatehaveorpublichave桶,拿avatar(applicationlayercoordinator).
+     * read privatehaveorpublichavebucket,getavatar(applicationlayercoordinator).
      * @param array<UserDetailDTO> $usersDetail
      * @return array<UserDetailDTO>
      */
@@ -470,7 +470,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             }
         }
 
-        // 按organizationgroupfileKeys
+        // byorganizationgroupfileKeys
         $orgFileKeys = [];
         foreach ($validFileKeys as $fileKey) {
             $orgCode = explode('/', $fileKey, 2)[0] ?? '';
@@ -479,7 +479,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             }
         }
 
-        // 按organizationbatchquantitygetlink
+        // byorganizationbatchquantitygetlink
         $links = [];
         foreach ($orgFileKeys as $orgCode => $fileKeys) {
             $orgLinks = $this->fileDomainService->getLinks($orgCode, $fileKeys);

@@ -12,7 +12,7 @@ use App\Infrastructure\ExternalAPI\Sms\Enum\LanguageEnum;
 abstract class AbstractTemplate implements TemplateInterface
 {
     /**
-     * shortmessagetypeandtemplateidmappingclose系.
+     * shortmessagetypeandtemplateidmappingclosesystem.
      */
     protected array $typeToIdMap = [];
 
@@ -61,7 +61,7 @@ abstract class AbstractTemplate implements TemplateInterface
             return $messages;
         }
         $variables = [];
-        // template$contentmiddlenotexistsin "${xxx}" orperson {$xxx) typecharacter.then按indexordermatch
+        // template$contentmiddlenotexistsin "${xxx}" orperson {$xxx) typecharacter.thenbyindexordermatch
         foreach ($matches[1] as $index => $variableKey) {
             if (isset($messages[$variableKey])) {
                 $variables[$variableKey] = $messages[$variableKey];

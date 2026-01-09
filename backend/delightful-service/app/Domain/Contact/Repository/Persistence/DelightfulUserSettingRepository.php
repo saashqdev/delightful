@@ -100,7 +100,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * pass delightfulId saveusersetting(crossorganization),若alreadyexistsinsame key thenupdate.
+     * pass delightfulId saveusersetting(crossorganization),ifalreadyexistsinsame key thenupdate.
      */
     public function saveByDelightfulId(string $delightfulId, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
@@ -127,7 +127,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * getalllocalconfiguration(organization_code/user_id/delightful_id 均for NULL).
+     * getalllocalconfiguration(organization_code/user_id/delightful_id averagefor NULL).
      */
     public function getGlobal(string $key): ?DelightfulUserSettingEntity
     {

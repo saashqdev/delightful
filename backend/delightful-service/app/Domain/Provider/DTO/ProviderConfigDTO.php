@@ -264,7 +264,7 @@ class ProviderConfigDTO extends AbstractDTO
         }
     }
 
-    // ===== configuration相closefieldGetter/Setter =====
+    // ===== configurationrelatedclosefieldGetter/Setter =====
 
     public function getAlias(): string
     {
@@ -362,7 +362,7 @@ class ProviderConfigDTO extends AbstractDTO
         }
     }
 
-    // ===== model相closefieldGetter/Setter =====
+    // ===== modelrelatedclosefieldGetter/Setter =====
 
     /**
      * @return ProviderModelDetailDTO[]

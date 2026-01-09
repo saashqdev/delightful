@@ -176,7 +176,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             }
         }
 
-        // applicationset餐filter
+        // applicationsetmealfilter
         return $this->applyPackageFilteringToModels($finalModels, $organizationCode);
     }
 
@@ -216,7 +216,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * nonofficialorganizationupdate Delightful modelstatus(写o clockcopylogic).
+     * nonofficialorganizationupdate Delightful modelstatus(writeo clockcopylogic).
      */
     public function updateDelightfulModelStatus(
         ProviderDataIsolation $dataIsolation,
@@ -298,7 +298,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * applicationset餐filterhandle(针tomodelactualbodycolumntable).
+     * applicationsetmealfilterhandle(针tomodelactualbodycolumntable).
      *
      * @param array<ProviderModelEntity> $models modelactualbodycolumntable
      * @param string $organizationCode organizationencoding
@@ -314,13 +314,13 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         $filteredModels = [];
         foreach ($models as $model) {
             $visiblePackages = $model->getVisiblePackages();
-            // ifnothaveconfigurationvisibleset餐,thento haveset餐visible
+            // ifnothaveconfigurationvisiblesetmeal,thento havesetmealvisible
             if (empty($visiblePackages)) {
                 $filteredModels[] = $model;
                 continue;
             }
 
-            // ifconfigurationvisibleset餐,checkcurrentset餐whetherinitsmiddle
+            // ifconfigurationvisiblesetmeal,checkcurrentsetmealwhetherinitsmiddle
             if ($currentPackage && in_array($currentPackage, $visiblePackages)) {
                 $filteredModels[] = $model;
             }
@@ -362,7 +362,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         ProviderDataIsolation $dataIsolation,
         ProviderModelEntity $officialModel
     ): ProviderModelEntity {
-        // createnewmodelrecord(avoidnewfieldcausecopyerror,directlyallquantity copy 然back set newvalue)
+        // createnewmodelrecord(avoidnewfieldcausecopyerror,directlyallquantity copy thenback set newvalue)
         $organizationModel = new ProviderModelEntity($officialModel->toArray());
         $organizationModel->setServiceProviderConfigId(0);
         $organizationModel->setModelParentId($officialModel->getId());

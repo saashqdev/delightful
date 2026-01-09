@@ -34,7 +34,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
      */
     public function getDepartmentFullPathByIds(DataIsolation $dataIsolation, array $departmentIds): array
     {
-        // todepartmentidsconductgo重
+        // todepartmentidsconductgoreload
         $departmentIds = array_values(array_unique($departmentIds));
         // getorganization havedepartment
         $departments = $this->departmentRepository->getOrganizationDepartments($dataIsolation->getCurrentOrganizationCode(), keyById: true);
@@ -147,7 +147,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
         );
 
         $departmentsChildrenEntities = $this->getChildrenByDepartmentIds($departments, $departmentIds);
-        // merge && go重
+        // merge && goreload
         $departmentIds = array_column(array_merge(...$departmentsChildrenEntities), 'department_id');
         return array_values(array_unique($departmentIds));
     }

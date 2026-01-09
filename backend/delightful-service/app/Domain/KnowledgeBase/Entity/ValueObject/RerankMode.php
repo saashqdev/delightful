@@ -8,28 +8,28 @@ declare(strict_types=1);
 namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 
 /**
- * 重sortmodetypeenumcategory.
+ * reloadsortmodetypeenumcategory.
  *
- * definition两type重sortmodetype:
- * - RERANKING_MODEL: use重sortmodeltoretrieveresultconduct重sort
- * - WEIGHTED_SCORE: useadd权minutecounttoretrieveresultconduct重sort
+ * definitiontwotypereloadsortmodetype:
+ * - RERANKING_MODEL: usereloadsortmodeltoretrieveresultconductreloadsort
+ * - WEIGHTED_SCORE: useaddpermissionminutecounttoretrieveresultconductreloadsort
  */
 class RerankMode
 {
     /**
-     * 重sortmodel.
+     * reloadsortmodel.
      *
-     * usespecialized重sortmodel(like BAAI/bge-reranker-large)toretrieveresultconduct重sort.
-     * 重sortmodelwillaccording toqueryanddocument相closepropertygiveoutmoreaccuratesort.
+     * usespecializedreloadsortmodel(like BAAI/bge-reranker-large)toretrieveresultconductreloadsort.
+     * reloadsortmodelwillaccording toqueryanddocumentrelatedclosepropertygiveoutmoreaccuratesort.
      * themodetypepassconfigurationparameter `reranking_mode` fieldset,
      * fromdatabasemiddle retrieve_config configurationget.
      */
     public const RERANKING_MODEL = 'reranking_model';
 
     /**
-     * add权minutecount.
+     * addpermissionminutecount.
      *
-     * usedifferentretrievemethodminutecountadd权calculatefinalminutecount,toretrieveresultconduct重sort.
+     * usedifferentretrievemethodminutecountaddpermissioncalculatefinalminutecount,toretrieveresultconductreloadsort.
      * for example,cansettoquantityretrieveresultweightfor 0.7,keywordretrieveresultweightfor 0.3.
      * themodetypepassconfigurationparameter `reranking_mode` fieldset,
      * fromdatabasemiddle retrieve_config configurationget.
@@ -37,7 +37,7 @@ class RerankMode
     public const WEIGHTED_SCORE = 'weighted_score';
 
     /**
-     * get havecanuse重sortmodetype.
+     * get havecanusereloadsortmodetype.
      *
      * @return array<string>
      */
@@ -50,7 +50,7 @@ class RerankMode
     }
 
     /**
-     * checkgiveset重sortmodetypewhethervalid.
+     * checkgivesetreloadsortmodetypewhethervalid.
      */
     public static function isValid(string $mode): bool
     {

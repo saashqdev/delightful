@@ -201,7 +201,7 @@ class ServiceProviderApi extends AbstractApi
     /**
      * get havenonofficialLLMservicequotientlist
      * directlyfromdatabasemiddlequerycategoryforllmandprovider_typenotforOFFICIALservicequotient
-     * notdependencyatcurrentorganization,适useatneedaddservicequotientscenario.
+     * notdependencyatcurrentorganization,fituseatneedaddservicequotientscenario.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getNonOfficialLlmProviders()
@@ -243,7 +243,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * according tocategorygetservicequotient通uselogic.
+     * according tocategorygetservicequotientcommonuselogic.
      * @param RequestInterface $request requestobject
      * @return array servicequotientlist
      */

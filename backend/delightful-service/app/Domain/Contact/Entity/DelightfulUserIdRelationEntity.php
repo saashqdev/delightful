@@ -11,7 +11,7 @@ use App\Domain\Contact\Entity\ValueObject\UserIdRelationType;
 use App\Domain\Contact\Entity\ValueObject\UserIdType;
 
 /**
- * user_id and open_id/union_idmappingclose系.
+ * user_id and open_id/union_idmappingclosesystem.
  */
 class DelightfulUserIdRelationEntity extends AbstractEntity
 {

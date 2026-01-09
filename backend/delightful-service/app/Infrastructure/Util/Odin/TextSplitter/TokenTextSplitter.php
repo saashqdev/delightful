@@ -214,7 +214,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 按fixedlengthsplittext.
+     * byfixedlengthsplittext.
      */
     private function splitByFixedLength(string $text): array
     {

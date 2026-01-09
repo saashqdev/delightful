@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('relation_value', 64)->comment('idtoshouldassociatetypevalue')->default('');
             // certainuniqueonevalue,防conflict
             $table->unique(['id_type', 'id_value', 'relation_type', 'relation_value'], 'unq_id_relation');
-            // 便at按organization/applicationetcfind haveassociateuser
+            // 便atbyorganization/applicationetcfind haveassociateuser
             $table->index(['relation_type', 'relation_value'], 'idx_relation');
             $table->index(['user_id'], 'idx_user_id');
             $table->comment('useridassociatetable. record user_id and open_id/union_idetcassociate');

@@ -245,14 +245,14 @@ class DelightfulFlowEntity extends AbstractEntity
                 $this->startNode = $node;
             }
             if ($node->isEnd() && ! $node->getParentId()) {
-                // multipleendsectionpointo clock,暫o clockgetfirst,shouldwantmakebecomeonlycanhaveoneendsectionpoint
+                // multipleendsectionpointo clock,temporaryo clockgetfirst,shouldwantmakebecomeonlycanhaveoneendsectionpoint
                 if (! $this->endNode) {
                     $this->endNode = $node;
                 }
             }
         }
 
-        // alreadyalreadyispublishstatus才needdetect
+        // alreadyalreadyispublishstatusonlyneeddetect
         if ($this->enabled) {
             //            if (! $this->startNode) {
             //                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.must_exist');

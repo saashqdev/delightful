@@ -17,16 +17,16 @@ use Delightful\ApiResponse\Annotation\ApiResponse;
 class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
 {
     /**
-     * getofficial重sortprovidequotientcolumntable.
+     * getofficialreloadsortprovidequotientcolumntable.
      * @return array<ProviderConfigModelsDTO>
      */
     public function getOfficialRerankProviderList(): array
     {
         $dto = new ProviderConfigModelsDTO();
         $dto->setId('official_rerank');
-        $dto->setName('official重sortservicequotient');
+        $dto->setName('officialreloadsortservicequotient');
         $dto->setProviderType(ProviderType::Official->value);
-        $dto->setDescription('officialprovide重sortservice');
+        $dto->setDescription('officialprovidereloadsortservice');
         $dto->setIcon('');
         $dto->setCategory('rerank');
         $dto->setStatus(1); // 1 indicateenable
@@ -35,12 +35,12 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
         // settingmodelcolumntable
         $models = [];
 
-        // foundation重sortmodel
+        // foundationreloadsortmodel
         $baseModel = new ProviderModelDetailDTO();
         $baseModel->setId('official_rerank_model');
-        $baseModel->setName('official重rowmodel');
+        $baseModel->setName('officialreloadrowmodel');
         $baseModel->setModelVersion('v1.0');
-        $baseModel->setDescription('foundation重sortmodel,适useatgeneralscenario');
+        $baseModel->setDescription('foundationreloadsortmodel,fituseatgeneralscenario');
         $baseModel->setIcon('');
         $baseModel->setModelType(1);
         $baseModel->setCategory('rerank');

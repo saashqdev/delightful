@@ -194,7 +194,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     }
 
     /**
-     * minutegroupgetsessiondownmostnew几itemmessage.
+     * minutegroupgetsessiondownmostnewseveralitemmessage.
      */
     public function getConversationsMessagesGroupById(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array
     {
@@ -381,7 +381,7 @@ sql;
         return (int) $this->delightfulSeq::query()->whereIn('id', $seqIds)->delete();
     }
 
-    // formoveexcept脏data写method
+    // formoveexcept脏datawritemethod
     public function getSeqByDelightfulId(string $delightfulId, int $limit): array
     {
         $query = $this->delightfulSeq::query()
@@ -391,10 +391,10 @@ sql;
         return Db::select($query->toSql(), $query->getBindings());
     }
 
-    // formoveexcept脏data写method
+    // formoveexcept脏datawritemethod
     public function getHasTrashMessageUsers(): array
     {
-        // 按 delightful_id minutegroup,findouthavegarbagemessageuser
+        // by delightful_id minutegroup,findouthavegarbagemessageuser
         $query = $this->delightfulSeq::query()
             ->select('object_id')
             ->groupBy('object_id')
@@ -490,7 +490,7 @@ sql;
     }
 
     /**
-     * toresultcollectionforce重newdescendingrowcolumn.
+     * toresultcollectionforcereloadnewdescendingrowcolumn.
      * @return ClientSequenceResponse[]
      */
     private function getClientSequencesResponse(array $seqInfos): array

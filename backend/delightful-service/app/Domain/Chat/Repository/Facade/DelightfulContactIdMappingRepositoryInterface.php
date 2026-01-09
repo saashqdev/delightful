@@ -15,7 +15,7 @@ use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 interface DelightfulContactIdMappingRepositoryInterface
 {
     /**
-     * getthethird-partyplatformdepartmentIDmappingclose系.
+     * getthethird-partyplatformdepartmentIDmappingclosesystem.
      *
      * @param string[] $thirdDepartmentIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -28,7 +28,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     ): array;
 
     /**
-     * getthethird-partyplatformuserIDmappingclose系.
+     * getthethird-partyplatformuserIDmappingclosesystem.
      *
      * @param string[] $thirdUserIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -41,7 +41,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     ): array;
 
     /**
-     * getMagicplatformuserIDmappingclose系.
+     * getMagicplatformuserIDmappingclosesystem.
      *
      * @param string[] $delightfulIds
      */
@@ -69,7 +69,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     public function getDepartmentRootId(string $delightfulOrganizationCode, PlatformType $platformType): string;
 
     /**
-     * getDelightfuldepartmentIDmappingclose系.
+     * getDelightfuldepartmentIDmappingclosesystem.
      */
     public function getDelightfulDepartmentIdsMapping(
         array $delightfulDepartmentIds,

@@ -105,8 +105,8 @@ usernicknameis:currentusernickname
 
 MARKDOWN,
 
-            // 'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,from明daystart,eachday早up9pointexecute,displayoneitemreminderIcookmessage',
-            'user_prompt' => 'helpIsendoneitemmessage,contentis:you今daytruegood看',
+            // 'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,from明daystart,eachdayearlyup9pointexecute,displayoneitemreminderIcookmessage',
+            'user_prompt' => 'helpIsendoneitemmessage,contentis:youtodaydaytruegoodlook',
         ]);
 
         $runner->execute($vertexResult, $executionData);
@@ -200,8 +200,8 @@ usernicknameis:currentusernickname
 
 MARKDOWN,
 
-            // 'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,from明daystart,eachday早up9pointexecute,displayoneitemreminderIcookmessage',
-            'user_prompt' => 'helpIsendoneitemmessage,contentis:you今daytruegood看',
+            // 'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,from明daystart,eachdayearlyup9pointexecute,displayoneitemreminderIcookmessage',
+            'user_prompt' => 'helpIsendoneitemmessage,contentis:youtodaydaytruegoodlook',
         ]);
 
         $runner->execute($vertexResult, $executionData);

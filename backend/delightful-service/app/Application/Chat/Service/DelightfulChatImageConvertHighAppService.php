@@ -102,7 +102,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             );
             // 计o clockstart
             $start = microtime(true);
-            // roundquery600time,until拿toimage
+            // roundquery600time,untilgettoimage
             $count = 600;
             $response = null;
 
@@ -242,7 +242,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
         ?string $id,
         ImageConvertHighResponseType $type,
         array $content,
-        // streamresponse,拿tocustomerclient transmissioncome app_message_id ,asforresponsetimeuniqueoneidentifier
+        // streamresponse,gettocustomerclient transmissioncome app_message_id ,asforresponsetimeuniqueoneidentifier
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

@@ -56,27 +56,27 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
             $knowledgePrompt .= "- {$knowledge->getName()}:{$knowledge->getDescription()}\n";
         }
         return <<<MARKDOWN
-# allowbeusecan力: knowledge baseretrieve
+# allowbeusecancapability: knowledge baseretrieve
 ## knowledge basecolumntable
 > knowledge basename:knowledge basedescription
 {$knowledgePrompt}
 ## process
-1. combineupdowntext extractionuserissue,generatemultiplekeyword,at mostnotexceedspass 5 ,multiplekeyworduseEnglish逗number"," separatoropen,useatusedifferentkeywordfromknowledge basemiddleretrievemost相closeinfo;
-2. combineupdowntext,analyzeuserissue,generate `names` parameter,useatfingersetanduserissuemaybehaveclosemultipleknowledge basename,according to相closepropertysort,相closeproperty需combineupdowntext,knowledge basenameandknowledge basedescriptionconductjudge;
+1. combineupdowntext extractionuserissue,generatemultiplekeyword,at mostnotexceedspass 5 ,multiplekeyworduseEnglish逗number"," separatoropen,useatusedifferentkeywordfromknowledge basemiddleretrievemostrelatedcloseinfo;
+2. combineupdowntext,analyzeuserissue,generate `names` parameter,useatfingersetanduserissuemaybehaveclosemultipleknowledge basename,according torelatedclosepropertysort,relatedclosepropertyneedcombineupdowntext,knowledge basenameandknowledge basedescriptionconductjudge;
 3. usekeywordanduserissue,call `{$this->getName()}` toolretrieveknowledge basemiddlecontent,keywordparameteris `keyword`,userissueparameteris `question`, pleaseensureparameterallbecorrectfill in,toolwillreturnanduserissuesimilardegreemosthighcontentslicesegment;
-4. knowledge baseretrieveoutcomecontentwithinwillcontainonethesecustomize Delightful tag,youwant善atuseit们,havebydown几typetag:
-    - <DelightfulImage></DelightfulImage> indicateoneimage,like <DelightfulImage>cp_xxxxxxx</DelightfulImage>,eachtagallwillinfrontclientmessagecardrenderoutone張image;
+4. knowledge baseretrieveoutcomecontentwithinwillcontainonethesecustomize Delightful tag,youwant善atuseit们,havebydownseveraltypetag:
+    - <DelightfulImage></DelightfulImage> indicateoneimage,like <DelightfulImage>cp_xxxxxxx</DelightfulImage>,eachtagallwillinfrontclientmessagecardrenderoutone张image;
     - <DelightfulVideo></DelightfulVideo> indicateonevideo,like <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>,eachtagallwillinfrontclientmessagecardrenderoutonevideo;
     - <DelightfulMention></DelightfulMention> indicateonepersonmemberinfo,like <DelightfulMention>cp_xxxxxxx</DelightfulMention>,eachtagallwillinfrontclientmessagecardshapebecomeone @somesomeperson effect;
 5. priorityusecontain <DelightfulImage></DelightfulImage>,<DelightfulVideo></DelightfulVideo>,<DelightfulMention></DelightfulMention> etchave Delightful tagslicesegment;
-6. combineknowledge basereturncontentorganizeback尽mayberichgroundreturn答userissue.
+6. combineknowledge basereturncontentorganizeback尽mayberichgroundreturnansweruserissue.
 ## toolmiddleclosekeyreturnvalueinstruction
 - fragments: thistimeretrieveto haveknowledge baseslicesegment
 - fragments.*.content: slicesegmentcontent
 - fragments.*.metadata.url: currentslicesegmentoriginal textlink
-- graph.*.content: comefromknowledgegraph谱data,canenhanceinfo,letyoumoregoodreturn答issue
+- graph.*.content: comefromknowledgegraph谱data,canenhanceinfo,letyoumoregoodreturnanswerissue
 ## limit
-- return答contentmiddlenotallowoutshownotisDelightfultaglink.
+- returnanswercontentmiddlenotallowoutshownotisDelightfultaglink.
 MARKDOWN;
     }
 

@@ -27,7 +27,7 @@ class ClientSequence extends AbstractEntity
     // usermessageid,userdownuniqueone.
     protected string $messageId;
 
-    // thisitemmessagefingertodelightful_message_id. useatimplementalreadyreadreturn执scenario.existsinquoteclose系o clock,send_msg_idfieldnotagainreturn,因forsendsidemessageidnothavealter.
+    // thisitemmessagefingertodelightful_message_id. useatimplementalreadyreadreturnexecutescenario.existsinquoteclosesystemo clock,send_msg_idfieldnotagainreturn,factorforsendsidemessageidnothavealter.
     protected ?string $referMessageId;
 
     // sendsidemessageid

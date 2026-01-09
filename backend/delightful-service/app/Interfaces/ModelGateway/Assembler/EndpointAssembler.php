@@ -52,7 +52,7 @@ class EndpointAssembler
     /**
      * checkgivesetstringwhetherforformatclientpointtypeidentifier.
      *
-     * @param string $modelId 待checkmodelID
+     * @param string $modelId pendingcheckmodelID
      * @return bool whetherforformatclientpointtypeidentifier
      */
     public static function isFormattedEndpointType(string $modelId): bool

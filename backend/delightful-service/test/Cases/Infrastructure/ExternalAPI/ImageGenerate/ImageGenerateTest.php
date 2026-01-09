@@ -42,7 +42,7 @@ class ImageGenerateTest extends BaseTest
         }
         $header = $data[0];
         $imageData = $data[1];
-        // checkhead部whetherconformBase64encodingimageformat
+        // checkheaddepartmentwhetherconformBase64encodingimageformat
         if (! preg_match('/^data:image\/(png|jpeg|jpg|gif);base64$/', $header)) {
             return false;
         }
@@ -95,7 +95,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByVolcengine()
     {
         $volcengineModelRequest = new VolcengineModelRequest();
-        $volcengineModelRequest->setPrompt('photographyas品,trueperson写truestyle,one画ten thousand圣sectiondress up womanpersonhandwithin拿onejack-o-lantern,thedesign冷color調and暖color調combine,冷color調and暖color調transitionfrom然,colorgentleand,cinematic feel,movie poster,highlevel感,16k,exceedsdetailed,UHD');
+        $volcengineModelRequest->setPrompt('photographyasproduct,truepersonwritetruestyle,one画ten thousand圣sectiondress up womanpersonhandwithingetonejack-o-lantern,thedesigncoldcolor调andwarmcolor调combine,coldcolor调andwarmcolor调transitionfromthen,colorgentleand,cinematic feel,movie poster,highlevel感,16k,exceedsdetailed,UHD');
         $volcengineModelRequest->setGenerateNum(1);
         $volcengineModelRequest->setWidth('1024');
         $volcengineModelRequest->setHeight('1024');
@@ -108,7 +108,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByFluix()
     {
         $FluxModelRequest = new FluxModelRequest();
-        $FluxModelRequest->setPrompt('photographyas品,trueperson写truestyle,one画ten thousand圣sectiondress up womanpersonhandwithin拿onejack-o-lantern,thedesign冷color調and暖color調combine,冷color調and暖color調transitionfrom然,colorgentleand,cinematic feel,movie poster,highlevel感,16k,exceedsdetailed,UHD');
+        $FluxModelRequest->setPrompt('photographyasproduct,truepersonwritetruestyle,one画ten thousand圣sectiondress up womanpersonhandwithingetonejack-o-lantern,thedesigncoldcolor调andwarmcolor调combine,coldcolor调andwarmcolor调transitionfromthen,colorgentleand,cinematic feel,movie poster,highlevel感,16k,exceedsdetailed,UHD');
         $FluxModelRequest->setGenerateNum(1);
         $FluxModelRequest->setWidth('1024');
         $FluxModelRequest->setHeight('1024');
@@ -121,7 +121,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByMJ()
     {
         $MjModelRequest = new MidjourneyModelRequest();
-        $MjModelRequest->setPrompt('photographyas品,trueperson写truestyle,one画ten thousand圣sectiondress up womanpersonhandwithin拿onejack-o-lantern,thedesign冷color調and暖color調combine,冷color調and暖color調transitionfrom然,colorgentleand,cinematic feel,movie poster,highlevel感,16k,exceedsdetailed,UHD');
+        $MjModelRequest->setPrompt('photographyasproduct,truepersonwritetruestyle,one画ten thousand圣sectiondress up womanpersonhandwithingetonejack-o-lantern,thedesigncoldcolor调andwarmcolor调combine,coldcolor调andwarmcolor调transitionfromthen,colorgentleand,cinematic feel,movie poster,highlevel感,16k,exceedsdetailed,UHD');
         $MjModelRequest->setGenerateNum(1);
         $MjModelRequest->setModel('relax');
         $MjModel = new MidjourneyModel();
@@ -197,7 +197,7 @@ class ImageGenerateTest extends BaseTest
         //        $config = $providerModelsByConfig->getConfig();
         //        // createserviceprovidequotientconfiguration
         //
-        //        // creategeneral meaningthousand问modelinstance
+        //        // creategeneral meaningthousandquestionmodelinstance
         //        $qwenImageModel = new QwenImageModel($config);
         //
         //        // createrequestinstance

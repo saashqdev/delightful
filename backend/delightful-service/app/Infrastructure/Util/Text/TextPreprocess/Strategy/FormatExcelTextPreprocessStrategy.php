@@ -26,7 +26,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
      */
     private function convertToCsv(string $content): string
     {
-        // willcontent按linesplit,butretainsingleyuanformatinsideexchangeline符
+        // willcontentbylinesplit,butretainsingleyuanformatinsideexchangeline符
         $lines = preg_split('/(?<!")[\r\n]+(?!")/', $content);
         $result = [];
         $headers = [];

@@ -35,11 +35,11 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.token.expired')]
     case TOKEN_EXPIRED = 4005;
 
-    // organizationquotanot足
+    // organizationquotanotenough
     #[ErrorMessage(message: 'api.organization.quota_not_enough')]
     case ORGANIZATION_QUOTA_NOT_ENOUGH = 4006;
 
-    // accessToken quotanot足
+    // accessToken quotanotenough
     #[ErrorMessage(message: 'api.token.quota_not_enough')]
     case TOKEN_QUOTA_NOT_ENOUGH = 4007;
 
@@ -83,7 +83,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.model.response_fail')]
     case MODEL_RESPONSE_FAIL = 4017;
 
-    // 通useverifyfailed
+    // commonuseverifyfailed
     #[ErrorMessage(message: 'api.validate_failed')]
     case ValidateFailed = 4018;
 

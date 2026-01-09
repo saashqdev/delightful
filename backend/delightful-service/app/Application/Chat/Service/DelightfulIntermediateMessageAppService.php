@@ -30,7 +30,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Throwable;
 
 /**
- * controlmessage相close.
+ * controlmessagerelatedclose.
  */
 class DelightfulIntermediateMessageAppService extends AbstractAppService
 {

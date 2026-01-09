@@ -33,7 +33,7 @@ class Template extends AbstractTemplate
     ];
 
     protected array $idContents = [
-        VolcengineTemplateIdEnum::ST_79E262F3->value => '您verifycodeis:${verification_code},valid期 ${timeout} minuteseconds.pleaseinpagemiddleinputverifycodecompleteverify.likenonthispersonoperationas,pleaseignore.',
+        VolcengineTemplateIdEnum::ST_79E262F3->value => 'youverifycodeis:${verification_code},valid期 ${timeout} minuteseconds.pleaseinpagemiddleinputverifycodecompleteverify.likenonthispersonoperationas,pleaseignore.',
     ];
 
     /**
@@ -46,7 +46,7 @@ class Template extends AbstractTemplate
     ];
 
     /**
-     * Volcanocloudshortmessagesignature暫notsupportinternationalization.
+     * Volcanocloudshortmessagesignaturetemporarynotsupportinternationalization.
      */
     protected array $signMap = [
         'lighthouseengine' => [

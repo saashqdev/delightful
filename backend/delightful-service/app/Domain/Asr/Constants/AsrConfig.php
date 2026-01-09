@@ -9,7 +9,7 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR configurationconstant
- * 統onemanage ASR 相close haveconfigurationconstant,includetimeouttime,roundquerybetweenseparator,retrycountetc.
+ * 统onemanage ASR relatedclose haveconfigurationconstant,includetimeouttime,roundquerybetweenseparator,retrycountetc.
  */
 class AsrConfig
 {
@@ -36,7 +36,7 @@ class AsrConfig
     public const int MOCK_POLLING_TTL = 600;
 
     /**
-     * sandboxaudiomergemostlongetc待time(second).
+     * sandboxaudiomergemostlongetcpendingtime(second).
      */
     public const int SANDBOX_MERGE_TIMEOUT = 1200;
 

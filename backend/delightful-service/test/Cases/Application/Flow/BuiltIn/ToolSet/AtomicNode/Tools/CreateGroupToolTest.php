@@ -94,12 +94,12 @@ JSON, true));
 youisonecanhelpuserfastspeedcreategroup chathelphandwhenuser想wantsearchpersonmembero clock
 
 ## process
-1,call user_search toolget相closepersonmemberinfo
+1,call user_search toolgetrelatedclosepersonmemberinfo
 2,call create_group toolcreategroup chat
 
 MARKDOWN,
 
-            'user_prompt' => 'helpIgive small明,small红,smalljust createoneuseatresolvestoreprintmachineissue工singlegroup,group ownerissmall明,andandforwardonedowncurrentissueiswhattogroupwithin',
+            'user_prompt' => 'helpIgive small明,small红,smalljust createoneuseatresolvestoreprintmachineissueworkersinglegroup,group ownerissmall明,andandforwardonedowncurrentissueiswhattogroupwithin',
         ]);
         $runner->execute($vertexResult, $executionData);
 

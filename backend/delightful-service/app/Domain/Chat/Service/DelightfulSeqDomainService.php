@@ -37,12 +37,12 @@ use Throwable;
 use function Hyperf\Support\retry;
 
 /**
- * handlemessagestream(seq)相close.
+ * handlemessagestream(seq)relatedclose.
  */
 class DelightfulSeqDomainService extends AbstractDomainService
 {
     /**
-     * messagepush. toalreadyalreadygenerateseq,pushgiveseq拥haveperson.
+     * messagepush. toalreadyalreadygenerateseq,pushgiveseqownhaveperson.
      * @throws Throwable
      */
     public function pushSeq(string $seqId): void
@@ -84,12 +84,12 @@ class DelightfulSeqDomainService extends AbstractDomainService
     }
 
     /**
-     * toalreadyalreadygenerateseq,pushgiveseq拥haveperson.
+     * toalreadyalreadygenerateseq,pushgiveseqownhaveperson.
      */
     public function pushControlSeq(DelightfulSeqEntity $seqEntity, DelightfulUserEntity $seqUserEntity, ?DelightfulMessageEntity $messageEntity = null): void
     {
         // havethesecontrolmessage,notonlycontrolfromselfdevice,alsoneedcontroltosidedevice
-        // controlmessagepush. todo:待optimize,mergepushalreadyreadcontrolmessage
+        // controlmessagepush. todo:pendingoptimize,mergepushalreadyreadcontrolmessage
         if ($seqEntity->getObjectType() === ConversationType::User && ($seqEntity->getSeqType() instanceof ControlMessageType)) {
             SocketIOUtil::sendSequenceId($seqEntity);
         }
@@ -112,7 +112,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 }
                 $senderUserEntity = $this->delightfulUserRepository->getUserById($conversationEntity->getReceiveId());
             } elseif ($seqEntity->getSeqType() === ControlMessageType::AddFriendSuccess) {
-                // 因foraddgoodfriendnothaveconversationwindow, byneedaccording tomessagesendidcheckouttoside user_entity
+                // factorforaddgoodfriendnothaveconversationwindow, byneedaccording tomessagesendidcheckouttoside user_entity
                 /** @var AddFriendMessage $seqContent */
                 $seqContent = $seqEntity->getContent();
                 $senderUserEntity = $this->delightfulUserRepository->getUserById($seqContent->getUserId());
@@ -124,7 +124,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
     }
 
     /**
-     * toalreadyalreadygenerateseq,pushgiveseq拥haveperson.
+     * toalreadyalreadygenerateseq,pushgiveseqownhaveperson.
      * @throws Throwable
      */
     public function pushChatSeq(DelightfulSeqEntity $selfSeqEntity, DelightfulUserEntity $userEntity, DelightfulMessageEntity $messageEntity): void
@@ -156,10 +156,10 @@ class DelightfulSeqDomainService extends AbstractDomainService
                     return;
                 }
                 try {
-                    # ai sendalreadyreadreturn执
+                    # ai sendalreadyreadreturnexecute
                     $this->aiSendReadStatusChangeReceipt($selfSeqEntity, $userEntity);
                     # call flow
-                    // todo canmake optimizeflowresponsesuccessrate: syncetc待flowexecute,meticulousjudge,toatthisseq_id,uptimeflowresponsewhethertimeout,ifis,directlydiscard,notagainhairgiveflow
+                    // todo canmake optimizeflowresponsesuccessrate: syncetcpendingflowexecute,meticulousjudge,toatthisseq_id,uptimeflowresponsewhethertimeout,ifis,directlydiscard,notagainhairgiveflow
                     $this->userCallFlow($aiAccountEntity, $userEntity, $senderUserEntity, $selfSeqEntity);
                 } catch (Throwable $throwable) {
                     $this->logger->error('UserCallAgentEventError', [
@@ -173,8 +173,8 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 }
                 break;
             case ConversationType::User:
-                // todo onesetwantmake! publishsubscribeuserabbitmqimplement,notagainuseredispub/sub. meanwhile,pushbackneedcustomerclientreturnack,然backupdateseqstatus
-                // todo onesetwantmake! only推seq_id,publishsubscribereceivetoseq_idback,againgodatabasecheckseqdetail,again推givecustomerclient
+                // todo onesetwantmake! publishsubscribeuserabbitmqimplement,notagainuseredispub/sub. meanwhile,pushbackneedcustomerclientreturnack,thenbackupdateseqstatus
+                // todo onesetwantmake! onlypushseq_id,publishsubscribereceivetoseq_idback,againgodatabasecheckseqdetail,againpushgivecustomerclient
                 $pushData = SeqAssembler::getClientSeqStruct($selfSeqEntity, $messageEntity)->toArray();
                 // notprintsensitiveinfo
                 $pushLogData = [
@@ -265,7 +265,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
     }
 
     /**
-     * sendalreadyreadreturn执.
+     * sendalreadyreadreturnexecute.
      */
     private function aiSendReadStatusChangeReceipt(DelightfulSeqEntity $selfSeqEntity, DelightfulUserEntity $userEntity): void
     {
@@ -337,7 +337,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         // getmessageEntity
         $messageEntity = $this->delightfulMessageRepository->getMessageByDelightfulMessageId($seqEntity->getDelightfulMessageId());
 
-        // onlychatmessageandalreadyreadreturn執才觸hairflow
+        // onlychatmessageandalreadyreadreturn執only觸hairflow
         $messageType = $messageEntity?->getMessageType();
         if ($messageType instanceof ChatMessageType || $seqEntity->canTriggerFlow()) {
             // getusertruename
@@ -348,7 +348,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
             $language = di(TranslatorInterface::class)->getLocale();
 
             $this->logger->info('userCallFlow language: ' . $language);
-            // callflowmaybeveryconsumeo clock,notcanletcustomerclientone直etc待
+            // callflowmaybeveryconsumeo clock,notcanletcustomerclientone直etcpending
             Coroutine::create(function () use (
                 $agentAccountEntity,
                 $agentUserEntity,

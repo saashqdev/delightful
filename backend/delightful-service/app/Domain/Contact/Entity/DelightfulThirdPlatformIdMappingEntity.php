@@ -11,7 +11,7 @@ use App\Domain\Contact\Entity\ValueObject\PlatformType;
 use App\Domain\Contact\Entity\ValueObject\ThirdPlatformIdMappingType;
 
 /**
- * thethird-partyplatformandMagedepartment,user,organizationencoding,nullbetweenencodingetcmappingclose系record.
+ * thethird-partyplatformandMagedepartment,user,organizationencoding,nullbetweenencodingetcmappingclosesystemrecord.
  */
 class DelightfulThirdPlatformIdMappingEntity extends AbstractEntity
 {

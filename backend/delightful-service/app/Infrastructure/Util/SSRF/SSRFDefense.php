@@ -45,7 +45,7 @@ class SSRFDefense
         $this->isValid($allowRedirect);
 
         $url = $this->url;
-        // replacebecome ip access,thiso clockneedinrequestmiddleadd Host 才line
+        // replacebecome ip access,thiso clockneedinrequestmiddleadd Host onlyline
         if ($this->options->isReplaceIp()) {
             $url = str_replace($this->host, $this->ip, $url);
         }

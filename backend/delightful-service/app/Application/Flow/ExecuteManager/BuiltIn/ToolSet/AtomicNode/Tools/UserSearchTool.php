@@ -36,7 +36,7 @@ class UserSearchTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'usersearch.notallowsearchall部personmember,onesetiswithhavefingersetfiltervalue';
+        return 'usersearch.notallowsearchalldepartmentpersonmember,onesetiswithhavefingersetfiltervalue';
     }
 
     public function getCallback(): ?Closure
@@ -126,7 +126,7 @@ class UserSearchTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "field",
                         "title": "filterfield",
-                        "description": "filterfield.optionalenumhave:username,work_number,position,position,department_name,group_name.minutealternativetable  username,user工number,userpost,userhandmachinenumber,departmentname,group chatname",
+                        "description": "filterfield.optionalenumhave:username,work_number,position,position,department_name,group_name.minutealternativetable  username,userworkernumber,userpost,userhandmachinenumber,departmentname,group chatname",
                         "required": null,
                         "value": null,
                         "encryption": false,

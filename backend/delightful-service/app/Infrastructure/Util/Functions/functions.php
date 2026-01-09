@@ -116,7 +116,7 @@ if (! function_exists('string_to_hump')) {
     /**
      * down划linetransferbecomecamel casenaming,defaultsmallcamel case.
      * @param string $string wantconvertstring
-     * @param bool $firstUp whetherinitialbig写,defaultno
+     * @param bool $firstUp whetherinitialbigwrite,defaultno
      */
     function string_to_hump(string $string, bool $firstUp = false): string
     {
@@ -185,7 +185,7 @@ if (! function_exists('format_micro_time')) {
             $microseconds = (int) $microTimes[0] * 1000000;
         } else {
             $integerTimestamp = (int) $microTime;
-            $microseconds = ($microTime - $integerTimestamp) * 1000000; // 微second部minute
+            $microseconds = ($microTime - $integerTimestamp) * 1000000; // 微seconddepartmentminute
         }
         $dateTime = date('Y-m-d H:i:s', $integerTimestamp);
         return "{$dateTime}.{$microseconds}";
@@ -247,7 +247,7 @@ if (! function_exists('calculate_elapsed_time')) {
 
 if (! function_exists('diff_day')) {
     /**
-     * fromstarttimetoshowinisthe几day.
+     * fromstarttimetoshowinistheseveralday.
      */
     function diff_day(DateTime $startTime): int
     {

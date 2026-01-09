@@ -63,7 +63,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return;
         }
 
-        // go重
+        // goreload
         $iconPaths = array_unique($iconPaths);
 
         // batchquantitygeticonURL(fromauto byorganizationcodegrouphandle)
@@ -115,7 +115,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return;
         }
 
-        // go重
+        // goreload
         $iconPaths = array_unique($iconPaths);
 
         // batchquantitygeticonURL(fromauto byorganizationcodegrouphandle)
@@ -186,7 +186,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return;
         }
 
-        // go重
+        // goreload
         $iconPaths = array_unique($iconPaths);
 
         // batchquantitygeticonURL(fromauto byorganizationcodegrouphandle)

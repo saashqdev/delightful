@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace App\Domain\Provider\Entity\ValueObject;
 
 /**
- * AI can力codeenum.
+ * AI cancapabilitycodeenum.
  */
 enum AiAbilityCode: string
 {
-    case Unknown = 'unknown';                          // unknowncan力
+    case Unknown = 'unknown';                          // unknowncancapability
     case Ocr = 'ocr';                                      // OCR identify
     case WebSearch = 'web_search';                         // internetsearch
     case RealtimeSpeechRecognition = 'realtime_speech_recognition';  // actualo clockvoiceidentify
@@ -24,7 +24,7 @@ enum AiAbilityCode: string
     case AiOptimization = 'ai_optimization';               // AI optimize
 
     /**
-     * getcan力name.
+     * getcancapabilityname.
      */
     public function label(): string
     {
@@ -43,7 +43,7 @@ enum AiAbilityCode: string
     }
 
     /**
-     * getcan力description.
+     * getcancapabilitydescription.
      */
     public function description(): string
     {
@@ -54,7 +54,7 @@ enum AiAbilityCode: string
             self::AudioFileRecognition => 'thiscancoverageplatform haveaudiofiletransfertextapplicationscenario,preciseidentifyspeakperson,audiotextetcinfo.',
             self::AutoCompletion => 'thiscancoverageplatform haveinputcontentfromauto supplementallapplicationscenario,according tocomprehendupdowntextforuserfromauto supplementallcontent,byuserchoosewhetheradopt.',
             self::ContentSummary => 'thiscancoverageplatform havecontentsummaryapplicationscenario,tolong篇document,reportorwebpagetextchapterconductdeepdegreeanalyze.',
-            self::VisualUnderstanding => 'thiscancoverageplatform haveneedletbigmodelconductvisualcomprehendapplicationscenario,precisecomprehendeachtypegraphlikemiddlecontentbyandcomplexclose系.',
+            self::VisualUnderstanding => 'thiscancoverageplatform haveneedletbigmodelconductvisualcomprehendapplicationscenario,precisecomprehendeachtypegraphlikemiddlecontentbyandcomplexclosesystem.',
             self::SmartRename => 'thiscancoverageplatform havesupport AI renameapplicationscenario,according tocomprehendupdowntextforuserfromautoconductcontenttitlenaming.',
             self::AiOptimization => 'thiscancoverageplatform havesupport AI optimizecontentapplicationscenario,according tocomprehendupdowntextforuserfromautotocontentconductoptimize.',
             default => 'Unknown',

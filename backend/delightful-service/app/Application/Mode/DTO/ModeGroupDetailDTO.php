@@ -97,7 +97,7 @@ class ModeGroupDetailDTO extends AbstractDTO
     }
 
     /**
-     * tomodel按sortfieldsort(descending,morebigmorefront).
+     * tomodelbysortfieldsort(descending,morebigmorefront).
      */
     public function sortModels(): void
     {

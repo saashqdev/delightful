@@ -24,7 +24,7 @@ class SubNodeRunnerTest extends ExecuteManagerBaseTest
 {
     public function testRun()
     {
-        $this->markTestSkipped('thiswithinneeddatabaseexistsinthisprocess,暫o clockskip');
+        $this->markTestSkipped('thiswithinneeddatabaseexistsinthisprocess,temporaryo clockskip');
         $node = Node::generateTemplate(NodeType::Sub, [
             'sub_flow_id' => 'DELIGHTFUL-FLOW-66d56f57e7b400-71937460',
         ]);

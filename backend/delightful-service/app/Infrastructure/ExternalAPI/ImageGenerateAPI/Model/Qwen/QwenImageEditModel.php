@@ -43,12 +43,12 @@ class QwenImageEditModel extends AbstractImageGenerate
 
     public function setAK(string $ak)
     {
-        // general meaningthousand问notuseAK/SKauthentication,thismethodfornullimplement
+        // general meaningthousandquestionnotuseAK/SKauthentication,thismethodfornullimplement
     }
 
     public function setSK(string $sk)
     {
-        // general meaningthousand问notuseAK/SKauthentication,thismethodfornullimplement
+        // general meaningthousandquestionnotuseAK/SKauthentication,thismethodfornullimplement
     }
 
     public function setApiKey(string $apiKey)
@@ -146,19 +146,19 @@ class QwenImageEditModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof QwenImageEditRequest) {
-            $this->logger->error('general meaningthousand问graphlikeedit:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('general meaningthousandquestiongraphlikeedit:invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
         // validationrequiredwantparameter
         $this->validateEditRequest($imageGenerateRequest);
 
-        $this->logger->info('general meaningthousand问graphlikeedit:startedit', [
+        $this->logger->info('general meaningthousandquestiongraphlikeedit:startedit', [
             'prompt' => $imageGenerateRequest->getPrompt(),
             'image_count' => count($imageGenerateRequest->getImageUrls()),
         ]);
 
-        // directlyhandlesinglerequest,graphlikeeditonlyhandleone張image
+        // directlyhandlesinglerequest,graphlikeeditonlyhandleone张image
         try {
             $result = $this->callSyncEditAPI($imageGenerateRequest);
             $rawResults = [
@@ -168,7 +168,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                 ],
             ];
         } catch (Exception $e) {
-            $this->logger->error('general meaningthousand问graphlikeedit:fail', [
+            $this->logger->error('general meaningthousandquestiongraphlikeedit:fail', [
                 'error' => $e->getMessage(),
             ]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::from($e->getCode()) ?? ImageGenerateErrorCode::GENERAL_ERROR, $e->getMessage());
@@ -184,7 +184,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     {
         // checkwhetherhaveinputgraphlike
         if (empty($request->getImageUrls())) {
-            $this->logger->error('general meaningthousand问graphlikeedit:missinginputgraphlike');
+            $this->logger->error('general meaningthousandquestiongraphlikeedit:missinginputgraphlike');
             ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, 'image_generate.reference_images_required');
         }
     }
@@ -208,24 +208,24 @@ class QwenImageEditModel extends AbstractImageGenerate
             // checkresponseformat - adaptnewsyncresponseformat
             if (! isset($response['output']['choices'])) {
                 $errorMsg = $response['message'] ?? 'unknownerror';
-                $this->logger->warning('general meaningthousand问graphlikeedit:responseformaterror', ['response' => $response]);
+                $this->logger->warning('general meaningthousandquestiongraphlikeedit:responseformaterror', ['response' => $response]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR, $errorMsg);
             }
 
             // checkwhetherhavegraphlikedata
             $choices = $response['output']['choices'];
             if (empty($choices)) {
-                $this->logger->error('general meaningthousand问graphlikeedit:responsemiddlemissinggraphlikedata', ['response' => $response]);
+                $this->logger->error('general meaningthousandquestiongraphlikeedit:responsemiddlemissinggraphlikedata', ['response' => $response]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
             }
 
-            $this->logger->info('general meaningthousand问graphlikeedit:callsuccess', [
+            $this->logger->info('general meaningthousandquestiongraphlikeedit:callsuccess', [
                 'choices_count' => count($choices),
             ]);
 
             return $response;
         } catch (Exception $e) {
-            $this->logger->error('general meaningthousand问graphlikeedit:callexception', [
+            $this->logger->error('general meaningthousandquestiongraphlikeedit:callexception', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -235,7 +235,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * forgeneral meaningthousand问editmodetypeoriginaldataaddwatermark - adaptnewchoicesformat.
+     * forgeneral meaningthousandquestioneditmodetypeoriginaldataaddwatermark - adaptnewchoicesformat.
      */
     private function processQwenEditRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -259,13 +259,13 @@ class QwenImageEditModel extends AbstractImageGenerate
                         $content['image'] = $this->watermarkProcessor->addWatermarkToUrl($content['image'], $imageGenerateRequest);
                     } catch (Exception $e) {
                         // watermarkhandlefailo clock,recorderrorbutnotimpactimagereturn
-                        $this->logger->error('general meaningthousand问graphlikeeditwatermarkhandlefail', [
+                        $this->logger->error('general meaningthousandquestiongraphlikeeditwatermarkhandlefail', [
                             'index' => $index,
                             'choiceIndex' => $choiceIndex,
                             'contentIndex' => $contentIndex,
                             'error' => $e->getMessage(),
                         ]);
-                        // continuehandledownone張image,currentimagemaintainoriginalstatus
+                        // continuehandledownone张image,currentimagemaintainoriginalstatus
                     }
                 }
             }
@@ -275,12 +275,12 @@ class QwenImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * validategeneral meaningthousand问editAPIresponsedataformat.
+     * validategeneral meaningthousandquestioneditAPIresponsedataformat.
      */
     private function validateQwenEditResponse(array $result): void
     {
         if (empty($result['output']['choices']) || ! is_array($result['output']['choices'])) {
-            throw new Exception('general meaningthousand问editresponsedataformaterror:missingchoicesdata');
+            throw new Exception('general meaningthousandquestioneditresponsedataformaterror:missingchoicesdata');
         }
 
         $hasValidImage = false;
@@ -296,19 +296,19 @@ class QwenImageEditModel extends AbstractImageGenerate
         }
 
         if (! $hasValidImage) {
-            throw new Exception('general meaningthousand问editresponsedataformaterror:missinggraphlikedata');
+            throw new Exception('general meaningthousandquestioneditresponsedataformaterror:missinggraphlikedata');
         }
     }
 
     /**
-     * willgeneral meaningthousand问editimagedataaddtoOpenAIresponseobjectmiddle.
+     * willgeneral meaningthousandquestioneditimagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponseQwenEdit(
         OpenAIFormatResponse $response,
         array $qwenResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // fromgeneral meaningthousand问editresponsemiddleextractdata
+        // fromgeneral meaningthousandquestioneditresponsemiddleextractdata
         if (empty($qwenResult['output']['choices']) || ! is_array($qwenResult['output']['choices'])) {
             return;
         }
@@ -344,9 +344,9 @@ class QwenImageEditModel extends AbstractImageGenerate
             }
         }
 
-        // accumulatedusageinfo - general meaningthousand问editusageformatadapt
+        // accumulatedusageinfo - general meaningthousandquestioneditusageformatadapt
         if (! empty($qwenResult['usage']) && is_array($qwenResult['usage'])) {
-            $currentUsage->addGeneratedImages(1); // editgenerate1張image
+            $currentUsage->addGeneratedImages(1); // editgenerate1张image
             $currentUsage->promptTokens += $qwenResult['usage']['input_tokens'] ?? 0;
             $currentUsage->completionTokens += $qwenResult['usage']['output_tokens'] ?? 0;
             $currentUsage->totalTokens += $qwenResult['usage']['total_tokens'] ?? 0;

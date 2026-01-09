@@ -68,7 +68,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         //        $sendResult = new SendResult();
         //        $sendResult->setResult(0, $code);
         $key = $this->getSmsVerifyCodeKey($stateCode . $phone, $type);
-        // cacheverifycode,back続verifyuse
+        // cacheverifycode,backcontinueverifyuse
         $this->redis->setex($key, 10 * 60, $code);
         return $sendResult->toArray();
     }
@@ -153,7 +153,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // certainuser_idgeneraterule
                 $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $userDTO->getOrganizationCode());
                 $userDTO->setUserId($userId);
-                // 1.47x(10**-29) 概ratedown,user_idwillduplicate,willbemysqluniqueoneindexintercept,letuser重newloginonetimethenline.
+                // 1.47x(10**-29) 概ratedown,user_idwillduplicate,willbemysqluniqueoneindexintercept,letuserreloadnewloginonetimethenline.
                 $this->userRepository->createUser($userDTO);
             }
             Db::commit();

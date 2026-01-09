@@ -9,7 +9,7 @@ namespace App\Domain\Admin\Entity\ValueObject\Extra;
 
 enum PermissionRange: int
 {
-    // all部
+    // alldepartment
     case ALL = 1;
 
     // fingerset

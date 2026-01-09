@@ -31,7 +31,7 @@ use Throwable;
 use function Hyperf\Translation\__;
 
 /**
- * processmessagestream(seq)相close.
+ * processmessagestream(seq)relatedclose.
  */
 class DelightfulTopicDomainService extends AbstractDomainService
 {
@@ -160,7 +160,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                 $messageStruct = $messageDTO->getContent();
                 // judgesessionwhetherexistsin,whetherbelongatcurrentuser
                 $this->checkAndGetSelfConversation($messageStruct->getConversationId(), $dataIsolation);
-                // todo topicnamecreateo clockallowforempty,back続 ai summarytopicname,pushgivecustomerclient
+                // todo topicnamecreateo clockallowforempty,backcontinue ai summarytopicname,pushgivecustomerclient
                 $topicEntity = $this->userCreateTopicHandler($messageStruct, $dataIsolation);
                 break;
             case ControlMessageType::UpdateTopic:
@@ -192,7 +192,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                 'name' => $topicEntity->getName(),
             ];
         }
-        // return写entercontrolmessagemiddle,便atcustomerclientprocess
+        // returnwriteentercontrolmessagemiddle,便atcustomerclientprocess
         $contentChange = MessageAssembler::getControlMessageStruct($messageDTO->getMessageType(), $seqContent);
         $messageDTO->setContent($contentChange);
         $messageDTO->setMessageType($contentChange->getMessageTypeEnum());
@@ -239,7 +239,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
 
     /**
      * agent sendmessageo clockgettopic id.
-     * @param int $getType todo 0:defaulttopic 1:most近topic 2:智cancertaintopic,暫o clockonlysupportdefaulttopic 3 newtopic
+     * @param int $getType todo 0:defaulttopic 1:most近topic 2:智cancertaintopic,temporaryo clockonlysupportdefaulttopic 3 newtopic
      * @throws Throwable
      */
     public function agentSendMessageGetTopicId(DelightfulConversationEntity $senderConversationEntity, int $getType): string
@@ -316,7 +316,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
         $topicDTO->setName(__('chat.topic.system_default_topic'));
         $topicDTO->setDescription('');
         $this->delightfulChatTopicRepository->createTopic($topicDTO);
-        // willdefaulttopicidreturn写entersessionwindow
+        // willdefaulttopicidreturnwriteentersessionwindow
         $senderConversationExtra = $conversationEntity->getExtra();
         if ($senderConversationExtra === null) {
             $senderConversationExtra = new ConversationExtra();

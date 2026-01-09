@@ -10,7 +10,7 @@ namespace App\Domain\Agent\Constant;
 enum DelightfulAgentVersionStatus: int
 {
     // approvalstreamstatus
-    case APPROVAL_PENDING = 1; // 待approval
+    case APPROVAL_PENDING = 1; // pendingapproval
     case APPROVAL_IN_PROGRESS = 2; // approvalmiddle
     case APPROVAL_PASSED = 3; // approvalpass
     case APPROVAL_REJECTED = 4; // already驳return

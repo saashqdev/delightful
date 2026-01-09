@@ -46,7 +46,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
         $knowledge = $event->knowledgeBaseEntity;
         $document = $event->knowledgeBaseDocumentEntity;
         $dataIsolation = $event->dataIsolation;
-        // ifisfoundationknowledge basetype,then传knowledge basecreateperson,avoidpermissionnot足
+        // ifisfoundationknowledge basetype,then传knowledge basecreateperson,avoidpermissionnotenough
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }

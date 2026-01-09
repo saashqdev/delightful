@@ -99,7 +99,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                 $reqDTO->getReferMessageId(),
             );
             if (! empty($reqDTO->getAttachments())) {
-                // toquotecontent重newtext generationgraph
+                // toquotecontentreloadnewtext generationgraph
                 $this->handleGenerateImageByReference($requestContext, $reqDTO);
             } else {
                 // text generationgraph
@@ -112,7 +112,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     }
 
     /**
-     * toquotecontent重newtext generationgraph.
+     * toquotecontentreloadnewtext generationgraph.
      */
     private function handleGenerateImageByReference(RequestContext $requestContext, DelightfulChatAIImageReqDTO $reqDTO): void
     {
@@ -244,7 +244,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
         ?string $id,
         AIImageCardResponseType $type,
         array $content,
-        // streamresponse,拿tocustomerclient transmissioncome app_message_id ,asforresponsetimeuniqueoneidentifier
+        // streamresponse,gettocustomerclient transmissioncome app_message_id ,asforresponsetimeuniqueoneidentifier
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

@@ -94,7 +94,7 @@ class FileParser
      *
      * @param string $url fileURLgroundaddress
      * @param string $tempFile temporaryfilepath
-     * @param int $maxSize filesizelimit(字section),0tableshownotlimit
+     * @param int $maxSize filesizelimit(fieldsection),0tableshownotlimit
      * @throws Exception whendownloadfailorfileexceed limito clock
      */
     private static function downloadFile(string $url, string $tempFile, int $maxSize = 0): void
@@ -132,7 +132,7 @@ class FileParser
         if (! $sizeKnown && $maxSize > 0) {
             self::downloadWithSizeControl($fileStream, $localFile, $maxSize);
         } else {
-            // filesizeknownorno需limit,directlycopy
+            // filesizeknownornoneedlimit,directlycopy
             stream_copy_to_stream($fileStream, $localFile);
         }
 
@@ -145,7 +145,7 @@ class FileParser
      *
      * @param resource $fileStream remotefilestreamresource
      * @param resource $localFile thisgroundfilestreamresource
-     * @param int $maxSize filesizelimit(字section)
+     * @param int $maxSize filesizelimit(fieldsection)
      * @throws Exception whenfilesizeexceed limitorwritefailo clock
      */
     private static function downloadWithSizeControl($fileStream, $localFile, int $maxSize): void
@@ -178,7 +178,7 @@ class FileParser
      * checkfilesizewhetherexceed limit.
      *
      * @param string $fileUrl fileURLgroundaddress
-     * @param int $maxSize filesizelimit(字section),0tableshownotlimit
+     * @param int $maxSize filesizelimit(fieldsection),0tableshownotlimit
      * @return bool truetableshowalreadychecksizeandinlimitinside,falsetableshowischunkedtransmissionneedstreamdownload
      * @throws Exception whenfilesizeexceedspasslimitorfilesizeunknownandnonchunkedtransmissiono clock
      */

@@ -38,7 +38,7 @@ class CheckPermissionAspect extends AbstractAspect
         /** @var null|CheckPermission $permissionAnnotation */
         $permissionAnnotation = $annotationMetadata->method[CheckPermission::class] ?? $annotationMetadata->class[CheckPermission::class] ?? null;
 
-        // 若noannotation,directlyputline
+        // ifnoannotation,directlyputline
         if ($permissionAnnotation === null) {
             return $proceedingJoinPoint->process();
         }
@@ -49,7 +49,7 @@ class CheckPermissionAspect extends AbstractAspect
             ExceptionBuilder::throw(PermissionErrorCode::AccessDenied, 'permission.error.access_denied');
         }
 
-        // buildpermissionkey(supportmultiple,任onefull足即pass)
+        // buildpermissionkey(supportmultiple,任onefullenoughimmediatelypass)
         $permissionKeys = method_exists($permissionAnnotation, 'getPermissionKeys')
             ? $permissionAnnotation->getPermissionKeys()
             : [$permissionAnnotation->getPermissionKey()];

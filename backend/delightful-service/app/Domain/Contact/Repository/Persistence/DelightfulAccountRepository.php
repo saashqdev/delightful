@@ -119,7 +119,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
             return [];
         }
         $sqlQuery = $this->accountModel::query();
-        // judge $query whetherall部ismiddletext,orlengthgreater than3
+        // judge $query whetheralldepartmentismiddletext,orlengthgreater than3
         if (preg_match('/^[\x{4e00}-\x{9fa5}]+$/u', $query) || strlen($query) > 3) {
             $sqlQuery->where('real_name', 'like', "%{$query}%");
         }

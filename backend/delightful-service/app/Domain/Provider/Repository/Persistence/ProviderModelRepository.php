@@ -130,11 +130,11 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * updatemodelstatus(support写o clockcopylogic).
+     * updatemodelstatus(supportwriteo clockcopylogic).
      */
     public function updateStatus(ProviderDataIsolation $dataIsolation, string $id, Status $status): void
     {
-        // 1. 按 id querymodelwhetherexistsin(notlimitorganization)
+        // 1. by id querymodelwhetherexistsin(notlimitorganization)
         $model = $this->getModelByIdWithoutOrgFilter($id);
         if (! $model) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
@@ -205,7 +205,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
      * getorganizationcanusemodelcolumntable(containorganizationfromselfmodelandDelightfulmodel).
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param null|Category $category modelcategory,fornullo clockreturn havecategorymodel
-     * @return ProviderModelEntity[] 按sortdescendingsortmodelcolumntable,containorganizationmodelandDelightfulmodel(notgo重)
+     * @return ProviderModelEntity[] bysortdescendingsortmodelcolumntable,containorganizationmodelandDelightfulmodel(notgoreload)
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, ?Status $status = Status::Enabled): array
     {
@@ -272,10 +272,10 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             $delightfulModels = $this->delightfulProviderAndModels->getDelightfulEnableModels($organizationCode, $category);
         }
 
-        // 4. directlymergemodelcolumntable,notgo重
+        // 4. directlymergemodelcolumntable,notgoreload
         $allModels = array_merge($organizationModels, $delightfulModels);
 
-        // 5. 按sortdescendingsort
+        // 5. bysortdescendingsort
         usort($allModels, static function ($a, $b) {
             return $b->getSort() <=> $a->getSort();
         });
@@ -325,7 +325,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $builder = $this->createBuilder($dataIsolation, ProviderModelModel::query())
             ->whereIn('model_id', $modelIds)
             ->orderBy('status', 'desc') // prioritysort:enablestatusinfront
-            ->orderBy('id'); // itstime按IDsort,guaranteeresultonetoproperty
+            ->orderBy('id'); // itstimebyIDsort,guaranteeresultonetoproperty
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
         $entities = ProviderModelAssembler::toEntities($result);
@@ -391,11 +391,11 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * according toqueryconditionget按modeltypegroupmodelIDcolumntable.
+     * according toqueryconditiongetbymodeltypegroupmodelIDcolumntable.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param ProviderModelQuery $query querycondition
-     * @return array<string, array<string>> 按modeltypegroupmodelIDarray,format: [modelType => [model_id, model_id]]
+     * @return array<string, array<string>> bymodeltypegroupmodelIDarray,format: [modelType => [model_id, model_id]]
      */
     public function getModelIdsGroupByType(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query): array
     {
@@ -424,7 +424,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
 
-        // 按modeltypegroup,andgo重modelID
+        // bymodeltypegroup,andgoreloadmodelID
         $groupedResults = [];
         foreach ($result as $row) {
             $modelType = $row['model_type'];

@@ -24,7 +24,7 @@ class DelightfulFlowApiKeyAppService extends AbstractFlowAppService
         if (! $delightfulFlow) {
             ExceptionBuilder::throw(FlowErrorCode::BusinessException, 'flow.common.not_found', ['label' => $savingDelightfulFlowApiKeyEntity->getFlowCode()]);
         }
-        // needat leastcanview,才canmaintainfromself API-KEY
+        // needat leastcanview,onlycanmaintainfromself API-KEY
         $this->getFlowOperation($dataIsolation, $delightfulFlow)->validate('r', $savingDelightfulFlowApiKeyEntity->getFlowCode());
         return $this->delightfulFlowApiKeyDomainService->save($dataIsolation, $savingDelightfulFlowApiKeyEntity);
     }

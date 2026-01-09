@@ -27,7 +27,7 @@ class ClientMessage extends AbstractEntity
     // topicid
     protected ?string $topicId;
 
-    // messagesmallcategory.controlmessagesmallcategory:alreadyreadreturn执;withdraw;edit;join group/leave group;organizationarchitecture change; . showmessage:text,voice,img,file,videoetc
+    // messagesmallcategory.controlmessagesmallcategory:alreadyreadreturnexecute;withdraw;edit;join group/leave group;organizationarchitecture change; . showmessage:text,voice,img,file,videoetc
 
     protected string $type;
 
@@ -40,7 +40,7 @@ class ClientMessage extends AbstractEntity
     // messagesendtime,and delightful_message_id oneup,useatwithdraw,editmessageo clockuniqueonepropertyvalidation.
     protected int $sendTime;
 
-    // chatmessagestatus:unread | seen | read |revoked  .toshouldmiddletext explanation:notread|alreadyread|alreadyview(non纯textcomplextypemessage,userpoint击detail)  | withdraw
+    // chatmessagestatus:unread | seen | read |revoked  .toshouldmiddletext explanation:notread|alreadyread|alreadyview(nonpuretextcomplextypemessage,userpoint击detail)  | withdraw
     protected ?string $status;
 
     protected MessageInterface $content;
@@ -48,7 +48,7 @@ class ClientMessage extends AbstractEntity
     public function __construct(array $data)
     {
         if (! $data['content'] instanceof MessageInterface) {
-            // avoideachtype bug causeuser完allnoFarahmessage,thiswithinmakeonedownfallbackbottom
+            // avoideachtype bug causeusercompleteallnoFarahmessage,thiswithinmakeonedownfallbackbottom
             try {
                 $data['content'] = MessageAssembler::getMessageStructByArray($data['type'], $data['content']);
             } catch (Throwable) {

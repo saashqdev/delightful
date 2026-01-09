@@ -20,7 +20,7 @@ class ModelConfigRepository extends AbstractRepository implements ModelConfigRep
 {
     public function save(LLMDataIsolation $dataIsolation, ModelConfigEntity $modelConfigEntity): ModelConfigEntity
     {
-        // byatmaybedouble写2張table,thereforeopentransaction.againbyatnot想generateproxycategory,thereforeuse Db::transaction
+        // byatmaybedoublewrite2张table,thereforeopentransaction.againbyatnot想generateproxycategory,thereforeuse Db::transaction
         return Db::transaction(function () use ($dataIsolation, $modelConfigEntity) {
             $model = $this->createBuilder($dataIsolation, ModelConfigModel::query())->where('model', $modelConfigEntity->getModel())->first();
             if (! $model) {

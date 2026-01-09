@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->softDeletes();
             $table->index(['new_id', 'mapping_type'], 'new_id_mapping_type');
             $table->unique(['origin_id', 'mapping_type'], 'unique_origin_id_mapping_type');
-            $table->comment('department,user,organizationencoding,nullbetweenencodingetcmappingclose系record');
+            $table->comment('department,user,organizationencoding,nullbetweenencodingetcmappingclosesystemrecord');
         });
     }
 

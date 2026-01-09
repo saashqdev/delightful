@@ -49,7 +49,7 @@ abstract class AbstractSms implements SmsInterface
 
     /**
      *  toat $smsStruct , if language intemplatemiddlenotexistsin,thenuse default_language conductdetect
-     *  if default_language alsonothavetoshouldtemplate,then按 type intemplatemiddlematchexistsinlanguagetype,ifexistsinmultipletype,byzh_CNpriority.
+     *  if default_language alsonothavetoshouldtemplate,thenby type intemplatemiddlematchexistsinlanguagetype,ifexistsinmultipletype,byzh_CNpriority.
      */
     public function getContentLanguage(SmsStruct $smsStruct): string
     {
@@ -84,7 +84,7 @@ abstract class AbstractSms implements SmsInterface
 
     /**
      * willvariablevalueandvariablenameassociate,alsooriginalshortmessagecontent.
-     * @param array $variables shortmessagevariable部minute,maybeis valuearray,alsomaybeis key=>valuearray,need按$templateContentcontent,統onealsooriginalbecomekey=>valuearray
+     * @param array $variables shortmessagevariabledepartmentminute,maybeis valuearray,alsomaybeis key=>valuearray,needby$templateContentcontent,统onealsooriginalbecomekey=>valuearray
      */
     protected function translateContent(string $templateContent, array $variables): string
     {

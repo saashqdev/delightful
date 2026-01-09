@@ -50,7 +50,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId): ?ProviderConfigModelsDTO
     {
-        // 1. getservicequotientconfigurationactualbody,containtemplateIDandvirtualDelightfulservicequotient統onehandle
+        // 1. getservicequotientconfigurationactualbody,containtemplateIDandvirtualDelightfulservicequotient统onehandle
         $providerConfigEntity = $this->getProviderConfig($dataIsolation, $configId);
         if (! $providerConfigEntity) {
             return null;
@@ -110,7 +110,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         }
 
         // establishconfigurationIDtoservicequotientactualbodymapping
-        // 两arrayallisby id for key,candirectlyaccess
+        // twoarrayallisby id for key,candirectlyaccess
         $configToProviderMap = [];
         foreach ($configEntities as $configId => $config) {
             $providerId = $config->getServiceProviderId();
@@ -170,7 +170,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * according toIDgetconfigurationactualbody(not按organizationfilter,alllocalquery).
+     * according toIDgetconfigurationactualbody(notbyorganizationfilter,alllocalquery).
      *
      * @param int $id configurationID
      * @return null|ProviderConfigEntity configurationactualbody
@@ -181,7 +181,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * according toIDarraygetconfigurationactualbodycolumntable(not按organizationfilter,alllocalquery).
+     * according toIDarraygetconfigurationactualbodycolumntable(notbyorganizationfilter,alllocalquery).
      *
      * @param array<int> $ids configurationIDarray
      * @return array<int, ProviderConfigEntity> returnbyidforkeyconfigurationactualbodyarray
@@ -192,7 +192,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * getservicequotientconfigurationactualbody,統onehandle havesituation.
+     * getservicequotientconfigurationactualbody,统onehandle havesituation.
      * - templateID(format:providerCode_category)
      * - conventionaldatabaseconfigurationID.
      */
@@ -225,7 +225,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
                 return $existingConfig;
             }
 
-            // notexistsino clock才constructvirtualservicequotientconfigurationactualbody
+            // notexistsino clockonlyconstructvirtualservicequotientconfigurationactualbody
             return $this->createVirtualProviderConfig($dataIsolation, $providerEntity, $configId);
         }
 
@@ -359,7 +359,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::SystemError);
         }*/
 
-        // use統oneconfigurationupdatelogic
+        // use统oneconfigurationupdatelogic
         return $this->updateProviderConfigData($dataIsolation, $existingConfigEntity, $providerConfigEntity);
     }
 
@@ -382,7 +382,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 統oneconfigurationdataupdatelogic.
+     * 统oneconfigurationdataupdatelogic.
      * handledesensitizedatamerge,fieldupdateandsaveoperationas.
      */
     private function updateProviderConfigData(ProviderDataIsolation $dataIsolation, ProviderConfigEntity $existingConfig, ProviderConfigEntity $newConfigData): ProviderConfigEntity

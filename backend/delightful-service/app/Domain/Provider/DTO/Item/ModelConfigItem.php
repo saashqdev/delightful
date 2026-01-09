@@ -317,13 +317,13 @@ class ModelConfigItem extends AbstractDTO
     private function handleCreativityAndTemperatureConflict(): void
     {
         if ($this->creativity !== null && $this->temperature !== null) {
-            // priorityretain temperature,will creativity 设for null
+            // priorityretain temperature,will creativity setfor null
             $this->creativity = null;
         }
     }
 
     /**
-     * parsebooleanvalue(統oneprocesslogic).
+     * parsebooleanvalue(统oneprocesslogic).
      */
     private function parseBooleanValue(null|bool|int|string $value): bool
     {
@@ -339,7 +339,7 @@ class ModelConfigItem extends AbstractDTO
     }
 
     /**
-     * verifyandsettingprice/cost(統oneprocesslogic).
+     * verifyandsettingprice/cost(统oneprocesslogic).
      */
     private function validateAndSetPricing(null|float|string $value): ?string
     {

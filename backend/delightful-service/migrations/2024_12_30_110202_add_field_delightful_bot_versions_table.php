@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_bot_versions', function (Blueprint $table) {
-            // todo xhy itemfrontisthishow simpleshortdesign,alreadyandbig白andaccompany哥discussion 2024-12-30
+            // todo xhy itemfrontisthishow simpleshortdesign,alreadyandbigwhiteandaccompany哥discussion 2024-12-30
             $table->boolean('start_page')->default(false)->comment('startpageswitch');
         });
     }

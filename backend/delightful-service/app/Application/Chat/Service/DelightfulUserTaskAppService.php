@@ -99,7 +99,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
 
         $callbackParams = $this->getCallbackParams($userTaskDTO, $userTaskValueDTO, $flowCode);
         $enabled = true;
-        // ifisnotduplicate,thatwhatisdirectlycreate調degreetask
+        // ifisnotduplicate,thatwhatisdirectlycreate调degreetask
         if ($taskConfigDomainService->getType() === TaskType::NoRepeat) {
             $taskScheduler = new TaskScheduler();
             $taskScheduler->setExternalId($externalId);
@@ -114,7 +114,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // ifiscustomizeduplicate,thatwhatdirectlycreate調degreetask,meanwhilecloseschedulegenerate調degreetask
+        // ifiscustomizeduplicate,thatwhatdirectlycreate调degreetask,meanwhilecloseschedulegenerate调degreetask
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;
@@ -238,11 +238,11 @@ class DelightfulUserTaskAppService extends AbstractAppService
             ExceptionBuilder::throw(UserTaskErrorCode::TASK_ALREADY_EXISTS);
         }
 
-        // clear firstexcept待executetask
+        // clear firstexceptpendingexecutetask
         $this->taskSchedulerDomainService->clearTaskByExternalId($task->getExternalId());
 
         $enabled = true;
-        // ifisnotduplicate,thatwhatisdirectlycreate調degreetask
+        // ifisnotduplicate,thatwhatisdirectlycreate调degreetask
         if ($taskConfigDomainService->getType() === TaskType::NoRepeat) {
             $taskScheduler = new TaskScheduler();
             $taskScheduler->setExternalId($externalId);
@@ -257,7 +257,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // ifiscustomizeduplicate,thatwhatdirectlycreate調degreetask,meanwhilecloseschedulegenerate調degreetask
+        // ifiscustomizeduplicate,thatwhatdirectlycreate调degreetask,meanwhilecloseschedulegenerate调degreetask
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;
@@ -339,7 +339,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
         di(DelightfulChatMessageAppService::class)->userSendMessageToAgent($receiveSeqDTO, $senderUserId, $receiveUserId, $appMessageId, false, null, ConversationType::Ai, $topicId);
     }
 
-    // backplatformtask,notwillmockusersendmessage,  reservemethod,暫o clocknothaveuseto
+    // backplatformtask,notwillmockusersendmessage,  reservemethod,temporaryo clocknothaveuseto
     // public static function asyncCallback(string $flow_code, array $user_task)
     // {
     //     $triggerConfig = [

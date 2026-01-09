@@ -9,47 +9,47 @@ namespace App\Domain\Provider\Entity\ValueObject;
 
 /**
  * servicequotienttemplateIDenum
- * willProviderCodeandCategorygroup合mappingforfixedcountvalue型string.
+ * willProviderCodeandCategorygroup合mappingforfixedcountvaluetypestring.
  */
 enum ProviderTemplateId: string
 {
-    // Official 相close
+    // Official relatedclose
     case OfficialLlm = '0';
     case OfficialVlm = '1';
 
-    // Volcengine 相close
+    // Volcengine relatedclose
     case VolcengineLlm = '2';
     case VolcengineVlm = '3';
 
-    // OpenAI 相close
+    // OpenAI relatedclose
     case OpenAILlm = '4';
     case OpenAIVlm = '5';
 
-    // MicrosoftAzure 相close
+    // MicrosoftAzure relatedclose
     case MicrosoftAzureLlm = '6';
     case MicrosoftAzureVlm = '7';
 
-    // Qwen 相close
+    // Qwen relatedclose
     case QwenLlm = '8';
     case QwenVlm = '9';
 
-    // DeepSeek 相close
+    // DeepSeek relatedclose
     case DeepSeekLlm = '10';
     case DeepSeekVlm = '11';
 
-    // Tencent 相close
+    // Tencent relatedclose
     case TencentLlm = '12';
     case TencentVlm = '13';
 
-    // TTAPI 相close
+    // TTAPI relatedclose
     case TTAPILlm = '14';
     case TTAPIVlm = '15';
 
-    // MiracleVision 相close
+    // MiracleVision relatedclose
     case MiracleVisionLlm = '16';
     case MiracleVisionVlm = '17';
 
-    // AWSBedrock 相close
+    // AWSBedrock relatedclose
     case AWSBedrockLlm = '18';
     case AWSBedrockVlm = '19';
     case GoogleVlm = '20';
@@ -134,7 +134,7 @@ enum ProviderTemplateId: string
             ProviderCode::Volcengine => 'Volcanoengine',
             ProviderCode::OpenAI => 'OpenAI',
             ProviderCode::MicrosoftAzure => 'Microsoft Azure',
-            ProviderCode::Qwen => 'general meaningthousand问',
+            ProviderCode::Qwen => 'general meaningthousandquestion',
             ProviderCode::DeepSeek => 'DeepSeek',
             ProviderCode::Tencent => 'Tencent Cloud',
             ProviderCode::TTAPI => 'TTAPI',

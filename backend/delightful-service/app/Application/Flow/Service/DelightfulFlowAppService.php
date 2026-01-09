@@ -314,7 +314,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
                 $toolSetData['list'][] = $builtInToolSet->generateToolSet();
                 foreach ($builtInToolSet->getTools() as $builtInTool) {
-                    // 私havetool,needhavehighlevelgraphlikeconvertURIpermission才candisplay
+                    // privatehavetool,needhavehighlevelgraphlikeconvertURIpermissiononlycandisplay
                     if ($builtInTool->getCode() === 'ai_image_image_convert_high'
                         && ! PermissionChecker::mobileHasPermission($authorization->getMobile(), SuperPermissionEnum::FLOW_ADMIN)
                     ) {
@@ -396,7 +396,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
 
         $query = new KnowledgeBaseQuery();
         $query->setCodes(array_keys($resources));
-        // itemfrontonlygetfrom建textknowledge base
+        // itemfrontonlygetfrombuildtextknowledge base
         $query->setTypes([KnowledgeType::UserKnowledgeBase->value]);
         $query->setEnabled(true);
         $knowledgeData = $this->delightfulFlowKnowledgeDomainService->queries($this->createKnowledgeBaseDataIsolation($dataIsolation), $query, $page);
@@ -418,7 +418,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         }
         $knowledgeData['users'] = $this->delightfulUserDomainService->getByUserIds($this->createContactDataIsolation($dataIsolation), $userIds);
 
-        // 重newcalculatetotal
+        // reloadnewcalculatetotal
         $knowledgeData['total'] = count($knowledgeData['list']);
 
         return $knowledgeData;

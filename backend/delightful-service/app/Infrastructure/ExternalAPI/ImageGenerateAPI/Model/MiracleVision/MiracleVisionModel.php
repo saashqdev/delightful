@@ -49,7 +49,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     public function generateImageRaw(ImageGenerateRequest $imageGenerateRequest): array
     {
-        throw new BadMethodCallException('themethod暫not supported');
+        throw new BadMethodCallException('themethodtemporarynot supported');
     }
 
     public function imageConvertHigh(ImageGenerateRequest $imageGenerateRequest): string
@@ -153,7 +153,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array
     {
-        throw new BadMethodCallException('themethod暫not supported');
+        throw new BadMethodCallException('themethodtemporarynot supported');
     }
 
     public function getProviderName(): string
@@ -163,7 +163,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
-        throw new BadMethodCallException('themethod暫not supported');
+        throw new BadMethodCallException('themethodtemporarynot supported');
     }
 
     private function handleTaskStatus(int $status, array $result, MiracleVisionModelResponse $response): MiracleVisionModelResponse
@@ -263,7 +263,7 @@ class MiracleVisionModel extends AbstractImageGenerate
         $this->logger->info('美graphAPI:responsedataverifypass');
     }
 
-    // todo xhy itemfrontonlycanforcereturn 26 ,因fornomethodtoimagescenariomakematch
+    // todo xhy itemfrontonlycanforcereturn 26 ,factorfornomethodtoimagescenariomakematch
     private function determineStyleId(array $styles): int
     {
         if (empty($styles['data']['style_list'])) {

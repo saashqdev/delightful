@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // onlywhentableexistsino clock才executeindexoperationas
+        // onlywhentableexistsino clockonlyexecuteindexoperationas
         if (Schema::hasTable('delightful_chat_sequences')) {
             // checkandcreate idx_object_type_id_refer_message_id index
             $this->createIndexIfNotExists(
@@ -70,7 +70,7 @@ return new class extends Migration {
             [$indexName]
         );
 
-        // onlywhenindexnotexistsino clock才create
+        // onlywhenindexnotexistsino clockonlycreate
         if (empty($indexExists)) {
             // createindex
             Db::statement($createStatement);

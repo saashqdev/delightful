@@ -159,7 +159,7 @@ readonly class LongTermMemoryDomainService
                     if (empty($content) && ! empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }
-                    // ifcontentandPendingContentallnotfornull,thenclearnullPendingContent即can,notwantdeletememory
+                    // ifcontentandPendingContentallnotfornull,thenclearnullPendingContentimmediatelycan,notwantdeletememory
                     elseif (! empty($content) && ! empty($pendingContent)) {
                         $memory->setPendingContent(null);
                         $memory->setStatus(MemoryStatus::ACTIVE);
@@ -400,11 +400,11 @@ readonly class LongTermMemoryDomainService
         $generalMemoryLimit = MemoryCategory::GENERAL->getEnabledLimit();
         $generalMemories = $this->repository->findEffectiveMemoriesByUser($orgId, $appId, $userId, '', $generalMemoryLimit);
 
-        // getproject相closememory
+        // getprojectrelatedclosememory
         $projectMemoryLimit = MemoryCategory::PROJECT->getEnabledLimit();
         $projectMemories = $this->repository->findEffectiveMemoriesByUser($orgId, $appId, $userId, $projectId ?? '', $projectMemoryLimit);
 
-        // mergememory,按minutecountsort
+        // mergememory,byminutecountsort
         $memories = array_merge($generalMemories, $projectMemories);
 
         // filterdropshouldbeeliminatememory
@@ -412,7 +412,7 @@ readonly class LongTermMemoryDomainService
             return ! $this->shouldMemoryBeEvicted($memory);
         });
 
-        // 按validminutecountsort
+        // byvalidminutecountsort
         usort($validMemories, static function ($a, $b) {
             return $b->getEffectiveScore() <=> $a->getEffectiveScore();
         });
@@ -490,7 +490,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 通usequerymethod (use DTO).
+     * commonusequerymethod (use DTO).
      * @return LongTermMemoryEntity[]
      */
     public function findMemories(MemoryQueryDTO $dto): array
@@ -550,7 +550,7 @@ readonly class LongTermMemoryDomainService
         }
 
         try {
-            // validatememoryIDvalidpropertyandbelong to权
+            // validatememoryIDvalidpropertyandbelong topermission
             $validMemoryIds = $this->repository->filterMemoriesByUser($memoryIds, $orgId, $appId, $userId);
             if (empty($validMemoryIds)) {
                 return 0;
@@ -584,7 +584,7 @@ readonly class LongTermMemoryDomainService
             return true;
         }
 
-        // longtimenotaccessand重wantpropertyverylow
+        // longtimenotaccessandreloadwantpropertyverylow
         if ($memory->getLastAccessedAt() && $memory->getImportance() < 0.2) {
             $daysSinceLastAccess = new DateTime()->diff($memory->getLastAccessedAt())->days;
             if ($daysSinceLastAccess > 30) {
@@ -629,7 +629,7 @@ readonly class LongTermMemoryDomainService
                 $projectedCounts[$categoryKey] = 0;
             }
 
-            // onlycurrentnotenablememory才willincreasecount
+            // onlycurrentnotenablememoryonlywillincreasecount
             if (! $memory->isEnabled()) {
                 ++$projectedCounts[$categoryKey];
             }
@@ -658,7 +658,7 @@ readonly class LongTermMemoryDomainService
         // getnewstatus
         $newStatus = $this->determineNewMemoryStatus($currentStatus, $hasPendingContent);
 
-        // onlyinstatusneedaltero clock才update
+        // onlyinstatusneedaltero clockonlyupdate
         if ($newStatus !== $currentStatus) {
             $memory->setStatus($newStatus);
         }
@@ -673,9 +673,9 @@ readonly class LongTermMemoryDomainService
         return match ([$currentStatus, $hasPendingContent]) {
             // pending_contentfornullo clockstatusconvert
             [MemoryStatus::PENDING_REVISION, false], [MemoryStatus::ACTIVE, false] => MemoryStatus::ACTIVE,        // revisioncomplete → take effect
-            [MemoryStatus::PENDING, false], [MemoryStatus::PENDING, true] => MemoryStatus::PENDING,                 // 待acceptstatusmaintainnotchange
+            [MemoryStatus::PENDING, false], [MemoryStatus::PENDING, true] => MemoryStatus::PENDING,                 // pendingacceptstatusmaintainnotchange
             // pending_contentnotfornullo clockstatusconvert
-            [MemoryStatus::ACTIVE, true], [MemoryStatus::PENDING_REVISION, true] => MemoryStatus::PENDING_REVISION,         // take effectmemoryhaverevision → 待revision
+            [MemoryStatus::ACTIVE, true], [MemoryStatus::PENDING_REVISION, true] => MemoryStatus::PENDING_REVISION,         // take effectmemoryhaverevision → pendingrevision
             // defaultsituation(notshouldto达thiswithin)
             default => $currentStatus,
         };

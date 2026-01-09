@@ -30,7 +30,7 @@ class PermissionChecker
     }
 
     /**
-     * inside部permissioncheckmethod,便attest.
+     * insidedepartmentpermissioncheckmethod,便attest.
      *
      * @param string $mobile handmachinenumber
      * @param SuperPermissionEnum $permission wantcheckpermission
@@ -64,7 +64,7 @@ class PermissionChecker
     }
 
     /**
-     * getuser拥haveadministratorpermissionorganizationencodinglist.
+     * getuserownhaveadministratorpermissionorganizationencodinglist.
      */
     public static function getUserOrganizationAdminList(string $mageId): array
     {

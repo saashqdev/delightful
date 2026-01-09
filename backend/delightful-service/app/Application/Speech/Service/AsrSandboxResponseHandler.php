@@ -37,7 +37,7 @@ readonly class AsrSandboxResponseHandler
      * handlesandbox finish response,updatefileanddirectoryrecord.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
-     * @param array $sandboxResponse sandboxresponsedata(data 部minute)
+     * @param array $sandboxResponse sandboxresponsedata(data departmentminute)
      */
     public function handleFinishResponse(
         AsrTaskStatusDTO $taskStatus,
@@ -100,8 +100,8 @@ readonly class AsrSandboxResponseHandler
     }
 
     /**
-     * according toresponseaudiofilename/filepath,findtoaudiofile id,useatback続hairchatmessage.
-     * useroundinquiry mechanismetc待sandboxsyncfiletodatabase(at mostetc待 30 second).
+     * according toresponseaudiofilename/filepath,findtoaudiofile id,useatbackcontinuehairchatmessage.
+     * useroundinquiry mechanismetcpendingsandboxsyncfiletodatabase(at mostetcpending 30 second).
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param array $audioFile audiofileinfo
@@ -138,7 +138,7 @@ readonly class AsrSandboxResponseHandler
                 'error' => $e->getMessage(),
             ]);
 
-            // ifiswefromselfthrowexception,directly重newthrow
+            // ifiswefromselfthrowexception,directlyreloadnewthrow
             if ($e instanceof BusinessException) {
                 throw $e;
             }
@@ -149,7 +149,7 @@ readonly class AsrSandboxResponseHandler
 
     /**
      * according toresponsenotefilepath,findtonotefile id.
-     * useroundinquiry mechanismetc待sandboxsyncfiletodatabase(at mostetc待 30 second).
+     * useroundinquiry mechanismetcpendingsandboxsyncfiletodatabase(at mostetcpending 30 second).
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param array $noteFile notefileinfo
@@ -209,10 +209,10 @@ readonly class AsrSandboxResponseHandler
     }
 
     /**
-     * passfilepathroundqueryqueryfilerecord(通usemethod).
+     * passfilepathroundqueryqueryfilerecord(commonusemethod).
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
-     * @param string $relativePath file相topath
+     * @param string $relativePath filerelatedtopath
      * @param string $fileTypeName filetypename(useatlog)
      * @param bool $throwOnTimeout timeoutwhetherthrowexception
      * @return null|TaskFileEntity fileactualbody,notfindtoreturnnull
@@ -291,7 +291,7 @@ readonly class AsrSandboxResponseHandler
             // recordroundqueryenterdegree
             if ($attempt % AsrConfig::FILE_RECORD_QUERY_LOG_FREQUENCY === 0 || $attempt === 1) {
                 $remainingSeconds = max(0, $timeoutSeconds - $elapsedSeconds);
-                $this->logger->info(sprintf('etc待sandboxsync%stodatabase', $fileTypeName), [
+                $this->logger->info(sprintf('etcpendingsandboxsync%stodatabase', $fileTypeName), [
                     'task_key' => $taskStatus->taskKey,
                     'file_type' => $fileTypeName,
                     'file_key' => $fileKey,
@@ -301,7 +301,7 @@ readonly class AsrSandboxResponseHandler
                 ]);
             }
 
-            // etc待downonetimeroundquery
+            // etcpendingdownonetimeroundquery
             sleep($pollingInterval);
         }
 
@@ -323,7 +323,7 @@ readonly class AsrSandboxResponseHandler
             ExceptionBuilder::throw(
                 AsrErrorCode::CreateAudioFileFailed,
                 '',
-                ['error' => sprintf('etc待 %d secondback仍notfindto%srecord', $timeoutSeconds, $fileTypeName)]
+                ['error' => sprintf('etcpending %d secondback仍notfindto%srecord', $timeoutSeconds, $fileTypeName)]
             );
         }
 
@@ -339,7 +339,7 @@ readonly class AsrSandboxResponseHandler
     {
         $noteFileId = $taskStatus->presetNoteFileId;
         if (empty($noteFileId)) {
-            $this->logger->debug('presetnotefileIDfornull,no需delete', [
+            $this->logger->debug('presetnotefileIDfornull,noneeddelete', [
                 'task_key' => $taskStatus->taskKey,
             ]);
             return;
@@ -352,7 +352,7 @@ readonly class AsrSandboxResponseHandler
 
         $deleted = $this->presetFileService->deleteNoteFile($noteFileId);
         if ($deleted) {
-            // clearnulltaskstatusmiddlenotefile相closefield
+            // clearnulltaskstatusmiddlenotefilerelatedclosefield
             $taskStatus->presetNoteFileId = null;
             $taskStatus->presetNoteFilePath = null;
             $taskStatus->noteFileId = null;

@@ -24,7 +24,7 @@ class MCPResourceManager
      */
     public function registerResource(array $resource): void
     {
-        // nullimplement,暫notregisteranyresource
+        // nullimplement,temporarynotregisteranyresource
     }
 
     /**

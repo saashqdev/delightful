@@ -96,7 +96,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     }
 
     /**
-     * transferletorganizationcreateperson身share.
+     * transferletorganizationcreatepersonbodyshare.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::EDIT)]
     public function transferOwner(): array

@@ -120,7 +120,7 @@ class LoopMainNodeRunner extends NodeRunner
                     if ($loopCount >= $maxLoopCount) {
                         break;
                     }
-                    // eachtime重newcalculateitemitem
+                    // eachtimereloadnewcalculateitemitem
                     $condition = $conditionComponent->getCondition()->getResult($executionData->getExpressionFieldData());
                 }
                 break;
@@ -148,7 +148,7 @@ class LoopMainNodeRunner extends NodeRunner
         if (empty($childNodes)) {
             return null;
         }
-        // goexceptparent id property,not然willbefilter
+        // goexceptparent id property,notthenwillbefilter
         foreach ($childNodes as $node) {
             $meta = $node->getMeta();
             $meta['parent_id'] = '';
@@ -170,7 +170,7 @@ class LoopMainNodeRunner extends NodeRunner
         } catch (Throwable $throwable) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $throwable->getMessage()]);
         }
-        // sectionpointinside部exceptionin node  debug infomiddlerecord
+        // sectionpointinsidedepartmentexceptionin node  debug infomiddlerecord
         foreach ($loopDelightfulFlow->getNodes() as $node) {
             if ($node->getNodeDebugResult() && ! $node->getNodeDebugResult()->isSuccess()) {
                 ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $node->getNodeDebugResult()->getErrorMessage()]);

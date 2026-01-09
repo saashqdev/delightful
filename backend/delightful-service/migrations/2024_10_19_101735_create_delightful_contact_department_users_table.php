@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->string('city', 64)->comment('workcity')->default('');
             $table->string('country', 32)->comment('countryorgroundregion Code abbreviation')->default('');
             $table->string('join_time', 32)->comment('onboardtime.secondleveltimestampformat,tableshowfrom 1970 year 1 month 1 daystartpassed throughpasssecondcount.')->default('');
-            $table->string('employee_no', 32)->comment('工number')->default('');
+            $table->string('employee_no', 32)->comment('workernumber')->default('');
             $table->tinyInteger('employee_type')->comment('employeetype.1:justtypeemployee2:intern3:outsidepackage4:labor 5:consultant');
             $table->string('orders', 256)->comment('usersortinfo.useatmarkaddress bookdownorganizationarchitecturepersonmemberorder,personmembermaybeexistsinmultipledepartmentmiddle,andhavedifferentsort')->nullable()->default('');
             $table->text('custom_attrs')->comment('customizefield.');

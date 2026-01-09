@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\Dag;
 class VertexResult
 {
     /**
-     * storageneedbe調degreechildsectionpoint.
+     * storageneedbe调degreechildsectionpoint.
      * @var array<string>
      */
     protected array $childrenIds = [];

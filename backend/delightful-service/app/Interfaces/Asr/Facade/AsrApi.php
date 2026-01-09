@@ -131,9 +131,9 @@ class AsrApi extends AbstractApi
                     ExceptionBuilder::throw(AsrErrorCode::TaskAlreadyCanceled);
                 }
 
-                // statuscheck 2:taskalreadycomplete(onlyinthiswithinrecordlog,allow重newsummarybymoreexchangemodel)
+                // statuscheck 2:taskalreadycomplete(onlyinthiswithinrecordlog,allowreloadnewsummarybymoreexchangemodel)
                 if ($taskStatus->isSummaryCompleted()) {
-                    $this->logger->info('taskalreadycomplete,allowusenewmodel重newsummary', [
+                    $this->logger->info('taskalreadycomplete,allowusenewmodelreloadnewsummary', [
                         'task_key' => $summaryRequest->taskKey,
                         'old_model_id' => $taskStatus->modelId,
                         'new_model_id' => $summaryRequest->modelId,
@@ -142,7 +142,7 @@ class AsrApi extends AbstractApi
             }
         }
 
-        // applicationlayeralreadyhaveminute布typelock,thiswithinno需againaddlock,directlycall
+        // applicationlayeralreadyhaveminute布typelock,thiswithinnoneedagainaddlock,directlycall
         try {
             // handlesummarytask
             $result = $this->asrFileAppService->processSummaryWithChat($summaryRequest, $userAuthorization);
@@ -491,7 +491,7 @@ class AsrApi extends AbstractApi
             }
         }
 
-        // 2. ifnothavefrom Redis gettotitle,then重newgenerate(frontclientrecordingoroldlogic)
+        // 2. ifnothavefrom Redis gettotitle,thenreloadnewgenerate(frontclientrecordingoroldlogic)
         if (empty($generatedTitle)) {
             $generatedTitle = $this->titleGeneratorService->generateTitleForScenario(
                 $userAuthorization,
@@ -654,12 +654,12 @@ class AsrApi extends AbstractApi
             ExceptionBuilder::throw(AsrErrorCode::TaskAutoStoppedByTimeout);
         }
 
-        // back続call:updaterequiredwantfield
+        // backcontinuecall:updaterequiredwantfield
         $this->asrFileAppService->validateProjectAccess($projectId, $userId, $organizationCode);
         $taskStatus->projectId = $projectId;
         $taskStatus->topicId = $topicId;
 
-        $this->logger->info('back続call getUploadToken,usealreadyhavedirectory', [
+        $this->logger->info('backcontinuecall getUploadToken,usealreadyhavedirectory', [
             'task_key' => $taskKey,
             'hidden_directory' => $taskStatus->tempHiddenDirectory,
             'display_directory' => $taskStatus->displayDirectory,
@@ -764,7 +764,7 @@ class AsrApi extends AbstractApi
             'directories' => $directories,
         ];
 
-        // onlywhenpresetfileexistsino clock才addtoreturnmiddle
+        // onlywhenpresetfileexistsino clockonlyaddtoreturnmiddle
         if (! empty($presetFiles)) {
             $response['preset_files'] = $presetFiles;
         }

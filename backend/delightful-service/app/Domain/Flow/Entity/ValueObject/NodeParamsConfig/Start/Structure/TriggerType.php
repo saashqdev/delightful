@@ -30,7 +30,7 @@ enum TriggerType: int
     // loopbodystartsectionpoint
     case LoopStart = 5;
 
-    // etc待message
+    // etcpendingmessage
     case WaitMessage = 6;
 
     // addgoodfriendo clock

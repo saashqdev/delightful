@@ -407,7 +407,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         }
 
         $departmentsChildrenIds = $childrenDepartments;
-        // merge && go重
+        // merge && goreload
         $departmentIds = array_merge(...$departmentsChildrenIds);
         return array_values(array_unique($departmentIds));
     }

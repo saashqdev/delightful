@@ -22,7 +22,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $icon MCPservicegraphmark
  * @property string $type servicetype ('sse' or 'stdio')
  * @property bool $enabled whetherenable
- * @property string $external_sse_url outside部SSEserviceURL
+ * @property string $external_sse_url outsidedepartmentSSEserviceURL
  * @property null|array $service_config serviceconfiguration
  * @property string $creator createperson
  * @property DateTime $created_at creation time

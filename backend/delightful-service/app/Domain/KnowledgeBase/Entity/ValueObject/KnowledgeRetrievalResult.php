@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 /**
  * knowledge baseretrieveresultvalueobject.
  *
- * 統onetableshowfromdifferentretrievemethod(semanticretrieve,alltextretrieve,graphretrieveetc)returnknowledgeslicesegment
+ * 统onetableshowfromdifferentretrievemethod(semanticretrieve,alltextretrieve,graphretrieveetc)returnknowledgeslicesegment
  */
 class KnowledgeRetrievalResult extends AbstractValueObject
 {

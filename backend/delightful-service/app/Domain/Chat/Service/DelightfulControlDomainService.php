@@ -19,7 +19,7 @@ use Hyperf\DbConnection\Db;
 use Throwable;
 
 /**
- * handlecontrolmessage相close.
+ * handlecontrolmessagerelatedclose.
  */
 class DelightfulControlDomainService extends AbstractDomainService
 {
@@ -40,7 +40,7 @@ class DelightfulControlDomainService extends AbstractDomainService
     public function handlerMQReceiptSeq(DelightfulSeqEntity $receiveDelightfulSeqEntity): void
     {
         $controlMessageType = $receiveDelightfulSeqEntity->getSeqType();
-        // according toalreadyreadreturn执sendside,parseoutcomemessagesendsideinfo
+        // according toalreadyreadreturnexecutesendside,parseoutcomemessagesendsideinfo
         $receiveConversationId = $receiveDelightfulSeqEntity->getConversationId();
         $receiveConversationEntity = $this->delightfulConversationRepository->getConversationById($receiveConversationId);
         if ($receiveConversationEntity === null) {
@@ -51,7 +51,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             ));
             return;
         }
-        // passreturn执sendpersonquotemessageid,findtosendpersonmessageid. (notcandirectlyusereceiveperson sender_message_id field,thisisonenotgooddesign,随o clockcancel)
+        // passreturnexecutesendpersonquotemessageid,findtosendpersonmessageid. (notcandirectlyusereceiveperson sender_message_id field,thisisonenotgooddesign,随o clockcancel)
         $senderMessageId = $this->delightfulSeqRepository->getSeqByMessageId($receiveDelightfulSeqEntity->getReferMessageId())?->getSenderMessageId();
         if ($senderMessageId === null) {
             $this->logger->error(sprintf(
@@ -99,7 +99,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             );
             if ($receiveUserEntity === null) {
                 $this->logger->error(sprintf(
-                    'messageDispatch return执messagenotfindtomessagesendperson $delightfulSeqEntity:%s',
+                    'messageDispatch returnexecutemessagenotfindtomessagesendperson $delightfulSeqEntity:%s',
                     Json::encode($receiveDelightfulSeqEntity->toArray())
                 ));
                 return;
@@ -107,7 +107,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             // notfindtoseq,orpersonmessagealreadybewithdraw
             if ($senderLatestSeq === null || $senderLatestSeq->getSeqType() === ControlMessageType::RevokeMessage) {
                 $this->logger->error(sprintf(
-                    'messageDispatch return执messagenotfindto seq,orpersonmessagealreadybewithdraw $senderLatestSeq:%s $delightfulSeqEntity:%s',
+                    'messageDispatch returnexecutemessagenotfindto seq,orpersonmessagealreadybewithdraw $senderLatestSeq:%s $delightfulSeqEntity:%s',
                     Json::encode($senderLatestSeq?->toArray()),
                     Json::encode($receiveDelightfulSeqEntity->toArray())
                 ));
@@ -117,7 +117,7 @@ class DelightfulControlDomainService extends AbstractDomainService
 
             switch ($controlMessageType) {
                 case ControlMessageType::SeenMessages:
-                    # alreadyreadreturn执(扫oneeyemessage,toatnontextcomplextypemessage,nothaveviewdetail).
+                    # alreadyreadreturnexecute(扫oneeyemessage,toatnontextcomplextypemessage,nothaveviewdetail).
                     $senderReceiveList = $senderLatestSeq->getReceiveList();
                     if ($senderReceiveList === null) {
                         $this->logger->error(sprintf(
@@ -160,7 +160,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $seqData = SeqAssembler::getInsertDataByEntity($senderSeenSeqEntity);
                     $seqData['app_message_id'] = $receiveDelightfulSeqEntity->getAppMessageId();
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {
-                        // 写database,updatemessagesendsidealreadyreadcolumntable.thisisfor复usemessagereceivehairchannel,notifycustomerclienthavenewalreadyreadreturn执.
+                        // writedatabase,updatemessagesendsidealreadyreadcolumntable.thisisfor复usemessagereceivehairchannel,notifycustomerclienthavenewalreadyreadreturnexecute.
                         $this->delightfulSeqRepository->createSequence($seqData);
                         // updateoriginal chat_seq messagereceivepersoncolumntable. avoidpullhistorymessageo clock,tosidealreadyreadmessagealsoisdisplaynotread.
                         $originalSeq = $this->delightfulSeqRepository->getSeqByMessageId($senderMessageId);
@@ -195,7 +195,7 @@ class DelightfulControlDomainService extends AbstractDomainService
     public function handlerMQUserSelfMessageChange(DelightfulSeqEntity $changeMessageStatusSeqEntity): void
     {
         $controlMessageType = $changeMessageStatusSeqEntity->getSeqType();
-        // passreturn执sendpersonquotemessageid,findtosendpersonmessageid. (notcandirectlyusereceiveperson sender_message_id field,thisisonenotgooddesign,随o clockcancel)
+        // passreturnexecutesendpersonquotemessageid,findtosendpersonmessageid. (notcandirectlyusereceiveperson sender_message_id field,thisisonenotgooddesign,随o clockcancel)
         $needChangeSeqEntity = $this->delightfulSeqRepository->getSeqByMessageId($changeMessageStatusSeqEntity->getReferMessageId());
         if ($needChangeSeqEntity === null) {
             $this->logger->error(sprintf(
@@ -222,7 +222,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             $this->delightfulSeqRepository->batchUpdateSeqStatus([$needChangeSeqEntity->getSeqId()], $messageStatus);
             // according to delightful_message_id findto havemessagereceiveperson
             $notifyAllReceiveSeqList = $this->batchCreateSeqByRevokeOrEditMessage($needChangeSeqEntity, $controlMessageType);
-            // rowexceptuserfromself,因foralreadyalreadysubmitfront
+            // rowexceptuserfromself,factorforalreadyalreadysubmitfront
             $this->batchPushControlSeqList($notifyAllReceiveSeqList);
         } finally {
             // releaselock
@@ -240,7 +240,7 @@ class DelightfulControlDomainService extends AbstractDomainService
         // get havereceiveitemsideseq
         $receiveSeqList = $this->delightfulSeqRepository->getBothSeqListByDelightfulMessageId($needChangeSeqEntity->getDelightfulMessageId());
         $receiveSeqList = array_column($receiveSeqList, null, 'object_id');
-        // godropfromself,因forneedando clockresponse,alreadyalreadysingle独generateseqandpush
+        // godropfromself,factorforneedando clockresponse,alreadyalreadysingle独generateseqandpush
         unset($receiveSeqList[$needChangeSeqEntity->getObjectId()]);
         $seqListCreateDTO = [];
         foreach ($receiveSeqList as $receiveSeq) {

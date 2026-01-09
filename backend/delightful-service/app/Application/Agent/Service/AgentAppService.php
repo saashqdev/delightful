@@ -74,7 +74,7 @@ class AgentAppService extends AbstractAppService
 
         $data = $this->agentDomainService->queries($agentDataIsolation, $query, $page);
 
-        // ifcontainofficialorganization,according topass inIDorder重newsortresult,maintainofficialorganizationassistantinfront
+        // ifcontainofficialorganization,according topass inIDorderreloadnewsortresult,maintainofficialorganizationassistantinfront
         if ($containOfficialOrganization) {
             $data['list'] = $this->sortAgentsByIdOrder($data['list'], $agentIds);
         }
@@ -113,14 +113,14 @@ class AgentAppService extends AbstractAppService
                 }
             }
 
-            // 重newsort:officialorganizationassistantinfront
+            // reloadnewsort:officialorganizationassistantinfront
             $data['list'] = array_merge($officialAgents, $nonOfficialAgents);
         }
         $visibleAgents = [];
         foreach ($data['list'] as $agentVersion) {
             $visibilityConfig = $agentVersion->getVisibilityConfig();
 
-            // all部visibleornovisiblepropertyconfiguration
+            // alldepartmentvisibleornovisiblepropertyconfiguration
             if ($visibilityConfig === null || $visibilityConfig->getVisibilityType() === VisibilityType::All->value) {
                 $visibleAgents[] = $agentVersion->getAgentId();
                 continue;
@@ -162,7 +162,7 @@ class AgentAppService extends AbstractAppService
             $agentMap[$agent->getId()] = $agent;
         }
 
-        // according tofingersetorder重neworganizationarray
+        // according tofingersetorderreloadneworganizationarray
         $sortedAgents = [];
         foreach ($sortedIds as $id) {
             if (isset($agentMap[$id])) {

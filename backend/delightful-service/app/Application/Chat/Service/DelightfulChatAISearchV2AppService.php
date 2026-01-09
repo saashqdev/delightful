@@ -54,7 +54,7 @@ use RedisException;
 use Throwable;
 
 /**
- * chatmessage相close.
+ * chatmessagerelatedclose.
  */
 class DelightfulChatAISearchV2AppService extends AbstractAppService
 {
@@ -119,7 +119,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             // 3.1 generateassociateissueandsendgivefrontclient
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $searchDetailItems);
             $associateQuestions = $this->generateAndSendAssociateQuestions($dto, $associateQuestionsQueryVo, AggregateAISearchCardMessageV2::NULL_PARENT_ID);
-            // 3.2 according toassociateissue,hairupsimplesinglesearch(not拿webpagedetail),andfilterdropduplicateorpersonandissueassociatepropertynothighwebpagecontent
+            // 3.2 according toassociateissue,hairupsimplesinglesearch(notgetwebpagedetail),andfilterdropduplicateorpersonandissueassociatepropertynothighwebpagecontent
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
 
             // 3.4 according tosearchdeepdegree,decidewhethercontinuesearchassociateissuechildissue
@@ -190,7 +190,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             // 2.1 generateassociateissue
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $searchDetailItems);
             $associateQuestions = $this->generateAssociateQuestions($associateQuestionsQueryVo, AggregateAISearchCardMessageV2::NULL_PARENT_ID);
-            // 2.2 according toassociateissue,hairupsimplesinglesearch(not拿webpagedetail),andfilterdropduplicateorpersonandissueassociatepropertynothighwebpagecontent
+            // 2.2 according toassociateissue,hairupsimplesinglesearch(notgetwebpagedetail),andfilterdropduplicateorpersonandissueassociatepropertynothighwebpagecontent
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
 
             // 3. according toeachassociateissuereply,generatesummary.
@@ -414,7 +414,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     public function generateSearchResults(DelightfulChatAggregateSearchReqDTO $dto, array $associateQuestions): array
     {
         $start = microtime(true);
-        // according toassociateissue,hairupsimplesinglesearch(not拿webpagedetail),andfilterdropduplicateorpersonandissueassociatepropertynothighwebpagecontent
+        // according toassociateissue,hairupsimplesinglesearch(notgetwebpagedetail),andfilterdropduplicateorpersonandissueassociatepropertynothighwebpagecontent
         $searchKeywords = $this->getSearchKeywords($associateQuestions);
         $queryVo = (new AISearchCommonQueryVo())
             ->setSearchKeywords($searchKeywords)
@@ -759,7 +759,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
 
     /**
      * intensive readingproceduremiddle,separatorrandomtimepushonetimeassociateissuesearchcompletedgivefrontclient.
-     * 完allintensive readingcompletedo clock,mostbackagain推onetime
+     * completeallintensive readingcompletedo clock,mostbackagainpushonetime
      */
     private function sendLLMResponseForAssociateQuestions(
         DelightfulChatAggregateSearchReqDTO $dto,
@@ -808,7 +808,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
                 CoContext::setRequestId($requestId);
                 $htmlReader = make(HTMLReader::class);
                 try {
-                    // usesnapshotgo拿content!!
+                    // usesnapshotgogetcontent!!
                     $content = $htmlReader->getText($context->getCachedPageUrl());
                     $content = mb_substr($content, 0, 2048);
                     $context->setDetail($content);

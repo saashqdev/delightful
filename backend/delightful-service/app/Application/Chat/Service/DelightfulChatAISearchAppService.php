@@ -57,7 +57,7 @@ use RedisException;
 use Throwable;
 
 /**
- * chatmessage相close.
+ * chatmessagerelatedclose.
  * @deprecated use DelightfulChatAISearchV2AppService replace
  */
 class DelightfulChatAISearchAppService extends AbstractAppService
@@ -124,7 +124,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             // 3.1 generateassociateissueandsendgivefrontclient
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $simpleSearchResults['search'] ?? []);
             $associateQuestions = $this->generateAndSendAssociateQuestions($dto, $associateQuestionsQueryVo, '0');
-            // 3.2 according toassociateissue,hairupsimplesinglesearch(not拿webpagedetail),andfilterdropduplicateorpersonandissueassociatepropertynothighwebpagecontent
+            // 3.2 according toassociateissue,hairupsimplesinglesearch(notgetwebpagedetail),andfilterdropduplicateorpersonandissueassociatepropertynothighwebpagecontent
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
             $this->sleepToFixBug();
             // 3.4 according tosearchdeepdegree,decidewhethercontinuesearchassociateissuechildissue
@@ -201,7 +201,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             // 2.1 generateassociateissue
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $simpleSearchResults['search'] ?? []);
             $associateQuestions = $this->generateAssociateQuestions($associateQuestionsQueryVo);
-            // 2.2 according toassociateissue,hairupsimplesinglesearch(not拿webpagedetail),andfilterdropduplicateorpersonandissueassociatepropertynothighwebpagecontent
+            // 2.2 according toassociateissue,hairupsimplesinglesearch(notgetwebpagedetail),andfilterdropduplicateorpersonandissueassociatepropertynothighwebpagecontent
             $this->sleepToFixBug();
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
 
@@ -314,7 +314,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 $associateQuestionsQueryVo->setMessageHistory(new MessageHistory());
                 $associateSubQuestions = $this->delightfulLLMDomainService->getRelatedQuestions($associateQuestionsQueryVo, 2, 3);
                 // todo byatthiswithinisto have维degreesummarybackagainintensive reading,thereforelosteach维degreequantity,onlycanrandomgenerate.
-                // etc待frontclientadjustrender ui
+                // etcpendingfrontclientadjustrender ui
                 $pageCount = random_int(30, 60);
                 $onePageWords = random_int(200, 2000);
                 $totalWords = $pageCount * $onePageWords;
@@ -455,7 +455,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     public function generateSearchResults(DelightfulChatAggregateSearchReqDTO $dto, array $associateQuestions): array
     {
         $start = microtime(true);
-        // according toassociateissue,hairupsimplesinglesearch(not拿webpagedetail),andfilterdropduplicateorpersonandissueassociatepropertynothighwebpagecontent
+        // according toassociateissue,hairupsimplesinglesearch(notgetwebpagedetail),andfilterdropduplicateorpersonandissueassociatepropertynothighwebpagecontent
         $searchKeywords = array_column($associateQuestions, 'title');
         $queryVo = (new AISearchCommonQueryVo())
             ->setSearchKeywords($searchKeywords)
@@ -520,7 +520,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
      */
     public function sendAssociateQuestionResponse(DelightfulChatAggregateSearchReqDTO $dto, string $associateQuestionId): void
     {
-        $content = ['llm_response' => 'alreadyalreadyforyou are looking fortoanswer,pleaseetc待generatesummary'];
+        $content = ['llm_response' => 'alreadyalreadyforyou are looking fortoanswer,pleaseetcpendinggeneratesummary'];
         $this->aiSendMessage(
             $dto->getConversationId(),
             (string) $this->idGenerator->generate(),
@@ -534,7 +534,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
 
     /**
      * intensive readingproceduremiddle,separatorrandomtimepushonetimeassociateissuesearchcompletedgivefrontclient.
-     * 完allintensive readingcompletedo clock,mostbackagain推onetime
+     * completeallintensive readingcompletedo clock,mostbackagainpushonetime
      * @throws Throwable
      */
     public function sendLLMResponseForAssociateQuestions(
@@ -643,7 +643,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                     $messageContent,
                     $senderConversationEntity
                 );
-                // pushonetime parent_id/id/type data,useatupdatestreamcache,avoidfinal落libraryo clock,parent_id/id/type datalost
+                // pushonetime parent_id/id/type data,useatupdatestreamcache,avoidfinalfalllibraryo clock,parent_id/id/type datalost
                 $this->delightfulChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [
                     'parent_id' => '0',
                     'id' => $summaryMessageId,
@@ -868,7 +868,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 CoContext::setRequestId($requestId);
                 $htmlReader = make(HTMLReader::class);
                 try {
-                    // usesnapshotgo拿content!!
+                    // usesnapshotgogetcontent!!
                     $content = $htmlReader->getText($context->getCachedPageUrl());
                     $content = mb_substr($content, 0, 2048);
                     $context->setDetail($content);
@@ -980,7 +980,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         string $parentId,
         int $type,
         array $content,
-        // todo streamresponse,拿tocustomerclient transmissioncome app_message_id ,asforresponsetimeuniqueoneidentifier
+        // todo streamresponse,gettocustomerclient transmissioncome app_message_id ,asforresponsetimeuniqueoneidentifier
         string $appMessageId = '',
         string $topicId = ''
     ): void {

@@ -76,7 +76,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     /**
      * retrieveconfiguration.
      *
-     * containretrievestrategy,retrievemethod,重sortconfigurationetcparameter
+     * containretrievestrategy,retrievemethod,reloadsortconfigurationetcparameter
      */
     protected ?RetrieveConfig $retrieveConfig = null;
 

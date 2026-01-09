@@ -10,7 +10,7 @@ namespace App\Application\Speech\Enum;
 /**
  * sandbox ASR taskstatusenum.
  *
- * 【asuse域】outside部system - sandboxaudiomergeservice
+ * 【asuse域】outsidedepartmentsystem - sandboxaudiomergeservice
  * 【use途】tableshowsandboxmiddleaudiomergetaskexecutestatus
  * 【usescenario】
  * - callsandbox finishTask interfaceroundquerystatusjudge
@@ -18,17 +18,17 @@ namespace App\Application\Speech\Enum;
  *
  * 【andotherenumdifference】
  * - AsrRecordingStatusEnum: frontclientrecordingactualo clockstatus(recordinginteractionlayer)
- * - AsrTaskStatusEnum: inside部taskallprocessstatus(businessmanagelayer)
+ * - AsrTaskStatusEnum: insidedepartmenttaskallprocessstatus(businessmanagelayer)
  * - SandboxAsrStatusEnum: sandboxmergetaskstatus(infrastructurelayer)✓ current
  *
  * 【statusstreamtransfer】waiting → running → finalizing → completed/finished | error
  */
 enum SandboxAsrStatusEnum: string
 {
-    case WAITING = 'waiting';           // etc待middle:taskalreadysubmit,etc待sandboxprocess
+    case WAITING = 'waiting';           // etcpendingmiddle:taskalreadysubmit,etcpendingsandboxprocess
     case RUNNING = 'running';           // runlinemiddle:sandboxjustinprocessaudiominuteslice
     case FINALIZING = 'finalizing';     // justinexecutefinalmerge:sandboxjustinmergeaudioandprocessnotefile
-    case COMPLETED = 'completed';       // taskcomplete(V2 newformat):audiomergeandfileprocessall部complete
+    case COMPLETED = 'completed';       // taskcomplete(V2 newformat):audiomergeandfileprocessalldepartmentcomplete
     case FINISHED = 'finished';         // taskcomplete(tobackcompatibleoldformat):retainuseatcompatibleoldversionsandbox
     case ERROR = 'error';               // error:sandboxprocessfail
 
@@ -38,7 +38,7 @@ enum SandboxAsrStatusEnum: string
     public function getDescription(): string
     {
         return match ($this) {
-            self::WAITING => 'etc待middle',
+            self::WAITING => 'etcpendingmiddle',
             self::RUNNING => 'runlinemiddle',
             self::FINALIZING => 'justinmerge',
             self::COMPLETED => 'alreadycomplete',
@@ -48,7 +48,7 @@ enum SandboxAsrStatusEnum: string
     }
 
     /**
-     * whetherforcompletestatus(containage两typeformat).
+     * whetherforcompletestatus(containagetwotypeformat).
      */
     public function isCompleted(): bool
     {

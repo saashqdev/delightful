@@ -85,9 +85,9 @@ class ChatMemory implements MemoryPersistenceInterface
     {
         $seqLimit = $memoryQuery->getLimit();
 
-        // todo back続inquery侧optimize
-        // whenfor ai_card message,samemessagehave 20 item,needgo重,butisinquerytime,isnotknowhaveduplicate
-        // inthiswithinfirstputquantityquery,at mostquery 200 item,然backagainconduct重.
+        // todo backcontinueinquery侧optimize
+        // whenfor ai_card message,samemessagehave 20 item,needgoreload,butisinquerytime,isnotknowhaveduplicate
+        // inthiswithinfirstputquantityquery,at mostquery 200 item,thenbackagainconductreload.
         $seqLimit = ($seqLimit * 20 <= 200) ? $seqLimit * 20 : 200;
 
         $messagesQueryDTO = (new MessagesQueryDTO());
@@ -118,7 +118,7 @@ class ChatMemory implements MemoryPersistenceInterface
             if ($messageId) {
                 $messageIds[] = $messageId;
             }
-            // specialprocess, whenstartgo重,andreturnitemcountgreater thanequal limit,thennotagaincontinuequery
+            // specialprocess, whenstartgoreload,andreturnitemcountgreater thanequal limit,thennotagaincontinuequery
             if (count($messageIds) >= $memoryQuery->getLimit()) {
                 break;
             }
@@ -134,13 +134,13 @@ class ChatMemory implements MemoryPersistenceInterface
                 }
             }
         }
-        // 按 key reverse order
+        // by key reverse order
         krsort($messageLists);
         return $messageLists;
     }
 
     /**
-     * addmountmemory,即in Chat o clockcall historymessagestoragesectionpoint.
+     * addmountmemory,immediatelyin Chat o clockcall historymessagestoragesectionpoint.
      * @return array<LLMMemoryMessage>
      */
     private function mountMessages(array $moundIds, array $messageLists): array

@@ -9,7 +9,7 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR Redis Key 常quantity
- * 統onemanage ASR 相close Redis Key format.
+ * 统onemanage ASR relatedclose Redis Key format.
  */
 class AsrRedisKeys
 {

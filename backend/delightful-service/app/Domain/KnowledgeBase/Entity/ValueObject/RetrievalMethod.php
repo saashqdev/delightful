@@ -22,8 +22,8 @@ class RetrievalMethod
      * semanticretrieve.
      *
      * based ontoquantitysimilardegreeretrievemethod.
-     * willquerytextconvertfortoquantity,然backintoquantitydatabasemiddlefindmostsimilardocument.
-     * suitablecomprehendsemanticclose系,multiplelanguagecomprehend,processblurdescription.
+     * willquerytextconvertfortoquantity,thenbackintoquantitydatabasemiddlefindmostsimilardocument.
+     * suitablecomprehendsemanticclosesystem,multiplelanguagecomprehend,processblurdescription.
      */
     public const string SEMANTIC_SEARCH = 'semantic_search';
 
@@ -40,8 +40,8 @@ class RetrievalMethod
      * hybridretrieve.
      *
      * combinesemanticretrieveandalltextretrievemethod.
-     * meanwhileexecutealltextretrieveandtoquantityretrieve,然backpass重sortstepchoosemost佳result.
-     * combine两typeretrievetechnologyadvantage,compensateeachfromnot足.
+     * meanwhileexecutealltextretrieveandtoquantityretrieve,thenbackpassreloadsortstepchoosemost佳result.
+     * combinetwotyperetrievetechnologyadvantage,compensateeachfromnotenough.
      */
     public const string HYBRID_SEARCH = 'hybrid_search';
 
@@ -49,8 +49,8 @@ class RetrievalMethod
      * graphretrieve.
      *
      * based onknowledgegraph谱retrievemethod.
-     * 利useactualbodybetweenclose系conductretrieve,suitableprocesscomplexassociatequery.
-     * canhairshow implicitclose系andconnect.
+     * 利useactualbodybetweenclosesystemconductretrieve,suitableprocesscomplexassociatequery.
+     * canhairshow implicitclosesystemandconnect.
      */
     public const string GRAPH_SEARCH = 'graph_search';
 

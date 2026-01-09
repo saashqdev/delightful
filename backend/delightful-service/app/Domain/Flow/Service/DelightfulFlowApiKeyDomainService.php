@@ -30,7 +30,7 @@ class DelightfulFlowApiKeyDomainService extends AbstractDomainService
         if ($savingDelightfulFlowApiKeyEntity->shouldCreate()) {
             $savingDelightfulFlowApiKeyEntity->prepareForCreate();
             $delightfulFlowApiKeyEntity = $savingDelightfulFlowApiKeyEntity;
-            // checkwhetherduplicate,after allisneedonetooneclose系
+            // checkwhetherduplicate,after allisneedonetooneclosesystem
             /* @phpstan-ignore-next-line */
             if ($delightfulFlowApiKeyEntity->getType() === ApiKeyType::Personal) {
                 if ($this->delightfulFlowApiKeyRepository->exist($dataIsolation, $delightfulFlowApiKeyEntity)) {

@@ -176,7 +176,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * (frontclientperformancehaveissuetemporarysolution)按session id minutegroupget几itemmostnewmessage.
+     * (frontclientperformancehaveissuetemporarysolution)bysession id minutegroupgetseveralitemmostnewmessage.
      */
     public function conversationsMessagesGroupQueries(RequestInterface $request): array
     {

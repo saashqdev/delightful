@@ -51,7 +51,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         $documentEntity->setEmbeddingModel($knowledgeBaseEntity->getModel());
         $documentEntity->setVectorDb(VectorStoreDriver::default()->value);
         if (! $documentEntity->getCode()) {
-            // new建document
+            // newbuilddocument
             if ($documentEntity->getDocumentFile()) {
                 $documentFile = $this->documentFileStrategy->preProcessDocumentFile($dataIsolation, $documentEntity->getDocumentFile());
                 $documentEntity->setDocumentFile($documentFile);
@@ -144,21 +144,21 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * 重newtoquantity化.
+     * reloadnewtoquantity化.
      */
     public function reVectorized(Authenticatable $authorization, string $knowledgeBaseCode, string $documentCode): void
     {
         $dataIsolation = $this->createKnowledgeBaseDataIsolation($authorization);
         $this->checkKnowledgeBaseOperation($dataIsolation, 'manage', $knowledgeBaseCode, $documentCode);
 
-        // calldomainservice重newtoquantity化
+        // calldomainservicereloadnewtoquantity化
         $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $knowledgeBaseCode);
         $documentEntity = $this->knowledgeBaseDocumentDomainService->show($dataIsolation, $knowledgeBaseCode, $documentCode);
-        // byathistorydocumentnothave document_file field,notcanbe重newtoquantity化
+        // byathistorydocumentnothave document_file field,notcanbereloadnewtoquantity化
         if (! $documentEntity->getDocumentFile()) {
             ExceptionBuilder::throw(PermissionErrorCode::Error, 'flow.knowledge_base.re_vectorized_not_support');
         }
-        // minutehairevent,重newtoquantity化
+        // minutehairevent,reloadnewtoquantity化
         $documentSavedEvent = new KnowledgeBaseDocumentSavedEvent(
             $dataIsolation,
             $knowledgeBaseEntity,

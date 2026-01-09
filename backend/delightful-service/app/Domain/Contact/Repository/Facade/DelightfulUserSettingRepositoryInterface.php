@@ -24,7 +24,7 @@ interface DelightfulUserSettingRepositoryInterface
     public function getByDelightfulId(string $delightfulId, string $key): ?DelightfulUserSettingEntity;
 
     /**
-     * alllocalconfiguration:organization_code/user_id/delightful_id all部for null.
+     * alllocalconfiguration:organization_code/user_id/delightful_id alldepartmentfor null.
      */
     public function getGlobal(string $key): ?DelightfulUserSettingEntity;
 

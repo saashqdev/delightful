@@ -48,10 +48,10 @@ class SlidingWindowUtil
             // markformostnewrequest
             $this->redis->set($latestRequestRedisKey, $uniqueRequestId, ['EX' => $totalExpirationSeconds]);
 
-            // etc待verifytime
+            // etcpendingverifytime
             Coroutine::sleep($delayVerificationSeconds);
 
-            // atomizationgroundverifyandstatementexecute权
+            // atomizationgroundverifyandstatementexecutepermission
             $script = <<<'LUA'
                 if redis.call('get', KEYS[1]) == ARGV[1] then
                     return redis.call('del', KEYS[1])

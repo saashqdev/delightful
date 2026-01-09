@@ -22,7 +22,7 @@ interface OrganizationBasedModelFilterInterface
      * thisisenterprisepackageprovidegiveopensourcepackage核corefiltermethod.
      *
      * @param string $organizationCode organizationencoding
-     * @param array $models 待filtermodellist [modelId => ProviderModelEntity]
+     * @param array $models pendingfiltermodellist [modelId => ProviderModelEntity]
      * @return array filterbackmodellist [modelId => ProviderModelEntity]
      */
     public function filterModelsByOrganization(string $organizationCode, array $models): array;
@@ -45,7 +45,7 @@ interface OrganizationBasedModelFilterInterface
     public function getAvailableModelIdentifiers(string $organizationCode): array;
 
     /**
-     * getorganizationneed升level才canusemodelIDlist.
+     * getorganizationneed升levelonlycanusemodelIDlist.
      *
      * @param string $organizationCode organizationencoding
      * @return array need升levelmodelIDarray,for example: ['gpt-4o-advanced', 'claude-3-opus', ...]

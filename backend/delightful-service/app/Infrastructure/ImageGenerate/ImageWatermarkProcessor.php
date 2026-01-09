@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * imagewatermarkhandledevice
- * 統onehandleeachtypeformatimagewatermarkadd.
+ * 统onehandleeachtypeformatimagewatermarkadd.
  */
 class ImageWatermarkProcessor
 {
@@ -48,11 +48,11 @@ class ImageWatermarkProcessor
         // decodingbase64image
         $imageData = $this->decodeBase64Image($base64Image);
 
-        // double重detectensureformataccurate
+        // doublereloaddetectensureformataccurate
         $detectedFormat = $this->detectImageFormat($imageData);
         $targetFormat = $originalFormat !== 'jpeg' ? $originalFormat : $detectedFormat;
 
-        // use統onewatermarkhandlemethod
+        // use统onewatermarkhandlemethod
         if ($imageGenerateRequest->isAddWatermark()) {
             $imageData = $this->addWaterMarkHandler($imageData, $imageGenerateRequest, $targetFormat);
         }
@@ -64,7 +64,7 @@ class ImageWatermarkProcessor
             $implicitWatermark
         );
 
-        // 重newencodingforbase64andupload
+        // reloadnewencodingforbase64andupload
         $outputPrefix = $this->generateBase64Prefix($targetFormat);
         return $this->processBase64Images($outputPrefix . base64_encode($xmpWatermarkedData), $imageGenerateRequest);
     }
@@ -164,14 +164,14 @@ class ImageWatermarkProcessor
         // calculatewatermarkposition
         [$x, $y] = $this->calculateWatermarkPosition($width, $height, $text, $fontSize, $config->getPosition());
 
-        // priorityuseTTF字body,especiallyistoatmiddletexttext
+        // priorityuseTTFfieldbody,especiallyistoatmiddletexttext
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && ($this->fontProvider->containsChinese($text) || $this->fontProvider->supportsTTF())) {
-            // useTTF字bodyrender,supportmiddletext
-            // TTF字bodysizeneedadjust,usuallyratioinsideset fieldbodysmallonethese
+            // useTTFfieldbodyrender,supportmiddletext
+            // TTFfieldbodysizeneedadjust,usuallyratioinsideset fieldbodysmallonethese
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
 
-            // correctcalculateTTF字body基lineposition
+            // correctcalculateTTFfieldbody基lineposition
             if (function_exists('imagettfbbox')) {
                 // directlyusepass inYcoordinateasfor基lineposition
                 $ttfY = $y;
@@ -183,11 +183,11 @@ class ImageWatermarkProcessor
             imagettftext($image, $ttfFontSize, 0, $x, $ttfY, $fontColor, $fontFile, $text);
         } else {
             // 降leveluseinsideset fieldbody(onlysupportASCIIcharacter)
-            // insideset fieldbodyYcoordinateistexttop部,needfrom基linepositionconvert
-            $builtinY = $y - (int) ($fontSize * 0.8); // from基linepositionconvertfortop部position
+            // insideset fieldbodyYcoordinateistexttopdepartment,needfrom基linepositionconvert
+            $builtinY = $y - (int) ($fontSize * 0.8); // from基linepositionconvertfortopdepartmentposition
             imagestring($image, 5, $x, $builtinY, $text, $fontColor);
 
-            // iftextcontainmiddletextbutnothaveTTF字body,recordwarning
+            // iftextcontainmiddletextbutnothaveTTFfieldbody,recordwarning
             if ($this->fontProvider->containsChinese($text)) {
                 $this->logger->warning('Chinese text detected but TTF font not available, may display incorrectly');
             }
@@ -195,11 +195,11 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * calculate字bodysize.
+     * calculatefieldbodysize.
      */
     private function calculateFontSize(int $width, int $height): int
     {
-        // according toimagesizeautostateadjust字bodysize
+        // according toimagesizeautostateadjustfieldbodysize
         $size = min($width, $height) / 20;
         return max(12, min(36, (int) $size));
     }
@@ -210,7 +210,7 @@ class ImageWatermarkProcessor
      */
     private function createTransparentColor($image, float $opacity): int
     {
-        // create白colorhalftransparentwatermark
+        // createwhitecolorhalftransparentwatermark
         $alpha = (int) ((1 - $opacity) * 127);
         return imagecolorallocatealpha($image, 255, 255, 255, $alpha);
     }
@@ -223,28 +223,28 @@ class ImageWatermarkProcessor
         // moreprecisetextwidthestimate
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && $this->fontProvider->supportsTTF() && function_exists('imagettfbbox')) {
-            // useTTF字bodycalculateactualtextsideboundary box
+            // useTTFfieldbodycalculateactualtextsideboundary box
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
             $bbox = imagettfbbox($ttfFontSize, 0, $fontFile, $text);
             $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // increase20%securityside距
             $textHeight = (int) abs($bbox[1] - $bbox[7]); // use绝tovalueensureheightforjust
 
-            // TTF字bodydowndowngrademinute(descender)
-            $descender = (int) abs($bbox[1]); // 基linebydown部minute
-            $ascender = (int) abs($bbox[7]);  // 基linebyup部minute
+            // TTFfieldbodydowndowngrademinute(descender)
+            $descender = (int) abs($bbox[1]); // 基linebydowndepartmentminute
+            $ascender = (int) abs($bbox[7]);  // 基linebyupdepartmentminute
             $totalTextHeight = $descender + $ascender;
         } else {
             // 降leveluseestimatemethod
-            // toatmiddletextcharacter,eachcharacterwidth约equal字bodysize
+            // toatmiddletextcharacter,eachcharacterwidth约equalfieldbodysize
             $chineseCharCount = mb_strlen($text, 'UTF-8');
             $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // increasesecurityside距
             $textHeight = $fontSize;
             $descender = (int) ($fontSize * 0.2); // insideset fieldbodyestimatedowndowngrademinute
-            $ascender = (int) ($fontSize * 0.8); // insideset fieldbodyestimateupupgrade部minute
+            $ascender = (int) ($fontSize * 0.8); // insideset fieldbodyestimateupupgradedepartmentminute
             $totalTextHeight = $textHeight;
         }
 
-        // autostateside距:based on字bodysizecalculate,ensure足够nullbetween
+        // autostateside距:based onfieldbodysizecalculate,ensureenough够nullbetween
         $margin = max(20, (int) ($fontSize * 0.8));
 
         switch ($position) {

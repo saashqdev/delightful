@@ -58,7 +58,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
         }
         $modelGatewayMapper = di(ModelGatewayMapper::class);
 
-        // create才needsetting
+        // createonlyneedsetting
         if ($delightfulFlowKnowledgeEntity->shouldCreate()) {
             $modelId = $delightfulFlowKnowledgeEntity->getEmbeddingConfig()['model_id'] ?? null;
             if (! $modelId) {

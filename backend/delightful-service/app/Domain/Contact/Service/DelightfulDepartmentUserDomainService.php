@@ -38,7 +38,7 @@ readonly class DelightfulDepartmentUserDomainService
 
     public function getDepartmentUsersByDepartmentId(UserQueryDTO $contactUserListQueryDTO, DataIsolation $dataIsolation): DepartmentUsersPageResponseDTO
     {
-        // 暫o clocknot supportedrecursionprocess
+        // temporaryo clocknot supportedrecursionprocess
         return $this->departmentUserRepository->getDepartmentUsersByDepartmentId(
             $contactUserListQueryDTO->getDepartmentId(),
             $dataIsolation->getCurrentOrganizationCode(),
@@ -62,7 +62,7 @@ readonly class DelightfulDepartmentUserDomainService
 
     /**
      * getuser indepartment.
-     * onetomultipleclose系.
+     * onetomultipleclosesystem.
      */
     public function getDepartmentIdsByUserIds(DataIsolation $dataIsolation, array $userIds, bool $withAllParentIds = false): array
     {
@@ -71,7 +71,7 @@ readonly class DelightfulDepartmentUserDomainService
 
     /**
      * getuser indepartment.
-     * onetomultipleclose系.
+     * onetomultipleclosesystem.
      */
     public function getDepartmentIdsByUserId(DataIsolation $dataIsolation, string $userId, bool $withAllParentIds = false): array
     {

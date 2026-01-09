@@ -41,7 +41,7 @@ return new class extends Migration {
             $table->text('exception_message')->comment('exceptioninfo')->nullable();
             $table->datetimes();
             $table->index(['request_id'], 'request_id_index');
-            // for endpoint_id and created_at addunionindex,useat按timerangequeryspecificclientpointresponse
+            // for endpoint_id and created_at addunionindex,useatbytimerangequeryspecificclientpointresponse
             $table->index(['endpoint_id', 'created_at'], 'endpoint_id_created_at_index');
             $table->comment('accesspointresponserecordtable');
         });

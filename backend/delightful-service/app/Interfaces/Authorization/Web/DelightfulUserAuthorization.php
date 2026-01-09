@@ -28,7 +28,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 class DelightfulUserAuthorization extends AbstractAuthorization
 {
     /**
-     * accountnumberinsomeorganizationdownid,即user_id.
+     * accountnumberinsomeorganizationdownid,immediatelyuser_id.
      */
     protected string $id = '';
 

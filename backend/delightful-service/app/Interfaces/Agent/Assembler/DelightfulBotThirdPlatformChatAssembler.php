@@ -39,7 +39,7 @@ class DelightfulBotThirdPlatformChatAssembler
         if ($desensitize) {
             $DTO->setOptions(array_map(function ($value) {
                 if (is_string($value)) {
-                    // retainfrontback 3 位,middlebetweenuse * replace,ifnot足 6 位,thendirectly ***
+                    // retainfrontback 3 position,middlebetweenuse * replace,ifnotenough 6 position,thendirectly ***
                     $length = strlen($value);
                     if ($length <= 6) {
                         return '***';

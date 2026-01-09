@@ -128,7 +128,7 @@ class IntentRecognitionNodeParamsConfig extends AbstractLLMNodeParamsConfig
                 "type": "string",
                 "key": "intent",
                 "sort": 0,
-                "title": "意graph",
+                "title": "intentiongraph",
                 "description": "",
                 "items": null,
                 "properties": null,

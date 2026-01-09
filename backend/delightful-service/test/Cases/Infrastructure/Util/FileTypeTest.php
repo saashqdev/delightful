@@ -95,8 +95,8 @@ class FileTypeTest extends TestCase
      */
     public function testGetTypeFromHeaders()
     {
-        // markthistestforskip,因forneedmockalllocalfunction
-        $this->markTestSkipped('needfunctionmockfeature才cancompletetest');
+        // markthistestforskip,factorforneedmockalllocalfunction
+        $this->markTestSkipped('needfunctionmockfeatureonlycancompletetest');
     }
 
     /**
@@ -105,7 +105,7 @@ class FileTypeTest extends TestCase
      */
     public function testInvalidFileType()
     {
-        $this->markTestSkipped('needfunctionmockfeature才cancompletetest');
+        $this->markTestSkipped('needfunctionmockfeatureonlycancompletetest');
     }
 
     /**
@@ -113,6 +113,6 @@ class FileTypeTest extends TestCase
      */
     public function testFileTooLarge()
     {
-        $this->markTestSkipped('needfunctionmockfeature才cancompletetest');
+        $this->markTestSkipped('needfunctionmockfeatureonlycancompletetest');
     }
 }

@@ -17,14 +17,14 @@ use App\Infrastructure\Core\ValueObject\Page;
 use App\Interfaces\Provider\Assembler\AiAbilityAssembler;
 
 /**
- * AI can力storageimplement.
+ * AI cancapabilitystorageimplement.
  */
 class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRepositoryInterface
 {
     protected bool $filterOrganizationCode = true;
 
     /**
-     * according tocan力codegetAIcanimplementationbody.
+     * according tocancapabilitycodegetAIcanimplementationbody.
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity
     {
@@ -39,7 +39,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * get haveAIcan力list.
+     * get haveAIcancapabilitylist.
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array
     {
@@ -151,7 +151,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * paginationqueryAIcan力list.
+     * paginationqueryAIcancapabilitylist.
      *
      * @return array{total: int, list: array<AiAbilityEntity>}
      */

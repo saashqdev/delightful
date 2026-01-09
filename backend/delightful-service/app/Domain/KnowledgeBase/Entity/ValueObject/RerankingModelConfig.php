@@ -11,21 +11,21 @@ use App\Infrastructure\Core\AbstractValueObject;
 use InvalidArgumentException;
 
 /**
- * 重sortmodelconfigurationvalueobject
+ * reloadsortmodelconfigurationvalueobject
  *
- * contain重sortmodel相closeconfigurationparameter,likemodelname,providequotient,API clientpointetc
+ * containreloadsortmodelrelatedcloseconfigurationparameter,likemodelname,providequotient,API clientpointetc
  */
 class RerankingModelConfig extends AbstractValueObject
 {
     /**
-     * 重sortmodelname.
+     * reloadsortmodelname.
      *
      * for example:BAAI/bge-reranker-large
      */
     private string $rerankingModelName = '';
 
     /**
-     * 重sortmodelprovidequotientname.
+     * reloadsortmodelprovidequotientname.
      *
      * for example:gitee_ai,openai etc
      */
@@ -34,14 +34,14 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * API clientpoint.
      *
-     * 重sortservice API clientpoint
+     * reloadsortservice API clientpoint
      */
     private string $apiEndpoint = '';
 
     /**
      * API key.
      *
-     * access重sortservice API key
+     * accessreloadsortservice API key
      */
     private string $apiKey = '';
 
@@ -62,7 +62,7 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * returnmostbigresultquantity.
      *
-     * 重sortbackreturnmostbigresultquantity
+     * reloadsortbackreturnmostbigresultquantity
      */
     private int $topN = 3;
 
@@ -76,7 +76,7 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * whetherusecache.
      *
-     * whethercache重sortresult,useatimproveperformance
+     * whethercachereloadsortresult,useatimproveperformance
      */
     private bool $useCache = true;
 
@@ -88,7 +88,7 @@ class RerankingModelConfig extends AbstractValueObject
     private int $cacheTtl = 3600;
 
     /**
-     * get重sortmodelname.
+     * getreloadsortmodelname.
      */
     public function getRerankingModelName(): string
     {
@@ -96,7 +96,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * set重sortmodelname.
+     * setreloadsortmodelname.
      */
     public function setRerankingModelName(string $rerankingModelName): self
     {
@@ -105,7 +105,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * get重sortmodelprovidequotientname.
+     * getreloadsortmodelprovidequotientname.
      */
     public function getRerankingProviderName(): string
     {
@@ -113,7 +113,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * set重sortmodelprovidequotientname.
+     * setreloadsortmodelprovidequotientname.
      */
     public function setRerankingProviderName(string $rerankingProviderName): self
     {

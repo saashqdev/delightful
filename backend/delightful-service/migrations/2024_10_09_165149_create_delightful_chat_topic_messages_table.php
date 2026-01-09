@@ -17,7 +17,7 @@ return new class extends Migration {
         if (Schema::hasTable('delightful_chat_topic_messages')) {
             return;
         }
-        // topic相closemessagetable
+        // topicrelatedclosemessagetable
         // topiccontain message_id list. notinseqtableaddtopicidfield,avoidseqcarryfeaturetoomultiple,needaddtoomultipleindex
         Schema::create('delightful_chat_topic_messages', static function (Blueprint $table) {
             // messageid

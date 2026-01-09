@@ -53,7 +53,7 @@ class ProviderAppService
         // batchquantitygetservicequotientconfigurationactualbody(useatgetalias)
         $configEntities = $this->providerConfigDomainService->getConfigByIdsWithoutOrganizationFilter($configIds);
 
-        // receivecollection havegraphmarkpath按organizationencodingminutegroup(includemodelgraphmarkandservicequotientgraphmark)
+        // receivecollection havegraphmarkpathbyorganizationencodingminutegroup(includemodelgraphmarkandservicequotientgraphmark)
         $iconsByOrg = [];
         $iconToModelMap = [];
         $iconToProviderMap = [];

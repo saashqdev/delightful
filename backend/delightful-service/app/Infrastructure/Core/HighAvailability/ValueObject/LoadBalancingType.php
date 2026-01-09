@@ -18,12 +18,12 @@ enum LoadBalancingType: int
     case RANDOM = 1;
 
     /**
-     * roundquerystrategy - 按order依timechoosebackclientservice
+     * roundquerystrategy - byorder依timechoosebackclientservice
      */
     case ROUND_ROBIN = 2;
 
     /**
-     * add权roundquerystrategy - according toweightratioexamplechoosebackclientservice
+     * addpermissionroundquerystrategy - according toweightratioexamplechoosebackclientservice
      */
     case WEIGHTED_ROUND_ROBIN = 3;
 
@@ -42,7 +42,7 @@ enum LoadBalancingType: int
         return match ($this) {
             self::RANDOM => 'random',
             self::ROUND_ROBIN => 'roundquery',
-            self::WEIGHTED_ROUND_ROBIN => 'add权roundquery',
+            self::WEIGHTED_ROUND_ROBIN => 'addpermissionroundquery',
             self::HASH => 'hash',
         };
     }

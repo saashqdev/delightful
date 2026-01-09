@@ -41,7 +41,7 @@ class VolceApiClient extends AbstractSms
             return $smsStruct->content ?: '';
         }
         $templateContent = $this->template->getContentByTemplateId($smsStruct->getTemplateId());
-        // 按variableorder,alsooriginalbecomecompleteshortmessagetext
+        // byvariableorder,alsooriginalbecomecompleteshortmessagetext
         return $this->translateContent($templateContent, $smsStruct->variables);
     }
 
@@ -54,7 +54,7 @@ class VolceApiClient extends AbstractSms
         $smsStruct->language = $this->getContentLanguage($smsStruct);
         // Volcanoshortmessageonlysupportvariableshortmessage,according tocomplete $message adapttoshould templatevariable
 
-        // $variables maybeforindexarray ["quotient品A","supplyquotientA",10],Volcanoshortmessageneedalsooriginalbecomeassociatearray
+        // $variables maybeforindexarray ["quotientproductA","supplyquotientA",10],Volcanoshortmessageneedalsooriginalbecomeassociatearray
         if ($smsStruct->templateId && $this->array_is_list($variables)) {
             // 1.gettemplatecontent,certainvariablekey
             $templateContent = $this->template->getContentByTemplateId($smsStruct->getTemplateId()) ?? '';

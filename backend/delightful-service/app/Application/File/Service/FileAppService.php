@@ -122,7 +122,7 @@ class FileAppService extends AbstractAppService
 
         $keys = array_column($files, 'key');
 
-        // 按organizationencodingminutegroupfile keys,reference ProviderAppService practice
+        // byorganizationencodingminutegroupfile keys,reference ProviderAppService practice
         $keysByOrg = [];
         foreach ($keys as $key) {
             if (empty($key)) {

@@ -20,7 +20,7 @@ use Hyperf\Redis\RedisFactory;
 use Psr\Log\LoggerInterface;
 
 /**
- * 字sectionByteDancevoiceserviceSTStokenservice
+ * fieldsectionByteDancevoiceserviceSTStokenservice
  * useatgetvoiceserviceJWT token.
  */
 class ByteDanceSTSService
@@ -54,7 +54,7 @@ class ByteDanceSTSService
      * @param string $delightfulId userDelightful ID
      * @param int $duration valid期(second),default7200second
      * @param bool $refresh whetherforcerefreshtoken,defaultfalse
-     * @return array containJWT Tokenand相closeinfoarray
+     * @return array containJWT Tokenandrelatedcloseinfoarray
      * @throws Exception
      */
     public function getJwtTokenForUser(string $delightfulId, int $duration = 7200, bool $refresh = false): array

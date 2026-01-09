@@ -8,22 +8,22 @@ declare(strict_types=1);
 namespace App\Domain\ImageGenerate\Contract;
 
 /**
- * 字bodyprovidepersoninterface
- * useatinopensourceprojectmiddledefinition字bodymanagestandard,byenterpriseprojectimplementspecificlogic.
+ * fieldbodyprovidepersoninterface
+ * useatinopensourceprojectmiddledefinitionfieldbodymanagestandard,byenterpriseprojectimplementspecificlogic.
  */
 interface FontProviderInterface
 {
     /**
-     * getTTF字bodyfilepath.
+     * getTTFfieldbodyfilepath.
      *
-     * @return null|string 字bodyfile绝topath,iffornullthennot supportedTTF字body
+     * @return null|string fieldbodyfile绝topath,iffornullthennot supportedTTFfieldbody
      */
     public function getFontPath(): ?string;
 
     /**
-     * detectwhethersupportTTF字bodyrender.
+     * detectwhethersupportTTFfieldbodyrender.
      *
-     * @return bool truetableshowsupportTTF字body,falsetableshowonlysupportinsideset fieldbody
+     * @return bool truetableshowsupportTTFfieldbody,falsetableshowonlysupportinsideset fieldbody
      */
     public function supportsTTF(): bool;
 

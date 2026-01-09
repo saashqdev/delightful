@@ -627,7 +627,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * test重newtoquantity化.
+     * testreloadnewtoquantity化.
      */
     public function testReVectorized()
     {

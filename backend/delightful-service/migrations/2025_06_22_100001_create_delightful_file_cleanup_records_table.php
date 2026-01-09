@@ -21,12 +21,12 @@ class CreateDelightfulFileCleanupRecordsTable extends Migration
             $table->string('organization_code', 50)->comment('organizationencoding');
             $table->string('file_key', 500)->comment('filestoragekey');
             $table->string('file_name', 255)->comment('filename');
-            $table->unsignedBigInteger('file_size')->default(0)->comment('filesize(字section)');
-            $table->string('bucket_type', 20)->default('private')->comment('storage桶type');
+            $table->unsignedBigInteger('file_size')->default(0)->comment('filesize(fieldsection)');
+            $table->string('bucket_type', 20)->default('private')->comment('storagebuckettype');
             $table->string('source_type', 50)->comment('comesourcetype(batch_compress,upload_tempetc)');
             $table->string('source_id', 100)->nullable()->comment('comesourceID(optionalbusinessidentifier)');
             $table->timestamp('expire_at')->comment('expiretime');
-            $table->tinyInteger('status')->default(0)->comment('status:0=待cleanup,1=alreadycleanup,2=cleanupfailed');
+            $table->tinyInteger('status')->default(0)->comment('status:0=pendingcleanup,1=alreadycleanup,2=cleanupfailed');
             $table->tinyInteger('retry_count')->default(0)->comment('retrycount');
             $table->text('error_message')->nullable()->comment('errorinformation');
             $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('creation time');

@@ -108,7 +108,7 @@ usernicknameis:currentusernickname
 
 MARKDOWN,
 
-            // 'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,from明daystart,eachday早up9pointexecute,displayoneitemreminderIcookmessage',
+            // 'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,from明daystart,eachdayearlyup9pointexecute,displayoneitemreminderIcookmessage',
             'user_prompt' => 'helpIcreateonescheduletask,taskname:reminderIcook,明day10pointreminderI,displayoneitemreminderIcookmessage',
         ]);
 

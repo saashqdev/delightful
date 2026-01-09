@@ -68,7 +68,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
                 $messageType->getName(),
                 $messageDTO->getContent()->toArray()
             );
-            // needmeanwhilemodifytypeandcontent,才canmessagecontentchangemoreforopenconversationwindow
+            // needmeanwhilemodifytypeandcontent,onlycanmessagecontentchangemoreforopenconversationwindow
             $messageDTO->setMessageType($messageTypeInterface->getMessageTypeEnum());
             $messageDTO->setContent($messageTypeInterface);
             $messageDTO->setReceiveType($conversationEntity->getReceiveType());
@@ -91,7 +91,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
 
     /**
      * openconversationwindow.
-     * controlmessage,onlyinseqtablewritedata,notinmessagetable写.
+     * controlmessage,onlyinseqtablewritedata,notinmessagetablewrite.
      * @throws Throwable
      */
     public function openConversationWindow(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
@@ -153,7 +153,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * justininputmiddlestatusonlyneedpushgivetoside,notneed推givefromselfdevice.
+     * justininputmiddlestatusonlyneedpushgivetoside,notneedpushgivefromselfdevice.
      */
     public function clientOperateConversationStatus(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
@@ -191,7 +191,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
 
     /**
      * 智canbodytouchhairconversationstartinputorpersonendinput.
-     * directlyoperationastosideconversationwindow,whilenotismessagehairinfromselfconversationwindow然backagainalreadybymessageminutehairmodepieceforwardtotosideconversationwindow.
+     * directlyoperationastosideconversationwindow,whilenotismessagehairinfromselfconversationwindowthenbackagainalreadybymessageminutehairmodepieceforwardtotosideconversationwindow.
      * @deprecated userclientcall agentOperateConversationStatusV2 methodreplace
      */
     public function agentOperateConversationStatus(ControlMessageType $controlMessageType, string $agentConversationId): bool
@@ -230,7 +230,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
 
     /**
      * use intermediate eventconductmiddlebetweenstatemessagepush,notpersistencemessage. supporttopiclevelother“justininputmiddle”
-     * directlyoperationastosideconversationwindow,whilenotismessagehairinfromselfconversationwindow然backagainalreadybymessageminutehairmodepieceforwardtotosideconversationwindow.
+     * directlyoperationastosideconversationwindow,whilenotismessagehairinfromselfconversationwindowthenbackagainalreadybymessageminutehairmodepieceforwardtotosideconversationwindow.
      */
     public function agentOperateConversationStatusV2(ControlMessageType $controlMessageType, string $agentConversationId, ?string $topicId = null): bool
     {
@@ -269,7 +269,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             'seq_type' => $messageDTO->getMessageType()->getName(),
             'content' => $content->toArray(),
             'conversation_id' => $receiveConversationEntity->getId(),
-            'status' => DelightfulMessageStatus::Read->value, // controlmessagenotneedalreadyreadreturn执
+            'status' => DelightfulMessageStatus::Read->value, // controlmessagenotneedalreadyreadreturnexecute
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => $messageDTO->getAppMessageId(),

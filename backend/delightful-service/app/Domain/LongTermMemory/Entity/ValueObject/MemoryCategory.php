@@ -13,7 +13,7 @@ namespace App\Domain\LongTermMemory\Entity\ValueObject;
 enum MemoryCategory: string
 {
     /**
-     * projectmemory - andspecificproject相closememory.
+     * projectmemory - andspecificprojectrelatedclosememory.
      */
     case PROJECT = 'project';
 

@@ -64,7 +64,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
 
         // addandhairtask
         $index = 0;
-        $count = 10; // enterone步decreasetestquantity,as long ashaveonesuccessthenline
+        $count = 10; // enteronestepdecreasetestquantity,as long ashaveonesuccessthenline
         while ($index < $count) {
             $parallel->add(function () use ($scenario, $index, $expectedResponse) {
                 try {
@@ -198,7 +198,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * providetestuse通usemessagedata.
+     * providetestusecommonusemessagedata.
      */
     private function getTestMessages(): array
     {

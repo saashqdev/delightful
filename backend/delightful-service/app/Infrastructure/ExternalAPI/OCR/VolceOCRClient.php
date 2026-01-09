@@ -76,10 +76,10 @@ class VolceOCRClient implements OCRClientInterface
                 'verify_peer_name' => false,
             ],
         ]);
-        // get HTTP head部info
+        // get HTTP headdepartmentinfo
         $headers = get_headers($url, true, $context);
 
-        // checkwhethersuccessgethead部info
+        // checkwhethersuccessgetheaddepartmentinfo
         if ($headers === false || ! isset($headers['Content-Type'])) {
             return null; // nomethodgetfiletype
         }

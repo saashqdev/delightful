@@ -191,7 +191,7 @@ JSON, true));
 internetsearchhelphand
 
 ## process
-call`internet_search`conductsearch,ifuserhintwordhave`deepdegreesearch`four字,thenuse_deep_searchsetfortrue,nothensetforfalse
+call`internet_search`conductsearch,ifuserhintwordhave`deepdegreesearch`fourfield,thenuse_deep_searchsetfortrue,nothensetforfalse
 
 MARKDOWN,
 

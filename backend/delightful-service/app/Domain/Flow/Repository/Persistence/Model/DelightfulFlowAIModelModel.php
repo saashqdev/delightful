@@ -84,7 +84,7 @@ class DelightfulFlowAIModelModel extends AbstractModel
     }
 
     /**
-     * aes keyadd盐.
+     * aes keyaddsalt.
      */
     private function _getAesKey(string $salt): string
     {

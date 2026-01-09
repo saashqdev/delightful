@@ -215,7 +215,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * outputhead部info.
+     * outputheaddepartmentinfo.
      */
     private function logHeader(bool $isDryRun, bool $isForce, int $limit): void
     {

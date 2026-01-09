@@ -86,7 +86,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         if (! empty($configData['config'])) {
             if ($decryptConfig) {
                 // whenneeddecrypto clock,settingalreadydecryptconfiguration(notdesensitize)
-                // need new 两timeProviderConfigItemobject,因for setConfig methodwilloperationasoriginalobjectconductdesensitize
+                // need new twotimeProviderConfigItemobject,factorfor setConfig methodwilloperationasoriginalobjectconductdesensitize
                 $mergedData['decryptedConfig'] = new ProviderConfigItem($configData['config']);
             }
             // config field set methodwilldesensitize
@@ -157,7 +157,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         if (! empty($modelOriginId)) {
             $models = $this->getModelsByVersionAndOrganization($modelOriginId, $organizationCode);
             if (! empty($models)) {
-                // iffindtomodel,notdirectlyreturnofficialservicequotientconfiguration,whileisconductenterone步judge
+                // iffindtomodel,notdirectlyreturnofficialservicequotientconfiguration,whileisconductenteronestepjudge
                 $this->logger->info('findtotoshouldmodel,judgeservicequotientconfiguration', [
                     'modelVersion' => $modelOriginId,
                     'organizationCode' => $organizationCode,
@@ -251,7 +251,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
                 continue;
             }
             if (is_numeric($key)) {
-                // 按IDfilter
+                // byIDfilter
                 if ((string) $model->getId() === $key) {
                     $models[] = $model;
                 }
@@ -282,7 +282,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // get havecategorycanusemodel
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
-        // 按model_idfilter
+        // bymodel_idfilter
         $models = [];
         foreach ($allModels as $model) {
             if ($model->getModelId() === $modelId) {
@@ -400,7 +400,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // get havecategorycanusemodel
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
-        // 按be_delightful_display_statefilter
+        // bybe_delightful_display_statefilter
         $models = [];
         foreach ($allModels as $model) {
             if ($model->isBeDelightfulDisplayState() === 1) {
@@ -417,7 +417,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             $beDelightfulModels[] = $model;
         }
 
-        // according to modelId go重
+        // according to modelId goreload
         $uniqueModels = [];
         foreach ($beDelightfulModels as $model) {
             $uniqueModels[$model->getModelId()] = $model;
@@ -435,7 +435,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     {
         $providerModelEntities = $this->providerModelRepository->getModelsForOrganization($dataIsolation, $providerModelQuery->getCategory(), $providerModelQuery->getStatus());
 
-        // modelId alreadypassfilter,go重选one
+        // modelId alreadypassfilter,goreload选one
         if ($providerModelQuery->isModelIdFilter()) {
             $uniqueModels = [];
             foreach ($providerModelEntities as $model) {
@@ -602,7 +602,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // get havecategorycanusemodel
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
-        // 按model_versionfilter
+        // bymodel_versionfilter
         $filteredModels = [];
         foreach ($allModels as $model) {
             if ($model->getModelId() === $modelOriginId) {

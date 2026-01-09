@@ -42,9 +42,9 @@ readonly class AsrPresetFileService
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
      * @param int $projectId projectID
-     * @param string $displayDir displaydirectory相topath (like: recordingsummary_xxx)
+     * @param string $displayDir displaydirectoryrelatedtopath (like: recordingsummary_xxx)
      * @param int $displayDirId displaydirectoryID
-     * @param string $hiddenDir hiddendirectory相topath (like: .asr_recordings/session_xxx)
+     * @param string $hiddenDir hiddendirectoryrelatedtopath (like: .asr_recordings/session_xxx)
      * @param int $hiddenDirId hiddendirectoryID
      * @param string $taskKey taskkey
      * @return array{note_file: TaskFileEntity, transcript_file: TaskFileEntity}
@@ -241,7 +241,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * createpresetfile通usemethod.
+     * createpresetfilecommonusemethod.
      */
     private function createPresetFile(
         string $userId,

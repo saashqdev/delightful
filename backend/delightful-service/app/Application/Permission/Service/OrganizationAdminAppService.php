@@ -85,7 +85,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * transferletorganizationcreateperson身share.
+     * transferletorganizationcreatepersonbodyshare.
      */
     public function transferOwnership(DataIsolation $dataIsolation, string $newOwnerUserId, string $currentOwnerUserId): void
     {

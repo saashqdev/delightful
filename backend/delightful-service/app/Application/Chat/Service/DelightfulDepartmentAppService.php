@@ -95,7 +95,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
         foreach ($departments as $delightfulDepartmentEntity) {
             $this->setChildrenEmployeeSum($queryDTO, $delightfulDepartmentEntity);
         }
-        // address bookandsearch相closeinterface,filterhiddendepartmentandhiddenuser.
+        // address bookandsearchrelatedcloseinterface,filterhiddendepartmentandhiddenuser.
         $departments = $this->filterDepartmentsHidden($departments);
         $departmentsPageResponseDTO->setItems($departments);
         return $departmentsPageResponseDTO;
@@ -110,7 +110,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
         foreach ($departments as $delightfulDepartmentEntity) {
             $this->setChildrenEmployeeSum($queryDTO, $delightfulDepartmentEntity);
         }
-        // address bookandsearch相closeinterface,filterhiddendepartmentandhiddenuser.
+        // address bookandsearchrelatedcloseinterface,filterhiddendepartmentandhiddenuser.
         $departments = $this->filterDepartmentsHidden($departments);
         // allquantityfind,nothavemoremultiple
         return PageListAssembler::pageByMysql($departments);
@@ -122,7 +122,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
     }
 
     /**
-     * address bookandsearch相closeinterface,filterhiddendepartmentandhiddenuser.
+     * address bookandsearchrelatedcloseinterface,filterhiddendepartmentandhiddenuser.
      * @param DelightfulDepartmentEntity[] $delightfulDepartments
      */
     protected function filterDepartmentsHidden(array $delightfulDepartments): array

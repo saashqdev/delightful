@@ -108,7 +108,7 @@ class UserAssembler
                 $logger->warning("user[delightful_id: {$user['delightful_id']} ]notexistsin, skip!");
                 continue;
             }
-            // ifexistsinhandmachinenumber,willhandmachinenumbermiddlebetweenfour位replacefor*
+            // ifexistsinhandmachinenumber,willhandmachinenumbermiddlebetweenfourpositionreplacefor*
             $phone = $account->getPhone();
             if (! empty($phone)) {
                 $phone = substr_replace($phone, '****', 3, 4);
@@ -151,7 +151,7 @@ class UserAssembler
         /** @var array<UserDepartmentDetailDTO> $usersDepartmentDetailDTOList */
         $usersDepartmentDetailDTOList = [];
 
-        // step1: builduserIDtodepartmentclose系mapping
+        // step1: builduserIDtodepartmentclosesystemmapping
         $userDepartmentMap = [];
         foreach ($departmentUsers as $departmentUser) {
             $userDepartmentMap[$departmentUser->getUserId()][] = $departmentUser;
@@ -188,7 +188,7 @@ class UserAssembler
                 }
             }
 
-            // step2.2: usedefaultdepartmentclose系asforfoundationinfo
+            // step2.2: usedefaultdepartmentclosesystemasforfoundationinfo
             $defaultDepartmentUser = $userDepartmentRelations[0] ?? [];
 
             // step2.3: updateorcreateuserdepartmentdetailobject

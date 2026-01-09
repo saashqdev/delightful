@@ -57,8 +57,8 @@ readonly class AuthenticationDomainService
     /**
      * generateaccountnumbertoken.
      *
-     * byatMagicsupportotheraccountnumberbody系access,thereforefrontclientprocessis,firstgosomeaccountnumberbody系login,againbyMagicmakeloginvalidation.
-     * therefore,even ifuseMagicfromown accountnumberbody系,alsoneedcomplythisprocess.
+     * byatMagicsupportotheraccountnumberbodysystemaccess,thereforefrontclientprocessis,firstgosomeaccountnumberbodysystemlogin,againbyMagicmakeloginvalidation.
+     * therefore,even ifuseMagicfromown accountnumberbodysystem,alsoneedcomplythisprocess.
      */
     public function generateAccountToken(string $delightfulId): string
     {

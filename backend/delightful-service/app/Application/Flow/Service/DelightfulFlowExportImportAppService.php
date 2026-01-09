@@ -38,7 +38,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * exportassistantprocess
-     * recursionexportprocess相close havesectionpoint,includechildprocessandtoolprocess.
+     * recursionexportprocessrelatedclose havesectionpoint,includechildprocessandtoolprocess.
      */
     public function exportFlow(FlowDataIsolation $dataIsolation, string $flowCode): array
     {
@@ -88,7 +88,7 @@ class DelightfulFlowExportImportAppService
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.import.missing_main_flow');
         }
 
-        // storageageIDmappingclose系
+        // storageageIDmappingclosesystem
         $idMapping = [
             'flows' => [], // 老ID => newID
             'tool_sets' => [], // 老ID => newID
@@ -322,7 +322,7 @@ class DelightfulFlowExportImportAppService
             $flowData['tool_set_id'] = $newToolSetId;
         }
 
-        // updateprocesssectionpointmiddlequoteclose系
+        // updateprocesssectionpointmiddlequoteclosesystem
         $this->updateFlowReferences($flowData, $idMapping);
 
         // updateorganizationinfo
@@ -340,8 +340,8 @@ class DelightfulFlowExportImportAppService
             $flowEntity->setAgentId($agentId);
         }
 
-        // ensuresettingfornew建process
-        $flowEntity->setId(0); // settingIDfor0indicatenew建
+        // ensuresettingfornewbuildprocess
+        $flowEntity->setId(0); // settingIDfor0indicatenewbuild
         $flowEntity->setId(null);
         $savedFlow = $this->delightfulFlowDomainService->create($dataIsolation, $flowEntity);
         $importReport['created'][] = "createprocess: {$savedFlow->getName()} (ID: {$savedFlow->getCode()})";
@@ -378,7 +378,7 @@ class DelightfulFlowExportImportAppService
         unset($toolSetData['created_at'], $toolSetData['updated_at'], $toolSetData['id']);
 
         // settingcreateactualbodyrequiredwantfield
-        $toolSetData['id'] = 0; // ensuresettingfornew建
+        $toolSetData['id'] = 0; // ensuresettingfornewbuild
         $toolSetData['created_at'] = new DateTime();
         $toolSetData['updated_at'] = new DateTime();
 
@@ -389,7 +389,7 @@ class DelightfulFlowExportImportAppService
         $savedToolSet = $this->delightfulFlowToolSetDomainService->create($dataIsolation, $toolSetEntity);
         $importReport['created'][] = "createtoolcollection: {$savedToolSet->getName()} (ID: {$savedToolSet->getCode()})";
 
-        // recordageIDmappingclose系
+        // recordageIDmappingclosesystem
         $idMapping['tool_sets'][$originalCode] = $savedToolSet->getCode();
 
         return $savedToolSet->getCode();
@@ -404,7 +404,7 @@ class DelightfulFlowExportImportAppService
         $newName = $name;
         $counter = 1;
 
-        // toolnotuseduplicate name,因fortoolcollectionnotsame
+        // toolnotuseduplicate name,factorfortoolcollectionnotsame
         if ($type === Type::Tools) {
             return $name;
         }
@@ -453,7 +453,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * updatesectionpointIDmapping
-     * for havesectionpointgeneratenewIDandmaintainmappingclose系.
+     * for havesectionpointgeneratenewIDandmaintainmappingclosesystem.
      */
     private function updateNodeIdsMapping(array &$flowData, array &$idMapping): void
     {
@@ -475,7 +475,7 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * updateprocessmiddlequoteclose系
+     * updateprocessmiddlequoteclosesystem
      * includesectionpointquote,childprocessquote,toolquoteetc.
      */
     private function updateFlowReferences(array &$flowData, array $idMapping): void
@@ -528,12 +528,12 @@ class DelightfulFlowExportImportAppService
                 $this->updateExpressionReferences($nodeData['params'], $idMapping);
             }
 
-            // 通usehandle input field (ifexistsinandforarray)
+            // commonusehandle input field (ifexistsinandforarray)
             if (isset($nodeData['input']) && is_array($nodeData['input'])) {
                 $this->processSpecialNodeFieldValue($nodeData['input'], $idMapping);
             }
 
-            // 通usehandle output field (ifexistsinandforarray)
+            // commonusehandle output field (ifexistsinandforarray)
             if (isset($nodeData['output']) && is_array($nodeData['output'])) {
                 $this->processSpecialNodeFieldValue($nodeData['output'], $idMapping);
             }
@@ -548,7 +548,7 @@ class DelightfulFlowExportImportAppService
                 $nodeData['prev_nodes'] = $prevNodes;
             }
 
-            // updateback続sectionpointquote
+            // updatebackcontinuesectionpointquote
             if (isset($nodeData['next_nodes']) && is_array($nodeData['next_nodes'])) {
                 $nextNodes = [];
                 foreach ($nodeData['next_nodes'] as $nextNodeId) {
@@ -656,7 +656,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * judgewhetherforinsidesettool
-     * insidesettoolnotneed重newcreate,candirectlyuse.
+     * insidesettoolnotneedreloadnewcreate,candirectlyuse.
      */
     private function isBuiltInTool(string $toolId, string $toolSetId): bool
     {

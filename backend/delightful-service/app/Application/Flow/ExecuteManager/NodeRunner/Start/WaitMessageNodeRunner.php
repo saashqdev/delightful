@@ -19,7 +19,7 @@ use App\Infrastructure\Core\Dag\VertexResult;
 #[FlowNodeDefine(
     type: NodeType::WaitMessage->value,
     code: NodeType::WaitMessage->name,
-    name: 'etc待',
+    name: 'etcpending',
     paramsConfig: WaitMessageNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,
@@ -59,7 +59,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
             $waitMessageEntity->setTimeout(time() + $intervalSeconds);
         }
 
-        // 暫o clockalsoisputtodatalibrarymiddle,back続considerputto objectstorage middle
+        // temporaryo clockalsoisputtodatalibrarymiddle,backcontinueconsiderputto objectstorage middle
         $persistenceData = $executionData->getPersistenceData();
         $waitMessageEntity->setPersistentData($persistenceData);
 

@@ -27,7 +27,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * getthethreesideplatformdepartmentIDmappingclose系.
+     * getthethreesideplatformdepartmentIDmappingclosesystem.
      *
      * @param string[] $thirdDepartmentIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -66,7 +66,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * getDelightfuldepartmentIDmappingclose系.
+     * getDelightfuldepartmentIDmappingclosesystem.
      *
      * @param string[] $delightfulDepartmentIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -90,7 +90,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * getthethreesideplatformuserIDmappingclose系.
+     * getthethreesideplatformuserIDmappingclosesystem.
      *
      * @param string[] $thirdUserIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -127,7 +127,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * getMagicplatformuserIDmappingclose系.
+     * getMagicplatformuserIDmappingclosesystem.
      *
      * @param string[] $delightfulIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -180,7 +180,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
             $delightfulThirdPlatformIdMappingEntity->setCreatedAt($time);
             $delightfulThirdPlatformIdMappingEntity->setUpdatedAt($time);
             $thirdPlatformIdMappings[] = [
-                'id' => $id, // 暫o clockprimary key idsetforandnew_idsamevalue,bybackhaveneedcan拆minute
+                'id' => $id, // temporaryo clockprimary key idsetforandnew_idsamevalue,bybackhaveneedcan拆minute
                 'delightful_organization_code' => $delightfulThirdPlatformIdMappingEntity->getDelightfulOrganizationCode(),
                 'mapping_type' => $delightfulThirdPlatformIdMappingEntity->getMappingType(),
                 'third_platform_type' => $delightfulThirdPlatformIdMappingEntity->getThirdPlatformType(),
@@ -254,7 +254,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
             $relationEnvIds = [$delightfulEnvironmentEntity->getId()];
         } else {
             $relationEnvIds[] = $delightfulEnvironmentEntity->getId();
-            // toenvironmentIDconductgo重process
+            // toenvironmentIDconductgoreloadprocess
             $relationEnvIds = array_unique($relationEnvIds);
         }
         return $relationEnvIds;

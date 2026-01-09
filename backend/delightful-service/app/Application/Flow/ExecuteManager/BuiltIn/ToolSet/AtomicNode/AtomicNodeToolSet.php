@@ -26,6 +26,6 @@ class AtomicNodeToolSet extends AbstractBuiltInToolSet
 
     public function getDescription(): string
     {
-        return 'provide部minuteatomicsectionpointtoolcallcan力';
+        return 'providedepartmentminuteatomicsectionpointtoolcallcancapability';
     }
 }

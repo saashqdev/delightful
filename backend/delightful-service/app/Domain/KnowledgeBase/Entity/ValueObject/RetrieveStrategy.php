@@ -10,9 +10,9 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 /**
  * retrievestrategyenumcategory.
  *
- * definition两typeretrievestrategy:
+ * definitiontwotyperetrievestrategy:
  * - SINGLE: singleretrieve,fromsingleknowledge basemiddleretrieveinfo
- * - MULTIPLE: multipleretrieve,meanwhilefrommultipleknowledge basemiddleretrieveinfo,然backtoresultconduct重newsort
+ * - MULTIPLE: multipleretrieve,meanwhilefrommultipleknowledge basemiddleretrieveinfo,thenbacktoresultconductreloadnewsort
  */
 class RetrieveStrategy
 {
@@ -28,10 +28,10 @@ class RetrieveStrategy
     /**
      * multipleretrieve.
      *
-     * meanwhilefrommultipleknowledge basemiddleretrieveinfo,然backtoresultconduct重newsort.
+     * meanwhilefrommultipleknowledge basemiddleretrieveinfo,thenbacktoresultconductreloadnewsort.
      * thestrategypassconfigurationparameter `retrieve_strategy` fieldset,
      * fromdatabasemiddle retrieve_config configurationget.
-     * itsupportdifferent重sortstrategy,likeuse重sortmodeloradd权minutecount.
+     * itsupportdifferentreloadsortstrategy,likeusereloadsortmodeloraddpermissionminutecount.
      */
     public const MULTIPLE = 'multiple';
 

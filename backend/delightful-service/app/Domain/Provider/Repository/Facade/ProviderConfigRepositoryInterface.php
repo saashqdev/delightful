@@ -41,7 +41,7 @@ interface ProviderConfigRepositoryInterface
     public function getProviderConfigEntityById(string $serviceProviderConfigId, string $organizationCode): ?ProviderConfigEntity;
 
     /**
-     * according toservicequotientIDfindconfiguration(按IDascendinggetfirst).
+     * according toservicequotientIDfindconfiguration(byIDascendinggetfirst).
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param int $serviceProviderId servicequotientID
@@ -50,7 +50,7 @@ interface ProviderConfigRepositoryInterface
     public function findFirstByServiceProviderId(ProviderDataIsolation $dataIsolation, int $serviceProviderId): ?ProviderConfigEntity;
 
     /**
-     * according toIDgetconfigurationactualbody(not按organizationfilter,alllocalquery).
+     * according toIDgetconfigurationactualbody(notbyorganizationfilter,alllocalquery).
      *
      * @param int $id configurationID
      * @return null|ProviderConfigEntity configurationactualbody
@@ -58,7 +58,7 @@ interface ProviderConfigRepositoryInterface
     public function getByIdWithoutOrganizationFilter(int $id): ?ProviderConfigEntity;
 
     /**
-     * according toIDarraygetconfigurationactualbodylist(not按organizationfilter,alllocalquery).
+     * according toIDarraygetconfigurationactualbodylist(notbyorganizationfilter,alllocalquery).
      *
      * @param array<int> $ids configurationIDarray
      * @return array<int, ProviderConfigEntity> returnbyidforkeyconfigurationactualbodyarray

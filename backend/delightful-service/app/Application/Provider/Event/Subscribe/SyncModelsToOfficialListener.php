@@ -20,7 +20,7 @@ use Throwable;
 
 /**
  * samemodeltoOfficialservicequotientlistendevice.
- * listenservicequotientconfigurationcreate/updateevent,fromoutside部APIpullmodelandsametoOfficialservicequotient.
+ * listenservicequotientconfigurationcreate/updateevent,fromoutsidedepartmentAPIpullmodelandsametoOfficialservicequotient.
  */
 #[AsyncListener]
 #[Listener]
@@ -53,7 +53,7 @@ class SyncModelsToOfficialListener implements ListenerInterface
                 default => null,
             };
         } catch (Throwable $e) {
-            $this->logger->error('fromoutside部APIsamemodelfailed', [
+            $this->logger->error('fromoutsidedepartmentAPIsamemodelfailed', [
                 'event' => get_class($event),
                 'error' => $e->getMessage(),
                 'file' => $e->getFile(),
@@ -65,7 +65,7 @@ class SyncModelsToOfficialListener implements ListenerInterface
 
     /**
      * processservicequotientconfigurationcreateorupdateevent.
-     * ifisOfficialservicequotientandisofficialorganization,thenfromoutside部APIpullmodelandsame.
+     * ifisOfficialservicequotientandisofficialorganization,thenfromoutsidedepartmentAPIpullmodelandsame.
      */
     private function handleProviderConfig(
         ProviderConfigCreatedEvent|ProviderConfigUpdatedEvent $event,

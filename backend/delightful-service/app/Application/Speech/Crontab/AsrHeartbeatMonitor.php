@@ -237,7 +237,7 @@ class AsrHeartbeatMonitor
             $userAuthorization = DelightfulUserAuthorization::fromUserEntity($userEntity);
             $organizationCode = $taskStatus->organizationCode ?? $userAuthorization->getOrganizationCode();
 
-            // directlycallfromautosummarymethod(willinmethodinside部updatestatus)
+            // directlycallfromautosummarymethod(willinmethodinsidedepartmentupdatestatus)
             $this->asrFileAppService->autoTriggerSummary($taskStatus, $taskStatus->userId, $organizationCode);
 
             $this->logger->info('corejumptimeoutfromautosummaryalreadytouchhair', [

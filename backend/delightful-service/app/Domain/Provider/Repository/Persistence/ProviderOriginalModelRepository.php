@@ -101,7 +101,7 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
         // mergeresult
         $allModels = array_merge($systemModels, $organizationModels);
 
-        // 按 id descendingsort
+        // by id descendingsort
         usort($allModels, static function (array $a, array $b) {
             return $b['id'] <=> $a['id'];
         });

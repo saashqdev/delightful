@@ -277,7 +277,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the theme and specific requirements of the PPT, or upload files, Be Delightful will help you create a beautiful PPT. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您caninput PPT themeandspecificrequire,oruploadfile,exceedslevelMagicwillforyou制asexquisite PPT. Enter send ; Shift + Enter exchangeline',
+                    'zh_CN' => 'youcaninput PPT themeandspecificrequire,oruploadfile,exceedslevelMagicwillforyou制asexquisite PPT. Enter send ; Shift + Enter exchangeline',
                 ]),
                 'identifier' => 'ppt',
                 'icon' => 'IconPresentation',
@@ -304,7 +304,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can select data sources or upload Excel files, and then enter the requirements for analysis. Be Delightful will perform comprehensive data analysis for you. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您optional择datasourceorupload Excel fileback,inputneedanalyzerequirement,exceedslevelMagicwillfor您conductallsurfacedataanalyze. Enter send ; Shift + Enter exchangeline',
+                    'zh_CN' => 'youoptional择datasourceorupload Excel fileback,inputneedanalyzerequirement,exceedslevelMagicwillforyouconductallsurfacedataanalyze. Enter send ; Shift + Enter exchangeline',
                 ]),
                 'identifier' => 'data_analysis',
                 'icon' => 'IconChartBarPopular',
@@ -331,7 +331,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the theme and specific requirements of your research report, or upload a file, and Super Maggie will write a complete and detailed report for you. Press Enter to send; press Shift + Enter to wrap lines.',
-                    'zh_CN' => '您caninputresearchreportthemeandspecificrequirement,oruploadfile,exceedslevelMagicwillfor您conductcompleteanddetailedreportwrite. Enter send ; Shift + Enter exchangeline',
+                    'zh_CN' => 'youcaninputresearchreportthemeandspecificrequirement,oruploadfile,exceedslevelMagicwillforyouconductcompleteanddetailedreportwrite. Enter send ; Shift + Enter exchangeline',
                 ]),
                 'identifier' => 'report',
                 'icon' => 'IconMicroscope',
@@ -358,7 +358,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Be Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您caninputwill议textcontent,oruploadwill议recordingfile,exceedslevelMagicwillfor您conductcompletewill议summary. Enter send ; Shift + Enter exchangeline',
+                    'zh_CN' => 'youcaninputwill议textcontent,oruploadwill议recordingfile,exceedslevelMagicwillforyouconductcompletewill议summary. Enter send ; Shift + Enter exchangeline',
                 ]),
                 'identifier' => 'summary',
                 'icon' => 'IconFileDescription',
@@ -381,11 +381,11 @@ class ModeInitializer
                 'id' => '821139958364049409',
                 'name_i18n' => json_encode([
                     'en_US' => 'General',
-                    'zh_CN' => '通usemodetype',
+                    'zh_CN' => 'commonusemodetype',
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Be Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => 'pleaseinput您requirement,oruploadfile,exceedslevelMagicwillfor您resolveissue. Enter send ; Shift + Enter exchangeline',
+                    'zh_CN' => 'pleaseinputyourequirement,oruploadfile,exceedslevelMagicwillforyouresolveissue. Enter send ; Shift + Enter exchangeline',
                 ]),
                 'identifier' => 'general',
                 'icon' => 'IconBeDelightful',

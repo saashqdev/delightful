@@ -10,15 +10,15 @@ namespace App\Infrastructure\ImageGenerate;
 use App\Domain\ImageGenerate\Contract\FontProviderInterface;
 
 /**
- * default字bodyprovidepersonimplement
- * opensourceprojectmiddledefaultimplement,providefoundation字bodyfeature
- * enterpriseprojectcanpassdependencyinjectioncoveragethisimplementcomeprovidehighlevel字bodyfeature.
+ * defaultfieldbodyprovidepersonimplement
+ * opensourceprojectmiddledefaultimplement,providefoundationfieldbodyfeature
+ * enterpriseprojectcanpassdependencyinjectioncoveragethisimplementcomeprovidehighlevelfieldbodyfeature.
  */
 class DefaultFontProvider implements FontProviderInterface
 {
     /**
-     * getTTF字bodyfilepath.
-     * opensourceversionnotprovideTTF字bodyfile.
+     * getTTFfieldbodyfilepath.
+     * opensourceversionnotprovideTTFfieldbodyfile.
      */
     public function getFontPath(): ?string
     {
@@ -26,7 +26,7 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * detectwhethersupportTTF字bodyrender.
+     * detectwhethersupportTTFfieldbodyrender.
      * opensourceversiononlysupportinsideset fieldbody.
      */
     public function supportsTTF(): bool
@@ -51,7 +51,7 @@ class DefaultFontProvider implements FontProviderInterface
     public function hasTransparency($image): bool
     {
         if (! imageistruecolor($image)) {
-            // 調color板graphlikechecktransparentcolorindex
+            // 调color板graphlikechecktransparentcolorindex
             return imagecolortransparent($image) !== -1;
         }
 

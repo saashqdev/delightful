@@ -23,7 +23,7 @@ use Hyperf\Contract\TranslatorInterface;
 use Throwable;
 
 /**
- * AIcan力applicationservice.
+ * AIcancapabilityapplicationservice.
  */
 class AiAbilityAppService extends AbstractKernelAppService
 {
@@ -34,7 +34,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * get haveAIcan力list.
+     * get haveAIcancapabilitylist.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @return array<AiAbilityListDTO>
@@ -51,10 +51,10 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * getAIcan力detail.
+     * getAIcancapabilitydetail.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
-     * @param string $code can力code
+     * @param string $code cancapabilitycode
      */
     public function getDetail(DelightfulUserAuthorization $authorization, string $code): AiAbilityDetailDTO
     {
@@ -67,7 +67,7 @@ class AiAbilityAppService extends AbstractKernelAppService
             ExceptionBuilder::throw(ServiceProviderErrorCode::AI_ABILITY_NOT_FOUND);
         }
 
-        // getcan力detail
+        // getcancapabilitydetail
         $entity = $this->aiAbilityDomainService->getByCode($dataIsolation, $codeEnum);
 
         $locale = $this->translator->getLocale();
@@ -75,7 +75,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * updateAIcan力.
+     * updateAIcancapability.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @param UpdateAiAbilityRequest $request updaterequest
@@ -117,7 +117,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * initializeAIcan力data(fromconfigurationfilesynctodatabase).
+     * initializeAIcancapabilitydata(fromconfigurationfilesynctodatabase).
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @return int initializequantity

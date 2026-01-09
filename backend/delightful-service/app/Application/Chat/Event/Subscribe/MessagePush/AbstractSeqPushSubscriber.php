@@ -19,7 +19,7 @@ use Throwable;
 /**
  * messagepushmodepiece.
  * according togenerateseqbyanditprioritylevel,uselongconnectpushgiveuser.
- * eachseqmaybewant推giveuser1to几tencustomerclient.
+ * eachseqmaybewantpushgiveuser1toseveraltencustomerclient.
  */
 abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
 {
@@ -58,7 +58,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                     return Result::ACK;
                 }
                 $this->addSeqRetryNumber($seqRetryKey);
-                // recordseqtrypushcount,useatback続judgewhetherneedretry
+                // recordseqtrypushcount,useatbackcontinuejudgewhetherneedretry
                 $this->delightfulSeqAppService->pushSeq($seqId);
                 // noterror,notagainre-push
                 $this->setSeqCanNotRetry($seqRetryKey);

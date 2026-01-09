@@ -29,7 +29,7 @@ class ProviderConfigModelsDTO extends ProviderConfigDTO
         parent::__construct($data);
     }
 
-    // ===== model相closefieldGetter/Setter =====
+    // ===== modelrelatedclosefieldGetter/Setter =====
 
     /**
      * @return ProviderModelDetailDTO[]

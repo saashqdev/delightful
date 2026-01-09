@@ -17,7 +17,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Delightful\FlowExprEngine\Component;
 use Hyperf\Odin\Message\UserMessage;
 
-#[FlowNodeDefine(type: NodeType::IntentRecognition->value, code: NodeType::IntentRecognition->name, name: '意graphidentify', paramsConfig: IntentRecognitionNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: true, needOutput: false)]
+#[FlowNodeDefine(type: NodeType::IntentRecognition->value, code: NodeType::IntentRecognition->name, name: 'intentiongraphidentify', paramsConfig: IntentRecognitionNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: true, needOutput: false)]
 class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 {
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void
@@ -25,7 +25,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
         /** @var IntentRecognitionNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        // 意graph
+        // intentiongraph
         $input = $this->node->getInput()?->getForm()?->getForm()?->getKeyValue($executionData->getExpressionFieldData(), true) ?? [];
         $vertexResult->setInput($input);
         $intent = $input['intent'] ?? '';
@@ -52,7 +52,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
             $title = $titleComponent?->getValue()?->getResult($executionData->getExpressionFieldData());
             if (! is_string($title) || $title === '') {
-                ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'common.empty', ['label' => '意graphname']);
+                ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'common.empty', ['label' => 'intentiongraphname']);
             }
             $desc = $descComponent?->getValue()?->getResult($executionData->getExpressionFieldData()) ?? '';
             if (! is_string($desc)) {
@@ -70,7 +70,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         $systemPrompt = $this->createSystemPrompt($intentPrompts);
 
-        // if意graphidentifystartfromautoloadmemory,thatwhatneed剔exceptcurrentmessage
+        // ifintentiongraphidentifystartfromautoloadmemory,thatwhatneed剔exceptcurrentmessage
         $ignoreMessageIds = [];
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
@@ -105,26 +105,26 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         return <<<MARKDOWN
 '# role
-youisone意graphidentifysectionpoint,useatanalyzeuser意graph,youwilltooneshareuserinputcontent,helpIanalyzeoutuser意graphandconfidencedegree.
-resultneedinqualifier意graphrangemiddle.
+youisoneintentiongraphidentifysectionpoint,useatanalyzeuserintentiongraph,youwilltooneshareuserinputcontent,helpIanalyzeoutuserintentiongraphandconfidencedegree.
+resultneedinqualifierintentiongraphrangemiddle.
 
-# 技can - 意graphidentify
+# 技can - intentiongraphidentify
 willyouresponseformat化for JSON object,formatlikedown:
 {
     "whetheridentify": true,
     "identifyfailreason": "",
     "mostbest wishesgraph": "eat",
-    "matchto意graphhave": [
+    "matchtointentiongraphhave": [
         {
-            "意graph": "eat",
+            "intentiongraph": "eat",
             "confidencedegree": 0.8
         },
         {
-            "意graph": "睡觉",
+            "intentiongraph": "睡觉",
             "confidencedegree": 0.1
         },
         {
-            "意graph": "打游戏",
+            "intentiongraph": "打游戏",
             "confidencedegree": 0.1
         }
     ],
@@ -133,17 +133,17 @@ willyouresponseformat化for JSON object,formatlikedown:
 }    
 
 # process
-1. youwilltooneshareuserinputcontent,helpIanalyzeoutuser意graphandconfidencedegree.
-2. inferenceuser意graph,willinferenceprocedureputto JSON middle deduceprocedure field,explainforwhatwilloutthisthese意graphandconfidencedegree.
-3. ifidentifyto意graph,pleasefill inmost佳matchandmatchto意graph,whetheridentifyfor true,mostbest wishesgraph onesetisconfidencedegreemosthigh,itsmiddle matchto意graphhave fieldisaccording to confidencedegree frombigtosmallrowcolumn.
-4. ifincurrentrangenothavefindtoany意graph,whetheridentifyfor false,pleasefill inidentifyfailreason,most佳matchandmatchto意graphallshouldisempty.
-5. onlywillreturn JSON format,notwillagainreturnothercontent,ifonesetneedhavereturn,please releasetoremarkmiddle,return答contentonesetcanbe JSON toolparse.
+1. youwilltooneshareuserinputcontent,helpIanalyzeoutuserintentiongraphandconfidencedegree.
+2. inferenceuserintentiongraph,willinferenceprocedureputto JSON middle deduceprocedure field,explainforwhatwilloutthistheseintentiongraphandconfidencedegree.
+3. ifidentifytointentiongraph,pleasefill inmost佳matchandmatchtointentiongraph,whetheridentifyfor true,mostbest wishesgraph onesetisconfidencedegreemosthigh,itsmiddle matchtointentiongraphhave fieldisaccording to confidencedegree frombigtosmallrowcolumn.
+4. ifincurrentrangenothavefindtoanyintentiongraph,whetheridentifyfor false,pleasefill inidentifyfailreason,most佳matchandmatchtointentiongraphallshouldisempty.
+5. onlywillreturn JSON format,notwillagainreturnothercontent,ifonesetneedhavereturn,please releasetoremarkmiddle,returnanswercontentonesetcanbe JSON toolparse.
 
 # limit
-- 意graphrangeformatis '意graph':'意graphdescription'.itsmiddle意graphdescriptioncanforempty.意graphand意graphdescriptiononesetisuse '' package裹data.
-- notcanreturn答otherissue,onlycanreturnanswer意graphidentifyissue.
+- intentiongraphrangeformatis 'intentiongraph':'intentiongraphdescription'.itsmiddleintentiongraphdescriptioncanforempty.intentiongraphandintentiongraphdescriptiononesetisuse '' package裹data.
+- notcanreturnanswerotherissue,onlycanreturnanswerintentiongraphidentifyissue.
 
-# needanalyze意graphrangelikedown
+# needanalyzeintentiongraphrangelikedown
 {$content}
 MARKDOWN;
     }

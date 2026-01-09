@@ -247,7 +247,7 @@ class StartInputTemplate
                     "work_number": {
                         "type": "string",
                         "key": "work_number",
-                        "title": "工number",
+                        "title": "workernumber",
                         "description": "",
                         "items": null,
                         "properties": null,

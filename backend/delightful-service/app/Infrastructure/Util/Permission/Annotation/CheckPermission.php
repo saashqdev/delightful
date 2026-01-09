@@ -53,7 +53,7 @@ class CheckPermission extends AbstractAnnotation
 
     /**
      * return havepermissionkeygroup合(resources x operations Cartesianproduct).
-     * whenstatementmultipleresourceormultiple operationsaso clock,permissionpassanyonekey即can.
+     * whenstatementmultipleresourceormultiple operationsaso clock,permissionpassanyonekeyimmediatelycan.
      *
      * @return array<string>
      */
@@ -72,7 +72,7 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * willstring/enumoritsarray統oneforstringarray.
+     * willstring/enumoritsarray统oneforstringarray.
      * @return array<string>
      */
     private function normalizeToValues(array|BackedEnum|string $input): array

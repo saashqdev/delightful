@@ -115,7 +115,7 @@ abstract class AbstractDomainService
 
     /**
      * messageminutehairmodepiece.
-     * willhairitemsidemessagedelivertomqmiddle,useatbackcontinue按messageprioritylevel,delivertoreceiveitemsidemessagestreammiddle.
+     * willhairitemsidemessagedelivertomqmiddle,useatbackcontinuebymessageprioritylevel,delivertoreceiveitemsidemessagestreammiddle.
      */
     public function dispatchSeq(SeqCreatedEvent $seqCreatedEvent): void
     {
@@ -266,7 +266,7 @@ abstract class AbstractDomainService
             'refer_message_id' => '',
             'sender_message_id' => '',
             'conversation_id' => $receiveConversationEntity->getId(),
-            'status' => DelightfulMessageStatus::Read->value, // controlmessagenotneedalreadyreadreturn执
+            'status' => DelightfulMessageStatus::Read->value, // controlmessagenotneedalreadyreadreturnexecute
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => $messageDTO->getAppMessageId(),
@@ -281,12 +281,12 @@ abstract class AbstractDomainService
      * 2.systemapplicationmessage,highprioritylevel
      * 3.apimessage(thethreesidecallgenerate)/100~1000persongroup chat,middleprioritylevel
      * 4.controlmessage/1000personbyupgroup chat,mostlowprioritylevel.
-     * 5.部minutecontrolmessageandchatstrong相close,canprioritylevelsubmittohigh. such asconversationwindowcreate.
+     * 5.departmentminutecontrolmessageandchatstrongrelatedclose,canprioritylevelsubmittohigh. such asconversationwindowcreate.
      */
     public function getControlMessagePriority(DelightfulSeqEntity $seqEntity, ?int $receiveUserCount = 1): MessagePriority
     {
         $messagePriority = MessagePriority::Low;
-        // 部minutecontrolmessageandchatstrong相close,canprioritylevelsubmittohigh. such asprivate chatandpersoncountless than100alreadyreadreturn执
+        // departmentminutecontrolmessageandchatstrongrelatedclose,canprioritylevelsubmittohigh. such asprivate chatandpersoncountless than100alreadyreadreturnexecute
         $seqType = $seqEntity->getSeqType();
         if (! in_array($seqType, ControlMessageType::getMessageStatusChangeType(), true)) {
             return $messagePriority;
@@ -297,7 +297,7 @@ abstract class AbstractDomainService
         }
 
         if (in_array($conversationEntity->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {
-            // private chatmessagealreadyreadreturn执,prioritylevelmosthigh
+            // private chatmessagealreadyreadreturnexecute,prioritylevelmosthigh
             $messagePriority = MessagePriority::High;
         } elseif ($receiveUserCount <= 100 && $seqEntity->getSeqType() === ControlMessageType::SeenMessages) {
             // 100personbyinsidegroup chat,prioritylevelmosthigh
@@ -314,7 +314,7 @@ abstract class AbstractDomainService
     {
         $messageType = $messageDTO->getMessageType();
         $batchResponse = [];
-        // eachitemmessagehairouto clock,thenwillinmessagebodymiddlerecord havereceiveside,by便back続messagestatuschangemore
+        // eachitemmessagehairouto clock,thenwillinmessagebodymiddlerecord havereceiveside,by便backcontinuemessagestatuschangemore
         switch ($messageType) {
             case ControlMessageType::SeenMessages:
                 /** @var MessagesSeen $messageStruct */
@@ -353,7 +353,7 @@ abstract class AbstractDomainService
                         Db::rollBack();
                         throw $exception;
                     }
-                    // batchquantitypushgivefromselfotherdevice,letotherdevicedisplayalreadyread,notagainduplicatesendreturn执
+                    // batchquantitypushgivefromselfotherdevice,letotherdevicedisplayalreadyread,notagainduplicatesendreturnexecute
                     $this->batchPushSeq($seqIds, $messagePriority);
                 }
 
@@ -421,7 +421,7 @@ abstract class AbstractDomainService
                             Db::rollBack();
                             throw $exception;
                         }
-                        // batchquantitypushgivefromselfotherdevice,letotherdevicedisplayalreadyread,notagainduplicatesendreturn执
+                        // batchquantitypushgivefromselfotherdevice,letotherdevicedisplayalreadyread,notagainduplicatesendreturnexecute
                         $this->batchPushSeq($seqIds, $messagePriority);
                     }
                     // poweretc,get refer_message_ids actualo clockstatus,ando clockresponsecustomerclient
@@ -585,7 +585,7 @@ abstract class AbstractDomainService
             // according to appMsgId,givethisitemmessagecreate delightfulMsgId
             $messageDTO->setReceiveId($conversationEntity->getReceiveId());
             $messageDTO->setReceiveType($conversationEntity->getReceiveType());
-            // willconversationidreturn写entercontrolmessagemiddle,便atcustomerclienthandle
+            // willconversationidreturnwriteentercontrolmessagemiddle,便atcustomerclienthandle
             $content = $messageDTO->getContent()->toArray();
             $content['id'] = $conversationEntity->getId();
             $contentChange = MessageAssembler::getMessageStructByArray(
@@ -672,7 +672,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * byatoneitemmessage,in2conversationwindowrendero clock,willgenerate2messageid,thereforeneedparseoutcomereceiveitemsidecan看tomessagequoteid.
+     * byatoneitemmessage,in2conversationwindowrendero clock,willgenerate2messageid,thereforeneedparseoutcomereceiveitemsidecanlooktomessagequoteid.
      * according to delightful_message_id + object_id + object_type findtomessagereceiveitemsiderefer_message_id.
      * Support for the message editing function: For multiple sequences (seqs) of the same object_id, only the one with the smallest seq_id is returned.
      */
@@ -701,7 +701,7 @@ abstract class AbstractDomainService
 
     /**
      * getmessagemost近status.
-     * @param DelightfulSeqEntity[] $seqList multiple refer_message_id 相closeseqList
+     * @param DelightfulSeqEntity[] $seqList multiple refer_message_id relatedcloseseqList
      * @return DelightfulSeqEntity[]
      */
     protected function getMessageLatestStatus(array $referMessageIds, array $seqList): array

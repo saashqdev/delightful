@@ -92,7 +92,7 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     public function execute(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults = []): void
     {
-        // sectionpointrunlinemostbigcountlimit,prevent死loop
+        // sectionpointrunlinemostbigcountlimit,preventdeadloop
         $max = 10000;
         $executeNum = $executionData->getExecuteNum($this->node->getNodeId());
         if ($executeNum >= $max) {
@@ -148,7 +148,7 @@ abstract class NodeRunner implements NodeRunnerInterface
             $debugResult->setSuccess(false);
             $debugResult->setErrorCode((int) $throwable->getCode());
             $debugResult->setErrorMessage($throwable->getMessage());
-            // outshowexceptiono clocknotrunlineback続sectionpoint
+            // outshowexceptiono clocknotrunlinebackcontinuesectionpoint
             $vertexResult->setChildrenIds([]);
             $this->logger->warning('NodeRunnerFailed', [
                 'node_id' => $this->node->getNodeId(),
@@ -222,8 +222,8 @@ abstract class NodeRunner implements NodeRunnerInterface
     abstract protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void;
 
     /**
-     * todo thiswithin暫notimplementduplicateuploadissue,均whenmakenewfileupload
-     * recordprocess producefile,均willmeanwhileuploadtocloud,back続sectionpointneeduseo clockfromexecuteprocessdatamiddleprioritymatch.
+     * todo thiswithintemporarynotimplementduplicateuploadissue,averagewhenmakenewfileupload
+     * recordprocess producefile,averagewillmeanwhileuploadtocloud,backcontinuesectionpointneeduseo clockfromexecuteprocessdatamiddleprioritymatch.
      * @return AbstractAttachment[]
      * @throws SSRFException
      */

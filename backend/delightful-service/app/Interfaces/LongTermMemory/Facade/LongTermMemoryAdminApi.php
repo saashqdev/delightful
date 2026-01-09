@@ -252,7 +252,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $dto->parsePageToken();
         $result = $this->longTermMemoryAppService->findMemories($dto);
 
-        // 按updatetimedescendingsort(PHP sort)
+        // byupdatetimedescendingsort(PHP sort)
         if (isset($result['data']) && is_array($result['data'])) {
             usort($result['data'], static function (array $a, array $b) {
                 $timeB = isset($b['updated_at']) && ! empty($b['updated_at']) ? strtotime($b['updated_at']) : 0;
@@ -625,7 +625,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * verifymemory have权.
+     * verifymemory havepermission.
      *
      * @param mixed $authorization
      * @return array{success: bool, message?: string}

@@ -149,7 +149,7 @@ class VolcengineArkModel extends AbstractImageGenerate
         }
 
         if (empty($imageData)) {
-            $this->logger->error('VolcengineArktext generationgraph: haveimagegenerate均fail', ['rawResults' => $rawResults]);
+            $this->logger->error('VolcengineArktext generationgraph: haveimagegenerateaveragefail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
@@ -246,7 +246,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             }
         }
 
-        // directlycallAPI,exceptionfrom然toup抛
+        // directlycallAPI,exceptionfromthentoup抛
         return $this->api->generateImage($payload);
     }
 
@@ -323,7 +323,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // VolcengineArk APIeachtimeonlycangenerateone張graph,passandhaircallimplementmultiplegraphgenerate
+        // VolcengineArk APIeachtimeonlycangenerateone张graph,passandhaircallimplementmultiplegraphgenerate
         $count = $imageGenerateRequest->getGenerateNum();
         $rawResults = [];
         $errors = [];
@@ -368,7 +368,7 @@ class VolcengineArkModel extends AbstractImageGenerate
 
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('VolcengineArktext generationgraph: haveimagegenerate均fail', ['errors' => $errors]);
+            $this->logger->error('VolcengineArktext generationgraph: haveimagegenerateaveragefail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 

@@ -221,7 +221,7 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * transferletorganizationcreateperson身share.
+     * transferletorganizationcreatepersonbodyshare.
      */
     public function transferOrganizationCreator(DataIsolation $dataIsolation, string $currentCreatorUserId, string $newCreatorUserId, string $operatorUserId): void
     {
@@ -235,15 +235,15 @@ class OrganizationAdminDomainService
         $newCreator = $this->getByUserId($dataIsolation, $newCreatorUserId);
         if (! $newCreator) {
             // ifnewcreatepersonalsonotisadministrator,firstgrantadministratorpermission
-            $newCreator = $this->grant($dataIsolation, $newCreatorUserId, $operatorUserId, 'transferletorganizationcreateperson身shareo clockfromautograntadministratorpermission');
+            $newCreator = $this->grant($dataIsolation, $newCreatorUserId, $operatorUserId, 'transferletorganizationcreatepersonbodyshareo clockfromautograntadministratorpermission');
         }
 
-        // cancelcurrentcreatepersoncreateperson身share
+        // cancelcurrentcreatepersoncreatepersonbodyshare
         $currentCreator->unmarkAsOrganizationCreator();
         $currentCreator->prepareForModification();
         $this->organizationAdminRepository->save($dataIsolation, $currentCreator);
 
-        // grantnewcreatepersoncreateperson身share
+        // grantnewcreatepersoncreatepersonbodyshare
         $newCreator->markAsOrganizationCreator();
         $newCreator->prepareForModification();
         $this->organizationAdminRepository->save($dataIsolation, $newCreator);

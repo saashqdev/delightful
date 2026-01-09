@@ -13,7 +13,7 @@ use App\Domain\ImageGenerate\ValueObject\WatermarkConfig;
 /**
  * defaultwatermarkconfigurationimplement
  * opensourceprojectmiddledefaultimplement,notenablewatermark
- * enterpriseprojectcanpassinheritor重newimplementcomeprovidespecificwatermarklogic.
+ * enterpriseprojectcanpassinheritorreloadnewimplementcomeprovidespecificwatermarklogic.
  */
 class DefaultWatermarkConfig implements WatermarkConfigInterface
 {

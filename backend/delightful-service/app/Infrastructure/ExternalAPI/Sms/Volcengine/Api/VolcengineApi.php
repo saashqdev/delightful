@@ -98,7 +98,7 @@ abstract class VolcengineApi
 
     public function __construct(ClientFactory $clientFactory, StdoutLoggerInterface $logger, string $region = self::CHINA_REGION)
     {
-        // 部minutepublicfixedparameterinconstructparametermiddlecertain
+        // departmentminutepublicfixedparameterinconstructparametermiddlecertain
         $this->setRegion($region);
         $this->setSecretKey(config('sms.volcengine.secretKey'));
         $this->setAccessKey(config('sms.volcengine.accessKey'));
@@ -165,7 +165,7 @@ abstract class VolcengineApi
 
     protected function addHeader(string $key, $value): void
     {
-        // 字sectionsiderequestheadvalueisarray,才can参andback続signature
+        // fieldsectionsiderequestheadvalueisarray,onlycan参andbackcontinuesignature
         $value = is_array($value) ? $value : [$value];
         $this->headers[$key] = $value;
     }

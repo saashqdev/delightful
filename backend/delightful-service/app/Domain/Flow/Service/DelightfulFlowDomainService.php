@@ -185,7 +185,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
         $startNodeParamsConfig->validate();
         $routineConfigs = $startNodeParamsConfig->getRoutineConfigs();
 
-        // useprocess code asforoutside部 id
+        // useprocess code asforoutsidedepartment id
         $externalId = $delightfulFlow->getCode();
         $retryTimes = 2;
         $callbackMethod = [DelightfulFlowExecuteAppService::class, 'routine'];
@@ -193,7 +193,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
             'flowCode' => $delightfulFlow->getCode(),
         ];
 
-        // firstcleanuponedownhistoryscheduletaskand調degreerule
+        // firstcleanuponedownhistoryscheduletaskand调degreerule
         $this->taskSchedulerDomainService->clearByExternalId($externalId);
 
         foreach ($routineConfigs as $branchId => $routineConfig) {
@@ -210,7 +210,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
 
             $callbackParams['branchId'] = $branchId;
             $callbackParams['routineConfig'] = $routineConfig->toConfigArray();
-            // ifisnotduplicate,thatwhatisdirectlycreate調degreetask
+            // ifisnotduplicate,thatwhatisdirectlycreate调degreetask
             if ($routineConfig->getType() === RoutineType::NoRepeat) {
                 $taskScheduler = new TaskScheduler();
                 $taskScheduler->setExternalId($externalId);

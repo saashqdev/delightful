@@ -22,7 +22,7 @@ enum DelightfulFlowMessageType: string
     case Audio = 'audio';
     case File = 'file';
 
-    // thisis暫o clock,itselfshouldnotwillexistsinthis,利usecardmessageshapetypecomeimplement才to
+    // thisistemporaryo clock,itselfshouldnotwillexistsinthis,利usecardmessageshapetypecomeimplementonlyto
     case AIMessage = 'ai_message';
 
     public function isAttachment(): bool
@@ -54,7 +54,7 @@ enum DelightfulFlowMessageType: string
             ExceptionBuilder::throw(FlowErrorCode::MessageError, 'flow.node.message.type_error');
         }
 
-        // all部parse,fetch on demanduse
+        // alldepartmentparse,fetch on demanduse
         $contentComponent = ComponentFactory::fastCreate($params['content'] ?? []);
         $linkComponent = ComponentFactory::fastCreate($params['link'] ?? []);
         $linkDescComponent = ComponentFactory::fastCreate($params['link_desc'] ?? []);

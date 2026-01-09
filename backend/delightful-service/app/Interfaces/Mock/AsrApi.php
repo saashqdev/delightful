@@ -171,13 +171,13 @@ class AsrApi
 
         // ifhavenotefileconfigurationandfilesize > 0,addtoreturnmiddle(mocktrueactualsandboxnotefilecontentcheck)
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
-            // userequestmiddleprovide target_path,whilenotis硬encodingfilename
+            // userequestmiddleprovide target_path,whilenotishardencodingfilename
             // this样cancorrectsupportinternationalizationfilename
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 
-            // mocktrueactualsandboxlinefor:onlywhennotefilehavecontento clock才returndetailedinfo
-            // thiswithinsimplifyprocess,defaultfalse设havecontent(trueactualsandboxwillcheckfilecontentwhetherforempty)
+            // mocktrueactualsandboxlinefor:onlywhennotefilehavecontento clockonlyreturndetailedinfo
+            // thiswithinsimplifyprocess,defaultfalsesethavecontent(trueactualsandboxwillcheckfilecontentwhetherforempty)
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
                 'path' => $noteFilePath, // userequestmiddle target_path
@@ -220,7 +220,7 @@ class AsrApi
             'workspace_dir' => $workspaceDir,
         ]);
 
-        // cleanuptask相close Redis status
+        // cleanuptaskrelatedclose Redis status
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $this->redis->del($countKey);
 

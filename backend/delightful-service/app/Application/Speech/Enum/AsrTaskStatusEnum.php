@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace App\Application\Speech\Enum;
 
 /**
- * ASR taskstatusenum(inside部businessprocess).
+ * ASR taskstatusenum(insidedepartmentbusinessprocess).
  *
- * 【asuse域】inside部system - delightful-service businesslayer
+ * 【asuse域】insidedepartmentsystem - delightful-service businesslayer
  * 【use途】tableshow ASR recordingsummarytaskalllifeperiodstatus
  * 【usescenario】
  * - taskstatuspersistence(Redis/database)
@@ -19,16 +19,16 @@ namespace App\Application\Speech\Enum;
  *
  * 【andotherenumdifference】
  * - AsrRecordingStatusEnum: frontclientrecordingactualo clockstatus(recordinginteractionlayer)
- * - AsrTaskStatusEnum: inside部taskallprocessstatus(businessmanagelayer)✓ current
+ * - AsrTaskStatusEnum: insidedepartmenttaskallprocessstatus(businessmanagelayer)✓ current
  * - SandboxAsrStatusEnum: sandboxmergetaskstatus(infrastructurelayer)
  *
  * 【statusstreamtransfer】created → processing → completed | failed
  */
 enum AsrTaskStatusEnum: string
 {
-    case CREATED = 'created';              // alreadycreate:taskinitializecomplete,etc待process
+    case CREATED = 'created';              // alreadycreate:taskinitializecomplete,etcpendingprocess
     case PROCESSING = 'processing';        // processmiddle:justinexecuterecording,mergeorsummary
-    case COMPLETED = 'completed';          // alreadycomplete:整 ASR processall部complete(includemessagesend)
+    case COMPLETED = 'completed';          // alreadycomplete:整 ASR processalldepartmentcomplete(includemessagesend)
     case FAILED = 'failed';                // fail:taskexecutefail
 
     /**

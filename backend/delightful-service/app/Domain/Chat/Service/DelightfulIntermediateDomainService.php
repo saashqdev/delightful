@@ -21,7 +21,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Throwable;
 
 /**
- * temporarymessage相close.
+ * temporarymessagerelatedclose.
  */
 class DelightfulIntermediateDomainService extends AbstractDomainService
 {

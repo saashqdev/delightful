@@ -23,7 +23,7 @@ return new class extends Migration {
         // clearnullofficialorganization Delightful servicequotientconfigurationandmodel(putindeletesoftdeletedataoffront)
         $this->cleanOfficialDelightfulProviderData();
 
-        // cleanup service_provider 相closefour張tablemiddlesoftdeletedata
+        // cleanup service_provider relatedclosefour张tablemiddlesoftdeletedata
         $this->cleanSoftDeletedData();
 
         // clean service_provider tablemiddle provider_code='Official' record
@@ -42,12 +42,12 @@ return new class extends Migration {
     }
 
     /**
-     * cleanup service_provider 相closetablemiddlesoftdeletedata.
+     * cleanup service_provider relatedclosetablemiddlesoftdeletedata.
      */
     private function cleanSoftDeletedData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('startcleanup service_provider 相closetablesoftdeletedata');
+        $logger->info('startcleanup service_provider relatedclosetablesoftdeletedata');
 
         try {
             // usetransactionensuredataonetoproperty
@@ -82,7 +82,7 @@ return new class extends Migration {
                 $totalDeleted += $deletedCount;
                 $logger->info("delete service_provider_original_models tablesoftdeletedata: {$deletedCount} item");
 
-                $logger->info("service_provider 相closetablesoftdeletedatacleanupcomplete,totaldelete: {$totalDeleted} itemrecord");
+                $logger->info("service_provider relatedclosetablesoftdeletedatacleanupcomplete,totaldelete: {$totalDeleted} itemrecord");
             });
         } catch (Throwable $e) {
             $logger->error('cleanupsoftdeletedataproceduremiddlehairgenerateerror: ' . $e->getMessage());
@@ -246,7 +246,7 @@ return new class extends Migration {
 
             $logger->info('needcleanuporganizationquantity: ' . count($allOrganizationCodes));
 
-            // 5. 按organizationhandlecleanupwork(smalltransaction)
+            // 5. byorganizationhandlecleanupwork(smalltransaction)
             $this->cleanOrganizationsInBatches($allOrganizationCodes, $officialModelIds, $officialEnabledModels, $logger);
         } catch (Throwable $e) {
             $logger->error('cleanup service_provider_models redundantremainderdataproceduremiddlehairgenerateerror: ' . $e->getMessage());
@@ -295,7 +295,7 @@ return new class extends Migration {
                 }, $organizationCode);
             }
 
-            // executeandhairtaskandetc待result
+            // executeandhairtaskandetcpendingresult
             $results = $parallel->wait();
 
             // handleresult
@@ -344,7 +344,7 @@ return new class extends Migration {
             // 1. delete have is_office = 1 data(guard:nonofficialorganization)
             $isOfficeDeletedCount = Db::table('service_provider_models')
                 ->where('organization_code', $organizationCode)
-                ->where('organization_code', '!=', $officialOrganizationCode) // double重guard
+                ->where('organization_code', '!=', $officialOrganizationCode) // doublereloadguard
                 ->where('is_office', 1)
                 ->whereNull('deleted_at')
                 ->delete();
@@ -441,7 +441,7 @@ return new class extends Migration {
         // 5. batchquantitydeletequotenotexistsinconfigurationmodel
         return Db::table('service_provider_models')
             ->where('organization_code', $organizationCode)
-            ->where('organization_code', '!=', $officialOrganizationCode) // double重guard
+            ->where('organization_code', '!=', $officialOrganizationCode) // doublereloadguard
             ->whereIn('service_provider_config_id', $invalidConfigIds)
             ->delete();
     }
@@ -484,7 +484,7 @@ return new class extends Migration {
         // 3. batchquantitydeleteuseinvalidconfigurationmodel
         return Db::table('service_provider_models')
             ->where('organization_code', $organizationCode)
-            ->where('organization_code', '!=', $officialOrganizationCode) // double重guard
+            ->where('organization_code', '!=', $officialOrganizationCode) // doublereloadguard
             ->whereIn('service_provider_config_id', $invalidConfigIds)
             ->delete();
     }

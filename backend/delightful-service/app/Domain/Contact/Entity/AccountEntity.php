@@ -53,7 +53,7 @@ class AccountEntity extends AbstractEntity
     protected int $delightfulEnvironmentId = 0;
 
     /**
-     * 密码(SHA256encrypt).
+     * password(SHA256encrypt).
      */
     protected string $password = '';
 

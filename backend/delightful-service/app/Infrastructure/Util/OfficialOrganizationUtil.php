@@ -9,7 +9,7 @@ namespace App\Infrastructure\Util;
 
 /**
  * 官方organizationtoolcategory
- * 统onemanage官方organization相closeconfigurationandjudge逻辑.
+ * 统onemanage官方organization相closeconfigurationandjudgelogic.
  */
 class OfficialOrganizationUtil
 {

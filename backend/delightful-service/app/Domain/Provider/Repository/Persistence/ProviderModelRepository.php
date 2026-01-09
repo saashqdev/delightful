@@ -106,7 +106,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
 
     public function saveModel(ProviderDataIsolation $dataIsolation, SaveProviderModelDTO $dto): ProviderModelEntity
     {
-        // settingorganizationencoding(优先useDTOmiddleorganizationencoding,否thenusecurrentdata隔离middle)
+        // settingorganizationencoding(优先useDTOmiddleorganizationencoding,nothenusecurrentdata隔离middle)
         $dto->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
 
         $data = $dto->toArray();
@@ -130,7 +130,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * updatemodelstatus(support写o clockcopy逻辑).
+     * updatemodelstatus(support写o clockcopylogic).
      */
     public function updateStatus(ProviderDataIsolation $dataIsolation, string $id, Status $status): void
     {
@@ -148,7 +148,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             // organizationnotone致:judgemodel所属organizationwhetheris官方organization
             if ($this->isOfficialOrganization($modelOrganizationCode)
                 && ! $this->isOfficialOrganization($currentOrganizationCode)) {
-                // model属at官方organizationandcurrentorganizationnotis官方organization:走写o clockcopy逻辑
+                // model属at官方organizationandcurrentorganizationnotis官方organization:走写o clockcopylogic
                 $organizationModelId = $this->delightfulProviderAndModels->updateDelightfulModelStatus($dataIsolation, $model);
             } else {
                 // other情况:nopermission操as
@@ -189,7 +189,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             return $this->delightfulProviderAndModels->getDelightfulEnableModels($dataIsolation->getCurrentOrganizationCode(), $providerEntity->getCategory());
         }
 
-        // non官方servicequotient,按原逻辑queryfinger定configurationdownmodel
+        // non官方servicequotient,按原logicqueryfinger定configurationdownmodel
         if (! is_numeric($configId)) {
             return [];
         }
@@ -228,7 +228,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             return $allModels;
         }
 
-        // cachenot命middle,execute原逻辑
+        // cachenot命middle,execute原logic
         // 1. 先queryorganizationdownenableservicequotientconfigurationID
         $builder = ProviderConfigModel::query();
 

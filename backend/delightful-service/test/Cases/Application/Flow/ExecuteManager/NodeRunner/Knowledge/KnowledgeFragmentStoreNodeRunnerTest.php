@@ -212,7 +212,7 @@ JSON, true));
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
             'vector_database_id' => 'KNOWLEDGE-674d1987228b42-90330502',
-            'content' => 'Q: Ifor什么wantin述职准备upflowertime? A: false设youitselfwork产outis90minute,onegood述职呈现canwillyouthis 90 minutework完美ground呈现give所haveperson,butoneincontent结构,validinfoquantityandcan读propertyupallnot尽如person意 PPT maybeonlycan呈现outyou30minuteworkbecomefruit. andand,ifyouin述职表达and呈现方surface做verynot尽如person意,nothavebody现out结构化思考method,nothave SMART notcome规划,that么同样,youinday常departmentwill议middle沟通协ascan力,workmiddle逻辑思维can力,fromImanageand规划can力alsowill备受quality疑. 述职oftenisonepersonday常forperson处事statedegree良good影射,优秀personoftennot吝atto公众showfrom己becomefruit,thisalsoisfor什么like GitHub this样open源社区will存in,and汇聚bigquantity优秀person才. meanwhile,述职alsoisonenon常珍贵,letyouhave机will解itsitpersonin做什么场域.',
+            'content' => 'Q: Ifor什么wantin述职准备upflowertime? A: false设youitselfwork产outis90minute,onegood述职呈现canwillyouthis 90 minutework完美ground呈现give所haveperson,butoneincontent结构,validinfoquantityandcan读propertyupallnot尽如person意 PPT maybeonlycan呈现outyou30minuteworkbecomefruit. andand,ifyouin述职表达and呈现方surface做verynot尽如person意,nothavebody现out结构化思考method,nothave SMART notcome规划,that么同样,youinday常departmentwill议middle沟通协ascan力,workmiddlelogic思维can力,fromImanageand规划can力alsowill备受quality疑. 述职oftenisonepersonday常forperson处事statedegree良good影射,优秀personoftennot吝atto公众showfrom己becomefruit,thisalsoisfor什么like GitHub this样open源社区will存in,and汇聚bigquantity优秀person才. meanwhile,述职alsoisonenon常珍贵,letyouhave机will解itsitpersonin做什么场域.',
             'business_id' => '',
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -325,7 +325,7 @@ JSON, true));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'content' => 'Q: Ifor什么wantin述职准备upflowertime? A: false设youitselfwork产outis90minute,onegood述职呈现canwillyouthis 90 minutework完美ground呈现give所haveperson,butoneincontent结构,validinfoquantityandcan读propertyupallnot尽如person意 PPT maybeonlycan呈现outyou30minuteworkbecomefruit. andand,ifyouin述职表达and呈现方surface做verynot尽如person意,nothavebody现out结构化思考method,nothave SMART notcome规划,that么同样,youinday常departmentwill议middle沟通协ascan力,workmiddle逻辑思维can力,fromImanageand规划can力alsowill备受quality疑. 述职oftenisonepersonday常forperson处事statedegree良good影射,优秀personoftennot吝atto公众showfrom己becomefruit,thisalsoisfor什么like GitHub this样open源社区will存in,and汇聚bigquantity优秀person才. meanwhile,述职alsoisonenon常珍贵,letyouhave机will解itsitpersonin做什么场域.',
+            'content' => 'Q: Ifor什么wantin述职准备upflowertime? A: false设youitselfwork产outis90minute,onegood述职呈现canwillyouthis 90 minutework完美ground呈现give所haveperson,butoneincontent结构,validinfoquantityandcan读propertyupallnot尽如person意 PPT maybeonlycan呈现outyou30minuteworkbecomefruit. andand,ifyouin述职表达and呈现方surface做verynot尽如person意,nothavebody现out结构化思考method,nothave SMART notcome规划,that么同样,youinday常departmentwill议middle沟通协ascan力,workmiddlelogic思维can力,fromImanageand规划can力alsowill备受quality疑. 述职oftenisonepersonday常forperson处事statedegree良good影射,优秀personoftennot吝atto公众showfrom己becomefruit,thisalsoisfor什么like GitHub this样open源社区will存in,and汇聚bigquantity优秀person才. meanwhile,述职alsoisonenon常珍贵,letyouhave机will解itsitpersonin做什么场域.',
             'business_id' => '',
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -433,7 +433,7 @@ JSON, true));
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
             'vector_database_id' => ConstValue::KNOWLEDGE_USER_CURRENT_TOPIC,
-            'content' => 'Q: Ifor什么wantin述职准备upflowertime? A: false设youitselfwork产outis90minute,onegood述职呈现canwillyouthis 90 minutework完美ground呈现give所haveperson,butoneincontent结构,validinfoquantityandcan读propertyupallnot尽如person意 PPT maybeonlycan呈现outyou30minuteworkbecomefruit. andand,ifyouin述职表达and呈现方surface做verynot尽如person意,nothavebody现out结构化思考method,nothave SMART notcome规划,that么同样,youinday常departmentwill议middle沟通协ascan力,workmiddle逻辑思维can力,fromImanageand规划can力alsowill备受quality疑. 述职oftenisonepersonday常forperson处事statedegree良good影射,优秀personoftennot吝atto公众showfrom己becomefruit,thisalsoisfor什么like GitHub this样open源社区will存in,and汇聚bigquantity优秀person才. meanwhile,述职alsoisonenon常珍贵,letyouhave机will解itsitpersonin做什么场域.',
+            'content' => 'Q: Ifor什么wantin述职准备upflowertime? A: false设youitselfwork产outis90minute,onegood述职呈现canwillyouthis 90 minutework完美ground呈现give所haveperson,butoneincontent结构,validinfoquantityandcan读propertyupallnot尽如person意 PPT maybeonlycan呈现outyou30minuteworkbecomefruit. andand,ifyouin述职表达and呈现方surface做verynot尽如person意,nothavebody现out结构化思考method,nothave SMART notcome规划,that么同样,youinday常departmentwill议middle沟通协ascan力,workmiddlelogic思维can力,fromImanageand规划can力alsowill备受quality疑. 述职oftenisonepersonday常forperson处事statedegree良good影射,优秀personoftennot吝atto公众showfrom己becomefruit,thisalsoisfor什么like GitHub this样open源社区will存in,and汇聚bigquantity优秀person才. meanwhile,述职alsoisonenon常珍贵,letyouhave机will解itsitpersonin做什么场域.',
             'business_id' => '',
         ]);
         $runner->execute($vertexResult, $executionData, []);

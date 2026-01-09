@@ -34,7 +34,7 @@ return new class extends Migration {
             $table->text('path')->comment('departmentpath')->nullable();
             // department直属userperson数
             $table->integer('employee_sum')->comment('department直属userperson数')->default(0);
-            $table->comment('userservicedepartmentandthethree方平台userrecordtable.useatandthethree方平台实o clockdatasync,activaterecordetc');
+            $table->comment('userservicedepartmentandthethree方platformuserrecordtable.useatandthethree方platform实o clockdatasync,activaterecordetc');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['organization_code', 'department_id'], 'org_department_id');

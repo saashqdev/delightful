@@ -27,7 +27,7 @@ class CreateDelightfulApiModelConfigTable extends Migration
             $table->unsignedDecimal('output_cost_per_1000', 40, 6)->comment('1000 token 輸out費use');
             $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('creation time');
             $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('modification time')->nullable();
-            $table->timestamp('deleted_at')->comment('逻辑delete')->nullable();
+            $table->timestamp('deleted_at')->comment('logicdelete')->nullable();
         });
     }
 

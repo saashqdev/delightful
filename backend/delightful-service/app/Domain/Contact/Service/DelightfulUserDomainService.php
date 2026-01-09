@@ -274,7 +274,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * searchusernickname(alldelightful平台retrieve).
+     * searchusernickname(alldelightfulplatformretrieve).
      */
     public function searchUserByNickNameInDelightful(string $query): array
     {

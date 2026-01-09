@@ -41,7 +41,7 @@ interface DelightfulPermissionInterface
     /**
      * getpermissiontree结构.
      *
-     * @param bool $isPlatformOrganization whether平台organization,平台organizationdown才contain platform 平台resourcetree
+     * @param bool $isPlatformOrganization whetherplatformorganization,platformorganizationdown才contain platform platformresourcetree
      */
     public function getPermissionTree(bool $isPlatformOrganization = false): array;
 

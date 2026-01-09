@@ -293,7 +293,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraphlike核core逻辑,returnnativeresult.
+     * generategraphlike核corelogic,returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {

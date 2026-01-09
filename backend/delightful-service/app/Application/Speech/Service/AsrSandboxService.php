@@ -429,7 +429,7 @@ readonly class AsrSandboxService
      * @param string $sandboxId 沙箱ID
      * @param float $finishStartTime starttime
      * @param int $attempt 尝试count
-     * @return null|AsrSandboxMergeResultDTO ifcompletethenreturnresult,否thenreturnnull
+     * @return null|AsrSandboxMergeResultDTO ifcompletethenreturnresult,nothenreturnnull
      * @throws BusinessException ifiserrorstatusthenthrowexception
      */
     private function checkAndHandleResponseStatus(

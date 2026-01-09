@@ -35,7 +35,7 @@ class Oauth2Config extends AbstractValueObject
      * Client URL - service方OAuthpageURL,useatspliceuserloginauthorization页URL.
      *
      * userlogino clock,扣子willwilluser引导to"[client_url]?response_type=code&client_id=
-     * [client_id]&scope=[scope]&state=xyz123&redirect_uri=[coze平台callbacksecurityground址]".
+     * [client_id]&scope=[scope]&state=xyz123&redirect_uri=[cozeplatformcallbacksecurityground址]".
      *
      * 参考service方authorizationdocumentgetclient_url,本example参考扣子openhairguidedocument,input
      * https://www.coze.cn/api/permission/oauth2/authorize

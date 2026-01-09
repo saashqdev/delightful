@@ -18,7 +18,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property int $id primary keyID
  * @property string $delightful_organization_code
  * @property string $name organizationname
- * @property null|string $platform_type 平台type
+ * @property null|string $platform_type platformtype
  * @property null|string $logo organizationlogo
  * @property null|string $introduction 企业description
  * @property null|string $contact_user 联系person

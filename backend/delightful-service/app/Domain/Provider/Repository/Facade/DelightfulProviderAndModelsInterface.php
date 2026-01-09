@@ -50,7 +50,7 @@ interface DelightfulProviderAndModelsInterface
     public function getDelightfulModelById(int $id): ?ProviderModelEntity;
 
     /**
-     * non官方organizationupdate Delightful modelstatus(写o clockcopy逻辑).
+     * non官方organizationupdate Delightful modelstatus(写o clockcopylogic).
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param ProviderModelEntity $officialModel 官方model实body

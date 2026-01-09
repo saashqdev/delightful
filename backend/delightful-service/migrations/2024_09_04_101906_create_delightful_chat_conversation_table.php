@@ -27,11 +27,11 @@ return new class extends Migration {
             $table->string('receive_id', '64')->comment('session另one方id.differentconversation type,idimplicationdifferent.');
             $table->string('receive_organization_code', 64)->comment('收itempersonorganizationencoding');
             // whether免打扰
-            $table->tinyInteger('is_not_disturb')->default(0)->comment('whether免打扰 0否 1is');
+            $table->tinyInteger('is_not_disturb')->default(0)->comment('whether免打扰 0no 1is');
             // whether置top
-            $table->tinyInteger('is_top')->default(0)->comment('whether置top 0否 1is');
+            $table->tinyInteger('is_top')->default(0)->comment('whether置top 0no 1is');
             // whethermark
-            $table->tinyInteger('is_mark')->default(0)->comment('whethermark 0否 1is');
+            $table->tinyInteger('is_mark')->default(0)->comment('whethermark 0no 1is');
             // status
             $table->tinyInteger('status')->default(0)->comment('sessionstatus.0:normal 1:notdisplay 2:delete');
             // current话题 id

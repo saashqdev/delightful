@@ -11,7 +11,7 @@ use App\Domain\ImageGenerate\ValueObject\WatermarkConfig;
 
 /**
  * watermarkconfigurationinterface
- * useatinopen源projectmiddledefinitionwatermarkconfigurationstandard,by企业projectimplementspecific逻辑.
+ * useatinopen源projectmiddledefinitionwatermarkconfigurationstandard,by企业projectimplementspecificlogic.
  */
 interface WatermarkConfigInterface
 {

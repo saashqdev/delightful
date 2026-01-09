@@ -85,7 +85,7 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => 'whenuserinputcontentis想wantconducttext切割o clock,call text_splitter toolcomeconducttext切割',
             'user_prompt' => 'I想thissegmenttext切割onedown:先帝创业nothalfwhilemiddle道崩殂,今daydownthreeminute,益州疲弊,this诚危急存亡之秋also.然侍卫之臣not懈atinside,忠志之士忘身atoutside者,盖追先帝之殊遇,欲报之at陛downalso.诚宜open张圣听,by光先帝遗德,恢弘志士之气,not宜妄from菲薄,引喻失义,by塞忠谏之路also.
-宫middle府middle,俱foronebody,陟罚臧否,not宜异同.若haveas奸犯科andfor忠善者,宜付have司论its刑赏,by昭陛down平明之理,not宜偏私,makeinsideoutside异法also.
+宫middle府middle,俱foronebody,陟罚臧no,not宜异同.若haveas奸犯科andfor忠善者,宜付have司论its刑赏,by昭陛down平明之理,not宜偏私,makeinsideoutside异法also.
 侍middle,侍郎郭攸之,费祎,董允etc,this皆良实,志虑忠纯,isby先帝简拔by遗陛down.愚byfor宫middle之事,事nosize,悉by咨之,然back施line,必can裨补阙漏,have所广益.
 will军to宠,propertyline淑均,晓畅军事,试useat昔day,先帝称之曰can,isby众议举宠for督.愚byfor营middle之事,悉by咨之,必canmakeline阵and睦,优劣所.
 亲贤臣,远smallperson,this先汉所by兴隆also;亲smallperson,远贤臣,thisback汉所by倾颓also.先帝ino clock,eachand臣论this事,not尝not叹息痛恨at桓,灵also.侍middle,尚书,long史,参军,this悉贞良死section之臣,愿陛down亲之信之,then汉室之隆,can计daywhile待also.

@@ -75,7 +75,7 @@ readonly class LoginAppService
             ExceptionBuilder::throw(AuthenticationErrorCode::AccountNotFound);
         }
 
-        // verify密码
+        // verifypassword
         if (! $this->passwordService->verifyPassword($request->getPassword(), $account->getPassword())) {
             ExceptionBuilder::throw(AuthenticationErrorCode::PasswordError);
         }
@@ -93,8 +93,8 @@ readonly class LoginAppService
             ExceptionBuilder::throw(AuthenticationErrorCode::AccountNotFound);
         }
 
-        // verify密码
-        // useSHA256validation密码
+        // verifypassword
+        // useSHA256validationpassword
         if (! $this->passwordService->verifyPassword($request->getPassword(), $account->getPassword())) {
             ExceptionBuilder::throw(AuthenticationErrorCode::PasswordError);
         }

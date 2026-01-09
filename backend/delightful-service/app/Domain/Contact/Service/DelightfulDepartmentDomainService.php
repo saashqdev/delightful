@@ -168,14 +168,14 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     public function getDepartmentRootId(DataIsolation $dataIsolation): string
     {
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
-        // getorganization所属平台type
+        // getorganization所属platformtype
         $platformType = $this->organizationsPlatformRepository->getOrganizationPlatformType($organizationCode);
         if ($platformType === PlatformType::Delightful) {
             // getrootdepartmentID
             return $this->departmentRepository->getDepartmentRootId($organizationCode);
         }
 
-        // according toorganizationencodingand平台typegetrootdepartmentID
+        // according toorganizationencodingandplatformtypegetrootdepartmentID
         return $this->thirdPlatformIdMappingRepository->getDepartmentRootId($organizationCode, $platformType);
     }
 

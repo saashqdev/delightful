@@ -18,7 +18,7 @@ enum SuperPermissionEnum: string
     // processadministrator,目frontonly queryToolSets useto
     case FLOW_ADMIN = 'flow_admin';
 
-    // (thethree方平台)助理administrator
+    // (thethree方platform)助理administrator
     case ASSISTANT_ADMIN = 'assistant_admin';
 
     // bigmodelconfigurationmanage

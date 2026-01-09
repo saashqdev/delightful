@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\OrganizationEnvironment\Entity\Facade;
 
 /**
- * open放平台所haveconfigurationsaveindatabaseonefieldmiddle.
+ * open放platform所haveconfigurationsaveindatabaseonefieldmiddle.
  */
 interface OpenPlatformConfigInterface
 {

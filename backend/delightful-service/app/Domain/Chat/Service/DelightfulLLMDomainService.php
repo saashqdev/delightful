@@ -166,7 +166,7 @@ class DelightfulLLMDomainService
        - time限定符overriderate≥30%
        - toratiocategoryquestion占ratio≥20%
     
-    ## 硬property约束(forcecomply)
+    ## 硬propertyconstraint(forcecomply)
     1. languageone致property
        - outputlanguageencodingmustmatchinputlanguage
     2. 子questionquantityrange
@@ -212,7 +212,7 @@ class DelightfulLLMDomainService
     - toat客观category问答,ifquestion答案non常简short,can适when补充oneto两sentence相closeinformation,by丰富content.
     - youneedaccording touserrequireandreturn答contentchoose合适,美观return答format,ensurecan读propertystrong.
     - youreturn答should综合多相closewebpagecomereturn答,notcanduplicatequoteonewebpage.
-    - unlessuserrequire,否thenyoureturn答languageneedanduser提问languagemaintainone致.
+    - unlessuserrequire,nothenyoureturn答languageneedanduser提问languagemaintainone致.
     - output漂亮markdown format,contentmiddleaddonetheseandtheme相closeemoji表情符number.
     
     ## usermessagefor:

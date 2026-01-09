@@ -114,12 +114,12 @@ abstract class AbstractImageGenerate implements ImageGenerate
                 'owner' => $owner,
                 'error' => $e->getMessage(),
             ]);
-            // lockreleasefailnotimpactbusiness逻辑,butwantrecordlog
+            // lockreleasefailnotimpactbusinesslogic,butwantrecordlog
         }
     }
 
     /**
-     * 统onewatermarkprocess逻辑
+     * 统onewatermarkprocesslogic
      * supportURLandbase64两typeformatimagewatermarkprocess.
      */
     private function applyWatermark(ImageGenerateResponse $response, ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse

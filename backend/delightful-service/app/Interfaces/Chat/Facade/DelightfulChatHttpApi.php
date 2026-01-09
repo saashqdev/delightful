@@ -509,7 +509,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * processchat补all共同逻辑.
+     * processchat补all共同logic.
      */
     protected function handleChatCompletions(array $params, ?string $conversationId, ?string $topicId): array
     {

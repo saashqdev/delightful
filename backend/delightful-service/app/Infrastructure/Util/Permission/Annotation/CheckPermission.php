@@ -46,7 +46,7 @@ class CheckPermission extends AbstractAnnotation
      */
     public function getPermissionKey(): string
     {
-        // forcompatibleold逻辑,returnfirstgroup合key
+        // forcompatibleoldlogic,returnfirstgroup合key
         $keys = $this->getPermissionKeys();
         return $keys[0] ?? '';
     }

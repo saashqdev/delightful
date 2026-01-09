@@ -141,7 +141,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraphlike核core逻辑,returnnativeresult - synccall.
+     * generategraphlike核corelogic,returnnativeresult - synccall.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {

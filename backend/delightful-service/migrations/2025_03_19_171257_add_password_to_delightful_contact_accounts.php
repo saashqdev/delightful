@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_contact_accounts', function (Blueprint $table) {
-            $table->string('password', 128)->comment('密码')->default('');
+            $table->string('password', 128)->comment('password')->default('');
         });
     }
 

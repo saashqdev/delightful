@@ -25,7 +25,7 @@ class NodeDTO extends AbstractFlowDTO
     public string $nodeVersion = '';
 
     /**
-     * sectionpointyuandata,canuseasgivefront端locate,back端onlystorageandshow,nothaveany逻辑.
+     * sectionpointyuandata,canuseasgivefront端locate,back端onlystorageandshow,nothaveanylogic.
      */
     public array $meta = [];
 

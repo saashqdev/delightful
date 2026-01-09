@@ -21,14 +21,14 @@ use function Hyperf\Translation\__;
 enum DelightfulResourceEnum: string
 {
     // ===== toplevel =====
-    case PLATFORM = 'platform'; # 平台manageback台
+    case PLATFORM = 'platform'; # platformmanageback台
     case ADMIN = 'admin'; # organizationmanageback台
     case ADMINPLUS = 'admin_plus'; # organizationmanageback台plus
 
     // ===== twolevel:模piece =====
-    case ADMIN_AI = 'admin.ai'; # 平台manageback台-AImanage
+    case ADMIN_AI = 'admin.ai'; # platformmanageback台-AImanage
     case ADMIN_SAFE = 'admin.safe'; # security管控
-    case PLATFORM_AI = 'platform.ai'; # 平台manageback台-AImanage
+    case PLATFORM_AI = 'platform.ai'; # platformmanageback台-AImanage
     case PLATFORM_SETTING = 'platform.setting'; # systemset
     case PLATFORM_ORGANIZATION = 'platform.organization'; # organizationmanage
     case ADMINPLUS_AI = 'admin_plus.ai'; # organizationmanageback台plus-AImanage
@@ -39,9 +39,9 @@ enum DelightfulResourceEnum: string
     case ADMIN_AI_MODE = 'platform.ai.mode_management'; # AImanage-模typemanagemanage
     case ADMIN_AI_ABILITY = 'platform.ai.ability'; # AImanage-can力manage
     case SAFE_SUB_ADMIN = 'admin.safe.sub_admin';  # security管控-子administrator
-    case PLATFORM_SETTING_PLATFORM_INFO = 'platform.setting.platform_info'; # 平台manage - systemset - 平台info
-    case PLATFORM_SETTING_MAINTENANCE = 'platform.setting.maintenance'; # 平台manage - systeminfo - 维护manage
-    case PLATFORM_ORGANIZATION_LIST = 'platform.organization.list'; # 平台manage - organizationmanage - organizationlist
+    case PLATFORM_SETTING_PLATFORM_INFO = 'platform.setting.platform_info'; # platformmanage - systemset - platforminfo
+    case PLATFORM_SETTING_MAINTENANCE = 'platform.setting.maintenance'; # platformmanage - systeminfo - 维护manage
+    case PLATFORM_ORGANIZATION_LIST = 'platform.organization.list'; # platformmanage - organizationmanage - organizationlist
     case ADMINPLUS_AI_MODEL = 'admin_plus.ai.model_management'; # organizationmanageback台plus-AImanage-modelmanage
 
     /**
@@ -78,7 +78,7 @@ enum DelightfulResourceEnum: string
     public function parent(): ?self
     {
         return match ($this) {
-            // 平台
+            // platform
             self::ADMIN,
             self::ADMINPLUS,
             self::PLATFORM => null,

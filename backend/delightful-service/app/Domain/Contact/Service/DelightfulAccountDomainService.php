@@ -91,7 +91,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         $userId = $this->idGenerator->generate();
         $time = date('Y-m-d H:i:s');
 
-        // useSHA256encrypt密码
+        // useSHA256encryptpassword
         $hashedPassword = $this->passwordService->hashPassword($password);
 
         $this->userRepository->insertUser([
@@ -268,7 +268,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
     }
 
     /**
-     * modifyuser密码
+     * modifyuserpassword
      */
     public function updatePassword(string $delightfulId, string $plainPassword): bool
     {
@@ -276,10 +276,10 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             return false;
         }
 
-        // useSHA256encrypt密码
+        // useSHA256encryptpassword
         $hashedPassword = $this->passwordService->hashPassword($plainPassword);
 
-        // update密码
+        // updatepassword
         $this->accountRepository->updateAccount($delightfulId, [
             'password' => $hashedPassword,
         ]);

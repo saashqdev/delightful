@@ -491,7 +491,7 @@ class AsrApi extends AbstractApi
             }
         }
 
-        // 2. ifnothavefrom Redis gettotitle,then重newgenerate(front端录音orold逻辑)
+        // 2. ifnothavefrom Redis gettotitle,then重newgenerate(front端录音oroldlogic)
         if (empty($generatedTitle)) {
             $generatedTitle = $this->titleGeneratorService->generateTitleForScenario(
                 $userAuthorization,

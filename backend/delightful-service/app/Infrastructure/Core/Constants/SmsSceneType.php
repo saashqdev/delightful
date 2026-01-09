@@ -15,7 +15,7 @@ class SmsSceneType
     public const DEVICE_LOGOUT = 'device_logout';
 
     /**
-     * modify密码
+     * modifypassword
      */
     public const CHANGE_PASSWORD = 'change_password';
 
@@ -50,7 +50,7 @@ class SmsSceneType
     public const ACCOUNT_LOGIN = 'account_login';
 
     /**
-     * 账numberloginbindthethird-party平台.
+     * 账numberloginbindthethird-partyplatform.
      */
     public const ACCOUNT_LOGIN_BIND_THIRD_PLATFORM = 'account_login_bind_third_platform';
 

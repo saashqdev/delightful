@@ -27,7 +27,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * getthethree方平台departmentIDmappingclose系.
+     * getthethree方platformdepartmentIDmappingclose系.
      *
      * @param string[] $thirdDepartmentIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -90,7 +90,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * getthethree方平台userIDmappingclose系.
+     * getthethree方platformuserIDmappingclose系.
      *
      * @param string[] $thirdUserIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -115,7 +115,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query->whereIn('origin_id', $thirdUserIds)
             ->where('mapping_type', ThirdPlatformIdMappingType::User->value);
 
-        // havethese平台多organizationuser id one致(such asday书),thereforequeryo clocknot带organizationencoding
+        // havetheseplatform多organizationuser id one致(such asday书),thereforequeryo clocknot带organizationencoding
         $delightfulOrganizationCode && $query->where('delightful_organization_code', $delightfulOrganizationCode);
         $thirdPlatformIdMappingEntities = [];
         $data = $query->where('third_platform_type', $thirdPlatformType->value);
@@ -127,7 +127,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * get麦吉平台userIDmappingclose系.
+     * get麦吉platformuserIDmappingclose系.
      *
      * @param string[] $delightfulIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -140,7 +140,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query = $this->delightfulContactIdMappingModel::query()
             ->whereIn('new_id', $delightfulIds)
             ->where('mapping_type', ThirdPlatformIdMappingType::User->value);
-        // havethese平台多organizationuser id one致(such asday书),thereforequeryo clocknot带organizationencoding
+        // havetheseplatform多organizationuser id one致(such asday书),thereforequeryo clocknot带organizationencoding
         if ($thirdPlatformType !== PlatformType::Teamshare) {
             $delightfulOrganizationCode && $query->where('delightful_organization_code', $delightfulOrganizationCode);
         }

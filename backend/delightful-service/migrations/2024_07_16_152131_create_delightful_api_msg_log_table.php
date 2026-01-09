@@ -25,7 +25,7 @@ class CreateDelightfulApiMsgLogTable extends Migration
             $table->string('user_id')->comment('userid');
             $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('createtime');
             $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('modifytime')->nullable();
-            $table->timestamp('deleted_at')->comment('逻辑delete')->nullable();
+            $table->timestamp('deleted_at')->comment('logicdelete')->nullable();
         });
     }
 

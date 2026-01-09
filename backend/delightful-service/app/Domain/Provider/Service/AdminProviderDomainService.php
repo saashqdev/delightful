@@ -148,7 +148,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         string $organizationCode,
         bool $throw = true,
     ): ?ProviderConfigEntity {
-        // 1. ifprovide modelId,走new逻辑
+        // 1. ifprovide modelId,走newlogic
         if (! empty($modelId)) {
             return $this->getServiceProviderConfigByModelId($modelId, $organizationCode, $throw);
         }
@@ -541,7 +541,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // 4. batchquantityquery所haveservicequotient
         $providerMap = $this->serviceProviderRepository->getByIds($providerIds);
 
-        // 5. 重建优先levelhandle逻辑
+        // 5. 重建优先levelhandlelogic
         $officialConfig = null;
 
         foreach ($activeModels as $model) {

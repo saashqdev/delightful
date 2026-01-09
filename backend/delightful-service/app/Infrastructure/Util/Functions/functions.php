@@ -116,7 +116,7 @@ if (! function_exists('string_to_hump')) {
     /**
      * down划line转become驼峰命名,defaultsmall驼峰.
      * @param string $string wantconvertstring
-     * @param bool $firstUp whether首字母big写,default否
+     * @param bool $firstUp whether首字母big写,defaultno
      */
     function string_to_hump(string $string, bool $firstUp = false): string
     {

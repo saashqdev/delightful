@@ -331,7 +331,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return null;
         }
 
-        // ifnothaveprovideservicequotientstatus,use原have逻辑(tobackcompatible)
+        // ifnothaveprovideservicequotientstatus,use原havelogic(tobackcompatible)
         if (empty($providerStatuses)) {
             foreach ($models as $model) {
                 if ($model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
@@ -373,7 +373,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return ModelStatus::Deleted;
         }
 
-        // ifnothaveprovideservicequotientstatus,use原have逻辑(tobackcompatible)
+        // ifnothaveprovideservicequotientstatus,use原havelogic(tobackcompatible)
         if (empty($providerStatuses)) {
             foreach ($models as $model) {
                 if ($model->getStatus() && $model->getStatus() === Status::Enabled) {

@@ -421,7 +421,7 @@ class ImageGenerateFactory
      * getfinger定modelfixedratio例sizeconfiguration.
      * @param null|string $modelKey modelkey名
      * @param string $ratioKey ratio例key名,如 "1:1", "16:9"
-     * @return null|array if存infixedconfigurationreturn [width, height] array,否thenreturn null table示needuse换算
+     * @return null|array if存infixedconfigurationreturn [width, height] array,nothenreturn null table示needuse换算
      */
     private static function getFixedRatioSize(?string $modelKey, string $ratioKey): ?array
     {
@@ -440,7 +440,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * calculate宽highratio例(from LLMAppService 移passcome逻辑).
+     * calculate宽highratio例(from LLMAppService 移passcomelogic).
      */
     private static function calculateRatio(int $width, int $height): string
     {
@@ -451,7 +451,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * calculatemostbig公约数(from LLMAppService 移passcome逻辑).
+     * calculatemostbig公约数(from LLMAppService 移passcomelogic).
      */
     private static function gcd(int $a, int $b): int
     {

@@ -38,7 +38,7 @@ readonly class AuthenticationDomainService
             return null;
         }
 
-        // verify密码
+        // verifypassword
         if (! $this->passwordService->verifyPassword($password, $account->getPassword())) {
             ExceptionBuilder::throw(AuthenticationErrorCode::PasswordError);
         }

@@ -59,7 +59,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $linkInfo = $this->getInvitationLink($projectId);
         $this->invitationToken = $linkInfo['data']['token'];
 
-        // 3. setting密码protected
+        // 3. settingpasswordprotected
         $this->assertSetPasswordProtection($projectId, true);
 
         // 4. outside部userpassTokenget邀请info
@@ -67,15 +67,15 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $invitationInfo = $this->getInvitationByToken($this->invitationToken);
         $this->assertTrue($invitationInfo['data']['requires_password']);
 
-        // 5. outside部user尝试add入project(密码error)
+        // 5. outside部user尝试add入project(passworderror)
         $this->joinProjectWithWrongPassword($this->invitationToken);
 
-        // 6. project所have者reset密码
+        // 6. project所have者resetpassword
         $this->switchUserTest1();
         $passwordInfo = $this->resetInvitationPassword($projectId);
         $this->invitationPassword = $passwordInfo['data']['password'];
 
-        // 7. outside部userusecorrect密码add入project
+        // 7. outside部userusecorrectpasswordadd入project
         $this->switchUserTest2();
         $this->joinProjectSuccess($this->invitationToken, $this->invitationPassword);
 
@@ -181,7 +181,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * setting密码protected.
+     * settingpasswordprotected.
      */
     public function setInvitationPassword(string $projectId, bool $enabled, int $expectedCode = 1000): array
     {
@@ -198,7 +198,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * reset密码
+     * resetpassword
      */
     public function resetInvitationPassword(string $projectId, int $expectedCode = 1000): array
     {
@@ -272,7 +272,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * add入project(密码error).
+     * add入project(passworderror).
      */
     public function joinProjectWithWrongPassword(string $token): void
     {
@@ -285,7 +285,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertEquals(51220, $response['code']); // 密码error
+        $this->assertEquals(51220, $response['code']); // passworderror
     }
 
     /**
@@ -390,7 +390,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * test密码securityproperty.
+     * testpasswordsecurityproperty.
      */
     public function testPasswordSecurity(): void
     {
@@ -400,23 +400,23 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 1. start邀请link
         $this->toggleInvitationLink($projectId, true);
 
-        // 2. 多timesetting密码protected,validate密码generate
+        // 2. 多timesettingpasswordprotected,validatepasswordgenerate
         $password1 = $this->setInvitationPassword($projectId, true);
         $password2 = $this->resetInvitationPassword($projectId);
         $password3 = $this->resetInvitationPassword($projectId);
 
-        // validateeachtimegenerate密码alldifferent
+        // validateeachtimegeneratepasswordalldifferent
         $this->assertNotEquals($password1['data']['password'] ?? '', $password2['data']['password']);
         $this->assertNotEquals($password2['data']['password'], $password3['data']['password']);
 
-        // validate密码lengthandformat
+        // validatepasswordlengthandformat
         $password = $password3['data']['password'];
-        $this->assertEquals(5, strlen($password)); // 密码lengthshouldis5位
+        $this->assertEquals(5, strlen($password)); // passwordlengthshouldis5位
         $this->assertMatchesRegularExpression('/^\d{5}$/', $password); // onlycontain5位number
     }
 
     /**
-     * test密码protectedswitchfeature - closebackagainstart密码notwillmore改.
+     * testpasswordprotectedswitchfeature - closebackagainstartpasswordnotwillmore改.
      */
     public function testPasswordTogglePreservation(): void
     {
@@ -429,7 +429,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 1. start邀请link
         $this->toggleInvitationLink($projectId, true);
 
-        // 2. setting密码protected
+        // 2. settingpasswordprotected
         $initialPasswordResponse = $this->setInvitationPassword($projectId, true);
         $this->assertEquals(1000, $initialPasswordResponse['code']);
 
@@ -437,11 +437,11 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->assertNotEmpty($originalPassword);
         $this->assertEquals(5, strlen($originalPassword));
 
-        // 3. close密码protected
+        // 3. closepasswordprotected
         $disableResponse = $this->setInvitationPassword($projectId, false);
         $this->assertEquals(1000, $disableResponse['code']);
 
-        // 4. validateclosestatusdownaccesslinknotneed密码
+        // 4. validateclosestatusdownaccesslinknotneedpassword
         $linkResponse = $this->getInvitationLink($projectId);
         $this->assertEquals(1000, $linkResponse['code']);
         $token = $linkResponse['data']['token'];
@@ -450,20 +450,20 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->assertEquals(1000, $linkInfo['code']);
         $this->assertFalse($linkInfo['data']['requires_password']);
 
-        // 5. 重newstart密码protected
+        // 5. 重newstartpasswordprotected
         $enableResponse = $this->setInvitationPassword($projectId, true);
         $this->assertEquals(1000, $enableResponse['code']);
 
-        // 6. validate密码maintainnot变
+        // 6. validatepasswordmaintainnot变
         $restoredPassword = $enableResponse['data']['password'];
-        $this->assertEquals($originalPassword, $restoredPassword, '重newstart密码protectedback,密码shouldmaintainnot变');
+        $this->assertEquals($originalPassword, $restoredPassword, '重newstartpasswordprotectedback,passwordshouldmaintainnot变');
 
-        // 7. validatestartstatusdownaccesslinkneed密码
+        // 7. validatestartstatusdownaccesslinkneedpassword
         $linkInfo = $this->getInvitationByToken($token);
         $this->assertEquals(1000, $linkInfo['code']);
         $this->assertTrue($linkInfo['data']['requires_password']);
 
-        // 8. validateuse原密码cansuccessadd入project
+        // 8. validateuse原passwordcansuccessadd入project
         $this->switchUserTest2();
         $joinResult = $this->joinProjectSuccess($token, $originalPassword);
         $this->assertEquals(1000, $joinResult['code']);
@@ -471,7 +471,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * test密码modifyfeature.
+     * testpasswordmodifyfeature.
      */
     public function testChangePassword(): void
     {
@@ -487,35 +487,35 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 1. start邀请link
         $this->toggleInvitationLink($projectId, true);
 
-        // 2. settinginitial密码protected
+        // 2. settinginitialpasswordprotected
         $initialPasswordResponse = $this->setInvitationPassword($projectId, true);
         $this->assertEquals(1000, $initialPasswordResponse['code']);
 
         $originalPassword = $initialPasswordResponse['data']['password'];
-        $this->assertEquals(5, strlen($originalPassword)); // validate密码lengthfor5位
+        $this->assertEquals(5, strlen($originalPassword)); // validatepasswordlengthfor5位
         $this->assertMatchesRegularExpression('/^\d{5}$/', $originalPassword); // validateis5位number
 
-        // 3. modify密码forcustomize密码
+        // 3. modifypasswordforcustomizepassword
         $customPassword = 'mypass123';
         $changePasswordResponse = $this->changeInvitationPassword($projectId, $customPassword);
         $this->assertEquals(1000, $changePasswordResponse['code']);
         $this->assertEquals($customPassword, $changePasswordResponse['data']['password']);
 
-        // 4. validate原密码notcanuse
+        // 4. validate原passwordnotcanuse
         $linkResponse = $this->getInvitationLink($projectId);
         $token = $linkResponse['data']['token'];
 
         $this->switchUserTest2();
-        // use原密码shouldfail
+        // use原passwordshouldfail
         $data = ['token' => $token, 'password' => $originalPassword];
         $response = $this->client->post(
             self::INVITATION_BASE_URI . '/join',
             $data,
             $this->getCommonHeaders()
         );
-        $this->assertEquals(51220, $response['code'], 'error密码shouldreturn51220error码');
+        $this->assertEquals(51220, $response['code'], 'errorpasswordshouldreturn51220error码');
 
-        // 5. validatenew密码cannormaluse
+        // 5. validatenewpasswordcannormaluse
         $joinResult = $this->joinProjectSuccess($token, $customPassword);
         $this->assertEquals(1000, $joinResult['code']);
         $this->assertEquals('viewer', $joinResult['data']['user_role']);
@@ -523,19 +523,19 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 6. cleanuptestdata
         $this->cleanupTestData($projectId);
 
-        // 7. testinvalid密码format(nullstringand超long密码)
+        // 7. testinvalidpasswordformat(nullstringand超longpassword)
         $this->switchUserTest1();
         $this->toggleInvitationLink($projectId, true);
 
-        // testnull密码
+        // testnullpassword
         $response = $this->changeInvitationPassword($projectId, '', 51220);
         $this->assertEquals(51220, $response['code']);
 
-        // test超long密码(19位)
+        // test超longpassword(19位)
         $response = $this->changeInvitationPassword($projectId, str_repeat('1', 19), 51220);
         $this->assertEquals(51220, $response['code']);
 
-        // 8. testvalideachtype密码format
+        // 8. testvalideachtypepasswordformat
         $validPasswords = ['123', '12345', 'abcde', '12a34', str_repeat('x', 18)];
         foreach ($validPasswords as $validPassword) {
             $response = $this->changeInvitationPassword($projectId, $validPassword, 1000);
@@ -599,7 +599,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->assertArrayHasKey('creator_name', $invitationInfo['data'], 'responseshouldcontaincreator_namefield');
         $this->assertArrayHasKey('creator_avatar', $invitationInfo['data'], 'responseshouldcontaincreator_avatarfield');
 
-        // 4. test2useradd入project - needprovide密码
+        // 4. test2useradd入project - needprovidepassword
         $password = $linkResponse['data']['password'] ?? null;
         $joinResult = $this->joinProjectSuccess($token, $password);
         $this->assertEquals(1000, $joinResult['code']);
@@ -661,7 +661,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * setting密码protected (私have辅助method).
+     * settingpasswordprotected (私have辅助method).
      */
     private function assertSetPasswordProtection(string $projectId, bool $enabled): void
     {
@@ -677,7 +677,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * modify邀请link密码 (私have辅助method).
+     * modify邀请linkpassword (私have辅助method).
      */
     private function changeInvitationPassword(string $projectId, string $password, int $expectedCode = 1000): array
     {

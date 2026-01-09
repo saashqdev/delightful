@@ -216,7 +216,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * non官方organizationupdate Delightful modelstatus(写o clockcopy逻辑).
+     * non官方organizationupdate Delightful modelstatus(写o clockcopylogic).
      */
     public function updateDelightfulModelStatus(
         ProviderDataIsolation $dataIsolation,

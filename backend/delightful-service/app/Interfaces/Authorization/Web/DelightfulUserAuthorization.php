@@ -72,13 +72,13 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     // currentuser所处environmentid
     protected int $delightfulEnvId = 0;
 
-    // thethree方平台originalorganizationencoding
+    // thethree方platformoriginalorganizationencoding
     protected string $thirdPlatformOrganizationCode = '';
 
-    // thethree方平台originaluser ID
+    // thethree方platformoriginaluser ID
     protected ?string $thirdPlatformUserId = '';
 
-    // thethree方平台type
+    // thethree方platformtype
     protected ?PlatformType $thirdPlatformType = null;
 
     public function __construct()

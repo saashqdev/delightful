@@ -43,7 +43,7 @@ class DataIsolation extends AbstractObject
     protected ?string $currentAppId = null;
 
     /**
-     * thethird-party平台organizationencoding.
+     * thethird-partyplatformorganizationencoding.
      */
     protected ?string $thirdPartyOrganizationCode = null;
 

@@ -15,7 +15,7 @@ use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 interface DelightfulContactIdMappingRepositoryInterface
 {
     /**
-     * getthethird-party平台departmentIDmappingclose系.
+     * getthethird-partyplatformdepartmentIDmappingclose系.
      *
      * @param string[] $thirdDepartmentIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -28,7 +28,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     ): array;
 
     /**
-     * getthethird-party平台userIDmappingclose系.
+     * getthethird-partyplatformuserIDmappingclose系.
      *
      * @param string[] $thirdUserIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -41,7 +41,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     ): array;
 
     /**
-     * get麦吉平台userIDmappingclose系.
+     * get麦吉platformuserIDmappingclose系.
      *
      * @param string[] $delightfulIds
      */
@@ -80,9 +80,9 @@ interface DelightfulContactIdMappingRepositoryInterface
     public function updateMappingEnvId(int $envId): int;
 
     /**
-     * according to origin_id batchquantity软deletethethird-party平台mappingrecord.
+     * according to origin_id batchquantity软deletethethird-partyplatformmappingrecord.
      *
-     * @param string[] $originIds thethird-party平台originalIDcolumn表
+     * @param string[] $originIds thethird-partyplatformoriginalIDcolumn表
      */
     public function deleteThirdPlatformIdsMapping(
         array $originIds,

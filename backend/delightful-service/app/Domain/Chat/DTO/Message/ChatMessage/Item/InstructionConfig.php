@@ -233,7 +233,7 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // 否then,willeachyuan素convertfor InstructionValue object
+        // nothen,willeachyuan素convertfor InstructionValue object
         $processedValues = [];
         foreach ($values as $value) {
             $processedValues[] = new InstructionValue($value);

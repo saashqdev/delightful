@@ -125,11 +125,11 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     {
         $tree = $this->permissionEnum->getPermissionTree();
 
-        // default情况down(non平台organization)notcontain platform 平台sectionpoint
+        // default情况down(nonplatformorganization)notcontain platform platformsectionpoint
         $this->assertIsArray($tree);
         $this->assertGreaterThanOrEqual(1, count($tree));
 
-        // 找to Admin 平台sectionpointconductenterone步validation
+        // 找to Admin platformsectionpointconductenterone步validation
         $platformsByKey = [];
         foreach ($tree as $node) {
             $platformsByKey[$node['permission_key']] = $node;

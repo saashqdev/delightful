@@ -603,7 +603,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * giveAIassistantusemethod,containfilteraicardmessage逻辑.
+     * giveAIassistantusemethod,containfilteraicardmessagelogic.
      */
     public function getLLMContentForAgent(string $conversationId, string $topicId): array
     {

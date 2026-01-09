@@ -20,7 +20,7 @@ class CheckLoginRequest extends AbstractDTO
     protected string $email = '';
 
     /**
-     * 密码
+     * password
      */
     protected string $password;
 

@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->bigIncrements('id')->comment('primary keyID');
             $table->string('delightful_organization_code', 100)->unique()->comment('organizationencoding');
             $table->string('name', 100)->comment('organizationname');
-            $table->string('platform_type', 64)->nullable()->comment('平台type');
+            $table->string('platform_type', 64)->nullable()->comment('platformtype');
             $table->mediumText('logo')->nullable()->comment('organizationlogo');
             $table->mediumText('introduction')->nullable()->comment('企业description');
             $table->string('contact_user')->nullable()->comment('联系person');

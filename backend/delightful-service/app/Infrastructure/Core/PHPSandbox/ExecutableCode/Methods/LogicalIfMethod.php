@@ -17,7 +17,7 @@ class LogicalIfMethod extends AbstractMethod
 
     protected string $returnType = 'mixed';
 
-    protected string $group = '逻辑';
+    protected string $group = 'logic';
 
     protected string $desc = 'according tofinger定itemitemcomereturndifferentresult';
 
@@ -25,17 +25,17 @@ class LogicalIfMethod extends AbstractMethod
         [
             'name' => 'logical',
             'type' => 'bool',
-            'desc' => '逻辑',
+            'desc' => 'logic',
         ],
         [
             'name' => 'trueValue',
             'type' => 'mixed',
-            'desc' => '逻辑fortrueo clockreturnvalue',
+            'desc' => 'logicfortrueo clockreturnvalue',
         ],
         [
             'name' => 'falseValue',
             'type' => 'mixed',
-            'desc' => '逻辑forfalseo clockreturnvalue',
+            'desc' => 'logicforfalseo clockreturnvalue',
         ],
     ];
 

@@ -48,7 +48,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.empty', ['label' => 'key']);
         }
 
-        // 特殊逻辑,ifis飞书,andandischallenge
+        // 特殊logic,ifis飞书,andandischallenge
         $platform = $params['platform'] ?? '';
         if ($platform === ThirdPlatformChatType::FeiShuRobot->value && isset($params['challenge'])) {
             $chatMessage = new ThirdPlatformChatMessage();
@@ -96,7 +96,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             return;
                         }
 
-                        // thiswithiniseach平台user id,notis delightful  user_id
+                        // thiswithiniseachplatformuser id,notis delightful  user_id
                         $userId = $thirdPlatformChatMessage->getUserId();
                         $dataIsolation->setCurrentUserId($userId);
                         EnvManager::initDataIsolationEnv($dataIsolation);

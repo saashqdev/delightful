@@ -234,7 +234,7 @@ readonly class RoleDomainService
     /**
      * getpermissionresourcetree结构.
      *
-     * @param bool $isPlatformOrganization whether平台organization
+     * @param bool $isPlatformOrganization whetherplatformorganization
      */
     public function getPermissionTree(bool $isPlatformOrganization = false): array
     {
@@ -245,7 +245,7 @@ readonly class RoleDomainService
     /**
      * forfinger定usercreateor维护“organizationadministrator”role(拥haveall局permission).
      *
-     * 逻辑:
+     * logic:
      * 1. according tocurrentorganizationfindwhetheralreadyhave同名role;
      * 2. 若not存in,thencreatenewroleand赋予 DelightfulPermission::ALL_PERMISSIONS;
      * 3. 若存in,thenensureitscontain ALL_PERMISSIONS;
@@ -291,7 +291,7 @@ readonly class RoleDomainService
     /**
      * 移exceptuser“organizationadministrator”role.
      *
-     * 逻辑:
+     * logic:
      * 1. getcurrentorganizationdown名for ORGANIZATION_ADMIN_ROLE_NAME role;
      * 2. 若not存in直接return;
      * 3. call仓library移exceptuserandtheroleassociateclose系;

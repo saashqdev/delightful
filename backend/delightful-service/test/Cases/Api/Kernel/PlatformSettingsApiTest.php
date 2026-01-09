@@ -42,11 +42,11 @@ class PlatformSettingsApiTest extends AbstractHttpTest
             'favicon_url' => 'https://example.com/favicon.ico',
             'default_language' => 'en_US',
             'name_i18n' => [
-                'zh_CN' => 'test平台',
+                'zh_CN' => 'testplatform',
                 'en_US' => 'Test Platform',
             ],
             'title_i18n' => [
-                'zh_CN' => 'test平台title',
+                'zh_CN' => 'testplatformtitle',
                 'en_US' => 'Test Platform Title',
             ],
             'keywords_i18n' => [
@@ -54,7 +54,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
                 'en_US' => 'AI,Test',
             ],
             'description_i18n' => [
-                'zh_CN' => 'thisisonetest平台',
+                'zh_CN' => 'thisisonetestplatform',
                 'en_US' => 'This is a test platform',
             ],
         ];
@@ -103,7 +103,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
             'favicon_url' => 'https://example.com/initial_favicon.ico',
             'default_language' => 'zh_CN',
             'name_i18n' => [
-                'zh_CN' => 'initial平台',
+                'zh_CN' => 'initialplatform',
                 'en_US' => 'Initial Platform',
             ],
         ];
@@ -175,7 +175,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $payload = [
             'favicon_url' => 'https://example.com/favicon.ico',
             'name_i18n' => [
-                'zh_CN' => 'I平台',
+                'zh_CN' => 'Iplatform',
                 'en_US' => 'My Platform',
             ],
             'title_i18n' => [

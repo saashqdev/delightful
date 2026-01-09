@@ -278,7 +278,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * according todepartmentIDbatchquantitydeletedepartment(逻辑delete,set deleted_at field).
+     * according todepartmentIDbatchquantitydeletedepartment(logicdelete,set deleted_at field).
      */
     public function deleteDepartmentsByIds(array $departmentIds, string $organizationCode): int
     {

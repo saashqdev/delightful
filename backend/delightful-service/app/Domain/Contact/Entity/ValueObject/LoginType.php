@@ -9,7 +9,7 @@ namespace App\Domain\Contact\Entity\ValueObject;
 
 enum LoginType: int
 {
-    // hand机number + 密码
+    // hand机number + password
     case PhoneAndPassword = 1;
 
     // hand机number + verify码

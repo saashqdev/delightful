@@ -26,9 +26,9 @@ return new class extends Migration {
             $table->string('third_parent_department_id', 64)->comment('thethree方父departmentdepartment ID')->nullable();
             $table->string('third_name', 64)->comment('thethree方departmentname');
             $table->text('third_i18n_name')->comment('thethree方国际化departmentname');
-            $table->string('third_platform_type')->comment('thethree方平台type dingTalk/lark/weCom/teamShare');
+            $table->string('third_platform_type')->comment('thethree方platformtype dingTalk/lark/weCom/teamShare');
             $table->text('third_platform_departments_extra')->comment('额outsideinfo.thethree方departmentstatus,jsonformat,目frontsupport is_deleted:whetherdelete');
-            $table->comment('userservicedepartmentandthethree方平台userrecordtable.useatandthethree方平台实o clockdatasync,activaterecordetc');
+            $table->comment('userservicedepartmentandthethree方platformuserrecordtable.useatandthethree方platform实o clockdatasync,activaterecordetc');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['third_platform_type', 'third_department_id', 'delightful_organization_code'], 'org_platform_department_id');

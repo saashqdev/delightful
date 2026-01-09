@@ -129,7 +129,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         if (ProviderConfigIdAssembler::isAnyProviderTemplate($configId)) {
             return $this->handleTemplateConfigUpdate($dataIsolation, $providerConfigEntity);
         }
-        // 2. 普通configurationupdate逻辑(原have逻辑)
+        // 2. 普通configurationupdatelogic(原havelogic)
         return $this->handleNormalConfigUpdate($dataIsolation, $providerConfigEntity);
     }
 
@@ -282,7 +282,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * handletemplateconfigurationupdate逻辑.
+     * handletemplateconfigurationupdatelogic.
      */
     private function handleTemplateConfigUpdate(ProviderDataIsolation $dataIsolation, ProviderConfigEntity $providerConfigEntity): ProviderConfigEntity
     {
@@ -338,7 +338,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * handle普通configurationupdate逻辑(原have逻辑).
+     * handle普通configurationupdatelogic(原havelogic).
      */
     private function handleNormalConfigUpdate(ProviderDataIsolation $dataIsolation, ProviderConfigEntity $providerConfigEntity): ProviderConfigEntity
     {
@@ -359,7 +359,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::SystemError);
         }*/
 
-        // use统oneconfigurationupdate逻辑
+        // use统oneconfigurationupdatelogic
         return $this->updateProviderConfigData($dataIsolation, $existingConfigEntity, $providerConfigEntity);
     }
 
@@ -382,7 +382,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 统oneconfigurationdataupdate逻辑.
+     * 统oneconfigurationdataupdatelogic.
      * handle脱敏datamerge,fieldupdateandsave操as.
      */
     private function updateProviderConfigData(ProviderDataIsolation $dataIsolation, ProviderConfigEntity $existingConfig, ProviderConfigEntity $newConfigData): ProviderConfigEntity

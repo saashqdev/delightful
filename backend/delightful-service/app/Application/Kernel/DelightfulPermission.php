@@ -136,9 +136,9 @@ class DelightfulPermission implements DelightfulPermissionInterface
             throw new InvalidArgumentException('Not a resource type: ' . $resource);
         }
 
-        // 模piecelayerdefinitionfortwolevelresource(即平台直接子resource)
+        // 模piecelayerdefinitionfortwolevelresource(即platform直接子resource)
         if ($enum->parent() === null) {
-            // toplevelresource(平台itself)
+            // toplevelresource(platformitself)
             $moduleEnum = $enum;
         } else {
             $parent = $enum->parent();
@@ -173,7 +173,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         $operations = $this->getOperations();
 
         foreach ($resources as $resource) {
-            // onlyhandlethreelevelandbyupresource,filter平台and模piecelevel
+            // onlyhandlethreelevelandbyupresource,filterplatformand模piecelevel
             if (substr_count($resource, '.') < 2) {
                 continue;
             }
@@ -205,7 +205,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
      *   ],
      * ]
      *
-     * @param bool $isPlatformOrganization whether平台organization;onlywhenfor true o clock,contain platform 平台resourcetree
+     * @param bool $isPlatformOrganization whetherplatformorganization;onlywhenfor true o clock,contain platform platformresourcetree
      */
     public function getPermissionTree(bool $isPlatformOrganization = false): array
     {
@@ -215,17 +215,17 @@ class DelightfulPermission implements DelightfulPermissionInterface
             // willresourcepath按 '.' split
             $segments = explode('.', $permission['resource']);
             if (count($segments) < 2) {
-                // at least应contain平台 + resource两level,若not足thenskip
+                // at least应containplatform + resource两level,若not足thenskip
                 continue;
             }
 
-            $platformKey = array_shift($segments); // 平台,如 Admin
+            $platformKey = array_shift($segments); // platform,如 Admin
 
-            // 平台organization独have:non平台organizationo clock,filter掉 platform 平台resource
+            // platformorganization独have:nonplatformorganizationo clock,filter掉 platform platformresource
             if ($platformKey === DelightfulResourceEnum::PLATFORM->value && ! $isPlatformOrganization) {
                 continue;
             }
-            // initialize平台rootsectionpoint
+            // initializeplatformrootsectionpoint
             if (! isset($tree[$platformKey])) {
                 $tree[$platformKey] = [
                     'label' => $this->getPlatformLabel($platformKey),
@@ -312,11 +312,11 @@ class DelightfulPermission implements DelightfulPermissionInterface
      *
      * @param string $permissionKey goalpermissionkey
      * @param string[] $userPermissions useralready拥havepermissionkeyset
-     * @param bool $isPlatformOrganization whether平台organization
+     * @param bool $isPlatformOrganization whetherplatformorganization
      */
     public function checkPermission(string $permissionKey, array $userPermissions, bool $isPlatformOrganization = false): bool
     {
-        // 平台organizationvalidation:non平台organizationnotallowaccess platform 平台resource
+        // platformorganizationvalidation:nonplatformorganizationnotallowaccess platform platformresource
         $parsed = $this->parsePermission($permissionKey);
         $platformKey = explode('.', $parsed['resource'])[0];
         if ($platformKey === DelightfulResourceEnum::PLATFORM->value && ! $isPlatformOrganization) {
@@ -411,7 +411,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 }
                 return $translated;
             }
-            // compatible:若notimplement label/translationKey,then退return通use getOperationLabel 逻辑
+            // compatible:若notimplement label/translationKey,then退return通use getOperationLabel logic
         }
         return $this->getOperationLabel($operation);
     }
@@ -430,7 +430,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * according to平台 key getdisplayname,can按需extension.
+     * according toplatform key getdisplayname,can按需extension.
      */
     private function getPlatformLabel(string $platformKey): string
     {

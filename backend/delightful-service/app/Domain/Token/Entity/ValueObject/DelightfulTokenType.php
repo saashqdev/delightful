@@ -27,7 +27,7 @@ enum DelightfulTokenType: int
     // process,type_relation_valueforprocessid
     case Flow = 4;
 
-    // day书open放平台
+    // day书open放platform
     case TeamshareOpenPlatform = 5;
 
     /**

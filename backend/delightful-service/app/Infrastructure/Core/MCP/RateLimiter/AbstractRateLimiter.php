@@ -67,7 +67,7 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
 
     /**
      * actualexecutespeedratelimitcheck.
-     * by子categoryimplementspecific逻辑.
+     * by子categoryimplementspecificlogic.
      */
     abstract protected function doCheck(string $clientId, MessageInterface $request): void;
 }

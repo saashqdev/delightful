@@ -117,7 +117,7 @@ class DelightfulOrganizationEnvDomainService
      */
     public function getEnvironmentEntities(): array
     {
-        // 所have存inopen放平台environment
+        // 所have存inopen放platformenvironment
         return $this->delightfulEnvironmentsRepository->getDelightfulEnvironments();
     }
 

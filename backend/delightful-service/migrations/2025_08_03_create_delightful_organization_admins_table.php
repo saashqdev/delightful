@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('grantor_user_id', 64)->nullable()->comment('authorization者userID');
             $table->timestamp('granted_at')->nullable()->comment('authorizationtime');
             $table->tinyInteger('status')->default(1)->comment('status: 0=disable, 1=enable');
-            $table->tinyInteger('is_organization_creator')->default(0)->comment('whetherfororganizationcreateperson: 0=否, 1=is');
+            $table->tinyInteger('is_organization_creator')->default(0)->comment('whetherfororganizationcreateperson: 0=no, 1=is');
             $table->text('remarks')->nullable()->comment('note');
             $table->timestamps();
             $table->softDeletes();

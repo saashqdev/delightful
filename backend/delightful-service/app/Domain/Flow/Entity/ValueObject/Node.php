@@ -31,7 +31,7 @@ class Node extends AbstractValueObject
     protected string $nodeVersion = '';
 
     /**
-     * sectionpointyuandata,canuseasgivefront端locate,back端onlystorageandshow,nothaveany逻辑.
+     * sectionpointyuandata,canuseasgivefront端locate,back端onlystorageandshow,nothaveanylogic.
      */
     protected array $meta = [];
 

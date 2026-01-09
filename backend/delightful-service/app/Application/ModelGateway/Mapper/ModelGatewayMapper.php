@@ -427,7 +427,7 @@ class ModelGatewayMapper extends ModelMapper
             return new ImageModel($providerConfigItem->toArray(), $providerModelEntity->getModelVersion(), (string) $providerModelEntity->getId(), $providerEntity->getProviderCode());
         }
 
-        // toatLLM/Embeddingmodel,maintain原have逻辑
+        // toatLLM/Embeddingmodel,maintain原havelogic
         return new OdinModel(
             key: $key,
             model: $this->createModel($providerModelEntity->getModelVersion(), [

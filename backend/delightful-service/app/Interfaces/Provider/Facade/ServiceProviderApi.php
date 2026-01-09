@@ -243,7 +243,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * according tocategorygetservicequotient通use逻辑.
+     * according tocategorygetservicequotient通uselogic.
      * @param RequestInterface $request requestobject
      * @return array servicequotientlist
      */

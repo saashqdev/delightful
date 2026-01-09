@@ -149,7 +149,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     /**
      * sendmessage.
      *
-     * @param ThirdPlatformChatMessage $thirdPlatformChatMessage 平台message
+     * @param ThirdPlatformChatMessage $thirdPlatformChatMessage platformmessage
      * @param MessageInterface $message wantsendmessage
      */
     public function sendMessage(ThirdPlatformChatMessage $thirdPlatformChatMessage, MessageInterface $message): void

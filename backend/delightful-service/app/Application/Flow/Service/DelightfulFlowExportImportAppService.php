@@ -374,7 +374,7 @@ class DelightfulFlowExportImportAppService
         $toolSetData['created_uid'] = $dataIsolation->getCurrentUserId();
         $toolSetData['updated_uid'] = $dataIsolation->getCurrentUserId();
 
-        // 移exceptmaybeimpactcreate逻辑field
+        // 移exceptmaybeimpactcreatelogicfield
         unset($toolSetData['created_at'], $toolSetData['updated_at'], $toolSetData['id']);
 
         // settingcreate实body必wantfield

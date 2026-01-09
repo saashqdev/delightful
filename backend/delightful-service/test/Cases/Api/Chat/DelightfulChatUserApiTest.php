@@ -23,7 +23,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
     /**
      * login账number:13800138001
-     * 密码:123456.
+     * password:123456.
      */
     private const string TEST_PHONE = '13800138001';
 
@@ -308,7 +308,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // according tobusiness逻辑,maybeacceptanystringasforavatar_url,orconductvalidate
+        // according tobusinesslogic,maybeacceptanystringasforavatar_url,orconductvalidate
         $this->assertIsArray($response, 'invalidURLformat应be妥善handle');
 
         // ifisauthenticationerror,skiptest
@@ -482,7 +482,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->get(self::GET_USER_UPDATE_PERMISSION_API, $headers);
 
-        // maybereturnerrororsuccess,取决atbusiness逻辑
+        // maybereturnerrororsuccess,取决atbusinesslogic
         $this->assertIsArray($response, 'responseshouldisarrayformat');
         $this->assertArrayHasKey('code', $response, 'response应containcodefield');
 

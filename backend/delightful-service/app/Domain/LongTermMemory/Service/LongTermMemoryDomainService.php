@@ -165,11 +165,11 @@ readonly class LongTermMemoryDomainService
                         $memory->setStatus(MemoryStatus::ACTIVE);
                         $memoriesToUpdate[] = $memory;
                     }
-                    // ifcontentnotfornullbutPendingContentfornull,also直接delete记忆(原have逻辑maintain)
+                    // ifcontentnotfornullbutPendingContentfornull,also直接delete记忆(原havelogicmaintain)
                     elseif (! empty($content) && empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }
-                    // ifcontentfornullandPendingContentalsofornull,直接delete记忆(原have逻辑maintain)
+                    // ifcontentfornullandPendingContentalsofornull,直接delete记忆(原havelogicmaintain)
                     elseif (empty($content) && empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }

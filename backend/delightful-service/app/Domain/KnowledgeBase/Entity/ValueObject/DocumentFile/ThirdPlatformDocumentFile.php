@@ -16,10 +16,10 @@ class ThirdPlatformDocumentFile extends AbstractDocumentFile implements ThirdPla
 
     public string $platformType;
 
-    // thethird-partyfiletype,customizefield,bythethird-party平台setting
+    // thethird-partyfiletype,customizefield,bythethird-partyplatformsetting
     public ?string $thirdFileType = null;
 
-    // thethird-partyfileextension名,customizefield,bythethird-party平台setting
+    // thethird-partyfileextension名,customizefield,bythethird-partyplatformsetting
     public ?string $thirdFileExtensionName = null;
 
     public function getThirdFileId(): string

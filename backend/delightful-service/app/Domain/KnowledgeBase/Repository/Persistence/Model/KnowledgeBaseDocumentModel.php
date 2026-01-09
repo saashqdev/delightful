@@ -24,7 +24,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property int $doc_type documenttype
  * @property array $doc_metadata documentyuandata
  * @property DocumentFileInterface $document_file documentfileinfo
- * @property string $third_platform_type thethree方平台type
+ * @property string $third_platform_type thethree方platformtype
  * @property string $third_file_id thethree方fileID
  * @property int $sync_status syncstatus
  * @property int $sync_times synccount

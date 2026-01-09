@@ -19,11 +19,11 @@ class LoginApiTest extends AbstractHttpTest
     public const string API = '/api/v1/sessions';
 
     /**
-     * testhand机number密码login.
+     * testhand机numberpasswordlogin.
      */
     public function testPhonePasswordLogin(): string
     {
-        // constructrequestparameter - hand机number密码login
+        // constructrequestparameter - hand机numberpasswordlogin
         $requestData = [
             'state_code' => '+86',
             'phone' => '13812345678', // testenvironmentmiddlenot存in账number

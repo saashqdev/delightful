@@ -143,7 +143,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $receiverConversationEntity = new DelightfulConversationEntity();
         $receiverConversationEntity->setUserId($messageStruct->getReceiveId());
         $receiverConversationEntity->setUserOrganizationCode($dataIsolation->getCurrentOrganizationCode());
-        // 通usecontrolmessagehandle逻辑
+        // 通usecontrolmessagehandlelogic
         $this->delightfulChatDomainService->handleCommonControlMessage($messageDTO, $conversationEntity, $receiverConversationEntity);
 
         return true;
@@ -234,7 +234,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         // 通讯录andsearch相closeinterface,filterhiddendepartmentandhiddenuser.
         $userDepartmentDetailDTOS = $this->filterDepartmentOrUserHidden($userDepartmentDetailDTOS);
         // byat $usersPageResponseDTO  items limitparametertype,fromcodestandardangledegree,again new one通use PageResponseDTO, 按pagination结构return
-        // 另outside,byatfilter逻辑存in,maybe本timereturn items quantity少at $limit,butisagainhavedownone页.
+        // 另outside,byatfilterlogic存in,maybe本timereturn items quantity少at $limit,butisagainhavedownone页.
         $pageResponseDTO = new PageResponseDTO();
         $pageResponseDTO->setPageToken($usersPageResponseDTO->getpageToken());
         $pageResponseDTO->setHasMore($usersPageResponseDTO->getHasMore());

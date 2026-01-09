@@ -51,7 +51,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
 
         $this->validateRequest($imageGenerateRequest);
 
-        // no参考graphlike,use原havegenerate逻辑
+        // no参考graphlike,use原havegeneratelogic
         $this->logger->info('Azure OpenAIgraphlikegenerate:startcallgenerateAPI', [
             'prompt' => $imageGenerateRequest->getPrompt(),
             'size' => $imageGenerateRequest->getSize(),

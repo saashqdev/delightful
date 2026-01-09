@@ -49,22 +49,22 @@ class GlobalConfigApiTest extends AbstractHttpTest
 
     public function testGetGlobalConfigWithPlatformSettings(): void
     {
-        // firstset平台set
+        // firstsetplatformset
         $platformPayload = [
             'logo_zh_url' => 'https://example.com/logo_zh.png',
             'logo_en_url' => 'https://example.com/logo_en.png',
             'favicon_url' => 'https://example.com/favicon.ico',
             'default_language' => 'zh_CN',
             'name_i18n' => [
-                'zh_CN' => 'test平台',
+                'zh_CN' => 'testplatform',
                 'en_US' => 'Test Platform',
             ],
         ];
 
-        // pass平台setinterfaceset
+        // passplatformsetinterfaceset
         $this->put('/api/v1/platform/setting', $platformPayload, $this->getCommonHeaders());
 
-        // getall局configuration,shouldcontain平台set
+        // getall局configuration,shouldcontainplatformset
         $response = $this->get($this->url, [], $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
@@ -73,12 +73,12 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertArrayHasKey('is_maintenance', $data);
         $this->assertArrayHasKey('maintenance_description', $data);
 
-        // verifycontain平台set
+        // verifycontainplatformset
         $this->assertArrayHasKey('logo', $data);
         $this->assertArrayHasKey('favicon', $data);
         $this->assertArrayHasKey('default_language', $data);
 
-        // verify平台setvalue
+        // verifyplatformsetvalue
         if (isset($data['logo']['zh_CN']['url'])) {
             $this->assertSame('https://example.com/logo_zh.png', $data['logo']['zh_CN']['url']);
         }
@@ -106,7 +106,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertIsBool($data['is_maintenance']);
         $this->assertIsString($data['maintenance_description']);
 
-        // ifhave平台set,verifyits结构
+        // ifhaveplatformset,verifyits结构
         if (isset($data['logo'])) {
             $this->assertIsArray($data['logo']);
         }

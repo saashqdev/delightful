@@ -202,7 +202,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         // ifis跟assistantprivate chat,andnothave话题 id,from动createone话题
         if ($conversationEntity->getReceiveType() === ConversationType::Ai && empty($seqDTO->getExtra()?->getTopicId())) {
             $topicId = $this->delightfulTopicDomainService->agentSendMessageGetTopicId($conversationEntity, 0);
-            // notimpact原have逻辑,will topicId settingto extra middle
+            // notimpact原havelogic,will topicId settingto extra middle
             $seqExtra = $seqDTO->getExtra() ?? new SeqExtra();
             $seqExtra->setTopicId($topicId);
             $seqDTO->setExtra($seqExtra);
@@ -1277,7 +1277,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
     /**
      * checkconversation所have权
-     * ensure所haveconversationIDall属atcurrent账number,否thenthrowexception.
+     * ensure所haveconversationIDall属atcurrent账number,nothenthrowexception.
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorizationinfo
      * @param array $conversationIds 待checkconversationIDarray

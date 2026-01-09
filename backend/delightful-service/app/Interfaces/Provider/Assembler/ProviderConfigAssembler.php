@@ -140,7 +140,7 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 预processservicequotientconfigurationdata,extract共同逻辑.
+     * 预processservicequotientconfigurationdata,extract共同logic.
      * @return array [$preparedConfig, $decodeConfig]
      */
     private static function prepareServiceProviderConfig(array $serviceProviderConfig): array

@@ -54,7 +54,7 @@ readonly class FileDomainService
             return null;
         }
         if (is_url($filePath)) {
-            // 只need路径
+            // 只needpath
             $filePath = ltrim(parse_url($filePath, PHP_URL_PATH), '/');
         }
         return $this->cloudFileRepository->getLinks($organizationCode, [$filePath], $bucketType, $downloadNames, $options)[$filePath] ?? null;
@@ -105,21 +105,21 @@ readonly class FileDomainService
     }
 
     /**
-     * 批量getfile链接（自动从路径提取organization编码并分组process）.
-     * @param string[] $filePaths containorganization编码的file路径array，format：orgCode/path/file.ext
+     * 批量getfile链接（自动从path提取organizationencoding并分组process）.
+     * @param string[] $filePaths containorganizationencoding的filepatharray，format：orgCode/path/file.ext
      * @param null|StorageBucketType $bucketType storage桶type，default为Public
-     * @return array<string,FileLink> file路径到FileLink的映射
+     * @return array<string,FileLink> filepath到FileLink的映射
      */
     public function getBatchLinksByOrgPaths(array $filePaths, ?StorageBucketType $bucketType = null): array
     {
-        // filter空路径和已经是URL的路径
+        // filter空path和已经是URL的path
         $validPaths = array_filter($filePaths, static fn ($path) => ! empty($path) && ! is_url($path));
 
         if (empty($validPaths)) {
             return [];
         }
 
-        // 按organization代码分组file路径
+        // 按organizationcode分组filepath
         $pathsByOrg = [];
         foreach ($validPaths as $filePath) {
             $orgCode = explode('/', $filePath, 2)[0] ?? '';
@@ -255,8 +255,8 @@ readonly class FileDomainService
     /**
      * 从云storagegetfilelist.
      *
-     * @param string $organizationCode organization编码
-     * @param string $directoryPrefix 目录前缀
+     * @param string $organizationCode organizationencoding
+     * @param string $directoryPrefix directory前缀
      * @param StorageBucketType $bucketType storage桶type
      * @return CloudFileInfoDTO[] fileDTOobjectarray
      */
@@ -265,7 +265,7 @@ readonly class FileDomainService
         string $directoryPrefix,
         StorageBucketType $bucketType = StorageBucketType::Private
     ): array {
-        // uselistObjectsByCredential列出目录file
+        // uselistObjectsByCredential列出directoryfile
         $objectsResponse = $this->cloudFileRepository->listObjectsByCredential(
             $organizationCode,
             $directoryPrefix,
@@ -274,7 +274,7 @@ readonly class FileDomainService
 
         $files = [];
 
-        // correct解析objectlist数据结构
+        // correctparseobjectlistdata结构
         $objectsList = $objectsResponse['objects'] ?? $objectsResponse;
 
         foreach ($objectsList as $object) {

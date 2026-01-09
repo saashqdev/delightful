@@ -71,7 +71,7 @@ class UpdateModeRequest extends FormRequest
 
     public function getName(): string
     {
-        // 为了兼容性，return中文名称
+        // 为了compatible性，return中文name
         $nameI18n = $this->getNameI18n();
         return $nameI18n['zh_CN'] ?? '';
     }

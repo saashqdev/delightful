@@ -76,7 +76,7 @@ class AdminGlobalSettingsRepository implements AdminGlobalSettingsRepositoryInte
             return [];
         }
 
-        // 准备批量update的数据
+        // 准备批量update的data
         $values = array_map(function ($entity) {
             /** @var ?AbstractSettingExtra $extra */
             $extra = $entity->getExtra();
@@ -90,14 +90,14 @@ class AdminGlobalSettingsRepository implements AdminGlobalSettingsRepositoryInte
             ];
         }, $entities);
 
-        // 一次性update或create所有记录
+        // 一次性update或create所有record
         AdminGlobalSettingsModel::query()->upsert(
             $values,
             ['type', 'organization'],
             ['status', 'extra', 'updated_at']
         );
 
-        // getupdate后的记录
+        // getupdate后的record
         $typeValues = array_map(fn ($entity) => $entity->getType()->value, $entities);
         $organization = $entities[0]->getOrganization();
 

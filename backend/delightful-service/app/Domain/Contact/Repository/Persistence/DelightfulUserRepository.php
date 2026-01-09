@@ -398,14 +398,14 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         }
         // update
         $userData = $userDTO->toArray();
-        // 移除为 null 的数据
+        // 移除为 null 的data
         foreach ($userData as $key => $value) {
             if ($value === null) {
                 unset($userData[$key]);
             }
         }
         $this->updateDataById($userDTO->getUserId(), $userData);
-        // return最新数据
+        // return最新data
         return $this->getUserById($userDTO->getUserId());
     }
 

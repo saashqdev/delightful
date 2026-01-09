@@ -10,7 +10,7 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 use App\Infrastructure\Core\AbstractValueObject;
 
 /**
- * 知识库检索resultvalueobject.
+ * knowledge base检索resultvalueobject.
  *
  * 统一table示从different检索method（语义检索、全文检索、图检索等）return的知识片段
  */
@@ -52,7 +52,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     private string $businessId = '';
 
     /**
-     * 元数据.
+     * 元data.
      */
     private array $metadata = [];
 
@@ -64,12 +64,12 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     private float $score = 0;
 
     /**
-     * 从知识库片段实体create检索result.
+     * 从knowledge base片段实体create检索result.
      *
      * @param string $id 唯一标识符
      * @param string $content content
      * @param string $businessId 业务ID
-     * @param array $metadata 元数据
+     * @param array $metadata 元data
      */
     public static function fromFragment(
         string $id = '',
@@ -90,12 +90,12 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 从图数据create检索result.
+     * 从图datacreate检索result.
      *
      * @param string $id 唯一标识符
      * @param string $content content
      * @param string $businessId 业务ID
-     * @param array $metadata 元数据
+     * @param array $metadata 元data
      */
     public static function fromGraphData(
         string $id = '',
@@ -179,7 +179,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * get元数据.
+     * get元data.
      */
     public function getMetadata(): array
     {
@@ -187,9 +187,9 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * set元数据.
+     * set元data.
      *
-     * @param array $metadata 元数据
+     * @param array $metadata 元data
      */
     public function setMetadata(array $metadata): self
     {

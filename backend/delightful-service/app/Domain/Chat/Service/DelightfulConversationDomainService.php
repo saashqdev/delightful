@@ -47,7 +47,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
      */
     public function saveConversation(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): DelightfulConversationEntity
     {
-        // 从messageStruct中parse出来conversation窗口详情
+        // 从messageStruct中parse出来conversation窗口detail
         $messageType = $messageDTO->getMessageType();
         if (! $messageType instanceof ControlMessageType) {
             ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR);
@@ -68,7 +68,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
                 $messageType->getName(),
                 $messageDTO->getContent()->toArray()
             );
-            // need同时修改type和content,才能把message内容变更为打开conversation窗口
+            // need同时修改type和content,才能把messagecontent变更为打开conversation窗口
             $messageDTO->setMessageType($messageTypeInterface->getMessageTypeEnum());
             $messageDTO->setContent($messageTypeInterface);
             $messageDTO->setReceiveType($conversationEntity->getReceiveType());
@@ -91,7 +91,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
 
     /**
      * 打开conversation窗口.
-     * 控制message,只在seq表write数据,不在message表写.
+     * 控制message,只在seq表writedata,不在message表写.
      * @throws Throwable
      */
     public function openConversationWindow(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
@@ -153,11 +153,11 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * 正在输入中的status只needpush给对方,不need推给自己的设备.
+     * 正在input中的status只needpush给对方,不need推给自己的设备.
      */
     public function clientOperateConversationStatus(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
-        // 从messageStruct中parse出来conversation窗口详情
+        // 从messageStruct中parse出来conversation窗口detail
         $messageType = $messageDTO->getMessageType();
         if (! in_array($messageType, [ControlMessageType::StartConversationInput, ControlMessageType::EndConversationInput], true)) {
             ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR);
@@ -190,7 +190,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * 智能体触发conversation的start输入或者end输入.
+     * 智能体触发conversation的startinput或者endinput.
      * 直接操作对方的conversation窗口，而不是把message发在自己的conversation窗口然后再经由message分发模块forward到对方的conversation窗口.
      * @deprecated user端call agentOperateConversationStatusV2 method代替
      */
@@ -229,7 +229,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * use intermediate event进行中间态messagepush，不持久化message. 支持话题级别的“正在输入中”
+     * use intermediate event进行中间态messagepush，不持久化message. 支持话题级别的“正在input中”
      * 直接操作对方的conversation窗口，而不是把message发在自己的conversation窗口然后再经由message分发模块forward到对方的conversation窗口.
      */
     public function agentOperateConversationStatusV2(ControlMessageType $controlMessageType, string $agentConversationId, ?string $topicId = null): bool
@@ -286,7 +286,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * 为指定群成员createconversation窗口.
+     * 为指定群membercreateconversation窗口.
      */
     public function batchCreateGroupConversationByUserIds(DelightfulGroupEntity $groupEntity, array $userIds): array
     {
@@ -296,7 +296,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $conversations = $this->delightfulConversationRepository->batchGetConversations($userIds, $groupEntity->getId(), ConversationType::Group);
         /** @var DelightfulConversationEntity[] $conversations */
         $conversations = array_column($conversations, null, 'user_id');
-        // 给这些群成员批量generatecreateconversation窗口message
+        // 给这些群member批量generatecreateconversation窗口message
         $conversationsCreateDTO = [];
         $conversationsUpdateIds = [];
         foreach ($users as $user) {
@@ -304,7 +304,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             $delightfulId = $user['delightful_id'] ?? null;
             if (empty($userId) || empty($delightfulId)) {
                 $this->logger->error(sprintf(
-                    'batchCreateGroupConversations 群成员没有匹配到 $users:%s $groupEntity:%s',
+                    'batchCreateGroupConversations 群member没有匹配到 $users:%s $groupEntity:%s',
                     Json::encode($users),
                     Json::encode($groupEntity->toArray()),
                 ));
@@ -338,7 +338,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * 为群主和群成员deleteconversation窗口.
+     * 为群主和群memberdeleteconversation窗口.
      */
     public function batchDeleteGroupConversationByUserIds(DelightfulGroupEntity $groupEntity, array $userIds): int
     {

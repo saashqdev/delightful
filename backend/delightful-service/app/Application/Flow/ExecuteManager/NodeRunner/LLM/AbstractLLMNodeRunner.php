@@ -184,7 +184,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
 
     private function createTools(ExecutionData $executionData, array $optionTools = [], array $tools = []): array
     {
-        // 兼容旧data
+        // compatible旧data
         foreach ($tools as $toolId) {
             if (is_string($toolId)) {
                 $optionTools[$toolId] = new OptionTool($toolId);

@@ -327,7 +327,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
             ->when($conversation->hasReceiveType(), function ($query) use ($conversation) {
                 $query->where('receive_type', $conversation->getReceiveType()->value);
             });
-        // receive_type +  receive_id 其实是全局唯一的,can确定organization编码. 但是如果needquery时指定organization,还是加上
+        // receive_type +  receive_id 其实是全局唯一的,can确定organizationencoding. 但是如果needquery时指定organization,还是加上
         if ($conversation->getUserOrganizationCode()) {
             $query->where('user_organization_code', $conversation->getUserOrganizationCode());
         }

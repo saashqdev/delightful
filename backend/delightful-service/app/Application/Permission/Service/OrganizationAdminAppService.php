@@ -51,7 +51,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * getorganization管理员详情.
+     * getorganization管理员detail.
      */
     public function show(DataIsolation $dataIsolation, int $id): array
     {

@@ -42,11 +42,11 @@ class ImageGenerateTest extends BaseTest
         }
         $header = $data[0];
         $imageData = $data[1];
-        // check头部是否符合Base64编码image的format
+        // check头部是否符合Base64encodingimage的format
         if (! preg_match('/^data:image\/(png|jpeg|jpg|gif);base64$/', $header)) {
             return false;
         }
-        // checkBase64编码是否valid
+        // checkBase64encoding是否valid
         $decodedData = base64_decode($imageData);
         return $decodedData !== false;
     }
@@ -58,10 +58,10 @@ class ImageGenerateTest extends BaseTest
         $uploadFile = new UploadFile($base64, $uploadDir, 'test');
 
         $fileDomainService = di(FileDomainService::class);
-        // uploadfile（指定不自动create目录）
+        // uploadfile（指定不自动createdirectory）
         $fileDomainService->uploadByCredential('DT001', $uploadFile);
 
-        // generate可访问的链接
+        // generate可access的链接
         $fileLink = $fileDomainService->getLink('DT001', $uploadFile->getKey(), StorageBucketType::Private);
         var_dump($fileLink);
     }

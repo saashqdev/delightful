@@ -16,7 +16,7 @@ use App\Infrastructure\Core\AbstractDTO;
 use Hyperf\Codec\Json;
 
 /**
- * 服务商下面单个模型详情的 dto.
+ * 服务商下面单个modeldetail的 dto.
  */
 class ProviderModelDetailDTO extends AbstractDTO
 {
@@ -24,7 +24,7 @@ class ProviderModelDetailDTO extends AbstractDTO
 
     protected string $serviceProviderConfigId; // 服务商configurationID
 
-    protected string $modelId = ''; // 模型true实ID
+    protected string $modelId = ''; // modeltrue实ID
 
     protected string $name;
 

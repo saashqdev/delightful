@@ -18,7 +18,7 @@ enum UserQueryType: int
     // 人员 + department
     case UserAndDepartment = 2;
 
-    // 人员 + department（完整路径）
+    // 人员 + department（完整path）
     case UserAndDepartmentFullPath = 3;
 
     /**

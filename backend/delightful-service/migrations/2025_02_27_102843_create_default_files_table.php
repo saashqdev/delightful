@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->integer('file_type')->comment('filetype：0:官方添加，1:organization添加');
             $table->string('key')->comment('filekey');
             $table->bigInteger('file_size')->comment('filesize');
-            $table->string('organization')->index()->comment('organization编码');
+            $table->string('organization')->index()->comment('organizationencoding');
             $table->string('file_extension')->index()->comment('file后缀');
             $table->string('user_id')->comment('upload者');
             $table->timestamps();

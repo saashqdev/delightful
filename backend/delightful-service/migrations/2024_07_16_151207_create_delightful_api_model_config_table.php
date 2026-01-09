@@ -18,7 +18,7 @@ class CreateDelightfulApiModelConfigTable extends Migration
     {
         Schema::create('delightful_api_model_configs', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('model')->comment('模型');
+            $table->string('model')->comment('model');
             $table->unsignedDecimal('total_amount', 40, 6)->comment('总额度');
             $table->unsignedDecimal('use_amount', 40, 6)->comment('use额度')->default(0);
             $table->integer('rpm')->comment('限stream');

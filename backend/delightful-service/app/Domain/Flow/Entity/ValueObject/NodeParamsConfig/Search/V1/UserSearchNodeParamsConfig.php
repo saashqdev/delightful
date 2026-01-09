@@ -158,7 +158,7 @@ class UserSearchNodeParamsConfig extends AbstractSearchNodeParamsConfig
                                 },
                                 "name": {
                                     "type": "string",
-                                    "title": "department名称",
+                                    "title": "departmentname",
                                     "description": "",
                                     "key": "name",
                                     "sort": 1,
@@ -171,7 +171,7 @@ class UserSearchNodeParamsConfig extends AbstractSearchNodeParamsConfig
                                 },
                                 "path": {
                                     "type": "string",
-                                    "title": "department路径",
+                                    "title": "departmentpath",
                                     "description": "",
                                     "key": "path",
                                     "sort": 2,

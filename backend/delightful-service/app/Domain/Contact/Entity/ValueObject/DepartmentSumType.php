@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * department成员求和type。
+ * departmentmember求和type。
  */
 enum DepartmentSumType: int
 {

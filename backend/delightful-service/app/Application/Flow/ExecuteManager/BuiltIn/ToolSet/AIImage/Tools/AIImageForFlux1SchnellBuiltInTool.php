@@ -27,7 +27,7 @@ class AIImageForFlux1SchnellBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return '文生图tool-Flux1-Schnell模型';
+        return '文生图tool-Flux1-Schnellmodel';
     }
 
     public function getCallback(): ?Closure

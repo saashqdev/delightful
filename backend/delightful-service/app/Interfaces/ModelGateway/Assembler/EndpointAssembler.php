@@ -18,7 +18,7 @@ class EndpointAssembler
     /**
      * generate标准化的端点type标识.
      *
-     * @param HighAvailabilityAppType $appType 高可用应用type
+     * @param HighAvailabilityAppType $appType 高可用applicationtype
      * @param string $modelId modelID
      * @return string 标准化的端点type标识
      */

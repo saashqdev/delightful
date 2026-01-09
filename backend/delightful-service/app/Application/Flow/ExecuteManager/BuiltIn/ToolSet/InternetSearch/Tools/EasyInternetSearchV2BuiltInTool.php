@@ -26,7 +26,7 @@ use function di;
 
 #[BuiltInToolDefine]
 /**
- * 采用一个 seq push所有的search相关content，前端不再多个 seq 合并成一个渲染.
+ * 采用一个 seq push所有的search相关content，前端不再多个 seq merge成一个渲染.
  */
 class EasyInternetSearchV2BuiltInTool extends AbstractBuiltInTool
 {

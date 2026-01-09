@@ -128,7 +128,7 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
                         "type": "string",
                         "key": "file_name",
                         "sort": 0,
-                        "title": "file名称",
+                        "title": "filename",
                         "description": "",
                         "required": null,
                         "value": null,

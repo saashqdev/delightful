@@ -8,15 +8,15 @@ declare(strict_types=1);
 namespace App\Domain\ImageGenerate\Contract;
 
 /**
- * 字体提供者接口
+ * 字体提供者interface
  * 用于在开源项目中定义字体管理规范，由企业项目implement具体逻辑.
  */
 interface FontProviderInterface
 {
     /**
-     * getTTF字体file路径.
+     * getTTF字体filepath.
      *
-     * @return null|string 字体file的绝对路径，如果为null则不支持TTF字体
+     * @return null|string 字体file的绝对path，如果为null则不支持TTF字体
      */
     public function getFontPath(): ?string;
 

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Token\Entity\ValueObject;
 
 /**
- * tokentype:0:账号,1:user,2:organization,3:应用,4:process.
+ * tokentype:0:账号,1:user,2:organization,3:application,4:process.
  */
 enum DelightfulTokenType: int
 {
@@ -21,7 +21,7 @@ enum DelightfulTokenType: int
     // organization,type_relation_value为organizationid
     case Organization = 2;
 
-    // 应用,type_relation_value为应用id
+    // application,type_relation_value为applicationid
     case App = 3;
 
     // process,type_relation_value为processid
@@ -31,7 +31,7 @@ enum DelightfulTokenType: int
     case TeamshareOpenPlatform = 5;
 
     /**
-     * pass枚举值名称的stringget枚举值.
+     * pass枚举值name的stringget枚举值.
      */
     public static function getCaseFromName(string $typeName): ?DelightfulTokenType
     {

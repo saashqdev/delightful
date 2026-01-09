@@ -20,7 +20,7 @@ class CreateDelightfulApiMsgLogTable extends Migration
             $table->bigIncrements('id');
             $table->text('msg')->comment('message');
             $table->unsignedDecimal('use_amount', 40, 6)->comment('use额度');
-            $table->string('model')->comment('use模型id');
+            $table->string('model')->comment('usemodelid');
             $table->string('organization_code')->comment('organizationid');
             $table->string('user_id')->comment('userid');
             $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('create时间');

@@ -49,7 +49,7 @@ class VolceOCRClient implements OCRClientInterface
         $content = $response->getContents();
         $this->logger->info('火山OCRresponse: ' . $content);
         $result = Json::decode($content);
-        $code = $result['code'] ?? 0; // 如果没有 'code'，则usedefault的error代码
+        $code = $result['code'] ?? 0; // 如果没有 'code'，则usedefault的errorcode
         if ($code !== 10000) {
             $message = $result['Message'] ?? '火山OCR遇到error,message 不存在'; // 如果没有 'message'，则usedefaultmessage
             $this->logger->error(sprintf(
@@ -84,7 +84,7 @@ class VolceOCRClient implements OCRClientInterface
             return null; // 无法getfiletype
         }
 
-        // 解析 Content-Type
+        // parse Content-Type
         $contentType = is_array($headers['Content-Type']) ? $headers['Content-Type'][0] : $headers['Content-Type'];
 
         // checkfiletype是否为 PDF 或image

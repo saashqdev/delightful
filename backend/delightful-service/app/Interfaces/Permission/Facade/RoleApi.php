@@ -39,7 +39,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // create数据隔离上下文
+        // createdata隔离上下文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -57,7 +57,7 @@ class RoleApi extends AbstractPermissionApi
         // queryrolelist
         $result = $this->roleAppService->queries($dataIsolation, $page, $filters);
 
-        // 批量getuser详情（每个role仅取前5个userId）
+        // 批量getuserdetail（每个role仅取前5个userId）
         $contactIsolation = ContactDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -81,7 +81,7 @@ class RoleApi extends AbstractPermissionApi
             $allUserInfo = $this->userInfoAppService->getBatchUserInfo($allNeedUserIds, $contactIsolation);
         }
 
-        // 重新组装list数据
+        // 重新组装listdata
         $list = [];
         foreach ($result['list'] as $index => $roleEntity) {
             $limitedIds = $roleUserIdsMap[$index] ?? [];
@@ -104,13 +104,13 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // create数据隔离上下文
+        // createdata隔离上下文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
         );
 
-        // getrole详情
+        // getroledetail
         $roleEntity = $this->roleAppService->show($dataIsolation, $id);
 
         // getrole关联的userinfo
@@ -132,7 +132,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // create数据隔离上下文
+        // createdata隔离上下文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -168,7 +168,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // create数据隔离上下文
+        // createdata隔离上下文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -216,7 +216,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // create数据隔离上下文
+        // createdata隔离上下文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()

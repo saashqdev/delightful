@@ -14,7 +14,7 @@ final class ProjectFileMention extends AbstractMention
 {
     public function getMentionTextStruct(): string
     {
-        // iffile_path为null，needaccording to file_id拿到 file_key，从 file_key解析到 file_path
+        // iffile_path为null，needaccording to file_id拿到 file_key，从 file_keyparse到 file_path
         $data = $this->getAttrs()?->getData();
         if (! $data instanceof FileData) {
             return '';

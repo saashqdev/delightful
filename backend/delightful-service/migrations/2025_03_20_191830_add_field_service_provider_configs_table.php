@@ -16,7 +16,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('service_provider_configs', function (Blueprint $table) {
-            $table->json('translate')->default(Db::raw('(JSON_ARRAY())'))->comment('多语言configuration，format：{"": "名称", "en_US": "name"}');
+            $table->json('translate')->default(Db::raw('(JSON_ARRAY())'))->comment('多语言configuration，format：{"": "name", "en_US": "name"}');
         });
     }
 

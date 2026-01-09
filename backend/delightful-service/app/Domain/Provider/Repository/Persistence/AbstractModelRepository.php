@@ -106,7 +106,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 重写 getAttributes method以correctprocess复杂field的序列化.
+     * override getAttributes method以correctprocess复杂field的序列化.
      */
     protected function getFieldAttributes(AbstractEntity $entity): array
     {
@@ -132,7 +132,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 准备移除软删相关功能，temporary这样写。create带有软deletefilter的 ProviderConfigModel querybuild器.
+     * 准备移除软删相关feature，temporary这样写。create带有软deletefilter的 ProviderConfigModel querybuild器.
      */
     private function createConfigQuery(): Builder
     {
@@ -140,7 +140,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 准备移除软删相关功能，temporary这样写。create带有软deletefilter的 ProviderModelModel querybuild器.
+     * 准备移除软删相关feature，temporary这样写。create带有软deletefilter的 ProviderModelModel querybuild器.
      */
     private function createProviderModelQuery(): Builder
     {

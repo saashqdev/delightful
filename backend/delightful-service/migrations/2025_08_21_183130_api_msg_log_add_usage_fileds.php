@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_api_msg_logs', function (Blueprint $table) {
             $table->integer('prompt_tokens')->default(0)->comment('prompt词token数');
-            $table->integer('completion_tokens')->default(0)->comment('complete内容token数');
+            $table->integer('completion_tokens')->default(0)->comment('completecontenttoken数');
             $table->integer('cache_write_tokens')->default(0)->comment('writecache的token数');
             $table->integer('cache_read_tokens')->default(0)->comment('从cacheread的token数');
         });

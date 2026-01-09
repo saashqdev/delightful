@@ -28,7 +28,7 @@ use Throwable;
 use function Hyperf\Support\retry;
 
 /**
- * service商modelsync应用service.
+ * service商modelsyncapplicationservice.
  * 负责从外部API拉取model并sync到Officialservice商.
  */
 class ProviderModelSyncAppService
@@ -73,7 +73,7 @@ class ProviderModelSyncAppService
         ]);
 
         try {
-            // 3. 解析configuration
+            // 3. parseconfiguration
             $config = $providerConfigEntity->getConfig();
             if (! $config) {
                 $this->logger->warning('configuration为空，跳过sync', [

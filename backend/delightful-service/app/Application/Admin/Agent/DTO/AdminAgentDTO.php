@@ -14,7 +14,7 @@ class AdminAgentDTO extends AbstractDTO
     // primary key
     protected string $id;
 
-    // 名称
+    // name
     protected string $agentName;
 
     // description
@@ -32,7 +32,7 @@ class AdminAgentDTO extends AbstractDTO
     // creation time
     protected string $createdAt;
 
-    // create人名称
+    // create人name
     protected string $createdName;
 
     // publishstatus

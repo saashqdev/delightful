@@ -33,7 +33,7 @@ enum DelightfulResourceEnum: string
     case PLATFORM_ORGANIZATION = 'platform.organization'; # organization管理
     case ADMINPLUS_AI = 'admin_plus.ai'; # organization管理后台plus-AI管理
 
-    // ===== 三级：具体资源 (用于具体绑定接口）=====
+    // ===== 三级：具体资源 (用于具体绑定interface）=====
     case ADMIN_AI_MODEL = 'platform.ai.model_management'; # AI管理-model管理
     case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AI管理-智能绘图管理
     case ADMIN_AI_MODE = 'platform.ai.mode_management'; # AI管理-模式管理管理

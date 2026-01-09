@@ -17,7 +17,7 @@ enum DelightfulMessageStatus: int
     // 已读
     case Seen = 1;
 
-    // 已查看（非纯文本的复杂typemessage，user点击了详情）
+    // 已查看（非纯文本的复杂typemessage，user点击了detail）
     case Read = 2;
 
     // 已withdraw

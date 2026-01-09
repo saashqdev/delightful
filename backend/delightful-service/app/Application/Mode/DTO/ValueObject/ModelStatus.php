@@ -14,13 +14,13 @@ enum ModelStatus: string
     case Deleted = 'deleted';
 
     /**
-     * getstatus描述.
+     * getstatusdescription.
      */
     public function getDescription(): string
     {
         return match ($this) {
             self::Normal => '正常',
-            self::Disabled => '已禁用',
+            self::Disabled => 'disabled',
             self::Deleted => '已delete',
         };
     }

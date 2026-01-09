@@ -27,7 +27,7 @@ class AIImageForHighAesGeneralV21LBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getDescription(): string
     {
-        return '文生图tool-火山-High-Aes-General-V21-L模型';
+        return '文生图tool-火山-High-Aes-General-V21-Lmodel';
     }
 
     public function getCallback(): ?Closure

@@ -19,8 +19,8 @@ use Psr\Log\LoggerInterface;
 
 /**
  * imagegenerate统一抽象类
- * integration水印process和钉钉alert功能
- * 所有imagegenerateProvider都should继承此类.
+ * integration水印process和钉钉alertfeature
+ * 所有imagegenerateProvider都shouldinherit此类.
  */
 abstract class AbstractImageGenerate implements ImageGenerate
 {
@@ -48,8 +48,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * implement接口要求的带水印original数据method
-     * 各子类mustaccording to自己的数据formatimplement此method.
+     * implementinterface要求的带水印originaldatamethod
+     * 各子类mustaccording to自己的dataformatimplement此method.
      */
     abstract public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array;
 

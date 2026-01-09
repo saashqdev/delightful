@@ -90,7 +90,7 @@ class RoleRepository implements RoleRepositoryInterface
         // default只queryneed展示的role
         $query->where('is_display', 1);
 
-        // 应用filter条件
+        // applicationfilter条件
         if ($filters) {
             if (isset($filters['name']) && ! empty($filters['name'])) {
                 $query->where('name', 'like', '%' . $filters['name'] . '%');
@@ -268,7 +268,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * based onorganization编码get RoleModel query构造器.
+     * based onorganizationencodingget RoleModel query构造器.
      */
     private function roleQuery(string $organizationCode)
     {
@@ -276,7 +276,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * based onorganization编码get RoleUserModel query构造器.
+     * based onorganizationencodingget RoleUserModel query构造器.
      */
     private function roleUserQuery(string $organizationCode)
     {

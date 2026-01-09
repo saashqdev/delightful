@@ -64,12 +64,12 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     }
 
     /**
-     * passDelightfulID和organization编码查找user.
+     * passDelightfulID和organizationencoding查找user.
      */
     public function findUserByDelightfulIdAndOrganization(string $delightfulId, ?string $organizationCode = null): ?DelightfulUserEntity
     {
         $query = $this->userModel::getQuery()->where('delightful_id', $delightfulId)
-            ->where('status', 1); // 已激活status
+            ->where('status', 1); // activatedstatus
 
         if (! empty($organizationCode)) {
             $query->where('organization_code', $organizationCode);

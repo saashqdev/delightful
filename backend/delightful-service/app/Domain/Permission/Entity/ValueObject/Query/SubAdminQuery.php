@@ -14,20 +14,20 @@ use App\Infrastructure\Core\AbstractQuery;
  *
  * use示例：
  * $query = new SubAdminQuery([
- *     'name' => 'role名称',
+ *     'name' => 'rolename',
  *     'status' => 1,
  * ]);
  */
 class SubAdminQuery extends AbstractQuery
 {
-    /** 子管理员名称（模糊匹配） */
+    /** 子管理员name（模糊匹配） */
     private ?string $name = null;
 
     /** enabled status：1-启用 0-禁用 */
     private ?int $status = null;
 
     /**
-     * 构造函数支持从array批量initialize属性（继承自 AbstractObject）。
+     * 构造函数支持从array批量initializeproperty（inherit自 AbstractObject）。
      */
 
     /* -------------------- getter / setter -------------------- */

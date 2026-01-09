@@ -78,7 +78,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * checkcurrentuser是否在currentorganization内,并且账号是已激活status
+     * checkcurrentuser是否在currentorganization内,并且账号是activatedstatus
      */
     public function assertUserInOrganization(string $userId, string $currentOrganizationCode): void
     {
@@ -162,7 +162,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 批量according to aiCode（flowCode）+ organization编码getassistant的 user_id.
+     * 批量according to aiCode（flowCode）+ organizationencodinggetassistant的 user_id.
      * @return array<string, string> return aiCode => userId 的映射
      */
     public function getByAiCodes(DataIsolation $dataIsolation, array $aiCodes): array
@@ -191,7 +191,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return [];
         }
 
-        // 4. filterorganization编码并build delightfulId => userId 映射
+        // 4. filterorganizationencoding并build delightfulId => userId 映射
         $delightfulIdToUserIdMap = [];
         foreach ($users as $user) {
             // 只保留currentorganization的user
@@ -222,14 +222,14 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * according touserID和userorganization列表queryuser详情，according touserorganization决定filter策略.
+     * according touserID和userorganization列表queryuserdetail，according touserorganization决定filter策略.
      * @param array $userIds userIDarray
-     * @param array $userOrganizations currentuser拥有的organization编码array
+     * @param array $userOrganizations currentuser拥有的organizationencodingarray
      * @return array<UserDetailDTO>
      */
     public function getUserDetailByUserIdsWithOrgCodes(array $userIds, array $userOrganizations): array
     {
-        // get官方organization编码
+        // get官方organizationencoding
         $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
         // mergeuserorganization和官方organization
@@ -341,7 +341,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         $cacheKey = md5(sprintf('OrganizationUserLogin:auth:%s:env:%s:', $authorization, $delightfulEnvironmentEntity->getId()));
         $lockKey = $this->generateLockKey(PlatformType::Delightful, $authorization);
 
-        // 尝试从cacheget结果
+        // 尝试从cachegetresult
         $cachedResult = $this->getCachedLoginCheckResult($cacheKey);
         if ($cachedResult !== null) {
             return $cachedResult;
@@ -369,7 +369,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_CREATE_ACCOUNT);
             }
 
-            // buildreturn结果
+            // buildreturnresult
             $loginResponses = [];
             foreach ($delightfulUserEntities as $delightfulUserEntity) {
                 $currentOrgCode = $delightfulUserEntity->getOrganizationCode();
@@ -382,7 +382,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
                 $loginResponses[] = $loginResponseDTO;
             }
-            // cache结果
+            // cacheresult
             $this->cacheLoginCheckResult($cacheKey, $loginResponses);
 
             return $loginResponses;
@@ -562,7 +562,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
     protected function getAgents(array $popular, array $latest): array
     {
-        // according todelightful_id,查账号详情
+        // according todelightful_id,查账号detail
         $delightfulIds[] = array_column($popular, 'delightful_id');
         $delightfulIds[] = array_column($latest, 'delightful_id');
         $delightfulIds = array_values(array_unique(array_merge(...$delightfulIds)));
@@ -582,12 +582,12 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * cache登录校验结果.
+     * cache登录校验result.
      * @param array<LoginResponseDTO> $result
      */
     protected function cacheLoginCheckResult(string $cacheKey, array $result): void
     {
-        // 为了兼容cache，need将DTOobjectconvert为arraystorage
+        // 为了compatiblecache，need将DTOobjectconvert为arraystorage
         $cacheDTOArray = array_map(static function ($dto) {
             return $dto->toArray();
         }, $result);
@@ -618,7 +618,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * getcache的登录校验结果.
+     * getcache的登录校验result.
      * @return null|array<LoginResponseDTO>
      */
     private function getCachedLoginCheckResult(string $cacheKey): ?array

@@ -13,16 +13,16 @@ use Hyperf\DbConnection\Model\Model;
 use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
- * 知识库文档model.
+ * knowledge base文档model.
  * @property int $id primary keyID
- * @property string $organization_code organization编码
- * @property string $knowledge_base_code 知识库编码
+ * @property string $organization_code organizationencoding
+ * @property string $knowledge_base_code knowledge baseencoding
  * @property string $name 文档name
- * @property string $code 文档编码
+ * @property string $code 文档encoding
  * @property int $version version号
  * @property bool $enabled 是否启用
  * @property int $doc_type 文档type
- * @property array $doc_metadata 文档元数据
+ * @property array $doc_metadata 文档元data
  * @property DocumentFileInterface $document_file 文档fileinfo
  * @property string $third_platform_type 第三方平台type
  * @property string $third_file_id 第三方fileID

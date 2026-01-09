@@ -23,7 +23,7 @@ interface AuthenticationRepositoryInterface
     public function findAccountByPhone(string $stateCode, string $phone): ?AccountEntity;
 
     /**
-     * passDelightfulID和organization编码查找user.
+     * passDelightfulID和organizationencoding查找user.
      */
     public function findUserByDelightfulIdAndOrganization(string $delightfulId, ?string $organizationCode = null): ?DelightfulUserEntity;
 }

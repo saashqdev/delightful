@@ -46,7 +46,7 @@ class ModelConfigRepository extends AbstractRepository implements ModelConfigRep
     }
 
     /**
-     * according toIDget模型configuration.
+     * according toIDgetmodelconfiguration.
      */
     public function getById(LLMDataIsolation $dataIsolation, string $id): ?ModelConfigEntity
     {
@@ -56,7 +56,7 @@ class ModelConfigRepository extends AbstractRepository implements ModelConfigRep
     }
 
     /**
-     * according toendpoint或typeget模型configuration.
+     * according toendpoint或typegetmodelconfiguration.
      */
     public function getByEndpointOrType(LLMDataIsolation $dataIsolation, string $endpointOrType): ?ModelConfigEntity
     {

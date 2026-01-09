@@ -46,7 +46,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
                 'en_US' => 'Test Platform',
             ],
             'title_i18n' => [
-                'zh_CN' => 'test平台标题',
+                'zh_CN' => 'test平台title',
                 'en_US' => 'Test Platform Title',
             ],
             'keywords_i18n' => [
@@ -96,7 +96,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
     public function testUpdatePlatformSettingsPartially(): void
     {
-        // 首先set完整数据
+        // 首先set完整data
         $initialPayload = [
             'logo_zh_url' => 'https://example.com/initial_logo_zh.png',
             'logo_en_url' => 'https://example.com/initial_logo_en.png',
@@ -179,7 +179,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
                 'en_US' => 'My Platform',
             ],
             'title_i18n' => [
-                'zh_CN' => '网站标题',
+                'zh_CN' => '网站title',
                 'en_US' => 'Website Title',
             ],
         ];

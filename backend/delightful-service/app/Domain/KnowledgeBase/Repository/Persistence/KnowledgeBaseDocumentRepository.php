@@ -24,7 +24,7 @@ use Psr\Container\ContainerInterface;
 use function mb_substr;
 
 /**
- * 知识库文档仓库implement.
+ * knowledge base文档仓库implement.
  */
 class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository implements KnowledgeBaseDocumentRepositoryInterface
 {
@@ -33,11 +33,11 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * create知识库文档.
+     * createknowledge base文档.
      */
     public function create(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentEntity $documentEntity): KnowledgeBaseDocumentEntity
     {
-        // 准备数据
+        // 准备data
         $attributes = $this->prepareAttributes($documentEntity);
         $attributes['organization_code'] = $dataIsolation->getCurrentOrganizationCode();
 
@@ -73,7 +73,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
 
     public function restoreOrCreate(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentEntity $documentEntity): KnowledgeBaseDocumentEntity
     {
-        // 准备数据
+        // 准备data
         $attributes = $this->prepareAttributes($documentEntity);
         $attributes['organization_code'] = $dataIsolation->getCurrentOrganizationCode();
 
@@ -96,7 +96,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * update知识库文档.
+     * updateknowledge base文档.
      */
     public function update(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentEntity $documentEntity): KnowledgeBaseDocumentEntity
     {
@@ -137,11 +137,11 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * @return array<string, int> array<知识库code, 文档quantity>
+     * @return array<string, int> array<knowledge basecode, 文档quantity>
      */
     public function getDocumentCountByKnowledgeBaseCode(KnowledgeBaseDataIsolation $dataIsolation, array $knowledgeBaseCodes): array
     {
-        // 分组聚合query，get每个知识库的文档quantity
+        // 分组聚合query，get每个knowledge base的文档quantity
         $res = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query())
             ->select('knowledge_base_code', Db::raw('count(*) as count'))
             ->groupBy('knowledge_base_code')
@@ -174,7 +174,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * query知识库文档list.
+     * queryknowledge base文档list.
      *
      * @return array{total: int, list: array<KnowledgeBaseDocumentEntity>}
      */
@@ -214,7 +214,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 查看单个知识库文档详情.
+     * 查看单个knowledge base文档detail.
      */
     public function show(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $selectForUpdate = false): ?KnowledgeBaseDocumentEntity
     {
@@ -232,7 +232,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * delete知识库文档.
+     * deleteknowledge base文档.
      */
     public function destroy(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -244,7 +244,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * according to文档编码delete所有片段.
+     * according to文档encodingdelete所有片段.
      */
     public function destroyFragmentsByDocumentCode(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -316,10 +316,10 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     {
         $builder = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query());
 
-        // 按知识库编码filter
+        // 按knowledge baseencodingfilter
         $builder->where('knowledge_base_code', $query->getKnowledgeBaseCode());
 
-        // 按文档编码filter
+        // 按文档encodingfilter
         if ($query->getCode() !== null) {
             $builder->where('code', $query->getCode());
         }
@@ -349,7 +349,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             $builder->where('updated_uid', $query->getUpdatedUid());
         }
 
-        // 按文档编码array批量query
+        // 按文档encodingarray批量query
         if ($query->getCodes() !== null && ! empty($query->getCodes())) {
             $builder->whereIn('code', $query->getCodes());
         }
@@ -358,7 +358,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * generate唯一文档编码
+     * generate唯一文档encoding
      */
     protected function generateDocumentCode(): string
     {

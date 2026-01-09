@@ -106,7 +106,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * getorganization编码
+     * getorganizationencoding
      */
     public function getOrganization(): string
     {
@@ -114,7 +114,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * setorganization编码
+     * setorganizationencoding
      */
     public function setOrganization(string $organization): self
     {

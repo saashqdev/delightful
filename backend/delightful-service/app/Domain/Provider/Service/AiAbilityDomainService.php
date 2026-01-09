@@ -30,12 +30,12 @@ class AiAbilityDomainService
     }
 
     /**
-     * according to能力代码getAI能力实体（用于运行时，不校验organization）.
+     * according to能力codegetAI能力实体（用于运行时，不校验organization）.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离info
-     * @param AiAbilityCode $code 能力代码
+     * @param ProviderDataIsolation $dataIsolation data隔离info
+     * @param AiAbilityCode $code 能力code
      * @return AiAbilityEntity AI能力实体
-     * @throws Exception 当能力不存在或未启用时抛出exception
+     * @throws Exception 当能力不存在或未启用时throwexception
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): AiAbilityEntity
     {
@@ -51,7 +51,7 @@ class AiAbilityDomainService
     /**
      * get所有AI能力list（无pagination）.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离info
+     * @param ProviderDataIsolation $dataIsolation data隔离info
      * @return array<AiAbilityEntity> AI能力实体list
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array
@@ -65,7 +65,7 @@ class AiAbilityDomainService
     /**
      * paginationqueryAI能力list.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离info
+     * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param AiAbilityQuery $query query条件
      * @param Page $page paginationinfo
      * @return array{total: int, list: array<AiAbilityEntity>}
@@ -78,11 +78,11 @@ class AiAbilityDomainService
     /**
      * updateAI能力.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离info
-     * @param AiAbilityCode $code 能力代码
-     * @param array $data update数据
+     * @param ProviderDataIsolation $dataIsolation data隔离info
+     * @param AiAbilityCode $code 能力code
+     * @param array $data updatedata
      * @return bool 是否updatesuccess
-     * @throws Exception 当能力不存在时抛出exception
+     * @throws Exception 当能力不存在时throwexception
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool
     {
@@ -100,9 +100,9 @@ class AiAbilityDomainService
     }
 
     /**
-     * initializeAI能力数据.
+     * initializeAI能力data.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离info
+     * @param ProviderDataIsolation $dataIsolation data隔离info
      * @return int initialize的quantity
      */
     public function initializeAbilities(ProviderDataIsolation $dataIsolation): int

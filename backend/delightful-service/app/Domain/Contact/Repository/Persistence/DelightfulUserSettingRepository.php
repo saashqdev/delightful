@@ -107,7 +107,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
         // write delightfulId
         $delightfulUserSettingEntity->setDelightfulId($delightfulId);
 
-        // 查找现有记录
+        // 查找现有record
         $model = UserSettingModel::query()
             ->where('delightful_id', $delightfulId)
             ->where('key', $delightfulUserSettingEntity->getKey())
@@ -147,7 +147,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
      */
     public function saveGlobal(DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
-        // 查找现有记录
+        // 查找现有record
         /** @var null|UserSettingModel $model */
         $model = UserSettingModel::query()
             ->whereNull('organization_code')

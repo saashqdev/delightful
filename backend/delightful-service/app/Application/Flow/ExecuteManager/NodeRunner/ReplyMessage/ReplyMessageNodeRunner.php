@@ -73,7 +73,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $paramsConfig->getLinkDesc()
         );
 
-        // 如果是资源类的数据，那么need提前upload了
+        // 如果是资源类的data，那么need提前upload了
         $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
         // 由于里面will进行重命名，所以这里直接get对应的name传入进去
@@ -225,7 +225,7 @@ class ReplyMessageNodeRunner extends NodeRunner
 
         $outputCall = function (string $data, array $compressibleContent, array $params) use ($id, $conversationId, $version) {
             if (! empty($compressibleContent)) {
-                // 如果有压缩content，那么解压数据再输出
+                // 如果有compresscontent，那么decompressdata再output
                 $data = CompressibleContent::deCompress($data, false);
             }
 
@@ -311,7 +311,7 @@ class ReplyMessageNodeRunner extends NodeRunner
 
         $outputCall = function (string $data, array $compressibleContent, array $params) use ($chatAppService, $appMessageId, $aiUserId, $receiveUserId) {
             if (! empty($compressibleContent)) {
-                // 如果有压缩content，那么解压数据再输出
+                // 如果有compresscontent，那么decompressdata再output
                 $data = CompressibleContent::deCompress($data, false);
             }
 

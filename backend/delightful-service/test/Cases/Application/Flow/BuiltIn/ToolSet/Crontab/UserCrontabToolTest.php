@@ -98,7 +98,7 @@ JSON, true));
 -topic_id是：750436587206451201
 -agent_id是：725682656757252096
 ​​3、你needcheckday+time  是否比currenttime大，如果不大，needreminderusertime只能是未来的time
-4、你need保证user输入的hint词中，有day, time和name的value
+4、你need保证userinput的hint词中，有day, time和name的value
 
 # 上下文
 

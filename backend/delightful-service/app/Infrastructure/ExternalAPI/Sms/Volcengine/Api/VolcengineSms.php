@@ -16,7 +16,7 @@ use Hyperf\Di\Annotation\Inject;
 use Throwable;
 
 /**
- * 火山引起短信类接口.
+ * 火山引起短信类interface.
  * @see https://www.volcengine.com/docs/6361/171579
  */
 class VolcengineSms extends VolcengineApi
@@ -26,12 +26,12 @@ class VolcengineSms extends VolcengineApi
     protected string $path = '/';
 
     /**
-     * 接口name.
+     * interfacename.
      */
     protected string $action = 'SendSms';
 
     /**
-     * 接口version.
+     * interfaceversion.
      */
     protected string $version = '2020-01-01';
 
@@ -69,7 +69,7 @@ class VolcengineSms extends VolcengineApi
                 'PhoneNumbers' => $phone,
             ];
             $this->setBody($body);
-            // 如果是单元test,不发短信,只verifyvariable解析/短信content&&短信signature多语种适配/国际区号correct解析
+            // 如果是单元test,不发短信,只verifyvariableparse/短信content&&短信signature多语种适配/国际区号correctparse
             if (defined('IN_UNIT_TEST')) {
                 // 单元test,不真的发短信
                 return $sendResult->setResult($errCode, $msg);

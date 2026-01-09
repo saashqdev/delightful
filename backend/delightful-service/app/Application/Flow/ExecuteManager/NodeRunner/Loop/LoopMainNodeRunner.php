@@ -165,7 +165,7 @@ class LoopMainNodeRunner extends NodeRunner
         try {
             $subExecutor = new DelightfulFlowExecutor($loopDelightfulFlow, $executionData);
             $subExecutor->setInLoop(true);
-            // 复用current的execute数据，循环体内可访问和修改
+            // 复用current的executedata，循环体内可access和修改
             $subExecutor->execute(TriggerType::LoopStart);
         } catch (Throwable $throwable) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $throwable->getMessage()]);

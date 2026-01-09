@@ -25,12 +25,12 @@ class CheckLoginRequest extends AbstractDTO
     protected string $password;
 
     /**
-     * organization编码,不传default为null.
+     * organizationencoding,不传default为null.
      */
     protected string $organizationCode = '';
 
     /**
-     * 国家代码
+     * 国家code
      */
     protected string $stateCode = '+86';
 

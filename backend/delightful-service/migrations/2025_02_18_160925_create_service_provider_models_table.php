@@ -21,16 +21,16 @@ return new class extends Migration {
         Schema::create('service_provider_models', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('service_provider_config_id')->index()->comment('服务商ID');
-            $table->string('name', 50)->comment('模型名称');
-            $table->string('model_version', 50)->comment('模型在服务商下的名称');
-            $table->string('model_id', 50)->comment('模型true实ID');
-            $table->string('category')->comment('模型category：llm/vlm');
+            $table->string('name', 50)->comment('modelname');
+            $table->string('model_version', 50)->comment('model在服务商下的name');
+            $table->string('model_id', 50)->comment('modeltrue实ID');
+            $table->string('category')->comment('modelcategory：llm/vlm');
             $table->tinyInteger('model_type')->comment('具体type,用于分组用');
-            $table->json('config')->comment('模型的configurationinformation');
-            $table->string('description', 255)->nullable()->comment('模型description');
+            $table->json('config')->comment('model的configurationinformation');
+            $table->string('description', 255)->nullable()->comment('modeldescription');
             $table->integer('sort')->default(0)->comment('sort');
             $table->string('icon')->default('')->comment('图标');
-            $table->string('organization_code')->comment('organization编码');
+            $table->string('organization_code')->comment('organizationencoding');
             $table->tinyInteger('status')->default(0)->comment('status：0-未启用，1-启用');
             $table->timestamps();
             $table->softDeletes();

@@ -36,10 +36,10 @@ class SSRFUtil
      * @param array $blackList blacklistIP或域名
      * @param array $whiteList 白名单IP或域名
      * @param array $allowProtocols allow的协议
-     * @param bool $replaceIp 是否替换为IP访问
+     * @param bool $replaceIp 是否替换为IPaccess
      * @param bool $allowRedirect 是否allow重定向
      * @return string 安全的URL
-     * @throws Exception\SSRFException 当URL不安全时抛出exception
+     * @throws Exception\SSRFException 当URL不安全时throwexception
      */
     public static function getSafeUrl(
         string $url,
@@ -68,7 +68,7 @@ class SSRFUtil
      * @param array $blackList blacklistIP或域名
      * @param array $whiteList 白名单IP或域名
      * @param array $allowProtocols allow的协议
-     * @param bool $replaceIp 是否替换为IP访问
+     * @param bool $replaceIp 是否替换为IPaccess
      * @param bool $allowRedirect 是否allow重定向
      * @return bool 是否安全
      */
@@ -92,7 +92,7 @@ class SSRFUtil
      * getURL对应的IP.
      *
      * @param string $url URL
-     * @return null|string IP地址或null（如果解析fail）
+     * @return null|string IP地址或null（如果parsefail）
      */
     public static function getUrlIp(string $url): ?string
     {

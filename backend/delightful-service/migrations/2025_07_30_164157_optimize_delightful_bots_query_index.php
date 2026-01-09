@@ -18,7 +18,7 @@ return new class extends Migration {
     {
         // optimize delightful_bots 表
         Schema::table('delightful_bots', function (Blueprint $table) {
-            // 1. optimize chat-mode/available 接口的 JOIN query
+            // 1. optimize chat-mode/available interface的 JOIN query
             // 对应SQL: delightful_bots.bot_version_id = delightful_bot_versions.id AND delightful_bots.status = '7'
             $table->index(['bot_version_id', 'status'], 'idx_bot_version_status');
 

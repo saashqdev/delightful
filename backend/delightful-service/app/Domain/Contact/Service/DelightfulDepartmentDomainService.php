@@ -147,7 +147,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
         );
 
         $departmentsChildrenEntities = $this->getChildrenByDepartmentIds($departments, $departmentIds);
-        // 合并 && 去重
+        // merge && 去重
         $departmentIds = array_column(array_merge(...$departmentsChildrenEntities), 'department_id');
         return array_values(array_unique($departmentIds));
     }
@@ -175,25 +175,25 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
             return $this->departmentRepository->getDepartmentRootId($organizationCode);
         }
 
-        // according toorganization编码和平台typeget根departmentID
+        // according toorganizationencoding和平台typeget根departmentID
         return $this->thirdPlatformIdMappingRepository->getDepartmentRootId($organizationCode, $platformType);
     }
 
     /**
      * 批量get多个organization的根departmentinfo.
-     * @param array $organizationCodes organization代码array
-     * @return array<string,DelightfulDepartmentEntity> 以organization代码为键，根department实体为value的关联array
+     * @param array $organizationCodes organizationcodearray
+     * @return array<string,DelightfulDepartmentEntity> 以organizationcode为键，根department实体为value的关联array
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array
     {
         $rootDepartments = $this->departmentRepository->getOrganizationsRootDepartment($organizationCodes);
 
-        // check是否有根department数据
+        // check是否有根departmentdata
         if (empty($rootDepartments)) {
             return [];
         }
 
-        // process数据format，以organization代码为键，根department实体为value
+        // processdataformat，以organizationcode为键，根department实体为value
         $result = [];
         foreach ($rootDepartments as $department) {
             $result[$department->getOrganizationCode()] = $department;

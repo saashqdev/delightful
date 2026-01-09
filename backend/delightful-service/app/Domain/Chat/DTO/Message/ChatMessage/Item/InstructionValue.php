@@ -10,22 +10,22 @@ namespace App\Domain\Chat\DTO\Message\ChatMessage\Item;
 use App\Domain\Chat\Entity\AbstractEntity;
 
 /**
- * instruction选项值实体类，according to proto 定义.
+ * instructionoption值实体类，according to proto 定义.
  */
 class InstructionValue extends AbstractEntity
 {
     /**
-     * 选项ID.
+     * optionID.
      */
     protected string $id = '';
 
     /**
-     * 选项的显示名称.
+     * option的显示name.
      */
     protected string $name = '';
 
     /**
-     * 选项的值.
+     * option的值.
      */
     protected string $value = '';
 

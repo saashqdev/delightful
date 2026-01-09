@@ -452,7 +452,7 @@ class VolcengineStandardClient
      * 只用于submittask时verify是否successsubmit（20000000）.
      *
      * @param array $responseHeaders response头array
-     * @param string $requestId requestID，用于log记录
+     * @param string $requestId requestID，用于logrecord
      */
     private function validateApiStatusCode(array $responseHeaders, string $requestId): void
     {

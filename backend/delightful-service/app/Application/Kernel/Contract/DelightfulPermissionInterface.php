@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\Kernel\Contract;
 
 /**
- * permission枚举接口
+ * permission枚举interface
  * 提供permission管理的统一抽象
  */
 interface DelightfulPermissionInterface
@@ -29,7 +29,7 @@ interface DelightfulPermissionInterface
     public function buildPermission(string $resource, string $operation): string;
 
     /**
-     * 解析permission标识.
+     * parsepermission标识.
      */
     public function parsePermission(string $permissionKey): array;
 

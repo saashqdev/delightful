@@ -41,7 +41,7 @@ class ModeDomainService
     }
 
     /**
-     * according toIDget模式aggregate根（contain模式详情、group、模型关系）.
+     * according toIDget模式aggregate根（contain模式detail、group、model关系）.
      */
     public function getModeDetailById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeAggregate
     {
@@ -277,7 +277,7 @@ class ModeDomainService
         $allGroups = $this->groupRepository->findByModeIds($dataIsolation, $modeIds);
         $allRelations = $this->relationRepository->findByModeIds($dataIsolation, $modeIds);
 
-        // 第三步：按模式IDgroup数据
+        // 第三步：按模式IDgroupdata
         $groupsByModeId = [];
         foreach ($allGroups as $group) {
             $groupsByModeId[$group->getModeId()][] = $group;
@@ -387,7 +387,7 @@ class ModeDomainService
             return $modeId;
         }
 
-        // 如果该模式没有跟随关系，说明它就是final源
+        // 如果该模式没有跟随关系，instruction它就是final源
         if (! isset($followMap[$modeId])) {
             return $modeId;
         }

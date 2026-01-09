@@ -19,8 +19,8 @@ return new class extends Migration {
         }
         Schema::create('delightful_organizations', function (Blueprint $table) {
             $table->bigIncrements('id')->comment('primary keyID');
-            $table->string('delightful_organization_code', 100)->unique()->comment('organization编码');
-            $table->string('name', 100)->comment('organization名称');
+            $table->string('delightful_organization_code', 100)->unique()->comment('organizationencoding');
+            $table->string('name', 100)->comment('organizationname');
             $table->string('platform_type', 64)->nullable()->comment('平台type');
             $table->mediumText('logo')->nullable()->comment('organizationlogo');
             $table->mediumText('introduction')->nullable()->comment('企业description');

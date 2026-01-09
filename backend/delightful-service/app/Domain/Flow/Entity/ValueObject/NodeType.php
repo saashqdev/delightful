@@ -10,7 +10,7 @@ namespace App\Domain\Flow\Entity\ValueObject;
 /**
  * 节点type
  * 1 ~ 99 原子节点
- * 100 ~ 199 组合节点的硬编码implement.
+ * 100 ~ 199 组合节点的硬encodingimplement.
  */
 enum NodeType: int
 {
@@ -21,8 +21,8 @@ enum NodeType: int
     case Start = 1;
 
     /*
-     * LLM Chat 这里是历史原因的组合节点
-     * 大语言model 可选model、prompt、temperature
+     * LLM Chat 这里是history原因的组合节点
+     * 大语言model optionalmodel、prompt、temperature
      */
     case LLM = 2;
 
@@ -40,15 +40,15 @@ enum NodeType: int
 
     /*
      * Code
-     * 代码execute节点
+     * codeexecute节点
      */
     case Code = 5;
 
     /*
      * Vector
      * 文本转向量
-     * 数据匹配
-     * 向量数据storage
+     * data匹配
+     * 向量datastorage
      */
     //    case Vector = 6;
 
@@ -61,7 +61,7 @@ enum NodeType: int
 
     /*
      * Loader
-     * 数据load。来源：向量database、file、网络
+     * dataload。来源：向量database、file、网络
      */
     case Loader = 8;
 
@@ -73,7 +73,7 @@ enum NodeType: int
 
     /*
      * Http
-     * 接口request
+     * interfacerequest
      */
     case Http = 10;
 
@@ -90,7 +90,7 @@ enum NodeType: int
 
     /*
      * History Message
-     * 历史message query
+     * historymessage query
      */
     case HistoryMessage = 13;
 
@@ -105,7 +105,7 @@ enum NodeType: int
     case TextEmbedding = 15;
 
     /*
-     * 向量storage 知识库片段
+     * 向量storage knowledge base片段
      */
     case KnowledgeFragmentStore = 16;
 
@@ -125,7 +125,7 @@ enum NodeType: int
     case CacheGet = 19;
 
     /*
-     * 历史messagestorage
+     * historymessagestorage
      */
     case HistoryMessageStore = 20;
 
@@ -160,7 +160,7 @@ enum NodeType: int
     case Tool = 26;
 
     /**
-     * 知识库片段delete.
+     * knowledge base片段delete.
      */
     case KnowledgeFragmentRemove = 27;
 
@@ -195,7 +195,7 @@ enum NodeType: int
     case ExcelLoader = 51;
 
     /**
-     * 知识库 检索.
+     * knowledge base 检索.
      */
     case KnowledgeSearch = 52;
 

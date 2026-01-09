@@ -51,7 +51,7 @@ interface ProviderModelRepositoryInterface
 
     /**
      * getorganization可用modellist（containorganization自己的model和Delightfulmodel）.
-     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param null|Category $category modelcategory，为空时return所有categorymodel
      * @return ProviderModelEntity[] 按sort降序sort的modellist，containorganizationmodel和Delightfulmodel（不去重）
      */
@@ -59,7 +59,7 @@ interface ProviderModelRepositoryInterface
 
     /**
      * 批量according toIDgetmodel.
-     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $ids modelIDarray
      * @return ProviderModelEntity[] model实体array，以ID为键
      */
@@ -69,7 +69,7 @@ interface ProviderModelRepositoryInterface
 
     /**
      * 批量according toModelIDgetmodel.
-     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $modelIds model标识array
      * @return array<string, ProviderModelEntity[]> model实体array，以model_id为键，value为对应的modellist
      */
@@ -83,7 +83,7 @@ interface ProviderModelRepositoryInterface
     /**
      * according toquery条件get按modeltype分组的modelIDlist.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param ProviderModelQuery $query query条件
      * @return array<string, array<string>> 按modeltype分组的modelIDarray，format: [modelType => [model_id, model_id]]
      */

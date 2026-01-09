@@ -125,10 +125,10 @@ readonly class LoginAppService
     {
         $response = new CheckLoginResponse();
 
-        // process国家代码format
+        // process国家codeformat
         $stateCode = $this->formatStateCode($account->getStateCode() ?? '+86');
 
-        // builduser数据
+        // builduserdata
         $userData = [
             'id' => $user->getUserId(),
             'real_name' => $user->getNickname(),
@@ -139,7 +139,7 @@ readonly class LoginAppService
             'state_code' => $stateCode,
         ];
 
-        // buildresponse数据
+        // buildresponsedata
         $responseData = [
             'access_token' => $authorization,
             'bind_phone' => ! empty($account->getPhone()),
@@ -153,7 +153,7 @@ readonly class LoginAppService
     }
 
     /**
-     * format化国家代码，ensure以+开头.
+     * format化国家code，ensure以+开头.
      */
     private function formatStateCode(string $stateCode): string
     {

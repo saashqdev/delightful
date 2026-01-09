@@ -15,12 +15,12 @@ interface SmsInterface
     public function getTemplateId(SmsStruct $smsStruct): ?string;
 
     /**
-     * send短信,强制要求所有短信驱动的return结构一样.
+     * send短信,force要求所有短信驱动的return结构一样.
      */
     public function send(SmsStruct $smsStruct): SendResult;
 
     /**
-     * 解析变量短信,return完整的短信文本.
+     * parse变量短信,return完整的短信文本.
      */
     public function getContent(SmsStruct $smsStruct): string;
 

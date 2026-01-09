@@ -12,7 +12,7 @@ interface PermissionInterface
     /**
      * 判断是否organization管理员.
      *
-     * @param string $organizationCode organization编码
+     * @param string $organizationCode organizationencoding
      * @param string $mobile 手机号
      *
      * @return bool 是否超级管理员
@@ -20,7 +20,7 @@ interface PermissionInterface
     public function isOrganizationAdmin(string $organizationCode, string $mobile): bool;
 
     /**
-     * getuser所拥有的organization管理员代码.
+     * getuser所拥有的organization管理员code.
      */
     public function getOrganizationAdminList(string $delightfulId): array;
 }

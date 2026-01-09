@@ -292,7 +292,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     /**
      * based on游标paginationget指定organization的助理versionlist.
-     * @param string $organizationCode organization代码
+     * @param string $organizationCode organizationcode
      * @param array $agentVersionIds 助理versionIDlist
      * @param string $cursor 游标ID，如果为空string则从最新开始
      * @param int $pageSize 每页quantity

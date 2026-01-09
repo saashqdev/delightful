@@ -71,7 +71,7 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * getorganization管理员详情.
+     * getorganization管理员detail.
      */
     public function show(DataIsolation $dataIsolation, int $id): OrganizationAdminEntity
     {
@@ -131,7 +131,7 @@ class OrganizationAdminDomainService
         $orgCode = $dataIsolation->getCurrentOrganizationCode();
         $organization = $this->organizationRepository->getByCode($orgCode);
         if (! $organization) {
-            $this->logger->warning('找不到organization代码', ['organizationCode' => $orgCode]);
+            $this->logger->warning('找不到organizationcode', ['organizationCode' => $orgCode]);
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_NOT_EXISTS);
         }
         // 个人organization不allow授予organization管理员
@@ -225,7 +225,7 @@ class OrganizationAdminDomainService
      */
     public function transferOrganizationCreator(DataIsolation $dataIsolation, string $currentCreatorUserId, string $newCreatorUserId, string $operatorUserId): void
     {
-        // checkcurrentcreate人是否存在且确实是create人
+        // checkcurrentcreate人是否存在且indeed是create人
         $currentCreator = $this->getByUserId($dataIsolation, $currentCreatorUserId);
         if (! $currentCreator || ! $currentCreator->isOrganizationCreator()) {
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.current_user_not_organization_creator', ['userId' => $currentCreatorUserId]);

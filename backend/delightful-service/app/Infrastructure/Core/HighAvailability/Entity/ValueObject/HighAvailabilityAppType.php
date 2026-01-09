@@ -10,17 +10,17 @@ namespace App\Infrastructure\Core\HighAvailability\Entity\ValueObject;
 use InvalidArgumentException;
 
 /**
- * 高可用应用type枚举.
+ * 高可用applicationtype枚举.
  */
 enum HighAvailabilityAppType: string
 {
     /**
-     * 模型网关type.
+     * model网关type.
      */
     case MODEL_GATEWAY = 'modelGateway';
 
     /**
-     * get所有应用type值array.
+     * get所有applicationtype值array.
      */
     public static function values(): array
     {
@@ -30,7 +30,7 @@ enum HighAvailabilityAppType: string
     }
 
     /**
-     * check是否是valid的应用type.
+     * check是否是valid的applicationtype.
      */
     public static function isValid(string $type): bool
     {
@@ -44,17 +44,17 @@ enum HighAvailabilityAppType: string
     {
         return match ($type) {
             self::MODEL_GATEWAY->value => self::MODEL_GATEWAY,
-            default => throw new InvalidArgumentException("invalid的高可用应用type: {$type}"),
+            default => throw new InvalidArgumentException("invalid的高可用applicationtype: {$type}"),
         };
     }
 
     /**
-     * get应用type的description文本.
+     * getapplicationtype的description文本.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::MODEL_GATEWAY => '模型网关',
+            self::MODEL_GATEWAY => 'model网关',
         };
     }
 }

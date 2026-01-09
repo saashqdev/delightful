@@ -25,16 +25,16 @@ return new class extends Migration {
             $table->text('i18n_name')->comment('国际化departmentname');
             $table->string('order', 64)->comment('department的sort，即department在其同级department的展示顺序。取value越小sort越靠前。')->nullable()->default('');
             $table->string('leader_user_id', 64)->comment('department主管的user ID')->nullable()->default('');
-            $table->string('organization_code', 64)->comment('麦吉organization编码');
+            $table->string('organization_code', 64)->comment('麦吉organizationencoding');
             $table->text('status')->comment('departmentstatus,jsonformat,目前支持 is_deleted:是否delete');
-            $table->string('document_id', 64)->comment('department说明书（云文档id）');
+            $table->string('document_id', 64)->comment('departmentinstruction书（云文档id）');
             // level
             $table->integer('level')->comment('department层级')->default(0);
             // path
-            $table->text('path')->comment('department路径')->nullable();
+            $table->text('path')->comment('departmentpath')->nullable();
             // department直属user人数
             $table->integer('employee_sum')->comment('department直属user人数')->default(0);
-            $table->comment('userservice的department与第三方平台userrecordtable.用于与第三方平台实时数据sync,激活record等');
+            $table->comment('userservice的department与第三方平台userrecordtable.用于与第三方平台实时datasync,激活record等');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['organization_code', 'department_id'], 'org_department_id');

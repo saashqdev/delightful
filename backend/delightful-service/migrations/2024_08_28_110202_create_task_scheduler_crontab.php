@@ -20,14 +20,14 @@ class CreateTaskSchedulerCrontab extends Migration
         Schema::create(config('task_scheduler.table_names.task_scheduler_crontab', 'task_scheduler_crontab'), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('external_id', 64)->comment('业务 id')->index();
-            $table->string('name', 64)->comment('名称');
+            $table->string('name', 64)->comment('name');
             $table->string('crontab', 64)->comment('crontab表达式');
             $table->dateTime('last_gen_time')->nullable()->comment('最后generate时间');
             $table->boolean('enabled')->default(true)->comment('是否启用');
             $table->integer('retry_times')->default(0)->comment('总retry次数');
             $table->json('callback_method')->comment('callbackmethod');
             $table->json('callback_params')->comment('callbackparameter');
-            $table->string('remark', 255)->default('')->comment('备注');
+            $table->string('remark', 255)->default('')->comment('note');
             $table->dateTime('deadline')->nullable()->comment('结束时间');
             $table->string('creator', 64)->default('')->comment('create人');
             $table->dateTime('created_at')->comment('creation time');

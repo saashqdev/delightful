@@ -20,7 +20,7 @@ return new class extends Migration {
         Schema::create('delightful_contact_third_platform_departments', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('delightful_department_id', 64)->comment('麦吉departmentid');
-            $table->string('delightful_organization_code', 64)->comment('麦吉organization编码');
+            $table->string('delightful_organization_code', 64)->comment('麦吉organizationencoding');
             $table->string('third_leader_user_id', 64)->comment('department主管的user ID')->nullable()->default('');
             $table->string('third_department_id', 64)->comment('第三方departmentid');
             $table->string('third_parent_department_id', 64)->comment('第三方父department的department ID')->nullable();
@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->text('third_i18n_name')->comment('第三方国际化departmentname');
             $table->string('third_platform_type')->comment('第三方平台type dingTalk/lark/weCom/teamShare');
             $table->text('third_platform_departments_extra')->comment('额外info.第三方departmentstatus,jsonformat,目前支持 is_deleted:是否delete');
-            $table->comment('userservice的department与第三方平台userrecordtable.用于与第三方平台实时数据sync,激活record等');
+            $table->comment('userservice的department与第三方平台userrecordtable.用于与第三方平台实时datasync,激活record等');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['third_platform_type', 'third_department_id', 'delightful_organization_code'], 'org_platform_department_id');

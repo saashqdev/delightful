@@ -13,7 +13,7 @@ use App\Domain\Mode\Repository\Persistence\Model\ModeGroupModel;
 class ModeGroupFactory
 {
     /**
-     * 将模型转换为实体.
+     * 将model转换为实体.
      */
     public static function modelToEntity(ModeGroupModel $model): ModeGroupEntity
     {

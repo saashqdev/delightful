@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->string('robot_name')->comment('assistant name');
             $table->string('robot_avatar')->comment('assistant avatar');
             $table->string('robot_description')->comment('助理description');
-            $table->string('organization_code')->comment('organization编码');
+            $table->string('organization_code')->comment('organizationencoding');
             $table->integer('status')->comment('助理status:启用｜禁用');
             $table->string('created_uid')->default('')->comment('publish人');
             $table->timestamp('created_at')->nullable()->comment('creation time');

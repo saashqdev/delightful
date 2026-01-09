@@ -27,7 +27,7 @@ class File implements ProviderInterface
      * @param string $messageId messageID
      * @param string $fileKey fileKey
      * @param string $type filetype
-     * @return string file路径
+     * @return string filepath
      */
     public function getIMFile(string $messageId, string $fileKey, string $type = 'file'): string
     {

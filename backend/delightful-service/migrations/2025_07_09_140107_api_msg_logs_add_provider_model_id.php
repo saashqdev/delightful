@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_api_msg_logs', function (Blueprint $table) {
             $table->string('provider_id', 30)->default('')->comment('服务商 id');
-            $table->string('provider_model_id', 30)->default('')->comment('服务商模型 id');
+            $table->string('provider_model_id', 30)->default('')->comment('服务商model id');
         });
     }
 

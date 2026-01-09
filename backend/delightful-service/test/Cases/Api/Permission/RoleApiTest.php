@@ -103,7 +103,7 @@ class RoleApiTest extends AbstractHttpTest
 
         // === testquery子管理员 ===
         $detailResp = $this->get(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
-        // assert详情接口response结构与数据
+        // assertdetailinterfaceresponse结构与data
         $this->assertIsArray($detailResp);
         $this->assertEquals(1000, $detailResp['code'] ?? null);
 
@@ -120,12 +120,12 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertArrayValueTypesEquals(
             $expectedDetailStructure,
             $detailResp['data'] ?? [],
-            '子管理员详情接口response结构不符合expected',
+            '子管理员detailinterfaceresponse结构不符合expected',
             false,
             false
         );
 
-        // 核对数据content
+        // 核对datacontent
         $this->assertEquals($id, $detailResp['data']['id'] ?? null);
         $this->assertEquals($requestData['name'], $detailResp['data']['name'] ?? null);
         $this->assertEquals($requestData['status'], $detailResp['data']['status'] ?? null);
@@ -133,7 +133,7 @@ class RoleApiTest extends AbstractHttpTest
         // === testquery子管理员END ===
 
         // === testdelete子管理员 ===
-        // calldelete接口
+        // calldeleteinterface
         $deleteResp = $this->delete(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
         $this->assertIsArray($deleteResp);
         $this->assertEquals(1000, $deleteResp['code']);
@@ -146,11 +146,11 @@ class RoleApiTest extends AbstractHttpTest
     }
 
     /**
-     * testgetuserpermission树接口.
+     * testgetuserpermission树interface.
      */
     public function testGetUserPermissionTree(): void
     {
-        // call接口
+        // callinterface
         $response = $this->get(
             '/api/v1/permissions/me',
             [],

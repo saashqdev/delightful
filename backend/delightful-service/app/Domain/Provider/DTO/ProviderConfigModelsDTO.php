@@ -11,15 +11,15 @@ use App\Domain\Provider\Entity\ProviderModelEntity;
 use Hyperf\Codec\Json;
 
 /**
- * service_provider_config_id 对应的服务商+模型列表。
+ * service_provider_config_id 对应的服务商+model列表。
  *
  * 同one服务商在different的organization下有different的 service_provider_config_id。
- * oneservice_provider_config_id对应多个具体的模型。
+ * oneservice_provider_config_id对应多个具体的model。
  */
 class ProviderConfigModelsDTO extends ProviderConfigDTO
 {
     /**
-     * Provider模型DTOarray.
+     * ProvidermodelDTOarray.
      * @var ProviderModelDetailDTO[]
      */
     protected array $models = [];
@@ -29,7 +29,7 @@ class ProviderConfigModelsDTO extends ProviderConfigDTO
         parent::__construct($data);
     }
 
-    // ===== 模型相关字段的Getter/Setter =====
+    // ===== model相关字段的Getter/Setter =====
 
     /**
      * @return ProviderModelDetailDTO[]

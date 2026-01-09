@@ -16,9 +16,9 @@ return new class extends Migration {
     {
         Schema::create('delightful_flow_tool_sets', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('organization_code', 32)->comment('organization编码');
-            $table->string('code', 80)->comment('tool集编码');
-            $table->string('name', 64)->comment('tool集名称');
+            $table->string('organization_code', 32)->comment('organizationencoding');
+            $table->string('code', 80)->comment('tool集encoding');
+            $table->string('name', 64)->comment('tool集name');
             $table->string('description', 255)->comment('tool集description');
             $table->string('icon', 255)->comment('tool集图标');
             $table->boolean('enabled')->default(true)->comment('是否启用');

@@ -11,13 +11,13 @@ use App\Domain\ImageGenerate\Contract\FontProviderInterface;
 
 /**
  * default字体提供者implement
- * 开源项目中的defaultimplement，提供基础字体功能
- * 企业项目canpass依赖注入覆盖此implement来提供高级字体功能.
+ * 开源项目中的defaultimplement，提供基础字体feature
+ * 企业项目canpassdependency注入覆盖此implement来提供高级字体feature.
  */
 class DefaultFontProvider implements FontProviderInterface
 {
     /**
-     * getTTF字体file路径.
+     * getTTF字体filepath.
      * 开源version不提供TTF字体file.
      */
     public function getFontPath(): ?string
@@ -45,7 +45,7 @@ class DefaultFontProvider implements FontProviderInterface
 
     /**
      * 检测图像是否contain透明通道.
-     * 提供基础的透明度检测功能.
+     * 提供基础的透明度检测feature.
      * @param mixed $image
      */
     public function hasTransparency($image): bool

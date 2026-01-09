@@ -22,14 +22,14 @@ class CreateDelightfulChatFriendTable extends Migration
             $table->bigIncrements('id');
             $table->string('user_id', 64)->comment('userid');
             // user所属organization
-            $table->string('user_organization_code', 64)->comment('userorganization编码')->default('');
+            $table->string('user_organization_code', 64)->comment('userorganizationencoding')->default('');
             $table->string('friend_id', 64)->comment('好友id');
             // 好友所属organization
-            $table->string('friend_organization_code', 64)->comment('好友的organization编码')->default('');
+            $table->string('friend_organization_code', 64)->comment('好友的organizationencoding')->default('');
             // 好友type
             $table->tinyInteger('friend_type')->comment('好友type，0:ai 1:人类')->default(0);
-            $table->string('remarks', 256)->comment('备注');
-            $table->string('extra', 1024)->comment('附加属性');
+            $table->string('remarks', 256)->comment('note');
+            $table->string('extra', 1024)->comment('附加property');
             $table->tinyInteger('status')->comment('status，1：申请，2：同意 3：拒绝 4：忽略');
             $table->unique(['user_id', 'friend_id'], 'uk_user_id_friend_id');
             $table->timestamps();

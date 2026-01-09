@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('user_id')->default('')->comment('userid')->change();
             $table->string('type', 20)->default('user')->comment('type')->after('access_token');
             $table->string('relation_id', 255)->default('')->comment('关联ID')->after('type');
-            $table->string('description', 255)->default('')->comment('描述');
+            $table->string('description', 255)->default('')->comment('description');
             $table->integer('rpm')->default(0)->comment('限stream');
         });
     }

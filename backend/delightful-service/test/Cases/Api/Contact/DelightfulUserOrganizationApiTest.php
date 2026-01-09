@@ -22,7 +22,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
     private const string LIST_ORGANIZATIONS_API = '/api/v1/contact/accounts/me/organizations';
 
     /**
-     * testpassHTTPrequestgetcurrentorganization代码
+     * testpassHTTPrequestgetcurrentorganizationcode
      */
     public function testGetCurrentOrganizationCodeViaHttp(): void
     {
@@ -40,7 +40,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
     }
 
     /**
-     * testpassHTTPrequestsetcurrentorganization代码
+     * testpassHTTPrequestsetcurrentorganizationcode
      */
     public function testSetCurrentOrganizationCodeViaHttp(): void
     {
@@ -57,7 +57,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
         // verifyresponse结构
         if (isset($response['data'])) {
             $this->assertIsArray($response['data']);
-            // verifyreturn的organization代码
+            // verifyreturn的organizationcode
             if (isset($response['data']['delightful_organization_code'])) {
                 $this->assertEquals($requestData['delightful_organization_code'], $response['data']['delightful_organization_code']);
             }
@@ -65,7 +65,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
     }
 
     /**
-     * testset空organization代码的error情况.
+     * testset空organizationcode的error情况.
      */
     public function testSetCurrentOrganizationCodeWithEmptyCodeViaHttp(): void
     {

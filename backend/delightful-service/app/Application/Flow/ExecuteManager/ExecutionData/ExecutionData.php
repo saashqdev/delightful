@@ -109,7 +109,7 @@ class ExecutionData
     private Operator $operator;
 
     /**
-     * 数据隔离.
+     * data隔离.
      */
     private FlowDataIsolation $dataIsolation;
 

@@ -47,7 +47,7 @@ class MCPExceptionHandler
     }
 
     /**
-     * geterror代码.
+     * geterrorcode.
      */
     protected function getErrorCode(Throwable $exception): int
     {
@@ -72,7 +72,7 @@ class MCPExceptionHandler
     }
 
     /**
-     * 记录详细errorinformation.
+     * record详细errorinformation.
      */
     private function logError(Throwable $exception, array $context = []): void
     {

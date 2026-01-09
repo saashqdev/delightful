@@ -94,7 +94,7 @@ abstract class AbstractKnowledgeNodeRunner extends NodeRunner
         }
 
         $create = false;
-        // 只有storage片段时，need新增知识库
+        // 只有storage片段时，need新增knowledge base
         if ($this->node->getNodeType() === NodeType::KnowledgeFragmentStore->value) {
             $create = true;
         }

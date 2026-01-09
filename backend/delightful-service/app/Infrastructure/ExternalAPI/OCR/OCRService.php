@@ -57,7 +57,7 @@ readonly class OCRService
         // 定义 Redis cache键
         $cacheKey = 'file_cache:' . md5($url);
 
-        // 尝试从cacheget数据
+        // 尝试从cachegetdata
         $cachedData = $this->cache->get($cacheKey);
         if ($cachedData) {
             $cachedData = Json::decode($cachedData);
@@ -94,7 +94,7 @@ readonly class OCRService
                 $isCacheValid = $cachedData['Content-Length'] === $contentLength;
             }
 
-            // 如果cache数据valid，直接returncachecontent
+            // 如果cachedatavalid，直接returncachecontent
             if ($isCacheValid) {
                 return $cachedData['content'];
             }
@@ -103,7 +103,7 @@ readonly class OCRService
         // call OCR service进行process
         $result = $OCRClient->ocr($url);
 
-        // updatecache数据
+        // updatecachedata
         $newCacheData = [
             'Last-Modified' => $lastModified,
             'Etag' => $etag,

@@ -14,15 +14,15 @@ use App\Domain\Provider\Entity\ValueObject\Query\AiAbilityQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 
 /**
- * AI 能力仓储接口.
+ * AI 能力仓储interface.
  */
 interface AiAbilityRepositoryInterface
 {
     /**
-     * according to能力代码getAI能力实体.
+     * according to能力codegetAI能力实体.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离info
-     * @param AiAbilityCode $code 能力代码
+     * @param ProviderDataIsolation $dataIsolation data隔离info
+     * @param AiAbilityCode $code 能力code
      * @return null|AiAbilityEntity AI能力实体
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity;
@@ -30,7 +30,7 @@ interface AiAbilityRepositoryInterface
     /**
      * get所有AI能力list.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离info
+     * @param ProviderDataIsolation $dataIsolation data隔离info
      * @return array<AiAbilityEntity> AI能力实体list
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array;
@@ -38,7 +38,7 @@ interface AiAbilityRepositoryInterface
     /**
      * according toIDgetAI能力实体.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离info
+     * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param int $id 能力ID
      * @return null|AiAbilityEntity AI能力实体
      */
@@ -63,9 +63,9 @@ interface AiAbilityRepositoryInterface
     /**
      * according tocodeupdate（支持选择性update）.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离info
-     * @param AiAbilityCode $code 能力代码
-     * @param array $data update数据（status、config等）
+     * @param ProviderDataIsolation $dataIsolation data隔离info
+     * @param AiAbilityCode $code 能力code
+     * @param array $data updatedata（status、config等）
      * @return bool 是否updatesuccess
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool;
@@ -73,7 +73,7 @@ interface AiAbilityRepositoryInterface
     /**
      * paginationqueryAI能力list.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离info
+     * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param AiAbilityQuery $query query条件
      * @param Page $page paginationinfo
      * @return array{total: int, list: array<AiAbilityEntity>}

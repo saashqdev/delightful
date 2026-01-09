@@ -46,7 +46,7 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
 
     /**
      * get工具管理器.
-     * @throws InternalErrorException 当工具管理器未set时抛出
+     * @throws InternalErrorException 当工具管理器未set时throw
      */
     public function getToolManager(): MCPToolManager
     {
@@ -67,7 +67,7 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
 
     /**
      * get资源管理器.
-     * @throws InternalErrorException 当资源管理器未set时抛出
+     * @throws InternalErrorException 当资源管理器未set时throw
      */
     public function getResourceManager(): MCPResourceManager
     {
@@ -88,7 +88,7 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
 
     /**
      * gethint管理器.
-     * @throws InternalErrorException 当hint管理器未set时抛出
+     * @throws InternalErrorException 当hint管理器未set时throw
      */
     public function getPromptManager(): MCPPromptManager
     {

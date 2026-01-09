@@ -36,7 +36,7 @@ class DelightfulFlowVersionFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * version详情.
+     * versiondetail.
      */
     public function show(string $flowId, string $versionId)
     {

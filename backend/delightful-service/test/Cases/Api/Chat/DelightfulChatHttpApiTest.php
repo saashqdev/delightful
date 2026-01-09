@@ -15,7 +15,7 @@ use HyperfTest\Cases\Api\AbstractHttpTest;
 class DelightfulChatHttpApiTest extends AbstractHttpTest
 {
     /**
-     * testsession窗口中的chat补全功能.
+     * testsession窗口中的chat补全feature.
      */
     public function testConversationChatCompletions(): void
     {
@@ -43,7 +43,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
             'Content-Type' => 'application/json',
         ];
 
-        // sendPOSTrequest到correct的接口路径
+        // sendPOSTrequest到correct的interfacepath
         $response = $this->json('/api/v2/delightful/conversation/chatCompletions', $requestData, $headers);
 
         // verifyresponse码
@@ -78,7 +78,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
     }
 
     /**
-     * testsession窗口中的chat补全功能 - parameterverifyfail.
+     * testsession窗口中的chat补全feature - parameterverifyfail.
      */
     public function testConversationChatCompletionsWithInvalidParams(): void
     {
@@ -95,7 +95,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
             'Content-Type' => 'application/json',
         ];
 
-        // sendPOSTrequest到correct的接口路径
+        // sendPOSTrequest到correct的interfacepath
         $response = $this->json('/api/v2/delightful/chat/chatCompletions', $requestData, $headers);
 
         // 定义expect的errorresponse结构
@@ -110,7 +110,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
     }
 
     /**
-     * testsession窗口中的chat补全功能 - authorizationverifyfail.
+     * testsession窗口中的chat补全feature - authorizationverifyfail.
      */
     public function testConversationChatCompletionsWithInvalidAuth(): void
     {
@@ -126,7 +126,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
             'Content-Type' => 'application/json',
         ];
 
-        // sendPOSTrequest到correct的接口路径
+        // sendPOSTrequest到correct的interfacepath
         $response = $this->json('/api/v2/delightful/chat/chatCompletions', $requestData, $headers);
 
         // 定义expect的errorresponse结构

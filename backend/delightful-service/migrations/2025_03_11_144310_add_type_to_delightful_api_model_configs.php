@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_api_model_configs', function (Blueprint $table) {
-            $table->string('type', 80)->default('')->comment('模型type')->after('model');
+            $table->string('type', 80)->default('')->comment('modeltype')->after('model');
             // 给 model 增加注释：actual上代table endpoint
             $table->string('model')->comment('actual上代table endpoint')->change();
             $table->index('type', 'idx_type');
@@ -30,7 +30,7 @@ return new class extends Migration {
         Schema::table('delightful_api_model_configs', function (Blueprint $table) {
             $table->dropIndex('idx_type');
             $table->dropColumn('type');
-            $table->string('model')->comment('模型名称')->change();
+            $table->string('model')->comment('modelname')->change();
         });
     }
 };

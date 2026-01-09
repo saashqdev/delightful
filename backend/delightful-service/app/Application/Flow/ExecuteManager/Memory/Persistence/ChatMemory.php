@@ -61,7 +61,7 @@ class ChatMemory implements MemoryPersistenceInterface
             return;
         }
 
-        // 这里storage的是 历史messagestorage节点 挂载message
+        // 这里storage的是 historymessagestorage节点 挂载message
         $history = new DelightfulFlowMemoryHistoryEntity();
         $history->setType(MemoryType::Mount);
         $history->setConversationId($LLMMemoryMessage->getConversationId());
@@ -140,7 +140,7 @@ class ChatMemory implements MemoryPersistenceInterface
     }
 
     /**
-     * 添加挂载记忆，即在 Chat 时call了 历史messagestorage节点.
+     * 添加挂载记忆，即在 Chat 时call了 historymessagestorage节点.
      * @return array<LLMMemoryMessage>
      */
     private function mountMessages(array $moundIds, array $messageLists): array

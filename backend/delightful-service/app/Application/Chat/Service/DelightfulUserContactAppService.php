@@ -195,14 +195,14 @@ class DelightfulUserContactAppService extends AbstractAppService
             $departmentUsers = $this->departmentUserDomainService->getDepartmentUsersByUserIds($userIds, $dataIsolation);
             $departmentIds = array_column($departmentUsers, 'department_id');
 
-            // getdepartment详情
+            // getdepartmentdetail
             $departmentsInfo = $this->departmentChartDomainService->getDepartmentFullPathByIds($dataIsolation, $departmentIds);
 
             // 组装user和departmentinfo
             $users = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfo, $withDepartmentFullPath);
         }
 
-        // 通讯录和search相关接口，filter隐藏department和隐藏user。
+        // 通讯录和search相关interface，filter隐藏department和隐藏user。
         $users = $this->filterDepartmentOrUserHidden($users);
         return PageListAssembler::pageByMysql($users, (int) $dto->getPageToken(), $pageSize, count($dto->getUserIds()));
     }
@@ -219,7 +219,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $usersPageResponseDTO = $this->departmentUserDomainService->getDepartmentUsersByDepartmentId($dto, $dataIsolation);
         $departmentUsers = $usersPageResponseDTO->getItems();
         $departmentIds = array_column($departmentUsers, 'department_id');
-        // department详情
+        // departmentdetail
         $departmentsInfo = $this->departmentChartDomainService->getDepartmentByIds($dataIsolation, $departmentIds);
         $departmentsInfoWithFullPath = [];
         foreach ($departmentsInfo as $departmentInfo) {
@@ -229,11 +229,11 @@ class DelightfulUserContactAppService extends AbstractAppService
         $userIds = array_values(array_unique(array_column($departmentUsers, 'user_id')));
         $usersDetail = $this->userDomainService->getUserDetailByUserIds($userIds, $dataIsolation);
         $usersDetail = $this->getUsersAvatar($usersDetail, $dataIsolation);
-        // organizationuser + department详情
+        // organizationuser + departmentdetail
         $userDepartmentDetailDTOS = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfoWithFullPath);
-        // 通讯录和search相关接口，filter隐藏department和隐藏user。
+        // 通讯录和search相关interface，filter隐藏department和隐藏user。
         $userDepartmentDetailDTOS = $this->filterDepartmentOrUserHidden($userDepartmentDetailDTOS);
-        // 由于 $usersPageResponseDTO 的 items 限制的parametertype，从代码规范的角度，再 new 一个通用的 PageResponseDTO， 按pagination的结构return
+        // 由于 $usersPageResponseDTO 的 items 限制的parametertype，从code规范的角度，再 new 一个通用的 PageResponseDTO， 按pagination的结构return
         // 另外，由于filter逻辑的存在，可能本次return的 items quantity少于 $limit,但是又有下一页。
         $pageResponseDTO = new PageResponseDTO();
         $pageResponseDTO->setPageToken($usersPageResponseDTO->getpageToken());
@@ -243,7 +243,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 按 usernickname/真名/手机号/email/department路径/position searchuser.
+     * 按 usernickname/真名/手机号/email/departmentpath/position searchuser.
      */
     public function searchDepartmentUser(UserQueryDTO $queryDTO, DelightfulUserAuthorization $authorization): array
     {
@@ -267,7 +267,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         // 按手机号/真名search
         $usersByPhoneOrRealName = $this->accountDomainService->searchUserByPhoneOrRealName($queryDTO->getQuery(), $dataIsolation);
 
-        // merge结果
+        // mergeresult
         $usersForQueryDepartmentPath = array_merge($usersForQueryJobTitle, $usersForQueryDepartmentPath, $usersByNickname, $usersByPhoneOrRealName);
         // 去重
         $usersForQueryDepartmentPath = array_values(array_column($usersForQueryDepartmentPath, null, 'user_id'));
@@ -417,7 +417,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 通讯录和search相关接口，filter隐藏department和隐藏user。
+     * 通讯录和search相关interface，filter隐藏department和隐藏user。
      * @param UserDepartmentDetailDTO[]|UserDetailDTO[] $usersDepartmentDetails
      */
     private function filterDepartmentOrUserHidden(array $usersDepartmentDetails): array

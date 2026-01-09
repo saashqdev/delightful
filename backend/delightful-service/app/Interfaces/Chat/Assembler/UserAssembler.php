@@ -139,7 +139,7 @@ class UserAssembler
      * @param DelightfulDepartmentUserEntity[] $departmentUsers
      * @param UserDetailDTO[] $usersDetail
      * @param array<string, DelightfulDepartmentEntity[]> $departmentsInfo
-     * @param bool $withDepartmentFullPath 是否returndepartment的完整路径
+     * @param bool $withDepartmentFullPath 是否returndepartment的完整path
      * @return UserDepartmentDetailDTO[]
      */
     public static function getUserDepartmentDetailDTOList(
@@ -162,7 +162,7 @@ class UserAssembler
             $userId = $userInfo->getUserId();
             $userDepartmentRelations = $userDepartmentMap[$userId] ?? [];
 
-            // 步骤2.1: 收集department路径info
+            // 步骤2.1: 收集departmentpathinfo
             $allPathNodes = [];
             $fullPathNodes = [];
 
@@ -173,7 +173,7 @@ class UserAssembler
 
                 if (! empty($departments)) {
                     if ($withDepartmentFullPath) {
-                        // 完整路径模式: 为每个departmentsave完整层级结构
+                        // 完整path模式: 为每个departmentsave完整层级结构
                         $pathNodes = array_map(
                             fn (DelightfulDepartmentEntity $department) => self::assemblePathNodeByDepartmentInfo($department),
                             $departments
@@ -191,9 +191,9 @@ class UserAssembler
             // 步骤2.2: usedefaultdepartment关系作为基础info
             $defaultDepartmentUser = $userDepartmentRelations[0] ?? [];
 
-            // 步骤2.3: update或createuserdepartment详情object
+            // 步骤2.3: update或createuserdepartmentdetailobject
             if (! empty($usersDepartmentDetailDTOList[$userId])) {
-                // update已存在的userdepartment详情
+                // update已存在的userdepartmentdetail
                 $userDepartmentDetailDTO = $usersDepartmentDetailDTOList[$userId];
 
                 if ($withDepartmentFullPath && ! empty($fullPathNodes)) {
@@ -202,7 +202,7 @@ class UserAssembler
                     $userDepartmentDetailDTO->setPathNodes($allPathNodes);
                 }
             } else {
-                // createnewuserdepartment详情
+                // createnewuserdepartmentdetail
                 $userDepartmentDetail = [
                     'employee_type' => $defaultDepartmentUser['employee_type'] ?? EmployeeType::Unknown->value,
                     'employee_no' => $defaultDepartmentUser['employee_no'] ?? '',
@@ -210,14 +210,14 @@ class UserAssembler
                     'is_leader' => (bool) ($defaultDepartmentUser['is_leader'] ?? false),
                 ];
 
-                // 添加路径节点info
+                // 添加path节点info
                 if ($withDepartmentFullPath) {
                     $userDepartmentDetail['full_path_nodes'] = $fullPathNodes;
                 } else {
                     $userDepartmentDetail['path_nodes'] = $allPathNodes;
                 }
 
-                // 合并user基本info
+                // mergeuser基本info
                 $userInfoArray = $userInfo->toArray();
                 foreach ($userInfoArray as $key => $value) {
                     $userDepartmentDetail[$key] = $value;
@@ -239,7 +239,7 @@ class UserAssembler
             // departmentid
             'department_id' => $departmentInfo->getDepartmentId(),
             'parent_department_id' => $departmentInfo->getParentDepartmentId(),
-            // department路径
+            // departmentpath
             'path' => $departmentInfo->getPath(),
             // 可见性
             'visible' => ! ($departmentInfo->getOption() === DepartmentOption::Hidden),

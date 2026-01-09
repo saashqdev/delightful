@@ -15,9 +15,9 @@ use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
  * @property int $id 雪花ID
- * @property string $organization_code organization编码
- * @property string $code 唯一编码
- * @property string $name MCP服务名称
+ * @property string $organization_code organizationencoding
+ * @property string $code 唯一encoding
+ * @property string $name MCP服务name
  * @property string $description MCP服务description
  * @property string $icon MCP服务图标
  * @property string $type 服务type ('sse' 或 'stdio')

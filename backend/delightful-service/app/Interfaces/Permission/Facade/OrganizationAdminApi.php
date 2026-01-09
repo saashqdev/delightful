@@ -48,7 +48,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     }
 
     /**
-     * getorganization管理员详情.
+     * getorganization管理员detail.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::QUERY)]
     public function show(int $id): array

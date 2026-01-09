@@ -30,12 +30,12 @@ class FileParser
     }
 
     /**
-     * 解析filecontent.
+     * parsefilecontent.
      *
      * @param string $fileUrl fileURL地址
      * @param bool $textPreprocess 是否进行文本预process
-     * @return string 解析后的filecontent
-     * @throws Exception 当file解析fail时
+     * @return string parse后的filecontent
+     * @throws Exception 当fileparsefail时
      */
     public function parse(string $fileUrl, bool $textPreprocess = false): string
     {
@@ -93,18 +93,18 @@ class FileParser
      * downloadfile到temporaryposition.
      *
      * @param string $url fileURL地址
-     * @param string $tempFile temporaryfile路径
+     * @param string $tempFile temporaryfilepath
      * @param int $maxSize filesize限制（字节），0table示不限制
      * @throws Exception 当downloadfail或file超限时
      */
     private static function downloadFile(string $url, string $tempFile, int $maxSize = 0): void
     {
-        // 如果是本地file路径，直接return
+        // 如果是本地filepath，直接return
         if (file_exists($url)) {
             return;
         }
 
-        // 如果url是本地file协议，转换为actual路径
+        // 如果url是本地file协议，转换为actualpath
         if (str_starts_with($url, 'file://')) {
             $localPath = substr($url, 7);
             if (file_exists($localPath)) {

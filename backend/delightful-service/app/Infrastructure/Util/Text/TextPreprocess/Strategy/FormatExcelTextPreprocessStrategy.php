@@ -26,7 +26,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
      */
     private function convertToCsv(string $content): string
     {
-        // 将content按行分割，但保留单元格内的换行符
+        // 将content按行split，但保留单元格内的换行符
         $lines = preg_split('/(?<!")[\r\n]+(?!")/', $content);
         $result = [];
         $headers = [];
@@ -45,16 +45,16 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
                 continue;
             }
 
-            // usefgetcsv的方式解析CSV行
+            // usefgetcsv的方式parseCSV行
             $row = str_getcsv($line);
 
-            // 如果是第一行且不是sheetmark，则作为标题行
+            // 如果是第一行且不是sheetmark，则作为title行
             if (empty($headers) && ! empty($line)) {
                 $headers = $row;
                 continue;
             }
 
-            // process数据行
+            // processdata行
             $rowResult = [];
             foreach ($row as $index => $value) {
                 if (isset($headers[$index])) {
@@ -102,7 +102,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             return '';
         }
 
-        // 如果单元格contentcontain以下任意字符，need用引号包围
+        // 如果单元格contentcontain以下任意字符，need用引号package围
         if (str_contains($value, ',')
             || str_contains($value, '"')
             || str_contains($value, "\n")

@@ -11,8 +11,8 @@ use ArrayAccess;
 use Hyperf\Contract\Arrayable;
 
 /**
- * 快速property访问基类
- * 其他类可继承此类，获得便捷的propertyset和访问能力.
+ * 快速propertyaccess基类
+ * 其他类可inherit此类，获得便捷的propertyset和access能力.
  */
 abstract class BaseObject extends UnderlineObjectJsonSerializable implements ArrayAccess, Arrayable
 {

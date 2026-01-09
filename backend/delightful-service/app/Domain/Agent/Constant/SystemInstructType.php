@@ -37,7 +37,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * get系统指令type选项.
+     * get系统指令typeoption.
      * @return array<int, mixed>
      */
     public static function getTypeOptions(): array

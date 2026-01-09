@@ -22,7 +22,7 @@ use Hyperf\Di\Aop\ProceedingJoinPoint;
 class CheckPermissionAspect extends AbstractAspect
 {
     /**
-     * need拦截的注解列表.
+     * need拦截的annotation列表.
      */
     public array $annotations = [
         CheckPermission::class,
@@ -38,7 +38,7 @@ class CheckPermissionAspect extends AbstractAspect
         /** @var null|CheckPermission $permissionAnnotation */
         $permissionAnnotation = $annotationMetadata->method[CheckPermission::class] ?? $annotationMetadata->class[CheckPermission::class] ?? null;
 
-        // 若无注解，直接放行
+        // 若无annotation，直接放行
         if ($permissionAnnotation === null) {
             return $proceedingJoinPoint->process();
         }

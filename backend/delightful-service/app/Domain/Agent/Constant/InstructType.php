@@ -16,7 +16,7 @@ use function Hyperf\Translation\__;
 
 enum InstructType: int
 {
-    case SINGLE_CHOICE = 1;  // 单选项
+    case SINGLE_CHOICE = 1;  // 单option
     case SWITCH = 2;         // 开关
     case TEXT = 3;          // 文本type
     case STATUS = 4;        // statustype
@@ -172,7 +172,7 @@ enum InstructType: int
     }
 
     /**
-     * 安全verify指令，捕获exception并returnresult.
+     * 安全verify指令，catchexception并returnresult.
      * @return array{success: bool, message: null|string}
      */
     public static function safeValidateInstructs(array &$instructs): array
@@ -226,7 +226,7 @@ enum InstructType: int
     }
 
     /**
-     * verify单选项type.
+     * verify单optiontype.
      */
     private function validateSingleChoice(array &$item): void
     {

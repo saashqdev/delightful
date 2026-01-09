@@ -71,7 +71,7 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
         $knowledge = $event->knowledgeBaseEntity;
         $documentEntity = $event->knowledgeBaseDocumentEntity;
         $dataIsolation = $event->dataIsolation;
-        // 如果是基础知识库type，则传知识库create者，避免permission不足
+        // 如果是基础knowledge basetype，则传knowledge basecreate者，避免permission不足
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }
@@ -84,7 +84,7 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
 
         // 自增version号(抢lock)
         $affectedRows = $knowledgeBaseDocumentDomainService->increaseVersion($dataIsolation, $documentEntity);
-        // 如果自增fail，说明已经重新向量化过了，提前结束
+        // 如果自增fail，instruction已经重新向量化过了，提前结束
         if ($affectedRows === 0) {
             $logger->info('文档已重新向量化，跳过sync');
             return;

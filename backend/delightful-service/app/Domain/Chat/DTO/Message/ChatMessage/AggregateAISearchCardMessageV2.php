@@ -38,7 +38,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     /**
      * 子issue的关联issue。支持关联issue再产生子issue，但是will被拍平成二维array。
      * @var array<string,QuestionItem[]>
-     * @example according touser输入的issue，generate关联issue。
+     * @example according touserinput的issue，generate关联issue。
      */
     protected ?array $associateQuestions;
 
@@ -79,7 +79,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     /**
      * get本次needstreampush的field。
      * 支持一次push多个field的streammessage，如果 json 层级较深，use field_1.*.field_2 作为 key。 其中 * 是指array的下标。
-     * service端willcache所有stream的数据，并在stream结束时一次性push，以减少丢包的概率，提升message完整性。
+     * service端willcache所有stream的data，并在stream结束时一次性push，以减少丢package的概率，提升message完整性。
      * for example：
      * [
      *     'users.0.name' => 'delightful',

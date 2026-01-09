@@ -41,7 +41,7 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * API key.
      *
-     * 访问重sortservice的 API key
+     * access重sortservice的 API key
      */
     private string $apiKey = '';
 

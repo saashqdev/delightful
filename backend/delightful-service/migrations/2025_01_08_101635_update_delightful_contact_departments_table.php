@@ -15,8 +15,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_contact_departments', static function (Blueprint $table) {
-            // 选项
-            $table->bigInteger('option')->default(null)->comment('选项,如：1(隐藏)')->nullable();
+            // option
+            $table->bigInteger('option')->default(null)->comment('option,如：1(隐藏)')->nullable();
         });
     }
 

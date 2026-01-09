@@ -38,7 +38,7 @@ trait DelightfulCacheTrait
 
     /**
      * 类的property在框架运行时是不变的，所以这里usecache，避免重复计算.
-     * 如果hasContainer是 false，则说明没有use容器，不querycache.
+     * 如果hasContainer是 false，则instruction没有use容器，不querycache.
      */
     protected function getUnCamelizeValueFromCache(string $key): string
     {

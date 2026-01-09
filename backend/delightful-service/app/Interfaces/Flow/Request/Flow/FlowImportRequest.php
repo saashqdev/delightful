@@ -37,8 +37,8 @@ class FlowImportRequest extends FormRequest
         return [
             'import_data' => 'importdata',
             'import_data.main_flow' => '主process',
-            'import_data.main_flow.code' => '主process编码',
-            'import_data.main_flow.name' => '主process名称',
+            'import_data.main_flow.code' => '主processencoding',
+            'import_data.main_flow.name' => '主processname',
             'import_data.main_flow.nodes' => '主process节点',
             'import_data.main_flow.edges' => '主process边缘',
             'import_data.sub_flows' => '子process',

@@ -52,7 +52,7 @@ class MCPServerToolAdminApi extends AbstractMCPAdminApi
     }
 
     /**
-     * getMCP服务tool详情.
+     * getMCP服务tooldetail.
      */
     public function show(string $code, int $id)
     {

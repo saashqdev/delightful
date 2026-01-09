@@ -12,7 +12,7 @@ use Hyperf\Contract\Arrayable;
 use JsonSerializable;
 
 /**
- * streampush大模型的responsemessage.
+ * streampush大model的responsemessage.
  */
 interface StreamMessageInterface extends JsonSerializable, Arrayable
 {

@@ -35,7 +35,7 @@ function processConfigValue(&$value): void
 // handleconfiguration中的环境variable
 function processModelConfig(&$modelItem, string $modelName): void
 {
-    // handle模型value
+    // handlemodelvalue
     if (isset($modelItem['model'])) {
         $modelItemModel = explode('|', $modelItem['model']);
         if (count($modelItemModel) > 1) {
@@ -54,15 +54,15 @@ function processModelConfig(&$modelItem, string $modelName): void
         }
     }
 
-    // handle API 选项value
+    // handle API optionvalue
     if (isset($modelItem['api_options']) && is_array($modelItem['api_options'])) {
         foreach ($modelItem['api_options'] as &$item) {
             processConfigValue($item);
         }
     }
 
-    // 优雅的打印loadsuccess的模型
-    echo "\033[32m✓\033[0m 模型loadsuccess: \033[1m" . $modelName . ' (' . $modelItem['model'] . ")\033[0m" . PHP_EOL;
+    // 优雅的打印loadsuccess的model
+    echo "\033[32m✓\033[0m modelloadsuccess: \033[1m" . $modelName . ' (' . $modelItem['model'] . ")\033[0m" . PHP_EOL;
 }
 
 $envModelConfigs = [];
@@ -87,7 +87,7 @@ if (env('AZURE_OPENAI_GPT4O_ENABLED', false)) {
     ];
 }
 
-// 豆包Pro 32k
+// 豆packagePro 32k
 if (env('DOUBAO_PRO_32K_ENABLED', false)) {
     $envModelConfigs['doubao-pro-32k'] = [
         'model' => 'DOUBAO_PRO_32K_ENDPOINT|doubao-1.5-pro-32k',
@@ -144,7 +144,7 @@ if (env('DEEPSEEK_V3_ENABLED', false)) {
     ];
 }
 
-// 豆包 Embedding
+// 豆package Embedding
 if (env('DOUBAO_EMBEDDING_ENABLED', false)) {
     $envModelConfigs['doubao-embedding-text-240715'] = [
         'model' => 'DOUBAO_EMBEDDING_ENDPOINT|doubao-embedding-text-240715',
@@ -205,10 +205,10 @@ if (env('AWS_CLAUDE_ENABLED', false)) {
     ];
 }
 
-// loaddefault模型configuration（优先级最低）
+// loaddefaultmodelconfiguration（优先级最低）
 $models = [];
 
-// loaddefault模型configuration
+// loaddefaultmodelconfiguration
 foreach ($envModelConfigs as $modelKey => $config) {
     processModelConfig($config, $modelKey);
     $models[$modelKey] = $config;
@@ -255,8 +255,8 @@ return [
                 'whitelist_fields' => [
                     // 基本requestinfo
                     'request_id',                  // requestID
-                    'model_id',                    // 模型ID
-                    'model',                       // 模型名称
+                    'model_id',                    // modelID
+                    'model',                       // modelname
                     'duration_ms',                 // request耗时
                     'url',                         // requestURL
                     'status_code',                 // responsestatus码
@@ -275,11 +275,11 @@ return [
 
                     // use量statistics
                     'usage',                       // 完整的usageobject
-                    'usage.input_tokens',          // 输入tokenquantity
-                    'usage.output_tokens',         // 输出tokenquantity
+                    'usage.input_tokens',          // inputtokenquantity
+                    'usage.output_tokens',         // outputtokenquantity
                     'usage.total_tokens',          // 总tokenquantity
 
-                    // requestparameter（排除敏感内容）
+                    // requestparameter（排除敏感content）
                     'args.temperature',            // 温度parameter
                     'args.max_tokens',             // 最大token限制
                     'args.max_completion_tokens',             // 最大token限制
@@ -292,20 +292,20 @@ return [
                     'args.seed',                   // 随机种子
 
                     // Token预估info
-                    'token_estimate',              // Token估算详情
-                    'token_estimate.input_tokens', // 估算输入tokens
-                    'token_estimate.output_tokens', // 估算输出tokens
+                    'token_estimate',              // Token估算detail
+                    'token_estimate.input_tokens', // 估算inputtokens
+                    'token_estimate.output_tokens', // 估算outputtokens
 
-                    // response内容（排除具体内容）
+                    // responsecontent（排除具体content）
                     'choices.0.finish_reason',     // complete原因
                     'choices.0.index',             // 选择索引
 
                     // errorinfo
-                    'error',                       // error详情
+                    'error',                       // errordetail
                     'error.type',                  // errortype
-                    'error.message',               // errormessage（不contain具体内容）
+                    'error.message',               // errormessage（不contain具体content）
 
-                    // 其他元数据
+                    // 其他元data
                     'created',                     // create时间戳
                     'id',                         // requestID
                     'object',                     // objecttype
@@ -313,11 +313,11 @@ return [
                     'performance_flag',            // performancemark（慢request标识）
 
                     // 注意：以下字段被排除，不will打印
-                    // - args.messages (usermessage内容)
+                    // - args.messages (usermessagecontent)
                     // - args.tools (工具定义)
-                    // - choices.0.message (responsemessage内容)
-                    // - choices.0.delta (streamresponse增量内容)
-                    // - content (response内容)
+                    // - choices.0.message (responsemessagecontent)
+                    // - choices.0.delta (streamresponse增量content)
+                    // - content (responsecontent)
                 ],
                 // 是否启用字段白名单filter，defaulttrue（启用filter）
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
@@ -327,7 +327,7 @@ return [
             'network_retry_count' => 1,
         ],
         'models' => $models,
-        // 全局模型 options，可被模型本身的 options override
+        // 全局model options，可被model本身的 options override
         'model_options' => [
             'error_mapping_rules' => [
                 // 示例：customizeerror映射

@@ -62,7 +62,7 @@ class MemoryQueryDTO extends AbstractDTO
     }
 
     /**
-     * 解析 pageToken.
+     * parse pageToken.
      */
     public function parsePageToken(): void
     {

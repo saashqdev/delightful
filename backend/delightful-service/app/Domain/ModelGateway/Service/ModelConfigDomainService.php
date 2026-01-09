@@ -61,7 +61,7 @@ class ModelConfigDomainService extends AbstractDomainService
     }
 
     /**
-     * according toIDget模型configuration.
+     * according toIDgetmodelconfiguration.
      */
     public function getById(string $id): ?ModelConfigEntity
     {
@@ -70,7 +70,7 @@ class ModelConfigDomainService extends AbstractDomainService
     }
 
     /**
-     * according toIDget模型configuration, 不存在则抛出exception.
+     * according toIDgetmodelconfiguration, 不存在则throwexception.
      */
     public function showById(string $id): ModelConfigEntity
     {
@@ -83,7 +83,7 @@ class ModelConfigDomainService extends AbstractDomainService
     }
 
     /**
-     * according toendpoint或typeget模型configuration.
+     * according toendpoint或typegetmodelconfiguration.
      */
     public function getByEndpointOrType(string $endpointOrType): ?ModelConfigEntity
     {

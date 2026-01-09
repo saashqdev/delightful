@@ -57,7 +57,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * getauth接口实例.
+     * getauthinterface实例.
      */
     public function getAuthentication(): AuthenticationInterface
     {
@@ -65,7 +65,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * setauth接口实例.
+     * setauthinterface实例.
      */
     public function setAuthentication(AuthenticationInterface $authentication): self
     {

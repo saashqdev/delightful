@@ -75,7 +75,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private Application $application;
 
     /**
-     * log记录器.
+     * logrecord器.
      */
     private LoggerInterface $logger;
 
@@ -89,7 +89,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     /**
      * 构造函数.
      *
-     * @param array $options 飞书configuration选项
+     * @param array $options 飞书configurationoption
      * @throws Exception 如果configurationinvalid
      */
     public function __construct(array $options)
@@ -168,7 +168,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
         try {
             $content = $message->getContent();
-            // parse Markdown 内容，convert为飞书rich textformat
+            // parse Markdown content，convert为飞书rich textformat
             $postContent = $this->parseMarkdownToFeiShuPost($content);
             $data = [
                 'receive_id' => $thirdPlatformChatMessage->getOriginConversationId(),
@@ -263,7 +263,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         // setting基本info
         $this->setMessageBasicInfo($params, $chatMessage);
 
-        // handlemessage内容
+        // handlemessagecontent
         $content = $this->decodeMessageContent($params['event']['message']['content'] ?? '');
         $messageType = $params['event']['message']['message_type'] ?? '';
 
@@ -303,7 +303,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      * getuserextensioninfo.
      *
      * @param array $params requestparameter
-     * @param string $organizationCode organization代码
+     * @param string $organizationCode organizationcode
      * @return null|TriggerDataUserExtInfo userextensioninfoobject
      */
     private function getUserExtInfo(array $params, string $organizationCode): ?TriggerDataUserExtInfo
@@ -384,10 +384,10 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * parsemessage内容JSON.
+     * parsemessagecontentJSON.
      *
-     * @param string $content originalmessage内容
-     * @return array parse后的内容array
+     * @param string $content originalmessagecontent
+     * @return array parse后的contentarray
      */
     private function decodeMessageContent(string $content): array
     {
@@ -399,7 +399,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $decoded = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
             return is_array($decoded) ? $decoded : [];
         } catch (JsonException $e) {
-            $this->logger->warning('parsemessage内容fail', [
+            $this->logger->warning('parsemessagecontentfail', [
                 'content' => $content,
                 'error' => $e->getMessage(),
             ]);
@@ -452,12 +452,12 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * handlemessage内容.
+     * handlemessagecontent.
      *
      * @param string $messageType messagetype
-     * @param array $content message内容
+     * @param array $content messagecontent
      * @param ThirdPlatformChatMessage $chatMessage chatmessageobject
-     * @param string $organizationCode organization代码
+     * @param string $organizationCode organizationcode
      * @param string $messageId messageID
      * @return bool handle是否success
      */
@@ -506,7 +506,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
             return true;
         } catch (Exception $e) {
-            $this->logger->error('handlemessage内容fail', [
+            $this->logger->error('handlemessagecontentfail', [
                 'message_type' => $messageType,
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
@@ -525,7 +525,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      * @param string $messageId messageID
      * @param string $fileKey fileKey
      * @param string $type filetype
-     * @return string file路径
+     * @return string filepath
      */
     private function getFileFromFeiShu(string $messageId, string $fileKey, string $type): string
     {
@@ -553,8 +553,8 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     /**
      * createattachmentobject
      *
-     * @param string $filePath file路径
-     * @param string $organizationCode organization代码
+     * @param string $filePath filepath
+     * @param string $organizationCode organizationcode
      * @return Attachment attachmentobject
      */
     private function createAttachment(string $filePath, string $organizationCode): Attachment
@@ -610,24 +610,24 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * parse飞书rich text内容为Markdown文本.
+     * parse飞书rich textcontent为Markdown文本.
      *
-     * @param array $content 飞书rich text内容
-     * @param string $organizationCode organization代码
+     * @param array $content 飞书rich textcontent
+     * @param string $organizationCode organizationcode
      * @param string $messageId messageID
-     * @return array parse结果，containmarkdown文本和attachment
+     * @return array parseresult，containmarkdown文本和attachment
      */
     private function parsePostContentToText(array $content, string $organizationCode, string $messageId): array
     {
         $markdown = '';
         $attachments = [];
 
-        // 提取标题（如果有）
+        // 提取title（如果有）
         if (! empty($content['title'])) {
             $markdown .= "# {$content['title']}\n\n";
         }
 
-        // 优先use中文内容，如果没有则use英文内容
+        // 优先use中文content，如果没有则use英文content
         $postContent = $content['content'] ?? [];
 
         foreach ($postContent as $paragraph) {
@@ -645,12 +645,12 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * handle内容元素.
+     * handlecontent元素.
      *
      * @param string $tag 元素tag
-     * @param array $element 元素内容
+     * @param array $element 元素content
      * @param array &$attachments attachment列表
-     * @param string $organizationCode organization代码
+     * @param string $organizationCode organizationcode
      * @param string $messageId messageID
      * @return string handle后的Markdown文本
      */
@@ -687,11 +687,11 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                     $text = $element['text'] ?? '';
                     return "{$text}\n";
                 default:
-                    // 对于未知的tag，尝试提取文本内容
+                    // 对于未知的tag，尝试提取文本content
                     return $element['text'] ?? '';
             }
         } catch (Exception $e) {
-            $this->logger->warning('handle内容元素fail', [
+            $this->logger->warning('handlecontent元素fail', [
                 'tag' => $tag,
                 'error' => $e->getMessage(),
             ]);
@@ -702,9 +702,9 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     /**
      * handleimage元素.
      *
-     * @param array $element 元素内容
+     * @param array $element 元素content
      * @param array &$attachments attachment列表
-     * @param string $organizationCode organization代码
+     * @param string $organizationCode organizationcode
      * @param string $messageId messageID
      * @return string handle后的Markdown文本
      */
@@ -732,10 +732,10 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * parseMarkdown内容，convert为飞书rich textformat
-     * 只handleimage，其他内容全部usemd样式.
+     * parseMarkdowncontent，convert为飞书rich textformat
+     * 只handleimage，其他content全部usemd样式.
      *
-     * @param string $markdown Markdown内容
+     * @param string $markdown Markdowncontent
      * @return array 飞书rich textformat
      */
     private function parseMarkdownToFeiShuPost(string $markdown): array
@@ -796,7 +796,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     /**
      * 添加文本块（如果不为null）.
      *
-     * @param array &$contentBlocks 内容块array
+     * @param array &$contentBlocks content块array
      * @param string $text 要添加的文本
      */
     private function addTextBlockIfNotEmpty(array &$contentBlocks, string $text): void
@@ -815,7 +815,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     /**
      * handleimage块.
      *
-     * @param array &$contentBlocks 内容块array
+     * @param array &$contentBlocks content块array
      * @param string $url imageURL
      * @param string $fallbackText uploadfail时的回退文本
      */

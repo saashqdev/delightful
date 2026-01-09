@@ -16,10 +16,10 @@ return new class extends Migration {
     {
         Schema::create('delightful_api_applications', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('organization_code', 32)->default('')->comment('organization编码');
-            $table->string('code', 64)->default('')->comment('编码');
-            $table->string('name', 64)->default('')->comment('名称');
-            $table->string('description', 255)->default('')->comment('描述');
+            $table->string('organization_code', 32)->default('')->comment('organizationencoding');
+            $table->string('code', 64)->default('')->comment('encoding');
+            $table->string('name', 64)->default('')->comment('name');
+            $table->string('description', 255)->default('')->comment('description');
             $table->string('icon', 255)->default('')->comment('icon');
             $table->string('created_uid', 80)->default('')->comment('create人');
             $table->dateTime('created_at')->comment('create时间');

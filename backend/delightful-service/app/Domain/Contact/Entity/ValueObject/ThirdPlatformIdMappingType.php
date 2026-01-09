@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * 第third-party平台与麦吉的department、user、organization编码、null间编码等的映射关系记录.
+ * 第third-party平台与麦吉的department、user、organizationencoding、null间encoding等的映射关系record.
  */
 enum ThirdPlatformIdMappingType: string
 {

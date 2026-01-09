@@ -13,17 +13,17 @@ namespace App\Domain\Contact\Entity\ValueObject;
 enum UserIdRelationType: int
 {
     /**
-     * organization编码
+     * organizationencoding
      */
     case organizationCode = 0;
 
     /**
-     * 应用编码
+     * applicationencoding
      */
     case applicationCode = 1;
 
     /**
-     * 应用的createorganization编码
+     * application的createorganizationencoding
      */
     case applicationCreatedOrganizationCode = 2;
 

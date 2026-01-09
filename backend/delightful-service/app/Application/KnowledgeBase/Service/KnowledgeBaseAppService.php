@@ -52,7 +52,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
             $operation = $this->knowledgeBaseStrategy->getKnowledgeOperation($dataIsolation, $oldKnowledge->getCode());
             $operation->validate('w', $oldKnowledge->getCode());
 
-            // use原来的模型和向量库
+            // use原来的model和向量库
             $delightfulFlowKnowledgeEntity->setModel($oldKnowledge->getModel());
             $delightfulFlowKnowledgeEntity->setVectorDB($oldKnowledge->getVectorDB());
         }
@@ -62,7 +62,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
         if ($delightfulFlowKnowledgeEntity->shouldCreate()) {
             $modelId = $delightfulFlowKnowledgeEntity->getEmbeddingConfig()['model_id'] ?? null;
             if (! $modelId) {
-                // 优先useconfiguration的模型
+                // 优先useconfiguration的model
                 $modelId = EmbeddingGenerator::defaultModel();
                 if (! $modelGatewayMapper->exists($dataIsolation, $modelId)) {
                     // get第one
@@ -84,7 +84,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
 
         $modelName = $delightfulFlowKnowledgeEntity->getModel();
         $delightfulFlowKnowledgeEntity->setForceCreateCode(Code::Knowledge->gen());
-        // create知识库前，先对嵌入模型进行连通性test
+        // createknowledge base前，先对嵌入model进行连通性test
         try {
             $embeddingModel = di(ModelGatewayMapper::class)->getEmbeddingModelProxy($dataIsolation, $delightfulFlowKnowledgeEntity->getModel());
             $modelName = $embeddingModel->getModelName();

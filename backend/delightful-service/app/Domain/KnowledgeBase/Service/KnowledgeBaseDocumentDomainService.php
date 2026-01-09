@@ -25,7 +25,7 @@ use Delightful\AsyncEvent\AsyncEventUtil;
 use Hyperf\DbConnection\Db;
 
 /**
- * 知识库文档领域service
+ * knowledge base文档领域service
  */
 readonly class KnowledgeBaseDocumentDomainService
 {
@@ -72,7 +72,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * query知识库文档list.
+     * queryknowledge base文档list.
      *
      * @return array{total: int, list: array<KnowledgeBaseDocumentEntity>}
      */
@@ -82,7 +82,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * 查看单个知识库文档详情.
+     * 查看单个knowledge base文档detail.
      */
     public function show(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $selectForUpdate = false): KnowledgeBaseDocumentEntity
     {
@@ -94,7 +94,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * delete知识库文档.
+     * deleteknowledge base文档.
      */
     public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $knowledgeBaseEntity, string $documentCode): void
     {
@@ -116,13 +116,13 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * 重建知识库文档向量索引.
+     * 重建knowledge base文档向量索引.
      */
     public function rebuild(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $force = false): void
     {
         $document = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode);
 
-        // 如果强制重建或者syncstatus为fail，则重新sync
+        // 如果force重建或者syncstatus为fail，则重新sync
         if ($force || $document->getSyncStatus() === 2) { // 2 table示syncfail
             $document->setSyncStatus(0); // 0 table示未sync
             $document->setSyncStatusMessage('');
@@ -143,7 +143,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * @return array<string, int> array<知识库code, 文档quantity>
+     * @return array<string, int> array<knowledge basecode, 文档quantity>
      */
     public function getDocumentCountByKnowledgeBaseCodes(KnowledgeBaseDataIsolation $dataIsolation, array $knowledgeBaseCodes): array
     {
@@ -257,7 +257,7 @@ readonly class KnowledgeBaseDocumentDomainService
         }
 
         if (empty($documentEntity->getKnowledgeBaseCode())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '知识库编码不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge baseencoding不能为空');
         }
 
         if (empty($documentEntity->getCreatedUid())) {

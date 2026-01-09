@@ -28,10 +28,10 @@ class SimpleJWT
     public function issueToken(array $data, int $expires = 7200): array
     {
         $token = [
-            'iss' => app_name(), // 签发者 可选
-            'aud' => '', // receive该JWT的一方，可选
+            'iss' => app_name(), // 签发者 optional
+            'aud' => '', // receive该JWT的一方，optional
             'exp' => time() + $expires, // 过期时间
-            'data' => $data, // customize数据
+            'data' => $data, // customizedata
         ];
         return [
             'access_token' => JWT::encode($token, $this->key, 'HS256'),

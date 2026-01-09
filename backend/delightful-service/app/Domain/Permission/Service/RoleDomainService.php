@@ -21,7 +21,7 @@ use Throwable;
 readonly class RoleDomainService
 {
     /**
-     * organization管理员role名称constant.
+     * organization管理员rolenameconstant.
      */
     public const ORGANIZATION_ADMIN_ROLE_NAME = 'ORGANIZATION_ADMIN';
 
@@ -112,7 +112,7 @@ readonly class RoleDomainService
             $roleEntity = clone $savingRoleEntity;
             $roleEntity->prepareForCreation($dataIsolation->getCurrentUserId());
 
-            // check名称在organization下是否唯一
+            // checkname在organization下是否唯一
             if ($this->roleRepository->getByName($organizationCode, $savingRoleEntity->getName())) {
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.role_name_exists', ['name' => $savingRoleEntity->getName()]);
             }
@@ -122,7 +122,7 @@ readonly class RoleDomainService
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.role_not_found', ['id' => $savingRoleEntity->getId()]);
             }
 
-            // check名称修改后是否冲突
+            // checkname修改后是否conflict
             if ($roleEntity->getName() !== $savingRoleEntity->getName()) {
                 $existingRole = $this->roleRepository->getByName($organizationCode, $savingRoleEntity->getName());
                 if ($existingRole && $existingRole->getId() !== $savingRoleEntity->getId()) {
@@ -152,7 +152,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * getrole详情.
+     * getroledetail.
      */
     public function show(PermissionDataIsolation $dataIsolation, int $id): RoleEntity
     {
@@ -169,7 +169,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * according to名称getrole.
+     * according tonamegetrole.
      */
     public function getByName(PermissionDataIsolation $dataIsolation, string $name): ?RoleEntity
     {
@@ -256,7 +256,7 @@ readonly class RoleDomainService
      */
     public function addOrganizationAdmin(PermissionDataIsolation $dataIsolation, array $userIds): RoleEntity
     {
-        // getcurrentorganization编码
+        // getcurrentorganizationencoding
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
         // 1. 尝试get已存在的organization管理员role

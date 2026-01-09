@@ -18,7 +18,7 @@ final class UploadFileMention extends AbstractMention
         if (! $data instanceof FileData) {
             return '';
         }
-        // @todo upload的file目前直接放在工作区的根目录。后面可能will调整路径，到时再改。
+        // @todo upload的file目前直接放在工作区的根directory。后面可能will调整path，到时再改。
         $filePath = $data->getFileName() ?? '';
         return sprintf('@<file_path>%s</file_path>', $filePath);
     }

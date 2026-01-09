@@ -134,7 +134,7 @@ abstract class AbstractDomainService
 
     public function getSeqContent(DelightfulMessageEntity $messageEntity): array
     {
-        // 节约storagenull间,chatmessage在seq表不存具体内容,只存messageid
+        // 节约storagenull间,chatmessage在seq表不存具体content,只存messageid
         if ($messageEntity->getMessageType() instanceof ControlMessageType) {
             $content = $messageEntity->getContent()->toArray();
         } else {
@@ -210,7 +210,7 @@ abstract class AbstractDomainService
     public function generateSenderSequenceByControlMessage(DelightfulMessageEntity $messageDTO, string $conversationId = ''): DelightfulSeqEntity
     {
         $time = date('Y-m-d H:i:s');
-        // 节约storagenull间,chatmessage在seq表不存具体内容,只存messageid
+        // 节约storagenull间,chatmessage在seq表不存具体content,只存messageid
         $content = $this->getSeqContent($messageDTO);
         $seqId = (string) IdGenerator::getSnowId();
         $senderAccountId = $this->getAccountId($messageDTO->getSenderId());
@@ -248,7 +248,7 @@ abstract class AbstractDomainService
         if ($receiveUserEntity === null) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
-        // 节约storagenull间,chatmessage在seq表不存具体内容,只存messageid
+        // 节约storagenull间,chatmessage在seq表不存具体content,只存messageid
         $content = $this->getSeqContent($messageDTO);
         $seqId = (string) IdGenerator::getSnowId();
         $receiverAccountId = $receiveUserEntity->getDelightfulId();
@@ -314,7 +314,7 @@ abstract class AbstractDomainService
     {
         $messageType = $messageDTO->getMessageType();
         $batchResponse = [];
-        // 每条message发出时,就will在message体中记录所有的receive方,以便后续的messagestatus变更
+        // 每条message发出时,就will在message体中record所有的receive方,以便后续的messagestatus变更
         switch ($messageType) {
             case ControlMessageType::SeenMessages:
                 /** @var MessagesSeen $messageStruct */
@@ -462,7 +462,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 避免 seq 表承载太多功能,加太多索引,因此将话题的message单独write到 topic_messages 表中.
+     * 避免 seq 表承载太多feature,加太多索引,因此将话题的message单独write到 topic_messages 表中.
      */
     public function createTopicMessage(DelightfulSeqEntity $seqEntity, ?string $topicId = null): ?DelightfulTopicMessageEntity
     {
@@ -597,11 +597,11 @@ abstract class AbstractDomainService
             // 给自己的messagestreamgenerate序列.
             $seqEntity = $this->generateSenderSequenceByControlMessage($messageDTO, $conversationEntity->getId());
             $seqEntity->setConversationId($conversationEntity->getId());
-            // group chatneed给群成员createconversation窗口
+            // group chatneed给群membercreateconversation窗口
             if ($conversationEntity->getReceiveType() === ConversationType::Group || $messageDTO->getReceiveType() === ConversationType::Ai) {
                 // 确定message优先级
                 $seqCreatedEvent = $this->getControlSeqCreatedEvent($seqEntity);
-                // async给收件方(其他群成员)generateSeq并push
+                // async给收件方(其他群member)generateSeq并push
                 $this->dispatchSeq($seqCreatedEvent);
             }
 
@@ -655,7 +655,7 @@ abstract class AbstractDomainService
         if ($senderConversation->getUserId() !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
-        // organization编码是否匹配
+        // organizationencoding是否匹配
         if ($senderConversation->getUserOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
@@ -733,7 +733,7 @@ abstract class AbstractDomainService
     private function getReceiveMessageLatestReadStatus(array $referMessageIds, DataIsolation $dataIsolation): array
     {
         $referSeqList = $this->delightfulSeqRepository->getReceiveMessagesStatusChange($referMessageIds, $dataIsolation->getCurrentUserId());
-        // 对于receive方来说,一个 sender_message_id 由于status变化,可能will有多条记录,此处need最后的status
+        // 对于receive方来说,一个 sender_message_id 由于status变化,可能will有多条record,此处need最后的status
         return $this->getMessageLatestStatus($referMessageIds, $referSeqList);
     }
 }

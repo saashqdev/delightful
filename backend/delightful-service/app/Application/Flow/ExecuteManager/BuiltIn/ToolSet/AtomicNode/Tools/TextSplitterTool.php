@@ -79,7 +79,7 @@ class TextSplitterTool extends AbstractBuiltInTool
         "content": {
             "type": "string",
             "key": "content",
-            "title": "need切割的内容",
+            "title": "need切割的content",
             "description": "need切割的长文本",
             "required": null,
             "value": null,

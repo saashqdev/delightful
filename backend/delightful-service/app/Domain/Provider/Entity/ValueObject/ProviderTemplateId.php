@@ -90,7 +90,7 @@ enum ProviderTemplateId: string
     }
 
     /**
-     * 解析templateID，return对应的ProviderCode和Category.
+     * parsetemplateID，return对应的ProviderCode和Category.
      *
      * @return array{providerCode: ProviderCode, category: Category}
      */
@@ -124,7 +124,7 @@ enum ProviderTemplateId: string
     }
 
     /**
-     * gettemplate的description名称.
+     * gettemplate的descriptionname.
      */
     public function getDescription(): string
     {

@@ -52,7 +52,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * getorganization编码.
+     * getorganizationencoding.
      */
     public function getOrganizationCode(): string
     {
@@ -60,7 +60,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * setorganization编码.
+     * setorganizationencoding.
      */
     public function setOrganizationCode(string $organizationCode): self
     {

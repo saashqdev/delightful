@@ -21,7 +21,7 @@ class ClientSequence extends AbstractEntity
     // 序列号归属账号id
     protected string $delightfulId;
 
-    // 序列号，一定不重复，一定增长，但是不保证连续。
+    // 序列号，一定不重复，一定growth，但是不保证连续。
     protected string $seqId;
 
     // user的messageid，user下唯一。
@@ -33,7 +33,7 @@ class ClientSequence extends AbstractEntity
     // send方的messageid
     protected ?string $senderMessageId;
 
-    // message所属session窗口。 客户端canaccording to此value确定message是否要reminder等。如果本地没有发现这个sessionid，主动向service端querysession窗口详情
+    // message所属session窗口。 客户端canaccording to此value确定message是否要reminder等。如果本地没有发现这个sessionid，主动向service端querysession窗口detail
     protected ?string $conversationId;
 
     protected string $organizationCode;

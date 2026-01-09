@@ -25,12 +25,12 @@ class CreateSubAdminRequestDTO extends AbstractDTO
     public int $status = 1;
 
     /**
-     * permission键list（可选）.
+     * permission键list（optional）.
      */
     public array $permissions = [];
 
     /**
-     * userIDlist（可选）.
+     * userIDlist（optional）.
      */
     public array $userIds = [];
 
@@ -75,7 +75,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
     }
 
     /**
-     * verifyDTO数据的valid性.
+     * verifyDTOdata的valid性.
      */
     public function validate(): bool
     {

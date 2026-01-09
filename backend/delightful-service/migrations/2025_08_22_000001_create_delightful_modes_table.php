@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->tinyInteger('distribution_type')->default(1)->comment('分配方式 1:customizeconfiguration 2:跟随其他模式');
             $table->bigInteger('follow_mode_id')->unsigned()->default(0)->comment('跟随的模式ID，0table示不跟随');
             $table->json('restricted_mode_identifiers')->comment('限制的模式标识array');
-            $table->string('organization_code', 32)->default('')->comment('organization代码');
+            $table->string('organization_code', 32)->default('')->comment('organizationcode');
             $table->string('creator_id', 64)->default('')->comment('create人ID');
             $table->timestamps();
             $table->softDeletes();
@@ -44,12 +44,12 @@ return new class extends Migration {
             $table->unique('identifier', 'idx_identifier');
         });
 
-        // 插入default模式数据
+        // 插入default模式data
         $this->insertDefaultModeData();
     }
 
     /**
-     * 插入default模式数据.
+     * 插入default模式data.
      */
     private function insertDefaultModeData(): void
     {

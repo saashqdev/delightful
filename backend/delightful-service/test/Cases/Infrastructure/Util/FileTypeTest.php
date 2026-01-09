@@ -96,16 +96,16 @@ class FileTypeTest extends TestCase
     public function testGetTypeFromHeaders()
     {
         // mark此test为跳过，因为need模拟全局function
-        $this->markTestSkipped('needfunction模拟功能才能完整test');
+        $this->markTestSkipped('needfunction模拟feature才能完整test');
     }
 
     /**
-     * test无法识别filetype时抛出exception.
+     * test无法识别filetype时throwexception.
      * 同样needfunction模拟支持
      */
     public function testInvalidFileType()
     {
-        $this->markTestSkipped('needfunction模拟功能才能完整test');
+        $this->markTestSkipped('needfunction模拟feature才能完整test');
     }
 
     /**
@@ -113,6 +113,6 @@ class FileTypeTest extends TestCase
      */
     public function testFileTooLarge()
     {
-        $this->markTestSkipped('needfunction模拟功能才能完整test');
+        $this->markTestSkipped('needfunction模拟feature才能完整test');
     }
 }

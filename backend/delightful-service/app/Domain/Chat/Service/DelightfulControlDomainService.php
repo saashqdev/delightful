@@ -29,7 +29,7 @@ class DelightfulControlDomainService extends AbstractDomainService
     public function getSenderMessageLatestReadStatus(string $senderMessageId, string $senderUserId): ?DelightfulSeqEntity
     {
         $senderSeqList = $this->delightfulSeqRepository->getSenderMessagesStatusChange($senderMessageId, $senderUserId);
-        // 对于receive方来说,一个 sender_message_id 由于status变化,可能will有多条记录,此处need最后的status
+        // 对于receive方来说,一个 sender_message_id 由于status变化,可能will有多条record,此处need最后的status
         $userMessagesReadStatus = $this->getMessageLatestStatus([$senderMessageId], $senderSeqList);
         return $userMessagesReadStatus[$senderMessageId] ?? null;
     }
@@ -78,7 +78,7 @@ class DelightfulControlDomainService extends AbstractDomainService
 
         $senderUserId = $senderConversationEntity->getUserId();
         $senderMessageId = $receiveDelightfulSeqEntity->getSenderMessageId();
-        # 这里加一下分布式行lock,防止并发修改messagereceive人列表,造成数据override.
+        # 这里加一下分布式行lock,防止并发修改messagereceive人列表,造成dataoverride.
         $spinLockKey = 'chat:seq:lock:' . $senderMessageId;
         $spinLockKeyOwner = random_bytes(8);
         try {
@@ -117,7 +117,7 @@ class DelightfulControlDomainService extends AbstractDomainService
 
             switch ($controlMessageType) {
                 case ControlMessageType::SeenMessages:
-                    # 已读回执(扫了一眼message,对于非文本的复杂typemessage,没有查看详情).
+                    # 已读回执(扫了一眼message,对于非文本的复杂typemessage,没有查看detail).
                     $senderReceiveList = $senderLatestSeq->getReceiveList();
                     if ($senderReceiveList === null) {
                         $this->logger->error(sprintf(
@@ -162,7 +162,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {
                         // 写database,updatemessagesend方的已读列表。这是为了复用message收发通道，notify客户端有new已读回执。
                         $this->delightfulSeqRepository->createSequence($seqData);
-                        // updateoriginal chat_seq 的messagereceive人列表。 避免拉取历史message时，对方已读的message还是显示未读。
+                        // updateoriginal chat_seq 的messagereceive人列表。 避免拉取historymessage时，对方已读的message还是显示未读。
                         $originalSeq = $this->delightfulSeqRepository->getSeqByMessageId($senderMessageId);
                         if ($originalSeq !== null) {
                             $originalSeq->setReceiveList($senderReceiveList);

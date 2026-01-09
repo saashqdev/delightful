@@ -16,12 +16,12 @@ return new class extends Migration {
     {
         Schema::create('delightful_flow_api_keys', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('organization_code')->default('')->comment('organization编码');
-            $table->string('code', 50)->default('')->comment('API Key编码')->index();
-            $table->string('flow_code', 50)->default('')->comment('process编码')->index();
+            $table->string('organization_code')->default('')->comment('organizationencoding');
+            $table->string('code', 50)->default('')->comment('API Keyencoding')->index();
+            $table->string('flow_code', 50)->default('')->comment('processencoding')->index();
             $table->string('conversation_id', 50)->default('')->comment('conversationID');
             $table->integer('type')->default(0)->comment('type');
-            $table->string('name')->default('')->comment('名称');
+            $table->string('name')->default('')->comment('name');
             $table->string('description')->default('')->comment('description');
             $table->string('secret_key', 50)->default('')->comment('key')->unique();
             $table->boolean('enabled')->default(false)->comment('是否启用');

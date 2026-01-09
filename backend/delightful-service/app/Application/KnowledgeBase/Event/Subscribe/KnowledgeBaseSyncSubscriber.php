@@ -43,7 +43,7 @@ readonly class KnowledgeBaseSyncSubscriber implements ListenerInterface
         }
         $knowledge = $event->delightfulFlowKnowledgeEntity;
         $dataIsolation = $event->dataIsolation;
-        // if是基础知识库type，则传知识库create者，避免permission不足
+        // if是基础knowledge basetype，则传knowledge basecreate者，避免permission不足
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }

@@ -163,7 +163,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * query可用向量知识库.
+     * query可用向量knowledge base.
      */
     public function queryKnowledge()
     {
@@ -172,7 +172,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 详情.
+     * detail.
      */
     public function show(string $flowId)
     {

@@ -223,7 +223,7 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     /**
      * todo 这里暂不implement重复upload的issue，均当做新fileupload
-     * recordprocess所产生的file，均will同时upload到云端，后续节点needuse时从executeprocess数据中优先匹配.
+     * recordprocess所产生的file，均will同时upload到云端，后续节点needuse时从executeprocessdata中优先匹配.
      * @return AbstractAttachment[]
      * @throws SSRFException
      */

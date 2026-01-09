@@ -26,7 +26,7 @@ enum OrganizationSyncStatus: int
 
     /**
      * 是否need补偿。
-     * 与知识库status保持一致的补偿集合。
+     * 与knowledge basestatus保持一致的补偿集合。
      */
     public static function needCompensate(): array
     {

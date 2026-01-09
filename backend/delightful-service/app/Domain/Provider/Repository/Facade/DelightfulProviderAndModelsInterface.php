@@ -14,19 +14,19 @@ use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 use App\Domain\Provider\Entity\ValueObject\Status;
 
 /**
- * organization下的 Delightful service商及model的相关接口（非官方organization才有 Delightful service商）.
+ * organization下的 Delightful service商及model的相关interface（非官方organization才有 Delightful service商）.
  */
 interface DelightfulProviderAndModelsInterface
 {
     /**
-     * getorganization下的 Delightful service商configuration（not containmodel详情）.
+     * getorganization下的 Delightful service商configuration（not containmodeldetail）.
      */
     public function getDelightfulProvider(ProviderDataIsolation $dataIsolation, Category $category, ?Status $status = null): ?ProviderConfigDTO;
 
     /**
-     * according toorganization编码和类别get Delightful service商modellist.
+     * according toorganizationencoding和类别get Delightful service商modellist.
      *
-     * @param string $organizationCode organization编码
+     * @param string $organizationCode organizationencoding
      * @param null|Category $category service商类别，为空时return所有categorymodel
      * @return array<ProviderModelEntity> Delightful service商model实体array
      */
@@ -35,7 +35,7 @@ interface DelightfulProviderAndModelsInterface
     /**
      * according to modelParentId getorganization Delightful model.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string $modelParentId model父ID
      * @return null|ProviderModelEntity 找到的organizationmodel实体，不存在则returnnull
      */
@@ -52,7 +52,7 @@ interface DelightfulProviderAndModelsInterface
     /**
      * 非官方organizationupdate Delightful modelstatus（写时复制逻辑）.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param ProviderModelEntity $officialModel 官方model实体
      * @return string organizationmodelID
      */

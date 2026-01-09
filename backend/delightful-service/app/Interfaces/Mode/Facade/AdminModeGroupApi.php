@@ -39,7 +39,7 @@ class AdminModeGroupApi extends AbstractApi
     }
 
     /**
-     * get分组详情.
+     * get分组detail.
      */
     public function getGroupDetail(RequestInterface $request, string $groupId): array
     {

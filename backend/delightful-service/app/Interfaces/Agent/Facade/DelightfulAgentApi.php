@@ -178,7 +178,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getAgentsByOrganizationPage($authenticatable, $page, $pageSize, $agentName);
     }
 
-    // get应用市场助理
+    // getapplication市场助理
     public function getAgentsFromMarketplace(RequestInterface $request)
     {
         $this->getAuthorization();
@@ -276,7 +276,7 @@ class DelightfulAgentApi extends AbstractApi
         $this->delightfulAgentAppService->updateAgentEnterpriseStatus($authorization, $agentId, $status, $authorization->getId());
     }
 
-    // get助理详情
+    // get助理detail
     public function getAgentDetailByAgentId(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -315,7 +315,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->isUpdated($authenticatable, $agentId);
     }
 
-    // according to userId getpublishversion的助理详情
+    // according to userId getpublishversion的助理detail
     public function getDetailByUserId(RequestInterface $request, ?string $userId = null)
     {
         $this->getAuthorization();
@@ -375,7 +375,7 @@ class DelightfulAgentApi extends AbstractApi
         // createpaginationobject
         $page = $this->createPage();
 
-        // get全量数据
+        // get全量data
         $data = $this->delightfulAgentAppService->getChatModeAvailableAgents($authenticatable, $query);
 
         // 在 API 层进行paginationprocess

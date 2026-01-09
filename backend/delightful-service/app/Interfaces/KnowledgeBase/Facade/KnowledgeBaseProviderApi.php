@@ -32,15 +32,15 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
         $dto->setStatus(1); // 1 表示启用
         $dto->setCreatedAt(date('Y-m-d H:i:s'));
 
-        // setting模型列表
+        // settingmodel列表
         $models = [];
 
-        // 基础重sort模型
+        // 基础重sortmodel
         $baseModel = new ProviderModelDetailDTO();
         $baseModel->setId('official_rerank_model');
-        $baseModel->setName('官方重排模型');
+        $baseModel->setName('官方重排model');
         $baseModel->setModelVersion('v1.0');
-        $baseModel->setDescription('基础重sort模型，适用于一般场景');
+        $baseModel->setDescription('基础重sortmodel，适用于一般场景');
         $baseModel->setIcon('');
         $baseModel->setModelType(1);
         $baseModel->setCategory('rerank');

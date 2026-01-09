@@ -26,12 +26,12 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
 
     // public function testCallbackSuccess()
     // {
-    //     // 准备test数据
+    //     // 准备testdata
     //     $userTask = [
     //         'conversation_id' => '728277721403252736',
     //         'topic_id' => '749639569880518657',
     //         'delightful_env_id' => 1,
-    //         'name' => 'query数据list',
+    //         'name' => 'querydatalist',
     //         'creator' => 'usi_3715ce50bc02d7e72ba7891649b7f1da',
     //         'nickname' => 'xxx',
     //         'agent_id' => '737330322528899073',
@@ -48,7 +48,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
     //         'deadline' => null,
     //         'interval' => null,
     //     ];
-    //     // create被test的service实例, use依赖注入
+    //     // create被test的service实例, usedependency注入
     //     $service = make(DelightfulUserTaskAppService::class);
     //     // {"branchId": "branch_83f180194d23", "flowCode": "DELIGHTFUL-FLOW-6784c05fc92ec0-09863904", "routineConfig": {"day": null, "time": "00:00", "type": "daily_repeat", "topic": {"name": null, "type": ""}, "value": {"unit": null, "values": null, "deadline": null, "interval": null}}}
     //     $flowCode = 'DELIGHTFUL-FLOW-6784c05fc92ec0-09863904';

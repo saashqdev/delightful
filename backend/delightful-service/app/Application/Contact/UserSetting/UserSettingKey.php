@@ -17,7 +17,7 @@ enum UserSettingKey: string
     // 项目 mcp userconfiguration
     case BeDelightfulProjectMCPServers = 'BeDelightfulProjectMCPServers';
 
-    // 项目话题模型configuration
+    // 项目话题modelconfiguration
     case BeDelightfulProjectTopicModel = 'BeDelightfulProjectTopicModel';
 
     // userwhen前organization

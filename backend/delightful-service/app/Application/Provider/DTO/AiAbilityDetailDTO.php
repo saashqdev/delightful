@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\Provider\DTO;
 
 /**
- * AI能力详情DTO.
+ * AI能力detailDTO.
  */
 class AiAbilityDetailDTO
 {

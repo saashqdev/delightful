@@ -41,7 +41,7 @@ class ProviderAppService
             return [];
         }
 
-        // build数据隔离object
+        // builddata隔离object
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
         // 收集所有唯一的service商configurationID
@@ -53,7 +53,7 @@ class ProviderAppService
         // 批量getservice商configuration实体（用于get别名）
         $configEntities = $this->providerConfigDomainService->getConfigByIdsWithoutOrganizationFilter($configIds);
 
-        // 收集所有图标路径按organization编码分组（includemodel图标和service商图标）
+        // 收集所有图标path按organizationencoding分组（includemodel图标和service商图标）
         $iconsByOrg = [];
         $iconToModelMap = [];
         $iconToProviderMap = [];

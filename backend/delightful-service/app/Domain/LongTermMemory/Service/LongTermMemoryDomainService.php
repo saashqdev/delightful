@@ -53,7 +53,7 @@ readonly class LongTermMemoryDomainService
             return;
         }
 
-        // generatelock名称和所有者（based on记忆IDsort后generate唯一lock名）
+        // generatelockname和所有者（based on记忆IDsort后generate唯一lock名）
         sort($memoryIds);
         $lockName = 'memory:batch:reinforce:' . md5(implode(',', $memoryIds));
         $lockOwner = getmypid() . '_' . microtime(true);
@@ -108,7 +108,7 @@ readonly class LongTermMemoryDomainService
             throw new InvalidArgumentException('delightful_message_id is required when scenario is memory_card_quick');
         }
 
-        // generatelock名称和所有者（based on记忆IDsort后generate唯一lock名）
+        // generatelockname和所有者（based on记忆IDsort后generate唯一lock名）
         sort($memoryIds);
         $lockName = sprintf('memory:batch:%s:%s:%s', $action->value, $scenario->value, md5(implode(',', $memoryIds)));
         $lockOwner = getmypid() . '_' . microtime(true);
@@ -186,7 +186,7 @@ readonly class LongTermMemoryDomainService
                 }
             }
 
-            // 如果是 memory_card_quick 场景，needupdate对应的message内容
+            // 如果是 memory_card_quick 场景，needupdate对应的messagecontent
             if ($scenario === MemoryOperationScenario::MEMORY_CARD_QUICK && ! empty($delightfulMessageId)) {
                 $this->updateMessageWithMemoryOperation($delightfulMessageId, $action, $memoryIds);
             }
@@ -197,7 +197,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 访问记忆（update访问statistics）.
+     * access记忆（updateaccessstatistics）.
      */
     public function accessMemory(string $memoryId): void
     {
@@ -215,7 +215,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 批量访问记忆.
+     * 批量access记忆.
      */
     public function accessMemories(array $memoryIds): void
     {
@@ -231,7 +231,7 @@ readonly class LongTermMemoryDomainService
             return;
         }
 
-        // 批量update访问statistics
+        // 批量updateaccessstatistics
         foreach ($memories as $memory) {
             $memory->access();
         }
@@ -244,7 +244,7 @@ readonly class LongTermMemoryDomainService
 
     public function create(CreateMemoryDTO $dto): string
     {
-        // generatelock名称和所有者
+        // generatelockname和所有者
         $lockName = sprintf('memory:create:%s:%s:%s', $dto->orgId, $dto->appId, $dto->userId);
         $lockOwner = getmypid() . '_' . microtime(true);
 
@@ -298,7 +298,7 @@ readonly class LongTermMemoryDomainService
 
     public function updateMemory(string $memoryId, UpdateMemoryDTO $dto): void
     {
-        // generatelock名称和所有者
+        // generatelockname和所有者
         $lockName = sprintf('memory:update:%s', $memoryId);
         $lockOwner = getmypid() . '_' . microtime(true);
 
@@ -337,7 +337,7 @@ readonly class LongTermMemoryDomainService
 
     public function deleteMemory(string $memoryId): void
     {
-        // generatelock名称和所有者
+        // generatelockname和所有者
         $lockName = sprintf('memory:delete:%s', $memoryId);
         $lockOwner = getmypid() . '_' . microtime(true);
 
@@ -373,7 +373,7 @@ readonly class LongTermMemoryDomainService
      * @param string $appId applicationID
      * @param string $userId userID
      * @param array $projectIds 项目ID列表
-     * @return int delete的记录quantity
+     * @return int delete的recordquantity
      */
     public function deleteMemoriesByProjectIds(string $orgId, string $appId, string $userId, array $projectIds): int
     {
@@ -437,7 +437,7 @@ readonly class LongTermMemoryDomainService
             'length' => $totalLength,
         ]);
 
-        // 记录访问
+        // recordaccess
         $memoryIds = array_map(static fn ($memory) => $memory->getId(), $selectedMemories);
         $this->accessMemories($memoryIds);
 
@@ -529,7 +529,7 @@ readonly class LongTermMemoryDomainService
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID
-     * @return int success更new记录quantity
+     * @return int success更newrecordquantity
      */
     public function batchUpdateEnabled(array $memoryIds, bool $enabled, string $orgId, string $appId, string $userId): int
     {
@@ -538,7 +538,7 @@ readonly class LongTermMemoryDomainService
             return 0;
         }
 
-        // generatelock名称和所有者（based on记忆IDsort后generate唯一lock名）
+        // generatelockname和所有者（based on记忆IDsort后generate唯一lock名）
         sort($memoryIds);
         $enabledStatus = $enabled ? 'enable' : 'disable';
         $lockName = sprintf('memory:batch:%s:%s', $enabledStatus, md5(implode(',', $memoryIds)));
@@ -584,7 +584,7 @@ readonly class LongTermMemoryDomainService
             return true;
         }
 
-        // 长时间未访问且重要性很低
+        // 长时间未access且重要性很低
         if ($memory->getLastAccessedAt() && $memory->getImportance() < 0.2) {
             $daysSinceLastAccess = new DateTime()->diff($memory->getLastAccessedAt())->days;
             if ($daysSinceLastAccess > 30) {
@@ -601,7 +601,7 @@ readonly class LongTermMemoryDomainService
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID
-     * @throws BusinessException 当启用quantity超过限制时抛出exception
+     * @throws BusinessException 当启用quantity超过限制时throwexception
      */
     private function validateMemoryEnablementLimits(array $memoryIds, string $orgId, string $appId, string $userId): void
     {
@@ -682,12 +682,12 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * updatemessage内容，setting记忆操作info.
+     * updatemessagecontent，setting记忆操作info.
      */
     private function updateMessageWithMemoryOperation(string $delightfulMessageId, MemoryOperationAction $action, array $memoryIds): void
     {
         try {
-            // according to delightful_message_id querymessage数据
+            // according to delightful_message_id querymessagedata
             $messageEntity = $this->messageRepository->getMessageByDelightfulMessageId($delightfulMessageId);
 
             if (! $messageEntity) {
@@ -711,7 +711,7 @@ readonly class LongTermMemoryDomainService
                 'scenario' => MemoryOperationScenario::MEMORY_CARD_QUICK->value,
             ]);
 
-            // updatemessage内容
+            // updatemessagecontent
             $updatedContent = $superAgentMessage->toArray();
             $this->messageRepository->updateMessageContent($delightfulMessageId, $updatedContent);
         } catch (Throwable $e) {

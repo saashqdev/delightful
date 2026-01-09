@@ -23,7 +23,7 @@ use Delightful\FlowExprEngine\Exception\FlowExprEngineException;
 #[FlowNodeDefine(
     type: NodeType::Loader->value,
     code: NodeType::Loader->name,
-    name: 'document解析',
+    name: 'documentparse',
     paramsConfig: LoaderNodeParamsConfig::class,
     version: 'v1',
     singleDebug: true,

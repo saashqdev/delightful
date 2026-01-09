@@ -17,12 +17,12 @@ class ApiKeyProviderDTO extends AbstractDTO
     use StringIdDTOTrait;
 
     /**
-     * organization代码.
+     * organizationcode.
      */
     protected string $organizationCode = '';
 
     /**
-     * 关联代码.
+     * 关联code.
      */
     protected string $relCode = '';
 
@@ -32,7 +32,7 @@ class ApiKeyProviderDTO extends AbstractDTO
     protected int $relType = 0;
 
     /**
-     * APIkey名称.
+     * APIkeyname.
      */
     protected string $name = '';
 

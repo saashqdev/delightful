@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('role_id')->comment('roleID');
             $table->string('user_id', 64)->comment('userID，对应delightful_contact_users.user_id');
-            $table->string('organization_code', 64)->comment('organization编码');
+            $table->string('organization_code', 64)->comment('organizationencoding');
             $table->string('assigned_by', 64)->nullable()->comment('分配者userID');
             $table->timestamp('assigned_at')->nullable()->comment('分配时间');
             $table->timestamps();

@@ -21,8 +21,8 @@ return new class extends Migration {
         Schema::create('delightful_ai_abilities', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('code', 50)->comment('能力唯一标识');
-            $table->string('organization_code', 100)->default('')->comment('organization编码');
-            $table->json('name_i18n')->comment('能力名称（多语言JSONformat）');
+            $table->string('organization_code', 100)->default('')->comment('organizationencoding');
+            $table->json('name_i18n')->comment('能力name（多语言JSONformat）');
             $table->json('description_i18n')->comment('能力description（多语言JSONformat）');
             $table->string('icon', 100)->nullable()->comment('图标标识');
             $table->integer('sort_order')->default(0)->comment('sort');

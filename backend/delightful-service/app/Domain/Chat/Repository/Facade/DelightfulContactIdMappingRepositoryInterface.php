@@ -80,7 +80,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     public function updateMappingEnvId(int $envId): int;
 
     /**
-     * according to origin_id 批量软delete第third-party平台映射记录。
+     * according to origin_id 批量软delete第third-party平台映射record。
      *
      * @param string[] $originIds 第third-party平台的originalID列表
      */

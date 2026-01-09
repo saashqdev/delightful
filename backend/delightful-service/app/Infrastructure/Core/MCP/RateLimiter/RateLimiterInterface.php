@@ -11,7 +11,7 @@ use App\Infrastructure\Core\MCP\Exception\InvalidParamsException;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * 速率限制器接口.
+ * 速率限制器interface.
  */
 interface RateLimiterInterface
 {

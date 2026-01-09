@@ -29,7 +29,7 @@ readonly class ClearDelightfulMessageCrontab
 
     public function clearDelightfulMessage(string $time): void
     {
-        // 录音功能已移除，此method保留为nullimplement，可according toneed添加其他清理逻辑
+        // 录音feature已移除，此method保留为nullimplement，可according toneed添加其他清理逻辑
         $this->logger->info(sprintf('ClearDelightfulMessageCrontab time: %s - recording functionality removed', $time));
     }
 }

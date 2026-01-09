@@ -11,13 +11,13 @@ enum MemoryType: int
 {
     case None = 0;
 
-    // 大语言模型记录 暂时不记录了 无用
+    // 大语言modelrecord 暂时不record了 无用
     case LLM = 1;
 
-    // Flow chat记录
+    // Flow chatrecord
     case Chat = 2;
 
-    // IM 的chat记录
+    // IM 的chatrecord
     case IMChat = 3;
 
     // 挂载记忆

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\Sms;
 
 /**
- * 所有短信驱动的return结果must转换为此object
+ * 所有短信驱动的returnresultmust转换为此object
  */
 class SendResult
 {

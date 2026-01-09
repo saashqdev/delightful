@@ -22,12 +22,12 @@ class MCPServerEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯一编码，仅在create时generate，用作给前端的id.
+     * 唯一encoding，仅在create时generate，用作给前端的id.
      */
     protected string $code;
 
     /**
-     * MCP服务名称.
+     * MCP服务name.
      */
     protected string $name;
 

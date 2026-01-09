@@ -11,15 +11,15 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
  * 检索策略枚举类.
  *
  * 定义了两种检索策略：
- * - SINGLE: 单一检索，从单个知识库中检索info
- * - MULTIPLE: 多重检索，同时从多个知识库中检索info，然后对result进行重新sort
+ * - SINGLE: 单一检索，从单个knowledge base中检索info
+ * - MULTIPLE: 多重检索，同时从多个knowledge base中检索info，然后对result进行重新sort
  */
 class RetrieveStrategy
 {
     /**
      * 单一检索.
      *
-     * 从单个知识库中检索info。
+     * 从单个knowledge base中检索info。
      * 该策略passconfigurationparameter `retrieve_strategy` fieldset，
      * 从database中的 retrieve_config configurationget。
      */
@@ -28,7 +28,7 @@ class RetrieveStrategy
     /**
      * 多重检索.
      *
-     * 同时从多个知识库中检索info，然后对result进行重新sort。
+     * 同时从多个knowledge base中检索info，然后对result进行重新sort。
      * 该策略passconfigurationparameter `retrieve_strategy` fieldset，
      * 从database中的 retrieve_config configurationget。
      * 它支持different的重sort策略，如use重sortmodel或加权分数。

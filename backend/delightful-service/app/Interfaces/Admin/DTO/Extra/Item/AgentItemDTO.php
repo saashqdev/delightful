@@ -19,7 +19,7 @@ class AgentItemDTO extends AbstractDTO
 
     public function __construct(null|array|string $data = null)
     {
-        // 兼容前端传参
+        // compatible前端传参
         is_string($data) && $data = ['agent_id' => $data];
         parent::__construct($data);
     }

@@ -71,7 +71,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * get助理详情.
+     * get助理detail.
      */
     public function getAgentDetail(DelightfulUserAuthorization $authorization, string $agentId): AdminAgentDetailDTO
     {
@@ -170,7 +170,7 @@ class AdminAgentAppService extends AbstractKernelAppService
             $agentVersionMap[$version->getId()] = $version;
         }
 
-        // 聚合数据
+        // 聚合data
         $items = [];
         foreach ($delightfulAgentEntities as $agent) {
             $adminAgentDTO = AgentAssembler::entityToDTO($agent);
@@ -268,7 +268,7 @@ class AdminAgentAppService extends AbstractKernelAppService
 
     public function getPublishedAgents(Authenticatable $authorization, string $pageToken, int $pageSize, AgentFilterType $type): GetPublishedAgentsResponseDTO
     {
-        // get数据隔离object并getcurrentorganization的organization代码
+        // getdata隔离object并getcurrentorganization的organizationcode
         /** @var DelightfulUserAuthorization $authorization */
         $organizationCode = $authorization->getOrganizationCode();
 
@@ -281,7 +281,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         // 提取启用机器人list中的 agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // get指定organization和机器人version的机器人数据及其total
+        // get指定organization和机器人version的机器人data及其total
         $agentVersions = $this->delightfulAgentVersionDomainService->getAgentsByOrganizationWithCursor(
             $organizationCode,
             $agentVersionIds,

@@ -32,17 +32,17 @@ class ImageGeneratedEvent extends AbstractEvent
     protected ImageGenerateSourceEnum $sourceType;
 
     /**
-     * service_provider_models.id 模型ID.
+     * service_provider_models.id modelID.
      */
     protected string $providerModelId = '';
 
     /**
-     * 访问token实体Id.
+     * accesstoken实体Id.
      */
     protected ?int $accessTokenId = null;
 
     /**
-     * 访问token实体名称.
+     * accesstoken实体name.
      */
     protected ?string $accessTokenName = null;
 

@@ -20,7 +20,7 @@ class CreateTaskScheduler extends Migration
         Schema::create(config('task_scheduler.table_names.task_scheduler', 'task_scheduler'), function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('external_id', 64)->comment('业务 id')->index();
-            $table->string('name', 64)->comment('名称');
+            $table->string('name', 64)->comment('name');
             $table->dateTimeTz('expect_time')->comment('expectedexecute时间');
             $table->dateTimeTz('actual_time')->nullable()->comment('actualexecute时间');
             $table->tinyInteger('type')->default(2)->comment('type');
@@ -29,7 +29,7 @@ class CreateTaskScheduler extends Migration
             $table->tinyInteger('status')->default(0)->comment('status');
             $table->json('callback_method')->comment('callbackmethod');
             $table->json('callback_params')->comment('callbackparameter');
-            $table->string('remark', 255)->default('')->comment('备注');
+            $table->string('remark', 255)->default('')->comment('note');
             $table->string('creator', 64)->default('')->comment('create人');
             $table->dateTimeTz('created_at')->comment('creation time');
             $table->index(['status', 'expect_time']);

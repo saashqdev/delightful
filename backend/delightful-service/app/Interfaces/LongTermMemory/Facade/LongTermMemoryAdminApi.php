@@ -164,7 +164,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * get记忆详情.
+     * get记忆detail.
      */
     public function getMemory(string $memoryId): array
     {
@@ -246,9 +246,9 @@ class LongTermMemoryAdminApi extends AbstractApi
             'status' => $status,
             'enabled' => $enabled,
             'pageToken' => $validatedParams['page_token'] ?? null,
-            'limit' => (int) $pageSize, // 传递original页面size，让应用service层processpagination逻辑
+            'limit' => (int) $pageSize, // 传递originalpagesize，让applicationservice层processpagination逻辑
         ]);
-        // 解析 pageToken
+        // parse pageToken
         $dto->parsePageToken();
         $result = $this->longTermMemoryAppService->findMemories($dto);
 

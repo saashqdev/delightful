@@ -23,7 +23,7 @@ interface RoleRepositoryInterface
     public function getById(string $organizationCode, int $id): ?RoleEntity;
 
     /**
-     * according to名称getrole.
+     * according tonamegetrole.
      */
     public function getByName(string $organizationCode, string $name): ?RoleEntity;
 
@@ -57,7 +57,7 @@ interface RoleRepositoryInterface
      * 批量get多个role的user列表。
      * returnformat为 [roleId => userId[]].
      *
-     * @param string $organizationCode organization编码
+     * @param string $organizationCode organizationencoding
      * @param int[] $roleIds role ID 列表
      *
      * @return array<int, array>

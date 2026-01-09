@@ -15,7 +15,7 @@ use Hyperf\Database\Model\Model;
 class ModeFactory
 {
     /**
-     * 将模型转换为实体.
+     * 将model转换为实体.
      */
     public static function modelToEntity(Model|ModeModel $model): ModeEntity
     {

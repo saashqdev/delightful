@@ -33,22 +33,22 @@ class TokenTextSplitter extends TextSplitter
     private array $separators;
 
     /**
-     * @var callable token计算闭包
+     * @var callable token计算闭package
      */
     private $tokenizer;
 
     /**
-     * defaulttoken计算闭包use到的encoderProvider.
+     * defaulttoken计算闭packageuse到的encoderProvider.
      */
     private EncoderProvider $defaultEncoderProvider;
 
     /**
-     * defaulttoken计算闭包use到的encoder.
+     * defaulttoken计算闭packageuse到的encoder.
      */
     private Encoder $defaultEncoder;
 
     /**
-     * @var bool 分割后的文本保留分隔符
+     * @var bool split后的文本保留分隔符
      */
     private bool $preserveSeparator = false;
 
@@ -77,10 +77,10 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 分割文本.
+     * split文本.
      *
-     * @param string $text 要分割的文本
-     * @return array 分割后的文本块array
+     * @param string $text 要split的文本
+     * @return array split后的文本块array
      */
     public function splitText(string $text): array
     {
@@ -95,7 +95,7 @@ class TokenTextSplitter extends TextSplitter
         // 2. 把tag替换成0x00
         $text = preg_replace('/<DelightfulCompressibleContent.*?<\/DelightfulCompressibleContent>/s', "\x00", $text);
 
-        // 3. 分割文本
+        // 3. split文本
         if ($this->fixedSeparator) {
             $chunks = $this->splitBySeparator($text, $this->fixedSeparator);
         } else {
@@ -110,7 +110,7 @@ class TokenTextSplitter extends TextSplitter
         $finalChunks = [];
         foreach ($chunks as $i => $chunk) {
             if ($chunksLengths[$i] > $this->chunkSize) {
-                // 如果chunk太大，进行递归分割
+                // 如果chunk太大，进行递归split
                 $finalChunks = array_merge($finalChunks, $this->recursiveSplitText($chunk));
             } else {
                 $finalChunks[] = $chunk;
@@ -134,11 +134,11 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 合并文本块.
+     * merge文本块.
      *
-     * @param array $splits 要合并的文本块
+     * @param array $splits 要merge的文本块
      * @param string $separator 分隔符
-     * @return array 合并后的文本块array
+     * @return array merge后的文本块array
      */
     protected function mergeSplits(array $splits, string $separator): array
     {
@@ -172,7 +172,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * use指定分隔符分割文本.
+     * use指定分隔符split文本.
      */
     private function splitBySeparator(string $text, string $separator): array
     {
@@ -202,7 +202,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 检测并转换文本编码
+     * 检测并转换文本encoding
      */
     private function ensureUtf8Encoding(string $text): string
     {
@@ -214,7 +214,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 按固定length分割文本.
+     * 按固定lengthsplit文本.
      */
     private function splitByFixedLength(string $text): array
     {
@@ -228,7 +228,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * process无分隔符的文本分割.
+     * process无分隔符的文本split.
      */
     private function handleNoSeparatorSplits(array $splits, array $splitLengths): array
     {
@@ -266,10 +266,10 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 递归分割文本.
+     * 递归split文本.
      *
-     * @param string $text 要分割的文本
-     * @return array 分割后的文本块array
+     * @param string $text 要split的文本
+     * @return array split后的文本块array
      */
     private function recursiveSplitText(string $text, int $separatorBeginIndex = 0): array
     {
@@ -292,7 +292,7 @@ class TokenTextSplitter extends TextSplitter
         }
         $separatorBeginIndex = min($i + 1, count($this->separators));
 
-        // use选定的分隔符分割文本
+        // use选定的分隔符split文本
         if ($separator !== '') {
             $splits = $this->splitBySeparator($text, $separator);
         } else {
@@ -391,7 +391,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 检测filecontent的编码
+     * 检测filecontent的encoding
      */
     private function detectEncoding(string $content): string
     {
@@ -406,10 +406,10 @@ class TokenTextSplitter extends TextSplitter
             return 'UTF-16BE';
         }
 
-        // 尝试检测编码
+        // 尝试检测encoding
         $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], true);
         if ($encoding === false) {
-            // 如果无法检测到编码，尝试use iconv 检测
+            // 如果无法检测到encoding，尝试use iconv 检测
             $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], false);
             if ($encoding === false) {
                 return 'UTF-8'; // defaultuse UTF-8

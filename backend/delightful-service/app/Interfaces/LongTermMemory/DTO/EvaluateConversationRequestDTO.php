@@ -11,17 +11,17 @@ use App\Domain\Chat\Entity\ValueObject\LLMModelEnum;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 评估conversation内容requestDTO.
+ * 评估conversationcontentrequestDTO.
  */
 class EvaluateConversationRequestDTO extends AbstractDTO
 {
     /**
-     * conversation内容.
+     * conversationcontent.
      */
     public string $conversationContent = '';
 
     /**
-     * use的模型名称.
+     * use的modelname.
      */
     public string $modelName = LLMModelEnum::DEEPSEEK_V3->value;
 

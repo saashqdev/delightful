@@ -19,7 +19,7 @@ use Hyperf\Stringable\Str;
 use function mb_strlen;
 
 /**
- * 向量知识库文本片段.
+ * 向量knowledge base文本片段.
  */
 class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
 {
@@ -39,7 +39,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
     protected array $metadata = [];
 
     /**
-     * 业务 ID，可用于业务方记录自己的 ID 用来进行updatedata.
+     * 业务 ID，可用于业务方record自己的 ID 用来进行updatedata.
      */
     protected string $businessId = '';
 

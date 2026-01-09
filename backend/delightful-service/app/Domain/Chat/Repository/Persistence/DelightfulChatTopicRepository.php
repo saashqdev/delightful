@@ -227,7 +227,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
         }
         $query->limit($limit)->orderBy('seq_id', $direction)->select('seq_id');
         $seqList = Db::select($query->toSql(), $query->getBindings());
-        // according to seqIds getmessage详情
+        // according to seqIds getmessagedetail
         $seqIds = array_column($seqList, 'seq_id');
         $clientSequenceResponses = $this->seqRepository->getConversationMessagesBySeqIds($seqIds, $order);
 

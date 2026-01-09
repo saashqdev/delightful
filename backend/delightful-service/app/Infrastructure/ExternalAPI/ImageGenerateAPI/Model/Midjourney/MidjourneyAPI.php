@@ -83,7 +83,7 @@ class MidjourneyAPI
     }
 
     /**
-     * querytask结果.
+     * querytaskresult.
      */
     public function getTaskResult(string $jobId): array
     {

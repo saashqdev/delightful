@@ -18,7 +18,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property int $file_type filetype：0:官方添加，1:organization添加
  * @property string $key filekey
  * @property int $file_size filesize
- * @property string $organization organization编码
+ * @property string $organization organizationencoding
  * @property string $file_extension file后缀
  * @property string $user_id upload者ID
  * @property DateTime $created_at creation time
@@ -31,12 +31,12 @@ class DefaultFileModel extends Model
     use SoftDeletes;
 
     /**
-     * 与模型关联的表名.
+     * 与model关联的表名.
      */
     protected ?string $table = 'default_files';
 
     /**
-     * 可批量赋值的属性.
+     * 可批量赋值的property.
      */
     protected array $fillable = [
         'id',

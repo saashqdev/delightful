@@ -17,7 +17,7 @@ use Mockery;
 
 /**
  * @internal
- * 项目成员管理APItest
+ * 项目member管理APItest
  */
 class ProjectMemberApiTest extends AbstractApiTest
 {
@@ -31,7 +31,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
     protected function setUp(): void
     {
-        // 清理项目成员数据，避免唯一键冲突
+        // 清理项目memberdata，避免唯一键conflict
         $this->cleanupProjectMembers($this->projectId);
         parent::setUp();
     }
@@ -80,7 +80,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         $this->updateMembers($projectId);
 
-        // 10. testfileeditstatus管理功能
+        // 10. testfileeditstatus管理feature
         $this->fileEditingStatusManagement($fileId);
 
         $this->fileEditingEdgeCases($fileId);
@@ -93,7 +93,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 1. 先setting项目成员，ensuretest2user有permission
+        // 1. 先setting项目member，ensuretest2user有permission
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
@@ -105,18 +105,18 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
-        // 4. 清null项目成员，使currentuser没有permission
+        // 4. 清null项目member，使currentuser没有permission
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
         // 5. 切换到没有permission的usertestpermission控制
         $this->switchUserTest2();
-        // test非项目成员不能置顶 - shouldreturnpermissionerror
+        // test非项目member不能置顶 - shouldreturnpermissionerror
         $this->pinProject($projectId, true, 51202); // 假设51202是permissionerror码
     }
 
     /**
-     * test置顶功能边界情况.
+     * test置顶feature边界情况.
      */
     public function testProjectPinEdgeCases(): void
     {
@@ -145,7 +145,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * testupdate项目成员 - success场景.
+     * testupdate项目member - success场景.
      */
     public function testUpdateProjectMembersSuccess(): void
     {
@@ -181,7 +181,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateProject($workspaceId, $projectId);
         $this->updateProject($workspaceId, $projectId);
 
-        // ensure不will对原有功能造成影响
+        // ensure不will对原有feature造成影响
         // create话题
         $topicId = $this->createTopic($workspaceId, $projectId);
         // 话题列表
@@ -205,12 +205,12 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         $this->switchUserTest1();
 
-        // 4. 添加null成员
+        // 4. 添加nullmember
         $this->updateEmptyMembers($projectId);
 
-        // 5. 添加项目成员
+        // 5. 添加项目member
         $this->updateMembers($projectId);
-        // 6. 查看项目成员
+        // 6. 查看项目member
         $this->projectMember($projectId);
 
         $this->collaborationProjects('test', 0);
@@ -218,7 +218,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         $this->switchUserTest2();
 
-        // 7. 查看项目成员
+        // 7. 查看项目member
         $this->projectMember($projectId);
         // 8. 查看协作项目列表
         $this->collaborationProjects();
@@ -242,13 +242,13 @@ class ProjectMemberApiTest extends AbstractApiTest
         // delete话题
         $this->deleteTopic($workspaceId, $projectId, $topicId);
 
-        // 9. test项目置顶功能
+        // 9. test项目置顶feature
         $this->projectPinFeature($projectId);
 
-        // 10. test协作项目create者列表功能
+        // 10. test协作项目create者列表feature
         //        $this->collaborationProjectCreatorFeature();
 
-        // 11. 清nullnull成员
+        // 11. 清nullnullmember
         $requestData = ['members' => []];
 
         // sendPUTrequest
@@ -661,11 +661,11 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test项目置顶功能 - 完整processtest.
+     * test项目置顶feature - 完整processtest.
      */
     public function projectPinFeature(string $projectId): void
     {
-        // ensurecurrentuser是项目成员
+        // ensurecurrentuser是项目member
         $this->switchUserTest2();
 
         // 1. test置顶项目
@@ -779,7 +779,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test协作项目create者列表功能 - 完整processtest.
+     * test协作项目create者列表feature - 完整processtest.
      */
     public function collaborationProjectCreatorFeature(): void
     {
@@ -788,15 +788,15 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
 
-        // 2. testpermission控制 - 清null成员后无permission
+        // 2. testpermission控制 - 清nullmember后无permission
         $this->switchUserTest1(); // 切换到项目所有者
-        $this->updateEmptyMembers($this->projectId); // 清null项目成员
+        $this->updateEmptyMembers($this->projectId); // 清null项目member
 
         $this->switchUserTest2(); // 切换到无permissionuser
         $emptyResponse = $this->getCollaborationProjectCreators();
         $this->verifyEmptyCreatorListResponse($emptyResponse);
 
-        // 3. restore项目成员status，以免影响后续test
+        // 3. restore项目memberstatus，以免影响后续test
         $this->switchUserTest1();
         $this->updateMembers($this->projectId);
     }
@@ -808,7 +808,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 1. 先setting项目成员，ensuretest2user有permission
+        // 1. 先setting项目member，ensuretest2user有permission
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
@@ -817,7 +817,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
 
-        // 3. 清null项目成员，使currentuser没有permission
+        // 3. 清null项目member，使currentuser没有permission
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
@@ -837,7 +837,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateMembers($this->projectId);
         $this->switchUserTest2();
 
-        // 1. 多次callAPI - shouldreturn一致结果
+        // 1. 多次callAPI - shouldreturn一致result
         $response1 = $this->getCollaborationProjectCreators();
         $response2 = $this->getCollaborationProjectCreators();
 
@@ -874,12 +874,12 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $this->assertEquals(1000, $response['code']);
         $this->assertEquals('ok', $response['message']);
-        $this->assertIsArray($response['data'], 'response数据should是array');
+        $this->assertIsArray($response['data'], 'responsedatashould是array');
 
         // validateat least有一个create者
         $this->assertGreaterThan(0, count($response['data']), 'shouldat least有一个create者');
 
-        // validatecreate者数据结构
+        // validatecreate者data结构
         $creator = $response['data'][0];
         $this->assertArrayHasKey('id', $creator, 'create者应containid字段');
         $this->assertArrayHasKey('name', $creator, 'create者应containname字段');
@@ -904,7 +904,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $this->assertEquals(1000, $response['code']);
         $this->assertEquals('ok', $response['message']);
-        $this->assertIsArray($response['data'], 'response数据should是array');
+        $this->assertIsArray($response['data'], 'responsedatashould是array');
         $this->assertEquals(0, count($response['data']), '无permission时shouldreturnnullarray');
     }
 
@@ -925,7 +925,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 清理项目成员数据（直接databasedelete）.
+     * 清理项目memberdata（直接databasedelete）.
      */
     private function cleanupProjectMembers(string $projectId): void
     {
@@ -946,9 +946,9 @@ class ProjectMemberApiTest extends AbstractApiTest
             $memberEntity->setStatus(MemberStatus::ACTIVE);
 
             $projectMemberDomainService->addInternalMembers([$memberEntity], $this->getOrganizationCode());
-            echo "清理项目成员数据complete: {$projectId}\n";
+            echo "清理项目memberdatacomplete: {$projectId}\n";
         } catch (Exception $e) {
-            echo '清理项目成员数据fail: ' . $e->getMessage() . "\n";
+            echo '清理项目memberdatafail: ' . $e->getMessage() . "\n";
         }
     }
 }

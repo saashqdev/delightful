@@ -20,7 +20,7 @@ class DelightfulAgentDTO extends AbstractEntity
     private ?string $id = '';
 
     /**
-     * 助理名称.
+     * 助理name.
      */
     private ?string $agentName = '';
 
@@ -34,14 +34,14 @@ class DelightfulAgentDTO extends AbstractEntity
     private ?string $robotAvatar = '';
 
     /**
-     * 助理描述.
+     * 助理description.
      */
     private string $agentDescription = '';
 
     private ?string $robotDescription = '';
 
     /**
-     * when前organization编码
+     * when前organizationencoding
      */
     private string $currentOrganizationCode = '';
 

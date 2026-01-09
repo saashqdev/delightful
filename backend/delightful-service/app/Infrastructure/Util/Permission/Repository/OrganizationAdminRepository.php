@@ -231,7 +231,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * based on数据隔离get OrganizationAdminModel query构造器.
+     * based ondata隔离get OrganizationAdminModel query构造器.
      */
     private function organizationAdminQuery(DataIsolation $dataIsolation): Builder
     {
@@ -239,7 +239,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 映射array数据到实体.
+     * 映射arraydata到实体.
      * @param mixed $row
      */
     private function mapArrayToEntity($row): OrganizationAdminEntity

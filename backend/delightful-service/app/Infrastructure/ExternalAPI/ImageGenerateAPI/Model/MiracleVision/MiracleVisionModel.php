@@ -244,7 +244,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private function validateApiResponse(array $result): void
     {
-        $this->logger->info('美图API：开始verifyresponse数据', ['response' => $result]);
+        $this->logger->info('美图API：开始verifyresponsedata', ['response' => $result]);
 
         if (! isset($result['code'])) {
             $this->logger->warning('美图API：responseformatexception', ['response' => $result]);
@@ -252,7 +252,7 @@ class MiracleVisionModel extends AbstractImageGenerate
         }
 
         if ($result['code'] !== 0) {
-            $this->logger->warning('美图API：接口returnerror', [
+            $this->logger->warning('美图API：interfacereturnerror', [
                 'code' => $result['code'],
                 'message' => $result['message'] ?? '',
                 'response' => $result,
@@ -260,10 +260,10 @@ class MiracleVisionModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $result['message'] ?? '');
         }
 
-        $this->logger->info('美图API：response数据verifypass');
+        $this->logger->info('美图API：responsedataverifypass');
     }
 
-    // todo xhy 目前只能强制return 26 ，因为无法对image场景做匹配
+    // todo xhy 目前只能forcereturn 26 ，因为无法对image场景做匹配
     private function determineStyleId(array $styles): int
     {
         if (empty($styles['data']['style_list'])) {

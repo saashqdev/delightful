@@ -184,8 +184,8 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * getdepartment的所有子department的成员total.
-     * use自旋lock避免并发，一次性query所有department数据并cache到 Redis.
+     * getdepartment的所有子department的membertotal.
+     * use自旋lock避免并发，一次性query所有departmentdata并cache到 Redis.
      */
     public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int
     {
@@ -209,7 +209,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
         }
 
         try {
-            // 一次性getorganization下的所有department数据
+            // 一次性getorganization下的所有departmentdata
             $allDepartments = $this->getAllDepartmentsForCalculation($organizationCode);
 
             // 计算每个department的员工total并cache到 Redis
@@ -303,7 +303,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
 
     /**
      * 批量get多个organization的根departmentinfo.
-     * @param array $organizationCodes organization代码array
+     * @param array $organizationCodes organizationcodearray
      * @return DelightfulDepartmentEntity[] 根department实体array
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array
@@ -408,7 +408,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 一次性getorganization下的所有department数据，用于员工数计算.
+     * 一次性getorganization下的所有departmentdata，用于员工数计算.
      */
     private function getAllDepartmentsForCalculation(string $organizationCode): array
     {

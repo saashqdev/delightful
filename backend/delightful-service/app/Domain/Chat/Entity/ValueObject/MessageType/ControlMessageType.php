@@ -39,10 +39,10 @@ enum ControlMessageType: string
     // editmessage
     case EditMessage = 'edit_message';
 
-    // 开始在session窗口输入
+    // 开始在session窗口input
     case StartConversationInput = 'start_conversation_input';
 
-    // 结束在session窗口输入
+    // 结束在session窗口input
     case EndConversationInput = 'end_conversation_input';
 
     // 打开session窗口
@@ -69,16 +69,16 @@ enum ControlMessageType: string
     // 系统notify(xx加入/离开group chat,群温馨reminder等)
     case SystemNotice = 'system_notice';
 
-    // 群成员变更
+    // 群member变更
     case GroupUsersAdd = 'group_users_add';
 
-    // 群成员变更
+    // 群member变更
     case GroupUsersRemove = 'group_users_remove';
 
     // 解散group chat
     case GroupDisband = 'group_disband';
 
-    // 群成员role变更(批量set管理员/普通成员)
+    // 群memberrole变更(批量set管理员/普通member)
     case GroupUserRoleChange = 'group_user_role_change';
 
     // 转让群主

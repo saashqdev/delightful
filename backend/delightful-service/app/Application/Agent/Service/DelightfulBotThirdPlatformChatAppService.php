@@ -215,7 +215,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         if (count($accounts) === 0) {
             ExceptionBuilder::throw(AgentErrorCode::CREATE_GROUP_USER_ACCOUNT_NOT_EXIST, 'user.not_exist', ['delightful_ids' => $delightfulIds]);
         }
-        // call接口，换取第三方的user id
+        // callinterface，换取第三方的user id
         $parallel = new Parallel(2);
         $thirdPlatformChat = ThirdPlatformChatFactory::make($chatEntity);
         $requestId = CoContext::getRequestId();
@@ -279,7 +279,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         }
         $delightfulFlow->setAgentId((string) $bot->getId());
 
-        // usecurrentprocess的organization编码
+        // usecurrentprocess的organizationencoding
         $dataIsolation->setCurrentOrganizationCode($delightfulFlow->getOrganizationCode());
         return $delightfulFlow;
     }

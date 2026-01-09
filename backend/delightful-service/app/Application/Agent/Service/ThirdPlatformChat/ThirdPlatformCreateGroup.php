@@ -15,10 +15,10 @@ class ThirdPlatformCreateGroup
     // 群主的userid
     private string $owner;
 
-    // 成员list
+    // memberlist
     private array $useridlist = [];
 
-    // 新成员是否可查看历史message：1（default）：可查看，0：不可查看
+    // 新member是否可查看historymessage：1（default）：可查看，0：不可查看
     private int $showHistoryType = 1;
 
     // 是否可searchgroup chat, 0（default）：不可search 1：可search

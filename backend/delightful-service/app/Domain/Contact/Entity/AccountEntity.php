@@ -18,7 +18,7 @@ class AccountEntity extends AbstractEntity
     protected ?string $delightfulId = null;
 
     /**
-     * 账号type:0:ai 1:人类 2:应用.
+     * 账号type:0:ai 1:人类 2:application.
      */
     protected ?UserType $type = null;
 
@@ -104,7 +104,7 @@ class AccountEntity extends AbstractEntity
     }
 
     /**
-     * get国家代码 (state_code的别名).
+     * get国家code (state_code的别名).
      */
     public function getStateCode(): ?string
     {

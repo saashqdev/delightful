@@ -59,7 +59,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.user.receive_not_found')]
     case RECEIVER_NOT_FOUND = 3012;
 
-    // 数据writefail
+    // datawritefail
         // Data write failed
     #[ErrorMessage('chat.data.write_failed')]
     case DATA_WRITE_FAILED = 3013;
@@ -119,7 +119,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.user_already_in_group')]
     case USER_ALREADY_IN_GROUP = 3024;
 
-    // 请sendmessage后再use智能重命名功能
+    // 请sendmessage后再use智能重命名feature
         // Send a message before using smart rename
     #[ErrorMessage('chat.topic.send_message_and_rename_topic')]
     case SEND_MESSAGE_AND_RENAME_TOPIC = 3025;
@@ -189,7 +189,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.topic.id_not_found')]
     case TOPIC_ID_NOT_FOUND = 3038;
 
-    // 不支持sync这个第三方平台的department数据
+    // 不支持sync这个第三方平台的departmentdata
         // Syncing department data from this third-party platform is not supported
     #[ErrorMessage('chat.department.sync_not_support')]
     case DEPARTMENT_SYNC_NOT_SUPPORT = 3039;

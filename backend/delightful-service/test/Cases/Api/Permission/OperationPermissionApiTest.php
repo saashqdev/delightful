@@ -29,12 +29,12 @@ class OperationPermissionApiTest extends AbstractHttpTest
      */
     public function testGetUserOrganizationAdminListSuccess(): void
     {
-        // sendGETrequest到API接口
+        // sendGETrequest到APIinterface
         $response = $this->get(self::API, [], $this->getCommonHeaders());
 
         // 如果returnautherror，跳过test
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003])) {
-            $this->markTestSkipped('接口authfail，可能need其他authconfiguration - 接口routeverify正常');
+            $this->markTestSkipped('interfaceauthfail，可能need其他authconfiguration - interfacerouteverify正常');
             return;
         }
 
@@ -42,10 +42,10 @@ class OperationPermissionApiTest extends AbstractHttpTest
         $this->assertIsArray($response, 'responseshould是arrayformat');
         $this->assertArrayHasKey('data', $response, 'response应containdatafield');
 
-        // verify数据结构
+        // verifydata结构
         $data = $response['data'];
-        $this->assertArrayHasKey('organization_codes', $data, '数据应containorganization_codesfield');
-        $this->assertArrayHasKey('total', $data, '数据应containtotalfield');
+        $this->assertArrayHasKey('organization_codes', $data, 'data应containorganization_codesfield');
+        $this->assertArrayHasKey('total', $data, 'data应containtotalfield');
         $this->assertIsArray($data['organization_codes'], 'organization_codesshould是array');
         $this->assertIsInt($data['total'], 'totalshould是整数');
         $this->assertEquals(count($data['organization_codes']), $data['total'], 'totalshouldequalorganization_codes的quantity');

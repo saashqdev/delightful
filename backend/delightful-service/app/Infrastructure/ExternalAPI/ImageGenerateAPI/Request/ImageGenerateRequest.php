@@ -41,7 +41,7 @@ class ImageGenerateRequest
     // userID（用于PGPsignature）
     protected ?string $userId = null;
 
-    // organization编码（用于PGPsignature）
+    // organizationencoding（用于PGPsignature）
     protected ?string $organizationCode = null;
 
     public function __construct(

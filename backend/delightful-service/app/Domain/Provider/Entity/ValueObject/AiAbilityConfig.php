@@ -48,7 +48,7 @@ class AiAbilityConfig
     }
 
     /**
-     * 判断是否有提供商代码.
+     * 判断是否有提供商code.
      */
     public function hasProviderCode(): bool
     {
@@ -64,7 +64,7 @@ class AiAbilityConfig
     }
 
     /**
-     * 判断是否有模型 ID.
+     * 判断是否有model ID.
      */
     public function hasModelId(): bool
     {

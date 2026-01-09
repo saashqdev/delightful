@@ -19,7 +19,7 @@ class LogicalIfMethod extends AbstractMethod
 
     protected string $group = '逻辑';
 
-    protected string $desc = 'according to指定的条件来returndifferent的结果';
+    protected string $desc = 'according to指定的条件来returndifferent的result';
 
     protected array $args = [
         [

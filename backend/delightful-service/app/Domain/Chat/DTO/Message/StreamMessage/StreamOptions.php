@@ -20,7 +20,7 @@ class StreamOptions extends AbstractEntity
     protected string $streamAppMessageId;
 
     /**
-     * message应用选项：0:覆盖 1：追加（string就拼接，array就插入）.
+     * messageapplicationoption：0:覆盖 1：追加（string就拼接，array就插入）.
      */
     protected MessageAppendOptions $append;
 

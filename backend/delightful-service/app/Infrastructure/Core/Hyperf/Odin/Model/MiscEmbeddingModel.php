@@ -29,7 +29,7 @@ class MiscEmbeddingModel extends OpenAIModel
      */
     public function embeddings(array|string $input, ?string $encoding_format = 'float', ?string $user = null, array $businessParams = []): EmbeddingResponse
     {
-        // check模型是否支持嵌入功能
+        // checkmodel是否支持嵌入feature
         $this->checkEmbeddingSupport();
 
         $client = $this->getClient();
@@ -47,7 +47,7 @@ class MiscEmbeddingModel extends OpenAIModel
      */
     protected function getClient(): ClientInterface
     {
-        // processAPI基础URL，ensurecontaincorrect的version路径
+        // processAPI基础URL，ensurecontaincorrect的versionpath
         $config = $this->config;
         $this->processApiBaseUrl($config);
 
@@ -60,8 +60,8 @@ class MiscEmbeddingModel extends OpenAIModel
     }
 
     /**
-     * getAPIversion路径.
-     * OpenAI的APIversion路径为 v1.
+     * getAPIversionpath.
+     * OpenAI的APIversionpath为 v1.
      */
     protected function getApiVersionPath(): string
     {

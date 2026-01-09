@@ -61,7 +61,7 @@ class DelightfulFlowTriggerTestcaseDomainService extends AbstractDomainService
     }
 
     /**
-     * gettest集详情.
+     * gettest集detail.
      */
     public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $testcaseCode): DelightfulFlowTriggerTestcaseEntity
     {

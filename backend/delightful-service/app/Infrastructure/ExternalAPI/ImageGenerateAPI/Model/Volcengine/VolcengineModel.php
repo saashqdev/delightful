@@ -94,7 +94,7 @@ class VolcengineModel extends AbstractImageGenerate
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof VolcengineModelRequest) {
             $this->logger->error('Volcengine OpenAIformat生图：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
-            return $response; // returnnull数据response
+            return $response; // returnnulldataresponse
         }
 
         // 3. 判断是图生图还是文生图
@@ -112,7 +112,7 @@ class VolcengineModel extends AbstractImageGenerate
                     $result = $this->requestImageGenerationV2($imageGenerateRequest, $isImageToImage);
                     $this->validateVolcengineResponse($result);
 
-                    // success：settingimage数据到responseobject
+                    // success：settingimagedata到responseobject
                     $this->addImageDataToResponse($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
                     // fail：settingerrorinfo到responseobject（只settingfirsterror）
@@ -131,7 +131,7 @@ class VolcengineModel extends AbstractImageGenerate
 
         $parallel->wait();
 
-        // 5. 记录final结果
+        // 5. recordfinalresult
         $this->logger->info('Volcengine OpenAIformat生图：并发handlecomplete', [
             '总request数' => $count,
             'successimage数' => count($response->getData()),
@@ -181,7 +181,7 @@ class VolcengineModel extends AbstractImageGenerate
                 try {
                     // submittask（带retry）
                     $taskId = $this->submitAsyncTask($imageGenerateRequest, $isImageToImage);
-                    // 轮询结果（带retry）
+                    // 轮询result（带retry）
                     $result = $this->pollTaskResult($taskId, $imageGenerateRequest);
 
                     return [
@@ -204,12 +204,12 @@ class VolcengineModel extends AbstractImageGenerate
             });
         }
 
-        // get所有并行task的结果
+        // get所有并行task的result
         $results = $parallel->wait();
         $rawResults = [];
         $errors = [];
 
-        // handle结果，保持原生format
+        // handleresult，保持原生format
         foreach ($results as $result) {
             if ($result['success']) {
                 $rawResults[$result['index']] = $result;
@@ -243,7 +243,7 @@ class VolcengineModel extends AbstractImageGenerate
             ExceptionBuilder::throw($finalErrorCode, $finalErrorMsg);
         }
 
-        // 按索引sort结果
+        // 按索引sortresult
         ksort($rawResults);
         $rawResults = array_values($rawResults);
 
@@ -251,7 +251,7 @@ class VolcengineModel extends AbstractImageGenerate
             'imagequantity' => $count,
         ]);
 
-        // 从原生结果中提取imageURL
+        // 从原生result中提取imageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             $data = $result['data'];
@@ -266,7 +266,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像的核心逻辑，return原生结果.
+     * generate图像的核心逻辑，return原生result.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -298,7 +298,7 @@ class VolcengineModel extends AbstractImageGenerate
                 try {
                     // submittask（带retry）
                     $taskId = $this->submitAsyncTask($imageGenerateRequest, $isImageToImage);
-                    // 轮询结果（带retry）
+                    // 轮询result（带retry）
                     $result = $this->pollTaskResult($taskId, $imageGenerateRequest);
 
                     return [
@@ -323,7 +323,7 @@ class VolcengineModel extends AbstractImageGenerate
 
         $results = $parallel->wait();
 
-        // check结果
+        // checkresult
         $rawResults = [];
         $errors = [];
         $finalErrorCode = ImageGenerateErrorCode::GENERAL_ERROR;
@@ -351,7 +351,7 @@ class VolcengineModel extends AbstractImageGenerate
             ExceptionBuilder::throw($finalErrorCode, $finalErrorMsg);
         }
 
-        // 按索引sort结果
+        // 按索引sortresult
         ksort($rawResults);
         $rawResults = array_values($rawResults);
 
@@ -508,7 +508,7 @@ class VolcengineModel extends AbstractImageGenerate
                         if (! empty($data['binary_data_base64']) || ! empty($data['image_urls'])) {
                             return $response;
                         }
-                        $this->logger->error('火山文生图：taskcomplete但缺少image数据', ['response' => $response]);
+                        $this->logger->error('火山文生图：taskcomplete但缺少imagedata', ['response' => $response]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
                         // no break
                     case 'in_queue':
@@ -541,24 +541,24 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * V2version：组合submittask和轮询结果，用于OpenAIformatgenerate.
+     * V2version：组合submittask和轮询result，用于OpenAIformatgenerate.
      */
     private function requestImageGenerationV2(VolcengineModelRequest $imageGenerateRequest, bool $isImageToImage): array
     {
         // submittask
         $taskId = $this->submitAsyncTask($imageGenerateRequest, $isImageToImage);
 
-        // 轮询结果
+        // 轮询result
         return $this->pollTaskResult($taskId, $imageGenerateRequest);
     }
 
     /**
-     * validate火山引擎APIresponse数据format.
+     * validate火山引擎APIresponsedataformat.
      */
     private function validateVolcengineResponse(array $result): void
     {
         if (empty($result['data']) || ! is_array($result['data'])) {
-            throw new Exception('火山引擎response数据formaterror：缺少data字段');
+            throw new Exception('火山引擎responsedataformaterror：缺少data字段');
         }
 
         $data = $result['data'];
@@ -567,12 +567,12 @@ class VolcengineModel extends AbstractImageGenerate
                             || (! empty($data['binary_data_base64']) && ! empty($data['binary_data_base64'][0]));
 
         if (! $hasValidImageData) {
-            throw new Exception('火山引擎response数据formaterror：缺少image数据');
+            throw new Exception('火山引擎responsedataformaterror：缺少imagedata');
         }
     }
 
     /**
-     * 将火山引擎image数据添加到OpenAIresponseobject中.
+     * 将火山引擎imagedata添加到OpenAIresponseobject中.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
@@ -582,7 +582,7 @@ class VolcengineModel extends AbstractImageGenerate
         // useRedislockensure并发安全
         $lockOwner = $this->lockResponse($response);
         try {
-            // 从火山引擎response中提取数据
+            // 从火山引擎response中提取data
             if (empty($volcengineResult['data']) || ! is_array($volcengineResult['data'])) {
                 return;
             }
@@ -601,7 +601,7 @@ class VolcengineModel extends AbstractImageGenerate
                         'url' => $processedUrl,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('Volcengine添加image数据：URL水印handlefail', [
+                    $this->logger->error('Volcengine添加imagedata：URL水印handlefail', [
                         'error' => $e->getMessage(),
                         'url' => $imageUrl,
                     ]);
@@ -620,10 +620,10 @@ class VolcengineModel extends AbstractImageGenerate
                         'b64_json' => $processedImage,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('Volcengine添加image数据：base64水印handlefail', [
+                    $this->logger->error('Volcengine添加imagedata：base64水印handlefail', [
                         'error' => $e->getMessage(),
                     ]);
-                    // 水印handlefail时useoriginal数据
+                    // 水印handlefail时useoriginaldata
                     $currentData[] = [
                         'b64_json' => $base64Image,
                     ];
@@ -722,7 +722,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * 为火山引擎original数据添加水印.
+     * 为火山引擎originaldata添加水印.
      */
     private function processVolcengineRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -750,7 +750,7 @@ class VolcengineModel extends AbstractImageGenerate
                     unset($imageUrl);
                 }
             } catch (Exception $e) {
-                // 水印handlefail时，记录error但不影响imagereturn
+                // 水印handlefail时，recorderror但不影响imagereturn
                 $this->logger->error('火山引擎image水印handlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),

@@ -28,7 +28,7 @@ class SlidingWindowUtil
     }
 
     /**
-     * 防抖接口 - execute最后一次request策略
+     * 防抖interface - execute最后一次request策略
      * 在指定time窗口内，只有最后一次requestwill被execute.
      *
      * @param string $debounceKey 防抖键

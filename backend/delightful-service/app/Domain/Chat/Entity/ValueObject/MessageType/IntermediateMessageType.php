@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject\MessageType;
 
 /**
- * temporarymessage内容的type.
+ * temporarymessagecontent的type.
  */
 enum IntermediateMessageType: string
 {

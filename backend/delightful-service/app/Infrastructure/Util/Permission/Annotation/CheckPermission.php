@@ -13,7 +13,7 @@ use BackedEnum;
 use Hyperf\Di\Annotation\AbstractAnnotation;
 
 /**
- * permission校验注解，用于method或类上声明所需的permission。
+ * permission校验annotation，用于method或类上声明所需的permission。
  *
  * 示例：
  * #[CheckPermission(DelightfulResourceEnum::CONSOLE_API_ASSISTANT, DelightfulOperationEnum::QUERY)]
@@ -46,7 +46,7 @@ class CheckPermission extends AbstractAnnotation
      */
     public function getPermissionKey(): string
     {
-        // 为了兼容旧逻辑，returnfirst组合键
+        // 为了compatible旧逻辑，returnfirst组合键
         $keys = $this->getPermissionKeys();
         return $keys[0] ?? '';
     }

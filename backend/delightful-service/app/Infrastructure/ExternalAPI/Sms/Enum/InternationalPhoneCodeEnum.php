@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\Sms\Enum;
 
 /**
- * 电话的国际区号代码
+ * 电话的国际区号code
  */
 enum InternationalPhoneCodeEnum: string
 {
@@ -288,7 +288,7 @@ enum InternationalPhoneCodeEnum: string
 
     /**
      * allow向这些国家send短信.
-     * 中国号码不allowuse国际短信接口进行send
+     * 中国号码不allowuse国际短信interface进行send
      */
     public static function allowCountryCodes(): array
     {

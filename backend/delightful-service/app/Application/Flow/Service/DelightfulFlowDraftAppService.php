@@ -41,7 +41,7 @@ class DelightfulFlowDraftAppService extends AbstractFlowAppService
     }
 
     /**
-     * get草稿详情.
+     * get草稿detail.
      */
     public function show(Authenticatable $authorization, string $flowCode, string $draftCode): DelightfulFlowDraftEntity
     {

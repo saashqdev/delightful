@@ -26,7 +26,7 @@ class MCPServerToolEntity extends AbstractEntity
     protected string $mcpServerCode;
 
     /**
-     * tool名称.
+     * toolname.
      */
     protected string $name;
 

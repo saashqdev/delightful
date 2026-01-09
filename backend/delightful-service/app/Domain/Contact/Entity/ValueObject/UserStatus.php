@@ -15,7 +15,7 @@ enum UserStatus: int
     // 0:冻结 (刚同过来没激活)
     case Frozen = 0;
 
-    // 1:已激活
+    // 1:activated
     case Activated = 1;
 
     // 2:已离职

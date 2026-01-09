@@ -21,8 +21,8 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * ASR 标题generate服务
- * 负责according todifferent场景generate录音总结标题.
+ * ASR titlegenerate服务
+ * 负责according todifferent场景generate录音总结title.
  */
 readonly class AsrTitleGeneratorService
 {
@@ -36,17 +36,17 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * according todifferent场景generate标题.
+     * according todifferent场景generatetitle.
      *
-     * 场景一：有 asr_stream_content（前端实时录音），直接用内容generate标题
-     * 场景二：有 file_id（upload已有file），buildhint词generate标题
+     * 场景一：有 asr_stream_content（前端实时录音），直接用contentgeneratetitle
+     * 场景二：有 file_id（upload已有file），buildhint词generatetitle
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
-     * @param string $asrStreamContent ASRstream识别内容
+     * @param string $asrStreamContent ASRstream识别content
      * @param null|string $fileId fileID
-     * @param null|NoteDTO $note 笔记内容
+     * @param null|NoteDTO $note 笔记content
      * @param string $taskKey task键（用于log）
-     * @return null|string generate的标题
+     * @return null|string generate的title
      */
     public function generateTitleForScenario(
         DelightfulUserAuthorization $userAuthorization,
@@ -72,14 +72,14 @@ readonly class AsrTitleGeneratorService
             if (! empty($fileId)) {
                 $fileEntity = $this->taskFileDomainService->getById((int) $fileId);
                 if ($fileEntity === null) {
-                    $this->logger->warning('generate标题时未找到file', [
+                    $this->logger->warning('generatetitle时未找到file', [
                         'file_id' => $fileId,
                         'task_key' => $taskKey,
                     ]);
                     return null;
                 }
 
-                // getaudiofile名称
+                // getaudiofilename
                 $audioFileName = $fileEntity->getFileName();
 
                 // build笔记file名（如果有）
@@ -105,7 +105,7 @@ readonly class AsrTitleGeneratorService
 
             return null;
         } catch (Throwable $e) {
-            $this->logger->warning('generate标题fail', [
+            $this->logger->warning('generatetitlefail', [
                 'task_key' => $taskKey,
                 'has_asr_content' => ! empty($asrStreamContent),
                 'has_file_id' => ! empty($fileId),
@@ -116,10 +116,10 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 从taskstatusgenerate标题（usesave的 ASR 内容和笔记内容）.
+     * 从taskstatusgeneratetitle（usesave的 ASR content和笔记content）.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
-     * @return string generate的标题（fail时returndefault标题）
+     * @return string generate的title（fail时returndefaulttitle）
      */
     public function generateFromTaskStatus(AsrTaskStatusDTO $taskStatus): string
     {
@@ -127,14 +127,14 @@ readonly class AsrTitleGeneratorService
             // use上报时save的语种，如果没有则usecurrent语种
             $language = $taskStatus->language ?: $this->translator->getLocale() ?: 'zh_CN';
 
-            $this->logger->info('use语种generate标题', [
+            $this->logger->info('use语种generatetitle', [
                 'task_key' => $taskStatus->taskKey,
                 'language' => $language,
                 'has_asr_content' => ! empty($taskStatus->asrStreamContent),
                 'has_note' => ! empty($taskStatus->noteContent),
             ]);
 
-            // 如果有 ASR stream内容，use它generate标题
+            // 如果有 ASR streamcontent，use它generatetitle
             if (! empty($taskStatus->asrStreamContent)) {
                 // build笔记 DTO（如果有）
                 $note = null;
@@ -152,7 +152,7 @@ readonly class AsrTitleGeneratorService
                     $language
                 );
 
-                // usecustomizehint词generate标题
+                // usecustomizehint词generatetitle
                 $userAuthorization = $this->getUserAuthorizationFromUserId($taskStatus->userId);
                 $title = $this->delightfulChatMessageAppService->summarizeTextWithCustomPrompt(
                     $userAuthorization,
@@ -162,10 +162,10 @@ readonly class AsrTitleGeneratorService
                 return $this->sanitizeTitle($title);
             }
 
-            // 如果没有 ASR 内容，returndefault标题
+            // 如果没有 ASR content，returndefaulttitle
             return $this->generateDefaultDirectoryName();
         } catch (Throwable $e) {
-            $this->logger->warning('generate标题fail，usedefault标题', [
+            $this->logger->warning('generatetitlefail，usedefaulttitle', [
                 'task_key' => $taskStatus->taskKey,
                 'error' => $e->getMessage(),
             ]);
@@ -174,10 +174,10 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 清洗标题，移除file/目录不allow的字符并截断length.
+     * 清洗title，移除file/directory不allow的字符并truncatelength.
      *
-     * @param string $title original标题
-     * @return string 清洗后的标题
+     * @param string $title originaltitle
+     * @return string 清洗后的title
      */
     public function sanitizeTitle(string $title): string
     {
@@ -188,9 +188,9 @@ readonly class AsrTitleGeneratorService
 
         // 移除illegal字符 \/:*?"<>|
         $title = preg_replace('/[\\\\\/:*?"<>|]/u', '', $title) ?? '';
-        // 压缩null白
+        // compressnull白
         $title = preg_replace('/\s+/u', ' ', $title) ?? '';
-        // 限制length，避免过长路径
+        // 限制length，避免过长path
         if (mb_strlen($title) > 50) {
             $title = mb_substr($title, 0, 50);
         }
@@ -199,10 +199,10 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * generatedefault的目录名称.
+     * generatedefault的directoryname.
      *
-     * @param null|string $customTitle customize标题
-     * @return string 目录名称
+     * @param null|string $customTitle customizetitle
+     * @return string directoryname
      */
     public function generateDefaultDirectoryName(?string $customTitle = null): string
     {
@@ -211,12 +211,12 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 为file直传场景generate标题（仅according tofile名）.
+     * 为file直传场景generatetitle（仅according tofile名）.
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
      * @param string $fileName file名
      * @param string $taskKey task键（用于log）
-     * @return null|string generate的标题
+     * @return null|string generate的title
      */
     public function generateTitleForFileUpload(
         DelightfulUserAuthorization $userAuthorization,
@@ -242,7 +242,7 @@ readonly class AsrTitleGeneratorService
 
             return $this->sanitizeTitle($title);
         } catch (Throwable $e) {
-            $this->logger->warning('为file直传generate标题fail', [
+            $this->logger->warning('为file直传generatetitlefail', [
                 'task_key' => $taskKey,
                 'file_name' => $fileName,
                 'error' => $e->getMessage(),
@@ -254,14 +254,14 @@ readonly class AsrTitleGeneratorService
     /**
      * builduserrequestmessage（模拟userchatmessage，use国际化文本）.
      *
-     * @param string $audioFileName audiofile名称
-     * @param null|string $noteFileName 笔记file名称（可选）
+     * @param string $audioFileName audiofilename
+     * @param null|string $noteFileName 笔记filename（optional）
      * @return string format化后的userrequest
      */
     private function buildUserRequestMessage(string $audioFileName, ?string $noteFileName): string
     {
         if ($noteFileName !== null) {
-            // 有笔记的情况："请帮我把 @年will方案discussion.webm 录音内容和 @年will笔记.md 的内容转化为一份超级产物"
+            // 有笔记的情况："请帮我把 @年will方案discussion.webm 录音content和 @年will笔记.md 的content转化为一份超级产物"
             return sprintf(
                 '%s@%s%s@%s%s',
                 $this->translator->trans('asr.messages.summary_prefix_with_note'),
@@ -272,7 +272,7 @@ readonly class AsrTitleGeneratorService
             );
         }
 
-        // 只有audiofile的情况："请帮我把 @年will方案discussion.webm 录音内容转化为一份超级产物"
+        // 只有audiofile的情况："请帮我把 @年will方案discussion.webm 录音content转化为一份超级产物"
         return sprintf(
             '%s@%s%s',
             $this->translator->trans('asr.messages.summary_prefix'),

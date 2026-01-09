@@ -13,7 +13,7 @@ use App\Interfaces\Agent\Assembler\MentionAssembler;
 use Hyperf\Codec\Json;
 
 /**
- * rich text的@功能.
+ * rich text的@feature.
  */
 class MentionNode extends AbstractCustomNode
 {

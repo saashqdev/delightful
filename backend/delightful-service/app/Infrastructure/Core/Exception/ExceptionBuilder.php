@@ -50,10 +50,10 @@ class ExceptionBuilder
     public static function throw(BackedEnum $error, string $message = '', array $replace = [], ?string $locale = null, ?Throwable $throwable = null): void
     {
         if ($throwable && ! $throwable instanceof BusinessException) {
-            // 记录originalexceptioninformation
+            // recordoriginalexceptioninformation
             $logger = ApplicationContext::getContainer()->get(LoggerFactory::class)?->get(__CLASS__);
             $logger->error(sprintf(
-                '记录original的 throwable exception message:%s, code:%d, file:%s, line:%s, trace:%s',
+                'recordoriginal的 throwable exception message:%s, code:%d, file:%s, line:%s, trace:%s',
                 $throwable->getMessage(),
                 $throwable->getCode(),
                 $throwable->getFile(),

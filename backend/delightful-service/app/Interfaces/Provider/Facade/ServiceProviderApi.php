@@ -68,7 +68,7 @@ class ServiceProviderApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authenticatable */
         $authenticatable = $this->getAuthorization();
         $providerConfigAggregateDTO = $this->adminProviderAppService->getProviderModelsByConfigId($authenticatable, $serviceProviderConfigId);
-        // 将新format数据转换为旧format以保持向后兼容性
+        // 将新formatdata转换为旧format以保持向后compatible性
         return $this->convertToLegacyFormat($providerConfigAggregateDTO);
     }
 
@@ -201,7 +201,7 @@ class ServiceProviderApi extends AbstractApi
     /**
      * get所有非官方LLMservice商list
      * 直接从database中querycategory为llm且provider_type不为OFFICIAL的service商
-     * 不依赖于currentorganization，适用于need添加service商的场景.
+     * 不dependency于currentorganization，适用于need添加service商的场景.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getNonOfficialLlmProviders()
@@ -264,9 +264,9 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 将新format数据转换为旧format，保持向后兼容性.
+     * 将新formatdata转换为旧format，保持向后compatible性.
      * @param ?ProviderConfigModelsDTO $aggregateDTO 聚合DTOobject
-     * @return array 旧format数据
+     * @return array 旧formatdata
      */
     private function convertToLegacyFormat(?ProviderConfigModelsDTO $aggregateDTO): array
     {

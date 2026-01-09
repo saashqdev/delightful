@@ -51,7 +51,7 @@ class DelightfulFlowVersionDomainService extends AbstractDomainService
     }
 
     /**
-     * getversion详情.
+     * getversiondetail.
      */
     public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $versionCode): DelightfulFlowVersionEntity
     {

@@ -18,7 +18,7 @@ abstract class AbstractOpenApi
 
     protected function getAccessToken(): string
     {
-        // 全面兼容 openai 的 api_key format
+        // 全面compatible openai 的 api_key format
 
         // 1. 按顺序尝试从request头中get
         $headers = [

@@ -26,7 +26,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
     protected AmqpTopicType $topic = AmqpTopicType::Seq;
 
     /**
-     * 1.本地开发时不启动,避免消费了test环境的数据,导致test环境的user收不到message
+     * 1.本地开发时不启动,避免消费了test环境的data,导致test环境的user收不到message
      * 2.如果本地开发时想debug,请自行在本地搭建前端环境,更换mq的host. 或者申请一个dev环境,隔离mq.
      */
     public function isEnable(): bool

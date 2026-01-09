@@ -16,28 +16,28 @@ use Hyperf\Codec\Json;
 
 /**
  * ASR 组装器
- * 负责 ASR 相关的实体组装和路径转换.
+ * 负责 ASR 相关的实体组装和path转换.
  *
- * 路径format说明：
- * - 工作区相对路径 (workspace-relative): .asr_recordings/session_xxx 或 录音总结_xxx
- * - 项目工作目录 (work directory): project_123/workspace
+ * pathformatinstruction：
+ * - 工作区相对path (workspace-relative): .asr_recordings/session_xxx 或 录音总结_xxx
+ * - 项目工作directory (work directory): project_123/workspace
  * - organization码+APP_ID+bucket_md5前缀 (full prefix): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/
- * - 完整路径/file_key (full path): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx
+ * - 完整path/file_key (full path): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx
  */
 class AsrAssembler
 {
     /**
-     * create目录实体.
+     * createdirectory实体.
      *
      * @param string $userId userID
-     * @param string $organizationCode organization编码
+     * @param string $organizationCode organizationencoding
      * @param int $projectId 项目ID
-     * @param string $relativePath 相对路径（如：.asr_recordings/task_123 或 录音总结_xxx）
+     * @param string $relativePath 相对path（如：.asr_recordings/task_123 或 录音总结_xxx）
      * @param string $fullPrefix 完整前缀（organization码+APP_ID+bucket_md5，如：DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/）
-     * @param string $workDir 工作目录
-     * @param int $rootDirectoryId 根目录ID
-     * @param bool $isHidden 是否为隐藏目录
-     * @param null|string $taskKey task键（仅隐藏目录need）
+     * @param string $workDir 工作directory
+     * @param int $rootDirectoryId 根directoryID
+     * @param bool $isHidden 是否为隐藏directory
+     * @param null|string $taskKey task键（仅隐藏directoryneed）
      */
     public static function createDirectoryEntity(
         string $userId,
@@ -69,7 +69,7 @@ class AsrAssembler
         $fileKey = WorkDirectoryUtil::getFullFileKey($fullPrefix, $workDir, $relativePath);
         $fileKey = rtrim($fileKey, '/') . '/';
 
-        // 确定file名：隐藏目录use basename，显示目录use完整路径
+        // 确定file名：隐藏directoryuse basename，显示directoryuse完整path
         $fileName = $isHidden ? basename($relativePath) : $relativePath;
 
         return new TaskFileEntity([
@@ -102,8 +102,8 @@ class AsrAssembler
      * 转换关系: file_key = fullPrefix + workDir + "/" + relativePath
      *
      * @param string $fullPrefix organization码+APP_ID+bucket_md5前缀 (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
-     * @param string $workDir 项目工作目录 (如: project_123/workspace)
-     * @param string $relativePath 工作区相对路径 (如: .asr_recordings/session_xxx)
+     * @param string $workDir 项目工作directory (如: project_123/workspace)
+     * @param string $relativePath 工作区相对path (如: .asr_recordings/session_xxx)
      * @return string 完整 file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
      */
     public static function buildFileKey(
@@ -115,17 +115,17 @@ class AsrAssembler
     }
 
     /**
-     * 从 file_key 提取工作区相对路径.
+     * 从 file_key 提取工作区相对path.
      *
-     * 将完整的 file_key 转换为工作区相对路径，用于沙箱 API call和界面展示
+     * 将完整的 file_key 转换为工作区相对path，用于沙箱 API call和界面展示
      * 转换关系: relativePath = extractWorkspaceRelativePath(file_key)
      *
      * @param string $fileKey 完整 file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
-     * @return string 工作区相对路径 (如: .asr_recordings/session_xxx)
+     * @return string 工作区相对path (如: .asr_recordings/session_xxx)
      */
     public static function extractWorkspaceRelativePath(string $fileKey): string
     {
-        // 标准化路径分隔符
+        // 标准化path分隔符
         $normalizedPath = str_replace('\\', '/', trim($fileKey, '/'));
 
         // 查找 workspace/ 的position
@@ -134,7 +134,7 @@ class AsrAssembler
             // 提取 workspace/ 后面的部分
             $relativePath = substr($normalizedPath, $workspacePos + 11); // 11 = strlen('/workspace/')
 
-            // 如果相对路径不为空，return相对路径
+            // 如果相对path不为空，return相对path
             if (! empty($relativePath)) {
                 return $relativePath;
             }
@@ -148,7 +148,7 @@ class AsrAssembler
             }
         }
 
-        // 如果都没找到workspace标识，直接returnoriginal路径（可能已经是相对路径）
+        // 如果都没找到workspace标识，直接returnoriginalpath（可能已经是相对path）
         return $normalizedPath;
     }
 }

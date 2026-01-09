@@ -21,7 +21,7 @@ class QueryPageAgentDTO extends AbstractDTO
     // create人
     protected ?string $createdUid = null;
 
-    // 条件query：名称/描述
+    // 条件query：name/description
     protected ?string $query = null;
 
     public function getPage(): int

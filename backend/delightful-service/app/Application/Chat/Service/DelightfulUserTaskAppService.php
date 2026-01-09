@@ -83,7 +83,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
 
         // according toconversation_id queryagent_user_id
         $conversation = $this->delightfulConversationDomainService->getConversationByIdWithoutCheck($userTaskDTO->getConversationId());
-        // 兼容flow 中的conversation_id 跟chat 中的conversation_id 不一致issue
+        // compatibleflow 中的conversation_id 跟chat 中的conversation_id 不一致issue
         if (empty($conversation)) {
             $dataIsolation = DataIsolation::create();
             $dataIsolation->setCurrentOrganizationCode($flow->getOrganizationCode());

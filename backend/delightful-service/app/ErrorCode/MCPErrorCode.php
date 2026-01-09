@@ -15,7 +15,7 @@ enum MCPErrorCode: int
     case ValidateFailed = 51500; // verifyfail
 
     #[ErrorMessage(message: 'mcp.not_found')]
-    case NotFound = 51501; // 数据不存在
+    case NotFound = 51501; // data不存在
 
     // MCPservice相关error码
     #[ErrorMessage(message: 'mcp.service.already_exists')]
@@ -54,7 +54,7 @@ enum MCPErrorCode: int
     case OAuth2ProviderError = 51534; // OAuth2提供商returnerror
 
     #[ErrorMessage(message: 'mcp.oauth2.missing_access_token')]
-    case OAuth2MissingAccessToken = 51535; // OAuth2response中缺少访问token
+    case OAuth2MissingAccessToken = 51535; // OAuth2response中缺少accesstoken
 
     // OAuth2绑定verify相关error码
     #[ErrorMessage(message: 'mcp.oauth2.binding.code_empty')]
@@ -64,7 +64,7 @@ enum MCPErrorCode: int
     case OAuth2BindingStateEmpty = 51541; // OAuth2绑定statusparameter为空
 
     #[ErrorMessage(message: 'mcp.oauth2.binding.mcp_server_code_empty')]
-    case OAuth2BindingMcpServerCodeEmpty = 51542; // OAuth2绑定MCPservice代码为空
+    case OAuth2BindingMcpServerCodeEmpty = 51542; // OAuth2绑定MCPservicecode为空
 
     // 必填fieldverify相关error码
     #[ErrorMessage(message: 'mcp.required_fields.missing')]
@@ -78,7 +78,7 @@ enum MCPErrorCode: int
     case ExecutorStdioConnectionFailed = 51560; // STDIOexecute器连接fail
 
     #[ErrorMessage(message: 'mcp.executor.stdio.access_denied')]
-    case ExecutorStdioAccessDenied = 51561; // STDIOexecute器访问被拒绝
+    case ExecutorStdioAccessDenied = 51561; // STDIOexecute器access被拒绝
 
     // HTTPexecute器相关error码
     #[ErrorMessage(message: 'mcp.executor.http.connection_failed')]

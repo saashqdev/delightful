@@ -34,7 +34,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 $rangeIds = $allIds;
             }
 
-            // 如果range id 被定义成了空array，代table已经没有符合条件的数据了，直接跳出循环
+            // 如果range id 被定义成了空array，代table已经没有符合条件的data了，直接跳出循环
             if (is_array($rangeIds) && empty($rangeIds)) {
                 break;
             }
@@ -51,7 +51,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 continue;
             }
             if ($filterType->isAny()) {
-                // 如果是任意条件满足，那么将本次的 id 与已有的 id 进行合并
+                // 如果是任意条件满足，那么将本次的 id 与已有的 id 进行merge
                 $allIds = array_merge($allIds ?? [], $currentIds);
             } else {
                 // 如果是所有条件满足，那么将本次的 id 与已有的 id 进行交集

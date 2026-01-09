@@ -59,9 +59,9 @@ class ModelConfigAppService extends AbstractLLMAppService
     }
 
     /**
-     * getmodel的降级链，合并user传入的降级链与系统default的降级链.
+     * getmodel的降级链，mergeuser传入的降级链与系统default的降级链.
      *
-     * @param string $orgCode organization编码
+     * @param string $orgCode organizationencoding
      * @param string $userId userID
      * @param string $modelType 指定的modeltype
      * @param string[] $modelFallbackChain user传入的降级链
@@ -89,11 +89,11 @@ class ModelConfigAppService extends AbstractLLMAppService
         // get系统default的降级链
         $systemFallbackChain = config('delightful-api.model_fallback_chain.chat', []);
 
-        // 合并user传入的降级链与系统default的降级链
+        // mergeuser传入的降级链与系统default的降级链
         // user传入的降级链优先级更高
         $mergedFallbackChain = array_merge($systemFallbackChain, $modelFallbackChain);
 
-        // 按优先级顺序遍历合并后的降级链
+        // 按优先级顺序遍历merge后的降级链
         foreach ($mergedFallbackChain as $modelName) {
             if (isset($availableModels[$modelName])) {
                 return $modelName;

@@ -39,13 +39,13 @@ readonly class AsrTaskRepository
         try {
             $redisKey = $this->generateTaskKey($taskStatus->taskKey, $taskStatus->userId);
 
-            // savetaskstatus数据
+            // savetaskstatusdata
             $this->redis->hMSet($redisKey, $taskStatus->toArray());
 
             // set过期time
             $this->redis->expire($redisKey, $ttl);
         } catch (Throwable $e) {
-            // Redis 操作fail时record但不抛出exception
+            // Redis 操作fail时record但不throwexception
             $this->logger->warning(trans('asr.api.redis.save_task_status_failed'), [
                 'task_key' => $taskStatus->taskKey ?? 'unknown',
                 'user_id' => $taskStatus->userId ?? 'unknown',

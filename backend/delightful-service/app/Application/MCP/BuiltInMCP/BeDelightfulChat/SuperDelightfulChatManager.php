@@ -120,7 +120,7 @@ MARKDOWN;
         }
 
         $usageInstructions = <<<'MARKDOWN'
-use说明：
+useinstruction：
 • must提供 agent_id 和 message parameter
 • conversation_id 用于保持conversation连续性，sameID的messagewill共享上下文
 
@@ -128,12 +128,12 @@ MARKDOWN;
 
         $description .= $usageInstructions;
 
-        // 添加指令parameter说明
+        // 添加指令parameterinstruction
         if (! empty($allInstructions)) {
             $instructionHelp = <<<'MARKDOWN'
-指令parameter instruction（可选）：
+指令parameter instruction（optional）：
 • format：[{"name": "指令name", "value": "指令value"}, ...]
-• 单选type：从可选value中选择一个，for example "yes", "no"
+• 单选type：从optionalvalue中选择一个，for example "yes", "no"
 • 开关type：只能是 "on" 或 "off"
 • 如果不提供指令parameter，将usedefaultvalue
 
@@ -178,7 +178,7 @@ MARKDOWN;
                         ],
                         'conversation_id' => [
                             'type' => 'string',
-                            'description' => 'sessionID，用于记忆功能，samesessionID的message将具有共享的上下文',
+                            'description' => 'sessionID，用于记忆feature，samesessionID的message将具有共享的上下文',
                         ],
                         'instruction' => $instructionSchema,
                     ],
@@ -267,7 +267,7 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => '指令parameterarray，用于控制AI助理的行为。每个objectcontain name（指令name）和 value（指令value）field。单选type指令need从可选value中选择一个，开关type指令只能是 "on" 或 "off"。',
+            'description' => '指令parameterarray，用于控制AI助理的行为。每个objectcontain name（指令name）和 value（指令value）field。单选type指令need从optionalvalue中选择一个，开关type指令只能是 "on" 或 "off"。',
             'items' => [
                 'type' => 'object',
                 'properties' => [
@@ -277,7 +277,7 @@ MARKDOWN;
                     ],
                     'value' => [
                         'type' => 'string',
-                        'description' => '指令value，单选type从可选value中选择，开关type只能是 "on" 或 "off"',
+                        'description' => '指令value，单选type从optionalvalue中选择，开关type只能是 "on" 或 "off"',
                     ],
                 ],
                 'required' => ['name', 'value'],

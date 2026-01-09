@@ -49,7 +49,7 @@ class OrganizationAdminAssembler
     }
 
     /**
-     * 将带有userinfo的数据转换为responseDTO.
+     * 将带有userinfo的data转换为responseDTO.
      *
      * @param array $data containorganization管理员实体和userinfo的array
      */
@@ -75,7 +75,7 @@ class OrganizationAdminAssembler
     }
 
     /**
-     * 将带有userinfo的数据list转换为responseDTO.
+     * 将带有userinfo的datalist转换为responseDTO.
      *
      * @param array $dataList containorganization管理员实体和userinfo的arraylist
      */

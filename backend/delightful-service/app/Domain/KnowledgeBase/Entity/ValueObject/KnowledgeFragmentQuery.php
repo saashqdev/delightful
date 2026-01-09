@@ -16,7 +16,7 @@ class KnowledgeFragmentQuery
     public int $limit = 5;
 
     /**
-     * get知识库编码
+     * getknowledge baseencoding
      */
     public function getKnowledgeCode(): string
     {
@@ -24,7 +24,7 @@ class KnowledgeFragmentQuery
     }
 
     /**
-     * setting知识库编码
+     * settingknowledge baseencoding
      */
     public function setKnowledgeCode(string $knowledgeCode): void
     {

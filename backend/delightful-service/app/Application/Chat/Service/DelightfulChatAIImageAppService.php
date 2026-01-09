@@ -106,7 +106,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                 $this->handleGenerateImage($requestContext, $reqDTO);
             }
         } catch (Throwable $e) {
-            // 发生exception时，send终止message，并抛出exception
+            // 发生exception时，send终止message，并throwexception
             $this->handleGlobalThrowable($reqDTO, $e);
         }
     }

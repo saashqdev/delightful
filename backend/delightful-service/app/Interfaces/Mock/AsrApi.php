@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * ASR task Mock service
- * 模拟沙箱中的audio合并和 ASR taskprocess.
+ * 模拟沙箱中的audiomerge和 ASR taskprocess.
  */
 class AsrApi
 {
@@ -130,30 +130,30 @@ class AsrApi
         $targetDir = $audioConfig['target_dir'] ?? '';
         $outputFilename = $audioConfig['output_filename'] ?? 'audio';
 
-        // 模拟真实沙箱行为：according to output_filename 重命名目录
-        // 提取原目录中的time戳部分（format：_YYYYMMDD_HHMMSS）
+        // 模拟真实沙箱行为：according to output_filename 重命名directory
+        // 提取原directory中的time戳部分（format：_YYYYMMDD_HHMMSS）
         $timestamp = '';
         if (preg_match('/_(\d{8}_\d{6})$/', $targetDir, $matches)) {
             $timestamp = '_' . $matches[1];
         }
 
-        // buildnew目录名：智能标题 + time戳
+        // buildnewdirectory名：智能title + time戳
         $renamedDir = $outputFilename . $timestamp;
 
         // buildaudiofileinfo
         $audioFileName = $outputFilename . '.webm';
         $audioPath = rtrim($renamedDir, '/') . '/' . $audioFileName;
 
-        // buildreturn数据 (V2 详细version)
+        // buildreturndata (V2 详细version)
         $responseData = [
             'status' => SandboxAsrStatusEnum::COMPLETED->value,
             'task_key' => $taskKey,
-            'intelligent_title' => $outputFilename, // use输出file名作为智能标题
+            'intelligent_title' => $outputFilename, // useoutputfile名作为智能title
             'error_message' => null,
             'files' => [
                 'audio_file' => [
                     'filename' => $audioFileName,
-                    'path' => $audioPath, // use重命名后的目录路径
+                    'path' => $audioPath, // use重命名后的directorypath
                     'size' => 127569,
                     'duration' => 17.0,
                     'action_performed' => 'merged_and_created',
@@ -171,7 +171,7 @@ class AsrApi
 
         // 如果有笔记fileconfiguration且filesize > 0，添加到return中（模拟真实沙箱的笔记filecontentcheck）
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
-            // userequest中提供的 target_path，而不是硬编码file名
+            // userequest中提供的 target_path，而不是硬encodingfile名
             // 这样cancorrect支持国际化的file名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
@@ -198,7 +198,7 @@ class AsrApi
 
         return [
             'code' => 1000,
-            'message' => 'audio合并已complete',
+            'message' => 'audiomerge已complete',
             'data' => $responseData,
         ];
     }

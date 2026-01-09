@@ -87,7 +87,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * 对configuration数据进行decrypt.
+     * 对configurationdata进行decrypt.
      *
      * @param string $config encrypt的configurationstring
      * @param string $salt 盐value(通常是recordID)
@@ -103,7 +103,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * 对configuration数据进行编码(JSON编码 + AESencrypt).
+     * 对configurationdata进行encoding(JSONencoding + AESencrypt).
      *
      * @param array $config configurationarray
      * @param string $salt 盐value(通常是recordID)

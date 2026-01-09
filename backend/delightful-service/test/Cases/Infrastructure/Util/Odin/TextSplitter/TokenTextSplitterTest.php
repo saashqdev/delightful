@@ -119,23 +119,23 @@ class TokenTextSplitterTest extends BaseTest
         );
 
         $text = <<<'EOT'
-# 主标题
+# 主title
 
-这是第一段内容。
+这是第一段content。
 
-## 二级标题1
+## 二级title1
 
-这是二级标题1下的内容。
-这里有一些细节说明。
+这是二级title1下的content。
+这里有一些细节instruction。
 
-## 二级标题2
+## 二级title2
 
-这是二级标题2下的内容。
-这里有一些其他说明。
+这是二级title2下的content。
+这里有一些其他instruction。
 
-## 二级标题3
+## 二级title3
 
-这是最后一段内容。
+这是最后一段content。
 EOT;
 
         $chunks = $splitter->splitText($text);
@@ -144,21 +144,21 @@ EOT;
         $this->assertNotEmpty($chunks);
         $this->assertCount(4, $chunks);
 
-        // validatefirst块contain主标题和第一段内容
-        $this->assertStringContainsString('# 主标题', $chunks[0]);
-        $this->assertStringContainsString('这是第一段内容', $chunks[0]);
+        // validatefirst块contain主title和第一段content
+        $this->assertStringContainsString('# 主title', $chunks[0]);
+        $this->assertStringContainsString('这是第一段content', $chunks[0]);
 
-        // validate第二个块contain二级标题1及其内容
-        $this->assertStringContainsString('## 二级标题1', $chunks[1]);
-        $this->assertStringContainsString('这是二级标题1下的内容', $chunks[1]);
+        // validate第二个块contain二级title1及其content
+        $this->assertStringContainsString('## 二级title1', $chunks[1]);
+        $this->assertStringContainsString('这是二级title1下的content', $chunks[1]);
 
-        // validate第三个块contain二级标题2及其内容
-        $this->assertStringContainsString('## 二级标题2', $chunks[2]);
-        $this->assertStringContainsString('这是二级标题2下的内容', $chunks[2]);
+        // validate第三个块contain二级title2及其content
+        $this->assertStringContainsString('## 二级title2', $chunks[2]);
+        $this->assertStringContainsString('这是二级title2下的content', $chunks[2]);
 
-        // validate第四个块contain二级标题3及其内容
-        $this->assertStringContainsString('## 二级标题3', $chunks[3]);
-        $this->assertStringContainsString('这是最后一段内容', $chunks[3]);
+        // validate第四个块contain二级title3及其content
+        $this->assertStringContainsString('## 二级title3', $chunks[3]);
+        $this->assertStringContainsString('这是最后一段content', $chunks[3]);
     }
 
     public function testMarkdownSplitting2()
@@ -172,23 +172,23 @@ EOT;
         );
 
         $text = <<<'EOT'
-** 主标题 **
+** 主title **
 
-这是第一段内容。
+这是第一段content。
 
-** 二级标题1 **
+** 二级title1 **
 
-这是二级标题1下的内容。
-这里有一些细节说明。
+这是二级title1下的content。
+这里有一些细节instruction。
 
-** 二级标题2 **
+** 二级title2 **
 
-这是二级标题2下的内容。
-这里有一些其他说明。
+这是二级title2下的content。
+这里有一些其他instruction。
 
-** 二级标题3 **
+** 二级title3 **
 
-这是最后一段内容。
+这是最后一段content。
 EOT;
 
         $chunks = $splitter->splitText($text);
@@ -197,21 +197,21 @@ EOT;
         $this->assertNotEmpty($chunks);
         $this->assertCount(4, $chunks);
 
-        // validatefirst块contain主标题和第一段内容
-        $this->assertStringContainsString('** 主标题 **', $chunks[0]);
-        $this->assertStringContainsString('这是第一段内容', $chunks[0]);
+        // validatefirst块contain主title和第一段content
+        $this->assertStringContainsString('** 主title **', $chunks[0]);
+        $this->assertStringContainsString('这是第一段content', $chunks[0]);
 
-        // validate第二个块contain二级标题1及其内容
-        $this->assertStringContainsString('** 二级标题1 **', $chunks[1]);
-        $this->assertStringContainsString('这是二级标题1下的内容', $chunks[1]);
+        // validate第二个块contain二级title1及其content
+        $this->assertStringContainsString('** 二级title1 **', $chunks[1]);
+        $this->assertStringContainsString('这是二级title1下的content', $chunks[1]);
 
-        // validate第三个块contain二级标题2及其内容
-        $this->assertStringContainsString('** 二级标题2 **', $chunks[2]);
-        $this->assertStringContainsString('这是二级标题2下的内容', $chunks[2]);
+        // validate第三个块contain二级title2及其content
+        $this->assertStringContainsString('** 二级title2 **', $chunks[2]);
+        $this->assertStringContainsString('这是二级title2下的content', $chunks[2]);
 
-        // validate第四个块contain二级标题3及其内容
-        $this->assertStringContainsString('** 二级标题3 **', $chunks[3]);
-        $this->assertStringContainsString('这是最后一段内容', $chunks[3]);
+        // validate第四个块contain二级title3及其content
+        $this->assertStringContainsString('** 二级title3 **', $chunks[3]);
+        $this->assertStringContainsString('这是最后一段content', $chunks[3]);
     }
 
     public function testTaggedContentProtection()
@@ -234,7 +234,7 @@ EOT;
         $this->assertIsArray($chunks);
         $this->assertNotEmpty($chunks);
 
-        // validatetag内容被完整保留
+        // validatetagcontent被完整保留
         $this->assertStringContainsString('testword', $chunks[0]);
         $this->assertStringContainsString('<DelightfulCompressibleContent', $chunks[0]);
         $this->assertStringContainsString('</DelightfulCompressibleContent>', $chunks[0]);
@@ -263,7 +263,7 @@ EOT;
         $this->assertIsArray($chunks);
         $this->assertNotEmpty($chunks);
 
-        // validate所有tag内容都被完整保留
+        // validate所有tagcontent都被完整保留
         $this->assertStringContainsString('第一段文本', $chunks[0]);
         $this->assertStringContainsString('第二段文本', $chunks[1]);
         $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">image2.png</DelightfulCompressibleContent>', $chunks[1]);
@@ -274,7 +274,7 @@ EOT;
     {
         $text = <<<'EOT'
 中文test
-<DelightfulCompressibleContent Type="Image">中文路径/image.png</DelightfulCompressibleContent>
+<DelightfulCompressibleContent Type="Image">中文path/image.png</DelightfulCompressibleContent>
 continuetest
 EOT;
 
@@ -291,9 +291,9 @@ EOT;
         $this->assertNotEmpty($chunks);
         $this->assertCount(2, $chunks);
 
-        // validate中文内容被correcthandle
+        // validate中文content被correcthandle
         $this->assertStringContainsString('中文test', $chunks[0]);
-        $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">中文路径/image.png</DelightfulCompressibleContent>', $chunks[0]);
+        $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">中文path/image.png</DelightfulCompressibleContent>', $chunks[0]);
         $this->assertStringContainsString('continuetest', $chunks[1]);
     }
 }

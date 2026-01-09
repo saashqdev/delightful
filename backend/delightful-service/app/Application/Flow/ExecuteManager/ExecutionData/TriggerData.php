@@ -22,7 +22,7 @@ use Delightful\FlowExprEngine\ComponentFactory;
 
 class TriggerData
 {
-    // 助理编码
+    // 助理encoding
     private string $agentKey = '';
 
     private TriggerDataUserExtInfo $userExtInfo;
@@ -60,7 +60,7 @@ class TriggerData
             $this->userExtInfo = $this->triggerDataUserExtInfo;
         }
 
-        // 合并 paramsForm 到 params
+        // merge paramsForm 到 params
         $form = ComponentFactory::fastCreate($this->paramsForm);
         if ($form?->isForm()) {
             $formResult = $form->getForm()->getKeyValue();

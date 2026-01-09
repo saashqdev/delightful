@@ -158,10 +158,10 @@ class DelightfulAgentDomainService
         return $this->agentRepository->isDefaultAssistantConversationExist($userId, $aiCode);
     }
 
-    // 商业代码目前还依赖
+    // 商业code目前还dependency
     public function getBotsByOrganization(RequestContext $requestContext, string $agentName, ?string $pageToken = null, int $pageSize = 50, ?string $descriptionKeyword = null): array
     {
-        // get数据隔离object并getcurrentorganization的organization代码
+        // getdata隔离object并getcurrentorganization的organizationcode
         $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode();
 
         // get启用的助理list
@@ -170,7 +170,7 @@ class DelightfulAgentDomainService
         // 提取启用助理list中的 agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // get指定organization和助理version的助理数据及其total
+        // get指定organization和助理version的助理data及其total
         $page = ((int) ceil((int) $pageToken / $pageSize)) + 1;
         $agents = $this->agentVersionRepository->getAgentsByOrganization($organizationCode, $agentVersionIds, $page, $pageSize, $agentName, $descriptionKeyword);
 

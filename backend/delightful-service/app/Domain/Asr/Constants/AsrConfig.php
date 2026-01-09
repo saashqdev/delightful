@@ -36,7 +36,7 @@ class AsrConfig
     public const int MOCK_POLLING_TTL = 600;
 
     /**
-     * 沙箱audio合并的最长等待time（秒）.
+     * 沙箱audiomerge的最长等待time（秒）.
      */
     public const int SANDBOX_MERGE_TIMEOUT = 1200;
 
@@ -77,12 +77,12 @@ class AsrConfig
     // ==================== logrecordconfiguration ====================
 
     /**
-     * 沙箱audio合并logrecord间隔（秒）.
+     * 沙箱audiomergelogrecord间隔（秒）.
      */
     public const int SANDBOX_MERGE_LOG_INTERVAL = 10;
 
     /**
-     * 沙箱audio合并logrecord频率（每N次尝试record一次）.
+     * 沙箱audiomergelogrecord频率（每N次尝试record一次）.
      */
     public const int SANDBOX_MERGE_LOG_FREQUENCY = 10;
 

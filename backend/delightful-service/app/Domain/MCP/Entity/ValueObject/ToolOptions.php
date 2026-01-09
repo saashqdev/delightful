@@ -12,12 +12,12 @@ use App\Infrastructure\Core\AbstractValueObject;
 class ToolOptions extends AbstractValueObject
 {
     /**
-     * tool名称.
+     * toolname.
      */
     protected string $name;
 
     /**
-     * tool描述.
+     * tooldescription.
      */
     protected string $description;
 

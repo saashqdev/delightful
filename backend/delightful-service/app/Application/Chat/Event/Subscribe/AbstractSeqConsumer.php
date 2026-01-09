@@ -63,7 +63,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
     }
 
     /**
-     * 继承以implementsettingqueue相关parameter.
+     * inherit以implementsettingqueue相关parameter.
      */
     public function getQueueBuilder(): QueueBuilder
     {

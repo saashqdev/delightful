@@ -144,12 +144,12 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             $result = $outputForm->getKeyValue(check: true);
         }
 
-        // 增加系统输出
+        // 增加系统output
         $systemOutputResult = $this->getChatMessageResult($executionData);
         $executionData->saveNodeContext($this->node->getSystemNodeId(), $systemOutputResult);
         $vertexResult->addDebugLog('system_response', $executionData->getNodeContext($this->node->getSystemNodeId()));
 
-        // 增加customize的系统输出
+        // 增加customize的系统output
         $customSystemOutput = $triggerBranch->getCustomSystemOutput()?->getFormComponent()?->getForm();
         if ($customSystemOutput) {
             $customSystemOutput->appendConstValue($executionData->getTriggerData()->getSystemParams());

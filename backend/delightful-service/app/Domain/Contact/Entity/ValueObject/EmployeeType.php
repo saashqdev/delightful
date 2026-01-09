@@ -21,7 +21,7 @@ enum EmployeeType: int
     // 实习生
     case Intern = 2;
 
-    // 外包
+    // 外package
     case Outsourcing = 3;
 
     // 劳务派遣

@@ -21,7 +21,7 @@ class CreateTaskSchedulerLog extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('task_id')->unsigned()->comment('taskID')->index();
             $table->string('external_id', 64)->comment('业务标识')->index();
-            $table->string('name', 64)->comment('名称');
+            $table->string('name', 64)->comment('name');
             $table->dateTime('expect_time')->comment('expectedexecute时间');
             $table->dateTime('actual_time')->nullable()->comment('actualexecute时间');
             $table->tinyInteger('type')->default(2)->comment('type');
@@ -29,10 +29,10 @@ class CreateTaskSchedulerLog extends Migration
             $table->tinyInteger('status')->default(0)->comment('status');
             $table->json('callback_method')->comment('callbackmethod');
             $table->json('callback_params')->comment('callbackparameter');
-            $table->string('remark', 255)->default('')->comment('备注');
+            $table->string('remark', 255)->default('')->comment('note');
             $table->string('creator', 64)->default('')->comment('create人');
             $table->dateTime('created_at')->comment('creation time');
-            $table->json('result')->nullable()->comment('结果');
+            $table->json('result')->nullable()->comment('result');
             $table->index(['status', 'expect_time']);
         });
     }

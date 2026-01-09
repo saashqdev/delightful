@@ -23,7 +23,7 @@ return new class extends Migration {
             // 账号type
             $table->tinyInteger('type')->comment('账号type,0:ai,1:人类')->default(0);
             // ai_code
-            $table->string('ai_code', 64)->comment('ai编码')->default('');
+            $table->string('ai_code', 64)->comment('aiencoding')->default('');
             // 账号status
             $table->tinyInteger('status')->comment('账号status,0:正常,1:禁用')->default(0);
             // 国际冠码

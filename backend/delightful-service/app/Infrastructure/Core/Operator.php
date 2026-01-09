@@ -33,7 +33,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * get操作者名称.
+     * get操作者name.
      */
     public function getName(): string
     {
@@ -58,7 +58,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * setting操作者名称.
+     * setting操作者name.
      */
     public function setName(string $name): self
     {

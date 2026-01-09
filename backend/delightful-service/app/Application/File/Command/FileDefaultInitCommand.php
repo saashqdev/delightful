@@ -71,13 +71,13 @@ class FileDefaultInitCommand extends Command
     {
         $this->line('startinitializefile...');
 
-        // 基础file目录 - usenew路径结构
+        // 基础filedirectory - usenewpath结构
         $baseFileDir = BASE_PATH . '/storage/files';
         $defaultModulesDir = $baseFileDir . '/DELIGHTFUL/open/default';
 
-        // checkdefault模块目录是否存在
+        // checkdefault模块directory是否存在
         if (! is_dir($defaultModulesDir)) {
-            $this->error('default模块目录不存在: ' . $defaultModulesDir);
+            $this->error('default模块directory不存在: ' . $defaultModulesDir);
             return;
         }
 
@@ -85,17 +85,17 @@ class FileDefaultInitCommand extends Command
         $skippedFiles = 0;
         $organizationCode = CloudFileRepository::DEFAULT_ICON_ORGANIZATION_CODE;
 
-        // get所有模块目录
+        // get所有模块directory
         $moduleDirs = array_filter(glob($defaultModulesDir . '/*'), 'is_dir');
 
         if (empty($moduleDirs)) {
-            $this->warn('没有找到任何模块目录');
+            $this->warn('没有找到任何模块directory');
             return;
         }
 
         $this->line('handle模块file:');
 
-        // 遍历每个模块目录
+        // 遍历每个模块directory
         foreach ($moduleDirs as $moduleDir) {
             $moduleName = basename($moduleDir);
 
@@ -110,7 +110,7 @@ class FileDefaultInitCommand extends Command
 
                 $this->line("  - handle模块: {$moduleName} (业务type: {$businessType->value})");
 
-                // get该模块目录下的所有file
+                // get该模块directory下的所有file
                 $files = array_filter(glob($moduleDir . '/*'), 'is_file');
 
                 if (empty($files)) {
@@ -149,7 +149,7 @@ class FileDefaultInitCommand extends Command
                     $this->line("    - handlefile: {$fileName}");
 
                     try {
-                        // readfile内容并转为 base64 format
+                        // readfilecontent并转为 base64 format
                         $fileContent = file_get_contents($filePath);
                         $mimeType = mime_content_type($filePath) ?: 'image/png';
                         $base64Content = 'data:' . $mimeType . ';base64,' . base64_encode($fileContent);
@@ -164,14 +164,14 @@ class FileDefaultInitCommand extends Command
 
                         // 立即validatefile是否可get（关键validate步骤）
                         $actualKey = $uploadFile->getKey();
-                        // 从 key 中提取organization编码，参考 ProviderAppService 的correct做法
+                        // 从 key 中提取organizationencoding，参考 ProviderAppService 的correct做法
                         $keyOrganizationCode = substr($actualKey, 0, strpos($actualKey, '/'));
                         $fileLink = $this->fileDomainService->getLink($keyOrganizationCode, $actualKey, StorageBucketType::Public);
                         if (! $fileLink || ! $fileLink->getUrl()) {
-                            throw new Exception('fileuploadfail，无法get访问链接');
+                            throw new Exception('fileuploadfail，无法getaccess链接');
                         }
 
-                        // validatesuccess后才createdatabase记录，useactual的upload key
+                        // validatesuccess后才createdatabaserecord，useactual的upload key
                         $defaultFileEntity = new DefaultFileEntity();
                         $defaultFileEntity->setBusinessType($businessType->value);
                         $defaultFileEntity->setFileType(DefaultFileType::DEFAULT->value);
@@ -213,7 +213,7 @@ class FileDefaultInitCommand extends Command
         try {
             return DefaultFileBusinessType::from($moduleName);
         } catch (ValueError) {
-            // 如果直接映射fail，尝试pass名称匹配
+            // 如果直接映射fail，尝试passname匹配
             return match (strtolower($moduleName)) {
                 'service_provider', 'serviceprovider', 'service-provider' => DefaultFileBusinessType::SERVICE_PROVIDER,
                 'flow', 'workflow' => DefaultFileBusinessType::FLOW,

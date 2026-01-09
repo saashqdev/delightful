@@ -42,13 +42,13 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * handlegroupDTOarray中的图标，将路径convert为完整的URL.
+     * handlegroupDTOarray中的图标，将pathconvert为完整的URL.
      *
      * @param ModeGroupDTO[] $groups
      */
     protected function processGroupIcons(array $groups): void
     {
-        // 收集所有needhandle的icon路径
+        // 收集所有needhandle的iconpath
         $iconPaths = [];
 
         foreach ($groups as $group) {
@@ -66,10 +66,10 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // 去重
         $iconPaths = array_unique($iconPaths);
 
-        // 批量geticon的URL（自动按organization代码grouphandle）
+        // 批量geticon的URL（自动按organizationcodegrouphandle）
         $iconUrls = $this->fileDomainService->getBatchLinksByOrgPaths($iconPaths);
 
-        // 替换DTO中的icon路径为完整URL
+        // 替换DTO中的iconpath为完整URL
         foreach ($groups as $group) {
             $groupIcon = $group->getIcon();
             if (! empty($groupIcon) && ! is_url($groupIcon) && isset($iconUrls[$groupIcon])) {
@@ -79,21 +79,21 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * handle模式aggregate根中的图标，将路径convert为完整的URL.
+     * handle模式aggregate根中的图标，将pathconvert为完整的URL.
      */
     protected function processModeAggregateIcons(AdminModeAggregateDTO|ModeAggregate|ModeAggregateDTO $modeAggregateDTO): void
     {
-        // 收集所有needhandle的icon路径
+        // 收集所有needhandle的iconpath
         $iconPaths = [];
 
-        // 收集group的icon路径
+        // 收集group的iconpath
         foreach ($modeAggregateDTO->getGroups() as $groupAggregate) {
             $groupIcon = $groupAggregate->getGroup()->getIcon();
             if (! empty($groupIcon) && ! is_url($groupIcon)) {
                 $iconPaths[] = $groupIcon;
             }
 
-            // 收集模型的icon路径
+            // 收集model的iconpath
             foreach ($groupAggregate->getModels() as $model) {
                 $modelIcon = $model->getModelIcon();
                 if (! empty($modelIcon) && ! is_url($modelIcon)) {
@@ -101,7 +101,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
                 }
             }
 
-            // 收集图像模型的icon路径
+            // 收集图像model的iconpath
             foreach ($groupAggregate->getImageModels() as $imageModel) {
                 $modelIcon = $imageModel->getModelIcon();
                 if (! empty($modelIcon) && ! is_url($modelIcon)) {
@@ -118,10 +118,10 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // 去重
         $iconPaths = array_unique($iconPaths);
 
-        // 批量geticon的URL（自动按organization代码grouphandle）
+        // 批量geticon的URL（自动按organizationcodegrouphandle）
         $iconUrls = $this->fileDomainService->getBatchLinksByOrgPaths($iconPaths);
 
-        // 替换DTO中的icon路径为完整URL
+        // 替换DTO中的iconpath为完整URL
         foreach ($modeAggregateDTO->getGroups() as $groupAggregate) {
             $group = $groupAggregate->getGroup();
             $groupIcon = $group->getIcon();
@@ -129,7 +129,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
                 $group->setIcon($iconUrls[$groupIcon]->getUrl());
             }
 
-            // 替换模型的icon
+            // 替换model的icon
             foreach ($groupAggregate->getModels() as $model) {
                 $modelIcon = $model->getModelIcon();
                 if (! empty($modelIcon) && ! is_url($modelIcon) && isset($iconUrls[$modelIcon])) {
@@ -137,7 +137,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
                 }
             }
 
-            // 替换图像模型的icon
+            // 替换图像model的icon
             foreach ($groupAggregate->getImageModels() as $imageModel) {
                 $modelIcon = $imageModel->getModelIcon();
                 if (! empty($modelIcon) && ! is_url($modelIcon) && isset($iconUrls[$modelIcon])) {
@@ -148,7 +148,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * get数据隔离object
+     * getdata隔离object
      */
     protected function getModeDataIsolation(DelightfulUserAuthorization $authorization): ModeDataIsolation
     {
@@ -156,23 +156,23 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * handleModeGroupDetailDTOarray中的图标，将路径convert为完整的URL.
+     * handleModeGroupDetailDTOarray中的图标，将pathconvert为完整的URL.
      *
      * @param ModeGroupDetailDTO[] $modeGroupDetails
      */
     protected function processModeGroupDetailIcons(DelightfulUserAuthorization $authorization, array $modeGroupDetails): void
     {
-        // 收集所有needhandle的icon路径
+        // 收集所有needhandle的iconpath
         $iconPaths = [];
 
         foreach ($modeGroupDetails as $groupDetail) {
-            // 收集group的icon路径
+            // 收集group的iconpath
             $groupIcon = $groupDetail->getIcon();
             if (! empty($groupIcon) && ! is_url($groupIcon)) {
                 $iconPaths[] = $groupIcon;
             }
 
-            // 收集模型的icon路径
+            // 收集model的iconpath
             foreach ($groupDetail->getModels() as $model) {
                 $modelIcon = $model->getModelIcon();
                 if (! empty($modelIcon) && ! is_url($modelIcon)) {
@@ -189,10 +189,10 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // 去重
         $iconPaths = array_unique($iconPaths);
 
-        // 批量geticon的URL（自动按organization代码grouphandle）
+        // 批量geticon的URL（自动按organizationcodegrouphandle）
         $iconUrls = $this->fileDomainService->getBatchLinksByOrgPaths($iconPaths);
 
-        // 替换DTO中的icon路径为完整URL
+        // 替换DTO中的iconpath为完整URL
         foreach ($modeGroupDetails as $groupDetail) {
             // 替换group的icon
             $groupIcon = $groupDetail->getIcon();
@@ -200,7 +200,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
                 $groupDetail->setIcon($iconUrls[$groupIcon]->getUrl());
             }
 
-            // 替换模型的icon
+            // 替换model的icon
             foreach ($groupDetail->getModels() as $model) {
                 $modelIcon = $model->getModelIcon();
                 if (! empty($modelIcon) && ! is_url($modelIcon) && isset($iconUrls[$modelIcon])) {
@@ -211,12 +211,12 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * get模型（考虑服务商级联status）.
+     * getmodel（考虑服务商级联status）.
      * @return ProviderModelEntity[]
      */
     protected function getModels(ModeAggregate $modeAggregate): array
     {
-        // get所有模型ID (usemodel_id而不是provider_model_id)
+        // get所有modelID (usemodel_id而不是provider_model_id)
         $allModelIds = [];
         foreach ($modeAggregate->getGroupAggregates() as $groupAggregate) {
             foreach ($groupAggregate->getRelations() as $relation) {
@@ -230,7 +230,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
 
         $providerDataIsolation = new ProviderDataIsolation(OfficialOrganizationUtil::getOfficialOrganizationCode());
 
-        // 批量get模型
+        // 批量getmodel
         $allModels = $this->providerModelDomainService->getModelsByModelIds($providerDataIsolation, array_unique($allModelIds));
 
         // 提取所有服务商ID
@@ -250,7 +250,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             }
         }
 
-        // 为每个model_id选择最佳模型（考虑级联status）
+        // 为每个model_id选择最佳model（考虑级联status）
         $providerModels = [];
         foreach ($allModels as $modelId => $models) {
             $bestModel = $this->selectBestModel($models, $providerStatuses);
@@ -263,12 +263,12 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * get详细的模型info（用于管理后台，考虑服务商级联status）.
+     * get详细的modelinfo（用于管理后台，考虑服务商级联status）.
      * @return array<string, array{best: null|ProviderModelEntity, all: ProviderModelEntity[], status: ModelStatus}>
      */
     protected function getDetailedModels(ModeAggregate $modeAggregate): array
     {
-        // get所有模型ID
+        // get所有modelID
         $allModelIds = [];
         foreach ($modeAggregate->getGroupAggregates() as $groupAggregate) {
             foreach ($groupAggregate->getRelations() as $relation) {
@@ -282,7 +282,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
 
         $providerDataIsolation = new ProviderDataIsolation(OfficialOrganizationUtil::getOfficialOrganizationCode());
 
-        // 单次queryget完整的模型info
+        // 单次queryget完整的modelinfo
         $allModels = $this->providerModelDomainService->getModelsByModelIds($providerDataIsolation, array_unique($allModelIds));
 
         // 提取所有服务商ID
@@ -319,11 +319,11 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * 从模型列表中选择最佳模型（考虑服务商级联status）.
+     * 从model列表中选择最佳model（考虑服务商级联status）.
      *
-     * @param ProviderModelEntity[] $models 模型列表
+     * @param ProviderModelEntity[] $models model列表
      * @param array<int, Status> $providerStatuses 服务商status映射
-     * @return null|ProviderModelEntity 选择的最佳模型，如果没有可用模型则returnnull
+     * @return null|ProviderModelEntity 选择的最佳model，如果没有可用model则returnnull
      */
     private function selectBestModel(array $models, array $providerStatuses = []): ?ProviderModelEntity
     {
@@ -331,7 +331,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return null;
         }
 
-        // 如果没有提供服务商status，use原有逻辑（向后兼容）
+        // 如果没有提供服务商status，use原有逻辑（向后compatible）
         if (empty($providerStatuses)) {
             foreach ($models as $model) {
                 if ($model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
@@ -341,17 +341,17 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return null;
         }
 
-        // 优先选择服务商启用且模型启用的模型
+        // 优先选择服务商启用且model启用的model
         foreach ($models as $model) {
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
 
-            // 服务商禁用，跳过该模型
+            // 服务商禁用，跳过该model
             if ($providerStatus === Status::Disabled) {
                 continue;
             }
 
-            // 服务商启用，check模型status
+            // 服务商启用，checkmodelstatus
             if ($model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
                 return $model;
             }
@@ -361,9 +361,9 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * according to模型列表确定status（考虑服务商级联status）.
+     * according tomodel列表确定status（考虑服务商级联status）.
      *
-     * @param ProviderModelEntity[] $models 模型列表
+     * @param ProviderModelEntity[] $models model列表
      * @param array<int, Status> $providerStatuses 服务商status映射
      * @return ModelStatus status：Normal、Disabled、Deleted
      */
@@ -373,7 +373,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return ModelStatus::Deleted;
         }
 
-        // 如果没有提供服务商status，use原有逻辑（向后兼容）
+        // 如果没有提供服务商status，use原有逻辑（向后compatible）
         if (empty($providerStatuses)) {
             foreach ($models as $model) {
                 if ($model->getStatus() && $model->getStatus() === Status::Enabled) {
@@ -388,7 +388,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
 
-            // 服务商启用且模型启用才算正常
+            // 服务商启用且model启用才算正常
             if ($providerStatus === Status::Enabled && $model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
                 return ModelStatus::Normal;
             }

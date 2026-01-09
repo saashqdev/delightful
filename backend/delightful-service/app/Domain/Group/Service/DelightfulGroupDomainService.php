@@ -50,7 +50,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         return $this->delightfulGroupRepository->addUsersToGroup($delightfulGroupEntity, $userIds);
     }
 
-    // 减少群成员
+    // 减少群member
     public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int
     {
         // todo 如果是群主离开,need转移群主
@@ -140,7 +140,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         Db::beginTransaction();
         try {
             $controlMessageType = $groupUserChangeSeqEntity->getSeqType();
-            // 批量generate群成员变更message
+            // 批量generate群member变更message
             /** @var GroupCreateMessage|GroupInfoUpdateMessage|GroupOwnerChangeMessage|GroupUserAddMessage|GroupUserRemoveMessage $content */
             $content = $groupUserChangeSeqEntity->getContent();
             $groupId = $content->getGroupId();
@@ -159,7 +159,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             $content = $content->toArray();
             // pass protobuf message结构,createdelightful chat的object,为弃用 protobuf 做准备
             if (in_array($controlMessageType, [ControlMessageType::GroupUsersRemove, ControlMessageType::GroupDisband], true)) {
-                // 这些user已经从群成员table中移除,但是他们还未收到被移除的message
+                // 这些user已经从群membertable中移除,但是他们还未收到被移除的message
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
                 if ($controlMessageType === ControlMessageType::GroupDisband) {
                     // 解散group chat,所有人都是被移除的.这里减少stream量消耗.
@@ -251,12 +251,12 @@ class DelightfulGroupDomainService extends AbstractDomainService
 
     private function getGroupUpdateReceiveUsers(string $groupId): array
     {
-        // 批量generate群成员变更message
+        // 批量generate群member变更message
         $groupEntity = $this->delightfulGroupRepository->getGroupInfoById($groupId);
         if ($groupEntity === null || $groupEntity->getGroupStatus() === GroupStatusEnum::Disband) {
             return [];
         }
-        // 找到群成员
+        // 找到群member
         $groupUsers = $this->delightfulGroupRepository->getGroupUserList($groupId, '', null, ['user_id']);
         return array_column($groupUsers, 'user_id');
     }
@@ -276,7 +276,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         $time = date('Y-m-d H:i:s');
         $seqListCreateDTO = [];
         $groupId = $content['group_id'] ?? '';
-        // 群成员增加时,为新加入的成员returnsessionid
+        // 群member增加时,为新加入的memberreturnsessionid
         $userConversations = $this->getGroupUserConversationsByUserIds(array_keys($users), $groupId);
         $userContent = $content;
         foreach ($users as $user) {

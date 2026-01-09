@@ -54,7 +54,7 @@ enum DelightfulFlowMessageType: string
             ExceptionBuilder::throw(FlowErrorCode::MessageError, 'flow.node.message.type_error');
         }
 
-        // 全部解析，按需取用
+        // 全部parse，按需取用
         $contentComponent = ComponentFactory::fastCreate($params['content'] ?? []);
         $linkComponent = ComponentFactory::fastCreate($params['link'] ?? []);
         $linkDescComponent = ComponentFactory::fastCreate($params['link_desc'] ?? []);

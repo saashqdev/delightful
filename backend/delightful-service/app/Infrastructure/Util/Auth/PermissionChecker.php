@@ -13,7 +13,7 @@ use App\Infrastructure\Util\Auth\Permission\PermissionInterface;
 class PermissionChecker
 {
     /**
-     * check手机号是否有permission访问指定的permission.
+     * check手机号是否有permissionaccess指定的permission.
      *
      * @param string $mobile 手机号
      * @param SuperPermissionEnum $permissionEnum 要check的permissiontype
@@ -64,7 +64,7 @@ class PermissionChecker
     }
 
     /**
-     * getuser拥有管理员permission的organization编码list.
+     * getuser拥有管理员permission的organizationencodinglist.
      */
     public static function getUserOrganizationAdminList(string $mageId): array
     {

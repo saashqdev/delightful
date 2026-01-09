@@ -10,16 +10,16 @@ namespace App\Application\Speech\Enum;
 /**
  * 沙箱 ASR taskstatus枚举.
  *
- * 【作用域】外部系统 - 沙箱audio合并service
- * 【用途】table示沙箱中audio合并task的executestatus
+ * 【作用域】外部系统 - 沙箱audiomergeservice
+ * 【用途】table示沙箱中audiomergetask的executestatus
  * 【use场景】
- * - call沙箱 finishTask 接口的轮询status判断
- * - 判断audio分片合并是否complete
+ * - call沙箱 finishTask interface的轮询status判断
+ * - 判断audio分片merge是否complete
  *
  * 【与其他枚举的区别】
  * - AsrRecordingStatusEnum: 前端录音实时status（录音交互层）
  * - AsrTaskStatusEnum: 内部task全processstatus（业务管理层）
- * - SandboxAsrStatusEnum: 沙箱合并taskstatus（基础设施层）✓ current
+ * - SandboxAsrStatusEnum: 沙箱mergetaskstatus（基础设施层）✓ current
  *
  * 【statusstream转】waiting → running → finalizing → completed/finished | error
  */
@@ -27,9 +27,9 @@ enum SandboxAsrStatusEnum: string
 {
     case WAITING = 'waiting';           // 等待中：task已submit，等待沙箱process
     case RUNNING = 'running';           // 运行中：沙箱正在processaudio分片
-    case FINALIZING = 'finalizing';     // 正在executefinal合并：沙箱正在合并audio并process笔记file
-    case COMPLETED = 'completed';       // taskcomplete（V2 新format）：audio合并和fileprocess全部complete
-    case FINISHED = 'finished';         // taskcomplete（向后兼容旧format）：保留用于兼容旧version沙箱
+    case FINALIZING = 'finalizing';     // 正在executefinalmerge：沙箱正在mergeaudio并process笔记file
+    case COMPLETED = 'completed';       // taskcomplete（V2 新format）：audiomerge和fileprocess全部complete
+    case FINISHED = 'finished';         // taskcomplete（向后compatible旧format）：保留用于compatible旧version沙箱
     case ERROR = 'error';               // error：沙箱processfail
 
     /**
@@ -40,7 +40,7 @@ enum SandboxAsrStatusEnum: string
         return match ($this) {
             self::WAITING => '等待中',
             self::RUNNING => '运行中',
-            self::FINALIZING => '正在合并',
+            self::FINALIZING => '正在merge',
             self::COMPLETED => '已complete',
             self::FINISHED => '已complete（旧）',
             self::ERROR => 'error',

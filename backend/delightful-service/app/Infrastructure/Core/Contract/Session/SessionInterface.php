@@ -12,9 +12,9 @@ use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 interface SessionInterface
 {
     /**
-     * 麦吉对其他服务端发起的登录校验。if想复用已有的user体系,needimplement该接口.
+     * 麦吉对其他服务端发起的登录校验。if想复用已有的user体系,needimplement该interface.
      *
-     * implementprocess：前端对非麦吉自建的账号体系进行登录request,then再request麦吉的登录校验接口。
+     * implementprocess：前端对非麦吉自建的账号体系进行登录request,then再request麦吉的登录校验interface。
      *
      * @param LoginCheckInterface $loginCheck 登录校验data
      * @param DelightfulEnvironmentEntity $delightfulEnvironmentEntity 要登录的环境

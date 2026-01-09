@@ -10,7 +10,7 @@ namespace App\Domain\Chat\DTO\Message\ChatMessage\Item\DeepSearch;
 use App\Infrastructure\Core\AbstractObject;
 
 /**
- * 某个问题的search结果.
+ * 某个问题的searchresult.
  */
 class QuestionSearchResult extends AbstractObject
 {
@@ -60,7 +60,7 @@ class QuestionSearchResult extends AbstractObject
             if (! $item instanceof SearchDetailItem) {
                 $item = new SearchDetailItem($item);
             }
-            // 移除详情
+            // 移除detail
             $item->setDetail(null);
             $search[$key] = $item;
         }

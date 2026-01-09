@@ -344,7 +344,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * get群成员list.
+     * get群memberlist.
      */
     public function getGroupUserList(string $id, RequestInterface $request): array
     {
@@ -570,7 +570,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * get历史message.
+     * gethistorymessage.
      * @param mixed $authorization
      */
     private function getHistoryMessages($authorization, ?string $conversationId, ?string $topicId, ?array $externalHistory): array

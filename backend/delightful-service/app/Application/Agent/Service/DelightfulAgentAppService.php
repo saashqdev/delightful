@@ -196,12 +196,12 @@ class DelightfulAgentAppService extends AbstractAppService
             // 首先尝试作为 agent_version_id 从已publishversion中get
             $delightfulAgentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentById($agentVersionId);
         } catch (Throwable $e) {
-            // 如果fail，从 delightful_bots 表getoriginalassistant数据，并convert为 DelightfulAgentVersionEntity（version号为 null）
+            // 如果fail，从 delightful_bots 表getoriginalassistantdata，并convert为 DelightfulAgentVersionEntity（version号为 null）
             try {
                 $delightfulAgentEntity = $this->delightfulAgentDomainService->getById($agentVersionId);
                 $delightfulAgentVersionEntity = $this->convertAgentToAgentVersion($delightfulAgentEntity);
             } catch (Throwable) {
-                // 如果都fail，抛出originalexception
+                // 如果都fail，throworiginalexception
                 throw $e;
             }
         }
@@ -263,7 +263,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $friendQueryDTO = new FriendQueryDTO();
         $friendQueryDTO->setAiCodes([$delightfulAgentVersionEntity->getFlowCode()]);
 
-        // 数据隔离handle
+        // data隔离handle
         $friendDataIsolation = new ContactDataIsolation();
         $friendDataIsolation->setCurrentUserId($authorization->getId());
         $friendDataIsolation->setCurrentOrganizationCode($organizationCode);
@@ -325,7 +325,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * getchat模式可用assistant列表（全量数据，不pagination）.
+     * getchat模式可用assistant列表（全量data，不pagination）.
      * @param Authenticatable $authorization userauthorization
      * @param DelightfulAgentQuery $query querycondition
      * @return array assistant列表及conversationID
@@ -336,9 +336,9 @@ class DelightfulAgentAppService extends AbstractAppService
             return ['total' => 0, 'list' => []];
         }
 
-        // 1. use queriesAvailable query官方+userorganization的assistant（全量数据）
+        // 1. use queriesAvailable query官方+userorganization的assistant（全量data）
         $fullQuery = clone $query;
-        $fullPage = Page::createNoPage(); // get全量数据
+        $fullPage = Page::createNoPage(); // get全量data
         $agentAppService = di(AgentAppService::class);
         $fullData = $agentAppService->queriesAvailable($authorization, $fullQuery, $fullPage, true);
 
@@ -494,7 +494,7 @@ class DelightfulAgentAppService extends AbstractAppService
         return $result;
     }
 
-    // queryassistant的version记录
+    // queryassistant的versionrecord
 
     /**
      * @param DelightfulUserAuthorization $authorization
@@ -636,7 +636,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $friendQueryDTO = new FriendQueryDTO();
             $friendQueryDTO->setAiCodes([$delightfulAgentVersionEntity->getFlowCode()]);
 
-            // 数据隔离handle
+            // data隔离handle
             $friendDataIsolation = new ContactDataIsolation();
             $friendDataIsolation->setCurrentUserId($authenticatable->getId());
             $friendDataIsolation->setCurrentOrganizationCode($authenticatable->getOrganizationCode());
@@ -742,10 +742,10 @@ class DelightfulAgentAppService extends AbstractAppService
             if ($this->delightfulAgentDomainService->isDefaultAssistantConversationExist($userEntity->getUserId(), $aiCode)) {
                 continue;
             }
-            $this->logger->info("initializeassistantconversation，aiCode: {$aiCode}, 名称: {$agentName}");
+            $this->logger->info("initializeassistantconversation，aiCode: {$aiCode}, name: {$agentName}");
             try {
                 Db::transaction(function () use ($dataIsolation, $aiUserEntity, $aiCode, $userEntity) {
-                    // 插入defaultconversation记录
+                    // 插入defaultconversationrecord
                     $this->delightfulAgentDomainService->insertDefaultAssistantConversation($userEntity->getUserId(), $aiCode);
                     // 添加好友，assistantdefault同意好友
                     $friendId = $aiUserEntity->getUserId();
@@ -755,11 +755,11 @@ class DelightfulAgentAppService extends AbstractAppService
                     $friendUserEntity->setUserId($friendId);
                     di(DelightfulUserContactAppService::class)->sendAddFriendControlMessage($dataIsolation, $friendUserEntity);
                 });
-                $this->logger->info("initializeassistantconversationsuccess，aiCode: {$aiCode}, 名称: {$agentName}");
+                $this->logger->info("initializeassistantconversationsuccess，aiCode: {$aiCode}, name: {$agentName}");
             } catch (Throwable $e) {
                 $errorMessage = $e->getMessage();
                 $trace = $e->getTraceAsString();
-                $this->logger->error("initializeassistantconversationfail，aiCode: {$aiCode}, 名称: {$agentName}\nerrorinfo: {$errorMessage}\n堆栈: {$trace} ");
+                $this->logger->error("initializeassistantconversationfail，aiCode: {$aiCode}, name: {$agentName}\nerrorinfo: {$errorMessage}\n堆栈: {$trace} ");
             }
         }
     }
@@ -783,7 +783,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * get可见性configuration中成员和department的详细info.
+     * get可见性configuration中member和department的详细info.
      *
      * @param null|VisibilityConfig $visibilityConfig 可见性configuration
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
@@ -799,7 +799,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $authorization->getId()
         );
 
-        // handle成员info，移除currentuser
+        // handlememberinfo，移除currentuser
         $users = $visibilityConfig->getUsers();
         if (! empty($users)) {
             $currentUserId = $authorization->getId();
@@ -854,7 +854,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // 尝试getlock，timeout时间setting为60秒
         if (! $this->redisLocker->mutexLock($lockKey, $userId, 60)) {
             $this->logger->warning(sprintf('get initAgents lockfail, orgCode: %s, userId: %s', $orgCode, $userId));
-            // getlockfail，can选择直接return或抛出exception，这里选择直接return避免阻塞
+            // getlockfail，can选择直接return或throwexception，这里选择直接return避免阻塞
             return;
         }
 
@@ -917,7 +917,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // 准备基本configuration
         $config = [
             'agent_name' => '文生图助手',
-            'agent_description' => '一个强大的AI文本generate图像助手，canaccording to您的描述create精美图像。',
+            'agent_description' => '一个强大的AI文本generate图像助手，canaccording to您的descriptioncreate精美图像。',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],
             'instruct' => $loadPresetConfig['instructs'],
@@ -960,7 +960,7 @@ class DelightfulAgentAppService extends AbstractAppService
      * @param $authorization DelightfulUserAuthorization userauthorizationinfo
      * @param array $config containAgentconfiguration的array
      * @return DelightfulAgentEntity create的机器人实体
-     * @throws Throwable 当configurationinvalid或initializefail时抛出exception
+     * @throws Throwable 当configurationinvalid或initializefail时throwexception
      */
     #[Transactional]
     public function initAgentFromConfig(DelightfulUserAuthorization $authorization, array $config): DelightfulAgentEntity
@@ -998,7 +998,7 @@ class DelightfulAgentAppService extends AbstractAppService
     /**
      * readJSONfile并替换templatevariable.
      *
-     * @param string $filepath JSONfile路径
+     * @param string $filepath JSONfilepath
      * @param array $variables 替换variable ['modelName' => 'gpt-4', 'otherVar' => '其他value']
      * @return null|array parse后的array或fail时returnnull
      */
@@ -1073,7 +1073,7 @@ class DelightfulAgentAppService extends AbstractAppService
                 if (isset($departmentsMap[$departmentId])) {
                     $department = $departmentsMap[$departmentId];
                     $pathStr = $department->getPath();
-                    // 路径format为 "-1/parent_id/department_id"，去除前导的-1
+                    // pathformat为 "-1/parent_id/department_id"，去除前导的-1
                     $allDepartmentIds[] = array_filter(explode('/', trim($pathStr, '/')), static function ($id) {
                         return $id !== '-1';
                     });
@@ -1156,7 +1156,7 @@ class DelightfulAgentAppService extends AbstractAppService
      */
     private function enrichAgentAvatarAndFriendStatus(array &$agentVersions, DelightfulUserAuthorization $authorization): void
     {
-        // 批量收集needget链接的file路径和flow_code
+        // 批量收集needget链接的filepath和flow_code
         $avatarPaths = [];
         $flowCodes = [];
         foreach ($agentVersions as $agent) {
@@ -1200,7 +1200,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * getnull的pagination结果.
+     * getnull的paginationresult.
      */
     private function getEmptyPageResult(int $page, int $pageSize): array
     {
@@ -1213,9 +1213,9 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * handle指令中的image路径.
+     * handle指令中的imagepath.
      * @param null|array $instructs 指令array
-     * @param string $organizationCode organization代码
+     * @param string $organizationCode organizationcode
      * @return array handle后的指令array
      */
     private function processInstructionsImages(?array $instructs, string $organizationCode): array
@@ -1224,7 +1224,7 @@ class DelightfulAgentAppService extends AbstractAppService
             return [];
         }
 
-        // 收集所有needhandle的image路径
+        // 收集所有needhandle的imagepath
         $imagePaths = [];
         foreach ($instructs as $instruct) {
             $hasValidItems = isset($instruct['items']) && is_array($instruct['items']);
@@ -1240,7 +1240,7 @@ class DelightfulAgentAppService extends AbstractAppService
                     $imagePaths[] = $explanation['image'];
                 }
 
-                // handle选项type指令的image
+                // handleoptiontype指令的image
                 $values = $item['values'] ?? [];
                 $hasValidValues = is_array($values);
                 if (! $hasValidValues) {
@@ -1268,7 +1268,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $imageUrlMap[$fileLink->getPath()] = $fileLink->getUrl();
         }
 
-        // handle指令array中的image路径
+        // handle指令array中的imagepath
         foreach ($instructs as &$instruct) {
             $hasValidItems = isset($instruct['items']) && is_array($instruct['items']);
             if (! $hasValidItems) {
@@ -1283,7 +1283,7 @@ class DelightfulAgentAppService extends AbstractAppService
                     $explanation['image'] = $imageUrlMap[$explanation['image']] ?? '';
                 }
 
-                // handle选项type指令的image
+                // handleoptiontype指令的image
                 $values = &$item['values'];
                 $hasValidValues = is_array($values);
                 if (! $hasValidValues) {
@@ -1337,7 +1337,7 @@ class DelightfulAgentAppService extends AbstractAppService
     /**
      * loadpresetAgentconfiguration.
      *
-     * @param string $presetName preset名称
+     * @param string $presetName presetname
      * @param array $variables 替换variable
      * @return array configurationarray
      */
@@ -1434,7 +1434,7 @@ class DelightfulAgentAppService extends AbstractAppService
      *
      * @param DelightfulAgentEntity[] $agentEntities assistant实体array
      * @param DelightfulUserAuthorization $authorization userauthorizationobject
-     * @return array avatar路径到URL的映射
+     * @return array avatarpath到URL的映射
      */
     private function batchGetAvatarUrls(array $agentEntities, DelightfulUserAuthorization $authorization): array
     {

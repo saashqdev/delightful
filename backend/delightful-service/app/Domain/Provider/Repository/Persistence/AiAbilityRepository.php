@@ -24,7 +24,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     protected bool $filterOrganizationCode = true;
 
     /**
-     * according to能力代码getAI能力实体.
+     * according to能力codegetAI能力实体.
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity
     {
@@ -187,18 +187,18 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
         $entity->setSortOrder($model->sort_order);
         $entity->setStatus($model->status);
 
-        // 解析config（兼容oldJSONformat和newencryptformat）
+        // parseconfig（compatibleoldJSONformat和newencryptformat）
         $config = $model->config ?? '';
         if (empty($config)) {
             $config = [];
         } elseif (is_string($config)) {
-            // 尝试作为JSON解析
+            // 尝试作为JSONparse
             $jsonDecoded = json_decode($config, true);
             if (json_last_error() === JSON_ERROR_NONE && is_array($jsonDecoded)) {
-                // JSON解析success，说明是旧数据（未encrypt）
+                // JSONparsesuccess，instruction是旧data（未encrypt）
                 $config = $jsonDecoded;
             } else {
-                // JSON解析fail，说明是encrypt数据，进行decrypt
+                // JSONparsefail，instruction是encryptdata，进行decrypt
                 $config = AiAbilityAssembler::decodeConfig($config, (string) $model->id);
             }
         } else {

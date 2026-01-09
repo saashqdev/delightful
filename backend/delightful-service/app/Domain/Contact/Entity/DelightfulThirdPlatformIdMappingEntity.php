@@ -11,7 +11,7 @@ use App\Domain\Contact\Entity\ValueObject\PlatformType;
 use App\Domain\Contact\Entity\ValueObject\ThirdPlatformIdMappingType;
 
 /**
- * 第third-party平台与Mage的department、user、organization编码、null间编码等的映射关系记录.
+ * 第third-party平台与Mage的department、user、organizationencoding、null间encoding等的映射关系record.
  */
 class DelightfulThirdPlatformIdMappingEntity extends AbstractEntity
 {

@@ -53,7 +53,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * according tofilekey和organization编码查找record.
+     * according tofilekey和organizationencoding查找record.
      */
     public function findByFileKey(string $fileKey, string $organizationCode): ?FileCleanupRecordEntity
     {
@@ -171,7 +171,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * get清理统计数据.
+     * get清理统计data.
      */
     public function getCleanupStats(?string $sourceType = null): array
     {

@@ -20,7 +20,7 @@ return new class extends Migration {
 
         Schema::create('service_provider_original_models', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('model_id')->comment('original模型ID');
+            $table->string('model_id')->comment('originalmodelID');
             $table->timestamps();
             $table->softDeletes();
         });

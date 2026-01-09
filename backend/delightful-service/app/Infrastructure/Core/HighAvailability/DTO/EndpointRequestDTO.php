@@ -23,22 +23,22 @@ class EndpointRequestDTO extends AbstractDTO
     protected string $endpointType;
 
     /**
-     * organization代码.
+     * organizationcode.
      */
     protected string $orgCode;
 
     /**
-     * service提供商 (可选).
+     * service提供商 (optional).
      */
     protected ?string $provider = null;
 
     /**
-     * 端点name (可选).
+     * 端点name (optional).
      */
     protected ?string $endpointName = null;
 
     /**
-     * 上次选择的接入点ID (可选).
+     * 上次选择的接入点ID (optional).
      * 用于conversation延续等场景，优先选择上次use的接入点.
      */
     protected ?string $lastSelectedEndpointId = null;
@@ -160,7 +160,7 @@ class EndpointRequestDTO extends AbstractDTO
     }
 
     /**
-     * 从array数据create实例的便捷method.
+     * 从arraydatacreate实例的便捷method.
      */
     public static function create(
         string $endpointType,

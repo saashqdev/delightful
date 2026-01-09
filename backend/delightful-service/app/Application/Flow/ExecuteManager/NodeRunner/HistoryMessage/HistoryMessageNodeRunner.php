@@ -19,7 +19,7 @@ use DateTime;
 #[FlowNodeDefine(
     type: NodeType::HistoryMessage->value,
     code: NodeType::HistoryMessage->name,
-    name: '历史message / query',
+    name: 'historymessage / query',
     paramsConfig: HistoryMessageQueryNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,

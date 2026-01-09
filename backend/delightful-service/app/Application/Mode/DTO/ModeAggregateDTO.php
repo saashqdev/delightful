@@ -80,7 +80,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * get所有模型ID.
+     * get所有modelID.
      *
      * @return string[]
      */
@@ -102,7 +102,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * get总模型quantity.
+     * get总modelquantity.
      */
     public function getTotalModelCount(): int
     {

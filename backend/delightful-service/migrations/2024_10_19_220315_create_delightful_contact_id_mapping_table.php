@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->softDeletes();
             $table->index(['new_id', 'mapping_type'], 'new_id_mapping_type');
             $table->unique(['origin_id', 'mapping_type'], 'unique_origin_id_mapping_type');
-            $table->comment('department、user、organization编码、null间编码等的映射关系记录');
+            $table->comment('department、user、organizationencoding、null间encoding等的映射关系record');
         });
     }
 

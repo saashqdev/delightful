@@ -18,13 +18,13 @@ class ThirdPlatformCreateSceneGroup
     // templateid
     private string $templateId;
 
-    // 成员list
+    // memberlist
     private array $userIds;
 
     // 管理员list
     private array $subadminIds;
 
-    // 新成员是否可查看历史message
+    // 新member是否可查看historymessage
     private int $showHistoryType;
 
     // 是否可searchgroup chat, 0（default）：不可search 1 search

@@ -21,7 +21,7 @@ use Hyperf\Di\Annotation\Inject;
 use Throwable;
 
 /**
- * userwhen前organization应用服务
+ * userwhen前organizationapplication服务
  */
 class DelightfulUserOrganizationAppService
 {
@@ -44,7 +44,7 @@ class DelightfulUserOrganizationAppService
     protected OrganizationProductResolver $organizationProductResolver;
 
     /**
-     * getuserwhen前organization代码
+     * getuserwhen前organizationcode
      */
     public function getCurrentOrganizationCode(string $delightfulId): ?array
     {
@@ -52,7 +52,7 @@ class DelightfulUserOrganizationAppService
     }
 
     /**
-     * settinguserwhen前organization代码
+     * settinguserwhen前organizationcode
      */
     public function setCurrentOrganizationCode(string $delightfulId, string $delightfulOrganizationCode): array
     {

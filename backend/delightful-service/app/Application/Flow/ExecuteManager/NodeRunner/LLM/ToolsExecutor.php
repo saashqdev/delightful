@@ -161,7 +161,7 @@ class ToolsExecutor extends AbstractTool
                 return null;
             }
             $toolsExecutor->execute();
-            // 节点内部的exception在 node 的 debug information中记录
+            // 节点内部的exception在 node 的 debug information中record
             foreach ($toolFlow->getNodes() as $node) {
                 if ($node->getNodeDebugResult() && ! $node->getNodeDebugResult()->isSuccess()) {
                     $logger->warning(

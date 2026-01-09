@@ -83,7 +83,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         $conversationId = $dto->getConversationId();
         $topicId = $dto->getTopicId();
         $searchKeyword = $dto->getUserMessage();
-        // ai准备start发message了,end输入status
+        // ai准备start发message了,endinputstatus
         $this->delightfulConversationDomainService->agentOperateConversationStatusV2(
             ControlMessageType::EndConversationInput,
             $conversationId,
@@ -113,18 +113,18 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         try {
             // 1.sendping pongresponse,代表startreply
             $this->sendPingPong($dto);
-            // get im 中指定conversation下某个话题的历史message，作为 llm 的历史message
+            // get im 中指定conversation下某个话题的historymessage，作为 llm 的historymessage
             $rawHistoryMessages = $this->getDelightfulChatMessages($dto->getConversationId(), $dto->getTopicId());
             $dto->setDelightfulChatMessageHistory($rawHistoryMessages);
             // 3.0 sendsearch深度
             $this->sendSearchDeepLevel($dto);
             // 2.searchuser问题.这里一定willsplit一次关联问题
             $simpleSearchResults = $this->searchUserQuestion($dto);
-            // 3.according tooriginal问题 + search结果，按多个维度拆解关联问题.
+            // 3.according tooriginal问题 + searchresult，按多个维度拆解关联问题.
             // 3.1 generate关联问题并send给前端
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $simpleSearchResults['search'] ?? []);
             $associateQuestions = $this->generateAndSendAssociateQuestions($dto, $associateQuestionsQueryVo, '0');
-            // 3.2 according to关联问题，发起简单search（不拿网页详情),并filter掉重复或者与问题关联性不高的网页内容
+            // 3.2 according to关联问题，发起简单search（不拿网页detail),并filter掉重复或者与问题关联性不高的网页content
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
             $this->sleepToFixBug();
             // 3.4 according tosearch深度，决定是否continuesearch关联问题的子问题
@@ -143,14 +143,14 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             $this->sleepToFixBug(0.3);
             // 4. according to每个关联问题reply，generate总结.
             $summarize = $this->generateAndSendSummary($dto, $noRepeatSearchContexts, $associateQuestions);
-            // 5. according to总结，generate额外内容（思维导图、PPT、event等）
+            // 5. according to总结，generate额外content（思维导图、PPT、event等）
             if ($dto->getSearchDeepLevel() === SearchDeepLevel::DEEP) {
                 $this->generateAndSendExtra($dto, $noRepeatSearchContexts, $summarize);
             }
             // 6. sendping pongresponse,代表endreply
             $this->sendPingPong($dto);
         } catch (Throwable $e) {
-            // 7. 发生exception时，send终止message，并抛出exception
+            // 7. 发生exception时，send终止message，并throwexception
             $this->aiSendMessage(
                 $dto->getConversationId(),
                 (string) $this->idGenerator->generate(),
@@ -197,18 +197,18 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             // 1.searchuser问题.这里一定willsplit一次关联问题
             $simpleSearchResults = $this->searchUserQuestion($dto);
 
-            // 2.according tooriginal问题 + search结果，按多个维度拆解关联问题.
+            // 2.according tooriginal问题 + searchresult，按多个维度拆解关联问题.
             // 2.1 generate关联问题
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $simpleSearchResults['search'] ?? []);
             $associateQuestions = $this->generateAssociateQuestions($associateQuestionsQueryVo);
-            // 2.2 according to关联问题，发起简单search（不拿网页详情),并filter掉重复或者与问题关联性不高的网页内容
+            // 2.2 according to关联问题，发起简单search（不拿网页detail),并filter掉重复或者与问题关联性不高的网页content
             $this->sleepToFixBug();
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
 
             // 3. according to每个关联问题reply，generate总结.
             return $this->generateSummary($dto, $noRepeatSearchContexts, $associateQuestions);
         } catch (Throwable $e) {
-            // 4. 发生exception时，记录报错
+            // 4. 发生exception时，record报错
             $errMsg = [
                 'function' => 'aggregateSearchError',
                 'file' => $e->getFile(),
@@ -247,7 +247,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             $parallel->add(function () use ($questionId, $associateQuestion, $dto, $currentContextChunk) {
                 $start = microtime(true);
                 CoContext::setRequestId($dto->getRequestId());
-                // 已generate关联问题，准备sendsearch结果
+                // 已generate关联问题，准备sendsearchresult
                 $pageCount = random_int(30, 60);
                 $onePageWords = random_int(50, 200);
                 $totalWords = $pageCount * $onePageWords;
@@ -259,12 +259,12 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                     AggregateAISearchCardResponseType::SEARCH,
                     [
                         'search_keywords' => [],
-                        // push前 5 个search结果。 且兼容历史数据，key use小驼峰
+                        // push前 5 个searchresult。 且compatiblehistorydata，key use小驼峰
                         'search' => $this->getSearchData($currentContextChunk),
                         'total_words' => $totalWords,
                         // 全网资料总计
                         'match_count' => random_int(1000, 5000),
-                        // get摘要的网页quantity
+                        // getsummary的网页quantity
                         'page_count' => $pageCount,
                     ],
                     $dto->getAppMessageId(),
@@ -324,10 +324,10 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                     'total_words' => $totalWords,
                     // 全网资料总计
                     'match_count' => random_int(1000, 5000),
-                    // get摘要的网页quantity
+                    // getsummary的网页quantity
                     'page_count' => $pageCount,
                 ];
-                // 已generate关联问题，准备sendsearch结果
+                // 已generate关联问题，准备sendsearchresult
                 $this->aiSendMessage(
                     $dto->getConversationId(),
                     (string) $this->idGenerator->generate(),
@@ -413,7 +413,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     }
 
     /**
-     * according tooriginal问题 + search结果，按多个维度拆解问题.
+     * according tooriginal问题 + searchresult，按多个维度拆解问题.
      * @todo 支持传入维度的quantityrange
      */
     public function generateAssociateQuestions(AISearchCommonQueryVo $queryVo): array
@@ -440,7 +440,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             ];
         }
         $this->logger->info(sprintf(
-            'getSearchResults 问题：%s 关联问题: %s .according tooriginal问题 + search结果，按多个维度拆解关联问题并push完毕 end计时，耗时 %s 秒',
+            'getSearchResults 问题：%s 关联问题: %s .according tooriginal问题 + searchresult，按多个维度拆解关联问题并push完毕 end计时，耗时 %s 秒',
             $queryVo->getUserMessage(),
             Json::encode($relatedQuestions, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
             TimeUtil::getMillisecondDiffFromNow($start) / 1000
@@ -455,17 +455,17 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     public function generateSearchResults(DelightfulChatAggregateSearchReqDTO $dto, array $associateQuestions): array
     {
         $start = microtime(true);
-        // according to关联问题，发起简单search（不拿网页详情),并filter掉重复或者与问题关联性不高的网页内容
+        // according to关联问题，发起简单search（不拿网页detail),并filter掉重复或者与问题关联性不高的网页content
         $searchKeywords = array_column($associateQuestions, 'title');
         $queryVo = (new AISearchCommonQueryVo())
             ->setSearchKeywords($searchKeywords)
             ->setSearchEngine($dto->getSearchEngine())
             ->setLanguage($dto->getLanguage());
         $allSearchContexts = $this->delightfulLLMDomainService->getSearchResults($queryVo)['search'] ?? [];
-        // filter重复内容
+        // filter重复content
         $noRepeatSearchContexts = [];
         if (! empty($allSearchContexts)) {
-            // 清洗search结果中的重复项
+            // 清洗searchresult中的重复项
             $searchKeywords = array_column($associateQuestions, 'title');
             $modelInterface = $this->getChatModel($dto->getOrganizationCode(), $dto->getUserId());
             $queryVo = (new AISearchCommonQueryVo())
@@ -477,11 +477,11 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 ->setSearchContexts($allSearchContexts)
                 ->setUserId($dto->getUserId())
                 ->setOrganizationCode($dto->getOrganizationCode());
-            // 与search关键词关联性最高且不重复的search结果
+            // 与search关键词关联性最高且不重复的searchresult
             $noRepeatSearchContexts = $this->delightfulLLMDomainService->filterSearchContexts($queryVo);
             $costMircoTime = TimeUtil::getMillisecondDiffFromNow($start);
             $this->logger->info(sprintf(
-                'mindSearch getSearchResults filterSearchContexts 清洗search结果中的重复项 清洗前：%s 清洗后:%s end计时 累计耗时 %s 秒',
+                'mindSearch getSearchResults filterSearchContexts 清洗searchresult中的重复项 清洗前：%s 清洗后:%s end计时 累计耗时 %s 秒',
                 count($allSearchContexts),
                 count($noRepeatSearchContexts),
                 $costMircoTime / 1000
@@ -557,7 +557,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         array $noRepeatSearchContexts,
         array $associateQuestions,
     ): DelightfulAggregateSearchSummaryDTO {
-        // 由于是stream输出response，因此让前端判断 ai quote的search url。
+        // 由于是streamoutputresponse，因此让前端判断 ai quote的search url。
         Coroutine::create(function () use ($dto, $noRepeatSearchContexts) {
             CoContext::setRequestId($dto->getRequestId());
             $messageId = (string) $this->idGenerator->generate();
@@ -599,7 +599,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             ->setSearchKeywords(array_column($associateQuestions, 'title'))
             ->setUserId($dto->getUserId())
             ->setOrganizationCode($dto->getOrganizationCode());
-        // 深度search的总结use deepseek-r1 模型
+        // 深度search的总结use deepseek-r1 model
         if ($dto->getSearchDeepLevel() === SearchDeepLevel::DEEP) {
             $modelInterface = $this->getChatModel($dto->getOrganizationCode(), $dto->getUserId(), LLMModelEnum::DEEPSEEK_R1->value);
         } else {
@@ -643,7 +643,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                     $messageContent,
                     $senderConversationEntity
                 );
-                // push一次 parent_id/id/type 数据，用于updatestreamcache，避免final落库时，parent_id/id/type 数据丢失
+                // push一次 parent_id/id/type data，用于updatestreamcache，避免final落库时，parent_id/id/type data丢失
                 $this->delightfulChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [
                     'parent_id' => '0',
                     'id' => $summaryMessageId,
@@ -652,18 +652,18 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             } else {
                 $streamOptions->setStatus(StreamMessageStatus::Processing);
             }
-            // stream内容
+            // streamcontent
             if ($assistantMessage->hasReasoningContent()) {
-                // send思考内容
+                // send思考content
                 $this->delightfulChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [
                     'reasoning_content' => $assistantMessage->getReasoningContent(),
                 ]);
             } else {
-                // 总结内容
+                // 总结content
                 $this->delightfulChatDomainService->streamSendJsonMessage($senderSeqDTO->getAppMessageId(), [
                     'llm_response' => $assistantMessage->getContent(),
                 ]);
-                // 累加stream内容，用作最后的return
+                // 累加streamcontent，用作最后的return
                 $summarizeStreamResponse .= $assistantMessage->getContent();
             }
         }
@@ -709,7 +709,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             $extraContentParallel->wait();
         } catch (ParallelExecutionException $parallelExecutionException) {
             foreach ($parallelExecutionException->getThrowables() as $throwable) {
-                // 仅记录
+                // 仅record
                 $this->logger->error('error_during_tool_call', [
                     'function' => 'generateAndSendExtraError',
                     'error_message' => $throwable->getMessage(),
@@ -821,7 +821,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     {
         $searchList = [];
         foreach ($noRepeatSearchContexts as $search) { // $search 已经是切片后的元素
-            // 兼容历史数据，key use小驼峰
+            // compatiblehistorydata，key use小驼峰
             $searchList[] = [
                 'id' => $search->getId(),
                 'name' => $search->getName(),
@@ -861,14 +861,14 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 if (str_contains($context->getCachedPageUrl(), 'zhihu.com')) {
                     return;
                 }
-                // 只取指定quantity网页的详细内容
+                // 只取指定quantity网页的详细content
                 if ($currentDetailReadCount > $detailReadMaxNum) {
                     return;
                 }
                 CoContext::setRequestId($requestId);
                 $htmlReader = make(HTMLReader::class);
                 try {
-                    // 用快照去拿内容！！
+                    // 用snapshot去拿content！！
                     $content = $htmlReader->getText($context->getCachedPageUrl());
                     $content = mb_substr($content, 0, 2048);
                     $context->setDetail($content);
@@ -881,7 +881,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                     }
                 } catch (Throwable $e) {
                     $this->logger->error(sprintf(
-                        'mindSearch getSearchResults get详细内容时发生error:%s,file:%s,line:%s trace:%s',
+                        'mindSearch getSearchResults get详细content时发生error:%s,file:%s,line:%s trace:%s',
                         $e->getMessage(),
                         $e->getFile(),
                         $e->getLine(),
@@ -897,7 +897,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             --$questionsNum;
         }
         $this->logger->info(sprintf(
-            'mindSearch getSearchResults 精读所有search结果 精读累计耗时：%s 秒',
+            'mindSearch getSearchResults 精读所有searchresult 精读累计耗时：%s 秒',
             number_format(TimeUtil::getMillisecondDiffFromNow($timeStart) / 1000, 2)
         ));
     }
@@ -955,12 +955,12 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             $this->generateAndSendAssociateSubQuestions($dto, $noRepeatSearchContexts, $associateQuestions);
         });
         $parallel->add(function () use (&$noRepeatSearchContexts, $readPagesDetailChannel, $associateQuestions) {
-            // 3.4.a.2 并行：精读关联问题search的网页详情
+            // 3.4.a.2 并行：精读关联问题search的网页detail
             $this->getSearchPageDetails($noRepeatSearchContexts, $associateQuestions, $readPagesDetailChannel);
         });
         $parallel->wait();
         $this->logger->info(sprintf(
-            'mindSearch getSearchResults generate关联问题的子问题，并精读所有search结果，end 累计耗时：%s 秒',
+            'mindSearch getSearchResults generate关联问题的子问题，并精读所有searchresult，end 累计耗时：%s 秒',
             number_format(TimeUtil::getMillisecondDiffFromNow($timeStart) / 1000, 2)
         ));
     }
@@ -1018,12 +1018,12 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     }
 
     /**
-     * get im中指定conversation下某个话题的历史message，作为 llm 的历史message.
+     * get im中指定conversation下某个话题的historymessage，作为 llm 的historymessage.
      */
     private function getDelightfulChatMessages(string $delightfulChatConversationId, string $topicId): array
     {
         $rawHistoryMessages = $this->delightfulChatDomainService->getLLMContentForAgent($delightfulChatConversationId, $topicId);
-        // 取最后指定条数的conversation记录
+        // 取最后指定条数的conversationrecord
         return array_slice($rawHistoryMessages, -10);
     }
 
@@ -1034,9 +1034,9 @@ class DelightfulChatAISearchAppService extends AbstractAppService
 
     private function getChatModel(string $orgCode, string $userId, string $modelName = LLMModelEnum::DEEPSEEK_V3->value): ModelInterface
     {
-        // pass降级链get模型名称
+        // pass降级链getmodelname
         $modelName = di(ModelConfigAppService::class)->getChatModelTypeByFallbackChain($orgCode, $userId, $modelName);
-        // get模型代理
+        // getmodel代理
         $dataIsolation = ModelGatewayDataIsolation::createByOrganizationCodeWithoutSubscription($orgCode, $userId);
         return di(ModelGatewayMapper::class)->getChatModelProxy($dataIsolation, $modelName);
     }

@@ -294,7 +294,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => '我今天去了广州吃了莞城大包，下次想带我朋友一起去',
+            'intent' => '我今天去了广州吃了莞城大package，下次想带我朋友一起去',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['123'], $vertexResult->getChildrenIds());

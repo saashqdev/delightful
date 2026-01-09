@@ -103,7 +103,7 @@ class StartInputTemplate
             "organization_code": {
                 "type": "string",
                 "key": "organization_code",
-                "title": "organization编码",
+                "title": "organizationencoding",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -138,7 +138,7 @@ class StartInputTemplate
                         "name": {
                             "type": "string",
                             "key": "name",
-                            "title": "file名称",
+                            "title": "filename",
                             "description": "",
                             "required": null,
                             "value": null,
@@ -293,7 +293,7 @@ class StartInputTemplate
                                 },
                                 "name": {
                                     "type": "string",
-                                    "title": "department名称",
+                                    "title": "departmentname",
                                     "description": "",
                                     "key": "name",
                                     "items": null,
@@ -305,7 +305,7 @@ class StartInputTemplate
                                 },
                                 "path": {
                                     "type": "string",
-                                    "title": "department路径",
+                                    "title": "departmentpath",
                                     "description": "",
                                     "key": "path",
                                     "items": null,
@@ -327,7 +327,7 @@ class StartInputTemplate
             "bot_key": {
                 "type": "string",
                 "key": "bot_key",
-                "title": "第third-partychat机器人编码",
+                "title": "第third-partychat机器人encoding",
                 "description": "",
                 "items": null,
                 "properties": null,

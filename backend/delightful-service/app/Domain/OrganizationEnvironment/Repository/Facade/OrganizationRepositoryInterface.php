@@ -11,7 +11,7 @@ use App\Domain\OrganizationEnvironment\Entity\OrganizationEntity;
 use App\Infrastructure\Core\ValueObject\Page;
 
 /**
- * organization仓库接口.
+ * organization仓库interface.
  */
 interface OrganizationRepositoryInterface
 {
@@ -26,19 +26,19 @@ interface OrganizationRepositoryInterface
     public function getById(int $id): ?OrganizationEntity;
 
     /**
-     * according to编码getorganization.
+     * according toencodinggetorganization.
      */
     public function getByCode(string $code): ?OrganizationEntity;
 
     /**
-     * according to编码列表批量getorganization.
+     * according toencoding列表批量getorganization.
      * @param string[] $codes
      * @return OrganizationEntity[]
      */
     public function getByCodes(array $codes): array;
 
     /**
-     * according to名称getorganization.
+     * according tonamegetorganization.
      */
     public function getByName(string $name): ?OrganizationEntity;
 
@@ -54,7 +54,7 @@ interface OrganizationRepositoryInterface
     public function delete(OrganizationEntity $organizationEntity): void;
 
     /**
-     * check编码是否已存在.
+     * checkencoding是否已存在.
      */
     public function existsByCode(string $code, ?int $excludeId = null): bool;
 }

@@ -11,7 +11,7 @@ interface LockerInterface
 {
     /**
      * get互斥lock
-     * @param string $name lock的名称，指定lock的名称
+     * @param string $name lock的name，指定lock的name
      * @param string $owner lock的所有者，指定lock的唯一标识，判断error释放
      * @param int $expire 过期时间，秒
      */
@@ -25,7 +25,7 @@ interface LockerInterface
 
     /**
      * 释放lock
-     * @param string $name lock的名称，指定lock的名称
+     * @param string $name lock的name，指定lock的name
      * @param string $owner lock的所有者，指定lock的唯一标识，判断error释放
      */
     public function release(string $name, string $owner): bool;

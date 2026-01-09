@@ -61,7 +61,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * syncconfigurationversion数据.
+     * syncconfigurationversiondata.
      */
     protected function syncConfigVersions(bool $isDryRun, bool $isForce, int $limit): array
     {
@@ -162,7 +162,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * buildversion数据.
+     * buildversiondata.
      */
     private function buildVersionData(ProviderModelModel $model, int $version): array
     {
@@ -215,15 +215,15 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 输出头部info.
+     * output头部info.
      */
     private function logHeader(bool $isDryRun, bool $isForce, int $limit): void
     {
-        $this->logger->info('开始syncservice商modelconfigurationversion数据...');
+        $this->logger->info('开始syncservice商modelconfigurationversiondata...');
         $this->logger->info(sprintf('模式: %s', $isDryRun ? '试运行（不writedatabase）' : '正式execute'));
 
         if ($isForce) {
-            $this->logger->warning('强制模式已启用：将为所有modelcreate新version');
+            $this->logger->warning('force模式已启用：将为所有modelcreate新version');
         }
 
         if ($limit > 0) {
@@ -232,7 +232,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 输出统计info.
+     * output统计info.
      */
     private function logSummary(array $result): void
     {

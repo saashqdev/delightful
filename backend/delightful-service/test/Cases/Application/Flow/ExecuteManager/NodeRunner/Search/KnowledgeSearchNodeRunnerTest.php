@@ -159,7 +159,7 @@ JSON,
                     "expression_value": [
                         {
                             "type": "input",
-                            "value": "特工oo7专用知识库112",
+                            "value": "特工oo7专用knowledge base112",
                             "name": "",
                             "args": null
                         }

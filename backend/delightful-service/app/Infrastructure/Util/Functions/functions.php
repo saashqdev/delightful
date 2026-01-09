@@ -406,7 +406,7 @@ if (! function_exists('get_path_by_url')) {
 }
 
 if (! function_exists('parse_json_config')) {
-    // 解析JSONconfiguration或return空array
+    // parseJSONconfiguration或return空array
     function parse_json_config(null|array|string $value): array
     {
         if (is_array($value)) {

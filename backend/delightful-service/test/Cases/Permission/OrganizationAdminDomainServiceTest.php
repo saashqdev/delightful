@@ -33,20 +33,20 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         parent::setUp();
         $this->organizationAdminDomainService = $this->getContainer()->get(OrganizationAdminDomainService::class);
 
-        // 为每个testgenerate唯一的userID，避免testbetween的数据冲突
+        // 为每个testgenerate唯一的userID，避免testbetween的dataconflict
         $this->testUserIds = [
             'test_domain_user_' . uniqid(),
             'test_domain_user_' . uniqid(),
             'test_domain_user_' . uniqid(),
         ];
 
-        // 清理可能存在的test数据
+        // 清理可能存在的testdata
         $this->cleanUpTestData();
     }
 
     protected function tearDown(): void
     {
-        // 清理test数据
+        // 清理testdata
         $this->cleanUpTestData();
 
         parent::tearDown();
@@ -54,7 +54,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsWithNoAdminsReturnsEmptyArray(): void
     {
-        // ensure没有organization管理员数据
+        // ensure没有organization管理员data
         $this->cleanUpTestData();
 
         // callmethod
@@ -115,7 +115,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             $this->assertContains($testUserId, $userIds);
         }
 
-        // verify所有实体都是correct的type和organization代码
+        // verify所有实体都是correct的type和organizationcode
         foreach ($result as $entity) {
             $this->assertInstanceOf(OrganizationAdminEntity::class, $entity);
             $this->assertEquals($this->testOrganizationCode, $entity->getOrganizationCode());
@@ -170,7 +170,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             $this->testGrantorUserId
         );
 
-        // use空的organization代码callmethod
+        // use空的organizationcodecallmethod
         $result = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation(''));
 
         // verifyresult为空
@@ -187,7 +187,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             $this->testGrantorUserId
         );
 
-        // use不存在的organization代码callmethod
+        // use不存在的organizationcodecallmethod
         $result = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation('non_existent_org_code'));
 
         // verifyresult为空
@@ -310,10 +310,10 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
     private function cleanUpTestData(): void
     {
         try {
-            // 清理testorganization的数据
+            // 清理testorganization的data
             $this->cleanUpOrganizationAdmins($this->testOrganizationCode);
 
-            // 清理另一个organization的数据
+            // 清理另一个organization的data
             $this->cleanUpOrganizationAdmins($this->anotherOrganizationCode);
         } catch (Exception $e) {
             // 忽略清理error

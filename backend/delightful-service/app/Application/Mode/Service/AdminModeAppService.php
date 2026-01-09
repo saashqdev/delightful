@@ -39,7 +39,7 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * according toIDget模式聚合根（contain模式详情、分组、model关系）.
+     * according toIDget模式聚合根（contain模式detail、分组、model关系）.
      */
     public function getModeById(DelightfulUserAuthorization $authorization, string $id): AdminModeAggregateDTO
     {
@@ -118,7 +118,7 @@ class AdminModeAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // 将updaterequest应用到现有实体（只updateallow修改的field）
+            // 将updaterequestapplication到现有实体（只updateallow修改的field）
             AdminModeAssembler::applyUpdateRequestToEntity($request, $existingMode);
 
             $updatedMode = $this->modeDomainService->updateMode($dataIsolation, $existingMode);

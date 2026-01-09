@@ -46,7 +46,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
         }
     }
 
-    // querydepartment详情,needreturn是否有子department
+    // querydepartmentdetail,needreturn是否有子department
     public function getDepartmentById(DepartmentQueryDTO $queryDTO, DelightfulUserAuthorization $userAuthorization): ?DelightfulDepartmentEntity
     {
         // 对于前端来说, -1 table示根departmentinfo.
@@ -62,7 +62,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
     }
 
     /**
-     * querydepartment详情.
+     * querydepartmentdetail.
      * @return array<DelightfulDepartmentEntity>
      */
     public function getDepartmentByIds(DepartmentQueryDTO $queryDTO, DelightfulUserAuthorization $userAuthorization): array
@@ -95,7 +95,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
         foreach ($departments as $delightfulDepartmentEntity) {
             $this->setChildrenEmployeeSum($queryDTO, $delightfulDepartmentEntity);
         }
-        // 通讯录和search相关接口，filter隐藏department和隐藏user。
+        // 通讯录和search相关interface，filter隐藏department和隐藏user。
         $departments = $this->filterDepartmentsHidden($departments);
         $departmentsPageResponseDTO->setItems($departments);
         return $departmentsPageResponseDTO;
@@ -110,7 +110,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
         foreach ($departments as $delightfulDepartmentEntity) {
             $this->setChildrenEmployeeSum($queryDTO, $delightfulDepartmentEntity);
         }
-        // 通讯录和search相关接口，filter隐藏department和隐藏user。
+        // 通讯录和search相关interface，filter隐藏department和隐藏user。
         $departments = $this->filterDepartmentsHidden($departments);
         // 全量查找，没有更多
         return PageListAssembler::pageByMysql($departments);
@@ -122,7 +122,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
     }
 
     /**
-     * 通讯录和search相关接口，filter隐藏department和隐藏user。
+     * 通讯录和search相关interface，filter隐藏department和隐藏user。
      * @param DelightfulDepartmentEntity[] $delightfulDepartments
      */
     protected function filterDepartmentsHidden(array $delightfulDepartments): array

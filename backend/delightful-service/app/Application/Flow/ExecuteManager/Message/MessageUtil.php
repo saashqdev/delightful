@@ -126,7 +126,7 @@ class MessageUtil
                     return null;
                 }
                 $contentString = $content->getKeyValue($executionData->getExpressionFieldData());
-                // todo actual上没implement，以下是伪代码
+                // todo actual上没implement，以下是伪code
                 return new AggregateAISearchCardMessageV2([
                     'search' => $contentString['search'] ?? [],
                     'llm_response' => $contentString['llm_response'] ?? '',

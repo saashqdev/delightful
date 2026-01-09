@@ -23,7 +23,7 @@ class DataIsolation extends AbstractObject
     protected string $currentDelightfulId = '';
 
     /**
-     * when前的organization编码.
+     * when前的organizationencoding.
      */
     protected string $currentOrganizationCode = '';
 
@@ -38,12 +38,12 @@ class DataIsolation extends AbstractObject
     protected string $environment;
 
     /**
-     * when前应用id.
+     * when前applicationid.
      */
     protected ?string $currentAppId = null;
 
     /**
-     * 第third-party平台organization编码.
+     * 第third-party平台organizationencoding.
      */
     protected ?string $thirdPartyOrganizationCode = null;
 

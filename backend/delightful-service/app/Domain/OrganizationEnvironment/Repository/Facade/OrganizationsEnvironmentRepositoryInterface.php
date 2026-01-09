@@ -25,7 +25,7 @@ interface OrganizationsEnvironmentRepositoryInterface
     public function getOrganizationEnvironments(array $delightfulOrganizationCodes, DelightfulEnvironmentEntity $delightfulEnvironmentEntity): array;
 
     /**
-     * get所有organization编码
+     * get所有organizationencoding
      * @return string[]
      */
     public function getAllOrganizationCodes(): array;

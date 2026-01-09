@@ -40,7 +40,7 @@ interface ProviderRepositoryInterface
 
     /**
      * according toProviderCode和Categorygetservice商.
-     * @param ProviderCode $providerCode service商编码
+     * @param ProviderCode $providerCode service商encoding
      * @param Category $category category
      * @return null|ProviderEntity service商实体
      */

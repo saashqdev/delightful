@@ -33,7 +33,7 @@ enum ConversationType: int
     // 话题
     case Topic = 6;
 
-    // 应用message
+    // applicationmessage
     case App = 7;
 
     /**

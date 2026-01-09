@@ -25,7 +25,7 @@ class ModelConfigEntity extends AbstractEntity
     protected string $model;
 
     /**
-     * 模型type.such as：gtp4o.
+     * modeltype.such as：gtp4o.
      */
     protected string $type;
 

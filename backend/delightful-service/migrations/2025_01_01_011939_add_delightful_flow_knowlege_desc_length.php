@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
-            $table->string('description', 2500)->default('')->comment('知识库描述')->change();
+            $table->string('description', 2500)->default('')->comment('knowledge basedescription')->change();
         });
     }
 

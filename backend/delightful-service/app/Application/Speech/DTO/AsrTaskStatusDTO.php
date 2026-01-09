@@ -20,16 +20,16 @@ class AsrTaskStatusDTO
 
     public string $userId = '';
 
-    public ?string $organizationCode = null; // organization编码（用于自动总结）
+    public ?string $organizationCode = null; // organizationencoding（用于自动总结）
 
     // 类似：project_821749697183776769/workspace/录音总结_20250910_174251/original录音file.webm
-    public ?string $filePath = null; // 工作区file路径
+    public ?string $filePath = null; // 工作区filepath
 
     // fileID（database中的actualID）
     public ?string $audioFileId = null; // audiofileID（writedelightful_super_agent_task_files表后return的ID）
 
     // note fileinfo
-    public ?string $noteFileName = null; // notefile名（与audiofile在同一目录，为null表示无笔记file）
+    public ?string $noteFileName = null; // notefile名（与audiofile在同一directory，为null表示无笔记file）
 
     public ?string $noteFileId = null; // notefileID（用于chatmessage中的filequote）
 
@@ -38,28 +38,28 @@ class AsrTaskStatusDTO
 
     public ?string $presetTranscriptFileId = null; // presetstream识别fileID
 
-    public ?string $presetNoteFilePath = null; // preset笔记file相对路径
+    public ?string $presetNoteFilePath = null; // preset笔记file相对path
 
-    public ?string $presetTranscriptFilePath = null; // presetstream识别file相对路径
+    public ?string $presetTranscriptFilePath = null; // presetstream识别file相对path
 
     // 项目和话题info
     public ?string $projectId = null; // 项目ID
 
     public ?string $topicId = null; // 话题ID
 
-    // 录音目录info
-    public ?string $tempHiddenDirectory = null; // 隐藏目录路径（存放分片file）
+    // 录音directoryinfo
+    public ?string $tempHiddenDirectory = null; // 隐藏directorypath（存放分片file）
 
-    public ?string $displayDirectory = null; // 显示目录路径（存放stream文本和笔记）
+    public ?string $displayDirectory = null; // 显示directorypath（存放stream文本和笔记）
 
-    public ?int $tempHiddenDirectoryId = null; // 隐藏目录的fileID
+    public ?int $tempHiddenDirectoryId = null; // 隐藏directory的fileID
 
-    public ?int $displayDirectoryId = null; // 显示目录的fileID
+    public ?int $displayDirectoryId = null; // 显示directory的fileID
 
     public AsrTaskStatusEnum $status = AsrTaskStatusEnum::FAILED;
 
     // 录音status管理字段
-    public ?string $modelId = null; // AI 模型ID，用于自动总结
+    public ?string $modelId = null; // AI modelID，用于自动总结
 
     public ?string $recordingStatus = null; // 录音status：start|recording|paused|stopped
 
@@ -75,16 +75,16 @@ class AsrTaskStatusDTO
 
     public bool $serverSummaryLocked = false; // 服务端总结是否lock定客户端
 
-    // ASR 内容和笔记（用于generate标题）
-    public ?string $asrStreamContent = null; // ASR stream识别内容
+    // ASR content和笔记（用于generatetitle）
+    public ?string $asrStreamContent = null; // ASR stream识别content
 
-    public ?string $noteContent = null; // 笔记内容
+    public ?string $noteContent = null; // 笔记content
 
     public ?string $noteFileType = null; // 笔记filetype（md、txt、json）
 
-    public ?string $language = null; // 语种（zh_CN、en_US等），用于generate标题时use
+    public ?string $language = null; // 语种（zh_CN、en_US等），用于generatetitle时use
 
-    public ?string $uploadGeneratedTitle = null; // upload-tokens generate的标题（用于 summary 复用）
+    public ?string $uploadGeneratedTitle = null; // upload-tokens generate的title（用于 summary 复用）
 
     public function __construct(array $data = [])
     {
@@ -102,7 +102,7 @@ class AsrTaskStatusDTO
         $this->projectId = self::getStringValue($data, ['project_id', 'projectId']);
         $this->topicId = self::getStringValue($data, ['topic_id', 'topicId']);
 
-        // 录音目录info（自动清洗为相对路径）
+        // 录音directoryinfo（自动清洗为相对path）
         $this->tempHiddenDirectory = self::extractRelativePath(
             self::getStringValue($data, ['temp_hidden_directory', 'tempHiddenDirectory'])
         );
@@ -128,7 +128,7 @@ class AsrTaskStatusDTO
         $this->presetNoteFilePath = self::getStringValue($data, ['preset_note_file_path', 'presetNoteFilePath']);
         $this->presetTranscriptFilePath = self::getStringValue($data, ['preset_transcript_file_path', 'presetTranscriptFilePath']);
 
-        // ASR 内容和笔记
+        // ASR content和笔记
         $this->asrStreamContent = self::getStringValue($data, ['asr_stream_content', 'asrStreamContent']);
         $this->noteContent = self::getStringValue($data, ['note_content', 'noteContent']);
         $this->noteFileType = self::getStringValue($data, ['note_file_type', 'noteFileType']);
@@ -222,7 +222,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 记录一次服务端总结尝试.
+     * record一次服务端总结尝试.
      */
     public function markServerSummaryAttempt(): void
     {
@@ -242,12 +242,12 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 提取相对于 workspace 的相对路径
-     * 如果路径contain workspace/，提取其后的部分
-     * 这样can自动修正 Redis 中storage的旧format数据（完整路径）.
+     * 提取相对于 workspace 的相对path
+     * 如果pathcontain workspace/，提取其后的部分
+     * 这样can自动修正 Redis 中storage的旧formatdata（完整path）.
      *
-     * @param null|string $path original路径
-     * @return null|string 相对路径
+     * @param null|string $path originalpath
+     * @return null|string 相对path
      */
     private static function extractRelativePath(?string $path): ?string
     {
@@ -255,7 +255,7 @@ class AsrTaskStatusDTO
             return $path;
         }
 
-        // 如果路径contain workspace/，提取 workspace/ 后面的部分
+        // 如果pathcontain workspace/，提取 workspace/ 后面的部分
         if (str_contains($path, 'workspace/')) {
             $parts = explode('workspace/', $path, 2);
             return $parts[1] ?? $path;
@@ -267,7 +267,7 @@ class AsrTaskStatusDTO
     /**
      * 从array中按优先级getstringvalue（支持 snake_case 和 camelCase）.
      *
-     * @param array<string, mixed> $data 数据array
+     * @param array<string, mixed> $data dataarray
      * @param array<string> $keys 键名列表（按优先级sort）
      * @param null|string $default defaultvalue
      */
@@ -284,7 +284,7 @@ class AsrTaskStatusDTO
     /**
      * 从array中按优先级get整数value（支持 snake_case 和 camelCase）.
      *
-     * @param array<string, mixed> $data 数据array
+     * @param array<string, mixed> $data dataarray
      * @param array<string> $keys 键名列表（按优先级sort）
      * @param null|int $default defaultvalue
      */
@@ -301,7 +301,7 @@ class AsrTaskStatusDTO
     /**
      * 从array中按优先级getbooleanvalue（支持多种format：true/false、1/0、'1'/'0'）.
      *
-     * @param array<string, mixed> $data 数据array
+     * @param array<string, mixed> $data dataarray
      * @param array<string> $keys 键名列表（按优先级sort）
      */
     private static function getBoolValue(array $data, array $keys): bool

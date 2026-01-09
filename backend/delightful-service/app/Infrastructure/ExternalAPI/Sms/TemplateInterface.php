@@ -27,7 +27,7 @@ interface TemplateInterface
     public function getContentByTemplateId(string $templateId): string;
 
     /**
-     * 解析templatevariable,得到 variablekey与variablevalue 的array.
+     * parsetemplatevariable,得到 variablekey与variablevalue 的array.
      */
     public function getTemplateVariables(string $content, array $messages): array;
 

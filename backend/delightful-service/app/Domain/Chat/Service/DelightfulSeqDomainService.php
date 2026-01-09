@@ -174,7 +174,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 break;
             case ConversationType::User:
                 // todo 一定要做! publishsubscribe用rabbitmqimplement,不再用redis的pub/sub. 同时,push后need客户端returnack,然后updateseq的status
-                // todo 一定要做! 只推seq_id,publishsubscribe收到seq_id后,再去database查seq详情,再推给客户端
+                // todo 一定要做! 只推seq_id,publishsubscribe收到seq_id后,再去database查seqdetail,再推给客户端
                 $pushData = SeqAssembler::getClientSeqStruct($selfSeqEntity, $messageEntity)->toArray();
                 // 不打印敏感info
                 $pushLogData = [

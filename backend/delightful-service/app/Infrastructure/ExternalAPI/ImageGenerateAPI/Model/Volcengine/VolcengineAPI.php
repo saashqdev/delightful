@@ -61,7 +61,7 @@ class VolcengineAPI
     }
 
     /**
-     * querytask结果.
+     * querytaskresult.
      */
     public function getTaskResult(array $params): array
     {

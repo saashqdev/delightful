@@ -22,10 +22,10 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->bigInteger('mode_id')->unsigned()->default(0)->comment('modeID');
             $table->bigInteger('group_id')->unsigned()->default(0)->comment('分组ID');
-            $table->string('model_id')->default('')->comment('模型ID');
-            $table->bigInteger('provider_model_id')->unsigned()->default(0)->comment('模型table主键 id');
+            $table->string('model_id')->default('')->comment('modelID');
+            $table->bigInteger('provider_model_id')->unsigned()->default(0)->comment('modeltable主键 id');
             $table->integer('sort')->default(0)->comment('sort权重');
-            $table->string('organization_code', 32)->default('')->comment('organization代码');
+            $table->string('organization_code', 32)->default('')->comment('organizationcode');
             $table->timestamps();
             $table->softDeletes();
         });

@@ -16,14 +16,14 @@ return new class extends Migration {
     {
         // 修改 service_provider 表的 name 字段length
         Schema::table('service_provider', function (Blueprint $table) {
-            $table->string('name', 255)->comment('服务商名称')->change();
+            $table->string('name', 255)->comment('服务商name')->change();
         });
 
         // 修改 service_provider_models 表的相关字段length
         Schema::table('service_provider_models', function (Blueprint $table) {
-            $table->string('name', 255)->comment('模型名称')->change();
-            $table->string('model_version', 255)->comment('模型在服务商下的名称')->change();
-            $table->string('model_id', 255)->comment('模型true实ID')->change();
+            $table->string('name', 255)->comment('modelname')->change();
+            $table->string('model_version', 255)->comment('model在服务商下的name')->change();
+            $table->string('model_id', 255)->comment('modeltrue实ID')->change();
         });
     }
 
@@ -34,14 +34,14 @@ return new class extends Migration {
     {
         // 回滚 service_provider 表的 name 字段length
         Schema::table('service_provider', function (Blueprint $table) {
-            $table->string('name', 50)->comment('服务商名称')->change();
+            $table->string('name', 50)->comment('服务商name')->change();
         });
 
         // 回滚 service_provider_models 表的相关字段length
         Schema::table('service_provider_models', function (Blueprint $table) {
-            $table->string('name', 50)->comment('模型名称')->change();
-            $table->string('model_version', 50)->comment('模型在服务商下的名称')->change();
-            $table->string('model_id', 50)->comment('模型true实ID')->change();
+            $table->string('name', 50)->comment('modelname')->change();
+            $table->string('model_version', 50)->comment('model在服务商下的name')->change();
+            $table->string('model_id', 50)->comment('modeltrue实ID')->change();
         });
     }
 };

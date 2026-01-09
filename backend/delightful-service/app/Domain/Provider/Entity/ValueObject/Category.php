@@ -15,8 +15,8 @@ enum Category: string
     public function label(): string
     {
         return match ($this) {
-            self::LLM => '大模型',
-            self::VLM => '视觉模型',
+            self::LLM => '大model',
+            self::VLM => '视觉model',
         };
     }
 }

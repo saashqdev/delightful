@@ -64,7 +64,7 @@ class DelightfulAgentEntity extends AbstractEntity
     protected ?int $status = null;
 
     /**
-     * organization编码
+     * organizationencoding
      */
     protected string $organizationCode;
 

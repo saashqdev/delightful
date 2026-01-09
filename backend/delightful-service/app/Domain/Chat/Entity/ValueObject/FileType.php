@@ -33,7 +33,7 @@ enum FileType: int
     // audio
     case Audio = 7;
 
-    // 压缩包
+    // compresspackage
     case Compress = 8;
 
     public static function getTypeFromFileExtension(string $fileExtension): self
@@ -54,7 +54,7 @@ enum FileType: int
             'mp4', 'avi', 'rmvb', 'rm', 'mpg', 'mpeg', 'mpe', 'wmv', 'mkv', 'vob', 'mov', 'qt', 'flv', 'f4v', 'swf' => self::Video,
             // audio
             'mp3', 'wma', 'wav', 'mod', 'ra', 'cd', 'md', 'asf', 'aac', 'ape', 'mid', 'ogg', 'm4a', 'vqf' => self::Audio,
-            // 压缩包
+            // compresspackage
             'zip', 'rar', '7z', 'tar', 'gz', 'bz2', 'cab', 'iso', 'lzh', 'ace', 'arj', 'uue', 'jar' => self::Compress,
             default => self::File,
         };

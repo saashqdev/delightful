@@ -53,7 +53,7 @@ class ByteDanceSTSService
      *
      * @param string $delightfulId userDelightful ID
      * @param int $duration valid期（秒），default7200秒
-     * @param bool $refresh 是否强制refreshtoken，defaultfalse
+     * @param bool $refresh 是否forcerefreshtoken，defaultfalse
      * @return array containJWT Token和相关info的array
      * @throws Exception
      */
@@ -63,7 +63,7 @@ class ByteDanceSTSService
             ExceptionBuilder::throw(AsrErrorCode::InvalidDelightfulId, 'asr.config_error.invalid_delightful_id');
         }
 
-        // checkcache（如果不是强制refresh）
+        // checkcache（如果不是forcerefresh）
         $cacheKey = $this->getCacheKey($delightfulId);
         if (! $refresh) {
             $cachedData = $this->getCachedJwtToken($cacheKey);
@@ -82,7 +82,7 @@ class ByteDanceSTSService
             }
         }
 
-        // cache中没有或已过期，或者强制refresh，getnewJWT Token
+        // cache中没有或已过期，或者forcerefresh，getnewJWT Token
         $appId = config('asr.volcengine.app_id');
         $accessToken = config('asr.volcengine.token');
 
@@ -92,7 +92,7 @@ class ByteDanceSTSService
 
         $jwtToken = $this->getJwtToken($appId, $accessToken, $duration);
 
-        // buildreturn数据
+        // buildreturndata
         $tokenData = [
             'jwt_token' => $jwtToken,
             'app_id' => $appId,
@@ -119,8 +119,8 @@ class ByteDanceSTSService
     /**
      * getJWT token.
      *
-     * @param string $appId 应用ID
-     * @param string $accessToken 访问token
+     * @param string $appId applicationID
+     * @param string $accessToken accesstoken
      * @param int $duration valid期（秒），default7200秒
      * @return string JWT token
      * @throws Exception
@@ -156,7 +156,7 @@ class ByteDanceSTSService
             $responseData = json_decode($responseBody, true);
 
             if (json_last_error() !== JSON_ERROR_NONE) {
-                $this->logger->error('解析responseJSONfail', [
+                $this->logger->error('parseresponseJSONfail', [
                     'response' => $responseBody,
                     'error' => json_last_error_msg(),
                 ]);
@@ -253,7 +253,7 @@ class ByteDanceSTSService
      * 从cachegetJWT Token.
      *
      * @param string $cacheKey cache键
-     * @return null|array cache的数据或null
+     * @return null|array cache的data或null
      */
     private function getCachedJwtToken(string $cacheKey): ?array
     {
@@ -286,7 +286,7 @@ class ByteDanceSTSService
      * cacheJWT Token.
      *
      * @param string $cacheKey cache键
-     * @param array $tokenData Token数据
+     * @param array $tokenData Tokendata
      * @param int $expiry 过期time（秒）
      */
     private function cacheJwtToken(string $cacheKey, array $tokenData, int $expiry): void

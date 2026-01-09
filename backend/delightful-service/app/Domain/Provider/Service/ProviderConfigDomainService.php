@@ -44,7 +44,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * pass service_provider_config_id get服务商、configuration和模型的aggregateinfo.
+     * pass service_provider_config_id get服务商、configuration和model的aggregateinfo.
      * 支持传入服务商template id.
      * @param string $configId 可能是template id，such as ProviderConfigIdAssembler
      */
@@ -89,7 +89,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             return [];
         }
 
-        // 批量getconfiguration实体（不needorganization编码filter）
+        // 批量getconfiguration实体（不needorganizationencodingfilter）
         $configEntities = $this->serviceProviderConfigRepository->getByIdsWithoutOrganizationFilter($configIds);
         if (empty($configEntities)) {
             return [];
@@ -103,14 +103,14 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         }
         $providerIds = array_unique($providerIds);
 
-        // 批量get服务商实体（不needorganization编码filter）
+        // 批量get服务商实体（不needorganizationencodingfilter）
         $providerEntities = $this->providerRepository->getByIdsWithoutOrganizationFilter($providerIds);
         if (empty($providerEntities)) {
             return [];
         }
 
         // 建立configurationID到服务商实体的映射
-        // 两个array都是以 id 为 key，can直接访问
+        // 两个array都是以 id 为 key，can直接access
         $configToProviderMap = [];
         foreach ($configEntities as $configId => $config) {
             $providerId = $config->getServiceProviderId();
@@ -382,18 +382,18 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * 统一的configuration数据update逻辑.
-     * handle脱敏数据merge、字段update和save操作.
+     * 统一的configurationdataupdate逻辑.
+     * handle脱敏datamerge、字段update和save操作.
      */
     private function updateProviderConfigData(ProviderDataIsolation $dataIsolation, ProviderConfigEntity $existingConfig, ProviderConfigEntity $newConfigData): ProviderConfigEntity
     {
-        // handle脱敏后的configuration数据
+        // handle脱敏后的configurationdata
         $processedConfig = $this->processDesensitizedConfig(
             $newConfigData->getConfig(),
             $existingConfig->getConfig()
         );
 
-        // updateconfiguration数据
+        // updateconfigurationdata
         $existingConfig->setConfig($processedConfig);
 
         // update其他字段（如果有提供）

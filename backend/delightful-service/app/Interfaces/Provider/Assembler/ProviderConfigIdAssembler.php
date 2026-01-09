@@ -14,7 +14,7 @@ use InvalidArgumentException;
 
 /**
  * service商templateIDprocess工具类
- * 用于generate和解析service商templateID（use固定的数value型string）.
+ * 用于generate和parseservice商templateID（use固定的数value型string）.
  */
 class ProviderConfigIdAssembler
 {
@@ -41,7 +41,7 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * according totemplateconfigurationID解析出ProviderCode和Category.
+     * according totemplateconfigurationIDparse出ProviderCode和Category.
      * 支持数value型stringformat的templateID.
      * @return null|array{providerCode: ProviderCode, category: Category}
      */

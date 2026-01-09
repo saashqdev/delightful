@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Domain\ModelGateway\Entity\ValueObject;
 
 /**
- * 访问tokentype: user、organization、应用.
- * 应用/user是跨organization的.
+ * accesstokentype: user、organization、application.
+ * application/user是跨organization的.
  */
 enum AccessTokenType: string
 {
@@ -24,7 +24,7 @@ enum AccessTokenType: string
     case Organization = 'organization';
 
     /**
-     * 应用版.
+     * application版.
      */
     case Application = 'application';
 

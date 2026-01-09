@@ -30,7 +30,7 @@ class ProviderConfigItem extends AbstractDTO
     protected string $modelVersion = '';
 
     /**
-     * service_provider_models.id 模型ID.
+     * service_provider_models.id modelID.
      */
     protected string $providerModelId;
 

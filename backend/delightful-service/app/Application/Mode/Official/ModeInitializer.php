@@ -250,7 +250,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'Please enter the content to converse with the agent.',
-                    'zh_CN' => '请输入与智能体conversation的content',
+                    'zh_CN' => '请input与智能体conversation的content',
                 ]),
                 'identifier' => 'chat',
                 'icon' => 'IconMessages',
@@ -277,7 +277,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the theme and specific requirements of the PPT, or upload files, Be Delightful will help you create a beautiful PPT. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您可输入 PPT 的theme和具体要求，或uploadfile，超级麦吉将为您制作精美的 PPT。 Enter send ; Shift + Enter 换行',
+                    'zh_CN' => '您可input PPT 的theme和具体要求，或uploadfile，超级麦吉将为您制作精美的 PPT。 Enter send ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'ppt',
                 'icon' => 'IconPresentation',
@@ -300,11 +300,11 @@ class ModeInitializer
                 'id' => '821139625302740993',
                 'name_i18n' => json_encode([
                     'en_US' => 'Analysis',
-                    'zh_CN' => '数据分析',
+                    'zh_CN' => 'data分析',
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can select data sources or upload Excel files, and then enter the requirements for analysis. Be Delightful will perform comprehensive data analysis for you. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您可选择数据源或upload Excel file后，输入need分析的需求，超级麦吉将为您进行全面的数据分析。 Enter send ; Shift + Enter 换行',
+                    'zh_CN' => '您optional择data源或upload Excel file后，inputneed分析的需求，超级麦吉将为您进行全面的data分析。 Enter send ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'data_analysis',
                 'icon' => 'IconChartBarPopular',
@@ -331,7 +331,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the theme and specific requirements of your research report, or upload a file, and Super Maggie will write a complete and detailed report for you. Press Enter to send; press Shift + Enter to wrap lines.',
-                    'zh_CN' => '您可输入研究报告的theme和具体需求，或uploadfile，超级麦吉将为您进行完整且详细的报告撰写。 Enter send ; Shift + Enter 换行',
+                    'zh_CN' => '您可input研究报告的theme和具体需求，或uploadfile，超级麦吉将为您进行完整且详细的报告撰写。 Enter send ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'report',
                 'icon' => 'IconMicroscope',
@@ -358,7 +358,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Be Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您可输入will议的文字content，或uploadwill议录音file，超级麦吉将为您进行完整的will议总结。 Enter send ; Shift + Enter 换行',
+                    'zh_CN' => '您可inputwill议的文字content，或uploadwill议录音file，超级麦吉将为您进行完整的will议总结。 Enter send ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'summary',
                 'icon' => 'IconFileDescription',
@@ -385,7 +385,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Be Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '请输入您的需求，或uploadfile，超级麦吉将为您resolveissue。 Enter send ; Shift + Enter 换行',
+                    'zh_CN' => '请input您的需求，或uploadfile，超级麦吉将为您resolveissue。 Enter send ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'general',
                 'icon' => 'IconBeDelightful',

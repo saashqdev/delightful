@@ -56,7 +56,7 @@ interface DelightfulChatSeqRepositoryInterface
     /**
      * @return ClientSequenceResponse[]
      * @todo 挪到 delightful_chat_topic_messages process
-     * session窗口滚动load历史record.
+     * session窗口滚动loadhistoryrecord.
      * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
@@ -112,10 +112,10 @@ interface DelightfulChatSeqRepositoryInterface
 
     public function deleteSeqMessageByIds(array $seqIds): int;
 
-    // 为了移除脏数据写的method
+    // 为了移除脏data写的method
     public function getSeqByDelightfulId(string $delightfulId, int $limit): array;
 
-    // 为了移除脏数据写的method
+    // 为了移除脏data写的method
     public function getHasTrashMessageUsers(): array;
 
     public function updateSeqExtra(string $seqId, SeqExtra $seqExtra): bool;

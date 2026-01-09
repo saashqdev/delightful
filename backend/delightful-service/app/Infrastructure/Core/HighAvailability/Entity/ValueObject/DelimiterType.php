@@ -15,7 +15,7 @@ use InvalidArgumentException;
 enum DelimiterType: string
 {
     /**
-     * 高可用应用type+模型type+organization编码的分隔符.
+     * 高可用applicationtype+modeltype+organizationencoding的分隔符.
      */
     case HIGH_AVAILABILITY = '||';
 

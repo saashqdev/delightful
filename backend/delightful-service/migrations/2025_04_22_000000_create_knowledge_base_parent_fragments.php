@@ -20,10 +20,10 @@ return new class extends Migration {
 
             // 元data
             $table->string('knowledge_base_code', 255);
-            $table->string('knowledge_base_document_code', 255)->comment('关联知识库documentcode');
-            $table->string('organization_code')->comment('organization编码');
+            $table->string('knowledge_base_document_code', 255)->comment('关联knowledge basedocumentcode');
+            $table->string('organization_code')->comment('organizationencoding');
 
-            // 操作记录
+            // 操作record
             $table->string('created_uid', 255)->comment('create者ID');
             $table->string('updated_uid', 255)->comment('update者ID');
 

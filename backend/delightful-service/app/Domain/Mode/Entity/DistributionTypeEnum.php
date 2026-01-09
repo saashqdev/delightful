@@ -15,7 +15,7 @@ enum DistributionTypeEnum: int
     case INDEPENDENT = 1;
 
     /**
-     * 继承configurationmode.
+     * inheritconfigurationmode.
      */
     case INHERITED = 2;
 
@@ -26,7 +26,7 @@ enum DistributionTypeEnum: int
     {
         return match ($this) {
             self::INDEPENDENT => '独立configuration',
-            self::INHERITED => '继承configuration',
+            self::INHERITED => 'inheritconfiguration',
         };
     }
 
@@ -50,7 +50,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * 是否为继承configuration.
+     * 是否为inheritconfiguration.
      */
     public function isInherited(): bool
     {
@@ -77,7 +77,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * get选项array（用于前端展示）.
+     * getoptionarray（用于前端展示）.
      */
     public static function getOptions(): array
     {

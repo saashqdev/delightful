@@ -49,12 +49,12 @@ abstract class VolcengineApi
     protected string $region;
 
     /**
-     * 接口name.
+     * interfacename.
      */
     protected string $action;
 
     /**
-     * 接口version.
+     * interfaceversion.
      */
     protected string $version;
 

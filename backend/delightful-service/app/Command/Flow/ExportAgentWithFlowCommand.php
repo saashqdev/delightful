@@ -62,17 +62,17 @@ class ExportAgentWithFlowCommand extends HyperfCommand
             return 1;
         }
 
-        // 从助理实体中getorganization代码和userID
+        // 从助理实体中getorganizationcode和userID
         $orgCode = $agent->getOrganizationCode();
         $userId = $agent->getCreatedUid();
 
-        // create数据隔离object
+        // createdata隔离object
         $dataIsolation = new FlowDataIsolation($orgCode, $userId);
 
         // exportprocess及助理info
         $exportData = $this->exportImportService->exportFlowWithAgent($dataIsolation, $flowCode, $agent);
 
-        // 将数据save为temporaryfile
+        // 将datasave为temporaryfile
         $filename = "agent-export-{$agentId}-" . time() . '.json';
         $tempFile = tempnam(sys_get_temp_dir(), 'flow_export_');
         file_put_contents($tempFile, json_encode($exportData, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
@@ -83,16 +83,16 @@ class ExportAgentWithFlowCommand extends HyperfCommand
 
         // use已有的fileserviceupload
         try {
-            // 定义upload目录
+            // 定义uploaddirectory
             $subDir = 'open';
 
             // createuploadfileobject（不自动重命名）
             $uploadFile = new UploadFile($tempFile, $subDir, '', false);
 
-            // uploadfile（指定不自动create目录）
+            // uploadfile（指定不自动createdirectory）
             $this->fileDomainService->uploadByCredential($orgCode, $uploadFile);
 
-            // generate可访问的链接
+            // generate可access的链接
             $fileLink = $this->fileDomainService->getLink($orgCode, $uploadFile->getKey(), StorageBucketType::Private);
 
             if ($fileLink) {

@@ -40,7 +40,7 @@ use Throwable;
 class ModelGatewayMapper extends ModelMapper
 {
     /**
-     * 持久化的customize数据.
+     * 持久化的customizedata.
      * @var array<string, OdinModelAttributes>
      */
     protected array $attributes = [];
@@ -81,7 +81,7 @@ class ModelGatewayMapper extends ModelMapper
 
     /**
      * 内部use chat 时，一定是use该method.
-     * will自动替代为本地代理模型.
+     * will自动替代为本地代理model.
      */
     public function getChatModelProxy(BaseDataIsolation $dataIsolation, string $model, bool $useOfficialAccessToken = false): DelightfulAILocalModel
     {
@@ -98,7 +98,7 @@ class ModelGatewayMapper extends ModelMapper
 
     /**
      * 内部use embedding 时，一定是use该method.
-     * will自动替代为本地代理模型.
+     * will自动替代为本地代理model.
      */
     public function getEmbeddingModelProxy(BaseDataIsolation $dataIsolation, string $model): DelightfulAILocalModel
     {
@@ -116,7 +116,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 该methodget到的一定是真实call的模型.
+     * 该methodget到的一定是真实call的model.
      * 仅 ModelGateway 领域use.
      * @param string $model expected是管理后台的 model_id，过度阶段接受传入 model_version
      */
@@ -131,9 +131,9 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 该methodget到的一定是真实call的模型.
+     * 该methodget到的一定是真实call的model.
      * 仅 ModelGateway 领域use.
-     * @param string $model 模型名称 expected是管理后台的 model_id，过度阶段接受 model_version
+     * @param string $model modelname expected是管理后台的 model_id，过度阶段接受 model_version
      */
     public function getOrganizationEmbeddingModel(BaseDataIsolation $dataIsolation, string $model): EmbeddingInterface|OdinModel
     {
@@ -150,7 +150,7 @@ class ModelGatewayMapper extends ModelMapper
         $dataIsolation = ModelGatewayDataIsolation::createByBaseDataIsolation($dataIsolation);
         $result = $this->getByAdmin($dataIsolation, $model);
 
-        // 只return ImageGenerationModelWrapper type的结果
+        // 只return ImageGenerationModelWrapper type的result
         if ($result instanceof ImageModel) {
             return $result;
         }
@@ -159,7 +159,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * getcurrentorganization下的所有可用 chat 模型.
+     * getcurrentorganization下的所有可用 chat model.
      * @return OdinModel[]
      */
     public function getChatModels(BaseDataIsolation $dataIsolation): array
@@ -169,7 +169,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * getcurrentorganization下的所有可用 embedding 模型.
+     * getcurrentorganization下的所有可用 embedding model.
      * @return OdinModel[]
      */
     public function getEmbeddingModels(BaseDataIsolation $dataIsolation): array
@@ -222,7 +222,7 @@ class ModelGatewayMapper extends ModelMapper
 
     protected function loadEnvModels(): void
     {
-        // env 添加的模型增加上 attributes
+        // env 添加的model增加上 attributes
         /**
          * @var string $name
          * @var AbstractModel $model
@@ -267,7 +267,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * getcurrentorganization下指定type的所有可用模型.
+     * getcurrentorganization下指定type的所有可用model.
      * @return OdinModel[]
      */
     private function getModelsByType(ModelGatewayDataIsolation $dataIsolation, ModelType $modelType): array
@@ -295,14 +295,14 @@ class ModelGatewayMapper extends ModelMapper
             $list[$name] = new OdinModel(key: $name, model: $model, attributes: $this->attributes[$name]);
         }
 
-        // getcurrent套餐下的可用模型
+        // getcurrent套餐下的可用model
         $availableModelIds = $dataIsolation->getSubscriptionManager()->getAvailableModelIds($modelType);
 
-        // needcontain官方organization的数据
+        // needcontain官方organization的data
         $providerDataIsolation = ProviderDataIsolation::createByBaseDataIsolation($dataIsolation);
         $providerDataIsolation->setContainOfficialOrganization(true);
 
-        // load 模型
+        // load model
         $providerModels = $this->providerManager->getModelsByModelIds($providerDataIsolation, $availableModelIds, $modelType);
 
         $modelLogs = [];
@@ -328,7 +328,7 @@ class ModelGatewayMapper extends ModelMapper
         // get 服务商
         $providers = $this->providerManager->getProvidersByIds($providerDataIsolation, $providerIds);
 
-        // 组装数据
+        // 组装data
         foreach ($providerModels as $providerModel) {
             if (! $providerConfig = $providerConfigs[$providerModel->getServiceProviderConfigId()] ?? null) {
                 $modelLogs[$providerModel->getModelId()]['error'] = 'ProviderConfig not found';
@@ -361,7 +361,7 @@ class ModelGatewayMapper extends ModelMapper
             $list = $orderedList;
         }
 
-        $this->logger->info('检索到模型', $modelLogs);
+        $this->logger->info('检索到model', $modelLogs);
 
         return $list;
     }
@@ -400,11 +400,11 @@ class ModelGatewayMapper extends ModelMapper
             // customize服务商统一显示别名，如果没有别名则显示“customize服务商”（need考虑多语言）
             $providerName = $providerConfigEntity->getLocalizedAlias($providerDataIsolation->getLanguage());
         } else {
-            // 内置服务商的统一显示 服务商名称，不用显示别名（need考虑多语言）
+            // 内置服务商的统一显示 服务商name，不用显示别名（need考虑多语言）
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 
-        // 如果不是官方organization，但是模型是官方organization，统一显示 Delightful
+        // 如果不是官方organization，但是model是官方organization，统一显示 Delightful
         if (! $providerDataIsolation->isOfficialOrganization()
             && in_array($providerConfigEntity->getOrganizationCode(), $providerDataIsolation->getOfficialOrganizationCodes())) {
             $providerName = 'Delightful';
@@ -422,12 +422,12 @@ class ModelGatewayMapper extends ModelMapper
             $iconUrl = '';
         }
 
-        // according to模型typereturndifferent的包装object
+        // according tomodeltypereturndifferent的package装object
         if ($providerModelEntity->getModelType()->isVLM()) {
             return new ImageModel($providerConfigItem->toArray(), $providerModelEntity->getModelVersion(), (string) $providerModelEntity->getId(), $providerEntity->getProviderCode());
         }
 
-        // 对于LLM/Embedding模型，保持原有逻辑
+        // 对于LLM/Embeddingmodel，保持原有逻辑
         return new OdinModel(
             key: $key,
             model: $this->createModel($providerModelEntity->getModelVersion(), [
@@ -473,21 +473,21 @@ class ModelGatewayMapper extends ModelMapper
             $checkStatus = false;
         }
 
-        // get模型
+        // getmodel
         $providerModelEntity = $this->providerManager->getAvailableByModelIdOrId($providerDataIsolation, $model, $checkStatus);
         if (! $providerModelEntity) {
-            $this->logger->info('模型不存在', ['model' => $model]);
+            $this->logger->info('model不存在', ['model' => $model]);
             return null;
         }
         if (! $dataIsolation->isOfficialOrganization() && ! $providerModelEntity->getStatus()->isEnabled()) {
-            $this->logger->info('模型被禁用', ['model' => $model]);
+            $this->logger->info('model被禁用', ['model' => $model]);
             return null;
         }
 
-        // checkcurrent套餐是否有这个模型的usepermission - 目前只有 LLM 模型有这个限制
+        // checkcurrent套餐是否有这个model的usepermission - 目前只有 LLM model有这个限制
         if ($providerModelEntity->getModelType()->isLLM()) {
             if (! $dataIsolation->isOfficialOrganization() && ! $dataIsolation->getSubscriptionManager()->isValidModelAvailable($providerModelEntity->getModelId(), $modelType)) {
-                $this->logger->info('模型不在可用名单', ['model' => $providerModelEntity->getModelId(), 'model_type' => $modelType?->value]);
+                $this->logger->info('model不在可用名单', ['model' => $providerModelEntity->getModelId(), 'model_type' => $modelType?->value]);
                 return null;
             }
         }
@@ -516,7 +516,7 @@ class ModelGatewayMapper extends ModelMapper
 
     private function createProxy(ModelGatewayDataIsolation $dataIsolation, string $model, ModelOptions $modelOptions, ApiOptions $apiOptions, bool $useOfficialAccessToken = false): DelightfulAILocalModel
     {
-        // useModelFactorycreate模型实例
+        // useModelFactorycreatemodel实例
         $odinModel = ModelFactory::create(
             DelightfulAILocalModel::class,
             $model,

@@ -26,7 +26,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
      */
     public function testHighAvaiable()
     {
-        // buildtest数据
+        // buildtestdata
         $expectedResponse = [
             'id' => '',
             'object' => 'chat.completion',
@@ -106,14 +106,14 @@ class ModelGatewayApiTest extends AbstractHttpTest
         // ensureat least有一个requestsuccess
         $this->assertGreaterThan(0, $successCount, 'at leastshould有一个requestsuccess');
 
-        // 输出success率
+        // outputsuccess率
         $successRate = ($successCount / $count) * 100;
         echo PHP_EOL;
         echo "testHighAvaiable requestsuccess率：{$successRate}% ({$successCount}/" . $count . ')' . PHP_EOL;
     }
 
     /**
-     * test chatCompletions method的基本功能.
+     * test chatCompletions method的基本feature.
      */
     public function testChatCompletions(): void
     {
@@ -155,7 +155,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * test embeddings method的基本功能.
+     * test embeddings method的基本feature.
      */
     public function testEmbeddings(): void
     {
@@ -198,7 +198,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * 提供test用的通用message数据.
+     * 提供test用的通用messagedata.
      */
     private function getTestMessages(): array
     {
@@ -226,7 +226,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * build基础的request数据.
+     * build基础的requestdata.
      */
     private function buildRequestData(array $overrides = []): array
     {

@@ -294,7 +294,7 @@ class MessageAssembler
                 continue;
             }
 
-            // 如果不是currentuser的message，且content超过500字符，则截断
+            // 如果不是currentuser的message，且content超过500字符，则truncate
             if (! empty($currentUserNickname) && $role !== $currentUserNickname && mb_strlen($content, 'UTF-8') > 500) {
                 $content = mb_substr($content, 0, 500, 'UTF-8') . '...';
             }

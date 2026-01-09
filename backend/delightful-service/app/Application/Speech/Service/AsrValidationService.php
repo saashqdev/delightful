@@ -42,7 +42,7 @@ readonly class AsrValidationService
      *
      * @param string $projectId 项目ID
      * @param string $userId userID
-     * @param string $organizationCode organization编码
+     * @param string $organizationCode organizationencoding
      * @return ProjectEntity 项目实体
      */
     public function validateProjectAccess(string $projectId, string $userId, string $organizationCode): ProjectEntity
@@ -64,7 +64,7 @@ readonly class AsrValidationService
                 return $projectEntity;
             }
 
-            // checkuser是否是项目成员
+            // checkuser是否是项目member
             if ($this->projectMemberDomainService->isProjectMemberByUser((int) $projectId, $userId)) {
                 return $projectEntity;
             }
@@ -80,12 +80,12 @@ readonly class AsrValidationService
             // 所有permissioncheck都fail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessDeniedUser);
         } catch (BusinessException $e) {
-            // process ExceptionBuilder::throw 抛出的业务exception
+            // process ExceptionBuilder::throw throw的业务exception
             if ($e->getCode() === BeAgentErrorCode::PROJECT_NOT_FOUND->value) {
                 ExceptionBuilder::throw(AsrErrorCode::ProjectNotFound);
             }
             if ($e->getCode() >= 43000 && $e->getCode() < 44000) {
-                // 已经是 AsrErrorCode，直接重新抛出
+                // 已经是 AsrErrorCode，直接重新throw
                 throw $e;
             }
 

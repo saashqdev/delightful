@@ -59,12 +59,12 @@ interface DelightfulDepartmentRepositoryInterface
     public function getOrganizationDepartments(string $organizationCode, array $fields = ['*'], bool $keyById = false): array;
 
     /**
-     * 增加department说明书.
+     * 增加departmentinstruction书.
      */
     public function addDepartmentDocument(string $departmentId, string $documentId): void;
 
     /**
-     * getdepartment的所有子department的成员total.
+     * getdepartment的所有子department的membertotal.
      */
     public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int;
 
@@ -90,7 +90,7 @@ interface DelightfulDepartmentRepositoryInterface
 
     /**
      * 批量get多个organization的根departmentinfo.
-     * @param array $organizationCodes organization代码array
+     * @param array $organizationCodes organizationcodearray
      * @return DelightfulDepartmentEntity[] 根department实体array
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array;

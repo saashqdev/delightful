@@ -79,7 +79,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * according to编码getorganization.
+     * according toencodinggetorganization.
      */
     public function getByCode(string $code): ?OrganizationEntity
     {
@@ -91,7 +91,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * according to编码list批量getorganization.
+     * according toencodinglist批量getorganization.
      */
     public function getByCodes(array $codes): array
     {
@@ -130,7 +130,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     {
         $query = OrganizationModel::query();
 
-        // 应用filter条件
+        // applicationfilter条件
         $this->applyFilters($query, $filters);
 
         // gettotal
@@ -176,7 +176,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * check编码是否已存在.
+     * checkencoding是否已存在.
      */
     public function existsByCode(string $code, ?int $excludeId = null): bool
     {
@@ -190,7 +190,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 应用filter条件.
+     * applicationfilter条件.
      */
     private function applyFilters(Builder $query, ?array $filters): void
     {

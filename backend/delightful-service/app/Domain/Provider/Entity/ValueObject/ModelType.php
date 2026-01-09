@@ -12,7 +12,7 @@ enum ModelType: int
     case TEXT_TO_IMAGE = 0; // 文生图
     case IMAGE_TO_IMAGE = 1; // 图生图
     case IMAGE_ENHANCE = 2; // image增强
-    case LLM = 3; // 大模型
+    case LLM = 3; // 大model
     case EMBEDDING = 4; // 嵌入
 
     public function label(): string
@@ -21,7 +21,7 @@ enum ModelType: int
             self::TEXT_TO_IMAGE => '文生图',
             self::IMAGE_TO_IMAGE => '图生图',
             self::IMAGE_ENHANCE => 'image增强',
-            self::LLM => '大模型',
+            self::LLM => '大model',
             self::EMBEDDING => '嵌入',
         };
     }

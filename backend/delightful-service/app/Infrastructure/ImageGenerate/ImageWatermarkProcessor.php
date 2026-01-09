@@ -64,14 +64,14 @@ class ImageWatermarkProcessor
             $implicitWatermark
         );
 
-        // 重新编码为base64并upload
+        // 重新encoding为base64并upload
         $outputPrefix = $this->generateBase64Prefix($targetFormat);
         return $this->processBase64Images($outputPrefix . base64_encode($xmpWatermarkedData), $imageGenerateRequest);
     }
 
     /**
      * 为URLformatimage添加水印
-     * 可选择returnformat：URL 或 base64.
+     * optional择returnformat：URL 或 base64.
      */
     public function addWatermarkToUrl(string $imageUrl, ImageGenerateRequest $imageGenerateRequest): string
     {
@@ -88,7 +88,7 @@ class ImageWatermarkProcessor
             $implicitWatermark
         );
 
-        // according toactual输出formatgeneratecorrect的base64前缀
+        // according toactualoutputformatgeneratecorrect的base64前缀
         $outputPrefix = $this->generateBase64Prefix($imageData);
         return $this->processBase64Images($outputPrefix . base64_encode($xmpWatermarkedData), $imageGenerateRequest);
     }
@@ -114,13 +114,13 @@ class ImageWatermarkProcessor
 
         $image = imagecreatefromstring($imageData);
         if ($image === false) {
-            throw new Exception('无法parseURLimage数据: ');
+            throw new Exception('无法parseURLimagedata: ');
         }
         $watermarkConfig = $imageGenerateRequest->getWatermarkConfig();
         // 添加视觉水印
         $watermarkedImage = $this->addWatermarkToImageResource($image, $watermarkConfig);
 
-        // use检测到的format进行无损输出
+        // use检测到的format进行无损output
         ob_start();
         $this->outputImage($watermarkedImage, $detectedFormat);
         $watermarkedData = ob_get_contents();
@@ -187,7 +187,7 @@ class ImageWatermarkProcessor
             $builtinY = $y - (int) ($fontSize * 0.8); // 从基线positionconvert为顶部position
             imagestring($image, 5, $x, $builtinY, $text, $fontColor);
 
-            // 如果文本contain中文但没有TTF字体，记录warning
+            // 如果文本contain中文但没有TTF字体，recordwarning
             if ($this->fontProvider->containsChinese($text)) {
                 $this->logger->warning('Chinese text detected but TTF font not available, may display incorrectly');
             }
@@ -272,7 +272,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 解码base64image数据.
+     * 解码base64imagedata.
      */
     private function decodeBase64Image(string $base64Image): string
     {
@@ -283,7 +283,7 @@ class ImageWatermarkProcessor
 
         $imageData = base64_decode($base64Image);
         if ($imageData === false) {
-            throw new Exception('invalid的base64image数据');
+            throw new Exception('invalid的base64imagedata');
         }
 
         return $imageData;
@@ -310,7 +310,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 输出image（无损version）.
+     * outputimage（无损version）.
      * @param mixed $image
      * @param string $format 目标format (png/jpeg/webp/gif)
      */
@@ -328,7 +328,7 @@ class ImageWatermarkProcessor
         try {
             switch (strtolower($format)) {
                 case 'png':
-                    imagepng($image, null, 0); // PNG无损压缩
+                    imagepng($image, null, 0); // PNG无损compress
                     break;
                 case 'webp':
                     if (function_exists('imagewebp')) {
@@ -356,7 +356,7 @@ class ImageWatermarkProcessor
                     break;
             }
         } catch (Exception $e) {
-            // 编码fail时usePNG兜底
+            // encodingfail时usePNG兜底
             $this->logger->error('Image encoding failed, falling back to PNG', [
                 'format' => $format,
                 'error' => $e->getMessage(),
@@ -366,7 +366,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 检测图像数据的format.
+     * 检测图像data的format.
      */
     private function detectImageFormat(string $imageData): string
     {
@@ -432,14 +432,14 @@ class ImageWatermarkProcessor
         try {
             $subDir = 'open';
 
-            // 直接use已containXMP水印的base64数据
+            // 直接use已containXMP水印的base64data
             $uploadFile = new UploadFile($base64Image, $subDir, '');
 
             $fileDomainService->uploadByCredential($organizationCode, $uploadFile, StorageBucketType::Public);
 
             $fileLink = $fileDomainService->getLink($organizationCode, $uploadFile->getKey(), StorageBucketType::Public);
 
-            // settingobject元数据作为备用方案
+            // settingobject元data作为备用方案
             $validityPeriod = $imageGenerateRequest->getValidityPeriod();
             $metadataContent = [];
             if ($validityPeriod !== null) {

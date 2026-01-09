@@ -31,7 +31,7 @@ class ClientMessage extends AbstractEntity
 
     protected string $type;
 
-    // 回显未读人数,如果user点击了详情,再request具体的messagecontent
+    // 回显未读人数,如果user点击了detail,再request具体的messagecontent
     protected ?int $unreadCount;
 
     // messagesend者,自己或者他人
@@ -40,7 +40,7 @@ class ClientMessage extends AbstractEntity
     // messagesendtime，与 delightful_message_id 一起，用于withdraw、editmessage时的唯一性校验。
     protected int $sendTime;
 
-    // chatmessagestatus:unread | seen | read |revoked  .对应中文释义：未读|已读|已查看（非纯文本的复杂typemessage，user点击了详情）  | withdraw
+    // chatmessagestatus:unread | seen | read |revoked  .对应中文释义：未读|已读|已查看（非纯文本的复杂typemessage，user点击了detail）  | withdraw
     protected ?string $status;
 
     protected MessageInterface $content;

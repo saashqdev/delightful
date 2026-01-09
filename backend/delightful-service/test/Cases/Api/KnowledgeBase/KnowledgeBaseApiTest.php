@@ -644,10 +644,10 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $this->assertSame(1000, $res['code'], $res['message']);
     }
 
-    // delete所有知识库
+    // delete所有knowledge base
     public function deleteAllKnowledgeBase()
     {
-        // get知识库list
+        // getknowledge baselist
         $res = $this->post(self::API . '/queries', [], $this->getCommonHeaders());
         $this->assertSame(1000, $res['code'], $res['message']);
         $knowledgeBases = $res['data']['list'];
@@ -658,7 +658,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * createtest文档并return文档数据.
+     * createtest文档并return文档data.
      */
     protected function createDocument(array $overrideData = [], ?string $knowledgeBaseCode = null): array
     {
@@ -690,12 +690,12 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * 清理test数据.
+     * 清理testdata.
      */
     protected function clearTestKnowledgeBaseData()
     {
         // according toactual情况implement清理逻辑
-        // can直接calldatabase操作deletetest数据
+        // can直接calldatabase操作deletetestdata
         // 或者call相应的servicemethod
     }
 
@@ -703,8 +703,8 @@ class KnowledgeBaseApiTest extends HttpTestCase
     {
         $data = array_merge([
             'source_type' => SourceType::EXTERNAL_FILE->value,
-            'name' => 'test知识库',
-            'description' => '这是一个test知识库description',
+            'name' => 'testknowledge base',
+            'description' => '这是一个testknowledge basedescription',
             'icon' => 'qqqq',
             'enabled' => true,
             'is_draft' => true,
@@ -742,7 +742,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * createtest片段并return数据.
+     * createtest片段并returndata.
      */
     protected function createFragment(array $overrideData = [], ?string $documentCode = null, ?string $knowledgeBaseCode = null): array
     {

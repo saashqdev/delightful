@@ -11,7 +11,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 use InvalidArgumentException;
 
 /**
- * 知识库检索configurationvalueobject
+ * knowledge base检索configurationvalueobject
  *
  * contain检索策略、检索method、重sortconfiguration等parameter
  */
@@ -20,14 +20,14 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * currentconfigurationversion.
      *
-     * 用于configuration结构变更时的兼容性process
+     * 用于configuration结构变更时的compatible性process
      */
     public const int CURRENT_VERSION = 1;
 
     /**
      * 检索method.
      *
-     * 可选value：
+     * optionalvalue：
      * - semantic_search: 语义检索
      * - full_text_search: 全文检索
      * - hybrid_search: 混合检索
@@ -57,7 +57,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * 重sort模式.
      *
-     * 可选value：
+     * optionalvalue：
      * - reranking_model: use重sortmodel
      * - weighted_score: use加权分数
      *
@@ -106,7 +106,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * configurationversion.
      *
-     * 用于configuration结构变更时的兼容性process
+     * 用于configuration结构变更时的compatible性process
      */
     private int $version = self::CURRENT_VERSION;
 
@@ -296,7 +296,7 @@ class RetrieveConfig extends AbstractValueObject
      */
     public function setRerankingModel(array $rerankingModel): self
     {
-        // 合并defaultconfiguration
+        // mergedefaultconfiguration
         $this->rerankingModel = array_merge($this->rerankingModel, $rerankingModel);
         return $this;
     }

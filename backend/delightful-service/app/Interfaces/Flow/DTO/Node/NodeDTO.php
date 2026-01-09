@@ -25,12 +25,12 @@ class NodeDTO extends AbstractFlowDTO
     public string $nodeVersion = '';
 
     /**
-     * 节点元数据，可用作给前端的定位，后端仅storage和展示，没有任何逻辑.
+     * 节点元data，可用作给前端的定位，后端仅storage和展示，没有任何逻辑.
      */
     public array $meta = [];
 
     /**
-     * 节点parameterconfiguration，目前依靠array来数据传递.
+     * 节点parameterconfiguration，目前依靠array来data传递.
      */
     public array $params = [];
 
@@ -150,7 +150,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get节点元数据.
+     * get节点元data.
      */
     public function getMeta(): array
     {
@@ -158,7 +158,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set节点元数据.
+     * set节点元data.
      */
     public function setMeta(?array $meta): self
     {
@@ -201,7 +201,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get节点输入.
+     * get节点input.
      */
     public function getInput(): ?NodeInputDTO
     {
@@ -209,7 +209,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set节点输入.
+     * set节点input.
      */
     public function setInput(mixed $input): void
     {
@@ -217,7 +217,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get节点输出.
+     * get节点output.
      */
     public function getOutput(): ?NodeOutputDTO
     {
@@ -225,7 +225,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set节点输出.
+     * set节点output.
      */
     public function setOutput(mixed $output): void
     {
@@ -233,7 +233,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get系统输出.
+     * get系统output.
      */
     public function getSystemOutput(): ?NodeOutputDTO
     {
@@ -241,7 +241,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set系统输出.
+     * set系统output.
      */
     public function setSystemOutput(null|array|NodeOutputDTO $systemOutput): void
     {

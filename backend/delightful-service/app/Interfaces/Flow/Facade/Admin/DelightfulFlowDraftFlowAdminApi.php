@@ -45,7 +45,7 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
         $authorization = $this->getAuthorization();
         $query = new DelightfulFLowDraftQuery($this->request->all());
 
-        // 仅query最new记录
+        // 仅query最newrecord
         $page = new Page(1, DelightfulFlowDraftEntity::MAX_RECORD);
         $query->setOrder(['id' => 'desc']);
         $query->flowCode = $flowId;
@@ -56,7 +56,7 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * query草稿详情.
+     * query草稿detail.
      */
     public function show(string $flowId, string $draftId)
     {

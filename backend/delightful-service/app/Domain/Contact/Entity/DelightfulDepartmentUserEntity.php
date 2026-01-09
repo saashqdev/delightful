@@ -11,7 +11,7 @@ use App\Domain\Contact\Entity\ValueObject\EmployeeType;
 use ArrayAccess;
 
 /**
- * 之前太多地方usearray访问，这里use ArrayAccess 接口来implementarray访问.
+ * 之前太多地方usearrayaccess，这里use ArrayAccess interface来implementarrayaccess.
  */
 class DelightfulDepartmentUserEntity extends AbstractEntity implements ArrayAccess
 {

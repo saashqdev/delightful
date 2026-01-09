@@ -45,7 +45,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
      * executeLLMchat节点.
      *
      * @param VertexResult $vertexResult 节点executeresult
-     * @param ExecutionData $executionData execute数据
+     * @param ExecutionData $executionData executedata
      * @param array $frontResults 前置节点result
      */
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void
@@ -147,7 +147,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 }
             }
 
-            // 永远processcurrent节点的历史attachmentmessage
+            // 永远processcurrent节点的historyattachmentmessage
             $delightfulMessageIds = [];
             foreach ($memoryManager->getMessages() as $message) {
                 $delightfulMessageIds[] = $message->getIdentifier();
@@ -249,7 +249,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
      *
      * @param Agent $agent 代理object
      * @param VertexResult $vertexResult 节点executeresult
-     * @param ExecutionData $executionData execute数据
+     * @param ExecutionData $executionData executedata
      * @return array [推理文本, response文本]
      */
     private function executeAgent(Agent $agent, VertexResult $vertexResult, ExecutionData $executionData): array
@@ -282,7 +282,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 $vertexResult->addDebugLog('reasoning', $reasoningResponseText);
                 $vertexResult->addDebugLog('origin_response', $responseText);
 
-                // 解压
+                // decompress
                 $responseText = CompressibleContent::deCompress($responseText, false);
                 $vertexResult->addDebugLog('response', $responseText);
             }

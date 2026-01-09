@@ -175,7 +175,7 @@ readonly class KnowledgeBaseFragmentDomainService
     }
 
     /**
-     * update知识库片段status.
+     * updateknowledge base片段status.
      */
     public function batchChangeSyncStatus(array $ids, KnowledgeSyncStatus $syncStatus, string $syncMessage = ''): void
     {

@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::create('delightful_flow_permissions', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('organization_code', 20)->comment('organization编码');
+            $table->string('organization_code', 20)->comment('organizationencoding');
             $table->unsignedTinyInteger('resource_type')->comment('资源type');
             $table->string('resource_id', 50)->comment('资源id');
             $table->unsignedTinyInteger('target_type')->comment('目标type');

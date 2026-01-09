@@ -15,37 +15,37 @@ use App\Infrastructure\Util\SSRF\SSRFUtil;
 class Oauth2Config extends AbstractValueObject
 {
     /**
-     * Client ID - 客户端ID，是应用在authorizationservice器中的唯一标识符。
-     * authorizationservice器pass客户端ID来识别different的三方应用。
+     * Client ID - 客户端ID，是application在authorizationservice器中的唯一标识符。
+     * authorizationservice器pass客户端ID来识别different的三方application。
      *
-     * createOAuth应用时will分配client_id，本示例输入
+     * createOAuthapplication时will分配client_id，本示例input
      * 813924812101982004357116497xxxx.app.coze
      */
     protected string $clientId = '';
 
     /**
-     * Client Secret - 客户端key，和客户端ID配合use，用于auth应用的身份。
-     * ensure只有authorization的应用canrequestpermission。
+     * Client Secret - 客户端key，和客户端ID配合use，用于authapplication的身份。
+     * ensure只有authorization的applicationcanrequestpermission。
      *
-     * createOAuth应用时will分配client_secret，本示例输入 8jmSATwI*********
+     * createOAuthapplication时will分配client_secret，本示例input 8jmSATwI*********
      */
     protected string $clientSecret = '';
 
     /**
-     * Client URL - service方的OAuth页面URL，用于拼接user登录authorization页的URL。
+     * Client URL - service方的OAuthpageURL，用于拼接user登录authorization页的URL。
      *
      * user登录时，扣子will将user引导至"[client_url]?response_type=code&client_id=
      * [client_id]&scope=[scope]&state=xyz123&redirect_uri=[coze平台的callback安全地址]"。
      *
-     * 参考service方的authorization文档getclient_url，本示例参考扣子开发指南文档，输入
+     * 参考service方的authorization文档getclient_url，本示例参考扣子开发指南文档，input
      * https://www.coze.cn/api/permission/oauth2/authorize
      */
     protected string $clientUrl = '';
 
     /**
-     * Scope - allow应用程序request访问user数据的range。
+     * Scope - allowapplication程序requestaccessuserdata的range。
      *
-     * 参考service方的authorization文档输入scope。
+     * 参考service方的authorization文档inputscope。
      */
     protected string $scope = '';
 
@@ -53,16 +53,16 @@ class Oauth2Config extends AbstractValueObject
      * Authorization URL - getuseraccess_token的URL地址。
      *
      * userpassclient_urlauthorizationsuccess后，三方servicewillreturnusergettoken的code，
-     * 并转至callback地址。此时，service器提供方willpass对应数据向authorization_url发起request，
+     * 并转至callback地址。此时，service器提供方willpass对应data向authorization_url发起request，
      * getuser的access_token。
      *
-     * 参考service方的authorization文档getauthorization_url，本示例参考扣子开发指南文档，输入
+     * 参考service方的authorization文档getauthorization_url，本示例参考扣子开发指南文档，input
      * https://api.coze.cn/api/permission/oauth2/token
      */
     protected string $authorizationUrl = '';
 
     /**
-     * Authorization Content Type - 向OAuth提供者send数据的contenttype。
+     * Authorization Content Type - 向OAuth提供者senddata的contenttype。
      * 目前仅支持application/jsontype。
      */
     protected string $authorizationContentType = 'application/json';

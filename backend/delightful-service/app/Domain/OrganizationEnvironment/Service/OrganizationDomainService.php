@@ -35,7 +35,7 @@ readonly class OrganizationDomainService
      */
     public function create(OrganizationEntity $organizationEntity): OrganizationEntity
     {
-        // check编码是否已存在
+        // checkencoding是否已存在
         if ($this->organizationRepository->existsByCode($organizationEntity->getDelightfulOrganizationCode())) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_EXISTS);
         }
@@ -83,7 +83,7 @@ readonly class OrganizationDomainService
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_NOT_EXISTS);
         }
 
-        // check编码是否已存在（排除currentorganization）
+        // checkencoding是否已存在（排除currentorganization）
         if ($this->organizationRepository->existsByCode($organizationEntity->getDelightfulOrganizationCode(), $organizationEntity->getId())) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_EXISTS);
         }
@@ -102,7 +102,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * according to编码getorganization.
+     * according toencodinggetorganization.
      */
     public function getByCode(string $delightfulOrganizationCode): ?OrganizationEntity
     {
@@ -110,7 +110,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * according to编码list批量getorganization.
+     * according toencodinglist批量getorganization.
      * @param string[] $delightfulOrganizationCodes
      * @return OrganizationEntity[]
      */
@@ -192,7 +192,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * checkorganization编码是否可用.
+     * checkorganizationencoding是否可用.
      */
     public function isCodeAvailable(string $code, ?int $excludeId = null): bool
     {

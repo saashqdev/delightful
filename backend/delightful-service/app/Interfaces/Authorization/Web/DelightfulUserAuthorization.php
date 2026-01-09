@@ -40,7 +40,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected UserType $userType;
 
     /**
-     * user在该organization下的status:0:冻结,1:已激活,2:已离职,3:已退出.
+     * user在该organization下的status:0:冻结,1:activated,2:已离职,3:已退出.
      */
     protected string $status;
 
@@ -72,7 +72,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     // currentuser所处的环境id
     protected int $delightfulEnvId = 0;
 
-    // 第三方平台的originalorganization编码
+    // 第三方平台的originalorganizationencoding
     protected string $thirdPlatformOrganizationCode = '';
 
     // 第三方平台的originaluser ID

@@ -13,14 +13,14 @@ use App\Infrastructure\Core\MCP\Tools\MCPToolManager;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * MCPmethodprocess器接口.
+ * MCPmethodprocess器interface.
  */
 interface MethodHandlerInterface
 {
     /**
-     * processrequest并return结果.
+     * processrequest并returnresult.
      *
-     * @return null|array<string, mixed> process结果，if不needreturndata则returnnull
+     * @return null|array<string, mixed> processresult，if不needreturndata则returnnull
      */
     public function handle(MessageInterface $request): ?array;
 

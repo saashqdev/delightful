@@ -47,7 +47,7 @@ class DelightfulOrganizationEnvDomainService
             if (! empty($orgEnvEntity)) {
                 return $orgEnvEntity;
             }
-            // createorganization环境:如果是 saas 则不改变organization编码。
+            // createorganization环境:如果是 saas 则不改变organizationencoding。
             if ($delightfulEnvEntity->getDeployment() === DeploymentEnum::SaaS) {
                 $delightfulOrganizationCode = $originOrganizationCode;
             } else {
@@ -91,7 +91,7 @@ class DelightfulOrganizationEnvDomainService
         if (! $organizationEnvEntity) {
             return null;
         }
-        // 环境的详情
+        // 环境的detail
         $environmentEntity = $this->delightfulEnvironmentsRepository->getEnvById((string) $organizationEnvEntity->getEnvironmentId());
         if (! $environmentEntity) {
             return null;
@@ -175,7 +175,7 @@ class DelightfulOrganizationEnvDomainService
     }
 
     /**
-     * current环境default的 env configuration。 访问 saas 时allow前端不传环境 id，usedefault的环境configuration。
+     * current环境default的 env configuration。 access saas 时allow前端不传环境 id，usedefault的环境configuration。
      */
     public function getCurrentDefaultDelightfulEnv(): ?DelightfulEnvironmentEntity
     {
@@ -202,7 +202,7 @@ class DelightfulOrganizationEnvDomainService
     }
 
     /**
-     * get所有organization编码
+     * get所有organizationencoding
      * @return string[]
      */
     public function getAllOrganizationCodes(): array

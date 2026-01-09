@@ -12,7 +12,7 @@ use App\Interfaces\Flow\DTO\AbstractFlowDTO;
 class DelightfulFlowToolSetDTO extends AbstractFlowDTO
 {
     /**
-     * tool集名称.
+     * tool集name.
      */
     public string $name = '';
 
@@ -33,7 +33,7 @@ class DelightfulFlowToolSetDTO extends AbstractFlowDTO
 
     /**
      * quotequantity.
-     * 被 n 个助理应用.
+     * 被 n 个助理application.
      */
     public int $agentUsedCount = 0;
 

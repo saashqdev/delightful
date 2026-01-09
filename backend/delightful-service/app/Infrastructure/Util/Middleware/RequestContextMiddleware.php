@@ -52,7 +52,7 @@ class RequestContextMiddleware implements MiddlewareInterface
         try {
             return di(AuthManager::class)->guard(name: 'web')->user();
         } catch (BusinessException $exception) {
-            // if是业务exception，直接抛出，不改变exceptiontype
+            // if是业务exception，直接throw，不改变exceptiontype
             throw $exception;
         } catch (Throwable $exception) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR, throwable: $exception);
@@ -83,7 +83,7 @@ class RequestContextMiddleware implements MiddlewareInterface
             $delightfulUserAuthorization->setUserType(UserType::Human);
             return $delightfulUserAuthorization;
         } catch (BusinessException $exception) {
-            // if是业务exception，直接抛出，不改变exceptiontype
+            // if是业务exception，直接throw，不改变exceptiontype
             throw $exception;
         } catch (Throwable $exception) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR, throwable: $exception);

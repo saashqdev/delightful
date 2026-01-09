@@ -11,7 +11,7 @@ use Hyperf\Contract\TranslatorInterface;
 
 /**
  * Provider Assembler抽象基类
- * 提取公共的转换逻辑，减少代码重复.
+ * 提取公共的转换逻辑，减少code重复.
  */
 abstract class AbstractProviderAssembler
 {

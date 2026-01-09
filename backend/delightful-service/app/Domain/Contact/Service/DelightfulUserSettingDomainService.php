@@ -73,7 +73,7 @@ readonly class DelightfulUserSettingDomainService
      */
     public function saveByDelightfulId(string $delightfulId, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
-        // get现有记录以保持实体完整性
+        // get现有record以保持实体完整性
         $existingEntity = $this->delightfulUserSettingRepository->getByDelightfulId($delightfulId, $delightfulUserSettingEntity->getKey());
 
         if ($existingEntity) {

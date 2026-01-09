@@ -114,7 +114,7 @@ class DocumentFileStrategy
                 if (! $fileKey) {
                     // getimagecontent
                     if ($isBase64) {
-                        // 解析base64数据
+                        // parsebase64data
                         $base64Data = explode(',', $imageUrl);
                         $imageContent = base64_decode($base64Data[1]);
                     } else {
@@ -208,7 +208,7 @@ class DocumentFileStrategy
             return $driver;
         }
 
-        $this->logger->warning('没有与[' . get_class($documentFile) . ']匹配的文本解析策略！将return空value！');
+        $this->logger->warning('没有与[' . get_class($documentFile) . ']匹配的文本parse策略！将return空value！');
         return null;
     }
 }

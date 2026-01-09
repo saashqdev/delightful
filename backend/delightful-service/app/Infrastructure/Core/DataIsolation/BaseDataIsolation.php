@@ -12,7 +12,7 @@ use App\Infrastructure\Util\Context\CoContext;
 class BaseDataIsolation implements DataIsolationInterface
 {
     /**
-     * when前的organization编码.
+     * when前的organizationencoding.
      */
     private string $currentOrganizationCode;
 

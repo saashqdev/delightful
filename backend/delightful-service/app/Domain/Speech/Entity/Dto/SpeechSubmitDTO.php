@@ -76,7 +76,7 @@ class SpeechSubmitDTO extends AbstractRequestDTO
             'audio' => $this->audio->toArray(),
         ];
 
-        // 添加可选的附加configuration
+        // 添加optional的附加configuration
         if ($this->additions) {
             $requestData['additions'] = $this->additions;
         }

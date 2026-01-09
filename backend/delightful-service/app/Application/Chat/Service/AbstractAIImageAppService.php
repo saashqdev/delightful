@@ -27,7 +27,7 @@ class AbstractAIImageAppService extends AbstractAppService
         if (! empty($referSeq['refer_message_id'])) {
             $referSeq = $delightfulChatDomainService->getSeqMessageByIds([$referSeq['refer_message_id']])[0] ?? [];
         }
-        // getquotemessage文本内容
+        // getquotemessage文本content
         $referMessage = $delightfulChatDomainService->getMessageByDelightfulMessageId($referSeq['delightful_message_id'] ?? '');
         return $referMessage?->getContent();
     }

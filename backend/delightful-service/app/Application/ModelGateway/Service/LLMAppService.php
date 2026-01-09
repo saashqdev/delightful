@@ -1710,13 +1710,13 @@ class LLMAppService extends AbstractLLMAppService
      * 统一触发imagegenerateevent.
      *
      * @param string $creator create者ID
-     * @param string $organizationCode organization编码
+     * @param string $organizationCode organizationencoding
      * @param AbstractRequestDTO $requestDTO requestDTO
      * @param int $imageCount imagequantity
      * @param string $providerModelId service商modelID
      * @param string $callTime calltime
      * @param float $startTime 开始time（微秒）
-     * @param null|AccessTokenEntity $accessTokenEntity 访问token实体
+     * @param null|AccessTokenEntity $accessTokenEntity accesstoken实体
      */
     private function dispatchImageGeneratedEvent(
         string $creator,

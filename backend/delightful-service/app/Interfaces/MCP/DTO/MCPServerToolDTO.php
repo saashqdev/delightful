@@ -22,7 +22,7 @@ class MCPServerToolDTO extends AbstractDTO
     public string $mcpServerCode = '';
 
     /**
-     * tool名称.
+     * toolname.
      */
     public string $name = '';
 

@@ -100,7 +100,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             executionType: ExecutionType::IMChat,
         );
 
-        // 如果是 conversation，强制开启 stream 模式
+        // 如果是 conversation，force开启 stream 模式
         if ($triggerType === TriggerType::ChatMessage) {
             $executionData->setStream(true);
         }
@@ -114,7 +114,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
         $executor->execute();
 
-        // 如果有节点executefail，抛出exception
+        // 如果有节点executefail，throwexception
         foreach ($delightfulFlow->getNodes() as $node) {
             $nodeDebugResult = $node->getNodeDebugResult();
             if ($nodeDebugResult && ! $nodeDebugResult->isSuccess()) {
@@ -369,7 +369,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         if (! $log) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $apiChatDTO->getTaskId()]);
         }
-        // 只能query第一层的数据
+        // 只能query第一层的data
         if (! $log->isTop()) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $apiChatDTO->getTaskId()]);
         }

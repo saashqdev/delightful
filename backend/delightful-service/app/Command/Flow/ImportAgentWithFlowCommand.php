@@ -30,9 +30,9 @@ class ImportAgentWithFlowCommand extends HyperfCommand
         $this->exportImportService = $container->get(DelightfulFlowExportImportAppService::class);
         parent::__construct('agent:import');
         $this->setDescription('从OSSimport助理（contain主process、工具、子process等）');
-        $this->addArgument('file_url', InputArgument::REQUIRED, 'export助理数据file的URL');
+        $this->addArgument('file_url', InputArgument::REQUIRED, 'export助理datafile的URL');
         $this->addArgument('user_id', InputArgument::REQUIRED, 'userid');
-        $this->addArgument('organization_code', InputArgument::REQUIRED, 'organization编码');
+        $this->addArgument('organization_code', InputArgument::REQUIRED, 'organizationencoding');
     }
 
     public function handle()
@@ -45,23 +45,23 @@ class ImportAgentWithFlowCommand extends HyperfCommand
             $response = $client->get($fileUrl);
             $content = $response->getBody()->getContents();
 
-            // 解析JSONcontent
+            // parseJSONcontent
             $importData = json_decode($content, true);
             if (! $importData || ! is_array($importData)) {
-                $this->output->error('file中的JSON数据invalid');
+                $this->output->error('file中的JSONdatainvalid');
                 return 1;
             }
 
-            // 从import数据中getorganization代码和userID
+            // 从importdata中getorganizationcode和userID
             $orgCode = $this->input->getArgument('organization_code');
             $userId = $this->input->getArgument('user_id');
 
             if (empty($orgCode) || empty($userId)) {
-                $this->output->error('import数据中缺少organization代码或userID');
+                $this->output->error('importdata中缺少organizationcode或userID');
                 return 1;
             }
 
-            // create数据隔离object
+            // createdata隔离object
             $dataIsolation = new FlowDataIsolation($orgCode, $userId);
 
             // importprocess及助理info

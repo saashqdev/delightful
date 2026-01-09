@@ -36,7 +36,7 @@ class LoaderTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'document解析。用于解析远程document中content，提取document中的contentoutput。';
+        return 'documentparse。用于parse远程document中content，提取document中的contentoutput。';
     }
 
     public function getCallback(): ?Closure
@@ -106,8 +106,8 @@ class LoaderTool extends AbstractBuiltInTool
                     "file_name": {
                         "type": "string",
                         "key": "file_name",
-                        "title": "file名称",
-                        "description": "file名称。没有时可use url 中的file名",
+                        "title": "filename",
+                        "description": "filename。没有时可use url 中的file名",
                         "required": null,
                         "value": null,
                         "encryption": false,

@@ -15,28 +15,28 @@ use App\Infrastructure\Core\AbstractDTO;
 class UpdateSubAdminRequestDTO extends AbstractDTO
 {
     /**
-     * rolename（可选，仅在needupdate时提供）.
+     * rolename（optional，仅在needupdate时提供）.
      */
     public ?string $name = null;
 
     /**
-     * rolestatus：0=禁用, 1=启用（可选，仅在needupdate时提供）.
+     * rolestatus：0=禁用, 1=启用（optional，仅在needupdate时提供）.
      */
     public ?int $status = null;
 
     /**
-     * permissiontag，用于前端展示category（可选，仅在needupdate时提供）.
+     * permissiontag，用于前端展示category（optional，仅在needupdate时提供）.
      */
     public ?array $permissionTag = null;
 
     /**
-     * permission键list（可选，仅在needupdate时提供）.
+     * permission键list（optional，仅在needupdate时提供）.
      * 注意：如果提供了此field，将替换所有现有permission.
      */
     public ?array $permissions = null;
 
     /**
-     * userIDlist（可选，仅在needupdate时提供）.
+     * userIDlist（optional，仅在needupdate时提供）.
      * 注意：如果提供了此field，将替换所有现有user关联.
      */
     public ?array $userIds = null;
@@ -104,7 +104,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
     }
 
     /**
-     * verifyDTO数据的valid性.
+     * verifyDTOdata的valid性.
      */
     public function validate(): bool
     {

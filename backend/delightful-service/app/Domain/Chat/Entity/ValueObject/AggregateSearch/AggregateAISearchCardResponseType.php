@@ -13,7 +13,7 @@ namespace App\Domain\Chat\Entity\ValueObject\AggregateSearch;
 class AggregateAISearchCardResponseType
 {
     /**
-     *关联问题的search结果，include子问题(search_keywords), 网页search结果(search), 总词数(total_words), 匹配词数(match_count), 页数(page_count).
+     *关联问题的searchresult，include子问题(search_keywords), 网页searchresult(search), 总词数(total_words), 匹配词数(match_count), 页数(page_count).
      */
     public const int SEARCH = 0;
 
@@ -44,7 +44,7 @@ class AggregateAISearchCardResponseType
     public static function getNameFromType(int $type): string
     {
         $typeNames = [
-            self::SEARCH => 'search结果',
+            self::SEARCH => 'searchresult',
             self::LLM_RESPONSE => 'LLMresponse',
             self::MIND_MAP => '思维导图',
             self::ASSOCIATE_QUESTIONS => '关联问题',

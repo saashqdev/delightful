@@ -93,7 +93,7 @@ readonly class ProviderModelDomainService
         }
 
         if ($providerModelDTO->getId()) {
-            // updatemodel：verifymodel是否存在（getByIdwill在不存在时抛出exception）
+            // updatemodel：verifymodel是否存在（getByIdwill在不存在时throwexception）
             $this->providerModelRepository->getById($dataIsolation, $providerModelDTO->getId());
         } else {
             // createmodel时default启用
@@ -107,7 +107,7 @@ readonly class ProviderModelDomainService
             }
         }
 
-        // 目前savemodel的接口只有大modeluse，因此强制type是 llm
+        // 目前savemodel的interface只有大modeluse，因此forcetype是 llm
         $providerModelDTO->setCategory(Category::LLM);
         $modelEntity = $this->providerModelRepository->saveModel($dataIsolation, $providerModelDTO);
 
@@ -135,7 +135,7 @@ readonly class ProviderModelDomainService
     /**
      * 批量according toIDgetmodel.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $ids modelIDarray
      * @return ProviderModelEntity[] model实体array，以ID为键
      */
@@ -152,7 +152,7 @@ readonly class ProviderModelDomainService
     /**
      * 批量according toModelIDgetmodel.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $modelIds model标识array
      * @return array<string, ProviderModelEntity[]> model实体array，以model_id为键，value为对应的modellist
      */
@@ -172,7 +172,7 @@ readonly class ProviderModelDomainService
     /**
      * according toquery条件get按modeltype分组的modelIDlist.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param ProviderModelQuery $query query条件
      * @return array<string, array<string>> 按modeltype分组的modelIDarray，format: [modelType => [model_id, model_id]]
      */
@@ -184,7 +184,7 @@ readonly class ProviderModelDomainService
     /**
      * get指定model的最新configurationversionID.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param int $serviceProviderModelId modelID
      * @return null|int 最新version的ID，如果不存在则returnnull
      */
@@ -196,7 +196,7 @@ readonly class ProviderModelDomainService
     /**
      * get指定model的最新configurationversion实体.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param int $serviceProviderModelId modelID
      * @return null|ProviderModelConfigVersionEntity 最新version的实体，如果不存在则returnnull
      */

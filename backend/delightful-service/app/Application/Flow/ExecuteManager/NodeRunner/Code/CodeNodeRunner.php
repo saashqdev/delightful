@@ -24,7 +24,7 @@ use Throwable;
 #[FlowNodeDefine(
     type: NodeType::Code->value,
     code: NodeType::Code->name,
-    name: '代码execute',
+    name: 'codeexecute',
     paramsConfig: CodeNodeParamsConfig::class,
     version: 'v0',
     singleDebug: true,

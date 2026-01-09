@@ -15,6 +15,6 @@ enum GroupUserRoleEnum: int
     // 管理员
     case ADMIN = 2;
 
-    // 普通成员
+    // 普通member
     case MEMBER = 3;
 }

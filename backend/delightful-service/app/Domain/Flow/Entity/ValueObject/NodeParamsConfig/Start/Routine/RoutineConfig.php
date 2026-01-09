@@ -29,7 +29,7 @@ class RoutineConfig
         private ?int $interval = null,
         // unit=week时为[1~7]，unit=month时为[1~31]
         private ?array $values = null,
-        // 结束日期，该日期后不generate数据
+        // 结束日期，该日期后不generatedata
         private readonly ?DateTime $deadline = null,
         // 话题configuration
         private readonly ?TopicConfig $topicConfig = null
@@ -76,7 +76,7 @@ class RoutineConfig
             case RoutineType::DailyRepeat:
                 break;
             case RoutineType::WeeklyRepeat:
-                // 0-6 table示周一到周日，所以得兼容一下 crontab 的规则 0 table示周日
+                // 0-6 table示周一到周日，所以得compatible一下 crontab 的规则 0 table示周日
                 $dayOfWeek = (int) $this->day + 1;
                 if ($dayOfWeek === 7) {
                     $dayOfWeek = 0;

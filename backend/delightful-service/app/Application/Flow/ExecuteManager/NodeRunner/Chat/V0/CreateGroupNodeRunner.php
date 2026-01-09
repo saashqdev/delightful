@@ -68,7 +68,7 @@ class CreateGroupNodeRunner extends NodeRunner
         }
         $vertexResult->addDebugLog('group_owner_delightful_id', $groupOwnerInfo->getDelightfulId());
 
-        // 群成员，全是user ID
+        // 群member，全是user ID
         $groupMembers = $paramsConfig->getGroupMembers()?->getValue()->getResult($executionData->getExpressionFieldData());
         $groupMemberIds = [];
         foreach ($groupMembers as $groupMember) {

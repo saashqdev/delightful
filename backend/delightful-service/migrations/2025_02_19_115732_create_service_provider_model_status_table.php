@@ -19,9 +19,9 @@ return new class extends Migration {
         }
         Schema::create('service_provider_model_status', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('model_id')->comment('模型id');
-            $table->string('model_version')->comment('模型名称');
-            $table->string('organization_code')->comment('organization编码');
+            $table->bigInteger('model_id')->comment('modelid');
+            $table->string('model_version')->comment('modelname');
+            $table->string('organization_code')->comment('organizationencoding');
             $table->bigInteger('service_provider_config_id')->comment('对应的服务商id');
             $table->tinyInteger('status')->default(0)->comment('status：0-未启用，1-启用');
             $table->timestamps();

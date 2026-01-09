@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::create('delightful_user_settings', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('organization_code', 32)->default('')->comment('organization编码');
+            $table->string('organization_code', 32)->default('')->comment('organizationencoding');
             $table->string('user_id', 64)->comment('userID');
             $table->string('key', 80)->comment('setting键');
             $table->json('value')->comment('setting值');

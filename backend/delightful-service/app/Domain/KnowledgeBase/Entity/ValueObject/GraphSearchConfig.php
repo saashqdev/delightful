@@ -48,7 +48,7 @@ class GraphSearchConfig extends AbstractValueObject
     /**
      * API key.
      *
-     * 访问图searchservice的 API key
+     * access图searchservice的 API key
      */
     private string $apiKey = '';
 

@@ -33,7 +33,7 @@ enum StatisticsLevel: int
     case LEVEL_DAY = 3;
 
     /**
-     * get统计级别名称.
+     * get统计级别name.
      */
     public function getName(): string
     {
@@ -46,7 +46,7 @@ enum StatisticsLevel: int
     }
 
     /**
-     * get统计级别名称（静态method，用于兼容旧代码）.
+     * get统计级别name（静态method，用于compatible旧code）.
      * @deprecated use枚举实例的 getName() method代替
      */
     public static function getLevelName(int|self $level): string

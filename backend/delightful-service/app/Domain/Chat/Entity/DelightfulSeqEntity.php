@@ -284,7 +284,7 @@ final class DelightfulSeqEntity extends AbstractEntity
             $this->receiveList = $receiveList;
             return $this;
         }
-        // 解析messagereceive人list.
+        // parsemessagereceive人list.
         if (is_string($receiveList) && $receiveList !== '') {
             $receiveList = Json::decode($receiveList);
         }

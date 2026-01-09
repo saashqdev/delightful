@@ -33,7 +33,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
     }
 
     /**
-     * get草稿详情.
+     * get草稿detail.
      */
     public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $draftCode): DelightfulFlowDraftEntity
     {
@@ -79,7 +79,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
         }
 
         $draft = $this->delightfulFlowDraftRepository->save($dataIsolation, $delightfulFlowDraftEntity);
-        // 仅保留最new记录
+        // 仅保留最newrecord
         $this->delightfulFlowDraftRepository->clearEarlyRecords($dataIsolation, $savingDelightfulFlowDraftEntity->getFlowCode());
         return $draft;
     }

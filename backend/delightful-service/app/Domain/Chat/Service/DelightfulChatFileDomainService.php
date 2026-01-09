@@ -98,7 +98,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
      */
     public function getFileEntitiesByFileIds(array $fileIds, ?string $order = null, ?int $limit = null, bool $withUrl = false): array
     {
-        // getfile路径
+        // getfilepath
         $entities = $this->delightfulFileRepository->getChatFileByIds($fileIds, $order, $limit);
         if (! $withUrl) {
             return $entities;
@@ -118,7 +118,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
      * 如果file_key不存在，则create新file.
      *
      * @param DelightfulChatFileEntity $fileEntity file实体
-     * @param DataIsolation $dataIsolation 数据隔离
+     * @param DataIsolation $dataIsolation data隔离
      * @return DelightfulChatFileEntity save或update后的file实体
      */
     public function saveOrUpdateByFileKey(DelightfulChatFileEntity $fileEntity, DataIsolation $dataIsolation): DelightfulChatFileEntity

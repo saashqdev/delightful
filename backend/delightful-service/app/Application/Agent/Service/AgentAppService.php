@@ -56,7 +56,7 @@ class AgentAppService extends AbstractAppService
             )[$agentDataIsolation->getCurrentUserId()] ?? [];
             $selfAgentIds = array_keys($agentResources);
 
-            // 合并
+            // merge
             $agentIds = array_unique(array_merge($orgAgentIds, $selfAgentIds));
 
             // cacheresult（仅当不为空时）

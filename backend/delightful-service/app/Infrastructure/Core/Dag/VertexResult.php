@@ -16,13 +16,13 @@ class VertexResult
     protected array $childrenIds = [];
 
     /**
-     * storage节点的execute结果.
+     * storage节点的executeresult.
      */
     protected mixed $result = null;
 
     /**
-     * storage节点的备注information.
-     * 可用于一些log记录之类的.
+     * storage节点的noteinformation.
+     * 可用于一些logrecord之类的.
      */
     protected mixed $remarkData = null;
 

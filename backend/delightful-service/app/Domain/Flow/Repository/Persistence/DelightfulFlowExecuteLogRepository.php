@@ -31,7 +31,7 @@ class DelightfulFlowExecuteLogRepository extends DelightfulFlowAbstractRepositor
         $update = [
             'status' => $delightfulFlowExecuteLogEntity->getStatus()->value,
         ];
-        // if是completestatus，记录结果
+        // if是completestatus，recordresult
         if ($delightfulFlowExecuteLogEntity->getStatus()->isFinished()) {
             $update['result'] = json_encode($delightfulFlowExecuteLogEntity->getResult(), JSON_UNESCAPED_UNICODE);
         }

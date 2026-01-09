@@ -132,12 +132,12 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
 
     public function getAgentById(string $agentId): DelightfulAgentEntity
     {
-        // querydatabase，get指定 agentId 和 userId 的数据
+        // querydatabase，get指定 agentId 和 userId 的data
         $agent = $this->agentModel::query()
             ->where('id', $agentId)
             ->first();
 
-        // 如果queryresult为空，抛出exception或return null，according to业务需求process
+        // 如果queryresult为空，throwexception或return null，according to业务需求process
         if (! $agent) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_not_exist');
         }

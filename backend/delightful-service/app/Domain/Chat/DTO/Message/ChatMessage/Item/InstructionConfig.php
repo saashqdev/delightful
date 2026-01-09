@@ -59,7 +59,7 @@ class InstructionConfig extends AbstractEntity
     protected bool $sendDirectly = false;
 
     /**
-     * 指令组件type，1 单选项 2 开关 3 文本type 4 statustype.
+     * 指令组件type，1 单option 2 开关 3 文本type 4 statustype.
      */
     protected int $type = InstructionComponentType::Radio->value;
 

@@ -31,12 +31,12 @@ class Node extends AbstractValueObject
     protected string $nodeVersion = '';
 
     /**
-     * 节点元数据，可用作给前端的定位，后端仅storage和展示，没有任何逻辑.
+     * 节点元data，可用作给前端的定位，后端仅storage和展示，没有任何逻辑.
      */
     protected array $meta = [];
 
     /**
-     * 节点parameterconfiguration，目前依靠array来数据传递.
+     * 节点parameterconfiguration，目前依靠array来data传递.
      */
     protected array $params = [];
 

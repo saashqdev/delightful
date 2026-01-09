@@ -93,7 +93,7 @@ abstract class AbstractSms implements SmsInterface
         }
         // 进行variable匹配短信匹配
         if (! empty($variables)) {
-            // 兼容火山template的variable替换,先将 $message 中的variable解析出来 such as将[123456] 解析为['VerificationCode'=>123456]后,再进行templatecontent替换
+            // compatible火山template的variable替换,先将 $message 中的variableparse出来 such as将[123456] parse为['VerificationCode'=>123456]后,再进行templatecontent替换
             $variables = $this->template->getTemplateVariables($templateContent, $variables);
             $i = 1;
             foreach ($variables as $k => $v) {

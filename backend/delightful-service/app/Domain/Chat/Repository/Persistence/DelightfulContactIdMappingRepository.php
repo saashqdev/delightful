@@ -115,7 +115,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query->whereIn('origin_id', $thirdUserIds)
             ->where('mapping_type', ThirdPlatformIdMappingType::User->value);
 
-        // 有些平台多organizationuser id 一致（such as天书），因此query时不带organization编码
+        // 有些平台多organizationuser id 一致（such as天书），因此query时不带organizationencoding
         $delightfulOrganizationCode && $query->where('delightful_organization_code', $delightfulOrganizationCode);
         $thirdPlatformIdMappingEntities = [];
         $data = $query->where('third_platform_type', $thirdPlatformType->value);
@@ -140,7 +140,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query = $this->delightfulContactIdMappingModel::query()
             ->whereIn('new_id', $delightfulIds)
             ->where('mapping_type', ThirdPlatformIdMappingType::User->value);
-        // 有些平台多organizationuser id 一致（such as天书），因此query时不带organization编码
+        // 有些平台多organizationuser id 一致（such as天书），因此query时不带organizationencoding
         if ($thirdPlatformType !== PlatformType::Teamshare) {
             $delightfulOrganizationCode && $query->where('delightful_organization_code', $delightfulOrganizationCode);
         }
@@ -261,7 +261,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 将array数据转换为实体object
+     * 将arraydata转换为实体object
      * @return DelightfulThirdPlatformIdMappingEntity[]
      */
     private function convertToEntities(array $dataArrays): array

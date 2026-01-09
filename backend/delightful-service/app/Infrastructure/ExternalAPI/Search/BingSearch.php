@@ -72,7 +72,7 @@ class BingSearch
             'offset' => $offset,
         ];
 
-        // 添加可选parameter
+        // 添加optionalparameter
         if (! empty($safeSearch)) {
             $queryParams['safeSearch'] = $safeSearch;
         }
@@ -120,10 +120,10 @@ class BingSearch
                 $body = $response->getBody()->getContents();
 
                 // 如果need将 JSON 转换为array或object，canuse json_decode
-                // requestsuccess，return数据
+                // requestsuccess，returndata
                 return Json::decode($body);
             } catch (RequestException $e) {
-                // 如果有response，说明是HTTPerror(4xx, 5xx等)，不retry
+                // 如果有response，instruction是HTTPerror(4xx, 5xx等)，不retry
                 if ($e->hasResponse()) {
                     $statusCode = $e->getResponse()?->getStatusCode();
                     $reason = $e->getResponse()?->getReasonPhrase();
@@ -144,7 +144,7 @@ class BingSearch
             }
         }
 
-        // 如果走到这里，说明所有尝试都fail了
+        // 如果走到这里，instruction所有尝试都fail了
         throw new RuntimeException('Search engine error.');
     }
 }

@@ -117,7 +117,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             if (! $response?->isFinishStatus() || empty($response?->getUrls())) {
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.task_timeout');
             }
-            // 计时结束，输出秒级time
+            // 计时结束，output秒级time
             $end = microtime(true);
             $this->logger->info(sprintf('转高清结束，耗时: %s秒。', $end - $start));
             // 将新旧image存入attachment
@@ -137,7 +137,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 $reqDTO->getReferMessageId(),
             );
         } catch (Throwable $e) {
-            // 发生exception时，send终止message，并抛出exception
+            // 发生exception时，send终止message，并throwexception
             $this->handleGlobalThrowable($reqDTO, $e);
         }
     }
@@ -218,19 +218,19 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
 
     private function getErrorMessageFromImageGenerateErrorCode(ImageGenerateErrorCode $case): ?string
     {
-        // get枚举constant的反射object
+        // get枚举constant的reflectionobject
         $reflectionEnum = new ReflectionEnum($case);
         $reflectionCase = $reflectionEnum->getCase($case->name);
 
-        // getconstant的所有注解
+        // getconstant的所有annotation
         $attributes = $reflectionCase->getAttributes(ErrorMessage::class);
 
-        // check是否存在 ErrorMessage 注解
+        // check是否存在 ErrorMessage annotation
         if (! empty($attributes)) {
-            // 实例化注解object
+            // 实例化annotationobject
             $errorMessageAttribute = $attributes[0]->newInstance();
 
-            // return注解中的 message property
+            // returnannotation中的 message property
             return '[' . __($errorMessageAttribute->getMessage()) . ']';
         }
 

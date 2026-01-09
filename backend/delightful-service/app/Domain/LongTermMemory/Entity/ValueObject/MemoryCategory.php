@@ -23,7 +23,7 @@ enum MemoryCategory: string
     case GENERAL = 'general';
 
     /**
-     * getcategory的中文名称.
+     * getcategory的中文name.
      */
     public function getDisplayName(): string
     {

@@ -32,7 +32,7 @@ class JsonStreamCachedDTO extends AbstractEntity
      */
     protected array $content;
 
-    // 避免频繁操作data库，记录最后一次updatedata库的时间
+    // 避免频繁操作data库，record最后一次updatedata库的时间
     protected ?int $lastUpdateDatabaseTime;
 
     public function getLastUpdateDatabaseTime(): ?int

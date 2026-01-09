@@ -53,12 +53,12 @@ class DelightfulFlowExportImportAppService
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.export.not_main_flow', ['label' => $flowCode]);
         }
 
-        // check是否存在循环依赖
+        // check是否存在循环dependency
         if ($this->checkCircularDependency($dataIsolation, $flowCode)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.export.circular_dependency_detected');
         }
 
-        // 准备export数据结构
+        // 准备exportdata结构
         $exportData = [
             'main_flow' => $mainFlow->toArray(),
             'sub_flows' => [],
@@ -66,7 +66,7 @@ class DelightfulFlowExportImportAppService
             'tool_sets' => [],
         ];
 
-        // 已handle的process编码，防止重复handle
+        // 已handle的processencoding，防止重复handle
         $processedFlowCodes = [$flowCode];
         $processedToolSetIds = [];
 
@@ -78,7 +78,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * importassistantprocess
-     * 遇到重复的工具或processwillcreate新实例，并pass名称区分.
+     * 遇到重复的工具或processwillcreate新实例，并passname区分.
      */
     public function importFlow(FlowDataIsolation $dataIsolation, array $importData, string $agentId = ''): DelightfulFlowEntity
     {
@@ -95,7 +95,7 @@ class DelightfulFlowExportImportAppService
             'nodes' => [], // 老ID => 新ID
         ];
 
-        // import报告，记录create、重命名和errorinfo
+        // import报告，recordcreate、重命名和errorinfo
         $importReport = [
             'created' => [],
             'renamed' => [],
@@ -140,7 +140,7 @@ class DelightfulFlowExportImportAppService
 
         // 4. 最后import主process，并关联到指定assistant（如果提供了agentId）
         try {
-            // 如果提供了agentId，setting到主process数据中
+            // 如果提供了agentId，setting到主processdata中
             if (! empty($agentId)) {
                 $mainFlowData['agent_id'] = $agentId;
             }
@@ -165,17 +165,17 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * validate是否存在循环依赖
+     * validate是否存在循环dependency
      * use深度优先search检测循环quote.
      */
     public function checkCircularDependency(FlowDataIsolation $dataIsolation, string $flowCode, array $visited = []): bool
     {
-        // 如果currentprocess已在访问路径中，说明形成了循环
+        // 如果currentprocess已在accesspath中，instruction形成了循环
         if (in_array($flowCode, $visited)) {
-            return true; // 发现循环依赖
+            return true; // 发现循环dependency
         }
 
-        // 将currentprocess添加到访问路径
+        // 将currentprocess添加到accesspath
         $visited[] = $flowCode;
 
         // getprocess实体
@@ -184,13 +184,13 @@ class DelightfulFlowExportImportAppService
             return false; // process不存在，不构成循环
         }
 
-        // 遍历所有节点check依赖
+        // 遍历所有节点checkdependency
         foreach ($flow->getNodes() as $node) {
             // check子process节点
             if ($node->getNodeType() === NodeType::Sub->value) {
                 $subFlowId = $node->getParams()['sub_flow_id'] ?? '';
                 if ($subFlowId && $this->checkCircularDependency($dataIsolation, $subFlowId, $visited)) {
-                    return true; // 子process中存在循环依赖
+                    return true; // 子process中存在循环dependency
                 }
             }
 
@@ -202,25 +202,25 @@ class DelightfulFlowExportImportAppService
                         $toolId = $optionTool['tool_id'] ?? '';
                         $toolSetId = $optionTool['tool_set_id'] ?? '';
 
-                        // 内置工具跳过循环依赖check
+                        // 内置工具跳过循环dependencycheck
                         if ($toolId && ! $this->isBuiltInTool($toolId, $toolSetId) && $this->checkCircularDependency($dataIsolation, $toolId, $visited)) {
-                            return true; // 工具quote中存在循环依赖
+                            return true; // 工具quote中存在循环dependency
                         }
                     }
                 }
             }
         }
 
-        return false; // 没有检测到循环依赖
+        return false; // 没有检测到循环dependency
     }
 
     /**
      * exportprocess和assistantinfo
-     * containprocess的所有数据以及assistant的基本info.
+     * containprocess的所有data以及assistant的基本info.
      */
     public function exportFlowWithAgent(FlowDataIsolation $dataIsolation, string $flowCode, DelightfulAgentEntity $agent): array
     {
-        // getprocess数据
+        // getprocessdata
         $flowData = $this->exportFlow($dataIsolation, $flowCode);
 
         // 添加assistantinfo
@@ -244,7 +244,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * importprocess和assistantinfo
-     * 从export的数据中createnewprocess和assistant，并建立关联.
+     * 从export的data中createnewprocess和assistant，并建立关联.
      */
     public function importFlowWithAgent(FlowDataIsolation $dataIsolation, array $importData): array
     {
@@ -293,11 +293,11 @@ class DelightfulFlowExportImportAppService
 
     /**
      * import单个process
-     * generate新ID并check名称重复.
+     * generate新ID并checkname重复.
      */
     private function importSingleFlow(FlowDataIsolation $dataIsolation, array $flowData, array &$idMapping, array &$importReport): string
     {
-        // 记录original名称和ID
+        // recordoriginalname和ID
         $originalName = $flowData['name'] ?? '';
         $originalCode = $flowData['code'] ?? '';
 
@@ -351,11 +351,11 @@ class DelightfulFlowExportImportAppService
 
     /**
      * import工具集
-     * generate新ID并check名称重复.
+     * generate新ID并checkname重复.
      */
     private function importToolSet(FlowDataIsolation $dataIsolation, array $toolSetData, array &$idMapping, array &$importReport): string
     {
-        // 记录original名称和ID
+        // recordoriginalname和ID
         $originalName = $toolSetData['name'] ?? '';
         $originalCode = $toolSetData['code'] ?? '';
 
@@ -389,14 +389,14 @@ class DelightfulFlowExportImportAppService
         $savedToolSet = $this->delightfulFlowToolSetDomainService->create($dataIsolation, $toolSetEntity);
         $importReport['created'][] = "create工具集: {$savedToolSet->getName()} (ID: {$savedToolSet->getCode()})";
 
-        // 记录新旧ID的映射关系
+        // record新旧ID的映射关系
         $idMapping['tool_sets'][$originalCode] = $savedToolSet->getCode();
 
         return $savedToolSet->getCode();
     }
 
     /**
-     * generate唯一的process名称
+     * generate唯一的processname
      * 当检测到同名process时，添加(n)后缀
      */
     private function generateUniqueName(FlowDataIsolation $dataIsolation, string $name, Type $type): string
@@ -418,7 +418,7 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * generate唯一的工具集名称
+     * generate唯一的工具集name
      * 当检测到同名工具集时，添加(n)后缀
      */
     private function generateUniqueToolSetName(FlowDataIsolation $dataIsolation, string $name): string
@@ -666,7 +666,7 @@ class DelightfulFlowExportImportAppService
             'search_engine', // search引擎工具集
             'web_browse',    // 网页浏览工具集
             'system',        // 系统工具集
-            'knowledge',     // 知识库工具集
+            'knowledge',     // knowledge base工具集
         ];
 
         // 判断是否属于内置工具集
@@ -701,7 +701,7 @@ class DelightfulFlowExportImportAppService
         }
 
         $agentDomainService = di(DelightfulAgentDomainService::class);
-        // settingprocess代码并saveassistant
+        // settingprocesscode并saveassistant
         $agentDomainService->associateFlowWithAgent($agentId, $flowCode);
     }
 
@@ -861,7 +861,7 @@ class DelightfulFlowExportImportAppService
         // mark为已handle
         $processedToolSetIds[] = $toolSetId;
 
-        // 添加到export数据中
+        // 添加到exportdata中
         $exportData['tool_sets'][$toolSetId] = $toolSet->toArray();
     }
 
@@ -894,7 +894,7 @@ class DelightfulFlowExportImportAppService
                 // mark为已handle
                 $processedFlowCodes[] = $subFlowId;
 
-                // 添加到export数据中
+                // 添加到exportdata中
                 $exportData['sub_flows'][$subFlowId] = $subFlow->toArray();
 
                 // 递归handle子process中的子process和工具
@@ -932,7 +932,7 @@ class DelightfulFlowExportImportAppService
                 // mark为已handle
                 $processedFlowCodes[] = $toolId;
 
-                // 添加到export数据中
+                // 添加到exportdata中
                 $exportData['tool_flows'][$toolId] = $toolFlow->toArray();
 
                 // 递归handle
@@ -974,7 +974,7 @@ class DelightfulFlowExportImportAppService
                         // mark为已handle
                         $processedFlowCodes[] = $toolId;
 
-                        // 添加到export数据中
+                        // 添加到exportdata中
                         $exportData['tool_flows'][$toolId] = $toolFlow->toArray();
 
                         // 递归handle工具process中的子process和其他工具

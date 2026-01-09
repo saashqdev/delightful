@@ -8,16 +8,16 @@ declare(strict_types=1);
 namespace App\Domain\Chat\DTO\Message;
 
 /**
- * 大模型reply的message.
+ * 大modelreply的message.
  */
 interface LLMMessageInterface extends TextContentInterface
 {
-    // 推理内容
+    // 推理content
     public function getReasoningContent(): ?string;
 
     public function setReasoningContent(?string $reasoningContent): static;
 
-    // 不contain推理内容的大模型response
+    // 不contain推理content的大modelresponse
     public function getContent(): string;
 
     public function setContent(string $content): static;

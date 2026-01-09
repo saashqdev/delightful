@@ -35,7 +35,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * get分组详情 (管理后台用).
+     * get分组detail (管理后台用).
      */
     public function getGroupById(DelightfulUserAuthorization $authorization, string $groupId): ?array
     {

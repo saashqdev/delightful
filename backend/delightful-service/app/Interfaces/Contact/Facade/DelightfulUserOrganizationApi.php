@@ -29,7 +29,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
     protected DelightfulUserDomainService $userDomainService;
 
     /**
-     * getusercurrentorganization代码
+     * getusercurrentorganizationcode
      */
     public function getCurrentOrganizationCode(RequestInterface $request): array
     {
@@ -41,12 +41,12 @@ class DelightfulUserOrganizationApi extends AbstractApi
 
         $delightfulId = $this->getDelightfulIdByAuthorization($authorization);
 
-        // getcurrentuser的organization代码
+        // getcurrentuser的organizationcode
         return $this->userOrganizationAppService->getCurrentOrganizationCode($delightfulId);
     }
 
     /**
-     * setusercurrentorganization代码
+     * setusercurrentorganizationcode
      */
     public function setCurrentOrganizationCode(RequestInterface $request): array
     {
@@ -58,13 +58,13 @@ class DelightfulUserOrganizationApi extends AbstractApi
 
         $delightfulId = $this->getDelightfulIdByAuthorization($authorization);
 
-        // 从request体getorganization代码
+        // 从request体getorganizationcode
         $organizationCode = (string) $request->input('delightful_organization_code', '');
         if (empty($organizationCode)) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
 
-        // setusercurrentorganization代码
+        // setusercurrentorganizationcode
         return $this->userOrganizationAppService->setCurrentOrganizationCode($delightfulId, $organizationCode);
     }
 

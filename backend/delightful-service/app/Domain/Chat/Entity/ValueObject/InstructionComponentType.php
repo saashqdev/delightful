@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Entity\ValueObject;
 
 enum InstructionComponentType: int
 {
-    // 单选项
+    // 单option
     case Radio = 1;
 
     // 开关

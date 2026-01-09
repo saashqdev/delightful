@@ -28,7 +28,7 @@ enum ResourceType: int
     case ToolSet = 3;
 
     /**
-     * 知识库.
+     * knowledge base.
      */
     case Knowledge = 4;
 

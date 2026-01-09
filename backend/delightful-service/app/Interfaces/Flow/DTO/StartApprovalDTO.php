@@ -9,7 +9,7 @@ namespace App\Interfaces\Flow\DTO;
 
 class StartApprovalDTO extends AbstractFlowDTO
 {
-    // approvaltemplate编码
+    // approvaltemplateencoding
     public string $templateCode = '';
 
     // approvaltable单data

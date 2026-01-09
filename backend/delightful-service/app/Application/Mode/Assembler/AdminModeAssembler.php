@@ -53,7 +53,7 @@ class AdminModeAssembler
      * 聚合根转换为DTO.
      *
      * @param ModeAggregate $aggregate 模式聚合根
-     * @param array $providerModels 可选的modelinfo映射 [modelId => ProviderModelEntity]
+     * @param array $providerModels optional的modelinfo映射 [modelId => ProviderModelEntity]
      */
     public static function aggregateToAdminDTO(ModeAggregate $aggregate, array $providerModels = []): AdminModeAggregateDTO
     {
@@ -74,7 +74,7 @@ class AdminModeAssembler
      * 分组聚合根转换为DTO.
      *
      * @param ModeGroupAggregate $groupAggregate 分组聚合根
-     * @param array $providerModels 可选的modelinfo映射 [model_id => ['best' => ProviderModelEntity|null, 'all' => ProviderModelEntity[], 'status' => string]]
+     * @param array $providerModels optional的modelinfo映射 [model_id => ['best' => ProviderModelEntity|null, 'all' => ProviderModelEntity[], 'status' => string]]
      */
     public static function groupAggregateToAdminDTO(ModeGroupAggregate $groupAggregate, array $providerModels = []): AdminModeGroupAggregateDTO
     {
@@ -105,7 +105,7 @@ class AdminModeAssembler
                 }
                 $modelDTO->setModelDescription($description);
 
-                // 保持向后兼容，set providerModelId 为查找到的model的ID
+                // 保持向后compatible，set providerModelId 为查找到的model的ID
                 $modelDTO->setProviderModelId((string) $providerModel->getId());
             } else {
                 // 后台管理need显示所有status，include无可用model的情况
@@ -200,7 +200,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 将UpdateModeRequest的数据应用到现有ModeEntity（部分update）.
+     * 将UpdateModeRequest的dataapplication到现有ModeEntity（部分update）.
      */
     public static function applyUpdateRequestToEntity(UpdateModeRequest $request, ModeEntity $existingEntity): void
     {

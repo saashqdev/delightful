@@ -14,7 +14,7 @@ namespace App\Infrastructure\Util;
 class OfficialOrganizationUtil
 {
     /**
-     * get官方organization编码
+     * get官方organizationencoding
      */
     public static function getOfficialOrganizationCode(): string
     {
@@ -30,9 +30,9 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * getcontain官方organization在内的organization编码array.
-     * @param string $currentOrganizationCode when前organization编码
-     * @return array 去重后的organization编码array
+     * getcontain官方organization在内的organizationencodingarray.
+     * @param string $currentOrganizationCode when前organizationencoding
+     * @return array 去重后的organizationencodingarray
      */
     public static function getOrganizationCodesWithOfficial(string $currentOrganizationCode): array
     {
@@ -41,7 +41,7 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * check官方organization编码是否已configuration.
+     * check官方organizationencoding是否已configuration.
      */
     public static function hasOfficialOrganization(): bool
     {

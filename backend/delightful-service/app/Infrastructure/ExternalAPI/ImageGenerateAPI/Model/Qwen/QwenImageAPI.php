@@ -58,7 +58,7 @@ class QwenImageAPI
             'parameters' => [],
         ];
 
-        // setting可选parameter
+        // settingoptionalparameter
         if (isset($params['size'])) {
             $body['parameters']['size'] = $params['size'];
         }
@@ -145,7 +145,7 @@ class QwenImageAPI
     }
 
     /**
-     * querytask结果.
+     * querytaskresult.
      */
     public function getTaskResult(string $taskId): array
     {

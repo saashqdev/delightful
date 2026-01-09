@@ -38,13 +38,13 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $putResponse = $this->put($this->url, $payload, $this->getCommonHeaders());
         $this->assertSame(1000, $putResponse['code']);
         $putData = $putResponse['data'];
-        $this->assertArrayEquals($payload, $putData, 'PUT return数据不一致');
+        $this->assertArrayEquals($payload, $putData, 'PUT returndata不一致');
 
         // 再次 GET verifycache及持久化
         $getResponse = $this->get($this->url, [], $this->getCommonHeaders());
         $this->assertSame(1000, $getResponse['code']);
         $getData = $getResponse['data'];
-        $this->assertArrayEquals($payload, $getData, 'GET return数据与expected不符');
+        $this->assertArrayEquals($payload, $getData, 'GET returndata与expected不符');
     }
 
     public function testGetGlobalConfigWithPlatformSettings(): void
@@ -61,7 +61,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
             ],
         ];
 
-        // pass平台set接口set
+        // pass平台setinterfaceset
         $this->put('/api/v1/platform/setting', $platformPayload, $this->getCommonHeaders());
 
         // get全局configuration，shouldcontain平台set

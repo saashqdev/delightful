@@ -73,7 +73,7 @@ class KnowledgeBaseDocumentApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * getdocument详情.
+     * getdocumentdetail.
      */
     public function show(string $knowledgeBaseCode, string $code)
     {

@@ -149,7 +149,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     /**
      * @return ClientSequenceResponse[]
      * @todo 挪到 delightful_chat_topic_messages process
-     * session窗口滚动load历史record.
+     * session窗口滚动loadhistoryrecord.
      * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      */
     public function getConversationChatMessages(MessagesQueryDTO $messagesQueryDTO): array
@@ -160,7 +160,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     /**
      * @return ClientSequenceResponse[]
      * @todo 挪到 delightful_chat_topic_messages process
-     * session窗口滚动load历史record.
+     * session窗口滚动loadhistoryrecord.
      * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array
@@ -179,7 +179,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
         $limit = $messagesQueryDTO->getLimit();
         $query = $this->delightfulSeq::query()->whereIn('conversation_id', $conversationIds);
         if (! empty($pageToken)) {
-            // currentsession历史message中最小的 seq id. will用来查比它还小的value
+            // currentsessionhistorymessage中最小的 seq id. will用来查比它还小的value
             $query->where('seq_id', $operator, $pageToken);
         }
         if ($timeStart !== null) {
@@ -381,7 +381,7 @@ sql;
         return (int) $this->delightfulSeq::query()->whereIn('id', $seqIds)->delete();
     }
 
-    // 为了移除脏数据写的method
+    // 为了移除脏data写的method
     public function getSeqByDelightfulId(string $delightfulId, int $limit): array
     {
         $query = $this->delightfulSeq::query()
@@ -391,7 +391,7 @@ sql;
         return Db::select($query->toSql(), $query->getBindings());
     }
 
-    // 为了移除脏数据写的method
+    // 为了移除脏data写的method
     public function getHasTrashMessageUsers(): array
     {
         // 按 delightful_id 分组,找出有垃圾message的user
@@ -482,7 +482,7 @@ sql;
             ->forceIndex('idx_object_type_id_seq_id')
             ->orderBy('seq_id', 'desc');
         $seqList = Db::select($query->toSql(), $query->getBindings());
-        // 合并后再降序排列,快速找出message的最新status
+        // merge后再降序排列,快速找出message的最新status
         $seqList = array_merge($seqList, $referMessages);
         $seqList = array_column($seqList, null, 'id');
         krsort($seqList);
@@ -490,7 +490,7 @@ sql;
     }
 
     /**
-     * 对result集强制重新降序排列.
+     * 对result集force重新降序排列.
      * @return ClientSequenceResponse[]
      */
     private function getClientSequencesResponse(array $seqInfos): array

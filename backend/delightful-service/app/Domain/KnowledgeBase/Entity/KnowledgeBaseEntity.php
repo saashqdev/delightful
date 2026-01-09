@@ -21,7 +21,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
 /**
- * 知识库.
+ * knowledge base.
  */
 class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
 {
@@ -121,13 +121,13 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function prepareForCreation(): void
     {
         if (empty($this->name)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '知识库name 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basename 不能为空');
         }
         if (empty($this->type)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '知识库type 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basetype 不能为空');
         }
         if (empty($this->organizationCode)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'organization编码 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'organizationencoding 不能为空');
         }
         if (empty($this->creator)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 不能为空');
@@ -156,7 +156,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function prepareForModification(KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void
     {
         if (empty($this->name)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '知识库name 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basename 不能为空');
         }
         if (empty($this->creator)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 不能为空');
@@ -490,7 +490,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function setEmbeddingConfig(?array $embeddingConfig): self
     {
         isset($embeddingConfig['model_id']) && $this->model = $embeddingConfig['model_id'];
-        // 兼容旧configuration，initializedefault嵌入configuration
+        // compatible旧configuration，initializedefault嵌入configuration
         is_null($embeddingConfig) && $embeddingConfig = ['model_id' => $this->model];
         $this->embeddingConfig = $embeddingConfig;
         return $this;

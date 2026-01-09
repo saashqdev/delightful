@@ -41,7 +41,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
             return;
         }
 
-        // if是作为运行节点 仅记录，then结束when前execute
+        // if是作为运行节点 仅record，then结束when前execute
         $waitMessageEntity = new DelightfulFlowWaitMessageEntity();
         $waitMessageEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $waitMessageEntity->setConversationId($executionData->getConversationId());

@@ -17,7 +17,7 @@ use App\Infrastructure\Core\Embeddings\VectorStores\VectorStoreInterface;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 
 /**
- * 知识库document实体.
+ * knowledge basedocument实体.
  */
 class KnowledgeBaseDocumentEntity extends AbstractKnowledgeBaseEntity
 {

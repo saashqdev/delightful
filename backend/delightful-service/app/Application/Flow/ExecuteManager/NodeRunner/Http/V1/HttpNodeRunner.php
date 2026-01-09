@@ -61,7 +61,7 @@ class HttpNodeRunner extends NodeRunner
                 $vertexResult->setResult($responseResult);
             }
         } catch (Throwable $e) {
-            // 不抛出exception
+            // 不throwexception
             $vertexResult->addDebugLog('error_message', $e->getMessage());
         } finally {
             $executionData->saveNodeContext($this->node->getSystemNodeId(), [

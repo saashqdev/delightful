@@ -15,19 +15,19 @@ namespace App\Application\Speech\Enum;
  * 【use场景】
  * - taskstatus持久化（Redis/database）
  * - 业务process控制和幂等性判断
- * - 整体taskstatustrace（录音 → 合并 → generate标题 → sendmessage）
+ * - 整体taskstatustrace（录音 → merge → generatetitle → sendmessage）
  *
  * 【与其他枚举的区别】
  * - AsrRecordingStatusEnum: 前端录音实时status（录音交互层）
  * - AsrTaskStatusEnum: 内部task全processstatus（业务管理层）✓ current
- * - SandboxAsrStatusEnum: 沙箱合并taskstatus（基础设施层）
+ * - SandboxAsrStatusEnum: 沙箱mergetaskstatus（基础设施层）
  *
  * 【statusstream转】created → processing → completed | failed
  */
 enum AsrTaskStatusEnum: string
 {
     case CREATED = 'created';              // 已create：taskinitializecomplete，等待process
-    case PROCESSING = 'processing';        // process中：正在execute录音、合并或总结
+    case PROCESSING = 'processing';        // process中：正在execute录音、merge或总结
     case COMPLETED = 'completed';          // 已complete：整个 ASR process全部complete（includemessagesend）
     case FAILED = 'failed';                // fail：taskexecutefail
 

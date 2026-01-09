@@ -20,16 +20,16 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 清null官方organization的 Delightful 服务商configuration和模型（放在delete软delete数据之前）
+        // 清null官方organization的 Delightful 服务商configuration和model（放在delete软deletedata之前）
         $this->cleanOfficialDelightfulProviderData();
 
-        // 清理 service_provider 相关四张表中的软delete数据
+        // 清理 service_provider 相关四张表中的软deletedata
         $this->cleanSoftDeletedData();
 
-        // 清洗 service_provider 表中 provider_code='Official' 的记录
+        // 清洗 service_provider 表中 provider_code='Official' 的record
         $this->cleanOfficialProviderData();
 
-        // 清理 service_provider_models 表中的冗余数据
+        // 清理 service_provider_models 表中的冗余data
         $this->cleanServiceProviderModelsData();
     }
 
@@ -38,72 +38,72 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // 软delete数据一旦物理delete就无法restore，所以 down method为null
+        // 软deletedata一旦物理delete就无法restore，所以 down method为null
     }
 
     /**
-     * 清理 service_provider 相关表中的软delete数据.
+     * 清理 service_provider 相关表中的软deletedata.
      */
     private function cleanSoftDeletedData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('start清理 service_provider 相关表的软delete数据');
+        $logger->info('start清理 service_provider 相关表的软deletedata');
 
         try {
-            // usetransactionensure数据一致性
+            // usetransactionensuredata一致性
             Db::transaction(function () use ($logger) {
                 $totalDeleted = 0;
 
-                // 1. delete service_provider 表中软delete的数据
+                // 1. delete service_provider 表中软delete的data
                 $deletedCount = Db::table('service_provider')
                     ->whereNotNull('deleted_at')
                     ->delete();
                 $totalDeleted += $deletedCount;
-                $logger->info("delete service_provider 表软delete数据: {$deletedCount} 条");
+                $logger->info("delete service_provider 表软deletedata: {$deletedCount} 条");
 
-                // 2. delete service_provider_configs 表中软delete的数据
+                // 2. delete service_provider_configs 表中软delete的data
                 $deletedCount = Db::table('service_provider_configs')
                     ->whereNotNull('deleted_at')
                     ->delete();
                 $totalDeleted += $deletedCount;
-                $logger->info("delete service_provider_configs 表软delete数据: {$deletedCount} 条");
+                $logger->info("delete service_provider_configs 表软deletedata: {$deletedCount} 条");
 
-                // 3. delete service_provider_models 表中软delete的数据
+                // 3. delete service_provider_models 表中软delete的data
                 $deletedCount = Db::table('service_provider_models')
                     ->whereNotNull('deleted_at')
                     ->delete();
                 $totalDeleted += $deletedCount;
-                $logger->info("delete service_provider_models 表软delete数据: {$deletedCount} 条");
+                $logger->info("delete service_provider_models 表软deletedata: {$deletedCount} 条");
 
-                // 4. delete service_provider_original_models 表中软delete的数据
+                // 4. delete service_provider_original_models 表中软delete的data
                 $deletedCount = Db::table('service_provider_original_models')
                     ->whereNotNull('deleted_at')
                     ->delete();
                 $totalDeleted += $deletedCount;
-                $logger->info("delete service_provider_original_models 表软delete数据: {$deletedCount} 条");
+                $logger->info("delete service_provider_original_models 表软deletedata: {$deletedCount} 条");
 
-                $logger->info("service_provider 相关表软delete数据清理complete，总共delete: {$totalDeleted} 条记录");
+                $logger->info("service_provider 相关表软deletedata清理complete，总共delete: {$totalDeleted} 条record");
             });
         } catch (Throwable $e) {
-            $logger->error('清理软delete数据过程中发生error: ' . $e->getMessage());
+            $logger->error('清理软deletedata过程中发生error: ' . $e->getMessage());
             throw $e;
         }
     }
 
     /**
-     * 清null官方organization的 Delightful 服务商configuration和模型.
+     * 清null官方organization的 Delightful 服务商configuration和model.
      */
     private function cleanOfficialDelightfulProviderData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('start清null官方organization的 Delightful 服务商configuration和模型');
+        $logger->info('start清null官方organization的 Delightful 服务商configuration和model');
 
         try {
-            // usetransactionensure数据一致性
+            // usetransactionensuredata一致性
             Db::transaction(function () use ($logger) {
-                // get官方organization编码
+                // get官方organizationencoding
                 $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
-                $logger->info("官方organization编码: {$officialOrganizationCode}");
+                $logger->info("官方organizationencoding: {$officialOrganizationCode}");
 
                 $totalDeleted = 0;
 
@@ -120,13 +120,13 @@ return new class extends Migration {
                 if (! empty($delightfulConfigIds)) {
                     $logger->info('找到 Delightful 服务商configurationquantity: ' . count($delightfulConfigIds));
 
-                    // 2. delete官方organization中 Delightful 服务商下的模型
+                    // 2. delete官方organization中 Delightful 服务商下的model
                     $deletedModelsCount = Db::table('service_provider_models')
                         ->where('organization_code', $officialOrganizationCode)
                         ->whereIn('service_provider_config_id', $delightfulConfigIds)
                         ->delete();
                     $totalDeleted += $deletedModelsCount;
-                    $logger->info("delete官方organization Delightful 服务商模型: {$deletedModelsCount} 条");
+                    $logger->info("delete官方organization Delightful 服务商model: {$deletedModelsCount} 条");
 
                     // 3. delete官方organization的 Delightful 服务商configuration
                     $deletedConfigsCount = Db::table('service_provider_configs')
@@ -139,24 +139,24 @@ return new class extends Migration {
                     $logger->info('未找到need清理的 Delightful 服务商configuration');
                 }
 
-                // 4. 额外清理：delete所有 is_office=1 的官方organization模型
+                // 4. 额外清理：delete所有 is_office=1 的官方organizationmodel
                 $deletedOfficeModelsCount = Db::table('service_provider_models')
                     ->where('organization_code', $officialOrganizationCode)
                     ->where('is_office', 1)
                     ->delete();
                 $totalDeleted += $deletedOfficeModelsCount;
-                $logger->info("delete官方organization Delightful 模型(is_office=1): {$deletedOfficeModelsCount} 条");
+                $logger->info("delete官方organization Delightful model(is_office=1): {$deletedOfficeModelsCount} 条");
 
-                $logger->info("官方organization Delightful 服务商数据清理complete，总共delete: {$totalDeleted} 条记录");
+                $logger->info("官方organization Delightful 服务商data清理complete，总共delete: {$totalDeleted} 条record");
             });
         } catch (Throwable $e) {
-            $logger->error('清理官方organization Delightful 服务商数据过程中发生error: ' . $e->getMessage());
+            $logger->error('清理官方organization Delightful 服务商data过程中发生error: ' . $e->getMessage());
             throw $e;
         }
     }
 
     /**
-     * 清洗 Official 服务商的数据.
+     * 清洗 Official 服务商的data.
      */
     private function cleanOfficialProviderData(): void
     {
@@ -164,9 +164,9 @@ return new class extends Migration {
         $logger->info('start清洗 Official 服务商的 description 和 translate 字段');
 
         try {
-            // usetransactionensure数据一致性
+            // usetransactionensuredata一致性
             Db::transaction(function () use ($logger) {
-                // queryneed清洗的 Official 服务商记录
+                // queryneed清洗的 Official 服务商record
                 $query = Db::table('service_provider')
                     ->select(['id', 'description', 'translate'])
                     ->where('provider_code', 'Official');
@@ -189,7 +189,7 @@ return new class extends Migration {
                         $needUpdate = true;
                     }
 
-                    // update记录
+                    // updaterecord
                     if ($needUpdate) {
                         Db::table('service_provider')
                             ->where('id', $provider['id'])
@@ -199,31 +199,31 @@ return new class extends Migration {
                 }
 
                 $logger->info("清洗complete，总共影响行数: {$updateCount}");
-                $logger->info('Official 服务商数据清洗complete');
+                $logger->info('Official 服务商data清洗complete');
             });
         } catch (Throwable $e) {
-            $logger->error('数据清洗过程中发生error: ' . $e->getMessage());
+            $logger->error('data清洗过程中发生error: ' . $e->getMessage());
             throw $e;
         }
     }
 
     /**
-     * 清理 service_provider_models 表中的冗余数据.
+     * 清理 service_provider_models 表中的冗余data.
      */
     private function cleanServiceProviderModelsData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('start清理 service_provider_models 表的冗余数据');
+        $logger->info('start清理 service_provider_models 表的冗余data');
 
         try {
-            // 1. get官方organization编码
+            // 1. get官方organizationencoding
             $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
-            $logger->info("官方organization编码: {$officialOrganizationCode}");
+            $logger->info("官方organizationencoding: {$officialOrganizationCode}");
 
-            // 2. 单独transaction：reset官方organization模型的 model_parent_id
+            // 2. 单独transaction：reset官方organizationmodel的 model_parent_id
             $this->resetOfficialModelsParentId($officialOrganizationCode, $logger);
 
-            // 3. get官方organization所有启用的模型（不needtransaction）
+            // 3. get官方organization所有启用的model（不needtransaction）
             $officialEnabledModels = Db::table('service_provider_models')
                 ->where('organization_code', $officialOrganizationCode)
                 ->where('status', Status::Enabled->value)
@@ -234,9 +234,9 @@ return new class extends Migration {
                 ->toArray();
 
             $officialModelIds = array_keys($officialEnabledModels);
-            $logger->info('get官方organization启用模型quantity: ' . count($officialModelIds));
+            $logger->info('get官方organization启用modelquantity: ' . count($officialModelIds));
 
-            // 4. get所有非官方organization编码（不needtransaction）
+            // 4. get所有非官方organizationencoding（不needtransaction）
             $allOrganizationCodes = Db::table('service_provider_models')
                 ->where('organization_code', '!=', $officialOrganizationCode)
                 ->whereNull('deleted_at')
@@ -249,13 +249,13 @@ return new class extends Migration {
             // 5. 按organizationhandle清理工作（小transaction）
             $this->cleanOrganizationsInBatches($allOrganizationCodes, $officialModelIds, $officialEnabledModels, $logger);
         } catch (Throwable $e) {
-            $logger->error('清理 service_provider_models 冗余数据过程中发生error: ' . $e->getMessage());
+            $logger->error('清理 service_provider_models 冗余data过程中发生error: ' . $e->getMessage());
             throw $e;
         }
     }
 
     /**
-     * reset官方organization模型的 parent_id（单独transaction）.
+     * reset官方organizationmodel的 parent_id（单独transaction）.
      */
     private function resetOfficialModelsParentId(string $officialOrganizationCode, LoggerInterface $logger): void
     {
@@ -264,12 +264,12 @@ return new class extends Migration {
                 ->where('organization_code', $officialOrganizationCode)
                 ->where('model_parent_id', '!=', 0)
                 ->update(['model_parent_id' => 0]);
-            $updatedCount && $logger->info("官方organization模型 model_parent_id reset为 0: {$updatedCount} 条");
+            $updatedCount && $logger->info("官方organizationmodel model_parent_id reset为 0: {$updatedCount} 条");
         });
     }
 
     /**
-     * 分批并发清理各个organization的数据（每个organization独立小transaction）.
+     * 分批并发清理各个organization的data（每个organization独立小transaction）.
      */
     private function cleanOrganizationsInBatches(array $organizationCodes, array $officialModelIds, array $officialEnabledModels, LoggerInterface $logger): void
     {
@@ -295,10 +295,10 @@ return new class extends Migration {
                 }, $organizationCode);
             }
 
-            // execute并发task并等待结果
+            // execute并发task并等待result
             $results = $parallel->wait();
 
-            // handle结果
+            // handleresult
             foreach ($results as $orgCode => $result) {
                 if (isset($result['error'])) {
                     $logger->error("清理organization {$orgCode} 时发生error: " . $result['error']->getMessage());
@@ -307,14 +307,14 @@ return new class extends Migration {
                     $totalDeleted += $deletedCount;
 
                     if ($deletedCount > 0) {
-                        $logger->info("organization {$orgCode} delete冗余模型: {$deletedCount} 条");
+                        $logger->info("organization {$orgCode} delete冗余model: {$deletedCount} 条");
                     }
                 }
             }
 
             $logger->info('第 ' . ($chunkIndex + 1) . ' 批organizationhandlecomplete');
 
-            // 每handle一批输出进度
+            // 每handle一批output进度
             $processedCount = ($chunkIndex + 1) * 10;
             if ($processedCount > $totalOrgs) {
                 $processedCount = $totalOrgs;
@@ -322,16 +322,16 @@ return new class extends Migration {
             $logger->info("已handle {$processedCount}/{$totalOrgs} 个organization，累计delete: {$totalDeleted} 条");
         }
 
-        $logger->info("service_provider_models 表冗余数据清理complete，总共delete: {$totalDeleted} 条记录");
+        $logger->info("service_provider_models 表冗余data清理complete，总共delete: {$totalDeleted} 条record");
     }
 
     /**
-     * 清理单个organization的数据（单独transaction）.
+     * 清理单个organization的data（单独transaction）.
      */
     private function cleanSingleOrganization(string $organizationCode, array $officialModelIds, array $officialEnabledModels): array
     {
         return Db::transaction(function () use ($organizationCode, $officialModelIds, $officialEnabledModels) {
-            // get官方organization编码用于安全防护
+            // get官方organizationencoding用于安全防护
             $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
             // 防护check：ensure不handle官方organization
@@ -341,7 +341,7 @@ return new class extends Migration {
 
             $totalDeletedCount = 0;
 
-            // 1. delete所有 is_office = 1 的数据（防护：非官方organization）
+            // 1. delete所有 is_office = 1 的data（防护：非官方organization）
             $isOfficeDeletedCount = Db::table('service_provider_models')
                 ->where('organization_code', $organizationCode)
                 ->where('organization_code', '!=', $officialOrganizationCode) // 双重防护
@@ -350,15 +350,15 @@ return new class extends Migration {
                 ->delete();
             $totalDeletedCount += $isOfficeDeletedCount;
 
-            // 2. deletequote不存在configuration的模型（批量query和批量delete）
+            // 2. deletequote不存在configuration的model（批量query和批量delete）
             $invalidConfigDeletedCount = $this->cleanModelsWithInvalidConfig($organizationCode, $officialOrganizationCode);
             $totalDeletedCount += $invalidConfigDeletedCount;
 
-            // 3. deleteconfigurationinvalid的模型（configurationdecrypt后为null或所有value都是null）
+            // 3. deleteconfigurationinvalid的model（configurationdecrypt后为null或所有value都是null）
             $invalidConfigDataDeletedCount = $this->cleanModelsWithInvalidConfigData($organizationCode, $officialOrganizationCode);
             $totalDeletedCount += $invalidConfigDataDeletedCount;
 
-            // 4. 查找 model_parent_id 不为 0 的数据
+            // 4. 查找 model_parent_id 不为 0 的data
             $modelsWithParent = Db::table('service_provider_models')
                 ->where('organization_code', $organizationCode)
                 ->where('model_parent_id', '!=', 0)
@@ -372,7 +372,7 @@ return new class extends Migration {
             foreach ($modelsWithParent as $model) {
                 $parentId = $model['model_parent_id'];
 
-                // check model_parent_id 是否在官方organization的模型 id 中
+                // check model_parent_id 是否在官方organization的model id 中
                 if (! in_array($parentId, $officialModelIds)) {
                     // model_parent_id 在官方organization找不到，markdelete
                     $deleteIds[] = $model['id'];
@@ -386,7 +386,7 @@ return new class extends Migration {
                 }
             }
 
-            // 5. 批量delete冗余数据（带防护）
+            // 5. 批量delete冗余data（带防护）
             if (! empty($deleteIds)) {
                 $redundantDeletedCount = Db::table('service_provider_models')
                     ->whereIn('id', $deleteIds)
@@ -400,11 +400,11 @@ return new class extends Migration {
     }
 
     /**
-     * 清理quote不存在configuration的模型（批量query和批量delete）.
+     * 清理quote不存在configuration的model（批量query和批量delete）.
      */
     private function cleanModelsWithInvalidConfig(string $organizationCode, string $officialOrganizationCode): int
     {
-        // 1. 批量query该organization下所有模型的 service_provider_config_id
+        // 1. 批量query该organization下所有model的 service_provider_config_id
         $modelConfigs = Db::table('service_provider_models')
             ->where('organization_code', $organizationCode)
             ->where('organization_code', '!=', $officialOrganizationCode) // 防护
@@ -438,7 +438,7 @@ return new class extends Migration {
             return 0;
         }
 
-        // 5. 批量deletequote不存在configuration的模型
+        // 5. 批量deletequote不存在configuration的model
         return Db::table('service_provider_models')
             ->where('organization_code', $organizationCode)
             ->where('organization_code', '!=', $officialOrganizationCode) // 双重防护
@@ -447,7 +447,7 @@ return new class extends Migration {
     }
 
     /**
-     * 清理configuration数据invalid的模型（configurationdecrypt后为null或所有value都是null）.
+     * 清理configurationdatainvalid的model（configurationdecrypt后为null或所有value都是null）.
      */
     private function cleanModelsWithInvalidConfigData(string $organizationCode, string $officialOrganizationCode): int
     {
@@ -481,7 +481,7 @@ return new class extends Migration {
             return 0;
         }
 
-        // 3. 批量deleteuseinvalidconfiguration的模型
+        // 3. 批量deleteuseinvalidconfiguration的model
         return Db::table('service_provider_models')
             ->where('organization_code', $organizationCode)
             ->where('organization_code', '!=', $officialOrganizationCode) // 双重防护
@@ -490,7 +490,7 @@ return new class extends Migration {
     }
 
     /**
-     * checkdecrypt后的configuration数据是否invalid.
+     * checkdecrypt后的configurationdata是否invalid.
      * @param mixed $decodedConfig
      */
     private function isConfigDataInvalid($decodedConfig): bool
@@ -518,7 +518,7 @@ return new class extends Migration {
     }
 
     /**
-     * getlog记录器.
+     * getlogrecord器.
      */
     private function getLogger(): LoggerInterface
     {

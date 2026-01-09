@@ -26,14 +26,14 @@ class DelightfulAccessToken
         $llmDataIsolation = new LLMDataIsolation('', 'system');
         $llmDataIsolation->setCurrentOrganizationCode($llmDataIsolation->getOfficialOrganizationCode());
 
-        // check应用是否已经create
+        // checkapplication是否已经create
         $applicationDomainService = di(ApplicationDomainService::class);
         $application = $applicationDomainService->getByCodeWithNull($llmDataIsolation, ModelGatewayOfficialApp::APP_CODE);
         if (! $application) {
             $application = new ApplicationEntity();
             $application->setCode(ModelGatewayOfficialApp::APP_CODE);
             $application->setName('灯塔引擎');
-            $application->setDescription('灯塔引擎官方应用');
+            $application->setDescription('灯塔引擎官方application');
             $application->setOrganizationCode($llmDataIsolation->getCurrentOrganizationCode());
             $application->setCreator('system');
             $application = $applicationDomainService->save($llmDataIsolation, $application);
@@ -51,7 +51,7 @@ class DelightfulAccessToken
         $accessToken->prepareForCreation();
         SystemAccessTokenManager::setSystemAccessToken($accessToken);
 
-        // 新增官方organization个人访问token常量
+        // 新增官方organization个人accesstoken常量
         $userAccessToken = new AccessTokenEntity();
         $userAccessToken->setId(2);
         $userAccessToken->setName($application->getCode());

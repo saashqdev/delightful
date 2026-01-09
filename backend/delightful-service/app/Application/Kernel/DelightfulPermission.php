@@ -49,7 +49,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         }
 
         $translated = $enum->label();
-        // 如果语言包缺失，return的仍然是original key，此时抛出exceptionreminder
+        // 如果语言package缺失，return的仍然是original key，此时throwexceptionreminder
         if ($translated === $enum->translationKey()) {
             ExceptionBuilder::throw(PermissionErrorCode::BusinessException, 'Missing i18n for key: ' . $enum->translationKey());
         }
@@ -153,7 +153,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
         $moduleLabel = $moduleEnum->label();
         if ($moduleLabel === $moduleEnum->translationKey()) {
-            // 如果缺失翻译，手动兼容已知模块
+            // 如果缺失翻译，手动compatible已知模块
             return match ($moduleEnum) {
                 DelightfulResourceEnum::ADMIN_AI => 'AI管理',
                 default => $moduleEnum->value,
@@ -212,7 +212,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         $tree = [];
 
         foreach ($this->generateAllPermissions() as $permission) {
-            // 将资源路径按 '.' split
+            // 将资源path按 '.' split
             $segments = explode('.', $permission['resource']);
             if (count($segments) < 2) {
                 // at least应contain平台 + 资源两级，若不足则跳过
@@ -316,7 +316,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
      */
     public function checkPermission(string $permissionKey, array $userPermissions, bool $isPlatformOrganization = false): bool
     {
-        // 平台organization校验：非平台organization不allow访问 platform 平台资源
+        // 平台organization校验：非平台organization不allowaccess platform 平台资源
         $parsed = $this->parsePermission($permissionKey);
         $platformKey = explode('.', $parsed['resource'])[0];
         if ($platformKey === DelightfulResourceEnum::PLATFORM->value && ! $isPlatformOrganization) {
@@ -411,7 +411,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 }
                 return $translated;
             }
-            // 兼容：若未implement label/translationKey，则退回通用 getOperationLabel 逻辑
+            // compatible：若未implement label/translationKey，则退回通用 getOperationLabel 逻辑
         }
         return $this->getOperationLabel($operation);
     }
@@ -430,7 +430,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * according to平台 key get显示名称，可按需extension.
+     * according to平台 key get显示name，可按需extension.
      */
     private function getPlatformLabel(string $platformKey): string
     {

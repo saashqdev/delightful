@@ -112,7 +112,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
         try {
             // use delightfulChatContract 校验parameter
             $context = new DelightfulContext($params['context']);
-            // 兼容历史version,从query中gettoken
+            // compatiblehistoryversion,从query中gettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
             $this->delightfulChatMessageAppService->setUserContext($userToken, $context);
             // call guard getuserinfo
@@ -174,7 +174,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->setLocale($params['context']['language'] ?? '');
             // use delightfulChatContract 校验parameter
             $controlRequest = new ControlRequest($params);
-            // 兼容历史version,从query中gettoken
+            // compatiblehistoryversion,从query中gettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
             $this->delightfulChatMessageAppService->setUserContext($userToken, $controlRequest->getContext());
             // getuserinfo
@@ -230,7 +230,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->setLocale($params['context']['language'] ?? '');
             # use delightfulChatContract 校验parameter
             $chatRequest = new ChatRequest($params);
-            // 兼容历史version,从query中gettoken
+            // compatiblehistoryversion,从query中gettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
             // according tomessagetype,分发到对应的process模块
@@ -284,7 +284,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->setLocale($params['context']['language'] ?? '');
             # use delightfulChatContract 校验parameter
             $chatRequest = new ChatRequest($params);
-            // 兼容历史version,从query中gettoken
+            // compatiblehistoryversion,从query中gettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
             // according tomessagetype,分发到对应的process模块

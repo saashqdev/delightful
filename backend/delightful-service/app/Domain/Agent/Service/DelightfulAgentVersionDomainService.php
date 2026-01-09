@@ -103,7 +103,7 @@ class DelightfulAgentVersionDomainService
             }
             $msg = 'publishsuccess';
         } elseif ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value) {
-            // publish到应用市场
+            // publish到application市场
             // 审核开关
             /* @phpstan-ignore-next-line */
             if ($reviewOpen) {
@@ -184,7 +184,7 @@ class DelightfulAgentVersionDomainService
             $agentMaxVersion = $agentMaxVersion . '.0.0';
         }
 
-        // 解析version号，for example "0.0.1" => ['0', '0', '1']
+        // parseversion号，for example "0.0.1" => ['0', '0', '1']
         [$major, $minor, $patch] = explode('.', $agentMaxVersion);
 
         // 将 PATCH 部分加 1
@@ -240,7 +240,7 @@ class DelightfulAgentVersionDomainService
 
     /**
      * based on游标paginationget指定organization的助理versionlist.
-     * @param string $organizationCode organization代码
+     * @param string $organizationCode organizationcode
      * @param array $agentVersionIds 助理versionIDlist
      * @param string $cursor 游标ID，如果为空string则从最新开始
      * @param int $pageSize 每页quantity

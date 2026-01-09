@@ -120,7 +120,7 @@ class GoogleSearch
 
             return Json::decode($response->getBody()->getContents());
         } catch (BadResponseException|RequestException $e) {
-            // 记录errorlog
+            // recorderrorlog
             $this->logger->error(sprintf(
                 '谷歌search遇到error:%s,file:%s,line:%s trace:%s, will generate again.',
                 $e->getResponse()?->getBody(), /* @phpstan-ignore-line */

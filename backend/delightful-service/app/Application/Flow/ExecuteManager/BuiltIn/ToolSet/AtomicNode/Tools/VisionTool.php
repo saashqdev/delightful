@@ -240,13 +240,13 @@ JSON, true)));
    - 视觉特征：颜色、构图、光线、质量等
    - 语义info：活动、情绪、关系、背景故事等
    - 文字识别：如有文字，准确提取并理解含义
-   - 技术info：如有图table/数据，分析其含义
+   - 技术info：如有图table/data，分析其含义
    
 4. 分析format要求：
    - 对于重要分析result，use结构化JSONformat呈现，如：{"类别":"xx", "主体":"xx", "特征":["xx","xx"]}
    - 对于不确定content，明确table明推测性质，for example："可能是..."
    - 如image质量较低，指出限制因素并尽力分析
-   - 对于多图分析，分别markimage序号进行解析，并总结其关联性
+   - 对于多图分析，分别markimage序号进行parse，并总结其关联性
    
 5. 注意事项：
    - 避免对敏感content做主观评判
@@ -276,7 +276,7 @@ JSON, true)));
     "type": "array",
     "key": "root",
     "sort": 0,
-    "title": "历史message",
+    "title": "historymessage",
     "description": "",
     "required": null,
     "value": {
@@ -297,7 +297,7 @@ JSON, true)));
         "type": "object",
         "key": "messages",
         "sort": 0,
-        "title": "历史message",
+        "title": "historymessage",
         "description": "",
         "required": [
             "role",

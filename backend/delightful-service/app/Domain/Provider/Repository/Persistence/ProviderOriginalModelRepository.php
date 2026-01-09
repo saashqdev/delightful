@@ -59,11 +59,11 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
         $attributes = $this->getFieldAttributes($providerOriginalModelEntity);
 
         if (! $providerOriginalModelEntity->getId()) {
-            // create新记录
+            // create新record
             $this->initializeEntityForCreation($providerOriginalModelEntity, $attributes);
             ProviderOriginalModelModel::query()->insert($attributes);
         } else {
-            // update现有记录
+            // update现有record
             $now = new DateTime();
             $providerOriginalModelEntity->setUpdatedAt($now);
             $attributes['updated_at'] = $now->format('Y-m-d H:i:s');
@@ -89,16 +89,16 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
     {
         $systemType = ProviderOriginalModelType::System;
 
-        // 第一次query：getsystemdefault模型（所有organization都可见）
+        // 第一次query：getsystemdefaultmodel（所有organization都可见）
         $systemBuilder = $this->createProviderOriginalModelQuery()
             ->where('type', $systemType->value);
         $systemModels = Db::select($systemBuilder->toSql(), $systemBuilder->getBindings());
 
-        // 第二次query：getwhen前organization的customize模型
+        // 第二次query：getwhen前organization的customizemodel
         $organizationBuilder = $this->createProviderOriginalModelQuery($dataIsolation);
         $organizationModels = Db::select($organizationBuilder->toSql(), $organizationBuilder->getBindings());
 
-        // 合并结果
+        // mergeresult
         $allModels = array_merge($systemModels, $organizationModels);
 
         // 按 id 降序sort
@@ -120,8 +120,8 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
     }
 
     /**
-     * 准备移除软删相关功能，temporary这样写。create带有软deletefilter的 ProviderOriginalModelModel querybuild器.
-     * @param null|ProviderDataIsolation $dataIsolation if传入则添加organization代码filter
+     * 准备移除软删相关feature，temporary这样写。create带有软deletefilter的 ProviderOriginalModelModel querybuild器.
+     * @param null|ProviderDataIsolation $dataIsolation if传入则添加organizationcodefilter
      */
     private function createProviderOriginalModelQuery(?ProviderDataIsolation $dataIsolation = null): Builder
     {

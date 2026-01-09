@@ -32,7 +32,7 @@ class NodeParamsConfigFactory
             $name = '';
             foreach ($flowNodeDefineVersions as $flowNodeDefine) {
                 $versions[] = $flowNodeDefine->getVersion();
-                // 永远use最newversion名称
+                // 永远use最newversionname
                 $name = $flowNodeDefine->getName();
             }
             $versionList[] = [

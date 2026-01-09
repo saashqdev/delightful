@@ -36,7 +36,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * save知识库 - 基本information.
+     * saveknowledge base - 基本information.
      * @param array<DocumentFileInterface> $files
      */
     public function save(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $savingDelightfulFlowKnowledgeEntity, array $files = []): KnowledgeBaseEntity
@@ -73,7 +73,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * save知识库 - 向量进度.
+     * saveknowledge base - 向量进度.
      */
     public function saveProcess(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $savingKnowledgeEntity): KnowledgeBaseEntity
     {
@@ -86,7 +86,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * query知识库列表.
+     * queryknowledge base列表.
      * @return array{total: int, list: array<KnowledgeBaseEntity>}
      */
     public function queries(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseQuery $query, Page $page): array
@@ -109,7 +109,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * queryone知识库.
+     * queryoneknowledge base.
      */
     public function show(KnowledgeBaseDataIsolation $dataIsolation, string $code, bool $checkCollection = false): KnowledgeBaseEntity
     {
@@ -134,7 +134,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * 知识库是否存在.
+     * knowledge base是否存在.
      */
     public function exist(KnowledgeBaseDataIsolation $dataIsolation, string $code): bool
     {
@@ -142,7 +142,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * delete知识库.
+     * deleteknowledge base.
      */
     #[Transactional]
     public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void
@@ -153,7 +153,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * update知识库status
+     * updateknowledge basestatus
      */
     public function changeSyncStatus(KnowledgeBaseEntity|KnowledgeBaseFragmentEntity $entity): void
     {

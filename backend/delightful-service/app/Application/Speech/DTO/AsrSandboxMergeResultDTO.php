@@ -10,7 +10,7 @@ namespace App\Application\Speech\DTO;
 use App\Application\Speech\Enum\SandboxAsrStatusEnum;
 
 /**
- * ASR 沙箱合并结果 DTO.
+ * ASR 沙箱mergeresult DTO.
  */
 readonly class AsrSandboxMergeResultDTO
 {
@@ -41,7 +41,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * check合并是否complete.
+     * checkmerge是否complete.
      */
     public function isFinished(): bool
     {
@@ -49,7 +49,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * check合并是否failed.
+     * checkmerge是否failed.
      */
     public function isError(): bool
     {
@@ -57,7 +57,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * 转换为array（用于兼容现有代码）.
+     * 转换为array（用于compatible现有code）.
      */
     public function toArray(): array
     {

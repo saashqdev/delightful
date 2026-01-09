@@ -115,7 +115,7 @@ class ImageGenerateFactory
 
     private static function createVolcengineRequest(array $data): VolcengineModelRequest
     {
-        // 解析 size parameter为 width 和 height
+        // parse size parameter为 width 和 height
         [$width, $height] = self::parseSizeToWidthHeight($data['size'] ?? '1024x1024');
 
         $request = new VolcengineModelRequest(
@@ -137,7 +137,7 @@ class ImageGenerateFactory
         $model = $data['model'];
         $mode = strtolower(explode('-', $model, limit: 2)[1] ?? 'fast');
 
-        // Midjourney 不use宽高parameter，只need prompt 和 mode，但是 Request 类继承need这些parameter
+        // Midjourney 不use宽高parameter，只need prompt 和 mode，但是 Request 类inheritneed这些parameter
         // 所以我们给defaultvalue即可
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
@@ -161,7 +161,7 @@ class ImageGenerateFactory
         }
         $model = strtolower($model);
 
-        // 解析 size parameter为 width 和 height
+        // parse size parameter为 width 和 height
         [$widthStr, $heightStr] = self::parseSizeToWidthHeight($data['size'] ?? '1024x1024');
         $width = (int) $widthStr;
         $height = (int) $heightStr;
@@ -251,7 +251,7 @@ class ImageGenerateFactory
 
     private static function createQwenImageRequest(array $data): QwenImageModelRequest
     {
-        // 解析 size parameter为 width 和 height
+        // parse size parameter为 width 和 height
         [$width, $height] = self::parseSizeToWidthHeight($data['size'] ?? '1328x1328');
 
         $request = new QwenImageModelRequest(
@@ -321,7 +321,7 @@ class ImageGenerateFactory
 
     private static function createVolcengineArkRequest(array $data): VolcengineArkRequest
     {
-        // 解析 size parameter为 width 和 height（use VolcengineArk 的固定比例configuration）
+        // parse size parameter为 width 和 height（use VolcengineArk 的固定比例configuration）
         [$width, $height] = self::parseSizeToWidthHeight($data['size'] ?? '1024x1024', ImageGenerateModelType::VolcengineArk->value);
 
         $request = new VolcengineArkRequest(
@@ -350,12 +350,12 @@ class ImageGenerateFactory
             $request->setResponseFormat($data['response_format']);
         }
 
-        // process组图功能parameter
+        // process组图featureparameter
         if (isset($data['sequential_image_generation'])) {
             $request->setSequentialImageGeneration($data['sequential_image_generation']);
         }
 
-        // process组图功能选项parameter
+        // process组图featureoptionparameter
         if (isset($data['sequential_image_generation_options']) && is_array($data['sequential_image_generation_options'])) {
             $request->setSequentialImageGenerationOptions($data['sequential_image_generation_options']);
         }
@@ -364,7 +364,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * 解析各种 size format为 [width, height] array.
+     * parse各种 size format为 [width, height] array.
      * 支持format：1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 等.
      * @param string $size 尺寸string
      * @param null|string $modelKey model键名，如果指定则优先use该model的固定比例configuration

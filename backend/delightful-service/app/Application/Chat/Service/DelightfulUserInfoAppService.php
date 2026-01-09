@@ -14,7 +14,7 @@ use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
 use App\Domain\Contact\Service\DelightfulUserDomainService;
 
 /**
- * Delightfuluserinfo应用service.
+ * Delightfuluserinfoapplicationservice.
  *
  * 聚合user的基本info、accountinfo和departmentinfo，提供完整的userinfo。
  */
@@ -32,7 +32,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
      * get完整的userinfo.
      *
      * @param string $userId userID
-     * @param ContactDataIsolation $dataIsolation 数据隔离object
+     * @param ContactDataIsolation $dataIsolation data隔离object
      * @return array containuser完整info的array
      */
     public function getUserInfo(string $userId, ContactDataIsolation $dataIsolation): array
@@ -79,7 +79,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
      * 批量getuserinfo.
      *
      * @param array $userIds userIDarray
-     * @param ContactDataIsolation $dataIsolation 数据隔离object
+     * @param ContactDataIsolation $dataIsolation data隔离object
      * @return array userinfoarray，键为userID
      */
     public function getBatchUserInfo(array $userIds, ContactDataIsolation $dataIsolation): array
@@ -107,7 +107,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
      * getuser的主要departmentinfo.
      *
      * @param string $userId userID
-     * @param ContactDataIsolation $dataIsolation 数据隔离object
+     * @param ContactDataIsolation $dataIsolation data隔离object
      * @return null|array 主要departmentinfo，如果没有则returnnull
      */
     public function getUserPrimaryDepartment(string $userId, ContactDataIsolation $dataIsolation): ?array
@@ -120,7 +120,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
      * getdepartmentinfo.
      *
      * @param array $departmentUserEntities departmentuser关联info
-     * @param ContactDataIsolation $dataIsolation 数据隔离object
+     * @param ContactDataIsolation $dataIsolation data隔离object
      * @return array departmentinfoarray
      */
     private function getDepartmentsInfo(array $departmentUserEntities, ContactDataIsolation $dataIsolation): array
@@ -141,7 +141,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
                 continue;
             }
 
-            // get路径department
+            // getpathdepartment
             $pathNames = [];
             $pathDepartments = explode('/', $departmentEntity->getPath());
             $pathDepartmentEntities = $this->departmentDomainService->getDepartmentByIds($dataIsolation, $pathDepartments, true);

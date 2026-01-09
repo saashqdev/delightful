@@ -80,7 +80,7 @@ class GPTAPI
     }
 
     /**
-     * queryGPT4otask结果.
+     * queryGPT4otaskresult.
      */
     public function getGPT4oTaskResult(string $jobId): array
     {

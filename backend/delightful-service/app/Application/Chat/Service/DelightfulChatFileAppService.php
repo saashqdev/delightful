@@ -14,8 +14,8 @@ use App\Domain\Contact\Entity\ValueObject\DataIsolation;
 use App\Domain\File\Service\FileDomainService;
 
 /**
- * chatfile应用service
- * 提供给其他领域use的接口.
+ * chatfileapplicationservice
+ * 提供给其他领域use的interface.
  */
 class DelightfulChatFileAppService extends AbstractAppService
 {
@@ -30,8 +30,8 @@ class DelightfulChatFileAppService extends AbstractAppService
      * 如果file已存在则update，不存在则create.
      *
      * @param string $fileKey filekey
-     * @param DataIsolation $dataIsolation 数据隔离object
-     * @param array $fileData file数据
+     * @param DataIsolation $dataIsolation data隔离object
+     * @param array $fileData filedata
      * @return array returncontainfileinfo的array
      */
     public function saveOrUpdateByFileKey(string $fileKey, DataIsolation $dataIsolation, array $fileData): array

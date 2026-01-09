@@ -22,7 +22,7 @@ use Hyperf\Codec\Json;
 use Throwable;
 
 /**
- * 官方代理模型.
+ * 官方代理model.
  */
 class OfficialProxyModel extends AbstractImageGenerate
 {

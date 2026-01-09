@@ -31,7 +31,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
     {
         parent::configure();
         $this->setDescription('ensure所有助理的开关指令都有 residency=true property')
-            ->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'test模式：提供JSONformat的test数据进行process', '')
+            ->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'test模式：提供JSONformat的testdata进行process', '')
             ->addOption('dry-run', null, InputOption::VALUE_NONE, '空运行模式：只check但不update到database');
     }
 
@@ -151,7 +151,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
     /**
      * processtest模式.
      *
-     * @param string $testData JSONformat的test数据
+     * @param string $testData JSONformat的testdata
      * @param bool $isDryRun 是否为空运行模式
      */
     private function handleTestMode(string $testData, bool $isDryRun): int
@@ -161,11 +161,11 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         try {
             $data = Json::decode($testData);
         } catch (Throwable $e) {
-            $this->output->writeln('<error>解析test数据fail: ' . $e->getMessage() . '</error>');
+            $this->output->writeln('<error>parsetestdatafail: ' . $e->getMessage() . '</error>');
             return 1;
         }
 
-        $this->output->writeln('test数据process开始...');
+        $this->output->writeln('testdataprocess开始...');
 
         // 显示original指令
         $this->output->writeln('<comment>original指令:</comment>');

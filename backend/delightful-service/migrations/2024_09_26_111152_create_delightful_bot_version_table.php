@@ -26,14 +26,14 @@ return new class extends Migration {
 
             $table->string('version_description', 255)->default('')->comment('description');
             $table->string('version_number')->nullable()->comment('version number');
-            $table->integer('release_scope')->nullable()->comment('publishrange.1:publish到企业内部 2:publish到应用市场');
+            $table->integer('release_scope')->nullable()->comment('publishrange.1:publish到企业内部 2:publish到application市场');
 
             $table->integer('approval_status')->default(3)->nullable(false)->comment('approvalstatus');
             $table->integer('review_status')->default(0)->nullable(false)->comment('审核status');
             $table->integer('enterprise_release_status')->default(0)->nullable(false)->comment('publish到企业内部status');
-            $table->integer('app_market_status')->default(0)->nullable(false)->comment('publish到应用市场status');
+            $table->integer('app_market_status')->default(0)->nullable(false)->comment('publish到application市场status');
 
-            $table->string('organization_code')->comment('organization编码');
+            $table->string('organization_code')->comment('organizationencoding');
 
             $table->string('created_uid')->default('')->comment('publish人');
             $table->timestamp('created_at')->nullable()->comment('creation time');

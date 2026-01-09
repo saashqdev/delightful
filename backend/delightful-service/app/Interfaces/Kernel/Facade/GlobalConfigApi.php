@@ -27,7 +27,7 @@ class GlobalConfigApi
         $config = $this->delightfulSettingAppService->get();
         $result = $config->toArray();
 
-        // 合并平台setting
+        // merge平台setting
         try {
             /** @var PlatformSettingsAppService $platformSettingsAppService */
             $platformSettingsAppService = di(PlatformSettingsAppService::class);

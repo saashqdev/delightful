@@ -300,7 +300,7 @@ final class LongTermMemoryEntity extends AbstractEntity
 
     /**
      * 内部set启用status（不进行业务规则check）.
-     * 用于数据initialize和内部操作，跳过业务规则限制.
+     * 用于datainitialize和内部操作，跳过业务规则限制.
      */
     public function setEnabledInternal(bool $enabled): void
     {
@@ -370,7 +370,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     // 业务method
 
     /**
-     * 访问记忆（update访问次数和time）.
+     * access记忆（updateaccess次数和time）.
      */
     public function access(): void
     {
@@ -400,7 +400,7 @@ final class LongTermMemoryEntity extends AbstractEntity
         // 计算time衰减
         $timeDecay = $this->calculateTimeDecay();
 
-        // 计算访问频率加成
+        // 计算access频率加成
         $accessBonus = $this->calculateAccessBonus();
 
         return $baseScore * $timeDecay * $this->decayFactor + $accessBonus;
@@ -425,7 +425,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 添加元数据.
+     * 添加元data.
      */
     public function addMetadata(string $key, mixed $value): void
     {
@@ -433,7 +433,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * get元数据.
+     * get元data.
      */
     public function getMetadataValue(string $key): mixed
     {
@@ -441,7 +441,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 重写 set method，对 enabled field进行特殊process.
+     * override set method，对 enabled field进行特殊process.
      */
     protected function set(string $key, mixed $value): void
     {
@@ -465,12 +465,12 @@ final class LongTermMemoryEntity extends AbstractEntity
 
         $daysSinceLastAccess = (new DateTime())->diff($this->lastAccessedAt)->days;
 
-        // according to访问time计算衰减，at most衰减到 0.5
+        // according toaccesstime计算衰减，at most衰减到 0.5
         return max(0.5, 1.0 - ($daysSinceLastAccess * 0.01));
     }
 
     /**
-     * 计算访问频率加成.
+     * 计算access频率加成.
      */
     private function calculateAccessBonus(): float
     {
@@ -478,7 +478,7 @@ final class LongTermMemoryEntity extends AbstractEntity
             return 0.0;
         }
 
-        // 访问次数的对数加成，避免过度奖励
+        // access次数的对数加成，避免过度奖励
         return min(0.3, log($this->accessCount + 1) * 0.1);
     }
 }

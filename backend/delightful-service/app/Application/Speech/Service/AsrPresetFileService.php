@@ -40,12 +40,12 @@ readonly class AsrPresetFileService
      * createpreset笔记和stream识别file.
      *
      * @param string $userId userID
-     * @param string $organizationCode organization编码
+     * @param string $organizationCode organizationencoding
      * @param int $projectId 项目ID
-     * @param string $displayDir 显示目录相对路径 (如: 录音总结_xxx)
-     * @param int $displayDirId 显示目录ID
-     * @param string $hiddenDir 隐藏目录相对路径 (如: .asr_recordings/session_xxx)
-     * @param int $hiddenDirId 隐藏目录ID
+     * @param string $displayDir 显示directory相对path (如: 录音总结_xxx)
+     * @param int $displayDirId 显示directoryID
+     * @param string $hiddenDir 隐藏directory相对path (如: .asr_recordings/session_xxx)
+     * @param int $hiddenDirId 隐藏directoryID
      * @param string $taskKey task键
      * @return array{note_file: TaskFileEntity, transcript_file: TaskFileEntity}
      */
@@ -66,7 +66,7 @@ readonly class AsrPresetFileService
         // getorganization码+APP_ID+bucket_md5前缀
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($organizationCode);
 
-        // create笔记file（放在显示目录，user可见）
+        // create笔记file（放在显示directory，user可见）
         $noteFile = $this->createNoteFile(
             $userId,
             $organizationCode,
@@ -78,7 +78,7 @@ readonly class AsrPresetFileService
             $workDir
         );
 
-        // createstream识别file（放在隐藏目录，user不可见）
+        // createstream识别file（放在隐藏directory，user不可见）
         $transcriptFile = $this->createTranscriptFile(
             $userId,
             $organizationCode,
@@ -167,7 +167,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * create笔记file（放在显示目录）.
+     * create笔记file（放在显示directory）.
      */
     private function createNoteFile(
         string $userId,
@@ -204,7 +204,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * createstream识别file（放在隐藏目录）.
+     * createstream识别file（放在隐藏directory）.
      */
     private function createTranscriptFile(
         string $userId,
@@ -260,7 +260,7 @@ readonly class AsrPresetFileService
         // 完整 file_key
         $fileKey = AsrAssembler::buildFileKey($fullPrefix, $workDir, $relativePath);
 
-        // 元数据
+        // 元data
         $metadata = [
             'asr_preset_file' => true,
             'file_type' => $fileType,
@@ -286,7 +286,7 @@ readonly class AsrPresetFileService
             'is_directory' => false,
             'sort' => 0,
             'parent_id' => $parentId,
-            'source' => 2, // 2-项目目录
+            'source' => 2, // 2-项目directory
             'metadata' => Json::encode($metadata),
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),

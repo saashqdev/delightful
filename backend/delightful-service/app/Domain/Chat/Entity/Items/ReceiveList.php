@@ -22,7 +22,7 @@ class ReceiveList extends UnderlineObjectJsonSerializable
     protected array $seenList = [];
 
     /**
-     * 已查看详情列table.
+     * 已查看detail列table.
      */
     protected array $readList = [];
 

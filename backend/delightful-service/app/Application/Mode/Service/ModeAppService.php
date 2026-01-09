@@ -32,14 +32,14 @@ class ModeAppService extends AbstractModeAppService
         // get目前的所有可用的 agent
         $beDelightfulAgentAppService = di(BeDelightfulAgentAppService::class);
         $agentData = $beDelightfulAgentAppService->queries($authorization, new BeDelightfulAgentQuery(), Page::createNoPage());
-        // 合并常用和全部 agent list，常用在前
+        // merge常用和全部 agent list，常用在前
         /** @var array<BeDelightfulAgentEntity> $allAgents */
         $allAgents = array_merge($agentData['frequent'], $agentData['all']);
         if (empty($allAgents)) {
             return [];
         }
 
-        // get后台的所有模式，用于封装数据到 Agent 中
+        // get后台的所有模式，用于封装data到 Agent 中
         $query = new ModeQuery(status: true);
         $modeEnabledList = $this->modeDomainService->getModes($modeDataIsolation, $query, Page::createNoPage())['list'];
 
@@ -167,7 +167,7 @@ class ModeAppService extends AbstractModeAppService
         $providerModels = $this->getModels($modeAggregate);
         $modeGroupDetailDTOS = ModeAssembler::aggregateToFlatGroupsDTO($modeAggregate, $providerModels);
 
-        // process图标路径转换为完整URL
+        // process图标path转换为完整URL
         $this->processModeGroupDetailIcons($authorization, $modeGroupDetailDTOS);
 
         return $modeGroupDetailDTOS;
@@ -206,7 +206,7 @@ class ModeAppService extends AbstractModeAppService
             }
         }
 
-        // 应用级联status筛选，return可用model
+        // application级联status筛选，return可用model
         $availableModels = [];
         foreach ($allModels as $modelId => $models) {
             $bestModel = $this->selectBestModelForBatch($models, $providerStatuses);

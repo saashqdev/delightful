@@ -47,7 +47,7 @@ class MCPToolManager
     }
 
     /**
-     * get指定名称的tool.
+     * get指定name的tool.
      */
     public function getTool(string $name): ?MCPTool
     {
@@ -55,7 +55,7 @@ class MCPToolManager
     }
 
     /**
-     * check指定名称的tool是否存在.
+     * check指定name的tool是否存在.
      */
     public function hasTool(string $name): bool
     {

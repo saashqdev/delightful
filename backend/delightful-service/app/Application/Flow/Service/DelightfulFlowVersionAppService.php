@@ -41,7 +41,7 @@ class DelightfulFlowVersionAppService extends AbstractFlowAppService
     }
 
     /**
-     * getversion详情.
+     * getversiondetail.
      */
     public function show(Authenticatable $authorization, string $flowCode, string $versionCode): DelightfulFlowVersionEntity
     {

@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->unsignedInteger('type')->comment('type');
             $table->unsignedTinyInteger('status')->default(0)->comment('status');
             $table->json('extra')->nullable()->comment('额外configuration');
-            $table->string('organization')->comment('organization编码');
+            $table->string('organization')->comment('organizationencoding');
             $table->unique(['type', 'organization'], 'unique_type_organization');
             $table->datetimes();
         });

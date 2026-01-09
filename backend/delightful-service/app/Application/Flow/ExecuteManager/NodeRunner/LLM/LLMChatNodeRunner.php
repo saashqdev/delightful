@@ -18,7 +18,7 @@ use Hyperf\Odin\Message\AssistantMessage;
 use Hyperf\Odin\Message\UserMessage;
 use Hyperf\Odin\Message\UserMessageContent;
 
-#[FlowNodeDefine(type: NodeType::LLM->value, code: NodeType::LLM->name, name: '大模型call', paramsConfig: LLMChatNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: false, needOutput: true)]
+#[FlowNodeDefine(type: NodeType::LLM->value, code: NodeType::LLM->name, name: '大modelcall', paramsConfig: LLMChatNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: false, needOutput: true)]
 class LLMChatNodeRunner extends AbstractLLMNodeRunner
 {
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void
@@ -97,7 +97,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 $vertexResult->addDebugLog('reasoning', $reasoningResponseText);
                 $vertexResult->addDebugLog('origin_response', $responseText);
 
-                // 解压
+                // decompress
                 $responseText = CompressibleContent::deCompress($responseText, false);
                 $vertexResult->addDebugLog('response', $responseText);
             }

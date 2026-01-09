@@ -69,7 +69,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected ?string $versionNumber = '';
 
     /**
-     * publishrange. 0:个人use,1:企业内部,2:应用市场.
+     * publishrange. 0:个人use,1:企业内部,2:application市场.
      */
     protected ?int $releaseScope = 0;
 
@@ -89,7 +89,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected ?int $enterpriseReleaseStatus;
 
     /**
-     * publish到应用市场status.
+     * publish到application市场status.
      */
     protected ?int $appMarketStatus;
 
@@ -99,7 +99,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected string $createdUid = '';
 
     /**
-     * organization编码
+     * organizationencoding
      */
     protected string $organizationCode;
 

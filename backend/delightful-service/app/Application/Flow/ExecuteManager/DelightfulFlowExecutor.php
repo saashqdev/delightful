@@ -189,7 +189,7 @@ class DelightfulFlowExecutor
         /** @var TriggerType $appointTriggerType */
         $appointTriggerType = $args['appoint_trigger_type'];
         if ($appointTriggerType === TriggerType::LoopStart) {
-            // 循环时，不process后面的数据
+            // 循环时，不process后面的data
             return;
         }
 
@@ -227,7 +227,7 @@ class DelightfulFlowExecutor
         $this->archiveToCloud($vertexResult);
 
         if (! $nodeDebugResult->isSuccess()) {
-            // 如果是 API request，抛出errorinfo
+            // 如果是 API request，throwerrorinfo
             if ($this->executionData->getExecutionType()->isApi()) {
                 // 如果不是助理parametercall 才recorderrorinfo
                 if (! $this->executionData->getTriggerData()->isAssistantParamCall()) {
@@ -241,7 +241,7 @@ class DelightfulFlowExecutor
                 }
             }
 
-            // 如果need主动抛出exception
+            // 如果need主动throwexception
             if ($nodeDebugResult->isThrowException()) {
                 if ($nodeDebugResult->isUnAuthorized()) {
                     throw new BusinessException($nodeDebugResult->getErrorMessage(), $nodeDebugResult->getErrorCode());
@@ -283,7 +283,7 @@ class DelightfulFlowExecutor
             $this->updateStatus(ExecuteLogStatus::Failed, $result);
         }
 
-        // 将currentprocess产生的 api executeresult传递给上一层的数据
+        // 将currentprocess产生的 api executeresult传递给上一层的data
         if ($parentExecutionData = ExecutionDataCollector::get($this->executionData->getUniqueParentId())) {
             foreach ($this->executionData->getReplyMessages() as $replyMessage) {
                 $parentExecutionData->addReplyMessage($replyMessage);
@@ -304,7 +304,7 @@ class DelightfulFlowExecutor
         /** @var TriggerType $appointTriggerType */
         $appointTriggerType = $args['appoint_trigger_type'];
         if ($appointTriggerType === TriggerType::LoopStart) {
-            // 循环时，不能delete该数据
+            // 循环时，不能delete该data
             return;
         }
 

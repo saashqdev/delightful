@@ -13,7 +13,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
  * @property int $id 雪花ID
- * @property string $organization_code organization编码
+ * @property string $organization_code organizationencoding
  * @property string $delightful_id 账号DelightfulID
  * @property string $user_id userID
  * @property string $key setting键

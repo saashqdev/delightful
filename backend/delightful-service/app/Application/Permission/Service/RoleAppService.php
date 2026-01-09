@@ -46,7 +46,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * getrole详情.
+     * getroledetail.
      */
     public function show(PermissionDataIsolation $dataIsolation, int $id): RoleEntity
     {
@@ -54,7 +54,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * according to名称getrole.
+     * according tonamegetrole.
      */
     public function getByName(PermissionDataIsolation $dataIsolation, string $name): ?RoleEntity
     {

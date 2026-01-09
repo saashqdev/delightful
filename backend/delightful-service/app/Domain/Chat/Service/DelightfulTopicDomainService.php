@@ -46,7 +46,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
 
     /**
      * customer端主动操asback,minutehairthis操asgivereceive方.
-     * 注意thiso clockmessage结构(eachtypeidetc)allishairup方value.
+     * noticethiso clockmessage结构(eachtypeidetc)allishairup方value.
      * @throws Throwable
      */
     public function dispatchMQTopicOperation(DelightfulSeqEntity $senderSeqEntity): ?DelightfulSeqEntity
@@ -62,7 +62,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                     /** @var TopicCreateMessage $senderTopicCreateMessage */
                     $senderTopicCreateMessage = $senderSeqEntity->getContent();
                     $conversationId = $senderTopicCreateMessage->getConversationId();
-                    // sessiondoublehair话题 id 保持one致
+                    // sessiondoublehair话题 id maintainone致
                     $topicId = $senderTopicCreateMessage->getId();
                     $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($conversationId);
                     if ($receiveConversationEntity === null) {
@@ -158,7 +158,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
             case ControlMessageType::CreateTopic:
                 /** @var TopicCreateMessage $messageStruct */
                 $messageStruct = $messageDTO->getContent();
-                // 判断sessionwhether存in,whether属atcurrentuser
+                // judgesessionwhether存in,whether属atcurrentuser
                 $this->checkAndGetSelfConversation($messageStruct->getConversationId(), $dataIsolation);
                 // todo 话题namecreateo clockallowforempty,back续 ai 总结话题name,pushgivecustomer端
                 $topicEntity = $this->userCreateTopicHandler($messageStruct, $dataIsolation);
@@ -281,7 +281,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
 
     private function checkTopicBelong(DelightfulTopicEntity $topicDTO, DataIsolation $dataIsolation): void
     {
-        // 判断话题id所属sessionidwhetheriscurrentuser
+        // judge话题id所属sessionidwhetheriscurrentuser
         $topicEntity = $this->delightfulChatTopicRepository->getTopicEntity($topicDTO);
         if ($topicEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
@@ -294,12 +294,12 @@ class DelightfulTopicDomainService extends AbstractDomainService
      */
     private function checkDefaultTopicExist(DelightfulConversationEntity $conversationEntity): ?string
     {
-        // 判断havenothavedefault话题tag
+        // judgehavenothavedefault话题tag
         $topicId = $conversationEntity->getExtra()?->getDefaultTopicId();
         if (empty($topicId)) {
             return null;
         }
-        // 判断default话题be删nothave
+        // judgedefault话题be删nothave
         $topicEntities = $this->delightfulChatTopicRepository->getTopicsByConversationId($conversationEntity->getId(), [$topicId]);
         return ($topicEntities[0] ?? null)?->getTopicId();
     }

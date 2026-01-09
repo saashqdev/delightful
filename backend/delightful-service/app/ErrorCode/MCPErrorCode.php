@@ -48,10 +48,10 @@ enum MCPErrorCode: int
     case OAuth2TokenRefreshFailed = 51532; // OAuth2tokenrefreshfail
 
     #[ErrorMessage(message: 'mcp.oauth2.invalid_response')]
-    case OAuth2InvalidResponse = 51533; // OAuth2提供quotientresponseinvalid
+    case OAuth2InvalidResponse = 51533; // OAuth2providequotientresponseinvalid
 
     #[ErrorMessage(message: 'mcp.oauth2.provider_error')]
-    case OAuth2ProviderError = 51534; // OAuth2提供quotientreturnerror
+    case OAuth2ProviderError = 51534; // OAuth2providequotientreturnerror
 
     #[ErrorMessage(message: 'mcp.oauth2.missing_access_token')]
     case OAuth2MissingAccessToken = 51535; // OAuth2responsemiddle缺少accesstoken

@@ -119,7 +119,7 @@ abstract class AbstractDomainService
      */
     public function dispatchSeq(SeqCreatedEvent $seqCreatedEvent): void
     {
-        // 降低responsedelay,尽快givecustomer端returnresponse.
+        // decreaseresponsedelay,尽快givecustomer端returnresponse.
         $controlMessageCreatedMq = new MessageDispatchPublisher($seqCreatedEvent);
         if (! $this->producer->produce($controlMessageCreatedMq)) {
             ExceptionBuilder::throw(ChatErrorCode::MESSAGE_SEND_FAILED);
@@ -180,7 +180,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * batchquantityminutehairmessage:提高performance,merge多 seq_id foroneitemmessage,decreasemessagepushcount.
+     * batchquantityminutehairmessage:improveperformance,merge多 seq_id foroneitemmessage,decreasemessagepushcount.
      */
     public function batchDispatchSeq(array $seqIds, MessagePriority $messagePriority, string $conversationId): void
     {
@@ -550,7 +550,7 @@ abstract class AbstractDomainService
         if ($receiverUserEntity === null || $senderUserEntity === null) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
-        // 判断userisaialsoispersoncategory
+        // judgeuserisaialsoispersoncategory
         $accountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($receiverUserEntity->getDelightfulId());
         if ($accountEntity === null) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
@@ -644,7 +644,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 判断conversationidwhetherisfrom己.
+     * judgeconversationidwhetherisfrom己.
      */
     protected function checkAndGetSelfConversation(string $conversationId, DataIsolation $dataIsolation): DelightfulConversationEntity
     {

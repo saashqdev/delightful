@@ -36,7 +36,7 @@ $servers = [
             Event::ON_CLOSE => [Hyperf\WebSocketServer\Server::class, 'onClose'],
         ],
     ],
-    // outatsingle测need，mock 所havethethird-party http call，提升single测speeddegreeandstableproperty。
+    // outatsingle测need，mock 所havethethird-party http call，enhancesingle测speeddegreeandstableproperty。
     [
         'name' => 'mock-http-service',
         'type' => ServerInterface::SERVER_HTTP,
@@ -47,7 +47,7 @@ $servers = [
         ],
     ],
 ];
-// ！！！注意，openscheduletask pod thennotstart websocket service，只start http service
+// ！！！notice，openscheduletask pod thennotstart websocket service，只start http service
 $enableCrontab = (bool) env('CRONTAB_ENABLE', true);
 $enableCrontab && $servers = [$servers[0]];
 return [

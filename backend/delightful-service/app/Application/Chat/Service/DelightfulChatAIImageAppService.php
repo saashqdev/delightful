@@ -70,7 +70,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     {
         $referContent = $this->getReferContentForAIImage($reqDTO->getReferMessageId());
         $referText = $this->getReferTextByContentForAIImage($referContent);
-        // ifisgraph生graph，thensize保持andoriginalimagesizeone致
+        // ifisgraph生graph，thensizemaintainandoriginalimagesizeone致
         if ($referContent instanceof AIImageCardMessage || $referContent instanceof ImageConvertHighCardMessage) {
             // setactualrequestsizeandratio例
             $radio = $referContent->getRadio() ?? Radio::OneToOne->value;

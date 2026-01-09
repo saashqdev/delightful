@@ -343,7 +343,7 @@ class ProviderConfigDTO extends AbstractDTO
             $this->decryptedConfig = $decryptedConfig;
         }
 
-        // 注意：alreadydecryptconfigurationnotconductdata脱敏process
+        // notice：alreadydecryptconfigurationnotconductdata脱敏process
     }
 
     public function getIsModelsEnable(): bool

@@ -69,7 +69,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // batchquantitygeticonURL（from动按organizationcodegrouphandle）
         $iconUrls = $this->fileDomainService->getBatchLinksByOrgPaths($iconPaths);
 
-        // 替换DTOmiddleiconpathforcompleteURL
+        // replaceDTOmiddleiconpathforcompleteURL
         foreach ($groups as $group) {
             $groupIcon = $group->getIcon();
             if (! empty($groupIcon) && ! is_url($groupIcon) && isset($iconUrls[$groupIcon])) {
@@ -121,7 +121,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // batchquantitygeticonURL（from动按organizationcodegrouphandle）
         $iconUrls = $this->fileDomainService->getBatchLinksByOrgPaths($iconPaths);
 
-        // 替换DTOmiddleiconpathforcompleteURL
+        // replaceDTOmiddleiconpathforcompleteURL
         foreach ($modeAggregateDTO->getGroups() as $groupAggregate) {
             $group = $groupAggregate->getGroup();
             $groupIcon = $group->getIcon();
@@ -129,7 +129,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
                 $group->setIcon($iconUrls[$groupIcon]->getUrl());
             }
 
-            // 替换modelicon
+            // replacemodelicon
             foreach ($groupAggregate->getModels() as $model) {
                 $modelIcon = $model->getModelIcon();
                 if (! empty($modelIcon) && ! is_url($modelIcon) && isset($iconUrls[$modelIcon])) {
@@ -137,7 +137,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
                 }
             }
 
-            // 替换graphlikemodelicon
+            // replacegraphlikemodelicon
             foreach ($groupAggregate->getImageModels() as $imageModel) {
                 $modelIcon = $imageModel->getModelIcon();
                 if (! empty($modelIcon) && ! is_url($modelIcon) && isset($iconUrls[$modelIcon])) {
@@ -192,15 +192,15 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // batchquantitygeticonURL（from动按organizationcodegrouphandle）
         $iconUrls = $this->fileDomainService->getBatchLinksByOrgPaths($iconPaths);
 
-        // 替换DTOmiddleiconpathforcompleteURL
+        // replaceDTOmiddleiconpathforcompleteURL
         foreach ($modeGroupDetails as $groupDetail) {
-            // 替换groupicon
+            // replacegroupicon
             $groupIcon = $groupDetail->getIcon();
             if (! empty($groupIcon) && ! is_url($groupIcon) && isset($iconUrls[$groupIcon])) {
                 $groupDetail->setIcon($iconUrls[$groupIcon]->getUrl());
             }
 
-            // 替换modelicon
+            // replacemodelicon
             foreach ($groupDetail->getModels() as $model) {
                 $modelIcon = $model->getModelIcon();
                 if (! empty($modelIcon) && ! is_url($modelIcon) && isset($iconUrls[$modelIcon])) {
@@ -331,7 +331,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return null;
         }
 
-        // ifnothave提供servicequotientstatus，use原have逻辑（tobackcompatible）
+        // ifnothaveprovideservicequotientstatus，use原have逻辑（tobackcompatible）
         if (empty($providerStatuses)) {
             foreach ($models as $model) {
                 if ($model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
@@ -373,7 +373,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return ModelStatus::Deleted;
         }
 
-        // ifnothave提供servicequotientstatus，use原have逻辑（tobackcompatible）
+        // ifnothaveprovideservicequotientstatus，use原have逻辑（tobackcompatible）
         if (empty($providerStatuses)) {
             foreach ($models as $model) {
                 if ($model->getStatus() && $model->getStatus() === Status::Enabled) {
@@ -383,7 +383,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return ModelStatus::Disabled;
         }
 
-        // level联status判断
+        // level联statusjudge
         foreach ($models as $model) {
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;

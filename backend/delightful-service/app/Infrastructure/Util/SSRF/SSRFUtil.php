@@ -36,7 +36,7 @@ class SSRFUtil
      * @param array $blackList blacklistIPor域名
      * @param array $whiteList 白名singleIPor域名
      * @param array $allowProtocols allowagreement
-     * @param bool $replaceIp whether替换forIPaccess
+     * @param bool $replaceIp whetherreplaceforIPaccess
      * @param bool $allowRedirect whetherallow重定to
      * @return string securityURL
      * @throws Exception\SSRFException whenURLnotsecurityo clockthrowexception
@@ -68,7 +68,7 @@ class SSRFUtil
      * @param array $blackList blacklistIPor域名
      * @param array $whiteList 白名singleIPor域名
      * @param array $allowProtocols allowagreement
-     * @param bool $replaceIp whether替换forIPaccess
+     * @param bool $replaceIp whetherreplaceforIPaccess
      * @param bool $allowRedirect whetherallow重定to
      * @return bool whethersecurity
      */

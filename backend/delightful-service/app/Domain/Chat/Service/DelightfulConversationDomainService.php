@@ -59,10 +59,10 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $conversationDTO->setUserOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $conversationDTO->setReceiveId($messageStruct->getReceiveId());
         $conversationDTO->setReceiveType(ConversationType::from($messageStruct->getReceiveType()));
-        // 判断 uid and receiverId whetheralready经存inconversation
+        // judge uid and receiverId whetheralready经存inconversation
         $existsConversation = $this->delightfulConversationRepository->getConversationByUserIdAndReceiveId($conversationDTO);
         if ($existsConversation) {
-            // 改变messagetype,fromcreateconversationwindow,变moreforopenconversationwindow
+            // altermessagetype,fromcreateconversationwindow,变moreforopenconversationwindow
             $conversationEntity = $existsConversation;
             $messageTypeInterface = MessageAssembler::getMessageStructByArray(
                 $messageType->getName(),
@@ -177,7 +177,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
                 // checkto方whether存inconversation,ifnot存in直接return
                 return [];
             }
-            // 替换conversationidforreceive方from己
+            // replaceconversationidforreceive方from己
             $messageStruct->setConversationId($receiveConversationEntity->getId());
             $messageDTO->setContent($messageStruct);
             // giveto方messagestreamgenerate序column.
@@ -292,7 +292,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     {
         $users = $this->delightfulUserRepository->getUserByIds($userIds);
         $users = array_column($users, null, 'user_id');
-        // 判断thistheseuserwhetheralready经存inconversationwindow,只iswindowstatusbemarkfordelete
+        // judgethistheseuserwhetheralready经存inconversationwindow,只iswindowstatusbemarkfordelete
         $conversations = $this->delightfulConversationRepository->batchGetConversations($userIds, $groupEntity->getId(), ConversationType::Group);
         /** @var DelightfulConversationEntity[] $conversations */
         $conversations = array_column($conversations, null, 'user_id');
@@ -360,7 +360,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
      */
     public function getOrCreateConversation(string $senderUserId, string $receiveId, ?ConversationType $receiverType = null): DelightfulConversationEntity
     {
-        // according to $receiverType ，to receiveId conductparse，判断whether存in
+        // according to $receiverType ，to receiveId conductparse，judgewhether存in
         $receiverTypeCallable = match ($receiverType) {
             null, ConversationType::User, ConversationType::Ai => function () use ($receiveId) {
                 $receiverUserEntity = $this->delightfulUserRepository->getUserById($receiveId);
@@ -385,7 +385,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $conversationDTO->setUserId($senderUserId);
         $conversationDTO->setReceiveId($receiveId);
         $conversationDTO->setReceiveType($receiverType);
-        // 判断 uid and receiverId whetheralready经存inconversation
+        // judge uid and receiverId whetheralready经存inconversation
         $conversationEntity = $this->delightfulConversationRepository->getConversationByUserIdAndReceiveId($conversationDTO);
         if ($conversationEntity === null) {
             if (in_array($conversationDTO->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {

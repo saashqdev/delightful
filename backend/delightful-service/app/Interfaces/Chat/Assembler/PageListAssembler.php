@@ -16,10 +16,10 @@ class PageListAssembler
             // notlimititem数，所bynothavedownone页
             $hasMore = false;
         } elseif ($maxRecords !== null) {
-            // if知道总record数，then直接compare
+            // ifknow总record数，then直接compare
             $hasMore = ($currentOffset + $currentLimit) < $maxRecords;
         } else {
-            // ifnot知道总record数，whenfrontresultcollectionnotfornullthenhavedownone页
+            // ifnotknow总record数，whenfrontresultcollectionnotfornullthenhavedownone页
             $hasMore = empty($data) ? false : true;
         }
         $nextPageToken = $hasMore ? (string) ($currentOffset + $currentLimit) : '';

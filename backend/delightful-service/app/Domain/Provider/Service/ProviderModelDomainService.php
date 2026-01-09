@@ -56,7 +56,7 @@ readonly class ProviderModelDomainService
         // get所havecategorycanusemodel
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
-        // loop判断 id equal $id or者 model_id equal $id
+        // loopjudge id equal $id or者 model_id equal $id
         foreach ($allModels as $model) {
             if ((string) $model->getId() === $id || $model->getModelId() === $id) {
                 return $model;

@@ -13,10 +13,10 @@ use function Hyperf\Translation\__;
  * Delightful resource枚举.
  *
  * 1. use Backed Enum willeachresourcemappingfor唯onestring key。
- * 2. passmethod提供 label / parent  etcyuaninfo，方便back续generatepermissiontree、做 i18n etc。
+ * 2. passmethodprovide label / parent  etcyuaninfo，方便back续generatepermissiontree、做 i18n etc。
  * 3. 仅definitionresource本身，not涉and操astype（如 query / edit）。
  *
- * 注意：if你modifythisfile，请executesingleyuantest PermissionApiTest.testGetPermissionTree.
+ * notice：if你modifythisfile，请executesingleyuantest PermissionApiTest.testGetPermissionTree.
  */
 enum DelightfulResourceEnum: string
 {
@@ -73,7 +73,7 @@ enum DelightfulResourceEnum: string
 
     /**
      * uplevelresource.
-     * 注意：new操asresourcebackwant补充thisconfiguration.
+     * notice：new操asresourcebackwant补充thisconfiguration.
      */
     public function parent(): ?self
     {

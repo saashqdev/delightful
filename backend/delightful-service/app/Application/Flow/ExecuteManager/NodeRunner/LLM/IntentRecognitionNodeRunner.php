@@ -17,7 +17,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Delightful\FlowExprEngine\Component;
 use Hyperf\Odin\Message\UserMessage;
 
-#[FlowNodeDefine(type: NodeType::IntentRecognition->value, code: NodeType::IntentRecognition->name, name: '意graph识别', paramsConfig: IntentRecognitionNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: true, needOutput: false)]
+#[FlowNodeDefine(type: NodeType::IntentRecognition->value, code: NodeType::IntentRecognition->name, name: '意graphidentify', paramsConfig: IntentRecognitionNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: true, needOutput: false)]
 class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 {
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void
@@ -70,7 +70,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         $systemPrompt = $this->createSystemPrompt($intentPrompts);
 
-        // if意graph识别startfrom动load记忆，that么need剔exceptcurrentmessage
+        // if意graphidentifystartfrom动load记忆，that么need剔exceptcurrentmessage
         $ignoreMessageIds = [];
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
@@ -89,7 +89,7 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
         if (! $data) {
             return;
         }
-        $hasMatch = (bool) ($data['whether识别'] ?? false);
+        $hasMatch = (bool) ($data['whetheridentify'] ?? false);
         if ($hasMatch) {
             $bestIntent = $data['most佳意graph'] ?? '';
             $vertexResult->setChildrenIds($childrenNodes[$bestIntent] ?? []);
@@ -105,14 +105,14 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         return <<<MARKDOWN
 '# role
-你isone意graph识别sectionpoint，useatanalyzeuser意graph，你willtooneshareuserinputcontent，帮我analyzeoutuser意graphand置信degree。
+你isone意graphidentifysectionpoint，useatanalyzeuser意graph，你willtooneshareuserinputcontent，帮我analyzeoutuser意graphand置信degree。
 resultneedin限定意graphrangemiddle。
 
-# 技can - 意graph识别
+# 技can - 意graphidentify
 will你responseformat化for JSON object，format如down：
 {
-    "whether识别": true,
-    "识别failreason": "",
+    "whetheridentify": true,
+    "identifyfailreason": "",
     "most佳意graph": "吃饭",
     "matchto意graphhave": [
         {
@@ -135,13 +135,13 @@ will你responseformat化for JSON object，format如down：
 # process
 1. 你willtooneshareuserinputcontent，帮我analyzeoutuser意graphand置信degree。
 2. 推理user意graph，will推理procedure放to JSON middle 推导procedure field，解释for什么willoutthisthese意graphand置信degree。
-3. if识别to意graph，请填写most佳matchandmatchto意graph，whether识别for true，most佳意graph one定is置信degreemost高，itsmiddle matchto意graphhave fieldisaccording to 置信degree from大to小rowcolumn。
-4. ifincurrentrangenothave找toany意graph，whether识别for false，请填写识别failreason，most佳matchandmatchto意graphallshouldisempty。
+3. ifidentifyto意graph，请填写most佳matchandmatchto意graph，whetheridentifyfor true，most佳意graph one定is置信degreemost高，itsmiddle matchto意graphhave fieldisaccording to 置信degree from大to小rowcolumn。
+4. ifincurrentrangenothave找toany意graph，whetheridentifyfor false，请填写identifyfailreason，most佳matchandmatchto意graphallshouldisempty。
 5. 只willreturn JSON format，notwillagainreturnothercontent，ifone定needhavereturn，请放toremarkmiddle，return答contentone定canbe JSON toolparse。
 
 # limit
 - 意graphrangeformatis '意graph'：'意graphdescription'。itsmiddle意graphdescriptioncanforempty。意graphand意graphdescriptionone定isuse '' package裹data。
-- notcanreturn答otherissue，只canreturn答意graph识别issue。
+- notcanreturn答otherissue，只canreturn答意graphidentifyissue。
 
 # needanalyze意graphrange如down
 {$content}

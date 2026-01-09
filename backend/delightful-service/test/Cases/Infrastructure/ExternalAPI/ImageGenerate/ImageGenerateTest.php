@@ -195,7 +195,7 @@ class ImageGenerateTest extends BaseTest
         //
         //        $providerModelsByConfig = $di->getProviderConfig(ProviderDataIsolation::create('TGosRaFhvb'), '814826843393773568');
         //        $config = $providerModelsByConfig->getConfig();
-        //        // createservice提供quotientconfiguration
+        //        // createserviceprovidequotientconfiguration
         //
         //        // create通义thousand问modelinstance
         //        $qwenImageModel = new QwenImageModel($config);

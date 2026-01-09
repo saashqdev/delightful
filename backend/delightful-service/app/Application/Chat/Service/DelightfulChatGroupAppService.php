@@ -120,7 +120,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         // get本timeneedadd群member (综合 finger定user_id + departmentiddownuser)
         $wantJoinUsers = $this->getGroupAddUsers($groupAddUserIds, $dataIsolation, $inputDepartmentIds, $chatGroupUserNumLimit);
         $wantJoinUserIds = array_column($wantJoinUsers, 'user_id');
-        // 判断哪theseuseralready经ingroup chatmiddle
+        // judge哪theseuseralready经ingroup chatmiddle
         $groupUsers = $this->delightfulGroupDomainService->getGroupUserList($groupId, '', $dataIsolation, ['user_id']);
         // already经存inatgroup chatmiddleuserid
         $existUserIds = array_column($groupUsers, 'user_id');
@@ -371,7 +371,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         // querygroup chatmiddleuser
         $groupUsers = $this->delightfulGroupDomainService->getGroupUserList($groupEntity->getId(), '', $dataIsolation, ['user_id']);
         $groupUsers = array_column($groupUsers, 'user_id');
-        // 判断want移exceptuserwhetheringroup chatmiddle
+        // judgewant移exceptuserwhetheringroup chatmiddle
         $removeUserIds = array_intersect($userIds, $groupUsers);
         if (empty($removeUserIds)) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NO_USER_TO_REMOVE);

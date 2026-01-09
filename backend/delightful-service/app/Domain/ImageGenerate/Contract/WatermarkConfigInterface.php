@@ -18,7 +18,7 @@ interface WatermarkConfigInterface
     /**
      * getwatermarkconfiguration.
      *
-     * @param null|string $orgCode organizationcode，useat判断whetherenablewatermark
+     * @param null|string $orgCode organizationcode，useatjudgewhetherenablewatermark
      * @return null|WatermarkConfig returnwatermarkconfiguration，iffornullthennotaddwatermark
      */
     public function getWatermarkConfig(?string $orgCode = null): ?WatermarkConfig;

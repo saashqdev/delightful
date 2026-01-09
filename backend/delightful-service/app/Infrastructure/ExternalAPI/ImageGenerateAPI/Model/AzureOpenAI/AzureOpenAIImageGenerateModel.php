@@ -309,7 +309,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledownone张image，currentimage保持originalstatus
+                // continuehandledownone张image，currentimagemaintainoriginalstatus
             }
         }
 
@@ -373,7 +373,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
                 // watermarkhandlefailo clockuseoriginalbase64data
             }
 
-            // 只returnURLformat，andothermodel保持one致
+            // 只returnURLformat，andothermodelmaintainone致
             $currentData[] = [
                 'url' => $processedUrl,
             ];

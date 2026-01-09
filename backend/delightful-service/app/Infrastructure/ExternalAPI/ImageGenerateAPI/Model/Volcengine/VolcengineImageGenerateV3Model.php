@@ -161,7 +161,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // 判断isgraph生graphalsois文生graph
+        // judgeisgraph生graphalsois文生graph
         $count = $imageGenerateRequest->getGenerateNum();
 
         $this->logger->info('火山文生graph：start生graph', [
@@ -407,7 +407,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
         array $volcengineResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // uselockensureandhairsecurity（althoughV3usesync，but保持one致property）
+        // uselockensureandhairsecurity（althoughV3usesync，butmaintainone致property）
         $lockOwner = $this->lockResponse($response);
         try {
             // from火山engineV3responsemiddleextractdata
@@ -511,7 +511,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledownone张image，currentimage保持originalstatus
+                // continuehandledownone张image，currentimagemaintainoriginalstatus
             }
         }
 

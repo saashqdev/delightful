@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\ImageGenerate\Contract;
 
 /**
- * 字body提供者interface
+ * 字bodyprovide者interface
  * useatinopen源projectmiddledefinition字bodymanagestandard，by企业projectimplementspecific逻辑.
  */
 interface FontProviderInterface

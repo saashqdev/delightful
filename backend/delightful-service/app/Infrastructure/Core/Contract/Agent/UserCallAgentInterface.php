@@ -17,7 +17,7 @@ interface UserCallAgentInterface
     public function process(UserCallAgentEvent $event): void;
 
     /**
-     * 判断whenfrontprocess器whethercanprocessthe AI Code.
+     * judgewhenfrontprocess器whethercanprocessthe AI Code.
      */
     public function canHandle(string $aiCode): bool;
 

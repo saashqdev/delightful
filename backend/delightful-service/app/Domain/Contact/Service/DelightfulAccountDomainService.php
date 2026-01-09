@@ -111,7 +111,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
 
     public function addUserAndAccount(DelightfulUserEntity $userDTO, AccountEntity $accountDTO): void
     {
-        // 判断账numberwhether存in
+        // judge账numberwhether存in
         $delightfulId = $accountDTO->getDelightfulId();
         if (empty($delightfulId) || empty($userDTO->getOrganizationCode())) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);

@@ -41,7 +41,7 @@ class InitAiAbilitiesCommand extends HyperfCommand
 
         $organizationCode = $this->input->getArgument('organization_code');
         if (empty($organizationCode)) {
-            $this->error('请提供organizationencoding');
+            $this->error('请provideorganizationencoding');
             return;
         }
 

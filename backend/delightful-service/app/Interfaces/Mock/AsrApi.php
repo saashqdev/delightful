@@ -171,7 +171,7 @@ class AsrApi
 
         // ifhave笔记fileconfigurationandfilesize > 0，addtoreturnmiddle（模拟true实沙箱笔记filecontentcheck）
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
-            // userequestmiddle提供 target_path，whilenotis硬encodingfile名
+            // userequestmiddleprovide target_path，whilenotis硬encodingfile名
             // this样cancorrectsupport国际化file名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
@@ -188,7 +188,7 @@ class AsrApi
             ];
         }
 
-        // ifhavestream识别fileconfiguration，recorddelete操as
+        // ifhavestreamidentifyfileconfiguration，recorddelete操as
         if ($transcriptFileConfig !== null && isset($transcriptFileConfig['source_path'])) {
             $responseData['deleted_files'][] = [
                 'path' => $transcriptFileConfig['source_path'],

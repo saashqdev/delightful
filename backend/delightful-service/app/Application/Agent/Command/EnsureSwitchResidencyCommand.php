@@ -31,7 +31,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
     {
         parent::configure();
         $this->setDescription('ensure所have助理switchfinger令allhave residency=true property')
-            ->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'test模type：提供JSONformattestdataconductprocess', '')
+            ->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'test模type：provideJSONformattestdataconductprocess', '')
             ->addOption('dry-run', null, InputOption::VALUE_NONE, 'empty运line模type：只checkbutnotupdatetodatabase');
     }
 

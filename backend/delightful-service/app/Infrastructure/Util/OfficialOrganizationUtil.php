@@ -9,7 +9,7 @@ namespace App\Infrastructure\Util;
 
 /**
  * 官方organizationtoolcategory
- * 统onemanage官方organization相closeconfigurationand判断逻辑.
+ * 统onemanage官方organization相closeconfigurationandjudge逻辑.
  */
 class OfficialOrganizationUtil
 {
@@ -22,7 +22,7 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * 判断whetherfor官方organization.
+     * judgewhetherfor官方organization.
      */
     public static function isOfficialOrganization(string $organizationCode): bool
     {

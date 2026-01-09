@@ -13,7 +13,7 @@ use InvalidArgumentException;
 /**
  * 重sortmodelconfigurationvalueobject
  *
- * contain重sortmodel相closeconfigurationparameter，如modelname、提供quotient、API 端pointetc
+ * contain重sortmodel相closeconfigurationparameter，如modelname、providequotient、API 端pointetc
  */
 class RerankingModelConfig extends AbstractValueObject
 {
@@ -25,7 +25,7 @@ class RerankingModelConfig extends AbstractValueObject
     private string $rerankingModelName = '';
 
     /**
-     * 重sortmodel提供quotientname.
+     * 重sortmodelprovidequotientname.
      *
      * for example：gitee_ai、openai etc
      */
@@ -69,14 +69,14 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * batchprocesssize.
      *
-     * batchquantityprocessdocumentsize，useat提高performance
+     * batchquantityprocessdocumentsize，useatimproveperformance
      */
     private int $batchSize = 16;
 
     /**
      * whetherusecache.
      *
-     * whethercache重sortresult，useat提高performance
+     * whethercache重sortresult，useatimproveperformance
      */
     private bool $useCache = true;
 
@@ -105,7 +105,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * get重sortmodel提供quotientname.
+     * get重sortmodelprovidequotientname.
      */
     public function getRerankingProviderName(): string
     {
@@ -113,7 +113,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * set重sortmodel提供quotientname.
+     * set重sortmodelprovidequotientname.
      */
     public function setRerankingProviderName(string $rerankingProviderName): self
     {

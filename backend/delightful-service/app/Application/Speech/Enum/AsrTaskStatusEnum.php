@@ -14,7 +14,7 @@ namespace App\Application\Speech\Enum;
  * 【use途】table示 ASR 录音总结taskall生命periodstatus
  * 【use场景】
  * - taskstatus持久化（Redis/database）
- * - businessprocesscontrolandpoweretcproperty判断
+ * - businessprocesscontrolandpoweretcpropertyjudge
  * - 整bodytaskstatustrace（录音 → merge → generatetitle → sendmessage）
  *
  * 【andother枚举区别】

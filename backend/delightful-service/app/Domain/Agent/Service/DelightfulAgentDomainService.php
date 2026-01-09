@@ -204,7 +204,7 @@ class DelightfulAgentDomainService
             $links = array_merge(...$links);
         }
 
-        // 替换each助理avatarlink
+        // replaceeach助理avatarlink
         foreach ($agents as &$agent) {
             $avatarKey = $agent['agent_avatar'];
             $fileLink = $links[$avatarKey] ?? null;

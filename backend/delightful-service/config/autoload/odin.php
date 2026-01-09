@@ -251,7 +251,7 @@ return [
                 // iffornullarrayornotconfiguration，thenprint所havefield
                 // ifconfigurationfieldcolumn表，then只printfinger定field
                 // support嵌setfield，usepoint语法如 'args.messages'
-                // 注意：messages and tools fieldnotin白名singlemiddle，notwillbeprint
+                // notice：messages and tools fieldnotin白名singlemiddle，notwillbeprint
                 'whitelist_fields' => [
                     // 基本requestinfo
                     'request_id',                  // requestID
@@ -312,7 +312,7 @@ return [
                     'system_fingerprint',         // systemfinger纹
                     'performance_flag',            // performancemark（慢requestidentifier）
 
-                    // 注意：bydownfieldberowexcept，notwillprint
+                    // notice：bydownfieldberowexcept，notwillprint
                     // - args.messages (usermessagecontent)
                     // - args.tools (tooldefinition)
                     // - choices.0.message (responsemessagecontent)
@@ -321,7 +321,7 @@ return [
                 ],
                 // whetherenablefield白名singlefilter，defaulttrue（enablefilter）
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
-                // most大stringlengthlimit，超passthislengthstringwillbe替换for [Long Text]，settingfor 0 indicatenotlimit
+                // most大stringlengthlimit，超passthislengthstringwillbereplacefor [Long Text]，settingfor 0 indicatenotlimit
                 'max_text_length' => env('ODIN_LOG_MAX_TEXT_LENGTH', 0),
             ],
             'network_retry_count' => 1,

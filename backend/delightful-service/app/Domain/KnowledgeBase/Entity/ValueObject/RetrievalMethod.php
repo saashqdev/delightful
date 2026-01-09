@@ -23,7 +23,7 @@ class RetrievalMethod
      *
      * based ontoquantitysimilardegreeretrievemethod。
      * willquerytextconvertfortoquantity，然backintoquantitydatabasemiddlefindmostsimilardocument。
-     * 适合理解语义close系、多language理解、processblurdescription。
+     * 适合comprehend语义close系、多languagecomprehend、processblurdescription。
      */
     public const string SEMANTIC_SEARCH = 'semantic_search';
 

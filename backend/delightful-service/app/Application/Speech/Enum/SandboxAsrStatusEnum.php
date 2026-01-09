@@ -13,8 +13,8 @@ namespace App\Application\Speech\Enum;
  * 【asuse域】outside部system - 沙箱audiomergeservice
  * 【use途】table示沙箱middleaudiomergetaskexecutestatus
  * 【use场景】
- * - call沙箱 finishTask interfaceround询status判断
- * - 判断audiominuteslicemergewhethercomplete
+ * - call沙箱 finishTask interfaceround询statusjudge
+ * - judgeaudiominuteslicemergewhethercomplete
  *
  * 【andother枚举区别】
  * - AsrRecordingStatusEnum: front端录音实o clockstatus（录音交互layer）

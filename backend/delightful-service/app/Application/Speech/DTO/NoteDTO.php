@@ -42,7 +42,7 @@ readonly class NoteDTO
     /**
      * generatefile名.
      *
-     * @param null|string $generatedTitle generatetitle，if提供thenuse {title}-笔记.{ext} format
+     * @param null|string $generatedTitle generatetitle，ifprovidethenuse {title}-笔记.{ext} format
      */
     public function generateFileName(?string $generatedTitle = null): string
     {

@@ -74,7 +74,7 @@ class AgentAppService extends AbstractAppService
 
         $data = $this->agentDomainService->queries($agentDataIsolation, $query, $page);
 
-        // ifcontain官方organization，按照传入IDorder重新sortresult，保持官方organization助理infront
+        // ifcontain官方organization，按照传入IDorder重新sortresult，maintain官方organization助理infront
         if ($containOfficialOrganization) {
             $data['list'] = $this->sortAgentsByIdOrder($data['list'], $agentIds);
         }

@@ -34,7 +34,7 @@ enum NodeType: int
 
     /*
      * If
-     * itemitem判断sectionpoint
+     * itemitemjudgesectionpoint
      */
     case If = 4;
 
@@ -145,7 +145,7 @@ enum NodeType: int
     case VariableArrayPush = 23;
 
     /*
-     * 意graph识别
+     * 意graphidentify
      */
     case IntentRecognition = 24;
 

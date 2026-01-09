@@ -129,7 +129,7 @@ abstract class VolcengineApi
             ];
             $response = $this->client->request($this->method, $this->getPath(), $options);
             $responseBody = Json::decode($response->getBody()->getContents());
-            // conducterror码判断
+            // conducterror码judge
             if (isset($responseBody['ResponseMetadata']['Error'])) {
                 $this->logger->error('sendSmsError ' . Json::encode($responseBody));
                 throw new RuntimeException('短信sendfail');
@@ -195,7 +195,7 @@ abstract class VolcengineApi
         $req->setIsSignUrl(false);
         $req->setMethod($this->getMethod());
         $req->setQueryList($this->getQuery());
-        // !!! 注意,thiswithinnotcanaddup JSON_UNESCAPED_UNICODE,addwill导致bodyhavemiddle文o clocksignaturenotcorrect!
+        // !!! notice,thiswithinnotcanaddup JSON_UNESCAPED_UNICODE,addwill导致bodyhavemiddle文o clocksignaturenotcorrect!
         $bodyStream = Utils::streamFor(Json::encode($this->getBody(), JSON_THROW_ON_ERROR));
         $req->setPayloadHash(Utils::hash($bodyStream, 'sha256'));
         $result = $sign->signOnly($req, $credentials);

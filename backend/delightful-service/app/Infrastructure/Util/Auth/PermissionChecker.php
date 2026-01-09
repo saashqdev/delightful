@@ -46,13 +46,13 @@ class PermissionChecker
             return false;
         }
 
-        // 判断whetherall局administrator
+        // judgewhetherall局administrator
         $globalAdminsEnum = SuperPermissionEnum::GLOBAL_ADMIN->value;
         if (isset($permissions[$globalAdminsEnum]) && in_array($mobile, $permissions[$globalAdminsEnum])) {
             return true;
         }
 
-        // 判断whether特定permission
+        // judgewhether特定permission
         $permissionKey = $permission->value;
         return isset($permissions[$permissionKey]) && in_array($mobile, $permissions[$permissionKey]);
     }

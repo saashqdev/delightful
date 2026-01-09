@@ -64,7 +64,7 @@ enum InstructType: int
     }
 
     /**
-     * 判断finger令typewhetherneedcontentfield.
+     * judgefinger令typewhetherneedcontentfield.
      */
     public static function requiresContent(int $type, ?int $displayType = null, ?int $instructionType = null): bool
     {
@@ -73,12 +73,12 @@ enum InstructType: int
             return false;
         }
 
-        // ifissystemfinger令，useSystemInstructType判断
+        // ifissystemfinger令，useSystemInstructTypejudge
         if ($displayType === InstructDisplayType::SYSTEM) {
             return SystemInstructType::requiresContent($type);
         }
 
-        // 普通finger令判断
+        // 普通finger令judge
         return match (self::fromType($type)) {
             self::STATUS => false,  // statustypenotneedcontent
             self::SINGLE_CHOICE, self::SWITCH, self::TEXT => true,  // othertypeneedcontent

@@ -9,7 +9,7 @@ namespace App\Application\Kernel\Contract;
 
 /**
  * permission枚举interface
- * 提供permissionmanage统oneabstract
+ * providepermissionmanage统oneabstract
  */
 interface DelightfulPermissionInterface
 {

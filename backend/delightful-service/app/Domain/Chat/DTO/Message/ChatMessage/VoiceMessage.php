@@ -210,7 +210,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
         $container = ApplicationContext::getContainer();
         $speechClient = $container->get(VolcengineStandardClient::class);
 
-        // buildFlashvoice识别request
+        // buildFlashvoiceidentifyrequest
         $submitDTO = new FlashSpeechSubmitDTO();
 
         // settingaudioinformation
@@ -227,7 +227,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
         $submitDTO->setUser($userDTO);
         $submitDTO->setRequest(['model_name' => 'bigmodel']);
 
-        // callFlashvoice识别andgetresponse
+        // callFlashvoiceidentifyandgetresponse
         $flashResponse = $speechClient->submitFlashTask($submitDTO);
 
         // If response contains audio duration info, set it to current object (convert to seconds)

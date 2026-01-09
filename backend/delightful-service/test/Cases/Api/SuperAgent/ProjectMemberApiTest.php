@@ -97,7 +97,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
-        // 2. 切换tohavepermissionusertest置topsuccess
+        // 2. switchtohavepermissionusertest置topsuccess
         $this->switchUserTest2();
         $this->pinProject($projectId, true);
 
@@ -109,7 +109,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
-        // 5. 切换tonothavepermissionusertestpermissioncontrol
+        // 5. switchtonothavepermissionusertestpermissioncontrol
         $this->switchUserTest2();
         // testnonprojectmembernotcan置top - shouldreturnpermissionerror
         $this->pinProject($projectId, true, 51202); // false设51202ispermissionerror码
@@ -508,7 +508,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 3. 切换to另oneuser，test多useredit
+        // 3. switchto另oneuser，test多useredit
         $this->switchUserTest2();
         $this->joinFileEditing($fileId);
 
@@ -523,7 +523,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 7. 切换returnfirstuser，testpermission
+        // 7. switchreturnfirstuser，testpermission
         $this->switchUserTest1();
         $this->leaveFileEditing($fileId);
 
@@ -789,10 +789,10 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->verifyCreatorListResponse($response);
 
         // 2. testpermissioncontrol - 清nullmemberbacknopermission
-        $this->switchUserTest1(); // 切换toproject所have者
+        $this->switchUserTest1(); // switchtoproject所have者
         $this->updateEmptyMembers($this->projectId); // 清nullprojectmember
 
-        $this->switchUserTest2(); // 切换tonopermissionuser
+        $this->switchUserTest2(); // switchtonopermissionuser
         $emptyResponse = $this->getCollaborationProjectCreators();
         $this->verifyEmptyCreatorListResponse($emptyResponse);
 
@@ -812,7 +812,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
-        // 2. 切换tohavepermissionusertestgetcreate者column表success
+        // 2. switchtohavepermissionusertestgetcreate者column表success
         $this->switchUserTest2();
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
@@ -821,7 +821,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
-        // 4. 切换tonothavepermissionusertestpermissioncontrol
+        // 4. switchtonothavepermissionusertestpermissioncontrol
         $this->switchUserTest2();
         $emptyResponse = $this->getCollaborationProjectCreators();
         //        $this->verifyEmptyCreatorListResponse($emptyResponse);

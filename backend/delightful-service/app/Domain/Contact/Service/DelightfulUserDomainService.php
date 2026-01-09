@@ -222,7 +222,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * according touserIDanduserorganizationcolumn表queryuserdetail，according touserorganization决定filterstrategy.
+     * according touserIDanduserorganizationcolumn表queryuserdetail，according touserorganizationdecidefilterstrategy.
      * @param array $userIds userIDarray
      * @param array $userOrganizations currentuser拥haveorganizationencodingarray
      * @return array<UserDetailDTO>
@@ -241,7 +241,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         // checkcurrentuserwhether拥have官方organization
         $hasOfficialOrganization = in_array($officialOrganizationCode, $userOrganizations, true);
 
-        // according touserwhether拥have官方organizationcome决定filterstrategy
+        // according touserwhether拥have官方organizationcomedecidefilterstrategy
         if (! $hasOfficialOrganization) {
             // ifusernothave官方organization，filter掉官方organizationnonAIuser
             $users = array_filter($users, static function (DelightfulUserEntity $user) use ($officialOrganizationCode) {

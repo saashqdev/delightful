@@ -148,7 +148,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         string $organizationCode,
         bool $throw = true,
     ): ?ProviderConfigEntity {
-        // 1. if提供 modelId，走new逻辑
+        // 1. ifprovide modelId，走new逻辑
         if (! empty($modelId)) {
             return $this->getServiceProviderConfigByModelId($modelId, $organizationCode, $throw);
         }
@@ -157,8 +157,8 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         if (! empty($modelOriginId)) {
             $models = $this->getModelsByVersionAndOrganization($modelOriginId, $organizationCode);
             if (! empty($models)) {
-                // if找tomodel，not直接return官方servicequotientconfiguration，whileisconductenterone步判断
-                $this->logger->info('找toto应model，判断servicequotientconfiguration', [
+                // if找tomodel，not直接return官方servicequotientconfiguration，whileisconductenterone步judge
+                $this->logger->info('找toto应model，judgeservicequotientconfiguration', [
                     'modelVersion' => $modelOriginId,
                     'organizationCode' => $organizationCode,
                 ]);
@@ -214,7 +214,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         if ($serviceProviderEntity === null) {
             return null;
         }
-        // 5. 判断servicequotienttypeandstatus
+        // 5. judgeservicequotienttypeandstatus
         $serviceProviderType = $serviceProviderEntity->getProviderType();
         if (
             $serviceProviderType !== ProviderType::Official
@@ -234,7 +234,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
     /**
      * returnmodelandservicequotientallbeactivate接入pointcolumn表.
-     * want判断 model_parent_id modelandservicequotientwhetheractivate.
+     * wantjudge model_parent_id modelandservicequotientwhetheractivate.
      * @return ProviderModelEntity[]
      */
     public function getOrganizationActiveModelsByIdOrType(string $key, string $orgCode): array
@@ -475,7 +475,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             // createdata隔离object
             $dataIsolation = ProviderDataIsolation::create($officialOrganization);
 
-            // 判断theservicequotientwhetheralreadyhaveconfiguration
+            // judgetheservicequotientwhetheralreadyhaveconfiguration
             $existingConfig = $this->providerConfigRepository->findFirstByServiceProviderId(
                 $dataIsolation,
                 $provider->getId()

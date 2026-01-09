@@ -42,7 +42,7 @@ readonly class AsrTitleGeneratorService
      * 场景two：have file_id（uploadalreadyhavefile），buildhint词generatetitle
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
-     * @param string $asrStreamContent ASRstream识别content
+     * @param string $asrStreamContent ASRstreamidentifycontent
      * @param null|string $fileId fileID
      * @param null|NoteDTO $note 笔记content
      * @param string $taskKey taskkey（useatlog）

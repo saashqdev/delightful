@@ -126,7 +126,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                         ));
                         return;
                     }
-                    // 1.判断userwhetherinnot读column表middle.
+                    // 1.judgeuserwhetherinnot读column表middle.
                     $unreadList = $senderReceiveList->getUnreadList();
                     if (! in_array($receiveUserEntity->getUserId(), $unreadList, true)) {
                         $this->logger->error(sprintf(

@@ -17,7 +17,7 @@ use Delightful\ApiResponse\Annotation\ApiResponse;
 class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
 {
     /**
-     * get官方重sort提供quotientcolumn表.
+     * get官方重sortprovidequotientcolumn表.
      * @return array<ProviderConfigModelsDTO>
      */
     public function getOfficialRerankProviderList(): array
@@ -26,7 +26,7 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
         $dto->setId('official_rerank');
         $dto->setName('官方重sortservicequotient');
         $dto->setProviderType(ProviderType::Official->value);
-        $dto->setDescription('官方提供重sortservice');
+        $dto->setDescription('官方provide重sortservice');
         $dto->setIcon('');
         $dto->setCategory('rerank');
         $dto->setStatus(1); // 1 indicateenable
@@ -55,7 +55,7 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * get嵌入提供quotientcolumn表.
+     * get嵌入providequotientcolumn表.
      * @return array<ProviderConfigModelsDTO>
      */
     public function getEmbeddingProviderList(): array

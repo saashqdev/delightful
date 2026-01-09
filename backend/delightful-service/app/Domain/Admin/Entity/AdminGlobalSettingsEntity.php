@@ -74,7 +74,7 @@ class AdminGlobalSettingsEntity extends AbstractEntity
     {
         if (is_string($extra)) {
             $extra = Json::decode($extra);
-            // according to type come决定use哪specific Extra category
+            // according to type comedecideuse哪specific Extra category
             $extraClass = $this->getExtraClassByType($this->getType()->value);
             if ($extraClass) {
                 $extra = new $extraClass($extra);

@@ -305,7 +305,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             'delightful_message_id' => $messageEntity->getDelightfulMessageId(),
             'message_id' => $seqId,
             'refer_message_id' => $receiverReferMessageId,
-            'sender_message_id' => $senderSeqEntity->getMessageId(), // 判断controlmessagetype,ifisalready读/withdraw/edit/quote,needparseoutcomequoteid
+            'sender_message_id' => $senderSeqEntity->getMessageId(), // judgecontrolmessagetype,ifisalready读/withdraw/edit/quote,needparseoutcomequoteid
             'conversation_id' => $receiveConversationId,
             'status' => $seqStatus->value,
             'created_at' => $time,
@@ -348,10 +348,10 @@ class DelightfulChatDomainService extends AbstractDomainService
             'receive_list' => $receiveList->toArray(),
             'delightful_message_id' => $messageEntity->getDelightfulMessageId(),
             'message_id' => $seqId,
-            'refer_message_id' => $seqDTO->getReferMessageId(), // 判断controlmessagetype,ifisalready读/withdraw/edit/quote,needparseoutcomequoteid
-            'sender_message_id' => '', // 判断controlmessagetype,ifisalready读/withdraw/edit/quote,needparseoutcomequoteid
+            'refer_message_id' => $seqDTO->getReferMessageId(), // judgecontrolmessagetype,ifisalready读/withdraw/edit/quote,needparseoutcomequoteid
+            'sender_message_id' => '', // judgecontrolmessagetype,ifisalready读/withdraw/edit/quote,needparseoutcomequoteid
             'conversation_id' => $conversationId,
-            'status' => DelightfulMessageStatus::Read, // from己sendmessage,notneed判断阅读status
+            'status' => DelightfulMessageStatus::Read, // from己sendmessage,notneedjudge阅读status
             'created_at' => $time,
             'updated_at' => $time,
             'extra' => (array) $seqDTO->getExtra()?->toArray(),
@@ -579,7 +579,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             'delightful_message_id' => $messageEntity->getDelightfulMessageId(),
             'message_id' => $seqId,
             'refer_message_id' => $receiveSeqDTO->getReferMessageId(),
-            'sender_message_id' => $receiveSeqDTO->getMessageId(), // 判断controlmessagetype,ifisalready读/withdraw/edit/quote,needparseoutcomequoteid
+            'sender_message_id' => $receiveSeqDTO->getMessageId(), // judgecontrolmessagetype,ifisalready读/withdraw/edit/quote,needparseoutcomequoteid
             'conversation_id' => $receiveUserConversationEntity->getId(),
             'status' => $seqStatus->value,
             'created_at' => $time,
@@ -690,11 +690,11 @@ class DelightfulChatDomainService extends AbstractDomainService
     /**
      * 1.need先call createAndSendStreamStartSequence createone seq ，然backagaincall streamSendJsonMessage sendmessage.
      * 2.streamsendJsonmessage,eachtimeupdate json somefieldmessage。
-     * 3.use本机inside存conductmessagecache，提升大 json 读写performance。
-     * @todo ifwanttooutside提供stream api，need改for redis cache，bysupport断line重连。
+     * 3.use本机inside存conductmessagecache，enhance大 json 读写performance。
+     * @todo ifwanttooutsideprovidestream api，need改for redis cache，bysupport断line重连。
      *
      *  supportonetimepush多fieldstreammessage，if json layerlevelmore深，use field_1.*.field_2 asfor key。 itsmiddle * isfingerarraydown标。
-     *  service端willcache所havestreamdata，andinstreamendo clockonetimepropertypush，bydecrease丢package概rate，提升messagecompleteproperty。
+     *  service端willcache所havestreamdata，andinstreamendo clockonetimepropertypush，bydecrease丢package概rate，enhancemessagecompleteproperty。
      *  for example：
      *  [
      *      'users.0.name' => 'delightful',
@@ -904,7 +904,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * createonestream seq andimmediatelypush，byatfront端渲染占位。注意，streammessagenotcanusecomeupdatealready经push完毕message，avoid篡改originalcontent！
+     * createonestream seq andimmediatelypush，byatfront端渲染占位。notice，streammessagenotcanusecomeupdatealready经push完毕message，avoid篡改originalcontent！
      * ifneedtoalready经hairoutmessageconductupdate，needuse editMessage method，editmessagewillrecordcompletemessagehistoryversion。
      */
     public function createAndSendStreamStartSequence(CreateStreamSeqDTO $createStreamSeqDTO, MessageInterface $messageStruct, DelightfulConversationEntity $senderConversationEntity): DelightfulSeqEntity
@@ -1011,8 +1011,8 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * use本机inside存conductmessagecache，提升大 json 读写performance。
-     * @todo ifwanttooutside提供stream api，need改for redis cache，bysupport断line重连。
+     * use本机inside存conductmessagecache，enhance大 json 读写performance。
+     * @todo ifwanttooutsideprovidestream api，need改for redis cache，bysupport断line重连。
      *
      * contentformat  for example：
      *   [
@@ -1131,7 +1131,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         $receiveSeqExtra->setTopicId($senderTopicId);
         // hairitem方所inenvironmentid
         $receiveSeqExtra->setDelightfulEnvId($senderSeqEntity->getExtra()?->getDelightfulEnvId());
-        // 判断收item方话题 idwhether存in
+        // judge收item方话题 idwhether存in
         $topicDTO = new DelightfulTopicEntity();
         $topicDTO->setConversationId($receiveConversationEntity->getId());
         $topicDTO->setTopicId($senderTopicId);

@@ -171,7 +171,7 @@ class QwenImageModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // other文生graphis x ，阿withinis * ，保持up游one致，final传入alsois *
+        // other文生graphis x ，阿withinis * ，maintainup游one致，final传入alsois *
         $size = $imageGenerateRequest->getWidth() . 'x' . $imageGenerateRequest->getHeight();
 
         // validationimagesize
@@ -222,7 +222,7 @@ class QwenImageModel extends AbstractImageGenerate
         $rawResults = [];
         $errors = [];
 
-        // handleresult，保持nativeformat
+        // handleresult，maintainnativeformat
         foreach ($results as $result) {
             if ($result['success']) {
                 $rawResults[$result['index']] = $result;
@@ -495,7 +495,7 @@ class QwenImageModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledownone张image，currentimage保持originalstatus
+                // continuehandledownone张image，currentimagemaintainoriginalstatus
             }
         }
 
@@ -568,7 +568,7 @@ class QwenImageModel extends AbstractImageGenerate
             // 累计usageinfo
             if (! empty($qwenResult['usage']) && is_array($qwenResult['usage'])) {
                 $currentUsage->addGeneratedImages($qwenResult['usage']['image_count'] ?? 1);
-            // 通义thousand问nothavetokeninfo，保持defaultvalue
+            // 通义thousand问nothavetokeninfo，maintaindefaultvalue
             } else {
                 // ifnothaveusageinfo，defaultincrease1张image
                 $currentUsage->addGeneratedImages(1);

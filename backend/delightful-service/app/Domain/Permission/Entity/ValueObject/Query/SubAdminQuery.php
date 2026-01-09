@@ -54,7 +54,7 @@ class SubAdminQuery extends AbstractQuery
     }
 
     /**
-     * willqueryobjectconvertfor仓储layercan识别filterarray。
+     * willqueryobjectconvertfor仓储layercanidentifyfilterarray。
      */
     public function toFilters(): array
     {

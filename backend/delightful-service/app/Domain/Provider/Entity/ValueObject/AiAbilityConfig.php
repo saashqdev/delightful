@@ -48,7 +48,7 @@ class AiAbilityConfig
     }
 
     /**
-     * 判断whetherhave提供quotientcode.
+     * judgewhetherhaveprovidequotientcode.
      */
     public function hasProviderCode(): bool
     {
@@ -56,7 +56,7 @@ class AiAbilityConfig
     }
 
     /**
-     * 判断whetherhave API Key.
+     * judgewhetherhave API Key.
      */
     public function hasApiKey(): bool
     {
@@ -64,7 +64,7 @@ class AiAbilityConfig
     }
 
     /**
-     * 判断whetherhavemodel ID.
+     * judgewhetherhavemodel ID.
      */
     public function hasModelId(): bool
     {

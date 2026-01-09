@@ -133,7 +133,7 @@ class FileDefaultInitCommand extends Command
                     $existingFiles = $this->defaultFileDomainService->getByOrganizationCodeAndBusinessType($businessType, $organizationCode);
                     $isDuplicate = false;
                     foreach ($existingFiles as $existingFile) {
-                        // use userId fieldstoragebusinessidentifiercome判断duplicate
+                        // use userId fieldstoragebusinessidentifiercomejudgeduplicate
                         if ($existingFile->getUserId() === $businessIdentifier) {
                             $isDuplicate = true;
                             break;

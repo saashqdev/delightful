@@ -33,7 +33,7 @@ class EndpointDTO extends AbstractDTO
     protected string $type;
 
     /**
-     * 提供quotient.
+     * providequotient.
      */
     protected ?string $provider = null;
 

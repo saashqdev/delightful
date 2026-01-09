@@ -56,7 +56,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
             return null;
         }
         $this->setChildrenEmployeeSum($queryDTO, $departmentEntity);
-        // 判断whetherhavedownleveldepartment
+        // judgewhetherhavedownleveldepartment
         $departmentEntity = $this->delightfulDepartmentDomainService->getDepartmentsHasChild([$departmentEntity], $dataIsolation->getCurrentOrganizationCode())[0];
         return $this->filterDepartmentsHidden([$departmentEntity])[0] ?? null;
     }

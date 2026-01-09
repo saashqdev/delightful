@@ -79,7 +79,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     /**
      * get本timeneedstreampushfield。
      * supportonetimepush多fieldstreammessage，if json layerlevelmore深，use field_1.*.field_2 asfor key。 itsmiddle * isfingerarraydown标。
-     * service端willcache所havestreamdata，andinstreamendo clockonetimepropertypush，bydecrease丢package概rate，提升messagecompleteproperty。
+     * service端willcache所havestreamdata，andinstreamendo clockonetimepropertypush，bydecrease丢package概rate，enhancemessagecompleteproperty。
      * for example：
      * [
      *     'users.0.name' => 'delightful',

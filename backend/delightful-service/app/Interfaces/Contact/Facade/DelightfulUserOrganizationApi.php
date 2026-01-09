@@ -69,7 +69,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
     }
 
     /**
-     * get账numberdown所havecan切换organizationlist。
+     * get账numberdown所havecanswitchorganizationlist。
      */
     public function listOrganizations(RequestInterface $request): array
     {

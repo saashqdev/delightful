@@ -226,7 +226,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         if ($conversationEntity->getUserOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
-        // 判断conversationhairup者whetheriscurrentuser,andandnotisassistant
+        // judgeconversationhairup者whetheriscurrentuser,andandnotisassistant
         if ($conversationEntity->getReceiveType() !== ConversationType::Ai && $conversationEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
@@ -237,7 +237,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         // ifiseditmessage，checkbeeditmessagelegalproperty(from己hairmessage，andincurrentconversationmiddle)
         $this->checkEditMessageLegality($senderSeqDTO, $dataIsolation);
         return;
-        // todo ifmessagemiddlehavefile:1.判断file所have者whetheriscurrentuser;2.判断userwhetherreceivepassthisthesefile。
+        // todo ifmessagemiddlehavefile:1.judgefile所have者whetheriscurrentuser;2.judgeuserwhetherreceivepassthisthesefile。
         /* @phpstan-ignore-next-line */
         $messageContent = $senderMessageDTO->getContent();
         if ($messageContent instanceof ChatFileInterface) {
@@ -273,7 +273,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
      * assistantgivepersoncategoryor者群hairmessage,supportonlinemessageandofflinemessage(取决atuserwhetheronline).
      * @param DelightfulSeqEntity $aiSeqDTO 怎么传参can参考 apilayer aiSendMessage method
      * @param string $appMessageId message防重,customer端(includeflow)from己tomessagegenerateoneitemencoding
-     * @param bool $doNotParseReferMessageId notby chat 判断 referMessageId quoteo clock机,bycall方from己判断
+     * @param bool $doNotParseReferMessageId notby chat judge referMessageId quoteo clock机,bycall方from己judge
      * @throws Throwable
      */
     public function aiSendMessage(
@@ -334,7 +334,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     /**
      * assistantgivepersoncategoryor者群hairmessage,cannot传conversationand话题 id,from动createconversation，nongroupconversationfrom动适配话题 id.
      * @param string $appMessageId message防重,customer端(includeflow)from己tomessagegenerateoneitemencoding
-     * @param bool $doNotParseReferMessageId cannotby chat 判断 referMessageId quoteo clock机,bycall方from己判断
+     * @param bool $doNotParseReferMessageId cannotby chat judge referMessageId quoteo clock机,bycall方from己judge
      * @throws Throwable
      */
     public function agentSendMessage(
@@ -342,11 +342,11 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         string $senderUserId,
         string $receiverId,
         string $appMessageId = '',
-        bool $doNotParseReferMessageId = false,// cannotby chat 判断 referMessageId quoteo clock机,bycall方from己判断
+        bool $doNotParseReferMessageId = false,// cannotby chat judge referMessageId quoteo clock机,bycall方from己judge
         ?Carbon $sendTime = null,
         ?ConversationType $receiverType = null
     ): array {
-        // 1.判断 $senderUserId and $receiverUserIdconversationwhether存in（参考getOrCreateConversationmethod）
+        // 1.judge $senderUserId and $receiverUserIdconversationwhether存in（参考getOrCreateConversationmethod）
         $senderConversationEntity = $this->delightfulConversationDomainService->getOrCreateConversation($senderUserId, $receiverId, $receiverType);
         // alsowantcreatereceive方conversationwindow，wantnot然no法create话题
         $this->delightfulConversationDomainService->getOrCreateConversation($receiverId, $senderUserId);
@@ -366,7 +366,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     /**
      * personcategorygiveassistantor者群hairmessage,cannot传conversationand话题 id,from动createconversation，nongroupconversationfrom动适配话题 id.
      * @param string $appMessageId message防重,customer端(includeflow)from己tomessagegenerateoneitemencoding
-     * @param bool $doNotParseReferMessageId cannotby chat 判断 referMessageId quoteo clock机,bycall方from己判断
+     * @param bool $doNotParseReferMessageId cannotby chat judge referMessageId quoteo clock机,bycall方from己judge
      * @throws Throwable
      */
     public function userSendMessageToAgent(
@@ -374,12 +374,12 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         string $senderUserId,
         string $receiverId,
         string $appMessageId = '',
-        bool $doNotParseReferMessageId = false,// cannotby chat 判断 referMessageId quoteo clock机,bycall方from己判断
+        bool $doNotParseReferMessageId = false,// cannotby chat judge referMessageId quoteo clock机,bycall方from己judge
         ?Carbon $sendTime = null,
         ?ConversationType $receiverType = null,
         string $topicId = ''
     ): array {
-        // 1.判断 $senderUserId and $receiverUserIdconversationwhether存in（参考getOrCreateConversationmethod）
+        // 1.judge $senderUserId and $receiverUserIdconversationwhether存in（参考getOrCreateConversationmethod）
         $senderConversationEntity = $this->delightfulConversationDomainService->getOrCreateConversation($senderUserId, $receiverId, $receiverType);
         // ifreceive方nongroup，thencreate senderUserId and receiverUserId conversation.
         if ($receiverType !== ConversationType::Group) {
@@ -410,7 +410,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
      * assistantgivepersoncategoryor者群hairmessage,supportonlinemessageandofflinemessage(取决atuserwhetheronline).
      * @param DelightfulSeqEntity $aiSeqDTO 怎么传参can参考 apilayer aiSendMessage method
      * @param string $appMessageId message防重,customer端(includeflow)from己tomessagegenerateoneitemencoding
-     * @param bool $doNotParseReferMessageId notby chat 判断 referMessageId quoteo clock机,bycall方from己判断
+     * @param bool $doNotParseReferMessageId notby chat judge referMessageId quoteo clock机,bycall方from己judge
      * @throws Throwable
      */
     public function sendMessageToAgent(
@@ -549,7 +549,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             $this->checkConversationsOwnership($userAuthorization, $conversationIds);
         }
 
-        // getconversationmessage（注意，feature目andgetMessagesByConversationIddifferent）
+        // getconversationmessage（notice，feature目andgetMessagesByConversationIddifferent）
         $clientSeqList = $this->delightfulChatDomainService->getConversationsChatMessages($conversationMessagesQueryDTO);
         return $this->formatConversationMessagesReturn($clientSeqList, $conversationMessagesQueryDTO);
     }
@@ -638,7 +638,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
      * use大modeltotextconduct总结（usecustomizehint词）.
      *
      * @param DelightfulUserAuthorization $authorization userauthorization
-     * @param string $customPrompt completecustomizehint词（not做any替换handle）
+     * @param string $customPrompt completecustomizehint词（not做anyreplacehandle）
      * @return string generatetitle
      */
     public function summarizeTextWithCustomPrompt(DelightfulUserAuthorization $authorization, string $customPrompt): string
@@ -675,7 +675,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     public function getFileDownUrl(array $fileDTOs, DelightfulUserAuthorization $authorization): array
     {
         $dataIsolation = $this->createDataIsolation($authorization);
-        // permissionvalidation，判断usermessagemiddle，whethercontain本time他想downloadfile
+        // permissionvalidation，judgeusermessagemiddle，whethercontain本time他想downloadfile
         $fileEntities = $this->delightfulChatFileDomainService->checkAndGetFilePaths($fileDTOs, $dataIsolation);
         // downloado clockalso原file原本name
         $downloadNames = [];
@@ -706,7 +706,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
     /**
      * givehairitem方generatemessageandSeq.forguaranteesystemstableproperty,give收item方generatemessageandSeqstep放inmqasyncgo做.
-     * !!! 注意,transactionmiddle投递 mq,maybetransactionalsonotsubmit,mqmessagethenalreadybe消费.
+     * !!! notice,transactionmiddle投递 mq,maybetransactionalsonotsubmit,mqmessagethenalreadybe消费.
      * @throws Throwable
      */
     public function delightfulChat(
@@ -913,7 +913,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                 continue;
             }
 
-            // according toparameter决定usenicknamealsois传统 role
+            // according toparameterdecideusenicknamealsois传统 role
             if ($useNicknameAsRole) {
                 $userMessages[$clientSeqResponseDTO->getSeq()->getSeqId()] = [
                     'role' => $delightfulUserEntity->getNickname(),
@@ -921,7 +921,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                     'content' => $messageContent,
                 ];
             } else {
-                // use传统 role，判断whetherfor AI user
+                // use传统 role，judgewhetherfor AI user
                 $isAiUser = $delightfulUserEntity->getUserType() === UserType::Ai;
                 $role = $isAiUser ? Role::Assistant : Role::User;
 

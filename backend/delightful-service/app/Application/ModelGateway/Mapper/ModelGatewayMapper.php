@@ -412,7 +412,7 @@ class ModelGatewayMapper extends ModelMapper
 
         try {
             $fileDomainService = di(FileDomainService::class);
-            // ifis官方organization icon，切换官方organization
+            // ifis官方organization icon，switch官方organization
             if ($providerModelEntity->isOffice()) {
                 $iconUrl = $fileDomainService->getLink($providerDataIsolation->getOfficialOrganizationCode(), $providerModelEntity->getIcon())?->getUrl() ?? '';
             } else {
@@ -427,7 +427,7 @@ class ModelGatewayMapper extends ModelMapper
             return new ImageModel($providerConfigItem->toArray(), $providerModelEntity->getModelVersion(), (string) $providerModelEntity->getId(), $providerEntity->getProviderCode());
         }
 
-        // toatLLM/Embeddingmodel，保持原have逻辑
+        // toatLLM/Embeddingmodel，maintain原have逻辑
         return new OdinModel(
             key: $key,
             model: $this->createModel($providerModelEntity->getModelVersion(), [

@@ -12,7 +12,7 @@ namespace App\Domain\Chat\Entity\ValueObject;
  */
 enum FriendStatus: int
 {
-    // 申请
+    // apply
     case Apply = 1;
 
     // agree

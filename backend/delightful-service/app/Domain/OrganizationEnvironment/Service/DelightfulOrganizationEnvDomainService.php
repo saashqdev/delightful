@@ -47,7 +47,7 @@ class DelightfulOrganizationEnvDomainService
             if (! empty($orgEnvEntity)) {
                 return $orgEnvEntity;
             }
-            // createorganizationenvironment:ifis saas thennot改变organizationencoding。
+            // createorganizationenvironment:ifis saas thennotalterorganizationencoding。
             if ($delightfulEnvEntity->getDeployment() === DeploymentEnum::SaaS) {
                 $delightfulOrganizationCode = $originOrganizationCode;
             } else {

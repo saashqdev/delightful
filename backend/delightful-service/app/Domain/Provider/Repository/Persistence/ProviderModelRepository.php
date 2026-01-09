@@ -143,9 +143,9 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $currentOrganizationCode = $dataIsolation->getCurrentOrganizationCode();
         $modelOrganizationCode = $model->getOrganizationCode();
 
-        // 2. 判断model所属organizationwhetherandcurrentorganizationone致
+        // 2. judgemodel所属organizationwhetherandcurrentorganizationone致
         if ($modelOrganizationCode !== $currentOrganizationCode) {
-            // organizationnotone致：判断model所属organizationwhetheris官方organization
+            // organizationnotone致：judgemodel所属organizationwhetheris官方organization
             if ($this->isOfficialOrganization($modelOrganizationCode)
                 && ! $this->isOfficialOrganization($currentOrganizationCode)) {
                 // model属at官方organizationandcurrentorganizationnotis官方organization：走写o clockcopy逻辑
@@ -184,7 +184,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId, ProviderEntity $providerEntity): array
     {
-        // ifis官方servicequotient，needconductdatamergeandstatus判断
+        // ifis官方servicequotient，needconductdatamergeandstatusjudge
         if ($providerEntity->getProviderCode() === ProviderCode::Official && ! OfficialOrganizationUtil::isOfficialOrganization($dataIsolation->getCurrentOrganizationCode())) {
             return $this->delightfulProviderAndModels->getDelightfulEnableModels($dataIsolation->getCurrentOrganizationCode(), $providerEntity->getCategory());
         }

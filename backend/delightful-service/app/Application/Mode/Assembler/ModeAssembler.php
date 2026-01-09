@@ -130,7 +130,7 @@ class ModeAssembler
             foreach ($groupAggregate->getRelations() as $relation) {
                 $modelDTO = new ModeGroupModelDTO($relation->toArray());
 
-                // if提供modelinfo，then填充modelnameandgraph标
+                // ifprovidemodelinfo，then填充modelnameandgraph标
                 $providerModelId = $relation->getModelId();
                 if (isset($providerModels[$providerModelId])) {
                     $providerModel = $providerModels[$providerModelId];

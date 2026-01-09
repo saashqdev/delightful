@@ -295,7 +295,7 @@ readonly class RoleDomainService
      * 1. getcurrentorganizationdown名for ORGANIZATION_ADMIN_ROLE_NAME role；
      * 2. 若not存in直接return；
      * 3. call仓library移exceptuserandtheroleassociateclose系；
-     * 4. ifrolenotagainassociateanyuser，保持role本身not变（如haveneed，can考虑back续cleanup）。
+     * 4. ifrolenotagainassociateanyuser，maintainrole本身not变（如haveneed，can考虑back续cleanup）。
      */
     public function removeOrganizationAdmin(PermissionDataIsolation $dataIsolation, string $userId): void
     {

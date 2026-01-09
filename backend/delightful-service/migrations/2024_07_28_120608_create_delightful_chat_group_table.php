@@ -15,7 +15,7 @@ class CreateDelightfulChatGroupTable extends Migration
      */
     public function up(): void
     {
-        // 判断表whether存in
+        // judge表whether存in
         if (Schema::hasTable('delightful_chat_groups')) {
             return;
         }

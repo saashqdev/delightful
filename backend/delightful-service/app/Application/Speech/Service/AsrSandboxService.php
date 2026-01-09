@@ -122,7 +122,7 @@ readonly class AsrSandboxService
         ]);
 
         // call沙箱starttask
-        // 注意：沙箱 API 只acceptwork区相topath (如: .asr_recordings/session_xxx)
+        // notice：沙箱 API 只acceptwork区相topath (如: .asr_recordings/session_xxx)
         $response = $this->asrRecorder->startTask(
             $actualSandboxId,
             $taskStatus->taskKey,
@@ -300,7 +300,7 @@ readonly class AsrSandboxService
             $intelligentTitle
         );
 
-        // buildstream识别fileconfigurationobject
+        // buildstreamidentifyfileconfigurationobject
         $transcriptFileConfig = $this->buildTranscriptFileConfig($taskStatus);
 
         $this->logger->info('准备call沙箱 finish', [
@@ -786,7 +786,7 @@ readonly class AsrSandboxService
     }
 
     /**
-     * buildstream识别fileconfigurationobject.
+     * buildstreamidentifyfileconfigurationobject.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      */

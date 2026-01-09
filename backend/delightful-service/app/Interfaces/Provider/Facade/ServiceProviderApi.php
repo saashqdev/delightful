@@ -43,7 +43,7 @@ class ServiceProviderApi extends AbstractApi
     protected ProviderAppService $providerAppService;
 
     /**
-     * notneed判断administratorpermission。
+     * notneedjudgeadministratorpermission。
      * according tocategorygetservicequotientlist.
      */
     public function getServiceProviders(RequestInterface $request)
@@ -52,7 +52,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * notneed判断administratorpermission。
+     * notneedjudgeadministratorpermission。
      * according tocategorygetservicequotientlist.
      */
     public function getOrganizationProvidersByCategory(RequestInterface $request)
@@ -68,7 +68,7 @@ class ServiceProviderApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authenticatable */
         $authenticatable = $this->getAuthorization();
         $providerConfigAggregateDTO = $this->adminProviderAppService->getProviderModelsByConfigId($authenticatable, $serviceProviderConfigId);
-        // will新formatdataconvertfor旧formatby保持tobackcompatibleproperty
+        // will新formatdataconvertfor旧formatbymaintaintobackcompatibleproperty
         return $this->convertToLegacyFormat($providerConfigAggregateDTO);
     }
 
@@ -264,7 +264,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * will新formatdataconvertfor旧format，保持tobackcompatibleproperty.
+     * will新formatdataconvertfor旧format，maintaintobackcompatibleproperty.
      * @param ?ProviderConfigModelsDTO $aggregateDTO aggregateDTOobject
      * @return array 旧formatdata
      */
@@ -280,7 +280,7 @@ class ServiceProviderApi extends AbstractApi
             return $data;
         }
 
-        // will provider_config content提升torootlevel别，andadd alias and models
+        // will provider_config contentenhancetorootlevel别，andadd alias and models
         return array_merge($data['provider_config'], [
             'alias' => $data['provider_config']['translate']['alias']['zh_CN'] ?? '',
             'models' => $data['models'] ?? [],

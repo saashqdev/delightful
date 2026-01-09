@@ -103,7 +103,7 @@ readonly class LongTermMemoryDomainService
             return;
         }
 
-        // validatewhen scenario is memory_card_quick o clock，delightfulMessageId must提供
+        // validatewhen scenario is memory_card_quick o clock，delightfulMessageId mustprovide
         if ($scenario === MemoryOperationScenario::MEMORY_CARD_QUICK && empty($delightfulMessageId)) {
             throw new InvalidArgumentException('delightful_message_id is required when scenario is memory_card_quick');
         }
@@ -145,7 +145,7 @@ readonly class LongTermMemoryDomainService
                     ExceptionBuilder::throw(LongTermMemoryErrorCode::UPDATE_FAILED);
                 }
             } elseif ($action === MemoryOperationAction::REJECT) {
-                // batchquantityreject记忆suggestion：according to记忆status决定deletealsois清nullpending_content
+                // batchquantityreject记忆suggestion：according to记忆statusdecidedeletealsois清nullpending_content
                 $memories = $this->repository->findByIds($memoryIds);
 
                 $memoriesToDelete = [];
@@ -165,11 +165,11 @@ readonly class LongTermMemoryDomainService
                         $memory->setStatus(MemoryStatus::ACTIVE);
                         $memoriesToUpdate[] = $memory;
                     }
-                    // ifcontentnotfornullbutPendingContentfornull，also直接delete记忆（原have逻辑保持）
+                    // ifcontentnotfornullbutPendingContentfornull，also直接delete记忆（原have逻辑maintain）
                     elseif (! empty($content) && empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }
-                    // ifcontentfornullandPendingContentalsofornull，直接delete记忆（原have逻辑保持）
+                    // ifcontentfornullandPendingContentalsofornull，直接delete记忆（原have逻辑maintain）
                     elseif (empty($content) && empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }
@@ -570,7 +570,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 判断记忆whethershouldbe淘汰.
+     * judge记忆whethershouldbe淘汰.
      */
     public function shouldMemoryBeEvicted(LongTermMemoryEntity $memory): bool
     {
@@ -658,7 +658,7 @@ readonly class LongTermMemoryDomainService
         // get新status
         $newStatus = $this->determineNewMemoryStatus($currentStatus, $hasPendingContent);
 
-        // 只instatusneed改变o clock才update
+        // 只instatusneedaltero clock才update
         if ($newStatus !== $currentStatus) {
             $memory->setStatus($newStatus);
         }
@@ -673,7 +673,7 @@ readonly class LongTermMemoryDomainService
         return match ([$currentStatus, $hasPendingContent]) {
             // pending_contentfornullo clockstatusconvert
             [MemoryStatus::PENDING_REVISION, false], [MemoryStatus::ACTIVE, false] => MemoryStatus::ACTIVE,        // 修订complete → 生效
-            [MemoryStatus::PENDING, false], [MemoryStatus::PENDING, true] => MemoryStatus::PENDING,                 // 待acceptstatus保持not变
+            [MemoryStatus::PENDING, false], [MemoryStatus::PENDING, true] => MemoryStatus::PENDING,                 // 待acceptstatusmaintainnot变
             // pending_contentnotfornullo clockstatusconvert
             [MemoryStatus::ACTIVE, true], [MemoryStatus::PENDING_REVISION, true] => MemoryStatus::PENDING_REVISION,         // 生效记忆have修订 → 待修订
             // default情况（notshouldto达thiswithin）

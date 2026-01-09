@@ -97,7 +97,7 @@ class VolcengineModel extends AbstractImageGenerate
             return $response; // returnnulldataresponse
         }
 
-        // 3. 判断isgraph生graphalsois文生graph
+        // 3. judgeisgraph生graphalsois文生graph
         $isImageToImage = ! empty($imageGenerateRequest->getReferenceImage());
         $count = $isImageToImage ? self::IMAGE_TO_IMAGE_IMAGE_COUNT : $imageGenerateRequest->getGenerateNum();
 
@@ -158,7 +158,7 @@ class VolcengineModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // 判断isgraph生graphalsois文生graph
+        // judgeisgraph生graphalsois文生graph
         $isImageToImage = ! empty($imageGenerateRequest->getReferenceImage());
         $count = $isImageToImage ? self::IMAGE_TO_IMAGE_IMAGE_COUNT : $imageGenerateRequest->getGenerateNum();
 
@@ -209,7 +209,7 @@ class VolcengineModel extends AbstractImageGenerate
         $rawResults = [];
         $errors = [];
 
-        // handleresult，保持nativeformat
+        // handleresult，maintainnativeformat
         foreach ($results as $result) {
             if ($result['success']) {
                 $rawResults[$result['index']] = $result;
@@ -275,7 +275,7 @@ class VolcengineModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // 判断isgraph生graphalsois文生graph
+        // judgeisgraph生graphalsois文生graph
         $isImageToImage = ! empty($imageGenerateRequest->getReferenceImage());
         $count = $isImageToImage ? self::IMAGE_TO_IMAGE_IMAGE_COUNT : $imageGenerateRequest->getGenerateNum();
 
@@ -755,7 +755,7 @@ class VolcengineModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledownone张image，currentimage保持originalstatus
+                // continuehandledownone张image，currentimagemaintainoriginalstatus
             }
         }
 

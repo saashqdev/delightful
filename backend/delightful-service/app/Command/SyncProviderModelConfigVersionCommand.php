@@ -127,7 +127,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 判断whethershouldskip.
+     * judgewhethershouldskip.
      */
     private function shouldSkip(int $existingVersionCount, bool $isForce): bool
     {

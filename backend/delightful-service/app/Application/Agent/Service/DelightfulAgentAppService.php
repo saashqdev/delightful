@@ -598,7 +598,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $flowDataIsolation = new FlowDataIsolation($authenticatable->getOrganizationCode(), $authenticatable->getId());
         $userId = $authenticatable->getId();
 
-        // 判断whether具havepermission
+        // judgewhether具havepermission
         $agentOperation = $this->operationPermissionAppService->getOperationByResourceAndUser(
             new PermissionDataIsolation($authenticatable->getOrganizationCode(), $authenticatable->getId()),
             ResourceType::AgentCode,
@@ -694,7 +694,7 @@ class DelightfulAgentAppService extends AbstractAppService
         }
 
         $flowDataIsolation = new FlowDataIsolation($authenticatable->getOrganizationCode(), $authenticatable->getId());
-        // 判断workflow
+        // judgeworkflow
         $delightfulFlowVersionEntity = $this->delightfulFlowVersionDomainService->getLastVersion($flowDataIsolation, $delightfulAgentVersionEntity->getFlowCode());
 
         if ($delightfulFlowVersionEntity === null) {
@@ -705,7 +705,7 @@ class DelightfulAgentAppService extends AbstractAppService
             return true;
         }
 
-        // 判断交互finger令,ifnotone致thenneedreturn true
+        // judge交互finger令,ifnotone致thenneedreturn true
         $oldInstruct = $delightfulAgentVersionEntity->getInstructs();
         $newInstruct = $delightfulAgentEntity->getInstructs();
 
@@ -738,7 +738,7 @@ class DelightfulAgentAppService extends AbstractAppService
         foreach ($defaultConversationAICodes as $aiCode) {
             $aiUserEntity = $this->delightfulUserDomainService->getByAiCode($dataIsolation, $aiCode);
             $agentName = $aiUserEntity?->getNickname();
-            // 判断conversationwhetheralready经initialize，ifalreadyinitializethenskip
+            // judgeconversationwhetheralready经initialize，ifalreadyinitializethenskip
             if ($this->delightfulAgentDomainService->isDefaultAssistantConversationExist($userEntity->getUserId(), $aiCode)) {
                 continue;
             }
@@ -996,10 +996,10 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * readJSONfileand替换templatevariable.
+     * readJSONfileandreplacetemplatevariable.
      *
      * @param string $filepath JSONfilepath
-     * @param array $variables 替换variable ['modelName' => 'gpt-4', 'otherVar' => 'othervalue']
+     * @param array $variables replacevariable ['modelName' => 'gpt-4', 'otherVar' => 'othervalue']
      * @return null|array parsebackarrayorfailo clockreturnnull
      */
     public function readJsonToArray(string $filepath, array $variables = []): ?array
@@ -1013,7 +1013,7 @@ class DelightfulAgentAppService extends AbstractAppService
             return null;
         }
 
-        // 替换templatevariable
+        // replacetemplatevariable
         if (! empty($variables)) {
             foreach ($variables as $key => $value) {
                 $jsonContent = str_replace("{{{$key}}}", $value, $jsonContent);
@@ -1105,7 +1105,7 @@ class DelightfulAgentAppService extends AbstractAppService
     }
 
     /**
-     * 判断userwhethervisible
+     * judgeuserwhethervisible
      */
     private function isUserVisible(VisibilityConfig $visibilityConfig, string $currentUserId, array $userDepartmentIds): bool
     {
@@ -1338,7 +1338,7 @@ class DelightfulAgentAppService extends AbstractAppService
      * loadpresetAgentconfiguration.
      *
      * @param string $presetName presetname
-     * @param array $variables 替换variable
+     * @param array $variables replacevariable
      * @return array configurationarray
      */
     private function loadPresetConfig(string $presetName, array $variables = []): array

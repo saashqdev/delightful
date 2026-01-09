@@ -265,7 +265,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                             'contentIndex' => $contentIndex,
                             'error' => $e->getMessage(),
                         ]);
-                        // continuehandledownone张image，currentimage保持originalstatus
+                        // continuehandledownone张image，currentimagemaintainoriginalstatus
                     }
                 }
             }

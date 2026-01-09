@@ -34,7 +34,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     }
 
     /**
-     * 判断usermessagemiddle，whethercontain本time他想downloadfile.
+     * judgeusermessagemiddle，whethercontain本time他想downloadfile.
      * @param DelightfulChatFileEntity[] $fileDTOs
      * @return DelightfulChatFileEntity[]
      */
@@ -73,7 +73,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
             }
         }
 
-        // 判断usermessagemiddle，whethercontain本time他想downloadfile
+        // judgeusermessagemiddle，whethercontain本time他想downloadfile
         $fileMaps = [];
         foreach ($fileDTOs as $fileDTO) {
             $delightfulMessageId = $fileDTO->getDelightfulMessageId();
@@ -145,7 +145,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     }
 
     /**
-     * 判断usermessagemiddleattachmentisnotis他from己upload.
+     * judgeusermessagemiddleattachmentisnotis他from己upload.
      * @param ChatAttachment[] $attachments
      * @return ChatAttachment[]
      */
@@ -154,7 +154,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
         $fileIds = array_column($attachments, 'file_id');
         $fileEntities = $this->getFileEntitiesByFileIds($fileIds);
         $fileEntities = array_column($fileEntities, null, 'file_id');
-        // todo ifmessagemiddlehavefile:1.判断file所have者whetheriscurrentuser;2.判断userwhetherreceivepassthisthesefile。
+        // todo ifmessagemiddlehavefile:1.judgefile所have者whetheriscurrentuser;2.judgeuserwhetherreceivepassthisthesefile。
         //        foreach ($fileEntities as $fileEntity) {
         //            if ($fileEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
         //                ExceptionBuilder::throw(ChatErrorCode::FILE_NOT_FOUND);

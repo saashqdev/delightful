@@ -131,12 +131,12 @@ enum SystemInstructType: int
     }
 
     /**
-     * 判断systemfinger令typewhetherneedcontentfield.
+     * judgesystemfinger令typewhetherneedcontentfield.
      */
     public static function requiresContent(int $type): bool
     {
         // 目front所havesystemfinger令allnotneedcontent
-        // ifnotcomehavesystemfinger令needcontent，caninthiswithinadd判断
+        // ifnotcomehavesystemfinger令needcontent，caninthiswithinaddjudge
         return match (self::fromType($type)) {
             self::EMOJI, self::FILE, self::NEW_TOPIC, self::SCHEDULE, self::RECORD => false,
         };

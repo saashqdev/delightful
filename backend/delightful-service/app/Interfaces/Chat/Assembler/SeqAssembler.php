@@ -90,7 +90,7 @@ class SeqAssembler
         // 强linedelete $streamOptions middlestream_app_message_id/streamfield
         unset($thisTimeStreamMessages['stream_options']['stream_app_message_id'], $thisTimeStreamMessages['stream_options']['stream']);
         $streamOptions = $thisTimeStreamMessages['stream_options'] ?? null;
-        // 0 willbewhen做 false handle，所bythiswithinwant判断whetherfor null or者 ''
+        // 0 willbewhen做 false handle，所bythiswithinwantjudgewhetherfor null or者 ''
         if ($content !== null && $content !== '') {
             $response->setContent($content);
         }
@@ -308,7 +308,7 @@ class SeqAssembler
             'seq_id' => $seqEntity->getSeqId(),
             // usermessageid，userdown唯one。
             'message_id' => $seqEntity->getMessageId(),
-            // 本itemmessagefingertodelightful_message_id。 useatimplementalready读return执场景。存inquoteclose系o clock，send_msg_idfieldnotagainreturn，因forsend方messageidnothave改变。
+            // 本itemmessagefingertodelightful_message_id。 useatimplementalready读return执场景。存inquoteclose系o clock，send_msg_idfieldnotagainreturn，因forsend方messageidnothavealter。
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // send方messageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),

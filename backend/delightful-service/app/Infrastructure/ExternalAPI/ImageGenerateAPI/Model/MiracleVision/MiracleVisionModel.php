@@ -226,7 +226,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
         $type = FileType::getType($url);
         if (empty($type)) {
-            $this->logger->error('美graph超清convert：no法识别imagetype', ['url' => $url]);
+            $this->logger->error('美graph超清convert：no法identifyimagetype', ['url' => $url]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 

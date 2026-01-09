@@ -138,9 +138,9 @@ class DelightfulFlowExportImportAppService
             }
         }
 
-        // 4. mostbackimport主process，andassociatetofinger定assistant（if提供agentId）
+        // 4. mostbackimport主process，andassociatetofinger定assistant（ifprovideagentId）
         try {
-            // if提供agentId，settingto主processdatamiddle
+            // ifprovideagentId，settingto主processdatamiddle
             if (! empty($agentId)) {
                 $mainFlowData['agent_id'] = $agentId;
             }
@@ -583,7 +583,7 @@ class DelightfulFlowExportImportAppService
                         $oldIdStr = (string) $oldId;
                         $newIdStr = (string) $newId;
 
-                        // usejustthen表达typeensure只替换completeID
+                        // usejustthen表达typeensure只replacecompleteID
                         if (preg_match('/^' . preg_quote($oldIdStr, '/') . '_/', $edge['sourceHandle'])) {
                             $edge['sourceHandle'] = preg_replace('/^' . preg_quote($oldIdStr, '/') . '/', $newIdStr, $edge['sourceHandle']);
                         }
@@ -620,7 +620,7 @@ class DelightfulFlowExportImportAppService
                     $oldNodeIdStr = (string) $oldNodeId;
                     $newNodeIdStr = (string) $newNodeId;
 
-                    // usejustthen表达typeensure只替换completesectionpointID
+                    // usejustthen表达typeensure只replacecompletesectionpointID
                     if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $item)) {
                         $fieldName = substr($item, strlen($oldNodeIdStr));
                         $item = $newNodeIdStr . $fieldName;
@@ -655,7 +655,7 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * 判断whetherforinside置tool
+     * judgewhetherforinside置tool
      * inside置toolnotneed重新create，can直接use.
      */
     private function isBuiltInTool(string $toolId, string $toolSetId): bool
@@ -669,14 +669,14 @@ class DelightfulFlowExportImportAppService
             'knowledge',     // knowledge basetoolcollection
         ];
 
-        // 判断whether属atinside置toolcollection
+        // judgewhether属atinside置toolcollection
         foreach ($builtInToolSetPrefixes as $prefix) {
             if ($toolSetId === $prefix || strpos($toolSetId, $prefix . '_') === 0) {
                 return true;
             }
         }
 
-        // 判断toolIDwhetherbytoolcollectionIDopenhead，thisisinside置tool常见模type
+        // judgetoolIDwhetherbytoolcollectionIDopenhead，thisisinside置tool常见模type
         if (! empty($toolSetId) && strpos($toolId, $toolSetId . '_') === 0) {
             return true;
         }
@@ -758,7 +758,7 @@ class DelightfulFlowExportImportAppService
             $oldNodeIdStr = (string) $oldNodeId;
             $newNodeIdStr = (string) $newNodeId;
 
-            // usejustthen表达typeensure只替换completesectionpointID
+            // usejustthen表达typeensure只replacecompletesectionpointID
             if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $str)) {
                 $fieldName = substr($str, strlen($oldNodeIdStr));
                 $str = $newNodeIdStr . $fieldName;
@@ -947,7 +947,7 @@ class DelightfulFlowExportImportAppService
                         $toolId = $optionToolData['tool_id'] ?? '';
                         $toolSetId = $optionToolData['tool_set_id'] ?? '';
 
-                        // 判断whetherforinside置tool，inside置tool直接skip
+                        // judgewhetherforinside置tool，inside置tool直接skip
                         if ($this->isBuiltInTool($toolId, $toolSetId)) {
                             continue;
                         }

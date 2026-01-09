@@ -16,7 +16,7 @@ class Oauth2Config extends AbstractValueObject
 {
     /**
      * Client ID - customer端ID，isapplicationinauthorizationservice器middle唯oneidentifier。
-     * authorizationservice器passcustomer端IDcome识别differentthree方application。
+     * authorizationservice器passcustomer端IDcomeidentifydifferentthree方application。
      *
      * createOAuthapplicationo clockwillminute配client_id，本exampleinput
      * 813924812101982004357116497xxxx.app.coze
@@ -53,7 +53,7 @@ class Oauth2Config extends AbstractValueObject
      * Authorization URL - getuseraccess_tokenURLground址。
      *
      * userpassclient_urlauthorizationsuccessback，three方servicewillreturnusergettokencode，
-     * and转tocallbackground址。thiso clock，service器提供方willpassto应datatoauthorization_urlhairuprequest，
+     * and转tocallbackground址。thiso clock，service器provide方willpassto应datatoauthorization_urlhairuprequest，
      * getuseraccess_token。
      *
      * 参考service方authorizationdocumentgetauthorization_url，本example参考扣子openhairguidedocument，input
@@ -62,7 +62,7 @@ class Oauth2Config extends AbstractValueObject
     protected string $authorizationUrl = '';
 
     /**
-     * Authorization Content Type - toOAuth提供者senddatacontenttype。
+     * Authorization Content Type - toOAuthprovide者senddatacontenttype。
      * 目front仅supportapplication/jsontype。
      */
     protected string $authorizationContentType = 'application/json';

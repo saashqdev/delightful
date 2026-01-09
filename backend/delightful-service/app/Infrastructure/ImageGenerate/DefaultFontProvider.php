@@ -10,15 +10,15 @@ namespace App\Infrastructure\ImageGenerate;
 use App\Domain\ImageGenerate\Contract\FontProviderInterface;
 
 /**
- * default字body提供者implement
- * open源projectmiddledefaultimplement，提供基础字bodyfeature
- * 企业projectcanpassdependencyinjection覆盖thisimplementcome提供高level字bodyfeature.
+ * default字bodyprovide者implement
+ * open源projectmiddledefaultimplement，provide基础字bodyfeature
+ * 企业projectcanpassdependencyinjection覆盖thisimplementcomeprovide高level字bodyfeature.
  */
 class DefaultFontProvider implements FontProviderInterface
 {
     /**
      * getTTF字bodyfilepath.
-     * open源versionnot提供TTF字bodyfile.
+     * open源versionnotprovideTTF字bodyfile.
      */
     public function getFontPath(): ?string
     {
@@ -45,7 +45,7 @@ class DefaultFontProvider implements FontProviderInterface
 
     /**
      * detectgraphlikewhethercontain透明channel.
-     * 提供基础透明degreedetectfeature.
+     * provide基础透明degreedetectfeature.
      * @param mixed $image
      */
     public function hasTransparency($image): bool
@@ -59,7 +59,7 @@ class DefaultFontProvider implements FontProviderInterface
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // 采样check，avoidcheckeachlike素提高performance
+        // 采样check，avoidcheckeachlike素improveperformance
         $sampleSize = min(50, $width, $height);
         $stepX = max(1, (int) ($width / $sampleSize));
         $stepY = max(1, (int) ($height / $sampleSize));

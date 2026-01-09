@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->string('type_relation_value', 255)->comment(
                 'tokentypeto应value.typefor0o clock,thisvalueforaccount_id;typefor1o clock,thisvalueforuser_id;typefor2o clock,thisvaluefororganizationencoding;typefor3o clock,thisvalueforapp_id;typefor4o clock,thisvalueforflow_id'
             )->default('')->change();
-            // 判断 idx_token whether存in
+            // judge idx_token whether存in
             if (Schema::hasIndex('delightful_tokens', 'idx_token')) {
                 $table->dropIndex('idx_token');
             }

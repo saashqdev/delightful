@@ -119,9 +119,9 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
         // verifymiddle文 logo alreadyupdate
         $this->assertSame('https://example.com/updated_logo_zh.png', $data['logo']['zh_CN']['url']);
-        // verifyEnglish logo 保持not变
+        // verifyEnglish logo maintainnot变
         $this->assertSame('https://example.com/initial_logo_en.png', $data['logo']['en_US']['url']);
-        // verify favicon 保持not变
+        // verify favicon maintainnot变
         $this->assertSame('https://example.com/initial_favicon.ico', $data['favicon']['url']);
     }
 
@@ -165,7 +165,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
-        // favicon should保持原value（因foremptystringnotwillupdate）
+        // favicon shouldmaintain原value（因foremptystringnotwillupdate）
         $data = $response['data'];
         $this->assertSame('https://example.com/favicon.ico', $data['favicon']['url']);
     }

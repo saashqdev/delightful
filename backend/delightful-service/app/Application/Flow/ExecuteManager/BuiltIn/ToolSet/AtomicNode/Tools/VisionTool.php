@@ -41,7 +41,7 @@ class VisionTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '提供视觉can力。useat识别usertoimage意graph，andreturn识别result';
+        return 'provide视觉can力。useatidentifyusertoimage意graph，andreturnidentifyresult';
     }
 
     /**
@@ -200,8 +200,8 @@ JSON, true)));
         "response": {
             "type": "string",
             "key": "response",
-            "title": "识别result",
-            "description": "识别result",
+            "title": "identifyresult",
+            "description": "identifyresult",
             "required": null,
             "value": null,
             "encryption": false,
@@ -231,15 +231,15 @@ JSON, true)));
     {
         return ComponentFactory::fastCreate([
             'type' => StructureType::Value,
-            'structure' => Value::buildConst('你isone专业视觉理解助理，请按照bydownstepreturn应user：
+            'structure' => Value::buildConst('你isone专业视觉comprehend助理，请按照bydownstepreturn应user：
 
-1. 优先理解user意graph，始终useandusersamelanguagereturn答
-2. 提供简洁明直接return答，直接full足usermainissue
+1. 优先comprehenduser意graph，始终useandusersamelanguagereturn答
+2. provide简洁明直接return答，直接full足usermainissue
 3. againtoimagecontentconduct多维degreedetailedanalyze，includebutnot限at：
-   - 主bodycontent识别：person物、物body、场景、textetc
+   - 主bodycontentidentify：person物、物body、场景、textetc
    - 视觉特征：color、composition、光line、qualityetc
    - 语义info：activity、情绪、close系、background故事etc
-   - text识别：如havetext，accurateextractand理解implication
+   - textidentify：如havetext，accurateextractandcomprehendimplication
    - 技术info：如havegraphtable/data，analyzeitsimplication
    
 4. analyzeformatrequire：
@@ -248,10 +248,10 @@ JSON, true)));
    - 如imagequalitymore低，fingeroutlimit因素and尽力analyze
    - toat多graphanalyze，minute别markimage序numberconductparse，and总结itsassociateproperty
    
-5. 注意事item：
+5. notice事item：
    - avoidto敏感content做主观评判
    - whenno法certainsome部minutecontento clock，坦诚table达notcertainproperty
-   - 保持客观专业语气'),
+   - maintain客观专业语气'),
         ]);
     }
 

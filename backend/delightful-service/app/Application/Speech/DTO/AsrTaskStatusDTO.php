@@ -36,11 +36,11 @@ class AsrTaskStatusDTO
     // presetfileinfo（useatfront端write）
     public ?string $presetNoteFileId = null; // preset笔记fileID
 
-    public ?string $presetTranscriptFileId = null; // presetstream识别fileID
+    public ?string $presetTranscriptFileId = null; // presetstreamidentifyfileID
 
     public ?string $presetNoteFilePath = null; // preset笔记file相topath
 
-    public ?string $presetTranscriptFilePath = null; // presetstream识别file相topath
+    public ?string $presetTranscriptFilePath = null; // presetstreamidentifyfile相topath
 
     // projectand话题info
     public ?string $projectId = null; // projectID
@@ -65,7 +65,7 @@ class AsrTaskStatusDTO
 
     public bool $sandboxTaskCreated = false; // 沙箱taskwhetheralreadycreate
 
-    public bool $isPaused = false; // whether处atpausestatus（useattimeout判断）
+    public bool $isPaused = false; // whether处atpausestatus（useattimeoutjudge）
 
     public ?string $sandboxId = null; // 沙箱ID
 
@@ -76,7 +76,7 @@ class AsrTaskStatusDTO
     public bool $serverSummaryLocked = false; // service端总结whetherlock定customer端
 
     // ASR contentand笔记（useatgeneratetitle）
-    public ?string $asrStreamContent = null; // ASR stream识别content
+    public ?string $asrStreamContent = null; // ASR streamidentifycontent
 
     public ?string $noteContent = null; // 笔记content
 
@@ -203,8 +203,8 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * check总结whetheralreadycomplete（poweretcproperty判断）.
-     * 判断standard：audiofilealreadymerge（audioFileId 存in）and录音alreadystop.
+     * check总结whetheralreadycomplete（poweretcpropertyjudge）.
+     * judgestandard：audiofilealreadymerge（audioFileId 存in）and录音alreadystop.
      */
     public function isSummaryCompleted(): bool
     {
@@ -214,7 +214,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 判断service端总结whethertocustomer端addlock.
+     * judgeservice端总结whethertocustomer端addlock.
      */
     public function hasServerSummaryLock(): bool
     {
@@ -327,7 +327,7 @@ class AsrTaskStatusDTO
                 return false;
             }
 
-            // othervalue按truevalue判断
+            // othervalue按truevaluejudge
             return (bool) $value;
         }
 

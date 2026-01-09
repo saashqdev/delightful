@@ -105,7 +105,7 @@ class AdminModeAssembler
                 }
                 $modelDTO->setModelDescription($description);
 
-                // 保持tobackcompatible，set providerModelId forfindtomodelID
+                // maintaintobackcompatible，set providerModelId forfindtomodelID
                 $modelDTO->setProviderModelId((string) $providerModel->getId());
             } else {
                 // back台manageneeddisplay所havestatus，includenocanusemodel情况

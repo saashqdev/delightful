@@ -401,7 +401,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 // watermarkhandlefailo clockuseoriginalbase64data（butthisusuallynotshouldhair生）
             }
 
-            // 只returnURLformat，andothermodel保持one致
+            // 只returnURLformat，andothermodelmaintainone致
             $currentData[] = [
                 'url' => $processedUrl,
             ];

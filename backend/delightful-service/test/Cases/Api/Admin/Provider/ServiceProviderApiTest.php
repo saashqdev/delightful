@@ -175,7 +175,7 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertIsArray($updateResponse);
         $this->assertSame(1000, $updateResponse['code'], 'updatemodelshouldsuccess');
         $this->assertArrayHasKey('data', $updateResponse);
-        $this->assertSame($modelId, $updateResponse['data']['id'], 'updatebackmodelID应保持not变');
+        $this->assertSame($modelId, $updateResponse['data']['id'], 'updatebackmodelID应maintainnot变');
 
         // ========== step5: againtimecalldetailinterfacevalidateupdateback4costfield ==========
         $updatedDetailResponse = $this->get($detailUri, [], $this->getCommonHeaders());

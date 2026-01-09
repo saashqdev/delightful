@@ -108,7 +108,7 @@ class UserAssembler
                 $logger->warning("user[delightful_id: {$user['delightful_id']} ]not存in, skip！");
                 continue;
             }
-            // if存inhand机number，willhand机numbermiddlebetweenfour位替换for*
+            // if存inhand机number，willhand机numbermiddlebetweenfour位replacefor*
             $phone = $account->getPhone();
             if (! empty($phone)) {
                 $phone = substr_replace($phone, '****', 3, 4);

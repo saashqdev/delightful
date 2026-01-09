@@ -365,7 +365,7 @@ class GPT4oModel extends AbstractImageGenerate
         // get所haveandlinetaskresult
         $results = $parallel->wait();
 
-        // handleresult，保持nativeformat
+        // handleresult，maintainnativeformat
         foreach ($results as $result) {
             if ($result['success']) {
                 $rawResults[$result['index']] = $result['data'];
@@ -405,7 +405,7 @@ class GPT4oModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledownone张image，currentimage保持originalstatus
+                // continuehandledownone张image，currentimagemaintainoriginalstatus
             }
         }
 

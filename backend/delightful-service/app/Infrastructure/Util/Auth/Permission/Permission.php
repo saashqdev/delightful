@@ -16,7 +16,7 @@ class Permission implements PermissionInterface
     protected DelightfulAccountDomainService $delightfulAccountDomainService;
 
     /**
-     * 判断whether超leveladministrator.
+     * judgewhether超leveladministrator.
      *
      * @param string $organizationCode organizationencoding
      * @param string $mobile hand机number

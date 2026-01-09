@@ -34,7 +34,7 @@ enum MemoryCategory: string
     }
 
     /**
-     * according toprojectID判断记忆category.
+     * according toprojectIDjudge记忆category.
      */
     public static function fromProjectId(?string $projectId): self
     {

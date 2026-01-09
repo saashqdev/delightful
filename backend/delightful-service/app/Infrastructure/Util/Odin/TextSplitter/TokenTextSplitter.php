@@ -89,10 +89,10 @@ class TokenTextSplitter extends TextSplitter
         // saveoriginaltext，useatalso原tag
         $originalText = $text;
 
-        // 1. 先原文middle0x00替换become0x000x00
+        // 1. 先原文middle0x00replacebecome0x000x00
         $text = str_replace("\x00", "\x00\x00", $text);
 
-        // 2. tag替换become0x00
+        // 2. tagreplacebecome0x00
         $text = preg_replace('/<DelightfulCompressibleContent.*?<\/DelightfulCompressibleContent>/s', "\x00", $text);
 
         // 3. splittext
@@ -179,7 +179,7 @@ class TokenTextSplitter extends TextSplitter
         if ($separator === ' ') {
             $chunks = preg_split('/\s+/', $text);
         } else {
-            // ifminute隔符contain0x00，替换become0x000x00
+            // ifminute隔符contain0x00，replacebecome0x000x00
             $separator = str_replace("\x00", "\x00\x00", $separator);
             $chunks = explode($separator, $text);
             if ($this->preserveSeparator) {

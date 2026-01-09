@@ -357,8 +357,8 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $secondUserData = $secondResponse['data'];
 
-        // validatedatacompleteproperty：nickname应保持theonetimemorenewvalue
-        $this->assertEquals($firstUpdateData['nickname'], $secondUserData['nickname'], 'nickname应保持theonetimemorenewvalue');
+        // validatedatacompleteproperty：nickname应maintaintheonetimemorenewvalue
+        $this->assertEquals($firstUpdateData['nickname'], $secondUserData['nickname'], 'nickname应maintaintheonetimemorenewvalue');
         $this->assertEquals($secondUpdateData['avatar_url'], $secondUserData['avatar_url'], 'avatar应forthetwotimemorenewvalue');
     }
 

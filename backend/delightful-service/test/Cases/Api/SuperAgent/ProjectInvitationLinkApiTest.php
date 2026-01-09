@@ -454,9 +454,9 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $enableResponse = $this->setInvitationPassword($projectId, true);
         $this->assertEquals(1000, $enableResponse['code']);
 
-        // 6. validate密码保持not变
+        // 6. validate密码maintainnot变
         $restoredPassword = $enableResponse['data']['password'];
-        $this->assertEquals($originalPassword, $restoredPassword, '重新start密码protectedback，密码should保持not变');
+        $this->assertEquals($originalPassword, $restoredPassword, '重新start密码protectedback，密码shouldmaintainnot变');
 
         // 7. validatestartstatusdownaccesslinkneed密码
         $linkInfo = $this->getInvitationByToken($token);
@@ -551,7 +551,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 0. ensure切换totest1userandcleanuptestdata
+        // 0. ensureswitchtotest1userandcleanuptestdata
         $this->switchUserTest1();
         $this->cleanupTestData($projectId);
         $this->getResourceShareDomainService()->deleteShareByResource($projectId, ResourceType::ProjectInvitation->value, '', true);
@@ -599,7 +599,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->assertArrayHasKey('creator_name', $invitationInfo['data'], 'responseshouldcontaincreator_namefield');
         $this->assertArrayHasKey('creator_avatar', $invitationInfo['data'], 'responseshouldcontaincreator_avatarfield');
 
-        // 4. test2useradd入project - need提供密码
+        // 4. test2useradd入project - needprovide密码
         $password = $linkResponse['data']['password'] ?? null;
         $joinResult = $this->joinProjectSuccess($token, $password);
         $this->assertEquals(1000, $joinResult['code']);
@@ -623,7 +623,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
             $this->assertArrayHasKey($field, $data, "responsedata应containfield: {$field}");
         }
 
-        // 7. cleanuptestdataand切换returntest1user
+        // 7. cleanuptestdataandswitchreturntest1user
         $this->switchUserTest1();
         $this->cleanupTestData($projectId);
         $this->getResourceShareDomainService()->deleteShareByResource($projectId, ResourceType::ProjectInvitation->value);

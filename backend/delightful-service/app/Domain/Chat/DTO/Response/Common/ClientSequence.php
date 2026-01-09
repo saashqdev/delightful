@@ -27,7 +27,7 @@ class ClientSequence extends AbstractEntity
     // usermessageid，userdown唯one。
     protected string $messageId;
 
-    // 本itemmessagefingertodelightful_message_id。 useatimplementalready读return执场景。存inquoteclose系o clock，send_msg_idfieldnotagainreturn，因forsend方messageidnothave改变。
+    // 本itemmessagefingertodelightful_message_id。 useatimplementalready读return执场景。存inquoteclose系o clock，send_msg_idfieldnotagainreturn，因forsend方messageidnothavealter。
     protected ?string $referMessageId;
 
     // send方messageid

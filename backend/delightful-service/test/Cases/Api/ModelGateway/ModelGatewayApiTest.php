@@ -198,7 +198,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * 提供testuse通usemessagedata.
+     * providetestuse通usemessagedata.
      */
     private function getTestMessages(): array
     {
@@ -215,7 +215,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * 提供testuserequesthead.
+     * providetestuserequesthead.
      */
     private function getTestHeaders(): array
     {

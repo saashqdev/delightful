@@ -121,8 +121,8 @@ MARKDOWN;
 
         $usageInstructions = <<<'MARKDOWN'
 useinstruction：
-• must提供 agent_id and message parameter
-• conversation_id useat保持conversation连续property，sameIDmessagewillsharedupdown文
+• mustprovide agent_id and message parameter
+• conversation_id useatmaintainconversation连续property，sameIDmessagewillsharedupdown文
 
 MARKDOWN;
 
@@ -135,7 +135,7 @@ finger令parameter instruction（optional）：
 • format：[{"name": "finger令name", "value": "finger令value"}, ...]
 • single-selecttype：fromoptionalvaluemiddlechooseone，for example "yes", "no"
 • switchtype：只canis "on" or "off"
-• ifnot提供finger令parameter，willusedefaultvalue
+• ifnotprovidefinger令parameter，willusedefaultvalue
 
 callexample：
 ```json

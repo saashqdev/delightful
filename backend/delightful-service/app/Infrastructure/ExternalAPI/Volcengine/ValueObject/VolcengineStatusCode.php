@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\Volcengine\ValueObject;
 
 /**
- * 火山enginevoice识别status码枚举.
+ * 火山enginevoiceidentifystatus码枚举.
  */
 enum VolcengineStatusCode: string
 {
@@ -53,7 +53,7 @@ enum VolcengineStatusCode: string
     case SERVER_BUSY = '55000031';
 
     /**
-     * 判断whetherforsuccessstatus
+     * judgewhetherforsuccessstatus
      */
     public function isSuccess(): bool
     {
@@ -61,7 +61,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断whetherforprocessmiddlestatus（includeprocessmiddleandrow队middle）.
+     * judgewhetherforprocessmiddlestatus（includeprocessmiddleandrow队middle）.
      */
     public function isProcessing(): bool
     {
@@ -69,7 +69,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断whetherforfailstatus
+     * judgewhetherforfailstatus
      */
     public function isFailed(): bool
     {
@@ -77,7 +77,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断whetherforcanretryfailstatus
+     * judgewhetherforcanretryfailstatus
      */
     public function isRetryable(): bool
     {
@@ -85,7 +85,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断whetherneed重新submittask
+     * judgewhetherneed重新submittask
      */
     public function needsResubmit(): bool
     {
@@ -98,7 +98,7 @@ enum VolcengineStatusCode: string
     public function getDescription(): string
     {
         return match ($this) {
-            self::SUCCESS => '识别success',
+            self::SUCCESS => 'identifysuccess',
             self::PROCESSING => 'justinprocessmiddle',
             self::QUEUED => 'taskinqueuemiddle',
             self::SILENT_AUDIO => 'muteaudio',
@@ -118,7 +118,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断whetherforserviceinside部error（550xxxx系column）.
+     * judgewhetherforserviceinside部error（550xxxx系column）.
      */
     public static function isInternalServerError(string $statusCode): bool
     {

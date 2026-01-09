@@ -308,7 +308,7 @@ class ProviderModelSyncAppService
         $saveDTO = $this->modelToReqDTO($dataIsolation, $modelData, $providerConfigEntity, $language);
 
         $saveDTO->setId($existingModel->getId());
-        $saveDTO->setStatus($existingModel->getStatus()); // 保持原havestatus
+        $saveDTO->setStatus($existingModel->getStatus()); // maintain原havestatus
 
         // savemodel
         $this->providerModelDomainService->saveModel($dataIsolation, $saveDTO);

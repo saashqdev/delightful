@@ -163,7 +163,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
     protected function routine(VertexResult $vertexResult, ExecutionData $executionData, StartNodeParamsConfig $startNodeParamsConfig): array
     {
-        // schedule入参，allbyoutside部call，判断is哪branch
+        // schedule入参，allbyoutside部call，judgeis哪branch
         $branchId = $executionData->getTriggerData()->getParams()['branch_id'] ?? '';
         if (empty($branchId)) {
             // nothave找toanybranch，直接运line

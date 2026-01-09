@@ -266,7 +266,7 @@ class DelightfulAgentApi extends AbstractApi
         $this->delightfulAgentAppService->updateAgentStatus($authorization, $agentId, DelightfulAgentVersionStatus::from($status));
     }
 
-    // 改变助理publishtoorganizationstatus
+    // alter助理publishtoorganizationstatus
     public function updateAgentEnterpriseStatus(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */

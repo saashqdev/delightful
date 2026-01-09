@@ -27,7 +27,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
 
     /**
      * 1.本groundopenhairo clocknotstart,avoid消费testenvironmentdata,导致testenvironmentuser收nottomessage
-     * 2.if本groundopenhairo clock想debug,请fromlinein本ground搭建front端environment,more换mqhost. or者申请onedevenvironment,隔离mq.
+     * 2.if本groundopenhairo clock想debug,请fromlinein本ground搭建front端environment,more换mqhost. or者applyonedevenvironment,隔离mq.
      */
     public function isEnable(): bool
     {
@@ -58,7 +58,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                     return Result::ACK;
                 }
                 $this->addSeqRetryNumber($seqRetryKey);
-                // recordseq尝试pushcount,useatback续判断whetherneedretry
+                // recordseq尝试pushcount,useatback续judgewhetherneedretry
                 $this->delightfulSeqAppService->pushSeq($seqId);
                 // not报错,notagain重推
                 $this->setSeqCanNotRetry($seqRetryKey);

@@ -96,7 +96,7 @@ enum ControlMessageType: string
     // add好友success
     case AddFriendSuccess = 'add_friend_success';
 
-    // add好友申请
+    // add好友apply
     case AddFriendApply = 'add_friend_apply';
 
     /**
@@ -116,7 +116,7 @@ enum ControlMessageType: string
     public static function getMessageStatusChangeType(): array
     {
         // notcontaineditmessagestatus变more!
-        // editmessagenotwill改变messagestatus,只will改变messagecontent.
+        // editmessagenotwillaltermessagestatus,只willaltermessagecontent.
         return [
             self::RevokeMessage,
             self::ReadMessage,

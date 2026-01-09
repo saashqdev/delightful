@@ -30,7 +30,7 @@ class CreateDelightfulChatFriendTable extends Migration
             $table->tinyInteger('friend_type')->comment('好友type，0:ai 1:personcategory')->default(0);
             $table->string('remarks', 256)->comment('note');
             $table->string('extra', 1024)->comment('attachaddproperty');
-            $table->tinyInteger('status')->comment('status，1：申请，2：agree 3：reject 4：ignore');
+            $table->tinyInteger('status')->comment('status，1：apply，2：agree 3：reject 4：ignore');
             $table->unique(['user_id', 'friend_id'], 'uk_user_id_friend_id');
             $table->timestamps();
             $table->softDeletes();

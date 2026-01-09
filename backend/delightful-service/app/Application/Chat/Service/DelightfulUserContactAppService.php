@@ -91,7 +91,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         if (! $this->userDomainService->addFriend($dataIsolation, $friendId)) {
             return false;
         }
-        // sendadd好友message。add好友splitfor：好友申请/好友agree/好友reject
+        // sendadd好友message。add好友splitfor：好友apply/好友agree/好友reject
         if ($addFriendType === AddFriendType::PASS) {
             // sendadd好友controlmessage
             $friendUserEntity = new DelightfulUserEntity();
@@ -489,7 +489,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             $links = array_merge(...$links);
         }
 
-        // 替换 avatar_url
+        // replace avatar_url
         foreach ($usersDetail as &$user) {
             $avatarUrl = $user['avatar_url'];
             $fileLink = $links[$avatarUrl] ?? null;

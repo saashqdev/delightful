@@ -22,7 +22,7 @@ use Throwable;
 
 /**
  * ASR presetfileservice
- * 负责createpreset笔记andstream识别file，供front端writecontent.
+ * 负责createpreset笔记andstreamidentifyfile，供front端writecontent.
  */
 readonly class AsrPresetFileService
 {
@@ -37,7 +37,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * createpreset笔记andstream识别file.
+     * createpreset笔记andstreamidentifyfile.
      *
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
@@ -78,7 +78,7 @@ readonly class AsrPresetFileService
             $workDir
         );
 
-        // createstream识别file（放inhiddendirectory，usernotvisible）
+        // createstreamidentifyfile（放inhiddendirectory，usernotvisible）
         $transcriptFile = $this->createTranscriptFile(
             $userId,
             $organizationCode,
@@ -135,7 +135,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * deletestream识别file（总结completebackcleanup）.
+     * deletestreamidentifyfile（总结completebackcleanup）.
      *
      * @param string $fileId fileID
      * @return bool whetherdeletesuccess
@@ -145,20 +145,20 @@ readonly class AsrPresetFileService
         try {
             $fileEntity = $this->taskFileDomainService->getById((int) $fileId);
             if ($fileEntity === null) {
-                $this->logger->warning('stream识别filenot存in', ['file_id' => $fileId]);
+                $this->logger->warning('streamidentifyfilenot存in', ['file_id' => $fileId]);
                 return false;
             }
 
             $this->taskFileDomainService->deleteById($fileEntity->getFileId());
 
-            $this->logger->info('deletestream识别filesuccess', [
+            $this->logger->info('deletestreamidentifyfilesuccess', [
                 'file_id' => $fileId,
                 'file_name' => $fileEntity->getFileName(),
             ]);
 
             return true;
         } catch (Throwable $e) {
-            $this->logger->error('deletestream识别filefail', [
+            $this->logger->error('deletestreamidentifyfilefail', [
                 'file_id' => $fileId,
                 'error' => $e->getMessage(),
             ]);
@@ -204,7 +204,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * createstream识别file（放inhiddendirectory）.
+     * createstreamidentifyfile（放inhiddendirectory）.
      */
     private function createTranscriptFile(
         string $userId,
@@ -236,7 +236,7 @@ readonly class AsrPresetFileService
             taskKey: $taskKey,
             fullPrefix: $fullPrefix,
             workDir: $workDir,
-            logPrefix: 'presetstream识别file'
+            logPrefix: 'presetstreamidentifyfile'
         );
     }
 

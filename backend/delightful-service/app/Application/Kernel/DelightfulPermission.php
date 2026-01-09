@@ -39,7 +39,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * getresource国际化tag（by DelightfulResourceEnum 提供）.
+     * getresource国际化tag（by DelightfulResourceEnum provide）.
      */
     public function getResourceLabel(string $resource): string
     {
@@ -273,7 +273,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
             ];
         }
 
-        // willassociatearray children 转forindexarray，保持returnformat
+        // willassociatearray children 转forindexarray，maintainreturnformat
         return array_values($this->normalizeTree($tree));
     }
 
@@ -303,7 +303,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * 判断userpermissionsetmiddlewhether拥havefinger定permission（考虑隐typecontain）。
+     * judgeuserpermissionsetmiddlewhether拥havefinger定permission（考虑隐typecontain）。
      *
      * rule：
      *   1. 如直接命middlepermissionkey，return true；

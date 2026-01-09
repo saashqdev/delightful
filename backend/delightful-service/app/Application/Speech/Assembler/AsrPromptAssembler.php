@@ -18,14 +18,14 @@ class AsrPromptAssembler
     /**
      * generate录音总结titlehint词.
      *
-     * @param string $asrStreamContent voice识别content
+     * @param string $asrStreamContent voiceidentifycontent
      * @param null|NoteDTO $note 笔记content（optional）
      * @param string $language outputlanguage（如：zh_CN, en_US）
      * @return string completehint词
      */
     public static function getTitlePrompt(string $asrStreamContent, ?NoteDTO $note, string $language): string
     {
-        // buildcontent：use XML tagformatexplicit区minutevoice识别contentand笔记content
+        // buildcontent：use XML tagformatexplicit区minutevoiceidentifycontentand笔记content
         $contentParts = [];
 
         // ifhave笔记，先add笔记content
@@ -33,8 +33,8 @@ class AsrPromptAssembler
             $contentParts[] = sprintf('<笔记content>%s</笔记content>', $note->content);
         }
 
-        // addvoice识别content
-        $contentParts[] = sprintf('<voice识别content>%s</voice识别content>', $asrStreamContent);
+        // addvoiceidentifycontent
+        $contentParts[] = sprintf('<voiceidentifycontent>%s</voiceidentifycontent>', $asrStreamContent);
 
         $textContent = implode("\n\n", $contentParts);
 
@@ -42,19 +42,19 @@ class AsrPromptAssembler
 你isone专业录音contenttitlegenerate助hand。
 
 ## backgroundinstruction
-usersubmitonesegment录音content，录音content经passvoice识别转fortext，usermaybealsowill提供hand写笔记asfor补充instruction。现inneed你according tothisthesecontentgenerateone简洁accuratetitle。
+usersubmitonesegment录音content，录音content经passvoiceidentify转fortext，usermaybealsowillprovidehand写笔记asfor补充instruction。现inneed你according tothisthesecontentgenerateone简洁accuratetitle。
 
 ## contentcome源instruction
 - <笔记content>：userhand写笔记content，isto录音重pointrecordand总结，usuallycontainclosekeyinfo
-- <voice识别content>：passvoice识别技术will录音convertbecometext，反映录音actualcontent
+- <voiceidentifycontent>：passvoiceidentify技术will录音convertbecometext，反映录音actualcontent
 
 ## titlegeneraterequire
 
 ### 优先level原then（重want）
 1. **笔记优先**：if存in<笔记content>，titleshould侧重笔记content
 2. **重视笔记title**：if笔记is Markdown formatandcontaintitle（# openheadline），优先采use笔记middletitlecontent
-3. **综合考虑**：meanwhile参考voice识别content，ensuretitlecompleteaccurate
-4. **keywordextract**：from笔记andvoice识别contentmiddleextractmost核corekeyword
+3. **综合考虑**：meanwhile参考voiceidentifycontent，ensuretitlecompleteaccurate
+4. **keywordextract**：from笔记andvoiceidentifycontentmiddleextractmost核corekeyword
 
 ### formatrequire
 1. **lengthlimit**：not超pass 20 character（汉字按 1 charactercalculate）
@@ -108,7 +108,7 @@ usersendoriginalmessage如down：
 
 ### 优先level原then（non常重want）
 1. **file名优先**：file名usuallyisuser精core命名，containmost核corethemeinfo，请重point参考usermessagemiddle @ backsurfacefile名
-2. **智can判断**：
+2. **智canjudge**：
    - iffile名语义清晰（如"2024yearQ4product规划will议.mp3"、"customer需求discussion.wav"），优先based onfile名generatetitle
    - iffile名isdatetime戳（如"20241112_143025.mp3"）ornomeaningcharacter（如"录音001.mp3"），thenuse通usedescription
 3. **extractkeyword**：fromfile名middleextractmost核corekeywordandtheme

@@ -62,7 +62,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         }
         $this->setRequestId($seqEntity->getAppMessageId());
         $this->logger->info(sprintf('messagePush 准备startpush seq:%s seqEntity:%s ', $seqId, Json::encode($seqEntity->toArray())));
-        // 判断messagetype,iscontrolmessage,alsoischatmessage
+        // judgemessagetype,iscontrolmessage,alsoischatmessage
         $seqUserEntity = $this->delightfulUserRepository->getUserByAccountAndOrganization($seqEntity->getObjectId(), $seqEntity->getOrganizationCode());
         if ($seqUserEntity === null) {
             $this->logger->error('messagePush delightful_id:{delightful_id} user not found', ['delightful_id' => $seqEntity->getObjectId()]);
@@ -159,7 +159,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                     # ai sendalready读return执
                     $this->aiSendReadStatusChangeReceipt($selfSeqEntity, $userEntity);
                     # call flow
-                    // todo can做 optimizeflowresponsesuccessrate: syncetc待flowexecute,细致判断,toat本seq_id,uptimeflowresponsewhethertimeout,ifis,直接丢弃,notagainhairgiveflow
+                    // todo can做 optimizeflowresponsesuccessrate: syncetc待flowexecute,细致judge,toat本seq_id,uptimeflowresponsewhethertimeout,ifis,直接丢弃,notagainhairgiveflow
                     $this->userCallFlow($aiAccountEntity, $userEntity, $senderUserEntity, $selfSeqEntity);
                 } catch (Throwable $throwable) {
                     $this->logger->error('UserCallAgentEventError', [

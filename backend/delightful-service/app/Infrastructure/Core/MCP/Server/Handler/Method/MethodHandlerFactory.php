@@ -41,7 +41,7 @@ class MethodHandlerFactory
     /**
      * createfinger定methodprocess器instance.
      * eachtimecallallcreatenewprocess器instance，ensure短生命period.
-     * 注意：call者needhand动forreturnprocess器set所需Managergroupitem.
+     * notice：call者needhand动forreturnprocess器set所需Managergroupitem.
      *
      * @return null|MethodHandlerInterface if找nottoto应methodprocess器thenreturnnull
      */

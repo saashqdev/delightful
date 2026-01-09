@@ -91,7 +91,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         );
         $this->logger->info(sprintf('mindSearch aggregateSearch startaggregatesearch  searchKeyword：%s searchtype：%s', $searchKeyword, $dto->getSearchDeepLevel()->name));
         $antiRepeatKey = md5($conversationId . $topicId . $searchKeyword);
-        // 防重(not知道哪comebug):if同oneconversation同one话题down,2secondinsidehaveduplicatemessage,not触hairprocess
+        // 防重(notknow哪comebug):if同oneconversation同one话题down,2secondinsidehaveduplicatemessage,not触hairprocess
         if (! $this->redis->set($antiRepeatKey, '1', ['nx', 'ex' => 2])) {
             return;
         }
@@ -127,7 +127,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             // 3.2 according toassociateissue，hairup简singlesearch（not拿webpagedetail),andfilter掉duplicateor者andissueassociatepropertynot高webpagecontent
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
             $this->sleepToFixBug();
-            // 3.4 according tosearch深degree，决定whethercontinuesearchassociateissue子issue
+            // 3.4 according tosearch深degree，decidewhethercontinuesearchassociateissue子issue
             $readPagesDetailChannel = new Channel(count($associateQuestions));
             // 3.4.a 深degreesearch
             if ($dto->getSearchDeepLevel() === SearchDeepLevel::DEEP) {
@@ -183,7 +183,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         $topicId = $dto->getTopicId();
         $searchKeyword = $dto->getUserMessage();
         $antiRepeatKey = md5($conversationId . $topicId . $searchKeyword);
-        // 防重(not知道哪comebug):if同oneconversation同one话题down,2secondinsidehaveduplicatemessage,not触hairprocess
+        // 防重(notknow哪comebug):if同oneconversation同one话题down,2secondinsidehaveduplicatemessage,not触hairprocess
         if (! $this->redis->set($antiRepeatKey, '1', ['nx', 'ex' => 2])) {
             return null;
         }
@@ -377,7 +377,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             ->setUserId($dto->getUserId())
             ->setOrganizationCode($dto->getOrganizationCode())
             ->setModel($modelInterface);
-        // according touserupdown文，拆解子issue。need理解user想问什么，againgo拆searchkeyword。
+        // according touserupdown文，拆解子issue。needcomprehenduser想问什么，againgo拆searchkeyword。
         $searchKeywords = $this->delightfulLLMDomainService->generateSearchKeywordsByUserInput($dto, $modelInterface);
         $queryVo->setSearchKeywords($searchKeywords);
         $searchResult = $this->delightfulLLMDomainService->getSearchResults($queryVo);
@@ -557,7 +557,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         array $noRepeatSearchContexts,
         array $associateQuestions,
     ): DelightfulAggregateSearchSummaryDTO {
-        // byatisstreamoutputresponse，thereforeletfront端判断 ai quotesearch url。
+        // byatisstreamoutputresponse，thereforeletfront端judge ai quotesearch url。
         Coroutine::create(function () use ($dto, $noRepeatSearchContexts) {
             CoContext::setRequestId($dto->getRequestId());
             $messageId = (string) $this->idGenerator->generate();

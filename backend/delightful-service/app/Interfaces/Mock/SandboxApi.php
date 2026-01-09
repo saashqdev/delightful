@@ -100,7 +100,7 @@ class SandboxApi
         ]);
 
         // 模拟work区then绪status
-        // 注意：status mustreturnintegertype，to应 WorkspaceStatus constant
+        // notice：status mustreturnintegertype，to应 WorkspaceStatus constant
         return [
             'code' => 1000,
             'message' => 'success',

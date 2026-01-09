@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 判断tablewhether存in
+        // judgetablewhether存in
         if (Schema::hasTable('delightful_chat_conversations')) {
             return;
         }

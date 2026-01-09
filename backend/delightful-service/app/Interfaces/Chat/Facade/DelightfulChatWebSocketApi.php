@@ -216,7 +216,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
      */
     public function onChatMessage(Socket $socket, array $params)
     {
-        // 判断messagetype,ifiscontrolmessage,minutehairtoto应process模piece
+        // judgemessagetype,ifiscontrolmessage,minutehairtoto应process模piece
         try {
             $appendRules = [
                 'data.conversation_id' => 'required|string',

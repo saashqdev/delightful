@@ -124,7 +124,7 @@ class ProviderAppService
             $localizedModelName = $model->getLocalizedName($locale);
             $localizedModelDescription = $model->getLocalizedDescription($locale);
 
-            // ifhave国际化namethenuse，否then保持原name
+            // ifhave国际化namethenuse，否thenmaintain原name
             if (! empty($localizedModelName)) {
                 $modelDTO->setName($localizedModelName);
             }
@@ -189,7 +189,7 @@ class ProviderAppService
     }
 
     /**
-     * 判断whetherforcustomizeservicequotient.
+     * judgewhetherforcustomizeservicequotient.
      */
     private function isCustomProvider(ProviderEntity $providerEntity): bool
     {

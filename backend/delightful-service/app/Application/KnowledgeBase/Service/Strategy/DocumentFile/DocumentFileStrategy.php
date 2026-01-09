@@ -38,7 +38,7 @@ class DocumentFileStrategy
     {
         $driver = $this->getImplement($documentFile);
         $originContent = $driver?->parseContent($dataIsolation, $documentFile) ?? '';
-        // 替换image
+        // replaceimage
         return $this->replaceImages($originContent, $dataIsolation, $knowledgeBaseCode);
     }
 
@@ -91,7 +91,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 替换contentmiddleimagefor DelightfulCompressibleContent tag.
+     * replacecontentmiddleimagefor DelightfulCompressibleContent tag.
      */
     private function replaceImages(string $content, KnowledgeBaseDataIsolation $dataIsolation, ?string $knowledgeBaseCode = null): string
     {
@@ -151,7 +151,7 @@ class DocumentFileStrategy
                     $this->cache->set($cacheKey, $fileKey, 3600);
                 }
 
-                // 替换imagelink
+                // replaceimagelink
                 $content = str_replace($fullMatches[$index], '<DelightfulCompressibleContent Type="Image">![image](delightful_knowledge_base_file_' . $fileKey . ')</DelightfulCompressibleContent>', $content);
             } catch (Throwable $e) {
                 $this->logger->error('Failed to process image', [

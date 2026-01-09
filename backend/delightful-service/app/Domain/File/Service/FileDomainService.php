@@ -234,7 +234,7 @@ readonly class FileDomainService
     public function getFullWorkDir(string $organizationCode, string $userId, int $projectId, string $code = 'be-delightful', string $lastPath = 'project'): string
     {
         $prefix = $this->getFullPrefix($organizationCode);
-        # 判断mostnextcharacterwhetheris /,ifis，go掉
+        # judgemostnextcharacterwhetheris /,ifis，go掉
         if (substr($prefix, -1) === '/') {
             $prefix = substr($prefix, 0, -1);
         }

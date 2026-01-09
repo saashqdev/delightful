@@ -10,7 +10,7 @@ namespace App\Infrastructure\Util\Auth\Permission;
 interface PermissionInterface
 {
     /**
-     * 判断whetherorganizationadministrator.
+     * judgewhetherorganizationadministrator.
      *
      * @param string $organizationCode organizationencoding
      * @param string $mobile hand机number

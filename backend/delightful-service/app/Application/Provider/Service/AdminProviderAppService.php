@@ -655,9 +655,9 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * handleservice提供quotient实bodycolumn表graph标.
+     * handleserviceprovidequotient实bodycolumn表graph标.
      *
-     * @param ProviderConfigModelsDTO[] $serviceProviders service提供quotient实bodycolumn表
+     * @param ProviderConfigModelsDTO[] $serviceProviders serviceprovidequotient实bodycolumn表
      * @param string $organizationCode organizationencoding
      */
     private function processServiceProviderEntityListIcons(array $serviceProviders, string $organizationCode): void

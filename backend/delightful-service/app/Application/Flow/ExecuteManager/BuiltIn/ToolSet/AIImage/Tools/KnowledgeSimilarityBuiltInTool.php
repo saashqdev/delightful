@@ -62,7 +62,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 {$knowledgePrompt}
 ## process
 1. 结合updown文提炼userissue，generate多keyword，at mostnot超pass 5 ，多keyworduseEnglish逗number"," 隔open，useatusedifferentkeywordfromknowledge basemiddleretrievemost相closeinfo；
-2. 结合updown文，analyzeuserissue，generate `names` parameter，useatfinger定anduserissuemaybehaveclose多knowledge basename，按照相closepropertysort，相closeproperty需结合updown文、knowledge basenameandknowledge basedescriptionconduct判断；
+2. 结合updown文，analyzeuserissue，generate `names` parameter，useatfinger定anduserissuemaybehaveclose多knowledge basename，按照相closepropertysort，相closeproperty需结合updown文、knowledge basenameandknowledge basedescriptionconductjudge；
 3. usekeywordanduserissue，call `{$this->getName()}` toolretrieveknowledge basemiddlecontent，keywordparameteris `keyword`，userissueparameteris `question`, 请ensureparameterallbecorrect填入，toolwillreturnanduserissuesimilardegreemost高contentslicesegment；
 4. knowledge baseretrieveoutcomecontentwithinwillcontainonethesecustomize Delightful tag，你want善atuse它们，havebydown几typetag：
     - <DelightfulImage></DelightfulImage> indicateoneimage，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，eachtagallwillinfront端messagecard渲染outone张image；

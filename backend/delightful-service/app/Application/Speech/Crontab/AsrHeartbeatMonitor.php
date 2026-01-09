@@ -170,7 +170,7 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * 判断whethershould触hairfrom动总结.
+     * judgewhethershould触hairfrom动总结.
      */
     private function shouldTriggerAutoSummary(AsrTaskStatusDTO $taskStatus): bool
     {

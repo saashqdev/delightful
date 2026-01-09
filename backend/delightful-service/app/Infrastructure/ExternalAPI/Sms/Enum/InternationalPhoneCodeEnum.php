@@ -315,14 +315,14 @@ enum InternationalPhoneCodeEnum: string
     }
 
     /**
-     * 判断whethernonmiddle国hand机number.
+     * judgewhethernonmiddle国hand机number.
      */
     public static function isInternationalPhone(string $phone): bool
     {
         if (str_starts_with($phone, '+' . self::CHINA->value) || str_starts_with($phone, self::CHINA->value)) {
             return false;
         }
-        // 判断国际区number
+        // judge国际区number
         if (str_contains($phone, '+') || str_contains($phone, '-')) {
             return true;
         }

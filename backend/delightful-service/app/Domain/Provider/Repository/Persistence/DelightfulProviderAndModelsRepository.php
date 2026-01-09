@@ -49,7 +49,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     {
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // 1. 判断organizationencodingwhetheris官方organization，ifis，thenreturn null
+        // 1. judgeorganizationencodingwhetheris官方organization，ifis，thenreturn null
         if (OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
             return null;
         }
@@ -169,7 +169,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
                 if (isset($modelMap[$modelId])) {
                     $organizationModel = $modelMap[$modelId];
 
-                    // 直接useconfigurationmodelstatus替换官方modelstatus
+                    // 直接useconfigurationmodelstatusreplace官方modelstatus
                     $officialModel->setStatus($organizationModel->getStatus());
                 }
                 $finalModels[] = $officialModel;

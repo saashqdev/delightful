@@ -284,7 +284,7 @@ readonly class KnowledgeBaseDocumentDomainService
      */
     private function prepareForUpdate(KnowledgeBaseDocumentEntity $newDocument, KnowledgeBaseDocumentEntity $oldDocument): void
     {
-        // notallowmodifyfield保持原value
+        // notallowmodifyfieldmaintain原value
         $newDocument->setId($oldDocument->getId());
         $newDocument->setCode($oldDocument->getCode());
         $newDocument->setKnowledgeBaseCode($oldDocument->getKnowledgeBaseCode());

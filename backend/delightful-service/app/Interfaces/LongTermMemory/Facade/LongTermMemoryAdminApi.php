@@ -402,7 +402,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $scenarioString = $validatedParams['scenario'] ?? 'admin_panel'; // defaultformanageback台
         $scenario = MemoryOperationScenario::from($scenarioString);
 
-        // verifywhen scenario is memory_card_quick o clock，delightful_message_id must提供
+        // verifywhen scenario is memory_card_quick o clock，delightful_message_id mustprovide
         if ($scenarioString === 'memory_card_quick' && empty($validatedParams['delightful_message_id'])) {
             return [
                 'success' => false,

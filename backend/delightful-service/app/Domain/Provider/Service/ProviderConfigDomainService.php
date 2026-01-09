@@ -55,7 +55,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         if (! $providerConfigEntity) {
             return null;
         }
-        // 存intemplatevirtual configId andalready经writedatabase configId，thereforethiswithinuse getProviderConfig returnservicequotient id 替换传入value
+        // 存intemplatevirtual configId andalready经writedatabase configId，thereforethiswithinuse getProviderConfig returnservicequotient id replace传入value
         $configId = (string) $providerConfigEntity->getId();
         // 2. query Provider
         $providerEntity = $this->getProviderById($dataIsolation, $providerConfigEntity->getServiceProviderId());
@@ -396,7 +396,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         // updateconfigurationdata
         $existingConfig->setConfig($processedConfig);
 
-        // updateotherfield（ifhave提供）
+        // updateotherfield（ifhaveprovide）
         if ($newConfigData->getAlias()) {
             $existingConfig->setAlias($newConfigData->getAlias());
         }

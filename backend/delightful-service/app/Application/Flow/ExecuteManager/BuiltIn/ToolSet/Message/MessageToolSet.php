@@ -26,6 +26,6 @@ class MessageToolSet extends AbstractBuiltInToolSet
 
     public function getDescription(): string
     {
-        return '提供sendmessage相closetool，includesendgivepersonandgroup';
+        return 'providesendmessage相closetool，includesendgivepersonandgroup';
     }
 }

@@ -150,11 +150,11 @@ class DelightfulLLMDomainService
     ### 1. question decomposition engine
     input: [userquestion + {context}]
     handlestep：
-    1.1 实body识别
-       - 显property命名实bodyextract，识别实bodybetweenclose系andproperty
+    1.1 实bodyidentify
+       - 显property命名实bodyextract，identify实bodybetweenclose系andproperty
        - 推导user隐property需求and潜in意graph，especiallyclose注隐含time因素
     1.2 dimension拆解
-       - according to识别out实bodyand需求，choose合适analyzedimension，for example：policy解读、datavalidate、案例research、impactevaluate、技术原理、市场front景、userbody验etc
+       - according toidentifyout实bodyand需求，choose合适analyzedimension，for example：policy解读、datavalidate、案例research、impactevaluate、技术原理、市场front景、userbody验etc
     1.3 子questiongenerate
        - generatejust交子questioncollection（Jaccardsimilardegree<0.25），ensureeach子questioncanfromdifferentangledegreeexploreuser需求，avoidgeneratepassat宽泛orsimilarquestion
     
@@ -166,7 +166,7 @@ class DelightfulLLMDomainService
        - time限定符overriderate≥30%
        - toratiocategoryquestion占ratio≥20%
     
-    ## 硬property约束（force遵守）
+    ## 硬property约束（forcecomply）
     1. languageone致property
        - outputlanguageencodingmustmatchinputlanguage
     2. 子questionquantityrange
@@ -200,19 +200,19 @@ class DelightfulLLMDomainService
 
     private string $summarizePrompt = <<<'PROMPT'
     # task
-    你needbased onusermessage，according to我提供searchresult，按照总minute总结构，output高quality，结构化detailedreturn答，formatfor markdown。
+    你needbased onusermessage，according to我providesearchresult，按照总minute总结构，output高quality，结构化detailedreturn答，formatfor markdown。
     
     in我give你searchresultmiddle，eachresultallis[webpage X begin]...[webpage X end]format，Xrepresenteach篇文chapternumberindex。请in适when情况downinsentence子末tailquotecontext。请按照quote编number[citation:X]formatin答案middleto应部minutequotecontext。ifonesentence话源from多context，请columnout所have相closequote编number，for example[citation:3][citation:5]，切记notwantwillquotecollectionmiddleinmostbackreturnquote编number，whileisin答案to应部minutecolumnout。
-    inreturn答o clock，请注意bydown几point：
+    inreturn答o clock，请noticebydown几point：
     - 今dayis{date_now}。
     - andnonsearchresult所havecontentallanduserquestion密切相close，你need结合question，tosearchresultconduct甄别、filter。
-    - toatcolumn举categoryquestion（如column举所have航班information），尽quantitywill答案controlin10wantpointbyinside，and告诉usercanviewsearchcome源、获completeinformation。优先提供informationcomplete、most相closecolumn举item；如non必want，notwant主动告诉usersearchresultnot提供content。
+    - toatcolumn举categoryquestion（如column举所have航班information），尽quantitywill答案controlin10wantpointbyinside，and告诉usercanviewsearchcome源、获completeinformation。优先provideinformationcomplete、most相closecolumn举item；如non必want，notwant主动告诉usersearchresultnotprovidecontent。
     - toat创ascategoryquestion（如写论文），请务必injust文segment落middlequoteto应参考编number，for example[citation:3][citation:5]，notcan只in文chapter末tailquote。你need解读and概括user题目require，choose合适format，充minute利usesearchresultanddraw重wantinformation，generatematchuserrequire、极具思想深degree、富havecreate力and专业property答案。你创as篇幅need尽maybe延长，toateachonewantpoint论述wantspeculateduser意graph，giveout尽maybe多angledegreereturn答wantpoint，and务必informationquantity大、论述详尽。
     - ifreturn答very长，请尽quantity结构化、minutesegment落总结。ifneedminutepointas答，尽quantitycontrolin5pointbyinside，andmerge相closecontent。
     - toat客观category问答，ifquestion答案non常简短，can适when补充oneto两sentence相closeinformation，by丰富content。
     - 你needaccording touserrequireandreturn答contentchoose合适、美观return答format，ensurecan读property强。
     - 你return答should综合多相closewebpagecomereturn答，notcanduplicatequoteonewebpage。
-    - unlessuserrequire，否then你return答languageneedanduser提问language保持one致。
+    - unlessuserrequire，否then你return答languageneedanduser提问languagemaintainone致。
     - output漂亮markdown format，contentmiddleaddonetheseandtheme相closeemoji表情符number。
     
     ## usermessagefor：
@@ -223,21 +223,21 @@ class DelightfulLLMDomainService
     PROMPT;
 
     private string $eventPrompt = <<<'PROMPT'
-    # 你isone新闻eventgenerate器，userwill提供searchcontentand询问question。
+    # 你isone新闻eventgenerate器，userwillprovidesearchcontentandaskquestion。
     ## Current Timeis {data_now}  
-    ## according touserquestion，你需fromuser提供searchcontentmiddle整理相closeevent，eventincludeeventname、eventtimeandevent概述。
-    ### 注意事item：
+    ## according touserquestion，你需fromuserprovidesearchcontentmiddle整理相closeevent，eventincludeeventname、eventtimeandevent概述。
+    ### notice事item：
     1. **eventnameformat**：
        - ineventnamebackaddsearchquote编number，formatfor `[[citation:x]]`，编numbercome源atsearchcontentmiddlequotemark（如 `[[citation:1]]`）。
        - ifoneevent涉and多quote，merge所have相closequote编number。
        - notwantin "description" middleaddquote。
     2. **timehandle**：
-       - eventtime尽quantityprecisetomonthshare（如 "2023-05"），若searchcontentnot提供specificmonthshare，buthavefingeroutuphalfyearor者downhalfyear，canuse（"2023 uphalfyear"），若nothavethen，useyearshare（如 "2023"）。
+       - eventtime尽quantityprecisetomonthshare（如 "2023-05"），若searchcontentnotprovidespecificmonthshare，buthavefingeroutuphalfyearor者downhalfyear，canuse（"2023 uphalfyear"），若nothavethen，useyearshare（如 "2023"）。
        - 若同oneeventin多quotemiddleout现，优先usemost早time。
        - 若timenotexplicit，according tocontextspeculatedmost早maybetime，andensure合理。
     3. **eventextractandfilter**：
        - **eventdefinition**：eventissearchcontentmiddlemention、具havetimeassociate（explicitorcanspeculated）独立事实、changeoractivity，includebutnot限atcreate、publish、open业、update、合as、activityetc。
-       - according touserquestion，extractand之相closeevent，保持description简洁，聚焦specifichair生thing。
+       - according touserquestion，extractand之相closeevent，maintaindescription简洁，聚焦specifichair生thing。
        - **skipnoclosecontent**：
          - 纯静statedescription（如not变property、background介绍，notimechange）。
          - datastatisticsor财务information（如营收、利润）。
@@ -265,7 +265,7 @@ class DelightfulLLMDomainService
     ]
     ```
     ## useinstruction
-    - user需提供searchcontent（containquotemark如 [[citation:x]]）andspecificquestion。
+    - user需providesearchcontent（containquotemark如 [[citation:x]]）andspecificquestion。
     - according toquestion，fromsearchcontentmiddleextractmatcheventdefinitioncontent，按requiregenerateoutput。
     - 若question涉andcurrenttime，based on {date_now} conduct推算。
     
@@ -290,7 +290,7 @@ class DelightfulLLMDomainService
     - forbid直接return答userquestion，one定wantreturnanduserquestionhaveassociatepropertyindex。
     - search contextsformatfor "[[x]] content" ，itsmiddle x issearch contextsindex。x notcangreater than 50
     - 请bycorrect JSON formatreplyfilterbackindex，for example：[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
-    - if search keywords andtime相close，重point注意 search contexts middleandcurrenttime相closecontent。andcurrenttimemore近more重want。
+    - if search keywords andtime相close，重pointnotice search contexts middleandcurrenttime相closecontent。andcurrenttimemore近more重want。
 
     
     ## search keywords
@@ -347,7 +347,7 @@ class DelightfulLLMDomainService
         }
         // goexcept掉quote，avoid思维导graphmiddleout现quote
         $responseMessage = preg_replace('/\[\[citation:(\d+)]]/', '', $responseMessage);
-        // 观察tosystemhint词variable串，看看isnotisnothavecopyonesharequestion
+        // observetosystemhint词variable串，看看isnotisnothavecopyonesharequestion
         $systemPrompt = str_replace(
             ['{question}', '{content}', '{date_now}'],
             [$question, $responseMessage, date('Yyear mmonth dday, Ho clock iminute ssecond')],
@@ -412,7 +412,7 @@ class DelightfulLLMDomainService
             $searchContextsDetail = mb_substr($searchContextsDetail, 0, $maxLen);
         }
 
-        // input替换
+        // inputreplace
         $systemPrompt = str_replace(
             ['{citations}', '{search_context_details}', '{date_now}'],
             [$searchContextsCitations, $searchContextsDetail, date('Yyear mmonth dday, Ho clock iminute ssecond')],
@@ -898,7 +898,7 @@ class DelightfulLLMDomainService
             foreach ($searchContexts as $searchContext) {
                 $contextString .= $searchContext->getSnippet() . "\n\n";
             }
-            // use str_replace functioncome替换占位符
+            // use str_replace functioncomereplace占位符
             // 带upyearmonthdayo clockminutesecond，avoidduplicatequestion
             $systemPrompt = str_replace(
                 ['{context}', '{date_now}', '{sub_questions_min}', '{sub_questions_max}'],
@@ -1081,7 +1081,7 @@ class DelightfulLLMDomainService
             $searchContextsDetail = mb_substr($searchContextsDetail, 0, $maxLen);
         }
 
-        // input替换
+        // inputreplace
         return str_replace(
             ['{search_context_details}', '{relevant_questions}', '{date_now}', '{question}'],
             [$searchContextsDetail, $searchKeywords, date('Yyear mmonth dday, Ho clock iminute ssecond'), $userMessage],

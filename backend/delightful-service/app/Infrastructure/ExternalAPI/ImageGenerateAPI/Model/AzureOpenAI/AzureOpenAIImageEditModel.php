@@ -197,7 +197,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             }
         }
 
-        // validatemask URL（if提供）
+        // validatemask URL（ifprovide）
         $maskUrl = $request->getMaskUrl();
         if (! empty($maskUrl) && ! filter_var($maskUrl, FILTER_VALIDATE_URL)) {
             $this->logger->error('Azure OpenAIgraphlikeedit：invalid遮罩graphlikeURL', [
@@ -283,7 +283,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandledownone张image，currentimage保持originalstatus
+                // continuehandledownone张image，currentimagemaintainoriginalstatus
             }
         }
 
@@ -347,7 +347,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                 // watermarkhandlefailo clockuseoriginalbase64data
             }
 
-            // 只returnURLformat，andothermodel保持one致
+            // 只returnURLformat，andothermodelmaintainone致
             $currentData[] = [
                 'url' => $processedUrl,
             ];

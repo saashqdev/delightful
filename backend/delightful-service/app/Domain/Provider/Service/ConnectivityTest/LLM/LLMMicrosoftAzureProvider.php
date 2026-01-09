@@ -41,7 +41,7 @@ class LLMMicrosoftAzureProvider implements IProvider
                 ],
             ]);
         } catch (ClientException|ConnectException|Exception $e) {
-            // 判断eachtype特殊取value
+            // judgeeachtype特殊取value
             if ($e instanceof ClientException) {
                 $connectResponse->setStatus(false);
                 $connectResponse->setMessage($e->getResponse()->getBody()->getContents());

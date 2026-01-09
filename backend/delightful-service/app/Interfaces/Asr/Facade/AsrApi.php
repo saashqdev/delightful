@@ -819,7 +819,7 @@ class AsrApi extends AbstractApi
             ];
         }
 
-        // stream识别file
+        // streamidentifyfile
         if (! empty($taskStatus->presetTranscriptFileId) && ! empty($taskStatus->presetTranscriptFilePath)) {
             $relativePath = AsrAssembler::extractWorkspaceRelativePath($taskStatus->presetTranscriptFilePath);
             $fileName = basename($relativePath);

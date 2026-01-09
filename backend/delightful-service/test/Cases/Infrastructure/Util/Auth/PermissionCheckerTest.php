@@ -111,7 +111,7 @@ class PermissionCheckerTest extends TestCase
     }
 
     /**
-     * usedata提供者testpermissioncheck.
+     * usedataprovide者testpermissioncheck.
      */
     #[DataProvider('permissionCheckDataProvider')]
     public function testPermissionCheckWithDataProvider(
@@ -127,7 +127,7 @@ class PermissionCheckerTest extends TestCase
     }
 
     /**
-     * testdata提供者method.
+     * testdataprovide者method.
      */
     public static function permissionCheckDataProvider(): array
     {

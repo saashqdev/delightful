@@ -62,7 +62,7 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
     {
         // propertyone定wantis小驼峰！not supportedotherformat！
         $humpKey = $this->getCamelizeValueFromCache($key);
-        // 判断propertywhether存in，avoidcallnot存inpropertyo clock，死loop触hair __get method
+        // judgepropertywhether存in，avoidcallnot存inpropertyo clock，死loop触hair __get method
         if (! property_exists($this, $humpKey)) {
             return null;
         }
@@ -78,7 +78,7 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
     {
         // propertyone定wantis小驼峰！not supportedotherformat！
         $humpKey = $this->getCamelizeValueFromCache($key);
-        // 判断propertywhether存in，avoidcallnot存inpropertyo clock，死loop触hair __set method
+        // judgepropertywhether存in，avoidcallnot存inpropertyo clock，死loop触hair __set method
         if (! property_exists($this, $humpKey)) {
             return;
         }

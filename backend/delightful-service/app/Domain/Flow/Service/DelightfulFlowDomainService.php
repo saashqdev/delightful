@@ -159,7 +159,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
             }
             $delightfulFlow->setEnabled($enable);
         } else {
-            // 否then保持原havefrom动切换逻辑
+            // 否thenmaintain原havefrom动switch逻辑
             $delightfulFlow->prepareForChangeEnable();
         }
 

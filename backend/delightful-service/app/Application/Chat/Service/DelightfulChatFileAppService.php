@@ -15,7 +15,7 @@ use App\Domain\File\Service\FileDomainService;
 
 /**
  * chatfileapplicationservice
- * 提供giveother领域useinterface.
+ * providegiveother领域useinterface.
  */
 class DelightfulChatFileAppService extends AbstractAppService
 {

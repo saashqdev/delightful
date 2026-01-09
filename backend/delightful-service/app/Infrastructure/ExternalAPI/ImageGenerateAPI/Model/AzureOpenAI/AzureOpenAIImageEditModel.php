@@ -200,7 +200,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
         // validatemask URL（ifprovide）
         $maskUrl = $request->getMaskUrl();
         if (! empty($maskUrl) && ! filter_var($maskUrl, FILTER_VALIDATE_URL)) {
-            $this->logger->error('Azure OpenAIgraphlikeedit：invalid遮罩graphlikeURL', [
+            $this->logger->error('Azure OpenAIgraphlikeedit：invalidmaskgraphlikeURL', [
                 'mask_url' => $maskUrl,
             ]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.invalid_mask_url');

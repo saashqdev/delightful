@@ -22,7 +22,7 @@ use Hyperf\Di\Aop\ProceedingJoinPoint;
 class CheckPermissionAspect extends AbstractAspect
 {
     /**
-     * need拦截annotationcolumntable.
+     * needinterceptannotationcolumntable.
      */
     public array $annotations = [
         CheckPermission::class,

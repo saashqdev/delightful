@@ -25,17 +25,17 @@ class QuestionSearchResult extends AbstractObject
     protected array $search;
 
     /**
-     * 总词数.
+     * 总word count.
      */
     protected int $totalWords;
 
     /**
-     * match词数.
+     * matchword count.
      */
     protected int $matchCount;
 
     /**
-     * 页数.
+     * page count.
      */
     protected int $pageCount;
 

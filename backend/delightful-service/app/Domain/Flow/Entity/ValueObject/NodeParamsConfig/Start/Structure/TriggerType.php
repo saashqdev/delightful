@@ -46,7 +46,7 @@ enum TriggerType: int
             // openchatwindow触hair
             $triggerType = TriggerType::OpenChatWindow;
         } elseif ($seqType === ControlMessageType::AddFriendSuccess) {
-            // addgood友触hair
+            // addgoodfriend triggerhair
             $triggerType = TriggerType::AddFriend;
         }
         return $triggerType;

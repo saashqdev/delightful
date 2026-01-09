@@ -60,7 +60,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                 $this->addSeqRetryNumber($seqRetryKey);
                 // recordseqtrypushcount,useatback续judgewhetherneedretry
                 $this->delightfulSeqAppService->pushSeq($seqId);
-                // noterror,notagain重推
+                // noterror,notagainre-push
                 $this->setSeqCanNotRetry($seqRetryKey);
             }
         } catch (Throwable $exception) {

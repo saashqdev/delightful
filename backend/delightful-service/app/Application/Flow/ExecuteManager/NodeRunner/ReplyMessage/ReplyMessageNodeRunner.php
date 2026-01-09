@@ -452,7 +452,7 @@ class ReplyMessageNodeRunner extends NodeRunner
 
     private function getUserIdsByDepartmentIds(ExecutionData $executionData, array $departmentIds): array
     {
-        // 先粗糙直连 Db
+        // rough direct connection first Db
         $allDepartments = Db::table('delightful_contact_departments')
             ->select(['department_id', 'parent_department_id', 'name', 'path'])
             ->where('organization_code', '=', $executionData->getDataIsolation()->getCurrentOrganizationCode())

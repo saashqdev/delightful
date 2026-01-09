@@ -37,7 +37,7 @@ class TextSplitterNodeRunner extends ExecuteManagerBaseTest
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "嘻嘻哈哈",
+                    "value": "hehe哈哈",
                     "name": "",
                     "args": null
                 }

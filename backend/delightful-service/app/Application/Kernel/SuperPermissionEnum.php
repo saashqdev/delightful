@@ -39,9 +39,9 @@ enum SuperPermissionEnum: string
     // 超levelMagicinvitationuseuser
     case SUPER_INVITE_USER = 'be_delightful_invite_use_user';
 
-    // 超levelMagic看板manageperson员
+    // 超levelMagickanbanmanageperson员
     case SUPER_DELIGHTFUL_BOARD_ADMIN = 'be_delightful_board_manager';
 
-    // 超levelMagic看板运营person员
+    // 超levelMagickanban运营person员
     case SUPER_DELIGHTFUL_BOARD_OPERATOR = 'be_delightful_board_operator';
 }

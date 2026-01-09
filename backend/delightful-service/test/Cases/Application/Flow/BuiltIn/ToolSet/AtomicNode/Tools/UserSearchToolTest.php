@@ -84,7 +84,7 @@ JSON, true));
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
             'system_prompt' => 'whenuser想wantsearchperson员o clock,call user_search toolget相closeperson员information',
-            'user_prompt' => 'I想找onedown openhair部small明',
+            'user_prompt' => 'Iwant to findonedown openhair部small明',
         ]);
         $runner->execute($vertexResult, $executionData);
 

@@ -15,12 +15,12 @@ enum LanguageEnum: string
     case ZH_CN = 'zh_CN';
 
     /**
-     * 美type英语.
+     * 美typeEnglish.
      */
     case EN_US = 'en_US';
 
     /**
-     * 印尼语.
+     * Indonesian.
      */
     case ID_ID = 'id_ID';
 }

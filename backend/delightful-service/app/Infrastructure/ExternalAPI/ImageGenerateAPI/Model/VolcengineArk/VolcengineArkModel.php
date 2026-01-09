@@ -213,7 +213,7 @@ class VolcengineArkModel extends AbstractImageGenerate
     }
 
     /**
-     * V2version:纯粹APIcall,nothandleexception.
+     * V2version:pureAPIcall,nothandleexception.
      */
     protected function requestImageGenerationV2(VolcengineArkRequest $imageGenerateRequest): array
     {

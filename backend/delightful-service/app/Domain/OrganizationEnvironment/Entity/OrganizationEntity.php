@@ -50,7 +50,7 @@ class OrganizationEntity extends AbstractEntity
 
     protected ?DateTime $deletedAt = null;
 
-    protected ?int $seats = null; // 席位数
+    protected ?int $seats = null; // seat count
 
     protected ?string $syncType = null; // 同type
 

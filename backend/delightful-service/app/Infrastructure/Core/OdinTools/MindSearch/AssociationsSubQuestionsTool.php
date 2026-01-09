@@ -14,7 +14,7 @@ class AssociationsSubQuestionsTool
 {
     public static string $name = 'associationsSubQuestionsSearch';
 
-    public static string $description = 'willeachassociateissue拆minutefor多子issue,thenbatchquantityinternetsearch';
+    public static string $description = 'willeachassociateissue拆minuteformultiple childrenissue,thenbatchquantityinternetsearch';
 
     protected static array $parameters = [
         'type' => 'object',
@@ -28,7 +28,7 @@ class AssociationsSubQuestionsTool
                 'items' => [
                     'type' => 'string',
                 ],
-                'description' => 'associateissue多子issue',
+                'description' => 'associateissuemultiple childrenissue',
             ],
         ],
         'required' => ['association', 'subQuestions'],

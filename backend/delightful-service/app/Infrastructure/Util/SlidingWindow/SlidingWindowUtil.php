@@ -51,7 +51,7 @@ class SlidingWindowUtil
             // etc待verifytime
             Coroutine::sleep($delayVerificationSeconds);
 
-            // 原子化groundverifyandstatementexecute权
+            // atomizationgroundverifyandstatementexecute权
             $script = <<<'LUA'
                 if redis.call('get', KEYS[1]) == ARGV[1] then
                     return redis.call('del', KEYS[1])

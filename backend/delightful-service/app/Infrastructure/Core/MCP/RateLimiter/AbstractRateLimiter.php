@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\MCP\RateLimiter;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * abstractspeedratelimit器基category.
+ * abstractspeedratelimitdevice basedcategory.
  */
 abstract class AbstractRateLimiter implements RateLimiterInterface
 {

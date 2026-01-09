@@ -300,7 +300,7 @@ final class LongTermMemoryEntity extends AbstractEntity
 
     /**
      * inside部setenablestatus(notconductbusinessrulecheck).
-     * useatdatainitializeandinside部操as,skipbusinessrulelimit.
+     * useatdatainitializeandinsidedepartment operationas,skipbusinessrulelimit.
      */
     public function setEnabledInternal(bool $enabled): void
     {

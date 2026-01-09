@@ -13,7 +13,7 @@ namespace App\Domain\Chat\Entity\ValueObject\AggregateSearch;
 class AggregateAISearchCardResponseType
 {
     /**
-     *associateissuesearchresult,include子issue(search_keywords), webpagesearchresult(search), 总词数(total_words), match词数(match_count), 页数(page_count).
+     *associateissuesearchresult,include子issue(search_keywords), webpagesearchresult(search), 总word count(total_words), matchword count(match_count), page count(page_count).
      */
     public const int SEARCH = 0;
 

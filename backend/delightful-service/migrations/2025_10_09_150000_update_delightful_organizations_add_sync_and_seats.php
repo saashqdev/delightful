@@ -19,12 +19,12 @@ return new class extends Migration {
         }
 
         Schema::table('delightful_organizations', function (Blueprint $table) {
-            // 席位quantity
+            // seatquantity
             if (! Schema::hasColumn('delightful_organizations', 'seats')) {
-                $table->unsignedInteger('seats')->default(0)->comment('席位quantity')->after('number');
+                $table->unsignedInteger('seats')->default(0)->comment('seatquantity')->after('number');
             }
 
-            // 同相closefield
+            // same phaseclosefield
             if (! Schema::hasColumn('delightful_organizations', 'sync_type')) {
                 $table->string('sync_type', 32)->default('')->comment('同type')->after('seats');
             }

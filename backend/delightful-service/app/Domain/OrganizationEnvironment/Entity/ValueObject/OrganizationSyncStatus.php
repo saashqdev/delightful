@@ -25,8 +25,8 @@ enum OrganizationSyncStatus: int
     case Syncing = 3;
 
     /**
-     * whetherneed补偿.
-     * andknowledge basestatusmaintainone致补偿set.
+     * whetherneedcompensation.
+     * andknowledge basestatusmaintainone致compensationset.
      */
     public static function needCompensate(): array
     {

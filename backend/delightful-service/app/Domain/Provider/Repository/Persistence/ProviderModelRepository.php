@@ -189,7 +189,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             return $this->delightfulProviderAndModels->getDelightfulEnableModels($dataIsolation->getCurrentOrganizationCode(), $providerEntity->getCategory());
         }
 
-        // nonofficialservicequotient,按原logicqueryfinger定configurationdownmodel
+        // nonofficialservicequotient,by originallogicqueryfinger定configurationdownmodel
         if (! is_numeric($configId)) {
             return [];
         }

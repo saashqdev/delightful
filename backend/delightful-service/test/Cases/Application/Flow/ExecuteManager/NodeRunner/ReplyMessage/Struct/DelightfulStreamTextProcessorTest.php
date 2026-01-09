@@ -156,7 +156,7 @@ class DelightfulStreamTextProcessorTest extends ExecuteManagerBaseTest
 
     public function testMultibyteCharacters()
     {
-        $text = ['Hello ', '👋 ', '世界', '<DelightfulImage>cp_67b5aac969f26</DelightfulImage>', '🌍'];
+        $text = ['Hello ', '👋 ', 'world', '<DelightfulImage>cp_67b5aac969f26</DelightfulImage>', '🌍'];
         $result = [];
         $processor = new DelightfulStreamTextProcessor(function (string $data) use (&$result) {
             $result[] = $data;
@@ -169,7 +169,7 @@ class DelightfulStreamTextProcessorTest extends ExecuteManagerBaseTest
         $this->assertEquals([
             'Hello ',
             '👋 ',
-            '世界',
+            'world',
             '<DelightfulImage>cp_67b5aac969f26</DelightfulImage>',
             '🌍',
         ], $result);

@@ -153,7 +153,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // certainuser_idgeneraterule
                 $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $userDTO->getOrganizationCode());
                 $userDTO->setUserId($userId);
-                // 1.47x(10**-29) 概ratedown,user_idwillduplicate,willbemysql唯oneindex拦截,letuser重newloginonetimethenline.
+                // 1.47x(10**-29) 概ratedown,user_idwillduplicate,willbemysql唯oneindexintercept,letuser重newloginonetimethenline.
                 $this->userRepository->createUser($userDTO);
             }
             Db::commit();
@@ -215,7 +215,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             $accountDTO->setGender(GenderType::Unknown);
             $accountDTO->setPhone($accountDTO->getAiCode());
             $accountDTO->setType(UserType::Ai);
-            # 账numbernot存in(user肯定alsonot存in),generate账numberanduserinfo
+            # 账numbernot存in(usercertainalsonot存in),generate账numberanduserinfo
             $delightfulId = (string) IdGenerator::getSnowId();
             $accountDTO->setDelightfulId($delightfulId);
             $this->accountRepository->createAccount($accountDTO);

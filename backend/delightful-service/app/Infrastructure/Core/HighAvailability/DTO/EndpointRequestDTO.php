@@ -160,7 +160,7 @@ class EndpointRequestDTO extends AbstractDTO
     }
 
     /**
-     * fromarraydatacreateinstance便捷method.
+     * fromarraydatacreateinstanceconvenientmethod.
      */
     public static function create(
         string $endpointType,

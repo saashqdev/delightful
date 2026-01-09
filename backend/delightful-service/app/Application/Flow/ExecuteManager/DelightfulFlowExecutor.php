@@ -430,7 +430,7 @@ class DelightfulFlowExecutor
             try {
                 $node->validate();
             } catch (Throwable $throwable) {
-                // havetheseis悬浮sectionpoint(即inprocess运linemiddlenotwillbeusesectionpoint),兜bottomwillinexecuteo clockagaintimeconductparameterverify
+                // havetheseisfloatingsectionpoint(即inprocess运linemiddlenotwillbeusesectionpoint),兜bottomwillinexecuteo clockagaintimeconductparameterverify
             }
 
             $job = function (array $frontResults) use ($node): VertexResult {

@@ -177,7 +177,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * getcustomer端唯oneidentifier.
+     * getcustomerclient uniqueoneidentifier.
      */
     protected function getClientId(MessageInterface $request): string
     {

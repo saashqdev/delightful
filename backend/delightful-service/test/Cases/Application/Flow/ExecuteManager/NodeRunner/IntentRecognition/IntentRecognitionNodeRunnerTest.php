@@ -73,7 +73,7 @@ class IntentRecognitionNodeRunnerTest extends ExecuteManagerBaseTest
                     "expression_value": [
                         {
                             "type": "input",
-                            "value": "品尝delicacy,drink beverage,drink waternot算",
+                            "value": "tastedelicacy,drink beverage,drink waternot算",
                             "name": "",
                             "args": null
                         }
@@ -150,7 +150,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => 'I今daygo广州看small蛮腰,downtimewant to bringIfriendoneupgo',
+            'intent' => 'I今daygoGuangzhou看small蛮腰,downtimewant to bringIfriendoneupgo',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['456'], $vertexResult->getChildrenIds());
@@ -158,7 +158,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => 'I今day吃糖醋rowbone',
+            'intent' => 'I今dayeat sweet and sourrowbone',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['123'], $vertexResult->getChildrenIds());
@@ -217,7 +217,7 @@ JSON,
                     "expression_value": [
                         {
                             "type": "input",
-                            "value": "品尝delicacy\ndrink beverage\ndrink waternot算",
+                            "value": "tastedelicacy\ndrink beverage\ndrink waternot算",
                             "name": "",
                             "args": null
                         }
@@ -294,7 +294,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => 'I今daygo广州吃莞城bigpackage,downtimewant to bringIfriendoneupgo',
+            'intent' => 'I今daygoGuangzhou吃莞城bigpackage,downtimewant to bringIfriendoneupgo',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['123'], $vertexResult->getChildrenIds());

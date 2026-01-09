@@ -110,7 +110,7 @@ enum DelightfulResourceEnum: string
     /**
      * returnandtheresourcebind Operation Enum category名.
      * defaultuse DelightfulOperationEnum.
-     * 如需forspecificresourcecustomize操ascollection,caninthisreturncustomize Enum::class.
+     * if neededforspecificresourcecustomize操ascollection,caninthisreturncustomize Enum::class.
      */
     public function operationEnumClass(): string
     {

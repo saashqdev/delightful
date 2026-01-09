@@ -18,7 +18,7 @@ class PageDTO extends AbstractDTO
     }
 
     /**
-     * get页码
+     * getpage number
      */
     public function getPage(): int
     {
@@ -42,7 +42,7 @@ class PageDTO extends AbstractDTO
     }
 
     /**
-     * setting页码
+     * settingpage number
      */
     public function setPage(int $page): self
     {

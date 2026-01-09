@@ -388,7 +388,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
 
-            // servicequotientenableandmodelenable才算normal
+            // servicequotientenableandmodelenableconsiderednormal
             if ($providerStatus === Status::Enabled && $model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
                 return ModelStatus::Normal;
             }

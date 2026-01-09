@@ -80,11 +80,11 @@ class EndNodeRunnerTest extends ExecuteManagerBaseTest
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'xxx' => '嘻嘻',
+            'xxx' => 'hehe',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());
         $this->assertEquals([], $vertexResult->getChildrenIds());
-        $this->assertEquals('嘻嘻', $executionData->getNodeContext($node->getNodeId())['message']);
+        $this->assertEquals('hehe', $executionData->getNodeContext($node->getNodeId())['message']);
     }
 }

@@ -101,7 +101,7 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
             return;
         }
 
-        // 销毁oldminutesegment
+        // destroyoldminutesegment
         try {
             $knowledgeBaseVectorAppService->destroyOldFragments($dataIsolation, $knowledge, $documentEntity);
         } catch (Throwable $throwable) {

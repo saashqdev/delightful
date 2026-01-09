@@ -62,8 +62,8 @@ abstract class AbstractKnowledgeAppService extends AbstractKernelAppService
     /**
      * knowledge basepermissionvalidation.
      * @param string $knowledgeBaseCode required parameter
-     * @param null|string $documentCode 选传
-     * @param null|int $fragmentId 选传
+     * @param null|string $documentCode select upload
+     * @param null|int $fragmentId select upload
      */
     protected function checkKnowledgeBaseOperation(
         KnowledgeBaseDataIsolation $dataIsolation,

@@ -28,7 +28,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property int $status status 1:normal 2:disable
  * @property null|string $creator_id createperson
  * @property int $type
- * @property null|int $seats 席位数
+ * @property null|int $seats seat count
  * @property null|string $sync_type synctype
  * @property null|int $sync_status syncstatus
  * @property null|Carbon $sync_time synctime

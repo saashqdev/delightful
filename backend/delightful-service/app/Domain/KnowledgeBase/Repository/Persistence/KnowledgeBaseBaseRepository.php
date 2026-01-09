@@ -146,7 +146,7 @@ class KnowledgeBaseBaseRepository extends KnowledgeBaseAbstractRepository implem
     }
 
     /**
-     * updateknowledge base词数statistics
+     * updateknowledge baseword countstatistics
      */
     public function updateWordCount(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, int $deltaWordCount): void
     {

@@ -9,7 +9,7 @@ namespace App\Domain\Flow\Entity\ValueObject;
 
 /**
  * sectionpointtype
- * 1 ~ 99 原子sectionpoint
+ * 1 ~ 99 atomicsectionpoint
  * 100 ~ 199 group合sectionpoint硬encodingimplement.
  */
 enum NodeType: int

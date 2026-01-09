@@ -345,7 +345,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     private function keepSubscribeAlive(): void
     {
         // onlyneedoneenter程canschedulepublishmessage,letsubscriberedislinkkeep alive即can.
-        // notlock放inmostoutsidelayer,isforpreventpod频繁restarto clock,nothaveanyoneenter程canpublishmessage
+        // notlock放inmostoutsidelayer,isforpreventpodfrequentrestarto clock,nothaveanyoneenter程canpublishmessage
         co(function () {
             // each 5 second推onetimemessage
             $this->timer->tick(

@@ -51,11 +51,11 @@ enum UserErrorCode: int
     case ACCOUNT_REPEAT_BIND_PARTNER = 2172;
     case ACCOUNT_REPEAT_BIND_STAFF = 2173;
 
-    // usercreatetoo频繁
+    // usercreatetoofrequent
     #[ErrorMessage('user.create_user_too_frequently')]
     case CREATE_USER_TOO_FREQUENTLY = 2174;
 
-    // createidassociateclose系too频繁
+    // createidassociateclose系toofrequent
     #[ErrorMessage('user.create_id_relation_too_frequently')]
     case CREATE_ID_RELATION_TOO_FREQUENTLY = 2175;
 

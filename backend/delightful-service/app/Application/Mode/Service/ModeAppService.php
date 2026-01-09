@@ -48,7 +48,7 @@ class ModeAppService extends AbstractModeAppService
 
         // ===== performanceoptimize:batchquantity预query =====
 
-        // step1:预收collection所haveneedmodelId
+        // step1:pre-receivecollection所haveneedmodelId
         $allModelIds = [];
         foreach ($modeAggregates as $aggregate) {
             foreach ($aggregate->getGroupAggregates() as $groupAggregate) {

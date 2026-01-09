@@ -166,7 +166,7 @@ class ImageGenerateFactory
         $width = (int) $widthStr;
         $height = (int) $heightStr;
 
-        // todo xhy 先兜bottom,因for整text generationgraphalsonothave闭环
+        // todo xhy first fallbackbottom,因for整text generationgraphalsonothave闭环
         if (
             ! ($width === 1024 && $height === 1024)
             && ! ($width === 1024 && $height === 1792)

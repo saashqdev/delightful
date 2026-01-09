@@ -57,10 +57,10 @@ class UserCallAgentFailSubscriber implements ListenerInterface
             $messageInterface = MessageAssembler::getMessageStructByArray(ChatMessageType::Text->getName(), $messageStruct);
             $seqDTO->setContent($messageInterface);
             $seqDTO->setSeqType($messageInterface->getMessageTypeEnum());
-            // 原样outputextensionparameter
+            // as-isoutputextensionparameter
             $seqDTO->setExtra($seqEntity->getExtra());
 
-            // 原样outputextensionparameter,butwantrowexcept editmessageoption
+            // as-isoutputextensionparameter,butwantrowexcept editmessageoption
             $seqExtra = $seqEntity->getExtra()?->getExtraCanCopyData();
             $seqDTO->setExtra($seqExtra);
             di(DelightfulChatMessageAppService::class)->aiSendMessage($seqDTO, $appMessageId, doNotParseReferMessageId: true);

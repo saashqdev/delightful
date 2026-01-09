@@ -41,7 +41,7 @@ class DocumentQueryRequestDTO extends AbstractRequestDTO
     public static function getHyperfValidationMessage(): array
     {
         return [
-            'page.min' => '页码mustgreater thanequal1',
+            'page.min' => 'page numbermustgreater thanequal1',
             'page_size.min' => 'each页quantitymustgreater thanequal1',
             'page_size.max' => 'each页quantitycannot超pass100',
         ];

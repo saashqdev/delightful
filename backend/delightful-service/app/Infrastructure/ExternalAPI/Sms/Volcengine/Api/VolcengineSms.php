@@ -60,7 +60,7 @@ class VolcengineSms extends VolcengineApi
             $groupId = $this->template->getMessageGroupId($templateId);
             // initialize,setpublicrequestparameter
             $this->init($groupId, $signStr, $templateId);
-            // setverify码short信特havebodystructure
+            // setverify码shortmessage specialhavebodystructure
             $body = [
                 'SmsAccount' => $this->getMessageGroupId(),
                 'Sign' => $this->getSign(),
@@ -80,7 +80,7 @@ class VolcengineSms extends VolcengineApi
             $msg = 'short信sendfail';
             $this->logger->error('short信sendfail:' . $exception->getMessage() . ',trace:' . $exception->getTraceAsString());
         }
-        // willreturnresultand创蓝统one,avoidbug
+        // willreturnresultandChuanglan systemone,avoidbug
         return $sendResult->setResult($errCode, $msg);
     }
 }

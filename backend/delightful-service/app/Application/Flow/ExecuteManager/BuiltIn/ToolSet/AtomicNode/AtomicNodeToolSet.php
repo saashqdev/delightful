@@ -21,11 +21,11 @@ class AtomicNodeToolSet extends AbstractBuiltInToolSet
 
     public function getName(): string
     {
-        return '原子sectionpoint';
+        return 'atomicsectionpoint';
     }
 
     public function getDescription(): string
     {
-        return 'provide部minute原子sectionpointtoolcallcan力';
+        return 'provide部minuteatomicsectionpointtoolcallcan力';
     }
 }

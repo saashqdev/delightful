@@ -291,7 +291,7 @@ return [
                     'args.stop',                   // stop词
                     'args.seed',                   // randomtype子
 
-                    // Token预估info
+                    // Tokenestimateinfo
                     'token_estimate',              // Tokenestimatedetail
                     'token_estimate.input_tokens', // estimateinputtokens
                     'token_estimate.output_tokens', // estimateoutputtokens

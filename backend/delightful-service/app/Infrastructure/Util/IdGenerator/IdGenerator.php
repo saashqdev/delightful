@@ -23,7 +23,7 @@ class IdGenerator
     }
 
     /**
-     * generatefixedlength(32位)string,尽力guarantee唯oneproperty.
+     * generatefixedlength(32位)string,do one's bestguarantee唯oneproperty.
      */
     public static function getUniqueId32(): string
     {
@@ -32,7 +32,7 @@ class IdGenerator
     }
 
     /**
-     * generatefixedlengthstring,尽力guarantee唯oneproperty.
+     * generatefixedlengthstring,do one's bestguarantee唯oneproperty.
      */
     public static function getUniqueIdSha256(): string
     {

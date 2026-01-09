@@ -12,7 +12,7 @@ return new class extends Migration {
     /**
      * Run the migrations.
      * optimize delightful_bots and delightful_bot_versions table多queryscenarioperformance
-     * add多复合indexsupportdifferentquerymode.
+     * addmulti-compositeindexsupportdifferentquerymode.
      */
     public function up(): void
     {

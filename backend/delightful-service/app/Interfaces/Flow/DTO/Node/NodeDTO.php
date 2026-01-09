@@ -30,7 +30,7 @@ class NodeDTO extends AbstractFlowDTO
     public array $meta = [];
 
     /**
-     * sectionpointparameterconfiguration,目front依靠arraycomedatapass.
+     * sectionpointparameterconfiguration,目frontrely onarraycomedatapass.
      */
     public array $params = [];
 

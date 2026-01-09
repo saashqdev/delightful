@@ -98,7 +98,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 丰富organizationadministrator实bodyuserinfo.
+     * richorganizationadministrator实bodyuserinfo.
      */
     private function enrichOrganizationAdminWithUserInfo(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdmin): array
     {

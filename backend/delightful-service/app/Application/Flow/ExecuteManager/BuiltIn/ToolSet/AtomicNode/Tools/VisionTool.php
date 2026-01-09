@@ -245,11 +245,11 @@ JSON, true)));
 4. analyzeformatrequire:
    - toat重wantanalyzeresult,usestructure化JSONformatpresent,如:{"category别":"xx", "主body":"xx", "feature":["xx","xx"]}
    - toatnotcertaincontent,explicittable明speculatedpropertyquality,for example:"maybeis..."
-   - 如imagequalitymorelow,fingeroutlimitelementand尽力analyze
+   - 如imagequalitymorelow,fingeroutlimitelementanddo one's bestanalyze
    - toat多graphanalyze,minute别markimage序numberconductparse,andsummaryitsassociateproperty
    
 5. notice事item:
-   - avoidtosensitivecontent做主观评判
+   - avoidtosensitivecontentmake subjective judgment
    - whenno法certainsome部minutecontento clock,坦诚table达notcertainproperty
    - maintain客观professional语气'),
         ]);

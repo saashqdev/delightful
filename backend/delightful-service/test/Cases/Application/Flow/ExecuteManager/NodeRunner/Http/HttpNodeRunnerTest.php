@@ -158,7 +158,7 @@ class HttpNodeRunnerTest extends ExecuteManagerBaseTest
                                     "const_value": [
                                         {
                                             "type": "input",
-                                            "value": "哈哈哈",
+                                            "value": "hahaha",
                                             "name": "name",
                                             "args": null
                                         }

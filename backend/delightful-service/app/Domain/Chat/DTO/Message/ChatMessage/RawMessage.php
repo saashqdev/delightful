@@ -13,7 +13,7 @@ use App\Domain\Chat\DTO\Message\StreamMessageInterface;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * originalmessage,canfastspeeduseatonetheseneedtemporaryforwarddataformat,原样output.
+ * originalmessage,canfastspeeduseatonetheseneedtemporaryforwarddataformat,as-isoutput.
  */
 class RawMessage extends DelightfulMessageStruct implements StreamMessageInterface
 {

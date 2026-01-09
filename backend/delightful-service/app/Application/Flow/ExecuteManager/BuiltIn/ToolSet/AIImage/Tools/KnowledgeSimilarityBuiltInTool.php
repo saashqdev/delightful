@@ -69,7 +69,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
     - <DelightfulVideo></DelightfulVideo> indicateonevideo,如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>,eachtagallwillinfront端messagecardrenderoutonevideo;
     - <DelightfulMention></DelightfulMention> indicateoneperson员info,如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>,eachtagallwillinfront端messagecardshapebecomeone @somesomeperson effect;
 5. priorityusecontain <DelightfulImage></DelightfulImage>,<DelightfulVideo></DelightfulVideo>,<DelightfulMention></DelightfulMention> etchave Delightful tagslicesegment;
-6. combineknowledge basereturncontentorganizeback尽maybe丰富groundreturn答userissue.
+6. combineknowledge basereturncontentorganizeback尽mayberichgroundreturn答userissue.
 ## toolmiddleclosekeyreturnvalueinstruction
 - fragments: 本timeretrieveto所haveknowledge baseslicesegment
 - fragments.*.content: slicesegmentcontent

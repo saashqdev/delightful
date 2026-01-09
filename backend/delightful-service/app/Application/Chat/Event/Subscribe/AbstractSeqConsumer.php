@@ -72,7 +72,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
 
     protected function setSeqCanNotRetry(string $retryCacheKey)
     {
-        // notagain重推
+        // notagainre-push
         try {
             $this->redis->set($retryCacheKey, 3);
             $this->redis->expire($retryCacheKey, 3600);
@@ -82,7 +82,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
 
     protected function addSeqRetryNumber(string $retryCacheKey)
     {
-        // notagain重推
+        // notagainre-push
         try {
             $this->redis->incr($retryCacheKey);
             $this->redis->expire($retryCacheKey, 3600);

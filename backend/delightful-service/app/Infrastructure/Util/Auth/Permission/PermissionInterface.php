@@ -20,7 +20,7 @@ interface PermissionInterface
     public function isOrganizationAdmin(string $organizationCode, string $mobile): bool;
 
     /**
-     * getuser所拥haveorganizationadministratorcode.
+     * getuserownedhaveorganizationadministratorcode.
      */
     public function getOrganizationAdminList(string $delightfulId): array;
 }

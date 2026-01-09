@@ -127,7 +127,7 @@ class ExecutionData
     private FlowStreamStatus $flowStreamStatus = FlowStreamStatus::Pending;
 
     /**
-     * send方冗remainderinfo.
+     * sendredundantremainderinfo.
      * $userEntity. send方userinfo.
      * $seqEntity. send方sessionwindowinfo.
      * $messageEntity. send方messageinfo.

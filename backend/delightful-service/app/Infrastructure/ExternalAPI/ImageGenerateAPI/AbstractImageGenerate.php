@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 /**
  * imagegenerate统一抽象类
  * integration水印process和钉钉alertfeature
- * 所有imagegenerateProvider都shouldinherit此类.
+ * 所haveimagegenerateProviderallshouldinherit此类.
  */
 abstract class AbstractImageGenerate implements ImageGenerate
 {
@@ -38,7 +38,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * 统一的imagegenerate入口method
-     * 先call子类implement的originalimagegenerate，再统一添加水印.
+     * 先call子类implement的originalimagegenerate，again统一添加水印.
      */
     final public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -49,7 +49,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * implementinterface要求的带水印originaldatamethod
-     * 各子类mustaccording to自己的dataformatimplement此method.
+     * each子类mustaccording to自己的dataformatimplement此method.
      */
     abstract public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array;
 
@@ -60,22 +60,22 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * 子类implement的originalimagegeneratemethod
-     * 只负责call各自APIgenerateimage，不用关心水印process.
+     * 只负责calleach自APIgenerateimage，notuse关心水印process.
      */
     abstract protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 
     /**
-     * getresponseobject的lock，用于并发security地操作 OpenAIFormatResponse.
-     * useRedis自旋lockimplement排队等待.
+     * getresponseobject的lock，useat并发security地操作 OpenAIFormatResponse.
+     * useRedis自旋lockimplement排队etc待.
      *
-     * @return string returnlock的owner，用于释放lock
+     * @return string returnlock的owner，useat释放lock
      */
     protected function lockResponse(OpenAIFormatResponse $response): string
     {
         $lockKey = 'img_response_' . spl_object_id($response);
         $owner = bin2hex(random_bytes(8)); // 16位随机string作为owner
 
-        // spinLockwill自动等待，直到getsuccess或timeout（30秒）
+        // spinLockwill自动etc待，untilgetsuccessortimeout（30秒）
         if (! $this->redisLocker->spinLock($lockKey, $owner, 30)) {
             $this->logger->error('get图像responseRedislocktimeout', [
                 'lock_key' => $lockKey,
@@ -101,7 +101,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
         try {
             $result = $this->redisLocker->release($lockKey, $owner);
             if (! $result) {
-                $this->logger->warning('Redislock释放fail，可能已被其他进程释放', [
+                $this->logger->warning('Redislock释放fail，可能已be其他进程释放', [
                     'lock_key' => $lockKey,
                     'owner' => $owner,
                 ]);
@@ -114,7 +114,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
                 'owner' => $owner,
                 'error' => $e->getMessage(),
             ]);
-            // lock释放fail不影响业务逻辑，但要recordlog
+            // lock释放failnot影响业务逻辑，but要recordlog
         }
     }
 
@@ -137,7 +137,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
                     $processedData[$index] = $this->watermarkProcessor->addWatermarkToUrl($imageData, $imageGenerateRequest);
                 }
             } catch (Exception $e) {
-                // 水印processfail时，recorderror但不影响imagereturn
+                // 水印processfail时，recorderrorbutnot影响imagereturn
                 $this->logger->error('image水印processfail', [
                     'index' => $index,
                     'error' => $e->getMessage(),

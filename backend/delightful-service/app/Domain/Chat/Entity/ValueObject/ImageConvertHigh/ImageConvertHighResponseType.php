@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Entity\ValueObject\ImageConvertHigh;
 
 enum ImageConvertHighResponseType: int
 {
-    // 开始generate
+    // startgenerate
     case START_GENERATE = 1;
 
     // generatecomplete
@@ -21,7 +21,7 @@ enum ImageConvertHighResponseType: int
     public static function getNameFromType(ImageConvertHighResponseType $type): string
     {
         return match ($type) {
-            self::START_GENERATE => '开始generate',
+            self::START_GENERATE => 'startgenerate',
             self::GENERATED => 'generatecomplete',
             self::TERMINATE => 'exception终止',
             default => '未知type',

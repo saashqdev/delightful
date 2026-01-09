@@ -13,7 +13,7 @@ use InvalidArgumentException;
 /**
  * 重sortmodelconfigurationvalueobject
  *
- * contain重sortmodel的相关configurationparameter，如modelname、提供商、API 端点等
+ * contain重sortmodel的相关configurationparameter，如modelname、提供商、API 端点etc
  */
 class RerankingModelConfig extends AbstractValueObject
 {
@@ -27,7 +27,7 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * 重sortmodel提供商name.
      *
-     * for example：gitee_ai、openai 等
+     * for example：gitee_ai、openai etc
      */
     private string $rerankingProviderName = '';
 
@@ -48,7 +48,7 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * timeouttime（秒）.
      *
-     * API request的timeouttime，单位为秒
+     * API request的timeouttime，unit为秒
      */
     private float $timeout = 3.0;
 
@@ -60,30 +60,30 @@ class RerankingModelConfig extends AbstractValueObject
     private int $retryCount = 2;
 
     /**
-     * return的最大resultquantity.
+     * return的most大resultquantity.
      *
-     * 重sort后return的最大resultquantity
+     * 重sort后return的most大resultquantity
      */
     private int $topN = 3;
 
     /**
      * 批processsize.
      *
-     * 批量processdocument的size，用于提高performance
+     * 批量processdocument的size，useat提高performance
      */
     private int $batchSize = 16;
 
     /**
-     * 是否usecache.
+     * whetherusecache.
      *
-     * 是否cache重sortresult，用于提高performance
+     * whethercache重sortresult，useat提高performance
      */
     private bool $useCache = true;
 
     /**
      * cacheexpiretime（秒）.
      *
-     * cache的expiretime，单位为秒
+     * cache的expiretime，unit为秒
      */
     private int $cacheTtl = 3600;
 
@@ -196,7 +196,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * getreturn的最大resultquantity.
+     * getreturn的most大resultquantity.
      */
     public function getTopN(): int
     {
@@ -204,7 +204,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * setreturn的最大resultquantity.
+     * setreturn的most大resultquantity.
      */
     public function setTopN(int $topN): self
     {
@@ -236,7 +236,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 是否usecache.
+     * whetherusecache.
      */
     public function isUseCache(): bool
     {
@@ -244,7 +244,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * set是否usecache.
+     * setwhetherusecache.
      */
     public function setUseCache(bool $useCache): self
     {
@@ -281,7 +281,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 从arraycreateconfiguration.
+     * fromarraycreateconfiguration.
      */
     public static function fromArray(array $config): self
     {

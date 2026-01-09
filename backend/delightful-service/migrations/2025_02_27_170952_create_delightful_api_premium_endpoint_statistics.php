@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // table存在就不execute
+        // table存inthennotexecute
         if (Schema::hasTable('delightful_api_premium_endpoint_statistics')) {
             return;
         }
@@ -22,15 +22,15 @@ return new class extends Migration {
         Schema::create('delightful_api_premium_endpoint_statistics', function (Blueprint $table) {
             $table->bigIncrements('id');
             // 这里canimplement对接入点request的statistics逻辑
-            // for example：recordrequestcount、requesttype、资源consume等
+            // for example：recordrequestcount、requesttype、资源consumeetc
             $table->string('endpoint_id', 64)->nullable()->default(null)->comment('接入点id');
             $table->integer('request_count')->nullable()->default(null)->comment('requestcount');
             $table->integer('request_success_count')->nullable()->default(null)->comment('requestsuccesscount');
             $table->integer('request_error_count')->nullable()->default(null)->comment('requestfailcount');
-            $table->double('request_success_rate')->nullable()->default(null)->comment('requestsuccess率,最大value为 100，不带%');
-            $table->integer('request_average_time')->nullable()->default(null)->comment('request平均time，单位毫秒');
-            $table->integer('request_max_time')->nullable()->default(null)->comment('requestconsume的最大time，单位毫秒');
-            $table->integer('request_min_time')->nullable()->default(null)->comment('requestconsume的最小time，单位毫秒');
+            $table->double('request_success_rate')->nullable()->default(null)->comment('requestsuccess率,most大value为 100，not带%');
+            $table->integer('request_average_time')->nullable()->default(null)->comment('request平均time，unit毫秒');
+            $table->integer('request_max_time')->nullable()->default(null)->comment('requestconsume的most大time，unit毫秒');
+            $table->integer('request_min_time')->nullable()->default(null)->comment('requestconsume的most小time，unit毫秒');
             // statisticstime段
             $table->bigInteger('statistics_time')->nullable()->default(null)->comment('statisticstime段');
             // statistics级别：0-秒级，1-分钟级，2-小时级，3-天级

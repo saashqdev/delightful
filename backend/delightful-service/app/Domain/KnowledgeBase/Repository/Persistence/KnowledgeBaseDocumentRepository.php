@@ -86,7 +86,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
                 ],
                 $attributes
             );
-        // 如果是软delete的，则restore
+        // if是软delete的，thenrestore
         if ($model->trashed()) {
             $model->restore();
             $model->fill($attributes)->save();
@@ -141,7 +141,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
      */
     public function getDocumentCountByKnowledgeBaseCode(KnowledgeBaseDataIsolation $dataIsolation, array $knowledgeBaseCodes): array
     {
-        // 分group聚合query，get每个knowledge base的documentquantity
+        // 分group聚合query，geteach个knowledge base的documentquantity
         $res = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query())
             ->select('knowledge_base_code', Db::raw('count(*) as count'))
             ->groupBy('knowledge_base_code')
@@ -160,7 +160,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
      */
     public function getDocumentsByCodes(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, array $knowledgeBaseDocumentCodes): array
     {
-        // get每个document的document名
+        // geteach个document的document名
         $res = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query())
             ->where('knowledge_base_code', $knowledgeBaseCode)
             ->whereIn('code', $knowledgeBaseDocumentCodes)
@@ -244,7 +244,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * according todocumentencodingdelete所有片段.
+     * according todocumentencodingdelete所have片段.
      */
     public function destroyFragmentsByDocumentCode(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -278,7 +278,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             'sync_status_message' => mb_substr($documentEntity->getSyncStatusMessage(), 0, 900),
         ];
 
-        // 如果是已sync或syncfailstatus，synccount加1
+        // if是已syncorsyncfailstatus，synccount加1
         if (in_array($documentEntity->getSyncStatus(), [KnowledgeSyncStatus::Synced->value, KnowledgeSyncStatus::SyncFailed->value])) {
             KnowledgeBaseDocumentModel::withTrashed()
                 ->where('id', $documentEntity->getId())
@@ -366,7 +366,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * get用于create或updatemodel的propertyarray.
+     * getuseatcreateorupdatemodel的propertyarray.
      */
     protected function prepareAttributes(KnowledgeBaseDocumentEntity $entity): array
     {

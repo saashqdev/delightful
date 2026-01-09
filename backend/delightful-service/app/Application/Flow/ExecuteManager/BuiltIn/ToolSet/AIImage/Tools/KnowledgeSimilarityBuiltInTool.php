@@ -41,7 +41,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'useuserissue和关键词，去检索knowledge base中的content，return与userissue相似度最高的content。';
+        return 'useuserissue和关键词，去检索knowledge base中的content，return与userissuesimilar度most高的content。';
     }
 
     public function getAppendSystemPrompt(array $customParams = []): string
@@ -56,27 +56,27 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
             $knowledgePrompt .= "- {$knowledge->getName()}：{$knowledge->getDescription()}\n";
         }
         return <<<MARKDOWN
-# allow被use的能力: knowledge base检索
+# allowbeuse的能力: knowledge base检索
 ## knowledge base列表
 > knowledge basename：knowledge basedescription
 {$knowledgePrompt}
 ## process
-1. 结合上下文提炼user的issue，generate多个关键词，at most不超过 5 个，多个关键词用英文逗号"," 隔开，用于usedifferent关键词从knowledge base中检索最相关的info；
-2. 结合上下文，analyzeuser的issue，generate `names` parameter，用于指定与userissue可能有关的多个knowledge basename，按照相关性sort，相关性需结合上下文、knowledge basename和knowledge basedescription进行判断；
-3. use关键词和userissue，call `{$this->getName()}` tool检索knowledge base中的content，关键词的parameter是 `keyword`，userissue的parameter是 `question`, 请ensureparameter都被correct填入，tool将return与userissue相似度最高的content片段；
-4. knowledge base检索出来的content里willcontain一些customize的 Delightful tag，你要善于use它们，有以下几种tag：
-    - <DelightfulImage></DelightfulImage> 表示一个image，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，每个tag都will在前端messagecard渲染出一张image；
-    - <DelightfulVideo></DelightfulVideo> 表示一个video，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，每个tag都will在前端messagecard渲染出一个video；
-    - <DelightfulMention></DelightfulMention> 表示一个人员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，每个tag都will在前端messagecard形成一个 @某某人 的effect；
-5. 优先usecontain <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> 等有 Delightful tag的片段；
+1. 结合上下文提炼user的issue，generate多个关键词，at mostnot超过 5 个，多个关键词use英文逗号"," 隔开，useatusedifferent关键词fromknowledge base中检索most相关的info；
+2. 结合上下文，analyzeuser的issue，generate `names` parameter，useat指定与userissue可能have关的多个knowledge basename，按照相关性sort，相关性需结合上下文、knowledge basename和knowledge basedescriptionconduct判断；
+3. use关键词和userissue，call `{$this->getName()}` tool检索knowledge base中的content，关键词的parameter是 `keyword`，userissue的parameter是 `question`, 请ensureparameterallbecorrect填入，tool将return与userissuesimilar度most高的content片段；
+4. knowledge base检索出来的content里willcontain一些customize的 Delightful tag，你要善atuse它们，haveby下几种tag：
+    - <DelightfulImage></DelightfulImage> 表示一个image，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，each个tagallwillin前端messagecard渲染出一张image；
+    - <DelightfulVideo></DelightfulVideo> 表示一个video，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，each个tagallwillin前端messagecard渲染出一个video；
+    - <DelightfulMention></DelightfulMention> 表示一个人员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，each个tagallwillin前端messagecard形成一个 @somesome人 的effect；
+5. 优先usecontain <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> etchave Delightful tag的片段；
 6. 结合knowledge basereturn的content整理后尽可能丰富地回答user的issue。
 ## tool中关键的returnvalueinstruction
-- fragments: 本次检索到的所有knowledge base片段
+- fragments: 本次检索to的所haveknowledge base片段
 - fragments.*.content: 片段content
 - fragments.*.metadata.url: current片段的原文link
-- graph.*.content: 来自知识图谱的data，能增强info，让你更好回答issue
+- graph.*.content: 来自知识图谱的data，能增强info，让你more好回答issue
 ## 限制
-- 回答的content中不allow出现不是Delightfultag的link。
+- 回答的content中notallow出现not是Delightfultag的link。
 MARKDOWN;
     }
 
@@ -198,7 +198,7 @@ MARKDOWN;
             "key": "names",
             "sort": 1,
             "title": "knowledge base names",
-            "description": "need被检索的knowledge basename",
+            "description": "needbe检索的knowledge basename",
             "required": null,
             "value": null,
             "encryption": false,
@@ -248,7 +248,7 @@ JSON,
             "type": "string",
             "key": "content",
             "sort": 0,
-            "title": "检索到的所有content",
+            "title": "检索to的所havecontent",
             "description": "",
             "required": null,
             "value": null,
@@ -337,7 +337,7 @@ JSON,
          "limit": {
             "type": "number",
             "key": "limit",
-            "title": "最大召回quantity",
+            "title": "most大召回quantity",
             "description": "",
             "required": null,
             "value": null,
@@ -349,7 +349,7 @@ JSON,
         "score": {
             "type": "number",
             "key": "score",
-            "title": "相似度",
+            "title": "similar度",
             "description": "",
             "required": null,
             "value": null,

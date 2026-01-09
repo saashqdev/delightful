@@ -140,7 +140,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
             ->select($columns)
             ->where('group_id', $groupId);
         $userList = Db::select($userList->toSql(), $userList->getBindings());
-        // 将time还原成time戳
+        // 将timealso原成time戳
         foreach ($userList as &$user) {
             ! empty($user['created_at']) && $user['created_at'] = strtotime($user['created_at']);
             ! empty($user['updated_at']) && $user['updated_at'] = strtotime($user['updated_at']);
@@ -193,7 +193,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
     }
 
     /**
-     * 将user从group中移除.
+     * 将userfromgroup中移except.
      */
     public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int
     {

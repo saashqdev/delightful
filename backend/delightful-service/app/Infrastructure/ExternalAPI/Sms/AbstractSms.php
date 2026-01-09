@@ -22,7 +22,7 @@ abstract class AbstractSms implements SmsInterface
 
     public function getContent(SmsStruct $smsStruct): string
     {
-        // according to短信驱动确定对应的语种,并进行语种兜底
+        // according to短信驱动确定对应的语种,并conduct语种兜底
         $language = $this->getContentLanguage($smsStruct);
         if (empty($smsStruct->variables)) {
             return $smsStruct->content ?: '';
@@ -48,8 +48,8 @@ abstract class AbstractSms implements SmsInterface
     }
 
     /**
-     *  对于 $smsStruct , 如果 language 在template中不存在,则用 default_language 进行检测
-     *  如果 default_language 也没有对应的template,则按 type 在template中匹配存在的语种,如果存在多种,以zh_CN优先.
+     *  对at $smsStruct , if language intemplate中not存in,thenuse default_language conduct检测
+     *  if default_language alsonothave对应的template,then按 type intemplate中匹配存in的语种,if存in多种,byzh_CN优先.
      */
     public function getContentLanguage(SmsStruct $smsStruct): string
     {
@@ -83,17 +83,17 @@ abstract class AbstractSms implements SmsInterface
     }
 
     /**
-     * 将variable的value与variable名associate,还原短信content.
-     * @param array $variables 短信的variable部分,可能是 valuearray,也可能是 key=>valuearray,need按$templateContent的content,统一还原成key=>valuearray
+     * 将variable的value与variable名associate,also原短信content.
+     * @param array $variables 短信的variable部分,可能是 valuearray,also可能是 key=>valuearray,need按$templateContent的content,统一also原成key=>valuearray
      */
     protected function translateContent(string $templateContent, array $variables): string
     {
         if (empty($templateContent)) {
             return Json::encode($variables);
         }
-        // 进行variable匹配短信匹配
+        // conductvariable匹配短信匹配
         if (! empty($variables)) {
-            // compatible火山template的variable替换,先将 $message 中的variableparse出来 such as将[123456] parse为['VerificationCode'=>123456]后,再进行templatecontent替换
+            // compatible火山template的variable替换,先将 $message 中的variableparse出来 such as将[123456] parse为['VerificationCode'=>123456]后,againconducttemplatecontent替换
             $variables = $this->template->getTemplateVariables($templateContent, $variables);
             $i = 1;
             foreach ($variables as $k => $v) {

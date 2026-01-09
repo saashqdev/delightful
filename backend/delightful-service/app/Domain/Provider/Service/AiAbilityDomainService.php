@@ -30,12 +30,12 @@ class AiAbilityDomainService
     }
 
     /**
-     * according to能力codegetAI能力实体（用于运行时，不校验organization）.
+     * according to能力codegetAI能力实体（useat运行时，not校验organization）.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param AiAbilityCode $code 能力code
      * @return AiAbilityEntity AI能力实体
-     * @throws Exception 当能力不存在或未enable时throwexception
+     * @throws Exception when能力not存inor未enable时throwexception
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): AiAbilityEntity
     {
@@ -49,7 +49,7 @@ class AiAbilityDomainService
     }
 
     /**
-     * get所有AI能力list（无pagination）.
+     * get所haveAI能力list（无pagination）.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @return array<AiAbilityEntity> AI能力实体list
@@ -81,12 +81,12 @@ class AiAbilityDomainService
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param AiAbilityCode $code 能力code
      * @param array $data updatedata
-     * @return bool 是否updatesuccess
-     * @throws Exception 当能力不存在时throwexception
+     * @return bool whetherupdatesuccess
+     * @throws Exception when能力not存in时throwexception
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool
     {
-        // check能力是否存在
+        // check能力whether存in
         $entity = $this->aiAbilityRepository->getByCode($dataIsolation, $code);
         if ($entity === null) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::AI_ABILITY_NOT_FOUND);
@@ -112,7 +112,7 @@ class AiAbilityDomainService
         $count = 0;
 
         foreach ($abilities as $abilityConfig) {
-            // checkdatabase中是否已存在
+            // checkdatabase中whether已存in
             $code = AiAbilityCode::from($abilityConfig['code']);
             $existingEntity = $this->aiAbilityRepository->getByCode($dataIsolation, $code);
 
@@ -134,7 +134,7 @@ class AiAbilityDomainService
             }
 
             if ($existingEntity === null) {
-                // 不存在则create
+                // not存inthencreate
                 $entity = new AiAbilityEntity();
                 $entity->setCode($abilityConfig['code']);
                 $entity->setOrganizationCode($organizationCode);

@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * 沙箱管理 Mock service
- * 模拟沙箱的create、statusquery、工作区status等管理interface.
+ * 模拟沙箱的create、statusquery、工作区statusetc管理interface.
  */
 class SandboxApi
 {
@@ -44,7 +44,7 @@ class SandboxApi
             'sandbox_id' => $sandboxId,
         ]);
 
-        // 模拟沙箱已存在且运行中
+        // 模拟沙箱已存inand运行中
         return [
             'code' => 1000,
             'message' => 'Success',
@@ -99,13 +99,13 @@ class SandboxApi
             'sandbox_id' => $sandboxId,
         ]);
 
-        // 模拟工作区就绪status
+        // 模拟工作区then绪status
         // 注意：status mustreturn整数type，对应 WorkspaceStatus constant
         return [
             'code' => 1000,
             'message' => 'success',
             'data' => [
-                'status' => WorkspaceStatus::READY, // initializecomplete，工作区完全可用
+                'status' => WorkspaceStatus::READY, // initializecomplete，工作区完all可use
                 'sandbox_id' => $sandboxId,
                 'workspace_path' => '/workspace',
                 'is_ready' => true,
@@ -146,7 +146,7 @@ class SandboxApi
     }
 
     /**
-     * initialize沙箱（simplify版，用于 ASR 等无chatmessage场景）
+     * initialize沙箱（simplify版，useat ASR etc无chatmessage场景）
      * POST /api/v1/sandboxes/{sandboxId}/proxy/v1/messages/chat.
      *
      * request体example：

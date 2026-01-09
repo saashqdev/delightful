@@ -34,9 +34,9 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
      */
     public function getDepartmentFullPathByIds(DataIsolation $dataIsolation, array $departmentIds): array
     {
-        // 对departmentids进行去重
+        // 对departmentidsconduct去重
         $departmentIds = array_values(array_unique($departmentIds));
-        // getorganization所有department
+        // getorganization所havedepartment
         $departments = $this->departmentRepository->getOrganizationDepartments($dataIsolation->getCurrentOrganizationCode(), keyById: true);
         // group装departmentinfo
         $res = [];
@@ -79,7 +79,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
         $orgCode = $dataIsolation->getCurrentOrganizationCode();
         $departmentsPageResponseDTO = $this->departmentRepository->getSubDepartmentsByLevel($level, $orgCode, $depth, $size, $offset);
         $departments = $departmentsPageResponseDTO->getItems();
-        // 确定下级department是否还有子department
+        // 确定下级departmentwhetheralsohave子department
         $items = $this->getDepartmentsHasChild($departments, $orgCode);
         $departmentsPageResponseDTO->setItems($items);
         return $departmentsPageResponseDTO;
@@ -90,7 +90,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
         $orgCode = $dataIsolation->getCurrentOrganizationCode();
         $departmentsPageResponseDTO = $this->departmentRepository->getSubDepartmentsById($departmentId, $orgCode, $size, $offset);
         $departments = $departmentsPageResponseDTO->getItems();
-        // 确定下级department是否还有子department
+        // 确定下级departmentwhetheralsohave子department
         $items = $this->getDepartmentsHasChild($departments, $orgCode);
         $departmentsPageResponseDTO->setItems($items);
         return $departmentsPageResponseDTO;
@@ -109,7 +109,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
         foreach ($departments as $department) {
             $hasChild = isset($childDepartments[$department->getDepartmentId()]);
             $department->setHasChild($hasChild);
-            // 移除不need的field
+            // 移exceptnotneed的field
             $departmentsHasChild[] = $department;
         }
         return $departmentsHasChild;
@@ -136,7 +136,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 批量getdepartment的所有子department.
+     * 批量getdepartment的所have子department.
      * @return DelightfulDepartmentEntity[]
      */
     public function getAllChildrenByDepartmentIds(array $departmentIds, DataIsolation $dataIsolation): array
@@ -163,7 +163,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 根department被抽象为 -1，所以这里needconvert为actual的根department id.
+     * 根departmentbe抽象为 -1，所by这里needconvert为actual的根department id.
      */
     public function getDepartmentRootId(DataIsolation $dataIsolation): string
     {
@@ -182,18 +182,18 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     /**
      * 批量get多个organization的根departmentinfo.
      * @param array $organizationCodes organizationcodearray
-     * @return array<string,DelightfulDepartmentEntity> 以organizationcode为键，根department实体为value的associatearray
+     * @return array<string,DelightfulDepartmentEntity> byorganizationcode为键，根department实体为value的associatearray
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array
     {
         $rootDepartments = $this->departmentRepository->getOrganizationsRootDepartment($organizationCodes);
 
-        // check是否有根departmentdata
+        // checkwhetherhave根departmentdata
         if (empty($rootDepartments)) {
             return [];
         }
 
-        // processdataformat，以organizationcode为键，根department实体为value
+        // processdataformat，byorganizationcode为键，根department实体为value
         $result = [];
         foreach ($rootDepartments as $department) {
             $result[$department->getOrganizationCode()] = $department;
@@ -246,7 +246,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * getdepartment的所有子department.
+     * getdepartment的所have子department.
      * @param DelightfulDepartmentEntity[] $allDepartments
      */
     protected function getChildrenByDepartmentIds(array $allDepartments, array $departmentIds): array

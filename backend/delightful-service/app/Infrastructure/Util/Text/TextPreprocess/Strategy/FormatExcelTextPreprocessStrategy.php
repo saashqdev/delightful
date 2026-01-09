@@ -15,7 +15,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
         $content = $this->convertToCsv($content);
         // delete ## 开头的行
         $content = preg_replace('/^##.*\n/', '', $content);
-        // use正则table达式匹配不在引号内的换行符
+        // use正thentable达式匹配notin引号内的换行符
         return preg_replace('/(?<!")[\r\n]+(?!")/', "\n\n", $content);
     }
 
@@ -26,29 +26,29 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
      */
     private function convertToCsv(string $content): string
     {
-        // 将content按行split，但保留单元格内的换行符
+        // 将content按行split，but保留单元格内的换行符
         $lines = preg_split('/(?<!")[\r\n]+(?!")/', $content);
         $result = [];
         $headers = [];
 
         foreach ($lines as $line) {
-            // check是否是newsheet
+            // checkwhether是newsheet
             if (str_starts_with($line, '##')) {
                 $result[] = $line;
                 $headers = [];
                 continue;
             }
 
-            // 如果是空行，skip
+            // if是空行，skip
             if (empty(trim($line))) {
                 $result[] = '';
                 continue;
             }
 
-            // usefgetcsv的方式parseCSV行
+            // usefgetcsv的methodparseCSV行
             $row = str_getcsv($line);
 
-            // 如果是第一行且不是sheetmark，则作为title行
+            // if是第一行andnot是sheetmark，then作为title行
             if (empty($headers) && ! empty($line)) {
                 $headers = $row;
                 continue;
@@ -73,7 +73,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
     /**
      * 检测CSV行的分隔符.
      * @param string $line CSV行content
-     * @return string 检测到的分隔符
+     * @return string 检测to的分隔符
      */
     private function detectSeparator(string $line): string
     {
@@ -86,7 +86,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             }
         }
 
-        // 如果没有找到分隔符，defaultuse逗号
+        // ifnothave找to分隔符，defaultuse逗号
         return ',';
     }
 
@@ -97,12 +97,12 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
      */
     private function formatCsvCell(string $value): string
     {
-        // 如果单元格content为空，直接return空string
+        // if单元格content为空，直接return空string
         if ($value === '') {
             return '';
         }
 
-        // 如果单元格contentcontain以下任意字符，need用引号package围
+        // if单元格contentcontainby下任意字符，needuse引号package围
         if (str_contains($value, ',')
             || str_contains($value, '"')
             || str_contains($value, "\n")

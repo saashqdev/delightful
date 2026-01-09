@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 表存在就不execute
+        // 表存inthennotexecute
         if (Schema::hasTable('delightful_api_premium_exceptions')) {
             return;
         }
@@ -22,11 +22,11 @@ return new class extends Migration {
         Schema::create('delightful_api_premium_exceptions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('exception_type', 255)->comment('exceptiontype');
-            $table->boolean('can_retry')->comment('是否canretry')->nullable();
-            $table->integer('retry_max_times')->comment('retry最大count')->nullable();
+            $table->boolean('can_retry')->comment('whethercanretry')->nullable();
+            $table->integer('retry_max_times')->comment('retrymost大count')->nullable();
             $table->integer('retry_interval')->comment('retrytime间隔')->nullable();
             $table->datetimes();
-            $table->comment('exceptioninformation表，储存exceptiontype，是否canretry，retry最大count，retrytime间隔');
+            $table->comment('exceptioninformation表，储存exceptiontype，whethercanretry，retrymost大count，retrytime间隔');
         });
     }
 

@@ -97,8 +97,8 @@ JSON, true));
 2、currenttime是:{$currentDateTime}
 -topic_id是：750436587206451201
 -agent_id是：725682656757252096
-​​3、你needcheckday+time  是否比currenttime大，如果不大，needreminderusertime只能是未来的time
-4、你need保证userinput的hint词中，有day, time和name的value
+​​3、你needcheckday+time  whether比currenttime大，ifnot大，needreminderusertime只能是未来的time
+4、你need保证userinput的hint词中，haveday, time和name的value
 
 # 上下文
 
@@ -108,7 +108,7 @@ user的昵称是：currentuser的昵称
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一个scheduletask，taskname：reminder我做饭，从明天开始，每天早上9点execute，显示一条reminder我做饭的message',
+            // 'user_prompt' => '帮我create一个scheduletask，taskname：reminder我做饭，from明天start，each天早上9点execute，显示一条reminder我做饭的message',
             'user_prompt' => '帮我create一个scheduletask，taskname：reminder我做饭，明天10点reminder我，显示一条reminder我做饭的message',
         ]);
 

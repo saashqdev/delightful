@@ -41,7 +41,7 @@ class FlowBreakpointRetryCrontab
         $parallel = new Parallel(50);
         while (true) {
             $parallel->clear();
-            // get所有 10 分钟还在进行中的process
+            // get所have 10 分钟alsoinconduct中的process
             $list = $this->delightfulFlowExecuteLogDomainService->getRunningTimeoutList($flowDataIsolation, 60 * 10, $page);
             if (empty($list)) {
                 break;
@@ -70,7 +70,7 @@ class FlowBreakpointRetryCrontab
         try {
             $flowDataIsolation = FlowDataIsolation::create()->disabled();
 
-            // 实时query最新
+            // 实时querymost新
             $delightfulFlowExecuteLogEntity = $this->delightfulFlowExecuteLogDomainService->getByExecuteId($flowDataIsolation, $delightfulFlowExecuteLogEntity->getExecuteDataId());
             if ($delightfulFlowExecuteLogEntity->getRetryCount() >= 1) {
                 return;

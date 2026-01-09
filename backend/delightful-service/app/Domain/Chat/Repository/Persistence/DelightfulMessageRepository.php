@@ -31,7 +31,7 @@ class DelightfulMessageRepository implements DelightfulMessageRepositoryInterfac
 
     public function getMessages(array $delightfulMessageIds, ?array $rangMessageTypes = null): array
     {
-        // 去除nullvalue
+        // 去exceptnullvalue
         $delightfulMessageIds = array_filter($delightfulMessageIds);
         if (empty($delightfulMessageIds)) {
             return [];
@@ -152,7 +152,7 @@ class DelightfulMessageRepository implements DelightfulMessageRepositoryInterfac
     /**
      * Batch create messages.
      * @param array $messagesData messagedataarray
-     * @return bool 是否createsuccess
+     * @return bool whethercreatesuccess
      */
     public function batchCreateMessages(array $messagesData): bool
     {

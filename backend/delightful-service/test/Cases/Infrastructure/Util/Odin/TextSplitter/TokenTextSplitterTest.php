@@ -126,16 +126,16 @@ class TokenTextSplitterTest extends BaseTest
 ## 二级title1
 
 这是二级title1下的content。
-这里有一些细节instruction。
+这里have一些detailinstruction。
 
 ## 二级title2
 
 这是二级title2下的content。
-这里有一些其他instruction。
+这里have一些其他instruction。
 
 ## 二级title3
 
-这是最后一段content。
+这是most后一段content。
 EOT;
 
         $chunks = $splitter->splitText($text);
@@ -158,7 +158,7 @@ EOT;
 
         // validate第四个块contain二级title3及其content
         $this->assertStringContainsString('## 二级title3', $chunks[3]);
-        $this->assertStringContainsString('这是最后一段content', $chunks[3]);
+        $this->assertStringContainsString('这是most后一段content', $chunks[3]);
     }
 
     public function testMarkdownSplitting2()
@@ -179,16 +179,16 @@ EOT;
 ** 二级title1 **
 
 这是二级title1下的content。
-这里有一些细节instruction。
+这里have一些detailinstruction。
 
 ** 二级title2 **
 
 这是二级title2下的content。
-这里有一些其他instruction。
+这里have一些其他instruction。
 
 ** 二级title3 **
 
-这是最后一段content。
+这是most后一段content。
 EOT;
 
         $chunks = $splitter->splitText($text);
@@ -211,7 +211,7 @@ EOT;
 
         // validate第四个块contain二级title3及其content
         $this->assertStringContainsString('** 二级title3 **', $chunks[3]);
-        $this->assertStringContainsString('这是最后一段content', $chunks[3]);
+        $this->assertStringContainsString('这是most后一段content', $chunks[3]);
     }
 
     public function testTaggedContentProtection()
@@ -234,7 +234,7 @@ EOT;
         $this->assertIsArray($chunks);
         $this->assertNotEmpty($chunks);
 
-        // validatetagcontent被完整保留
+        // validatetagcontentbe完整保留
         $this->assertStringContainsString('testword', $chunks[0]);
         $this->assertStringContainsString('<DelightfulCompressibleContent', $chunks[0]);
         $this->assertStringContainsString('</DelightfulCompressibleContent>', $chunks[0]);
@@ -263,7 +263,7 @@ EOT;
         $this->assertIsArray($chunks);
         $this->assertNotEmpty($chunks);
 
-        // validate所有tagcontent都被完整保留
+        // validate所havetagcontentallbe完整保留
         $this->assertStringContainsString('第一段文本', $chunks[0]);
         $this->assertStringContainsString('第二段文本', $chunks[1]);
         $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">image2.png</DelightfulCompressibleContent>', $chunks[1]);
@@ -291,7 +291,7 @@ EOT;
         $this->assertNotEmpty($chunks);
         $this->assertCount(2, $chunks);
 
-        // validate中文content被correcthandle
+        // validate中文contentbecorrecthandle
         $this->assertStringContainsString('中文test', $chunks[0]);
         $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">中文path/image.png</DelightfulCompressibleContent>', $chunks[0]);
         $this->assertStringContainsString('continuetest', $chunks[1]);

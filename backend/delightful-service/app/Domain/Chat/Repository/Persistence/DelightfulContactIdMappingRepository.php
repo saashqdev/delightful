@@ -41,8 +41,8 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $relationEnvIds = $this->getEnvRelationIds($delightfulEnvironmentEntity);
         $data = $this->delightfulContactIdMappingModel::query();
 
-        // 保持原有的queryfield顺序
-        // according to环境IDquantity选择合适的query方式
+        // 保持原have的queryfield顺序
+        // according to环境IDquantity选择合适的querymethod
         if (count($relationEnvIds) === 1) {
             $data->where('delightful_environment_id', reset($relationEnvIds));
         } else {
@@ -104,8 +104,8 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $relationEnvIds = $this->getEnvRelationIds($delightfulEnvironmentEntity);
         $query = $this->delightfulContactIdMappingModel::query();
 
-        // 保持原有的queryfield顺序
-        // according to环境IDquantity选择合适的query方式
+        // 保持原have的queryfield顺序
+        // according to环境IDquantity选择合适的querymethod
         if (count($relationEnvIds) === 1) {
             $query->where('delightful_environment_id', reset($relationEnvIds));
         } else {
@@ -115,7 +115,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query->whereIn('origin_id', $thirdUserIds)
             ->where('mapping_type', ThirdPlatformIdMappingType::User->value);
 
-        // 有些平台多organizationuser id 一致（such as天书），因此query时不带organizationencoding
+        // have些平台多organizationuser id 一致（such as天书），thereforequery时not带organizationencoding
         $delightfulOrganizationCode && $query->where('delightful_organization_code', $delightfulOrganizationCode);
         $thirdPlatformIdMappingEntities = [];
         $data = $query->where('third_platform_type', $thirdPlatformType->value);
@@ -140,7 +140,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query = $this->delightfulContactIdMappingModel::query()
             ->whereIn('new_id', $delightfulIds)
             ->where('mapping_type', ThirdPlatformIdMappingType::User->value);
-        // 有些平台多organizationuser id 一致（such as天书），因此query时不带organizationencoding
+        // have些平台多organizationuser id 一致（such as天书），thereforequery时not带organizationencoding
         if ($thirdPlatformType !== PlatformType::Teamshare) {
             $delightfulOrganizationCode && $query->where('delightful_organization_code', $delightfulOrganizationCode);
         }
@@ -180,7 +180,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
             $delightfulThirdPlatformIdMappingEntity->setCreatedAt($time);
             $delightfulThirdPlatformIdMappingEntity->setUpdatedAt($time);
             $thirdPlatformIdMappings[] = [
-                'id' => $id, // 暂时把primary key idset为与new_idsame的value，以后有needcan拆分
+                'id' => $id, // 暂时把primary key idset为与new_idsame的value，by后haveneedcan拆分
                 'delightful_organization_code' => $delightfulThirdPlatformIdMappingEntity->getDelightfulOrganizationCode(),
                 'mapping_type' => $delightfulThirdPlatformIdMappingEntity->getMappingType(),
                 'third_platform_type' => $delightfulThirdPlatformIdMappingEntity->getThirdPlatformType(),
@@ -245,7 +245,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 预publish和生产can看做是一个环境，所以这里process一下associate的环境 ids.
+     * 预publish和生产can看做是一个环境，所by这里process一下associate的环境 ids.
      * */
     private function getEnvRelationIds(DelightfulEnvironmentEntity $delightfulEnvironmentEntity): array
     {
@@ -254,7 +254,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
             $relationEnvIds = [$delightfulEnvironmentEntity->getId()];
         } else {
             $relationEnvIds[] = $delightfulEnvironmentEntity->getId();
-            // 对环境ID进行去重process
+            // 对环境IDconduct去重process
             $relationEnvIds = array_unique($relationEnvIds);
         }
         return $relationEnvIds;

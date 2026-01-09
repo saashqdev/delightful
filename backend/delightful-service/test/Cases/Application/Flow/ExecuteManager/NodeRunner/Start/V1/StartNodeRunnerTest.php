@@ -171,7 +171,7 @@ JSON, true));
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());
         $this->assertEquals(['node_2'], $vertexResult->getChildrenIds());
 
-        // 10s内，所以不willexecute
+        // 10s内，所bynotwillexecute
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEmpty($vertexResult->getChildrenIds());
     }
@@ -283,7 +283,7 @@ JSON,
         $this->expectException(BusinessException::class);
         $this->expectExceptionMessage('field名 [conversation_id] 与系统保留fieldconflict，请use其他name');
 
-        // create一个contain系统保留field的节点configuration，这should在validate阶段throwexception
+        // create一个contain系统保留field的节点configuration，这shouldinvalidate阶段throwexception
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {
@@ -339,7 +339,7 @@ JSON,
         $this->expectException(BusinessException::class);
         $this->expectExceptionMessage('field名 [message_type] 与系统保留fieldconflict，请use其他name');
 
-        // test在custom_system_output中use系统保留field
+        // testincustom_system_output中use系统保留field
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {
@@ -395,7 +395,7 @@ JSON,
         $this->expectException(BusinessException::class);
         $this->expectExceptionMessage('JSON Schema formaterror：[user_list] Array type must have items');
 
-        // create一个contain系统保留field的节点configuration，这should在validate阶段throwexception
+        // create一个contain系统保留field的节点configuration，这shouldinvalidate阶段throwexception
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {

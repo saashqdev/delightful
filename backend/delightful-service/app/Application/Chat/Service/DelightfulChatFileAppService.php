@@ -26,8 +26,8 @@ class DelightfulChatFileAppService extends AbstractAppService
     }
 
     /**
-     * passfile_keysave或updatefile
-     * 如果file已存在则update，不存在则create.
+     * passfile_keysaveorupdatefile
+     * iffile已存inthenupdate，not存inthencreate.
      *
      * @param string $fileKey filekey
      * @param DataIsolation $dataIsolation data隔离object
@@ -48,7 +48,7 @@ class DelightfulChatFileAppService extends AbstractAppService
         $fileType = FileType::tryFrom($fileTypeValue) ?? FileType::File;
         $fileEntity->setFileType($fileType);
 
-        // 2. save或updatefile
+        // 2. saveorupdatefile
         $savedFile = $this->delightfulChatFileDomainService->saveOrUpdateByFileKey($fileEntity, $dataIsolation);
 
         // 3. getfileURL

@@ -35,12 +35,12 @@ readonly class OrganizationDomainService
      */
     public function create(OrganizationEntity $organizationEntity): OrganizationEntity
     {
-        // checkencoding是否已存在
+        // checkencodingwhether已存in
         if ($this->organizationRepository->existsByCode($organizationEntity->getDelightfulOrganizationCode())) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_EXISTS);
         }
 
-        // checkcreate者是否存在
+        // checkcreate者whether存in
         $creatorId = $organizationEntity->getCreatorId();
         if ($creatorId !== null) {
             $creator = $this->userDomainService->getUserById((string) $creatorId);
@@ -54,19 +54,19 @@ readonly class OrganizationDomainService
         $savedOrganization = $this->organizationRepository->save($organizationEntity);
 
         if ($creatorId !== null && $savedOrganization->getType() !== 1) {
-            // 个人organization不添加organization管理员
+            // 个人organizationnot添加organization管理员
             // 为create者添加organization管理员permission并mark为organizationcreate人
             try {
                 $dataIsolation = DataIsolation::simpleMake($savedOrganization->getDelightfulOrganizationCode(), (string) $creatorId);
                 $this->organizationAdminDomainService->grant(
                     $dataIsolation,
                     (string) $creatorId,
-                    (string) $creatorId, // 授予者也是create者自己
+                    (string) $creatorId, // 授予者also是create者自己
                     'organizationcreate者自动获得管理员permission',
                     true // mark为organizationcreate人
                 );
             } catch (Throwable $e) {
-                // 如果授予管理员permissionfail，recordlog但不影响organizationcreate
+                // if授予管理员permissionfail，recordlogbutnot影响organizationcreate
                 error_log("Failed to grant organization admin permission for creator {$creatorId}: " . $e->getMessage());
             }
         }
@@ -83,7 +83,7 @@ readonly class OrganizationDomainService
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_NOT_EXISTS);
         }
 
-        // checkencoding是否已存在（排除currentorganization）
+        // checkencodingwhether已存in（排exceptcurrentorganization）
         if ($this->organizationRepository->existsByCode($organizationEntity->getDelightfulOrganizationCode(), $organizationEntity->getId())) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_EXISTS);
         }
@@ -192,7 +192,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * checkorganizationencoding是否可用.
+     * checkorganizationencodingwhether可use.
      */
     public function isCodeAvailable(string $code, ?int $excludeId = null): bool
     {

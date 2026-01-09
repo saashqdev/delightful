@@ -35,11 +35,11 @@ interface DelightfulDepartmentRepositoryInterface
     public function getSubDepartmentsById(string $departmentId, string $organizationCode, int $size, int $offset): DepartmentsPageResponseDTO;
 
     /**
-     * get某一层级的department.
+     * getsome一层级的department.
      */
     public function getSubDepartmentsByLevel(int $level, string $organizationCode, int $depth, int $size, int $offset): DepartmentsPageResponseDTO;
 
-    // 给定的departmentid是否有下级department
+    // 给定的departmentidwhetherhave下级department
     #[ArrayShape([
         [
             'parent_department_id' => 'string',
@@ -53,7 +53,7 @@ interface DelightfulDepartmentRepositoryInterface
     public function searchDepartments(string $departmentName, string $organizationCode, string $pageToken = '', ?int $pageSize = null): array;
 
     /**
-     * getorganization的所有department.
+     * getorganization的所havedepartment.
      * @return DelightfulDepartmentEntity[]
      */
     public function getOrganizationDepartments(string $organizationCode, array $fields = ['*'], bool $keyById = false): array;
@@ -64,7 +64,7 @@ interface DelightfulDepartmentRepositoryInterface
     public function addDepartmentDocument(string $departmentId, string $documentId): void;
 
     /**
-     * getdepartment的所有子department的membertotal.
+     * getdepartment的所have子department的membertotal.
      */
     public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int;
 

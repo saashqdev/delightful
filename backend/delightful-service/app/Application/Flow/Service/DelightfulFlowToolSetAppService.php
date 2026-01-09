@@ -75,7 +75,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = PermissionDataIsolation::create($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
 
-        // 仅query目前user具有permission的tool集
+        // 仅query目前user具havepermission的tool集
         $resources = $this->operationPermissionAppService->getResourceOperationByUserIds(
             $permissionDataIsolation,
             ResourceType::ToolSet,
@@ -83,7 +83,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         )[$authorization->getId()] ?? [];
         $resourceIds = array_keys($resources);
 
-        // 其实不太适合的 whereIn 暂时没想到其他好办法
+        // 其实nottoo适合的 whereIn 暂时not想to其他好way
         $query->setCodes($resourceIds);
 
         $data = $this->delightfulFlowToolSetDomainService->queries($dataIsolation, $query, $page);

@@ -15,17 +15,17 @@ class StreamOptions extends AbstractEntity
 
     protected bool $stream;
 
-    // 用于标识streammessage的associate性。多段streammessage的 stream_app_message_id same
+    // useat标识streammessage的associate性。多段streammessage的 stream_app_message_id same
     // ai searchcardmessage的多段response，已经将 app_message_id 作为associate id，streamresponseneed另外的 id 来做associate
     protected string $streamAppMessageId;
 
     /**
-     * messageapplicationoption：0:覆盖 1：追加（string就拼接，array就插入）.
+     * messageapplicationoption：0:覆盖 1：追加（stringthen拼接，arraythen插入）.
      */
     protected MessageAppendOptions $append;
 
     /**
-     * issuesearch结束的标识，用于前端渲染结束动画。或者pushexceptioninfo。
+     * issuesearchend的标识，useat前端渲染end动画。or者pushexceptioninfo。
      * @var StepFinishedDTO[]
      */
     protected array $stepsFinished;
@@ -41,7 +41,7 @@ class StreamOptions extends AbstractEntity
         return $this;
     }
 
-    // message是否是streammessage
+    // messagewhether是streammessage
     public function isStream(): bool
     {
         return $this->stream ?? true;

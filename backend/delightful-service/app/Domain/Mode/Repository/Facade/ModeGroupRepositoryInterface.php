@@ -45,7 +45,7 @@ interface ModeGroupRepositoryInterface
     public function delete(ModeDataIsolation $dataIsolation, int|string $id): bool;
 
     /**
-     * according tomodeIDdelete所有分group.
+     * according tomodeIDdelete所have分group.
      */
     public function deleteByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): bool;
 

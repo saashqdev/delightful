@@ -11,10 +11,10 @@ use App\Domain\Chat\Entity\AbstractEntity;
 
 class JsonStreamCachedDTO extends AbstractEntity
 {
-    // 避免频繁操作datalibrary，在内存中cachesendmessage的 sender_message_id
+    // 避免频繁操作datalibrary，in内存中cachesendmessage的 sender_message_id
     protected string $senderMessageId;
 
-    // 避免频繁操作datalibrary，在内存中cachereceivemessage的 receive_message_id
+    // 避免频繁操作datalibrary，in内存中cachereceivemessage的 receive_message_id
     protected string $receiveMessageId;
 
     /**
@@ -32,7 +32,7 @@ class JsonStreamCachedDTO extends AbstractEntity
      */
     protected array $content;
 
-    // 避免频繁操作datalibrary，record最后一次updatedatalibrary的time
+    // 避免频繁操作datalibrary，recordmost后一次updatedatalibrary的time
     protected ?int $lastUpdateDatabaseTime;
 
     public function getLastUpdateDatabaseTime(): ?int

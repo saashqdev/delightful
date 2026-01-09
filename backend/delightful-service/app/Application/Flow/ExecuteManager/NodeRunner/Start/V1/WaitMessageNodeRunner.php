@@ -19,7 +19,7 @@ use App\Infrastructure\Core\Dag\VertexResult;
 #[FlowNodeDefine(
     type: NodeType::WaitMessage->value,
     code: NodeType::WaitMessage->name,
-    name: '等待',
+    name: 'etc待',
     paramsConfig: WaitMessageNodeParamsConfig::class,
     version: 'v1',
     singleDebug: false,
@@ -33,7 +33,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
         $dataIsolation = $executionData->getDataIsolation();
         $waitMessageDomainService = di(DelightfulFlowWaitMessageDomainService::class);
 
-        // if是作为开始节点
+        // if是作为start节点
         if ($executionData->getTriggerType() === TriggerType::WaitMessage) {
             $result = $this->chatMessage($vertexResult, $executionData);
             $vertexResult->setResult($result);
@@ -41,7 +41,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
             return;
         }
 
-        // if是作为运行节点 仅record，then结束when前execute
+        // if是作为运行节点 仅record，thenendwhen前execute
         $waitMessageEntity = new DelightfulFlowWaitMessageEntity();
         $waitMessageEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $waitMessageEntity->setConversationId($executionData->getConversationId());
@@ -60,7 +60,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
             $waitMessageEntity->setTimeout(time() + $intervalSeconds);
         }
 
-        // 暂时还是放到datalibrary中，后续考虑放到 objectstorage 中
+        // 暂时also是放todatalibrary中，后续考虑放to objectstorage 中
         $persistenceData = $executionData->getPersistenceData();
         $waitMessageEntity->setPersistentData($persistenceData);
 

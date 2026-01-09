@@ -15,8 +15,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_chat_messages', static function (Blueprint $table) {
-            // 由于聚合search的存在，messagecontent可能will很长，所以将fieldtype改为longText
-            $table->longText('content')->comment('messagedetail。由于聚合search的存在，messagecontent可能will很长，所以将fieldtype改为longText')->change();
+            // 由at聚合search的存in，messagecontent可能willvery长，所by将fieldtype改为longText
+            $table->longText('content')->comment('messagedetail。由at聚合search的存in，messagecontent可能willvery长，所by将fieldtype改为longText')->change();
         });
     }
 

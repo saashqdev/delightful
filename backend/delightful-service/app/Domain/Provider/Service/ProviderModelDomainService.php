@@ -48,15 +48,15 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * passID或ModelIDquerymodel
-     * based on可用modellist进行匹配，同时匹配id和model_idfield.
+     * passIDorModelIDquerymodel
+     * based on可usemodellistconduct匹配，meanwhile匹配id和model_idfield.
      */
     public function getByIdOrModelId(ProviderDataIsolation $dataIsolation, string $id): ?ProviderModelEntity
     {
-        // get所有category的可用model
+        // get所havecategory的可usemodel
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
-        // 循环判断 id equal $id 或者 model_id equal $id
+        // 循环判断 id equal $id or者 model_id equal $id
         foreach ($allModels as $model) {
             if ((string) $model->getId() === $id || $model->getModelId() === $id) {
                 return $model;
@@ -93,13 +93,13 @@ readonly class ProviderModelDomainService
         }
 
         if ($providerModelDTO->getId()) {
-            // updatemodel：verifymodel是否存在（getByIdwill在不存在时throwexception）
+            // updatemodel：verifymodelwhether存in（getByIdwillinnot存in时throwexception）
             $this->providerModelRepository->getById($dataIsolation, $providerModelDTO->getId());
         } else {
             // createmodel时defaultenable
             $providerModelDTO->setStatus(Status::Enabled);
         }
-        // verify service_provider_config_id 是否存在
+        // verify service_provider_config_id whether存in
         if ($providerModelDTO->getServiceProviderConfigId()) {
             $providerConfigEntity = $this->providerConfigRepository->getById($dataIsolation, (int) $providerModelDTO->getServiceProviderConfigId());
             if ($providerConfigEntity === null) {
@@ -107,7 +107,7 @@ readonly class ProviderModelDomainService
             }
         }
 
-        // 目前savemodel的interface只有大modeluse，因此forcetype是 llm
+        // 目前savemodel的interfaceonly大modeluse，thereforeforcetype是 llm
         $providerModelDTO->setCategory(Category::LLM);
         $modelEntity = $this->providerModelRepository->saveModel($dataIsolation, $providerModelDTO);
 
@@ -137,7 +137,7 @@ readonly class ProviderModelDomainService
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $ids modelIDarray
-     * @return ProviderModelEntity[] model实体array，以ID为键
+     * @return ProviderModelEntity[] model实体array，byID为键
      */
     public function getModelsByIds(ProviderDataIsolation $dataIsolation, array $ids): array
     {
@@ -154,7 +154,7 @@ readonly class ProviderModelDomainService
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $modelIds model标识array
-     * @return array<string, ProviderModelEntity[]> model实体array，以model_id为键，value为对应的modellist
+     * @return array<string, ProviderModelEntity[]> model实体array，bymodel_id为键，value为对应的modellist
      */
     public function getModelsByModelIds(ProviderDataIsolation $dataIsolation, array $modelIds): array
     {
@@ -182,11 +182,11 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * get指定model的最新configurationversionID.
+     * get指定model的most新configurationversionID.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param int $serviceProviderModelId modelID
-     * @return null|int 最新version的ID，如果不存在则returnnull
+     * @return null|int most新version的ID，ifnot存inthenreturnnull
      */
     public function getLatestConfigVersionId(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?int
     {
@@ -194,11 +194,11 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * get指定model的最新configurationversion实体.
+     * get指定model的most新configurationversion实体.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param int $serviceProviderModelId modelID
-     * @return null|ProviderModelConfigVersionEntity 最新version的实体，如果不存在则returnnull
+     * @return null|ProviderModelConfigVersionEntity most新version的实体，ifnot存inthenreturnnull
      */
     public function getLatestConfigVersionEntity(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?ProviderModelConfigVersionEntity
     {
@@ -210,12 +210,12 @@ readonly class ProviderModelDomainService
      */
     private function saveConfigVersion(ProviderDataIsolation $dataIsolation, ProviderModelEntity $modelEntity): void
     {
-        // 如果configuration为空，不createversionrecord
+        // ifconfiguration为空，notcreateversionrecord
         if ($modelEntity->getConfig() === null) {
             return;
         }
 
-        // convert为configurationversion实体并save（transaction、version号递增、markcurrentversion都在 Repository 内complete）
+        // convert为configurationversion实体并save（transaction、version号递增、markcurrentversionallin Repository 内complete）
         $versionEntity = ProviderModelAssembler::toConfigVersionEntity($modelEntity);
         $this->providerModelConfigVersionRepository->saveVersionWithTransaction($dataIsolation, $versionEntity);
     }

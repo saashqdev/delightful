@@ -20,8 +20,8 @@ use Hyperf\Codec\Json;
 /**
  * service_provider_config_id 对应的service商+modellist。
  *
- * 同一个service商在different的organization下有different的 service_provider_config_id。
- * 一个service_provider_config_id对应多个具体的model。
+ * 同一个service商indifferent的organization下havedifferent的 service_provider_config_id。
+ * 一个service_provider_config_id对应多个specific的model。
  */
 class ProviderConfigDTO extends AbstractDTO
 {
@@ -41,12 +41,12 @@ class ProviderConfigDTO extends AbstractDTO
     protected string $serviceProviderId = '';
 
     /**
-     * 大model的具体configuration，ak,sk,host 之类（已脱敏）.
+     * 大model的specificconfiguration，ak,sk,host 之类（已脱敏）.
      */
     protected ?ProviderConfigItem $config = null;
 
     /**
-     * 已decrypt的configuration，不进行data脱敏process.
+     * 已decrypt的configuration，notconductdata脱敏process.
      */
     protected ?ProviderConfigItem $decryptedConfig = null;
 
@@ -343,7 +343,7 @@ class ProviderConfigDTO extends AbstractDTO
             $this->decryptedConfig = $decryptedConfig;
         }
 
-        // 注意：已decrypt的configuration不进行data脱敏process
+        // 注意：已decrypt的configurationnotconductdata脱敏process
     }
 
     public function getIsModelsEnable(): bool

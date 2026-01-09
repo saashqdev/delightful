@@ -76,7 +76,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $permissions = $this->permissionEnum->generateAllPermissions();
 
         $this->assertIsArray($permissions);
-        // should有 2 个资源 × 2 个操作 = 4 个permission（排除export操作）
+        // shouldhave 2 个资源 × 2 个操作 = 4 个permission（排exceptexport操作）
         $this->assertCount(4, $permissions);
 
         // checkpermission结构
@@ -87,12 +87,12 @@ class DelightfulPermissionEnumTest extends HttpTestCase
             $this->assertArrayHasKey('resource_label', $permission);
             $this->assertArrayHasKey('operation_label', $permission);
 
-            // check具体value
+            // checkspecificvalue
             $this->assertContains($permission['resource'], $this->permissionEnum->getResources());
             $this->assertContains($permission['operation'], $this->permissionEnum->getOperations());
         }
 
-        // check特定permission是否存在
+        // check特定permissionwhether存in
         $permissionKeys = array_column($permissions, 'permission_key');
         $this->assertContains('admin.ai.model_management.query', $permissionKeys);
         $this->assertContains('admin.ai.model_management.manage', $permissionKeys);
@@ -102,7 +102,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
 
     public function testIsValidPermissionWithValidKeys()
     {
-        // test全局permission
+        // testall局permission
         $this->assertTrue($this->permissionEnum->isValidPermission(DelightfulPermission::ALL_PERMISSIONS));
 
         // testvalid的permissiongroup合
@@ -125,11 +125,11 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     {
         $tree = $this->permissionEnum->getPermissionTree();
 
-        // default情况下（非平台organization）不contain platform 平台节点
+        // default情况下（non平台organization）notcontain platform 平台节点
         $this->assertIsArray($tree);
         $this->assertGreaterThanOrEqual(1, count($tree));
 
-        // 找到 Admin 平台节点进行进一步校验
+        // 找to Admin 平台节点conduct进一步校验
         $platformsByKey = [];
         foreach ($tree as $node) {
             $platformsByKey[$node['permission_key']] = $node;
@@ -155,14 +155,14 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     }
 
     /**
-     * test私有methodisValidCombination的行为
+     * test私havemethodisValidCombination的行为
      * passgenerateAllPermissions间接test.
      */
     public function testIsValidCombinationThroughGenerateAllPermissions()
     {
         $permissions = $this->permissionEnum->generateAllPermissions();
 
-        // ensure没有export操作的permission
+        // ensurenothaveexport操作的permission
         foreach ($permissions as $permission) {
             $this->assertNotEquals('export', $permission['operation']);
         }

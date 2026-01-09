@@ -27,13 +27,13 @@ class DelightfulFlowToolSetDTO extends AbstractFlowDTO
     public string $icon = '';
 
     /**
-     * 用于冗余tool的information列表.
+     * useat冗余tool的information列表.
      */
     public array $tools = [];
 
     /**
      * quotequantity.
-     * 被 n 个助理application.
+     * be n 个助理application.
      */
     public int $agentUsedCount = 0;
 

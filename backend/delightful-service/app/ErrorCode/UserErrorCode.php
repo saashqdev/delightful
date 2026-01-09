@@ -51,11 +51,11 @@ enum UserErrorCode: int
     case ACCOUNT_REPEAT_BIND_PARTNER = 2172;
     case ACCOUNT_REPEAT_BIND_STAFF = 2173;
 
-    // usercreate太频繁
+    // usercreatetoo频繁
     #[ErrorMessage('user.create_user_too_frequently')]
     case CREATE_USER_TOO_FREQUENTLY = 2174;
 
-    // createidassociate关系太频繁
+    // createidassociate关系too频繁
     #[ErrorMessage('user.create_id_relation_too_frequently')]
     case CREATE_ID_RELATION_TOO_FREQUENTLY = 2175;
 
@@ -66,7 +66,7 @@ enum UserErrorCode: int
     #[ErrorMessage('user.phone_login_is_exist')]
     case PHONE_INVALID = 2178;
 
-    // auth_token 不存在
+    // auth_token not存in
     #[ErrorMessage('user.token_not_found')]
     case TOKEN_NOT_FOUND = 2179;
 
@@ -78,7 +78,7 @@ enum UserErrorCode: int
     #[ErrorMessage('user.receive_type_error')]
     case RECEIVE_TYPE_ERROR = 2181;
 
-    // user所在organization不存在
+    // user所inorganizationnot存in
     #[ErrorMessage('user.organization_not_exist')]
     case ORGANIZATION_NOT_EXIST = 2182;
 
@@ -90,7 +90,7 @@ enum UserErrorCode: int
     #[ErrorMessage('user.user_type_error')]
     case USER_TYPE_ERROR = 2184;
 
-    // organization没有authorization
+    // organizationnothaveauthorization
     #[ErrorMessage('user.organization_not_authorize')]
     case ORGANIZATION_NOT_AUTHORIZE = 2185;
 }

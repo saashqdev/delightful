@@ -32,7 +32,7 @@ class AppExceptionHandler extends ExceptionHandler
     public function handle(Throwable $throwable, ResponseInterface $response): MessageInterface|ResponseInterface
     {
         if ($throwable instanceof SocketException) {
-            // tcplink正常disconnect,不need打印exception
+            // tcplink正常disconnect,notneed打印exception
             return $response;
         }
         $request = $this->container->get(RequestInterface::class);

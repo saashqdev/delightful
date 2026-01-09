@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Entity\ValueObject\MessageType;
 
 /**
  * chatmessagecontent的type.
- * value从0开始.
+ * valuefrom0start.
  */
 enum ChatMessageType: string
 {
@@ -65,12 +65,12 @@ enum ChatMessageType: string
     // image转高清
     case ImageConvertHighCard = 'image_convert_high_card';
 
-    // 通用 agent message
+    // 通use agent message
     case BeAgentCard = 'general_agent_card';
 
     /**
      * 未知message。
-     * 由于version迭代，发版timediff等原因，可能产生未知type的message。
+     * 由atversion迭代，发版timediffetcreason，可能产生未知type的message。
      */
     case Unknown = 'unknown';
 

@@ -87,7 +87,7 @@ class KnowledgeBaseApi extends AbstractKnowledgeBaseApi
         if (empty($fileKey)) {
             return [];
         }
-        // 校验file_keyformat，must以organization/applicationid/knowledge-base/开头
+        // 校验file_keyformat，mustbyorganization/applicationid/knowledge-base/开头
         if (! preg_match('/^[a-zA-Z0-9]+\/[0-9]+\/knowledge-base\/.*$/', $fileKey)) {
             ExceptionBuilder::throw(AuthenticationErrorCode::ValidateFailed);
         }

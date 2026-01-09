@@ -29,10 +29,10 @@ class OperationPermissionApiTest extends AbstractHttpTest
      */
     public function testGetUserOrganizationAdminListSuccess(): void
     {
-        // sendGETrequest到APIinterface
+        // sendGETrequesttoAPIinterface
         $response = $this->get(self::API, [], $this->getCommonHeaders());
 
-        // 如果returnautherror，skiptest
+        // ifreturnautherror，skiptest
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003])) {
             $this->markTestSkipped('interfaceauthfail，可能need其他authconfiguration - interfacerouteverify正常');
             return;

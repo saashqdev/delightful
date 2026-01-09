@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 只有当table存在时才execute索引操作
+        // onlywhentable存in时才execute索引操作
         if (Schema::hasTable('delightful_chat_sequences')) {
             // check并create idx_object_type_id_refer_message_id 索引
             $this->createIndexIfNotExists(
@@ -56,7 +56,7 @@ return new class extends Migration {
     }
 
     /**
-     * check索引是否存在，如果不存在则create索引.
+     * check索引whether存in，ifnot存inthencreate索引.
      *
      * @param string $table table名
      * @param string $indexName 索引name
@@ -64,13 +64,13 @@ return new class extends Migration {
      */
     private function createIndexIfNotExists(string $table, string $indexName, string $createStatement): void
     {
-        // check索引是否存在
+        // check索引whether存in
         $indexExists = Db::select(
             "SHOW INDEX FROM `{$table}` WHERE Key_name = ?",
             [$indexName]
         );
 
-        // 只有当索引不存在时才create
+        // onlywhen索引not存in时才create
         if (empty($indexExists)) {
             // create索引
             Db::statement($createStatement);
@@ -78,21 +78,21 @@ return new class extends Migration {
     }
 
     /**
-     * 如果索引存在则delete.
+     * if索引存inthendelete.
      *
      * @param string $table table名
      * @param string $indexName 索引name
      */
     private function dropIndexIfExists(string $table, string $indexName): void
     {
-        // check索引是否存在
+        // check索引whether存in
         $indexExists = Db::select(
             "SHOW INDEX FROM `{$table}` WHERE Key_name = ?",
             [$indexName]
         );
 
         if (! empty($indexExists)) {
-            // delete现有索引
+            // delete现have索引
             Db::statement("DROP INDEX `{$indexName}` ON `{$table}`");
         }
     }

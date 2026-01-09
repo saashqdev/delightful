@@ -38,7 +38,7 @@ return new class extends Migration {
             $table->unique(['third_union_id', 'third_platform_type', 'delightful_organization_code'], 'unique_third_id');
             $table->softDeletes();
             $table->timestamps();
-            $table->comment('第三方平台sync过来的userinfotable. 不过天书有点特殊,can直接把天书的user当做麦吉的user.');
+            $table->comment('第三方平台sync过来的userinfotable. not过天书have点特殊,can直接把天书的userwhen做麦吉的user.');
         });
     }
 

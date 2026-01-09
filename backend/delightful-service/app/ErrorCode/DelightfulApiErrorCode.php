@@ -14,7 +14,7 @@ use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
  */
 enum DelightfulApiErrorCode: int
 {
-    // token不存在
+    // tokennot存in
     #[ErrorMessage(message: 'api.token.not_exist')]
     case TOKEN_NOT_EXIST = 4000;
 
@@ -27,7 +27,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.token.organization_not_support')]
     case TOKEN_ORGANIZATION_NOT_SUPPORT = 4003;
 
-    // ip不在白名单
+    // ipnotin白名单
     #[ErrorMessage(message: 'api.token.ip_not_in_white_list')]
     case TOKEN_IP_NOT_IN_WHITE_LIST = 4004;
 
@@ -35,11 +35,11 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.token.expired')]
     case TOKEN_EXPIRED = 4005;
 
-    // organization的quota不足
+    // organization的quotanot足
     #[ErrorMessage(message: 'api.organization.quota_not_enough')]
     case ORGANIZATION_QUOTA_NOT_ENOUGH = 4006;
 
-    // accessToken quota不足
+    // accessToken quotanot足
     #[ErrorMessage(message: 'api.token.quota_not_enough')]
     case TOKEN_QUOTA_NOT_ENOUGH = 4007;
 
@@ -55,7 +55,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.msg_empty')]
     case MSG_EMPTY = 4010;
 
-    // user不存在
+    // usernot存in
     #[ErrorMessage(message: 'api.user_id_not_exist')]
     case USER_ID_NOT_EXIST = 4011;
 
@@ -83,11 +83,11 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.model.response_fail')]
     case MODEL_RESPONSE_FAIL = 4017;
 
-    // 通用verifyfailed
+    // 通useverifyfailed
     #[ErrorMessage(message: 'api.validate_failed')]
     case ValidateFailed = 4018;
 
-    // token被disable
+    // tokenbedisable
     #[ErrorMessage(message: 'api.token.disabled')]
     case TOKEN_DISABLED = 4019;
 }

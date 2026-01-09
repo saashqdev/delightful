@@ -57,7 +57,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         /** @var ReplyMessageNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        // 如果具有 大model的streamresponse体，那么直接开始
+        // if具have 大model的streamresponse体，那么直接start
         if ($executionData->getExecutionType()->isSupportStream() && ! empty($frontResults['chat_completion_choice_generator'])) {
             $streamResponse = $this->sendMessageForStream($executionData, $frontResults);
             // generate大model节点的response给回去
@@ -73,10 +73,10 @@ class ReplyMessageNodeRunner extends NodeRunner
             $paramsConfig->getLinkDesc()
         );
 
-        // 如果是资源类的data，那么need提前upload了
+        // if是资源类的data，那么need提前upload了
         $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
-        // 由于里面will进行重命名，所以这里直接get对应的name传入进去
+        // 由at里面willconduct重命名，所by这里直接get对应的name传入进去
         $linkPaths = array_map(function (AbstractAttachment $attachment) {
             return $attachment->getPath();
         }, $attachments);
@@ -108,7 +108,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $this->sendMessageForStreamApi($executionData, $chatCompletionChoiceGenerator, $streamResponse);
         }
 
-        // Chat call，每次stream都是一条新message
+        // Chat call，each次streamall是一条新message
         if ($executionData->getExecutionType()->isImChat()) {
             $this->sendMessageForStreamIMChat($executionData, $chatCompletionChoiceGenerator, $streamResponse);
         }
@@ -148,7 +148,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         $messageStruct = new Message($IMResponse->toArray(), $executionData->getOriginConversationId(), $IMResponse, version: $executionData->getStreamVersion());
         $messageStruct->setId($id);
         if ($executionData->isStream()) {
-            // 开始
+            // start
             $startMessageStruct = new Message([], $executionData->getOriginConversationId(), version: $executionData->getStreamVersion());
             $startMessageStruct->setId($id);
             FlowEventStreamManager::write($startMessageStruct->toSteamResponse('start'));
@@ -205,7 +205,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                 $receiveSeqDTO->setContent($IMResponse);
                 $receiveSeqDTO->setSeqType($IMResponse->getMessageTypeEnum());
 
-                // todo according to开始节点configuration的话题来选择话题
+                // todo according tostart节点configuration的话题来选择话题
 
                 $delightfulChatMessageAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $userId, IdGenerator::getUniqueId32());
             });
@@ -225,7 +225,7 @@ class ReplyMessageNodeRunner extends NodeRunner
 
         $outputCall = function (string $data, array $compressibleContent, array $params) use ($id, $conversationId, $version) {
             if (! empty($compressibleContent)) {
-                // 如果有compresscontent，那么decompressdata再output
+                // ifhavecompresscontent，那么decompressdataagainoutput
                 $data = CompressibleContent::deCompress($data, false);
             }
 
@@ -306,12 +306,12 @@ class ReplyMessageNodeRunner extends NodeRunner
             $receiveSeqDTO->setReferMessageId($flowSeqEntity->getMessageId());
         }
 
-        // send开始mark
+        // sendstartmark
         $chatAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $receiveUserId, $appMessageId, receiverType: ConversationType::User);
 
         $outputCall = function (string $data, array $compressibleContent, array $params) use ($chatAppService, $appMessageId, $aiUserId, $receiveUserId) {
             if (! empty($compressibleContent)) {
-                // 如果有compresscontent，那么decompressdata再output
+                // ifhavecompresscontent，那么decompressdataagainoutput
                 $data = CompressibleContent::deCompress($data, false);
             }
 
@@ -379,7 +379,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $receiveSeqDTO->setContent($messageContent);
             $chatAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $receiveUserId, $appMessageId, receiverType: ConversationType::User);
         } finally {
-            // send结束mark
+            // sendendmark
             $streamOptions->setStatus(StreamMessageStatus::Completed);
             $messageContent->setContent('end');
             $messageContent->setStreamOptions($streamOptions);
@@ -398,7 +398,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         foreach ($recipientsData as $recipient) {
             $userId = null;
             if (is_array($recipient)) {
-                // 引入一个的时候
+                // 引入一个的time
                 if (isset($recipient['type'])) {
                     switch ($recipient['type']) {
                         case 'department':
@@ -412,7 +412,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                     }
                     continue;
                 }
-                // 引入多个的时候
+                // 引入多个的time
                 foreach ($recipient as $item) {
                     if (is_string($item)) {
                         $userIds[] = $item;
@@ -437,12 +437,12 @@ class ReplyMessageNodeRunner extends NodeRunner
             $userIds = array_merge($userIds, $this->getUserIdsByDepartmentIds($executionData, $departmentIds));
         }
 
-        // 如果为空，兜底currentuser
+        // if为空，兜底currentuser
         if (empty($userIds)) {
             $userIds[] = $executionData->getOperator()->getUid();
         }
 
-        // filter不legal的user
+        // filternotlegal的user
         $userIds = array_values(array_unique($userIds));
 
         return Db::table('delightful_contact_users')

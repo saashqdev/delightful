@@ -22,7 +22,7 @@ use Throwable;
 class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
 {
     /**
-     * checkknowledge base的向量集合是否存在.
+     * checkknowledge base的to量集合whether存in.
      *
      * @throws BusinessException
      */
@@ -31,7 +31,7 @@ class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
         $vector = $knowledgeBaseEntity->getVectorDBDriver();
         $collection = $vector->getCollection($knowledgeBaseEntity->getCollectionName());
         if (! $collection) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'collection不存在');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'collectionnot存in');
         }
         return true;
     }
@@ -45,7 +45,7 @@ class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
         KnowledgeBaseDocumentEntity $documentEntity
     ): bool {
         try {
-            // 先get所有分段
+            // 先get所have分段
             $fragmentQuery = new KnowledgeBaseFragmentQuery();
             $fragmentQuery->setKnowledgeCode($knowledge->getCode());
             $fragmentQuery->setDocumentCode($documentEntity->getCode());
@@ -65,7 +65,7 @@ class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
              */
             $fragmentEntities = array_merge(...$fragmentEntities);
 
-            // 再delete片段
+            // againdelete片段
             foreach ($fragmentEntities as $fragmentEntity) {
                 $this->knowledgeBaseFragmentDomainService->destroy($dataIsolation, $knowledge, $fragmentEntity);
             }
@@ -90,9 +90,9 @@ class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
 
         $documentEntity->setSyncStatus(KnowledgeSyncStatus::Syncing->value);
         $this->knowledgeBaseDocumentDomainService->changeSyncStatus($dataIsolation, $documentEntity);
-        $this->logger->info('正在parsefile，file名：' . $documentFile->getName());
+        $this->logger->info('正inparsefile，file名：' . $documentFile->getName());
         $content = $this->documentFileStrategy->parseContent($dataIsolation, $documentFile, $knowledgeBaseEntity->getCode());
-        $this->logger->info('parsefilecomplete，正在file分段，file名：' . $documentFile->getName());
+        $this->logger->info('parsefilecomplete，正infile分段，file名：' . $documentFile->getName());
         $splitText = $this->knowledgeBaseFragmentDomainService->processFragmentsByContent($dataIsolation, $content, $documentEntity->getFragmentConfig());
         $this->logger->info('file分段complete，file名：' . $documentFile->getName() . '，分段quantity:' . count($splitText));
 

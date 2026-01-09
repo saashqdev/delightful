@@ -13,7 +13,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 将现有的 'accepted' statusupdate为 'active' status
+        // 将现have的 'accepted' statusupdate为 'active' status
         Db::table('delightful_long_term_memories')
             ->where('status', 'accepted')
             ->update(['status' => 'active']);

@@ -134,7 +134,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendOneOnOneChatMessages($param);
             } catch (Throwable $throwable) {
-                // 钉钉 downloadimagetime较长，超过了3000ms，网关直接return了timeouterror。sendmessage此时skip
+                // 钉钉 downloadimagetimemore长，超过了3000ms，网关直接return了timeouterror。sendmessage此时skip
                 simple_log('SendOneOnOneChatMessagesError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -152,7 +152,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendGroupMessage($param);
             } catch (Throwable $throwable) {
-                // 钉钉 downloadimagetime较长，超过了3000ms，网关直接return了timeouterror。sendmessage此时skip
+                // 钉钉 downloadimagetimemore长，超过了3000ms，网关直接return了timeouterror。sendmessage此时skip
                 simple_log('SendGroupMessageError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -265,7 +265,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             realName: $userInfo->getName(),
         );
 
-        // getuser的所有department上级
+        // getuser的所havedepartment上级
         $param = new GetAllParentDepartmentByUserParameter($this->openDevFactory->accessTokenEndpoint->get());
         $param->setUserId($thirdPlatformChatMessage->getUserId());
         $list = $this->openDevFactory->departmentEndpoint->getAllParentDepartmentByUser($param);

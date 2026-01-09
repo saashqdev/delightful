@@ -81,7 +81,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
     protected function loadAgentPlugins(FlowDataIsolation $flowDataIsolation, ModelInterface $model, AbstractLLMNodeParamsConfig $LLMNodeParamsConfig, string &$systemPrompt): void
     {
         $mcpServerConfigs = [];
-        // load Agent 的plugin。一般就是loadtool和追加systemprompt词，先做着两个的吧
+        // load Agent 的plugin。generalthen是loadtool和追加systemprompt词，先做着两个的吧
         foreach ($LLMNodeParamsConfig->getAgentPlugins() as $agentPlugin) {
             $appendSystemPrompt = $agentPlugin->getAppendSystemPrompt();
             if ($appendSystemPrompt !== '') {
@@ -124,7 +124,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
                 topicId: $executionData->getTopicId(),
                 limit: $modelConfig->getMaxRecord(),
             );
-            // if来源的是第third-partychattool，仅get最近 3 小时的记忆
+            // if来源is第third-partychattool，仅getmost近 3 小时的记忆
             if ($executionData->isThirdPlatformChat()) {
                 $memoryQuery->setStartTime(new DateTime('-3 hours'));
             }

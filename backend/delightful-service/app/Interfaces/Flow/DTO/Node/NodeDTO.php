@@ -25,7 +25,7 @@ class NodeDTO extends AbstractFlowDTO
     public string $nodeVersion = '';
 
     /**
-     * 节点元data，可用作给前端的定位，后端仅storage和展示，没有任何逻辑.
+     * 节点元data，可use作给前端的定位，后端仅storage和展示，nothave任何逻辑.
      */
     public array $meta = [];
 
@@ -60,7 +60,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get是否为debug模式.
+     * getwhether为debug模式.
      */
     public function isDebug(): bool
     {
@@ -73,7 +73,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set是否为debug模式.
+     * setwhether为debug模式.
      */
     public function setDebug(?bool $debug): self
     {

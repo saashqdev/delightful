@@ -15,7 +15,7 @@ class CreateDelightfulChatGroupTable extends Migration
      */
     public function up(): void
     {
-        // 判断表是否存在
+        // 判断表whether存in
         if (Schema::hasTable('delightful_chat_groups')) {
             return;
         }
@@ -27,7 +27,7 @@ class CreateDelightfulChatGroupTable extends Migration
             $table->string('group_owner', 64)->comment('群主');
             // 群所属organization
             $table->string('organization_code', 64)->comment('群organizationencoding')->default('');
-            $table->string('group_tag', 64)->comment('群tag:0:无tag,1:外部群；2：内部群;3:全员群')->default('0');
+            $table->string('group_tag', 64)->comment('群tag:0:无tag,1:外部群；2：内部群;3:all员群')->default('0');
             $table->tinyInteger('group_type')->default(1)->comment('群type,1:conversation；2：话题');
             $table->tinyInteger('group_status')->default(1)->comment('群status,1:正常；2：解散');
             // member上限

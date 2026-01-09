@@ -40,7 +40,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
      * settingqueue优先级parameter.
      */
     protected AMQPTable|array $arguments = [
-        'x-ha-policy' => ['S', 'all'], // 将queue镜像到所有节点,hyperf defaultconfiguration
+        'x-ha-policy' => ['S', 'all'], // 将queue镜像to所have节点,hyperf defaultconfiguration
     ];
 
     protected MessagePriority $priority;
@@ -63,7 +63,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
     }
 
     /**
-     * inherit以implementsettingqueue相关parameter.
+     * inheritbyimplementsettingqueue相关parameter.
      */
     public function getQueueBuilder(): QueueBuilder
     {
@@ -72,7 +72,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
 
     protected function setSeqCanNotRetry(string $retryCacheKey)
     {
-        // 不再重推
+        // notagain重推
         try {
             $this->redis->set($retryCacheKey, 3);
             $this->redis->expire($retryCacheKey, 3600);
@@ -82,7 +82,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
 
     protected function addSeqRetryNumber(string $retryCacheKey)
     {
-        // 不再重推
+        // notagain重推
         try {
             $this->redis->incr($retryCacheKey);
             $this->redis->expire($retryCacheKey, 3600);

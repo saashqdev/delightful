@@ -34,7 +34,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     protected MCPServerAppService $mcpServerAppService;
 
     /**
-     * get所有节点的version.
+     * get所have节点的version.
      */
     public function nodeVersions()
     {
@@ -100,7 +100,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
         $delightfulFlowDO = DelightfulFlowAssembler::createDelightfulFlowDO($delightfulFlowDTO);
         $delightfulFlowDO->setCode($flowId);
 
-        // 触发方式、触发data
+        // 触发method、触发data
         $triggerConfig = $this->request->input('trigger_config', []);
 
         return $this->delightfulFlowExecuteAppService->testRun($authorization, $delightfulFlowDO, $triggerConfig);
@@ -133,7 +133,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * query可用tool集.
+     * query可usetool集.
      */
     public function queryToolSets()
     {
@@ -163,7 +163,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * query可用向量knowledge base.
+     * query可useto量knowledge base.
      */
     public function queryKnowledge()
     {
@@ -192,7 +192,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
      */
     public function changeEnable(string $flowId)
     {
-        // 从request中getenableparameter，if没有传递则不影响原有逻辑
+        // fromrequest中getenableparameter，ifnothave传递thennot影响原have逻辑
         $enable = $this->request->has('enable') ? (bool) $this->request->input('enable') : null;
         $this->delightfulFlowAppService->changeEnable($this->getAuthorization(), $flowId, $enable);
     }

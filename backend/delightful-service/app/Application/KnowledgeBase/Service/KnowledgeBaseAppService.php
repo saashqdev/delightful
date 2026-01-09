@@ -35,7 +35,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
         $delightfulFlowKnowledgeEntity->setCreator($dataIsolation->getCurrentUserId());
 
         $oldKnowledge = null;
-        // if具有业务 id，那么就是update了，need先query出来
+        // if具have业务 id，那么then是update了，need先query出来
         if (! empty($delightfulFlowKnowledgeEntity->getBusinessId())) {
             $oldKnowledge = $this->getByBusinessId($authorization, $delightfulFlowKnowledgeEntity->getBusinessId());
             if ($oldKnowledge) {
@@ -52,7 +52,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
             $operation = $this->knowledgeBaseStrategy->getKnowledgeOperation($dataIsolation, $oldKnowledge->getCode());
             $operation->validate('w', $oldKnowledge->getCode());
 
-            // use原来的model和向量library
+            // use原来的model和to量library
             $delightfulFlowKnowledgeEntity->setModel($oldKnowledge->getModel());
             $delightfulFlowKnowledgeEntity->setVectorDB($oldKnowledge->getVectorDB());
         }
@@ -84,7 +84,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
 
         $modelName = $delightfulFlowKnowledgeEntity->getModel();
         $delightfulFlowKnowledgeEntity->setForceCreateCode(Code::Knowledge->gen());
-        // createknowledge base前，先对嵌入model进行连通性test
+        // createknowledge base前，先对嵌入modelconduct连通性test
         try {
             $embeddingModel = di(ModelGatewayMapper::class)->getEmbeddingModelProxy($dataIsolation, $delightfulFlowKnowledgeEntity->getModel());
             $modelName = $embeddingModel->getModelName();
@@ -160,7 +160,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
             [$authorization->getId()]
         )[$authorization->getId()] ?? [];
         $resourceIds = array_keys($resources);
-        // 在这一堆中查找one
+        // in这一堆中查找one
         $query = new KnowledgeBaseQuery();
         $query->setCodes($resourceIds);
         $query->setBusinessId($businessId);

@@ -27,10 +27,10 @@ enum TriggerType: int
     // parametercall
     case ParamCall = 4;
 
-    // 循环体开始节点
+    // 循环体start节点
     case LoopStart = 5;
 
-    // 等待message
+    // etc待message
     case WaitMessage = 6;
 
     // 添加好友时

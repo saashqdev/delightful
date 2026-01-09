@@ -22,8 +22,8 @@ return new class extends Migration {
             $table->string('name', 255)->comment('rolename');
             $table->json('permission_key')->nullable()->comment('rolepermission列表');
             $table->string('organization_code', 64)->comment('organizationencoding');
-            $table->tinyInteger('is_display')->default(1)->comment('是否展示: 0=否, 1=是');
-            $table->json('permission_tag')->nullable()->comment('permissiontag，用于前端展示category');
+            $table->tinyInteger('is_display')->default(1)->comment('whether展示: 0=否, 1=是');
+            $table->json('permission_tag')->nullable()->comment('permissiontag，useat前端展示category');
             $table->tinyInteger('status')->default(1)->comment('status: 0=disable, 1=enable');
             $table->string('created_uid', 64)->nullable()->comment('create者userID');
             $table->string('updated_uid', 64)->nullable()->comment('update者userID');

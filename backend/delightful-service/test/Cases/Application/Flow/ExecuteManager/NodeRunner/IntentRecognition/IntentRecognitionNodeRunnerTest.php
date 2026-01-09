@@ -73,7 +73,7 @@ class IntentRecognitionNodeRunnerTest extends ExecuteManagerBaseTest
                     "expression_value": [
                         {
                             "type": "input",
-                            "value": "品尝了美食，喝了饮料，喝水不算",
+                            "value": "品尝了美食，喝了饮料，喝水not算",
                             "name": "",
                             "args": null
                         }
@@ -217,7 +217,7 @@ JSON,
                     "expression_value": [
                         {
                             "type": "input",
-                            "value": "品尝了美食\n喝了饮料\n喝水不算",
+                            "value": "品尝了美食\n喝了饮料\n喝水not算",
                             "name": "",
                             "args": null
                         }

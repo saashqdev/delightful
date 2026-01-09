@@ -13,11 +13,11 @@ use App\Infrastructure\Util\Auth\Permission\PermissionInterface;
 class PermissionChecker
 {
     /**
-     * check手机号是否有permissionaccess指定的permission.
+     * check手机号whetherhavepermissionaccess指定的permission.
      *
      * @param string $mobile 手机号
      * @param SuperPermissionEnum $permissionEnum 要check的permissiontype
-     * @return bool 是否有permission
+     * @return bool whetherhavepermission
      */
     public static function mobileHasPermission(string $mobile, SuperPermissionEnum $permissionEnum): bool
     {
@@ -30,12 +30,12 @@ class PermissionChecker
     }
 
     /**
-     * 内部permissioncheckmethod，便于test.
+     * 内部permissioncheckmethod，便attest.
      *
      * @param string $mobile 手机号
      * @param SuperPermissionEnum $permission 要check的permission
      * @param array $permissions permissionconfiguration
-     * @return bool 是否有permission
+     * @return bool whetherhavepermission
      */
     public static function checkPermission(
         string $mobile,
@@ -46,13 +46,13 @@ class PermissionChecker
             return false;
         }
 
-        // 判断是否全局管理员
+        // 判断whetherall局管理员
         $globalAdminsEnum = SuperPermissionEnum::GLOBAL_ADMIN->value;
         if (isset($permissions[$globalAdminsEnum]) && in_array($mobile, $permissions[$globalAdminsEnum])) {
             return true;
         }
 
-        // 判断是否特定permission
+        // 判断whether特定permission
         $permissionKey = $permission->value;
         return isset($permissions[$permissionKey]) && in_array($mobile, $permissions[$permissionKey]);
     }
@@ -64,7 +64,7 @@ class PermissionChecker
     }
 
     /**
-     * getuser拥有管理员permission的organizationencodinglist.
+     * getuser拥have管理员permission的organizationencodinglist.
      */
     public static function getUserOrganizationAdminList(string $mageId): array
     {

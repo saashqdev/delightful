@@ -13,13 +13,13 @@ class PageListAssembler
     public static function pageByMysql(array $data, int $currentOffset = 0, int $currentLimit = 0, ?int $maxRecords = null): array
     {
         if ($currentLimit === 0) {
-            // 不限制条数，所以没有下一页
+            // not限制条数，所bynothave下一页
             $hasMore = false;
         } elseif ($maxRecords !== null) {
-            // if知道总record数，则直接compare
+            // if知道总record数，then直接compare
             $hasMore = ($currentOffset + $currentLimit) < $maxRecords;
         } else {
-            // if不知道总record数，when前result集不为null则有下一页
+            // ifnot知道总record数，when前result集not为nullthenhave下一页
             $hasMore = empty($data) ? false : true;
         }
         $nextPageToken = $hasMore ? (string) ($currentOffset + $currentLimit) : '';

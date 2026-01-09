@@ -81,7 +81,7 @@ class DelightfulAgentVersionDomainService
         $reviewOpen = false;
 
         $msg = '';
-        // 如果旧status已经是企业或者市场，则不allow回退
+        // if旧status已经是企业or者市场，thennotallow回退
         $oldDelightfulAgentVersionEntity = $this->agentVersionRepository->getNewestAgentVersionEntity($delightfulAgentVersionEntity->getAgentId());
         if ($oldDelightfulAgentVersionEntity !== null) {
             $this->validateVersionNumber($delightfulAgentVersionEntity->getVersionNumber(), $oldDelightfulAgentVersionEntity->getVersionNumber());
@@ -92,7 +92,7 @@ class DelightfulAgentVersionDomainService
             // 个人use
             $msg = 'publishsuccess';
         } elseif ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
-            // publish到企业内部
+            // publishto企业内部
             /* @phpstan-ignore-next-line */
             if ($approvalOpen) {
                 $delightfulAgentVersionEntity->setApprovalStatus(DelightfulAgentVersionStatus::APPROVAL_PENDING->value);
@@ -103,7 +103,7 @@ class DelightfulAgentVersionDomainService
             }
             $msg = 'publishsuccess';
         } elseif ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value) {
-            // publish到application市场
+            // publishtoapplication市场
             // 审核开关
             /* @phpstan-ignore-next-line */
             if ($reviewOpen) {
@@ -177,9 +177,9 @@ class DelightfulAgentVersionDomainService
 
     public function getAgentMaxVersion(string $agentId): string
     {
-        // return的是语义化version，need在return的基础上+1
+        // returnis语义化version，needinreturn的基础上+1
         $agentMaxVersion = $this->agentVersionRepository->getAgentMaxVersion($agentId);
-        // 如果version号是整数format（如 1），将其convert为语义化version号（如 1.0.0）
+        // ifversion号是整数format（如 1），将其convert为语义化version号（如 1.0.0）
         if (is_numeric($agentMaxVersion) && strpos($agentMaxVersion, '.') === false) {
             $agentMaxVersion = $agentMaxVersion . '.0.0';
         }
@@ -190,15 +190,15 @@ class DelightfulAgentVersionDomainService
         // 将 PATCH 部分加 1
         $patch = (int) $patch + 1;
 
-        // 如果 PATCH 达到 10，进位到 MINOR（canaccording to需求调整此rule）
+        // if PATCH 达to 10，进位to MINOR（canaccording to需求调整此rule）
         if ($patch > 99) {
             $patch = 0;
             $minor = (int) $minor + 1;
         }
 
-        // 如果 MINOR 达到 10，进位到 MAJOR（canaccording to需求调整此rule）
+        // if MINOR 达to 10，进位to MAJOR（canaccording to需求调整此rule）
         if ($minor > 99) {
-            // 不resetminor，而是直接增大major，避免不必要的reset
+            // notresetminor，而是直接增大major，避免not必要的reset
             $minor = 0;
             $major = (int) $major + 1;
         }
@@ -242,8 +242,8 @@ class DelightfulAgentVersionDomainService
      * based on游标paginationget指定organization的助理versionlist.
      * @param string $organizationCode organizationcode
      * @param array $agentVersionIds 助理versionIDlist
-     * @param string $cursor 游标ID，如果为空string则从最新开始
-     * @param int $pageSize 每页quantity
+     * @param string $cursor 游标ID，if为空stringthenfrommost新start
+     * @param int $pageSize each页quantity
      * @return array<DelightfulAgentVersionEntity>
      */
     public function getAgentsByOrganizationWithCursor(string $organizationCode, array $agentVersionIds, string $cursor, int $pageSize): array
@@ -253,7 +253,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * verify新version号是否legal.
+     * verify新version号whetherlegal.
      * @throws BusinessException
      */
     private function validateVersionNumber(string $newVersion, string $oldVersion): void
@@ -267,7 +267,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * verifypublishrange是否legal.
+     * verifypublishrangewhetherlegal.
      */
     private function validateReleaseScope(int $newScope, int $oldScope): void
     {
@@ -275,7 +275,7 @@ class DelightfulAgentVersionDomainService
             return;
         }
 
-        // check是否试图从更高级别的publishrange回退到更低级别
+        // checkwhether试图frommore高级别的publishrange回退tomore低级别
         $errorMessage = match ($oldScope) {
             DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value => 'agent.already_published_to_enterprise_cannot_publish_to_individual',
             DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value => 'agent.already_published_to_market_cannot_publish_to_individual',

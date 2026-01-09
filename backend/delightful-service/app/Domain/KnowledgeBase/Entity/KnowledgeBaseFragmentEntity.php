@@ -19,7 +19,7 @@ use Hyperf\Stringable\Str;
 use function mb_strlen;
 
 /**
- * 向量knowledge base文本片段.
+ * to量knowledge base文本片段.
  */
 class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
 {
@@ -39,7 +39,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
     protected array $metadata = [];
 
     /**
-     * 业务 ID，可用于业务方record自己的 ID 用来进行updatedata.
+     * 业务 ID，可useat业务方record自己的 ID use来conductupdatedata.
      */
     protected string $businessId = '';
 
@@ -124,7 +124,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
 
     public function hasModify(KnowledgeBaseFragmentEntity $savingDelightfulFlowKnowledgeFragmentEntity): bool
     {
-        // if content 和 metadata 都没有变化，就不needupdate了
+        // if content 和 metadata allnothave变化，thennotneedupdate了
         if ($savingDelightfulFlowKnowledgeFragmentEntity->getContent() === $this->content
             && $savingDelightfulFlowKnowledgeFragmentEntity->getMetadata() === $this->metadata
             && $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId() === $this->businessId
@@ -368,7 +368,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
         return $this->wordCount;
     }
 
-    // 这里不用setting，直接according tocontent计算出来就行
+    // 这里notusesetting，直接according tocontent计算出来then行
     public function setWordCount(int $wordCount): KnowledgeBaseFragmentEntity
     {
         $this->wordCount = $wordCount;
@@ -423,7 +423,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
     {
         foreach ($this->metadata as $key => $value) {
             if (Str::startsWith($key, self::PAYLOAD_PREFIX)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data key cannot以 ' . self::PAYLOAD_PREFIX . ' 开头');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data key cannotby ' . self::PAYLOAD_PREFIX . ' 开头');
             }
             if (! is_string($key)) {
                 ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data 的 key must是string');

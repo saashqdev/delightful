@@ -26,7 +26,7 @@ class Message extends AbstractEntity
     protected string $type;
 
     /**
-     * according to type 的type,来确定 DelightfulMessage 的具体type.
+     * according to type 的type,来确定 DelightfulMessage 的specifictype.
      */
     protected MessageInterface $delightfulMessage;
 

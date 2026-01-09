@@ -15,7 +15,7 @@ enum SocketEventType: string
     // connect
     case Connect = 'connect';
 
-    // login. 以后logincan投一条控制message,来implement上线notify等逻辑
+    // login. by后logincan投一条控制message,来implement上线notifyetc逻辑
     case Login = 'login';
 
     // chatmessage
@@ -28,7 +28,7 @@ enum SocketEventType: string
     case Stream = 'stream';
 
     /**
-     * 实时性极高的过渡message，没有 seq_id，不will被持久化，也不will被cache。
+     * 实时性极高的过渡message，nothave seq_id，notwillbe持久化，alsonotwillbecache。
      */
     case Intermediate = 'intermediate';
 }

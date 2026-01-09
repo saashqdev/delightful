@@ -58,11 +58,11 @@ class ExportAgentWithFlowCommand extends HyperfCommand
 
         $flowCode = $agent->getFlowCode();
         if (empty($flowCode)) {
-            $this->output->error('助理没有associate的process');
+            $this->output->error('助理nothaveassociate的process');
             return 1;
         }
 
-        // 从助理实体中getorganizationcode和userID
+        // from助理实体中getorganizationcode和userID
         $orgCode = $agent->getOrganizationCode();
         $userId = $agent->getCreatedUid();
 
@@ -77,26 +77,26 @@ class ExportAgentWithFlowCommand extends HyperfCommand
         $tempFile = tempnam(sys_get_temp_dir(), 'flow_export_');
         file_put_contents($tempFile, json_encode($exportData, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
         chmod($tempFile, 0644);
-        // upload到OSS
+        // uploadtoOSS
         $uploadDir = $orgCode . '/open/' . md5(StorageBucketType::Public->value);
         $uploadFile = new UploadFile($tempFile, $uploadDir, $filename);
 
-        // use已有的fileserviceupload
+        // use已have的fileserviceupload
         try {
             // 定义uploaddirectory
             $subDir = 'open';
 
-            // createuploadfileobject（不自动重命名）
+            // createuploadfileobject（not自动重命名）
             $uploadFile = new UploadFile($tempFile, $subDir, '', false);
 
-            // uploadfile（指定不自动createdirectory）
+            // uploadfile（指定not自动createdirectory）
             $this->fileDomainService->uploadByCredential($orgCode, $uploadFile);
 
             // generate可access的link
             $fileLink = $this->fileDomainService->getLink($orgCode, $uploadFile->getKey(), StorageBucketType::Private);
 
             if ($fileLink) {
-                // use这种方式点击link是valid的link
+                // use这种method点击link是valid的link
                 return 0;
             }
 

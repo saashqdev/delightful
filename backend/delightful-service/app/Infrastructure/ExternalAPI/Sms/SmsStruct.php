@@ -10,7 +10,7 @@ namespace App\Infrastructure\ExternalAPI\Sms;
 use App\Infrastructure\ExternalAPI\Sms\Enum\SignEnum;
 
 /**
- * 所有短信驱动的returnresultmustconvert为此object
+ * 所have短信驱动的returnresultmustconvert为此object
  */
 class SmsStruct
 {
@@ -20,14 +20,14 @@ class SmsStruct
     public string $phone = '';
 
     /**
-     * 短信的type,such as:registration_rewards (order已发货),arrival_notice(到货notify).
-     * 1.如果搭配 language field,同时usevariable短信,canimplement多语言适配,以及语种兜底
-     * 2.电商的相关短信use此field,但是没有 language 传入.
+     * 短信的type,such as:registration_rewards (order已发货),arrival_notice(to货notify).
+     * 1.if搭配 language field,meanwhileusevariable短信,canimplement多语言适配,by及语种兜底
+     * 2.电商的相关短信use此field,but是nothave language 传入.
      */
     public ?string $type = null;
 
     /**
-     * variable短信的variablecontent. 可能为associatearray,也可能为索引array.
+     * variable短信的variablecontent. 可能为associatearray,also可能为索引array.
      * @example {"product_name": "商品A", "payer": "供应商A","amount": 10}
      * @example ["商品A","供应商A",10]
      */
@@ -35,7 +35,7 @@ class SmsStruct
 
     /**
      * 普通短信的纯文本content.
-     * 如: 灯塔正在邀请你加入企业，点击linkregister或login https://xxxx.com/sso?r_ce=vB5932.
+     * 如: 灯塔正in邀请你加入企业，点击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
      */
     public ?string $content = null;
 
@@ -51,7 +51,7 @@ class SmsStruct
     public ?string $language = null;
 
     /**
-     * 短信的default语种,support业务方customize. 不传给defaultvaluezh_CN.
+     * 短信的default语种,support业务方customize. not传给defaultvaluezh_CN.
      */
     public ?string $defaultLanguage = null;
 

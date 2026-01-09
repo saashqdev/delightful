@@ -105,7 +105,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * 对资源进行authorization.
+     * 对资源conductauthorization.
      * @param array<OperationPermissionEntity> $operationPermissions
      */
     public function resourceAccess(Authenticatable $authorization, ResourceType $resourceType, string $resourceId, array $operationPermissions): void
@@ -123,7 +123,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * getuser对某个资源的最高permission.
+     * getuser对some个资源的most高permission.
      */
     public function getOperationByResourceAndUser(PermissionDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, string $userId): Operation
     {
@@ -134,7 +134,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * getuser对某一类资源的最高操作permission.
+     * getuser对some一类资源的most高操作permission.
      */
     #[ArrayShape([
         // userId => [resourceId => Operation]

@@ -31,7 +31,7 @@ enum ImageGenerateModelType: string
     case Official = 'Official';
 
     /**
-     * 从modelnameget对应的type.
+     * frommodelnameget对应的type.
      */
     public static function fromModel(string $model, bool $throw = true): self
     {
@@ -53,7 +53,7 @@ enum ImageGenerateModelType: string
     }
 
     /**
-     * Midjourney的所有mode.
+     * Midjourney的所havemode.
      * @return string[]
      */
     public static function getMidjourneyModes(): array
@@ -62,7 +62,7 @@ enum ImageGenerateModelType: string
     }
 
     /**
-     * Flux的所有mode.
+     * Flux的所havemode.
      * @return string[]
      */
     public static function getFluxModes(): array
@@ -71,7 +71,7 @@ enum ImageGenerateModelType: string
     }
 
     /**
-     * Volecengin的所有mode.
+     * Volecengin的所havemode.
      * @return string[]
      */
     public static function getVolcengineModes(): array

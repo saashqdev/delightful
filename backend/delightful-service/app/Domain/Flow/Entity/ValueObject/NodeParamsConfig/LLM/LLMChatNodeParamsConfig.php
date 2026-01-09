@@ -45,7 +45,7 @@ class LLMChatNodeParamsConfig extends AbstractLLMNodeParamsConfig
             temperature: (float) ($params['model_config']['temperature'] ?? 0.5)
         );
 
-        // messages 非必填
+        // messages non必填
         $messages = ComponentFactory::fastCreate($params['messages'] ?? null);
         if ($messages && ! $messages->isForm()) {
             ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'flow.component.format_error', ['label' => 'messages']);
@@ -166,7 +166,7 @@ JSON,
                 "type": "array",
                 "key": "use_tools",
                 "sort": 0,
-                "title": "use到的tool",
+                "title": "useto的tool",
                 "description": "",
                 "items": {
                     "type": "object",
@@ -191,7 +191,7 @@ JSON,
                             "type": "boolean",
                             "key": "success",
                             "sort": 1,
-                            "title": "是否success",
+                            "title": "whethersuccess",
                             "description": "",
                             "items": null,
                             "properties": null,

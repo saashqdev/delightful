@@ -67,7 +67,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 添加modelID（向后compatible，但不推荐use）.
+     * 添加modelID（to后compatible，butnot推荐use）.
      */
     public function addModelId(string $modelId): void
     {
@@ -79,7 +79,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 移除model.
+     * 移exceptmodel.
      */
     public function removeModelId(string $modelId): void
     {
@@ -93,7 +93,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * check是否contain指定modelID.
+     * checkwhethercontain指定modelID.
      */
     public function hasModelId(string $modelId): bool
     {
@@ -114,7 +114,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * getmodelIDarray（向后compatible）.
+     * getmodelIDarray（to后compatible）.
      * @return string[]
      */
     public function getModelIds(): array
@@ -123,12 +123,12 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * setmodelIDarray（向后compatible，但不推荐use）.
+     * setmodelIDarray（to后compatible，butnot推荐use）.
      * @param string[] $modelIds
      */
     public function setModelIds(array $modelIds): void
     {
-        // 这个method保留用于向后compatible，但actual上need完整的modelinfo
+        // 这个method保留useatto后compatible，butactual上need完整的modelinfo
         // suggestionuse setModels() method
         $this->models = [];
         foreach ($modelIds as $modelId) {

@@ -28,7 +28,7 @@ interface AiAbilityRepositoryInterface
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity;
 
     /**
-     * get所有AI能力list.
+     * get所haveAI能力list.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @return array<AiAbilityEntity> AI能力实体list
@@ -48,7 +48,7 @@ interface AiAbilityRepositoryInterface
      * saveAI能力实体.
      *
      * @param AiAbilityEntity $entity AI能力实体
-     * @return bool 是否savesuccess
+     * @return bool whethersavesuccess
      */
     public function save(AiAbilityEntity $entity): bool;
 
@@ -56,7 +56,7 @@ interface AiAbilityRepositoryInterface
      * updateAI能力实体.
      *
      * @param AiAbilityEntity $entity AI能力实体
-     * @return bool 是否updatesuccess
+     * @return bool whetherupdatesuccess
      */
     public function update(AiAbilityEntity $entity): bool;
 
@@ -65,8 +65,8 @@ interface AiAbilityRepositoryInterface
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param AiAbilityCode $code 能力code
-     * @param array $data updatedata（status、config等）
-     * @return bool 是否updatesuccess
+     * @param array $data updatedata（status、configetc）
+     * @return bool whetherupdatesuccess
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool;
 

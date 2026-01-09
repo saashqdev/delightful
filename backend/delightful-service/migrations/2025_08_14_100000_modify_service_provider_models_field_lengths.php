@@ -22,7 +22,7 @@ return new class extends Migration {
         // 修改 service_provider_models 表的相关fieldlength
         Schema::table('service_provider_models', function (Blueprint $table) {
             $table->string('name', 255)->comment('modelname')->change();
-            $table->string('model_version', 255)->comment('model在service商下的name')->change();
+            $table->string('model_version', 255)->comment('modelinservice商下的name')->change();
             $table->string('model_id', 255)->comment('modeltrue实ID')->change();
         });
     }
@@ -40,7 +40,7 @@ return new class extends Migration {
         // 回滚 service_provider_models 表的相关fieldlength
         Schema::table('service_provider_models', function (Blueprint $table) {
             $table->string('name', 50)->comment('modelname')->change();
-            $table->string('model_version', 50)->comment('model在service商下的name')->change();
+            $table->string('model_version', 50)->comment('modelinservice商下的name')->change();
             $table->string('model_id', 50)->comment('modeltrue实ID')->change();
         });
     }

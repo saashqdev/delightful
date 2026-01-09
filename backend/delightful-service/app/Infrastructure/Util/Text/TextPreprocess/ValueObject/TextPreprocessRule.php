@@ -12,18 +12,18 @@ enum TextPreprocessRule: int
     // 替换掉连续null格/换行符/制表符
     case REPLACE_WHITESPACE = 1;
 
-    // delete所有url和电子邮件地址
+    // delete所haveurl和电子邮件地址
     case REMOVE_URL_EMAIL = 2;
 
-    // Exceltitle行拼接，剔除sheet行，行间换行调整为\n\n
+    // Exceltitle行拼接，剔exceptsheet行，行间换行调整为\n\n
     case FORMAT_EXCEL = 3;
 
     public function getDescription(): string
     {
         return match ($this) {
             self::REPLACE_WHITESPACE => '替换掉连续null格/换行符/制表符',
-            self::REMOVE_URL_EMAIL => 'delete所有url和电子邮件地址',
-            self::FORMAT_EXCEL => '剔除title行，将Excelcontent与title行拼接成"title:content"format，剔除sheet行，行间换行调整为\n\n',
+            self::REMOVE_URL_EMAIL => 'delete所haveurl和电子邮件地址',
+            self::FORMAT_EXCEL => '剔excepttitle行，将Excelcontent与title行拼接成"title:content"format，剔exceptsheet行，行间换行调整为\n\n',
         };
     }
 

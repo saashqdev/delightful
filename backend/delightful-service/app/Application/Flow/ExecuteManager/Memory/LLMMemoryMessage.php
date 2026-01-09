@@ -176,7 +176,7 @@ class LLMMemoryMessage
             $customMessage->setAttachments($attachments);
         }
 
-        // verify是否是valid的
+        // verifywhether是valid的
         if (! $customMessage->isValid()) {
             return null;
         }

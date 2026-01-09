@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('cache_hash', 32)->unique()->comment('cache键MD5hashvalue(cache_prefix+cache_key)');
             $table->string('cache_prefix')->comment('cache前缀');
             $table->string('cache_key')->comment('cache键名');
-            $table->string('scope_tag', 10)->comment('作用域标识');
+            $table->string('scope_tag', 10)->comment('作use域标识');
             $table->longText('cache_value')->comment('cachevaluecontent');
             $table->unsignedInteger('ttl_seconds')->default(7200)->comment('TTL秒数（0代表permanentcache）');
             $table->timestamp('expires_at')->comment('expiretime戳');
@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->string('updated_uid', 64)->default('')->comment('update人');
             $table->timestamps();
 
-            // 索引 - useMD5hashvalue作为主要query索引
+            // 索引 - useMD5hashvalue作为mainquery索引
             $table->unique('cache_hash', 'uk_cache_hash');
             $table->index('expires_at', 'idx_expires_at');
             $table->index('organization_code', 'idx_organization_code');

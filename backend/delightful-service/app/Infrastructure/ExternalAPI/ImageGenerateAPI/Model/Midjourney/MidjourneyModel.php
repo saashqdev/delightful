@@ -20,7 +20,7 @@ use Exception;
 
 class MidjourneyModel extends AbstractImageGenerate
 {
-    // 最大retrycount
+    // most大retrycount
     protected const MAX_RETRIES = 20;
 
     // retry间隔（秒）
@@ -78,15 +78,15 @@ class MidjourneyModel extends AbstractImageGenerate
             return $response; // returnnulldataresponse
         }
 
-        // 3. synchandle（Midjourney采用轮询机制）
+        // 3. synchandle（Midjourney采use轮询机制）
         try {
             $result = $this->generateImageRawInternal($imageGenerateRequest);
             $this->validateMidjourneyResponse($result);
 
-            // success：settingimagedata到responseobject
+            // success：settingimagedatatoresponseobject
             $this->addImageDataToResponse($response, $result, $imageGenerateRequest);
         } catch (Exception $e) {
-            // fail：settingerrorinfo到responseobject
+            // fail：settingerrorinfotoresponseobject
             $response->setProviderErrorCode($e->getCode());
             $response->setProviderErrorMessage($e->getMessage());
 
@@ -99,7 +99,7 @@ class MidjourneyModel extends AbstractImageGenerate
         // 4. recordfinalresult
         $this->logger->info('Midjourney OpenAIformat生图：handlecomplete', [
             'successimage数' => count($response->getData()),
-            '是否有error' => $response->hasError(),
+            'whetherhaveerror' => $response->hasError(),
             'error码' => $response->getProviderErrorCode(),
             'errormessage' => $response->getProviderErrorMessage(),
         ]);
@@ -116,17 +116,17 @@ class MidjourneyModel extends AbstractImageGenerate
     {
         $rawResult = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // 从nativeresult中提取imageURL
+        // fromnativeresult中提取imageURL
         if (! empty($rawResult['data']['images']) && is_array($rawResult['data']['images'])) {
             return new ImageGenerateResponse(ImageGenerateType::URL, $rawResult['data']['images']);
         }
 
-        // 如果没有 images array，尝试use cdnImage
+        // ifnothave images array，尝试use cdnImage
         if (! empty($rawResult['data']['cdnImage'])) {
             return new ImageGenerateResponse(ImageGenerateType::URL, [$rawResult['data']['cdnImage']]);
         }
 
-        $this->logger->error('MJ文生图：未get到imageURL', [
+        $this->logger->error('MJ文生图：未gettoimageURL', [
             'rawResult' => $rawResult,
         ]);
         ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
@@ -171,7 +171,7 @@ class MidjourneyModel extends AbstractImageGenerate
                     ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
                 }
 
-                // 如果是其他status（如 PENDING_QUEUE 或 ON_QUEUE），continue等待
+                // if是其他status（如 PENDING_QUEUE or ON_QUEUE），continueetc待
                 ++$retryCount;
                 sleep(self::RETRY_INTERVAL);
             } catch (Exception $e) {
@@ -233,7 +233,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * check Prompt 是否legal.
+     * check Prompt whetherlegal.
      * @throws Exception
      */
     protected function checkPrompt(string $prompt): void
@@ -368,7 +368,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 $rawData['data']['cdnImage'] = $this->watermarkProcessor->addWatermarkToUrl($rawData['data']['cdnImage'], $imageGenerateRequest);
             }
         } catch (Exception $e) {
-            // 水印handlefail时，recorderror但不影响imagereturn
+            // 水印handlefail时，recorderrorbutnot影响imagereturn
             $this->logger->error('Midjourneyimage水印handlefail', [
                 'error' => $e->getMessage(),
             ]);
@@ -388,7 +388,7 @@ class MidjourneyModel extends AbstractImageGenerate
         }
 
         if (empty($result['data']['images']) || ! is_array($result['data']['images'])) {
-            throw new Exception('Midjourneyresponsedataformaterror：缺少imagesfield或images不是array');
+            throw new Exception('Midjourneyresponsedataformaterror：缺少imagesfieldorimagesnot是array');
         }
 
         if (count($result['data']['images']) === 0) {
@@ -397,14 +397,14 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 将Midjourneyimagedata添加到OpenAIresponseobject中（仅handleimagesfield）.
+     * 将Midjourneyimagedata添加toOpenAIresponseobject中（仅handleimagesfield）.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
         array $midjourneyResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // 从Midjourneyresponse中提取data.imagesfield
+        // fromMidjourneyresponse中提取data.imagesfield
         if (empty($midjourneyResult['data']['images']) || ! is_array($midjourneyResult['data']['images'])) {
             return;
         }

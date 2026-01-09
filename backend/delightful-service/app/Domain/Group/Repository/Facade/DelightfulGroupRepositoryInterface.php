@@ -46,11 +46,11 @@ interface DelightfulGroupRepositoryInterface
 
     public function deleteGroup(DelightfulGroupEntity $delightfulGroupEntity): int;
 
-    // user是否在group中
+    // userwhetheringroup中
     public function isUserInGroup(string $groupId, string $userId): bool;
 
     /**
-     * user是否在group中.
+     * userwhetheringroup中.
      * @param array<string> $userIds
      */
     public function isUsersInGroup(string $groupId, array $userIds): bool;

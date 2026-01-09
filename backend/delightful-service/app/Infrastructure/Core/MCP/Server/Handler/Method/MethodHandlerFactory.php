@@ -40,10 +40,10 @@ class MethodHandlerFactory
 
     /**
      * create指定method的process器实例.
-     * 每次call都createnewprocess器实例，ensure短生命period.
+     * each次callallcreatenewprocess器实例，ensure短生命period.
      * 注意：call者need手动为return的process器set所需的Managergroup件.
      *
-     * @return null|MethodHandlerInterface 如果找不到对应method的process器则returnnull
+     * @return null|MethodHandlerInterface if找notto对应method的process器thenreturnnull
      */
     public function createHandler(string $method): ?MethodHandlerInterface
     {
@@ -57,7 +57,7 @@ class MethodHandlerFactory
     }
 
     /**
-     * check是否存在指定method的process器.
+     * checkwhether存in指定method的process器.
      */
     public function hasHandler(string $method): bool
     {
@@ -65,7 +65,7 @@ class MethodHandlerFactory
     }
 
     /**
-     * get所有support的method.
+     * get所havesupport的method.
      *
      * @return array<string>
      */

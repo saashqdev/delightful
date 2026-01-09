@@ -18,22 +18,22 @@ class ThirdPlatformCreateGroup
     // memberlist
     private array $useridlist = [];
 
-    // 新member是否可查看historymessage：1（default）：可查看，0：不可查看
+    // 新memberwhether可查看historymessage：1（default）：可查看，0：not可查看
     private int $showHistoryType = 1;
 
-    // 是否可searchgroup chat, 0（default）：不可search 1：可search
+    // whether可searchgroup chat, 0（default）：not可search 1：可search
     private int $searchable = 0;
 
-    // 入群是否needverify：0（default）：不verify 1：入群verify
+    // 入群whetherneedverify：0（default）：notverify 1：入群verify
     private int $validationType = 0;
 
-    // @all userange： 0（default）：所有人都can@all
+    // @all userange： 0（default）：所have人allcan@all
     private int $mentionAllAuthority = 0;
 
-    // 群管理type：0（default）：所有人可管理，1：仅群主可管理
+    // 群管理type：0（default）：所have人可管理，1：仅群主可管理
     private int $managementType = 0;
 
-    // 是否开启群禁言：0（default）：不禁言，1：全员禁言
+    // whether开启群禁言：0（default）：not禁言，1：all员禁言
     private int $chatBannedType = 0;
 
     public function setName(string $name): void

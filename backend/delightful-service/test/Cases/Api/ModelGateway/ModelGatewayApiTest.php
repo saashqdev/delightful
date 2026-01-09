@@ -22,7 +22,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     private const DEFAULT_MODEL = 'deepseek-v3';
 
     /**
-     * test chatCompletions method的高可用性.
+     * test chatCompletions method的高可use性.
      */
     public function testHighAvaiable()
     {
@@ -50,7 +50,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
             ],
         ];
 
-        // create一个 Parallel 实例，set最大并发数为 10
+        // create一个 Parallel 实例，setmost大并发数为 10
         $parallel = new Parallel(10);
 
         // 定义多个different的request场景
@@ -64,7 +64,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
 
         // 添加并发task
         $index = 0;
-        $count = 10; // 进一步减少testquantity，只要有一个success就行
+        $count = 10; // 进一步减少testquantity，只要have一个successthen行
         while ($index < $count) {
             $parallel->add(function () use ($scenario, $index, $expectedResponse) {
                 try {
@@ -79,7 +79,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
                         'content' => $response['choices'][0]['message']['content'] ?? '',
                     ];
                 } catch (Throwable $e) {
-                    // 直接returnfailinfo，不进行retry
+                    // 直接returnfailinfo，notconductretry
                     return [
                         'success' => false,
                         'index' => $index,
@@ -90,7 +90,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
             });
             ++$index;
         }
-        // execute所有并发task并getresult
+        // execute所have并发task并getresult
         $results = $parallel->wait();
         // statisticssuccess和fail的request
         $successCount = 0;
@@ -98,13 +98,13 @@ class ModelGatewayApiTest extends AbstractHttpTest
             if ($result['success']) {
                 ++$successCount;
             } else {
-                // recordfailinfo，但不assertfail
+                // recordfailinfo，butnotassertfail
                 echo "Request {$result['index']} failed: {$result['error']} (code: {$result['error_code']})" . PHP_EOL;
             }
         }
 
-        // ensureat least有一个requestsuccess
-        $this->assertGreaterThan(0, $successCount, 'at leastshould有一个requestsuccess');
+        // ensureat leasthave一个requestsuccess
+        $this->assertGreaterThan(0, $successCount, 'at leastshouldhave一个requestsuccess');
 
         // outputsuccess率
         $successRate = ($successCount / $count) * 100;
@@ -159,10 +159,10 @@ class ModelGatewayApiTest extends AbstractHttpTest
      */
     public function testEmbeddings(): void
     {
-        // 构造向量嵌入requestparameter
+        // 构造to量嵌入requestparameter
         $requestData = [
             'model' => self::DEFAULT_MODEL,
-            'input' => '这是一个用于test的文本',
+            'input' => '这是一个useattest的文本',
             'business_params' => [
                 'organization_id' => '000',
                 'user_id' => '9527',
@@ -198,7 +198,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * 提供test用的通用messagedata.
+     * 提供testuse的通usemessagedata.
      */
     private function getTestMessages(): array
     {
@@ -215,7 +215,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * 提供test用的request头.
+     * 提供testuse的request头.
      */
     private function getTestHeaders(): array
     {

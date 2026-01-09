@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->string('type_relation_value', 255)->comment(
                 'tokentype对应的value.type为0时,此value为account_id;type为1时,此value为user_id;type为2时,此value为organizationencoding;type为3时,此value为app_id;type为4时,此value为flow_id'
             )->default('')->change();
-            // 判断 idx_token 是否存在
+            // 判断 idx_token whether存in
             if (Schema::hasIndex('delightful_tokens', 'idx_token')) {
                 $table->dropIndex('idx_token');
             }

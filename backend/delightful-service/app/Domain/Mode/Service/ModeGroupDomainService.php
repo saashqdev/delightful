@@ -70,7 +70,7 @@ class ModeGroupDomainService
             ExceptionBuilder::throw(ModeErrorCode::GROUP_NOT_FOUND);
         }
 
-        // delete分group下的所有modelassociate
+        // delete分group下的所havemodelassociate
         $this->relationRepository->deleteByGroupId($dataIsolation, $groupId);
 
         // delete分group
@@ -86,7 +86,7 @@ class ModeGroupDomainService
     }
 
     /**
-     * verifymode是否存在.
+     * verifymodewhether存in.
      */
     private function validateModeExists(ModeDataIsolation $dataIsolation, int $modeId): void
     {

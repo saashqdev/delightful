@@ -32,7 +32,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private const STATUS_NOT_FOUND = -1;
 
-    // comment掉的是目前用不到
+    // comment掉is目前usenotto
     //    private const STYLE_PORTRAIT = 25;
     private const STYLE_GENERAL = 26;
     //    private const STYLE_LANDSCAPE = 28;
@@ -54,7 +54,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     public function imageConvertHigh(ImageGenerateRequest $imageGenerateRequest): string
     {
-        $this->logger->info('美图超清convert：开始processconvertrequest', [
+        $this->logger->info('美图超清convert：startprocessconvertrequest', [
             'request_type' => get_class($imageGenerateRequest),
         ]);
 
@@ -91,7 +91,7 @@ class MiracleVisionModel extends AbstractImageGenerate
     #[RateLimit(create: 5, consume: 1, capacity: 0, key: ImageGenerate::IMAGE_GENERATE_KEY_PREFIX . ImageGenerate::IMAGE_GENERATE_POLL_KEY_PREFIX . ImageGenerateModelType::MiracleVision->value, waitTimeout: 60)]
     public function queryTask(string $taskId): MiracleVisionModelResponse
     {
-        $this->logger->info('美图超清convert：开始querytaskstatus', ['task_id' => $taskId]);
+        $this->logger->info('美图超清convert：startquerytaskstatus', ['task_id' => $taskId]);
 
         if (empty($taskId)) {
             $this->logger->error('美图超清convert：缺少taskIDparameter');
@@ -173,7 +173,7 @@ class MiracleVisionModel extends AbstractImageGenerate
         switch ($status) {
             case self::STATUS_SUCCESS:
                 if (empty($result['data']['result']['urls'])) {
-                    $this->logger->error('美图超清convert：taskcomplete但缺少resultURL', ['response' => $result]);
+                    $this->logger->error('美图超清convert：taskcompletebut缺少resultURL', ['response' => $result]);
                     ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
                 }
                 $response->setFinishStatus(true);
@@ -185,14 +185,14 @@ class MiracleVisionModel extends AbstractImageGenerate
             case self::STATUS_PROCESSING:
                 $response->setFinishStatus(false);
                 $response->setProgress($result['data']['progress']);
-                $this->logger->info('美图超清convert：taskprocess进行中', [
+                $this->logger->info('美图超清convert：taskprocessconduct中', [
                     'progress' => $result['data']['progress'],
                 ]);
                 // no break
             case self::STATUS_INIT:
                 $response->setFinishStatus(false);
                 $response->setProgress($result['data']['progress']);
-                $this->logger->info('美图超清convert：task正在initialize', [
+                $this->logger->info('美图超清convert：task正ininitialize', [
                     'progress' => $result['data']['progress'],
                 ]);
                 break;
@@ -202,7 +202,7 @@ class MiracleVisionModel extends AbstractImageGenerate
                 $response->setFinishStatus(false);
                 $response->setError($result['message'] ?? '未知error');
                 $this->logger->error(
-                    $status === self::STATUS_NOT_FOUND ? '美图超清convert：task不存在' : '美图超清convert：taskprocessfail',
+                    $status === self::STATUS_NOT_FOUND ? '美图超清convert：tasknot存in' : '美图超清convert：taskprocessfail',
                     ['status' => $status, 'response' => $result]
                 );
         }
@@ -213,7 +213,7 @@ class MiracleVisionModel extends AbstractImageGenerate
     private function validateRequest(ImageGenerateRequest $request): void
     {
         if (! $request instanceof MiracleVisionModelRequest) {
-            $this->logger->error('美图超清convert：requesttype不匹配', ['class' => get_class($request)]);
+            $this->logger->error('美图超清convert：requesttypenot匹配', ['class' => get_class($request)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -222,7 +222,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private function validateImageType(string $url): void
     {
-        $this->logger->info('美图超清convert：开始verifyimagetype', ['url' => $url]);
+        $this->logger->info('美图超清convert：startverifyimagetype', ['url' => $url]);
 
         $type = FileType::getType($url);
         if (empty($type)) {
@@ -244,7 +244,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private function validateApiResponse(array $result): void
     {
-        $this->logger->info('美图API：开始verifyresponsedata', ['response' => $result]);
+        $this->logger->info('美图API：startverifyresponsedata', ['response' => $result]);
 
         if (! isset($result['code'])) {
             $this->logger->warning('美图API：responseformatexception', ['response' => $result]);

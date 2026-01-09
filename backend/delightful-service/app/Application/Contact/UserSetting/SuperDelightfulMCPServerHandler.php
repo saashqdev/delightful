@@ -35,7 +35,7 @@ class BeDelightfulMCPServerHandler extends AbstractUserSettingHandler
 
         $servers = [];
 
-        // organization内有permission的data
+        // organization内havepermission的data
         $resources = $this->operationPermissionAppService->getResourceOperationByUserIds(
             $mcpDataIsolation,
             ResourceType::MCPServer,

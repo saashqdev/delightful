@@ -31,7 +31,7 @@ class SessionAppService implements SessionInterface
         $loginResponses = $this->delightfulUserDomainService->delightfulUserLoginCheck($loginCheck->getAuthorization(), $delightfulEnvironmentEntity, $delightfulOrganizationCode);
         // 增加organizationname和avatar
         if (! empty($loginResponses)) {
-            // 收集所有organizationcode
+            // 收集所haveorganizationcode
             $orgCodes = [];
             foreach ($loginResponses as $loginResponse) {
                 $orgCode = $loginResponse->getDelightfulOrganizationCode();
@@ -40,9 +40,9 @@ class SessionAppService implements SessionInterface
                 }
             }
 
-            // if有organizationcode，批量get所有organization的根departmentinformation
+            // ifhaveorganizationcode，批量get所haveorganization的根departmentinformation
             if (! empty($orgCodes)) {
-                // 一次性批量get所有organization的根departmentinformation
+                // 一次性批量get所haveorganization的根departmentinformation
                 $rootDepartments = $this->delightfulDepartmentDomainService->getOrganizationsRootDepartment($orgCodes);
 
                 // 填充loginresponseinformation

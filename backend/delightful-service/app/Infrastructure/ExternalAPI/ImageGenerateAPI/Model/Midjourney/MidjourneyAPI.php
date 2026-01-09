@@ -64,7 +64,7 @@ class MidjourneyAPI
     }
 
     /**
-     * check Prompt 是否legal.
+     * check Prompt whetherlegal.
      */
     public function checkPrompt(string $prompt): array
     {

@@ -69,7 +69,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
             $seqInfo['content'] = Json::encode($seqInfo['content']);
             $seqInfo['receive_list'] = Json::encode($seqInfo['receive_list']);
             $seqInfo['extra'] = $this->getSeqExtra($seqInfo['extra'] ?? null);
-            // seq 的topic_idactualsave在 topic_messages table中
+            // seq 的topic_idactualsavein topic_messages table中
             unset($seqInfo['topic_id']);
             $insertData[] = $seqInfo;
         }
@@ -81,8 +81,8 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     }
 
     /**
-     * return最大message的倒数 n 条序列.
-     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
+     * returnmost大message的倒数 n 条序列.
+     * message_id= seqtable的primary keyid,thereforenotneed单独对 message_id 加索引.
      * @return ClientSequenceResponse[]
      */
     public function pullRecentMessage(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array
@@ -102,7 +102,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * return $userLocalMaxSeqId 之后的 $limit 条message.
-     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
+     * message_id= seqtable的primary keyid,thereforenotneed单独对 message_id 加索引.
      * @return ClientSequenceResponse[]
      */
     public function getAccountSeqListByDelightfulId(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array
@@ -148,9 +148,9 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * @return ClientSequenceResponse[]
-     * @todo 挪到 delightful_chat_topic_messages process
+     * @todo 挪to delightful_chat_topic_messages process
      * session窗口滚动loadhistoryrecord.
-     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
+     * message_id= seqtable的primary keyid,thereforenotneed单独对 message_id 加索引.
      */
     public function getConversationChatMessages(MessagesQueryDTO $messagesQueryDTO): array
     {
@@ -159,9 +159,9 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * @return ClientSequenceResponse[]
-     * @todo 挪到 delightful_chat_topic_messages process
+     * @todo 挪to delightful_chat_topic_messages process
      * session窗口滚动loadhistoryrecord.
-     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
+     * message_id= seqtable的primary keyid,thereforenotneed单独对 message_id 加索引.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array
     {
@@ -179,7 +179,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
         $limit = $messagesQueryDTO->getLimit();
         $query = $this->delightfulSeq::query()->whereIn('conversation_id', $conversationIds);
         if (! empty($pageToken)) {
-            // currentsessionhistorymessage中最小的 seq id. will用来查比它还小的value
+            // currentsessionhistorymessage中most小的 seq id. willuse来查比它also小的value
             $query->where('seq_id', $operator, $pageToken);
         }
         if ($timeStart !== null) {
@@ -194,7 +194,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     }
 
     /**
-     * 分groupgetsession下最new几条message.
+     * 分groupgetsession下mostnew几条message.
      */
     public function getConversationsMessagesGroupById(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array
     {
@@ -218,8 +218,8 @@ sql;
     }
 
     /**
-     * get收件方message的status变更stream.
-     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
+     * get收件方message的status变morestream.
+     * message_id= seqtable的primary keyid,thereforenotneed单独对 message_id 加索引.
      * @return DelightfulSeqEntity[]
      */
     public function getReceiveMessagesStatusChange(array $referMessageIds, string $userId): array
@@ -232,8 +232,8 @@ sql;
     }
 
     /**
-     * get发件方message的status变更stream.
-     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
+     * get发件方message的status变morestream.
+     * message_id= seqtable的primary keyid,thereforenotneed单独对 message_id 加索引.
      * @return DelightfulSeqEntity[]
      */
     public function getSenderMessagesStatusChange(string $senderMessageId, string $userId): array
@@ -258,11 +258,11 @@ sql;
     }
 
     /**
-     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
+     * message_id= seqtable的primary keyid,thereforenotneed单独对 message_id 加索引.
      */
     public function getMessageReceiveList(string $messageId, string $delightfulId, ConversationType $userType): ?array
     {
-        // messagestatus发生了变更
+        // messagestatus发生了变more
         $statusChangeSeq = $this->delightfulSeq::query()
             ->where('object_id', $delightfulId)
             ->where('object_type', $userType->value)
@@ -272,7 +272,7 @@ sql;
             ->orderBy('seq_id', 'desc');
         $statusChangeSeq = Db::select($statusChangeSeq->toSql(), $statusChangeSeq->getBindings())[0] ?? null;
         if (empty($statusChangeSeq)) {
-            // 没有status变更的message
+            // nothavestatus变more的message
             $statusChangeSeq = $this->delightfulSeq::query()
                 ->where('id', $messageId)
                 ->orderBy('id', 'desc');
@@ -333,7 +333,7 @@ sql;
         return SeqAssembler::getSeqEntity($seqInfo);
     }
 
-    // todo 移到 delightful_chat_topic_messages process
+    // todo 移to delightful_chat_topic_messages process
     public function getConversationSeqByType(string $delightfulId, string $conversationId, ControlMessageType $seqType): ?DelightfulSeqEntity
     {
         $query = $this->delightfulSeq::query()
@@ -381,7 +381,7 @@ sql;
         return (int) $this->delightfulSeq::query()->whereIn('id', $seqIds)->delete();
     }
 
-    // 为了移除脏data写的method
+    // 为了移except脏data写的method
     public function getSeqByDelightfulId(string $delightfulId, int $limit): array
     {
         $query = $this->delightfulSeq::query()
@@ -391,10 +391,10 @@ sql;
         return Db::select($query->toSql(), $query->getBindings());
     }
 
-    // 为了移除脏data写的method
+    // 为了移except脏data写的method
     public function getHasTrashMessageUsers(): array
     {
-        // 按 delightful_id 分group,找出有垃圾message的user
+        // 按 delightful_id 分group,找出have垃圾message的user
         $query = $this->delightfulSeq::query()
             ->select('object_id')
             ->groupBy('object_id')
@@ -461,7 +461,7 @@ sql;
     }
 
     /**
-     * getmessage的status变更stream.
+     * getmessage的status变morestream.
      * @return DelightfulSeqEntity[]
      */
     private function getMessagesStatusChangeSeq(array $referMessageIds, DelightfulUserEntity $userEntity): array
@@ -474,7 +474,7 @@ sql;
             ->forceIndex('idx_object_type_id_refer_message_id')
             ->orderBy('seq_id', 'desc');
         $referMessages = Db::select($query->toSql(), $query->getBindings());
-        // 从 refer_message_id 中找出message的最新status
+        // from refer_message_id 中找出message的most新status
         $query = $this->delightfulSeq::query()
             ->where('object_type', $userEntity->getUserType()->value)
             ->where('object_id', $userEntity->getDelightfulId())
@@ -482,7 +482,7 @@ sql;
             ->forceIndex('idx_object_type_id_seq_id')
             ->orderBy('seq_id', 'desc');
         $seqList = Db::select($query->toSql(), $query->getBindings());
-        // merge后再降序排列,快速找出message的最新status
+        // merge后again降序排列,快速找出message的most新status
         $seqList = array_merge($seqList, $referMessages);
         $seqList = array_column($seqList, null, 'id');
         krsort($seqList);
@@ -534,17 +534,17 @@ sql;
      */
     private function getMessagesBySeqList(array $seqList, Order $order = Order::Desc): array
     {
-        // 从Messagestablegetmessagecontent
+        // fromMessagestablegetmessagecontent
         $delightfulMessageIds = array_column($seqList, 'delightful_message_id');
         $messages = $this->delightfulMessageRepository->getMessages($delightfulMessageIds);
         $clientSequenceResponses = SeqAssembler::getClientSeqStructs($seqList, $messages);
         return SeqAssembler::sortSeqList($clientSequenceResponses, $order);
     }
 
-    // 避免 redis cacheserialize的object,占用太多内存
+    // 避免 redis cacheserialize的object,占usetoo多内存
     private function getAccountIdByUserId(string $uid): ?DelightfulUserEntity
     {
-        // according touid找到account_id
+        // according touid找toaccount_id
         return $this->delightfulUserRepository->getUserById($uid);
     }
 

@@ -47,7 +47,7 @@ readonly class AuthenticationDomainService
     }
 
     /**
-     * 在organization中查找user.
+     * inorganization中查找user.
      */
     public function findUserInOrganization(string $delightfulId, ?string $organizationCode = null): ?DelightfulUserEntity
     {
@@ -57,8 +57,8 @@ readonly class AuthenticationDomainService
     /**
      * generate账号token.
      *
-     * 由于麦吉support其他账号体系的接入，因此前端的process的是，先去某个账号体系login，再由麦吉做login校验。
-     * 因此，即使use麦吉自己的账号体系，也need遵守这个process。
+     * 由at麦吉support其他账号体系的接入，therefore前端的processis，先去some个账号体系login，again由麦吉做login校验。
+     * therefore，即使use麦吉自己的账号体系，alsoneed遵守这个process。
      */
     public function generateAccountToken(string $delightfulId): string
     {

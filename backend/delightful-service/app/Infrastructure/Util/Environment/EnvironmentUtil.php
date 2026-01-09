@@ -13,7 +13,7 @@ class EnvironmentUtil
 
     public const string ENV_LOCAL_DEV = 'local-dev';
 
-    // 是否本地环境
+    // whether本地环境
     public static function isLocal(): bool
     {
         if (in_array(self::getEnv(), [self::ENV_LOCAL, self::ENV_LOCAL_DEV])) {

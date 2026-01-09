@@ -18,12 +18,12 @@ enum VolcengineStatusCode: string
     case SUCCESS = '20000000';
 
     /**
-     * 正在process中 - responsebody为空.
+     * 正inprocess中 - responsebody为空.
      */
     case PROCESSING = '20000001';
 
     /**
-     * task在queue中 - responsebody为空.
+     * taskinqueue中 - responsebody为空.
      */
     case QUEUED = '20000002';
 
@@ -43,7 +43,7 @@ enum VolcengineStatusCode: string
     case EMPTY_AUDIO = '45000002';
 
     /**
-     * audioformat不correct.
+     * audioformatnotcorrect.
      */
     case INVALID_AUDIO_FORMAT = '45000151';
 
@@ -53,7 +53,7 @@ enum VolcengineStatusCode: string
     case SERVER_BUSY = '55000031';
 
     /**
-     * 判断是否为successstatus
+     * 判断whether为successstatus
      */
     public function isSuccess(): bool
     {
@@ -61,7 +61,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否为process中status（includeprocess中和排队中）.
+     * 判断whether为process中status（includeprocess中和排队中）.
      */
     public function isProcessing(): bool
     {
@@ -69,7 +69,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否为failstatus
+     * 判断whether为failstatus
      */
     public function isFailed(): bool
     {
@@ -77,7 +77,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否为可retry的failstatus
+     * 判断whether为可retry的failstatus
      */
     public function isRetryable(): bool
     {
@@ -85,7 +85,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否need重新submittask
+     * 判断whetherneed重新submittask
      */
     public function needsResubmit(): bool
     {
@@ -99,12 +99,12 @@ enum VolcengineStatusCode: string
     {
         return match ($this) {
             self::SUCCESS => '识别success',
-            self::PROCESSING => '正在process中',
-            self::QUEUED => 'task在queue中',
+            self::PROCESSING => '正inprocess中',
+            self::QUEUED => 'taskinqueue中',
             self::SILENT_AUDIO => '静音audio',
             self::INVALID_PARAMS => 'requestparameterinvalid',
             self::EMPTY_AUDIO => '空audio',
-            self::INVALID_AUDIO_FORMAT => 'audioformat不correct',
+            self::INVALID_AUDIO_FORMAT => 'audioformatnotcorrect',
             self::SERVER_BUSY => 'service器繁忙',
         };
     }
@@ -118,7 +118,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否为service内部error（550xxxx系列）.
+     * 判断whether为service内部error（550xxxx系列）.
      */
     public static function isInternalServerError(string $statusCode): bool
     {

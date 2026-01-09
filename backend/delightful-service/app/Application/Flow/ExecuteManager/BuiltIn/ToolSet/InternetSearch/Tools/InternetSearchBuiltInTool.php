@@ -37,7 +37,7 @@ class InternetSearchBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '麦吉互联网search，批量对user的多个含义sameordifferent的issue进行互联网search。';
+        return '麦吉互联网search，批量对user的多个含义sameordifferent的issueconduct互联网search。';
     }
 
     public function getCallback(): ?Closure
@@ -112,8 +112,8 @@ class InternetSearchBuiltInTool extends AbstractBuiltInTool
         "use_deep_search": {
             "type": "boolean",
             "key": "use_deep_search",
-            "title": "是否use深度search",
-            "description": "是否use深度search",
+            "title": "whetheruse深度search",
+            "description": "whetheruse深度search",
             "required": null,
             "value": null,
             "encryption": false,

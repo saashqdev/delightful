@@ -100,9 +100,9 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 $reqDTO->getTopicId(),
                 $reqDTO->getReferMessageId(),
             );
-            // 计时开始
+            // 计时start
             $start = microtime(true);
-            // 轮询600次，直到拿到image
+            // 轮询600次，until拿toimage
             $count = 600;
             $response = null;
 
@@ -113,13 +113,13 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 }
                 sleep(2);
             }
-            // 如果未complete，则报错timeout
+            // if未complete，then报错timeout
             if (! $response?->isFinishStatus() || empty($response?->getUrls())) {
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.task_timeout');
             }
-            // 计时结束，output秒级time
+            // 计时end，output秒级time
             $end = microtime(true);
-            $this->logger->info(sprintf('转高清结束，耗时: %s秒。', $end - $start));
+            $this->logger->info(sprintf('转高清end，耗时: %s秒。', $end - $start));
             // 将新旧image存入attachment
             $newFile = $this->upLoadFiles($requestContext, [$response->getUrls()[0]])[0] ?? [];
             $this->aiSendMessage(
@@ -143,7 +143,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
     }
 
     /**
-     * 将fileupload到云端.
+     * 将fileuploadto云端.
      */
     #[ArrayShape([['file_id' => 'string', 'url' => 'string']])]
     private function upLoadFiles(RequestContext $requestContext, array $attachments): array
@@ -222,10 +222,10 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
         $reflectionEnum = new ReflectionEnum($case);
         $reflectionCase = $reflectionEnum->getCase($case->name);
 
-        // getconstant的所有annotation
+        // getconstant的所haveannotation
         $attributes = $reflectionCase->getAttributes(ErrorMessage::class);
 
-        // check是否存在 ErrorMessage annotation
+        // checkwhether存in ErrorMessage annotation
         if (! empty($attributes)) {
             // 实例化annotationobject
             $errorMessageAttribute = $attributes[0]->newInstance();
@@ -242,7 +242,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
         ?string $id,
         ImageConvertHighResponseType $type,
         array $content,
-        // streamresponse，拿到客户端传来的 app_message_id ，作为response时候的唯一标识
+        // streamresponse，拿to客户端传来的 app_message_id ，作为responsetime的唯一标识
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

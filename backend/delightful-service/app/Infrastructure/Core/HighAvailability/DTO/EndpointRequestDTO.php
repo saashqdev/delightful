@@ -13,7 +13,7 @@ use App\Infrastructure\Core\HighAvailability\ValueObject\StatisticsLevel;
 
 /**
  * 接入点request DTO.
- * 用于封装 getAvailableEndpoint method的requestparameter.
+ * useat封装 getAvailableEndpoint method的requestparameter.
  */
 class EndpointRequestDTO extends AbstractDTO
 {
@@ -39,7 +39,7 @@ class EndpointRequestDTO extends AbstractDTO
 
     /**
      * 上次选择的接入点ID (optional).
-     * 用于conversation延续等场景，优先选择上次use的接入点.
+     * useatconversation延续etc场景，优先选择上次use的接入点.
      */
     protected ?string $lastSelectedEndpointId = null;
 
@@ -152,7 +152,7 @@ class EndpointRequestDTO extends AbstractDTO
     }
 
     /**
-     * check是否有上次选择的接入点ID.
+     * checkwhetherhave上次选择的接入点ID.
      */
     public function hasLastSelectedEndpointId(): bool
     {
@@ -160,7 +160,7 @@ class EndpointRequestDTO extends AbstractDTO
     }
 
     /**
-     * 从arraydatacreate实例的便捷method.
+     * fromarraydatacreate实例的便捷method.
      */
     public static function create(
         string $endpointType,

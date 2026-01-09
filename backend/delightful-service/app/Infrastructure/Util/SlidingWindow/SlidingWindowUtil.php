@@ -15,7 +15,7 @@ use Throwable;
 
 /**
  * 防抖tool类
- * implement"execute最后一次request"防抖strategy.
+ * implement"executemost后一次request"防抖strategy.
  */
 class SlidingWindowUtil
 {
@@ -28,27 +28,27 @@ class SlidingWindowUtil
     }
 
     /**
-     * 防抖interface - execute最后一次requeststrategy
-     * 在指定time窗口内，只有最后一次requestwill被execute.
+     * 防抖interface - executemost后一次requeststrategy
+     * in指定time窗口内，onlymost后一次requestwillbeexecute.
      *
      * @param string $debounceKey 防抖键
-     * @param float $delayVerificationSeconds delayverifytime（秒），也是actual的防抖窗口
-     * @return bool 是否shouldexecutecurrentrequest
+     * @param float $delayVerificationSeconds delayverifytime（秒），also是actual的防抖窗口
+     * @return bool whethershouldexecutecurrentrequest
      */
     public function shouldExecuteWithDebounce(
         string $debounceKey,
         float $delayVerificationSeconds = 0.5
     ): bool {
         $uniqueRequestId = uniqid('req_', true) . '_' . getmypid();
-        // 键的expiretime应greater thandelayverifytime，以作为security保障
+        // 键的expiretime应greater thandelayverifytime，by作为security保障
         $totalExpirationSeconds = (int) ceil($delayVerificationSeconds) + 1;
         $latestRequestRedisKey = $debounceKey . ':last_req';
 
         try {
-            // mark为最新request
+            // mark为most新request
             $this->redis->set($latestRequestRedisKey, $uniqueRequestId, ['EX' => $totalExpirationSeconds]);
 
-            // 等待verifytime
+            // etc待verifytime
             Coroutine::sleep($delayVerificationSeconds);
 
             // 原子化地verify并statementexecute权
@@ -66,7 +66,7 @@ LUA;
                 'debounce_key' => $debounceKey,
                 'exception' => $exception,
             ]);
-            // 出现exception时defaultallowexecute，避免关键业务被阻塞
+            // 出现exception时defaultallowexecute，避免关键业务be阻塞
             return true;
         }
     }

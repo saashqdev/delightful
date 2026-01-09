@@ -14,7 +14,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
  * @property int $id primary keyID
- * @property int $business_type 模块type，file属于哪个模块
+ * @property int $business_type 模块type，file属at哪个模块
  * @property int $file_type filetype：0:官方添加，1:organization添加
  * @property string $key filekey
  * @property int $file_size filesize

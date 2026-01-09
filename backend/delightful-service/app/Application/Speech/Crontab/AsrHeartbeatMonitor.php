@@ -27,11 +27,11 @@ use Throwable;
  * ASR 录音心跳monitorscheduletask.
  */
 #[Crontab(
-    rule: '* * * * *',                    // 每分钟execute一次
+    rule: '* * * * *',                    // each分钟execute一次
     name: 'AsrHeartbeatMonitor',
     singleton: true,                      // 单例模式防止重复execute
     mutexExpires: 60,                     // 互斥lockexpiretime（秒），对应 AsrConfig::HEARTBEAT_MONITOR_MUTEX_EXPIRES
-    onOneServer: true,                    // 仅在一台service器上execute
+    onOneServer: true,                    // 仅in一台service器上execute
     callback: 'execute',
     memo: 'ASR recording heartbeat monitoring task'
 )]
@@ -54,9 +54,9 @@ class AsrHeartbeatMonitor
     public function execute(): void
     {
         try {
-            $this->logger->info('开始execute ASR 录音心跳monitortask');
+            $this->logger->info('startexecute ASR 录音心跳monitortask');
 
-            // 扫描所有心跳 key（use RedisUtil::scanKeys 防止阻塞）
+            // 扫描所have心跳 key（use RedisUtil::scanKeys 防止阻塞）
             $keys = RedisUtil::scanKeys(
                 AsrRedisKeys::HEARTBEAT_SCAN_PATTERN,
                 AsrConfig::REDIS_SCAN_BATCH_SIZE,
@@ -89,7 +89,7 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * check心跳是否timeout.
+     * check心跳whethertimeout.
      */
     private function checkHeartbeatTimeout(string $key): bool
     {
@@ -100,7 +100,7 @@ class AsrHeartbeatMonitor
             return false;
         }
 
-        // Key 不存在或time戳timeout，触发process
+        // Key not存inortime戳timeout，触发process
         $this->handleHeartbeatTimeout($key);
         return true;
     }
@@ -111,12 +111,12 @@ class AsrHeartbeatMonitor
     private function handleHeartbeatTimeout(string $key): void
     {
         try {
-            // 从 key 中提取 task_key 和 user_id
+            // from key 中提取 task_key 和 user_id
             // Key format：asr:heartbeat:{md5(user_id:task_key)}
-            $this->logger->info('检测到心跳timeout', ['key' => $key]);
+            $this->logger->info('检测to心跳timeout', ['key' => $key]);
 
-            // 由于 key 是 MD5 hash，我们无法直接反向get task_key 和 user_id
-            // need从 Redis 中扫描所有 asr:task:* 来查找匹配的task
+            // 由at key 是 MD5 hash，我们无法直接反toget task_key 和 user_id
+            // needfrom Redis 中扫描所have asr:task:* 来查找匹配的task
             $this->findAndTriggerTimeoutTask($key);
         } catch (Throwable $e) {
             $this->logger->error('process心跳timeoutfail', [
@@ -131,7 +131,7 @@ class AsrHeartbeatMonitor
      */
     private function findAndTriggerTimeoutTask(string $heartbeatKey): void
     {
-        // 扫描所有task
+        // 扫描所havetask
         $keys = RedisUtil::scanKeys(
             AsrRedisKeys::TASK_SCAN_PATTERN,
             AsrConfig::REDIS_SCAN_BATCH_SIZE,
@@ -147,14 +147,14 @@ class AsrHeartbeatMonitor
 
                 $taskStatus = AsrTaskStatusDTO::fromArray($taskData);
 
-                // check是否匹配current心跳 key
+                // checkwhether匹配current心跳 key
                 $expectedHeartbeatKey = sprintf(
                     AsrRedisKeys::HEARTBEAT,
                     md5($taskStatus->userId . ':' . $taskStatus->taskKey)
                 );
 
                 if ($expectedHeartbeatKey === $heartbeatKey) {
-                    // 找到匹配的task，check是否need触发自动总结
+                    // 找to匹配的task，checkwhetherneed触发自动总结
                     if ($this->shouldTriggerAutoSummary($taskStatus)) {
                         $this->triggerAutoSummary($taskStatus);
                     }
@@ -170,21 +170,21 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * 判断是否should触发自动总结.
+     * 判断whethershould触发自动总结.
      */
     private function shouldTriggerAutoSummary(AsrTaskStatusDTO $taskStatus): bool
     {
-        // 如果已cancel，不触发
+        // if已cancel，not触发
         if ($taskStatus->recordingStatus === AsrRecordingStatusEnum::CANCELED->value) {
             return false;
         }
 
-        // 如果处于pausestatus，不触发
+        // if处atpausestatus，not触发
         if ($taskStatus->isPaused) {
             return false;
         }
 
-        // 如果录音status不是 start 或 recording，不触发
+        // if录音statusnot是 start or recording，not触发
         if (! in_array($taskStatus->recordingStatus, [
             AsrRecordingStatusEnum::START->value,
             AsrRecordingStatusEnum::RECORDING->value,
@@ -192,12 +192,12 @@ class AsrHeartbeatMonitor
             return false;
         }
 
-        // 如果没有projectID或话题ID，不触发
+        // ifnothaveprojectIDor话题ID，not触发
         if (empty($taskStatus->projectId) || empty($taskStatus->topicId)) {
             return false;
         }
 
-        // 如果沙箱task未create，不触发
+        // if沙箱task未create，not触发
         if (! $taskStatus->sandboxTaskCreated) {
             return false;
         }
@@ -211,7 +211,7 @@ class AsrHeartbeatMonitor
     private function triggerAutoSummary(AsrTaskStatusDTO $taskStatus): void
     {
         try {
-            // 幂等性check：如果task已complete，skipprocess
+            // 幂etc性check：iftask已complete，skipprocess
             if ($taskStatus->isSummaryCompleted()) {
                 $this->logger->info('task已complete，skip心跳timeoutprocess', [
                     'task_key' => $taskStatus->taskKey,
@@ -237,7 +237,7 @@ class AsrHeartbeatMonitor
             $userAuthorization = DelightfulUserAuthorization::fromUserEntity($userEntity);
             $organizationCode = $taskStatus->organizationCode ?? $userAuthorization->getOrganizationCode();
 
-            // 直接call自动总结method（will在method内部updatestatus）
+            // 直接call自动总结method（willinmethod内部updatestatus）
             $this->asrFileAppService->autoTriggerSummary($taskStatus, $taskStatus->userId, $organizationCode);
 
             $this->logger->info('心跳timeout自动总结已触发', [

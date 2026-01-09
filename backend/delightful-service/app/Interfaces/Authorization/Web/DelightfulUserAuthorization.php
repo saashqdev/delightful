@@ -23,24 +23,24 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Qbhy\HyperfAuth\Authenticatable;
 
 /**
- * 如果改了这个类的name/property/命名空间，请修改 WebUserGuard.php 的 cacheKey ，避免cache无法还原
+ * if改了这个类的name/property/命名空间，请修改 WebUserGuard.php 的 cacheKey ，避免cache无法also原
  */
 class DelightfulUserAuthorization extends AbstractAuthorization
 {
     /**
-     * 账号在某个organization下的id,即user_id.
+     * 账号insome个organization下的id,即user_id.
      */
     protected string $id = '';
 
     /**
-     * userregister后generate的delightful_id,全局唯一
+     * userregister后generate的delightful_id,all局唯一
      */
     protected string $delightfulId = '';
 
     protected UserType $userType;
 
     /**
-     * user在该organization下的status:0:freeze,1:activated,2:已离职,3:已exit.
+     * userin该organization下的status:0:freeze,1:activated,2:已离职,3:已exit.
      */
     protected string $status;
 
@@ -58,7 +58,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected string $applicationCode = '';
 
     /**
-     * 手机号,不带国际冠码
+     * 手机号,not带国际冠码
      */
     protected string $mobile = '';
 
@@ -111,16 +111,16 @@ class DelightfulUserAuthorization extends AbstractAuthorization
             goto create_user;
         }
 
-        // 多环境下 $authorization 可能重复，will有issue（概率趋近无穷小）
+        // 多环境下 $authorization 可能重复，willhaveissue（概率趋近无穷小）
         $delightfulEnvEntity = $delightfulEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
         if ($delightfulEnvEntity === null) {
             $delightfulEnvEntity = $delightfulEnvDomainService->getCurrentDefaultDelightfulEnv();
             if ($delightfulEnvEntity === null) {
-                // token没有bind环境，且没有default环境configuration
+                // tokennothavebind环境，andnothavedefault环境configuration
                 ExceptionBuilder::throw(ChatErrorCode::Delightful_ENVIRONMENT_NOT_FOUND);
             }
         }
-        // 如果是麦吉自己下发的 Token,就由自己校验
+        // if是麦吉自己下发的 Token,then由自己校验
         $loginCheckDTO = new LoginCheckDTO();
         $loginCheckDTO->setAuthorization($authorization);
         /** @var LoginResponseDTO[] $currentEnvDelightfulOrganizationUsers */

@@ -14,7 +14,7 @@ class ImageGenerateResponse
 {
     private ImageGenerateType $imageGenerateType;
 
-    // can是 base64 也可能是 urls
+    // can是 base64 also可能是 urls
     private array $data;
 
     public function __construct(ImageGenerateType $imageGenerateType, array $data)
@@ -25,7 +25,7 @@ class ImageGenerateResponse
             $base64Data = [];
             foreach ($data as $base64) {
                 if (! EasyFileTools::isBase64Image($base64)) {
-                    // check base64 format是否符合standard, 尝试添加前缀
+                    // check base64 formatwhether符合standard, 尝试添加前缀
                     $base64 = 'data:image/jpeg;base64,' . $base64;
                     if (EasyFileTools::isBase64Image($base64)) {
                         $base64Data[] = $base64;

@@ -36,7 +36,7 @@ class TextSplitterTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '将长文本按照既定strategy进行切割';
+        return '将长文本按照既定strategyconduct切割';
     }
 
     public function getCallback(): ?Closure

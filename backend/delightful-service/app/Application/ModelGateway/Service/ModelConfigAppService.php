@@ -71,26 +71,26 @@ class ModelConfigAppService extends AbstractLLMAppService
     public function getChatModelTypeByFallbackChain(string $orgCode, string $userId, string $modelType = '', array $modelFallbackChain = []): string
     {
         $dataIsolation = ModelGatewayDataIsolation::createByOrganizationCodeWithoutSubscription($orgCode, $userId);
-        // 从organization可用的modellist中get所有可chat的model
+        // fromorganization可use的modellist中get所have可chat的model
         $odinModels = di(ModelGatewayMapper::class)->getChatModels($dataIsolation) ?? [];
         $chatModelsName = array_keys($odinModels);
         if (empty($chatModelsName)) {
             return '';
         }
 
-        // 如果指定了modeltype且该model存在于可用modellist中，则直接return
+        // if指定了modeltypeand该model存inat可usemodellist中，then直接return
         if (! empty($modelType) && in_array($modelType, $chatModelsName)) {
             return $modelType;
         }
 
-        // 将可用model转为hashtable，implementO(1)time复杂度的查找
+        // 将可usemodel转为hashtable，implementO(1)time复杂度的查找
         $availableModels = array_flip($chatModelsName);
 
         // get系统default的降级链
         $systemFallbackChain = config('delightful-api.model_fallback_chain.chat', []);
 
         // mergeuser传入的降级链与系统default的降级链
-        // user传入的降级链优先级更高
+        // user传入的降级链优先级more高
         $mergedFallbackChain = array_merge($systemFallbackChain, $modelFallbackChain);
 
         // 按优先级顺序遍历merge后的降级链
@@ -100,7 +100,7 @@ class ModelConfigAppService extends AbstractLLMAppService
             }
         }
 
-        // 后备solution：如果没有匹配任何优先model，usefirst可用model
+        // 后备solution：ifnothave匹配任何优先model，usefirst可usemodel
         return $chatModelsName[0] ?? '';
     }
 }

@@ -14,15 +14,15 @@ use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
  */
 enum UserTaskErrorCode: int
 {
-    // parameter不legal 不legal
+    // parameternotlegal notlegal
     #[ErrorMessage('task.invalid')]
     case PARAMETER_INVALID = 8001;
 
-    // task不存在
+    // tasknot存in
     #[ErrorMessage('task.not_found')]
     case TASK_NOT_FOUND = 8002;
 
-    // task已存在
+    // task已存in
     #[ErrorMessage('task.already_exists')]
     case TASK_ALREADY_EXISTS = 8003;
 

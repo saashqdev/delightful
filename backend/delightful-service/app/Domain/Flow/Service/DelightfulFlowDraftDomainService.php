@@ -39,7 +39,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
     {
         $draft = $this->delightfulFlowDraftRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $draftCode);
         if (! $draft) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$draftCode} 不存在");
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$draftCode} not存in");
         }
         return $draft;
     }
@@ -51,7 +51,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
     {
         $draft = $this->delightfulFlowDraftRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $draftCode);
         if (! $draft) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$draftCode} 不存在");
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$draftCode} not存in");
         }
         $this->delightfulFlowDraftRepository->remove($dataIsolation, $draft);
     }
@@ -73,13 +73,13 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
             }
             $delightfulFlowDraftEntity = $this->delightfulFlowDraftRepository->getByFlowCodeAndCode($dataIsolation, $savingDelightfulFlowDraftEntity->getFlowCode(), $savingDelightfulFlowDraftEntity->getCode());
             if (! $delightfulFlowDraftEntity) {
-                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$savingDelightfulFlowDraftEntity->getCode()} 不存在");
+                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$savingDelightfulFlowDraftEntity->getCode()} not存in");
             }
             $savingDelightfulFlowDraftEntity->prepareForModification($delightfulFlowDraftEntity);
         }
 
         $draft = $this->delightfulFlowDraftRepository->save($dataIsolation, $delightfulFlowDraftEntity);
-        // 仅保留最newrecord
+        // 仅保留mostnewrecord
         $this->delightfulFlowDraftRepository->clearEarlyRecords($dataIsolation, $savingDelightfulFlowDraftEntity->getFlowCode());
         return $draft;
     }

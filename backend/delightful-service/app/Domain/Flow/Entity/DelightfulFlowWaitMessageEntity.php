@@ -32,7 +32,7 @@ class DelightfulFlowWaitMessageEntity extends AbstractEntity
 
     /**
      * timeouttime戳.
-     * 0 代table永不timeout.
+     * 0 代table永nottimeout.
      */
     protected int $timeout = 0;
 
@@ -69,7 +69,7 @@ class DelightfulFlowWaitMessageEntity extends AbstractEntity
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow_code']);
         }
         if (empty($this->flowVersion)) {
-            // 有可能是没有version的情况
+            // have可能是nothaveversion的情况
             $this->flowVersion = '';
         }
         if (empty($this->creator)) {

@@ -21,7 +21,7 @@ return new class extends Migration {
         Schema::create('service_provider', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 50)->comment('service商name');
-            $table->string('provider_code', 50)->comment('service商encoding，表示属于哪个 AI service商。如：官方，DS，阿里云等');
+            $table->string('provider_code', 50)->comment('service商encoding，表示属at哪个 AI service商。如：官方，DS，阿里云etc');
             $table->string('description', 255)->nullable()->comment('service商description');
             $table->string('icon', 255)->nullable()->comment('service商图标');
             $table->tinyInteger('provider_type')->default(0)->comment('service商type：0-普通，1-官方');

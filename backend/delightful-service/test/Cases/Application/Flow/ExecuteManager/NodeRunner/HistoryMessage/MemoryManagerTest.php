@@ -31,7 +31,7 @@ class MemoryManagerTest extends ExecuteManagerBaseTest
             '715320715409252352',
             '342cfb91cba5271e3f6634b4d8b57a73',
             '123',
-            json_decode('{"text": {"content": "task结束：null", "attachments": []}, "type": "text"}', true)
+            json_decode('{"text": {"content": "taskend：null", "attachments": []}, "type": "text"}', true)
         );
         $this->assertTrue(true);
     }

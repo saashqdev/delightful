@@ -60,7 +60,7 @@ class TriggerData
             $this->userExtInfo = $this->triggerDataUserExtInfo;
         }
 
-        // merge paramsForm 到 params
+        // merge paramsForm to params
         $form = ComponentFactory::fastCreate($this->paramsForm);
         if ($form?->isForm()) {
             $formResult = $form->getForm()->getKeyValue();

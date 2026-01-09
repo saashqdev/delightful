@@ -50,10 +50,10 @@ interface ProviderModelRepositoryInterface
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId, ProviderEntity $providerEntity): array;
 
     /**
-     * getorganization可用modellist（containorganization自己的model和Delightfulmodel）.
+     * getorganization可usemodellist（containorganization自己的model和Delightfulmodel）.
      * @param ProviderDataIsolation $dataIsolation data隔离object
-     * @param null|Category $category modelcategory，为空时return所有categorymodel
-     * @return ProviderModelEntity[] 按sort降序sort的modellist，containorganizationmodel和Delightfulmodel（不去重）
+     * @param null|Category $category modelcategory，为空时return所havecategorymodel
+     * @return ProviderModelEntity[] 按sort降序sort的modellist，containorganizationmodel和Delightfulmodel（not去重）
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, Status $status = Status::Enabled): array;
 
@@ -61,7 +61,7 @@ interface ProviderModelRepositoryInterface
      * 批量according toIDgetmodel.
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $ids modelIDarray
-     * @return ProviderModelEntity[] model实体array，以ID为键
+     * @return ProviderModelEntity[] model实体array，byID为键
      */
     public function getByIds(ProviderDataIsolation $dataIsolation, array $ids): array;
 
@@ -71,7 +71,7 @@ interface ProviderModelRepositoryInterface
      * 批量according toModelIDgetmodel.
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $modelIds model标识array
-     * @return array<string, ProviderModelEntity[]> model实体array，以model_id为键，value为对应的modellist
+     * @return array<string, ProviderModelEntity[]> model实体array，bymodel_id为键，value为对应的modellist
      */
     public function getByModelIds(ProviderDataIsolation $dataIsolation, array $modelIds): array;
 

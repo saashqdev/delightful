@@ -40,7 +40,7 @@ readonly class LoginAppService
         // verifyaccountinfo并getaccount
         $account = $this->verifyAndGetAccount($request);
 
-        // verifyuser在organization内是否存在
+        // verifyuserinorganization内whether存in
         $user = $this->verifyAndGetUserInOrganization($account, $request->getOrganizationCode());
 
         // generatetoken
@@ -102,7 +102,7 @@ readonly class LoginAppService
     }
 
     /**
-     * verifyuser在organization内是否存在.
+     * verifyuserinorganization内whether存in.
      */
     private function verifyAndGetUserInOrganization(AccountEntity $account, string $organizationCode): DelightfulUserEntity
     {
@@ -153,7 +153,7 @@ readonly class LoginAppService
     }
 
     /**
-     * format化国家code，ensure以+开头.
+     * format化国家code，ensureby+开头.
      */
     private function formatStateCode(string $stateCode): string
     {

@@ -11,14 +11,14 @@ class RemoveUrlEmailTextPreprocessStrategy extends AbstractTextPreprocessStrateg
 {
     public function preprocess(string $content): string
     {
-        // 移除URL（supportstandard和非standardformat）
+        // 移exceptURL（supportstandard和nonstandardformat）
         $content = preg_replace(
             '/(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/i',
             '',
             $content
         );
 
-        // 移除电子邮件地址
+        // 移except电子邮件地址
         return preg_replace(
             '/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/',
             '',

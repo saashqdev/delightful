@@ -17,8 +17,8 @@ class StepFinishedDTO extends AbstractObject
     protected string $key;
 
     /**
-     * 结束原因：
-     * 0:process结束
+     * endreason：
+     * 0:processend
      * 1.发生exception.
      */
     protected FinishedReasonEnum $finishedReason;

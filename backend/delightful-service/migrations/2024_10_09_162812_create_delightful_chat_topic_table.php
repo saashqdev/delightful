@@ -31,7 +31,7 @@ return new class extends Migration {
             // organizationencoding
             $table->string('organization_code', 64)->comment('organizationencoding');
             // 话题来源
-            $table->string('source_id', 64)->default('')->comment('话题的来源。 such as甲create了one话题，乙的话题id就来自于甲。need同update。');
+            $table->string('source_id', 64)->default('')->comment('话题的来源。 such as甲create了one话题，乙的话题idthen来自at甲。need同update。');
             # 索引
             $table->index(['conversation_id'], 'idx_conversation_id');
             $table->index(['topic_id'], 'idx_topic_id');

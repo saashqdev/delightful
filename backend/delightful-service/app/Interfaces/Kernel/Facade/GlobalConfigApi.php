@@ -34,7 +34,7 @@ class GlobalConfigApi
             $platform = $platformSettingsAppService->get();
             $result = array_merge($result, self::platformSettingsToResponse($platform->toArray()));
         } catch (Throwable $e) {
-            // ignore平台settingexception，避免影响全局configurationread
+            // ignore平台settingexception，避免影响all局configurationread
         }
 
         return $result;

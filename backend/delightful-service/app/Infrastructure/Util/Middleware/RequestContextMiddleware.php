@@ -31,7 +31,7 @@ class RequestContextMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // 注意！为了迭代可控，只能在 api 层对协程context赋value
+        // 注意！为了迭代可控，只能in api 层对协程context赋value
         $accessToken = $request->getHeaderLine('api-key');
 
         if (! empty($accessToken)) {
@@ -52,7 +52,7 @@ class RequestContextMiddleware implements MiddlewareInterface
         try {
             return di(AuthManager::class)->guard(name: 'web')->user();
         } catch (BusinessException $exception) {
-            // if是业务exception，直接throw，不改变exceptiontype
+            // if是业务exception，直接throw，not改变exceptiontype
             throw $exception;
         } catch (Throwable $exception) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR, throwable: $exception);
@@ -83,7 +83,7 @@ class RequestContextMiddleware implements MiddlewareInterface
             $delightfulUserAuthorization->setUserType(UserType::Human);
             return $delightfulUserAuthorization;
         } catch (BusinessException $exception) {
-            // if是业务exception，直接throw，不改变exceptiontype
+            // if是业务exception，直接throw，not改变exceptiontype
             throw $exception;
         } catch (Throwable $exception) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR, throwable: $exception);

@@ -53,7 +53,7 @@ class DelightfulChatUserApi extends AbstractApi
     }
 
     /**
-     * return ai 的avatar昵称等information.
+     * return ai 的avatar昵称etcinformation.
      * @throws Throwable
      */
     #[ArrayShape([
@@ -129,7 +129,7 @@ class DelightfulChatUserApi extends AbstractApi
     }
 
     /*
-     * 是否allowupdateuserinformation.
+     * whetherallowupdateuserinformation.
      */
     public function getUserUpdatePermission(): array
     {

@@ -54,7 +54,7 @@ class File implements ProviderInterface
             }
             throw new TokenInvalidException('Token invalid');
         }
-        // response是one二进制file，save到本地
+        // response是one二进制file，saveto本地
         $localFile = tempnam(sys_get_temp_dir(), 'feishu_file_');
         // according to header 中的 content-type setting本地file名和extension名
         $contentType = $response->getHeader('Content-Type')[0] ?? '';

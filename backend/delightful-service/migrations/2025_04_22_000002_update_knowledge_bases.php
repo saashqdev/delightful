@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         // 修改表结构，添加新field
         Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
-            // check是否已存在field，避免重复添加
+            // checkwhether已存infield，避免重复添加
             if (! Schema::hasColumn('delightful_flow_knowledge', 'fragment_config')) {
                 $table->string('fragment_config', 2000)->nullable()->comment('分段configuration');
             }
@@ -24,7 +24,7 @@ return new class extends Migration {
                 $table->string('embedding_config', 2000)->nullable()->comment('嵌入configuration');
             }
             if (! Schema::hasColumn('delightful_flow_knowledge', 'is_draft')) {
-                $table->tinyInteger('is_draft')->default(0)->comment('是否为draft');
+                $table->tinyInteger('is_draft')->default(0)->comment('whether为draft');
             }
         });
     }
@@ -35,7 +35,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
-            // check是否已存在field，避免重复delete
+            // checkwhether已存infield，避免重复delete
             if (Schema::hasColumn('delightful_flow_knowledge', 'fragment_config')) {
                 $table->dropColumn('fragment_config');
             }

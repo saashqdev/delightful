@@ -44,16 +44,16 @@ class ProviderAppService
         // builddata隔离object
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
-        // 收集所有唯一的service商configurationID
+        // 收集所have唯一的service商configurationID
         $configIds = array_unique(array_map(fn ($model) => $model->getServiceProviderConfigId(), $models));
 
         // 批量getservice商实体（避免嵌套query）
         $providerEntities = $this->providerConfigDomainService->getProviderEntitiesByConfigIds($dataIsolation, $configIds);
 
-        // 批量getservice商configuration实体（用于get别名）
+        // 批量getservice商configuration实体（useatget别名）
         $configEntities = $this->providerConfigDomainService->getConfigByIdsWithoutOrganizationFilter($configIds);
 
-        // 收集所有图标path按organizationencoding分group（includemodel图标和service商图标）
+        // 收集所have图标path按organizationencoding分group（includemodel图标和service商图标）
         $iconsByOrg = [];
         $iconToModelMap = [];
         $iconToProviderMap = [];
@@ -124,7 +124,7 @@ class ProviderAppService
             $localizedModelName = $model->getLocalizedName($locale);
             $localizedModelDescription = $model->getLocalizedDescription($locale);
 
-            // 如果有国际化name则use，否则保持原name
+            // ifhave国际化namethenuse，否then保持原name
             if (! empty($localizedModelName)) {
                 $modelDTO->setName($localizedModelName);
             }
@@ -177,7 +177,7 @@ class ProviderAppService
             return $this->translator->trans('common.recommended');
         }
 
-        // 2. customizeservice商且有别名
+        // 2. customizeservice商andhave别名
         if ($this->isCustomProvider($providerEntity)
             && $configEntity
             && ! empty($configEntity->getAlias())) {
@@ -189,7 +189,7 @@ class ProviderAppService
     }
 
     /**
-     * 判断是否为customizeservice商.
+     * 判断whether为customizeservice商.
      */
     private function isCustomProvider(ProviderEntity $providerEntity): bool
     {

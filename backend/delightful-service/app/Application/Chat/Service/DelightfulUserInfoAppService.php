@@ -92,10 +92,10 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * checkuser是否存在.
+     * checkuserwhether存in.
      *
      * @param string $userId userID
-     * @return bool user是否存在
+     * @return bool userwhether存in
      */
     public function userExists(string $userId): bool
     {
@@ -104,11 +104,11 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * getuser的主要departmentinfo.
+     * getuser的maindepartmentinfo.
      *
      * @param string $userId userID
      * @param ContactDataIsolation $dataIsolation data隔离object
-     * @return null|array 主要departmentinfo，如果没有则returnnull
+     * @return null|array maindepartmentinfo，ifnothavethenreturnnull
      */
     public function getUserPrimaryDepartment(string $userId, ContactDataIsolation $dataIsolation): ?array
     {

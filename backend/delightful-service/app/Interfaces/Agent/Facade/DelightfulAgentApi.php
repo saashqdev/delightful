@@ -247,7 +247,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getReleaseAgentVersions($authenticatable, $agentId);
     }
 
-    // get助理最新version号
+    // get助理most新version号
     public function getAgentMaxVersion(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -266,7 +266,7 @@ class DelightfulAgentApi extends AbstractApi
         $this->delightfulAgentAppService->updateAgentStatus($authorization, $agentId, DelightfulAgentVersionStatus::from($status));
     }
 
-    // 改变助理publish到organization的status
+    // 改变助理publishtoorganization的status
     public function updateAgentEnterpriseStatus(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -363,7 +363,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->saveInstruct($authenticatable, $agentId, $instructs);
     }
 
-    // getchat模式可用助理list
+    // getchat模式可use助理list
     public function getChatModeAvailableAgents()
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -375,10 +375,10 @@ class DelightfulAgentApi extends AbstractApi
         // createpaginationobject
         $page = $this->createPage();
 
-        // get全量data
+        // getall量data
         $data = $this->delightfulAgentAppService->getChatModeAvailableAgents($authenticatable, $query);
 
-        // 在 API 层进行paginationprocess
+        // in API 层conductpaginationprocess
         return AgentAssembler::createChatModelAvailableList($page, $data['total'], $data['list']);
     }
 }

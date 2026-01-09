@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 class PermissionCheckerTest extends TestCase
 {
     /**
-     * test全局管理员permissioncheck.
+     * testall局管理员permissioncheck.
      */
     public function testGlobalAdminHasPermission(): void
     {
@@ -30,7 +30,7 @@ class PermissionCheckerTest extends TestCase
             SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003', '13800000004'],
         ];
 
-        // 全局管理员should有所有permission
+        // all局管理员shouldhave所havepermission
         $this->assertTrue(PermissionChecker::checkPermission(
             '13800000001',
             SuperPermissionEnum::FLOW_ADMIN,
@@ -56,14 +56,14 @@ class PermissionCheckerTest extends TestCase
             SuperPermissionEnum::MODEL_CONFIG_ADMIN->value => ['13800000004', '13800000007'],
         ];
 
-        // 有特定permission的user
+        // have特定permission的user
         $this->assertTrue(PermissionChecker::checkPermission(
             '13800000003',
             SuperPermissionEnum::FLOW_ADMIN,
             $permissions
         ));
 
-        // 一个usercan有多个permission
+        // 一个usercanhave多个permission
         $this->assertTrue(PermissionChecker::checkPermission(
             '13800000004',
             SuperPermissionEnum::FLOW_ADMIN,
@@ -76,7 +76,7 @@ class PermissionCheckerTest extends TestCase
             $permissions
         ));
 
-        // 没有此permission的user
+        // nothave此permission的user
         $this->assertFalse(PermissionChecker::checkPermission(
             '13800000003',
             SuperPermissionEnum::MODEL_CONFIG_ADMIN,
@@ -95,14 +95,14 @@ class PermissionCheckerTest extends TestCase
             SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003', '13800000004'],
         ];
 
-        // 不在permissionlist中的user
+        // notinpermissionlist中的user
         $this->assertFalse(PermissionChecker::checkPermission(
             '13800000099',
             SuperPermissionEnum::FLOW_ADMIN,
             $permissions
         ));
 
-        // permission不存在的情况
+        // permissionnot存in的情况
         $this->assertFalse(PermissionChecker::checkPermission(
             '13800000003',
             SuperPermissionEnum::HIDE_USER_OR_DEPT,
@@ -132,10 +132,10 @@ class PermissionCheckerTest extends TestCase
     public static function permissionCheckDataProvider(): array
     {
         return [
-            '全局管理员' => ['13800000001', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => []], true],
+            'all局管理员' => ['13800000001', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => []], true],
             '特定permissionuser' => ['13800000003', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], true],
             '无permissionuser' => ['13800000099', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
-            'permission不存在' => ['13800000003', SuperPermissionEnum::HIDE_USER_OR_DEPT, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
+            'permissionnot存in' => ['13800000003', SuperPermissionEnum::HIDE_USER_OR_DEPT, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
             '空手机号' => ['', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
         ];
     }

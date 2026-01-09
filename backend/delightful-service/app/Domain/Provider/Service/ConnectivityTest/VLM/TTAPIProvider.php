@@ -34,8 +34,8 @@ class TTAPIProvider implements IProvider
         }
 
         try {
-            // TTAPI 任意test即可，and不need生图，因为 VLM 的model是超级管理员添加的，在use前我们肯定testsuccess
-            // 所以只needtestonecost低的interface即可
+            // TTAPI 任意test即可，andnotneed生图，因为 VLM 的model是超级管理员添加的，inuse前我们肯定testsuccess
+            // 所by只needtestonecost低的interface即可
             $fluxAPI = new FluxAPI($apiKey);
             $fluxAPI->getAccountInfo();
         } catch (Exception $e) {

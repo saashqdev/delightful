@@ -24,7 +24,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * 从沙箱 API responsecreate DTO.
+     * from沙箱 API responsecreate DTO.
      */
     public static function fromSandboxResponse(array $response): self
     {
@@ -41,7 +41,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * checkmerge是否complete.
+     * checkmergewhethercomplete.
      */
     public function isFinished(): bool
     {
@@ -49,7 +49,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * checkmerge是否failed.
+     * checkmergewhetherfailed.
      */
     public function isError(): bool
     {
@@ -57,7 +57,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * convert为array（用于compatible现有code）.
+     * convert为array（useatcompatible现havecode）.
      */
     public function toArray(): array
     {

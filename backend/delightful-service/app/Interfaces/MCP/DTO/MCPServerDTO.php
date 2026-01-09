@@ -37,7 +37,7 @@ class MCPServerDTO extends AbstractDTO
     public string $type = '';
 
     /**
-     * 是否enable.
+     * whetherenable.
      */
     public ?bool $enabled = null;
 

@@ -90,7 +90,7 @@ class KnowledgeBaseDocumentApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * 重新向量化.
+     * 重新to量化.
      */
     public function reVectorized(string $knowledgeBaseCode, string $code)
     {

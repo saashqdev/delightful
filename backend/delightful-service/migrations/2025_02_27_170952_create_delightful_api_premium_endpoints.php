@@ -15,18 +15,18 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // table存在就不execute
+        // table存inthennotexecute
         if (Schema::hasTable('delightful_api_premium_endpoints')) {
             return;
         }
 
         Schema::create('delightful_api_premium_endpoints', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('type', 255)->comment('接入点type。userneed自己保证不与其他业务重复');
+            $table->string('type', 255)->comment('接入点type。userneed自己保证not与其他业务重复');
             $table->string('provider', 255)->comment('提供商')->nullable();
             $table->string('name', 255)->comment('接入点name');
             $table->text('config')->comment('让user自己存一些configurationinfo')->nullable();
-            $table->tinyInteger('enabled')->default(1)->comment('是否enable: 1=enable, 0=disable');
+            $table->tinyInteger('enabled')->default(1)->comment('whetherenable: 1=enable, 0=disable');
             $table->string('circuit_breaker_status', 32)
                 ->default(CircuitBreakerStatus::CLOSED->value)
                 ->comment('熔断status: closed=正常service中, open=熔断中, half_open=尝试restore中');

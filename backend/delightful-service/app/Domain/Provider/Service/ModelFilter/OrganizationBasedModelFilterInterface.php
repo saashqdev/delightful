@@ -12,8 +12,8 @@ use App\Domain\Provider\Entity\ProviderModelEntity;
 /**
  * based onorganizationencoding的modelfilterserviceinterface.
  *
- * 用于替代based onmodeltable visiblePackages field的filter逻辑
- * 企业packageimplement此interface，提供给开源package进行modelfilter
+ * useat替代based onmodeltable visiblePackages field的filter逻辑
+ * 企业packageimplement此interface，提供给开源packageconductmodelfilter
  */
 interface OrganizationBasedModelFilterInterface
 {
@@ -28,16 +28,16 @@ interface OrganizationBasedModelFilterInterface
     public function filterModelsByOrganization(string $organizationCode, array $models): array;
 
     /**
-     * check指定model是否对organization可用.
+     * check指定modelwhether对organization可use.
      *
      * @param string $organizationCode organizationencoding
      * @param string $modelIdentifier model标识符 (如: gpt-4o)
-     * @return bool 是否可用
+     * @return bool whether可use
      */
     public function isModelAvailableForOrganization(string $organizationCode, string $modelIdentifier): bool;
 
     /**
-     * getorganizationcurrentsubscribeproductbind的所有model标识符.
+     * getorganizationcurrentsubscribeproductbind的所havemodel标识符.
      *
      * @param string $organizationCode organizationencoding
      * @return array model标识符array，for example: ['gpt-4o', 'claude-3', ...]

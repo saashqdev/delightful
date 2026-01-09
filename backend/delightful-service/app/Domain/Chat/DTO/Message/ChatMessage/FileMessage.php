@@ -13,7 +13,7 @@ class FileMessage extends AbstractAttachmentMessage
 {
     /**
      * getfileID（return第onefile的ID）
-     * 对于单filemessage（如voice、video等）很有用.
+     * 对at单filemessage（如voice、videoetc）veryhaveuse.
      */
     public function getFileId(): ?string
     {
@@ -23,7 +23,7 @@ class FileMessage extends AbstractAttachmentMessage
 
     /**
      * get第oneattachmentobject
-     * 对于单attachmentmessage（如voice、video等）很有用.
+     * 对at单attachmentmessage（如voice、videoetc）veryhaveuse.
      */
     public function getAttachment(): ?object
     {

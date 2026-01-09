@@ -14,7 +14,7 @@ use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
  */
 enum TokenErrorCode: int
 {
-    // token不存在
+    // tokennot存in
     #[ErrorMessage(message: 'token.not_found')]
     case TokenNotFound = 9000;
 
@@ -22,11 +22,11 @@ enum TokenErrorCode: int
     #[ErrorMessage(message: 'token.expired')]
     case TokenExpired = 9001;
 
-    // tokentype不correct
+    // tokentypenotcorrect
     #[ErrorMessage(message: 'token.type_error')]
     case TokenTypeError = 9002;
 
-    // 没有检测到Tokenassociate的data
+    // nothave检测toTokenassociate的data
     #[ErrorMessage(message: 'token.relation_not_found')]
     case TokenRelationNotFound = 9003;
 
@@ -38,7 +38,7 @@ enum TokenErrorCode: int
     #[ErrorMessage(message: 'token.relation_value_must_set')]
     case TokenRelationValueMustSet = 9005;
 
-    // token不唯一
+    // tokennot唯一
     #[ErrorMessage(message: 'token.not_unique')]
     case TokenNotUnique = 9006;
 

@@ -83,7 +83,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
 
         // according toconversation_id queryagent_user_id
         $conversation = $this->delightfulConversationDomainService->getConversationByIdWithoutCheck($userTaskDTO->getConversationId());
-        // compatibleflow 中的conversation_id 跟chat 中的conversation_id 不一致issue
+        // compatibleflow 中的conversation_id 跟chat 中的conversation_id not一致issue
         if (empty($conversation)) {
             $dataIsolation = DataIsolation::create();
             $dataIsolation->setCurrentOrganizationCode($flow->getOrganizationCode());
@@ -99,7 +99,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
 
         $callbackParams = $this->getCallbackParams($userTaskDTO, $userTaskValueDTO, $flowCode);
         $enabled = true;
-        // 如果是不重复的，那么是直接create调度task
+        // if是not重复的，那么是直接create调度task
         if ($taskConfigDomainService->getType() === TaskType::NoRepeat) {
             $taskScheduler = new TaskScheduler();
             $taskScheduler->setExternalId($externalId);
@@ -114,7 +114,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // 如果是customize重复，那么直接create调度task,同时closeschedulegenerate调度task
+        // if是customize重复，那么直接create调度task,meanwhilecloseschedulegenerate调度task
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;
@@ -238,11 +238,11 @@ class DelightfulUserTaskAppService extends AbstractAppService
             ExceptionBuilder::throw(UserTaskErrorCode::TASK_ALREADY_EXISTS);
         }
 
-        // 先清除待execute的task
+        // 先清except待execute的task
         $this->taskSchedulerDomainService->clearTaskByExternalId($task->getExternalId());
 
         $enabled = true;
-        // 如果是不重复的，那么是直接create调度task
+        // if是not重复的，那么是直接create调度task
         if ($taskConfigDomainService->getType() === TaskType::NoRepeat) {
             $taskScheduler = new TaskScheduler();
             $taskScheduler->setExternalId($externalId);
@@ -257,7 +257,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // 如果是customize重复，那么直接create调度task,同时closeschedulegenerate调度task
+        // if是customize重复，那么直接create调度task,meanwhilecloseschedulegenerate调度task
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;
@@ -339,7 +339,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
         di(DelightfulChatMessageAppService::class)->userSendMessageToAgent($receiveSeqDTO, $senderUserId, $receiveUserId, $appMessageId, false, null, ConversationType::Ai, $topicId);
     }
 
-    // 后台task,不will模拟usersendmessage,  预留method，暂时没有用到
+    // 后台task,notwill模拟usersendmessage,  预留method，暂时nothaveuseto
     // public static function asyncCallback(string $flow_code, array $user_task)
     // {
     //     $triggerConfig = [
@@ -426,7 +426,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //         messageInfo: ['message_entity' => TriggerData::createMessageEntity(new TextMessage(['content' => $triggerConfig['trigger_data']['content']]))],
     //         params: $triggerConfig['trigger_data'],
     //         paramsForm: $triggerConfig['trigger_data_form'],
-    //         // 试运行时，全局variable为手动传入
+    //         // 试运行时，all局variable为手动传入
     //         globalVariable: ComponentFactory::fastCreate($globalVariable) ?? $delightfulFlow->getGlobalVariable(),
     //     );
 
@@ -445,7 +445,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     );
     //     $executionData->setTopicId($topicId);
     //     $executionData->setDebug($triggerConfig['debug']);
-    //     // 运行process图，检测是否can运行
+    //     // 运行process图，检测whethercan运行
     //     $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
     //     $executor->execute();
 
@@ -459,12 +459,12 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     // get node 运行result
     //     foreach ($delightfulFlow->getNodes() as $node) {
     //         if ($node->getNodeDebugResult()) {
-    //             // 有一个fail就判定为fail
+    //             // have一个failthen判定为fail
     //             if (! $node->getNodeDebugResult()->isSuccess()) {
     //                 $result['success'] = false;
     //             }
     //             if ($node->getNodeType() === NodeType::ReplyMessage) {
-    //                 // 如果是replymessage节点，则将messagecontent添加到result中
+    //                 // if是replymessage节点，then将messagecontent添加toresult中
     //                 $result['message'] = $node->getNodeDebugResult()->getOutput();
     //             }
     //         }

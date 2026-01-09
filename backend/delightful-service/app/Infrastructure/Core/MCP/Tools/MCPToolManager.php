@@ -23,7 +23,7 @@ class MCPToolManager
     }
 
     /**
-     * get所有register的tool.
+     * get所haveregister的tool.
      *
      * @return array<string, MCPTool>
      */
@@ -55,7 +55,7 @@ class MCPToolManager
     }
 
     /**
-     * check指定name的tool是否存在.
+     * check指定name的toolwhether存in.
      */
     public function hasTool(string $name): bool
     {
@@ -63,7 +63,7 @@ class MCPToolManager
     }
 
     /**
-     * check是否没有任何tool.
+     * checkwhethernothave任何tool.
      */
     public function isEmpty(): bool
     {

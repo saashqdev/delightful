@@ -24,7 +24,7 @@ class MCPResourceManager
      */
     public function registerResource(array $resource): void
     {
-        // nullimplement，暂不register任何资源
+        // nullimplement，暂notregister任何资源
     }
 
     /**
@@ -48,7 +48,7 @@ class MCPResourceManager
     }
 
     /**
-     * check指定ID的资源是否存在.
+     * check指定ID的资源whether存in.
      */
     public function hasResource(string $id): bool
     {
@@ -56,7 +56,7 @@ class MCPResourceManager
     }
 
     /**
-     * check是否没有任何资源.
+     * checkwhethernothave任何资源.
      */
     public function isEmpty(): bool
     {

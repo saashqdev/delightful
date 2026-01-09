@@ -55,7 +55,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         if (! $providerConfigEntity) {
             return null;
         }
-        // 存在template虚拟的 configId 和已经writedatabase的 configId，因此这里用 getProviderConfig return的service商 id 替换传入的value
+        // 存intemplate虚拟的 configId 和已经writedatabase的 configId，therefore这里use getProviderConfig return的service商 id 替换传入的value
         $configId = (string) $providerConfigEntity->getId();
         // 2. query Provider
         $providerEntity = $this->getProviderById($dataIsolation, $providerConfigEntity->getServiceProviderId());
@@ -81,7 +81,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     /**
      * 批量getservice商实体，passservice商configurationIDmapping.
      * @param array<int> $configIds service商configurationIDarray
-     * @return array<int, ProviderEntity> configurationID到service商实体的mapping
+     * @return array<int, ProviderEntity> configurationIDtoservice商实体的mapping
      */
     public function getProviderEntitiesByConfigIds(ProviderDataIsolation $dataIsolation, array $configIds): array
     {
@@ -89,28 +89,28 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             return [];
         }
 
-        // 批量getconfiguration实体（不needorganizationencodingfilter）
+        // 批量getconfiguration实体（notneedorganizationencodingfilter）
         $configEntities = $this->serviceProviderConfigRepository->getByIdsWithoutOrganizationFilter($configIds);
         if (empty($configEntities)) {
             return [];
         }
 
         // 提取service商ID
-        // $configEntities 现在是以 config_id 为 key 的array
+        // $configEntities 现in是by config_id 为 key 的array
         $providerIds = [];
         foreach ($configEntities as $configId => $config) {
             $providerIds[] = $config->getServiceProviderId();
         }
         $providerIds = array_unique($providerIds);
 
-        // 批量getservice商实体（不needorganizationencodingfilter）
+        // 批量getservice商实体（notneedorganizationencodingfilter）
         $providerEntities = $this->providerRepository->getByIdsWithoutOrganizationFilter($providerIds);
         if (empty($providerEntities)) {
             return [];
         }
 
-        // 建立configurationID到service商实体的mapping
-        // 两个array都是以 id 为 key，can直接access
+        // 建立configurationIDtoservice商实体的mapping
+        // 两个arrayall是by id 为 key，can直接access
         $configToProviderMap = [];
         foreach ($configEntities as $configId => $config) {
             $providerId = $config->getServiceProviderId();
@@ -125,11 +125,11 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     public function updateProviderConfig(ProviderDataIsolation $dataIsolation, ProviderConfigEntity $providerConfigEntity): ProviderConfigEntity
     {
         $configId = $providerConfigEntity->getId();
-        // 1. check是否为template ID
+        // 1. checkwhether为template ID
         if (ProviderConfigIdAssembler::isAnyProviderTemplate($configId)) {
             return $this->handleTemplateConfigUpdate($dataIsolation, $providerConfigEntity);
         }
-        // 2. 普通configurationupdate逻辑（原有逻辑）
+        // 2. 普通configurationupdate逻辑（原have逻辑）
         return $this->handleNormalConfigUpdate($dataIsolation, $providerConfigEntity);
     }
 
@@ -154,7 +154,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         $this->serviceProviderConfigRepository->delete($dataIsolation, $id);
     }
 
-    // 从 ProviderDomainService merge过来的method
+    // from ProviderDomainService merge过来的method
     public function getProviderById(ProviderDataIsolation $dataIsolation, int $id): ?ProviderEntity
     {
         return $this->providerRepository->getById($id);
@@ -170,7 +170,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * according toIDgetconfiguration实体（不按organizationfilter，全局query）.
+     * according toIDgetconfiguration实体（not按organizationfilter，all局query）.
      *
      * @param int $id configurationID
      * @return null|ProviderConfigEntity configuration实体
@@ -181,10 +181,10 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * according toIDarraygetconfiguration实体列表（不按organizationfilter，全局query）.
+     * according toIDarraygetconfiguration实体列表（not按organizationfilter，all局query）.
      *
      * @param array<int> $ids configurationIDarray
-     * @return array<int, ProviderConfigEntity> return以id为key的configuration实体array
+     * @return array<int, ProviderConfigEntity> returnbyid为key的configuration实体array
      */
     public function getConfigByIdsWithoutOrganizationFilter(array $ids): array
     {
@@ -192,13 +192,13 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * getservice商configuration实体，统一handle所有情况.
+     * getservice商configuration实体，统一handle所have情况.
      * - templateID（format：providerCode_category）
      * - 常规databaseconfigurationID.
      */
     public function getProviderConfig(ProviderDataIsolation $dataIsolation, string $configId): ?ProviderConfigEntity
     {
-        // 1. check是否为service商templateID（format：providerCode_category）
+        // 1. checkwhether为service商templateID（format：providerCode_category）
         if (ProviderConfigIdAssembler::isAnyProviderTemplate($configId)) {
             // parsetemplateIDgetProviderCode和Category
             $parsed = ProviderConfigIdAssembler::parseProviderTemplate($configId);
@@ -209,7 +209,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             $providerCode = $parsed['providerCode'];
             $category = $parsed['category'];
             if ($providerCode === ProviderCode::Official && OfficialOrganizationUtil::isOfficialOrganization($dataIsolation->getCurrentOrganizationCode())) {
-                // 官方organization不allowuse官方service商
+                // 官方organizationnotallowuse官方service商
                 return null;
             }
             // get对应的service商实体
@@ -218,14 +218,14 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
                 return null;
             }
 
-            // 先checkorganization下是否已存在对应的configuration
+            // 先checkorganization下whether已存in对应的configuration
             $existingConfig = $this->serviceProviderConfigRepository->findFirstByServiceProviderId($dataIsolation, $providerEntity->getId());
             if ($existingConfig) {
-                // 如果存在真实configuration，return真实configuration
+                // if存in真实configuration，return真实configuration
                 return $existingConfig;
             }
 
-            // 不存在时才构造虚拟的service商configuration实体
+            // not存in时才构造虚拟的service商configuration实体
             return $this->createVirtualProviderConfig($dataIsolation, $providerEntity, $configId);
         }
 
@@ -242,7 +242,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * getorganization下的所有service商configuration.
+     * getorganization下的所haveservice商configuration.
      * @return ProviderConfigEntity[]
      */
     public function getAllByOrganization(ProviderDataIsolation $dataIsolation): array
@@ -251,7 +251,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * according toIDgetservice商configuration（不filterorganization）.
+     * according toIDgetservice商configuration（notfilterorganization）.
      */
     public function getByIdWithoutOrganizationFilter(int $id): ?ProviderConfigEntity
     {
@@ -259,13 +259,13 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * create虚拟的service商configuration实体（support所有service商type）.
+     * create虚拟的service商configuration实体（support所haveservice商type）.
      */
     private function createVirtualProviderConfig(ProviderDataIsolation $dataIsolation, ProviderEntity $providerEntity, string $templateId): ProviderConfigEntity
     {
         $configEntity = new ProviderConfigEntity();
 
-        // 除了 delightful service商，defaultstatus都是close
+        // except了 delightful service商，defaultstatusall是close
         $defaultStatus = $providerEntity->getProviderCode() === ProviderCode::Official
             ? Status::Enabled
             : Status::Disabled;
@@ -297,7 +297,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         $providerCode = $parsed['providerCode'];
         $category = $parsed['category'];
 
-        // 2. validatetemplateconfiguration不能为null
+        // 2. validatetemplateconfigurationnot能为null
         $config = $providerConfigEntity->getConfig();
         if ($config === null || $this->isProviderConfigEmpty($config)) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderConfigError);
@@ -326,11 +326,11 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             // 5. 查找本organization下same provider_code 和 category 的configuration
             $existingConfig = $this->serviceProviderConfigRepository->findFirstByServiceProviderId($dataIsolation, $providerEntity->getId());
             if ($existingConfig) {
-                // 6. 存在则update
+                // 6. 存inthenupdate
                 return $this->updateProviderConfigData($dataIsolation, $existingConfig, $providerConfigEntity);
             }
 
-            // 7. 不存在则create新configuration
+            // 7. not存inthencreate新configuration
             return $this->createNewTemplateConfig($dataIsolation, $providerEntity, $providerConfigEntity);
         } finally {
             $this->locker->release($lockName, $lockOwner);
@@ -338,17 +338,17 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * handle普通configurationupdate逻辑（原有逻辑）.
+     * handle普通configurationupdate逻辑（原have逻辑）.
      */
     private function handleNormalConfigUpdate(ProviderDataIsolation $dataIsolation, ProviderConfigEntity $providerConfigEntity): ProviderConfigEntity
     {
-        // get现有的configuration实体
+        // get现have的configuration实体
         $existingConfigEntity = $this->serviceProviderConfigRepository->getById($dataIsolation, $providerConfigEntity->getId());
         if ($existingConfigEntity === null) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderConfigError);
         }
 
-        // get对应的 Provider info进行业务rulevalidate
+        // get对应的 Provider infoconduct业务rulevalidate
         $provider = $this->getProviderById($dataIsolation, $existingConfigEntity->getServiceProviderId());
         if ($provider === null) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotFound);
@@ -396,7 +396,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         // updateconfigurationdata
         $existingConfig->setConfig($processedConfig);
 
-        // update其他field（如果有提供）
+        // update其他field（ifhave提供）
         if ($newConfigData->getAlias()) {
             $existingConfig->setAlias($newConfigData->getAlias());
         }
@@ -412,11 +412,11 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * checkProviderConfigItemconfiguration是否为null（所有field都是nullvalue）.
+     * checkProviderConfigItemconfigurationwhether为null（所havefieldall是nullvalue）.
      */
     private function isProviderConfigEmpty(ProviderConfigItem $config): bool
     {
-        // check所有configurationfield是否都为null
+        // check所haveconfigurationfieldwhetherall为null
         return empty($config->getAk())
                && empty($config->getSk())
                && empty($config->getApiKey())

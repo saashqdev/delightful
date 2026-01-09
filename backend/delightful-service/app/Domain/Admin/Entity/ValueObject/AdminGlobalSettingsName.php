@@ -9,7 +9,7 @@ namespace App\Domain\Admin\Entity\ValueObject;
 
 enum AdminGlobalSettingsName: string
 {
-    // 全局default好友
+    // all局default好友
     case DEFAULT_FRIEND = 'default_friend';
 
     // 助理create管理
@@ -18,7 +18,7 @@ enum AdminGlobalSettingsName: string
     // 第third-partypublish管控
     case THIRD_PARTY_PUBLISH = 'third_platform_publish';
 
-    // get助理全局settingtype
+    // get助理all局settingtype
     public static function getByType(AdminGlobalSettingsType $type): string
     {
         return match ($type) {

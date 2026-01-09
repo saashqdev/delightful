@@ -79,12 +79,12 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
         // verify其他field
         $this->assertSame('en_US', $data['default_language']);
-        $this->assertArrayEquals($payload['name_i18n'], $data['name_i18n'], 'name_i18n 不匹配');
-        $this->assertArrayEquals($payload['title_i18n'], $data['title_i18n'], 'title_i18n 不匹配');
-        $this->assertArrayEquals($payload['keywords_i18n'], $data['keywords_i18n'], 'keywords_i18n 不匹配');
-        $this->assertArrayEquals($payload['description_i18n'], $data['description_i18n'], 'description_i18n 不匹配');
+        $this->assertArrayEquals($payload['name_i18n'], $data['name_i18n'], 'name_i18n not匹配');
+        $this->assertArrayEquals($payload['title_i18n'], $data['title_i18n'], 'title_i18n not匹配');
+        $this->assertArrayEquals($payload['keywords_i18n'], $data['keywords_i18n'], 'keywords_i18n not匹配');
+        $this->assertArrayEquals($payload['description_i18n'], $data['description_i18n'], 'description_i18n not匹配');
 
-        // 再次 GET verify持久化
+        // again次 GET verify持久化
         $getResponse = $this->get($this->getUrl, [], $this->getCommonHeaders());
         $this->assertSame(1000, $getResponse['code']);
         $getData = $getResponse['data'];
@@ -119,9 +119,9 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
         // verify中文 logo 已update
         $this->assertSame('https://example.com/updated_logo_zh.png', $data['logo']['zh_CN']['url']);
-        // verify英文 logo 保持不变
+        // verify英文 logo 保持not变
         $this->assertSame('https://example.com/initial_logo_en.png', $data['logo']['en_US']['url']);
-        // verify favicon 保持不变
+        // verify favicon 保持not变
         $this->assertSame('https://example.com/initial_favicon.ico', $data['favicon']['url']);
     }
 
@@ -139,9 +139,9 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
     public function testUpdatePlatformSettingsWithInvalidUrl(): void
     {
-        // test非 https URL
+        // testnon https URL
         $payload = [
-            'favicon_url' => 'http://example.com/favicon.ico', // 非 https
+            'favicon_url' => 'http://example.com/favicon.ico', // non https
         ];
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
@@ -157,7 +157,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         ];
         $this->put($this->putUrl, $initialPayload, $this->getCommonHeaders());
 
-        // 尝试clear favicon (传入空string不willupdate，所以不shouldfail)
+        // 尝试clear favicon (传入空stringnotwillupdate，所bynotshouldfail)
         $payload = [
             'favicon_url' => '', // 空string
             'default_language' => 'zh_CN',
@@ -165,7 +165,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
-        // favicon should保持原value（因为空string不willupdate）
+        // favicon should保持原value（因为空stringnotwillupdate）
         $data = $response['data'];
         $this->assertSame('https://example.com/favicon.ico', $data['favicon']['url']);
     }
@@ -190,8 +190,8 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
         $this->assertArrayHasKey('name_i18n', $data);
         $this->assertArrayHasKey('title_i18n', $data);
-        $this->assertArrayEquals($payload['name_i18n'], $data['name_i18n'], 'name_i18n 不匹配');
-        $this->assertArrayEquals($payload['title_i18n'], $data['title_i18n'], 'title_i18n 不匹配');
+        $this->assertArrayEquals($payload['name_i18n'], $data['name_i18n'], 'name_i18n not匹配');
+        $this->assertArrayEquals($payload['title_i18n'], $data['title_i18n'], 'title_i18n not匹配');
     }
 
     public function testUpdatePlatformSettingsWithLogoUrls(): void

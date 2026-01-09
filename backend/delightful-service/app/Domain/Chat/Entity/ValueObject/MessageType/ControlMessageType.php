@@ -12,13 +12,13 @@ namespace App\Domain\Chat\Entity\ValueObject\MessageType;
  */
 enum ControlMessageType: string
 {
-    // queue等场景的心跳
+    // queueetc场景的心跳
     case Ping = 'ping';
 
     // createsession窗口
     case CreateConversation = 'create_conversation';
 
-    // 移除session窗口（list不显示）
+    // 移exceptsession窗口（listnot显示）
     case HideConversation = 'hide_conversation';
 
     // 置顶session窗口
@@ -39,10 +39,10 @@ enum ControlMessageType: string
     // editmessage
     case EditMessage = 'edit_message';
 
-    // 开始在session窗口input
+    // startinsession窗口input
     case StartConversationInput = 'start_conversation_input';
 
-    // 结束在session窗口input
+    // endinsession窗口input
     case EndConversationInput = 'end_conversation_input';
 
     // opensession窗口
@@ -66,19 +66,19 @@ enum ControlMessageType: string
     // updategroup chat
     case GroupUpdate = 'group_update';
 
-    // 系统notify(xx加入/离开group chat,群温馨reminder等)
+    // 系统notify(xx加入/离开group chat,群温馨reminderetc)
     case SystemNotice = 'system_notice';
 
-    // 群member变更
+    // 群member变more
     case GroupUsersAdd = 'group_users_add';
 
-    // 群member变更
+    // 群member变more
     case GroupUsersRemove = 'group_users_remove';
 
     // 解散group chat
     case GroupDisband = 'group_disband';
 
-    // 群memberrole变更(批量set管理员/普通member)
+    // 群memberrole变more(批量set管理员/普通member)
     case GroupUserRoleChange = 'group_user_role_change';
 
     // 转让群主
@@ -101,7 +101,7 @@ enum ControlMessageType: string
 
     /**
      * 未知message。
-     * 由于version迭代，发版timediff等原因，可能产生未知type的message。
+     * 由atversion迭代，发版timediffetcreason，可能产生未知type的message。
      */
     case Unknown = 'unknown';
 
@@ -115,8 +115,8 @@ enum ControlMessageType: string
      */
     public static function getMessageStatusChangeType(): array
     {
-        // 不containeditmessage的status变更!
-        // editmessage不will改变message的status,只will改变message的content.
+        // notcontaineditmessage的status变more!
+        // editmessagenotwill改变message的status,只will改变message的content.
         return [
             self::RevokeMessage,
             self::ReadMessage,

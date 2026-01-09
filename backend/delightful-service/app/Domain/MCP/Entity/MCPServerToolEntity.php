@@ -56,7 +56,7 @@ class MCPServerToolEntity extends AbstractEntity
     protected string $version = '';
 
     /**
-     * 是否enable.
+     * whetherenable.
      */
     protected bool $enabled = false;
 
@@ -66,7 +66,7 @@ class MCPServerToolEntity extends AbstractEntity
     protected ToolOptions $options;
 
     /**
-     * associate的information，用于前端展示.
+     * associate的information，useat前端展示.
      */
     protected ?array $relInfo = null;
 

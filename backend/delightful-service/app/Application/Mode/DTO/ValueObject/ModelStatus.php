@@ -26,7 +26,7 @@ enum ModelStatus: string
     }
 
     /**
-     * check是否为可用status
+     * checkwhether为可usestatus
      */
     public function isAvailable(): bool
     {

@@ -37,7 +37,7 @@ class CommentEntity extends AbstractEntity
     protected int $parentId;
 
     /**
-     * 对comment的简短description，主要是给动态用的，for examplecreate待办、uploadimage等system动态.
+     * 对comment的简短description，main是给动态use的，for examplecreate待办、uploadimageetcsystem动态.
      */
     protected string $description = '';
 

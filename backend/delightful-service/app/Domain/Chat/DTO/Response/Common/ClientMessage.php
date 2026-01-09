@@ -14,33 +14,33 @@ use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Throwable;
 
 /**
- * 客户端收到的message结构体.
+ * 客户端收to的message结构体.
  */
 class ClientMessage extends AbstractEntity
 {
-    // service端generate的message唯一id，全局唯一。用于withdraw、editmessage。
+    // service端generate的message唯一id，all局唯一。useatwithdraw、editmessage。
     protected string $delightfulMessageId;
 
-    // 客户端generate，needios/安卓/web三端共同确定一个generate算法。用于告知客户端，delightful_message_id的由来
+    // 客户端generate，needios/安卓/web三端共同确定一个generate算法。useat告知客户端，delightful_message_id的由来
     protected ?string $appMessageId;
 
     // 话题id
     protected ?string $topicId;
 
-    // message的小类。控制message的小类：已读回执；withdraw；edit；入群/退群；organization架构变动; 。 展示message：text,voice,img,file,video等
+    // message的小类。控制message的小类：已读回执；withdraw；edit；入群/退群；organization架构变动; 。 展示message：text,voice,img,file,videoetc
 
     protected string $type;
 
-    // 回显未读人数,如果user点击了detail,再request具体的messagecontent
+    // 回显未读人数,ifuser点击了detail,againrequestspecific的messagecontent
     protected ?int $unreadCount;
 
-    // messagesend者,自己或者他人
+    // messagesend者,自己or者他人
     protected string $senderId;
 
-    // messagesendtime，与 delightful_message_id 一起，用于withdraw、editmessage时的唯一性校验。
+    // messagesendtime，与 delightful_message_id 一起，useatwithdraw、editmessage时的唯一性校验。
     protected int $sendTime;
 
-    // chatmessagestatus:unread | seen | read |revoked  .对应中文释义：未读|已读|已查看（非纯文本的复杂typemessage，user点击了detail）  | withdraw
+    // chatmessagestatus:unread | seen | read |revoked  .对应中文释义：未读|已读|已查看（non纯文本的复杂typemessage，user点击了detail）  | withdraw
     protected ?string $status;
 
     protected MessageInterface $content;
@@ -48,7 +48,7 @@ class ClientMessage extends AbstractEntity
     public function __construct(array $data)
     {
         if (! $data['content'] instanceof MessageInterface) {
-            // 避免各种 bug 导致user完全无法拉message，这里做一下兜底
+            // 避免each种 bug 导致user完all无法拉message，这里做一下兜底
             try {
                 $data['content'] = MessageAssembler::getMessageStructByArray($data['type'], $data['content']);
             } catch (Throwable) {

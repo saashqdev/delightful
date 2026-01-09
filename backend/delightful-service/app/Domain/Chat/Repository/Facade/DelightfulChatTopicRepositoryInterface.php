@@ -51,13 +51,13 @@ interface DelightfulChatTopicRepositoryInterface
     public function getTopicMessagesByConversationId(string $conversationId): array;
 
     /**
-     * 按timerangegetconversation下某个话题的message.
+     * 按timerangegetconversation下some个话题的message.
      * @return ClientSequenceResponse[]
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array;
 
     /**
-     * passtopic_idget话题information（不needconversation_id）.
+     * passtopic_idget话题information（notneedconversation_id）.
      */
     public function getTopicByTopicId(string $topicId): ?DelightfulTopicEntity;
 
@@ -74,7 +74,7 @@ interface DelightfulChatTopicRepositoryInterface
      * Get topic messages by conversation ID, topic ID and max seq ID.
      * @param string $conversationId conversationID
      * @param string $topicId 话题ID
-     * @param int $maxSeqId 最大序列ID（contain该ID）
+     * @param int $maxSeqId most大序列ID（contain该ID）
      * @return DelightfulTopicMessageEntity[] 话题message实体array
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array;

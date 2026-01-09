@@ -70,7 +70,7 @@ class ModelConfigDomainService extends AbstractDomainService
     }
 
     /**
-     * according toIDgetmodelconfiguration, 不存在则throwexception.
+     * according toIDgetmodelconfiguration, not存inthenthrowexception.
      */
     public function showById(string $id): ModelConfigEntity
     {
@@ -83,7 +83,7 @@ class ModelConfigDomainService extends AbstractDomainService
     }
 
     /**
-     * according toendpoint或typegetmodelconfiguration.
+     * according toendpointortypegetmodelconfiguration.
      */
     public function getByEndpointOrType(string $endpointOrType): ?ModelConfigEntity
     {

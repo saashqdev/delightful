@@ -91,7 +91,7 @@ class AdminModeAssembler
             $modelInfo = $providerModels[$modelId] ?? null;
 
             if ($modelInfo && $modelInfo['best']) {
-                // 找到可用model，use最佳model的info
+                // 找to可usemodel，usemost佳model的info
                 $providerModel = $modelInfo['best'];
                 $modelDTO->setModelName($providerModel->getName());
                 $modelDTO->setModelIcon($providerModel->getIcon());
@@ -105,10 +105,10 @@ class AdminModeAssembler
                 }
                 $modelDTO->setModelDescription($description);
 
-                // 保持向后compatible，set providerModelId 为查找到的model的ID
+                // 保持to后compatible，set providerModelId 为查找to的model的ID
                 $modelDTO->setProviderModelId((string) $providerModel->getId());
             } else {
-                // 后台管理need显示所有status，include无可用model的情况
+                // 后台管理need显示所havestatus，include无可usemodel的情况
                 $status = $modelInfo['status'] ?? ModelStatus::Deleted;
                 $modelDTO->setModelStatus($status);
                 $modelDTO->setModelStatus($status);
@@ -200,7 +200,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 将UpdateModeRequest的dataapplication到现有ModeEntity（部分update）.
+     * 将UpdateModeRequest的dataapplicationto现haveModeEntity（部分update）.
      */
     public static function applyUpdateRequestToEntity(UpdateModeRequest $request, ModeEntity $existingEntity): void
     {

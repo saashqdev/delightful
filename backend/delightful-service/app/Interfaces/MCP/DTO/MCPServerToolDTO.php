@@ -52,7 +52,7 @@ class MCPServerToolDTO extends AbstractDTO
     public string $version = '';
 
     /**
-     * 是否enable.
+     * whetherenable.
      */
     public ?bool $enabled = null;
 

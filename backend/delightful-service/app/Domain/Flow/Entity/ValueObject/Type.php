@@ -11,7 +11,7 @@ enum Type: int
 {
     case None = 0;
 
-    // 主process（直接用作助理）
+    // 主process（直接use作助理）
     case Main = 1;
 
     // 子process
@@ -20,7 +20,7 @@ enum Type: int
     // tool
     case Tools = 3;
 
-    // group合节点，运行方式有点类似于子process
+    // group合节点，运行methodhave点analogousat子process
     case CombinedNode = 4;
 
     // 循环节点

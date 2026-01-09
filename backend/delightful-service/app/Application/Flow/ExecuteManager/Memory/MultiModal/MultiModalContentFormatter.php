@@ -11,16 +11,16 @@ use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 
 /**
  * 多模态contentformat化tool
- * 用于统一processdifferent场景下的多模态contentformat化.
+ * useat统一processdifferent场景下的多模态contentformat化.
  */
 class MultiModalContentFormatter
 {
     /**
-     * 将所有attachmentformat化到文本中.
+     * 将所haveattachmentformat化to文本中.
      *
      * @param string $originalContent original文本content
      * @param string $visionResponse 视觉analyzeresult
-     * @param AttachmentInterface[] $attachments 所有attachmentarray
+     * @param AttachmentInterface[] $attachments 所haveattachmentarray
      * @return string format化后的文本content
      */
     public static function formatAllAttachments(
@@ -32,7 +32,7 @@ class MultiModalContentFormatter
             return $originalContent;
         }
 
-        // 分离image和非imageattachment
+        // 分离image和nonimageattachment
         $imageAttachments = [];
         $nonImageAttachments = [];
 
@@ -44,7 +44,7 @@ class MultiModalContentFormatter
             }
         }
 
-        // process非imageattachment
+        // processnonimageattachment
         $content = self::formatNonImageAttachments($originalContent, $nonImageAttachments);
 
         // processimageattachment
@@ -52,7 +52,7 @@ class MultiModalContentFormatter
     }
 
     /**
-     * format化imagecontent到文本
+     * format化imagecontentto文本
      * support单张image和多张image场景.
      *
      * @param string $originalContent original文本content
@@ -65,7 +65,7 @@ class MultiModalContentFormatter
         string $visionResponse,
         array $imageAttachments
     ): string {
-        // 如果没有imageattachment，直接returnoriginalcontent
+        // ifnothaveimageattachment，直接returnoriginalcontent
         if (empty($imageAttachments)) {
             return $originalContent;
         }
@@ -88,24 +88,24 @@ class MultiModalContentFormatter
     }
 
     /**
-     * format化非imageattachment到文本.
+     * format化nonimageattachmentto文本.
      *
      * @param string $originalContent original文本content
-     * @param AttachmentInterface[] $nonImageAttachments 非imageattachmentarray
-     * @return string 添加了非imageattachmentinfo的文本content
+     * @param AttachmentInterface[] $nonImageAttachments nonimageattachmentarray
+     * @return string 添加了nonimageattachmentinfo的文本content
      */
     protected static function formatNonImageAttachments(
         string $originalContent,
         array $nonImageAttachments
     ): string {
-        // 如果没有attachment，直接returnoriginalcontent
+        // ifnothaveattachment，直接returnoriginalcontent
         if (empty($nonImageAttachments)) {
             return $originalContent;
         }
 
         $content = $originalContent;
 
-        // 添加非imageattachment的link
+        // 添加nonimageattachment的link
         foreach ($nonImageAttachments as $attachment) {
             $url = $attachment->getUrl();
             $name = $attachment->getName();

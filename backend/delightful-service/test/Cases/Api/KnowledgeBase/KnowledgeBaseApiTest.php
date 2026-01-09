@@ -599,8 +599,8 @@ class KnowledgeBaseApiTest extends HttpTestCase
             'content' => 'This is a test fragment content for testing similarity query functionality',
         ], $document['code'], $code);
 
-        // execute相似度query
-        $query = 'test相似度query';
+        // executesimilar度query
+        $query = 'testsimilar度query';
         $res = $this->post(
             sprintf('%s/%s/fragments/similarity', self::API, $code),
             ['query' => $query],
@@ -627,7 +627,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * test重新向量化.
+     * test重新to量化.
      */
     public function testReVectorized()
     {
@@ -644,7 +644,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $this->assertSame(1000, $res['code'], $res['message']);
     }
 
-    // delete所有knowledge base
+    // delete所haveknowledge base
     public function deleteAllKnowledgeBase()
     {
         // getknowledge baselist
@@ -696,7 +696,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     {
         // according toactual情况implement清理逻辑
         // can直接calldatabase操作deletetestdata
-        // 或者call相应的servicemethod
+        // or者call相应的servicemethod
     }
 
     protected function createKnowledgeBase(array $data = []): array

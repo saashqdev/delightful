@@ -73,7 +73,7 @@ class DelightfulAgentDomainService
             // create助理时添加系统交互指令
             $this->initSystemInstructs($agent->getOrganizationCode(), $agent->getId(), $agentEntity->getUpdatedUid());
         } else {
-            // 是否能修改
+            // whether能修改
             $agent = $this->getAgentById($agentEntity->getId());
             $agent->setRobotName($agentEntity->getAgentName());
             $agent->setRobotDescription($agentEntity->getAgentDescription());
@@ -158,7 +158,7 @@ class DelightfulAgentDomainService
         return $this->agentRepository->isDefaultAssistantConversationExist($userId, $aiCode);
     }
 
-    // 商业code目前还dependency
+    // 商业code目前alsodependency
     public function getBotsByOrganization(RequestContext $requestContext, string $agentName, ?string $pageToken = null, int $pageSize = 50, ?string $descriptionKeyword = null): array
     {
         // getdata隔离object并getcurrentorganization的organizationcode
@@ -182,7 +182,7 @@ class DelightfulAgentDomainService
 
         // 收集助理avatarfile键
         $fileKeys = array_column($agents, 'agent_avatar');
-        // 移除空value
+        // 移except空value
         $validFileKeys = array_filter($fileKeys, static fn ($fileKey) => ! empty($fileKey));
 
         // 按organization分groupfileKeys
@@ -204,7 +204,7 @@ class DelightfulAgentDomainService
             $links = array_merge(...$links);
         }
 
-        // 替换每个助理的avatarlink
+        // 替换each个助理的avatarlink
         foreach ($agents as &$agent) {
             $avatarKey = $agent['agent_avatar'];
             $fileLink = $links[$avatarKey] ?? null;
@@ -230,7 +230,7 @@ class DelightfulAgentDomainService
             // 校验普通交互指令
             InstructType::validateInstructs($instructs);
 
-            // ensure系统交互指令存在，如果缺少则补充
+            // ensure系统交互指令存in，if缺少then补充
             $instructs = SystemInstructType::ensureSystemInstructs($instructs);
         }
         // save
@@ -244,7 +244,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * query企业下的所有助理,条件query：status，create人，search.
+     * query企业下的所have助理,条件query：status，create人，search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
@@ -258,7 +258,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * get企业下的所有助理create者.
+     * get企业下的所have助理create者.
      * @return array<string>
      */
     public function getOrganizationAgentsCreators(string $organizationCode): array

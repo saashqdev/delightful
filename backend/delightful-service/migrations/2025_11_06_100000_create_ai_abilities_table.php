@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->string('icon', 100)->nullable()->comment('图标标识');
             $table->integer('sort_order')->default(0)->comment('sort');
             $table->tinyInteger('status')->default(1)->comment('status：0-disable，1-enable');
-            $table->json('config')->comment('configurationinformation（provider_code, access_point, api_key, model_id等）');
+            $table->json('config')->comment('configurationinformation（provider_code, access_point, api_key, model_idetc）');
             $table->timestamps();
 
             $table->index('code', 'idx_code');

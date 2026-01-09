@@ -18,16 +18,16 @@ use Throwable;
 
 /**
  * messagepush模块.
- * according togenerate的seq以及它的优先级,用长connectpush给user.
- * 每个seq可能要推给user的1到几十个客户端.
+ * according togenerate的seqby及它的优先级,use长connectpush给user.
+ * each个seq可能要推给user的1to几十个客户端.
  */
 abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
 {
     protected AmqpTopicType $topic = AmqpTopicType::Seq;
 
     /**
-     * 1.本地开发时不start,避免消费了test环境的data,导致test环境的user收不到message
-     * 2.如果本地开发时想debug,请自行在本地搭建前端环境,更换mq的host. 或者申请一个dev环境,隔离mq.
+     * 1.本地开发时notstart,避免消费了test环境的data,导致test环境的user收nottomessage
+     * 2.if本地开发时想debug,请自行in本地搭建前端环境,more换mq的host. or者申请一个dev环境,隔离mq.
      */
     public function isEnable(): bool
     {
@@ -46,11 +46,11 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
         }
 
         // notify收件方
-        $this->logger->info(sprintf('messagePush 收到message data:%s', Json::encode($data)));
+        $this->logger->info(sprintf('messagePush 收tomessage data:%s', Json::encode($data)));
         try {
             foreach ($seqIds as $seqId) {
                 $seqId = (string) $seqId;
-                // 用redis检测seq是否已经尝试多次,如果超过 n 次,则不再push
+                // useredis检测seqwhether已经尝试多次,if超过 n 次,thennotagainpush
                 $seqRetryKey = sprintf('messagePush:seqRetry:%s', $seqId);
                 $seqRetryCount = $this->redis->get($seqRetryKey);
                 if ($seqRetryCount >= 3) {
@@ -58,9 +58,9 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                     return Result::ACK;
                 }
                 $this->addSeqRetryNumber($seqRetryKey);
-                // recordseq尝试push的count,用于后续判断是否needretry
+                // recordseq尝试push的count,useat后续判断whetherneedretry
                 $this->delightfulSeqAppService->pushSeq($seqId);
-                // 未报错,不再重推
+                // 未报错,notagain重推
                 $this->setSeqCanNotRetry($seqRetryKey);
             }
         } catch (Throwable $exception) {
@@ -71,7 +71,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessagequality保证模块,如果是service器stress大导致的fail,则放入delayretryqueue,并指数级延长retrytime间隔
+            // todo callmessagequality保证模块,if是service器stress大导致的fail,then放入delayretryqueue,并指数级延长retrytime间隔
             return Result::REQUEUE;
         }
         return Result::ACK;

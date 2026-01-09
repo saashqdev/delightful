@@ -84,7 +84,7 @@ class ModelConfigEntity extends AbstractEntity
 
     public function checkRpm(): void
     {
-        // 目前不限制
+        // 目前not限制
     }
 
     public function calculateInputCost(int $inputTokens, int $outputTokens): string
@@ -276,7 +276,7 @@ class ModelConfigEntity extends AbstractEntity
         if (! is_null($this->actualImplementationConfig)) {
             return $this->actualImplementationConfig;
         }
-        // 从configuration中getactual的configuration
+        // fromconfiguration中getactual的configuration
         $configs = [];
         foreach ($this->implementationConfig as $index => $item) {
             $item = explode('|', $item);

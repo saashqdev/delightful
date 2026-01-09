@@ -89,7 +89,7 @@ class DelightfulMessageTest extends BaseTest
             $receiveSeqDTO->setContent($messageContent);
             $chatAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $receiveUserId, $appMessageId, receiverType: ConversationType::User);
         }
-        // send结束
+        // sendend
         $streamOptions->setStatus(StreamMessageStatus::Completed);
         $messageContent->setContent('end');
         $messageContent->setStreamOptions($streamOptions);

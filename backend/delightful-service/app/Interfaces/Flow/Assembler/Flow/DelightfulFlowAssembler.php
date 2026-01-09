@@ -119,7 +119,7 @@ class DelightfulFlowAssembler
         ));
         $delightfulFlowDTO->setUserOperation($delightfulFlowEntity->getUserOperation());
 
-        // 只有tool的时候才显示入参出参
+        // onlytool的time才显示入参出参
         if ($delightfulFlowEntity->getType()->isTools()) {
             $input = new NodeInputDTO();
             $input->setForm($delightfulFlowEntity->getInput()?->getForm());

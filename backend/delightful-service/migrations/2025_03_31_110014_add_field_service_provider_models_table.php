@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('service_provider_models', function (Blueprint $table) {
-            $table->bigInteger('model_parent_id')->default(0)->comment('dependency的model_id，有些modelinformationdependency其他model');
+            $table->bigInteger('model_parent_id')->default(0)->comment('dependency的model_id，have些modelinformationdependency其他model');
         });
     }
 

@@ -12,7 +12,7 @@ use Delightful\FlowExprEngine\Component;
 class TopicConfig
 {
     /**
-     * @var string assigned_topic 指定话题 / recent_topic 最近话题
+     * @var string assigned_topic 指定话题 / recent_topic most近话题
      */
     private string $type;
 

@@ -18,7 +18,7 @@ class DefaultFontProvider implements FontProviderInterface
 {
     /**
      * getTTF字体filepath.
-     * 开源version不提供TTF字体file.
+     * 开源versionnot提供TTF字体file.
      */
     public function getFontPath(): ?string
     {
@@ -26,7 +26,7 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * 检测是否supportTTF字体渲染.
+     * 检测whethersupportTTF字体渲染.
      * 开源version仅support内置字体.
      */
     public function supportsTTF(): bool
@@ -35,8 +35,8 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * 检测文本是否contain中文字符.
-     * 开源version视所有文本为非中文，use内置字体渲染.
+     * 检测文本whethercontain中文字符.
+     * 开源version视所have文本为non中文，use内置字体渲染.
      */
     public function containsChinese(string $text): bool
     {
@@ -44,7 +44,7 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * 检测图像是否contain透明通道.
+     * 检测图像whethercontain透明通道.
      * 提供基础的透明度检测feature.
      * @param mixed $image
      */
@@ -59,7 +59,7 @@ class DefaultFontProvider implements FontProviderInterface
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // 采样check，避免check每个像素提高performance
+        // 采样check，避免checkeach个像素提高performance
         $sampleSize = min(50, $width, $height);
         $stepX = max(1, (int) ($width / $sampleSize));
         $stepY = max(1, (int) ($height / $sampleSize));

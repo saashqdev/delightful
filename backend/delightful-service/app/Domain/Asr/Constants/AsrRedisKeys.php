@@ -41,7 +41,7 @@ class AsrRedisKeys
     public const HEARTBEAT_SCAN_PATTERN = 'asr:heartbeat:*';
 
     /**
-     * Mock 轮询计数 Key format（仅用于test）.
+     * Mock 轮询计数 Key format（仅useattest）.
      */
     public const MOCK_FINISH_COUNT = 'mock:asr:task:%s:finish_count';
 }

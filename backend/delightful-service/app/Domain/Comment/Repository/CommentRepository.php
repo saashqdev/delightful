@@ -124,7 +124,7 @@ class CommentRepository
      *
      * @param RequestContext $requestContext request上下文
      * @param int $commentId commentID
-     * @return ?CommentEntity comment实体，如果不存在则returnnull
+     * @return ?CommentEntity comment实体，ifnot存inthenreturnnull
      */
     public function getCommentById(
         RequestContext $requestContext,
@@ -157,7 +157,7 @@ class CommentRepository
     }
 
     /**
-     * 批量delete指定的comment及其所有子comment。
+     * 批量delete指定的comment及其所have子comment。
      *
      * @param RequestContext $requestContext request上下文
      * @param array $commentIds 要delete的commentIDarray
@@ -167,7 +167,7 @@ class CommentRepository
         RequestContext $requestContext,
         array $commentIds
     ): array {
-        // get这条comment下的所有子comment
+        // get这条comment下的所have子comment
         $descendantIds = $this->treeIndexRepository->getDescendantIdsByAncestorIds(
             $requestContext,
             CommentTreeIndexModel::query(),
@@ -176,7 +176,7 @@ class CommentRepository
 
         $deletedCommentIds = array_unique([...$commentIds, ...$descendantIds]);
 
-        // delete这条comment以及所有子comment
+        // delete这条commentby及所have子comment
         CommentModel::query()->whereIn('id', $deletedCommentIds)
             ->where('organization_code', $requestContext->getOrganizationCode())
             ->delete();
@@ -200,7 +200,7 @@ class CommentRepository
     }
 
     /**
-     * according to资源IDget所有相关的comment。
+     * according to资源IDget所have相关的comment。
      *
      * @param int $resourceId 资源ID
      * @return array<CommentEntity> comment实体array

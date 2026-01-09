@@ -51,7 +51,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateEmptyMembers($projectId);
         $this->updateFileContent($fileId, 'test1', 51154);
 
-        // 没permission
+        // notpermission
         $this->switchUserTest2();
         $this->updateFileContent($fileId, 'test2', 51202);
 
@@ -59,21 +59,21 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
-        // 有permission
+        // havepermission
         $this->switchUserTest2();
         $this->updateFileContent($fileId, 'test2', 51154);
     }
 
     public function testFile()
     {
-        // use现有的project和fileID进行test
+        // use现have的project和fileIDconducttest
         $fileId = $this->fileId; // testfileID
         $projectId = $this->projectId;
 
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
-        // test没permission
+        // testnotpermission
         $this->fileEditingPermissionControl($fileId);
 
         $this->switchUserTest1();
@@ -93,11 +93,11 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 1. 先settingprojectmember，ensuretest2user有permission
+        // 1. 先settingprojectmember，ensuretest2userhavepermission
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
-        // 2. 切换到有permission的usertest置顶success
+        // 2. 切换tohavepermission的usertest置顶success
         $this->switchUserTest2();
         $this->pinProject($projectId, true);
 
@@ -105,13 +105,13 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
-        // 4. 清nullprojectmember，使currentuser没有permission
+        // 4. 清nullprojectmember，使currentusernothavepermission
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
-        // 5. 切换到没有permission的usertestpermission控制
+        // 5. 切换tonothavepermission的usertestpermission控制
         $this->switchUserTest2();
-        // test非projectmember不能置顶 - shouldreturnpermissionerror
+        // testnonprojectmembernot能置顶 - shouldreturnpermissionerror
         $this->pinProject($projectId, true, 51202); // 假设51202是permissionerror码
     }
 
@@ -122,7 +122,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // ensureuser有permission
+        // ensureuserhavepermission
         $this->switchUserTest1();
         $this->updateMembers($projectId);
         $this->switchUserTest2();
@@ -139,7 +139,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->pinProject($projectId, false);
         $this->pinProject($projectId, false); // 重复cancel置顶
 
-        // validateproject不是置顶status
+        // validateprojectnot是置顶status
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, false);
     }
@@ -181,7 +181,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateProject($workspaceId, $projectId);
         $this->updateProject($workspaceId, $projectId);
 
-        // ensure不will对原有feature造成影响
+        // ensurenotwill对原havefeature造成影响
         // create话题
         $topicId = $this->createTopic($workspaceId, $projectId);
         // 话题列表
@@ -197,7 +197,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         $this->updateEmptyMembers($projectId);
 
-        // 3. 没有permission
+        // 3. nothavepermission
         $this->switchUserTest2();
         $this->updateEmptyMembers($projectId, 51202);
         $this->updateProject($workspaceId, $projectId, 51202);
@@ -284,7 +284,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         ];
         // sendPUTrequest
         $response = $this->put(self::BASE_URI . "/{$projectId}/members", $requestData, $this->getCommonHeaders());
-        $this->assertNotNull($response, 'response不should为null');
+        $this->assertNotNull($response, 'responsenotshould为null');
         $this->assertEquals(1000, $response['code']);
     }
 
@@ -301,7 +301,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     public function projectMember(string $projectId): void
     {
         $response = $this->get(self::BASE_URI . "/{$projectId}/members", [], $this->getCommonHeaders());
-        $this->assertNotNull($response, 'response不should为null');
+        $this->assertNotNull($response, 'responsenotshould为null');
         $this->assertEquals(1000, $response['code']);
         $this->assertGreaterThan(4, count($response['data']['members']));
         $this->assertEquals('usi_27229966f39dd1b62c9d1449e3f7a90d', $response['data']['members'][0]['user_id']);
@@ -318,7 +318,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         $response = $this->client->get('/api/v1/be-agent/collaboration-projects', $params, $this->getCommonHeaders());
 
-        $this->assertNotNull($response, 'response不should为null');
+        $this->assertNotNull($response, 'responsenotshould为null');
         $this->assertEquals(1000, $response['code'], $response['message'] ?? '');
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data']);
@@ -354,7 +354,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         }
 
         $response = $this->client->get('/api/v1/be-agent/collaboration-projects?type=shared', $params, $this->getCommonHeaders());
-        $this->assertNotNull($response, 'response不should为null');
+        $this->assertNotNull($response, 'responsenotshould为null');
         $this->assertEquals(1000, $response['code'], $response['message'] ?? '');
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data']);
@@ -504,15 +504,15 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 1. test加入edit
         $this->joinFileEditing($fileId);
 
-        // 2. testgetedituserquantity - should有1个user在edit
+        // 2. testgetedituserquantity - shouldhave1个userinedit
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 3. 切换到另一个user，test多useredit
+        // 3. 切换to另一个user，test多useredit
         $this->switchUserTest2();
         $this->joinFileEditing($fileId);
 
-        // 4. 再次getedituserquantity - should有2个user在edit
+        // 4. again次getedituserquantity - shouldhave2个userinedit
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(2, $editingCount);
 
@@ -527,7 +527,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->leaveFileEditing($fileId);
 
-        // 8. finalvalidate没有user在edit
+        // 8. finalvalidatenothaveuserinedit
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(0, $editingCount);
     }
@@ -539,7 +539,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $response = $this->post("/api/v1/be-agent/file/{$fileId}/join-editing", [], $this->getCommonHeaders());
 
-        $this->assertNotNull($response, 'response不should为null');
+        $this->assertNotNull($response, 'responsenotshould为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -558,7 +558,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $response = $this->post("/api/v1/be-agent/file/{$fileId}/leave-editing", [], $this->getCommonHeaders());
 
-        $this->assertNotNull($response, 'response不should为null');
+        $this->assertNotNull($response, 'responsenotshould为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -577,7 +577,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $response = $this->get("/api/v1/be-agent/file/{$fileId}/editing-users", [], $this->getCommonHeaders());
 
-        $this->assertNotNull($response, 'response不should为null');
+        $this->assertNotNull($response, 'responsenotshould为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -671,27 +671,27 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 1. test置顶project
         $this->pinProject($projectId, true);
 
-        // 2. validate协作project列表中project被置顶
+        // 2. validate协作project列表中projectbe置顶
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
         // 3. testcancel置顶
         $this->pinProject($projectId, false);
 
-        // 4. validate协作project列表中project不再置顶
+        // 4. validate协作project列表中projectnotagain置顶
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, false);
 
-        // 5. 重新置顶project以testsort
+        // 5. 重新置顶projectbytestsort
         $this->pinProject($projectId, true);
 
-        // 6. validate置顶project排在前面
+        // 6. validate置顶project排in前面
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyPinnedProjectsAtTop($response);
     }
 
     /**
-     * 置顶或cancel置顶project.
+     * 置顶orcancel置顶project.
      */
     public function pinProject(string $projectId, bool $isPinned, int $expectedCode = 1000): array
     {
@@ -701,7 +701,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         $response = $this->put("/api/v1/be-agent/collaboration-projects/{$projectId}/pin", $requestData, $this->getCommonHeaders());
 
-        $this->assertNotNull($response, 'response不should为null');
+        $this->assertNotNull($response, 'responsenotshould为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -714,13 +714,13 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * get协作project列表并return完整响application于置顶validate.
+     * get协作project列表并return完整响applicationat置顶validate.
      */
     public function collaborationProjectsWithPinCheck(): array
     {
         $response = $this->client->get('/api/v1/be-agent/collaboration-projects', [], $this->getCommonHeaders());
 
-        $this->assertNotNull($response, 'response不should为null');
+        $this->assertNotNull($response, 'responsenotshould为null');
         $this->assertEquals(1000, $response['code'], $response['message'] ?? '');
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data']);
@@ -753,7 +753,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             }
         }
 
-        $this->assertNotNull($targetProject, "project {$projectId} should在协作project列表中");
+        $this->assertNotNull($targetProject, "project {$projectId} shouldin协作project列表中");
         $this->assertEquals(
             $expectedPinned,
             $targetProject['is_pinned'],
@@ -762,7 +762,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * validate置顶project排在列表前面.
+     * validate置顶project排in列表前面.
      */
     public function verifyPinnedProjectsAtTop(array $response): void
     {
@@ -771,7 +771,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         foreach ($projects as $project) {
             if ($project['is_pinned']) {
-                $this->assertFalse($pinnedProjectsEnded, '置顶projectshould排在非置顶project前面');
+                $this->assertFalse($pinnedProjectsEnded, '置顶projectshould排innon置顶project前面');
             } else {
                 $pinnedProjectsEnded = true;
             }
@@ -783,20 +783,20 @@ class ProjectMemberApiTest extends AbstractApiTest
      */
     public function collaborationProjectCreatorFeature(): void
     {
-        // 1. test有permissionusergetcreate者列表
-        $this->switchUserTest2(); // ensure是有permission的协作user
+        // 1. testhavepermissionusergetcreate者列表
+        $this->switchUserTest2(); // ensure是havepermission的协作user
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
 
         // 2. testpermission控制 - 清nullmember后无permission
-        $this->switchUserTest1(); // 切换到project所有者
+        $this->switchUserTest1(); // 切换toproject所have者
         $this->updateEmptyMembers($this->projectId); // 清nullprojectmember
 
-        $this->switchUserTest2(); // 切换到无permissionuser
+        $this->switchUserTest2(); // 切换to无permissionuser
         $emptyResponse = $this->getCollaborationProjectCreators();
         $this->verifyEmptyCreatorListResponse($emptyResponse);
 
-        // 3. restoreprojectmemberstatus，以免影响后续test
+        // 3. restoreprojectmemberstatus，by免影响后续test
         $this->switchUserTest1();
         $this->updateMembers($this->projectId);
     }
@@ -808,20 +808,20 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 1. 先settingprojectmember，ensuretest2user有permission
+        // 1. 先settingprojectmember，ensuretest2userhavepermission
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
-        // 2. 切换到有permission的usertestgetcreate者列表success
+        // 2. 切换tohavepermission的usertestgetcreate者列表success
         $this->switchUserTest2();
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
 
-        // 3. 清nullprojectmember，使currentuser没有permission
+        // 3. 清nullprojectmember，使currentusernothavepermission
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
-        // 4. 切换到没有permission的usertestpermission控制
+        // 4. 切换tonothavepermission的usertestpermission控制
         $this->switchUserTest2();
         $emptyResponse = $this->getCollaborationProjectCreators();
         //        $this->verifyEmptyCreatorListResponse($emptyResponse);
@@ -832,7 +832,7 @@ class ProjectMemberApiTest extends AbstractApiTest
      */
     public function testCollaborationProjectCreatorsEdgeCases(): void
     {
-        // ensureuser有permission
+        // ensureuserhavepermission
         $this->switchUserTest1();
         $this->updateMembers($this->projectId);
         $this->switchUserTest2();
@@ -856,7 +856,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $response = $this->client->get('/api/v1/be-agent/collaboration-projects/creators', [], $this->getCommonHeaders());
 
-        $this->assertNotNull($response, 'response不should为null');
+        $this->assertNotNull($response, 'responsenotshould为null');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -876,8 +876,8 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data'], 'responsedatashould是array');
 
-        // validateat least有一个create者
-        $this->assertGreaterThan(0, count($response['data']), 'shouldat least有一个create者');
+        // validateat leasthave一个create者
+        $this->assertGreaterThan(0, count($response['data']), 'shouldat leasthave一个create者');
 
         // validatecreate者data结构
         $creator = $response['data'][0];
@@ -892,9 +892,9 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertIsString($creator['user_id'], 'user_idshould是string');
         $this->assertIsString($creator['avatar_url'], 'avatar_urlshould是string');
 
-        // validate必填field不为null
-        $this->assertNotEmpty($creator['id'], 'id不should为null');
-        $this->assertNotEmpty($creator['user_id'], 'user_id不should为null');
+        // validate必填fieldnot为null
+        $this->assertNotEmpty($creator['id'], 'idnotshould为null');
+        $this->assertNotEmpty($creator['user_id'], 'user_idnotshould为null');
     }
 
     /**
@@ -920,7 +920,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals(
             count($userIds),
             count($uniqueUserIds),
-            'create者列表中不should有重复的user_id'
+            'create者列表中notshouldhave重复的user_id'
         );
     }
 

@@ -61,7 +61,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 预processdocumentfile，according todocumentfiletype，进行different的process.
+     * 预processdocumentfile，according todocumentfiletype，conductdifferent的process.
      */
     public function preProcessDocumentFiles(KnowledgeBaseDataIsolation $dataIsolation, array $documentFiles): array
     {
@@ -73,7 +73,7 @@ class DocumentFileStrategy
         }
 
         $result = [];
-        // 对每个分group分别process
+        // 对each个分group分别process
         foreach ($groupedFiles as $class => $files) {
             $driver = $this->getImplement($files[0]);
             if ($driver) {
@@ -95,12 +95,12 @@ class DocumentFileStrategy
      */
     private function replaceImages(string $content, KnowledgeBaseDataIsolation $dataIsolation, ?string $knowledgeBaseCode = null): string
     {
-        // 匹配所有image
+        // 匹配所haveimage
         $pattern = '/(!\[.*\]\((.*?)\))/';
         $matches = [];
         preg_match_all($pattern, $content, $matches);
         $fullMatches = $matches[1] ?? [];  // 完整的markdownimage语法
-        $imageUrls = $matches[2] ?? [];  // imageURL或base64
+        $imageUrls = $matches[2] ?? [];  // imageURLorbase64
 
         foreach ($imageUrls as $index => $imageUrl) {
             try {
@@ -208,7 +208,7 @@ class DocumentFileStrategy
             return $driver;
         }
 
-        $this->logger->warning('没有与[' . get_class($documentFile) . ']匹配的文本parsestrategy！将return空value！');
+        $this->logger->warning('nothave与[' . get_class($documentFile) . ']匹配的文本parsestrategy！将return空value！');
         return null;
     }
 }

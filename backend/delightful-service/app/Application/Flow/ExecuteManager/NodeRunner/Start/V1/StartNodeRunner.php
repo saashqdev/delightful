@@ -19,7 +19,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 #[FlowNodeDefine(
     type: NodeType::Start->value,
     code: NodeType::Start->name,
-    name: '开始',
+    name: 'start',
     paramsConfig: StartNodeParamsConfig::class,
     version: 'v1',
     singleDebug: true,
@@ -30,7 +30,7 @@ class StartNodeRunner extends AbstractStartNodeRunner
 {
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void
     {
-        // 触发方式从运行dataget，触发时只能有one触发方式
+        // 触发methodfrom运行dataget，触发时只能haveone触发method
         $triggerType = $executionData->getTriggerType();
         if ($appointTriggerType = $frontResults['appoint_trigger_type'] ?? null) {
             if ($appointTriggerType instanceof TriggerType) {
@@ -43,7 +43,7 @@ class StartNodeRunner extends AbstractStartNodeRunner
 
         $triggerBranch = $paramsConfig->getBranchByTriggerType($triggerType);
         if (empty($triggerBranch)) {
-            // if没有找到任何触发方式，直接结束就好
+            // ifnothave找to任何触发method，直接endthen好
             $vertexResult->clearChildren();
             return;
         }

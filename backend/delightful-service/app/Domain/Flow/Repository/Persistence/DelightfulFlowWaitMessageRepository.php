@@ -55,7 +55,7 @@ class DelightfulFlowWaitMessageRepository extends DelightfulFlowAbstractReposito
     {
         $builder = $this->createBuilder($dataIsolation, DelightfulFlowWaitMessageModel::query());
         $models = $builder
-            // 这里不query persistent_data，因为这个field可能will很大
+            // 这里notquery persistent_data，因为这个field可能willvery大
             ->select(['id', 'organization_code', 'conversation_id', 'origin_conversation_id', 'message_id', 'wait_node_id', 'flow_code', 'flow_version', 'timeout', 'handled', 'created_uid', 'created_at', 'updated_uid', 'updated_at'])
             ->where('conversation_id', '=', $conversationId)
             ->where('handled', false)

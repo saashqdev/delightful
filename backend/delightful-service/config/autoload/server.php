@@ -36,7 +36,7 @@ $servers = [
             Event::ON_CLOSE => [Hyperf\WebSocketServer\Server::class, 'onClose'],
         ],
     ],
-    // 出于单测的need，mock 所有第third-party的 http call，提升单测速度和稳定性。
+    // 出at单测的need，mock 所have第third-party的 http call，提升单测速度和稳定性。
     [
         'name' => 'mock-http-service',
         'type' => ServerInterface::SERVER_HTTP,
@@ -47,7 +47,7 @@ $servers = [
         ],
     ],
 ];
-// ！！！注意，开了scheduletask的 pod 就不start websocket service了，只start http service
+// ！！！注意，开了scheduletask的 pod thennotstart websocket service了，只start http service
 $enableCrontab = (bool) env('CRONTAB_ENABLE', true);
 $enableCrontab && $servers = [$servers[0]];
 return [

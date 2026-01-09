@@ -34,9 +34,9 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         $userPrompt = (string) $paramsConfig->getUserPrompt()->getValue()->getResult($executionData->getExpressionFieldData());
         $vertexResult->addDebugLog('user_prompt', $userPrompt);
 
-        // system 中是否contain content
+        // system 中whethercontain content
         $systemHasContent = $this->contentIsInSystemPrompt($executionData);
-        // user 中是否contain content
+        // user 中whethercontain content
         $userHasContent = $this->contentIsInUserPrompt($executionData);
         if ($frontResults['force_user_has_content'] ?? false) {
             $userHasContent = true;
@@ -52,7 +52,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
 
         $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId();
         $contentMessage = $currentMessage = null;
-        // 尝试在记忆中找到 content message
+        // 尝试in记忆中找to content message
         foreach ($memoryManager->getMessages() as $message) {
             if ($message->getIdentifier() === $contentMessageId) {
                 $contentMessage = $message;
@@ -68,7 +68,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                     // 仅仅添加attachment
                     $imageUrls = $executionData->getTriggerData()->getAttachmentImageUrls();
                     if ($imageUrls) {
-                        // 有content且有attachment，添加文本和imagecontent
+                        // havecontentandhaveattachment，添加文本和imagecontent
                         $contentMessage->addContent(UserMessageContent::text($userPrompt));
                         foreach ($imageUrls as $imageUrl) {
                             $contentMessage->addContent(UserMessageContent::imageUrl($imageUrl));
@@ -77,7 +77,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                     $memoryManager->addMessage($contentMessage);
                 }
             } else {
-                // createonenew，在后续use
+                // createonenew，in后续use
                 $currentMessage = new UserMessage();
                 $currentMessage->setContent($userPrompt);
             }

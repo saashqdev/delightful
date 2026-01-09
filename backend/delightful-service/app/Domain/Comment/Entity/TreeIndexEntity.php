@@ -22,7 +22,7 @@ class TreeIndexEntity
     protected int $descendantId;
 
     /**
-     * 祖先节点到后代节点的距离.
+     * 祖先节点to后代节点的距离.
      */
     protected int $distance;
 

@@ -37,11 +37,11 @@ return new class extends Migration {
 
             // configurationinfo
             $table->string('embedding_model', 255)->comment('嵌入model');
-            $table->string('vector_db', 255)->comment('向量database');
+            $table->string('vector_db', 255)->comment('to量database');
             $table->json('retrieve_config')->nullable()->comment('检索configuration');
             $table->json('fragment_config')->nullable()->comment('分段configuration');
             $table->json('embedding_config')->nullable()->comment('嵌入configuration');
-            $table->json('vector_db_config')->nullable()->comment('向量databaseconfiguration');
+            $table->json('vector_db_config')->nullable()->comment('to量databaseconfiguration');
 
             // 操作record
             $table->string('created_uid', 255)->comment('create者ID');

@@ -123,7 +123,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                 'successimage数' => count($response->getData()),
             ]);
         } catch (Exception $e) {
-            // settingerrorinfo到responseobject
+            // settingerrorinfotoresponseobject
             $response->setProviderErrorCode($e->getCode());
             $response->setProviderErrorMessage($e->getMessage());
 
@@ -197,7 +197,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             }
         }
 
-        // validatemask URL（如果提供）
+        // validatemask URL（if提供）
         $maskUrl = $request->getMaskUrl();
         if (! empty($maskUrl) && ! filter_var($maskUrl, FILTER_VALIDATE_URL)) {
             $this->logger->error('Azure OpenAI图像edit：invalid的遮罩图像URL', [
@@ -237,7 +237,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             }
 
             if (empty($images)) {
-                $this->logger->error('Azure OpenAI图像edit：所有图像datainvalid');
+                $this->logger->error('Azure OpenAI图像edit：所have图像datainvalid');
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, 'image_generate.invalid_image_data');
             }
 
@@ -278,7 +278,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
                 // handlebase64format的image
                 $item['b64_json'] = $this->watermarkProcessor->addWatermarkToBase64($item['b64_json'], $imageGenerateRequest);
             } catch (Exception $e) {
-                // 水印handlefail时，recorderror但不影响imagereturn
+                // 水印handlefail时，recorderrorbutnot影响imagereturn
                 $this->logger->error('Azure OpenAI图像edit水印handlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
@@ -300,7 +300,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
         }
 
         if (empty($result['data']) || ! is_array($result['data'])) {
-            throw new Exception('Azure OpenAI图像editresponsedataformaterror：datafield为null或不是array');
+            throw new Exception('Azure OpenAI图像editresponsedataformaterror：datafield为nullornot是array');
         }
 
         $hasValidImage = false;
@@ -317,7 +317,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * 将Azure OpenAI图像editresult添加到OpenAIresponseobject中.
+     * 将Azure OpenAI图像editresult添加toOpenAIresponseobject中.
      */
     private function addImageDataToResponseAzureOpenAIEdit(
         OpenAIFormatResponse $response,
@@ -356,7 +356,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             $currentUsage->addGeneratedImages(1);
         }
 
-        // 如果Azure OpenAIresponsecontainusageinfo，则use它
+        // ifAzure OpenAIresponsecontainusageinfo，thenuse它
         if (! empty($azureResult['usage']) && is_array($azureResult['usage'])) {
             $usage = $azureResult['usage'];
             $currentUsage->promptTokens += $usage['input_tokens'] ?? 0;

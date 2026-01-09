@@ -17,8 +17,8 @@ use Yethee\Tiktoken\EncoderProvider;
 class TokenTextSplitter extends TextSplitter
 {
     /**
-     * set最大cache文本length（字符数）
-     * 超过此length的文本将不will被cache在协程上下文中.
+     * setmost大cache文本length（字符数）
+     * 超过此length的文本将notwillbecachein协程上下文中.
      */
     private const int MAX_CACHE_TEXT_LENGTH = 1000;
 
@@ -38,12 +38,12 @@ class TokenTextSplitter extends TextSplitter
     private $tokenizer;
 
     /**
-     * defaulttoken计算闭packageuse到的encoderProvider.
+     * defaulttoken计算闭packageuseto的encoderProvider.
      */
     private EncoderProvider $defaultEncoderProvider;
 
     /**
-     * defaulttoken计算闭packageuse到的encoder.
+     * defaulttoken计算闭packageuseto的encoder.
      */
     private Encoder $defaultEncoder;
 
@@ -86,7 +86,7 @@ class TokenTextSplitter extends TextSplitter
     {
         $text = $this->ensureUtf8Encoding($text);
 
-        // saveoriginal文本，用于还原tag
+        // saveoriginal文本，useatalso原tag
         $originalText = $text;
 
         // 1. 先把原文中的0x00替换成0x000x00
@@ -102,7 +102,7 @@ class TokenTextSplitter extends TextSplitter
             $chunks = [$text];
         }
 
-        // 计算每个chunk的tokenlength
+        // 计算each个chunk的tokenlength
         $chunksLengths = array_map(function ($chunk) {
             return ($this->tokenizer)($chunk);
         }, $chunks);
@@ -110,23 +110,23 @@ class TokenTextSplitter extends TextSplitter
         $finalChunks = [];
         foreach ($chunks as $i => $chunk) {
             if ($chunksLengths[$i] > $this->chunkSize) {
-                // 如果chunk太大，进行递归split
+                // ifchunktoo大，conduct递归split
                 $finalChunks = array_merge($finalChunks, $this->recursiveSplitText($chunk));
             } else {
                 $finalChunks[] = $chunk;
             }
         }
 
-        // 4. 还原文本
-        // 先get所有tag
+        // 4. also原文本
+        // 先get所havetag
         preg_match_all('/<DelightfulCompressibleContent.*?<\/DelightfulCompressibleContent>/s', $originalText, $matches);
         $tags = $matches[0];
         $tagIndex = 0;
 
         return array_map(function ($chunk) use ($tags, &$tagIndex) {
-            // 还原0x000x00为0x00
+            // also原0x000x00为0x00
             $chunk = str_replace("\x00\x00", "\x00", $chunk);
-            // 还原tag
+            // also原tag
             return preg_replace_callback('/\x00/', function () use ($tags, &$tagIndex) {
                 return $tags[$tagIndex++] ?? '';
             }, $chunk);
@@ -179,7 +179,7 @@ class TokenTextSplitter extends TextSplitter
         if ($separator === ' ') {
             $chunks = preg_split('/\s+/', $text);
         } else {
-            // 如果分隔符contain0x00，替换成0x000x00
+            // if分隔符contain0x00，替换成0x000x00
             $separator = str_replace("\x00", "\x00\x00", $separator);
             $chunks = explode($separator, $text);
             if ($this->preserveSeparator) {
@@ -192,7 +192,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * process分隔符，将分隔符拼接到每个分块的前面（除了first）.
+     * process分隔符，将分隔符拼接toeach个分块的前面（except了first）.
      */
     private function preserveSeparator(array $chunks, string $separator): array
     {
@@ -218,7 +218,7 @@ class TokenTextSplitter extends TextSplitter
      */
     private function splitByFixedLength(string $text): array
     {
-        $chunkSize = (int) floor($this->chunkSize / 2); // use较小的块size
+        $chunkSize = (int) floor($this->chunkSize / 2); // usemore小的块size
         $length = mb_strlen($text);
         $splits = [];
         for ($i = 0; $i < $length; $i += $chunkSize) {
@@ -277,7 +277,7 @@ class TokenTextSplitter extends TextSplitter
         $separator = end($this->separators);
         $newSeparators = [];
 
-        // 查找合适的分隔符, 从$separatorBeginIndex开始
+        // 查找合适的分隔符, from$separatorBeginIndexstart
         for ($i = $separatorBeginIndex; $i < count($this->separators); ++$i) {
             $sep = $this->separators[$i];
             if ($sep === '') {
@@ -299,13 +299,13 @@ class TokenTextSplitter extends TextSplitter
             $splits = $this->splitByFixedLength($text);
         }
 
-        // 计算每个split的tokenlength
+        // 计算each个split的tokenlength
         $splitLengths = array_map(function ($split) {
             return ($this->tokenizer)($split);
         }, $splits);
 
         if ($separator !== '') {
-            // process有分隔符的情况
+            // processhave分隔符的情况
             $goodSplits = [];
             $goodSplitsLengths = [];
             $actualSeparator = $this->keepSeparator ? $separator : '';
@@ -358,7 +358,7 @@ class TokenTextSplitter extends TextSplitter
             }
             return count($this->defaultEncoder->encode($text));
         } catch (Throwable $e) {
-            // 如果计算tokenfail，return一个估计value
+            // if计算tokenfail，return一个估计value
             return (int) ceil(mb_strlen($text) / 4);
         }
     }
@@ -366,7 +366,7 @@ class TokenTextSplitter extends TextSplitter
     private function getDefaultTokenizer(): callable
     {
         return function (string $text) {
-            // 如果文本length超过限制，直接计算不cache
+            // if文本length超过限制，直接计算notcache
             if (mb_strlen($text) > self::MAX_CACHE_TEXT_LENGTH) {
                 return $this->calculateTokenCount($text);
             }
@@ -374,7 +374,7 @@ class TokenTextSplitter extends TextSplitter
             // generate上下文键
             $contextKey = 'token_count:' . md5($text);
 
-            // 尝试从协程上下文get
+            // 尝试from协程上下文get
             $count = Context::get($contextKey);
             if ($count !== null) {
                 return $count;
@@ -383,7 +383,7 @@ class TokenTextSplitter extends TextSplitter
             // 计算 token quantity
             $count = $this->calculateTokenCount($text);
 
-            // storage到协程上下文
+            // storageto协程上下文
             Context::set($contextKey, $count);
 
             return $count;
@@ -409,7 +409,7 @@ class TokenTextSplitter extends TextSplitter
         // 尝试检测encoding
         $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], true);
         if ($encoding === false) {
-            // 如果无法检测到encoding，尝试use iconv 检测
+            // if无法检测toencoding，尝试use iconv 检测
             $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], false);
             if ($encoding === false) {
                 return 'UTF-8'; // defaultuse UTF-8

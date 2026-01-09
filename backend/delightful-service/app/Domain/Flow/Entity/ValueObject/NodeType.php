@@ -16,12 +16,12 @@ enum NodeType: int
 {
     /*
      * Start Node
-     * 用作触发器。窗口open时、有新message时、schedule;parametercall（仅子process可用）
+     * use作触发器。窗口open时、have新message时、schedule;parametercall（仅子process可use）
      */
     case Start = 1;
 
     /*
-     * LLM Chat 这里是history原因的group合节点
+     * LLM Chat 这里是historyreason的group合节点
      * 大语言model optionalmodel、prompt、temperature
      */
     case LLM = 2;
@@ -46,9 +46,9 @@ enum NodeType: int
 
     /*
      * Vector
-     * 文本转向量
+     * 文本转to量
      * data匹配
-     * 向量datastorage
+     * to量datastorage
      */
     //    case Vector = 6;
 
@@ -61,7 +61,7 @@ enum NodeType: int
 
     /*
      * Loader
-     * dataload。来源：向量database、file、网络
+     * dataload。来源：to量database、file、网络
      */
     case Loader = 8;
 
@@ -84,7 +84,7 @@ enum NodeType: int
 
     /*
      * End Node
-     * 结束节点
+     * end节点
      */
     case End = 12;
 
@@ -105,12 +105,12 @@ enum NodeType: int
     case TextEmbedding = 15;
 
     /*
-     * 向量storage knowledge base片段
+     * to量storage knowledge base片段
      */
     case KnowledgeFragmentStore = 16;
 
     /*
-     * 知识相似度
+     * 知识similar度
      */
     case KnowledgeSimilarity = 17;
 
@@ -170,7 +170,7 @@ enum NodeType: int
     case UserSearch = 28;
 
     /**
-     * 等待message.
+     * etc待message.
      */
     case WaitMessage = 29;
 
@@ -185,7 +185,7 @@ enum NodeType: int
     case LoopBody = 31;
 
     /**
-     * 循环结束.
+     * 循环end.
      */
     case LoopStop = 32;
 

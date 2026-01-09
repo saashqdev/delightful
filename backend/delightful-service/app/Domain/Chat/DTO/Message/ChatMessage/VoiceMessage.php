@@ -263,7 +263,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
 
             $fileEntity = $fileEntities[0];
 
-            // if有外链URL，直接use
+            // ifhave外链URL，直接use
             if (! empty($fileEntity->getExternalUrl())) {
                 return $fileEntity->getExternalUrl();
             }

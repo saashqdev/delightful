@@ -32,9 +32,9 @@ return [
         ],
         SearchEngineType::Google->value => [
             'class_name' => GoogleSearchAdapter::class,
-            // if你useGOOGLE，你need指定searchAPIkey。注意你还should在env中指定cx。
+            // if你useGOOGLE，你need指定searchAPIkey。注意你alsoshouldinenv中指定cx。
             'api_key' => env('GOOGLE_SEARCH_API_KEY', ''),
-            // if你在usegoogle，请指定searchcx,也就是GOOGLE_SEARCH_ENGINE_ID
+            // if你inusegoogle，请指定searchcx,alsothen是GOOGLE_SEARCH_ENGINE_ID
             'cx' => env('GOOGLE_SEARCH_CX', ''),
         ],
         SearchEngineType::Bing->value => [
@@ -55,8 +55,8 @@ return [
         SearchEngineType::Cloudsway->value => [
             'class_name' => CloudswaySearchAdapter::class,
             'base_path' => env('CLOUDSWAY_BASE_PATH', ''),
-            'endpoint' => env('CLOUDSWAY_ENDPOINT', ''),  // 从 console.cloudsway.ai get
-            'access_key' => env('CLOUDSWAY_ACCESS_KEY', ''),  // 从 console.cloudsway.ai get
+            'endpoint' => env('CLOUDSWAY_ENDPOINT', ''),  // from console.cloudsway.ai get
+            'access_key' => env('CLOUDSWAY_ACCESS_KEY', ''),  // from console.cloudsway.ai get
         ],
     ],
 ];

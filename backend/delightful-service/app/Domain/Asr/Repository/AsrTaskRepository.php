@@ -29,7 +29,7 @@ readonly class AsrTaskRepository
     }
 
     /**
-     * savetaskstatus到 Redis.
+     * savetaskstatusto Redis.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus DTO
      * @param int $ttl expiretime（秒），default 7 天
@@ -45,7 +45,7 @@ readonly class AsrTaskRepository
             // setexpiretime
             $this->redis->expire($redisKey, $ttl);
         } catch (Throwable $e) {
-            // Redis 操作fail时record但不throwexception
+            // Redis 操作fail时recordbutnotthrowexception
             $this->logger->warning(trans('asr.api.redis.save_task_status_failed'), [
                 'task_key' => $taskStatus->taskKey ?? 'unknown',
                 'user_id' => $taskStatus->userId ?? 'unknown',
@@ -59,7 +59,7 @@ readonly class AsrTaskRepository
      *
      * @param string $taskKey task键
      * @param string $userId userID
-     * @return null|AsrTaskStatusDTO taskstatus DTO，不存在时return null
+     * @return null|AsrTaskStatusDTO taskstatus DTO，not存in时return null
      */
     public function findByTaskKey(string $taskKey, string $userId): ?AsrTaskStatusDTO
     {
@@ -74,7 +74,7 @@ readonly class AsrTaskRepository
             $dto = AsrTaskStatusDTO::fromArray($taskData);
             return $dto->isEmpty() ? null : $dto;
         } catch (Throwable $e) {
-            $this->logger->warning('从 Redis gettaskstatusfail', [
+            $this->logger->warning('from Redis gettaskstatusfail', [
                 'task_key' => $taskKey,
                 'user_id' => $userId,
                 'error' => $e->getMessage(),
@@ -84,11 +84,11 @@ readonly class AsrTaskRepository
     }
 
     /**
-     * checktask是否存在.
+     * checktaskwhether存in.
      *
      * @param string $taskKey task键
      * @param string $userId userID
-     * @return bool 是否存在
+     * @return bool whether存in
      */
     public function exists(string $taskKey, string $userId): bool
     {
@@ -97,7 +97,7 @@ readonly class AsrTaskRepository
             $result = $this->redis->exists($redisKey);
             return is_int($result) && $result > 0;
         } catch (Throwable $e) {
-            $this->logger->warning('checktask是否存在fail', [
+            $this->logger->warning('checktaskwhether存infail', [
                 'task_key' => $taskKey,
                 'user_id' => $userId,
                 'error' => $e->getMessage(),
@@ -111,7 +111,7 @@ readonly class AsrTaskRepository
      *
      * @param string $taskKey task键
      * @param string $userId userID
-     * @return bool 是否deletesuccess
+     * @return bool whetherdeletesuccess
      */
     public function delete(string $taskKey, string $userId): bool
     {

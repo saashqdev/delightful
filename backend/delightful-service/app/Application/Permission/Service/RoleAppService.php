@@ -79,7 +79,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * getuser所有permission.
+     * getuser所havepermission.
      */
     public function getUserPermissions(PermissionDataIsolation $dataIsolation, string $userId): array
     {
@@ -87,7 +87,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * checkuser是否拥有指定permission.
+     * checkuserwhether拥have指定permission.
      */
     public function hasPermission(PermissionDataIsolation $dataIsolation, string $userId, string $permissionKey): bool
     {
@@ -97,7 +97,7 @@ class RoleAppService extends AbstractKernelAppService
     /**
      * getpermission资源树结构.
      *
-     * @param bool $isPlatformOrganization 是否平台organization
+     * @param bool $isPlatformOrganization whether平台organization
      */
     public function getPermissionTree(bool $isPlatformOrganization = false): array
     {

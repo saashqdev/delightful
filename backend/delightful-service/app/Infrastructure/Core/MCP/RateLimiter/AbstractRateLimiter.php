@@ -15,27 +15,27 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 abstract class AbstractRateLimiter implements RateLimiterInterface
 {
     /**
-     * 每分钟最大request数.
+     * each分钟most大request数.
      */
     protected int $maxRequestsPerMinute = 60;
 
     /**
-     * 每小时最大request数.
+     * each小时most大request数.
      */
     protected int $maxRequestsPerHour = 1000;
 
     /**
-     * 每天最大request数.
+     * each天most大request数.
      */
     protected int $maxRequestsPerDay = 5000;
 
     /**
-     * 是否enable速率限制.
+     * whetherenable速率限制.
      */
     protected bool $enabled = true;
 
     /**
-     * check客户端是否allowexecuterequest.
+     * check客户端whetherallowexecuterequest.
      */
     public function check(string $clientId, MessageInterface $request): void
     {
@@ -43,12 +43,12 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
             return;
         }
 
-        // initializerequest不进行限制
+        // initializerequestnotconduct限制
         if ($request->getMethod() === 'initialize') {
             return;
         }
 
-        // execute具体的速率限制check
+        // executespecific的速率限制check
         $this->doCheck($clientId, $request);
     }
 
@@ -67,7 +67,7 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
 
     /**
      * actualexecute的速率限制check.
-     * 由子类implement具体逻辑.
+     * 由子类implementspecific逻辑.
      */
     abstract protected function doCheck(string $clientId, MessageInterface $request): void;
 }

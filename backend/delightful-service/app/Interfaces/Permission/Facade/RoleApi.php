@@ -57,7 +57,7 @@ class RoleApi extends AbstractPermissionApi
         // queryrolelist
         $result = $this->roleAppService->queries($dataIsolation, $page, $filters);
 
-        // 批量getuserdetail（每个role仅取前5个userId）
+        // 批量getuserdetail（each个role仅取前5个userId）
         $contactIsolation = ContactDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -188,7 +188,7 @@ class RoleApi extends AbstractPermissionApi
             throw new InvalidArgumentException('at leastneed提供一个要update的field');
         }
 
-        // get现有role
+        // get现haverole
         $roleEntity = $this->roleAppService->show($dataIsolation, $roleId);
 
         $updateFields = $requestDTO->getUpdateFields();
@@ -225,7 +225,7 @@ class RoleApi extends AbstractPermissionApi
         // deleterole
         $this->roleAppService->destroy($dataIsolation, $id);
 
-        // return空array以触发统一的 ApiResponse 封装
+        // return空arrayby触发统一的 ApiResponse 封装
         return [];
     }
 }

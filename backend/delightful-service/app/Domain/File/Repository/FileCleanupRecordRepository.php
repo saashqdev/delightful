@@ -159,7 +159,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * cancel清理(如果fileneed保留).
+     * cancel清理(iffileneed保留).
      */
     public function cancelCleanup(string $fileKey, string $organizationCode): bool
     {

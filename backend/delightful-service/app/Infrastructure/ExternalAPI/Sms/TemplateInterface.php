@@ -12,7 +12,7 @@ use App\Infrastructure\ExternalAPI\Sms\Enum\LanguageEnum;
 interface TemplateInterface
 {
     /**
-     * according to传入的短信type和语种,尝试确定可能存在的templateid.
+     * according to传入的短信type和语种,尝试确定可能存in的templateid.
      */
     public function getTemplateIdByTypeAndLanguage(string $type, ?string $language): ?string;
 
@@ -27,7 +27,7 @@ interface TemplateInterface
     public function getContentByTemplateId(string $templateId): string;
 
     /**
-     * parsetemplatevariable,得到 variablekey与variablevalue 的array.
+     * parsetemplatevariable,得to variablekey与variablevalue 的array.
      */
     public function getTemplateVariables(string $content, array $messages): array;
 

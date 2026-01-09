@@ -29,7 +29,7 @@ use function Hyperf\Support\retry;
 
 /**
  * service商modelsyncapplicationservice.
- * 负责从外部APIpullmodel并sync到Officialservice商.
+ * 负责from外部APIpullmodel并synctoOfficialservice商.
  */
 class ProviderModelSyncAppService
 {
@@ -46,27 +46,27 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * 从外部APIsyncmodel.
-     * 当service商configurationcreate或update时，如果是Officialservice商且是官方organization，则从外部APIpullmodel.
+     * from外部APIsyncmodel.
+     * whenservice商configurationcreateorupdate时，if是Officialservice商and是官方organization，thenfrom外部APIpullmodel.
      */
     public function syncModelsFromExternalApi(
         ProviderConfigEntity $providerConfigEntity,
         string $language,
         string $organizationCode
     ): void {
-        // 1. check是否为Officialservice商
+        // 1. checkwhether为Officialservice商
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
         $provider = $this->providerConfigDomainService->getProviderById($dataIsolation, $providerConfigEntity->getServiceProviderId());
 
         if (! $provider || $provider->getProviderCode() !== ProviderCode::Official) {
-            $this->logger->debug('不是Officialservice商，skipsync', [
+            $this->logger->debug('not是Officialservice商，skipsync', [
                 'config_id' => $providerConfigEntity->getId(),
                 'provider_code' => $provider?->getProviderCode()->value,
             ]);
             return;
         }
 
-        $this->logger->info('开始从外部APIsyncmodel', [
+        $this->logger->info('startfrom外部APIsyncmodel', [
             'config_id' => $providerConfigEntity->getId(),
             'organization_code' => $organizationCode,
             'provider_code' => $provider->getProviderCode()->value,
@@ -85,7 +85,7 @@ class ProviderModelSyncAppService
             $url = $config->getUrl();
             $apiKey = $config->getApiKey();
             if (! $url || ! $apiKey) {
-                $this->logger->warning('configuration不完整，缺少url或api_key', [
+                $this->logger->warning('configurationnot完整，缺少urlorapi_key', [
                     'config_id' => $providerConfigEntity->getId(),
                     'has_url' => ! empty($url),
                     'has_api_key' => ! empty($apiKey),
@@ -96,26 +96,26 @@ class ProviderModelSyncAppService
             // 4. according tocategory确定typeparameter
             $types = $this->getModelTypesByCategory($provider->getCategory());
 
-            // 5. 从外部APIpullmodel
+            // 5. from外部APIpullmodel
             $models = $this->fetchModelsFromApi($url, $apiKey, $types, $language);
 
             if (empty($models)) {
-                $this->logger->warning('未从外部APIget到model', [
+                $this->logger->warning('未from外部APIgettomodel', [
                     'config_id' => $providerConfigEntity->getId(),
                     'url' => $url,
                 ]);
                 return;
             }
 
-            // 6. syncmodel到database
+            // 6. syncmodeltodatabase
             $this->syncModelsToDatabase($dataIsolation, $providerConfigEntity, $models, $language);
 
-            $this->logger->info('从外部APIsyncmodelcomplete', [
+            $this->logger->info('from外部APIsyncmodelcomplete', [
                 'config_id' => $providerConfigEntity->getId(),
                 'model_count' => count($models),
             ]);
         } catch (Throwable $e) {
-            $this->logger->error('从外部APIsyncmodelfail', [
+            $this->logger->error('from外部APIsyncmodelfail', [
                 'config_id' => $providerConfigEntity->getId(),
                 'error' => $e->getMessage(),
                 'file' => $e->getFile(),
@@ -138,7 +138,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * 从外部APIpullmodel.
+     * from外部APIpullmodel.
      */
     private function fetchModelsFromApi(string $url, string $apiKey, array $types, string $language): array
     {
@@ -147,7 +147,7 @@ class ProviderModelSyncAppService
 
         $allModels = [];
 
-        // 为每个typecallAPI
+        // 为each个typecallAPI
         foreach ($types as $type) {
             try {
                 $models = retry(3, function () use ($apiUrl, $apiKey, $type, $language) {
@@ -200,7 +200,7 @@ class ProviderModelSyncAppService
             return [];
         }
 
-        $this->logger->info('success从APIpullmodel', [
+        $this->logger->info('successfromAPIpullmodel', [
             'api_url' => $apiUrl,
             'type' => $type,
             'model_count' => count($data['data']),
@@ -210,7 +210,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * 将modelsync到database.
+     * 将modelsynctodatabase.
      */
     private function syncModelsToDatabase(
         ProviderDataIsolation $dataIsolation,
@@ -220,7 +220,7 @@ class ProviderModelSyncAppService
     ): void {
         $configId = $providerConfigEntity->getId();
 
-        // get现有的所有model
+        // get现have的所havemodel
         $existingModels = $this->providerModelDomainService->getByProviderConfigId($dataIsolation, (string) $configId);
 
         // 建立model_id -> entity的mapping
@@ -232,7 +232,7 @@ class ProviderModelSyncAppService
         // 提取新model的model_id
         $newModelIds = array_column($models, 'id');
 
-        // 遍历新model，create或update
+        // 遍历新model，createorupdate
         foreach ($models as $modelData) {
             $modelId = $modelData['id'] ?? null;
             if (! $modelId) {
@@ -241,7 +241,7 @@ class ProviderModelSyncAppService
 
             try {
                 if (isset($existingModelMap[$modelId])) {
-                    // update现有model
+                    // update现havemodel
                     $this->updateModel($dataIsolation, $existingModelMap[$modelId], $modelData, $providerConfigEntity, $language);
                 } else {
                     // create新model
@@ -256,7 +256,7 @@ class ProviderModelSyncAppService
             }
         }
 
-        // delete不再存在的model
+        // deletenotagain存in的model
         foreach ($existingModelMap as $modelId => $existingModel) {
             if (! in_array($modelId, $newModelIds)) {
                 try {
@@ -296,7 +296,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * update现有model.
+     * update现havemodel.
      */
     private function updateModel(
         ProviderDataIsolation $dataIsolation,
@@ -308,7 +308,7 @@ class ProviderModelSyncAppService
         $saveDTO = $this->modelToReqDTO($dataIsolation, $modelData, $providerConfigEntity, $language);
 
         $saveDTO->setId($existingModel->getId());
-        $saveDTO->setStatus($existingModel->getStatus()); // 保持原有status
+        $saveDTO->setStatus($existingModel->getStatus()); // 保持原havestatus
 
         // savemodel
         $this->providerModelDomainService->saveModel($dataIsolation, $saveDTO);
@@ -325,7 +325,7 @@ class ProviderModelSyncAppService
         ProviderConfigEntity $providerConfigEntity,
         string $language
     ): SaveProviderModelDTO {
-        // 如果是一个link，那么need对 url 进行限制
+        // if是一个link，那么need对 url conduct限制
         $iconUrl = $modelData['info']['attributes']['icon'] ?? '';
         try {
             $iconUrl = str_replace(' ', '%20', $iconUrl);

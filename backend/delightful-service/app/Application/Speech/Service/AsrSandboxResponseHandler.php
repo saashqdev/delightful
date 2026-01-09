@@ -53,13 +53,13 @@ readonly class AsrSandboxResponseHandler
         $noteFile = $sandboxResponse['files']['note_file'] ?? null;
 
         if ($audioFile === null) {
-            $this->logger->warning('沙箱response中未找到audiofileinfo', [
+            $this->logger->warning('沙箱response中未找toaudiofileinfo', [
                 'task_key' => $taskStatus->taskKey,
             ]);
             return;
         }
 
-        // 2. check并handledirectory重命名（沙箱有bug，will重命名directory但是没有notifyfile变动，没有改databaserecord）
+        // 2. check并handledirectory重命名（沙箱havebug，will重命名directorybut是nothavenotifyfile变动，nothave改databaserecord）
         $taskStatus->displayDirectory = $this->extractDirectoryPath($audioFile);
 
         // 3. 查找audiofilerecord
@@ -67,10 +67,10 @@ readonly class AsrSandboxResponseHandler
 
         // 4. handle笔记file
         if ($noteFile !== null) {
-            // pass file_key 查找最new笔记file ID（directory可能被重命名）
+            // pass file_key 查找mostnew笔记file ID（directory可能be重命名）
             $this->getNoteFileId($taskStatus, $noteFile);
         } else {
-            // 笔记file为null或不存在，deletepreset的笔记filerecord
+            // 笔记file为nullornot存in，deletepreset的笔记filerecord
             $this->handleEmptyNoteFile($taskStatus);
         }
 
@@ -83,7 +83,7 @@ readonly class AsrSandboxResponseHandler
     }
 
     /**
-     * 从filepath提取directorypath.
+     * fromfilepath提取directorypath.
      *
      * @param array $fileInfo fileinfo
      * @return string directorypath（工作区相对path）
@@ -95,13 +95,13 @@ readonly class AsrSandboxResponseHandler
             return '';
         }
 
-        // 从filepath提取actual的directory名
+        // fromfilepath提取actual的directory名
         return dirname($filePath);
     }
 
     /**
-     * according toresponse的audiofile名/filepath，找到audiofile id，用于后续发chatmessage.
-     * use轮询机制等待沙箱syncfile到database（at most等待 30 秒）.
+     * according toresponse的audiofile名/filepath，找toaudiofile id，useat后续发chatmessage.
+     * use轮询机制etc待沙箱syncfiletodatabase（at mostetc待 30 秒）.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param array $audioFile audiofileinfo
@@ -138,7 +138,7 @@ readonly class AsrSandboxResponseHandler
                 'error' => $e->getMessage(),
             ]);
 
-            // 如果是我们自己throw的exception，直接重新throw
+            // if是我们自己throw的exception，直接重新throw
             if ($e instanceof BusinessException) {
                 throw $e;
             }
@@ -148,8 +148,8 @@ readonly class AsrSandboxResponseHandler
     }
 
     /**
-     * according toresponse的笔记filepath，找到笔记file id.
-     * use轮询机制等待沙箱syncfile到database（at most等待 30 秒）.
+     * according toresponse的笔记filepath，找to笔记file id.
+     * use轮询机制etc待沙箱syncfiletodatabase（at mostetc待 30 秒）.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param array $noteFile 笔记fileinfo
@@ -174,22 +174,22 @@ readonly class AsrSandboxResponseHandler
                 $taskStatus,
                 $relativePath,
                 '笔记file',
-                false // 笔记filequeryfail不抛exception
+                false // 笔记filequeryfailnot抛exception
             );
 
             if ($fileEntity !== null) {
                 $taskStatus->noteFileId = (string) $fileEntity->getFileId();
                 $taskStatus->noteFileName = $noteFile['filename'] ?? $noteFile['path'] ?? '';
 
-                $this->logger->info('success找到笔记filerecord', [
+                $this->logger->info('success找to笔记filerecord', [
                     'task_key' => $taskStatus->taskKey,
                     'note_file_id' => $taskStatus->noteFileId,
                     'note_file_name' => $taskStatus->noteFileName,
                     'old_preset_note_file_id' => $taskStatus->presetNoteFileId,
                 ]);
             } else {
-                // 没找到就清null，不usepresetID
-                $this->logger->warning('未找到笔记filerecord', [
+                // not找tothen清null，notusepresetID
+                $this->logger->warning('未找to笔记filerecord', [
                     'task_key' => $taskStatus->taskKey,
                     'relative_path' => $relativePath,
                 ]);
@@ -209,13 +209,13 @@ readonly class AsrSandboxResponseHandler
     }
 
     /**
-     * passfilepath轮询queryfilerecord（通用method）.
+     * passfilepath轮询queryfilerecord（通usemethod）.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $relativePath file相对path
-     * @param string $fileTypeName filetypename（用于log）
-     * @param bool $throwOnTimeout timeout是否throwexception
-     * @return null|TaskFileEntity file实体，未找到returnnull
+     * @param string $fileTypeName filetypename（useatlog）
+     * @param bool $throwOnTimeout timeoutwhetherthrowexception
+     * @return null|TaskFileEntity file实体，未找toreturnnull
      * @throws Throwable
      */
     private function findFileByPathWithPolling(
@@ -226,14 +226,14 @@ readonly class AsrSandboxResponseHandler
     ): ?TaskFileEntity {
         // check必要的taskstatusfield
         if (empty($taskStatus->projectId) || empty($taskStatus->userId) || empty($taskStatus->organizationCode)) {
-            $this->logger->error('taskstatusinfo不完整，无法queryfilerecord', [
+            $this->logger->error('taskstatusinfonot完整，无法queryfilerecord', [
                 'task_key' => $taskStatus->taskKey,
                 'file_type' => $fileTypeName,
                 'project_id' => $taskStatus->projectId,
                 'user_id' => $taskStatus->userId,
                 'organization_code' => $taskStatus->organizationCode,
             ]);
-            ExceptionBuilder::throw(AsrErrorCode::CreateAudioFileFailed, '', ['error' => 'taskstatusinfo不完整']);
+            ExceptionBuilder::throw(AsrErrorCode::CreateAudioFileFailed, '', ['error' => 'taskstatusinfonot完整']);
         }
 
         // getprojectinfo并build file_key
@@ -271,7 +271,7 @@ readonly class AsrSandboxResponseHandler
             );
 
             if ($existingFile !== null) {
-                $this->logger->info(sprintf('success找到%srecord', $fileTypeName), [
+                $this->logger->info(sprintf('success找to%srecord', $fileTypeName), [
                     'task_key' => $taskStatus->taskKey,
                     'file_type' => $fileTypeName,
                     'file_id' => $existingFile->getFileId(),
@@ -283,7 +283,7 @@ readonly class AsrSandboxResponseHandler
                 return $existingFile;
             }
 
-            // check是否timeout
+            // checkwhethertimeout
             if ($elapsedSeconds >= $timeoutSeconds) {
                 break;
             }
@@ -291,7 +291,7 @@ readonly class AsrSandboxResponseHandler
             // record轮询进度
             if ($attempt % AsrConfig::FILE_RECORD_QUERY_LOG_FREQUENCY === 0 || $attempt === 1) {
                 $remainingSeconds = max(0, $timeoutSeconds - $elapsedSeconds);
-                $this->logger->info(sprintf('等待沙箱sync%s到database', $fileTypeName), [
+                $this->logger->info(sprintf('etc待沙箱sync%stodatabase', $fileTypeName), [
                     'task_key' => $taskStatus->taskKey,
                     'file_type' => $fileTypeName,
                     'file_key' => $fileKey,
@@ -301,13 +301,13 @@ readonly class AsrSandboxResponseHandler
                 ]);
             }
 
-            // 等待下一次轮询
+            // etc待下一次轮询
             sleep($pollingInterval);
         }
 
-        // 轮询timeout，仍未找到filerecord
+        // 轮询timeout，仍未找tofilerecord
         $totalElapsedTime = (int) (microtime(true) - $startTime);
-        $this->logger->warning(sprintf('轮询timeout，未找到%srecord', $fileTypeName), [
+        $this->logger->warning(sprintf('轮询timeout，未找to%srecord', $fileTypeName), [
             'task_key' => $taskStatus->taskKey,
             'file_type' => $fileTypeName,
             'file_key' => $fileKey,
@@ -323,7 +323,7 @@ readonly class AsrSandboxResponseHandler
             ExceptionBuilder::throw(
                 AsrErrorCode::CreateAudioFileFailed,
                 '',
-                ['error' => sprintf('等待 %d 秒后仍未找到%srecord', $timeoutSeconds, $fileTypeName)]
+                ['error' => sprintf('etc待 %d 秒后仍未找to%srecord', $timeoutSeconds, $fileTypeName)]
             );
         }
 
@@ -345,7 +345,7 @@ readonly class AsrSandboxResponseHandler
             return;
         }
 
-        $this->logger->info('笔记file为null或不存在，deletepreset笔记filerecord', [
+        $this->logger->info('笔记file为nullornot存in，deletepreset笔记filerecord', [
             'task_key' => $taskStatus->taskKey,
             'note_file_id' => $noteFileId,
         ]);

@@ -186,7 +186,7 @@ class AiAbilityEntity extends AbstractEntity
     }
 
     /**
-     * 判断能力是否enable.
+     * 判断能力whetherenable.
      */
     public function isEnabled(): bool
     {

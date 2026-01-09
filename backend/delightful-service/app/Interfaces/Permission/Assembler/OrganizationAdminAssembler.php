@@ -20,11 +20,11 @@ class OrganizationAdminAssembler
     {
         $dto = new OrganizationAdminResponseDTO();
         $dto->setUserId($entity->getUserId());
-        $dto->setUserName(''); // need从userserviceget
-        $dto->setAvatar(''); // need从userserviceget
-        $dto->setDepartmentName(''); // need从departmentserviceget
-        $dto->setGrantorUserName(''); // need从userserviceget
-        $dto->setGrantorUserAvatar(''); // need从userserviceget
+        $dto->setUserName(''); // needfromuserserviceget
+        $dto->setAvatar(''); // needfromuserserviceget
+        $dto->setDepartmentName(''); // needfromdepartmentserviceget
+        $dto->setGrantorUserName(''); // needfromuserserviceget
+        $dto->setGrantorUserAvatar(''); // needfromuserserviceget
         $dto->setOperationTime($entity->getGrantedAt()?->format('Y-m-d H:i:s') ?? '');
         $dto->setIsOrganizationCreator($entity->isOrganizationCreator());
 
@@ -49,7 +49,7 @@ class OrganizationAdminAssembler
     }
 
     /**
-     * 将带有userinfo的dataconvert为responseDTO.
+     * 将带haveuserinfo的dataconvert为responseDTO.
      *
      * @param array $data containorganization管理员实体和userinfo的array
      */
@@ -75,7 +75,7 @@ class OrganizationAdminAssembler
     }
 
     /**
-     * 将带有userinfo的datalistconvert为responseDTO.
+     * 将带haveuserinfo的datalistconvert为responseDTO.
      *
      * @param array $dataList containorganization管理员实体和userinfo的arraylist
      */

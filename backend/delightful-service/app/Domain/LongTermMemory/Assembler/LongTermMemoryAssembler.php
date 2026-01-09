@@ -47,7 +47,7 @@ class LongTermMemoryAssembler
         if ($dto->metadata !== null) {
             $entity->setMetadata($dto->metadata);
         }
-        // enabled 放在最后setting，ensure status 已经correctsetting
+        // enabled 放inmost后setting，ensure status 已经correctsetting
         if ($dto->enabled !== null) {
             $entity->setEnabled($dto->enabled);
         }

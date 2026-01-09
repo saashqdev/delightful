@@ -23,7 +23,7 @@ class FlowExecutorArchiveCloud
         $maxSize = 100 * 1024 * 1024; // 100MB
 
         if ($dataSize > $maxSize) {
-            // data过大，不upload，直接returnnullstring
+            // data过大，notupload，直接returnnullstring
             return '';
         }
 
@@ -31,7 +31,7 @@ class FlowExecutorArchiveCloud
         $tmpFile = "{$tmpDir}/{$name}." . uniqid();
 
         try {
-            // datasize符合要求，save到temporaryfile
+            // datasize符合要求，savetotemporaryfile
             file_put_contents($tmpFile, $serializedData);
 
             $uploadFile = new UploadFile($tmpFile, dir: 'DelightfulFlowExecutorArchive', name: $name, rename: false);

@@ -25,7 +25,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertArrayValueTypesEquals([
             'is_maintenance' => false,
             'maintenance_description' => '',
-        ], $data, 'default全局configuration结构不符', false, true);
+        ], $data, 'defaultall局configuration结构not符', false, true);
     }
 
     public function testUpdateGlobalConfig(): void
@@ -38,13 +38,13 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $putResponse = $this->put($this->url, $payload, $this->getCommonHeaders());
         $this->assertSame(1000, $putResponse['code']);
         $putData = $putResponse['data'];
-        $this->assertArrayEquals($payload, $putData, 'PUT returndata不一致');
+        $this->assertArrayEquals($payload, $putData, 'PUT returndatanot一致');
 
-        // 再次 GET verifycache及持久化
+        // again次 GET verifycache及持久化
         $getResponse = $this->get($this->url, [], $this->getCommonHeaders());
         $this->assertSame(1000, $getResponse['code']);
         $getData = $getResponse['data'];
-        $this->assertArrayEquals($payload, $getData, 'GET returndata与expected不符');
+        $this->assertArrayEquals($payload, $getData, 'GET returndata与expectednot符');
     }
 
     public function testGetGlobalConfigWithPlatformSettings(): void
@@ -64,7 +64,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         // pass平台setinterfaceset
         $this->put('/api/v1/platform/setting', $platformPayload, $this->getCommonHeaders());
 
-        // get全局configuration，shouldcontain平台set
+        // getall局configuration，shouldcontain平台set
         $response = $this->get($this->url, [], $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
@@ -106,7 +106,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertIsBool($data['is_maintenance']);
         $this->assertIsString($data['maintenance_description']);
 
-        // 如果有平台set，verify其结构
+        // ifhave平台set，verify其结构
         if (isset($data['logo'])) {
             $this->assertIsArray($data['logo']);
         }

@@ -20,7 +20,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $name documentname
  * @property string $code documentencoding
  * @property int $version version号
- * @property bool $enabled 是否enable
+ * @property bool $enabled whetherenable
  * @property int $doc_type documenttype
  * @property array $doc_metadata document元data
  * @property DocumentFileInterface $document_file documentfileinfo
@@ -30,11 +30,11 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property int $sync_times synccount
  * @property string $sync_status_message syncstatusmessage
  * @property string $embedding_model 嵌入model
- * @property string $vector_db 向量database
+ * @property string $vector_db to量database
  * @property array $retrieve_config 检索configuration
  * @property array $fragment_config 片段configuration
  * @property array $embedding_config 嵌入configuration
- * @property array $vector_db_config 向量databaseconfiguration
+ * @property array $vector_db_config to量databaseconfiguration
  * @property string $created_uid create者UID
  * @property string $updated_uid update者UID
  * @property string $created_at createtime
@@ -48,7 +48,7 @@ class KnowledgeBaseDocumentModel extends Model
     use Snowflake;
 
     /**
-     * 是否自增.
+     * whether自增.
      */
     public bool $incrementing = true;
 

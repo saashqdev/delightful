@@ -93,7 +93,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
             $dataIsolation,
             $currentOwnerUserId,
             $newOwnerUserId,
-            $currentOwnerUserId // 操作者就是currentcreate者
+            $currentOwnerUserId // 操作者then是currentcreate者
         );
     }
 
@@ -167,7 +167,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
                 'job_title' => $departmentUser->getJobTitle(),
             ];
         } catch (Exception $e) {
-            // 如果getdepartmentinfofail，return空array
+            // ifgetdepartmentinfofail，return空array
             return [];
         }
     }

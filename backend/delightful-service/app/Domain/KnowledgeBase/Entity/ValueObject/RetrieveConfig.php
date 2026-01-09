@@ -13,14 +13,14 @@ use InvalidArgumentException;
 /**
  * knowledge base检索configurationvalueobject
  *
- * contain检索strategy、检索method、重sortconfiguration等parameter
+ * contain检索strategy、检索method、重sortconfigurationetcparameter
  */
 class RetrieveConfig extends AbstractValueObject
 {
     /**
      * currentconfigurationversion.
      *
-     * 用于configuration结构变更时的compatible性process
+     * useatconfiguration结构变more时的compatible性process
      */
     public const int CURRENT_VERSION = 1;
 
@@ -29,7 +29,7 @@ class RetrieveConfig extends AbstractValueObject
      *
      * optionalvalue：
      * - semantic_search: 语义检索
-     * - full_text_search: 全文检索
+     * - full_text_search: all文检索
      * - hybrid_search: 混合检索
      * - graph_search: 图检索
      *
@@ -38,19 +38,19 @@ class RetrieveConfig extends AbstractValueObject
     protected string $searchMethod = RetrievalMethod::SEMANTIC_SEARCH;
 
     /**
-     * return的最大resultquantity.
+     * return的most大resultquantity.
      */
     protected int $topK = 3;
 
     /**
      * 分数阈value
      *
-     * 只return相似度分数greater than该阈value的result
+     * 只returnsimilar度分数greater than该阈value的result
      */
     protected float $scoreThreshold = 0.5;
 
     /**
-     * 是否enable分数阈valuefilter.
+     * whetherenable分数阈valuefilter.
      */
     protected bool $scoreThresholdEnabled = false;
 
@@ -66,14 +66,14 @@ class RetrieveConfig extends AbstractValueObject
     protected string $rerankingMode = RerankMode::WEIGHTED_SCORE;
 
     /**
-     * 是否enable重sort.
+     * whetherenable重sort.
      */
     protected bool $rerankingEnable = false;
 
     /**
      * 权重configuration.
      *
-     * contain向量检索和关键词检索的权重configuration
+     * containto量检索和关键词检索的权重configuration
      */
     protected array $weights = [
         'vector_setting' => [
@@ -106,7 +106,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * configurationversion.
      *
-     * 用于configuration结构变更时的compatible性process
+     * useatconfiguration结构变more时的compatible性process
      */
     private int $version = self::CURRENT_VERSION;
 
@@ -148,7 +148,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * getreturn的最大resultquantity.
+     * getreturn的most大resultquantity.
      */
     public function getTopK(): int
     {
@@ -156,7 +156,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * setreturn的最大resultquantity.
+     * setreturn的most大resultquantity.
      */
     public function setTopK(int $topK): self
     {
@@ -188,7 +188,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 是否enable分数阈valuefilter.
+     * whetherenable分数阈valuefilter.
      */
     public function isScoreThresholdEnabled(): bool
     {
@@ -196,7 +196,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * set是否enable分数阈valuefilter.
+     * setwhetherenable分数阈valuefilter.
      */
     public function setScoreThresholdEnabled(bool $scoreThresholdEnabled): self
     {
@@ -225,7 +225,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 是否enable重sort.
+     * whetherenable重sort.
      */
     public function isRerankingEnable(): bool
     {
@@ -233,7 +233,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * set是否enable重sort.
+     * setwhetherenable重sort.
      */
     public function setRerankingEnable(bool $rerankingEnable): self
     {
@@ -310,7 +310,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 从arraycreateconfiguration.
+     * fromarraycreateconfiguration.
      */
     public static function fromArray(array $config): self
     {

@@ -90,7 +90,7 @@ class AdminGlobalSettingsRepository implements AdminGlobalSettingsRepositoryInte
             ];
         }, $entities);
 
-        // 一次性update或create所有record
+        // 一次性updateorcreate所haverecord
         AdminGlobalSettingsModel::query()->upsert(
             $values,
             ['type', 'organization'],

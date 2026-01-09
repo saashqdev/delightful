@@ -365,7 +365,7 @@ class KnowledgeBaseDocumentEntity extends AbstractKnowledgeBaseEntity
     {
         $driver = VectorStoreDriver::tryFrom($this->vectorDb);
         if ($driver === null) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "向量datalibrary [{$this->vectorDb}] 不存在");
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "to量datalibrary [{$this->vectorDb}] not存in");
         }
         return $driver->get();
     }

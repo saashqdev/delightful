@@ -78,7 +78,7 @@ class ExecutionData
     private array $variables = [];
 
     /**
-     * attachment。processexecute时产生的所有filerecord.
+     * attachment。processexecute时产生的所havefilerecord.
      * @var array<string, AbstractAttachment>
      */
     private array $attachmentRecords = [];
@@ -99,7 +99,7 @@ class ExecutionData
     private ?string $topicId = null;
 
     /**
-     * 用作传递一些特殊的parameter，预留.
+     * use作传递一些特殊的parameter，预留.
      */
     private array $ext = [];
 
@@ -167,7 +167,7 @@ class ExecutionData
         $this->id = $id ?? 'e_' . IdGenerator::getUniqueId32();
         $this->conversationId = $conversationId ?? 'c_' . IdGenerator::getUniqueId32();
         $this->originConversationId = $originConversationId ?? $this->conversationId;
-        // initialize全局variable到variable中
+        // initializeall局variabletovariable中
         $this->initGlobalVariable();
     }
 

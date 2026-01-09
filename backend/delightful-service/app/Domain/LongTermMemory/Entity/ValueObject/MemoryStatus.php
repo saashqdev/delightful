@@ -13,8 +13,8 @@ namespace App\Domain\LongTermMemory\Entity\ValueObject;
 enum MemoryStatus: string
 {
     case PENDING = 'pending';                   // 待接受（第一次generate记忆时）
-    case ACTIVE = 'active';                     // in effect（记忆已被接受，pending_content为null）
-    case PENDING_REVISION = 'pending_revision'; // 待修订（记忆已被接受，但pending_content不为null）
+    case ACTIVE = 'active';                     // in effect（记忆已be接受，pending_content为null）
+    case PENDING_REVISION = 'pending_revision'; // 待修订（记忆已be接受，butpending_contentnot为null）
 
     /**
      * getstatusdescription.
@@ -29,7 +29,7 @@ enum MemoryStatus: string
     }
 
     /**
-     * get所有statusvalue.
+     * get所havestatusvalue.
      */
     public static function getAllValues(): array
     {
@@ -37,7 +37,7 @@ enum MemoryStatus: string
     }
 
     /**
-     * checkstatus是否valid.
+     * checkstatuswhethervalid.
      */
     public static function isValid(string $status): bool
     {

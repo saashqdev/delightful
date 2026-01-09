@@ -26,7 +26,7 @@ class DelightfulAccessToken
         $llmDataIsolation = new LLMDataIsolation('', 'system');
         $llmDataIsolation->setCurrentOrganizationCode($llmDataIsolation->getOfficialOrganizationCode());
 
-        // checkapplication是否已经create
+        // checkapplicationwhether已经create
         $applicationDomainService = di(ApplicationDomainService::class);
         $application = $applicationDomainService->getByCodeWithNull($llmDataIsolation, ModelGatewayOfficialApp::APP_CODE);
         if (! $application) {
@@ -39,7 +39,7 @@ class DelightfulAccessToken
             $application = $applicationDomainService->save($llmDataIsolation, $application);
         }
 
-        // 这里的常量 AccessToken 不落library，仅存在于内存中，保证内部call时use一致
+        // 这里的常量 AccessToken not落library，仅存inat内存中，保证内部call时use一致
         $accessToken = new AccessTokenEntity();
         $accessToken->setId(1);
         $accessToken->setName($application->getCode());

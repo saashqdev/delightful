@@ -32,7 +32,7 @@ class OrganizationMiddleware implements MiddlewareInterface
         // todo getuserid
         $userId = $requestContext->getUserId();
 
-        // todo checkuser是否在when前organization
+        // todo checkuserwhetherinwhen前organization
         //        $this->userAppService->assertUserInCurrentOrganization($requestContext, $organizationCode);
         $requestContext->setOrganizationCode($organizationCode);
         return $handler->handle($request);

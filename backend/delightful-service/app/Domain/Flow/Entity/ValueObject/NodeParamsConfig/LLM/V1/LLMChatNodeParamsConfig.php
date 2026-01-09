@@ -48,7 +48,7 @@ class LLMChatNodeParamsConfig extends AbstractLLMNodeParamsConfig
             visionModel: (string) ($params['model_config']['vision_model'] ?? ''),
         );
 
-        // messages 非必填
+        // messages non必填
         $messages = ComponentFactory::fastCreate($params['messages'] ?? null);
         if ($messages && ! $messages->isForm()) {
             ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'flow.component.format_error', ['label' => 'messages']);
@@ -204,7 +204,7 @@ JSON,
                             "type": "boolean",
                             "key": "success",
                             "sort": 1,
-                            "title": "是否success",
+                            "title": "whethersuccess",
                             "description": "",
                             "items": null,
                             "properties": null,

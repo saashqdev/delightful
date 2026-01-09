@@ -78,10 +78,10 @@ class BeDelightfulChatManager
      */
     private static function getAgents(FlowDataIsolation $flowDataIsolation, array $agentIds): array
     {
-        // 1. query所有可用 agent
+        // 1. query所have可use agent
         $agents = di(DelightfulAgentDomainService::class)->getAgentByIds($agentIds);
 
-        // 如果没有可用的 agents，直接return空array
+        // ifnothave可use的 agents，直接return空array
         if (empty($agents)) {
             return [];
         }
@@ -91,9 +91,9 @@ class BeDelightfulChatManager
 
         // 2. generate一份大modelcalltool可阅读的description
         $description = <<<'MARKDOWN'
-call麦吉 AI 助理进行conversation
+call麦吉 AI 助理conductconversation
 
-可用的 AI 助理list：
+可use的 AI 助理list：
 
 MARKDOWN;
 
@@ -108,10 +108,10 @@ MARKDOWN;
                 $agent->getId(),
                 $agent->getAgentName(),
                 $agent->getAgentDescription() ?: '暂无description',
-                $instructionDescription ? "\n  可用指令: {$instructionDescription}" : ''
+                $instructionDescription ? "\n  可use指令: {$instructionDescription}" : ''
             );
 
-            // 收集所有指令info用于generate schema
+            // 收集所have指令infouseatgenerate schema
             if ($instruction) {
                 $allInstructions[$agent->getId()] = $instruction;
             }
@@ -122,7 +122,7 @@ MARKDOWN;
         $usageInstructions = <<<'MARKDOWN'
 useinstruction：
 • must提供 agent_id 和 message parameter
-• conversation_id 用于保持conversation连续性，sameID的messagewill共享上下文
+• conversation_id useat保持conversation连续性，sameID的messagewill共享上下文
 
 MARKDOWN;
 
@@ -133,9 +133,9 @@ MARKDOWN;
             $instructionHelp = <<<'MARKDOWN'
 指令parameter instruction（optional）：
 • format：[{"name": "指令name", "value": "指令value"}, ...]
-• 单选type：从optionalvalue中选择一个，for example "yes", "no"
-• 开关type：只能是 "on" 或 "off"
-• 如果不提供指令parameter，将usedefaultvalue
+• 单选type：fromoptionalvalue中选择一个，for example "yes", "no"
+• 开关type：只能是 "on" or "off"
+• ifnot提供指令parameter，将usedefaultvalue
 
 callexample：
 ```json
@@ -178,7 +178,7 @@ MARKDOWN;
                         ],
                         'conversation_id' => [
                             'type' => 'string',
-                            'description' => 'sessionID，用于记忆feature，samesessionID的message将具有共享的上下文',
+                            'description' => 'sessionID，useat记忆feature，samesessionID的message将具have共享的上下文',
                         ],
                         'instruction' => $instructionSchema,
                     ],
@@ -267,17 +267,17 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => '指令parameterarray，用于控制AI助理的行为。每个objectcontain name（指令name）和 value（指令value）field。单选type指令need从optionalvalue中选择一个，开关type指令只能是 "on" 或 "off"。',
+            'description' => '指令parameterarray，useat控制AI助理的行为。each个objectcontain name（指令name）和 value（指令value）field。单选type指令needfromoptionalvalue中选择一个，开关type指令只能是 "on" or "off"。',
             'items' => [
                 'type' => 'object',
                 'properties' => [
                     'name' => [
                         'type' => 'string',
-                        'description' => '指令name，must与AI助理定义的指令name完全匹配',
+                        'description' => '指令name，must与AI助理定义的指令name完all匹配',
                     ],
                     'value' => [
                         'type' => 'string',
-                        'description' => '指令value，单选type从optionalvalue中选择，开关type只能是 "on" 或 "off"',
+                        'description' => '指令value，单选typefromoptionalvalue中选择，开关type只能是 "on" or "off"',
                     ],
                 ],
                 'required' => ['name', 'value'],
@@ -285,7 +285,7 @@ MARKDOWN;
             ],
         ];
 
-        // 如果有具体的指令info，generate更详细的 schema
+        // ifhavespecific的指令info，generatemore详细的 schema
         if (! empty($allInstructions)) {
             $examples = [];
             foreach ($allInstructions as $instructions) {

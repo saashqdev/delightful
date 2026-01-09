@@ -105,7 +105,7 @@ user的昵称是：currentuser的昵称
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一个scheduletask，taskname：reminder我做饭，从明天开始，每天早上9点execute，显示一条reminder我做饭的message',
+            // 'user_prompt' => '帮我create一个scheduletask，taskname：reminder我做饭，from明天start，each天早上9点execute，显示一条reminder我做饭的message',
             'user_prompt' => '帮我send一条message,content是：你今天真好看',
         ]);
 
@@ -200,7 +200,7 @@ user的昵称是：currentuser的昵称
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一个scheduletask，taskname：reminder我做饭，从明天开始，每天早上9点execute，显示一条reminder我做饭的message',
+            // 'user_prompt' => '帮我create一个scheduletask，taskname：reminder我做饭，from明天start，each天早上9点execute，显示一条reminder我做饭的message',
             'user_prompt' => '帮我send一条message,content是：你今天真好看',
         ]);
 

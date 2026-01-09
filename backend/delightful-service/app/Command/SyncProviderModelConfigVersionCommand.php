@@ -70,7 +70,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
         $models = $this->fetchModels($limit);
         $stats['total'] = $models->count();
 
-        $this->logger->info(sprintf('找到 %d 个service商modelneedprocess', $stats['total']));
+        $this->logger->info(sprintf('找to %d 个service商modelneedprocess', $stats['total']));
 
         foreach ($models as $model) {
             try {
@@ -117,7 +117,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * get已存在的versionquantity.
+     * get已存in的versionquantity.
      */
     private function getExistingVersionCount(ProviderModelModel $model): int
     {
@@ -127,7 +127,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 判断是否shouldskip.
+     * 判断whethershouldskip.
      */
     private function shouldSkip(int $existingVersionCount, bool $isForce): bool
     {
@@ -135,7 +135,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * update旧version（如果need）.
+     * update旧version（ifneed）.
      */
     private function updateOldVersionsIfNeeded(ProviderModelModel $model, int $existingVersionCount, bool $isForce): void
     {
@@ -219,11 +219,11 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
      */
     private function logHeader(bool $isDryRun, bool $isForce, int $limit): void
     {
-        $this->logger->info('开始syncservice商modelconfigurationversiondata...');
-        $this->logger->info(sprintf('模式: %s', $isDryRun ? '试运行（不writedatabase）' : '正式execute'));
+        $this->logger->info('startsyncservice商modelconfigurationversiondata...');
+        $this->logger->info(sprintf('模式: %s', $isDryRun ? '试运行（notwritedatabase）' : '正式execute'));
 
         if ($isForce) {
-            $this->logger->warning('force模式已enable：将为所有modelcreate新version');
+            $this->logger->warning('force模式已enable：将为所havemodelcreate新version');
         }
 
         if ($limit > 0) {
@@ -239,7 +239,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
         $this->logger->info('=================================');
         $this->logger->info('synccomplete！statisticsinfo:');
         $this->logger->info(sprintf('  总model数: %d', $result['total']));
-        $this->logger->info(sprintf('  已有version: %d', $result['skipped']));
+        $this->logger->info(sprintf('  已haveversion: %d', $result['skipped']));
         $this->logger->info(sprintf('  新增version: %d', $result['created']));
         $this->logger->info(sprintf('  failquantity: %d', $result['failed']));
         $this->logger->info('=================================');
@@ -251,7 +251,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     private function logSkipped(ProviderModelModel $model, int $existingVersionCount): void
     {
         $this->logger->debug(sprintf(
-            '[skip] model ID: %d, name: %s (已有 %d 个configurationversion)',
+            '[skip] model ID: %d, name: %s (已have %d 个configurationversion)',
             $model->id,
             $model->name ?: $model->model_id,
             $existingVersionCount

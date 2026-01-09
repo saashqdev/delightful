@@ -45,7 +45,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * get最后modification time.
+     * getmost后modification time.
      */
     public function getLastModified(): ?string
     {
@@ -53,7 +53,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * 从arraycreateDTO.
+     * fromarraycreateDTO.
      */
     public static function fromArray(array $data): self
     {
@@ -66,7 +66,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * convert为array（向后compatible）.
+     * convert为array（to后compatible）.
      */
     public function toArray(): array
     {

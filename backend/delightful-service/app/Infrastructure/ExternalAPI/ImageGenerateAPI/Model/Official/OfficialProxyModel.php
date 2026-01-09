@@ -68,7 +68,7 @@ class OfficialProxyModel extends AbstractImageGenerate
             $statusCode = $response->getStatusCode();
             $responseBody = $response->getBody()->getContents();
 
-            $this->logger->info('官方代理：收到response', [
+            $this->logger->info('官方代理：收toresponse', [
                 'status_code' => $statusCode,
                 'response_length' => strlen($responseBody),
             ]);
@@ -156,7 +156,7 @@ class OfficialProxyModel extends AbstractImageGenerate
 
     protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
-        // 官方代理不use此method，直接use generateImageOpenAIFormat
+        // 官方代理notuse此method，直接use generateImageOpenAIFormat
         throw new Exception('OfficialProxyModel does not support generateImageInternal method');
     }
 }

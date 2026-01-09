@@ -19,8 +19,8 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $name rolename
  * @property array $permission_key rolepermissionlist
  * @property string $organization_code organizationencoding
- * @property null|array $permission_tag permissiontag，用于前端展示category
- * @property int $is_display 是否显示
+ * @property null|array $permission_tag permissiontag，useat前端展示category
+ * @property int $is_display whether显示
  * @property int $status status: 0=disable, 1=enable
  * @property null|string $created_uid create者userID
  * @property null|string $updated_uid update者userID
@@ -114,7 +114,7 @@ class RoleModel extends AbstractModel
     }
 
     /**
-     * checkrole是否enable.
+     * checkrolewhetherenable.
      */
     public function isEnabled(): bool
     {

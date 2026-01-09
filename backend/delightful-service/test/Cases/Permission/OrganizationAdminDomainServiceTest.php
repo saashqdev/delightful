@@ -33,14 +33,14 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         parent::setUp();
         $this->organizationAdminDomainService = $this->getContainer()->get(OrganizationAdminDomainService::class);
 
-        // 为每个testgenerate唯一的userID，避免testbetween的dataconflict
+        // 为each个testgenerate唯一的userID，避免testbetween的dataconflict
         $this->testUserIds = [
             'test_domain_user_' . uniqid(),
             'test_domain_user_' . uniqid(),
             'test_domain_user_' . uniqid(),
         ];
 
-        // 清理可能存在的testdata
+        // 清理可能存in的testdata
         $this->cleanUpTestData();
     }
 
@@ -54,7 +54,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsWithNoAdminsReturnsEmptyArray(): void
     {
-        // ensure没有organization管理员data
+        // ensurenothaveorganization管理员data
         $this->cleanUpTestData();
 
         // callmethod
@@ -109,13 +109,13 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         $this->assertIsArray($result);
         $this->assertCount(3, $result);
 
-        // verify每个return的实体
+        // verifyeach个return的实体
         $userIds = array_map(fn ($entity) => $entity->getUserId(), $result);
         foreach ($this->testUserIds as $testUserId) {
             $this->assertContains($testUserId, $userIds);
         }
 
-        // verify所有实体都是correct的type和organizationcode
+        // verify所have实体all是correct的type和organizationcode
         foreach ($result as $entity) {
             $this->assertInstanceOf(OrganizationAdminEntity::class, $entity);
             $this->assertEquals($this->testOrganizationCode, $entity->getOrganizationCode());
@@ -126,7 +126,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsOnlyReturnsAdminsFromSpecificOrganization(): void
     {
-        // 在testorganization中create管理员
+        // intestorganization中create管理员
         $testOrgAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -134,7 +134,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             'Test org admin'
         );
 
-        // 在另一个organization中create管理员
+        // in另一个organization中create管理员
         $anotherOrgAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->anotherOrganizationCode),
             $this->testUserIds[1],
@@ -187,7 +187,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             $this->testGrantorUserId
         );
 
-        // use不存在的organizationcodecallmethod
+        // usenot存in的organizationcodecallmethod
         $result = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation('non_existent_org_code'));
 
         // verifyresult为空
@@ -208,7 +208,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         // callmethod
         $result = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($this->testOrganizationCode));
 
-        // verifyreturn的实体contain所有必要field
+        // verifyreturn的实体contain所have必要field
         $this->assertCount(1, $result);
         $entity = $result[0];
 
@@ -226,7 +226,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGrantWithOrganizationCreatorFlagSetsIsOrganizationCreatorCorrectly(): void
     {
-        // create一个普通管理员（非organizationcreate者）
+        // create一个普通管理员（nonorganizationcreate者）
         $normalAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -260,13 +260,13 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             true
         );
 
-        // passservicemethodcheck是否为organizationcreate者
+        // passservicemethodcheckwhether为organizationcreate者
         $this->assertTrue($this->organizationAdminDomainService->isOrganizationCreator(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0]
         ));
 
-        // check不存在的user
+        // checknot存in的user
         $this->assertFalse($this->organizationAdminDomainService->isOrganizationCreator(
             $this->createDataIsolation($this->testOrganizationCode),
             'non_existent_user'
@@ -323,7 +323,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
     private function cleanUpOrganizationAdmins(string $organizationCode): void
     {
         try {
-            // get所有管理员并delete
+            // get所have管理员并delete
             $allAdmins = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($organizationCode));
             foreach ($allAdmins as $admin) {
                 $this->organizationAdminDomainService->destroy($this->createDataIsolation($organizationCode), $admin);

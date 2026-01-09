@@ -10,12 +10,12 @@ namespace App\Domain\Chat\DTO\Message\StreamMessage;
 enum StreamMessageStatus: int
 {
     /**
-     * 开始.
+     * start.
      */
     case Start = 0;
 
     /**
-     * 进行中.
+     * conduct中.
      */
     case Processing = 1;
 

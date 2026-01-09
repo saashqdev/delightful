@@ -9,7 +9,7 @@ use function Hyperf\Support\env;
 return [
     // 一天at mostsendcount
     'day_max_count' => 30,
-    // 每次send间隔60s
+    // each次send间隔60s
     'time_interval' => 60,
     'volcengine' => [
         'accessKey' => env('VOLCENGINE_SMS_ACCESS_KEY', ''),

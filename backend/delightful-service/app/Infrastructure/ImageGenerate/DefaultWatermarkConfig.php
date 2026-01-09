@@ -12,14 +12,14 @@ use App\Domain\ImageGenerate\ValueObject\WatermarkConfig;
 
 /**
  * default水印configurationimplement
- * 开源project中的defaultimplement，不enable水印
- * 企业projectcanpassinherit或重新implement来提供具体的水印逻辑.
+ * 开源project中的defaultimplement，notenable水印
+ * 企业projectcanpassinheritor重新implement来提供specific的水印逻辑.
  */
 class DefaultWatermarkConfig implements WatermarkConfigInterface
 {
     public function getWatermarkConfig(?string $orgCode = null): ?WatermarkConfig
     {
-        // 开源versiondefault不enable水印
+        // 开源versiondefaultnotenable水印
         return new WatermarkConfig(
             logoTextContent: 'Delightful AI Generated', // default水印文字
             position: 3, // 右下角

@@ -44,7 +44,7 @@ class RoleRepository implements RoleRepositoryInterface
             $model = RoleModel::create($data);
             $roleEntity->setId($model->id);
         } else {
-            // usemodelupdate以便use casts process JSON 与datefield
+            // usemodelupdateby便use casts process JSON 与datefield
             $model = $this->roleQuery($organizationCode)
                 ->where('id', $roleEntity->getId())
                 ->first();
@@ -144,11 +144,11 @@ class RoleRepository implements RoleRepositoryInterface
             ->pluck('user_id')
             ->toArray();
 
-        // 计算need添加和移除的user
+        // 计算need添加和移except的user
         $toAdd = array_diff($userIds, $existingUserIds);
         $toRemove = array_diff($existingUserIds, $userIds);
 
-        // 移除不再属于该role的user
+        // 移exceptnotagain属at该role的user
         if (! empty($toRemove)) {
             $this->roleUserQuery($organizationCode)
                 ->where('role_id', $roleId)
@@ -176,7 +176,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 移除roleuser.
+     * 移exceptroleuser.
      */
     public function removeUsers(string $organizationCode, int $roleId, array $userIds): void
     {
@@ -217,7 +217,7 @@ class RoleRepository implements RoleRepositoryInterface
             $map[$rid][] = $row['user_id'];
         }
 
-        // ensure所有 roleIds 都有 key
+        // ensure所have roleIds allhave key
         foreach ($roleIds as $rid) {
             $map[$rid] = $map[$rid] ?? [];
         }
@@ -253,7 +253,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * getuser的所有permission.
+     * getuser的所havepermission.
      */
     public function getUserPermissions(string $organizationCode, string $userId): array
     {
@@ -284,7 +284,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * mappingmodel到实体.
+     * mappingmodelto实体.
      */
     private function mapToEntity(RoleModel $model): RoleEntity
     {
@@ -293,7 +293,7 @@ class RoleRepository implements RoleRepositoryInterface
         $entity->setName($model->name);
         $entity->setOrganizationCode($model->organization_code);
 
-        // 从modelgetpermissionarray
+        // frommodelgetpermissionarray
         $entity->setPermissions($model->getPermissions());
 
         // getpermissiontag

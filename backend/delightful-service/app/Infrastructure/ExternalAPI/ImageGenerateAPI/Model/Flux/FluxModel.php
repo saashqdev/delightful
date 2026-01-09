@@ -97,10 +97,10 @@ class FluxModel extends AbstractImageGenerate
 
                     $this->validateFluxResponse($result);
 
-                    // success：settingimagedata到responseobject
+                    // success：settingimagedatatoresponseobject
                     $this->addImageDataToResponseFlux($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // fail：settingerrorinfo到responseobject（只settingfirsterror）
+                    // fail：settingerrorinfotoresponseobject（只settingfirsterror）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
@@ -120,7 +120,7 @@ class FluxModel extends AbstractImageGenerate
         $this->logger->info('Flux OpenAIformat生图：并发handlecomplete', [
             '总request数' => $count,
             'successimage数' => count($response->getData()),
-            '是否有error' => $response->hasError(),
+            'whetherhaveerror' => $response->hasError(),
             'error码' => $response->getProviderErrorCode(),
             'errormessage' => $response->getProviderErrorMessage(),
         ]);
@@ -137,7 +137,7 @@ class FluxModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // 从nativeresult中提取imageURL
+        // fromnativeresult中提取imageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             if (! empty($result['data']['imageUrl'])) {
@@ -145,9 +145,9 @@ class FluxModel extends AbstractImageGenerate
             }
         }
 
-        // check是否at least有一张imagegeneratesuccess
+        // checkwhetherat leasthave一张imagegeneratesuccess
         if (empty($imageUrls)) {
-            $this->logger->error('Flux文生图：所有imagegenerate均fail', ['rawResults' => $rawResults]);
+            $this->logger->error('Flux文生图：所haveimagegenerate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
@@ -222,7 +222,7 @@ class FluxModel extends AbstractImageGenerate
             return new ImageGenerateResponse(ImageGenerateType::URL, [$rawResult['data']['imageUrl']]);
         }
 
-        $this->logger->error('Flux文生图：未get到imageURL', ['response' => $rawResult]);
+        $this->logger->error('Flux文生图：未gettoimageURL', ['response' => $rawResult]);
         ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
     }
 
@@ -334,7 +334,7 @@ class FluxModel extends AbstractImageGenerate
             });
         }
 
-        // get所有并行task的result
+        // get所have并行task的result
         $results = $parallel->wait();
 
         // handleresult，保持nativeformat
@@ -346,10 +346,10 @@ class FluxModel extends AbstractImageGenerate
             }
         }
 
-        // check是否at least有一张imagegeneratesuccess
+        // checkwhetherat leasthave一张imagegeneratesuccess
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('Flux文生图：所有imagegenerate均fail', ['errors' => $errors]);
+            $this->logger->error('Flux文生图：所haveimagegenerate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 
@@ -372,7 +372,7 @@ class FluxModel extends AbstractImageGenerate
                 // handleimageURL
                 $result['data']['imageUrl'] = $this->watermarkProcessor->addWatermarkToUrl($result['data']['imageUrl'], $imageGenerateRequest);
             } catch (Exception $e) {
-                // 水印handlefail时，recorderror但不影响imagereturn
+                // 水印handlefail时，recorderrorbutnot影响imagereturn
                 $this->logger->error('Fluximage水印handlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
@@ -399,7 +399,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * 将Fluximagedata添加到OpenAIresponseobject中.
+     * 将Fluximagedata添加toOpenAIresponseobject中.
      */
     private function addImageDataToResponseFlux(
         OpenAIFormatResponse $response,
@@ -409,7 +409,7 @@ class FluxModel extends AbstractImageGenerate
         // useRedislockensure并发security
         $lockOwner = $this->lockResponse($response);
         try {
-            // 从Fluxresponse中提取data
+            // fromFluxresponse中提取data
             if (empty($fluxResult['data']['imageUrl'])) {
                 return;
             }
@@ -442,7 +442,7 @@ class FluxModel extends AbstractImageGenerate
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {
-            // ensurelock一定will被释放
+            // ensurelock一定willbe释放
             $this->unlockResponse($response, $lockOwner);
         }
     }

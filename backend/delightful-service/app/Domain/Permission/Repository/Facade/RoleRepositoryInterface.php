@@ -44,7 +44,7 @@ interface RoleRepositoryInterface
     public function assignUsers(string $organizationCode, int $roleId, array $userIds, ?string $assignedBy = null): void;
 
     /**
-     * 移除roleuser.
+     * 移exceptroleuser.
      */
     public function removeUsers(string $organizationCode, int $roleId, array $userIds): void;
 
@@ -70,7 +70,7 @@ interface RoleRepositoryInterface
     public function getUserRoles(string $organizationCode, string $userId): array;
 
     /**
-     * getuser的所有permission.
+     * getuser的所havepermission.
      */
     public function getUserPermissions(string $organizationCode, string $userId): array;
 }

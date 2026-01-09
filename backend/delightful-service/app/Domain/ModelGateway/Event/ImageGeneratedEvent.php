@@ -47,7 +47,7 @@ class ImageGeneratedEvent extends AbstractEvent
     protected ?string $accessTokenName = null;
 
     /**
-     * when前configurationversion，用于计价
+     * when前configurationversion，useat计价
      * service_provider_models_config_versions.id.
      */
     protected ?int $priceId = null;

@@ -9,7 +9,7 @@ namespace App\Domain\Admin\Entity\ValueObject\Extra;
 
 enum PermissionRange: int
 {
-    // 全部
+    // all部
     case ALL = 1;
 
     // 指定

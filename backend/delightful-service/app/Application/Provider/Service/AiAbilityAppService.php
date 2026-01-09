@@ -34,7 +34,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * get所有AI能力list.
+     * get所haveAI能力list.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @return array<AiAbilityListDTO>
@@ -60,7 +60,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     {
         $dataIsolation = $this->createProviderDataIsolation($authorization);
 
-        // verifycode是否valid
+        // verifycodewhethervalid
         try {
             $codeEnum = AiAbilityCode::from($code);
         } catch (Throwable $e) {
@@ -79,13 +79,13 @@ class AiAbilityAppService extends AbstractKernelAppService
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @param UpdateAiAbilityRequest $request updaterequest
-     * @return bool 是否updatesuccess
+     * @return bool whetherupdatesuccess
      */
     public function update(DelightfulUserAuthorization $authorization, UpdateAiAbilityRequest $request): bool
     {
         $dataIsolation = $this->createProviderDataIsolation($authorization);
 
-        // verifycode是否valid
+        // verifycodewhethervalid
         try {
             $code = AiAbilityCode::from($request->getCode());
         } catch (Throwable $e) {
@@ -102,12 +102,12 @@ class AiAbilityAppService extends AbstractKernelAppService
             $entity = $this->aiAbilityDomainService->getByCode($dataIsolation, $code);
             $dbConfig = $entity->getConfig();
 
-            // 智能mergeconfiguration（保留被脱敏的api_key）
+            // 智能mergeconfiguration（保留be脱敏的api_key）
             $mergedConfig = $this->mergeConfigPreservingApiKeys($dbConfig, $request->getConfig());
             $updateData['config'] = $mergedConfig;
         }
 
-        // 如果没有要update的data，直接returnsuccess
+        // ifnothave要update的data，直接returnsuccess
         if (empty($updateData)) {
             return true;
         }
@@ -117,7 +117,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * initializeAI能力data（从configurationfilesync到database）.
+     * initializeAI能力data（fromconfigurationfilesynctodatabase）.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @return int initialize的quantity
@@ -130,7 +130,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * 智能mergeconfiguration（保留被脱敏的api_keyoriginalvalue）.
+     * 智能mergeconfiguration（保留be脱敏的api_keyoriginalvalue）.
      *
      * @param array $dbConfig databaseoriginalconfiguration
      * @param array $frontendConfig 前端传来的configuration（可能contain脱敏的api_key）
@@ -140,14 +140,14 @@ class AiAbilityAppService extends AbstractKernelAppService
     {
         $result = [];
 
-        // 遍历前端configuration的所有field
+        // 遍历前端configuration的所havefield
         foreach ($frontendConfig as $key => $value) {
-            // 如果是 api_key field且contain脱敏mark ***
+            // if是 api_key fieldandcontain脱敏mark ***
             if ($key === 'api_key' && is_string($value) && str_contains($value, '*')) {
                 // usedatabase中的originalvalue
                 $result[$key] = $dbConfig[$key] ?? $value;
             }
-            // 如果是array，递归process
+            // if是array，递归process
             elseif (is_array($value)) {
                 $dbValue = $dbConfig[$key] ?? [];
                 $result[$key] = is_array($dbValue)
@@ -160,7 +160,7 @@ class AiAbilityAppService extends AbstractKernelAppService
             }
         }
 
-        // 前端未传的field, 则database中field为defaultvalue ''
+        // 前端未传的field, thendatabase中field为defaultvalue ''
         foreach ($dbConfig as $key => $value) {
             if (! array_key_exists($key, $result)) {
                 $result[$key] = '';

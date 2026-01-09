@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_flow_ai_models', function (Blueprint $table) {
             $table->string('icon')->default('')->comment('icon')->after('label');
-            $table->boolean('display')->default(true)->comment('是否显示')->after('enabled');
+            $table->boolean('display')->default(true)->comment('whether显示')->after('enabled');
         });
     }
 

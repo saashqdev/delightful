@@ -9,7 +9,7 @@ namespace App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request;
 
 class VolcengineModelRequest extends ImageGenerateRequest
 {
-    // 内置的超分feature，开启后可将上述宽高均乘以2return，此parameteropen后delaywill有增加
+    // 内置的超分feature，开启后可将上述宽高均乘by2return，此parameteropen后delaywillhave增加
     // 如上述宽高均为512和512，此parameterclose出图 512*512 ，此parameteropen出图1024 * 1024
     private bool $useSr = false;
 

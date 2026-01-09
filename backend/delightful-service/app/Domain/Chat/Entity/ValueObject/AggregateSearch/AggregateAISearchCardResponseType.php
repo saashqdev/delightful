@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject\AggregateSearch;
 
 /**
- * response顺序：5 3 0 1 以后随意.
+ * response顺序：5 3 0 1 by后随意.
  */
 class AggregateAISearchCardResponseType
 {

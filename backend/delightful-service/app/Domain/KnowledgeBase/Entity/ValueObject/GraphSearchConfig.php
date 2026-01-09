@@ -13,28 +13,28 @@ use InvalidArgumentException;
 /**
  * 图searchconfigurationvalueobject
  *
- * contain图search的相关configurationparameter，如 API 端点、authinfo、timeoutset等
+ * contain图search的相关configurationparameter，如 API 端点、authinfo、timeoutsetetc
  */
 class GraphSearchConfig extends AbstractValueObject
 {
     /**
      * 关系权重.
      *
-     * 图search中关系的权重，用于计算final相似度分数
+     * 图search中关系的权重，useat计算finalsimilar度分数
      */
     private float $relationWeight = 0.5;
 
     /**
-     * 最大search深度.
+     * most大search深度.
      *
-     * 图search的最大深度，即从起始节点开始，at mostsearch几跳关系
+     * 图search的most大深度，即from起始节点start，at mostsearch几跳关系
      */
     private int $maxDepth = 2;
 
     /**
-     * 是否containproperty.
+     * whethercontainproperty.
      *
-     * 是否在searchresult中contain节点和关系的property
+     * whetherinsearchresult中contain节点和关系的property
      */
     private bool $includeProperties = true;
 
@@ -55,7 +55,7 @@ class GraphSearchConfig extends AbstractValueObject
     /**
      * timeouttime（秒）.
      *
-     * API request的timeouttime，单位为秒
+     * API request的timeouttime，unit为秒
      */
     private float $timeout = 5.0;
 
@@ -69,21 +69,21 @@ class GraphSearchConfig extends AbstractValueObject
     /**
      * 关系type.
      *
-     * search时考虑的关系typelist，为空table示所有type
+     * search时考虑的关系typelist，为空table示所havetype
      */
     private array $relationTypes = [];
 
     /**
      * 节点type.
      *
-     * search时考虑的节点typelist，为空table示所有type
+     * search时考虑的节点typelist，为空table示所havetype
      */
     private array $nodeTypes = [];
 
     /**
      * result限制.
      *
-     * return的最大resultquantity
+     * return的most大resultquantity
      */
     private int $limit = 10;
 
@@ -108,7 +108,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * get最大search深度.
+     * getmost大search深度.
      */
     public function getMaxDepth(): int
     {
@@ -116,7 +116,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * set最大search深度.
+     * setmost大search深度.
      */
     public function setMaxDepth(int $maxDepth): self
     {
@@ -128,7 +128,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 是否containproperty.
+     * whethercontainproperty.
      */
     public function isIncludeProperties(): bool
     {
@@ -136,7 +136,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * set是否containproperty.
+     * setwhethercontainproperty.
      */
     public function setIncludeProperties(bool $includeProperties): self
     {
@@ -281,7 +281,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 从arraycreateconfiguration.
+     * fromarraycreateconfiguration.
      */
     public static function fromArray(array $config): self
     {

@@ -13,7 +13,7 @@ use App\Infrastructure\Core\AbstractModel;
  * @property int $id
  * @property int $ancestor_id 祖先节点id, commentstable的主键id
  * @property int $descendant_id 后代节点id, commentstable的主键id
- * @property int $distance 祖先节点到后代节点的距离
+ * @property int $distance 祖先节点to后代节点的距离
  * @property string $organization_code organizationcode
  * @property string $created_at
  * @property string $updated_at

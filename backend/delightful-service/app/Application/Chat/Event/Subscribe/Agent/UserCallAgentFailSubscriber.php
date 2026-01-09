@@ -43,7 +43,7 @@ class UserCallAgentFailSubscriber implements ListenerInterface
         }
         try {
             $seqEntity = $event->seqEntity;
-            // 助理在自己的conversation窗口，发一条国际化的failedreminder
+            // 助理in自己的conversation窗口，发一条国际化的failedreminder
             $conversationId = $seqEntity->getConversationId();
             $messageStruct = [
                 'content' => __('chat.agent.user_call_agent_fail_notice'),
@@ -60,7 +60,7 @@ class UserCallAgentFailSubscriber implements ListenerInterface
             // 原样outputextensionparameter
             $seqDTO->setExtra($seqEntity->getExtra());
 
-            // 原样outputextensionparameter,but要排除 editmessageoption
+            // 原样outputextensionparameter,but要排except editmessageoption
             $seqExtra = $seqEntity->getExtra()?->getExtraCanCopyData();
             $seqDTO->setExtra($seqExtra);
             di(DelightfulChatMessageAppService::class)->aiSendMessage($seqDTO, $appMessageId, doNotParseReferMessageId: true);

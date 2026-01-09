@@ -31,7 +31,7 @@ class InitAiAbilitiesCommand extends HyperfCommand
     public function configure(): void
     {
         parent::configure();
-        $this->setDescription('initializeAI能力data（从configurationfile同到datalibrary）');
+        $this->setDescription('initializeAI能力data（fromconfigurationfile同todatalibrary）');
         $this->addArgument('organization_code', InputArgument::REQUIRED, 'organizationencoding');
     }
 
@@ -45,10 +45,10 @@ class InitAiAbilitiesCommand extends HyperfCommand
             return;
         }
 
-        $this->info("开始为organization {$organizationCode} initializeAI能力data...");
+        $this->info("start为organization {$organizationCode} initializeAI能力data...");
 
         try {
-            // createonetemporary的 Authorization object用于命令行
+            // createonetemporary的 Authorization objectuseat命令行
             $authorization = new DelightfulUserAuthorization();
             $authorization->setOrganizationCode($organizationCode);
 

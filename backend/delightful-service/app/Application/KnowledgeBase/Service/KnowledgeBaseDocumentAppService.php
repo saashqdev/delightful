@@ -41,13 +41,13 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         $documentEntity->setUpdatedUid($dataIsolation->getCurrentUserId());
         $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $documentEntity->getKnowledgeBaseCode());
 
-        // documentconfigurationinheritknowledge base(如果没有对应set)
+        // documentconfigurationinheritknowledge base(ifnothave对应set)
         empty($knowledgeBaseEntity->getFragmentConfig()) && $documentEntity->setFragmentConfig($knowledgeBaseEntity->getFragmentConfig());
         empty($documentEntity->getRetrieveConfig()) && $documentEntity->setRetrieveConfig($knowledgeBaseEntity->getRetrieveConfig());
 
-        // 嵌入configuration不可edit
+        // 嵌入configurationnot可edit
         $documentEntity->setEmbeddingConfig($knowledgeBaseEntity->getEmbeddingConfig());
-        // setdefault的嵌入model和向量database
+        // setdefault的嵌入model和to量database
         $documentEntity->setEmbeddingModel($knowledgeBaseEntity->getModel());
         $documentEntity->setVectorDb(VectorStoreDriver::default()->value);
         if (! $documentEntity->getCode()) {
@@ -144,21 +144,21 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * 重新向量化.
+     * 重新to量化.
      */
     public function reVectorized(Authenticatable $authorization, string $knowledgeBaseCode, string $documentCode): void
     {
         $dataIsolation = $this->createKnowledgeBaseDataIsolation($authorization);
         $this->checkKnowledgeBaseOperation($dataIsolation, 'manage', $knowledgeBaseCode, $documentCode);
 
-        // call领域service重新向量化
+        // call领域service重新to量化
         $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $knowledgeBaseCode);
         $documentEntity = $this->knowledgeBaseDocumentDomainService->show($dataIsolation, $knowledgeBaseCode, $documentCode);
-        // 由于historydocument没有 document_file field，不能被重新向量化
+        // 由athistorydocumentnothave document_file field，not能be重新to量化
         if (! $documentEntity->getDocumentFile()) {
             ExceptionBuilder::throw(PermissionErrorCode::Error, 'flow.knowledge_base.re_vectorized_not_support');
         }
-        // 分发event，重新向量化
+        // 分发event，重新to量化
         $documentSavedEvent = new KnowledgeBaseDocumentSavedEvent(
             $dataIsolation,
             $knowledgeBaseEntity,

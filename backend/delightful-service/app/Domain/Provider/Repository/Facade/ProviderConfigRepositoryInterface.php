@@ -50,7 +50,7 @@ interface ProviderConfigRepositoryInterface
     public function findFirstByServiceProviderId(ProviderDataIsolation $dataIsolation, int $serviceProviderId): ?ProviderConfigEntity;
 
     /**
-     * according toIDgetconfiguration实体（不按organizationfilter，全局query）.
+     * according toIDgetconfiguration实体（not按organizationfilter，all局query）.
      *
      * @param int $id configurationID
      * @return null|ProviderConfigEntity configuration实体
@@ -58,15 +58,15 @@ interface ProviderConfigRepositoryInterface
     public function getByIdWithoutOrganizationFilter(int $id): ?ProviderConfigEntity;
 
     /**
-     * according toIDarraygetconfiguration实体list（不按organizationfilter，全局query）.
+     * according toIDarraygetconfiguration实体list（not按organizationfilter，all局query）.
      *
      * @param array<int> $ids configurationIDarray
-     * @return array<int, ProviderConfigEntity> return以id为key的configuration实体array
+     * @return array<int, ProviderConfigEntity> returnbyid为key的configuration实体array
      */
     public function getByIdsWithoutOrganizationFilter(array $ids): array;
 
     /**
-     * getorganization下所有enable的service商configuration.
+     * getorganization下所haveenable的service商configuration.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @return array<ProviderConfigEntity> service商configuration实体array

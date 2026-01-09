@@ -12,7 +12,7 @@ use App\Domain\Provider\Entity\ValueObject\ModelType;
 interface SubscriptionManagerInterface
 {
     /**
-     * 是否enablesubscribefeature.
+     * whetherenablesubscribefeature.
      */
     public function isEnabled(): bool;
 
@@ -31,7 +31,7 @@ interface SubscriptionManagerInterface
     public function getCurrentSubscriptionInfo(): array;
 
     /**
-     * getwhen前可用的modelID列表, ifreturnnull表示不限制.
+     * getwhen前可use的modelID列表, ifreturnnull表示not限制.
      *
      * @return null|array<string>
      */

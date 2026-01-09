@@ -43,12 +43,12 @@ class QwenImageEditModel extends AbstractImageGenerate
 
     public function setAK(string $ak)
     {
-        // 通义千问不useAK/SKauthentication，此method为nullimplement
+        // 通义千问notuseAK/SKauthentication，此method为nullimplement
     }
 
     public function setSK(string $sk)
     {
-        // 通义千问不useAK/SKauthentication，此method为nullimplement
+        // 通义千问notuseAK/SKauthentication，此method为nullimplement
     }
 
     public function setApiKey(string $apiKey)
@@ -86,10 +86,10 @@ class QwenImageEditModel extends AbstractImageGenerate
             $result = $this->callSyncEditAPI($imageGenerateRequest);
             $this->validateQwenEditResponse($result);
 
-            // success：settingimagedata到responseobject
+            // success：settingimagedatatoresponseobject
             $this->addImageDataToResponseQwenEdit($response, $result, $imageGenerateRequest);
         } catch (Exception $e) {
-            // fail：settingerrorinfo到responseobject
+            // fail：settingerrorinfotoresponseobject
             $response->setProviderErrorCode($e->getCode());
             $response->setProviderErrorMessage($e->getMessage());
 
@@ -102,7 +102,7 @@ class QwenImageEditModel extends AbstractImageGenerate
         // 4. recordfinalresult
         $this->logger->info('QwenEdit OpenAIformat生图：handlecomplete', [
             'successimage数' => count($response->getData()),
-            '是否有error' => $response->hasError(),
+            'whetherhaveerror' => $response->hasError(),
             'error码' => $response->getProviderErrorCode(),
             'errormessage' => $response->getProviderErrorMessage(),
         ]);
@@ -119,7 +119,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // 从nativeresult中提取imageURL - 适配newresponseformat output.choices
+        // fromnativeresult中提取imageURL - 适配newresponseformat output.choices
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             $output = $result['output'];
@@ -182,7 +182,7 @@ class QwenImageEditModel extends AbstractImageGenerate
      */
     private function validateEditRequest(QwenImageEditRequest $request): void
     {
-        // check是否有input图像
+        // checkwhetherhaveinput图像
         if (empty($request->getImageUrls())) {
             $this->logger->error('通义千问图像edit：缺少input图像');
             ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, 'image_generate.reference_images_required');
@@ -212,7 +212,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR, $errorMsg);
             }
 
-            // check是否有图像data
+            // checkwhetherhave图像data
             $choices = $response['output']['choices'];
             if (empty($choices)) {
                 $this->logger->error('通义千问图像edit：response中缺少图像data', ['response' => $response]);
@@ -258,7 +258,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                         // handleURLformat的image
                         $content['image'] = $this->watermarkProcessor->addWatermarkToUrl($content['image'], $imageGenerateRequest);
                     } catch (Exception $e) {
-                        // 水印handlefail时，recorderror但不影响imagereturn
+                        // 水印handlefail时，recorderrorbutnot影响imagereturn
                         $this->logger->error('通义千问图像edit水印handlefail', [
                             'index' => $index,
                             'choiceIndex' => $choiceIndex,
@@ -301,14 +301,14 @@ class QwenImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * 将通义千问editimagedata添加到OpenAIresponseobject中.
+     * 将通义千问editimagedata添加toOpenAIresponseobject中.
      */
     private function addImageDataToResponseQwenEdit(
         OpenAIFormatResponse $response,
         array $qwenResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // 从通义千问editresponse中提取data
+        // from通义千问editresponse中提取data
         if (empty($qwenResult['output']['choices']) || ! is_array($qwenResult['output']['choices'])) {
             return;
         }

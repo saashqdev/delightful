@@ -105,7 +105,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
         $savedOrganization1 = $this->organizationDomainService->create($organization1);
         $this->testOrganizationIds[] = $savedOrganization1->getId();
 
-        // 尝试create具有samename的organization
+        // 尝试create具havesamename的organization
         $organization2 = $this->createTestOrganizationEntity(1);
         $organization2->setName('Test Organization 0'); // usesame的name
 

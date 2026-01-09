@@ -12,10 +12,10 @@ namespace App\Application\Kernel;
  */
 enum SuperPermissionEnum: string
 {
-    // 全局管理员
+    // all局管理员
     case GLOBAL_ADMIN = 'global_admin';
 
-    // process管理员,目前只有 queryToolSets 用到
+    // process管理员,目前only queryToolSets useto
     case FLOW_ADMIN = 'flow_admin';
 
     // （第三方平台的）助理管理员
@@ -24,7 +24,7 @@ enum SuperPermissionEnum: string
     // 大modelconfiguration管理
     case MODEL_CONFIG_ADMIN = 'model_config_admin';
 
-    // 隐藏department或者user
+    // 隐藏departmentor者user
     case HIDE_USER_OR_DEPT = 'hide_user_or_dept';
 
     // 特权发message

@@ -40,7 +40,7 @@ class PermissionApi extends AbstractPermissionApi
             $authorization->getId()
         );
 
-        // getuser拥有的permission列表（扁平permission键array）
+        // getuser拥have的permission列表（扁平permission键array）
         $permissions = $this->roleAppService->getUserPermissions($dataIsolation, $authorization->getId());
         return ['permission_key' => $permissions];
     }

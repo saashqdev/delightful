@@ -62,7 +62,7 @@ class OperationPermissionAssembler
             $targetOperationDTO->setTargetInfo($targetInfo);
 
             if ($operationPermission->getOperation()->isOwner()) {
-                // 放到最前面
+                // 放tomost前面
                 array_unshift($targets, $targetOperationDTO);
             } else {
                 $targets[] = $targetOperationDTO;

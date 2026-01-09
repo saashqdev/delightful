@@ -41,7 +41,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function getAccountSeqListByAppMessageId(DataIsolation $dataIsolation, string $appMessageId, string $pageToken, int $pageSize): array;
 
     /**
-     * return最大message的倒数 n 条序列.
+     * returnmost大message的倒数 n 条序列.
      * @return ClientSequenceResponse[]
      */
     public function pullRecentMessage(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array;
@@ -55,25 +55,25 @@ interface DelightfulChatSeqRepositoryInterface
 
     /**
      * @return ClientSequenceResponse[]
-     * @todo 挪到 delightful_chat_topic_messages process
+     * @todo 挪to delightful_chat_topic_messages process
      * session窗口滚动loadhistoryrecord.
-     * message_id= seqtable的primary keyid,因此不need单独对 message_id 加索引.
+     * message_id= seqtable的primary keyid,thereforenotneed单独对 message_id 加索引.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
 
     /**
-     * 分groupgetsession下最new几条message.
+     * 分groupgetsession下mostnew几条message.
      */
     public function getConversationsMessagesGroupById(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
 
     /**
-     * get收件方message的status变更stream.
+     * get收件方message的status变morestream.
      * @return DelightfulSeqEntity[]
      */
     public function getReceiveMessagesStatusChange(array $referMessageIds, string $userId): array;
 
     /**
-     * get发件方message的status变更stream.
+     * get发件方message的status变morestream.
      * @return DelightfulSeqEntity[]
      */
     public function getSenderMessagesStatusChange(string $senderMessageId, string $userId): array;
@@ -112,10 +112,10 @@ interface DelightfulChatSeqRepositoryInterface
 
     public function deleteSeqMessageByIds(array $seqIds): int;
 
-    // 为了移除脏data写的method
+    // 为了移except脏data写的method
     public function getSeqByDelightfulId(string $delightfulId, int $limit): array;
 
-    // 为了移除脏data写的method
+    // 为了移except脏data写的method
     public function getHasTrashMessageUsers(): array;
 
     public function updateSeqExtra(string $seqId, SeqExtra $seqExtra): bool;

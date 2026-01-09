@@ -23,11 +23,11 @@ class UserQueryDTO extends AbstractEntity
     protected string $departmentId = '';
 
     /**
-     * 上一页的token. 对于mysql来说,return累积偏移量;对于es来说,return游标.
+     * 上一页的token. 对atmysql来说,return累积偏移量;对ates来说,return游标.
      */
     protected string $pageToken = '';
 
-    // is_recursive 是否递归query
+    // is_recursive whether递归query
     protected bool $isRecursive = false;
 
     /**

@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * user在organization中的status
+ * userinorganization中的status
  */
 enum UserStatus: int
 {
-    // 0:freeze (刚同过来没activate)
+    // 0:freeze (刚同过来notactivate)
     case Frozen = 0;
 
     // 1:activated

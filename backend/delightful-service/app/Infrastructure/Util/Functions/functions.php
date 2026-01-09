@@ -116,7 +116,7 @@ if (! function_exists('string_to_hump')) {
     /**
      * 下划线转成驼峰命名,default小驼峰.
      * @param string $string 要convert的string
-     * @param bool $firstUp 是否首字母大写,default否
+     * @param bool $firstUp whether首字母大写,default否
      */
     function string_to_hump(string $string, bool $firstUp = false): string
     {
@@ -247,7 +247,7 @@ if (! function_exists('calculate_elapsed_time')) {
 
 if (! function_exists('diff_day')) {
     /**
-     * 从开始time到现在是第几天.
+     * fromstarttimeto现in是第几天.
      */
     function diff_day(DateTime $startTime): int
     {
@@ -257,7 +257,7 @@ if (! function_exists('diff_day')) {
 
 if (! function_exists('swoole_get_local_mac')) {
     /**
-     * 用于平替Swoolefunction.
+     * useat平替Swoolefunction.
      */
     function swoole_get_local_mac(): array
     {
@@ -406,7 +406,7 @@ if (! function_exists('get_path_by_url')) {
 }
 
 if (! function_exists('parse_json_config')) {
-    // parseJSONconfiguration或return空array
+    // parseJSONconfigurationorreturn空array
     function parse_json_config(null|array|string $value): array
     {
         if (is_array($value)) {

@@ -57,7 +57,7 @@ class UserAssembler
     {
         // 强转user id type为 string
         foreach ($userInfos as &$user) {
-            // 不return delightful_id 和 id
+            // notreturn delightful_id 和 id
             unset($user['delightful_id'], $user['id']);
         }
         return $userInfos;
@@ -105,10 +105,10 @@ class UserAssembler
         foreach ($users as $user) {
             $account = $accounts[$user['delightful_id']] ?? null;
             if (empty($account)) {
-                $logger->warning("user[delightful_id: {$user['delightful_id']} ]不存在, skip！");
+                $logger->warning("user[delightful_id: {$user['delightful_id']} ]not存in, skip！");
                 continue;
             }
-            // 如果存在手机号，将手机号的中间四位替换为*
+            // if存in手机号，将手机号的中间四位替换为*
             $phone = $account->getPhone();
             if (! empty($phone)) {
                 $phone = substr_replace($phone, '****', 3, 4);
@@ -124,7 +124,7 @@ class UserAssembler
 
             foreach ($user->toArray() as $key => $value) {
                 if (isset($userDetailAdd[$key])) {
-                    // 如果已经存在，skip
+                    // if已经存in，skip
                     continue;
                 }
                 $userDetailAdd[$key] = $value;
@@ -135,11 +135,11 @@ class UserAssembler
     }
 
     /**
-     * 一个user可能存在于多个department.
+     * 一个user可能存inat多个department.
      * @param DelightfulDepartmentUserEntity[] $departmentUsers
      * @param UserDetailDTO[] $usersDetail
      * @param array<string, DelightfulDepartmentEntity[]> $departmentsInfo
-     * @param bool $withDepartmentFullPath 是否returndepartment的完整path
+     * @param bool $withDepartmentFullPath whetherreturndepartment的完整path
      * @return UserDepartmentDetailDTO[]
      */
     public static function getUserDepartmentDetailDTOList(
@@ -151,13 +151,13 @@ class UserAssembler
         /** @var array<UserDepartmentDetailDTO> $usersDepartmentDetailDTOList */
         $usersDepartmentDetailDTOList = [];
 
-        // 步骤1: builduserID到department关系的mapping
+        // 步骤1: builduserIDtodepartment关系的mapping
         $userDepartmentMap = [];
         foreach ($departmentUsers as $departmentUser) {
             $userDepartmentMap[$departmentUser->getUserId()][] = $departmentUser;
         }
 
-        // 步骤2: 为每个userbuild详细info
+        // 步骤2: 为each个userbuild详细info
         foreach ($usersDetail as $userInfo) {
             $userId = $userInfo->getUserId();
             $userDepartmentRelations = $userDepartmentMap[$userId] ?? [];
@@ -173,14 +173,14 @@ class UserAssembler
 
                 if (! empty($departments)) {
                     if ($withDepartmentFullPath) {
-                        // 完整path模式: 为每个departmentsave完整层级结构
+                        // 完整path模式: 为each个departmentsave完整层级结构
                         $pathNodes = array_map(
                             fn (DelightfulDepartmentEntity $department) => self::assemblePathNodeByDepartmentInfo($department),
                             $departments
                         );
                         $fullPathNodes[$userDepartmentId] = $pathNodes;
                     } else {
-                        // 简略模式: 只取每个department的最next节点
+                        // 简略模式: 只取each个department的mostnext节点
                         $departmentInfo = end($departments);
                         $pathNode = self::assemblePathNodeByDepartmentInfo($departmentInfo);
                         $allPathNodes[] = $pathNode;
@@ -191,9 +191,9 @@ class UserAssembler
             // 步骤2.2: usedefaultdepartment关系作为基础info
             $defaultDepartmentUser = $userDepartmentRelations[0] ?? [];
 
-            // 步骤2.3: update或createuserdepartmentdetailobject
+            // 步骤2.3: updateorcreateuserdepartmentdetailobject
             if (! empty($usersDepartmentDetailDTOList[$userId])) {
-                // update已存在的userdepartmentdetail
+                // update已存in的userdepartmentdetail
                 $userDepartmentDetailDTO = $usersDepartmentDetailDTOList[$userId];
 
                 if ($withDepartmentFullPath && ! empty($fullPathNodes)) {

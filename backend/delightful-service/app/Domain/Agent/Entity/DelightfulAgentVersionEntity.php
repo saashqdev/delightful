@@ -84,12 +84,12 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected ?int $reviewStatus;
 
     /**
-     * publish到企业内部status.
+     * publishto企业内部status.
      */
     protected ?int $enterpriseReleaseStatus;
 
     /**
-     * publish到application市场status.
+     * publishtoapplication市场status.
      */
     protected ?int $appMarketStatus;
 

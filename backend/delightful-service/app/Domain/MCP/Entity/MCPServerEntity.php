@@ -22,7 +22,7 @@ class MCPServerEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯一encoding，仅在create时generate，用作给前端的id.
+     * 唯一encoding，仅increate时generate，use作给前端的id.
      */
     protected string $code;
 
@@ -49,7 +49,7 @@ class MCPServerEntity extends AbstractEntity
     protected ServiceConfigInterface $serviceConfig;
 
     /**
-     * 是否enable.
+     * whetherenable.
      */
     protected ?bool $enabled = null;
 

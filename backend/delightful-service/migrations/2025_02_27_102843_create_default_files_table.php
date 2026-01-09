@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::create('default_files', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('business_type')->comment('模块type,file属于哪个模块');
+            $table->string('business_type')->comment('模块type,file属at哪个模块');
             $table->integer('file_type')->comment('filetype：0:官方添加，1:organization添加');
             $table->string('key')->comment('filekey');
             $table->bigInteger('file_size')->comment('filesize');

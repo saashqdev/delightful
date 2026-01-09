@@ -21,8 +21,8 @@ return new class extends Migration {
             $table->string('name', 64)->default('')->comment('MCPservicename');
             $table->string('description', 255)->default('')->comment('MCPservicedescription');
             $table->string('icon', 255)->default('')->comment('MCPservice图标');
-            $table->string('type', 16)->default('sse')->comment('servicetype: sse或stdio');
-            $table->boolean('enabled')->default(false)->comment('是否enable: 0-disable, 1-enable');
+            $table->string('type', 16)->default('sse')->comment('servicetype: sseorstdio');
+            $table->boolean('enabled')->default(false)->comment('whetherenable: 0-disable, 1-enable');
             $table->string('creator', 64)->default('')->comment('create者');
             $table->dateTime('created_at')->comment('creation time');
             $table->string('modifier', 64)->default('')->comment('修改者');

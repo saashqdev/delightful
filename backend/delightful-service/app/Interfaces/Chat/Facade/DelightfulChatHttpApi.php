@@ -65,7 +65,7 @@ class DelightfulChatHttpApi extends AbstractApi
     {
         $params = $request->all();
         $rules = [
-            'page_token' => 'string', // private chat的本地最大 seq_id
+            'page_token' => 'string', // private chat的本地most大 seq_id
         ];
         $params = $this->checkParams($params, $rules);
         $this->logger->info('pullMessage:' . Json::encode($params));
@@ -77,7 +77,7 @@ class DelightfulChatHttpApi extends AbstractApi
     {
         $params = $request->all();
         $rules = [
-            'page_token' => 'string', // private chat的本地最大 seq_id
+            'page_token' => 'string', // private chat的本地most大 seq_id
         ];
         $params = $this->checkParams($params, $rules);
         $this->logger->info('pullMessageByAppMessageId:' . $appMessageId);
@@ -86,7 +86,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * pulluser的最近一段time收件message.
+     * pulluser的most近一段time收件message.
      * @throws Throwable
      */
     public function pullRecentMessage(RequestInterface $request): array
@@ -176,7 +176,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * （前端performance有issue的temporarysolution）按session id 分groupget几条最新message.
+     * （前端performancehaveissue的temporarysolution）按session id 分groupget几条most新message.
      */
     public function conversationsMessagesGroupQueries(RequestInterface $request): array
     {
@@ -237,7 +237,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $delightfulGroupDTO->setGroupName($params['group_name']);
         $delightfulGroupDTO->setGroupType(GroupTypeEnum::from($params['group_type']));
         $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
-        // 人员和department不能同时为空
+        // 人员和departmentnot能meanwhile为空
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_SELECT_ERROR);
         }
@@ -258,7 +258,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $authorization = $this->getAuthorization();
         $delightfulGroupDTO = new DelightfulGroupEntity();
         $delightfulGroupDTO->setId($id);
-        // 人员和department不能同时为空
+        // 人员和departmentnot能meanwhile为空
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_SELECT_ERROR);
         }
@@ -308,7 +308,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 批量get群info（name、公告等）.
+     * 批量get群info（name、公告etc）.
      */
     public function getDelightfulGroupList(RequestInterface $request): array
     {
@@ -336,7 +336,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $delightfulGroupDTO->setId($id);
         $delightfulGroupDTO->setGroupName($params['group_name'] ?? null);
         $delightfulGroupDTO->setGroupAvatar($params['group_avatar'] ?? null);
-        // name 和 avatar 不能同时为空
+        // name 和 avatar not能meanwhile为空
         if (empty($delightfulGroupDTO->getGroupName()) && empty($delightfulGroupDTO->getGroupAvatar())) {
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR);
         }
@@ -355,7 +355,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * user所在grouplist.
+     * user所ingrouplist.
      */
     public function getUserGroupList(RequestInterface $request): array
     {
@@ -494,7 +494,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * @param null|string $method 有时候field没有区分度，need加上method名
+     * @param null|string $method havetimefieldnothave区分度，need加上method名
      */
     protected function checkParams(array $params, array $rules, ?string $method = null): array
     {
@@ -509,7 +509,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * processchat补全的共同逻辑.
+     * processchat补all的共同逻辑.
      */
     protected function handleChatCompletions(array $params, ?string $conversationId, ?string $topicId): array
     {
@@ -588,7 +588,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * process补全content.
+     * process补allcontent.
      */
     private function processCompletionContent(string $completionContent): string
     {

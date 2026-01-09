@@ -43,7 +43,7 @@ class ServiceProviderApi extends AbstractApi
     protected ProviderAppService $providerAppService;
 
     /**
-     * 不need判断管理员permission。
+     * notneed判断管理员permission。
      * according tocategorygetservice商list.
      */
     public function getServiceProviders(RequestInterface $request)
@@ -52,7 +52,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 不need判断管理员permission。
+     * notneed判断管理员permission。
      * according tocategorygetservice商list.
      */
     public function getOrganizationProvidersByCategory(RequestInterface $request)
@@ -68,7 +68,7 @@ class ServiceProviderApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authenticatable */
         $authenticatable = $this->getAuthorization();
         $providerConfigAggregateDTO = $this->adminProviderAppService->getProviderModelsByConfigId($authenticatable, $serviceProviderConfigId);
-        // 将新formatdataconvert为旧format以保持向后compatible性
+        // 将新formatdataconvert为旧formatby保持to后compatible性
         return $this->convertToLegacyFormat($providerConfigAggregateDTO);
     }
 
@@ -93,7 +93,7 @@ class ServiceProviderApi extends AbstractApi
         $this->adminProviderAppService->updateModelStatus($authenticatable, $modelId, $status);
     }
 
-    // getcurrentorganization是否是官方organization
+    // getcurrentorganizationwhether是官方organization
     public function isCurrentOrganizationOfficial(): array
     {
         $organizationCode = $this->getAuthorization()->getOrganizationCode();
@@ -199,26 +199,26 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * get所有非官方LLMservice商list
-     * 直接从database中querycategory为llm且provider_type不为OFFICIAL的service商
-     * 不dependency于currentorganization，适用于need添加service商的场景.
+     * get所havenon官方LLMservice商list
+     * 直接fromdatabase中querycategory为llmandprovider_typenot为OFFICIAL的service商
+     * notdependencyatcurrentorganization，适useatneed添加service商的场景.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getNonOfficialLlmProviders()
     {
         $authenticatable = $this->getAuthorization();
-        // 直接get所有LLMtype的非官方service商
+        // 直接get所haveLLMtype的non官方service商
         return $this->adminProviderAppService->getAllNonOfficialProviders(Category::LLM, $authenticatable->getOrganizationCode());
     }
 
     /**
-     * get所有可用的LLMservice商list（include官方service商）.
+     * get所have可use的LLMservice商list（include官方service商）.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getAllAvailableLlmProviders()
     {
         $authenticatable = $this->getAuthorization();
-        // get所有LLMtype的service商（includeOfficial）
+        // get所haveLLMtype的service商（includeOfficial）
         return $this->adminProviderAppService->getAllAvailableLlmProviders(Category::LLM, $authenticatable->getOrganizationCode());
     }
 
@@ -243,7 +243,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * according tocategorygetservice商通用逻辑.
+     * according tocategorygetservice商通use逻辑.
      * @param RequestInterface $request requestobject
      * @return array service商list
      */
@@ -264,7 +264,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 将新formatdataconvert为旧format，保持向后compatible性.
+     * 将新formatdataconvert为旧format，保持to后compatible性.
      * @param ?ProviderConfigModelsDTO $aggregateDTO 聚合DTOobject
      * @return array 旧formatdata
      */
@@ -275,12 +275,12 @@ class ServiceProviderApi extends AbstractApi
         }
         $data = $aggregateDTO->toArray();
 
-        // 如果不是新format结构，直接return
+        // ifnot是新format结构，直接return
         if (! isset($data['provider_config'])) {
             return $data;
         }
 
-        // 将 provider_config content提升到根级别，并添加 alias 和 models
+        // 将 provider_config content提升to根级别，并添加 alias 和 models
         return array_merge($data['provider_config'], [
             'alias' => $data['provider_config']['translate']['alias']['zh_CN'] ?? '',
             'models' => $data['models'] ?? [],

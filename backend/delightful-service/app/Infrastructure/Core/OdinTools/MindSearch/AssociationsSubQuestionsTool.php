@@ -14,7 +14,7 @@ class AssociationsSubQuestionsTool
 {
     public static string $name = 'associationsSubQuestionsSearch';
 
-    public static string $description = '将每个associateissue拆分为多个子issue，then批量互联网search';
+    public static string $description = '将each个associateissue拆分为多个子issue，then批量互联网search';
 
     protected static array $parameters = [
         'type' => 'object',

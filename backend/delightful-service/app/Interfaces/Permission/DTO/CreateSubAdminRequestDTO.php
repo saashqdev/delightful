@@ -79,12 +79,12 @@ class CreateSubAdminRequestDTO extends AbstractDTO
      */
     public function validate(): bool
     {
-        // verifyrolename不能为空
+        // verifyrolenamenot能为空
         if (empty(trim($this->name))) {
             return false;
         }
 
-        // verifyrolenamelength不超过255字符
+        // verifyrolenamelengthnot超过255字符
         if (strlen($this->name) > 255) {
             return false;
         }
@@ -94,7 +94,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
             return false;
         }
 
-        // verifypermissionlist是否为stringarray
+        // verifypermissionlistwhether为stringarray
         if (! empty($this->permissions)) {
             foreach ($this->permissions as $permission) {
                 if (! is_string($permission)) {
@@ -103,7 +103,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
             }
         }
 
-        // verifyuserIDlist是否为stringarray
+        // verifyuserIDlistwhether为stringarray
         if (! empty($this->userIds)) {
             foreach ($this->userIds as $userId) {
                 if (! is_string($userId)) {
@@ -124,15 +124,15 @@ class CreateSubAdminRequestDTO extends AbstractDTO
         $errors = [];
 
         if (empty(trim($this->name))) {
-            $errors[] = 'rolename不能为空';
+            $errors[] = 'rolenamenot能为空';
         }
 
         if (strlen($this->name) > 255) {
-            $errors[] = 'rolenamelength不能超过255个字符';
+            $errors[] = 'rolenamelengthnot能超过255个字符';
         }
 
         if (! in_array($this->status, [0, 1])) {
-            $errors[] = 'rolestatusvalueinvalid，只能是0或1';
+            $errors[] = 'rolestatusvalueinvalid，只能是0or1';
         }
 
         if (! empty($this->permissions)) {

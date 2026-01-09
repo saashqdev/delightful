@@ -56,7 +56,7 @@ class DelightfulUserOrganizationAppService
      */
     public function setCurrentOrganizationCode(string $delightfulId, string $delightfulOrganizationCode): array
     {
-        // 1. queryuser是否在指定organization中
+        // 1. queryuserwhetherin指定organization中
         $userOrganizations = $this->userDomainService->getUserOrganizationsByDelightfulId($delightfulId);
         if (! in_array($delightfulOrganizationCode, $userOrganizations, true)) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
@@ -81,7 +81,7 @@ class DelightfulUserOrganizationAppService
     }
 
     /**
-     * get账号下可用organization列表（仅containenabled statusorganization）。
+     * get账号下可useorganization列表（仅containenabled statusorganization）。
      *
      * @throws Throwable
      */

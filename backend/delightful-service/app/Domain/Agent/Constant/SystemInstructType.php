@@ -22,7 +22,7 @@ enum SystemInstructType: int
     case RECORD = 5;
 
     /**
-     * 从typevalueget系统指令type实例.
+     * fromtypevalueget系统指令type实例.
      */
     public static function fromType(int $type): self
     {
@@ -116,7 +116,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * get所有系统指令typevalue.
+     * get所have系统指令typevalue.
      * @return array<int>
      */
     public static function getAllTypes(): array
@@ -131,19 +131,19 @@ enum SystemInstructType: int
     }
 
     /**
-     * 判断系统指令type是否needcontentfield.
+     * 判断系统指令typewhetherneedcontentfield.
      */
     public static function requiresContent(int $type): bool
     {
-        // 目前所有系统指令都不needcontent
-        // 如果未来有系统指令needcontent，can在这里添加判断
+        // 目前所have系统指令allnotneedcontent
+        // if未来have系统指令needcontent，canin这里添加判断
         return match (self::fromType($type)) {
             self::EMOJI, self::FILE, self::NEW_TOPIC, self::SCHEDULE, self::RECORD => false,
         };
     }
 
     /**
-     * ensure系统交互指令存在，如果缺少则补充.
+     * ensure系统交互指令存in，if缺少then补充.
      * @return array return补充后的指令array
      */
     public static function ensureSystemInstructs(array $instructs): array
@@ -153,7 +153,7 @@ enum SystemInstructType: int
         $toolbarGroupIndex = null;
         $toolbarGroup = null;
 
-        // 查找tool栏group和现有的系统指令
+        // 查找tool栏group和现have的系统指令
         foreach ($instructs as $index => $group) {
             if (isset($group['position']) && $group['position'] === InstructGroupPosition::TOOLBAR->value) {
                 $hasSystemGroup = true;
@@ -163,7 +163,7 @@ enum SystemInstructType: int
             }
         }
 
-        // 如果没有tool栏group，create一个new
+        // ifnothavetool栏group，create一个new
         if (! $hasSystemGroup) {
             $toolbarGroup = [
                 'id' => (string) IdGenerator::getSnowId(),
@@ -172,7 +172,7 @@ enum SystemInstructType: int
             ];
         }
 
-        // 分离系统指令和非系统指令
+        // 分离系统指令和non系统指令
         $systemInstructs = [];
         $normalInstructs = [];
         foreach ($toolbarGroup['items'] as $item) {
@@ -200,10 +200,10 @@ enum SystemInstructType: int
         // 按枚举定义顺序sort系统指令
         ksort($systemInstructs);
 
-        // 重新group合tool栏group的 items，系统指令在前
+        // 重新group合tool栏group的 items，系统指令in前
         $toolbarGroup['items'] = array_merge(array_values($systemInstructs), $normalInstructs);
 
-        // update或添加tool栏group
+        // updateor添加tool栏group
         if ($toolbarGroupIndex !== null) {
             $instructs[$toolbarGroupIndex] = $toolbarGroup;
         } else {

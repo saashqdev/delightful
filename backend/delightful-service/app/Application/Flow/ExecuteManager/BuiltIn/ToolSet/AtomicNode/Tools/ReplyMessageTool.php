@@ -81,7 +81,7 @@ class ReplyMessageTool extends AbstractBuiltInTool
             "type": "string",
             "key": "type",
             "title": "messagetype",
-            "description": "messagetype；可用type有 text、markdown、image、video、audio、file，default是 text",
+            "description": "messagetype；可usetypehave text、markdown、image、video、audio、file，default是 text",
             "required": null,
             "value": null,
             "encryption": false,

@@ -42,7 +42,7 @@ class AiAbilityAssembler
         // getoriginalconfiguration
         $config = $entity->getConfig();
 
-        // 递归脱敏所有 api_key field（support任意嵌套结构）
+        // 递归脱敏所have api_key field（support任意嵌套结构）
         $maskedConfig = self::maskConfigRecursively($config);
 
         return new AiAbilityDetailDTO(
@@ -87,10 +87,10 @@ class AiAbilityAssembler
     }
 
     /**
-     * 对configurationdata进行decrypt.
+     * 对configurationdataconductdecrypt.
      *
      * @param string $config encrypt的configurationstring
-     * @param string $salt 盐value(通常是recordID)
+     * @param string $salt 盐value(usually是recordID)
      * @return array decrypt后的configurationarray
      */
     public static function decodeConfig(string $config, string $salt): array
@@ -103,10 +103,10 @@ class AiAbilityAssembler
     }
 
     /**
-     * 对configurationdata进行encoding(JSONencoding + AESencrypt).
+     * 对configurationdataconductencoding(JSONencoding + AESencrypt).
      *
      * @param array $config configurationarray
-     * @param string $salt 盐value(通常是recordID)
+     * @param string $salt 盐value(usually是recordID)
      * @return string encrypt后的configurationstring
      */
     public static function encodeConfig(array $config, string $salt): string
@@ -116,7 +116,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * 递归脱敏configuration中的所有 api_key field.
+     * 递归脱敏configuration中的所have api_key field.
      *
      * @param array $config configurationarray
      * @return array 脱敏后的configurationarray
@@ -126,11 +126,11 @@ class AiAbilityAssembler
         $result = [];
 
         foreach ($config as $key => $value) {
-            // 如果是 api_key field，进行脱敏（前4后4）
+            // if是 api_key field，conduct脱敏（前4后4）
             if ($key === 'api_key' && is_string($value) && ! empty($value)) {
                 $result[$key] = self::maskApiKey($value);
             }
-            // 如果是array，递归process
+            // if是array，递归process
             elseif (is_array($value)) {
                 $result[$key] = self::maskConfigRecursively($value);
             }
@@ -156,7 +156,7 @@ class AiAbilityAssembler
         $length = mb_strlen($apiKey);
         $minLength = $prefixLength + $suffixLength;
 
-        // 如果 key 太短，全部脱敏
+        // if key too短，all部脱敏
         if ($length <= $minLength) {
             return str_repeat('*', $length);
         }

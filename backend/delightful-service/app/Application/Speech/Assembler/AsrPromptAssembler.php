@@ -28,7 +28,7 @@ class AsrPromptAssembler
         // buildcontent：use XML tagformat明确区分voice识别content和笔记content
         $contentParts = [];
 
-        // 如果有笔记，先添加笔记content
+        // ifhave笔记，先添加笔记content
         if ($note !== null && $note->hasContent()) {
             $contentParts[] = sprintf('<笔记content>%s</笔记content>', $note->content);
         }
@@ -42,31 +42,31 @@ class AsrPromptAssembler
 你是一个专业的录音contenttitlegenerate助手。
 
 ## 背景instruction
-usersubmit了一段录音content，录音content经过voice识别转为文字，user可能还will提供手写的笔记作为补充instruction。现在need你according to这些contentgenerate一个简洁准确的title。
+usersubmit了一段录音content，录音content经过voice识别转为文字，user可能alsowill提供手写的笔记作为补充instruction。现inneed你according to这些contentgenerate一个简洁准确的title。
 
 ## content来源instruction
-- <笔记content>：user手写的笔记content，是对录音的重点record和总结，通常contain关键info
+- <笔记content>：user手写的笔记content，是对录音的重点record和总结，usuallycontain关键info
 - <voice识别content>：passvoice识别技术将录音convert成的文字，反映录音的actualcontent
 
 ## titlegenerate要求
 
-### 优先级原则（重要）
-1. **笔记优先**：如果存在<笔记content>，titleshould侧重笔记content
-2. **重视笔记title**：如果笔记是 Markdown format且containtitle（# 开头的行），优先采用笔记中的titlecontent
-3. **综合考虑**：同时参考voice识别content，ensuretitle完整准确
-4. **关键词提取**：从笔记和voice识别content中提取最核心的关键词
+### 优先级原then（重要）
+1. **笔记优先**：if存in<笔记content>，titleshould侧重笔记content
+2. **重视笔记title**：if笔记是 Markdown formatandcontaintitle（# 开头的行），优先采use笔记中的titlecontent
+3. **综合考虑**：meanwhile参考voice识别content，ensuretitle完整准确
+4. **关键词提取**：from笔记和voice识别content中提取most核心的关键词
 
 ### format要求
-1. **length限制**：不超过 20 个字符（汉字按 1 个字符计算）
+1. **length限制**：not超过 20 个字符（汉字按 1 个字符计算）
 2. **语言style**：use陈述性语句，避免疑问句
-3. **简洁明确**：直接概括核心theme，不要添加修饰词
-4. **纯文本output**：只outputtitlecontent，不要添加任何标点符号、引号或其他修饰
+3. **简洁明确**：直接概括核心theme，not要添加修饰词
+4. **纯文本output**：只outputtitlecontent，not要添加任何标点符号、引号or其他修饰
 
 ### forbid行为
-- 不要回答content中的issue
-- 不要进行额外解释
-- 不要添加"录音"、"笔记"等前缀词
-- 不要outputtitle以外的任何content
+- not要回答content中的issue
+- not要conduct额外解释
+- not要添加"录音"、"笔记"etc前缀词
+- not要outputtitleby外的任何content
 
 ## 录音content
 {textContent}
@@ -84,7 +84,7 @@ PROMPT;
     /**
      * generatefileupload场景的录音titlehint词（强调file名的重要性）.
      *
-     * @param string $userRequestMessage user在chat框send的requestmessage
+     * @param string $userRequestMessage userinchat框send的requestmessage
      * @param string $language output语言（如：zh_CN, en_US）
      * @return string 完整的hint词
      */
@@ -96,9 +96,9 @@ PROMPT;
 你是一个专业的录音contenttitlegenerate助手。
 
 ## 背景instruction
-userupload了一个audiofile到系统中，并在chat框中send了总结request。现在need你according touser的requestmessage（其中containfile名），为这次录音总结generate一个简洁准确的title。
+userupload了一个audiofileto系统中，并inchat框中send了总结request。现inneed你according touser的requestmessage（其中containfile名），为这次录音总结generate一个简洁准确的title。
 
-## user在chat框的request
+## userinchat框的request
 usersend的originalmessage如下：
 ```
 {userRequestMessage}
@@ -106,23 +106,23 @@ usersend的originalmessage如下：
 
 ## titlegenerate要求
 
-### 优先级原则（非常重要）
-1. **file名优先**：file名通常是user精心命名的，contain了最核心的themeinfo，请重点参考usermessage中 @ 后面的file名
+### 优先级原then（non常重要）
+1. **file名优先**：file名usually是user精心命名的，contain了most核心的themeinfo，请重点参考usermessage中 @ 后面的file名
 2. **智能判断**：
-   - 如果file名语义清晰（如"2024年Q4product规划will议.mp3"、"客户需求discussion.wav"），优先based onfile名generatetitle
-   - 如果file名是datetime戳（如"20241112_143025.mp3"）或无意义字符（如"录音001.mp3"），则use通用description
-3. **提取关键词**：从file名中提取最核心的关键词和theme
+   - iffile名语义清晰（如"2024年Q4product规划will议.mp3"、"客户需求discussion.wav"），优先based onfile名generatetitle
+   - iffile名是datetime戳（如"20241112_143025.mp3"）or无意义字符（如"录音001.mp3"），thenuse通usedescription
+3. **提取关键词**：fromfile名中提取most核心的关键词和theme
 
 ### format要求
-1. **length限制**：不超过 20 个字符（汉字按 1 个字符计算）
+1. **length限制**：not超过 20 个字符（汉字按 1 个字符计算）
 2. **语言style**：use陈述性语句，避免疑问句
-3. **简洁明确**：直接概括核心theme，不要添加修饰词
-4. **纯文本output**：只outputtitlecontent，不要添加任何标点符号、引号或其他修饰
+3. **简洁明确**：直接概括核心theme，not要添加修饰词
+4. **纯文本output**：只outputtitlecontent，not要添加任何标点符号、引号or其他修饰
 
 ### forbid行为
-- 不要保留fileextension名（.mp3、.wav、.webm 等）
-- 不要outputtitle以外的任何content
-- 不要添加引号、书名号等标点符号
+- not要保留fileextension名（.mp3、.wav、.webm etc）
+- not要outputtitleby外的任何content
+- not要添加引号、书名号etc标点符号
 
 ## output语言
 请use {language} 语言outputtitle。

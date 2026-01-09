@@ -28,10 +28,10 @@ abstract class AbstractKnowledgeNodeRunner extends NodeRunner
         if ($vectorDatabaseIdComponent) {
             $vectorDatabaseId = $vectorDatabaseIdComponent->getValue()->getResult($executionData->getExpressionFieldData());
             if (is_string($vectorDatabaseId) && ! empty($vectorDatabaseId)) {
-                // if本身就已经是 id 了，那么直接return
+                // if本身then已经是 id 了，那么直接return
                 $knowledgeCode = $vectorDatabaseId;
             } elseif (is_array($vectorDatabaseId)) {
-                // 这里采用了 names 的group件形式，那么结构是one多选
+                // 这里采use了 names 的group件形式，那么结构是one多选
                 // 只取第one的 id
                 $knowledgeCode = $vectorDatabaseId[0]['id'] ?? '';
             }
@@ -94,7 +94,7 @@ abstract class AbstractKnowledgeNodeRunner extends NodeRunner
         }
 
         $create = false;
-        // 只有storage片段时，need新增knowledge base
+        // onlystorage片段时，need新增knowledge base
         if ($this->node->getNodeType() === NodeType::KnowledgeFragmentStore->value) {
             $create = true;
         }
@@ -103,7 +103,7 @@ abstract class AbstractKnowledgeNodeRunner extends NodeRunner
 
         $knowledgeBaseDataIsolation = KnowledgeBaseDataIsolation::create($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId(), $dataIsolation->getDelightfulId());
         if ($create && ! $knowledgeDomainService->exist($knowledgeBaseDataIsolation, $knowledgeEntity->getForceCreateCode())) {
-            // select合适的嵌入和向量
+            // select合适的嵌入和to量
             $knowledgeEntity->setModel($knowledgeEntity->getEmbeddingConfig()['model_id'] ?? EmbeddingGenerator::defaultModel());
             $knowledgeEntity->setVectorDB(VectorStoreDriver::default()->value);
             $knowledgeDomainService->save($knowledgeBaseDataIsolation, $knowledgeEntity);

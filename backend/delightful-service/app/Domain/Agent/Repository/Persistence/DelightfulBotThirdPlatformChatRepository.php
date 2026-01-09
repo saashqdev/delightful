@@ -23,7 +23,7 @@ class DelightfulBotThirdPlatformChatRepository extends AbstractRepository implem
             /** @var DelightfulBotThirdPlatformChatModel $model */
             $model = DelightfulBotThirdPlatformChatModel::query()->find($entity->getId());
             $saveData = [
-                // 只allow修改是否enable
+                // 只allow修改whetherenable
                 'identification' => $entity->getIdentification(),
                 'enabled' => $entity->isEnabled(),
             ];

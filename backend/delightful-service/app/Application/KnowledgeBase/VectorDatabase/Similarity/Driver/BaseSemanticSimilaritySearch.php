@@ -30,10 +30,10 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
 
     public function search(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeSimilarityFilter $filter, KnowledgeBaseEntity $knowledgeBaseEntity, RetrieveConfig $retrieveConfig): array
     {
-        // 场景verify， 如果开启重新sort，can多召回data，然后according to得分进行sort，取 limit ，at most不超过 20 或者 limit 上限
+        // 场景verify， if开启重新sort，can多召回data，然后according to得分conductsort，取 limit ，at mostnot超过 20 or者 limit 上限
         $queryNum = $filter->getLimit();
         if ($retrieveConfig->isRerankingEnable()) {
-            // 如果开启重sort，增加召回quantity，但不超过20或originallimit的3倍
+            // if开启重sort，增加召回quantity，butnot超过20ororiginallimit的3倍
             $maxLimit = min(20, $queryNum * 3);
             $filter->setLimit($maxLimit);
         }
@@ -46,7 +46,7 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
         $modelGatewayMapper = di(ModelGatewayMapper::class);
 
         $result = [];
-        // according tomodel进行向量化
+        // according tomodelconductto量化
         $model = $modelGatewayMapper->getEmbeddingModelProxy($dataIsolation, $knowledgeBaseEntity->getModel());
         $embeddingGenerator = di(EmbeddingGeneratorInterface::class);
         $queryEmbeddings = $embeddingGenerator->embedText($model, $question, options: [
@@ -73,7 +73,7 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
         }
 
         // todo optimize
-        //        // 进行重sort
+        //        // conduct重sort
         //        if (count($result) > 1 && $retrieveConfig->isRerankingEnable() && container()->has(RerankGeneratorInterface::class)) {
         //            $rerankModelName = $retrieveConfig->getRerankingModel()["reranking_model_name'"];
         //            $rerankModel = OdinModelFactory::getFlowModelEntity($rerankModelName, $dataIsolation->getCurrentOrganizationCode());
@@ -83,7 +83,7 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
         //            }
         //            $rerankGenerator = di(RerankGeneratorInterface::class);
         //            $rerankResult = $rerankGenerator->rerank($rerankModel->createRerank(), $filter->getQuestion(), $documents);
-        //            // 按 relevance_score 从大到小sort
+        //            // 按 relevance_score from大to小sort
         //            usort($rerankResult, function ($a, $b) {
         //                return $b['relevance_score'] <=> $a['relevance_score'];
         //            });
@@ -94,7 +94,7 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
         //                $sortedResult[] = $result[$item['index']];
         //            }
         //            $result = $sortedResult;
-        //            // restore到original的 limit value
+        //            // restoretooriginal的 limit value
         //            if (count($result) > $filter->getLimit()) {
         //                $result = array_slice($result, 0, $filter->getLimit());
         //            }

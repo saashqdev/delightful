@@ -38,7 +38,7 @@ interface LoginResponseInterface
     /**
      * convert为arrayformat.
      *
-     * @return array<string, mixed> contain所有property的array
+     * @return array<string, mixed> contain所haveproperty的array
      */
     public function toArray(): array;
 }

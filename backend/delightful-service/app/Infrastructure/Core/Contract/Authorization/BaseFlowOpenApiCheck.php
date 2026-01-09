@@ -45,7 +45,7 @@ class BaseFlowOpenApiCheck implements FlowOpenApiCheckInterface
         if (str_starts_with($delightfulFlowApiChatDTO->getAuthorization(), 'Bearer ')) {
             $authorization = substr(trim($delightfulFlowApiChatDTO->getAuthorization()), 7);
         }
-        // 还是 api-key
+        // also是 api-key
         if (str_starts_with($authorization, 'api-sk-')) {
             $data['type'] = 'api-key';
             $data['authorization'] = $authorization;

@@ -98,7 +98,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
             $query->where('user_id', $filters['user_id']);
         }
 
-        // sort：先按是否为organizationcreate者sort，再按authorizationtimesort，都是降序
+        // sort：先按whether为organizationcreate者sort，again按authorizationtimesort，all是降序
         $query->orderBy('is_organization_creator', 'desc')
             ->orderBy('granted_at', 'desc');
 
@@ -129,7 +129,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * checkuser是否为organization管理员.
+     * checkuserwhether为organization管理员.
      */
     public function isOrganizationAdmin(DataIsolation $dataIsolation, string $userId): bool
     {
@@ -144,7 +144,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
      */
     public function grant(DataIsolation $dataIsolation, string $userId, ?string $grantorUserId, ?string $remarks = null, bool $isOrganizationCreator = false): OrganizationAdminEntity
     {
-        // check是否已存在
+        // checkwhether已存in
         $existing = $this->getByUserId($dataIsolation, $userId);
         if ($existing) {
             return $existing;
@@ -196,7 +196,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * getorganization下所有organization管理员.
+     * getorganization下所haveorganization管理员.
      */
     public function getAllOrganizationAdmins(DataIsolation $dataIsolation): array
     {
@@ -212,7 +212,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 批量checkuser是否为organization管理员.
+     * 批量checkuserwhether为organization管理员.
      */
     public function batchCheckOrganizationAdmin(DataIsolation $dataIsolation, array $userIds): array
     {
@@ -239,12 +239,12 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * mappingarraydata到实体.
+     * mappingarraydatato实体.
      * @param mixed $row
      */
     private function mapArrayToEntity($row): OrganizationAdminEntity
     {
-        // process DB::select return的 stdClass object或array
+        // process DB::select return的 stdClass objectorarray
         $data = is_array($row) ? $row : (array) $row;
 
         $entity = new OrganizationAdminEntity();

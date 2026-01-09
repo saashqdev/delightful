@@ -46,7 +46,7 @@ enum StatisticsLevel: int
     }
 
     /**
-     * getstatistics级别name（静态method，用于compatible旧code）.
+     * getstatistics级别name（静态method，useatcompatible旧code）.
      * @deprecated use枚举实例的 getName() method代替
      */
     public static function getLevelName(int|self $level): string

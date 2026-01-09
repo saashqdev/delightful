@@ -22,7 +22,7 @@ enum DelightfulFlowMessageType: string
     case Audio = 'audio';
     case File = 'file';
 
-    // 这个是暂时的，本身should不will存在这个，利用cardmessage的形式来implement才对
+    // 这个是暂时的，本身shouldnotwill存in这个，利usecardmessage的形式来implement才对
     case AIMessage = 'ai_message';
 
     public function isAttachment(): bool
@@ -54,7 +54,7 @@ enum DelightfulFlowMessageType: string
             ExceptionBuilder::throw(FlowErrorCode::MessageError, 'flow.node.message.type_error');
         }
 
-        // 全部parse，按需取用
+        // all部parse，按需取use
         $contentComponent = ComponentFactory::fastCreate($params['content'] ?? []);
         $linkComponent = ComponentFactory::fastCreate($params['link'] ?? []);
         $linkDescComponent = ComponentFactory::fastCreate($params['link_desc'] ?? []);

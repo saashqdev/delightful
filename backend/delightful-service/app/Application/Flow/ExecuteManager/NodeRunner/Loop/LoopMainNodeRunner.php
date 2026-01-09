@@ -50,7 +50,7 @@ class LoopMainNodeRunner extends NodeRunner
         }
 
         $breakVariableKey = "#{$bodyId}_break";
-        // 采用variable来initialize跳出循环configuration
+        // 采usevariable来initialize跳出循环configuration
         $executionData->variableSave($breakVariableKey, false);
 
         $params = $this->node->getParams();
@@ -120,7 +120,7 @@ class LoopMainNodeRunner extends NodeRunner
                     if ($loopCount >= $maxLoopCount) {
                         break;
                     }
-                    // 每次重新计算条件
+                    // each次重新计算条件
                     $condition = $conditionComponent->getCondition()->getResult($executionData->getExpressionFieldData());
                 }
                 break;
@@ -143,18 +143,18 @@ class LoopMainNodeRunner extends NodeRunner
             return null;
         }
 
-        // get所有 父 id 是这个循环体的节点
+        // get所have 父 id 是这个循环体的节点
         $childNodes = $delightfulFlow->getNodesByParentId($bodyId);
         if (empty($childNodes)) {
             return null;
         }
-        // 去除父 id property，不然will被filter
+        // 去except父 id property，not然willbefilter
         foreach ($childNodes as $node) {
             $meta = $node->getMeta();
             $meta['parent_id'] = '';
             $node->setMeta($meta);
         }
-        // 更换execute的节点
+        // more换execute的节点
         $loopDelightfulFlow->setNodes($childNodes);
 
         return $loopDelightfulFlow;
@@ -165,12 +165,12 @@ class LoopMainNodeRunner extends NodeRunner
         try {
             $subExecutor = new DelightfulFlowExecutor($loopDelightfulFlow, $executionData);
             $subExecutor->setInLoop(true);
-            // 复用current的executedata，循环体内可access和修改
+            // 复usecurrent的executedata，循环体内可access和修改
             $subExecutor->execute(TriggerType::LoopStart);
         } catch (Throwable $throwable) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $throwable->getMessage()]);
         }
-        // 节点内部的exception在 node 的 debug info中record
+        // 节点内部的exceptionin node 的 debug info中record
         foreach ($loopDelightfulFlow->getNodes() as $node) {
             if ($node->getNodeDebugResult() && ! $node->getNodeDebugResult()->isSuccess()) {
                 ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $node->getNodeDebugResult()->getErrorMessage()]);

@@ -36,21 +36,21 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected SearchDeepLevel $searchDeepLevel;
 
     /**
-     * 子issue的associateissue。supportassociateissue再产生子issue，但是will被拍平成二维array。
+     * 子issue的associateissue。supportassociateissueagain产生子issue，but是willbe拍平成二维array。
      * @var array<string,QuestionItem[]>
      * @example according touserinput的issue，generateassociateissue。
      */
     protected ?array $associateQuestions;
 
     /**
-     * （所有子issue的）search网页list.
+     * （所have子issue的）search网页list.
      *
      * @var QuestionSearchResult[]
      */
     protected array $searchWebPages;
 
     /**
-     * 由于多次子issuesearch时，will出现多个重复的searchresult，所以need ai 去重后，再丢给大model总结。
+     * 由at多次子issuesearch时，will出现多个重复的searchresult，所byneed ai 去重后，again丢给大model总结。
      *
      * @var SearchDetailItem[]
      */
@@ -78,8 +78,8 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
 
     /**
      * get本次needstreampush的field。
-     * support一次push多个field的streammessage，如果 json 层级较深，use field_1.*.field_2 作为 key。 其中 * 是指array的下标。
-     * service端willcache所有stream的data，并在stream结束时一次性push，以减少丢package的概率，提升message完整性。
+     * support一次push多个field的streammessage，if json 层级more深，use field_1.*.field_2 作为 key。 其中 * 是指array的下标。
+     * service端willcache所havestream的data，并instreamend时一次性push，by减少丢package的概率，提升message完整性。
      * for example：
      * [
      *     'users.0.name' => 'delightful',
@@ -113,7 +113,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
         //            {
         //                "parent_question_id": "0",
         //                "question_id": "1",
-        //                "question": "小米集团旗下有哪些品牌"
+        //                "question": "小米集团旗下have哪些品牌"
         //            }
         //        ],
         //        "question_1": [

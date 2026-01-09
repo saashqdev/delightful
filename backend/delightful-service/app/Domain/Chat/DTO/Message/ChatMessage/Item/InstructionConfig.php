@@ -205,7 +205,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * @param null|array $values originalvaluearray或 InstructionValue objectarray，或 null
+     * @param null|array $values originalvaluearrayor InstructionValue objectarray，or null
      */
     public function setValues($values): void
     {
@@ -227,13 +227,13 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // 如果first元素已经是 InstructionValue object，则直接use
+        // iffirst元素已经是 InstructionValue object，then直接use
         if (isset($values[0]) && $values[0] instanceof InstructionValue) {
             $this->values = $values;
             return;
         }
 
-        // 否则，将每个元素convert为 InstructionValue object
+        // 否then，将each个元素convert为 InstructionValue object
         $processedValues = [];
         foreach ($values as $value) {
             $processedValues[] = new InstructionValue($value);
@@ -318,9 +318,9 @@ class InstructionConfig extends AbstractEntity
     /**
      * according to指令group件typeget对应的name和value.
      *
-     * type为开关时，name 取的是 开/关，value 取 $instruction->getOn / $instruction->getOff
-     * type为单选时, name 取的是 显示name，value：$instructionValue
-     * type为status按钮时，name 取的是status文本，value: $instructionValue
+     * type为开关时，name 取is 开/关，value 取 $instruction->getOn / $instruction->getOff
+     * type为单选时, name 取is 显示name，value：$instructionValue
+     * type为status按钮时，name 取isstatus文本，value: $instructionValue
      * default name 为空， value = $instructionValue
      *
      * @param string $instructionValue 指令value

@@ -12,11 +12,11 @@ use function Hyperf\Translation\__;
 /**
  * Delightful 资源枚举.
  *
- * 1. use Backed Enum 将每个资源mapping为唯一string key。
- * 2. passmethod提供 label / parent  等元info，方便后续generatepermission树、做 i18n 等。
- * 3. 仅定义资源本身，不涉及操作type（如 query / edit）。
+ * 1. use Backed Enum 将each个资源mapping为唯一string key。
+ * 2. passmethod提供 label / parent  etc元info，方便后续generatepermission树、做 i18n etc。
+ * 3. 仅定义资源本身，not涉及操作type（如 query / edit）。
  *
- * 注意：如果你修改了这个file，请execute单元test PermissionApiTest.testGetPermissionTree.
+ * 注意：if你修改了这个file，请execute单元test PermissionApiTest.testGetPermissionTree.
  */
 enum DelightfulResourceEnum: string
 {
@@ -33,7 +33,7 @@ enum DelightfulResourceEnum: string
     case PLATFORM_ORGANIZATION = 'platform.organization'; # organization管理
     case ADMINPLUS_AI = 'admin_plus.ai'; # organization管理后台plus-AI管理
 
-    // ===== 三级：具体资源 (用于具体bindinterface）=====
+    // ===== 三级：specific资源 (useatspecificbindinterface）=====
     case ADMIN_AI_MODEL = 'platform.ai.model_management'; # AI管理-model管理
     case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AI管理-智能绘图管理
     case ADMIN_AI_MODE = 'platform.ai.mode_management'; # AI管理-模式管理管理
@@ -110,7 +110,7 @@ enum DelightfulResourceEnum: string
     /**
      * return与该资源bind的 Operation Enum 类名。
      * defaultuse DelightfulOperationEnum。
-     * 如需为特定资源customize操作集，可在此returncustomize Enum::class。
+     * 如需为特定资源customize操作集，可in此returncustomize Enum::class。
      */
     public function operationEnumClass(): string
     {

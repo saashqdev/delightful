@@ -23,7 +23,7 @@ use RuntimeException;
 use function Hyperf\Config\config;
 
 /**
- * 火山短信所有 api 的基础类.
+ * 火山短信所have api 的基础类.
  * @see https://www.volcengine.com/docs/6361/171579
  */
 abstract class VolcengineApi
@@ -98,7 +98,7 @@ abstract class VolcengineApi
 
     public function __construct(ClientFactory $clientFactory, StdoutLoggerInterface $logger, string $region = self::CHINA_REGION)
     {
-        // 部分公共固定的parameter在构造parameter中确定
+        // 部分公共固定的parameterin构造parameter中确定
         $this->setRegion($region);
         $this->setSecretKey(config('sms.volcengine.secretKey'));
         $this->setAccessKey(config('sms.volcengine.accessKey'));
@@ -129,7 +129,7 @@ abstract class VolcengineApi
             ];
             $response = $this->client->request($this->method, $this->getPath(), $options);
             $responseBody = Json::decode($response->getBody()->getContents());
-            // 进行error码判断
+            // conducterror码判断
             if (isset($responseBody['ResponseMetadata']['Error'])) {
                 $this->logger->error('sendSmsError ' . Json::encode($responseBody));
                 throw new RuntimeException('短信sendfail');
@@ -195,7 +195,7 @@ abstract class VolcengineApi
         $req->setIsSignUrl(false);
         $req->setMethod($this->getMethod());
         $req->setQueryList($this->getQuery());
-        // !!! 注意,这里不能加上 JSON_UNESCAPED_UNICODE,加了will导致body有中文时signature不correct!
+        // !!! 注意,这里not能加上 JSON_UNESCAPED_UNICODE,加了will导致bodyhave中文时signaturenotcorrect!
         $bodyStream = Utils::streamFor(Json::encode($this->getBody(), JSON_THROW_ON_ERROR));
         $req->setPayloadHash(Utils::hash($bodyStream, 'sha256'));
         $result = $sign->signOnly($req, $credentials);
@@ -208,7 +208,7 @@ abstract class VolcengineApi
 
     protected function setHeaders(): void
     {
-        // 研究发现,document要求在request头中传AccessKey/SecretKey/ServiceName/Region,其实can不传. Authorization头中有传AccessKey
+        // 研究发现,document要求inrequest头中传AccessKey/SecretKey/ServiceName/Region,其实cannot传. Authorization头中have传AccessKey
         $this->headers = [
             'Content-Type' => ['application/json;charset=utf-8'],
             'User-Agent' => ['volc-sdk-php/v1.0.87'],

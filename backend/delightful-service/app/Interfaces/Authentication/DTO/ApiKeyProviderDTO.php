@@ -52,12 +52,12 @@ class ApiKeyProviderDTO extends AbstractDTO
     protected string $conversationId = '';
 
     /**
-     * 是否enable.
+     * whetherenable.
      */
     protected bool $enabled = true;
 
     /**
-     * 最后usetime.
+     * most后usetime.
      */
     protected ?string $lastUsed = null;
 

@@ -326,7 +326,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因为vertex2的executetime比vertex3长，所以vertex3will先execute，先outputresult
+        // 因为vertex2的executetime比vertex3长，所byvertex3will先execute，先outputresult
         $this->assertEquals(['vertex1', 'vertex3', 'vertex2'], array_keys($result));
 
         // Verify concurrent execution - vertex2 and vertex3 should run in different coroutines
@@ -380,7 +380,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因为vertex3的executetime比vertex2长，所以vertex2will先execute，先outputresult
+        // 因为vertex3的executetime比vertex2长，所byvertex2will先execute，先outputresult
         $this->assertEquals(['vertex1', 'vertex2', 'vertex3'], array_keys($result));
 
         // Verify concurrent execution again
@@ -466,7 +466,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * test并发调度且等待父节点complete.
+     * test并发调度andetc待父节点complete.
      * root -> vertex2
      * root -> vertex3
      * vertex2 -> vertex5
@@ -532,7 +532,7 @@ class DagTest extends BaseTest
      * root -> vertex3
      * vertex2 -> vertex5
      * vertex3 -> vertex4
-     * vertex4 -> vertex5 （但是不调度）.
+     * vertex4 -> vertex5 （but是not调度）.
      */
     public function test4(): void
     {
@@ -588,7 +588,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * test非并发模式.
+     * testnon并发模式.
      * vertex1 -> vertex2
      * vertex1 -> vertex3
      * vertex2 -> vertex4
@@ -667,7 +667,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * test非并发模式.
+     * testnon并发模式.
      * vertex1 -> vertex2
      * vertex2 -> vertex3.
      */
@@ -717,10 +717,10 @@ class DagTest extends BaseTest
     }
 
     /**
-     * test非并发模式.
-     * vertex1 -> vertex2（不调度）
+     * testnon并发模式.
+     * vertex1 -> vertex2（not调度）
      * vertex1 -> vertex3（调度）.
-     * vertex1 -> vertex4（不调度）.
+     * vertex1 -> vertex4（not调度）.
      *
      * shouldoutput：vertex1, vertex3.
      */
@@ -839,7 +839,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因为vertex2的executetime比vertex3长，所以vertex3will先execute，先outputresult
+        // 因为vertex2的executetime比vertex3长，所byvertex3will先execute，先outputresult
         $this->assertEquals(['vertex1', 'vertex3', 'vertex5', 'vertex2', 'vertex4', 'vertex6'], array_keys($result));
     }
 

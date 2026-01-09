@@ -36,7 +36,7 @@ class Page
     }
 
     /**
-     * according to页码及页数计算分片data结束position.
+     * according to页码及页数计算分片dataendposition.
      */
     public function getSliceEnd(): int
     {

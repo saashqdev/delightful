@@ -13,7 +13,7 @@ namespace App\Infrastructure\Core\HighAvailability\ValueObject;
 enum LoadBalancingType: int
 {
     /**
-     * 随机strategy - 随机选择一个可用的后端service
+     * 随机strategy - 随机选择一个可use的后端service
      */
     case RANDOM = 1;
 
@@ -48,9 +48,9 @@ enum LoadBalancingType: int
     }
 
     /**
-     * checkcurrent负载均衡type是否support权重.
+     * checkcurrent负载均衡typewhethersupport权重.
      *
-     * @return bool 是否support权重
+     * @return bool whethersupport权重
      */
     public function supportsWeight(): bool
     {
@@ -58,7 +58,7 @@ enum LoadBalancingType: int
     }
 
     /**
-     * get所有可用的负载均衡type.
+     * get所have可use的负载均衡type.
      *
      * @return array<LoadBalancingType> 负载均衡typearray
      */

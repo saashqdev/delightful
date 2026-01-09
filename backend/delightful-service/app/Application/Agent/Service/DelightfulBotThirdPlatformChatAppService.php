@@ -48,7 +48,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.empty', ['label' => 'key']);
         }
 
-        // 特殊逻辑，如果是飞书，并且是challenge
+        // 特殊逻辑，if是飞书，并and是challenge
         $platform = $params['platform'] ?? '';
         if ($platform === ThirdPlatformChatType::FeiShuRobot->value && isset($params['challenge'])) {
             $chatMessage = new ThirdPlatformChatMessage();
@@ -96,7 +96,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             return;
                         }
 
-                        // 这里是各个平台的user id，不是 delightful 的 user_id
+                        // 这里是each个平台的user id，not是 delightful 的 user_id
                         $userId = $thirdPlatformChatMessage->getUserId();
                         $dataIsolation->setCurrentUserId($userId);
                         EnvManager::initDataIsolationEnv($dataIsolation);
@@ -141,7 +141,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             'code' => $exception->getCode(),
                             'trace' => $exception->getTraceAsString(),
                         ]);
-                        $message = new TextMessage(['content' => '不好意思，同时问我issue的人太多啦，有点忙不过来，你can一will儿再来问我吗？感谢谅解！']);
+                        $message = new TextMessage(['content' => 'not好意思，meanwhile问我issue的人too多啦，have点忙not过来，你can一will儿again来问我吗？感谢谅解！']);
                         $thirdPlatformChat->sendMessage($thirdPlatformChatMessage, $message);
                     }
                 });
@@ -256,7 +256,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
 
     private function clearMemory(string $conversationId): void
     {
-        // 清理 flow 的自身记忆，仅更改原session为backupsession
+        // 清理 flow 的自身记忆，仅more改原session为backupsession
         di(DelightfulFlowMemoryHistoryDomainService::class)->removeByConversationId(
             FlowDataIsolation::create('', ''),
             $conversationId

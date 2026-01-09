@@ -11,15 +11,15 @@ use App\Domain\ImageGenerate\ValueObject\WatermarkConfig;
 
 /**
  * 水印configurationinterface
- * 用于在开源project中定义水印configurationstandard，由企业projectimplement具体逻辑.
+ * useatin开源project中定义水印configurationstandard，由企业projectimplementspecific逻辑.
  */
 interface WatermarkConfigInterface
 {
     /**
      * get水印configuration.
      *
-     * @param null|string $orgCode organizationcode，用于判断是否enable水印
-     * @return null|WatermarkConfig return水印configuration，if为null则不添加水印
+     * @param null|string $orgCode organizationcode，useat判断whetherenable水印
+     * @return null|WatermarkConfig return水印configuration，if为nullthennot添加水印
      */
     public function getWatermarkConfig(?string $orgCode = null): ?WatermarkConfig;
 }

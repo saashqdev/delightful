@@ -50,11 +50,11 @@ class ModeDomainService
             return null;
         }
 
-        // 如果是跟随模式，get被跟随模式的groupconfiguration
+        // if是跟随模式，getbe跟随模式的groupconfiguration
         if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
             $followModeAggregate = $this->getModeDetailById($dataIsolation, $mode->getFollowModeId());
             if ($followModeAggregate) {
-                // usecurrent模式的基本info + 被跟随模式的groupconfiguration
+                // usecurrent模式的基本info + be跟随模式的groupconfiguration
                 return new ModeAggregate($mode, $followModeAggregate->getGroupAggregates());
             }
         }
@@ -90,11 +90,11 @@ class ModeDomainService
             return null;
         }
 
-        // 如果是跟随模式，get被跟随模式的groupconfiguration
+        // if是跟随模式，getbe跟随模式的groupconfiguration
         if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
             $followModeAggregate = $this->getModeDetailById($dataIsolation, $mode->getFollowModeId());
             if ($followModeAggregate) {
-                // usecurrent模式的基本info + 被跟随模式的groupconfiguration
+                // usecurrent模式的基本info + be跟随模式的groupconfiguration
                 return new ModeAggregate($mode, $followModeAggregate->getGroupAggregates());
             }
         }
@@ -130,7 +130,7 @@ class ModeDomainService
      */
     public function updateMode(ModeDataIsolation $dataIsolation, ModeEntity $modeEntity): ModeEntity
     {
-        // 如果是跟随模式，validate跟随的goal模式存在 todo xhy use业务exception
+        // if是跟随模式，validate跟随的goal模式存in todo xhy use业务exception
         if ($modeEntity->isInheritedConfiguration() && $modeEntity->hasFollowMode()) {
             $followMode = $this->modeRepository->findById($dataIsolation, $modeEntity->getFollowModeId());
             if (! $followMode) {
@@ -157,7 +157,7 @@ class ModeDomainService
         }
         $mode = $modeAggregate->getMode();
 
-        // default模式不能被disable
+        // default模式not能bedisable
         if ($mode->isDefaultMode() && ! $status) {
             ExceptionBuilder::throw(ModeErrorCode::MODE_IN_USE_CANNOT_DELETE);
         }
@@ -180,15 +180,15 @@ class ModeDomainService
 
         $this->updateMode($dataIsolation, $modeEntity);
 
-        // 如果是inheritconfiguration模式
+        // if是inheritconfiguration模式
         if ($mode->getDistributionType() === DistributionTypeEnum::INHERITED) {
             return $this->getModeDetailById($dataIsolation, $id);
         }
 
-        // 直接delete该模式的所有现有configuration
+        // 直接delete该模式的所have现haveconfiguration
         $this->relationRepository->deleteByModeId($dataIsolation, $id);
 
-        // delete该模式的所有现有group
+        // delete该模式的所have现havegroup
         $this->groupRepository->deleteByModeId($dataIsolation, $id);
 
         // save模式基本info
@@ -258,22 +258,22 @@ class ModeDomainService
             return [];
         }
 
-        // 第一步：建立跟随关系mapping followMap[跟随者ID] = 被跟随者ID
+        // 第一步：建立跟随关系mapping followMap[跟随者ID] = be跟随者ID
         $followMap = [];
         $modeIds = [];
 
         foreach ($modes as $mode) {
             $modeIds[] = $mode->getId();
 
-            // 如果是跟随模式，建立mapping关系
+            // if是跟随模式，建立mapping关系
             if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
                 $followMap[$mode->getId()] = $mode->getFollowModeId();
-                $modeIds[] = $mode->getFollowModeId(); // 也要收集被跟随的模式ID
+                $modeIds[] = $mode->getFollowModeId(); // also要收集be跟随的模式ID
             }
         }
         $modeIds = array_unique($modeIds);
 
-        // 第二步：批量get所有group和关系
+        // 第二步：批量get所havegroup和关系
         $allGroups = $this->groupRepository->findByModeIds($dataIsolation, $modeIds);
         $allRelations = $this->relationRepository->findByModeIds($dataIsolation, $modeIds);
 
@@ -302,7 +302,7 @@ class ModeDomainService
             // buildgroupaggregate根array
             $groupAggregates = [];
             foreach ($groups as $group) {
-                // get该group下的所有associate关系
+                // get该group下的所haveassociate关系
                 $groupRelations = array_filter($relations, fn ($relation) => $relation->getGroupId() === $group->getId());
                 usort($groupRelations, fn ($a, $b) => $a->getSort() <=> $b->getSort());
 
@@ -332,7 +332,7 @@ class ModeDomainService
                 ExceptionBuilder::throw(ModeErrorCode::VALIDATE_FAILED);
             }
 
-            // get该group下的所有associate关系
+            // get该group下的所haveassociate关系
             $groupRelations = array_filter($relations, fn ($relation) => $relation->getGroupId() === $group->getId());
             usort($groupRelations, fn ($a, $b) => $a->getSort() <=> $b->getSort());
 
@@ -343,7 +343,7 @@ class ModeDomainService
     }
 
     /**
-     * check是否存在循环跟随.
+     * checkwhether存in循环跟随.
      */
     private function hasCircularFollow(ModeDataIsolation $dataIsolation, int|string $modeId, int|string $followModeId, array $visited = []): bool
     {
@@ -376,7 +376,7 @@ class ModeDomainService
     /**
      * according to跟随关系mapping递归查找final源模式ID.
      * @param int $modeId current模式ID
-     * @param array $followMap 跟随关系mapping [跟随者ID => 被跟随者ID]
+     * @param array $followMap 跟随关系mapping [跟随者ID => be跟随者ID]
      * @param array $visited 防止循环跟随
      * @return int final源模式ID
      */
@@ -387,7 +387,7 @@ class ModeDomainService
             return $modeId;
         }
 
-        // 如果该模式没有跟随关系，instruction它就是final源
+        // if该模式nothave跟随关系，instruction它then是final源
         if (! isset($followMap[$modeId])) {
             return $modeId;
         }

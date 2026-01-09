@@ -38,7 +38,7 @@ readonly class KnowledgeBaseDocumentDomainService
     {
         $this->prepareForCreation($documentEntity);
         $entity = $this->knowledgeBaseDocumentRepository->create($dataIsolation, $documentEntity);
-        // 如果有file，syncfile
+        // ifhavefile，syncfile
         if ($documentEntity->getDocumentFile()) {
             $event = new KnowledgeBaseDocumentSavedEvent($dataIsolation, $knowledgeBaseEntity, $entity, true);
             AsyncEventUtil::dispatch($event);
@@ -101,7 +101,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $documentEntity = null;
         Db::transaction(function () use ($dataIsolation, $documentCode, $knowledgeBaseEntity) {
             $knowledgeBaseCode = $knowledgeBaseEntity->getCode();
-            // 首先deletedocument下的所有片段
+            // 首先deletedocument下的所have片段
             $this->destroyFragments($dataIsolation, $knowledgeBaseCode, $documentCode);
             $documentEntity = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode, true);
             // 然后deletedocument本身
@@ -110,27 +110,27 @@ readonly class KnowledgeBaseDocumentDomainService
             $deltaWordCount = -$documentEntity->getWordCount();
             $this->updateWordCount($dataIsolation, $knowledgeBaseCode, $documentEntity->getCode(), $deltaWordCount);
         });
-        // asyncdelete向量database片段
+        // asyncdeleteto量database片段
         /* @phpstan-ignore-next-line */
         ! is_null($documentEntity) && AsyncEventUtil::dispatch(new KnowledgeBaseDocumentRemovedEvent($dataIsolation, $knowledgeBaseEntity, $documentEntity));
     }
 
     /**
-     * 重建knowledge basedocument向量索引.
+     * 重建knowledge basedocumentto量索引.
      */
     public function rebuild(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $force = false): void
     {
         $document = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode);
 
-        // 如果force重建或者syncstatus为fail，则重新sync
+        // ifforce重建or者syncstatus为fail，then重新sync
         if ($force || $document->getSyncStatus() === 2) { // 2 table示syncfail
             $document->setSyncStatus(0); // 0 table示未sync
             $document->setSyncStatusMessage('');
             $document->setSyncTimes(0);
             $this->knowledgeBaseDocumentRepository->update($dataIsolation, $document);
 
-            // async触发重建（这里cansendevent或者加入queue）
-            // TODO: 触发重建向量event
+            // async触发重建（这里cansendeventor者加入queue）
+            // TODO: 触发重建to量event
         }
     }
 
@@ -171,7 +171,7 @@ readonly class KnowledgeBaseDocumentDomainService
         if ($documentEntity) {
             return $documentEntity;
         }
-        // 如果document不存在，createnewdefaultdocument
+        // ifdocumentnot存in，createnewdefaultdocument
         $documentEntity = (new KnowledgeBaseDocumentEntity())
             ->setCode($defaultDocumentCode)
             ->setName('未命名document.txt')
@@ -240,7 +240,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * deletedocument下的所有片段.
+     * deletedocument下的所have片段.
      */
     private function destroyFragments(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -253,15 +253,15 @@ readonly class KnowledgeBaseDocumentDomainService
     private function prepareForCreation(KnowledgeBaseDocumentEntity $documentEntity): void
     {
         if (empty($documentEntity->getName())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'documentname不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'documentnamenot能为空');
         }
 
         if (empty($documentEntity->getKnowledgeBaseCode())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge baseencoding不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge baseencodingnot能为空');
         }
 
         if (empty($documentEntity->getCreatedUid())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者not能为空');
         }
 
         // setdefaultvalue
@@ -273,7 +273,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $documentEntity->setUpdatedAt($documentEntity->getCreatedAt());
         $documentEntity->setUpdatedUid($documentEntity->getCreatedUid());
         $documentEntity->setSyncStatus(0); // 0 table示未sync
-        // 以下property均从documentfile中get
+        // by下property均fromdocumentfile中get
         $documentEntity->setDocType($documentFile?->getDocType() ?? DocType::TXT->value);
         $documentEntity->setThirdFileId($documentFile?->getThirdFileId());
         $documentEntity->setThirdPlatformType($documentFile?->getPlatformType());
@@ -284,7 +284,7 @@ readonly class KnowledgeBaseDocumentDomainService
      */
     private function prepareForUpdate(KnowledgeBaseDocumentEntity $newDocument, KnowledgeBaseDocumentEntity $oldDocument): void
     {
-        // 不allow修改的field保持原value
+        // notallow修改的field保持原value
         $newDocument->setId($oldDocument->getId());
         $newDocument->setCode($oldDocument->getCode());
         $newDocument->setKnowledgeBaseCode($oldDocument->getKnowledgeBaseCode());

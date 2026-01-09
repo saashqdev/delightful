@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 表存在就不execute
+        // 表存inthennotexecute
         if (Schema::hasTable('delightful_api_premium_resources')) {
             return;
         }

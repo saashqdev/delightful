@@ -11,19 +11,19 @@ use App\Infrastructure\Core\AbstractDTO;
 use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\CircuitBreakerStatus;
 
 /**
- * 用于在业务process中同时save业务ID和高可用group件接入点databaseID.
+ * useatin业务process中meanwhilesave业务ID和高可usegroup件接入点databaseID.
  */
 class EndpointDTO extends AbstractDTO
 {
     /**
      * getEndpointList interfacereturn的 id。
-     * different的业务含义different。对于model网关来说，这里的 id 是 service_provider_models table的 id。
-     * 前端可能not supported bigint，所以这里用 string.
+     * different的业务含义different。对atmodel网关来说，这里的 id 是 service_provider_models table的 id。
+     * 前端可能not supported bigint，所by这里use string.
      */
     protected ?string $businessId = null;
 
     /**
-     * database接入点ID（高可用tableprimary key）.
+     * database接入点ID（高可usetableprimary key）.
      */
     protected ?string $endpointId = null;
 
@@ -54,7 +54,7 @@ class EndpointDTO extends AbstractDTO
     protected ?array $resources = null;
 
     /**
-     * 接入点是否enable.
+     * 接入点whetherenable.
      */
     protected bool $enabled = true;
 
@@ -83,7 +83,7 @@ class EndpointDTO extends AbstractDTO
         parent::__construct($data);
     }
 
-    // 原有 EndpointDTO 的所有method
+    // 原have EndpointDTO 的所havemethod
     public function getResources(): ?array
     {
         return $this->resources ?? null;
@@ -184,8 +184,8 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * set接入点是否enable.
-     * @param bool|int|string $enabled 可传入布尔value、整数或string
+     * set接入点whetherenable.
+     * @param bool|int|string $enabled 可传入布尔value、整数orstring
      */
     public function setEnabled(bool|int|string $enabled): static
     {
@@ -239,7 +239,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * check是否存在于database中.
+     * checkwhether存inatdatabase中.
      */
     public function hasEndpointId(): bool
     {

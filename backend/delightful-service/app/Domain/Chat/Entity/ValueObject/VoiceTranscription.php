@@ -23,7 +23,7 @@ class VoiceTranscription extends AbstractValueObject
     private ?array $transcriptions;
 
     /**
-     * errorinfo（如果转录fail）.
+     * errorinfo（if转录fail）.
      */
     private ?string $errorMessage;
 
@@ -33,12 +33,12 @@ class VoiceTranscription extends AbstractValueObject
     private ?int $transcribedAt;
 
     /**
-     * 主要语言code（default转录语言）.
+     * main语言code（default转录语言）.
      */
     private ?string $primaryLanguage;
 
     /**
-     * get所有转录result.
+     * get所have转录result.
      * @return array<string, string>
      */
     public function getTranscriptions(): array
@@ -77,7 +77,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * get主要语言的转录result.
+     * getmain语言的转录result.
      */
     public function getPrimaryTranscription(): ?string
     {
@@ -85,12 +85,12 @@ class VoiceTranscription extends AbstractValueObject
             return $this->transcriptions[$this->primaryLanguage];
         }
 
-        // 如果没有set主要语言，returnfirst可用的转录result
+        // ifnothavesetmain语言，returnfirst可use的转录result
         return ! empty($this->transcriptions) ? reset($this->transcriptions) : null;
     }
 
     /**
-     * check是否有指定语言的转录result.
+     * checkwhetherhave指定语言的转录result.
      */
     public function hasTranscription(string $language): bool
     {
@@ -98,7 +98,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * get所有support的语言code
+     * get所havesupport的语言code
      * @return string[]
      */
     public function getSupportedLanguages(): array
@@ -141,7 +141,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * get主要语言code
+     * getmain语言code
      */
     public function getPrimaryLanguage(): ?string
     {
@@ -149,7 +149,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * set主要语言code
+     * setmain语言code
      */
     public function setPrimaryLanguage(?string $primaryLanguage): self
     {
@@ -158,7 +158,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * 从arraycreate实例.
+     * fromarraycreate实例.
      */
     public static function fromArray(array $data): self
     {
@@ -166,7 +166,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * check是否为空（没有任何转录result）.
+     * checkwhether为空（nothave任何转录result）.
      */
     public function isEmpty(): bool
     {
@@ -174,7 +174,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * clear所有转录result.
+     * clear所have转录result.
      */
     public function clear(): self
     {

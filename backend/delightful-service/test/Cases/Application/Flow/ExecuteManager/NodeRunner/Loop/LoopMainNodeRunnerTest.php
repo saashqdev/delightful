@@ -61,7 +61,7 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
     "nodes": [
         {
             "node_id": "DELIGHTFUL-FLOW-NODE-66dfe2b8223d85-83130117",
-            "name": "开始节点",
+            "name": "start节点",
             "description": "",
             "node_type": 1,
             "meta": {},
@@ -208,7 +208,7 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
         },
         {
             "node_id": "DELIGHTFUL-FLOW-NODE-66dfc32637e0b5-42629375",
-            "name": "循环开始节点",
+            "name": "循环start节点",
             "description": "",
             "node_type": 1,
             "meta": {

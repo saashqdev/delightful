@@ -18,7 +18,7 @@ interface MCPUserSettingRepositoryInterface
 
     /**
      * @param array<int> $ids
-     * @return array<int, MCPUserSettingEntity> return以id为key的实体objectarray
+     * @return array<int, MCPUserSettingEntity> returnbyid为key的实体objectarray
      */
     public function getByIds(MCPDataIsolation $dataIsolation, array $ids): array;
 
@@ -28,14 +28,14 @@ interface MCPUserSettingRepositoryInterface
     public function getByUserAndMcpServer(MCPDataIsolation $dataIsolation, string $userId, string $mcpServerId): ?MCPUserSettingEntity;
 
     /**
-     * according touserIDget所有MCPusersetting.
+     * according touserIDget所haveMCPusersetting.
      *
      * @return array<MCPUserSettingEntity>
      */
     public function getByUserId(MCPDataIsolation $dataIsolation, string $userId): array;
 
     /**
-     * according toMCPserviceIDget所有usersetting.
+     * according toMCPserviceIDget所haveusersetting.
      *
      * @return array<MCPUserSettingEntity>
      */

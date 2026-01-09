@@ -10,6 +10,6 @@ namespace App\Domain\Agent\Constant;
 enum DelightfulAgentReleaseStatus: int
 {
     case PERSONAL_USE = 0; // 个人use
-    case PUBLISHED_TO_ENTERPRISE = 1; // publish到企业
-    case PUBLISHED_TO_MARKET = 2; // publish到市场
+    case PUBLISHED_TO_ENTERPRISE = 1; // publishto企业
+    case PUBLISHED_TO_MARKET = 2; // publishto市场
 }

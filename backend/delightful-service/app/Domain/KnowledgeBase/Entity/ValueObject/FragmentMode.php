@@ -15,7 +15,7 @@ enum FragmentMode: int
     public function getDescription(): string
     {
         return match ($this) {
-            self::NORMAL => '通用mode',
+            self::NORMAL => '通usemode',
             self::PARENT_CHILD => '父子分段',
         };
     }

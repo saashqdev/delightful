@@ -16,7 +16,7 @@ use JsonSerializable;
  */
 interface StreamMessageInterface extends JsonSerializable, Arrayable
 {
-    // message是否是streammessage
+    // messagewhether是streammessage
     public function isStream(): bool;
 
     public function getStreamOptions(): ?StreamOptions;

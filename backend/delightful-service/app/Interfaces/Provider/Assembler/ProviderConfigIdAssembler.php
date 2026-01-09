@@ -14,7 +14,7 @@ use InvalidArgumentException;
 
 /**
  * service商templateIDprocesstool类
- * 用于generate和parseservice商templateID（use固定的数value型string）.
+ * useatgenerate和parseservice商templateID（use固定的数value型string）.
  */
 class ProviderConfigIdAssembler
 {
@@ -32,7 +32,7 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * check给定的configurationID是否为任何service商的template.
+     * check给定的configurationIDwhether为任何service商的template.
      * support数value型stringformat的templateID.
      */
     public static function isAnyProviderTemplate(null|int|string $configId): bool

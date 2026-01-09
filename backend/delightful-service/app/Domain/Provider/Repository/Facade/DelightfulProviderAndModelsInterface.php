@@ -14,7 +14,7 @@ use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 use App\Domain\Provider\Entity\ValueObject\Status;
 
 /**
- * organization下的 Delightful service商及model的相关interface（非官方organization才有 Delightful service商）.
+ * organization下的 Delightful service商及model的相关interface（non官方organization才have Delightful service商）.
  */
 interface DelightfulProviderAndModelsInterface
 {
@@ -27,7 +27,7 @@ interface DelightfulProviderAndModelsInterface
      * according toorganizationencoding和类别get Delightful service商modellist.
      *
      * @param string $organizationCode organizationencoding
-     * @param null|Category $category service商类别，为空时return所有categorymodel
+     * @param null|Category $category service商类别，为空时return所havecategorymodel
      * @return array<ProviderModelEntity> Delightful service商model实体array
      */
     public function getDelightfulEnableModels(string $organizationCode, ?Category $category = null): array;
@@ -37,7 +37,7 @@ interface DelightfulProviderAndModelsInterface
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string $modelParentId model父ID
-     * @return null|ProviderModelEntity 找到的organizationmodel实体，不存在则returnnull
+     * @return null|ProviderModelEntity 找to的organizationmodel实体，not存inthenreturnnull
      */
     public function getDelightfulModelByParentId(ProviderDataIsolation $dataIsolation, string $modelParentId): ?ProviderModelEntity;
 
@@ -45,12 +45,12 @@ interface DelightfulProviderAndModelsInterface
      * according toIDgetorganization Delightful model.
      *
      * @param int $id modelID`
-     * @return null|ProviderModelEntity 找到的model实体，不存在则returnnull
+     * @return null|ProviderModelEntity 找to的model实体，not存inthenreturnnull
      */
     public function getDelightfulModelById(int $id): ?ProviderModelEntity;
 
     /**
-     * 非官方organizationupdate Delightful modelstatus（写时复制逻辑）.
+     * non官方organizationupdate Delightful modelstatus（写时复制逻辑）.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param ProviderModelEntity $officialModel 官方model实体

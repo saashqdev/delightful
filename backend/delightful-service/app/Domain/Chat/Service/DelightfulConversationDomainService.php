@@ -47,7 +47,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
      */
     public function saveConversation(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): DelightfulConversationEntity
     {
-        // 从messageStruct中parse出来conversation窗口detail
+        // frommessageStruct中parse出来conversation窗口detail
         $messageType = $messageDTO->getMessageType();
         if (! $messageType instanceof ControlMessageType) {
             ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR);
@@ -59,16 +59,16 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $conversationDTO->setUserOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $conversationDTO->setReceiveId($messageStruct->getReceiveId());
         $conversationDTO->setReceiveType(ConversationType::from($messageStruct->getReceiveType()));
-        // 判断 uid 和 receiverId 是否已经存在conversation
+        // 判断 uid 和 receiverId whether已经存inconversation
         $existsConversation = $this->delightfulConversationRepository->getConversationByUserIdAndReceiveId($conversationDTO);
         if ($existsConversation) {
-            // 改变messagetype,从createconversation窗口,变更为openconversation窗口
+            // 改变messagetype,fromcreateconversation窗口,变more为openconversation窗口
             $conversationEntity = $existsConversation;
             $messageTypeInterface = MessageAssembler::getMessageStructByArray(
                 $messageType->getName(),
                 $messageDTO->getContent()->toArray()
             );
-            // need同时修改type和content,才能把messagecontent变更为openconversation窗口
+            // needmeanwhile修改type和content,才能把messagecontent变more为openconversation窗口
             $messageDTO->setMessageType($messageTypeInterface->getMessageTypeEnum());
             $messageDTO->setContent($messageTypeInterface);
             $messageDTO->setReceiveType($conversationEntity->getReceiveType());
@@ -91,7 +91,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
 
     /**
      * openconversation窗口.
-     * 控制message,只在seq表writedata,不在message表写.
+     * 控制message,只inseq表writedata,notinmessage表写.
      * @throws Throwable
      */
     public function openConversationWindow(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
@@ -109,7 +109,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * conversation窗口：置顶/移除/免打扰.
+     * conversation窗口：置顶/移except/免打扰.
      * @throws Throwable
      */
     public function conversationOptionChange(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
@@ -118,7 +118,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $messageStruct = $messageDTO->getContent();
         $conversationId = $messageStruct->getConversationId();
         $conversationEntity = $this->checkAndGetSelfConversation($conversationId, $dataIsolation);
-        // according to要操作的type，更改database
+        // according to要操作的type，more改database
         $updateData = [];
         if ($messageStruct instanceof ConversationTopMessage) {
             $updateData = ['is_top' => $messageStruct->getIsTop()];
@@ -137,12 +137,12 @@ class DelightfulConversationDomainService extends AbstractDomainService
             // 给自己的messagestreamgenerate序列.
             $seqEntity = $this->generateSenderSequenceByControlMessage($messageDTO, $conversationEntity->getId());
             $seqEntity->setConversationId($conversationEntity->getId());
-            // notifyuser的其他设备,这里即使投递fail也不影响,所以放协程里,transaction外.
+            // notifyuser的其他设备,这里即使投递failalsonot影响,所by放协程里,transaction外.
             co(function () use ($seqEntity) {
                 // asyncpushmessage给自己的其他设备
                 $this->pushControlSequence($seqEntity);
             });
-            // 将messagestreamreturn给current客户端! 但是还是willasyncpush给user的所有online客户端.
+            // 将messagestreamreturn给current客户端! but是also是willasyncpush给user的所haveonline客户端.
             $result = SeqAssembler::getClientSeqStruct($seqEntity, $messageDTO)->toArray();
             Db::commit();
         } catch (Throwable $e) {
@@ -153,11 +153,11 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * 正在input中的status只needpush给对方,不need推给自己的设备.
+     * 正ininput中的status只needpush给对方,notneed推给自己的设备.
      */
     public function clientOperateConversationStatus(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
-        // 从messageStruct中parse出来conversation窗口detail
+        // frommessageStruct中parse出来conversation窗口detail
         $messageType = $messageDTO->getMessageType();
         if (! in_array($messageType, [ControlMessageType::StartConversationInput, ControlMessageType::EndConversationInput], true)) {
             ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR);
@@ -166,7 +166,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         if (in_array($messageType, [ControlMessageType::StartConversationInput, ControlMessageType::EndConversationInput], true)) {
             /** @var ConversationEndInputMessage|ConversationStartInputMessage $messageStruct */
             $messageStruct = $messageDTO->getContent();
-            // conversation不存在直接return
+            // conversationnot存in直接return
             if (! $messageStruct->getConversationId()) {
                 return [];
             }
@@ -174,7 +174,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             // generate控制message,push给收发双发
             $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($messageStruct->getConversationId());
             if ($receiveConversationEntity === null) {
-                // check对方是否存在conversation,如果不存在直接return
+                // check对方whether存inconversation,ifnot存in直接return
                 return [];
             }
             // 替换conversationid为receive方自己的
@@ -182,7 +182,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             $messageDTO->setContent($messageStruct);
             // 给对方的messagestreamgenerate序列.
             $seqEntity = $this->generateReceiveSequenceByControlMessage($messageDTO, $receiveConversationEntity);
-            // notify对方的所有
+            // notify对方的所have
             $this->pushControlSequence($seqEntity);
         }
         // 告知客户端requestsuccess
@@ -190,8 +190,8 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * 智能体触发conversation的startinput或者endinput.
-     * 直接操作对方的conversation窗口，而不是把message发在自己的conversation窗口然后再经由message分发模块forward到对方的conversation窗口.
+     * 智能体触发conversation的startinputor者endinput.
+     * 直接操作对方的conversation窗口，而not是把message发in自己的conversation窗口然后again经由message分发模块forwardto对方的conversation窗口.
      * @deprecated user端call agentOperateConversationStatusV2 method代替
      */
     public function agentOperateConversationStatus(ControlMessageType $controlMessageType, string $agentConversationId): bool
@@ -223,14 +223,14 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $messageDTO->setContent($messageStruct);
         // generatemessagestreamgenerate序列.
         $seqEntity = $this->generateReceiveSequenceByControlMessage($messageDTO, $receiveConversationEntity);
-        // notify收件方所有设备
+        // notify收件方所have设备
         $this->pushControlSequence($seqEntity);
         return true;
     }
 
     /**
-     * use intermediate event进行中间态messagepush，不持久化message. support话题级别的“正在input中”
-     * 直接操作对方的conversation窗口，而不是把message发在自己的conversation窗口然后再经由message分发模块forward到对方的conversation窗口.
+     * use intermediate eventconduct中间态messagepush，not持久化message. support话题级别的“正ininput中”
+     * 直接操作对方的conversation窗口，而not是把message发in自己的conversation窗口然后again经由message分发模块forwardto对方的conversation窗口.
      */
     public function agentOperateConversationStatusV2(ControlMessageType $controlMessageType, string $agentConversationId, ?string $topicId = null): bool
     {
@@ -269,7 +269,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             'seq_type' => $messageDTO->getMessageType()->getName(),
             'content' => $content->toArray(),
             'conversation_id' => $receiveConversationEntity->getId(),
-            'status' => DelightfulMessageStatus::Read->value, // 控制message不need已读回执
+            'status' => DelightfulMessageStatus::Read->value, // 控制messagenotneed已读回执
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => $messageDTO->getAppMessageId(),
@@ -278,7 +278,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             ],
         ];
         $seqEntity = SeqAssembler::getSeqEntity($seqData);
-        // seq 也加上 topicId
+        // seq also加上 topicId
         $pushData = SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
         // 直接pushmessage给收件方
         SocketIOUtil::sendIntermediate(SocketEventType::Intermediate, $receiveUserEntity->getDelightfulId(), $pushData);
@@ -292,7 +292,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     {
         $users = $this->delightfulUserRepository->getUserByIds($userIds);
         $users = array_column($users, null, 'user_id');
-        // 判断这些user是否已经存在conversation窗口,只是窗口status被mark为delete
+        // 判断这些userwhether已经存inconversation窗口,只是窗口statusbemark为delete
         $conversations = $this->delightfulConversationRepository->batchGetConversations($userIds, $groupEntity->getId(), ConversationType::Group);
         /** @var DelightfulConversationEntity[] $conversations */
         $conversations = array_column($conversations, null, 'user_id');
@@ -304,7 +304,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             $delightfulId = $user['delightful_id'] ?? null;
             if (empty($userId) || empty($delightfulId)) {
                 $this->logger->error(sprintf(
-                    'batchCreateGroupConversations 群member没有匹配到 $users:%s $groupEntity:%s',
+                    'batchCreateGroupConversations 群membernothave匹配to $users:%s $groupEntity:%s',
                     Json::encode($users),
                     Json::encode($groupEntity->toArray()),
                 ));
@@ -356,11 +356,11 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * getconversation窗口，不存在则create.supportuser/group chat/ai.
+     * getconversation窗口，not存inthencreate.supportuser/group chat/ai.
      */
     public function getOrCreateConversation(string $senderUserId, string $receiveId, ?ConversationType $receiverType = null): DelightfulConversationEntity
     {
-        // according to $receiverType ，对 receiveId 进行parse，判断是否存在
+        // according to $receiverType ，对 receiveId conductparse，判断whether存in
         $receiverTypeCallable = match ($receiverType) {
             null, ConversationType::User, ConversationType::Ai => function () use ($receiveId) {
                 $receiverUserEntity = $this->delightfulUserRepository->getUserById($receiveId);
@@ -385,7 +385,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $conversationDTO->setUserId($senderUserId);
         $conversationDTO->setReceiveId($receiveId);
         $conversationDTO->setReceiveType($receiverType);
-        // 判断 uid 和 receiverId 是否已经存在conversation
+        // 判断 uid 和 receiverId whether已经存inconversation
         $conversationEntity = $this->delightfulConversationRepository->getConversationByUserIdAndReceiveId($conversationDTO);
         if ($conversationEntity === null) {
             if (in_array($conversationDTO->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {

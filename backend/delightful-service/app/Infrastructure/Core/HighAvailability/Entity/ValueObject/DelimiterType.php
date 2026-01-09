@@ -15,12 +15,12 @@ use InvalidArgumentException;
 enum DelimiterType: string
 {
     /**
-     * 高可用applicationtype+modeltype+organizationencoding的分隔符.
+     * 高可useapplicationtype+modeltype+organizationencoding的分隔符.
      */
     case HIGH_AVAILABILITY = '||';
 
     /**
-     * get所有分隔符typevaluearray.
+     * get所have分隔符typevaluearray.
      */
     public static function values(): array
     {
@@ -30,7 +30,7 @@ enum DelimiterType: string
     }
 
     /**
-     * check是否是valid的分隔符type.
+     * checkwhether是valid的分隔符type.
      */
     public static function isValid(string $type): bool
     {
@@ -38,7 +38,7 @@ enum DelimiterType: string
     }
 
     /**
-     * 从stringcreate枚举实例.
+     * fromstringcreate枚举实例.
      */
     public static function fromString(string $type): self
     {

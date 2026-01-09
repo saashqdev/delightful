@@ -10,12 +10,12 @@ namespace App\Infrastructure\ExternalAPI\Sms;
 interface SmsInterface
 {
     /**
-     * get短信的templateid. 并不一定存在templateid.
+     * get短信的templateid. 并not一定存intemplateid.
      */
     public function getTemplateId(SmsStruct $smsStruct): ?string;
 
     /**
-     * send短信,force要求所有短信驱动的return结构一样.
+     * send短信,force要求所have短信驱动的return结构same.
      */
     public function send(SmsStruct $smsStruct): SendResult;
 

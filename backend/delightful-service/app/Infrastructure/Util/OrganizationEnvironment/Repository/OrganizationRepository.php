@@ -53,7 +53,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
             $model = OrganizationModel::create($data);
             $organizationEntity->setId($model->id);
         } else {
-            // usemodelupdate以便use casts process JSON 与datefield
+            // usemodelupdateby便use casts process JSON 与datefield
             $model = OrganizationModel::query()
                 ->where('id', $organizationEntity->getId())
                 ->first();
@@ -136,7 +136,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
         // gettotal
         $total = $query->count();
 
-        // sort：优先usefilter器中的sortfield，否则default按createtime倒序
+        // sort：优先usefilter器中的sortfield，否thendefault按createtime倒序
         $orderBy = $filters['order_by'] ?? null;
         $orderDirection = strtolower((string) ($filters['order_direction'] ?? '')) === 'asc' ? 'asc' : 'desc';
         if (! empty($orderBy)) {
@@ -176,7 +176,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * checkencoding是否已存在.
+     * checkencodingwhether已存in.
      */
     public function existsByCode(string $code, ?int $excludeId = null): bool
     {

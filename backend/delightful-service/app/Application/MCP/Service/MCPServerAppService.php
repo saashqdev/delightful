@@ -158,7 +158,7 @@ class MCPServerAppService extends AbstractMCPAppService
 
             $operation = Operation::None;
             if (in_array($item->getOrganizationCode(), $dataIsolation->getOfficialOrganizationCodes(), true)) {
-                // if是官方organizationdata，andwhen前organization所在的organization是官方organization，则setting操作permission为管理员
+                // if是官方organizationdata，andwhen前organization所in的organization是官方organization，thensetting操作permission为管理员
                 if ($dataIsolation->isOfficialOrganization()) {
                     $operation = Operation::Admin;
                 }
@@ -302,7 +302,7 @@ class MCPServerAppService extends AbstractMCPAppService
                 ];
             }, $toolsResult?->getTools() ?? []);
 
-            // 每次检测success，都存下一次tool列表
+            // each次检测success，all存下一次tool列表
             $this->mcpUserSettingDomainService->updateAdditionalConfig(
                 $dataIsolation,
                 $code,

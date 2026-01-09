@@ -15,6 +15,6 @@ enum DepartmentSumType: int
     // 1：returndepartment直属usertotal，
     case DirectEmployee = 1;
 
-    // 2：return本department + 所有子departmentusertotal
+    // 2：return本department + 所have子departmentusertotal
     case All = 2;
 }

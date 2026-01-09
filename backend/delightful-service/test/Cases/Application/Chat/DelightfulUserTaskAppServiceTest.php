@@ -48,7 +48,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
     //         'deadline' => null,
     //         'interval' => null,
     //     ];
-    //     // create被test的service实例, usedependency注入
+    //     // createbetest的service实例, usedependency注入
     //     $service = make(DelightfulUserTaskAppService::class);
     //     // {"branchId": "branch_83f180194d23", "flowCode": "DELIGHTFUL-FLOW-6784c05fc92ec0-09863904", "routineConfig": {"day": null, "time": "00:00", "type": "daily_repeat", "topic": {"name": null, "type": ""}, "value": {"unit": null, "values": null, "deadline": null, "interval": null}}}
     //     $flowCode = 'DELIGHTFUL-FLOW-6784c05fc92ec0-09863904';
@@ -94,7 +94,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $userTask->setTopicId('749639569880518657');
         $userTask->setCreator('usi_3715ce50bc02d7e72ba7891649b7f1da');
         $userTask->setNickname('xxx');
-        $userTask->setName('customize每两周重复task-2');
+        $userTask->setName('customizeeach两周重复task-2');
         $userTask->setAgentId('737330322528899073');
         $userTask->setDay('');
         $userTask->setTime('16:00');

@@ -227,7 +227,7 @@ class MessageAssembler
      */
     public static function getControlMessageStruct(ControlMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
-        // 其实can直接use protobuf generate的 php object,但是暂时没有time全量替换,以后再说.
+        // 其实can直接use protobuf generate的 php object,but是暂时nothavetimeall量替换,by后again说.
         return match ($messageTypeEnum) {
             # 控制message
             ControlMessageType::CreateConversation => new ConversationWindowCreateMessage($messageStructArray),
@@ -294,7 +294,7 @@ class MessageAssembler
                 continue;
             }
 
-            // 如果不是currentuser的message，且content超过500字符，则truncate
+            // ifnot是currentuser的message，andcontent超过500字符，thentruncate
             if (! empty($currentUserNickname) && $role !== $currentUserNickname && mb_strlen($content, 'UTF-8') > 500) {
                 $content = mb_substr($content, 0, 500, 'UTF-8') . '...';
             }
@@ -302,7 +302,7 @@ class MessageAssembler
             $formattedMessage = sprintf("%s: %s\n", $role, $content);
             $messageLength = mb_strlen($formattedMessage, 'UTF-8');
 
-            // 如果是第一条message，即使超过length限制也要contain
+            // if是第一条message，即使超过length限制also要contain
             if ($messageCount === 0) {
                 array_unshift($limitedMessages, $formattedMessage);
                 $currentLength += $messageLength;

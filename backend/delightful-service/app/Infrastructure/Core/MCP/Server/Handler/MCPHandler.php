@@ -183,17 +183,17 @@ class MCPHandler implements MCPHandlerInterface
     {
         $params = $request->getParams() ?? [];
 
-        // 尝试从authinfo中get
+        // 尝试fromauthinfo中get
         if (isset($params['auth'], $params['auth']['client_id'])) {
             return $params['auth']['client_id'];
         }
 
-        // 回退到sessionID
+        // 回退tosessionID
         if (isset($params['sessionId'])) {
             return $params['sessionId'];
         }
 
-        // 如果都没有，则userequestID
+        // ifallnothave，thenuserequestID
         return (string) $request->getId();
     }
 }

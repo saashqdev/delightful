@@ -47,10 +47,10 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         $this->logger = $loggerFactory->get('user');
     }
 
-    // return最受欢迎和最新加入的 agent list
+    // returnmost受欢迎和most新加入的 agent list
     public function getSquareAgentList(): array
     {
-        // 最受欢迎
+        // most受欢迎
         $popular = $this->userModel::query()
             ->where('status', UserStatus::Activated->value)
             ->where('user_type', UserType::Ai->value)
@@ -59,7 +59,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             ->limit(3);
         $popular = Db::select($popular->toSql(), $popular->getBindings());
         $popularIds = array_column($popular, 'id');
-        // 最新
+        // most新
         $latest = $this->userModel::query()
             ->where('status', UserStatus::Activated->value)
             ->where('user_type', UserType::Ai->value)
@@ -200,7 +200,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
 
         $delightfulId = $userEntity->getDelightfulId();
 
-        // 第二次query：according to delightful_id query所有该账号在differentorganization中的userrecord
+        // 第二次query：according to delightful_id query所have该账号indifferentorganization中的userrecord
         $query = $this->userModel::query()
             ->select('organization_code')
             ->where('delightful_id', $delightfulId)
@@ -243,7 +243,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         if (empty($keyword)) {
             return [[], []];
         }
-        // 最受欢迎
+        // most受欢迎
         $popular = $this->userModel::query()
             ->where('status', AccountStatus::Normal->value)
             ->where('user_type', UserType::Ai->value)
@@ -257,7 +257,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             ->limit(3);
         $popular = Db::select($popular->toSql(), $popular->getBindings());
         $popularIds = array_column($popular, 'id');
-        // 最新
+        // most新
         $latest = $this->userModel::query()
             ->where('status', AccountStatus::Normal->value)
             ->where('user_type', UserType::Ai->value)
@@ -398,14 +398,14 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         }
         // update
         $userData = $userDTO->toArray();
-        // 移除为 null 的data
+        // 移except为 null 的data
         foreach ($userData as $key => $value) {
             if ($value === null) {
                 unset($userData[$key]);
             }
         }
         $this->updateDataById($userDTO->getUserId(), $userData);
-        // return最新data
+        // returnmost新data
         return $this->getUserById($userDTO->getUserId());
     }
 
@@ -478,7 +478,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         return UserModel::query()->whereIn('user_id', $userIds)->pluck('delightful_id')->toArray();
     }
 
-    // 避免 redis cacheserialize的object,占用太多内存
+    // 避免 redis cacheserialize的object,占usetoo多内存
     #[Cacheable(prefix: 'userEntity', value: '_#{id}', ttl: 60)]
     private function getUser(string $id): ?array
     {
@@ -488,7 +488,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         return Db::select($query->toSql(), $query->getBindings())[0] ?? null;
     }
 
-    // 避免 redis cacheserialize的object,占用太多内存
+    // 避免 redis cacheserialize的object,占usetoo多内存
     #[Cacheable(prefix: 'userAccount', ttl: 60)]
     private function getUserArrayByAccountAndOrganization(string $accountId, string $organizationCode): ?array
     {
@@ -499,7 +499,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     }
 
     /**
-     * 投递initializedefault助手sessionevent到MQ.
+     * 投递initializedefault助手sessioneventtoMQ.
      */
     private function publishInitDefaultAssistantConversationEventForMQ(DelightfulUserEntity $userEntity): void
     {

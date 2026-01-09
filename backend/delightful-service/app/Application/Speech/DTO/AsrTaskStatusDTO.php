@@ -12,7 +12,7 @@ use App\Application\Speech\Enum\AsrTaskStatusEnum;
 
 /**
  * ASRtaskstatusDTO - 管理Redis Hashfieldmapping.
- * 这不是从 JSON response结构来的，而是用于管理taskstatus
+ * 这not是from JSON response结构来的，而是useat管理taskstatus
  */
 class AsrTaskStatusDTO
 {
@@ -20,20 +20,20 @@ class AsrTaskStatusDTO
 
     public string $userId = '';
 
-    public ?string $organizationCode = null; // organizationencoding（用于自动总结）
+    public ?string $organizationCode = null; // organizationencoding（useat自动总结）
 
-    // 类似：project_821749697183776769/workspace/录音总结_20250910_174251/original录音file.webm
+    // analogous：project_821749697183776769/workspace/录音总结_20250910_174251/original录音file.webm
     public ?string $filePath = null; // 工作区filepath
 
     // fileID（database中的actualID）
     public ?string $audioFileId = null; // audiofileID（writedelightful_super_agent_task_files表后return的ID）
 
     // note fileinfo
-    public ?string $noteFileName = null; // notefile名（与audiofile在同一directory，为null表示无笔记file）
+    public ?string $noteFileName = null; // notefile名（与audiofilein同一directory，为null表示无笔记file）
 
-    public ?string $noteFileId = null; // notefileID（用于chatmessage中的filequote）
+    public ?string $noteFileId = null; // notefileID（useatchatmessage中的filequote）
 
-    // presetfileinfo（用于前端write）
+    // presetfileinfo（useat前端write）
     public ?string $presetNoteFileId = null; // preset笔记fileID
 
     public ?string $presetTranscriptFileId = null; // presetstream识别fileID
@@ -59,13 +59,13 @@ class AsrTaskStatusDTO
     public AsrTaskStatusEnum $status = AsrTaskStatusEnum::FAILED;
 
     // 录音status管理field
-    public ?string $modelId = null; // AI modelID，用于自动总结
+    public ?string $modelId = null; // AI modelID，useat自动总结
 
     public ?string $recordingStatus = null; // 录音status：start|recording|paused|stopped
 
-    public bool $sandboxTaskCreated = false; // 沙箱task是否已create
+    public bool $sandboxTaskCreated = false; // 沙箱taskwhether已create
 
-    public bool $isPaused = false; // 是否处于pausestatus（用于timeout判断）
+    public bool $isPaused = false; // whether处atpausestatus（useattimeout判断）
 
     public ?string $sandboxId = null; // 沙箱ID
 
@@ -73,18 +73,18 @@ class AsrTaskStatusDTO
 
     public int $serverSummaryRetryCount = 0; // service端总结触发retrycount
 
-    public bool $serverSummaryLocked = false; // service端总结是否lock定客户端
+    public bool $serverSummaryLocked = false; // service端总结whetherlock定客户端
 
-    // ASR content和笔记（用于generatetitle）
+    // ASR content和笔记（useatgeneratetitle）
     public ?string $asrStreamContent = null; // ASR stream识别content
 
     public ?string $noteContent = null; // 笔记content
 
     public ?string $noteFileType = null; // 笔记filetype（md、txt、json）
 
-    public ?string $language = null; // 语种（zh_CN、en_US等），用于generatetitle时use
+    public ?string $language = null; // 语种（zh_CN、en_USetc），useatgeneratetitle时use
 
-    public ?string $uploadGeneratedTitle = null; // upload-tokens generate的title（用于 summary 复用）
+    public ?string $uploadGeneratedTitle = null; // upload-tokens generate的title（useat summary 复use）
 
     public function __construct(array $data = [])
     {
@@ -137,7 +137,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 从arraycreateDTOobject
+     * fromarraycreateDTOobject
      */
     public static function fromArray(array $data): self
     {
@@ -145,7 +145,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * convert为array（用于storage到Redis）.
+     * convert为array（useatstoragetoRedis）.
      *
      * @return array<string, null|bool|int|string>
      */
@@ -187,7 +187,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * check是否为null（不存在）.
+     * checkwhether为null（not存in）.
      */
     public function isEmpty(): bool
     {
@@ -203,8 +203,8 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * check总结是否已complete（幂等性判断）.
-     * 判断standard：audiofile已merge（audioFileId 存在）且录音已stop.
+     * check总结whether已complete（幂etc性判断）.
+     * 判断standard：audiofile已merge（audioFileId 存in）and录音已stop.
      */
     public function isSummaryCompleted(): bool
     {
@@ -214,7 +214,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 判断service端总结是否对客户端加lock.
+     * 判断service端总结whether对客户端加lock.
      */
     public function hasServerSummaryLock(): bool
     {
@@ -231,7 +231,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 在一次service端总结end后updatestatus.
+     * in一次service端总结end后updatestatus.
      */
     public function finishServerSummaryAttempt(bool $success): void
     {
@@ -242,8 +242,8 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 提取相对于 workspace 的相对path
-     * 如果pathcontain workspace/，提取其后的部分
+     * 提取相对at workspace 的相对path
+     * ifpathcontain workspace/，提取其后的部分
      * 这样can自动修正 Redis 中storage的旧formatdata（完整path）.
      *
      * @param null|string $path originalpath
@@ -255,7 +255,7 @@ class AsrTaskStatusDTO
             return $path;
         }
 
-        // 如果pathcontain workspace/，提取 workspace/ 后面的部分
+        // ifpathcontain workspace/，提取 workspace/ 后面的部分
         if (str_contains($path, 'workspace/')) {
             $parts = explode('workspace/', $path, 2);
             return $parts[1] ?? $path;
@@ -265,7 +265,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 从array中按优先级getstringvalue（support snake_case 和 camelCase）.
+     * fromarray中按优先级getstringvalue（support snake_case 和 camelCase）.
      *
      * @param array<string, mixed> $data dataarray
      * @param array<string> $keys 键名列表（按优先级sort）
@@ -282,7 +282,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 从array中按优先级get整数value（support snake_case 和 camelCase）.
+     * fromarray中按优先级get整数value（support snake_case 和 camelCase）.
      *
      * @param array<string, mixed> $data dataarray
      * @param array<string> $keys 键名列表（按优先级sort）
@@ -299,7 +299,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 从array中按优先级getbooleanvalue（support多种format：true/false、1/0、'1'/'0'）.
+     * fromarray中按优先级getbooleanvalue（support多种format：true/false、1/0、'1'/'0'）.
      *
      * @param array<string, mixed> $data dataarray
      * @param array<string> $keys 键名列表（按优先级sort）
@@ -318,7 +318,7 @@ class AsrTaskStatusDTO
                 return $value;
             }
 
-            // handlestring '1' 或 '0'
+            // handlestring '1' or '0'
             if ($value === '1' || $value === 1) {
                 return true;
             }

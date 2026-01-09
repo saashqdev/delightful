@@ -23,7 +23,7 @@ class CreateDelightfulFileCleanupRecordsTable extends Migration
             $table->string('file_name', 255)->comment('filename');
             $table->unsignedBigInteger('file_size')->default(0)->comment('filesize(字节)');
             $table->string('bucket_type', 20)->default('private')->comment('storage桶type');
-            $table->string('source_type', 50)->comment('来源type(batch_compress,upload_temp等)');
+            $table->string('source_type', 50)->comment('来源type(batch_compress,upload_tempetc)');
             $table->string('source_id', 100)->nullable()->comment('来源ID(optional的业务标识)');
             $table->timestamp('expire_at')->comment('expiretime');
             $table->tinyInteger('status')->default(0)->comment('status:0=待清理,1=已清理,2=清理failed');

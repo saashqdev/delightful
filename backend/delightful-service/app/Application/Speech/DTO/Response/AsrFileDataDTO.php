@@ -11,7 +11,7 @@ use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 
 /**
  * ASR filedata传输object
- * 用于在chatmessage中quotefile.
+ * useatinchatmessage中quotefile.
  */
 readonly class AsrFileDataDTO
 {
@@ -26,7 +26,7 @@ readonly class AsrFileDataDTO
     }
 
     /**
-     * 从 TaskFileEntity create DTO.
+     * from TaskFileEntity create DTO.
      *
      * @param TaskFileEntity $fileEntity taskfile实体
      * @param string $workspaceRelativePath 工作区相对path
@@ -44,7 +44,7 @@ readonly class AsrFileDataDTO
     }
 
     /**
-     * convert为arrayformat，用于chatmessage.
+     * convert为arrayformat，useatchatmessage.
      */
     public function toArray(): array
     {

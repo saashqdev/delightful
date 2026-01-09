@@ -21,7 +21,7 @@ use Hyperf\Codec\Json;
 use InvalidArgumentException;
 
 /**
- * message的contentdetail. 一条message可能被多个session/序列号associate，所以messagecontent是独立的.
+ * message的contentdetail. 一条message可能be多个session/序列号associate，所bymessagecontent是独立的.
  */
 class DelightfulMessageEntity extends AbstractEntity
 {
@@ -30,7 +30,7 @@ class DelightfulMessageEntity extends AbstractEntity
     protected string $senderId = '';
 
     /**
-     * send方type. user:user(ai也被认为是user)，group：group chat，system：系统message，cloud_document：云document，multidimensional_table：多维table格 topic：话题 app：applicationmessage.
+     * send方type. user:user(aialsobe认为是user)，group：group chat，system：系统message，cloud_document：云document，multidimensional_table：多维table格 topic：话题 app：applicationmessage.
      */
     protected ConversationType $senderType;
 
@@ -42,7 +42,7 @@ class DelightfulMessageEntity extends AbstractEntity
     protected string $receiveId = '';
 
     /**
-     * receiveobjecttype. user:user(ai也被认为是user)，group：group chat，system：系统message，cloud_document：云document，multidimensional_table：多维table格 topic：话题 app：applicationmessage.
+     * receiveobjecttype. user:user(aialsobe认为是user)，group：group chat，system：系统message，cloud_document：云document，multidimensional_table：多维table格 topic：话题 app：applicationmessage.
      * @see UserType
      */
     protected ConversationType $receiveType;

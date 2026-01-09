@@ -18,7 +18,7 @@ interface ModeGroupRelationRepositoryInterface
     public function findById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeGroupRelationEntity;
 
     /**
-     * according tomodeIDget所有associate关系.
+     * according tomodeIDget所haveassociate关系.
      * @return ModeGroupRelationEntity[]
      */
     public function findByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;
@@ -40,7 +40,7 @@ interface ModeGroupRelationRepositoryInterface
     public function deleteByGroupId(ModeDataIsolation $dataIsolation, int|string $groupId): bool;
 
     /**
-     * according tomodeIDdelete所有associate关系.
+     * according tomodeIDdelete所haveassociate关系.
      */
     public function deleteByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): bool;
 

@@ -9,7 +9,7 @@ namespace App\Application\Speech\DTO;
 
 /**
  * ASR总结requestDTO
- * save总结request的所有必传和optionalparameter.
+ * save总结request的所have必传和optionalparameter.
  */
 readonly class SummaryRequestDTO
 {
@@ -26,7 +26,7 @@ readonly class SummaryRequestDTO
     }
 
     /**
-     * 是否有fileID（场景二：直接upload已有audiofile）.
+     * whetherhavefileID（场景二：直接upload已haveaudiofile）.
      */
     public function hasFileId(): bool
     {

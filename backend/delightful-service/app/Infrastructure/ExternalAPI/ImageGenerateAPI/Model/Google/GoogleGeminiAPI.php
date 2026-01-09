@@ -70,7 +70,7 @@ class GoogleGeminiAPI
     public function editLocalImage(string $imagePath, string $instructions): array
     {
         if (! file_exists($imagePath)) {
-            throw new Exception("图像file不存在: {$imagePath}");
+            throw new Exception("图像filenot存in: {$imagePath}");
         }
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE);

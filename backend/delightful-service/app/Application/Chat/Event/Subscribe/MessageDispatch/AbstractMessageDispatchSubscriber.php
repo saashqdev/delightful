@@ -25,15 +25,15 @@ use function Hyperf\Support\retry;
 
 /**
  * message分发模块.
- * processdifferent优先级message的consumer,用于写收件方的seq.
+ * processdifferent优先级message的consumer,useat写收件方的seq.
  */
 abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
 {
     protected AmqpTopicType $topic = AmqpTopicType::Message;
 
     /**
-     * 1.本地开发时不start,避免消费了test环境的data,导致test环境的user收不到message
-     * 2.如果本地开发时想debug,请自行在本地搭建前端环境,更换mq的host. 或者申请一个dev环境,隔离mq.
+     * 1.本地开发时notstart,避免消费了test环境的data,导致test环境的user收nottomessage
+     * 2.if本地开发时想debug,请自行in本地搭建前端环境,more换mq的host. or者申请一个dev环境,隔离mq.
      */
     public function isEnable(): bool
     {
@@ -52,7 +52,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
         }
         $conversationId = $data['conversationId'] ?? null;
         // generate收件方的seq
-        $this->logger->info(sprintf('messageDispatch 收到message data:%s', Json::encode($data)));
+        $this->logger->info(sprintf('messageDispatch 收tomessage data:%s', Json::encode($data)));
         $lock = di(LockerInterface::class);
         try {
             if ($conversationId) {
@@ -62,7 +62,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
             }
             foreach ($seqIds as $seqId) {
                 $seqId = (string) $seqId;
-                // 用redis检测seq是否已经尝试多次,如果超过 n 次,则不再push
+                // useredis检测seqwhether已经尝试多次,if超过 n 次,thennotagainpush
                 $seqRetryKey = sprintf('messageDispatch:seqRetry:%s', $seqId);
                 $seqRetryCount = $this->redis->get($seqRetryKey);
                 if ($seqRetryCount >= 3) {
@@ -75,7 +75,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 retry(3, function () use ($seqId, &$userSeqEntity) {
                     $userSeqEntity = $this->delightfulChatSeqRepository->getSeqByMessageId($seqId);
                     if ($userSeqEntity === null) {
-                        // 可能是transaction还未submit,mq已经消费,delayretry
+                        // 可能是transactionalso未submit,mq已经消费,delayretry
                         ExceptionBuilder::throw(ChatErrorCode::SEQ_NOT_FOUND);
                     }
                 }, 100);
@@ -85,8 +85,8 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                     $this->setSeqCanNotRetry($seqRetryKey);
                 }
                 $this->setRequestId($userSeqEntity->getAppMessageId());
-                $this->logger->info(sprintf('messageDispatch 开始分发message seq:%s seqEntity:%s ', $seqId, Json::encode($userSeqEntity->toArray())));
-                // 如果是控制message,check是否是need分发的控制message
+                $this->logger->info(sprintf('messageDispatch start分发message seq:%s seqEntity:%s ', $seqId, Json::encode($userSeqEntity->toArray())));
+                // if是控制message,checkwhether是need分发的控制message
                 if ($userSeqEntity->getSeqType() instanceof ControlMessageType) {
                     $this->delightfulControlMessageAppService->dispatchMQControlMessage($userSeqEntity);
                     $this->setSeqCanNotRetry($seqRetryKey);
@@ -116,7 +116,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessagequality保证模块,如果是service器stress大导致的fail,则放入delayretryqueue,并指数级延长retrytime间隔
+            // todo callmessagequality保证模块,if是service器stress大导致的fail,then放入delayretryqueue,并指数级延长retrytime间隔
             return Result::REQUEUE;
         } finally {
             if (isset($lockKey, $owner)) {

@@ -16,7 +16,7 @@ use DateTime;
 class DelightfulFlowDraftEntity extends AbstractEntity
 {
     /**
-     * 最大record数.
+     * most大record数.
      */
     public const int MAX_RECORD = 50;
 

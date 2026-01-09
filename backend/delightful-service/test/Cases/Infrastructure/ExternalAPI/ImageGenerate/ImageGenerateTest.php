@@ -42,11 +42,11 @@ class ImageGenerateTest extends BaseTest
         }
         $header = $data[0];
         $imageData = $data[1];
-        // check头部是否符合Base64encodingimage的format
+        // check头部whether符合Base64encodingimage的format
         if (! preg_match('/^data:image\/(png|jpeg|jpg|gif);base64$/', $header)) {
             return false;
         }
-        // checkBase64encoding是否valid
+        // checkBase64encodingwhethervalid
         $decodedData = base64_decode($imageData);
         return $decodedData !== false;
     }
@@ -58,7 +58,7 @@ class ImageGenerateTest extends BaseTest
         $uploadFile = new UploadFile($base64, $uploadDir, 'test');
 
         $fileDomainService = di(FileDomainService::class);
-        // uploadfile（指定不自动createdirectory）
+        // uploadfile（指定not自动createdirectory）
         $fileDomainService->uploadByCredential('DT001', $uploadFile);
 
         // generate可access的link
@@ -137,7 +137,7 @@ class ImageGenerateTest extends BaseTest
 
         // createrequest实例
         $gpt4oModelRequest = new GPT4oModelRequest();
-        $gpt4oModelRequest->setPrompt('一只小金毛正在草原上欢快的奔跑');
+        $gpt4oModelRequest->setPrompt('一只小金毛正in草原上欢快的奔跑');
         $gpt4oModelRequest->setGenerateNum(4);
 
         // generateimage
@@ -163,7 +163,7 @@ class ImageGenerateTest extends BaseTest
 
         // createrequest实例
         $gpt4oModelRequest = new GPT4oModelRequest();
-        $gpt4oModelRequest->setPrompt('调整一群女巫手里捧着南瓜在膜拜一个人');
+        $gpt4oModelRequest->setPrompt('调整一群女巫手里捧着南瓜in膜拜一个人');
         $gpt4oModelRequest->setGenerateNum(1);
 
         // set参考image
@@ -202,7 +202,7 @@ class ImageGenerateTest extends BaseTest
         //
         //        // createrequest实例
         //        $qwenImageRequest = new QwenImageModelRequest();
-        //        $qwenImageRequest->setPrompt('一只可爱的小猫咪在花园里玩耍，阳光明媚，色彩丰富，高quality摄影');
+        //        $qwenImageRequest->setPrompt('一只可爱的小猫咪in花园里玩耍，阳光明媚，色彩丰富，高quality摄影');
         //        $qwenImageRequest->setHeight('1328');
         //        $qwenImageRequest->setWidth('1328');
         //        $qwenImageRequest->setGenerateNum(1);

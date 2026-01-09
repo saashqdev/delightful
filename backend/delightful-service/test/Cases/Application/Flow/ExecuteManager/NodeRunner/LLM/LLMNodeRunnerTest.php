@@ -190,7 +190,7 @@ JSON, true));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "# role\r\n你是一位极其专业且富有责任心的访客系统录入员，秉持严谨缜密的态度开展访客系统的重要inforecord工作。\r\n\r\n## 技能\r\n### 技能 1: 精准的info录入\r\n1. 当有访客进行登记时，全面细致地询问并精确record访客姓名、联系方式、来访time等关键info，同时ensure来访time为未来time，且联系方式正常，如 110 这类报警phone不可用。\r\n2. 保证录入info百分之百准确无误且完整无缺。\r\n\r\n### 技能 2: 细致的info核验\r\n1. 录入complete后，仔细check已录入的info，决不容许出现任何error或遗漏。若发现有误，当即更正。若有遗漏，请引导user填写。\r\n2. confirm访客姓名、联系方式、来访timeuser都已经完整填写，按照能直接进行 json_decode 的 json formatoutputdata，如 {\"name\":\"小李\",\"phone\":\"13800138000\",\"time\":\"20240517 15:30\"}，不allow有其他字符。针对非standardformat的来访time，进行format统一convert。\r\n\r\n### 技能 3: 热忱的help供给\r\n1. 倘若访客对登记process存在疑问，务必耐心解答。\r\n2. 给予访客必要的引导和协助。\r\n\r\n## 限制\r\n- 专注handle与访客系统有关的info，不涉及其他事项。\r\n- 严格遵循info的保密性与security性原则。\r\n- 平等公正地对待每一位访客，持续提供高品质service。\r\n\r\n总结：访客系统录入员需专业、严谨、细致、热情，精准录入核验info，提供优质service。^^以上content援引自访客系统相关规定。",
+                    "value": "# role\r\n你是一位极其专业and富have责任心的访客系统录入员，秉持严谨缜密的态度开展访客系统的重要inforecord工作。\r\n\r\n## 技能\r\n### 技能 1: 精准的info录入\r\n1. whenhave访客conduct登记时，all面细致地询问并精确record访客姓名、联系method、来访timeetc关键info，meanwhileensure来访time为未来time，and联系method正常，如 110 这类报警phonenot可use。\r\n2. 保证录入info百分之百准确无误and完整无缺。\r\n\r\n### 技能 2: 细致的info核验\r\n1. 录入complete后，仔细check已录入的info，决not容许出现任何erroror遗漏。若发现have误，when即more正。若have遗漏，请引导user填写。\r\n2. confirm访客姓名、联系method、来访timeuserall已经完整填写，按照能直接conduct json_decode 的 json formatoutputdata，如 {\"name\":\"小李\",\"phone\":\"13800138000\",\"time\":\"20240517 15:30\"}，notallowhave其他字符。针对nonstandardformat的来访time，conductformat统一convert。\r\n\r\n### 技能 3: 热忱的help供给\r\n1. 倘若访客对登记process存in疑问，务必耐心解答。\r\n2. 给予访客必要的引导和协助。\r\n\r\n## 限制\r\n- 专注handle与访客系统have关的info，not涉及其他事项。\r\n- 严格遵循info的保密性与security性原then。\r\n- 平etc公正地对待each一位访客，持续提供高品质service。\r\n\r\n总结：访客系统录入员需专业、严谨、细致、热情，精准录入核验info，提供优质service。^^by上content援引自访客系统相关规定。",
                     "name": "",
                     "args": null
                 }
@@ -308,7 +308,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "你是一个 AI 助手。当userneed资讯当日天气时，call today_weather 来queryresult",
+                    "value": "你是一个 AI 助手。whenuserneed资讯when日天气时，call today_weather 来queryresult",
                     "name": "",
                     "args": null
                 }
@@ -425,7 +425,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "你是一个旅行专家，专门负责随机旅游体验，当user提到要去旅游时，你need先useget_rand_cityget到一个随机city，然后according tocityname同时callget_foods_by_city，get_place_by_city。finalgenerate一个旅游solution",
+                    "value": "你是一个旅行专家，专门负责随机旅游体验，whenuser提to要去旅游时，你need先useget_rand_citygetto一个随机city，然后according tocitynamemeanwhilecallget_foods_by_city，get_place_by_city。finalgenerate一个旅游solution",
                     "name": "",
                     "args": null
                 }
@@ -605,7 +605,7 @@ JSON, true), 'v1');
         $executionData = $this->createExecutionData();
         $executionData->getTriggerData()->addAttachment(new ExternalAttachment('https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/a8eb01e6fc604e8f30521f7e3b4df449.jpeg'));
         $executionData->saveNodeContext('9527', [
-            'content' => '这里面有什么color',
+            'content' => '这里面have什么color',
         ]);
         $runner->execute($vertexResult, $executionData, []);
 
@@ -660,7 +660,7 @@ JSON, true), 'v1');
         $executionData = $this->createExecutionData();
         $executionData->getTriggerData()->addAttachment(new ExternalAttachment('https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/a8eb01e6fc604e8f30521f7e3b4df449.jpeg'));
         $executionData->saveNodeContext('9527', [
-            'content' => '这里面有什么color',
+            'content' => '这里面have什么color',
         ]);
         $runner->execute($vertexResult, $executionData, []);
 

@@ -302,7 +302,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     {
         $authorization = $this->getAuthorization();
 
-        // 批量verify记忆是否属于currentuser
+        // 批量verify记忆whether属atcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             [$memoryId],
             $authorization->getOrganizationCode(),
@@ -310,7 +310,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             $authorization->getId()
         );
 
-        // check是否有不属于user的记忆
+        // checkwhetherhavenot属atuser的记忆
         if (! $allMemoriesBelongToUser) {
             return [
                 'success' => false,
@@ -340,7 +340,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $validatedParams = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
 
-        // 批量verify所有记忆都属于currentuser
+        // 批量verify所have记忆all属atcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             $validatedParams['memory_ids'],
             $authorization->getOrganizationCode(),
@@ -348,7 +348,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             $authorization->getId()
         );
 
-        // check是否有不属于user的记忆
+        // checkwhetherhavenot属atuser的记忆
         if (! $allMemoriesBelongToUser) {
             return [
                 'success' => false,
@@ -381,7 +381,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $validatedParams = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
 
-        // 批量verify所有记忆都属于currentuser
+        // 批量verify所have记忆all属atcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             $validatedParams['memory_ids'],
             $authorization->getOrganizationCode(),
@@ -389,7 +389,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             $authorization->getId()
         );
 
-        // check是否有不属于user的记忆
+        // checkwhetherhavenot属atuser的记忆
         if (! $allMemoriesBelongToUser) {
             return [
                 'success' => false,
@@ -402,7 +402,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $scenarioString = $validatedParams['scenario'] ?? 'admin_panel'; // default为管理后台
         $scenario = MemoryOperationScenario::from($scenarioString);
 
-        // verify当 scenario 是 memory_card_quick 时，delightful_message_id must提供
+        // verifywhen scenario 是 memory_card_quick 时，delightful_message_id must提供
         if ($scenarioString === 'memory_card_quick' && empty($validatedParams['delightful_message_id'])) {
             return [
                 'success' => false,
@@ -423,7 +423,7 @@ class LongTermMemoryAdminApi extends AbstractApi
                     'scenario' => $scenario->value,
                 ];
             }
-            // delete记忆或者拒绝update记忆
+            // delete记忆or者拒绝update记忆
             $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::REJECT, $scenario, $validatedParams['delightful_message_id'] ?? null);
 
             return [
@@ -525,7 +525,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 评估conversationcontent以create记忆.
+     * 评估conversationcontentbycreate记忆.
      */
     public function evaluateConversation(RequestInterface $request): array
     {
@@ -625,7 +625,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * verify记忆所有权.
+     * verify记忆所have权.
      *
      * @param mixed $authorization
      * @return array{success: bool, message?: string}
@@ -652,11 +652,11 @@ class LongTermMemoryAdminApi extends AbstractApi
      */
     private function buildUpdateMemoryDTO(?string $inputContent, ?string $inputPendingContent = null): UpdateMemoryDTO
     {
-        // buildDTO（lengthcheck已在parameterverify阶段complete，且at least有一个field不为空）
+        // buildDTO（lengthcheck已inparameterverify阶段complete，andat leasthave一个fieldnot为空）
         $status = null;
         $explanation = null;
 
-        // 如果update了content，setstatus为ACTIVE
+        // ifupdate了content，setstatus为ACTIVE
         if ($inputContent !== null) {
             $status = MemoryStatus::ACTIVE->value;
             $explanation = trans('long_term_memory.api.user_manual_edit_explanation');

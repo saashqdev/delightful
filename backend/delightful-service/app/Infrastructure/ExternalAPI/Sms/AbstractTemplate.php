@@ -17,12 +17,12 @@ abstract class AbstractTemplate implements TemplateInterface
     protected array $typeToIdMap = [];
 
     /**
-     * according to短信type,进行variable短信的适配,还原整条短信文本content.
+     * according to短信type,conductvariable短信的适配,also原整条短信文本content.
      */
     protected array $typeContents = [];
 
     /**
-     * according totemplateid,进行variable短信的适配,还原整条短信文本content.
+     * according totemplateid,conductvariable短信的适配,also原整条短信文本content.
      */
     protected array $idContents = [];
 
@@ -61,7 +61,7 @@ abstract class AbstractTemplate implements TemplateInterface
             return $messages;
         }
         $variables = [];
-        // template$content中不存在 "${xxx}" 或者 {$xxx) type的字符.则按index顺序匹配
+        // template$content中not存in "${xxx}" or者 {$xxx) type的字符.then按index顺序匹配
         foreach ($matches[1] as $index => $variableKey) {
             if (isset($messages[$variableKey])) {
                 $variables[$variableKey] = $messages[$variableKey];
@@ -91,11 +91,11 @@ abstract class AbstractTemplate implements TemplateInterface
             $sign = $this->getTemplateDefaultSignType($sign);
         }
         if (empty($this->signMap[$sign])) {
-            // signaturetype不存在,直接return
+            // signaturetypenot存in,直接return
             return $sign;
         }
 
-        // 确定signature的语种,need从 user指定语种,user指定兜底语种,系统default的兜底语种 中确定出来一个value
+        // 确定signature的语种,needfrom user指定语种,user指定兜底语种,系统default的兜底语种 中确定出来一个value
         $signLanguage = null;
         // 语种兜底的顺序
         $defaultLanguages = [$language, $defaultLanguage, LanguageEnum::EN_US, LanguageEnum::ZH_CN];
@@ -105,7 +105,7 @@ abstract class AbstractTemplate implements TemplateInterface
                 break;
             }
         }
-        // 如果 $sign 在 $defaultLanguages 不存在value,则给一个typesupport的语种
+        // if $sign in $defaultLanguages not存invalue,then给一个typesupport的语种
         $firstLanguage = null;
         if (isset($this->signMap[$sign]) && is_array($this->signMap[$sign])) {
             $firstLanguage = array_key_first($this->signMap[$sign]);
@@ -115,7 +115,7 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
-     * 当传入的signaturetype不存在时,get短信的defaultsignaturetype.
+     * when传入的signaturetypenot存in时,get短信的defaultsignaturetype.
      */
     abstract protected function getTemplateDefaultSignType(string $sign): string;
 

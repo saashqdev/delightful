@@ -29,7 +29,7 @@ class ImportAgentWithFlowCommand extends HyperfCommand
         $this->container = $container;
         $this->exportImportService = $container->get(DelightfulFlowExportImportAppService::class);
         parent::__construct('agent:import');
-        $this->setDescription('从OSSimport助理（contain主process、tool、子process等）');
+        $this->setDescription('fromOSSimport助理（contain主process、tool、子processetc）');
         $this->addArgument('file_url', InputArgument::REQUIRED, 'export助理datafile的URL');
         $this->addArgument('user_id', InputArgument::REQUIRED, 'userid');
         $this->addArgument('organization_code', InputArgument::REQUIRED, 'organizationencoding');
@@ -52,12 +52,12 @@ class ImportAgentWithFlowCommand extends HyperfCommand
                 return 1;
             }
 
-            // 从importdata中getorganizationcode和userID
+            // fromimportdata中getorganizationcode和userID
             $orgCode = $this->input->getArgument('organization_code');
             $userId = $this->input->getArgument('user_id');
 
             if (empty($orgCode) || empty($userId)) {
-                $this->output->error('importdata中缺少organizationcode或userID');
+                $this->output->error('importdata中缺少organizationcodeoruserID');
                 return 1;
             }
 

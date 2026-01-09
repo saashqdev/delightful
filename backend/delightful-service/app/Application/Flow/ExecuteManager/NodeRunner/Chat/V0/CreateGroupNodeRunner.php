@@ -68,7 +68,7 @@ class CreateGroupNodeRunner extends NodeRunner
         }
         $vertexResult->addDebugLog('group_owner_delightful_id', $groupOwnerInfo->getDelightfulId());
 
-        // 群member，全是user ID
+        // 群member，all是user ID
         $groupMembers = $paramsConfig->getGroupMembers()?->getValue()->getResult($executionData->getExpressionFieldData());
         $groupMemberIds = [];
         foreach ($groupMembers as $groupMember) {
@@ -90,7 +90,7 @@ class CreateGroupNodeRunner extends NodeRunner
         if ($paramsConfig->isIncludeCurrentAssistant()) {
             if ($agentUserId = $executionData->getAgentUserId()) {
                 $groupMemberIds[] = $agentUserId;
-                // 只有 assistant 开启，才will有开场白
+                // only assistant 开启，才willhave开场白
                 $assistantOpeningSpeech = $paramsConfig->getAssistantOpeningSpeech()?->getValue()->getResult($executionData->getExpressionFieldData()) ?? '';
             }
         }
@@ -98,7 +98,7 @@ class CreateGroupNodeRunner extends NodeRunner
         $vertexResult->addDebugLog('group_members', $groupMemberIds);
         $vertexResult->addDebugLog('assistant_opening_speech', $assistantOpeningSpeech);
 
-        // 只有 IM chat才willcreate
+        // only IM chat才willcreate
         if (! $executionData->getExecutionType()->isImChat()) {
             $delightfulGroup = [
                 'group_id' => 'test_group_id',
@@ -110,7 +110,7 @@ class CreateGroupNodeRunner extends NodeRunner
             return;
         }
 
-        // 以 owner 的身份去create
+        // by owner 的身份去create
         $ownerAuthorization = new DelightfulUserAuthorization();
         $ownerAuthorization->setId($groupOwnerInfo->getUserId());
         $ownerAuthorization->setOrganizationCode($groupOwnerInfo->getOrganizationCode());

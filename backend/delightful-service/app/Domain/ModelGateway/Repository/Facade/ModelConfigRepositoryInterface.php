@@ -24,7 +24,7 @@ interface ModelConfigRepositoryInterface
     public function getById(LLMDataIsolation $dataIsolation, string $id): ?ModelConfigEntity;
 
     /**
-     * according toendpoint或typegetmodelconfiguration.
+     * according toendpointortypegetmodelconfiguration.
      */
     public function getByEndpointOrType(LLMDataIsolation $dataIsolation, string $endpointOrType): ?ModelConfigEntity;
 

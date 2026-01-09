@@ -36,7 +36,7 @@ enum InstructType: int
     }
 
     /**
-     * get所有指令type及其国际化tag.
+     * get所have指令type及其国际化tag.
      * @return array<string, int> returntypename和对应的value
      */
     public static function getTypeOptions(): array
@@ -64,23 +64,23 @@ enum InstructType: int
     }
 
     /**
-     * 判断指令type是否needcontentfield.
+     * 判断指令typewhetherneedcontentfield.
      */
     public static function requiresContent(int $type, ?int $displayType = null, ?int $instructionType = null): bool
     {
-        // 如果是process指令，则不可configuration指令content
+        // if是process指令，thennot可configuration指令content
         if ($instructionType == InstructCategory::FLOW) {
             return false;
         }
 
-        // 如果是系统指令，useSystemInstructType的判断
+        // if是系统指令，useSystemInstructType的判断
         if ($displayType === InstructDisplayType::SYSTEM) {
             return SystemInstructType::requiresContent($type);
         }
 
         // 普通指令的判断
         return match (self::fromType($type)) {
-            self::STATUS => false,  // statustype不needcontent
+            self::STATUS => false,  // statustypenotneedcontent
             self::SINGLE_CHOICE, self::SWITCH, self::TEXT => true,  // 其他typeneedcontent
         };
     }
@@ -121,7 +121,7 @@ enum InstructType: int
             }
         }
 
-        // process指令不可configuration send指令检测
+        // process指令not可configuration send指令检测
         if ($instructionType == InstructCategory::FLOW && isset($item['send_directly']) && $item['send_directly']) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.send_directly_only_allow_flow_instruction');
         }
@@ -130,7 +130,7 @@ enum InstructType: int
             $item['id'] = (string) IdGenerator::getSnowId();
         }
 
-        // 如果是普通指令，verifytype
+        // if是普通指令，verifytype
         if (! isset($item['display_type'])) {
             self::fromType((int) $item['type'])->validate($item);
         }
@@ -147,7 +147,7 @@ enum InstructType: int
                 ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.instruct_group_format_invalid');
             }
 
-            // verifygrouptype是否valid
+            // verifygrouptypewhethervalid
             if (! is_numeric($group['position'])) {
                 ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.instruct_group_type_must_be_numeric');
             }
@@ -195,7 +195,7 @@ enum InstructType: int
         }
 
         $totalItems = count($items['values']);
-        // verifystatus项最小quantity
+        // verifystatus项most小quantity
         if ($totalItems < 2) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_items_min_count');
         }
@@ -215,12 +215,12 @@ enum InstructType: int
 
         // verifystatus项
         foreach ($items['values'] as &$item) {
-            // ensure每个status项都有ID
+            // ensureeach个status项allhaveID
             if (! isset($item['id'])) {
                 $item['id'] = (string) IdGenerator::getSnowId();
             }
 
-            // verify每个status项
+            // verifyeach个status项
             $this->validateStatus($item);
         }
     }
@@ -234,9 +234,9 @@ enum InstructType: int
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_select_cannot_be_empty');
         }
 
-        // verify是否直接send指令
+        // verifywhether直接send指令
         if (! isset($item['send_directly'])) {
-            $item['send_directly'] = false;  // default不直接send
+            $item['send_directly'] = false;  // defaultnot直接send
         }
 
         if (! is_bool($item['send_directly'])) {
@@ -268,12 +268,12 @@ enum InstructType: int
      */
     private function validateSwitch(array &$item): void
     {
-        // verifymust存在 on 和 off field
+        // verifymust存in on 和 off field
         if (! array_key_exists('on', $item) || ! array_key_exists('off', $item)) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_switch_fields_missing');
         }
 
-        // verifydefaultvaluemust存在且must 'on' 或 'off'
+        // verifydefaultvaluemust存inandmust 'on' or 'off'
         if (! isset($item['default_value']) || ! in_array($item['default_value'], ['on', 'off'], true)) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_switch_default_value_invalid');
         }
@@ -284,9 +284,9 @@ enum InstructType: int
      */
     private function validateText(array &$item): void
     {
-        // verify是否直接send指令
+        // verifywhether直接send指令
         if (! isset($item['send_directly'])) {
-            $item['send_directly'] = false;  // default不直接send
+            $item['send_directly'] = false;  // defaultnot直接send
         }
 
         if (! is_bool($item['send_directly'])) {

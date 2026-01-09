@@ -39,9 +39,9 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
         if ((bool) env('ENABLE_DELIGHTFUL_WATCHDOG', true) !== true) {
             return;
         }
-        $quantum = 10 * 1000 * 1000; // 单位：毫秒
+        $quantum = 10 * 1000 * 1000; // unit：毫秒
         $logger = ApplicationContext::getContainer()->get(LoggerFactory::class)?->get('DelightfulWatchDogSubscriber');
-        // 看门狗找同阻塞的地方
+        // 看门狗找同阻塞的place
         $logger->info('麦吉看门狗，start！');
         $alertCountMap = new WeakMap();
         Watchdog::run($quantum * 5, 0, static function () use (&$alertCountMap, $logger) {
@@ -58,7 +58,7 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
                     $trace
                 ));
             }
-            // 让出time片，让其他协程有机willexecute
+            // 让出time片，让其他协程have机willexecute
             $millSeconds = 10 * 1000; // 10 毫秒
             usleep($millSeconds * $alertCount);
         });

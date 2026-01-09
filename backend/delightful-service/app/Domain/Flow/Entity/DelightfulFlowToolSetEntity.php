@@ -21,7 +21,7 @@ class DelightfulFlowToolSetEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯一encoding，仅在create时generate，用作给前端的id.
+     * 唯一encoding，仅increate时generate，use作给前端的id.
      */
     protected string $code;
 
@@ -51,7 +51,7 @@ class DelightfulFlowToolSetEntity extends AbstractEntity
     protected DateTime $updatedAt;
 
     /**
-     * 用于冗余tool的information列表.
+     * useat冗余tool的information列表.
      * with query.
      */
     private array $tools = [];

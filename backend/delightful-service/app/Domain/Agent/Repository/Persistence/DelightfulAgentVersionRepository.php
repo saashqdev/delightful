@@ -183,17 +183,17 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
             ->update(['enterprise_release_status' => $status]);
     }
 
-    // according to助理idget最大的 version_number
+    // according to助理idgetmost大的 version_number
     public function getAgentMaxVersion(string $agentId): string
     {
-        // query指定 agent_id 和 user_id 下的最大version号,这里不能用 max 取 version，因为will出现 0.3 greater than 0.10的情况，但是actual是 0.10greater than 0.3
-        // 而version号只能递增，因此用time倒序取first即可
+        // query指定 agent_id 和 user_id 下的most大version号,这里not能use max 取 version，因为will出现 0.3 greater than 0.10的情况，but是actual是 0.10greater than 0.3
+        // 而version号只能递增，thereforeusetime倒序取first即可
         $maxVersion = $this->agentVersionModel::query()
             ->where('root_id', $agentId)
             ->orderByDesc('id')
             ->limit(1)->first();
 
-        // 如果没有找到record，return 0.0 作为defaultvalue
+        // ifnothave找torecord，return 0.0 作为defaultvalue
         if ($maxVersion === null) {
             return '0.0.0';
         }
@@ -203,7 +203,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function deleteByAgentId(string $agentId, string $organizationCode): void
     {
-        // query指定 agent_id 和 user_id 下的最大version号
+        // query指定 agent_id 和 user_id 下的most大version号
         $this->agentVersionModel::query()
             ->where('root_id', $agentId)
             ->where('organization_code', $organizationCode)
@@ -294,8 +294,8 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
      * based on游标paginationget指定organization的助理versionlist.
      * @param string $organizationCode organizationcode
      * @param array $agentVersionIds 助理versionIDlist
-     * @param string $cursor 游标ID，如果为空string则从最新开始
-     * @param int $pageSize 每页quantity
+     * @param string $cursor 游标ID，if为空stringthenfrommost新start
+     * @param int $pageSize each页quantity
      */
     public function getAgentsByOrganizationWithCursor(string $organizationCode, array $agentVersionIds, string $cursor, int $pageSize): array
     {

@@ -19,7 +19,7 @@ return new class extends Migration {
         }
         Schema::create('delightful_contact_accounts', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('delightful_id', 64)->comment('账号id,跨租户(organization)唯一. 为了避免与user_id(organization内唯一)的概念混淆,因此起名了delightful_id')->default('');
+            $table->string('delightful_id', 64)->comment('账号id,跨租户(organization)唯一. 为了避免与user_id(organization内唯一)的概念混淆,therefore起名了delightful_id')->default('');
             // 账号type
             $table->tinyInteger('type')->comment('账号type,0:ai,1:人类')->default(0);
             // ai_code
@@ -45,7 +45,7 @@ return new class extends Migration {
             $table->unique(['country_code', 'phone'], 'unq_country_code_phone');
             $table->timestamps();
             $table->softDeletes();
-            $table->comment('user账号table,recorduser跨organization唯一的info,such as的手机号/真名/性别/usertype等');
+            $table->comment('user账号table,recorduser跨organization唯一的info,such as的手机号/真名/性别/usertypeetc');
         });
     }
 

@@ -137,7 +137,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
             ->where('id', $agentId)
             ->first();
 
-        // 如果queryresult为空，throwexception或return null，according to业务需求process
+        // ifqueryresult为空，throwexceptionorreturn null，according to业务需求process
         if (! $agent) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_not_exist');
         }
@@ -259,7 +259,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     /**
      * 分批get助理list.
      * @param int $offset 偏移量
-     * @param int $limit 每批quantity
+     * @param int $limit each批quantity
      * @return array 助理list
      */
     public function getAgentsByBatch(int $offset, int $limit): array
@@ -278,7 +278,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * query企业下的所有助理,条件query：status，create人，search.
+     * query企业下的所have助理,条件query：status，create人，search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
@@ -294,7 +294,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
         }
 
         if ($queryPageAgentDTO->getQuery()) {
-            // name或者description
+            // nameor者description
             $query->where('robot_name', 'like', "%{$queryPageAgentDTO->getQuery()}%")
                 ->orWhere('robot_description', 'like', "%{$queryPageAgentDTO->getQuery()}%");
         }
@@ -316,7 +316,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
         }
 
         if ($queryPageAgentDTO->getQuery()) {
-            // name或者description
+            // nameor者description
             $query->where('robot_name', 'like', "%{$queryPageAgentDTO->getQuery()}%")
                 ->orWhere('robot_description', 'like', "%{$queryPageAgentDTO->getQuery()}%");
         }
@@ -328,7 +328,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * get企业下的所有助理create者.
+     * get企业下的所have助理create者.
      * @return array<string>
      */
     public function getOrganizationAgentsCreators(string $organizationCode): array

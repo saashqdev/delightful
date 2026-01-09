@@ -9,6 +9,6 @@ namespace App\Domain\Group\Entity\ValueObject;
 
 enum GroupLimitEnum: int
 {
-    // 普通group chat最大人数限制
+    // 普通group chatmost大人数限制
     case NormalGroup = 1000;
 }

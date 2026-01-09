@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_chat_sequences', function (Blueprint $table) {
-            // checkdeleted_atfield是否存在，if不存在则添加软deletefield
+            // checkdeleted_atfieldwhether存in，ifnot存inthen添加软deletefield
             if (! Schema::hasColumn('delightful_chat_sequences', 'deleted_at')) {
                 $table->softDeletes()->comment('软deletion time');
             }
@@ -28,7 +28,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('delightful_chat_sequences', function (Blueprint $table) {
-            // 回滚时deletedeleted_atfield（仅在field存在时）
+            // 回滚时deletedeleted_atfield（仅infield存in时）
             if (Schema::hasColumn('delightful_chat_sequences', 'deleted_at')) {
                 $table->dropSoftDeletes();
             }

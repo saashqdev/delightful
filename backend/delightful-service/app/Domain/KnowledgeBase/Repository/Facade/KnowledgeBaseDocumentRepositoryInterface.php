@@ -73,7 +73,7 @@ interface KnowledgeBaseDocumentRepositoryInterface
     public function destroy(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void;
 
     /**
-     * according todocumentencodingdelete所有片段.
+     * according todocumentencodingdelete所have片段.
      */
     public function destroyFragmentsByDocumentCode(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void;
 

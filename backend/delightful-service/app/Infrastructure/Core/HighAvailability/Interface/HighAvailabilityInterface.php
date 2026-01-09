@@ -46,11 +46,11 @@ interface HighAvailabilityInterface
     public function getAvailableEndpoint(EndpointRequestDTO $request): ?EndpointDTO;
 
     /**
-     * record接入点的response并自动processsuccess/failedstatus，以及用于后续的dataanalyze。
+     * record接入点的response并自动processsuccess/failedstatus，by及useat后续的dataanalyze。
      *
      * 该method将:
      * 1. recordrequeststatisticsdata
-     * 2. according torequestsuccess或failedstatus自动触发熔断器feedback
+     * 2. according torequestsuccessorfailedstatus自动触发熔断器feedback
      *
      * @param EndpointResponseDTO $response 接入点response实体
      */

@@ -299,8 +299,8 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 内部setenablestatus（不进行业务rulecheck）.
-     * 用于datainitialize和内部操作，skip业务rule限制.
+     * 内部setenablestatus（notconduct业务rulecheck）.
+     * useatdatainitialize和内部操作，skip业务rule限制.
      */
     public function setEnabledInternal(bool $enabled): void
     {
@@ -386,7 +386,7 @@ final class LongTermMemoryEntity extends AbstractEntity
         ++$this->reinforcementCount;
         $this->lastReinforcedAt = new DateTime();
 
-        // 强化will提升重要性，但有上限
+        // 强化will提升重要性，buthave上限
         $this->importance = min(1.0, $this->importance + 0.1);
     }
 
@@ -417,7 +417,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 移除tag.
+     * 移excepttag.
      */
     public function removeTag(string $tag): void
     {
@@ -441,11 +441,11 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * override set method，对 enabled field进行特殊process.
+     * override set method，对 enabled fieldconduct特殊process.
      */
     protected function set(string $key, mixed $value): void
     {
-        // enabled field在initialize时use内部method，skip业务rulecheck
+        // enabled fieldininitialize时use内部method，skip业务rulecheck
         if (strtolower($key) === 'enabled' && is_bool($value)) {
             $this->setEnabledInternal($value);
             return;
@@ -465,7 +465,7 @@ final class LongTermMemoryEntity extends AbstractEntity
 
         $daysSinceLastAccess = (new DateTime())->diff($this->lastAccessedAt)->days;
 
-        // according toaccesstime计算衰减，at most衰减到 0.5
+        // according toaccesstime计算衰减，at most衰减to 0.5
         return max(0.5, 1.0 - ($daysSinceLastAccess * 0.01));
     }
 

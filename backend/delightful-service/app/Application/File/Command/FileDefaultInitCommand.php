@@ -48,13 +48,13 @@ class FileDefaultInitCommand extends Command
         $this->fileDomainService = $this->container->get(FileDomainService::class);
         $this->defaultFileDomainService = $this->container->get(DefaultFileDomainService::class);
 
-        // get公有桶configuration
+        // get公have桶configuration
         $publicBucketConfig = config('cloudfile.storages.' . StorageBucketType::Public->value);
-        $this->line('公有桶configuration：' . json_encode($publicBucketConfig, JSON_UNESCAPED_UNICODE));
+        $this->line('公have桶configuration：' . json_encode($publicBucketConfig, JSON_UNESCAPED_UNICODE));
 
-        // 如果是 local 驱动，不needinitialize
+        // if是 local 驱动，notneedinitialize
         if ($publicBucketConfig['adapter'] === 'local') {
-            $this->info('本地驱动，不needinitialize');
+            $this->info('本地驱动，notneedinitialize');
             return;
         }
 
@@ -65,7 +65,7 @@ class FileDefaultInitCommand extends Command
     }
 
     /**
-     * initialize所有file.
+     * initialize所havefile.
      */
     protected function initFiles(): void
     {
@@ -75,9 +75,9 @@ class FileDefaultInitCommand extends Command
         $baseFileDir = BASE_PATH . '/storage/files';
         $defaultModulesDir = $baseFileDir . '/DELIGHTFUL/open/default';
 
-        // checkdefault模块directory是否存在
+        // checkdefault模块directorywhether存in
         if (! is_dir($defaultModulesDir)) {
-            $this->error('default模块directory不存在: ' . $defaultModulesDir);
+            $this->error('default模块directorynot存in: ' . $defaultModulesDir);
             return;
         }
 
@@ -85,22 +85,22 @@ class FileDefaultInitCommand extends Command
         $skippedFiles = 0;
         $organizationCode = CloudFileRepository::DEFAULT_ICON_ORGANIZATION_CODE;
 
-        // get所有模块directory
+        // get所have模块directory
         $moduleDirs = array_filter(glob($defaultModulesDir . '/*'), 'is_dir');
 
         if (empty($moduleDirs)) {
-            $this->warn('没有找到任何模块directory');
+            $this->warn('nothave找to任何模块directory');
             return;
         }
 
         $this->line('handle模块file:');
 
-        // 遍历每个模块directory
+        // 遍历each个模块directory
         foreach ($moduleDirs as $moduleDir) {
             $moduleName = basename($moduleDir);
 
             try {
-                // 尝试将模块名mapping到对应的业务type
+                // 尝试将模块名mappingto对应的业务type
                 $businessType = $this->mapModuleToBusinessType($moduleName);
 
                 if ($businessType === null) {
@@ -110,26 +110,26 @@ class FileDefaultInitCommand extends Command
 
                 $this->line("  - handle模块: {$moduleName} (业务type: {$businessType->value})");
 
-                // get该模块directory下的所有file
+                // get该模块directory下的所havefile
                 $files = array_filter(glob($moduleDir . '/*'), 'is_file');
 
                 if (empty($files)) {
-                    $this->line('    - 没有找到任何file');
+                    $this->line('    - nothave找to任何file');
                     continue;
                 }
 
                 $fileCount = 0;
 
-                // handle每个file
+                // handleeach个file
                 foreach ($files as $filePath) {
                     $fileName = basename($filePath);
                     $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
                     $fileSize = filesize($filePath);
 
-                    // generate业务唯一标识（用于重复check）
+                    // generate业务唯一标识（useat重复check）
                     $businessIdentifier = $moduleName . '/' . $fileName;
 
-                    // correct的重复check：querysame业务type下是否有same的业务标识
+                    // correct的重复check：querysame业务type下whetherhavesame的业务标识
                     $existingFiles = $this->defaultFileDomainService->getByOrganizationCodeAndBusinessType($businessType, $organizationCode);
                     $isDuplicate = false;
                     foreach ($existingFiles as $existingFile) {
@@ -154,7 +154,7 @@ class FileDefaultInitCommand extends Command
                         $mimeType = mime_content_type($filePath) ?: 'image/png';
                         $base64Content = 'data:' . $mimeType . ';base64,' . base64_encode($fileContent);
 
-                        // 完全参考 ImageWatermarkProcessor 的success做法，但指定file名
+                        // 完all参考 ImageWatermarkProcessor 的success做法，but指定file名
                         $uploadFile = new UploadFile($base64Content, 'default-files', $fileName);
                         $this->fileDomainService->uploadByCredential(
                             $organizationCode,
@@ -162,9 +162,9 @@ class FileDefaultInitCommand extends Command
                             StorageBucketType::Public
                         );
 
-                        // 立即validatefile是否可get（关键validate步骤）
+                        // 立即validatefilewhether可get（关键validate步骤）
                         $actualKey = $uploadFile->getKey();
-                        // 从 key 中提取organizationencoding，参考 ProviderAppService 的correct做法
+                        // from key 中提取organizationencoding，参考 ProviderAppService 的correct做法
                         $keyOrganizationCode = substr($actualKey, 0, strpos($actualKey, '/'));
                         $fileLink = $this->fileDomainService->getLink($keyOrganizationCode, $actualKey, StorageBucketType::Public);
                         if (! $fileLink || ! $fileLink->getUrl()) {
@@ -187,7 +187,7 @@ class FileDefaultInitCommand extends Command
                         ++$fileCount;
                     } catch (Exception $e) {
                         $this->error("  - handlefile {$fileName} fail: {$e->getMessage()}");
-                        continue; // 不影响后续filehandle
+                        continue; // not影响后续filehandle
                     }
                 }
 
@@ -198,14 +198,14 @@ class FileDefaultInitCommand extends Command
             }
         }
 
-        // 同时handleoriginal的default图标file（如果need的话）
+        // meanwhilehandleoriginal的default图标file（ifneed的话）
         $this->processDefaultIcons($baseFileDir, $organizationCode, $totalFiles, $skippedFiles);
 
-        $this->info("fileinitializecomplete，共handle {$totalFiles} 个file，skip {$skippedFiles} 个已存在的file");
+        $this->info("fileinitializecomplete，共handle {$totalFiles} 个file，skip {$skippedFiles} 个已存in的file");
     }
 
     /**
-     * 将模块名mapping到对应的业务type.
+     * 将模块名mappingto对应的业务type.
      */
     protected function mapModuleToBusinessType(string $moduleName): ?DefaultFileBusinessType
     {
@@ -213,7 +213,7 @@ class FileDefaultInitCommand extends Command
         try {
             return DefaultFileBusinessType::from($moduleName);
         } catch (ValueError) {
-            // 如果直接mappingfail，尝试passname匹配
+            // if直接mappingfail，尝试passname匹配
             return match (strtolower($moduleName)) {
                 'service_provider', 'serviceprovider', 'service-provider' => DefaultFileBusinessType::SERVICE_PROVIDER,
                 'flow', 'workflow' => DefaultFileBusinessType::FLOW,
@@ -228,7 +228,7 @@ class FileDefaultInitCommand extends Command
      */
     protected function processDefaultIcons(string $baseFileDir, string $organizationCode, int &$totalFiles, int &$skippedFiles): void
     {
-        // 如果有need单独handle的default图标，can在这里implement
-        // for examplehandle Midjourney 等default图标
+        // ifhaveneed单独handle的default图标，canin这里implement
+        // for examplehandle Midjourney etcdefault图标
     }
 }

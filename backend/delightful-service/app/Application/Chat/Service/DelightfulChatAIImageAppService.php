@@ -70,7 +70,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     {
         $referContent = $this->getReferContentForAIImage($reqDTO->getReferMessageId());
         $referText = $this->getReferTextByContentForAIImage($referContent);
-        // 如果是图生图，则size保持和originalimagesize一致
+        // if是图生图，thensize保持和originalimagesize一致
         if ($referContent instanceof AIImageCardMessage || $referContent instanceof ImageConvertHighCardMessage) {
             // setactualrequest的size和比例
             $radio = $referContent->getRadio() ?? Radio::OneToOne->value;
@@ -169,7 +169,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     }
 
     /**
-     * 将fileupload到云端.
+     * 将fileuploadto云端.
      */
     #[ArrayShape([['file_id' => 'string', 'url' => 'string']])]
     private function uploadFiles(RequestContext $requestContext, array $attachments): array
@@ -244,7 +244,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
         ?string $id,
         AIImageCardResponseType $type,
         array $content,
-        // streamresponse，拿到客户端传来的 app_message_id ，作为response时候的唯一标识
+        // streamresponse，拿to客户端传来的 app_message_id ，作为responsetime的唯一标识
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

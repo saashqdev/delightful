@@ -64,7 +64,7 @@ class ToolsExecutor extends AbstractTool
                 continue;
             }
 
-            // 这里就should检测 systeminput
+            // 这里thenshould检测 systeminput
             $customSystemInput = $optionTool->getCustomSystemInput()?->getFormComponent()?->getForm()?->getKeyValue($executionData->getExpressionFieldData()) ?? [];
 
             $tool = new ToolsExecutor();
@@ -161,7 +161,7 @@ class ToolsExecutor extends AbstractTool
                 return null;
             }
             $toolsExecutor->execute();
-            // 节点内部的exception在 node 的 debug information中record
+            // 节点内部的exceptionin node 的 debug information中record
             foreach ($toolFlow->getNodes() as $node) {
                 if ($node->getNodeDebugResult() && ! $node->getNodeDebugResult()->isSuccess()) {
                     $logger->warning(

@@ -24,12 +24,12 @@ function processConfigValue(&$value): void
             $value = env($parts[0], $parts[0]);
         }
     } elseif (is_array($value)) {
-        // arraytype：递归handle每个元素，保留array结构
+        // arraytype：递归handleeach个元素，保留array结构
         foreach ($value as &$item) {
             processConfigValue($item);
         }
     }
-    // 其他type（如 int, bool 等）：保留原value，不进行parse
+    // 其他type（如 int, bool etc）：保留原value，notconductparse
 }
 
 // handleconfiguration中的环境variable
@@ -205,7 +205,7 @@ if (env('AWS_CLAUDE_ENABLED', false)) {
     ];
 }
 
-// loaddefaultmodelconfiguration（优先级最低）
+// loaddefaultmodelconfiguration（优先级most低）
 $models = [];
 
 // loaddefaultmodelconfiguration
@@ -214,7 +214,7 @@ foreach ($envModelConfigs as $modelKey => $config) {
     $models[$modelKey] = $config;
 }
 
-// load odin_models.json configuration（优先级更高，willoverridedefaultconfiguration）
+// load odin_models.json configuration（优先级more高，willoverridedefaultconfiguration）
 if (file_exists(BASE_PATH . '/odin_models.json')) {
     $customModels = json_decode(file_get_contents(BASE_PATH . '/odin_models.json'), true);
     if (is_array($customModels)) {
@@ -248,10 +248,10 @@ return [
             'custom_error_mapping_rules' => [],
             'logging' => [
                 // logfield白名单configuration
-                // 如果为nullarray或未configuration，则打印所有field
-                // 如果configuration了field列表，则只打印指定的field
+                // if为nullarrayor未configuration，then打印所havefield
+                // ifconfiguration了field列表，then只打印指定的field
                 // support嵌套field，use点语法如 'args.messages'
-                // 注意：messages 和 tools field不在白名单中，不will被打印
+                // 注意：messages 和 tools fieldnotin白名单中，notwillbe打印
                 'whitelist_fields' => [
                     // 基本requestinfo
                     'request_id',                  // requestID
@@ -279,14 +279,14 @@ return [
                     'usage.output_tokens',         // outputtokenquantity
                     'usage.total_tokens',          // 总tokenquantity
 
-                    // requestparameter（排除敏感content）
+                    // requestparameter（排except敏感content）
                     'args.temperature',            // 温度parameter
-                    'args.max_tokens',             // 最大token限制
-                    'args.max_completion_tokens',             // 最大token限制
+                    'args.max_tokens',             // most大token限制
+                    'args.max_completion_tokens',             // most大token限制
                     'args.top_p',                  // Top-pparameter
                     'args.top_k',                  // Top-kparameter
                     'args.frequency_penalty',      // frequency惩罚
-                    'args.presence_penalty',       // 存在惩罚
+                    'args.presence_penalty',       // 存in惩罚
                     'args.stream',                 // streamresponse标志
                     'args.stop',                   // stop词
                     'args.seed',                   // 随机种子
@@ -296,14 +296,14 @@ return [
                     'token_estimate.input_tokens', // 估算inputtokens
                     'token_estimate.output_tokens', // 估算outputtokens
 
-                    // responsecontent（排除具体content）
-                    'choices.0.finish_reason',     // complete原因
+                    // responsecontent（排exceptspecificcontent）
+                    'choices.0.finish_reason',     // completereason
                     'choices.0.index',             // 选择索引
 
                     // errorinfo
                     'error',                       // errordetail
                     'error.type',                  // errortype
-                    'error.message',               // errormessage（不contain具体content）
+                    'error.message',               // errormessage（notcontainspecificcontent）
 
                     // 其他元data
                     'created',                     // createtime戳
@@ -312,22 +312,22 @@ return [
                     'system_fingerprint',         // 系统指纹
                     'performance_flag',            // performancemark（慢request标识）
 
-                    // 注意：以下field被排除，不will打印
+                    // 注意：by下fieldbe排except，notwill打印
                     // - args.messages (usermessagecontent)
                     // - args.tools (tool定义)
                     // - choices.0.message (responsemessagecontent)
                     // - choices.0.delta (streamresponse增量content)
                     // - content (responsecontent)
                 ],
-                // 是否enablefield白名单filter，defaulttrue（enablefilter）
+                // whetherenablefield白名单filter，defaulttrue（enablefilter）
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
-                // 最大stringlength限制，超过此length的string将被替换为 [Long Text]，setting为 0 表示不限制
+                // most大stringlength限制，超过此length的string将be替换为 [Long Text]，setting为 0 表示not限制
                 'max_text_length' => env('ODIN_LOG_MAX_TEXT_LENGTH', 0),
             ],
             'network_retry_count' => 1,
         ],
         'models' => $models,
-        // 全局model options，可被model本身的 options override
+        // all局model options，可bemodel本身的 options override
         'model_options' => [
             'error_mapping_rules' => [
                 // example：customizeerrormapping

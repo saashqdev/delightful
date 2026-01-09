@@ -83,14 +83,14 @@ class StartNodeParamsConfig extends NodeParamsConfig
             $systemOutput = null;
             $customSystemOutput = null;
             $config = $branch['config'] ?? [];
-            // 可同时选择多种方式触发，所以他的入参和出参放到这里来process
+            // 可meanwhile选择多种method触发，所by他的入参和出参放to这里来process
             switch ($triggerType) {
                 case TriggerType::ChatMessage:
                     $output = $this->getChatMessageOutputTemplate();
                     break;
                 case TriggerType::OpenChatWindow:
                     $output = $this->getOpenChatWindowOutputTemplate();
-                    // 如果有下游节点，那么间隔time就不能为空
+                    // ifhave下游节点，那么间隔timethennot能为空
                     if (! empty($nextNodes) && ! empty($branch['config'])) {
                         // 秒
                         $interval = $branch['config']['interval'] ?? 0;
@@ -151,7 +151,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     $output = $this->getRoutineOutputTemplate();
                     break;
                 case TriggerType::LoopStart:
-                    // 循环开始节点，不needconfiguration
+                    // 循环start节点，notneedconfiguration
                     break;
                 default:
                     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'flow.node.start.unsupported_trigger_type', ['trigger_type' => $triggerType->name]);
@@ -165,7 +165,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
             $list[] = $branchStructure->toArray();
         }
 
-        // 这俩parameter没有用了
+        // 这俩parameternothaveuse了
         $this->node->setInput(null);
         $this->node->setOutput(null);
 

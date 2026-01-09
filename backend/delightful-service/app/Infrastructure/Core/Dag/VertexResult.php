@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\Dag;
 class VertexResult
 {
     /**
-     * storageneed被调度的子节点.
+     * storageneedbe调度的子节点.
      * @var array<string>
      */
     protected array $childrenIds = [];
@@ -22,7 +22,7 @@ class VertexResult
 
     /**
      * storage节点的noteinformation.
-     * 可用于一些logrecord之类的.
+     * 可useat一些logrecord之类的.
      */
     protected mixed $remarkData = null;
 

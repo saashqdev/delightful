@@ -47,7 +47,7 @@ class HistoryMessageStoreNodeRunner extends NodeRunner
         // if是资源类的data，那么need提前upload了
         $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
-        // 由于里面will进行重命名，所以这里直接get对应的name传入进去
+        // 由at里面willconduct重命名，所by这里直接get对应的name传入进去
         $linkPaths = array_map(function (AbstractAttachment $attachment) {
             return $attachment->getPath();
         }, $attachments);

@@ -57,7 +57,7 @@ class DelightfulFlowVersionDomainService extends AbstractDomainService
     {
         $version = $this->delightfulFlowVersionRepository->getByFlowCodeAndCode($dataIsolation, $flowCode, $versionCode);
         if (! $version) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$versionCode} 不存在");
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$versionCode} not存in");
         }
         return $version;
     }
@@ -90,7 +90,7 @@ class DelightfulFlowVersionDomainService extends AbstractDomainService
     {
         $version = $this->delightfulFlowVersionRepository->getByFlowCodeAndCode($dataIsolation, $delightfulFlow->getCode(), $versionCode);
         if (! $version) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$versionCode} 不存在");
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "{$versionCode} not存in");
         }
 
         $delightfulFlow->prepareForPublish($version, $dataIsolation->getCurrentUserId());

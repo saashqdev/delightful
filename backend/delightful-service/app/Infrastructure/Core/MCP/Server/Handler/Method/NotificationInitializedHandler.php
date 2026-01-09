@@ -16,7 +16,7 @@ class NotificationInitializedHandler extends AbstractMethodHandler
 {
     /**
      * processnotifyinitializerequest.
-     * 不needreturndata.
+     * notneedreturndata.
      */
     public function handle(MessageInterface $request): ?array
     {

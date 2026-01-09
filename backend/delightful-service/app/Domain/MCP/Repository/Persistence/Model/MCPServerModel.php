@@ -20,8 +20,8 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $name MCPservicename
  * @property string $description MCPservicedescription
  * @property string $icon MCPservice图标
- * @property string $type servicetype ('sse' 或 'stdio')
- * @property bool $enabled 是否enable
+ * @property string $type servicetype ('sse' or 'stdio')
+ * @property bool $enabled whetherenable
  * @property string $external_sse_url 外部SSEserviceURL
  * @property null|array $service_config serviceconfiguration
  * @property string $creator create者

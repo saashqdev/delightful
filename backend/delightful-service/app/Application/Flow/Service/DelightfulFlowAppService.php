@@ -166,7 +166,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_support', ['label' => 'type']);
                 // no break
             case Type::Sub:
-                // 仅get具有permission的子process
+                // 仅get具havepermission的子process
                 $subResources = $this->operationPermissionAppService->getResourceOperationByUserIds(
                     $permissionDataIsolation,
                     ResourceType::SubFlowCode,
@@ -178,7 +178,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
                 $query->setSelect(['id', 'code', 'name', 'description', 'icon', 'type', 'tool_set_id', 'enabled', 'version_code', 'organization_code', 'created_uid', 'created_at', 'updated_uid', 'updated_at', 'deleted_at']);
                 break;
             case Type::Tools:
-                // need具有该tool集的读permission
+                // need具have该tool集的读permission
                 if (empty($query->getToolSetId())) {
                     break;
                     //                    ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'tool_set_id']);
@@ -255,7 +255,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         )[$authorization->getId()] ?? [];
         $toolSetIds = array_keys($toolSetResources);
 
-        // 再filter一下enable的tool集
+        // againfilter一下enable的tool集
         $toolSetQuery = new DelightfulFlowToolSetQuery();
         $toolSetQuery->setCodes($toolSetIds);
         $toolSetQuery->setEnabled(true);
@@ -314,7 +314,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
                 $toolSetData['list'][] = $builtInToolSet->generateToolSet();
                 foreach ($builtInToolSet->getTools() as $builtInTool) {
-                    // 私有tool，need有高级图像convertURIpermission才能显示
+                    // 私havetool，needhave高级图像convertURIpermission才能显示
                     if ($builtInTool->getCode() === 'ai_image_image_convert_high'
                         && ! PermissionChecker::mobileHasPermission($authorization->getMobile(), SuperPermissionEnum::FLOW_ADMIN)
                     ) {
@@ -350,7 +350,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             $toolResult['list'][] = $builtInTool->generateToolFlow($dataIsolation->getCurrentOrganizationCode());
         }
 
-        // 挂载到tool上面
+        // 挂载totool上面
         foreach ($toolResult['list'] as $tool) {
             $index = array_search($tool->getToolSetId(), $toolSetIds);
             if ($index === false) {
@@ -365,7 +365,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             $toolSetData['list'][$index]->addTool($toolInfo);
         }
 
-        // filter掉没有任何tool的tool集
+        // filter掉nothave任何tool的tool集
         $toolSetData['list'] = array_filter($toolSetData['list'], fn (DelightfulFlowToolSetEntity $toolSet) => ! empty($toolSet->getTools()));
         $toolSetData['total'] = count($toolSetData['list']);
 

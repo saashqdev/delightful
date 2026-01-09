@@ -62,11 +62,11 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
     {
         // property一定要是小驼峰！not supported其他format！
         $humpKey = $this->getCamelizeValueFromCache($key);
-        // 判断property是否存在，避免call不存在的property时，死循环触发 __get method
+        // 判断propertywhether存in，避免callnot存in的property时，死循环触发 __get method
         if (! property_exists($this, $humpKey)) {
             return null;
         }
-        // php 的method不区分size写
+        // php 的methodnot区分size写
         $methodName = 'get' . $humpKey;
         if (method_exists($this, $methodName)) {
             return $this->{$methodName}($humpKey);
@@ -78,11 +78,11 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
     {
         // property一定要是小驼峰！not supported其他format！
         $humpKey = $this->getCamelizeValueFromCache($key);
-        // 判断property是否存在，避免call不存在的property时，死循环触发 __set method
+        // 判断propertywhether存in，避免callnot存in的property时，死循环触发 __set method
         if (! property_exists($this, $humpKey)) {
             return;
         }
-        // php 的method不区分size写
+        // php 的methodnot区分size写
         $methodName = 'set' . $humpKey;
         if (method_exists($this, $methodName)) {
             $this->{$methodName}($value);

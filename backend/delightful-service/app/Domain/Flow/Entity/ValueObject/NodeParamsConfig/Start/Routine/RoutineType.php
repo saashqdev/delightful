@@ -10,32 +10,32 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Start\Routine;
 enum RoutineType: string
 {
     /**
-     * 不重复.
+     * not重复.
      */
     case NoRepeat = 'no_repeat';
 
     /**
-     * 每天重复.
+     * each天重复.
      */
     case DailyRepeat = 'daily_repeat';
 
     /**
-     * 每周重复.
+     * each周重复.
      */
     case WeeklyRepeat = 'weekly_repeat';
 
     /**
-     * 每月重复.
+     * each月重复.
      */
     case MonthlyRepeat = 'monthly_repeat';
 
     /**
-     * 每年重复.
+     * each年重复.
      */
     case AnnuallyRepeat = 'annually_repeat';
 
     /**
-     * 每个工作日重复.
+     * each个工作日重复.
      */
     case WeekdayRepeat = 'weekday_repeat';
 

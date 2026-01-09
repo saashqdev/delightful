@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace HyperfTest\Cases\Application\Flow\BuiltIn\ToolSet\InternetSearch\Tools;
 
 /*
- * 本file属于灯塔engine版权所有，泄漏必究。
+ * 本file属at灯塔engine版权所have，泄漏必究。
  */
 use App\Application\Flow\ExecuteManager\NodeRunner\NodeRunnerFactory;
 use App\Domain\Flow\Entity\ValueObject\Node;
@@ -83,8 +83,8 @@ class InternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
             "use_deep_search": {
                 "type": "boolean",
                 "key": "use_deep_search",
-                "title": "是否enable深度search",
-                "description": "是否enable深度search",
+                "title": "whetherenable深度search",
+                "description": "whetherenable深度search",
                 "required": null,
                 "value": {
                     "type": "const",
@@ -191,7 +191,7 @@ JSON, true));
 互联网search助手
 
 ## process
-call`internet_search`进行search，如果userhint词有`深度search`四个字，则use_deep_searchset为true，否则set为false
+call`internet_search`conductsearch，ifuserhint词have`深度search`四个字，thenuse_deep_searchset为true，否thenset为false
 
 MARKDOWN,
 

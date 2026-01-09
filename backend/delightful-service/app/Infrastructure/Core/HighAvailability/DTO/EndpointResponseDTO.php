@@ -33,7 +33,7 @@ class EndpointResponseDTO extends AbstractDTO
     protected int $requestLength;
 
     /**
-     * responseconsume的time，单位：毫秒.
+     * responseconsume的time，unit：毫秒.
      */
     protected int $responseTime;
 
@@ -48,7 +48,7 @@ class EndpointResponseDTO extends AbstractDTO
     protected int $businessStatusCode;
 
     /**
-     * 是否requestsuccess
+     * whetherrequestsuccess
      */
     protected int $isSuccess = 0;
 

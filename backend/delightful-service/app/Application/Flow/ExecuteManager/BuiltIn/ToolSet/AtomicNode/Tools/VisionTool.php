@@ -41,7 +41,7 @@ class VisionTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '提供视觉能力。用于识别user对image的意图，并return识别result';
+        return '提供视觉能力。useat识别user对image的意图，并return识别result';
     }
 
     /**
@@ -70,7 +70,7 @@ class VisionTool extends AbstractBuiltInTool
             $node->setParams([
                 'model' => $model,
                 'system_prompt' => $this->createSystemPrompt(),
-                // 不再具有 user，直接采用自行group装的 messages
+                // notagain具have user，直接采use自行group装的 messages
                 'messages' => $this->createMessages($executionData, $params),
                 'user_prompt' => ComponentFactory::generateTemplate(StructureType::Value),
                 'model_config' => [
@@ -116,7 +116,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "string",
             "key": "model",
             "title": "model",
-            "description": "可用model。非必填",
+            "description": "可usemodel。non必填",
             "required": null,
             "value": null,
             "encryption": false,
@@ -231,26 +231,26 @@ JSON, true)));
     {
         return ComponentFactory::fastCreate([
             'type' => StructureType::Value,
-            'structure' => Value::buildConst('你是一个专业的视觉理解助理，请按照以下步骤回应user：
+            'structure' => Value::buildConst('你是一个专业的视觉理解助理，请按照by下步骤回应user：
 
 1. 优先理解user的意图，始终use与usersame的语言回答
-2. 提供简洁明了的直接回答，直接满足user的主要issue
-3. 再对imagecontent进行多维度详细analyze，include但不限于：
-   - 主体content识别：人物、物体、场景、文字等
-   - 视觉特征：color、构图、光线、quality等
-   - 语义info：activity、情绪、关系、背景故事等
-   - 文字识别：如有文字，准确提取并理解含义
-   - 技术info：如有图table/data，analyze其含义
+2. 提供简洁明了的直接回答，直接满足user的mainissue
+3. again对imagecontentconduct多维度详细analyze，includebutnot限at：
+   - 主体content识别：人物、物体、场景、文字etc
+   - 视觉特征：color、构图、光线、qualityetc
+   - 语义info：activity、情绪、关系、背景故事etc
+   - 文字识别：如have文字，准确提取并理解含义
+   - 技术info：如have图table/data，analyze其含义
    
 4. analyzeformat要求：
-   - 对于重要analyzeresult，use结构化JSONformat呈现，如：{"类别":"xx", "主体":"xx", "特征":["xx","xx"]}
-   - 对于不确定content，明确table明推测性质，for example："可能是..."
-   - 如imagequality较低，指出限制因素并尽力analyze
-   - 对于多图analyze，分别markimage序号进行parse，并总结其associate性
+   - 对at重要analyzeresult，use结构化JSONformat呈现，如：{"类别":"xx", "主体":"xx", "特征":["xx","xx"]}
+   - 对atnot确定content，明确table明推测性质，for example："可能是..."
+   - 如imagequalitymore低，指出限制因素并尽力analyze
+   - 对at多图analyze，分别markimage序号conductparse，并总结其associate性
    
 5. 注意事项：
    - 避免对敏感content做主观评判
-   - 当无法确定某部分content时，坦诚table达不确定性
+   - when无法确定some部分content时，坦诚table达not确定性
    - 保持客观专业的语气'),
         ]);
     }

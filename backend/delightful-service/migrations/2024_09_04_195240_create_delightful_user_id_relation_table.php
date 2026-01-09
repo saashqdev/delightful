@@ -23,10 +23,10 @@ return new class extends Migration {
             $table->string('relation_value', 64)->comment('id对应的associatetype的value')->default('');
             // 确定唯一value,防conflict
             $table->unique(['id_type', 'id_value', 'relation_type', 'relation_value'], 'unq_id_relation');
-            // 便于按organization/application等查找所有associate的user
+            // 便at按organization/applicationetc查找所haveassociate的user
             $table->index(['relation_type', 'relation_value'], 'idx_relation');
             $table->index(['user_id'], 'idx_user_id');
-            $table->comment('useridassociate表. record user_id 与 open_id/union_id等的associate');
+            $table->comment('useridassociate表. record user_id 与 open_id/union_idetc的associate');
             $table->datetimes();
             $table->softDeletes();
         });

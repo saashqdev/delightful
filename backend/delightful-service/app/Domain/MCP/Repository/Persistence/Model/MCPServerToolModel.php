@@ -21,7 +21,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $rel_code associate的toolcode
  * @property string $rel_version_code associate的toolversioncode
  * @property string $version toolversion
- * @property bool $enabled 是否enable
+ * @property bool $enabled whetherenable
  * @property array $options toolconfiguration
  * @property array $rel_info associate的information
  * @property string $creator create者

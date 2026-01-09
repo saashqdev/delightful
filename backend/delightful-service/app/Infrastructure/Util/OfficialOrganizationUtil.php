@@ -22,7 +22,7 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * 判断是否为官方organization.
+     * 判断whether为官方organization.
      */
     public static function isOfficialOrganization(string $organizationCode): bool
     {
@@ -30,7 +30,7 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * getcontain官方organization在内的organizationencodingarray.
+     * getcontain官方organizationin内的organizationencodingarray.
      * @param string $currentOrganizationCode when前organizationencoding
      * @return array 去重后的organizationencodingarray
      */
@@ -41,7 +41,7 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * check官方organizationencoding是否已configuration.
+     * check官方organizationencodingwhether已configuration.
      */
     public static function hasOfficialOrganization(): bool
     {

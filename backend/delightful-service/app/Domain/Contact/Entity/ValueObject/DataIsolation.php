@@ -12,13 +12,13 @@ use App\Infrastructure\Core\AbstractObject;
 
 /**
  * data隔离 SaaS化
- * 目前仅有organization隔离
- * 显式传入，防止隐式传入，导致不知道哪些地方need做隔离.
+ * 目前仅haveorganization隔离
+ * 显式传入，防止隐式传入，导致not知道哪些placeneed做隔离.
  */
 class DataIsolation extends AbstractObject
 {
     /**
-     * when前的账号id. 所有账号统一注意privacy保护,不对第third-partyreturn.
+     * when前的账号id. 所have账号统一注意privacy保护,not对第third-partyreturn.
      */
     protected string $currentDelightfulId = '';
 

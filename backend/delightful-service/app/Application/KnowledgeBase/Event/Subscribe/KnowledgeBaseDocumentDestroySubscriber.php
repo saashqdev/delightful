@@ -46,7 +46,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
         $knowledge = $event->knowledgeBaseEntity;
         $document = $event->knowledgeBaseDocumentEntity;
         $dataIsolation = $event->dataIsolation;
-        // if是基础knowledge basetype，则传knowledge basecreate者，避免permission不足
+        // if是基础knowledge basetype，then传knowledge basecreate者，避免permissionnot足
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }
@@ -59,7 +59,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
 
         $knowledgeBaseEntity = $knowledgeBaseDomainService->show($dataIsolation, $document->getKnowledgeBaseCode());
 
-        // 这里needdelete所有片段，在deletedocument
+        // 这里needdelete所have片段，indeletedocument
         $query = new KnowledgeBaseFragmentQuery()->setDocumentCode($document->getCode());
         /** @var KnowledgeBaseFragmentEntity[][] $fragments */
         $fragments = [];

@@ -38,7 +38,7 @@ readonly class OCRService
         $ocrClient = $this->clientFactory->getClient($type);
         try {
             $result = retry(1, function () use ($ocrClient, $url) {
-                // 如果还有其他service商，这里can故障转移
+                // ifalsohave其他service商，这里can故障转移
                 return $this->get($url, $ocrClient);
             }, 1000);
         } catch (Throwable $throwable) {
@@ -57,7 +57,7 @@ readonly class OCRService
         // 定义 Redis cache键
         $cacheKey = 'file_cache:' . md5($url);
 
-        // 尝试从cachegetdata
+        // 尝试fromcachegetdata
         $cachedData = $this->cache->get($cacheKey);
         if ($cachedData) {
             $cachedData = Json::decode($cachedData);
@@ -76,7 +76,7 @@ readonly class OCRService
             throw new RuntimeException("无法get头info: {$url}");
         }
 
-        // 提取 `Last-Modified`、`ETag` 和 `Content-Length`（如果存在）
+        // 提取 `Last-Modified`、`ETag` 和 `Content-Length`（if存in）
         $lastModified = $headers['Last-Modified'] ?? null;
         $etag = $headers['Etag'] ?? null;
         $contentLength = $headers['Content-Length'] ?? null;
@@ -89,18 +89,18 @@ readonly class OCRService
             if ($lastModified && $etag) {
                 $isCacheValid = $cachedData['Last-Modified'] === $lastModified && $cachedData['Etag'] === $etag;
             }
-            // 如果没有 Last-Modified 或 ETag，check Content-Length
+            // ifnothave Last-Modified or ETag，check Content-Length
             elseif ($contentLength) {
                 $isCacheValid = $cachedData['Content-Length'] === $contentLength;
             }
 
-            // 如果cachedatavalid，直接returncachecontent
+            // ifcachedatavalid，直接returncachecontent
             if ($isCacheValid) {
                 return $cachedData['content'];
             }
         }
 
-        // call OCR service进行process
+        // call OCR serviceconductprocess
         $result = $OCRClient->ocr($url);
 
         // updatecachedata

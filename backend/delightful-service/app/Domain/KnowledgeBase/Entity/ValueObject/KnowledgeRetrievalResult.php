@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 /**
  * knowledge base检索resultvalueobject.
  *
- * 统一table示从different检索method（语义检索、全文检索、图检索等）return的知识片段
+ * 统一table示fromdifferent检索method（语义检索、all文检索、图检索etc）return的知识片段
  */
 class KnowledgeRetrievalResult extends AbstractValueObject
 {
@@ -22,7 +22,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     public const string TYPE_SEMANTIC = 'semantic';
 
     /**
-     * 全文检索type.
+     * all文检索type.
      */
     public const string TYPE_FULLTEXT = 'fulltext';
 
@@ -57,14 +57,14 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     private array $metadata = [];
 
     /**
-     * type（semantic, fulltext, graph, hybrid等）.
+     * type（semantic, fulltext, graph, hybridetc）.
      */
     private string $type = self::TYPE_SEMANTIC;
 
     private float $score = 0;
 
     /**
-     * 从knowledge base片段实体create检索result.
+     * fromknowledge base片段实体create检索result.
      *
      * @param string $id 唯一标识符
      * @param string $content content
@@ -90,7 +90,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 从图datacreate检索result.
+     * from图datacreate检索result.
      *
      * @param string $id 唯一标识符
      * @param string $content content
@@ -217,7 +217,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * check是否为语义检索type.
+     * checkwhether为语义检索type.
      */
     public function isSemantic(): bool
     {
@@ -225,7 +225,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * check是否为全文检索type.
+     * checkwhether为all文检索type.
      */
     public function isFulltext(): bool
     {
@@ -233,7 +233,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * check是否为图检索type.
+     * checkwhether为图检索type.
      */
     public function isGraph(): bool
     {
@@ -241,7 +241,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * check是否为混合检索type.
+     * checkwhether为混合检索type.
      */
     public function isHybrid(): bool
     {

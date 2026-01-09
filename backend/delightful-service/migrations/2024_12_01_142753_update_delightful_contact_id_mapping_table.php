@@ -38,7 +38,7 @@ return new class extends Migration {
             $table->softDeletes();
             $table->index(['new_id', 'mapping_type'], 'new_id_mapping_type');
             $table->unique(['delightful_organization_code', 'third_platform_type', 'mapping_type', 'origin_id'], 'unique_origin_id_mapping_type');
-            $table->comment('department、user、null间encoding等的mapping关系record');
+            $table->comment('department、user、null间encodingetc的mapping关系record');
         });
     }
 

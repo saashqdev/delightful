@@ -18,7 +18,7 @@ enum MemoryCategory: string
     case PROJECT = 'project';
 
     /**
-     * 全局记忆 - 不特定于某个project的记忆.
+     * all局记忆 - not特定atsome个project的记忆.
      */
     case GENERAL = 'general';
 
@@ -29,7 +29,7 @@ enum MemoryCategory: string
     {
         return match ($this) {
             self::PROJECT => 'project记忆',
-            self::GENERAL => '全局记忆',
+            self::GENERAL => 'all局记忆',
         };
     }
 

@@ -159,7 +159,7 @@ class AsrApi
                     'action_performed' => 'merged_and_created',
                     'source_path' => null,
                 ],
-                'note_file' => null, // default为 null，table示笔记file为空或不存在
+                'note_file' => null, // default为 null，table示笔记file为空ornot存in
             ],
             'deleted_files' => [],
             'operations' => [
@@ -169,26 +169,26 @@ class AsrApi
             ],
         ];
 
-        // 如果有笔记fileconfiguration且filesize > 0，添加到return中（模拟真实沙箱的笔记filecontentcheck）
+        // ifhave笔记fileconfigurationandfilesize > 0，添加toreturn中（模拟真实沙箱的笔记filecontentcheck）
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
-            // userequest中提供的 target_path，而不是硬encodingfile名
+            // userequest中提供的 target_path，而not是硬encodingfile名
             // 这样cancorrectsupport国际化的file名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 
-            // 模拟真实沙箱行为：只有当笔记file有content时才return详细info
-            // 这里simplifyprocess，default假设有content（真实沙箱willcheckfilecontent是否为空）
+            // 模拟真实沙箱行为：onlywhen笔记filehavecontent时才return详细info
+            // 这里simplifyprocess，default假设havecontent（真实沙箱willcheckfilecontentwhether为空）
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
                 'path' => $noteFilePath, // userequest中的 target_path
-                'size' => 256, // 模拟有content的filesize
+                'size' => 256, // 模拟havecontent的filesize
                 'duration' => null,
                 'action_performed' => 'renamed_and_moved',
                 'source_path' => $noteFileConfig['source_path'] ?? '',
             ];
         }
 
-        // 如果有stream识别fileconfiguration，recorddelete操作
+        // ifhavestream识别fileconfiguration，recorddelete操作
         if ($transcriptFileConfig !== null && isset($transcriptFileConfig['source_path'])) {
             $responseData['deleted_files'][] = [
                 'path' => $transcriptFileConfig['source_path'],

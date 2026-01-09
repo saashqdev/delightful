@@ -19,7 +19,7 @@ use App\Infrastructure\Util\Text\TextPreprocess\ValueObject\TextPreprocessRule;
 class TextPreprocessUtil
 {
     /**
-     * according to文本预processrule进行预process.
+     * according to文本预processruleconduct预process.
      * @param array<TextPreprocessRule> $rules
      */
     public static function preprocess(array $rules, string $text): string
@@ -36,7 +36,7 @@ class TextPreprocessUtil
             $text
         );
 
-        // 将FORMAT_EXCELrule放到array前面
+        // 将FORMAT_EXCELrule放toarray前面
         $excelSheetLineRemoveRule = array_filter($rules, fn (TextPreprocessRule $rule) => $rule === TextPreprocessRule::FORMAT_EXCEL);
         $otherRules = array_filter(
             $rules,

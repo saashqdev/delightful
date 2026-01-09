@@ -32,7 +32,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯一encoding，仅在create时generate，用作给前端的id.
+     * 唯一encoding，仅increate时generate，use作给前端的id.
      */
     protected string $code;
 
@@ -59,7 +59,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $toolSetId = '';
 
     /**
-     * 仅前端need，process编排放到 node 节点configuration的 next_nodes 中.
+     * 仅前端need，process编排放to node 节点configuration的 next_nodes 中.
      */
     protected array $edges;
 
@@ -107,7 +107,7 @@ class DelightfulFlowEntity extends AbstractEntity
     private int $userOperation = 0;
 
     /**
-     * process的callbackfunction，如果有该value，那么将直接execute该选择，而不是passNodeRunner来execute.
+     * process的callbackfunction，ifhave该value，那么将直接execute该选择，而not是passNodeRunner来execute.
      */
     private ?Closure $callback = null;
 
@@ -180,7 +180,7 @@ class DelightfulFlowEntity extends AbstractEntity
     {
         $this->enabled = ! $this->enabled;
         if ($this->enabled) {
-            // 如果是要开启，need检测是否有 nodes configuration
+            // if是要开启，need检测whetherhave nodes configuration
             if (empty($this->nodes)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
             }
@@ -238,14 +238,14 @@ class DelightfulFlowEntity extends AbstractEntity
             }
 
             if ($node->isStart() && ! $node->getParentId()) {
-                // 如果已经有一个了，那么是error的process，出现了多个开始节点
+                // if已经have一个了，那么是error的process，出现了多个start节点
                 if ($this->startNode) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.only_one');
                 }
                 $this->startNode = $node;
             }
             if ($node->isEnd() && ! $node->getParentId()) {
-                // 多个结束节点时，暂时取first，should要做成只能有一个结束节点
+                // 多个end节点时，暂时取first，should要做成只能have一个end节点
                 if (! $this->endNode) {
                     $this->endNode = $node;
                 }
@@ -299,7 +299,7 @@ class DelightfulFlowEntity extends AbstractEntity
                 $result['error_information'] = $nodeDebugResult->getErrorMessage();
             }
             if ($node->isEnd() && $nodeDebugResult && $nodeDebugResult->hasExecute()) {
-                // result优先，如果已经存在，则不need了
+                // result优先，if已经存in，thennotneed了
                 if (empty($result)) {
                     $result = $nodeDebugResult->getOutput() ?? [];
                 }
@@ -674,12 +674,12 @@ class DelightfulFlowEntity extends AbstractEntity
         }
 
         if ($this->type === Type::Tools) {
-            // name只能contain 字母、数字、下划线
+            // name只能contain 字母、number、下划线
             if (! preg_match('/^[a-zA-Z0-9_]+$/', $this->name)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.tool.name.invalid_format');
             }
             // todo 要唯一
-            // todo 内置tool名allow被use
+            // todo 内置tool名allowbeuse
         }
     }
 

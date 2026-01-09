@@ -38,7 +38,7 @@ abstract class AbstractProviderModelRepository extends AbstractRepository
         if ($modelEntity->getId() === null) {
             $modelEntity->setId(IdGenerator::getSnowId());
         }
-        // checktimefield是否为null
+        // checktimefieldwhether为null
         if ($modelEntity->getCreatedAt() === null || $modelEntity->getUpdatedAt() === null) {
             $modelEntity->setCreatedAt(new DateTime());
             $modelEntity->setUpdatedAt(new DateTime());

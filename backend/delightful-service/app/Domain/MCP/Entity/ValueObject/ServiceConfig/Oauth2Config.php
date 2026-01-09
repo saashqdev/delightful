@@ -15,7 +15,7 @@ use App\Infrastructure\Util\SSRF\SSRFUtil;
 class Oauth2Config extends AbstractValueObject
 {
     /**
-     * Client ID - 客户端ID，是application在authorizationservice器中的唯一标识符。
+     * Client ID - 客户端ID，是applicationinauthorizationservice器中的唯一标识符。
      * authorizationservice器pass客户端ID来识别different的三方application。
      *
      * createOAuthapplication时will分配client_id，本exampleinput
@@ -24,15 +24,15 @@ class Oauth2Config extends AbstractValueObject
     protected string $clientId = '';
 
     /**
-     * Client Secret - 客户端key，和客户端ID配合use，用于authapplication的身份。
-     * ensure只有authorization的applicationcanrequestpermission。
+     * Client Secret - 客户端key，和客户端ID配合use，useatauthapplication的身份。
+     * ensureonlyauthorization的applicationcanrequestpermission。
      *
      * createOAuthapplication时will分配client_secret，本exampleinput 8jmSATwI*********
      */
     protected string $clientSecret = '';
 
     /**
-     * Client URL - service方的OAuthpageURL，用于拼接userloginauthorization页的URL。
+     * Client URL - service方的OAuthpageURL，useat拼接userloginauthorization页的URL。
      *
      * userlogin时，扣子will将user引导至"[client_url]?response_type=code&client_id=
      * [client_id]&scope=[scope]&state=xyz123&redirect_uri=[coze平台的callbacksecurity地址]"。
@@ -53,7 +53,7 @@ class Oauth2Config extends AbstractValueObject
      * Authorization URL - getuseraccess_token的URL地址。
      *
      * userpassclient_urlauthorizationsuccess后，三方servicewillreturnusergettoken的code，
-     * 并转至callback地址。此时，service器提供方willpass对应data向authorization_url发起request，
+     * 并转至callback地址。此时，service器提供方willpass对应datatoauthorization_url发起request，
      * getuser的access_token。
      *
      * 参考service方的authorizationdocumentgetauthorization_url，本example参考扣子开发guidedocument，input
@@ -62,7 +62,7 @@ class Oauth2Config extends AbstractValueObject
     protected string $authorizationUrl = '';
 
     /**
-     * Authorization Content Type - 向OAuth提供者senddata的contenttype。
+     * Authorization Content Type - toOAuth提供者senddata的contenttype。
      * 目前仅supportapplication/jsontype。
      */
     protected string $authorizationContentType = 'application/json';

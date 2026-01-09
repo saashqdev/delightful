@@ -76,7 +76,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     /**
      * 检索configuration.
      *
-     * contain检索strategy、检索method、重sortconfiguration等parameter
+     * contain检索strategy、检索method、重sortconfigurationetcparameter
      */
     protected ?RetrieveConfig $retrieveConfig = null;
 
@@ -121,16 +121,16 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function prepareForCreation(): void
     {
         if (empty($this->name)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basename 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basename not能为空');
         }
         if (empty($this->type)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basetype 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basetype not能为空');
         }
         if (empty($this->organizationCode)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'organizationencoding 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'organizationencoding not能为空');
         }
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 not能为空');
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
@@ -156,10 +156,10 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function prepareForModification(KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void
     {
         if (empty($this->name)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basename 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basename not能为空');
         }
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 not能为空');
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
@@ -186,13 +186,13 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function prepareForModifyProcess(KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void
     {
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 not能为空');
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
         }
         if ($this->completedNum > $this->expectedNum) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '已completequantity不能greater thanexpectquantity');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '已completequantitynot能greater thanexpectquantity');
         }
         $delightfulFlowKnowledgeEntity->setExpectedNum($this->expectedNum);
         $delightfulFlowKnowledgeEntity->setCompletedNum($this->completedNum);
@@ -204,7 +204,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     {
         $driver = VectorStoreDriver::tryFrom($this->vectorDB);
         if ($driver === null) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "向量database [{$this->vectorDB}] 不存在");
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "to量database [{$this->vectorDB}] not存in");
         }
         return $driver->get();
     }
@@ -515,9 +515,9 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     }
 
     /**
-     * get或create检索configuration.
+     * getorcreate检索configuration.
      *
-     * 如果检索configuration不存在，则createdefaultconfiguration
+     * if检索configurationnot存in，thencreatedefaultconfiguration
      */
     public function getOrCreateRetrieveConfig(): RetrieveConfig
     {
@@ -603,7 +603,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     private function checkModel(): void
     {
         if (empty($this->model)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'model 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'model not能为空');
         }
     }
 

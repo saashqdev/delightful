@@ -45,7 +45,7 @@ class BeAgentExtra extends AbstractDTO
     protected ?string $queueId;
 
     /**
-     * 动态parameter（用于向沙箱传递额外parameter，如 task_key 等）.
+     * 动态parameter（useatto沙箱传递额外parameter，如 task_key etc）.
      */
     protected ?array $dynamicParams;
 

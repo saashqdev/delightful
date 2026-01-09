@@ -31,7 +31,7 @@ class ResponseMiddleware implements MiddlewareInterface
         'api-key',
     ];
 
-    // 指定的 uri 不打印request和responsedetail
+    // 指定的 uri not打印request和responsedetail
     private array $desensitizeUris = [
         '/conversation/chatCompletions',
         '/message',
@@ -59,7 +59,7 @@ class ResponseMiddleware implements MiddlewareInterface
         $path = $request->getUri()->getPath();
         if (! in_array($path, $this->ignoreUris, true)) {
             // 提前recordrequestlog、request url、request头
-            $this->logger->info('request跟踪开始', [
+            $this->logger->info('request跟踪start', [
                 'url' => $request->getRequestTarget(),
                 'method' => $request->getMethod(),
                 'headers' => $this->desensitizeRequestHeaders($request->getHeaders()),
@@ -122,7 +122,7 @@ class ResponseMiddleware implements MiddlewareInterface
             'parsed_body' => $parsedBody,
         ];
         $responseBody = $errorResponse ?? $response;
-        // greater than 5K 的data不record
+        // greater than 5K 的datanotrecord
         if (strlen($responseBody) > 5 * 1024) {
             $responseBody = 'ResponseBodyIsTooLarge';
         }

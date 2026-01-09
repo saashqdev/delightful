@@ -21,7 +21,7 @@ enum InternationalPhoneCodeEnum: string
     case CHINA = '86';
 
     /**
-     * 所有国际区号.
+     * 所have国际区号.
      * @return string[]
      */
     public static function InternationalCodes(): array
@@ -287,8 +287,8 @@ enum InternationalPhoneCodeEnum: string
     }
 
     /**
-     * allow向这些国家send短信.
-     * 中国号码不allowuse国际短信interface进行send
+     * allowto这些国家send短信.
+     * 中国号码notallowuse国际短信interfaceconductsend
      */
     public static function allowCountryCodes(): array
     {
@@ -303,7 +303,7 @@ enum InternationalPhoneCodeEnum: string
     }
 
     /**
-     * 去掉手机号的"+"号,以及可能存在的"-","00".
+     * 去掉手机号的"+"号,by及可能存in的"-","00".
      * @example +8613104871111
      * @example +86-13104871111
      * @example +0086-13104871111
@@ -315,7 +315,7 @@ enum InternationalPhoneCodeEnum: string
     }
 
     /**
-     * 判断是否非中国手机号.
+     * 判断whethernon中国手机号.
      */
     public static function isInternationalPhone(string $phone): bool
     {

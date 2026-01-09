@@ -15,29 +15,29 @@ use App\Infrastructure\Core\AbstractDTO;
 class UpdateSubAdminRequestDTO extends AbstractDTO
 {
     /**
-     * rolename（optional，仅在needupdate时提供）.
+     * rolename（optional，仅inneedupdate时提供）.
      */
     public ?string $name = null;
 
     /**
-     * rolestatus：0=disable, 1=enable（optional，仅在needupdate时提供）.
+     * rolestatus：0=disable, 1=enable（optional，仅inneedupdate时提供）.
      */
     public ?int $status = null;
 
     /**
-     * permissiontag，用于前端展示category（optional，仅在needupdate时提供）.
+     * permissiontag，useat前端展示category（optional，仅inneedupdate时提供）.
      */
     public ?array $permissionTag = null;
 
     /**
-     * permission键list（optional，仅在needupdate时提供）.
-     * 注意：如果提供了此field，将替换所有现有permission.
+     * permission键list（optional，仅inneedupdate时提供）.
+     * 注意：if提供了此field，将替换所have现havepermission.
      */
     public ?array $permissions = null;
 
     /**
-     * userIDlist（optional，仅在needupdate时提供）.
-     * 注意：如果提供了此field，将替换所有现有userassociate.
+     * userIDlist（optional，仅inneedupdate时提供）.
+     * 注意：if提供了此field，将替换所have现haveuserassociate.
      */
     public ?array $userIds = null;
 
@@ -92,7 +92,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
     }
 
     /**
-     * check是否有needupdate的field.
+     * checkwhetherhaveneedupdate的field.
      */
     public function hasUpdates(): bool
     {
@@ -108,7 +108,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
      */
     public function validate(): bool
     {
-        // verifyrolename（如果提供）
+        // verifyrolename（if提供）
         if ($this->name !== null) {
             if (empty(trim($this->name))) {
                 return false;
@@ -119,12 +119,12 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
             }
         }
 
-        // verifystatusvalue（如果提供）
+        // verifystatusvalue（if提供）
         if ($this->status !== null && ! in_array($this->status, [0, 1])) {
             return false;
         }
 
-        // verifypermissionlist（如果提供）
+        // verifypermissionlist（if提供）
         if ($this->permissions !== null) {
             foreach ($this->permissions as $permission) {
                 if (! is_string($permission)) {
@@ -133,7 +133,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
             }
         }
 
-        // verifyuserIDlist（如果提供）
+        // verifyuserIDlist（if提供）
         if ($this->userIds !== null) {
             foreach ($this->userIds as $userId) {
                 if (! is_string($userId)) {
@@ -154,16 +154,16 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
 
         if ($this->name !== null) {
             if (empty(trim($this->name))) {
-                $errors[] = 'rolename不能为空';
+                $errors[] = 'rolenamenot能为空';
             }
 
             if (strlen($this->name) > 255) {
-                $errors[] = 'rolenamelength不能超过255个字符';
+                $errors[] = 'rolenamelengthnot能超过255个字符';
             }
         }
 
         if ($this->status !== null && ! in_array($this->status, [0, 1])) {
-            $errors[] = 'rolestatusvalueinvalid，只能是0或1';
+            $errors[] = 'rolestatusvalueinvalid，只能是0or1';
         }
 
         if ($this->permissions !== null) {
@@ -186,7 +186,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
     }
 
     /**
-     * get所有已set的updatefield.
+     * get所have已set的updatefield.
      */
     public function getUpdateFields(): array
     {

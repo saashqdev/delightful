@@ -49,12 +49,12 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.message.type_error')]
     case MESSAGE_TYPE_ERROR = 3010;
 
-    // session不存在
+    // sessionnot存in
         // Conversation not found
     #[ErrorMessage('chat.conversation.not_found')]
     case CONVERSATION_NOT_FOUND = 3011;
 
-    // 收件方不存在
+    // 收件方not存in
         // Receiver not found
     #[ErrorMessage('chat.user.receive_not_found')]
     case RECEIVER_NOT_FOUND = 3012;
@@ -69,22 +69,22 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.context.lost')]
     case CONTEXT_LOST = 3014;
 
-    // quotemessage不存在
+    // quotemessagenot存in
         // Referenced message not found
     #[ErrorMessage('chat.refer_message.not_found')]
     case REFER_MESSAGE_NOT_FOUND = 3015;
 
-    // 话题不存在
+    // 话题not存in
         // Topic not found
     #[ErrorMessage('chat.topic.not_found')]
     case TOPIC_NOT_FOUND = 3016;
 
-    // 话题的message不存在
+    // 话题的messagenot存in
         // Topic message not found
     #[ErrorMessage('chat.topic.message.not_found')]
     case TOPIC_MESSAGE_NOT_FOUND = 3017;
 
-    // message序列不存在
+    // message序列not存in
         // Message sequence not found
     #[ErrorMessage('chat.seq.not_found')]
     case SEQ_NOT_FOUND = 3018;
@@ -104,7 +104,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.create_error')]
     case GROUP_CREATE_ERROR = 3021;
 
-    // group chat不存在
+    // group chatnot存in
         // Group not found
     #[ErrorMessage('chat.group.not_found')]
     case GROUP_NOT_FOUND = 3022;
@@ -114,17 +114,17 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.message.delivery_failed')]
     case MESSAGE_DELIVERY_FAILED = 3023;
 
-    // 所有user已经在群里中
+    // 所haveuser已经in群里中
         // All users are already in the group
     #[ErrorMessage('chat.group.user_already_in_group')]
     case USER_ALREADY_IN_GROUP = 3024;
 
-    // 请sendmessage后再use智能重命名feature
+    // 请sendmessage后againuse智能重命名feature
         // Send a message before using smart rename
     #[ErrorMessage('chat.topic.send_message_and_rename_topic')]
     case SEND_MESSAGE_AND_RENAME_TOPIC = 3025;
 
-    // user不存在
+    // usernot存in
         // User not found
     #[ErrorMessage('chat.user.not_found')]
     case USER_NOT_FOUND = 3026;
@@ -134,37 +134,37 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.update_error')]
     case GROUP_UPDATE_ERROR = 3027;
 
-    // 没有usercan从group chat中移除
+    // nothaveusercanfromgroup chat中移except
         // No users can be removed from the group
     #[ErrorMessage('chat.group.no_user_to_remove')]
     case GROUP_NO_USER_TO_REMOVE = 3028;
 
-    // 不能踢出群主
+    // not能踢出群主
         // Cannot remove the group owner
     #[ErrorMessage('chat.group.group_cannot_kick_owner')]
     case GROUP_CANNOT_KICK_OWNER = 3029;
 
-    // 请先转让群主再exitgroup chat
+    // 请先转让群主againexitgroup chat
         // Transfer ownership before leaving the group
     #[ErrorMessage('chat.group.transfer_owner_before_leave')]
     case GROUP_TRANSFER_OWNER_BEFORE_LEAVE = 3030;
 
-    // 只有群主才能解散group chat
+    // only群主才能解散group chat
         // Only the owner can disband the group
     #[ErrorMessage('chat.group.only_owner_can_disband')]
     case GROUP_ONLY_OWNER_CAN_DISBAND = 3031;
 
-    // 只有群主才能转让group
+    // only群主才能转让group
         // Only the owner can transfer the group
     #[ErrorMessage('chat.group.only_owner_can_transfer')]
     case GROUP_ONLY_OWNER_CAN_TRANSFER = 3032;
 
-    // session已被delete
+    // session已bedelete
         // Conversation has been deleted
     #[ErrorMessage('chat.conversation.deleted')]
     case CONVERSATION_DELETED = 3033;
 
-    // department不存在
+    // departmentnot存in
         // Department not found
     #[ErrorMessage('chat.department.not_found')]
     case DEPARTMENT_NOT_FOUND = 3034;
@@ -179,7 +179,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.operation.failed')]
     case OPERATION_FAILED = 3036;
 
-    // message中的file不存在
+    // message中的filenot存in
         // File in message not found
     #[ErrorMessage('chat.file.not_found')]
     case FILE_NOT_FOUND = 3037;
@@ -237,12 +237,12 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.conversation.organization_code_empty')]
     case CONVERSATION_ORGANIZATION_CODE_EMPTY = 3101;
 
-    // user还未create账号
+    // useralso未create账号
         // User has not created an account
     #[ErrorMessage('chat.user.not_create_account')]
     case USER_NOT_CREATE_ACCOUNT = 3102;
 
-    // authorization 不legal
+    // authorization notlegal
         // Authorization is invalid
     #[ErrorMessage('chat.authorization.invalid')]
     case AUTHORIZATION_INVALID = 3103;

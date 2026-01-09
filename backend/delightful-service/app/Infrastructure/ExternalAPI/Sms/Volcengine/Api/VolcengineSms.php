@@ -39,7 +39,7 @@ class VolcengineSms extends VolcengineApi
     protected Template $template;
 
     /**
-     * sendverify码,火山的verify码短信not supported传入指定的数字.
+     * sendverify码,火山的verify码短信not supported传入指定的number.
      */
     public function request(string $phone, array $templateVariables, SignEnum $sign, string $templateId): SendResult
     {
@@ -48,7 +48,7 @@ class VolcengineSms extends VolcengineApi
         $sendResult = new SendResult();
         $signStr = SignEnum::format($sign, LanguageEnum::EN_US);
         if (empty($templateVariables)) {
-            return $sendResult->setResult(-1, '未匹配到对应的短信template!');
+            return $sendResult->setResult(-1, '未匹配to对应的短信template!');
         }
         if (! in_array($signStr, Template::$signToMessageGroup, true)) {
             return $sendResult->setResult(-1, '短信signature:' . $signStr . ' not supported!');
@@ -60,7 +60,7 @@ class VolcengineSms extends VolcengineApi
             $groupId = $this->template->getMessageGroupId($templateId);
             // initialize,set公共的requestparameter
             $this->init($groupId, $signStr, $templateId);
-            // setverify码短信的特有body结构
+            // setverify码短信的特havebody结构
             $body = [
                 'SmsAccount' => $this->getMessageGroupId(),
                 'Sign' => $this->getSign(),
@@ -69,9 +69,9 @@ class VolcengineSms extends VolcengineApi
                 'PhoneNumbers' => $phone,
             ];
             $this->setBody($body);
-            // 如果是单元test,不发短信,只verifyvariableparse/短信content&&短信signature多语种适配/国际区号correctparse
+            // if是单元test,not发短信,只verifyvariableparse/短信content&&短信signature多语种适配/国际区号correctparse
             if (defined('IN_UNIT_TEST')) {
-                // 单元test,不真的发短信
+                // 单元test,not真的发短信
                 return $sendResult->setResult($errCode, $msg);
             }
             $this->sendRequest();

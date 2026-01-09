@@ -68,7 +68,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 移除分group聚合根.
+     * 移except分group聚合根.
      */
     public function removeGroupAggregateByGroupId(string $groupId): void
     {
@@ -80,7 +80,7 @@ class ModeAggregateDTO extends AbstractDTO
     }
 
     /**
-     * get所有modelID.
+     * get所havemodelID.
      *
      * @return string[]
      */

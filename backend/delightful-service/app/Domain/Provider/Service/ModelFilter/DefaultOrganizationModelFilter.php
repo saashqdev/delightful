@@ -10,13 +10,13 @@ namespace App\Domain\Provider\Service\ModelFilter;
 /**
  * default的organizationmodelfilter器implement.
  *
- * 不进行任何filter，直接returnoriginalmodellist
- * 用于开源version或企业package未configuration时的回退solution
+ * notconduct任何filter，直接returnoriginalmodellist
+ * useat开源versionor企业package未configuration时的回退solution
  */
 class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInterface
 {
     /**
-     * defaultimplement：不进行filter，return所有传入的model.
+     * defaultimplement：notconductfilter，return所have传入的model.
      */
     public function filterModelsByOrganization(string $organizationCode, array $models): array
     {
@@ -24,7 +24,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement：所有model都可用.
+     * defaultimplement：所havemodelall可use.
      */
     public function isModelAvailableForOrganization(string $organizationCode, string $modelIdentifier): bool
     {
@@ -32,7 +32,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement：return空array，table示没有特定的modelbind.
+     * defaultimplement：return空array，table示nothave特定的modelbind.
      */
     public function getAvailableModelIdentifiers(string $organizationCode): array
     {
@@ -40,7 +40,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement：return空array，table示没有modelneed升级.
+     * defaultimplement：return空array，table示nothavemodelneed升级.
      */
     public function getUpgradeRequiredModelIds(string $organizationCode): array
     {

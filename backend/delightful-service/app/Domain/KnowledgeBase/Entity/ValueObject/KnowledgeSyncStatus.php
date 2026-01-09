@@ -45,7 +45,7 @@ enum KnowledgeSyncStatus: int
     case Rebuilding = 6;
 
     /*
-     * need进行补偿的status
+     * needconduct补偿的status
      */
     public static function needCompensate(): array
     {

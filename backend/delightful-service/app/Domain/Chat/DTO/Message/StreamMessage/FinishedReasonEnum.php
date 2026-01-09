@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Domain\Chat\DTO\Message\StreamMessage;
 
 /**
- * 结束原因：
- * 0:process结束
+ * endreason：
+ * 0:processend
  * 1.发生exception.
  */
 enum FinishedReasonEnum: int

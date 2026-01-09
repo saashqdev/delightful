@@ -85,7 +85,7 @@ class KnowledgeSimilarityManager
         $filter->setLimit(1000);
         while ($max) {
             --$max;
-            // 从向量library中先getdata
+            // fromto量library中先getdata
             $points = $knowledgeBaseEntity->getVectorDBDriver()->queryPoints(
                 $knowledgeBaseEntity->getCollectionName(),
                 $filter->getLimit(),
@@ -107,7 +107,7 @@ class KnowledgeSimilarityManager
                     $knowledgeBaseEntity,
                     $pointIds
                 );
-                // 还needdeletesame point_id 的content，因为目前allow重复
+                // alsoneeddeletesame point_id 的content，因为目前allow重复
                 $knowledgeBaseEntity->getVectorDBDriver()->removeByFilter(
                     $knowledgeBaseEntity->getCollectionName(),
                     $filter->getMetadataFilter(),

@@ -23,12 +23,12 @@ use Hyperf\DbConnection\Db;
 class AdminModeAppService extends AbstractModeAppService
 {
     /**
-     * get模式list (管理后台用，contain完整i18nfield).
+     * get模式list (管理后台use，contain完整i18nfield).
      */
     public function getModes(DelightfulUserAuthorization $authorization, Page $page): array
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
-        // 管理后台query：sort降序，不filterdefault模式
+        // 管理后台query：sort降序，notfilterdefault模式
         $query = new ModeQuery('desc', false);
         $result = $this->modeDomainService->getModes($dataIsolation, $query, $page);
 
@@ -79,7 +79,7 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * create模式 (管理后台用).
+     * create模式 (管理后台use).
      */
     public function createMode(DelightfulUserAuthorization $authorization, CreateModeRequest $request): AdminModeDTO
     {
@@ -110,7 +110,7 @@ class AdminModeAppService extends AbstractModeAppService
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
 
-        // 先get现有的完整实体
+        // 先get现have的完整实体
         $existingMode = $this->modeDomainService->getModeById($dataIsolation, $modeId);
         if (! $existingMode) {
             ExceptionBuilder::throw(ModeErrorCode::MODE_NOT_FOUND);
@@ -118,7 +118,7 @@ class AdminModeAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // 将updaterequestapplication到现有实体（只updateallow修改的field）
+            // 将updaterequestapplicationto现have实体（只updateallow修改的field）
             AdminModeAssembler::applyUpdateRequestToEntity($request, $existingMode);
 
             $updatedMode = $this->modeDomainService->updateMode($dataIsolation, $existingMode);

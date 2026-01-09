@@ -42,7 +42,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * 是否为独立configuration.
+     * whether为独立configuration.
      */
     public function isIndependent(): bool
     {
@@ -50,7 +50,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * 是否为inheritconfiguration.
+     * whether为inheritconfiguration.
      */
     public function isInherited(): bool
     {
@@ -58,7 +58,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * get所有type.
+     * get所havetype.
      */
     public static function getAllTypes(): array
     {
@@ -69,7 +69,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * 从valuecreate枚举.
+     * fromvaluecreate枚举.
      */
     public static function fromValue(int $value): self
     {
@@ -77,7 +77,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * getoptionarray（用于前端展示）.
+     * getoptionarray（useat前端展示）.
      */
     public static function getOptions(): array
     {

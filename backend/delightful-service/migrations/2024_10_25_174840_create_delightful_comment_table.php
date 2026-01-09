@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->tinyInteger('type')->comment('type，for examplecomment、动态');
             $table->json('attachments')->comment('attachment');
-            $table->string('description')->comment('对comment的简短description，主要是给动态用的，for examplecreate待办、uploadimage等system动态');
+            $table->string('description')->comment('对comment的简短description，main是给动态use的，for examplecreate待办、uploadimageetcsystem动态');
             $table->unsignedBigInteger('resource_id')->index()->comment('comment的资源id，for example云documentid、sheet表id');
             $table->tinyInteger('resource_type')->comment('comment的资源type，for example云document、sheet表');
             $table->unsignedBigInteger('parent_id')->index()->comment('父级comment的primary keyid');

@@ -39,7 +39,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
         $result = $this->getChatMessageResult($executionData);
 
-        // content 或者 files 同时为空
+        // content or者 files meanwhile为空
         if ($result['message_content'] === '' && empty($executionData->getTriggerData()->getAttachments())) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.start.content_empty');
         }
@@ -90,7 +90,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         $key = 'open_chat_notice_' . $executionData->getConversationId();
         $lastNoticeTime = $this->cache->get($key);
 
-        // 如果没有上次，或者距离上次的time秒已经超过了，那么就needexecute
+        // ifnothave上次，or者距离上次的time秒已经超过了，那么thenneedexecute
         $config = $triggerBranch->getConfig();
         $intervalSeconds = $this->getIntervalSeconds($config['interval'] ?? 0, $config['unit'] ?? '');
         if (! $lastNoticeTime || (Carbon::make($openChatTime)->diffInSeconds(Carbon::make($lastNoticeTime)) > $intervalSeconds)) {
@@ -163,10 +163,10 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
     protected function routine(VertexResult $vertexResult, ExecutionData $executionData, StartNodeParamsConfig $startNodeParamsConfig): array
     {
-        // schedule入参，都由外部call，判断是哪个branch
+        // schedule入参，all由外部call，判断是哪个branch
         $branchId = $executionData->getTriggerData()->getParams()['branch_id'] ?? '';
         if (empty($branchId)) {
-            // 没有找到任何branch，直接运行
+            // nothave找to任何branch，直接运行
             $vertexResult->setChildrenIds([]);
             return [];
         }
@@ -254,7 +254,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         if (! $delightfulFlowEntity || ! $delightfulFlowEntity->getType()->isMain()) {
             return;
         }
-        // 兜底，如果没有 agent 的process指令，尝试实时get
+        // 兜底，ifnothave agent 的process指令，尝试实时get
         if (empty($executionData->getInstructionConfigs())) {
             $instructs = di(DelightfulAgentDomainService::class)->getAgentById($executionData->getAgentId())->getInstructs();
             $executionData->setInstructionConfigs($instructs);
@@ -290,7 +290,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             if ($messageChatInstruction) {
                 $value = $messageChatInstruction->getValue();
             } else {
-                // 如果message体中没有指令value，usedefaultvalue
+                // ifmessage体中nothave指令value，usedefaultvalue
                 $value = $instructionConfig->getDefaultValue();
             }
             $instructions[$instructionConfig->getId()] = $instructionConfig->getNameAndValueByType($value);
@@ -351,7 +351,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             $container = ApplicationContext::getContainer();
             $messageRepository = $container->get(DelightfulMessageRepositoryInterface::class);
 
-            // 将 VoiceMessage convert为arrayformat用于update
+            // 将 VoiceMessage convert为arrayformatuseatupdate
             $messageContent = $voiceMessage->toArray();
 
             $messageRepository->updateMessageContent($delightfulMessageId, $messageContent);
@@ -362,7 +362,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
                 'transcription_length' => strlen($voiceMessage->getTranscriptionText() ?? ''),
             ]);
         } catch (Throwable $e) {
-            // 静默processupdatefail，不影响主要process
+            // 静默processupdatefail，not影响mainprocess
             $this->logger->warning('Failed to update voice message content (V1)', [
                 'delightful_message_id' => $delightfulMessageId,
                 'error' => $e->getMessage(),

@@ -273,7 +273,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * check是否已expire.
+     * checkwhether已expire.
      */
     public function isExpired(): bool
     {
@@ -281,7 +281,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * check是否待清理status.
+     * checkwhether待清理status.
      */
     public function isPending(): bool
     {
@@ -289,7 +289,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * check是否已清理.
+     * checkwhether已清理.
      */
     public function isCleaned(): bool
     {
@@ -297,7 +297,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * check是否清理fail.
+     * checkwhether清理fail.
      */
     public function isFailed(): bool
     {
@@ -305,7 +305,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * check是否canretry.
+     * checkwhethercanretry.
      */
     public function canRetry(int $maxRetries = 3): bool
     {

@@ -59,7 +59,7 @@ readonly class KnowledgeBaseFragmentDomainService
     {
         $delightfulFlowKnowledgeFragmentEntity = $this->knowledgeBaseFragmentRepository->getById($dataIsolation, $id, $selectForUpdate);
         if (empty($delightfulFlowKnowledgeFragmentEntity) && $throw) {
-            ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$id}] 不存在");
+            ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$id}] not存in");
         }
         return $delightfulFlowKnowledgeFragmentEntity;
     }
@@ -74,7 +74,7 @@ readonly class KnowledgeBaseFragmentDomainService
         $savingDelightfulFlowKnowledgeFragmentEntity->setDocumentCode($knowledgeBaseDocumentEntity->getCode());
         $savingDelightfulFlowKnowledgeFragmentEntity->setCreator($dataIsolation->getCurrentUserId());
 
-        // 如果有业务id，并且业务 ID 存在，也can相当于update
+        // ifhave业务id，并and业务 ID 存in，alsocan相whenatupdate
         $knowledgeBaseFragmentEntity = null;
         if (! empty($savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId()) && empty($savingDelightfulFlowKnowledgeFragmentEntity->getId())) {
             $knowledgeBaseFragmentEntity = $this->knowledgeBaseFragmentRepository->getByBusinessId($dataIsolation, $savingDelightfulFlowKnowledgeFragmentEntity->getKnowledgeCode(), $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId());
@@ -89,9 +89,9 @@ readonly class KnowledgeBaseFragmentDomainService
         } else {
             $knowledgeBaseFragmentEntity = $knowledgeBaseFragmentEntity ?? $this->knowledgeBaseFragmentRepository->getById($dataIsolation, $savingDelightfulFlowKnowledgeFragmentEntity->getId());
             if (empty($knowledgeBaseFragmentEntity)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$savingDelightfulFlowKnowledgeFragmentEntity->getId()}] 没有找到");
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$savingDelightfulFlowKnowledgeFragmentEntity->getId()}] nothave找to");
             }
-            // 如果没有变化，就不needupdate了
+            // ifnothave变化，thennotneedupdate了
             if (! $knowledgeBaseFragmentEntity->hasModify($savingDelightfulFlowKnowledgeFragmentEntity)) {
                 return $knowledgeBaseFragmentEntity;
             }
@@ -126,7 +126,7 @@ readonly class KnowledgeBaseFragmentDomainService
     {
         $delightfulFlowKnowledgeFragmentEntity = $this->knowledgeBaseFragmentRepository->getByBusinessId($dataIsolation, $knowledgeCode, $businessId);
         if (empty($delightfulFlowKnowledgeFragmentEntity)) {
-            ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$businessId}] 不存在");
+            ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$businessId}] not存in");
         }
         return $delightfulFlowKnowledgeFragmentEntity;
     }
@@ -158,7 +158,7 @@ readonly class KnowledgeBaseFragmentDomainService
     }
 
     /**
-     * according to point_id get所有相关片段，按 version 倒序sort.
+     * according to point_id get所have相关片段，按 version 倒序sort.
      * @return array<KnowledgeBaseFragmentEntity>
      */
     public function getFragmentsByPointId(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, string $pointId, bool $lock = false): array
@@ -194,18 +194,18 @@ readonly class KnowledgeBaseFragmentDomainService
             default => ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed),
         };
         $preprocessRule = $selectedFragmentConfig->getTextPreprocessRule();
-        // 先进行预process
-        // needfilterREPLACE_WHITESPACErule，REPLACE_WHITESPACErule在分段后进行process
+        // 先conduct预process
+        // needfilterREPLACE_WHITESPACErule，REPLACE_WHITESPACErulein分段后conductprocess
         $filterPreprocessRule = array_filter($preprocessRule, fn (TextPreprocessRule $rule) => $rule !== TextPreprocessRule::REPLACE_WHITESPACE);
         $start = microtime(true);
-        $this->logger->info('前置文本预process开始。');
+        $this->logger->info('前置文本预processstart。');
         $content = TextPreprocessUtil::preprocess($filterPreprocessRule, $content);
-        $this->logger->info('前置文本预process结束，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
+        $this->logger->info('前置文本预processend，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
-        // 再进行分段
+        // againconduct分段
         // process转义的分隔符
         $start = microtime(true);
-        $this->logger->info('文本分段开始。');
+        $this->logger->info('文本分段start。');
         $separator = stripcslashes($selectedFragmentConfig->getSegmentRule()->getSeparator());
         $splitter = new TokenTextSplitter(
             chunkSize: $selectedFragmentConfig->getSegmentRule()->getChunkSize(),
@@ -215,17 +215,17 @@ readonly class KnowledgeBaseFragmentDomainService
         );
 
         $fragments = $splitter->splitText($content);
-        $this->logger->info('文本分段结束，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
+        $this->logger->info('文本分段end，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
-        // need额外进行process的rule
+        // need额外conductprocess的rule
         $start = microtime(true);
-        $this->logger->info('后置文本预process开始。');
+        $this->logger->info('后置文本预processstart。');
         if (in_array(TextPreprocessRule::REPLACE_WHITESPACE, $preprocessRule)) {
             foreach ($fragments as &$fragment) {
                 $fragment = TextPreprocessUtil::preprocess([TextPreprocessRule::REPLACE_WHITESPACE], $fragment);
             }
         }
-        $this->logger->info('后置文本预process结束，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
+        $this->logger->info('后置文本预processend，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
         // filter掉空string
         return array_values(array_filter($fragments, function ($fragment) {

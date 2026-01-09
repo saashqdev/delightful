@@ -15,11 +15,11 @@ enum MCPErrorCode: int
     case ValidateFailed = 51500; // verifyfail
 
     #[ErrorMessage(message: 'mcp.not_found')]
-    case NotFound = 51501; // data不存在
+    case NotFound = 51501; // datanot存in
 
     // MCPservice相关error码
     #[ErrorMessage(message: 'mcp.service.already_exists')]
-    case ServiceAlreadyExists = 51510; // MCPservice已存在
+    case ServiceAlreadyExists = 51510; // MCPservice已存in
 
     #[ErrorMessage(message: 'mcp.service.not_enabled')]
     case ServiceNotEnabled = 51511; // MCPservice未enable
@@ -29,7 +29,7 @@ enum MCPErrorCode: int
     case RelNotFound = 51520; // associateresource not found
 
     #[ErrorMessage(message: 'mcp.rel_version.not_found')]
-    case RelVersionNotFound = 51521; // associate资源version不存在
+    case RelVersionNotFound = 51521; // associate资源versionnot存in
 
     #[ErrorMessage(message: 'mcp.rel.not_enabled')]
     case RelNotEnabled = 51522; // associate资源未enable
@@ -78,7 +78,7 @@ enum MCPErrorCode: int
     case ExecutorStdioConnectionFailed = 51560; // STDIOexecute器connectfail
 
     #[ErrorMessage(message: 'mcp.executor.stdio.access_denied')]
-    case ExecutorStdioAccessDenied = 51561; // STDIOexecute器access被拒绝
+    case ExecutorStdioAccessDenied = 51561; // STDIOexecute器accessbe拒绝
 
     // HTTPexecute器相关error码
     #[ErrorMessage(message: 'mcp.executor.http.connection_failed')]

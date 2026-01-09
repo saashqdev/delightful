@@ -16,12 +16,12 @@ class Permission implements PermissionInterface
     protected DelightfulAccountDomainService $delightfulAccountDomainService;
 
     /**
-     * 判断是否超级管理员.
+     * 判断whether超级管理员.
      *
      * @param string $organizationCode organizationencoding
      * @param string $mobile 手机号
      *
-     * @return bool 是否超级管理员
+     * @return bool whether超级管理员
      */
     public function isOrganizationAdmin(string $organizationCode, string $mobile): bool
     {
@@ -36,7 +36,7 @@ class Permission implements PermissionInterface
     }
 
     /**
-     * get该用手机号码下所拥有的organization管理员code.
+     * get该use手机号码下所拥have的organization管理员code.
      */
     public function getOrganizationAdminList(string $delightfulId): array
     {

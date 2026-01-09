@@ -11,7 +11,7 @@ use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 
 /**
  * data隔离 SaaS化
- * 显式传入，防止隐式传入，导致不知道哪些地方need做隔离.
+ * 显式传入，防止隐式传入，导致not知道哪些placeneed做隔离.
  */
 class AuthenticationDataIsolation extends BaseDataIsolation
 {

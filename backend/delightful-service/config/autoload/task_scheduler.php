@@ -20,6 +20,6 @@ return [
     // Lock timeout
     'lock_timeout' => 600,
 
-    // 是否privatedeploy
+    // whetherprivatedeploy
     'is_private_deploy' => (bool) env('IS_PRIVATE_DEPLOY', false),
 ];

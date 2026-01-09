@@ -39,7 +39,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * get所有AI能力list.
+     * get所haveAI能力list.
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array
     {
@@ -116,7 +116,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
         $model->sort_order = $entity->getSortOrder();
         $model->status = $entity->getStatus()->value;
 
-        // encryptconfig后再save
+        // encryptconfig后againsave
         $model->config = AiAbilityAssembler::encodeConfig($entity->getConfig(), (string) $model->id);
 
         return $model->save();
@@ -131,7 +131,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
             return false;
         }
 
-        // 如果needupdateconfig，先getrecordID进行encrypt
+        // ifneedupdateconfig，先getrecordIDconductencrypt
         if (! empty($data['config'])) {
             $builder = $this->createBuilder($dataIsolation, AiAbilityModel::query());
             $model = $builder->where('code', $code->value)->first();
@@ -198,7 +198,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
                 // JSONparsesuccess，instruction是旧data（未encrypt）
                 $config = $jsonDecoded;
             } else {
-                // JSONparsefail，instruction是encryptdata，进行decrypt
+                // JSONparsefail，instruction是encryptdata，conductdecrypt
                 $config = AiAbilityAssembler::decodeConfig($config, (string) $model->id);
             }
         } else {

@@ -151,19 +151,19 @@ class DelightfulFlowDomainService extends AbstractDomainService
      */
     public function changeEnable(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow, ?bool $enable = null): void
     {
-        // 如果传入了明确的statusvalue，则直接set
+        // if传入了明确的statusvalue，then直接set
         if ($enable !== null) {
-            // 如果currentstatus与要set的statussame，则无需操作
+            // ifcurrentstatus与要set的statussame，then无需操作
             if ($delightfulFlow->isEnabled() === $enable) {
                 return;
             }
             $delightfulFlow->setEnabled($enable);
         } else {
-            // 否则保持原有的自动切换逻辑
+            // 否then保持原have的自动切换逻辑
             $delightfulFlow->prepareForChangeEnable();
         }
 
-        // 如果enablestatus为true，need进行verify
+        // ifenablestatus为true，needconductverify
         if ($delightfulFlow->isEnabled() && empty($delightfulFlow->getNodes())) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
         }
@@ -176,7 +176,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
      */
     public function createRoutine(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow): void
     {
-        // get开始节点的scheduleconfiguration
+        // getstart节点的scheduleconfiguration
         /** @var null|StartNodeParamsConfig $startNodeParamsConfig */
         $startNodeParamsConfig = $delightfulFlow->getStartNode()?->getNodeParamsConfig();
         if (! $startNodeParamsConfig) {
@@ -210,7 +210,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
 
             $callbackParams['branchId'] = $branchId;
             $callbackParams['routineConfig'] = $routineConfig->toConfigArray();
-            // 如果是不重复的，那么是直接create调度task
+            // if是not重复的，那么是直接create调度task
             if ($routineConfig->getType() === RoutineType::NoRepeat) {
                 $taskScheduler = new TaskScheduler();
                 $taskScheduler->setExternalId($externalId);

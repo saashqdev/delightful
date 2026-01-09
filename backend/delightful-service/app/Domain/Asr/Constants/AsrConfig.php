@@ -9,7 +9,7 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR configurationconstant
- * 统一管理 ASR 相关的所有configurationconstant，includetimeouttime、轮询间隔、retrycount等.
+ * 统一管理 ASR 相关的所haveconfigurationconstant，includetimeouttime、轮询间隔、retrycountetc.
  */
 class AsrConfig
 {
@@ -31,12 +31,12 @@ class AsrConfig
     public const int TASK_STATUS_TTL = 604800;
 
     /**
-     * Mock 轮询status TTL（秒）- 仅test用.
+     * Mock 轮询status TTL（秒）- 仅testuse.
      */
     public const int MOCK_POLLING_TTL = 600;
 
     /**
-     * 沙箱audiomerge的最长等待time（秒）.
+     * 沙箱audiomerge的most长etc待time（秒）.
      */
     public const int SANDBOX_MERGE_TIMEOUT = 1200;
 
@@ -65,12 +65,12 @@ class AsrConfig
     // ==================== retryconfiguration ====================
 
     /**
-     * service端自动总结最大retrycount.
+     * service端自动总结most大retrycount.
      */
     public const int SERVER_SUMMARY_MAX_RETRY = 10;
 
     /**
-     * 沙箱start最大retrycount.
+     * 沙箱startmost大retrycount.
      */
     public const int SANDBOX_STARTUP_MAX_RETRY = 3;
 
@@ -82,12 +82,12 @@ class AsrConfig
     public const int SANDBOX_MERGE_LOG_INTERVAL = 10;
 
     /**
-     * 沙箱audiomergelogrecordfrequency（每N次尝试record一次）.
+     * 沙箱audiomergelogrecordfrequency（eachN次尝试record一次）.
      */
     public const int SANDBOX_MERGE_LOG_FREQUENCY = 10;
 
     /**
-     * audiofilerecordquerylogrecordfrequency（每N次尝试record一次）.
+     * audiofilerecordquerylogrecordfrequency（eachN次尝试record一次）.
      */
     public const int FILE_RECORD_QUERY_LOG_FREQUENCY = 3;
 
@@ -99,7 +99,7 @@ class AsrConfig
     public const int REDIS_SCAN_BATCH_SIZE = 200;
 
     /**
-     * Redis 扫描最大quantity.
+     * Redis 扫描most大quantity.
      */
     public const int REDIS_SCAN_MAX_COUNT = 2000;
 

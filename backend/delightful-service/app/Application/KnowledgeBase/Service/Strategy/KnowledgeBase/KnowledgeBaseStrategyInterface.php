@@ -22,7 +22,7 @@ interface KnowledgeBaseStrategyInterface
     public function getOrCreateDefaultDocument(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $knowledgeBaseEntity): void;
 
     /**
-     * get或createdefaultknowledge basedata源type.
+     * getorcreatedefaultknowledge basedata源type.
      *
      * @param KnowledgeBaseEntity $knowledgeBaseEntity knowledge base实体
      *

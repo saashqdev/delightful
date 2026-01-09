@@ -36,7 +36,7 @@ class InitDelightfulProviderCommand extends HyperfCommand
     {
         $this->adminProviderAppService = $this->container->get(AdminProviderAppService::class);
 
-        $this->info('开始initializeDelightfulservice商configurationdata...');
+        $this->info('startinitializeDelightfulservice商configurationdata...');
 
         try {
             $count = $this->adminProviderAppService->initializeDelightfulProviderConfigs();

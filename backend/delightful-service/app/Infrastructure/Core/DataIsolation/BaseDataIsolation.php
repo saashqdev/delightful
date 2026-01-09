@@ -42,12 +42,12 @@ class BaseDataIsolation implements DataIsolationInterface
     private string $thirdPlatformOrganizationCode;
 
     /**
-     * 是否contain官方organization.
+     * whethercontain官方organization.
      */
     private bool $containOfficialOrganization = false;
 
     /**
-     * 是否仅仅contain官方organization.
+     * whether仅仅contain官方organization.
      */
     private bool $onlyOfficialOrganization = false;
 
@@ -70,7 +70,7 @@ class BaseDataIsolation implements DataIsolationInterface
         $this->subscriptionManager = \Hyperf\Support\make(SubscriptionManagerInterface::class);
 
         if (config('office_organization')) {
-            // 目前只有 1 个官方organization
+            // 目前only 1 个官方organization
             $this->officialOrganizationCodes = [config('office_organization')];
         }
     }

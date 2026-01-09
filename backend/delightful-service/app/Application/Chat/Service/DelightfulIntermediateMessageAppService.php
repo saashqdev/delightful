@@ -41,7 +41,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
     }
 
     /**
-     * according to客户端发来的控制messagetype,分发到对应的process模块.
+     * according to客户端发来的控制messagetype,分发to对应的process模块.
      * @throws Throwable
      */
     public function dispatchClientIntermediateMessage(ChatRequest $chatRequest, DelightfulUserAuthorization $userAuthorization): ?array
@@ -83,7 +83,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
         if ($conversationEntity->getUserOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
-        // conversation是否已被delete
+        // conversationwhether已bedelete
         if ($conversationEntity->getStatus() === ConversationStatus::Delete) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_DELETED);
         }

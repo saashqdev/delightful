@@ -100,14 +100,14 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * pass delightfulId saveusersetting（跨organization），若已存在same key 则update。
+     * pass delightfulId saveusersetting（跨organization），若已存insame key thenupdate。
      */
     public function saveByDelightfulId(string $delightfulId, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
         // write delightfulId
         $delightfulUserSettingEntity->setDelightfulId($delightfulId);
 
-        // 查找现有record
+        // 查找现haverecord
         $model = UserSettingModel::query()
             ->where('delightful_id', $delightfulId)
             ->where('key', $delightfulUserSettingEntity->getKey())
@@ -127,7 +127,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * get全局configuration（organization_code/user_id/delightful_id 均为 NULL）。
+     * getall局configuration（organization_code/user_id/delightful_id 均为 NULL）。
      */
     public function getGlobal(string $key): ?DelightfulUserSettingEntity
     {
@@ -143,11 +143,11 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * save全局configuration.
+     * saveall局configuration.
      */
     public function saveGlobal(DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {
-        // 查找现有record
+        // 查找现haverecord
         /** @var null|UserSettingModel $model */
         $model = UserSettingModel::query()
             ->whereNull('organization_code')

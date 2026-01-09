@@ -15,18 +15,18 @@ use Hyperf\DbConnection\Db;
 
 class ProviderModelConfigVersionRepository extends AbstractProviderModelRepository implements ProviderModelConfigVersionRepositoryInterface
 {
-    // configurationversiontable不needorganization隔离（pass service_provider_model_id associate已经隔离）
+    // configurationversiontablenotneedorganization隔离（pass service_provider_model_id associate已经隔离）
     protected bool $filterOrganizationCode = false;
 
     /**
-     * savemodelconfigurationversion（在transaction中completeversion号递增、mark旧version、create新version）.
+     * savemodelconfigurationversion（intransaction中completeversion号递增、mark旧version、create新version）.
      */
     public function saveVersionWithTransaction(ProviderDataIsolation $dataIsolation, ProviderModelConfigVersionEntity $entity): void
     {
         Db::transaction(function () use ($dataIsolation, $entity) {
             $serviceProviderModelId = $entity->getServiceProviderModelId();
 
-            // 1. get最新version号并计算新version号（use FOR UPDATE 行lock防止并发issue）
+            // 1. getmost新version号并计算新version号（use FOR UPDATE 行lock防止并发issue）
             $builder = $this->createBuilder($dataIsolation, ProviderModelConfigVersionModel::query());
             $latestVersion = $builder
                 ->where('service_provider_model_id', $serviceProviderModelId)
@@ -35,7 +35,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
 
             $newVersion = $latestVersion ? (int) $latestVersion + 1 : 1;
 
-            // 2. 将该model的所有旧versionmark为非currentversion
+            // 2. 将该model的所have旧versionmark为noncurrentversion
             $updateBuilder = $this->createBuilder($dataIsolation, ProviderModelConfigVersionModel::query());
             $updateBuilder
                 ->where('service_provider_model_id', $serviceProviderModelId)
@@ -46,7 +46,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
             $entity->setVersion($newVersion);
             $entity->setIsCurrentVersion(true);
 
-            // convert为array并移除 null 的 created_at，让 Model 自动processtime戳
+            // convert为array并移except null 的 created_at，让 Model 自动processtime戳
             $data = $entity->toArray();
 
             ProviderModelConfigVersionModel::query()->create($data);
@@ -54,7 +54,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
     }
 
     /**
-     * get指定model的最新versionID.
+     * get指定model的most新versionID.
      */
     public function getLatestVersionId(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?int
     {
@@ -66,7 +66,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
     }
 
     /**
-     * get指定model的最新configurationversion实体.
+     * get指定model的most新configurationversion实体.
      */
     public function getLatestVersionEntity(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?ProviderModelConfigVersionEntity
     {

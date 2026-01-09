@@ -58,12 +58,12 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         $dataIsolation = ModelGatewayDataIsolation::createByOrganizationCodeWithoutSubscription($executionData->getDataIsolation()->getCurrentOrganizationCode(), $executionData->getDataIsolation()->getCurrentUserId());
         $model = $this->modelGatewayMapper->getChatModelProxy($dataIsolation, $modelName);
 
-        // default视觉modelconfiguration就是自己
+        // default视觉modelconfigurationthen是自己
         if ($paramsConfig->getModelConfig()->getVisionModel() === '') {
             $paramsConfig->getModelConfig()->setVisionModel($modelName);
         }
 
-        // 如果主动close视觉能力。或者 currentmodelsupport，但是选择了别的model，也是相当于要closecurrentmodel的视觉能力
+        // if主动close视觉能力。or者 currentmodelsupport，but是选择了别的model，also是相whenat要closecurrentmodel的视觉能力
         if (! $paramsConfig->getModelConfig()->isVision() || ($model->getModelOptions()->isMultiModal() && $paramsConfig->getModelConfig()->getVisionModel() !== $modelName)) {
             $model->getModelOptions()->setMultiModal(false);
         }
@@ -74,9 +74,9 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         $ignoreMessageIds = [];
         $checkUserContent = (bool) ($frontResults['check_user_content'] ?? true);
         if ($checkUserContent) {
-            // system 中是否contain content
+            // system 中whethercontain content
             $systemHasContent = $this->contentIsInSystemPrompt($executionData);
-            // user 中是否contain content
+            // user 中whethercontain content
             $userHasContent = $this->contentIsInUserPrompt($executionData);
 
             if ($systemHasContent || $userHasContent) {
@@ -87,11 +87,11 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         // load记忆
         $memoryManager = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), $paramsConfig->getMessages(), $ignoreMessageIds);
 
-        // 只有自动记忆needprocess以下多模态message
+        // only自动记忆needprocessby下多模态message
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId();
             $contentMessage = null;
-            // 尝试在记忆中找到 content message
+            // 尝试in记忆中找to content message
             foreach ($memoryManager->getMessages() as $message) {
                 if ($message->getIdentifier() === $contentMessageId) {
                     $contentMessage = $message;
@@ -107,7 +107,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                         // 仅仅添加attachment
                         $imageUrls = $executionData->getTriggerData()->getAttachmentImageUrls();
                         if ($imageUrls) {
-                            // 有content且有attachment，添加文本和imagecontent
+                            // havecontentandhaveattachment，添加文本和imagecontent
                             $contentMessage->addContent(UserMessageContent::text($userPrompt));
                             foreach ($imageUrls as $imageUrl) {
                                 $contentMessage->addContent(UserMessageContent::imageUrl($imageUrl));
@@ -119,20 +119,20 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                         $memoryManager->addMessage($contentMessage);
                     }
                 } else {
-                    // create一个new，在后续use
+                    // create一个new，in后续use
                     $currentMessage = new UserMessage();
                     $currentMessage->setContent($userPrompt);
                     $memoryManager->addMessage($currentMessage);
                 }
             }
 
-            // processcurrent的多模态message - 只有 content 的need立刻call去process
+            // processcurrent的多模态message - only content 的need立刻call去process
             /** @var null|UserMessage $contentMessage */
             if ($contentMessage?->hasImageMultiModal() && $paramsConfig->getModelConfig()->isVision()) {
                 $currentModel = $model->getModelName();
                 $visionModel = $paramsConfig->getModelConfig()->getVisionModel();
 
-                // 只有 currentmodel与视觉model不一致，或者 currentmodelnot supported多模态 时。在视觉model的tool中，currentmodelequal视觉model并且具有视觉能力，就不will产生死循环
+                // only currentmodel与视觉modelnot一致，or者 currentmodelnot supported多模态 时。in视觉model的tool中，currentmodelequal视觉model并and具have视觉能力，thennotwill产生死循环
                 if ($currentModel !== $visionModel || ! $model->getModelOptions()->isMultiModal()) {
                     $multiModalLoglog = MultiModalBuilder::vision(
                         executionData: $executionData,
@@ -192,7 +192,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             }
         } else {
             if ($userPrompt !== '') {
-                // create一个new，在后续use
+                // create一个new，in后续use
                 $currentMessage = new UserMessage();
                 $currentMessage->setContent($userPrompt);
                 $memoryManager->addMessage($currentMessage);
@@ -312,7 +312,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
 
     private function isIntrovertedReplyMessageNode(VertexResult $vertexResult, ExecutionData $executionData): bool
     {
-        // 只有一个子节点
+        // only一个子节点
         if (count($vertexResult->getChildrenIds()) !== 1) {
             return false;
         }
@@ -336,13 +336,13 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             return false;
         }
 
-        // 有且只有一个current节点的table达式quote
+        // haveandonly一个current节点的table达式quote
         $expressionItems = $contentValue->getAllFieldsExpressionItem() ?? [];
         if (count($expressionItems) !== 1) {
             return false;
         }
 
-        // 可能还有其他string拼接，暂时也不内敛
+        // 可能alsohave其他string拼接，暂时alsonot内敛
         $items = match ($contentValue->getType()) {
             ValueType::Const => $contentValue->getConstValue()?->getItems() ?? [],
             ValueType::Expression => $contentValue->getExpressionValue()?->getItems() ?? [],

@@ -88,14 +88,14 @@ class FileTypeTest extends TestCase
     }
 
     /**
-     * test从HTTP头infogettype（need模拟HTTPresponse）.
+     * testfromHTTP头infogettype（need模拟HTTPresponse）.
      *
-     * 注意：这个test可能needusefunction模拟，如果project中没有configurationfunction模拟，
-     * can将此testmark为skip或use真实URL进行test
+     * 注意：这个test可能needusefunction模拟，ifproject中nothaveconfigurationfunction模拟，
+     * can将此testmark为skiporuse真实URLconducttest
      */
     public function testGetTypeFromHeaders()
     {
-        // mark此test为skip，因为need模拟全局function
+        // mark此test为skip，因为need模拟all局function
         $this->markTestSkipped('needfunction模拟feature才能完整test');
     }
 
@@ -109,7 +109,7 @@ class FileTypeTest extends TestCase
     }
 
     /**
-     * testfile太大的情况.
+     * testfiletoo大的情况.
      */
     public function testFileTooLarge()
     {

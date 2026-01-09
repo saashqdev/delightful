@@ -17,7 +17,7 @@ interface LLMMessageInterface extends TextContentInterface
 
     public function setReasoningContent(?string $reasoningContent): static;
 
-    // 不contain推理content的大modelresponse
+    // notcontain推理content的大modelresponse
     public function getContent(): string;
 
     public function setContent(string $content): static;

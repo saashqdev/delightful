@@ -105,10 +105,10 @@ readonly class FileDomainService
     }
 
     /**
-     * 批量getfilelink（自动从path提取organizationencoding并分groupprocess）.
+     * 批量getfilelink（自动frompath提取organizationencoding并分groupprocess）.
      * @param string[] $filePaths containorganizationencoding的filepatharray，format：orgCode/path/file.ext
      * @param null|StorageBucketType $bucketType storage桶type，default为Public
-     * @return array<string,FileLink> filepath到FileLink的mapping
+     * @return array<string,FileLink> filepathtoFileLink的mapping
      */
     public function getBatchLinksByOrgPaths(array $filePaths, ?StorageBucketType $bucketType = null): array
     {
@@ -160,7 +160,7 @@ readonly class FileDomainService
     /**
      * 开启 sts 模式.
      * gettemporary凭证给前端use.
-     * @todo securityissue，dir 没有校验，没有organization隔离
+     * @todo securityissue，dir nothave校验，nothaveorganization隔离
      */
     public function getStsTemporaryCredential(
         string $organizationCode,
@@ -234,7 +234,7 @@ readonly class FileDomainService
     public function getFullWorkDir(string $organizationCode, string $userId, int $projectId, string $code = 'be-delightful', string $lastPath = 'project'): string
     {
         $prefix = $this->getFullPrefix($organizationCode);
-        # 判断最next字符是否是 /,如果是，去掉
+        # 判断mostnext字符whether是 /,if是，去掉
         if (substr($prefix, -1) === '/') {
             $prefix = substr($prefix, 0, -1);
         }
@@ -253,7 +253,7 @@ readonly class FileDomainService
     }
 
     /**
-     * 从云storagegetfilelist.
+     * from云storagegetfilelist.
      *
      * @param string $organizationCode organizationencoding
      * @param string $directoryPrefix directory前缀
@@ -285,7 +285,7 @@ readonly class FileDomainService
                 key: $objectKey,
                 filename: $filename,
                 size: $object['size'] ?? null,
-                lastModified: null // ASR业务中不use该field，直接传null
+                lastModified: null // ASR业务中notuse该field，直接传null
             );
         }
         return $files;

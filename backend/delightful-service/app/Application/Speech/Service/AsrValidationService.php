@@ -24,7 +24,7 @@ use Throwable;
 
 /**
  * ASR verifyservice
- * 负责projectpermission、话题归属、taskstatus等verify逻辑.
+ * 负责projectpermission、话题归属、taskstatusetcverify逻辑.
  */
 readonly class AsrValidationService
 {
@@ -38,7 +38,7 @@ readonly class AsrValidationService
     }
 
     /**
-     * verifyprojectpermission - ensureproject属于currentuser和organization.
+     * verifyprojectpermission - ensureproject属atcurrentuser和organization.
      *
      * @param string $projectId projectID
      * @param string $userId userID
@@ -54,22 +54,22 @@ readonly class AsrValidationService
                 ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND);
             }
 
-            // 校验project是否属于currentorganization
+            // 校验projectwhether属atcurrentorganization
             if ($projectEntity->getUserOrganizationCode() !== $organizationCode) {
                 ExceptionBuilder::throw(AsrErrorCode::ProjectAccessDeniedOrganization);
             }
 
-            // 校验project是否属于currentuser
+            // 校验projectwhether属atcurrentuser
             if ($projectEntity->getUserId() === $userId) {
                 return $projectEntity;
             }
 
-            // checkuser是否是projectmember
+            // checkuserwhether是projectmember
             if ($this->projectMemberDomainService->isProjectMemberByUser((int) $projectId, $userId)) {
                 return $projectEntity;
             }
 
-            // checkuser所在department是否有projectpermission
+            // checkuser所indepartmentwhetherhaveprojectpermission
             $dataIsolation = DataIsolation::create($organizationCode, $userId);
             $departmentIds = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserId($dataIsolation, $userId, true);
 
@@ -77,7 +77,7 @@ readonly class AsrValidationService
                 return $projectEntity;
             }
 
-            // 所有permissioncheck都fail
+            // 所havepermissioncheckallfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessDeniedUser);
         } catch (BusinessException $e) {
             // process ExceptionBuilder::throw throw的业务exception
@@ -112,7 +112,7 @@ readonly class AsrValidationService
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND);
         }
 
-        // verify话题属于currentuser
+        // verify话题属atcurrentuser
         if ($topicEntity->getUserId() !== $userId) {
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND);
         }
@@ -144,7 +144,7 @@ readonly class AsrValidationService
     }
 
     /**
-     * 从话题getprojectID（contain话题归属verify）.
+     * from话题getprojectID（contain话题归属verify）.
      *
      * @param int $topicId 话题ID
      * @param string $userId userID

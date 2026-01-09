@@ -25,7 +25,7 @@ class CheckLoginRequest extends AbstractDTO
     protected string $password;
 
     /**
-     * organizationencoding,不传default为null.
+     * organizationencoding,not传default为null.
      */
     protected string $organizationCode = '';
 
@@ -40,7 +40,7 @@ class CheckLoginRequest extends AbstractDTO
     protected string $phone = '';
 
     /**
-     * 重定向URL.
+     * 重定toURL.
      */
     protected string $redirect = '';
 

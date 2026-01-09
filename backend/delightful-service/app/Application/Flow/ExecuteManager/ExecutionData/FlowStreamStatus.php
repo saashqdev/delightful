@@ -9,13 +9,13 @@ namespace App\Application\Flow\ExecuteManager\ExecutionData;
 
 enum FlowStreamStatus: string
 {
-    // 未开始
+    // 未start
     case Pending = 'Pending';
 
-    // 进行中
+    // conduct中
     case Processing = 'Processing';
 
-    // 结束
+    // end
     case Finished = 'Finished';
 
     public function isPending(): bool

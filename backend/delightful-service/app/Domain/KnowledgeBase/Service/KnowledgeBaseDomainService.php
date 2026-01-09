@@ -73,7 +73,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * saveknowledge base - 向量进度.
+     * saveknowledge base - to量进度.
      */
     public function saveProcess(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $savingKnowledgeEntity): KnowledgeBaseEntity
     {
@@ -134,7 +134,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * knowledge base是否存在.
+     * knowledge basewhether存in.
      */
     public function exist(KnowledgeBaseDataIsolation $dataIsolation, string $code): bool
     {

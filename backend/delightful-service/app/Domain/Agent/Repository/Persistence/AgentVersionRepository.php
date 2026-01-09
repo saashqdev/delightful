@@ -24,7 +24,7 @@ class AgentVersionRepository extends AbstractRepository implements AgentVersionR
     protected bool $filterOrganizationCode = true;
 
     /**
-     * getorganization内可用的 Agent version.
+     * getorganization内可use的 Agent version.
      *
      * @return array{total: int, list: array<DelightfulAgentVersionEntity>}
      */
@@ -33,7 +33,7 @@ class AgentVersionRepository extends AbstractRepository implements AgentVersionR
         $builder = $this->createBuilder($dataIsolation, DelightfulAgentModel::query());
         $versionBuilder = $this->createBuilder($dataIsolation, DelightfulAgentVersionModel::query());
 
-        // query所有的enableversion id
+        // query所have的enableversion id
         $botVersionIds = $builder
             ->where('status', '=', DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value)
             ->whereNotNull('bot_version_id')

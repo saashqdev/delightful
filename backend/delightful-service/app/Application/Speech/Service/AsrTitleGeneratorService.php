@@ -38,14 +38,14 @@ readonly class AsrTitleGeneratorService
     /**
      * according todifferent场景generatetitle.
      *
-     * 场景一：有 asr_stream_content（前端实时录音），直接用contentgeneratetitle
-     * 场景二：有 file_id（upload已有file），buildhint词generatetitle
+     * 场景一：have asr_stream_content（前端实时录音），直接usecontentgeneratetitle
+     * 场景二：have file_id（upload已havefile），buildhint词generatetitle
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
      * @param string $asrStreamContent ASRstream识别content
      * @param null|string $fileId fileID
      * @param null|NoteDTO $note 笔记content
-     * @param string $taskKey task键（用于log）
+     * @param string $taskKey task键（useatlog）
      * @return null|string generate的title
      */
     public function generateTitleForScenario(
@@ -58,7 +58,7 @@ readonly class AsrTitleGeneratorService
         try {
             $language = $this->translator->getLocale() ?: 'zh_CN';
 
-            // 场景一：有 asr_stream_content（前端实时录音）
+            // 场景一：have asr_stream_content（前端实时录音）
             if (! empty($asrStreamContent)) {
                 $customPrompt = AsrPromptAssembler::getTitlePrompt($asrStreamContent, $note, $language);
                 $title = $this->delightfulChatMessageAppService->summarizeTextWithCustomPrompt(
@@ -68,11 +68,11 @@ readonly class AsrTitleGeneratorService
                 return $this->sanitizeTitle($title);
             }
 
-            // 场景二：有 file_id（upload已有file）
+            // 场景二：have file_id（upload已havefile）
             if (! empty($fileId)) {
                 $fileEntity = $this->taskFileDomainService->getById((int) $fileId);
                 if ($fileEntity === null) {
-                    $this->logger->warning('generatetitle时未找到file', [
+                    $this->logger->warning('generatetitle时未找tofile', [
                         'file_id' => $fileId,
                         'task_key' => $taskKey,
                     ]);
@@ -82,7 +82,7 @@ readonly class AsrTitleGeneratorService
                 // getaudiofilename
                 $audioFileName = $fileEntity->getFileName();
 
-                // build笔记file名（如果有）
+                // build笔记file名（ifhave）
                 $noteFileName = null;
                 if ($note !== null && $note->hasContent()) {
                     $noteFileName = $note->generateFileName();
@@ -116,7 +116,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 从taskstatusgeneratetitle（usesave的 ASR content和笔记content）.
+     * fromtaskstatusgeneratetitle（usesave的 ASR content和笔记content）.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @return string generate的title（fail时returndefaulttitle）
@@ -124,7 +124,7 @@ readonly class AsrTitleGeneratorService
     public function generateFromTaskStatus(AsrTaskStatusDTO $taskStatus): string
     {
         try {
-            // use上报时save的语种，如果没有则usecurrent语种
+            // use上报时save的语种，ifnothavethenusecurrent语种
             $language = $taskStatus->language ?: $this->translator->getLocale() ?: 'zh_CN';
 
             $this->logger->info('use语种generatetitle', [
@@ -134,9 +134,9 @@ readonly class AsrTitleGeneratorService
                 'has_note' => ! empty($taskStatus->noteContent),
             ]);
 
-            // 如果有 ASR streamcontent，use它generatetitle
+            // ifhave ASR streamcontent，use它generatetitle
             if (! empty($taskStatus->asrStreamContent)) {
-                // build笔记 DTO（如果有）
+                // build笔记 DTO（ifhave）
                 $note = null;
                 if (! empty($taskStatus->noteContent)) {
                     $note = new NoteDTO(
@@ -162,7 +162,7 @@ readonly class AsrTitleGeneratorService
                 return $this->sanitizeTitle($title);
             }
 
-            // 如果没有 ASR content，returndefaulttitle
+            // ifnothave ASR content，returndefaulttitle
             return $this->generateDefaultDirectoryName();
         } catch (Throwable $e) {
             $this->logger->warning('generatetitlefail，usedefaulttitle', [
@@ -174,7 +174,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 清洗title，移除file/directory不allow的字符并truncatelength.
+     * 清洗title，移exceptfile/directorynotallow的字符并truncatelength.
      *
      * @param string $title originaltitle
      * @return string 清洗后的title
@@ -186,7 +186,7 @@ readonly class AsrTitleGeneratorService
             return '';
         }
 
-        // 移除illegal字符 \/:*?"<>|
+        // 移exceptillegal字符 \/:*?"<>|
         $title = preg_replace('/[\\\\\/:*?"<>|]/u', '', $title) ?? '';
         // compressnull白
         $title = preg_replace('/\s+/u', ' ', $title) ?? '';
@@ -215,7 +215,7 @@ readonly class AsrTitleGeneratorService
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
      * @param string $fileName file名
-     * @param string $taskKey task键（用于log）
+     * @param string $taskKey task键（useatlog）
      * @return null|string generate的title
      */
     public function generateTitleForFileUpload(
@@ -261,7 +261,7 @@ readonly class AsrTitleGeneratorService
     private function buildUserRequestMessage(string $audioFileName, ?string $noteFileName): string
     {
         if ($noteFileName !== null) {
-            // 有笔记的情况："请帮我把 @年willsolutiondiscussion.webm 录音content和 @年will笔记.md 的content转化为一份超级产物"
+            // have笔记的情况："请帮我把 @年willsolutiondiscussion.webm 录音content和 @年will笔记.md 的content转化为一份超级产物"
             return sprintf(
                 '%s@%s%s@%s%s',
                 $this->translator->trans('asr.messages.summary_prefix_with_note'),
@@ -272,7 +272,7 @@ readonly class AsrTitleGeneratorService
             );
         }
 
-        // 只有audiofile的情况："请帮我把 @年willsolutiondiscussion.webm 录音content转化为一份超级产物"
+        // onlyaudiofile的情况："请帮我把 @年willsolutiondiscussion.webm 录音content转化为一份超级产物"
         return sprintf(
             '%s@%s%s',
             $this->translator->trans('asr.messages.summary_prefix'),
@@ -282,7 +282,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 从userIDgetuserauthorizationobject.
+     * fromuserIDgetuserauthorizationobject.
      *
      * @param string $userId userID
      * @return DelightfulUserAuthorization userauthorizationobject

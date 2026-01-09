@@ -54,7 +54,7 @@ readonly class ProviderManager
     }
 
     /**
-     * get可用的modelID列table.
+     * get可use的modelID列table.
      *
      * @param ProviderDataIsolation $providerDataIsolation data隔离object
      * @return array<string, array<string>> 按modeltype分group的modelIDarray，format: [modelType => [model_id, model_id]]

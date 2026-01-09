@@ -17,7 +17,7 @@ enum AiAbilityCode: string
     case WebSearch = 'web_search';                         // 互联网search
     case RealtimeSpeechRecognition = 'realtime_speech_recognition';  // 实时voice识别
     case AudioFileRecognition = 'audio_file_recognition';  // audiofile识别
-    case AutoCompletion = 'auto_completion';               // 自动补全
+    case AutoCompletion = 'auto_completion';               // 自动补all
     case ContentSummary = 'content_summary';               // content总结
     case VisualUnderstanding = 'visual_understanding';     // 视觉理解
     case SmartRename = 'smart_rename';                     // 智能重命名
@@ -33,7 +33,7 @@ enum AiAbilityCode: string
             self::WebSearch => '互联网search',
             self::RealtimeSpeechRecognition => '实时voice识别',
             self::AudioFileRecognition => 'audiofile识别',
-            self::AutoCompletion => '自动补全',
+            self::AutoCompletion => '自动补all',
             self::ContentSummary => 'content总结',
             self::VisualUnderstanding => '视觉理解',
             self::SmartRename => '智能重命名',
@@ -48,15 +48,15 @@ enum AiAbilityCode: string
     public function description(): string
     {
         return match ($this) {
-            self::Ocr => '本能力覆盖平台所有 OCR application场景，精准捕捉并提取 PDF、扫描件及各类image中的文字info。',
-            self::WebSearch => '本能力覆盖平台 AI 大model的互联网search场景，精准get并整合最new新闻、事实和datainfo。',
-            self::RealtimeSpeechRecognition => '本能力覆盖平台所有voice转文字的application场景，实时listeneraudiostream并逐步output准确的文字content。',
-            self::AudioFileRecognition => '本能力覆盖平台所有audiofile转文字的application场景，精准识别说话人、audio文字等info。',
-            self::AutoCompletion => '本能力覆盖平台所有inputcontent自动补全的application场景，according to理解上下文为user自动补全content，由user选择是否采纳。',
-            self::ContentSummary => '本能力覆盖平台所有content总结的application场景，对长篇document、报告或网页文章进行深度analyze。',
-            self::VisualUnderstanding => '本能力覆盖平台所有need让大model进行视觉理解的application场景，精准理解各种图像中的content以及复杂关系。',
-            self::SmartRename => '本能力覆盖平台所有support AI 重命名的application场景，according to理解上下文为user自动进行contenttitle的命名。',
-            self::AiOptimization => '本能力覆盖平台所有support AI optimizecontent的application场景，according to理解上下文为user自动对content进行optimize。',
+            self::Ocr => '本能力覆盖平台所have OCR application场景，精准捕捉并提取 PDF、扫描件及each类image中的文字info。',
+            self::WebSearch => '本能力覆盖平台 AI 大model的互联网search场景，精准get并整合mostnew新闻、事实和datainfo。',
+            self::RealtimeSpeechRecognition => '本能力覆盖平台所havevoice转文字的application场景，实时listeneraudiostream并逐步output准确的文字content。',
+            self::AudioFileRecognition => '本能力覆盖平台所haveaudiofile转文字的application场景，精准识别说话人、audio文字etcinfo。',
+            self::AutoCompletion => '本能力覆盖平台所haveinputcontent自动补all的application场景，according to理解上下文为user自动补allcontent，由user选择whether采纳。',
+            self::ContentSummary => '本能力覆盖平台所havecontent总结的application场景，对长篇document、报告or网页文章conduct深度analyze。',
+            self::VisualUnderstanding => '本能力覆盖平台所haveneed让大modelconduct视觉理解的application场景，精准理解each种图像中的contentby及复杂关系。',
+            self::SmartRename => '本能力覆盖平台所havesupport AI 重命名的application场景，according to理解上下文为user自动conductcontenttitle的命名。',
+            self::AiOptimization => '本能力覆盖平台所havesupport AI optimizecontent的application场景，according to理解上下文为user自动对contentconductoptimize。',
             default => 'Unknown',
         };
     }

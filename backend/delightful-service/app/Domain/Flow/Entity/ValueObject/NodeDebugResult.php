@@ -23,7 +23,7 @@ class NodeDebugResult extends AbstractValueObject
     private const MAX_LOOP_RESULTS_TAIL = 10;
 
     /**
-     *  节点是否executesuccess
+     *  节点whetherexecutesuccess
      */
     protected bool $success = false;
 
@@ -276,7 +276,7 @@ class NodeDebugResult extends AbstractValueObject
     public function toArray(): array
     {
         $loopDebugResults = $this->loopDebugResults ?? [];
-        // 有多个result时，才need有 loop_debug_results
+        // have多个result时，才needhave loop_debug_results
         if (count($loopDebugResults) <= 1) {
             $loopDebugResults = [];
         }
@@ -303,7 +303,7 @@ class NodeDebugResult extends AbstractValueObject
     public function toDesensitizationArray(): array
     {
         $loopDebugResults = $this->loopDebugResults ?? [];
-        // 有多个result时，才need有 loop_debug_results
+        // have多个result时，才needhave loop_debug_results
         if (count($loopDebugResults) <= 1) {
             $loopDebugResults = [];
         }

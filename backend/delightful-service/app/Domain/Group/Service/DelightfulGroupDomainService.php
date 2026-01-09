@@ -53,7 +53,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
     // 减少群member
     public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int
     {
-        // todo 如果是群主离开,need转移群主
+        // todo if是群主离开,need转移群主
         return $this->delightfulGroupRepository->removeUsersFromGroup($delightfulGroupEntity, $userIds);
     }
 
@@ -116,7 +116,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
     {
         $groupPageResponseDTO = $this->delightfulGroupRepository->getUserGroupList($pageToken, $dataIsolation->getCurrentUserId(), $pageSize);
         $groupDTOS = $groupPageResponseDTO->getItems();
-        // user在这些group chat中的sessionid
+        // userin这些group chat中的sessionid
         $groupIds = array_column($groupDTOS, 'id');
         $conversations = $this->delightfulConversationRepository->getConversationsByReceiveIds($dataIsolation->getCurrentUserId(), $groupIds);
         /** @var DelightfulConversationEntity[] $conversations */
@@ -140,7 +140,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         Db::beginTransaction();
         try {
             $controlMessageType = $groupUserChangeSeqEntity->getSeqType();
-            // 批量generate群member变更message
+            // 批量generate群member变moremessage
             /** @var GroupCreateMessage|GroupInfoUpdateMessage|GroupOwnerChangeMessage|GroupUserAddMessage|GroupUserRemoveMessage $content */
             $content = $groupUserChangeSeqEntity->getContent();
             $groupId = $content->getGroupId();
@@ -157,12 +157,12 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 }
             }
             $content = $content->toArray();
-            // pass protobuf message结构,createdelightful chat的object,为弃用 protobuf 做准备
+            // pass protobuf message结构,createdelightful chat的object,为弃use protobuf 做准备
             if (in_array($controlMessageType, [ControlMessageType::GroupUsersRemove, ControlMessageType::GroupDisband], true)) {
-                // 这些user已经从群membertable中移除,但是他们还未收到被移除的message
+                // 这些user已经from群membertable中移except,but是他们also未收tobe移except的message
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
                 if ($controlMessageType === ControlMessageType::GroupDisband) {
-                    // 解散group chat,所有人都是被移除的.这里减少stream量consume.
+                    // 解散group chat,所have人all是be移except的.这里减少stream量consume.
                     $content['user_ids'] = [];
                 }
             }
@@ -208,12 +208,12 @@ class DelightfulGroupDomainService extends AbstractDomainService
 
     public function transferGroupOwner(DelightfulGroupEntity $groupEntity, DataIsolation $dataIsolation, DelightfulGroupEntity $delightfulGroupDTO): bool
     {
-        // checkuser是否是群主
+        // checkuserwhether是群主
         $oldGroupOwner = $groupEntity->getGroupOwner();
         if ($oldGroupOwner !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_ONLY_OWNER_CAN_TRANSFER);
         }
-        // check被转让的user是否在group chat中
+        // checkbe转让的userwhetheringroup chat中
         $groupId = $groupEntity->getId();
         $newOwnerUserId = $delightfulGroupDTO->getGroupOwner();
         if (! $this->isUserInGroup($groupId, $newOwnerUserId)) {
@@ -241,7 +241,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             'refer_message_id' => '',
             'sender_message_id' => '',
             'conversation_id' => $seqContent['conversation_id'] ?? '',
-            'status' => DelightfulMessageStatus::Read->value, // 控制message不need已读回执
+            'status' => DelightfulMessageStatus::Read->value, // 控制messagenotneed已读回执
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => '',
@@ -251,12 +251,12 @@ class DelightfulGroupDomainService extends AbstractDomainService
 
     private function getGroupUpdateReceiveUsers(string $groupId): array
     {
-        // 批量generate群member变更message
+        // 批量generate群member变moremessage
         $groupEntity = $this->delightfulGroupRepository->getGroupInfoById($groupId);
         if ($groupEntity === null || $groupEntity->getGroupStatus() === GroupStatusEnum::Disband) {
             return [];
         }
-        // 找到群member
+        // 找to群member
         $groupUsers = $this->delightfulGroupRepository->getGroupUserList($groupId, '', null, ['user_id']);
         return array_column($groupUsers, 'user_id');
     }
@@ -284,7 +284,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             if (empty($userId)) {
                 continue;
             }
-            // 不为操作者重复generateseq. 因为在投mq之前,已经为操作者generate了seq
+            // not为操作者重复generateseq. 因为in投mq之前,已经为操作者generate了seq
             if ($userId === $operateUserId) {
                 continue;
             }
@@ -303,7 +303,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 'seq_type' => $controlMessageType->value,
                 'content' => Json::encode($userContent, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
                 'receive_list' => '',
-                'delightful_message_id' => '', // 控制message不能有 delightful_message_id
+                'delightful_message_id' => '', // 控制messagenot能have delightful_message_id
                 'message_id' => $seqId,
                 'refer_message_id' => '',
                 'sender_message_id' => '',

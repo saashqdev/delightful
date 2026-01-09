@@ -15,7 +15,7 @@ class ChatCompletionsDTO extends AbstractDTO
 
     protected string $message;
 
-    // if不在conversation中，support外部传入historymessage
+    // ifnotinconversation中，support外部传入historymessage
     protected array $history;
 
     protected string $topicId = '';

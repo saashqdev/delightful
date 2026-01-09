@@ -64,7 +64,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     public function updateTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity
     {
         $name = $delightfulTopicEntity->getName();
-        // length不能超过 50
+        // lengthnot能超过 50
         if (mb_strlen($name) > 50) {
             ExceptionBuilder::throw(
                 ChatErrorCode::INPUT_PARAM_ERROR,
@@ -188,7 +188,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     /**
-     * 按timerangegetsession下某个话题的message.
+     * 按timerangegetsession下some个话题的message.
      * @return ClientSequenceResponse[]
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array
@@ -235,7 +235,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     /**
-     * passtopic_idget话题info（不needconversation_id）.
+     * passtopic_idget话题info（notneedconversation_id）.
      */
     public function getTopicByTopicId(string $topicId): ?DelightfulTopicEntity
     {
@@ -279,7 +279,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
      * Get topic messages by conversation ID, topic ID and max seq ID.
      * @param string $conversationId sessionID
      * @param string $topicId 话题ID
-     * @param int $maxSeqId 最大序列ID（contain该ID）
+     * @param int $maxSeqId most大序列ID（contain该ID）
      * @return DelightfulTopicMessageEntity[] 话题message实体array
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array
@@ -294,7 +294,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
         return TopicAssembler::getTopicMessageEntities($topicMessages);
     }
 
-    // 避免 redis cacheserialize的object,占用太多内存
+    // 避免 redis cacheserialize的object,占usetoo多内存
     #[Cacheable(prefix: 'topic:id:conversation', value: '_#{delightfulTopicDTO.topicId}_#{delightfulTopicDTO.conversationId}', ttl: 60)]
     private function getTopicArray(DelightfulTopicEntity $delightfulTopicDTO): ?array
     {

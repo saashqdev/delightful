@@ -34,7 +34,7 @@ class MiscClient extends Client
             // 这里的 response 的 content 是 ['embedding' => '', 'count' => '']
             $content = json_decode($response->getBody()->getContents(), true);
 
-            // convertresponseformat以compatibleEmbeddingResponse
+            // convertresponseformatbycompatibleEmbeddingResponse
             $compatibleContent = [
                 'object' => 'list',
                 'data' => [],

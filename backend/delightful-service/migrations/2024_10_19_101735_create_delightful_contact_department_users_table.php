@@ -24,18 +24,18 @@ return new class extends Migration {
             // delightful_user_id
             $table->string('user_id', 64)->comment('delightful_contact_user table的 user_id')->default('');
             $table->string('department_id', 64)->comment('departmentid');
-            $table->tinyInteger('is_leader')->comment('是否是department领导 0-否 1-是')->default(0);
-            $table->string('job_title', 64)->comment('在此department的职位')->default('');
-            $table->string('leader_user_id', 64)->comment('在此department的直属领导的 user_id')->nullable()->default('');
+            $table->tinyInteger('is_leader')->comment('whether是department领导 0-否 1-是')->default(0);
+            $table->string('job_title', 64)->comment('in此department的职位')->default('');
+            $table->string('leader_user_id', 64)->comment('in此department的直属领导的 user_id')->nullable()->default('');
             $table->string('organization_code', 32)->comment('麦吉的organizationencoding');
             $table->string('city', 64)->comment('工作城市')->default('');
-            $table->string('country', 32)->comment('国家或地区 Code 缩写')->default('');
-            $table->string('join_time', 32)->comment('入职time。秒级time戳format，table示从 1970 年 1 月 1 日开始所经过的秒数。')->default('');
+            $table->string('country', 32)->comment('国家or地区 Code 缩写')->default('');
+            $table->string('join_time', 32)->comment('入职time。秒级time戳format，table示from 1970 年 1 月 1 日start所经过的秒数。')->default('');
             $table->string('employee_no', 32)->comment('工号')->default('');
             $table->tinyInteger('employee_type')->comment('员工type。1：正式员工2：实习生3：外package4：劳务 5：顾问');
-            $table->string('orders', 256)->comment('usersortinfo。用于mark通讯录下organization架构的人员顺序，人员可能存在多个department中，且有different的sort')->nullable()->default('');
+            $table->string('orders', 256)->comment('usersortinfo。useatmark通讯录下organization架构的人员顺序，人员可能存in多个department中，andhavedifferent的sort')->nullable()->default('');
             $table->text('custom_attrs')->comment('customizefield。');
-            $table->tinyInteger('is_frozen')->comment('是否为pausestatus的user。')->default(0);
+            $table->tinyInteger('is_frozen')->comment('whether为pausestatus的user。')->default(0);
             $table->comment('麦吉department下的userinfotable');
             $table->timestamps();
             $table->softDeletes();

@@ -20,12 +20,12 @@ class PageResponseDTO extends AbstractDTO
     protected string $pageToken = '';
 
     /**
-     * responsedataresponse，不限制array中的元素type.
+     * responsedataresponse，not限制array中的元素type.
      */
     protected array $items = [];
 
     /**
-     * 是否还有更多data.
+     * whetheralsohavemore多data.
      */
     protected bool $hasMore = false;
 

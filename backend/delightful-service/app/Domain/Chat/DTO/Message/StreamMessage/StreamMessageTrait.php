@@ -11,7 +11,7 @@ trait StreamMessageTrait
 {
     protected ?StreamOptions $streamOptions;
 
-    // message是否是streammessage
+    // messagewhether是streammessage
     public function isStream(): bool
     {
         return (bool) $this->getStreamOptions()?->isStream();

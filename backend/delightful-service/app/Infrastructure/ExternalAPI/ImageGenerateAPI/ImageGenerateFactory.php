@@ -39,7 +39,7 @@ use InvalidArgumentException;
 class ImageGenerateFactory
 {
     /**
-     * 各modelsupport的固定比例mappingtable.
+     * eachmodelsupport的固定比例mappingtable.
      */
     private const SIZE_FIXED_RATIOS = [
         'VolcengineArk' => [
@@ -137,12 +137,12 @@ class ImageGenerateFactory
         $model = $data['model'];
         $mode = strtolower(explode('-', $model, limit: 2)[1] ?? 'fast');
 
-        // Midjourney 不use宽高parameter，只need prompt 和 mode，但是 Request 类inheritneed这些parameter
-        // 所以我们给defaultvalue即可
+        // Midjourney notuse宽高parameter，只need prompt 和 mode，but是 Request 类inheritneed这些parameter
+        // 所by我们给defaultvalue即可
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
 
-        // Midjourney 不关心具体的宽高比例，但我们保留这个field以防将来need
+        // Midjourney not关心specific的宽高比例，but我们保留这个fieldby防将来need
         if (isset($data['size'])) {
             [$width, $height] = self::parseSizeToWidthHeight($data['size']);
             $ratio = self::calculateRatio((int) $width, (int) $height);
@@ -166,7 +166,7 @@ class ImageGenerateFactory
         $width = (int) $widthStr;
         $height = (int) $heightStr;
 
-        // todo xhy 先兜底，因为整个文生图还没有闭环
+        // todo xhy 先兜底，因为整个文生图alsonothave闭环
         if (
             ! ($width === 1024 && $height === 1024)
             && ! ($width === 1024 && $height === 1792)
@@ -301,10 +301,10 @@ class ImageGenerateFactory
     private static function createGoogleGeminiRequest(array $data): GoogleGeminiRequest
     {
         $request = new GoogleGeminiRequest(
-            '', // width - Google Gemini不use
-            '', // height - Google Gemini不use
+            '', // width - Google Gemininotuse
+            '', // height - Google Gemininotuse
             $data['user_prompt'] ?? '',
-            '', // negative_prompt - Google Gemini不use
+            '', // negative_prompt - Google Gemininotuse
             $data['model'] ?? 'gemini-2.5-flash-image-preview'
         );
 
@@ -364,10 +364,10 @@ class ImageGenerateFactory
     }
 
     /**
-     * parse各种 size format为 [width, height] array.
-     * supportformat：1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 等.
+     * parseeach种 size format为 [width, height] array.
+     * supportformat：1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 etc.
      * @param string $size sizestring
-     * @param null|string $modelKey model键名，如果指定则优先use该model的固定比例configuration
+     * @param null|string $modelKey model键名，if指定then优先use该model的固定比例configuration
      */
     private static function parseSizeToWidthHeight(string $size, ?string $modelKey = null): array
     {
@@ -383,13 +383,13 @@ class ImageGenerateFactory
             return [(string) $matches[1], (string) $matches[2]];
         }
 
-        // process k format：2k, 3k 等
+        // process k format：2k, 3k etc
         if (preg_match('/^(\d+)k$/i', $size, $matches)) {
             $resolution = (int) $matches[1] * 1024;
             return [(string) $resolution, (string) $resolution];
         }
 
-        // process比例format：16:9, 1:1, 3:4 等
+        // process比例format：16:9, 1:1, 3:4 etc
         if (preg_match('/^(\d+):(\d+)$/', $size, $matches)) {
             $width = (int) $matches[1];
             $height = (int) $matches[2];
@@ -400,13 +400,13 @@ class ImageGenerateFactory
                 return $fixedSize;
             }
 
-            // 如果没有固定configuration，按照正常换算（based on1024为基准）
+            // ifnothave固定configuration，按照正常换算（based on1024为基准）
             if ($width >= $height) {
-                // 横向
+                // 横to
                 $actualWidth = 1024;
                 $actualHeight = (int) (1024 * $height / $width);
             } else {
-                // 纵向
+                // 纵to
                 $actualHeight = 1024;
                 $actualWidth = (int) (1024 * $width / $height);
             }
@@ -421,26 +421,26 @@ class ImageGenerateFactory
      * get指定model的固定比例sizeconfiguration.
      * @param null|string $modelKey model键名
      * @param string $ratioKey 比例键名，如 "1:1", "16:9"
-     * @return null|array 如果存在固定configurationreturn [width, height] array，否则return null table示needuse换算
+     * @return null|array if存in固定configurationreturn [width, height] array，否thenreturn null table示needuse换算
      */
     private static function getFixedRatioSize(?string $modelKey, string $ratioKey): ?array
     {
-        // 如果没有指定model，直接return null
+        // ifnothave指定model，直接return null
         if ($modelKey === null) {
             return null;
         }
 
-        // check是否存在该model的固定比例configuration
+        // checkwhether存in该model的固定比例configuration
         if (isset(self::SIZE_FIXED_RATIOS[$modelKey])) {
             return self::SIZE_FIXED_RATIOS[$modelKey][$ratioKey] ?? self::SIZE_FIXED_RATIOS[$modelKey]['1:1'];
         }
 
-        // 如果不存在，return null table示needuse换算
+        // ifnot存in，return null table示needuse换算
         return null;
     }
 
     /**
-     * 计算宽高比例（从 LLMAppService 移过来的逻辑）.
+     * 计算宽高比例（from LLMAppService 移过来的逻辑）.
      */
     private static function calculateRatio(int $width, int $height): string
     {
@@ -451,7 +451,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * 计算最大公约数（从 LLMAppService 移过来的逻辑）.
+     * 计算most大公约数（from LLMAppService 移过来的逻辑）.
      */
     private static function gcd(int $a, int $b): int
     {

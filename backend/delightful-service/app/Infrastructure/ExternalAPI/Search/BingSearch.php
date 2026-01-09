@@ -59,7 +59,7 @@ class BingSearch
         if (empty($requestUrl)) {
             $requestUrl = trim(config('search.drivers.bing.endpoint'));
         }
-        // ensure endpoint 以 /search 结尾
+        // ensure endpoint by /search 结尾
         if (! str_ends_with($requestUrl, '/search')) {
             $requestUrl = rtrim($requestUrl, '/') . '/search';
         }
@@ -100,7 +100,7 @@ class BingSearch
 
         while ($attempt < $maxAttempts) {
             try {
-                // 如果是retry(第二次尝试)，disableSSLverify
+                // if是retry(第二次尝试)，disableSSLverify
                 if ($attempt !== 0) {
                     $clientConfig['verify'] = false;
                     $this->logger->warning('Retrying request with SSL verification disabled', [
@@ -119,11 +119,11 @@ class BingSearch
                 // getresponse体content
                 $body = $response->getBody()->getContents();
 
-                // 如果need将 JSON convert为array或object，canuse json_decode
+                // ifneed将 JSON convert为arrayorobject，canuse json_decode
                 // requestsuccess，returndata
                 return Json::decode($body);
             } catch (RequestException $e) {
-                // 如果有response，instruction是HTTPerror(4xx, 5xx等)，不retry
+                // ifhaveresponse，instruction是HTTPerror(4xx, 5xxetc)，notretry
                 if ($e->hasResponse()) {
                     $statusCode = $e->getResponse()?->getStatusCode();
                     $reason = $e->getResponse()?->getReasonPhrase();
@@ -132,7 +132,7 @@ class BingSearch
                         'endpoint' => $requestUrl,
                         'statusCode' => $statusCode,
                     ]);
-                    break; // HTTPerror不retry，直接跳出循环
+                    break; // HTTPerrornotretry，直接跳出循环
                 }
                 $this->logger->warning('Network error occurred', [
                     'endpoint' => $requestUrl,
@@ -144,7 +144,7 @@ class BingSearch
             }
         }
 
-        // 如果走到这里，instruction所有尝试都fail了
+        // if走to这里，instruction所have尝试allfail了
         throw new RuntimeException('Search engine error.');
     }
 }

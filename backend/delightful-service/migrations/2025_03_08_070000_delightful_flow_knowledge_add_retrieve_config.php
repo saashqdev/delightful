@@ -19,7 +19,7 @@ class DelightfulFlowKnowledgeAddRetrieveConfig extends Migration
             $table->string('retrieve_config', 2000)->nullable()->comment('检索configuration');
         });
 
-        // 不settingdefaultconfiguration，让field保持为 null
+        // notsettingdefaultconfiguration，让field保持为 null
     }
 
     /**

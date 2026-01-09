@@ -81,7 +81,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         $agentVersionEntity = new DelightfulAgentVersionEntity();
         if ($agentEntity->getAgentVersionId()) {
             $agentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentById($agentEntity->getAgentVersionId());
-            // 只有publish的助理才will有permission管控
+            // onlypublish的助理才willhavepermission管控
             $resourceAccessDTO = $this->getAgentResource($authorization, $agentId);
             $adminAgentDetail->setResourceAccess($resourceAccessDTO);
         } else {
@@ -104,12 +104,12 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * get企业下的所有助理create者.
+     * get企业下的所have助理create者.
      * @return array<array{user_id:string,nickname:string,avatar:string}>
      */
     public function getOrganizationAgentsCreators(DelightfulUserAuthorization $authorization): array
     {
-        // get所有助理
+        // get所have助理
         $agentCreators = $this->delightfulAgentDomainService->getOrganizationAgentsCreators($authorization->getOrganizationCode());
         $dataIsolation = DataIsolation::create($authorization->getOrganizationCode(), $authorization->getId());
         $userMap = $this->userDomainService->getByUserIds($dataIsolation, $agentCreators);
@@ -140,7 +140,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * query企业下的所有助理,条件query：status，create人，search.
+     * query企业下的所have助理,条件query：status，create人，search.
      */
     public function queriesAgents(DelightfulUserAuthorization $authorization, QueryPageAgentDTO $query): PageDTO
     {
@@ -149,7 +149,7 @@ class AdminAgentAppService extends AbstractKernelAppService
             return new PageDTO();
         }
         $delightfulAgentEntityCount = $this->delightfulAgentDomainService->queriesAgentsCount($authorization->getOrganizationCode(), $query);
-        // get所有的 avatar
+        // get所have的 avatar
         $avatars = array_filter(array_column($delightfulAgentEntities, 'agent_avatar'), fn ($avatar) => ! empty($avatar));
         $fileLinks = $this->fileDomainService->getLinks($authorization->getOrganizationCode(), $avatars);
         // get助理create人
@@ -212,16 +212,16 @@ class AdminAgentAppService extends AbstractKernelAppService
         $dataIsolation = $this->createAdminDataIsolation($authorization);
         $allSettings = [];
 
-        // get所有 Agent 相关的settype
+        // get所have Agent 相关的settype
         $agentSettingsTypes = AdminGlobalSettingsType::getAssistantGlobalSettingsType();
 
-        // 一次性get所有set
+        // 一次性get所haveset
         $settings = $this->globalSettingsDomainService->getSettingsByTypes(
             $agentSettingsTypes,
             $dataIsolation
         );
 
-        // process所有set
+        // process所haveset
         foreach ($settings as $setting) {
             $settingDTO = (new AgentGlobalSettingsDTO($setting->toArray()));
             ExtraDetailAppenderFactory::createStrategy($settingDTO->getExtra())->appendExtraDetail($settingDTO->getExtra(), $authorization);
@@ -259,7 +259,7 @@ class AdminAgentAppService extends AbstractKernelAppService
                 ->setExtra(AbstractSettingExtra::fromDataByType($extra->toArray(), $setting->getType()));
         }, $settingsToUpdate);
 
-        // 一次性update所有set
+        // 一次性update所haveset
         $updatedSettings = $this->globalSettingsDomainService->updateSettingsBatch($entities, $dataIsolation);
 
         // convert为DTOreturn
@@ -362,13 +362,13 @@ class AdminAgentAppService extends AbstractKernelAppService
         }
 
         $selectedDefaultFriendRootIds = array_flip($this->getSelectedDefaultFriendRootIds($authorization));
-        // 如果type为SELECTED_DEFAULT_FRIEND，则只return选中的default好友
+        // iftype为SELECTED_DEFAULT_FRIEND，then只return选中的default好友
         if ($type === AgentFilterType::SELECTED_DEFAULT_FRIEND) {
             return array_filter($enabledAgents, function ($agent) use ($selectedDefaultFriendRootIds) {
                 return isset($selectedDefaultFriendRootIds[$agent->getId()]);
             });
         }
-        // 如果type为NOT_SELECTED_DEFAULT_FRIEND，则只return未选中的default好友
+        // iftype为NOT_SELECTED_DEFAULT_FRIEND，then只return未选中的default好友
         /* @phpstan-ignore-next-line */
         if ($type === AgentFilterType::NOT_SELECTED_DEFAULT_FRIEND) {
             return array_filter($enabledAgents, function ($agent) use ($selectedDefaultFriendRootIds) {

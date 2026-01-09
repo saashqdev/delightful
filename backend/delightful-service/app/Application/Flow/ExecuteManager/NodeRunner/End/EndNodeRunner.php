@@ -17,7 +17,7 @@ use App\Infrastructure\Core\Dag\VertexResult;
 #[FlowNodeDefine(
     type: NodeType::End->value,
     code: NodeType::End->name,
-    name: '结束节点',
+    name: 'end节点',
     paramsConfig: EndNodeParamsConfig::class,
     version: 'v0',
     singleDebug: true,
@@ -34,12 +34,12 @@ class EndNodeRunner extends NodeRunner
             $result = $output->getKeyValue($executionData->getExpressionFieldData());
         }
 
-        // end节点后，不execute后续节点
+        // end节点后，notexecute后续节点
         $vertexResult->setChildrenIds([]);
         $vertexResult->setResult($result);
         $executionData->saveNodeContext($this->node->getNodeId(), $result);
 
-        // 动态setting结束节点 id
+        // 动态settingend节点 id
         $executionData->getDelightfulFlowEntity()?->setEndNode($this->node);
     }
 }

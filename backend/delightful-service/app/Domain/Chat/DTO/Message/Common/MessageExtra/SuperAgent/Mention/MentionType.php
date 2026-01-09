@@ -13,7 +13,7 @@ enum MentionType: string
     case PROJECT_FILE = 'project_file';
 
     /**
-     * 本次message中temporaryupload的file，后续will统一到 project_file 中.
+     * 本次message中temporaryupload的file，后续will统一to project_file 中.
      */
     case UPLOAD_FILE = 'upload_file';
 

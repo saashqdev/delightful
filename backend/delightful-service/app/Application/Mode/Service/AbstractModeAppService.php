@@ -365,7 +365,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
      *
      * @param ProviderModelEntity[] $models modelcolumn表
      * @param array<int, Status> $providerStatuses servicequotientstatusmapping
-     * @return ModelStatus status:Normal、Disabled、Deleted
+     * @return ModelStatus status:Normal,Disabled,Deleted
      */
     private function determineStatus(array $models, array $providerStatuses = []): ModelStatus
     {

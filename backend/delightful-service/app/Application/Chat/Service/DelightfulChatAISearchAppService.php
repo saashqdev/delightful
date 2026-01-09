@@ -143,7 +143,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             $this->sleepToFixBug(0.3);
             // 4. according toeachassociateissuereply,generate总结.
             $summarize = $this->generateAndSendSummary($dto, $noRepeatSearchContexts, $associateQuestions);
-            // 5. according to总结,generate额outsidecontent(思维导graph、PPT、eventetc)
+            // 5. according to总结,generate额outsidecontent(思维导graph,PPT,eventetc)
             if ($dto->getSearchDeepLevel() === SearchDeepLevel::DEEP) {
                 $this->generateAndSendExtra($dto, $noRepeatSearchContexts, $summarize);
             }

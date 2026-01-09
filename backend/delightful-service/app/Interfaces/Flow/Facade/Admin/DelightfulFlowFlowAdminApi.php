@@ -100,7 +100,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
         $delightfulFlowDO = DelightfulFlowAssembler::createDelightfulFlowDO($delightfulFlowDTO);
         $delightfulFlowDO->setCode($flowId);
 
-        // 触hairmethod、触hairdata
+        // 触hairmethod,触hairdata
         $triggerConfig = $this->request->input('trigger_config', []);
 
         return $this->delightfulFlowExecuteAppService->testRun($authorization, $delightfulFlowDO, $triggerConfig);

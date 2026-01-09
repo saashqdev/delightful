@@ -13,7 +13,7 @@ use InvalidArgumentException;
 /**
  * 重sortmodelconfigurationvalueobject
  *
- * contain重sortmodel相closeconfigurationparameter,如modelname、providequotient、API 端pointetc
+ * contain重sortmodel相closeconfigurationparameter,如modelname,providequotient,API 端pointetc
  */
 class RerankingModelConfig extends AbstractValueObject
 {
@@ -27,7 +27,7 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * 重sortmodelprovidequotientname.
      *
-     * for example:gitee_ai、openai etc
+     * for example:gitee_ai,openai etc
      */
     private string $rerankingProviderName = '';
 

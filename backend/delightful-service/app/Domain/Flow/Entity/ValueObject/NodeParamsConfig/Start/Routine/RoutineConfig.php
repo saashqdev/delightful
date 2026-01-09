@@ -201,7 +201,7 @@ class RoutineConfig
             $this->day = (string) ((int) $this->day);
         }
 
-        // notduplicate、eachyear、eachmonthtime,day table示date
+        // notduplicate,eachyear,eachmonthtime,day table示date
         if (in_array($this->type, [RoutineType::NoRepeat, RoutineType::AnnuallyRepeat])) {
             if (! is_string($this->day) || empty($this->day) || ! strtotime($this->day)) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date formaterror');

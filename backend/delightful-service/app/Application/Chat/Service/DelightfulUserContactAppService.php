@@ -161,7 +161,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * batchquantityqueryorganization架构、ai 、or者person版user.
+     * batchquantityqueryorganization架构,ai ,or者person版user.
      */
     public function getUserDetailByIds(UserQueryDTO $dto, DelightfulUserAuthorization $authorization): array
     {

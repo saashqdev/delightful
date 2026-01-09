@@ -23,7 +23,7 @@ class RetrievalMethod
      *
      * based ontoquantitysimilardegreeretrievemethod.
      * willquerytextconvertfortoquantity,然backintoquantitydatabasemiddlefindmostsimilardocument.
-     * 适合comprehend语义close系、多languagecomprehend、processblurdescription.
+     * 适合comprehend语义close系,多languagecomprehend,processblurdescription.
      */
     public const string SEMANTIC_SEARCH = 'semantic_search';
 
@@ -32,7 +32,7 @@ class RetrievalMethod
      *
      * based onkeywordmatchretrievemethod.
      * indexdocumentmiddle所havesingle词,returncontainquery词textslicesegment.
-     * 适合precisematch(如productname、person名、ID)andlow频词match.
+     * 适合precisematch(如productname,person名,ID)andlow频词match.
      */
     public const string FULL_TEXT_SEARCH = 'full_text_search';
 

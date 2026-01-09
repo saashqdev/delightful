@@ -95,7 +95,7 @@ class DelightfulFlowExportImportAppService
             'nodes' => [], // 老ID => newID
         ];
 
-        // import报告,recordcreate、renameanderrorinfo
+        // import报告,recordcreate,renameanderrorinfo
         $importReport = [
             'created' => [],
             'renamed' => [],
@@ -476,7 +476,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * updateprocessmiddlequoteclose系
-     * includesectionpointquote、子processquote、toolquoteetc.
+     * includesectionpointquote,子processquote,toolquoteetc.
      */
     private function updateFlowReferences(array &$flowData, array $idMapping): void
     {

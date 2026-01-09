@@ -308,7 +308,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * batchquantityget群info(name、公告etc).
+     * batchquantityget群info(name,公告etc).
      */
     public function getDelightfulGroupList(RequestInterface $request): array
     {

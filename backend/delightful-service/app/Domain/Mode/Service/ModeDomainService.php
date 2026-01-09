@@ -41,7 +41,7 @@ class ModeDomainService
     }
 
     /**
-     * according toIDget模typeaggregateroot(contain模typedetail、group、modelclose系).
+     * according toIDget模typeaggregateroot(contain模typedetail,group,modelclose系).
      */
     public function getModeDetailById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeAggregate
     {

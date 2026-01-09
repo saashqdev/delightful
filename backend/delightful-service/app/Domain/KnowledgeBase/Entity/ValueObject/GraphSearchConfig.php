@@ -13,7 +13,7 @@ use InvalidArgumentException;
 /**
  * graphsearchconfigurationvalueobject
  *
- * containgraphsearch相closeconfigurationparameter,如 API 端point、authinfo、timeoutsetetc
+ * containgraphsearch相closeconfigurationparameter,如 API 端point,authinfo,timeoutsetetc
  */
 class GraphSearchConfig extends AbstractValueObject
 {

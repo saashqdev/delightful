@@ -281,9 +281,9 @@ class SeqAssembler
         $messageTopicId = (string) $seqEntity->getExtra()?->getTopicId();
         // generatecustomer端message结构
         $clientMessageData = [
-            // service端generatemessage唯oneid,all局唯one.useatwithdraw、editmessage.
+            // service端generatemessage唯oneid,all局唯one.useatwithdraw,editmessage.
             'delightful_message_id' => $seqEntity->getDelightfulMessageId(),
-            // customer端generate,needios/安卓/webthree端共同certainonegenerate算法.useat告知customer端,delightful_message_idbycome
+            // customer端generate,needios/安卓/webthree端共同certainonegeneratealgorithm.useat告知customer端,delightful_message_idbycome
             'app_message_id' => $seqEntity->getAppMessageId(),
             // send者
             'sender_id' => (string) $messageEntity?->getSenderId(),
@@ -292,7 +292,7 @@ class SeqAssembler
             'type' => $messageTypeName,
             // return显not读person数,ifuserpoint击detail,againrequestspecificmessagecontent
             'unread_count' => $unreadCount,
-            // messagesendtime,and delightful_message_id oneup,useatwithdraw、editmessageo clock唯onepropertyvalidation.
+            // messagesendtime,and delightful_message_id oneup,useatwithdraw,editmessageo clock唯onepropertyvalidation.
             'send_time' => $carbon->getTimestamp(),
             // chatmessagestatus:unread | seen | read |revoked  .to应middle文释义:not读|already读|alreadyview(non纯textcomplextypemessage,userpoint击detail)  | withdraw
             'status' => $messageStatus ?: '',

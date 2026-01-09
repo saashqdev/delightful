@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * 沙箱manage Mock service
- * 模拟沙箱create、statusquery、work区statusetcmanageinterface.
+ * 模拟沙箱create,statusquery,work区statusetcmanageinterface.
  */
 class SandboxApi
 {

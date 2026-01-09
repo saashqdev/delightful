@@ -81,7 +81,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
         $message = '';
         $attachments = [];
-        // 目frontonlyparse text、image、rich text
+        // 目frontonlyparse text,image,rich text
         switch ($params['msgtype']) {
             case 'text':
                 $message = $params['text']['content'] ?? '';

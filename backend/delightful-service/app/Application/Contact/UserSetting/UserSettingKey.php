@@ -26,7 +26,7 @@ enum UserSettingKey: string
     // all局configuration
     case GlobalConfig = 'GlobalConfig';
 
-    // 平台setting(平台information、Logo、Favicon、i18n etc)
+    // 平台setting(平台information,Logo,Favicon,i18n etc)
     case PlatformSettings = 'PlatformSettings';
 
     // 智canbodysortconfiguration

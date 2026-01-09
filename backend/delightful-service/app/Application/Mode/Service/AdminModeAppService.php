@@ -39,7 +39,7 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * according toIDget模typeaggregateroot(contain模typedetail、minutegroup、modelclose系).
+     * according toIDget模typeaggregateroot(contain模typedetail,minutegroup,modelclose系).
      */
     public function getModeById(DelightfulUserAuthorization $authorization, string $id): AdminModeAggregateDTO
     {

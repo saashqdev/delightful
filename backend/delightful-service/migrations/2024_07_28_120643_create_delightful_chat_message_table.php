@@ -26,7 +26,7 @@ class CreateDelightfulChatMessageTable extends Migration
             $table->tinyInteger('sender_type')->comment('hairitem方usertype,1:user(aialsobe认forisuser);2:application;3:document;4:多维table格');
             $table->string('sender_organization_code', 64)->comment('hairitem方organizationencoding,maybeforemptystring')->default('');
             // receive方所属organization
-            $table->string('receive_id', 64)->comment('receive方id,maybeispersoncategory、aior者application/document/多维table格etc');
+            $table->string('receive_id', 64)->comment('receive方id,maybeispersoncategory,aior者application/document/多维table格etc');
             $table->tinyInteger('receive_type')->comment('receive方type,1:user(aialsobe认forisuser);2:application;3:document;4:多维table格');
             $table->string('receive_organization_code', 64)->comment('receive方organizationencoding,maybeforemptystring')->default('');
             // message相closeid

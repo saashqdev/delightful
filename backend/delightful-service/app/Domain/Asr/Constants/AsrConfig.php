@@ -9,7 +9,7 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR configurationconstant
- * 统onemanage ASR 相close所haveconfigurationconstant,includetimeouttime、round询between隔、retrycountetc.
+ * 统onemanage ASR 相close所haveconfigurationconstant,includetimeouttime,round询between隔,retrycountetc.
  */
 class AsrConfig
 {

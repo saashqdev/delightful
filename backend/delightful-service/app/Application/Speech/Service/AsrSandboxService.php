@@ -44,7 +44,7 @@ use function Hyperf\Translation\trans;
 
 /**
  * ASR 沙箱service
- * 负责沙箱taskstart、merge、round询andfilerecordcreate.
+ * 负责沙箱taskstart,merge,round询andfilerecordcreate.
  */
 readonly class AsrSandboxService
 {
@@ -694,7 +694,7 @@ readonly class AsrSandboxService
         // certain agentUserId:use topic create者ID,ifnothavethenuse topic userID(参考 AgentAppService)
         $agentUserId = $topicEntity->getCreatedUid() ?: $topicEntity->getUserId();
 
-        // build TaskContext(ASR 场景middle chatConversationId、chatTopicId usenullstring)
+        // build TaskContext(ASR 场景middle chatConversationId,chatTopicId usenullstring)
         $taskContext = new TaskContext(
             task: $taskEntity,
             dataIsolation: $dataIsolation,

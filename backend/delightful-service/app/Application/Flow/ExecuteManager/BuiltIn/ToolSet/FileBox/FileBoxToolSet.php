@@ -26,6 +26,6 @@ class FileBoxToolSet extends AbstractBuiltInToolSet
 
     public function getDescription(): string
     {
-        return 'file盒子based on合规andprivacyprotected统onestorageandmanageuseruploadimage、document、tableetc常usefile';
+        return 'file盒子based on合规andprivacyprotected统onestorageandmanageuseruploadimage,document,tableetc常usefile';
     }
 }

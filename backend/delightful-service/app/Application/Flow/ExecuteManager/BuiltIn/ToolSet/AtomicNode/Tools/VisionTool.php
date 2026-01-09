@@ -236,9 +236,9 @@ JSON, true)));
 1. 优先comprehenduser意graph,始终useandusersamelanguagereturn答
 2. provide简洁明直接return答,直接full足usermainissue
 3. againtoimagecontentconduct多维degreedetailedanalyze,includebutnot限at:
-   - 主bodycontentidentify:person物、物body、场景、textetc
-   - 视觉特征:color、composition、光line、qualityetc
-   - 语义info:activity、情绪、close系、background故事etc
+   - 主bodycontentidentify:person物,物body,场景,textetc
+   - 视觉特征:color,composition,光line,qualityetc
+   - 语义info:activity,情绪,close系,background故事etc
    - textidentify:如havetext,accurateextractandcomprehendimplication
    - 技术info:如havegraphtable/data,analyzeitsimplication
    

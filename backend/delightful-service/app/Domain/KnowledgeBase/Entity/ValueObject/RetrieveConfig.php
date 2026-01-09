@@ -13,7 +13,7 @@ use InvalidArgumentException;
 /**
  * knowledge baseretrieveconfigurationvalueobject
  *
- * containretrievestrategy、retrievemethod、重sortconfigurationetcparameter
+ * containretrievestrategy,retrievemethod,重sortconfigurationetcparameter
  */
 class RetrieveConfig extends AbstractValueObject
 {

@@ -18,10 +18,10 @@ use Throwable;
  */
 class ClientMessage extends AbstractEntity
 {
-    // service端generatemessage唯oneid,all局唯one.useatwithdraw、editmessage.
+    // service端generatemessage唯oneid,all局唯one.useatwithdraw,editmessage.
     protected string $delightfulMessageId;
 
-    // customer端generate,needios/安卓/webthree端共同certainonegenerate算法.useat告知customer端,delightful_message_idbycome
+    // customer端generate,needios/安卓/webthree端共同certainonegeneratealgorithm.useat告知customer端,delightful_message_idbycome
     protected ?string $appMessageId;
 
     // 话题id
@@ -37,7 +37,7 @@ class ClientMessage extends AbstractEntity
     // messagesend者,from己or者heperson
     protected string $senderId;
 
-    // messagesendtime,and delightful_message_id oneup,useatwithdraw、editmessageo clock唯onepropertyvalidation.
+    // messagesendtime,and delightful_message_id oneup,useatwithdraw,editmessageo clock唯onepropertyvalidation.
     protected int $sendTime;
 
     // chatmessagestatus:unread | seen | read |revoked  .to应middle文释义:not读|already读|alreadyview(non纯textcomplextypemessage,userpoint击detail)  | withdraw

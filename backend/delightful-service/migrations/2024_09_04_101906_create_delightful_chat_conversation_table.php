@@ -41,7 +41,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->softDeletes();
             $table->unique(['user_id', 'receive_id', 'receive_type', 'user_organization_code', 'receive_organization_code'], 'unq_user_conversation');
-            $table->comment('usersessionlist.sessionmaybeisprivate chat、group chat、systemmessage、one云documentor者多维table格etc.');
+            $table->comment('usersessionlist.sessionmaybeisprivate chat,group chat,systemmessage,one云documentor者多维table格etc.');
         });
     }
 

@@ -57,7 +57,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
             $senderUserEntity
         );
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        // message鉴权
+        // messageauthentication
         $this->checkSendMessageAuth($conversationEntity, $dataIsolation);
 
         $messageContent = $messageDTO->getContent();

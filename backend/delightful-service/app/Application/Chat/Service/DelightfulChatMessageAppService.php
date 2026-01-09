@@ -217,7 +217,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * message鉴权.
+     * messageauthentication.
      * @throws Throwable
      */
     public function checkSendMessageAuth(DelightfulSeqEntity $senderSeqDTO, DelightfulMessageEntity $senderMessageDTO, DelightfulConversationEntity $conversationEntity, DataIsolation $dataIsolation): void
@@ -596,7 +596,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         youisone专业contenttitlegenerate助hand.请严格按照bydownrequireforconversationcontentgeneratetitle:
 
         ## taskgoal
-        according toconversationcontent,generateone简洁、accuratetitle,can概括conversation核coretheme.
+        according toconversationcontent,generateone简洁,accuratetitle,can概括conversation核coretheme.
 
         ## theme优先level原then
         whenconversation涉and多differentthemeo clock:
@@ -609,7 +609,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         1. titlelength:not超pass 15 character.Englishone字母算onecharacter,汉字one字算onecharacter,other语type采useanalogouscountsolution.
         2. content相close:titlemust直接反映conversation核coretheme
         3. languagestyle:use陈述property语sentence,avoid疑问sentence
-        4. outputformat:onlyoutputtitlecontent,notwantaddany解释、标pointorothertext
+        4. outputformat:onlyoutputtitlecontent,notwantaddany解释,标pointorothertext
         5. forbidlinefor:notwantreturn答conversationmiddleissue,notwantconduct额outside解释
 
         ## conversationcontent
@@ -1203,7 +1203,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                 ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR);
             }
             $dataIsolation = $this->createDataIsolation($userAuthorization);
-            // message鉴权
+            // messageauthentication
             $this->checkSendMessageAuth($senderSeqDTO, $senderMessageDTO, $senderConversationEntity, $dataIsolation);
             // securitypropertyguarantee,validationattachmentmiddlefilewhether属atcurrentuser
             $senderMessageDTO = $this->checkAndFillAttachments($senderMessageDTO, $dataIsolation);

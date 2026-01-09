@@ -674,7 +674,7 @@ class DelightfulFlowEntity extends AbstractEntity
         }
 
         if ($this->type === Type::Tools) {
-            // nameonlycancontain 字母、number、down划line
+            // nameonlycancontain 字母,number,down划line
             if (! preg_match('/^[a-zA-Z0-9_]+$/', $this->name)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.tool.name.invalid_format');
             }

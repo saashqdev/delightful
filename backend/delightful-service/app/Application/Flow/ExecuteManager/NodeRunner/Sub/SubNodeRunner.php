@@ -35,7 +35,7 @@ class SubNodeRunner extends NodeRunner
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.sub.flow_not_found', ['flow_code' => $subFlowId]);
         }
 
-        // getstartsectionpoint、endsectionpoint
+        // getstartsectionpoint,endsectionpoint
         if (! $subFlow->getStartNode()) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.sub.start_node_not_found', ['flow_code' => $subFlowId]);
         }

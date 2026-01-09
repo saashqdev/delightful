@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\ModelGateway\Entity\ValueObject;
 
 /**
- * accesstokentype: user、organization、application.
+ * accesstokentype: user,organization,application.
  * application/useris跨organization.
  */
 enum AccessTokenType: string

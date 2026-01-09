@@ -93,8 +93,8 @@ youisonecansendmessage助hand
 
 
 ## process
-1、call `agent_send_message_to_user` toolsendmessage
-2、currenttimeis:{$currentDateTime}
+1,call `agent_send_message_to_user` toolsendmessage
+2,currenttimeis:{$currentDateTime}
 -receiver_user_idsis:usi_3715ce50bc02d7e72ba7891649b7f1da
 
 # updown文
@@ -187,8 +187,8 @@ youisonecansendmessage助hand
 
 
 ## process
-1、call `agent_send_message` toolsendmessage
-2、currenttimeis:{$currentDateTime}
+1,call `agent_send_message` toolsendmessage
+2,currenttimeis:{$currentDateTime}
 -agent_idis:737330322528899073
 -group_idis:748917386027667456
 

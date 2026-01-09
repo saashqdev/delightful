@@ -27,7 +27,7 @@ namespace App\Application\Speech\Enum;
 enum AsrTaskStatusEnum: string
 {
     case CREATED = 'created';              // alreadycreate:taskinitializecomplete,etc待process
-    case PROCESSING = 'processing';        // processmiddle:justinexecute录音、mergeor总结
+    case PROCESSING = 'processing';        // processmiddle:justinexecute录音,mergeor总结
     case COMPLETED = 'completed';          // alreadycomplete:整 ASR processall部complete(includemessagesend)
     case FAILED = 'failed';                // fail:taskexecutefail
 

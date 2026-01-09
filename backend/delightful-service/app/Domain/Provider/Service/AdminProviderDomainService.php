@@ -134,7 +134,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
     /**
      * getservicequotientconfiguration(综合method)
-     * according tomodelversion、modelIDandorganizationencodinggetservicequotientconfiguration.
+     * according tomodelversion,modelIDandorganizationencodinggetservicequotientconfiguration.
      *
      * @param string $modelOriginId modelversion
      * @param string $modelId modelID

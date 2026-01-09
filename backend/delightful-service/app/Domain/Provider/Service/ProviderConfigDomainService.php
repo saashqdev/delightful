@@ -44,7 +44,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * pass service_provider_config_id getservicequotient、configurationandmodelaggregateinfo.
+     * pass service_provider_config_id getservicequotient,configurationandmodelaggregateinfo.
      * support传入servicequotienttemplate id.
      * @param string $configId maybeistemplate id,such as ProviderConfigIdAssembler
      */
@@ -383,7 +383,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
 
     /**
      * 统oneconfigurationdataupdate逻辑.
-     * handle脱敏datamerge、fieldupdateandsave操as.
+     * handle脱敏datamerge,fieldupdateandsave操as.
      */
     private function updateProviderConfigData(ProviderDataIsolation $dataIsolation, ProviderConfigEntity $existingConfig, ProviderConfigEntity $newConfigData): ProviderConfigEntity
     {

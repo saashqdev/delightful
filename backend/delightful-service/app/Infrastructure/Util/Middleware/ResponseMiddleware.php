@@ -58,7 +58,7 @@ class ResponseMiddleware implements MiddlewareInterface
     {
         $path = $request->getUri()->getPath();
         if (! in_array($path, $this->ignoreUris, true)) {
-            // 提frontrecordrequestlog、request url、requesthead
+            // 提frontrecordrequestlog,request url,requesthead
             $this->logger->info('requesttracestart', [
                 'url' => $request->getRequestTarget(),
                 'method' => $request->getMethod(),

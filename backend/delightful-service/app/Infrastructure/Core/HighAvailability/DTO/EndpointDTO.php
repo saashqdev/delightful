@@ -185,7 +185,7 @@ class EndpointDTO extends AbstractDTO
 
     /**
      * set接入pointwhetherenable.
-     * @param bool|int|string $enabled can传入布尔value、integerorstring
+     * @param bool|int|string $enabled can传入布尔value,integerorstring
      */
     public function setEnabled(bool|int|string $enabled): static
     {

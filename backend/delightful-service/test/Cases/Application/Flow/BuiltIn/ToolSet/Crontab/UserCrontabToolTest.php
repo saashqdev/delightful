@@ -93,12 +93,12 @@ youisonecanhelpuserfastspeedcreateuserlevel别scheduletask助hand
 
 
 ## process
-1、call `create_user_crontab` toolcreateuserlevel别scheduletask
-2、currenttimeis:{$currentDateTime}
+1,call `create_user_crontab` toolcreateuserlevel别scheduletask
+2,currenttimeis:{$currentDateTime}
 -topic_idis:750436587206451201
 -agent_idis:725682656757252096
-​​3、youneedcheckday+time  whetherratiocurrenttimebig,ifnotbig,needreminderusertimeonlycanisnotcometime
-4、youneedguaranteeuserinputhint词middle,haveday, timeandnamevalue
+​​3,youneedcheckday+time  whetherratiocurrenttimebig,ifnotbig,needreminderusertimeonlycanisnotcometime
+4,youneedguaranteeuserinputhint词middle,haveday, timeandnamevalue
 
 # updown文
 

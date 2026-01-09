@@ -72,7 +72,7 @@ class FileParser
             /** @var FileParserDriverInterface $driver */
             $driver = di($interface);
             $res = $driver->parse($tempFile, $fileUrl, $extension);
-            // ifiscsv、xlsx、xlsfile,needconduct额outsideprocess
+            // ifiscsv,xlsx,xlsfile,needconduct额outsideprocess
             if ($textPreprocess && in_array($extension, ['csv', 'xlsx', 'xls'])) {
                 $res = TextPreprocessUtil::preprocess([TextPreprocessRule::FORMAT_EXCEL], $res);
             }

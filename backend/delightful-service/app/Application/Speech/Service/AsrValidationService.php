@@ -24,7 +24,7 @@ use Throwable;
 
 /**
  * ASR verifyservice
- * 负责projectpermission、话题归属、taskstatusetcverify逻辑.
+ * 负责projectpermission,话题归属,taskstatusetcverify逻辑.
  */
 readonly class AsrValidationService
 {

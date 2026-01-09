@@ -69,7 +69,7 @@ readonly class AdminProviderAppService
             $authorization->getId(),
         );
 
-        // pass领域layermethodonetimepropertygetservicequotient、configurationandmodelinfo
+        // pass领域layermethodonetimepropertygetservicequotient,configurationandmodelinfo
         $providerModels = $this->providerConfigDomainService->getProviderModelsByConfigId($dataIsolation, $configId);
         if ($providerModels === null) {
             return null;

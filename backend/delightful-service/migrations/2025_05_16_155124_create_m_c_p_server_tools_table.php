@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->json('rel_info')->nullable()->comment('associateinformation');
             $table->string('version', 80)->default('')->comment('toolversion');
             $table->boolean('enabled')->default(false)->comment('whetherenable: 0-disable, 1-enable');
-            $table->json('options')->nullable()->comment('toolconfiguration name、description、inputSchema');
+            $table->json('options')->nullable()->comment('toolconfiguration name,description,inputSchema');
             $table->string('creator', 64)->default('')->comment('create者');
             $table->dateTime('created_at')->comment('creation time');
             $table->string('modifier', 64)->default('')->comment('modify者');

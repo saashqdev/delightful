@@ -19,7 +19,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
     protected bool $filterOrganizationCode = false;
 
     /**
-     * savemodelconfigurationversion(intransactionmiddlecompleteversionnumber递增、markoldversion、createnewversion).
+     * savemodelconfigurationversion(intransactionmiddlecompleteversionnumber递增,markoldversion,createnewversion).
      */
     public function saveVersionWithTransaction(ProviderDataIsolation $dataIsolation, ProviderModelConfigVersionEntity $entity): void
     {

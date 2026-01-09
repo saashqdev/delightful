@@ -877,7 +877,7 @@ class DagTest extends BaseTest
             ['D', 'F'],
         ];
 
-        // A -> B、C -> D -> E、F
+        // A -> B,C -> D -> E,F
 
         $nodes = [];
         foreach ($edges as $edge) {

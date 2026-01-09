@@ -110,7 +110,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * savesectionpoint,nodes、edges.
+     * savesectionpoint,nodes,edges.
      */
     public function saveNode(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $savingDelightfulFlow): DelightfulFlowEntity
     {

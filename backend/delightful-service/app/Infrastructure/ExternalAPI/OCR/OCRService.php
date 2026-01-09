@@ -76,12 +76,12 @@ readonly class OCRService
             throw new RuntimeException("no法getheadinfo: {$url}");
         }
 
-        // extract `Last-Modified`、`ETag` and `Content-Length`(if存in)
+        // extract `Last-Modified`,`ETag` and `Content-Length`(if存in)
         $lastModified = $headers['Last-Modified'] ?? null;
         $etag = $headers['Etag'] ?? null;
         $contentLength = $headers['Content-Length'] ?? null;
 
-        // checkcachemiddle `Last-Modified`、`ETag` and `Content-Length`
+        // checkcachemiddle `Last-Modified`,`ETag` and `Content-Length`
         if ($cachedData) {
             $isCacheValid = true;
 

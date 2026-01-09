@@ -16,7 +16,7 @@ use App\Domain\Contact\Service\DelightfulUserDomainService;
 /**
  * Delightfuluserinfoapplicationservice.
  *
- * aggregateuser基本info、accountinfoanddepartmentinfo,providecompleteuserinfo.
+ * aggregateuser基本info,accountinfoanddepartmentinfo,providecompleteuserinfo.
  */
 class DelightfulUserInfoAppService extends AbstractAppService
 {

@@ -16,13 +16,13 @@ enum NodeType: int
 {
     /*
      * Start Node
-     * useas触hair器.windowopeno clock、havenewmessageo clock、schedule;parametercall(only子processcanuse)
+     * useas触hair器.windowopeno clock,havenewmessageo clock,schedule;parametercall(only子processcanuse)
      */
     case Start = 1;
 
     /*
      * LLM Chat thiswithinishistoryreasongroup合sectionpoint
-     * biglanguagemodel optionalmodel、prompt、temperature
+     * biglanguagemodel optionalmodel,prompt,temperature
      */
     case LLM = 2;
 
@@ -61,7 +61,7 @@ enum NodeType: int
 
     /*
      * Loader
-     * dataload.come源:toquantitydatabase、file、network
+     * dataload.come源:toquantitydatabase,file,network
      */
     case Loader = 8;
 

@@ -80,9 +80,9 @@ class AsrTaskStatusDTO
 
     public ?string $noteContent = null; // 笔记content
 
-    public ?string $noteFileType = null; // 笔记filetype(md、txt、json)
+    public ?string $noteFileType = null; // 笔记filetype(md,txt,json)
 
-    public ?string $language = null; // 语type(zh_CN、en_USetc),useatgeneratetitleo clockuse
+    public ?string $language = null; // 语type(zh_CN,en_USetc),useatgeneratetitleo clockuse
 
     public ?string $uploadGeneratedTitle = null; // upload-tokens generatetitle(useat summary 复use)
 
@@ -299,7 +299,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarraymiddle按优先levelgetbooleanvalue(support多typeformat:true/false、1/0、'1'/'0').
+     * fromarraymiddle按优先levelgetbooleanvalue(support多typeformat:true/false,1/0,'1'/'0').
      *
      * @param array<string, mixed> $data dataarray
      * @param array<string> $keys key名column表(按优先levelsort)

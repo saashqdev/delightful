@@ -19,7 +19,7 @@ return new class extends Migration {
             });
         }
 
-        // Make organization_code、user_id nullable
+        // Make organization_code,user_id nullable
         Schema::table('delightful_user_settings', function (Blueprint $table) {
             $table->string('organization_code', 32)->nullable()->default(null)->change();
             $table->string('user_id', 64)->nullable()->change();
@@ -28,7 +28,7 @@ return new class extends Migration {
 
     public function down(): void
     {
-        // Revert organization_code、user_id back to NOT NULL
+        // Revert organization_code,user_id back to NOT NULL
         Schema::table('delightful_user_settings', function (Blueprint $table) {
             $table->string('organization_code', 32)->default('')->nullable(false)->change();
             $table->string('user_id', 64)->nullable(false)->change();

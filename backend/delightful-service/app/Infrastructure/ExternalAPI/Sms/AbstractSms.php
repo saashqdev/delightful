@@ -22,7 +22,7 @@ abstract class AbstractSms implements SmsInterface
 
     public function getContent(SmsStruct $smsStruct): string
     {
-        // according toshortmessage drivencertainto应语type,andconduct语type兜bottom
+        // according toshortmessage drivencertaintoresponse languagetype,andconduct语type兜bottom
         $language = $this->getContentLanguage($smsStruct);
         if (empty($smsStruct->variables)) {
             return $smsStruct->content ?: '';

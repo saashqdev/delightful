@@ -601,7 +601,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             'receive_id' => $receiverId,
             'msg_type' => 'text',
             'content' => [
-                'text' => 'handlemessageo clockhair生error,请稍backagain试',
+                'text' => 'handlemessageo clockhair生error,please waitbackagain试',
             ],
         ];
         $this->application->message->send($data, 'chat_id');

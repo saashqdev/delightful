@@ -186,7 +186,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         if ($groupEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NOT_FOUND);
         }
-        // group ownernotcanexitgroup chat,need先转移group owner身share
+        // group ownernotcanexitgroup chat,need先transfergroup owner身share
         $groupOwner = $groupEntity->getGroupOwner();
         if ($groupOwner === $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_TRANSFER_OWNER_BEFORE_LEAVE);

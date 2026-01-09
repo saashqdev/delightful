@@ -53,7 +53,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
     // decrease群member
     public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int
     {
-        // todo ifisgroup ownerleave,need转移group owner
+        // todo ifisgroup ownerleave,needtransfergroup owner
         return $this->delightfulGroupRepository->removeUsersFromGroup($delightfulGroupEntity, $userIds);
     }
 

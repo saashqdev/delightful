@@ -16,7 +16,7 @@ use Hyperf\Codec\Json;
 use function Hyperf\Config\config;
 
 /**
- * AIcan力装配器.
+ * AIcanpower assembler.
  */
 class AiAbilityAssembler
 {
@@ -147,8 +147,8 @@ class AiAbilityAssembler
      * desensitize API Key.
      *
      * @param string $apiKey original API Key
-     * @param int $prefixLength retainfront几位(default3)
-     * @param int $suffixLength retainback几位(default3)
+     * @param int $prefixLength retainfrontseveral digits(default3)
+     * @param int $suffixLength retainbackseveral digits(default3)
      * @return string desensitizeback API Key
      */
     private static function maskApiKey(string $apiKey, int $prefixLength = 4, int $suffixLength = 4): string

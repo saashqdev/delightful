@@ -104,7 +104,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
             case ControlMessageType::GroupDisband:
             case ControlMessageType::GroupUpdate:
             case ControlMessageType::GroupOwnerChange:
-                // 群操as
+                // group operationas
                 $this->groupDomainService->handlerMQGroupUserChangeSeq($delightfulSeqEntity);
                 break;
         }

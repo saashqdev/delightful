@@ -13,7 +13,7 @@ use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 interface ProviderModelConfigVersionRepositoryInterface
 {
     /**
-     * savemodelconfigurationversion(containversionnumber递增andmarkcurrentversioncompletelogic).
+     * savemodelconfigurationversion(containversionnumberincrementandmarkcurrentversioncompletelogic).
      * usetransactionensuredataone致property.
      *
      * @param ProviderDataIsolation $dataIsolation dataisolationobject

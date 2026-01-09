@@ -176,7 +176,7 @@ class SandboxApi
             'metadata' => $metadata,
         ]);
 
-        // verify必传parameter
+        // verifyrequired parameterparameter
         if (empty($type) || $type !== 'init') {
             return [
                 'code' => 4000,

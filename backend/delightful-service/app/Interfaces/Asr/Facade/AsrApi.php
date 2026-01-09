@@ -456,7 +456,7 @@ class AsrApi extends AbstractApi
             $taskKey = uniqid('', true);
         }
 
-        // validate必传parameter
+        // validaterequired parameterparameter
         if (empty($taskKey) && empty($fileId)) {
             ExceptionBuilder::throw(GenericErrorCode::ParameterMissing, trans('asr.api.validation.task_key_required'));
         }

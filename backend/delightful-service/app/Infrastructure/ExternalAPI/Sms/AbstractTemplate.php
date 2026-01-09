@@ -95,7 +95,7 @@ abstract class AbstractTemplate implements TemplateInterface
             return $sign;
         }
 
-        // certainsignature语type,needfrom userfinger定语type,userfinger定兜bottom语type,systemdefault兜bottom语type middlecertainoutcomeonevalue
+        // certainsignature语type,needfrom userfinger定语type,userfingerfixedbottom语type,systemdefault兜bottom语type middlecertainoutcomeonevalue
         $signLanguage = null;
         // 语type兜bottomorder
         $defaultLanguages = [$language, $defaultLanguage, LanguageEnum::EN_US, LanguageEnum::ZH_CN];

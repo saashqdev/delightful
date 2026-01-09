@@ -39,7 +39,7 @@ class ModeAppService extends AbstractModeAppService
             return [];
         }
 
-        // getback台所have模type,useatencapsulationdatato Agent middle
+        // getbackplatformhave模type,useatencapsulationdatato Agent middle
         $query = new ModeQuery(status: true);
         $modeEnabledList = $this->modeDomainService->getModes($modeDataIsolation, $query, Page::createNoPage())['list'];
 

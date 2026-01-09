@@ -339,7 +339,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
         di(DelightfulChatMessageAppService::class)->userSendMessageToAgent($receiveSeqDTO, $senderUserId, $receiveUserId, $appMessageId, false, null, ConversationType::Ai, $topicId);
     }
 
-    // back台task,notwillmockusersendmessage,  预留method,暂o clocknothaveuseto
+    // back台task,notwillmockusersendmessage,  reservemethod,暂o clocknothaveuseto
     // public static function asyncCallback(string $flow_code, array $user_task)
     // {
     //     $triggerConfig = [
@@ -459,7 +459,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     // get node 运lineresult
     //     foreach ($delightfulFlow->getNodes() as $node) {
     //         if ($node->getNodeDebugResult()) {
-    //             // haveonefailthen判定forfail
+    //             // haveonefailthendetermineforfail
     //             if (! $node->getNodeDebugResult()->isSuccess()) {
     //                 $result['success'] = false;
     //             }

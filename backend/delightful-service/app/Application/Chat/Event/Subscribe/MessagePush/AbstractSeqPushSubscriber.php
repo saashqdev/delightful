@@ -27,7 +27,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
 
     /**
      * 1.本groundopenhairo clocknotstart,avoidconsumetestenvironmentdata,causetestenvironmentuser收nottomessage
-     * 2.if本groundopenhairo clock想debug,请fromlinein本ground搭建front端environment,more换mqhost. or者applyonedevenvironment,isolationmq.
+     * 2.if本groundopenhairo clock想debug,请fromlinein本groundbuildfront端environment,more换mqhost. or者applyonedevenvironment,isolationmq.
      */
     public function isEnable(): bool
     {

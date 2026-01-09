@@ -40,7 +40,7 @@ class MCPResourceManager
 
     /**
      * getfinger定IDresource.
-     * whenfrontfornullimplement,始终returnnull.
+     * whenfrontfornullimplement,alwaysreturnnull.
      */
     public function getResource(string $id): ?array
     {

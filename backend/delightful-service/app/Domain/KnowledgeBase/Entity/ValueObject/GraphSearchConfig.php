@@ -69,14 +69,14 @@ class GraphSearchConfig extends AbstractValueObject
     /**
      * close系type.
      *
-     * searcho clockconsiderclose系typelist,foremptytable示所havetype
+     * searcho clockconsiderclose系typelist,foremptytabledisplayhavetype
      */
     private array $relationTypes = [];
 
     /**
      * sectionpointtype.
      *
-     * searcho clockconsidersectionpointtypelist,foremptytable示所havetype
+     * searcho clockconsidersectionpointtypelist,foremptytabledisplayhavetype
      */
     private array $nodeTypes = [];
 

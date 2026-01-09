@@ -466,7 +466,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testandhair调degreeandetc待父sectionpointcomplete.
+     * testandhair调degreeandetcpending parentsectionpointcomplete.
      * root -> vertex2
      * root -> vertex3
      * vertex2 -> vertex5

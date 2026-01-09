@@ -19,7 +19,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Hyperf\Codec\Json;
 
 /**
- * 账number收item箱序columnnumbertable,each账number所havemessagemustsingleincrement.
+ * 账number收itembox sequencecolumnnumbertable,each账number所havemessagemustsingleincrement.
  */
 final class DelightfulSeqEntity extends AbstractEntity
 {
@@ -29,7 +29,7 @@ final class DelightfulSeqEntity extends AbstractEntity
 
     protected ConversationType $objectType;
 
-    // object_type for0or者1o clock,this处代table delightful_id
+    // object_type for0or者1o clock,thisprocess generationtable delightful_id
     protected string $objectId = '';
 
     protected string $seqId = '';

@@ -12,7 +12,7 @@ use App\Domain\Provider\Entity\ProviderModelEntity;
 /**
  * based onorganizationencodingmodelfilterserviceinterface.
  *
- * useat替代based onmodeltable visiblePackages fieldfilterlogic
+ * useatsubstitutebased onmodeltable visiblePackages fieldfilterlogic
  * enterprisepackageimplementthisinterface,providegiveopen源packageconductmodelfilter
  */
 interface OrganizationBasedModelFilterInterface

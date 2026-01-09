@@ -209,7 +209,7 @@ class DelightfulMessageEntity extends AbstractEntity
     }
 
     /**
-     * @deprecated use getContent 替代
+     * @deprecated use getContent substitute
      */
     public function getMessageContent(): MessageInterface
     {

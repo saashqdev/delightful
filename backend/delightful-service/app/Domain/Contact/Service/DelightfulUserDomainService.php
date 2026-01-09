@@ -562,7 +562,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
     protected function getAgents(array $popular, array $latest): array
     {
-        // according todelightful_id,查账numberdetail
+        // according todelightful_id,check accountnumberdetail
         $delightfulIds[] = array_column($popular, 'delightful_id');
         $delightfulIds[] = array_column($latest, 'delightful_id');
         $delightfulIds = array_values(array_unique(array_merge(...$delightfulIds)));

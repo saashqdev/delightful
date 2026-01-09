@@ -95,7 +95,7 @@ class OrganizationAdminDomainService
      */
     public function destroy(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdminEntity): void
     {
-        // indeleteorganizationadministratorrecord之front,先移exceptitsinpermissionsystemmiddle role_user associate
+        // indeleteorganizationadministratorrecord之front,move firstexceptitsinpermissionsystemmiddle role_user associate
         try {
             // createpermissionisolationobject,useat操asroleservice
             $permissionIsolation = PermissionDataIsolation::create(

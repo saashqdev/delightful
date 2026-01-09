@@ -31,7 +31,7 @@ class VolceApiClient extends AbstractSms
             $smsStruct->setTemplateId($templateId);
         }
         $variables = $this->parseVariables($smsStruct);
-        // VolcengineSms needeachtimeshort信重new new
+        // VolcengineSms needeachtimeshortmessage weightnew new
         return make(VolcengineSms::class)->request($smsStruct->phone, $variables, $smsStruct->sign, $smsStruct->templateId);
     }
 

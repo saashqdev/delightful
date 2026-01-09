@@ -198,7 +198,7 @@ class CreateGroupTool extends AbstractBuiltInTool
             "type": "number",
             "key": "group_type",
             "title": "群type",
-            "description": "群type.1 insidedepartment group;2 培训群;3 will议群;4 project群;5 工single群;6 outsidedepartment group;",
+            "description": "群type.1 insidedepartment group;2 培训群;3 willdiscussion group;4 project群;5 工single群;6 outsidedepartment group;",
             "required": null,
             "value": null,
             "encryption": false,

@@ -12,7 +12,7 @@ use App\Domain\ImageGenerate\Contract\FontProviderInterface;
 /**
  * default字bodyprovide者implement
  * open源projectmiddledefaultimplement,providefoundation字bodyfeature
- * enterpriseprojectcanpassdependencyinjection覆盖thisimplementcomeprovidehighlevel字bodyfeature.
+ * enterpriseprojectcanpassdependencyinjectioncoveragethisimplementcomeprovidehighlevel字bodyfeature.
  */
 class DefaultFontProvider implements FontProviderInterface
 {

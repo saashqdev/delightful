@@ -398,7 +398,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         foreach ($recipientsData as $recipient) {
             $userId = null;
             if (is_array($recipient)) {
-                // 引入onetime
+                // introduceonetime
                 if (isset($recipient['type'])) {
                     switch ($recipient['type']) {
                         case 'department':
@@ -412,7 +412,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                     }
                     continue;
                 }
-                // 引入多time
+                // introduce多time
                 foreach ($recipient as $item) {
                     if (is_string($item)) {
                         $userIds[] = $item;

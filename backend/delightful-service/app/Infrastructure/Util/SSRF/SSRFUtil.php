@@ -10,7 +10,7 @@ namespace App\Infrastructure\Util\SSRF;
 use Throwable;
 
 /**
- * SSRF防御toolcategory.
+ * SSRFdefensetoolcategory.
  *
  * useexample:
  * // 简singleuse,defaultconfiguration
@@ -30,14 +30,14 @@ use Throwable;
 class SSRFUtil
 {
     /**
-     * getSSRF防御securitylink.
+     * getSSRFdefensesecuritylink.
      *
      * @param string $url needcheckURL
      * @param array $blackList blacklistIPordomain
      * @param array $whiteList whitelistsingleIPordomain
      * @param array $allowProtocols allowagreement
      * @param bool $replaceIp whetherreplaceforIPaccess
-     * @param bool $allowRedirect whetherallow重定to
+     * @param bool $allowRedirect whetherallowredirectto
      * @return string securityURL
      * @throws Exception\SSRFException whenURLnotsecurityo clockthrowexception
      */
@@ -69,7 +69,7 @@ class SSRFUtil
      * @param array $whiteList whitelistsingleIPordomain
      * @param array $allowProtocols allowagreement
      * @param bool $replaceIp whetherreplaceforIPaccess
-     * @param bool $allowRedirect whetherallow重定to
+     * @param bool $allowRedirect whetherallowredirectto
      * @return bool whethersecurity
      */
     public static function isSafeUrl(

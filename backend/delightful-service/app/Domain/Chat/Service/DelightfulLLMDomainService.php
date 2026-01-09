@@ -152,7 +152,7 @@ class DelightfulLLMDomainService
     handlestep:
     1.1 实bodyidentify
        - 显propertynaming实bodyextract,identify实bodybetweenclose系andproperty
-       - deduceuser隐propertyrequirementand潜in意graph,especiallycloseimplicittime因素
+       - deduceuser隐propertyrequirementand潜in意graph,especiallycloseimplicittimeelement
     1.2 dimensiondecompose
        - according toidentifyout实bodyandrequirement,choosesuitableanalyzedimension,for example:policyinterpret,datavalidate,caseresearch,impactevaluate,technology原理,marketfront景,userbody验etc
     1.3 子questiongenerate

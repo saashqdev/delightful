@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Entity\ValueObject;
 
 enum AmqpTopicType: string
 {
-    // 生产message(consumeeachtypecustomer端producemessage,generate序columnnumber)
+    // productionmessage(consumeeachtypecustomer端producemessage,generate序columnnumber)
     case Message = 'delightful-chat-message';
 
     // delivermessage(consume序columnnumber)

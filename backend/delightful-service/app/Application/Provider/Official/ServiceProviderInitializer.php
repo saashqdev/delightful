@@ -150,7 +150,7 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'ByteDance',
-                        'zh_CN' => '字section跳动',
+                        'zh_CN' => '字sectionByteDance',
                     ],
                     'description' => [
                         'en_US' => 'A cloud service platform under ByteDance, with independently developed Doubao large model series. Includes Doubao general models Pro and lite with different text processing and comprehensive capabilities, as well as various models for role-playing, speech synthesis, etc.',

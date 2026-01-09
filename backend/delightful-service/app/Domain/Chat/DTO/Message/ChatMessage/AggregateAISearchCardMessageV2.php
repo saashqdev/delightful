@@ -113,14 +113,14 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
         //            {
         //                "parent_question_id": "0",
         //                "question_id": "1",
-        //                "question": "small米collection团旗downhave哪these品牌"
+        //                "question": "small米collectionteam flagdownhave哪these品牌"
         //            }
         //        ],
         //        "question_1": [
         //            {
         //                "parent_question_id": "1",
         //                "question_id": "3",
-        //                "question": "hundreddegreeis干嘛"
+        //                "question": "hundreddegreeiswhat for"
         //            }
         //        ]
         //    }

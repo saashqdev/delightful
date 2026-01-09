@@ -40,7 +40,7 @@ class CheckLoginRequest extends AbstractDTO
     protected string $phone = '';
 
     /**
-     * 重定toURL.
+     * redirecttoURL.
      */
     protected string $redirect = '';
 

@@ -182,7 +182,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             $messageDTO->setContent($messageStruct);
             // giveto方messagestreamgenerate序column.
             $seqEntity = $this->generateReceiveSequenceByControlMessage($messageDTO, $receiveConversationEntity);
-            // notifyto方所have
+            // notifytolocationhave
             $this->pushControlSequence($seqEntity);
         }
         // informcustomer端requestsuccess
@@ -223,7 +223,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $messageDTO->setContent($messageStruct);
         // generatemessagestreamgenerate序column.
         $seqEntity = $this->generateReceiveSequenceByControlMessage($messageDTO, $receiveConversationEntity);
-        // notify收item方所havedevice
+        // notify收itemlocationhavedevice
         $this->pushControlSequence($seqEntity);
         return true;
     }

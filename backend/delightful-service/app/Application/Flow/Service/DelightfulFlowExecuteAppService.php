@@ -510,7 +510,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         // get node 运lineresult
         foreach ($delightfulFlowEntity->getNodes() as $node) {
             if ($node->getNodeDebugResult()) {
-                // haveonefailthen判定forfail
+                // haveonefailthendetermineforfail
                 if (! $node->getNodeDebugResult()->isSuccess()) {
                     $result['success'] = false;
                 }

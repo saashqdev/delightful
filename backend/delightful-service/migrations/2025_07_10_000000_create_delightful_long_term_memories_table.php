@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->decimal('importance', 3, 2)->unsigned()->default(0.5)->comment('重wantproperty(0-1)');
             $table->unsignedInteger('access_count')->default(0)->comment('accesscount');
             $table->unsignedInteger('reinforcement_count')->default(0)->comment('strong化count');
-            $table->decimal('decay_factor', 3, 2)->unsigned()->default(1.0)->comment('衰subtract因子(0-1)');
+            $table->decimal('decay_factor', 3, 2)->unsigned()->default(1.0)->comment('衰subtractfactor(0-1)');
             $table->json('tags')->nullable()->comment('taglist');
             $table->json('metadata')->nullable()->comment('yuandata');
             $table->string('org_id', 36)->comment('organizationID');

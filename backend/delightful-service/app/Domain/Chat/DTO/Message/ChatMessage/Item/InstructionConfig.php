@@ -39,7 +39,7 @@ class InstructionConfig extends AbstractEntity
     protected string $id = '';
 
     /**
-     * finger令insertposition,1 messagecontentfront方,2 messagecontentmiddle光标position,3 messagecontentback方.
+     * finger令insertposition,1 messagecontentfront方,2 messagecontentmiddlecursorposition,3 messagecontentback方.
      */
     protected int $insertLocation = InstructionInsertLocation::Cursor->value;
 

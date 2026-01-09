@@ -100,7 +100,7 @@ class MessageUtil
                     if (count($linkPaths) === 1 && is_string($linkDesc) && $linkDesc !== '') {
                         $attachment->setName($linkDesc);
                     }
-                    // down标寻找
+                    // downfind marker
                     if (is_array($linkDesc) && $fileName = $linkDesc[$attachment->getOriginAttachment()] ?? null) {
                         is_string($fileName) && $attachment->setName($fileName);
                     }

@@ -61,7 +61,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 > knowledge basename:knowledge basedescription
 {$knowledgePrompt}
 ## process
-1. combineupdown文提炼userissue,generate多keyword,at mostnot超pass 5 ,多keyworduseEnglish逗number"," 隔open,useatusedifferentkeywordfromknowledge basemiddleretrievemost相closeinfo;
+1. combineupdowntext extractionuserissue,generate多keyword,at mostnot超pass 5 ,多keyworduseEnglish逗number"," 隔open,useatusedifferentkeywordfromknowledge basemiddleretrievemost相closeinfo;
 2. combineupdown文,analyzeuserissue,generate `names` parameter,useatfinger定anduserissuemaybehaveclose多knowledge basename,according to相closepropertysort,相closeproperty需combineupdown文,knowledge basenameandknowledge basedescriptionconductjudge;
 3. usekeywordanduserissue,call `{$this->getName()}` toolretrieveknowledge basemiddlecontent,keywordparameteris `keyword`,userissueparameteris `question`, 请ensureparameterallbecorrect填入,toolwillreturnanduserissuesimilardegreemosthighcontentslicesegment;
 4. knowledge baseretrieveoutcomecontentwithinwillcontainonethesecustomize Delightful tag,youwant善atuseit们,havebydown几typetag:

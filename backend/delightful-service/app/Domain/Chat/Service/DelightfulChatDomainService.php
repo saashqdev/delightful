@@ -1129,7 +1129,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         }
         // 收hairdoublehairtopicidone致,butistopicbelong toconversationiddifferent
         $receiveSeqExtra->setTopicId($senderTopicId);
-        // hairitem方所inenvironmentid
+        // hairitemlocationinenvironmentid
         $receiveSeqExtra->setDelightfulEnvId($senderSeqEntity->getExtra()?->getDelightfulEnvId());
         // judge收item方topic idwhether存in
         $topicDTO = new DelightfulTopicEntity();

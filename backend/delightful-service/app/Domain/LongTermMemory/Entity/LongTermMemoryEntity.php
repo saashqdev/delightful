@@ -455,7 +455,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * calculatetime衰subtract因子.
+     * calculatetime衰subtractfactor.
      */
     private function calculateTimeDecay(): float
     {

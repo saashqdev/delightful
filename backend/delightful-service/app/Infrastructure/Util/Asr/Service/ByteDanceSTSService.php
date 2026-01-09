@@ -20,7 +20,7 @@ use Hyperf\Redis\RedisFactory;
 use Psr\Log\LoggerInterface;
 
 /**
- * 字section跳动voiceserviceSTStokenservice
+ * 字sectionByteDancevoiceserviceSTStokenservice
  * useatgetvoiceserviceJWT token.
  */
 class ByteDanceSTSService

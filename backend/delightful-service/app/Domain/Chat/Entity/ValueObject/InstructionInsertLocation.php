@@ -12,7 +12,7 @@ enum InstructionInsertLocation: int
     // messagecontentfront方
     case Before = 1;
 
-    // messagecontentmiddle光标position
+    // messagecontentmiddlecursorposition
     case Cursor = 2;
 
     // messagecontentback方

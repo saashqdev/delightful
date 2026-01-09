@@ -18,7 +18,7 @@ enum UserStatus: int
     // 1:activated
     case Activated = 1;
 
-    // 2:already离职
+    // 2:alreadyresign
     case Resigned = 2;
 
     // 3:alreadyexit

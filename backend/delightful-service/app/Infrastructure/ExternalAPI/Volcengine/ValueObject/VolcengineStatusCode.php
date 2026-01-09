@@ -28,7 +28,7 @@ enum VolcengineStatusCode: string
     case QUEUED = '20000002';
 
     /**
-     * muteaudio - no需重newquery,directly重newsubmit.
+     * muteaudio - noneed重newquery,directly重newsubmit.
      */
     case SILENT_AUDIO = '20000003';
 
@@ -48,7 +48,7 @@ enum VolcengineStatusCode: string
     case INVALID_AUDIO_FORMAT = '45000151';
 
     /**
-     * service器繁忙.
+     * servicedevice busy.
      */
     case SERVER_BUSY = '55000031';
 
@@ -105,7 +105,7 @@ enum VolcengineStatusCode: string
             self::INVALID_PARAMS => 'requestparameterinvalid',
             self::EMPTY_AUDIO => 'emptyaudio',
             self::INVALID_AUDIO_FORMAT => 'audioformatnotcorrect',
-            self::SERVER_BUSY => 'service器繁忙',
+            self::SERVER_BUSY => 'servicedevice busy',
         };
     }
 

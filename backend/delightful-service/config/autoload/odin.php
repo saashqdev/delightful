@@ -61,7 +61,7 @@ function processModelConfig(&$modelItem, string $modelName): void
         }
     }
 
-    // 优雅printloadsuccessmodel
+    // elegantprintloadsuccessmodel
     echo "\033[32m✓\033[0m modelloadsuccess: \033[1m" . $modelName . ' (' . $modelItem['model'] . ")\033[0m" . PHP_EOL;
 }
 

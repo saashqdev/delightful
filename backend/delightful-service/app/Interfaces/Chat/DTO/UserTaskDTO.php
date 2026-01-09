@@ -36,7 +36,7 @@ class UserTaskDTO extends AbstractDTO
 
     protected string $agentUserId = '';
 
-    // whenfrontuser所处environmentid
+    // whenfrontuserlocatedenvironmentid
     protected int $delightfulEnvId = 0;
 
     public function __construct(?array $data = null)

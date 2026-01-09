@@ -12,7 +12,7 @@ use Hyperf\Contract\Arrayable;
 
 /**
  * fastspeedpropertyaccess基category
- * othercategorycaninheritthiscategory,获便捷propertysetandaccesscan力.
+ * othercategorycaninheritthiscategory,convenient accesspropertysetandaccesscan力.
  */
 abstract class BaseObject extends UnderlineObjectJsonSerializable implements ArrayAccess, Arrayable
 {

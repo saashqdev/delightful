@@ -40,7 +40,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected UserType $userType;
 
     /**
-     * userintheorganizationdownstatus:0:freeze,1:activated,2:already离职,3:alreadyexit.
+     * userintheorganizationdownstatus:0:freeze,1:activated,2:alreadyresign,3:alreadyexit.
      */
     protected string $status;
 
@@ -69,7 +69,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
 
     protected array $permissions = [];
 
-    // currentuser所处environmentid
+    // currentuserlocatedenvironmentid
     protected int $delightfulEnvId = 0;
 
     // thethree方platformoriginalorganizationencoding

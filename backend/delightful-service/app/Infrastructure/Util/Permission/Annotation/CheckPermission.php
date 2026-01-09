@@ -13,7 +13,7 @@ use BackedEnum;
 use Hyperf\Di\Annotation\AbstractAnnotation;
 
 /**
- * permissionvalidationannotation,useatmethodorcategoryupstatement所需permission.
+ * permissionvalidationannotation,useatmethodorcategoryupstatementrequiredpermission.
  *
  * example:
  * #[CheckPermission(DelightfulResourceEnum::CONSOLE_API_ASSISTANT, DelightfulOperationEnum::QUERY)]

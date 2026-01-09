@@ -12,7 +12,7 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
  *
  * definition两typeretrievestrategy:
  * - SINGLE: singleretrieve,fromsingleknowledge basemiddleretrieveinfo
- * - MULTIPLE: 多重retrieve,meanwhilefrom多knowledge basemiddleretrieveinfo,然backtoresultconduct重newsort
+ * - MULTIPLE: multipleretrieve,meanwhilefrom多knowledge basemiddleretrieveinfo,然backtoresultconduct重newsort
  */
 class RetrieveStrategy
 {
@@ -26,7 +26,7 @@ class RetrieveStrategy
     public const SINGLE = 'single';
 
     /**
-     * 多重retrieve.
+     * multipleretrieve.
      *
      * meanwhilefrom多knowledge basemiddleretrieveinfo,然backtoresultconduct重newsort.
      * thestrategypassconfigurationparameter `retrieve_strategy` fieldset,

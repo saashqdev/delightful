@@ -245,7 +245,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 预publishand生产can看做isoneenvironment,所bythiswithinprocessonedownassociateenvironment ids.
+     * 预publishandproductioncanregard asisoneenvironment,所bythiswithinprocessonedownassociateenvironment ids.
      * */
     private function getEnvRelationIds(DelightfulEnvironmentEntity $delightfulEnvironmentEntity): array
     {

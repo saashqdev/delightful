@@ -169,7 +169,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     }
 
     /**
-     * willfileuploadto云端.
+     * willfileuploadtocloud.
      */
     #[ArrayShape([['file_id' => 'string', 'url' => 'string']])]
     private function uploadFiles(RequestContext $requestContext, array $attachments): array

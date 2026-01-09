@@ -81,7 +81,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
                 'lock_key' => $lockKey,
                 'timeout' => 30,
             ]);
-            throw new Exception('getgraphlikeresponselocktimeout,请稍backretry');
+            throw new Exception('getgraphlikeresponselocktimeout,please waitbackretry');
         }
 
         $this->logger->debug('Redislockgetsuccess', ['lock_key' => $lockKey, 'owner' => $owner]);

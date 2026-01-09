@@ -40,7 +40,7 @@ class MCPPromptManager
 
     /**
      * getfinger定IDprompt.
-     * whenfrontfornullimplement,始终returnnull.
+     * whenfrontfornullimplement,alwaysreturnnull.
      */
     public function getPrompt(string $id): ?array
     {

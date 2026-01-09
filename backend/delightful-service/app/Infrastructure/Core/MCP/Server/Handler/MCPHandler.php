@@ -157,7 +157,7 @@ class MCPHandler implements MCPHandlerInterface
 
             $result = null;
             if ($handler) {
-                // forprocess器set所需managergroupitem
+                // forprocess器setrequiredmanagergroupitem
                 $handler->setToolManager($this->toolManager)
                     ->setResourceManager($this->resourceManager)
                     ->setPromptManager($this->promptManager);

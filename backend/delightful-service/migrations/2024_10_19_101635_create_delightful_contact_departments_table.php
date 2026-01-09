@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->string('name', 64)->comment('departmentname');
             $table->text('i18n_name')->comment('internationalizationdepartmentname');
             $table->string('order', 64)->comment('departmentsort,即departmentinits同leveldepartmentshoworder.取valuemoresmallsortmore靠front.')->nullable()->default('');
-            $table->string('leader_user_id', 64)->comment('department主管user ID')->nullable()->default('');
+            $table->string('leader_user_id', 64)->comment('departmentsupervisoruser ID')->nullable()->default('');
             $table->string('organization_code', 64)->comment('Magicorganizationencoding');
             $table->text('status')->comment('departmentstatus,jsonformat,目frontsupport is_deleted:whetherdelete');
             $table->string('document_id', 64)->comment('departmentinstruction书(云documentid)');

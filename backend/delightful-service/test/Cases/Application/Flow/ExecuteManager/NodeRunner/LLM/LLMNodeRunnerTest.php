@@ -308,7 +308,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "youisone AI 助hand.whenuserneed资讯whendayday气o clock,call today_weather comequeryresult",
+                    "value": "youisone AI 助hand.whenuserneedinformationwhendayday气o clock,call today_weather comequeryresult",
                     "name": "",
                     "args": null
                 }

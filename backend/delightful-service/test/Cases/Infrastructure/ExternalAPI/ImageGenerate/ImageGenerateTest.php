@@ -137,7 +137,7 @@ class ImageGenerateTest extends BaseTest
 
         // createrequestinstance
         $gpt4oModelRequest = new GPT4oModelRequest();
-        $gpt4oModelRequest->setPrompt('oneonlysmall金毛justin草原up欢fastrun');
+        $gpt4oModelRequest->setPrompt('oneonlysmall金毛justingrasslandup欢fastrun');
         $gpt4oModelRequest->setGenerateNum(4);
 
         // generateimage

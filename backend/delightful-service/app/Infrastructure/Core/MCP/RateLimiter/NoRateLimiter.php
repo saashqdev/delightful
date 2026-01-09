@@ -35,10 +35,10 @@ class NoRateLimiter extends AbstractRateLimiter
     }
 
     /**
-     * nolimitcheckimplement,始终allowrequestpass.
+     * nolimitcheckimplement,alwaysallowrequestpass.
      */
     protected function doCheck(string $clientId, MessageInterface $request): void
     {
-        // nullimplement,始终allowrequestpass
+        // nullimplement,alwaysallowrequestpass
     }
 }

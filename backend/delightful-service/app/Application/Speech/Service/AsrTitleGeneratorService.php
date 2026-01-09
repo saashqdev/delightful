@@ -38,7 +38,7 @@ readonly class AsrTitleGeneratorService
     /**
      * according todifferentscenariogeneratetitle.
      *
-     * scenarioone:have asr_stream_content(front端实o clockrecording),directlyusecontentgeneratetitle
+     * scenarioone:have asr_stream_content(frontclient implementationo clockrecording),directlyusecontentgeneratetitle
      * scenariotwo:have file_id(uploadalreadyhavefile),buildhint词generatetitle
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
@@ -58,7 +58,7 @@ readonly class AsrTitleGeneratorService
         try {
             $language = $this->translator->getLocale() ?: 'zh_CN';
 
-            // scenarioone:have asr_stream_content(front端实o clockrecording)
+            // scenarioone:have asr_stream_content(frontclient implementationo clockrecording)
             if (! empty($asrStreamContent)) {
                 $customPrompt = AsrPromptAssembler::getTitlePrompt($asrStreamContent, $note, $language);
                 $title = $this->delightfulChatMessageAppService->summarizeTextWithCustomPrompt(

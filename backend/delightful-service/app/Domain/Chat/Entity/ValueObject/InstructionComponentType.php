@@ -12,10 +12,10 @@ enum InstructionComponentType: int
     // 单option
     case Radio = 1;
 
-    // 开关
+    // switch
     case Switch = 2;
 
-    // 文本type
+    // texttype
     case Text = 3;
 
     // statustype

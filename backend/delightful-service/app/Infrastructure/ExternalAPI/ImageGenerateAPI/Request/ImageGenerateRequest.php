@@ -29,10 +29,10 @@ class ImageGenerateRequest
 
     protected string $model;
 
-    // display水印
+    // displaywatermark
     protected ?WatermarkConfig $watermarkConfig = null;
 
-    // 隐type水印
+    // 隐typewatermark
     protected ?ImplicitWatermark $implicitWatermark = null;
 
     // valid期

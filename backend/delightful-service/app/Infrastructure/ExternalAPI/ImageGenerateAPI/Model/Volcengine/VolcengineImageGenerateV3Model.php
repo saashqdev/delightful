@@ -423,17 +423,17 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
             if (! empty($data['image_urls']) && ! empty($data['image_urls'][0])) {
                 $imageUrl = $data['image_urls'][0];
                 try {
-                    // handle水印
+                    // handlewatermark
                     $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($imageUrl, $imageGenerateRequest);
                     $currentData[] = [
                         'url' => $processedUrl,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('VolcengineV3addimagedata：URL水印handlefail', [
+                    $this->logger->error('VolcengineV3addimagedata：URLwatermarkhandlefail', [
                         'error' => $e->getMessage(),
                         'url' => $imageUrl,
                     ]);
-                    // 水印handlefailo clockuseoriginalURL
+                    // watermarkhandlefailo clockuseoriginalURL
                     $currentData[] = [
                         'url' => $imageUrl,
                     ];
@@ -442,16 +442,16 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                 // 备选：handle base64 formatimage，只取firstimage
                 $base64Image = $data['binary_data_base64'][0];
                 try {
-                    // handle水印
+                    // handlewatermark
                     $processedImage = $this->watermarkProcessor->addWatermarkToBase64($base64Image, $imageGenerateRequest);
                     $currentData[] = [
                         'b64_json' => $processedImage,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('VolcengineV3addimagedata：base64水印handlefail', [
+                    $this->logger->error('VolcengineV3addimagedata：base64watermarkhandlefail', [
                         'error' => $e->getMessage(),
                     ]);
-                    // 水印handlefailo clockuseoriginaldata
+                    // watermarkhandlefailo clockuseoriginaldata
                     $currentData[] = [
                         'b64_json' => $base64Image,
                     ];
@@ -478,7 +478,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
     }
 
     /**
-     * 为火山engineV3originaldataadd水印.
+     * 为火山engineV3originaldataaddwatermark.
      */
     private function processVolcengineV3RawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -506,8 +506,8 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                     unset($imageUrl);
                 }
             } catch (Exception $e) {
-                // 水印handlefailo clock，recorderrorbutnot影响imagereturn
-                $this->logger->error('火山engineV3image水印handlefail', [
+                // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
+                $this->logger->error('火山engineV3imagewatermarkhandlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);

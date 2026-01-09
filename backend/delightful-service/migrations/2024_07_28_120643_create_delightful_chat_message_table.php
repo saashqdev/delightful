@@ -35,7 +35,7 @@ class CreateDelightfulChatMessageTable extends Migration
             # ## message结构
             // message优先level,由atsystemstableproperty管理
             $table->tinyInteger('priority')->default(0)->comment('message优先level,0~255,0most低,255most高');
-            $table->string('message_type', 32)->comment('messagetype:文本/table情/file/markdownetc');
+            $table->string('message_type', 32)->comment('messagetype:text/table情/file/markdownetc');
             $table->text('content')->comment('messagedetail');
             $table->timestamp('send_time')->comment('messagesendtime');
             $table->index(['sender_id', 'sender_type', 'sender_organization_code'], 'idx_sender_id_type');

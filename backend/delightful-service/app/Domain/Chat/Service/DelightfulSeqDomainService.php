@@ -344,7 +344,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
             $senderAccountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($senderUserEntity->getDelightfulId());
             // 开协程了，copy requestId
             $requestId = CoContext::getRequestId();
-            // 协程透传语言
+            // 协程透传language
             $language = di(TranslatorInterface::class)->getLocale();
 
             $this->logger->info('userCallFlow language: ' . $language);

@@ -83,8 +83,8 @@ JSON, true));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'system_prompt' => 'whenuserinput的content是想要conduct文本切割o clock，call text_splitter tool来conduct文本切割',
-            'user_prompt' => '我想把这segment文本切割一down：先帝创业未半而middle道崩殂，今daydown三minute，益州疲弊，此诚危急存亡之秋also。然侍卫之臣not懈atinside，忠志之士忘身atoutside者，盖追先帝之殊遇，欲报之at陛downalso。诚宜开张圣听，by光先帝遗德，恢弘志士之气，not宜妄自菲薄，引喻失义，by塞忠谏之路also。
+            'system_prompt' => 'whenuserinput的content是想要conducttext切割o clock，call text_splitter tool来conducttext切割',
+            'user_prompt' => '我想把这segmenttext切割一down：先帝创业未半而middle道崩殂，今daydown三minute，益州疲弊，此诚危急存亡之秋also。然侍卫之臣not懈atinside，忠志之士忘身atoutside者，盖追先帝之殊遇，欲报之at陛downalso。诚宜开张圣听，by光先帝遗德，恢弘志士之气，not宜妄自菲薄，引喻失义，by塞忠谏之路also。
 宫middle府middle，俱为一body，陟罚臧否，not宜异同。若have作奸犯科及为忠善者，宜付have司论其刑赏，by昭陛down平明之理，not宜偏私，使insideoutside异法also。
 侍middle、侍郎郭攸之、费祎、董允etc，此皆良实，志虑忠纯，是by先帝简拔by遗陛down。愚by为宫middle之事，事无size，悉by咨之，然back施line，必能裨补阙漏，have所广益。
 将军to宠，propertyline淑均，晓畅军事，试useat昔day，先帝称之曰能，是by众议举宠为督。愚by为营middle之事，悉by咨之，必能使line阵和睦，优劣得所。

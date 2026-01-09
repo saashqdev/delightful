@@ -162,7 +162,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
         // 构造toquantity嵌入requestparameter
         $requestData = [
             'model' => self::DEFAULT_MODEL,
-            'input' => '这是一useattest的文本',
+            'input' => '这是一useattest的text',
             'business_params' => [
                 'organization_id' => '000',
                 'user_id' => '9527',

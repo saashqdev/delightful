@@ -10,14 +10,14 @@ namespace App\Domain\Chat\Entity\ValueObject;
 use App\Infrastructure\Core\AbstractValueObject;
 
 /**
- * voice转文字resultvalueobject
- * support多语言转录resultstorage.
+ * voice转textresultvalueobject
+ * support多language转录resultstorage.
  */
 class VoiceTranscription extends AbstractValueObject
 {
     /**
-     * 多语言转录result
-     * format: ['zh_CN' => '转录文本', 'en_US' => 'Transcription text', ...].
+     * 多language转录result
+     * format: ['zh_CN' => '转录text', 'en_US' => 'Transcription text', ...].
      * @var null|array<string, string>
      */
     private ?array $transcriptions;
@@ -33,7 +33,7 @@ class VoiceTranscription extends AbstractValueObject
     private ?int $transcribedAt;
 
     /**
-     * main语言code（default转录语言）.
+     * mainlanguagecode（default转录language）.
      */
     private ?string $primaryLanguage;
 
@@ -57,7 +57,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * add单语言的转录result.
+     * add单language的转录result.
      */
     public function addTranscription(string $language, string $text): self
     {
@@ -69,7 +69,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * getfinger定语言的转录result.
+     * getfinger定language的转录result.
      */
     public function getTranscription(string $language): ?string
     {
@@ -77,7 +77,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * getmain语言的转录result.
+     * getmainlanguage的转录result.
      */
     public function getPrimaryTranscription(): ?string
     {
@@ -85,12 +85,12 @@ class VoiceTranscription extends AbstractValueObject
             return $this->transcriptions[$this->primaryLanguage];
         }
 
-        // ifnothavesetmain语言，returnfirst可use的转录result
+        // ifnothavesetmainlanguage，returnfirst可use的转录result
         return ! empty($this->transcriptions) ? reset($this->transcriptions) : null;
     }
 
     /**
-     * checkwhetherhavefinger定语言的转录result.
+     * checkwhetherhavefinger定language的转录result.
      */
     public function hasTranscription(string $language): bool
     {
@@ -98,7 +98,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * get所havesupport的语言code
+     * get所havesupport的languagecode
      * @return string[]
      */
     public function getSupportedLanguages(): array
@@ -141,7 +141,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * getmain语言code
+     * getmainlanguagecode
      */
     public function getPrimaryLanguage(): ?string
     {
@@ -149,7 +149,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * setmain语言code
+     * setmainlanguagecode
      */
     public function setPrimaryLanguage(?string $primaryLanguage): self
     {

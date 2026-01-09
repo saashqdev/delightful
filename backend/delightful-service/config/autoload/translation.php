@@ -5,10 +5,10 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    // default语言
+    // defaultlanguage
     'locale' => 'zh_CN',
-    // back语言，whendefault语言的语言文本nothave提供o clock，thenwilluseback语言的对应语言文本
+    // backlanguage，whendefaultlanguage的languagetextnothave提供o clock，thenwillusebacklanguage的对应languagetext
     'fallback_locale' => 'en_US',
-    // 语言file存放的file夹
+    // languagefile存放的file夹
     'path' => BASE_PATH . '/storage/languages',
 ];

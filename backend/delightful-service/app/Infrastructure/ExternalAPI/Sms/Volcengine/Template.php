@@ -70,8 +70,8 @@ class Template extends AbstractTemplate
     }
 
     /**
-     * according to传来的短信文本,parsevariable. onlyvariable的value,未匹配variable的key!
-     * needvariableparse的reason:火山短信只supportvariable短信的send,而业务方will出at创蓝短信的reason,will传来整短信文本content,nothavevariable.
+     * according to传来的短信text,parsevariable. onlyvariable的value,未匹配variable的key!
+     * needvariableparse的reason:火山短信只supportvariable短信的send,而业务方will出at创蓝短信的reason,will传来整短信textcontent,nothavevariable.
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
     {
@@ -85,7 +85,7 @@ class Template extends AbstractTemplate
             // ifaccording to短信content匹配to了templateid,then变more传入的templateid的value
             $pregMatch && [$templateId, $matchedVariables] = $this->variablePregMatch([$templateId => $pregMatch], $message);
         } elseif (isset($this->variablePregAnalyse[$language])) {
-            // 火山普通短信,and无法according totype + language 确定templateid,尝试according to短信文本content + language 确定templateid和variable
+            // 火山普通短信,and无法according totype + language 确定templateid,尝试according to短信textcontent + language 确定templateid和variable
             [$templateId, $matchedVariables] = $this->variablePregMatch($this->variablePregAnalyse[$language], $message);
         }
         if (empty($templateId)) {

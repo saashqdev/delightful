@@ -20,7 +20,7 @@ class AsrPromptAssembler
      *
      * @param string $asrStreamContent voice识别content
      * @param null|NoteDTO $note 笔记content（optional）
-     * @param string $language output语言（如：zh_CN, en_US）
+     * @param string $language outputlanguage（如：zh_CN, en_US）
      * @return string 完整的hint词
      */
     public static function getTitlePrompt(string $asrStreamContent, ?NoteDTO $note, string $language): string
@@ -42,11 +42,11 @@ class AsrPromptAssembler
 你是一专业的录音contenttitlegenerate助hand。
 
 ## backgroundinstruction
-usersubmit了一segment录音content，录音content经过voice识别转为文字，user可能alsowill提供hand写的笔记作为补充instruction。现inneed你according to这些contentgenerate一简洁准确的title。
+usersubmit了一segment录音content，录音content经过voice识别转为text，user可能alsowill提供hand写的笔记作为补充instruction。现inneed你according to这些contentgenerate一简洁准确的title。
 
 ## content来源instruction
 - <笔记content>：userhand写的笔记content，是对录音的重pointrecord和总结，usuallycontain关键info
-- <voice识别content>：passvoice识别技术将录音convertbecome的文字，反映录音的actualcontent
+- <voice识别content>：passvoice识别技术将录音convertbecome的text，反映录音的actualcontent
 
 ## titlegenerate要求
 
@@ -57,10 +57,10 @@ usersubmit了一segment录音content，录音content经过voice识别转为文�
 4. **keywordextract**：from笔记和voice识别contentmiddleextractmost核core的keyword
 
 ### format要求
-1. **length限制**：not超过 20 字符（汉字按 1 字符计算）
-2. **语言style**：use陈述property语sentence，避免疑问sentence
+1. **length限制**：not超过 20 character（汉字按 1 character计算）
+2. **languagestyle**：use陈述property语sentence，避免疑问sentence
 3. **简洁明确**：直接概括核coretheme，not要addmodification词
-4. **纯文本output**：只outputtitlecontent，not要add任何标point符number、引numberor其他modification
+4. **纯textoutput**：只outputtitlecontent，not要add任何标point符number、引numberor其他modification
 
 ### forbidline为
 - not要回答contentmiddle的issue
@@ -71,8 +71,8 @@ usersubmit了一segment录音content，录音content经过voice识别转为文�
 ## 录音content
 {textContent}
 
-## output语言
-请use {language} 语言outputtitle。
+## outputlanguage
+请use {language} languageoutputtitle。
 
 ## output
 请直接outputtitle：
@@ -85,7 +85,7 @@ PROMPT;
      * generatefileupload场景的录音titlehint词（emphasizefile名的重要property）.
      *
      * @param string $userRequestMessage userinchat框send的requestmessage
-     * @param string $language output语言（如：zh_CN, en_US）
+     * @param string $language outputlanguage（如：zh_CN, en_US）
      * @return string 完整的hint词
      */
     public static function getTitlePromptForUploadedFile(
@@ -110,22 +110,22 @@ usersend的originalmessage如down：
 1. **file名优先**：file名usually是user精core命名的，contain了most核core的themeinfo，请重point参考usermessagemiddle @ backsurface的file名
 2. **智能判断**：
    - iffile名语义清晰（如"2024yearQ4product规划will议.mp3"、"customer需求discussion.wav"），优先based onfile名generatetitle
-   - iffile名是datetime戳（如"20241112_143025.mp3"）or无意义字符（如"录音001.mp3"），thenuse通usedescription
+   - iffile名是datetime戳（如"20241112_143025.mp3"）or无意义character（如"录音001.mp3"），thenuse通usedescription
 3. **extractkeyword**：fromfile名middleextractmost核core的keyword和theme
 
 ### format要求
-1. **length限制**：not超过 20 字符（汉字按 1 字符计算）
-2. **语言style**：use陈述property语sentence，避免疑问sentence
+1. **length限制**：not超过 20 character（汉字按 1 character计算）
+2. **languagestyle**：use陈述property语sentence，避免疑问sentence
 3. **简洁明确**：直接概括核coretheme，not要addmodification词
-4. **纯文本output**：只outputtitlecontent，not要add任何标point符number、引numberor其他modification
+4. **纯textoutput**：只outputtitlecontent，not要add任何标point符number、引numberor其他modification
 
 ### forbidline为
 - not要保留fileextension名（.mp3、.wav、.webm etc）
 - not要outputtitlebyoutside的任何content
 - not要add引number、书名numberetc标point符number
 
-## output语言
-请use {language} 语言outputtitle。
+## outputlanguage
+请use {language} languageoutputtitle。
 
 ## output
 请直接outputtitle：

@@ -33,7 +33,7 @@ class FileParser
      * parsefilecontent.
      *
      * @param string $fileUrl fileURLground址
-     * @param bool $textPreprocess whetherconduct文本预process
+     * @param bool $textPreprocess whetherconducttext预process
      * @return string parseback的filecontent
      * @throws Exception whenfileparsefailo clock
      */

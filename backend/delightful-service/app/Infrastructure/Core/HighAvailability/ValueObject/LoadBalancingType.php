@@ -33,9 +33,9 @@ enum LoadBalancingType: int
     case HASH = 4;
 
     /**
-     * get负载均衡type的description文本.
+     * get负载均衡type的descriptiontext.
      *
-     * @return string description文本
+     * @return string descriptiontext
      */
     public function getDescription(): string
     {

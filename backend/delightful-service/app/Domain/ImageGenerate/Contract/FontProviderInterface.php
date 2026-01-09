@@ -28,10 +28,10 @@ interface FontProviderInterface
     public function supportsTTF(): bool;
 
     /**
-     * 检测文本whethercontainmiddle文字符.
+     * 检测textwhethercontainmiddle文character.
      *
-     * @param string $text 要检测的文本
-     * @return bool truetable示containmiddle文字符，falsetable示notcontain
+     * @param string $text 要检测的text
+     * @return bool truetable示containmiddle文character，falsetable示notcontain
      */
     public function containsChinese(string $text): bool;
 

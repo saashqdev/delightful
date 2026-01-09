@@ -287,7 +287,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
     }
 
     /**
-     * 为Azure OpenAIoriginaldataadd水印.
+     * 为Azure OpenAIoriginaldataaddwatermark.
      */
     private function processAzureOpenAIRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -304,8 +304,8 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
                 // handlebase64format的image
                 $item['b64_json'] = $this->watermarkProcessor->addWatermarkToBase64($item['b64_json'], $imageGenerateRequest);
             } catch (Exception $e) {
-                // 水印handlefailo clock，recorderrorbutnot影响imagereturn
-                $this->logger->error('Azure OpenAIimage水印handlefail', [
+                // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
+                $this->logger->error('Azure OpenAIimagewatermarkhandlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
@@ -362,15 +362,15 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
                 continue;
             }
 
-            // handle水印（将base64convert为URL）
+            // handlewatermark（将base64convert为URL）
             $processedUrl = $item['b64_json'];
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToBase64($item['b64_json'], $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('Azure OpenAIaddimagedata：水印handlefail', [
+                $this->logger->error('Azure OpenAIaddimagedata：watermarkhandlefail', [
                     'error' => $e->getMessage(),
                 ]);
-                // 水印handlefailo clockuseoriginalbase64data
+                // watermarkhandlefailo clockuseoriginalbase64data
             }
 
             // 只returnURLformat，与其他model保持一致

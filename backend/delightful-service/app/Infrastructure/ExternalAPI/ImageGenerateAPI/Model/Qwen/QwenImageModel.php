@@ -282,7 +282,7 @@ class QwenImageModel extends AbstractImageGenerate
                 'size' => $request->getWidth() . '*' . $request->getHeight(),
                 'n' => 1, // 通义千问eachtime只能generate1张image
                 'model' => $request->getModel(),
-                'watermark' => false, // closeAPI水印，use统一PHP水印
+                'watermark' => false, // closeAPIwatermark，use统一PHPwatermark
                 'prompt_extend' => $request->isPromptExtend(),
             ];
 
@@ -472,7 +472,7 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * 为通义千问originaldataadd水印.
+     * 为通义千问originaldataaddwatermark.
      */
     private function processQwenRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -490,8 +490,8 @@ class QwenImageModel extends AbstractImageGenerate
                 }
                 unset($resultItem);
             } catch (Exception $e) {
-                // 水印handlefailo clock，recorderrorbutnot影响imagereturn
-                $this->logger->error('通义千问image水印handlefail', [
+                // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
+                $this->logger->error('通义千问imagewatermarkhandlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
@@ -546,17 +546,17 @@ class QwenImageModel extends AbstractImageGenerate
             foreach ($results as $resultItem) {
                 if (! empty($resultItem['url'])) {
                     try {
-                        // handle水印
+                        // handlewatermark
                         $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($resultItem['url'], $imageGenerateRequest);
                         $currentData[] = [
                             'url' => $processedUrl,
                         ];
                     } catch (Exception $e) {
-                        $this->logger->error('Qwenaddimagedata：URL水印handlefail', [
+                        $this->logger->error('Qwenaddimagedata：URLwatermarkhandlefail', [
                             'error' => $e->getMessage(),
                             'url' => $resultItem['url'],
                         ]);
-                        // 水印handlefailo clockuseoriginalURL
+                        // watermarkhandlefailo clockuseoriginalURL
                         $currentData[] = [
                             'url' => $resultItem['url'],
                         ];

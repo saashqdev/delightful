@@ -49,7 +49,7 @@ enum HighAvailabilityAppType: string
     }
 
     /**
-     * getapplicationtype的description文本.
+     * getapplicationtype的descriptiontext.
      */
     public function getDescription(): string
     {

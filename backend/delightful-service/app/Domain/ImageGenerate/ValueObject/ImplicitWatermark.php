@@ -12,7 +12,7 @@ use DateTime;
 
 use function Hyperf\Config\config;
 
-// 隐type水印
+// 隐typewatermark
 class ImplicitWatermark
 {
     protected string $userId;

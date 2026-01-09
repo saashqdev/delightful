@@ -40,9 +40,9 @@ class CreateDocumentRequestDTO extends AbstractRequestDTO
     {
         return [
             'knowledge_base_code.required' => 'knowledge baseencodingcannot为null',
-            'knowledge_base_code.max' => 'knowledge baseencodinglengthcannot超过64字符',
+            'knowledge_base_code.max' => 'knowledge baseencodinglengthcannot超过64character',
             'name.required' => 'documentnamecannot为null',
-            'name.max' => 'documentnamelengthcannot超过255字符',
+            'name.max' => 'documentnamelengthcannot超过255character',
             'doc_type.required' => 'documenttypecannot为null',
             'doc_type.integer' => 'documenttypemust为整数',
             'doc_type.min' => 'documenttypemustgreater thanequal0',

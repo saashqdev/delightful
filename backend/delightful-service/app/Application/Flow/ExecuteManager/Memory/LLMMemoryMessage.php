@@ -28,7 +28,7 @@ class LLMMemoryMessage
     private Role $role;
 
     /**
-     * @var string message文本content
+     * @var string messagetextcontent
      */
     private string $textContent;
 
@@ -154,7 +154,7 @@ class LLMMemoryMessage
 
         $content = $delightfulFlowMemoryHistoryEntity->getContent();
 
-        // get文本content
+        // gettextcontent
         $textContent = $content['text']['content'] ?? '';
 
         // createcustomizemessage

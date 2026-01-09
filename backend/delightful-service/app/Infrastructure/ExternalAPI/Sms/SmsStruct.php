@@ -21,7 +21,7 @@ class SmsStruct
 
     /**
      * 短信的type,such as:registration_rewards (order已hair货),arrival_notice(to货notify).
-     * 1.if搭配 language field,meanwhileusevariable短信,canimplement多语言适配,by及语type兜bottom
+     * 1.if搭配 language field,meanwhileusevariable短信,canimplement多language适配,by及语type兜bottom
      * 2.电商的相关短信use此field,but是nothave language 传入.
      */
     public ?string $type = null;
@@ -34,7 +34,7 @@ class SmsStruct
     public ?array $variables = null;
 
     /**
-     * 普通短信的纯文本content.
+     * 普通短信的纯textcontent.
      * 如: 灯塔正in邀请你加入企业，point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
      */
     public ?string $content = null;

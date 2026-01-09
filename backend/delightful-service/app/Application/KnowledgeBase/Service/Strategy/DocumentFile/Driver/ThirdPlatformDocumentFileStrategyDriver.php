@@ -17,13 +17,13 @@ class ThirdPlatformDocumentFileStrategyDriver implements ThirdPlatformDocumentFi
 {
     public function parseContent(KnowledgeBaseDataIsolation $dataIsolation, DocumentFileInterface $documentFile): string
     {
-        // 这withinimplementthethird-partydocumentfile的文本parse逻辑
+        // 这withinimplementthethird-partydocumentfile的textparse逻辑
         return '';
     }
 
     public function parseDocType(KnowledgeBaseDataIsolation $dataIsolation, DocumentFileInterface $documentFile): int
     {
-        // 这withinimplementthethird-partydocumentfile的文本formatparse逻辑
+        // 这withinimplementthethird-partydocumentfile的textformatparse逻辑
         return DocType::UNKNOWN->value;
     }
 

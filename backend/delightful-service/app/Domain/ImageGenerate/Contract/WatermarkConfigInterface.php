@@ -10,16 +10,16 @@ namespace App\Domain\ImageGenerate\Contract;
 use App\Domain\ImageGenerate\ValueObject\WatermarkConfig;
 
 /**
- * 水印configurationinterface
- * useatin开源projectmiddledefinition水印configurationstandard，由企业projectimplementspecific逻辑.
+ * watermarkconfigurationinterface
+ * useatin开源projectmiddledefinitionwatermarkconfigurationstandard，由企业projectimplementspecific逻辑.
  */
 interface WatermarkConfigInterface
 {
     /**
-     * get水印configuration.
+     * getwatermarkconfiguration.
      *
-     * @param null|string $orgCode organizationcode，useat判断whetherenable水印
-     * @return null|WatermarkConfig return水印configuration，if为nullthennotadd水印
+     * @param null|string $orgCode organizationcode，useat判断whetherenablewatermark
+     * @return null|WatermarkConfig returnwatermarkconfiguration，if为nullthennotaddwatermark
      */
     public function getWatermarkConfig(?string $orgCode = null): ?WatermarkConfig;
 }

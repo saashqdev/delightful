@@ -917,7 +917,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // 准备基本configuration
         $config = [
             'agent_name' => '文生graph助hand',
-            'agent_description' => '一强大的AI文本generategraph像助hand，canaccording to您的descriptioncreate精美graph像。',
+            'agent_description' => '一强大的AItextgenerategraph像助hand，canaccording to您的descriptioncreate精美graph像。',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],
             'instruct' => $loadPresetConfig['instructs'],

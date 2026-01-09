@@ -337,7 +337,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             try {
                 $result['imageData'] = $this->watermarkProcessor->addWatermarkToBase64($result['imageData'], $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('Google Geminiimage水印handlefail', [
+                $this->logger->error('Google Geminiimagewatermarkhandlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
@@ -390,15 +390,15 @@ class GoogleGeminiModel extends AbstractImageGenerate
             $currentData = $response->getData();
             $currentUsage = $response->getUsage() ?? new ImageUsage();
 
-            // 水印handle（will将base64convert为URL）
+            // watermarkhandle（will将base64convert为URL）
             $processedUrl = $imageBase64;
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToBase64($imageBase64, $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('GoogleGeminiaddimagedata：水印handlefail', [
+                $this->logger->error('GoogleGeminiaddimagedata：watermarkhandlefail', [
                     'error' => $e->getMessage(),
                 ]);
-                // 水印handlefailo clockuseoriginalbase64data（but这usuallynotshouldhair生）
+                // watermarkhandlefailo clockuseoriginalbase64data（but这usuallynotshouldhair生）
             }
 
             // 只returnURLformat，与其他model保持一致

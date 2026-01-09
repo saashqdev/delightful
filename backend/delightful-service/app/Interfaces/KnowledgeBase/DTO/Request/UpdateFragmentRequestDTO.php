@@ -37,11 +37,11 @@ class UpdateFragmentRequestDTO extends AbstractRequestDTO
         return [
             'id.required' => 'knowledge baseencodingcannot为null',
             'knowledge_base_code.required' => 'knowledge baseencodingcannot为null',
-            'knowledge_base_code.max' => 'knowledge baseencodinglengthcannot超过255字符',
+            'knowledge_base_code.max' => 'knowledge baseencodinglengthcannot超过255character',
             'document_code.required' => 'documentencodingcannot为null',
-            'document_code.max' => 'documentencodinglengthcannot超过255字符',
+            'document_code.max' => 'documentencodinglengthcannot超过255character',
             'content.required' => 'slicesegmentcontentcannot为null',
-            'content.max' => 'slicesegmentcontentlengthcannot超过65535字符',
+            'content.max' => 'slicesegmentcontentlengthcannot超过65535character',
         ];
     }
 

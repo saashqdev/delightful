@@ -107,7 +107,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                         // 仅仅addattachment
                         $imageUrls = $executionData->getTriggerData()->getAttachmentImageUrls();
                         if ($imageUrls) {
-                            // havecontentandhaveattachment，add文本和imagecontent
+                            // havecontentandhaveattachment，addtext和imagecontent
                             $contentMessage->addContent(UserMessageContent::text($userPrompt));
                             foreach ($imageUrls as $imageUrl) {
                                 $contentMessage->addContent(UserMessageContent::imageUrl($imageUrl));
@@ -250,7 +250,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
      * @param Agent $agent 代理object
      * @param VertexResult $vertexResult sectionpointexecuteresult
      * @param ExecutionData $executionData executedata
-     * @return array [推理文本, response文本]
+     * @return array [推理text, responsetext]
      */
     private function executeAgent(Agent $agent, VertexResult $vertexResult, ExecutionData $executionData): array
     {

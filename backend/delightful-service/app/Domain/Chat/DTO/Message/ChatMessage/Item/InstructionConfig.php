@@ -59,7 +59,7 @@ class InstructionConfig extends AbstractEntity
     protected bool $sendDirectly = false;
 
     /**
-     * finger令groupitemtype，1 单option 2 开关 3 文本type 4 statustype.
+     * finger令groupitemtype，1 单option 2 switch 3 texttype 4 statustype.
      */
     protected int $type = InstructionComponentType::Radio->value;
 
@@ -71,12 +71,12 @@ class InstructionConfig extends AbstractEntity
     protected array $values = [];
 
     /**
-     * 开关openstatus的文本description.
+     * switchopenstatus的textdescription.
      */
     protected string $on = '';
 
     /**
-     * 开关closestatus的文本description.
+     * switchclosestatus的textdescription.
      */
     protected string $off = '';
 
@@ -242,7 +242,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * get开关openstatus的文本description.
+     * getswitchopenstatus的textdescription.
      */
     public function getOn(): string
     {
@@ -250,7 +250,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * set开关openstatus的文本description.
+     * setswitchopenstatus的textdescription.
      * @param mixed $on
      */
     public function setOn($on): void
@@ -259,7 +259,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * get开关closestatus的文本description.
+     * getswitchclosestatus的textdescription.
      */
     public function getOff(): string
     {
@@ -267,7 +267,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * set开关closestatus的文本description.
+     * setswitchclosestatus的textdescription.
      * @param mixed $off
      */
     public function setOff($off): void
@@ -318,9 +318,9 @@ class InstructionConfig extends AbstractEntity
     /**
      * according tofinger令groupitemtypeget对应的name和value.
      *
-     * type为开关o clock，name 取is 开/关，value 取 $instruction->getOn / $instruction->getOff
+     * type为switcho clock，name 取is 开/关，value 取 $instruction->getOn / $instruction->getOff
      * type为single-selecto clock, name 取is displayname，value：$instructionValue
-     * type为status按钮o clock，name 取isstatus文本，value: $instructionValue
+     * type为statusbuttono clock，name 取isstatustext，value: $instructionValue
      * default name 为空， value = $instructionValue
      *
      * @param string $instructionValue finger令value
@@ -333,7 +333,7 @@ class InstructionConfig extends AbstractEntity
 
         switch ($this->type) {
             case InstructionComponentType::Switch->value:
-                // 开关type
+                // switchtype
                 $name = $value;
                 $value = ($instructionValue === 'on') ? $this->getOn() : $this->getOff();
                 break;
@@ -349,7 +349,7 @@ class InstructionConfig extends AbstractEntity
                 }
                 break;
             case InstructionComponentType::Status->value:
-                // status按钮type
+                // statusbuttontype
                 // find对应的 InstructionValue object
                 foreach ($this->values as $instructionValueObj) {
                     if ($instructionValueObj->getValue() === $instructionValue) {

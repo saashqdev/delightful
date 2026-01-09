@@ -13,7 +13,7 @@ namespace App\Domain\Chat\Entity\ValueObject\MessageType;
  */
 enum ChatMessageType: string
 {
-    // 文本
+    // text
     case Text = 'text';
 
     // image
@@ -32,7 +32,7 @@ enum ChatMessageType: string
     // voice
     case Voice = 'voice';
 
-    // 文本card
+    // textcard
     case TextCard = 'text_card';
 
     // markdown

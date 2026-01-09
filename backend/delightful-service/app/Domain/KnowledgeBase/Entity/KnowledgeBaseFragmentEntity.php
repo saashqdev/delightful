@@ -19,7 +19,7 @@ use Hyperf\Stringable\Str;
 use function mb_strlen;
 
 /**
- * toquantityknowledge base文本slicesegment.
+ * toquantityknowledge basetextslicesegment.
  */
 class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
 {

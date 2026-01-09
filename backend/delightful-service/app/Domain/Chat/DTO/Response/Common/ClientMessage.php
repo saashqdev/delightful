@@ -40,7 +40,7 @@ class ClientMessage extends AbstractEntity
     // messagesendtime，与 delightful_message_id 一起，useatwithdraw、editmessageo clock的唯一property校验。
     protected int $sendTime;
 
-    // chatmessagestatus:unread | seen | read |revoked  .对应middle文释义：未读|已读|已view（non纯文本的复杂typemessage，userpoint击了detail）  | withdraw
+    // chatmessagestatus:unread | seen | read |revoked  .对应middle文释义：未读|已读|已view（non纯text的复杂typemessage，userpoint击了detail）  | withdraw
     protected ?string $status;
 
     protected MessageInterface $content;

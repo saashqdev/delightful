@@ -610,12 +610,12 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * parse飞书rich textcontent为Markdown文本.
+     * parse飞书rich textcontent为Markdowntext.
      *
      * @param array $content 飞书rich textcontent
      * @param string $organizationCode organizationcode
      * @param string $messageId messageID
-     * @return array parseresult，containmarkdown文本和attachment
+     * @return array parseresult，containmarkdowntext和attachment
      */
     private function parsePostContentToText(array $content, string $organizationCode, string $messageId): array
     {
@@ -627,7 +627,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $markdown .= "# {$content['title']}\n\n";
         }
 
-        // 优先usemiddle文content，ifnothavethenuse英文content
+        // 优先usemiddle文content，ifnothavethenuseEnglishcontent
         $postContent = $content['content'] ?? [];
 
         foreach ($postContent as $paragraph) {
@@ -652,7 +652,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      * @param array &$attachments attachmentcolumn表
      * @param string $organizationCode organizationcode
      * @param string $messageId messageID
-     * @return string handleback的Markdown文本
+     * @return string handleback的Markdowntext
      */
     private function processContentElement(
         string $tag,
@@ -687,7 +687,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                     $text = $element['text'] ?? '';
                     return "{$text}\n";
                 default:
-                    // 对at未知的tag，尝试extract文本content
+                    // 对at未知的tag，尝试extracttextcontent
                     return $element['text'] ?? '';
             }
         } catch (Exception $e) {
@@ -706,7 +706,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      * @param array &$attachments attachmentcolumn表
      * @param string $organizationCode organizationcode
      * @param string $messageId messageID
-     * @return string handleback的Markdown文本
+     * @return string handleback的Markdowntext
      */
     private function processImageElement(
         array $element,
@@ -770,7 +770,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $position = $match[1];
             $url = $matches[2][$index][0];
 
-            // addimagefront的文本（ifhave）
+            // addimagefront的text（ifhave）
             $this->addTextBlockIfNotEmpty(
                 $contentBlocks,
                 substr($markdown, $lastPosition, $position - $lastPosition)
@@ -783,7 +783,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $lastPosition = $position + strlen($fullMatch);
         }
 
-        // addmostnextimageback的文本（ifhave）
+        // addmostnextimageback的text（ifhave）
         $this->addTextBlockIfNotEmpty(
             $contentBlocks,
             substr($markdown, $lastPosition)
@@ -794,10 +794,10 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * add文本piece（ifnot为null）.
+     * addtextpiece（ifnot为null）.
      *
      * @param array &$contentBlocks contentpiecearray
-     * @param string $text 要add的文本
+     * @param string $text 要add的text
      */
     private function addTextBlockIfNotEmpty(array &$contentBlocks, string $text): void
     {
@@ -817,7 +817,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      *
      * @param array &$contentBlocks contentpiecearray
      * @param string $url imageURL
-     * @param string $fallbackText uploadfailo clock的back文本
+     * @param string $fallbackText uploadfailo clock的backtext
      */
     private function processImageBlock(array &$contentBlocks, string $url, string $fallbackText): void
     {
@@ -836,7 +836,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                 'url' => $url,
                 'error' => $e->getMessage(),
             ]);
-            // ifuploadfail，addimageURL作为md文本
+            // ifuploadfail，addimageURL作为mdtext
             $contentBlocks[] = [
                 [
                     'tag' => 'md',

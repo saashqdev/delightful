@@ -359,7 +359,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * 为Fluxoriginaldataadd水印.
+     * 为Fluxoriginaldataaddwatermark.
      */
     private function processFluxRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -372,8 +372,8 @@ class FluxModel extends AbstractImageGenerate
                 // handleimageURL
                 $result['data']['imageUrl'] = $this->watermarkProcessor->addWatermarkToUrl($result['data']['imageUrl'], $imageGenerateRequest);
             } catch (Exception $e) {
-                // 水印handlefailo clock，recorderrorbutnot影响imagereturn
-                $this->logger->error('Fluximage水印handlefail', [
+                // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
+                $this->logger->error('Fluximagewatermarkhandlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
@@ -419,16 +419,16 @@ class FluxModel extends AbstractImageGenerate
 
             $imageUrl = $fluxResult['data']['imageUrl'];
 
-            // handle水印
+            // handlewatermark
             $processedUrl = $imageUrl;
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($imageUrl, $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('Fluxaddimagedata：水印handlefail', [
+                $this->logger->error('Fluxaddimagedata：watermarkhandlefail', [
                     'error' => $e->getMessage(),
                     'url' => $imageUrl,
                 ]);
-                // 水印handlefailo clockuseoriginalURL
+                // watermarkhandlefailo clockuseoriginalURL
             }
 
             $currentData[] = [

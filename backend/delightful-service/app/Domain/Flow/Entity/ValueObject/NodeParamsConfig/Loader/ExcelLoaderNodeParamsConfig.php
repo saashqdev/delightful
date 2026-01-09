@@ -116,7 +116,7 @@ JSON,
                 "type": "array",
                 "key": "files_spreadsheet",
                 "sort": 1,
-                "title": "表格file",
+                "title": "tablefile",
                 "description": "",
                 "items": {
                     "type": "object",

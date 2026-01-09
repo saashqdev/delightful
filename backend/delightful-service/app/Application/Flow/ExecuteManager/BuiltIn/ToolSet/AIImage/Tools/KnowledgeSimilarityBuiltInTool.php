@@ -61,7 +61,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 > knowledge basename：knowledge basedescription
 {$knowledgePrompt}
 ## process
-1. 结合updown文提炼user的issue，generate多keyword，at mostnot超过 5 ，多keyworduse英文逗number"," 隔开，useatusedifferentkeywordfromknowledge basemiddle检索most相关的info；
+1. 结合updown文提炼user的issue，generate多keyword，at mostnot超过 5 ，多keyworduseEnglish逗number"," 隔开，useatusedifferentkeywordfromknowledge basemiddle检索most相关的info；
 2. 结合updown文，analyzeuser的issue，generate `names` parameter，useatfinger定与userissue可能have关的多knowledge basename，按照相关propertysort，相关property需结合updown文、knowledge basename和knowledge basedescriptionconduct判断；
 3. usekeyword和userissue，call `{$this->getName()}` tool检索knowledge basemiddle的content，keyword的parameter是 `keyword`，userissue的parameter是 `question`, 请ensureparameterallbecorrect填入，tool将return与userissuesimilardegreemost高的contentslicesegment；
 4. knowledge base检索出来的contentwithinwillcontain一些customize的 Delightful tag，你要善atuse它们，havebydown几typetag：

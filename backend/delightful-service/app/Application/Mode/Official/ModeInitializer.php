@@ -358,7 +358,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Be Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您可inputwill议的文字content，oruploadwill议录音file，超level麦吉将为您conduct完整的will议总结。 Enter send ; Shift + Enter 换line',
+                    'zh_CN' => '您可inputwill议的textcontent，oruploadwill议录音file，超level麦吉将为您conduct完整的will议总结。 Enter send ; Shift + Enter 换line',
                 ]),
                 'identifier' => 'summary',
                 'icon' => 'IconFileDescription',

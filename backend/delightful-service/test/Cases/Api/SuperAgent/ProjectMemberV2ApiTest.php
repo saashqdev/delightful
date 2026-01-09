@@ -239,7 +239,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * test多语言errormessage.
+     * test多languageerrormessage.
      */
     public function testMultiLanguageErrorMessages(): void
     {

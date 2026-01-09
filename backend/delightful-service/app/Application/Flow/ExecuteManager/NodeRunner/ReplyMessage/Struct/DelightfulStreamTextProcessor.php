@@ -13,7 +13,7 @@ use function Hyperf\Support\call;
 
 class DelightfulStreamTextProcessor
 {
-    private const int STATE_NORMAL = 0;    // 普通文本status
+    private const int STATE_NORMAL = 0;    // 普通textstatus
 
     private const int STATE_TAG_START = 1; // 可能是tagstart
 
@@ -26,7 +26,7 @@ class DelightfulStreamTextProcessor
     private string $buffer = '';
 
     /**
-     * @var int status 0 普通文本，1 tagstart，2 intaginside
+     * @var int status 0 普通text，1 tagstart，2 intaginside
      */
     private int $state = 0;
 

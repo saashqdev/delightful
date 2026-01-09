@@ -396,7 +396,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
 
         $query = new KnowledgeBaseQuery();
         $query->setCodes(array_keys($resources));
-        // 目front仅get自建文本的knowledge base
+        // 目front仅get自建text的knowledge base
         $query->setTypes([KnowledgeType::UserKnowledgeBase->value]);
         $query->setEnabled(true);
         $knowledgeData = $this->delightfulFlowKnowledgeDomainService->queries($this->createKnowledgeBaseDataIsolation($dataIsolation), $query, $page);

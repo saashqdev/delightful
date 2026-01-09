@@ -84,7 +84,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
             return false;
         }
 
-        // verifyrolenamelengthnot超过255字符
+        // verifyrolenamelengthnot超过255character
         if (strlen($this->name) > 255) {
             return false;
         }
@@ -117,7 +117,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
 
     /**
      * getverifyerrorinfo.
-     * TODO: needconfiguration多语言
+     * TODO: needconfiguration多language
      */
     public function getValidationErrors(): array
     {
@@ -128,7 +128,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
         }
 
         if (strlen($this->name) > 255) {
-            $errors[] = 'rolenamelengthnot能超过255字符';
+            $errors[] = 'rolenamelengthnot能超过255character';
         }
 
         if (! in_array($this->status, [0, 1])) {

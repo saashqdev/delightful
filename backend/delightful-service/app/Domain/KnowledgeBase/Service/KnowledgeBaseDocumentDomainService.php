@@ -106,7 +106,7 @@ readonly class KnowledgeBaseDocumentDomainService
             $documentEntity = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode, true);
             // 然backdeletedocument本身
             $this->knowledgeBaseDocumentRepository->destroy($dataIsolation, $knowledgeBaseCode, $documentCode);
-            // update字符数
+            // updatecharacter数
             $deltaWordCount = -$documentEntity->getWordCount();
             $this->updateWordCount($dataIsolation, $knowledgeBaseCode, $documentEntity->getCode(), $deltaWordCount);
         });

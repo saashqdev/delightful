@@ -149,7 +149,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     /**
      * @return ClientSequenceResponse[]
      * @todo 挪to delightful_chat_topic_messages process
-     * session窗口滚动loadhistoryrecord.
+     * session窗口scrollloadhistoryrecord.
      * message_id= seqtable的primary keyid,thereforenotneed单独对 message_id 加索引.
      */
     public function getConversationChatMessages(MessagesQueryDTO $messagesQueryDTO): array
@@ -160,7 +160,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     /**
      * @return ClientSequenceResponse[]
      * @todo 挪to delightful_chat_topic_messages process
-     * session窗口滚动loadhistoryrecord.
+     * session窗口scrollloadhistoryrecord.
      * message_id= seqtable的primary keyid,thereforenotneed单独对 message_id 加索引.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array

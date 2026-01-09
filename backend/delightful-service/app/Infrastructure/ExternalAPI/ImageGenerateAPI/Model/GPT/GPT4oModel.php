@@ -387,7 +387,7 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * 为GPT4ooriginaldataadd水印.
+     * 为GPT4ooriginaldataaddwatermark.
      */
     private function processGPT4oRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -400,8 +400,8 @@ class GPT4oModel extends AbstractImageGenerate
                 // handleimageURL
                 $result['imageUrl'] = $this->watermarkProcessor->addWatermarkToUrl($result['imageUrl'], $imageGenerateRequest);
             } catch (Exception $e) {
-                // 水印handlefailo clock，recorderrorbutnot影响imagereturn
-                $this->logger->error('GPT4oimage水印handlefail', [
+                // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
+                $this->logger->error('GPT4oimagewatermarkhandlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
@@ -443,16 +443,16 @@ class GPT4oModel extends AbstractImageGenerate
 
             $imageUrl = $gpt4oResult['imageUrl'];
 
-            // handle水印
+            // handlewatermark
             $processedUrl = $imageUrl;
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($imageUrl, $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('GPT4oaddimagedata：水印handlefail', [
+                $this->logger->error('GPT4oaddimagedata：watermarkhandlefail', [
                     'error' => $e->getMessage(),
                     'url' => $imageUrl,
                 ]);
-                // 水印handlefailo clockuseoriginalURL
+                // watermarkhandlefailo clockuseoriginalURL
             }
 
             $currentData[] = [

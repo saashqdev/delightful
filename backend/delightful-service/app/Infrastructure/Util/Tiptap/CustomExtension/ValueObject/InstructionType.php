@@ -12,9 +12,9 @@ enum InstructionType: int
     // single-select
     case SINGLE_CHOICE = 1;
 
-    // 开关
+    // switch
     case SWITCH = 2;
 
-    // 文本
+    // text
     case TEXT = 3;
 }

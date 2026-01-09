@@ -117,7 +117,7 @@ class DelightfulControlDomainService extends AbstractDomainService
 
             switch ($controlMessageType) {
                 case ControlMessageType::SeenMessages:
-                    # 已读回执(扫了一eyemessage,对atnon文本的复杂typemessage,nothaveviewdetail).
+                    # 已读回执(扫了一eyemessage,对atnontext的复杂typemessage,nothaveviewdetail).
                     $senderReceiveList = $senderLatestSeq->getReceiveList();
                     if ($senderReceiveList === null) {
                         $this->logger->error(sprintf(

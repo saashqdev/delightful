@@ -16,12 +16,12 @@ use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 class MultiModalContentFormatter
 {
     /**
-     * 将所haveattachmentformat化to文本middle.
+     * 将所haveattachmentformat化totextmiddle.
      *
-     * @param string $originalContent original文本content
+     * @param string $originalContent originaltextcontent
      * @param string $visionResponse 视觉analyzeresult
      * @param AttachmentInterface[] $attachments 所haveattachmentarray
-     * @return string format化back的文本content
+     * @return string format化back的textcontent
      */
     public static function formatAllAttachments(
         string $originalContent,
@@ -52,13 +52,13 @@ class MultiModalContentFormatter
     }
 
     /**
-     * format化imagecontentto文本
+     * format化imagecontenttotext
      * support单张image和多张image场景.
      *
-     * @param string $originalContent original文本content
+     * @param string $originalContent originaltextcontent
      * @param string $visionResponse 视觉analyzeresult
      * @param AttachmentInterface[] $imageAttachments imageattachmentarray
-     * @return string add了imageinfo的文本content
+     * @return string add了imageinfo的textcontent
      */
     protected static function formatImageContent(
         string $originalContent,
@@ -88,11 +88,11 @@ class MultiModalContentFormatter
     }
 
     /**
-     * format化nonimageattachmentto文本.
+     * format化nonimageattachmenttotext.
      *
-     * @param string $originalContent original文本content
+     * @param string $originalContent originaltextcontent
      * @param AttachmentInterface[] $nonImageAttachments nonimageattachmentarray
-     * @return string add了nonimageattachmentinfo的文本content
+     * @return string add了nonimageattachmentinfo的textcontent
      */
     protected static function formatNonImageAttachments(
         string $originalContent,

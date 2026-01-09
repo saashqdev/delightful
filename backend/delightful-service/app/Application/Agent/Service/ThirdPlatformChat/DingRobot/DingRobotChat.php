@@ -81,7 +81,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
         $message = '';
         $attachments = [];
-        // 目front只parse 文本、image、rich text
+        // 目front只parse text、image、rich text
         switch ($params['msgtype']) {
             case 'text':
                 $message = $params['text']['content'] ?? '';
@@ -117,7 +117,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
     public function sendMessage(ThirdPlatformChatMessage $thirdPlatformChatMessage, MessageInterface $message): void
     {
-        // 目front仅send文本出去
+        // 目front仅sendtext出去
         if (! $message instanceof TextMessage) {
             return;
         }

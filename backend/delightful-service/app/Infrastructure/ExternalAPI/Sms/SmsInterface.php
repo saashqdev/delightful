@@ -20,12 +20,12 @@ interface SmsInterface
     public function send(SmsStruct $smsStruct): SendResult;
 
     /**
-     * parse变quantity短信,return完整的短信文本.
+     * parse变quantity短信,return完整的短信text.
      */
     public function getContent(SmsStruct $smsStruct): string;
 
     /**
-     * get短信文案的语type,与signature无关. 可能短信content是印尼语,signature是英文.
+     * get短信文案的语type,与signature无关. 可能短信content是印尼语,signature是English.
      */
     public function getContentLanguage(SmsStruct $smsStruct): string;
 

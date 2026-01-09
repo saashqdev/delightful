@@ -158,7 +158,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
             }
 
             if (strlen($this->name) > 255) {
-                $errors[] = 'rolenamelengthnot能超过255字符';
+                $errors[] = 'rolenamelengthnot能超过255character';
             }
         }
 

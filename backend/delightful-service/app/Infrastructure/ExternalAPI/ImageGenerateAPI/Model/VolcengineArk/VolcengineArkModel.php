@@ -281,16 +281,16 @@ class VolcengineArkModel extends AbstractImageGenerate
 
             foreach ($volcengineResult['data'] as $item) {
                 if (! empty($item['url'])) {
-                    // handle水印
+                    // handlewatermark
                     $processedUrl = $item['url'];
                     try {
                         $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($item['url'], $imageGenerateRequest);
                     } catch (Exception $e) {
-                        $this->logger->error('VolcengineArkaddimagedata：水印handlefail', [
+                        $this->logger->error('VolcengineArkaddimagedata：watermarkhandlefail', [
                             'error' => $e->getMessage(),
                             'url' => $item['url'],
                         ]);
-                        // 水印handlefailo clockuseoriginalURL
+                        // watermarkhandlefailo clockuseoriginalURL
                     }
 
                     $currentData[] = [
@@ -377,7 +377,7 @@ class VolcengineArkModel extends AbstractImageGenerate
     }
 
     /**
-     * 为火山engineArkoriginaldataadd水印.
+     * 为火山engineArkoriginaldataaddwatermark.
      */
     private function processVolcengineArkRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -387,7 +387,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             }
 
             try {
-                // VolcengineArk returnis URL format，useURL水印handle
+                // VolcengineArk returnis URL format，useURLwatermarkhandle
                 foreach ($result['data']['data'] as $i => &$item) {
                     if (isset($item['url'])) {
                         $item['url'] = $this->watermarkProcessor->addWatermarkToUrl($item['url'], $imageGenerateRequest);
@@ -395,7 +395,7 @@ class VolcengineArkModel extends AbstractImageGenerate
                 }
                 unset($item);
             } catch (Exception $e) {
-                $this->logger->error('VolcengineArkimage水印handlefail', [
+                $this->logger->error('VolcengineArkimagewatermarkhandlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);

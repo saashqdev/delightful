@@ -102,7 +102,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             return '';
         }
 
-        // if单yuan格contentcontainbydown任意字符，needuse引numberpackage围
+        // if单yuan格contentcontainbydown任意character，needuse引numberpackage围
         if (str_contains($value, ',')
             || str_contains($value, '"')
             || str_contains($value, "\n")

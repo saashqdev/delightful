@@ -134,7 +134,7 @@ MARKDOWN;
 finger令parameter instruction（optional）：
 • format：[{"name": "finger令name", "value": "finger令value"}, ...]
 • single-selecttype：fromoptionalvaluemiddlechoose一，for example "yes", "no"
-• 开关type：只能是 "on" or "off"
+• switchtype：只能是 "on" or "off"
 • ifnot提供finger令parameter，将usedefaultvalue
 
 callexample：
@@ -144,7 +144,7 @@ callexample：
   "message": "你好，请帮我analyze一down...",
   "conversation_id": "conv_001",
   "instruction": [
-    {"name": "开关", "value": "on"},
+    {"name": "switch", "value": "on"},
     {"name": "ok", "value": "yes"}
   ]
 }
@@ -252,7 +252,7 @@ MARKDOWN;
                 } elseif ($item['type'] === 2) {
                     // Switch
                     $defaultValue = $item['default_value'] ?? 'off';
-                    $descriptions[] = "{$baseDescription}[开关: on/off, default:{$defaultValue}]";
+                    $descriptions[] = "{$baseDescription}[switch: on/off, default:{$defaultValue}]";
                 }
             }
         }
@@ -267,7 +267,7 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => 'finger令parameterarray，useat控制AI助理的line为。eachobjectcontain name（finger令name）和 value（finger令value）field。single-selecttypefinger令needfromoptionalvaluemiddlechoose一，开关typefinger令只能是 "on" or "off"。',
+            'description' => 'finger令parameterarray，useat控制AI助理的line为。eachobjectcontain name（finger令name）和 value（finger令value）field。single-selecttypefinger令needfromoptionalvaluemiddlechoose一，switchtypefinger令只能是 "on" or "off"。',
             'items' => [
                 'type' => 'object',
                 'properties' => [
@@ -277,7 +277,7 @@ MARKDOWN;
                     ],
                     'value' => [
                         'type' => 'string',
-                        'description' => 'finger令value，single-selecttypefromoptionalvaluemiddlechoose，开关type只能是 "on" or "off"',
+                        'description' => 'finger令value，single-selecttypefromoptionalvaluemiddlechoose，switchtype只能是 "on" or "off"',
                     ],
                 ],
                 'required' => ['name', 'value'],

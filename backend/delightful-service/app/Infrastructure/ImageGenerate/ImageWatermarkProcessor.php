@@ -21,8 +21,8 @@ use Hyperf\Di\Annotation\Inject;
 use Psr\Log\LoggerInterface;
 
 /**
- * image水印handle器
- * 统一handleeachtypeformatimage的水印add.
+ * imagewatermarkhandle器
+ * 统一handleeachtypeformatimage的watermarkadd.
  */
 class ImageWatermarkProcessor
 {
@@ -38,7 +38,7 @@ class ImageWatermarkProcessor
     protected ImageEnhancementProcessorInterface $imageEnhancementProcessor;
 
     /**
-     * 为base64formatimageadd水印.
+     * 为base64formatimageaddwatermark.
      */
     public function addWatermarkToBase64(string $base64Image, ImageGenerateRequest $imageGenerateRequest): string
     {
@@ -52,12 +52,12 @@ class ImageWatermarkProcessor
         $detectedFormat = $this->detectImageFormat($imageData);
         $targetFormat = $originalFormat !== 'jpeg' ? $originalFormat : $detectedFormat;
 
-        // use统一的水印handlemethod
+        // use统一的watermarkhandlemethod
         if ($imageGenerateRequest->isAddWatermark()) {
             $imageData = $this->addWaterMarkHandler($imageData, $imageGenerateRequest, $targetFormat);
         }
 
-        // 立即addXMP隐type水印
+        // 立即addXMP隐typewatermark
         $implicitWatermark = $imageGenerateRequest->getImplicitWatermark();
         $xmpWatermarkedData = $this->imageEnhancementProcessor->enhanceImageData(
             $imageData,
@@ -70,7 +70,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 为URLformatimageadd水印
+     * 为URLformatimageaddwatermark
      * optional择returnformat：URL or base64.
      */
     public function addWatermarkToUrl(string $imageUrl, ImageGenerateRequest $imageGenerateRequest): string
@@ -81,7 +81,7 @@ class ImageWatermarkProcessor
             $imageData = $this->addWaterMarkHandler($imageData, $imageGenerateRequest);
         }
 
-        // 立即addXMP隐type水印
+        // 立即addXMP隐typewatermark
         $implicitWatermark = $imageGenerateRequest->getImplicitWatermark();
         $xmpWatermarkedData = $this->imageEnhancementProcessor->enhanceImageData(
             $imageData,
@@ -117,7 +117,7 @@ class ImageWatermarkProcessor
             throw new Exception('无法parseURLimagedata: ');
         }
         $watermarkConfig = $imageGenerateRequest->getWatermarkConfig();
-        // add视觉水印
+        // add视觉watermark
         $watermarkedImage = $this->addWatermarkToImageResource($image, $watermarkConfig);
 
         // use检测to的formatconduct无损output
@@ -133,7 +133,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 为imageresourceadd水印.
+     * 为imageresourceaddwatermark.
      * @param mixed $image
      */
     private function addWatermarkToImageResource($image, WatermarkConfig $config)
@@ -145,14 +145,14 @@ class ImageWatermarkProcessor
         $watermarkedImage = imagecreatetruecolor($width, $height);
         imagecopy($watermarkedImage, $image, 0, 0, 0, 0, $width, $height);
 
-        // add文字水印
+        // addtextwatermark
         $this->addTextWatermark($watermarkedImage, $config, $width, $height);
 
         return $watermarkedImage;
     }
 
     /**
-     * add文字水印.
+     * addtextwatermark.
      * @param mixed $image
      */
     private function addTextWatermark($image, WatermarkConfig $config, int $width, int $height): void
@@ -161,10 +161,10 @@ class ImageWatermarkProcessor
         $fontSize = $this->calculateFontSize($width, $height);
         $fontColor = $this->createTransparentColor($image, $config->getOpacity());
 
-        // 计算水印position
+        // 计算watermarkposition
         [$x, $y] = $this->calculateWatermarkPosition($width, $height, $text, $fontSize, $config->getPosition());
 
-        // 优先useTTF字body，especially是对atmiddle文文本
+        // 优先useTTF字body，especially是对atmiddle文text
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && ($this->fontProvider->containsChinese($text) || $this->fontProvider->supportsTTF())) {
             // useTTF字body渲染，supportmiddle文
@@ -182,12 +182,12 @@ class ImageWatermarkProcessor
 
             imagettftext($image, $ttfFontSize, 0, $x, $ttfY, $fontColor, $fontFile, $text);
         } else {
-            // 降leveluseinside置字body（仅supportASCII字符）
-            // inside置字body的Y坐标是文字top部，needfrom基linepositionconvert
+            // 降leveluseinside置字body（仅supportASCIIcharacter）
+            // inside置字body的Y坐标是texttop部，needfrom基linepositionconvert
             $builtinY = $y - (int) ($fontSize * 0.8); // from基linepositionconvert为top部position
             imagestring($image, 5, $x, $builtinY, $text, $fontColor);
 
-            // if文本containmiddle文butnothaveTTF字body，recordwarning
+            // iftextcontainmiddle文butnothaveTTF字body，recordwarning
             if ($this->fontProvider->containsChinese($text)) {
                 $this->logger->warning('Chinese text detected but TTF font not available, may display incorrectly');
             }
@@ -210,20 +210,20 @@ class ImageWatermarkProcessor
      */
     private function createTransparentColor($image, float $opacity): int
     {
-        // create白color半透明水印
+        // create白color半透明watermark
         $alpha = (int) ((1 - $opacity) * 127);
         return imagecolorallocatealpha($image, 255, 255, 255, $alpha);
     }
 
     /**
-     * 计算水印position.
+     * 计算watermarkposition.
      */
     private function calculateWatermarkPosition(int $width, int $height, string $text, int $fontSize, int $position): array
     {
-        // more精确的文字width估算
+        // more精确的textwidth估算
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && $this->fontProvider->supportsTTF() && function_exists('imagettfbbox')) {
-            // useTTF字body计算actual文本side界框
+            // useTTF字body计算actualtextside界框
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
             $bbox = imagettfbbox($ttfFontSize, 0, $fontFile, $text);
             $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // increase20%securityside距
@@ -235,7 +235,7 @@ class ImageWatermarkProcessor
             $totalTextHeight = $descender + $ascender;
         } else {
             // 降leveluse估算method
-            // 对atmiddle文字符，each字符width约equal字bodysize
+            // 对atmiddle文character，eachcharacterwidth约equal字bodysize
             $chineseCharCount = mb_strlen($text, 'UTF-8');
             $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // increasesecurityside距
             $textHeight = $fontSize;
@@ -432,7 +432,7 @@ class ImageWatermarkProcessor
         try {
             $subDir = 'open';
 
-            // 直接use已containXMP水印的base64data
+            // 直接use已containXMPwatermark的base64data
             $uploadFile = new UploadFile($base64Image, $subDir, '');
 
             $fileDomainService->uploadByCredential($organizationCode, $uploadFile, StorageBucketType::Public);

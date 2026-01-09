@@ -346,7 +346,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 为Midjourneyoriginaldataadd水印.
+     * 为Midjourneyoriginaldataaddwatermark.
      */
     private function processMidjourneyRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -368,8 +368,8 @@ class MidjourneyModel extends AbstractImageGenerate
                 $rawData['data']['cdnImage'] = $this->watermarkProcessor->addWatermarkToUrl($rawData['data']['cdnImage'], $imageGenerateRequest);
             }
         } catch (Exception $e) {
-            // 水印handlefailo clock，recorderrorbutnot影响imagereturn
-            $this->logger->error('Midjourneyimage水印handlefail', [
+            // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
+            $this->logger->error('Midjourneyimagewatermarkhandlefail', [
                 'error' => $e->getMessage(),
             ]);
             // returnoriginaldata
@@ -415,16 +415,16 @@ class MidjourneyModel extends AbstractImageGenerate
         // 仅handle images arraymiddle的URL
         foreach ($midjourneyResult['data']['images'] as $imageUrl) {
             if (! empty($imageUrl)) {
-                // handle水印
+                // handlewatermark
                 $processedUrl = $imageUrl;
                 try {
                     $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($imageUrl, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    $this->logger->error('Midjourneyaddimagedata：水印handlefail', [
+                    $this->logger->error('Midjourneyaddimagedata：watermarkhandlefail', [
                         'error' => $e->getMessage(),
                         'url' => $imageUrl,
                     ]);
-                    // 水印handlefailo clockuseoriginalURL
+                    // watermarkhandlefailo clockuseoriginalURL
                 }
 
                 $currentData[] = [

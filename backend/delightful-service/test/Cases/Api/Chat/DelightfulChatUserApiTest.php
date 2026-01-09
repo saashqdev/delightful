@@ -234,7 +234,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * test特殊字符handle.
+     * test特殊characterhandle.
      */
     public function testUpdateUserInfoWithSpecialCharacters(): void
     {
@@ -271,7 +271,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $this->performLogin();
 
         $requestData = [
-            'nickname' => str_repeat('very长的nickname', 10), // 50字符
+            'nickname' => str_repeat('very长的nickname', 10), // 50character
             'avatar_url' => 'https://example.com/very/long/path/to/avatar/' . str_repeat('long-filename', 5) . '.jpg',
         ];
 

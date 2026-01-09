@@ -235,7 +235,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * 为通义千问edit模typeoriginaldataadd水印 - 适配newchoicesformat.
+     * 为通义千问edit模typeoriginaldataaddwatermark - 适配newchoicesformat.
      */
     private function processQwenEditRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -258,8 +258,8 @@ class QwenImageEditModel extends AbstractImageGenerate
                         // handleURLformat的image
                         $content['image'] = $this->watermarkProcessor->addWatermarkToUrl($content['image'], $imageGenerateRequest);
                     } catch (Exception $e) {
-                        // 水印handlefailo clock，recorderrorbutnot影响imagereturn
-                        $this->logger->error('通义千问graph像edit水印handlefail', [
+                        // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
+                        $this->logger->error('通义千问graph像editwatermarkhandlefail', [
                             'index' => $index,
                             'choiceIndex' => $choiceIndex,
                             'contentIndex' => $contentIndex,
@@ -326,16 +326,16 @@ class QwenImageEditModel extends AbstractImageGenerate
                     continue;
                 }
 
-                // handle水印
+                // handlewatermark
                 $processedUrl = $content['image'];
                 try {
                     $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($content['image'], $imageGenerateRequest);
                 } catch (Exception $e) {
-                    $this->logger->error('QwenEditaddimagedata：水印handlefail', [
+                    $this->logger->error('QwenEditaddimagedata：watermarkhandlefail', [
                         'error' => $e->getMessage(),
                         'url' => $content['image'],
                     ]);
-                    // 水印handlefailo clockuseoriginalURL
+                    // watermarkhandlefailo clockuseoriginalURL
                 }
 
                 $currentData[] = [

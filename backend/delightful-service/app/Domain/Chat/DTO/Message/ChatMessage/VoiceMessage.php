@@ -236,7 +236,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
             $this->setDuration((int) ceil($audioDuration / 1000)); // Convert milliseconds to seconds, round up
         }
 
-        // extract并return文本content
+        // extract并returntextcontent
         return $flashResponse->extractTextContent();
     }
 

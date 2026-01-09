@@ -49,7 +49,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         }
 
         $translated = $enum->label();
-        // if语言package缺失，return的仍然是original key，此o clockthrowexceptionreminder
+        // iflanguagepackage缺失，return的仍然是original key，此o clockthrowexceptionreminder
         if ($translated === $enum->translationKey()) {
             ExceptionBuilder::throw(PermissionErrorCode::BusinessException, 'Missing i18n for key: ' . $enum->translationKey());
         }

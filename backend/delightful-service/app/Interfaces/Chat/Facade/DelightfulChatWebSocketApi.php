@@ -375,7 +375,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
         });
     }
 
-    // set语言
+    // setlanguage
     private function setLocale(?string $language): void
     {
         if (! empty($language)) {

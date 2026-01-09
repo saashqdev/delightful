@@ -17,8 +17,8 @@ use function Hyperf\Translation\__;
 enum InstructType: int
 {
     case SINGLE_CHOICE = 1;  // 单option
-    case SWITCH = 2;         // 开关
-    case TEXT = 3;          // 文本type
+    case SWITCH = 2;         // switch
+    case TEXT = 3;          // texttype
     case STATUS = 4;        // statustype
 
     /**
@@ -264,7 +264,7 @@ enum InstructType: int
     }
 
     /**
-     * verify开关type.
+     * verifyswitchtype.
      */
     private function validateSwitch(array &$item): void
     {
@@ -280,7 +280,7 @@ enum InstructType: int
     }
 
     /**
-     * verify文本type.
+     * verifytexttype.
      */
     private function validateText(array &$item): void
     {
@@ -309,12 +309,12 @@ enum InstructType: int
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_icon_invalid');
         }
 
-        // verifystatus文本
+        // verifystatustext
         if (! isset($item['status_text']) || empty($item['status_text'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_text_required');
         }
 
-        // verify文本color
+        // verifytextcolor
         if (! isset($item['text_color'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_color_required');
         }

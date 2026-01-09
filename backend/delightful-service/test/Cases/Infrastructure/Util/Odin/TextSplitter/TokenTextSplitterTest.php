@@ -73,7 +73,7 @@ class TokenTextSplitterTest extends BaseTest
 
     public function testEncodingHandling()
     {
-        $text = mb_convert_encoding("这是test文本。\n\n这是the二segment。", 'GBK', 'UTF-8');
+        $text = mb_convert_encoding("这是testtext。\n\n这是the二segment。", 'GBK', 'UTF-8');
         $chunks = $this->splitter->splitText($text);
 
         $this->assertIsArray($chunks);
@@ -244,11 +244,11 @@ EOT;
     public function testMultipleTaggedContent()
     {
         $text = <<<'EOT'
-the一segment文本
+the一segmenttext
 <DelightfulCompressibleContent Type="Image">image1.png</DelightfulCompressibleContent>
-the二segment文本
+the二segmenttext
 <DelightfulCompressibleContent Type="Image">image2.png</DelightfulCompressibleContent>
-the三segment文本
+the三segmenttext
 EOT;
 
         $splitter = new TokenTextSplitter(
@@ -264,10 +264,10 @@ EOT;
         $this->assertNotEmpty($chunks);
 
         // validate所havetagcontentallbe完整保留
-        $this->assertStringContainsString('the一segment文本', $chunks[0]);
-        $this->assertStringContainsString('the二segment文本', $chunks[1]);
+        $this->assertStringContainsString('the一segmenttext', $chunks[0]);
+        $this->assertStringContainsString('the二segmenttext', $chunks[1]);
         $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">image2.png</DelightfulCompressibleContent>', $chunks[1]);
-        $this->assertStringContainsString('the三segment文本', $chunks[2]);
+        $this->assertStringContainsString('the三segmenttext', $chunks[2]);
     }
 
     public function testTaggedContentWithChinese()

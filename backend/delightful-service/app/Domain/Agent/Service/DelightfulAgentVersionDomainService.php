@@ -76,7 +76,7 @@ class DelightfulAgentVersionDomainService
      */
     public function releaseAgentVersion(DelightfulAgentVersionEntity $delightfulAgentVersionEntity): array
     {
-        // approval开关 todo
+        // approvalswitch todo
         $approvalOpen = false;
         $reviewOpen = false;
 
@@ -104,7 +104,7 @@ class DelightfulAgentVersionDomainService
             $msg = 'publishsuccess';
         } elseif ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value) {
             // publishtoapplication市场
-            // review开关
+            // reviewswitch
             /* @phpstan-ignore-next-line */
             if ($reviewOpen) {
             } else {
@@ -148,7 +148,7 @@ class DelightfulAgentVersionDomainService
 
         $approvalOpen = false;
 
-        // approval开关
+        // approvalswitch
         /* @phpstan-ignore-next-line */
         if ($approvalOpen) {
             // 校验status

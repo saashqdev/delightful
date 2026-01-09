@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * imagegenerate统一抽象category
- * integration水印process和钉钉alertfeature
+ * integrationwatermarkprocess和钉钉alertfeature
  * 所haveimagegenerateProviderallshouldinherit此category.
  */
 abstract class AbstractImageGenerate implements ImageGenerate
@@ -38,7 +38,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * 统一的imagegenerate入口method
-     * 先call子categoryimplement的originalimagegenerate，again统一add水印.
+     * 先call子categoryimplement的originalimagegenerate，again统一addwatermark.
      */
     final public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -48,7 +48,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * implementinterface要求的带水印originaldatamethod
+     * implementinterface要求的带watermarkoriginaldatamethod
      * each子categorymustaccording to自己的dataformatimplement此method.
      */
     abstract public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array;
@@ -60,7 +60,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * 子categoryimplement的originalimagegeneratemethod
-     * 只负责calleach自APIgenerateimage，notuse关core水印process.
+     * 只负责calleach自APIgenerateimage，notuse关corewatermarkprocess.
      */
     abstract protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 
@@ -119,8 +119,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 统一的水印process逻辑
-     * supportURL和base64两typeformat的image水印process.
+     * 统一的watermarkprocess逻辑
+     * supportURL和base64两typeformat的imagewatermarkprocess.
      */
     private function applyWatermark(ImageGenerateResponse $response, ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -137,8 +137,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
                     $processedData[$index] = $this->watermarkProcessor->addWatermarkToUrl($imageData, $imageGenerateRequest);
                 }
             } catch (Exception $e) {
-                // 水印processfailo clock，recorderrorbutnot影响imagereturn
-                $this->logger->error('image水印processfail', [
+                // watermarkprocessfailo clock，recorderrorbutnot影响imagereturn
+                $this->logger->error('imagewatermarkprocessfail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                     'imageType' => $response->getImageGenerateType()->value,

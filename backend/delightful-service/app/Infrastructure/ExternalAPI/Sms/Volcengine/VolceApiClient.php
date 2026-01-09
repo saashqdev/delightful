@@ -41,12 +41,12 @@ class VolceApiClient extends AbstractSms
             return $smsStruct->content ?: '';
         }
         $templateContent = $this->template->getContentByTemplateId($smsStruct->getTemplateId());
-        // 按variable顺序,also原become完整的短信文本
+        // 按variable顺序,also原become完整的短信text
         return $this->translateContent($templateContent, $smsStruct->variables);
     }
 
     /**
-     * parse传入的variablevariableor者文本短信,得totemplate短信variable的associatearray.
+     * parse传入的variablevariableor者text短信,得totemplate短信variable的associatearray.
      */
     private function parseVariables(SmsStruct $smsStruct): array
     {

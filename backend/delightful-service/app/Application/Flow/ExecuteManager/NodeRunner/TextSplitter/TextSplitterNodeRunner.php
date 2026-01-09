@@ -22,7 +22,7 @@ use Delightful\FlowExprEngine\ComponentFactory;
 #[FlowNodeDefine(
     type: NodeType::TextSplitter->value,
     code: NodeType::TextSplitter->name,
-    name: '文本切割',
+    name: 'text切割',
     paramsConfig: TextSplitterNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,

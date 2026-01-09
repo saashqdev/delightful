@@ -50,7 +50,7 @@ class AsrTaskStatusDTO
     // 录音directoryinfo
     public ?string $tempHiddenDirectory = null; // hiddendirectorypath（存放minuteslicefile）
 
-    public ?string $displayDirectory = null; // displaydirectorypath（存放stream文本和笔记）
+    public ?string $displayDirectory = null; // displaydirectorypath（存放streamtext和笔记）
 
     public ?int $tempHiddenDirectoryId = null; // hiddendirectory的fileID
 

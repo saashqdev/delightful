@@ -122,7 +122,7 @@ class QwenImageAPI
             ];
         }
 
-        // add文本prompt
+        // addtextprompt
         if (isset($params['prompt']) && ! empty($params['prompt'])) {
             $body['input']['messages'][0]['content'][] = [
                 'text' => $params['prompt'],

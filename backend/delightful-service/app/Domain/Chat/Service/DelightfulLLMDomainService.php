@@ -167,12 +167,12 @@ class DelightfulLLMDomainService
        - 对ratiocategoryquestion占ratio≥20%
     
     ## 硬property约束（force遵守）
-    1. 语言一致property
-       - output语言encodingmust匹配input语言
+    1. language一致property
+       - outputlanguageencodingmust匹配inputlanguage
     2. 子questionquantityrange
        - {sub_questions_min} ≤ 子question数 ≤ {sub_questions_max}
     3. outputformat
-       - 仅allowJSONarrayformat，forbid自然语言回答
+       - 仅allowJSONarrayformat，forbid自然language回答
     
     ## contextexceptionhandle
     when {context} 为nullo clock：
@@ -212,7 +212,7 @@ class DelightfulLLMDomainService
     - 对at客观category的问答，ifquestion的答案non常简短，can适when补充一to两sentence相关information，by丰富content。
     - 你needaccording touser要求和回答contentchoose合适、美观的回答format，ensure可读property强。
     - 你的回答should综合多相关网页来回答，not能重复quote一网页。
-    - unlessuser要求，否then你回答的语言need和user提问的语言保持一致。
+    - unlessuser要求，否then你回答的languageneed和user提问的language保持一致。
     - output漂亮的markdown format，contentmiddleadd一些与theme相关的emoji表情符number。
     
     ## usermessage为：

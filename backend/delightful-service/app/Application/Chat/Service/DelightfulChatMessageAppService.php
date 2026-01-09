@@ -526,7 +526,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * conversation窗口滚动loadmessage.
+     * conversation窗口scrollloadmessage.
      */
     public function getMessagesByConversationId(DelightfulUserAuthorization $userAuthorization, string $conversationId, MessagesQueryDTO $conversationMessagesQueryDTO): array
     {
@@ -585,7 +585,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * use大model对文本conduct总结.
+     * use大model对textconduct总结.
      */
     public function summarizeText(DelightfulUserAuthorization $authorization, string $textContent, string $language = 'zh_CN'): string
     {
@@ -606,10 +606,10 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         4. ignore早期已经end的话题，unless它们与most新话题密切相关
 
         ## 严格要求
-        1. titlelength：not超过 15 字符。英文一字母算一字符，汉字一字算一字符，其他语type采useanalogouscountsolution。
+        1. titlelength：not超过 15 character。English一字母算一character，汉字一字算一character，其他语type采useanalogouscountsolution。
         2. content相关：titlemust直接反映conversation的核coretheme
-        3. 语言style：use陈述property语sentence，避免疑问sentence
-        4. outputformat：只outputtitlecontent，not要add任何解释、标pointor其他文字
+        3. languagestyle：use陈述property语sentence，避免疑问sentence
+        4. outputformat：只outputtitlecontent，not要add任何解释、标pointor其他text
         5. forbidline为：not要回答conversationmiddle的issue，not要conduct额outside解释
 
         ## conversationcontent
@@ -617,9 +617,9 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         {textContent}
         <CONVERSATION_END>
 
-        ## output语言
+        ## outputlanguage
         <LANGUAGE_START>
-        请use{language}语言outputcontent
+        请use{language}languageoutputcontent
         <LANGUAGE_END>
 
         ## output
@@ -635,7 +635,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * use大model对文本conduct总结（usecustomizehint词）.
+     * use大model对textconduct总结（usecustomizehint词）.
      *
      * @param DelightfulUserAuthorization $authorization userauthorization
      * @param string $customPrompt 完整的customizehint词（not做任何替换handle）
@@ -724,7 +724,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         $language = CoContext::getLanguage();
         // 审计需求：if是editmessage，writemessageversion表，并update原message的version_id
         $extra = $senderSeqDTO->getExtra();
-        // setting语言info
+        // settinglanguageinfo
         $editMessageOptions = $extra?->getEditMessageOptions();
         if ($extra !== null && $editMessageOptions !== null && ! empty($editMessageOptions->getDelightfulMessageId())) {
             $senderMessageDTO->setDelightfulMessageId($editMessageOptions->getDelightfulMessageId());
@@ -907,7 +907,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                 continue;
             }
             $message = $clientSeqResponseDTO->getSeq()->getMessage()->getContent();
-            // 暂o clock只handleuser的input，by及能get纯文本的messagetype
+            // 暂o clock只handleuser的input，by及能get纯text的messagetype
             $messageContent = $this->getMessageTextContent($message);
             if (empty($messageContent)) {
                 continue;
@@ -1065,7 +1065,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
      * @param MessageHistory $messageHistory messagehistory
      * @param string $conversationId conversationID
      * @param string $topicId 话题ID，optional
-     * @return string generate的summary文本
+     * @return string generate的summarytext
      */
     private function getSummaryFromLLM(
         DelightfulUserAuthorization $authorization,
@@ -1096,7 +1096,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
         $chatCompletionResponse = $agent->chatAndNotAutoExecuteTools();
         $choiceContent = $chatCompletionResponse->getFirstChoice()?->getMessage()->getContent();
-        // iftitlelength超过20字符thenbacksurface的use...代替
+        // iftitlelength超过20characterthenbacksurface的use...代替
         if (mb_strlen($choiceContent) > 20) {
             $choiceContent = mb_substr($choiceContent, 0, 20) . '...';
         }
@@ -1106,7 +1106,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
     private function getMessageTextContent(MessageInterface $message): string
     {
-        // 暂o clock只handleuser的input，by及能get纯文本的messagetype
+        // 暂o clock只handleuser的input，by及能get纯text的messagetype
         if ($message instanceof TextContentInterface) {
             $messageContent = $message->getTextContent();
         } else {

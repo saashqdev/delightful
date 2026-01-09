@@ -119,7 +119,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
         // verifymiddle文 logo 已update
         $this->assertSame('https://example.com/updated_logo_zh.png', $data['logo']['zh_CN']['url']);
-        // verify英文 logo 保持not变
+        // verifyEnglish logo 保持not变
         $this->assertSame('https://example.com/initial_logo_en.png', $data['logo']['en_US']['url']);
         // verify favicon 保持not变
         $this->assertSame('https://example.com/initial_favicon.ico', $data['favicon']['url']);
@@ -129,7 +129,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
     {
         $payload = [
             'favicon_url' => 'https://example.com/favicon.ico',
-            'default_language' => 'invalid_locale', // invalid的语言
+            'default_language' => 'invalid_locale', // invalid的language
         ];
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());

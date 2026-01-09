@@ -174,7 +174,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 清洗title，移exceptfile/directorynotallow的字符并truncatelength.
+     * 清洗title，移exceptfile/directorynotallow的character并truncatelength.
      *
      * @param string $title originaltitle
      * @return string 清洗back的title
@@ -186,7 +186,7 @@ readonly class AsrTitleGeneratorService
             return '';
         }
 
-        // 移exceptillegal字符 \/:*?"<>|
+        // 移exceptillegalcharacter \/:*?"<>|
         $title = preg_replace('/[\\\\\/:*?"<>|]/u', '', $title) ?? '';
         // compressnull白
         $title = preg_replace('/\s+/u', ' ', $title) ?? '';
@@ -252,7 +252,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * builduserrequestmessage（模拟userchatmessage，use国际化文本）.
+     * builduserrequestmessage（模拟userchatmessage，use国际化text）.
      *
      * @param string $audioFileName audiofilename
      * @param null|string $noteFileName 笔记filename（optional）

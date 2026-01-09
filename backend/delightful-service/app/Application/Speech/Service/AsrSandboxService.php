@@ -776,7 +776,7 @@ readonly class AsrSandboxService
 
         // need重命名：use智能title和国际化的笔记back缀buildgoalpath
         $fileExtension = pathinfo($workspaceRelativePath, PATHINFO_EXTENSION);
-        $noteSuffix = trans('asr.file_names.note_suffix'); // according to语言get国际化的"笔记"/"Note"
+        $noteSuffix = trans('asr.file_names.note_suffix'); // according tolanguageget国际化的"笔记"/"Note"
         $noteFilename = sprintf('%s-%s.%s', $intelligentTitle, $noteSuffix, $fileExtension);
 
         return new AsrNoteFileConfig(

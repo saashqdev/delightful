@@ -416,7 +416,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * test密码保护开关feature - closebackagainstart密码notwillmore改.
+     * test密码保护switchfeature - closebackagainstart密码notwillmore改.
      */
     public function testPasswordTogglePreservation(): void
     {

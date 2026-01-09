@@ -22,7 +22,7 @@ enum NodeType: int
 
     /*
      * LLM Chat 这within是historyreason的group合sectionpoint
-     * 大语言model optionalmodel、prompt、temperature
+     * 大languagemodel optionalmodel、prompt、temperature
      */
     case LLM = 2;
 
@@ -46,7 +46,7 @@ enum NodeType: int
 
     /*
      * Vector
-     * 文本转toquantity
+     * text转toquantity
      * data匹配
      * toquantitydatastorage
      */
@@ -95,12 +95,12 @@ enum NodeType: int
     case HistoryMessage = 13;
 
     /*
-     * 文本切割
+     * text切割
      */
     case TextSplitter = 14;
 
     /*
-     * 文本嵌入
+     * text嵌入
      */
     case TextEmbedding = 15;
 

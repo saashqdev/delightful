@@ -39,7 +39,7 @@ class CloudswaySearch
      * @param int $count resultquantity (10/20/30/40/50)
      * @param int $offset pagination偏移quantity
      * @param string $freshness timefilter (Day/Week/Month)
-     * @param string $setLang 语言code (如 en-US)
+     * @param string $setLang languagecode (如 en-US)
      * @return array Cloudsway API response
      * @throws GuzzleException
      */

@@ -38,7 +38,7 @@ interface TemplateInterface
     public function getTemplateLanguagesByType(string $type): array;
 
     /**
-     * according to语type要求和短信support的signaturelist,return对应的signature文本.
+     * according to语type要求和短信support的signaturelist,return对应的signaturetext.
      */
     public function formatSign(string $sign, ?LanguageEnum $language, ?LanguageEnum $defaultLanguage = LanguageEnum::ZH_CN): string;
 }

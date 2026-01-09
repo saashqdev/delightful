@@ -91,7 +91,7 @@ class AiAbilityEntity extends AbstractEntity
     }
 
     /**
-     * getwhenfront语言的name.
+     * getwhenfrontlanguage的name.
      */
     public function getLocalizedName(?string $locale = null): string
     {
@@ -116,7 +116,7 @@ class AiAbilityEntity extends AbstractEntity
     }
 
     /**
-     * getwhenfront语言的description.
+     * getwhenfrontlanguage的description.
      */
     public function getLocalizedDescription(?string $locale = null): string
     {

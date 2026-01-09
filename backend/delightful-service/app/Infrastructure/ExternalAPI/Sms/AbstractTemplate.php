@@ -17,12 +17,12 @@ abstract class AbstractTemplate implements TemplateInterface
     protected array $typeToIdMap = [];
 
     /**
-     * according to短信type,conductvariable短信的适配,also原整item短信文本content.
+     * according to短信type,conductvariable短信的适配,also原整item短信textcontent.
      */
     protected array $typeContents = [];
 
     /**
-     * according totemplateid,conductvariable短信的适配,also原整item短信文本content.
+     * according totemplateid,conductvariable短信的适配,also原整item短信textcontent.
      */
     protected array $idContents = [];
 
@@ -53,15 +53,15 @@ abstract class AbstractTemplate implements TemplateInterface
     public function getTemplateVariables(string $content, array $messages): array
     {
         $matches = [];
-        // 匹配文本 ${code} middle的code
+        // 匹配text ${code} middle的code
         $matched = preg_match_all('/\$\{([^}]+)}/uS', $content, $matches);
-        // 匹配文本 {$code} middle的code
+        // 匹配text {$code} middle的code
         ! $matched && $matched = preg_match_all('/\{\$([^}]+)}/uS', $content, $matches);
         if (! $matched) {
             return $messages;
         }
         $variables = [];
-        // template$contentmiddlenot存in "${xxx}" or者 {$xxx) type的字符.then按index顺序匹配
+        // template$contentmiddlenot存in "${xxx}" or者 {$xxx) type的character.then按index顺序匹配
         foreach ($matches[1] as $index => $variableKey) {
             if (isset($messages[$variableKey])) {
                 $variables[$variableKey] = $messages[$variableKey];

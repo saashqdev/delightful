@@ -22,7 +22,7 @@ use Hyperf\Context\ApplicationContext;
 #[FlowNodeDefine(
     type: NodeType::TextEmbedding->value,
     code: NodeType::TextEmbedding->name,
-    name: '文本嵌入',
+    name: 'text嵌入',
     paramsConfig: TextEmbeddingNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,

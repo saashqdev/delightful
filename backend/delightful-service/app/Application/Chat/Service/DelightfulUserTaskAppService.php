@@ -464,7 +464,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //                 $result['success'] = false;
     //             }
     //             if ($node->getNodeType() === NodeType::ReplyMessage) {
-    //                 // if是replymessagesectionpoint，then将messagecontent添加toresultmiddle
+    //                 // if是replymessagesectionpoint，then将messagecontentaddtoresultmiddle
     //                 $result['message'] = $node->getNodeDebugResult()->getOutput();
     //             }
     //         }

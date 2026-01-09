@@ -95,7 +95,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     public function __construct(array $options)
     {
         if (empty($options)) {
-            throw new InvalidArgumentException('飞书机器人configurationnot能为null');
+            throw new InvalidArgumentException('飞书机器personconfigurationnot能为null');
         }
         $options['http'] = [
             'base_uri' => 'https://open.feishu.cn',
@@ -622,7 +622,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $markdown = '';
         $attachments = [];
 
-        // 提取title（ifhave）
+        // extracttitle（ifhave）
         if (! empty($content['title'])) {
             $markdown .= "# {$content['title']}\n\n";
         }
@@ -687,7 +687,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                     $text = $element['text'] ?? '';
                     return "{$text}\n";
                 default:
-                    // 对at未知的tag，尝试提取文本content
+                    // 对at未知的tag，尝试extract文本content
                     return $element['text'] ?? '';
             }
         } catch (Exception $e) {
@@ -721,7 +721,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             try {
                 $attachments[] = $this->createAttachment($filePath, $organizationCode);
             } catch (Exception $e) {
-                $this->logger->warning('添加imageattachmentfail', [
+                $this->logger->warning('addimageattachmentfail', [
                     'file_path' => $filePath,
                     'error' => $e->getMessage(),
                 ]);
@@ -770,7 +770,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $position = $match[1];
             $url = $matches[2][$index][0];
 
-            // 添加imagefront的文本（ifhave）
+            // addimagefront的文本（ifhave）
             $this->addTextBlockIfNotEmpty(
                 $contentBlocks,
                 substr($markdown, $lastPosition, $position - $lastPosition)
@@ -783,7 +783,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $lastPosition = $position + strlen($fullMatch);
         }
 
-        // 添加mostnextimageback的文本（ifhave）
+        // addmostnextimageback的文本（ifhave）
         $this->addTextBlockIfNotEmpty(
             $contentBlocks,
             substr($markdown, $lastPosition)
@@ -794,10 +794,10 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * 添加文本piece（ifnot为null）.
+     * add文本piece（ifnot为null）.
      *
      * @param array &$contentBlocks contentpiecearray
-     * @param string $text 要添加的文本
+     * @param string $text 要add的文本
      */
     private function addTextBlockIfNotEmpty(array &$contentBlocks, string $text): void
     {
@@ -817,7 +817,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      *
      * @param array &$contentBlocks contentpiecearray
      * @param string $url imageURL
-     * @param string $fallbackText uploadfailo clock的回退文本
+     * @param string $fallbackText uploadfailo clock的back文本
      */
     private function processImageBlock(array &$contentBlocks, string $url, string $fallbackText): void
     {
@@ -836,7 +836,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                 'url' => $url,
                 'error' => $e->getMessage(),
             ]);
-            // ifuploadfail，添加imageURL作为md文本
+            // ifuploadfail，addimageURL作为md文本
             $contentBlocks[] = [
                 [
                     'tag' => 'md',

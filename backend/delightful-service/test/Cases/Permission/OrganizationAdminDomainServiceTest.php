@@ -54,7 +54,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsWithNoAdminsReturnsEmptyArray(): void
     {
-        // ensurenothaveorganization管理员data
+        // ensurenothaveorganizationadministratordata
         $this->cleanUpTestData();
 
         // callmethod
@@ -67,7 +67,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsWithSingleAdminReturnsOneEntity(): void
     {
-        // create一organization管理员
+        // create一organizationadministrator
         $organizationAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -91,7 +91,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsWithMultipleAdminsReturnsAllEntities(): void
     {
-        // create多organization管理员
+        // create多organizationadministrator
         $admins = [];
         foreach ($this->testUserIds as $index => $userId) {
             $admins[] = $this->organizationAdminDomainService->grant(
@@ -126,7 +126,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsOnlyReturnsAdminsFromSpecificOrganization(): void
     {
-        // intestorganizationmiddlecreate管理员
+        // intestorganizationmiddlecreateadministrator
         $testOrgAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -134,7 +134,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             'Test org admin'
         );
 
-        // in另一organizationmiddlecreate管理员
+        // in另一organizationmiddlecreateadministrator
         $anotherOrgAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->anotherOrganizationCode),
             $this->testUserIds[1],
@@ -142,19 +142,19 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             'Another org admin'
         );
 
-        // callmethodgettestorganization的管理员
+        // callmethodgettestorganization的administrator
         $testOrgResult = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($this->testOrganizationCode));
 
-        // verify只returntestorganization的管理员
+        // verify只returntestorganization的administrator
         $this->assertIsArray($testOrgResult);
         $this->assertCount(1, $testOrgResult);
         $this->assertEquals($this->testUserIds[0], $testOrgResult[0]->getUserId());
         $this->assertEquals($this->testOrganizationCode, $testOrgResult[0]->getOrganizationCode());
 
-        // callmethodget另一organization的管理员
+        // callmethodget另一organization的administrator
         $anotherOrgResult = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($this->anotherOrganizationCode));
 
-        // verify只return另一organization的管理员
+        // verify只return另一organization的administrator
         $this->assertIsArray($anotherOrgResult);
         $this->assertCount(1, $anotherOrgResult);
         $this->assertEquals($this->testUserIds[1], $anotherOrgResult[0]->getUserId());
@@ -163,7 +163,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsWithEmptyOrganizationCodeReturnsEmptyArray(): void
     {
-        // create一些管理员
+        // create一些administrator
         $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -180,7 +180,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsWithNonExistentOrganizationCodeReturnsEmptyArray(): void
     {
-        // create一些管理员
+        // create一些administrator
         $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -197,7 +197,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsReturnsEntitiesWithAllRequiredFields(): void
     {
-        // create一organization管理员
+        // create一organizationadministrator
         $organizationAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -226,7 +226,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGrantWithOrganizationCreatorFlagSetsIsOrganizationCreatorCorrectly(): void
     {
-        // create一普通管理员（nonorganizationcreate者）
+        // create一普通administrator（nonorganizationcreate者）
         $normalAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -275,7 +275,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetOrganizationCreatorReturnsCorrectEntity(): void
     {
-        // create多管理员，其middle一是organizationcreate者
+        // create多administrator，其middle一是organizationcreate者
         $normalAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -323,7 +323,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
     private function cleanUpOrganizationAdmins(string $organizationCode): void
     {
         try {
-            // get所have管理员并delete
+            // get所haveadministrator并delete
             $allAdmins = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($organizationCode));
             foreach ($allAdmins as $admin) {
                 $this->organizationAdminDomainService->destroy($this->createDataIsolation($organizationCode), $admin);

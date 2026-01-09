@@ -9,7 +9,7 @@ namespace App\Infrastructure\Util\Tiptap\CustomExtension\ValueObject;
 
 enum InstructionType: int
 {
-    // 单选
+    // single-select
     case SINGLE_CHOICE = 1;
 
     // 开关

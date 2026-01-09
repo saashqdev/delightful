@@ -59,7 +59,7 @@ interface DelightfulDepartmentRepositoryInterface
     public function getOrganizationDepartments(string $organizationCode, array $fields = ['*'], bool $keyById = false): array;
 
     /**
-     * 增加departmentinstruction书.
+     * increasedepartmentinstruction书.
      */
     public function addDepartmentDocument(string $departmentId, string $documentId): void;
 

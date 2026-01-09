@@ -36,7 +36,7 @@ class CreateGroupTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'create一具havefinger定人员的group chatday';
+        return 'create一具havefinger定person员的group chatday';
     }
 
     public function getCallback(): ?Closure

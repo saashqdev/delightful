@@ -26,19 +26,19 @@ class AdminAgentDTO extends AbstractDTO
     // status
     protected int $status;
 
-    // create人id
+    // createpersonid
     protected string $createdUid;
 
     // creation time
     protected string $createdAt;
 
-    // create人name
+    // createpersonname
     protected string $createdName;
 
     // publishstatus
     protected ?int $releaseScope = null;
 
-    // 审核status
+    // reviewstatus
     protected ?int $reviewStatus = null;
 
     // approvalstatus

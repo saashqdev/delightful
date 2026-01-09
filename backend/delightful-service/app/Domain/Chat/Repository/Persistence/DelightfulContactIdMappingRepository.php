@@ -42,7 +42,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $data = $this->delightfulContactIdMappingModel::query();
 
         // 保持原have的queryfield顺序
-        // according to环境IDquantity选择合适的querymethod
+        // according toenvironmentIDquantitychoose合适的querymethod
         if (count($relationEnvIds) === 1) {
             $data->where('delightful_environment_id', reset($relationEnvIds));
         } else {
@@ -105,7 +105,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query = $this->delightfulContactIdMappingModel::query();
 
         // 保持原have的queryfield顺序
-        // according to环境IDquantity选择合适的querymethod
+        // according toenvironmentIDquantitychoose合适的querymethod
         if (count($relationEnvIds) === 1) {
             $query->where('delightful_environment_id', reset($relationEnvIds));
         } else {
@@ -245,7 +245,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 预publish和生产can看做是一环境，所by这withinprocess一downassociate的环境 ids.
+     * 预publish和生产can看做是一environment，所by这withinprocess一downassociate的environment ids.
      * */
     private function getEnvRelationIds(DelightfulEnvironmentEntity $delightfulEnvironmentEntity): array
     {
@@ -254,7 +254,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
             $relationEnvIds = [$delightfulEnvironmentEntity->getId()];
         } else {
             $relationEnvIds[] = $delightfulEnvironmentEntity->getId();
-            // 对环境IDconduct去重process
+            // 对environmentIDconduct去重process
             $relationEnvIds = array_unique($relationEnvIds);
         }
         return $relationEnvIds;

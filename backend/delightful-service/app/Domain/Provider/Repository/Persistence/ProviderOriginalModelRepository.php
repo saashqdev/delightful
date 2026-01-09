@@ -89,7 +89,7 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
     {
         $systemType = ProviderOriginalModelType::System;
 
-        // the一timequery：getsystemdefaultmodel（所haveorganizationall可见）
+        // the一timequery：getsystemdefaultmodel（所haveorganizationallvisible）
         $systemBuilder = $this->createProviderOriginalModelQuery()
             ->where('type', $systemType->value);
         $systemModels = Db::select($systemBuilder->toSql(), $systemBuilder->getBindings());
@@ -121,7 +121,7 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
 
     /**
      * 准备移except软删相关feature，temporary这样写。create带have软deletefilter的 ProviderOriginalModelModel querybuild器.
-     * @param null|ProviderDataIsolation $dataIsolation if传入then添加organizationcodefilter
+     * @param null|ProviderDataIsolation $dataIsolation if传入thenaddorganizationcodefilter
      */
     private function createProviderOriginalModelQuery(?ProviderDataIsolation $dataIsolation = null): Builder
     {

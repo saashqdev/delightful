@@ -55,7 +55,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest2();
         $this->updateFileContent($fileId, 'test2', 51202);
 
-        // 添加team协作
+        // addteam协作
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
@@ -127,7 +127,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateMembers($projectId);
         $this->switchUserTest2();
 
-        // 1. 重复置top同一project - should正常handle
+        // 1. 重复置top同一project - shouldnormalhandle
         $this->pinProject($projectId, true);
         $this->pinProject($projectId, true); // 重复置top
 
@@ -135,7 +135,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
-        // 2. 重复cancel置top - should正常handle
+        // 2. 重复cancel置top - shouldnormalhandle
         $this->pinProject($projectId, false);
         $this->pinProject($projectId, false); // 重复cancel置top
 
@@ -157,7 +157,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             'workspace_name' => date('Y-m-d')
         ];
 
-        // 1. create工作区
+        // 1. creatework区
         $response = $this->post('/api/v1/be-agent/workspaces', $requestData, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $workspaceId = $response['data']['id'];
@@ -169,7 +169,7 @@ class ProjectMemberApiTest extends AbstractApiTest
             'workspace_id' => $workspaceId,
         ];
 
-        // 2. create工作区
+        // 2. creatework区
         $response = $this->post('/api/v1/be-agent/projects', $requestData, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $projectId = $response['data']['project']['id'];*/
@@ -205,12 +205,12 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         $this->switchUserTest1();
 
-        // 4. 添加nullmember
+        // 4. addnullmember
         $this->updateEmptyMembers($projectId);
 
-        // 5. 添加projectmember
+        // 5. addprojectmember
         $this->updateMembers($projectId);
-        // 6. 查看projectmember
+        // 6. viewprojectmember
         $this->projectMember($projectId);
 
         $this->collaborationProjects('test', 0);
@@ -218,9 +218,9 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         $this->switchUserTest2();
 
-        // 7. 查看projectmember
+        // 7. viewprojectmember
         $this->projectMember($projectId);
-        // 8. 查看协作projectcolumn表
+        // 8. view协作projectcolumn表
         $this->collaborationProjects();
         $this->collaborationProjects('test');
 
@@ -516,7 +516,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(2, $editingCount);
 
-        // 5. test离开edit
+        // 5. testleaveedit
         $this->leaveFileEditing($fileId);
 
         // 6. getedituserquantity - should只剩1user
@@ -552,7 +552,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test离开fileedit.
+     * testleavefileedit.
      */
     public function leaveFileEditing(string $fileId, int $expectedCode = 1000): array
     {
@@ -601,7 +601,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         // test无permission加入edit - shouldreturnerror
         $this->joinFileEditing($unauthorizedFileId, 51202); // 假设51200是无permissionerror码
 
-        // test无permission离开edit - shouldreturnerror
+        // test无permissionleaveedit - shouldreturnerror
         $this->leaveFileEditing($unauthorizedFileId, 51202);
 
         // test无permissionqueryedituser - shouldreturnerror
@@ -615,7 +615,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $this->switchUserTest1();
 
-        // 1. 重复加入edit - should正常handle
+        // 1. 重复加入edit - shouldnormalhandle
         $this->joinFileEditing($fileId);
         $this->joinFileEditing($fileId); // 重复加入
 
@@ -623,9 +623,9 @@ class ProjectMemberApiTest extends AbstractApiTest
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 2. 重复离开edit - should正常handle
+        // 2. 重复leaveedit - shouldnormalhandle
         $this->leaveFileEditing($fileId);
-        $this->leaveFileEditing($fileId); // 重复离开
+        $this->leaveFileEditing($fileId); // 重复leave
 
         // validateuserquantity是0
         $editingCount = $this->getEditingUsers($fileId);

@@ -26,7 +26,7 @@ class LoginApiTest extends AbstractHttpTest
         // 构造requestparameter - hand机number密码login
         $requestData = [
             'state_code' => '+86',
-            'phone' => '13812345678', // test环境middlenot存in的账number
+            'phone' => '13812345678', // testenvironmentmiddlenot存in的账number
             'password' => '123456',
             'type' => 'phone_password',
         ];
@@ -48,7 +48,7 @@ class LoginApiTest extends AbstractHttpTest
                 'is_perfect_password' => false,
                 'user_info' => [
                     'id' => 'xxxxx',
-                    'real_name' => '管理员1',
+                    'real_name' => 'administrator1',
                     'avatar' => 'default_avatar',
                     'description' => '',
                     'position' => '',

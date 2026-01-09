@@ -38,8 +38,8 @@ class EndpointRequestDTO extends AbstractDTO
     protected ?string $endpointName = null;
 
     /**
-     * uptime选择的接入pointID (optional).
-     * useatconversation延续etc场景，优先选择uptimeuse的接入point.
+     * uptimechoose的接入pointID (optional).
+     * useatconversation延续etc场景，优先chooseuptimeuse的接入point.
      */
     protected ?string $lastSelectedEndpointId = null;
 
@@ -152,7 +152,7 @@ class EndpointRequestDTO extends AbstractDTO
     }
 
     /**
-     * checkwhetherhaveuptime选择的接入pointID.
+     * checkwhetherhaveuptimechoose的接入pointID.
      */
     public function hasLastSelectedEndpointId(): bool
     {

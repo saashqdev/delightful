@@ -229,7 +229,7 @@ class ProviderModelSyncAppService
             $existingModelMap[$model->getModelId()] = $model;
         }
 
-        // 提取新model的model_id
+        // extract新model的model_id
         $newModelIds = array_column($models, 'id');
 
         // 遍历新model，createorupdate

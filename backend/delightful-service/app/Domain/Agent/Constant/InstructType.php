@@ -73,7 +73,7 @@ enum InstructType: int
             return false;
         }
 
-        // if是系统finger令，useSystemInstructType的判断
+        // if是systemfinger令，useSystemInstructType的判断
         if ($displayType === InstructDisplayType::SYSTEM) {
             return SystemInstructType::requiresContent($type);
         }

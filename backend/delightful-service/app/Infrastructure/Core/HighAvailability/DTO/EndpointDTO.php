@@ -197,7 +197,7 @@ class EndpointDTO extends AbstractDTO
         return $this;
     }
 
-    // 新增的enhancefieldmethod
+    // new的enhancefieldmethod
     /**
      * getdatabase接入pointID.
      */

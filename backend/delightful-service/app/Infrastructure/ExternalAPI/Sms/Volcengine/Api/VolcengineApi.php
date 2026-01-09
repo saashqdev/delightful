@@ -121,7 +121,7 @@ abstract class VolcengineApi
         // setrequest的signature和X-Daterequesthead
         $this->setAuth();
         try {
-            // requesthead追加signature
+            // requestheadappendsignature
             $options = [
                 RequestOptions::QUERY => $this->getQuery(),
                 RequestOptions::HEADERS => $this->getHeaders(),

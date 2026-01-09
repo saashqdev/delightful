@@ -74,7 +74,7 @@ enum UserErrorCode: int
     #[ErrorMessage('user.input_param_error')]
     case INPUT_PARAM_ERROR = 2180;
 
-    // 收item人typeexception
+    // 收itempersontypeexception
     #[ErrorMessage('user.receive_type_error')]
     case RECEIVE_TYPE_ERROR = 2181;
 

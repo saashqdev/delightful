@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('grantor_user_id', 64)->nullable()->comment('authorization者userID');
             $table->timestamp('granted_at')->nullable()->comment('authorizationtime');
             $table->tinyInteger('status')->default(1)->comment('status: 0=disable, 1=enable');
-            $table->tinyInteger('is_organization_creator')->default(0)->comment('whether为organizationcreate人: 0=否, 1=是');
+            $table->tinyInteger('is_organization_creator')->default(0)->comment('whether为organizationcreateperson: 0=否, 1=是');
             $table->text('remarks')->nullable()->comment('note');
             $table->timestamps();
             $table->softDeletes();
@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->index(['organization_code', 'is_organization_creator', 'granted_at'], 'idx_organization_code_queries');
             $table->index(['delightful_id'], 'idx_delightful_id');
 
-            $table->comment('organization管理员表');
+            $table->comment('organizationadministrator表');
         });
     }
 

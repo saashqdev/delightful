@@ -264,7 +264,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 $current = &$current['children'][$segment];
             }
 
-            // 此o clock $current fingertoresourcesectionpoint，为其添加操作leaf子
+            // 此o clock $current fingertoresourcesectionpoint，为其add操作leaf子
             $current['children'][] = [
                 'label' => $permission['operation_label'],
                 'permission_key' => $permission['permission_key'],
@@ -430,7 +430,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * according to平台 key get显示name，可按需extension.
+     * according to平台 key getdisplayname，可按需extension.
      */
     private function getPlatformLabel(string $platformKey): string
     {

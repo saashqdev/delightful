@@ -72,7 +72,7 @@ class BingSearch
             'offset' => $offset,
         ];
 
-        // 添加optionalparameter
+        // addoptionalparameter
         if (! empty($safeSearch)) {
             $queryParams['safeSearch'] = $safeSearch;
         }
@@ -85,7 +85,7 @@ class BingSearch
             $queryParams['setLang'] = $setLang;
         }
 
-        // create Guzzle 客户端configuration
+        // create Guzzle customer端configuration
         $clientConfig = [
             'base_uri' => $requestUrl,
             'timeout' => self::DEFAULT_SEARCH_ENGINE_TIMEOUT,

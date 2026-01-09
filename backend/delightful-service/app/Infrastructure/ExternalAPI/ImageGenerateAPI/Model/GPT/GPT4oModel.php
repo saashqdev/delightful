@@ -139,7 +139,7 @@ class GPT4oModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // fromnativeresultmiddle提取imageURL
+        // fromnativeresultmiddleextractimageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             if (! empty($result['imageUrl'])) {
@@ -387,7 +387,7 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * 为GPT4ooriginaldata添加水印.
+     * 为GPT4ooriginaldataadd水印.
      */
     private function processGPT4oRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -423,7 +423,7 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * 将GPT4oimagedata添加toOpenAIresponseobjectmiddle.
+     * 将GPT4oimagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponseGPT4o(
         OpenAIFormatResponse $response,
@@ -433,7 +433,7 @@ class GPT4oModel extends AbstractImageGenerate
         // useRedislockensure并hairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
-            // fromGPT4oround询resultmiddle提取imageURL
+            // fromGPT4oround询resultmiddleextractimageURL
             if (empty($gpt4oResult['imageUrl'])) {
                 return;
             }
@@ -448,7 +448,7 @@ class GPT4oModel extends AbstractImageGenerate
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($imageUrl, $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('GPT4o添加imagedata：水印handlefail', [
+                $this->logger->error('GPT4oaddimagedata：水印handlefail', [
                     'error' => $e->getMessage(),
                     'url' => $imageUrl,
                 ]);

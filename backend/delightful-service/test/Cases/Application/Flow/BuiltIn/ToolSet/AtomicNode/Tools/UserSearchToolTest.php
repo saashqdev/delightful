@@ -83,7 +83,7 @@ JSON, true));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'system_prompt' => 'whenuser想要search人员o clock，call user_search toolget相关人员information',
+            'system_prompt' => 'whenuser想要searchperson员o clock，call user_search toolget相关person员information',
             'user_prompt' => '我想找一down 开hair部的小明',
         ]);
         $runner->execute($vertexResult, $executionData);

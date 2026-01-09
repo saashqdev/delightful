@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
-            // checkwhether已存infield，避免重复添加
+            // checkwhether已存infield，避免重复add
             if (! Schema::hasColumn('delightful_flow_knowledge', 'source_type')) {
                 $table->integer('source_type')->nullable()->comment('data源type');
             }

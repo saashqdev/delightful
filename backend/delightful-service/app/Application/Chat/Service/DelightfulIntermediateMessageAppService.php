@@ -41,7 +41,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
     }
 
     /**
-     * according to客户端hair来的控制messagetype,minutehairto对应的process模piece.
+     * according tocustomer端hair来的控制messagetype,minutehairto对应的process模piece.
      * @throws Throwable
      */
     public function dispatchClientIntermediateMessage(ChatRequest $chatRequest, DelightfulUserAuthorization $userAuthorization): ?array

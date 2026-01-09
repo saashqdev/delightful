@@ -48,7 +48,7 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
             $coroutine = Coroutine::getCurrent();
             $alertCount = ($alertCountMap[$coroutine] ??= 0) + 1;
             $alertCountMap[$coroutine] = $alertCount;
-            // when单协程运line超过 $millSeconds o clock，will触hair看门狗，打印协程callstack
+            // when单协程运line超过 $millSeconds o clock，will触hair看门狗，print协程callstack
             if ($alertCount > 1) {
                 $trace = str_replace(["\n", "\r"], ' | ', $coroutine->getTraceAsString());
                 $logger->error(sprintf(

@@ -270,9 +270,9 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * assistant给人categoryor者群hairmessage,supportonlinemessage和offlinemessage(取决atuserwhetheronline).
+     * assistant给personcategoryor者群hairmessage,supportonlinemessage和offlinemessage(取决atuserwhetheronline).
      * @param DelightfulSeqEntity $aiSeqDTO 怎么传参can参考 apilayer的 aiSendMessage method
-     * @param string $appMessageId message防重,客户端(includeflow)自己对messagegenerate一itemencoding
+     * @param string $appMessageId message防重,customer端(includeflow)自己对messagegenerate一itemencoding
      * @param bool $doNotParseReferMessageId not由 chat 判断 referMessageId 的quoteo clock机,由call方自己判断
      * @throws Throwable
      */
@@ -293,13 +293,13 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             if ($aiConversationEntity === null) {
                 ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
             }
-            // confirmhairitem人whether是assistant
+            // confirmhairitempersonwhether是assistant
             $aiUserId = $aiConversationEntity->getUserId();
             $aiUserEntity = $this->delightfulChatDomainService->getUserInfo($aiUserId);
             if ($aiUserEntity->getUserType() !== UserType::Ai) {
                 ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
             }
-            // if是assistant与人private chat，andassistantsend的messagenothave话题 id，then报错
+            // if是assistant与personprivate chat，andassistantsend的messagenothave话题 id，then报错
             if ($aiConversationEntity->getReceiveType() === ConversationType::User && empty($aiSeqDTO->getExtra()?->getTopicId())) {
                 ExceptionBuilder::throw(ChatErrorCode::TOPIC_ID_NOT_FOUND);
             }
@@ -332,8 +332,8 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * assistant给人categoryor者群hairmessage,cannot传conversation和话题 id,自动createconversation，nongroupconversation自动适配话题 id.
-     * @param string $appMessageId message防重,客户端(includeflow)自己对messagegenerate一itemencoding
+     * assistant给personcategoryor者群hairmessage,cannot传conversation和话题 id,自动createconversation，nongroupconversation自动适配话题 id.
+     * @param string $appMessageId message防重,customer端(includeflow)自己对messagegenerate一itemencoding
      * @param bool $doNotParseReferMessageId cannot由 chat 判断 referMessageId 的quoteo clock机,由call方自己判断
      * @throws Throwable
      */
@@ -364,8 +364,8 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * 人category给assistantor者群hairmessage,cannot传conversation和话题 id,自动createconversation，nongroupconversation自动适配话题 id.
-     * @param string $appMessageId message防重,客户端(includeflow)自己对messagegenerate一itemencoding
+     * personcategory给assistantor者群hairmessage,cannot传conversation和话题 id,自动createconversation，nongroupconversation自动适配话题 id.
+     * @param string $appMessageId message防重,customer端(includeflow)自己对messagegenerate一itemencoding
      * @param bool $doNotParseReferMessageId cannot由 chat 判断 referMessageId 的quoteo clock机,由call方自己判断
      * @throws Throwable
      */
@@ -407,9 +407,9 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * assistant给人categoryor者群hairmessage,supportonlinemessage和offlinemessage(取决atuserwhetheronline).
+     * assistant给personcategoryor者群hairmessage,supportonlinemessage和offlinemessage(取决atuserwhetheronline).
      * @param DelightfulSeqEntity $aiSeqDTO 怎么传参can参考 apilayer的 aiSendMessage method
-     * @param string $appMessageId message防重,客户端(includeflow)自己对messagegenerate一itemencoding
+     * @param string $appMessageId message防重,customer端(includeflow)自己对messagegenerate一itemencoding
      * @param bool $doNotParseReferMessageId not由 chat 判断 referMessageId 的quoteo clock机,由call方自己判断
      * @throws Throwable
      */
@@ -430,13 +430,13 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             if ($aiConversationEntity === null) {
                 ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
             }
-            // confirmhairitem人whether是assistant
+            // confirmhairitempersonwhether是assistant
             $aiUserId = $aiConversationEntity->getUserId();
             $aiUserEntity = $this->delightfulChatDomainService->getUserInfo($aiUserId);
             // if ($aiUserEntity->getUserType() !== UserType::Ai) {
             //     ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
             // }
-            // if是assistant与人private chat，andassistantsend的messagenothave话题 id，then报错
+            // if是assistant与personprivate chat，andassistantsend的messagenothave话题 id，then报错
             if ($aiConversationEntity->getReceiveType() === ConversationType::User && empty($aiSeqDTO->getExtra()?->getTopicId())) {
                 ExceptionBuilder::throw(ChatErrorCode::TOPIC_ID_NOT_FOUND);
             }
@@ -477,7 +477,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     {
         Db::beginTransaction();
         try {
-            # bydown是chatmessage. 采取写扩散:if是群,then为群member的each人generateseq
+            # bydown是chatmessage. 采取写扩散:if是群,then为群member的eachpersongenerateseq
             // 1.getconversationinfo
             $senderConversationEntity = $this->delightfulChatDomainService->getConversationById($senderSeqEntity->getConversationId());
             if ($senderConversationEntity === null) {
@@ -609,7 +609,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         1. titlelength：not超过 15 字符。英文一字母算一字符，汉字一字算一字符，其他语type采useanalogouscountsolution。
         2. content相关：titlemust直接反映conversation的核coretheme
         3. 语言style：use陈述property语sentence，避免疑问sentence
-        4. outputformat：只outputtitlecontent，not要添加任何解释、标pointor其他文字
+        4. outputformat：只outputtitlecontent，not要add任何解释、标pointor其他文字
         5. forbidline为：not要回答conversationmiddle的issue，not要conduct额outside解释
 
         ## conversationcontent
@@ -705,7 +705,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * 给hairitem方generatemessage和Seq.为了保证系统稳定property,给收item方generatemessage和Seq的步骤放inmqasync去做.
+     * 给hairitem方generatemessage和Seq.为了保证systemstableproperty,给收item方generatemessage和Seq的step放inmqasync去做.
      * !!! 注意,transactionmiddle投递 mq,可能transactionalsonotsubmit,mqmessagethen已be消费.
      * @throws Throwable
      */
@@ -736,7 +736,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             $messageEntity && $messageEntity->setLanguage($language);
         }
 
-        // ifquote的messagebeedit过，那么修改 referMessageId 为original的message id
+        // ifquote的messagebeedit过，那么modify referMessageId 为original的message id
         $this->checkAndUpdateReferMessageId($senderSeqDTO);
 
         $senderMessageDTO->setLanguage($language);
@@ -765,7 +765,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             // 只in确定 $senderSeqEntity 和 $messageEntity，useatreturndata结构
             $senderSeqEntity = $this->delightfulSeqDomainService->getSeqEntityByMessageId($senderMessageId);
             $messageEntity = $this->delightfulChatDomainService->getMessageByDelightfulMessageId($delightfulMessageId);
-            // 将messagestreamreturn给current客户端! but是also是willasyncpush给user的所haveonline客户端.
+            // 将messagestreamreturn给currentcustomer端! but是also是willasyncpush给user的所haveonlinecustomer端.
             return SeqAssembler::getClientSeqStruct($senderSeqEntity, $messageEntity)->toArray();
         }
 
@@ -775,7 +775,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             if (! isset($messageEntity)) {
                 $messageEntity = $this->delightfulChatDomainService->createDelightfulMessageByAppClient($senderMessageDTO, $senderConversationEntity);
             }
-            // 给自己的messagestreamgenerate序column,并确定message的receive人column表
+            // 给自己的messagestreamgenerate序column,并确定message的receivepersoncolumn表
             $senderSeqEntity = $this->delightfulChatDomainService->generateSenderSequenceByChatMessage($senderSeqDTO, $messageEntity, $senderConversationEntity);
             // 避免 seq 表承载too多feature,加too多索引,therefore将话题的message单独writeto topic_messages 表middle
             $this->delightfulChatDomainService->createTopicMessage($senderSeqEntity);
@@ -823,12 +823,12 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             return [];
         }
 
-        // 将messagestreamreturn给current客户端! but是also是willasyncpush给user的所haveonline客户端.
+        // 将messagestreamreturn给currentcustomer端! but是also是willasyncpush给user的所haveonlinecustomer端.
         return SeqAssembler::getClientSeqStruct($senderSeqEntity, $messageEntity)->toArray();
     }
 
     /**
-     * ifquote的messagebeedit过，那么修改 referMessageId 为original的message id.
+     * ifquote的messagebeedit过，那么modify referMessageId 为original的message id.
      */
     public function checkAndUpdateReferMessageId(DelightfulSeqEntity $senderSeqDTO): void
     {
@@ -1185,7 +1185,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * according to客户端hair来的chatmessagetype,minutehairto对应的handle模piece.
+     * according tocustomer端hair来的chatmessagetype,minutehairto对应的handle模piece.
      * @throws Throwable
      */
     private function dispatchClientChatMessage(

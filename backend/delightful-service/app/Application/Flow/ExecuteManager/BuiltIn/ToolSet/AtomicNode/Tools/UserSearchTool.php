@@ -36,7 +36,7 @@ class UserSearchTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'usersearch。notallowsearchall部人员，一定是具havefinger定filtervalue';
+        return 'usersearch。notallowsearchall部person员，一定是具havefinger定filtervalue';
     }
 
     public function getCallback(): ?Closure

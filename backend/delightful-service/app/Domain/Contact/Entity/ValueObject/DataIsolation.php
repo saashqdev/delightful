@@ -33,7 +33,7 @@ class DataIsolation extends AbstractObject
     protected ?string $currentUserId = null;
 
     /**
-     * whenfront环境.
+     * whenfrontenvironment.
      */
     protected string $environment;
 

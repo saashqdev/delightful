@@ -32,8 +32,8 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
     protected AmqpTopicType $topic = AmqpTopicType::Message;
 
     /**
-     * 1.本ground开hairo clocknotstart,避免消费了test环境的data,导致test环境的user收nottomessage
-     * 2.if本ground开hairo clock想debug,请自linein本ground搭建front端环境,more换mq的host. or者申请一dev环境,隔离mq.
+     * 1.本ground开hairo clocknotstart,避免消费了testenvironment的data,导致testenvironment的user收nottomessage
+     * 2.if本ground开hairo clock想debug,请自linein本ground搭建front端environment,more换mq的host. or者申请一devenvironment,隔离mq.
      */
     public function isEnable(): bool
     {

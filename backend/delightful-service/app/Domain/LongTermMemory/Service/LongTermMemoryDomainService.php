@@ -95,7 +95,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 批quantityhandle记忆suggestion（接受/拒绝）.
+     * 批quantityhandle记忆suggestion（接受/reject）.
      */
     public function batchProcessMemorySuggestions(array $memoryIds, MemoryOperationAction $action, MemoryOperationScenario $scenario = MemoryOperationScenario::ADMIN_PANEL, ?string $delightfulMessageId = null): void
     {
@@ -127,7 +127,7 @@ readonly class LongTermMemoryDomainService
                 foreach ($memories as $memory) {
                     // ifhavepending_content，then将其移动tocontent
                     if ($memory->getPendingContent() !== null) {
-                        // 将pending_content的value复制tocontentfield
+                        // 将pending_content的valuecopytocontentfield
                         $memory->setContent($memory->getPendingContent());
                         // 清nullpending_contentfield
                         $memory->setPendingContent(null);
@@ -145,7 +145,7 @@ readonly class LongTermMemoryDomainService
                     ExceptionBuilder::throw(LongTermMemoryErrorCode::UPDATE_FAILED);
                 }
             } elseif ($action === MemoryOperationAction::REJECT) {
-                // 批quantity拒绝记忆suggestion：according to记忆status决定deletealso是清nullpending_content
+                // 批quantityreject记忆suggestion：according to记忆status决定deletealso是清nullpending_content
                 $memories = $this->repository->findByIds($memoryIds);
 
                 $memoriesToDelete = [];
@@ -482,7 +482,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * 查找记忆 by ID.
+     * find记忆 by ID.
      */
     public function findById(string $memoryId): ?LongTermMemoryEntity
     {
@@ -629,7 +629,7 @@ readonly class LongTermMemoryDomainService
                 $projectedCounts[$categoryKey] = 0;
             }
 
-            // onlycurrent未enable的记忆才will增加count
+            // onlycurrent未enable的记忆才willincreasecount
             if (! $memory->isEnabled()) {
                 ++$projectedCounts[$categoryKey];
             }
@@ -648,7 +648,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * according topending_content的变化adjust记忆status.
+     * according topending_content的changeadjust记忆status.
      */
     private function adjustMemoryStatusBasedOnPendingContent(LongTermMemoryEntity $memory, ?string $pendingContent): void
     {

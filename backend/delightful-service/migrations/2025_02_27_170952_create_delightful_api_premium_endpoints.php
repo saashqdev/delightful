@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->tinyInteger('enabled')->default(1)->comment('whetherenable: 1=enable, 0=disable');
             $table->string('circuit_breaker_status', 32)
                 ->default(CircuitBreakerStatus::CLOSED->value)
-                ->comment('circuit breakstatus: closed=正常servicemiddle, open=circuit breakmiddle, half_open=尝试restoremiddle');
+                ->comment('circuit breakstatus: closed=normalservicemiddle, open=circuit breakmiddle, half_open=尝试restoremiddle');
             $table->string('resources', 255)->comment('resource的consume id list，一timerequest可能consume多typeresource')->nullable();
             $table->datetimes();
             $table->unique(['enabled', 'type', 'provider', 'name'], 'unique_enabled_type_provider_name');

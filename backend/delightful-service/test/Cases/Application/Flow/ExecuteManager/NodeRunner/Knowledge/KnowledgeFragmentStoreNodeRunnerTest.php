@@ -212,7 +212,7 @@ JSON, true));
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
             'vector_database_id' => 'KNOWLEDGE-674d1987228b42-90330502',
-            'content' => 'Q: 我为什么要in述职准备upflowertime？ A: 假设你本身的工作产出是90minute，一好的述职呈现能将你这 90 minute的工作完美ground呈现给所have人，but一incontent结构、validinfoquantity和可读propertyupallnot尽如人意的 PPT 可能只能呈现出你30minute的工作becomefruit。 并and，if你in述职的表达与呈现方surface做得verynot尽如人意、nothavebody现出结构化的思考method、nothave SMART 的未来规划，那么同样的，你inday常departmentwill议middle的沟通协作能力、工作middle的逻辑思维能力、自我管理和规划的能力alsowill备受quality疑。 述职often是一人day常为人处事statedegree的良好影射，优秀的人oftennot吝atto公众展示自己的becomefruit，这also是为什么像 GitHub 这样的开源社区will存in，and汇聚了大quantity的优秀人才。 meanwhile，述职also是一non常珍贵的、让你have机will了解其它人in做什么的场域。',
+            'content' => 'Q: 我为什么要in述职准备upflowertime？ A: 假设你本身的work产出是90minute，一好的述职呈现能将你这 90 minute的work完美ground呈现给所haveperson，but一incontent结构、validinfoquantity和可读propertyupallnot尽如person意的 PPT 可能只能呈现出你30minute的workbecomefruit。 并and，if你in述职的表达与呈现方surface做得verynot尽如person意、nothavebody现出结构化的思考method、nothave SMART 的未来规划，那么同样的，你inday常departmentwill议middle的沟通协作能力、workmiddle的逻辑思维能力、自我管理和规划的能力alsowill备受quality疑。 述职often是一personday常为person处事statedegree的良好影射，优秀的personoftennot吝atto公众show自己的becomefruit，这also是为什么像 GitHub 这样的开源社区will存in，and汇聚了大quantity的优秀person才。 meanwhile，述职also是一non常珍贵的、让你have机will了解其它personin做什么的场域。',
             'business_id' => '',
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -325,7 +325,7 @@ JSON, true));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'content' => 'Q: 我为什么要in述职准备upflowertime？ A: 假设你本身的工作产出是90minute，一好的述职呈现能将你这 90 minute的工作完美ground呈现给所have人，but一incontent结构、validinfoquantity和可读propertyupallnot尽如人意的 PPT 可能只能呈现出你30minute的工作becomefruit。 并and，if你in述职的表达与呈现方surface做得verynot尽如人意、nothavebody现出结构化的思考method、nothave SMART 的未来规划，那么同样的，你inday常departmentwill议middle的沟通协作能力、工作middle的逻辑思维能力、自我管理和规划的能力alsowill备受quality疑。 述职often是一人day常为人处事statedegree的良好影射，优秀的人oftennot吝atto公众展示自己的becomefruit，这also是为什么像 GitHub 这样的开源社区will存in，and汇聚了大quantity的优秀人才。 meanwhile，述职also是一non常珍贵的、让你have机will了解其它人in做什么的场域。',
+            'content' => 'Q: 我为什么要in述职准备upflowertime？ A: 假设你本身的work产出是90minute，一好的述职呈现能将你这 90 minute的work完美ground呈现给所haveperson，but一incontent结构、validinfoquantity和可读propertyupallnot尽如person意的 PPT 可能只能呈现出你30minute的workbecomefruit。 并and，if你in述职的表达与呈现方surface做得verynot尽如person意、nothavebody现出结构化的思考method、nothave SMART 的未来规划，那么同样的，你inday常departmentwill议middle的沟通协作能力、workmiddle的逻辑思维能力、自我管理和规划的能力alsowill备受quality疑。 述职often是一personday常为person处事statedegree的良好影射，优秀的personoftennot吝atto公众show自己的becomefruit，这also是为什么像 GitHub 这样的开源社区will存in，and汇聚了大quantity的优秀person才。 meanwhile，述职also是一non常珍贵的、让你have机will了解其它personin做什么的场域。',
             'business_id' => '',
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -433,7 +433,7 @@ JSON, true));
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
             'vector_database_id' => ConstValue::KNOWLEDGE_USER_CURRENT_TOPIC,
-            'content' => 'Q: 我为什么要in述职准备upflowertime？ A: 假设你本身的工作产出是90minute，一好的述职呈现能将你这 90 minute的工作完美ground呈现给所have人，but一incontent结构、validinfoquantity和可读propertyupallnot尽如人意的 PPT 可能只能呈现出你30minute的工作becomefruit。 并and，if你in述职的表达与呈现方surface做得verynot尽如人意、nothavebody现出结构化的思考method、nothave SMART 的未来规划，那么同样的，你inday常departmentwill议middle的沟通协作能力、工作middle的逻辑思维能力、自我管理和规划的能力alsowill备受quality疑。 述职often是一人day常为人处事statedegree的良好影射，优秀的人oftennot吝atto公众展示自己的becomefruit，这also是为什么像 GitHub 这样的开源社区will存in，and汇聚了大quantity的优秀人才。 meanwhile，述职also是一non常珍贵的、让你have机will了解其它人in做什么的场域。',
+            'content' => 'Q: 我为什么要in述职准备upflowertime？ A: 假设你本身的work产出是90minute，一好的述职呈现能将你这 90 minute的work完美ground呈现给所haveperson，but一incontent结构、validinfoquantity和可读propertyupallnot尽如person意的 PPT 可能只能呈现出你30minute的workbecomefruit。 并and，if你in述职的表达与呈现方surface做得verynot尽如person意、nothavebody现出结构化的思考method、nothave SMART 的未来规划，那么同样的，你inday常departmentwill议middle的沟通协作能力、workmiddle的逻辑思维能力、自我管理和规划的能力alsowill备受quality疑。 述职often是一personday常为person处事statedegree的良好影射，优秀的personoftennot吝atto公众show自己的becomefruit，这also是为什么像 GitHub 这样的开源社区will存in，and汇聚了大quantity的优秀person才。 meanwhile，述职also是一non常珍贵的、让你have机will了解其它personin做什么的场域。',
             'business_id' => '',
         ]);
         $runner->execute($vertexResult, $executionData, []);

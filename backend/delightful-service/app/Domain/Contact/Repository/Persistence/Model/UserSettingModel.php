@@ -20,7 +20,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property array $value settingvalue
  * @property string $creator create者
  * @property DateTime $created_at createtime
- * @property string $modifier 修改者
+ * @property string $modifier modify者
  * @property DateTime $updated_at updatetime
  */
 class UserSettingModel extends AbstractModel

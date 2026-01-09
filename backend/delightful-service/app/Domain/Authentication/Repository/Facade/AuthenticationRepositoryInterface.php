@@ -13,17 +13,17 @@ use App\Domain\Contact\Entity\DelightfulUserEntity;
 interface AuthenticationRepositoryInterface
 {
     /**
-     * pass邮箱查找账number.
+     * pass邮箱find账number.
      */
     public function findAccountByEmail(string $email): ?AccountEntity;
 
     /**
-     * passhand机number查找账number.
+     * passhand机numberfind账number.
      */
     public function findAccountByPhone(string $stateCode, string $phone): ?AccountEntity;
 
     /**
-     * passDelightfulID和organizationencoding查找user.
+     * passDelightfulID和organizationencodingfinduser.
      */
     public function findUserByDelightfulIdAndOrganization(string $delightfulId, ?string $organizationCode = null): ?DelightfulUserEntity;
 }

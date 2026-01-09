@@ -115,14 +115,14 @@ class QwenImageAPI
             ],
         ];
 
-        // 添加graph像tocontentmiddle（只取the一张image）
+        // addgraph像tocontentmiddle（只取the一张image）
         if (isset($params['image_urls']) && ! empty($params['image_urls'])) {
             $body['input']['messages'][0]['content'][] = [
                 'image' => $params['image_urls'][0],
             ];
         }
 
-        // 添加文本prompt
+        // add文本prompt
         if (isset($params['prompt']) && ! empty($params['prompt'])) {
             $body['input']['messages'][0]['content'][] = [
                 'text' => $params['prompt'],

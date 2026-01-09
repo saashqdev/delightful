@@ -21,10 +21,10 @@ return new class extends Migration {
             $table->string('name', 64)->default('')->comment('name');
             $table->string('description', 255)->default('')->comment('description');
             $table->string('icon', 255)->default('')->comment('icon');
-            $table->string('created_uid', 80)->default('')->comment('create人');
+            $table->string('created_uid', 80)->default('')->comment('createperson');
             $table->dateTime('created_at')->comment('createtime');
-            $table->string('updated_uid', 80)->default('')->comment('修改人');
-            $table->dateTime('updated_at')->comment('修改time');
+            $table->string('updated_uid', 80)->default('')->comment('modifyperson');
+            $table->dateTime('updated_at')->comment('modifytime');
             $table->softDeletes();
 
             $table->unique(['organization_code', 'code']);

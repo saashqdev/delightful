@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * 沙箱管理 Mock service
- * 模拟沙箱的create、statusquery、工作区statusetc管理interface.
+ * 模拟沙箱的create、statusquery、work区statusetc管理interface.
  */
 class SandboxApi
 {
@@ -88,7 +88,7 @@ class SandboxApi
     }
 
     /**
-     * get工作区status
+     * getwork区status
      * GET /api/v1/sandboxes/{sandboxId}/proxy/api/v1/workspace/status.
      */
     public function getWorkspaceStatus(RequestInterface $request): array
@@ -99,13 +99,13 @@ class SandboxApi
             'sandbox_id' => $sandboxId,
         ]);
 
-        // 模拟工作区then绪status
+        // 模拟work区then绪status
         // 注意：status mustreturn整数type，对应 WorkspaceStatus constant
         return [
             'code' => 1000,
             'message' => 'success',
             'data' => [
-                'status' => WorkspaceStatus::READY, // initializecomplete，工作区完all可use
+                'status' => WorkspaceStatus::READY, // initializecomplete，work区完all可use
                 'sandbox_id' => $sandboxId,
                 'workspace_path' => '/workspace',
                 'is_ready' => true,
@@ -196,7 +196,7 @@ class SandboxApi
         // 模拟沙箱initializesuccessresponse
         return [
             'code' => 1000,
-            'message' => '工作区initializesuccess',
+            'message' => 'work区initializesuccess',
             'data' => null,
         ];
     }

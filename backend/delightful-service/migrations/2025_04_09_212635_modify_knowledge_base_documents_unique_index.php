@@ -18,7 +18,7 @@ return new class extends Migration {
             // deleteold唯一索引
             $table->dropUnique('unique_code_version');
 
-            // 添加new唯一索引
+            // addnew唯一索引
             $table->unique(['knowledge_base_code', 'code', 'version'], 'unique_knowledge_base_code_code_version');
         });
     }

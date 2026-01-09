@@ -12,6 +12,6 @@ namespace App\Domain\Contact\Entity\ValueObject;
  */
 enum DepartmentOption: int
 {
-    // 隐藏
+    // hidden
     case Hidden = 1;
 }

@@ -164,7 +164,7 @@ class ProviderAppService
     }
 
     /**
-     * getservice商显示name.
+     * getservice商displayname.
      */
     private function getProviderDisplayName(
         ProviderEntity $providerEntity,

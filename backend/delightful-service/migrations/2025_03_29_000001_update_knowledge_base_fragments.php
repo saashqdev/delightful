@@ -14,9 +14,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 修改表结构，添加新field
+        // modify表结构，add新field
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
-            // checkwhether已存infield，避免重复添加
+            // checkwhether已存infield，避免重复add
             if (! Schema::hasColumn('delightful_flow_knowledge_fragment', 'document_code')) {
                 $table->string('document_code', 255)->default('')->comment('associatedocumentcode')->index();
             }
@@ -32,7 +32,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // 移except添加的field
+        // 移exceptadd的field
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
             if (Schema::hasColumn('delightful_flow_knowledge_fragment', 'document_code')) {
                 $table->dropColumn('document_code');

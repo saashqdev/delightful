@@ -15,7 +15,7 @@ use Hyperf\Amqp\Message\ProducerMessage;
 
 /**
  * messagepush模piece.
- * 直接pushseq给客户端.
+ * 直接pushseq给customer端.
  */
 #[Producer]
 class MessagePushPublisher extends ProducerMessage

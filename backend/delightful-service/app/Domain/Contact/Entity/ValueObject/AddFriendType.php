@@ -9,12 +9,12 @@ namespace App\Domain\Contact\Entity\ValueObject;
 
 enum AddFriendType: int
 {
-    // 添加好友申请
+    // add好友申请
     case APPLY = 1;
 
-    // 添加好友pass
+    // add好友pass
     case PASS = 2;
 
-    // 添加好友拒绝
+    // add好友reject
     case REFUSE = 3;
 }

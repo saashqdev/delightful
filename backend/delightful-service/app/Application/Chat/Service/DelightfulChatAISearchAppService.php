@@ -286,7 +286,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     }
 
     /**
-     * according toassociateissue和issue的简单search，generateassociateissue的子issue.(associateissue的子issue目front只useatfront端展示，notwillaccording to子issueagaintimesearch+精读).
+     * according toassociateissue和issue的简单search，generateassociateissue的子issue.(associateissue的子issue目front只useatfront端show，notwillaccording to子issueagaintimesearch+精读).
      * @param SearchDetailItem[] $noRepeatSearchContexts
      */
     public function generateAndSendAssociateSubQuestions(
@@ -685,7 +685,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         $extraContentParallel = new Parallel(3);
         $modelInterface = $this->getChatModel($dto->getOrganizationCode(), $dto->getUserId());
         $extraContentParallel->add(function () use ($summarize, $dto, $modelInterface) {
-            // odin will修改 vo objectmiddle的value，避免污染，复制again传入
+            // odin willmodify vo objectmiddle的value，避免污染，copyagain传入
             CoContext::setRequestId($dto->getRequestId());
             // 思维导graph
             $mindMapQueryVo = $this->getSearchVOByAggregateSearchDTO($dto, $summarize);
@@ -876,7 +876,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                     // according to精读进degree，pushassociateissuesearch完毕给front端
                     if (($currentDetailReadCount % $perReadResponseNum === 0) && $readPagesDetailChannel->isAvailable()) {
                         $readPagesDetailChannel->push(1, 5);
-                        // needpush的count减少
+                        // needpush的countdecrease
                         --$questionsNum;
                     }
                 } catch (Throwable $e) {
@@ -951,7 +951,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         $timeStart = microtime(true);
         $parallel = new Parallel(2);
         $parallel->add(function () use ($dto, $noRepeatSearchContexts, $associateQuestions) {
-            // 3.4.a.1 并line：according toassociateissue和issue的简单search，generateassociateissue的子issue.(associateissue的子issue只useatfront端展示，目frontnotwillaccording to子issueagaintimesearch+精读)
+            // 3.4.a.1 并line：according toassociateissue和issue的简单search，generateassociateissue的子issue.(associateissue的子issue只useatfront端show，目frontnotwillaccording to子issueagaintimesearch+精读)
             $this->generateAndSendAssociateSubQuestions($dto, $noRepeatSearchContexts, $associateQuestions);
         });
         $parallel->add(function () use (&$noRepeatSearchContexts, $readPagesDetailChannel, $associateQuestions) {
@@ -980,7 +980,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         string $parentId,
         int $type,
         array $content,
-        // todo streamresponse，拿to客户端传来的 app_message_id ，作为responsetime的唯一标识
+        // todo streamresponse，拿tocustomer端传来的 app_message_id ，作为responsetime的唯一标识
         string $appMessageId = '',
         string $topicId = ''
     ): void {

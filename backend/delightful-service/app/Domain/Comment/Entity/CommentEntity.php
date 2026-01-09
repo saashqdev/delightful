@@ -52,7 +52,7 @@ class CommentEntity extends AbstractEntity
     protected ?array $attachments = null;
 
     /**
-     * create人.
+     * createperson.
      */
     protected string $creator;
 

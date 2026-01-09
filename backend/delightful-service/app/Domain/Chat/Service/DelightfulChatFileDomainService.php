@@ -123,7 +123,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
      */
     public function saveOrUpdateByFileKey(DelightfulChatFileEntity $fileEntity, DataIsolation $dataIsolation): DelightfulChatFileEntity
     {
-        // passfile_key查找filewhether存in
+        // passfile_keyfindfilewhether存in
         $existingFile = $this->delightfulFileRepository->getChatFileByFileKey($fileEntity->getFileKey());
 
         // iffile存in，updatefileinfo

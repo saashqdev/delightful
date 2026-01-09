@@ -29,13 +29,13 @@ return new class extends Migration {
             $table->integer('release_scope')->nullable()->comment('publishrange.1:publishto企业inside部 2:publishtoapplication市场');
 
             $table->integer('approval_status')->default(3)->nullable(false)->comment('approvalstatus');
-            $table->integer('review_status')->default(0)->nullable(false)->comment('审核status');
+            $table->integer('review_status')->default(0)->nullable(false)->comment('reviewstatus');
             $table->integer('enterprise_release_status')->default(0)->nullable(false)->comment('publishto企业inside部status');
             $table->integer('app_market_status')->default(0)->nullable(false)->comment('publishtoapplication市场status');
 
             $table->string('organization_code')->comment('organizationencoding');
 
-            $table->string('created_uid')->default('')->comment('publish人');
+            $table->string('created_uid')->default('')->comment('publishperson');
             $table->timestamp('created_at')->nullable()->comment('creation time');
             $table->string('updated_uid')->default('')->comment('update者userID');
             $table->timestamp('updated_at')->nullable()->comment('update time');

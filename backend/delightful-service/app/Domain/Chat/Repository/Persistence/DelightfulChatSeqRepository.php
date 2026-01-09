@@ -425,7 +425,7 @@ sql;
     }
 
     /**
-     * updatemessagereceive人list.
+     * updatemessagereceivepersonlist.
      */
     public function updateReceiveList(DelightfulSeqEntity $seqEntity): bool
     {
@@ -529,7 +529,7 @@ sql;
     }
 
     /**
-     * 批quantityreturn客户端need的Seq结构.
+     * 批quantityreturncustomer端need的Seq结构.
      * @return ClientSequenceResponse[]
      */
     private function getMessagesBySeqList(array $seqList, Order $order = Order::Desc): array

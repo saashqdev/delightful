@@ -42,7 +42,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * according toID查找record.
+     * according toIDfindrecord.
      */
     public function findById(int $id): ?FileCleanupRecordEntity
     {
@@ -53,7 +53,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * according tofilekey和organizationencoding查找record.
+     * according tofilekey和organizationencodingfindrecord.
      */
     public function findByFileKey(string $fileKey, string $organizationCode): ?FileCleanupRecordEntity
     {
@@ -119,7 +119,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 增加retrycount.
+     * increaseretrycount.
      */
     public function incrementRetry(int $id, ?string $errorMessage = null): bool
     {

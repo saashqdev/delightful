@@ -10,7 +10,7 @@ namespace App\Interfaces\Permission\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * update子管理员rolerequestDTO.
+ * update子administratorrolerequestDTO.
  */
 class UpdateSubAdminRequestDTO extends AbstractDTO
 {
@@ -25,7 +25,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
     public ?int $status = null;
 
     /**
-     * permissiontag，useatfront端展示category（optional，仅inneedupdateo clock提供）.
+     * permissiontag，useatfront端showcategory（optional，仅inneedupdateo clock提供）.
      */
     public ?array $permissionTag = null;
 

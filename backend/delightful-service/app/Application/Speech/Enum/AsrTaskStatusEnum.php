@@ -10,7 +10,7 @@ namespace App\Application\Speech\Enum;
 /**
  * ASR taskstatus枚举（inside部业务process）.
  *
- * 【作use域】inside部系统 - delightful-service 业务layer
+ * 【作use域】inside部system - delightful-service 业务layer
  * 【use途】table示 ASR 录音总结task的all生命periodstatus
  * 【use场景】
  * - taskstatus持久化（Redis/database）

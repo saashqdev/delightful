@@ -378,7 +378,7 @@ class AsrApi extends AbstractApi
         $taskStatus = $this->asrFileAppService->getTaskStatusFromRedis($taskKey, $userId);
         if (! $taskStatus->isEmpty()) {
             if ($taskStatus->hasServerSummaryLock()) {
-                $this->logger->info('reportStatus service端总结conductmiddle，拒绝statusup报', [
+                $this->logger->info('reportStatus service端总结conductmiddle，rejectstatusup报', [
                     'task_key' => $taskKey,
                     'user_id' => $userId,
                     'retry_count' => $taskStatus->serverSummaryRetryCount,
@@ -628,7 +628,7 @@ class AsrApi extends AbstractApi
         }
 
         if ($taskStatus->hasServerSummaryLock()) {
-            $this->logger->info('getUploadToken service端总结conductmiddle，拒绝hair放upload凭证', [
+            $this->logger->info('getUploadToken service端总结conductmiddle，rejecthair放upload凭证', [
                 'task_key' => $taskKey,
                 'user_id' => $userId,
                 'retry_count' => $taskStatus->serverSummaryRetryCount,
@@ -764,7 +764,7 @@ class AsrApi extends AbstractApi
             'directories' => $directories,
         ];
 
-        // onlywhenpresetfile存ino clock才添加toreturnmiddle
+        // onlywhenpresetfile存ino clock才addtoreturnmiddle
         if (! empty($presetFiles)) {
             $response['preset_files'] = $presetFiles;
         }
@@ -835,7 +835,7 @@ class AsrApi extends AbstractApi
     }
 
     /**
-     * fromdirectoryarraymiddle查找finger定type的directory.
+     * fromdirectoryarraymiddlefindfinger定type的directory.
      */
     private function findDirectoryByType(array $directories, bool $hidden): ?AsrRecordingDirectoryDTO
     {

@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->json('options')->nullable()->comment('toolconfiguration name、description、inputSchema');
             $table->string('creator', 64)->default('')->comment('create者');
             $table->dateTime('created_at')->comment('creation time');
-            $table->string('modifier', 64)->default('')->comment('修改者');
+            $table->string('modifier', 64)->default('')->comment('modify者');
             $table->dateTime('updated_at')->comment('update time');
         });
     }

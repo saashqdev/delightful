@@ -43,12 +43,12 @@ class ModeAppService extends AbstractModeAppService
         $query = new ModeQuery(status: true);
         $modeEnabledList = $this->modeDomainService->getModes($modeDataIsolation, $query, Page::createNoPage())['list'];
 
-        // 批quantitybuild模type聚合root
+        // 批quantitybuild模typeaggregateroot
         $modeAggregates = $this->modeDomainService->batchBuildModeAggregates($modeDataIsolation, $modeEnabledList);
 
         // ===== performanceoptimize：批quantity预query =====
 
-        // 步骤1：预收集所haveneed的modelId
+        // step1：预收集所haveneed的modelId
         $allModelIds = [];
         foreach ($modeAggregates as $aggregate) {
             foreach ($aggregate->getGroupAggregates() as $groupAggregate) {
@@ -58,10 +58,10 @@ class ModeAppService extends AbstractModeAppService
             }
         }
 
-        // 步骤2：批quantityquery所havemodel和service商status
+        // step2：批quantityquery所havemodel和service商status
         $allProviderModelsWithStatus = $this->getModelsBatch(array_unique($allModelIds));
 
-        // 步骤3：organizationmodelfilter
+        // step3：organizationmodelfilter
 
         // 首先收集所haveneedfilter的model（LLM）
         $allAggregateModels = [];
@@ -189,7 +189,7 @@ class ModeAppService extends AbstractModeAppService
         // 批quantitygetmodel
         $allModels = $this->providerModelDomainService->getModelsByModelIds($providerDataIsolation, $allModelIds);
 
-        // 提取所haveservice商ID
+        // extract所haveservice商ID
         $providerConfigIds = [];
         foreach ($allModels as $models) {
             foreach ($models as $model) {
@@ -219,7 +219,7 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * 为批quantityqueryoptimize的model选择method.
+     * 为批quantityqueryoptimize的modelchoosemethod.
      * @param ProviderModelEntity[] $models modellist
      * @param array $providerStatuses service商statusmapping
      */
@@ -229,7 +229,7 @@ class ModeAppService extends AbstractModeAppService
             return null;
         }
 
-        // 优先选择service商enableandmodelenable的model
+        // 优先chooseservice商enableandmodelenable的model
         foreach ($models as $model) {
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
@@ -249,10 +249,10 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * from批quantityqueryresultmiddle提取特定聚合root的model（LLM）.
-     * @param ModeAggregate $aggregate 模type聚合root
+     * from批quantityqueryresultmiddleextract特定aggregateroot的model（LLM）.
+     * @param ModeAggregate $aggregate 模typeaggregateroot
      * @param array<string, ProviderModelEntity> $allProviderModels 批quantityquery的所havemodelresult
-     * @return array<string, ProviderModelEntity> 该聚合root相关的model
+     * @return array<string, ProviderModelEntity> 该aggregateroot相关的model
      */
     private function getModelsForAggregate(ModeAggregate $aggregate, array $allProviderModels): array
     {
@@ -276,10 +276,10 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * from批quantityqueryresultmiddle提取特定聚合root的graph像model（VLM）.
-     * @param ModeAggregate $aggregate 模type聚合root
+     * from批quantityqueryresultmiddleextract特定aggregateroot的graph像model（VLM）.
+     * @param ModeAggregate $aggregate 模typeaggregateroot
      * @param array<string, ProviderModelEntity> $allProviderModels 批quantityquery的所havemodelresult
-     * @return array<string, ProviderModelEntity> 该聚合root相关的graph像model
+     * @return array<string, ProviderModelEntity> 该aggregateroot相关的graph像model
      */
     private function getImageModelsForAggregate(ModeAggregate $aggregate, array $allProviderModels): array
     {

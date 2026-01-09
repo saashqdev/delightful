@@ -18,7 +18,7 @@ enum ControlMessageType: string
     // createsession窗口
     case CreateConversation = 'create_conversation';
 
-    // 移exceptsession窗口（listnot显示）
+    // 移exceptsession窗口（listnotdisplay）
     case HideConversation = 'hide_conversation';
 
     // 置topsession窗口
@@ -30,7 +30,7 @@ enum ControlMessageType: string
     // 已读
     case SeenMessages = 'seen_messages';
 
-    // 已查看message
+    // 已viewmessage
     case ReadMessage = 'read_message';
 
     // withdrawmessage
@@ -57,7 +57,7 @@ enum ControlMessageType: string
     // delete话题
     case DeleteTopic = 'delete_topic';
 
-    // setsession的话题(set为空table示离开话题)
+    // setsession的话题(set为空table示leave话题)
     case SetConversationTopic = 'set_conversation_topic';
 
     // creategroup chat
@@ -66,7 +66,7 @@ enum ControlMessageType: string
     // updategroup chat
     case GroupUpdate = 'group_update';
 
-    // 系统notify(xx加入/离开group chat,群温馨reminderetc)
+    // systemnotify(xx加入/leavegroup chat,群温馨reminderetc)
     case SystemNotice = 'system_notice';
 
     // 群member变more
@@ -78,7 +78,7 @@ enum ControlMessageType: string
     // 解散group chat
     case GroupDisband = 'group_disband';
 
-    // 群memberrole变more(批quantityset管理员/普通member)
+    // 群memberrole变more(批quantitysetadministrator/普通member)
     case GroupUserRoleChange = 'group_user_role_change';
 
     // 转让群主
@@ -93,10 +93,10 @@ enum ControlMessageType: string
     // 翻译
     case Translate = 'translate';
 
-    // 添加好友success
+    // add好友success
     case AddFriendSuccess = 'add_friend_success';
 
-    // 添加好友申请
+    // add好友申请
     case AddFriendApply = 'add_friend_apply';
 
     /**

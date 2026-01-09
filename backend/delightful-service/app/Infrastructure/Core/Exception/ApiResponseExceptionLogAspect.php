@@ -17,7 +17,7 @@ use Throwable;
 
 #[Aspect]
 /**
- * 1.为了not让user看to一些sql/codeexception,thereforewillin config/api-response.php 的 error_exception configurationmiddle,将意outside的exceptionconvert为统一的系统inside部errorexception.
+ * 1.为了not让user看to一些sql/codeexception,thereforewillin config/api-response.php 的 error_exception configurationmiddle,将意outside的exceptionconvert为统一的systeminside部errorexception.
  * 2.logrecordexceptioninfo,便atrow查issue.
  */
 class ApiResponseExceptionLogAspect extends AbstractAspect
@@ -42,7 +42,7 @@ class ApiResponseExceptionLogAspect extends AbstractAspect
         try {
             return $proceedingJoinPoint->process();
         } catch (Throwable $exception) {
-            // 一些兜bottomexception的log打印,可能存in重复log打印,but是为了保证exceptioninfonot丢失,所by这withinnot做判断.
+            // 一些兜bottomexception的logprint,可能存in重复logprint,but是为了保证exceptioninfonot丢失,所by这withinnot做判断.
             $this->logger->error(
                 __CLASS__ . ' hair生exception message:{message}, code:{code}, file:{file}, line:{line}, trace:{trace}',
                 [

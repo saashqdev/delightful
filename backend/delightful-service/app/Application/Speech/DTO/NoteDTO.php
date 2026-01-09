@@ -51,7 +51,7 @@ readonly class NoteDTO
             return sprintf('%s-%s.%s', $generatedTitle, trans('asr.file_names.note_suffix'), $this->getFileExtension());
         }
 
-        // 回退todefaultformat
+        // backtodefaultformat
         return sprintf('%s.%s', trans('asr.file_names.note_prefix'), $this->getFileExtension());
     }
 

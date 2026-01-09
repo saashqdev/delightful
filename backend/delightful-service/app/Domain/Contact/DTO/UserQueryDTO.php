@@ -31,8 +31,8 @@ class UserQueryDTO extends AbstractEntity
     protected bool $isRecursive = false;
 
     /**
-     * 1: 人员
-     * 2: 人员 + department.
+     * 1: person员
+     * 2: person员 + department.
      */
     protected UserQueryType $queryType = UserQueryType::User;
 

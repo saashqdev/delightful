@@ -24,7 +24,7 @@ class DelightfulUserDomainExtendService implements DelightfulUserDomainExtendInt
 
     /**
      * whetherallowupdateuserinformation.
-     * returnallow修改的field.
+     * returnallowmodify的field.
      */
     public function getUserUpdatePermission(DataIsolation $dataIsolation): array
     {

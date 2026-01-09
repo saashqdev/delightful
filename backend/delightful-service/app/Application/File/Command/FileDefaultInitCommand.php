@@ -61,7 +61,7 @@ class FileDefaultInitCommand extends Command
         // executefileinitialize
         $this->initFiles();
 
-        $this->info('file系统initializecomplete');
+        $this->info('filesysteminitializecomplete');
     }
 
     /**
@@ -162,9 +162,9 @@ class FileDefaultInitCommand extends Command
                             StorageBucketType::Public
                         );
 
-                        // 立即validatefilewhether可get（关键validate步骤）
+                        // 立即validatefilewhether可get（关键validatestep）
                         $actualKey = $uploadFile->getKey();
-                        // from key middle提取organizationencoding，参考 ProviderAppService 的correct做法
+                        // from key middleextractorganizationencoding，参考 ProviderAppService 的correct做法
                         $keyOrganizationCode = substr($actualKey, 0, strpos($actualKey, '/'));
                         $fileLink = $this->fileDomainService->getLink($keyOrganizationCode, $actualKey, StorageBucketType::Public);
                         if (! $fileLink || ! $fileLink->getUrl()) {

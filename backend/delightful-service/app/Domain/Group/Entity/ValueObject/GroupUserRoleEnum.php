@@ -12,7 +12,7 @@ enum GroupUserRoleEnum: int
     // 群主
     case OWNER = 1;
 
-    // 管理员
+    // administrator
     case ADMIN = 2;
 
     // 普通member

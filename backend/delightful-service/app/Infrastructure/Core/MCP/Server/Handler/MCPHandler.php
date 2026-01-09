@@ -177,7 +177,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * get客户端唯一标识.
+     * getcustomer端唯一标识.
      */
     protected function getClientId(MessageInterface $request): string
     {
@@ -188,7 +188,7 @@ class MCPHandler implements MCPHandlerInterface
             return $params['auth']['client_id'];
         }
 
-        // 回退tosessionID
+        // backtosessionID
         if (isset($params['sessionId'])) {
             return $params['sessionId'];
         }

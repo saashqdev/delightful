@@ -244,7 +244,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
         ?string $id,
         AIImageCardResponseType $type,
         array $content,
-        // streamresponse，拿to客户端传来的 app_message_id ，作为responsetime的唯一标识
+        // streamresponse，拿tocustomer端传来的 app_message_id ，作为responsetime的唯一标识
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

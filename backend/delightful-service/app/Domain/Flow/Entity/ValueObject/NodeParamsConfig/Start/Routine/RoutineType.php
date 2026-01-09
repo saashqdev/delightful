@@ -35,7 +35,7 @@ enum RoutineType: string
     case AnnuallyRepeat = 'annually_repeat';
 
     /**
-     * each工作day重复.
+     * eachworkday重复.
      */
     case WeekdayRepeat = 'weekday_repeat';
 

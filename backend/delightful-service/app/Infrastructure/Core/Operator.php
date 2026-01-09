@@ -25,7 +25,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * get操作者ID.
+     * get操authorID.
      */
     public function getUid(): string
     {
@@ -33,7 +33,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * get操作者name.
+     * get操authorname.
      */
     public function getName(): string
     {
@@ -49,7 +49,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * setting操作者ID.
+     * setting操authorID.
      */
     public function setUid(string $uid): self
     {
@@ -58,7 +58,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * setting操作者name.
+     * setting操authorname.
      */
     public function setName(string $name): self
     {

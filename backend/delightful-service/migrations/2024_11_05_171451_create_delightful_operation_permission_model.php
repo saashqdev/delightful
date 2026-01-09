@@ -22,8 +22,8 @@ return new class extends Migration {
             $table->unsignedTinyInteger('target_type')->comment('goaltype');
             $table->string('target_id', 50)->comment('goalid');
             $table->unsignedTinyInteger('operation')->comment('操作');
-            $table->string('created_uid', 50)->comment('create人');
-            $table->string('updated_uid', 50)->comment('修改人');
+            $table->string('created_uid', 50)->comment('createperson');
+            $table->string('updated_uid', 50)->comment('modifyperson');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['organization_code', 'resource_type', 'resource_id'], 'idx_organization_resource');

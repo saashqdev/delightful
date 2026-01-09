@@ -237,7 +237,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $delightfulGroupDTO->setGroupName($params['group_name']);
         $delightfulGroupDTO->setGroupType(GroupTypeEnum::from($params['group_type']));
         $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
-        // 人员和departmentnot能meanwhile为空
+        // person员和departmentnot能meanwhile为空
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_SELECT_ERROR);
         }
@@ -245,7 +245,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 批quantity拉人进群.
+     * 批quantity拉person进群.
      */
     public function groupAddUsers(string $id, RequestInterface $request): array
     {
@@ -258,7 +258,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $authorization = $this->getAuthorization();
         $delightfulGroupDTO = new DelightfulGroupEntity();
         $delightfulGroupDTO->setId($id);
-        // 人员和departmentnot能meanwhile为空
+        // person员和departmentnot能meanwhile为空
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_SELECT_ERROR);
         }

@@ -128,7 +128,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // fromnativeresultmiddle提取imageURL
+        // fromnativeresultmiddleextractimageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             $data = $result['data'];
@@ -400,7 +400,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
     }
 
     /**
-     * 将火山engineV3imagedata添加toOpenAIresponseobjectmiddle.
+     * 将火山engineV3imagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponseV3(
         OpenAIFormatResponse $response,
@@ -410,7 +410,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
         // uselockensure并hairsecurity（althoughV3usesync，but保持一致property）
         $lockOwner = $this->lockResponse($response);
         try {
-            // from火山engineV3responsemiddle提取data
+            // from火山engineV3responsemiddleextractdata
             if (empty($volcengineResult['data']) || ! is_array($volcengineResult['data'])) {
                 return;
             }
@@ -429,7 +429,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                         'url' => $processedUrl,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('VolcengineV3添加imagedata：URL水印handlefail', [
+                    $this->logger->error('VolcengineV3addimagedata：URL水印handlefail', [
                         'error' => $e->getMessage(),
                         'url' => $imageUrl,
                     ]);
@@ -448,7 +448,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                         'b64_json' => $processedImage,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('VolcengineV3添加imagedata：base64水印handlefail', [
+                    $this->logger->error('VolcengineV3addimagedata：base64水印handlefail', [
                         'error' => $e->getMessage(),
                     ]);
                     // 水印handlefailo clockuseoriginaldata
@@ -464,7 +464,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                 $currentUsage->completionTokens += $volcengineResult['usage']['output_tokens'] ?? 0;
                 $currentUsage->totalTokens += $volcengineResult['usage']['total_tokens'] ?? 0;
             } else {
-                // ifnothaveusageinfo，default增加1张image
+                // ifnothaveusageinfo，defaultincrease1张image
                 $currentUsage->addGeneratedImages(1);
             }
 
@@ -478,7 +478,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
     }
 
     /**
-     * 为火山engineV3originaldata添加水印.
+     * 为火山engineV3originaldataadd水印.
      */
     private function processVolcengineV3RawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {

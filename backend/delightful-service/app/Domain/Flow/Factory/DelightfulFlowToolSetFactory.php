@@ -60,7 +60,7 @@ class DelightfulFlowToolSetFactory
             $entity->setUserOperation($toolSetData['user_operation']);
         }
 
-        // settingcreate者和修改者information
+        // settingcreate者和modify者information
         $entity->setCreator($toolSetData['created_uid'] ?? $toolSetData['creator'] ?? '');
         $entity->setModifier($toolSetData['updated_uid'] ?? $toolSetData['modifier'] ?? '');
 

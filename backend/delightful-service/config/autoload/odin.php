@@ -12,11 +12,11 @@ use Hyperf\Odin\Model\OpenAIModel;
 
 use function Hyperf\Support\env;
 
-// 递归handleconfigurationvaluemiddle的环境variable
+// 递归handleconfigurationvaluemiddle的environmentvariable
 function processConfigValue(&$value): void
 {
     if (is_string($value)) {
-        // stringtype：parse环境variable
+        // stringtype：parseenvironmentvariable
         $parts = explode('|', $value);
         if (count($parts) > 1) {
             $value = env($parts[0], $parts[1]);
@@ -32,7 +32,7 @@ function processConfigValue(&$value): void
     // 其他type（如 int, bool etc）：保留原value，notconductparse
 }
 
-// handleconfigurationmiddle的环境variable
+// handleconfigurationmiddle的environmentvariable
 function processModelConfig(&$modelItem, string $modelName): void
 {
     // handlemodelvalue
@@ -61,7 +61,7 @@ function processModelConfig(&$modelItem, string $modelName): void
         }
     }
 
-    // 优雅的打印loadsuccess的model
+    // 优雅的printloadsuccess的model
     echo "\033[32m✓\033[0m modelloadsuccess: \033[1m" . $modelName . ' (' . $modelItem['model'] . ")\033[0m" . PHP_EOL;
 }
 
@@ -248,10 +248,10 @@ return [
             'custom_error_mapping_rules' => [],
             'logging' => [
                 // logfield白名单configuration
-                // if为nullarrayor未configuration，then打印所havefield
-                // ifconfiguration了fieldcolumn表，then只打印finger定的field
+                // if为nullarrayor未configuration，thenprint所havefield
+                // ifconfiguration了fieldcolumn表，then只printfinger定的field
                 // support嵌setfield，usepoint语法如 'args.messages'
-                // 注意：messages 和 tools fieldnotin白名单middle，notwillbe打印
+                // 注意：messages 和 tools fieldnotin白名单middle，notwillbeprint
                 'whitelist_fields' => [
                     // 基本requestinfo
                     'request_id',                  // requestID
@@ -298,7 +298,7 @@ return [
 
                     // responsecontent（rowexceptspecificcontent）
                     'choices.0.finish_reason',     // completereason
-                    'choices.0.index',             // 选择索引
+                    'choices.0.index',             // choose索引
 
                     // errorinfo
                     'error',                       // errordetail
@@ -309,10 +309,10 @@ return [
                     'created',                     // createtime戳
                     'id',                         // requestID
                     'object',                     // objecttype
-                    'system_fingerprint',         // 系统finger纹
+                    'system_fingerprint',         // systemfinger纹
                     'performance_flag',            // performancemark（慢request标识）
 
-                    // 注意：bydownfieldberowexcept，notwill打印
+                    // 注意：bydownfieldberowexcept，notwillprint
                     // - args.messages (usermessagecontent)
                     // - args.tools (tooldefinition)
                     // - choices.0.message (responsemessagecontent)

@@ -87,7 +87,7 @@ class RoleRepository implements RoleRepositoryInterface
     public function queries(string $organizationCode, Page $page, ?array $filters = null): array
     {
         $query = $this->roleQuery($organizationCode);
-        // default只queryneed展示的role
+        // default只queryneedshow的role
         $query->where('is_display', 1);
 
         // applicationfilteritemitem
@@ -144,7 +144,7 @@ class RoleRepository implements RoleRepositoryInterface
             ->pluck('user_id')
             ->toArray();
 
-        // 计算need添加和移except的user
+        // 计算needadd和移except的user
         $toAdd = array_diff($userIds, $existingUserIds);
         $toRemove = array_diff($existingUserIds, $userIds);
 
@@ -156,7 +156,7 @@ class RoleRepository implements RoleRepositoryInterface
                 ->delete();
         }
 
-        // 插入new关系
+        // insertnew关系
         $data = [];
         foreach ($toAdd as $userId) {
             $data[] = [

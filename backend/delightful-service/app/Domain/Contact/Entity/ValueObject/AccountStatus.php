@@ -15,6 +15,6 @@ enum AccountStatus: int
     // disable
     case Disable = 0;
 
-    // 正常
+    // normal
     case Normal = 1;
 }

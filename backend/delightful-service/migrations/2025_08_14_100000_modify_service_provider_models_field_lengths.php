@@ -14,12 +14,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 修改 service_provider 表的 name fieldlength
+        // modify service_provider 表的 name fieldlength
         Schema::table('service_provider', function (Blueprint $table) {
             $table->string('name', 255)->comment('service商name')->change();
         });
 
-        // 修改 service_provider_models 表的相关fieldlength
+        // modify service_provider_models 表的相关fieldlength
         Schema::table('service_provider_models', function (Blueprint $table) {
             $table->string('name', 255)->comment('modelname')->change();
             $table->string('model_version', 255)->comment('modelinservice商down的name')->change();

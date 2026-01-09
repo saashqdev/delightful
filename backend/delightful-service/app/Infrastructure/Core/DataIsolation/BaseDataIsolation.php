@@ -24,14 +24,14 @@ class BaseDataIsolation implements DataIsolationInterface
     private string $delightfulId;
 
     /**
-     * whenfront环境 app_env().
+     * whenfrontenvironment app_env().
      */
     private string $environment;
 
     private bool $enabled = true;
 
     /**
-     * 多organizationdown的环境 ID.
+     * 多organizationdown的environment ID.
      */
     private int $envId = 0;
 

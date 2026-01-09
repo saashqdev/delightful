@@ -87,7 +87,7 @@ class DelightfulChatFileRepository implements DelightfulChatFileRepositoryInterf
     }
 
     /**
-     * passfile_key查找file.
+     * passfile_keyfindfile.
      */
     public function getChatFileByFileKey(string $fileKey): ?DelightfulChatFileEntity
     {

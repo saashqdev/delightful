@@ -19,7 +19,7 @@ use App\Domain\Chat\Entity\ValueObject\AggregateSearch\SearchDeepLevel;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * 聚合AIsearch的responsecardmessage.
+ * aggregateAIsearch的responsecardmessage.
  */
 class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implements TextContentInterface, StreamMessageInterface
 {
@@ -79,7 +79,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     /**
      * get本timeneedstreampush的field。
      * support一timepush多field的streammessage，if json layerlevelmore深，use field_1.*.field_2 作为 key。 其middle * 是fingerarray的down标。
-     * service端willcache所havestream的data，并instreamendo clock一timepropertypush，by减少丢package的概rate，提升message完整property。
+     * service端willcache所havestream的data，并instreamendo clock一timepropertypush，bydecrease丢package的概rate，提升message完整property。
      * for example：
      * [
      *     'users.0.name' => 'delightful',

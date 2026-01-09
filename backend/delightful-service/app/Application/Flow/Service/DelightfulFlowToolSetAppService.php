@@ -50,7 +50,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         // default是create
         $operation = Operation::Owner;
         if (! $savingDelightfulFLowToolSetEntity->shouldCreate()) {
-            // 修改needcheckpermission
+            // modifyneedcheckpermission
             $operation = $this->operationPermissionAppService->getOperationByResourceAndUser(
                 $permissionDataIsolation,
                 ResourceType::ToolSet,
@@ -91,7 +91,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         foreach ($data['list'] ?? [] as $item) {
             $filePaths[] = $item->getIcon();
             if ($item->getCode() === ConstValue::TOOL_SET_DEFAULT_CODE) {
-                // 未minutegroup的直接minute配管理员permission
+                // 未minutegroup的直接minute配administratorpermission
                 $item->setUserOperation(Operation::Admin->value);
             } else {
                 $operation = $resources[$item->getCode()] ?? Operation::None;

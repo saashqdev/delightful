@@ -10,7 +10,7 @@ namespace App\Interfaces\Permission\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * create子管理员rolerequestDTO.
+ * create子administratorrolerequestDTO.
  */
 class CreateSubAdminRequestDTO extends AbstractDTO
 {

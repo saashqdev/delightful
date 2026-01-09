@@ -108,12 +108,12 @@ user的昵称是：currentuser的昵称
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，显示一itemreminder我做饭的message',
-            'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，明day10pointreminder我，显示一itemreminder我做饭的message',
+            // 'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，display一itemreminder我做饭的message',
+            'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，明day10pointreminder我，display一itemreminder我做饭的message',
         ]);
 
         $runner->execute($vertexResult, $executionData);
-        // 打印vertexResult
+        // printvertexResult
         // var_dump($vertexResult);
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());
     }

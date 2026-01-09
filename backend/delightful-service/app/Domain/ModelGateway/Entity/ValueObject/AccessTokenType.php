@@ -14,7 +14,7 @@ namespace App\Domain\ModelGateway\Entity\ValueObject;
 enum AccessTokenType: string
 {
     /**
-     * 人版.
+     * person版.
      */
     case User = 'user';
 

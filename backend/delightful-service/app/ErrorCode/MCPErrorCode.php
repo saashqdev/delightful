@@ -78,7 +78,7 @@ enum MCPErrorCode: int
     case ExecutorStdioConnectionFailed = 51560; // STDIOexecute器connectfail
 
     #[ErrorMessage(message: 'mcp.executor.stdio.access_denied')]
-    case ExecutorStdioAccessDenied = 51561; // STDIOexecute器accessbe拒绝
+    case ExecutorStdioAccessDenied = 51561; // STDIOexecute器accessbereject
 
     // HTTPexecute器相关error码
     #[ErrorMessage(message: 'mcp.executor.http.connection_failed')]

@@ -208,7 +208,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 修改modelstatus.
+     * modifymodelstatus.
      */
     public function updateModelStatus(
         DelightfulUserAuthorization $authorization,

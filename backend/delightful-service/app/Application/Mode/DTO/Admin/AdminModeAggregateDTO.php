@@ -14,7 +14,7 @@ class AdminModeAggregateDTO extends AbstractDTO
     protected AdminModeDTO $mode;
 
     /**
-     * @var AdminModeGroupAggregateDTO[] minutegroup聚合rootarray
+     * @var AdminModeGroupAggregateDTO[] minutegroupaggregaterootarray
      */
     protected array $groups = [];
 

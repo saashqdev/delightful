@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('parent_department_id', 64)->comment('父department的department ID')->nullable();
             $table->string('name', 64)->comment('departmentname');
             $table->text('i18n_name')->comment('国际化departmentname');
-            $table->string('order', 64)->comment('department的sort，即departmentin其同leveldepartment的展示顺序。取valuemore小sortmore靠front。')->nullable()->default('');
+            $table->string('order', 64)->comment('department的sort，即departmentin其同leveldepartment的show顺序。取valuemore小sortmore靠front。')->nullable()->default('');
             $table->string('leader_user_id', 64)->comment('department主管的user ID')->nullable()->default('');
             $table->string('organization_code', 64)->comment('麦吉organizationencoding');
             $table->text('status')->comment('departmentstatus,jsonformat,目frontsupport is_deleted:whetherdelete');
@@ -32,8 +32,8 @@ return new class extends Migration {
             $table->integer('level')->comment('departmentlayerlevel')->default(0);
             // path
             $table->text('path')->comment('departmentpath')->nullable();
-            // department直属user人数
-            $table->integer('employee_sum')->comment('department直属user人数')->default(0);
+            // department直属userperson数
+            $table->integer('employee_sum')->comment('department直属userperson数')->default(0);
             $table->comment('userservice的department与the三方平台userrecordtable.useat与the三方平台实o clockdatasync,activaterecordetc');
             $table->timestamps();
             $table->softDeletes();

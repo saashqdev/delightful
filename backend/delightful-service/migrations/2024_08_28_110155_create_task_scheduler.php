@@ -30,7 +30,7 @@ class CreateTaskScheduler extends Migration
             $table->json('callback_method')->comment('callbackmethod');
             $table->json('callback_params')->comment('callbackparameter');
             $table->string('remark', 255)->default('')->comment('note');
-            $table->string('creator', 64)->default('')->comment('create人');
+            $table->string('creator', 64)->default('')->comment('createperson');
             $table->dateTimeTz('created_at')->comment('creation time');
             $table->index(['status', 'expect_time']);
         });

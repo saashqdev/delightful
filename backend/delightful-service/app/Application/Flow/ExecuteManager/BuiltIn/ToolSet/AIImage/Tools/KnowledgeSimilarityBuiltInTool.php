@@ -67,7 +67,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 4. knowledge base检索出来的contentwithinwillcontain一些customize的 Delightful tag，你要善atuse它们，havebydown几typetag：
     - <DelightfulImage></DelightfulImage> 表示一image，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，eachtagallwillinfront端messagecard渲染出一张image；
     - <DelightfulVideo></DelightfulVideo> 表示一video，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，eachtagallwillinfront端messagecard渲染出一video；
-    - <DelightfulMention></DelightfulMention> 表示一人员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，eachtagallwillinfront端messagecardshapebecome一 @somesome人 的effect；
+    - <DelightfulMention></DelightfulMention> 表示一person员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，eachtagallwillinfront端messagecardshapebecome一 @somesomeperson 的effect；
 5. 优先usecontain <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> etchave Delightful tag的slicesegment；
 6. 结合knowledge basereturn的content整理back尽可能丰富ground回答user的issue。
 ## toolmiddle关键的returnvalueinstruction

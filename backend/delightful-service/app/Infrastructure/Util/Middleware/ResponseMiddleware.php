@@ -31,7 +31,7 @@ class ResponseMiddleware implements MiddlewareInterface
         'api-key',
     ];
 
-    // finger定的 uri not打印request和responsedetail
+    // finger定的 uri notprintrequest和responsedetail
     private array $desensitizeUris = [
         '/conversation/chatCompletions',
         '/message',

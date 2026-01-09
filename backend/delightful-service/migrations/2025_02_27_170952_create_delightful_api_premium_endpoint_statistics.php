@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->integer('request_success_count')->nullable()->default(null)->comment('requestsuccesscount');
             $table->integer('request_error_count')->nullable()->default(null)->comment('requestfailcount');
             $table->double('request_success_rate')->nullable()->default(null)->comment('requestsuccessrate,most大value为 100，not带%');
-            $table->integer('request_average_time')->nullable()->default(null)->comment('request平均time，unit毫second');
+            $table->integer('request_average_time')->nullable()->default(null)->comment('requestaveragetime，unit毫second');
             $table->integer('request_max_time')->nullable()->default(null)->comment('requestconsume的most大time，unit毫second');
             $table->integer('request_min_time')->nullable()->default(null)->comment('requestconsume的most小time，unit毫second');
             // statisticstimesegment

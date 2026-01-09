@@ -73,7 +73,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                 // check并修复开关finger令的 residency property
                 $hasChanges = $this->ensureSwitchResidency($instructs);
 
-                // iffinger令have变化，saveupdate
+                // iffinger令havechange，saveupdate
                 if ($hasChanges) {
                     if (! $isDryRun) {
                         $this->agentRepository->updateInstruct(
@@ -124,7 +124,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                 // check并修复开关finger令的 residency property
                 $hasChanges = $this->ensureSwitchResidency($instructs);
 
-                // iffinger令have变化，saveupdate
+                // iffinger令havechange，saveupdate
                 if ($hasChanges) {
                     if (! $isDryRun) {
                         $this->agentVersionRepository->updateById(
@@ -167,14 +167,14 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
 
         $this->output->writeln('testdataprocessstart...');
 
-        // 显示originalfinger令
+        // displayoriginalfinger令
         $this->output->writeln('<comment>originalfinger令:</comment>');
         $this->output->writeln(Json::encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         // check并修复开关finger令的 residency property
         $hasChanges = $this->ensureSwitchResidency($data);
 
-        // 显示processresult
+        // displayprocessresult
         $this->output->writeln('<comment>processback的finger令:</comment>');
         $this->output->writeln(Json::encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
@@ -189,7 +189,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
     /**
      * ensure开关finger令allhave residency=true property.
      * @param array &$instructs finger令array
-     * @return bool whetherhave修改
+     * @return bool whetherhavemodify
      */
     private function ensureSwitchResidency(array &$instructs): bool
     {
@@ -201,19 +201,19 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
             }
 
             foreach ($group['items'] as &$item) {
-                // skip系统finger令process
+                // skipsystemfinger令process
                 if (isset($item['display_type']) && (int) $item['display_type'] === InstructDisplayType::SYSTEM) {
                     continue;
                 }
 
                 // checkwhether是开关finger令(type = 2)
                 if (isset($item['type']) && (int) $item['type'] === InstructType::SWITCH->value) {
-                    // ifnothave residency property，添加 residency = true
+                    // ifnothave residency property，add residency = true
                     if (! isset($item['residency'])) {
                         $item['residency'] = true;
                         $hasChanges = true;
                         $this->output->writeln(sprintf(
-                            'hair现开关finger令 [%s](%s) 缺少 residency property，已添加',
+                            'hair现开关finger令 [%s](%s) 缺少 residency property，已add',
                             $item['name'] ?? '未命名',
                             $item['id'] ?? '无ID'
                         ));

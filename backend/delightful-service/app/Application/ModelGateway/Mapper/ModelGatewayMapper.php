@@ -222,7 +222,7 @@ class ModelGatewayMapper extends ModelMapper
 
     protected function loadEnvModels(): void
     {
-        // env 添加的model增加up attributes
+        // env add的modelincreaseup attributes
         /**
          * @var string $name
          * @var AbstractModel $model
@@ -289,7 +289,7 @@ class ModelGatewayMapper extends ModelMapper
                     }
                     break;
                 default:
-                    // ifnothavefinger定type，thenall部添加
+                    // ifnothavefinger定type，thenall部add
                     break;
             }
             $list[$name] = new OdinModel(key: $name, model: $model, attributes: $this->attributes[$name]);
@@ -397,14 +397,14 @@ class ModelGatewayMapper extends ModelMapper
         $implementationConfig = $providerEntity->getProviderCode()->getImplementationConfig($providerConfigItem, $providerModelEntity->getModelVersion());
 
         if ($providerEntity->getProviderType()->isCustom()) {
-            // customizeservice商统一显示别名，ifnothave别名then显示“customizeservice商”（need考虑多语言）
+            // customizeservice商统一display别名，ifnothave别名thendisplay“customizeservice商”（need考虑多语言）
             $providerName = $providerConfigEntity->getLocalizedAlias($providerDataIsolation->getLanguage());
         } else {
-            // inside置service商的统一显示 service商name，notuse显示别名（need考虑多语言）
+            // inside置service商的统一display service商name，notusedisplay别名（need考虑多语言）
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 
-        // ifnot是官方organization，but是model是官方organization，统一显示 Delightful
+        // ifnot是官方organization，but是model是官方organization，统一display Delightful
         if (! $providerDataIsolation->isOfficialOrganization()
             && in_array($providerConfigEntity->getOrganizationCode(), $providerDataIsolation->getOfficialOrganizationCodes())) {
             $providerName = 'Delightful';

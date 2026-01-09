@@ -21,12 +21,12 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property null|string $platform_type 平台type
  * @property null|string $logo organizationlogo
  * @property null|string $introduction 企业description
- * @property null|string $contact_user 联系人
+ * @property null|string $contact_user 联系person
  * @property null|string $contact_mobile 联系电话
  * @property string $industry_type organizationline业type
  * @property null|string $number 企业规模
- * @property int $status status 1:正常 2:disable
- * @property null|string $creator_id create人
+ * @property int $status status 1:normal 2:disable
+ * @property null|string $creator_id createperson
  * @property int $type
  * @property null|int $seats 席位数
  * @property null|string $sync_type synctype

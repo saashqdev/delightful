@@ -93,7 +93,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             $builder->whereIn('id', $query->getIds());
         }
 
-        // 添加sort（numbermore大more靠front）
+        // addsort（numbermore大more靠front）
         $builder->orderBy('sort', 'DESC')->orderBy('id', 'ASC');
 
         $result = $this->getByPage($builder, $page, $query);
@@ -202,7 +202,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     /**
      * according toorganization和service商typegetservice商configurationcolumn表.
      * 新逻辑：bydatabasemiddle的actualconfiguration为准，对atdatabasemiddlenothave的service商type，usetemplate补充
-     * support多same provider_code 的configuration（organization管理员hand动添加的）
+     * support多same provider_code 的configuration（organizationadministratorhand动add的）
      * finalresulthandleo clock，官方organizationwillfilter掉Delightfulservice商，普通organizationwill将Delightfulservice商置top.
      * @param string $organizationCode organizationencoding
      * @param Category $category service商type
@@ -216,10 +216,10 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
         // 2. getorganizationdown已configuration的service商
         $organizationProviders = $this->getOrganizationProvidersFromDatabase($organizationCode, $category, $status);
 
-        // 3. 首先添加databasemiddle的所haveactualconfiguration（保留多same provider_code 的configuration）
+        // 3. 首先adddatabasemiddle的所haveactualconfiguration（保留多same provider_code 的configuration）
         $result = $organizationProviders;
 
-        // 4. check哪些service商typeindatabasemiddlenothaveconfiguration，为这些添加template
+        // 4. check哪些service商typeindatabasemiddlenothaveconfiguration，为这些addtemplate
         $existingProviderCodes = [];
         foreach ($organizationProviders as $config) {
             if ($config->getProviderCode()) {
@@ -227,7 +227,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             }
         }
 
-        // 为databasemiddlenot存in的service商type添加templateconfiguration
+        // 为databasemiddlenot存in的service商typeaddtemplateconfiguration
         foreach ($templateProviders as $template) {
             if (! $template->getProviderCode() || ! in_array($template->getProviderCode(), $existingProviderCodes, true)) {
                 $result[] = $template;
@@ -417,7 +417,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             return [];
         }
 
-        // 提取所have的 service_provider_id
+        // extract所have的 service_provider_id
         $providerIds = [];
         foreach ($configsResult as $config) {
             $providerIds[] = $config['service_provider_id'];

@@ -374,7 +374,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
     }
 
     /**
-     * 将Google Geminiimagedata添加toOpenAIresponseobjectmiddle（convert为URLformat）.
+     * 将Google GeminiimagedataaddtoOpenAIresponseobjectmiddle（convert为URLformat）.
      */
     private function addImageDataToResponseGemini(
         OpenAIFormatResponse $response,
@@ -384,7 +384,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         // useRedislockensure并hairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
-            // use现havemethod提取graph像data
+            // use现havemethodextractgraph像data
             $imageBase64 = $this->extractImageDataFromResponse($geminiResult);
 
             $currentData = $response->getData();
@@ -395,7 +395,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToBase64($imageBase64, $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('GoogleGemini添加imagedata：水印handlefail', [
+                $this->logger->error('GoogleGeminiaddimagedata：水印handlefail', [
                     'error' => $e->getMessage(),
                 ]);
                 // 水印handlefailo clockuseoriginalbase64data（but这usuallynotshouldhair生）
@@ -406,7 +406,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 'url' => $processedUrl,
             ];
 
-            // 累计usageinfo - fromusageMetadatamiddle提取
+            // 累计usageinfo - fromusageMetadatamiddleextract
             if (! empty($geminiResult['usageMetadata']) && is_array($geminiResult['usageMetadata'])) {
                 $usageMetadata = $geminiResult['usageMetadata'];
                 $currentUsage->addGeneratedImages(1);
@@ -414,7 +414,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 $currentUsage->completionTokens += $usageMetadata['candidatesTokenCount'] ?? 0;
                 $currentUsage->totalTokens += $usageMetadata['totalTokenCount'] ?? 0;
             } else {
-                // ifnothaveusageinfo，default增加1张image
+                // ifnothaveusageinfo，defaultincrease1张image
                 $currentUsage->addGeneratedImages(1);
             }
 

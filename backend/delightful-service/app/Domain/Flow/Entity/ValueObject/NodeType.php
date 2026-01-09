@@ -165,7 +165,7 @@ enum NodeType: int
     case KnowledgeFragmentRemove = 27;
 
     /**
-     * 人员检索.
+     * person员检索.
      */
     case UserSearch = 28;
 

@@ -149,12 +149,12 @@ class DelightfulLLMDomainService
     ## core logic
     ### 1. question decomposition engine
     input: [userquestion + {context}]
-    handle步骤：
+    handlestep：
     1.1 实body识别
-       - 显property命名实body提取，识别实bodybetween的关系与property
+       - 显property命名实bodyextract，识别实bodybetween的关系与property
        - 推导user的隐property需求和潜in意graph，especially关注隐含的time因素
     1.2 dimension拆解
-       - according to识别出的实body和需求，选择合适的analyzedimension，for example：政策解读、datavalidate、案例研究、影响评估、技术原理、市场front景、userbody验etc
+       - according to识别出的实body和需求，choose合适的analyzedimension，for example：政策解读、datavalidate、案例研究、影响评估、技术原理、市场front景、userbody验etc
     1.3 子questiongenerate
        - generate正交子question集（Jaccardsimilardegree<0.25），ensureeach子question能fromdifferentangledegree探索user需求，避免generate过at宽泛orsimilar的question
     
@@ -177,7 +177,7 @@ class DelightfulLLMDomainService
     ## contextexceptionhandle
     when {context} 为nullo clock：
     1. start备选generatestrategy，application5W1Hframework（Who/What/When/Where/Why/How），并结合user的originalquestionconduct填充
-    2. generatedefaultdimension，for example：政策background | most新data | 专家观point | 对ratioanalyze | line业趋势
+    2. generatedefaultdimension，for example：政策background | most新data | 专家观point | 对ratioanalyze | line业trend
     
     ## outputstandard
     混合bydown三type及more多type的question范type，byensure子question的多样property和overrideproperty：
@@ -187,7 +187,7 @@ class DelightfulLLMDomainService
       "关atA的Bfinger标",    // finger标/propertycategory
       "导致Mhair生的mainreason是什么？", // reason/机制category
       "什么是N？它的核core特征是什么？", // definition/解释category
-      "未来五yearP领域的hair展趋势是什么？", // 趋势/预测category
+      "未来五yearP领域的hair展trend是什么？", // trend/预测category
       "针对Qquestion，have哪些可line的resolvesolution？" // resolvesolution/suggestioncategory
     ]
     
@@ -206,14 +206,14 @@ class DelightfulLLMDomainService
     in回答o clock，请注意bydown几point：
     - 今day是{date_now}。
     - 并nonsearchresult的所havecontentall与user的question密切相关，你need结合question，对searchresultconduct甄别、filter。
-    - 对atcolumn举category的question（如column举所have航班information），尽quantity将答案控制in10要pointbyinside，并告诉usercan查看search来源、获得完整information。优先提供information完整、most相关的column举item；如non必要，not要主动告诉usersearchresult未提供的content。
-    - 对at创作category的question（如写论文），请务必in正文的segment落middlequote对应的参考编number，for example[citation:3][citation:5]，not能只in文chapter末tailquote。你need解读并概括user的题目要求，选择合适的format，充minute利usesearchresult并抽取重要information，generatematchuser要求、极具思想深degree、富have创造力与专业property的答案。你的创作篇幅need尽可能延长，对ateach一要point的论述要推测user的意graph，给出尽可能多angledegree的回答要point，and务必informationquantity大、论述详尽。
+    - 对atcolumn举category的question（如column举所have航班information），尽quantity将答案控制in10要pointbyinside，并告诉usercanviewsearch来源、获得完整information。优先提供information完整、most相关的column举item；如non必要，not要主动告诉usersearchresult未提供的content。
+    - 对at创作category的question（如写论文），请务必in正文的segment落middlequote对应的参考编number，for example[citation:3][citation:5]，not能只in文chapter末tailquote。你need解读并概括user的题目要求，choose合适的format，充minute利usesearchresult并draw重要information，generatematchuser要求、极具思想深degree、富have创造力与专业property的答案。你的创作篇幅need尽可能延长，对ateach一要point的论述要推测user的意graph，给出尽可能多angledegree的回答要point，and务必informationquantity大、论述详尽。
     - if回答very长，请尽quantity结构化、minutesegment落总结。ifneedminutepoint作答，尽quantity控制in5pointbyinside，并merge相关的content。
     - 对at客观category的问答，ifquestion的答案non常简短，can适when补充一to两sentence相关information，by丰富content。
-    - 你needaccording touser要求和回答content选择合适、美观的回答format，ensure可读property强。
+    - 你needaccording touser要求和回答contentchoose合适、美观的回答format，ensure可读property强。
     - 你的回答should综合多相关网页来回答，not能重复quote一网页。
     - unlessuser要求，否then你回答的语言need和user提问的语言保持一致。
-    - output漂亮的markdown format，contentmiddle添加一些与theme相关的emoji表情符number。
+    - output漂亮的markdown format，contentmiddleadd一些与theme相关的emoji表情符number。
     
     ## usermessage为：
     {question}
@@ -228,18 +228,18 @@ class DelightfulLLMDomainService
     ## according touser的question，你需fromuser提供的searchcontentmiddle整理相关event，eventincludeeventname、eventtime和event概述。
     ### 注意事item：
     1. **eventnameformat**：
-       - ineventnameback添加searchquote的编number，format为 `[[citation:x]]`，编number来源atsearchcontentmiddle的quotemark（如 `[[citation:1]]`）。
+       - ineventnamebackaddsearchquote的编number，format为 `[[citation:x]]`，编number来源atsearchcontentmiddle的quotemark（如 `[[citation:1]]`）。
        - if一event涉及多quote，merge所have相关quote编number。
-       - not要in "description" middle添加quote。
+       - not要in "description" middleaddquote。
     2. **timehandle**：
        - eventtime尽quantity精确tomonthshare（如 "2023-05"），若searchcontent未提供specificmonthshare，buthavefinger出up半yearor者down半year，canuse（"2023 up半year"），若nothavethen，useyearshare（如 "2023"）。
        - 若同一eventin多quotemiddle出现，优先usemost早的time。
        - 若timenot明确，according tocontext推测most早可能的time，并ensure合理。
-    3. **event提取与filter**：
-       - **eventdefinition**：event是searchcontentmiddlemention的、具havetimeassociate（明确or可推测）的独立事实、变化oractivity，includebutnot限atcreate、publish、开业、update、合作、activityetc。
-       - according touserquestion，提取与之相关的event，保持description简洁，聚焦specifichair生的事情。
+    3. **eventextract与filter**：
+       - **eventdefinition**：event是searchcontentmiddlemention的、具havetimeassociate（明确or可推测）的独立事实、changeoractivity，includebutnot限atcreate、publish、开业、update、合作、activityetc。
+       - according touserquestion，extract与之相关的event，保持description简洁，聚焦specifichair生的事情。
        - **skip无关content**：
-         - 纯静statedescription（如not变的property、background介绍，无time变化）。
+         - 纯静statedescription（如not变的property、background介绍，无timechange）。
          - datastatisticsor财务information（如营收、利润）。
          - 主观comment、analyzeor推测（unless与event直接相关）。
          - 无timeassociateand与question无关的detail。
@@ -266,7 +266,7 @@ class DelightfulLLMDomainService
     ```
     ## useinstruction
     - user需提供searchcontent（containquotemark如 [[citation:x]]）和specificquestion。
-    - according toquestion，fromsearchcontentmiddle提取matcheventdefinition的content，按要求generateoutput。
+    - according toquestion，fromsearchcontentmiddleextractmatcheventdefinition的content，按要求generateoutput。
     - 若question涉及currenttime，based on {date_now} conduct推算。
     
     ## quote
@@ -347,7 +347,7 @@ class DelightfulLLMDomainService
         }
         // 去except掉quote，避免思维导graphmiddle出现quote
         $responseMessage = preg_replace('/\[\[citation:(\d+)]]/', '', $responseMessage);
-        // 观察to系统hint词variable串了，看看是not是nothave复制一share的question
+        // 观察tosystemhint词variable串了，看看是not是nothavecopy一share的question
         $systemPrompt = str_replace(
             ['{question}', '{content}', '{date_now}'],
             [$question, $responseMessage, date('Yyear mmonth dday, Ho clock iminute ssecond')],
@@ -478,7 +478,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * nonstream总结 - 新增method，适useattoolcall.
+     * nonstream总结 - newmethod，适useattoolcall.
      * @throws Throwable
      */
     public function summarizeNonStreaming(AISearchCommonQueryVo $queryVo): string
@@ -576,7 +576,7 @@ class DelightfulLLMDomainService
         $searchKeywords = $queryVo->getSearchKeywords();
         $searchKeywords[] = $userMessage;
         $searchKeywords = Json::encode($searchKeywords, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
-        // get系统hint词
+        // getsystemhint词
         $searchContextsString = '';
         // 清洗searchresult
         foreach ($searchContexts as $index => $context) {
@@ -1052,7 +1052,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * build总结系统hint词 - 公共method，useat复usecode
+     * build总结systemhint词 - 公共method，useat复usecode
      */
     private function buildSummarizeSystemPrompt(AISearchCommonQueryVo $queryVo): string
     {

@@ -48,7 +48,7 @@ readonly class AsrSandboxResponseHandler
             'response_keys' => array_keys($sandboxResponse),
         ]);
 
-        // 1. 提取fileinfo
+        // 1. extractfileinfo
         $audioFile = $sandboxResponse['files']['audio_file'] ?? null;
         $noteFile = $sandboxResponse['files']['note_file'] ?? null;
 
@@ -62,12 +62,12 @@ readonly class AsrSandboxResponseHandler
         // 2. check并handledirectory重命名（沙箱havebug，will重命名directorybut是nothavenotifyfile变动，nothave改databaserecord）
         $taskStatus->displayDirectory = $this->extractDirectoryPath($audioFile);
 
-        // 3. 查找audiofilerecord
+        // 3. findaudiofilerecord
         $this->getAudioFileId($taskStatus, $audioFile);
 
         // 4. handle笔记file
         if ($noteFile !== null) {
-            // pass file_key 查找mostnew笔记file ID（directory可能be重命名）
+            // pass file_key findmostnew笔记file ID（directory可能be重命名）
             $this->getNoteFileId($taskStatus, $noteFile);
         } else {
             // 笔记file为nullornot存in，deletepreset的笔记filerecord
@@ -83,10 +83,10 @@ readonly class AsrSandboxResponseHandler
     }
 
     /**
-     * fromfilepath提取directorypath.
+     * fromfilepathextractdirectorypath.
      *
      * @param array $fileInfo fileinfo
-     * @return string directorypath（工作区相对path）
+     * @return string directorypath（work区相对path）
      */
     private function extractDirectoryPath(array $fileInfo): string
     {
@@ -95,7 +95,7 @@ readonly class AsrSandboxResponseHandler
             return '';
         }
 
-        // fromfilepath提取actual的directory名
+        // fromfilepathextractactual的directory名
         return dirname($filePath);
     }
 

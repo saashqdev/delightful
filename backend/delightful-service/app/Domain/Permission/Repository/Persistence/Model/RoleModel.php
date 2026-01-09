@@ -19,8 +19,8 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $name rolename
  * @property array $permission_key rolepermissionlist
  * @property string $organization_code organizationencoding
- * @property null|array $permission_tag permissiontag，useatfront端展示category
- * @property int $is_display whether显示
+ * @property null|array $permission_tag permissiontag，useatfront端showcategory
+ * @property int $is_display whetherdisplay
  * @property int $status status: 0=disable, 1=enable
  * @property null|string $created_uid create者userID
  * @property null|string $updated_uid update者userID

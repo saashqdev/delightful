@@ -158,7 +158,7 @@ class MCPServerAppService extends AbstractMCPAppService
 
             $operation = Operation::None;
             if (in_array($item->getOrganizationCode(), $dataIsolation->getOfficialOrganizationCodes(), true)) {
-                // if是官方organizationdata，andwhenfrontorganization所in的organization是官方organization，thensetting操作permission为管理员
+                // if是官方organizationdata，andwhenfrontorganization所in的organization是官方organization，thensetting操作permission为administrator
                 if ($dataIsolation->isOfficialOrganization()) {
                     $operation = Operation::Admin;
                 }

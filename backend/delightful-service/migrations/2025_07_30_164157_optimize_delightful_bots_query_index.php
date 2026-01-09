@@ -12,7 +12,7 @@ return new class extends Migration {
     /**
      * Run the migrations.
      * optimize delightful_bots 和 delightful_bot_versions 表的多query场景performance
-     * 添加多复合索引supportdifferent的querymode.
+     * add多复合索引supportdifferent的querymode.
      */
     public function up(): void
     {

@@ -19,7 +19,7 @@ class VectorProgress
     }
 
     /**
-     * 追加total.
+     * appendtotal.
      */
     public function additionalTotal(string $key, int $num): void
     {
@@ -28,7 +28,7 @@ class VectorProgress
     }
 
     /**
-     * 追加complete数.
+     * appendcomplete数.
      */
     public function additionalComplete(string $key, int $num): void
     {

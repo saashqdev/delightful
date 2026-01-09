@@ -251,7 +251,7 @@ class VolcengineModel extends AbstractImageGenerate
             'imagequantity' => $count,
         ]);
 
-        // fromnativeresultmiddle提取imageURL
+        // fromnativeresultmiddleextractimageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             $data = $result['data'];
@@ -572,7 +572,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * 将火山engineimagedata添加toOpenAIresponseobjectmiddle.
+     * 将火山engineimagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
@@ -582,7 +582,7 @@ class VolcengineModel extends AbstractImageGenerate
         // useRedislockensure并hairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
-            // from火山engineresponsemiddle提取data
+            // from火山engineresponsemiddleextractdata
             if (empty($volcengineResult['data']) || ! is_array($volcengineResult['data'])) {
                 return;
             }
@@ -601,7 +601,7 @@ class VolcengineModel extends AbstractImageGenerate
                         'url' => $processedUrl,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('Volcengine添加imagedata：URL水印handlefail', [
+                    $this->logger->error('Volcengineaddimagedata：URL水印handlefail', [
                         'error' => $e->getMessage(),
                         'url' => $imageUrl,
                     ]);
@@ -620,7 +620,7 @@ class VolcengineModel extends AbstractImageGenerate
                         'b64_json' => $processedImage,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('Volcengine添加imagedata：base64水印handlefail', [
+                    $this->logger->error('Volcengineaddimagedata：base64水印handlefail', [
                         'error' => $e->getMessage(),
                     ]);
                     // 水印handlefailo clockuseoriginaldata
@@ -636,7 +636,7 @@ class VolcengineModel extends AbstractImageGenerate
                 $currentUsage->completionTokens += $volcengineResult['usage']['output_tokens'] ?? 0;
                 $currentUsage->totalTokens += $volcengineResult['usage']['total_tokens'] ?? 0;
             } else {
-                // ifnothaveusageinfo，default增加1张image
+                // ifnothaveusageinfo，defaultincrease1张image
                 $currentUsage->addGeneratedImages(1);
             }
 
@@ -722,7 +722,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * 为火山engineoriginaldata添加水印.
+     * 为火山engineoriginaldataadd水印.
      */
     private function processVolcengineRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {

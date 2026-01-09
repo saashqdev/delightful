@@ -45,7 +45,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
     }
 
     /**
-     * 客户端主动操作back,minutehair此操作给receive方.
+     * customer端主动操作back,minutehair此操作给receive方.
      * 注意此o clock的message结构(eachtypeidetc)all是hair起方的value.
      * @throws Throwable
      */
@@ -160,7 +160,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                 $messageStruct = $messageDTO->getContent();
                 // 判断sessionwhether存in,whether属atcurrentuser
                 $this->checkAndGetSelfConversation($messageStruct->getConversationId(), $dataIsolation);
-                // todo 话题namecreateo clockallow为空,back续 ai 总结话题name,push给客户端
+                // todo 话题namecreateo clockallow为空,back续 ai 总结话题name,push给customer端
                 $topicEntity = $this->userCreateTopicHandler($messageStruct, $dataIsolation);
                 break;
             case ControlMessageType::UpdateTopic:
@@ -192,7 +192,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                 'name' => $topicEntity->getName(),
             ];
         }
-        // 回写进控制messagemiddle,便at客户端process
+        // 回写进控制messagemiddle,便atcustomer端process
         $contentChange = MessageAssembler::getControlMessageStruct($messageDTO->getMessageType(), $seqContent);
         $messageDTO->setContent($contentChange);
         $messageDTO->setMessageType($contentChange->getMessageTypeEnum());
@@ -239,7 +239,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
 
     /**
      * agent sendmessageo clockget话题 id.
-     * @param int $getType todo 0:default话题 1:most近的话题 2:智能确定话题，暂o clock只supportdefault话题 3 新增话题
+     * @param int $getType todo 0:default话题 1:most近的话题 2:智能确定话题，暂o clock只supportdefault话题 3 new话题
      * @throws Throwable
      */
     public function agentSendMessageGetTopicId(DelightfulConversationEntity $senderConversationEntity, int $getType): string
@@ -258,7 +258,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
         $senderTopicId = $this->checkDefaultTopicExist($senderConversationEntity);
         $receiverTopicId = $this->checkDefaultTopicExist($receiverConversationEntity);
         $defaultTopicId = $senderTopicId;
-        // if $getType 为新增话题，thendefaultcreate话题，而not是default话题
+        // if $getType 为new话题，thendefaultcreate话题，而not是default话题
         if ($getType === 3) {
             $senderTopicId = '';
         }

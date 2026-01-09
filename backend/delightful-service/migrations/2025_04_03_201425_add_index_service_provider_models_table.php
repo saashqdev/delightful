@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('service_provider_models', function (Blueprint $table) {
-            // 添加 model_parent_id 和 status 联合索引
+            // add model_parent_id 和 status 联合索引
             $table->index(['model_parent_id', 'status']);
         });
     }

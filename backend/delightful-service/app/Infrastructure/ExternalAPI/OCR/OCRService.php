@@ -76,7 +76,7 @@ readonly class OCRService
             throw new RuntimeException("无法getheadinfo: {$url}");
         }
 
-        // 提取 `Last-Modified`、`ETag` 和 `Content-Length`（if存in）
+        // extract `Last-Modified`、`ETag` 和 `Content-Length`（if存in）
         $lastModified = $headers['Last-Modified'] ?? null;
         $etag = $headers['Etag'] ?? null;
         $contentLength = $headers['Content-Length'] ?? null;

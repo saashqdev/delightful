@@ -15,8 +15,8 @@ use App\Infrastructure\Util\SSRF\SSRFUtil;
 class Oauth2Config extends AbstractValueObject
 {
     /**
-     * Client ID - 客户端ID，是applicationinauthorizationservice器middle的唯一identifier。
-     * authorizationservice器pass客户端ID来识别different的三方application。
+     * Client ID - customer端ID，是applicationinauthorizationservice器middle的唯一identifier。
+     * authorizationservice器passcustomer端ID来识别different的三方application。
      *
      * createOAuthapplicationo clockwillminute配client_id，本exampleinput
      * 813924812101982004357116497xxxx.app.coze
@@ -24,7 +24,7 @@ class Oauth2Config extends AbstractValueObject
     protected string $clientId = '';
 
     /**
-     * Client Secret - 客户端key，和客户端ID配合use，useatauthapplication的身share。
+     * Client Secret - customer端key，和customer端ID配合use，useatauthapplication的身share。
      * ensureonlyauthorization的applicationcanrequestpermission。
      *
      * createOAuthapplicationo clockwillminute配client_secret，本exampleinput 8jmSATwI*********

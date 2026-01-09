@@ -27,7 +27,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     protected OrganizationAdminAppService $organizationAdminAppService;
 
     /**
-     * getorganization管理员column表.
+     * getorganizationadministratorcolumn表.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::QUERY)]
     public function list(): array
@@ -48,7 +48,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     }
 
     /**
-     * getorganization管理员detail.
+     * getorganizationadministratordetail.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::QUERY)]
     public function show(int $id): array
@@ -62,7 +62,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     }
 
     /**
-     * 授予userorganization管理员permission.
+     * 授予userorganizationadministratorpermission.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::EDIT)]
     public function grant(): array
@@ -83,7 +83,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     }
 
     /**
-     * deleteorganization管理员.
+     * deleteorganizationadministrator.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::EDIT)]
     public function destroy(int $id): array
@@ -96,7 +96,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     }
 
     /**
-     * 转让organizationcreate人身share.
+     * 转让organizationcreateperson身share.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::EDIT)]
     public function transferOwner(): array
@@ -107,7 +107,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
 
         $newOwnerUserId = $this->request->input('user_id');
         if (empty($newOwnerUserId)) {
-            throw new InvalidArgumentException('neworganizationcreate人userIDcannot为null');
+            throw new InvalidArgumentException('neworganizationcreatepersonuserIDcannot为null');
         }
 
         $this->organizationAdminAppService->transferOwnership(

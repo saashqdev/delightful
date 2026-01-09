@@ -58,7 +58,7 @@ class MultiModalContentFormatter
      * @param string $originalContent original文本content
      * @param string $visionResponse 视觉analyzeresult
      * @param AttachmentInterface[] $imageAttachments imageattachmentarray
-     * @return string 添加了imageinfo的文本content
+     * @return string add了imageinfo的文本content
      */
     protected static function formatImageContent(
         string $originalContent,
@@ -92,7 +92,7 @@ class MultiModalContentFormatter
      *
      * @param string $originalContent original文本content
      * @param AttachmentInterface[] $nonImageAttachments nonimageattachmentarray
-     * @return string 添加了nonimageattachmentinfo的文本content
+     * @return string add了nonimageattachmentinfo的文本content
      */
     protected static function formatNonImageAttachments(
         string $originalContent,
@@ -105,7 +105,7 @@ class MultiModalContentFormatter
 
         $content = $originalContent;
 
-        // 添加nonimageattachment的link
+        // addnonimageattachment的link
         foreach ($nonImageAttachments as $attachment) {
             $url = $attachment->getUrl();
             $name = $attachment->getName();

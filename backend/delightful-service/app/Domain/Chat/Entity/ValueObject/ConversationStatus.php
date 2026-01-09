@@ -11,7 +11,7 @@ enum ConversationStatus: int
 {
     case Normal = 0;
 
-    // 隐藏
+    // hidden
     case Hidden = 1;
 
     // delete

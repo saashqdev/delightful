@@ -73,7 +73,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         // verifyknowledge base的permission
         $this->checkKnowledgeBaseOperation($dataIsolation, 'r', $query->getKnowledgeBaseCode(), $query->getCode());
 
-        // compatible旧data，新增defaultdocument
+        // compatible旧data，newdefaultdocument
         $fragmentQuery = new KnowledgeBaseFragmentQuery();
         $fragmentQuery->setKnowledgeCode($query->getKnowledgeBaseCode());
         $fragmentQuery->setIsDefaultDocumentCode(true);
@@ -116,7 +116,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * 查看单knowledge basedocumentdetail.
+     * view单knowledge basedocumentdetail.
      */
     public function show(Authenticatable $authorization, string $knowledgeBaseCode, string $documentCode): KnowledgeBaseDocumentEntity
     {

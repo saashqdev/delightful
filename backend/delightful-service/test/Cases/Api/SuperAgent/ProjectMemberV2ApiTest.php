@@ -105,11 +105,11 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest2();
         $this->addTeamMembers($projectId, 51202); // No permission error
 
-        // 3. projectcreate者添加member - shouldsuccess
+        // 3. projectcreate者addmember - shouldsuccess
         $this->switchUserTest1();
         $this->addTeamMembers($projectId);
 
-        // 4. 现intest2userbecome为member，butpermissionnot足 - 添加membershouldfail
+        // 4. 现intest2userbecome为member，butpermissionnot足 - addmembershouldfail
         $this->switchUserTest2();
         $this->addTeamMembers($projectId, 51202); // 仍然无permission，因为not是管理者
 
@@ -117,7 +117,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->updateMemberToManager($projectId, $this->testUserId2);
 
-        // 6. 现intest2usercan添加member
+        // 6. 现intest2usercanaddmember
         $this->switchUserTest2();
         $this->addMoreTeamMembers($projectId);
     }
@@ -136,10 +136,10 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->assertFalse($response['data']['is_collaboration_enabled']);
         $this->assertEquals(true, in_array($response['data']['default_join_permission'], ['viewer', 'editor']));
 
-        // 2. 开启协作feature
+        // 2. start协作feature
         $this->enableCollaboration($projectId);
 
-        // 3. validate协作已开启
+        // 3. validate协作已start
         $response = $this->getCollaborationSettings($projectId);
         $this->assertTrue($response['data']['is_collaboration_enabled']);
 
@@ -158,7 +158,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 1. 准备test环境
+        // 1. 准备testenvironment
         $this->switchUserTest1();
         $this->enableCollaboration($projectId);
         $this->addTeamMembers($projectId);
@@ -186,7 +186,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->enableCollaboration($projectId);
 
-        // 尝试添加其他organization的user - shouldfail
+        // 尝试add其他organization的user - shouldfail
         $requestData = [
             'members' => [
                 [
@@ -217,12 +217,12 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->enableCollaboration($projectId);
 
-        // 1. test添加nullmembercolumn表
+        // 1. testaddnullmembercolumn表
         $this->addEmptyMembersList($projectId, 5003);
 
-        // 2. test重复添加samemember
+        // 2. test重复addsamemember
         $this->addTeamMembers($projectId);
-        //        $this->addTeamMembers($projectId); // 重复添加
+        //        $this->addTeamMembers($projectId); // 重复add
 
         // 3. testinvalid的permissionlevel别
         $this->addMembersWithInvalidPermission($projectId, 5003);
@@ -233,7 +233,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->switchUserTest1();
 
-        // 5. test协作closeo clocknot能添加member
+        // 5. test协作closeo clocknot能addmember
         $this->disableCollaboration($projectId);
         $this->addTeamMembers($projectId, 51202); // 协作已closeerror
     }
@@ -250,7 +250,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $response = $this->addTeamMembers($projectId, 51202);
         $this->assertStringContainsString('permission', $response['message']);
 
-        // 2. test协作未开启error
+        // 2. test协作未starterror
         $this->switchUserTest1();
         $response = $this->addTeamMembers($projectId, 51202);
         $this->assertStringContainsString('协作', $response['message']);
@@ -259,7 +259,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     // ========== 辅助testmethod ==========
 
     /**
-     * 开启project协作.
+     * startproject协作.
      */
     public function enableCollaboration(string $projectId, int $expectedCode = 1000): array
     {
@@ -326,7 +326,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 添加teammember.
+     * addteammember.
      */
     public function addTeamMembers(string $projectId, int $expectedCode = 1000): array
     {
@@ -363,7 +363,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 添加more多teammember（test管理者permission）.
+     * addmore多teammember（test管理者permission）.
      */
     public function addMoreTeamMembers(string $projectId, int $expectedCode = 1000): array
     {
@@ -390,7 +390,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 添加nullmembercolumn表.
+     * addnullmembercolumn表.
      */
     public function addEmptyMembersList(string $projectId, int $expectedCode = 1000): array
     {
@@ -409,7 +409,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 添加invalidpermission的member.
+     * addinvalidpermission的member.
      */
     public function addMembersWithInvalidPermission(string $projectId, int $expectedCode = 51221): array
     {
@@ -530,7 +530,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
      */
     public function cannotDeleteSelf(string $projectId): void
     {
-        // 先添加currentuser为member
+        // 先addcurrentuser为member
         //        $this->addTeamMembers($projectId);
 
         // 尝试delete自己
@@ -570,7 +570,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * validatemember已添加.
+     * validatemember已add.
      */
     public function verifyMembersAdded(string $projectId): void
     {
@@ -583,7 +583,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->assertEquals(1000, $response['code']);
         $this->assertGreaterThan(0, count($response['data']['members']));
 
-        // validate添加的member存in
+        // validateadd的member存in
         $memberIds = array_column($response['data']['members'], 'user_id');
         $departmentIds = array_column($response['data']['members'], 'department_id');
 
@@ -604,7 +604,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->assertEquals(1000, $response['code']);
 
-        // 查找finger定user的permission
+        // findfinger定user的permission
         $members = $response['data']['members'];
         foreach ($members as $member) {
             if (isset($member['user_id']) && $member['user_id'] === $this->testUserId2) {

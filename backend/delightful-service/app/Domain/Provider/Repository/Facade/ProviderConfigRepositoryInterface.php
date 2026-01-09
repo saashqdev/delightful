@@ -41,7 +41,7 @@ interface ProviderConfigRepositoryInterface
     public function getProviderConfigEntityById(string $serviceProviderConfigId, string $organizationCode): ?ProviderConfigEntity;
 
     /**
-     * according toservice商ID查找configuration（按ID升序取first）.
+     * according toservice商IDfindconfiguration（按ID升序取first）.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param int $serviceProviderId service商ID

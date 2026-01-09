@@ -19,7 +19,7 @@ enum ModelStatus: string
     public function getDescription(): string
     {
         return match ($this) {
-            self::Normal => '正常',
+            self::Normal => 'normal',
             self::Disabled => 'disabled',
             self::Deleted => '已delete',
         };

@@ -22,7 +22,7 @@ class RetrievalMethod
      * 语义检索.
      *
      * based ontoquantitysimilardegree的检索method。
-     * 将query文本convert为toquantity，然backintoquantitydatabasemiddle查找mostsimilar的document。
+     * 将query文本convert为toquantity，然backintoquantitydatabasemiddlefindmostsimilar的document。
      * 适合理解语义关系、多语言理解、processblurdescription。
      */
     public const string SEMANTIC_SEARCH = 'semantic_search';
@@ -32,7 +32,7 @@ class RetrievalMethod
      *
      * based onkeyword匹配的检索method。
      * 索引documentmiddle的所have单词，returncontainquery词的文本slicesegment。
-     * 适合精确匹配（如productname、人名、ID）和低频词匹配。
+     * 适合精确匹配（如productname、person名、ID）和低频词匹配。
      */
     public const string FULL_TEXT_SEARCH = 'full_text_search';
 
@@ -40,7 +40,7 @@ class RetrievalMethod
      * 混合检索.
      *
      * 结合语义检索和all文检索的method。
-     * meanwhileexecuteall文检索和toquantity检索，然backpass重sort步骤选择most佳result。
+     * meanwhileexecuteall文检索和toquantity检索，然backpass重sortstepchoosemost佳result。
      * 结合了两type检索技术的advantage，弥补each自的not足。
      */
     public const string HYBRID_SEARCH = 'hybrid_search';

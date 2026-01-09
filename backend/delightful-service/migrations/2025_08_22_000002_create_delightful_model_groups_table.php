@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->integer('sort')->default(0)->comment('sort权重');
             $table->tinyInteger('status')->default(1)->comment('status 0:disable 1:enable');
             $table->string('organization_code', 32)->default('')->comment('organizationcode');
-            $table->string('creator_id', 64)->default('')->comment('create人ID');
+            $table->string('creator_id', 64)->default('')->comment('createpersonID');
             $table->timestamps();
             $table->softDeletes();
         });

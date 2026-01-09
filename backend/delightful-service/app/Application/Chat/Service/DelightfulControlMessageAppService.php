@@ -38,7 +38,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * according to客户端hair来的控制messagetype,minutehairto对应的process模piece.
+     * according tocustomer端hair来的控制messagetype,minutehairto对应的process模piece.
      * @throws Throwable
      */
     public function dispatchClientControlMessage(DelightfulMessageEntity $messageDTO, DelightfulUserAuthorization $userAuthorization): ?array
@@ -51,7 +51,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         return match ($controlType) {
             ControlMessageType::CreateConversation,
             ControlMessageType::OpenConversation => $this->conversationDomainService->openConversationWindow($messageDTO, $dataIsolation),
-            // 置top,隐藏,免打扰session
+            // 置top,hidden,免打扰session
             ControlMessageType::HideConversation,
             ControlMessageType::MuteConversation,
             ControlMessageType::TopConversation => $this->conversationDomainService->conversationOptionChange($messageDTO, $dataIsolation),
@@ -84,7 +84,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         switch ($controlMessageType) {
             case ControlMessageType::SeenMessages:
             case ControlMessageType::ReadMessage:
-                // 已读回执etc场景,according to一item控制message,generate其他人的seq.
+                // 已读回执etc场景,according to一item控制message,generate其他person的seq.
                 $this->controlDomainService->handlerMQReceiptSeq($delightfulSeqEntity);
                 break;
             case ControlMessageType::RevokeMessage:
@@ -116,7 +116,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageEntity, $conversationId);
         // async将generate的messagestreamnotifyuser的其他设备.
         $this->controlDomainService->pushControlSequence($seqEntity);
-        // 将messagestreamreturn给current客户端! but是also是willasyncpush给user的所haveonline客户端.
+        // 将messagestreamreturn给currentcustomer端! but是also是willasyncpush给user的所haveonlinecustomer端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 
@@ -129,7 +129,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         $seqCreatedEvent = $this->controlDomainService->pushControlSequence($seqEntity);
         // asyncminutehair控制message,对方操作了session的话题
         $this->controlDomainService->dispatchSeq($seqCreatedEvent);
-        // 将messagestreamreturn给current客户端! but是also是willasyncpush给user的所haveonline客户端.
+        // 将messagestreamreturn给currentcustomer端! but是also是willasyncpush给user的所haveonlinecustomer端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 

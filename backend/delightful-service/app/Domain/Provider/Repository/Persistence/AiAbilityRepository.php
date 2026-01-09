@@ -123,7 +123,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * according tocodeupdate（support选择propertyupdate）.
+     * according tocodeupdate（supportchoosepropertyupdate）.
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool
     {

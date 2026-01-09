@@ -54,19 +54,19 @@ readonly class OrganizationDomainService
         $savedOrganization = $this->organizationRepository->save($organizationEntity);
 
         if ($creatorId !== null && $savedOrganization->getType() !== 1) {
-            // 人organizationnot添加organization管理员
-            // 为create者添加organization管理员permission并mark为organizationcreate人
+            // personorganizationnotaddorganizationadministrator
+            // 为create者addorganizationadministratorpermission并mark为organizationcreateperson
             try {
                 $dataIsolation = DataIsolation::simpleMake($savedOrganization->getDelightfulOrganizationCode(), (string) $creatorId);
                 $this->organizationAdminDomainService->grant(
                     $dataIsolation,
                     (string) $creatorId,
                     (string) $creatorId, // 授予者also是create者自己
-                    'organizationcreate者自动获得管理员permission',
-                    true // mark为organizationcreate人
+                    'organizationcreate者自动获得administratorpermission',
+                    true // mark为organizationcreateperson
                 );
             } catch (Throwable $e) {
-                // if授予管理员permissionfail，recordlogbutnot影响organizationcreate
+                // if授予administratorpermissionfail，recordlogbutnot影响organizationcreate
                 error_log("Failed to grant organization admin permission for creator {$creatorId}: " . $e->getMessage());
             }
         }

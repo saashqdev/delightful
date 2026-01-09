@@ -31,7 +31,7 @@ abstract class AbstractKnowledgeNodeRunner extends NodeRunner
                 // if本身then已经是 id 了，那么直接return
                 $knowledgeCode = $vectorDatabaseId;
             } elseif (is_array($vectorDatabaseId)) {
-                // 这within采use了 names 的groupitemshapetype，那么结构是one多选
+                // 这within采use了 names 的groupitemshapetype，那么结构是onemulti-select
                 // 只取theone的 id
                 $knowledgeCode = $vectorDatabaseId[0]['id'] ?? '';
             }
@@ -94,7 +94,7 @@ abstract class AbstractKnowledgeNodeRunner extends NodeRunner
         }
 
         $create = false;
-        // onlystorageslicesegmento clock，need新增knowledge base
+        // onlystorageslicesegmento clock，neednewknowledge base
         if ($this->node->getNodeType() === NodeType::KnowledgeFragmentStore->value) {
             $create = true;
         }

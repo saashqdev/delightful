@@ -139,7 +139,7 @@ class VolcengineArkModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // fromnativeresultmiddle提取imageURL
+        // fromnativeresultmiddleextractimageURL
         $imageData = [];
         foreach ($rawResults as $index => $result) {
             // check嵌set的data结构：result['data']['data'][0]['url']
@@ -190,13 +190,13 @@ class VolcengineArkModel extends AbstractImageGenerate
             'stream' => $imageGenerateRequest->getStream(),
         ];
 
-        // ifsetting了groupgraphfeatureoption，then添加 sequential_image_generation_options
+        // ifsetting了groupgraphfeatureoption，thenadd sequential_image_generation_options
         $sequentialOptions = $imageGenerateRequest->getSequentialImageGenerationOptions();
         if (! empty($sequentialOptions)) {
             $payload['sequential_image_generation_options'] = $sequentialOptions;
         }
 
-        // ifhave参考graph像，then添加imagefield（support多张image）
+        // ifhave参考graph像，thenaddimagefield（support多张image）
         if (! empty($referImages)) {
             if (count($referImages) === 1) {
                 $payload['image'] = $referImages[0];
@@ -231,13 +231,13 @@ class VolcengineArkModel extends AbstractImageGenerate
             'stream' => $imageGenerateRequest->getStream(),
         ];
 
-        // ifsetting了groupgraphfeatureoption，then添加 sequential_image_generation_options
+        // ifsetting了groupgraphfeatureoption，thenadd sequential_image_generation_options
         $sequentialOptions = $imageGenerateRequest->getSequentialImageGenerationOptions();
         if (! empty($sequentialOptions)) {
             $payload['sequential_image_generation_options'] = $sequentialOptions;
         }
 
-        // ifhave参考graph像，then添加imagefield（support多张image）
+        // ifhave参考graph像，thenaddimagefield（support多张image）
         if (! empty($referImages)) {
             if (count($referImages) === 1) {
                 $payload['image'] = $referImages[0];
@@ -261,7 +261,7 @@ class VolcengineArkModel extends AbstractImageGenerate
     }
 
     /**
-     * 将火山方舟imagedata添加toOpenAIresponseobjectmiddle.
+     * 将火山方舟imagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
@@ -271,7 +271,7 @@ class VolcengineArkModel extends AbstractImageGenerate
         // useRedislockensure并hairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
-            // from火山方舟responsemiddle提取data
+            // from火山方舟responsemiddleextractdata
             if (empty($volcengineResult['data']) || ! is_array($volcengineResult['data'])) {
                 return;
             }
@@ -286,7 +286,7 @@ class VolcengineArkModel extends AbstractImageGenerate
                     try {
                         $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($item['url'], $imageGenerateRequest);
                     } catch (Exception $e) {
-                        $this->logger->error('VolcengineArk添加imagedata：水印handlefail', [
+                        $this->logger->error('VolcengineArkaddimagedata：水印handlefail', [
                             'error' => $e->getMessage(),
                             'url' => $item['url'],
                         ]);
@@ -377,7 +377,7 @@ class VolcengineArkModel extends AbstractImageGenerate
     }
 
     /**
-     * 为火山engineArkoriginaldata添加水印.
+     * 为火山engineArkoriginaldataadd水印.
      */
     private function processVolcengineArkRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {

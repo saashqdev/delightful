@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 添加 service_provider_models table的索引
+        // add service_provider_models table的索引
         Schema::table('service_provider_models', function (Blueprint $table) {
             // deleteold model_parent_id_status 索引（if存in）
             if (Schema::hasIndex('service_provider_models', 'service_provider_models_model_parent_id_status_index')) {
@@ -31,23 +31,23 @@ return new class extends Migration {
                 $table->dropIndex('idx_model_id_status_organization_code');
             }
 
-            // 添加organization+status+category别索引（ifnot存in）
+            // addorganization+status+category别索引（ifnot存in）
             if (! Schema::hasIndex('service_provider_models', 'idx_organization_status_category')) {
                 $table->index(['organization_code', 'status', 'category'], 'idx_organization_status_category');
             }
 
-            // 添加organization+configurationID索引（ifnot存in）
+            // addorganization+configurationID索引（ifnot存in）
             if (! Schema::hasIndex('service_provider_models', 'idx_organization_code_config_id')) {
                 $table->index(['organization_code', 'service_provider_config_id'], 'idx_organization_code_config_id');
             }
 
-            // 添加newgroup合索引：organization_code, model_parent_id（ifnot存in）
+            // addnewgroup合索引：organization_code, model_parent_id（ifnot存in）
             if (! Schema::hasIndex('service_provider_models', 'idx_org_model_parent')) {
                 $table->index(['organization_code', 'model_parent_id'], 'idx_org_model_parent');
             }
         });
 
-        // 添加 service_provider_configs table的索引
+        // add service_provider_configs table的索引
         Schema::table('service_provider_configs', function (Blueprint $table) {
             // organization+status联合索引（ifnot存in）
             if (! Schema::hasIndex('service_provider_configs', 'idx_org_status')) {
@@ -60,7 +60,7 @@ return new class extends Migration {
             }
         });
 
-        // 添加 service_provider_original_models table的索引
+        // add service_provider_original_models table的索引
         Schema::table('service_provider_original_models', function (Blueprint $table) {
             // 核coregroup合索引（ifnot存in）
             if (! Schema::hasIndex('service_provider_original_models', 'idx_org_type')) {

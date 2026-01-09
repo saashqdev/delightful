@@ -47,7 +47,7 @@ class ServiceProviderApiTest extends BaseTest
         $modelUri = $this->baseUri . '/models';
         $serviceProviderConfigId = '841681476732149761';
 
-        // ========== 步骤1: createmodel ==========
+        // ========== step1: createmodel ==========
         $createRequestData = [
             'model_type' => 3,
             'model_id' => 'test-model-' . time(),
@@ -102,7 +102,7 @@ class ServiceProviderApiTest extends BaseTest
         $modelId = $createResponse['data']['id'];
         $this->assertNotEmpty($modelId, 'modelIDnot应为null');
 
-        // ========== 步骤2: calldetailinterfacevalidate4costfield ==========
+        // ========== step2: calldetailinterfacevalidate4costfield ==========
         $detailUri = $this->baseUri . '/' . $serviceProviderConfigId;
         $detailResponse = $this->get($detailUri, [], $this->getCommonHeaders());
 
@@ -110,7 +110,7 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertSame(1000, $detailResponse['code'], 'getdetailshouldsuccess');
         $this->assertArrayHasKey('data', $detailResponse);
 
-        // 查找create的model
+        // findcreate的model
         $createdModel = $this->findModelInDetailResponse($detailResponse['data'], $modelId);
         $this->assertNotNull($createdModel, 'should能indetailmiddle找tocreate的model');
 
@@ -124,10 +124,10 @@ class ServiceProviderApiTest extends BaseTest
             'time_cost' => 50,
         ]);
 
-        // ========== 步骤3: validateconfigurationversion（version=1） ==========
+        // ========== step3: validateconfigurationversion（version=1） ==========
         $this->verifyConfigVersion((int) $modelId, $createRequestData['config'], 1);
 
-        // ========== 步骤4: updatemodel ==========
+        // ========== step4: updatemodel ==========
         $updateRequestData = [
             'id' => $modelId,
             'model_type' => 3,
@@ -177,13 +177,13 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertArrayHasKey('data', $updateResponse);
         $this->assertSame($modelId, $updateResponse['data']['id'], 'updatebackmodelID应保持not变');
 
-        // ========== 步骤5: againtimecalldetailinterfacevalidateupdateback的4costfield ==========
+        // ========== step5: againtimecalldetailinterfacevalidateupdateback的4costfield ==========
         $updatedDetailResponse = $this->get($detailUri, [], $this->getCommonHeaders());
 
         $this->assertIsArray($updatedDetailResponse);
         $this->assertSame(1000, $updatedDetailResponse['code'], 'getupdatebackdetailshouldsuccess');
 
-        // 查找updateback的model
+        // findupdateback的model
         $updatedModel = $this->findModelInDetailResponse($updatedDetailResponse['data'], $modelId);
         $this->assertNotNull($updatedModel, 'should能indetailmiddle找toupdateback的model');
 
@@ -196,7 +196,7 @@ class ServiceProviderApiTest extends BaseTest
             'cache_hit_cost' => 0.0003,
         ]);
 
-        // ========== 步骤6: validateupdateback的configurationversion（version=2） ==========
+        // ========== step6: validateupdateback的configurationversion（version=2） ==========
         $this->verifyConfigVersion((int) $modelId, $updateRequestData['config'], 2);
     }
 
@@ -304,7 +304,7 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * indetailresponsemiddle查找finger定ID的model.
+     * indetailresponsemiddlefindfinger定ID的model.
      *
      * @param array $detailData detailresponsedata
      * @param string $modelId modelID
@@ -321,7 +321,7 @@ class ServiceProviderApiTest extends BaseTest
             }
         }
 
-        // if是其他结构，continue查找
+        // if是其他结构，continuefind
         if (isset($detailData['id']) && (string) $detailData['id'] === (string) $modelId) {
             return $detailData;
         }

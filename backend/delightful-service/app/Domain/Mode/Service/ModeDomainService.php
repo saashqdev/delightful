@@ -293,7 +293,7 @@ class ModeDomainService
         foreach ($modes as $mode) {
             $modeId = $mode->getId();
 
-            // 查找final源模typeID（递归查找跟随链）
+            // findfinal源模typeID（递归find跟随链）
             $ultimateSourceId = $this->findUltimateSourceId($modeId, $followMap);
 
             $groups = $groupsByModeId[$ultimateSourceId] ?? [];
@@ -374,7 +374,7 @@ class ModeDomainService
     }
 
     /**
-     * according to跟随关系mapping递归查找final源模typeID.
+     * according to跟随关系mapping递归findfinal源模typeID.
      * @param int $modeId current模typeID
      * @param array $followMap 跟随关系mapping [跟随者ID => be跟随者ID]
      * @param array $visited 防止循环跟随
@@ -394,7 +394,7 @@ class ModeDomainService
 
         $visited[] = $modeId;
 
-        // 递归查找跟随goal的final源
+        // 递归find跟随goal的final源
         return $this->findUltimateSourceId($followMap[$modeId], $followMap, $visited);
     }
 }

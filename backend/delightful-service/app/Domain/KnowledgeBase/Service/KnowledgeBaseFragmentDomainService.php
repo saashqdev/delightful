@@ -91,7 +91,7 @@ readonly class KnowledgeBaseFragmentDomainService
             if (empty($knowledgeBaseFragmentEntity)) {
                 ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$savingDelightfulFlowKnowledgeFragmentEntity->getId()}] nothave找to");
             }
-            // ifnothave变化，thennotneedupdate了
+            // ifnothavechange，thennotneedupdate了
             if (! $knowledgeBaseFragmentEntity->hasModify($savingDelightfulFlowKnowledgeFragmentEntity)) {
                 return $knowledgeBaseFragmentEntity;
             }

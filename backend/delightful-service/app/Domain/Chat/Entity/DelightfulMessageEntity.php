@@ -30,7 +30,7 @@ class DelightfulMessageEntity extends AbstractEntity
     protected string $senderId = '';
 
     /**
-     * send方type. user:user(aialsobe认为是user)，group：group chat，system：系统message，cloud_document：云document，multidimensional_table：多维table格 topic：话题 app：applicationmessage.
+     * send方type. user:user(aialsobe认为是user)，group：group chat，system：systemmessage，cloud_document：云document，multidimensional_table：多维table格 topic：话题 app：applicationmessage.
      */
     protected ConversationType $senderType;
 
@@ -42,12 +42,12 @@ class DelightfulMessageEntity extends AbstractEntity
     protected string $receiveId = '';
 
     /**
-     * receiveobjecttype. user:user(aialsobe认为是user)，group：group chat，system：系统message，cloud_document：云document，multidimensional_table：多维table格 topic：话题 app：applicationmessage.
+     * receiveobjecttype. user:user(aialsobe认为是user)，group：group chat，system：systemmessage，cloud_document：云document，multidimensional_table：多维table格 topic：话题 app：applicationmessage.
      * @see UserType
      */
     protected ConversationType $receiveType;
 
-    // 收item人organizationencoding
+    // 收itempersonorganizationencoding
     protected string $receiveOrganizationCode = '';
 
     protected string $appMessageId = '';
@@ -58,7 +58,7 @@ class DelightfulMessageEntity extends AbstractEntity
 
     protected string $sendTime = '';
 
-    // create/修改/deletetime
+    // create/modify/deletetime
     protected string $createdAt = '';
 
     protected string $updatedAt = '';

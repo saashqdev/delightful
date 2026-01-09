@@ -26,7 +26,7 @@ use Hyperf\DbConnection\Db;
 #[FlowNodeDefine(
     type: NodeType::UserSearch->value,
     code: NodeType::UserSearch->name,
-    name: '人员检索',
+    name: 'person员检索',
     paramsConfig: UserSearchNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,
@@ -72,7 +72,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
             $departmentIds = array_column($departmentUsers, 'department_id');
 
             $departments = $departmentDomain->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
-            // 添加 path 去again查一time
+            // add path 去again查一time
             foreach ($departments as $department) {
                 $pathDepartments = explode('/', $department->getPath());
                 $departmentIds = array_merge($departmentIds, $pathDepartments);
@@ -81,7 +81,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
             $departments = $departmentDomain->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
 
             $userDepartments = [];
-            // one人canhavevery多department
+            // onepersoncanhavevery多department
             foreach ($departmentUsers as $departmentUser) {
                 $userDepartments[$departmentUser['user_id']][] = $departmentUser;
             }
@@ -91,7 +91,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
                 $phoneDesensitization = true;
             }
             foreach ($delightfulUsers as $delightfulUser) {
-                // ifnot是人category，filter
+                // ifnot是personcategory，filter
                 if ($delightfulUser->getUserType() !== UserType::Human) {
                     continue;
                 }

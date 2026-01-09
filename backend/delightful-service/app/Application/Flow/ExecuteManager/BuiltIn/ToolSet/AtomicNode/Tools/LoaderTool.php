@@ -36,7 +36,7 @@ class LoaderTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'documentparse。useatparse远程documentmiddlecontent，提取documentmiddle的contentoutput。';
+        return 'documentparse。useatparse远程documentmiddlecontent，extractdocumentmiddle的contentoutput。';
     }
 
     public function getCallback(): ?Closure

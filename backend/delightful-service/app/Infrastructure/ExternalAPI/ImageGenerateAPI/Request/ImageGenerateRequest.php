@@ -29,7 +29,7 @@ class ImageGenerateRequest
 
     protected string $model;
 
-    // 显示水印
+    // display水印
     protected ?WatermarkConfig $watermarkConfig = null;
 
     // 隐type水印

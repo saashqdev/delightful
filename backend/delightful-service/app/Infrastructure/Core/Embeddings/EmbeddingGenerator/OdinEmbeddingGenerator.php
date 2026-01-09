@@ -21,13 +21,13 @@ readonly class OdinEmbeddingGenerator implements EmbeddingGeneratorInterface
     {
         $businessParams = $options['business_params'] ?? [];
         unset($options['business_params']);
-        // 对嵌入做cache，减少consume
+        // 对嵌入做cache，decreaseconsume
         $cacheKey = 'embedding:' . md5($embeddingModel->getModelName() . $embeddingModel->getVectorSize() . $text . serialize($options));
         if ($this->cache->has($cacheKey)) {
             $data = $this->cache->get($cacheKey);
         } else {
             $response = $embeddingModel->embeddings($text, businessParams: $businessParams);
-            // fromresponsemiddle提取嵌入toquantity
+            // fromresponsemiddleextract嵌入toquantity
             $embeddings = [];
             foreach ($response->getData() as $embedding) {
                 $embeddings[] = $embedding->getEmbedding();

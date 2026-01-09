@@ -86,12 +86,12 @@ readonly class AsrSandboxService
         // settinguserupdown文
         $this->sandboxGateway->setUserContext($userId, $organizationCode);
 
-        // get完整工作directorypath
+        // get完整workdirectorypath
         $projectEntity = $this->projectDomainService->getProject((int) $taskStatus->projectId, $userId);
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($organizationCode);
         $fullWorkdir = WorkDirectoryUtil::getFullWorkdir($fullPrefix, $projectEntity->getWorkDir());
 
-        // create沙箱并etc待工作区可use
+        // create沙箱并etc待work区可use
         $actualSandboxId = $this->ensureSandboxWorkspaceReady(
             $taskStatus,
             $sandboxId,
@@ -122,7 +122,7 @@ readonly class AsrSandboxService
         ]);
 
         // call沙箱starttask
-        // 注意：沙箱 API 只接受工作区相对path (如: .asr_recordings/session_xxx)
+        // 注意：沙箱 API 只接受work区相对path (如: .asr_recordings/session_xxx)
         $response = $this->asrRecorder->startTask(
             $actualSandboxId,
             $taskStatus->taskKey,
@@ -216,7 +216,7 @@ readonly class AsrSandboxService
         // settinguserupdown文
         $this->sandboxGateway->setUserContext($taskStatus->userId, $organizationCode);
 
-        // get完整工作directorypath
+        // get完整workdirectorypath
         $projectEntity = $this->projectDomainService->getProject((int) $taskStatus->projectId, $taskStatus->userId);
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($organizationCode);
         $fullWorkdir = WorkDirectoryUtil::getFullWorkdir($fullPrefix, $projectEntity->getWorkDir());
@@ -231,9 +231,9 @@ readonly class AsrSandboxService
             $organizationCode
         );
 
-        // updateactual的沙箱ID（可能已经变化）
+        // updateactual的沙箱ID（可能已经change）
         if ($actualSandboxId !== $requestedSandboxId) {
-            $this->logger->warning('沙箱IDhair生变化，可能是沙箱重启', [
+            $this->logger->warning('沙箱IDhair生change，可能是沙箱重启', [
                 'task_key' => $taskStatus->taskKey,
                 'old_sandbox_id' => $requestedSandboxId,
                 'new_sandbox_id' => $actualSandboxId,
@@ -480,7 +480,7 @@ readonly class AsrSandboxService
 
     /**
      * etc待沙箱start（canresponseinterface）.
-     * ASR featurenotneed工作区initialize，只need沙箱canresponse getWorkspaceStatus interface即可.
+     * ASR featurenotneedwork区initialize，只need沙箱canresponse getWorkspaceStatus interface即可.
      *
      * @param string $sandboxId 沙箱ID
      * @param string $taskKey taskKey（useatlog）
@@ -502,7 +502,7 @@ readonly class AsrSandboxService
 
         while (time() < $endTime) {
             try {
-                // 尝试get工作区status，只要interface能successreturntheninstruction沙箱已start
+                // 尝试getwork区status，只要interface能successreturntheninstruction沙箱已start
                 $response = $this->agentDomainService->getWorkspaceStatus($sandboxId);
                 $status = $response->getDataValue('status');
 
@@ -545,7 +545,7 @@ readonly class AsrSandboxService
     }
 
     /**
-     * pass AgentDomainService create沙箱并etc待工作区then绪.
+     * pass AgentDomainService create沙箱并etc待work区then绪.
      */
     private function ensureSandboxWorkspaceReady(
         AsrTaskStatusDTO $taskStatus,
@@ -564,26 +564,26 @@ readonly class AsrSandboxService
             ExceptionBuilder::throw(AsrErrorCode::SandboxTaskCreationFailed, '', ['message' => 'projectID为null，无法create沙箱']);
         }
 
-        // 尝试get工作区status
+        // 尝试getwork区status
         $workspaceStatusResponse = null;
         try {
             $workspaceStatusResponse = $this->agentDomainService->getWorkspaceStatus($requestedSandboxId);
         } catch (Throwable $throwable) {
-            $this->logger->warning('get沙箱工作区statusfail，沙箱可能未start，将create新沙箱', [
+            $this->logger->warning('get沙箱work区statusfail，沙箱可能未start，将create新沙箱', [
                 'task_key' => $taskStatus->taskKey,
                 'sandbox_id' => $requestedSandboxId,
                 'error' => $throwable->getMessage(),
             ]);
         }
 
-        // if工作区statusresponse存in，checkwhetherneedinitialize
+        // ifwork区statusresponse存in，checkwhetherneedinitialize
         if ($workspaceStatusResponse !== null) {
             $responseCode = $workspaceStatusResponse->getCode();
             $workspaceStatus = (int) $workspaceStatusResponse->getDataValue('status');
 
-            // ifresponsesuccess（code 1000）and工作区已then绪，直接return
+            // ifresponsesuccess（code 1000）andwork区已then绪，直接return
             if ($responseCode === ResponseCode::SUCCESS && WorkspaceStatus::isReady($workspaceStatus)) {
-                $this->logger->info('检测to沙箱工作区已then绪，无需initialize', [
+                $this->logger->info('检测to沙箱work区已then绪，无需initialize', [
                     'task_key' => $taskStatus->taskKey,
                     'sandbox_id' => $requestedSandboxId,
                     'status' => $workspaceStatus,
@@ -595,8 +595,8 @@ readonly class AsrSandboxService
                 return $requestedSandboxId;
             }
 
-            // ifresponsesuccessbut工作区未initialize，orresponsefail，needinitialize工作区
-            $this->logger->info('检测to沙箱工作区未initializeorresponseexception，needinitialize工作区', [
+            // ifresponsesuccessbutwork区未initialize，orresponsefail，needinitializework区
+            $this->logger->info('检测to沙箱work区未initializeorresponseexception，needinitializework区', [
                 'task_key' => $taskStatus->taskKey,
                 'sandbox_id' => $requestedSandboxId,
                 'response_code' => $responseCode,
@@ -610,7 +610,7 @@ readonly class AsrSandboxService
             return $requestedSandboxId;
         }
 
-        // 工作区statusresponsenot存in，沙箱未start，needcreate沙箱
+        // work区statusresponsenot存in，沙箱未start，needcreate沙箱
         $dataIsolation = DataIsolation::simpleMake($organizationCode, $userId);
 
         $this->logger->info('准备call AgentDomainService create沙箱', [
@@ -638,14 +638,14 @@ readonly class AsrSandboxService
 
         $taskStatus->sandboxId = $actualSandboxId;
 
-        // initialize工作区
+        // initializework区
         $this->initializeWorkspace($taskStatus, $actualSandboxId, $userId, $organizationCode);
 
         return $actualSandboxId;
     }
 
     /**
-     * initialize工作区.
+     * initializework区.
      * 复use AgentDomainService::initializeAgent method，ensureinitializeconfiguration一致.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
@@ -715,20 +715,20 @@ readonly class AsrSandboxService
         $initMetadata = (new InitializationMetadataDTO(skipInitMessages: true));
         $this->agentDomainService->initializeAgent($dataIsolation, $taskContext, null, $projectOrganizationCode, $initMetadata);
 
-        $this->logger->info('沙箱initializemessage已send，etc待工作区initializecomplete', [
+        $this->logger->info('沙箱initializemessage已send，etc待work区initializecomplete', [
             'task_key' => $taskStatus->taskKey,
             'actual_sandbox_id' => $actualSandboxId,
             'task_id' => $taskEntity->getId(),
         ]);
 
-        // etc待工作区initializecomplete（includefilesync）
+        // etc待work区initializecomplete（includefilesync）
         $this->agentDomainService->waitForWorkspaceReady(
             $actualSandboxId,
             AsrConfig::WORKSPACE_INIT_TIMEOUT,
             AsrConfig::POLLING_INTERVAL
         );
 
-        $this->logger->info('沙箱工作区已initializecomplete，file已sync，canstartuse', [
+        $this->logger->info('沙箱work区已initializecomplete，file已sync，canstartuse', [
             'task_key' => $taskStatus->taskKey,
             'actual_sandbox_id' => $actualSandboxId,
             'task_id' => $taskEntity->getId(),

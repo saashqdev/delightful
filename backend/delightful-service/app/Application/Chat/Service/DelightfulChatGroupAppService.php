@@ -96,12 +96,12 @@ class DelightfulChatGroupAppService extends AbstractAppService
             Db::rollBack();
             ExceptionBuilder::throw(ChatErrorCode::GROUP_CREATE_ERROR, throwable: $exception);
         }
-        // 为操作者及o clockreturn seq
+        // 为操author及o clockreturn seq
         return $this->noticeGroupChangeSeq($createGroupSeq);
     }
 
     /**
-     * group chat加人.
+     * group chat加person.
      */
     public function groupAddUsers(array $groupAddUserIds, array $inputDepartmentIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $delightfulGroupDTO): array
     {
@@ -112,12 +112,12 @@ class DelightfulChatGroupAppService extends AbstractAppService
         if ($groupEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NOT_FOUND);
         }
-        // currentgroup chat人数
+        // currentgroup chatperson数
         $groupUserCount = $this->delightfulGroupDomainService->getGroupUserCount($groupId);
-        // most大人数限制减去current人数
+        // most大person数限制减去currentperson数
         $chatGroupUserNumLimit = GroupLimitEnum::NormalGroup->value;
         $chatGroupUserNumLimit -= $groupUserCount;
-        // get本timeneed添加的群member (综合 finger定的user_id + departmentiddown的user)
+        // get本timeneedadd的群member (综合 finger定的user_id + departmentiddown的user)
         $wantJoinUsers = $this->getGroupAddUsers($groupAddUserIds, $dataIsolation, $inputDepartmentIds, $chatGroupUserNumLimit);
         $wantJoinUserIds = array_column($wantJoinUsers, 'user_id');
         // 判断哪些user已经ingroup chatmiddle
@@ -147,7 +147,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
             Db::rollBack();
             ExceptionBuilder::throw(ChatErrorCode::GROUP_UPDATE_ERROR, throwable: $exception);
         }
-        // 为操作者及o clockreturn seq
+        // 为操author及o clockreturn seq
         return $this->noticeGroupChangeSeq($addUsersSeq);
     }
 
@@ -191,10 +191,10 @@ class DelightfulChatGroupAppService extends AbstractAppService
         if ($groupOwner === $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_TRANSFER_OWNER_BEFORE_LEAVE);
         }
-        // 幂etc.checkuserwhether已离开group
+        // 幂etc.checkuserwhether已leavegroup
         $isInGroup = $this->delightfulGroupDomainService->isUserInGroup($groupId, $dataIsolation->getCurrentUserId());
         if (! $isInGroup) {
-            // returnuseruptime离开group chat的 seq
+            // returnuseruptimeleavegroup chat的 seq
             $seqEntity = $this->delightfulGroupDomainService->getGroupControlSeq($groupEntity, $dataIsolation, ControlMessageType::GroupUsersRemove);
             if (isset($seqEntity)) {
                 return $this->noticeGroupChangeSeq($seqEntity);
@@ -355,12 +355,12 @@ class DelightfulChatGroupAppService extends AbstractAppService
             Db::rollBack();
             ExceptionBuilder::throw(ChatErrorCode::GROUP_UPDATE_ERROR, throwable: $exception);
         }
-        // 为操作者及o clockreturn seq
+        // 为操author及o clockreturn seq
         return $this->noticeGroupChangeSeq($userSeq);
     }
 
     /**
-     * group chat减人.
+     * group chat减person.
      */
     protected function groupRemoveUsers(
         DataIsolation $dataIsolation,
@@ -378,11 +378,11 @@ class DelightfulChatGroupAppService extends AbstractAppService
         }
         Db::beginTransaction();
         try {
-            // 往group chatmiddle减少user
+            // 往group chatmiddledecreaseuser
             $this->delightfulGroupDomainService->removeUsersFromGroup($groupEntity, $removeUserIds);
             // 移except这些user的conversation窗口
             $this->delightfulConversationDomainService->batchDeleteGroupConversationByUserIds($groupEntity, $removeUserIds);
-            // generate群member减少的seq
+            // generate群memberdecrease的seq
             $seqContent = ['user_ids' => $removeUserIds, 'group_id' => $groupEntity->getId(), 'operate_user_id' => $dataIsolation->getCurrentUserId()];
             $groupUserRemoveSeq = $this->createAndDispatchOperateGroupUsersSeq($seqContent, $groupEntity, $dataIsolation, $controlMessageType);
             Db::commit();
@@ -390,12 +390,12 @@ class DelightfulChatGroupAppService extends AbstractAppService
             Db::rollBack();
             ExceptionBuilder::throw(ChatErrorCode::GROUP_UPDATE_ERROR, throwable: $exception);
         }
-        // 为操作者及o clockreturn seq
+        // 为操author及o clockreturn seq
         return $groupUserRemoveSeq;
     }
 
     /**
-     * get本timeneed添加的群member.
+     * get本timeneedadd的群member.
      * @return DelightfulUserEntity[]
      */
     private function getGroupAddUsers(array $needAddGroupUserIds, DataIsolation $dataIsolation, array $inputDepartmentIds, int $chatGroupUserNumLimit): array
@@ -405,7 +405,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         } else {
             $departmentIds = [];
         }
-        // 目front只support添加同organization的user
+        // 目front只supportadd同organization的user
         $groupAddUsers = $this->delightfulUserDomainService->getUserByIds($needAddGroupUserIds, $dataIsolation, ['user_id', 'nickname']);
         // 按departmentgetuser
         if (! empty($departmentIds)) {
@@ -456,9 +456,9 @@ class DelightfulChatGroupAppService extends AbstractAppService
         DataIsolation $dataIsolation,
         ControlMessageType $controlMessageType
     ): DelightfulSeqEntity {
-        // 往group chatmiddle添加user
+        // 往group chatmiddleadduser
         $this->delightfulGroupDomainService->addUsersToGroup($groupEntity, $userIds);
-        // 为新增的membercreateconversation窗口
+        // 为new的membercreateconversation窗口
         $this->delightfulConversationDomainService->batchCreateGroupConversationByUserIds($groupEntity, $userIds);
         return $this->createAndDispatchOperateGroupUsersSeq($structure, $groupEntity, $dataIsolation, $controlMessageType);
     }
@@ -472,7 +472,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         DataIsolation $dataIsolation,
         ControlMessageType $controlMessageType
     ): DelightfulSeqEntity {
-        // 为current操作者,generate群member变moreSeq,并经由 mq minutehair给群member
+        // 为current操author,generate群member变moreSeq,并经由 mq minutehair给群member
         $groupUserChangeSeq = $this->delightfulGroupDomainService->createGroupUserChangeSeq($dataIsolation, $groupEntity, $seqContent, $controlMessageType);
         $seqCreateEvent = $this->delightfulControlDomainService->getControlSeqCreatedEvent($groupUserChangeSeq);
         $this->delightfulControlDomainService->dispatchSeq($seqCreateEvent);
@@ -485,7 +485,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         co(function () use ($seqEntity) {
             $this->delightfulControlDomainService->pushControlSequence($seqEntity);
         });
-        // return为current操作者generate的 seq
+        // return为current操authorgenerate的 seq
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 }

@@ -14,9 +14,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 修改表结构，添加新field
+        // modify表结构，add新field
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
-            // checkwhether已存infield，避免重复添加
+            // checkwhether已存infield，避免重复add
             if (! Schema::hasColumn('delightful_flow_knowledge_fragment', 'parent_fragment_id')) {
                 $table->unsignedBigInteger('parent_fragment_id')->nullable()->comment('父slicesegmentid')->index();
             }

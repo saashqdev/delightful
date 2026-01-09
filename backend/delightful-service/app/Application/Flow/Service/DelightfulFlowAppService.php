@@ -269,7 +269,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $query->setEnabled(true);
         $data = $this->delightfulFlowDomainService->queries($dataIsolation, $query, $page);
 
-        // 增加系统inside置tool
+        // increasesysteminside置tool
         foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
             foreach ($builtInToolSet->getTools() as $builtInTool) {
                 if ($builtInTool->isShow() && in_array($builtInTool->getCode(), $query->getCodes())) {
@@ -308,13 +308,13 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $toolSetQuery->setOrder(['updated_at' => 'desc']);
         $toolSetData = $this->delightfulFlowToolSetDomainService->queries($dataIsolation, $toolSetQuery, $page);
 
-        // 增加系统inside置tool集
+        // increasesysteminside置tool集
         $builtInTools = [];
         if ($withBuiltInTools) {
             foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
                 $toolSetData['list'][] = $builtInToolSet->generateToolSet();
                 foreach ($builtInToolSet->getTools() as $builtInTool) {
-                    // 私havetool，needhave高levelgraph像convertURIpermission才能显示
+                    // 私havetool，needhave高levelgraph像convertURIpermission才能display
                     if ($builtInTool->getCode() === 'ai_image_image_convert_high'
                         && ! PermissionChecker::mobileHasPermission($authorization->getMobile(), SuperPermissionEnum::FLOW_ADMIN)
                     ) {
@@ -344,7 +344,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $toolQuery->setOrder(['updated_at' => 'desc']);
         $toolResult = $this->delightfulFlowDomainService->queries($dataIsolation, $toolQuery, $page);
 
-        // 增加系统inside置tool
+        // increasesysteminside置tool
         /** @var BuiltInToolInterface $builtInTool */
         foreach ($builtInTools as $builtInTool) {
             $toolResult['list'][] = $builtInTool->generateToolFlow($dataIsolation->getCurrentOrganizationCode());
@@ -440,7 +440,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * 修改enablestatus.
+     * modifyenablestatus.
      */
     #[Transactional]
     public function changeEnable(Authenticatable $authorization, string $flowId, ?bool $enable = null): void

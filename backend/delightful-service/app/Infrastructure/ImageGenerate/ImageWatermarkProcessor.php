@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * image水印handle器
- * 统一handleeachtypeformatimage的水印添加.
+ * 统一handleeachtypeformatimage的水印add.
  */
 class ImageWatermarkProcessor
 {
@@ -38,7 +38,7 @@ class ImageWatermarkProcessor
     protected ImageEnhancementProcessorInterface $imageEnhancementProcessor;
 
     /**
-     * 为base64formatimage添加水印.
+     * 为base64formatimageadd水印.
      */
     public function addWatermarkToBase64(string $base64Image, ImageGenerateRequest $imageGenerateRequest): string
     {
@@ -57,7 +57,7 @@ class ImageWatermarkProcessor
             $imageData = $this->addWaterMarkHandler($imageData, $imageGenerateRequest, $targetFormat);
         }
 
-        // 立即添加XMP隐type水印
+        // 立即addXMP隐type水印
         $implicitWatermark = $imageGenerateRequest->getImplicitWatermark();
         $xmpWatermarkedData = $this->imageEnhancementProcessor->enhanceImageData(
             $imageData,
@@ -70,7 +70,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 为URLformatimage添加水印
+     * 为URLformatimageadd水印
      * optional择returnformat：URL or base64.
      */
     public function addWatermarkToUrl(string $imageUrl, ImageGenerateRequest $imageGenerateRequest): string
@@ -81,7 +81,7 @@ class ImageWatermarkProcessor
             $imageData = $this->addWaterMarkHandler($imageData, $imageGenerateRequest);
         }
 
-        // 立即添加XMP隐type水印
+        // 立即addXMP隐type水印
         $implicitWatermark = $imageGenerateRequest->getImplicitWatermark();
         $xmpWatermarkedData = $this->imageEnhancementProcessor->enhanceImageData(
             $imageData,
@@ -117,7 +117,7 @@ class ImageWatermarkProcessor
             throw new Exception('无法parseURLimagedata: ');
         }
         $watermarkConfig = $imageGenerateRequest->getWatermarkConfig();
-        // 添加视觉水印
+        // add视觉水印
         $watermarkedImage = $this->addWatermarkToImageResource($image, $watermarkConfig);
 
         // use检测to的formatconduct无损output
@@ -133,7 +133,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 为imageresource添加水印.
+     * 为imageresourceadd水印.
      * @param mixed $image
      */
     private function addWatermarkToImageResource($image, WatermarkConfig $config)
@@ -141,18 +141,18 @@ class ImageWatermarkProcessor
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // create新imageresourceby避免修改原graph
+        // create新imageresourceby避免modify原graph
         $watermarkedImage = imagecreatetruecolor($width, $height);
         imagecopy($watermarkedImage, $image, 0, 0, 0, 0, $width, $height);
 
-        // 添加文字水印
+        // add文字水印
         $this->addTextWatermark($watermarkedImage, $config, $width, $height);
 
         return $watermarkedImage;
     }
 
     /**
-     * 添加文字水印.
+     * add文字水印.
      * @param mixed $image
      */
     private function addTextWatermark($image, WatermarkConfig $config, int $width, int $height): void
@@ -226,7 +226,7 @@ class ImageWatermarkProcessor
             // useTTF字body计算actual文本side界框
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
             $bbox = imagettfbbox($ttfFontSize, 0, $fontFile, $text);
-            $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // 增加20%securityside距
+            $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // increase20%securityside距
             $textHeight = (int) abs($bbox[1] - $bbox[7]); // use绝对valueensureheight为正
 
             // TTF字body的down降部minute（descender）
@@ -237,7 +237,7 @@ class ImageWatermarkProcessor
             // 降leveluse估算method
             // 对atmiddle文字符，each字符width约equal字bodysize
             $chineseCharCount = mb_strlen($text, 'UTF-8');
-            $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // 增加securityside距
+            $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // increasesecurityside距
             $textHeight = $fontSize;
             $descender = (int) ($fontSize * 0.2); // inside置字body估算down降部minute
             $ascender = (int) ($fontSize * 0.8); // inside置字body估算up升部minute
@@ -386,7 +386,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * frombase64front缀提取graph像format.
+     * frombase64front缀extractgraph像format.
      */
     private function extractBase64Format(string $base64Image): string
     {

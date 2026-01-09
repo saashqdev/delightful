@@ -122,18 +122,18 @@ MARKDOWN;
         $usageInstructions = <<<'MARKDOWN'
 useinstruction：
 • must提供 agent_id 和 message parameter
-• conversation_id useat保持conversation连续property，sameID的messagewill共享updown文
+• conversation_id useat保持conversation连续property，sameID的messagewillsharedupdown文
 
 MARKDOWN;
 
         $description .= $usageInstructions;
 
-        // 添加finger令parameterinstruction
+        // addfinger令parameterinstruction
         if (! empty($allInstructions)) {
             $instructionHelp = <<<'MARKDOWN'
 finger令parameter instruction（optional）：
 • format：[{"name": "finger令name", "value": "finger令value"}, ...]
-• 单选type：fromoptionalvaluemiddle选择一，for example "yes", "no"
+• single-selecttype：fromoptionalvaluemiddlechoose一，for example "yes", "no"
 • 开关type：只能是 "on" or "off"
 • ifnot提供finger令parameter，将usedefaultvalue
 
@@ -178,7 +178,7 @@ MARKDOWN;
                         ],
                         'conversation_id' => [
                             'type' => 'string',
-                            'description' => 'sessionID，useat记忆feature，samesessionID的message将具have共享的updown文',
+                            'description' => 'sessionID，useat记忆feature，samesessionID的message将具haveshared的updown文',
                         ],
                         'instruction' => $instructionSchema,
                     ],
@@ -247,7 +247,7 @@ MARKDOWN;
                     // Single selection
                     $values = array_column($item['values'] ?? [], 'value');
                     if (! empty($values)) {
-                        $descriptions[] = "{$baseDescription}[单选: " . implode(' | ', $values) . ']';
+                        $descriptions[] = "{$baseDescription}[single-select: " . implode(' | ', $values) . ']';
                     }
                 } elseif ($item['type'] === 2) {
                     // Switch
@@ -267,7 +267,7 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => 'finger令parameterarray，useat控制AI助理的line为。eachobjectcontain name（finger令name）和 value（finger令value）field。单选typefinger令needfromoptionalvaluemiddle选择一，开关typefinger令只能是 "on" or "off"。',
+            'description' => 'finger令parameterarray，useat控制AI助理的line为。eachobjectcontain name（finger令name）和 value（finger令value）field。single-selecttypefinger令needfromoptionalvaluemiddlechoose一，开关typefinger令只能是 "on" or "off"。',
             'items' => [
                 'type' => 'object',
                 'properties' => [
@@ -277,7 +277,7 @@ MARKDOWN;
                     ],
                     'value' => [
                         'type' => 'string',
-                        'description' => 'finger令value，单选typefromoptionalvaluemiddle选择，开关type只能是 "on" or "off"',
+                        'description' => 'finger令value，single-selecttypefromoptionalvaluemiddlechoose，开关type只能是 "on" or "off"',
                     ],
                 ],
                 'required' => ['name', 'value'],

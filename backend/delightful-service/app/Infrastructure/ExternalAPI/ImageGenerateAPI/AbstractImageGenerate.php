@@ -38,7 +38,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * 统一的imagegenerate入口method
-     * 先call子categoryimplement的originalimagegenerate，again统一添加水印.
+     * 先call子categoryimplement的originalimagegenerate，again统一add水印.
      */
     final public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {

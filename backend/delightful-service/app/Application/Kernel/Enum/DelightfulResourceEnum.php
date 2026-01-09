@@ -16,7 +16,7 @@ use function Hyperf\Translation\__;
  * 2. passmethod提供 label / parent  etcyuaninfo，方便back续generatepermissiontree、做 i18n etc。
  * 3. 仅definitionresource本身，not涉及操作type（如 query / edit）。
  *
- * 注意：if你修改了这file，请execute单yuantest PermissionApiTest.testGetPermissionTree.
+ * 注意：if你modify了这file，请execute单yuantest PermissionApiTest.testGetPermissionTree.
  */
 enum DelightfulResourceEnum: string
 {
@@ -29,7 +29,7 @@ enum DelightfulResourceEnum: string
     case ADMIN_AI = 'admin.ai'; # 平台管理back台-AI管理
     case ADMIN_SAFE = 'admin.safe'; # security管控
     case PLATFORM_AI = 'platform.ai'; # 平台管理back台-AI管理
-    case PLATFORM_SETTING = 'platform.setting'; # 系统set
+    case PLATFORM_SETTING = 'platform.setting'; # systemset
     case PLATFORM_ORGANIZATION = 'platform.organization'; # organization管理
     case ADMINPLUS_AI = 'admin_plus.ai'; # organization管理back台plus-AI管理
 
@@ -38,9 +38,9 @@ enum DelightfulResourceEnum: string
     case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AI管理-智能绘graph管理
     case ADMIN_AI_MODE = 'platform.ai.mode_management'; # AI管理-模type管理管理
     case ADMIN_AI_ABILITY = 'platform.ai.ability'; # AI管理-能力管理
-    case SAFE_SUB_ADMIN = 'admin.safe.sub_admin';  # security管控-子管理员
-    case PLATFORM_SETTING_PLATFORM_INFO = 'platform.setting.platform_info'; # 平台管理 - 系统set - 平台info
-    case PLATFORM_SETTING_MAINTENANCE = 'platform.setting.maintenance'; # 平台管理 - 系统info - 维护管理
+    case SAFE_SUB_ADMIN = 'admin.safe.sub_admin';  # security管控-子administrator
+    case PLATFORM_SETTING_PLATFORM_INFO = 'platform.setting.platform_info'; # 平台管理 - systemset - 平台info
+    case PLATFORM_SETTING_MAINTENANCE = 'platform.setting.maintenance'; # 平台管理 - systeminfo - 维护管理
     case PLATFORM_ORGANIZATION_LIST = 'platform.organization.list'; # 平台管理 - organization管理 - organizationlist
     case ADMINPLUS_AI_MODEL = 'admin_plus.ai.model_management'; # organization管理back台plus-AI管理-model管理
 
@@ -60,7 +60,7 @@ enum DelightfulResourceEnum: string
             self::ADMIN_AI_IMAGE => 'permission.resource.ai_image',
             self::ADMIN_AI_MODE => 'permission.resource.ai_mode',
             self::ADMIN_AI_ABILITY => 'permission.resource.ai_ability',
-            self::SAFE_SUB_ADMIN => 'permission.resource.safe_sub_admin', # 子管理员
+            self::SAFE_SUB_ADMIN => 'permission.resource.safe_sub_admin', # 子administrator
             self::PLATFORM => 'permission.resource.platform',
             self::PLATFORM_AI => 'permission.resource.platform_ai',
             self::PLATFORM_SETTING => 'permission.resource.platform_setting',
@@ -73,7 +73,7 @@ enum DelightfulResourceEnum: string
 
     /**
      * uplevelresource.
-     * 注意：新增操作resourceback要补充这configuration.
+     * 注意：new操作resourceback要补充这configuration.
      */
     public function parent(): ?self
     {

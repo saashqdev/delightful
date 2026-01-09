@@ -95,7 +95,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             return [];
         }
 
-        // 提取service商ID
+        // extractservice商ID
         // $configEntities 现in是by config_id 为 key 的array
         $providerIds = [];
         foreach ($configEntities as $configId => $config) {
@@ -323,7 +323,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         }
 
         try {
-            // 5. 查找本organizationdownsame provider_code 和 category 的configuration
+            // 5. find本organizationdownsame provider_code 和 category 的configuration
             $existingConfig = $this->serviceProviderConfigRepository->findFirstByServiceProviderId($dataIsolation, $providerEntity->getId());
             if ($existingConfig) {
                 // 6. 存inthenupdate
@@ -354,7 +354,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotFound);
         }
 
-        // support修改官方service商
+        // supportmodify官方service商
         /*if ($provider->getProviderType() === ProviderType::Official) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::SystemError);
         }*/

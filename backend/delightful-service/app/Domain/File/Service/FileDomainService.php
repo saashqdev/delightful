@@ -105,7 +105,7 @@ readonly class FileDomainService
     }
 
     /**
-     * 批quantitygetfilelink（自动frompath提取organizationencoding并minutegroupprocess）.
+     * 批quantitygetfilelink（自动frompathextractorganizationencoding并minutegroupprocess）.
      * @param string[] $filePaths containorganizationencoding的filepatharray，format：orgCode/path/file.ext
      * @param null|StorageBucketType $bucketType storage桶type，default为Public
      * @return array<string,FileLink> filepathtoFileLink的mapping
@@ -158,7 +158,7 @@ readonly class FileDomainService
     }
 
     /**
-     * 开启 sts 模type.
+     * start sts 模type.
      * gettemporary凭证给front端use.
      * @todo securityissue，dir nothave校验，nothaveorganization隔离
      */

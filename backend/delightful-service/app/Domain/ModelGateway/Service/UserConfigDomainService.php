@@ -21,11 +21,11 @@ class UserConfigDomainService extends AbstractDomainService
     public function getByAppCodeAndOrganizationCode(LLMDataIsolation $dataIsolation, ?string $appCode, ?string $organizationCode, string $userId): UserConfigEntity
     {
         if (is_null($appCode)) {
-            // 人版
+            // person版
             $appCode = 'personal';
         }
         if (is_null($organizationCode)) {
-            // 人版
+            // person版
             $organizationCode = 'personal';
         }
         $userConfig = $this->userConfigRepository->getByAppCodeAndOrganizationCode($dataIsolation, $appCode, $organizationCode, $userId);

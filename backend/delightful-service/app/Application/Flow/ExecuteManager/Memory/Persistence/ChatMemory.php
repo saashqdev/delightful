@@ -118,7 +118,7 @@ class ChatMemory implements MemoryPersistenceInterface
             if ($messageId) {
                 $messageIds[] = $messageId;
             }
-            // 特殊process, when开启去重，andreturn的item数greater thanequal limit，thennotagaincontinuequery
+            // 特殊process, whenstart去重，andreturn的item数greater thanequal limit，thennotagaincontinuequery
             if (count($messageIds) >= $memoryQuery->getLimit()) {
                 break;
             }
@@ -140,7 +140,7 @@ class ChatMemory implements MemoryPersistenceInterface
     }
 
     /**
-     * 添加挂载记忆，即in Chat o clockcall了 historymessagestoragesectionpoint.
+     * add挂载记忆，即in Chat o clockcall了 historymessagestoragesectionpoint.
      * @return array<LLMMemoryMessage>
      */
     private function mountMessages(array $moundIds, array $messageLists): array

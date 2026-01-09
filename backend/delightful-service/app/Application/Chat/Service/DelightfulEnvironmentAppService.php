@@ -28,13 +28,13 @@ class DelightfulEnvironmentAppService extends AbstractAppService
         return $this->delightfulOrganizationEnvDomainService->getEnvironmentEntitiesByIds($ids);
     }
 
-    // create环境
+    // createenvironment
     public function createDelightfulEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity
     {
         return $this->delightfulOrganizationEnvDomainService->createEnvironment($environmentDTO);
     }
 
-    // update环境
+    // updateenvironment
     public function updateDelightfulEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity
     {
         return $this->delightfulOrganizationEnvDomainService->updateEnvironment($environmentDTO);

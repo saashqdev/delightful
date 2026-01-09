@@ -16,7 +16,7 @@ use App\Domain\Contact\Service\DelightfulUserDomainService;
 /**
  * Delightfuluserinfoapplicationservice.
  *
- * 聚合user的基本info、accountinfo和departmentinfo，提供完整的userinfo。
+ * aggregateuser的基本info、accountinfo和departmentinfo，提供完整的userinfo。
  */
 class DelightfulUserInfoAppService extends AbstractAppService
 {
@@ -52,7 +52,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
         // getdepartmentuserassociateinfo
         $departmentUserEntities = $this->departmentUserDomainService->getDepartmentUsersByUserIds([$userId], $dataIsolation);
 
-        // 提取工number和职位
+        // extract工number和职位
         $workNumber = '';
         $position = '';
         if (! empty($departmentUserEntities)) {

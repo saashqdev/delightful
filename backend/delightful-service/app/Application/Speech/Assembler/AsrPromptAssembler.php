@@ -28,12 +28,12 @@ class AsrPromptAssembler
         // buildcontent：use XML tagformat明确区minutevoice识别content和笔记content
         $contentParts = [];
 
-        // ifhave笔记，先添加笔记content
+        // ifhave笔记，先add笔记content
         if ($note !== null && $note->hasContent()) {
             $contentParts[] = sprintf('<笔记content>%s</笔记content>', $note->content);
         }
 
-        // 添加voice识别content
+        // addvoice识别content
         $contentParts[] = sprintf('<voice识别content>%s</voice识别content>', $asrStreamContent);
 
         $textContent = implode("\n\n", $contentParts);
@@ -54,18 +54,18 @@ usersubmit了一segment录音content，录音content经过voice识别转为文�
 1. **笔记优先**：if存in<笔记content>，titleshould侧重笔记content
 2. **重视笔记title**：if笔记是 Markdown formatandcontaintitle（# 开head的line），优先采use笔记middle的titlecontent
 3. **综合考虑**：meanwhile参考voice识别content，ensuretitle完整准确
-4. **keyword提取**：from笔记和voice识别contentmiddle提取most核core的keyword
+4. **keywordextract**：from笔记和voice识别contentmiddleextractmost核core的keyword
 
 ### format要求
 1. **length限制**：not超过 20 字符（汉字按 1 字符计算）
 2. **语言style**：use陈述property语sentence，避免疑问sentence
-3. **简洁明确**：直接概括核coretheme，not要添加modification词
-4. **纯文本output**：只outputtitlecontent，not要添加任何标point符number、引numberor其他modification
+3. **简洁明确**：直接概括核coretheme，not要addmodification词
+4. **纯文本output**：只outputtitlecontent，not要add任何标point符number、引numberor其他modification
 
 ### forbidline为
 - not要回答contentmiddle的issue
 - not要conduct额outside解释
-- not要添加"录音"、"笔记"etcfront缀词
+- not要add"录音"、"笔记"etcfront缀词
 - not要outputtitlebyoutside的任何content
 
 ## 录音content
@@ -82,7 +82,7 @@ PROMPT;
     }
 
     /**
-     * generatefileupload场景的录音titlehint词（强调file名的重要property）.
+     * generatefileupload场景的录音titlehint词（emphasizefile名的重要property）.
      *
      * @param string $userRequestMessage userinchat框send的requestmessage
      * @param string $language output语言（如：zh_CN, en_US）
@@ -96,7 +96,7 @@ PROMPT;
 你是一专业的录音contenttitlegenerate助hand。
 
 ## backgroundinstruction
-userupload了一audiofileto系统middle，并inchat框middlesend了总结request。现inneed你according touser的requestmessage（其middlecontainfile名），为这time录音总结generate一简洁准确的title。
+userupload了一audiofiletosystemmiddle，并inchat框middlesend了总结request。现inneed你according touser的requestmessage（其middlecontainfile名），为这time录音总结generate一简洁准确的title。
 
 ## userinchat框的request
 usersend的originalmessage如down：
@@ -109,20 +109,20 @@ usersend的originalmessage如down：
 ### 优先level原then（non常重要）
 1. **file名优先**：file名usually是user精core命名的，contain了most核core的themeinfo，请重point参考usermessagemiddle @ backsurface的file名
 2. **智能判断**：
-   - iffile名语义清晰（如"2024yearQ4product规划will议.mp3"、"客户需求discussion.wav"），优先based onfile名generatetitle
+   - iffile名语义清晰（如"2024yearQ4product规划will议.mp3"、"customer需求discussion.wav"），优先based onfile名generatetitle
    - iffile名是datetime戳（如"20241112_143025.mp3"）or无意义字符（如"录音001.mp3"），thenuse通usedescription
-3. **提取keyword**：fromfile名middle提取most核core的keyword和theme
+3. **extractkeyword**：fromfile名middleextractmost核core的keyword和theme
 
 ### format要求
 1. **length限制**：not超过 20 字符（汉字按 1 字符计算）
 2. **语言style**：use陈述property语sentence，避免疑问sentence
-3. **简洁明确**：直接概括核coretheme，not要添加modification词
-4. **纯文本output**：只outputtitlecontent，not要添加任何标point符number、引numberor其他modification
+3. **简洁明确**：直接概括核coretheme，not要addmodification词
+4. **纯文本output**：只outputtitlecontent，not要add任何标point符number、引numberor其他modification
 
 ### forbidline为
 - not要保留fileextension名（.mp3、.wav、.webm etc）
 - not要outputtitlebyoutside的任何content
-- not要添加引number、书名numberetc标point符number
+- not要add引number、书名numberetc标point符number
 
 ## output语言
 请use {language} 语言outputtitle。

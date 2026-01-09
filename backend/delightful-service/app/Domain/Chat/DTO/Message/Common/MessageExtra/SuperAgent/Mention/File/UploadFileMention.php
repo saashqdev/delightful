@@ -18,7 +18,7 @@ final class UploadFileMention extends AbstractMention
         if (! $data instanceof FileData) {
             return '';
         }
-        // @todo upload的file目front直接放in工作区的rootdirectory。backsurface可能willadjustpath，too clockagain改。
+        // @todo upload的file目front直接放inwork区的rootdirectory。backsurface可能willadjustpath，too clockagain改。
         $filePath = $data->getFileName() ?? '';
         return sprintf('@<file_path>%s</file_path>', $filePath);
     }

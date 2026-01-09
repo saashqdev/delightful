@@ -26,7 +26,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property array $rel_info associate的information
  * @property string $creator create者
  * @property DateTime $created_at creation time
- * @property string $modifier 修改者
+ * @property string $modifier modify者
  * @property DateTime $updated_at update time
  */
 class MCPServerToolModel extends AbstractModel

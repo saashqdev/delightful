@@ -9,8 +9,8 @@ use function Hyperf\Support\env;
 $organizationWhitelists = parse_json_config(env('ORGANIZATION_WHITELISTS'));
 $superWhitelists = parse_json_config(env('SUPER_WHITELISTS', '[]'));
 return [
-    // 超level管理员
+    // 超leveladministrator
     'super_whitelists' => $superWhitelists,
-    // 由at暂o clocknothavepermissionsystem，env configurationorganization的管理员
+    // 由at暂o clocknothavepermissionsystem，env configurationorganization的administrator
     'organization_whitelists' => $organizationWhitelists,
 ];

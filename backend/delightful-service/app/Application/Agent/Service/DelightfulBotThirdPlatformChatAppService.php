@@ -141,7 +141,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             'code' => $exception->getCode(),
                             'trace' => $exception->getTraceAsString(),
                         ]);
-                        $message = new TextMessage(['content' => 'not好意思，meanwhile问我issue的人too多啦，havepoint忙not过来，你can一will儿again来问我吗？感谢谅解！']);
+                        $message = new TextMessage(['content' => 'not好意思，meanwhile问我issue的persontoo多啦，havepoint忙not过来，你can一will儿again来问我吗？感谢谅解！']);
                         $thirdPlatformChat->sendMessage($thirdPlatformChatMessage, $message);
                     }
                 });

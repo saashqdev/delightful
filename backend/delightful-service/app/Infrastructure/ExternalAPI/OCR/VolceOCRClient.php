@@ -28,7 +28,7 @@ class VolceOCRClient implements OCRClientInterface
 
     public function ocr(?string $url = null): string
     {
-        // configuration特定的 OCR 客户端
+        // configuration特定的 OCR customer端
         $client = Visual::getInstance();
         $client->setAccessKey(config('volce_cv.ocr_pdf.ak'));
         $client->setSecretKey(config('volce_cv.ocr_pdf.sk'));

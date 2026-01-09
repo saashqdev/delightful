@@ -69,7 +69,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected ?string $versionNumber = '';
 
     /**
-     * publishrange. 0:人use,1:企业inside部,2:application市场.
+     * publishrange. 0:personuse,1:企业inside部,2:application市场.
      */
     protected ?int $releaseScope = 0;
 
@@ -79,7 +79,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected ?int $approvalStatus;
 
     /**
-     * 审核status.
+     * reviewstatus.
      */
     protected ?int $reviewStatus;
 
@@ -94,7 +94,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected ?int $appMarketStatus;
 
     /**
-     * publish人.
+     * publishperson.
      */
     protected string $createdUid = '';
 
@@ -126,7 +126,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected bool $startPage = false;
 
     /**
-     * 可见propertyconfiguration.
+     * visiblepropertyconfiguration.
      */
     protected ?VisibilityConfig $visibilityConfig = null;
 

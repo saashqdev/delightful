@@ -33,7 +33,7 @@ class Template extends AbstractTemplate
     ];
 
     protected array $idContents = [
-        VolcengineTemplateIdEnum::ST_79E262F3->value => '您的verify码是：${verification_code}，valid期 ${timeout} minute钟。请inpagemiddleinputverify码completeverify。如non本人操作，请ignore。',
+        VolcengineTemplateIdEnum::ST_79E262F3->value => '您的verify码是：${verification_code}，valid期 ${timeout} minute钟。请inpagemiddleinputverify码completeverify。如non本person操作，请ignore。',
     ];
 
     /**

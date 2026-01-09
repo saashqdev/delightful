@@ -194,7 +194,7 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
             "type": "string",
             "key": "type",
             "title": "重复period",
-            "description": "重复period，no_repeat not重复，daily_repeat eachdayparameter，weekly_repeat eachweek重复，monthly_repeat eachmonth重复，annually_repeat eachyear重复，weekday_repeat each工作day重复，custom_repeat customize重复",
+            "description": "重复period，no_repeat not重复，daily_repeat eachdayparameter，weekly_repeat eachweek重复，monthly_repeat eachmonth重复，annually_repeat eachyear重复，weekday_repeat eachworkday重复，custom_repeat customize重复",
             "required": null,
             "value": null,
             "encryption": false,

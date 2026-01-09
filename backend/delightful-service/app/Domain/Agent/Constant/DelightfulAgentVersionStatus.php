@@ -23,6 +23,6 @@ enum DelightfulAgentVersionStatus: int
 
     // AI Agentpublish (平台)
     case APP_MARKET_UNLISTED = 9; // 未up架
-    case APP_MARKET_REVIEW = 10; // 审核middle
+    case APP_MARKET_REVIEW = 10; // reviewmiddle
     case APP_MARKET_LISTED = 11; // 已up架
 }

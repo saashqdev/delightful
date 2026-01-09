@@ -28,7 +28,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * queryorganization管理员list.
+     * queryorganizationadministratorlist.
      * @return array{total: int, list: array}
      */
     public function queries(DataIsolation $dataIsolation, Page $page, ?array $filters = null): array
@@ -51,7 +51,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * getorganization管理员detail.
+     * getorganizationadministratordetail.
      */
     public function show(DataIsolation $dataIsolation, int $id): array
     {
@@ -60,7 +60,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * according touserIDgetorganization管理员.
+     * according touserIDgetorganizationadministrator.
      */
     public function getByUserId(DataIsolation $dataIsolation, string $userId): ?OrganizationAdminEntity
     {
@@ -68,7 +68,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 授予userorganization管理员permission.
+     * 授予userorganizationadministratorpermission.
      */
     public function grant(DataIsolation $dataIsolation, string $userId, string $grantorUserId, ?string $remarks = null): OrganizationAdminEntity
     {
@@ -76,7 +76,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * deleteorganization管理员.
+     * deleteorganizationadministrator.
      */
     public function destroy(DataIsolation $dataIsolation, int $id): void
     {
@@ -85,7 +85,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 转让organizationcreate人身share.
+     * 转让organizationcreateperson身share.
      */
     public function transferOwnership(DataIsolation $dataIsolation, string $newOwnerUserId, string $currentOwnerUserId): void
     {
@@ -93,19 +93,19 @@ class OrganizationAdminAppService extends AbstractKernelAppService
             $dataIsolation,
             $currentOwnerUserId,
             $newOwnerUserId,
-            $currentOwnerUserId // 操作者then是currentcreate者
+            $currentOwnerUserId // 操authorthen是currentcreate者
         );
     }
 
     /**
-     * 丰富organization管理员实body的userinfo.
+     * 丰富organizationadministrator实body的userinfo.
      */
     private function enrichOrganizationAdminWithUserInfo(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdmin): array
     {
         // getuser基本info
         $userInfo = $this->getUserInfo($organizationAdmin->getUserId());
 
-        // getauthorization人info
+        // getauthorizationpersoninfo
         $grantorInfo = [];
         if ($organizationAdmin->getGrantorUserId()) {
             $grantorInfo = $this->getUserInfo($organizationAdmin->getGrantorUserId());

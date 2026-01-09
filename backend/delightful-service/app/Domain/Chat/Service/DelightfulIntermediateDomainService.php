@@ -110,7 +110,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
 
             // 6. createsend者额outsideinfo
             $senderExtraDTO = new SenderExtraDTO();
-            // temporarymessage可能notneed环境ID，usedefaultvalue
+            // temporarymessage可能notneedenvironmentID，usedefaultvalue
             $senderExtraDTO->setDelightfulEnvId(null);
 
             // 7. 触hairusercall超level麦吉event

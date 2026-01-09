@@ -50,7 +50,7 @@ class DelightfulFlowApiKeyDomainService extends AbstractDomainService
 
     public function changeSecretKey(FlowDataIsolation $dataIsolation, string $code, ?string $operator = null): DelightfulFlowApiKeyEntity
     {
-        // 只能修改自己的
+        // 只能modify自己的
         $delightfulFlowApiKeyEntity = $this->delightfulFlowApiKeyRepository->getByCode($dataIsolation, $code, $operator);
         if (! $delightfulFlowApiKeyEntity) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $code]);

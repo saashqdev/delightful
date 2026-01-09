@@ -68,7 +68,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
                 $messageType->getName(),
                 $messageDTO->getContent()->toArray()
             );
-            // needmeanwhile修改type和content,才能把messagecontent变more为openconversation窗口
+            // needmeanwhilemodifytype和content,才能把messagecontent变more为openconversation窗口
             $messageDTO->setMessageType($messageTypeInterface->getMessageTypeEnum());
             $messageDTO->setContent($messageTypeInterface);
             $messageDTO->setReceiveType($conversationEntity->getReceiveType());
@@ -142,7 +142,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
                 // asyncpushmessage给自己的其他设备
                 $this->pushControlSequence($seqEntity);
             });
-            // 将messagestreamreturn给current客户端! but是also是willasyncpush给user的所haveonline客户端.
+            // 将messagestreamreturn给currentcustomer端! but是also是willasyncpush给user的所haveonlinecustomer端.
             $result = SeqAssembler::getClientSeqStruct($seqEntity, $messageDTO)->toArray();
             Db::commit();
         } catch (Throwable $e) {
@@ -185,7 +185,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             // notify对方的所have
             $this->pushControlSequence($seqEntity);
         }
-        // 告知客户端requestsuccess
+        // 告知customer端requestsuccess
         return [];
     }
 
@@ -196,7 +196,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
      */
     public function agentOperateConversationStatus(ControlMessageType $controlMessageType, string $agentConversationId): bool
     {
-        // 查找对方的conversation窗口
+        // find对方的conversation窗口
         $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($agentConversationId);
         if ($receiveConversationEntity === null) {
             return true;
@@ -234,7 +234,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
      */
     public function agentOperateConversationStatusV2(ControlMessageType $controlMessageType, string $agentConversationId, ?string $topicId = null): bool
     {
-        // 查找对方的conversation窗口
+        // find对方的conversation窗口
         $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($agentConversationId);
         if ($receiveConversationEntity === null) {
             return true;

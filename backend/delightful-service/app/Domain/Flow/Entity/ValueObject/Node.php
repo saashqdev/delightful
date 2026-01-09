@@ -31,7 +31,7 @@ class Node extends AbstractValueObject
     protected string $nodeVersion = '';
 
     /**
-     * sectionpointyuandata，可use作给front端的定位，back端仅storage和展示，nothave任何逻辑.
+     * sectionpointyuandata，可use作给front端的locate，back端仅storage和show，nothave任何逻辑.
      */
     protected array $meta = [];
 
@@ -57,7 +57,7 @@ class Node extends AbstractValueObject
     protected ?NodeDebugResult $nodeDebugResult = null;
 
     /**
-     * sectionpointexecute的callbackfunction，ifhave该value，那么将直接execute该选择，而not是passNodeRunner来execute.
+     * sectionpointexecute的callbackfunction，ifhave该value，那么将直接execute该choose，而not是passNodeRunner来execute.
      * 这within暂o clock想tois为了单测方便.
      */
     private ?Closure $callback = null;

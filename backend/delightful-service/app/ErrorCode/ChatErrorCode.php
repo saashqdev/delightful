@@ -89,12 +89,12 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.seq.not_found')]
     case SEQ_NOT_FOUND = 3018;
 
-    // group chat人员选择exception
+    // group chatperson员chooseexception
         // Group member selection error
     #[ErrorMessage('chat.group.user_select_error')]
     case GROUP_USER_SELECT_ERROR = 3019;
 
-    // group chat人数超出限制
+    // group chatperson数超出限制
         // Group size exceeds limit
     #[ErrorMessage('chat.group.user_num_limit_error')]
     case GROUP_USER_NUM_LIMIT_ERROR = 3020;

@@ -16,7 +16,7 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 interface RateLimiterInterface
 {
     /**
-     * check客户端whetherallowexecuterequest.
+     * checkcustomer端whetherallowexecuterequest.
      *
      * @throws InvalidParamsException whenrequest超过speedrate限制o clock
      */

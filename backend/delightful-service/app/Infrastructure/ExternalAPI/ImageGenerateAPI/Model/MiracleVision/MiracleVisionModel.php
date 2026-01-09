@@ -68,7 +68,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             $this->validateApiResponse($styles);
 
             $styleId = $this->determineStyleId($styles);
-            $this->logger->info('美graph超清convert：已选择convert样type', ['style_id' => $styleId]);
+            $this->logger->info('美graph超清convert：已chooseconvert样type', ['style_id' => $styleId]);
 
             $result = $this->api->submitTask($imageGenerateRequest->getUrl(), $styleId);
             $this->validateApiResponse($result);

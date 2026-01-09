@@ -261,7 +261,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * 为Azure OpenAIedit模typeoriginaldata添加水印.
+     * 为Azure OpenAIedit模typeoriginaldataadd水印.
      */
     private function processAzureOpenAIEditRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -317,7 +317,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * 将Azure OpenAIgraph像editresult添加toOpenAIresponseobjectmiddle.
+     * 将Azure OpenAIgraph像editresultaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponseAzureOpenAIEdit(
         OpenAIFormatResponse $response,
@@ -341,7 +341,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToBase64($item['b64_json'], $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('Azure OpenAIgraph像edit添加imagedata：水印handlefail', [
+                $this->logger->error('Azure OpenAIgraph像editaddimagedata：水印handlefail', [
                     'error' => $e->getMessage(),
                 ]);
                 // 水印handlefailo clockuseoriginalbase64data

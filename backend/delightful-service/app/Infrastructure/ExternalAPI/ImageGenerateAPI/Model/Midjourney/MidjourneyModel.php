@@ -116,7 +116,7 @@ class MidjourneyModel extends AbstractImageGenerate
     {
         $rawResult = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // fromnativeresultmiddle提取imageURL
+        // fromnativeresultmiddleextractimageURL
         if (! empty($rawResult['data']['images']) && is_array($rawResult['data']['images'])) {
             return new ImageGenerateResponse(ImageGenerateType::URL, $rawResult['data']['images']);
         }
@@ -346,7 +346,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 为Midjourneyoriginaldata添加水印.
+     * 为Midjourneyoriginaldataadd水印.
      */
     private function processMidjourneyRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -397,14 +397,14 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 将Midjourneyimagedata添加toOpenAIresponseobjectmiddle（仅handleimagesfield）.
+     * 将MidjourneyimagedataaddtoOpenAIresponseobjectmiddle（仅handleimagesfield）.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
         array $midjourneyResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // fromMidjourneyresponsemiddle提取data.imagesfield
+        // fromMidjourneyresponsemiddleextractdata.imagesfield
         if (empty($midjourneyResult['data']['images']) || ! is_array($midjourneyResult['data']['images'])) {
             return;
         }
@@ -420,7 +420,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 try {
                     $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($imageUrl, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    $this->logger->error('Midjourney添加imagedata：水印handlefail', [
+                    $this->logger->error('Midjourneyaddimagedata：水印handlefail', [
                         'error' => $e->getMessage(),
                         'url' => $imageUrl,
                     ]);

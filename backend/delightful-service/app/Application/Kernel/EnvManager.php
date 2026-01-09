@@ -29,7 +29,7 @@ class EnvManager
             return;
         }
         if (empty($envId)) {
-            // 尝试getwhenfront环境的环境 ID.
+            // 尝试getwhenfrontenvironment的environment ID.
             $envId = $baseDataIsolation->getEnvId();
         }
 

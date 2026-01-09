@@ -46,7 +46,7 @@ class DefaultAgent extends AbstractAgent
         // 1. $userAccountEntity containtrue名,hand机numberetchavesecurity风险,shouldneedauthauthorization的information
         // 2. $userEntity userdetail,containuserid,user昵称,useravataretcinformation
         // 3. $seqEntity conversation窗口id,quote的message_id,messagetype(chatmessage/open了conversation窗口)
-        // 4. $messageEntity savehavemessagetype,message的specificcontent,hairitem人id,sendtime
+        // 4. $messageEntity savehavemessagetype,message的specificcontent,hairitempersonid,sendtime
         $this->getDelightfulFlowExecuteAppService()->imChat(
             $agentAccountEntity->getAiCode(),
             $triggerType,

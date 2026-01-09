@@ -9,7 +9,7 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Loop;
 
 enum LoopType: string
 {
-    // 计数
+    // count
     case Count = 'count';
 
     // 遍历array

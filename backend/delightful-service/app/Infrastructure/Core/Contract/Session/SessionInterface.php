@@ -17,7 +17,7 @@ interface SessionInterface
      * implementprocess：front端对non麦吉自建的账numberbody系conductloginrequest,thenagainrequest麦吉的login校验interface。
      *
      * @param LoginCheckInterface $loginCheck login校验data
-     * @param DelightfulEnvironmentEntity $delightfulEnvironmentEntity 要login的环境
+     * @param DelightfulEnvironmentEntity $delightfulEnvironmentEntity 要login的environment
      * @param null|string $delightfulOrganizationCode 要login的organization
      * @return LoginResponseInterface[] loginresponsedata
      */

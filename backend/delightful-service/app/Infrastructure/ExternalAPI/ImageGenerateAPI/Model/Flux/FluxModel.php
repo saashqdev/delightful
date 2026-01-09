@@ -137,7 +137,7 @@ class FluxModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // fromnativeresultmiddle提取imageURL
+        // fromnativeresultmiddleextractimageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             if (! empty($result['data']['imageUrl'])) {
@@ -359,7 +359,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * 为Fluxoriginaldata添加水印.
+     * 为Fluxoriginaldataadd水印.
      */
     private function processFluxRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -399,7 +399,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * 将Fluximagedata添加toOpenAIresponseobjectmiddle.
+     * 将FluximagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponseFlux(
         OpenAIFormatResponse $response,
@@ -409,7 +409,7 @@ class FluxModel extends AbstractImageGenerate
         // useRedislockensure并hairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
-            // fromFluxresponsemiddle提取data
+            // fromFluxresponsemiddleextractdata
             if (empty($fluxResult['data']['imageUrl'])) {
                 return;
             }
@@ -424,7 +424,7 @@ class FluxModel extends AbstractImageGenerate
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($imageUrl, $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('Flux添加imagedata：水印handlefail', [
+                $this->logger->error('Fluxaddimagedata：水印handlefail', [
                     'error' => $e->getMessage(),
                     'url' => $imageUrl,
                 ]);

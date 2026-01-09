@@ -68,7 +68,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
             // if是authenticationerror，我们can接受并skiptest
             if ($response['code'] === 2179 || $response['code'] === 3035) {
-                $this->markTestSkipped('interfaceauthenticationfail，可能need其他authenticationconfiguration - interface路由validate正常');
+                $this->markTestSkipped('interfaceauthenticationfail，可能need其他authenticationconfiguration - interface路由validatenormal');
                 return;
             }
         }
@@ -173,7 +173,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // nullparameterdownshould正常returncurrentuserinfo，not报错
+        // nullparameterdownshouldnormalreturncurrentuserinfo，not报错
         $this->assertIsArray($response, 'responseshould是arrayformat');
 
         // if是authenticationerror，skiptest
@@ -218,7 +218,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
         // nullvalueshouldbecorrecthandle，not导致error
-        $this->assertIsArray($response, '传入nullvalueo clock应正常returnresponse');
+        $this->assertIsArray($response, '传入nullvalueo clock应normalreturnresponse');
 
         // if是authenticationerror，skiptest
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
@@ -277,7 +277,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // validate长stringwhetherbecorrecthandle（可能betruncateor拒绝）
+        // validate长stringwhetherbecorrecthandle（可能betruncateorreject）
         $this->assertIsArray($response, '长string应becorrecthandle');
 
         // if是authenticationerror，skiptest
@@ -383,7 +383,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * testgetuserupdatepermission - 正常情况.
+     * testgetuserupdatepermission - normal情况.
      */
     public function testGetUserUpdatePermissionSuccess(): void
     {
@@ -407,7 +407,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
             // if是authenticationerror，我们can接受并skiptest
             if ($response['code'] === 2179 || $response['code'] === 3035) {
-                $this->markTestSkipped('interfaceauthenticationfail，可能need其他authenticationconfiguration - interface路由validate正常');
+                $this->markTestSkipped('interfaceauthenticationfail，可能need其他authenticationconfiguration - interface路由validatenormal');
                 return;
             }
         }
@@ -518,8 +518,8 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
                 }
             }
         } else {
-            // ifreturnnull，instructionmethodbecorrect拒绝了
-            $this->assertTrue(true, 'POSTmethodbecorrect拒绝');
+            // ifreturnnull，instructionmethodbecorrectreject了
+            $this->assertTrue(true, 'POSTmethodbecorrectreject');
         }
 
         // testerror的HTTPmethod（PUT）
@@ -535,8 +535,8 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
                 }
             }
         } else {
-            // ifreturnnull，instructionmethodbecorrect拒绝了
-            $this->assertTrue(true, 'PUTmethodbecorrect拒绝');
+            // ifreturnnull，instructionmethodbecorrectreject了
+            $this->assertTrue(true, 'PUTmethodbecorrectreject');
         }
     }
 

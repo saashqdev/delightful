@@ -400,7 +400,7 @@ class ImageGenerateFactory
                 return $fixedSize;
             }
 
-            // ifnothave固定configuration，按照正常换算（based on1024为基准）
+            // ifnothave固定configuration，按照normal换算（based on1024为基准）
             if ($width >= $height) {
                 // 横to
                 $actualWidth = 1024;

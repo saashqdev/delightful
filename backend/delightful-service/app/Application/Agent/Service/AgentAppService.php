@@ -120,20 +120,20 @@ class AgentAppService extends AbstractAppService
         foreach ($data['list'] as $agentVersion) {
             $visibilityConfig = $agentVersion->getVisibilityConfig();
 
-            // all部可见or无可见propertyconfiguration
+            // all部visibleor无visiblepropertyconfiguration
             if ($visibilityConfig === null || $visibilityConfig->getVisibilityType() === VisibilityType::All->value) {
                 $visibleAgents[] = $agentVersion->getAgentId();
                 continue;
             }
 
-            // whetherin人可见middle
+            // whetherinpersonvisiblemiddle
             foreach ($visibilityConfig->getUsers() as $visibleUser) {
                 if ($visibleUser->getId() === $agentDataIsolation->getCurrentUserId()) {
                     $visibleAgents[] = $agentVersion->getAgentId();
                 }
             }
 
-            // whetherindepartment可见middle
+            // whetherindepartmentvisiblemiddle
             foreach ($visibilityConfig->getDepartments() as $visibleDepartment) {
                 if (in_array($visibleDepartment->getId(), $userDepartmentIds)) {
                     $visibleAgents[] = $agentVersion->getAgentId();

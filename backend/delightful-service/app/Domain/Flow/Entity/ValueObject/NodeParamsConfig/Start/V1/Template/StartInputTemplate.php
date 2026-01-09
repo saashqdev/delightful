@@ -327,7 +327,7 @@ class StartInputTemplate
             "bot_key": {
                 "type": "string",
                 "key": "bot_key",
-                "title": "thethird-partychat机器人encoding",
+                "title": "thethird-partychat机器personencoding",
                 "description": "",
                 "items": null,
                 "properties": null,

@@ -29,7 +29,7 @@ class InstructionConfig extends AbstractEntity
     protected string $description = '';
 
     /**
-     * finger令property，1 普通finger令 2 系统finger令.
+     * finger令property，1 普通finger令 2 systemfinger令.
      */
     protected int $displayType = InstructionDisplayType::Normal->value;
 
@@ -39,7 +39,7 @@ class InstructionConfig extends AbstractEntity
     protected string $id = '';
 
     /**
-     * finger令插入position，1 messagecontentfront方，2 messagecontentmiddle光标position，3 messagecontentback方.
+     * finger令insertposition，1 messagecontentfront方，2 messagecontentmiddle光标position，3 messagecontentback方.
      */
     protected int $insertLocation = InstructionInsertLocation::Cursor->value;
 
@@ -319,7 +319,7 @@ class InstructionConfig extends AbstractEntity
      * according tofinger令groupitemtypeget对应的name和value.
      *
      * type为开关o clock，name 取is 开/关，value 取 $instruction->getOn / $instruction->getOff
-     * type为单选o clock, name 取is 显示name，value：$instructionValue
+     * type为single-selecto clock, name 取is displayname，value：$instructionValue
      * type为status按钮o clock，name 取isstatus文本，value: $instructionValue
      * default name 为空， value = $instructionValue
      *
@@ -338,8 +338,8 @@ class InstructionConfig extends AbstractEntity
                 $value = ($instructionValue === 'on') ? $this->getOn() : $this->getOff();
                 break;
             case InstructionComponentType::Radio->value:
-                // 单选type
-                // 查找对应的 InstructionValue object
+                // single-selecttype
+                // find对应的 InstructionValue object
                 foreach ($this->values as $instructionValueObj) {
                     if ($instructionValueObj->getId() === $instructionValue || $instructionValueObj->getValue() === $value) {
                         $name = $instructionValueObj->getName();
@@ -350,7 +350,7 @@ class InstructionConfig extends AbstractEntity
                 break;
             case InstructionComponentType::Status->value:
                 // status按钮type
-                // 查找对应的 InstructionValue object
+                // find对应的 InstructionValue object
                 foreach ($this->values as $instructionValueObj) {
                     if ($instructionValueObj->getValue() === $instructionValue) {
                         $name = $instructionValueObj->getName();

@@ -111,12 +111,12 @@ class AsrHeartbeatMonitor
     private function handleHeartbeatTimeout(string $key): void
     {
         try {
-            // from key middle提取 task_key 和 user_id
+            // from key middleextract task_key 和 user_id
             // Key format：asr:heartbeat:{md5(user_id:task_key)}
             $this->logger->info('检测tocore跳timeout', ['key' => $key]);
 
             // 由at key 是 MD5 hash，我们无法直接反toget task_key 和 user_id
-            // needfrom Redis middle扫描所have asr:task:* 来查找匹配的task
+            // needfrom Redis middle扫描所have asr:task:* 来find匹配的task
             $this->findAndTriggerTimeoutTask($key);
         } catch (Throwable $e) {
             $this->logger->error('processcore跳timeoutfail', [
@@ -127,7 +127,7 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * 查找并触hairtimeouttask的自动总结.
+     * find并触hairtimeouttask的自动总结.
      */
     private function findAndTriggerTimeoutTask(string $heartbeatKey): void
     {

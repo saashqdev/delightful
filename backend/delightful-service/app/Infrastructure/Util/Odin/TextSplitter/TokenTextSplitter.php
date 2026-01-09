@@ -277,7 +277,7 @@ class TokenTextSplitter extends TextSplitter
         $separator = end($this->separators);
         $newSeparators = [];
 
-        // 查找合适的minute隔符, from$separatorBeginIndexstart
+        // find合适的minute隔符, from$separatorBeginIndexstart
         for ($i = $separatorBeginIndex; $i < count($this->separators); ++$i) {
             $sep = $this->separators[$i];
             if ($sep === '') {

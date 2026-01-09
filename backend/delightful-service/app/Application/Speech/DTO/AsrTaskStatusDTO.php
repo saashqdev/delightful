@@ -23,7 +23,7 @@ class AsrTaskStatusDTO
     public ?string $organizationCode = null; // organizationencoding（useat自动总结）
 
     // analogous：project_821749697183776769/workspace/录音总结_20250910_174251/original录音file.webm
-    public ?string $filePath = null; // 工作区filepath
+    public ?string $filePath = null; // work区filepath
 
     // fileID（databasemiddle的actualID）
     public ?string $audioFileId = null; // audiofileID（writedelightful_super_agent_task_files表backreturn的ID）
@@ -48,13 +48,13 @@ class AsrTaskStatusDTO
     public ?string $topicId = null; // 话题ID
 
     // 录音directoryinfo
-    public ?string $tempHiddenDirectory = null; // 隐藏directorypath（存放minuteslicefile）
+    public ?string $tempHiddenDirectory = null; // hiddendirectorypath（存放minuteslicefile）
 
-    public ?string $displayDirectory = null; // 显示directorypath（存放stream文本和笔记）
+    public ?string $displayDirectory = null; // displaydirectorypath（存放stream文本和笔记）
 
-    public ?int $tempHiddenDirectoryId = null; // 隐藏directory的fileID
+    public ?int $tempHiddenDirectoryId = null; // hiddendirectory的fileID
 
-    public ?int $displayDirectoryId = null; // 显示directory的fileID
+    public ?int $displayDirectoryId = null; // displaydirectory的fileID
 
     public AsrTaskStatusEnum $status = AsrTaskStatusEnum::FAILED;
 
@@ -73,7 +73,7 @@ class AsrTaskStatusDTO
 
     public int $serverSummaryRetryCount = 0; // service端总结触hairretrycount
 
-    public bool $serverSummaryLocked = false; // service端总结whetherlock定客户端
+    public bool $serverSummaryLocked = false; // service端总结whetherlock定customer端
 
     // ASR content和笔记（useatgeneratetitle）
     public ?string $asrStreamContent = null; // ASR stream识别content
@@ -214,7 +214,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 判断service端总结whether对客户端加lock.
+     * 判断service端总结whether对customer端加lock.
      */
     public function hasServerSummaryLock(): bool
     {
@@ -242,8 +242,8 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 提取相对at workspace 的相对path
-     * ifpathcontain workspace/，提取其back的部minute
+     * extract相对at workspace 的相对path
+     * ifpathcontain workspace/，extract其back的部minute
      * 这样can自动修正 Redis middlestorage的旧formatdata（完整path）.
      *
      * @param null|string $path originalpath
@@ -255,7 +255,7 @@ class AsrTaskStatusDTO
             return $path;
         }
 
-        // ifpathcontain workspace/，提取 workspace/ backsurface的部minute
+        // ifpathcontain workspace/，extract workspace/ backsurface的部minute
         if (str_contains($path, 'workspace/')) {
             $parts = explode('workspace/', $path, 2);
             return $parts[1] ?? $path;

@@ -18,7 +18,7 @@ enum FriendStatus: int
     // 同意
     case Agree = 2;
 
-    // 拒绝
+    // reject
     case Refuse = 3;
 
     // ignore

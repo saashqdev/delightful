@@ -27,10 +27,10 @@ class CreateDelightfulChatFriendTable extends Migration
             // 好友所属organization
             $table->string('friend_organization_code', 64)->comment('好友的organizationencoding')->default('');
             // 好友type
-            $table->tinyInteger('friend_type')->comment('好友type，0:ai 1:人category')->default(0);
+            $table->tinyInteger('friend_type')->comment('好友type，0:ai 1:personcategory')->default(0);
             $table->string('remarks', 256)->comment('note');
             $table->string('extra', 1024)->comment('attach加property');
-            $table->tinyInteger('status')->comment('status，1：申请，2：同意 3：拒绝 4：ignore');
+            $table->tinyInteger('status')->comment('status，1：申请，2：同意 3：reject 4：ignore');
             $table->unique(['user_id', 'friend_id'], 'uk_user_id_friend_id');
             $table->timestamps();
             $table->softDeletes();

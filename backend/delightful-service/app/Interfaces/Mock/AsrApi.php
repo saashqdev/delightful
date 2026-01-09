@@ -63,7 +63,7 @@ class AsrApi
             'transcript_file_config' => $transcriptFileConfig,
         ]);
 
-        // initializetaskstatus（resetround询计数）
+        // initializetaskstatus（resetround询count）
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $this->redis->del($countKey);
 
@@ -98,7 +98,7 @@ class AsrApi
         $noteFileConfig = $request->input('note_file');
         $transcriptFileConfig = $request->input('transcript_file');
 
-        // use Redis 计数器模拟round询进degree
+        // use Redis count器模拟round询进degree
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $count = (int) $this->redis->incr($countKey);
         $this->redis->expire($countKey, AsrConfig::MOCK_POLLING_TTL); // 10minute钟expire
@@ -131,7 +131,7 @@ class AsrApi
         $outputFilename = $audioConfig['output_filename'] ?? 'audio';
 
         // 模拟真实沙箱line为：according to output_filename 重命名directory
-        // 提取原directorymiddle的time戳部minute（format：_YYYYMMDD_HHMMSS）
+        // extract原directorymiddle的time戳部minute（format：_YYYYMMDD_HHMMSS）
         $timestamp = '';
         if (preg_match('/_(\d{8}_\d{6})$/', $targetDir, $matches)) {
             $timestamp = '_' . $matches[1];
@@ -169,7 +169,7 @@ class AsrApi
             ],
         ];
 
-        // ifhave笔记fileconfigurationandfilesize > 0，添加toreturnmiddle（模拟真实沙箱的笔记filecontentcheck）
+        // ifhave笔记fileconfigurationandfilesize > 0，addtoreturnmiddle（模拟真实沙箱的笔记filecontentcheck）
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
             // userequestmiddle提供的 target_path，而not是硬encodingfile名
             // 这样cancorrectsupport国际化的file名

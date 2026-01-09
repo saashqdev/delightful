@@ -62,9 +62,9 @@ class ModelGatewayApiTest extends AbstractHttpTest
             ],
         ]);
 
-        // 添加并hairtask
+        // add并hairtask
         $index = 0;
-        $count = 10; // 进一步减少testquantity，只要have一successthenline
+        $count = 10; // 进一步decreasetestquantity，只要have一successthenline
         while ($index < $count) {
             $parallel->add(function () use ($scenario, $index, $expectedResponse) {
                 try {

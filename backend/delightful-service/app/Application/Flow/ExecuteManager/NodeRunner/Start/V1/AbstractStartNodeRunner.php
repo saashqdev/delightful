@@ -144,12 +144,12 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             $result = $outputForm->getKeyValue(check: true);
         }
 
-        // 增加系统output
+        // increasesystemoutput
         $systemOutputResult = $this->getChatMessageResult($executionData);
         $executionData->saveNodeContext($this->node->getSystemNodeId(), $systemOutputResult);
         $vertexResult->addDebugLog('system_response', $executionData->getNodeContext($this->node->getSystemNodeId()));
 
-        // 增加customize的系统output
+        // increasecustomize的systemoutput
         $customSystemOutput = $triggerBranch->getCustomSystemOutput()?->getFormComponent()?->getForm();
         if ($customSystemOutput) {
             $customSystemOutput->appendConstValue($executionData->getTriggerData()->getSystemParams());
@@ -280,10 +280,10 @@ abstract class AbstractStartNodeRunner extends NodeRunner
                 continue;
             }
 
-            // pass id 查找
+            // pass id find
             $messageChatInstruction = $messageChatInstructionIdMaps[$instructionConfig->getId()] ?? null;
             if (! $messageChatInstruction) {
-                // pass name 查找
+                // pass name find
                 $messageChatInstruction = $messageChatInstructionNameMaps[$instructionConfig->getName()] ?? null;
             }
 

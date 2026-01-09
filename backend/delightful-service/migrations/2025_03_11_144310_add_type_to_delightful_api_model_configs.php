@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_api_model_configs', function (Blueprint $table) {
             $table->string('type', 80)->default('')->comment('modeltype')->after('model');
-            // 给 model 增加comment：actualup代table endpoint
+            // 给 model increasecomment：actualup代table endpoint
             $table->string('model')->comment('actualup代table endpoint')->change();
             $table->index('type', 'idx_type');
         });

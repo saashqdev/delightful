@@ -9,7 +9,7 @@ namespace App\Domain\Group\Entity\ValueObject;
 
 enum GroupStatusEnum: int
 {
-    // 正常
+    // normal
     case Normal = 1;
 
     // 解散

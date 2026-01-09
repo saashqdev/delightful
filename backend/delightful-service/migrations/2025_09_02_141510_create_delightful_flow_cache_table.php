@@ -24,8 +24,8 @@ return new class extends Migration {
             $table->unsignedInteger('ttl_seconds')->default(7200)->comment('TTLsecond数（0代表permanentcache）');
             $table->timestamp('expires_at')->comment('expiretime戳');
             $table->string('organization_code', 64)->comment('organization隔离');
-            $table->string('created_uid', 64)->default('')->comment('create人');
-            $table->string('updated_uid', 64)->default('')->comment('update人');
+            $table->string('created_uid', 64)->default('')->comment('createperson');
+            $table->string('updated_uid', 64)->default('')->comment('updateperson');
             $table->timestamps();
 
             // 索引 - useMD5hashvalue作为mainquery索引

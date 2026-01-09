@@ -153,7 +153,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             return $this->getServiceProviderConfigByModelId($modelId, $organizationCode, $throw);
         }
 
-        // 2. ifonly modelOriginId，先尝试查找对应的model
+        // 2. ifonly modelOriginId，先尝试find对应的model
         if (! empty($modelOriginId)) {
             $models = $this->getModelsByVersionAndOrganization($modelOriginId, $organizationCode);
             if (! empty($models)) {
@@ -163,7 +163,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
                     'organizationCode' => $organizationCode,
                 ]);
 
-                // fromactivate的modelmiddle查找可use的service商configuration
+                // fromactivate的modelmiddlefind可use的service商configuration
                 return $this->findAvailableServiceProviderFromModels($models);
             }
         }
@@ -309,7 +309,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotActive);
         }
 
-        // fromactivate的modelmiddle查找可use的service商configuration
+        // fromactivate的modelmiddlefind可use的service商configuration
         return $this->findAvailableServiceProviderFromModels($activeModels);
     }
 
@@ -364,7 +364,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             return [];
         }
 
-        // createconfigurationIDtoconfiguration实body的mapping，便at快speed查找
+        // createconfigurationIDtoconfiguration实body的mapping，便at快speedfind
         $configMap = [];
         foreach ($serviceProviderConfigEntities as $configEntity) {
             $configMap[$configEntity->getId()] = $configEntity;
@@ -440,7 +440,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             $uniqueModels = [];
             foreach ($providerModelEntities as $model) {
                 $modelId = $model->getModelId();
-                // if这 modelId alsonothavebe添加，then添加
+                // if这 modelId alsonothavebeadd，thenadd
                 if (! isset($uniqueModels[$modelId])) {
                     $uniqueModels[$modelId] = $model;
                 }
@@ -461,7 +461,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         $officialOrganization = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
         foreach ($categories as $category) {
-            // 查找provider_code=Official的service商
+            // findprovider_code=Official的service商
             $provider = $this->serviceProviderRepository->getByCodeAndCategory(
                 ProviderCode::Official,
                 $category
@@ -510,7 +510,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * fromactivate的modelmiddle查找可use的service商configuration
+     * fromactivate的modelmiddlefind可use的service商configuration
      * 优先returnnon官方configuration，ifnothavethenreturn官方configuration.
      *
      * @param ProviderModelEntity[] $activeModels activate的modelcolumn表

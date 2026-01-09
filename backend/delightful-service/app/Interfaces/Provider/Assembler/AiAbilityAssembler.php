@@ -161,7 +161,7 @@ class AiAbilityAssembler
             return str_repeat('*', $length);
         }
 
-        // 显示frontN位和backN位
+        // displayfrontN位和backN位
         $prefix = mb_substr($apiKey, 0, $prefixLength);
         $suffix = mb_substr($apiKey, -$suffixLength);
         $maskLength = $length - $minLength;

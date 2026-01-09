@@ -16,7 +16,7 @@ class InstructDisplayType
     public const SYSTEM = 2;    // system
 
     /**
-     * verify显示typewhethervalid.
+     * verifydisplaytypewhethervalid.
      */
     public static function isValid(int $type): bool
     {
@@ -27,7 +27,7 @@ class InstructDisplayType
     }
 
     /**
-     * get所have显示type及其国际化tag.
+     * get所havedisplaytype及其国际化tag.
      * @return array<int, string>
      */
     public static function getTypeOptions(): array

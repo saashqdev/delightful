@@ -25,7 +25,7 @@ class OperationPermissionApiTest extends AbstractHttpTest
     }
 
     /**
-     * testgetuserorganization管理员list - success情况.
+     * testgetuserorganizationadministratorlist - success情况.
      */
     public function testGetUserOrganizationAdminListSuccess(): void
     {
@@ -34,7 +34,7 @@ class OperationPermissionApiTest extends AbstractHttpTest
 
         // ifreturnautherror，skiptest
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003])) {
-            $this->markTestSkipped('interfaceauthfail，可能need其他authconfiguration - interfacerouteverify正常');
+            $this->markTestSkipped('interfaceauthfail，可能need其他authconfiguration - interfacerouteverifynormal');
             return;
         }
 

@@ -33,7 +33,7 @@ enum TriggerType: int
     // etc待message
     case WaitMessage = 6;
 
-    // 添加好友o clock
+    // add好友o clock
     case AddFriend = 7;
 
     public static function fromSeqType(ChatMessageType|ControlMessageType $seqType): TriggerType
@@ -46,7 +46,7 @@ enum TriggerType: int
             // openchat窗口触hair
             $triggerType = TriggerType::OpenChatWindow;
         } elseif ($seqType === ControlMessageType::AddFriendSuccess) {
-            // 添加好友触hair
+            // add好友触hair
             $triggerType = TriggerType::AddFriend;
         }
         return $triggerType;

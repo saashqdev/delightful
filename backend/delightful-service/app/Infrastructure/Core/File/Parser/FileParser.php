@@ -132,7 +132,7 @@ class FileParser
         if (! $sizeKnown && $maxSize > 0) {
             self::downloadWithSizeControl($fileStream, $localFile, $maxSize);
         } else {
-            // filesize已知or无需限制，直接复制
+            // filesize已知or无需限制，直接copy
             stream_copy_to_stream($fileStream, $localFile);
         }
 
@@ -208,7 +208,7 @@ class FileParser
             return false;
         }
 
-        // 既nothaveContent-Length，alsonot是chunked传输，拒绝download
+        // 既nothaveContent-Length，alsonot是chunked传输，rejectdownload
         ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesize未知，forbiddownload');
     }
 }

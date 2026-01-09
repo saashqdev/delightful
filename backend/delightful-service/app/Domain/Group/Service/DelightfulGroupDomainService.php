@@ -50,10 +50,10 @@ class DelightfulGroupDomainService extends AbstractDomainService
         return $this->delightfulGroupRepository->addUsersToGroup($delightfulGroupEntity, $userIds);
     }
 
-    // 减少群member
+    // decrease群member
     public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int
     {
-        // todo if是群主离开,need转移群主
+        // todo if是群主leave,need转移群主
         return $this->delightfulGroupRepository->removeUsersFromGroup($delightfulGroupEntity, $userIds);
     }
 
@@ -162,7 +162,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 // 这些user已经from群membertablemiddle移except,but是他们also未收tobe移except的message
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
                 if ($controlMessageType === ControlMessageType::GroupDisband) {
-                    // 解散group chat,所have人all是be移except的.这within减少streamquantityconsume.
+                    // 解散group chat,所havepersonall是be移except的.这withindecreasestreamquantityconsume.
                     $content['user_ids'] = [];
                 }
             }
@@ -276,7 +276,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         $time = date('Y-m-d H:i:s');
         $seqListCreateDTO = [];
         $groupId = $content['group_id'] ?? '';
-        // 群member增加o clock,为新加入的memberreturnsessionid
+        // 群memberincreaseo clock,为新加入的memberreturnsessionid
         $userConversations = $this->getGroupUserConversationsByUserIds(array_keys($users), $groupId);
         $userContent = $content;
         foreach ($users as $user) {
@@ -284,7 +284,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             if (empty($userId)) {
                 continue;
             }
-            // not为操作者重复generateseq. 因为in投mq之front,已经为操作者generate了seq
+            // not为操author重复generateseq. 因为in投mq之front,已经为操authorgenerate了seq
             if ($userId === $operateUserId) {
                 continue;
             }

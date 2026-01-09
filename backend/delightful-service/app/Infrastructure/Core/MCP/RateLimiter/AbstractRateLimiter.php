@@ -35,7 +35,7 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
     protected bool $enabled = true;
 
     /**
-     * check客户端whetherallowexecuterequest.
+     * checkcustomer端whetherallowexecuterequest.
      */
     public function check(string $clientId, MessageInterface $request): void
     {

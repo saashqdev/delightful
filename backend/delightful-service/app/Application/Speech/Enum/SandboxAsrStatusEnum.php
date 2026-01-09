@@ -10,7 +10,7 @@ namespace App\Application\Speech\Enum;
 /**
  * 沙箱 ASR taskstatus枚举.
  *
- * 【作use域】outside部系统 - 沙箱audiomergeservice
+ * 【作use域】outside部system - 沙箱audiomergeservice
  * 【use途】table示沙箱middleaudiomergetask的executestatus
  * 【use场景】
  * - call沙箱 finishTask interface的round询status判断

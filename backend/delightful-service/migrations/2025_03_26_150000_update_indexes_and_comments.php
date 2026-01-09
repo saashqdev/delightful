@@ -16,14 +16,14 @@ class UpdateIndexesAndComments extends Migration
         // 清null delightful_api_premium_endpoint_statistics 表data
         Db::table('delightful_api_premium_endpoint_statistics')->truncate();
 
-        // 修改 delightful_api_premium_endpoint_statistics 表的 statistics_level comment
+        // modify delightful_api_premium_endpoint_statistics 表的 statistics_level comment
         Schema::table('delightful_api_premium_endpoint_statistics', function (Blueprint $table) {
             $table->integer('statistics_level')->comment('statisticslevel别：0-secondlevel，1-minute钟level，2-hourlevel，3-daylevel')->change();
-            // 修改 statistics_time 的datatype为 datetime
+            // modify statistics_time 的datatype为 datetime
             $table->dateTime('statistics_time')->change();
         });
 
-        // 修改 delightful_api_premium_endpoint_responses 表的索引
+        // modify delightful_api_premium_endpoint_responses 表的索引
         Schema::table('delightful_api_premium_endpoint_responses', function (Blueprint $table) {
             // delete旧索引
             if (Schema::hasIndex('delightful_api_premium_endpoint_responses', 'endpoint_id_created_at_index')) {
@@ -32,18 +32,18 @@ class UpdateIndexesAndComments extends Migration
             if (Schema::hasIndex('delightful_api_premium_endpoint_responses', 'request_id_index')) {
                 $table->dropIndex('request_id_index');
             }
-            // 添加新索引
+            // add新索引
             $table->index(['created_at', 'endpoint_id'], 'endpoint_id_created_at_index');
         });
 
-        // 修改 delightful_api_premium_endpoint_statistics 表的索引
+        // modify delightful_api_premium_endpoint_statistics 表的索引
         Schema::table('delightful_api_premium_endpoint_statistics', function (Blueprint $table) {
             // delete旧索引
             if (Schema::hasIndex('delightful_api_premium_endpoint_statistics', 'unique_endpoint_id_statistics_level_time')) {
                 $table->dropIndex('unique_endpoint_id_statistics_level_time');
             }
 
-            // 添加新索引
+            // add新索引
             $table->unique(['statistics_time', 'statistics_level', 'endpoint_id'], 'unique_statistics_time');
         });
     }

@@ -9,7 +9,7 @@ namespace App\Domain\Flow\Entity\ValueObject\NodeParamsConfig\Search\Structure;
 
 enum LeftType: string
 {
-    // 人员
+    // person员
     case Username = 'username';
     case WorkNumber = 'work_number';
     case Position = 'position';

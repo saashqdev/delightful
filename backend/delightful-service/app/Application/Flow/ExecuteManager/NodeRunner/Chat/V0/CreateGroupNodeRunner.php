@@ -90,7 +90,7 @@ class CreateGroupNodeRunner extends NodeRunner
         if ($paramsConfig->isIncludeCurrentAssistant()) {
             if ($agentUserId = $executionData->getAgentUserId()) {
                 $groupMemberIds[] = $agentUserId;
-                // only assistant 开启，才willhave开场白
+                // only assistant start，才willhave开场白
                 $assistantOpeningSpeech = $paramsConfig->getAssistantOpeningSpeech()?->getValue()->getResult($executionData->getExpressionFieldData()) ?? '';
             }
         }

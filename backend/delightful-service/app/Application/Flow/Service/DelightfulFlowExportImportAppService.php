@@ -175,7 +175,7 @@ class DelightfulFlowExportImportAppService
             return true; // hair现循环dependency
         }
 
-        // 将currentprocess添加toaccesspath
+        // 将currentprocessaddtoaccesspath
         $visited[] = $flowCode;
 
         // getprocess实body
@@ -223,7 +223,7 @@ class DelightfulFlowExportImportAppService
         // getprocessdata
         $flowData = $this->exportFlow($dataIsolation, $flowCode);
 
-        // 添加assistantinfo
+        // addassistantinfo
         $agentData = [
             'id' => $agent->getId(),
             'name' => $agent->getAgentName(),
@@ -231,7 +231,7 @@ class DelightfulFlowExportImportAppService
             'flow_code' => $agent->getFlowCode(),
             'avatar' => $agent->getAgentAvatar(),
             'instruct' => $agent->getInstructs(),
-            // canaccording toneed添加其他assistantinfo
+            // canaccording toneedadd其他assistantinfo
         ];
 
         return [
@@ -397,7 +397,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * generate唯一的processname
-     * when检测to同名processo clock，添加(n)back缀
+     * when检测to同名processo clock，add(n)back缀
      */
     private function generateUniqueName(FlowDataIsolation $dataIsolation, string $name, Type $type): string
     {
@@ -419,7 +419,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * generate唯一的tool集name
-     * when检测to同名tool集o clock，添加(n)back缀
+     * when检测to同名tool集o clock，add(n)back缀
      */
     private function generateUniqueToolSetName(FlowDataIsolation $dataIsolation, string $name): string
     {
@@ -600,7 +600,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * 递归handlearraymiddle的表达typequote
-     * 查找并update所havecontainsectionpointID的表达typefield.
+     * find并update所havecontainsectionpointID的表达typefield.
      */
     private function updateExpressionReferences(array &$data, array $idMapping): void
     {
@@ -664,8 +664,8 @@ class DelightfulFlowExportImportAppService
         $builtInToolSetPrefixes = [
             'file_box',      // file盒tool集
             'search_engine', // searchenginetool集
-            'web_browse',    // 网页浏览tool集
-            'system',        // 系统tool集
+            'web_browse',    // 网页browsetool集
+            'system',        // systemtool集
             'knowledge',     // knowledge basetool集
         ];
 
@@ -861,7 +861,7 @@ class DelightfulFlowExportImportAppService
         // mark为已handle
         $processedToolSetIds[] = $toolSetId;
 
-        // 添加toexportdatamiddle
+        // addtoexportdatamiddle
         $exportData['tool_sets'][$toolSetId] = $toolSet->toArray();
     }
 
@@ -894,7 +894,7 @@ class DelightfulFlowExportImportAppService
                 // mark为已handle
                 $processedFlowCodes[] = $subFlowId;
 
-                // 添加toexportdatamiddle
+                // addtoexportdatamiddle
                 $exportData['sub_flows'][$subFlowId] = $subFlow->toArray();
 
                 // 递归handle子processmiddle的子process和tool
@@ -932,7 +932,7 @@ class DelightfulFlowExportImportAppService
                 // mark为已handle
                 $processedFlowCodes[] = $toolId;
 
-                // 添加toexportdatamiddle
+                // addtoexportdatamiddle
                 $exportData['tool_flows'][$toolId] = $toolFlow->toArray();
 
                 // 递归handle
@@ -974,7 +974,7 @@ class DelightfulFlowExportImportAppService
                         // mark为已handle
                         $processedFlowCodes[] = $toolId;
 
-                        // 添加toexportdatamiddle
+                        // addtoexportdatamiddle
                         $exportData['tool_flows'][$toolId] = $toolFlow->toArray();
 
                         // 递归handletoolprocessmiddle的子process和其他tool

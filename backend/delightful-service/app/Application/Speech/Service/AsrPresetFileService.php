@@ -42,10 +42,10 @@ readonly class AsrPresetFileService
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
      * @param int $projectId projectID
-     * @param string $displayDir 显示directory相对path (如: 录音总结_xxx)
-     * @param int $displayDirId 显示directoryID
-     * @param string $hiddenDir 隐藏directory相对path (如: .asr_recordings/session_xxx)
-     * @param int $hiddenDirId 隐藏directoryID
+     * @param string $displayDir displaydirectory相对path (如: 录音总结_xxx)
+     * @param int $displayDirId displaydirectoryID
+     * @param string $hiddenDir hiddendirectory相对path (如: .asr_recordings/session_xxx)
+     * @param int $hiddenDirId hiddendirectoryID
      * @param string $taskKey task键
      * @return array{note_file: TaskFileEntity, transcript_file: TaskFileEntity}
      */
@@ -66,7 +66,7 @@ readonly class AsrPresetFileService
         // getorganization码+APP_ID+bucket_md5front缀
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($organizationCode);
 
-        // create笔记file（放in显示directory，user可见）
+        // create笔记file（放indisplaydirectory，uservisible）
         $noteFile = $this->createNoteFile(
             $userId,
             $organizationCode,
@@ -78,7 +78,7 @@ readonly class AsrPresetFileService
             $workDir
         );
 
-        // createstream识别file（放in隐藏directory，usernot可见）
+        // createstream识别file（放inhiddendirectory，usernotvisible）
         $transcriptFile = $this->createTranscriptFile(
             $userId,
             $organizationCode,
@@ -167,7 +167,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * create笔记file（放in显示directory）.
+     * create笔记file（放indisplaydirectory）.
      */
     private function createNoteFile(
         string $userId,
@@ -204,7 +204,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * createstream识别file（放in隐藏directory）.
+     * createstream识别file（放inhiddendirectory）.
      */
     private function createTranscriptFile(
         string $userId,
@@ -297,7 +297,7 @@ readonly class AsrPresetFileService
             return $result;
         }
 
-        // if插入beignore（file已存in），query现haverecord
+        // ifinsertbeignore（file已存in），query现haverecord
         $existingFile = $this->taskFileDomainService->getByProjectIdAndFileKey($projectId, $fileKey);
         if ($existingFile !== null) {
             $this->logger->info(sprintf('%s已存in，use现haverecord', $logPrefix), [

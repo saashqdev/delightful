@@ -63,7 +63,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             $paramsConfig->getModelConfig()->setVisionModel($modelName);
         }
 
-        // if主动close视觉能力。or者 currentmodelsupport，but是选择了别的model，also是相whenat要closecurrentmodel的视觉能力
+        // if主动close视觉能力。or者 currentmodelsupport，but是choose了别的model，also是相whenat要closecurrentmodel的视觉能力
         if (! $paramsConfig->getModelConfig()->isVision() || ($model->getModelOptions()->isMultiModal() && $paramsConfig->getModelConfig()->getVisionModel() !== $modelName)) {
             $model->getModelOptions()->setMultiModal(false);
         }
@@ -104,10 +104,10 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                         $contentMessage = new UserMessage();
                         $contentMessage->setContent($userPrompt);
                         $contentMessage->setIdentifier($contentMessageId);
-                        // 仅仅添加attachment
+                        // 仅仅addattachment
                         $imageUrls = $executionData->getTriggerData()->getAttachmentImageUrls();
                         if ($imageUrls) {
-                            // havecontentandhaveattachment，添加文本和imagecontent
+                            // havecontentandhaveattachment，add文本和imagecontent
                             $contentMessage->addContent(UserMessageContent::text($userPrompt));
                             foreach ($imageUrls as $imageUrl) {
                                 $contentMessage->addContent(UserMessageContent::imageUrl($imageUrl));

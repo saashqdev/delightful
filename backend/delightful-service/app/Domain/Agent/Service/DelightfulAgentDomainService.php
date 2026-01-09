@@ -70,10 +70,10 @@ class DelightfulAgentDomainService
             $agent = $this->agentRepository->insert($agentEntity);
             $create = true;
 
-            // create助理o clock添加系统交互finger令
+            // create助理o clockaddsystem交互finger令
             $this->initSystemInstructs($agent->getOrganizationCode(), $agent->getId(), $agentEntity->getUpdatedUid());
         } else {
-            // whether能修改
+            // whether能modify
             $agent = $this->getAgentById($agentEntity->getId());
             $agent->setRobotName($agentEntity->getAgentName());
             $agent->setRobotDescription($agentEntity->getAgentDescription());
@@ -167,7 +167,7 @@ class DelightfulAgentDomainService
         // getenable的助理list
         $enabledAgents = $this->getEnabledAgents();
 
-        // 提取enable助理listmiddle的 agent_version_id
+        // extractenable助理listmiddle的 agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
         // getfinger定organization和助理version的助理data及其total
@@ -230,7 +230,7 @@ class DelightfulAgentDomainService
             // 校验普通交互finger令
             InstructType::validateInstructs($instructs);
 
-            // ensure系统交互finger令存in，if缺少then补充
+            // ensuresystem交互finger令存in，if缺少then补充
             $instructs = SystemInstructType::ensureSystemInstructs($instructs);
         }
         // save
@@ -244,7 +244,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * query企业down的所have助理,itemitemquery：status，create人，search.
+     * query企业down的所have助理,itemitemquery：status，createperson，search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
@@ -267,7 +267,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * initialize系统交互finger令.
+     * initializesystem交互finger令.
      */
     private function initSystemInstructs(string $organizationCode, string $agentId, string $userId): void
     {

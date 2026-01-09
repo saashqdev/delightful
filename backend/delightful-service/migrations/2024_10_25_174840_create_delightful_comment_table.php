@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->tinyInteger('resource_type')->comment('comment的resourcetype，for example云document、sheet表');
             $table->unsignedBigInteger('parent_id')->index()->comment('父levelcomment的primary keyid');
             $table->text('message')->comment('comment的content');
-            $table->string('creator')->index()->comment('create人');
+            $table->string('creator')->index()->comment('createperson');
             $table->string('organization_code')->index()->comment('organizationcode');
             $table->softDeletes();
             $table->timestamps();

@@ -18,7 +18,7 @@ class AccountEntity extends AbstractEntity
     protected ?string $delightfulId = null;
 
     /**
-     * 账numbertype:0:ai 1:人category 2:application.
+     * 账numbertype:0:ai 1:personcategory 2:application.
      */
     protected ?UserType $type = null;
 
@@ -28,7 +28,7 @@ class AccountEntity extends AbstractEntity
     protected ?string $aiCode = null;
 
     /**
-     * 账numberstatus,0:正常,1:disable.
+     * 账numberstatus,0:normal,1:disable.
      */
     protected ?AccountStatus $status = null;
 

@@ -140,7 +140,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * query企业down的所have助理,itemitemquery：status，create人，search.
+     * query企业down的所have助理,itemitemquery：status，createperson，search.
      */
     public function queriesAgents(DelightfulUserAuthorization $authorization, QueryPageAgentDTO $query): PageDTO
     {
@@ -152,13 +152,13 @@ class AdminAgentAppService extends AbstractKernelAppService
         // get所have的 avatar
         $avatars = array_filter(array_column($delightfulAgentEntities, 'agent_avatar'), fn ($avatar) => ! empty($avatar));
         $fileLinks = $this->fileDomainService->getLinks($authorization->getOrganizationCode(), $avatars);
-        // get助理create人
+        // get助理createperson
         $createdUids = array_column($delightfulAgentEntities, 'created_uid');
         $createdUsers = $this->userDomainService->getUserByIdsWithoutOrganization($createdUids);
         $agentVersionIds = array_filter(array_column($delightfulAgentEntities, 'agent_version_id'), fn ($agentVersionId) => $agentVersionId !== null);
         $agentVersions = $this->delightfulAgentVersionDomainService->getAgentByIds($agentVersionIds);
 
-        // buildcreate人mapping
+        // buildcreatepersonmapping
         $createdUserMap = [];
         foreach ($createdUsers as $user) {
             $createdUserMap[$user->getUserId()] = $user;
@@ -170,7 +170,7 @@ class AdminAgentAppService extends AbstractKernelAppService
             $agentVersionMap[$version->getId()] = $version;
         }
 
-        // 聚合data
+        // aggregatedata
         $items = [];
         foreach ($delightfulAgentEntities as $agent) {
             $adminAgentDTO = AgentAssembler::entityToDTO($agent);
@@ -179,7 +179,7 @@ class AdminAgentAppService extends AbstractKernelAppService
             $avatar = $fileLinks[$agent->getAgentAvatar()] ?? null;
             $adminAgentDTO->setAgentAvatar($avatar?->getUrl() ?? '');
 
-            // setcreate人info
+            // setcreatepersoninfo
             $createdUser = $createdUserMap[$agent->getCreatedUid()] ?? null;
             if ($createdUser) {
                 $adminAgentDTO->setCreatedName($createdUser->getNickname());
@@ -272,16 +272,16 @@ class AdminAgentAppService extends AbstractKernelAppService
         /** @var DelightfulUserAuthorization $authorization */
         $organizationCode = $authorization->getOrganizationCode();
 
-        // getenable的机器人list
+        // getenable的机器personlist
         $enabledAgents = $this->delightfulAgentDomainService->getEnabledAgents();
 
         // according tofiltertypefilter
         $enabledAgents = $this->filterEnableAgentsByType($authorization, $enabledAgents, $type);
 
-        // 提取enable机器人listmiddle的 agent_version_id
+        // extractenable机器personlistmiddle的 agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // getfinger定organization和机器人version的机器人data及其total
+        // getfinger定organization和机器personversion的机器persondata及其total
         $agentVersions = $this->delightfulAgentVersionDomainService->getAgentsByOrganizationWithCursor(
             $organizationCode,
             $agentVersionIds,

@@ -20,7 +20,7 @@ use PHPUnit\Framework\TestCase;
 class PermissionCheckerTest extends TestCase
 {
     /**
-     * testall局管理员permissioncheck.
+     * testall局administratorpermissioncheck.
      */
     public function testGlobalAdminHasPermission(): void
     {
@@ -30,7 +30,7 @@ class PermissionCheckerTest extends TestCase
             SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003', '13800000004'],
         ];
 
-        // all局管理员shouldhave所havepermission
+        // all局administratorshouldhave所havepermission
         $this->assertTrue(PermissionChecker::checkPermission(
             '13800000001',
             SuperPermissionEnum::FLOW_ADMIN,
@@ -132,7 +132,7 @@ class PermissionCheckerTest extends TestCase
     public static function permissionCheckDataProvider(): array
     {
         return [
-            'all局管理员' => ['13800000001', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => []], true],
+            'all局administrator' => ['13800000001', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => []], true],
             '特定permissionuser' => ['13800000003', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], true],
             '无permissionuser' => ['13800000099', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
             'permissionnot存in' => ['13800000003', SuperPermissionEnum::HIDE_USER_OR_DEPT, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],

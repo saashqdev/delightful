@@ -113,7 +113,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $entity = new ProviderModelEntity($data);
 
         if ($dto->getId()) {
-            // 准备updatedata，只containhave变化的field
+            // 准备updatedata，只containhavechange的field
             $updateData = $this->serializeEntityToArray($entity);
             $updateData['updated_at'] = date('Y-m-d H:i:s');
             $success = ProviderModelModel::query()
@@ -130,7 +130,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * updatemodelstatus（support写o clock复制逻辑）.
+     * updatemodelstatus（support写o clockcopy逻辑）.
      */
     public function updateStatus(ProviderDataIsolation $dataIsolation, string $id, Status $status): void
     {
@@ -148,7 +148,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             // organizationnot一致：判断model所属organizationwhether是官方organization
             if ($this->isOfficialOrganization($modelOrganizationCode)
                 && ! $this->isOfficialOrganization($currentOrganizationCode)) {
-                // model属at官方organizationandcurrentorganizationnot是官方organization：走写o clock复制逻辑
+                // model属at官方organizationandcurrentorganizationnot是官方organization：走写o clockcopy逻辑
                 $organizationModelId = $this->delightfulProviderAndModels->updateDelightfulModelStatus($dataIsolation, $model);
             } else {
                 // 其他情况：无permission操作
@@ -253,7 +253,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
                 // query普通organization自己的model。 官方organization的model现in model_parent_id equal它自己，need洗data。
                 $organizationModelsBuilder->where('model_parent_id', 0);
             }
-            // iffinger定了category，添加categoryfiltercondition
+            // iffinger定了category，addcategoryfiltercondition
             if ($category !== null) {
                 $organizationModelsBuilder->where('category', $category->value);
             }
@@ -412,7 +412,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             $builder->where('model_type', $query->getModelType()->value);
         }
 
-        // 选择 model_id 和 model_type field
+        // choose model_id 和 model_type field
         $builder->select('model_id', 'model_type');
 
         // applicationsort

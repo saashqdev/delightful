@@ -26,9 +26,9 @@ return new class extends Migration {
             $table->integer('timeout')->default(0)->comment('timeouttime戳');
             $table->boolean('handled')->default(false)->comment('whether已process');
             $table->json('persistent_data')->nullable()->comment('持久化data');
-            $table->string('created_uid', 80)->comment('create人');
+            $table->string('created_uid', 80)->comment('createperson');
             $table->dateTime('created_at')->comment('creation time');
-            $table->string('updated_uid', 80)->comment('修改人');
+            $table->string('updated_uid', 80)->comment('modifyperson');
             $table->dateTime('updated_at')->comment('modification time');
 
             $table->index(['organization_code', 'conversation_id']);

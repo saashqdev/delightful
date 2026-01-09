@@ -58,7 +58,7 @@ final class DelightfulSeqEntity extends AbstractEntity
     protected ?DelightfulMessageStatus $status = null;
 
     /**
-     * messagereceive人list.
+     * messagereceivepersonlist.
      */
     protected ?ReceiveList $receiveList = null;
 
@@ -284,11 +284,11 @@ final class DelightfulSeqEntity extends AbstractEntity
             $this->receiveList = $receiveList;
             return $this;
         }
-        // parsemessagereceive人list.
+        // parsemessagereceivepersonlist.
         if (is_string($receiveList) && $receiveList !== '') {
             $receiveList = Json::decode($receiveList);
         }
-        // 对at收item人来说,notneedrecordmessagereceive人list
+        // 对at收itemperson来说,notneedrecordmessagereceivepersonlist
         if (empty($receiveList)) {
             $receiveListObj = null;
         } elseif (is_array($receiveList)) {

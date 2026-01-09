@@ -135,7 +135,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         Db::beginTransaction();
         try {
             if (! $existsAccount) {
-                // 账numbernot存in,新增账number
+                // 账numbernot存in,new账number
                 $accountEntity = $this->accountRepository->createAccount($accountDTO);
             } else {
                 // 账number存in,but是该organizationdownnothaveuserinfo
@@ -268,7 +268,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 修改user密码
+     * modifyuser密码
      */
     public function updatePassword(string $delightfulId, string $plainPassword): bool
     {

@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::create('delightful_bot_third_platform_chat', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('bot_id', 64)->default('')->comment('机器人ID');
+            $table->string('bot_id', 64)->default('')->comment('机器personID');
             $table->string('key', 64)->comment('唯一标识')->unique();
             $table->string('type', 64)->default('')->comment('平台type');
             $table->boolean('enabled')->default(true)->comment('whetherenable');

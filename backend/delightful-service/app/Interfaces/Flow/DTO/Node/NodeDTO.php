@@ -25,7 +25,7 @@ class NodeDTO extends AbstractFlowDTO
     public string $nodeVersion = '';
 
     /**
-     * sectionpointyuandata，可use作给front端的定位，back端仅storage和展示，nothave任何逻辑.
+     * sectionpointyuandata，可use作给front端的locate，back端仅storage和show，nothave任何逻辑.
      */
     public array $meta = [];
 
@@ -233,7 +233,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get系统output.
+     * getsystemoutput.
      */
     public function getSystemOutput(): ?NodeOutputDTO
     {
@@ -241,7 +241,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set系统output.
+     * setsystemoutput.
      */
     public function setSystemOutput(null|array|NodeOutputDTO $systemOutput): void
     {

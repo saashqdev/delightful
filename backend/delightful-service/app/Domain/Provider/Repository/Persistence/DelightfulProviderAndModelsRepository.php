@@ -64,7 +64,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         $configBuilder = $this->createConfigQuery()->where('organization_code', $organizationCode);
         $configBuilder->where('service_provider_id', $delightfulProvider->getId());
 
-        // iffinger定了status，添加statusfilter
+        // iffinger定了status，addstatusfilter
         if ($status !== null) {
             $configBuilder->where('status', $status->value);
         }
@@ -130,7 +130,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             return [];
         }
 
-        // 提取官方model的IDarray
+        // extract官方model的IDarray
         $officialModelIds = [];
         foreach ($officialModels as $officialModel) {
             $officialModelIds[] = $officialModel->getId();
@@ -140,7 +140,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         $configBuilder = $this->createProviderModelQuery();
         $configBuilder->where('organization_code', $organizationCode)->whereIn('model_parent_id', $officialModelIds);
 
-        // iffinger定了category，添加categoryfiltercondition
+        // iffinger定了category，addcategoryfiltercondition
         if ($category !== null) {
             $configBuilder->where('category', $category->value);
         }
@@ -181,7 +181,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * 查找 Delightful modelwhether已经inorganizationmiddle.
+     * find Delightful modelwhether已经inorganizationmiddle.
      */
     public function getDelightfulModelByParentId(ProviderDataIsolation $dataIsolation, string $modelParentId): ?ProviderModelEntity
     {
@@ -216,7 +216,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * non官方organizationupdate Delightful modelstatus（写o clock复制逻辑）.
+     * non官方organizationupdate Delightful modelstatus（写o clockcopy逻辑）.
      */
     public function updateDelightfulModelStatus(
         ProviderDataIsolation $dataIsolation,
@@ -241,7 +241,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
                 ExceptionBuilder::throw(ServiceProviderErrorCode::ModelOfficiallyDisabled);
             }
 
-            // 2. 查找现have的organizationmodelrecord（inlock保护downagaintimecheck）
+            // 2. find现have的organizationmodelrecord（inlock保护downagaintimecheck）
             $organizationModel = $this->getDelightfulModelByParentId($dataIsolation, (string) $officialModel->getId());
 
             if ($organizationModel) {
@@ -285,7 +285,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
                 ->where('status', Status::Enabled->value)
                 ->whereIn('service_provider_config_id', $enabledConfigIdArray);
 
-            // iffinger定了category，添加categoryfiltercondition
+            // iffinger定了category，addcategoryfiltercondition
             if ($category !== null) {
                 $officialBuilder->where('category', $category->value);
             }
@@ -314,13 +314,13 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         $filteredModels = [];
         foreach ($models as $model) {
             $visiblePackages = $model->getVisiblePackages();
-            // ifnothaveconfiguration可见set餐，then对所haveset餐可见
+            // ifnothaveconfigurationvisibleset餐，then对所haveset餐visible
             if (empty($visiblePackages)) {
                 $filteredModels[] = $model;
                 continue;
             }
 
-            // ifconfiguration了可见set餐，checkcurrentset餐whetherin其middle
+            // ifconfiguration了visibleset餐，checkcurrentset餐whetherin其middle
             if ($currentPackage && in_array($currentPackage, $visiblePackages)) {
                 $filteredModels[] = $model;
             }
@@ -362,14 +362,14 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         ProviderDataIsolation $dataIsolation,
         ProviderModelEntity $officialModel
     ): ProviderModelEntity {
-        // create新modelrecord(避免新增field导致复制报错，直接allquantity copy 然back set 新value)
+        // create新modelrecord(避免newfield导致copy报错，直接allquantity copy 然back set 新value)
         $organizationModel = new ProviderModelEntity($officialModel->toArray());
         $organizationModel->setServiceProviderConfigId(0);
         $organizationModel->setModelParentId($officialModel->getId());
         $organizationModel->setIsOffice(true); // Delightfulservice商down的model
         $organizationModel->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $organizationModel->setId(IdGenerator::getSnowId());
-        // 避免error复制 config
+        // 避免errorcopy config
         $organizationModel->setConfig(new ModelConfigItem());
         return $this->create($dataIsolation, $organizationModel);
     }

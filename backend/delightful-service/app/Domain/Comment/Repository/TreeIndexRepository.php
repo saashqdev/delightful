@@ -40,7 +40,7 @@ class TreeIndexRepository
     }
 
     /**
-     * false设现in的父子level关系是1 -> 2 -> 3 -> 4，现inneedin4的backsurface插入5，那么need做的操作是：
+     * false设现in的父子level关系是1 -> 2 -> 3 -> 4，现inneedin4的backsurfaceinsert5，那么need做的操作是：
      * getto4的所have祖先sectionpoint，thenuse4的所have祖先sectionpoint去update5的祖先sectionpoint，thenagaincreate一item5 -> 5的关系。
      * 1->4
      * 2->4

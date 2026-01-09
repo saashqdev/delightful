@@ -125,7 +125,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function updateSeqRelation(DelightfulSeqEntity $seqEntity): bool;
 
     /**
-     * updatemessagereceive人list.
+     * updatemessagereceivepersonlist.
      */
     public function updateReceiveList(DelightfulSeqEntity $seqEntity): bool;
 

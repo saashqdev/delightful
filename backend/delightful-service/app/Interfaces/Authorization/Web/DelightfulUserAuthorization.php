@@ -23,7 +23,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Qbhy\HyperfAuth\Authenticatable;
 
 /**
- * if改了这category的name/property/命名空between，请修改 WebUserGuard.php 的 cacheKey ，避免cache无法also原
+ * if改了这category的name/property/命名空between，请modify WebUserGuard.php 的 cacheKey ，避免cache无法also原
  */
 class DelightfulUserAuthorization extends AbstractAuthorization
 {
@@ -51,7 +51,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected string $avatar = '';
 
     /**
-     * usercurrent选择的organization.
+     * usercurrentchoose的organization.
      */
     protected string $organizationCode = '';
 
@@ -69,7 +69,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
 
     protected array $permissions = [];
 
-    // currentuser所处的环境id
+    // currentuser所处的environmentid
     protected int $delightfulEnvId = 0;
 
     // the三方平台的originalorganizationencoding
@@ -111,12 +111,12 @@ class DelightfulUserAuthorization extends AbstractAuthorization
             goto create_user;
         }
 
-        // 多环境down $authorization 可能重复，willhaveissue（概rate趋近无穷小）
+        // 多environmentdown $authorization 可能重复，willhaveissue（概rate趋近无穷小）
         $delightfulEnvEntity = $delightfulEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
         if ($delightfulEnvEntity === null) {
             $delightfulEnvEntity = $delightfulEnvDomainService->getCurrentDefaultDelightfulEnv();
             if ($delightfulEnvEntity === null) {
-                // tokennothavebind环境，andnothavedefault环境configuration
+                // tokennothavebindenvironment，andnothavedefaultenvironmentconfiguration
                 ExceptionBuilder::throw(ChatErrorCode::Delightful_ENVIRONMENT_NOT_FOUND);
             }
         }

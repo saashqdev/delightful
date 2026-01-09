@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->tinyInteger('third_is_leader')->comment('whether是department领导 0-否 1-是')->default(0);
             $table->string('third_job_title', 64)->comment('in此department的职位')->default('');
             $table->string('third_leader_user_id', 64)->comment('in此department的直属领导的 user_id')->default('');
-            $table->string('third_city', 64)->comment('工作城市')->default('');
+            $table->string('third_city', 64)->comment('work城市')->default('');
             $table->string('third_country', 32)->comment('国家orground区 Code 缩写')->default('CN');
             $table->string('third_join_time', 64)->comment('入职time。secondleveltime戳format，table示from 1970 year 1 month 1 daystart所经过的second数。');
             $table->string('third_employee_no', 32)->comment('工number')->default('');

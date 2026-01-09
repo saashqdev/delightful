@@ -47,7 +47,7 @@ readonly class AuthenticationDomainService
     }
 
     /**
-     * inorganizationmiddle查找user.
+     * inorganizationmiddlefinduser.
      */
     public function findUserInOrganization(string $delightfulId, ?string $organizationCode = null): ?DelightfulUserEntity
     {

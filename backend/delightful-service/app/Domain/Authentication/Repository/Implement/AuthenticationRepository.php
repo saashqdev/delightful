@@ -29,13 +29,13 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     }
 
     /**
-     * pass邮箱查找账number.
+     * pass邮箱find账number.
      */
     public function findAccountByEmail(string $email): ?AccountEntity
     {
         $query = $this->accountModel::getQuery()->where('email', $email)
-            ->where('type', 1) // 人category账number
-            ->where('status', 0); // 正常status
+            ->where('type', 1) // personcategory账number
+            ->where('status', 0); // normalstatus
         $accountData = Db::select($query->toSql(), $query->getBindings())[0] ?? null;
         if (! $accountData) {
             return null;
@@ -45,15 +45,15 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     }
 
     /**
-     * passhand机number查找账number.
+     * passhand机numberfind账number.
      */
     public function findAccountByPhone(string $stateCode, string $phone): ?AccountEntity
     {
         $query = $this->accountModel::getQuery()
             ->where('country_code', $stateCode)
             ->where('phone', $phone)
-            ->where('status', 0) // 正常status
-            ->where('type', 1); // 人category账number
+            ->where('status', 0) // normalstatus
+            ->where('type', 1); // personcategory账number
 
         $accountData = Db::select($query->toSql(), $query->getBindings())[0] ?? null;
         if (! $accountData) {
@@ -64,7 +64,7 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     }
 
     /**
-     * passDelightfulID和organizationencoding查找user.
+     * passDelightfulID和organizationencodingfinduser.
      */
     public function findUserByDelightfulIdAndOrganization(string $delightfulId, ?string $organizationCode = null): ?DelightfulUserEntity
     {

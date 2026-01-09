@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('object_id', 64)->comment('objectid. if是usero clock,table示delightful_id');
             $table->string('seq_id', 64)->comment('message序columnnumber id，each账number的所havemessagemust逐渐增大');
             $table->string('seq_type', 32)->comment('message大type:控制message,chatmessage。');
-            $table->text('content')->comment('序columnnumberdetail. 一些not可见的控制message,只inseqtable存indetail. by及写o clock复制一sharemessagetablecontenttoseqtableuse.');
+            $table->text('content')->comment('序columnnumberdetail. 一些notvisible的控制message,只inseqtable存indetail. by及写o clockcopy一sharemessagetablecontenttoseqtableuse.');
             $table->string('delightful_message_id', 64)->comment('service端generate的唯一messageid,useatmessagewithdraw/edit');
             $table->string('message_id', 64)->comment('序columnnumberassociate的usermessageid,implement已读回执,messagewithdraw/editetc')->default(0);
             // quote的messageid
@@ -35,15 +35,15 @@ return new class extends Migration {
             // sessionid
             $table->string('conversation_id', 64)->comment('message所属sessionid,冗余field');
             $table->tinyInteger('status')->default(0)->comment('messagestatus,0:unread, 1:seen, 2:read, 3:revoked');
-            // messagereceive人list
-            $table->text('receive_list')->comment('messagereceive人list,allquantityrecord未读/已读/已查看userlist');
+            // messagereceivepersonlist
+            $table->text('receive_list')->comment('messagereceivepersonlist,allquantityrecord未读/已读/已viewuserlist');
             $table->text('extra')->comment('attach加field，record一些extensionproperty。 such as话题id。');
             // app_message_id
-            $table->string('app_message_id', 64)->default('')->comment('冗余field,客户端generate的messageid,useat防客户端重复');
+            $table->string('app_message_id', 64)->default('')->comment('冗余field,customer端generate的messageid,useat防customer端重复');
             # bydown是索引set
             // delightful_message_id 索引
             $table->index(['delightful_message_id'], 'idx_delightful_message_id');
-            // 因为经常need按 seq_id sort，所by增加联合索引
+            // 因为经常need按 seq_id sort，所byincrease联合索引
             // bydown索引create移动to单独的migratefilemiddle
             $table->timestamps();
             $table->softDeletes();

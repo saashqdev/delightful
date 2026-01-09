@@ -579,7 +579,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $extraContentParallel = new Parallel(3);
         $modelInterface = $this->getChatModel($dto->getOrganizationCode(), $dto->getUserId());
         $extraContentParallel->add(function () use ($summarize, $dto, $modelInterface) {
-            // odin will修改 vo objectmiddle的value，避免污染，复制again传入
+            // odin willmodify vo objectmiddle的value，避免污染，copyagain传入
             CoContext::setRequestId($dto->getRequestId());
             // 思维导graph
             $mindMapQueryVo = $this->getSearchVOByAggregateSearchDTO($dto, $summarize);
@@ -816,7 +816,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
                     // according to精读进degree，pushassociateissuesearch完毕给front端
                     if (($currentDetailReadCount % $perReadResponseNum === 0) && $readPagesDetailChannel->isAvailable()) {
                         $readPagesDetailChannel->push(1, 5);
-                        // needpush的count减少
+                        // needpush的countdecrease
                         --$questionsNum;
                     }
                 } catch (Throwable $e) {
@@ -892,7 +892,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $timeStart = microtime(true);
         $parallel = new Parallel(2);
         $parallel->add(function () use ($dto, $noRepeatSearchContexts, $associateQuestions) {
-            // 3.4.a.1 并line：according toassociateissue和issue的简单search，generateassociateissue的子issue.(associateissue的子issue只useatfront端展示，目frontnotwillaccording to子issueagaintimesearch+精读)
+            // 3.4.a.1 并line：according toassociateissue和issue的简单search，generateassociateissue的子issue.(associateissue的子issue只useatfront端show，目frontnotwillaccording to子issueagaintimesearch+精读)
             $this->generateAndSendAssociateSubQuestions($dto, $noRepeatSearchContexts, $associateQuestions);
         });
         $parallel->add(function () use (&$noRepeatSearchContexts, $readPagesDetailChannel, $associateQuestions) {

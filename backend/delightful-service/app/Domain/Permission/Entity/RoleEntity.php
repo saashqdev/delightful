@@ -23,10 +23,10 @@ class RoleEntity extends AbstractEntity
 
     protected string $organizationCode;
 
-    protected ?array $permissionTag = null; // permissiontag，useatfront端展示category
+    protected ?array $permissionTag = null; // permissiontag，useatfront端showcategory
 
     /**
-     * whetherinfront端column表middle展示：1=是 0=否.
+     * whetherinfront端column表middleshow：1=是 0=否.
      */
     protected int $isDisplay = 1;
 

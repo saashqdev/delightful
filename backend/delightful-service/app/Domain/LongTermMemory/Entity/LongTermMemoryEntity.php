@@ -407,7 +407,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 添加tag.
+     * addtag.
      */
     public function addTag(string $tag): void
     {
@@ -425,7 +425,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 添加yuandata.
+     * addyuandata.
      */
     public function addMetadata(string $key, mixed $value): void
     {

@@ -91,7 +91,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
     }
 
     /**
-     * format化CSV单yuan格content，对特殊content添加引number.
+     * format化CSV单yuan格content，对特殊contentadd引number.
      * @param string $value 单yuan格content
      * @return string format化back的单yuan格content
      */

@@ -34,10 +34,10 @@ class ByteDanceSTSService
     /** logrecord器 */
     protected LoggerInterface $logger;
 
-    /** HTTP客户端 */
+    /** HTTPcustomer端 */
     private Client $client;
 
-    /** Redis客户端 */
+    /** Rediscustomer端 */
     private Redis $redis;
 
     public function __construct()
@@ -189,7 +189,7 @@ class ByteDanceSTSService
     }
 
     /**
-     * use环境variableconfigurationgetJWT token.
+     * useenvironmentvariableconfigurationgetJWT token.
      *
      * @param int $duration valid期（second），default7200second
      * @return string JWT token

@@ -85,7 +85,7 @@ class DelightfulAgentApi extends AbstractApi
         return AgentAssembler::createAvailableList($page, $data['total'], $data['list'], $data['icons']);
     }
 
-    // create/修改助理
+    // create/modify助理
     public function saveAgent(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -232,7 +232,7 @@ class DelightfulAgentApi extends AbstractApi
 
         if ($result['is_add_friend']) {
             $friendId = $userEntity->getUserId();
-            // 添加好友，助理default同意好友
+            // add好友，助理default同意好友
             $this->userAppService->addFriend($authorization, $friendId, AddFriendType::PASS);
         }
         return $result;
@@ -301,7 +301,7 @@ class DelightfulAgentApi extends AbstractApi
         $aiCode = $delightfulAgentVersionEntity->getFlowCode();
         $userEntity = $this->accountAppService->aiRegister($userDTO, $authorization, $aiCode);
         $friendId = $userEntity->getUserId();
-        // 添加好友，助理default同意好友
+        // add好友，助理default同意好友
         $this->userAppService->addFriend($authorization, $friendId, AddFriendType::PASS);
 
         return $userEntity;

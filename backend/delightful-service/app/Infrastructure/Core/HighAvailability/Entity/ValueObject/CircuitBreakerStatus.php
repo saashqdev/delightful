@@ -15,12 +15,12 @@ use InvalidArgumentException;
 enum CircuitBreakerStatus: string
 {
     /**
-     * closestatus - 正常servicemiddle.
+     * closestatus - normalservicemiddle.
      */
     case CLOSED = 'closed';
 
     /**
-     * 开启status - circuit breakmiddle.
+     * startstatus - circuit breakmiddle.
      */
     case OPEN = 'open';
 

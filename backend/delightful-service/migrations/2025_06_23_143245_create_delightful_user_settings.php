@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->json('value')->comment('settingvalue');
             $table->string('creator', 100)->comment('create者');
             $table->timestamp('created_at')->nullable()->comment('createtime');
-            $table->string('modifier', 100)->comment('修改者');
+            $table->string('modifier', 100)->comment('modify者');
             $table->timestamp('updated_at')->nullable()->comment('updatetime');
 
             $table->index(['organization_code', 'user_id'], 'idx_org_user');

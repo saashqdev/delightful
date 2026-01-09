@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->boolean('enabled')->default(false)->comment('whetherenable: 0-disable, 1-enable');
             $table->string('creator', 64)->default('')->comment('create者');
             $table->dateTime('created_at')->comment('creation time');
-            $table->string('modifier', 64)->default('')->comment('修改者');
+            $table->string('modifier', 64)->default('')->comment('modify者');
             $table->dateTime('updated_at')->comment('update time');
             $table->softDeletes();
 

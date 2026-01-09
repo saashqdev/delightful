@@ -100,7 +100,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             executionType: ExecutionType::IMChat,
         );
 
-        // if是 conversation，force开启 stream 模type
+        // if是 conversation，forcestart stream 模type
         if ($triggerType === TriggerType::ChatMessage) {
             $executionData->setStream(true);
         }
@@ -385,7 +385,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
      */
     public static function routine(string $flowCode, string $branchId, array $routineConfig = []): void
     {
-        // 暂o clockonly系统level别的scheduletask
+        // 暂o clockonlysystemlevel别的scheduletask
         $dataIsolation = FlowDataIsolation::create();
         $delightfulFlow = di(DelightfulFlowDomainService::class)->getByCode($dataIsolation, $flowCode);
         if (! $delightfulFlow) {
@@ -571,7 +571,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         switch ($delightfulFlow->getType()) {
             case Type::Main:
                 $agent = $this->delightfulAgentDomainService->getByFlowCode($delightfulFlow->getCode());
-                // 仅allowcreate人canindisablestatusdowncall
+                // 仅allowcreatepersoncanindisablestatusdowncall
                 if ($agent->getCreatedUid() !== $dataIsolation->getCurrentUserId() && ! $agent->isAvailable()) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.agent_disabled');
                 }

@@ -26,14 +26,14 @@ class CreateDelightfulChatMessageTable extends Migration
             $table->tinyInteger('sender_type')->comment('hairitem方usertype,1:user(aialsobe认为是user)；2：application;3:document;4:多维table格');
             $table->string('sender_organization_code', 64)->comment('hairitem方organizationencoding,可能为空string')->default('');
             // receive方所属organization
-            $table->string('receive_id', 64)->comment('receive方id，可能是人category、aior者application/document/多维table格etc');
+            $table->string('receive_id', 64)->comment('receive方id，可能是personcategory、aior者application/document/多维table格etc');
             $table->tinyInteger('receive_type')->comment('receive方type,1:user(aialsobe认为是user)；2：application;3:document;4:多维table格');
             $table->string('receive_organization_code', 64)->comment('receive方organizationencoding,可能为空string')->default('');
             // message的相关id
-            $table->string('app_message_id', 64)->comment('客户端generate的messageid,useat防客户端重复');
+            $table->string('app_message_id', 64)->comment('customer端generate的messageid,useat防customer端重复');
             $table->string('delightful_message_id', 64)->comment('service端generate的唯一messageid,useatmessagewithdraw/edit');
             # ## message结构
-            // message优先level,由at系统稳定property管理
+            // message优先level,由atsystemstableproperty管理
             $table->tinyInteger('priority')->default(0)->comment('message优先level,0~255,0most低,255most高');
             $table->string('message_type', 32)->comment('messagetype:文本/table情/file/markdownetc');
             $table->text('content')->comment('messagedetail');

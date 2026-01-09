@@ -20,7 +20,7 @@ use Delightful\FlowExprEngine\ComponentFactory;
 #[FlowNodeDefine(
     type: NodeType::VariableArrayPush->value,
     code: NodeType::VariableArrayPush->name,
-    name: '变quantity / arraytail部追加',
+    name: '变quantity / arraytail部append',
     paramsConfig: VariableArrayPushNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,

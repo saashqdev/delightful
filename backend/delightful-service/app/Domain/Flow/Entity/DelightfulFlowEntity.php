@@ -107,7 +107,7 @@ class DelightfulFlowEntity extends AbstractEntity
     private int $userOperation = 0;
 
     /**
-     * process的callbackfunction，ifhave该value，那么将直接execute该选择，而not是passNodeRunner来execute.
+     * process的callbackfunction，ifhave该value，那么将直接execute该choose，而not是passNodeRunner来execute.
      */
     private ?Closure $callback = null;
 
@@ -125,7 +125,7 @@ class DelightfulFlowEntity extends AbstractEntity
 
     public function prepareTestRun(): void
     {
-        // 试运line是要按照开启o clock计算
+        // 试运line是要按照starto clock计算
         $this->enabled = true;
 
         // process试运line其实只need nodes
@@ -180,7 +180,7 @@ class DelightfulFlowEntity extends AbstractEntity
     {
         $this->enabled = ! $this->enabled;
         if ($this->enabled) {
-            // if是要开启，need检测whetherhave nodes configuration
+            // if是要start，need检测whetherhave nodes configuration
             if (empty($this->nodes)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
             }
@@ -207,7 +207,7 @@ class DelightfulFlowEntity extends AbstractEntity
         $this->modifier = $publisher;
         $this->updatedAt = new DateTime('now');
 
-        // publisho clockneed按照开启来process
+        // publisho clockneed按照start来process
         $enable = $this->enabled;
         $this->enabled = true;
         $this->nodeValidate(true);

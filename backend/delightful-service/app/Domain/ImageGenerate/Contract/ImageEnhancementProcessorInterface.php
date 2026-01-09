@@ -26,7 +26,7 @@ interface ImageEnhancementProcessorInterface
     public function enhanceImageUrl(string $imageUrl, ImplicitWatermark $watermark): string;
 
     /**
-     * fromimagedata提取enhanceinformation.
+     * fromimagedataextractenhanceinformation.
      */
     public function extractEnhancementFromImageData(string $imageData): ?array;
 }

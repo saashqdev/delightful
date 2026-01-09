@@ -36,20 +36,20 @@ return new class extends Migration {
             $table->bigInteger('follow_mode_id')->unsigned()->default(0)->comment('跟随的模typeID，0table示not跟随');
             $table->json('restricted_mode_identifiers')->comment('限制的模type标识array');
             $table->string('organization_code', 32)->default('')->comment('organizationcode');
-            $table->string('creator_id', 64)->default('')->comment('create人ID');
+            $table->string('creator_id', 64)->default('')->comment('createpersonID');
             $table->timestamps();
             $table->softDeletes();
 
-            // 添加唯一索引
+            // add唯一索引
             $table->unique('identifier', 'idx_identifier');
         });
 
-        // 插入default模typedata
+        // insertdefault模typedata
         $this->insertDefaultModeData();
     }
 
     /**
-     * 插入default模typedata.
+     * insertdefault模typedata.
      */
     private function insertDefaultModeData(): void
     {

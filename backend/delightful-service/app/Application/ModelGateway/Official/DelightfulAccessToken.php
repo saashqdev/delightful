@@ -51,7 +51,7 @@ class DelightfulAccessToken
         $accessToken->prepareForCreation();
         SystemAccessTokenManager::setSystemAccessToken($accessToken);
 
-        // 新增官方organization人accesstoken常quantity
+        // new官方organizationpersonaccesstoken常quantity
         $userAccessToken = new AccessTokenEntity();
         $userAccessToken->setId(2);
         $userAccessToken->setName($application->getCode());

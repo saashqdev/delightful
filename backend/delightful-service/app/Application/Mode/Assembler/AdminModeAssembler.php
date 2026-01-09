@@ -50,9 +50,9 @@ class AdminModeAssembler
     }
 
     /**
-     * 聚合rootconvert为DTO.
+     * aggregaterootconvert为DTO.
      *
-     * @param ModeAggregate $aggregate 模type聚合root
+     * @param ModeAggregate $aggregate 模typeaggregateroot
      * @param array $providerModels optional的modelinfomapping [modelId => ProviderModelEntity]
      */
     public static function aggregateToAdminDTO(ModeAggregate $aggregate, array $providerModels = []): AdminModeAggregateDTO
@@ -71,9 +71,9 @@ class AdminModeAssembler
     }
 
     /**
-     * minutegroup聚合rootconvert为DTO.
+     * minutegroupaggregaterootconvert为DTO.
      *
-     * @param ModeGroupAggregate $groupAggregate minutegroup聚合root
+     * @param ModeGroupAggregate $groupAggregate minutegroupaggregateroot
      * @param array $providerModels optional的modelinfomapping [model_id => ['best' => ProviderModelEntity|null, 'all' => ProviderModelEntity[], 'status' => string]]
      */
     public static function groupAggregateToAdminDTO(ModeGroupAggregate $groupAggregate, array $providerModels = []): AdminModeGroupAggregateDTO
@@ -86,7 +86,7 @@ class AdminModeAssembler
         foreach ($groupAggregate->getRelations() as $relation) {
             $modelDTO = new ModeGroupModelDTO($relation->toArray());
 
-            // use model_id 查找model
+            // use model_id findmodel
             $modelId = $relation->getModelId();
             $modelInfo = $providerModels[$modelId] ?? null;
 
@@ -105,10 +105,10 @@ class AdminModeAssembler
                 }
                 $modelDTO->setModelDescription($description);
 
-                // 保持tobackcompatible，set providerModelId 为查找to的model的ID
+                // 保持tobackcompatible，set providerModelId 为findto的model的ID
                 $modelDTO->setProviderModelId((string) $providerModel->getId());
             } else {
-                // back台管理need显示所havestatus，include无可usemodel的情况
+                // back台管理needdisplay所havestatus，include无可usemodel的情况
                 $status = $modelInfo['status'] ?? ModelStatus::Deleted;
                 $modelDTO->setModelStatus($status);
                 $modelDTO->setModelStatus($status);
@@ -204,7 +204,7 @@ class AdminModeAssembler
      */
     public static function applyUpdateRequestToEntity(UpdateModeRequest $request, ModeEntity $existingEntity): void
     {
-        // 只updaterequestmiddlecontain的allow修改的field
+        // 只updaterequestmiddlecontain的allowmodify的field
         $existingEntity->setNameI18n($request->getNameI18n());
         $existingEntity->setPlaceholderI18n($request->getPlaceholderI18n());
         $existingEntity->setIdentifier($request->getIdentifier());

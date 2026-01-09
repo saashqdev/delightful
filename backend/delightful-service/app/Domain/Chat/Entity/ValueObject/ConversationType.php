@@ -15,7 +15,7 @@ enum ConversationType: int
     // 与ai的conversation(private chat)
     case Ai = 0;
 
-    // 与人category的conversation(private chat)
+    // 与personcategory的conversation(private chat)
     case User = 1;
 
     // group chat

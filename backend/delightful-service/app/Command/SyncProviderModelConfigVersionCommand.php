@@ -240,7 +240,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
         $this->logger->info('synccomplete！statisticsinfo:');
         $this->logger->info(sprintf('  总model数: %d', $result['total']));
         $this->logger->info(sprintf('  已haveversion: %d', $result['skipped']));
-        $this->logger->info(sprintf('  新增version: %d', $result['created']));
+        $this->logger->info(sprintf('  newversion: %d', $result['created']));
         $this->logger->info(sprintf('  failquantity: %d', $result['failed']));
         $this->logger->info('=================================');
     }

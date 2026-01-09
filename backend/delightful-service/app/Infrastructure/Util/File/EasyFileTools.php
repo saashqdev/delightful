@@ -36,7 +36,7 @@ class EasyFileTools
         // 去掉blob的head
         $blob = substr($blob, 44);
 
-        // 将新data追加tofile末tail
+        // 将新dataappendtofile末tail
         // getfilesize
         fseek($wav1, 0, SEEK_END);
         fwrite($wav1, $blob);

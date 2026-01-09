@@ -67,7 +67,7 @@ class CloudswaySearch
             $requestUrl = rtrim($basePath, '/') . '/search/' . trim($endpoint, '/') . '/smart';
         }
 
-        // 添加optionalparameter
+        // addoptionalparameter
         if (! empty($freshness)) {
             $queryParams['freshness'] = $freshness;
         }
@@ -82,7 +82,7 @@ class CloudswaySearch
             'Pragma' => 'no-cache',  // notusecache，保证实o clockproperty
         ];
 
-        // create Guzzle 客户端
+        // create Guzzle customer端
         $client = new Client([
             'timeout' => self::DEFAULT_SEARCH_ENGINE_TIMEOUT,
             'headers' => $headers,

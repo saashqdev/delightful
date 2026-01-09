@@ -82,7 +82,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * 查看单knowledge basedocumentdetail.
+     * view单knowledge basedocumentdetail.
      */
     public function show(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $selectForUpdate = false): KnowledgeBaseDocumentEntity
     {
@@ -284,7 +284,7 @@ readonly class KnowledgeBaseDocumentDomainService
      */
     private function prepareForUpdate(KnowledgeBaseDocumentEntity $newDocument, KnowledgeBaseDocumentEntity $oldDocument): void
     {
-        // notallow修改的field保持原value
+        // notallowmodify的field保持原value
         $newDocument->setId($oldDocument->getId());
         $newDocument->setCode($oldDocument->getCode());
         $newDocument->setKnowledgeBaseCode($oldDocument->getKnowledgeBaseCode());

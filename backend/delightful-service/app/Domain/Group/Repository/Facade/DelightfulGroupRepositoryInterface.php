@@ -22,7 +22,7 @@ interface DelightfulGroupRepositoryInterface
      */
     public function getGroupsByIds(array $groupIds): array;
 
-    // 修改groupinformation
+    // modifygroupinformation
     public function updateGroupById(string $groupId, array $data): int;
 
     public function getGroupInfoById(string $groupId, ?string $organizationCode = null): ?DelightfulGroupEntity;

@@ -51,7 +51,7 @@ class SeqAssembler
     }
 
     /**
-     * 批quantityreturn客户端need的Seq结构,对result集force重新降序rowcolumn.
+     * 批quantityreturncustomer端need的Seq结构,对result集force重新降序rowcolumn.
      * @return ClientSequenceResponse[]
      */
     public static function getClientSeqStructs(array $seqInfos, array $messageInfos): array
@@ -75,7 +75,7 @@ class SeqAssembler
     }
 
     /**
-     * Json streammessage的客户端 seq 结构.
+     * Json streammessage的customer端 seq 结构.
      */
     public static function getClientJsonStreamSeqStruct(
         string $seqId,
@@ -111,7 +111,7 @@ class SeqAssembler
     }
 
     /**
-     * generate客户端need的Seq结构.
+     * generatecustomer端need的Seq结构.
      */
     public static function getClientSeqStruct(
         DelightfulSeqEntity $seqEntity,
@@ -125,7 +125,7 @@ class SeqAssembler
     }
 
     /**
-     * according to已经存in的seqEntity,generate已读/已查看/withdraw/editetcmessagestatus变moretype的回执message.
+     * according to已经存in的seqEntity,generate已读/已view/withdraw/editetcmessagestatus变moretype的回执message.
      */
     public static function generateReceiveStatusChangeSeqEntity(DelightfulSeqEntity $originSeqEntity, ControlMessageType $messageType): DelightfulSeqEntity
     {
@@ -136,7 +136,7 @@ class SeqAssembler
             $referMessageId = $originSeqEntity->getReferMessageId();
         }
         $statusChangeSeqEntity = clone $originSeqEntity;
-        // message的receive方notneedrecord收item人column表,清null该fieldinfo
+        // message的receive方notneedrecord收itempersoncolumn表,清null该fieldinfo
         $statusChangeSeqEntity->setReceiveList(null);
         $statusChangeSeqEntity->setSeqType($messageType);
         $seqData = $statusChangeSeqEntity->toArray();
@@ -155,7 +155,7 @@ class SeqAssembler
     }
 
     /**
-     * according to已经存in的seqEntity,generate已读/已查看/withdraw/editetcmessagestatus变moretype的回执message.
+     * according to已经存in的seqEntity,generate已读/已view/withdraw/editetcmessagestatus变moretype的回执message.
      * @param string $referMessageId supportfinger定quote的messageid,useat给receive方的其他设备push回执,or者给hairitem方push回执
      */
     public static function generateStatusChangeSeqEntity(array $seqData, string $referMessageId): DelightfulSeqEntity
@@ -271,7 +271,7 @@ class SeqAssembler
             // if是chatmessage,message的specificcontentfrommessageEntitymiddleget
             $messageData = $messageEntity?->getContent()->toArray();
         }
-        // chatstatistics未读人数
+        // chatstatistics未读person数
         $receiveList = $seqEntity->getReceiveList();
         $unreadCount = $receiveList === null ? 0 : count($receiveList->getUnreadList());
         if (empty($messageData)) {
@@ -279,28 +279,28 @@ class SeqAssembler
         }
         $carbon = Carbon::parse($seqEntity->getCreatedAt());
         $messageTopicId = (string) $seqEntity->getExtra()?->getTopicId();
-        // generate客户端message结构
+        // generatecustomer端message结构
         $clientMessageData = [
             // service端generate的message唯一id，all局唯一。useatwithdraw、editmessage。
             'delightful_message_id' => $seqEntity->getDelightfulMessageId(),
-            // 客户端generate，needios/安卓/web三端共同确定一generate算法。useat告知客户端，delightful_message_id的由来
+            // customer端generate，needios/安卓/web三端共同确定一generate算法。useat告知customer端，delightful_message_id的由来
             'app_message_id' => $seqEntity->getAppMessageId(),
             // send者
             'sender_id' => (string) $messageEntity?->getSenderId(),
             'topic_id' => $messageTopicId,
-            // message的小category。控制message的小category：已读回执；withdraw；edit；入群/退群；organization架构变动; 。 展示message：text,voice,img,file,videoetc
+            // message的小category。控制message的小category：已读回执；withdraw；edit；入群/退群；organization架构变动; 。 showmessage：text,voice,img,file,videoetc
             'type' => $messageTypeName,
-            // 回显未读人数,ifuserpoint击了detail,againrequestspecific的messagecontent
+            // 回显未读person数,ifuserpoint击了detail,againrequestspecific的messagecontent
             'unread_count' => $unreadCount,
             // messagesendtime，与 delightful_message_id 一起，useatwithdraw、editmessageo clock的唯一property校验。
             'send_time' => $carbon->getTimestamp(),
-            // chatmessagestatus:unread | seen | read |revoked  .对应middle文释义：未读|已读|已查看（non纯文本的复杂typemessage，userpoint击了detail）  | withdraw
+            // chatmessagestatus:unread | seen | read |revoked  .对应middle文释义：未读|已读|已view（non纯文本的复杂typemessage，userpoint击了detail）  | withdraw
             'status' => $messageStatus ?: '',
             'content' => $messageData,
         ];
         $clientSeqMessage = new ClientMessage($clientMessageData);
 
-        // generate客户端seq结构
+        // generatecustomer端seq结构
         $clientSequenceData = [
             // 序columnnumber归属账numberid
             'delightful_id' => $seqEntity->getObjectId(),
@@ -312,7 +312,7 @@ class SeqAssembler
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // send方的messageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),
-            // message所属conversation窗口。 客户端canaccording to此value确定messagewhether要reminderetc。if本groundnothavehair现这conversationid，主动toservice端queryconversation窗口detail
+            // message所属conversation窗口。 customer端canaccording to此value确定messagewhether要reminderetc。if本groundnothavehair现这conversationid，主动toservice端queryconversation窗口detail
             'conversation_id' => $seqEntity->getConversationId(),
             // 本itemmessage所属organization
             'organization_code' => $seqEntity->getOrganizationCode(),

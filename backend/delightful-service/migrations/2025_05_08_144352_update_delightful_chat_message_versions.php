@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_chat_message_versions', function (Blueprint $table) {
-            // message_type field，ifnothavethen添加
+            // message_type field，ifnothavethenadd
             if (! Schema::hasColumn('delightful_chat_message_versions', 'message_type')) {
                 $table->string('message_type', 64)->nullable()->comment('messagetype');
             }

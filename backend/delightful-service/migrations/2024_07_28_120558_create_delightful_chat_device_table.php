@@ -28,7 +28,7 @@ class CreateDelightfulChatDeviceTable extends Migration
             $table->string('sdk_version', 10)->comment('appversion');
             $table->tinyInteger('status')->default(0)->comment('onlinestatus，0：offline；1：online');
             $table->string('sid', 25)->comment('connecttoservice端的sid');
-            $table->string('client_addr', 25)->comment('客户端ground址');
+            $table->string('client_addr', 25)->comment('customer端ground址');
             $table->index('user_id', 'idx_user_id');
             $table->softDeletes();
             $table->timestamps();

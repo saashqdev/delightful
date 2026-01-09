@@ -80,7 +80,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
             $systemOutput = null;
             $customSystemOutput = null;
             $config = $branch['config'] ?? [];
-            // 可meanwhile选择多typemethod触hair，所by他的入参和出参放to这within来process
+            // 可meanwhilechoose多typemethod触hair，所by他的入参和出参放to这within来process
             switch ($triggerType) {
                 case TriggerType::ChatMessage:
                     $output = $this->getChatMessageOutputTemplate();
@@ -446,7 +446,7 @@ JSON;
         "add_time": {
             "type": "string",
             "key": "add_time",
-            "title": "添加time",
+            "title": "addtime",
             "description": "",
             "items": null,
             "properties": null,

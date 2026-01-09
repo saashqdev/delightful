@@ -233,7 +233,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // 批quantitygetmodel
         $allModels = $this->providerModelDomainService->getModelsByModelIds($providerDataIsolation, array_unique($allModelIds));
 
-        // 提取所haveservice商ID
+        // extract所haveservice商ID
         $providerConfigIds = [];
         foreach ($allModels as $models) {
             foreach ($models as $model) {
@@ -250,7 +250,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             }
         }
 
-        // 为eachmodel_id选择most佳model（考虑level联status）
+        // 为eachmodel_idchoosemost佳model（考虑level联status）
         $providerModels = [];
         foreach ($allModels as $modelId => $models) {
             $bestModel = $this->selectBestModel($models, $providerStatuses);
@@ -285,7 +285,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // 单timequeryget完整的modelinfo
         $allModels = $this->providerModelDomainService->getModelsByModelIds($providerDataIsolation, array_unique($allModelIds));
 
-        // 提取所haveservice商ID
+        // extract所haveservice商ID
         $providerConfigIds = [];
         foreach ($allModels as $models) {
             foreach ($models as $model) {
@@ -319,11 +319,11 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
     }
 
     /**
-     * frommodelcolumn表middle选择most佳model（考虑service商level联status）.
+     * frommodelcolumn表middlechoosemost佳model（考虑service商level联status）.
      *
      * @param ProviderModelEntity[] $models modelcolumn表
      * @param array<int, Status> $providerStatuses service商statusmapping
-     * @return null|ProviderModelEntity 选择的most佳model，ifnothave可usemodelthenreturnnull
+     * @return null|ProviderModelEntity choose的most佳model，ifnothave可usemodelthenreturnnull
      */
     private function selectBestModel(array $models, array $providerStatuses = []): ?ProviderModelEntity
     {
@@ -341,7 +341,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             return null;
         }
 
-        // 优先选择service商enableandmodelenable的model
+        // 优先chooseservice商enableandmodelenable的model
         foreach ($models as $model) {
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
@@ -388,7 +388,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
 
-            // service商enableandmodelenable才算正常
+            // service商enableandmodelenable才算normal
             if ($providerStatus === Status::Enabled && $model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
                 return ModelStatus::Normal;
             }

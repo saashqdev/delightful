@@ -46,7 +46,7 @@ class PermissionChecker
             return false;
         }
 
-        // 判断whetherall局管理员
+        // 判断whetherall局administrator
         $globalAdminsEnum = SuperPermissionEnum::GLOBAL_ADMIN->value;
         if (isset($permissions[$globalAdminsEnum]) && in_array($mobile, $permissions[$globalAdminsEnum])) {
             return true;
@@ -64,7 +64,7 @@ class PermissionChecker
     }
 
     /**
-     * getuser拥have管理员permission的organizationencodinglist.
+     * getuser拥haveadministratorpermission的organizationencodinglist.
      */
     public static function getUserOrganizationAdminList(string $mageId): array
     {

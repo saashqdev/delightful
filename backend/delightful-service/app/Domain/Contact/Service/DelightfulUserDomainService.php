@@ -59,7 +59,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             // if是 ai ,直接同意
             $friendStatus = FriendStatus::Agree;
         } else {
-            // if是人category，check他们whether处at同一organization
+            // if是personcategory，check他们whether处at同一organization
             $this->assertUserInOrganization($friendId, $dataIsolation->getCurrentOrganizationCode());
         }
         // 将好友关系write friend 表.
@@ -351,7 +351,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         $owner = $this->acquireLock($lockKey);
 
         try {
-            // handle麦吉user系统的token，getdelightfulId和userId
+            // handle麦吉usersystem的token，getdelightfulId和userId
             $tokenDTO = new DelightfulTokenEntity();
             $tokenDTO->setType(DelightfulTokenType::Account);
             $tokenDTO->setToken($authorization);

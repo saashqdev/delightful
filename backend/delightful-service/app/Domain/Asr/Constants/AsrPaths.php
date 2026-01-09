@@ -14,22 +14,22 @@ namespace App\Domain\Asr\Constants;
 class AsrPaths
 {
     /**
-     * 工作区directory名.
+     * work区directory名.
      */
     public const WORKSPACE_DIR = '.workspace';
 
     /**
-     * 隐藏录音directoryfront缀.
+     * hidden录音directoryfront缀.
      */
     public const HIDDEN_DIR_PREFIX = '.asr_recordings';
 
     /**
-     * 隐藏statusdirectoryname.
+     * hiddenstatusdirectoryname.
      */
     public const STATES_DIR = '.asr_states';
 
     /**
-     * generate隐藏directory相对path.
+     * generatehiddendirectory相对path.
      *
      * @param string $taskKey task键
      * @return string format：.asr_recordings/{task_key}

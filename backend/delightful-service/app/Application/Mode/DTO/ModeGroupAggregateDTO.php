@@ -57,7 +57,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 添加model.
+     * addmodel.
      */
     public function addModel(ModeGroupModelDTO $model): void
     {
@@ -67,7 +67,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 添加modelID（tobackcompatible，butnot推荐use）.
+     * addmodelID（tobackcompatible，butnot推荐use）.
      */
     public function addModelId(string $modelId): void
     {

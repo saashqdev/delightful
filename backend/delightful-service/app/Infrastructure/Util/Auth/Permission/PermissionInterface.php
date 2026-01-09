@@ -10,17 +10,17 @@ namespace App\Infrastructure\Util\Auth\Permission;
 interface PermissionInterface
 {
     /**
-     * 判断whetherorganization管理员.
+     * 判断whetherorganizationadministrator.
      *
      * @param string $organizationCode organizationencoding
      * @param string $mobile hand机number
      *
-     * @return bool whether超level管理员
+     * @return bool whether超leveladministrator
      */
     public function isOrganizationAdmin(string $organizationCode, string $mobile): bool;
 
     /**
-     * getuser所拥have的organization管理员code.
+     * getuser所拥have的organizationadministratorcode.
      */
     public function getOrganizationAdminList(string $delightfulId): array;
 }

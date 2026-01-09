@@ -95,7 +95,7 @@ readonly class KnowledgeBaseSyncSubscriber implements ListenerInterface
             $logger->error($throwable->getMessage() . PHP_EOL . $throwable->getTraceAsString());
             $knowledge->setSyncStatus(KnowledgeSyncStatus::SyncFailed);
             $knowledge->setSyncStatusMessage($throwable->getMessage());
-            // 同failed，回退version
+            // 同failed，backversion
             $knowledge->setVersion(max(1, $knowledge->getVersion() - 1));
             $changed = true;
         }

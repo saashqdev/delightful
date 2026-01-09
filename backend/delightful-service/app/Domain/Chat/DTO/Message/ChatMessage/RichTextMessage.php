@@ -53,7 +53,7 @@ class RichTextMessage extends AbstractAttachmentMessage implements TextContentIn
     }
 
     /**
-     * 递归查找所haveimagesectionpoint的 file_id.
+     * 递归find所haveimagesectionpoint的 file_id.
      *
      * @param array $data 要search的dataarray
      * @param int $maxDepth most大递归深degree

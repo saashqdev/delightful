@@ -100,7 +100,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
      */
     public function update(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentEntity $documentEntity): KnowledgeBaseDocumentEntity
     {
-        // 查找document
+        // finddocument
         $builder = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query());
         $model = $builder->where('code', $documentEntity->getCode())->first();
 
@@ -141,7 +141,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
      */
     public function getDocumentCountByKnowledgeBaseCode(KnowledgeBaseDataIsolation $dataIsolation, array $knowledgeBaseCodes): array
     {
-        // minutegroup聚合query，geteachknowledge base的documentquantity
+        // minutegroupaggregatequery，geteachknowledge base的documentquantity
         $res = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query())
             ->select('knowledge_base_code', Db::raw('count(*) as count'))
             ->groupBy('knowledge_base_code')
@@ -214,7 +214,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 查看单knowledge basedocumentdetail.
+     * view单knowledge basedocumentdetail.
      */
     public function show(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $selectForUpdate = false): ?KnowledgeBaseDocumentEntity
     {

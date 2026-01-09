@@ -107,7 +107,7 @@ return new class extends Migration {
 
                 $totalDeleted = 0;
 
-                // 1. 查找官方organizationmiddle Delightful service商的configurationID
+                // 1. find官方organizationmiddle Delightful service商的configurationID
                 $delightfulProviderConfigQuery = Db::table('service_provider_configs as configs')
                     ->join('service_provider as providers', 'configs.service_provider_id', '=', 'providers.id')
                     ->select('configs.id')
@@ -246,7 +246,7 @@ return new class extends Migration {
 
             $logger->info('needcleanup的organizationquantity: ' . count($allOrganizationCodes));
 
-            // 5. 按organizationhandlecleanup工作（小transaction）
+            // 5. 按organizationhandlecleanupwork（小transaction）
             $this->cleanOrganizationsInBatches($allOrganizationCodes, $officialModelIds, $officialEnabledModels, $logger);
         } catch (Throwable $e) {
             $logger->error('cleanup service_provider_models 冗余dataproceduremiddlehair生error: ' . $e->getMessage());
@@ -284,7 +284,7 @@ return new class extends Migration {
 
             $parallel = new Parallel(10);
 
-            // 添加并hairtask
+            // add并hairtask
             foreach ($chunk as $organizationCode) {
                 $parallel->add(function () use ($organizationCode, $officialModelIds, $officialEnabledModels) {
                     try {
@@ -358,7 +358,7 @@ return new class extends Migration {
             $invalidConfigDataDeletedCount = $this->cleanModelsWithInvalidConfigData($organizationCode, $officialOrganizationCode);
             $totalDeletedCount += $invalidConfigDataDeletedCount;
 
-            // 4. 查找 model_parent_id not为 0 的data
+            // 4. find model_parent_id not为 0 的data
             $modelsWithParent = Db::table('service_provider_models')
                 ->where('organization_code', $organizationCode)
                 ->where('model_parent_id', '!=', 0)
@@ -417,7 +417,7 @@ return new class extends Migration {
             return 0;
         }
 
-        // 2. 提取所have唯一的 config_id
+        // 2. extract所have唯一的 config_id
         $configIds = $modelConfigs->pluck('service_provider_config_id')->unique()->filter()->toArray();
 
         if (empty($configIds)) {

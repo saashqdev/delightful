@@ -91,9 +91,9 @@ class DelightfulUserContactAppService extends AbstractAppService
         if (! $this->userDomainService->addFriend($dataIsolation, $friendId)) {
             return false;
         }
-        // send添加好友message。加好友split为：好友申请/好友同意/好友拒绝
+        // sendadd好友message。加好友split为：好友申请/好友同意/好友reject
         if ($addFriendType === AddFriendType::PASS) {
-            // send添加好友控制message
+            // sendadd好友控制message
             $friendUserEntity = new DelightfulUserEntity();
             $friendUserEntity->setUserId($friendId);
             $this->sendAddFriendControlMessage($dataIsolation, $friendUserEntity);
@@ -102,7 +102,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * toAIassistantsend添加好友控制message.
+     * toAIassistantsendadd好友控制message.
      * @throws Throwable
      */
     public function sendAddFriendControlMessage(DataIsolation $dataIsolation, DelightfulUserEntity $friendUserEntity): bool
@@ -161,7 +161,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 批quantityqueryorganization架构、ai 、or者人版的user.
+     * 批quantityqueryorganization架构、ai 、or者person版的user.
      */
     public function getUserDetailByIds(UserQueryDTO $dto, DelightfulUserAuthorization $authorization): array
     {
@@ -185,7 +185,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $this->addAgentInfoToUsers($authorization, $usersDetail);
 
         if ($queryType === UserQueryType::User) {
-            // 只查人员info
+            // 只查person员info
             $users = $usersDetail;
         } else {
             // querydepartmentinfo
@@ -202,7 +202,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             $users = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfo, $withDepartmentFullPath);
         }
 
-        // 通讯录和search相关interface，filter隐藏department和隐藏user。
+        // 通讯录和search相关interface，filterhiddendepartment和hiddenuser。
         $users = $this->filterDepartmentOrUserHidden($users);
         return PageListAssembler::pageByMysql($users, (int) $dto->getPageToken(), $pageSize, count($dto->getUserIds()));
     }
@@ -231,7 +231,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $usersDetail = $this->getUsersAvatar($usersDetail, $dataIsolation);
         // organizationuser + departmentdetail
         $userDepartmentDetailDTOS = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfoWithFullPath);
-        // 通讯录和search相关interface，filter隐藏department和隐藏user。
+        // 通讯录和search相关interface，filterhiddendepartment和hiddenuser。
         $userDepartmentDetailDTOS = $this->filterDepartmentOrUserHidden($userDepartmentDetailDTOS);
         // 由at $usersPageResponseDTO 的 items 限制的parametertype，fromcodestandard的angledegree，again new 一通use的 PageResponseDTO， 按pagination的结构return
         // 另outside，由atfilter逻辑的存in，可能本timereturn的 items quantity少at $limit,but是againhavedown一页。
@@ -253,7 +253,7 @@ class DelightfulUserContactAppService extends AbstractAppService
 
         $usersForQueryDepartmentPath = [];
         $usersForQueryJobTitle = [];
-        // searchpositioncontainsearch词的人
+        // searchpositioncontainsearch词的person
         if ($queryDTO->isQueryByJobTitle()) {
             $departmentUsers = $this->departmentUserDomainService->searchDepartmentUsersByJobTitle($queryDTO->getQuery(), $dataIsolation);
             // getuser详细info
@@ -336,7 +336,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     public function getLoginCodeEnv(string $loginCode): DelightfulEnvironmentEntity
     {
         if (empty($loginCode)) {
-            // ifnothave传，那么default取current环境
+            // ifnothave传，那么default取currentenvironment
             $delightfulEnvironmentEntity = $this->delightfulOrganizationEnvDomainService->getCurrentDefaultDelightfulEnv();
         } else {
             $delightfulEnvironmentEntity = $this->delightfulOrganizationEnvDomainService->getEnvironmentEntityByLoginCode($loginCode);
@@ -368,7 +368,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 为user添加Agentinfo(applicationlayer协调器).
+     * 为useraddAgentinfo(applicationlayer协调器).
      * @param array<UserDetailDTO> $usersDetailDTOList
      */
     public function addAgentInfoToUsers(Authenticatable $authorization, array $usersDetailDTOList): array
@@ -417,13 +417,13 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 通讯录和search相关interface，filter隐藏department和隐藏user。
+     * 通讯录和search相关interface，filterhiddendepartment和hiddenuser。
      * @param UserDepartmentDetailDTO[]|UserDetailDTO[] $usersDepartmentDetails
      */
     private function filterDepartmentOrUserHidden(array $usersDepartmentDetails): array
     {
         foreach ($usersDepartmentDetails as $key => $userDepartmentDetail) {
-            // userwhether隐藏
+            // userwhetherhidden
             if ($userDepartmentDetail->getOption() === UserOption::Hidden) {
                 unset($usersDepartmentDetails[$key]);
                 continue;
@@ -434,7 +434,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             }
             $userPathNodes = [];
             foreach ($userDepartmentDetail->getPathNodes() as $pathNode) {
-                // user所in的departmentwhether隐藏
+                // user所in的departmentwhetherhidden
                 if ($pathNode->getOption() === DepartmentOption::Hidden) {
                     continue;
                 }

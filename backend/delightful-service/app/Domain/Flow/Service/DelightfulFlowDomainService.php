@@ -147,7 +147,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * 修改processstatus.
+     * modifyprocessstatus.
      */
     public function changeEnable(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow, ?bool $enable = null): void
     {

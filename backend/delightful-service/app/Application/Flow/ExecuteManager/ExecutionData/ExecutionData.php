@@ -104,7 +104,7 @@ class ExecutionData
     private array $ext = [];
 
     /**
-     * current操作人.
+     * current操作person.
      */
     private Operator $operator;
 

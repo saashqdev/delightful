@@ -129,7 +129,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
                 'organization_code' => $user['organization_code'],
             ];
         }
-        // 批quantity往groupmiddle添加user
+        // 批quantity往groupmiddleadduser
         ! empty($groupUsers) && $this->groupUserModel::query()->insert($groupUsers);
         return true;
     }

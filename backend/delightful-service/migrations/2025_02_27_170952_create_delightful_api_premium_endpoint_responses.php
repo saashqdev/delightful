@@ -41,7 +41,7 @@ return new class extends Migration {
             $table->text('exception_message')->comment('exceptioninfo')->nullable();
             $table->datetimes();
             $table->index(['request_id'], 'request_id_index');
-            // 为 endpoint_id 和 created_at 添加联合索引，useat按timerangequery特定端point的response
+            // 为 endpoint_id 和 created_at add联合索引，useat按timerangequery特定端point的response
             $table->index(['endpoint_id', 'created_at'], 'endpoint_id_created_at_index');
             $table->comment('接入pointresponserecordtable');
         });

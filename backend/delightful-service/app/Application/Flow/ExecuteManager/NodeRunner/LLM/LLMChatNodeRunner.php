@@ -65,10 +65,10 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                     $contentMessage = new UserMessage();
                     $contentMessage->setContent($userPrompt);
                     $contentMessage->setIdentifier($contentMessageId);
-                    // 仅仅添加attachment
+                    // 仅仅addattachment
                     $imageUrls = $executionData->getTriggerData()->getAttachmentImageUrls();
                     if ($imageUrls) {
-                        // havecontentandhaveattachment，添加文本和imagecontent
+                        // havecontentandhaveattachment，add文本和imagecontent
                         $contentMessage->addContent(UserMessageContent::text($userPrompt));
                         foreach ($imageUrls as $imageUrl) {
                             $contentMessage->addContent(UserMessageContent::imageUrl($imageUrl));

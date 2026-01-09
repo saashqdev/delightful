@@ -12,7 +12,7 @@ class ModeAggregate
     private ModeEntity $mode;
 
     /**
-     * @var ModeGroupAggregate[] minutegroup聚合rootarray
+     * @var ModeGroupAggregate[] minutegroupaggregaterootarray
      */
     private array $groupAggregates = [];
 

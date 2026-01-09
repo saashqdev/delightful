@@ -32,7 +32,7 @@ class DefaultFileRepository
     }
 
     /**
-     * 插入.
+     * insert.
      */
     public function insert(DefaultFileEntity $defaultFileEntity): DefaultFileEntity
     {

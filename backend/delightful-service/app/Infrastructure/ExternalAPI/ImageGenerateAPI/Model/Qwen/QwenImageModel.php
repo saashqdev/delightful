@@ -144,7 +144,7 @@ class QwenImageModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // fromnativeresultmiddle提取imageURL
+        // fromnativeresultmiddleextractimageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             $output = $result['output'];
@@ -472,7 +472,7 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * 为通义千问originaldata添加水印.
+     * 为通义千问originaldataadd水印.
      */
     private function processQwenRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -523,7 +523,7 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * 将通义千问imagedata添加toOpenAIresponseobjectmiddle.
+     * 将通义千问imagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponseQwen(
         OpenAIFormatResponse $response,
@@ -533,7 +533,7 @@ class QwenImageModel extends AbstractImageGenerate
         // useRedislockensure并hairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
-            // from通义千问responsemiddle提取data
+            // from通义千问responsemiddleextractdata
             if (empty($qwenResult['output']['results']) || ! is_array($qwenResult['output']['results'])) {
                 return;
             }
@@ -552,7 +552,7 @@ class QwenImageModel extends AbstractImageGenerate
                             'url' => $processedUrl,
                         ];
                     } catch (Exception $e) {
-                        $this->logger->error('Qwen添加imagedata：URL水印handlefail', [
+                        $this->logger->error('Qwenaddimagedata：URL水印handlefail', [
                             'error' => $e->getMessage(),
                             'url' => $resultItem['url'],
                         ]);
@@ -570,7 +570,7 @@ class QwenImageModel extends AbstractImageGenerate
                 $currentUsage->addGeneratedImages($qwenResult['usage']['image_count'] ?? 1);
             // 通义千问nothavetokeninfo，保持defaultvalue
             } else {
-                // ifnothaveusageinfo，default增加1张image
+                // ifnothaveusageinfo，defaultincrease1张image
                 $currentUsage->addGeneratedImages(1);
             }
 

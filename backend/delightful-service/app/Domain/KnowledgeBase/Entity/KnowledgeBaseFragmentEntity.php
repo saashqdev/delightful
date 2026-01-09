@@ -124,7 +124,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
 
     public function hasModify(KnowledgeBaseFragmentEntity $savingDelightfulFlowKnowledgeFragmentEntity): bool
     {
-        // if content 和 metadata allnothave变化，thennotneedupdate了
+        // if content 和 metadata allnothavechange，thennotneedupdate了
         if ($savingDelightfulFlowKnowledgeFragmentEntity->getContent() === $this->content
             && $savingDelightfulFlowKnowledgeFragmentEntity->getMetadata() === $this->metadata
             && $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId() === $this->businessId

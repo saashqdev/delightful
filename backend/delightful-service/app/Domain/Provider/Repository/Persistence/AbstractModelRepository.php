@@ -98,7 +98,7 @@ abstract class AbstractModelRepository extends AbstractRepository
         $entity->setUpdatedAt($now);
         $entity->setDeletedAt(null);
 
-        // setarrayproperty（useatdatabase插入）
+        // setarrayproperty（useatdatabaseinsert）
         $attributes['id'] = $id;
         $attributes['created_at'] = $nowString;
         $attributes['updated_at'] = $nowString;

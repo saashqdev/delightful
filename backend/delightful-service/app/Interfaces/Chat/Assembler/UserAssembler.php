@@ -151,18 +151,18 @@ class UserAssembler
         /** @var array<UserDepartmentDetailDTO> $usersDepartmentDetailDTOList */
         $usersDepartmentDetailDTOList = [];
 
-        // 步骤1: builduserIDtodepartment关系的mapping
+        // step1: builduserIDtodepartment关系的mapping
         $userDepartmentMap = [];
         foreach ($departmentUsers as $departmentUser) {
             $userDepartmentMap[$departmentUser->getUserId()][] = $departmentUser;
         }
 
-        // 步骤2: 为eachuserbuild详细info
+        // step2: 为eachuserbuild详细info
         foreach ($usersDetail as $userInfo) {
             $userId = $userInfo->getUserId();
             $userDepartmentRelations = $userDepartmentMap[$userId] ?? [];
 
-            // 步骤2.1: 收集departmentpathinfo
+            // step2.1: 收集departmentpathinfo
             $allPathNodes = [];
             $fullPathNodes = [];
 
@@ -188,10 +188,10 @@ class UserAssembler
                 }
             }
 
-            // 步骤2.2: usedefaultdepartment关系作为基础info
+            // step2.2: usedefaultdepartment关系作为基础info
             $defaultDepartmentUser = $userDepartmentRelations[0] ?? [];
 
-            // 步骤2.3: updateorcreateuserdepartmentdetailobject
+            // step2.3: updateorcreateuserdepartmentdetailobject
             if (! empty($usersDepartmentDetailDTOList[$userId])) {
                 // update已存in的userdepartmentdetail
                 $userDepartmentDetailDTO = $usersDepartmentDetailDTOList[$userId];
@@ -210,7 +210,7 @@ class UserAssembler
                     'is_leader' => (bool) ($defaultDepartmentUser['is_leader'] ?? false),
                 ];
 
-                // 添加pathsectionpointinfo
+                // addpathsectionpointinfo
                 if ($withDepartmentFullPath) {
                     $userDepartmentDetail['full_path_nodes'] = $fullPathNodes;
                 } else {
@@ -241,7 +241,7 @@ class UserAssembler
             'parent_department_id' => $departmentInfo->getParentDepartmentId(),
             // departmentpath
             'path' => $departmentInfo->getPath(),
-            // 可见property
+            // visibleproperty
             'visible' => ! ($departmentInfo->getOption() === DepartmentOption::Hidden),
             'option' => $departmentInfo->getOption(),
         ];

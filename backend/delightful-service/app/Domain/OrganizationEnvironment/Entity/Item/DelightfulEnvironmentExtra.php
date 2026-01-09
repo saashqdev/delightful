@@ -11,12 +11,12 @@ use App\Domain\Chat\Entity\AbstractEntity;
 
 class DelightfulEnvironmentExtra extends AbstractEntity
 {
-    // 预publish和生产can看做是one环境，所by这within存一downassociate的环境 ids
+    // 预publish和生产can看做是oneenvironment，所by这within存一downassociate的environment ids
     protected array $relationEnvIds;
 
     public function getRelationEnvIds(): array
     {
-        // 预publish和生产can看做是one环境，所by这within存一downassociate的环境 ids
+        // 预publish和生产can看做是oneenvironment，所by这within存一downassociate的environment ids
         return $this->relationEnvIds;
     }
 

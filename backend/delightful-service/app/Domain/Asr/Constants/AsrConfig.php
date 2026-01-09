@@ -51,7 +51,7 @@ class AsrConfig
     public const int SANDBOX_STARTUP_TIMEOUT = 121;
 
     /**
-     * 工作区initializetimeout（second）.
+     * work区initializetimeout（second）.
      */
     public const int WORKSPACE_INIT_TIMEOUT = 60;
 

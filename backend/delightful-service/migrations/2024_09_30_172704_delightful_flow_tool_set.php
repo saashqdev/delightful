@@ -22,9 +22,9 @@ return new class extends Migration {
             $table->string('description', 255)->comment('tool集description');
             $table->string('icon', 255)->comment('tool集graph标');
             $table->boolean('enabled')->default(true)->comment('whetherenable');
-            $table->string('created_uid', 80)->comment('create人');
+            $table->string('created_uid', 80)->comment('createperson');
             $table->dateTime('created_at')->comment('creation time');
-            $table->string('updated_uid', 80)->comment('修改人');
+            $table->string('updated_uid', 80)->comment('modifyperson');
             $table->dateTime('updated_at')->comment('modification time');
             $table->softDeletes();
 

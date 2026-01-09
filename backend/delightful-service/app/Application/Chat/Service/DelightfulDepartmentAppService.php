@@ -91,11 +91,11 @@ class DelightfulDepartmentAppService extends AbstractAppService
             $departmentsPageResponseDTO = $this->delightfulDepartmentDomainService->getSubDepartmentsById($dataIsolation, $departmentId, $pageSize, $offset);
         }
         $departments = $departmentsPageResponseDTO->getItems();
-        // setdepartmentby及所have子department的人员quantity.
+        // setdepartmentby及所have子department的person员quantity.
         foreach ($departments as $delightfulDepartmentEntity) {
             $this->setChildrenEmployeeSum($queryDTO, $delightfulDepartmentEntity);
         }
-        // 通讯录和search相关interface，filter隐藏department和隐藏user。
+        // 通讯录和search相关interface，filterhiddendepartment和hiddenuser。
         $departments = $this->filterDepartmentsHidden($departments);
         $departmentsPageResponseDTO->setItems($departments);
         return $departmentsPageResponseDTO;
@@ -110,9 +110,9 @@ class DelightfulDepartmentAppService extends AbstractAppService
         foreach ($departments as $delightfulDepartmentEntity) {
             $this->setChildrenEmployeeSum($queryDTO, $delightfulDepartmentEntity);
         }
-        // 通讯录和search相关interface，filter隐藏department和隐藏user。
+        // 通讯录和search相关interface，filterhiddendepartment和hiddenuser。
         $departments = $this->filterDepartmentsHidden($departments);
-        // allquantity查找，nothavemore多
+        // allquantityfind，nothavemore多
         return PageListAssembler::pageByMysql($departments);
     }
 
@@ -122,7 +122,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
     }
 
     /**
-     * 通讯录和search相关interface，filter隐藏department和隐藏user。
+     * 通讯录和search相关interface，filterhiddendepartment和hiddenuser。
      * @param DelightfulDepartmentEntity[] $delightfulDepartments
      */
     protected function filterDepartmentsHidden(array $delightfulDepartments): array
@@ -136,11 +136,11 @@ class DelightfulDepartmentAppService extends AbstractAppService
     }
 
     /**
-     * setdepartmentby及所have子department的人员quantity.
+     * setdepartmentby及所have子department的person员quantity.
      */
     protected function setChildrenEmployeeSum(DepartmentQueryDTO $queryDTO, DelightfulDepartmentEntity $departmentEntity): void
     {
-        // departmentby及所have子department的人员quantity
+        // departmentby及所have子department的person员quantity
         if ($queryDTO->getSumType() === DepartmentSumType::All) {
             $employeeSum = $this->delightfulDepartmentDomainService->getDepartmentChildrenEmployeeSum($departmentEntity);
             $departmentEntity->setEmployeeSum($employeeSum);

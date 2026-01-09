@@ -26,8 +26,8 @@ return new class extends Migration {
             $table->tinyInteger('receive_type')->comment('sessiontype.1:private chat,2:group chat,3:systemmessage,4:云document,5:multi-dimensionaltable格 6:topic 7:applicationmessage');
             $table->string('receive_id', '64')->comment('session另one方id.differentconversation type,idimplicationdifferent.');
             $table->string('receive_organization_code', 64)->comment('收itempersonorganizationencoding');
-            // whether免打扰
-            $table->tinyInteger('is_not_disturb')->default(0)->comment('whether免打扰 0no 1is');
+            // whetherdo not disturb
+            $table->tinyInteger('is_not_disturb')->default(0)->comment('whetherdo not disturb 0no 1is');
             // whether置top
             $table->tinyInteger('is_top')->default(0)->comment('whether置top 0no 1is');
             // whethermark

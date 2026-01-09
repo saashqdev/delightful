@@ -62,7 +62,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     }
 
     /**
-     * 授予userorganizationadministratorpermission.
+     * grantuserorganizationadministratorpermission.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::EDIT)]
     public function grant(): array

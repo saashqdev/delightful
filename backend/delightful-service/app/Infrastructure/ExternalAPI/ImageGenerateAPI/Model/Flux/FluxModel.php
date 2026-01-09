@@ -69,7 +69,7 @@ class FluxModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先createresponseobject
+        // 1. in advancecreateresponseobject
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -435,7 +435,7 @@ class FluxModel extends AbstractImageGenerate
                 'url' => $processedUrl,
             ];
 
-            // 累计usageinfo
+            // accumulatedusageinfo
             $currentUsage->addGeneratedImages(1);
 
             // updateresponseobject

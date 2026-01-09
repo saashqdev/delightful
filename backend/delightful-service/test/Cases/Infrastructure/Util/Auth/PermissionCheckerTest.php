@@ -45,7 +45,7 @@ class PermissionCheckerTest extends TestCase
     }
 
     /**
-     * test特定permissioncheck.
+     * testspecificpermissioncheck.
      */
     public function testSpecificPermission(): void
     {
@@ -56,7 +56,7 @@ class PermissionCheckerTest extends TestCase
             SuperPermissionEnum::MODEL_CONFIG_ADMIN->value => ['13800000004', '13800000007'],
         ];
 
-        // have特定permissionuser
+        // havespecificpermissionuser
         $this->assertTrue(PermissionChecker::checkPermission(
             '13800000003',
             SuperPermissionEnum::FLOW_ADMIN,
@@ -133,7 +133,7 @@ class PermissionCheckerTest extends TestCase
     {
         return [
             'all局administrator' => ['13800000001', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => []], true],
-            '特定permissionuser' => ['13800000003', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], true],
+            'specificpermissionuser' => ['13800000003', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], true],
             'nopermissionuser' => ['13800000099', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
             'permissionnot存in' => ['13800000003', SuperPermissionEnum::HIDE_USER_OR_DEPT, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
             'emptyhand机number' => ['', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],

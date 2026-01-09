@@ -13,7 +13,7 @@ namespace App\Infrastructure\ExternalAPI\Volcengine\ValueObject;
 enum VolcengineStatusCode: string
 {
     /**
-     * success - responsebodycontain转录result.
+     * success - responsebodycontaintranscriptionresult.
      */
     case SUCCESS = '20000000';
 

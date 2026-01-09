@@ -229,7 +229,7 @@ class ImageWatermarkProcessor
             $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // increase20%securityside距
             $textHeight = (int) abs($bbox[1] - $bbox[7]); // use绝tovalueensureheightforjust
 
-            // TTF字bodydown降部minute(descender)
+            // TTF字bodydowndowngrademinute(descender)
             $descender = (int) abs($bbox[1]); // 基linebydown部minute
             $ascender = (int) abs($bbox[7]);  // 基linebyup部minute
             $totalTextHeight = $descender + $ascender;
@@ -239,7 +239,7 @@ class ImageWatermarkProcessor
             $chineseCharCount = mb_strlen($text, 'UTF-8');
             $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // increasesecurityside距
             $textHeight = $fontSize;
-            $descender = (int) ($fontSize * 0.2); // insideset fieldbodyestimatedown降部minute
+            $descender = (int) ($fontSize * 0.2); // insideset fieldbodyestimatedowndowngrademinute
             $ascender = (int) ($fontSize * 0.8); // insideset fieldbodyestimateup升部minute
             $totalTextHeight = $textHeight;
         }

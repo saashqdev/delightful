@@ -11,7 +11,7 @@ use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 
 /**
  * dataisolation SaaS化
- * 显typepass in,prevent隐typepass in,导致notknow哪theseplaceneed做isolation.
+ * 显typepass in,prevent隐typepass in,causenotknow哪theseplaceneed做isolation.
  */
 class MCPDataIsolation extends BaseDataIsolation
 {

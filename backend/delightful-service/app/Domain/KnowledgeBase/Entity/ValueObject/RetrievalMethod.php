@@ -13,7 +13,7 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
  * definitionfourtyperetrievemethod:
  * - SEMANTIC_SEARCH: semanticretrieve,based ontoquantitysimilardegreeretrievemethod
  * - FULL_TEXT_SEARCH: all文retrieve,based onkeywordmatchretrievemethod
- * - HYBRID_SEARCH: 混合retrieve,combinesemanticretrieveandall文retrievemethod
+ * - HYBRID_SEARCH: hybridretrieve,combinesemanticretrieveandall文retrievemethod
  * - GRAPH_SEARCH: graphretrieve,based onknowledgegraph谱retrievemethod
  */
 class RetrievalMethod
@@ -37,7 +37,7 @@ class RetrievalMethod
     public const string FULL_TEXT_SEARCH = 'full_text_search';
 
     /**
-     * 混合retrieve.
+     * hybridretrieve.
      *
      * combinesemanticretrieveandall文retrievemethod.
      * meanwhileexecuteall文retrieveandtoquantityretrieve,然backpass重sortstepchoosemost佳result.

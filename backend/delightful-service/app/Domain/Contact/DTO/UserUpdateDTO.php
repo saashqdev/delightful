@@ -17,7 +17,7 @@ class UserUpdateDTO extends AbstractEntity
     protected ?string $avatarUrl = null;
 
     /**
-     * user昵称.
+     * usernickname.
      */
     protected ?string $nickname = null;
 

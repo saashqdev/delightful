@@ -30,7 +30,7 @@ class Misc extends AbstractApi
         }
 
         if (empty($config->getBaseUrl())) {
-            throw new LLMInvalidEndpointException('基础URLcannotfornull', null, $config->getBaseUrl());
+            throw new LLMInvalidEndpointException('foundationURLcannotfornull', null, $config->getBaseUrl());
         }
         $requestOptions = $requestOptions ?? new ApiOptions();
 

@@ -64,7 +64,7 @@ class BingSearch
             $requestUrl = rtrim($requestUrl, '/') . '/search';
         }
 
-        // build基础queryparameter
+        // buildfoundationqueryparameter
         $queryParams = [
             'q' => $query,
             'mkt' => $mkt,

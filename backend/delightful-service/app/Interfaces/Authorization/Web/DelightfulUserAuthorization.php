@@ -33,7 +33,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected string $id = '';
 
     /**
-     * userregisterbackgeneratedelightful_id,all局唯one
+     * userregisterbackgeneratedelightful_id,alllocally uniqueone
      */
     protected string $delightfulId = '';
 
@@ -58,12 +58,12 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected string $applicationCode = '';
 
     /**
-     * hand机number,not带国际冠码
+     * hand机number,not带international prefix
      */
     protected string $mobile = '';
 
     /**
-     * hand机number国际冠码
+     * hand机numberinternational prefix
      */
     protected string $countryCode = '';
 

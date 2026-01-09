@@ -226,7 +226,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * build基础requestdata.
+     * buildfoundationrequestdata.
      */
     private function buildRequestData(array $overrides = []): array
     {

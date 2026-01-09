@@ -24,15 +24,15 @@ return new class extends Migration {
             // delightful_user_id
             $table->string('user_id', 64)->comment('delightful_contact_user table user_id')->default('');
             $table->string('department_id', 64)->comment('departmentid');
-            $table->tinyInteger('is_leader')->comment('whetherisdepartment领导 0-no 1-is')->default(0);
-            $table->string('job_title', 64)->comment('inthisdepartment职位')->default('');
-            $table->string('leader_user_id', 64)->comment('inthisdepartment直属领导 user_id')->nullable()->default('');
+            $table->tinyInteger('is_leader')->comment('whetherisdepartmentleader 0-no 1-is')->default(0);
+            $table->string('job_title', 64)->comment('inthisdepartmentposition')->default('');
+            $table->string('leader_user_id', 64)->comment('inthisdepartmentdirect supervisor user_id')->nullable()->default('');
             $table->string('organization_code', 32)->comment('Magicorganizationencoding');
-            $table->string('city', 64)->comment('work城市')->default('');
-            $table->string('country', 32)->comment('国家orground区 Code 缩写')->default('');
-            $table->string('join_time', 32)->comment('入职time.secondleveltime戳format,table示from 1970 year 1 month 1 daystart所经passsecond数.')->default('');
+            $table->string('city', 64)->comment('workcity')->default('');
+            $table->string('country', 32)->comment('countryorground区 Code 缩写')->default('');
+            $table->string('join_time', 32)->comment('入职time.secondleveltime戳format,table示from 1970 year 1 month 1 daystartpassed throughpasssecond数.')->default('');
             $table->string('employee_no', 32)->comment('工number')->default('');
-            $table->tinyInteger('employee_type')->comment('员工type.1:justtype员工2:实习生3:outsidepackage4:劳务 5:顾问');
+            $table->tinyInteger('employee_type')->comment('employeetype.1:justtypeemployee2:实习生3:outsidepackage4:劳务 5:consultant');
             $table->string('orders', 256)->comment('usersortinfo.useatmarkaddress bookdownorganization架构person员order,person员maybe存in多departmentmiddle,andhavedifferentsort')->nullable()->default('');
             $table->text('custom_attrs')->comment('customizefield.');
             $table->tinyInteger('is_frozen')->comment('whetherforpausestatususer.')->default(0);

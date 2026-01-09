@@ -86,7 +86,7 @@ enum InstructType: int
     }
 
     /**
-     * verifynormal交互finger令item.
+     * verifynormalinteractionfinger令item.
      */
     public static function validateInstructItem(array &$item, array &$seenOuterNames): void
     {
@@ -137,7 +137,7 @@ enum InstructType: int
     }
 
     /**
-     * verifynormal交互finger令group.
+     * verifynormalinteractionfinger令group.
      */
     public static function validateInstructs(array &$instructs): void
     {

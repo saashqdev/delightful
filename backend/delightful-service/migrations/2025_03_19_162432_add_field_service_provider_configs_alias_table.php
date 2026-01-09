@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('service_provider_configs', function (Blueprint $table) {
-            $table->string('alias')->default('')->comment('别名');
+            $table->string('alias')->default('')->comment('alias');
         });
     }
 

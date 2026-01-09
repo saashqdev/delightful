@@ -84,7 +84,7 @@ class ProviderAdminAssembler
     ): ProviderConfigModelsDTO {
         $dto = new ProviderConfigModelsDTO();
 
-        // from Provider populate基础information
+        // from Provider populatefoundationinformation
         $dto->setId($providerConfig->getId());
         $dto->setProviderCode($provider->getProviderCode());
         $dto->setName($provider->getName());

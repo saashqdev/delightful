@@ -10,17 +10,17 @@ namespace App\Domain\Agent\Entity\ValueObject\ThirdPlatformChat;
 enum ThirdPlatformChatType: string
 {
     /**
-     * 钉钉机器person.
+     * 钉钉machineperson.
      */
     case DingRobot = 'ding_robot';
 
     /**
-     * enterprise微信机器person.
+     * enterprise微信machineperson.
      */
     case WeChatRobot = 'wechat_robot';
 
     /**
-     * Feishu机器person.
+     * Feishumachineperson.
      */
     case FeiShuRobot = 'fei_shu_robot';
 

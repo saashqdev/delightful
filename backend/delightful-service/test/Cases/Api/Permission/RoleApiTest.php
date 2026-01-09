@@ -157,7 +157,7 @@ class RoleApiTest extends AbstractHttpTest
             $this->getCommonHeaders()
         );
 
-        // assert基础responsestructure
+        // assertfoundationresponsestructure
         $this->assertIsArray($response);
         $this->assertEquals(1000, $response['code'] ?? null);
 

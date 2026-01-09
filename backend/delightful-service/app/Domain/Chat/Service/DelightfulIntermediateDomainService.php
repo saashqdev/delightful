@@ -25,7 +25,7 @@ use Throwable;
  */
 class DelightfulIntermediateDomainService extends AbstractDomainService
 {
-    // 超levelMagic交互finger令temporarymessageprocess
+    // 超levelMagicinteractionfinger令temporarymessageprocess
     /**
      * @throws Throwable
      */

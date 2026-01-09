@@ -16,7 +16,7 @@ class AddInstructToDelightfulChatConversations extends Migration
     public function up(): void
     {
         Schema::table('delightful_chat_conversations', function (Blueprint $table) {
-            $table->json('instructs')->nullable()->comment('交互instruction');
+            $table->json('instructs')->nullable()->comment('interactioninstruction');
         });
     }
 

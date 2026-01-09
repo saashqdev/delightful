@@ -125,7 +125,7 @@ readonly class LoginAppService
     {
         $response = new CheckLoginResponse();
 
-        // process国家codeformat
+        // processcountrycodeformat
         $stateCode = $this->formatStateCode($account->getStateCode() ?? '+86');
 
         // builduserdata
@@ -153,7 +153,7 @@ readonly class LoginAppService
     }
 
     /**
-     * format化国家code,ensureby+openhead.
+     * format化countrycode,ensureby+openhead.
      */
     private function formatStateCode(string $stateCode): string
     {

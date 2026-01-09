@@ -30,7 +30,7 @@ class CheckLoginRequest extends AbstractDTO
     protected string $organizationCode = '';
 
     /**
-     * 国家code
+     * countrycode
      */
     protected string $stateCode = '+86';
 

@@ -23,7 +23,7 @@ use RuntimeException;
 use function Hyperf\Config\config;
 
 /**
- * Volcanoshort信所have api 基础category.
+ * Volcanoshort信所have api foundationcategory.
  * @see https://www.volcengine.com/docs/6361/171579
  */
 abstract class VolcengineApi
@@ -68,7 +68,7 @@ abstract class VolcengineApi
     protected string $secretKey = '';
 
     /**
-     * short信signature. such as[灯塔engine].
+     * short信signature. such as[lighthouseengine].
      */
     protected string $sign = '';
 
@@ -114,7 +114,7 @@ abstract class VolcengineApi
 
     /**
      * @throws GuzzleException
-     * @todo 接入messagesendstatuscallback
+     * @todo accessmessagesendstatuscallback
      */
     protected function sendRequest()
     {
@@ -195,7 +195,7 @@ abstract class VolcengineApi
         $req->setIsSignUrl(false);
         $req->setMethod($this->getMethod());
         $req->setQueryList($this->getQuery());
-        // !!! notice,thiswithinnotcanaddup JSON_UNESCAPED_UNICODE,addwill导致bodyhavemiddle文o clocksignaturenotcorrect!
+        // !!! notice,thiswithinnotcanaddup JSON_UNESCAPED_UNICODE,addwillcausebodyhavemiddle文o clocksignaturenotcorrect!
         $bodyStream = Utils::streamFor(Json::encode($this->getBody(), JSON_THROW_ON_ERROR));
         $req->setPayloadHash(Utils::hash($bodyStream, 'sha256'));
         $result = $sign->signOnly($req, $credentials);

@@ -8,14 +8,14 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * 员工type.
+ * employeetype.
  */
 enum EmployeeType: int
 {
     // unknown(such asisperson版user)
     case Unknown = 0;
 
-    // justtype员工
+    // justtypeemployee
     case Formal = 1;
 
     // 实习生
@@ -27,6 +27,6 @@ enum EmployeeType: int
     // 劳务派遣
     case LaborDispatch = 4;
 
-    // 顾问
+    // consultant
     case Consultant = 5;
 }

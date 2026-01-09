@@ -68,7 +68,7 @@ class QwenImageEditModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先createresponseobject
+        // 1. in advancecreateresponseobject
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -344,7 +344,7 @@ class QwenImageEditModel extends AbstractImageGenerate
             }
         }
 
-        // 累计usageinfo - general meaningthousand问editusageformatadapt
+        // accumulatedusageinfo - general meaningthousand问editusageformatadapt
         if (! empty($qwenResult['usage']) && is_array($qwenResult['usage'])) {
             $currentUsage->addGeneratedImages(1); // editgenerate1张image
             $currentUsage->promptTokens += $qwenResult['usage']['input_tokens'] ?? 0;

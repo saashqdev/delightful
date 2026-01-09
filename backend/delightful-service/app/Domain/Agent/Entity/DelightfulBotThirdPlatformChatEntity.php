@@ -25,7 +25,7 @@ class DelightfulBotThirdPlatformChatEntity extends AbstractEntity
     protected bool $enabled;
 
     /**
-     * 接入platformconfigurationinformation.
+     * accessplatformconfigurationinformation.
      */
     protected array $options = [];
 

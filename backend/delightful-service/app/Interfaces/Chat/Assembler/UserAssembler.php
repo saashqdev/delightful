@@ -188,7 +188,7 @@ class UserAssembler
                 }
             }
 
-            // step2.2: usedefaultdepartmentclose系asfor基础info
+            // step2.2: usedefaultdepartmentclose系asforfoundationinfo
             $defaultDepartmentUser = $userDepartmentRelations[0] ?? [];
 
             // step2.3: updateorcreateuserdepartmentdetailobject

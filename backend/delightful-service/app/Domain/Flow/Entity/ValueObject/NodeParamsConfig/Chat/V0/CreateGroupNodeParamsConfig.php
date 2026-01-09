@@ -118,7 +118,7 @@ class CreateGroupNodeParamsConfig extends NodeParamsConfig
             'include_current_user' => $this->includeCurrentUser,
             // containwhenfrontassistant
             'include_current_assistant' => $this->includeCurrentAssistant,
-            // assistantopen场白
+            // assistantopenfield
             'assistant_opening_speech' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
         ]);
     }

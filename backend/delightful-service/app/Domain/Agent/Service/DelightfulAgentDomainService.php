@@ -70,7 +70,7 @@ class DelightfulAgentDomainService
             $agent = $this->agentRepository->insert($agentEntity);
             $create = true;
 
-            // createassistanto clockaddsystem交互finger令
+            // createassistanto clockaddsysteminteractionfinger令
             $this->initSystemInstructs($agent->getOrganizationCode(), $agent->getId(), $agentEntity->getUpdatedUid());
         } else {
             // whethercanmodify
@@ -222,15 +222,15 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * saveassistant交互finger令.
+     * saveassistantinteractionfinger令.
      */
     public function updateInstruct(string $organizationCode, string $agentId, array $instructs, string $userId = '', bool $valid = true): array
     {
         if ($valid) {
-            // validationnormal交互finger令
+            // validationnormalinteractionfinger令
             InstructType::validateInstructs($instructs);
 
-            // ensuresystem交互finger令存in,ifmissingthensupplement
+            // ensuresysteminteractionfinger令存in,ifmissingthensupplement
             $instructs = SystemInstructType::ensureSystemInstructs($instructs);
         }
         // save
@@ -267,7 +267,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * initializesystem交互finger令.
+     * initializesysteminteractionfinger令.
      */
     private function initSystemInstructs(string $organizationCode, string $agentId, string $userId): void
     {

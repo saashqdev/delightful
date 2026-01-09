@@ -249,7 +249,7 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * frombatchquantityqueryresultmiddleextract特定aggregaterootmodel(LLM).
+     * frombatchquantityqueryresultmiddleextractspecificaggregaterootmodel(LLM).
      * @param ModeAggregate $aggregate 模typeaggregateroot
      * @param array<string, ProviderModelEntity> $allProviderModels batchquantityquery所havemodelresult
      * @return array<string, ProviderModelEntity> theaggregateroot相closemodel
@@ -276,7 +276,7 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * frombatchquantityqueryresultmiddleextract特定aggregaterootgraphlikemodel(VLM).
+     * frombatchquantityqueryresultmiddleextractspecificaggregaterootgraphlikemodel(VLM).
      * @param ModeAggregate $aggregate 模typeaggregateroot
      * @param array<string, ProviderModelEntity> $allProviderModels batchquantityquery所havemodelresult
      * @return array<string, ProviderModelEntity> theaggregateroot相closegraphlikemodel

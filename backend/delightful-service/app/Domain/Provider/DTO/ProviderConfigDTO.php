@@ -78,7 +78,7 @@ class ProviderConfigDTO extends AbstractDTO
         parent::__construct($data);
     }
 
-    // ===== 基础fieldGetter/Setter =====
+    // ===== foundationfieldGetter/Setter =====
 
     public function getId(): string
     {

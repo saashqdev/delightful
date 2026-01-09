@@ -466,7 +466,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * sessionsave交互finger令.
+     * sessionsaveinteractionfinger令.
      */
     public function saveInstruct(string $conversationId, RequestInterface $request)
     {

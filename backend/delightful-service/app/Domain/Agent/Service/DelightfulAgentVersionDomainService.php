@@ -177,7 +177,7 @@ class DelightfulAgentVersionDomainService
 
     public function getAgentMaxVersion(string $agentId): string
     {
-        // returnissemantic化version,needinreturn基础up+1
+        // returnissemantic化version,needinreturnfoundationup+1
         $agentMaxVersion = $this->agentVersionRepository->getAgentMaxVersion($agentId);
         // ifversionnumberisintegerformat(如 1),willitsconvertforsemantic化versionnumber(如 1.0.0)
         if (is_numeric($agentMaxVersion) && strpos($agentMaxVersion, '.') === false) {

@@ -27,7 +27,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
      */
     protected string $flowVersion;
 
-    // 交互finger令
+    // interactionfinger令
     protected ?array $instructs = [];
 
     /**

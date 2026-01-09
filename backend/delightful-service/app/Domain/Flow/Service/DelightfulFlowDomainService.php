@@ -87,7 +87,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * saveprocess,only基础info.
+     * saveprocess,onlyfoundationinfo.
      */
     public function save(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $savingDelightfulFlow): DelightfulFlowEntity
     {

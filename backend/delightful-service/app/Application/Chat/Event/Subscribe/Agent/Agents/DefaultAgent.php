@@ -44,7 +44,7 @@ class DefaultAgent extends AbstractAgent
         $triggerType = TriggerType::fromSeqType($seqEntity->getSeqType());
         # pass inparameter:
         // 1. $userAccountEntity containtrue名,hand机numberetchavesecurityrisk,shouldneedauthauthorizationinformation
-        // 2. $userEntity userdetail,containuserid,user昵称,useravataretcinformation
+        // 2. $userEntity userdetail,containuserid,usernickname,useravataretcinformation
         // 3. $seqEntity conversationwindowid,quotemessage_id,messagetype(chatmessage/openconversationwindow)
         // 4. $messageEntity savehavemessagetype,messagespecificcontent,hairitempersonid,sendtime
         $this->getDelightfulFlowExecuteAppService()->imChat(

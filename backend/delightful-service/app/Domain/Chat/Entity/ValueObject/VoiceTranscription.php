@@ -11,34 +11,34 @@ use App\Infrastructure\Core\AbstractValueObject;
 
 /**
  * voice转textresultvalueobject
- * support多language转录resultstorage.
+ * support多languagetranscriptionresultstorage.
  */
 class VoiceTranscription extends AbstractValueObject
 {
     /**
-     * 多language转录result
-     * format: ['zh_CN' => '转录text', 'en_US' => 'Transcription text', ...].
+     * 多languagetranscriptionresult
+     * format: ['zh_CN' => 'transcriptiontext', 'en_US' => 'Transcription text', ...].
      * @var null|array<string, string>
      */
     private ?array $transcriptions;
 
     /**
-     * errorinfo(if转录fail).
+     * errorinfo(iftranscriptionfail).
      */
     private ?string $errorMessage;
 
     /**
-     * 转录time戳.
+     * transcriptiontime戳.
      */
     private ?int $transcribedAt;
 
     /**
-     * mainlanguagecode(default转录language).
+     * mainlanguagecode(defaulttranscriptionlanguage).
      */
     private ?string $primaryLanguage;
 
     /**
-     * get所have转录result.
+     * get所havetranscriptionresult.
      * @return array<string, string>
      */
     public function getTranscriptions(): array
@@ -47,7 +47,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * set转录result.
+     * settranscriptionresult.
      * @param array<string, string> $transcriptions
      */
     public function setTranscriptions(array $transcriptions): self
@@ -57,7 +57,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * addsinglelanguage转录result.
+     * addsinglelanguagetranscriptionresult.
      */
     public function addTranscription(string $language, string $text): self
     {
@@ -69,7 +69,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * getfinger定language转录result.
+     * getfinger定languagetranscriptionresult.
      */
     public function getTranscription(string $language): ?string
     {
@@ -77,7 +77,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * getmainlanguage转录result.
+     * getmainlanguagetranscriptionresult.
      */
     public function getPrimaryTranscription(): ?string
     {
@@ -85,12 +85,12 @@ class VoiceTranscription extends AbstractValueObject
             return $this->transcriptions[$this->primaryLanguage];
         }
 
-        // ifnothavesetmainlanguage,returnfirstcanuse转录result
+        // ifnothavesetmainlanguage,returnfirstcanusetranscriptionresult
         return ! empty($this->transcriptions) ? reset($this->transcriptions) : null;
     }
 
     /**
-     * checkwhetherhavefinger定language转录result.
+     * checkwhetherhavefinger定languagetranscriptionresult.
      */
     public function hasTranscription(string $language): bool
     {
@@ -124,7 +124,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * get转录time戳.
+     * gettranscriptiontime戳.
      */
     public function getTranscribedAt(): ?int
     {
@@ -132,7 +132,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * set转录time戳.
+     * settranscriptiontime戳.
      */
     public function setTranscribedAt(?int $transcribedAt): self
     {
@@ -166,7 +166,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * checkwhetherforempty(nothaveany转录result).
+     * checkwhetherforempty(nothaveanytranscriptionresult).
      */
     public function isEmpty(): bool
     {
@@ -174,7 +174,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * clear所have转录result.
+     * clear所havetranscriptionresult.
      */
     public function clear(): self
     {

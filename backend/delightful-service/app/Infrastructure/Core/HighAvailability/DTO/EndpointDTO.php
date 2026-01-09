@@ -11,7 +11,7 @@ use App\Infrastructure\Core\AbstractDTO;
 use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\CircuitBreakerStatus;
 
 /**
- * useatinbusinessprocessmiddlemeanwhilesavebusinessIDandhighcanusegroupitem接入pointdatabaseID.
+ * useatinbusinessprocessmiddlemeanwhilesavebusinessIDandhighcanusegroupitemaccesspointdatabaseID.
  */
 class EndpointDTO extends AbstractDTO
 {
@@ -23,12 +23,12 @@ class EndpointDTO extends AbstractDTO
     protected ?string $businessId = null;
 
     /**
-     * database接入pointID(highcanusetableprimary key).
+     * databaseaccesspointID(highcanusetableprimary key).
      */
     protected ?string $endpointId = null;
 
     /**
-     * 接入pointtype.
+     * accesspointtype.
      */
     protected string $type;
 
@@ -38,7 +38,7 @@ class EndpointDTO extends AbstractDTO
     protected ?string $provider = null;
 
     /**
-     * 接入pointname.
+     * accesspointname.
      */
     protected string $name;
 
@@ -54,7 +54,7 @@ class EndpointDTO extends AbstractDTO
     protected ?array $resources = null;
 
     /**
-     * 接入pointwhetherenable.
+     * accesspointwhetherenable.
      */
     protected bool $enabled = true;
 
@@ -184,7 +184,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * set接入pointwhetherenable.
+     * setaccesspointwhetherenable.
      * @param bool|int|string $enabled canpass inbooleanvalue,integerorstring
      */
     public function setEnabled(bool|int|string $enabled): static
@@ -199,7 +199,7 @@ class EndpointDTO extends AbstractDTO
 
     // newenhancefieldmethod
     /**
-     * getdatabase接入pointID.
+     * getdatabaseaccesspointID.
      */
     public function getEndpointId(): ?string
     {
@@ -207,7 +207,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * setdatabase接入pointID.
+     * setdatabaseaccesspointID.
      */
     public function setEndpointId(null|int|string $endpointId): static
     {

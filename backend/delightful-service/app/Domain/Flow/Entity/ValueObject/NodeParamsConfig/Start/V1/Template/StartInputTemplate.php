@@ -215,7 +215,7 @@ class StartInputTemplate
                     "nickname": {
                         "type": "string",
                         "key": "nickname",
-                        "title": "user昵称",
+                        "title": "usernickname",
                         "description": "",
                         "items": null,
                         "properties": null,
@@ -327,7 +327,7 @@ class StartInputTemplate
             "bot_key": {
                 "type": "string",
                 "key": "bot_key",
-                "title": "thethird-partychat机器personencoding",
+                "title": "thethird-partychatmachinepersonencoding",
                 "description": "",
                 "items": null,
                 "properties": null,

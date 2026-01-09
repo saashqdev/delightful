@@ -23,7 +23,7 @@ class EndpointResponseDTO extends AbstractDTO
     protected string $requestId;
 
     /**
-     * 接入pointID.
+     * accesspointID.
      */
     protected string $endpointId;
 

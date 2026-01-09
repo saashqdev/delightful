@@ -32,7 +32,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
     protected AmqpTopicType $topic = AmqpTopicType::Message;
 
     /**
-     * 1.本groundopenhairo clocknotstart,avoidconsumetestenvironmentdata,导致testenvironmentuser收nottomessage
+     * 1.本groundopenhairo clocknotstart,avoidconsumetestenvironmentdata,causetestenvironmentuser收nottomessage
      * 2.if本groundopenhairo clock想debug,请fromlinein本ground搭建front端environment,more换mqhost. or者applyonedevenvironment,isolationmq.
      */
     public function isEnable(): bool
@@ -116,7 +116,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessagequalityguarantee模piece,ifisservice器stressbig导致fail,then放入delayretryqueue,andfinger数level延longretrytimebetween隔
+            // todo callmessagequalityguarantee模piece,ifisservice器stressbigcausefail,thenput intodelayretryqueue,andfinger数level延longretrytimebetween隔
             return Result::REQUEUE;
         } finally {
             if (isset($lockKey, $owner)) {

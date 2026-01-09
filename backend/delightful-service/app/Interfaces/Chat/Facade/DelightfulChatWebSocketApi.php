@@ -117,7 +117,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->delightfulChatMessageAppService->setUserContext($userToken, $context);
             // call guard getuserinfo
             $userAuthorization = $this->getAuthorization();
-            // will账number所havedeviceadd入同oneroom
+            // will账number所havedeviceaddjoin sameoneroom
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return ['type' => 'user', 'user' => [
                 'delightful_id' => $userAuthorization->getDelightfulId(),
@@ -235,7 +235,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
             // according tomessagetype,minutehairtoto应process模piece
             $userAuthorization = $this->getAuthorization();
-            // will账number所havedeviceadd入同oneroom
+            // will账number所havedeviceaddjoin sameoneroom
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return $this->delightfulChatMessageAppService->onChatMessage($chatRequest, $userAuthorization);
         } catch (BusinessException $businessException) {
@@ -289,7 +289,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
             // according tomessagetype,minutehairtoto应process模piece
             $userAuthorization = $this->getAuthorization();
-            // will账number所havedeviceadd入同oneroom
+            // will账number所havedeviceaddjoin sameoneroom
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return $this->delightfulIntermediateMessageAppService->dispatchClientIntermediateMessage($chatRequest, $userAuthorization);
         } catch (BusinessException $businessException) {
@@ -333,18 +333,18 @@ class DelightfulChatWebSocketApi extends BaseNamespace
 
     private function relationAppMsgIdAndRequestId(?string $appMsgId): void
     {
-        // directlyuse appMsgId asfor requestIdwill导致very多invalid log,难bytrace.
+        // directlyuse appMsgId asfor requestIdwillcausevery多invalid log,难bytrace.
         $requestId = empty($appMsgId) ? (string) IdGenerator::getSnowId() : $appMsgId;
         CoContext::setRequestId($requestId);
         $this->logger->info('relationAppMsgIdAndRequestId requestId:' . $requestId . ' appMsgId: ' . $appMsgId);
     }
 
     /**
-     * publishsubscribe/多messageminutehairandpushqueue保活.
+     * publishsubscribe/多messageminutehairandpushqueuekeep alive.
      */
     private function keepSubscribeAlive(): void
     {
-        // onlyneedoneenter程canschedulepublishmessage,letsubscriberedislink保活即can.
+        // onlyneedoneenter程canschedulepublishmessage,letsubscriberedislinkkeep alive即can.
         // notlock放inmostoutsidelayer,isforpreventpod频繁restarto clock,nothaveanyoneenter程canpublishmessage
         co(function () {
             // each 5 second推onetimemessage
@@ -357,7 +357,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
                     SocketIOUtil::sendIntermediate(SocketEventType::Chat, 'delightful-im:subscribe:keepalive', ControlMessageType::Ping->value);
 
                     $producer = ApplicationContext::getContainer()->get(Producer::class);
-                    // to所havequeue投oneitemmessage,by保活link/queue
+                    // to所havequeue投oneitemmessage,bykeep alivelink/queue
                     $messagePriorities = MessagePriority::cases();
                     foreach ($messagePriorities as $priority) {
                         $seqCreatedEvent = new SeqCreatedEvent([ControlMessageType::Ping->value]);

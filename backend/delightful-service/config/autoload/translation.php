@@ -9,6 +9,6 @@ return [
     'locale' => 'zh_CN',
     // backlanguage,whendefaultlanguagelanguagetextnothaveprovideo clock,thenwillusebacklanguageto应languagetext
     'fallback_locale' => 'en_US',
-    // languagefile存放file夹
+    // languagefilestorefile夹
     'path' => BASE_PATH . '/storage/languages',
 ];

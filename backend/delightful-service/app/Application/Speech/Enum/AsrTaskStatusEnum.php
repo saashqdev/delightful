@@ -18,7 +18,7 @@ namespace App\Application\Speech\Enum;
  * - 整bodytaskstatustrace(recording → merge → generatetitle → sendmessage)
  *
  * 【andotherenum区别】
- * - AsrRecordingStatusEnum: front端recording实o clockstatus(recording交互layer)
+ * - AsrRecordingStatusEnum: front端recording实o clockstatus(recordinginteractionlayer)
  * - AsrTaskStatusEnum: inside部taskallprocessstatus(businessmanagelayer)✓ current
  * - SandboxAsrStatusEnum: sandboxmergetaskstatus(infrastructurelayer)
  *

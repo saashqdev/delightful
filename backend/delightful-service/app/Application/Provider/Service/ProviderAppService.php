@@ -50,7 +50,7 @@ class ProviderAppService
         // batchquantitygetservicequotient实body(avoid嵌setquery)
         $providerEntities = $this->providerConfigDomainService->getProviderEntitiesByConfigIds($dataIsolation, $configIds);
 
-        // batchquantitygetservicequotientconfiguration实body(useatget别名)
+        // batchquantitygetservicequotientconfiguration实body(useatgetalias)
         $configEntities = $this->providerConfigDomainService->getConfigByIdsWithoutOrganizationFilter($configIds);
 
         // 收collection所havegraph标path按organizationencodingminutegroup(includemodelgraph标andservicequotientgraph标)
@@ -177,7 +177,7 @@ class ProviderAppService
             return $this->translator->trans('common.recommended');
         }
 
-        // 2. customizeservicequotientandhave别名
+        // 2. customizeservicequotientandhavealias
         if ($this->isCustomProvider($providerEntity)
             && $configEntity
             && ! empty($configEntity->getAlias())) {

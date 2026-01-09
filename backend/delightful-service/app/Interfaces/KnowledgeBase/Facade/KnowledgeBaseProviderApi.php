@@ -35,12 +35,12 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
         // settingmodelcolumntable
         $models = [];
 
-        // 基础重sortmodel
+        // foundation重sortmodel
         $baseModel = new ProviderModelDetailDTO();
         $baseModel->setId('official_rerank_model');
         $baseModel->setName('official重rowmodel');
         $baseModel->setModelVersion('v1.0');
-        $baseModel->setDescription('基础重sortmodel,适useatgeneralscenario');
+        $baseModel->setDescription('foundation重sortmodel,适useatgeneralscenario');
         $baseModel->setIcon('');
         $baseModel->setModelType(1);
         $baseModel->setCategory('rerank');

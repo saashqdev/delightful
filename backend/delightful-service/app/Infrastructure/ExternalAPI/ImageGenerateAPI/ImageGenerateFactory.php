@@ -400,7 +400,7 @@ class ImageGenerateFactory
                 return $fixedSize;
             }
 
-            // ifnothavefixedconfiguration,according tonormal换算(based on1024for基准)
+            // ifnothavefixedconfiguration,according tonormalconvert(based on1024for基准)
             if ($width >= $height) {
                 // 横to
                 $actualWidth = 1024;
@@ -421,7 +421,7 @@ class ImageGenerateFactory
      * getfinger定modelfixedratio例sizeconfiguration.
      * @param null|string $modelKey modelkey名
      * @param string $ratioKey ratio例key名,如 "1:1", "16:9"
-     * @return null|array if存infixedconfigurationreturn [width, height] array,nothenreturn null table示needuse换算
+     * @return null|array if存infixedconfigurationreturn [width, height] array,nothenreturn null table示needuseconvert
      */
     private static function getFixedRatioSize(?string $modelKey, string $ratioKey): ?array
     {
@@ -435,7 +435,7 @@ class ImageGenerateFactory
             return self::SIZE_FIXED_RATIOS[$modelKey][$ratioKey] ?? self::SIZE_FIXED_RATIOS[$modelKey]['1:1'];
         }
 
-        // ifnot存in,return null table示needuse换算
+        // ifnot存in,return null table示needuseconvert
         return null;
     }
 

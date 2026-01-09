@@ -59,7 +59,7 @@ readonly class AsrSandboxResponseHandler
             return;
         }
 
-        // 2. checkandhandledirectoryrename(sandboxhavebug,willrenamedirectorybutisnothavenotifyfile变动,nothave改databaserecord)
+        // 2. checkandhandledirectoryrename(sandboxhavebug,willrenamedirectorybutisnothavenotifyfilechange,nothave改databaserecord)
         $taskStatus->displayDirectory = $this->extractDirectoryPath($audioFile);
 
         // 3. findaudiofilerecord

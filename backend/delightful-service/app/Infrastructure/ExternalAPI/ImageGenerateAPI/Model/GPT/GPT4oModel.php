@@ -71,7 +71,7 @@ class GPT4oModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先createresponseobject
+        // 1. in advancecreateresponseobject
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -459,7 +459,7 @@ class GPT4oModel extends AbstractImageGenerate
                 'url' => $processedUrl,
             ];
 
-            // 累计usageinfo - GPT4onothavedetailedtokenstatistics
+            // accumulatedusageinfo - GPT4onothavedetailedtokenstatistics
             $currentUsage->addGeneratedImages(1);
 
             // updateresponseobject

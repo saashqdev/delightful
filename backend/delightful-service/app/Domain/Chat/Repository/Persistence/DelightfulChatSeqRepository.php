@@ -507,7 +507,7 @@ sql;
         if (! empty($delightfulMessageIds)) {
             $messages = $this->delightfulMessageRepository->getMessages($delightfulMessageIds);
         }
-        // willcontrolmessage/chatmessageoneup放入usermessagestreammiddle
+        // willcontrolmessage/chatmessageoneupput intousermessagestreammiddle
         return SeqAssembler::getClientSeqStructs($seqInfos, $messages);
     }
 

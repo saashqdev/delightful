@@ -32,8 +32,8 @@ class DelightfulAccessToken
         if (! $application) {
             $application = new ApplicationEntity();
             $application->setCode(ModelGatewayOfficialApp::APP_CODE);
-            $application->setName('灯塔engine');
-            $application->setDescription('灯塔engineofficialapplication');
+            $application->setName('lighthouseengine');
+            $application->setDescription('lighthouseengineofficialapplication');
             $application->setOrganizationCode($llmDataIsolation->getCurrentOrganizationCode());
             $application->setCreator('system');
             $application = $applicationDomainService->save($llmDataIsolation, $application);

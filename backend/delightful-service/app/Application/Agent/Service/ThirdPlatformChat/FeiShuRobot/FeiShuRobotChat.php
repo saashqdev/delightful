@@ -95,7 +95,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     public function __construct(array $options)
     {
         if (empty($options)) {
-            throw new InvalidArgumentException('Feishu机器personconfigurationnotcanfornull');
+            throw new InvalidArgumentException('Feishumachinepersonconfigurationnotcanfornull');
         }
         $options['http'] = [
             'base_uri' => 'https://open.feishu.cn',

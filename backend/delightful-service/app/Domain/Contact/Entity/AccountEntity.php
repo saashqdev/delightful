@@ -33,7 +33,7 @@ class AccountEntity extends AbstractEntity
     protected ?AccountStatus $status = null;
 
     /**
-     * hand机number国家冠码
+     * hand机numbercountry冠码
      */
     protected ?string $countryCode = null;
 
@@ -104,7 +104,7 @@ class AccountEntity extends AbstractEntity
     }
 
     /**
-     * get国家code (state_code别名).
+     * getcountrycode (state_codealias).
      */
     public function getStateCode(): ?string
     {

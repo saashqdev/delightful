@@ -57,7 +57,7 @@ readonly class AuthenticationDomainService
     /**
      * generate账numbertoken.
      *
-     * byatMagicsupportother账numberbody系接入,thereforefront端processis,先gosome账numberbody系login,againbyMagic做loginvalidation.
+     * byatMagicsupportother账numberbody系access,thereforefront端processis,先gosome账numberbody系login,againbyMagic做loginvalidation.
      * therefore,even ifuseMagicfrom己账numberbody系,alsoneedcomplythisprocess.
      */
     public function generateAccountToken(string $delightfulId): string

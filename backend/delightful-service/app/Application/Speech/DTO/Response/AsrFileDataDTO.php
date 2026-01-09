@@ -10,7 +10,7 @@ namespace App\Application\Speech\DTO\Response;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 
 /**
- * ASR filedata传输object
+ * ASR filedatatransmissionobject
  * useatinchatmessagemiddlequotefile.
  */
 readonly class AsrFileDataDTO

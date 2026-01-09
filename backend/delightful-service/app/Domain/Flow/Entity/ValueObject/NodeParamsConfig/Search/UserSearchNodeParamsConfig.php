@@ -97,7 +97,7 @@ class UserSearchNodeParamsConfig extends AbstractSearchNodeParamsConfig
                         "type": "string",
                         "key": "country_code",
                         "sort": 3,
-                        "title": "国际冠码",
+                        "title": "international prefix",
                         "description": "",
                         "items": null,
                         "properties": null,

@@ -24,7 +24,7 @@ enum ControlMessageType: string
     // 置topsessionwindow
     case TopConversation = 'top_conversation';
 
-    // session免打扰
+    // sessiondo not disturb
     case MuteConversation = 'mute_conversation';
 
     // already读
@@ -84,7 +84,7 @@ enum ControlMessageType: string
     // 转letgroup owner
     case GroupOwnerChange = 'group_owner_change';
 
-    // assistant交互finger令
+    // assistantinteractionfinger令
     case AgentInstruct = 'bot_instruct';
 
     // translateconfigurationitem

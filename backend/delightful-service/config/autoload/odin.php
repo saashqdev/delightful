@@ -247,11 +247,11 @@ return [
             ],
             'custom_error_mapping_rules' => [],
             'logging' => [
-                // logfield白名singleconfiguration
+                // logfieldwhitelistsingleconfiguration
                 // iffornullarrayornotconfiguration,thenprint所havefield
                 // ifconfigurationfieldcolumntable,thenonlyprintfinger定field
                 // support嵌setfield,usepoint语法如 'args.messages'
-                // notice:messages and tools fieldnotin白名singlemiddle,notwillbeprint
+                // notice:messages and tools fieldnotinwhitelistsinglemiddle,notwillbeprint
                 'whitelist_fields' => [
                     // basicrequestinfo
                     'request_id',                  // requestID
@@ -285,8 +285,8 @@ return [
                     'args.max_completion_tokens',             // mostbigtokenlimit
                     'args.top_p',                  // Top-pparameter
                     'args.top_k',                  // Top-kparameter
-                    'args.frequency_penalty',      // frequency惩罚
-                    'args.presence_penalty',       // 存in惩罚
+                    'args.frequency_penalty',      // frequencypenalty
+                    'args.presence_penalty',       // 存inpenalty
                     'args.stream',                 // streamresponse标志
                     'args.stop',                   // stop词
                     'args.seed',                   // randomtype子
@@ -319,7 +319,7 @@ return [
                     // - choices.0.delta (streamresponse增quantitycontent)
                     // - content (responsecontent)
                 ],
-                // whetherenablefield白名singlefilter,defaulttrue(enablefilter)
+                // whetherenablefieldwhitelistsinglefilter,defaulttrue(enablefilter)
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
                 // mostbigstringlengthlimit,超passthislengthstringwillbereplacefor [Long Text],settingfor 0 indicatenotlimit
                 'max_text_length' => env('ODIN_LOG_MAX_TEXT_LENGTH', 0),

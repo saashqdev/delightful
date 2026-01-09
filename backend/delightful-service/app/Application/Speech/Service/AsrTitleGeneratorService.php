@@ -211,7 +211,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * forfile直传scenariogeneratetitle(onlyaccording tofile名).
+     * forfiledirect uploadscenariogeneratetitle(onlyaccording tofile名).
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
      * @param string $fileName file名
@@ -242,7 +242,7 @@ readonly class AsrTitleGeneratorService
 
             return $this->sanitizeTitle($title);
         } catch (Throwable $e) {
-            $this->logger->warning('forfile直传generatetitlefail', [
+            $this->logger->warning('forfiledirect uploadgeneratetitlefail', [
                 'task_key' => $taskKey,
                 'file_name' => $fileName,
                 'error' => $e->getMessage(),
@@ -261,7 +261,7 @@ readonly class AsrTitleGeneratorService
     private function buildUserRequestMessage(string $audioFileName, ?string $noteFileName): string
     {
         if ($noteFileName !== null) {
-            // havenotesituation:"请帮I @yearwillsolutiondiscussion.webm recordingcontentand @yearwillnote.md contentconversionforoneshare超level产物"
+            // havenotesituation:"请帮I @yearwillsolutiondiscussion.webm recordingcontentand @yearwillnote.md contentconversionforoneshare超levelproduct"
             return sprintf(
                 '%s@%s%s@%s%s',
                 $this->translator->trans('asr.messages.summary_prefix_with_note'),
@@ -272,7 +272,7 @@ readonly class AsrTitleGeneratorService
             );
         }
 
-        // onlyaudiofilesituation:"请帮I @yearwillsolutiondiscussion.webm recordingcontentconversionforoneshare超level产物"
+        // onlyaudiofilesituation:"请帮I @yearwillsolutiondiscussion.webm recordingcontentconversionforoneshare超levelproduct"
         return sprintf(
             '%s@%s%s',
             $this->translator->trans('asr.messages.summary_prefix'),

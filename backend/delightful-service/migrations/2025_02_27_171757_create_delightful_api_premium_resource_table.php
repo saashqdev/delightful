@@ -20,7 +20,7 @@ return new class extends Migration {
         }
         Schema::create('delightful_api_premium_resources', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('endpoint_id', 64)->comment('接入pointID');
+            $table->string('endpoint_id', 64)->comment('accesspointID');
             $table->string('resource_name', 64)->comment('resourcename');
             $table->integer('billing_cycle_value')->default(0)->comment('计费periodvalue');
             $table->tinyInteger('billing_cycle_type')->default(0)->comment('0: 总quantity, 1:second, 2:minute钟, 3:hour, 4:day');

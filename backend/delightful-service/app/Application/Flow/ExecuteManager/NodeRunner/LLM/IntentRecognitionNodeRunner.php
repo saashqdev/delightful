@@ -113,10 +113,10 @@ willyouresponseformat化for JSON object,format如down:
 {
     "whetheridentify": true,
     "identifyfailreason": "",
-    "mostbest wishesgraph": "吃饭",
+    "mostbest wishesgraph": "eat",
     "matchto意graphhave": [
         {
-            "意graph": "吃饭",
+            "意graph": "eat",
             "confidencedegree": 0.8
         },
         {

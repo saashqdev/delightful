@@ -81,7 +81,7 @@ class ModelGatewayMapper extends ModelMapper
 
     /**
      * inside部use chat o clock,one定isusethemethod.
-     * willfrom动替代for本groundproxymodel.
+     * willfromauto replacefor本groundproxymodel.
      */
     public function getChatModelProxy(BaseDataIsolation $dataIsolation, string $model, bool $useOfficialAccessToken = false): DelightfulAILocalModel
     {
@@ -98,7 +98,7 @@ class ModelGatewayMapper extends ModelMapper
 
     /**
      * inside部use embedding o clock,one定isusethemethod.
-     * willfrom动替代for本groundproxymodel.
+     * willfromauto replacefor本groundproxymodel.
      */
     public function getEmbeddingModelProxy(BaseDataIsolation $dataIsolation, string $model): DelightfulAILocalModel
     {
@@ -397,10 +397,10 @@ class ModelGatewayMapper extends ModelMapper
         $implementationConfig = $providerEntity->getProviderCode()->getImplementationConfig($providerConfigItem, $providerModelEntity->getModelVersion());
 
         if ($providerEntity->getProviderType()->isCustom()) {
-            // customizeservicequotient统onedisplay别名,ifnothave别名thendisplay“customizeservicequotient”(needconsider多language)
+            // customizeservicequotient统onedisplayalias,ifnothavealiasthendisplay“customizeservicequotient”(needconsider多language)
             $providerName = $providerConfigEntity->getLocalizedAlias($providerDataIsolation->getLanguage());
         } else {
-            // inside置servicequotient统onedisplay servicequotientname,notusedisplay别名(needconsider多language)
+            // inside置servicequotient统onedisplay servicequotientname,notusedisplayalias(needconsider多language)
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 

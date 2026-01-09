@@ -705,7 +705,7 @@ class DelightfulAgentAppService extends AbstractAppService
             return true;
         }
 
-        // judge交互finger令,ifnotone致thenneedreturn true
+        // judgeinteractionfinger令,ifnotone致thenneedreturn true
         $oldInstruct = $delightfulAgentVersionEntity->getInstructs();
         $newInstruct = $delightfulAgentEntity->getInstructs();
 
@@ -959,13 +959,13 @@ class DelightfulAgentAppService extends AbstractAppService
      *
      * @param $authorization DelightfulUserAuthorization userauthorizationinfo
      * @param array $config containAgentconfigurationarray
-     * @return DelightfulAgentEntity create机器person实body
+     * @return DelightfulAgentEntity createmachineperson实body
      * @throws Throwable whenconfigurationinvalidorinitializefailo clockthrowexception
      */
     #[Transactional]
     public function initAgentFromConfig(DelightfulUserAuthorization $authorization, array $config): DelightfulAgentEntity
     {
-        // create机器person
+        // createmachineperson
         $delightfulAgentDTO = new DelightfulAgentDTO();
         $delightfulAgentDTO->setAgentName($config['agent_name']);
         $delightfulAgentDTO->setAgentDescription($config['agent_description'] ?? '');
@@ -1094,7 +1094,7 @@ class DelightfulAgentAppService extends AbstractAppService
                 continue;
             }
 
-            // 特定visible - this处no需againtimecheckvisibilityType,因forfrontsurfacealreadyrowexceptnullandAlltype
+            // specificvisible - this处no需againtimecheckvisibilityType,因forfrontsurfacealreadyrowexceptnullandAlltype
             // 剩downonlymaybeisSPECIFICtype
             if ($this->isUserVisible($visibilityConfig, $currentUserId, $userDepartmentIds)) {
                 $visibleAgentVersions[] = $agentVersion;

@@ -120,7 +120,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                     return null;
                 }
                 $senderSeqEntity = SeqAssembler::generateTopicChangeSeqEntity($senderSeqEntity, $receiveTopicEntity, $receiveUserEntity);
-                // for收item方generateoneseq,inform收item方,topichave变动
+                // for收item方generateoneseq,inform收item方,topichavechange
                 $receiveSeqEntity = $this->delightfulSeqRepository->createSequence($senderSeqEntity->toArray());
             }
             return $receiveSeqEntity ?? null;

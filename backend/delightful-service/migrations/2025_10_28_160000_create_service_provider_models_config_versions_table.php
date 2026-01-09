@@ -37,7 +37,7 @@ return new class extends Migration {
             $table->boolean('support_embedding')->default(false)->comment('whethersupportembedding');
             $table->boolean('support_deep_think')->default(false)->comment('whethersupport深degreethink');
             $table->decimal('cache_write_pricing', 10, 4)->nullable()->comment('cachewrite定价');
-            $table->boolean('support_multi_modal')->default(false)->comment('whethersupport多模state');
+            $table->boolean('support_multi_modal')->default(false)->comment('whethersupportmulti-modalstate');
             $table->boolean('official_recommended')->default(false)->comment('whetherofficialrecommended');
             $table->decimal('input_cost', 10, 4)->nullable()->comment('inputcost');
             $table->decimal('output_cost', 10, 4)->nullable()->comment('outputcost');

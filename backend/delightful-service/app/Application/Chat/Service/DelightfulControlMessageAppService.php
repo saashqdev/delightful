@@ -51,7 +51,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         return match ($controlType) {
             ControlMessageType::CreateConversation,
             ControlMessageType::OpenConversation => $this->conversationDomainService->openConversationWindow($messageDTO, $dataIsolation),
-            // 置top,hidden,免打扰session
+            // 置top,hidden,do not disturbsession
             ControlMessageType::HideConversation,
             ControlMessageType::MuteConversation,
             ControlMessageType::TopConversation => $this->conversationDomainService->conversationOptionChange($messageDTO, $dataIsolation),

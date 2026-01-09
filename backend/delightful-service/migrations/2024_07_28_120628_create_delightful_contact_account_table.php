@@ -26,8 +26,8 @@ return new class extends Migration {
             $table->string('ai_code', 64)->comment('aiencoding')->default('');
             // 账numberstatus
             $table->tinyInteger('status')->comment('账numberstatus,0:normal,1:disable')->default(0);
-            // 国际冠码
-            $table->string('country_code', 16)->comment('国际冠码')->default('');
+            // international prefix
+            $table->string('country_code', 16)->comment('international prefix')->default('');
             // hand机number
             $table->string('phone', 64)->comment('hand机number')->default('');
             // mailbox

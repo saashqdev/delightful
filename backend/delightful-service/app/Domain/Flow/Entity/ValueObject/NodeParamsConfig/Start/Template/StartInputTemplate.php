@@ -50,7 +50,7 @@ class StartInputTemplate
                 "type": "string",
                 "key": "nickname",
                 "sort": 1,
-                "title": " user昵称",
+                "title": " usernickname",
                 "description": "",
                 "items": null,
                 "properties": null,

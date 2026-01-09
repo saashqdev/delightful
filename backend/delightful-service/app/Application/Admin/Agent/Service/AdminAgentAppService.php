@@ -272,16 +272,16 @@ class AdminAgentAppService extends AbstractKernelAppService
         /** @var DelightfulUserAuthorization $authorization */
         $organizationCode = $authorization->getOrganizationCode();
 
-        // getenable机器personlist
+        // getenablemachinepersonlist
         $enabledAgents = $this->delightfulAgentDomainService->getEnabledAgents();
 
         // according tofiltertypefilter
         $enabledAgents = $this->filterEnableAgentsByType($authorization, $enabledAgents, $type);
 
-        // extractenable机器personlistmiddle agent_version_id
+        // extractenablemachinepersonlistmiddle agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // getfinger定organizationand机器personversion机器persondataanditstotal
+        // getfinger定organizationandmachinepersonversionmachinepersondataanditstotal
         $agentVersions = $this->delightfulAgentVersionDomainService->getAgentsByOrganizationWithCursor(
             $organizationCode,
             $agentVersionIds,

@@ -170,7 +170,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * generateAESencryptkey(基础key + 盐value).
+     * generateAESencryptkey(foundationkey + 盐value).
      *
      * @param string $salt 盐value
      * @return string AESkey

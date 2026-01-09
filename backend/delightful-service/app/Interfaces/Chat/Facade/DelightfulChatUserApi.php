@@ -53,7 +53,7 @@ class DelightfulChatUserApi extends AbstractApi
     }
 
     /**
-     * return ai avatar昵称etcinformation.
+     * return ai avatarnicknameetcinformation.
      * @throws Throwable
      */
     #[ArrayShape([
@@ -141,7 +141,7 @@ class DelightfulChatUserApi extends AbstractApi
      * updateuserinformation
      * supportupdatefield:
      * 1. avatar_url: avatar
-     * 2. nickname:   昵称.
+     * 2. nickname:   nickname.
      */
     public function updateUserInfo(RequestInterface $request): array
     {

@@ -61,12 +61,12 @@ readonly class OrganizationDomainService
                 $this->organizationAdminDomainService->grant(
                     $dataIsolation,
                     (string) $creatorId,
-                    (string) $creatorId, // 授予者alsoiscreate者from己
+                    (string) $creatorId, // grant者alsoiscreate者from己
                     'organizationcreate者from动获administratorpermission',
                     true // markfororganizationcreateperson
                 );
             } catch (Throwable $e) {
-                // if授予administratorpermissionfail,recordlogbutnotimpactorganizationcreate
+                // ifgrantadministratorpermissionfail,recordlogbutnotimpactorganizationcreate
                 error_log("Failed to grant organization admin permission for creator {$creatorId}: " . $e->getMessage());
             }
         }

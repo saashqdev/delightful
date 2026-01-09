@@ -179,7 +179,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             $accountEntity = $this->accountRepository->getAccountInfoByAiCode($accountDTO->getAiCode());
             if ($accountEntity) {
                 $userDTO->setDelightfulId($accountEntity->getDelightfulId());
-                // update ai 昵称
+                // update ai nickname
                 $accountEntity->setRealName($userDTO->getNickname());
                 // update账numberinfo
                 if ($accountDTO->getStatus() !== null) {

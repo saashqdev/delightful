@@ -58,7 +58,7 @@ class DelightfulAgentAppService extends AbstractAppService
      */
     public function getAgentsForAdmin(array $agentIds, Authenticatable $authenticatable): array
     {
-        // get机器personinformation
+        // getmachinepersoninformation
         $delightfulAgentEntities = $this->delightfulAgentDomainService->getAgentByIds($agentIds);
 
         $filePaths = array_column($delightfulAgentEntities, 'agent_avatar');

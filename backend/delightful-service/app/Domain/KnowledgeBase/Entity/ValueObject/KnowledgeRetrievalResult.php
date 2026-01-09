@@ -32,7 +32,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     public const string TYPE_GRAPH = 'graph';
 
     /**
-     * 混合retrievetype.
+     * hybridretrievetype.
      */
     public const string TYPE_HYBRID = 'hybrid';
 
@@ -241,7 +241,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * checkwhetherfor混合retrievetype.
+     * checkwhetherforhybridretrievetype.
      */
     public function isHybrid(): bool
     {

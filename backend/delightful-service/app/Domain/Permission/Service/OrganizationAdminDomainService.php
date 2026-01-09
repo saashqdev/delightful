@@ -123,7 +123,7 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 授予userorganizationadministratorpermission.
+     * grantuserorganizationadministratorpermission.
      */
     public function grant(DataIsolation $dataIsolation, string $userId, ?string $grantorUserId, ?string $remarks = null, bool $isOrganizationCreator = false): OrganizationAdminEntity
     {
@@ -134,7 +134,7 @@ class OrganizationAdminDomainService
             $this->logger->warning('找nottoorganizationcode', ['organizationCode' => $orgCode]);
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_NOT_EXISTS);
         }
-        // personorganizationnotallow授予organizationadministrator
+        // personorganizationnotallowgrantorganizationadministrator
         if ($organization->getType() === 1) {
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.personal_organization_cannot_grant_admin');
         }
@@ -149,7 +149,7 @@ class OrganizationAdminDomainService
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST, 'user.not_exist', ['userId' => $userId]);
         }
 
-        // 授予organizationadministrator实body
+        // grantorganizationadministrator实body
         $organizationAdmin = $this->organizationAdminRepository->grant($dataIsolation, $userId, $grantorUserId, $remarks, $isOrganizationCreator);
 
         // synccreate / updateorganizationadministratorrole
@@ -234,8 +234,8 @@ class OrganizationAdminDomainService
         // checknewcreatepersonwhetheralready经isorganizationadministrator
         $newCreator = $this->getByUserId($dataIsolation, $newCreatorUserId);
         if (! $newCreator) {
-            // ifnewcreatepersonalsonotisadministrator,先授予administratorpermission
-            $newCreator = $this->grant($dataIsolation, $newCreatorUserId, $operatorUserId, '转letorganizationcreateperson身shareo clockfrom动授予administratorpermission');
+            // ifnewcreatepersonalsonotisadministrator,先grantadministratorpermission
+            $newCreator = $this->grant($dataIsolation, $newCreatorUserId, $operatorUserId, '转letorganizationcreateperson身shareo clockfrom动grantadministratorpermission');
         }
 
         // cancelcurrentcreatepersoncreateperson身share
@@ -243,7 +243,7 @@ class OrganizationAdminDomainService
         $currentCreator->prepareForModification();
         $this->organizationAdminRepository->save($dataIsolation, $currentCreator);
 
-        // 授予newcreatepersoncreateperson身share
+        // grantnewcreatepersoncreateperson身share
         $newCreator->markAsOrganizationCreator();
         $newCreator->prepareForModification();
         $this->organizationAdminRepository->save($dataIsolation, $newCreator);

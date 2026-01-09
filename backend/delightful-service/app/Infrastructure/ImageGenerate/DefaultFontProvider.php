@@ -11,7 +11,7 @@ use App\Domain\ImageGenerate\Contract\FontProviderInterface;
 
 /**
  * default字bodyprovide者implement
- * open源projectmiddledefaultimplement,provide基础字bodyfeature
+ * open源projectmiddledefaultimplement,providefoundation字bodyfeature
  * enterpriseprojectcanpassdependencyinjection覆盖thisimplementcomeprovidehighlevel字bodyfeature.
  */
 class DefaultFontProvider implements FontProviderInterface
@@ -45,7 +45,7 @@ class DefaultFontProvider implements FontProviderInterface
 
     /**
      * detectgraphlikewhethercontaintransparentchannel.
-     * provide基础transparentdegreedetectfeature.
+     * providefoundationtransparentdegreedetectfeature.
      * @param mixed $image
      */
     public function hasTransparency($image): bool

@@ -9,7 +9,7 @@ namespace App\Domain\Group\Entity\ValueObject;
 
 enum GroupTypeEnum: int
 {
-    // inside部群
+    // insidedepartment group
     case Internal = 1;
 
     // inside部培训群
@@ -24,6 +24,6 @@ enum GroupTypeEnum: int
     // inside部工single群
     case InternalWorkOrder = 5;
 
-    // outside部群
+    // outsidedepartment group
     case External = 6;
 }

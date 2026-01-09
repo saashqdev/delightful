@@ -52,7 +52,7 @@ class PermissionChecker
             return true;
         }
 
-        // judgewhether特定permission
+        // judgewhetherspecificpermission
         $permissionKey = $permission->value;
         return isset($permissions[$permissionKey]) && in_array($mobile, $permissions[$permissionKey]);
     }

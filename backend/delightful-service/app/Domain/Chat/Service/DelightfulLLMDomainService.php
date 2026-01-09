@@ -180,12 +180,12 @@ class DelightfulLLMDomainService
     2. generatedefaultdimension,for example:policybackground | mostnewdata | expert viewpoint | toratioanalyze | line业trend
     
     ## outputstandard
-    混合bydownthreetypeandmore多typequestion范type,byensure子questiondiversepropertyandoverrideproperty:
+    hybridbydownthreetypeandmore多typequestion范type,byensure子questiondiversepropertyandoverrideproperty:
     [
       "XtoYimpactdiff",  // toratio/comparecategory
       "Zdomaintypicalapplication",  // application/casecategory
       "closeatABfinger标",    // finger标/propertycategory
-      "导致Mhair生mainreasoniswhat?", // reason/机制category
+      "causeMhair生mainreasoniswhat?", // reason/机制category
       "whatisN?it核corefeatureiswhat?", // definition/explaincategory
       "notcomefiveyearPdomainhair展trendiswhat?", // trend/predictioncategory
       "针toQquestion,have哪thesecanlineresolvesolution?" // resolvesolution/suggestioncategory

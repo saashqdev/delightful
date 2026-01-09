@@ -34,7 +34,7 @@ class SSRFUtil
      *
      * @param string $url needcheckURL
      * @param array $blackList blacklistIPordomain
-     * @param array $whiteList 白名singleIPordomain
+     * @param array $whiteList whitelistsingleIPordomain
      * @param array $allowProtocols allowagreement
      * @param bool $replaceIp whetherreplaceforIPaccess
      * @param bool $allowRedirect whetherallow重定to
@@ -66,7 +66,7 @@ class SSRFUtil
      *
      * @param string $url needcheckURL
      * @param array $blackList blacklistIPordomain
-     * @param array $whiteList 白名singleIPordomain
+     * @param array $whiteList whitelistsingleIPordomain
      * @param array $allowProtocols allowagreement
      * @param bool $replaceIp whetherreplaceforIPaccess
      * @param bool $allowRedirect whetherallow重定to

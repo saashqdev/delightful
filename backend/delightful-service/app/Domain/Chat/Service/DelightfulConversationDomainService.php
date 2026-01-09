@@ -109,7 +109,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * conversationwindow:置top/移except/免打扰.
+     * conversationwindow:置top/移except/do not disturb.
      * @throws Throwable
      */
     public function conversationOptionChange(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array

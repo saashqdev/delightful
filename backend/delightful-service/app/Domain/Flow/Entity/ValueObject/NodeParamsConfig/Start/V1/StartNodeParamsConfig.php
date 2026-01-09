@@ -341,7 +341,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     "nickname": {
                         "type": "string",
                         "key": "nickname",
-                        "title": "user昵称",
+                        "title": "usernickname",
                         "description": "",
                         "items": null,
                         "properties": null,
@@ -567,7 +567,7 @@ JSON;
                 "nickname": {
                     "type": "string",
                     "key": "nickname",
-                    "title": "user昵称",
+                    "title": "usernickname",
                     "description": "",
                     "items": null,
                     "properties": null,

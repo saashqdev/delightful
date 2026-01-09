@@ -1324,7 +1324,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
     /**
      * businessparametervalidation
-     * to特定typemessageconductbusinessrulevalidation.
+     * tospecifictypemessageconductbusinessrulevalidation.
      */
     private function validateBusinessParams(DelightfulMessageEntity $senderMessageDTO, DataIsolation $dataIsolation): void
     {

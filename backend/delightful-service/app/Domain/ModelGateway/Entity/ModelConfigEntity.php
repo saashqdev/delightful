@@ -20,7 +20,7 @@ class ModelConfigEntity extends AbstractEntity
     protected ?int $id = null;
 
     /**
-     * servicequotient侧接入point id.such asVolcano:ep-xxxx.
+     * servicequotient侧accesspoint id.such asVolcano:ep-xxxx.
      */
     protected string $model;
 

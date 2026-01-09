@@ -234,7 +234,7 @@ class AsrApi extends AbstractApi
                 ]);
             }
 
-            // 5. 预先generatetitle(forincreatedirectoryo clockuse)
+            // 5. in advancegeneratetitle(forincreatedirectoryo clockuse)
             $generatedTitle = null;
             // getcurrentstatusbycheckwhetheralready存intitle
             $currentTaskStatus = $this->asrFileAppService->getTaskStatusFromRedis($taskKey, $userId);
@@ -252,7 +252,7 @@ class AsrApi extends AbstractApi
                     );
 
                     if (! empty($generatedTitle)) {
-                        $this->logger->info('file直传titlegeneratesuccess', [
+                        $this->logger->info('filedirect uploadtitlegeneratesuccess', [
                             'task_key' => $taskKey,
                             'file_name' => $fileName,
                             'generated_title' => $generatedTitle,
@@ -260,7 +260,7 @@ class AsrApi extends AbstractApi
                     }
                 } catch (Throwable $e) {
                     // titlegeneratefailnotimpact主process
-                    $this->logger->warning('file直传titlegeneratefail', [
+                    $this->logger->warning('filedirect uploadtitlegeneratefail', [
                         'task_key' => $taskKey,
                         'file_name' => $fileName,
                         'error' => $e->getMessage(),
@@ -479,7 +479,7 @@ class AsrApi extends AbstractApi
         // generatetitle:priorityfrom Redis middle复use upload-tokens generatetitle
         $generatedTitle = null;
 
-        // 1. tryfrom Redis middlegetalreadygeneratetitle(file直传scenario)
+        // 1. tryfrom Redis middlegetalreadygeneratetitle(filedirect uploadscenario)
         if (! empty($taskKey)) {
             $taskStatus = $this->asrFileAppService->getTaskStatusFromRedis($taskKey, $userAuthorization->getId());
             if (! empty($taskStatus->uploadGeneratedTitle) && ! $taskStatus->isEmpty()) {

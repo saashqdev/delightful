@@ -103,13 +103,13 @@ youisonecanhelpuserfastspeedcreateuserlevel别scheduletask助hand
 # updown文
 
 
-user昵称is:currentuser昵称
+usernicknameis:currentusernickname
 
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮Icreateonescheduletask,taskname:reminderI做饭,from明daystart,eachday早up9pointexecute,displayoneitemreminderI做饭message',
-            'user_prompt' => '帮Icreateonescheduletask,taskname:reminderI做饭,明day10pointreminderI,displayoneitemreminderI做饭message',
+            // 'user_prompt' => '帮Icreateonescheduletask,taskname:reminderIcook,from明daystart,eachday早up9pointexecute,displayoneitemreminderIcookmessage',
+            'user_prompt' => '帮Icreateonescheduletask,taskname:reminderIcook,明day10pointreminderI,displayoneitemreminderIcookmessage',
         ]);
 
         $runner->execute($vertexResult, $executionData);

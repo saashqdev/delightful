@@ -12,7 +12,7 @@ use App\Infrastructure\Core\HighAvailability\ValueObject\LoadBalancingType;
 use App\Infrastructure\Core\HighAvailability\ValueObject\StatisticsLevel;
 
 /**
- * 接入pointrequest DTO.
+ * accesspointrequest DTO.
  * useatencapsulation getAvailableEndpoint methodrequestparameter.
  */
 class EndpointRequestDTO extends AbstractDTO
@@ -38,8 +38,8 @@ class EndpointRequestDTO extends AbstractDTO
     protected ?string $endpointName = null;
 
     /**
-     * uptimechoose接入pointID (optional).
-     * useatconversation延续etcscenario,prioritychooseuptimeuse接入point.
+     * uptimechooseaccesspointID (optional).
+     * useatconversation延续etcscenario,prioritychooseuptimeuseaccesspoint.
      */
     protected ?string $lastSelectedEndpointId = null;
 
@@ -152,7 +152,7 @@ class EndpointRequestDTO extends AbstractDTO
     }
 
     /**
-     * checkwhetherhaveuptimechoose接入pointID.
+     * checkwhetherhaveuptimechooseaccesspointID.
      */
     public function hasLastSelectedEndpointId(): bool
     {

@@ -21,9 +21,9 @@ return new class extends Migration {
 
         Schema::create('delightful_api_premium_endpoint_statistics', function (Blueprint $table) {
             $table->bigIncrements('id');
-            // thiswithincanimplementto接入pointrequeststatisticslogic
+            // thiswithincanimplementtoaccesspointrequeststatisticslogic
             // for example:recordrequestcount,requesttype,resourceconsumeetc
-            $table->string('endpoint_id', 64)->nullable()->default(null)->comment('接入pointid');
+            $table->string('endpoint_id', 64)->nullable()->default(null)->comment('accesspointid');
             $table->integer('request_count')->nullable()->default(null)->comment('requestcount');
             $table->integer('request_success_count')->nullable()->default(null)->comment('requestsuccesscount');
             $table->integer('request_error_count')->nullable()->default(null)->comment('requestfailcount');
@@ -37,7 +37,7 @@ return new class extends Migration {
             $table->tinyInteger('statistics_level')->nullable()->default(null)->comment('statisticslevel别:0-secondlevel,1-minute钟level,2-hourlevel,3-daylevel');
             $table->datetimes();
             $table->unique(['endpoint_id', 'statistics_time', 'statistics_level'], 'unique_endpoint_id_statistics_level_time');
-            $table->comment('接入pointrequeststatisticstable');
+            $table->comment('accesspointrequeststatisticstable');
         });
     }
 

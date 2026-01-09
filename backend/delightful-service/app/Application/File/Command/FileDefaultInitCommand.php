@@ -71,7 +71,7 @@ class FileDefaultInitCommand extends Command
     {
         $this->line('startinitializefile...');
 
-        // 基础filedirectory - usenewpathstructure
+        // foundationfiledirectory - usenewpathstructure
         $baseFileDir = BASE_PATH . '/storage/files';
         $defaultModulesDir = $baseFileDir . '/DELIGHTFUL/open/default';
 

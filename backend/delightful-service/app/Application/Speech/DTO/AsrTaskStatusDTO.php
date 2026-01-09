@@ -48,9 +48,9 @@ class AsrTaskStatusDTO
     public ?string $topicId = null; // topicID
 
     // recordingdirectoryinfo
-    public ?string $tempHiddenDirectory = null; // hiddendirectorypath(存放minuteslicefile)
+    public ?string $tempHiddenDirectory = null; // hiddendirectorypath(storeminuteslicefile)
 
-    public ?string $displayDirectory = null; // displaydirectorypath(存放streamtextandnote)
+    public ?string $displayDirectory = null; // displaydirectorypath(storestreamtextandnote)
 
     public ?int $tempHiddenDirectoryId = null; // hiddendirectoryfileID
 

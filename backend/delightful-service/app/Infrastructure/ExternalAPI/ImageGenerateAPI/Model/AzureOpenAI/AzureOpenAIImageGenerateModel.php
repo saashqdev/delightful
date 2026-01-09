@@ -109,7 +109,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先createresponseobject
+        // 1. in advancecreateresponseobject
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -123,7 +123,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
         }
 
         try {
-            // 3. graphlikegenerate(synchandle,Azure OpenAI API support n parameteronetimepropertygenerate多张image)
+            // 3. graphlikegenerate(synchandle,Azure OpenAI API support n parameteronetimepropertygeneratemultipleimage)
             if (! empty($imageGenerateRequest->getReferenceImages())) {
                 $editModel = new AzureOpenAIImageEditModel($this->configItem);
                 $editRequest = $this->convertToEditRequest($imageGenerateRequest);
@@ -378,7 +378,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
                 'url' => $processedUrl,
             ];
 
-            // 累计usageinfo
+            // accumulatedusageinfo
             $currentUsage->addGeneratedImages(1);
         }
 

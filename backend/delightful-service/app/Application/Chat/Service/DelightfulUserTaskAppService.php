@@ -426,7 +426,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //         messageInfo: ['message_entity' => TriggerData::createMessageEntity(new TextMessage(['content' => $triggerConfig['trigger_data']['content']]))],
     //         params: $triggerConfig['trigger_data'],
     //         paramsForm: $triggerConfig['trigger_data_form'],
-    //         // 试运lineo clock,all局variableforhand动pass in
+    //         // trial operationlineo clock,all局variableforhand动pass in
     //         globalVariable: ComponentFactory::fastCreate($globalVariable) ?? $delightfulFlow->getGlobalVariable(),
     //     );
 

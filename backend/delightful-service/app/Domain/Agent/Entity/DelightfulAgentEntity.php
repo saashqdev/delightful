@@ -24,7 +24,7 @@ class DelightfulAgentEntity extends AbstractEntity
 
     protected ?string $botVersionId = null;
 
-    // 交互instruction
+    // interactioninstruction
     protected ?array $instructs = [];
 
     /**

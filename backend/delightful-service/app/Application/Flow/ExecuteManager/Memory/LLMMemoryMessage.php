@@ -45,7 +45,7 @@ class LLMMemoryMessage
     private array $attachments = [];
 
     /**
-     * @var string originalmessageanalyzeresult(多模stateanalyze)
+     * @var string originalmessageanalyzeresult(multi-modalstateanalyze)
      */
     private string $analysisResult = '';
 

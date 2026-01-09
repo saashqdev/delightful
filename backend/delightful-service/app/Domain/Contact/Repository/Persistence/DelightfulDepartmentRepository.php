@@ -212,7 +212,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             // onetimepropertygetorganizationdown所havedepartmentdata
             $allDepartments = $this->getAllDepartmentsForCalculation($organizationCode);
 
-            // calculateeachdepartment员工totalandcacheto Redis
+            // calculateeachdepartmentemployeetotalandcacheto Redis
             $this->calculateAndCacheAllDepartmentEmployeeSums($organizationCode, $allDepartments, $cacheKey);
             $result = $this->redis->hget($cacheKey, $departmentId);
 
@@ -408,7 +408,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * onetimepropertygetorganizationdown所havedepartmentdata,useat员工数calculate.
+     * onetimepropertygetorganizationdown所havedepartmentdata,useatemployee数calculate.
      */
     private function getAllDepartmentsForCalculation(string $organizationCode): array
     {
@@ -420,19 +420,19 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * calculateandcache所havedepartment员工total.
+     * calculateandcache所havedepartmentemployeetotal.
      */
     private function calculateAndCacheAllDepartmentEmployeeSums(string $organizationCode, array $allDepartments, string $cacheKey): void
     {
         $departmentSums = [];
 
-        // 1) initialize:eachdepartment先放入from身直属person数
+        // 1) initialize:eachdepartment先put intofrom身直属person数
         foreach ($allDepartments as $department) {
             $deptId = (string) $department['department_id'];
             $departmentSums[$deptId] = (int) ($department['employee_sum'] ?? 0);
         }
 
-        // 2) frombottomtoup:按 level frombigtosmall,子department累计valueaddto父department
+        // 2) frombottomtoup:按 level frombigtosmall,子departmentaccumulatedvalueaddto父department
         usort($allDepartments, static function (array $a, array $b): int {
             return (int) ($b['level'] ?? 0) <=> (int) ($a['level'] ?? 0);
         });
@@ -493,7 +493,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * directlycalculatesingledepartment员工total(notusecache).
+     * directlycalculatesingledepartmentemployeetotal(notusecache).
      */
     private function calculateSelfAndChildrenEmployeeSum(string $organizationCode, string $departmentId): int
     {

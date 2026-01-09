@@ -74,7 +74,7 @@ class VolcengineArkModel extends AbstractImageGenerate
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先createresponseobject
+        // 1. in advancecreateresponseobject
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
@@ -196,7 +196,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             $payload['sequential_image_generation_options'] = $sequentialOptions;
         }
 
-        // ifhavereferencegraphlike,thenaddimagefield(support多张image)
+        // ifhavereferencegraphlike,thenaddimagefield(supportmultipleimage)
         if (! empty($referImages)) {
             if (count($referImages) === 1) {
                 $payload['image'] = $referImages[0];
@@ -237,7 +237,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             $payload['sequential_image_generation_options'] = $sequentialOptions;
         }
 
-        // ifhavereferencegraphlike,thenaddimagefield(support多张image)
+        // ifhavereferencegraphlike,thenaddimagefield(supportmultipleimage)
         if (! empty($referImages)) {
             if (count($referImages) === 1) {
                 $payload['image'] = $referImages[0];
@@ -300,7 +300,7 @@ class VolcengineArkModel extends AbstractImageGenerate
                 }
             }
 
-            // 累计usageinfo
+            // accumulatedusageinfo
             if (! empty($volcengineResult['usage']) && is_array($volcengineResult['usage'])) {
                 $currentUsage->addGeneratedImages($volcengineResult['usage']['generated_images'] ?? 0);
                 $currentUsage->completionTokens += $volcengineResult['usage']['output_tokens'] ?? 0;

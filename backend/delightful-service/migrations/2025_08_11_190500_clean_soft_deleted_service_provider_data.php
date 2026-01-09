@@ -319,7 +319,7 @@ return new class extends Migration {
             if ($processedCount > $totalOrgs) {
                 $processedCount = $totalOrgs;
             }
-            $logger->info("alreadyhandle {$processedCount}/{$totalOrgs} organization,累计delete: {$totalDeleted} item");
+            $logger->info("alreadyhandle {$processedCount}/{$totalOrgs} organization,accumulateddelete: {$totalDeleted} item");
         }
 
         $logger->info("service_provider_models table冗remainderdatacleanupcomplete,totaldelete: {$totalDeleted} itemrecord");

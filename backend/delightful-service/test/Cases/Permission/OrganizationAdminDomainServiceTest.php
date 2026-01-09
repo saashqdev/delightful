@@ -329,7 +329,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
                 $this->organizationAdminDomainService->destroy($this->createDataIsolation($organizationCode), $admin);
             }
 
-            // cleanup特定testuserID
+            // cleanupspecifictestuserID
             foreach ($this->testUserIds as $userId) {
                 $organizationAdmin = $this->organizationAdminDomainService->getByUserId($this->createDataIsolation($organizationCode), $userId);
                 if ($organizationAdmin) {

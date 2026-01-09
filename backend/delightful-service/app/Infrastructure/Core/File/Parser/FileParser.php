@@ -95,7 +95,7 @@ class FileParser
      * @param string $url fileURLground址
      * @param string $tempFile temporaryfilepath
      * @param int $maxSize filesizelimit(字section),0table示notlimit
-     * @throws Exception whendownloadfailorfile超限o clock
+     * @throws Exception whendownloadfailorfileexceed limito clock
      */
     private static function downloadFile(string $url, string $tempFile, int $maxSize = 0): void
     {
@@ -112,7 +112,7 @@ class FileParser
             }
         }
 
-        // try预先checkfilesize
+        // tryin advancecheckfilesize
         $sizeKnown = self::checkUrlFileSize($url, $maxSize);
 
         $context = stream_context_create([
@@ -146,7 +146,7 @@ class FileParser
      * @param resource $fileStream remotefilestreamresource
      * @param resource $localFile 本groundfilestreamresource
      * @param int $maxSize filesizelimit(字section)
-     * @throws Exception whenfilesize超限orwritefailo clock
+     * @throws Exception whenfilesizeexceed limitorwritefailo clock
      */
     private static function downloadWithSizeControl($fileStream, $localFile, int $maxSize): void
     {
@@ -175,12 +175,12 @@ class FileParser
     }
 
     /**
-     * checkfilesizewhether超限.
+     * checkfilesizewhetherexceed limit.
      *
      * @param string $fileUrl fileURLground址
      * @param int $maxSize filesizelimit(字section),0table示notlimit
-     * @return bool truetable示alreadychecksizeandinlimitinside,falsetable示ischunked传输needstreamdownload
-     * @throws Exception whenfilesize超passlimitorfilesizeunknownandnonchunked传输o clock
+     * @return bool truetable示alreadychecksizeandinlimitinside,falsetable示ischunkedtransmissionneedstreamdownload
+     * @throws Exception whenfilesize超passlimitorfilesizeunknownandnonchunkedtransmissiono clock
      */
     private static function checkUrlFileSize(string $fileUrl, int $maxSize = 0): bool
     {
@@ -197,18 +197,18 @@ class FileParser
             return true;
         }
 
-        // nothaveContent-Length,checkwhetherforchunked传输
+        // nothaveContent-Length,checkwhetherforchunkedtransmission
         $transferEncoding = $headers['Transfer-Encoding'] ?? '';
         if (is_array($transferEncoding)) {
             $transferEncoding = end($transferEncoding);
         }
 
         if (strtolower(trim($transferEncoding)) === 'chunked') {
-            // chunked传输,allowstreamdownload
+            // chunkedtransmission,allowstreamdownload
             return false;
         }
 
-        // 既nothaveContent-Length,alsonotischunked传输,rejectdownload
+        // 既nothaveContent-Length,alsonotischunkedtransmission,rejectdownload
         ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesizeunknown,forbiddownload');
     }
 }

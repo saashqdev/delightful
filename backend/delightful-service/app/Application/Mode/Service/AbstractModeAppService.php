@@ -66,7 +66,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // go重
         $iconPaths = array_unique($iconPaths);
 
-        // batchquantitygeticonURL(from动按organizationcodegrouphandle)
+        // batchquantitygeticonURL(fromauto byorganizationcodegrouphandle)
         $iconUrls = $this->fileDomainService->getBatchLinksByOrgPaths($iconPaths);
 
         // replaceDTOmiddleiconpathforcompleteURL
@@ -118,7 +118,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // go重
         $iconPaths = array_unique($iconPaths);
 
-        // batchquantitygeticonURL(from动按organizationcodegrouphandle)
+        // batchquantitygeticonURL(fromauto byorganizationcodegrouphandle)
         $iconUrls = $this->fileDomainService->getBatchLinksByOrgPaths($iconPaths);
 
         // replaceDTOmiddleiconpathforcompleteURL
@@ -189,7 +189,7 @@ abstract class AbstractModeAppService extends AbstractKernelAppService
         // go重
         $iconPaths = array_unique($iconPaths);
 
-        // batchquantitygeticonURL(from动按organizationcodegrouphandle)
+        // batchquantitygeticonURL(fromauto byorganizationcodegrouphandle)
         $iconUrls = $this->fileDomainService->getBatchLinksByOrgPaths($iconPaths);
 
         // replaceDTOmiddleiconpathforcompleteURL

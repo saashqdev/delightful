@@ -10,7 +10,7 @@ namespace App\Domain\Chat\Event\Device;
 use App\Infrastructure\Core\AbstractEvent;
 
 /**
- * service端todevicelink保活失效.
+ * service端todevicelinkkeep alive失效.
  */
 class DeviceDisconnectEvent extends AbstractEvent
 {

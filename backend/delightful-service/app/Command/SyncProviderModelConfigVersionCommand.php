@@ -168,7 +168,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     {
         $config = is_string($model->config) ? json_decode($model->config, true) : $model->config;
 
-        // 基础field
+        // foundationfield
         $baseData = [
             'service_provider_model_id' => $model->id,
             'version' => $version,
@@ -220,7 +220,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     private function logHeader(bool $isDryRun, bool $isForce, int $limit): void
     {
         $this->logger->info('startsyncservicequotientmodelconfigurationversiondata...');
-        $this->logger->info(sprintf('模type: %s', $isDryRun ? '试运line(notwritedatabase)' : 'justtypeexecute'));
+        $this->logger->info(sprintf('模type: %s', $isDryRun ? 'trial operationline(notwritedatabase)' : 'justtypeexecute'));
 
         if ($isForce) {
             $this->logger->warning('force模typealreadyenable:willfor所havemodelcreatenewversion');
@@ -263,7 +263,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
      */
     private function logCreated(ProviderModelModel $model, int $version, bool $isDryRun): void
     {
-        $prefix = $isDryRun ? '[试运line]' : '[create]';
+        $prefix = $isDryRun ? '[trial operationline]' : '[create]';
         $this->logger->info(sprintf(
             '%s model ID: %d, name: %s, version: %d',
             $prefix,

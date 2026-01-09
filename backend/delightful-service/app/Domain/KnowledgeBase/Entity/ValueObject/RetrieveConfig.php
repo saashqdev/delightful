@@ -30,7 +30,7 @@ class RetrieveConfig extends AbstractValueObject
      * optionalvalue:
      * - semantic_search: semanticretrieve
      * - full_text_search: all文retrieve
-     * - hybrid_search: 混合retrieve
+     * - hybrid_search: hybridretrieve
      * - graph_search: graphretrieve
      *
      * @see RetrievalMethod
@@ -43,14 +43,14 @@ class RetrieveConfig extends AbstractValueObject
     protected int $topK = 3;
 
     /**
-     * minute数阈value
+     * minutethreshold countvalue
      *
      * onlyreturnsimilardegreeminute数greater thanthe阈valueresult
      */
     protected float $scoreThreshold = 0.5;
 
     /**
-     * whetherenableminute数阈valuefilter.
+     * whetherenableminutethreshold countvaluefilter.
      */
     protected bool $scoreThresholdEnabled = false;
 
@@ -168,7 +168,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * getminute数阈value
+     * getminutethreshold countvalue
      */
     public function getScoreThreshold(): float
     {
@@ -176,7 +176,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * setminute数阈value
+     * setminutethreshold countvalue
      */
     public function setScoreThreshold(float $scoreThreshold): self
     {
@@ -188,7 +188,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * whetherenableminute数阈valuefilter.
+     * whetherenableminutethreshold countvaluefilter.
      */
     public function isScoreThresholdEnabled(): bool
     {
@@ -196,7 +196,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * setwhetherenableminute数阈valuefilter.
+     * setwhetherenableminutethreshold countvaluefilter.
      */
     public function setScoreThresholdEnabled(bool $scoreThresholdEnabled): self
     {

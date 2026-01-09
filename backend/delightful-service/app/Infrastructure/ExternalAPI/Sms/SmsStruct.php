@@ -28,20 +28,20 @@ class SmsStruct
 
     /**
      * variableshort信variablecontent. maybeforassociatearray,alsomaybeforindexarray.
-     * @example {"product_name": "quotient品A", "payer": "供应quotientA","amount": 10}
-     * @example ["quotient品A","供应quotientA",10]
+     * @example {"product_name": "quotient品A", "payer": "supplyquotientA","amount": 10}
+     * @example ["quotient品A","supplyquotientA",10]
      */
     public ?array $variables = null;
 
     /**
      * normalshort信纯textcontent.
-     * 如: 灯塔justininvitationyouadd入enterprise,point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
+     * 如: lighthousejustininvitationyouadd入enterprise,point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
      */
     public ?string $content = null;
 
     /**
      * short信signature.
-     * @example 灯塔engine
+     * @example lighthouseengine
      */
     public SignEnum $sign;
 

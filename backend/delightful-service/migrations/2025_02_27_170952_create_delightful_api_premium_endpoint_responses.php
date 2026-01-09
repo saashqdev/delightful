@@ -24,7 +24,7 @@ return new class extends Migration {
             // request_id
             $table->string('request_id', 128)->nullable()->default(null)->comment('requestid');
             // endpoint_id
-            $table->string('endpoint_id', 64)->nullable()->default(null)->comment('接入pointid');
+            $table->string('endpoint_id', 64)->nullable()->default(null)->comment('accesspointid');
             // requestparameterlength
             $table->integer('request_length')->nullable()->default(null)->comment('requestparameterlength');
             // responseconsumetime,unit:毫second
@@ -41,9 +41,9 @@ return new class extends Migration {
             $table->text('exception_message')->comment('exceptioninfo')->nullable();
             $table->datetimes();
             $table->index(['request_id'], 'request_id_index');
-            // for endpoint_id and created_at addunionindex,useat按timerangequery特定端pointresponse
+            // for endpoint_id and created_at addunionindex,useat按timerangequeryspecific端pointresponse
             $table->index(['endpoint_id', 'created_at'], 'endpoint_id_created_at_index');
-            $table->comment('接入pointresponserecordtable');
+            $table->comment('accesspointresponserecordtable');
         });
     }
 

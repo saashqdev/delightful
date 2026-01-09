@@ -68,7 +68,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 授予userorganizationadministratorpermission.
+     * grantuserorganizationadministratorpermission.
      */
     public function grant(DataIsolation $dataIsolation, string $userId, string $grantorUserId, ?string $remarks = null): OrganizationAdminEntity
     {

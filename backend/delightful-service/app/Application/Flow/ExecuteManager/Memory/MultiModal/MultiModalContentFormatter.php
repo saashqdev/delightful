@@ -10,8 +10,8 @@ namespace App\Application\Flow\ExecuteManager\Memory\MultiModal;
 use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 
 /**
- * 多模statecontentformat化tool
- * useat统oneprocessdifferentscenariodown多模statecontentformat化.
+ * multi-modalstatecontentformat化tool
+ * useat统oneprocessdifferentscenariodownmulti-modalstatecontentformat化.
  */
 class MultiModalContentFormatter
 {
@@ -53,7 +53,7 @@ class MultiModalContentFormatter
 
     /**
      * format化imagecontenttotext
-     * supportsingle张imageand多张imagescenario.
+     * supportsingle张imageandmultipleimagescenario.
      *
      * @param string $originalContent originaltextcontent
      * @param string $visionResponse visualanalyzeresult

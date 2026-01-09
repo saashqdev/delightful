@@ -327,13 +327,13 @@ class DelightfulAgentApi extends AbstractApi
         return $delightfulAgentVersionEntity->toArray();
     }
 
-    // get交互finger令type
+    // getinteractionfinger令type
     public function getInstructTypeOptions()
     {
         return InstructType::getTypeOptions();
     }
 
-    // get交互finger令grouptype
+    // getinteractionfinger令grouptype
     public function getInstructGroupTypeOptions()
     {
         return InstructGroupPosition::getTypeOptions();

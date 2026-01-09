@@ -87,7 +87,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         // loadmemory
         $memoryManager = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), $paramsConfig->getMessages(), $ignoreMessageIds);
 
-        // onlyfrom动memoryneedprocessbydown多模statemessage
+        // onlyfrom动memoryneedprocessbydownmulti-modalstatemessage
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId();
             $contentMessage = null;
@@ -126,13 +126,13 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 }
             }
 
-            // processcurrent多模statemessage - only content needinstantlycallgoprocess
+            // processcurrentmulti-modalstatemessage - only content needinstantlycallgoprocess
             /** @var null|UserMessage $contentMessage */
             if ($contentMessage?->hasImageMultiModal() && $paramsConfig->getModelConfig()->isVision()) {
                 $currentModel = $model->getModelName();
                 $visionModel = $paramsConfig->getModelConfig()->getVisionModel();
 
-                // only currentmodelandvisualmodelnotone致,or者 currentmodelnot supported多模state o clock.invisualmodeltoolmiddle,currentmodelequalvisualmodelandand具havevisualcan力,thennotwillproduce死loop
+                // only currentmodelandvisualmodelnotone致,or者 currentmodelnot supportedmulti-modalstate o clock.invisualmodeltoolmiddle,currentmodelequalvisualmodelandand具havevisualcan力,thennotwillproduce死loop
                 if ($currentModel !== $visionModel || ! $model->getModelOptions()->isMultiModal()) {
                     $multiModalLoglog = MultiModalBuilder::vision(
                         executionData: $executionData,
@@ -171,10 +171,10 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                     $lastMessage = clone $message;
                     $message->setContent($content);
                     $message->setContents(null);
-                    // 重neworganization多模state
+                    // 重neworganizationmulti-modalstate
                     if ($model->getModelOptions()->isMultiModal()) {
                         $message->addContent(UserMessageContent::text($content));
-                        // supplement多模state
+                        // supplementmulti-modalstate
                         $imageUrls = [];
                         foreach ($lastMessage->getContents() ?? [] as $userContent) {
                             if (! empty($userContent->getImageUrl())) {

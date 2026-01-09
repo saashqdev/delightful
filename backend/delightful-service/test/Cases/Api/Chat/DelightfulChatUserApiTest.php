@@ -217,7 +217,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // nullvalueshouldbecorrecthandle,not导致error
+        // nullvalueshouldbecorrecthandle,notcauseerror
         $this->assertIsArray($response, 'pass innullvalueo clock应normalreturnresponse');
 
         // ifisauthenticationerror,skiptest

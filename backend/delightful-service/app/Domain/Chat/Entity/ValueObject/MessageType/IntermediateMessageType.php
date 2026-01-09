@@ -12,7 +12,7 @@ namespace App\Domain\Chat\Entity\ValueObject\MessageType;
  */
 enum IntermediateMessageType: string
 {
-    // 超levelMage交互instruction
+    // 超levelMageinteractioninstruction
     case BeDelightfulInstruction = 'be_delightful_instruction';
 
     public function getName(): string

@@ -26,13 +26,13 @@ return new class extends Migration {
             $table->string('third_union_id', 128)->comment('thethree方platformuser union_id');
             $table->string('third_platform_type', 32)->comment('thethree方platformtype dingTalk/lark/weCom/teamShare');
             $table->string('third_employee_no', 64)->nullable()->default('')->comment('工number');
-            $table->string('third_real_name', 64)->comment('员工name');
-            $table->string('third_nick_name', 64)->nullable()->default('')->comment('员工昵称');
+            $table->string('third_real_name', 64)->comment('employeename');
+            $table->string('third_nick_name', 64)->nullable()->default('')->comment('employeenickname');
             $table->text('third_avatar')->nullable()->comment('avatar');
-            $table->tinyInteger('third_gender')->default(0)->comment('员工property别 0-unknown 1-男 2-女');
+            $table->tinyInteger('third_gender')->default(0)->comment('employeeproperty别 0-unknown 1-男 2-女');
             $table->string('third_email', 128)->nullable()->default('')->comment('mailbox');
-            $table->string('third_mobile', 64)->nullable()->default('')->comment('thethree方platform员工hand机number');
-            $table->string('third_id_number', 64)->nullable()->default('')->comment('员工身share证');
+            $table->string('third_mobile', 64)->nullable()->default('')->comment('thethree方platformemployeehand机number');
+            $table->string('third_id_number', 64)->nullable()->default('')->comment('employee身share证');
             $table->text('third_platform_users_extra')->comment('额outsideinfo');
             $table->index('delightful_user_id', 'delightful_user_id');
             $table->unique(['third_union_id', 'third_platform_type', 'delightful_organization_code'], 'unique_third_id');

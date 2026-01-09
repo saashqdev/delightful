@@ -76,7 +76,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * save基础information.
+     * savefoundationinformation.
      */
     public function saveFlow()
     {
@@ -91,7 +91,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 试运line.
+     * trial operationline.
      */
     public function flowDebug(string $flowId)
     {

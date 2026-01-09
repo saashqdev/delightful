@@ -18,16 +18,16 @@ use Throwable;
  */
 class ClientMessage extends AbstractEntity
 {
-    // service端generatemessage唯oneid,all局唯one.useatwithdraw,editmessage.
+    // service端generatemessage唯oneid,alllocally uniqueone.useatwithdraw,editmessage.
     protected string $delightfulMessageId;
 
-    // customer端generate,needios/安卓/webthree端共同certainonegeneratealgorithm.useatinformcustomer端,delightful_message_idbycome
+    // customer端generate,needios/安卓/webthreeclient commoncertainonegeneratealgorithm.useatinformcustomer端,delightful_message_idbycome
     protected ?string $appMessageId;
 
     // topicid
     protected ?string $topicId;
 
-    // messagesmallcategory.controlmessagesmallcategory:already读return执;withdraw;edit;入群/退群;organization架构变动; . showmessage:text,voice,img,file,videoetc
+    // messagesmallcategory.controlmessagesmallcategory:already读return执;withdraw;edit;入群/退群;organizationarchitecture change; . showmessage:text,voice,img,file,videoetc
 
     protected string $type;
 
@@ -40,7 +40,7 @@ class ClientMessage extends AbstractEntity
     // messagesendtime,and delightful_message_id oneup,useatwithdraw,editmessageo clock唯onepropertyvalidation.
     protected int $sendTime;
 
-    // chatmessagestatus:unread | seen | read |revoked  .to应middle文释义:not读|already读|alreadyview(non纯textcomplextypemessage,userpoint击detail)  | withdraw
+    // chatmessagestatus:unread | seen | read |revoked  .to应middletext explanation:not读|already读|alreadyview(non纯textcomplextypemessage,userpoint击detail)  | withdraw
     protected ?string $status;
 
     protected MessageInterface $content;
@@ -48,7 +48,7 @@ class ClientMessage extends AbstractEntity
     public function __construct(array $data)
     {
         if (! $data['content'] instanceof MessageInterface) {
-            // avoideachtype bug 导致user完allno法拉message,thiswithin做onedown兜bottom
+            // avoideachtype bug causeuser完allno法拉message,thiswithin做onedown兜bottom
             try {
                 $data['content'] = MessageAssembler::getMessageStructByArray($data['type'], $data['content']);
             } catch (Throwable) {

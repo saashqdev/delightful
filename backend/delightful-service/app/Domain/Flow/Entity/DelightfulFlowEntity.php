@@ -125,10 +125,10 @@ class DelightfulFlowEntity extends AbstractEntity
 
     public function prepareTestRun(): void
     {
-        // 试运lineiswantaccording tostarto clockcalculate
+        // trial operationlineiswantaccording tostarto clockcalculate
         $this->enabled = true;
 
-        // process试运lineits实onlyneed nodes
+        // processtrial operationlineits实onlyneed nodes
         if (empty($this->nodes)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow.fields.nodes']);
         }

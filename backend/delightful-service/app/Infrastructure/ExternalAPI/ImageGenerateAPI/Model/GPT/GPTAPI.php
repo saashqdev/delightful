@@ -34,7 +34,7 @@ class GPTAPI
     }
 
     /**
-     * setting API 基础 URL.
+     * setting API foundation URL.
      */
     public function setBaseUrl(string $baseUrl): void
     {

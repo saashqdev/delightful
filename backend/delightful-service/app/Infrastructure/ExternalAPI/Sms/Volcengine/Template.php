@@ -24,7 +24,7 @@ class Template extends AbstractTemplate
     /**
      * messagegroupsupportsignaturelist.
      */
-    public static array $signToMessageGroup = ['灯塔engine'];
+    public static array $signToMessageGroup = ['lighthouseengine'];
 
     protected array $typeToIdMap = [
         LanguageEnum::ZH_CN->value => [
@@ -49,12 +49,12 @@ class Template extends AbstractTemplate
      * Volcano云short信signature暂notsupportinternationalization.
      */
     protected array $signMap = [
-        '灯塔engine' => [
-            LanguageEnum::ZH_CN->value => '灯塔engine',
+        'lighthouseengine' => [
+            LanguageEnum::ZH_CN->value => 'lighthouseengine',
             //            Language::EN_US => 'Light Engine',
         ],
         SignEnum::DENG_TA->value => [
-            LanguageEnum::ZH_CN->value => '灯塔engine',
+            LanguageEnum::ZH_CN->value => 'lighthouseengine',
             //            Language::EN_US => 'Light Engine',
         ],
     ];

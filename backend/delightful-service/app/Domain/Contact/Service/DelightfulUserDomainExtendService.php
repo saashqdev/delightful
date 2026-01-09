@@ -50,7 +50,7 @@ class DelightfulUserDomainExtendService implements DelightfulUserDomainExtendInt
             $updateFilter['avatar_url'] = $userUpdateDTO->getAvatarUrl();
         }
 
-        // process昵称
+        // processnickname
         if (in_array('nickname', $permission) && $userUpdateDTO->getNickname() !== null) {
             $updateFilter['nickname'] = $userUpdateDTO->getNickname();
         }

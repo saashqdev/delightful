@@ -233,7 +233,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * returnmodelandservicequotientallbeactivate接入pointcolumntable.
+     * returnmodelandservicequotientallbeactivateaccesspointcolumntable.
      * wantjudge model_parent_id modelandservicequotientwhetheractivate.
      * @return ProviderModelEntity[]
      */

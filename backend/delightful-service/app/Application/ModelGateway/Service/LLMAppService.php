@@ -656,7 +656,7 @@ class LLMAppService extends AbstractLLMAppService
                 if (! empty($generateImageRaw)) {
                     $this->recordImageGenerateMessageLog($modelVersion, $creator, $organizationCode);
                     $n = $textGenerateImageDTO->getN();
-                    // except mj is 1 time之outside,otherall按张数算
+                    // except mj is 1 time之outside,otherallcount by sheet
                     if (in_array($modelVersion, ImageGenerateModelType::getMidjourneyModes())) {
                         $n = 1;
                     }
@@ -1169,7 +1169,7 @@ class LLMAppService extends AbstractLLMAppService
 
             // calculate计费quantity
             $n = $proxyModelRequest->getN();
-            // except mjand graph生graph is 1 time之outside,otherall按张数算
+            // except mjand graph生graph is 1 time之outside,otherallcount by sheet
             if (in_array($modelVersion, ImageGenerateModelType::getMidjourneyModes())) {
                 $n = 1;
             }

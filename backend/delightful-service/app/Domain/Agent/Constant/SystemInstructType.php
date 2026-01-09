@@ -66,7 +66,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * getdefaultsystem交互finger令configuration.
+     * getdefaultsysteminteractionfinger令configuration.
      */
     public static function getDefaultInstructs(): array
     {
@@ -143,7 +143,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * ensuresystem交互finger令存in,ifmissingthensupplement.
+     * ensuresysteminteractionfinger令存in,ifmissingthensupplement.
      * @return array returnsupplementbackfinger令array
      */
     public static function ensureSystemInstructs(array $instructs): array

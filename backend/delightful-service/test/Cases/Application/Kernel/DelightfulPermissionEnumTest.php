@@ -92,7 +92,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
             $this->assertContains($permission['operation'], $this->permissionEnum->getOperations());
         }
 
-        // check特定permissionwhether存in
+        // checkspecificpermissionwhether存in
         $permissionKeys = array_column($permissions, 'permission_key');
         $this->assertContains('admin.ai.model_management.query', $permissionKeys);
         $this->assertContains('admin.ai.model_management.manage', $permissionKeys);

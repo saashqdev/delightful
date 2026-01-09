@@ -37,8 +37,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     protected RedisLocker $redisLocker;
 
     /**
-     * 统一的图片生成入口方法
-     * 先调用子类实现的原始图片生成，再统一添加水印.
+     * 统一的图片生成入口method
+     * 先call子类实现的原始图片生成，再统一添加水印.
      */
     final public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -48,8 +48,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 实现接口要求的带水印原始数据方法
-     * 各子类必须根据自己的数据格式实现此方法.
+     * 实现接口要求的带水印原始数据method
+     * 各子类必须根据自己的数据格式实现此method.
      */
     abstract public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array;
 
@@ -59,39 +59,39 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 子类实现的原始图片生成方法
-     * 只负责调用各自API生成图片，不用关心水印处理.
+     * 子类实现的原始图片生成method
+     * 只负责call各自API生成图片，不用关心水印处理.
      */
     abstract protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 
     /**
-     * 获取响应对象的锁，用于并发安全地操作 OpenAIFormatResponse.
+     * get响应object的锁，用于并发安全地操作 OpenAIFormatResponse.
      * 使用Redis自旋锁实现排队等待.
      *
-     * @return string 返回锁的owner，用于释放锁
+     * @return string return锁的owner，用于释放锁
      */
     protected function lockResponse(OpenAIFormatResponse $response): string
     {
         $lockKey = 'img_response_' . spl_object_id($response);
-        $owner = bin2hex(random_bytes(8)); // 16位随机字符串作为owner
+        $owner = bin2hex(random_bytes(8)); // 16位随机string作为owner
 
-        // spinLock会自动等待，直到获取成功或超时（30秒）
+        // spinLock会自动等待，直到getsuccess或超时（30秒）
         if (! $this->redisLocker->spinLock($lockKey, $owner, 30)) {
-            $this->logger->error('获取图像响应Redis锁超时', [
+            $this->logger->error('get图像响应Redis锁超时', [
                 'lock_key' => $lockKey,
                 'timeout' => 30,
             ]);
-            throw new Exception('获取图像响应锁超时，请稍后重试');
+            throw new Exception('get图像响应锁超时，请稍后重试');
         }
 
-        $this->logger->debug('Redis锁获取成功', ['lock_key' => $lockKey, 'owner' => $owner]);
+        $this->logger->debug('Redis锁getsuccess', ['lock_key' => $lockKey, 'owner' => $owner]);
         return $owner;
     }
 
     /**
-     * 释放响应对象的锁.
+     * 释放响应object的锁.
      *
-     * @param OpenAIFormatResponse $response 响应对象
+     * @param OpenAIFormatResponse $response 响应object
      * @param string $owner 锁的owner
      */
     protected function unlockResponse(OpenAIFormatResponse $response, string $owner): void
@@ -101,20 +101,20 @@ abstract class AbstractImageGenerate implements ImageGenerate
         try {
             $result = $this->redisLocker->release($lockKey, $owner);
             if (! $result) {
-                $this->logger->warning('Redis锁释放失败，可能已被其他进程释放', [
+                $this->logger->warning('Redis锁释放fail，可能已被其他进程释放', [
                     'lock_key' => $lockKey,
                     'owner' => $owner,
                 ]);
             } else {
-                $this->logger->debug('Redis锁释放成功', ['lock_key' => $lockKey, 'owner' => $owner]);
+                $this->logger->debug('Redis锁释放success', ['lock_key' => $lockKey, 'owner' => $owner]);
             }
         } catch (Exception $e) {
-            $this->logger->error('Redis锁释放异常', [
+            $this->logger->error('Redis锁释放exception', [
                 'lock_key' => $lockKey,
                 'owner' => $owner,
                 'error' => $e->getMessage(),
             ]);
-            // 锁释放失败不影响业务逻辑，但要记录日志
+            // 锁释放fail不影响业务逻辑，但要recordlog
         }
     }
 
@@ -137,13 +137,13 @@ abstract class AbstractImageGenerate implements ImageGenerate
                     $processedData[$index] = $this->watermarkProcessor->addWatermarkToUrl($imageData, $imageGenerateRequest);
                 }
             } catch (Exception $e) {
-                // 水印处理失败时，记录错误但不影响图片返回
-                $this->logger->error('图片水印处理失败', [
+                // 水印处理fail时，recorderror但不影响图片return
+                $this->logger->error('图片水印处理fail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                     'imageType' => $response->getImageGenerateType()->value,
                 ]);
-                // 返回原始图片
+                // return原始图片
                 $processedData[$index] = $imageData;
             }
         }

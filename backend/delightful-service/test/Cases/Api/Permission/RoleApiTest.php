@@ -22,11 +22,11 @@ class RoleApiTest extends AbstractHttpTest
     public const string SUB_ADMIN_API = '/api/v1/admin/roles/sub-admins/';
 
     /**
-     * 测试子管理员列表查询.
+     * test子管理员listquery.
      */
     public function testGetSubAdminListAndById(): void
     {
-        // === 测试 getSubAdminList ===
+        // === test getSubAdminList ===
         $listResp = $this->get(self::CREATE_SUB_ADMIN_API, [], $this->getCommonHeaders());
 
         $this->assertIsArray($listResp);
@@ -35,7 +35,7 @@ class RoleApiTest extends AbstractHttpTest
 
     public function testCreateSubAdminSuccess(): void
     {
-        // === 测试创建子管理员 ===
+        // === testcreate子管理员 ===
         $delightfulPermission = new DelightfulPermission();
         $testPermissions = [
             $delightfulPermission->buildPermission(DelightfulResourceEnum::ADMIN_AI_MODEL->value, DelightfulOperationEnum::EDIT->value),
@@ -43,7 +43,7 @@ class RoleApiTest extends AbstractHttpTest
             $delightfulPermission->buildPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN->value, DelightfulOperationEnum::EDIT->value),
         ];
         $requestData = [
-            'name' => '测试子管理员角色',
+            'name' => 'test子管理员角色',
             'status' => 1,
             'permissions' => $testPermissions,
             'user_ids' => ['usi_343adbdbe8a026226311c67bdea152ea', 'usi_71f7b56bec00b0cd9f9daba18caa7a4c'],
@@ -57,7 +57,7 @@ class RoleApiTest extends AbstractHttpTest
 
         $this->assertIsArray($response);
 
-        // 检查成功响应结构
+        // checksuccess响应结构
         if (isset($response['code']) && $response['code'] === 1000) {
             $this->assertArrayHasKey('data', $response);
             $this->assertIsArray($response['data']);
@@ -66,9 +66,9 @@ class RoleApiTest extends AbstractHttpTest
             $this->assertEquals($requestData['name'], $response['data']['name']);
             $this->assertEquals($requestData['status'], $response['data']['status']);
         }
-        // === 测试创建子管理员END ===
+        // === testcreate子管理员END ===
 
-        // === 测试更新子管理员 ===
+        // === testupdate子管理员 ===
         $id = $response['data']['id'];
 
         $testPermissions = [
@@ -77,7 +77,7 @@ class RoleApiTest extends AbstractHttpTest
         ];
 
         $requestData = [
-            'name' => '更新的子管理员角色' . rand(100, 999),
+            'name' => 'update的子管理员角色' . rand(100, 999),
             'status' => 0,
             'permissions' => $testPermissions,
             'user_ids' => ['usi_343adbdbe8a026226311c67bdea152ea'],
@@ -92,18 +92,18 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertIsArray($response);
         $this->assertEquals(1000, $response['code']);
 
-        // 检查成功响应结构
+        // checksuccess响应结构
         $this->assertArrayHasKey('data', $response);
         $this->assertIsArray($response['data']);
         $this->assertArrayHasKey('id', $response['data']);
         $this->assertArrayHasKey('name', $response['data']);
         $this->assertEquals($requestData['name'], $response['data']['name']);
         $this->assertEquals($requestData['status'], $response['data']['status']);
-        // === 测试更新子管理员END ===
+        // === testupdate子管理员END ===
 
-        // === 测试查询子管理员 ===
+        // === testquery子管理员 ===
         $detailResp = $this->get(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
-        // 断言详情接口响应结构与数据
+        // assert详情接口响应结构与数据
         $this->assertIsArray($detailResp);
         $this->assertEquals(1000, $detailResp['code'] ?? null);
 
@@ -125,43 +125,43 @@ class RoleApiTest extends AbstractHttpTest
             false
         );
 
-        // 核对数据内容
+        // 核对数据content
         $this->assertEquals($id, $detailResp['data']['id'] ?? null);
         $this->assertEquals($requestData['name'], $detailResp['data']['name'] ?? null);
         $this->assertEquals($requestData['status'], $detailResp['data']['status'] ?? null);
 
-        // === 测试查询子管理员END ===
+        // === testquery子管理员END ===
 
-        // === 测试删除子管理员 ===
-        // 调用删除接口
+        // === testdelete子管理员 ===
+        // calldelete接口
         $deleteResp = $this->delete(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
         $this->assertIsArray($deleteResp);
         $this->assertEquals(1000, $deleteResp['code']);
 
-        // 再次查询应当返回角色不存在或空
+        // 再次query应当return角色不存在或空
         $detailResp = $this->get(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
-        // 预期这里会返回错误码，具体根据业务而定，只要非1000即可
+        // 预期这里会returnerror码，具体根据业务而定，只要非1000即可
         $this->assertNotEquals(1000, $detailResp['code'] ?? null);
-        // === 测试删除子管理员END ===
+        // === testdelete子管理员END ===
     }
 
     /**
-     * 测试获取用户权限树接口.
+     * testgetuserpermission树接口.
      */
     public function testGetUserPermissionTree(): void
     {
-        // 调用接口
+        // call接口
         $response = $this->get(
             '/api/v1/permissions/me',
             [],
             $this->getCommonHeaders()
         );
 
-        // 断言基础响应结构
+        // assert基础响应结构
         $this->assertIsArray($response);
         $this->assertEquals(1000, $response['code'] ?? null);
 
-        // 断言 data 字段存在且为数组
+        // assert data field存在且为array
         $this->assertArrayHasKey('data', $response);
         $this->assertIsArray($response['data']);
 

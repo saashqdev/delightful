@@ -26,12 +26,12 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
 
     // public function testCallbackSuccess()
     // {
-    //     // 准备测试数据
+    //     // 准备test数据
     //     $userTask = [
     //         'conversation_id' => '728277721403252736',
     //         'topic_id' => '749639569880518657',
     //         'delightful_env_id' => 1,
-    //         'name' => '查询数据列表',
+    //         'name' => 'query数据list',
     //         'creator' => 'usi_3715ce50bc02d7e72ba7891649b7f1da',
     //         'nickname' => 'xxx',
     //         'agent_id' => '737330322528899073',
@@ -48,15 +48,15 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
     //         'deadline' => null,
     //         'interval' => null,
     //     ];
-    //     // 创建被测试的服务实例, 使用依赖注入
+    //     // create被test的service实例, 使用依赖注入
     //     $service = make(DelightfulUserTaskAppService::class);
     //     // {"branchId": "branch_83f180194d23", "flowCode": "DELIGHTFUL-FLOW-6784c05fc92ec0-09863904", "routineConfig": {"day": null, "time": "00:00", "type": "daily_repeat", "topic": {"name": null, "type": ""}, "value": {"unit": null, "values": null, "deadline": null, "interval": null}}}
     //     $flowCode = 'DELIGHTFUL-FLOW-6784c05fc92ec0-09863904';
     //     //  $branchId = 'branch_83f180194d23';
-    //     // 执行测试
+    //     // 执行test
     //      $service::callback($flowCode, $userTask, $userTaskValue);
 
-    //     // 验证结果
+    //     // 验证result
     //     $this->assertTrue(true);
     // }
 
@@ -85,7 +85,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $this->assertTrue(true);
     }
 
-    // 测试创建自定义重复任务 week 场景
+    // testcreate自定义重复task week 场景
     public function testCreateCustomRepeatTaskWeek()
     {
         $service = make(DelightfulUserTaskAppService::class);
@@ -94,7 +94,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $userTask->setTopicId('749639569880518657');
         $userTask->setCreator('usi_3715ce50bc02d7e72ba7891649b7f1da');
         $userTask->setNickname('xxx');
-        $userTask->setName('自定义每两周重复任务-2');
+        $userTask->setName('自定义每两周重复task-2');
         $userTask->setAgentId('737330322528899073');
         $userTask->setDay('');
         $userTask->setTime('16:00');
@@ -110,7 +110,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $this->assertTrue(true);
     }
 
-    // 测试创建自定义重复任务 month 场景
+    // testcreate自定义重复task month 场景
     public function testCreateCustomRepeatTaskMonth()
     {
         $service = make(DelightfulUserTaskAppService::class);
@@ -119,7 +119,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $userTask->setTopicId('749639569880518657');
         $userTask->setCreator('usi_3715ce50bc02d7e72ba7891649b7f1da');
         $userTask->setNickname('xxx');
-        $userTask->setName('测试自定义重复任务-月');
+        $userTask->setName('test自定义重复task-月');
         $userTask->setAgentId('737330322528899073');
         $userTask->setDay('');
         $userTask->setTime('22:00');
@@ -135,7 +135,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $this->assertTrue(true);
     }
 
-    // 测试创建自定义重复任务 year 场景
+    // testcreate自定义重复task year 场景
     public function testCreateCustomRepeatTaskYear()
     {
         $service = make(DelightfulUserTaskAppService::class);
@@ -145,7 +145,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $userTask->setTopicId('749639569880518657');
         $userTask->setCreator('usi_3715ce50bc02d7e72ba7891649b7f1da');
         $userTask->setNickname('xxx');
-        $userTask->setName('测试自定义重复年任务');
+        $userTask->setName('test自定义重复年task');
         $userTask->setAgentId('737330322528899073');
         $userTask->setDay('2025-02-27');
         $userTask->setTime('13:00');

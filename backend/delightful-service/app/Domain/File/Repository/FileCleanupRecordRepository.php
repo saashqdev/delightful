@@ -15,7 +15,7 @@ use Hyperf\DbConnection\Db;
 class FileCleanupRecordRepository
 {
     /**
-     * 创建文件清理记录.
+     * create文件清理record.
      */
     public function create(FileCleanupRecordEntity $entity): FileCleanupRecordEntity
     {
@@ -42,7 +42,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 根据ID查找记录.
+     * 根据ID查找record.
      */
     public function findById(int $id): ?FileCleanupRecordEntity
     {
@@ -53,7 +53,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 根据文件key和组织编码查找记录.
+     * 根据文件key和organization编码查找record.
      */
     public function findByFileKey(string $fileKey, string $organizationCode): ?FileCleanupRecordEntity
     {
@@ -67,14 +67,14 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 获取过期的待清理记录.
+     * get过期的待清理record.
      */
     public function getExpiredRecords(int $limit = 50): array
     {
         /** @var Collection<FileCleanupRecordModel> $models */
         $models = FileCleanupRecordModel::query()
             ->where('expire_at', '<=', date('Y-m-d H:i:s'))
-            ->where('status', 0) // 待清理状态
+            ->where('status', 0) // 待清理status
             ->orderBy('expire_at', 'asc')
             ->limit($limit)
             ->get();
@@ -83,15 +83,15 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 获取需要重试的失败记录.
+     * get需要重试的failrecord.
      */
     public function getRetryRecords(int $maxRetries = 3, int $limit = 50): array
     {
         /** @var Collection<FileCleanupRecordModel> $models */
         $models = FileCleanupRecordModel::query()
-            ->where('status', 2) // 失败状态
+            ->where('status', 2) // failstatus
             ->where('retry_count', '<', $maxRetries)
-            ->where('updated_at', '<=', date('Y-m-d H:i:s', time() - 300)) // 5分钟前更新的记录
+            ->where('updated_at', '<=', date('Y-m-d H:i:s', time() - 300)) // 5分钟前update的record
             ->orderBy('updated_at', 'asc')
             ->limit($limit)
             ->get();
@@ -100,7 +100,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 更新记录状态.
+     * updaterecordstatus.
      */
     public function updateStatus(int $id, int $status, ?string $errorMessage = null): bool
     {
@@ -125,7 +125,7 @@ class FileCleanupRecordRepository
     {
         $updateData = [
             'retry_count' => Db::raw('retry_count + 1'),
-            'status' => 2, // 设置为失败状态
+            'status' => 2, // set为failstatus
             'updated_at' => date('Y-m-d H:i:s'),
         ];
 
@@ -139,7 +139,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 删除记录.
+     * deleterecord.
      */
     public function delete(int $id): bool
     {
@@ -149,7 +149,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 批量删除记录.
+     * 批量deleterecord.
      */
     public function batchDelete(array $ids): bool
     {
@@ -166,12 +166,12 @@ class FileCleanupRecordRepository
         return FileCleanupRecordModel::query()
             ->where('file_key', $fileKey)
             ->where('organization_code', $organizationCode)
-            ->where('status', 0) // 只能取消待清理状态的记录
+            ->where('status', 0) // 只能取消待清理status的record
             ->delete() > 0;
     }
 
     /**
-     * 获取清理统计数据.
+     * get清理统计数据.
      */
     public function getCleanupStats(?string $sourceType = null): array
     {
@@ -196,27 +196,27 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 清理旧的成功记录.
+     * 清理旧的successrecord.
      */
     public function cleanupOldRecords(int $daysToKeep = 7): int
     {
         $cutoffDate = date('Y-m-d H:i:s', time() - ($daysToKeep * 24 * 3600));
 
         return FileCleanupRecordModel::query()
-            ->where('status', 1) // 只清理已成功的记录
+            ->where('status', 1) // 只清理已success的record
             ->where('updated_at', '<', $cutoffDate)
             ->delete();
     }
 
     /**
-     * 清理长时间失败的记录.
+     * 清理长timefail的record.
      */
     public function cleanupFailedRecords(int $maxRetries = 3, int $daysToKeep = 7): int
     {
         $cutoffDate = date('Y-m-d H:i:s', time() - ($daysToKeep * 24 * 3600));
 
         return FileCleanupRecordModel::query()
-            ->where('status', 2) // 失败状态
+            ->where('status', 2) // failstatus
             ->where('retry_count', '>=', $maxRetries)
             ->where('updated_at', '<', $cutoffDate)
             ->delete();
@@ -247,7 +247,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 将多个Model转换为Entity数组.
+     * 将多个Model转换为Entityarray.
      */
     private function modelsToEntities(Collection $models): array
     {

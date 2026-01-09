@@ -12,16 +12,16 @@ class ThirdPlatformCreateGroup
     // 群名
     private string $name;
 
-    // 群主的用户id
+    // 群主的userid
     private string $owner;
 
-    // 成员列表
+    // 成员list
     private array $useridlist = [];
 
-    // 新成员是否可查看历史消息：1（默认）：可查看，0：不可查看
+    // 新成员是否可查看历史message：1（默认）：可查看，0：不可查看
     private int $showHistoryType = 1;
 
-    // 是否可搜索群聊, 0（默认）：不可搜索 1：可搜索
+    // 是否可search群聊, 0（默认）：不可search 1：可search
     private int $searchable = 0;
 
     // 入群是否需要验证：0（默认）：不验证 1：入群验证
@@ -30,7 +30,7 @@ class ThirdPlatformCreateGroup
     // @all 使用范围： 0（默认）：所有人都可以@all
     private int $mentionAllAuthority = 0;
 
-    // 群管理类型：0（默认）：所有人可管理，1：仅群主可管理
+    // 群管理type：0（默认）：所有人可管理，1：仅群主可管理
     private int $managementType = 0;
 
     // 是否开启群禁言：0（默认）：不禁言，1：全员禁言

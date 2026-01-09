@@ -70,7 +70,7 @@ class DelightfulAgentDomainService
             $agent = $this->agentRepository->insert($agentEntity);
             $create = true;
 
-            // 创建助理时添加系统交互指令
+            // create助理时添加系统交互指令
             $this->initSystemInstructs($agent->getOrganizationCode(), $agent->getId(), $agentEntity->getUpdatedUid());
         } else {
             // 是否能修改
@@ -161,16 +161,16 @@ class DelightfulAgentDomainService
     // 商业代码目前还依赖
     public function getBotsByOrganization(RequestContext $requestContext, string $agentName, ?string $pageToken = null, int $pageSize = 50, ?string $descriptionKeyword = null): array
     {
-        // 获取数据隔离对象并获取当前组织的组织代码
+        // get数据隔离object并get当前organization的organization代码
         $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode();
 
-        // 获取启用的助理列表
+        // get启用的助理list
         $enabledAgents = $this->getEnabledAgents();
 
-        // 提取启用助理列表中的 agent_version_id
+        // 提取启用助理list中的 agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // 获取指定组织和助理版本的助理数据及其总数
+        // get指定organization和助理版本的助理数据及其总数
         $page = ((int) ceil((int) $pageToken / $pageSize)) + 1;
         $agents = $this->agentVersionRepository->getAgentsByOrganization($organizationCode, $agentVersionIds, $page, $pageSize, $agentName, $descriptionKeyword);
 
@@ -182,10 +182,10 @@ class DelightfulAgentDomainService
 
         // 收集助理头像文件键
         $fileKeys = array_column($agents, 'agent_avatar');
-        // 移除空值
+        // 移除空value
         $validFileKeys = array_filter($fileKeys, static fn ($fileKey) => ! empty($fileKey));
 
-        // 按组织分组fileKeys
+        // 按organization分组fileKeys
         $orgFileKeys = [];
         foreach ($validFileKeys as $fileKey) {
             $orgCode = explode('/', $fileKey, 2)[0] ?? '';
@@ -194,7 +194,7 @@ class DelightfulAgentDomainService
             }
         }
 
-        // 按组织批量获取链接
+        // 按organization批量get链接
         $links = [];
         foreach ($orgFileKeys as $orgCode => $fileKeys) {
             $orgLinks = $this->cloudFileRepository->getLinks($orgCode, $fileKeys);
@@ -244,7 +244,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * 查询企业下的所有助理,条件查询：状态，创建人，搜索.
+     * query企业下的所有助理,条件query：status，create人，search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
@@ -258,7 +258,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * 获取企业下的所有助理创建者.
+     * get企业下的所有助理create者.
      * @return array<string>
      */
     public function getOrganizationAgentsCreators(string $organizationCode): array

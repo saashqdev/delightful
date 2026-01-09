@@ -114,12 +114,12 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 消息分发模块.
-     * 将发件方的消息投递到mq中,用于后续按消息优先级,投递到收件方的消息流中.
+     * message分发模块.
+     * 将发件方的message投递到mq中,用于后续按message优先级,投递到收件方的message流中.
      */
     public function dispatchSeq(SeqCreatedEvent $seqCreatedEvent): void
     {
-        // 降低响应延迟,尽快给客户端返回响应.
+        // 降低响应延迟,尽快给客户端return响应.
         $controlMessageCreatedMq = new MessageDispatchPublisher($seqCreatedEvent);
         if (! $this->producer->produce($controlMessageCreatedMq)) {
             ExceptionBuilder::throw(ChatErrorCode::MESSAGE_SEND_FAILED);
@@ -134,7 +134,7 @@ abstract class AbstractDomainService
 
     public function getSeqContent(DelightfulMessageEntity $messageEntity): array
     {
-        // 节约存储空间,聊天消息在seq表不存具体内容,只存消息id
+        // 节约存储null间,聊天message在seq表不存具体内容,只存messageid
         if ($messageEntity->getMessageType() instanceof ControlMessageType) {
             $content = $messageEntity->getContent()->toArray();
         } else {
@@ -144,13 +144,13 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 通知收件方有新消息(收件方可能是自己,或者是chat对象).
-     * @todo 考虑对 seqIds 合并同类项,减少push次数,减轻网络/mq/服务器压力
+     * 通知收件方有新message(收件方可能是自己,或者是chatobject).
+     * @todo 考虑对 seqIds merge同类项,减少push次数,减轻网络/mq/服务器压力
      */
     public function pushControlSequence(DelightfulSeqEntity $seqEntity): SeqCreatedEvent
     {
         $seqCreatedEvent = $this->getControlSeqCreatedEvent($seqEntity);
-        // 投递消息
+        // 投递message
         $seqCreatedPublisher = new MessagePushPublisher($seqCreatedEvent);
         if (! $this->producer->produce($seqCreatedPublisher)) {
             $this->logger->error(sprintf(
@@ -165,8 +165,8 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 批量推送消息.
-     * 将多个 seq_id 合并为一条 mq 消息进行推送
+     * 批量推送message.
+     * 将多个 seq_id merge为一条 mq message进行推送
      */
     public function batchPushSeq(array $seqIds, MessagePriority $messagePriority): void
     {
@@ -180,7 +180,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 批量分发消息:提高性能,合并多个 seq_id 为一条消息,减少消息推送次数.
+     * 批量分发message:提高性能,merge多个 seq_id 为一条message,减少message推送次数.
      */
     public function batchDispatchSeq(array $seqIds, MessagePriority $messagePriority, string $conversationId): void
     {
@@ -204,13 +204,13 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 生成发件方的控制消息序列.(控制的是非聊天消息).
-     * 由于存在序列号合并/删除的场景,所以不需要保证序列号的连续性.
+     * generate发件方的控制message序列.(控制的是非聊天message).
+     * 由于存在序列号merge/删除的场景,所以不需要保证序列号的连续性.
      */
     public function generateSenderSequenceByControlMessage(DelightfulMessageEntity $messageDTO, string $conversationId = ''): DelightfulSeqEntity
     {
         $time = date('Y-m-d H:i:s');
-        // 节约存储空间,聊天消息在seq表不存具体内容,只存消息id
+        // 节约存储null间,聊天message在seq表不存具体内容,只存messageid
         $content = $this->getSeqContent($messageDTO);
         $seqId = (string) IdGenerator::getSnowId();
         $senderAccountId = $this->getAccountId($messageDTO->getSenderId());
@@ -223,12 +223,12 @@ abstract class AbstractDomainService
             'seq_type' => $messageDTO->getMessageType()->getName(),
             'content' => $content,
             'receive_list' => '',
-            'delightful_message_id' => '', // 控制消息不能有 delightful_message_id
+            'delightful_message_id' => '', // 控制message不能有 delightful_message_id
             'message_id' => $seqId,
             'refer_message_id' => '',
             'sender_message_id' => '',
             'conversation_id' => $conversationId,
-            'status' => DelightfulMessageStatus::Read->value, // 发送方自己的消息,默认已读
+            'status' => DelightfulMessageStatus::Read->value, // send方自己的message,默认已读
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => $messageDTO->getAppMessageId(),
@@ -237,18 +237,18 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 生成发件方的控制消息序列.(不是控制聊天消息).
-     * 由于存在序列号合并/删除的场景,所以不需要保证序列号的连续性.
+     * generate发件方的控制message序列.(不是控制聊天message).
+     * 由于存在序列号merge/删除的场景,所以不需要保证序列号的连续性.
      */
     public function generateReceiveSequenceByControlMessage(DelightfulMessageEntity $messageDTO, DelightfulConversationEntity $receiveConversationEntity): DelightfulSeqEntity
     {
         $time = date('Y-m-d H:i:s');
-        // 获取收件方的会话实体
+        // 获取收件方的conversation实体
         $receiveUserEntity = $this->delightfulUserRepository->getUserById($receiveConversationEntity->getUserId());
         if ($receiveUserEntity === null) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
-        // 节约存储空间,聊天消息在seq表不存具体内容,只存消息id
+        // 节约存储null间,聊天message在seq表不存具体内容,只存messageid
         $content = $this->getSeqContent($messageDTO);
         $seqId = (string) IdGenerator::getSnowId();
         $receiverAccountId = $receiveUserEntity->getDelightfulId();
@@ -266,7 +266,7 @@ abstract class AbstractDomainService
             'refer_message_id' => '',
             'sender_message_id' => '',
             'conversation_id' => $receiveConversationEntity->getId(),
-            'status' => DelightfulMessageStatus::Read->value, // 控制消息不需要已读回执
+            'status' => DelightfulMessageStatus::Read->value, // 控制message不需要已读回执
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => $messageDTO->getAppMessageId(),
@@ -275,18 +275,18 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 系统稳定性保障模块之一:消息优先级的确定
+     * 系统稳定性保障模块之一:message优先级的确定
      * 优先级规则:
      * 1.私聊/100人以内的群聊,优先级最高
-     * 2.系统应用消息,高优先级
-     * 3.api消息(第三方调用生成)/100~1000人群聊,中优先级
-     * 4.控制消息/1000人以上的群聊,最低优先级.
-     * 5.部分控制消息与聊天强相关的,可以把优先级提到高. 比如会话窗口的创建.
+     * 2.系统applicationmessage,高优先级
+     * 3.apimessage(第三方callgenerate)/100~1000人群聊,中优先级
+     * 4.控制message/1000人以上的群聊,最低优先级.
+     * 5.部分控制message与聊天强相关的,可以把优先级提到高. 比如conversation窗口的创建.
      */
     public function getControlMessagePriority(DelightfulSeqEntity $seqEntity, ?int $receiveUserCount = 1): MessagePriority
     {
         $messagePriority = MessagePriority::Low;
-        // 部分控制消息与聊天强相关的,可以把优先级提到高. 比如私聊和人数小于100的已读回执
+        // 部分控制message与聊天强相关的,可以把优先级提到高. 比如私聊和人数小于100的已读回执
         $seqType = $seqEntity->getSeqType();
         if (! in_array($seqType, ControlMessageType::getMessageStatusChangeType(), true)) {
             return $messagePriority;
@@ -297,7 +297,7 @@ abstract class AbstractDomainService
         }
 
         if (in_array($conversationEntity->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {
-            // 私聊消息的已读回执,优先级最高
+            // 私聊message的已读回执,优先级最高
             $messagePriority = MessagePriority::High;
         } elseif ($receiveUserCount <= 100 && $seqEntity->getSeqType() === ControlMessageType::SeenMessages) {
             // 100人以内的群聊,优先级最高
@@ -307,20 +307,20 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 客户端 已读/已查看/撤回/编辑消息.
+     * 客户端 已读/已查看/撤回/编辑message.
      * @throws Throwable
      */
     public function clientOperateMessageStatus(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
         $messageType = $messageDTO->getMessageType();
         $batchResponse = [];
-        // 每条消息发出时,就会在消息体中记录所有的接收方,以便后续的消息状态变更
+        // 每条message发出时,就会在message体中记录所有的receive方,以便后续的messagestatus变更
         switch ($messageType) {
             case ControlMessageType::SeenMessages:
                 /** @var MessagesSeen $messageStruct */
                 $messageStruct = $messageDTO->getContent();
                 $referMessageIds = $messageStruct->getReferMessageIds();
-                // 获取每条消息的最终状态
+                // 获取每条message的最终status
                 $messageStatusSeqEntities = $this->getReceiveMessageLatestReadStatus($referMessageIds, $dataIsolation);
                 $userMessageStatusChangeSeqEntities = [];
                 $needUpdateStatusSeqIds = [];
@@ -336,29 +336,29 @@ abstract class AbstractDomainService
                 if (! empty($userMessageStatusChangeSeqEntities)) {
                     Db::beginTransaction();
                     try {
-                        // 批量给自己生成状态变更的消息流序列
+                        // 批量给自己generatestatus变更的message流序列
                         $this->delightfulSeqRepository->batchCreateSeq($userMessageStatusChangeSeqEntities);
-                        // 更改数据库中消息的状态，避免新设备登录时显示未读
+                        // 更改数据库中message的status，避免新设备登录时显示未读
                         if (! empty($needUpdateStatusSeqIds)) {
                             $this->delightfulSeqRepository->batchUpdateSeqStatus($needUpdateStatusSeqIds, DelightfulMessageStatus::Seen);
                         }
                         $messagePriority = $this->getControlMessagePriority($userMessageStatusChangeSeqEntities[0], count($userMessageStatusChangeSeqEntities));
-                        // 异步将生成的消息流通知用户的其他设备.
+                        // 异步将generate的message流通知user的其他设备.
                         $seqIds = array_column($userMessageStatusChangeSeqEntities, 'id');
-                        // 批量分发已读消息,给消息发送者
+                        // 批量分发已读message,给messagesend者
                         $this->batchDispatchSeq($seqIds, $messagePriority, $userMessageStatusChangeSeqEntities[0]->getConversationId());
                         Db::commit();
-                        $this->logger->info(sprintf('batchDispatchSeq 成功 seqIds:%s  $messagePriority:%s', Json::encode($seqIds), Json::encode($messagePriority)));
+                        $this->logger->info(sprintf('batchDispatchSeq success seqIds:%s  $messagePriority:%s', Json::encode($seqIds), Json::encode($messagePriority)));
                     } catch (Throwable $exception) {
                         Db::rollBack();
                         throw $exception;
                     }
-                    // 批量推送给自己的其他设备,让其他设备显示已读,不再重复发送回执
+                    // 批量推送给自己的其他设备,让其他设备显示已读,不再重复send回执
                     $this->batchPushSeq($seqIds, $messagePriority);
                 }
 
-                // 幂等,获取 refer_message_ids 的实时状态,及时响应客户端
-                // 获取每条消息的最终状态
+                // 幂等,获取 refer_message_ids 的实时status,及时响应客户端
+                // 获取每条message的最终status
                 $messageStatusSeqEntities = $this->getReceiveMessageLatestReadStatus($referMessageIds, $dataIsolation);
                 foreach ($messageStatusSeqEntities as $userSeqEntity) {
                     // 格式化响应结构
@@ -366,7 +366,7 @@ abstract class AbstractDomainService
                 }
                 break;
             case ControlMessageType::ReadMessage:
-                // 如果消息的发送者不是人类,不用处理
+                // 如果message的send者不是人类,不用handle
                 $messageEntity = $this->delightfulMessageRepository->getMessageByDelightfulMessageId($messageDTO->getDelightfulMessageId());
                 if ($messageEntity === null || $messageEntity->getSenderType() !== ConversationType::User) {
                     return [];
@@ -386,12 +386,12 @@ abstract class AbstractDomainService
                 $mutexLockKey = 'chat:revoke_message:' . $messageStruct->getReferMessageId();
                 $this->redisLocker->mutexLock($mutexLockKey, $messageStruct->getReferMessageId());
                 try {
-                    // 只能撤回自己发出的消息
+                    // 只能撤回自己发出的message
                     $userSeqEntity = $this->delightfulSeqRepository->getSeqByMessageId($messageStruct->getReferMessageId());
                     if ($userSeqEntity === null || $userSeqEntity->getObjectId() !== $userEntity->getDelightfulId()) {
                         ExceptionBuilder::throw(ChatErrorCode::MESSAGE_NOT_FOUND);
                     }
-                    // 查询消息是否已被撤回
+                    // querymessage是否已被撤回
                     $userRevokedSeqEntity = $this->delightfulSeqRepository->getMessageRevokedSeq(
                         $messageStruct->getReferMessageId(),
                         $userEntity,
@@ -406,25 +406,25 @@ abstract class AbstractDomainService
                         try {
                             // 修改原始 seq，标记已撤回
                             $this->delightfulSeqRepository->batchUpdateSeqStatus([$userSeqEntity->getId()], DelightfulMessageStatus::Revoked);
-                            // 批量给自己生成状态变更的消息流序列
+                            // 批量给自己generatestatus变更的message流序列
                             $this->delightfulSeqRepository->batchCreateSeq([$userRevokedSeqEntity]);
                             $messagePriority = $this->getControlMessagePriority($userRevokedSeqEntity);
-                            // 更改数据库中消息的状态，避免新设备登录时显示未读
+                            // 更改数据库中message的status，避免新设备登录时显示未读
                             $this->delightfulSeqRepository->batchUpdateSeqStatus([$messageStruct->getReferMessageId()], DelightfulMessageStatus::Revoked);
-                            // 异步将生成的消息流通知用户的其他设备.
+                            // 异步将generate的message流通知user的其他设备.
                             $seqIds = [$userRevokedSeqEntity->getId()];
-                            // 批量分发已读消息,给消息发送者
+                            // 批量分发已读message,给messagesend者
                             $this->batchDispatchSeq($seqIds, $messagePriority, $userSeqEntity->getConversationId());
                             Db::commit();
-                            $this->logger->info(sprintf('batchDispatchSeq 成功 seqIds:%s  $messagePriority:%s', Json::encode($seqIds), Json::encode($messagePriority)));
+                            $this->logger->info(sprintf('batchDispatchSeq success seqIds:%s  $messagePriority:%s', Json::encode($seqIds), Json::encode($messagePriority)));
                         } catch (Throwable $exception) {
                             Db::rollBack();
                             throw $exception;
                         }
-                        // 批量推送给自己的其他设备,让其他设备显示已读,不再重复发送回执
+                        // 批量推送给自己的其他设备,让其他设备显示已读,不再重复send回执
                         $this->batchPushSeq($seqIds, $messagePriority);
                     }
-                    // 幂等,获取 refer_message_ids 的实时状态,及时响应客户端
+                    // 幂等,获取 refer_message_ids 的实时status,及时响应客户端
                     // 格式化响应结构
                     $batchResponse[] = SeqAssembler::getClientSeqStruct($userRevokedSeqEntity, $messageDTO)->toArray();
                 } finally {
@@ -444,7 +444,7 @@ abstract class AbstractDomainService
     public function batchPushControlSeqList(array $seqListCreateDTO): void
     {
         $userSeqEntity = $seqListCreateDTO[array_key_first($seqListCreateDTO)];
-        // 将这些 seq_id 合并为一条 mq 消息进行推送/消费
+        // 将这些 seq_id merge为一条 mq message进行推送/消费
         $seqIds = [];
         foreach ($seqListCreateDTO as $seqEntity) {
             $seqIds[] = $seqEntity->getId();
@@ -462,7 +462,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 避免 seq 表承载太多功能,加太多索引,因此将话题的消息单独写入到 topic_messages 表中.
+     * 避免 seq 表承载太多功能,加太多索引,因此将话题的message单独写入到 topic_messages 表中.
      */
     public function createTopicMessage(DelightfulSeqEntity $seqEntity, ?string $topicId = null): ?DelightfulTopicMessageEntity
     {
@@ -472,7 +472,7 @@ abstract class AbstractDomainService
         if (empty($topicId)) {
             return null;
         }
-        // 如果是编辑消息，不写入
+        // 如果是编辑message，不写入
         if (! empty($seqEntity->getExtra()?->getEditMessageOptions()?->getDelightfulMessageId())) {
             return null;
         }
@@ -496,7 +496,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 用户主动创建了话题的处理。
+     * user主动创建了话题的handle。
      * @throws Throwable
      */
     public function userCreateTopicHandler(TopicCreateMessage $messageStruct, DataIsolation $dataIsolation): DelightfulTopicEntity
@@ -504,17 +504,17 @@ abstract class AbstractDomainService
         Db::beginTransaction();
         try {
             $conversationId = $messageStruct->getConversationId();
-            // 为消息发送方创建话题
+            // 为messagesend方创建话题
             $topicDTO = new DelightfulTopicEntity();
             $topicDTO->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
             $topicDTO->setConversationId($conversationId);
             $topicDTO->setName($messageStruct->getName());
             $topicDTO->setDescription($messageStruct->getDescription());
             $senderTopicEntity = $this->delightfulChatTopicRepository->createTopic($topicDTO);
-            // 为消息接收方创建话题
+            // 为messagereceive方创建话题
             $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($conversationId);
             if ($receiveConversationEntity === null) {
-                // 刚加好友，接收方的会话 id 还未生成
+                // 刚加好友，receive方的conversation id 还未generate
                 return $senderTopicEntity;
             }
             $receiveTopicDTO = new DelightfulTopicEntity();
@@ -550,7 +550,7 @@ abstract class AbstractDomainService
         if ($receiverUserEntity === null || $senderUserEntity === null) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
-        // 判断用户是ai还是人类
+        // 判断user是ai还是人类
         $accountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($receiverUserEntity->getDelightfulId());
         if ($accountEntity === null) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
@@ -582,10 +582,10 @@ abstract class AbstractDomainService
         }
         Db::beginTransaction();
         try {
-            // 根据 appMsgId,给这条消息创建 delightfulMsgId
+            // 根据 appMsgId,给这条message创建 delightfulMsgId
             $messageDTO->setReceiveId($conversationEntity->getReceiveId());
             $messageDTO->setReceiveType($conversationEntity->getReceiveType());
-            // 将会话id回写进控制消息中,便于客户端处理
+            // 将conversationid回写进控制message中,便于客户端handle
             $content = $messageDTO->getContent()->toArray();
             $content['id'] = $conversationEntity->getId();
             $contentChange = MessageAssembler::getMessageStructByArray(
@@ -594,30 +594,30 @@ abstract class AbstractDomainService
             );
             $messageDTO->setContent($contentChange);
             $messageDTO->setMessageType($contentChange->getMessageTypeEnum());
-            // 给自己的消息流生成序列.
+            // 给自己的message流generate序列.
             $seqEntity = $this->generateSenderSequenceByControlMessage($messageDTO, $conversationEntity->getId());
             $seqEntity->setConversationId($conversationEntity->getId());
-            // 群聊需要给群成员创建会话窗口
+            // 群聊需要给群成员创建conversation窗口
             if ($conversationEntity->getReceiveType() === ConversationType::Group || $messageDTO->getReceiveType() === ConversationType::Ai) {
-                // 确定消息优先级
+                // 确定message优先级
                 $seqCreatedEvent = $this->getControlSeqCreatedEvent($seqEntity);
-                // 异步给收件方(其他群成员)生成Seq并推送
+                // 异步给收件方(其他群成员)generateSeq并推送
                 $this->dispatchSeq($seqCreatedEvent);
             }
 
             if ($receiverConversationEntity) {
-                // 给接收方的消息流生成序列.
+                // 给receive方的message流generate序列.
                 $receiverSeqEntity = $this->generateReceiveSequenceByControlMessage($messageDTO, $receiverConversationEntity);
-                // 确定消息优先级
+                // 确定message优先级
                 $receiverSeqCreatedEvent = $this->getControlSeqCreatedEvent($receiverSeqEntity);
-                // 给对方发送消息
+                // 给对方sendmessage
                 $this->dispatchSeq($receiverSeqCreatedEvent);
             }
-            // 将消息流返回给当前客户端! 但是还是会异步推送给用户的所有在线客户端.
+            // 将message流return给当前客户端! 但是还是会异步推送给user的所有在线客户端.
             $data = SeqAssembler::getClientSeqStruct($seqEntity, $messageDTO)->toArray();
-            // 通知用户的其他设备,这里即使投递失败也不影响,所以放协程里,事务外.
+            // 通知user的其他设备,这里即使投递fail也不影响,所以放协程里,事务外.
             co(function () use ($seqEntity) {
-                // 异步推送消息给自己的其他设备
+                // 异步推送message给自己的其他设备
                 $this->pushControlSequence($seqEntity);
             });
             Db::commit();
@@ -644,7 +644,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 判断会话id是否是自己的.
+     * 判断conversationid是否是自己的.
      */
     protected function checkAndGetSelfConversation(string $conversationId, DataIsolation $dataIsolation): DelightfulConversationEntity
     {
@@ -655,7 +655,7 @@ abstract class AbstractDomainService
         if ($senderConversation->getUserId() !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
-        // 组织编码是否匹配
+        // organization编码是否匹配
         if ($senderConversation->getUserOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
@@ -672,16 +672,16 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 由于一条消息,在2个会话窗口渲染时,会生成2个消息id,因此需要解析出来收件方能看到的消息引用的id.
-     * 根据 delightful_message_id + object_id + object_type 找到消息的收件方的refer_message_id.
+     * 由于一条message,在2个conversation窗口渲染时,会generate2个messageid,因此需要parse出来收件方能看到的message引用的id.
+     * 根据 delightful_message_id + object_id + object_type 找到message的收件方的refer_message_id.
      * Support for the message editing function: For multiple sequences (seqs) of the same object_id, only the one with the smallest seq_id is returned.
      */
     protected function getMinSeqListByReferMessageId(DelightfulSeqEntity $senderSeqEntity): array
     {
-        // 发送方自己的会话窗口里,引用的消息id,需要转换成收件方的消息id
+        // send方自己的conversation窗口里,引用的messageid,需要convert成收件方的messageid
         $sendReferMessageId = $senderSeqEntity->getReferMessageId();
         if (empty($sendReferMessageId)) {
-            // 没有消息引用
+            // 没有message引用
             return [];
         }
         $referSeqEntity = $this->delightfulSeqRepository->getSeqByMessageId($sendReferMessageId);
@@ -700,7 +700,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 获取消息的最近状态.
+     * 获取message的最近status.
      * @param DelightfulSeqEntity[] $seqList 多个 refer_message_id 的相关seqList
      * @return DelightfulSeqEntity[]
      */
@@ -726,14 +726,14 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 返回收件方多条消息最终的阅读状态
+     * return收件方多条message最终的阅读status
      * @return DelightfulSeqEntity[]
-     * @todo 考虑用户的A设备编辑消息,B设备撤回消息的场景
+     * @todo 考虑user的A设备编辑message,B设备撤回message的场景
      */
     private function getReceiveMessageLatestReadStatus(array $referMessageIds, DataIsolation $dataIsolation): array
     {
         $referSeqList = $this->delightfulSeqRepository->getReceiveMessagesStatusChange($referMessageIds, $dataIsolation->getCurrentUserId());
-        // 对于接收方来说,一个 sender_message_id 由于状态变化,可能会有多条记录,此处需要最后的状态
+        // 对于receive方来说,一个 sender_message_id 由于status变化,可能会有多条记录,此处需要最后的status
         return $this->getMessageLatestStatus($referMessageIds, $referSeqList);
     }
 }

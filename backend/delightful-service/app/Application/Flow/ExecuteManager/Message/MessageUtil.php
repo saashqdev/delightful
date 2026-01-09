@@ -68,7 +68,7 @@ class MessageUtil
                     $chatAttachments[] = $chatAttachment;
 
                     if ($attachment instanceof ExternalAttachment) {
-                        // 异步下载外链文件并上传到本服务 oss
+                        // 异步下载外链文件并上传到本service oss
                         $imageUploadEvent = new ExternalAttachmentUploadEvent($attachment, $executionData->getDataIsolation()->getCurrentOrganizationCode());
                         AsyncEventUtil::dispatch($imageUploadEvent);
                     }
@@ -77,7 +77,7 @@ class MessageUtil
                 $message = new FilesMessage([]);
                 $linkDesc = $delightfulFlowMessage->getLinkDesc()?->getValue()?->getResult($executionData->getExpressionFieldData());
                 if (is_string($linkDesc) && $linkDesc !== '') {
-                    // 如果具有描述，那么应该是富文本形式
+                    // 如果具有description，那么应该是富文本形式
                     $message = new TextMessage([]);
                     $message->setContent($linkDesc);
                 }
@@ -90,13 +90,13 @@ class MessageUtil
                 return $message;
             case DelightfulFlowMessageType::File:
                 $chatAttachments = [];
-                // 这里的描述是用来标记文件名称
+                // 这里的description是用来标记文件name
                 $linkDesc = $delightfulFlowMessage->getLinkDesc()?->getValue()?->getResult($executionData->getExpressionFieldData());
                 foreach ($linkPaths as $linkPath) {
                     if (! is_string($linkPath) || ! $attachment = $executionData->getAttachmentRecord($linkPath)) {
                         continue;
                     }
-                    // 获取文件名称。如果 linkPaths 只有 1 个，并且 linkDesc 也是只有一个，那么可以直接使用 linkDesc 作为文件名称
+                    // get文件name。如果 linkPaths 只有 1 个，并且 linkDesc 也是只有一个，那么可以直接使用 linkDesc 作为文件name
                     if (count($linkPaths) === 1 && is_string($linkDesc) && $linkDesc !== '') {
                         $attachment->setName($linkDesc);
                     }
@@ -111,7 +111,7 @@ class MessageUtil
                     $chatAttachments[] = $chatAttachment;
 
                     if ($attachment instanceof ExternalAttachment) {
-                        // 异步下载外链文件并上传到本服务 oss
+                        // 异步下载外链文件并上传到本service oss
                         $imageUploadEvent = new ExternalAttachmentUploadEvent($attachment, $executionData->getDataIsolation()->getCurrentOrganizationCode());
                         AsyncEventUtil::dispatch($imageUploadEvent);
                     }

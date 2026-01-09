@@ -36,12 +36,12 @@ class Node extends AbstractValueObject
     protected array $meta = [];
 
     /**
-     * 节点参数配置，目前依靠数组来数据传递.
+     * 节点parameterconfiguration，目前依靠array来数据传递.
      */
     protected array $params = [];
 
     /**
-     * 下一个节点 id 列表.
+     * 下一个节点 id list.
      */
     protected array $nextNodes = [];
 
@@ -52,12 +52,12 @@ class Node extends AbstractValueObject
     protected ?NodeOutput $systemOutput = null;
 
     /**
-     * 节点调试结果.
+     * 节点debugresult.
      */
     protected ?NodeDebugResult $nodeDebugResult = null;
 
     /**
-     * 节点执行的回调函数，如果有该值，那么将直接执行该选择，而不是通过NodeRunner来执行.
+     * 节点执行的回调function，如果有该value，那么将直接执行该选择，而不是通过NodeRunner来执行.
      * 这里暂时想到的是为了单测方便.
      */
     private ?Closure $callback = null;
@@ -76,7 +76,7 @@ class Node extends AbstractValueObject
         $this->nodeDefine = FlowNodeCollector::get($nodeType, $version);
         $this->nodeType = $nodeType;
         $this->nodeVersion = $this->nodeDefine->getVersion();
-        // 初始化配置
+        // 初始化configuration
         $this->nodeParamsConfig = NodeParamsConfigFactory::make($this);
         parent::__construct();
     }

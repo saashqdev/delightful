@@ -36,7 +36,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
 
     /**
      * @param array<int> $ids
-     * @return array<int, ProviderEntity> 返回以id为key的实体对象数组
+     * @return array<int, ProviderEntity> return以id为key的实体objectarray
      */
     public function getByIds(array $ids): array
     {
@@ -47,7 +47,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
             return [];
         }
 
-        // 仅拉取指定 ID，避免全表扫描
+        // 仅拉取指定 ID，避免全table扫描
         $builder->whereIn('id', $ids);
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
@@ -151,10 +151,10 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     }
 
     /**
-     * 获取指定类别的非官方服务商 (Legacy).
+     * get指定类别的非官方service商 (Legacy).
      *
-     * @param Category $category 服务商类别
-     * @return ProviderEntity[] 非官方服务商列表
+     * @param Category $category service商类别
+     * @return ProviderEntity[] 非官方service商list
      */
     public function getNonOfficialByCategory(Category $category): array
     {
@@ -173,7 +173,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     {
         $builder = $this->createProviderQuery();
         $builder->where('category', $category->value);
-        // 不排除任何服务商，包括 Official，因为模板需要所有服务商
+        // 不排除任何service商，包括 Official，因为模板需要所有service商
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
         return ProviderAssembler::toEntities($result);
@@ -215,7 +215,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
             return [];
         }
 
-        // 仅拉取指定 ID，避免全表扫描
+        // 仅拉取指定 ID，避免全table扫描
         $builder->whereIn('id', $ids);
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
@@ -230,7 +230,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     }
 
     /**
-     * 准备移除软删相关功能，临时这样写。创建带有软删除过滤的 ProviderModel 查询构建器.
+     * 准备移除软删相关功能，临时这样写。create带有软deletefilter的 ProviderModel query构建器.
      */
     private function createProviderQuery(): Builder
     {

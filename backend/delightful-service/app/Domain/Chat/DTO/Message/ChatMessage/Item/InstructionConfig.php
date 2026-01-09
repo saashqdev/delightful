@@ -14,22 +14,22 @@ use App\Domain\Chat\Entity\ValueObject\InstructionInsertLocation;
 use App\Domain\Chat\Entity\ValueObject\InstructionType;
 
 /**
- * 指令配置实体类，根据 proto 定义.
+ * 指令configuration实体类，根据 proto 定义.
  */
 class InstructionConfig extends AbstractEntity
 {
     /**
-     * 指令内容.
+     * 指令content.
      */
     protected string $content = '';
 
     /**
-     * 指令描述.
+     * 指令description.
      */
     protected string $description = '';
 
     /**
-     * 指令属性，1 普通指令 2 系统指令.
+     * 指令property，1 普通指令 2 系统指令.
      */
     protected int $displayType = InstructionDisplayType::Normal->value;
 
@@ -39,44 +39,44 @@ class InstructionConfig extends AbstractEntity
     protected string $id = '';
 
     /**
-     * 指令插入位置，1 消息内容前方，2 消息内容中光标位置，3 消息内容后方.
+     * 指令插入位置，1 messagecontent前方，2 messagecontent中光标位置，3 messagecontent后方.
      */
     protected int $insertLocation = InstructionInsertLocation::Cursor->value;
 
     /**
-     * 指令类型, 取值 1 为流程指令，取值 2 为对话指令，默认为 对话指令。
+     * 指令type, 取value 1 为流程指令，取value 2 为对话指令，默认为 对话指令。
      */
     protected int $instructionType = InstructionType::Conversation->value;
 
     /**
-     * 指令名称.
+     * 指令name.
      */
     protected string $name = '';
 
     /**
-     * 直接发送指令，用户点击指令后将直接发送给助理.
+     * 直接发送指令，user点击指令后将直接发送给助理.
      */
     protected bool $sendDirectly = false;
 
     /**
-     * 指令组件类型，1 单选项 2 开关 3 文本类型 4 状态类型.
+     * 指令组件type，1 单选项 2 开关 3 文本type 4 statustype.
      */
     protected int $type = InstructionComponentType::Radio->value;
 
     /**
-     * 指令值.
+     * 指令value.
      *
      * @var InstructionValue[]
      */
     protected array $values = [];
 
     /**
-     * 开关打开状态的文本描述.
+     * 开关打开status的文本description.
      */
     protected string $on = '';
 
     /**
-     * 开关关闭状态的文本描述.
+     * 开关关闭status的文本description.
      */
     protected string $off = '';
 
@@ -128,7 +128,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setDisplayType($displayType): void
     {
-        // 确保 display_type 是整数类型
+        // 确保 display_type 是整数type
         $this->displayType = is_numeric($displayType) ? (int) $displayType : InstructionDisplayType::Normal->value;
     }
 
@@ -149,7 +149,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setInsertLocation($insertLocation): void
     {
-        // 确保 insert_location 是整数类型
+        // 确保 insert_location 是整数type
         $this->insertLocation = is_numeric($insertLocation) ? (int) $insertLocation : InstructionInsertLocation::Cursor->value;
     }
 
@@ -160,7 +160,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setInstructionType($instructionType): void
     {
-        // 确保 instruction_type 是整数类型
+        // 确保 instruction_type 是整数type
         $this->instructionType = is_numeric($instructionType) ? (int) $instructionType : InstructionType::Conversation->value;
     }
 
@@ -181,7 +181,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setSendDirectly($sendDirectly): void
     {
-        // 确保 send_directly 是布尔类型
+        // 确保 send_directly 是布尔type
         $this->sendDirectly = filter_var($sendDirectly, FILTER_VALIDATE_BOOLEAN);
     }
 
@@ -192,7 +192,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setType($type): void
     {
-        // 确保 type 是整数类型
+        // 确保 type 是整数type
         $this->type = is_numeric($type) ? (int) $type : InstructionComponentType::Radio->value;
     }
 
@@ -205,35 +205,35 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * @param null|array $values 原始值数组或 InstructionValue 对象数组，或 null
+     * @param null|array $values 原始valuearray或 InstructionValue objectarray，或 null
      */
     public function setValues($values): void
     {
-        // 处理 null 值
+        // 处理 null value
         if ($values === null) {
             $this->values = [];
             return;
         }
 
-        // 确保 $values 是数组
+        // 确保 $values 是array
         if (! is_array($values)) {
             $this->values = [];
             return;
         }
 
-        // 处理指令值数组
+        // 处理指令valuearray
         if (empty($values)) {
             $this->values = [];
             return;
         }
 
-        // 如果第一个元素已经是 InstructionValue 对象，则直接使用
+        // 如果第一个元素已经是 InstructionValue object，则直接使用
         if (isset($values[0]) && $values[0] instanceof InstructionValue) {
             $this->values = $values;
             return;
         }
 
-        // 否则，将每个元素转换为 InstructionValue 对象
+        // 否则，将每个元素转换为 InstructionValue object
         $processedValues = [];
         foreach ($values as $value) {
             $processedValues[] = new InstructionValue($value);
@@ -242,7 +242,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * 获取开关打开状态的文本描述.
+     * get开关打开status的文本description.
      */
     public function getOn(): string
     {
@@ -250,7 +250,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * 设置开关打开状态的文本描述.
+     * set开关打开status的文本description.
      * @param mixed $on
      */
     public function setOn($on): void
@@ -259,7 +259,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * 获取开关关闭状态的文本描述.
+     * get开关关闭status的文本description.
      */
     public function getOff(): string
     {
@@ -267,7 +267,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * 设置开关关闭状态的文本描述.
+     * set开关关闭status的文本description.
      * @param mixed $off
      */
     public function setOff($off): void
@@ -316,15 +316,15 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * 根据指令组件类型获取对应的名称和值.
+     * 根据指令组件typeget对应的name和value.
      *
-     * 类型为开关时，name 取的是 开/关，value 取 $instruction->getOn / $instruction->getOff
-     * 类型为单选时, name 取的是 显示名称，value：$instructionValue
-     * 类型为状态按钮时，name 取的是状态文本，value: $instructionValue
+     * type为开关时，name 取的是 开/关，value 取 $instruction->getOn / $instruction->getOff
+     * type为单选时, name 取的是 显示name，value：$instructionValue
+     * type为status按钮时，name 取的是status文本，value: $instructionValue
      * 默认 name 为空， value = $instructionValue
      *
-     * @param string $instructionValue 指令值
-     * @return array 返回包含 name 和 value 的数组
+     * @param string $instructionValue 指令value
+     * @return array return包含 name 和 value 的array
      */
     public function getNameAndValueByType(string $instructionValue): array
     {
@@ -333,13 +333,13 @@ class InstructionConfig extends AbstractEntity
 
         switch ($this->type) {
             case InstructionComponentType::Switch->value:
-                // 开关类型
+                // 开关type
                 $name = $value;
                 $value = ($instructionValue === 'on') ? $this->getOn() : $this->getOff();
                 break;
             case InstructionComponentType::Radio->value:
-                // 单选类型
-                // 查找对应的 InstructionValue 对象
+                // 单选type
+                // 查找对应的 InstructionValue object
                 foreach ($this->values as $instructionValueObj) {
                     if ($instructionValueObj->getId() === $instructionValue || $instructionValueObj->getValue() === $value) {
                         $name = $instructionValueObj->getName();
@@ -349,8 +349,8 @@ class InstructionConfig extends AbstractEntity
                 }
                 break;
             case InstructionComponentType::Status->value:
-                // 状态按钮类型
-                // 查找对应的 InstructionValue 对象
+                // status按钮type
+                // 查找对应的 InstructionValue object
                 foreach ($this->values as $instructionValueObj) {
                     if ($instructionValueObj->getValue() === $instructionValue) {
                         $name = $instructionValueObj->getName();

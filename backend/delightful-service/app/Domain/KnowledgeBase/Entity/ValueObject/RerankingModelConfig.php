@@ -11,21 +11,21 @@ use App\Infrastructure\Core\AbstractValueObject;
 use InvalidArgumentException;
 
 /**
- * 重排序模型配置值对象
+ * 重sortmodelconfigurationvalueobject
  *
- * 包含重排序模型的相关配置参数，如模型名称、提供商、API 端点等
+ * 包含重sortmodel的相关configurationparameter，如modelname、提供商、API 端点等
  */
 class RerankingModelConfig extends AbstractValueObject
 {
     /**
-     * 重排序模型名称.
+     * 重sortmodelname.
      *
      * 例如：BAAI/bge-reranker-large
      */
     private string $rerankingModelName = '';
 
     /**
-     * 重排序模型提供商名称.
+     * 重sortmodel提供商name.
      *
      * 例如：gitee_ai、openai 等
      */
@@ -34,35 +34,35 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * API 端点.
      *
-     * 重排序服务的 API 端点
+     * 重sortservice的 API 端点
      */
     private string $apiEndpoint = '';
 
     /**
      * API 密钥.
      *
-     * 访问重排序服务的 API 密钥
+     * 访问重sortservice的 API 密钥
      */
     private string $apiKey = '';
 
     /**
-     * 超时时间（秒）.
+     * 超时time（秒）.
      *
-     * API 请求的超时时间，单位为秒
+     * API 请求的超时time，单位为秒
      */
     private float $timeout = 3.0;
 
     /**
      * 重试次数.
      *
-     * API 请求失败时的重试次数
+     * API 请求fail时的重试次数
      */
     private int $retryCount = 2;
 
     /**
-     * 返回的最大结果数量.
+     * return的最大result数量.
      *
-     * 重排序后返回的最大结果数量
+     * 重sort后return的最大result数量
      */
     private int $topN = 3;
 
@@ -74,21 +74,21 @@ class RerankingModelConfig extends AbstractValueObject
     private int $batchSize = 16;
 
     /**
-     * 是否使用缓存.
+     * 是否使用cache.
      *
-     * 是否缓存重排序结果，用于提高性能
+     * 是否cache重sortresult，用于提高性能
      */
     private bool $useCache = true;
 
     /**
-     * 缓存过期时间（秒）.
+     * cache过期time（秒）.
      *
-     * 缓存的过期时间，单位为秒
+     * cache的过期time，单位为秒
      */
     private int $cacheTtl = 3600;
 
     /**
-     * 获取重排序模型名称.
+     * get重sortmodelname.
      */
     public function getRerankingModelName(): string
     {
@@ -96,7 +96,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 设置重排序模型名称.
+     * set重sortmodelname.
      */
     public function setRerankingModelName(string $rerankingModelName): self
     {
@@ -105,7 +105,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 获取重排序模型提供商名称.
+     * get重sortmodel提供商name.
      */
     public function getRerankingProviderName(): string
     {
@@ -113,7 +113,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 设置重排序模型提供商名称.
+     * set重sortmodel提供商name.
      */
     public function setRerankingProviderName(string $rerankingProviderName): self
     {
@@ -122,7 +122,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 获取 API 端点.
+     * get API 端点.
      */
     public function getApiEndpoint(): string
     {
@@ -130,7 +130,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 设置 API 端点.
+     * set API 端点.
      */
     public function setApiEndpoint(string $apiEndpoint): self
     {
@@ -139,7 +139,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 获取 API 密钥.
+     * get API 密钥.
      */
     public function getApiKey(): string
     {
@@ -147,7 +147,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 设置 API 密钥.
+     * set API 密钥.
      */
     public function setApiKey(string $apiKey): self
     {
@@ -156,7 +156,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 获取超时时间.
+     * get超时time.
      */
     public function getTimeout(): float
     {
@@ -164,7 +164,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 设置超时时间.
+     * set超时time.
      */
     public function setTimeout(float $timeout): self
     {
@@ -176,7 +176,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 获取重试次数.
+     * get重试次数.
      */
     public function getRetryCount(): int
     {
@@ -184,7 +184,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 设置重试次数.
+     * set重试次数.
      */
     public function setRetryCount(int $retryCount): self
     {
@@ -196,7 +196,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 获取返回的最大结果数量.
+     * getreturn的最大result数量.
      */
     public function getTopN(): int
     {
@@ -204,7 +204,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 设置返回的最大结果数量.
+     * setreturn的最大result数量.
      */
     public function setTopN(int $topN): self
     {
@@ -216,7 +216,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 获取批处理大小.
+     * get批处理大小.
      */
     public function getBatchSize(): int
     {
@@ -224,7 +224,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 设置批处理大小.
+     * set批处理大小.
      */
     public function setBatchSize(int $batchSize): self
     {
@@ -236,7 +236,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 是否使用缓存.
+     * 是否使用cache.
      */
     public function isUseCache(): bool
     {
@@ -244,7 +244,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 设置是否使用缓存.
+     * set是否使用cache.
      */
     public function setUseCache(bool $useCache): self
     {
@@ -253,7 +253,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 获取缓存过期时间.
+     * getcache过期time.
      */
     public function getCacheTtl(): int
     {
@@ -261,7 +261,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 设置缓存过期时间.
+     * setcache过期time.
      */
     public function setCacheTtl(int $cacheTtl): self
     {
@@ -273,7 +273,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 创建默认配置.
+     * create默认configuration.
      */
     public static function createDefault(): self
     {
@@ -281,7 +281,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 从数组创建配置.
+     * 从arraycreateconfiguration.
      */
     public static function fromArray(array $config): self
     {
@@ -331,7 +331,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * 转换为数组.
+     * 转换为array.
      */
     public function toArray(): array
     {

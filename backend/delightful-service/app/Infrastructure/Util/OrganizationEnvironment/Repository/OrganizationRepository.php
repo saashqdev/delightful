@@ -18,12 +18,12 @@ use Hyperf\Database\Model\Builder;
 use function Hyperf\Support\now;
 
 /**
- * 组织仓库实现.
+ * organization仓库实现.
  */
 class OrganizationRepository implements OrganizationRepositoryInterface
 {
     /**
-     * 保存组织.
+     * 保存organization.
      */
     public function save(OrganizationEntity $organizationEntity): OrganizationEntity
     {
@@ -53,7 +53,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
             $model = OrganizationModel::create($data);
             $organizationEntity->setId($model->id);
         } else {
-            // 使用模型更新以便使用 casts 处理 JSON 与日期字段
+            // 使用modelupdate以便使用 casts 处理 JSON 与日期field
             $model = OrganizationModel::query()
                 ->where('id', $organizationEntity->getId())
                 ->first();
@@ -67,7 +67,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 根据ID获取组织.
+     * 根据IDgetorganization.
      */
     public function getById(int $id): ?OrganizationEntity
     {
@@ -79,7 +79,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 根据编码获取组织.
+     * 根据编码getorganization.
      */
     public function getByCode(string $code): ?OrganizationEntity
     {
@@ -91,7 +91,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 根据编码列表批量获取组织.
+     * 根据编码list批量getorganization.
      */
     public function getByCodes(array $codes): array
     {
@@ -112,7 +112,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 根据名称获取组织.
+     * 根据namegetorganization.
      */
     public function getByName(string $name): ?OrganizationEntity
     {
@@ -124,19 +124,19 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 查询组织列表.
+     * queryorganizationlist.
      */
     public function queries(Page $page, ?array $filters = null): array
     {
         $query = OrganizationModel::query();
 
-        // 应用过滤条件
+        // 应用filter条件
         $this->applyFilters($query, $filters);
 
-        // 获取总数
+        // get总数
         $total = $query->count();
 
-        // 排序：优先使用过滤器中的排序字段，否则默认按创建时间倒序
+        // sort：优先使用filter器中的sortfield，否则默认按createtime倒序
         $orderBy = $filters['order_by'] ?? null;
         $orderDirection = strtolower((string) ($filters['order_direction'] ?? '')) === 'asc' ? 'asc' : 'desc';
         if (! empty($orderBy)) {
@@ -145,7 +145,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
             $query->orderBy('id', 'asc');
         }
 
-        // 分页查询
+        // paginationquery
         $models = $query
             ->forPage($page->getPage(), $page->getPageNum())
             ->get();
@@ -162,7 +162,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 删除组织.
+     * deleteorganization.
      */
     public function delete(OrganizationEntity $organizationEntity): void
     {
@@ -176,7 +176,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 检查编码是否已存在.
+     * check编码是否已存在.
      */
     public function existsByCode(string $code, ?int $excludeId = null): bool
     {
@@ -190,7 +190,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 应用过滤条件.
+     * 应用filter条件.
      */
     private function applyFilters(Builder $query, ?array $filters): void
     {
@@ -218,12 +218,12 @@ class OrganizationRepository implements OrganizationRepositoryInterface
             $query->where('type', (int) $filters['type']);
         }
 
-        // 同步状态筛选
+        // 同步status筛选
         if (isset($filters['sync_status'])) {
             $query->where('sync_status', (int) $filters['sync_status']);
         }
 
-        // 创建时间区间筛选
+        // createtime区间筛选
         if (! empty($filters['created_at_start'])) {
             $query->where('created_at', '>=', $filters['created_at_start'] . ' 00:00:00');
         }
@@ -233,7 +233,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 将模型映射为实体.
+     * 将model映射为实体.
      */
     private function mapToEntity(OrganizationModel $model): OrganizationEntity
     {

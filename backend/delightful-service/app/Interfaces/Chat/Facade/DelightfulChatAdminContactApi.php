@@ -23,7 +23,7 @@ use Delightful\ApiResponse\Annotation\ApiResponse;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**
- * 管理后台的通讯录接口,与开放平台的接口返回格式不同.
+ * 管理后台的通讯录接口,与开放平台的接口return格式不同.
  */
 #[ApiResponse('low_code')]
 class DelightfulChatAdminContactApi extends AbstractApi
@@ -35,7 +35,7 @@ class DelightfulChatAdminContactApi extends AbstractApi
     }
 
     /**
-     * 获取下级部门列表.
+     * get下级departmentlist.
      */
     public function getSubList(string $id, RequestInterface $request): array
     {
@@ -67,12 +67,12 @@ class DelightfulChatAdminContactApi extends AbstractApi
     }
 
     /**
-     * 按用户id查询,返回用户以及他所在的部门信息.
+     * 按useridquery,returnuser以及他所在的departmentinfo.
      */
     public function userGetByIds(RequestInterface $request): array
     {
         $ids = $request->input('user_ids', '');
-        // 上一页的token. 对于mysql来说,返回累积偏移量;对于es来说,返回游标
+        // 上一页的token. 对于mysql来说,return累积偏移量;对于es来说,return游标
         $pageToken = (string) $request->input('page_token', '');
         $queryType = (int) ($request->input('query_type') ?: UserQueryType::User->value);
         if (! in_array($queryType, UserQueryType::types())) {
@@ -88,12 +88,12 @@ class DelightfulChatAdminContactApi extends AbstractApi
     }
 
     /**
-     * 查询部门直属用户列表.
+     * querydepartment直属userlist.
      */
     public function departmentUserList(string $id, RequestInterface $request): array
     {
-        // 部门id
-        // 上一页的token. 对于mysql来说,返回累积偏移量;对于es来说,返回游标
+        // departmentid
+        // 上一页的token. 对于mysql来说,return累积偏移量;对于es来说,return游标
         $pageToken = (string) $request->input('page_token', '');
         // 是否递归
         $recursive = (bool) $request->input('recursive', false);
@@ -109,7 +109,7 @@ class DelightfulChatAdminContactApi extends AbstractApi
     {
         $authorization = $this->getAuthorization();
         $query = (string) $request->input('query', '');
-        // 上一页的token. 对于mysql来说,返回累积偏移量;对于es来说,返回游标
+        // 上一页的token. 对于mysql来说,return累积偏移量;对于es来说,return游标
         $pageToken = (string) $request->input('page_token', '');
         if (empty($query)) {
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR, 'chat.common.param_error', ['param' => 'query']);
@@ -157,7 +157,7 @@ class DelightfulChatAdminContactApi extends AbstractApi
         ];
     }
 
-    // 获取部门查询dto
+    // getdepartmentquerydto
     private function getDepartmentQueryDTO(string $id, string $pageToken, int $sumType): DepartmentQueryDTO
     {
         $queryDTO = new DepartmentQueryDTO();

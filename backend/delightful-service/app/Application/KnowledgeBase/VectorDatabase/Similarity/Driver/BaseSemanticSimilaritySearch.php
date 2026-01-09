@@ -30,10 +30,10 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
 
     public function search(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeSimilarityFilter $filter, KnowledgeBaseEntity $knowledgeBaseEntity, RetrieveConfig $retrieveConfig): array
     {
-        // 场景验证， 如果开启重新排序，可以多召回数据，然后根据得分进行排序，取 limit ，最多不超过 20 或者 limit 上限
+        // 场景验证， 如果开启重新sort，可以多召回数据，然后根据得分进行sort，取 limit ，最多不超过 20 或者 limit 上限
         $queryNum = $filter->getLimit();
         if ($retrieveConfig->isRerankingEnable()) {
-            // 如果开启重排序，增加召回数量，但不超过20或原始limit的3倍
+            // 如果开启重sort，增加召回数量，但不超过20或原始limit的3倍
             $maxLimit = min(20, $queryNum * 3);
             $filter->setLimit($maxLimit);
         }
@@ -46,7 +46,7 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
         $modelGatewayMapper = di(ModelGatewayMapper::class);
 
         $result = [];
-        // 根据模型进行向量化
+        // 根据model进行向量化
         $model = $modelGatewayMapper->getEmbeddingModelProxy($dataIsolation, $knowledgeBaseEntity->getModel());
         $embeddingGenerator = di(EmbeddingGeneratorInterface::class);
         $queryEmbeddings = $embeddingGenerator->embedText($model, $question, options: [
@@ -73,7 +73,7 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
         }
 
         // todo 优化
-        //        // 进行重排序
+        //        // 进行重sort
         //        if (count($result) > 1 && $retrieveConfig->isRerankingEnable() && container()->has(RerankGeneratorInterface::class)) {
         //            $rerankModelName = $retrieveConfig->getRerankingModel()["reranking_model_name'"];
         //            $rerankModel = OdinModelFactory::getFlowModelEntity($rerankModelName, $dataIsolation->getCurrentOrganizationCode());
@@ -83,18 +83,18 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
         //            }
         //            $rerankGenerator = di(RerankGeneratorInterface::class);
         //            $rerankResult = $rerankGenerator->rerank($rerankModel->createRerank(), $filter->getQuestion(), $documents);
-        //            // 按 relevance_score 从大到小排序
+        //            // 按 relevance_score 从大到小sort
         //            usort($rerankResult, function ($a, $b) {
         //                return $b['relevance_score'] <=> $a['relevance_score'];
         //            });
         //
-        //            // 根据排序后的结果重新排列 $result 数组
+        //            // 根据sort后的result重新排列 $result array
         //            $sortedResult = [];
         //            foreach ($rerankResult as $item) {
         //                $sortedResult[] = $result[$item['index']];
         //            }
         //            $result = $sortedResult;
-        //            // 恢复到原始的 limit 值
+        //            // 恢复到原始的 limit value
         //            if (count($result) > $filter->getLimit()) {
         //                $result = array_slice($result, 0, $filter->getLimit());
         //            }

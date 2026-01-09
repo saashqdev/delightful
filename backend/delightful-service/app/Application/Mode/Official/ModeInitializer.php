@@ -215,7 +215,7 @@ class ModeInitializer
             'icon' => 'Icon3dCubeSphere',
             'color' => '#999999',
             'sort' => 0,
-            'description' => '仅用于创建时初始化模式及重置模式中的配置',
+            'description' => '仅用于create时初始化模式及重置模式中的configuration',
             'is_default' => 1,
             'status' => 1,
             'distribution_type' => 1,
@@ -250,7 +250,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'Please enter the content to converse with the agent.',
-                    'zh_CN' => '请输入与智能体对话的内容',
+                    'zh_CN' => '请输入与智能体对话的content',
                 ]),
                 'identifier' => 'chat',
                 'icon' => 'IconMessages',
@@ -358,7 +358,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Be Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您可输入会议的文字内容，或上传会议录音文件，超级麦吉将为您进行完整的会议总结。 Enter 发送 ; Shift + Enter 换行',
+                    'zh_CN' => '您可输入会议的文字content，或上传会议录音文件，超级麦吉将为您进行完整的会议总结。 Enter 发送 ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'summary',
                 'icon' => 'IconFileDescription',
@@ -385,7 +385,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the text content of the meeting, or upload meeting audio files, Be Delightful will help you complete the meeting summary. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '请输入您的需求，或上传文件，超级麦吉将为您解决问题。 Enter 发送 ; Shift + Enter 换行',
+                    'zh_CN' => '请输入您的需求，或上传文件，超级麦吉将为您解决issue。 Enter 发送 ; Shift + Enter 换行',
                 ]),
                 'identifier' => 'general',
                 'icon' => 'IconBeDelightful',

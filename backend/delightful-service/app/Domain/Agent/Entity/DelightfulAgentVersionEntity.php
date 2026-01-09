@@ -13,7 +13,7 @@ use Hyperf\Codec\Json;
 class DelightfulAgentVersionEntity extends AbstractEntity
 {
     /**
-     * 主键.
+     * primary key.
      */
     protected string $id = '';
 
@@ -38,7 +38,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected string $rootId = '';
 
     /**
-     * 助理名称.
+     * 助理name.
      */
     protected string $agentName;
 
@@ -52,14 +52,14 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected string $robotAvatar;
 
     /**
-     * 助理描述.
+     * 助理description.
      */
     protected string $agentDescription;
 
     protected string $robotDescription;
 
     /**
-     * 版本描述.
+     * 版本description.
      */
     protected ?string $versionDescription = '';
 
@@ -74,22 +74,22 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected ?int $releaseScope = 0;
 
     /**
-     * 审批状态.
+     * 审批status.
      */
     protected ?int $approvalStatus;
 
     /**
-     * 审核状态.
+     * 审核status.
      */
     protected ?int $reviewStatus;
 
     /**
-     * 发布到企业内部状态.
+     * 发布到企业内部status.
      */
     protected ?int $enterpriseReleaseStatus;
 
     /**
-     * 发布到应用市场状态.
+     * 发布到应用市场status.
      */
     protected ?int $appMarketStatus;
 
@@ -99,34 +99,34 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected string $createdUid = '';
 
     /**
-     * 组织编码
+     * organization编码
      */
     protected string $organizationCode;
 
     /**
-     * 创建时间.
+     * createtime.
      */
     protected ?string $createdAt = null;
 
     /**
-     * 更新者用户ID.
+     * update者userID.
      */
     protected ?string $updatedUid = '';
 
     /**
-     * 更新时间.
+     * updatetime.
      */
     protected ?string $updatedAt = null;
 
     /**
-     * 删除时间.
+     * deletetime.
      */
     protected ?string $deletedAt = null;
 
     protected bool $startPage = false;
 
     /**
-     * 可见性配置.
+     * 可见性configuration.
      */
     protected ?VisibilityConfig $visibilityConfig = null;
 

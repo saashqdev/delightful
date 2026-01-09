@@ -26,7 +26,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * 获取助理版本.
+     * get助理版本.
      */
     public function getAgentById(string $id): DelightfulAgentVersionEntity
     {
@@ -76,13 +76,13 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
         }
         return $builder
             ->where('organization_code', $organizationCode)
-            ->where('enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value) // 确保外层筛选启用状态
+            ->where('enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value) // 确保外层筛选启用status
             ->whereIn('id', $agentIds)
             ->count();
     }
 
     /**
-     * 优化版本：直接通过JOIN查询获取启用的助理版本，避免传入大量ID.
+     * 优化版本：直接通过JOINqueryget启用的助理版本，避免传入大量ID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -108,7 +108,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * 优化版本：获取启用助理的总数.
+     * 优化版本：get启用助理的总数.
      */
     public function getEnabledAgentsByOrganizationCount(string $organizationCode, string $agentName): int
     {
@@ -143,7 +143,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function getAgentsFromMarketplaceCount(array $agentIds): int
     {
-        // 使用 count() 方法来统计符合条件的记录数
+        // 使用 count() method来统计符合条件的record数
         return $this->agentVersionModel::query()
             ->whereIn('id', $agentIds)
             ->where('app_market_status', DelightfulAgentVersionStatus::APP_MARKET_LISTED)
@@ -177,23 +177,23 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function setEnterpriseStatus(string $id, int $status): void
     {
-        // 尝试更新指定 ID 的记录
+        // 尝试update指定 ID 的record
         $this->agentVersionModel::query()
             ->where('id', $id)
             ->update(['enterprise_release_status' => $status]);
     }
 
-    // 根据助理id获取最大的 version_number
+    // 根据助理idget最大的 version_number
     public function getAgentMaxVersion(string $agentId): string
     {
-        // 查询指定 agent_id 和 user_id 下的最大版本号,这里不能用 max 取 version，因为会出现 0.3 大于 0.10的情况，但是实际是 0.10大于 0.3
-        // 而版本号只能递增，因此用时间倒序取第一个即可
+        // query指定 agent_id 和 user_id 下的最大版本号,这里不能用 max 取 version，因为会出现 0.3 大于 0.10的情况，但是实际是 0.10大于 0.3
+        // 而版本号只能递增，因此用time倒序取第一个即可
         $maxVersion = $this->agentVersionModel::query()
             ->where('root_id', $agentId)
             ->orderByDesc('id')
             ->limit(1)->first();
 
-        // 如果没有找到记录，返回 0.0 作为默认值
+        // 如果没有找到record，return 0.0 作为默认value
         if ($maxVersion === null) {
             return '0.0.0';
         }
@@ -203,7 +203,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function deleteByAgentId(string $agentId, string $organizationCode): void
     {
-        // 查询指定 agent_id 和 user_id 下的最大版本号
+        // query指定 agent_id 和 user_id 下的最大版本号
         $this->agentVersionModel::query()
             ->where('root_id', $agentId)
             ->where('organization_code', $organizationCode)
@@ -233,7 +233,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function getNewestAgentVersionEntity(string $agentId): ?DelightfulAgentVersionEntity
     {
-        // 获取 $agentId 通过
+        // get $agentId 通过
         $model = $this->agentVersionModel::query()
             ->where('root_id', $agentId)
             ->orderByDesc('id')
@@ -246,7 +246,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function getAgentByFlowCode(string $flowCode): ?DelightfulAgentVersionEntity
     {
-        // 获取 $agentId 通过
+        // get $agentId 通过
         $model = $this->agentVersionModel::query()
             ->where('flow_code', $flowCode)
             ->orderByDesc('id')
@@ -291,10 +291,10 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * 基于游标分页获取指定组织的助理版本列表.
-     * @param string $organizationCode 组织代码
-     * @param array $agentVersionIds 助理版本ID列表
-     * @param string $cursor 游标ID，如果为空字符串则从最新开始
+     * 基于游标paginationget指定organization的助理版本list.
+     * @param string $organizationCode organization代码
+     * @param array $agentVersionIds 助理版本IDlist
+     * @param string $cursor 游标ID，如果为空string则从最新开始
      * @param int $pageSize 每页数量
      */
     public function getAgentsByOrganizationWithCursor(string $organizationCode, array $agentVersionIds, string $cursor, int $pageSize): array
@@ -313,7 +313,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * 根据ids获取助理版本.
+     * 根据idsget助理版本.
      * @return array<DelightfulAgentVersionEntity>
      */
     public function getAgentByIds(array $ids)

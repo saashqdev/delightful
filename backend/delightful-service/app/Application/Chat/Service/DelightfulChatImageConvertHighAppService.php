@@ -117,7 +117,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             if (! $response?->isFinishStatus() || empty($response?->getUrls())) {
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.task_timeout');
             }
-            // 计时结束，输出秒级时间
+            // 计时结束，输出秒级time
             $end = microtime(true);
             $this->logger->info(sprintf('转高清结束，耗时: %s秒。', $end - $start));
             // 将新旧图片存入附件
@@ -137,7 +137,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 $reqDTO->getReferMessageId(),
             );
         } catch (Throwable $e) {
-            // 发生异常时，发送终止消息，并抛出异常
+            // 发生exception时，发送终止message，并抛出exception
             $this->handleGlobalThrowable($reqDTO, $e);
         }
     }
@@ -157,7 +157,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 // 上传OSS
                 $uploadFile = new UploadFile($attachment);
                 $this->fileDomainService->uploadByCredential($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile);
-                // 获取url
+                // geturl
                 $url = $this->fileDomainService->getLink($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile->getKey())->getUrl();
                 // 同步文件至delightful
                 $fileUploadDTOs = [];
@@ -175,7 +175,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                     'url' => $url,
                 ];
             } catch (Throwable $throwable) {
-                // 提交图片失败
+                // 提交图片fail
                 $this->logger->error('upload_attachment_error', [
                     'error' => $throwable->getMessage(),
                     'file' => $attachment,
@@ -218,19 +218,19 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
 
     private function getErrorMessageFromImageGenerateErrorCode(ImageGenerateErrorCode $case): ?string
     {
-        // 获取枚举常量的反射对象
+        // get枚举constant的反射object
         $reflectionEnum = new ReflectionEnum($case);
         $reflectionCase = $reflectionEnum->getCase($case->name);
 
-        // 获取常量的所有注解
+        // getconstant的所有注解
         $attributes = $reflectionCase->getAttributes(ErrorMessage::class);
 
-        // 检查是否存在 ErrorMessage 注解
+        // check是否存在 ErrorMessage 注解
         if (! empty($attributes)) {
-            // 实例化注解对象
+            // 实例化注解object
             $errorMessageAttribute = $attributes[0]->newInstance();
 
-            // 返回注解中的 message 属性
+            // return注解中的 message property
             return '[' . __($errorMessageAttribute->getMessage()) . ']';
         }
 
@@ -275,7 +275,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             ->setAppMessageId($appMessageId)
             ->setReferMessageId($referMessageId)
             ->setExtra($extra);
-        // 设置话题 id
+        // set话题 id
         return $this->getDelightfulChatMessageAppService()->aiSendMessage($seqDTO, $appMessageId, doNotParseReferMessageId: true);
     }
 

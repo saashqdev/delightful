@@ -8,34 +8,34 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\HighAvailability\ValueObject;
 
 /**
- * 负载均衡策略类型枚举.
+ * 负载均衡策略type枚举.
  */
 enum LoadBalancingType: int
 {
     /**
-     * 随机策略 - 随机选择一个可用的后端服务
+     * 随机策略 - 随机选择一个可用的后端service
      */
     case RANDOM = 1;
 
     /**
-     * 轮询策略 - 按顺序依次选择后端服务
+     * 轮询策略 - 按顺序依次选择后端service
      */
     case ROUND_ROBIN = 2;
 
     /**
-     * 加权轮询策略 - 根据权重比例选择后端服务
+     * 加权轮询策略 - 根据权重比例选择后端service
      */
     case WEIGHTED_ROUND_ROBIN = 3;
 
     /**
-     * 哈希策略 - 根据请求的哈希值选择后端服务
+     * 哈希策略 - 根据请求的哈希value选择后端service
      */
     case HASH = 4;
 
     /**
-     * 获取负载均衡类型的描述文本.
+     * get负载均衡type的description文本.
      *
-     * @return string 描述文本
+     * @return string description文本
      */
     public function getDescription(): string
     {
@@ -48,7 +48,7 @@ enum LoadBalancingType: int
     }
 
     /**
-     * 检查当前负载均衡类型是否支持权重.
+     * check当前负载均衡type是否支持权重.
      *
      * @return bool 是否支持权重
      */
@@ -58,9 +58,9 @@ enum LoadBalancingType: int
     }
 
     /**
-     * 获取所有可用的负载均衡类型.
+     * get所有可用的负载均衡type.
      *
-     * @return array<LoadBalancingType> 负载均衡类型数组
+     * @return array<LoadBalancingType> 负载均衡typearray
      */
     public static function getAvailableTypes(): array
     {

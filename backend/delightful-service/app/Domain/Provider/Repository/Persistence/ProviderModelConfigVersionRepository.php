@@ -15,18 +15,18 @@ use Hyperf\DbConnection\Db;
 
 class ProviderModelConfigVersionRepository extends AbstractProviderModelRepository implements ProviderModelConfigVersionRepositoryInterface
 {
-    // 配置版本表不需要组织隔离（通过 service_provider_model_id 关联已经隔离）
+    // configuration版本table不需要organization隔离（通过 service_provider_model_id 关联已经隔离）
     protected bool $filterOrganizationCode = false;
 
     /**
-     * 保存模型配置版本（在事务中完成版本号递增、标记旧版本、创建新版本）.
+     * 保存modelconfiguration版本（在事务中完成版本号递增、标记旧版本、create新版本）.
      */
     public function saveVersionWithTransaction(ProviderDataIsolation $dataIsolation, ProviderModelConfigVersionEntity $entity): void
     {
         Db::transaction(function () use ($dataIsolation, $entity) {
             $serviceProviderModelId = $entity->getServiceProviderModelId();
 
-            // 1. 获取最新版本号并计算新版本号（使用 FOR UPDATE 行锁防止并发问题）
+            // 1. get最新版本号并计算新版本号（使用 FOR UPDATE 行锁防止并发issue）
             $builder = $this->createBuilder($dataIsolation, ProviderModelConfigVersionModel::query());
             $latestVersion = $builder
                 ->where('service_provider_model_id', $serviceProviderModelId)
@@ -35,18 +35,18 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
 
             $newVersion = $latestVersion ? (int) $latestVersion + 1 : 1;
 
-            // 2. 将该模型的所有旧版本标记为非当前版本
+            // 2. 将该model的所有旧版本标记为非当前版本
             $updateBuilder = $this->createBuilder($dataIsolation, ProviderModelConfigVersionModel::query());
             $updateBuilder
                 ->where('service_provider_model_id', $serviceProviderModelId)
                 ->where('is_current_version', true)
                 ->update(['is_current_version' => false]);
 
-            // 3. 设置版本号并创建新版本记录
+            // 3. set版本号并create新版本record
             $entity->setVersion($newVersion);
             $entity->setIsCurrentVersion(true);
 
-            // 转换为数组并移除 null 的 created_at，让 Model 自动处理时间戳
+            // 转换为array并移除 null 的 created_at，让 Model 自动处理time戳
             $data = $entity->toArray();
 
             ProviderModelConfigVersionModel::query()->create($data);
@@ -54,7 +54,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
     }
 
     /**
-     * 获取指定模型的最新版本ID.
+     * get指定model的最新版本ID.
      */
     public function getLatestVersionId(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?int
     {
@@ -66,7 +66,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
     }
 
     /**
-     * 获取指定模型的最新配置版本实体.
+     * get指定model的最新configuration版本实体.
      */
     public function getLatestVersionEntity(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?ProviderModelConfigVersionEntity
     {

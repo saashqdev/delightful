@@ -44,7 +44,7 @@ class RoleRepository implements RoleRepositoryInterface
             $model = RoleModel::create($data);
             $roleEntity->setId($model->id);
         } else {
-            // 使用模型更新以便使用 casts 处理 JSON 与日期字段
+            // 使用modelupdate以便使用 casts 处理 JSON 与日期field
             $model = $this->roleQuery($organizationCode)
                 ->where('id', $roleEntity->getId())
                 ->first();
@@ -58,7 +58,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 根据ID获取角色.
+     * 根据IDget角色.
      */
     public function getById(string $organizationCode, int $id): ?RoleEntity
     {
@@ -70,7 +70,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 根据名称获取角色.
+     * 根据nameget角色.
      */
     public function getByName(string $organizationCode, string $name): ?RoleEntity
     {
@@ -82,15 +82,15 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 查询角色列表.
+     * query角色list.
      */
     public function queries(string $organizationCode, Page $page, ?array $filters = null): array
     {
         $query = $this->roleQuery($organizationCode);
-        // 默认只查询需要展示的角色
+        // 默认只query需要展示的角色
         $query->where('is_display', 1);
 
-        // 应用过滤条件
+        // 应用filter条件
         if ($filters) {
             if (isset($filters['name']) && ! empty($filters['name'])) {
                 $query->where('name', 'like', '%' . $filters['name'] . '%');
@@ -100,10 +100,10 @@ class RoleRepository implements RoleRepositoryInterface
             }
         }
 
-        // 获取总数
+        // get总数
         $total = $query->count();
 
-        // 分页查询
+        // paginationquery
         $models = $query->orderBy('created_at', 'desc')
             ->forPage($page->getPage(), $page->getPageNum())
             ->get();
@@ -120,7 +120,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 删除角色.
+     * delete角色.
      */
     public function delete(string $organizationCode, RoleEntity $roleEntity): void
     {
@@ -134,21 +134,21 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 为角色分配用户.
+     * 为角色分配user.
      */
     public function assignUsers(string $organizationCode, int $roleId, array $userIds, ?string $assignedBy = null): void
     {
-        // 获取当前已分配的用户列表
+        // get当前已分配的userlist
         $existingUserIds = $this->roleUserQuery($organizationCode)
             ->where('role_id', $roleId)
             ->pluck('user_id')
             ->toArray();
 
-        // 计算需要添加和移除的用户
+        // 计算需要添加和移除的user
         $toAdd = array_diff($userIds, $existingUserIds);
         $toRemove = array_diff($existingUserIds, $userIds);
 
-        // 移除不再属于该角色的用户
+        // 移除不再属于该角色的user
         if (! empty($toRemove)) {
             $this->roleUserQuery($organizationCode)
                 ->where('role_id', $roleId)
@@ -176,7 +176,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 移除角色用户.
+     * 移除角色user.
      */
     public function removeUsers(string $organizationCode, int $roleId, array $userIds): void
     {
@@ -187,7 +187,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 获取角色的用户列表.
+     * get角色的userlist.
      */
     public function getRoleUsers(string $organizationCode, int $roleId): array
     {
@@ -198,7 +198,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 批量获取角色的用户列表，返回 [roleId => userIds[]]。
+     * 批量get角色的userlist，return [roleId => userIds[]]。
      */
     public function getRoleUsersMap(string $organizationCode, array $roleIds): array
     {
@@ -226,7 +226,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 获取用户的角色列表.
+     * getuser的角色list.
      */
     public function getUserRoles(string $organizationCode, string $userId): array
     {
@@ -241,7 +241,7 @@ class RoleRepository implements RoleRepositoryInterface
 
         $models = $this->roleQuery($organizationCode)
             ->whereIn('id', $roleIds)
-            ->where('status', RoleModel::STATUS_ENABLED) // 只返回启用的角色
+            ->where('status', RoleModel::STATUS_ENABLED) // 只return启用的角色
             ->get();
 
         $roles = [];
@@ -253,7 +253,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 获取用户的所有权限.
+     * getuser的所有permission.
      */
     public function getUserPermissions(string $organizationCode, string $userId): array
     {
@@ -268,7 +268,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 基于组织编码获取 RoleModel 查询构造器.
+     * 基于organization编码get RoleModel query构造器.
      */
     private function roleQuery(string $organizationCode)
     {
@@ -276,7 +276,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 基于组织编码获取 RoleUserModel 查询构造器.
+     * 基于organization编码get RoleUserModel query构造器.
      */
     private function roleUserQuery(string $organizationCode)
     {
@@ -284,7 +284,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 映射模型到实体.
+     * 映射model到实体.
      */
     private function mapToEntity(RoleModel $model): RoleEntity
     {
@@ -293,10 +293,10 @@ class RoleRepository implements RoleRepositoryInterface
         $entity->setName($model->name);
         $entity->setOrganizationCode($model->organization_code);
 
-        // 从模型获取权限数组
+        // 从modelgetpermissionarray
         $entity->setPermissions($model->getPermissions());
 
-        // 获取权限标签
+        // getpermission标签
         $entity->setPermissionTag($model->getPermissionTag());
 
         // is_display

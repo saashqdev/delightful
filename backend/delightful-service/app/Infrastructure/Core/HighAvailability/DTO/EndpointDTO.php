@@ -11,24 +11,24 @@ use App\Infrastructure\Core\AbstractDTO;
 use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\CircuitBreakerStatus;
 
 /**
- * 用于在业务流程中同时保存业务ID和高可用组件接入点数据库ID.
+ * 用于在业务流程中同时保存业务ID和高可用组件接入点databaseID.
  */
 class EndpointDTO extends AbstractDTO
 {
     /**
-     * getEndpointList 接口返回的 id。
-     * 不同的业务含义不同。对于模型网关来说，这里的 id 是 service_provider_models 表的 id。
+     * getEndpointList 接口return的 id。
+     * 不同的业务含义不同。对于model网关来说，这里的 id 是 service_provider_models table的 id。
      * 前端可能不支持 bigint，所以这里用 string.
      */
     protected ?string $businessId = null;
 
     /**
-     * 数据库接入点ID（高可用表主键）.
+     * database接入点ID（高可用tableprimary key）.
      */
     protected ?string $endpointId = null;
 
     /**
-     * 接入点类型.
+     * 接入点type.
      */
     protected string $type;
 
@@ -38,17 +38,17 @@ class EndpointDTO extends AbstractDTO
     protected ?string $provider = null;
 
     /**
-     * 接入点名称.
+     * 接入点name.
      */
     protected string $name;
 
     /**
-     * 配置信息.
+     * configurationinfo.
      */
     protected ?string $config = null;
 
     /**
-     * 资源的消耗的 id 列表. 一次请求可能会消耗多个资源。
+     * 资源的消耗的 id list. 一次请求可能会消耗多个资源。
      * @var null|string[]
      */
     protected ?array $resources = null;
@@ -59,7 +59,7 @@ class EndpointDTO extends AbstractDTO
     protected bool $enabled = true;
 
     /**
-     * 熔断状态.
+     * 熔断status.
      */
     protected CircuitBreakerStatus $circuitBreakerStatus;
 
@@ -69,12 +69,12 @@ class EndpointDTO extends AbstractDTO
     protected ?int $loadBalancingWeight = null;
 
     /**
-     * 创建时间.
+     * createtime.
      */
     protected string $createdAt;
 
     /**
-     * 更新时间.
+     * updatetime.
      */
     protected string $updatedAt;
 
@@ -83,7 +83,7 @@ class EndpointDTO extends AbstractDTO
         parent::__construct($data);
     }
 
-    // 原有 EndpointDTO 的所有方法
+    // 原有 EndpointDTO 的所有method
     public function getResources(): ?array
     {
         return $this->resources ?? null;
@@ -184,8 +184,8 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * 设置接入点是否启用.
-     * @param bool|int|string $enabled 可传入布尔值、整数或字符串
+     * set接入点是否启用.
+     * @param bool|int|string $enabled 可传入布尔value、整数或string
      */
     public function setEnabled(bool|int|string $enabled): static
     {
@@ -197,9 +197,9 @@ class EndpointDTO extends AbstractDTO
         return $this;
     }
 
-    // 新增的增强字段方法
+    // 新增的增强fieldmethod
     /**
-     * 获取数据库接入点ID.
+     * getdatabase接入点ID.
      */
     public function getEndpointId(): ?string
     {
@@ -207,7 +207,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * 设置数据库接入点ID.
+     * setdatabase接入点ID.
      */
     public function setEndpointId(null|int|string $endpointId): static
     {
@@ -219,7 +219,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * 获取业务ID.
+     * get业务ID.
      */
     public function getBusinessId(): ?string
     {
@@ -227,7 +227,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * 设置业务ID.
+     * set业务ID.
      */
     public function setBusinessId(null|int|string $businessId): static
     {
@@ -239,7 +239,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * 检查是否存在于数据库中.
+     * check是否存在于database中.
      */
     public function hasEndpointId(): bool
     {
@@ -247,7 +247,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * 获取负载均衡权重.
+     * get负载均衡权重.
      */
     public function getLoadBalancingWeight(): ?int
     {
@@ -255,7 +255,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * 设置负载均衡权重.
+     * set负载均衡权重.
      */
     public function setLoadBalancingWeight(?int $loadBalancingWeight): static
     {

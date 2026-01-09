@@ -14,12 +14,12 @@ class ModeGroupAggregateDTO extends AbstractDTO
     protected ModeGroupDTO $group;
 
     /**
-     * @var ModeGroupModelDTO[] 该分组对应的模型详细信息数组
+     * @var ModeGroupModelDTO[] 该分组对应的model详细infoarray
      */
     protected array $models = [];
 
     /**
-     * @var ModeGroupModelDTO[] 该分组对应的图像模型详细信息数组（VLM）
+     * @var ModeGroupModelDTO[] 该分组对应的图像model详细infoarray（VLM）
      */
     protected array $imageModels = [];
 
@@ -57,7 +57,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 添加模型.
+     * 添加model.
      */
     public function addModel(ModeGroupModelDTO $model): void
     {
@@ -67,7 +67,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 添加模型ID（向后兼容，但不推荐使用）.
+     * 添加modelID（向后兼容，但不推荐使用）.
      */
     public function addModelId(string $modelId): void
     {
@@ -79,7 +79,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 移除模型.
+     * 移除model.
      */
     public function removeModelId(string $modelId): void
     {
@@ -93,7 +93,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 检查是否包含指定模型ID.
+     * check是否包含指定modelID.
      */
     public function hasModelId(string $modelId): bool
     {
@@ -106,7 +106,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 获取模型数量.
+     * getmodel数量.
      */
     public function getModelCount(): int
     {
@@ -114,7 +114,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 获取模型ID数组（向后兼容）.
+     * getmodelIDarray（向后兼容）.
      * @return string[]
      */
     public function getModelIds(): array
@@ -123,13 +123,13 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 设置模型ID数组（向后兼容，但不推荐使用）.
+     * setmodelIDarray（向后兼容，但不推荐使用）.
      * @param string[] $modelIds
      */
     public function setModelIds(array $modelIds): void
     {
-        // 这个方法保留用于向后兼容，但实际上需要完整的模型信息
-        // 建议使用 setModels() 方法
+        // 这个method保留用于向后兼容，但实际上需要完整的modelinfo
+        // 建议使用 setModels() method
         $this->models = [];
         foreach ($modelIds as $modelId) {
             $model = new ModeGroupModelDTO();

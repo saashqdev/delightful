@@ -23,24 +23,24 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Qbhy\HyperfAuth\Authenticatable;
 
 /**
- * 如果改了这个类的名称/属性/命名空间，请修改 WebUserGuard.php 的 cacheKey ，避免缓存无法还原
+ * 如果改了这个类的name/property/命名空间，请修改 WebUserGuard.php 的 cacheKey ，避免cache无法还原
  */
 class DelightfulUserAuthorization extends AbstractAuthorization
 {
     /**
-     * 账号在某个组织下的id,即user_id.
+     * 账号在某个organization下的id,即user_id.
      */
     protected string $id = '';
 
     /**
-     * 用户注册后生成的delightful_id,全局唯一
+     * user注册后生成的delightful_id,全局唯一
      */
     protected string $delightfulId = '';
 
     protected UserType $userType;
 
     /**
-     * 用户在该组织下的状态:0:冻结,1:已激活,2:已离职,3:已退出.
+     * user在该organization下的status:0:冻结,1:已激活,2:已离职,3:已退出.
      */
     protected string $status;
 
@@ -51,7 +51,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected string $avatar = '';
 
     /**
-     * 用户当前选择的组织.
+     * user当前选择的organization.
      */
     protected string $organizationCode = '';
 
@@ -69,16 +69,16 @@ class DelightfulUserAuthorization extends AbstractAuthorization
 
     protected array $permissions = [];
 
-    // 当前用户所处的环境id
+    // 当前user所处的环境id
     protected int $delightfulEnvId = 0;
 
-    // 第三方平台的原始组织编码
+    // 第三方平台的原始organization编码
     protected string $thirdPlatformOrganizationCode = '';
 
-    // 第三方平台的原始用户 ID
+    // 第三方平台的原始user ID
     protected ?string $thirdPlatformUserId = '';
 
-    // 第三方平台类型
+    // 第三方平台type
     protected ?PlatformType $thirdPlatformType = null;
 
     public function __construct()
@@ -99,7 +99,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
 
         $beDelightfulAgentUserId = $key['beDelightfulAgentUserId'] ?? '';
         if ($beDelightfulAgentUserId) {
-            // 处理超级麦吉的 agent 用户
+            // 处理超级麦吉的 agent user
             $sandboxToken = config('be-delightful.sandbox.token', '');
             if (empty($sandboxToken) || $sandboxToken !== $authorization) {
                 ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND, 'token error');
@@ -111,12 +111,12 @@ class DelightfulUserAuthorization extends AbstractAuthorization
             goto create_user;
         }
 
-        // 多环境下 $authorization 可能重复，会有问题（概率趋近无穷小）
+        // 多环境下 $authorization 可能重复，会有issue（概率趋近无穷小）
         $delightfulEnvEntity = $delightfulEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
         if ($delightfulEnvEntity === null) {
             $delightfulEnvEntity = $delightfulEnvDomainService->getCurrentDefaultDelightfulEnv();
             if ($delightfulEnvEntity === null) {
-                // token没有绑定环境，且没有默认环境配置
+                // token没有绑定环境，且没有默认环境configuration
                 ExceptionBuilder::throw(ChatErrorCode::Delightful_ENVIRONMENT_NOT_FOUND);
             }
         }

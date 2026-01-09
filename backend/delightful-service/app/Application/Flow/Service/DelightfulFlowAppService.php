@@ -58,7 +58,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * 获取节点配置模板.
+     * get节点configuration模板.
      */
     public function getNodeTemplate(Authenticatable $authorization, Node $node): Node
     {
@@ -66,7 +66,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * 单节点调试.
+     * 单节点debug.
      */
     public function singleDebugNode(Authenticatable $authorization, Node $node, array $nodeContexts = [], array $triggerConfig = []): ?NodeDebugResult
     {
@@ -124,7 +124,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * 保存基本信息.
+     * 保存基本info.
      */
     #[Transactional]
     public function save(Authenticatable $authorization, DelightfulFlowEntity $delightfulFlowEntity): DelightfulFlowEntity
@@ -153,7 +153,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * 查询流程.
+     * query流程.
      * @return array{total: int, list: array<DelightfulFlowEntity>, users: array<string, DelightfulUserEntity>, icons: array<string, FileLink>}
      */
     public function queries(Authenticatable $authorization, DelightfulFLowQuery $query, Page $page): array
@@ -162,11 +162,11 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
         switch (Type::tryFrom($query->getType())) {
             case Type::Main:
-                // 不支持主流程的查询
+                // 不支持主流程的query
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_support', ['label' => 'type']);
                 // no break
             case Type::Sub:
-                // 仅获取具有权限的子流程
+                // 仅get具有permission的子流程
                 $subResources = $this->operationPermissionAppService->getResourceOperationByUserIds(
                     $permissionDataIsolation,
                     ResourceType::SubFlowCode,
@@ -178,7 +178,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
                 $query->setSelect(['id', 'code', 'name', 'description', 'icon', 'type', 'tool_set_id', 'enabled', 'version_code', 'organization_code', 'created_uid', 'created_at', 'updated_uid', 'updated_at', 'deleted_at']);
                 break;
             case Type::Tools:
-                // 需要具有该工具集的读权限
+                // 需要具有该工具集的读permission
                 if (empty($query->getToolSetId())) {
                     break;
                     //                    ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'tool_set_id']);
@@ -234,7 +234,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * 查询工具.
+     * query工具.
      * @return array{total: int, list: array<DelightfulFlowEntity>}
      */
     public function queryTools(Authenticatable $authorization, DelightfulFLowQuery $query): array
@@ -243,7 +243,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
         $query->setType(Type::Tools->value);
-        // 一定是指定查询的工具 codes
+        // 一定是指定query的工具 codes
         if (empty($query->getCodes())) {
             return ['total' => 0, 'list' => []];
         }
@@ -255,7 +255,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         )[$authorization->getId()] ?? [];
         $toolSetIds = array_keys($toolSetResources);
 
-        // 再过滤一下启用的工具集
+        // 再filter一下启用的工具集
         $toolSetQuery = new DelightfulFlowToolSetQuery();
         $toolSetQuery->setCodes($toolSetIds);
         $toolSetQuery->setEnabled(true);
@@ -314,7 +314,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
                 $toolSetData['list'][] = $builtInToolSet->generateToolSet();
                 foreach ($builtInToolSet->getTools() as $builtInTool) {
-                    // 私有工具，需要有高级图像转换URI权限才能显示
+                    // 私有工具，需要有高级图像转换URIpermission才能显示
                     if ($builtInTool->getCode() === 'ai_image_image_convert_high'
                         && ! PermissionChecker::mobileHasPermission($authorization->getMobile(), SuperPermissionEnum::FLOW_ADMIN)
                     ) {
@@ -365,7 +365,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             $toolSetData['list'][$index]->addTool($toolInfo);
         }
 
-        // 过滤掉没有任何工具的工具集
+        // filter掉没有任何工具的工具集
         $toolSetData['list'] = array_filter($toolSetData['list'], fn (DelightfulFlowToolSetEntity $toolSet) => ! empty($toolSet->getTools()));
         $toolSetData['total'] = count($toolSetData['list']);
 
@@ -396,7 +396,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
 
         $query = new KnowledgeBaseQuery();
         $query->setCodes(array_keys($resources));
-        // 目前仅获取自建文本的知识库
+        // 目前仅get自建文本的知识库
         $query->setTypes([KnowledgeType::UserKnowledgeBase->value]);
         $query->setEnabled(true);
         $knowledgeData = $this->delightfulFlowKnowledgeDomainService->queries($this->createKnowledgeBaseDataIsolation($dataIsolation), $query, $page);
@@ -425,7 +425,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * 获取流程.
+     * get流程.
      */
     public function getByCode(Authenticatable $authorization, string $flowId): DelightfulFlowEntity
     {
@@ -440,7 +440,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * 修改启用状态.
+     * 修改启用status.
      */
     #[Transactional]
     public function changeEnable(Authenticatable $authorization, string $flowId, ?bool $enable = null): void
@@ -457,7 +457,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * 删除流程.
+     * delete流程.
      */
     public function remove(Authenticatable $authorization, string $flowId): void
     {

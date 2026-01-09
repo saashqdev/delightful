@@ -27,7 +27,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 获取第三方平台部门ID的映射关系.
+     * get第三方平台departmentID的映射关系.
      *
      * @param string[] $thirdDepartmentIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -41,8 +41,8 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $relationEnvIds = $this->getEnvRelationIds($delightfulEnvironmentEntity);
         $data = $this->delightfulContactIdMappingModel::query();
 
-        // 保持原有的查询字段顺序
-        // 根据环境ID数量选择合适的查询方式
+        // 保持原有的queryfield顺序
+        // 根据环境ID数量选择合适的query方式
         if (count($relationEnvIds) === 1) {
             $data->where('delightful_environment_id', reset($relationEnvIds));
         } else {
@@ -66,7 +66,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 获取Delightful部门ID的映射关系.
+     * getDelightfuldepartmentID的映射关系.
      *
      * @param string[] $delightfulDepartmentIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -90,7 +90,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 获取第三方平台用户ID的映射关系.
+     * get第三方平台userID的映射关系.
      *
      * @param string[] $thirdUserIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -104,8 +104,8 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $relationEnvIds = $this->getEnvRelationIds($delightfulEnvironmentEntity);
         $query = $this->delightfulContactIdMappingModel::query();
 
-        // 保持原有的查询字段顺序
-        // 根据环境ID数量选择合适的查询方式
+        // 保持原有的queryfield顺序
+        // 根据环境ID数量选择合适的query方式
         if (count($relationEnvIds) === 1) {
             $query->where('delightful_environment_id', reset($relationEnvIds));
         } else {
@@ -115,7 +115,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query->whereIn('origin_id', $thirdUserIds)
             ->where('mapping_type', ThirdPlatformIdMappingType::User->value);
 
-        // 有些平台多组织用户 id 一致（比如天书），因此查询时不带组织编码
+        // 有些平台多organizationuser id 一致（比如天书），因此query时不带organization编码
         $delightfulOrganizationCode && $query->where('delightful_organization_code', $delightfulOrganizationCode);
         $thirdPlatformIdMappingEntities = [];
         $data = $query->where('third_platform_type', $thirdPlatformType->value);
@@ -127,7 +127,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 获取麦吉平台用户ID的映射关系.
+     * get麦吉平台userID的映射关系.
      *
      * @param string[] $delightfulIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -140,7 +140,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query = $this->delightfulContactIdMappingModel::query()
             ->whereIn('new_id', $delightfulIds)
             ->where('mapping_type', ThirdPlatformIdMappingType::User->value);
-        // 有些平台多组织用户 id 一致（比如天书），因此查询时不带组织编码
+        // 有些平台多organizationuser id 一致（比如天书），因此query时不带organization编码
         if ($thirdPlatformType !== PlatformType::Teamshare) {
             $delightfulOrganizationCode && $query->where('delightful_organization_code', $delightfulOrganizationCode);
         }
@@ -180,7 +180,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
             $delightfulThirdPlatformIdMappingEntity->setCreatedAt($time);
             $delightfulThirdPlatformIdMappingEntity->setUpdatedAt($time);
             $thirdPlatformIdMappings[] = [
-                'id' => $id, // 暂时把主键 id设置为与new_id相同的值，以后有需要可以拆分
+                'id' => $id, // 暂时把primary key idset为与new_id相同的value，以后有需要可以拆分
                 'delightful_organization_code' => $delightfulThirdPlatformIdMappingEntity->getDelightfulOrganizationCode(),
                 'mapping_type' => $delightfulThirdPlatformIdMappingEntity->getMappingType(),
                 'third_platform_type' => $delightfulThirdPlatformIdMappingEntity->getThirdPlatformType(),
@@ -261,7 +261,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 将数组数据转换为实体对象
+     * 将array数据转换为实体object
      * @return DelightfulThirdPlatformIdMappingEntity[]
      */
     private function convertToEntities(array $dataArrays): array

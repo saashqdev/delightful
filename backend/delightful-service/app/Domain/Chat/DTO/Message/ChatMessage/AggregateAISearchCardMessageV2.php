@@ -19,7 +19,7 @@ use App\Domain\Chat\Entity\ValueObject\AggregateSearch\SearchDeepLevel;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * 聚合AI搜索的响应卡片消息.
+ * 聚合AIsearch的响应卡片message.
  */
 class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implements TextContentInterface, StreamMessageInterface
 {
@@ -28,29 +28,29 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     public const string NULL_PARENT_ID = '0';
 
     /**
-     * associate_questions的 key的前缀，避免自动将字符串 0 转 int 0.
+     * associate_questions的 key的前缀，避免自动将string 0 转 int 0.
      */
     public const string QUESTION_DELIMITER = 'question_';
 
-    # 搜索级别：简单/搜索
+    # search级别：简单/search
     protected SearchDeepLevel $searchDeepLevel;
 
     /**
-     * 子问题的关联问题。支持关联问题再产生子问题，但是会被拍平成二维数组。
+     * 子issue的关联issue。支持关联issue再产生子issue，但是会被拍平成二维array。
      * @var array<string,QuestionItem[]>
-     * @example 根据用户输入的问题，生成关联问题。
+     * @example 根据user输入的issue，生成关联issue。
      */
     protected ?array $associateQuestions;
 
     /**
-     * （所有子问题的）搜索网页列表.
+     * （所有子issue的）search网页list.
      *
      * @var QuestionSearchResult[]
      */
     protected array $searchWebPages;
 
     /**
-     * 由于多次子问题搜索时，会出现多个重复的搜索结果，所以需要 ai 去重后，再丢给大模型总结。
+     * 由于多次子issuesearch时，会出现多个重复的searchresult，所以需要 ai 去重后，再丢给大model总结。
      *
      * @var SearchDetailItem[]
      */
@@ -67,19 +67,19 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected array $events;
 
     /**
-     * @var string 思维导图。markdown 格式的字符串
+     * @var string 思维导图。markdown 格式的string
      */
     protected string $mindMap;
 
     /**
-     * @var string ppt。markdown 格式的字符串
+     * @var string ppt。markdown 格式的string
      */
     protected string $ppt;
 
     /**
-     * 获取本次需要流式推送的字段。
-     * 支持一次推送多个字段的流式消息，如果 json 层级较深，使用 field_1.*.field_2 作为 key。 其中 * 是指数组的下标。
-     * 服务端会缓存所有流式的数据，并在流式结束时一次性推送，以减少丢包的概率，提升消息完整性。
+     * get本次需要流式推送的field。
+     * 支持一次推送多个field的流式message，如果 json 层级较深，使用 field_1.*.field_2 作为 key。 其中 * 是指array的下标。
+     * service端会cache所有流式的数据，并在流式结束时一次性推送，以减少丢包的概率，提升message完整性。
      * 例如：
      * [
      *     'users.0.name' => 'delightful',
@@ -128,7 +128,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
 
         foreach ($associateQuestions as $key => $data) {
             if (str_contains((string) $key, self::QUESTION_DELIMITER) && is_array($data)) {
-                // $data是 questionItem 的数组
+                // $data是 questionItem 的array
                 foreach ($data as $item) {
                     $questionItem = $item instanceof QuestionItem ? $item : new QuestionItem($item);
                     $itemKey = self::QUESTION_DELIMITER . $questionItem->getParentQuestionId();

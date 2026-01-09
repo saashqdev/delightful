@@ -72,7 +72,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
         $referText = $this->getReferTextByContentForAIImage($referContent);
         // 如果是图生图，则尺寸保持和原始图片尺寸一致
         if ($referContent instanceof AIImageCardMessage || $referContent instanceof ImageConvertHighCardMessage) {
-            // 设置实际请求的尺寸和比例
+            // set实际请求的尺寸和比例
             $radio = $referContent->getRadio() ?? Radio::OneToOne->value;
             $enumModel = ImageGenerateModelType::fromModel($reqDTO->getParams()->getModel(), false);
             $reqDTO->getParams()->setRatioForModel($radio, $enumModel);
@@ -99,25 +99,25 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                 $reqDTO->getReferMessageId(),
             );
             if (! empty($reqDTO->getAttachments())) {
-                // 对引用内容重新文生图
+                // 对引用content重新文生图
                 $this->handleGenerateImageByReference($requestContext, $reqDTO);
             } else {
                 // 文生图
                 $this->handleGenerateImage($requestContext, $reqDTO);
             }
         } catch (Throwable $e) {
-            // 发生异常时，发送终止消息，并抛出异常
+            // 发生exception时，发送终止message，并抛出exception
             $this->handleGlobalThrowable($reqDTO, $e);
         }
     }
 
     /**
-     * 对引用内容重新文生图.
+     * 对引用content重新文生图.
      */
     private function handleGenerateImageByReference(RequestContext $requestContext, DelightfulChatAIImageReqDTO $reqDTO): void
     {
         $reqDTO->getParams()->setGenerateNum(1);
-        // 清空空值
+        // 清空空value
         $urls = array_filter(array_map(fn ($attachment) => $attachment->getUrl(), $reqDTO->getAttachments()));
         $reqDTO->getParams()->setReferenceImages($urls);
         $this->handleGenerateImage($requestContext, $reqDTO);
@@ -157,7 +157,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     private function generateImage(RequestContext $requestContext, AIImageGenerateParamsVO $generateParamsVO): array
     {
         $model = $generateParamsVO->getModel();
-        // 根据模型类型创建对应的服务
+        // 根据modeltypecreate对应的service
         $data = $generateParamsVO->toArray();
         $delightfulUserAuthorization = $requestContext->getUserAuthorization();
         $images = $this->llmAppService->imageGenerate($delightfulUserAuthorization, $model, '', $data);
@@ -183,7 +183,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                 // 上传OSS
                 $uploadFile = new UploadFile($attachment);
                 $this->fileDomainService->uploadByCredential($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile);
-                // 获取url
+                // geturl
                 $url = $this->fileDomainService->getLink($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile->getKey())->getUrl();
                 // 同步文件至delightful
                 $fileUploadDTOs = [];
@@ -201,7 +201,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                     'url' => $url,
                 ];
             } catch (Throwable $throwable) {
-                // 提交图片失败
+                // 提交图片fail
                 $this->logger->error('upload_attachment_error', [
                     'error' => $throwable->getMessage(),
                     'file' => $attachment,
@@ -277,7 +277,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
             ->setAppMessageId($appMessageId)
             ->setExtra($extra)
             ->setReferMessageId($referMessageId);
-        // 设置话题 id
+        // set话题 id
         return $this->getDelightfulChatMessageAppService()->aiSendMessage($seqDTO, $appMessageId, doNotParseReferMessageId: true);
     }
 

@@ -96,7 +96,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             return;
                         }
 
-                        // 这里是各个平台的用户 id，不是 delightful 的 user_id
+                        // 这里是各个平台的user id，不是 delightful 的 user_id
                         $userId = $thirdPlatformChatMessage->getUserId();
                         $dataIsolation->setCurrentUserId($userId);
                         EnvManager::initDataIsolationEnv($dataIsolation);
@@ -141,7 +141,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             'code' => $exception->getCode(),
                             'trace' => $exception->getTraceAsString(),
                         ]);
-                        $message = new TextMessage(['content' => '不好意思，同时问我问题的人太多啦，有点忙不过来，你可以一会儿再来问我吗？感谢谅解！']);
+                        $message = new TextMessage(['content' => '不好意思，同时问我issue的人太多啦，有点忙不过来，你可以一会儿再来问我吗？感谢谅解！']);
                         $thirdPlatformChat->sendMessage($thirdPlatformChatMessage, $message);
                     }
                 });
@@ -195,7 +195,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
 
     public function createChatGroup(string $key, array $groupMemberIds, DelightfulUserAuthorization $userAuthorization, DelightfulGroupEntity $delightfulGroupDTO): string
     {
-        // 获取助理配置
+        // get助理configuration
         if (empty($key)) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.empty', ['label' => 'key']);
         }
@@ -203,7 +203,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         if (! $chatEntity || ! $chatEntity->isEnabled()) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.invalid', ['label' => $key]);
         }
-        // 通过 $groupMemberIds 获取用户信息，可以用户列表
+        // 通过 $groupMemberIds getuserinfo，可以userlist
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $users = $this->delightfulUserDomainService->getUserByIds($groupMemberIds, $dataIsolation, ['delightful_id', 'nickname']);
         if (count($users) === 0) {
@@ -215,7 +215,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         if (count($accounts) === 0) {
             ExceptionBuilder::throw(AgentErrorCode::CREATE_GROUP_USER_ACCOUNT_NOT_EXIST, 'user.not_exist', ['delightful_ids' => $delightfulIds]);
         }
-        // 调用接口，换取第三方的用户 id
+        // call接口，换取第三方的user id
         $parallel = new Parallel(2);
         $thirdPlatformChat = ThirdPlatformChatFactory::make($chatEntity);
         $requestId = CoContext::getRequestId();
@@ -228,7 +228,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         $thirdPlatformUserIds = [];
         $ownerThirdPlatformUserId = '';
         $result = $parallel->wait();
-        // 二位数组转成一维
+        // 二位array转成一维
         foreach ($result as $item) {
             if ($item['delightful_id'] == $userAuthorization->getDelightfulId()) {
                 $ownerThirdPlatformUserId = $item['third_user_id'];
@@ -239,7 +239,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
             ExceptionBuilder::throw(AgentErrorCode::GET_THIRD_PLATFORM_USER_ID_FAILED, 'user.not_exist', ['delightful_ids' => $delightfulIds]);
         }
 
-        // 创建群聊
+        // create群聊
         $createGroupParams = new ThirdPlatformCreateGroup();
         $createGroupParams->setName($delightfulGroupDTO->getGroupName());
         $createGroupParams->setOwner($ownerThirdPlatformUserId);
@@ -256,7 +256,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
 
     private function clearMemory(string $conversationId): void
     {
-        // 清理 flow 的自身记忆，仅更改原会话为备份会话
+        // 清理 flow 的自身记忆，仅更改原session为备份session
         di(DelightfulFlowMemoryHistoryDomainService::class)->removeByConversationId(
             FlowDataIsolation::create('', ''),
             $conversationId
@@ -279,7 +279,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         }
         $delightfulFlow->setAgentId((string) $bot->getId());
 
-        // 使用当前流程的组织编码
+        // 使用当前流程的organization编码
         $dataIsolation->setCurrentOrganizationCode($delightfulFlow->getOrganizationCode());
         return $delightfulFlow;
     }

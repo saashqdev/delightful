@@ -28,7 +28,7 @@ use Hyperf\Contract\TranslatorInterface;
 class AdminModeAssembler
 {
     /**
-     * 实体转换为管理后台DTO (包含完整的i18n字段).
+     * 实体转换为管理后台DTO (包含完整的i18nfield).
      */
     public static function modeToAdminDTO(ModeEntity $entity): AdminModeDTO
     {
@@ -53,7 +53,7 @@ class AdminModeAssembler
      * 聚合根转换为DTO.
      *
      * @param ModeAggregate $aggregate 模式聚合根
-     * @param array $providerModels 可选的模型信息映射 [modelId => ProviderModelEntity]
+     * @param array $providerModels 可选的modelinfo映射 [modelId => ProviderModelEntity]
      */
     public static function aggregateToAdminDTO(ModeAggregate $aggregate, array $providerModels = []): AdminModeAggregateDTO
     {
@@ -74,7 +74,7 @@ class AdminModeAssembler
      * 分组聚合根转换为DTO.
      *
      * @param ModeGroupAggregate $groupAggregate 分组聚合根
-     * @param array $providerModels 可选的模型信息映射 [model_id => ['best' => ProviderModelEntity|null, 'all' => ProviderModelEntity[], 'status' => string]]
+     * @param array $providerModels 可选的modelinfo映射 [model_id => ['best' => ProviderModelEntity|null, 'all' => ProviderModelEntity[], 'status' => string]]
      */
     public static function groupAggregateToAdminDTO(ModeGroupAggregate $groupAggregate, array $providerModels = []): AdminModeGroupAggregateDTO
     {
@@ -86,16 +86,16 @@ class AdminModeAssembler
         foreach ($groupAggregate->getRelations() as $relation) {
             $modelDTO = new ModeGroupModelDTO($relation->toArray());
 
-            // 使用 model_id 查找模型
+            // 使用 model_id 查找model
             $modelId = $relation->getModelId();
             $modelInfo = $providerModels[$modelId] ?? null;
 
             if ($modelInfo && $modelInfo['best']) {
-                // 找到可用模型，使用最佳模型的信息
+                // 找到可用model，使用最佳model的info
                 $providerModel = $modelInfo['best'];
                 $modelDTO->setModelName($providerModel->getName());
                 $modelDTO->setModelIcon($providerModel->getIcon());
-                $modelDTO->setModelStatus($modelInfo['status']); // 使用计算出的状态
+                $modelDTO->setModelStatus($modelInfo['status']); // 使用计算出的status
                 $description = '';
                 $translate = $providerModel->getTranslate();
                 if (is_array($translate) && isset($translate['description'][$locale])) {
@@ -105,10 +105,10 @@ class AdminModeAssembler
                 }
                 $modelDTO->setModelDescription($description);
 
-                // 保持向后兼容，设置 providerModelId 为查找到的模型的ID
+                // 保持向后兼容，set providerModelId 为查找到的model的ID
                 $modelDTO->setProviderModelId((string) $providerModel->getId());
             } else {
-                // 后台管理需要显示所有状态，包括无可用模型的情况
+                // 后台管理需要显示所有status，包括无可用model的情况
                 $status = $modelInfo['status'] ?? ModelStatus::Deleted;
                 $modelDTO->setModelStatus($status);
                 $modelDTO->setModelStatus($status);
@@ -123,7 +123,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 实体数组转换为管理后台DTO数组.
+     * 实体array转换为管理后台DTOarray.
      */
     public static function entitiesToAdminDTOs(array $entities): array
     {
@@ -131,7 +131,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 分组实体数组转换为管理后台DTO数组.
+     * 分组实体array转换为管理后台DTOarray.
      */
     public static function groupEntitiesToAdminDTOs(array $entities): array
     {
@@ -139,7 +139,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 关联实体数组转换为DTO数组.
+     * 关联实体array转换为DTOarray.
      */
     public static function relationEntitiesToDTOs(array $entities): array
     {
@@ -200,11 +200,11 @@ class AdminModeAssembler
     }
 
     /**
-     * 将UpdateModeRequest的数据应用到现有ModeEntity（部分更新）.
+     * 将UpdateModeRequest的数据应用到现有ModeEntity（部分update）.
      */
     public static function applyUpdateRequestToEntity(UpdateModeRequest $request, ModeEntity $existingEntity): void
     {
-        // 只更新请求中包含的允许修改的字段
+        // 只update请求中包含的允许修改的field
         $existingEntity->setNameI18n($request->getNameI18n());
         $existingEntity->setPlaceholderI18n($request->getPlaceholderI18n());
         $existingEntity->setIdentifier($request->getIdentifier());

@@ -48,12 +48,12 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * 通过ID或ModelID查询模型
-     * 基于可用模型列表进行匹配，同时匹配id和model_id字段.
+     * 通过ID或ModelIDquerymodel
+     * 基于可用modellist进行匹配，同时匹配id和model_idfield.
      */
     public function getByIdOrModelId(ProviderDataIsolation $dataIsolation, string $id): ?ProviderModelEntity
     {
-        // 获取所有分类的可用模型
+        // get所有分类的可用model
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
         // 循环判断 id 等于 $id 或者 model_id 等于 $id
@@ -93,10 +93,10 @@ readonly class ProviderModelDomainService
         }
 
         if ($providerModelDTO->getId()) {
-            // 更新模型：验证模型是否存在（getById会在不存在时抛出异常）
+            // updatemodel：验证model是否存在（getById会在不存在时抛出exception）
             $this->providerModelRepository->getById($dataIsolation, $providerModelDTO->getId());
         } else {
-            // 创建模型时默认启用
+            // createmodel时默认启用
             $providerModelDTO->setStatus(Status::Enabled);
         }
         // 验证 service_provider_config_id 是否存在
@@ -107,11 +107,11 @@ readonly class ProviderModelDomainService
             }
         }
 
-        // 目前保存模型的接口只有大模型使用，因此强制类型是 llm
+        // 目前保存model的接口只有大model使用，因此强制type是 llm
         $providerModelDTO->setCategory(Category::LLM);
         $modelEntity = $this->providerModelRepository->saveModel($dataIsolation, $providerModelDTO);
 
-        // 创建配置版本记录
+        // createconfiguration版本record
         $this->saveConfigVersion($dataIsolation, $modelEntity);
 
         return new SaveProviderModelDTO($modelEntity->toArray());
@@ -133,11 +133,11 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * 批量根据ID获取模型.
+     * 批量根据IDgetmodel.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离对象
-     * @param string[] $ids 模型ID数组
-     * @return ProviderModelEntity[] 模型实体数组，以ID为键
+     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param string[] $ids modelIDarray
+     * @return ProviderModelEntity[] model实体array，以ID为键
      */
     public function getModelsByIds(ProviderDataIsolation $dataIsolation, array $ids): array
     {
@@ -150,11 +150,11 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * 批量根据ModelID获取模型.
+     * 批量根据ModelIDgetmodel.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离对象
-     * @param string[] $modelIds 模型标识数组
-     * @return array<string, ProviderModelEntity[]> 模型实体数组，以model_id为键，值为对应的模型列表
+     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param string[] $modelIds model标识array
+     * @return array<string, ProviderModelEntity[]> model实体array，以model_id为键，value为对应的modellist
      */
     public function getModelsByModelIds(ProviderDataIsolation $dataIsolation, array $modelIds): array
     {
@@ -170,11 +170,11 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * 根据查询条件获取按模型类型分组的模型ID列表.
+     * 根据query条件get按modeltype分组的modelIDlist.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离对象
-     * @param ProviderModelQuery $query 查询条件
-     * @return array<string, array<string>> 按模型类型分组的模型ID数组，格式: [modelType => [model_id, model_id]]
+     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param ProviderModelQuery $query query条件
+     * @return array<string, array<string>> 按modeltype分组的modelIDarray，格式: [modelType => [model_id, model_id]]
      */
     public function getModelIdsGroupByType(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query): array
     {
@@ -182,11 +182,11 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * 获取指定模型的最新配置版本ID.
+     * get指定model的最新configuration版本ID.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离对象
-     * @param int $serviceProviderModelId 模型ID
-     * @return null|int 最新版本的ID，如果不存在则返回null
+     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param int $serviceProviderModelId modelID
+     * @return null|int 最新版本的ID，如果不存在则returnnull
      */
     public function getLatestConfigVersionId(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?int
     {
@@ -194,11 +194,11 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * 获取指定模型的最新配置版本实体.
+     * get指定model的最新configuration版本实体.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离对象
-     * @param int $serviceProviderModelId 模型ID
-     * @return null|ProviderModelConfigVersionEntity 最新版本的实体，如果不存在则返回null
+     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param int $serviceProviderModelId modelID
+     * @return null|ProviderModelConfigVersionEntity 最新版本的实体，如果不存在则returnnull
      */
     public function getLatestConfigVersionEntity(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?ProviderModelConfigVersionEntity
     {
@@ -206,16 +206,16 @@ readonly class ProviderModelDomainService
     }
 
     /**
-     * 保存模型配置版本.
+     * 保存modelconfiguration版本.
      */
     private function saveConfigVersion(ProviderDataIsolation $dataIsolation, ProviderModelEntity $modelEntity): void
     {
-        // 如果配置为空，不创建版本记录
+        // 如果configuration为空，不create版本record
         if ($modelEntity->getConfig() === null) {
             return;
         }
 
-        // 转换为配置版本实体并保存（事务、版本号递增、标记当前版本都在 Repository 内完成）
+        // 转换为configuration版本实体并保存（事务、版本号递增、标记当前版本都在 Repository 内完成）
         $versionEntity = ProviderModelAssembler::toConfigVersionEntity($modelEntity);
         $this->providerModelConfigVersionRepository->saveVersionWithTransaction($dataIsolation, $versionEntity);
     }

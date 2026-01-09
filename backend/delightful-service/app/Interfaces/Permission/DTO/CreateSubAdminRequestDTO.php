@@ -10,27 +10,27 @@ namespace App\Interfaces\Permission\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 创建子管理员角色请求DTO.
+ * create子管理员角色请求DTO.
  */
 class CreateSubAdminRequestDTO extends AbstractDTO
 {
     /**
-     * 角色名称（必填）.
+     * 角色name（必填）.
      */
     public string $name = '';
 
     /**
-     * 角色状态：0=禁用, 1=启用（默认启用）.
+     * 角色status：0=禁用, 1=启用（默认启用）.
      */
     public int $status = 1;
 
     /**
-     * 权限键列表（可选）.
+     * permission键list（可选）.
      */
     public array $permissions = [];
 
     /**
-     * 用户ID列表（可选）.
+     * userIDlist（可选）.
      */
     public array $userIds = [];
 
@@ -79,22 +79,22 @@ class CreateSubAdminRequestDTO extends AbstractDTO
      */
     public function validate(): bool
     {
-        // 验证角色名称不能为空
+        // 验证角色name不能为空
         if (empty(trim($this->name))) {
             return false;
         }
 
-        // 验证角色名称长度不超过255字符
+        // 验证角色name长度不超过255字符
         if (strlen($this->name) > 255) {
             return false;
         }
 
-        // 验证状态值有效性
+        // 验证statusvalue有效性
         if (! in_array($this->status, [0, 1])) {
             return false;
         }
 
-        // 验证权限列表是否为字符串数组
+        // 验证permissionlist是否为stringarray
         if (! empty($this->permissions)) {
             foreach ($this->permissions as $permission) {
                 if (! is_string($permission)) {
@@ -103,7 +103,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
             }
         }
 
-        // 验证用户ID列表是否为字符串数组
+        // 验证userIDlist是否为stringarray
         if (! empty($this->userIds)) {
             foreach ($this->userIds as $userId) {
                 if (! is_string($userId)) {
@@ -116,29 +116,29 @@ class CreateSubAdminRequestDTO extends AbstractDTO
     }
 
     /**
-     * 获取验证错误信息.
-     * TODO: 需要配置多语言
+     * get验证errorinfo.
+     * TODO: 需要configuration多语言
      */
     public function getValidationErrors(): array
     {
         $errors = [];
 
         if (empty(trim($this->name))) {
-            $errors[] = '角色名称不能为空';
+            $errors[] = '角色name不能为空';
         }
 
         if (strlen($this->name) > 255) {
-            $errors[] = '角色名称长度不能超过255个字符';
+            $errors[] = '角色name长度不能超过255个字符';
         }
 
         if (! in_array($this->status, [0, 1])) {
-            $errors[] = '角色状态值无效，只能是0或1';
+            $errors[] = '角色statusvalue无效，只能是0或1';
         }
 
         if (! empty($this->permissions)) {
             foreach ($this->permissions as $index => $permission) {
                 if (! is_string($permission)) {
-                    $errors[] = "权限列表第{$index}项必须是字符串";
+                    $errors[] = "permissionlist第{$index}项必须是string";
                 }
             }
         }
@@ -146,7 +146,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
         if (! empty($this->userIds)) {
             foreach ($this->userIds as $index => $userId) {
                 if (! is_string($userId)) {
-                    $errors[] = "用户ID列表第{$index}项必须是字符串";
+                    $errors[] = "userIDlist第{$index}项必须是string";
                 }
             }
         }

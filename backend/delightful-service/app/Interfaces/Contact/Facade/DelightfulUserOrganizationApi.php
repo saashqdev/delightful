@@ -17,7 +17,7 @@ use Hyperf\Di\Annotation\Inject;
 use Hyperf\HttpServer\Contract\RequestInterface;
 
 /**
- * 用户当前组织管理API.
+ * user当前organization管理API.
  */
 #[ApiResponse('low_code')]
 class DelightfulUserOrganizationApi extends AbstractApi
@@ -29,11 +29,11 @@ class DelightfulUserOrganizationApi extends AbstractApi
     protected DelightfulUserDomainService $userDomainService;
 
     /**
-     * 获取用户当前组织代码
+     * getuser当前organization代码
      */
     public function getCurrentOrganizationCode(RequestInterface $request): array
     {
-        // 从请求头获取 authorization
+        // 从请求头get authorization
         $authorization = (string) $request->header('authorization', '');
         if ($authorization === '') {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
@@ -41,16 +41,16 @@ class DelightfulUserOrganizationApi extends AbstractApi
 
         $delightfulId = $this->getDelightfulIdByAuthorization($authorization);
 
-        // 获取当前用户的组织代码
+        // get当前user的organization代码
         return $this->userOrganizationAppService->getCurrentOrganizationCode($delightfulId);
     }
 
     /**
-     * 设置用户当前组织代码
+     * setuser当前organization代码
      */
     public function setCurrentOrganizationCode(RequestInterface $request): array
     {
-        // 从请求头获取 authorization
+        // 从请求头get authorization
         $authorization = (string) $request->header('authorization', '');
         if ($authorization === '') {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
@@ -58,18 +58,18 @@ class DelightfulUserOrganizationApi extends AbstractApi
 
         $delightfulId = $this->getDelightfulIdByAuthorization($authorization);
 
-        // 从请求体获取组织代码
+        // 从请求体getorganization代码
         $organizationCode = (string) $request->input('delightful_organization_code', '');
         if (empty($organizationCode)) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
 
-        // 设置用户当前组织代码
+        // setuser当前organization代码
         return $this->userOrganizationAppService->setCurrentOrganizationCode($delightfulId, $organizationCode);
     }
 
     /**
-     * 获取账号下所有可切换的组织列表。
+     * get账号下所有可切换的organizationlist。
      */
     public function listOrganizations(RequestInterface $request): array
     {

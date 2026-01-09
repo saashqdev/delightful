@@ -88,31 +88,31 @@ class FileTypeTest extends TestCase
     }
 
     /**
-     * 测试从HTTP头信息获取类型（需要模拟HTTP响应）.
+     * test从HTTP头infogettype（需要模拟HTTP响应）.
      *
-     * 注意：这个测试可能需要使用函数模拟，如果项目中没有配置函数模拟，
-     * 可以将此测试标记为跳过或使用真实URL进行测试
+     * 注意：这个test可能需要使用function模拟，如果项目中没有configurationfunction模拟，
+     * 可以将此test标记为跳过或使用真实URL进行test
      */
     public function testGetTypeFromHeaders()
     {
-        // 标记此测试为跳过，因为需要模拟全局函数
-        $this->markTestSkipped('需要函数模拟功能才能完整测试');
+        // 标记此test为跳过，因为需要模拟全局function
+        $this->markTestSkipped('需要function模拟功能才能完整test');
     }
 
     /**
-     * 测试无法识别文件类型时抛出异常.
-     * 同样需要函数模拟支持
+     * test无法识别文件type时抛出exception.
+     * 同样需要function模拟支持
      */
     public function testInvalidFileType()
     {
-        $this->markTestSkipped('需要函数模拟功能才能完整测试');
+        $this->markTestSkipped('需要function模拟功能才能完整test');
     }
 
     /**
-     * 测试文件太大的情况.
+     * test文件太大的情况.
      */
     public function testFileTooLarge()
     {
-        $this->markTestSkipped('需要函数模拟功能才能完整测试');
+        $this->markTestSkipped('需要function模拟功能才能完整test');
     }
 }

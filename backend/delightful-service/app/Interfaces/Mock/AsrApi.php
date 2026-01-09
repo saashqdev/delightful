@@ -19,8 +19,8 @@ use Psr\Container\NotFoundExceptionInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * ASR 任务 Mock 服务
- * 模拟沙箱中的音频合并和 ASR 任务处理.
+ * ASR task Mock service
+ * 模拟沙箱中的音频合并和 ASR task处理.
  */
 class AsrApi
 {
@@ -41,7 +41,7 @@ class AsrApi
     }
 
     /**
-     * 启动 ASR 任务
+     * 启动 ASR task
      * POST /api/v1/sandboxes/{sandboxId}/proxy/api/asr/task/start.
      */
     public function startTask(RequestInterface $request): array
@@ -53,7 +53,7 @@ class AsrApi
         $noteFileConfig = $request->input('note_file');
         $transcriptFileConfig = $request->input('transcript_file');
 
-        // 记录调用日志
+        // recordcalllog
         $this->logger->info('[Mock Sandbox ASR] Start task called', [
             'sandbox_id' => $sandboxId,
             'task_key' => $taskKey,
@@ -63,7 +63,7 @@ class AsrApi
             'transcript_file_config' => $transcriptFileConfig,
         ]);
 
-        // 初始化任务状态（重置轮询计数）
+        // 初始化taskstatus（重置轮询计数）
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $this->redis->del($countKey);
 
@@ -84,7 +84,7 @@ class AsrApi
     }
 
     /**
-     * 完成 ASR 任务（支持轮询）- V2 结构化版本
+     * 完成 ASR task（支持轮询）- V2 结构化版本
      * POST /api/v1/sandboxes/{sandboxId}/proxy/api/asr/task/finish.
      */
     public function finishTask(RequestInterface $request): array
@@ -93,7 +93,7 @@ class AsrApi
         $taskKey = $request->input('task_key', '');
         $workspaceDir = $request->input('workspace_dir', '.workspace');
 
-        // V2 结构化参数
+        // V2 结构化parameter
         $audioConfig = $request->input('audio', []);
         $noteFileConfig = $request->input('note_file');
         $transcriptFileConfig = $request->input('transcript_file');
@@ -103,7 +103,7 @@ class AsrApi
         $count = (int) $this->redis->incr($countKey);
         $this->redis->expire($countKey, AsrConfig::MOCK_POLLING_TTL); // 10分钟过期
 
-        // 记录调用日志
+        // recordcalllog
         $this->logger->info('[Mock Sandbox ASR] Finish task called (V2)', [
             'sandbox_id' => $sandboxId,
             'task_key' => $taskKey,
@@ -114,7 +114,7 @@ class AsrApi
             'call_count' => $count,
         ]);
 
-        // 前 3 次调用返回 finalizing 状态
+        // 前 3 次callreturn finalizing status
         if ($count < 4) {
             return [
                 'code' => 1000,
@@ -126,25 +126,25 @@ class AsrApi
             ];
         }
 
-        // 第 4 次调用返回 completed 状态
+        // 第 4 次callreturn completed status
         $targetDir = $audioConfig['target_dir'] ?? '';
         $outputFilename = $audioConfig['output_filename'] ?? 'audio';
 
         // 模拟真实沙箱行为：根据 output_filename 重命名目录
-        // 提取原目录中的时间戳部分（格式：_YYYYMMDD_HHMMSS）
+        // 提取原目录中的time戳部分（格式：_YYYYMMDD_HHMMSS）
         $timestamp = '';
         if (preg_match('/_(\d{8}_\d{6})$/', $targetDir, $matches)) {
             $timestamp = '_' . $matches[1];
         }
 
-        // 构建新的目录名：智能标题 + 时间戳
+        // 构建新的目录名：智能标题 + time戳
         $renamedDir = $outputFilename . $timestamp;
 
-        // 构建音频文件信息
+        // 构建音频文件info
         $audioFileName = $outputFilename . '.webm';
         $audioPath = rtrim($renamedDir, '/') . '/' . $audioFileName;
 
-        // 构建返回数据 (V2 详细版本)
+        // 构建return数据 (V2 详细版本)
         $responseData = [
             'status' => SandboxAsrStatusEnum::COMPLETED->value,
             'task_key' => $taskKey,
@@ -159,7 +159,7 @@ class AsrApi
                     'action_performed' => 'merged_and_created',
                     'source_path' => null,
                 ],
-                'note_file' => null, // 默认为 null，表示笔记文件为空或不存在
+                'note_file' => null, // 默认为 null，table示笔记文件为空或不存在
             ],
             'deleted_files' => [],
             'operations' => [
@@ -169,26 +169,26 @@ class AsrApi
             ],
         ];
 
-        // 如果有笔记文件配置且文件大小 > 0，添加到返回中（模拟真实沙箱的笔记文件内容检查）
+        // 如果有笔记文件configuration且文件大小 > 0，添加到return中（模拟真实沙箱的笔记文件contentcheck）
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
             // 使用请求中提供的 target_path，而不是硬编码文件名
             // 这样可以正确支持国际化的文件名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 
-            // 模拟真实沙箱行为：只有当笔记文件有内容时才返回详细信息
-            // 这里简化处理，默认假设有内容（真实沙箱会检查文件内容是否为空）
+            // 模拟真实沙箱行为：只有当笔记文件有content时才return详细info
+            // 这里简化处理，默认假设有content（真实沙箱会check文件content是否为空）
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
                 'path' => $noteFilePath, // 使用请求中的 target_path
-                'size' => 256, // 模拟有内容的文件大小
+                'size' => 256, // 模拟有content的文件大小
                 'duration' => null,
                 'action_performed' => 'renamed_and_moved',
                 'source_path' => $noteFileConfig['source_path'] ?? '',
             ];
         }
 
-        // 如果有流式识别文件配置，记录删除操作
+        // 如果有流式识别文件configuration，recorddelete操作
         if ($transcriptFileConfig !== null && isset($transcriptFileConfig['source_path'])) {
             $responseData['deleted_files'][] = [
                 'path' => $transcriptFileConfig['source_path'],
@@ -204,7 +204,7 @@ class AsrApi
     }
 
     /**
-     * 取消 ASR 任务
+     * 取消 ASR task
      * POST /api/v1/sandboxes/{sandboxId}/proxy/api/asr/task/cancel.
      */
     public function cancelTask(RequestInterface $request): array
@@ -213,14 +213,14 @@ class AsrApi
         $taskKey = $request->input('task_key', '');
         $workspaceDir = $request->input('workspace_dir', '.workspace');
 
-        // 记录调用日志
+        // recordcalllog
         $this->logger->info('[Mock Sandbox ASR] Cancel task called', [
             'sandbox_id' => $sandboxId,
             'task_key' => $taskKey,
             'workspace_dir' => $workspaceDir,
         ]);
 
-        // 清理任务相关的 Redis 状态
+        // 清理task相关的 Redis status
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $this->redis->del($countKey);
 

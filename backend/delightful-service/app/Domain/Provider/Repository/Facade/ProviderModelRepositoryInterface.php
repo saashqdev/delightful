@@ -44,34 +44,34 @@ interface ProviderModelRepositoryInterface
     public function create(ProviderDataIsolation $dataIsolation, ProviderModelEntity $modelEntity): ProviderModelEntity;
 
     /**
-     * 通过 service_provider_config_id 获取模型列表.
+     * 通过 service_provider_config_id getmodellist.
      * @return ProviderModelEntity[]
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId, ProviderEntity $providerEntity): array;
 
     /**
-     * 获取组织可用模型列表（包含组织自己的模型和Delightful模型）.
-     * @param ProviderDataIsolation $dataIsolation 数据隔离对象
-     * @param null|Category $category 模型分类，为空时返回所有分类模型
-     * @return ProviderModelEntity[] 按sort降序排序的模型列表，包含组织模型和Delightful模型（不去重）
+     * getorganization可用modellist（包含organization自己的model和Delightfulmodel）.
+     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param null|Category $category model分类，为空时return所有分类model
+     * @return ProviderModelEntity[] 按sort降序sort的modellist，包含organizationmodel和Delightfulmodel（不去重）
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, Status $status = Status::Enabled): array;
 
     /**
-     * 批量根据ID获取模型.
-     * @param ProviderDataIsolation $dataIsolation 数据隔离对象
-     * @param string[] $ids 模型ID数组
-     * @return ProviderModelEntity[] 模型实体数组，以ID为键
+     * 批量根据IDgetmodel.
+     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param string[] $ids modelIDarray
+     * @return ProviderModelEntity[] model实体array，以ID为键
      */
     public function getByIds(ProviderDataIsolation $dataIsolation, array $ids): array;
 
     public function getModelByIdWithoutOrgFilter(string $id): ?ProviderModelEntity;
 
     /**
-     * 批量根据ModelID获取模型.
-     * @param ProviderDataIsolation $dataIsolation 数据隔离对象
-     * @param string[] $modelIds 模型标识数组
-     * @return array<string, ProviderModelEntity[]> 模型实体数组，以model_id为键，值为对应的模型列表
+     * 批量根据ModelIDgetmodel.
+     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param string[] $modelIds model标识array
+     * @return array<string, ProviderModelEntity[]> model实体array，以model_id为键，value为对应的modellist
      */
     public function getByModelIds(ProviderDataIsolation $dataIsolation, array $modelIds): array;
 
@@ -81,11 +81,11 @@ interface ProviderModelRepositoryInterface
     public function queries(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query, Page $page): array;
 
     /**
-     * 根据查询条件获取按模型类型分组的模型ID列表.
+     * 根据query条件get按modeltype分组的modelIDlist.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离对象
-     * @param ProviderModelQuery $query 查询条件
-     * @return array<string, array<string>> 按模型类型分组的模型ID数组，格式: [modelType => [model_id, model_id]]
+     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param ProviderModelQuery $query query条件
+     * @return array<string, array<string>> 按modeltype分组的modelIDarray，格式: [modelType => [model_id, model_id]]
      */
     public function getModelIdsGroupByType(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query): array;
 }

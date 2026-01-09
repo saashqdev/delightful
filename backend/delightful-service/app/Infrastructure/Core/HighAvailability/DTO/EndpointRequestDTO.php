@@ -13,27 +13,27 @@ use App\Infrastructure\Core\HighAvailability\ValueObject\StatisticsLevel;
 
 /**
  * 接入点请求 DTO.
- * 用于封装 getAvailableEndpoint 方法的请求参数.
+ * 用于封装 getAvailableEndpoint method的请求parameter.
  */
 class EndpointRequestDTO extends AbstractDTO
 {
     /**
-     * 端点类型/模型ID.
+     * 端点type/modelID.
      */
     protected string $endpointType;
 
     /**
-     * 组织代码.
+     * organization代码.
      */
     protected string $orgCode;
 
     /**
-     * 服务提供商 (可选).
+     * service提供商 (可选).
      */
     protected ?string $provider = null;
 
     /**
-     * 端点名称 (可选).
+     * 端点name (可选).
      */
     protected ?string $endpointName = null;
 
@@ -44,7 +44,7 @@ class EndpointRequestDTO extends AbstractDTO
     protected ?string $lastSelectedEndpointId = null;
 
     /**
-     * 负载均衡类型.
+     * 负载均衡type.
      */
     protected LoadBalancingType $balancingType = LoadBalancingType::RANDOM;
 
@@ -54,7 +54,7 @@ class EndpointRequestDTO extends AbstractDTO
     protected StatisticsLevel $statisticsLevel = StatisticsLevel::LEVEL_MINUTE;
 
     /**
-     * 统计时间范围（分钟）.
+     * 统计time范围（分钟）.
      */
     protected int $timeRange = 30;
 
@@ -147,12 +147,12 @@ class EndpointRequestDTO extends AbstractDTO
 
     public function setTimeRange(int $timeRange): static
     {
-        $this->timeRange = max(1, $timeRange); // 确保时间范围至少为1分钟
+        $this->timeRange = max(1, $timeRange); // 确保time范围至少为1分钟
         return $this;
     }
 
     /**
-     * 检查是否有上次选择的接入点ID.
+     * check是否有上次选择的接入点ID.
      */
     public function hasLastSelectedEndpointId(): bool
     {
@@ -160,7 +160,7 @@ class EndpointRequestDTO extends AbstractDTO
     }
 
     /**
-     * 从数组数据创建实例的便捷方法.
+     * 从array数据create实例的便捷method.
      */
     public static function create(
         string $endpointType,

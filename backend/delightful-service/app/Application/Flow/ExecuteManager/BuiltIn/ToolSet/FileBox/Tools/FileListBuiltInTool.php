@@ -83,7 +83,7 @@ class FileListBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '列出用户当前会话产生的文件';
+        return '列出user当前session产生的文件';
     }
 
     public function getInput(): ?NodeInput
@@ -106,8 +106,8 @@ class FileListBuiltInTool extends AbstractBuiltInTool
             "type": "number",
             "key": "limit",
             "sort": 0,
-            "title": "查询数量",
-            "description": "查询数量 默认 10",
+            "title": "query数量",
+            "description": "query数量 默认 10",
             "required": null,
             "value": null,
             "encryption": false,
@@ -119,8 +119,8 @@ class FileListBuiltInTool extends AbstractBuiltInTool
             "type": "string",
             "key": "sort",
             "sort": 1,
-            "title": "排序",
-            "description": "排序规则。asc 升序;desc 降序。默认 desc",
+            "title": "sort",
+            "description": "sort规则。asc 升序;desc 降序。默认 desc",
             "required": null,
             "value": null,
             "encryption": false,
@@ -132,8 +132,8 @@ class FileListBuiltInTool extends AbstractBuiltInTool
             "type": "string",
             "key": "start_time",
             "sort": 2,
-            "title": "开始时间",
-            "description": "时间范围搜索的开始时间。格式示例：Y-m-d H:i:s",
+            "title": "开始time",
+            "description": "time范围search的开始time。格式示例：Y-m-d H:i:s",
             "required": null,
             "value": null,
             "encryption": false,
@@ -145,8 +145,8 @@ class FileListBuiltInTool extends AbstractBuiltInTool
             "type": "string",
             "key": "end_time",
             "sort": 3,
-            "title": "结束时间",
-            "description": "时间范围搜索的结束时间。格式示例：Y-m-d H:i:s",
+            "title": "结束time",
+            "description": "time范围search的结束time。格式示例：Y-m-d H:i:s",
             "required": null,
             "value": null,
             "encryption": false,
@@ -182,7 +182,7 @@ JSON,
             "type": "array",
             "key": "root",
             "sort": 5,
-            "title": "文件列表",
+            "title": "文件list",
             "description": "",
             "required": null,
             "value": null,
@@ -207,7 +207,7 @@ JSON,
                         "type": "string",
                         "key": "file_name",
                         "sort": 0,
-                        "title": "文件名称",
+                        "title": "文件name",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -285,7 +285,7 @@ JSON,
         if (! empty($endTime) && strtotime($endTime) !== false) {
             $memoryQuery->setEndTime(new DateTime($endTime));
         }
-        // 只获取文件
+        // 只get文件
         $memoryQuery->setRangMessageTypes([
             ChatMessageType::Text,
             ChatMessageType::RichText,
@@ -305,7 +305,7 @@ JSON,
             }
         }
 
-        // 排序+数量
+        // sort+数量
         $delightfulChatFileDomainService = di(DelightfulChatFileDomainService::class);
         return $delightfulChatFileDomainService->getFileEntitiesByFileIds($attachmentIds, $order, $limit);
     }

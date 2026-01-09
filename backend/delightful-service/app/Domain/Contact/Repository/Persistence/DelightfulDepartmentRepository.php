@@ -101,13 +101,13 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 获取某一层级的部门.
+     * get某一层级的department.
      */
     public function getSubDepartmentsByLevel(int $level, string $organizationCode, int $depth, int $size, int $offset): DepartmentsPageResponseDTO
     {
         $departments = $this->getSubDepartmentsByLevelCache($level, $organizationCode, $depth, $size, $offset);
         $delightfulDepartmentEntities = $this->getDepartmentsEntity($departments);
-        // 下一级子部门有不可预测的数量，因此只要返回数量与limit一致，就认为有下一页
+        // 下一级子department有不可预测的数量，因此只要return数量与limit一致，就认为有下一页
         $hasMore = count($delightfulDepartmentEntities) === $size;
         $pageToken = $hasMore ? (string) ($offset + $size) : '';
         return new DepartmentsPageResponseDTO([
@@ -117,7 +117,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
         ]);
     }
 
-    // 给定的部门id是否有下级部门
+    // 给定的departmentid是否有下级department
     #[ArrayShape([
         'parent_department_id' => 'string',
     ])]
@@ -133,7 +133,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
 
     public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?DelightfulDepartmentEntity
     {
-        // 对于前端来说, -1 表示根部门信息.
+        // 对于前端来说, -1 table示根departmentinfo.
         $query = $this->model->newQuery()->where('organization_code', $organizationCode);
         if ($departmentId === PlatformRootDepartmentId::Delightful) {
             $query->where(function (Builder $query) {
@@ -160,7 +160,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             ->limit(100)
             /* @phpstan-ignore-next-line */
             ->when($pageSize, function (Builder $query) use ($pageToken, $pageSize) {
-                // $pageToken 为查询总量
+                // $pageToken 为query总量
                 $page = ((int) ceil((int) $pageToken / $pageSize)) + 1;
                 $query->forPage($page, $pageSize);
             });
@@ -169,7 +169,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 获取组织的所有部门.
+     * getorganization的所有department.
      * @return DelightfulDepartmentEntity[]
      */
     public function getOrganizationDepartments(string $organizationCode, array $fields = ['*'], bool $keyById = false): array
@@ -184,15 +184,15 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 获取部门的所有子部门的成员总数.
-     * 使用自旋锁避免并发，一次性查询所有部门数据并缓存到 Redis.
+     * getdepartment的所有子department的成员总数.
+     * 使用自旋锁避免并发，一次性query所有department数据并cache到 Redis.
      */
     public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int
     {
         $organizationCode = $delightfulDepartmentEntity->getOrganizationCode();
         $departmentId = $delightfulDepartmentEntity->getDepartmentId();
 
-        // 先尝试从 Redis 缓存获取
+        // 先尝试从 Redis cacheget
         $cacheKey = sprintf('department_employee_sum:%s', $organizationCode);
 
         $cachedData = $this->redis->hget($cacheKey, $departmentId);
@@ -209,10 +209,10 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
         }
 
         try {
-            // 一次性获取组织下的所有部门数据
+            // 一次性getorganization下的所有department数据
             $allDepartments = $this->getAllDepartmentsForCalculation($organizationCode);
 
-            // 计算每个部门的员工总数并缓存到 Redis
+            // 计算每个department的员工总数并cache到 Redis
             $this->calculateAndCacheAllDepartmentEmployeeSums($organizationCode, $allDepartments, $cacheKey);
             $result = $this->redis->hget($cacheKey, $departmentId);
 
@@ -224,7 +224,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
-            // 发生异常时直接计算不走缓存
+            // 发生exception时直接计算不走cache
             return $this->calculateSelfAndChildrenEmployeeSum($organizationCode, $departmentId);
         } finally {
             $this->locker->release($lockKey, $lockOwner);
@@ -278,7 +278,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 根据部门ID批量删除部门（逻辑删除，设置 deleted_at 字段）。
+     * 根据departmentID批量deletedepartment（逻辑delete，set deleted_at field）。
      */
     public function deleteDepartmentsByIds(array $departmentIds, string $organizationCode): int
     {
@@ -302,9 +302,9 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 批量获取多个组织的根部门信息.
-     * @param array $organizationCodes 组织代码数组
-     * @return DelightfulDepartmentEntity[] 根部门实体数组
+     * 批量get多个organization的根departmentinfo.
+     * @param array $organizationCodes organization代码array
+     * @return DelightfulDepartmentEntity[] 根department实体array
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array
     {
@@ -408,7 +408,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 一次性获取组织下的所有部门数据，用于员工数计算.
+     * 一次性getorganization下的所有department数据，用于员工数计算.
      */
     private function getAllDepartmentsForCalculation(string $organizationCode): array
     {
@@ -420,19 +420,19 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 计算并缓存所有部门的员工总数.
+     * 计算并cache所有department的员工总数.
      */
     private function calculateAndCacheAllDepartmentEmployeeSums(string $organizationCode, array $allDepartments, string $cacheKey): void
     {
         $departmentSums = [];
 
-        // 1) 初始化：每个部门先放入自身直属人数
+        // 1) 初始化：每个department先放入自身直属人数
         foreach ($allDepartments as $department) {
             $deptId = (string) $department['department_id'];
             $departmentSums[$deptId] = (int) ($department['employee_sum'] ?? 0);
         }
 
-        // 2) 自底向上：按 level 从大到小，把子部门累计值加到父部门
+        // 2) 自底向上：按 level 从大到小，把子department累计value加到父department
         usort($allDepartments, static function (array $a, array $b): int {
             return (int) ($b['level'] ?? 0) <=> (int) ($a['level'] ?? 0);
         });
@@ -456,22 +456,22 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             $departmentSums[$parentId] += $childSum;
         }
 
-        // 批量写入 Redis 缓存
+        // 批量写入 Redis cache
         try {
             if (! empty($departmentSums)) {
-                // 确保所有值都是字符串格式
+                // 确保所有value都是string格式
                 $stringDepartmentSums = [];
                 foreach ($departmentSums as $deptId => $sum) {
                     $stringDepartmentSums[$deptId] = (string) $sum;
                 }
                 $this->redis->multi();
-                // 使用 hmset 一次性设置多个 hash 字段
+                // 使用 hmset 一次性set多个 hash field
                 $this->redis->hmset($cacheKey, $stringDepartmentSums);
-                // 设置缓存过期时间
+                // setcache过期time
                 $this->redis->expire($cacheKey, 60 * 5);
                 $results = $this->redis->exec();
 
-                // 检查事务执行结果
+                // check事务执行result
                 if ($results === false) {
                     $this->logger->error('Redis transaction failed', [
                         'cache_key' => $cacheKey,
@@ -484,7 +484,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
                 ]);
             }
         } catch (Throwable $e) {
-            // Redis 异常时记录日志，但不影响业务流程
+            // Redis exception时recordlog，但不影响业务流程
             $this->logger->warning('calculateAndCacheAllDepartmentEmployeeSums Failed to cache department employee sums', [
                 'organization_code' => $organizationCode,
                 'error' => $e->getMessage(),
@@ -493,7 +493,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 直接计算单个部门的员工总数（不使用缓存）.
+     * 直接计算单个department的员工总数（不使用cache）.
      */
     private function calculateSelfAndChildrenEmployeeSum(string $organizationCode, string $departmentId): int
     {

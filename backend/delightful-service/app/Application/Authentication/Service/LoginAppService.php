@@ -33,14 +33,14 @@ readonly class LoginAppService
     }
 
     /**
-     * 检查用户登录信息并颁发令牌.
+     * checkuser登录info并颁发令牌.
      */
     public function login(CheckLoginRequest $request): CheckLoginResponse
     {
-        // 验证账户信息并获取账户
+        // 验证账户info并get账户
         $account = $this->verifyAndGetAccount($request);
 
-        // 验证用户在组织内是否存在
+        // 验证user在organization内是否存在
         $user = $this->verifyAndGetUserInOrganization($account, $request->getOrganizationCode());
 
         // 生成令牌
@@ -51,7 +51,7 @@ readonly class LoginAppService
     }
 
     /**
-     * 根据登录类型验证账户信息并返回账户实体.
+     * 根据登录type验证账户info并return账户实体.
      */
     private function verifyAndGetAccount(CheckLoginRequest $request): AccountEntity
     {
@@ -102,7 +102,7 @@ readonly class LoginAppService
     }
 
     /**
-     * 验证用户在组织内是否存在.
+     * 验证user在organization内是否存在.
      */
     private function verifyAndGetUserInOrganization(AccountEntity $account, string $organizationCode): DelightfulUserEntity
     {
@@ -128,7 +128,7 @@ readonly class LoginAppService
         // 处理国家代码格式
         $stateCode = $this->formatStateCode($account->getStateCode() ?? '+86');
 
-        // 构建用户数据
+        // 构建user数据
         $userData = [
             'id' => $user->getUserId(),
             'real_name' => $user->getNickname(),

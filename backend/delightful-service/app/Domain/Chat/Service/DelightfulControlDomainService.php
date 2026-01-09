@@ -19,49 +19,49 @@ use Hyperf\DbConnection\Db;
 use Throwable;
 
 /**
- * 处理控制消息相关.
+ * handle控制message相关.
  */
 class DelightfulControlDomainService extends AbstractDomainService
 {
     /**
-     * 返回收件方多条消息最终的阅读状态
+     * return收件方多条message最终的阅读status
      */
     public function getSenderMessageLatestReadStatus(string $senderMessageId, string $senderUserId): ?DelightfulSeqEntity
     {
         $senderSeqList = $this->delightfulSeqRepository->getSenderMessagesStatusChange($senderMessageId, $senderUserId);
-        // 对于接收方来说,一个 sender_message_id 由于状态变化,可能会有多条记录,此处需要最后的状态
+        // 对于receive方来说,一个 sender_message_id 由于status变化,可能会有多条记录,此处需要最后的status
         $userMessagesReadStatus = $this->getMessageLatestStatus([$senderMessageId], $senderSeqList);
         return $userMessagesReadStatus[$senderMessageId] ?? null;
     }
 
     /**
-     * 处理 mq 中分发的消息已读/已查看消息. 这些消息需要操作消息发送者的seq.
+     * handle mq 中分发的message已读/已查看message. 这些message需要操作messagesend者的seq.
      */
     public function handlerMQReceiptSeq(DelightfulSeqEntity $receiveDelightfulSeqEntity): void
     {
         $controlMessageType = $receiveDelightfulSeqEntity->getSeqType();
-        // 根据已读回执的发送方,解析出来消息发送方的信息
+        // 根据已读回执的send方,parse出来messagesend方的信息
         $receiveConversationId = $receiveDelightfulSeqEntity->getConversationId();
         $receiveConversationEntity = $this->delightfulConversationRepository->getConversationById($receiveConversationId);
         if ($receiveConversationEntity === null) {
             $this->logger->error(sprintf(
-                'messageDispatch 收件方的会话不存在 $conversation_id:%s $delightfulSeqEntity:%s',
+                'messageDispatch 收件方的conversation不存在 $conversation_id:%s $delightfulSeqEntity:%s',
                 $receiveConversationId,
                 Json::encode($receiveDelightfulSeqEntity->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
             ));
             return;
         }
-        // 通过回执发送者引用的消息id,找到发送者的消息id. (不可直接使用接收者的 sender_message_id 字段,这是一个不好的设计,随时取消)
+        // 通过回执send者引用的messageid,找到send者的messageid. (不可直接使用receive者的 sender_message_id 字段,这是一个不好的设计,随时取消)
         $senderMessageId = $this->delightfulSeqRepository->getSeqByMessageId($receiveDelightfulSeqEntity->getReferMessageId())?->getSenderMessageId();
         if ($senderMessageId === null) {
             $this->logger->error(sprintf(
-                'messageDispatch 没有找到发送方的消息id $delightfulSeqEntity:%s $senderMessageId:%s',
+                'messageDispatch 没有找到send方的messageid $delightfulSeqEntity:%s $senderMessageId:%s',
                 Json::encode($receiveDelightfulSeqEntity->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
                 $senderMessageId
             ));
             return;
         }
-        // 没有找到发送方的会话id
+        // 没有找到send方的conversationid
         $senderConversationId = $this->delightfulSeqRepository->getSeqByMessageId($senderMessageId)?->getConversationId();
         if ($senderConversationId) {
             $senderConversationEntity = $this->delightfulConversationRepository->getConversationById($senderConversationId);
@@ -70,7 +70,7 @@ class DelightfulControlDomainService extends AbstractDomainService
         }
         if ($senderConversationId === null || $senderConversationEntity === null) {
             $this->logger->error(sprintf(
-                'messageDispatch 没有找到发送方的会话id $delightfulSeqEntity:%s',
+                'messageDispatch 没有找到send方的conversationid $delightfulSeqEntity:%s',
                 Json::encode($receiveDelightfulSeqEntity->toArray(), JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE)
             ));
             return;
@@ -78,20 +78,20 @@ class DelightfulControlDomainService extends AbstractDomainService
 
         $senderUserId = $senderConversationEntity->getUserId();
         $senderMessageId = $receiveDelightfulSeqEntity->getSenderMessageId();
-        # 这里加一下分布式行锁,防止并发修改消息接收人列表,造成数据覆盖.
+        # 这里加一下分布式行锁,防止并发修改messagereceive人列表,造成数据override.
         $spinLockKey = 'chat:seq:lock:' . $senderMessageId;
         $spinLockKeyOwner = random_bytes(8);
         try {
             if (! $this->redisLocker->spinLock($spinLockKey, $spinLockKeyOwner)) {
-                // 自旋失败
+                // 自旋fail
                 $this->logger->error(sprintf(
-                    'messageDispatch 获取消息接收人列表的自旋锁超时 $spinLockKey:%s $delightfulSeqEntity:%s',
+                    'messageDispatch 获取messagereceive人列表的自旋锁超时 $spinLockKey:%s $delightfulSeqEntity:%s',
                     $spinLockKey,
                     Json::encode($receiveDelightfulSeqEntity->toArray())
                 ));
                 ExceptionBuilder::throw(ChatErrorCode::DATA_WRITE_FAILED);
             }
-            // 获取每条消息的最终状态,解析出来接收人列表,
+            // 获取每条message的最终status,parse出来receive人列表,
             $senderLatestSeq = $this->getSenderMessageLatestReadStatus($senderMessageId, $senderUserId);
             $receiveUserEntity = $this->delightfulUserRepository->getUserByAccountAndOrganization(
                 $receiveDelightfulSeqEntity->getObjectId(),
@@ -99,15 +99,15 @@ class DelightfulControlDomainService extends AbstractDomainService
             );
             if ($receiveUserEntity === null) {
                 $this->logger->error(sprintf(
-                    'messageDispatch 回执消息未找到消息发送者 $delightfulSeqEntity:%s',
+                    'messageDispatch 回执message未找到messagesend者 $delightfulSeqEntity:%s',
                     Json::encode($receiveDelightfulSeqEntity->toArray())
                 ));
                 return;
             }
-            // 没找到seq,或者消息已被撤回
+            // 没找到seq,或者message已被撤回
             if ($senderLatestSeq === null || $senderLatestSeq->getSeqType() === ControlMessageType::RevokeMessage) {
                 $this->logger->error(sprintf(
-                    'messageDispatch 回执消息没找到 seq,或者消息已被撤回 $senderLatestSeq:%s $delightfulSeqEntity:%s',
+                    'messageDispatch 回执message没找到 seq,或者message已被撤回 $senderLatestSeq:%s $delightfulSeqEntity:%s',
                     Json::encode($senderLatestSeq?->toArray()),
                     Json::encode($receiveDelightfulSeqEntity->toArray())
                 ));
@@ -117,26 +117,26 @@ class DelightfulControlDomainService extends AbstractDomainService
 
             switch ($controlMessageType) {
                 case ControlMessageType::SeenMessages:
-                    # 已读回执(扫了一眼消息,对于非文本的复杂类型消息,没有查看详情).
+                    # 已读回执(扫了一眼message,对于非文本的复杂typemessage,没有查看详情).
                     $senderReceiveList = $senderLatestSeq->getReceiveList();
                     if ($senderReceiveList === null) {
                         $this->logger->error(sprintf(
-                            'messageDispatch 消息接收人列表为空 $delightfulSeqEntity:%s',
+                            'messageDispatch messagereceive人列表为null $delightfulSeqEntity:%s',
                             Json::encode($receiveDelightfulSeqEntity->toArray())
                         ));
                         return;
                     }
-                    // 1.判断用户是否在未读列表中.
+                    // 1.判断user是否在未读列表中.
                     $unreadList = $senderReceiveList->getUnreadList();
                     if (! in_array($receiveUserEntity->getUserId(), $unreadList, true)) {
                         $this->logger->error(sprintf(
-                            'messageDispatch 用户不在消息未读列表中（可能其他设备已读） $unreadList:%s $delightfulSeqEntity:%s',
+                            'messageDispatch user不在message未读列表中（可能其他设备已读） $unreadList:%s $delightfulSeqEntity:%s',
                             Json::encode($unreadList),
                             Json::encode($receiveDelightfulSeqEntity->toArray())
                         ));
                         return;
                     }
-                    // 2. 将已读的用户从未读移到已读
+                    // 2. 将已读的user从未读移到已读
                     $key = array_search($receiveUserEntity->getUserId(), $unreadList, true);
                     if ($key !== false) {
                         unset($unreadList[$key]);
@@ -147,35 +147,35 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $seenList[] = $receiveUserEntity->getUserId();
                     $senderReceiveList->setUnreadList($unreadList);
                     $senderReceiveList->setSeenList($seenList);
-                    // 为消息发送者生成新的seq,用于更新消息接收人列表
+                    // 为messagesend者generate新的seq,用于更新messagereceive人列表
                     $senderLatestSeq->setReceiveList($senderReceiveList);
-                    # 更新已读列表结束
+                    # 更新已读列表end
 
                     $senderLatestSeq->setSeqType($controlMessageType);
                     $senderLatestSeq->setStatus($messageStatus);
                     $senderSeqData = $senderLatestSeq->toArray();
                     $senderSeqData['content'] = ['refer_message_ids' => [$senderMessageId]];
                     $senderSeenSeqEntity = SeqAssembler::generateStatusChangeSeqEntity($senderSeqData, $senderMessageId);
-                    // 由于存在批量写入的情况,这里只生成entity,不调用create方法
+                    // 由于存在批量写入的情况,这里只generateentity,不callcreatemethod
                     $seqData = SeqAssembler::getInsertDataByEntity($senderSeenSeqEntity);
                     $seqData['app_message_id'] = $receiveDelightfulSeqEntity->getAppMessageId();
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {
-                        // 写数据库,更新消息发送方的已读列表。这是为了复用消息收发通道，通知客户端有新的已读回执。
+                        // 写数据库,更新messagesend方的已读列表。这是为了复用message收发通道，通知客户端有新的已读回执。
                         $this->delightfulSeqRepository->createSequence($seqData);
-                        // 更新原始 chat_seq 的消息接收人列表。 避免拉取历史消息时，对方已读的消息还是显示未读。
+                        // 更新原始 chat_seq 的messagereceive人列表。 避免拉取历史message时，对方已读的message还是显示未读。
                         $originalSeq = $this->delightfulSeqRepository->getSeqByMessageId($senderMessageId);
                         if ($originalSeq !== null) {
                             $originalSeq->setReceiveList($senderReceiveList);
                             $this->delightfulSeqRepository->updateReceiveList($originalSeq);
                         } else {
                             $this->logger->error(sprintf(
-                                'messageDispatch 更新原始 chat_seq 失败，未找到原始消息 $senderMessageId:%s',
+                                'messageDispatch 更新原始 chat_seq fail，未找到原始message $senderMessageId:%s',
                                 $senderMessageId
                             ));
                         }
                     });
 
-                    // 3. 异步推送给消息的发送方,有人已读了他发出的消息
+                    // 3. 异步推送给message的send方,有人已读了他发出的message
                     $this->pushControlSequence($senderSeenSeqEntity);
                     break;
                 case ControlMessageType::ReadMessage:
@@ -189,17 +189,17 @@ class DelightfulControlDomainService extends AbstractDomainService
     }
 
     /**
-     * 处理 mq 中分发的撤回/编辑消息. 这些消息是操作用户自己的seq.
+     * handle mq 中分发的撤回/编辑message. 这些message是操作user自己的seq.
      * @throws Throwable
      */
     public function handlerMQUserSelfMessageChange(DelightfulSeqEntity $changeMessageStatusSeqEntity): void
     {
         $controlMessageType = $changeMessageStatusSeqEntity->getSeqType();
-        // 通过回执发送者引用的消息id,找到发送者的消息id. (不可直接使用接收者的 sender_message_id 字段,这是一个不好的设计,随时取消)
+        // 通过回执send者引用的messageid,找到send者的messageid. (不可直接使用receive者的 sender_message_id 字段,这是一个不好的设计,随时取消)
         $needChangeSeqEntity = $this->delightfulSeqRepository->getSeqByMessageId($changeMessageStatusSeqEntity->getReferMessageId());
         if ($needChangeSeqEntity === null) {
             $this->logger->error(sprintf(
-                'messageDispatch 没有找到发送方的消息id $delightfulSeqEntity:%s',
+                'messageDispatch 没有找到send方的messageid $delightfulSeqEntity:%s',
                 Json::encode($changeMessageStatusSeqEntity->toArray())
             ));
             return;
@@ -209,20 +209,20 @@ class DelightfulControlDomainService extends AbstractDomainService
         $spinLockKey = 'chat:seq:lock:' . $revokeMessageId;
         try {
             if (! $this->redisLocker->mutexLock($spinLockKey, $revokeMessageId)) {
-                // 互斥失败
+                // 互斥fail
                 $this->logger->error(sprintf(
-                    'messageDispatch 撤回或者编辑消息失败 $spinLockKey:%s $delightfulSeqEntity:%s',
+                    'messageDispatch 撤回或者编辑messagefail $spinLockKey:%s $delightfulSeqEntity:%s',
                     $spinLockKey,
                     Json::encode($changeMessageStatusSeqEntity->toArray())
                 ));
                 ExceptionBuilder::throw(ChatErrorCode::DATA_WRITE_FAILED);
             }
-            // 更新原始消息的状态
+            // 更新原始message的status
             $messageStatus = DelightfulMessageStatus::getMessageStatusByControlMessageType($controlMessageType);
             $this->delightfulSeqRepository->batchUpdateSeqStatus([$needChangeSeqEntity->getSeqId()], $messageStatus);
-            // 根据 delightful_message_id 找到所有消息接收者
+            // 根据 delightful_message_id 找到所有messagereceive者
             $notifyAllReceiveSeqList = $this->batchCreateSeqByRevokeOrEditMessage($needChangeSeqEntity, $controlMessageType);
-            // 排除用户自己,因为已经提前
+            // 排除user自己,因为已经提前
             $this->batchPushControlSeqList($notifyAllReceiveSeqList);
         } finally {
             // 释放锁
@@ -231,7 +231,7 @@ class DelightfulControlDomainService extends AbstractDomainService
     }
 
     /**
-     * 分发群聊/私聊中的撤回或者编辑消息.
+     * 分发群聊/私聊中的撤回或者编辑message.
      * @return DelightfulSeqEntity[]
      */
     #[Transactional]
@@ -240,11 +240,11 @@ class DelightfulControlDomainService extends AbstractDomainService
         // 获取所有收件方的seq
         $receiveSeqList = $this->delightfulSeqRepository->getBothSeqListByDelightfulMessageId($needChangeSeqEntity->getDelightfulMessageId());
         $receiveSeqList = array_column($receiveSeqList, null, 'object_id');
-        // 去掉自己,因为需要及时响应,已经单独生成了seq并推送了
+        // 去掉自己,因为需要及时响应,已经单独generate了seq并推送了
         unset($receiveSeqList[$needChangeSeqEntity->getObjectId()]);
         $seqListCreateDTO = [];
         foreach ($receiveSeqList as $receiveSeq) {
-            // 撤回的都是收件方自己会话窗口中的消息id
+            // 撤回的都是收件方自己conversation窗口中的messageid
             $revokeMessageId = $receiveSeq['message_id'];
             $receiveSeq['status'] = DelightfulMessageStatus::Seen;
             $receiveSeq['seq_type'] = $controlMessageType->value;

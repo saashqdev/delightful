@@ -25,7 +25,7 @@ use Delightful\AsyncEvent\AsyncEventUtil;
 use Hyperf\DbConnection\Db;
 
 /**
- * 知识库文档领域服务
+ * 知识库文档领域service
  */
 readonly class KnowledgeBaseDocumentDomainService
 {
@@ -72,7 +72,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * 查询知识库文档列表.
+     * query知识库文档list.
      *
      * @return array{total: int, list: array<KnowledgeBaseDocumentEntity>}
      */
@@ -94,23 +94,23 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * 删除知识库文档.
+     * delete知识库文档.
      */
     public function destroy(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $knowledgeBaseEntity, string $documentCode): void
     {
         $documentEntity = null;
         Db::transaction(function () use ($dataIsolation, $documentCode, $knowledgeBaseEntity) {
             $knowledgeBaseCode = $knowledgeBaseEntity->getCode();
-            // 首先删除文档下的所有片段
+            // 首先delete文档下的所有片段
             $this->destroyFragments($dataIsolation, $knowledgeBaseCode, $documentCode);
             $documentEntity = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode, true);
-            // 然后删除文档本身
+            // 然后delete文档本身
             $this->knowledgeBaseDocumentRepository->destroy($dataIsolation, $knowledgeBaseCode, $documentCode);
-            // 更新字符数
+            // update字符数
             $deltaWordCount = -$documentEntity->getWordCount();
             $this->updateWordCount($dataIsolation, $knowledgeBaseCode, $documentEntity->getCode(), $deltaWordCount);
         });
-        // 异步删除向量数据库片段
+        // 异步delete向量database片段
         /* @phpstan-ignore-next-line */
         ! is_null($documentEntity) && AsyncEventUtil::dispatch(new KnowledgeBaseDocumentRemovedEvent($dataIsolation, $knowledgeBaseEntity, $documentEntity));
     }
@@ -122,15 +122,15 @@ readonly class KnowledgeBaseDocumentDomainService
     {
         $document = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode);
 
-        // 如果强制重建或者同步状态为失败，则重新同步
-        if ($force || $document->getSyncStatus() === 2) { // 2 表示同步失败
-            $document->setSyncStatus(0); // 0 表示未同步
+        // 如果强制重建或者同步status为fail，则重新同步
+        if ($force || $document->getSyncStatus() === 2) { // 2 table示同步fail
+            $document->setSyncStatus(0); // 0 table示未同步
             $document->setSyncStatusMessage('');
             $document->setSyncTimes(0);
             $this->knowledgeBaseDocumentRepository->update($dataIsolation, $document);
 
-            // 异步触发重建（这里可以发送事件或者加入队列）
-            // TODO: 触发重建向量事件
+            // 异步触发重建（这里可以发送event或者加入队列）
+            // TODO: 触发重建向量event
         }
     }
 
@@ -165,13 +165,13 @@ readonly class KnowledgeBaseDocumentDomainService
 
     public function getOrCreateDefaultDocument(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $knowledgeBaseEntity): KnowledgeBaseDocumentEntity
     {
-        // 尝试获取默认文档
+        // 尝试get默认文档
         $defaultDocumentCode = $knowledgeBaseEntity->getDefaultDocumentCode();
         $documentEntity = $this->knowledgeBaseDocumentRepository->show($dataIsolation, $knowledgeBaseEntity->getCode(), $defaultDocumentCode);
         if ($documentEntity) {
             return $documentEntity;
         }
-        // 如果文档不存在，创建新的默认文档
+        // 如果文档不存在，create新的默认文档
         $documentEntity = (new KnowledgeBaseDocumentEntity())
             ->setCode($defaultDocumentCode)
             ->setName('未命名文档.txt')
@@ -227,7 +227,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $lastId = null;
         /** @var array<KnowledgeBaseDocumentEntity> $res */
         $res = [];
-        // 最多允许获取一万份文档
+        // 最多允许get一万份文档
         while ($loopCount--) {
             $entities = $this->knowledgeBaseDocumentRepository->getByThirdFileId($dataIsolation, $thirdPlatformType, $thirdFileId, $knowledgeBaseCode, $lastId, $pageSize);
             if (empty($entities)) {
@@ -240,7 +240,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * 删除文档下的所有片段.
+     * delete文档下的所有片段.
      */
     private function destroyFragments(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -248,12 +248,12 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * 准备创建.
+     * 准备create.
      */
     private function prepareForCreation(KnowledgeBaseDocumentEntity $documentEntity): void
     {
         if (empty($documentEntity->getName())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '文档名称不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '文档name不能为空');
         }
 
         if (empty($documentEntity->getKnowledgeBaseCode())) {
@@ -261,10 +261,10 @@ readonly class KnowledgeBaseDocumentDomainService
         }
 
         if (empty($documentEntity->getCreatedUid())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '创建者不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者不能为空');
         }
 
-        // 设置默认值
+        // set默认value
         if (! $documentEntity->issetCreatedAt()) {
             $documentEntity->setCreatedAt(date('Y-m-d H:i:s'));
         }
@@ -272,19 +272,19 @@ readonly class KnowledgeBaseDocumentDomainService
         $documentFile = $documentEntity->getDocumentFile();
         $documentEntity->setUpdatedAt($documentEntity->getCreatedAt());
         $documentEntity->setUpdatedUid($documentEntity->getCreatedUid());
-        $documentEntity->setSyncStatus(0); // 0 表示未同步
-        // 以下属性均从文档文件中获取
+        $documentEntity->setSyncStatus(0); // 0 table示未同步
+        // 以下property均从文档文件中get
         $documentEntity->setDocType($documentFile?->getDocType() ?? DocType::TXT->value);
         $documentEntity->setThirdFileId($documentFile?->getThirdFileId());
         $documentEntity->setThirdPlatformType($documentFile?->getPlatformType());
     }
 
     /**
-     * 准备更新.
+     * 准备update.
      */
     private function prepareForUpdate(KnowledgeBaseDocumentEntity $newDocument, KnowledgeBaseDocumentEntity $oldDocument): void
     {
-        // 不允许修改的字段保持原值
+        // 不允许修改的field保持原value
         $newDocument->setId($oldDocument->getId());
         $newDocument->setCode($oldDocument->getCode());
         $newDocument->setKnowledgeBaseCode($oldDocument->getKnowledgeBaseCode());
@@ -300,7 +300,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $newDocument->setThirdFileId($oldDocument->getThirdFileId());
         $newDocument->setVersion($oldDocument->getVersion());
 
-        // 更新时间
+        // updatetime
         $newDocument->setUpdatedAt(date('Y-m-d H:i:s'));
     }
 }

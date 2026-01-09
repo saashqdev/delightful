@@ -33,7 +33,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
      */
     public function queries(DelightfulAgentQuery $query, Page $page): array
     {
-        // todo 这里至少需要组织隔离
+        // todo 这里至少需要organization隔离
         $builder = DelightfulAgentModel::query();
 
         if (! is_null($query->getIds())) {
@@ -132,12 +132,12 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
 
     public function getAgentById(string $agentId): DelightfulAgentEntity
     {
-        // 查询数据库，获取指定 agentId 和 userId 的数据
+        // querydatabase，get指定 agentId 和 userId 的数据
         $agent = $this->agentModel::query()
             ->where('id', $agentId)
             ->first();
 
-        // 如果查询结果为空，抛出异常或返回 null，根据业务需求处理
+        // 如果queryresult为空，抛出exception或return null，根据业务需求处理
         if (! $agent) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_not_exist');
         }
@@ -257,10 +257,10 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * 分批获取助理列表.
+     * 分批get助理list.
      * @param int $offset 偏移量
      * @param int $limit 每批数量
-     * @return array 助理列表
+     * @return array 助理list
      */
     public function getAgentsByBatch(int $offset, int $limit): array
     {
@@ -278,7 +278,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * 查询企业下的所有助理,条件查询：状态，创建人，搜索.
+     * query企业下的所有助理,条件query：status，create人，search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
@@ -294,7 +294,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
         }
 
         if ($queryPageAgentDTO->getQuery()) {
-            // 名称或者描述
+            // name或者description
             $query->where('robot_name', 'like', "%{$queryPageAgentDTO->getQuery()}%")
                 ->orWhere('robot_description', 'like', "%{$queryPageAgentDTO->getQuery()}%");
         }
@@ -316,7 +316,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
         }
 
         if ($queryPageAgentDTO->getQuery()) {
-            // 名称或者描述
+            // name或者description
             $query->where('robot_name', 'like', "%{$queryPageAgentDTO->getQuery()}%")
                 ->orWhere('robot_description', 'like', "%{$queryPageAgentDTO->getQuery()}%");
         }
@@ -328,7 +328,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * 获取企业下的所有助理创建者.
+     * get企业下的所有助理create者.
      * @return array<string>
      */
     public function getOrganizationAgentsCreators(string $organizationCode): array

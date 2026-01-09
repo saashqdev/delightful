@@ -35,7 +35,7 @@ use InvalidArgumentException;
 use Throwable;
 
 /**
- * 集合项目本身多套的 ModelGatewayMapper - 最终全部转换为 odin model 参数格式.
+ * 集合项目本身多套的 ModelGatewayMapper - 最终全部convert为 odin model parameter格式.
  */
 class ModelGatewayMapper extends ModelMapper
 {
@@ -80,7 +80,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 内部使用 chat 时，一定是使用该方法.
+     * 内部使用 chat 时，一定是使用该method.
      * 会自动替代为本地代理模型.
      */
     public function getChatModelProxy(BaseDataIsolation $dataIsolation, string $model, bool $useOfficialAccessToken = false): DelightfulAILocalModel
@@ -97,7 +97,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 内部使用 embedding 时，一定是使用该方法.
+     * 内部使用 embedding 时，一定是使用该method.
      * 会自动替代为本地代理模型.
      */
     public function getEmbeddingModelProxy(BaseDataIsolation $dataIsolation, string $model): DelightfulAILocalModel
@@ -111,12 +111,12 @@ class ModelGatewayMapper extends ModelMapper
         if (! $odinModel instanceof AbstractModel) {
             throw new InvalidArgumentException(sprintf('Model %s is not a valid Odin model.', $model));
         }
-        // 转换为代理
+        // convert为代理
         return $this->createProxy($dataIsolation, $model, $odinModel->getModelOptions(), $odinModel->getApiRequestOptions());
     }
 
     /**
-     * 该方法获取到的一定是真实调用的模型.
+     * 该method获取到的一定是真实call的模型.
      * 仅 ModelGateway 领域使用.
      * @param string $model 预期是管理后台的 model_id，过度阶段接受传入 model_version
      */
@@ -131,7 +131,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 该方法获取到的一定是真实调用的模型.
+     * 该method获取到的一定是真实call的模型.
      * 仅 ModelGateway 领域使用.
      * @param string $model 模型名称 预期是管理后台的 model_id，过度阶段接受 model_version
      */
@@ -150,7 +150,7 @@ class ModelGatewayMapper extends ModelMapper
         $dataIsolation = ModelGatewayDataIsolation::createByBaseDataIsolation($dataIsolation);
         $result = $this->getByAdmin($dataIsolation, $model);
 
-        // 只返回 ImageGenerationModelWrapper 类型的结果
+        // 只return ImageGenerationModelWrapper type的结果
         if ($result instanceof ImageModel) {
             return $result;
         }
@@ -159,7 +159,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 获取当前组织下的所有可用 chat 模型.
+     * 获取当前organization下的所有可用 chat 模型.
      * @return OdinModel[]
      */
     public function getChatModels(BaseDataIsolation $dataIsolation): array
@@ -169,7 +169,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 获取当前组织下的所有可用 embedding 模型.
+     * 获取当前organization下的所有可用 embedding 模型.
      * @return OdinModel[]
      */
     public function getEmbeddingModels(BaseDataIsolation $dataIsolation): array
@@ -267,7 +267,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 获取当前组织下指定类型的所有可用模型.
+     * 获取当前organization下指定type的所有可用模型.
      * @return OdinModel[]
      */
     private function getModelsByType(ModelGatewayDataIsolation $dataIsolation, ModelType $modelType): array
@@ -289,7 +289,7 @@ class ModelGatewayMapper extends ModelMapper
                     }
                     break;
                 default:
-                    // 如果没有指定类型，则全部添加
+                    // 如果没有指定type，则全部添加
                     break;
             }
             $list[$name] = new OdinModel(key: $name, model: $model, attributes: $this->attributes[$name]);
@@ -298,11 +298,11 @@ class ModelGatewayMapper extends ModelMapper
         // 获取当前套餐下的可用模型
         $availableModelIds = $dataIsolation->getSubscriptionManager()->getAvailableModelIds($modelType);
 
-        // 需要包含官方组织的数据
+        // 需要contain官方organization的数据
         $providerDataIsolation = ProviderDataIsolation::createByBaseDataIsolation($dataIsolation);
         $providerDataIsolation->setContainOfficialOrganization(true);
 
-        // 加载 模型
+        // load 模型
         $providerModels = $this->providerManager->getModelsByModelIds($providerDataIsolation, $availableModelIds, $modelType);
 
         $modelLogs = [];
@@ -318,7 +318,7 @@ class ModelGatewayMapper extends ModelMapper
         }
         $providerConfigIds = array_unique($providerConfigIds);
 
-        // 加载 服务商配置
+        // load 服务商配置
         $providerConfigs = $this->providerManager->getProviderConfigsByIds($providerDataIsolation, $providerConfigIds);
         $providerIds = [];
         foreach ($providerConfigs as $providerConfig) {
@@ -350,7 +350,7 @@ class ModelGatewayMapper extends ModelMapper
             $list[$model->getAttributes()->getKey()] = $model;
         }
 
-        // 按照 $availableModelIds 排序
+        // 按照 $availableModelIds sort
         if ($availableModelIds !== null) {
             $orderedList = [];
             foreach ($availableModelIds as $modelId) {
@@ -404,7 +404,7 @@ class ModelGatewayMapper extends ModelMapper
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 
-        // 如果不是官方组织，但是模型是官方组织，统一显示 Delightful
+        // 如果不是官方organization，但是模型是官方organization，统一显示 Delightful
         if (! $providerDataIsolation->isOfficialOrganization()
             && in_array($providerConfigEntity->getOrganizationCode(), $providerDataIsolation->getOfficialOrganizationCodes())) {
             $providerName = 'Delightful';
@@ -412,7 +412,7 @@ class ModelGatewayMapper extends ModelMapper
 
         try {
             $fileDomainService = di(FileDomainService::class);
-            // 如果是官方组织的 icon，切换官方组织
+            // 如果是官方organization的 icon，切换官方organization
             if ($providerModelEntity->isOffice()) {
                 $iconUrl = $fileDomainService->getLink($providerDataIsolation->getOfficialOrganizationCode(), $providerModelEntity->getIcon())?->getUrl() ?? '';
             } else {
@@ -422,7 +422,7 @@ class ModelGatewayMapper extends ModelMapper
             $iconUrl = '';
         }
 
-        // 根据模型类型返回不同的包装对象
+        // 根据模型typereturn不同的包装object
         if ($providerModelEntity->getModelType()->isVLM()) {
             return new ImageModel($providerConfigItem->toArray(), $providerModelEntity->getModelVersion(), (string) $providerModelEntity->getId(), $providerEntity->getProviderCode());
         }

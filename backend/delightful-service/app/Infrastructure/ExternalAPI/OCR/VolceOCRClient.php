@@ -28,7 +28,7 @@ class VolceOCRClient implements OCRClientInterface
 
     public function ocr(?string $url = null): string
     {
-        // 配置特定的 OCR 客户端
+        // configuration特定的 OCR 客户端
         $client = Visual::getInstance();
         $client->setAccessKey(config('volce_cv.ocr_pdf.ak'));
         $client->setSecretKey(config('volce_cv.ocr_pdf.sk'));
@@ -49,11 +49,11 @@ class VolceOCRClient implements OCRClientInterface
         $content = $response->getContents();
         $this->logger->info('火山OCR响应: ' . $content);
         $result = Json::decode($content);
-        $code = $result['code'] ?? 0; // 如果没有 'code'，则使用默认的错误代码
+        $code = $result['code'] ?? 0; // 如果没有 'code'，则使用默认的error代码
         if ($code !== 10000) {
-            $message = $result['Message'] ?? '火山OCR遇到错误,message 不存在'; // 如果没有 'message'，则使用默认消息
+            $message = $result['Message'] ?? '火山OCR遇到error,message 不存在'; // 如果没有 'message'，则使用默认message
             $this->logger->error(sprintf(
-                '火山OCR遇到错误:%s,',
+                '火山OCR遇到error:%s,',
                 $message,
             ));
             throw new OCRException($message, $code);
@@ -76,18 +76,18 @@ class VolceOCRClient implements OCRClientInterface
                 'verify_peer_name' => false,
             ],
         ]);
-        // 获取 HTTP 头部信息
+        // get HTTP 头部info
         $headers = get_headers($url, true, $context);
 
-        // 检查是否成功获取头部信息
+        // check是否successget头部info
         if ($headers === false || ! isset($headers['Content-Type'])) {
-            return null; // 无法获取文件类型
+            return null; // 无法get文件type
         }
 
         // 解析 Content-Type
         $contentType = is_array($headers['Content-Type']) ? $headers['Content-Type'][0] : $headers['Content-Type'];
 
-        // 检查文件类型是否为 PDF 或图片
+        // check文件type是否为 PDF 或图片
         if ($contentType === 'application/pdf') {
             return 'pdf';
         }

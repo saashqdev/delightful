@@ -8,39 +8,39 @@ declare(strict_types=1);
 namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 
 /**
- * 检索方法枚举类.
+ * 检索method枚举类.
  *
- * 定义了四种检索方法：
- * - SEMANTIC_SEARCH: 语义检索，基于向量相似度的检索方法
- * - FULL_TEXT_SEARCH: 全文检索，基于关键词匹配的检索方法
- * - HYBRID_SEARCH: 混合检索，结合语义检索和全文检索的方法
- * - GRAPH_SEARCH: 图检索，基于知识图谱的检索方法
+ * 定义了四种检索method：
+ * - SEMANTIC_SEARCH: 语义检索，基于向量相似度的检索method
+ * - FULL_TEXT_SEARCH: 全文检索，基于关键词匹配的检索method
+ * - HYBRID_SEARCH: 混合检索，结合语义检索和全文检索的method
+ * - GRAPH_SEARCH: 图检索，基于知识图谱的检索method
  */
 class RetrievalMethod
 {
     /**
      * 语义检索.
      *
-     * 基于向量相似度的检索方法。
-     * 将查询文本转换为向量，然后在向量数据库中查找最相似的文档。
-     * 适合理解语义关系、多语言理解、处理模糊描述。
+     * 基于向量相似度的检索method。
+     * 将query文本转换为向量，然后在向量database中查找最相似的文档。
+     * 适合理解语义关系、多语言理解、处理模糊description。
      */
     public const string SEMANTIC_SEARCH = 'semantic_search';
 
     /**
      * 全文检索.
      *
-     * 基于关键词匹配的检索方法。
-     * 索引文档中的所有单词，返回包含查询词的文本片段。
-     * 适合精确匹配（如产品名称、人名、ID）和低频词匹配。
+     * 基于关键词匹配的检索method。
+     * 索引文档中的所有单词，return包含query词的文本片段。
+     * 适合精确匹配（如产品name、人名、ID）和低频词匹配。
      */
     public const string FULL_TEXT_SEARCH = 'full_text_search';
 
     /**
      * 混合检索.
      *
-     * 结合语义检索和全文检索的方法。
-     * 同时执行全文检索和向量检索，然后通过重排序步骤选择最佳结果。
+     * 结合语义检索和全文检索的method。
+     * 同时执行全文检索和向量检索，然后通过重sort步骤选择最佳result。
      * 结合了两种检索技术的优势，弥补各自的不足。
      */
     public const string HYBRID_SEARCH = 'hybrid_search';
@@ -48,14 +48,14 @@ class RetrievalMethod
     /**
      * 图检索.
      *
-     * 基于知识图谱的检索方法。
-     * 利用实体间的关系进行检索，适合处理复杂的关联查询。
+     * 基于知识图谱的检索method。
+     * 利用实体间的关系进行检索，适合处理复杂的关联query。
      * 可以发现隐含的关系和连接。
      */
     public const string GRAPH_SEARCH = 'graph_search';
 
     /**
-     * 获取所有可用的检索方法.
+     * get所有可用的检索method.
      *
      * @return array<string>
      */
@@ -70,7 +70,7 @@ class RetrievalMethod
     }
 
     /**
-     * 检查给定的检索方法是否有效.
+     * check给定的检索method是否有效.
      */
     public static function isValid(string $method): bool
     {

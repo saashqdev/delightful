@@ -17,16 +17,16 @@ use Throwable;
 class ModelGatewayApiTest extends AbstractHttpTest
 {
     /**
-     * 默认测试模型.
+     * 默认testmodel.
      */
     private const DEFAULT_MODEL = 'deepseek-v3';
 
     /**
-     * 测试 chatCompletions 方法的高可用性.
+     * test chatCompletions method的高可用性.
      */
     public function testHighAvaiable()
     {
-        // 构建测试数据
+        // 构建test数据
         $expectedResponse = [
             'id' => '',
             'object' => 'chat.completion',
@@ -50,7 +50,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
             ],
         ];
 
-        // 创建一个 Parallel 实例，设置最大并发数为 10
+        // create一个 Parallel 实例，set最大并发数为 10
         $parallel = new Parallel(10);
 
         // 定义多个不同的请求场景
@@ -62,15 +62,15 @@ class ModelGatewayApiTest extends AbstractHttpTest
             ],
         ]);
 
-        // 添加并发任务
+        // 添加并发task
         $index = 0;
-        $count = 10; // 进一步减少测试数量，只要有一个成功就行
+        $count = 10; // 进一步减少test数量，只要有一个success就行
         while ($index < $count) {
             $parallel->add(function () use ($scenario, $index, $expectedResponse) {
                 try {
                     // 发送HTTP请求
                     $response = $this->json('/v1/chat/completions', $scenario, $this->getTestHeaders());
-                    // 断言结果包含预期的内容
+                    // assertresult包含预期的content
                     $this->assertArrayValueTypesEquals($expectedResponse, $response);
 
                     return [
@@ -79,7 +79,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
                         'content' => $response['choices'][0]['message']['content'] ?? '',
                     ];
                 } catch (Throwable $e) {
-                    // 直接返回失败信息，不进行重试
+                    // 直接returnfailinfo，不进行重试
                     return [
                         'success' => false,
                         'index' => $index,
@@ -90,34 +90,34 @@ class ModelGatewayApiTest extends AbstractHttpTest
             });
             ++$index;
         }
-        // 执行所有并发任务并获取结果
+        // 执行所有并发task并getresult
         $results = $parallel->wait();
-        // 统计成功和失败的请求
+        // 统计success和fail的请求
         $successCount = 0;
         foreach ($results as $result) {
             if ($result['success']) {
                 ++$successCount;
             } else {
-                // 记录失败信息，但不断言失败
+                // recordfailinfo，但不assertfail
                 echo "Request {$result['index']} failed: {$result['error']} (code: {$result['error_code']})" . PHP_EOL;
             }
         }
 
-        // 确保至少有一个请求成功
-        $this->assertGreaterThan(0, $successCount, '至少应该有一个请求成功');
+        // 确保至少有一个请求success
+        $this->assertGreaterThan(0, $successCount, '至少应该有一个请求success');
 
-        // 输出成功率
+        // 输出success率
         $successRate = ($successCount / $count) * 100;
         echo PHP_EOL;
-        echo "testHighAvaiable 请求成功率：{$successRate}% ({$successCount}/" . $count . ')' . PHP_EOL;
+        echo "testHighAvaiable 请求success率：{$successRate}% ({$successCount}/" . $count . ')' . PHP_EOL;
     }
 
     /**
-     * 测试 chatCompletions 方法的基本功能.
+     * test chatCompletions method的基本功能.
      */
     public function testChatCompletions(): void
     {
-        // 构造请求参数
+        // 构造请求parameter
         $requestData = $this->buildRequestData([
             'business_params' => [
                 'organization_id' => '000',
@@ -151,18 +151,18 @@ class ModelGatewayApiTest extends AbstractHttpTest
                 'prompt_tokens_details' => [],
             ],
         ];
-        $this->assertArrayValueTypesEquals($expectedResponse, $response, '响应结构及类型验证失败');
+        $this->assertArrayValueTypesEquals($expectedResponse, $response, '响应结构及type验证fail');
     }
 
     /**
-     * 测试 embeddings 方法的基本功能.
+     * test embeddings method的基本功能.
      */
     public function testEmbeddings(): void
     {
-        // 构造向量嵌入请求参数
+        // 构造向量嵌入请求parameter
         $requestData = [
             'model' => self::DEFAULT_MODEL,
-            'input' => '这是一个用于测试的文本',
+            'input' => '这是一个用于test的文本',
             'business_params' => [
                 'organization_id' => '000',
                 'user_id' => '9527',
@@ -194,11 +194,11 @@ class ModelGatewayApiTest extends AbstractHttpTest
                 'total_tokens' => 0,
             ],
         ];
-        $this->assertArrayValueTypesEquals($expectedResponse, $response, '响应结构及类型验证失败');
+        $this->assertArrayValueTypesEquals($expectedResponse, $response, '响应结构及type验证fail');
     }
 
     /**
-     * 提供测试用的通用消息数据.
+     * 提供test用的通用message数据.
      */
     private function getTestMessages(): array
     {
@@ -215,7 +215,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * 提供测试用的请求头.
+     * 提供test用的请求头.
      */
     private function getTestHeaders(): array
     {

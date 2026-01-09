@@ -18,15 +18,15 @@ use App\Infrastructure\Util\StringMaskUtil;
 use Hyperf\Codec\Json;
 
 /**
- * service_provider_config_id 对应的服务商+模型列表。
+ * service_provider_config_id 对应的service商+modellist。
  *
- * 同一个服务商在不同的组织下有不同的 service_provider_config_id。
- * 一个service_provider_config_id对应多个具体的模型。
+ * 同一个service商在不同的organization下有不同的 service_provider_config_id。
+ * 一个service_provider_config_id对应多个具体的model。
  */
 class ProviderConfigDTO extends AbstractDTO
 {
     /**
-     * service_provider_config_id 的值
+     * service_provider_config_id 的value
      */
     protected string $id = '';
 
@@ -41,12 +41,12 @@ class ProviderConfigDTO extends AbstractDTO
     protected string $serviceProviderId = '';
 
     /**
-     * 大模型的具体配置，ak,sk,host 之类（已脱敏）.
+     * 大model的具体configuration，ak,sk,host 之类（已脱敏）.
      */
     protected ?ProviderConfigItem $config = null;
 
     /**
-     * 已解密的配置，不进行数据脱敏处理.
+     * 已解密的configuration，不进行数据脱敏处理.
      */
     protected ?ProviderConfigItem $decryptedConfig = null;
 
@@ -61,7 +61,7 @@ class ProviderConfigDTO extends AbstractDTO
     protected bool $isModelsEnable = true;
 
     /**
-     * 为了接口兼容，固定返回空数组.
+     * 为了接口兼容，固定return空array.
      */
     protected array $models = [];
 
@@ -78,7 +78,7 @@ class ProviderConfigDTO extends AbstractDTO
         parent::__construct($data);
     }
 
-    // ===== 基础字段的Getter/Setter =====
+    // ===== 基础field的Getter/Setter =====
 
     public function getId(): string
     {
@@ -264,7 +264,7 @@ class ProviderConfigDTO extends AbstractDTO
         }
     }
 
-    // ===== 配置相关字段的Getter/Setter =====
+    // ===== configuration相关field的Getter/Setter =====
 
     public function getAlias(): string
     {
@@ -343,7 +343,7 @@ class ProviderConfigDTO extends AbstractDTO
             $this->decryptedConfig = $decryptedConfig;
         }
 
-        // 注意：已解密的配置不进行数据脱敏处理
+        // 注意：已解密的configuration不进行数据脱敏处理
     }
 
     public function getIsModelsEnable(): bool
@@ -362,7 +362,7 @@ class ProviderConfigDTO extends AbstractDTO
         }
     }
 
-    // ===== 模型相关字段的Getter/Setter =====
+    // ===== model相关field的Getter/Setter =====
 
     /**
      * @return ProviderModelDetailDTO[]

@@ -80,7 +80,7 @@ if (! function_exists('is_unit_test')) {
 if (! function_exists('camelize')) {
     /**
      * 下划线转驼峰.
-     * @param string $unCamelizeWords 需要转换的字符串
+     * @param string $unCamelizeWords 需要转换的string
      * @param string $separator 分隔符
      */
     function camelize(string $unCamelizeWords, string $separator = '_'): string
@@ -100,7 +100,7 @@ if (! function_exists('camelize')) {
 if (! function_exists('un_camelize')) {
     /**
      * 驼峰命名转下划线命名.
-     * @param string $camelCaps 需要转换的字符串
+     * @param string $camelCaps 需要转换的string
      * @param string $separator 分隔符
      */
     function un_camelize(string $camelCaps, string $separator = '_'): string
@@ -115,7 +115,7 @@ if (! function_exists('un_camelize')) {
 if (! function_exists('string_to_hump')) {
     /**
      * 下划线转成驼峰命名,默认小驼峰.
-     * @param string $string 要转换的字符串
+     * @param string $string 要转换的string
      * @param bool $firstUp 是否首字母大写,默认否
      */
     function string_to_hump(string $string, bool $firstUp = false): string
@@ -128,7 +128,7 @@ if (! function_exists('string_to_hump')) {
 if (! function_exists('string_to_line')) {
     /**
      * 驼峰命名转下划线
-     * @param string $string 要转换的字符串
+     * @param string $string 要转换的string
      */
     function string_to_line(string $string, string $separator = '_'): string
     {
@@ -138,8 +138,8 @@ if (! function_exists('string_to_line')) {
 
 if (! function_exists('array_key_to_line')) {
     /**
-     * 转换数组key成下划线
-     * @param array $array 要转换的数组
+     * 转换arraykey成下划线
+     * @param array $array 要转换的array
      */
     function array_key_to_line(array $array): array
     {
@@ -158,8 +158,8 @@ if (! function_exists('array_key_to_line')) {
 
 if (! function_exists('array_key_to_hump')) {
     /**
-     * 转换数组key成驼峰.
-     * @param array $array 要转换的数组
+     * 转换arraykey成驼峰.
+     * @param array $array 要转换的array
      */
     function array_key_to_hump(array $array, bool $firstUp = false, bool $loop = true): array
     {
@@ -247,7 +247,7 @@ if (! function_exists('calculate_elapsed_time')) {
 
 if (! function_exists('diff_day')) {
     /**
-     * 从开始时间到现在是第几天.
+     * 从开始time到现在是第几天.
      */
     function diff_day(DateTime $startTime): int
     {
@@ -257,7 +257,7 @@ if (! function_exists('diff_day')) {
 
 if (! function_exists('swoole_get_local_mac')) {
     /**
-     * 用于平替Swoole函数.
+     * 用于平替Swoolefunction.
      */
     function swoole_get_local_mac(): array
     {
@@ -406,7 +406,7 @@ if (! function_exists('get_path_by_url')) {
 }
 
 if (! function_exists('parse_json_config')) {
-    // 解析JSON配置或返回空数组
+    // 解析JSONconfiguration或return空array
     function parse_json_config(null|array|string $value): array
     {
         if (is_array($value)) {

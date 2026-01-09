@@ -45,7 +45,7 @@ class DelightfulFlowExecutor
     private ?string $rootId = null;
 
     /**
-     * 用于记录 nodes 的 next_nodes，作为 edges 的编排.
+     * 用于record nodes 的 next_nodes，作为 edges 的编排.
      */
     private array $nextNodeIds = [];
 
@@ -199,7 +199,7 @@ class DelightfulFlowExecutor
             $this->delightfulFlowEntity->getCreator()
         );
 
-        // 为了在运行中，给有需要获取当前流程的节点使用
+        // 为了在运行中，给有需要get当前流程的节点使用
         ExecutionDataCollector::add($this->executionData);
     }
 
@@ -207,7 +207,7 @@ class DelightfulFlowExecutor
     {
         $nodeDebugResult = $node->getNodeDebugResult();
         if (! $nodeDebugResult->isSuccess()) {
-            // 只要有一个节点是失败的，那么流程就是失败
+            // 只要有一个节点是fail的，那么流程就是fail
             $this->success = false;
         }
         $this->logger->info('HandledNode', [
@@ -227,9 +227,9 @@ class DelightfulFlowExecutor
         $this->archiveToCloud($vertexResult);
 
         if (! $nodeDebugResult->isSuccess()) {
-            // 如果是 API 请求，抛出错误信息
+            // 如果是 API 请求，抛出errorinfo
             if ($this->executionData->getExecutionType()->isApi()) {
-                // 如果不是助理参数调用 才记录错误信息
+                // 如果不是助理parametercall 才recorderrorinfo
                 if (! $this->executionData->getTriggerData()->isAssistantParamCall()) {
                     $errorMessage = new Message([], $this->executionData->getOriginConversationId());
                     $errorMessage->setErrorInformation($nodeDebugResult->getErrorMessage());
@@ -241,7 +241,7 @@ class DelightfulFlowExecutor
                 }
             }
 
-            // 如果需要主动抛出异常
+            // 如果需要主动抛出exception
             if ($nodeDebugResult->isThrowException()) {
                 if ($nodeDebugResult->isUnAuthorized()) {
                     throw new BusinessException($nodeDebugResult->getErrorMessage(), $nodeDebugResult->getErrorCode());
@@ -255,7 +255,7 @@ class DelightfulFlowExecutor
     {
         $result = [];
 
-        // 如果是异步调用的 API 或者 执行失败了
+        // 如果是异步call的 API 或者 执行fail了
         if ($this->executionData->getExecutionType()->isApi() || ! $this->success) {
             $result = match ($this->executionData->getTriggerType()) {
                 TriggerType::ChatMessage => [
@@ -283,7 +283,7 @@ class DelightfulFlowExecutor
             $this->updateStatus(ExecuteLogStatus::Failed, $result);
         }
 
-        // 将当前流程产生的 api 执行结果传递给上一层的数据
+        // 将当前流程产生的 api 执行result传递给上一层的数据
         if ($parentExecutionData = ExecutionDataCollector::get($this->executionData->getUniqueParentId())) {
             foreach ($this->executionData->getReplyMessages() as $replyMessage) {
                 $parentExecutionData->addReplyMessage($replyMessage);
@@ -304,7 +304,7 @@ class DelightfulFlowExecutor
         /** @var TriggerType $appointTriggerType */
         $appointTriggerType = $args['appoint_trigger_type'];
         if ($appointTriggerType === TriggerType::LoopStart) {
-            // 循环时，不能删除该数据
+            // 循环时，不能delete该数据
             return;
         }
 
@@ -340,7 +340,7 @@ class DelightfulFlowExecutor
     {
         $result = $this->delightfulFlowEntity->getCallback()($this->executionData);
         if (is_array($result)) {
-            // 得把结果赋值到结束节点上面
+            // 得把result赋value到结束节点上面
             $this->executionData->saveNodeContext($this->delightfulFlowEntity->getEndNode()->getNodeId(), $result);
         }
         if (! is_array($result)) {
@@ -426,11 +426,11 @@ class DelightfulFlowExecutor
             if ($node->getParentId()) {
                 continue;
             }
-            // 运行前就先尝试进行所有节点的参数检测，用于提前生成好 NodeParamsConfig
+            // 运行前就先尝试进行所有节点的parameter检测，用于提前生成好 NodeParamsConfig
             try {
                 $node->validate();
             } catch (Throwable $throwable) {
-                // 有些是悬浮节点（即在流程运行中不会被使用节点)，兜底会在执行时再次进行参数验证
+                // 有些是悬浮节点（即在流程运行中不会被使用节点)，兜底会在执行时再次进行parameter验证
             }
 
             $job = function (array $frontResults) use ($node): VertexResult {
@@ -455,7 +455,7 @@ class DelightfulFlowExecutor
                     }
                     $childrenIds[] = $childVertex->key;
                 }
-                // 默认是要调度下一级的，如果不需要调度，在具体的执行中可以设置为[]
+                // 默认是要调度下一级的，如果不需要调度，在具体的执行中可以set为[]
                 $vertexResult->setChildrenIds($childrenIds);
                 // 添加 flow
                 $frontResults['current_flow_entity'] = $this->delightfulFlowEntity;

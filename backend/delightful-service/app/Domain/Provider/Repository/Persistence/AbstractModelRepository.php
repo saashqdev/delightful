@@ -52,7 +52,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 根据配置ID数组获取配置实体列表.
+     * 根据configurationIDarraygetconfiguration实体list.
      * @return ProviderConfigEntity[]
      */
     public function getConfigsByIds(array $configIds): array
@@ -66,8 +66,8 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 根据多个服务商配置ID获取模型列表.
-     * @param array $configIds 服务商配置ID数组
+     * 根据多个service商configurationIDgetmodellist.
+     * @param array $configIds service商configurationIDarray
      * @return ProviderModelEntity[]
      */
     public function getModelsByServiceProviderConfigIds(array $configIds): array
@@ -83,7 +83,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 初始化实体的ID和时间戳（为新创建的实体设置）.
+     * 初始化实体的ID和time戳（为新create的实体set）.
      * @param mixed $entity
      */
     protected function initializeEntityForCreation($entity, array &$attributes): void
@@ -92,13 +92,13 @@ abstract class AbstractModelRepository extends AbstractRepository
         $nowString = $now->format('Y-m-d H:i:s');
         $id = IdGenerator::getSnowId();
 
-        // 设置实体属性
+        // set实体property
         $entity->setId($id);
         $entity->setCreatedAt($now);
         $entity->setUpdatedAt($now);
         $entity->setDeletedAt(null);
 
-        // 设置数组属性（用于数据库插入）
+        // setarrayproperty（用于database插入）
         $attributes['id'] = $id;
         $attributes['created_at'] = $nowString;
         $attributes['updated_at'] = $nowString;
@@ -106,14 +106,14 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 重写 getAttributes 方法以正确处理复杂字段的序列化.
+     * 重写 getAttributes method以正确处理复杂field的序列化.
      */
     protected function getFieldAttributes(AbstractEntity $entity): array
     {
         $attributes = [];
         $array = $entity->toArray();
         foreach ($array as $key => $value) {
-            // 对复杂字段进行特殊处理
+            // 对复杂field进行特殊处理
             if (in_array($key, ['config', 'translate'], true) && (is_array($value) || is_object($value))) {
                 $value = Json::encode($value);
             }
@@ -132,7 +132,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 准备移除软删相关功能，临时这样写。创建带有软删除过滤的 ProviderConfigModel 查询构建器.
+     * 准备移除软删相关功能，临时这样写。create带有软deletefilter的 ProviderConfigModel query构建器.
      */
     private function createConfigQuery(): Builder
     {
@@ -140,7 +140,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 准备移除软删相关功能，临时这样写。创建带有软删除过滤的 ProviderModelModel 查询构建器.
+     * 准备移除软删相关功能，临时这样写。create带有软deletefilter的 ProviderModelModel query构建器.
      */
     private function createProviderModelQuery(): Builder
     {

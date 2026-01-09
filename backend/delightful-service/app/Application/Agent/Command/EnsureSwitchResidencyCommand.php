@@ -30,14 +30,14 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
     public function configure()
     {
         parent::configure();
-        $this->setDescription('确保所有助理的开关指令都有 residency=true 属性')
-            ->addOption('test', 't', InputOption::VALUE_OPTIONAL, '测试模式：提供JSON格式的测试数据进行处理', '')
-            ->addOption('dry-run', null, InputOption::VALUE_NONE, '空运行模式：只检查但不更新到数据库');
+        $this->setDescription('确保所有助理的开关指令都有 residency=true property')
+            ->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'test模式：提供JSON格式的test数据进行处理', '')
+            ->addOption('dry-run', null, InputOption::VALUE_NONE, '空运行模式：只check但不update到database');
     }
 
     public function handle()
     {
-        // 检查是否运行在测试模式
+        // check是否运行在test模式
         $testData = $this->input->getOption('test');
         $isDryRun = $this->input->getOption('dry-run');
 
@@ -46,7 +46,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         if ($isDryRun) {
-            $this->output->writeln('<info>运行在空运行模式，将不会实际更新数据库</info>');
+            $this->output->writeln('<info>运行在空运行模式，将不会实际updatedatabase</info>');
         }
 
         $batchSize = 20;
@@ -57,23 +57,23 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $this->output->writeln('开始处理助理开关指令...');
 
         while (true) {
-            // 分批获取助理
+            // 分批get助理
             $agents = $this->agentRepository->getAgentsByBatch($offset, $batchSize);
             if (empty($agents)) {
                 break;
             }
             foreach ($agents as $agent) {
                 ++$total;
-                // 获取当前指令
+                // get当前指令
                 $instructs = $agent['instructs'] ?? [];
                 if (empty($instructs)) {
                     continue;
                 }
 
-                // 检查并修复开关指令的 residency 属性
+                // check并修复开关指令的 residency property
                 $hasChanges = $this->ensureSwitchResidency($instructs);
 
-                // 如果指令有变化，保存更新
+                // 如果指令有变化，保存update
                 if ($hasChanges) {
                     if (! $isDryRun) {
                         $this->agentRepository->updateInstruct(
@@ -83,7 +83,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         );
                     }
                     ++$updated;
-                    $this->output->writeln(sprintf('已%s助理 [%s] 的开关指令', $isDryRun ? '检测到需要更新' : '更新', $agent['id']));
+                    $this->output->writeln(sprintf('已%s助理 [%s] 的开关指令', $isDryRun ? '检测到需要update' : 'update', $agent['id']));
                 }
             }
 
@@ -94,7 +94,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $this->output->writeln(sprintf(
             '处理完成！共处理 %d 个助理，%s %d 个助理的开关指令',
             $total,
-            $isDryRun ? '发现需要更新' : '更新了',
+            $isDryRun ? '发现需要update' : 'update了',
             $updated
         ));
 
@@ -106,7 +106,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $this->output->writeln('\n开始处理助理版本开关指令...');
 
         while (true) {
-            // 分批获取助理版本
+            // 分批get助理版本
             $versions = $this->agentVersionRepository->getAgentVersionsByBatch($offset, $batchSize);
             if (empty($versions)) {
                 break;
@@ -115,16 +115,16 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
             foreach ($versions as $version) {
                 ++$versionTotal;
 
-                // 获取当前指令
+                // get当前指令
                 $instructs = $version['instructs'] ?? [];
                 if (empty($instructs)) {
                     continue;
                 }
 
-                // 检查并修复开关指令的 residency 属性
+                // check并修复开关指令的 residency property
                 $hasChanges = $this->ensureSwitchResidency($instructs);
 
-                // 如果指令有变化，保存更新
+                // 如果指令有变化，保存update
                 if ($hasChanges) {
                     if (! $isDryRun) {
                         $this->agentVersionRepository->updateById(
@@ -132,7 +132,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         );
                     }
                     ++$versionUpdated;
-                    $this->output->writeln(sprintf('已%s助理版本 [%s] 的开关指令', $isDryRun ? '检测到需要更新' : '更新', $version['id']));
+                    $this->output->writeln(sprintf('已%s助理版本 [%s] 的开关指令', $isDryRun ? '检测到需要update' : 'update', $version['id']));
                 }
             }
 
@@ -143,43 +143,43 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $this->output->writeln(sprintf(
             '处理完成！共处理 %d 个助理版本，%s %d 个助理版本的开关指令',
             $versionTotal,
-            $isDryRun ? '发现需要更新' : '更新了',
+            $isDryRun ? '发现需要update' : 'update了',
             $versionUpdated
         ));
     }
 
     /**
-     * 处理测试模式.
+     * 处理test模式.
      *
-     * @param string $testData JSON格式的测试数据
+     * @param string $testData JSON格式的test数据
      * @param bool $isDryRun 是否为空运行模式
      */
     private function handleTestMode(string $testData, bool $isDryRun): int
     {
-        $this->output->writeln('<info>运行在测试模式</info>');
+        $this->output->writeln('<info>运行在test模式</info>');
 
         try {
             $data = Json::decode($testData);
         } catch (Throwable $e) {
-            $this->output->writeln('<error>解析测试数据失败: ' . $e->getMessage() . '</error>');
+            $this->output->writeln('<error>解析test数据fail: ' . $e->getMessage() . '</error>');
             return 1;
         }
 
-        $this->output->writeln('测试数据处理开始...');
+        $this->output->writeln('test数据处理开始...');
 
         // 显示原始指令
         $this->output->writeln('<comment>原始指令:</comment>');
         $this->output->writeln(Json::encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-        // 检查并修复开关指令的 residency 属性
+        // check并修复开关指令的 residency property
         $hasChanges = $this->ensureSwitchResidency($data);
 
-        // 显示处理结果
+        // 显示处理result
         $this->output->writeln('<comment>处理后的指令:</comment>');
         $this->output->writeln(Json::encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         $this->output->writeln(sprintf(
-            '处理完成！指令集%s更新',
+            '处理完成！指令集%supdate',
             $hasChanges ? '已' : '无需'
         ));
 
@@ -187,8 +187,8 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
     }
 
     /**
-     * 确保开关指令都有 residency=true 属性.
-     * @param array &$instructs 指令数组
+     * 确保开关指令都有 residency=true property.
+     * @param array &$instructs 指令array
      * @return bool 是否有修改
      */
     private function ensureSwitchResidency(array &$instructs): bool
@@ -206,14 +206,14 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                     continue;
                 }
 
-                // 检查是否是开关指令(type = 2)
+                // check是否是开关指令(type = 2)
                 if (isset($item['type']) && (int) $item['type'] === InstructType::SWITCH->value) {
-                    // 如果没有 residency 属性，添加 residency = true
+                    // 如果没有 residency property，添加 residency = true
                     if (! isset($item['residency'])) {
                         $item['residency'] = true;
                         $hasChanges = true;
                         $this->output->writeln(sprintf(
-                            '发现开关指令 [%s](%s) 缺少 residency 属性，已添加',
+                            '发现开关指令 [%s](%s) 缺少 residency property，已添加',
                             $item['name'] ?? '未命名',
                             $item['id'] ?? '无ID'
                         ));

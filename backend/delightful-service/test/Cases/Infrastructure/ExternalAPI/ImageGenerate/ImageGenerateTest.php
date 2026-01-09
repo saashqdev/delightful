@@ -42,11 +42,11 @@ class ImageGenerateTest extends BaseTest
         }
         $header = $data[0];
         $imageData = $data[1];
-        // 检查头部是否符合Base64编码图片的格式
+        // check头部是否符合Base64编码图片的格式
         if (! preg_match('/^data:image\/(png|jpeg|jpg|gif);base64$/', $header)) {
             return false;
         }
-        // 检查Base64编码是否有效
+        // checkBase64编码是否有效
         $decodedData = base64_decode($imageData);
         return $decodedData !== false;
     }
@@ -58,7 +58,7 @@ class ImageGenerateTest extends BaseTest
         $uploadFile = new UploadFile($base64, $uploadDir, 'test');
 
         $fileDomainService = di(FileDomainService::class);
-        // 上传文件（指定不自动创建目录）
+        // 上传文件（指定不自动create目录）
         $fileDomainService->uploadByCredential('DT001', $uploadFile);
 
         // 生成可访问的链接
@@ -71,7 +71,7 @@ class ImageGenerateTest extends BaseTest
     {
         //        $this->markTestSkipped();
 
-        // 测试需要跳过
+        // test需要跳过
         $url = 'https://p9-aiop-sign.byteimg.com/tos-cn-i-vuqhorh59i/2025012317440606999C578B9234E9F5A4-0~tplv-vuqhorh59i-image.image?rk3s=7f9e702d&x-expires=1737711846&x-signature=5bkTf2E2xzRQVsDhrZZYghlJsUw%3D';
         $MiracleVisionModelRequest = new MiracleVisionModelRequest($url);
         $MiracleVisionModel = new MiracleVisionModel();
@@ -132,10 +132,10 @@ class ImageGenerateTest extends BaseTest
 
     public function testText2ImageByGPT4o()
     {
-        // 创建GPT4o模型实例
+        // createGPT4omodel实例
         $gpt4oModel = new GPT4oModel();
 
-        // 创建请求实例
+        // create请求实例
         $gpt4oModelRequest = new GPT4oModelRequest();
         $gpt4oModelRequest->setPrompt('一只小金毛正在草原上欢快的奔跑');
         $gpt4oModelRequest->setGenerateNum(4);
@@ -143,7 +143,7 @@ class ImageGenerateTest extends BaseTest
         // 生成图片
         $result = $gpt4oModel->generateImage($gpt4oModelRequest);
 
-        // 验证结果
+        // 验证result
         $this->assertNotEmpty($result);
         $this->assertEquals(ImageGenerateType::URL, $result->getImageGenerateType());
         $urls = $result->getData();
@@ -158,15 +158,15 @@ class ImageGenerateTest extends BaseTest
 
     public function testText2ImageByGPT4oWithReferenceImages()
     {
-        // 创建GPT4o模型实例
+        // createGPT4omodel实例
         $gpt4oModel = new GPT4oModel();
 
-        // 创建请求实例
+        // create请求实例
         $gpt4oModelRequest = new GPT4oModelRequest();
         $gpt4oModelRequest->setPrompt('调整一群女巫手里捧着南瓜在膜拜一个人');
         $gpt4oModelRequest->setGenerateNum(1);
 
-        // 设置参考图片
+        // set参考图片
         $gpt4oModelRequest->setReferImages([
             'https://cdn.ttapi.io/gpt/2025-04-01/0a4f0c65-c678-4e4d-a26c-ee7c50398f3f.png',
         ]);
@@ -174,7 +174,7 @@ class ImageGenerateTest extends BaseTest
         // 生成图片
         $result = $gpt4oModel->generateImage($gpt4oModelRequest);
 
-        // 验证结果
+        // 验证result
         $this->assertNotEmpty($result);
         $this->assertEquals(ImageGenerateType::URL, $result->getImageGenerateType());
         $urls = $result->getData();
@@ -195,12 +195,12 @@ class ImageGenerateTest extends BaseTest
         //
         //        $providerModelsByConfig = $di->getProviderConfig(ProviderDataIsolation::create('TGosRaFhvb'), '814826843393773568');
         //        $config = $providerModelsByConfig->getConfig();
-        //        // 创建服务提供商配置
+        //        // createservice提供商configuration
         //
-        //        // 创建通义千问模型实例
+        //        // create通义千问model实例
         //        $qwenImageModel = new QwenImageModel($config);
         //
-        //        // 创建请求实例
+        //        // create请求实例
         //        $qwenImageRequest = new QwenImageModelRequest();
         //        $qwenImageRequest->setPrompt('一只可爱的小猫咪在花园里玩耍，阳光明媚，色彩丰富，高质量摄影');
         //        $qwenImageRequest->setHeight('1328');
@@ -211,7 +211,7 @@ class ImageGenerateTest extends BaseTest
         //        // 生成图片
         //        $result = $qwenImageModel->generateImage($qwenImageRequest);
         //
-        //        // 验证结果
+        //        // 验证result
         //        $this->assertNotEmpty($result);
         //        $this->assertEquals(ImageGenerateType::URL, $result->getImageGenerateType());
         //        $urls = $result->getData();

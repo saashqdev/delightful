@@ -31,45 +31,45 @@ class ImportAgentWithFlowCommand extends HyperfCommand
         parent::__construct('agent:import');
         $this->setDescription('从OSS导入助理（包含主流程、工具、子流程等）');
         $this->addArgument('file_url', InputArgument::REQUIRED, '导出助理数据文件的URL');
-        $this->addArgument('user_id', InputArgument::REQUIRED, '用户id');
-        $this->addArgument('organization_code', InputArgument::REQUIRED, '组织编码');
+        $this->addArgument('user_id', InputArgument::REQUIRED, 'userid');
+        $this->addArgument('organization_code', InputArgument::REQUIRED, 'organization编码');
     }
 
     public function handle()
     {
         $fileUrl = $this->input->getArgument('file_url');
 
-        // 下载文件内容
+        // 下载文件content
         try {
             $client = new Client();
             $response = $client->get($fileUrl);
             $content = $response->getBody()->getContents();
 
-            // 解析JSON内容
+            // 解析JSONcontent
             $importData = json_decode($content, true);
             if (! $importData || ! is_array($importData)) {
                 $this->output->error('文件中的JSON数据无效');
                 return 1;
             }
 
-            // 从导入数据中获取组织代码和用户ID
+            // 从导入数据中getorganization代码和userID
             $orgCode = $this->input->getArgument('organization_code');
             $userId = $this->input->getArgument('user_id');
 
             if (empty($orgCode) || empty($userId)) {
-                $this->output->error('导入数据中缺少组织代码或用户ID');
+                $this->output->error('导入数据中缺少organization代码或userID');
                 return 1;
             }
 
-            // 创建数据隔离对象
+            // create数据隔离object
             $dataIsolation = new FlowDataIsolation($orgCode, $userId);
 
-            // 导入流程及助理信息
+            // 导入流程及助理info
             $result = $this->exportImportService->importFlowWithAgent($dataIsolation, $importData);
-            $this->output->success('助理导入成功。' . $result['agent_name']);
+            $this->output->success('助理导入success。' . $result['agent_name']);
             return 0;
         } catch (Throwable $e) {
-            $this->output->error("导入助理失败: {$e->getMessage()}");
+            $this->output->error("导入助理fail: {$e->getMessage()}");
             return 1;
         }
     }

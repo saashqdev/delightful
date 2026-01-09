@@ -64,24 +64,24 @@ class GoogleGeminiModel extends AbstractImageGenerate
     }
 
     /**
-     * 生成图像并返回OpenAI格式响应 - Google Gemini版本.
+     * generate图像并returnOpenAI格式响应 - Google Gemini版本.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先创建响应对象
+        // 1. 预先创建响应object
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
             'data' => [],
         ]);
 
-        // 2. 参数验证
+        // 2. parametervalidate
         if (! $imageGenerateRequest instanceof GoogleGeminiRequest) {
-            $this->logger->error('GoogleGemini OpenAI格式生图：无效的请求类型', ['class' => get_class($imageGenerateRequest)]);
-            return $response; // 返回空数据响应
+            $this->logger->error('GoogleGemini OpenAI格式生图：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
+            return $response; // returnnull数据响应
         }
 
-        // 3. 并发处理 - 直接操作响应对象
+        // 3. 并发handle - 直接操作响应object
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
@@ -93,16 +93,16 @@ class GoogleGeminiModel extends AbstractImageGenerate
                     $result = $this->requestImageGeneration($imageGenerateRequest);
                     $this->validateGoogleGeminiResponse($result);
 
-                    // 成功：设置图片数据到响应对象
+                    // success：设置图片数据到响应object
                     $this->addImageDataToResponseGemini($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // 失败：设置错误信息到响应对象（只设置第一个错误）
+                    // fail：设置error信息到响应object（只设置第一个error）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('GoogleGemini OpenAI格式生图：单个请求失败', [
+                    $this->logger->error('GoogleGemini OpenAI格式生图：单个请求fail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -113,12 +113,12 @@ class GoogleGeminiModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 4. 记录最终结果
-        $this->logger->info('GoogleGemini OpenAI格式生图：并发处理完成', [
+        $this->logger->info('GoogleGemini OpenAI格式生图：并发handlecomplete', [
             '总请求数' => $count,
-            '成功图片数' => count($response->getData()),
-            '是否有错误' => $response->hasError(),
-            '错误码' => $response->getProviderErrorCode(),
-            '错误消息' => $response->getProviderErrorMessage(),
+            'success图片数' => count($response->getData()),
+            '是否有error' => $response->hasError(),
+            'error码' => $response->getProviderErrorCode(),
+            'errormessage' => $response->getProviderErrorMessage(),
         ]);
 
         return $response;
@@ -141,7 +141,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         }
 
         if (empty($imageData)) {
-            $this->logger->error('Google Gemini文生图：所有图片生成均失败', ['rawResults' => $rawResults]);
+            $this->logger->error('Google Gemini文生图：所有图片generate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
@@ -158,7 +158,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
     protected function checkBalance(): float
     {
-        // Google Gemini API 目前没有余额查询接口，返回默认值
+        // Google Gemini API 目前没有余额query接口，return默认value
         return 999.0;
     }
 
@@ -178,7 +178,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         }
 
         try {
-            // 如果有参考图像，则执行图像编辑
+            // 如果有参考图像，则execute图像编辑
             if (! empty($referImages)) {
                 // 取第一张参考图像进行编辑
                 $referImage = $referImages[0];
@@ -193,14 +193,14 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
             return $result;
         } catch (Exception $e) {
-            $this->logger->warning('Google Gemini图片生成：调用图片生成接口失败', ['error' => $e->getMessage()]);
+            $this->logger->warning('Google Gemini图片generate：call图片generate接口fail', ['error' => $e->getMessage()]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $e->getMessage());
         }
     }
 
     private function processImageEdit(string $referImageUrl, string $instructions): array
     {
-        // 直接处理URL图像
+        // 直接handleURL图像
         $imageBase64 = $this->downloadImageAsBase64($referImageUrl);
         $mimeType = $this->detectMimeTypeFromUrl($referImageUrl);
 
@@ -214,21 +214,21 @@ class GoogleGeminiModel extends AbstractImageGenerate
             $response = $client->get($url);
 
             if ($response->getStatusCode() !== 200) {
-                throw new Exception("无法下载图像，HTTP状态码: {$response->getStatusCode()}");
+                throw new Exception("无法下载图像，HTTPstatus码: {$response->getStatusCode()}");
             }
 
             $imageContent = $response->getBody()->getContents();
             if (empty($imageContent)) {
-                throw new Exception('下载的图像内容为空');
+                throw new Exception('下载的图像内容为null');
             }
 
             return base64_encode($imageContent);
         } catch (Exception $e) {
-            $this->logger->error('Google Gemini图生图：图像下载失败', [
+            $this->logger->error('Google Gemini图生图：图像下载fail', [
                 'url' => $url,
                 'error' => $e->getMessage(),
             ]);
-            throw new Exception("下载图像失败: {$e->getMessage()}");
+            throw new Exception("下载图像fail: {$e->getMessage()}");
         }
     }
 
@@ -248,11 +248,11 @@ class GoogleGeminiModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof GoogleGeminiRequest) {
-            $this->logger->error('Google Gemini文生图：无效的请求类型', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Google Gemini文生图：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // Google Gemini API每次只能生成一张图，通过并发调用实现多图生成
+        // Google Gemini API每次只能generate一张图，通过并发callimplement多图generate
         $count = $imageGenerateRequest->getGenerateNum();
         $rawResults = [];
         $errors = [];
@@ -273,7 +273,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                         'index' => $i,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('Google Gemini文生图：图片生成失败', [
+                    $this->logger->error('Google Gemini文生图：图片generatefail', [
                         'error' => $e->getMessage(),
                         'index' => $i,
                     ]);
@@ -292,13 +292,13 @@ class GoogleGeminiModel extends AbstractImageGenerate
             if ($result['success']) {
                 $rawResults[$result['index']] = $result['data'];
             } else {
-                $errors[] = $result['error'] ?? '未知错误';
+                $errors[] = $result['error'] ?? '未知error';
             }
         }
 
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('Google Gemini文生图：所有图片生成均失败', ['errors' => $errors]);
+            $this->logger->error('Google Gemini文生图：所有图片generate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 
@@ -337,7 +337,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             try {
                 $result['imageData'] = $this->watermarkProcessor->addWatermarkToBase64($result['imageData'], $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('Google Gemini图片水印处理失败', [
+                $this->logger->error('Google Gemini图片水印handlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
@@ -348,12 +348,12 @@ class GoogleGeminiModel extends AbstractImageGenerate
     }
 
     /**
-     * 验证Google Gemini API响应数据格式.
+     * validateGoogle Gemini API响应数据格式.
      */
     private function validateGoogleGeminiResponse(array $result): void
     {
         if (! isset($result['candidates']) || ! is_array($result['candidates'])) {
-            throw new Exception('Google Gemini响应数据格式错误：缺少candidates字段');
+            throw new Exception('Google Gemini响应数据格式error：缺少candidates字段');
         }
 
         $hasValidImage = false;
@@ -369,12 +369,12 @@ class GoogleGeminiModel extends AbstractImageGenerate
         }
 
         if (! $hasValidImage) {
-            throw new Exception('Google Gemini响应数据格式错误：缺少图像数据');
+            throw new Exception('Google Gemini响应数据格式error：缺少图像数据');
         }
     }
 
     /**
-     * 将Google Gemini图片数据添加到OpenAI响应对象中（转换为URL格式）.
+     * 将Google Gemini图片数据添加到OpenAI响应object中（convert为URL格式）.
      */
     private function addImageDataToResponseGemini(
         OpenAIFormatResponse $response,
@@ -384,24 +384,24 @@ class GoogleGeminiModel extends AbstractImageGenerate
         // 使用Redis锁确保并发安全
         $lockOwner = $this->lockResponse($response);
         try {
-            // 使用现有方法提取图像数据
+            // 使用现有method提取图像数据
             $imageBase64 = $this->extractImageDataFromResponse($geminiResult);
 
             $currentData = $response->getData();
             $currentUsage = $response->getUsage() ?? new ImageUsage();
 
-            // 水印处理（会将base64转换为URL）
+            // 水印handle（会将base64convert为URL）
             $processedUrl = $imageBase64;
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToBase64($imageBase64, $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('GoogleGemini添加图片数据：水印处理失败', [
+                $this->logger->error('GoogleGemini添加图片数据：水印handlefail', [
                     'error' => $e->getMessage(),
                 ]);
-                // 水印处理失败时使用原始base64数据（但这通常不应该发生）
+                // 水印handlefail时使用原始base64数据（但这通常不应该发生）
             }
 
-            // 只返回URL格式，与其他模型保持一致
+            // 只returnURL格式，与其他模型保持一致
             $currentData[] = [
                 'url' => $processedUrl,
             ];
@@ -418,7 +418,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 $currentUsage->addGeneratedImages(1);
             }
 
-            // 更新响应对象
+            // 更新响应object
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {

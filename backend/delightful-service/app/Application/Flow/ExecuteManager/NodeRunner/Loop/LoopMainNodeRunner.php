@@ -50,7 +50,7 @@ class LoopMainNodeRunner extends NodeRunner
         }
 
         $breakVariableKey = "#{$bodyId}_break";
-        // 采用变量来初始化跳出循环配置
+        // 采用variable来初始化跳出循环configuration
         $executionData->variableSave($breakVariableKey, false);
 
         $params = $this->node->getParams();
@@ -143,12 +143,12 @@ class LoopMainNodeRunner extends NodeRunner
             return null;
         }
 
-        // 获取所有 父 id 是这个循环体的节点
+        // get所有 父 id 是这个循环体的节点
         $childNodes = $delightfulFlow->getNodesByParentId($bodyId);
         if (empty($childNodes)) {
             return null;
         }
-        // 去除父 id 属性，不然会被过滤
+        // 去除父 id property，不然会被filter
         foreach ($childNodes as $node) {
             $meta = $node->getMeta();
             $meta['parent_id'] = '';
@@ -170,7 +170,7 @@ class LoopMainNodeRunner extends NodeRunner
         } catch (Throwable $throwable) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $throwable->getMessage()]);
         }
-        // 节点内部的异常在 node 的 debug 信息中记录
+        // 节点内部的exception在 node 的 debug info中record
         foreach ($loopDelightfulFlow->getNodes() as $node) {
             if ($node->getNodeDebugResult() && ! $node->getNodeDebugResult()->isSuccess()) {
                 ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $node->getNodeDebugResult()->getErrorMessage()]);

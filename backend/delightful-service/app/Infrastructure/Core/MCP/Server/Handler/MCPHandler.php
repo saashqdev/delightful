@@ -57,7 +57,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * 获取认证接口实例.
+     * getauth接口实例.
      */
     public function getAuthentication(): AuthenticationInterface
     {
@@ -65,7 +65,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * 设置认证接口实例.
+     * setauth接口实例.
      */
     public function setAuthentication(AuthenticationInterface $authentication): self
     {
@@ -74,7 +74,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * 获取速率限制器实例.
+     * get速率限制器实例.
      */
     public function getRateLimiter(): RateLimiterInterface
     {
@@ -82,7 +82,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * 设置速率限制器实例.
+     * set速率限制器实例.
      */
     public function setRateLimiter(RateLimiterInterface $rateLimiter): self
     {
@@ -91,7 +91,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * 获取工具管理器实例.
+     * get工具管理器实例.
      */
     public function getToolManager(): MCPToolManager
     {
@@ -99,7 +99,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * 设置工具管理器实例.
+     * set工具管理器实例.
      */
     public function setToolManager(MCPToolManager $toolManager): self
     {
@@ -108,7 +108,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * 获取资源管理器实例.
+     * get资源管理器实例.
      */
     public function getResourceManager(): MCPResourceManager
     {
@@ -116,7 +116,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * 设置资源管理器实例.
+     * set资源管理器实例.
      */
     public function setResourceManager(MCPResourceManager $resourceManager): self
     {
@@ -125,7 +125,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * 获取提示管理器实例.
+     * get提示管理器实例.
      */
     public function getPromptManager(): MCPPromptManager
     {
@@ -133,7 +133,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * 设置提示管理器实例.
+     * set提示管理器实例.
      */
     public function setPromptManager(MCPPromptManager $promptManager): self
     {
@@ -149,15 +149,15 @@ class MCPHandler implements MCPHandlerInterface
 
             $this->getAuthentication()->authenticate($request);
 
-            // 获取请求的方法名称
+            // get请求的methodname
             $method = $request->getMethod();
 
-            // 创建处理器实例（短生命周期）
+            // create处理器实例（短生命周期）
             $handler = $this->methodHandlerFactory->createHandler($method);
 
             $result = null;
             if ($handler) {
-                // 为处理器设置所需的管理器组件
+                // 为处理器set所需的管理器组件
                 $handler->setToolManager($this->toolManager)
                     ->setResourceManager($this->resourceManager)
                     ->setPromptManager($this->promptManager);
@@ -177,18 +177,18 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * 获取客户端唯一标识.
+     * get客户端唯一标识.
      */
     protected function getClientId(MessageInterface $request): string
     {
         $params = $request->getParams() ?? [];
 
-        // 尝试从认证信息中获取
+        // 尝试从authinfo中get
         if (isset($params['auth'], $params['auth']['client_id'])) {
             return $params['auth']['client_id'];
         }
 
-        // 回退到会话ID
+        // 回退到sessionID
         if (isset($params['sessionId'])) {
             return $params['sessionId'];
         }

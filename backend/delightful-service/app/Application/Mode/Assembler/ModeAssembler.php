@@ -31,7 +31,7 @@ class ModeAssembler
         $groupAggregatesDTOs = [];
         foreach ($aggregate->getGroupAggregates() as $groupAggregate) {
             $groupDTO = self::groupAggregateToDTO($groupAggregate, $providerModels, $upgradeRequiredModelIds, $providerImageModels);
-            // 只有当分组下有模型或图像模型时才添加（前台过滤空分组）
+            // 只有当分组下有model或图像model时才添加（前台filter空分组）
             if (! empty($groupDTO->getModels()) || ! empty($groupDTO->getImageModels())) {
                 $groupAggregatesDTOs[] = $groupDTO;
             }
@@ -52,12 +52,12 @@ class ModeAssembler
         $dto->setGroup(self::groupEntityToDTO($groupAggregate->getGroup()));
         $locale = di(TranslatorInterface::class)->getLocale();
 
-        // 处理 LLM 模型
+        // 处理 LLM model
         $models = [];
         foreach ($groupAggregate->getRelations() as $relation) {
             $modelDTO = new ModeGroupModelDTO($relation->toArray());
 
-            // 过滤掉套餐的情况
+            // filter掉套餐的情况
             $providerModelId = $relation->getModelId();
             if (isset($providerModels[$providerModelId])) {
                 $providerModel = $providerModels[$providerModelId];
@@ -72,7 +72,7 @@ class ModeAssembler
             }
         }
 
-        // 处理 VLM 图像模型
+        // 处理 VLM 图像model
         $imageModels = [];
         foreach ($groupAggregate->getRelations() as $relation) {
             $modelDTO = new ModeGroupModelDTO($relation->toArray());
@@ -111,7 +111,7 @@ class ModeAssembler
     }
 
     /**
-     * 将ModeAggregate转换为扁平化的分组DTO数组.
+     * 将ModeAggregate转换为扁平化的分组DTOarray.
      * @param $providerModels ProviderModelEntity[]
      * @return ModeGroupDetailDTO[]
      */
@@ -125,12 +125,12 @@ class ModeAssembler
             $locale = di(TranslatorInterface::class)->getLocale();
             $modeGroupDetailDTO->setName($modeGroupEntity->getNameI18n()[$locale]);
 
-            // 设置模型信息
+            // setmodelinfo
             $models = [];
             foreach ($groupAggregate->getRelations() as $relation) {
                 $modelDTO = new ModeGroupModelDTO($relation->toArray());
 
-                // 如果提供了模型信息，则填充模型名称和图标
+                // 如果提供了modelinfo，则填充modelname和图标
                 $providerModelId = $relation->getModelId();
                 if (isset($providerModels[$providerModelId])) {
                     $providerModel = $providerModels[$providerModelId];
@@ -149,15 +149,15 @@ class ModeAssembler
                 }
             }
 
-            // 只有当分组下有模型时才添加（前台过滤空分组）
+            // 只有当分组下有model时才添加（前台filter空分组）
             if (! empty($models)) {
                 $modeGroupDetailDTO->setModels($models);
-                $modeGroupDetailDTO->sortModels(); // 对模型排序
+                $modeGroupDetailDTO->sortModels(); // 对modelsort
                 $flatGroups[] = $modeGroupDetailDTO;
             }
         }
 
-        // 对分组排序（降序，越大越前）
+        // 对分组sort（降序，越大越前）
         usort($flatGroups, function ($a, $b) {
             return $b->getSort() <=> $a->getSort();
         });

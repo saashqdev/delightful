@@ -21,8 +21,8 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * ASR 预设文件服务
- * 负责创建预设笔记和流式识别文件，供前端写入内容.
+ * ASR 预设文件service
+ * 负责create预设笔记和流式识别文件，供前端写入content.
  */
 readonly class AsrPresetFileService
 {
@@ -37,16 +37,16 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * 创建预设笔记和流式识别文件.
+     * create预设笔记和流式识别文件.
      *
-     * @param string $userId 用户ID
-     * @param string $organizationCode 组织编码
+     * @param string $userId userID
+     * @param string $organizationCode organization编码
      * @param int $projectId 项目ID
      * @param string $displayDir 显示目录相对路径 (如: 录音总结_xxx)
      * @param int $displayDirId 显示目录ID
      * @param string $hiddenDir 隐藏目录相对路径 (如: .asr_recordings/session_xxx)
      * @param int $hiddenDirId 隐藏目录ID
-     * @param string $taskKey 任务键
+     * @param string $taskKey task键
      * @return array{note_file: TaskFileEntity, transcript_file: TaskFileEntity}
      */
     public function createPresetFiles(
@@ -59,14 +59,14 @@ readonly class AsrPresetFileService
         int $hiddenDirId,
         string $taskKey
     ): array {
-        // 获取项目信息
+        // get项目info
         $projectEntity = $this->projectDomainService->getProject($projectId, $userId);
         $workDir = $projectEntity->getWorkDir();
 
-        // 获取组织码+APP_ID+bucket_md5前缀
+        // getorganization码+APP_ID+bucket_md5前缀
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($organizationCode);
 
-        // 创建笔记文件（放在显示目录，用户可见）
+        // create笔记文件（放在显示目录，user可见）
         $noteFile = $this->createNoteFile(
             $userId,
             $organizationCode,
@@ -78,7 +78,7 @@ readonly class AsrPresetFileService
             $workDir
         );
 
-        // 创建流式识别文件（放在隐藏目录，用户不可见）
+        // create流式识别文件（放在隐藏目录，user不可见）
         $transcriptFile = $this->createTranscriptFile(
             $userId,
             $organizationCode,
@@ -90,7 +90,7 @@ readonly class AsrPresetFileService
             $workDir
         );
 
-        $this->logger->info('创建预设文件成功', [
+        $this->logger->info('create预设文件success', [
             'task_key' => $taskKey,
             'note_file_id' => $noteFile->getFileId(),
             'transcript_file_id' => $transcriptFile->getFileId(),
@@ -103,10 +103,10 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * 删除笔记文件（笔记内容为空时清理）.
+     * delete笔记文件（笔记content为空时清理）.
      *
      * @param string $fileId 文件ID
-     * @return bool 是否删除成功
+     * @return bool 是否deletesuccess
      */
     public function deleteNoteFile(string $fileId): bool
     {
@@ -119,14 +119,14 @@ readonly class AsrPresetFileService
 
             $this->taskFileDomainService->deleteById($fileEntity->getFileId());
 
-            $this->logger->info('删除笔记文件成功', [
+            $this->logger->info('delete笔记文件success', [
                 'file_id' => $fileId,
                 'file_name' => $fileEntity->getFileName(),
             ]);
 
             return true;
         } catch (Throwable $e) {
-            $this->logger->error('删除笔记文件失败', [
+            $this->logger->error('delete笔记文件fail', [
                 'file_id' => $fileId,
                 'error' => $e->getMessage(),
             ]);
@@ -135,10 +135,10 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * 删除流式识别文件（总结完成后清理）.
+     * delete流式识别文件（总结完成后清理）.
      *
      * @param string $fileId 文件ID
-     * @return bool 是否删除成功
+     * @return bool 是否deletesuccess
      */
     public function deleteTranscriptFile(string $fileId): bool
     {
@@ -151,14 +151,14 @@ readonly class AsrPresetFileService
 
             $this->taskFileDomainService->deleteById($fileEntity->getFileId());
 
-            $this->logger->info('删除流式识别文件成功', [
+            $this->logger->info('delete流式识别文件success', [
                 'file_id' => $fileId,
                 'file_name' => $fileEntity->getFileName(),
             ]);
 
             return true;
         } catch (Throwable $e) {
-            $this->logger->error('删除流式识别文件失败', [
+            $this->logger->error('delete流式识别文件fail', [
                 'file_id' => $fileId,
                 'error' => $e->getMessage(),
             ]);
@@ -167,7 +167,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * 创建笔记文件（放在显示目录）.
+     * create笔记文件（放在显示目录）.
      */
     private function createNoteFile(
         string $userId,
@@ -179,7 +179,7 @@ readonly class AsrPresetFileService
         string $fullPrefix,
         string $workDir
     ): TaskFileEntity {
-        // ⚠️ 使用 CoContext 和 di() 获取正确的语言和翻译
+        // ⚠️ 使用 CoContext 和 di() get正确的语言和翻译
         $language = CoContext::getLanguage();
         $translator = di(TranslatorInterface::class);
         $translator->setLocale($language);
@@ -204,7 +204,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * 创建流式识别文件（放在隐藏目录）.
+     * create流式识别文件（放在隐藏目录）.
      */
     private function createTranscriptFile(
         string $userId,
@@ -216,7 +216,7 @@ readonly class AsrPresetFileService
         string $fullPrefix,
         string $workDir
     ): TaskFileEntity {
-        // ⚠️ 使用 CoContext 和 di() 获取正确的语言和翻译
+        // ⚠️ 使用 CoContext 和 di() get正确的语言和翻译
         $language = CoContext::getLanguage();
         $translator = di(TranslatorInterface::class);
         $translator->setLocale($language);
@@ -241,7 +241,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * 创建预设文件的通用方法.
+     * create预设文件的通用method.
      */
     private function createPresetFile(
         string $userId,
@@ -279,7 +279,7 @@ readonly class AsrPresetFileService
             'file_name' => $fileName,
             'file_extension' => 'md',
             'file_key' => $fileKey,
-            'file_size' => 0, // 初始为0，前端写入后会更新
+            'file_size' => 0, // 初始为0，前端写入后会update
             'external_url' => '',
             'storage_type' => 'workspace',
             'is_hidden' => $isHidden,
@@ -297,10 +297,10 @@ readonly class AsrPresetFileService
             return $result;
         }
 
-        // 如果插入被忽略（文件已存在），查询现有记录
+        // 如果插入被忽略（文件已存在），query现有record
         $existingFile = $this->taskFileDomainService->getByProjectIdAndFileKey($projectId, $fileKey);
         if ($existingFile !== null) {
-            $this->logger->info(sprintf('%s已存在，使用现有记录', $logPrefix), [
+            $this->logger->info(sprintf('%s已存在，使用现有record', $logPrefix), [
                 'task_key' => $taskKey,
                 'file_id' => $existingFile->getFileId(),
             ]);

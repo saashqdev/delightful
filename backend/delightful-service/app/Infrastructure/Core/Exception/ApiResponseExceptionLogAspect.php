@@ -17,12 +17,12 @@ use Throwable;
 
 #[Aspect]
 /**
- * 1.为了不让用户看到一些sql/代码异常,因此会在 config/api-response.php 的 error_exception 配置中,将意外的异常转换为统一的系统内部错误异常.
- * 2.log记录异常信息,便于排查问题.
+ * 1.为了不让user看到一些sql/代码exception,因此会在 config/api-response.php 的 error_exception configuration中,将意外的exception转换为统一的系统内部errorexception.
+ * 2.logrecordexceptioninfo,便于排查issue.
  */
 class ApiResponseExceptionLogAspect extends AbstractAspect
 {
-    // 优先级,值越小优先级越高
+    // 优先级,value越小优先级越高
     public ?int $priority = 1;
 
     public array $annotations = [
@@ -42,9 +42,9 @@ class ApiResponseExceptionLogAspect extends AbstractAspect
         try {
             return $proceedingJoinPoint->process();
         } catch (Throwable $exception) {
-            // 一些兜底异常的log打印,可能存在重复log打印,但是为了保证异常信息不丢失,所以这里不做判断.
+            // 一些兜底exception的log打印,可能存在重复log打印,但是为了保证exceptioninfo不丢失,所以这里不做判断.
             $this->logger->error(
-                __CLASS__ . ' 发生异常 message:{message}, code:{code}, file:{file}, line:{line}, trace:{trace}',
+                __CLASS__ . ' 发生exception message:{message}, code:{code}, file:{file}, line:{line}, trace:{trace}',
                 [
                     'message' => $exception->getMessage(),
                     'code' => $exception->getCode(),

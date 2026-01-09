@@ -8,12 +8,12 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\Volcengine\ValueObject;
 
 /**
- * 火山引擎语音识别状态码枚举.
+ * 火山引擎语音识别status码枚举.
  */
 enum VolcengineStatusCode: string
 {
     /**
-     * 成功 - 响应body包含转录结果.
+     * success - 响应body包含转录result.
      */
     case SUCCESS = '20000000';
 
@@ -23,7 +23,7 @@ enum VolcengineStatusCode: string
     case PROCESSING = '20000001';
 
     /**
-     * 任务在队列中 - 响应body为空.
+     * task在队列中 - 响应body为空.
      */
     case QUEUED = '20000002';
 
@@ -33,7 +33,7 @@ enum VolcengineStatusCode: string
     case SILENT_AUDIO = '20000003';
 
     /**
-     * 请求参数无效.
+     * 请求parameter无效.
      */
     case INVALID_PARAMS = '45000001';
 
@@ -48,12 +48,12 @@ enum VolcengineStatusCode: string
     case INVALID_AUDIO_FORMAT = '45000151';
 
     /**
-     * 服务器繁忙.
+     * service器繁忙.
      */
     case SERVER_BUSY = '55000031';
 
     /**
-     * 判断是否为成功状态
+     * 判断是否为successstatus
      */
     public function isSuccess(): bool
     {
@@ -61,7 +61,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否为处理中状态（包括处理中和排队中）.
+     * 判断是否为处理中status（包括处理中和排队中）.
      */
     public function isProcessing(): bool
     {
@@ -69,7 +69,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否为失败状态
+     * 判断是否为failstatus
      */
     public function isFailed(): bool
     {
@@ -77,7 +77,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否为可重试的失败状态
+     * 判断是否为可重试的failstatus
      */
     public function isRetryable(): bool
     {
@@ -85,7 +85,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否需要重新提交任务
+     * 判断是否需要重新提交task
      */
     public function needsResubmit(): bool
     {
@@ -93,24 +93,24 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 获取状态码的描述信息.
+     * getstatus码的descriptioninfo.
      */
     public function getDescription(): string
     {
         return match ($this) {
-            self::SUCCESS => '识别成功',
+            self::SUCCESS => '识别success',
             self::PROCESSING => '正在处理中',
-            self::QUEUED => '任务在队列中',
+            self::QUEUED => 'task在队列中',
             self::SILENT_AUDIO => '静音音频',
-            self::INVALID_PARAMS => '请求参数无效',
+            self::INVALID_PARAMS => '请求parameter无效',
             self::EMPTY_AUDIO => '空音频',
             self::INVALID_AUDIO_FORMAT => '音频格式不正确',
-            self::SERVER_BUSY => '服务器繁忙',
+            self::SERVER_BUSY => 'service器繁忙',
         };
     }
 
     /**
-     * 根据状态码字符串创建枚举实例.
+     * 根据status码stringcreate枚举实例.
      */
     public static function fromString(string $statusCode): ?self
     {
@@ -118,7 +118,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断是否为服务内部错误（550xxxx系列）.
+     * 判断是否为service内部error（550xxxx系列）.
      */
     public static function isInternalServerError(string $statusCode): bool
     {

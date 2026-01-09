@@ -21,7 +21,7 @@ use Hyperf\Codec\Json;
 use InvalidArgumentException;
 
 /**
- * 消息的内容详情. 一条消息可能被多个会话/序列号关联，所以消息内容是独立的.
+ * message的content详情. 一条message可能被多个session/序列号关联，所以messagecontent是独立的.
  */
 class DelightfulMessageEntity extends AbstractEntity
 {
@@ -30,24 +30,24 @@ class DelightfulMessageEntity extends AbstractEntity
     protected string $senderId = '';
 
     /**
-     * 发送方类型. user:用户(ai也被认为是用户)，group：群聊，system：系统消息，cloud_document：云文档，multidimensional_table：多维表格 topic：话题 app：应用消息.
+     * 发送方type. user:user(ai也被认为是user)，group：群聊，system：系统message，cloud_document：云文档，multidimensional_table：多维table格 topic：话题 app：应用message.
      */
     protected ConversationType $senderType;
 
     /**
-     * 发送者所属组织编码.
+     * 发送者所属organization编码.
      */
     protected string $senderOrganizationCode = '';
 
     protected string $receiveId = '';
 
     /**
-     * 接收对象类型. user:用户(ai也被认为是用户)，group：群聊，system：系统消息，cloud_document：云文档，multidimensional_table：多维表格 topic：话题 app：应用消息.
+     * 接收objecttype. user:user(ai也被认为是user)，group：群聊，system：系统message，cloud_document：云文档，multidimensional_table：多维table格 topic：话题 app：应用message.
      * @see UserType
      */
     protected ConversationType $receiveType;
 
-    // 收件人组织编码
+    // 收件人organization编码
     protected string $receiveOrganizationCode = '';
 
     protected string $appMessageId = '';
@@ -58,7 +58,7 @@ class DelightfulMessageEntity extends AbstractEntity
 
     protected string $sendTime = '';
 
-    // 创建/修改/删除时间
+    // create/修改/deletetime
     protected string $createdAt = '';
 
     protected string $updatedAt = '';

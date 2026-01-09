@@ -106,14 +106,14 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
 
     public function saveModel(ProviderDataIsolation $dataIsolation, SaveProviderModelDTO $dto): ProviderModelEntity
     {
-        // 设置组织编码（优先使用DTO中的组织编码，否则使用当前数据隔离中的）
+        // 设置organization编码（优先使用DTO中的organization编码，否则使用当前数据隔离中的）
         $dto->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
 
         $data = $dto->toArray();
         $entity = new ProviderModelEntity($data);
 
         if ($dto->getId()) {
-            // 准备更新数据，只包含有变化的字段
+            // 准备更新数据，只contain有变化的字段
             $updateData = $this->serializeEntityToArray($entity);
             $updateData['updated_at'] = date('Y-m-d H:i:s');
             $success = ProviderModelModel::query()
@@ -123,18 +123,18 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             if ($success === 0) {
                 ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
             }
-            // 先查询数据库现有的实体
+            // 先query数据库现有的实体
             return $this->getById($dataIsolation, $dto->getId());
         }
         return $this->create($dataIsolation, $entity);
     }
 
     /**
-     * 更新模型状态（支持写时复制逻辑）.
+     * 更新模型status（支持写时复制逻辑）.
      */
     public function updateStatus(ProviderDataIsolation $dataIsolation, string $id, Status $status): void
     {
-        // 1. 按 id 查询模型是否存在（不限制组织）
+        // 1. 按 id query模型是否存在（不限制organization）
         $model = $this->getModelByIdWithoutOrgFilter($id);
         if (! $model) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
@@ -143,12 +143,12 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $currentOrganizationCode = $dataIsolation->getCurrentOrganizationCode();
         $modelOrganizationCode = $model->getOrganizationCode();
 
-        // 2. 判断模型的所属组织是否与当前组织一致
+        // 2. 判断模型的所属organization是否与当前organization一致
         if ($modelOrganizationCode !== $currentOrganizationCode) {
-            // 组织不一致：判断模型所属组织是否是官方组织
+            // organization不一致：判断模型所属organization是否是官方organization
             if ($this->isOfficialOrganization($modelOrganizationCode)
                 && ! $this->isOfficialOrganization($currentOrganizationCode)) {
-                // 模型属于官方组织且当前组织不是官方组织：走写时复制逻辑
+                // 模型属于官方organization且当前organization不是官方organization：走写时复制逻辑
                 $organizationModelId = $this->delightfulProviderAndModels->updateDelightfulModelStatus($dataIsolation, $model);
             } else {
                 // 其他情况：无权限操作
@@ -157,7 +157,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         } else {
             $organizationModelId = $id;
         }
-        // 3. 更新组织模型状态
+        // 3. 更新organization模型status
         $this->updateStatusDirect($dataIsolation, $organizationModelId, $status);
     }
 
@@ -184,12 +184,12 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId, ProviderEntity $providerEntity): array
     {
-        // 如果是官方服务商，需要进行数据合并和状态判断
+        // 如果是官方服务商，需要进行数据merge和status判断
         if ($providerEntity->getProviderCode() === ProviderCode::Official && ! OfficialOrganizationUtil::isOfficialOrganization($dataIsolation->getCurrentOrganizationCode())) {
             return $this->delightfulProviderAndModels->getDelightfulEnableModels($dataIsolation->getCurrentOrganizationCode(), $providerEntity->getCategory());
         }
 
-        // 非官方服务商，按原逻辑查询指定配置下的模型
+        // 非官方服务商，按原逻辑query指定配置下的模型
         if (! is_numeric($configId)) {
             return [];
         }
@@ -202,16 +202,16 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 获取组织可用模型列表（包含组织自己的模型和Delightful模型）.
-     * @param ProviderDataIsolation $dataIsolation 数据隔离对象
-     * @param null|Category $category 模型分类，为空时返回所有分类模型
-     * @return ProviderModelEntity[] 按sort降序排序的模型列表，包含组织模型和Delightful模型（不去重）
+     * 获取organization可用模型列表（containorganization自己的模型和Delightful模型）.
+     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param null|Category $category 模型分类，为null时return所有分类模型
+     * @return ProviderModelEntity[] 按sort降序sort的模型列表，containorganization模型和Delightful模型（不去重）
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, ?Status $status = Status::Enabled): array
     {
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // 生成缓存键
+        // generate缓存键
         $cacheKey = sprintf('provider_models:available:%s:%s', $organizationCode, $category->value ?? 'all');
 
         // 尝试从缓存获取
@@ -219,7 +219,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $cachedData = $redis->get($cacheKey);
 
         if ($cachedData !== false) {
-            // 从缓存恢复实体对象
+            // 从缓存恢复实体object
             $modelsArray = Json::decode($cachedData);
             $allModels = [];
             foreach ($modelsArray as $modelData) {
@@ -228,8 +228,8 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             return $allModels;
         }
 
-        // 缓存未命中，执行原逻辑
-        // 1. 先查询组织下启用的服务商配置ID
+        // 缓存未命中，execute原逻辑
+        // 1. 先queryorganization下启用的服务商配置ID
         $builder = ProviderConfigModel::query();
 
         if ($status !== null) {
@@ -243,17 +243,17 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $enabledConfigIds = Db::select($enabledConfigQuery->toSql(), $enabledConfigQuery->getBindings());
         $enabledConfigIdArray = array_column($enabledConfigIds, 'id');
 
-        // 2. 使用启用的配置ID查询组织自己的启用模型
+        // 2. 使用启用的配置IDqueryorganization自己的启用模型
         $organizationModels = [];
         if (! empty($enabledConfigIdArray)) {
             $organizationModelsBuilder = $this->createProviderModelQuery()
                 ->where('organization_code', $organizationCode)
                 ->whereIn('service_provider_config_id', $enabledConfigIdArray);
             if (! OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
-                // 查询普通组织自己的模型。 官方组织的模型现在 model_parent_id 等于它自己，需要洗数据。
+                // query普通organization自己的模型。 官方organization的模型现在 model_parent_id 等于它自己，需要洗数据。
                 $organizationModelsBuilder->where('model_parent_id', 0);
             }
-            // 如果指定了分类，添加分类过滤条件
+            // 如果指定了分类，添加分类filtercondition
             if ($category !== null) {
                 $organizationModelsBuilder->where('category', $category->value);
             }
@@ -266,26 +266,26 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             $organizationModels = ProviderModelAssembler::toEntities($organizationModelsResult);
         }
 
-        // 3. 获取Delightful模型（如果不是官方组织）
+        // 3. 获取Delightful模型（如果不是官方organization）
         $delightfulModels = [];
         if (! OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
             $delightfulModels = $this->delightfulProviderAndModels->getDelightfulEnableModels($organizationCode, $category);
         }
 
-        // 4. 直接合并模型列表，不去重
+        // 4. 直接merge模型列表，不去重
         $allModels = array_merge($organizationModels, $delightfulModels);
 
-        // 5. 按sort降序排序
+        // 5. 按sort降序sort
         usort($allModels, static function ($a, $b) {
             return $b->getSort() <=> $a->getSort();
         });
-        // 6. 过滤状态
+        // 6. filterstatus
         if ($status !== null) {
             $allModels = array_filter($allModels, static function (ProviderModelEntity $model) use ($status) {
                 return $model->getStatus() === $status;
             });
         }
-        // 7. 转为数组并缓存结果，缓存10秒
+        // 7. 转为array并缓存结果，缓存10秒
         $modelsArray = [];
         foreach ($allModels as $model) {
             $modelsArray[] = $model->toArray();
@@ -307,7 +307,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
 
         $entities = ProviderModelAssembler::toEntities($result);
 
-        // 转换为以ID为键的数组
+        // convert为以ID为键的array
         $modelsById = [];
         foreach ($entities as $entity) {
             $modelsById[(string) $entity->getId()] = $entity;
@@ -324,13 +324,13 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
 
         $builder = $this->createBuilder($dataIsolation, ProviderModelModel::query())
             ->whereIn('model_id', $modelIds)
-            ->orderBy('status', 'desc') // 优先排序：启用状态在前
-            ->orderBy('id'); // 其次按ID排序，保证结果一致性
+            ->orderBy('status', 'desc') // 优先sort：启用status在前
+            ->orderBy('id'); // 其次按IDsort，保证结果一致性
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
         $entities = ProviderModelAssembler::toEntities($result);
 
-        // 转换为以model_id为键的数组，保留所有模型
+        // convert为以model_id为键的array，保留所有模型
         $modelsByModelId = [];
         foreach ($entities as $entity) {
             $modelId = $entity->getModelId();
@@ -344,7 +344,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 根据ID查询模型（不限制组织）.
+     * 根据IDquery模型（不限制organization）.
      */
     public function getModelByIdWithoutOrgFilter(string $id): ?ProviderModelEntity
     {
@@ -391,17 +391,17 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 根据查询条件获取按模型类型分组的模型ID列表.
+     * 根据querycondition获取按模型typegroup的模型ID列表.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离对象
-     * @param ProviderModelQuery $query 查询条件
-     * @return array<string, array<string>> 按模型类型分组的模型ID数组，格式: [modelType => [model_id, model_id]]
+     * @param ProviderDataIsolation $dataIsolation 数据隔离object
+     * @param ProviderModelQuery $query querycondition
+     * @return array<string, array<string>> 按模型typegroup的模型IDarray，格式: [modelType => [model_id, model_id]]
      */
     public function getModelIdsGroupByType(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query): array
     {
         $builder = $this->createBuilder($dataIsolation, ProviderModelModel::query());
 
-        // 应用查询条件
+        // applicationquerycondition
         if (! is_null($query->getModelIds())) {
             $builder->whereIn('model_id', $query->getModelIds());
         }
@@ -415,7 +415,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         // 选择 model_id 和 model_type 字段
         $builder->select('model_id', 'model_type');
 
-        // 应用排序
+        // applicationsort
         if (! empty($query->getOrder())) {
             foreach ($query->getOrder() as $field => $direction) {
                 $builder->orderBy($field, $direction);
@@ -424,7 +424,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
 
-        // 按模型类型分组，并去重模型ID
+        // 按模型typegroup，并去重模型ID
         $groupedResults = [];
         foreach ($result as $row) {
             $modelType = $row['model_type'];
@@ -444,7 +444,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 直接更新模型状态.
+     * 直接更新模型status.
      */
     private function updateStatusDirect(ProviderDataIsolation $dataIsolation, string $id, Status $status): void
     {
@@ -453,7 +453,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 准备移除软删相关功能，临时这样写。创建带有软删除过滤的 ProviderModelModel 查询构建器.
+     * 准备移除软删相关功能，临时这样写。创建带有软删除filter的 ProviderModelModel query构建器.
      */
     private function createProviderModelQuery(): Builder
     {
@@ -462,7 +462,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 是否是官方组织.
+     * 是否是官方organization.
      */
     private function isOfficialOrganization(string $organizationCode): bool
     {

@@ -14,9 +14,9 @@ use App\Domain\Contact\Service\DelightfulDepartmentUserDomainService;
 use App\Domain\Contact\Service\DelightfulUserDomainService;
 
 /**
- * Delightful用户信息应用服务.
+ * Delightfuluserinfo应用service.
  *
- * 聚合用户的基本信息、账户信息和部门信息，提供完整的用户信息。
+ * 聚合user的基本info、账户info和departmentinfo，提供完整的userinfo。
  */
 class DelightfulUserInfoAppService extends AbstractAppService
 {
@@ -29,27 +29,27 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * 获取完整的用户信息.
+     * get完整的userinfo.
      *
-     * @param string $userId 用户ID
-     * @param ContactDataIsolation $dataIsolation 数据隔离对象
-     * @return array 包含用户完整信息的数组
+     * @param string $userId userID
+     * @param ContactDataIsolation $dataIsolation 数据隔离object
+     * @return array 包含user完整info的array
      */
     public function getUserInfo(string $userId, ContactDataIsolation $dataIsolation): array
     {
-        // 获取基本用户信息
+        // get基本userinfo
         $userEntity = $this->userDomainService->getUserById($userId);
         if (! $userEntity) {
             return $this->getEmptyUserInfo($userId);
         }
 
-        // 获取账户信息
+        // get账户info
         $accountEntity = null;
         if ($userEntity->getDelightfulId()) {
             $accountEntity = $this->accountDomainService->getAccountInfoByDelightfulId($userEntity->getDelightfulId());
         }
 
-        // 获取部门用户关联信息
+        // getdepartmentuser关联info
         $departmentUserEntities = $this->departmentUserDomainService->getDepartmentUsersByUserIds([$userId], $dataIsolation);
 
         // 提取工号和职位
@@ -61,7 +61,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
             $position = $firstDepartmentUser->getJobTitle() ?? '';
         }
 
-        // 获取部门详细信息
+        // getdepartment详细info
         $departments = $this->getDepartmentsInfo($departmentUserEntities, $dataIsolation);
 
         return [
@@ -76,11 +76,11 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * 批量获取用户信息.
+     * 批量getuserinfo.
      *
-     * @param array $userIds 用户ID数组
-     * @param ContactDataIsolation $dataIsolation 数据隔离对象
-     * @return array 用户信息数组，键为用户ID
+     * @param array $userIds userIDarray
+     * @param ContactDataIsolation $dataIsolation 数据隔离object
+     * @return array userinfoarray，键为userID
      */
     public function getBatchUserInfo(array $userIds, ContactDataIsolation $dataIsolation): array
     {
@@ -92,10 +92,10 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * 检查用户是否存在.
+     * checkuser是否存在.
      *
-     * @param string $userId 用户ID
-     * @return bool 用户是否存在
+     * @param string $userId userID
+     * @return bool user是否存在
      */
     public function userExists(string $userId): bool
     {
@@ -104,11 +104,11 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * 获取用户的主要部门信息.
+     * getuser的主要departmentinfo.
      *
-     * @param string $userId 用户ID
-     * @param ContactDataIsolation $dataIsolation 数据隔离对象
-     * @return null|array 主要部门信息，如果没有则返回null
+     * @param string $userId userID
+     * @param ContactDataIsolation $dataIsolation 数据隔离object
+     * @return null|array 主要departmentinfo，如果没有则returnnull
      */
     public function getUserPrimaryDepartment(string $userId, ContactDataIsolation $dataIsolation): ?array
     {
@@ -117,11 +117,11 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * 获取部门信息.
+     * getdepartmentinfo.
      *
-     * @param array $departmentUserEntities 部门用户关联信息
-     * @param ContactDataIsolation $dataIsolation 数据隔离对象
-     * @return array 部门信息数组
+     * @param array $departmentUserEntities departmentuser关联info
+     * @param ContactDataIsolation $dataIsolation 数据隔离object
+     * @return array departmentinfoarray
      */
     private function getDepartmentsInfo(array $departmentUserEntities, ContactDataIsolation $dataIsolation): array
     {
@@ -129,11 +129,11 @@ class DelightfulUserInfoAppService extends AbstractAppService
             return [];
         }
 
-        // 获取部门ID
+        // getdepartmentID
         $departmentIds = array_column($departmentUserEntities, 'department_id');
         $departments = $this->departmentDomainService->getDepartmentByIds($dataIsolation, $departmentIds, true);
 
-        // 构建部门数组
+        // 构建departmentarray
         $departmentArray = [];
         foreach ($departmentUserEntities as $departmentUserEntity) {
             $departmentEntity = $departments[$departmentUserEntity->getDepartmentId()] ?? null;
@@ -141,7 +141,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
                 continue;
             }
 
-            // 获取路径部门
+            // get路径department
             $pathNames = [];
             $pathDepartments = explode('/', $departmentEntity->getPath());
             $pathDepartmentEntities = $this->departmentDomainService->getDepartmentByIds($dataIsolation, $pathDepartments, true);
@@ -163,10 +163,10 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * 构建空的用户信息.
+     * 构建空的userinfo.
      *
-     * @param string $userId 用户ID
-     * @return array 空的用户信息数组
+     * @param string $userId userID
+     * @return array 空的userinfoarray
      */
     private function getEmptyUserInfo(string $userId): array
     {

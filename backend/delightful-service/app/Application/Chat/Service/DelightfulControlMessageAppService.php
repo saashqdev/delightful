@@ -23,7 +23,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Throwable;
 
 /**
- * 控制消息相关.
+ * 控制message相关.
  */
 class DelightfulControlMessageAppService extends DelightfulSeqAppService
 {
@@ -38,7 +38,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * 根据客户端发来的控制消息类型,分发到对应的处理模块.
+     * 根据客户端发来的控制messagetype,分发到对应的处理模块.
      * @throws Throwable
      */
     public function dispatchClientControlMessage(DelightfulMessageEntity $messageDTO, DelightfulUserAuthorization $userAuthorization): ?array
@@ -51,30 +51,30 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         return match ($controlType) {
             ControlMessageType::CreateConversation,
             ControlMessageType::OpenConversation => $this->conversationDomainService->openConversationWindow($messageDTO, $dataIsolation),
-            // 置顶,隐藏,免打扰会话
+            // 置顶,隐藏,免打扰session
             ControlMessageType::HideConversation,
             ControlMessageType::MuteConversation,
             ControlMessageType::TopConversation => $this->conversationDomainService->conversationOptionChange($messageDTO, $dataIsolation),
-            // 撤回,已读,已读回执,编辑消息
+            // 撤回,已读,已读回执,编辑message
             ControlMessageType::SeenMessages,
             ControlMessageType::ReadMessage,
             ControlMessageType::RevokeMessage,
             ControlMessageType::EditMessage => $this->controlDomainService->clientOperateMessageStatus($messageDTO, $dataIsolation),
-            // 创建,更新,删除,设置话题
+            // create,update,delete,set话题
             ControlMessageType::CreateTopic,
             ControlMessageType::UpdateTopic,
             ControlMessageType::DeleteTopic, => $this->clientOperateTopicMessage($messageDTO, $dataIsolation),
-            // （单聊的会话窗口中）开始输入/结束输入
+            // （单聊的session窗口中）开始输入/结束输入
             ControlMessageType::StartConversationInput,
             ControlMessageType::EndConversationInput => $this->conversationDomainService->clientOperateConversationStatus($messageDTO, $dataIsolation),
-            // 设置会话话题，准备废弃
+            // setsession话题，准备废弃
             ControlMessageType::SetConversationTopic => [],
             default => ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR),
         };
     }
 
     /**
-     * 分发异步消息队列中的seq.
+     * 分发异步message队列中的seq.
      * 比如根据发件方的seq,为收件方生成seq,投递seq.
      * @throws Throwable
      */
@@ -84,12 +84,12 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         switch ($controlMessageType) {
             case ControlMessageType::SeenMessages:
             case ControlMessageType::ReadMessage:
-                // 已读回执等场景,根据一条控制消息,生成其他人的seq.
+                // 已读回执等场景,根据一条控制message,生成其他人的seq.
                 $this->controlDomainService->handlerMQReceiptSeq($delightfulSeqEntity);
                 break;
             case ControlMessageType::RevokeMessage:
             case ControlMessageType::EditMessage:
-                // 撤回消息,编辑消息等场景
+                // 撤回message,编辑message等场景
                 $this->controlDomainService->handlerMQUserSelfMessageChange($delightfulSeqEntity);
                 break;
             case ControlMessageType::CreateTopic:
@@ -112,24 +112,24 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
 
     public function clientOperateInstructMessage(DelightfulMessageEntity $messageEntity, string $conversationId): ?array
     {
-        // 给自己的消息流生成序列.
+        // 给自己的message流生成序列.
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageEntity, $conversationId);
-        // 异步将生成的消息流通知用户的其他设备.
+        // 异步将生成的message流通知user的其他设备.
         $this->controlDomainService->pushControlSequence($seqEntity);
-        // 将消息流返回给当前客户端! 但是还是会异步推送给用户的所有在线客户端.
+        // 将message流return给当前客户端! 但是还是会异步推送给user的所有在线客户端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 
     private function clientOperateTopicMessage(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
         $conversationId = $this->topicDomainService->clientOperateTopic($messageDTO, $dataIsolation);
-        // 给自己的消息流生成序列.
+        // 给自己的message流生成序列.
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageDTO, $conversationId);
-        // 异步将生成的消息流通知用户的其他设备.
+        // 异步将生成的message流通知user的其他设备.
         $seqCreatedEvent = $this->controlDomainService->pushControlSequence($seqEntity);
-        // 异步分发控制消息,对方操作了会话的话题
+        // 异步分发控制message,对方操作了session的话题
         $this->controlDomainService->dispatchSeq($seqCreatedEvent);
-        // 将消息流返回给当前客户端! 但是还是会异步推送给用户的所有在线客户端.
+        // 将message流return给当前客户端! 但是还是会异步推送给user的所有在线客户端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 

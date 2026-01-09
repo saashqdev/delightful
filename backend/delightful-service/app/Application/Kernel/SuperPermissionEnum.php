@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\Kernel;
 
 /**
- * 跨组织的超级权限枚举类.
+ * 跨organization的超级permission枚举类.
  */
 enum SuperPermissionEnum: string
 {
@@ -21,22 +21,22 @@ enum SuperPermissionEnum: string
     // （第三方平台的）助理管理员
     case ASSISTANT_ADMIN = 'assistant_admin';
 
-    // 大模型配置管理
+    // 大modelconfiguration管理
     case MODEL_CONFIG_ADMIN = 'model_config_admin';
 
-    // 隐藏部门或者用户
+    // 隐藏department或者user
     case HIDE_USER_OR_DEPT = 'hide_user_or_dept';
 
-    // 特权发消息
+    // 特权发message
     case PRIVILEGE_SEND_MESSAGE = 'privilege_send_message';
 
     // 麦吉多环境管理
     case DELIGHTFUL_ENV_MANAGEMENT = 'delightful_env_management';
 
-    // 服务商的管理员
+    // service商的管理员
     case SERVICE_PROVIDER_ADMIN = 'service_provider_admin';
 
-    // 超级麦吉邀请使用用户
+    // 超级麦吉邀请使用user
     case SUPER_INVITE_USER = 'be_delightful_invite_use_user';
 
     // 超级麦吉看板管理人员

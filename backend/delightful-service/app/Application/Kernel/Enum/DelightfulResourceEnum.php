@@ -12,37 +12,37 @@ use function Hyperf\Translation\__;
 /**
  * Delightful 资源枚举.
  *
- * 1. 使用 Backed Enum 将每个资源映射为唯一字符串 key。
- * 2. 通过方法提供 label / parent  等元信息，方便后续生成权限树、做 i18n 等。
- * 3. 仅定义资源本身，不涉及操作类型（如 query / edit）。
+ * 1. 使用 Backed Enum 将每个资源映射为唯一string key。
+ * 2. 通过method提供 label / parent  等元info，方便后续生成permission树、做 i18n 等。
+ * 3. 仅定义资源本身，不涉及操作type（如 query / edit）。
  *
- * 注意：如果你修改了这个文件，请执行单元测试 PermissionApiTest.testGetPermissionTree.
+ * 注意：如果你修改了这个文件，请执行单元test PermissionApiTest.testGetPermissionTree.
  */
 enum DelightfulResourceEnum: string
 {
     // ===== 顶级 =====
     case PLATFORM = 'platform'; # 平台管理后台
-    case ADMIN = 'admin'; # 组织管理后台
-    case ADMINPLUS = 'admin_plus'; # 组织管理后台plus
+    case ADMIN = 'admin'; # organization管理后台
+    case ADMINPLUS = 'admin_plus'; # organization管理后台plus
 
     // ===== 二级：模块 =====
     case ADMIN_AI = 'admin.ai'; # 平台管理后台-AI管理
     case ADMIN_SAFE = 'admin.safe'; # 安全管控
     case PLATFORM_AI = 'platform.ai'; # 平台管理后台-AI管理
-    case PLATFORM_SETTING = 'platform.setting'; # 系统设置
-    case PLATFORM_ORGANIZATION = 'platform.organization'; # 组织管理
-    case ADMINPLUS_AI = 'admin_plus.ai'; # 组织管理后台plus-AI管理
+    case PLATFORM_SETTING = 'platform.setting'; # 系统set
+    case PLATFORM_ORGANIZATION = 'platform.organization'; # organization管理
+    case ADMINPLUS_AI = 'admin_plus.ai'; # organization管理后台plus-AI管理
 
     // ===== 三级：具体资源 (用于具体绑定接口）=====
-    case ADMIN_AI_MODEL = 'platform.ai.model_management'; # AI管理-模型管理
+    case ADMIN_AI_MODEL = 'platform.ai.model_management'; # AI管理-model管理
     case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AI管理-智能绘图管理
     case ADMIN_AI_MODE = 'platform.ai.mode_management'; # AI管理-模式管理管理
     case ADMIN_AI_ABILITY = 'platform.ai.ability'; # AI管理-能力管理
     case SAFE_SUB_ADMIN = 'admin.safe.sub_admin';  # 安全管控-子管理员
-    case PLATFORM_SETTING_PLATFORM_INFO = 'platform.setting.platform_info'; # 平台管理 - 系统设置 - 平台信息
-    case PLATFORM_SETTING_MAINTENANCE = 'platform.setting.maintenance'; # 平台管理 - 系统信息 - 维护管理
-    case PLATFORM_ORGANIZATION_LIST = 'platform.organization.list'; # 平台管理 - 组织管理 - 组织列表
-    case ADMINPLUS_AI_MODEL = 'admin_plus.ai.model_management'; # 组织管理后台plus-AI管理-模型管理
+    case PLATFORM_SETTING_PLATFORM_INFO = 'platform.setting.platform_info'; # 平台管理 - 系统set - 平台info
+    case PLATFORM_SETTING_MAINTENANCE = 'platform.setting.maintenance'; # 平台管理 - 系统info - 维护管理
+    case PLATFORM_ORGANIZATION_LIST = 'platform.organization.list'; # 平台管理 - organization管理 - organizationlist
+    case ADMINPLUS_AI_MODEL = 'admin_plus.ai.model_management'; # organization管理后台plus-AI管理-model管理
 
     /**
      * 对应 i18n key.
@@ -54,7 +54,7 @@ enum DelightfulResourceEnum: string
             self::ADMIN => 'permission.resource.admin',
             self::ADMIN_AI => 'permission.resource.admin_ai',
             self::ADMINPLUS_AI => 'permission.resource.admin_plus_ai',
-            self::ADMIN_SAFE => 'permission.resource.admin_safe', # 安全与权限
+            self::ADMIN_SAFE => 'permission.resource.admin_safe', # 安全与permission
             self::ADMIN_AI_MODEL => 'permission.resource.ai_model',
             self::ADMINPLUS_AI_MODEL => 'permission.resource.ai_model',
             self::ADMIN_AI_IMAGE => 'permission.resource.ai_image',
@@ -73,7 +73,7 @@ enum DelightfulResourceEnum: string
 
     /**
      * 上级资源.
-     * 注意：新增操作资源后要补充这个配置.
+     * 注意：新增操作资源后要补充这个configuration.
      */
     public function parent(): ?self
     {
@@ -108,9 +108,9 @@ enum DelightfulResourceEnum: string
     }
 
     /**
-     * 返回与该资源绑定的 Operation Enum 类名。
+     * return与该资源绑定的 Operation Enum 类名。
      * 默认使用 DelightfulOperationEnum。
-     * 如需为特定资源自定义操作集，可在此返回自定义 Enum::class。
+     * 如需为特定资源自定义操作集，可在此return自定义 Enum::class。
      */
     public function operationEnumClass(): string
     {

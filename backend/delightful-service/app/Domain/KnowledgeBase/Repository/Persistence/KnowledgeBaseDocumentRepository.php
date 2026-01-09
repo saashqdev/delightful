@@ -33,7 +33,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 创建知识库文档.
+     * create知识库文档.
      */
     public function create(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentEntity $documentEntity): KnowledgeBaseDocumentEntity
     {
@@ -41,7 +41,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
         $attributes = $this->prepareAttributes($documentEntity);
         $attributes['organization_code'] = $dataIsolation->getCurrentOrganizationCode();
 
-        // 创建模型并保存
+        // createmodel并保存
         $model = new KnowledgeBaseDocumentModel();
         $model->fill($attributes);
         $model->save();
@@ -56,7 +56,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             $attrs['organization_code'] = $documentEntity->getOrganizationCode();
             $attrs['created_at'] = date('Y-m-d H:i:s');
             $attrs['updated_at'] = date('Y-m-d H:i:s');
-            // 将数组类型的字段转换为 JSON 字符串
+            // 将arraytype的field转换为 JSON string
             foreach ($attrs as $key => $attr) {
                 if (is_array($attr)) {
                     $attrs[$key] = Json::encode($attr);
@@ -77,7 +77,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
         $attributes = $this->prepareAttributes($documentEntity);
         $attributes['organization_code'] = $dataIsolation->getCurrentOrganizationCode();
 
-        // 创建模型并保存
+        // createmodel并保存
         $model = KnowledgeBaseDocumentModel::withTrashed()
             ->firstOrCreate(
                 [
@@ -86,7 +86,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
                 ],
                 $attributes
             );
-        // 如果是软删除的，则恢复
+        // 如果是软delete的，则恢复
         if ($model->trashed()) {
             $model->restore();
             $model->fill($attributes)->save();
@@ -96,7 +96,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 更新知识库文档.
+     * update知识库文档.
      */
     public function update(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentEntity $documentEntity): KnowledgeBaseDocumentEntity
     {
@@ -108,7 +108,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             return $documentEntity;
         }
 
-        // 更新文档
+        // update文档
         $attributes = $this->prepareAttributes($documentEntity);
         $model->fill($attributes);
         $model->save();
@@ -141,7 +141,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
      */
     public function getDocumentCountByKnowledgeBaseCode(KnowledgeBaseDataIsolation $dataIsolation, array $knowledgeBaseCodes): array
     {
-        // 分组聚合查询，获取每个知识库的文档数量
+        // 分组聚合query，get每个知识库的文档数量
         $res = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query())
             ->select('knowledge_base_code', Db::raw('count(*) as count'))
             ->groupBy('knowledge_base_code')
@@ -160,7 +160,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
      */
     public function getDocumentsByCodes(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, array $knowledgeBaseDocumentCodes): array
     {
-        // 获取每个文档的文档名
+        // get每个文档的文档名
         $res = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query())
             ->where('knowledge_base_code', $knowledgeBaseCode)
             ->whereIn('code', $knowledgeBaseDocumentCodes)
@@ -174,7 +174,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 查询知识库文档列表.
+     * query知识库文档list.
      *
      * @return array{total: int, list: array<KnowledgeBaseDocumentEntity>}
      */
@@ -232,7 +232,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 删除知识库文档.
+     * delete知识库文档.
      */
     public function destroy(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -244,7 +244,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 根据文档编码删除所有片段.
+     * 根据文档编码delete所有片段.
      */
     public function destroyFragmentsByDocumentCode(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -256,7 +256,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 重置文档同步状态
+     * 重置文档同步status
      */
     public function resetSyncStatus(KnowledgeBaseDataIsolation $dataIsolation, string $documentCode): void
     {
@@ -269,7 +269,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 更新文档同步状态
+     * update文档同步status
      */
     public function updateSyncStatus(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentEntity $documentEntity): void
     {
@@ -278,7 +278,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             'sync_status_message' => mb_substr($documentEntity->getSyncStatusMessage(), 0, 900),
         ];
 
-        // 如果是已同步或同步失败状态，同步次数加1
+        // 如果是已同步或同步failstatus，同步次数加1
         if (in_array($documentEntity->getSyncStatus(), [KnowledgeSyncStatus::Synced->value, KnowledgeSyncStatus::SyncFailed->value])) {
             KnowledgeBaseDocumentModel::withTrashed()
                 ->where('id', $documentEntity->getId())
@@ -310,46 +310,46 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 创建查询构建器.
+     * createquery构建器.
      */
     protected function createQueryBuilder(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentQuery $query): Builder
     {
         $builder = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query());
 
-        // 按知识库编码过滤
+        // 按知识库编码filter
         $builder->where('knowledge_base_code', $query->getKnowledgeBaseCode());
 
-        // 按文档编码过滤
+        // 按文档编码filter
         if ($query->getCode() !== null) {
             $builder->where('code', $query->getCode());
         }
 
-        // 按名称模糊查询
+        // 按name模糊query
         if ($query->getName() !== null && $query->getName() !== '') {
             $builder->where('name', 'like', '%' . $query->getName() . '%');
         }
 
-        // 按启用状态过滤
+        // 按启用statusfilter
         if ($query->getEnabled() !== null) {
             $builder->where('enabled', $query->getEnabled());
         }
 
-        // 按文档类型过滤
+        // 按文档typefilter
         if ($query->getDocType() !== null) {
             $builder->where('doc_type', $query->getDocType());
         }
 
-        // 按创建者过滤
+        // 按create者filter
         if ($query->getCreatedUid() !== null) {
             $builder->where('created_uid', $query->getCreatedUid());
         }
 
-        // 按更新者过滤
+        // 按update者filter
         if ($query->getUpdatedUid() !== null) {
             $builder->where('updated_uid', $query->getUpdatedUid());
         }
 
-        // 按文档编码数组批量查询
+        // 按文档编码array批量query
         if ($query->getCodes() !== null && ! empty($query->getCodes())) {
             $builder->whereIn('code', $query->getCodes());
         }
@@ -366,7 +366,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 获取用于创建或更新模型的属性数组.
+     * get用于create或updatemodel的propertyarray.
      */
     protected function prepareAttributes(KnowledgeBaseDocumentEntity $entity): array
     {

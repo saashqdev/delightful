@@ -76,10 +76,10 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $permissions = $this->permissionEnum->generateAllPermissions();
 
         $this->assertIsArray($permissions);
-        // 应该有 2 个资源 × 2 个操作 = 4 个权限（排除export操作）
+        // 应该有 2 个资源 × 2 个操作 = 4 个permission（排除export操作）
         $this->assertCount(4, $permissions);
 
-        // 检查权限结构
+        // checkpermission结构
         foreach ($permissions as $permission) {
             $this->assertArrayHasKey('permission_key', $permission);
             $this->assertArrayHasKey('resource', $permission);
@@ -87,12 +87,12 @@ class DelightfulPermissionEnumTest extends HttpTestCase
             $this->assertArrayHasKey('resource_label', $permission);
             $this->assertArrayHasKey('operation_label', $permission);
 
-            // 检查具体值
+            // check具体value
             $this->assertContains($permission['resource'], $this->permissionEnum->getResources());
             $this->assertContains($permission['operation'], $this->permissionEnum->getOperations());
         }
 
-        // 检查特定权限是否存在
+        // check特定permission是否存在
         $permissionKeys = array_column($permissions, 'permission_key');
         $this->assertContains('admin.ai.model_management.query', $permissionKeys);
         $this->assertContains('admin.ai.model_management.manage', $permissionKeys);
@@ -102,10 +102,10 @@ class DelightfulPermissionEnumTest extends HttpTestCase
 
     public function testIsValidPermissionWithValidKeys()
     {
-        // 测试全局权限
+        // test全局permission
         $this->assertTrue($this->permissionEnum->isValidPermission(DelightfulPermission::ALL_PERMISSIONS));
 
-        // 测试有效的权限组合
+        // test有效的permission组合
         $this->assertTrue($this->permissionEnum->isValidPermission('admin.ai.model_management.query'));
         $this->assertTrue($this->permissionEnum->isValidPermission('admin.ai.model_management.manage'));
         $this->assertTrue($this->permissionEnum->isValidPermission('admin.ai.image_generation.query'));
@@ -114,7 +114,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
 
     public function testIsValidPermissionWithInvalidKeys()
     {
-        // 测试无效的权限键
+        // test无效的permission键
         $this->assertFalse($this->permissionEnum->isValidPermission('invalid_permission'));
         $this->assertFalse($this->permissionEnum->isValidPermission('Admin.ai.invalid_resource.query'));
         $this->assertFalse($this->permissionEnum->isValidPermission('Admin.ai.model_management.invalid_operation'));
@@ -125,7 +125,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     {
         $tree = $this->permissionEnum->getPermissionTree();
 
-        // 默认情况下（非平台组织）不包含 platform 平台节点
+        // 默认情况下（非平台organization）不包含 platform 平台节点
         $this->assertIsArray($tree);
         $this->assertGreaterThanOrEqual(1, count($tree));
 
@@ -155,35 +155,35 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     }
 
     /**
-     * 测试私有方法isValidCombination的行为
-     * 通过generateAllPermissions间接测试.
+     * test私有methodisValidCombination的行为
+     * 通过generateAllPermissions间接test.
      */
     public function testIsValidCombinationThroughGenerateAllPermissions()
     {
         $permissions = $this->permissionEnum->generateAllPermissions();
 
-        // 确保没有export操作的权限
+        // 确保没有export操作的permission
         foreach ($permissions as $permission) {
             $this->assertNotEquals('export', $permission['operation']);
         }
     }
 
     /**
-     * 测试边界情况.
+     * test边界情况.
      */
     public function testEdgeCases()
     {
-        // 测试空字符串
+        // test空string
         $this->assertFalse($this->permissionEnum->isResource(''));
         $this->assertFalse($this->permissionEnum->isOperation(''));
         $this->assertFalse($this->permissionEnum->isValidPermission(''));
 
-        // 测试null值处理（PHP会转换为字符串）
+        // testnullvalue处理（PHP会转换为string）
         $this->assertFalse($this->permissionEnum->isValidPermission('null'));
     }
 
     /**
-     * 测试类实现了正确的接口.
+     * test类实现了正确的接口.
      */
     public function testImplementsInterface()
     {

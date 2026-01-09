@@ -89,7 +89,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[VerifyStructure]
     public function onConnect(Socket $socket)
     {
-        // 链接时刷新 sid 缓存的权限信息，避免极端情况下，用了以前的 sid 权限
+        // 链接时刷新 sid cache的permissioninfo，避免极端情况下，用了以前的 sid permission
         $this->logger->info(sprintf('sid:%s connect', $socket->getSid()));
     }
 
@@ -110,12 +110,12 @@ class DelightfulChatWebSocketApi extends BaseNamespace
         }
         $this->setLocale($params['context']['language'] ?? '');
         try {
-            // 使用 delightfulChatContract 校验参数
+            // 使用 delightfulChatContract 校验parameter
             $context = new DelightfulContext($params['context']);
-            // 兼容历史版本,从query中获取token
+            // 兼容历史版本,从query中gettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
             $this->delightfulChatMessageAppService->setUserContext($userToken, $context);
-            // 调用 guard 获取用户信息
+            // call guard getuserinfo
             $userAuthorization = $this->getAuthorization();
             // 将账号的所有设备加入同一个房间
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
@@ -157,7 +157,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[Event('control')]
     #[VerifyStructure]
     /**
-     * 控制消息.
+     * 控制message.
      * @throws Throwable
      */
     public function onControlMessage(Socket $socket, array $params)
@@ -172,14 +172,14 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->relationAppMsgIdAndRequestId($params['data']['message']['app_message_id'] ?? '');
             $this->checkParams($appendRules, $params);
             $this->setLocale($params['context']['language'] ?? '');
-            // 使用 delightfulChatContract 校验参数
+            // 使用 delightfulChatContract 校验parameter
             $controlRequest = new ControlRequest($params);
-            // 兼容历史版本,从query中获取token
+            // 兼容历史版本,从query中gettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
             $this->delightfulChatMessageAppService->setUserContext($userToken, $controlRequest->getContext());
-            // 获取用户信息
+            // getuserinfo
             $userAuthorization = $this->getAuthorization();
-            // 根据消息类型,分发到对应的处理模块
+            // 根据messagetype,分发到对应的处理模块
             $messageDTO = MessageAssembler::getControlMessageDTOByRequest($controlRequest, $userAuthorization, ConversationType::User);
             return $this->delightfulControlMessageAppService->dispatchClientControlMessage($messageDTO, $userAuthorization);
         } catch (BusinessException $exception) {
@@ -211,12 +211,12 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[Event('chat')]
     #[VerifyStructure]
     /**
-     * 聊天消息.
+     * 聊天message.
      * @throws Throwable
      */
     public function onChatMessage(Socket $socket, array $params)
     {
-        // 判断消息类型,如果是控制消息,分发到对应的处理模块
+        // 判断messagetype,如果是控制message,分发到对应的处理模块
         try {
             $appendRules = [
                 'data.conversation_id' => 'required|string',
@@ -228,12 +228,12 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->relationAppMsgIdAndRequestId($params['data']['message']['app_message_id'] ?? '');
             $this->checkParams($appendRules, $params);
             $this->setLocale($params['context']['language'] ?? '');
-            # 使用 delightfulChatContract 校验参数
+            # 使用 delightfulChatContract 校验parameter
             $chatRequest = new ChatRequest($params);
-            // 兼容历史版本,从query中获取token
+            // 兼容历史版本,从query中gettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
-            // 根据消息类型,分发到对应的处理模块
+            // 根据messagetype,分发到对应的处理模块
             $userAuthorization = $this->getAuthorization();
             // 将账号的所有设备加入同一个房间
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
@@ -259,7 +259,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[Event('intermediate')]
     #[VerifyStructure]
     /**
-     * 不存入数据库的实时消息，用于一些临时消息场景。
+     * 不存入database的实时message，用于一些临时message场景。
      * @throws Throwable
      */
     public function onIntermediateMessage(Socket $socket, array $params)
@@ -282,12 +282,12 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->relationAppMsgIdAndRequestId($params['data']['message']['app_message_id'] ?? '');
             $this->checkParams($appendRules, $params);
             $this->setLocale($params['context']['language'] ?? '');
-            # 使用 delightfulChatContract 校验参数
+            # 使用 delightfulChatContract 校验parameter
             $chatRequest = new ChatRequest($params);
-            // 兼容历史版本,从query中获取token
+            // 兼容历史版本,从query中gettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
-            // 根据消息类型,分发到对应的处理模块
+            // 根据messagetype,分发到对应的处理模块
             $userAuthorization = $this->getAuthorization();
             // 将账号的所有设备加入同一个房间
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
@@ -340,14 +340,14 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     }
 
     /**
-     * 发布订阅/多个消息分发和推送的队列保活.
+     * 发布订阅/多个message分发和推送的队列保活.
      */
     private function keepSubscribeAlive(): void
     {
-        // 只需要一个进程能定时发布消息,让订阅的redis链接保活即可.
-        // 不把锁放在最外层,是为了防止pod频繁重启时,没有任何一个进程能够发布消息
+        // 只需要一个进程能定时发布message,让订阅的redis链接保活即可.
+        // 不把锁放在最外层,是为了防止pod频繁重启时,没有任何一个进程能够发布message
         co(function () {
-            // 每 5 秒推一次消息
+            // 每 5 秒推一次message
             $this->timer->tick(
                 5,
                 function () {
@@ -357,14 +357,14 @@ class DelightfulChatWebSocketApi extends BaseNamespace
                     SocketIOUtil::sendIntermediate(SocketEventType::Chat, 'delightful-im:subscribe:keepalive', ControlMessageType::Ping->value);
 
                     $producer = ApplicationContext::getContainer()->get(Producer::class);
-                    // 对所有队列投一条消息,以保活链接/队列
+                    // 对所有队列投一条message,以保活链接/队列
                     $messagePriorities = MessagePriority::cases();
                     foreach ($messagePriorities as $priority) {
                         $seqCreatedEvent = new SeqCreatedEvent([ControlMessageType::Ping->value]);
                         $seqCreatedEvent->setPriority($priority);
-                        // 消息分发. 一条seq可能会生成多条seq
+                        // message分发. 一条seq可能会生成多条seq
                         $messageDispatch = new MessageDispatchPublisher($seqCreatedEvent);
-                        // 消息推送. 一条seq只会推送给一个用户(的多个设备)
+                        // message推送. 一条seq只会推送给一个user(的多个设备)
                         $messagePush = new MessagePushPublisher($seqCreatedEvent);
                         $producer->produce($messageDispatch);
                         $producer->produce($messagePush);
@@ -375,7 +375,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
         });
     }
 
-    // 设置语言
+    // set语言
     private function setLocale(?string $language): void
     {
         if (! empty($language)) {

@@ -13,26 +13,26 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
     {
         // 转换为csv格式
         $content = $this->convertToCsv($content);
-        // 删除 ## 开头的行
+        // delete ## 开头的行
         $content = preg_replace('/^##.*\n/', '', $content);
-        // 使用正则表达式匹配不在引号内的换行符
+        // 使用正则table达式匹配不在引号内的换行符
         return preg_replace('/(?<!")[\r\n]+(?!")/', "\n\n", $content);
     }
 
     /**
-     * 将内容转换为CSV格式.
-     * @param string $content 原始内容
-     * @return string 转换后的CSV格式内容
+     * 将content转换为CSV格式.
+     * @param string $content 原始content
+     * @return string 转换后的CSV格式content
      */
     private function convertToCsv(string $content): string
     {
-        // 将内容按行分割，但保留单元格内的换行符
+        // 将content按行分割，但保留单元格内的换行符
         $lines = preg_split('/(?<!")[\r\n]+(?!")/', $content);
         $result = [];
         $headers = [];
 
         foreach ($lines as $line) {
-            // 检查是否是新的sheet
+            // check是否是新的sheet
             if (str_starts_with($line, '##')) {
                 $result[] = $line;
                 $headers = [];
@@ -72,7 +72,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
 
     /**
      * 检测CSV行的分隔符.
-     * @param string $line CSV行内容
+     * @param string $line CSV行content
      * @return string 检测到的分隔符
      */
     private function detectSeparator(string $line): string
@@ -91,18 +91,18 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
     }
 
     /**
-     * 格式化CSV单元格内容，对特殊内容添加引号.
-     * @param string $value 单元格内容
-     * @return string 格式化后的单元格内容
+     * 格式化CSV单元格content，对特殊content添加引号.
+     * @param string $value 单元格content
+     * @return string 格式化后的单元格content
      */
     private function formatCsvCell(string $value): string
     {
-        // 如果单元格内容为空，直接返回空字符串
+        // 如果单元格content为空，直接return空string
         if ($value === '') {
             return '';
         }
 
-        // 如果单元格内容包含以下任意字符，需要用引号包围
+        // 如果单元格content包含以下任意字符，需要用引号包围
         if (str_contains($value, ',')
             || str_contains($value, '"')
             || str_contains($value, "\n")

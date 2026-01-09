@@ -41,25 +41,25 @@ class ProviderAppService
             return [];
         }
 
-        // 构建数据隔离对象
+        // 构建数据隔离object
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
-        // 收集所有唯一的服务商配置ID
+        // 收集所有唯一的service商configurationID
         $configIds = array_unique(array_map(fn ($model) => $model->getServiceProviderConfigId(), $models));
 
-        // 批量获取服务商实体（避免嵌套查询）
+        // 批量getservice商实体（避免嵌套query）
         $providerEntities = $this->providerConfigDomainService->getProviderEntitiesByConfigIds($dataIsolation, $configIds);
 
-        // 批量获取服务商配置实体（用于获取别名）
+        // 批量getservice商configuration实体（用于get别名）
         $configEntities = $this->providerConfigDomainService->getConfigByIdsWithoutOrganizationFilter($configIds);
 
-        // 收集所有图标路径按组织编码分组（包括模型图标和服务商图标）
+        // 收集所有图标路径按organization编码分组（包括model图标和service商图标）
         $iconsByOrg = [];
         $iconToModelMap = [];
         $iconToProviderMap = [];
 
         foreach ($models as $model) {
-            // 处理模型图标
+            // 处理model图标
             $modelIcon = $model->getIcon();
             if (empty($modelIcon)) {
                 continue;
@@ -74,7 +74,7 @@ class ProviderAppService
             }
             $iconToModelMap[$modelIcon][] = $model;
 
-            // 处理服务商图标
+            // 处理service商图标
             $configId = $model->getServiceProviderConfigId();
             if (! isset($providerEntities[$configId])) {
                 continue;
@@ -94,7 +94,7 @@ class ProviderAppService
             $iconToProviderMap[$providerIcon][] = $configId;
         }
 
-        // 批量获取图标URL
+        // 批量get图标URL
         $iconUrlMap = [];
         foreach ($iconsByOrg as $iconOrganizationCode => $icons) {
             $links = $this->fileDomainService->getLinks($iconOrganizationCode, array_unique($icons));
@@ -102,7 +102,7 @@ class ProviderAppService
         }
         ! empty($iconUrlMap) && $iconUrlMap = array_merge(...$iconUrlMap);
 
-        // 更新服务商图标URL映射
+        // updateservice商图标URL映射
         $providerIconUrls = [];
         foreach ($iconToProviderMap as $icon => $configIds) {
             if (! isset($iconUrlMap[$icon])) {
@@ -116,7 +116,7 @@ class ProviderAppService
             }
         }
         $locale = $this->translator->getLocale();
-        // 创建DTO并设置图标URL
+        // createDTO并set图标URL
         $modelDTOs = [];
         foreach ($models as $model) {
             $modelDTO = new BeDelightfulModelDTO($model->toArray());
@@ -124,13 +124,13 @@ class ProviderAppService
             $localizedModelName = $model->getLocalizedName($locale);
             $localizedModelDescription = $model->getLocalizedDescription($locale);
 
-            // 如果有国际化名称则使用，否则保持原名称
+            // 如果有国际化name则使用，否则保持原name
             if (! empty($localizedModelName)) {
                 $modelDTO->setName($localizedModelName);
             }
             $modelDTO->setDescription($localizedModelDescription);
 
-            // 设置模型图标URL
+            // setmodel图标URL
             $modelIcon = $model->getIcon();
             if (! empty($modelIcon) && isset($iconUrlMap[$modelIcon])) {
                 $fileLink = $iconUrlMap[$modelIcon];
@@ -139,7 +139,7 @@ class ProviderAppService
                 }
             }
 
-            // 创建服务商DTO
+            // createservice商DTO
             $configId = $model->getServiceProviderConfigId();
             $providerEntity = $providerEntities[$configId] ?? null;
             if ($providerEntity) {
@@ -164,7 +164,7 @@ class ProviderAppService
     }
 
     /**
-     * 获取服务商显示名称.
+     * getservice商显示name.
      */
     private function getProviderDisplayName(
         ProviderEntity $providerEntity,
@@ -172,24 +172,24 @@ class ProviderAppService
         bool $isRecommended,
         string $locale
     ): string {
-        // 1. 推荐服务商优先
+        // 1. 推荐service商优先
         if ($isRecommended) {
             return $this->translator->trans('common.recommended');
         }
 
-        // 2. 自定义服务商且有别名
+        // 2. 自定义service商且有别名
         if ($this->isCustomProvider($providerEntity)
             && $configEntity
             && ! empty($configEntity->getAlias())) {
             return $configEntity->getAlias();
         }
 
-        // 3. 默认使用国际化名称
+        // 3. 默认使用国际化name
         return $providerEntity->getLocalizedName($locale);
     }
 
     /**
-     * 判断是否为自定义服务商.
+     * 判断是否为自定义service商.
      */
     private function isCustomProvider(ProviderEntity $providerEntity): bool
     {

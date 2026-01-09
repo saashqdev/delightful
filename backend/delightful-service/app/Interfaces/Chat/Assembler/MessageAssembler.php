@@ -78,7 +78,7 @@ class MessageAssembler
     }
 
     /**
-     * 根据数组获取消息结构.
+     * 根据arraygetmessage结构.
      */
     public static function getMessageStructByArray(ChatMessageType|ControlMessageType|string $messageTypeString, array $messageStructArray): MessageInterface
     {
@@ -123,10 +123,10 @@ class MessageAssembler
         $time = date('Y-m-d H:i:s');
         $appMessageId = $chatRequest->getData()->getMessage()->getAppMessageId();
         $requestMessage = $chatRequest->getData()->getMessage();
-        // 消息的type和content抽象出来
+        // message的type和content抽象出来
         $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setSenderId($conversationEntity->getUserId());
-        // TODO 会话表应该冗余的记录收发双方的用户类型，目前只记录了收件方的，需要补充
+        // TODO sessiontable应该冗余的record收发双方的usertype，目前只record了收件方的，需要补充
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
         $messageDTO->setSenderType($senderType);
         $messageDTO->setSenderOrganizationCode($conversationEntity->getUserOrganizationCode());
@@ -152,10 +152,10 @@ class MessageAssembler
         $appMessageId = $chatRequest->getData()->getMessage()->getAppMessageId();
         $requestMessage = $chatRequest->getData()->getMessage();
         $topicId = $chatRequest->getData()->getMessage()->getTopicId();
-        // 消息的type和content抽象出来
+        // message的type和content抽象出来
         $messageDTO = new DelightfulMessageDTO();
         $messageDTO->setSenderId($conversationEntity->getUserId());
-        // TODO 会话表应该冗余的记录收发双方的用户类型，目前只记录了收件方的，需要补充
+        // TODO sessiontable应该冗余的record收发双方的usertype，目前只record了收件方的，需要补充
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
         $messageDTO->setSenderType($senderType);
         $messageDTO->setSenderOrganizationCode($conversationEntity->getUserOrganizationCode());
@@ -174,20 +174,20 @@ class MessageAssembler
     }
 
     /**
-     * 根据 protobuf 的消息结构,获取对应的消息对象.
+     * 根据 protobuf 的message结构,get对应的messageobject.
      */
     public static function getControlMessageDTOByRequest(ControlRequest $controlRequest, DelightfulUserAuthorization $userAuthorization, ConversationType $conversationType): DelightfulMessageEntity
     {
         $appMessageId = $controlRequest->getData()->getMessage()->getAppMessageId();
         $messageStruct = $controlRequest->getData()->getMessage()->getDelightfulMessage();
-        # 将protobuf的消息转换为对应的对象
+        # 将protobuf的message转换为对应的object
         $messageEntity = new DelightfulMessageEntity();
         $messageEntity->setSenderId($userAuthorization->getId());
         $messageEntity->setSenderType($conversationType);
         $messageEntity->setSenderOrganizationCode($userAuthorization->getOrganizationCode());
         $time = date('Y-m-d H:i:s');
         $messageEntity->setAppMessageId($appMessageId);
-        // 消息的type和content抽象出来
+        // message的type和content抽象出来
         $messageEntity->setContent($messageStruct);
         $messageEntity->setMessageType($messageStruct->getMessageTypeEnum());
         $messageEntity->setSendTime($time);
@@ -198,12 +198,12 @@ class MessageAssembler
     }
 
     /**
-     * 获取聊天消息的结构.
+     * get聊天message的结构.
      */
     public static function getChatMessageStruct(ChatMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
         return match ($messageTypeEnum) {
-            # 聊天消息
+            # 聊天message
             ChatMessageType::Text => new TextMessage($messageStructArray),
             ChatMessageType::RichText => new RichTextMessage($messageStructArray),
             ChatMessageType::Markdown => new MarkdownMessage($messageStructArray),
@@ -223,13 +223,13 @@ class MessageAssembler
     }
 
     /**
-     * 获取控制消息的结构.
+     * get控制message的结构.
      */
     public static function getControlMessageStruct(ControlMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
-        // 其实可以直接使用 protobuf 生成的 php 对象,但是暂时没有时间全量替换,以后再说.
+        // 其实可以直接使用 protobuf 生成的 php object,但是暂时没有time全量替换,以后再说.
         return match ($messageTypeEnum) {
-            # 控制消息
+            # 控制message
             ControlMessageType::CreateConversation => new ConversationWindowCreateMessage($messageStructArray),
             ControlMessageType::OpenConversation => new ConversationWindowOpenMessage($messageStructArray),
             ControlMessageType::TopConversation => new ConversationTopMessage($messageStructArray),
@@ -257,7 +257,7 @@ class MessageAssembler
     }
 
     /**
-     * 获取临时消息的结构.
+     * get临时message的结构.
      */
     public static function getIntermediateMessageStruct(IntermediateMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
@@ -294,7 +294,7 @@ class MessageAssembler
                 continue;
             }
 
-            // 如果不是当前用户的消息，且内容超过500字符，则截断
+            // 如果不是当前user的message，且content超过500字符，则截断
             if (! empty($currentUserNickname) && $role !== $currentUserNickname && mb_strlen($content, 'UTF-8') > 500) {
                 $content = mb_substr($content, 0, 500, 'UTF-8') . '...';
             }
@@ -302,7 +302,7 @@ class MessageAssembler
             $formattedMessage = sprintf("%s: %s\n", $role, $content);
             $messageLength = mb_strlen($formattedMessage, 'UTF-8');
 
-            // 如果是第一条消息，即使超过长度限制也要包含
+            // 如果是第一条message，即使超过长度限制也要包含
             if ($messageCount === 0) {
                 array_unshift($limitedMessages, $formattedMessage);
                 $currentLength += $messageLength;

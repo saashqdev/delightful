@@ -39,7 +39,7 @@ class DelightfulOrganizationEnvDomainService
         $owner = random_bytes(8);
         $this->lock->spinLock($spinLockKey, $owner);
         try {
-            // 组织所在的环境
+            // organization所在的环境
             $orgEnvEntity = $this->delightfulOrganizationsEnvironmentRepository->getOrganizationEnvironmentByOrganizationCode(
                 $originOrganizationCode,
                 $delightfulEnvEntity
@@ -47,7 +47,7 @@ class DelightfulOrganizationEnvDomainService
             if (! empty($orgEnvEntity)) {
                 return $orgEnvEntity;
             }
-            // 创建组织环境:如果是 saas 则不改变组织编码。
+            // createorganization环境:如果是 saas 则不改变organization编码。
             if ($delightfulEnvEntity->getDeployment() === DeploymentEnum::SaaS) {
                 $delightfulOrganizationCode = $originOrganizationCode;
             } else {
@@ -78,13 +78,13 @@ class DelightfulOrganizationEnvDomainService
 
     public function getDelightfulEnvironmentById(int $envId): ?DelightfulEnvironmentEntity
     {
-        // 组织所在的环境
+        // organization所在的环境
         return $this->delightfulEnvironmentsRepository->getEnvById((string) $envId);
     }
 
     public function getOrganizationsEnvironmentDTO(string $delightfulOrganizationCode): ?DelightfulOrganizationEnvDTO
     {
-        // 组织所在的环境 id
+        // organization所在的环境 id
         $organizationEnvEntity = $this->delightfulOrganizationsEnvironmentRepository->getOrganizationEnvironmentByDelightfulOrganizationCode(
             $delightfulOrganizationCode
         );
@@ -129,13 +129,13 @@ class DelightfulOrganizationEnvDomainService
         return $this->delightfulEnvironmentsRepository->getDelightfulEnvironmentsByIds($ids);
     }
 
-    // 创建环境
+    // create环境
     public function createEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity
     {
         return $this->delightfulEnvironmentsRepository->createDelightfulEnvironment($environmentDTO);
     }
 
-    // 更新环境
+    // update环境
     public function updateEnvironment(DelightfulEnvironmentEntity $environmentDTO): DelightfulEnvironmentEntity
     {
         return $this->delightfulEnvironmentsRepository->updateDelightfulEnvironment($environmentDTO);
@@ -153,7 +153,7 @@ class DelightfulOrganizationEnvDomainService
         if ($data) {
             return new DelightfulEnvironmentEntity(Json::decode($data));
         }
-        // 查询 token 是否已经绑定 (调用了 delightful/auth/check)
+        // query token 是否已经绑定 (call了 delightful/auth/check)
         $tokenDTO = new DelightfulTokenEntity();
         $tokenDTO->setType(DelightfulTokenType::Account);
         $tokenDTO->setToken($tokenDTO->getDelightfulShortToken($authorization));
@@ -175,7 +175,7 @@ class DelightfulOrganizationEnvDomainService
     }
 
     /**
-     * 当前环境默认的 env 配置。 访问 saas 时允许前端不传环境 id，使用默认的环境配置。
+     * 当前环境默认的 env configuration。 访问 saas 时允许前端不传环境 id，使用默认的环境configuration。
      */
     public function getCurrentDefaultDelightfulEnv(): ?DelightfulEnvironmentEntity
     {
@@ -202,7 +202,7 @@ class DelightfulOrganizationEnvDomainService
     }
 
     /**
-     * 获取所有组织编码
+     * get所有organization编码
      * @return string[]
      */
     public function getAllOrganizationCodes(): array

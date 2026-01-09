@@ -58,7 +58,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 拉取用户的收件消息.
+     * 拉取user的收件message.
      * @throws Throwable
      */
     public function pullByPageToken(RequestInterface $request): array
@@ -86,7 +86,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 拉取用户的最近一段时间收件消息.
+     * 拉取user的最近一段time收件message.
      * @throws Throwable
      */
     public function pullRecentMessage(RequestInterface $request): array
@@ -146,7 +146,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 会话窗口滚动加载消息.
+     * session窗口滚动加载message.
      */
     public function messageQueries(RequestInterface $request, string $conversationId): array
     {
@@ -176,7 +176,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * （前端性能有问题的临时方案）按会话 id 分组获取几条最新消息.
+     * （前端性能有issue的临时方案）按session id 分组get几条最新message.
      */
     public function conversationsMessagesGroupQueries(RequestInterface $request): array
     {
@@ -196,7 +196,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 智能根据话题id获取话题名称.
+     * 智能根据话题idget话题name.
      */
     public function intelligenceGetTopicName(string $conversationId, string $topicId): array
     {
@@ -218,7 +218,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 创建聊天群组.
+     * create聊天群组.
      */
     public function createChatGroup(RequestInterface $request): array
     {
@@ -237,7 +237,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $delightfulGroupDTO->setGroupName($params['group_name']);
         $delightfulGroupDTO->setGroupType(GroupTypeEnum::from($params['group_type']));
         $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
-        // 人员和部门不能同时为空
+        // 人员和department不能同时为空
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_SELECT_ERROR);
         }
@@ -258,7 +258,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $authorization = $this->getAuthorization();
         $delightfulGroupDTO = new DelightfulGroupEntity();
         $delightfulGroupDTO->setId($id);
-        // 人员和部门不能同时为空
+        // 人员和department不能同时为空
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_SELECT_ERROR);
         }
@@ -308,7 +308,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 批量获取群信息（名称、公告等）.
+     * 批量get群info（name、公告等）.
      */
     public function getDelightfulGroupList(RequestInterface $request): array
     {
@@ -344,7 +344,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 获取群成员列表.
+     * get群成员list.
      */
     public function getGroupUserList(string $id, RequestInterface $request): array
     {
@@ -355,7 +355,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 用户所在群组列表.
+     * user所在群组list.
      */
     public function getUserGroupList(RequestInterface $request): array
     {
@@ -466,7 +466,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 会话保存交互指令.
+     * session保存交互指令.
      */
     public function saveInstruct(string $conversationId, RequestInterface $request)
     {
@@ -494,7 +494,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * @param null|string $method 有时候字段没有区分度，需要加上方法名
+     * @param null|string $method 有时候field没有区分度，需要加上method名
      */
     protected function checkParams(array $params, array $rules, ?string $method = null): array
     {
@@ -562,7 +562,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 生成缓存键.
+     * 生成cache键.
      */
     private function generateCacheKey(?string $conversationId, ?string $topicId, string $message, string $userId): string
     {
@@ -570,7 +570,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 获取历史消息.
+     * get历史message.
      * @param mixed $authorization
      */
     private function getHistoryMessages($authorization, ?string $conversationId, ?string $topicId, ?array $externalHistory): array
@@ -588,7 +588,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 处理补全内容.
+     * 处理补全content.
      */
     private function processCompletionContent(string $completionContent): string
     {

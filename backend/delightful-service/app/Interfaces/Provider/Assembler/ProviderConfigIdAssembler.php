@@ -13,13 +13,13 @@ use App\Domain\Provider\Entity\ValueObject\ProviderTemplateId;
 use InvalidArgumentException;
 
 /**
- * 服务商模板ID处理工具类
- * 用于生成和解析服务商模板ID（使用固定的数值型字符串）.
+ * service商模板ID处理工具类
+ * 用于生成和解析service商模板ID（使用固定的数value型string）.
  */
 class ProviderConfigIdAssembler
 {
     /**
-     * 根据ProviderCode和Category生成服务商模板的config_id.
+     * 根据ProviderCode和Category生成service商模板的config_id.
      */
     public static function generateProviderTemplate(ProviderCode $providerCode, Category $category): string
     {
@@ -32,8 +32,8 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * 检查给定的配置ID是否为任何服务商的模板.
-     * 支持数值型字符串格式的模板ID.
+     * check给定的configurationID是否为任何service商的模板.
+     * 支持数value型string格式的模板ID.
      */
     public static function isAnyProviderTemplate(null|int|string $configId): bool
     {
@@ -41,8 +41,8 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * 根据模板配置ID解析出ProviderCode和Category.
-     * 支持数值型字符串格式的模板ID.
+     * 根据模板configurationID解析出ProviderCode和Category.
+     * 支持数value型string格式的模板ID.
      * @return null|array{providerCode: ProviderCode, category: Category}
      */
     public static function parseProviderTemplate(null|int|string $configId): ?array
@@ -62,7 +62,7 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * 根据ProviderTemplateId获取对应的数值型字符串.
+     * 根据ProviderTemplateIdget对应的数value型string.
      */
     public static function getTemplateIdValue(ProviderTemplateId $templateId): string
     {
@@ -70,7 +70,7 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * 根据数值型字符串获取对应的ProviderTemplateId.
+     * 根据数value型stringget对应的ProviderTemplateId.
      */
     public static function getTemplateIdFromValue(null|int|string $configId): ?ProviderTemplateId
     {

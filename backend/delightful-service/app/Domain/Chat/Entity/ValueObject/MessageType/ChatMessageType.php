@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject\MessageType;
 
 /**
- * 聊天消息内容的类型.
- * 值从0开始.
+ * 聊天messagecontent的type.
+ * value从0开始.
  */
 enum ChatMessageType: string
 {
@@ -47,7 +47,7 @@ enum ChatMessageType: string
     case AggregateAISearchCard = 'aggregate_ai_search_card';
 
     /**
-     * 多次流式响应后，最终合并成一条消息入库.
+     * 多次流式响应后，最终合并成一条message入库.
      */
     case AggregateAISearchCardV2 = 'aggregate_ai_search_card_v2';
 
@@ -65,12 +65,12 @@ enum ChatMessageType: string
     // 图片转高清
     case ImageConvertHighCard = 'image_convert_high_card';
 
-    // 通用 agent 消息
+    // 通用 agent message
     case BeAgentCard = 'general_agent_card';
 
     /**
-     * 未知消息。
-     * 由于版本迭代，发版时间差异等原因，可能产生未知类型的消息。
+     * 未知message。
+     * 由于版本迭代，发版time差异等原因，可能产生未知type的message。
      */
     case Unknown = 'unknown';
 

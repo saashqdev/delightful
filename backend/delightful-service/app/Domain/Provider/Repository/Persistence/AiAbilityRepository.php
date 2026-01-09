@@ -24,7 +24,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     protected bool $filterOrganizationCode = true;
 
     /**
-     * 根据能力代码获取AI能力实体.
+     * 根据能力代码getAI能力实体.
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity
     {
@@ -39,7 +39,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * 获取所有AI能力列表.
+     * get所有AI能力list.
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array
     {
@@ -55,7 +55,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * 根据ID获取AI能力实体.
+     * 根据IDgetAI能力实体.
      */
     public function getById(ProviderDataIsolation $dataIsolation, int $id): ?AiAbilityEntity
     {
@@ -88,7 +88,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
 
         if ($result) {
             $entity->setId($model->id);
-            // 使用ID加密config并更新
+            // 使用ID加密config并update
             $encryptedConfig = AiAbilityAssembler::encodeConfig($entity->getConfig(), (string) $model->id);
             $model->config = $encryptedConfig;
             $model->save();
@@ -98,7 +98,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * 更新AI能力实体.
+     * updateAI能力实体.
      */
     public function update(AiAbilityEntity $entity): bool
     {
@@ -123,7 +123,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * 根据code更新（支持选择性更新）.
+     * 根据codeupdate（支持选择性update）.
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool
     {
@@ -131,7 +131,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
             return false;
         }
 
-        // 如果需要更新config，先获取记录ID进行加密
+        // 如果需要updateconfig，先getrecordID进行加密
         if (! empty($data['config'])) {
             $builder = $this->createBuilder($dataIsolation, AiAbilityModel::query());
             $model = $builder->where('code', $code->value)->first();
@@ -151,7 +151,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * 分页查询AI能力列表.
+     * paginationqueryAI能力list.
      *
      * @return array{total: int, list: array<AiAbilityEntity>}
      */
@@ -195,10 +195,10 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
             // 尝试作为JSON解析
             $jsonDecoded = json_decode($config, true);
             if (json_last_error() === JSON_ERROR_NONE && is_array($jsonDecoded)) {
-                // JSON解析成功，说明是旧数据（未加密）
+                // JSON解析success，说明是旧数据（未加密）
                 $config = $jsonDecoded;
             } else {
-                // JSON解析失败，说明是加密数据，进行解密
+                // JSON解析fail，说明是加密数据，进行解密
                 $config = AiAbilityAssembler::decodeConfig($config, (string) $model->id);
             }
         } else {

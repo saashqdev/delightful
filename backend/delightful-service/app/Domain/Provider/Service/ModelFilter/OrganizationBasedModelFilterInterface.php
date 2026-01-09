@@ -10,45 +10,45 @@ namespace App\Domain\Provider\Service\ModelFilter;
 use App\Domain\Provider\Entity\ProviderModelEntity;
 
 /**
- * 基于组织编码的模型过滤服务接口.
+ * 基于organization编码的modelfilterservice接口.
  *
- * 用于替代基于模型表 visiblePackages 字段的过滤逻辑
- * 企业包实现此接口，提供给开源包进行模型过滤
+ * 用于替代基于modeltable visiblePackages field的filter逻辑
+ * 企业包实现此接口，提供给开源包进行modelfilter
  */
 interface OrganizationBasedModelFilterInterface
 {
     /**
-     * 基于组织编码过滤模型列表
-     * 这是企业包提供给开源包的核心过滤方法.
+     * 基于organization编码filtermodellist
+     * 这是企业包提供给开源包的核心filtermethod.
      *
-     * @param string $organizationCode 组织编码
-     * @param array $models 待过滤的模型列表 [modelId => ProviderModelEntity]
-     * @return array 过滤后的模型列表 [modelId => ProviderModelEntity]
+     * @param string $organizationCode organization编码
+     * @param array $models 待filter的modellist [modelId => ProviderModelEntity]
+     * @return array filter后的modellist [modelId => ProviderModelEntity]
      */
     public function filterModelsByOrganization(string $organizationCode, array $models): array;
 
     /**
-     * 检查指定模型是否对组织可用.
+     * check指定model是否对organization可用.
      *
-     * @param string $organizationCode 组织编码
-     * @param string $modelIdentifier 模型标识符 (如: gpt-4o)
+     * @param string $organizationCode organization编码
+     * @param string $modelIdentifier model标识符 (如: gpt-4o)
      * @return bool 是否可用
      */
     public function isModelAvailableForOrganization(string $organizationCode, string $modelIdentifier): bool;
 
     /**
-     * 获取组织当前订阅产品绑定的所有模型标识符.
+     * getorganization当前订阅产品绑定的所有model标识符.
      *
-     * @param string $organizationCode 组织编码
-     * @return array 模型标识符数组，例如: ['gpt-4o', 'claude-3', ...]
+     * @param string $organizationCode organization编码
+     * @return array model标识符array，例如: ['gpt-4o', 'claude-3', ...]
      */
     public function getAvailableModelIdentifiers(string $organizationCode): array;
 
     /**
-     * 获取组织需要升级才能使用的模型ID列表.
+     * getorganization需要升级才能使用的modelIDlist.
      *
-     * @param string $organizationCode 组织编码
-     * @return array 需要升级的模型ID数组，例如: ['gpt-4o-advanced', 'claude-3-opus', ...]
+     * @param string $organizationCode organization编码
+     * @return array 需要升级的modelIDarray，例如: ['gpt-4o-advanced', 'claude-3-opus', ...]
      */
     public function getUpgradeRequiredModelIds(string $organizationCode): array;
 }

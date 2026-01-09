@@ -74,7 +74,7 @@ abstract class AbstractSms implements SmsInterface
     }
 
     /**
-     * 根据语种要求和短信支持的签名列表,返回对应的签名本文.
+     * 根据语种要求和短信支持的签名list,return对应的签名本文.
      */
     public function getSign(SmsStruct $smsStruct): string
     {
@@ -83,17 +83,17 @@ abstract class AbstractSms implements SmsInterface
     }
 
     /**
-     * 将变量的值与变量名关联,还原短信内容.
-     * @param array $variables 短信的变量部分,可能是 value数组,也可能是 key=>value数组,需要按$templateContent的内容,统一还原成key=>value数组
+     * 将variable的value与variable名关联,还原短信content.
+     * @param array $variables 短信的variable部分,可能是 valuearray,也可能是 key=>valuearray,需要按$templateContent的content,统一还原成key=>valuearray
      */
     protected function translateContent(string $templateContent, array $variables): string
     {
         if (empty($templateContent)) {
             return Json::encode($variables);
         }
-        // 进行变量匹配短信匹配
+        // 进行variable匹配短信匹配
         if (! empty($variables)) {
-            // 兼容火山模板的变量替换,先将 $message 中的变量解析出来 比如将[123456] 解析为['VerificationCode'=>123456]后,再进行模板内容替换
+            // 兼容火山模板的variable替换,先将 $message 中的variable解析出来 比如将[123456] 解析为['VerificationCode'=>123456]后,再进行模板content替换
             $variables = $this->template->getTemplateVariables($templateContent, $variables);
             $i = 1;
             foreach ($variables as $k => $v) {

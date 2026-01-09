@@ -35,7 +35,7 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
     protected bool $enabled = true;
 
     /**
-     * 检查客户端是否允许执行请求.
+     * check客户端是否允许执行请求.
      */
     public function check(string $clientId, MessageInterface $request): void
     {
@@ -48,12 +48,12 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
             return;
         }
 
-        // 执行具体的速率限制检查
+        // 执行具体的速率限制check
         $this->doCheck($clientId, $request);
     }
 
     /**
-     * 获取当前的限制配置.
+     * get当前的限制configuration.
      */
     public function getLimits(): array
     {
@@ -66,7 +66,7 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
     }
 
     /**
-     * 实际执行的速率限制检查.
+     * 实际执行的速率限制check.
      * 由子类实现具体逻辑.
      */
     abstract protected function doCheck(string $clientId, MessageInterface $request): void;

@@ -39,7 +39,7 @@ use InvalidArgumentException;
 class ImageGenerateFactory
 {
     /**
-     * 各模型支持的固定比例映射表.
+     * 各model支持的固定比例映射table.
      */
     private const SIZE_FIXED_RATIOS = [
         'VolcengineArk' => [
@@ -115,7 +115,7 @@ class ImageGenerateFactory
 
     private static function createVolcengineRequest(array $data): VolcengineModelRequest
     {
-        // 解析 size 参数为 width 和 height
+        // 解析 size parameter为 width 和 height
         [$width, $height] = self::parseSizeToWidthHeight($data['size'] ?? '1024x1024');
 
         $request = new VolcengineModelRequest(
@@ -137,12 +137,12 @@ class ImageGenerateFactory
         $model = $data['model'];
         $mode = strtolower(explode('-', $model, limit: 2)[1] ?? 'fast');
 
-        // Midjourney 不使用宽高参数，只需要 prompt 和 mode，但是 Request 类继承需要这些参数
-        // 所以我们给默认值即可
+        // Midjourney 不使用宽高parameter，只需要 prompt 和 mode，但是 Request 类继承需要这些parameter
+        // 所以我们给默认value即可
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
 
-        // Midjourney 不关心具体的宽高比例，但我们保留这个字段以防将来需要
+        // Midjourney 不关心具体的宽高比例，但我们保留这个field以防将来需要
         if (isset($data['size'])) {
             [$width, $height] = self::parseSizeToWidthHeight($data['size']);
             $ratio = self::calculateRatio((int) $width, (int) $height);
@@ -161,7 +161,7 @@ class ImageGenerateFactory
         }
         $model = strtolower($model);
 
-        // 解析 size 参数为 width 和 height
+        // 解析 size parameter为 width 和 height
         [$widthStr, $heightStr] = self::parseSizeToWidthHeight($data['size'] ?? '1024x1024');
         $width = (int) $widthStr;
         $height = (int) $heightStr;
@@ -251,7 +251,7 @@ class ImageGenerateFactory
 
     private static function createQwenImageRequest(array $data): QwenImageModelRequest
     {
-        // 解析 size 参数为 width 和 height
+        // 解析 size parameter为 width 和 height
         [$width, $height] = self::parseSizeToWidthHeight($data['size'] ?? '1328x1328');
 
         $request = new QwenImageModelRequest(
@@ -321,7 +321,7 @@ class ImageGenerateFactory
 
     private static function createVolcengineArkRequest(array $data): VolcengineArkRequest
     {
-        // 解析 size 参数为 width 和 height（使用 VolcengineArk 的固定比例配置）
+        // 解析 size parameter为 width 和 height（使用 VolcengineArk 的固定比例configuration）
         [$width, $height] = self::parseSizeToWidthHeight($data['size'] ?? '1024x1024', ImageGenerateModelType::VolcengineArk->value);
 
         $request = new VolcengineArkRequest(
@@ -350,12 +350,12 @@ class ImageGenerateFactory
             $request->setResponseFormat($data['response_format']);
         }
 
-        // 处理组图功能参数
+        // 处理组图功能parameter
         if (isset($data['sequential_image_generation'])) {
             $request->setSequentialImageGeneration($data['sequential_image_generation']);
         }
 
-        // 处理组图功能选项参数
+        // 处理组图功能选项parameter
         if (isset($data['sequential_image_generation_options']) && is_array($data['sequential_image_generation_options'])) {
             $request->setSequentialImageGenerationOptions($data['sequential_image_generation_options']);
         }
@@ -364,10 +364,10 @@ class ImageGenerateFactory
     }
 
     /**
-     * 解析各种 size 格式为 [width, height] 数组.
+     * 解析各种 size 格式为 [width, height] array.
      * 支持格式：1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 等.
-     * @param string $size 尺寸字符串
-     * @param null|string $modelKey 模型键名，如果指定则优先使用该模型的固定比例配置
+     * @param string $size 尺寸string
+     * @param null|string $modelKey model键名，如果指定则优先使用该model的固定比例configuration
      */
     private static function parseSizeToWidthHeight(string $size, ?string $modelKey = null): array
     {
@@ -394,13 +394,13 @@ class ImageGenerateFactory
             $width = (int) $matches[1];
             $height = (int) $matches[2];
 
-            // 尝试获取固定比例配置
+            // 尝试get固定比例configuration
             $fixedSize = self::getFixedRatioSize($modelKey, $size);
             if ($fixedSize !== null) {
                 return $fixedSize;
             }
 
-            // 如果没有固定配置，按照正常换算（基于1024为基准）
+            // 如果没有固定configuration，按照正常换算（基于1024为基准）
             if ($width >= $height) {
                 // 横向
                 $actualWidth = 1024;
@@ -418,24 +418,24 @@ class ImageGenerateFactory
     }
 
     /**
-     * 获取指定模型的固定比例尺寸配置.
-     * @param null|string $modelKey 模型键名
+     * get指定model的固定比例尺寸configuration.
+     * @param null|string $modelKey model键名
      * @param string $ratioKey 比例键名，如 "1:1", "16:9"
-     * @return null|array 如果存在固定配置返回 [width, height] 数组，否则返回 null 表示需要使用换算
+     * @return null|array 如果存在固定configurationreturn [width, height] array，否则return null table示需要使用换算
      */
     private static function getFixedRatioSize(?string $modelKey, string $ratioKey): ?array
     {
-        // 如果没有指定模型，直接返回 null
+        // 如果没有指定model，直接return null
         if ($modelKey === null) {
             return null;
         }
 
-        // 检查是否存在该模型的固定比例配置
+        // check是否存在该model的固定比例configuration
         if (isset(self::SIZE_FIXED_RATIOS[$modelKey])) {
             return self::SIZE_FIXED_RATIOS[$modelKey][$ratioKey] ?? self::SIZE_FIXED_RATIOS[$modelKey]['1:1'];
         }
 
-        // 如果不存在，返回 null 表示需要使用换算
+        // 如果不存在，return null table示需要使用换算
         return null;
     }
 

@@ -16,7 +16,7 @@ use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * MCP方法处理器抽象基类.
+ * MCPmethod处理器抽象基类.
  */
 abstract class AbstractMethodHandler implements MethodHandlerInterface
 {
@@ -36,7 +36,7 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
     }
 
     /**
-     * 设置工具管理器.
+     * set工具管理器.
      */
     public function setToolManager(MCPToolManager $toolManager): self
     {
@@ -45,19 +45,19 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
     }
 
     /**
-     * 获取工具管理器.
-     * @throws InternalErrorException 当工具管理器未设置时抛出
+     * get工具管理器.
+     * @throws InternalErrorException 当工具管理器未set时抛出
      */
     public function getToolManager(): MCPToolManager
     {
         if (! isset($this->toolManager)) {
-            throw new InternalErrorException('工具管理器(ToolManager)未设置');
+            throw new InternalErrorException('工具管理器(ToolManager)未set');
         }
         return $this->toolManager;
     }
 
     /**
-     * 设置资源管理器.
+     * set资源管理器.
      */
     public function setResourceManager(MCPResourceManager $resourceManager): self
     {
@@ -66,19 +66,19 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
     }
 
     /**
-     * 获取资源管理器.
-     * @throws InternalErrorException 当资源管理器未设置时抛出
+     * get资源管理器.
+     * @throws InternalErrorException 当资源管理器未set时抛出
      */
     public function getResourceManager(): MCPResourceManager
     {
         if (! isset($this->resourceManager)) {
-            throw new InternalErrorException('资源管理器(ResourceManager)未设置');
+            throw new InternalErrorException('资源管理器(ResourceManager)未set');
         }
         return $this->resourceManager;
     }
 
     /**
-     * 设置提示管理器.
+     * set提示管理器.
      */
     public function setPromptManager(MCPPromptManager $promptManager): self
     {
@@ -87,13 +87,13 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
     }
 
     /**
-     * 获取提示管理器.
-     * @throws InternalErrorException 当提示管理器未设置时抛出
+     * get提示管理器.
+     * @throws InternalErrorException 当提示管理器未set时抛出
      */
     public function getPromptManager(): MCPPromptManager
     {
         if (! isset($this->promptManager)) {
-            throw new InternalErrorException('提示管理器(PromptManager)未设置');
+            throw new InternalErrorException('提示管理器(PromptManager)未set');
         }
         return $this->promptManager;
     }

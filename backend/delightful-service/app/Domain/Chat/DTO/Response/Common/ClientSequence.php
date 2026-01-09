@@ -12,7 +12,7 @@ use App\Domain\Chat\Entity\AbstractEntity;
 use App\Domain\Chat\Entity\ValueObject\MessageType\MessageOptionsEnum;
 
 /**
- * 客户端收到的消息序列结构.
+ * 客户端收到的message序列结构.
  */
 class ClientSequence extends AbstractEntity
 {
@@ -24,16 +24,16 @@ class ClientSequence extends AbstractEntity
     // 序列号，一定不重复，一定增长，但是不保证连续。
     protected string $seqId;
 
-    // 用户的消息id，用户下唯一。
+    // user的messageid，user下唯一。
     protected string $messageId;
 
-    // 本条消息指向的delightful_message_id。 用于实现已读回执场景。存在引用关系时，send_msg_id字段不再返回，因为发送方的消息id没有改变。
+    // 本条message指向的delightful_message_id。 用于实现已读回执场景。存在引用关系时，send_msg_idfield不再return，因为发送方的messageid没有改变。
     protected ?string $referMessageId;
 
-    // 发送方的消息id
+    // 发送方的messageid
     protected ?string $senderMessageId;
 
-    // 消息所属会话窗口。 客户端可以根据此值确定消息是否要提醒等。如果本地没有发现这个会话id，主动向服务端查询会话窗口详情
+    // message所属session窗口。 客户端可以根据此value确定message是否要提醒等。如果本地没有发现这个sessionid，主动向service端querysession窗口详情
     protected ?string $conversationId;
 
     protected string $organizationCode;
@@ -57,7 +57,7 @@ class ClientSequence extends AbstractEntity
             'organization_code' => $this->getOrganizationCode(),
             'message' => $this->getMessage()->toArray($filterNull),
         ];
-        // edit_message_options 字段大多数时候不需要返回
+        // edit_message_options field大多数时候不需要return
         $editMessageOptions = $this->getEditMessageOptions();
         if (! empty($editMessageOptions)) {
             $data[MessageOptionsEnum::EDIT_MESSAGE_OPTIONS->value] = $editMessageOptions->toArray();

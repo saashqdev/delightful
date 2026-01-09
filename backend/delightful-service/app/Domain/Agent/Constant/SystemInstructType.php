@@ -22,7 +22,7 @@ enum SystemInstructType: int
     case RECORD = 5;
 
     /**
-     * 从类型值获取系统指令类型实例.
+     * 从typevalueget系统指令type实例.
      */
     public static function fromType(int $type): self
     {
@@ -37,7 +37,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * 获取系统指令类型选项.
+     * get系统指令type选项.
      * @return array<int, mixed>
      */
     public static function getTypeOptions(): array
@@ -52,7 +52,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * 获取系统指令对应的图标.
+     * get系统指令对应的图标.
      */
     public function getIcon(): string
     {
@@ -66,7 +66,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * 获取默认的系统交互指令配置.
+     * get默认的系统交互指令configuration.
      */
     public static function getDefaultInstructs(): array
     {
@@ -116,7 +116,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * 获取所有系统指令类型值.
+     * get所有系统指令typevalue.
      * @return array<int>
      */
     public static function getAllTypes(): array
@@ -131,7 +131,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * 判断系统指令类型是否需要content字段.
+     * 判断系统指令type是否需要contentfield.
      */
     public static function requiresContent(int $type): bool
     {
@@ -144,7 +144,7 @@ enum SystemInstructType: int
 
     /**
      * 确保系统交互指令存在，如果缺少则补充.
-     * @return array 返回补充后的指令数组
+     * @return array return补充后的指令array
      */
     public static function ensureSystemInstructs(array $instructs): array
     {
@@ -163,7 +163,7 @@ enum SystemInstructType: int
             }
         }
 
-        // 如果没有工具栏组，创建一个新的
+        // 如果没有工具栏组，create一个新的
         if (! $hasSystemGroup) {
             $toolbarGroup = [
                 'id' => (string) IdGenerator::getSnowId(),
@@ -184,7 +184,7 @@ enum SystemInstructType: int
             }
         }
 
-        // 检查缺失的系统指令类型并补充
+        // check缺失的系统指令type并补充
         foreach (self::cases() as $case) {
             if (! in_array($case->value, $systemTypes)) {
                 $systemInstructs[$case->value] = [
@@ -197,13 +197,13 @@ enum SystemInstructType: int
             }
         }
 
-        // 按枚举定义顺序排序系统指令
+        // 按枚举定义顺序sort系统指令
         ksort($systemInstructs);
 
         // 重新组合工具栏组的 items，系统指令在前
         $toolbarGroup['items'] = array_merge(array_values($systemInstructs), $normalInstructs);
 
-        // 更新或添加工具栏组
+        // update或添加工具栏组
         if ($toolbarGroupIndex !== null) {
             $instructs[$toolbarGroupIndex] = $toolbarGroup;
         } else {

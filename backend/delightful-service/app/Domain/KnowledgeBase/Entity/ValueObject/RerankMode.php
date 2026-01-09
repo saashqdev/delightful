@@ -8,36 +8,36 @@ declare(strict_types=1);
 namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 
 /**
- * 重排序模式枚举类.
+ * 重sort模式枚举类.
  *
- * 定义了两种重排序模式：
- * - RERANKING_MODEL: 使用重排序模型对检索结果进行重排序
- * - WEIGHTED_SCORE: 使用加权分数对检索结果进行重排序
+ * 定义了两种重sort模式：
+ * - RERANKING_MODEL: 使用重sortmodel对检索result进行重sort
+ * - WEIGHTED_SCORE: 使用加权分数对检索result进行重sort
  */
 class RerankMode
 {
     /**
-     * 重排序模型.
+     * 重sortmodel.
      *
-     * 使用专门的重排序模型（如 BAAI/bge-reranker-large）对检索结果进行重排序。
-     * 重排序模型会根据查询和文档的相关性给出更准确的排序。
-     * 该模式通过配置参数 `reranking_mode` 字段设置，
-     * 从数据库中的 retrieve_config 配置获取。
+     * 使用专门的重sortmodel（如 BAAI/bge-reranker-large）对检索result进行重sort。
+     * 重sortmodel会根据query和文档的相关性给出更准确的sort。
+     * 该模式通过configurationparameter `reranking_mode` fieldset，
+     * 从database中的 retrieve_config configurationget。
      */
     public const RERANKING_MODEL = 'reranking_model';
 
     /**
      * 加权分数.
      *
-     * 使用不同检索方法的分数加权计算最终分数，对检索结果进行重排序。
-     * 例如，可以设置向量检索结果的权重为 0.7，关键词检索结果的权重为 0.3。
-     * 该模式通过配置参数 `reranking_mode` 字段设置，
-     * 从数据库中的 retrieve_config 配置获取。
+     * 使用不同检索method的分数加权计算最终分数，对检索result进行重sort。
+     * 例如，可以set向量检索result的权重为 0.7，关键词检索result的权重为 0.3。
+     * 该模式通过configurationparameter `reranking_mode` fieldset，
+     * 从database中的 retrieve_config configurationget。
      */
     public const WEIGHTED_SCORE = 'weighted_score';
 
     /**
-     * 获取所有可用的重排序模式.
+     * get所有可用的重sort模式.
      *
      * @return array<string>
      */
@@ -50,7 +50,7 @@ class RerankMode
     }
 
     /**
-     * 检查给定的重排序模式是否有效.
+     * check给定的重sort模式是否有效.
      */
     public static function isValid(string $mode): bool
     {

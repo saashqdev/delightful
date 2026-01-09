@@ -35,7 +35,7 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '根据文件名获取文件上传的预签名URL。仅能操作本流程产生的文件';
+        return '根据文件名get文件上传的预签名URL。仅能操作本流程产生的文件';
     }
 
     public function getCallback(): ?Closure
@@ -49,7 +49,7 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
             }
             $organizationCode = $executionData->getDataIsolation()->getCurrentOrganizationCode();
 
-            // 权限问题，目前仅允许操作本流程产生的文件。因为当前工具也是一个 flow，所以需要获取父流程的 code
+            // permissionissue，目前仅允许操作本流程产生的文件。因为当前工具也是一个 flow，所以需要get父流程的 code
             $name = $executionData->getParentFlowCode() . '/' . ltrim($name, '/');
 
             $fileDomain = di(FileDomainService::class);
@@ -88,7 +88,7 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
             "type": "string",
             "key": "name",
             "title": "文件名",
-            "description": "文件名称",
+            "description": "文件name",
             "required": null,
             "value": null,
             "encryption": false,
@@ -152,8 +152,8 @@ JSON,
         "expires": {
             "type": "number",
             "key": "expires",
-            "title": "过期时间",
-            "description": "文件上传的预签名URL的过期时间",
+            "title": "过期time",
+            "description": "文件上传的预签名URL的过期time",
             "required": null,
             "value": null,
             "encryption": false,

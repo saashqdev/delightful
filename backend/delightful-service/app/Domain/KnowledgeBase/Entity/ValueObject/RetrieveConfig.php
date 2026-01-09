@@ -11,23 +11,23 @@ use App\Infrastructure\Core\AbstractValueObject;
 use InvalidArgumentException;
 
 /**
- * 知识库检索配置值对象
+ * 知识库检索configurationvalueobject
  *
- * 包含检索策略、检索方法、重排序配置等参数
+ * 包含检索策略、检索method、重sortconfiguration等parameter
  */
 class RetrieveConfig extends AbstractValueObject
 {
     /**
-     * 当前配置版本.
+     * 当前configuration版本.
      *
-     * 用于配置结构变更时的兼容性处理
+     * 用于configuration结构变更时的兼容性处理
      */
     public const int CURRENT_VERSION = 1;
 
     /**
-     * 检索方法.
+     * 检索method.
      *
-     * 可选值：
+     * 可选value：
      * - semantic_search: 语义检索
      * - full_text_search: 全文检索
      * - hybrid_search: 混合检索
@@ -38,27 +38,27 @@ class RetrieveConfig extends AbstractValueObject
     protected string $searchMethod = RetrievalMethod::SEMANTIC_SEARCH;
 
     /**
-     * 返回的最大结果数量.
+     * return的最大result数量.
      */
     protected int $topK = 3;
 
     /**
-     * 分数阈值
+     * 分数阈value
      *
-     * 只返回相似度分数大于该阈值的结果
+     * 只return相似度分数大于该阈value的result
      */
     protected float $scoreThreshold = 0.5;
 
     /**
-     * 是否启用分数阈值过滤.
+     * 是否启用分数阈valuefilter.
      */
     protected bool $scoreThresholdEnabled = false;
 
     /**
-     * 重排序模式.
+     * 重sort模式.
      *
-     * 可选值：
-     * - reranking_model: 使用重排序模型
+     * 可选value：
+     * - reranking_model: 使用重sortmodel
      * - weighted_score: 使用加权分数
      *
      * @see RerankMode
@@ -66,14 +66,14 @@ class RetrieveConfig extends AbstractValueObject
     protected string $rerankingMode = RerankMode::WEIGHTED_SCORE;
 
     /**
-     * 是否启用重排序.
+     * 是否启用重sort.
      */
     protected bool $rerankingEnable = false;
 
     /**
-     * 权重配置.
+     * 权重configuration.
      *
-     * 包含向量检索和关键词检索的权重配置
+     * 包含向量检索和关键词检索的权重configuration
      */
     protected array $weights = [
         'vector_setting' => [
@@ -94,9 +94,9 @@ class RetrieveConfig extends AbstractValueObject
     ];
 
     /**
-     * 重排序模型配置.
+     * 重sortmodelconfiguration.
      *
-     * 包含重排序模型的相关配置参数
+     * 包含重sortmodel的相关configurationparameter
      */
     protected array $rerankingModel = [
         'reranking_model_name' => '',
@@ -104,14 +104,14 @@ class RetrieveConfig extends AbstractValueObject
     ];
 
     /**
-     * 配置版本.
+     * configuration版本.
      *
-     * 用于配置结构变更时的兼容性处理
+     * 用于configuration结构变更时的兼容性处理
      */
     private int $version = self::CURRENT_VERSION;
 
     /**
-     * 获取配置版本.
+     * getconfiguration版本.
      */
     public function getVersion(): int
     {
@@ -119,7 +119,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 设置配置版本.
+     * setconfiguration版本.
      */
     public function setVersion(int $version): self
     {
@@ -128,7 +128,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 获取检索方法.
+     * get检索method.
      */
     public function getSearchMethod(): string
     {
@@ -136,7 +136,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 设置检索方法.
+     * set检索method.
      */
     public function setSearchMethod(string $searchMethod): self
     {
@@ -148,7 +148,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 获取返回的最大结果数量.
+     * getreturn的最大result数量.
      */
     public function getTopK(): int
     {
@@ -156,7 +156,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 设置返回的最大结果数量.
+     * setreturn的最大result数量.
      */
     public function setTopK(int $topK): self
     {
@@ -168,7 +168,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 获取分数阈值
+     * get分数阈value
      */
     public function getScoreThreshold(): float
     {
@@ -176,7 +176,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 设置分数阈值
+     * set分数阈value
      */
     public function setScoreThreshold(float $scoreThreshold): self
     {
@@ -188,7 +188,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 是否启用分数阈值过滤.
+     * 是否启用分数阈valuefilter.
      */
     public function isScoreThresholdEnabled(): bool
     {
@@ -196,7 +196,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 设置是否启用分数阈值过滤.
+     * set是否启用分数阈valuefilter.
      */
     public function setScoreThresholdEnabled(bool $scoreThresholdEnabled): self
     {
@@ -205,7 +205,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 获取重排序模式.
+     * get重sort模式.
      */
     public function getRerankingMode(): string
     {
@@ -213,7 +213,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 设置重排序模式.
+     * set重sort模式.
      */
     public function setRerankingMode(string $rerankingMode): self
     {
@@ -225,7 +225,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 是否启用重排序.
+     * 是否启用重sort.
      */
     public function isRerankingEnable(): bool
     {
@@ -233,7 +233,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 设置是否启用重排序.
+     * set是否启用重sort.
      */
     public function setRerankingEnable(bool $rerankingEnable): self
     {
@@ -242,7 +242,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 获取权重配置.
+     * get权重configuration.
      */
     public function getWeights(): array
     {
@@ -250,11 +250,11 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 设置权重配置.
+     * set权重configuration.
      */
     public function setWeights(array $weights): self
     {
-        // 验证权重配置
+        // 验证权重configuration
         if (! isset($weights['vector_setting']) || ! isset($weights['keyword_setting']) || ! isset($weights['graph_setting'])) {
             throw new InvalidArgumentException('Weights must contain vector_setting, keyword_setting and graph_setting');
         }
@@ -264,7 +264,7 @@ class RetrieveConfig extends AbstractValueObject
             throw new InvalidArgumentException('Vector setting must contain vector_weight and keyword setting must contain keyword_weight');
         }
 
-        // 验证 graph_setting 必须包含必要的字段
+        // 验证 graph_setting 必须包含必要的field
         if (! isset($weights['graph_setting']['relation_weight'])
             || ! isset($weights['graph_setting']['max_depth'])
             || ! isset($weights['graph_setting']['include_properties'])) {
@@ -284,7 +284,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 获取重排序模型配置.
+     * get重sortmodelconfiguration.
      */
     public function getRerankingModel(): array
     {
@@ -292,17 +292,17 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 设置重排序模型配置.
+     * set重sortmodelconfiguration.
      */
     public function setRerankingModel(array $rerankingModel): self
     {
-        // 合并默认配置
+        // 合并默认configuration
         $this->rerankingModel = array_merge($this->rerankingModel, $rerankingModel);
         return $this;
     }
 
     /**
-     * 创建默认配置.
+     * create默认configuration.
      */
     public static function createDefault(): self
     {
@@ -310,7 +310,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 从数组创建配置.
+     * 从arraycreateconfiguration.
      */
     public static function fromArray(array $config): self
     {
@@ -351,7 +351,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * 转换为数组.
+     * 转换为array.
      */
     public function toArray(): array
     {

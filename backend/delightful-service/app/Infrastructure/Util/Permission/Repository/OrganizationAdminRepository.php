@@ -20,7 +20,7 @@ use Hyperf\DbConnection\Db;
 use function Hyperf\Support\now;
 
 /**
- * 组织管理员仓库实现.
+ * organization管理员仓库实现.
  */
 readonly class OrganizationAdminRepository implements OrganizationAdminRepositoryInterface
 {
@@ -30,7 +30,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 保存组织管理员.
+     * 保存organization管理员.
      */
     public function save(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdminEntity): OrganizationAdminEntity
     {
@@ -64,7 +64,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 根据ID获取组织管理员.
+     * 根据IDgetorganization管理员.
      */
     public function getById(DataIsolation $dataIsolation, int $id): ?OrganizationAdminEntity
     {
@@ -76,7 +76,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 根据用户ID获取组织管理员.
+     * 根据userIDgetorganization管理员.
      */
     public function getByUserId(DataIsolation $dataIsolation, string $userId): ?OrganizationAdminEntity
     {
@@ -88,7 +88,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 查询组织管理员列表.
+     * queryorganization管理员list.
      */
     public function queries(DataIsolation $dataIsolation, Page $page, ?array $filters = null): array
     {
@@ -98,11 +98,11 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
             $query->where('user_id', $filters['user_id']);
         }
 
-        // 排序：先按是否为组织创建者排序，再按授权时间排序，都是降序
+        // sort：先按是否为organizationcreate者sort，再按authorizationtimesort，都是降序
         $query->orderBy('is_organization_creator', 'desc')
             ->orderBy('granted_at', 'desc');
 
-        // 分页
+        // pagination
         $total = $query->count();
         $query->forPage($page->getPage(), $page->getPageNum());
 
@@ -119,7 +119,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 删除组织管理员.
+     * deleteorganization管理员.
      */
     public function delete(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdminEntity): void
     {
@@ -129,7 +129,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 检查用户是否为组织管理员.
+     * checkuser是否为organization管理员.
      */
     public function isOrganizationAdmin(DataIsolation $dataIsolation, string $userId): bool
     {
@@ -140,22 +140,22 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 授予用户组织管理员权限.
+     * 授予userorganization管理员permission.
      */
     public function grant(DataIsolation $dataIsolation, string $userId, ?string $grantorUserId, ?string $remarks = null, bool $isOrganizationCreator = false): OrganizationAdminEntity
     {
-        // 检查是否已存在
+        // check是否已存在
         $existing = $this->getByUserId($dataIsolation, $userId);
         if ($existing) {
             return $existing;
         }
 
-        // 创建新的组织管理员
+        // create新的organization管理员
         $entity = new OrganizationAdminEntity();
         $entity->setUserId($userId);
         $entity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
 
-        // 获取用户的 delightful_id
+        // getuser的 delightful_id
         $user = $this->userRepository->getUserById($userId);
         if ($user) {
             $entity->setDelightfulId($user->getDelightfulId());
@@ -171,7 +171,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 撤销用户组织管理员权限.
+     * 撤销userorganization管理员permission.
      */
     public function revoke(DataIsolation $dataIsolation, string $userId): void
     {
@@ -183,7 +183,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 获取组织创建人.
+     * getorganizationcreate人.
      */
     public function getOrganizationCreator(DataIsolation $dataIsolation): ?OrganizationAdminEntity
     {
@@ -196,7 +196,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 获取组织下所有组织管理员.
+     * getorganization下所有organization管理员.
      */
     public function getAllOrganizationAdmins(DataIsolation $dataIsolation): array
     {
@@ -212,7 +212,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 批量检查用户是否为组织管理员.
+     * 批量checkuser是否为organization管理员.
      */
     public function batchCheckOrganizationAdmin(DataIsolation $dataIsolation, array $userIds): array
     {
@@ -231,7 +231,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 基于数据隔离获取 OrganizationAdminModel 查询构造器.
+     * 基于数据隔离get OrganizationAdminModel query构造器.
      */
     private function organizationAdminQuery(DataIsolation $dataIsolation): Builder
     {
@@ -239,12 +239,12 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 映射数组数据到实体.
+     * 映射array数据到实体.
      * @param mixed $row
      */
     private function mapArrayToEntity($row): OrganizationAdminEntity
     {
-        // 处理 DB::select 返回的 stdClass 对象或数组
+        // 处理 DB::select return的 stdClass object或array
         $data = is_array($row) ? $row : (array) $row;
 
         $entity = new OrganizationAdminEntity();
@@ -257,7 +257,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
         $entity->setIsOrganizationCreator((bool) ($data['is_organization_creator'] ?? false));
         $entity->setRemarks($data['remarks'] ?? null);
 
-        // 处理日期字段
+        // 处理日期field
         if (isset($data['granted_at']) && $data['granted_at']) {
             $entity->setGrantedAt(new DateTime($data['granted_at']));
         }

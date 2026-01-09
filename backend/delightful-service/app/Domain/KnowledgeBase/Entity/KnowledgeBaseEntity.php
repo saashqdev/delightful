@@ -64,7 +64,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     protected DateTime $updatedAt;
 
     /**
-     * 业务维护的期望总数.
+     * 业务维护的expect总数.
      */
     protected int $expectedNum = 0;
 
@@ -74,9 +74,9 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     protected int $completedNum = 0;
 
     /**
-     * 检索配置.
+     * 检索configuration.
      *
-     * 包含检索策略、检索方法、重排序配置等参数
+     * 包含检索策略、检索method、重sortconfiguration等parameter
      */
     protected ?RetrieveConfig $retrieveConfig = null;
 
@@ -121,16 +121,16 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function prepareForCreation(): void
     {
         if (empty($this->name)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '知识库名称 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '知识库name 不能为空');
         }
         if (empty($this->type)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '知识库类型 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '知识库type 不能为空');
         }
         if (empty($this->organizationCode)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '组织编码 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'organization编码 不能为空');
         }
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '创建者 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 不能为空');
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
@@ -156,10 +156,10 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function prepareForModification(KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void
     {
         if (empty($this->name)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '知识库名称 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '知识库name 不能为空');
         }
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '创建者 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 不能为空');
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
@@ -186,13 +186,13 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function prepareForModifyProcess(KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void
     {
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '创建者 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 不能为空');
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
         }
         if ($this->completedNum > $this->expectedNum) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '已完成数量不能大于期望数量');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '已完成数量不能大于expect数量');
         }
         $delightfulFlowKnowledgeEntity->setExpectedNum($this->expectedNum);
         $delightfulFlowKnowledgeEntity->setCompletedNum($this->completedNum);
@@ -204,7 +204,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     {
         $driver = VectorStoreDriver::tryFrom($this->vectorDB);
         if ($driver === null) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "向量数据库 [{$this->vectorDB}] 不存在");
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "向量database [{$this->vectorDB}] 不存在");
         }
         return $driver->get();
     }
@@ -475,7 +475,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
 
     public function setFragmentConfig(null|array|FragmentConfig $fragmentConfig): self
     {
-        // 默认配置
+        // 默认configuration
         is_null($fragmentConfig) && $fragmentConfig = $this->getDefaultFragmentConfig();
         is_array($fragmentConfig) && $fragmentConfig = FragmentConfig::fromArray($fragmentConfig);
         $this->fragmentConfig = $fragmentConfig;
@@ -490,14 +490,14 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function setEmbeddingConfig(?array $embeddingConfig): self
     {
         isset($embeddingConfig['model_id']) && $this->model = $embeddingConfig['model_id'];
-        // 兼容旧配置，初始化默认嵌入配置
+        // 兼容旧configuration，初始化默认嵌入configuration
         is_null($embeddingConfig) && $embeddingConfig = ['model_id' => $this->model];
         $this->embeddingConfig = $embeddingConfig;
         return $this;
     }
 
     /**
-     * 获取检索配置.
+     * get检索configuration.
      */
     public function getRetrieveConfig(): ?RetrieveConfig
     {
@@ -505,7 +505,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     }
 
     /**
-     * 设置检索配置.
+     * set检索configuration.
      */
     public function setRetrieveConfig(null|array|RetrieveConfig $retrieveConfig): void
     {
@@ -515,9 +515,9 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     }
 
     /**
-     * 获取或创建检索配置.
+     * get或create检索configuration.
      *
-     * 如果检索配置不存在，则创建默认配置
+     * 如果检索configuration不存在，则create默认configuration
      */
     public function getOrCreateRetrieveConfig(): RetrieveConfig
     {
@@ -539,8 +539,8 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public static function createConversationTemplate(string $organizationCode, string $creator): KnowledgeBaseEntity
     {
         $self = self::createTemplate($organizationCode, ConstValue::KNOWLEDGE_USER_CURRENT_CONVERSATION, $creator);
-        $self->setName('当前会话');
-        $self->setDescription("{$creator} 的会话");
+        $self->setName('当前session');
+        $self->setDescription("{$creator} 的session");
         $self->setType(KnowledgeType::UserConversation->value);
         return $self;
     }
@@ -603,7 +603,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     private function checkModel(): void
     {
         if (empty($this->model)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '模型 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'model 不能为空');
         }
     }
 

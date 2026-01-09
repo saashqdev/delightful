@@ -12,11 +12,11 @@ use Hyperf\Odin\Model\OpenAIModel;
 
 use function Hyperf\Support\env;
 
-// 递归处理配置值中的环境变量
+// 递归handle配置value中的环境variable
 function processConfigValue(&$value): void
 {
     if (is_string($value)) {
-        // 字符串类型：解析环境变量
+        // stringtype：parse环境variable
         $parts = explode('|', $value);
         if (count($parts) > 1) {
             $value = env($parts[0], $parts[1]);
@@ -24,18 +24,18 @@ function processConfigValue(&$value): void
             $value = env($parts[0], $parts[0]);
         }
     } elseif (is_array($value)) {
-        // 数组类型：递归处理每个元素，保留数组结构
+        // arraytype：递归handle每个元素，保留array结构
         foreach ($value as &$item) {
             processConfigValue($item);
         }
     }
-    // 其他类型（如 int, bool 等）：保留原值，不进行解析
+    // 其他type（如 int, bool 等）：保留原value，不进行parse
 }
 
-// 处理配置中的环境变量
+// handle配置中的环境variable
 function processModelConfig(&$modelItem, string $modelName): void
 {
-    // 处理模型值
+    // handle模型value
     if (isset($modelItem['model'])) {
         $modelItemModel = explode('|', $modelItem['model']);
         if (count($modelItemModel) > 1) {
@@ -47,22 +47,22 @@ function processModelConfig(&$modelItem, string $modelName): void
         $modelItem['model'] = $modelName;
     }
 
-    // 处理配置值
+    // handle配置value
     if (isset($modelItem['config']) && is_array($modelItem['config'])) {
         foreach ($modelItem['config'] as &$item) {
             processConfigValue($item);
         }
     }
 
-    // 处理 API 选项值
+    // handle API 选项value
     if (isset($modelItem['api_options']) && is_array($modelItem['api_options'])) {
         foreach ($modelItem['api_options'] as &$item) {
             processConfigValue($item);
         }
     }
 
-    // 优雅的打印加载成功的模型
-    echo "\033[32m✓\033[0m 模型加载成功: \033[1m" . $modelName . ' (' . $modelItem['model'] . ")\033[0m" . PHP_EOL;
+    // 优雅的打印loadsuccess的模型
+    echo "\033[32m✓\033[0m 模型loadsuccess: \033[1m" . $modelName . ' (' . $modelItem['model'] . ")\033[0m" . PHP_EOL;
 }
 
 $envModelConfigs = [];
@@ -205,16 +205,16 @@ if (env('AWS_CLAUDE_ENABLED', false)) {
     ];
 }
 
-// 加载默认模型配置（优先级最低）
+// load默认模型配置（优先级最低）
 $models = [];
 
-// 加载默认模型配置
+// load默认模型配置
 foreach ($envModelConfigs as $modelKey => $config) {
     processModelConfig($config, $modelKey);
     $models[$modelKey] = $config;
 }
 
-// 加载 odin_models.json 配置（优先级更高，会覆盖默认配置）
+// load odin_models.json 配置（优先级更高，会override默认配置）
 if (file_exists(BASE_PATH . '/odin_models.json')) {
     $customModels = json_decode(file_get_contents(BASE_PATH . '/odin_models.json'), true);
     if (is_array($customModels)) {
@@ -242,13 +242,13 @@ return [
                 'read' => 300.0,      // 读取超时（秒）
                 'total' => 350.0,     // 总体超时（秒）
                 'thinking' => 120.0,  // 思考超时（秒）
-                'stream_chunk' => 30.0, // 流式块间超时（秒）
-                'stream_first' => 60.0, // 首个流式块超时（秒）
+                'stream_chunk' => 30.0, // stream块间超时（秒）
+                'stream_first' => 60.0, // 首个stream块超时（秒）
             ],
             'custom_error_mapping_rules' => [],
             'logging' => [
                 // 日志字段白名单配置
-                // 如果为空数组或未配置，则打印所有字段
+                // 如果为nullarray或未配置，则打印所有字段
                 // 如果配置了字段列表，则只打印指定的字段
                 // 支持嵌套字段，使用点语法如 'args.messages'
                 // 注意：messages 和 tools 字段不在白名单中，不会被打印
@@ -259,7 +259,7 @@ return [
                     'model',                       // 模型名称
                     'duration_ms',                 // 请求耗时
                     'url',                         // 请求URL
-                    'status_code',                 // 响应状态码
+                    'status_code',                 // 响应status码
 
                     // options 信息
                     'options.headers',
@@ -273,21 +273,21 @@ return [
                     'options.json.business_params',
                     'options.json.thinking',
 
-                    // 使用量统计
-                    'usage',                       // 完整的usage对象
+                    // 使用量statistics
+                    'usage',                       // 完整的usageobject
                     'usage.input_tokens',          // 输入token数量
                     'usage.output_tokens',         // 输出token数量
                     'usage.total_tokens',          // 总token数量
 
-                    // 请求参数（排除敏感内容）
-                    'args.temperature',            // 温度参数
+                    // 请求parameter（排除敏感内容）
+                    'args.temperature',            // 温度parameter
                     'args.max_tokens',             // 最大token限制
                     'args.max_completion_tokens',             // 最大token限制
-                    'args.top_p',                  // Top-p参数
-                    'args.top_k',                  // Top-k参数
+                    'args.top_p',                  // Top-pparameter
+                    'args.top_k',                  // Top-kparameter
                     'args.frequency_penalty',      // 频率惩罚
                     'args.presence_penalty',       // 存在惩罚
-                    'args.stream',                 // 流式响应标志
+                    'args.stream',                 // stream响应标志
                     'args.stop',                   // 停止词
                     'args.seed',                   // 随机种子
 
@@ -297,41 +297,41 @@ return [
                     'token_estimate.output_tokens', // 估算输出tokens
 
                     // 响应内容（排除具体内容）
-                    'choices.0.finish_reason',     // 完成原因
+                    'choices.0.finish_reason',     // complete原因
                     'choices.0.index',             // 选择索引
 
-                    // 错误信息
-                    'error',                       // 错误详情
-                    'error.type',                  // 错误类型
-                    'error.message',               // 错误消息（不包含具体内容）
+                    // error信息
+                    'error',                       // error详情
+                    'error.type',                  // errortype
+                    'error.message',               // errormessage（不contain具体内容）
 
                     // 其他元数据
                     'created',                     // 创建时间戳
                     'id',                         // 请求ID
-                    'object',                     // 对象类型
+                    'object',                     // objecttype
                     'system_fingerprint',         // 系统指纹
                     'performance_flag',            // 性能标记（慢请求标识）
 
                     // 注意：以下字段被排除，不会打印
-                    // - args.messages (用户消息内容)
+                    // - args.messages (usermessage内容)
                     // - args.tools (工具定义)
-                    // - choices.0.message (响应消息内容)
-                    // - choices.0.delta (流式响应增量内容)
+                    // - choices.0.message (响应message内容)
+                    // - choices.0.delta (stream响应增量内容)
                     // - content (响应内容)
                 ],
-                // 是否启用字段白名单过滤，默认true（启用过滤）
+                // 是否启用字段白名单filter，默认true（启用filter）
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
-                // 最大字符串长度限制，超过此长度的字符串将被替换为 [Long Text]，设置为 0 表示不限制
+                // 最大string长度限制，超过此长度的string将被替换为 [Long Text]，设置为 0 表示不限制
                 'max_text_length' => env('ODIN_LOG_MAX_TEXT_LENGTH', 0),
             ],
             'network_retry_count' => 1,
         ],
         'models' => $models,
-        // 全局模型 options，可被模型本身的 options 覆盖
+        // 全局模型 options，可被模型本身的 options override
         'model_options' => [
             'error_mapping_rules' => [
-                // 示例：自定义错误映射
-                // '自定义错误关键词' => \Hyperf\Odin\Exception\LLMException\LLMTimeoutError::class,
+                // 示例：自定义error映射
+                // '自定义error关键词' => \Hyperf\Odin\Exception\LLMException\LLMTimeoutError::class,
             ],
         ],
         'model_fixed_temperature' => [

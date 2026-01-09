@@ -61,7 +61,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 预处理文档文件，根据文档文件类型，进行不同的处理.
+     * 预处理文档文件，根据文档文件type，进行不同的处理.
      */
     public function preProcessDocumentFiles(KnowledgeBaseDataIsolation $dataIsolation, array $documentFiles): array
     {
@@ -91,7 +91,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 替换内容中的图片为 DelightfulCompressibleContent 标签.
+     * 替换content中的图片为 DelightfulCompressibleContent 标签.
      */
     private function replaceImages(string $content, KnowledgeBaseDataIsolation $dataIsolation, ?string $knowledgeBaseCode = null): string
     {
@@ -107,12 +107,12 @@ class DocumentFileStrategy
                 $md5 = md5($imageUrl);
                 $isBase64 = str_starts_with($imageUrl, 'data:image/');
 
-                // 获取缓存key
+                // getcachekey
                 $cacheKey = 'knowledge_base:' . $knowledgeBaseCode . ':document_file:image:' . $md5;
                 $fileKey = $this->cache->get($cacheKey);
 
                 if (! $fileKey) {
-                    // 获取图片内容
+                    // get图片content
                     if ($isBase64) {
                         // 解析base64数据
                         $base64Data = explode(',', $imageUrl);
@@ -129,7 +129,7 @@ class DocumentFileStrategy
                     $tempFile = sys_get_temp_dir() . DIRECTORY_SEPARATOR . uniqid();
                     file_put_contents($tempFile, $imageContent);
 
-                    // 获取文件扩展名
+                    // get文件扩展名
                     $finfo = finfo_open(FILEINFO_MIME_TYPE);
                     $mimeType = finfo_file($finfo, $tempFile);
                     finfo_close($finfo);
@@ -140,7 +140,7 @@ class DocumentFileStrategy
                     $imagePath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $imageName;
                     rename($tempFile, $imagePath);
 
-                    // 创建上传文件对象并上传
+                    // create上传文件object并上传
                     $uploadFile = new UploadFile($imagePath, 'knowledge-base/' . $knowledgeBaseCode, $imageName);
                     $this->fileDomainService->uploadByCredential(
                         $dataIsolation->getCurrentOrganizationCode(),
@@ -159,7 +159,7 @@ class DocumentFileStrategy
                     'url' => $imageUrl,
                 ]);
             } finally {
-                // 删除临时文件
+                // delete临时文件
                 if (isset($imagePath) && file_exists($imagePath)) {
                     unlink($imagePath);
                 }
@@ -173,7 +173,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 根据MIME类型获取文件扩展名.
+     * 根据MIMEtypeget文件扩展名.
      */
     private function getExtensionFromMimeType(string $mimeType): string
     {
@@ -208,7 +208,7 @@ class DocumentFileStrategy
             return $driver;
         }
 
-        $this->logger->warning('没有与[' . get_class($documentFile) . ']匹配的文本解析策略！将返回空值！');
+        $this->logger->warning('没有与[' . get_class($documentFile) . ']匹配的文本解析策略！将return空value！');
         return null;
     }
 }

@@ -19,12 +19,12 @@ return new class extends Migration {
         }
         Schema::create('delightful_contact_third_platform_users', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('delightful_id', 64)->nullable()->comment('delightful_user_account 表的 delightful_id');
-            $table->string('delightful_user_id', 64)->nullable()->comment('delightful_user_organization 表的 user_id');
-            $table->string('delightful_organization_code', 32)->comment('麦吉用户体系下的组织code');
-            $table->string('third_user_id', 128)->comment('第三方平台用户id');
-            $table->string('third_union_id', 128)->comment('第三方平台用户 union_id');
-            $table->string('third_platform_type', 32)->comment('第三方平台类型 dingTalk/lark/weCom/teamShare');
+            $table->string('delightful_id', 64)->nullable()->comment('delightful_user_account table的 delightful_id');
+            $table->string('delightful_user_id', 64)->nullable()->comment('delightful_user_organization table的 user_id');
+            $table->string('delightful_organization_code', 32)->comment('麦吉user体系下的organizationcode');
+            $table->string('third_user_id', 128)->comment('第三方平台userid');
+            $table->string('third_union_id', 128)->comment('第三方平台user union_id');
+            $table->string('third_platform_type', 32)->comment('第三方平台type dingTalk/lark/weCom/teamShare');
             $table->string('third_employee_no', 64)->nullable()->default('')->comment('工号');
             $table->string('third_real_name', 64)->comment('员工姓名');
             $table->string('third_nick_name', 64)->nullable()->default('')->comment('员工昵称');
@@ -33,12 +33,12 @@ return new class extends Migration {
             $table->string('third_email', 128)->nullable()->default('')->comment('邮箱');
             $table->string('third_mobile', 64)->nullable()->default('')->comment('第三方平台员工手机号');
             $table->string('third_id_number', 64)->nullable()->default('')->comment('员工身份证');
-            $table->text('third_platform_users_extra')->comment('额外信息');
+            $table->text('third_platform_users_extra')->comment('额外info');
             $table->index('delightful_user_id', 'delightful_user_id');
             $table->unique(['third_union_id', 'third_platform_type', 'delightful_organization_code'], 'unique_third_id');
             $table->softDeletes();
             $table->timestamps();
-            $table->comment('第三方平台同步过来的用户信息表. 不过天书有点特殊,可以直接把天书的用户当做麦吉的用户.');
+            $table->comment('第三方平台同步过来的userinfotable. 不过天书有点特殊,可以直接把天书的user当做麦吉的user.');
         });
     }
 

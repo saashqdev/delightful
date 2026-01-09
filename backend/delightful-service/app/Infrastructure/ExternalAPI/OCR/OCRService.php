@@ -38,7 +38,7 @@ readonly class OCRService
         $ocrClient = $this->clientFactory->getClient($type);
         try {
             $result = retry(1, function () use ($ocrClient, $url) {
-                // 如果还有其他服务商，这里可以故障转移
+                // 如果还有其他service商，这里可以故障转移
                 return $this->get($url, $ocrClient);
             }, 1000);
         } catch (Throwable $throwable) {
@@ -54,10 +54,10 @@ readonly class OCRService
 
     private function get(string $url, OCRClientInterface $OCRClient): string
     {
-        // 定义 Redis 缓存键
+        // 定义 Redis cache键
         $cacheKey = 'file_cache:' . md5($url);
 
-        // 尝试从缓存获取数据
+        // 尝试从cacheget数据
         $cachedData = $this->cache->get($cacheKey);
         if ($cachedData) {
             $cachedData = Json::decode($cachedData);
@@ -70,10 +70,10 @@ readonly class OCRService
             ],
         ]);
 
-        // 获取远程文件的头信息
+        // get远程文件的头info
         $headers = get_headers($url, true, $context);
         if ($headers === false) {
-            throw new RuntimeException("无法获取头信息: {$url}");
+            throw new RuntimeException("无法get头info: {$url}");
         }
 
         // 提取 `Last-Modified`、`ETag` 和 `Content-Length`（如果存在）
@@ -81,29 +81,29 @@ readonly class OCRService
         $etag = $headers['Etag'] ?? null;
         $contentLength = $headers['Content-Length'] ?? null;
 
-        // 检查缓存中的 `Last-Modified`、`ETag` 和 `Content-Length`
+        // checkcache中的 `Last-Modified`、`ETag` 和 `Content-Length`
         if ($cachedData) {
             $isCacheValid = true;
 
-            // 检查 Last-Modified 和 ETag
+            // check Last-Modified 和 ETag
             if ($lastModified && $etag) {
                 $isCacheValid = $cachedData['Last-Modified'] === $lastModified && $cachedData['Etag'] === $etag;
             }
-            // 如果没有 Last-Modified 或 ETag，检查 Content-Length
+            // 如果没有 Last-Modified 或 ETag，check Content-Length
             elseif ($contentLength) {
                 $isCacheValid = $cachedData['Content-Length'] === $contentLength;
             }
 
-            // 如果缓存数据有效，直接返回缓存内容
+            // 如果cache数据有效，直接returncachecontent
             if ($isCacheValid) {
                 return $cachedData['content'];
             }
         }
 
-        // 调用 OCR 服务进行处理
+        // call OCR service进行处理
         $result = $OCRClient->ocr($url);
 
-        // 更新缓存数据
+        // updatecache数据
         $newCacheData = [
             'Last-Modified' => $lastModified,
             'Etag' => $etag,

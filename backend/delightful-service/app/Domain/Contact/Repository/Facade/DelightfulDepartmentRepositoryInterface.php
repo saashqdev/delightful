@@ -16,7 +16,7 @@ interface DelightfulDepartmentRepositoryInterface
 {
     public function getDepartmentById(string $departmentId, string $organizationCode): ?DelightfulDepartmentEntity;
 
-    // 获取父部门下的一个子部门
+    // get父department下的一个子department
     public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?DelightfulDepartmentEntity;
 
     /**
@@ -30,16 +30,16 @@ interface DelightfulDepartmentRepositoryInterface
     public function getDepartmentsByIdsInDelightful(array $departmentIds, bool $keyById = false): array;
 
     /**
-     * 批量获取部门的下n级部门.
+     * 批量getdepartment的下n级department.
      */
     public function getSubDepartmentsById(string $departmentId, string $organizationCode, int $size, int $offset): DepartmentsPageResponseDTO;
 
     /**
-     * 获取某一层级的部门.
+     * get某一层级的department.
      */
     public function getSubDepartmentsByLevel(int $level, string $organizationCode, int $depth, int $size, int $offset): DepartmentsPageResponseDTO;
 
-    // 给定的部门id是否有下级部门
+    // 给定的departmentid是否有下级department
     #[ArrayShape([
         [
             'parent_department_id' => 'string',
@@ -53,18 +53,18 @@ interface DelightfulDepartmentRepositoryInterface
     public function searchDepartments(string $departmentName, string $organizationCode, string $pageToken = '', ?int $pageSize = null): array;
 
     /**
-     * 获取组织的所有部门.
+     * getorganization的所有department.
      * @return DelightfulDepartmentEntity[]
      */
     public function getOrganizationDepartments(string $organizationCode, array $fields = ['*'], bool $keyById = false): array;
 
     /**
-     * 增加部门说明书.
+     * 增加department说明书.
      */
     public function addDepartmentDocument(string $departmentId, string $documentId): void;
 
     /**
-     * 获取部门的所有子部门的成员总数.
+     * getdepartment的所有子department的成员总数.
      */
     public function getSelfAndChildrenEmployeeSum(DelightfulDepartmentEntity $delightfulDepartmentEntity): int;
 
@@ -79,19 +79,19 @@ interface DelightfulDepartmentRepositoryInterface
     public function updateDepartmentsOptionByIds(array $departmentIds, ?DepartmentOption $departmentOption = null): int;
 
     /**
-     * 根据部门ID批量删除部门（逻辑删除，设置 deleted_at 字段）。
+     * 根据departmentID批量deletedepartment（逻辑delete，set deleted_at field）。
      */
     public function deleteDepartmentsByIds(array $departmentIds, string $organizationCode): int;
 
     /**
-     * 获取组织的根部门ID.
+     * getorganization的根departmentID.
      */
     public function getDepartmentRootId(string $organizationCode): ?string;
 
     /**
-     * 批量获取多个组织的根部门信息.
-     * @param array $organizationCodes 组织代码数组
-     * @return DelightfulDepartmentEntity[] 根部门实体数组
+     * 批量get多个organization的根departmentinfo.
+     * @param array $organizationCodes organization代码array
+     * @return DelightfulDepartmentEntity[] 根department实体array
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array;
 

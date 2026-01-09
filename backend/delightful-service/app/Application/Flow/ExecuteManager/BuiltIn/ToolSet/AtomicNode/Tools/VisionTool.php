@@ -41,7 +41,7 @@ class VisionTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '提供视觉能力。用于识别用户对图片的意图，并返回识别结果';
+        return '提供视觉能力。用于识别user对图片的意图，并return识别result';
     }
 
     /**
@@ -115,8 +115,8 @@ class VisionTool extends AbstractBuiltInTool
         "model": {
             "type": "string",
             "key": "model",
-            "title": "模型",
-            "description": "可用模型。非必填",
+            "title": "model",
+            "description": "可用model。非必填",
             "required": null,
             "value": null,
             "encryption": false,
@@ -128,7 +128,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "string",
             "key": "intent",
             "title": "意图",
-            "description": "意图。用户对图片的意图",
+            "description": "意图。user对图片的意图",
             "required": null,
             "value": null,
             "encryption": false,
@@ -152,7 +152,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "array",
             "key": "image_urls",
             "title": "文件",
-            "description": "图片链接列表。多个图片时使用",
+            "description": "图片链接list。多个图片时使用",
             "required": null,
             "value": null,
             "encryption": false,
@@ -200,8 +200,8 @@ JSON, true)));
         "response": {
             "type": "string",
             "key": "response",
-            "title": "识别结果",
-            "description": "识别结果",
+            "title": "识别result",
+            "description": "识别result",
             "required": null,
             "value": null,
             "encryption": false,
@@ -231,26 +231,26 @@ JSON, true)));
     {
         return ComponentFactory::fastCreate([
             'type' => StructureType::Value,
-            'structure' => Value::buildConst('你是一个专业的视觉理解助理，请按照以下步骤回应用户：
+            'structure' => Value::buildConst('你是一个专业的视觉理解助理，请按照以下步骤回应user：
 
-1. 优先理解用户的意图，始终使用与用户相同的语言回答
-2. 提供简洁明了的直接回答，直接满足用户的主要问题
-3. 再对图片内容进行多维度详细分析，包括但不限于：
-   - 主体内容识别：人物、物体、场景、文字等
+1. 优先理解user的意图，始终使用与user相同的语言回答
+2. 提供简洁明了的直接回答，直接满足user的主要issue
+3. 再对图片content进行多维度详细分析，包括但不限于：
+   - 主体content识别：人物、物体、场景、文字等
    - 视觉特征：颜色、构图、光线、质量等
-   - 语义信息：活动、情绪、关系、背景故事等
+   - 语义info：活动、情绪、关系、背景故事等
    - 文字识别：如有文字，准确提取并理解含义
-   - 技术信息：如有图表/数据，分析其含义
+   - 技术info：如有图table/数据，分析其含义
    
 4. 分析格式要求：
-   - 对于重要分析结果，使用结构化JSON格式呈现，如：{"类别":"xx", "主体":"xx", "特征":["xx","xx"]}
-   - 对于不确定内容，明确表明推测性质，例如："可能是..."
+   - 对于重要分析result，使用结构化JSON格式呈现，如：{"类别":"xx", "主体":"xx", "特征":["xx","xx"]}
+   - 对于不确定content，明确table明推测性质，例如："可能是..."
    - 如图片质量较低，指出限制因素并尽力分析
    - 对于多图分析，分别标记图片序号进行解析，并总结其关联性
    
 5. 注意事项：
-   - 避免对敏感内容做主观评判
-   - 当无法确定某部分内容时，坦诚表达不确定性
+   - 避免对敏感content做主观评判
+   - 当无法确定某部分content时，坦诚table达不确定性
    - 保持客观专业的语气'),
         ]);
     }
@@ -276,7 +276,7 @@ JSON, true)));
     "type": "array",
     "key": "root",
     "sort": 0,
-    "title": "历史消息",
+    "title": "历史message",
     "description": "",
     "required": null,
     "value": {
@@ -297,7 +297,7 @@ JSON, true)));
         "type": "object",
         "key": "messages",
         "sort": 0,
-        "title": "历史消息",
+        "title": "历史message",
         "description": "",
         "required": [
             "role",
@@ -325,7 +325,7 @@ JSON, true)));
                 "type": "string",
                 "key": "content",
                 "sort": 1,
-                "title": "内容",
+                "title": "content",
                 "description": "",
                 "required": null,
                 "value": null,

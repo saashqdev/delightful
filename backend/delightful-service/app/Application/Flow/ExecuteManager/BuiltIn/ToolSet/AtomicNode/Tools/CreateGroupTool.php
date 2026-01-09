@@ -36,7 +36,7 @@ class CreateGroupTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '创建一个具有指定人员的群聊天';
+        return 'create一个具有指定人员的群聊天';
     }
 
     public function getCallback(): ?Closure
@@ -99,8 +99,8 @@ class CreateGroupTool extends AbstractBuiltInTool
         "group_name": {
             "type": "string",
             "key": "group_name",
-            "title": "群名称",
-            "description": "群名称",
+            "title": "群name",
+            "description": "群name",
             "required": null,
             "value": null,
             "encryption": false,
@@ -122,8 +122,8 @@ class CreateGroupTool extends AbstractBuiltInTool
                 "id": {
                     "type": "string",
                     "key": "id",
-                    "title": "用户 ID",
-                    "description": "用户 ID",
+                    "title": "user ID",
+                    "description": "user ID",
                     "required": null,
                     "value": null,
                     "encryption": false,
@@ -134,8 +134,8 @@ class CreateGroupTool extends AbstractBuiltInTool
                 "name": {
                     "type": "string",
                     "key": "name",
-                    "title": "用户名称",
-                    "description": "用户名称",
+                    "title": "username",
+                    "description": "username",
                     "required": null,
                     "value": null,
                     "encryption": false,
@@ -169,8 +169,8 @@ class CreateGroupTool extends AbstractBuiltInTool
                     "id": {
                         "type": "string",
                         "key": "id",
-                        "title": "用户 ID",
-                        "description": "用户 ID",
+                        "title": "user ID",
+                        "description": "user ID",
                         "required": null,
                         "value": null,
                         "encryption": false,
@@ -181,8 +181,8 @@ class CreateGroupTool extends AbstractBuiltInTool
                     "name": {
                         "type": "string",
                         "key": "name",
-                        "title": "用户名称",
-                        "description": "用户名称",
+                        "title": "username",
+                        "description": "username",
                         "required": null,
                         "value": null,
                         "encryption": false,
@@ -197,8 +197,8 @@ class CreateGroupTool extends AbstractBuiltInTool
         "group_type": {
             "type": "number",
             "key": "group_type",
-            "title": "群类型",
-            "description": "群类型。1 内部群；2 培训群；3 会议群；4 项目群；5 工单群；6 外部群；",
+            "title": "群type",
+            "description": "群type。1 内部群；2 培训群；3 会议群；4 项目群；5 工单群；6 外部群；",
             "required": null,
             "value": null,
             "encryption": false,
@@ -210,7 +210,7 @@ class CreateGroupTool extends AbstractBuiltInTool
             "type": "string",
             "key": "opening_speech",
             "title": "开场白",
-            "description": "已当前助理的身份发送一次群聊的开场白。默认不传该值，除非指定需要发送开场白。",
+            "description": "已当前助理的身份发送一次群聊的开场白。默认不传该value，除非指定需要发送开场白。",
             "required": null,
             "value": null,
             "encryption": false,

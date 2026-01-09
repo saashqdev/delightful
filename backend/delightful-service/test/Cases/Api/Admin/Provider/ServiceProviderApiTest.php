@@ -25,9 +25,9 @@ class ServiceProviderApiTest extends BaseTest
         $uri = $this->baseUri . '?category=llm';
         $response = $this->get($uri, [], $this->getCommonHeaders());
 
-        // 如果返回认证或权限相关错误，跳过测试（仅验证路由可用）
+        // 如果return认证或权限相关error，跳过测试（仅validate路由可用）
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003], true)) {
-            $this->markTestSkipped('接口认证失败或无权限，路由校验通过');
+            $this->markTestSkipped('接口认证fail或无权限，路由校验通过');
             return;
         }
 
@@ -40,7 +40,7 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * 测试模型创建和更新的完整流程，包括配置版本验证.
+     * 测试模型创建和更新的完整流程，包括配置版本validate.
      */
     public function testSaveModelToServiceProviderCreate(): void
     {
@@ -92,29 +92,29 @@ class ServiceProviderApiTest extends BaseTest
 
         $createResponse = $this->post($modelUri, $createRequestData, $this->getCommonHeaders());
 
-        // 验证创建响应
+        // validate创建响应
         $this->assertIsArray($createResponse);
         $this->assertArrayHasKey('code', $createResponse);
-        $this->assertSame(1000, $createResponse['code'], '创建模型应该成功');
+        $this->assertSame(1000, $createResponse['code'], '创建模型应该success');
         $this->assertArrayHasKey('data', $createResponse);
-        $this->assertArrayHasKey('id', $createResponse['data'], '返回数据应包含模型ID');
+        $this->assertArrayHasKey('id', $createResponse['data'], 'return数据应contain模型ID');
 
         $modelId = $createResponse['data']['id'];
-        $this->assertNotEmpty($modelId, '模型ID不应为空');
+        $this->assertNotEmpty($modelId, '模型ID不应为null');
 
-        // ========== 步骤2: 调用详情接口验证4个成本字段 ==========
+        // ========== 步骤2: call详情接口validate4个成本字段 ==========
         $detailUri = $this->baseUri . '/' . $serviceProviderConfigId;
         $detailResponse = $this->get($detailUri, [], $this->getCommonHeaders());
 
         $this->assertIsArray($detailResponse);
-        $this->assertSame(1000, $detailResponse['code'], '获取详情应该成功');
+        $this->assertSame(1000, $detailResponse['code'], '获取详情应该success');
         $this->assertArrayHasKey('data', $detailResponse);
 
         // 查找创建的模型
         $createdModel = $this->findModelInDetailResponse($detailResponse['data'], $modelId);
         $this->assertNotNull($createdModel, '应该能在详情中找到创建的模型');
 
-        // 验证4个成本字段存在且值正确
+        // validate4个成本字段存在且value正确
         $this->assertArrayHasKey('config', $createdModel, '模型应该有config字段');
         $this->verifyConfigCostFields($createdModel['config'], [
             'input_cost' => 0.001,
@@ -124,7 +124,7 @@ class ServiceProviderApiTest extends BaseTest
             'time_cost' => 50,
         ]);
 
-        // ========== 步骤3: 验证配置版本（version=1） ==========
+        // ========== 步骤3: validate配置版本（version=1） ==========
         $this->verifyConfigVersion((int) $modelId, $createRequestData['config'], 1);
 
         // ========== 步骤4: 更新模型 ==========
@@ -171,23 +171,23 @@ class ServiceProviderApiTest extends BaseTest
 
         $updateResponse = $this->post($modelUri, $updateRequestData, $this->getCommonHeaders());
 
-        // 验证更新响应
+        // validate更新响应
         $this->assertIsArray($updateResponse);
-        $this->assertSame(1000, $updateResponse['code'], '更新模型应该成功');
+        $this->assertSame(1000, $updateResponse['code'], '更新模型应该success');
         $this->assertArrayHasKey('data', $updateResponse);
         $this->assertSame($modelId, $updateResponse['data']['id'], '更新后模型ID应保持不变');
 
-        // ========== 步骤5: 再次调用详情接口验证更新后的4个成本字段 ==========
+        // ========== 步骤5: 再次call详情接口validate更新后的4个成本字段 ==========
         $updatedDetailResponse = $this->get($detailUri, [], $this->getCommonHeaders());
 
         $this->assertIsArray($updatedDetailResponse);
-        $this->assertSame(1000, $updatedDetailResponse['code'], '获取更新后详情应该成功');
+        $this->assertSame(1000, $updatedDetailResponse['code'], '获取更新后详情应该success');
 
         // 查找更新后的模型
         $updatedModel = $this->findModelInDetailResponse($updatedDetailResponse['data'], $modelId);
         $this->assertNotNull($updatedModel, '应该能在详情中找到更新后的模型');
 
-        // 验证更新后的4个成本字段
+        // validate更新后的4个成本字段
         $this->assertArrayHasKey('config', $updatedModel, '更新后的模型应该有config字段');
         $this->verifyConfigCostFields($updatedModel['config'], [
             'input_cost' => 0.003,
@@ -196,12 +196,12 @@ class ServiceProviderApiTest extends BaseTest
             'cache_hit_cost' => 0.0003,
         ]);
 
-        // ========== 步骤6: 验证更新后的配置版本（version=2） ==========
+        // ========== 步骤6: validate更新后的配置版本（version=2） ==========
         $this->verifyConfigVersion((int) $modelId, $updateRequestData['config'], 2);
     }
 
     /**
-     * 测试返回Delightful服务商.
+     * 测试returnDelightful服务商.
      */
     public function testGetOfficialProvider()
     {
@@ -308,11 +308,11 @@ class ServiceProviderApiTest extends BaseTest
      *
      * @param array $detailData 详情响应数据
      * @param string $modelId 模型ID
-     * @return null|array 找到的模型数据，未找到返回null
+     * @return null|array 找到的模型数据，未找到returnnull
      */
     private function findModelInDetailResponse(array $detailData, string $modelId): ?array
     {
-        // 详情接口可能返回 models 数组或其他结构，这里需要根据实际接口调整
+        // 详情接口可能return models array或其他结构，这里需要根据实际接口调整
         if (isset($detailData['models']) && is_array($detailData['models'])) {
             foreach ($detailData['models'] as $model) {
                 if (isset($model['id']) && (string) $model['id'] === (string) $modelId) {
@@ -321,7 +321,7 @@ class ServiceProviderApiTest extends BaseTest
             }
         }
 
-        // 如果是其他结构，继续查找
+        // 如果是其他结构，continue查找
         if (isset($detailData['id']) && (string) $detailData['id'] === (string) $modelId) {
             return $detailData;
         }
@@ -330,50 +330,50 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * 验证配置中的4个成本字段.
+     * validate配置中的4个成本字段.
      *
      * @param array $config 配置数据
-     * @param array $expectedCosts 期望的成本值
+     * @param array $expectedCosts 期望的成本value
      */
     private function verifyConfigCostFields(array $config, array $expectedCosts): void
     {
-        $this->assertArrayHasKey('input_cost', $config, 'config应该包含input_cost字段');
-        $this->assertArrayHasKey('output_cost', $config, 'config应该包含output_cost字段');
-        $this->assertArrayHasKey('cache_write_cost', $config, 'config应该包含cache_write_cost字段');
-        $this->assertArrayHasKey('cache_hit_cost', $config, 'config应该包含cache_hit_cost字段');
+        $this->assertArrayHasKey('input_cost', $config, 'config应该containinput_cost字段');
+        $this->assertArrayHasKey('output_cost', $config, 'config应该containoutput_cost字段');
+        $this->assertArrayHasKey('cache_write_cost', $config, 'config应该containcache_write_cost字段');
+        $this->assertArrayHasKey('cache_hit_cost', $config, 'config应该containcache_hit_cost字段');
 
-        // 验证值是否正确（允许浮点数误差）
+        // validatevalue是否正确（允许浮点数误差）
         $this->assertEqualsWithDelta(
             $expectedCosts['input_cost'],
             (float) $config['input_cost'],
             0.0001,
-            'input_cost值应该匹配'
+            'input_costvalue应该匹配'
         );
 
         $this->assertEqualsWithDelta(
             $expectedCosts['output_cost'],
             (float) $config['output_cost'],
             0.0001,
-            'output_cost值应该匹配'
+            'output_costvalue应该匹配'
         );
 
         $this->assertEqualsWithDelta(
             $expectedCosts['cache_write_cost'],
             (float) $config['cache_write_cost'],
             0.0001,
-            'cache_write_cost值应该匹配'
+            'cache_write_costvalue应该匹配'
         );
 
         $this->assertEqualsWithDelta(
             $expectedCosts['cache_hit_cost'],
             (float) $config['cache_hit_cost'],
             0.0001,
-            'cache_hit_cost值应该匹配'
+            'cache_hit_costvalue应该匹配'
         );
     }
 
     /**
-     * 验证配置版本是否正确落库.
+     * validate配置版本是否正确落库.
      *
      * @param int $modelId 模型ID
      * @param array $expectedConfig 期望的配置数据
@@ -384,7 +384,7 @@ class ServiceProviderApiTest extends BaseTest
         // 获取 Domain Service
         $domainService = $this->getContainer()->get(ProviderModelDomainService::class);
 
-        // 构造数据隔离对象
+        // 构造数据隔离object
         $organizationCode = env('TEST_ORGANIZATION_CODE');
         $dataIsolation = new ProviderDataIsolation($organizationCode, '', '');
 
@@ -393,7 +393,7 @@ class ServiceProviderApiTest extends BaseTest
 
         $this->assertNotNull($versionEntity, '配置版本应该存在');
 
-        // 验证 int 类型字段（字符串应该被转换为 int）
+        // validate int type字段（string应该被convert为 int）
         if (isset($expectedConfig['max_output_tokens'])) {
             $this->assertSame(
                 (int) $expectedConfig['max_output_tokens'],
@@ -418,7 +418,7 @@ class ServiceProviderApiTest extends BaseTest
             );
         }
 
-        // 验证 float 类型字段（字符串应该被转换为 float）
+        // validate float type字段（string应该被convert为 float）
         if (isset($expectedConfig['input_pricing'])) {
             $this->assertEqualsWithDelta(
                 (float) $expectedConfig['input_pricing'],
@@ -522,7 +522,7 @@ class ServiceProviderApiTest extends BaseTest
             }
         }
 
-        // 验证 bool 类型字段
+        // validate bool type字段
         if (isset($expectedConfig['support_function'])) {
             $this->assertSame(
                 (bool) $expectedConfig['support_function'],
@@ -547,7 +547,7 @@ class ServiceProviderApiTest extends BaseTest
             );
         }
 
-        // 验证 string 类型字段
+        // validate string type字段
         if (isset($expectedConfig['billing_currency'])) {
             $this->assertSame(
                 $expectedConfig['billing_currency'],
@@ -556,7 +556,7 @@ class ServiceProviderApiTest extends BaseTest
             );
         }
 
-        // 验证版本号和当前版本标记
+        // validate版本号和当前版本标记
         $this->assertSame($expectedVersion, $versionEntity->getVersion(), "版本号应该是 {$expectedVersion}");
         $this->assertTrue($versionEntity->isCurrentVersion(), '应该是当前版本');
     }

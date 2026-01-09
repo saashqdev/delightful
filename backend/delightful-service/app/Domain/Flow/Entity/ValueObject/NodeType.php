@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Flow\Entity\ValueObject;
 
 /**
- * 节点类型
+ * 节点type
  * 1 ~ 99 原子节点
  * 100 ~ 199 组合节点的硬编码实现.
  */
@@ -16,19 +16,19 @@ enum NodeType: int
 {
     /*
      * Start Node
-     * 用作触发器。窗口打开时、有新消息时、定时;参数调用（仅子流程可用）
+     * 用作触发器。窗口打开时、有新message时、定时;parametercall（仅子流程可用）
      */
     case Start = 1;
 
     /*
      * LLM Chat 这里是历史原因的组合节点
-     * 大语言模型 可选model、prompt、temperature
+     * 大语言model 可选model、prompt、temperature
      */
     case LLM = 2;
 
     /*
      * Reply Message
-     * 回复消息节点
+     * 回复message节点
      */
     case ReplyMessage = 3;
 
@@ -61,12 +61,12 @@ enum NodeType: int
 
     /*
      * Loader
-     * 数据加载。来源：向量数据库、文件、网络
+     * 数据加载。来源：向量database、文件、网络
      */
     case Loader = 8;
 
     /*
-     * 变量
+     * variable
      * set get
      */
     //    case Variable = 9;
@@ -90,7 +90,7 @@ enum NodeType: int
 
     /*
      * History Message
-     * 历史消息 查询
+     * 历史message query
      */
     case HistoryMessage = 13;
 
@@ -115,32 +115,32 @@ enum NodeType: int
     case KnowledgeSimilarity = 17;
 
     /*
-     * 缓存设置
+     * cacheset
      */
     case CacheSet = 18;
 
     /*
-     * 缓存获取
+     * cacheget
      */
     case CacheGet = 19;
 
     /*
-     * 历史消息存储
+     * 历史message存储
      */
     case HistoryMessageStore = 20;
 
     /*
-     * 变量设置
+     * variableset
      */
     case VariableSet = 21;
 
     /*
-     * 变量数组shift
+     * variablearrayshift
      */
     case VariableArrayShift = 22;
 
     /*
-     * 变量数组push
+     * variablearraypush
      */
     case VariableArrayPush = 23;
 
@@ -160,7 +160,7 @@ enum NodeType: int
     case Tool = 26;
 
     /**
-     * 知识库片段删除.
+     * 知识库片段delete.
      */
     case KnowledgeFragmentRemove = 27;
 
@@ -170,7 +170,7 @@ enum NodeType: int
     case UserSearch = 28;
 
     /**
-     * 等待消息.
+     * 等待message.
      */
     case WaitMessage = 29;
 
@@ -205,7 +205,7 @@ enum NodeType: int
     case ImageGenerate = 53;
 
     /**
-     * 创建群聊.
+     * create群聊.
      */
     case CreateGroup = 54;
 }

@@ -53,7 +53,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
     {
         $agentId = $this->input->getArgument('agent_id');
 
-        // 获取助理信息
+        // get助理info
         $agent = $this->agentDomainService->getById($agentId);
 
         $flowCode = $agent->getFlowCode();
@@ -62,14 +62,14 @@ class ExportAgentWithFlowCommand extends HyperfCommand
             return 1;
         }
 
-        // 从助理实体中获取组织代码和用户ID
+        // 从助理实体中getorganization代码和userID
         $orgCode = $agent->getOrganizationCode();
         $userId = $agent->getCreatedUid();
 
-        // 创建数据隔离对象
+        // create数据隔离object
         $dataIsolation = new FlowDataIsolation($orgCode, $userId);
 
-        // 导出流程及助理信息
+        // 导出流程及助理info
         $exportData = $this->exportImportService->exportFlowWithAgent($dataIsolation, $flowCode, $agent);
 
         // 将数据保存为临时文件
@@ -81,15 +81,15 @@ class ExportAgentWithFlowCommand extends HyperfCommand
         $uploadDir = $orgCode . '/open/' . md5(StorageBucketType::Public->value);
         $uploadFile = new UploadFile($tempFile, $uploadDir, $filename);
 
-        // 使用已有的文件服务上传
+        // 使用已有的文件service上传
         try {
             // 定义上传目录
             $subDir = 'open';
 
-            // 创建上传文件对象（不自动重命名）
+            // create上传文件object（不自动重命名）
             $uploadFile = new UploadFile($tempFile, $subDir, '', false);
 
-            // 上传文件（指定不自动创建目录）
+            // 上传文件（指定不自动create目录）
             $this->fileDomainService->uploadByCredential($orgCode, $uploadFile);
 
             // 生成可访问的链接
@@ -100,13 +100,13 @@ class ExportAgentWithFlowCommand extends HyperfCommand
                 return 0;
             }
 
-            $this->output->error('生成文件链接失败');
+            $this->output->error('生成文件链接fail');
             return 1;
         } catch (Throwable $e) {
-            $this->output->error("上传文件失败: {$e->getMessage()}");
+            $this->output->error("上传文件fail: {$e->getMessage()}");
             return 1;
         } finally {
-            // 删除临时文件
+            // delete临时文件
             if (file_exists($tempFile)) {
                 unlink($tempFile);
             }

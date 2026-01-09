@@ -28,14 +28,14 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 查询组织管理员列表.
+     * queryorganization管理员list.
      * @return array{total: int, list: array}
      */
     public function queries(DataIsolation $dataIsolation, Page $page, ?array $filters = null): array
     {
         $result = $this->organizationAdminDomainService->queries($dataIsolation, $page, $filters);
 
-        // 获取用户信息
+        // getuserinfo
         $organizationAdmins = $result['list'];
         $enrichedList = [];
 
@@ -51,7 +51,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 获取组织管理员详情.
+     * getorganization管理员详情.
      */
     public function show(DataIsolation $dataIsolation, int $id): array
     {
@@ -60,7 +60,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 根据用户ID获取组织管理员.
+     * 根据userIDgetorganization管理员.
      */
     public function getByUserId(DataIsolation $dataIsolation, string $userId): ?OrganizationAdminEntity
     {
@@ -68,7 +68,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 授予用户组织管理员权限.
+     * 授予userorganization管理员permission.
      */
     public function grant(DataIsolation $dataIsolation, string $userId, string $grantorUserId, ?string $remarks = null): OrganizationAdminEntity
     {
@@ -76,7 +76,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 删除组织管理员.
+     * deleteorganization管理员.
      */
     public function destroy(DataIsolation $dataIsolation, int $id): void
     {
@@ -85,7 +85,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 转让组织创建人身份.
+     * 转让organizationcreate人身份.
      */
     public function transferOwnership(DataIsolation $dataIsolation, string $newOwnerUserId, string $currentOwnerUserId): void
     {
@@ -93,25 +93,25 @@ class OrganizationAdminAppService extends AbstractKernelAppService
             $dataIsolation,
             $currentOwnerUserId,
             $newOwnerUserId,
-            $currentOwnerUserId // 操作者就是当前创建者
+            $currentOwnerUserId // 操作者就是当前create者
         );
     }
 
     /**
-     * 丰富组织管理员实体的用户信息.
+     * 丰富organization管理员实体的userinfo.
      */
     private function enrichOrganizationAdminWithUserInfo(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdmin): array
     {
-        // 获取用户基本信息
+        // getuser基本info
         $userInfo = $this->getUserInfo($organizationAdmin->getUserId());
 
-        // 获取授权人信息
+        // getauthorization人info
         $grantorInfo = [];
         if ($organizationAdmin->getGrantorUserId()) {
             $grantorInfo = $this->getUserInfo($organizationAdmin->getGrantorUserId());
         }
 
-        // 获取部门信息
+        // getdepartmentinfo
         $departmentInfo = $this->getDepartmentInfo($dataIsolation, $organizationAdmin->getUserId());
 
         return [
@@ -123,7 +123,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 获取用户信息.
+     * getuserinfo.
      */
     private function getUserInfo(string $userId): array
     {
@@ -140,7 +140,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 获取用户部门信息.
+     * getuserdepartmentinfo.
      */
     private function getDepartmentInfo(DataIsolation $dataIsolation, string $userId): array
     {
@@ -156,7 +156,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
 
             $departmentUser = $departmentUsers[0];
 
-            // 获取部门详细信息
+            // getdepartment详细info
             $department = $this->departmentDomainService->getDepartmentById(
                 $dataIsolation,
                 $departmentUser->getDepartmentId()
@@ -167,7 +167,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
                 'job_title' => $departmentUser->getJobTitle(),
             ];
         } catch (Exception $e) {
-            // 如果获取部门信息失败，返回空数组
+            // 如果getdepartmentinfofail，return空array
             return [];
         }
     }

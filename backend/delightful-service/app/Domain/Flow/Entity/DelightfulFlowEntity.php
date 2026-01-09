@@ -32,17 +32,17 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯一编码，仅在创建时生成，用作给前端的id.
+     * 唯一编码，仅在create时生成，用作给前端的id.
      */
     protected string $code;
 
     /**
-     * 流程名称（助理名称）.
+     * 流程name（助理name）.
      */
     protected string $name;
 
     /**
-     * 流程描述 （助理描述）.
+     * 流程description （助理description）.
      */
     protected string $description;
 
@@ -52,14 +52,14 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $icon = '';
 
     /**
-     * 流程类型.
+     * 流程type.
      */
     protected Type $type;
 
     protected string $toolSetId = '';
 
     /**
-     * 仅前端需要，流程编排放到 node 节点配置的 next_nodes 中.
+     * 仅前端需要，流程编排放到 node 节点configuration的 next_nodes 中.
      */
     protected array $edges;
 
@@ -107,7 +107,7 @@ class DelightfulFlowEntity extends AbstractEntity
     private int $userOperation = 0;
 
     /**
-     * 流程的回调函数，如果有该值，那么将直接执行该选择，而不是通过NodeRunner来执行.
+     * 流程的回调function，如果有该value，那么将直接执行该选择，而不是通过NodeRunner来执行.
      */
     private ?Closure $callback = null;
 
@@ -180,7 +180,7 @@ class DelightfulFlowEntity extends AbstractEntity
     {
         $this->enabled = ! $this->enabled;
         if ($this->enabled) {
-            // 如果是要开启，需要检测是否有 nodes 配置
+            // 如果是要开启，需要检测是否有 nodes configuration
             if (empty($this->nodes)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
             }
@@ -238,7 +238,7 @@ class DelightfulFlowEntity extends AbstractEntity
             }
 
             if ($node->isStart() && ! $node->getParentId()) {
-                // 如果已经有一个了，那么是错误的流程，出现了多个开始节点
+                // 如果已经有一个了，那么是error的流程，出现了多个开始节点
                 if ($this->startNode) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.only_one');
                 }
@@ -252,7 +252,7 @@ class DelightfulFlowEntity extends AbstractEntity
             }
         }
 
-        // 已经是发布状态的才需要检测
+        // 已经是发布status的才需要检测
         if ($this->enabled) {
             //            if (! $this->startNode) {
             //                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.must_exist');
@@ -299,7 +299,7 @@ class DelightfulFlowEntity extends AbstractEntity
                 $result['error_information'] = $nodeDebugResult->getErrorMessage();
             }
             if ($node->isEnd() && $nodeDebugResult && $nodeDebugResult->hasExecute()) {
-                // 结果优先，如果已经存在，则不需要了
+                // result优先，如果已经存在，则不需要了
                 if (empty($result)) {
                     $result = $nodeDebugResult->getOutput() ?? [];
                 }
@@ -674,7 +674,7 @@ class DelightfulFlowEntity extends AbstractEntity
         }
 
         if ($this->type === Type::Tools) {
-            // 名称只能包含 字母、数字、下划线
+            // name只能包含 字母、数字、下划线
             if (! preg_match('/^[a-zA-Z0-9_]+$/', $this->name)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.tool.name.invalid_format');
             }

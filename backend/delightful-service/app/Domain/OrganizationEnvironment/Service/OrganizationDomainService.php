@@ -19,7 +19,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 use Throwable;
 
 /**
- * 组织领域服务.
+ * organization领域service.
  */
 readonly class OrganizationDomainService
 {
@@ -31,16 +31,16 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 创建组织.
+     * createorganization.
      */
     public function create(OrganizationEntity $organizationEntity): OrganizationEntity
     {
-        // 检查编码是否已存在
+        // check编码是否已存在
         if ($this->organizationRepository->existsByCode($organizationEntity->getDelightfulOrganizationCode())) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_EXISTS);
         }
 
-        // 检查创建者是否存在
+        // checkcreate者是否存在
         $creatorId = $organizationEntity->getCreatorId();
         if ($creatorId !== null) {
             $creator = $this->userDomainService->getUserById((string) $creatorId);
@@ -54,19 +54,19 @@ readonly class OrganizationDomainService
         $savedOrganization = $this->organizationRepository->save($organizationEntity);
 
         if ($creatorId !== null && $savedOrganization->getType() !== 1) {
-            // 个人组织不添加组织管理员
-            // 为创建者添加组织管理员权限并标记为组织创建人
+            // 个人organization不添加organization管理员
+            // 为create者添加organization管理员permission并标记为organizationcreate人
             try {
                 $dataIsolation = DataIsolation::simpleMake($savedOrganization->getDelightfulOrganizationCode(), (string) $creatorId);
                 $this->organizationAdminDomainService->grant(
                     $dataIsolation,
                     (string) $creatorId,
-                    (string) $creatorId, // 授予者也是创建者自己
-                    '组织创建者自动获得管理员权限',
-                    true // 标记为组织创建人
+                    (string) $creatorId, // 授予者也是create者自己
+                    'organizationcreate者自动获得管理员permission',
+                    true // 标记为organizationcreate人
                 );
             } catch (Throwable $e) {
-                // 如果授予管理员权限失败，记录日志但不影响组织创建
+                // 如果授予管理员permissionfail，recordlog但不影响organizationcreate
                 error_log("Failed to grant organization admin permission for creator {$creatorId}: " . $e->getMessage());
             }
         }
@@ -75,7 +75,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 更新组织.
+     * updateorganization.
      */
     public function update(OrganizationEntity $organizationEntity): OrganizationEntity
     {
@@ -83,7 +83,7 @@ readonly class OrganizationDomainService
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_NOT_EXISTS);
         }
 
-        // 检查编码是否已存在（排除当前组织）
+        // check编码是否已存在（排除当前organization）
         if ($this->organizationRepository->existsByCode($organizationEntity->getDelightfulOrganizationCode(), $organizationEntity->getId())) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_EXISTS);
         }
@@ -94,7 +94,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 根据ID获取组织.
+     * 根据IDgetorganization.
      */
     public function getById(int $id): ?OrganizationEntity
     {
@@ -102,7 +102,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 根据编码获取组织.
+     * 根据编码getorganization.
      */
     public function getByCode(string $delightfulOrganizationCode): ?OrganizationEntity
     {
@@ -110,7 +110,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 根据编码列表批量获取组织.
+     * 根据编码list批量getorganization.
      * @param string[] $delightfulOrganizationCodes
      * @return OrganizationEntity[]
      */
@@ -130,7 +130,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 根据名称获取组织.
+     * 根据namegetorganization.
      */
     public function getByName(string $name): ?OrganizationEntity
     {
@@ -138,7 +138,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 查询组织列表.
+     * queryorganizationlist.
      * @return array{total: int, list: OrganizationEntity[]}
      */
     public function queries(Page $page, ?array $filters = null): array
@@ -147,7 +147,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 删除组织.
+     * deleteorganization.
      */
     public function delete(int $id): void
     {
@@ -160,7 +160,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 启用组织.
+     * 启用organization.
      */
     public function enable(int $id): OrganizationEntity
     {
@@ -176,7 +176,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 禁用组织.
+     * 禁用organization.
      */
     public function disable(int $id): OrganizationEntity
     {
@@ -192,7 +192,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * 检查组织编码是否可用.
+     * checkorganization编码是否可用.
      */
     public function isCodeAvailable(string $code, ?int $excludeId = null): bool
     {

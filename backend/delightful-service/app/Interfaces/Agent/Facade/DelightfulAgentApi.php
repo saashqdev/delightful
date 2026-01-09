@@ -85,7 +85,7 @@ class DelightfulAgentApi extends AbstractApi
         return AgentAssembler::createAvailableList($page, $data['total'], $data['list'], $data['icons']);
     }
 
-    // 创建/修改助理
+    // create/修改助理
     public function saveAgent(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -122,7 +122,7 @@ class DelightfulAgentApi extends AbstractApi
         return $entityArray;
     }
 
-    // 删除助理
+    // delete助理
     public function deleteAgentById(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -131,7 +131,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->deleteAgentById($authorization, $agentId);
     }
 
-    // 获取当前用户的助理
+    // get当前user的助理
 
     /**
      * @deprecated
@@ -156,7 +156,7 @@ class DelightfulAgentApi extends AbstractApi
         return $agentsByUserIdPage;
     }
 
-    // 获取发布版本的助理
+    // get发布版本的助理
     public function getAgentVersionById(RequestInterface $request, ?string $agentVersionId = null)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -167,7 +167,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAssembler::createAgentV1Response($delightfulAgentVO, $delightfulFlowDTO);
     }
 
-    // 获取企业内部的助理
+    // get企业内部的助理
     public function getAgentsByOrganization(RequestInterface $request)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -178,7 +178,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getAgentsByOrganizationPage($authenticatable, $page, $pageSize, $agentName);
     }
 
-    // 获取应用市场助理
+    // get应用市场助理
     public function getAgentsFromMarketplace(RequestInterface $request)
     {
         $this->getAuthorization();
@@ -238,7 +238,7 @@ class DelightfulAgentApi extends AbstractApi
         return $result;
     }
 
-    // 查询助理的版本记录
+    // query助理的版本record
     public function getReleaseAgentVersions(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -247,7 +247,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getReleaseAgentVersions($authenticatable, $agentId);
     }
 
-    // 获取助理最新版本号
+    // get助理最新版本号
     public function getAgentMaxVersion(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -266,7 +266,7 @@ class DelightfulAgentApi extends AbstractApi
         $this->delightfulAgentAppService->updateAgentStatus($authorization, $agentId, DelightfulAgentVersionStatus::from($status));
     }
 
-    // 改变助理发布到组织的状态
+    // 改变助理发布到organization的status
     public function updateAgentEnterpriseStatus(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -276,7 +276,7 @@ class DelightfulAgentApi extends AbstractApi
         $this->delightfulAgentAppService->updateAgentEnterpriseStatus($authorization, $agentId, $status, $authorization->getId());
     }
 
-    // 获取助理详情
+    // get助理详情
     public function getAgentDetailByAgentId(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -315,7 +315,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->isUpdated($authenticatable, $agentId);
     }
 
-    // 根据 userId 获取发布版本的助理详情
+    // 根据 userId get发布版本的助理详情
     public function getDetailByUserId(RequestInterface $request, ?string $userId = null)
     {
         $this->getAuthorization();
@@ -327,13 +327,13 @@ class DelightfulAgentApi extends AbstractApi
         return $delightfulAgentVersionEntity->toArray();
     }
 
-    // 获取交互指令类型
+    // get交互指令type
     public function getInstructTypeOptions()
     {
         return InstructType::getTypeOptions();
     }
 
-    // 获取交互指令组类型
+    // get交互指令组type
     public function getInstructGroupTypeOptions()
     {
         return InstructGroupPosition::getTypeOptions();
@@ -363,7 +363,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->saveInstruct($authenticatable, $agentId, $instructs);
     }
 
-    // 获取聊天模式可用助理列表
+    // get聊天模式可用助理list
     public function getChatModeAvailableAgents()
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -372,13 +372,13 @@ class DelightfulAgentApi extends AbstractApi
         $query = new DelightfulAgentQuery($inputs);
         $query->setOrder(['id' => 'desc']);
 
-        // 创建分页对象
+        // createpaginationobject
         $page = $this->createPage();
 
-        // 获取全量数据
+        // get全量数据
         $data = $this->delightfulAgentAppService->getChatModeAvailableAgents($authenticatable, $query);
 
-        // 在 API 层进行分页处理
+        // 在 API 层进行pagination处理
         return AgentAssembler::createChatModelAvailableList($page, $data['total'], $data['list']);
     }
 }

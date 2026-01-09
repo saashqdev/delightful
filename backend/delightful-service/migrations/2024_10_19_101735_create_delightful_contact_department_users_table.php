@@ -20,23 +20,23 @@ return new class extends Migration {
         Schema::create('delightful_contact_department_users', static function (Blueprint $table) {
             $table->bigIncrements('id');
             // delightful_id
-            $table->string('delightful_id', 64)->comment('delightful_contact_account 表的 delightful_id')->default('');
+            $table->string('delightful_id', 64)->comment('delightful_contact_account table的 delightful_id')->default('');
             // delightful_user_id
-            $table->string('user_id', 64)->comment('delightful_contact_user 表的 user_id')->default('');
-            $table->string('department_id', 64)->comment('部门id');
-            $table->tinyInteger('is_leader')->comment('是否是部门领导 0-否 1-是')->default(0);
-            $table->string('job_title', 64)->comment('在此部门的职位')->default('');
-            $table->string('leader_user_id', 64)->comment('在此部门的直属领导的 user_id')->nullable()->default('');
-            $table->string('organization_code', 32)->comment('麦吉的组织编码');
+            $table->string('user_id', 64)->comment('delightful_contact_user table的 user_id')->default('');
+            $table->string('department_id', 64)->comment('departmentid');
+            $table->tinyInteger('is_leader')->comment('是否是department领导 0-否 1-是')->default(0);
+            $table->string('job_title', 64)->comment('在此department的职位')->default('');
+            $table->string('leader_user_id', 64)->comment('在此department的直属领导的 user_id')->nullable()->default('');
+            $table->string('organization_code', 32)->comment('麦吉的organization编码');
             $table->string('city', 64)->comment('工作城市')->default('');
             $table->string('country', 32)->comment('国家或地区 Code 缩写')->default('');
-            $table->string('join_time', 32)->comment('入职时间。秒级时间戳格式，表示从 1970 年 1 月 1 日开始所经过的秒数。')->default('');
+            $table->string('join_time', 32)->comment('入职time。秒级time戳格式，table示从 1970 年 1 月 1 日开始所经过的秒数。')->default('');
             $table->string('employee_no', 32)->comment('工号')->default('');
-            $table->tinyInteger('employee_type')->comment('员工类型。1：正式员工2：实习生3：外包4：劳务 5：顾问');
-            $table->string('orders', 256)->comment('用户排序信息。用于标记通讯录下组织架构的人员顺序，人员可能存在多个部门中，且有不同的排序')->nullable()->default('');
-            $table->text('custom_attrs')->comment('自定义字段。');
-            $table->tinyInteger('is_frozen')->comment('是否为暂停状态的用户。')->default(0);
-            $table->comment('麦吉部门下的用户信息表');
+            $table->tinyInteger('employee_type')->comment('员工type。1：正式员工2：实习生3：外包4：劳务 5：顾问');
+            $table->string('orders', 256)->comment('usersortinfo。用于标记通讯录下organization架构的人员顺序，人员可能存在多个department中，且有不同的sort')->nullable()->default('');
+            $table->text('custom_attrs')->comment('自定义field。');
+            $table->tinyInteger('is_frozen')->comment('是否为暂停status的user。')->default(0);
+            $table->comment('麦吉department下的userinfotable');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['organization_code', 'delightful_id'], 'org_delightful_id');

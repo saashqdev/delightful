@@ -36,7 +36,7 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 查询组织管理员列表.
+     * queryorganization管理员list.
      * @return array{total: int, list: OrganizationAdminEntity[]}
      */
     public function queries(DataIsolation $dataIsolation, Page $page, ?array $filters = null): array
@@ -45,7 +45,7 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 保存组织管理员.
+     * 保存organization管理员.
      */
     public function save(DataIsolation $dataIsolation, OrganizationAdminEntity $savingOrganizationAdminEntity): OrganizationAdminEntity
     {
@@ -53,7 +53,7 @@ class OrganizationAdminDomainService
             $organizationAdminEntity = clone $savingOrganizationAdminEntity;
             $organizationAdminEntity->prepareForCreation();
 
-            // 检查用户是否已经是组织管理员
+            // checkuser是否已经是organization管理员
             if ($this->organizationAdminRepository->getByUserId($dataIsolation, $savingOrganizationAdminEntity->getUserId())) {
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.user_already_organization_admin', ['userId' => $savingOrganizationAdminEntity->getUserId()]);
             }
@@ -71,7 +71,7 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 获取组织管理员详情.
+     * getorganization管理员详情.
      */
     public function show(DataIsolation $dataIsolation, int $id): OrganizationAdminEntity
     {
@@ -83,7 +83,7 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 根据用户ID获取组织管理员.
+     * 根据userIDgetorganization管理员.
      */
     public function getByUserId(DataIsolation $dataIsolation, string $userId): ?OrganizationAdminEntity
     {
@@ -91,13 +91,13 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 删除组织管理员.
+     * deleteorganization管理员.
      */
     public function destroy(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdminEntity): void
     {
-        // 在删除组织管理员记录之前，先移除其在权限系统中的 role_user 关联
+        // 在deleteorganization管理员record之前，先移除其在permission系统中的 role_user 关联
         try {
-            // 创建权限隔离对象，用于操作角色服务
+            // createpermission隔离object，用于操作角色service
             $permissionIsolation = PermissionDataIsolation::create(
                 $dataIsolation->getCurrentOrganizationCode(),
                 $dataIsolation->getCurrentUserId() ?? ''
@@ -110,12 +110,12 @@ class OrganizationAdminDomainService
             ]);
         }
 
-        // 删除组织管理员记录
+        // deleteorganization管理员record
         $this->organizationAdminRepository->delete($dataIsolation, $organizationAdminEntity);
     }
 
     /**
-     * 检查用户是否为组织管理员.
+     * checkuser是否为organization管理员.
      */
     public function isOrganizationAdmin(DataIsolation $dataIsolation, string $userId): bool
     {
@@ -123,36 +123,36 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 授予用户组织管理员权限.
+     * 授予userorganization管理员permission.
      */
     public function grant(DataIsolation $dataIsolation, string $userId, ?string $grantorUserId, ?string $remarks = null, bool $isOrganizationCreator = false): OrganizationAdminEntity
     {
-        // 组织校验与限制
+        // organization校验与限制
         $orgCode = $dataIsolation->getCurrentOrganizationCode();
         $organization = $this->organizationRepository->getByCode($orgCode);
         if (! $organization) {
-            $this->logger->warning('找不到组织代码', ['organizationCode' => $orgCode]);
+            $this->logger->warning('找不到organization代码', ['organizationCode' => $orgCode]);
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_NOT_EXISTS);
         }
-        // 个人组织不允许授予组织管理员
+        // 个人organization不允许授予organization管理员
         if ($organization->getType() === 1) {
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.personal_organization_cannot_grant_admin');
         }
 
-        // 检查用户是否已经是组织管理员
+        // checkuser是否已经是organization管理员
         if ($this->isOrganizationAdmin($dataIsolation, $userId)) {
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.user_already_organization_admin', ['userId' => $userId]);
         }
-        // 检查用户是否有效
+        // checkuser是否有效
         $user = $this->userRepository->getUserById($userId);
         if (! $user) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST, 'user.not_exist', ['userId' => $userId]);
         }
 
-        // 授予组织管理员实体
+        // 授予organization管理员实体
         $organizationAdmin = $this->organizationAdminRepository->grant($dataIsolation, $userId, $grantorUserId, $remarks, $isOrganizationCreator);
 
-        // 同步创建 / 更新组织管理员角色
+        // 同步create / updateorganization管理员角色
         try {
             $permissionIsolation = PermissionDataIsolation::create(
                 $dataIsolation->getCurrentOrganizationCode(),
@@ -171,16 +171,16 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 撤销用户组织管理员权限.
+     * 撤销userorganization管理员permission.
      */
     public function revoke(DataIsolation $dataIsolation, string $userId): void
     {
-        // 检查用户是否为组织管理员
+        // checkuser是否为organization管理员
         if (! $this->isOrganizationAdmin($dataIsolation, $userId)) {
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.user_not_organization_admin', ['userId' => $userId]);
         }
 
-        // 检查是否为组织创建人，组织创建人不可删除管理员权限
+        // check是否为organizationcreate人，organizationcreate人不可delete管理员permission
         $organizationAdmin = $this->getByUserId($dataIsolation, $userId);
         if ($organizationAdmin && $organizationAdmin->isOrganizationCreator()) {
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.organization_creator_cannot_be_revoked', ['userId' => $userId]);
@@ -188,7 +188,7 @@ class OrganizationAdminDomainService
 
         $this->organizationAdminRepository->revoke($dataIsolation, $userId);
 
-        // 同步移除组织管理员角色
+        // 同步移除organization管理员角色
         try {
             $permissionIsolation = PermissionDataIsolation::create(
                 $dataIsolation->getCurrentOrganizationCode(),
@@ -205,7 +205,7 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 获取组织下所有组织管理员.
+     * getorganization下所有organization管理员.
      */
     public function getAllOrganizationAdmins(DataIsolation $dataIsolation): array
     {
@@ -213,7 +213,7 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 批量检查用户是否为组织管理员.
+     * 批量checkuser是否为organization管理员.
      */
     public function batchCheckOrganizationAdmin(DataIsolation $dataIsolation, array $userIds): array
     {
@@ -221,36 +221,36 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 转让组织创建人身份.
+     * 转让organizationcreate人身份.
      */
     public function transferOrganizationCreator(DataIsolation $dataIsolation, string $currentCreatorUserId, string $newCreatorUserId, string $operatorUserId): void
     {
-        // 检查当前创建人是否存在且确实是创建人
+        // check当前create人是否存在且确实是create人
         $currentCreator = $this->getByUserId($dataIsolation, $currentCreatorUserId);
         if (! $currentCreator || ! $currentCreator->isOrganizationCreator()) {
             ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.current_user_not_organization_creator', ['userId' => $currentCreatorUserId]);
         }
 
-        // 检查新创建人是否已经是组织管理员
+        // check新create人是否已经是organization管理员
         $newCreator = $this->getByUserId($dataIsolation, $newCreatorUserId);
         if (! $newCreator) {
-            // 如果新创建人还不是管理员，先授予管理员权限
-            $newCreator = $this->grant($dataIsolation, $newCreatorUserId, $operatorUserId, '转让组织创建人身份时自动授予管理员权限');
+            // 如果新create人还不是管理员，先授予管理员permission
+            $newCreator = $this->grant($dataIsolation, $newCreatorUserId, $operatorUserId, '转让organizationcreate人身份时自动授予管理员permission');
         }
 
-        // 取消当前创建人的创建人身份
+        // 取消当前create人的create人身份
         $currentCreator->unmarkAsOrganizationCreator();
         $currentCreator->prepareForModification();
         $this->organizationAdminRepository->save($dataIsolation, $currentCreator);
 
-        // 授予新创建人的创建人身份
+        // 授予新create人的create人身份
         $newCreator->markAsOrganizationCreator();
         $newCreator->prepareForModification();
         $this->organizationAdminRepository->save($dataIsolation, $newCreator);
     }
 
     /**
-     * 获取组织创建人.
+     * getorganizationcreate人.
      */
     public function getOrganizationCreator(DataIsolation $dataIsolation): ?OrganizationAdminEntity
     {
@@ -258,7 +258,7 @@ class OrganizationAdminDomainService
     }
 
     /**
-     * 检查用户是否为组织创建人.
+     * checkuser是否为organizationcreate人.
      */
     public function isOrganizationCreator(DataIsolation $dataIsolation, string $userId): bool
     {

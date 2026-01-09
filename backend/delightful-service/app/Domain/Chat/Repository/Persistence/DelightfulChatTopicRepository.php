@@ -34,7 +34,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     ) {
     }
 
-    // 创建话题
+    // create话题
     public function createTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity
     {
         if (empty($delightfulTopicEntity->getOrganizationCode())) {
@@ -60,7 +60,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
         return $delightfulTopicEntity;
     }
 
-    // 更新话题
+    // update话题
     public function updateTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity
     {
         $name = $delightfulTopicEntity->getName();
@@ -84,7 +84,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
         return $delightfulTopicEntity;
     }
 
-    // 删除话题
+    // delete话题
     public function deleteTopic(DelightfulTopicEntity $delightfulTopicDTO): int
     {
         $this->checkEntity($delightfulTopicDTO);
@@ -95,7 +95,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     /**
-     * 获取会话的会话列表.
+     * getsession的sessionlist.
      * @param string[] $topicIds
      * @return array<DelightfulTopicEntity>
      */
@@ -188,7 +188,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     /**
-     * 按时间范围获取会话下某个话题的消息.
+     * 按time范围getsession下某个话题的message.
      * @return ClientSequenceResponse[]
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array
@@ -227,7 +227,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
         }
         $query->limit($limit)->orderBy('seq_id', $direction)->select('seq_id');
         $seqList = Db::select($query->toSql(), $query->getBindings());
-        // 根据 seqIds 获取消息详情
+        // 根据 seqIds getmessage详情
         $seqIds = array_column($seqList, 'seq_id');
         $clientSequenceResponses = $this->seqRepository->getConversationMessagesBySeqIds($seqIds, $order);
 
@@ -235,7 +235,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     /**
-     * 通过topic_id获取话题信息（不需要conversation_id）.
+     * 通过topic_idget话题info（不需要conversation_id）.
      */
     public function getTopicByTopicId(string $topicId): ?DelightfulTopicEntity
     {
@@ -266,7 +266,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     /**
      * Get topics by topic ID.
      * @param string $topicId 话题ID
-     * @return DelightfulTopicEntity[] 话题实体数组
+     * @return DelightfulTopicEntity[] 话题实体array
      */
     public function getTopicsByTopicId(string $topicId): array
     {
@@ -277,10 +277,10 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
 
     /**
      * Get topic messages by conversation ID, topic ID and max seq ID.
-     * @param string $conversationId 会话ID
+     * @param string $conversationId sessionID
      * @param string $topicId 话题ID
      * @param int $maxSeqId 最大序列ID（包含该ID）
-     * @return DelightfulTopicMessageEntity[] 话题消息实体数组
+     * @return DelightfulTopicMessageEntity[] 话题message实体array
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array
     {
@@ -294,7 +294,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
         return TopicAssembler::getTopicMessageEntities($topicMessages);
     }
 
-    // 避免 redis 缓存序列化的对象,占用太多内存
+    // 避免 redis cache序列化的object,占用太多内存
     #[Cacheable(prefix: 'topic:id:conversation', value: '_#{delightfulTopicDTO.topicId}_#{delightfulTopicDTO.conversationId}', ttl: 60)]
     private function getTopicArray(DelightfulTopicEntity $delightfulTopicDTO): ?array
     {

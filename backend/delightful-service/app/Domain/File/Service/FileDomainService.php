@@ -105,21 +105,21 @@ readonly class FileDomainService
     }
 
     /**
-     * 批量获取文件链接（自动从路径提取组织编码并分组处理）.
-     * @param string[] $filePaths 包含组织编码的文件路径数组，格式：orgCode/path/file.ext
-     * @param null|StorageBucketType $bucketType 存储桶类型，默认为Public
+     * 批量get文件链接（自动从路径提取organization编码并分组处理）.
+     * @param string[] $filePaths 包含organization编码的文件路径array，格式：orgCode/path/file.ext
+     * @param null|StorageBucketType $bucketType 存储桶type，默认为Public
      * @return array<string,FileLink> 文件路径到FileLink的映射
      */
     public function getBatchLinksByOrgPaths(array $filePaths, ?StorageBucketType $bucketType = null): array
     {
-        // 过滤空路径和已经是URL的路径
+        // filter空路径和已经是URL的路径
         $validPaths = array_filter($filePaths, static fn ($path) => ! empty($path) && ! is_url($path));
 
         if (empty($validPaths)) {
             return [];
         }
 
-        // 按组织代码分组文件路径
+        // 按organization代码分组文件路径
         $pathsByOrg = [];
         foreach ($validPaths as $filePath) {
             $orgCode = explode('/', $filePath, 2)[0] ?? '';
@@ -128,7 +128,7 @@ readonly class FileDomainService
             }
         }
 
-        // 批量获取文件链接
+        // 批量get文件链接
         $allLinks = [];
         foreach ($pathsByOrg as $orgCode => $paths) {
             $orgLinks = $this->getLinks($orgCode, $paths, $bucketType);
@@ -159,8 +159,8 @@ readonly class FileDomainService
 
     /**
      * 开启 sts 模式.
-     * 获取临时凭证给前端使用.
-     * @todo 安全问题，dir 没有校验，没有组织隔离
+     * get临时凭证给前端使用.
+     * @todo 安全issue，dir 没有校验，没有organization隔离
      */
     public function getStsTemporaryCredential(
         string $organizationCode,
@@ -253,12 +253,12 @@ readonly class FileDomainService
     }
 
     /**
-     * 从云存储获取文件列表.
+     * 从云存储get文件list.
      *
-     * @param string $organizationCode 组织编码
+     * @param string $organizationCode organization编码
      * @param string $directoryPrefix 目录前缀
-     * @param StorageBucketType $bucketType 存储桶类型
-     * @return CloudFileInfoDTO[] 文件DTO对象数组
+     * @param StorageBucketType $bucketType 存储桶type
+     * @return CloudFileInfoDTO[] 文件DTOobjectarray
      */
     public function getFilesFromCloudStorage(
         string $organizationCode,
@@ -274,7 +274,7 @@ readonly class FileDomainService
 
         $files = [];
 
-        // 正确解析对象列表数据结构
+        // 正确解析objectlist数据结构
         $objectsList = $objectsResponse['objects'] ?? $objectsResponse;
 
         foreach ($objectsList as $object) {
@@ -285,7 +285,7 @@ readonly class FileDomainService
                 key: $objectKey,
                 filename: $filename,
                 size: $object['size'] ?? null,
-                lastModified: null // ASR业务中不使用该字段，直接传null
+                lastModified: null // ASR业务中不使用该field，直接传null
             );
         }
         return $files;

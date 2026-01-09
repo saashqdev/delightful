@@ -30,7 +30,7 @@ class ModelConfigAppService extends AbstractLLMAppService
     }
 
     /**
-     * 根据ID获取模型配置.
+     * 根据IDgetmodelconfiguration.
      */
     public function showById(Authenticatable $authorization, string $id): ModelConfigEntity
     {
@@ -59,38 +59,38 @@ class ModelConfigAppService extends AbstractLLMAppService
     }
 
     /**
-     * 获取模型的降级链，合并用户传入的降级链与系统默认的降级链.
+     * getmodel的降级链，合并user传入的降级链与系统默认的降级链.
      *
-     * @param string $orgCode 组织编码
-     * @param string $userId 用户ID
-     * @param string $modelType 指定的模型类型
-     * @param string[] $modelFallbackChain 用户传入的降级链
+     * @param string $orgCode organization编码
+     * @param string $userId userID
+     * @param string $modelType 指定的modeltype
+     * @param string[] $modelFallbackChain user传入的降级链
      *
-     * @return string 最终的模型类型
+     * @return string 最终的modeltype
      */
     public function getChatModelTypeByFallbackChain(string $orgCode, string $userId, string $modelType = '', array $modelFallbackChain = []): string
     {
         $dataIsolation = ModelGatewayDataIsolation::createByOrganizationCodeWithoutSubscription($orgCode, $userId);
-        // 从组织可用的模型列表中获取所有可聊天的模型
+        // 从organization可用的modellist中get所有可聊天的model
         $odinModels = di(ModelGatewayMapper::class)->getChatModels($dataIsolation) ?? [];
         $chatModelsName = array_keys($odinModels);
         if (empty($chatModelsName)) {
             return '';
         }
 
-        // 如果指定了模型类型且该模型存在于可用模型列表中，则直接返回
+        // 如果指定了modeltype且该model存在于可用modellist中，则直接return
         if (! empty($modelType) && in_array($modelType, $chatModelsName)) {
             return $modelType;
         }
 
-        // 将可用模型转为哈希表，实现O(1)时间复杂度的查找
+        // 将可用model转为哈希table，实现O(1)time复杂度的查找
         $availableModels = array_flip($chatModelsName);
 
-        // 获取系统默认的降级链
+        // get系统默认的降级链
         $systemFallbackChain = config('delightful-api.model_fallback_chain.chat', []);
 
-        // 合并用户传入的降级链与系统默认的降级链
-        // 用户传入的降级链优先级更高
+        // 合并user传入的降级链与系统默认的降级链
+        // user传入的降级链优先级更高
         $mergedFallbackChain = array_merge($systemFallbackChain, $modelFallbackChain);
 
         // 按优先级顺序遍历合并后的降级链
@@ -100,7 +100,7 @@ class ModelConfigAppService extends AbstractLLMAppService
             }
         }
 
-        // 后备方案：如果没有匹配任何优先模型，使用第一个可用模型
+        // 后备方案：如果没有匹配任何优先model，使用第一个可用model
         return $chatModelsName[0] ?? '';
     }
 }

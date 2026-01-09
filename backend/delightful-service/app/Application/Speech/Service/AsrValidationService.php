@@ -23,8 +23,8 @@ use Delightful\BeDelightful\ErrorCode\BeAgentErrorCode;
 use Throwable;
 
 /**
- * ASR 验证服务
- * 负责项目权限、话题归属、任务状态等验证逻辑.
+ * ASR 验证service
+ * 负责项目permission、话题归属、taskstatus等验证逻辑.
  */
 readonly class AsrValidationService
 {
@@ -38,38 +38,38 @@ readonly class AsrValidationService
     }
 
     /**
-     * 验证项目权限 - 确保项目属于当前用户和组织.
+     * 验证项目permission - 确保项目属于当前user和organization.
      *
      * @param string $projectId 项目ID
-     * @param string $userId 用户ID
-     * @param string $organizationCode 组织编码
+     * @param string $userId userID
+     * @param string $organizationCode organization编码
      * @return ProjectEntity 项目实体
      */
     public function validateProjectAccess(string $projectId, string $userId, string $organizationCode): ProjectEntity
     {
         try {
-            // 获取项目信息
+            // get项目info
             $projectEntity = $this->projectDomainService->getProjectNotUserId((int) $projectId);
             if ($projectEntity === null) {
                 ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND);
             }
 
-            // 校验项目是否属于当前组织
+            // 校验项目是否属于当前organization
             if ($projectEntity->getUserOrganizationCode() !== $organizationCode) {
                 ExceptionBuilder::throw(AsrErrorCode::ProjectAccessDeniedOrganization);
             }
 
-            // 校验项目是否属于当前用户
+            // 校验项目是否属于当前user
             if ($projectEntity->getUserId() === $userId) {
                 return $projectEntity;
             }
 
-            // 检查用户是否是项目成员
+            // checkuser是否是项目成员
             if ($this->projectMemberDomainService->isProjectMemberByUser((int) $projectId, $userId)) {
                 return $projectEntity;
             }
 
-            // 检查用户所在部门是否有项目权限
+            // checkuser所在department是否有项目permission
             $dataIsolation = DataIsolation::create($organizationCode, $userId);
             $departmentIds = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserId($dataIsolation, $userId, true);
 
@@ -77,10 +77,10 @@ readonly class AsrValidationService
                 return $projectEntity;
             }
 
-            // 所有权限检查都失败
+            // 所有permissioncheck都fail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessDeniedUser);
         } catch (BusinessException $e) {
-            // 处理 ExceptionBuilder::throw 抛出的业务异常
+            // 处理 ExceptionBuilder::throw 抛出的业务exception
             if ($e->getCode() === BeAgentErrorCode::PROJECT_NOT_FOUND->value) {
                 ExceptionBuilder::throw(AsrErrorCode::ProjectNotFound);
             }
@@ -89,10 +89,10 @@ readonly class AsrValidationService
                 throw $e;
             }
 
-            // 其他业务异常转换为权限验证失败
+            // 其他业务exception转换为permission验证fail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         } catch (Throwable $e) {
-            // 其他异常统一处理为权限验证失败
+            // 其他exception统一处理为permission验证fail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         }
     }
@@ -101,7 +101,7 @@ readonly class AsrValidationService
      * 验证话题归属.
      *
      * @param int $topicId 话题ID
-     * @param string $userId 用户ID
+     * @param string $userId userID
      * @return TopicEntity 话题实体
      */
     public function validateTopicOwnership(int $topicId, string $userId): TopicEntity
@@ -112,7 +112,7 @@ readonly class AsrValidationService
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND);
         }
 
-        // 验证话题属于当前用户
+        // 验证话题属于当前user
         if ($topicEntity->getUserId() !== $userId) {
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND);
         }
@@ -121,11 +121,11 @@ readonly class AsrValidationService
     }
 
     /**
-     * 验证并获取任务状态.
+     * 验证并gettaskstatus.
      *
-     * @param string $taskKey 任务键
-     * @param string $userId 用户ID
-     * @return AsrTaskStatusDTO 任务状态DTO
+     * @param string $taskKey task键
+     * @param string $userId userID
+     * @return AsrTaskStatusDTO taskstatusDTO
      */
     public function validateTaskStatus(string $taskKey, string $userId): AsrTaskStatusDTO
     {
@@ -135,7 +135,7 @@ readonly class AsrValidationService
             ExceptionBuilder::throw(AsrErrorCode::UploadAudioFirst);
         }
 
-        // 验证用户ID匹配（基本的安全检查）
+        // 验证userID匹配（基本的安全check）
         if ($taskStatus->userId !== $userId) {
             ExceptionBuilder::throw(AsrErrorCode::TaskNotBelongToUser);
         }
@@ -144,10 +144,10 @@ readonly class AsrValidationService
     }
 
     /**
-     * 从话题获取项目ID（包含话题归属验证）.
+     * 从话题get项目ID（包含话题归属验证）.
      *
      * @param int $topicId 话题ID
-     * @param string $userId 用户ID
+     * @param string $userId userID
      * @return string 项目ID
      */
     public function getProjectIdFromTopic(int $topicId, string $userId): string

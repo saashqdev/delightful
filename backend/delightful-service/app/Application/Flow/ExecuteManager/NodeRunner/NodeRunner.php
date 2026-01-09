@@ -84,7 +84,7 @@ abstract class NodeRunner implements NodeRunnerInterface
         $this->llmAppService = di(LLMAppService::class);
 
         $this->node = $node;
-        // 初始化运行结果
+        // 初始化运行result
         if (! $this->node->getNodeDebugResult()) {
             $this->node->setNodeDebugResult(new NodeDebugResult($this->node->getNodeVersion()));
         }
@@ -129,7 +129,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 $callback($vertexResult, $executionData, $frontResults);
             } else {
                 $this->node->validate();
-                // 提前获取本次的结果，如果有，则直接使用
+                // 提前get本次的result，如果有，则直接使用
                 $nextExecuteNum = $executeNum + 1;
                 $historyVertexResult = $executionData->getNodeHistoryVertexResult($this->node->getNodeId(), $nextExecuteNum);
                 if ($historyVertexResult) {
@@ -148,7 +148,7 @@ abstract class NodeRunner implements NodeRunnerInterface
             $debugResult->setSuccess(false);
             $debugResult->setErrorCode((int) $throwable->getCode());
             $debugResult->setErrorMessage($throwable->getMessage());
-            // 出现异常时不运行后续节点
+            // 出现exception时不运行后续节点
             $vertexResult->setChildrenIds([]);
             $this->logger->warning('NodeRunnerFailed', [
                 'node_id' => $this->node->getNodeId(),
@@ -158,7 +158,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 'line' => $throwable->getLine(),
                 'trace' => $throwable->getTraceAsString(),
             ]);
-            // 默认是要抛异常的
+            // 默认是要抛exception的
             if ($throw) {
                 throw $throwable;
             }
@@ -168,7 +168,7 @@ abstract class NodeRunner implements NodeRunnerInterface
             $debugResult->setChildrenIds($vertexResult->getChildrenIds());
             $debugResult->addLoopDebugResult($debugResult);
 
-            // 记录节点次数的结果
+            // record节点次数的result
             $executionData->increaseExecuteNum($this->node->getNodeId(), $vertexResult);
         }
     }
@@ -206,7 +206,7 @@ abstract class NodeRunner implements NodeRunnerInterface
         }
         $response = trim($response, '\\');
         $response = str_replace('\\\\\"', '\"', $response);
-        // 如果 $response 本身就是 JSON 格式的，那么直接返回
+        // 如果 $response 本身就是 JSON 格式的，那么直接return
         $data = json_decode(trim($response), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             return [];
@@ -222,8 +222,8 @@ abstract class NodeRunner implements NodeRunnerInterface
     abstract protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void;
 
     /**
-     * todo 这里暂不实现重复上传的问题，均当做新文件上传
-     * 记录流程所产生的文件，均会同时上传到云端，后续节点需要使用时从执行流程数据中优先匹配.
+     * todo 这里暂不实现重复上传的issue，均当做新文件上传
+     * record流程所产生的文件，均会同时上传到云端，后续节点需要使用时从执行流程数据中优先匹配.
      * @return AbstractAttachment[]
      * @throws SSRFException
      */
@@ -239,7 +239,7 @@ abstract class NodeRunner implements NodeRunnerInterface
             if (! is_string($attachment)) {
                 continue;
             }
-            // 如果已经存在，直接添加到结果中
+            // 如果已经存在，直接添加到result中
             $path = get_path_by_url($attachment);
             if ($attachmentObj = $executionData->getAttachmentRecord($path)) {
                 $flowExecutionAttachments[] = $attachmentObj;

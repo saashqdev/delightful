@@ -87,7 +87,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     break;
                 case TriggerType::OpenChatWindow:
                     $output = $this->getOpenChatWindowOutputTemplate();
-                    // 如果有下游节点，那么间隔时间就不能为空
+                    // 如果有下游节点，那么间隔time就不能为空
                     if (! empty($nextNodes) && ! empty($branch['config'])) {
                         // 秒
                         $interval = $branch['config']['interval'] ?? 0;
@@ -109,7 +109,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     break;
                 case TriggerType::ParamCall:
                     $outputComponent = ComponentFactory::fastCreate($branch['output']['form'] ?? []);
-                    // 参数调用可以无参数触发，例如触发一个事件
+                    // parametercall可以无parameter触发，例如触发一个event
                     if ($outputComponent) {
                         $output = new NodeOutput();
                         $output->setForm($outputComponent);
@@ -141,7 +141,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     $output = $this->getRoutineOutputTemplate();
                     break;
                 case TriggerType::LoopStart:
-                    // 循环开始节点，不需要配置
+                    // 循环开始节点，不需要configuration
                     break;
                 default:
                     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'flow.node.start.unsupported_trigger_type', ['trigger_type' => $triggerType->name]);
@@ -155,7 +155,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
             $list[] = $branchStructure->toArray();
         }
 
-        // 这俩参数没有用了
+        // 这俩parameter没有用了
         $this->node->setInput(null);
         $this->node->setOutput(null);
 
@@ -254,7 +254,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                 "type": "string",
                 "key": "user_id",
                 "sort": 0,
-                "title": " 用户ID",
+                "title": " userID",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -265,7 +265,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                 "type": "string",
                 "key": "nickname",
                 "sort": 1,
-                "title": " 用户昵称",
+                "title": " user昵称",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -276,7 +276,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                 "type": "string",
                 "key": "open_time",
                 "sort": 2,
-                "title": "打开时间",
+                "title": "打开time",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -287,7 +287,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                 "type": "string",
                 "key": "organization_code",
                 "sort": 3,
-                "title": "组织编码",
+                "title": "organization编码",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -298,7 +298,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                 "type": "string",
                 "key": "conversation_id",
                 "sort": 4,
-                "title": "会话 ID",
+                "title": "session ID",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -353,7 +353,7 @@ JSON;
                 "type": "string",
                 "key": "trigger_time",
                 "sort": 0,
-                "title": "触发时间",
+                "title": "触发time",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -364,7 +364,7 @@ JSON;
                 "type": "number",
                 "key": "trigger_timestamp",
                 "sort": 1,
-                "title": "触发时间戳",
+                "title": "触发time戳",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -401,7 +401,7 @@ JSON;
         "user": {
             "type": "object",
             "key": "user",
-            "title": " 用户ID",
+            "title": " userID",
             "description": "",
             "items": null,
             "required": [
@@ -413,7 +413,7 @@ JSON;
                 "id": {
                     "type": "string",
                     "key": "id",
-                    "title": "用户 ID",
+                    "title": "user ID",
                     "description": "",
                     "items": null,
                     "properties": null,
@@ -423,7 +423,7 @@ JSON;
                 "nickname": {
                     "type": "string",
                     "key": "nickname",
-                    "title": "用户昵称",
+                    "title": "user昵称",
                     "description": "",
                     "items": null,
                     "properties": null,
@@ -446,7 +446,7 @@ JSON;
         "add_time": {
             "type": "string",
             "key": "add_time",
-            "title": "添加时间",
+            "title": "添加time",
             "description": "",
             "items": null,
             "properties": null,

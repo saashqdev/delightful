@@ -36,34 +36,34 @@ class RoleApi extends AbstractPermissionApi
     #[CheckPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN, DelightfulOperationEnum::QUERY)]
     public function getSubAdminList(): array
     {
-        // 获取认证信息
+        // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // 创建数据隔离上下文
+        // create数据隔离上下文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
         );
 
-        // 创建分页对象
+        // createpaginationobject
         $page = $this->createPage();
 
-        // 构建查询对象（自动过滤掉分页字段）
+        // 构建queryobject（自动filter掉paginationfield）
         $query = new SubAdminQuery($this->request->all());
 
-        // 转换为仓储过滤数组
+        // 转换为仓储filterarray
         $filters = $query->toFilters();
 
-        // 查询角色列表
+        // query角色list
         $result = $this->roleAppService->queries($dataIsolation, $page, $filters);
 
-        // 批量获取用户详情（每个角色仅取前5个userId）
+        // 批量getuser详情（每个角色仅取前5个userId）
         $contactIsolation = ContactDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
         );
 
-        // 收集需要查询的用户ID
+        // 收集需要query的userID
         $roleUserIdsMap = [];
         $allNeedUserIds = [];
         foreach ($result['list'] as $index => $roleEntity) {
@@ -75,13 +75,13 @@ class RoleApi extends AbstractPermissionApi
         }
         $allNeedUserIds = array_values(array_unique($allNeedUserIds));
 
-        // 批量查询用户信息
+        // 批量queryuserinfo
         $allUserInfo = [];
         if (! empty($allNeedUserIds)) {
             $allUserInfo = $this->userInfoAppService->getBatchUserInfo($allNeedUserIds, $contactIsolation);
         }
 
-        // 重新组装列表数据
+        // 重新组装list数据
         $list = [];
         foreach ($result['list'] as $index => $roleEntity) {
             $limitedIds = $roleUserIdsMap[$index] ?? [];
@@ -101,19 +101,19 @@ class RoleApi extends AbstractPermissionApi
     #[CheckPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN, DelightfulOperationEnum::QUERY)]
     public function getSubAdminById(int $id): array
     {
-        // 获取认证信息
+        // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // 创建数据隔离上下文
+        // create数据隔离上下文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
         );
 
-        // 获取角色详情
+        // get角色详情
         $roleEntity = $this->roleAppService->show($dataIsolation, $id);
 
-        // 获取角色关联的用户信息
+        // get角色关联的userinfo
         $contactIsolation = ContactDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -129,23 +129,23 @@ class RoleApi extends AbstractPermissionApi
     #[CheckPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN, DelightfulOperationEnum::EDIT)]
     public function createSubAdmin(): array
     {
-        // 获取认证信息
+        // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // 创建数据隔离上下文
+        // create数据隔离上下文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
         );
 
-        // 创建并验证请求DTO
+        // create并验证请求DTO
         $requestDTO = new CreateSubAdminRequestDTO($this->request->all());
         if (! $requestDTO->validate()) {
             $errors = $requestDTO->getValidationErrors();
-            throw new InvalidArgumentException('请求参数验证失败: ' . implode(', ', $errors));
+            throw new InvalidArgumentException('请求parameter验证fail: ' . implode(', ', $errors));
         }
 
-        // 创建角色实体
+        // create角色实体
         $roleEntity = new RoleEntity();
         $roleEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $roleEntity->setCreatedUid($dataIsolation->getCurrentUserId());
@@ -165,30 +165,30 @@ class RoleApi extends AbstractPermissionApi
     #[CheckPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN, DelightfulOperationEnum::EDIT)]
     public function updateSubAdmin(): array
     {
-        // 获取认证信息
+        // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // 创建数据隔离上下文
+        // create数据隔离上下文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
         );
 
-        // 获取角色ID
+        // get角色ID
         $roleId = (int) $this->request->route('id');
 
-        // 创建并验证请求DTO
+        // create并验证请求DTO
         $requestDTO = new UpdateSubAdminRequestDTO($this->request->all());
 
         if (! $requestDTO->validate()) {
             $errors = $requestDTO->getValidationErrors();
-            throw new InvalidArgumentException('请求参数验证失败: ' . implode(', ', $errors));
+            throw new InvalidArgumentException('请求parameter验证fail: ' . implode(', ', $errors));
         }
         if (! $requestDTO->hasUpdates()) {
-            throw new InvalidArgumentException('至少需要提供一个要更新的字段');
+            throw new InvalidArgumentException('至少需要提供一个要update的field');
         }
 
-        // 获取现有角色
+        // get现有角色
         $roleEntity = $this->roleAppService->show($dataIsolation, $roleId);
 
         $updateFields = $requestDTO->getUpdateFields();
@@ -213,19 +213,19 @@ class RoleApi extends AbstractPermissionApi
     #[CheckPermission(DelightfulResourceEnum::SAFE_SUB_ADMIN, DelightfulOperationEnum::EDIT)]
     public function deleteSubAdmin(int $id): array
     {
-        // 获取认证信息
+        // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // 创建数据隔离上下文
+        // create数据隔离上下文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
         );
 
-        // 删除角色
+        // delete角色
         $this->roleAppService->destroy($dataIsolation, $id);
 
-        // 返回空数组以触发统一的 ApiResponse 封装
+        // return空array以触发统一的 ApiResponse 封装
         return [];
     }
 }

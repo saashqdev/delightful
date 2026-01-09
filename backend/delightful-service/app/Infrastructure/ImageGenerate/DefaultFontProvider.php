@@ -17,7 +17,7 @@ use App\Domain\ImageGenerate\Contract\FontProviderInterface;
 class DefaultFontProvider implements FontProviderInterface
 {
     /**
-     * 获取TTF字体文件路径.
+     * getTTF字体文件路径.
      * 开源版本不提供TTF字体文件.
      */
     public function getFontPath(): ?string
@@ -51,15 +51,15 @@ class DefaultFontProvider implements FontProviderInterface
     public function hasTransparency($image): bool
     {
         if (! imageistruecolor($image)) {
-            // 调色板图像检查透明色索引
+            // 调色板图像check透明色索引
             return imagecolortransparent($image) !== -1;
         }
 
-        // 真彩色图像检查alpha通道
+        // 真彩色图像checkalpha通道
         $width = imagesx($image);
         $height = imagesy($image);
 
-        // 采样检查，避免检查每个像素提高性能
+        // 采样check，避免check每个像素提高性能
         $sampleSize = min(50, $width, $height);
         $stepX = max(1, (int) ($width / $sampleSize));
         $stepY = max(1, (int) ($height / $sampleSize));

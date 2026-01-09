@@ -30,7 +30,7 @@ class NodeDTO extends AbstractFlowDTO
     public array $meta = [];
 
     /**
-     * 节点参数配置，目前依靠数组来数据传递.
+     * 节点parameterconfiguration，目前依靠array来数据传递.
      */
     public array $params = [];
 
@@ -43,7 +43,7 @@ class NodeDTO extends AbstractFlowDTO
     public ?NodeOutputDTO $systemOutput = null;
 
     /**
-     * 获取节点ID.
+     * get节点ID.
      */
     public function getNodeId(): string
     {
@@ -51,7 +51,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 设置节点ID.
+     * set节点ID.
      */
     public function setNodeId(?string $nodeId): self
     {
@@ -60,7 +60,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 获取是否为调试模式.
+     * get是否为debug模式.
      */
     public function isDebug(): bool
     {
@@ -73,7 +73,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 设置是否为调试模式.
+     * set是否为debug模式.
      */
     public function setDebug(?bool $debug): self
     {
@@ -82,7 +82,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 获取节点名称.
+     * get节点name.
      */
     public function getName(): string
     {
@@ -90,7 +90,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 设置节点名称.
+     * set节点name.
      */
     public function setName(?string $name): self
     {
@@ -99,7 +99,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 获取节点描述.
+     * get节点description.
      */
     public function getDescription(): string
     {
@@ -107,7 +107,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 设置节点描述.
+     * set节点description.
      */
     public function setDescription(?string $description): self
     {
@@ -116,7 +116,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 获取节点类型.
+     * get节点type.
      */
     public function getNodeType(): int
     {
@@ -124,7 +124,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 设置节点类型.
+     * set节点type.
      */
     public function setNodeType(null|int|string $nodeType): self
     {
@@ -133,7 +133,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 获取节点版本.
+     * get节点版本.
      */
     public function getNodeVersion(): string
     {
@@ -141,7 +141,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 设置节点版本.
+     * set节点版本.
      */
     public function setNodeVersion(?string $nodeVersion): self
     {
@@ -150,7 +150,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 获取节点元数据.
+     * get节点元数据.
      */
     public function getMeta(): array
     {
@@ -158,7 +158,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 设置节点元数据.
+     * set节点元数据.
      */
     public function setMeta(?array $meta): self
     {
@@ -167,7 +167,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 获取节点参数配置.
+     * get节点parameterconfiguration.
      */
     public function getParams(): array
     {
@@ -175,7 +175,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 设置节点参数配置.
+     * set节点parameterconfiguration.
      */
     public function setParams(?array $params): self
     {
@@ -184,7 +184,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 获取下一节点列表.
+     * get下一节点list.
      */
     public function getNextNodes(): array
     {
@@ -192,7 +192,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 设置下一节点列表.
+     * set下一节点list.
      */
     public function setNextNodes(?array $nextNodes): self
     {
@@ -201,7 +201,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 获取节点输入.
+     * get节点输入.
      */
     public function getInput(): ?NodeInputDTO
     {
@@ -209,7 +209,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 设置节点输入.
+     * set节点输入.
      */
     public function setInput(mixed $input): void
     {
@@ -217,7 +217,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 获取节点输出.
+     * get节点输出.
      */
     public function getOutput(): ?NodeOutputDTO
     {
@@ -225,7 +225,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 设置节点输出.
+     * set节点输出.
      */
     public function setOutput(mixed $output): void
     {
@@ -233,7 +233,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 获取系统输出.
+     * get系统输出.
      */
     public function getSystemOutput(): ?NodeOutputDTO
     {
@@ -241,7 +241,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * 设置系统输出.
+     * set系统输出.
      */
     public function setSystemOutput(null|array|NodeOutputDTO $systemOutput): void
     {

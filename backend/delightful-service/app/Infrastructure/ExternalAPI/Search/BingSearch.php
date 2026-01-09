@@ -54,7 +54,7 @@ class BingSearch
         string $requestUrl = ''
     ): array {
         /*
-         * 使用 bing 搜索并返回上下文。
+         * 使用 bing search并return上下文。
          */
         if (empty($requestUrl)) {
             $requestUrl = trim(config('search.drivers.bing.endpoint'));
@@ -64,7 +64,7 @@ class BingSearch
             $requestUrl = rtrim($requestUrl, '/') . '/search';
         }
 
-        // 构建基础查询参数
+        // 构建基础queryparameter
         $queryParams = [
             'q' => $query,
             'mkt' => $mkt,
@@ -72,7 +72,7 @@ class BingSearch
             'offset' => $offset,
         ];
 
-        // 添加可选参数
+        // 添加可选parameter
         if (! empty($safeSearch)) {
             $queryParams['safeSearch'] = $safeSearch;
         }
@@ -85,7 +85,7 @@ class BingSearch
             $queryParams['setLang'] = $setLang;
         }
 
-        // 创建 Guzzle 客户端配置
+        // create Guzzle 客户端configuration
         $clientConfig = [
             'base_uri' => $requestUrl,
             'timeout' => self::DEFAULT_SEARCH_ENGINE_TIMEOUT,
@@ -116,14 +116,14 @@ class BingSearch
                     'query' => $queryParams,
                 ]);
 
-                // 获取响应体内容
+                // get响应体content
                 $body = $response->getBody()->getContents();
 
-                // 如果需要将 JSON 转换为数组或对象，可以使用 json_decode
-                // 请求成功，返回数据
+                // 如果需要将 JSON 转换为array或object，可以使用 json_decode
+                // 请求success，return数据
                 return Json::decode($body);
             } catch (RequestException $e) {
-                // 如果有响应，说明是HTTP错误(4xx, 5xx等)，不重试
+                // 如果有响应，说明是HTTPerror(4xx, 5xx等)，不重试
                 if ($e->hasResponse()) {
                     $statusCode = $e->getResponse()?->getStatusCode();
                     $reason = $e->getResponse()?->getReasonPhrase();
@@ -132,7 +132,7 @@ class BingSearch
                         'endpoint' => $requestUrl,
                         'statusCode' => $statusCode,
                     ]);
-                    break; // HTTP错误不重试，直接跳出循环
+                    break; // HTTPerror不重试，直接跳出循环
                 }
                 $this->logger->warning('Network error occurred', [
                     'endpoint' => $requestUrl,
@@ -144,7 +144,7 @@ class BingSearch
             }
         }
 
-        // 如果走到这里，说明所有尝试都失败了
+        // 如果走到这里，说明所有尝试都fail了
         throw new RuntimeException('Search engine error.');
     }
 }

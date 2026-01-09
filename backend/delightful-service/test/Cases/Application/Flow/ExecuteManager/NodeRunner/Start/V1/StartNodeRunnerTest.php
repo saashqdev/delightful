@@ -281,9 +281,9 @@ JSON,
     public function testParamCallWithSystemParamKey()
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionMessage('字段名 [conversation_id] 与系统保留字段冲突，请使用其他名称');
+        $this->expectExceptionMessage('field名 [conversation_id] 与系统保留field冲突，请使用其他name');
 
-        // 创建一个包含系统保留字段的节点配置，这应该在validate阶段抛出异常
+        // create一个包含系统保留field的节点configuration，这应该在validate阶段抛出exception
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {
@@ -337,9 +337,9 @@ JSON,
     public function testParamCallWithSystemParamKeyInCustomSystemOutput()
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionMessage('字段名 [message_type] 与系统保留字段冲突，请使用其他名称');
+        $this->expectExceptionMessage('field名 [message_type] 与系统保留field冲突，请使用其他name');
 
-        // 测试在custom_system_output中使用系统保留字段
+        // test在custom_system_output中使用系统保留field
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {
@@ -393,9 +393,9 @@ JSON,
     public function testParamCallWithErrorJsonSchema()
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionMessage('JSON Schema 格式错误：[user_list] Array type must have items');
+        $this->expectExceptionMessage('JSON Schema 格式error：[user_list] Array type must have items');
 
-        // 创建一个包含系统保留字段的节点配置，这应该在validate阶段抛出异常
+        // create一个包含系统保留field的节点configuration，这应该在validate阶段抛出exception
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {
@@ -509,7 +509,7 @@ JSON,
                                 "type": "string",
                                 "key": "trigger_time",
                                 "sort": 0,
-                                "title": "触发时间",
+                                "title": "触发time",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -520,7 +520,7 @@ JSON,
                                 "type": "number",
                                 "key": "trigger_timestamp",
                                 "sort": 1,
-                                "title": "触发时间戳",
+                                "title": "触发time戳",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -570,7 +570,7 @@ JSON,
                                 "type": "string",
                                 "key": "trigger_time",
                                 "sort": 0,
-                                "title": "触发时间",
+                                "title": "触发time",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -581,7 +581,7 @@ JSON,
                                 "type": "number",
                                 "key": "trigger_timestamp",
                                 "sort": 1,
-                                "title": "触发时间戳",
+                                "title": "触发time戳",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -647,7 +647,7 @@ JSON,
                                 "type": "string",
                                 "key": "trigger_time",
                                 "sort": 0,
-                                "title": "触发时间",
+                                "title": "触发time",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -658,7 +658,7 @@ JSON,
                                 "type": "number",
                                 "key": "trigger_timestamp",
                                 "sort": 1,
-                                "title": "触发时间戳",
+                                "title": "触发time戳",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -708,7 +708,7 @@ JSON,
                                 "type": "string",
                                 "key": "trigger_time",
                                 "sort": 0,
-                                "title": "触发时间",
+                                "title": "触发time",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -719,7 +719,7 @@ JSON,
                                 "type": "number",
                                 "key": "trigger_timestamp",
                                 "sort": 1,
-                                "title": "触发时间戳",
+                                "title": "触发time戳",
                                 "description": "",
                                 "required": null,
                                 "value": null,

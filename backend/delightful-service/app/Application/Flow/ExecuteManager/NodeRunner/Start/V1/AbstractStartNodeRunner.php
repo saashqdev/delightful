@@ -86,11 +86,11 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             'open_time' => $openChatTime->format('Y-m-d H:i:s'),
         ];
 
-        // 获取上次打开触发的时间
+        // get上次打开触发的time
         $key = 'open_chat_notice_' . $executionData->getConversationId();
         $lastNoticeTime = $this->cache->get($key);
 
-        // 如果没有上次，或者距离上次的时间秒已经超过了，那么就需要执行
+        // 如果没有上次，或者距离上次的time秒已经超过了，那么就需要执行
         $config = $triggerBranch->getConfig();
         $intervalSeconds = $this->getIntervalSeconds($config['interval'] ?? 0, $config['unit'] ?? '');
         if (! $lastNoticeTime || (Carbon::make($openChatTime)->diffInSeconds(Carbon::make($lastNoticeTime)) > $intervalSeconds)) {
@@ -163,7 +163,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
     protected function routine(VertexResult $vertexResult, ExecutionData $executionData, StartNodeParamsConfig $startNodeParamsConfig): array
     {
-        // 定时入参，都由外部调用，判断是哪个分支
+        // 定时入参，都由外部call，判断是哪个分支
         $branchId = $executionData->getTriggerData()->getParams()['branch_id'] ?? '';
         if (empty($branchId)) {
             // 没有找到任何分支，直接运行
@@ -254,13 +254,13 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         if (! $delightfulFlowEntity || ! $delightfulFlowEntity->getType()->isMain()) {
             return;
         }
-        // 兜底，如果没有 agent 的流程指令，尝试实时获取
+        // 兜底，如果没有 agent 的流程指令，尝试实时get
         if (empty($executionData->getInstructionConfigs())) {
             $instructs = di(DelightfulAgentDomainService::class)->getAgentById($executionData->getAgentId())->getInstructs();
             $executionData->setInstructionConfigs($instructs);
         }
 
-        // 获取当前消息体的指令值
+        // get当前message体的指令value
         $messageChatInstructions = $messageEntity->getChatInstructions();
         $messageChatInstructionIdMaps = [];
         $messageChatInstructionNameMaps = [];
@@ -274,7 +274,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         }
 
         $instructions = [];
-        // 只放当前 agent 配置的流程指令
+        // 只放当前 agent configuration的流程指令
         foreach ($executionData->getInstructionConfigs() as $instructionConfig) {
             if (! $instructionConfig->isFlowInstructionType()) {
                 continue;
@@ -290,7 +290,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             if ($messageChatInstruction) {
                 $value = $messageChatInstruction->getValue();
             } else {
-                // 如果消息体中没有指令值，使用默认值
+                // 如果message体中没有指令value，使用默认value
                 $value = $instructionConfig->getDefaultValue();
             }
             $instructions[$instructionConfig->getId()] = $instructionConfig->getNameAndValueByType($value);
@@ -351,7 +351,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             $container = ApplicationContext::getContainer();
             $messageRepository = $container->get(DelightfulMessageRepositoryInterface::class);
 
-            // 将 VoiceMessage 转换为数组格式用于更新
+            // 将 VoiceMessage 转换为array格式用于update
             $messageContent = $voiceMessage->toArray();
 
             $messageRepository->updateMessageContent($delightfulMessageId, $messageContent);
@@ -362,7 +362,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
                 'transcription_length' => strlen($voiceMessage->getTranscriptionText() ?? ''),
             ]);
         } catch (Throwable $e) {
-            // 静默处理更新失败，不影响主要流程
+            // 静默处理updatefail，不影响主要流程
             $this->logger->warning('Failed to update voice message content (V1)', [
                 'delightful_message_id' => $delightfulMessageId,
                 'error' => $e->getMessage(),

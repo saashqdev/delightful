@@ -67,24 +67,24 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * 生成图像并返回OpenAI格式响应 - GPT4o版本.
+     * generate图像并returnOpenAI格式响应 - GPT4o版本.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
-        // 1. 预先创建响应对象
+        // 1. 预先创建响应object
         $response = new OpenAIFormatResponse([
             'created' => time(),
             'provider' => $this->getProviderName(),
             'data' => [],
         ]);
 
-        // 2. 参数验证
+        // 2. parametervalidate
         if (! $imageGenerateRequest instanceof GPT4oModelRequest) {
-            $this->logger->error('GPT4o OpenAI格式生图：无效的请求类型', ['class' => get_class($imageGenerateRequest)]);
-            return $response; // 返回空数据响应
+            $this->logger->error('GPT4o OpenAI格式生图：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
+            return $response; // returnnull数据响应
         }
 
-        // 3. 并发处理 - 直接操作响应对象
+        // 3. 并发handle - 直接操作响应object
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
@@ -99,16 +99,16 @@ class GPT4oModel extends AbstractImageGenerate
 
                     $this->validateGPT4oResponse($result);
 
-                    // 成功：设置图片数据到响应对象
+                    // success：设置图片数据到响应object
                     $this->addImageDataToResponseGPT4o($response, $result, $imageGenerateRequest);
                 } catch (Exception $e) {
-                    // 失败：设置错误信息到响应对象（只设置第一个错误）
+                    // fail：设置error信息到响应object（只设置第一个error）
                     if (! $response->hasError()) {
                         $response->setProviderErrorCode($e->getCode());
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('GPT4o OpenAI格式生图：单个请求失败', [
+                    $this->logger->error('GPT4o OpenAI格式生图：单个请求fail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -119,12 +119,12 @@ class GPT4oModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 4. 记录最终结果
-        $this->logger->info('GPT4o OpenAI格式生图：并发处理完成', [
+        $this->logger->info('GPT4o OpenAI格式生图：并发handlecomplete', [
             '总请求数' => $count,
-            '成功图片数' => count($response->getData()),
-            '是否有错误' => $response->hasError(),
-            '错误码' => $response->getProviderErrorCode(),
-            '错误消息' => $response->getProviderErrorMessage(),
+            'success图片数' => count($response->getData()),
+            '是否有error' => $response->hasError(),
+            'error码' => $response->getProviderErrorCode(),
+            'errormessage' => $response->getProviderErrorMessage(),
         ]);
 
         return $response;
@@ -147,17 +147,17 @@ class GPT4oModel extends AbstractImageGenerate
             }
         }
 
-        // 检查是否至少有一张图片生成成功
+        // 检查是否至少有一张图片generatesuccess
         if (empty($imageUrls)) {
-            $this->logger->error('GPT4o文生图：所有图片生成均失败', ['rawResults' => $rawResults]);
+            $this->logger->error('GPT4o文生图：所有图片generate均fail', ['rawResults' => $rawResults]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE);
         }
 
-        // 按索引排序结果
+        // 按索引sort结果
         ksort($imageUrls);
         $imageUrls = array_values($imageUrls);
 
-        $this->logger->info('GPT4o文生图：生成结束', [
+        $this->logger->info('GPT4o文生图：generateend', [
             'totalImages' => count($imageUrls),
             'requestedImages' => $imageGenerateRequest->getGenerateNum(),
         ]);
@@ -176,17 +176,17 @@ class GPT4oModel extends AbstractImageGenerate
             $result = $this->api->getAccountInfo();
 
             if ($result['status'] !== 'SUCCESS') {
-                throw new Exception('检查余额失败: ' . ($result['message'] ?? '未知错误'));
+                throw new Exception('检查余额fail: ' . ($result['message'] ?? '未知error'));
             }
 
             return (float) $result['data']['balance'];
         } catch (Exception $e) {
-            throw new Exception('检查余额失败: ' . $e->getMessage());
+            throw new Exception('检查余额fail: ' . $e->getMessage());
         }
     }
 
     /**
-     * 请求生成图片并返回任务ID.
+     * 请求generate图片并return任务ID.
      */
     #[RateLimit(create: 20, consume: 1, capacity: 0, key: self::IMAGE_GENERATE_KEY_PREFIX . self::IMAGE_GENERATE_SUBMIT_KEY_PREFIX . ImageGenerateModelType::TTAPIGPT4o->value, waitTimeout: 60)]
     #[Retry(
@@ -198,8 +198,8 @@ class GPT4oModel extends AbstractImageGenerate
         $prompt = $imageGenerateRequest->getPrompt();
         $referImages = $imageGenerateRequest->getReferImages();
 
-        // 记录请求开始
-        $this->logger->info('GPT4o文生图：开始生图', [
+        // 记录请求start
+        $this->logger->info('GPT4o文生图：start生图', [
             'prompt' => $prompt,
             'referImages' => $referImages,
         ]);
@@ -208,7 +208,7 @@ class GPT4oModel extends AbstractImageGenerate
             $result = $this->api->submitGPT4oTask($prompt, $referImages);
 
             if ($result['status'] !== 'SUCCESS') {
-                $this->logger->warning('GPT4o文生图：生成请求失败', ['message' => $result['message'] ?? '未知错误']);
+                $this->logger->warning('GPT4o文生图：generate请求fail', ['message' => $result['message'] ?? '未知error']);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $result['message']);
             }
 
@@ -217,12 +217,12 @@ class GPT4oModel extends AbstractImageGenerate
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
             }
             $taskId = $result['data']['jobId'];
-            $this->logger->info('GPT4o文生图：提交任务成功', [
+            $this->logger->info('GPT4o文生图：提交任务success', [
                 'taskId' => $taskId,
             ]);
             return $taskId;
         } catch (Exception $e) {
-            $this->logger->warning('GPT4o文生图：调用图片生成接口失败', ['error' => $e->getMessage()]);
+            $this->logger->warning('GPT4o文生图：call图片generate接口fail', ['error' => $e->getMessage()]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
     }
@@ -243,16 +243,16 @@ class GPT4oModel extends AbstractImageGenerate
                 $result = $this->api->getGPT4oTaskResult($jobId);
 
                 if ($result['status'] === 'FAILED') {
-                    throw new Exception($result['message'] ?? '任务执行失败');
+                    throw new Exception($result['message'] ?? '任务executefail');
                 }
 
                 if ($result['status'] === 'SUCCESS' && ! empty($result['data']['imageUrl'])) {
                     return $result['data'];
                 }
 
-                // 如果任务还在进行中，等待后继续轮询
+                // 如果任务还在进行中，等待后continue轮询
                 if ($result['status'] === 'ON_QUEUE') {
-                    $this->logger->info('GPT4o文生图：任务处理中', [
+                    $this->logger->info('GPT4o文生图：任务handle中', [
                         'jobId' => $jobId,
                         'attempt' => $attempts + 1,
                     ]);
@@ -261,9 +261,9 @@ class GPT4oModel extends AbstractImageGenerate
                     continue;
                 }
 
-                throw new Exception('未知的任务状态：' . $result['status']);
+                throw new Exception('未知的任务status：' . $result['status']);
             } catch (Exception $e) {
-                $this->logger->error('GPT4o文生图：轮询任务失败', [
+                $this->logger->error('GPT4o文生图：轮询任务fail', [
                     'jobId' => $jobId,
                     'error' => $e->getMessage(),
                 ]);
@@ -275,7 +275,7 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * 轮询任务结果，返回原生数据格式.
+     * 轮询任务结果，return原生数据格式.
      */
     #[Retry(
         maxAttempts: self::GENERATE_RETRY_COUNT,
@@ -289,16 +289,16 @@ class GPT4oModel extends AbstractImageGenerate
                 $result = $this->api->getGPT4oTaskResult($jobId);
 
                 if ($result['status'] === 'FAILED') {
-                    throw new Exception($result['message'] ?? '任务执行失败');
+                    throw new Exception($result['message'] ?? '任务executefail');
                 }
 
                 if ($result['status'] === 'SUCCESS' && ! empty($result['data']['imageUrl'])) {
                     return $result['data'];
                 }
 
-                // 如果任务还在进行中，等待后继续轮询
+                // 如果任务还在进行中，等待后continue轮询
                 if ($result['status'] === 'ON_QUEUE') {
-                    $this->logger->info('GPT4o文生图：任务处理中', [
+                    $this->logger->info('GPT4o文生图：任务handle中', [
                         'jobId' => $jobId,
                         'attempt' => $attempts + 1,
                     ]);
@@ -307,9 +307,9 @@ class GPT4oModel extends AbstractImageGenerate
                     continue;
                 }
 
-                throw new Exception('未知的任务状态：' . $result['status']);
+                throw new Exception('未知的任务status：' . $result['status']);
             } catch (Exception $e) {
-                $this->logger->error('GPT4o文生图：轮询任务失败', [
+                $this->logger->error('GPT4o文生图：轮询任务fail', [
                     'jobId' => $jobId,
                     'error' => $e->getMessage(),
                 ]);
@@ -321,12 +321,12 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * 生成图像的核心逻辑，返回原生结果.
+     * generate图像的核心逻辑，return原生结果.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof GPT4oModelRequest) {
-            $this->logger->error('GPT4o文生图：无效的请求类型', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('GPT4o文生图：无效的请求type', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -334,7 +334,7 @@ class GPT4oModel extends AbstractImageGenerate
         $rawResults = [];
         $errors = [];
 
-        // 使用 Parallel 并行处理
+        // 使用 Parallel 并行handle
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
         for ($i = 0; $i < $count; ++$i) {
@@ -349,7 +349,7 @@ class GPT4oModel extends AbstractImageGenerate
                         'index' => $i,
                     ];
                 } catch (Exception $e) {
-                    $this->logger->error('GPT4o文生图：图片生成失败', [
+                    $this->logger->error('GPT4o文生图：图片generatefail', [
                         'error' => $e->getMessage(),
                         'index' => $i,
                     ]);
@@ -365,23 +365,23 @@ class GPT4oModel extends AbstractImageGenerate
         // 获取所有并行任务的结果
         $results = $parallel->wait();
 
-        // 处理结果，保持原生格式
+        // handle结果，保持原生格式
         foreach ($results as $result) {
             if ($result['success']) {
                 $rawResults[$result['index']] = $result['data'];
             } else {
-                $errors[] = $result['error'] ?? '未知错误';
+                $errors[] = $result['error'] ?? '未知error';
             }
         }
 
-        // 检查是否至少有一张图片生成成功
+        // 检查是否至少有一张图片generatesuccess
         if (empty($rawResults)) {
             $errorMessage = implode('; ', $errors);
-            $this->logger->error('GPT4o文生图：所有图片生成均失败', ['errors' => $errors]);
+            $this->logger->error('GPT4o文生图：所有图片generate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, $errorMessage);
         }
 
-        // 按索引排序结果
+        // 按索引sort结果
         ksort($rawResults);
         return array_values($rawResults);
     }
@@ -397,15 +397,15 @@ class GPT4oModel extends AbstractImageGenerate
             }
 
             try {
-                // 处理图片URL
+                // handle图片URL
                 $result['imageUrl'] = $this->watermarkProcessor->addWatermarkToUrl($result['imageUrl'], $imageGenerateRequest);
             } catch (Exception $e) {
-                // 水印处理失败时，记录错误但不影响图片返回
-                $this->logger->error('GPT4o图片水印处理失败', [
+                // 水印handlefail时，记录error但不影响图片return
+                $this->logger->error('GPT4o图片水印handlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // 继续处理下一张图片，当前图片保持原始状态
+                // continuehandle下一张图片，当前图片保持原始status
             }
         }
 
@@ -413,17 +413,17 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * 验证GPT4o API轮询响应数据格式.
+     * validateGPT4o API轮询响应数据格式.
      */
     private function validateGPT4oResponse(array $result): void
     {
         if (empty($result['imageUrl'])) {
-            throw new Exception('GPT4o响应数据格式错误：缺少imageUrl字段');
+            throw new Exception('GPT4o响应数据格式error：缺少imageUrl字段');
         }
     }
 
     /**
-     * 将GPT4o图片数据添加到OpenAI响应对象中.
+     * 将GPT4o图片数据添加到OpenAI响应object中.
      */
     private function addImageDataToResponseGPT4o(
         OpenAIFormatResponse $response,
@@ -443,26 +443,26 @@ class GPT4oModel extends AbstractImageGenerate
 
             $imageUrl = $gpt4oResult['imageUrl'];
 
-            // 处理水印
+            // handle水印
             $processedUrl = $imageUrl;
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToUrl($imageUrl, $imageGenerateRequest);
             } catch (Exception $e) {
-                $this->logger->error('GPT4o添加图片数据：水印处理失败', [
+                $this->logger->error('GPT4o添加图片数据：水印handlefail', [
                     'error' => $e->getMessage(),
                     'url' => $imageUrl,
                 ]);
-                // 水印处理失败时使用原始URL
+                // 水印handlefail时使用原始URL
             }
 
             $currentData[] = [
                 'url' => $processedUrl,
             ];
 
-            // 累计usage信息 - GPT4o没有详细的token统计
+            // 累计usage信息 - GPT4o没有详细的tokenstatistics
             $currentUsage->addGeneratedImages(1);
 
-            // 更新响应对象
+            // 更新响应object
             $response->setData($currentData);
             $response->setUsage($currentUsage);
         } finally {

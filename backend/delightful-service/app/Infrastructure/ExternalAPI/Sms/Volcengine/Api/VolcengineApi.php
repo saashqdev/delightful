@@ -49,7 +49,7 @@ abstract class VolcengineApi
     protected string $region;
 
     /**
-     * 接口名称.
+     * 接口name.
      */
     protected string $action;
 
@@ -73,7 +73,7 @@ abstract class VolcengineApi
     protected string $sign = '';
 
     /**
-     * 短信消息组id.
+     * 短信message组id.
      */
     protected string $messageGroupId = '';
 
@@ -98,7 +98,7 @@ abstract class VolcengineApi
 
     public function __construct(ClientFactory $clientFactory, StdoutLoggerInterface $logger, string $region = self::CHINA_REGION)
     {
-        // 部分公共固定的参数在构造参数中确定
+        // 部分公共固定的parameter在构造parameter中确定
         $this->setRegion($region);
         $this->setSecretKey(config('sms.volcengine.secretKey'));
         $this->setAccessKey(config('sms.volcengine.accessKey'));
@@ -114,11 +114,11 @@ abstract class VolcengineApi
 
     /**
      * @throws GuzzleException
-     * @todo 接入消息发送状态回调
+     * @todo 接入message发送status回调
      */
     protected function sendRequest()
     {
-        // 设置请求的签名和X-Date请求头
+        // set请求的签名和X-Date请求头
         $this->setAuth();
         try {
             // 请求头追加签名
@@ -129,10 +129,10 @@ abstract class VolcengineApi
             ];
             $response = $this->client->request($this->method, $this->getPath(), $options);
             $responseBody = Json::decode($response->getBody()->getContents());
-            // 进行错误码判断
+            // 进行error码判断
             if (isset($responseBody['ResponseMetadata']['Error'])) {
                 $this->logger->error('sendSmsError ' . Json::encode($responseBody));
-                throw new RuntimeException('短信发送失败');
+                throw new RuntimeException('短信发送fail');
             }
             $this->logger->info(sprintf('volce sendRequest %s response %s', Json::encode($options), Json::encode($responseBody)));
             return $responseBody;
@@ -149,7 +149,7 @@ abstract class VolcengineApi
     }
 
     /**
-     * 接受不同的短信类型发送
+     * 接受不同的短信type发送
      */
     protected function init(string $messageGroupId, string $sign, string $templateId): void
     {
@@ -165,7 +165,7 @@ abstract class VolcengineApi
 
     protected function addHeader(string $key, $value): void
     {
-        // 字节方的请求头的值是数组,才能参与后续的签名
+        // 字节方的请求头的value是array,才能参与后续的签名
         $value = is_array($value) ? $value : [$value];
         $this->headers[$key] = $value;
     }
@@ -176,7 +176,7 @@ abstract class VolcengineApi
     }
 
     /**
-     * 设置参数的签名和公共请求头参数X-Date.
+     * setparameter的签名和公共请求头parameterX-Date.
      */
     protected function setAuth(): void
     {

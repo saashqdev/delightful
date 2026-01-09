@@ -13,13 +13,13 @@ use Throwable;
  * SSRF防御工具类.
  *
  * 使用示例：
- * // 简单使用，默认配置
+ * // 简单使用，默认configuration
  * $safeUrl = SSRFUtil::getSafeUrl('https://example.com');
  *
- * // 自定义参数
+ * // 自定义parameter
  * $safeUrl = SSRFUtil::getSafeUrl('https://example.com', replaceIp: false, allowRedirect: true);
  *
- * // 高级配置
+ * // 高级configuration
  * $safeUrl = SSRFUtil::getSafeUrl(
  *     'https://example.com',
  *     blackList: ['192.168.1.1'],
@@ -30,16 +30,16 @@ use Throwable;
 class SSRFUtil
 {
     /**
-     * 获取SSRF防御安全链接.
+     * getSSRF防御安全链接.
      *
-     * @param string $url 需要检查的URL
+     * @param string $url 需要check的URL
      * @param array $blackList 黑名单IP或域名
      * @param array $whiteList 白名单IP或域名
      * @param array $allowProtocols 允许的协议
      * @param bool $replaceIp 是否替换为IP访问
      * @param bool $allowRedirect 是否允许重定向
      * @return string 安全的URL
-     * @throws Exception\SSRFException 当URL不安全时抛出异常
+     * @throws Exception\SSRFException 当URL不安全时抛出exception
      */
     public static function getSafeUrl(
         string $url,
@@ -62,9 +62,9 @@ class SSRFUtil
     }
 
     /**
-     * 检查URL是否安全（不抛异常，返回布尔值）.
+     * checkURL是否安全（不抛exception，return布尔value）.
      *
-     * @param string $url 需要检查的URL
+     * @param string $url 需要check的URL
      * @param array $blackList 黑名单IP或域名
      * @param array $whiteList 白名单IP或域名
      * @param array $allowProtocols 允许的协议
@@ -89,10 +89,10 @@ class SSRFUtil
     }
 
     /**
-     * 获取URL对应的IP.
+     * getURL对应的IP.
      *
      * @param string $url URL
-     * @return null|string IP地址或null（如果解析失败）
+     * @return null|string IP地址或null（如果解析fail）
      */
     public static function getUrlIp(string $url): ?string
     {

@@ -54,14 +54,14 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
 
             return 0;
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('同步失败: %s', $e->getMessage()));
+            $this->logger->error(sprintf('同步fail: %s', $e->getMessage()));
             $this->logger->error($e->getTraceAsString());
             return 1;
         }
     }
 
     /**
-     * 同步配置版本数据.
+     * 同步configuration版本数据.
      */
     protected function syncConfigVersions(bool $isDryRun, bool $isForce, int $limit): array
     {
@@ -70,7 +70,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
         $models = $this->fetchModels($limit);
         $stats['total'] = $models->count();
 
-        $this->logger->info(sprintf('找到 %d 个服务商模型需要处理', $stats['total']));
+        $this->logger->info(sprintf('找到 %d 个service商model需要处理', $stats['total']));
 
         foreach ($models as $model) {
             try {
@@ -101,7 +101,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 获取服务商模型列表.
+     * getservice商modellist.
      */
     private function fetchModels(int $limit)
     {
@@ -117,7 +117,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 获取已存在的版本数量.
+     * get已存在的版本数量.
      */
     private function getExistingVersionCount(ProviderModelModel $model): int
     {
@@ -135,7 +135,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 更新旧版本（如果需要）.
+     * update旧版本（如果需要）.
      */
     private function updateOldVersionsIfNeeded(ProviderModelModel $model, int $existingVersionCount, bool $isForce): void
     {
@@ -150,7 +150,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 创建新版本.
+     * create新版本.
      */
     private function createNewVersion(ProviderModelModel $model, int $nextVersion): void
     {
@@ -168,14 +168,14 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     {
         $config = is_string($model->config) ? json_decode($model->config, true) : $model->config;
 
-        // 基础字段
+        // 基础field
         $baseData = [
             'service_provider_model_id' => $model->id,
             'version' => $version,
             'is_current_version' => true,
         ];
 
-        // 配置字段映射
+        // configurationfield映射
         $configFields = [
             'creativity', 'max_tokens', 'temperature', 'max_output_tokens',
             'billing_type', 'billing_currency', 'time_pricing',
@@ -190,14 +190,14 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
             $configData[$field] = $config[$field] ?? $this->getDefaultValue($field);
         }
 
-        // 特殊字段处理
+        // 特殊field处理
         $configData['vector_size'] = $config['vector_size'] ?? 2048;
 
         return array_merge($baseData, $configData);
     }
 
     /**
-     * 获取字段默认值.
+     * getfield默认value.
      */
     private function getDefaultValue(string $field): mixed
     {
@@ -215,15 +215,15 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 输出头部信息.
+     * 输出头部info.
      */
     private function logHeader(bool $isDryRun, bool $isForce, int $limit): void
     {
-        $this->logger->info('开始同步服务商模型配置版本数据...');
-        $this->logger->info(sprintf('模式: %s', $isDryRun ? '试运行（不写入数据库）' : '正式执行'));
+        $this->logger->info('开始同步service商modelconfiguration版本数据...');
+        $this->logger->info(sprintf('模式: %s', $isDryRun ? '试运行（不写入database）' : '正式执行'));
 
         if ($isForce) {
-            $this->logger->warning('强制模式已启用：将为所有模型创建新版本');
+            $this->logger->warning('强制模式已启用：将为所有modelcreate新版本');
         }
 
         if ($limit > 0) {
@@ -232,26 +232,26 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 输出统计信息.
+     * 输出统计info.
      */
     private function logSummary(array $result): void
     {
         $this->logger->info('=================================');
-        $this->logger->info('同步完成！统计信息:');
-        $this->logger->info(sprintf('  总模型数: %d', $result['total']));
+        $this->logger->info('同步完成！统计info:');
+        $this->logger->info(sprintf('  总model数: %d', $result['total']));
         $this->logger->info(sprintf('  已有版本: %d', $result['skipped']));
         $this->logger->info(sprintf('  新增版本: %d', $result['created']));
-        $this->logger->info(sprintf('  失败数量: %d', $result['failed']));
+        $this->logger->info(sprintf('  fail数量: %d', $result['failed']));
         $this->logger->info('=================================');
     }
 
     /**
-     * 记录跳过日志.
+     * record跳过log.
      */
     private function logSkipped(ProviderModelModel $model, int $existingVersionCount): void
     {
         $this->logger->debug(sprintf(
-            '[跳过] 模型 ID: %d, 名称: %s (已有 %d 个配置版本)',
+            '[跳过] model ID: %d, name: %s (已有 %d 个configuration版本)',
             $model->id,
             $model->name ?: $model->model_id,
             $existingVersionCount
@@ -259,13 +259,13 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 记录创建日志.
+     * recordcreatelog.
      */
     private function logCreated(ProviderModelModel $model, int $version, bool $isDryRun): void
     {
-        $prefix = $isDryRun ? '[试运行]' : '[创建]';
+        $prefix = $isDryRun ? '[试运行]' : '[create]';
         $this->logger->info(sprintf(
-            '%s 模型 ID: %d, 名称: %s, 版本: %d',
+            '%s model ID: %d, name: %s, 版本: %d',
             $prefix,
             $model->id,
             $model->name ?: $model->model_id,
@@ -274,12 +274,12 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * 记录失败日志.
+     * recordfaillog.
      */
     private function logFailed(ProviderModelModel $model, Throwable $e): void
     {
         $this->logger->error(sprintf(
-            '[失败] 模型 ID: %d, 错误: %s',
+            '[fail] model ID: %d, error: %s',
             $model->id,
             $e->getMessage()
         ));

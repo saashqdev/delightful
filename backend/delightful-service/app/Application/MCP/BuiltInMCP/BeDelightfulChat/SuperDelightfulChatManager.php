@@ -78,10 +78,10 @@ class BeDelightfulChatManager
      */
     private static function getAgents(FlowDataIsolation $flowDataIsolation, array $agentIds): array
     {
-        // 1. 查询所有可用 agent
+        // 1. query所有可用 agent
         $agents = di(DelightfulAgentDomainService::class)->getAgentByIds($agentIds);
 
-        // 如果没有可用的 agents，直接返回空数组
+        // 如果没有可用的 agents，直接return空array
         if (empty($agents)) {
             return [];
         }
@@ -89,11 +89,11 @@ class BeDelightfulChatManager
         $hasAgents = false;
         $allInstructions = [];
 
-        // 2. 生成一份大模型调用工具可阅读的描述
+        // 2. 生成一份大modelcall工具可阅读的description
         $description = <<<'MARKDOWN'
-调用麦吉 AI 助理进行对话
+call麦吉 AI 助理进行对话
 
-可用的 AI 助理列表：
+可用的 AI 助理list：
 
 MARKDOWN;
 
@@ -104,14 +104,14 @@ MARKDOWN;
             $instruction = $agent->getInstructs();
             $instructionDescription = self::parseInstructionDescription($instruction);
             $description .= sprintf(
-                "• ID: %s\n  名称: %s\n  描述: %s%s\n\n",
+                "• ID: %s\n  name: %s\n  description: %s%s\n\n",
                 $agent->getId(),
                 $agent->getAgentName(),
-                $agent->getAgentDescription() ?: '暂无描述',
+                $agent->getAgentDescription() ?: '暂无description',
                 $instructionDescription ? "\n  可用指令: {$instructionDescription}" : ''
             );
 
-            // 收集所有指令信息用于生成 schema
+            // 收集所有指令info用于生成 schema
             if ($instruction) {
                 $allInstructions[$agent->getId()] = $instruction;
             }
@@ -121,23 +121,23 @@ MARKDOWN;
 
         $usageInstructions = <<<'MARKDOWN'
 使用说明：
-• 必须提供 agent_id 和 message 参数
-• conversation_id 用于保持对话连续性，相同ID的消息会共享上下文
+• 必须提供 agent_id 和 message parameter
+• conversation_id 用于保持对话连续性，相同ID的message会共享上下文
 
 MARKDOWN;
 
         $description .= $usageInstructions;
 
-        // 添加指令参数说明
+        // 添加指令parameter说明
         if (! empty($allInstructions)) {
             $instructionHelp = <<<'MARKDOWN'
-指令参数 instruction（可选）：
-• 格式：[{"name": "指令名称", "value": "指令值"}, ...]
-• 单选类型：从可选值中选择一个，例如 "yes", "no"
-• 开关类型：只能是 "on" 或 "off"
-• 如果不提供指令参数，将使用默认值
+指令parameter instruction（可选）：
+• 格式：[{"name": "指令name", "value": "指令value"}, ...]
+• 单选type：从可选value中选择一个，例如 "yes", "no"
+• 开关type：只能是 "on" 或 "off"
+• 如果不提供指令parameter，将使用默认value
 
-调用示例：
+call示例：
 ```json
 {
   "agent_id": "123456",
@@ -170,15 +170,15 @@ MARKDOWN;
                     'properties' => [
                         'agent_id' => [
                             'type' => 'string',
-                            'description' => '要调用的 AI 助理 ID',
+                            'description' => '要call的 AI 助理 ID',
                         ],
                         'message' => [
                             'type' => 'string',
-                            'description' => '发送给 AI 助理的消息内容',
+                            'description' => '发送给 AI 助理的messagecontent',
                         ],
                         'conversation_id' => [
                             'type' => 'string',
-                            'description' => '会话ID，用于记忆功能，相同会话ID的消息将具有共享的上下文',
+                            'description' => 'sessionID，用于记忆功能，相同sessionID的message将具有共享的上下文',
                         ],
                         'instruction' => $instructionSchema,
                     ],
@@ -267,17 +267,17 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => '指令参数数组，用于控制AI助理的行为。每个对象包含 name（指令名称）和 value（指令值）字段。单选类型指令需要从可选值中选择一个，开关类型指令只能是 "on" 或 "off"。',
+            'description' => '指令parameterarray，用于控制AI助理的行为。每个object包含 name（指令name）和 value（指令value）field。单选type指令需要从可选value中选择一个，开关type指令只能是 "on" 或 "off"。',
             'items' => [
                 'type' => 'object',
                 'properties' => [
                     'name' => [
                         'type' => 'string',
-                        'description' => '指令名称，必须与AI助理定义的指令名称完全匹配',
+                        'description' => '指令name，必须与AI助理定义的指令name完全匹配',
                     ],
                     'value' => [
                         'type' => 'string',
-                        'description' => '指令值，单选类型从可选值中选择，开关类型只能是 "on" 或 "off"',
+                        'description' => '指令value，单选type从可选value中选择，开关type只能是 "on" 或 "off"',
                     ],
                 ],
                 'required' => ['name', 'value'],
@@ -285,7 +285,7 @@ MARKDOWN;
             ],
         ];
 
-        // 如果有具体的指令信息，生成更详细的 schema
+        // 如果有具体的指令info，生成更详细的 schema
         if (! empty($allInstructions)) {
             $examples = [];
             foreach ($allInstructions as $instructions) {

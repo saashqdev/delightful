@@ -37,7 +37,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * 获取节点配置模板.
+     * get节点configuration模板.
      */
     public function getNodeTemplate(FlowDataIsolation $dataIsolation, Node $node): Node
     {
@@ -45,7 +45,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * 获取流程.
+     * get流程.
      */
     public function getByCode(FlowDataIsolation $dataIsolation, string $code): ?DelightfulFlowEntity
     {
@@ -53,7 +53,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * 获取流程.
+     * get流程.
      * @return array<DelightfulFlowEntity>
      */
     public function getByCodes(FlowDataIsolation $dataIsolation, array $codes): array
@@ -62,7 +62,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * 获取流程.
+     * get流程.
      */
     public function getByName(FlowDataIsolation $dataIsolation, string $name, Type $type): ?DelightfulFlowEntity
     {
@@ -87,7 +87,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * 保存流程，仅基础信息.
+     * 保存流程，仅基础info.
      */
     public function save(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $savingDelightfulFlow): DelightfulFlowEntity
     {
@@ -120,7 +120,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
         }
         $savingDelightfulFlow->prepareForSaveNode($delightfulFlow);
 
-        // todo 检测子流程循环调用
+        // todo 检测子流程循环call
 
         $this->delightfulFlowRepository->save($dataIsolation, $delightfulFlow);
 
@@ -129,7 +129,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * 删除流程.
+     * delete流程.
      */
     public function destroy(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $deletingDelightfulFlow): void
     {
@@ -138,7 +138,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * 查询流程.
+     * query流程.
      * @return array{total: int, list: array<DelightfulFlowEntity>}
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowQuery $query, Page $page): array
@@ -147,13 +147,13 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * 修改流程状态.
+     * 修改流程status.
      */
     public function changeEnable(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow, ?bool $enable = null): void
     {
-        // 如果传入了明确的状态值，则直接设置
+        // 如果传入了明确的statusvalue，则直接set
         if ($enable !== null) {
-            // 如果当前状态与要设置的状态相同，则无需操作
+            // 如果当前status与要set的status相同，则无需操作
             if ($delightfulFlow->isEnabled() === $enable) {
                 return;
             }
@@ -163,7 +163,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
             $delightfulFlow->prepareForChangeEnable();
         }
 
-        // 如果启用状态为true，需要进行验证
+        // 如果启用status为true，需要进行验证
         if ($delightfulFlow->isEnabled() && empty($delightfulFlow->getNodes())) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
         }
@@ -172,11 +172,11 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * 创建定时任务.
+     * create定时task.
      */
     public function createRoutine(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow): void
     {
-        // 获取开始节点的定时配置
+        // get开始节点的定时configuration
         /** @var null|StartNodeParamsConfig $startNodeParamsConfig */
         $startNodeParamsConfig = $delightfulFlow->getStartNode()?->getNodeParamsConfig();
         if (! $startNodeParamsConfig) {
@@ -193,7 +193,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
             'flowCode' => $delightfulFlow->getCode(),
         ];
 
-        // 先清理一下历史定时任务和调度规则
+        // 先清理一下历史定时task和调度规则
         $this->taskSchedulerDomainService->clearByExternalId($externalId);
 
         foreach ($routineConfigs as $branchId => $routineConfig) {
@@ -210,7 +210,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
 
             $callbackParams['branchId'] = $branchId;
             $callbackParams['routineConfig'] = $routineConfig->toConfigArray();
-            // 如果是不重复的，那么是直接创建调度任务
+            // 如果是不重复的，那么是直接create调度task
             if ($routineConfig->getType() === RoutineType::NoRepeat) {
                 $taskScheduler = new TaskScheduler();
                 $taskScheduler->setExternalId($externalId);

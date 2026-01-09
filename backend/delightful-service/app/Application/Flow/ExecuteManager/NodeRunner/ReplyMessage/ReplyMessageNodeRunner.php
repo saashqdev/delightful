@@ -46,7 +46,7 @@ use Throwable;
 
 use function Hyperf\Translation\__;
 
-#[FlowNodeDefine(type: NodeType::ReplyMessage->value, code: NodeType::ReplyMessage->name, name: '回复消息', paramsConfig: ReplyMessageNodeParamsConfig::class, version: 'v0', singleDebug: false, needInput: false, needOutput: false)]
+#[FlowNodeDefine(type: NodeType::ReplyMessage->value, code: NodeType::ReplyMessage->name, name: '回复message', paramsConfig: ReplyMessageNodeParamsConfig::class, version: 'v0', singleDebug: false, needInput: false, needOutput: false)]
 class ReplyMessageNodeRunner extends NodeRunner
 {
     /**
@@ -57,10 +57,10 @@ class ReplyMessageNodeRunner extends NodeRunner
         /** @var ReplyMessageNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        // 如果具有 大模型的流式响应体，那么直接开始
+        // 如果具有 大model的流式响应体，那么直接开始
         if ($executionData->getExecutionType()->isSupportStream() && ! empty($frontResults['chat_completion_choice_generator'])) {
             $streamResponse = $this->sendMessageForStream($executionData, $frontResults);
-            // 生成大模型节点的响应给回去
+            // 生成大model节点的响应给回去
             $vertexResult->addDebugLog('llm_stream_response', $streamResponse->getLlmStreamResponse());
             $vertexResult->addDebugLog('llm_stream_reasoning_response', $streamResponse->getLlmStreamReasoningResponse());
             return;
@@ -76,7 +76,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         // 如果是资源类的数据，那么需要提前上传了
         $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
-        // 由于里面会进行重命名，所以这里直接获取对应的名称传入进去
+        // 由于里面会进行重命名，所以这里直接get对应的name传入进去
         $linkPaths = array_map(function (AbstractAttachment $attachment) {
             return $attachment->getPath();
         }, $attachments);
@@ -103,12 +103,12 @@ class ReplyMessageNodeRunner extends NodeRunner
         /** @var Generator $chatCompletionChoiceGenerator */
         $chatCompletionChoiceGenerator = $frontResults['chat_completion_choice_generator'];
 
-        // Api 调用
+        // Api call
         if ($executionData->getExecutionType()->isApi()) {
             $this->sendMessageForStreamApi($executionData, $chatCompletionChoiceGenerator, $streamResponse);
         }
 
-        // Chat 调用，每次流式都是一条新消息
+        // Chat call，每次流式都是一条新message
         if ($executionData->getExecutionType()->isImChat()) {
             $this->sendMessageForStreamIMChat($executionData, $chatCompletionChoiceGenerator, $streamResponse);
         }
@@ -205,7 +205,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                 $receiveSeqDTO->setContent($IMResponse);
                 $receiveSeqDTO->setSeqType($IMResponse->getMessageTypeEnum());
 
-                // todo 根据开始节点配置的话题来选择话题
+                // todo 根据开始节点configuration的话题来选择话题
 
                 $delightfulChatMessageAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $userId, IdGenerator::getUniqueId32());
             });
@@ -225,7 +225,7 @@ class ReplyMessageNodeRunner extends NodeRunner
 
         $outputCall = function (string $data, array $compressibleContent, array $params) use ($id, $conversationId, $version) {
             if (! empty($compressibleContent)) {
-                // 如果有压缩内容，那么解压数据再输出
+                // 如果有压缩content，那么解压数据再输出
                 $data = CompressibleContent::deCompress($data, false);
             }
 
@@ -311,7 +311,7 @@ class ReplyMessageNodeRunner extends NodeRunner
 
         $outputCall = function (string $data, array $compressibleContent, array $params) use ($chatAppService, $appMessageId, $aiUserId, $receiveUserId) {
             if (! empty($compressibleContent)) {
-                // 如果有压缩内容，那么解压数据再输出
+                // 如果有压缩content，那么解压数据再输出
                 $data = CompressibleContent::deCompress($data, false);
             }
 
@@ -371,7 +371,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                 'line' => $throwable->getLine(),
                 'trace' => $throwable->getTraceAsString(),
             ]);
-            // 报错推送兜底消息
+            // 报错推送兜底message
             $streamOptions->setStatus(StreamMessageStatus::Processing);
             $messageContent = new TextMessage();
             $messageContent->setStreamOptions($streamOptions);
@@ -437,12 +437,12 @@ class ReplyMessageNodeRunner extends NodeRunner
             $userIds = array_merge($userIds, $this->getUserIdsByDepartmentIds($executionData, $departmentIds));
         }
 
-        // 如果为空，兜底当前用户
+        // 如果为空，兜底当前user
         if (empty($userIds)) {
             $userIds[] = $executionData->getOperator()->getUid();
         }
 
-        // 过滤不合法的用户
+        // filter不合法的user
         $userIds = array_values(array_unique($userIds));
 
         return Db::table('delightful_contact_users')

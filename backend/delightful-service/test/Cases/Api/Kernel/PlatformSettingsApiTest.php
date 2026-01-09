@@ -42,19 +42,19 @@ class PlatformSettingsApiTest extends AbstractHttpTest
             'favicon_url' => 'https://example.com/favicon.ico',
             'default_language' => 'en_US',
             'name_i18n' => [
-                'zh_CN' => '测试平台',
+                'zh_CN' => 'test平台',
                 'en_US' => 'Test Platform',
             ],
             'title_i18n' => [
-                'zh_CN' => '测试平台标题',
+                'zh_CN' => 'test平台标题',
                 'en_US' => 'Test Platform Title',
             ],
             'keywords_i18n' => [
-                'zh_CN' => 'AI,测试',
+                'zh_CN' => 'AI,test',
                 'en_US' => 'AI,Test',
             ],
             'description_i18n' => [
-                'zh_CN' => '这是一个测试平台',
+                'zh_CN' => '这是一个test平台',
                 'en_US' => 'This is a test platform',
             ],
         ];
@@ -77,7 +77,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         // 验证 favicon
         $this->assertSame('https://example.com/favicon.ico', $data['favicon']['url']);
 
-        // 验证其他字段
+        // 验证其他field
         $this->assertSame('en_US', $data['default_language']);
         $this->assertArrayEquals($payload['name_i18n'], $data['name_i18n'], 'name_i18n 不匹配');
         $this->assertArrayEquals($payload['title_i18n'], $data['title_i18n'], 'title_i18n 不匹配');
@@ -96,7 +96,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
     public function testUpdatePlatformSettingsPartially(): void
     {
-        // 首先设置完整数据
+        // 首先set完整数据
         $initialPayload = [
             'logo_zh_url' => 'https://example.com/initial_logo_zh.png',
             'logo_en_url' => 'https://example.com/initial_logo_en.png',
@@ -109,7 +109,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         ];
         $this->put($this->putUrl, $initialPayload, $this->getCommonHeaders());
 
-        // 部分更新：仅更新中文 logo
+        // 部分update：仅update中文 logo
         $partialPayload = [
             'logo_zh_url' => 'https://example.com/updated_logo_zh.png',
         ];
@@ -117,7 +117,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // 验证中文 logo 已更新
+        // 验证中文 logo 已update
         $this->assertSame('https://example.com/updated_logo_zh.png', $data['logo']['zh_CN']['url']);
         // 验证英文 logo 保持不变
         $this->assertSame('https://example.com/initial_logo_en.png', $data['logo']['en_US']['url']);
@@ -133,39 +133,39 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         ];
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
-        // 应该返回验证失败错误
+        // 应该return验证failerror
         $this->assertNotSame(1000, $response['code']);
     }
 
     public function testUpdatePlatformSettingsWithInvalidUrl(): void
     {
-        // 测试非 https URL
+        // test非 https URL
         $payload = [
             'favicon_url' => 'http://example.com/favicon.ico', // 非 https
         ];
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
-        // 应该返回验证失败错误
+        // 应该return验证failerror
         $this->assertNotSame(1000, $response['code']);
     }
 
     public function testUpdatePlatformSettingsWithEmptyFavicon(): void
     {
-        // 首先设置 favicon
+        // 首先set favicon
         $initialPayload = [
             'favicon_url' => 'https://example.com/favicon.ico',
         ];
         $this->put($this->putUrl, $initialPayload, $this->getCommonHeaders());
 
-        // 尝试清空 favicon (传入空字符串不会更新，所以不应该失败)
+        // 尝试清空 favicon (传入空string不会update，所以不应该fail)
         $payload = [
-            'favicon_url' => '', // 空字符串
+            'favicon_url' => '', // 空string
             'default_language' => 'zh_CN',
         ];
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
-        // favicon 应该保持原值（因为空字符串不会更新）
+        // favicon 应该保持原value（因为空string不会update）
         $data = $response['data'];
         $this->assertSame('https://example.com/favicon.ico', $data['favicon']['url']);
     }

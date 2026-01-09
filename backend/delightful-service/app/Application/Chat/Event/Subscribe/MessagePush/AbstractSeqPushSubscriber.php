@@ -17,17 +17,17 @@ use PhpAmqpLib\Message\AMQPMessage;
 use Throwable;
 
 /**
- * 消息推送模块.
- * 根据生成的seq以及它的优先级,用长连接推送给用户.
- * 每个seq可能要推给用户的1到几十个客户端.
+ * message推送模块.
+ * 根据生成的seq以及它的优先级,用长连接推送给user.
+ * 每个seq可能要推给user的1到几十个客户端.
  */
 abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
 {
     protected AmqpTopicType $topic = AmqpTopicType::Seq;
 
     /**
-     * 1.本地开发时不启动,避免消费了测试环境的数据,导致测试环境的用户收不到消息
-     * 2.如果本地开发时想调试,请自行在本地搭建前端环境,更换mq的host. 或者申请一个dev环境,隔离mq.
+     * 1.本地开发时不启动,避免消费了test环境的数据,导致test环境的user收不到message
+     * 2.如果本地开发时想debug,请自行在本地搭建前端环境,更换mq的host. 或者申请一个dev环境,隔离mq.
      */
     public function isEnable(): bool
     {
@@ -46,7 +46,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
         }
 
         // 通知收件方
-        $this->logger->info(sprintf('messagePush 收到消息 data:%s', Json::encode($data)));
+        $this->logger->info(sprintf('messagePush 收到message data:%s', Json::encode($data)));
         try {
             foreach ($seqIds as $seqId) {
                 $seqId = (string) $seqId;
@@ -58,7 +58,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                     return Result::ACK;
                 }
                 $this->addSeqRetryNumber($seqRetryKey);
-                // 记录seq尝试推送的次数,用于后续判断是否需要重试
+                // recordseq尝试推送的次数,用于后续判断是否需要重试
                 $this->delightfulSeqAppService->pushSeq($seqId);
                 // 未报错,不再重推
                 $this->setSeqCanNotRetry($seqRetryKey);
@@ -71,7 +71,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo 调用消息质量保证模块,如果是服务器压力大导致的失败,则放入延迟重试队列,并指数级延长重试时间间隔
+            // todo callmessage质量保证模块,如果是service器压力大导致的fail,则放入延迟重试队列,并指数级延长重试time间隔
             return Result::REQUEUE;
         }
         return Result::ACK;

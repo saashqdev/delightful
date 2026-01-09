@@ -45,7 +45,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * 优化版本：直接获取启用的助理版本，避免传入大量ID.
+     * 优化版本：直接get启用的助理版本，避免传入大量ID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -54,7 +54,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * 优化版本：获取启用助理的总数.
+     * 优化版本：get启用助理的总数.
      */
     public function getEnabledAgentsByOrganizationCount(string $organizationCode, string $agentName): int
     {
@@ -81,7 +81,7 @@ class DelightfulAgentVersionDomainService
         $reviewOpen = false;
 
         $msg = '';
-        // 如果旧状态已经是企业或者市场，则不允许回退
+        // 如果旧status已经是企业或者市场，则不允许回退
         $oldDelightfulAgentVersionEntity = $this->agentVersionRepository->getNewestAgentVersionEntity($delightfulAgentVersionEntity->getAgentId());
         if ($oldDelightfulAgentVersionEntity !== null) {
             $this->validateVersionNumber($delightfulAgentVersionEntity->getVersionNumber(), $oldDelightfulAgentVersionEntity->getVersionNumber());
@@ -90,18 +90,18 @@ class DelightfulAgentVersionDomainService
 
         if ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PERSONAL_USE->value) {
             // 个人使用
-            $msg = '发布成功';
+            $msg = '发布success';
         } elseif ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
             // 发布到企业内部
             /* @phpstan-ignore-next-line */
             if ($approvalOpen) {
                 $delightfulAgentVersionEntity->setApprovalStatus(DelightfulAgentVersionStatus::APPROVAL_PENDING->value);
                 $delightfulAgentVersionEntity->setEnterpriseReleaseStatus(DelightfulAgentVersionStatus::APP_MARKET_LISTED->value);
-                $msg = '提交成功';
+                $msg = '提交success';
             } else {
                 $delightfulAgentVersionEntity->setEnterpriseReleaseStatus(DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value);
             }
-            $msg = '发布成功';
+            $msg = '发布success';
         } elseif ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value) {
             // 发布到应用市场
             // 审核开关
@@ -123,7 +123,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * 根据ids获取助理版本.
+     * 根据idsget助理版本.
      * @return array<DelightfulAgentVersionEntity>
      */
     public function getAgentByIds(array $ids): array
@@ -151,7 +151,7 @@ class DelightfulAgentVersionDomainService
         // 审批开关
         /* @phpstan-ignore-next-line */
         if ($approvalOpen) {
-            // 校验状态
+            // 校验status
             if ($agent->getApprovalStatus() !== DelightfulAgentVersionStatus::APPROVAL_PASSED->value) {
                 ExceptionBuilder::throw(AgentErrorCode::VERSION_CAN_ONLY_BE_ENABLED_AFTER_APPROVAL);
             }
@@ -177,7 +177,7 @@ class DelightfulAgentVersionDomainService
 
     public function getAgentMaxVersion(string $agentId): string
     {
-        // 返回的是语义化版本，需要在返回的基础上+1
+        // return的是语义化版本，需要在return的基础上+1
         $agentMaxVersion = $this->agentVersionRepository->getAgentMaxVersion($agentId);
         // 如果版本号是整数格式（如 1），将其转换为语义化版本号（如 1.0.0）
         if (is_numeric($agentMaxVersion) && strpos($agentMaxVersion, '.') === false) {
@@ -203,12 +203,12 @@ class DelightfulAgentVersionDomainService
             $major = (int) $major + 1;
         }
 
-        // 拼接并返回新的版本号
+        // 拼接并return新的版本号
         return "{$major}.{$minor}.{$patch}";
     }
 
     /**
-     * 根据助理 id 获取默认的版本.
+     * 根据助理 id get默认的版本.
      */
     public function getDefaultVersions(array $agentIds): void
     {
@@ -239,10 +239,10 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * 基于游标分页获取指定组织的助理版本列表.
-     * @param string $organizationCode 组织代码
-     * @param array $agentVersionIds 助理版本ID列表
-     * @param string $cursor 游标ID，如果为空字符串则从最新开始
+     * 基于游标paginationget指定organization的助理版本list.
+     * @param string $organizationCode organization代码
+     * @param array $agentVersionIds 助理版本IDlist
+     * @param string $cursor 游标ID，如果为空string则从最新开始
      * @param int $pageSize 每页数量
      * @return array<DelightfulAgentVersionEntity>
      */
@@ -275,7 +275,7 @@ class DelightfulAgentVersionDomainService
             return;
         }
 
-        // 检查是否试图从更高级别的发布范围回退到更低级别
+        // check是否试图从更高级别的发布范围回退到更低级别
         $errorMessage = match ($oldScope) {
             DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value => 'agent.already_published_to_enterprise_cannot_publish_to_individual',
             DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value => 'agent.already_published_to_market_cannot_publish_to_individual',

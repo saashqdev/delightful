@@ -63,19 +63,19 @@ readonly class AdminProviderAppService
         DelightfulUserAuthorization $authorization,
         string $configId
     ): ?ProviderConfigModelsDTO {
-        // 构建数据隔离对象
+        // 构建数据隔离object
         $dataIsolation = ProviderDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId(),
         );
 
-        // 通过领域层方法一次性获取服务商、配置和模型信息
+        // 通过领域层method一次性获取服务商、配置和模型信息
         $providerModels = $this->providerConfigDomainService->getProviderModelsByConfigId($dataIsolation, $configId);
         if ($providerModels === null) {
             return null;
         }
 
-        // ProviderModelsDTO 已经包含所有需要的数据，统一处理 provider 和 models 的 icon 并返回
+        // ProviderModelsDTO 已经contain所有需要的数据，统一handle provider 和 models 的 icon 并return
         $this->processProviderAndModelsIcons($providerModels);
         return $providerModels;
     }
@@ -201,14 +201,14 @@ readonly class AdminProviderAppService
 
             Db::commit();
         } catch (Exception $e) {
-            $this->logger->error('删除模型失败', ['error' => $e->getMessage()]);
+            $this->logger->error('删除模型fail', ['error' => $e->getMessage()]);
             Db::rollBack();
             throw $e;
         }
     }
 
     /**
-     * 修改模型状态.
+     * 修改模型status.
      */
     public function updateModelStatus(
         DelightfulUserAuthorization $authorization,
@@ -224,7 +224,7 @@ readonly class AdminProviderAppService
         $this->providerModelDomainService->updateStatus($dataIsolation, $id, $statusEnum);
     }
 
-    // 保存模型
+    // save模型
     public function saveModel(DelightfulUserAuthorization $authorization, SaveProviderModelDTO $saveProviderModelDTO): array
     {
         $dataIsolation = ProviderDataIsolation::create($authorization->getOrganizationCode(), $authorization->getId());
@@ -234,7 +234,7 @@ readonly class AdminProviderAppService
 
         $saveProviderModelDTO = $this->providerModelDomainService->saveModel($dataIsolation, $saveProviderModelDTO);
 
-        // 获取保存后的模型实体
+        // 获取save后的模型实体
         $modelEntity = $this->providerModelDomainService->getById($dataIsolation, $saveProviderModelDTO->getId());
 
         // 触发相应的事件
@@ -251,24 +251,24 @@ readonly class AdminProviderAppService
         }
 
         $saveProviderModelData = $saveProviderModelDTO->toArray();
-        // icon传入是 url，返回也需要是 url，但是保存在数据库是 file_key
-        // 所以 SaveProviderModelDTO 的 setIcon 做了 url 到 file_key的转换
+        // icon传入是 url，return也需要是 url，但是save在数据库是 file_key
+        // 所以 SaveProviderModelDTO 的 setIcon 做了 url 到 file_key的convert
         $saveProviderModelData['icon'] = $this->getFileUrl($saveProviderModelDTO->getIcon());
         return $saveProviderModelData;
     }
 
     /**
-     * 根据组织编码和服务商分类获取活跃的服务商配置.
-     * @param string $organizationCode 组织编码
+     * 根据organization编码和服务商分类获取活跃的服务商配置.
+     * @param string $organizationCode organization编码
      * @param Category $category 服务商分类
      * @return ProviderConfigDTO[]
      */
     public function getOrganizationProvidersModelsByCategory(string $organizationCode, Category $category): array
     {
-        // 调用领域层时传递 modelTypes 参数，让仓储层完成查询和过滤
+        // call领域层时pass modelTypes parameter，让仓储层completequery和filter
         $serviceProviderModelsDTOs = $this->adminProviderDomainService->getOrganizationProvidersModelsByCategory($organizationCode, $category);
 
-        // 处理图标
+        // handle图标
         $this->processProviderConfigIcons($serviceProviderModelsDTOs);
 
         return array_values($serviceProviderModelsDTOs);
@@ -279,18 +279,18 @@ readonly class AdminProviderAppService
      */
     public function connectivityTest(string $serviceProviderConfigId, string $modelVersion, string $modelPrimaryId, DelightfulUserAuthorization $authorization): ConnectResponse
     {
-        // 构建数据隔离对象
+        // 构建数据隔离object
         $dataIsolation = ProviderDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId(),
         );
 
-        // 通过领域层方法获取完整的模型详情信息
+        // 通过领域层method获取完整的模型详情信息
         $providerModelEntity = $this->providerModelDomainService->getById(
             $dataIsolation,
             $modelPrimaryId
         );
-        // 根据服务商类型和模型类型进行连通性测试
+        // 根据服务商type和模型type进行连通性测试
         return match ($this->getConnectivityTestType($providerModelEntity->getCategory()->value, $providerModelEntity->getModelType()->value)) {
             NaturalLanguageProcessing::EMBEDDING => $this->embeddingConnectivityTest($modelPrimaryId, $authorization),
             NaturalLanguageProcessing::LLM => $this->llmConnectivityTest($modelPrimaryId, $authorization),
@@ -299,10 +299,10 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 获取所有非官方服务商列表，不依赖于组织.
+     * 获取所有非官方服务商列表，不依赖于organization.
      *
      * @param Category $category 服务商分类
-     * @param string $organizationCode 组织编码
+     * @param string $organizationCode organization编码
      * @return ProviderConfigModelsDTO[] 非官方服务商列表
      */
     public function getAllNonOfficialProviders(Category $category, string $organizationCode): array
@@ -314,17 +314,17 @@ readonly class AdminProviderAppService
             return [];
         }
 
-        // 处理图标
+        // handle图标
         $this->processServiceProviderEntityListIcons($serviceProviders, $organizationCode);
 
         return $serviceProviders;
     }
 
     /**
-     * 获取所有可用的服务商列表（包括官方服务商），不依赖于组织.
+     * 获取所有可用的服务商列表（包括官方服务商），不依赖于organization.
      *
      * @param Category $category 服务商分类
-     * @param string $organizationCode 组织编码
+     * @param string $organizationCode organization编码
      * @return ProviderConfigModelsDTO[] 所有可用服务商列表
      */
     public function getAllAvailableLlmProviders(Category $category, string $organizationCode): array
@@ -336,7 +336,7 @@ readonly class AdminProviderAppService
             return [];
         }
 
-        // 处理图标
+        // handle图标
         $this->processServiceProviderEntityListIcons($serviceProviders, $organizationCode);
 
         return $serviceProviders;
@@ -355,7 +355,7 @@ readonly class AdminProviderAppService
             return [];
         }
 
-        // 收集所有图标路径按组织编码分组
+        // 收集所有图标路径按organization编码group
         $iconsByOrg = [];
         $iconToModelMap = [];
 
@@ -403,7 +403,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 获取官方组织下的所有可用模型.
+     * 获取官方organization下的所有可用模型.
      * @return ProviderModelDetailDTO[]
      */
     public function queriesModels(DelightfulUserAuthorization $authorization, ProviderModelQuery $providerModelQuery): array
@@ -422,7 +422,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 初始化Delightful服务商配置数据.
+     * initializeDelightful服务商配置数据.
      */
     public function initializeDelightfulProviderConfigs(): int
     {
@@ -438,7 +438,7 @@ readonly class AdminProviderAppService
             return;
         }
 
-        // 收集所有图标路径按组织编码分组
+        // 收集所有图标路径按organization编码group
         $iconsByOrg = [];
         $iconToModelMap = [];
 
@@ -481,7 +481,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 填充 provider 信息并处理 icon.
+     * 填充 provider 信息并handle icon.
      */
     private function fillProviderInfoAndIcon(
         ProviderEntity $provider,
@@ -510,16 +510,16 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 统一处理 Provider 和 Models 的图标，转换为完整URL.
+     * 统一handle Provider 和 Models 的图标，convert为完整URL.
      */
     private function processProviderAndModelsIcons(ProviderConfigModelsDTO $providerDTO): void
     {
-        // 收集所有图标路径和对应的组织编码
+        // 收集所有图标路径和对应的organization编码
         $iconsByOrg = [];
         $providerIconMap = [];  // provider图标映射
         $modelIconMap = [];     // 模型图标映射
 
-        // 处理 provider 图标
+        // handle provider 图标
         $providerIcon = $providerDTO->getIcon();
         if (! empty($providerIcon)) {
             $providerIcon = FileAssembler::formatPath($providerIcon);
@@ -532,7 +532,7 @@ readonly class AdminProviderAppService
             $providerIconMap[$providerIcon] = $providerDTO;
         }
 
-        // 处理模型图标
+        // handle模型图标
         $modelEntities = $providerDTO->getModels();
         if (! empty($modelEntities)) {
             foreach ($modelEntities as $modelEntity) {
@@ -557,7 +557,7 @@ readonly class AdminProviderAppService
             }
         }
 
-        // 按组织编码批量获取图标URL
+        // 按organization编码批量获取图标URL
         foreach ($iconsByOrg as $organizationCode => $icons) {
             $iconUrlMap = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
 
@@ -580,7 +580,7 @@ readonly class AdminProviderAppService
         }
     }
 
-    // 是否是官方组织
+    // 是否是官方organization
     private function isOfficialOrganization(string $organizationCode): bool
     {
         $officialOrganization = config('service_provider.office_organization');
@@ -588,7 +588,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 获取联通测试类型.
+     * 获取联通测试type.
      */
     private function getConnectivityTestType(string $category, int $modelType): NaturalLanguageProcessing
     {
@@ -655,10 +655,10 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 处理服务提供商实体列表的图标.
+     * handle服务提供商实体列表的图标.
      *
      * @param ProviderConfigModelsDTO[] $serviceProviders 服务提供商实体列表
-     * @param string $organizationCode 组织编码
+     * @param string $organizationCode organization编码
      */
     private function processServiceProviderEntityListIcons(array $serviceProviders, string $organizationCode): void
     {
@@ -671,7 +671,7 @@ readonly class AdminProviderAppService
         // 批量获取所有图标的链接
         $iconUrlMap = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
 
-        // 只处理图标URL，直接返回实体对象
+        // 只handle图标URL，直接return实体object
         foreach ($serviceProviders as $serviceProvider) {
             $icon = $serviceProvider->getIcon();
 
@@ -683,7 +683,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 处理服务商配置图标.
+     * handle服务商配置图标.
      *
      * @param ProviderConfigDTO[] $providerConfigs 服务商配置DTO列表
      */
@@ -700,7 +700,7 @@ readonly class AdminProviderAppService
             $this->collectProviderIcon($configDTO, $iconMappings);
         }
 
-        // 批量处理图标URL
+        // 批量handle图标URL
         $this->batchProcessIcons($iconMappings);
     }
 
@@ -733,7 +733,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 批量处理图标URL.
+     * 批量handle图标URL.
      */
     private function batchProcessIcons(array $iconMappings): void
     {

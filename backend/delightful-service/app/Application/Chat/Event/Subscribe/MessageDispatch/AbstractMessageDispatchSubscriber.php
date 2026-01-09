@@ -24,16 +24,16 @@ use Throwable;
 use function Hyperf\Support\retry;
 
 /**
- * 消息分发模块.
- * 处理不同优先级消息的消费者,用于写收件方的seq.
+ * message分发模块.
+ * 处理不同优先级message的消费者,用于写收件方的seq.
  */
 abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
 {
     protected AmqpTopicType $topic = AmqpTopicType::Message;
 
     /**
-     * 1.本地开发时不启动,避免消费了测试环境的数据,导致测试环境的用户收不到消息
-     * 2.如果本地开发时想调试,请自行在本地搭建前端环境,更换mq的host. 或者申请一个dev环境,隔离mq.
+     * 1.本地开发时不启动,避免消费了test环境的数据,导致test环境的user收不到message
+     * 2.如果本地开发时想debug,请自行在本地搭建前端环境,更换mq的host. 或者申请一个dev环境,隔离mq.
      */
     public function isEnable(): bool
     {
@@ -41,7 +41,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
     }
 
     /**
-     * 根据消息优先级.将收件方的消息生成序列号.
+     * 根据message优先级.将收件方的message生成序列号.
      * @param SeqCreatedEvent $data
      */
     public function consumeMessage($data, AMQPMessage $message): Result
@@ -52,7 +52,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
         }
         $conversationId = $data['conversationId'] ?? null;
         // 生成收件方的seq
-        $this->logger->info(sprintf('messageDispatch 收到消息 data:%s', Json::encode($data)));
+        $this->logger->info(sprintf('messageDispatch 收到message data:%s', Json::encode($data)));
         $lock = di(LockerInterface::class);
         try {
             if ($conversationId) {
@@ -71,7 +71,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 }
                 $this->addSeqRetryNumber($seqRetryKey);
                 $userSeqEntity = null;
-                // 查seq,失败延迟后重试3次
+                // 查seq,fail延迟后重试3次
                 retry(3, function () use ($seqId, &$userSeqEntity) {
                     $userSeqEntity = $this->delightfulChatSeqRepository->getSeqByMessageId($seqId);
                     if ($userSeqEntity === null) {
@@ -85,8 +85,8 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                     $this->setSeqCanNotRetry($seqRetryKey);
                 }
                 $this->setRequestId($userSeqEntity->getAppMessageId());
-                $this->logger->info(sprintf('messageDispatch 开始分发消息 seq:%s seqEntity:%s ', $seqId, Json::encode($userSeqEntity->toArray())));
-                // 如果是控制消息,检查是否是需要分发的控制消息
+                $this->logger->info(sprintf('messageDispatch 开始分发message seq:%s seqEntity:%s ', $seqId, Json::encode($userSeqEntity->toArray())));
+                // 如果是控制message,check是否是需要分发的控制message
                 if ($userSeqEntity->getSeqType() instanceof ControlMessageType) {
                     $this->delightfulControlMessageAppService->dispatchMQControlMessage($userSeqEntity);
                     $this->setSeqCanNotRetry($seqRetryKey);
@@ -102,10 +102,10 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                     }
                 }
                 if ($userSeqEntity->getSeqType() instanceof ChatMessageType) {
-                    // 聊天消息分发
+                    // 聊天message分发
                     $this->delightfulChatMessageAppService->asyncHandlerChatMessage($userSeqEntity);
                 }
-                // seq 处理成功
+                // seq 处理success
                 $this->setSeqCanNotRetry($seqRetryKey);
             }
         } catch (Throwable $exception) {
@@ -116,7 +116,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo 调用消息质量保证模块,如果是服务器压力大导致的失败,则放入延迟重试队列,并指数级延长重试时间间隔
+            // todo callmessage质量保证模块,如果是service器压力大导致的fail,则放入延迟重试队列,并指数级延长重试time间隔
             return Result::REQUEUE;
         } finally {
             if (isset($lockKey, $owner)) {

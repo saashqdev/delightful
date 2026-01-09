@@ -17,8 +17,8 @@ use Psr\Container\NotFoundExceptionInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * 沙箱管理 Mock 服务
- * 模拟沙箱的创建、状态查询、工作区状态等管理接口.
+ * 沙箱管理 Mock service
+ * 模拟沙箱的create、statusquery、工作区status等管理接口.
  */
 class SandboxApi
 {
@@ -33,7 +33,7 @@ class SandboxApi
     }
 
     /**
-     * 查询沙箱状态
+     * query沙箱status
      * GET /api/v1/sandboxes/{sandboxId}.
      */
     public function getSandboxStatus(RequestInterface $request): array
@@ -58,7 +58,7 @@ class SandboxApi
     }
 
     /**
-     * 创建沙箱
+     * create沙箱
      * POST /api/v1/sandboxes.
      */
     public function createSandbox(RequestInterface $request): array
@@ -73,7 +73,7 @@ class SandboxApi
             'project_oss_path' => $projectOssPath,
         ]);
 
-        // 模拟沙箱创建成功
+        // 模拟沙箱createsuccess
         return [
             'code' => 1000,
             'message' => 'Sandbox created successfully',
@@ -88,7 +88,7 @@ class SandboxApi
     }
 
     /**
-     * 获取工作区状态
+     * get工作区status
      * GET /api/v1/sandboxes/{sandboxId}/proxy/api/v1/workspace/status.
      */
     public function getWorkspaceStatus(RequestInterface $request): array
@@ -99,8 +99,8 @@ class SandboxApi
             'sandbox_id' => $sandboxId,
         ]);
 
-        // 模拟工作区就绪状态
-        // 注意：status 必须返回整数类型，对应 WorkspaceStatus 常量
+        // 模拟工作区就绪status
+        // 注意：status 必须return整数type，对应 WorkspaceStatus constant
         return [
             'code' => 1000,
             'message' => 'success',
@@ -146,7 +146,7 @@ class SandboxApi
     }
 
     /**
-     * 初始化沙箱（简化版，用于 ASR 等无聊天消息场景）
+     * 初始化沙箱（简化版，用于 ASR 等无聊天message场景）
      * POST /api/v1/sandboxes/{sandboxId}/proxy/v1/messages/chat.
      *
      * 请求体示例：
@@ -176,7 +176,7 @@ class SandboxApi
             'metadata' => $metadata,
         ]);
 
-        // 验证必传参数
+        // 验证必传parameter
         if (empty($type) || $type !== 'init') {
             return [
                 'code' => 4000,
@@ -193,10 +193,10 @@ class SandboxApi
             ];
         }
 
-        // 模拟沙箱初始化成功响应
+        // 模拟沙箱初始化success响应
         return [
             'code' => 1000,
-            'message' => '工作区初始化成功',
+            'message' => '工作区初始化success',
             'data' => null,
         ];
     }

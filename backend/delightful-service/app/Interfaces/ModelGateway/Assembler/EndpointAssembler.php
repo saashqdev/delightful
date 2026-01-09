@@ -16,11 +16,11 @@ use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\HighAvailability
 class EndpointAssembler
 {
     /**
-     * 生成标准化的端点类型标识.
+     * 生成标准化的端点type标识.
      *
-     * @param HighAvailabilityAppType $appType 高可用应用类型
-     * @param string $modelId 模型ID
-     * @return string 标准化的端点类型标识
+     * @param HighAvailabilityAppType $appType 高可用应用type
+     * @param string $modelId modelID
+     * @return string 标准化的端点type标识
      */
     public static function generateEndpointType(HighAvailabilityAppType $appType, string $modelId): string
     {
@@ -28,36 +28,36 @@ class EndpointAssembler
     }
 
     /**
-     * 从格式化的端点类型标识中还原原始的模型ID.
+     * 从格式化的端点type标识中还原原始的modelID.
      *
-     * @param string $formattedModelId 可能包含格式化前缀的模型ID
-     * @return string 原始的模型ID
+     * @param string $formattedModelId 可能包含格式化前缀的modelID
+     * @return string 原始的modelID
      */
     public static function extractOriginalModelId(string $formattedModelId): string
     {
-        // 遍历所有的 HighAvailabilityAppType 枚举值
+        // 遍历所有的 HighAvailabilityAppType 枚举value
         foreach (HighAvailabilityAppType::cases() as $appType) {
             $prefix = $appType->value . DelimiterType::HIGH_AVAILABILITY->value;
 
-            // 如果匹配到前缀，则移除前缀返回原始 modelId
+            // 如果匹配到前缀，则移除前缀return原始 modelId
             if (str_starts_with($formattedModelId, $prefix)) {
                 return substr($formattedModelId, strlen($prefix));
             }
         }
 
-        // 如果没有匹配到任何前缀，则直接返回原始值
+        // 如果没有匹配到任何前缀，则直接return原始value
         return $formattedModelId;
     }
 
     /**
-     * 检查给定的字符串是否为格式化的端点类型标识.
+     * check给定的string是否为格式化的端点type标识.
      *
-     * @param string $modelId 待检查的模型ID
-     * @return bool 是否为格式化的端点类型标识
+     * @param string $modelId 待check的modelID
+     * @return bool 是否为格式化的端点type标识
      */
     public static function isFormattedEndpointType(string $modelId): bool
     {
-        // 遍历所有的 HighAvailabilityAppType 枚举值
+        // 遍历所有的 HighAvailabilityAppType 枚举value
         foreach (HighAvailabilityAppType::cases() as $appType) {
             $prefix = $appType->value . DelimiterType::HIGH_AVAILABILITY->value;
             if (str_starts_with($modelId, $prefix)) {

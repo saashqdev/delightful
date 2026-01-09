@@ -19,13 +19,13 @@ return new class extends Migration {
         }
         Schema::create('delightful_contact_accounts', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('delightful_id', 64)->comment('账号id,跨租户(组织)唯一. 为了避免与user_id(组织内唯一)的概念混淆,因此起名了delightful_id')->default('');
-            // 账号类型
-            $table->tinyInteger('type')->comment('账号类型,0:ai,1:人类')->default(0);
+            $table->string('delightful_id', 64)->comment('账号id,跨租户(organization)唯一. 为了避免与user_id(organization内唯一)的概念混淆,因此起名了delightful_id')->default('');
+            // 账号type
+            $table->tinyInteger('type')->comment('账号type,0:ai,1:人类')->default(0);
             // ai_code
             $table->string('ai_code', 64)->comment('ai编码')->default('');
-            // 账号状态
-            $table->tinyInteger('status')->comment('账号状态,0:正常,1:禁用')->default(0);
+            // 账号status
+            $table->tinyInteger('status')->comment('账号status,0:正常,1:禁用')->default(0);
             // 国际冠码
             $table->string('country_code', 16)->comment('国际冠码')->default('');
             // 手机号
@@ -36,16 +36,16 @@ return new class extends Migration {
             $table->string('real_name', 64)->comment('真名')->default('');
             // 性别
             $table->tinyInteger('gender')->comment('性别，0:未知；1:男；2:女')->default(0);
-            // 附加属性
-            $table->string('extra', 1024)->comment('附加属性.')->default('');
+            // 附加property
+            $table->string('extra', 1024)->comment('附加property.')->default('');
 
-            // 索引设置
+            // 索引set
             $table->index(['status', 'type'], 'idx_status_type');
             $table->unique(['delightful_id'], 'unq_delightful_id');
             $table->unique(['country_code', 'phone'], 'unq_country_code_phone');
             $table->timestamps();
             $table->softDeletes();
-            $table->comment('用户账号表,记录用户跨组织唯一的信息,比如的手机号/真名/性别/用户类型等');
+            $table->comment('user账号table,recorduser跨organization唯一的info,比如的手机号/真名/性别/usertype等');
         });
     }
 

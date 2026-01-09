@@ -11,8 +11,8 @@ use ArrayAccess;
 use Hyperf\Contract\Arrayable;
 
 /**
- * 快速属性访问基类
- * 其他类可继承此类，获得便捷的属性设置和访问能力.
+ * 快速property访问基类
+ * 其他类可继承此类，获得便捷的propertyset和访问能力.
  */
 abstract class BaseObject extends UnderlineObjectJsonSerializable implements ArrayAccess, Arrayable
 {
@@ -60,13 +60,13 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
 
     protected function get(string $key): mixed
     {
-        // 属性一定要是小驼峰！不支持其他格式！
+        // property一定要是小驼峰！不支持其他格式！
         $humpKey = $this->getCamelizeValueFromCache($key);
-        // 判断属性是否存在，避免调用不存在的属性时，死循环触发 __get 方法
+        // 判断property是否存在，避免call不存在的property时，死循环触发 __get method
         if (! property_exists($this, $humpKey)) {
             return null;
         }
-        // php 的方法不区分大小写
+        // php 的method不区分大小写
         $methodName = 'get' . $humpKey;
         if (method_exists($this, $methodName)) {
             return $this->{$methodName}($humpKey);
@@ -76,13 +76,13 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
 
     protected function set(string $key, mixed $value): void
     {
-        // 属性一定要是小驼峰！不支持其他格式！
+        // property一定要是小驼峰！不支持其他格式！
         $humpKey = $this->getCamelizeValueFromCache($key);
-        // 判断属性是否存在，避免调用不存在的属性时，死循环触发 __set 方法
+        // 判断property是否存在，避免call不存在的property时，死循环触发 __set method
         if (! property_exists($this, $humpKey)) {
             return;
         }
-        // php 的方法不区分大小写
+        // php 的method不区分大小写
         $methodName = 'set' . $humpKey;
         if (method_exists($this, $methodName)) {
             $this->{$methodName}($value);

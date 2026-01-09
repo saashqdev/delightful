@@ -51,7 +51,7 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
         /** @var LoggerInterface $logger */
         $logger = di(LoggerInterface::class);
 
-        // 获取分布式锁
+        // get分布式锁
         $lockKey = "document_re_sync:{$documentEntity->getKnowledgeBaseCode()}:{$documentEntity->getCode()}";
         if (! $lock->mutexLock($lockKey, $event->knowledgeBaseDocumentEntity->getCreatedUid(), 300)) { // 5分钟超时
             $logger->info('文档[' . $documentEntity->getCode() . ']正在被其他进程处理，跳过同步');
@@ -71,7 +71,7 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
         $knowledge = $event->knowledgeBaseEntity;
         $documentEntity = $event->knowledgeBaseDocumentEntity;
         $dataIsolation = $event->dataIsolation;
-        // 如果是基础知识库类型，则传知识库创建者，避免权限不足
+        // 如果是基础知识库type，则传知识库create者，避免permission不足
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }
@@ -84,13 +84,13 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
 
         // 自增版本号(抢锁)
         $affectedRows = $knowledgeBaseDocumentDomainService->increaseVersion($dataIsolation, $documentEntity);
-        // 如果自增失败，说明已经重新向量化过了，提前结束
+        // 如果自增fail，说明已经重新向量化过了，提前结束
         if ($affectedRows === 0) {
             $logger->info('文档已重新向量化，跳过同步');
             return;
         }
 
-        // 检查配置
+        // checkconfiguration
         try {
             $knowledgeBaseVectorAppService->checkCollectionExists($knowledge);
         } catch (Throwable $throwable) {

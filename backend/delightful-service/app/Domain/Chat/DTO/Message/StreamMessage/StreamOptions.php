@@ -15,17 +15,17 @@ class StreamOptions extends AbstractEntity
 
     protected bool $stream;
 
-    // 用于标识流式消息的关联性。多段流式消息的 stream_app_message_id 相同
-    // ai 搜索卡片消息的多段响应，已经将 app_message_id 作为关联 id，流式响应需要另外的 id 来做关联
+    // 用于标识流式message的关联性。多段流式message的 stream_app_message_id 相同
+    // ai search卡片message的多段响应，已经将 app_message_id 作为关联 id，流式响应需要另外的 id 来做关联
     protected string $streamAppMessageId;
 
     /**
-     * 消息应用选项：0:覆盖 1：追加（字符串就拼接，数组就插入）.
+     * message应用选项：0:覆盖 1：追加（string就拼接，array就插入）.
      */
     protected MessageAppendOptions $append;
 
     /**
-     * 问题搜索结束的标识，用于前端渲染结束动画。或者推送异常信息。
+     * issuesearch结束的标识，用于前端渲染结束动画。或者推送exceptioninfo。
      * @var StepFinishedDTO[]
      */
     protected array $stepsFinished;
@@ -41,7 +41,7 @@ class StreamOptions extends AbstractEntity
         return $this;
     }
 
-    // 消息是否是流式消息
+    // message是否是流式message
     public function isStream(): bool
     {
         return $this->stream ?? true;

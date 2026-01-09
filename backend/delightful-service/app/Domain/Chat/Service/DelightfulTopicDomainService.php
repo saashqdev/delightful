@@ -31,7 +31,7 @@ use Throwable;
 use function Hyperf\Translation\__;
 
 /**
- * 处理消息流(seq)相关.
+ * 处理message流(seq)相关.
  */
 class DelightfulTopicDomainService extends AbstractDomainService
 {
@@ -46,7 +46,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
 
     /**
      * 客户端主动操作后,分发此操作给接收方.
-     * 注意此时的消息结构(各种id等)都是发起方的值.
+     * 注意此时的message结构(各种id等)都是发起方的value.
      * @throws Throwable
      */
     public function dispatchMQTopicOperation(DelightfulSeqEntity $senderSeqEntity): ?DelightfulSeqEntity
@@ -58,11 +58,11 @@ class DelightfulTopicDomainService extends AbstractDomainService
             $receiveConversationEntity = null;
             switch ($controlMessageType) {
                 case ControlMessageType::CreateTopic:
-                    # 为对方创建一个新的话题
+                    # 为对方create一个新的话题
                     /** @var TopicCreateMessage $senderTopicCreateMessage */
                     $senderTopicCreateMessage = $senderSeqEntity->getContent();
                     $conversationId = $senderTopicCreateMessage->getConversationId();
-                    // 会话双发的话题 id 保持一致
+                    // session双发的话题 id 保持一致
                     $topicId = $senderTopicCreateMessage->getId();
                     $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($conversationId);
                     if ($receiveConversationEntity === null) {
@@ -71,15 +71,15 @@ class DelightfulTopicDomainService extends AbstractDomainService
                     $receiveTopicDTO = new DelightfulTopicEntity();
                     $receiveTopicDTO->setTopicId($topicId);
                     $receiveTopicDTO->setConversationId($receiveConversationEntity->getId());
-                    // 查询收件方的话题是否存在
+                    // query收件方的话题是否存在
                     $receiveTopicEntity = $this->delightfulChatTopicRepository->getTopicEntity($receiveTopicDTO);
-                    // 如果不存在，为收件方创建话题
+                    // 如果不存在，为收件方create话题
                     if ($receiveTopicEntity === null) {
                         $receiveTopicEntity = $this->createReceiveTopic($topicId, senderConversationId: $conversationId);
                     }
                     break;
                 case ControlMessageType::UpdateTopic:
-                    // 更新对方的话题
+                    // update对方的话题
                     /** @var TopicUpdateMessage $senderTopicUpdateMessage */
                     $senderTopicUpdateMessage = $senderSeqEntity->getContent();
                     $receiveTopicEntity = $this->delightfulChatTopicRepository->getPrivateChatReceiveTopicEntity(
@@ -94,7 +94,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                     $receiveTopicEntity = $this->delightfulChatTopicRepository->updateTopic($receiveTopicEntity);
                     break;
                 case ControlMessageType::DeleteTopic:
-                    // 删除双方的话题
+                    // delete双方的话题
                     /** @var TopicDeleteMessage $senderTopicDeleteMessage */
                     $senderTopicDeleteMessage = $senderSeqEntity->getContent();
                     $receiveTopicEntity = $this->delightfulChatTopicRepository->getPrivateChatReceiveTopicEntity(
@@ -113,7 +113,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                 $receiveConversationEntity = $this->delightfulConversationRepository->getConversationById($receiveTopicEntity->getConversationId());
             }
             if ($receiveTopicEntity && $receiveConversationEntity) {
-                // 获取收件方的 delightful_id
+                // get收件方的 delightful_id
                 $receiveUserId = $receiveConversationEntity->getUserId();
                 $receiveUserEntity = $this->delightfulUserRepository->getUserById($receiveUserId);
                 if (! $receiveUserEntity?->getDelightfulId()) {
@@ -136,7 +136,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
 
     /**
      * 主动操作话题.
-     * @return string 会话id
+     * @return string sessionid
      * @throws Throwable
      */
     public function clientOperateTopic(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): string
@@ -158,9 +158,9 @@ class DelightfulTopicDomainService extends AbstractDomainService
             case ControlMessageType::CreateTopic:
                 /** @var TopicCreateMessage $messageStruct */
                 $messageStruct = $messageDTO->getContent();
-                // 判断会话是否存在,是否属于当前用户
+                // 判断session是否存在,是否属于当前user
                 $this->checkAndGetSelfConversation($messageStruct->getConversationId(), $dataIsolation);
-                // todo 话题名称创建时允许为空,后续 ai 总结话题名称,推送给客户端
+                // todo 话题namecreate时允许为空,后续 ai 总结话题name,推送给客户端
                 $topicEntity = $this->userCreateTopicHandler($messageStruct, $dataIsolation);
                 break;
             case ControlMessageType::UpdateTopic:
@@ -192,7 +192,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                 'name' => $topicEntity->getName(),
             ];
         }
-        // 回写进控制消息中,便于客户端处理
+        // 回写进控制message中,便于客户端处理
         $contentChange = MessageAssembler::getControlMessageStruct($messageDTO->getMessageType(), $seqContent);
         $messageDTO->setContent($contentChange);
         $messageDTO->setMessageType($contentChange->getMessageTypeEnum());
@@ -200,11 +200,11 @@ class DelightfulTopicDomainService extends AbstractDomainService
     }
 
     /**
-     * 根据收件方或者发件方的会话 id + 话题 id，为收件方创建一个新的话题.
+     * 根据收件方或者发件方的session id + 话题 id，为收件方create一个新的话题.
      */
     public function createReceiveTopic(string $topicId, string $senderConversationId = '', string $receiveConversationId = ''): ?DelightfulTopicEntity
     {
-        // 为消息接收方创建话题
+        // 为message接收方create话题
         if ($senderConversationId) {
             $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($senderConversationId);
         }
@@ -220,11 +220,11 @@ class DelightfulTopicDomainService extends AbstractDomainService
         $receiveTopicDTO->setConversationId($receiveConversationEntity->getId());
         $receiveTopicDTO->setOrganizationCode($receiveConversationEntity->getUserOrganizationCode());
         $receiveTopicDTO->setDescription('');
-        // 为收件方创建一个新的话题
+        // 为收件方create一个新的话题
         return $this->delightfulChatTopicRepository->createTopic($receiveTopicDTO);
     }
 
-    // 更新话题
+    // update话题
     public function updateTopic(TopicUpdateMessage $messageStruct, DataIsolation $dataIsolation): DelightfulTopicEntity
     {
         $topicDTO = new DelightfulTopicEntity();
@@ -238,35 +238,35 @@ class DelightfulTopicDomainService extends AbstractDomainService
     }
 
     /**
-     * agent 发送消息时获取话题 id.
+     * agent 发送message时get话题 id.
      * @param int $getType todo 0:默认话题 1:最近的话题 2:智能确定话题，暂时只支持默认话题 3 新增话题
      * @throws Throwable
      */
     public function agentSendMessageGetTopicId(DelightfulConversationEntity $senderConversationEntity, int $getType): string
     {
         $receiverConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($senderConversationEntity->getId());
-        // 为收件方创建会话，但是不再触发 ConversationCreatedEvent 事件，避免事件循环
+        // 为收件方createsession，但是不再触发 ConversationCreatedEvent event，避免event循环
         if (($receiverConversationEntity === null) && in_array($senderConversationEntity->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {
             $conversationDTO = new DelightfulConversationEntity();
             $conversationDTO->setUserId($senderConversationEntity->getReceiveId());
             $conversationDTO->setReceiveId($senderConversationEntity->getUserId());
-            # 创建会话窗口
+            # createsession窗口
             $conversationDTO = $this->parsePrivateChatConversationReceiveType($conversationDTO);
-            # 准备生成一个会话窗口
+            # 准备生成一个session窗口
             $receiverConversationEntity = $this->delightfulConversationRepository->addConversation($conversationDTO);
         }
         $senderTopicId = $this->checkDefaultTopicExist($senderConversationEntity);
         $receiverTopicId = $this->checkDefaultTopicExist($receiverConversationEntity);
         $defaultTopicId = $senderTopicId;
-        // 如果 $getType 为新增话题，则默认创建话题，而不是默认话题
+        // 如果 $getType 为新增话题，则默认create话题，而不是默认话题
         if ($getType === 3) {
             $senderTopicId = '';
         }
-        // 收发双方只要有一个的默认话题不存在,或者不在同一个默认话题，就需要创建
+        // 收发双方只要有一个的默认话题不存在,或者不在同一个默认话题，就需要create
         if (empty($senderTopicId) || empty($receiverTopicId) || $senderTopicId !== $receiverTopicId) {
             Db::beginTransaction();
             try {
-                // 为收发双方同时创建一个默认话题
+                // 为收发双方同时create一个默认话题
                 $defaultTopicId = (string) IdGenerator::getSnowId();
                 $this->createAndUpdateDefaultTopic($senderConversationEntity, $defaultTopicId);
                 $this->createAndUpdateDefaultTopic($receiverConversationEntity, $defaultTopicId);
@@ -281,7 +281,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
 
     private function checkTopicBelong(DelightfulTopicEntity $topicDTO, DataIsolation $dataIsolation): void
     {
-        // 判断话题id所属的会话id是否是当前用户的
+        // 判断话题id所属的sessionid是否是当前user的
         $topicEntity = $this->delightfulChatTopicRepository->getTopicEntity($topicDTO);
         if ($topicEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
@@ -290,7 +290,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
     }
 
     /**
-     * 检查默认话题是否存在.
+     * check默认话题是否存在.
      */
     private function checkDefaultTopicExist(DelightfulConversationEntity $conversationEntity): ?string
     {
@@ -305,7 +305,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
     }
 
     /**
-     * 创建并更新默认话题.
+     * create并update默认话题.
      */
     private function createAndUpdateDefaultTopic(DelightfulConversationEntity $conversationEntity, string $defaultTopicId): void
     {
@@ -316,7 +316,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
         $topicDTO->setName(__('chat.topic.system_default_topic'));
         $topicDTO->setDescription('');
         $this->delightfulChatTopicRepository->createTopic($topicDTO);
-        // 将默认话题id回写进会话窗口
+        // 将默认话题id回写进session窗口
         $senderConversationExtra = $conversationEntity->getExtra();
         if ($senderConversationExtra === null) {
             $senderConversationExtra = new ConversationExtra();

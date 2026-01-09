@@ -26,7 +26,7 @@ use function di;
 
 #[BuiltInToolDefine]
 /**
- * 采用一个 seq 推送所有的搜索相关内容，前端不再多个 seq 合并成一个渲染.
+ * 采用一个 seq 推送所有的search相关content，前端不再多个 seq 合并成一个渲染.
  */
 class EasyInternetSearchV2BuiltInTool extends AbstractBuiltInTool
 {
@@ -42,7 +42,7 @@ class EasyInternetSearchV2BuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '麦吉互联网搜索简单版，批量对用户的多个含义相同或者不同的问题进行互联网搜索。';
+        return '麦吉互联网search简单版，批量对user的多个含义相同或者不同的issue进行互联网search。';
     }
 
     public function getCallback(): ?Closure
@@ -88,8 +88,8 @@ class EasyInternetSearchV2BuiltInTool extends AbstractBuiltInTool
         "questions": {
             "type": "array",
             "key": "questions",
-            "title": "用户问题列表",
-            "description": "用户问题列表",
+            "title": "userissuelist",
+            "description": "userissuelist",
             "required": null,
             "value": null,
             "encryption": false,
@@ -137,8 +137,8 @@ JSON,
         "search": {
             "type": "array",
             "key": "search",
-            "title": "搜索结果",
-            "description": "搜索结果",
+            "title": "searchresult",
+            "description": "searchresult",
             "required": null,
             "value": null,
             "encryption": false,
@@ -161,8 +161,8 @@ JSON,
         "llm_response": {
             "type": "array",
             "key": "llm_response",
-            "title": "大模型响应",
-            "description": "大模型响应",
+            "title": "大model响应",
+            "description": "大model响应",
             "required": null,
             "value": null,
             "encryption": false,
@@ -185,8 +185,8 @@ JSON,
         "related_questions": {
             "type": "array",
             "key": "related_questions",
-            "title": "关联问题",
-            "description": "关联问题",
+            "title": "关联issue",
+            "description": "关联issue",
             "required": null,
             "value": null,
             "encryption": false,

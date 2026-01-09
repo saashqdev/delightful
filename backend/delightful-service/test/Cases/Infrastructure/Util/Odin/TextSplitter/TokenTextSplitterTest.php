@@ -144,19 +144,19 @@ EOT;
         $this->assertNotEmpty($chunks);
         $this->assertCount(4, $chunks);
 
-        // 验证第一个块包含主标题和第一段内容
+        // validate第一个块contain主标题和第一段内容
         $this->assertStringContainsString('# 主标题', $chunks[0]);
         $this->assertStringContainsString('这是第一段内容', $chunks[0]);
 
-        // 验证第二个块包含二级标题1及其内容
+        // validate第二个块contain二级标题1及其内容
         $this->assertStringContainsString('## 二级标题1', $chunks[1]);
         $this->assertStringContainsString('这是二级标题1下的内容', $chunks[1]);
 
-        // 验证第三个块包含二级标题2及其内容
+        // validate第三个块contain二级标题2及其内容
         $this->assertStringContainsString('## 二级标题2', $chunks[2]);
         $this->assertStringContainsString('这是二级标题2下的内容', $chunks[2]);
 
-        // 验证第四个块包含二级标题3及其内容
+        // validate第四个块contain二级标题3及其内容
         $this->assertStringContainsString('## 二级标题3', $chunks[3]);
         $this->assertStringContainsString('这是最后一段内容', $chunks[3]);
     }
@@ -197,19 +197,19 @@ EOT;
         $this->assertNotEmpty($chunks);
         $this->assertCount(4, $chunks);
 
-        // 验证第一个块包含主标题和第一段内容
+        // validate第一个块contain主标题和第一段内容
         $this->assertStringContainsString('** 主标题 **', $chunks[0]);
         $this->assertStringContainsString('这是第一段内容', $chunks[0]);
 
-        // 验证第二个块包含二级标题1及其内容
+        // validate第二个块contain二级标题1及其内容
         $this->assertStringContainsString('** 二级标题1 **', $chunks[1]);
         $this->assertStringContainsString('这是二级标题1下的内容', $chunks[1]);
 
-        // 验证第三个块包含二级标题2及其内容
+        // validate第三个块contain二级标题2及其内容
         $this->assertStringContainsString('** 二级标题2 **', $chunks[2]);
         $this->assertStringContainsString('这是二级标题2下的内容', $chunks[2]);
 
-        // 验证第四个块包含二级标题3及其内容
+        // validate第四个块contain二级标题3及其内容
         $this->assertStringContainsString('** 二级标题3 **', $chunks[3]);
         $this->assertStringContainsString('这是最后一段内容', $chunks[3]);
     }
@@ -234,7 +234,7 @@ EOT;
         $this->assertIsArray($chunks);
         $this->assertNotEmpty($chunks);
 
-        // 验证标签内容被完整保留
+        // validate标签内容被完整保留
         $this->assertStringContainsString('测试word', $chunks[0]);
         $this->assertStringContainsString('<DelightfulCompressibleContent', $chunks[0]);
         $this->assertStringContainsString('</DelightfulCompressibleContent>', $chunks[0]);
@@ -263,7 +263,7 @@ EOT;
         $this->assertIsArray($chunks);
         $this->assertNotEmpty($chunks);
 
-        // 验证所有标签内容都被完整保留
+        // validate所有标签内容都被完整保留
         $this->assertStringContainsString('第一段文本', $chunks[0]);
         $this->assertStringContainsString('第二段文本', $chunks[1]);
         $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">image2.png</DelightfulCompressibleContent>', $chunks[1]);
@@ -275,7 +275,7 @@ EOT;
         $text = <<<'EOT'
 中文测试
 <DelightfulCompressibleContent Type="Image">中文路径/图片.png</DelightfulCompressibleContent>
-继续测试
+continue测试
 EOT;
 
         $splitter = new TokenTextSplitter(
@@ -291,9 +291,9 @@ EOT;
         $this->assertNotEmpty($chunks);
         $this->assertCount(2, $chunks);
 
-        // 验证中文内容被正确处理
+        // validate中文内容被正确handle
         $this->assertStringContainsString('中文测试', $chunks[0]);
         $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">中文路径/图片.png</DelightfulCompressibleContent>', $chunks[0]);
-        $this->assertStringContainsString('继续测试', $chunks[1]);
+        $this->assertStringContainsString('continue测试', $chunks[1]);
     }
 }

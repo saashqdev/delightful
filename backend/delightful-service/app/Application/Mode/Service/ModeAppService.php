@@ -29,24 +29,24 @@ class ModeAppService extends AbstractModeAppService
         $modeDataIsolation = $this->getModeDataIsolation($authorization);
         $modeDataIsolation->disabled();
 
-        // 获取目前的所有可用的 agent
+        // get目前的所有可用的 agent
         $beDelightfulAgentAppService = di(BeDelightfulAgentAppService::class);
         $agentData = $beDelightfulAgentAppService->queries($authorization, new BeDelightfulAgentQuery(), Page::createNoPage());
-        // 合并常用和全部 agent 列表，常用在前
+        // 合并常用和全部 agent list，常用在前
         /** @var array<BeDelightfulAgentEntity> $allAgents */
         $allAgents = array_merge($agentData['frequent'], $agentData['all']);
         if (empty($allAgents)) {
             return [];
         }
 
-        // 获取后台的所有模式，用于封装数据到 Agent 中
+        // get后台的所有模式，用于封装数据到 Agent 中
         $query = new ModeQuery(status: true);
         $modeEnabledList = $this->modeDomainService->getModes($modeDataIsolation, $query, Page::createNoPage())['list'];
 
         // 批量构建模式聚合根
         $modeAggregates = $this->modeDomainService->batchBuildModeAggregates($modeDataIsolation, $modeEnabledList);
 
-        // ===== 性能优化：批量预查询 =====
+        // ===== 性能优化：批量预query =====
 
         // 步骤1：预收集所有需要的modelId
         $allModelIds = [];
@@ -58,19 +58,19 @@ class ModeAppService extends AbstractModeAppService
             }
         }
 
-        // 步骤2：批量查询所有模型和服务商状态
+        // 步骤2：批量query所有model和service商status
         $allProviderModelsWithStatus = $this->getModelsBatch(array_unique($allModelIds));
 
-        // 步骤3：组织模型过滤
+        // 步骤3：organizationmodelfilter
 
-        // 首先收集所有需要过滤的模型（LLM）
+        // 首先收集所有需要filter的model（LLM）
         $allAggregateModels = [];
         foreach ($modeAggregates as $aggregate) {
             $aggregateModels = $this->getModelsForAggregate($aggregate, $allProviderModelsWithStatus);
             $allAggregateModels = array_merge($allAggregateModels, $aggregateModels);
         }
 
-        // 收集所有需要过滤的图像模型（VLM）
+        // 收集所有需要filter的图像model（VLM）
         $allAggregateImageModels = [];
         foreach ($modeAggregates as $aggregate) {
             $aggregateImageModels = $this->getImageModelsForAggregate($aggregate, $allProviderModelsWithStatus);
@@ -80,7 +80,7 @@ class ModeAppService extends AbstractModeAppService
         // 需要升级套餐
         $upgradeRequiredModelIds = [];
 
-        // 使用组织过滤器进行过滤（LLM）
+        // 使用organizationfilter器进行filter（LLM）
         if ($this->organizationModelFilter) {
             $providerModels = $this->organizationModelFilter->filterModelsByOrganization(
                 $authorization->getOrganizationCode(),
@@ -88,22 +88,22 @@ class ModeAppService extends AbstractModeAppService
             );
             $upgradeRequiredModelIds = $this->organizationModelFilter->getUpgradeRequiredModelIds($authorization->getOrganizationCode());
         } else {
-            // 如果没有组织过滤器，返回所有模型（开源版本行为）
+            // 如果没有organizationfilter器，return所有model（开源版本行为）
             $providerModels = $allAggregateModels;
         }
 
-        // 使用组织过滤器进行过滤（VLM）
+        // 使用organizationfilter器进行filter（VLM）
         if ($this->organizationModelFilter) {
             $providerImageModels = $this->organizationModelFilter->filterModelsByOrganization(
                 $authorization->getOrganizationCode(),
                 $allAggregateImageModels
             );
         } else {
-            // 如果没有组织过滤器，返回所有模型（开源版本行为）
+            // 如果没有organizationfilter器，return所有model（开源版本行为）
             $providerImageModels = $allAggregateImageModels;
         }
 
-        // 转换为DTO数组
+        // 转换为DTOarray
         $modeAggregateDTOs = [];
         foreach ($modeAggregates as $aggregate) {
             $modeAggregateDTOs[$aggregate->getMode()->getIdentifier()] = ModeAssembler::aggregateToDTO($aggregate, $providerModels, $upgradeRequiredModelIds, $providerImageModels);
@@ -124,7 +124,7 @@ class ModeAppService extends AbstractModeAppService
             if (! $modeAggregateDTO) {
                 continue;
             }
-            // 如果没有配置任何模型，要被过滤
+            // 如果没有configuration任何model，要被filter
             if (empty($modeAggregateDTO->getAllModelIds())) {
                 continue;
             }
@@ -174,9 +174,9 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * 批量获取模型和服务商状态（性能优化版本）.
-     * @param array $allModelIds 所有需要查询的modelId
-     * @return array<string, ProviderModelEntity> 已通过级联状态筛选的可用模型
+     * 批量getmodel和service商status（性能优化版本）.
+     * @param array $allModelIds 所有需要query的modelId
+     * @return array<string, ProviderModelEntity> 已通过级联status筛选的可用model
      */
     private function getModelsBatch(array $allModelIds): array
     {
@@ -186,10 +186,10 @@ class ModeAppService extends AbstractModeAppService
 
         $providerDataIsolation = new ProviderDataIsolation(OfficialOrganizationUtil::getOfficialOrganizationCode());
 
-        // 批量获取模型
+        // 批量getmodel
         $allModels = $this->providerModelDomainService->getModelsByModelIds($providerDataIsolation, $allModelIds);
 
-        // 提取所有服务商ID
+        // 提取所有service商ID
         $providerConfigIds = [];
         foreach ($allModels as $models) {
             foreach ($models as $model) {
@@ -197,7 +197,7 @@ class ModeAppService extends AbstractModeAppService
             }
         }
 
-        // 批量获取服务商状态（第2次SQL查询）
+        // 批量getservice商status（第2次SQLquery）
         $providerStatuses = [];
         if (! empty($providerConfigIds)) {
             $providerConfigs = $this->providerConfigDomainService->getByIds($providerDataIsolation, array_unique($providerConfigIds));
@@ -206,7 +206,7 @@ class ModeAppService extends AbstractModeAppService
             }
         }
 
-        // 应用级联状态筛选，返回可用模型
+        // 应用级联status筛选，return可用model
         $availableModels = [];
         foreach ($allModels as $modelId => $models) {
             $bestModel = $this->selectBestModelForBatch($models, $providerStatuses);
@@ -219,9 +219,9 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * 为批量查询优化的模型选择方法.
-     * @param ProviderModelEntity[] $models 模型列表
-     * @param array $providerStatuses 服务商状态映射
+     * 为批量query优化的model选择method.
+     * @param ProviderModelEntity[] $models modellist
+     * @param array $providerStatuses service商status映射
      */
     private function selectBestModelForBatch(array $models, array $providerStatuses): ?ProviderModelEntity
     {
@@ -229,17 +229,17 @@ class ModeAppService extends AbstractModeAppService
             return null;
         }
 
-        // 优先选择服务商启用且模型启用的模型
+        // 优先选择service商启用且model启用的model
         foreach ($models as $model) {
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;
 
-            // 服务商禁用，跳过该模型
+            // service商禁用，跳过该model
             if ($providerStatus === Status::Disabled) {
                 continue;
             }
 
-            // 服务商启用，检查模型状态
+            // service商启用，checkmodelstatus
             if ($model->getStatus() && $model->getStatus()->value === Status::Enabled->value) {
                 return $model;
             }
@@ -249,10 +249,10 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * 从批量查询结果中提取特定聚合根的模型（LLM）.
+     * 从批量queryresult中提取特定聚合根的model（LLM）.
      * @param ModeAggregate $aggregate 模式聚合根
-     * @param array<string, ProviderModelEntity> $allProviderModels 批量查询的所有模型结果
-     * @return array<string, ProviderModelEntity> 该聚合根相关的模型
+     * @param array<string, ProviderModelEntity> $allProviderModels 批量query的所有modelresult
+     * @return array<string, ProviderModelEntity> 该聚合根相关的model
      */
     private function getModelsForAggregate(ModeAggregate $aggregate, array $allProviderModels): array
     {
@@ -276,10 +276,10 @@ class ModeAppService extends AbstractModeAppService
     }
 
     /**
-     * 从批量查询结果中提取特定聚合根的图像模型（VLM）.
+     * 从批量queryresult中提取特定聚合根的图像model（VLM）.
      * @param ModeAggregate $aggregate 模式聚合根
-     * @param array<string, ProviderModelEntity> $allProviderModels 批量查询的所有模型结果
-     * @return array<string, ProviderModelEntity> 该聚合根相关的图像模型
+     * @param array<string, ProviderModelEntity> $allProviderModels 批量query的所有modelresult
+     * @return array<string, ProviderModelEntity> 该聚合根相关的图像model
      */
     private function getImageModelsForAggregate(ModeAggregate $aggregate, array $allProviderModels): array
     {
@@ -292,7 +292,7 @@ class ModeAppService extends AbstractModeAppService
                 if (! $providerModel = $allProviderModels[$modelId] ?? null) {
                     continue;
                 }
-                // 只返回 VLM 类型的模型
+                // 只return VLM type的model
                 if ($providerModel->getCategory() !== Category::VLM) {
                     continue;
                 }

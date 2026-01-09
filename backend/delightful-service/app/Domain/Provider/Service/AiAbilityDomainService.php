@@ -19,7 +19,7 @@ use Exception;
 use Hyperf\Contract\ConfigInterface;
 
 /**
- * AI 能力领域服务.
+ * AI 能力领域service.
  */
 class AiAbilityDomainService
 {
@@ -30,12 +30,12 @@ class AiAbilityDomainService
     }
 
     /**
-     * 根据能力代码获取AI能力实体（用于运行时，不校验组织）.
+     * 根据能力代码getAI能力实体（用于运行时，不校验organization）.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离信息
+     * @param ProviderDataIsolation $dataIsolation 数据隔离info
      * @param AiAbilityCode $code 能力代码
      * @return AiAbilityEntity AI能力实体
-     * @throws Exception 当能力不存在或未启用时抛出异常
+     * @throws Exception 当能力不存在或未启用时抛出exception
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): AiAbilityEntity
     {
@@ -49,10 +49,10 @@ class AiAbilityDomainService
     }
 
     /**
-     * 获取所有AI能力列表（无分页）.
+     * get所有AI能力list（无pagination）.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离信息
-     * @return array<AiAbilityEntity> AI能力实体列表
+     * @param ProviderDataIsolation $dataIsolation 数据隔离info
+     * @return array<AiAbilityEntity> AI能力实体list
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array
     {
@@ -63,11 +63,11 @@ class AiAbilityDomainService
     }
 
     /**
-     * 分页查询AI能力列表.
+     * paginationqueryAI能力list.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离信息
-     * @param AiAbilityQuery $query 查询条件
-     * @param Page $page 分页信息
+     * @param ProviderDataIsolation $dataIsolation 数据隔离info
+     * @param AiAbilityQuery $query query条件
+     * @param Page $page paginationinfo
      * @return array{total: int, list: array<AiAbilityEntity>}
      */
     public function queries(ProviderDataIsolation $dataIsolation, AiAbilityQuery $query, Page $page): array
@@ -76,17 +76,17 @@ class AiAbilityDomainService
     }
 
     /**
-     * 更新AI能力.
+     * updateAI能力.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离信息
+     * @param ProviderDataIsolation $dataIsolation 数据隔离info
      * @param AiAbilityCode $code 能力代码
-     * @param array $data 更新数据
-     * @return bool 是否更新成功
-     * @throws Exception 当能力不存在时抛出异常
+     * @param array $data update数据
+     * @return bool 是否updatesuccess
+     * @throws Exception 当能力不存在时抛出exception
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool
     {
-        // 检查能力是否存在
+        // check能力是否存在
         $entity = $this->aiAbilityRepository->getByCode($dataIsolation, $code);
         if ($entity === null) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::AI_ABILITY_NOT_FOUND);
@@ -102,7 +102,7 @@ class AiAbilityDomainService
     /**
      * 初始化AI能力数据.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离信息
+     * @param ProviderDataIsolation $dataIsolation 数据隔离info
      * @return int 初始化的数量
      */
     public function initializeAbilities(ProviderDataIsolation $dataIsolation): int
@@ -112,11 +112,11 @@ class AiAbilityDomainService
         $count = 0;
 
         foreach ($abilities as $abilityConfig) {
-            // 检查数据库中是否已存在
+            // checkdatabase中是否已存在
             $code = AiAbilityCode::from($abilityConfig['code']);
             $existingEntity = $this->aiAbilityRepository->getByCode($dataIsolation, $code);
 
-            // 构建名称和描述（确保是多语言格式）
+            // 构建name和description（确保是多语言格式）
             $name = $abilityConfig['name'];
             if (is_string($name)) {
                 $name = [
@@ -134,7 +134,7 @@ class AiAbilityDomainService
             }
 
             if ($existingEntity === null) {
-                // 不存在则创建
+                // 不存在则create
                 $entity = new AiAbilityEntity();
                 $entity->setCode($abilityConfig['code']);
                 $entity->setOrganizationCode($organizationCode);

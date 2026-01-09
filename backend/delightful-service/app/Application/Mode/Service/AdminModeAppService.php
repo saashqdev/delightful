@@ -23,12 +23,12 @@ use Hyperf\DbConnection\Db;
 class AdminModeAppService extends AbstractModeAppService
 {
     /**
-     * 获取模式列表 (管理后台用，包含完整i18n字段).
+     * get模式list (管理后台用，包含完整i18nfield).
      */
     public function getModes(DelightfulUserAuthorization $authorization, Page $page): array
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
-        // 管理后台查询：sort降序，不过滤默认模式
+        // 管理后台query：sort降序，不filter默认模式
         $query = new ModeQuery('desc', false);
         $result = $this->modeDomainService->getModes($dataIsolation, $query, $page);
 
@@ -39,7 +39,7 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * 根据ID获取模式聚合根（包含模式详情、分组、模型关系）.
+     * 根据IDget模式聚合根（包含模式详情、分组、model关系）.
      */
     public function getModeById(DelightfulUserAuthorization $authorization, string $id): AdminModeAggregateDTO
     {
@@ -79,7 +79,7 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * 创建模式 (管理后台用).
+     * create模式 (管理后台用).
      */
     public function createMode(DelightfulUserAuthorization $authorization, CreateModeRequest $request): AdminModeDTO
     {
@@ -104,13 +104,13 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * 更新模式.
+     * update模式.
      */
     public function updateMode(DelightfulUserAuthorization $authorization, string $modeId, UpdateModeRequest $request): AdminModeAggregateDTO
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
 
-        // 先获取现有的完整实体
+        // 先get现有的完整实体
         $existingMode = $this->modeDomainService->getModeById($dataIsolation, $modeId);
         if (! $existingMode) {
             ExceptionBuilder::throw(ModeErrorCode::MODE_NOT_FOUND);
@@ -118,14 +118,14 @@ class AdminModeAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // 将更新请求应用到现有实体（只更新允许修改的字段）
+            // 将update请求应用到现有实体（只update允许修改的field）
             AdminModeAssembler::applyUpdateRequestToEntity($request, $existingMode);
 
             $updatedMode = $this->modeDomainService->updateMode($dataIsolation, $existingMode);
 
             Db::commit();
 
-            // 重新获取聚合根信息
+            // 重新get聚合根info
             $updatedModeAggregate = $this->modeDomainService->getModeDetailById($dataIsolation, $updatedMode->getId());
             return AdminModeAssembler::aggregateToAdminDTO($updatedModeAggregate);
         } catch (Exception $exception) {
@@ -136,7 +136,7 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * 更新模式状态
+     * update模式status
      */
     public function updateModeStatus(DelightfulUserAuthorization $authorization, string $id, bool $status): bool
     {
@@ -151,7 +151,7 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * 获取默认模式.
+     * get默认模式.
      */
     public function getDefaultMode(DelightfulUserAuthorization $authorization): ?AdminModeAggregateDTO
     {
@@ -167,7 +167,7 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * 保存模式配置.
+     * 保存模式configuration.
      */
     public function saveModeConfig(DelightfulUserAuthorization $authorization, AdminModeAggregateDTO $modeAggregateDTO): AdminModeAggregateDTO
     {
@@ -175,7 +175,7 @@ class AdminModeAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // 将DTO转换为领域对象
+            // 将DTO转换为领域object
             $modeAggregateEntity = AdminModeAssembler::aggregateDTOToEntity($modeAggregateDTO);
 
             $this->modeDomainService->saveModeConfig($dataIsolation, $modeAggregateEntity);

@@ -15,39 +15,39 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('knowledge_base_documents', function (Blueprint $table) {
-            // 主键
+            // primary key
             $table->bigIncrements('id');
 
-            // 关联字段
+            // 关联field
             $table->string('knowledge_base_code', 255)->comment('关联知识库code')->index();
 
             // 文档元数据
-            $table->string('name', 255)->comment('文档名称');
-            $table->string('description', 255)->comment('描述');
+            $table->string('name', 255)->comment('文档name');
+            $table->string('description', 255)->comment('description');
             $table->string('code', 255)->comment('文档code');
             $table->unsignedInteger('version')->default(1)->comment('版本');
             $table->boolean('enabled')->default(true)->comment('1 启用 0 禁用');
-            $table->unsignedInteger('doc_type')->comment('文档类型');
+            $table->unsignedInteger('doc_type')->comment('文档type');
             $table->json('doc_metadata')->nullable()->comment('文档元数据');
-            $table->tinyInteger('sync_status')->default(0)->comment('同步状态');
+            $table->tinyInteger('sync_status')->default(0)->comment('同步status');
             $table->tinyInteger('sync_times')->default(0)->comment('同步次数');
-            $table->string('sync_status_message', 1000)->default('')->comment('同步状态消息');
-            $table->string('organization_code')->comment('组织编码');
+            $table->string('sync_status_message', 1000)->default('')->comment('同步statusmessage');
+            $table->string('organization_code')->comment('organization编码');
             $table->unsignedBigInteger('word_count')->default(0)->comment('字数统计');
 
-            // 配置信息
-            $table->string('embedding_model', 255)->comment('嵌入模型');
-            $table->string('vector_db', 255)->comment('向量数据库');
-            $table->json('retrieve_config')->nullable()->comment('检索配置');
-            $table->json('fragment_config')->nullable()->comment('分段配置');
-            $table->json('embedding_config')->nullable()->comment('嵌入配置');
-            $table->json('vector_db_config')->nullable()->comment('向量数据库配置');
+            // configurationinfo
+            $table->string('embedding_model', 255)->comment('嵌入model');
+            $table->string('vector_db', 255)->comment('向量database');
+            $table->json('retrieve_config')->nullable()->comment('检索configuration');
+            $table->json('fragment_config')->nullable()->comment('分段configuration');
+            $table->json('embedding_config')->nullable()->comment('嵌入configuration');
+            $table->json('vector_db_config')->nullable()->comment('向量databaseconfiguration');
 
-            // 操作记录
-            $table->string('created_uid', 255)->comment('创建者ID');
-            $table->string('updated_uid', 255)->comment('更新者ID');
+            // 操作record
+            $table->string('created_uid', 255)->comment('create者ID');
+            $table->string('updated_uid', 255)->comment('update者ID');
 
-            // 状态时间点
+            // statustime点
             $table->datetimes();
             $table->softDeletes();
 

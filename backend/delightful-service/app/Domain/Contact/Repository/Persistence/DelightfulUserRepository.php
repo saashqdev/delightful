@@ -47,7 +47,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         $this->logger = $loggerFactory->get('user');
     }
 
-    // 返回最受欢迎和最新加入的 agent 列表
+    // return最受欢迎和最新加入的 agent list
     public function getSquareAgentList(): array
     {
         // 最受欢迎
@@ -200,7 +200,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
 
         $delightfulId = $userEntity->getDelightfulId();
 
-        // 第二次查询：根据 delightful_id 查询所有该账号在不同组织中的用户记录
+        // 第二次query：根据 delightful_id query所有该账号在不同organization中的userrecord
         $query = $this->userModel::query()
             ->select('organization_code')
             ->where('delightful_id', $delightfulId)
@@ -213,7 +213,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     }
 
     /**
-     * 根据 delightfulId 获取用户所属的组织列表.
+     * 根据 delightfulId getuser所属的organizationlist.
      * @return string[]
      */
     public function getUserOrganizationsByDelightfulId(string $delightfulId): array
@@ -393,10 +393,10 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     {
         $user = $this->getUserById($userDTO->getUserId());
         if ($user === null) {
-            // 创建
+            // create
             return $this->createUser($userDTO);
         }
-        // 更新
+        // update
         $userData = $userDTO->toArray();
         // 移除为 null 的数据
         foreach ($userData as $key => $value) {
@@ -405,7 +405,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
             }
         }
         $this->updateDataById($userDTO->getUserId(), $userData);
-        // 返回最新数据
+        // return最新数据
         return $this->getUserById($userDTO->getUserId());
     }
 
@@ -478,7 +478,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         return UserModel::query()->whereIn('user_id', $userIds)->pluck('delightful_id')->toArray();
     }
 
-    // 避免 redis 缓存序列化的对象,占用太多内存
+    // 避免 redis cache序列化的object,占用太多内存
     #[Cacheable(prefix: 'userEntity', value: '_#{id}', ttl: 60)]
     private function getUser(string $id): ?array
     {
@@ -488,7 +488,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         return Db::select($query->toSql(), $query->getBindings())[0] ?? null;
     }
 
-    // 避免 redis 缓存序列化的对象,占用太多内存
+    // 避免 redis cache序列化的object,占用太多内存
     #[Cacheable(prefix: 'userAccount', ttl: 60)]
     private function getUserArrayByAccountAndOrganization(string $accountId, string $organizationCode): ?array
     {
@@ -499,7 +499,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     }
 
     /**
-     * 投递初始化默认助手会话事件到MQ.
+     * 投递初始化默认助手sessionevent到MQ.
      */
     private function publishInitDefaultAssistantConversationEventForMQ(DelightfulUserEntity $userEntity): void
     {

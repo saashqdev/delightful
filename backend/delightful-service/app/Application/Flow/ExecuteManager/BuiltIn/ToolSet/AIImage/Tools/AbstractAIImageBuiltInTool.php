@@ -61,8 +61,8 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
         "user_prompt": {
             "type": "string",
             "key": "user_prompt",
-            "title": "用户提示词",
-            "description": "用户提示词",
+            "title": "user提示词",
+            "description": "user提示词",
             "required": null,
             "value": null,
             "encryption": false,
@@ -73,8 +73,8 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
         "reference_image_ids": {
             "type": "array",
             "key": "reference_image_ids",
-            "title": "引用的图片id列表",
-            "description": "引用的图片id列表",
+            "title": "引用的图片idlist",
+            "description": "引用的图片idlist",
             "required": null,
             "value": null,
             "encryption": false,
@@ -97,8 +97,8 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
         "attachments": {
             "type": "array",
             "key": "attachments",
-            "title": "附件数组",
-            "description": "传入文件列表数组",
+            "title": "附件array",
+            "description": "传入文件listarray",
             "required": null,
             "value": null,
             "encryption": false,
@@ -120,7 +120,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "file_name",
                         "sort": 0,
-                        "title": "文件名称",
+                        "title": "文件name",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -206,7 +206,7 @@ JSON,
             ->setUserMessage($textMessage)
             ->setAttachments($executionData->getTriggerData()?->getAttachments())
             ->setReferMessageId($executionData->getTriggerData()?->getSeqEntity()?->getSeqId());
-        // 设置实际请求的尺寸和比例
+        // set实际请求的尺寸和比例
         $enumModel = ImageGenerateModelType::fromModel($model, false);
         $imageGenerateParamsVO = $reqDto->getParams();
         $imageGenerateParamsVO->setSourceId($this->getCode());
@@ -220,7 +220,7 @@ JSON,
 
     protected function getAssistantAuthorization(string $assistantUserId): DelightfulUserAuthorization
     {
-        // 获取助理的用户信息。生成的图片上传者是助理自己。
+        // get助理的userinfo。生成的图片上传者是助理自己。
         $assistantInfoEntity = $this->getDelightfulUserDomainService()->getUserById($assistantUserId);
         if ($assistantInfoEntity === null) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'assistant_not_found');

@@ -13,20 +13,20 @@ use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
- * 角色模型.
+ * 角色model.
  *
- * @property int $id 主键ID
- * @property string $name 角色名称
- * @property array $permission_key 角色权限列表
- * @property string $organization_code 组织编码
- * @property null|array $permission_tag 权限标签，用于前端展示分类
+ * @property int $id primary keyID
+ * @property string $name 角色name
+ * @property array $permission_key 角色permissionlist
+ * @property string $organization_code organization编码
+ * @property null|array $permission_tag permission标签，用于前端展示分类
  * @property int $is_display 是否显示
- * @property int $status 状态: 0=禁用, 1=启用
- * @property null|string $created_uid 创建者用户ID
- * @property null|string $updated_uid 更新者用户ID
- * @property Carbon $created_at 创建时间
- * @property Carbon $updated_at 更新时间
- * @property null|Carbon $deleted_at 删除时间
+ * @property int $status status: 0=禁用, 1=启用
+ * @property null|string $created_uid create者userID
+ * @property null|string $updated_uid update者userID
+ * @property Carbon $created_at createtime
+ * @property Carbon $updated_at updatetime
+ * @property null|Carbon $deleted_at deletetime
  */
 class RoleModel extends AbstractModel
 {
@@ -34,19 +34,19 @@ class RoleModel extends AbstractModel
     use SoftDeletes;
 
     /**
-     * 状态常量.
+     * statusconstant.
      */
     public const int STATUS_DISABLED = 0;
 
     public const int STATUS_ENABLED = 1;
 
     /**
-     * 与模型关联的表名.
+     * 与model关联的table名.
      */
     protected ?string $table = 'delightful_roles';
 
     /**
-     * 可批量赋值的属性.
+     * 可批量赋value的property.
      */
     protected array $fillable = [
         'id',
@@ -64,7 +64,7 @@ class RoleModel extends AbstractModel
     ];
 
     /**
-     * 属性类型转换.
+     * propertytype转换.
      */
     protected array $casts = [
         'id' => 'int',
@@ -82,7 +82,7 @@ class RoleModel extends AbstractModel
     ];
 
     /**
-     * 获取权限列表.
+     * getpermissionlist.
      */
     public function getPermissions(): array
     {
@@ -90,7 +90,7 @@ class RoleModel extends AbstractModel
     }
 
     /**
-     * 设置权限列表.
+     * setpermissionlist.
      */
     public function setPermissions(array $permissions): void
     {
@@ -98,7 +98,7 @@ class RoleModel extends AbstractModel
     }
 
     /**
-     * 获取权限标签.
+     * getpermission标签.
      */
     public function getPermissionTag(): ?array
     {
@@ -106,7 +106,7 @@ class RoleModel extends AbstractModel
     }
 
     /**
-     * 设置权限标签.
+     * setpermission标签.
      */
     public function setPermissionTag(?array $permissionTag): void
     {
@@ -114,7 +114,7 @@ class RoleModel extends AbstractModel
     }
 
     /**
-     * 检查角色是否启用.
+     * check角色是否启用.
      */
     public function isEnabled(): bool
     {

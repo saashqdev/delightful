@@ -47,8 +47,8 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 将服务商配置数组转换为 DTO 列表，包含完整的 provider 信息.
-     * @param array $serviceProviderConfigs 服务商配置数组
+     * 将service商configurationarray转换为 DTO list，包含完整的 provider info.
+     * @param array $serviceProviderConfigs service商configurationarray
      * @param array $providerMap provider ID 到 provider 数据的映射
      * @return ProviderConfigDTO[]
      */
@@ -65,8 +65,8 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 将服务商配置转换为 DTO，包含完整的 provider 信息.
-     * @param array $serviceProviderConfig 服务商配置数据
+     * 将service商configuration转换为 DTO，包含完整的 provider info.
+     * @param array $serviceProviderConfig service商configuration数据
      * @param array $providerMap provider ID 到 provider 数据的映射
      */
     public static function toDTOWithProvider(array $serviceProviderConfig, array $providerMap): ProviderConfigDTO
@@ -79,13 +79,13 @@ class ProviderConfigAssembler
         $translator = di(TranslatorInterface::class);
         $locale = $translator->getLocale();
 
-        // 从 providerMap 中获取对应的 provider 信息
+        // 从 providerMap 中get对应的 provider info
         $providerId = $serviceProviderConfig['service_provider_id'];
         if (isset($providerMap[$providerId])) {
             $provider = $providerMap[$providerId];
 
             $translate = Json::decode($provider['translate']);
-            // 合并 provider 信息到配置中
+            // 合并 provider info到configuration中
             $preparedConfig['name'] = self::getTranslatedText($translate['name'] ?? [], $locale);
             $preparedConfig['description'] = self::getTranslatedText($translate['description'] ?? [], $locale);
             $preparedConfig['icon'] = $provider['icon'] ?? '';
@@ -94,7 +94,7 @@ class ProviderConfigAssembler
             $preparedConfig['provider_code'] = $provider['provider_code'] ?? null;
             $preparedConfig['is_models_enable'] = $provider['is_models_enable'] ?? true;
 
-            // 直接使用 provider 的翻译信息（config 中只有 ak、sk 等配置，没有翻译数据）
+            // 直接使用 provider 的翻译info（config 中只有 ak、sk 等configuration，没有翻译数据）
             if (! empty($provider['translate'])) {
                 $providerTranslate = is_string($provider['translate'])
                     ? Json::decode($provider['translate'])
@@ -131,7 +131,7 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 对配置数据进行编码（JSON编码 + AES加密）.
+     * 对configuration数据进行编码（JSON编码 + AES加密）.
      */
     public static function encodeConfig(array $config, string $salt): string
     {
@@ -140,7 +140,7 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 预处理服务商配置数据，提取共同逻辑.
+     * 预处理service商configuration数据，提取共同逻辑.
      * @return array [$preparedConfig, $decodeConfig]
      */
     private static function prepareServiceProviderConfig(array $serviceProviderConfig): array
@@ -150,7 +150,7 @@ class ProviderConfigAssembler
             $decodeConfig = self::decodeConfig($serviceProviderConfig['config'], (string) $serviceProviderConfig['id']);
         }
 
-        // 设置默认的translate
+        // set默认的translate
         if (empty($serviceProviderConfig['translate'])) {
             $serviceProviderConfig['translate'] = [];
         }

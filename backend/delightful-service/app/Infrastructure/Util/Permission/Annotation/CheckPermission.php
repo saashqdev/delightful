@@ -13,7 +13,7 @@ use BackedEnum;
 use Hyperf\Di\Annotation\AbstractAnnotation;
 
 /**
- * 权限校验注解，用于方法或类上声明所需的权限。
+ * permission校验注解，用于method或类上声明所需的permission。
  *
  * 示例：
  * #[CheckPermission(DelightfulResourceEnum::CONSOLE_API_ASSISTANT, DelightfulOperationEnum::QUERY)]
@@ -32,8 +32,8 @@ class CheckPermission extends AbstractAnnotation
     public string $operation;
 
     /**
-     * @param array|BackedEnum|string $resource 资源，字符串/枚举或其数组
-     * @param BackedEnum|string $operation 操作，仅字符串或枚举
+     * @param array|BackedEnum|string $resource 资源，string/枚举或其array
+     * @param BackedEnum|string $operation 操作，仅string或枚举
      */
     public function __construct(array|BackedEnum|string $resource, BackedEnum|string $operation)
     {
@@ -42,18 +42,18 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * 组合为完整权限键，如 "console.api.assistant.query".
+     * 组合为完整permission键，如 "console.api.assistant.query".
      */
     public function getPermissionKey(): string
     {
-        // 为了兼容旧逻辑，返回第一个组合键
+        // 为了兼容旧逻辑，return第一个组合键
         $keys = $this->getPermissionKeys();
         return $keys[0] ?? '';
     }
 
     /**
-     * 返回所有权限键组合（resources x operations 的笛卡尔积）。
-     * 当声明了多个资源或多个操作时，权限通过任意一个键即可。
+     * return所有permission键组合（resources x operations 的笛卡尔积）。
+     * 当声明了多个资源或多个操作时，permission通过任意一个键即可。
      *
      * @return array<string>
      */
@@ -72,7 +72,7 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * 将字符串/枚举或其数组统一为字符串数组。
+     * 将string/枚举或其array统一为stringarray。
      * @return array<string>
      */
     private function normalizeToValues(array|BackedEnum|string $input): array

@@ -45,14 +45,14 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
      */
     public function sendVerificationCode(string $stateCode, string $phone, string $type): array
     {
-        // 手机号是否可用检查
+        // 手机号是否可用check
         $this->checkPhoneStatus($type, $stateCode, $phone);
-        // 短信频率检查
+        // 短信频率check
         $this->checkSmsLimit($stateCode, $phone);
         $code = (string) random_int(100000, 999999);
         $variables = ['timeout' => 10, 'verification_code' => $code];
         $sign = SignEnum::DENG_TA;
-        // 将业务场景类型 转为 短信类型
+        // 将业务场景type 转为 短信type
         $smsType = match ($type) {
             SmsSceneType::BIND_PHONE,
             SmsSceneType::CHANGE_PHONE,
@@ -68,7 +68,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         //        $sendResult = new SendResult();
         //        $sendResult->setResult(0, $code);
         $key = $this->getSmsVerifyCodeKey($stateCode . $phone, $type);
-        // 缓存验证码,后续验证用
+        // cache验证码,后续验证用
         $this->redis->setex($key, 10 * 60, $code);
         return $sendResult->toArray();
     }
@@ -78,7 +78,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
      */
     public function humanRegister(string $stateCode, string $phone, string $verifyCode, string $password): array
     {
-        // 手机号检查
+        // 手机号check
         $this->checkPhoneStatus(SmsSceneType::REGISTER_ACCOUNT, $stateCode, $phone);
         $key = $this->getSmsVerifyCodeKey($stateCode . $phone, SmsSceneType::REGISTER_ACCOUNT);
         $code = $this->redis->get($key);
@@ -119,7 +119,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         $existsAccount = $this->accountRepository->getAccountInfoByDelightfulId($delightfulId);
         if ($existsAccount !== null) {
             $userEntity = $this->userRepository->getUserByAccountAndOrganization($delightfulId, $userDTO->getOrganizationCode());
-            // 账号存在,且在该组织下已经生成了用户信息,直接返回
+            // 账号存在,且在该organization下已经生成了userinfo,直接return
             if ($userEntity !== null) {
                 $userDTO->setUserId($userEntity->getUserId());
                 $userDTO->setNickname($userEntity->getNickname());
@@ -138,22 +138,22 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // 账号不存在,新增账号
                 $accountEntity = $this->accountRepository->createAccount($accountDTO);
             } else {
-                // 账号存在,但是该组织下没有用户信息
+                // 账号存在,但是该organization下没有userinfo
                 $accountEntity = $existsAccount;
             }
-            // 将生成的账号信息关联到userEntity
+            // 将生成的账号info关联到userEntity
             $userDTO->setDelightfulId($accountEntity->getDelightfulId());
             $userEntity = $this->userRepository->getUserByAccountAndOrganization($delightfulId, $userDTO->getOrganizationCode());
             if ($userEntity && $userEntity->getUserId()) {
                 $userDTO->setUserId($userEntity->getUserId());
                 return;
             }
-            // 生成组织下用户信息
+            // 生成organization下userinfo
             if (empty($userDTO->getUserId())) {
                 // 确定user_id的生成规则
                 $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $userDTO->getOrganizationCode());
                 $userDTO->setUserId($userId);
-                // 1.47x(10**-29) 概率下,user_id会重复,会被mysql唯一索引拦截,让用户重新登录一次就行.
+                // 1.47x(10**-29) 概率下,user_id会重复,会被mysql唯一索引拦截,让user重新登录一次就行.
                 $this->userRepository->createUser($userDTO);
             }
             Db::commit();
@@ -179,21 +179,21 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             $accountEntity = $this->accountRepository->getAccountInfoByAiCode($accountDTO->getAiCode());
             if ($accountEntity) {
                 $userDTO->setDelightfulId($accountEntity->getDelightfulId());
-                // 更新 ai 的昵称
+                // update ai 的昵称
                 $accountEntity->setRealName($userDTO->getNickname());
-                // 更新账号信息
+                // update账号info
                 if ($accountDTO->getStatus() !== null) {
                     // 启用/禁用智能体
                     $accountEntity->setStatus($accountDTO->getStatus());
                 }
                 $this->accountRepository->saveAccount($accountEntity);
-                // 更新账号在该组织下的用户信息
+                // update账号在该organization下的userinfo
                 $userEntity = $this->userRepository->getUserByAccountAndOrganization($accountEntity->getDelightfulId(), $dataIsolation->getCurrentOrganizationCode());
                 if ($userEntity === null) {
-                    # 账号存在,但是该组织下没有用户信息. 生成用户信息
+                    # 账号存在,但是该organization下没有userinfo. 生成userinfo
                     $userEntity = $this->createUser($userDTO, $dataIsolation);
                 } else {
-                    // 账号和用户信息都存在,更新一下用户信息
+                    // 账号和userinfo都存在,update一下userinfo
                     $userEntity->setNickname($userDTO->getNickname());
                     $userEntity->setAvatarUrl($userDTO->getAvatarUrl());
                     $userEntity->setDescription($userDTO->getDescription());
@@ -202,7 +202,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 Db::commit();
                 return $userEntity;
             }
-            // 创建账号
+            // create账号
             $extra = [
                 'like_num' => 0,
                 'friend_num' => 0,
@@ -215,12 +215,12 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             $accountDTO->setGender(GenderType::Unknown);
             $accountDTO->setPhone($accountDTO->getAiCode());
             $accountDTO->setType(UserType::Ai);
-            # 账号不存在(用户肯定也不存在),生成账号和用户信息
+            # 账号不存在(user肯定也不存在),生成账号和userinfo
             $delightfulId = (string) IdGenerator::getSnowId();
             $accountDTO->setDelightfulId($delightfulId);
             $this->accountRepository->createAccount($accountDTO);
             $userDTO->setDelightfulId($delightfulId);
-            // 为账号在当前组织创建用户
+            // 为账号在当前organizationcreateuser
             $result = $this->createUser($userDTO, $dataIsolation);
             Db::commit();
             return $result;
@@ -268,7 +268,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 修改用户密码
+     * 修改user密码
      */
     public function updatePassword(string $delightfulId, string $plainPassword): bool
     {
@@ -279,7 +279,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         // 使用SHA256加密密码
         $hashedPassword = $this->passwordService->hashPassword($plainPassword);
 
-        // 更新密码
+        // update密码
         $this->accountRepository->updateAccount($delightfulId, [
             'password' => $hashedPassword,
         ]);

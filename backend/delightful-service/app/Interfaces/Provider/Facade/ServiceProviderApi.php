@@ -43,8 +43,8 @@ class ServiceProviderApi extends AbstractApi
     protected ProviderAppService $providerAppService;
 
     /**
-     * 不需要判断管理员权限。
-     * 根据分类获取服务商列表.
+     * 不需要判断管理员permission。
+     * 根据分类getservice商list.
      */
     public function getServiceProviders(RequestInterface $request)
     {
@@ -52,15 +52,15 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 不需要判断管理员权限。
-     * 根据分类获取服务商列表.
+     * 不需要判断管理员permission。
+     * 根据分类getservice商list.
      */
     public function getOrganizationProvidersByCategory(RequestInterface $request)
     {
         return $this->getProvidersByCategory($request);
     }
 
-    // 获取服务商和模型列表
+    // getservice商和modellist
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getServiceProviderConfigModels(RequestInterface $request, ?string $serviceProviderConfigId = null)
     {
@@ -72,7 +72,7 @@ class ServiceProviderApi extends AbstractApi
         return $this->convertToLegacyFormat($providerConfigAggregateDTO);
     }
 
-    // 更新服务商
+    // updateservice商
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function updateServiceProviderConfig(RequestInterface $request)
     {
@@ -82,7 +82,7 @@ class ServiceProviderApi extends AbstractApi
         return $this->adminProviderAppService->updateProvider($authenticatable, $updateProviderConfigRequest);
     }
 
-    // 修改模型状态
+    // 修改modelstatus
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function updateModelStatus(RequestInterface $request, ?string $modelId = null)
     {
@@ -93,7 +93,7 @@ class ServiceProviderApi extends AbstractApi
         $this->adminProviderAppService->updateModelStatus($authenticatable, $modelId, $status);
     }
 
-    // 获取当前组织是否是官方组织
+    // get当前organization是否是官方organization
     public function isCurrentOrganizationOfficial(): array
     {
         $organizationCode = $this->getAuthorization()->getOrganizationCode();
@@ -103,7 +103,7 @@ class ServiceProviderApi extends AbstractApi
         ];
     }
 
-    // 保存模型
+    // 保存model
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function saveModelToServiceProvider(RequestInterface $request)
     {
@@ -113,7 +113,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 连通性测试.
+     * 连通性test.
      * @throws Exception
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
@@ -127,7 +127,7 @@ class ServiceProviderApi extends AbstractApi
         return $this->adminProviderAppService->connectivityTest($serviceProviderConfigId, $modelVersion, $modelPrimaryId, $authenticatable);
     }
 
-    // 删除模型
+    // deletemodel
 
     /**
      * @throws Exception
@@ -140,7 +140,7 @@ class ServiceProviderApi extends AbstractApi
         $this->adminProviderAppService->deleteModel($authenticatable, $modelId);
     }
 
-    // 获取原始模型id
+    // get原始modelid
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function listOriginalModels()
     {
@@ -148,7 +148,7 @@ class ServiceProviderApi extends AbstractApi
         return $this->adminOriginModelAppService->list($authenticatable);
     }
 
-    // 增加原始模型id
+    // 增加原始modelid
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function addOriginalModel(RequestInterface $request)
     {
@@ -157,7 +157,7 @@ class ServiceProviderApi extends AbstractApi
         $this->adminOriginModelAppService->create($authenticatable, $modelId);
     }
 
-    // 组织添加服务商
+    // organization添加service商
     #[Deprecated]
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function addServiceProviderForOrganization(RequestInterface $request)
@@ -168,7 +168,7 @@ class ServiceProviderApi extends AbstractApi
         return $this->adminProviderAppService->createProvider($authenticatable, $createProviderConfigRequest);
     }
 
-    // 删除服务商
+    // deleteservice商
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function deleteServiceProviderForOrganization(RequestInterface $request, ?string $serviceProviderConfigId = null)
     {
@@ -178,7 +178,7 @@ class ServiceProviderApi extends AbstractApi
         $this->adminProviderAppService->deleteProvider($authenticatable, $serviceProviderConfigId);
     }
 
-    // 组织添加模型标识
+    // organization添加model标识
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function addModelIdForOrganization(RequestInterface $request)
     {
@@ -188,7 +188,7 @@ class ServiceProviderApi extends AbstractApi
         $this->adminOriginModelAppService->create($authenticatable, $modelId);
     }
 
-    // 组织删除模型标识
+    // organizationdeletemodel标识
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::EDIT)]
     public function deleteModelIdForOrganization(RequestInterface $request, ?string $modelId = null)
     {
@@ -199,26 +199,26 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 获取所有非官方LLM服务商列表
-     * 直接从数据库中查询category为llm且provider_type不为OFFICIAL的服务商
-     * 不依赖于当前组织，适用于需要添加服务商的场景.
+     * get所有非官方LLMservice商list
+     * 直接从database中querycategory为llm且provider_type不为OFFICIAL的service商
+     * 不依赖于当前organization，适用于需要添加service商的场景.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getNonOfficialLlmProviders()
     {
         $authenticatable = $this->getAuthorization();
-        // 直接获取所有LLM类型的非官方服务商
+        // 直接get所有LLMtype的非官方service商
         return $this->adminProviderAppService->getAllNonOfficialProviders(Category::LLM, $authenticatable->getOrganizationCode());
     }
 
     /**
-     * 获取所有可用的LLM服务商列表（包括官方服务商）.
+     * get所有可用的LLMservice商list（包括官方service商）.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getAllAvailableLlmProviders()
     {
         $authenticatable = $this->getAuthorization();
-        // 获取所有LLM类型的服务商（包括Official）
+        // get所有LLMtype的service商（包括Official）
         return $this->adminProviderAppService->getAllAvailableLlmProviders(Category::LLM, $authenticatable->getOrganizationCode());
     }
 
@@ -243,9 +243,9 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 根据分类获取服务商通用逻辑.
-     * @param RequestInterface $request 请求对象
-     * @return array 服务商列表
+     * 根据分类getservice商通用逻辑.
+     * @param RequestInterface $request 请求object
+     * @return array service商list
      */
     private function getProvidersByCategory(RequestInterface $request): array
     {
@@ -265,7 +265,7 @@ class ServiceProviderApi extends AbstractApi
 
     /**
      * 将新格式数据转换为旧格式，保持向后兼容性.
-     * @param ?ProviderConfigModelsDTO $aggregateDTO 聚合DTO对象
+     * @param ?ProviderConfigModelsDTO $aggregateDTO 聚合DTOobject
      * @return array 旧格式数据
      */
     private function convertToLegacyFormat(?ProviderConfigModelsDTO $aggregateDTO): array
@@ -275,12 +275,12 @@ class ServiceProviderApi extends AbstractApi
         }
         $data = $aggregateDTO->toArray();
 
-        // 如果不是新格式结构，直接返回
+        // 如果不是新格式结构，直接return
         if (! isset($data['provider_config'])) {
             return $data;
         }
 
-        // 将 provider_config 内容提升到根级别，并添加 alias 和 models
+        // 将 provider_config content提升到根级别，并添加 alias 和 models
         return array_merge($data['provider_config'], [
             'alias' => $data['provider_config']['translate']['alias']['zh_CN'] ?? '',
             'models' => $data['models'] ?? [],

@@ -19,7 +19,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Hyperf\Codec\Json;
 
 /**
- * 账号收件箱的序列号表,每个账号的所有消息必须单调递增.
+ * 账号收件箱的序列号table,每个账号的所有message必须单调递增.
  */
 final class DelightfulSeqEntity extends AbstractEntity
 {
@@ -29,16 +29,16 @@ final class DelightfulSeqEntity extends AbstractEntity
 
     protected ConversationType $objectType;
 
-    // object_type 为0或者1时,此处代表 delightful_id
+    // object_type 为0或者1时,此处代table delightful_id
     protected string $objectId = '';
 
     protected string $seqId = '';
 
-    // 序列号类型
+    // 序列号type
     protected ChatMessageType|ControlMessageType $seqType;
 
     /**
-     * 序列号内容.
+     * 序列号content.
      */
     protected MessageInterface $content;
 
@@ -58,7 +58,7 @@ final class DelightfulSeqEntity extends AbstractEntity
     protected ?DelightfulMessageStatus $status = null;
 
     /**
-     * 消息接收人列表.
+     * message接收人list.
      */
     protected ?ReceiveList $receiveList = null;
 
@@ -73,7 +73,7 @@ final class DelightfulSeqEntity extends AbstractEntity
     public function __construct(?array $data = [])
     {
         if ($data) {
-            // 处理消息的内容类型转换
+            // 处理message的contenttype转换
             if (! empty($data['content'])) {
                 if (is_string($data['content'])) {
                     $data['content'] = Json::decode($data['content']);
@@ -284,11 +284,11 @@ final class DelightfulSeqEntity extends AbstractEntity
             $this->receiveList = $receiveList;
             return $this;
         }
-        // 解析消息接收人列表.
+        // 解析message接收人list.
         if (is_string($receiveList) && $receiveList !== '') {
             $receiveList = Json::decode($receiveList);
         }
-        // 对于收件人来说,不需要记录消息接收人列表
+        // 对于收件人来说,不需要recordmessage接收人list
         if (empty($receiveList)) {
             $receiveListObj = null;
         } elseif (is_array($receiveList)) {
@@ -355,7 +355,7 @@ final class DelightfulSeqEntity extends AbstractEntity
 
     public function canTriggerFlow(): bool
     {
-        // 如果是聊天消息，或者是加好友/打开会话窗口的控制消息，就能触发 flow
+        // 如果是聊天message，或者是加好友/打开session窗口的控制message，就能触发 flow
         return $this->seqType instanceof ChatMessageType || in_array($this->seqType, [ControlMessageType::AddFriendSuccess, ControlMessageType::OpenConversation], true);
     }
 }

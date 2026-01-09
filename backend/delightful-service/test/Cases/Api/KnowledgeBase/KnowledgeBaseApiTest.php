@@ -599,8 +599,8 @@ class KnowledgeBaseApiTest extends HttpTestCase
             'content' => 'This is a test fragment content for testing similarity query functionality',
         ], $document['code'], $code);
 
-        // 执行相似度查询
-        $query = '测试相似度查询';
+        // 执行相似度query
+        $query = 'test相似度query';
         $res = $this->post(
             sprintf('%s/%s/fragments/similarity', self::API, $code),
             ['query' => $query],
@@ -610,7 +610,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $this->assertSame(1000, $res['code'], $res['message']);
         $this->assertIsArray($res['data']);
 
-        // 验证返回结果的结构
+        // 验证returnresult的结构
         if (! empty($res['data'])) {
             $result = $res['data']['list'][0];
             $this->assertArrayHasKey('id', $result);
@@ -621,13 +621,13 @@ class KnowledgeBaseApiTest extends HttpTestCase
             $this->assertArrayHasKey('doc_type', $result);
             $this->assertArrayHasKey('knowledge_base_code', $result);
 
-            // 验证返回的内容包含查询关键词
-            $this->assertStringContainsString('测试', $result['content']);
+            // 验证return的content包含query关键词
+            $this->assertStringContainsString('test', $result['content']);
         }
     }
 
     /**
-     * 测试重新向量化.
+     * test重新向量化.
      */
     public function testReVectorized()
     {
@@ -644,10 +644,10 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $this->assertSame(1000, $res['code'], $res['message']);
     }
 
-    // 删除所有知识库
+    // delete所有知识库
     public function deleteAllKnowledgeBase()
     {
-        // 获取知识库列表
+        // get知识库list
         $res = $this->post(self::API . '/queries', [], $this->getCommonHeaders());
         $this->assertSame(1000, $res['code'], $res['message']);
         $knowledgeBases = $res['data']['list'];
@@ -658,7 +658,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * 创建测试文档并返回文档数据.
+     * createtest文档并return文档数据.
      */
     protected function createDocument(array $overrideData = [], ?string $knowledgeBaseCode = null): array
     {
@@ -667,7 +667,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
             $knowledgeBaseCode = $knowledgeBase['code'];
         }
         $defaultData = [
-            'name' => '测试文档',
+            'name' => 'test文档',
             'doc_type' => 1,
             'enabled' => true,
             'doc_metadata' => ['source' => 'test'],
@@ -690,21 +690,21 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * 清理测试数据.
+     * 清理test数据.
      */
     protected function clearTestKnowledgeBaseData()
     {
         // 根据实际情况实现清理逻辑
-        // 可以直接调用数据库操作删除测试数据
-        // 或者调用相应的服务方法
+        // 可以直接calldatabase操作deletetest数据
+        // 或者call相应的servicemethod
     }
 
     protected function createKnowledgeBase(array $data = []): array
     {
         $data = array_merge([
             'source_type' => SourceType::EXTERNAL_FILE->value,
-            'name' => '测试知识库',
-            'description' => '这是一个测试知识库描述',
+            'name' => 'test知识库',
+            'description' => '这是一个test知识库description',
             'icon' => 'qqqq',
             'enabled' => true,
             'is_draft' => true,
@@ -742,7 +742,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * 创建测试片段并返回数据.
+     * createtest片段并return数据.
      */
     protected function createFragment(array $overrideData = [], ?string $documentCode = null, ?string $knowledgeBaseCode = null): array
     {
@@ -760,7 +760,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         }
 
         $defaultData = [
-            'content' => '这是一个测试片段内容',
+            'content' => '这是一个test片段content',
             'metadata' => ['page' => 1],
             'embedding_model' => 'test-model',
             'vector_db' => 'test-db',

@@ -39,10 +39,10 @@ class AiAbilityAssembler
      */
     public static function entityToDetailDTO(AiAbilityEntity $entity, string $locale = 'zh_CN'): AiAbilityDetailDTO
     {
-        // 获取原始配置
+        // get原始configuration
         $config = $entity->getConfig();
 
-        // 递归脱敏所有 api_key 字段（支持任意嵌套结构）
+        // 递归脱敏所有 api_key field（支持任意嵌套结构）
         $maskedConfig = self::maskConfigRecursively($config);
 
         return new AiAbilityDetailDTO(
@@ -58,7 +58,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * AI能力Entity列表转换为ListDTO列表.
+     * AI能力Entitylist转换为ListDTOlist.
      *
      * @param array<AiAbilityEntity> $entities
      * @return array<AiAbilityListDTO>
@@ -73,7 +73,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * AI能力列表DTO转数组.
+     * AI能力listDTO转array.
      *
      * @param array<AiAbilityListDTO> $dtos
      */
@@ -87,11 +87,11 @@ class AiAbilityAssembler
     }
 
     /**
-     * 对配置数据进行解密.
+     * 对configuration数据进行解密.
      *
-     * @param string $config 加密的配置字符串
-     * @param string $salt 盐值(通常是记录ID)
-     * @return array 解密后的配置数组
+     * @param string $config 加密的configurationstring
+     * @param string $salt 盐value(通常是recordID)
+     * @return array 解密后的configurationarray
      */
     public static function decodeConfig(string $config, string $salt): array
     {
@@ -103,11 +103,11 @@ class AiAbilityAssembler
     }
 
     /**
-     * 对配置数据进行编码(JSON编码 + AES加密).
+     * 对configuration数据进行编码(JSON编码 + AES加密).
      *
-     * @param array $config 配置数组
-     * @param string $salt 盐值(通常是记录ID)
-     * @return string 加密后的配置字符串
+     * @param array $config configurationarray
+     * @param string $salt 盐value(通常是recordID)
+     * @return string 加密后的configurationstring
      */
     public static function encodeConfig(array $config, string $salt): string
     {
@@ -116,25 +116,25 @@ class AiAbilityAssembler
     }
 
     /**
-     * 递归脱敏配置中的所有 api_key 字段.
+     * 递归脱敏configuration中的所有 api_key field.
      *
-     * @param array $config 配置数组
-     * @return array 脱敏后的配置数组
+     * @param array $config configurationarray
+     * @return array 脱敏后的configurationarray
      */
     private static function maskConfigRecursively(array $config): array
     {
         $result = [];
 
         foreach ($config as $key => $value) {
-            // 如果是 api_key 字段，进行脱敏（前4后4）
+            // 如果是 api_key field，进行脱敏（前4后4）
             if ($key === 'api_key' && is_string($value) && ! empty($value)) {
                 $result[$key] = self::maskApiKey($value);
             }
-            // 如果是数组，递归处理
+            // 如果是array，递归处理
             elseif (is_array($value)) {
                 $result[$key] = self::maskConfigRecursively($value);
             }
-            // 其他值直接赋值
+            // 其他value直接赋value
             else {
                 $result[$key] = $value;
             }
@@ -170,9 +170,9 @@ class AiAbilityAssembler
     }
 
     /**
-     * 生成AES加密密钥(基础密钥 + 盐值).
+     * 生成AES加密密钥(基础密钥 + 盐value).
      *
-     * @param string $salt 盐值
+     * @param string $salt 盐value
      * @return string AES密钥
      */
     private static function _getAesKey(string $salt): string

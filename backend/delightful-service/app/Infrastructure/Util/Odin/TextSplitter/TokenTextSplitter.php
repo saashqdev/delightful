@@ -17,8 +17,8 @@ use Yethee\Tiktoken\EncoderProvider;
 class TokenTextSplitter extends TextSplitter
 {
     /**
-     * 设置最大缓存文本长度（字符数）
-     * 超过此长度的文本将不会被缓存在协程上下文中.
+     * set最大cache文本长度（字符数）
+     * 超过此长度的文本将不会被cache在协程上下文中.
      */
     private const int MAX_CACHE_TEXT_LENGTH = 1000;
 
@@ -53,8 +53,8 @@ class TokenTextSplitter extends TextSplitter
     private bool $preserveSeparator = false;
 
     /**
-     * @param null|callable $tokenizer token计算函数
-     * @param null|array $separators 备选分隔符列表
+     * @param null|callable $tokenizer token计算function
+     * @param null|array $separators 备选分隔符list
      * @throws Exception
      */
     public function __construct(
@@ -80,7 +80,7 @@ class TokenTextSplitter extends TextSplitter
      * 分割文本.
      *
      * @param string $text 要分割的文本
-     * @return array 分割后的文本块数组
+     * @return array 分割后的文本块array
      */
     public function splitText(string $text): array
     {
@@ -118,7 +118,7 @@ class TokenTextSplitter extends TextSplitter
         }
 
         // 4. 还原文本
-        // 先获取所有标签
+        // 先get所有标签
         preg_match_all('/<DelightfulCompressibleContent.*?<\/DelightfulCompressibleContent>/s', $originalText, $matches);
         $tags = $matches[0];
         $tagIndex = 0;
@@ -138,7 +138,7 @@ class TokenTextSplitter extends TextSplitter
      *
      * @param array $splits 要合并的文本块
      * @param string $separator 分隔符
-     * @return array 合并后的文本块数组
+     * @return array 合并后的文本块array
      */
     protected function mergeSplits(array $splits, string $separator): array
     {
@@ -269,7 +269,7 @@ class TokenTextSplitter extends TextSplitter
      * 递归分割文本.
      *
      * @param string $text 要分割的文本
-     * @return array 分割后的文本块数组
+     * @return array 分割后的文本块array
      */
     private function recursiveSplitText(string $text, int $separatorBeginIndex = 0): array
     {
@@ -358,7 +358,7 @@ class TokenTextSplitter extends TextSplitter
             }
             return count($this->defaultEncoder->encode($text));
         } catch (Throwable $e) {
-            // 如果计算token失败，返回一个估计值
+            // 如果计算tokenfail，return一个估计value
             return (int) ceil(mb_strlen($text) / 4);
         }
     }
@@ -366,7 +366,7 @@ class TokenTextSplitter extends TextSplitter
     private function getDefaultTokenizer(): callable
     {
         return function (string $text) {
-            // 如果文本长度超过限制，直接计算不缓存
+            // 如果文本长度超过限制，直接计算不cache
             if (mb_strlen($text) > self::MAX_CACHE_TEXT_LENGTH) {
                 return $this->calculateTokenCount($text);
             }
@@ -374,7 +374,7 @@ class TokenTextSplitter extends TextSplitter
             // 生成上下文键
             $contextKey = 'token_count:' . md5($text);
 
-            // 尝试从协程上下文获取
+            // 尝试从协程上下文get
             $count = Context::get($contextKey);
             if ($count !== null) {
                 return $count;
@@ -391,11 +391,11 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 检测文件内容的编码
+     * 检测文件content的编码
      */
     private function detectEncoding(string $content): string
     {
-        // 检查 BOM
+        // check BOM
         if (str_starts_with($content, "\xEF\xBB\xBF")) {
             return 'UTF-8';
         }

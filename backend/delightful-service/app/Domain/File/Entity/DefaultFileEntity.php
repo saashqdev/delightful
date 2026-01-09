@@ -37,7 +37,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 设置ID.
+     * setID.
      */
     public function setId(int $id): self
     {
@@ -46,7 +46,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 设置业务类型.
+     * set业务type.
      */
     public function setBusinessType(string $businessType): self
     {
@@ -55,7 +55,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 获取文件类型.
+     * get文件type.
      */
     public function getFileType(): int
     {
@@ -63,7 +63,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 设置文件类型.
+     * set文件type.
      */
     public function setFileType(int $fileType): self
     {
@@ -72,7 +72,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 获取文件key.
+     * get文件key.
      */
     public function getKey(): string
     {
@@ -80,7 +80,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 设置文件key.
+     * set文件key.
      */
     public function setKey(string $key): self
     {
@@ -89,7 +89,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 获取文件大小.
+     * get文件大小.
      */
     public function getFileSize(): int
     {
@@ -97,7 +97,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 设置文件大小.
+     * set文件大小.
      */
     public function setFileSize(int $fileSize): self
     {
@@ -106,7 +106,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 获取组织编码
+     * getorganization编码
      */
     public function getOrganization(): string
     {
@@ -114,7 +114,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 设置组织编码
+     * setorganization编码
      */
     public function setOrganization(string $organization): self
     {
@@ -123,7 +123,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 获取文件后缀
+     * get文件后缀
      */
     public function getFileExtension(): string
     {
@@ -131,7 +131,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 设置文件后缀
+     * set文件后缀
      */
     public function setFileExtension(string $fileExtension): self
     {
@@ -140,7 +140,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 获取上传者ID.
+     * get上传者ID.
      */
     public function getUserId(): string
     {
@@ -148,7 +148,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 设置上传者ID.
+     * set上传者ID.
      */
     public function setUserId(string $userId): self
     {
@@ -157,7 +157,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 获取创建时间.
+     * getcreatetime.
      */
     public function getCreatedAt(): ?string
     {
@@ -165,7 +165,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 设置创建时间.
+     * setcreatetime.
      */
     public function setCreatedAt(?string $createdAt): self
     {
@@ -174,7 +174,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 获取更新时间.
+     * getupdatetime.
      */
     public function getUpdatedAt(): ?string
     {
@@ -182,7 +182,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 设置更新时间.
+     * setupdatetime.
      */
     public function setUpdatedAt(?string $updatedAt): self
     {
@@ -191,7 +191,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 获取删除时间.
+     * getdeletetime.
      */
     public function getDeletedAt(): ?string
     {
@@ -199,7 +199,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * 设置删除时间.
+     * setdeletetime.
      */
     public function setDeletedAt(?string $deletedAt): self
     {

@@ -10,29 +10,29 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 use App\Infrastructure\Core\AbstractValueObject;
 
 /**
- * 知识库检索结果值对象.
+ * 知识库检索resultvalueobject.
  *
- * 统一表示从不同检索方法（语义检索、全文检索、图检索等）返回的知识片段
+ * 统一table示从不同检索method（语义检索、全文检索、图检索等）return的知识片段
  */
 class KnowledgeRetrievalResult extends AbstractValueObject
 {
     /**
-     * 语义检索类型.
+     * 语义检索type.
      */
     public const string TYPE_SEMANTIC = 'semantic';
 
     /**
-     * 全文检索类型.
+     * 全文检索type.
      */
     public const string TYPE_FULLTEXT = 'fulltext';
 
     /**
-     * 图检索类型.
+     * 图检索type.
      */
     public const string TYPE_GRAPH = 'graph';
 
     /**
-     * 混合检索类型.
+     * 混合检索type.
      */
     public const string TYPE_HYBRID = 'hybrid';
 
@@ -42,7 +42,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     private string $id = '';
 
     /**
-     * 内容.
+     * content.
      */
     private string $content = '';
 
@@ -57,17 +57,17 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     private array $metadata = [];
 
     /**
-     * 类型（semantic, fulltext, graph, hybrid等）.
+     * type（semantic, fulltext, graph, hybrid等）.
      */
     private string $type = self::TYPE_SEMANTIC;
 
     private float $score = 0;
 
     /**
-     * 从知识库片段实体创建检索结果.
+     * 从知识库片段实体create检索result.
      *
      * @param string $id 唯一标识符
-     * @param string $content 内容
+     * @param string $content content
      * @param string $businessId 业务ID
      * @param array $metadata 元数据
      */
@@ -90,10 +90,10 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 从图数据创建检索结果.
+     * 从图数据create检索result.
      *
      * @param string $id 唯一标识符
-     * @param string $content 内容
+     * @param string $content content
      * @param string $businessId 业务ID
      * @param array $metadata 元数据
      */
@@ -114,7 +114,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 创建空的检索结果.
+     * create空的检索result.
      */
     public static function empty(): self
     {
@@ -122,7 +122,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 获取唯一标识符.
+     * get唯一标识符.
      */
     public function getId(): string
     {
@@ -130,7 +130,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 设置唯一标识符.
+     * set唯一标识符.
      *
      * @param string $id 唯一标识符
      */
@@ -141,7 +141,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 获取内容.
+     * getcontent.
      */
     public function getContent(): string
     {
@@ -149,9 +149,9 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 设置内容.
+     * setcontent.
      *
-     * @param string $content 内容
+     * @param string $content content
      */
     public function setContent(string $content): self
     {
@@ -160,7 +160,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 获取业务ID.
+     * get业务ID.
      */
     public function getBusinessId(): string
     {
@@ -168,7 +168,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 设置业务ID.
+     * set业务ID.
      *
      * @param string $businessId 业务ID
      */
@@ -179,7 +179,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 获取元数据.
+     * get元数据.
      */
     public function getMetadata(): array
     {
@@ -187,7 +187,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 设置元数据.
+     * set元数据.
      *
      * @param array $metadata 元数据
      */
@@ -198,7 +198,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 获取类型.
+     * gettype.
      */
     public function getType(): string
     {
@@ -206,9 +206,9 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 设置类型.
+     * settype.
      *
-     * @param string $type 类型
+     * @param string $type type
      */
     public function setType(string $type): self
     {
@@ -217,7 +217,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 检查是否为语义检索类型.
+     * check是否为语义检索type.
      */
     public function isSemantic(): bool
     {
@@ -225,7 +225,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 检查是否为全文检索类型.
+     * check是否为全文检索type.
      */
     public function isFulltext(): bool
     {
@@ -233,7 +233,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 检查是否为图检索类型.
+     * check是否为图检索type.
      */
     public function isGraph(): bool
     {
@@ -241,7 +241,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * 检查是否为混合检索类型.
+     * check是否为混合检索type.
      */
     public function isHybrid(): bool
     {

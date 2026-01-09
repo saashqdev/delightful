@@ -30,18 +30,18 @@ class FileParser
     }
 
     /**
-     * 解析文件内容.
+     * 解析文件content.
      *
      * @param string $fileUrl 文件URL地址
      * @param bool $textPreprocess 是否进行文本预处理
-     * @return string 解析后的文件内容
-     * @throws Exception 当文件解析失败时
+     * @return string 解析后的文件content
+     * @throws Exception 当文件解析fail时
      */
     public function parse(string $fileUrl, bool $textPreprocess = false): string
     {
-        // 使用md5作为缓存key
+        // 使用md5作为cachekey
         $cacheKey = 'file_parser:parse_' . md5($fileUrl) . '_' . ($textPreprocess ? 1 : 0);
-        // 检查缓存,如果存在则返回缓存内容
+        // checkcache,如果存在则returncachecontent
         if ($this->cache->has($cacheKey)) {
             return $this->cache->get($cacheKey, '');
         }
@@ -55,7 +55,7 @@ class FileParser
             $extension = FileType::getType($fileUrl);
 
             $interface = match ($extension) {
-                // 更多的文件类型支持
+                // 更多的文件type支持
                 'png', 'jpeg', 'jpg' => OcrFileParserDriverInterface::class,
                 'pdf' => PdfFileParserDriverInterface::class,
                 'xlsx', 'xls', 'xlsm' => ExcelFileParserDriverInterface::class,
@@ -77,14 +77,14 @@ class FileParser
                 $res = TextPreprocessUtil::preprocess([TextPreprocessRule::FORMAT_EXCEL], $res);
             }
 
-            // 设置缓存
+            // setcache
             $this->cache->set($cacheKey, $res, 600);
             return $res;
         } catch (Throwable $throwable) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, "[{$fileUrl}] fail to parse: {$throwable->getMessage()}");
         } finally {
             if (isset($tempFile) && file_exists($tempFile)) {
-                unlink($tempFile); // 确保临时文件被删除
+                unlink($tempFile); // 确保临时文件被delete
             }
         }
     }
@@ -94,12 +94,12 @@ class FileParser
      *
      * @param string $url 文件URL地址
      * @param string $tempFile 临时文件路径
-     * @param int $maxSize 文件大小限制（字节），0表示不限制
-     * @throws Exception 当下载失败或文件超限时
+     * @param int $maxSize 文件大小限制（字节），0table示不限制
+     * @throws Exception 当下载fail或文件超限时
      */
     private static function downloadFile(string $url, string $tempFile, int $maxSize = 0): void
     {
-        // 如果是本地文件路径，直接返回
+        // 如果是本地文件路径，直接return
         if (file_exists($url)) {
             return;
         }
@@ -112,7 +112,7 @@ class FileParser
             }
         }
 
-        // 尝试预先检查文件大小
+        // 尝试预先check文件大小
         $sizeKnown = self::checkUrlFileSize($url, $maxSize);
 
         $context = stream_context_create([
@@ -146,7 +146,7 @@ class FileParser
      * @param resource $fileStream 远程文件流资源
      * @param resource $localFile 本地文件流资源
      * @param int $maxSize 文件大小限制（字节）
-     * @throws Exception 当文件大小超限或写入失败时
+     * @throws Exception 当文件大小超限或写入fail时
      */
     private static function downloadWithSizeControl($fileStream, $localFile, int $maxSize): void
     {
@@ -169,17 +169,17 @@ class FileParser
 
             // Write buffer to local file
             if (fwrite($localFile, $buffer) === false) {
-                ExceptionBuilder::throw(FlowErrorCode::Error, message: '写入临时文件失败');
+                ExceptionBuilder::throw(FlowErrorCode::Error, message: '写入临时文件fail');
             }
         }
     }
 
     /**
-     * 检查文件大小是否超限.
+     * check文件大小是否超限.
      *
      * @param string $fileUrl 文件URL地址
-     * @param int $maxSize 文件大小限制（字节），0表示不限制
-     * @return bool true表示已检查大小且在限制内，false表示是chunked传输需要流式下载
+     * @param int $maxSize 文件大小限制（字节），0table示不限制
+     * @return bool truetable示已check大小且在限制内，falsetable示是chunked传输需要流式下载
      * @throws Exception 当文件大小超过限制或文件大小未知且非chunked传输时
      */
     private static function checkUrlFileSize(string $fileUrl, int $maxSize = 0): bool
@@ -197,7 +197,7 @@ class FileParser
             return true;
         }
 
-        // 没有Content-Length，检查是否为chunked传输
+        // 没有Content-Length，check是否为chunked传输
         $transferEncoding = $headers['Transfer-Encoding'] ?? '';
         if (is_array($transferEncoding)) {
             $transferEncoding = end($transferEncoding);

@@ -14,9 +14,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 只有当表存在时才执行索引操作
+        // 只有当table存在时才执行索引操作
         if (Schema::hasTable('delightful_chat_sequences')) {
-            // 检查并创建 idx_object_type_id_refer_message_id 索引
+            // check并create idx_object_type_id_refer_message_id 索引
             $this->createIndexIfNotExists(
                 'delightful_chat_sequences',
                 'idx_object_type_id_refer_message_id',
@@ -24,7 +24,7 @@ return new class extends Migration {
                 ON `delightful_chat_sequences` (object_type, object_id, refer_message_id, seq_id DESC)'
             );
 
-            // 检查并创建 idx_object_type_id_seq_id 索引
+            // check并create idx_object_type_id_seq_id 索引
             $this->createIndexIfNotExists(
                 'delightful_chat_sequences',
                 'idx_object_type_id_seq_id',
@@ -32,7 +32,7 @@ return new class extends Migration {
                 ON `delightful_chat_sequences` (object_type, object_id, seq_id)'
             );
 
-            // 检查并创建 idx_conversation_id_seq_id 索引
+            // check并create idx_conversation_id_seq_id 索引
             $this->createIndexIfNotExists(
                 'delightful_chat_sequences',
                 'idx_conversation_id_seq_id',
@@ -48,7 +48,7 @@ return new class extends Migration {
     public function down(): void
     {
         if (Schema::hasTable('delightful_chat_sequences')) {
-            // 删除索引
+            // delete索引
             $this->dropIndexIfExists('delightful_chat_sequences', 'idx_object_type_id_refer_message_id');
             $this->dropIndexIfExists('delightful_chat_sequences', 'idx_object_type_id_seq_id');
             $this->dropIndexIfExists('delightful_chat_sequences', 'idx_conversation_id_seq_id');
@@ -56,43 +56,43 @@ return new class extends Migration {
     }
 
     /**
-     * 检查索引是否存在，如果不存在则创建索引.
+     * check索引是否存在，如果不存在则create索引.
      *
-     * @param string $table 表名
-     * @param string $indexName 索引名称
-     * @param string $createStatement 创建索引的SQL语句
+     * @param string $table table名
+     * @param string $indexName 索引name
+     * @param string $createStatement create索引的SQL语句
      */
     private function createIndexIfNotExists(string $table, string $indexName, string $createStatement): void
     {
-        // 检查索引是否存在
+        // check索引是否存在
         $indexExists = Db::select(
             "SHOW INDEX FROM `{$table}` WHERE Key_name = ?",
             [$indexName]
         );
 
-        // 只有当索引不存在时才创建
+        // 只有当索引不存在时才create
         if (empty($indexExists)) {
-            // 创建索引
+            // create索引
             Db::statement($createStatement);
         }
     }
 
     /**
-     * 如果索引存在则删除.
+     * 如果索引存在则delete.
      *
-     * @param string $table 表名
-     * @param string $indexName 索引名称
+     * @param string $table table名
+     * @param string $indexName 索引name
      */
     private function dropIndexIfExists(string $table, string $indexName): void
     {
-        // 检查索引是否存在
+        // check索引是否存在
         $indexExists = Db::select(
             "SHOW INDEX FROM `{$table}` WHERE Key_name = ?",
             [$indexName]
         );
 
         if (! empty($indexExists)) {
-            // 删除现有索引
+            // delete现有索引
             Db::statement("DROP INDEX `{$indexName}` ON `{$table}`");
         }
     }

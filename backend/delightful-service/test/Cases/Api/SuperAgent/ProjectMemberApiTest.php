@@ -80,7 +80,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         $this->updateMembers($projectId);
 
-        // 10. 测试文件编辑状态管理功能
+        // 10. 测试文件编辑status管理功能
         $this->fileEditingStatusManagement($fileId);
 
         $this->fileEditingEdgeCases($fileId);
@@ -93,26 +93,26 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 1. 先设置项目成员，确保测试2用户有权限
+        // 1. 先设置项目成员，确保测试2user有权限
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
-        // 2. 切换到有权限的用户测试置顶成功
+        // 2. 切换到有权限的user测试置顶success
         $this->switchUserTest2();
         $this->pinProject($projectId, true);
 
-        // 3. 验证置顶成功
+        // 3. validate置顶success
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
-        // 4. 清空项目成员，使当前用户没有权限
+        // 4. 清null项目成员，使当前user没有权限
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
-        // 5. 切换到没有权限的用户测试权限控制
+        // 5. 切换到没有权限的user测试权限控制
         $this->switchUserTest2();
-        // 测试非项目成员不能置顶 - 应该返回权限错误
-        $this->pinProject($projectId, true, 51202); // 假设51202是权限错误码
+        // 测试非项目成员不能置顶 - 应该return权限error
+        $this->pinProject($projectId, true, 51202); // 假设51202是权限error码
     }
 
     /**
@@ -122,30 +122,30 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 确保用户有权限
+        // 确保user有权限
         $this->switchUserTest1();
         $this->updateMembers($projectId);
         $this->switchUserTest2();
 
-        // 1. 重复置顶同一个项目 - 应该正常处理
+        // 1. 重复置顶同一个项目 - 应该正常handle
         $this->pinProject($projectId, true);
         $this->pinProject($projectId, true); // 重复置顶
 
-        // 验证项目仍然是置顶状态
+        // validate项目仍然是置顶status
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
-        // 2. 重复取消置顶 - 应该正常处理
+        // 2. 重复取消置顶 - 应该正常handle
         $this->pinProject($projectId, false);
         $this->pinProject($projectId, false); // 重复取消置顶
 
-        // 验证项目不是置顶状态
+        // validate项目不是置顶status
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, false);
     }
 
     /**
-     * 测试更新项目成员 - 成功场景.
+     * 测试更新项目成员 - success场景.
      */
     public function testUpdateProjectMembersSuccess(): void
     {
@@ -205,7 +205,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         $this->switchUserTest1();
 
-        // 4. 添加空成员
+        // 4. 添加null成员
         $this->updateEmptyMembers($projectId);
 
         // 5. 添加项目成员
@@ -232,7 +232,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->renameTopic($workspaceId, $projectId, $topicId);
         // 分享话题
         $this->createTopicShare($workspaceId, $projectId, $topicId);
-        // 发送消息
+        // sendmessage
         //        $this->sendMessage($workspaceId, $projectId, $topicId);
         // 项目文件
         $file = $this->attachments($workspaceId, $projectId, $topicId);
@@ -248,10 +248,10 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 10. 测试协作项目创建者列表功能
         //        $this->collaborationProjectCreatorFeature();
 
-        // 11. 清空空成员
+        // 11. 清nullnull成员
         $requestData = ['members' => []];
 
-        // 发送PUT请求
+        // sendPUT请求
         $response = $this->put(self::BASE_URI . "/{$projectId}/members", $requestData, $this->getCommonHeaders());
         $this->assertEquals(1000, $response['code']);
     }
@@ -282,7 +282,7 @@ class ProjectMemberApiTest extends AbstractApiTest
                 ],
             ],
         ];
-        // 发送PUT请求
+        // sendPUT请求
         $response = $this->put(self::BASE_URI . "/{$projectId}/members", $requestData, $this->getCommonHeaders());
         $this->assertNotNull($response, '响应不应该为null');
         $this->assertEquals(1000, $response['code']);
@@ -293,7 +293,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $requestData = [
             'members' => [],
         ];
-        // 发送PUT请求
+        // sendPUT请求
         $response = $this->put(self::BASE_URI . "/{$projectId}/members", $requestData, $this->getCommonHeaders());
         $this->assertEquals($code, $response['code']);
     }
@@ -323,13 +323,13 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data']);
 
-        // 验证响应结构
-        $this->assertArrayHasKey('list', $response['data'], '响应应包含list字段');
-        $this->assertArrayHasKey('total', $response['data'], '响应应包含total字段');
+        // validate响应结构
+        $this->assertArrayHasKey('list', $response['data'], '响应应containlist字段');
+        $this->assertArrayHasKey('total', $response['data'], '响应应containtotal字段');
         if (! is_null($count)) {
             $this->assertEquals(0, count($response['data']['list']));
         } else {
-            $this->assertIsArray($response['data']['list'], 'list应该是数组');
+            $this->assertIsArray($response['data']['list'], 'list应该是array');
             $this->assertIsInt($response['data']['total'], 'total应该是整数');
             $project = $response['data']['list'][0];
             $this->assertArrayHasKey('id', $project);
@@ -359,13 +359,13 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data']);
 
-        // 验证响应结构
-        $this->assertArrayHasKey('list', $response['data'], '响应应包含list字段');
-        $this->assertArrayHasKey('total', $response['data'], '响应应包含total字段');
+        // validate响应结构
+        $this->assertArrayHasKey('list', $response['data'], '响应应containlist字段');
+        $this->assertArrayHasKey('total', $response['data'], '响应应containtotal字段');
         if (! is_null($count)) {
             $this->assertEquals($count, count($response['data']['list']));
         } else {
-            $this->assertIsArray($response['data']['list'], 'list应该是数组');
+            $this->assertIsArray($response['data']['list'], 'list应该是array');
             $this->assertIsInt($response['data']['total'], 'total应该是整数');
             $project = $response['data']['list'][0];
             $this->assertArrayHasKey('id', $project);
@@ -495,7 +495,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 测试文件编辑状态管理 - 完整流程测试.
+     * 测试文件编辑status管理 - 完整流程测试.
      */
     public function fileEditingStatusManagement(string $fileId): void
     {
@@ -504,30 +504,30 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 1. 测试加入编辑
         $this->joinFileEditing($fileId);
 
-        // 2. 测试获取编辑用户数量 - 应该有1个用户在编辑
+        // 2. 测试获取编辑user数量 - 应该有1个user在编辑
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 3. 切换到另一个用户，测试多用户编辑
+        // 3. 切换到另一个user，测试多user编辑
         $this->switchUserTest2();
         $this->joinFileEditing($fileId);
 
-        // 4. 再次获取编辑用户数量 - 应该有2个用户在编辑
+        // 4. 再次获取编辑user数量 - 应该有2个user在编辑
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(2, $editingCount);
 
         // 5. 测试离开编辑
         $this->leaveFileEditing($fileId);
 
-        // 6. 获取编辑用户数量 - 应该只剩1个用户
+        // 6. 获取编辑user数量 - 应该只剩1个user
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 7. 切换回第一个用户，测试权限
+        // 7. 切换回第一个user，测试权限
         $this->switchUserTest1();
         $this->leaveFileEditing($fileId);
 
-        // 8. 最终验证没有用户在编辑
+        // 8. 最终validate没有user在编辑
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(0, $editingCount);
     }
@@ -545,7 +545,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         if ($expectedCode === 1000) {
             $this->assertEquals('ok', $response['message']);
             $this->assertIsArray($response['data']);
-            $this->assertEmpty($response['data']); // join-editing返回空数组
+            $this->assertEmpty($response['data']); // join-editingreturnnullarray
         }
 
         return $response;
@@ -564,14 +564,14 @@ class ProjectMemberApiTest extends AbstractApiTest
         if ($expectedCode === 1000) {
             $this->assertEquals('ok', $response['message']);
             $this->assertIsArray($response['data']);
-            $this->assertEmpty($response['data']); // leave-editing返回空数组
+            $this->assertEmpty($response['data']); // leave-editingreturnnullarray
         }
 
         return $response;
     }
 
     /**
-     * 测试获取编辑用户数量.
+     * 测试获取编辑user数量.
      */
     public function getEditingUsers(string $fileId, int $expectedCode = 1000): int
     {
@@ -598,13 +598,13 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $this->switchUserTest2();
 
-        // 测试无权限加入编辑 - 应该返回错误
-        $this->joinFileEditing($unauthorizedFileId, 51202); // 假设51200是无权限错误码
+        // 测试无权限加入编辑 - 应该returnerror
+        $this->joinFileEditing($unauthorizedFileId, 51202); // 假设51200是无权限error码
 
-        // 测试无权限离开编辑 - 应该返回错误
+        // 测试无权限离开编辑 - 应该returnerror
         $this->leaveFileEditing($unauthorizedFileId, 51202);
 
-        // 测试无权限查询编辑用户 - 应该返回错误
+        // 测试无权限query编辑user - 应该returnerror
         $this->getEditingUsers($unauthorizedFileId, 51202);
     }
 
@@ -615,25 +615,25 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $this->switchUserTest1();
 
-        // 1. 重复加入编辑 - 应该正常处理
+        // 1. 重复加入编辑 - 应该正常handle
         $this->joinFileEditing($fileId);
         $this->joinFileEditing($fileId); // 重复加入
 
-        // 验证用户数量仍然是1
+        // validateuser数量仍然是1
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 2. 重复离开编辑 - 应该正常处理
+        // 2. 重复离开编辑 - 应该正常handle
         $this->leaveFileEditing($fileId);
         $this->leaveFileEditing($fileId); // 重复离开
 
-        // 验证用户数量是0
+        // validateuser数量是0
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(0, $editingCount);
 
         // 3. 测试无效文件ID格式
         $invalidFileId = 'invalid_file_id';
-        $this->joinFileEditing($invalidFileId, 51202); // 假设400是参数错误
+        $this->joinFileEditing($invalidFileId, 51202); // 假设400是parametererror
     }
 
     public function updateFileContent(int $fileId, string $content, int $expectedCode): void
@@ -665,27 +665,27 @@ class ProjectMemberApiTest extends AbstractApiTest
      */
     public function projectPinFeature(string $projectId): void
     {
-        // 确保当前用户是项目成员
+        // 确保当前user是项目成员
         $this->switchUserTest2();
 
         // 1. 测试置顶项目
         $this->pinProject($projectId, true);
 
-        // 2. 验证协作项目列表中项目被置顶
+        // 2. validate协作项目列表中项目被置顶
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
         // 3. 测试取消置顶
         $this->pinProject($projectId, false);
 
-        // 4. 验证协作项目列表中项目不再置顶
+        // 4. validate协作项目列表中项目不再置顶
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, false);
 
-        // 5. 重新置顶项目以测试排序
+        // 5. 重新置顶项目以测试sort
         $this->pinProject($projectId, true);
 
-        // 6. 验证置顶项目排在前面
+        // 6. validate置顶项目排在前面
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyPinnedProjectsAtTop($response);
     }
@@ -707,14 +707,14 @@ class ProjectMemberApiTest extends AbstractApiTest
         if ($expectedCode === 1000) {
             $this->assertEquals('ok', $response['message']);
             $this->assertIsArray($response['data']);
-            $this->assertEmpty($response['data']); // 置顶操作返回空数组
+            $this->assertEmpty($response['data']); // 置顶操作returnnullarray
         }
 
         return $response;
     }
 
     /**
-     * 获取协作项目列表并返回完整响应用于置顶验证.
+     * 获取协作项目列表并return完整响application于置顶validate.
      */
     public function collaborationProjectsWithPinCheck(): array
     {
@@ -725,21 +725,21 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data']);
 
-        // 验证响应结构包含置顶相关字段
-        $this->assertArrayHasKey('list', $response['data'], '响应应包含list字段');
-        $this->assertArrayHasKey('total', $response['data'], '响应应包含total字段');
+        // validate响应结构contain置顶相关字段
+        $this->assertArrayHasKey('list', $response['data'], '响应应containlist字段');
+        $this->assertArrayHasKey('total', $response['data'], '响应应containtotal字段');
 
         if (! empty($response['data']['list'])) {
             $project = $response['data']['list'][0];
-            $this->assertArrayHasKey('is_pinned', $project, '项目应包含is_pinned字段');
-            $this->assertIsBool($project['is_pinned'], 'is_pinned应该是布尔值');
+            $this->assertArrayHasKey('is_pinned', $project, '项目应containis_pinned字段');
+            $this->assertIsBool($project['is_pinned'], 'is_pinned应该是booleanvalue');
         }
 
         return $response;
     }
 
     /**
-     * 验证项目的置顶状态.
+     * validate项目的置顶status.
      */
     public function verifyProjectPinStatus(array $response, string $projectId, bool $expectedPinned): void
     {
@@ -757,12 +757,12 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals(
             $expectedPinned,
             $targetProject['is_pinned'],
-            "项目 {$projectId} 的置顶状态应该为 " . ($expectedPinned ? 'true' : 'false')
+            "项目 {$projectId} 的置顶status应该为 " . ($expectedPinned ? 'true' : 'false')
         );
     }
 
     /**
-     * 验证置顶项目排在列表前面.
+     * validate置顶项目排在列表前面.
      */
     public function verifyPinnedProjectsAtTop(array $response): void
     {
@@ -783,20 +783,20 @@ class ProjectMemberApiTest extends AbstractApiTest
      */
     public function collaborationProjectCreatorFeature(): void
     {
-        // 1. 测试有权限用户获取创建者列表
-        $this->switchUserTest2(); // 确保是有权限的协作用户
+        // 1. 测试有权限user获取创建者列表
+        $this->switchUserTest2(); // 确保是有权限的协作user
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
 
-        // 2. 测试权限控制 - 清空成员后无权限
+        // 2. 测试权限控制 - 清null成员后无权限
         $this->switchUserTest1(); // 切换到项目所有者
-        $this->updateEmptyMembers($this->projectId); // 清空项目成员
+        $this->updateEmptyMembers($this->projectId); // 清null项目成员
 
-        $this->switchUserTest2(); // 切换到无权限用户
+        $this->switchUserTest2(); // 切换到无权限user
         $emptyResponse = $this->getCollaborationProjectCreators();
         $this->verifyEmptyCreatorListResponse($emptyResponse);
 
-        // 3. 恢复项目成员状态，以免影响后续测试
+        // 3. 恢复项目成员status，以免影响后续测试
         $this->switchUserTest1();
         $this->updateMembers($this->projectId);
     }
@@ -808,20 +808,20 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 1. 先设置项目成员，确保测试2用户有权限
+        // 1. 先设置项目成员，确保测试2user有权限
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
-        // 2. 切换到有权限的用户测试获取创建者列表成功
+        // 2. 切换到有权限的user测试获取创建者列表success
         $this->switchUserTest2();
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
 
-        // 3. 清空项目成员，使当前用户没有权限
+        // 3. 清null项目成员，使当前user没有权限
         $this->switchUserTest1();
         $this->updateEmptyMembers($projectId);
 
-        // 4. 切换到没有权限的用户测试权限控制
+        // 4. 切换到没有权限的user测试权限控制
         $this->switchUserTest2();
         $emptyResponse = $this->getCollaborationProjectCreators();
         //        $this->verifyEmptyCreatorListResponse($emptyResponse);
@@ -832,19 +832,19 @@ class ProjectMemberApiTest extends AbstractApiTest
      */
     public function testCollaborationProjectCreatorsEdgeCases(): void
     {
-        // 确保用户有权限
+        // 确保user有权限
         $this->switchUserTest1();
         $this->updateMembers($this->projectId);
         $this->switchUserTest2();
 
-        // 1. 多次调用API - 应该返回一致结果
+        // 1. 多次callAPI - 应该return一致结果
         $response1 = $this->getCollaborationProjectCreators();
         $response2 = $this->getCollaborationProjectCreators();
 
         $this->assertEquals($response1['code'], $response2['code']);
         $this->assertEquals(count($response1['data']), count($response2['data']));
 
-        // 2. 验证创建者去重 - 同一创建者只应该出现一次
+        // 2. validate创建者去重 - 同一创建者只应该出现一次
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListDeduplication($response);
     }
@@ -868,48 +868,48 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * 验证创建者列表响应结构.
+     * validate创建者列表响应结构.
      */
     public function verifyCreatorListResponse(array $response): void
     {
         $this->assertEquals(1000, $response['code']);
         $this->assertEquals('ok', $response['message']);
-        $this->assertIsArray($response['data'], '响应数据应该是数组');
+        $this->assertIsArray($response['data'], '响应数据应该是array');
 
-        // 验证至少有一个创建者
+        // validate至少有一个创建者
         $this->assertGreaterThan(0, count($response['data']), '应该至少有一个创建者');
 
-        // 验证创建者数据结构
+        // validate创建者数据结构
         $creator = $response['data'][0];
-        $this->assertArrayHasKey('id', $creator, '创建者应包含id字段');
-        $this->assertArrayHasKey('name', $creator, '创建者应包含name字段');
-        $this->assertArrayHasKey('user_id', $creator, '创建者应包含user_id字段');
-        $this->assertArrayHasKey('avatar_url', $creator, '创建者应包含avatar_url字段');
+        $this->assertArrayHasKey('id', $creator, '创建者应containid字段');
+        $this->assertArrayHasKey('name', $creator, '创建者应containname字段');
+        $this->assertArrayHasKey('user_id', $creator, '创建者应containuser_id字段');
+        $this->assertArrayHasKey('avatar_url', $creator, '创建者应containavatar_url字段');
 
-        // 验证字段类型
-        $this->assertIsString($creator['id'], 'id应该是字符串');
-        $this->assertIsString($creator['name'], 'name应该是字符串');
-        $this->assertIsString($creator['user_id'], 'user_id应该是字符串');
-        $this->assertIsString($creator['avatar_url'], 'avatar_url应该是字符串');
+        // validate字段type
+        $this->assertIsString($creator['id'], 'id应该是string');
+        $this->assertIsString($creator['name'], 'name应该是string');
+        $this->assertIsString($creator['user_id'], 'user_id应该是string');
+        $this->assertIsString($creator['avatar_url'], 'avatar_url应该是string');
 
-        // 验证必填字段不为空
-        $this->assertNotEmpty($creator['id'], 'id不应该为空');
-        $this->assertNotEmpty($creator['user_id'], 'user_id不应该为空');
+        // validate必填字段不为null
+        $this->assertNotEmpty($creator['id'], 'id不应该为null');
+        $this->assertNotEmpty($creator['user_id'], 'user_id不应该为null');
     }
 
     /**
-     * 验证空创建者列表响应.
+     * validatenull创建者列表响应.
      */
     public function verifyEmptyCreatorListResponse(array $response): void
     {
         $this->assertEquals(1000, $response['code']);
         $this->assertEquals('ok', $response['message']);
-        $this->assertIsArray($response['data'], '响应数据应该是数组');
-        $this->assertEquals(0, count($response['data']), '无权限时应该返回空数组');
+        $this->assertIsArray($response['data'], '响应数据应该是array');
+        $this->assertEquals(0, count($response['data']), '无权限时应该returnnullarray');
     }
 
     /**
-     * 验证创建者列表去重.
+     * validate创建者列表去重.
      */
     public function verifyCreatorListDeduplication(array $response): void
     {
@@ -946,9 +946,9 @@ class ProjectMemberApiTest extends AbstractApiTest
             $memberEntity->setStatus(MemberStatus::ACTIVE);
 
             $projectMemberDomainService->addInternalMembers([$memberEntity], $this->getOrganizationCode());
-            echo "清理项目成员数据完成: {$projectId}\n";
+            echo "清理项目成员数据complete: {$projectId}\n";
         } catch (Exception $e) {
-            echo '清理项目成员数据失败: ' . $e->getMessage() . "\n";
+            echo '清理项目成员数据fail: ' . $e->getMessage() . "\n";
         }
     }
 }

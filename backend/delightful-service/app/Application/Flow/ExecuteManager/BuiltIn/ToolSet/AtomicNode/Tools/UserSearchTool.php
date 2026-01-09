@@ -36,7 +36,7 @@ class UserSearchTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '用户搜索。不允许搜索全部人员，一定是具有指定过滤值';
+        return 'usersearch。不允许search全部人员，一定是具有指定filtervalue';
     }
 
     public function getCallback(): ?Closure
@@ -92,8 +92,8 @@ class UserSearchTool extends AbstractBuiltInTool
         "filter_type": {
             "type": "string",
             "key": "filter_type",
-            "title": "过滤类型",
-            "description": "过滤类型。支持的过滤类型有：all、any。分别代表 所有条件、任意条件。默认是 all",
+            "title": "filtertype",
+            "description": "filtertype。支持的filtertype有：all、any。分别代table 所有条件、任意条件。默认是 all",
             "required": null,
             "value": null,
             "encryption": false,
@@ -104,8 +104,8 @@ class UserSearchTool extends AbstractBuiltInTool
         "filters": {
             "type": "array",
             "key": "filters",
-            "title": "过滤条件",
-            "description": "过滤条件",
+            "title": "filter条件",
+            "description": "filter条件",
             "required": null,
             "value": null,
             "encryption": false,
@@ -125,8 +125,8 @@ class UserSearchTool extends AbstractBuiltInTool
                     "left": {
                         "type": "string",
                         "key": "field",
-                        "title": "过滤字段",
-                        "description": "过滤字段。可选枚举有：username、work_number、position、position、department_name、group_name。分别代表  用户姓名、用户工号、用户岗位、用户手机号、部门名称、群聊名称",
+                        "title": "filterfield",
+                        "description": "filterfield。可选枚举有：username、work_number、position、position、department_name、group_name。分别代table  user姓名、user工号、user岗位、user手机号、departmentname、群聊name",
                         "required": null,
                         "value": null,
                         "encryption": false,
@@ -137,8 +137,8 @@ class UserSearchTool extends AbstractBuiltInTool
                     "operator": {
                         "type": "string",
                         "key": "operator",
-                        "title": "过滤符",
-                        "description": "过滤符。可选枚举有：equals、no_equals、contains、no_contains。分别代表 等于、不等于、包含、不包含",
+                        "title": "filter符",
+                        "description": "filter符。可选枚举有：equals、no_equals、contains、no_contains。分别代table 等于、不等于、包含、不包含",
                         "required": null,
                         "value": null,
                         "encryption": false,
@@ -149,8 +149,8 @@ class UserSearchTool extends AbstractBuiltInTool
                     "right": {
                         "type": "string",
                         "key": "value",
-                        "title": "过滤值",
-                        "description": "过滤值",
+                        "title": "filtervalue",
+                        "description": "filtervalue",
                         "required": null,
                         "value": null,
                         "encryption": false,

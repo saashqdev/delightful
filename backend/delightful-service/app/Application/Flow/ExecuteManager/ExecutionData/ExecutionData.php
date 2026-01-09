@@ -73,23 +73,23 @@ class ExecutionData
     private array $simplifiedVertexResults = [];
 
     /**
-     * 变量.
+     * variable.
      */
     private array $variables = [];
 
     /**
-     * 附件。流程执行时产生的所有文件记录.
+     * 附件。流程执行时产生的所有文件record.
      * @var array<string, AbstractAttachment>
      */
     private array $attachmentRecords = [];
 
     /**
-     * 真实会话ID.
+     * 真实sessionID.
      */
     private string $conversationId;
 
     /**
-     * 原始会话ID.
+     * 原始sessionID.
      */
     private string $originConversationId = '';
 
@@ -99,7 +99,7 @@ class ExecutionData
     private ?string $topicId = null;
 
     /**
-     * 用作传递一些特殊的参数，预留.
+     * 用作传递一些特殊的parameter，预留.
      */
     private array $ext = [];
 
@@ -127,10 +127,10 @@ class ExecutionData
     private FlowStreamStatus $flowStreamStatus = FlowStreamStatus::Pending;
 
     /**
-     * 发送方的冗余信息.
-     * $userEntity. 发送方的用户信息.
-     * $seqEntity. 发送方的会话窗口信息.
-     * $messageEntity. 发送方的消息信息.
+     * 发送方的冗余info.
+     * $userEntity. 发送方的userinfo.
+     * $seqEntity. 发送方的session窗口info.
+     * $messageEntity. 发送方的messageinfo.
      */
     private array $senderEntities = [];
 
@@ -143,7 +143,7 @@ class ExecutionData
     private ?DelightfulFlowEntity $delightfulFlowEntity = null;
 
     /**
-     * 当前 agent 的指令配置列表.
+     * 当前 agent 的指令configurationlist.
      * @var array<InstructionConfig>
      */
     private array $instructionConfigs = [];
@@ -167,7 +167,7 @@ class ExecutionData
         $this->id = $id ?? 'e_' . IdGenerator::getUniqueId32();
         $this->conversationId = $conversationId ?? 'c_' . IdGenerator::getUniqueId32();
         $this->originConversationId = $originConversationId ?? $this->conversationId;
-        // 初始化全局变量到变量中
+        // 初始化全局variable到variable中
         $this->initGlobalVariable();
     }
 
@@ -566,7 +566,7 @@ class ExecutionData
     }
 
     /**
-     * 获取当前 agent 的 user_id.
+     * get当前 agent 的 user_id.
      */
     public function getAgentUserId(): ?string
     {

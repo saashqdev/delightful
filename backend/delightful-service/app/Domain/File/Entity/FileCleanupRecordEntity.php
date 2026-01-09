@@ -43,7 +43,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 设置ID.
+     * setID.
      */
     public function setId(int $id): self
     {
@@ -52,7 +52,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 获取组织编码.
+     * getorganization编码.
      */
     public function getOrganizationCode(): string
     {
@@ -60,7 +60,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 设置组织编码.
+     * setorganization编码.
      */
     public function setOrganizationCode(string $organizationCode): self
     {
@@ -69,7 +69,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 获取文件key.
+     * get文件key.
      */
     public function getFileKey(): string
     {
@@ -77,7 +77,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 设置文件key.
+     * set文件key.
      */
     public function setFileKey(string $fileKey): self
     {
@@ -86,7 +86,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 获取文件名称.
+     * get文件name.
      */
     public function getFileName(): string
     {
@@ -94,7 +94,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 设置文件名称.
+     * set文件name.
      */
     public function setFileName(string $fileName): self
     {
@@ -103,7 +103,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 获取文件大小.
+     * get文件大小.
      */
     public function getFileSize(): int
     {
@@ -111,7 +111,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 设置文件大小.
+     * set文件大小.
      */
     public function setFileSize(int $fileSize): self
     {
@@ -120,7 +120,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 获取存储桶类型.
+     * get存储桶type.
      */
     public function getBucketType(): string
     {
@@ -128,7 +128,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 设置存储桶类型.
+     * set存储桶type.
      */
     public function setBucketType(string $bucketType): self
     {
@@ -137,7 +137,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 获取来源类型.
+     * get来源type.
      */
     public function getSourceType(): string
     {
@@ -145,7 +145,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 设置来源类型.
+     * set来源type.
      */
     public function setSourceType(string $sourceType): self
     {
@@ -154,7 +154,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 获取来源ID.
+     * get来源ID.
      */
     public function getSourceId(): ?string
     {
@@ -162,7 +162,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 设置来源ID.
+     * set来源ID.
      */
     public function setSourceId(?string $sourceId): self
     {
@@ -171,7 +171,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 获取过期时间.
+     * get过期time.
      */
     public function getExpireAt(): string
     {
@@ -179,7 +179,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 设置过期时间.
+     * set过期time.
      */
     public function setExpireAt(string $expireAt): self
     {
@@ -188,7 +188,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 获取状态.
+     * getstatus.
      */
     public function getStatus(): int
     {
@@ -196,7 +196,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 设置状态.
+     * setstatus.
      */
     public function setStatus(int $status): self
     {
@@ -205,7 +205,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 获取重试次数.
+     * get重试次数.
      */
     public function getRetryCount(): int
     {
@@ -213,7 +213,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 设置重试次数.
+     * set重试次数.
      */
     public function setRetryCount(int $retryCount): self
     {
@@ -222,7 +222,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 获取错误信息.
+     * geterrorinfo.
      */
     public function getErrorMessage(): ?string
     {
@@ -230,7 +230,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 设置错误信息.
+     * seterrorinfo.
      */
     public function setErrorMessage(?string $errorMessage): self
     {
@@ -239,7 +239,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 获取创建时间.
+     * getcreatetime.
      */
     public function getCreatedAt(): ?string
     {
@@ -247,7 +247,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 设置创建时间.
+     * setcreatetime.
      */
     public function setCreatedAt(?string $createdAt): self
     {
@@ -256,7 +256,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 获取更新时间.
+     * getupdatetime.
      */
     public function getUpdatedAt(): ?string
     {
@@ -264,7 +264,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 设置更新时间.
+     * setupdatetime.
      */
     public function setUpdatedAt(?string $updatedAt): self
     {
@@ -273,7 +273,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 检查是否已过期.
+     * check是否已过期.
      */
     public function isExpired(): bool
     {
@@ -281,7 +281,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 检查是否待清理状态.
+     * check是否待清理status.
      */
     public function isPending(): bool
     {
@@ -289,7 +289,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 检查是否已清理.
+     * check是否已清理.
      */
     public function isCleaned(): bool
     {
@@ -297,7 +297,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 检查是否清理失败.
+     * check是否清理fail.
      */
     public function isFailed(): bool
     {
@@ -305,7 +305,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * 检查是否可以重试.
+     * check是否可以重试.
      */
     public function canRetry(int $maxRetries = 3): bool
     {

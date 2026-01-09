@@ -21,23 +21,23 @@ use Hyperf\Codec\Json;
  * 路径格式说明：
  * - 工作区相对路径 (workspace-relative): .asr_recordings/session_xxx 或 录音总结_xxx
  * - 项目工作目录 (work directory): project_123/workspace
- * - 组织码+APP_ID+bucket_md5前缀 (full prefix): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/
+ * - organization码+APP_ID+bucket_md5前缀 (full prefix): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/
  * - 完整路径/file_key (full path): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx
  */
 class AsrAssembler
 {
     /**
-     * 创建目录实体.
+     * create目录实体.
      *
-     * @param string $userId 用户ID
-     * @param string $organizationCode 组织编码
+     * @param string $userId userID
+     * @param string $organizationCode organization编码
      * @param int $projectId 项目ID
      * @param string $relativePath 相对路径（如：.asr_recordings/task_123 或 录音总结_xxx）
-     * @param string $fullPrefix 完整前缀（组织码+APP_ID+bucket_md5，如：DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/）
+     * @param string $fullPrefix 完整前缀（organization码+APP_ID+bucket_md5，如：DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/）
      * @param string $workDir 工作目录
      * @param int $rootDirectoryId 根目录ID
      * @param bool $isHidden 是否为隐藏目录
-     * @param null|string $taskKey 任务键（仅隐藏目录需要）
+     * @param null|string $taskKey task键（仅隐藏目录需要）
      */
     public static function createDirectoryEntity(
         string $userId,
@@ -101,7 +101,7 @@ class AsrAssembler
      *
      * 转换关系: file_key = fullPrefix + workDir + "/" + relativePath
      *
-     * @param string $fullPrefix 组织码+APP_ID+bucket_md5前缀 (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
+     * @param string $fullPrefix organization码+APP_ID+bucket_md5前缀 (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
      * @param string $workDir 项目工作目录 (如: project_123/workspace)
      * @param string $relativePath 工作区相对路径 (如: .asr_recordings/session_xxx)
      * @return string 完整 file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
@@ -117,7 +117,7 @@ class AsrAssembler
     /**
      * 从 file_key 提取工作区相对路径.
      *
-     * 将完整的 file_key 转换为工作区相对路径，用于沙箱 API 调用和界面展示
+     * 将完整的 file_key 转换为工作区相对路径，用于沙箱 API call和界面展示
      * 转换关系: relativePath = extractWorkspaceRelativePath(file_key)
      *
      * @param string $fileKey 完整 file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
@@ -134,7 +134,7 @@ class AsrAssembler
             // 提取 workspace/ 后面的部分
             $relativePath = substr($normalizedPath, $workspacePos + 11); // 11 = strlen('/workspace/')
 
-            // 如果相对路径不为空，返回相对路径
+            // 如果相对路径不为空，return相对路径
             if (! empty($relativePath)) {
                 return $relativePath;
             }
@@ -148,7 +148,7 @@ class AsrAssembler
             }
         }
 
-        // 如果都没找到workspace标识，直接返回原始路径（可能已经是相对路径）
+        // 如果都没找到workspace标识，直接return原始路径（可能已经是相对路径）
         return $normalizedPath;
     }
 }

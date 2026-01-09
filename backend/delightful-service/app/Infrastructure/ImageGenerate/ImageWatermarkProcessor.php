@@ -21,12 +21,12 @@ use Hyperf\Di\Annotation\Inject;
 use Psr\Log\LoggerInterface;
 
 /**
- * 图片水印处理器
- * 统一处理各种格式图片的水印添加.
+ * 图片水印handle器
+ * 统一handle各种格式图片的水印添加.
  */
 class ImageWatermarkProcessor
 {
-    public const WATERMARK_TEXT = '麦吉 AI 生成';
+    public const WATERMARK_TEXT = '麦吉 AI generate';
 
     #[Inject]
     protected LoggerInterface $logger;
@@ -52,7 +52,7 @@ class ImageWatermarkProcessor
         $detectedFormat = $this->detectImageFormat($imageData);
         $targetFormat = $originalFormat !== 'jpeg' ? $originalFormat : $detectedFormat;
 
-        // 使用统一的水印处理方法
+        // 使用统一的水印handlemethod
         if ($imageGenerateRequest->isAddWatermark()) {
             $imageData = $this->addWaterMarkHandler($imageData, $imageGenerateRequest, $targetFormat);
         }
@@ -71,7 +71,7 @@ class ImageWatermarkProcessor
 
     /**
      * 为URL格式图片添加水印
-     * 可选择返回格式：URL 或 base64.
+     * 可选择return格式：URL 或 base64.
      */
     public function addWatermarkToUrl(string $imageUrl, ImageGenerateRequest $imageGenerateRequest): string
     {
@@ -88,7 +88,7 @@ class ImageWatermarkProcessor
             $implicitWatermark
         );
 
-        // 根据实际输出格式生成正确的base64前缀
+        // 根据实际输出格式generate正确的base64前缀
         $outputPrefix = $this->generateBase64Prefix($imageData);
         return $this->processBase64Images($outputPrefix . base64_encode($xmpWatermarkedData), $imageGenerateRequest);
     }
@@ -114,7 +114,7 @@ class ImageWatermarkProcessor
 
         $image = imagecreatefromstring($imageData);
         if ($image === false) {
-            throw new Exception('无法解析URL图片数据: ');
+            throw new Exception('无法parseURL图片数据: ');
         }
         $watermarkConfig = $imageGenerateRequest->getWatermarkConfig();
         // 添加视觉水印
@@ -183,11 +183,11 @@ class ImageWatermarkProcessor
             imagettftext($image, $ttfFontSize, 0, $x, $ttfY, $fontColor, $fontFile, $text);
         } else {
             // 降级使用内置字体（仅支持ASCII字符）
-            // 内置字体的Y坐标是文字顶部，需要从基线位置转换
-            $builtinY = $y - (int) ($fontSize * 0.8); // 从基线位置转换为顶部位置
+            // 内置字体的Y坐标是文字顶部，需要从基线位置convert
+            $builtinY = $y - (int) ($fontSize * 0.8); // 从基线位置convert为顶部位置
             imagestring($image, 5, $x, $builtinY, $text, $fontColor);
 
-            // 如果文本包含中文但没有TTF字体，记录警告
+            // 如果文本contain中文但没有TTF字体，记录warning
             if ($this->fontProvider->containsChinese($text)) {
                 $this->logger->warning('Chinese text detected but TTF font not available, may display incorrectly');
             }
@@ -227,14 +227,14 @@ class ImageWatermarkProcessor
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
             $bbox = imagettfbbox($ttfFontSize, 0, $fontFile, $text);
             $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // 增加20%安全边距
-            $textHeight = (int) abs($bbox[1] - $bbox[7]); // 使用绝对值确保高度为正
+            $textHeight = (int) abs($bbox[1] - $bbox[7]); // 使用绝对value确保高度为正
 
             // TTF字体的下降部分（descender）
             $descender = (int) abs($bbox[1]); // 基线以下的部分
             $ascender = (int) abs($bbox[7]);  // 基线以上的部分
             $totalTextHeight = $descender + $ascender;
         } else {
-            // 降级使用估算方法
+            // 降级使用估算method
             // 对于中文字符，每个字符宽度约等于字体大小
             $chineseCharCount = mb_strlen($text, 'UTF-8');
             $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // 增加安全边距
@@ -244,7 +244,7 @@ class ImageWatermarkProcessor
             $totalTextHeight = $textHeight;
         }
 
-        // 动态边距：基于字体大小计算，确保足够的空间
+        // 动态边距：基于字体大小计算，确保足够的null间
         $margin = max(20, (int) ($fontSize * 0.8));
 
         switch ($position) {
@@ -356,7 +356,7 @@ class ImageWatermarkProcessor
                     break;
             }
         } catch (Exception $e) {
-            // 编码失败时使用PNG兜底
+            // 编码fail时使用PNG兜底
             $this->logger->error('Image encoding failed, falling back to PNG', [
                 'format' => $format,
                 'error' => $e->getMessage(),
@@ -407,12 +407,12 @@ class ImageWatermarkProcessor
             }
         }
 
-        // 默认返回jpeg
+        // 默认returnjpeg
         return 'jpeg';
     }
 
     /**
-     * 根据格式生成base64前缀.
+     * 根据格式generatebase64前缀.
      */
     private function generateBase64Prefix(string $format): string
     {
@@ -432,14 +432,14 @@ class ImageWatermarkProcessor
         try {
             $subDir = 'open';
 
-            // 直接使用已包含XMP水印的base64数据
+            // 直接使用已containXMP水印的base64数据
             $uploadFile = new UploadFile($base64Image, $subDir, '');
 
             $fileDomainService->uploadByCredential($organizationCode, $uploadFile, StorageBucketType::Public);
 
             $fileLink = $fileDomainService->getLink($organizationCode, $uploadFile->getKey(), StorageBucketType::Public);
 
-            // 设置对象元数据作为备用方案
+            // 设置object元数据作为备用方案
             $validityPeriod = $imageGenerateRequest->getValidityPeriod();
             $metadataContent = [];
             if ($validityPeriod !== null) {

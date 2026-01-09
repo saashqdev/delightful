@@ -276,7 +276,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * 测试并行调度节点 - Test parallel node scheduling with coroutine ID tracking.
+     * test并行调度节点 - Test parallel node scheduling with coroutine ID tracking.
      */
     public function test1(): void
     {
@@ -326,7 +326,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因为vertex2的执行时间比vertex3长，所以vertex3会先执行，先输出结果
+        // 因为vertex2的执行time比vertex3长，所以vertex3会先执行，先输出result
         $this->assertEquals(['vertex1', 'vertex3', 'vertex2'], array_keys($result));
 
         // Verify concurrent execution - vertex2 and vertex3 should run in different coroutines
@@ -380,7 +380,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因为vertex3的执行时间比vertex2长，所以vertex2会先执行，先输出结果
+        // 因为vertex3的执行time比vertex2长，所以vertex2会先执行，先输出result
         $this->assertEquals(['vertex1', 'vertex2', 'vertex3'], array_keys($result));
 
         // Verify concurrent execution again
@@ -390,7 +390,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * 测试条件调度节点.
+     * test条件调度节点.
      */
     public function test2(): void
     {
@@ -466,7 +466,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * 测试并发调度且等待父节点完成.
+     * test并发调度且等待父节点完成.
      * root -> vertex2
      * root -> vertex3
      * vertex2 -> vertex5
@@ -527,7 +527,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * 测试并发+条件调度节点.
+     * test并发+条件调度节点.
      * root -> vertex2
      * root -> vertex3
      * vertex2 -> vertex5
@@ -588,7 +588,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * 测试非并发模式.
+     * test非并发模式.
      * vertex1 -> vertex2
      * vertex1 -> vertex3
      * vertex2 -> vertex4
@@ -667,7 +667,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * 测试非并发模式.
+     * test非并发模式.
      * vertex1 -> vertex2
      * vertex2 -> vertex3.
      */
@@ -717,7 +717,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * 测试非并发模式.
+     * test非并发模式.
      * vertex1 -> vertex2（不调度）
      * vertex1 -> vertex3（调度）.
      * vertex1 -> vertex4（不调度）.
@@ -778,7 +778,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * 测试并行调度节点.
+     * test并行调度节点.
      */
     public function test8(): void
     {
@@ -839,7 +839,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因为vertex2的执行时间比vertex3长，所以vertex3会先执行，先输出结果
+        // 因为vertex2的执行time比vertex3长，所以vertex3会先执行，先输出result
         $this->assertEquals(['vertex1', 'vertex3', 'vertex5', 'vertex2', 'vertex4', 'vertex6'], array_keys($result));
     }
 

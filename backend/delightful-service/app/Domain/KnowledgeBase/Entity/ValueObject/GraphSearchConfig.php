@@ -11,84 +11,84 @@ use App\Infrastructure\Core\AbstractValueObject;
 use InvalidArgumentException;
 
 /**
- * 图搜索配置值对象
+ * 图searchconfigurationvalueobject
  *
- * 包含图搜索的相关配置参数，如 API 端点、认证信息、超时设置等
+ * 包含图search的相关configurationparameter，如 API 端点、authinfo、超时set等
  */
 class GraphSearchConfig extends AbstractValueObject
 {
     /**
      * 关系权重.
      *
-     * 图搜索中关系的权重，用于计算最终相似度分数
+     * 图search中关系的权重，用于计算最终相似度分数
      */
     private float $relationWeight = 0.5;
 
     /**
-     * 最大搜索深度.
+     * 最大search深度.
      *
-     * 图搜索的最大深度，即从起始节点开始，最多搜索几跳关系
+     * 图search的最大深度，即从起始节点开始，最多search几跳关系
      */
     private int $maxDepth = 2;
 
     /**
-     * 是否包含属性.
+     * 是否包含property.
      *
-     * 是否在搜索结果中包含节点和关系的属性
+     * 是否在searchresult中包含节点和关系的property
      */
     private bool $includeProperties = true;
 
     /**
      * API 端点.
      *
-     * 图搜索服务的 API 端点
+     * 图searchservice的 API 端点
      */
     private string $apiEndpoint = '';
 
     /**
      * API 密钥.
      *
-     * 访问图搜索服务的 API 密钥
+     * 访问图searchservice的 API 密钥
      */
     private string $apiKey = '';
 
     /**
-     * 超时时间（秒）.
+     * 超时time（秒）.
      *
-     * API 请求的超时时间，单位为秒
+     * API 请求的超时time，单位为秒
      */
     private float $timeout = 5.0;
 
     /**
      * 重试次数.
      *
-     * API 请求失败时的重试次数
+     * API 请求fail时的重试次数
      */
     private int $retryCount = 3;
 
     /**
-     * 关系类型.
+     * 关系type.
      *
-     * 搜索时考虑的关系类型列表，为空表示所有类型
+     * search时考虑的关系typelist，为空table示所有type
      */
     private array $relationTypes = [];
 
     /**
-     * 节点类型.
+     * 节点type.
      *
-     * 搜索时考虑的节点类型列表，为空表示所有类型
+     * search时考虑的节点typelist，为空table示所有type
      */
     private array $nodeTypes = [];
 
     /**
-     * 结果限制.
+     * result限制.
      *
-     * 返回的最大结果数量
+     * return的最大result数量
      */
     private int $limit = 10;
 
     /**
-     * 获取关系权重.
+     * get关系权重.
      */
     public function getRelationWeight(): float
     {
@@ -96,7 +96,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 设置关系权重.
+     * set关系权重.
      */
     public function setRelationWeight(float $relationWeight): self
     {
@@ -108,7 +108,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 获取最大搜索深度.
+     * get最大search深度.
      */
     public function getMaxDepth(): int
     {
@@ -116,7 +116,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 设置最大搜索深度.
+     * set最大search深度.
      */
     public function setMaxDepth(int $maxDepth): self
     {
@@ -128,7 +128,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 是否包含属性.
+     * 是否包含property.
      */
     public function isIncludeProperties(): bool
     {
@@ -136,7 +136,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 设置是否包含属性.
+     * set是否包含property.
      */
     public function setIncludeProperties(bool $includeProperties): self
     {
@@ -145,7 +145,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 获取 API 端点.
+     * get API 端点.
      */
     public function getApiEndpoint(): string
     {
@@ -153,7 +153,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 设置 API 端点.
+     * set API 端点.
      */
     public function setApiEndpoint(string $apiEndpoint): self
     {
@@ -162,7 +162,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 获取 API 密钥.
+     * get API 密钥.
      */
     public function getApiKey(): string
     {
@@ -170,7 +170,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 设置 API 密钥.
+     * set API 密钥.
      */
     public function setApiKey(string $apiKey): self
     {
@@ -179,7 +179,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 获取超时时间.
+     * get超时time.
      */
     public function getTimeout(): float
     {
@@ -187,7 +187,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 设置超时时间.
+     * set超时time.
      */
     public function setTimeout(float $timeout): self
     {
@@ -199,7 +199,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 获取重试次数.
+     * get重试次数.
      */
     public function getRetryCount(): int
     {
@@ -207,7 +207,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 设置重试次数.
+     * set重试次数.
      */
     public function setRetryCount(int $retryCount): self
     {
@@ -219,7 +219,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 获取关系类型.
+     * get关系type.
      */
     public function getRelationTypes(): array
     {
@@ -227,7 +227,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 设置关系类型.
+     * set关系type.
      */
     public function setRelationTypes(array $relationTypes): self
     {
@@ -236,7 +236,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 获取节点类型.
+     * get节点type.
      */
     public function getNodeTypes(): array
     {
@@ -244,7 +244,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 设置节点类型.
+     * set节点type.
      */
     public function setNodeTypes(array $nodeTypes): self
     {
@@ -253,7 +253,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 获取结果限制.
+     * getresult限制.
      */
     public function getLimit(): int
     {
@@ -261,7 +261,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 设置结果限制.
+     * setresult限制.
      */
     public function setLimit(int $limit): self
     {
@@ -273,7 +273,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 创建默认配置.
+     * create默认configuration.
      */
     public static function createDefault(): self
     {
@@ -281,7 +281,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 从数组创建配置.
+     * 从arraycreateconfiguration.
      */
     public static function fromArray(array $config): self
     {
@@ -331,7 +331,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * 转换为数组.
+     * 转换为array.
      */
     public function toArray(): array
     {

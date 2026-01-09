@@ -109,7 +109,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
         $chatMessage->setMessage($message);
         $chatMessage->setAttachments($attachments);
 
-        // 加载用户扩展信息
+        // 加载user扩展info
         $this->setUserExtInfo($chatMessage);
 
         return $chatMessage;
@@ -134,7 +134,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendOneOnOneChatMessages($param);
             } catch (Throwable $throwable) {
-                // 钉钉 下载图片时间较长，超过了3000ms，网关直接返回了超时错误。发送消息此时跳过
+                // 钉钉 下载图片time较长，超过了3000ms，网关直接return了超时error。发送message此时跳过
                 simple_log('SendOneOnOneChatMessagesError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -152,7 +152,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendGroupMessage($param);
             } catch (Throwable $throwable) {
-                // 钉钉 下载图片时间较长，超过了3000ms，网关直接返回了超时错误。发送消息此时跳过
+                // 钉钉 下载图片time较长，超过了3000ms，网关直接return了超时error。发送message此时跳过
                 simple_log('SendGroupMessageError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -161,9 +161,9 @@ class DingRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * 通过手机号获取第三方用户id.
+     * 通过手机号get第三方userid.
      * @param string $mobile 手机号码
-     * @return string 第三方用户id，返回格式
+     * @return string 第三方userid，return格式
      */
     public function getThirdPlatformUserIdByMobiles(string $mobile): string
     {
@@ -185,7 +185,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * 创建场景群.
+     * create场景群.
      */
     public function createSceneGroup(ThirdPlatformCreateSceneGroup $params): string
     {
@@ -207,7 +207,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * 创建普通群组.
+     * create普通群组.
      * @see https://oapi.dingtalk.com/chat/create
      */
     public function createGroup(ThirdPlatformCreateGroup $params): string
@@ -243,7 +243,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
     private function setUserExtInfo(ThirdPlatformChatMessage $thirdPlatformChatMessage): void
     {
-        // 缓存起来
+        // cache起来
         $cacheKey = "ding_user_ext_info_{$thirdPlatformChatMessage->getUserId()}";
         if ($cacheValue = $this->cache->get($cacheKey)) {
             $userExtInfo = unserialize($cacheValue);
@@ -253,7 +253,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             }
         }
 
-        // 获取用户信息
+        // getuserinfo
         $getUserInfoByUserIdParameter = new GetUserInfoByUserIdParameter($this->openDevFactory->accessTokenEndpoint->get());
         $getUserInfoByUserIdParameter->setUserId($thirdPlatformChatMessage->getUserId());
         $userInfo = $this->openDevFactory->userEndpoint->getUserInfoByUserId($getUserInfoByUserIdParameter);
@@ -265,7 +265,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             realName: $userInfo->getName(),
         );
 
-        // 获取用户的所有部门上级
+        // getuser的所有department上级
         $param = new GetAllParentDepartmentByUserParameter($this->openDevFactory->accessTokenEndpoint->get());
         $param->setUserId($thirdPlatformChatMessage->getUserId());
         $list = $this->openDevFactory->departmentEndpoint->getAllParentDepartmentByUser($param);
@@ -274,7 +274,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
          * @var AllParentDepartmentResult $allParentDepartmentResult
          */
         foreach ($list as $deptId => $allParentDepartmentResult) {
-            // 获取部门信息
+            // getdepartmentinfo
             $getDeptByIdParameter = new GetDeptByIdParameter($this->openDevFactory->accessTokenEndpoint->get());
             $getDeptByIdParameter->setDeptId($deptId);
             $departmentResult = $this->openDevFactory->departmentEndpoint->getDeptById($getDeptByIdParameter);

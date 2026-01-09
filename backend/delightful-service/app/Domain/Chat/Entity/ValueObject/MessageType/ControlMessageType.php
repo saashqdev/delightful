@@ -8,62 +8,62 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject\MessageType;
 
 /**
- * 聊天消息内容的类型.
+ * 聊天messagecontent的type.
  */
 enum ControlMessageType: string
 {
     // 队列等场景的心跳
     case Ping = 'ping';
 
-    // 创建会话窗口
+    // createsession窗口
     case CreateConversation = 'create_conversation';
 
-    // 移除会话窗口（列表不显示）
+    // 移除session窗口（list不显示）
     case HideConversation = 'hide_conversation';
 
-    // 置顶会话窗口
+    // 置顶session窗口
     case TopConversation = 'top_conversation';
 
-    // 会话免打扰
+    // session免打扰
     case MuteConversation = 'mute_conversation';
 
     // 已读
     case SeenMessages = 'seen_messages';
 
-    // 已查看消息
+    // 已查看message
     case ReadMessage = 'read_message';
 
-    // 撤回消息
+    // 撤回message
     case RevokeMessage = 'revoke_message';
 
-    // 编辑消息
+    // 编辑message
     case EditMessage = 'edit_message';
 
-    // 开始在会话窗口输入
+    // 开始在session窗口输入
     case StartConversationInput = 'start_conversation_input';
 
-    // 结束在会话窗口输入
+    // 结束在session窗口输入
     case EndConversationInput = 'end_conversation_input';
 
-    // 打开会话窗口
+    // 打开session窗口
     case OpenConversation = 'open_conversation';
 
-    // 创建话题
+    // create话题
     case CreateTopic = 'create_topic';
 
-    // 更新话题
+    // update话题
     case UpdateTopic = 'update_topic';
 
-    // 删除话题
+    // delete话题
     case DeleteTopic = 'delete_topic';
 
-    // 设置会话的话题(设置为空表示离开话题)
+    // setsession的话题(set为空table示离开话题)
     case SetConversationTopic = 'set_conversation_topic';
 
-    // 创建群聊
+    // create群聊
     case GroupCreate = 'group_create';
 
-    // 更新群聊
+    // update群聊
     case GroupUpdate = 'group_update';
 
     // 系统通知(xx加入/离开群聊,群温馨提醒等)
@@ -78,7 +78,7 @@ enum ControlMessageType: string
     // 解散群聊
     case GroupDisband = 'group_disband';
 
-    // 群成员角色变更(批量设置管理员/普通成员)
+    // 群成员角色变更(批量set管理员/普通成员)
     case GroupUserRoleChange = 'group_user_role_change';
 
     // 转让群主
@@ -87,21 +87,21 @@ enum ControlMessageType: string
     // 助理的交互指令
     case AgentInstruct = 'bot_instruct';
 
-    // 翻译配置项
+    // 翻译configuration项
     case TranslateConfig = 'translate_config';
 
     // 翻译
     case Translate = 'translate';
 
-    // 添加好友成功
+    // 添加好友success
     case AddFriendSuccess = 'add_friend_success';
 
     // 添加好友申请
     case AddFriendApply = 'add_friend_apply';
 
     /**
-     * 未知消息。
-     * 由于版本迭代，发版时间差异等原因，可能产生未知类型的消息。
+     * 未知message。
+     * 由于版本迭代，发版time差异等原因，可能产生未知type的message。
      */
     case Unknown = 'unknown';
 
@@ -115,8 +115,8 @@ enum ControlMessageType: string
      */
     public static function getMessageStatusChangeType(): array
     {
-        // 不包含编辑消息的状态变更!
-        // 编辑消息不会改变消息的状态,只会改变消息的内容.
+        // 不包含编辑message的status变更!
+        // 编辑message不会改变message的status,只会改变message的content.
         return [
             self::RevokeMessage,
             self::ReadMessage,

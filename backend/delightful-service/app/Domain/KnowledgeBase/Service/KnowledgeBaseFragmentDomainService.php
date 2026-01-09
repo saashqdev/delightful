@@ -74,7 +74,7 @@ readonly class KnowledgeBaseFragmentDomainService
         $savingDelightfulFlowKnowledgeFragmentEntity->setDocumentCode($knowledgeBaseDocumentEntity->getCode());
         $savingDelightfulFlowKnowledgeFragmentEntity->setCreator($dataIsolation->getCurrentUserId());
 
-        // 如果有业务id，并且业务 ID 存在，也可以相当于更新
+        // 如果有业务id，并且业务 ID 存在，也可以相当于update
         $knowledgeBaseFragmentEntity = null;
         if (! empty($savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId()) && empty($savingDelightfulFlowKnowledgeFragmentEntity->getId())) {
             $knowledgeBaseFragmentEntity = $this->knowledgeBaseFragmentRepository->getByBusinessId($dataIsolation, $savingDelightfulFlowKnowledgeFragmentEntity->getKnowledgeCode(), $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId());
@@ -91,7 +91,7 @@ readonly class KnowledgeBaseFragmentDomainService
             if (empty($knowledgeBaseFragmentEntity)) {
                 ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$savingDelightfulFlowKnowledgeFragmentEntity->getId()}] 没有找到");
             }
-            // 如果没有变化，就不需要更新了
+            // 如果没有变化，就不需要update了
             if (! $knowledgeBaseFragmentEntity->hasModify($savingDelightfulFlowKnowledgeFragmentEntity)) {
                 return $knowledgeBaseFragmentEntity;
             }
@@ -136,7 +136,7 @@ readonly class KnowledgeBaseFragmentDomainService
         Db::transaction(function () use ($dataIsolation, $knowledgeBaseFragmentEntity) {
             $oldKnowledgeBaseFragmentEntity = $this->knowledgeBaseFragmentRepository->getById($dataIsolation, $knowledgeBaseFragmentEntity->getId(), true);
             $this->knowledgeBaseFragmentRepository->destroy($dataIsolation, $knowledgeBaseFragmentEntity);
-            // 需要更新字符数
+            // 需要update字符数
             $deltaWordCount = -$oldKnowledgeBaseFragmentEntity->getWordCount();
             $this->updateWordCount($dataIsolation, $oldKnowledgeBaseFragmentEntity, $deltaWordCount);
         });
@@ -158,7 +158,7 @@ readonly class KnowledgeBaseFragmentDomainService
     }
 
     /**
-     * 根据 point_id 获取所有相关片段，按 version 倒序排序.
+     * 根据 point_id get所有相关片段，按 version 倒序sort.
      * @return array<KnowledgeBaseFragmentEntity>
      */
     public function getFragmentsByPointId(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, string $pointId, bool $lock = false): array
@@ -175,7 +175,7 @@ readonly class KnowledgeBaseFragmentDomainService
     }
 
     /**
-     * 更新知识库片段状态.
+     * update知识库片段status.
      */
     public function batchChangeSyncStatus(array $ids, KnowledgeSyncStatus $syncStatus, string $syncMessage = ''): void
     {
@@ -195,7 +195,7 @@ readonly class KnowledgeBaseFragmentDomainService
         };
         $preprocessRule = $selectedFragmentConfig->getTextPreprocessRule();
         // 先进行预处理
-        // 需要过滤REPLACE_WHITESPACE规则，REPLACE_WHITESPACE规则在分段后进行处理
+        // 需要filterREPLACE_WHITESPACE规则，REPLACE_WHITESPACE规则在分段后进行处理
         $filterPreprocessRule = array_filter($preprocessRule, fn (TextPreprocessRule $rule) => $rule !== TextPreprocessRule::REPLACE_WHITESPACE);
         $start = microtime(true);
         $this->logger->info('前置文本预处理开始。');
@@ -227,7 +227,7 @@ readonly class KnowledgeBaseFragmentDomainService
         }
         $this->logger->info('后置文本预处理结束，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
-        // 过滤掉空字符串
+        // filter掉空string
         return array_values(array_filter($fragments, function ($fragment) {
             return trim($fragment) !== '';
         }));
@@ -244,9 +244,9 @@ readonly class KnowledgeBaseFragmentDomainService
     #[Transactional]
     public function updateWordCount(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseFragmentEntity $entity, int $deltaWordCount): void
     {
-        // 更新数据库字数统计
+        // updatedatabase字数统计
         $this->knowledgeBaseRepository->updateWordCount($dataIsolation, $entity->getKnowledgeCode(), $deltaWordCount);
-        // 更新文档字数统计
+        // update文档字数统计
         $this->knowledgeBaseDocumentRepository->updateWordCount($dataIsolation, $entity->getKnowledgeCode(), $entity->getDocumentCode(), $deltaWordCount);
     }
 }

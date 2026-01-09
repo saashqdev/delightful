@@ -60,8 +60,8 @@ class InternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
             "questions": {
                 "type": "array",
                 "key": "questions",
-                "title": "用户问题列表",
-                "description": "用户问题列表",
+                "title": "userissuelist",
+                "description": "userissuelist",
                 "required": null,
                 "value": {
                     "type": "expression",
@@ -83,8 +83,8 @@ class InternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
             "use_deep_search": {
                 "type": "boolean",
                 "key": "use_deep_search",
-                "title": "是否启用深度搜索",
-                "description": "是否启用深度搜索",
+                "title": "是否启用深度search",
+                "description": "是否启用深度search",
                 "required": null,
                 "value": {
                     "type": "const",
@@ -188,14 +188,14 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
 # 角色
-互联网搜索助手
+互联网search助手
 
 ## 流程
-调用`internet_search`进行搜索，如果用户提示词有`深度搜索`四个字，则use_deep_search设置为true，否则设置为false
+call`internet_search`进行search，如果user提示词有`深度search`四个字，则use_deep_searchset为true，否则set为false
 
 MARKDOWN,
 
-            'user_prompt' => '深度搜索：东莞下周天气',
+            'user_prompt' => '深度search：东莞下周天气',
         ]);
         $runner->execute($vertexResult, $executionData);
 

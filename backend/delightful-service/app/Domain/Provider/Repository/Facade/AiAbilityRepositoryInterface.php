@@ -19,26 +19,26 @@ use App\Infrastructure\Core\ValueObject\Page;
 interface AiAbilityRepositoryInterface
 {
     /**
-     * 根据能力代码获取AI能力实体.
+     * 根据能力代码getAI能力实体.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离信息
+     * @param ProviderDataIsolation $dataIsolation 数据隔离info
      * @param AiAbilityCode $code 能力代码
      * @return null|AiAbilityEntity AI能力实体
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity;
 
     /**
-     * 获取所有AI能力列表.
+     * get所有AI能力list.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离信息
-     * @return array<AiAbilityEntity> AI能力实体列表
+     * @param ProviderDataIsolation $dataIsolation 数据隔离info
+     * @return array<AiAbilityEntity> AI能力实体list
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array;
 
     /**
-     * 根据ID获取AI能力实体.
+     * 根据IDgetAI能力实体.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离信息
+     * @param ProviderDataIsolation $dataIsolation 数据隔离info
      * @param int $id 能力ID
      * @return null|AiAbilityEntity AI能力实体
      */
@@ -48,34 +48,34 @@ interface AiAbilityRepositoryInterface
      * 保存AI能力实体.
      *
      * @param AiAbilityEntity $entity AI能力实体
-     * @return bool 是否保存成功
+     * @return bool 是否保存success
      */
     public function save(AiAbilityEntity $entity): bool;
 
     /**
-     * 更新AI能力实体.
+     * updateAI能力实体.
      *
      * @param AiAbilityEntity $entity AI能力实体
-     * @return bool 是否更新成功
+     * @return bool 是否updatesuccess
      */
     public function update(AiAbilityEntity $entity): bool;
 
     /**
-     * 根据code更新（支持选择性更新）.
+     * 根据codeupdate（支持选择性update）.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离信息
+     * @param ProviderDataIsolation $dataIsolation 数据隔离info
      * @param AiAbilityCode $code 能力代码
-     * @param array $data 更新数据（status、config等）
-     * @return bool 是否更新成功
+     * @param array $data update数据（status、config等）
+     * @return bool 是否updatesuccess
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool;
 
     /**
-     * 分页查询AI能力列表.
+     * paginationqueryAI能力list.
      *
-     * @param ProviderDataIsolation $dataIsolation 数据隔离信息
-     * @param AiAbilityQuery $query 查询条件
-     * @param Page $page 分页信息
+     * @param ProviderDataIsolation $dataIsolation 数据隔离info
+     * @param AiAbilityQuery $query query条件
+     * @param Page $page paginationinfo
      * @return array{total: int, list: array<AiAbilityEntity>}
      */
     public function queries(ProviderDataIsolation $dataIsolation, AiAbilityQuery $query, Page $page): array;

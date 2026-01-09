@@ -93,7 +93,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             $builder->whereIn('id', $query->getIds());
         }
 
-        // 添加排序（数字越大越靠前）
+        // 添加sort（number越大越靠前）
         $builder->orderBy('sort', 'DESC')->orderBy('id', 'ASC');
 
         $result = $this->getByPage($builder, $page, $query);
@@ -121,7 +121,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
         $isNewRecord = ! $providerConfigEntity->getId();
 
         if ($isNewRecord) {
-            // 创建新记录 - 先生成ID
+            // 创建新记录 - 先generateID
             $this->initializeEntityForCreation($providerConfigEntity, $attributes);
         } else {
             // 更新现有记录
@@ -137,7 +137,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
         if (! empty($attributes['config'])) {
             $configId = (string) $providerConfigEntity->getId();
 
-            // 如果 config 是字符串且是有效的 JSON 格式（未加密的配置数据），则需要加密
+            // 如果 config 是string且是有效的 JSON 格式（未加密的配置数据），则需要加密
             if (is_string($attributes['config']) && json_validate($attributes['config'])) {
                 $decodedConfig = Json::decode($attributes['config']);
                 $attributes['config'] = ProviderConfigAssembler::encodeConfig($decodedConfig, $configId);
@@ -200,12 +200,12 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * 根据组织和服务商类型获取服务商配置列表.
-     * 新逻辑：以数据库中的实际配置为准，对于数据库中没有的服务商类型，使用模板补充
-     * 支持多个相同 provider_code 的配置（组织管理员手动添加的）
-     * 最终结果处理时，官方组织会过滤掉Delightful服务商，普通组织会将Delightful服务商置顶.
-     * @param string $organizationCode 组织编码
-     * @param Category $category 服务商类型
+     * 根据organization和服务商type获取服务商配置列表.
+     * 新逻辑：以数据库中的实际配置为准，对于数据库中没有的服务商type，使用模板补充
+     * 支持多个相同 provider_code 的配置（organization管理员手动添加的）
+     * 最终结果handle时，官方organization会filter掉Delightful服务商，普通organization会将Delightful服务商置顶.
+     * @param string $organizationCode organization编码
+     * @param Category $category 服务商type
      * @return ProviderConfigDTO[]
      */
     public function getOrganizationProviders(string $organizationCode, Category $category, ?Status $status = null): array
@@ -213,13 +213,13 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
         // 1. 获取全量的服务商模板列表
         $templateProviders = $this->providerTemplateRepository->getAllProviderTemplates($category);
 
-        // 2. 获取组织下已配置的服务商
+        // 2. 获取organization下已配置的服务商
         $organizationProviders = $this->getOrganizationProvidersFromDatabase($organizationCode, $category, $status);
 
         // 3. 首先添加数据库中的所有实际配置（保留多个相同 provider_code 的配置）
         $result = $organizationProviders;
 
-        // 4. 检查哪些服务商类型在数据库中没有配置，为这些添加模板
+        // 4. 检查哪些服务商type在数据库中没有配置，为这些添加模板
         $existingProviderCodes = [];
         foreach ($organizationProviders as $config) {
             if ($config->getProviderCode()) {
@@ -227,13 +227,13 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             }
         }
 
-        // 为数据库中不存在的服务商类型添加模板配置
+        // 为数据库中不存在的服务商type添加模板配置
         foreach ($templateProviders as $template) {
             if (! $template->getProviderCode() || ! in_array($template->getProviderCode(), $existingProviderCodes, true)) {
                 $result[] = $template;
             }
         }
-        // 5. 最终结果处理：排序和过滤
+        // 5. 最终结果handle：sort和filter
         $isOfficialOrganization = OfficialOrganizationUtil::isOfficialOrganization($organizationCode);
         $delightfulProvider = null;
         $otherProviders = [];
@@ -243,7 +243,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
                 continue;
             }
 
-            // 如果是官方组织，过滤掉 Delightful 服务商（Official），因为 delightful 服务商就是官方组织配置的模型总和
+            // 如果是官方organization，filter掉 Delightful 服务商（Official），因为 delightful 服务商就是官方organization配置的模型总和
             /*if ($isOfficialOrganization && $provider->getProviderCode() === ProviderCode::Official) {
                 continue;
             }*/
@@ -255,15 +255,15 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             }
         }
 
-        // 对其他服务商按 sort 字段排序（数字越大越靠前）
+        // 对其他服务商按 sort 字段sort（number越大越靠前）
         usort($otherProviders, function ($a, $b) {
             if ($a->getSort() === $b->getSort()) {
-                return strcmp($a->getId(), $b->getId()); // 相同 sort 值时按 ID 排序
+                return strcmp($a->getId(), $b->getId()); // 相同 sort value时按 ID sort
             }
-            return $b->getSort() <=> $a->getSort(); // 降序排列，数字大的在前
+            return $b->getSort() <=> $a->getSort(); // 降序排列，number大的在前
         });
 
-        // 如果找到 Delightful 服务商，将其放在第一位（非官方组织才会有 Delightful 服务商）
+        // 如果找到 Delightful 服务商，将其放在第一位（非官方organization才会有 Delightful 服务商）
         if ($delightfulProvider !== null) {
             $result = array_merge([$delightfulProvider], $otherProviders);
         } else {
@@ -290,7 +290,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * 通过配置ID和组织编码获取服务商配置实体.
+     * 通过配置ID和organization编码获取服务商配置实体.
      */
     public function getProviderConfigEntityById(string $serviceProviderConfigId, string $organizationCode): ?ProviderConfigEntity
     {
@@ -357,7 +357,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * 准备移除软删相关功能，临时这样写。创建带有软删除过滤的 ProviderConfigModel 查询构建器.
+     * 准备移除软删相关功能，临时这样写。创建带有软删除filter的 ProviderConfigModel query构建器.
      */
     protected function createConfigQuery(): Builder
     {
@@ -366,7 +366,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * 创建带有软删除过滤的 ProviderModel 查询构建器.
+     * 创建带有软删除filter的 ProviderModel query构建器.
      */
     private function createProviderQuery(): Builder
     {
@@ -375,7 +375,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * 从数据库获取组织下已配置的服务商.
+     * 从数据库获取organization下已配置的服务商.
      * @return ProviderConfigDTO[]
      */
     private function getOrganizationProvidersFromDatabase(string $organizationCode, Category $category, ?Status $status = null): array
@@ -387,7 +387,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             return [];
         }
 
-        // 根据组织编码和服务商ID列表获取配置
+        // 根据organization编码和服务商ID列表获取配置
         $providerConfigQuery = $this->createConfigQuery()
             ->where('organization_code', $organizationCode)
             ->whereIn('service_provider_id', $serviceProviderIds)
@@ -400,16 +400,16 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
 
         $providerConfigsResult = Db::select($providerConfigQuery->toSql(), $providerConfigQuery->getBindings());
 
-        // 批量查询对应的 provider 信息
+        // 批量query对应的 provider 信息
         $providerMap = $this->getProviderMapByConfigs($providerConfigsResult);
 
         return ProviderConfigAssembler::toDTOListWithProviders($providerConfigsResult, $providerMap);
     }
 
     /**
-     * 根据配置数据批量查询对应的 provider 信息.
-     * @param array $configsResult 配置查询结果
-     * @return array provider ID 到 provider 数组的映射
+     * 根据配置数据批量query对应的 provider 信息.
+     * @param array $configsResult 配置query结果
+     * @return array provider ID 到 provider array的映射
      */
     private function getProviderMapByConfigs(array $configsResult): array
     {
@@ -428,7 +428,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             return [];
         }
 
-        // 批量查询 provider 信息
+        // 批量query provider 信息
         $providerQuery = $this->createProviderQuery()
             ->whereIn('id', $providerIds);
         $providersResult = Db::select($providerQuery->toSql(), $providerQuery->getBindings());
@@ -446,7 +446,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
      * 根据分类获取服务商ID列表.
      *
      * @param Category $category 服务商分类
-     * @return array 服务商ID数组
+     * @return array 服务商IDarray
      */
     private function getServiceProviderIdsByCategory(Category $category): array
     {

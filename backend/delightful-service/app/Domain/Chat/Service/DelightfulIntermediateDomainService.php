@@ -21,11 +21,11 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Throwable;
 
 /**
- * 临时消息相关.
+ * 临时message相关.
  */
 class DelightfulIntermediateDomainService extends AbstractDomainService
 {
-    // 超级麦吉的交互指令临时消息处理
+    // 超级麦吉的交互指令临时message处理
     /**
      * @throws Throwable
      */
@@ -35,7 +35,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
         DelightfulConversationEntity $userConversationEntity,
     ): void {
         try {
-            // 1. 获取发送者（当前用户）信息
+            // 1. get发送者（当前user）info
             $senderUserId = $dataIsolation->getCurrentUserId();
             if (empty($senderUserId)) {
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
@@ -51,7 +51,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
                 ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
             }
 
-            // 2. 获取超级麦吉（接收者）信息
+            // 2. get超级麦吉（接收者）info
             $agentUserId = $messageDTO->getReceiveId();
             $agentUserEntity = $this->delightfulUserRepository->getUserById($agentUserId);
             if (! $agentUserEntity) {
@@ -63,7 +63,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
                 ExceptionBuilder::throw(ChatErrorCode::AI_NOT_FOUND);
             }
 
-            // 3. 获取 agent 的 conversationId
+            // 3. get agent 的 conversationId
             $agentConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId(
                 $userConversationEntity->getId()
             );
@@ -74,19 +74,19 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
 
             $agentConversationId = $agentConversationEntity->getId();
 
-            // 4. 创建序列实体 (临时消息不需要持久化序列)
+            // 4. create序列实体 (临时message不需要持久化序列)
             $seqEntity = new DelightfulSeqEntity();
             $seqEntity->setAppMessageId($messageDTO->getAppMessageId());
             $seqEntity->setConversationId($agentConversationId);
             $seqEntity->setObjectId($agentAccountEntity->getDelightfulId());
             $seqEntity->setContent($messageDTO->getContent());
 
-            // 设置额外信息 (包括 topicId)
+            // set额外info (包括 topicId)
             $seqExtra = new SeqExtra();
-            // 从 messageDTO 中获取 topicId
+            // 从 messageDTO 中get topicId
             $topicId = $messageDTO->getTopicId() ?? '';
 
-            // 如果 topicId 不为空，验证话题是否属于当前用户
+            // 如果 topicId 不为空，验证话题是否属于当前user
             if (empty($topicId)) {
                 ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
             }
@@ -95,7 +95,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             $seqExtra->setTopicId($topicId);
             $seqEntity->setExtra($seqExtra);
 
-            // 5. 创建消息实体 (转换DTO为Entity，但不持久化)
+            // 5. createmessage实体 (转换DTO为Entity，但不持久化)
             $messageEntity = new DelightfulMessageEntity();
             $messageEntity->setSenderId($messageDTO->getSenderId());
             $messageEntity->setSenderType($messageDTO->getSenderType());
@@ -108,12 +108,12 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             $messageEntity->setMessageType($messageDTO->getMessageType());
             $messageEntity->setSendTime($messageDTO->getSendTime());
 
-            // 6. 创建发送者额外信息
+            // 6. create发送者额外info
             $senderExtraDTO = new SenderExtraDTO();
-            // 临时消息可能不需要环境ID，使用默认值
+            // 临时message可能不需要环境ID，使用默认value
             $senderExtraDTO->setDelightfulEnvId(null);
 
-            // 7. 触发用户调用超级麦吉事件
+            // 7. 触发usercall超级麦吉event
             event_dispatch(new UserCallAgentEvent(
                 $agentAccountEntity,
                 $agentUserEntity,
@@ -124,7 +124,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
                 $senderExtraDTO
             ));
         } catch (Throwable $e) {
-            // 记录错误日志，但不阻断处理流程
+            // recorderrorlog，但不阻断处理流程
             $this->logger?->error('HandleBeDelightfulInstructionMessage failed', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
@@ -135,22 +135,22 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
     }
 
     /**
-     * 验证话题是否属于当前用户.
+     * 验证话题是否属于当前user.
      */
     private function validateTopicOwnership(string $topicId, string $conversationId, DataIsolation $dataIsolation): void
     {
-        // 创建话题DTO
+        // create话题DTO
         $topicDTO = new DelightfulTopicEntity();
         $topicDTO->setTopicId($topicId);
         $topicDTO->setConversationId($conversationId);
 
-        // 获取话题实体
+        // get话题实体
         $topicEntity = $this->delightfulChatTopicRepository->getTopicEntity($topicDTO);
         if ($topicEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
         }
 
-        // 验证话题所属的会话是否属于当前用户
+        // 验证话题所属的session是否属于当前user
         $this->checkAndGetSelfConversation($topicEntity->getConversationId(), $dataIsolation);
     }
 }

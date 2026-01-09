@@ -13,14 +13,14 @@ use App\Domain\Chat\Entity\AbstractEntity;
 use Hyperf\Codec\Json;
 
 /**
- * todo 为了兼容旧版流式消息，需要将 content/reasoning_content/status 字段放到最外层。
+ * todo 为了兼容旧版流式message，需要将 content/reasoning_content/status field放到最外层。
  */
 class ClientJsonStreamSequenceResponse extends AbstractEntity
 {
-    // 要更新目标 seqId 的内容
+    // 要update目标 seqId 的content
     protected string $targetSeqId;
 
-    // 为了实现丢包重传，需要记录当前的 $streamId。一定单调递增。
+    // 为了实现丢包重传，需要record当前的 $streamId。一定单调递增。
     protected ?int $streamId;
 
     /**
@@ -31,22 +31,22 @@ class ClientJsonStreamSequenceResponse extends AbstractEntity
     protected ?StreamOptions $streamOptions;
 
     /**
-     * @deprecated 为了兼容旧版流式消息，需要将 content/reasoning_content/status/llm_response 字段放到最外层
+     * @deprecated 为了兼容旧版流式message，需要将 content/reasoning_content/status/llm_response field放到最外层
      */
     protected ?string $content;
 
     /**
-     * @deprecated 为了兼容旧版流式消息，需要将 content/reasoning_content/status/llm_response 字段放到最外层
+     * @deprecated 为了兼容旧版流式message，需要将 content/reasoning_content/status/llm_response field放到最外层
      */
     protected ?string $reasoningContent;
 
     /**
-     * @deprecated 为了兼容旧版流式消息，需要将 content/reasoning_content/status/llm_response 字段放到最外层
+     * @deprecated 为了兼容旧版流式message，需要将 content/reasoning_content/status/llm_response field放到最外层
      */
     protected ?int $status;
 
     /**
-     * @deprecated 为了兼容旧版流式消息，需要将 content/reasoning_content/status/llm_response 字段放到最外层
+     * @deprecated 为了兼容旧版流式message，需要将 content/reasoning_content/status/llm_response field放到最外层
      */
     protected ?string $llmResponse;
 

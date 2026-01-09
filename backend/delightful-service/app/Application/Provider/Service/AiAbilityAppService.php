@@ -23,7 +23,7 @@ use Hyperf\Contract\TranslatorInterface;
 use Throwable;
 
 /**
- * AI能力应用服务.
+ * AI能力应用service.
  */
 class AiAbilityAppService extends AbstractKernelAppService
 {
@@ -34,9 +34,9 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * 获取所有AI能力列表.
+     * get所有AI能力list.
      *
-     * @param DelightfulUserAuthorization $authorization 用户授权信息
+     * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @return array<AiAbilityListDTO>
      */
     public function queries(DelightfulUserAuthorization $authorization): array
@@ -51,9 +51,9 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * 获取AI能力详情.
+     * getAI能力详情.
      *
-     * @param DelightfulUserAuthorization $authorization 用户授权信息
+     * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @param string $code 能力代码
      */
     public function getDetail(DelightfulUserAuthorization $authorization, string $code): AiAbilityDetailDTO
@@ -67,7 +67,7 @@ class AiAbilityAppService extends AbstractKernelAppService
             ExceptionBuilder::throw(ServiceProviderErrorCode::AI_ABILITY_NOT_FOUND);
         }
 
-        // 获取能力详情
+        // get能力详情
         $entity = $this->aiAbilityDomainService->getByCode($dataIsolation, $codeEnum);
 
         $locale = $this->translator->getLocale();
@@ -75,11 +75,11 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * 更新AI能力.
+     * updateAI能力.
      *
-     * @param DelightfulUserAuthorization $authorization 用户授权信息
-     * @param UpdateAiAbilityRequest $request 更新请求
-     * @return bool 是否更新成功
+     * @param DelightfulUserAuthorization $authorization userauthorizationinfo
+     * @param UpdateAiAbilityRequest $request update请求
+     * @return bool 是否updatesuccess
      */
     public function update(DelightfulUserAuthorization $authorization, UpdateAiAbilityRequest $request): bool
     {
@@ -92,34 +92,34 @@ class AiAbilityAppService extends AbstractKernelAppService
             ExceptionBuilder::throw(ServiceProviderErrorCode::AI_ABILITY_NOT_FOUND);
         }
 
-        // 构建更新数据（支持选择性更新）
+        // 构建update数据（支持选择性update）
         $updateData = [];
         if ($request->hasStatus()) {
             $updateData['status'] = $request->getStatus();
         }
         if ($request->hasConfig()) {
-            // 获取当前数据库中的配置
+            // get当前database中的configuration
             $entity = $this->aiAbilityDomainService->getByCode($dataIsolation, $code);
             $dbConfig = $entity->getConfig();
 
-            // 智能合并配置（保留被脱敏的api_key）
+            // 智能合并configuration（保留被脱敏的api_key）
             $mergedConfig = $this->mergeConfigPreservingApiKeys($dbConfig, $request->getConfig());
             $updateData['config'] = $mergedConfig;
         }
 
-        // 如果没有要更新的数据，直接返回成功
+        // 如果没有要update的数据，直接returnsuccess
         if (empty($updateData)) {
             return true;
         }
 
-        // 通过 DomainService 更新
+        // 通过 DomainService update
         return $this->aiAbilityDomainService->updateByCode($dataIsolation, $code, $updateData);
     }
 
     /**
-     * 初始化AI能力数据（从配置文件同步到数据库）.
+     * 初始化AI能力数据（从configuration文件同步到database）.
      *
-     * @param DelightfulUserAuthorization $authorization 用户授权信息
+     * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @return int 初始化的数量
      */
     public function initializeAbilities(DelightfulUserAuthorization $authorization): int
@@ -130,37 +130,37 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * 智能合并配置（保留被脱敏的api_key原始值）.
+     * 智能合并configuration（保留被脱敏的api_key原始value）.
      *
-     * @param array $dbConfig 数据库原始配置
-     * @param array $frontendConfig 前端传来的配置（可能包含脱敏的api_key）
-     * @return array 合并后的配置
+     * @param array $dbConfig database原始configuration
+     * @param array $frontendConfig 前端传来的configuration（可能包含脱敏的api_key）
+     * @return array 合并后的configuration
      */
     private function mergeConfigPreservingApiKeys(array $dbConfig, array $frontendConfig): array
     {
         $result = [];
 
-        // 遍历前端配置的所有字段
+        // 遍历前端configuration的所有field
         foreach ($frontendConfig as $key => $value) {
-            // 如果是 api_key 字段且包含脱敏标记 ***
+            // 如果是 api_key field且包含脱敏标记 ***
             if ($key === 'api_key' && is_string($value) && str_contains($value, '*')) {
-                // 使用数据库中的原始值
+                // 使用database中的原始value
                 $result[$key] = $dbConfig[$key] ?? $value;
             }
-            // 如果是数组，递归处理
+            // 如果是array，递归处理
             elseif (is_array($value)) {
                 $dbValue = $dbConfig[$key] ?? [];
                 $result[$key] = is_array($dbValue)
                     ? $this->mergeConfigPreservingApiKeys($dbValue, $value)
                     : $value;
             }
-            // 其他情况直接使用前端的值
+            // 其他情况直接使用前端的value
             else {
                 $result[$key] = $value;
             }
         }
 
-        // 前端未传的字段, 则数据库中字段为默认值 ''
+        // 前端未传的field, 则database中field为默认value ''
         foreach ($dbConfig as $key => $value) {
             if (! array_key_exists($key, $result)) {
                 $result[$key] = '';

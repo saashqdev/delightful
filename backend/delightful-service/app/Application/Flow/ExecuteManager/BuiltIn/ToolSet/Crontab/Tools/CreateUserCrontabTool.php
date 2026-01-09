@@ -65,7 +65,7 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
             $crontab = $delightfulUserTaskAppService->createTask($userTaskDTO, $userTaskValueDTO);
             return [
                 'crontab' => $crontab,
-                'message' => '定时任务创建成功',
+                'message' => '定时taskcreatesuccess',
             ];
         };
     }
@@ -82,7 +82,7 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '创建一个新的用户级别定时任务';
+        return 'create一个新的user级别定时task';
     }
 
     public function getInput(): ?NodeInput
@@ -133,8 +133,8 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
         "conversation_id": {
             "type": "string",
             "key": "conversation_id",
-            "title": "会话ID",
-            "description": "会话ID, 如果为空，则使用当前会话ID",
+            "title": "sessionID",
+            "description": "sessionID, 如果为空，则使用当前sessionID",
             "required": null,
             "value": null,
             "encryption": false,
@@ -145,8 +145,8 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
         "name": {
             "type": "string",
             "key": "name",
-            "title": "任务名称",
-            "description": "任务的名称",
+            "title": "taskname",
+            "description": "task的name",
             "required": null,
             "value": null,
             "encryption": false,
@@ -157,8 +157,8 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
         "description": {
             "type": "string",
             "key": "description",
-            "title": "任务描述",
-            "description": "任务的描述",
+            "title": "taskdescription",
+            "description": "task的description",
             "required": null,
             "value": null,
             "encryption": false,
@@ -181,8 +181,8 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
         "time": {
             "type": "string",
             "key": "time",
-            "title": "执行时间",
-            "description": "执行时间，格式：HH:mm",
+            "title": "执行time",
+            "description": "执行time，格式：HH:mm",
             "required": null,
             "value": null,
             "encryption": false,
@@ -194,7 +194,7 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
             "type": "string",
             "key": "type",
             "title": "重复周期",
-            "description": "重复周期，no_repeat 不重复，daily_repeat 每天参数，weekly_repeat 每周重复，monthly_repeat 每月重复，annually_repeat 每年重复，weekday_repeat 每个工作日重复，custom_repeat 自定义重复",
+            "description": "重复周期，no_repeat 不重复，daily_repeat 每天parameter，weekly_repeat 每周重复，monthly_repeat 每月重复，annually_repeat 每年重复，weekday_repeat 每个工作日重复，custom_repeat 自定义重复",
             "required": null,
             "value": null,
             "encryption": false,
@@ -216,8 +216,8 @@ JSON,
 /* "value": {
      "type": "object",
      "key": "value",
-     "title": "自定义重复参数",
-     "description": "自定义重复参数",
+     "title": "自定义重复parameter",
+     "description": "自定义重复parameter",
      "required": [
    "unit",
    "deadline",
@@ -255,8 +255,8 @@ JSON,
    "interval": {
        "type": "number",
        "key": "interval",
-       "title": "失败重试次数",
-       "description": "失败重试次数",
+       "title": "fail重试次数",
+       "description": "fail重试次数",
        "required": null,
        "value": null,
        "encryption": false,
@@ -267,8 +267,8 @@ JSON,
    "values": {
        "type": "array",
        "key": "values",
-       "title": "重复值",
-       "description": "重复值",
+       "title": "重复value",
+       "description": "重复value",
        "required": null,
        "value": null,
        "encryption": false,

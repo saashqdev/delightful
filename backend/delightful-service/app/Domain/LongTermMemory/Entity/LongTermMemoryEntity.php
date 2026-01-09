@@ -74,7 +74,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     {
         parent::__construct($data);
 
-        // 默认值设置
+        // 默认valueset
         if (! isset($this->memoryType)) {
             $this->memoryType = MemoryType::MANUAL_INPUT;
         }
@@ -299,7 +299,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 内部设置启用状态（不进行业务规则检查）.
+     * 内部set启用status（不进行业务规则check）.
      * 用于数据初始化和内部操作，跳过业务规则限制.
      */
     public function setEnabledInternal(bool $enabled): void
@@ -367,10 +367,10 @@ final class LongTermMemoryEntity extends AbstractEntity
         $this->deletedAt = $this->createDatetime($deletedAt);
     }
 
-    // 业务方法
+    // 业务method
 
     /**
-     * 访问记忆（更新访问次数和时间）.
+     * 访问记忆（update访问次数和time）.
      */
     public function access(): void
     {
@@ -379,7 +379,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 强化记忆（更新强化次数和时间，提升重要性）.
+     * 强化记忆（update强化次数和time，提升重要性）.
      */
     public function reinforce(): void
     {
@@ -397,7 +397,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     {
         $baseScore = $this->importance * $this->confidence;
 
-        // 计算时间衰减
+        // 计算time衰减
         $timeDecay = $this->calculateTimeDecay();
 
         // 计算访问频率加成
@@ -433,7 +433,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 获取元数据.
+     * get元数据.
      */
     public function getMetadataValue(string $key): mixed
     {
@@ -441,11 +441,11 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 重写 set 方法，对 enabled 字段进行特殊处理.
+     * 重写 set method，对 enabled field进行特殊处理.
      */
     protected function set(string $key, mixed $value): void
     {
-        // enabled 字段在初始化时使用内部方法，跳过业务规则检查
+        // enabled field在初始化时使用内部method，跳过业务规则check
         if (strtolower($key) === 'enabled' && is_bool($value)) {
             $this->setEnabledInternal($value);
             return;
@@ -455,7 +455,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 计算时间衰减因子.
+     * 计算time衰减因子.
      */
     private function calculateTimeDecay(): float
     {
@@ -465,7 +465,7 @@ final class LongTermMemoryEntity extends AbstractEntity
 
         $daysSinceLastAccess = (new DateTime())->diff($this->lastAccessedAt)->days;
 
-        // 根据访问时间计算衰减，最多衰减到 0.5
+        // 根据访问time计算衰减，最多衰减到 0.5
         return max(0.5, 1.0 - ($daysSinceLastAccess * 0.01));
     }
 

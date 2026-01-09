@@ -46,28 +46,28 @@ class DelightfulDepartmentAppService extends AbstractAppService
         }
     }
 
-    // 查询部门详情,需要返回是否有子部门
+    // querydepartment详情,需要return是否有子department
     public function getDepartmentById(DepartmentQueryDTO $queryDTO, DelightfulUserAuthorization $userAuthorization): ?DelightfulDepartmentEntity
     {
-        // 对于前端来说, -1 表示根部门信息.
+        // 对于前端来说, -1 table示根departmentinfo.
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $departmentEntity = $this->delightfulDepartmentDomainService->getDepartmentById($dataIsolation, $queryDTO->getDepartmentId());
         if ($departmentEntity === null) {
             return null;
         }
         $this->setChildrenEmployeeSum($queryDTO, $departmentEntity);
-        // 判断是否有下级部门
+        // 判断是否有下级department
         $departmentEntity = $this->delightfulDepartmentDomainService->getDepartmentsHasChild([$departmentEntity], $dataIsolation->getCurrentOrganizationCode())[0];
         return $this->filterDepartmentsHidden([$departmentEntity])[0] ?? null;
     }
 
     /**
-     * 查询部门详情.
+     * querydepartment详情.
      * @return array<DelightfulDepartmentEntity>
      */
     public function getDepartmentByIds(DepartmentQueryDTO $queryDTO, DelightfulUserAuthorization $userAuthorization): array
     {
-        // 对于前端来说, -1 表示根部门信息.
+        // 对于前端来说, -1 table示根departmentinfo.
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $departmentEntities = $this->delightfulDepartmentDomainService->getDepartmentByIds($dataIsolation, $queryDTO->getDepartmentIds(), true);
         return $this->filterDepartmentsHidden($departmentEntities);
@@ -83,19 +83,19 @@ class DelightfulDepartmentAppService extends AbstractAppService
             $offset = (int) $pageToken;
         }
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        // departmentId 为-1 表示获取根部门下的第一级部门
+        // departmentId 为-1 table示get根department下的第一级department
         if ($departmentId === PlatformRootDepartmentId::Delightful) {
             $departmentsPageResponseDTO = $this->delightfulDepartmentDomainService->getSubDepartmentsByLevel($dataIsolation, 0, 1, $pageSize, $offset);
         } else {
-            // 获取部门
+            // getdepartment
             $departmentsPageResponseDTO = $this->delightfulDepartmentDomainService->getSubDepartmentsById($dataIsolation, $departmentId, $pageSize, $offset);
         }
         $departments = $departmentsPageResponseDTO->getItems();
-        // 设置部门以及所有子部门的人员数量.
+        // setdepartment以及所有子department的人员数量.
         foreach ($departments as $delightfulDepartmentEntity) {
             $this->setChildrenEmployeeSum($queryDTO, $delightfulDepartmentEntity);
         }
-        // 通讯录和搜索相关接口，过滤隐藏部门和隐藏用户。
+        // 通讯录和search相关接口，filter隐藏department和隐藏user。
         $departments = $this->filterDepartmentsHidden($departments);
         $departmentsPageResponseDTO->setItems($departments);
         return $departmentsPageResponseDTO;
@@ -110,7 +110,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
         foreach ($departments as $delightfulDepartmentEntity) {
             $this->setChildrenEmployeeSum($queryDTO, $delightfulDepartmentEntity);
         }
-        // 通讯录和搜索相关接口，过滤隐藏部门和隐藏用户。
+        // 通讯录和search相关接口，filter隐藏department和隐藏user。
         $departments = $this->filterDepartmentsHidden($departments);
         // 全量查找，没有更多
         return PageListAssembler::pageByMysql($departments);
@@ -122,7 +122,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
     }
 
     /**
-     * 通讯录和搜索相关接口，过滤隐藏部门和隐藏用户。
+     * 通讯录和search相关接口，filter隐藏department和隐藏user。
      * @param DelightfulDepartmentEntity[] $delightfulDepartments
      */
     protected function filterDepartmentsHidden(array $delightfulDepartments): array
@@ -136,11 +136,11 @@ class DelightfulDepartmentAppService extends AbstractAppService
     }
 
     /**
-     * 设置部门以及所有子部门的人员数量.
+     * setdepartment以及所有子department的人员数量.
      */
     protected function setChildrenEmployeeSum(DepartmentQueryDTO $queryDTO, DelightfulDepartmentEntity $departmentEntity): void
     {
-        // 部门以及所有子部门的人员数量
+        // department以及所有子department的人员数量
         if ($queryDTO->getSumType() === DepartmentSumType::All) {
             $employeeSum = $this->delightfulDepartmentDomainService->getDepartmentChildrenEmployeeSum($departmentEntity);
             $departmentEntity->setEmployeeSum($employeeSum);

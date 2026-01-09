@@ -26,7 +26,7 @@ class VolcengineSms extends VolcengineApi
     protected string $path = '/';
 
     /**
-     * 接口名称.
+     * 接口name.
      */
     protected string $action = 'SendSms';
 
@@ -58,9 +58,9 @@ class VolcengineSms extends VolcengineApi
         $msg = 'success';
         try {
             $groupId = $this->template->getMessageGroupId($templateId);
-            // 初始化,设置公共的请求参数
+            // 初始化,set公共的请求parameter
             $this->init($groupId, $signStr, $templateId);
-            // 设置验证码短信的特有body结构
+            // set验证码短信的特有body结构
             $body = [
                 'SmsAccount' => $this->getMessageGroupId(),
                 'Sign' => $this->getSign(),
@@ -69,18 +69,18 @@ class VolcengineSms extends VolcengineApi
                 'PhoneNumbers' => $phone,
             ];
             $this->setBody($body);
-            // 如果是单元测试,不发短信,只验证变量解析/短信内容&&短信签名多语种适配/国际区号正确解析
+            // 如果是单元test,不发短信,只验证variable解析/短信content&&短信签名多语种适配/国际区号正确解析
             if (defined('IN_UNIT_TEST')) {
-                // 单元测试,不真的发短信
+                // 单元test,不真的发短信
                 return $sendResult->setResult($errCode, $msg);
             }
             $this->sendRequest();
         } catch (Throwable$exception) {
             $errCode = -1;
-            $msg = '短信发送失败';
-            $this->logger->error('短信发送失败：' . $exception->getMessage() . ',trace:' . $exception->getTraceAsString());
+            $msg = '短信发送fail';
+            $this->logger->error('短信发送fail：' . $exception->getMessage() . ',trace:' . $exception->getTraceAsString());
         }
-        // 将返回结果与创蓝统一,避免bug
+        // 将returnresult与创蓝统一,避免bug
         return $sendResult->setResult($errCode, $msg);
     }
 }

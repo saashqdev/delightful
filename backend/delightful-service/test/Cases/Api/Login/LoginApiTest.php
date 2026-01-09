@@ -12,21 +12,21 @@ use HyperfTest\Cases\Api\AbstractHttpTest;
 
 /**
  * @internal
- * 用户登录会话API测试
+ * user登录sessionAPItest
  */
 class LoginApiTest extends AbstractHttpTest
 {
     public const string API = '/api/v1/sessions';
 
     /**
-     * 测试手机号密码登录.
+     * test手机号密码登录.
      */
     public function testPhonePasswordLogin(): string
     {
-        // 构造请求参数 - 手机号密码登录
+        // 构造请求parameter - 手机号密码登录
         $requestData = [
             'state_code' => '+86',
-            'phone' => '13812345678', // 测试环境中不存在的账号
+            'phone' => '13812345678', // test环境中不存在的账号
             'password' => '123456',
             'type' => 'phone_password',
         ];
@@ -41,7 +41,7 @@ class LoginApiTest extends AbstractHttpTest
         ]);
         $expectData = [
             'code' => 1000,
-            'message' => '请求成功',
+            'message' => '请求success',
             'data' => [
                 'access_token' => 'delightful:xxx',
                 'bind_phone' => true,
@@ -64,11 +64,11 @@ class LoginApiTest extends AbstractHttpTest
     }
 
     /**
-     * 测试手机号不存在.
+     * test手机号不存在.
      */
     public function testPhoneNotExists(): void
     {
-        // 构造请求参数 - 测试手机号不存在
+        // 构造请求parameter - test手机号不存在
         $requestData = [
             'state_code' => '+86',
             'phone' => '19999999999', // 使用一个确定不存在的手机号
@@ -78,7 +78,7 @@ class LoginApiTest extends AbstractHttpTest
 
         // 发送POST请求
         $response = $this->json(self::API, $requestData);
-        // 期望手机号不存在时返回相应的错误码和消息
+        // expect手机号不存在时return相应的error码和message
         $expectData = [
             'code' => AuthenticationErrorCode::AccountNotFound->value,
         ];
@@ -87,7 +87,7 @@ class LoginApiTest extends AbstractHttpTest
     }
 
     /**
-     * 测试有效的 token 验证
+     * test有效的 token 验证
      * @depends testPhonePasswordLogin
      */
     public function testValidTokenVerification(string $authorization): void
@@ -113,7 +113,7 @@ class LoginApiTest extends AbstractHttpTest
     }
 
     /**
-     * 测试无效的 token 验证
+     * test无效的 token 验证
      */
     public function testInvalidTokenVerification(): void
     {

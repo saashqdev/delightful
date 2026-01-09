@@ -19,22 +19,22 @@ return new class extends Migration {
         }
         Schema::create('delightful_contact_departments', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('department_id', 64)->comment('麦吉部门id');
-            $table->string('parent_department_id', 64)->comment('父部门的部门 ID')->nullable();
-            $table->string('name', 64)->comment('部门名称');
-            $table->text('i18n_name')->comment('国际化部门名称');
-            $table->string('order', 64)->comment('部门的排序，即部门在其同级部门的展示顺序。取值越小排序越靠前。')->nullable()->default('');
-            $table->string('leader_user_id', 64)->comment('部门主管的用户 ID')->nullable()->default('');
-            $table->string('organization_code', 64)->comment('麦吉组织编码');
-            $table->text('status')->comment('部门状态,json格式,目前支持 is_deleted:是否删除');
-            $table->string('document_id', 64)->comment('部门说明书（云文档id）');
+            $table->string('department_id', 64)->comment('麦吉departmentid');
+            $table->string('parent_department_id', 64)->comment('父department的department ID')->nullable();
+            $table->string('name', 64)->comment('departmentname');
+            $table->text('i18n_name')->comment('国际化departmentname');
+            $table->string('order', 64)->comment('department的sort，即department在其同级department的展示顺序。取value越小sort越靠前。')->nullable()->default('');
+            $table->string('leader_user_id', 64)->comment('department主管的user ID')->nullable()->default('');
+            $table->string('organization_code', 64)->comment('麦吉organization编码');
+            $table->text('status')->comment('departmentstatus,json格式,目前支持 is_deleted:是否delete');
+            $table->string('document_id', 64)->comment('department说明书（云文档id）');
             // level
-            $table->integer('level')->comment('部门层级')->default(0);
+            $table->integer('level')->comment('department层级')->default(0);
             // path
-            $table->text('path')->comment('部门路径')->nullable();
-            // 部门直属用户人数
-            $table->integer('employee_sum')->comment('部门直属用户人数')->default(0);
-            $table->comment('用户服务的部门与第三方平台用户记录表.用于与第三方平台实时数据同步,激活记录等');
+            $table->text('path')->comment('department路径')->nullable();
+            // department直属user人数
+            $table->integer('employee_sum')->comment('department直属user人数')->default(0);
+            $table->comment('userservice的department与第三方平台userrecordtable.用于与第三方平台实时数据同步,激活record等');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['organization_code', 'department_id'], 'org_department_id');

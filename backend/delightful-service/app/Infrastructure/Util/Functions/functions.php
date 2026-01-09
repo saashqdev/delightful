@@ -89,7 +89,7 @@ if (! function_exists('camelize')) {
             return '';
         }
         if (! str_contains($unCamelizeWords, $separator)) {
-            // 认for已经is小驼峰
+            // 认foralready经is小驼峰
             return $unCamelizeWords;
         }
         $unCamelizeWords = $separator . str_replace($separator, ' ', strtolower($unCamelizeWords));
@@ -115,7 +115,7 @@ if (! function_exists('un_camelize')) {
 if (! function_exists('string_to_hump')) {
     /**
      * down划line转become驼峰命名,default小驼峰.
-     * @param string $string 要convertstring
+     * @param string $string wantconvertstring
      * @param bool $firstUp whether首字母大写,default否
      */
     function string_to_hump(string $string, bool $firstUp = false): string
@@ -128,7 +128,7 @@ if (! function_exists('string_to_hump')) {
 if (! function_exists('string_to_line')) {
     /**
      * 驼峰命名转down划line
-     * @param string $string 要convertstring
+     * @param string $string wantconvertstring
      */
     function string_to_line(string $string, string $separator = '_'): string
     {
@@ -139,7 +139,7 @@ if (! function_exists('string_to_line')) {
 if (! function_exists('array_key_to_line')) {
     /**
      * convertarraykeybecomedown划line
-     * @param array $array 要convertarray
+     * @param array $array wantconvertarray
      */
     function array_key_to_line(array $array): array
     {
@@ -159,7 +159,7 @@ if (! function_exists('array_key_to_line')) {
 if (! function_exists('array_key_to_hump')) {
     /**
      * convertarraykeybecome驼峰.
-     * @param array $array 要convertarray
+     * @param array $array wantconvertarray
      */
     function array_key_to_hump(array $array, bool $firstUp = false, bool $loop = true): array
     {

@@ -55,7 +55,7 @@ class RichTextMessage extends AbstractAttachmentMessage implements TextContentIn
     /**
      * recursionfind所haveimagesectionpoint file_id.
      *
-     * @param array $data 要searchdataarray
+     * @param array $data wantsearchdataarray
      * @param int $maxDepth most大recursion深degree
      * @return array<string> return找to所have file_id array
      */

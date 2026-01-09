@@ -21,7 +21,7 @@ enum ModelStatus: string
         return match ($this) {
             self::Normal => 'normal',
             self::Disabled => 'disabled',
-            self::Deleted => '已delete',
+            self::Deleted => 'alreadydelete',
         };
     }
 

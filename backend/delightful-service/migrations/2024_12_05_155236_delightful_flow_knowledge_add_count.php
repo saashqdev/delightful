@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
             $table->integer('expected_num')->default(0)->comment('expecttotal');
-            $table->integer('completed_num')->default(0)->comment('已completetotal');
+            $table->integer('completed_num')->default(0)->comment('alreadycompletetotal');
         });
     }
 

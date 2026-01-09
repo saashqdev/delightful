@@ -36,7 +36,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
 
     protected ?array $associateQuestions = null;
 
-    // thiswithin要compatible老versionjsondata
+    // thiswithinwantcompatible老versionjsondata
     protected null|array|string $mindMap = null;
 
     protected ?array $searchKeywords = null;
@@ -225,7 +225,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
     }
 
     /**
-     * 只return大modelreturntextcontent， andignoreinvalidcontent，如: "已经for您找to答案，请etc待generate总结“.
+     * 只return大modelreturntextcontent， andignoreinvalidcontent，如: "already经for您找to答案，请etc待generate总结“.
      */
     public function getTextContent(): string
     {

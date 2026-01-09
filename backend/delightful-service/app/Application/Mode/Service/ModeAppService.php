@@ -124,7 +124,7 @@ class ModeAppService extends AbstractModeAppService
             if (! $modeAggregateDTO) {
                 continue;
             }
-            // ifnothaveconfigurationanymodel，要befilter
+            // ifnothaveconfigurationanymodel，wantbefilter
             if (empty($modeAggregateDTO->getAllModelIds())) {
                 continue;
             }
@@ -176,7 +176,7 @@ class ModeAppService extends AbstractModeAppService
     /**
      * batchquantitygetmodelandservicequotientstatus（performanceoptimizeversion）.
      * @param array $allModelIds 所haveneedquerymodelId
-     * @return array<string, ProviderModelEntity> 已passlevel联statusfiltercanusemodel
+     * @return array<string, ProviderModelEntity> alreadypasslevel联statusfiltercanusemodel
      */
     private function getModelsBatch(array $allModelIds): array
     {

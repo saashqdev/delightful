@@ -99,7 +99,7 @@ readonly class RoleDomainService
                 $moduleLabel = $this->permission->getResourceModule($resource);
                 $permissionTags[$moduleLabel] = $moduleLabel; // usekeyvaluego重
             } catch (Throwable $e) {
-                // parsefailo clockignorethepermissiontagextract，validation已pass，not影响save
+                // parsefailo clockignorethepermissiontagextract，validationalreadypass，not影响save
             }
         }
 
@@ -246,7 +246,7 @@ readonly class RoleDomainService
      * forfinger定usercreateor维护“organizationadministrator”role（拥haveall局permission）。
      *
      * 逻辑：
-     * 1. according tocurrentorganizationfindwhether已have同名role；
+     * 1. according tocurrentorganizationfindwhetheralreadyhave同名role；
      * 2. 若not存in，thencreatenewroleand赋予 DelightfulPermission::ALL_PERMISSIONS；
      * 3. 若存in，thenensureitscontain ALL_PERMISSIONS；
      * 4. willuser ID column表add入roleassociateusercolumn表；
@@ -259,7 +259,7 @@ readonly class RoleDomainService
         // getcurrentorganizationencoding
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // 1. 尝试get已存inorganizationadministratorrole
+        // 1. 尝试getalready存inorganizationadministratorrole
         $roleEntity = $this->getByName($dataIsolation, self::ORGANIZATION_ADMIN_ROLE_NAME);
 
         if ($roleEntity === null) {

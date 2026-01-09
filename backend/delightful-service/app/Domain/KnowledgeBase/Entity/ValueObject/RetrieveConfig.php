@@ -264,7 +264,7 @@ class RetrieveConfig extends AbstractValueObject
             throw new InvalidArgumentException('Vector setting must contain vector_weight and keyword setting must contain keyword_weight');
         }
 
-        // verify graph_setting mustcontain必要field
+        // verify graph_setting mustcontain必wantfield
         if (! isset($weights['graph_setting']['relation_weight'])
             || ! isset($weights['graph_setting']['max_depth'])
             || ! isset($weights['graph_setting']['include_properties'])) {

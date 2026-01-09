@@ -16,12 +16,12 @@ use Hyperf\Codec\Json;
 use function Hyperf\Config\config;
 
 /**
- * AI能力装配器.
+ * AIcan力装配器.
  */
 class AiAbilityAssembler
 {
     /**
-     * AI能力EntityconvertforListDTO.
+     * AIcan力EntityconvertforListDTO.
      */
     public static function entityToListDTO(AiAbilityEntity $entity, string $locale = 'zh_CN'): AiAbilityListDTO
     {
@@ -35,7 +35,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * AI能力EntityconvertforDetailDTO.
+     * AIcan力EntityconvertforDetailDTO.
      */
     public static function entityToDetailDTO(AiAbilityEntity $entity, string $locale = 'zh_CN'): AiAbilityDetailDTO
     {
@@ -58,7 +58,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * AI能力EntitylistconvertforListDTOlist.
+     * AIcan力EntitylistconvertforListDTOlist.
      *
      * @param array<AiAbilityEntity> $entities
      * @return array<AiAbilityListDTO>
@@ -73,7 +73,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * AI能力listDTO转array.
+     * AIcan力listDTO转array.
      *
      * @param array<AiAbilityListDTO> $dtos
      */

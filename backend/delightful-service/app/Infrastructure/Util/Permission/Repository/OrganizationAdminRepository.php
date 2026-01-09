@@ -144,7 +144,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
      */
     public function grant(DataIsolation $dataIsolation, string $userId, ?string $grantorUserId, ?string $remarks = null, bool $isOrganizationCreator = false): OrganizationAdminEntity
     {
-        // checkwhether已存in
+        // checkwhetheralready存in
         $existing = $this->getByUserId($dataIsolation, $userId);
         if ($existing) {
             return $existing;

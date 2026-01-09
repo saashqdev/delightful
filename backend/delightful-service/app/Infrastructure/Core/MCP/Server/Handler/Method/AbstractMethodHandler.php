@@ -46,12 +46,12 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
 
     /**
      * gettoolmanager.
-     * @throws InternalErrorException whentoolmanager未seto clockthrow
+     * @throws InternalErrorException whentoolmanagernotseto clockthrow
      */
     public function getToolManager(): MCPToolManager
     {
         if (! isset($this->toolManager)) {
-            throw new InternalErrorException('toolmanager(ToolManager)未set');
+            throw new InternalErrorException('toolmanager(ToolManager)notset');
         }
         return $this->toolManager;
     }
@@ -67,12 +67,12 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
 
     /**
      * getresourcemanager.
-     * @throws InternalErrorException whenresourcemanager未seto clockthrow
+     * @throws InternalErrorException whenresourcemanagernotseto clockthrow
      */
     public function getResourceManager(): MCPResourceManager
     {
         if (! isset($this->resourceManager)) {
-            throw new InternalErrorException('resourcemanager(ResourceManager)未set');
+            throw new InternalErrorException('resourcemanager(ResourceManager)notset');
         }
         return $this->resourceManager;
     }
@@ -88,12 +88,12 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
 
     /**
      * gethintmanager.
-     * @throws InternalErrorException whenhintmanager未seto clockthrow
+     * @throws InternalErrorException whenhintmanagernotseto clockthrow
      */
     public function getPromptManager(): MCPPromptManager
     {
         if (! isset($this->promptManager)) {
-            throw new InternalErrorException('hintmanager(PromptManager)未set');
+            throw new InternalErrorException('hintmanager(PromptManager)notset');
         }
         return $this->promptManager;
     }

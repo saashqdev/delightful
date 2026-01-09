@@ -240,8 +240,8 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             ) {
                 $start = microtime(true);
                 CoContext::setRequestId($dto->getRequestId());
-                // 已generateassociateissue，准备sendsearchresult
-                // byatthiswithinisto所have维degreesummarybackagain精读，therefore丢失each维degreequantity，只能随机generate。
+                // alreadygenerateassociateissue，准备sendsearchresult
+                // byatthiswithinisto所have维degreesummarybackagain精读，therefore丢失each维degreequantity，只can随机generate。
                 $pageCount = random_int(30, 60);
                 $webSearchItem = new QuestionSearchResult([
                     'question_id' => $questionId,
@@ -303,7 +303,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
                 $pageCount = random_int(30, 60);
                 $onePageWords = random_int(200, 2000);
                 $totalWords = $pageCount * $onePageWords;
-                // todo byatthiswithinisto所have维degreesummarybackagain精读，therefore丢失each维degreequantity，只能随机generate。
+                // todo byatthiswithinisto所have维degreesummarybackagain精读，therefore丢失each维degreequantity，只can随机generate。
                 $webSearchItem = new QuestionSearchResult([
                     'question_id' => $questionId,
                     'search_keywords' => $associateSubQuestions,
@@ -473,7 +473,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $noRepeatSearchData = [];
         foreach ($noRepeatSearchContexts as $searchDetailItem) {
             $noRepeatSearch = $searchDetailItem->toArray();
-            // front端not要webpagedetail，移except detail，meanwhile保留总结o clocksearchdetail
+            // front端notwantwebpagedetail，移except detail，meanwhile保留总结o clocksearchdetail
             unset($noRepeatSearch['detail']);
             $noRepeatSearchData[] = $noRepeatSearch;
         }

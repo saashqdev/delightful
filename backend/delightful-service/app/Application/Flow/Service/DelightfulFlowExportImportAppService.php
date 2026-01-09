@@ -66,7 +66,7 @@ class DelightfulFlowExportImportAppService
             'tool_sets' => [],
         ];
 
-        // 已handleprocessencoding，防止duplicatehandle
+        // alreadyhandleprocessencoding，防止duplicatehandle
         $processedFlowCodes = [$flowCode];
         $processedToolSetIds = [];
 
@@ -170,7 +170,7 @@ class DelightfulFlowExportImportAppService
      */
     public function checkCircularDependency(FlowDataIsolation $dataIsolation, string $flowCode, array $visited = []): bool
     {
-        // ifcurrentprocess已inaccesspathmiddle，instructionshapebecomeloop
+        // ifcurrentprocessalreadyinaccesspathmiddle，instructionshapebecomeloop
         if (in_array($flowCode, $visited)) {
             return true; // hair现loopdependency
         }
@@ -281,7 +281,7 @@ class DelightfulFlowExportImportAppService
                 'flow_name' => $mainFlow->getName(),
             ];
         } catch (Throwable $e) {
-            // ifcreateassistantfail，butprocess已import，仍returnprocessinfo
+            // ifcreateassistantfail，butprocessalreadyimport，仍returnprocessinfo
             return [
                 'agent_id' => null,
                 'agent_error' => $e->getMessage(),
@@ -377,7 +377,7 @@ class DelightfulFlowExportImportAppService
         // 移exceptmaybe影响create逻辑field
         unset($toolSetData['created_at'], $toolSetData['updated_at'], $toolSetData['id']);
 
-        // settingcreate实body必要field
+        // settingcreate实body必wantfield
         $toolSetData['id'] = 0; // ensuresettingfor新建
         $toolSetData['created_at'] = new DateTime();
         $toolSetData['updated_at'] = new DateTime();
@@ -583,7 +583,7 @@ class DelightfulFlowExportImportAppService
                         $oldIdStr = (string) $oldId;
                         $newIdStr = (string) $newId;
 
-                        // use正then表达typeensure只替换completeID
+                        // usejustthen表达typeensure只替换completeID
                         if (preg_match('/^' . preg_quote($oldIdStr, '/') . '_/', $edge['sourceHandle'])) {
                             $edge['sourceHandle'] = preg_replace('/^' . preg_quote($oldIdStr, '/') . '/', $newIdStr, $edge['sourceHandle']);
                         }
@@ -620,7 +620,7 @@ class DelightfulFlowExportImportAppService
                     $oldNodeIdStr = (string) $oldNodeId;
                     $newNodeIdStr = (string) $newNodeId;
 
-                    // use正then表达typeensure只替换completesectionpointID
+                    // usejustthen表达typeensure只替换completesectionpointID
                     if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $item)) {
                         $fieldName = substr($item, strlen($oldNodeIdStr));
                         $item = $newNodeIdStr . $fieldName;
@@ -758,7 +758,7 @@ class DelightfulFlowExportImportAppService
             $oldNodeIdStr = (string) $oldNodeId;
             $newNodeIdStr = (string) $newNodeId;
 
-            // use正then表达typeensure只替换completesectionpointID
+            // usejustthen表达typeensure只替换completesectionpointID
             if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $str)) {
                 $fieldName = substr($str, strlen($oldNodeIdStr));
                 $str = $newNodeIdStr . $fieldName;
@@ -851,14 +851,14 @@ class DelightfulFlowExportImportAppService
         array &$processedToolSetIds
     ): void {
         $toolSetId = $flow->getToolSetId();
-        // skip官方tool(not_grouped)and已handletoolcollection
+        // skip官方tool(not_grouped)andalreadyhandletoolcollection
         if (empty($toolSetId) || $toolSetId === 'not_grouped' || in_array($toolSetId, $processedToolSetIds)) {
             return;
         }
 
         // gettoolcollectioninfo
         $toolSet = $this->delightfulFlowToolSetDomainService->getByCode($dataIsolation, $toolSetId);
-        // markfor已handle
+        // markforalreadyhandle
         $processedToolSetIds[] = $toolSetId;
 
         // addtoexportdatamiddle
@@ -879,7 +879,7 @@ class DelightfulFlowExportImportAppService
             // ifis子processsectionpoint
             if ($node->getNodeType() === NodeType::Sub->value) {
                 $subFlowId = $node->getParams()['sub_flow_id'] ?? '';
-                // skipnullIDand已handle子process
+                // skipnullIDandalreadyhandle子process
                 if (! $subFlowId || in_array($subFlowId, $processedFlowCodes)) {
                     continue;
                 }
@@ -891,7 +891,7 @@ class DelightfulFlowExportImportAppService
                     continue;
                 }
 
-                // markfor已handle
+                // markforalreadyhandle
                 $processedFlowCodes[] = $subFlowId;
 
                 // addtoexportdatamiddle
@@ -929,7 +929,7 @@ class DelightfulFlowExportImportAppService
                     continue;
                 }
 
-                // markfor已handle
+                // markforalreadyhandle
                 $processedFlowCodes[] = $toolId;
 
                 // addtoexportdatamiddle
@@ -971,7 +971,7 @@ class DelightfulFlowExportImportAppService
                             continue;
                         }
 
-                        // markfor已handle
+                        // markforalreadyhandle
                         $processedFlowCodes[] = $toolId;
 
                         // addtoexportdatamiddle

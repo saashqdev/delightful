@@ -117,7 +117,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * get已存inversionquantity.
+     * getalready存inversionquantity.
      */
     private function getExistingVersionCount(ProviderModelModel $model): int
     {
@@ -220,10 +220,10 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     private function logHeader(bool $isDryRun, bool $isForce, int $limit): void
     {
         $this->logger->info('startsyncservicequotientmodelconfigurationversiondata...');
-        $this->logger->info(sprintf('模type: %s', $isDryRun ? '试运line（notwritedatabase）' : '正typeexecute'));
+        $this->logger->info(sprintf('模type: %s', $isDryRun ? '试运line（notwritedatabase）' : 'justtypeexecute'));
 
         if ($isForce) {
-            $this->logger->warning('force模type已enable：willfor所havemodelcreate新version');
+            $this->logger->warning('force模typealreadyenable：willfor所havemodelcreate新version');
         }
 
         if ($limit > 0) {
@@ -239,7 +239,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
         $this->logger->info('=================================');
         $this->logger->info('synccomplete！statisticsinfo:');
         $this->logger->info(sprintf('  总model数: %d', $result['total']));
-        $this->logger->info(sprintf('  已haveversion: %d', $result['skipped']));
+        $this->logger->info(sprintf('  alreadyhaveversion: %d', $result['skipped']));
         $this->logger->info(sprintf('  newversion: %d', $result['created']));
         $this->logger->info(sprintf('  failquantity: %d', $result['failed']));
         $this->logger->info('=================================');
@@ -251,7 +251,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     private function logSkipped(ProviderModelModel $model, int $existingVersionCount): void
     {
         $this->logger->debug(sprintf(
-            '[skip] model ID: %d, name: %s (已have %d configurationversion)',
+            '[skip] model ID: %d, name: %s (alreadyhave %d configurationversion)',
             $model->id,
             $model->name ?: $model->model_id,
             $existingVersionCount

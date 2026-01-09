@@ -223,12 +223,12 @@ abstract class AbstractDomainService
             'seq_type' => $messageDTO->getMessageType()->getName(),
             'content' => $content,
             'receive_list' => '',
-            'delightful_message_id' => '', // 控制messagenot能have delightful_message_id
+            'delightful_message_id' => '', // 控制messagenotcanhave delightful_message_id
             'message_id' => $seqId,
             'refer_message_id' => '',
             'sender_message_id' => '',
             'conversation_id' => $conversationId,
-            'status' => DelightfulMessageStatus::Read->value, // send方from己message,default已读
+            'status' => DelightfulMessageStatus::Read->value, // send方from己message,defaultalready读
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => $messageDTO->getAppMessageId(),
@@ -266,7 +266,7 @@ abstract class AbstractDomainService
             'refer_message_id' => '',
             'sender_message_id' => '',
             'conversation_id' => $receiveConversationEntity->getId(),
-            'status' => DelightfulMessageStatus::Read->value, // 控制messagenotneed已读return执
+            'status' => DelightfulMessageStatus::Read->value, // 控制messagenotneedalready读return执
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => $messageDTO->getAppMessageId(),
@@ -286,7 +286,7 @@ abstract class AbstractDomainService
     public function getControlMessagePriority(DelightfulSeqEntity $seqEntity, ?int $receiveUserCount = 1): MessagePriority
     {
         $messagePriority = MessagePriority::Low;
-        // 部minute控制messageandchat强相close,can优先level提to高. such asprivate chatandperson数less than100已读return执
+        // 部minute控制messageandchat强相close,can优先level提to高. such asprivate chatandperson数less than100already读return执
         $seqType = $seqEntity->getSeqType();
         if (! in_array($seqType, ControlMessageType::getMessageStatusChangeType(), true)) {
             return $messagePriority;
@@ -297,7 +297,7 @@ abstract class AbstractDomainService
         }
 
         if (in_array($conversationEntity->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {
-            // private chatmessage已读return执,优先levelmost高
+            // private chatmessagealready读return执,优先levelmost高
             $messagePriority = MessagePriority::High;
         } elseif ($receiveUserCount <= 100 && $seqEntity->getSeqType() === ControlMessageType::SeenMessages) {
             // 100personbyinsidegroup chat,优先levelmost高
@@ -307,7 +307,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * customer端 已读/已view/withdraw/editmessage.
+     * customer端 already读/alreadyview/withdraw/editmessage.
      * @throws Throwable
      */
     public function clientOperateMessageStatus(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
@@ -338,14 +338,14 @@ abstract class AbstractDomainService
                     try {
                         // batchquantitygivefrom己generatestatus变moremessagestream序column
                         $this->delightfulSeqRepository->batchCreateSeq($userMessageStatusChangeSeqEntities);
-                        // more改databasemiddlemessagestatus，避免新设备logino clockdisplay未读
+                        // more改databasemiddlemessagestatus，避免新设备logino clockdisplaynot读
                         if (! empty($needUpdateStatusSeqIds)) {
                             $this->delightfulSeqRepository->batchUpdateSeqStatus($needUpdateStatusSeqIds, DelightfulMessageStatus::Seen);
                         }
                         $messagePriority = $this->getControlMessagePriority($userMessageStatusChangeSeqEntities[0], count($userMessageStatusChangeSeqEntities));
                         // asyncwillgeneratemessagestreamnotifyuserother设备.
                         $seqIds = array_column($userMessageStatusChangeSeqEntities, 'id');
-                        // batchquantityminutehair已读message,givemessagesend者
+                        // batchquantityminutehairalready读message,givemessagesend者
                         $this->batchDispatchSeq($seqIds, $messagePriority, $userMessageStatusChangeSeqEntities[0]->getConversationId());
                         Db::commit();
                         $this->logger->info(sprintf('batchDispatchSeq success seqIds:%s  $messagePriority:%s', Json::encode($seqIds), Json::encode($messagePriority)));
@@ -353,7 +353,7 @@ abstract class AbstractDomainService
                         Db::rollBack();
                         throw $exception;
                     }
-                    // batchquantitypushgivefrom己other设备,letother设备display已读,notagainduplicatesendreturn执
+                    // batchquantitypushgivefrom己other设备,letother设备displayalready读,notagainduplicatesendreturn执
                     $this->batchPushSeq($seqIds, $messagePriority);
                 }
 
@@ -386,12 +386,12 @@ abstract class AbstractDomainService
                 $mutexLockKey = 'chat:revoke_message:' . $messageStruct->getReferMessageId();
                 $this->redisLocker->mutexLock($mutexLockKey, $messageStruct->getReferMessageId());
                 try {
-                    // 只能withdrawfrom己hairoutmessage
+                    // 只canwithdrawfrom己hairoutmessage
                     $userSeqEntity = $this->delightfulSeqRepository->getSeqByMessageId($messageStruct->getReferMessageId());
                     if ($userSeqEntity === null || $userSeqEntity->getObjectId() !== $userEntity->getDelightfulId()) {
                         ExceptionBuilder::throw(ChatErrorCode::MESSAGE_NOT_FOUND);
                     }
-                    // querymessagewhether已bewithdraw
+                    // querymessagewhetheralreadybewithdraw
                     $userRevokedSeqEntity = $this->delightfulSeqRepository->getMessageRevokedSeq(
                         $messageStruct->getReferMessageId(),
                         $userEntity,
@@ -404,16 +404,16 @@ abstract class AbstractDomainService
                         );
                         Db::beginTransaction();
                         try {
-                            // modifyoriginal seq，mark已withdraw
+                            // modifyoriginal seq，markalreadywithdraw
                             $this->delightfulSeqRepository->batchUpdateSeqStatus([$userSeqEntity->getId()], DelightfulMessageStatus::Revoked);
                             // batchquantitygivefrom己generatestatus变moremessagestream序column
                             $this->delightfulSeqRepository->batchCreateSeq([$userRevokedSeqEntity]);
                             $messagePriority = $this->getControlMessagePriority($userRevokedSeqEntity);
-                            // more改databasemiddlemessagestatus，避免新设备logino clockdisplay未读
+                            // more改databasemiddlemessagestatus，避免新设备logino clockdisplaynot读
                             $this->delightfulSeqRepository->batchUpdateSeqStatus([$messageStruct->getReferMessageId()], DelightfulMessageStatus::Revoked);
                             // asyncwillgeneratemessagestreamnotifyuserother设备.
                             $seqIds = [$userRevokedSeqEntity->getId()];
-                            // batchquantityminutehair已读message,givemessagesend者
+                            // batchquantityminutehairalready读message,givemessagesend者
                             $this->batchDispatchSeq($seqIds, $messagePriority, $userSeqEntity->getConversationId());
                             Db::commit();
                             $this->logger->info(sprintf('batchDispatchSeq success seqIds:%s  $messagePriority:%s', Json::encode($seqIds), Json::encode($messagePriority)));
@@ -421,7 +421,7 @@ abstract class AbstractDomainService
                             Db::rollBack();
                             throw $exception;
                         }
-                        // batchquantitypushgivefrom己other设备,letother设备display已读,notagainduplicatesendreturn执
+                        // batchquantitypushgivefrom己other设备,letother设备displayalready读,notagainduplicatesendreturn执
                         $this->batchPushSeq($seqIds, $messagePriority);
                     }
                     // poweretc,get refer_message_ids 实o clockstatus,ando clockresponsecustomer端
@@ -514,7 +514,7 @@ abstract class AbstractDomainService
             // formessagereceive方create话题
             $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($conversationId);
             if ($receiveConversationEntity === null) {
-                // 刚add好友，receive方conversation id also未generate
+                // justadd好友，receive方conversation id alsonotgenerate
                 return $senderTopicEntity;
             }
             $receiveTopicDTO = new DelightfulTopicEntity();
@@ -672,7 +672,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * byatoneitemmessage,in2conversationwindow渲染o clock,willgenerate2messageid,thereforeneedparseoutcome收item方能看tomessagequoteid.
+     * byatoneitemmessage,in2conversationwindow渲染o clock,willgenerate2messageid,thereforeneedparseoutcome收item方can看tomessagequoteid.
      * according to delightful_message_id + object_id + object_type 找tomessage收item方refer_message_id.
      * Support for the message editing function: For multiple sequences (seqs) of the same object_id, only the one with the smallest seq_id is returned.
      */

@@ -78,7 +78,7 @@ class ChatMemory implements MemoryPersistenceInterface
     }
 
     /**
-     * 已经isrow好序所havemessage.
+     * already经isrow好序所havemessage.
      * @return array<DelightfulMessageEntity>
      */
     public function getImChatMessages(MemoryQuery $memoryQuery): array

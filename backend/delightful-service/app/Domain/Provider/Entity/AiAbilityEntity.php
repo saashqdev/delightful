@@ -12,7 +12,7 @@ use App\Domain\Provider\Entity\ValueObject\Status;
 use App\Infrastructure\Core\AbstractEntity;
 
 /**
- * AI 能力实body.
+ * AI can力实body.
  */
 class AiAbilityEntity extends AbstractEntity
 {
@@ -186,7 +186,7 @@ class AiAbilityEntity extends AbstractEntity
     }
 
     /**
-     * 判断能力whetherenable.
+     * 判断can力whetherenable.
      */
     public function isEnabled(): bool
     {

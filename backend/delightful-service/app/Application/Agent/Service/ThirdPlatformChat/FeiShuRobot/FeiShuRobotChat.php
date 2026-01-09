@@ -95,7 +95,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     public function __construct(array $options)
     {
         if (empty($options)) {
-            throw new InvalidArgumentException('飞书机器personconfigurationnot能fornull');
+            throw new InvalidArgumentException('飞书机器personconfigurationnotcanfornull');
         }
         $options['http'] = [
             'base_uri' => 'https://open.feishu.cn',
@@ -132,7 +132,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
         // poweretcpropertyhandle：usemessageIDconductgo重
         if (! $this->checkMessageIdLock($messageId)) {
-            $this->logger->info('飞书message已handlepass，skip', ['message_id' => $messageId]);
+            $this->logger->info('飞书messagealreadyhandlepass，skip', ['message_id' => $messageId]);
             $chatMessage->setEvent(ThirdPlatformChatEvent::None);
             return $chatMessage;
         }
@@ -150,7 +150,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      * sendmessage.
      *
      * @param ThirdPlatformChatMessage $thirdPlatformChatMessage 平台message
-     * @param MessageInterface $message 要sendmessage
+     * @param MessageInterface $message wantsendmessage
      */
     public function sendMessage(ThirdPlatformChatMessage $thirdPlatformChatMessage, MessageInterface $message): void
     {
@@ -270,7 +270,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $result = $this->processMessageContent($messageType, $content, $chatMessage, $organizationCode, $messageId);
 
         if ($result === false) {
-            // not supportedmessagetype，已sendhintandsettingeventforNone
+            // not supportedmessagetype，alreadysendhintandsettingeventforNone
             return $chatMessage;
         }
 
@@ -587,7 +587,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         ];
         $this->application->message->send($data, 'chat_id');
 
-        $this->logger->info('已sendnot supportedmessagetypenotify', ['receive_id' => $receiverId]);
+        $this->logger->info('alreadysendnot supportedmessagetypenotify', ['receive_id' => $receiverId]);
     }
 
     /**
@@ -606,7 +606,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         ];
         $this->application->message->send($data, 'chat_id');
 
-        $this->logger->info('已senderrornotify', ['receive_id' => $receiverId]);
+        $this->logger->info('alreadysenderrornotify', ['receive_id' => $receiverId]);
     }
 
     /**
@@ -746,7 +746,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             'content' => [],
         ];
 
-        // use正then表达typematchMarkdownmiddleimage
+        // usejustthen表达typematchMarkdownmiddleimage
         $pattern = '/!\[(.*?)\]\((.*?)\)/';
 
         // ifnothaveimage，直接returnmdformat
@@ -797,7 +797,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      * addtextpiece（ifnotfornull）.
      *
      * @param array &$contentBlocks contentpiecearray
-     * @param string $text 要addtext
+     * @param string $text wantaddtext
      */
     private function addTextBlockIfNotEmpty(array &$contentBlocks, string $text): void
     {

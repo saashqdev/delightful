@@ -169,12 +169,12 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
     private function validateRequest(AzureOpenAIImageEditRequest $request): void
     {
         if (empty($request->getPrompt())) {
-            $this->logger->error('Azure OpenAIgraphlikeedit：缺少必要parameter - prompt');
+            $this->logger->error('Azure OpenAIgraphlikeedit：缺少必wantparameter - prompt');
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.prompt_required');
         }
 
         if (empty($request->getReferenceImages())) {
-            $this->logger->error('Azure OpenAIgraphlikeedit：缺少必要parameter - reference images');
+            $this->logger->error('Azure OpenAIgraphlikeedit：缺少必wantparameter - reference images');
             ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, 'image_generate.reference_images_required');
         }
 

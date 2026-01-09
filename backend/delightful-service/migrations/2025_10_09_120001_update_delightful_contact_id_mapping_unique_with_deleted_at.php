@@ -30,7 +30,7 @@ return new class extends Migration {
     public function down(): void
     {
         Schema::table('delightful_contact_third_platform_id_mapping', static function (Blueprint $table) {
-            // also原for未contain deleted_at 唯oneindex
+            // also原fornotcontain deleted_at 唯oneindex
             $table->dropIndex('unique_env_origin_mapping_type_third_type_org_code');
             $table->unique(
                 ['delightful_environment_id', 'origin_id', 'mapping_type', 'third_platform_type', 'delightful_organization_code'],

@@ -363,7 +363,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * test未authorizationaccess.
+     * testnotauthorizationaccess.
      */
     public function testUpdateUserInfoWithoutAuthorization(): void
     {
@@ -378,8 +378,8 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         // shouldreturnauthorizationerror
         $this->assertIsArray($response, 'responseshouldisarrayformat');
-        $this->assertArrayHasKey('code', $response, '未authorizationrequest应returnerror码');
-        $this->assertNotEquals(1000, $response['code'] ?? 1000, '未authorizationrequestnot应returnsuccess码');
+        $this->assertArrayHasKey('code', $response, 'notauthorizationrequest应returnerror码');
+        $this->assertNotEquals(1000, $response['code'] ?? 1000, 'notauthorizationrequestnot应returnsuccess码');
     }
 
     /**
@@ -425,7 +425,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * testgetuserupdatepermission - 未authorizationaccess.
+     * testgetuserupdatepermission - notauthorizationaccess.
      */
     public function testGetUserUpdatePermissionWithoutAuthorization(): void
     {
@@ -437,12 +437,12 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         // shouldreturnauthorizationerror
         $this->assertIsArray($response, 'responseshouldisarrayformat');
-        $this->assertArrayHasKey('code', $response, '未authorizationrequest应returnerror码');
-        $this->assertNotEquals(1000, $response['code'] ?? 1000, '未authorizationrequestnot应returnsuccess码');
+        $this->assertArrayHasKey('code', $response, 'notauthorizationrequest应returnerror码');
+        $this->assertNotEquals(1000, $response['code'] ?? 1000, 'notauthorizationrequestnot应returnsuccess码');
 
-        // 常见未authorizationerror码
+        // 常见notauthorizationerror码
         $unauthorizedCodes = [2179, 3035, 401, 403];
-        $this->assertContains($response['code'] ?? 0, $unauthorizedCodes, 'shouldreturn未authorizationerror码');
+        $this->assertContains($response['code'] ?? 0, $unauthorizedCodes, 'shouldreturnnotauthorizationerror码');
     }
 
     /**
@@ -545,7 +545,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
      */
     private function performLogin(): string
     {
-        // if已经havetoken，直接return
+        // ifalready经havetoken，直接return
         if (! empty(self::$accessToken)) {
             return self::$accessToken;
         }
@@ -572,7 +572,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         self::$accessToken = $loginResponse['data']['access_token'];
 
         // outputdebuginfo
-        echo "\nloginsuccess，获得token: " . self::$accessToken . "\n";
+        echo "\nloginsuccess，获token: " . self::$accessToken . "\n";
         echo "\ncompleteloginresponse: " . json_encode($loginResponse, JSON_UNESCAPED_UNICODE) . "\n";
 
         return self::$accessToken;

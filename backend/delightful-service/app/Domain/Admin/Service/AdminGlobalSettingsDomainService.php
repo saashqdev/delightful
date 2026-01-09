@@ -59,7 +59,7 @@ readonly class AdminGlobalSettingsDomainService
             $dataIsolation->getCurrentOrganizationCode()
         );
 
-        // get已存insettingtype，use array_flip optimizefind
+        // getalready存insettingtype，use array_flip optimizefind
         $existingTypes = array_flip(array_map(fn ($setting) => $setting->getType()->value, $settings));
 
         // 找outnot存insettingtype

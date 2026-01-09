@@ -82,7 +82,7 @@ class ByteDanceSTSService
             }
         }
 
-        // cachemiddlenothaveor已expire，or者forcerefresh，getnewJWT Token
+        // cachemiddlenothaveoralreadyexpire，or者forcerefresh，getnewJWT Token
         $appId = config('asr.volcengine.app_id');
         $accessToken = config('asr.volcengine.token');
 
@@ -266,7 +266,7 @@ class ByteDanceSTSService
 
             $data = Json::decode($cachedData);
 
-            // checkwhether已expire（额outsidesecuritycheck）
+            // checkwhetheralreadyexpire（额outsidesecuritycheck）
             if (isset($data['expires_at']) && $data['expires_at'] <= time()) {
                 $this->redis->del($cacheKey);
                 return null;

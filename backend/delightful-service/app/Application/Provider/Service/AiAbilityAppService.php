@@ -23,7 +23,7 @@ use Hyperf\Contract\TranslatorInterface;
 use Throwable;
 
 /**
- * AI能力applicationservice.
+ * AIcan力applicationservice.
  */
 class AiAbilityAppService extends AbstractKernelAppService
 {
@@ -34,7 +34,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * get所haveAI能力list.
+     * get所haveAIcan力list.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @return array<AiAbilityListDTO>
@@ -51,10 +51,10 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * getAI能力detail.
+     * getAIcan力detail.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
-     * @param string $code 能力code
+     * @param string $code can力code
      */
     public function getDetail(DelightfulUserAuthorization $authorization, string $code): AiAbilityDetailDTO
     {
@@ -67,7 +67,7 @@ class AiAbilityAppService extends AbstractKernelAppService
             ExceptionBuilder::throw(ServiceProviderErrorCode::AI_ABILITY_NOT_FOUND);
         }
 
-        // get能力detail
+        // getcan力detail
         $entity = $this->aiAbilityDomainService->getByCode($dataIsolation, $codeEnum);
 
         $locale = $this->translator->getLocale();
@@ -75,7 +75,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * updateAI能力.
+     * updateAIcan力.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @param UpdateAiAbilityRequest $request updaterequest
@@ -102,12 +102,12 @@ class AiAbilityAppService extends AbstractKernelAppService
             $entity = $this->aiAbilityDomainService->getByCode($dataIsolation, $code);
             $dbConfig = $entity->getConfig();
 
-            // 智能mergeconfiguration（保留be脱敏api_key）
+            // 智canmergeconfiguration（保留be脱敏api_key）
             $mergedConfig = $this->mergeConfigPreservingApiKeys($dbConfig, $request->getConfig());
             $updateData['config'] = $mergedConfig;
         }
 
-        // ifnothave要updatedata，直接returnsuccess
+        // ifnothavewantupdatedata，直接returnsuccess
         if (empty($updateData)) {
             return true;
         }
@@ -117,7 +117,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * initializeAI能力data（fromconfigurationfilesynctodatabase）.
+     * initializeAIcan力data（fromconfigurationfilesynctodatabase）.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
      * @return int initializequantity
@@ -130,7 +130,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * 智能mergeconfiguration（保留be脱敏api_keyoriginalvalue）.
+     * 智canmergeconfiguration（保留be脱敏api_keyoriginalvalue）.
      *
      * @param array $dbConfig databaseoriginalconfiguration
      * @param array $frontendConfig front端传comeconfiguration（maybecontain脱敏api_key）
@@ -160,7 +160,7 @@ class AiAbilityAppService extends AbstractKernelAppService
             }
         }
 
-        // front端未传field, thendatabasemiddlefieldfordefaultvalue ''
+        // front端not传field, thendatabasemiddlefieldfordefaultvalue ''
         foreach ($dbConfig as $key => $value) {
             if (! array_key_exists($key, $result)) {
                 $result[$key] = '';

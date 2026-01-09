@@ -227,7 +227,7 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // iffirstyuan素已经is InstructionValue object，then直接use
+        // iffirstyuan素already经is InstructionValue object，then直接use
         if (isset($values[0]) && $values[0] instanceof InstructionValue) {
             $this->values = $values;
             return;

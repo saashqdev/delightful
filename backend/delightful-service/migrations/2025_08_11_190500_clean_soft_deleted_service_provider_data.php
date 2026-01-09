@@ -136,7 +136,7 @@ return new class extends Migration {
                     $totalDeleted += $deletedConfigsCount;
                     $logger->info("delete官方organization Delightful servicequotientconfiguration: {$deletedConfigsCount} item");
                 } else {
-                    $logger->info('未找toneedcleanup Delightful servicequotientconfiguration');
+                    $logger->info('not找toneedcleanup Delightful servicequotientconfiguration');
                 }
 
                 // 4. 额outsidecleanup：delete所have is_office=1 官方organizationmodel
@@ -319,7 +319,7 @@ return new class extends Migration {
             if ($processedCount > $totalOrgs) {
                 $processedCount = $totalOrgs;
             }
-            $logger->info("已handle {$processedCount}/{$totalOrgs} organization，累计delete: {$totalDeleted} item");
+            $logger->info("alreadyhandle {$processedCount}/{$totalOrgs} organization，累计delete: {$totalDeleted} item");
         }
 
         $logger->info("service_provider_models 表冗remainderdatacleanupcomplete，总共delete: {$totalDeleted} itemrecord");

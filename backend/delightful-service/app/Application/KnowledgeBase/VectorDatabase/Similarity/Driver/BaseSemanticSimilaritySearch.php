@@ -30,7 +30,7 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
 
     public function search(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeSimilarityFilter $filter, KnowledgeBaseEntity $knowledgeBaseEntity, RetrieveConfig $retrieveConfig): array
     {
-        // 场景verify， ifstart重新sort，can多召returndata，然backaccording to得minuteconductsort，取 limit ，at mostnot超pass 20 or者 limit up限
+        // 场景verify， ifstart重新sort，can多召returndata，然backaccording tominuteconductsort，取 limit ，at mostnot超pass 20 or者 limit up限
         $queryNum = $filter->getLimit();
         if ($retrieveConfig->isRerankingEnable()) {
             // ifstart重sort，increase召returnquantity，butnot超pass20ororiginallimit3times

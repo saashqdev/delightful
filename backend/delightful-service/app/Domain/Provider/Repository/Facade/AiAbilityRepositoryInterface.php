@@ -14,48 +14,48 @@ use App\Domain\Provider\Entity\ValueObject\Query\AiAbilityQuery;
 use App\Infrastructure\Core\ValueObject\Page;
 
 /**
- * AI 能力仓储interface.
+ * AI can力仓储interface.
  */
 interface AiAbilityRepositoryInterface
 {
     /**
-     * according to能力codegetAI能力实body.
+     * according tocan力codegetAIcan力实body.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
-     * @param AiAbilityCode $code 能力code
-     * @return null|AiAbilityEntity AI能力实body
+     * @param AiAbilityCode $code can力code
+     * @return null|AiAbilityEntity AIcan力实body
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity;
 
     /**
-     * get所haveAI能力list.
+     * get所haveAIcan力list.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
-     * @return array<AiAbilityEntity> AI能力实bodylist
+     * @return array<AiAbilityEntity> AIcan力实bodylist
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array;
 
     /**
-     * according toIDgetAI能力实body.
+     * according toIDgetAIcan力实body.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
-     * @param int $id 能力ID
-     * @return null|AiAbilityEntity AI能力实body
+     * @param int $id can力ID
+     * @return null|AiAbilityEntity AIcan力实body
      */
     public function getById(ProviderDataIsolation $dataIsolation, int $id): ?AiAbilityEntity;
 
     /**
-     * saveAI能力实body.
+     * saveAIcan力实body.
      *
-     * @param AiAbilityEntity $entity AI能力实body
+     * @param AiAbilityEntity $entity AIcan力实body
      * @return bool whethersavesuccess
      */
     public function save(AiAbilityEntity $entity): bool;
 
     /**
-     * updateAI能力实body.
+     * updateAIcan力实body.
      *
-     * @param AiAbilityEntity $entity AI能力实body
+     * @param AiAbilityEntity $entity AIcan力实body
      * @return bool whetherupdatesuccess
      */
     public function update(AiAbilityEntity $entity): bool;
@@ -64,14 +64,14 @@ interface AiAbilityRepositoryInterface
      * according tocodeupdate（supportchoosepropertyupdate）.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
-     * @param AiAbilityCode $code 能力code
+     * @param AiAbilityCode $code can力code
      * @param array $data updatedata（status、configetc）
      * @return bool whetherupdatesuccess
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool;
 
     /**
-     * paginationqueryAI能力list.
+     * paginationqueryAIcan力list.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param AiAbilityQuery $query queryitemitem

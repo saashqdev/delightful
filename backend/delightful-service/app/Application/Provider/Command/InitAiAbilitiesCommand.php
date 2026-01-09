@@ -31,7 +31,7 @@ class InitAiAbilitiesCommand extends HyperfCommand
     public function configure(): void
     {
         parent::configure();
-        $this->setDescription('initializeAI能力data（fromconfigurationfile同todatalibrary）');
+        $this->setDescription('initializeAIcan力data（fromconfigurationfile同todatalibrary）');
         $this->addArgument('organization_code', InputArgument::REQUIRED, 'organizationencoding');
     }
 
@@ -45,7 +45,7 @@ class InitAiAbilitiesCommand extends HyperfCommand
             return;
         }
 
-        $this->info("startfororganization {$organizationCode} initializeAI能力data...");
+        $this->info("startfororganization {$organizationCode} initializeAIcan力data...");
 
         try {
             // createonetemporary Authorization objectuseatcommandline
@@ -53,13 +53,13 @@ class InitAiAbilitiesCommand extends HyperfCommand
             $authorization->setOrganizationCode($organizationCode);
 
             $count = $this->aiAbilityAppService->initializeAbilities($authorization);
-            $this->info("successinitialize {$count} AI能力");
+            $this->info("successinitialize {$count} AIcan力");
         } catch (Throwable $e) {
-            $this->error('initializeAI能力datafailed: ' . $e->getMessage());
+            $this->error('initializeAIcan力datafailed: ' . $e->getMessage());
             $this->error($e->getTraceAsString());
             return;
         }
 
-        $this->info('AI能力datainitializecomplete');
+        $this->info('AIcan力datainitializecomplete');
     }
 }

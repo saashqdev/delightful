@@ -60,7 +60,7 @@ class CommentRepository
      * updatefinger定commentcontentandattachment。
      *
      * @param RequestContext $requestContext requestupdown文
-     * @param CommentEntity $commentEntity 要updatecomment实body
+     * @param CommentEntity $commentEntity wantupdatecomment实body
      */
     public function updateComment(
         RequestContext $requestContext,
@@ -160,7 +160,7 @@ class CommentRepository
      * batchquantitydeletefinger定commentandits所have子comment。
      *
      * @param RequestContext $requestContext requestupdown文
-     * @param array $commentIds 要deletecommentIDarray
+     * @param array $commentIds wantdeletecommentIDarray
      * @return array deletecommentIDarray
      */
     public function batchDelete(
@@ -185,10 +185,10 @@ class CommentRepository
     }
 
     /**
-     * batchquantityrestore已deletecomment。
+     * batchquantityrestorealreadydeletecomment。
      *
      * @param RequestContext $requestContext requestupdown文
-     * @param array $commentIds 要restorecommentIDarray
+     * @param array $commentIds wantrestorecommentIDarray
      */
     public function batchRestore(
         RequestContext $requestContext,

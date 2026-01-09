@@ -48,7 +48,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         if (! isset($usersInfo[$uid], $usersInfo[$friendId])) {
             ExceptionBuilder::throw(UserErrorCode::USER_NOT_EXIST);
         }
-        // 检测whether已经is好友
+        // 检测whetheralready经is好友
         if ($this->friendRepository->isFriend($uid, $friendId)) {
             return true;
         }

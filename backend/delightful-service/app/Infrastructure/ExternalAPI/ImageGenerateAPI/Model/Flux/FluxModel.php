@@ -222,7 +222,7 @@ class FluxModel extends AbstractImageGenerate
             return new ImageGenerateResponse(ImageGenerateType::URL, [$rawResult['data']['imageUrl']]);
         }
 
-        $this->logger->error('Flux文生graph：未gettoimageURL', ['response' => $rawResult]);
+        $this->logger->error('Flux文生graph：notgettoimageURL', ['response' => $rawResult]);
         ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
     }
 

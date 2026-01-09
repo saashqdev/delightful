@@ -297,10 +297,10 @@ readonly class AsrPresetFileService
             return $result;
         }
 
-        // ifinsertbeignore（file已存in），query现haverecord
+        // ifinsertbeignore（filealready存in），query现haverecord
         $existingFile = $this->taskFileDomainService->getByProjectIdAndFileKey($projectId, $fileKey);
         if ($existingFile !== null) {
-            $this->logger->info(sprintf('%s已存in，use现haverecord', $logPrefix), [
+            $this->logger->info(sprintf('%salready存in，use现haverecord', $logPrefix), [
                 'task_key' => $taskKey,
                 'file_id' => $existingFile->getFileId(),
             ]);

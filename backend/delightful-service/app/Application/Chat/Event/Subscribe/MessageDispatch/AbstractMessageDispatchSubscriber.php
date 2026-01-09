@@ -62,7 +62,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
             }
             foreach ($seqIds as $seqId) {
                 $seqId = (string) $seqId;
-                // useredis检测seqwhether已经尝试多time,if超pass n time,thennotagainpush
+                // useredis检测seqwhetheralready经尝试多time,if超pass n time,thennotagainpush
                 $seqRetryKey = sprintf('messageDispatch:seqRetry:%s', $seqId);
                 $seqRetryCount = $this->redis->get($seqRetryKey);
                 if ($seqRetryCount >= 3) {
@@ -75,7 +75,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 retry(3, function () use ($seqId, &$userSeqEntity) {
                     $userSeqEntity = $this->delightfulChatSeqRepository->getSeqByMessageId($seqId);
                     if ($userSeqEntity === null) {
-                        // maybeistransactionalso未submit,mq已经消费,delayretry
+                        // maybeistransactionalsonotsubmit,mqalready经消费,delayretry
                         ExceptionBuilder::throw(ChatErrorCode::SEQ_NOT_FOUND);
                     }
                 }, 100);

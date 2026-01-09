@@ -55,7 +55,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         if (! $providerConfigEntity) {
             return null;
         }
-        // 存intemplatevirtual configId and已经writedatabase configId，thereforethiswithinuse getProviderConfig returnservicequotient id 替换传入value
+        // 存intemplatevirtual configId andalready经writedatabase configId，thereforethiswithinuse getProviderConfig returnservicequotient id 替换传入value
         $configId = (string) $providerConfigEntity->getId();
         // 2. query Provider
         $providerEntity = $this->getProviderById($dataIsolation, $providerConfigEntity->getServiceProviderId());
@@ -218,7 +218,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
                 return null;
             }
 
-            // 先checkorganizationdownwhether已存into应configuration
+            // 先checkorganizationdownwhetheralready存into应configuration
             $existingConfig = $this->serviceProviderConfigRepository->findFirstByServiceProviderId($dataIsolation, $providerEntity->getId());
             if ($existingConfig) {
                 // if存intrue实configuration，returntrue实configuration
@@ -297,7 +297,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         $providerCode = $parsed['providerCode'];
         $category = $parsed['category'];
 
-        // 2. validatetemplateconfigurationnot能fornull
+        // 2. validatetemplateconfigurationnotcanfornull
         $config = $providerConfigEntity->getConfig();
         if ($config === null || $this->isProviderConfigEmpty($config)) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderConfigError);

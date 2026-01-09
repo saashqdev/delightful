@@ -46,7 +46,7 @@ class Template extends AbstractTemplate
     ];
 
     /**
-     * 火山云短信signature暂未support国际化.
+     * 火山云短信signature暂notsupport国际化.
      */
     protected array $signMap = [
         '灯塔engine' => [
@@ -70,16 +70,16 @@ class Template extends AbstractTemplate
     }
 
     /**
-     * according to传come短信text,parsevariable. onlyvariablevalue,未matchvariablekey!
+     * according to传come短信text,parsevariable. onlyvariablevalue,notmatchvariablekey!
      * needvariableparsereason:火山短信只supportvariable短信send,while业务方willoutat创蓝短信reason,will传come整短信textcontent,nothavevariable.
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
     {
-        // 找tofinger定templatevariable正thenparserule. ifnot传模版id,loop正thenmatchwill降低matchspeeddegreeandaccuratedegree
+        // 找tofinger定templatevariablejustthenparserule. ifnot传模版id,loopjustthenmatchwill降低matchspeeddegreeandaccuratedegree
         if ($templateId) {
             // 判断templatewhether存in
             if (! isset($this->idContents[$templateId])) {
-                throw new RuntimeException('未matchtotemplateid:' . $templateId);
+                throw new RuntimeException('notmatchtotemplateid:' . $templateId);
             }
             $pregMatch = $this->variablePregAnalyse[$language][$templateId] ?? '';
             // ifaccording to短信contentmatchtotemplateid,then变more传入templateidvalue
@@ -89,7 +89,7 @@ class Template extends AbstractTemplate
             [$templateId, $matchedVariables] = $this->variablePregMatch($this->variablePregAnalyse[$language], $message);
         }
         if (empty($templateId)) {
-            throw new RuntimeException('未matchtotemplateid');
+            throw new RuntimeException('notmatchtotemplateid');
         }
         if (empty($matchedVariables)) {
             throw new RuntimeException('短信templatevariableparsefail');
@@ -103,7 +103,7 @@ class Template extends AbstractTemplate
     }
 
     /**
-     * @param array $pregVariableAnalyse ['templateid_xxx'=>'正thentable达type']
+     * @param array $pregVariableAnalyse ['templateid_xxx'=>'justthentable达type']
      */
     private function variablePregMatch(array $pregVariableAnalyse, string $message): array
     {

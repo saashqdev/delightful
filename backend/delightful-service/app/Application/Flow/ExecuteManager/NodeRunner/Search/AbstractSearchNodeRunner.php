@@ -22,19 +22,19 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
         $filterType = $paramsConfig->getFilterType();
         foreach ($paramsConfig->getFilters() as $filter) {
             $rightValue = $filter->getRightValue()->getValue()->getResult($executionData->getExpressionFieldData());
-            // null、''、0、[]、false  直接skip吧，谁not事搜thisthese啊。right侧not填valuenotconductsearch
+            // null、''、0、[]、false  直接skip，谁not事搜thisthese。right侧not填valuenotconductsearch
             if (empty($rightValue)) {
                 continue;
             }
 
-            // definition本time range id，ifis null 代tablealso未conductlimit
+            // definition本time range id，ifis null 代tablealsonotconductlimit
             $rangeIds = null;
             if ($filterType->isAll()) {
-                // ifis所haveitemitemfull足，that么已经存in id setthenis本timerange
+                // ifis所haveitemitemfull足，that么already经存in id setthenis本timerange
                 $rangeIds = $allIds;
             }
 
-            // ifrange id bedefinitionbecomeemptyarray，代table已经nothaveconformitemitemdata，直接跳outloop
+            // ifrange id bedefinitionbecomeemptyarray，代tablealready经nothaveconformitemitemdata，直接跳outloop
             if (is_array($rangeIds) && empty($rangeIds)) {
                 break;
             }
@@ -51,10 +51,10 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 continue;
             }
             if ($filterType->isAny()) {
-                // ifis任意itemitemfull足，that么will本time id and已have id conductmerge
+                // ifis任意itemitemfull足，that么will本time id andalreadyhave id conductmerge
                 $allIds = array_merge($allIds ?? [], $currentIds);
             } else {
-                // ifis所haveitemitemfull足，that么will本time id and已have id conduct交collection
+                // ifis所haveitemitemfull足，that么will本time id andalreadyhave id conduct交collection
                 $allIds = $allIds === null ? $currentIds : array_intersect($allIds, $currentIds);
             }
         }

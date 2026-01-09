@@ -125,7 +125,7 @@ class DelightfulFlowEntity extends AbstractEntity
 
     public function prepareTestRun(): void
     {
-        // 试运lineis要按照starto clockcalculate
+        // 试运lineiswant按照starto clockcalculate
         $this->enabled = true;
 
         // process试运lineits实只need nodes
@@ -180,7 +180,7 @@ class DelightfulFlowEntity extends AbstractEntity
     {
         $this->enabled = ! $this->enabled;
         if ($this->enabled) {
-            // ifis要start，need检测whetherhave nodes configuration
+            // ifiswantstart，need检测whetherhave nodes configuration
             if (empty($this->nodes)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
             }
@@ -238,21 +238,21 @@ class DelightfulFlowEntity extends AbstractEntity
             }
 
             if ($node->isStart() && ! $node->getParentId()) {
-                // if已经haveone，that么iserrorprocess，out现多startsectionpoint
+                // ifalready经haveone，that么iserrorprocess，out现多startsectionpoint
                 if ($this->startNode) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.only_one');
                 }
                 $this->startNode = $node;
             }
             if ($node->isEnd() && ! $node->getParentId()) {
-                // 多endsectionpointo clock，暂o clock取first，should要做become只能haveoneendsectionpoint
+                // 多endsectionpointo clock，暂o clock取first，shouldwant做become只canhaveoneendsectionpoint
                 if (! $this->endNode) {
                     $this->endNode = $node;
                 }
             }
         }
 
-        // 已经ispublishstatus才need检测
+        // already经ispublishstatus才need检测
         if ($this->enabled) {
             //            if (! $this->startNode) {
             //                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.must_exist');
@@ -299,7 +299,7 @@ class DelightfulFlowEntity extends AbstractEntity
                 $result['error_information'] = $nodeDebugResult->getErrorMessage();
             }
             if ($node->isEnd() && $nodeDebugResult && $nodeDebugResult->hasExecute()) {
-                // result优先，if已经存in，thennotneed
+                // result优先，ifalready经存in，thennotneed
                 if (empty($result)) {
                     $result = $nodeDebugResult->getOutput() ?? [];
                 }
@@ -674,11 +674,11 @@ class DelightfulFlowEntity extends AbstractEntity
         }
 
         if ($this->type === Type::Tools) {
-            // name只能contain 字母、number、down划line
+            // name只cancontain 字母、number、down划line
             if (! preg_match('/^[a-zA-Z0-9_]+$/', $this->name)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.tool.name.invalid_format');
             }
-            // todo 要唯one
+            // todo want唯one
             // todo inside置tool名allowbeuse
         }
     }

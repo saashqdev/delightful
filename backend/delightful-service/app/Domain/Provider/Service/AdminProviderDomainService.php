@@ -85,7 +85,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
         if (! empty($configData['config'])) {
             if ($decryptConfig) {
-                // whenneeddecrypto clock，setting已decryptconfiguration（not脱敏)
+                // whenneeddecrypto clock，settingalreadydecryptconfiguration（not脱敏)
                 // need new 两timeProviderConfigItemobject，因for setConfig methodwill操asoriginalobjectconduct脱敏
                 $mergedData['decryptedConfig'] = new ProviderConfigItem($configData['config']);
             }
@@ -234,7 +234,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
     /**
      * returnmodelandservicequotientallbeactivate接入pointcolumn表.
-     * 要判断 model_parent_id modelandservicequotientwhetheractivate.
+     * want判断 model_parent_id modelandservicequotientwhetheractivate.
      * @return ProviderModelEntity[]
      */
     public function getOrganizationActiveModelsByIdOrType(string $key, string $orgCode): array
@@ -291,7 +291,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         }
 
         if (empty($models)) {
-            $this->logger->warning('美graphmodel未找to' . $modelId);
+            $this->logger->warning('美graphmodelnot找to' . $modelId);
             // ifnothave找tomodel，throwexception
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
         }
@@ -468,21 +468,21 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             );
 
             if ($provider === null) {
-                $this->logger->warning('未找toOfficialservicequotient', ['category' => $category->value]);
+                $this->logger->warning('not找toOfficialservicequotient', ['category' => $category->value]);
                 continue;
             }
 
             // createdata隔离object
             $dataIsolation = ProviderDataIsolation::create($officialOrganization);
 
-            // 判断theservicequotientwhether已haveconfiguration
+            // 判断theservicequotientwhetheralreadyhaveconfiguration
             $existingConfig = $this->providerConfigRepository->findFirstByServiceProviderId(
                 $dataIsolation,
                 $provider->getId()
             );
 
             if ($existingConfig !== null) {
-                $this->logger->info('servicequotientconfiguration已存in，skip', [
+                $this->logger->info('servicequotientconfigurationalready存in，skip', [
                     'category' => $category->value,
                     'provider_id' => $provider->getId(),
                 ]);
@@ -565,7 +565,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
             // toatnon官方servicequotient，checkitswhetheractivate
             if ($providerType !== ProviderType::Official) {
-                // ifisnon官方servicequotientbut未activate，thenskip
+                // ifisnon官方servicequotientbutnotactivate，thenskip
                 if ($serviceProviderConfigEntity->getStatus() !== Status::Enabled) {
                     continue;
                 }

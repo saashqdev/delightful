@@ -27,7 +27,7 @@ interface TemplateInterface
     public function getContentByTemplateId(string $templateId): string;
 
     /**
-     * parsetemplatevariable,得to variablekeyandvariablevalue array.
+     * parsetemplatevariable,to variablekeyandvariablevalue array.
      */
     public function getTemplateVariables(string $content, array $messages): array;
 

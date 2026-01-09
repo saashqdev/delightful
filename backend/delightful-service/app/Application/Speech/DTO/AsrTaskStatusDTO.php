@@ -63,7 +63,7 @@ class AsrTaskStatusDTO
 
     public ?string $recordingStatus = null; // 录音status：start|recording|paused|stopped
 
-    public bool $sandboxTaskCreated = false; // 沙箱taskwhether已create
+    public bool $sandboxTaskCreated = false; // 沙箱taskwhetheralreadycreate
 
     public bool $isPaused = false; // whether处atpausestatus（useattimeout判断）
 
@@ -203,8 +203,8 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * check总结whether已complete（poweretcproperty判断）.
-     * 判断standard：audiofile已merge（audioFileId 存in）and录音已stop.
+     * check总结whetheralreadycomplete（poweretcproperty判断）.
+     * 判断standard：audiofilealreadymerge（audioFileId 存in）and录音alreadystop.
      */
     public function isSummaryCompleted(): bool
     {
@@ -244,7 +244,7 @@ class AsrTaskStatusDTO
     /**
      * extract相toat workspace 相topath
      * ifpathcontain workspace/，extractitsback部minute
-     * this样canfrom动修正 Redis middlestorage旧formatdata（completepath）.
+     * this样canfrom动修just Redis middlestorage旧formatdata（completepath）.
      *
      * @param null|string $path originalpath
      * @return null|string 相topath

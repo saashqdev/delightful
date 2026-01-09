@@ -185,7 +185,7 @@ class RoleApi extends AbstractPermissionApi
             throw new InvalidArgumentException('requestparameterverifyfail: ' . implode(', ', $errors));
         }
         if (! $requestDTO->hasUpdates()) {
-            throw new InvalidArgumentException('at leastneed提供one要updatefield');
+            throw new InvalidArgumentException('at leastneed提供onewantupdatefield');
         }
 
         // get现haverole

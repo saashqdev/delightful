@@ -228,7 +228,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             return $allModels;
         }
 
-        // cache未命middle，execute原逻辑
+        // cachenot命middle，execute原逻辑
         // 1. 先queryorganizationdownenableservicequotientconfigurationID
         $builder = ProviderConfigModel::query();
 

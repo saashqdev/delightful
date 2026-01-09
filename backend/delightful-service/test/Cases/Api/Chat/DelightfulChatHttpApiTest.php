@@ -31,7 +31,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
                 ],
                 [
                     'role' => 'assistant',
-                    'content' => '你好，have什么canhelp你吗？',
+                    'content' => '你好，have什么canhelp你？',
                 ],
             ],
         ];
@@ -82,7 +82,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
      */
     public function testConversationChatCompletionsWithInvalidParams(): void
     {
-        // construct缺少必要parameterrequest
+        // construct缺少必wantparameterrequest
         $requestData = [
             // 缺少 conversation_id
             'topic_id' => 'test_topic_id',
@@ -105,7 +105,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         ];
 
         // verifyresponseshouldisparameterverifyerror
-        $this->assertNotEquals(1000, $response['code'] ?? 0, '缺少必要parametero clock，response码not应for1000');
+        $this->assertNotEquals(1000, $response['code'] ?? 0, '缺少必wantparametero clock，response码not应for1000');
         $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'errorresponse结构notconformexpected');
     }
 

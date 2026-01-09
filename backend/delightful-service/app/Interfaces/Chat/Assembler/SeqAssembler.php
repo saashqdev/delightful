@@ -90,7 +90,7 @@ class SeqAssembler
         // 强linedelete $streamOptions middlestream_app_message_id/streamfield
         unset($thisTimeStreamMessages['stream_options']['stream_app_message_id'], $thisTimeStreamMessages['stream_options']['stream']);
         $streamOptions = $thisTimeStreamMessages['stream_options'] ?? null;
-        // 0 willbewhen做 false handle，所bythiswithin要判断whetherfor null or者 ''
+        // 0 willbewhen做 false handle，所bythiswithinwant判断whetherfor null or者 ''
         if ($content !== null && $content !== '') {
             $response->setContent($content);
         }
@@ -125,7 +125,7 @@ class SeqAssembler
     }
 
     /**
-     * according to已经存inseqEntity,generate已读/已view/withdraw/editetcmessagestatus变moretypereturn执message.
+     * according toalready经存inseqEntity,generatealready读/alreadyview/withdraw/editetcmessagestatus变moretypereturn执message.
      */
     public static function generateReceiveStatusChangeSeqEntity(DelightfulSeqEntity $originSeqEntity, ControlMessageType $messageType): DelightfulSeqEntity
     {
@@ -141,13 +141,13 @@ class SeqAssembler
         $statusChangeSeqEntity->setSeqType($messageType);
         $seqData = $statusChangeSeqEntity->toArray();
         if ($messageType === ControlMessageType::SeenMessages) {
-            // 变morestatusfor已读
+            // 变morestatusforalready读
             $seqData['status'] = DelightfulMessageStatus::Seen->value;
-            // return写o clockwill $referMessageIds 拆open,eachitemmessagegenerateoneitem已读message
+            // return写o clockwill $referMessageIds 拆open,eachitemmessagegenerateoneitemalready读message
             $seqData['content'] = Json::encode(['refer_message_ids' => [$referMessageId]], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
         if ($messageType === ControlMessageType::RevokeMessage) {
-            // 变morestatusfor已withdraw
+            // 变morestatusforalreadywithdraw
             $seqData['status'] = DelightfulMessageStatus::Revoked->value;
             $seqData['content'] = Json::encode(['refer_message_id' => $referMessageId], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE);
         }
@@ -155,7 +155,7 @@ class SeqAssembler
     }
 
     /**
-     * according to已经存inseqEntity,generate已读/已view/withdraw/editetcmessagestatus变moretypereturn执message.
+     * according toalready经存inseqEntity,generatealready读/alreadyview/withdraw/editetcmessagestatus变moretypereturn执message.
      * @param string $referMessageId supportfinger定quotemessageid,useatgivereceive方other设备pushreturn执,or者givehairitem方pushreturn执
      */
     public static function generateStatusChangeSeqEntity(array $seqData, string $referMessageId): DelightfulSeqEntity
@@ -176,7 +176,7 @@ class SeqAssembler
     }
 
     /**
-     * according to已经存inseqEntity,generatetopic变moretype控制message.
+     * according toalready经存inseqEntity,generatetopic变moretype控制message.
      */
     public static function generateTopicChangeSeqEntity(DelightfulSeqEntity $seqEntity, DelightfulTopicEntity $topicEntity, ?DelightfulUserEntity $receiveUserEntity): DelightfulSeqEntity
     {
@@ -271,7 +271,7 @@ class SeqAssembler
             // ifischatmessage,messagespecificcontentfrommessageEntitymiddleget
             $messageData = $messageEntity?->getContent()->toArray();
         }
-        // chatstatistics未读person数
+        // chatstatisticsnot读person数
         $receiveList = $seqEntity->getReceiveList();
         $unreadCount = $receiveList === null ? 0 : count($receiveList->getUnreadList());
         if (empty($messageData)) {
@@ -288,13 +288,13 @@ class SeqAssembler
             // send者
             'sender_id' => (string) $messageEntity?->getSenderId(),
             'topic_id' => $messageTopicId,
-            // message小category。控制message小category：已读return执；withdraw；edit；入群/退群；organization架构变动; 。 showmessage：text,voice,img,file,videoetc
+            // message小category。控制message小category：already读return执；withdraw；edit；入群/退群；organization架构变动; 。 showmessage：text,voice,img,file,videoetc
             'type' => $messageTypeName,
-            // return显未读person数,ifuserpoint击detail,againrequestspecificmessagecontent
+            // return显not读person数,ifuserpoint击detail,againrequestspecificmessagecontent
             'unread_count' => $unreadCount,
             // messagesendtime，and delightful_message_id oneup，useatwithdraw、editmessageo clock唯onepropertyvalidation。
             'send_time' => $carbon->getTimestamp(),
-            // chatmessagestatus:unread | seen | read |revoked  .to应middle文释义：未读|已读|已view（non纯text复杂typemessage，userpoint击detail）  | withdraw
+            // chatmessagestatus:unread | seen | read |revoked  .to应middle文释义：not读|already读|alreadyview（non纯text复杂typemessage，userpoint击detail）  | withdraw
             'status' => $messageStatus ?: '',
             'content' => $messageData,
         ];
@@ -308,11 +308,11 @@ class SeqAssembler
             'seq_id' => $seqEntity->getSeqId(),
             // usermessageid，userdown唯one。
             'message_id' => $seqEntity->getMessageId(),
-            // 本itemmessagefingertodelightful_message_id。 useatimplement已读return执场景。存inquoteclose系o clock，send_msg_idfieldnotagainreturn，因forsend方messageidnothave改变。
+            // 本itemmessagefingertodelightful_message_id。 useatimplementalready读return执场景。存inquoteclose系o clock，send_msg_idfieldnotagainreturn，因forsend方messageidnothave改变。
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // send方messageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),
-            // message所属conversationwindow。 customer端canaccording tothisvaluecertainmessagewhether要reminderetc。if本groundnothavehair现thisconversationid，主动toservice端queryconversationwindowdetail
+            // message所属conversationwindow。 customer端canaccording tothisvaluecertainmessagewhetherwantreminderetc。if本groundnothavehair现thisconversationid，主动toservice端queryconversationwindowdetail
             'conversation_id' => $seqEntity->getConversationId(),
             // 本itemmessage所属organization
             'organization_code' => $seqEntity->getOrganizationCode(),

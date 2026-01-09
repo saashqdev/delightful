@@ -26,9 +26,9 @@ namespace App\Application\Speech\Enum;
  */
 enum AsrTaskStatusEnum: string
 {
-    case CREATED = 'created';              // 已create：taskinitializecomplete，etc待process
-    case PROCESSING = 'processing';        // processmiddle：正inexecute录音、mergeor总结
-    case COMPLETED = 'completed';          // 已complete：整 ASR processall部complete（includemessagesend）
+    case CREATED = 'created';              // alreadycreate：taskinitializecomplete，etc待process
+    case PROCESSING = 'processing';        // processmiddle：justinexecute录音、mergeor总结
+    case COMPLETED = 'completed';          // alreadycomplete：整 ASR processall部complete（includemessagesend）
     case FAILED = 'failed';                // fail：taskexecutefail
 
     /**
@@ -37,9 +37,9 @@ enum AsrTaskStatusEnum: string
     public function getDescription(): string
     {
         return match ($this) {
-            self::CREATED => '已create',
+            self::CREATED => 'alreadycreate',
             self::PROCESSING => 'processmiddle',
-            self::COMPLETED => '已complete',
+            self::COMPLETED => 'alreadycomplete',
             self::FAILED => 'fail',
         };
     }

@@ -81,7 +81,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
         $uploadDir = $orgCode . '/open/' . md5(StorageBucketType::Public->value);
         $uploadFile = new UploadFile($tempFile, $uploadDir, $filename);
 
-        // use已havefileserviceupload
+        // usealreadyhavefileserviceupload
         try {
             // definitionuploaddirectory
             $subDir = 'open';

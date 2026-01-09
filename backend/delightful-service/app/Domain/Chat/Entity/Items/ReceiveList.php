@@ -12,17 +12,17 @@ use App\Infrastructure\Core\UnderlineObjectJsonSerializable;
 class ReceiveList extends UnderlineObjectJsonSerializable
 {
     /**
-     * 未读columntable.
+     * not读columntable.
      */
     protected array $unreadList = [];
 
     /**
-     * 已读columntable.
+     * already读columntable.
      */
     protected array $seenList = [];
 
     /**
-     * 已viewdetailcolumntable.
+     * alreadyviewdetailcolumntable.
      */
     protected array $readList = [];
 

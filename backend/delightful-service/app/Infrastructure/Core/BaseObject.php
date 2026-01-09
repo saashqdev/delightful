@@ -12,7 +12,7 @@ use Hyperf\Contract\Arrayable;
 
 /**
  * 快speedpropertyaccess基category
- * othercategorycaninheritthiscategory，获得便捷propertysetandaccess能力.
+ * othercategorycaninheritthiscategory，获便捷propertysetandaccesscan力.
  */
 abstract class BaseObject extends UnderlineObjectJsonSerializable implements ArrayAccess, Arrayable
 {
@@ -60,7 +60,7 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
 
     protected function get(string $key): mixed
     {
-        // propertyone定要is小驼峰！not supportedotherformat！
+        // propertyone定wantis小驼峰！not supportedotherformat！
         $humpKey = $this->getCamelizeValueFromCache($key);
         // 判断propertywhether存in，避免callnot存inpropertyo clock，死loop触hair __get method
         if (! property_exists($this, $humpKey)) {
@@ -76,7 +76,7 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
 
     protected function set(string $key, mixed $value): void
     {
-        // propertyone定要is小驼峰！not supportedotherformat！
+        // propertyone定wantis小驼峰！not supportedotherformat！
         $humpKey = $this->getCamelizeValueFromCache($key);
         // 判断propertywhether存in，避免callnot存inpropertyo clock，死loop触hair __set method
         if (! property_exists($this, $humpKey)) {

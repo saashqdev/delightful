@@ -274,7 +274,7 @@ class ModelGatewayMapper extends ModelMapper
     {
         $list = [];
 
-        // get已持久化configuration
+        // getalready持久化configuration
         $models = $this->getModels($modelType->isLLM() ? 'chat' : 'embedding');
         foreach ($models as $name => $model) {
             switch ($modelType) {

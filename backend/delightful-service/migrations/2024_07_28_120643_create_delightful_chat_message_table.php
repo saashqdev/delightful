@@ -19,7 +19,7 @@ class CreateDelightfulChatMessageTable extends Migration
             return;
         }
         Schema::create('delightful_chat_messages', static function (Blueprint $table) {
-            // according toupsurface建table语sentence，得outbydowncode
+            // according toupsurface建table语sentence，outbydowncode
             $table->bigIncrements('id');
             // hairitem方所属organization
             $table->string('sender_id', 64)->comment('hairitem方id');

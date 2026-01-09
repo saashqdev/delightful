@@ -100,7 +100,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * pass delightfulId saveusersetting（跨organization），若已存insame key thenupdate。
+     * pass delightfulId saveusersetting（跨organization），若already存insame key thenupdate。
      */
     public function saveByDelightfulId(string $delightfulId, DelightfulUserSettingEntity $delightfulUserSettingEntity): DelightfulUserSettingEntity
     {

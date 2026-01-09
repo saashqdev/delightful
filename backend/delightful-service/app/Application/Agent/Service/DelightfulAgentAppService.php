@@ -110,7 +110,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $delightfulAgentEntity->setFlowCode($delightfulFlowEntity->getCode());
             $delightfulAgentEntity->setStatus(DelightfulAgentVersionStatus::ENTERPRISE_ENABLED->value);
         } else {
-            // modify得checkpermission
+            // modifycheckpermission
             $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $delightfulAgentEntity->getId())->validate('edit', $delightfulAgentEntity->getId());
         }
 
@@ -193,7 +193,7 @@ class DelightfulAgentAppService extends AbstractAppService
     public function getAgentById(string $agentVersionId, DelightfulUserAuthorization $authorization): DelightfulAgentVersionEntity
     {
         try {
-            // first尝试asfor agent_version_id from已publishversionmiddleget
+            // first尝试asfor agent_version_id fromalreadypublishversionmiddleget
             $delightfulAgentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentById($agentVersionId);
         } catch (Throwable $e) {
             // iffail，from delightful_bots 表getoriginalassistantdata，andconvertfor DelightfulAgentVersionEntity（versionnumberfor null）
@@ -475,7 +475,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // publishassistant
         $result = $this->delightfulAgentVersionDomainService->releaseAgentVersion($delightfulAgentVersionEntity);
 
-        // ifpublishisperson，that么not能操asthethree方assistant
+        // ifpublishisperson，that么notcan操asthethree方assistant
         if ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PERSONAL_USE->value) {
             $thirdPlatformList = null;
         }
@@ -738,7 +738,7 @@ class DelightfulAgentAppService extends AbstractAppService
         foreach ($defaultConversationAICodes as $aiCode) {
             $aiUserEntity = $this->delightfulUserDomainService->getByAiCode($dataIsolation, $aiCode);
             $agentName = $aiUserEntity?->getNickname();
-            // 判断conversationwhether已经initialize，if已initializethenskip
+            // 判断conversationwhetheralready经initialize，ifalreadyinitializethenskip
             if ($this->delightfulAgentDomainService->isDefaultAssistantConversationExist($userEntity->getUserId(), $aiCode)) {
                 continue;
             }
@@ -1094,7 +1094,7 @@ class DelightfulAgentAppService extends AbstractAppService
                 continue;
             }
 
-            // 特定visible - this处no需againtimecheckvisibilityType，因forfrontsurface已rowexceptnullandAlltype
+            // 特定visible - this处no需againtimecheckvisibilityType，因forfrontsurfacealreadyrowexceptnullandAlltype
             // 剩down只maybeisSPECIFICtype
             if ($this->isUserVisible($visibilityConfig, $currentUserId, $userDepartmentIds)) {
                 $visibleAgentVersions[] = $agentVersion;

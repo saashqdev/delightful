@@ -83,7 +83,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // checkwhether已经is好友
+        // checkwhetheralready经is好友
         if ($this->userDomainService->isFriend($dataIsolation->getCurrentUserId(), $friendId)) {
             return true;
         }
@@ -107,7 +107,7 @@ class DelightfulUserContactAppService extends AbstractAppService
      */
     public function sendAddFriendControlMessage(DataIsolation $dataIsolation, DelightfulUserEntity $friendUserEntity): bool
     {
-        // checkwhether已经is好友
+        // checkwhetheralready经is好友
         if ($this->userDomainService->isFriend($dataIsolation->getCurrentUserId(), $friendUserEntity->getUserId())) {
             return true;
         }
@@ -429,7 +429,7 @@ class DelightfulUserContactAppService extends AbstractAppService
                 continue;
             }
             if ($userDepartmentDetail instanceof UserDetailDTO) {
-                // not要checkuserdepartmentinfo
+                // notwantcheckuserdepartmentinfo
                 continue;
             }
             $userPathNodes = [];

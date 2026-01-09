@@ -80,7 +80,7 @@ class DelightfulStreamTextProcessor
         }
 
         if ($this->state === self::STATE_IN_TAG) {
-            // if已经检测length已经达tomost大length，直接response
+            // ifalready经检测lengthalready经达tomost大length，直接response
             if (mb_strlen($this->buffer) > max($this->successLengths)) {
                 $this->output($params);
                 return;
@@ -114,7 +114,7 @@ class DelightfulStreamTextProcessor
 
     private function isValidTagContent(): array
     {
-        // 正then挺费performance，先采usefixedstringlength吧
+        // justthen挺费performance，先采usefixedstringlength
         if (! in_array(mb_strlen($this->buffer), $this->successLengths)) {
             return [];
         }

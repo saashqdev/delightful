@@ -17,14 +17,14 @@ use App\Infrastructure\Core\ValueObject\Page;
 use App\Interfaces\Provider\Assembler\AiAbilityAssembler;
 
 /**
- * AI 能力仓储implement.
+ * AI can力仓储implement.
  */
 class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRepositoryInterface
 {
     protected bool $filterOrganizationCode = true;
 
     /**
-     * according to能力codegetAI能力实body.
+     * according tocan力codegetAIcan力实body.
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity
     {
@@ -39,7 +39,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * get所haveAI能力list.
+     * get所haveAIcan力list.
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array
     {
@@ -55,7 +55,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * according toIDgetAI能力实body.
+     * according toIDgetAIcan力实body.
      */
     public function getById(ProviderDataIsolation $dataIsolation, int $id): ?AiAbilityEntity
     {
@@ -70,7 +70,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * saveAI能力实body.
+     * saveAIcan力实body.
      */
     public function save(AiAbilityEntity $entity): bool
     {
@@ -98,7 +98,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * updateAI能力实body.
+     * updateAIcan力实body.
      */
     public function update(AiAbilityEntity $entity): bool
     {
@@ -151,7 +151,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * paginationqueryAI能力list.
+     * paginationqueryAIcan力list.
      *
      * @return array{total: int, list: array<AiAbilityEntity>}
      */
@@ -195,7 +195,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
             // 尝试asforJSONparse
             $jsonDecoded = json_decode($config, true);
             if (json_last_error() === JSON_ERROR_NONE && is_array($jsonDecoded)) {
-                // JSONparsesuccess，instructionis旧data（未encrypt）
+                // JSONparsesuccess，instructionis旧data（notencrypt）
                 $config = $jsonDecoded;
             } else {
                 // JSONparsefail，instructionisencryptdata，conductdecrypt

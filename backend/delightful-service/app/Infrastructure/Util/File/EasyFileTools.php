@@ -42,11 +42,11 @@ class EasyFileTools
         fwrite($wav1, $blob);
         $fileSize = ftell($wav1);
 
-        // 修正 RIFF piecesize（file总size - 8）
+        // 修just RIFF piecesize（file总size - 8）
         fseek($wav1, 4);
         fwrite($wav1, pack('V', $fileSize - 8));
 
-        // 修正 data piecesize（file总size - 44）
+        // 修just data piecesize（file总size - 44）
         fseek($wav1, 40);
         fwrite($wav1, pack('V', $fileSize - 44));
 

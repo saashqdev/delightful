@@ -139,14 +139,14 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         // 2. start协asfeature
         $this->enableCollaboration($projectId);
 
-        // 3. validate协as已start
+        // 3. validate协asalreadystart
         $response = $this->getCollaborationSettings($projectId);
         $this->assertTrue($response['data']['is_collaboration_enabled']);
 
         // 4. close协asfeature
         $this->disableCollaboration($projectId);
 
-        // 5. validate协as已close
+        // 5. validate协asalreadyclose
         $response = $this->getCollaborationSettings($projectId);
         $this->assertFalse($response['data']['is_collaboration_enabled']);
     }
@@ -227,15 +227,15 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         // 3. testinvalidpermissionlevel别
         $this->addMembersWithInvalidPermission($projectId, 5003);
 
-        // 4. testnot能deletefrom己
+        // 4. testnotcandeletefrom己
         $this->switchUserTest2();
         $this->cannotDeleteSelf($projectId);
 
         $this->switchUserTest1();
 
-        // 5. test协ascloseo clocknot能addmember
+        // 5. test协ascloseo clocknotcanaddmember
         $this->disableCollaboration($projectId);
-        $this->addTeamMembers($projectId, 51202); // 协as已closeerror
+        $this->addTeamMembers($projectId, 51202); // 协asalreadycloseerror
     }
 
     /**
@@ -250,7 +250,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $response = $this->addTeamMembers($projectId, 51202);
         $this->assertStringContainsString('permission', $response['message']);
 
-        // 2. test协as未starterror
+        // 2. test协asnotstarterror
         $this->switchUserTest1();
         $response = $this->addTeamMembers($projectId, 51202);
         $this->assertStringContainsString('协as', $response['message']);
@@ -526,7 +526,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * testnot能deletefrom己.
+     * testnotcandeletefrom己.
      */
     public function cannotDeleteSelf(string $projectId): void
     {
@@ -550,7 +550,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        // shouldreturnnot能deletefrom己error
+        // shouldreturnnotcandeletefrom己error
         $this->assertNotEquals(1000, $response['code']);
     }
 
@@ -570,7 +570,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * validatemember已add.
+     * validatememberalreadyadd.
      */
     public function verifyMembersAdded(string $projectId): void
     {
@@ -592,7 +592,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * validatepermission已update.
+     * validatepermissionalreadyupdate.
      */
     public function verifyPermissionsUpdated(string $projectId): void
     {
@@ -615,7 +615,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * validatemember已delete.
+     * validatememberalreadydelete.
      */
     public function verifyMembersDeleted(string $projectId): void
     {

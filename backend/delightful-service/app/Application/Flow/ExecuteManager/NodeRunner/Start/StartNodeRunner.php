@@ -30,7 +30,7 @@ class StartNodeRunner extends AbstractStartNodeRunner
 {
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void
     {
-        // 触hairmethodfrom运linedataget，触hairo clock只能haveone触hairmethod
+        // 触hairmethodfrom运linedataget，触hairo clock只canhaveone触hairmethod
         $triggerType = $executionData->getTriggerType();
         if ($appointTriggerType = $frontResults['appoint_trigger_type'] ?? null) {
             if ($appointTriggerType instanceof TriggerType) {

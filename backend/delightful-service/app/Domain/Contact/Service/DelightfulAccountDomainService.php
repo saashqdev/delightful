@@ -119,7 +119,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         $existsAccount = $this->accountRepository->getAccountInfoByDelightfulId($delightfulId);
         if ($existsAccount !== null) {
             $userEntity = $this->userRepository->getUserByAccountAndOrganization($delightfulId, $userDTO->getOrganizationCode());
-            // 账number存in,andintheorganizationdown已经generateuserinfo,直接return
+            // 账number存in,andintheorganizationdownalready经generateuserinfo,直接return
             if ($userEntity !== null) {
                 $userDTO->setUserId($userEntity->getUserId());
                 $userDTO->setNickname($userEntity->getNickname());
@@ -166,7 +166,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
     }
 
     /**
-     * @param AccountEntity $accountDTO supportenable/disable智能body
+     * @param AccountEntity $accountDTO supportenable/disable智canbody
      * @throws Throwable
      */
     public function aiRegister(DelightfulUserEntity $userDTO, DataIsolation $dataIsolation, AccountEntity $accountDTO): DelightfulUserEntity
@@ -183,7 +183,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 $accountEntity->setRealName($userDTO->getNickname());
                 // update账numberinfo
                 if ($accountDTO->getStatus() !== null) {
-                    // enable/disable智能body
+                    // enable/disable智canbody
                     $accountEntity->setStatus($accountDTO->getStatus());
                 }
                 $this->accountRepository->saveAccount($accountEntity);

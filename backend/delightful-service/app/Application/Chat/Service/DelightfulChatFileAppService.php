@@ -27,7 +27,7 @@ class DelightfulChatFileAppService extends AbstractAppService
 
     /**
      * passfile_keysaveorupdatefile
-     * iffile已存inthenupdate，not存inthencreate.
+     * iffilealready存inthenupdate，not存inthencreate.
      *
      * @param string $fileKey filekey
      * @param DataIsolation $dataIsolation data隔离object

@@ -143,7 +143,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         } else {
             $parent = $enum->parent();
             if ($parent->parent() === null) {
-                // currentresource已经istwolevellayerlevel，直接asfor模piece
+                // currentresourcealready经istwolevellayerlevel，直接asfor模piece
                 $moduleEnum = $enum;
             } else {
                 // more深layerlevel，模piece取父level（twolevel）
@@ -308,10 +308,10 @@ class DelightfulPermission implements DelightfulPermissionInterface
      * rule：
      *   1. 如直接命middlepermissionkey，return true；
      *   2. if拥haveall局permission ALL_PERMISSIONS，return true；
-     *   3. 若未命middle，thencheckbythepermission隐typecontainpermissionset（for example *edit* 隐typecontain *query*）。
+     *   3. 若not命middle，thencheckbythepermission隐typecontainpermissionset（for example *edit* 隐typecontain *query*）。
      *
      * @param string $permissionKey goalpermissionkey
-     * @param string[] $userPermissions user已拥havepermissionkeyset
+     * @param string[] $userPermissions useralready拥havepermissionkeyset
      * @param bool $isPlatformOrganization whether平台organization
      */
     public function checkPermission(string $permissionKey, array $userPermissions, bool $isPlatformOrganization = false): bool
@@ -411,7 +411,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 }
                 return $translated;
             }
-            // compatible：若未implement label/translationKey，then退return通use getOperationLabel 逻辑
+            // compatible：若notimplement label/translationKey，then退return通use getOperationLabel 逻辑
         }
         return $this->getOperationLabel($operation);
     }

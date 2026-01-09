@@ -18,7 +18,7 @@ class CompressibleContentTest extends ExecuteManagerBaseTest
 {
     public function testRun()
     {
-        $content = '1.when我漫步inthis园middle，我才深刻bodywillto，eachone处placeall曾留down我足迹，whilethattheseplacealsoallhavepass母亲陪伴。<DelightfulCompressibleContent Type="Image">firstneedbecompressdata</DelightfulCompressibleContent> 2.若byoneday喻four季，早晨is春day，middle午is夏day，黄昏is秋day，夜晚thenis冬day。\n!\n<DelightfulCompressibleContent Type="Video">thetwoneedbecompressdata</DelightfulCompressibleContent>3.too阳eacho clockeach刻allis落dayand旭day，when他落山o clock，正is他爬up山head之o clock。while我，终will沉静ground走down山go。';
+        $content = '1.when我漫步inthis园middle，我才深刻bodywillto，eachone处placeall曾留down我足迹，whilethattheseplacealsoallhavepass母亲陪伴。<DelightfulCompressibleContent Type="Image">firstneedbecompressdata</DelightfulCompressibleContent> 2.若byoneday喻four季，早晨is春day，middle午is夏day，黄昏is秋day，夜晚thenis冬day。\n!\n<DelightfulCompressibleContent Type="Video">thetwoneedbecompressdata</DelightfulCompressibleContent>3.too阳eacho clockeach刻allis落dayand旭day，when他落山o clock，justis他爬up山head之o clock。while我，终will沉静ground走down山go。';
 
         $compressibleContent = CompressibleContent::compress($content);
         $this->assertEquals($content, CompressibleContent::deCompress($compressibleContent));
@@ -26,15 +26,15 @@ class CompressibleContentTest extends ExecuteManagerBaseTest
 
     public function testRun1()
     {
-        $content = '1.when我漫步inthis园middle，我才深刻bodywillto，eachone处placeall曾留down我足迹，whilethattheseplacealsoallhavepass母亲陪伴。<DelightfulCompressibleContent Type="Image">firstneedbecompressdata</DelightfulCompressibleContent> 2.若byoneday喻four季，早晨is春day，middle午is夏day，黄昏is秋day，夜晚thenis冬day。\n!\n<DelightfulCompressibleContent Type="Video">thetwoneedbecompressdata</DelightfulCompressibleContent>3.too阳eacho clockeach刻allis落dayand旭day，when他落山o clock，正is他爬up山head之o clock。while我，终will沉静ground走down山go。';
+        $content = '1.when我漫步inthis园middle，我才深刻bodywillto，eachone处placeall曾留down我足迹，whilethattheseplacealsoallhavepass母亲陪伴。<DelightfulCompressibleContent Type="Image">firstneedbecompressdata</DelightfulCompressibleContent> 2.若byoneday喻four季，早晨is春day，middle午is夏day，黄昏is秋day，夜晚thenis冬day。\n!\n<DelightfulCompressibleContent Type="Video">thetwoneedbecompressdata</DelightfulCompressibleContent>3.too阳eacho clockeach刻allis落dayand旭day，when他落山o clock，justis他爬up山head之o clock。while我，终will沉静ground走down山go。';
 
         $compressibleContent = CompressibleContent::compress($content);
-        $this->assertEquals('1.when我漫步inthis园middle，我才深刻bodywillto，eachone处placeall曾留down我足迹，whilethattheseplacealsoallhavepass母亲陪伴。firstneedbecompressdata 2.若byoneday喻four季，早晨is春day，middle午is夏day，黄昏is秋day，夜晚thenis冬day。\n!\nthetwoneedbecompressdata3.too阳eacho clockeach刻allis落dayand旭day，when他落山o clock，正is他爬up山head之o clock。while我，终will沉静ground走down山go。', CompressibleContent::deCompress($compressibleContent, false));
+        $this->assertEquals('1.when我漫步inthis园middle，我才深刻bodywillto，eachone处placeall曾留down我足迹，whilethattheseplacealsoallhavepass母亲陪伴。firstneedbecompressdata 2.若byoneday喻four季，早晨is春day，middle午is夏day，黄昏is秋day，夜晚thenis冬day。\n!\nthetwoneedbecompressdata3.too阳eacho clockeach刻allis落dayand旭day，when他落山o clock，justis他爬up山head之o clock。while我，终will沉静ground走down山go。', CompressibleContent::deCompress($compressibleContent, false));
     }
 
     public function testRun2()
     {
-        $content = '1.when我漫步inthis园middle，我才深刻bodywillto，eachone处placeall曾留down我足迹，whilethattheseplacealsoallhavepass母亲陪伴。<DELIGHTFUL-COMPRESSABLE-CONTENT TYPE="PICTURE">firstneedbecompressdata</DELIGHTFUL-COMPRESSABLE-CONTENT> 2.若byoneday喻four季，早晨is春day，middle午is夏day，黄昏is秋day，夜晚thenis冬day。\n!\n<DELIGHTFUL-COMPRESSABLE-CONTENT TYPE="PICTURE">thetwoneedbecompressdata</DELIGHTFUL-COMPRESSABLE-CONTENT>3.too阳eacho clockeach刻allis落dayand旭day，when他落山o clock，正is他爬up山head之o clock。while我，终will沉静ground走down山go。';
+        $content = '1.when我漫步inthis园middle，我才深刻bodywillto，eachone处placeall曾留down我足迹，whilethattheseplacealsoallhavepass母亲陪伴。<DELIGHTFUL-COMPRESSABLE-CONTENT TYPE="PICTURE">firstneedbecompressdata</DELIGHTFUL-COMPRESSABLE-CONTENT> 2.若byoneday喻four季，早晨is春day，middle午is夏day，黄昏is秋day，夜晚thenis冬day。\n!\n<DELIGHTFUL-COMPRESSABLE-CONTENT TYPE="PICTURE">thetwoneedbecompressdata</DELIGHTFUL-COMPRESSABLE-CONTENT>3.too阳eacho clockeach刻allis落dayand旭day，when他落山o clock，justis他爬up山head之o clock。while我，终will沉静ground走down山go。';
 
         $compressibleContent = CompressibleContent::compress($content);
         $this->assertEquals($content, CompressibleContent::deCompress($compressibleContent));

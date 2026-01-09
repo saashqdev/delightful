@@ -45,7 +45,7 @@ readonly class ApiKeyProviderDomainService
 
     public function changeSecretKey(AuthenticationDataIsolation $dataIsolation, string $code, ?string $operator = null): ApiKeyProviderEntity
     {
-        // 只能modifyfrom己
+        // 只canmodifyfrom己
         $apiKeyProviderEntity = $this->apiKeyProviderRepository->getByCode($dataIsolation, $code, $operator);
         if (! $apiKeyProviderEntity) {
             ExceptionBuilder::throw(AuthenticationErrorCode::ValidateFailed, 'common.not_found', ['label' => $code]);

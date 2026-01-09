@@ -60,7 +60,7 @@ class UserCallAgentFailSubscriber implements ListenerInterface
             // 原样outputextensionparameter
             $seqDTO->setExtra($seqEntity->getExtra());
 
-            // 原样outputextensionparameter,but要rowexcept editmessageoption
+            // 原样outputextensionparameter,butwantrowexcept editmessageoption
             $seqExtra = $seqEntity->getExtra()?->getExtraCanCopyData();
             $seqDTO->setExtra($seqExtra);
             di(DelightfulChatMessageAppService::class)->aiSendMessage($seqDTO, $appMessageId, doNotParseReferMessageId: true);

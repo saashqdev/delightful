@@ -133,11 +133,11 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             unset($attributes['id'], $attributes['created_at']);
         }
 
-        // toconfigurationdataconductencrypt（if存inand未encrypt）
+        // toconfigurationdataconductencrypt（if存inandnotencrypt）
         if (! empty($attributes['config'])) {
             $configId = (string) $providerConfigEntity->getId();
 
-            // if config isstringandisvalid JSON format（未encryptconfigurationdata），thenneedencrypt
+            // if config isstringandisvalid JSON format（notencryptconfigurationdata），thenneedencrypt
             if (is_string($attributes['config']) && json_validate($attributes['config'])) {
                 $decodedConfig = Json::decode($attributes['config']);
                 $attributes['config'] = ProviderConfigAssembler::encodeConfig($decodedConfig, $configId);
@@ -213,7 +213,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
         // 1. getallquantityservicequotienttemplatecolumn表
         $templateProviders = $this->providerTemplateRepository->getAllProviderTemplates($category);
 
-        // 2. getorganizationdown已configurationservicequotient
+        // 2. getorganizationdownalreadyconfigurationservicequotient
         $organizationProviders = $this->getOrganizationProvidersFromDatabase($organizationCode, $category, $status);
 
         // 3. firstadddatabasemiddle所haveactualconfiguration（保留多same provider_code configuration）
@@ -375,7 +375,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * fromdatabasegetorganizationdown已configurationservicequotient.
+     * fromdatabasegetorganizationdownalreadyconfigurationservicequotient.
      * @return ProviderConfigDTO[]
      */
     private function getOrganizationProvidersFromDatabase(string $organizationCode, Category $category, ?Status $status = null): array

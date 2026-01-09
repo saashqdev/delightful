@@ -18,7 +18,7 @@ return new class extends Migration {
             return;
         }
         Schema::create('delightful_chat_sequences', static function (Blueprint $table) {
-            // according toupsurface建table语sentence，得outbydowncode
+            // according toupsurface建table语sentence，outbydowncode
             $table->bigIncrements('id')->comment('primary keyid,not啥use');
             $table->string('organization_code', 64)->comment('序columnnumber所属organizationencoding.')->default('');
             $table->tinyInteger('object_type')->comment('objecttype,0:ai,1:user；2：application;3:document;4:多维table格');
@@ -27,16 +27,16 @@ return new class extends Migration {
             $table->string('seq_type', 32)->comment('message大type:控制message,chatmessage。');
             $table->text('content')->comment('序columnnumberdetail. onethesenotvisible控制message,只inseqtable存indetail. byand写o clockcopyonesharemessagetablecontenttoseqtableuse.');
             $table->string('delightful_message_id', 64)->comment('service端generate唯onemessageid,useatmessagewithdraw/edit');
-            $table->string('message_id', 64)->comment('序columnnumberassociateusermessageid,implement已读return执,messagewithdraw/editetc')->default(0);
+            $table->string('message_id', 64)->comment('序columnnumberassociateusermessageid,implementalready读return执,messagewithdraw/editetc')->default(0);
             // quotemessageid
-            $table->string('refer_message_id', 64)->comment('quotemessageid,implement已读return执,messagewithdraw/editetc');
+            $table->string('refer_message_id', 64)->comment('quotemessageid,implementalready读return执,messagewithdraw/editetc');
             // sender_message_id
             $table->string('sender_message_id', 64)->comment('send方messageid,useatmessagewithdraw/edit');
             // sessionid
             $table->string('conversation_id', 64)->comment('message所属sessionid,冗remainderfield');
             $table->tinyInteger('status')->default(0)->comment('messagestatus,0:unread, 1:seen, 2:read, 3:revoked');
             // messagereceivepersonlist
-            $table->text('receive_list')->comment('messagereceivepersonlist,allquantityrecord未读/已读/已viewuserlist');
+            $table->text('receive_list')->comment('messagereceivepersonlist,allquantityrecordnot读/already读/alreadyviewuserlist');
             $table->text('extra')->comment('attachaddfield，recordonetheseextensionproperty。 such as话题id。');
             // app_message_id
             $table->string('app_message_id', 64)->default('')->comment('冗remainderfield,customer端generatemessageid,useat防customer端duplicate');

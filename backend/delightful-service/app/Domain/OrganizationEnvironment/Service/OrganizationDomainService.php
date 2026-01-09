@@ -35,7 +35,7 @@ readonly class OrganizationDomainService
      */
     public function create(OrganizationEntity $organizationEntity): OrganizationEntity
     {
-        // checkencodingwhether已存in
+        // checkencodingwhetheralready存in
         if ($this->organizationRepository->existsByCode($organizationEntity->getDelightfulOrganizationCode())) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_EXISTS);
         }
@@ -62,7 +62,7 @@ readonly class OrganizationDomainService
                     $dataIsolation,
                     (string) $creatorId,
                     (string) $creatorId, // 授予者alsoiscreate者from己
-                    'organizationcreate者from动获得administratorpermission',
+                    'organizationcreate者from动获administratorpermission',
                     true // markfororganizationcreateperson
                 );
             } catch (Throwable $e) {
@@ -83,7 +83,7 @@ readonly class OrganizationDomainService
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_NOT_EXISTS);
         }
 
-        // checkencodingwhether已存in（rowexceptcurrentorganization）
+        // checkencodingwhetheralready存in（rowexceptcurrentorganization）
         if ($this->organizationRepository->existsByCode($organizationEntity->getDelightfulOrganizationCode(), $organizationEntity->getId())) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_EXISTS);
         }

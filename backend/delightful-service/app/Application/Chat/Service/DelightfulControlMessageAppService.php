@@ -55,7 +55,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
             ControlMessageType::HideConversation,
             ControlMessageType::MuteConversation,
             ControlMessageType::TopConversation => $this->conversationDomainService->conversationOptionChange($messageDTO, $dataIsolation),
-            // withdraw,已读,已读return执,editmessage
+            // withdraw,already读,already读return执,editmessage
             ControlMessageType::SeenMessages,
             ControlMessageType::ReadMessage,
             ControlMessageType::RevokeMessage,
@@ -84,7 +84,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         switch ($controlMessageType) {
             case ControlMessageType::SeenMessages:
             case ControlMessageType::ReadMessage:
-                // 已读return执etc场景,according tooneitem控制message,generateotherpersonseq.
+                // already读return执etc场景,according tooneitem控制message,generateotherpersonseq.
                 $this->controlDomainService->handlerMQReceiptSeq($delightfulSeqEntity);
                 break;
             case ControlMessageType::RevokeMessage:

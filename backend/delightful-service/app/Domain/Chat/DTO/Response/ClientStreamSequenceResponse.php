@@ -13,7 +13,7 @@ use Hyperf\Codec\Json;
 
 class ClientStreamSequenceResponse extends AbstractEntity
 {
-    // 要updategoal seqId content
+    // wantupdategoal seqId content
     protected string $targetSeqId;
 
     // forimplement丢package重传，needrecordwhenfrontseqId。one定single调递增。

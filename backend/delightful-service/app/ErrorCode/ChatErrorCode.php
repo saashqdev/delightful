@@ -114,12 +114,12 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.message.delivery_failed')]
     case MESSAGE_DELIVERY_FAILED = 3023;
 
-    // 所haveuser已经in群withinmiddle
+    // 所haveuseralready经in群withinmiddle
         // All users are already in the group
     #[ErrorMessage('chat.group.user_already_in_group')]
     case USER_ALREADY_IN_GROUP = 3024;
 
-    // 请sendmessagebackagainuse智能renamefeature
+    // 请sendmessagebackagainuse智canrenamefeature
         // Send a message before using smart rename
     #[ErrorMessage('chat.topic.send_message_and_rename_topic')]
     case SEND_MESSAGE_AND_RENAME_TOPIC = 3025;
@@ -139,7 +139,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.no_user_to_remove')]
     case GROUP_NO_USER_TO_REMOVE = 3028;
 
-    // not能踢out群主
+    // notcan踢out群主
         // Cannot remove the group owner
     #[ErrorMessage('chat.group.group_cannot_kick_owner')]
     case GROUP_CANNOT_KICK_OWNER = 3029;
@@ -149,17 +149,17 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.transfer_owner_before_leave')]
     case GROUP_TRANSFER_OWNER_BEFORE_LEAVE = 3030;
 
-    // only群主才能解散group chat
+    // only群主才can解散group chat
         // Only the owner can disband the group
     #[ErrorMessage('chat.group.only_owner_can_disband')]
     case GROUP_ONLY_OWNER_CAN_DISBAND = 3031;
 
-    // only群主才能转letgroup
+    // only群主才can转letgroup
         // Only the owner can transfer the group
     #[ErrorMessage('chat.group.only_owner_can_transfer')]
     case GROUP_ONLY_OWNER_CAN_TRANSFER = 3032;
 
-    // session已bedelete
+    // sessionalreadybedelete
         // Conversation has been deleted
     #[ErrorMessage('chat.conversation.deleted')]
     case CONVERSATION_DELETED = 3033;
@@ -237,7 +237,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.conversation.organization_code_empty')]
     case CONVERSATION_ORGANIZATION_CODE_EMPTY = 3101;
 
-    // useralso未create账number
+    // useralsonotcreate账number
         // User has not created an account
     #[ErrorMessage('chat.user.not_create_account')]
     case USER_NOT_CREATE_ACCOUNT = 3102;

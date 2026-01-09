@@ -19,10 +19,10 @@ enum MCPErrorCode: int
 
     // MCPservice相closeerror码
     #[ErrorMessage(message: 'mcp.service.already_exists')]
-    case ServiceAlreadyExists = 51510; // MCPservice已存in
+    case ServiceAlreadyExists = 51510; // MCPservicealready存in
 
     #[ErrorMessage(message: 'mcp.service.not_enabled')]
-    case ServiceNotEnabled = 51511; // MCPservice未enable
+    case ServiceNotEnabled = 51511; // MCPservicenotenable
 
     // toolassociate相closeerror码
     #[ErrorMessage(message: 'mcp.rel.not_found')]
@@ -32,7 +32,7 @@ enum MCPErrorCode: int
     case RelVersionNotFound = 51521; // associateresourceversionnot存in
 
     #[ErrorMessage(message: 'mcp.rel.not_enabled')]
-    case RelNotEnabled = 51522; // associateresource未enable
+    case RelNotEnabled = 51522; // associateresourcenotenable
 
     #[ErrorMessage(message: 'mcp.tool.execute_failed')]
     case ToolExecuteFailed = 51523; // toolexecutefail

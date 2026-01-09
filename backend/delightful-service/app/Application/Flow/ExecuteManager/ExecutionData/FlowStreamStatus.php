@@ -9,7 +9,7 @@ namespace App\Application\Flow\ExecuteManager\ExecutionData;
 
 enum FlowStreamStatus: string
 {
-    // 未start
+    // notstart
     case Pending = 'Pending';
 
     // conductmiddle

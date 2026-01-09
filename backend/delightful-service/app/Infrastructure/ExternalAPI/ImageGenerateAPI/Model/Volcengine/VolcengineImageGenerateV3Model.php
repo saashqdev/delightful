@@ -355,7 +355,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                     case 'generating':
                         break;
                     case 'not_found':
-                        $this->logger->error('火山文生graph：task未找toor已expire', ['taskId' => $taskId]);
+                        $this->logger->error('火山文生graph：tasknot找tooralreadyexpire', ['taskId' => $taskId]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT_WITH_REASON);
                         // no break
                     default:

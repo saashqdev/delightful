@@ -42,7 +42,7 @@ use function Hyperf\Support\retry;
 class DelightfulSeqDomainService extends AbstractDomainService
 {
     /**
-     * messagepush. to已经generateseq,pushgiveseq拥have者.
+     * messagepush. toalready经generateseq,pushgiveseq拥have者.
      * @throws Throwable
      */
     public function pushSeq(string $seqId): void
@@ -52,7 +52,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         retry(3, function () use ($seqId, &$seqEntity) {
             $seqEntity = $this->delightfulSeqRepository->getSeqByMessageId($seqId);
             if ($seqEntity === null) {
-                // maybeistransactionalso未submit,mq已经消费,delayretry
+                // maybeistransactionalsonotsubmit,mqalready经消费,delayretry
                 ExceptionBuilder::throw(ChatErrorCode::SEQ_NOT_FOUND);
             }
         }, 100);
@@ -84,12 +84,12 @@ class DelightfulSeqDomainService extends AbstractDomainService
     }
 
     /**
-     * to已经generateseq,pushgiveseq拥have者.
+     * toalready经generateseq,pushgiveseq拥have者.
      */
     public function pushControlSeq(DelightfulSeqEntity $seqEntity, DelightfulUserEntity $seqUserEntity, ?DelightfulMessageEntity $messageEntity = null): void
     {
         // havethese控制message,not仅控制from己设备,alsoneed控制to方设备
-        // 控制messagepush. todo:待optimize,mergepush已读控制message
+        // 控制messagepush. todo:待optimize,mergepushalready读控制message
         if ($seqEntity->getObjectType() === ConversationType::User && ($seqEntity->getSeqType() instanceof ControlMessageType)) {
             SocketIOUtil::sendSequenceId($seqEntity);
         }
@@ -124,7 +124,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
     }
 
     /**
-     * to已经generateseq,pushgiveseq拥have者.
+     * toalready经generateseq,pushgiveseq拥have者.
      * @throws Throwable
      */
     public function pushChatSeq(DelightfulSeqEntity $selfSeqEntity, DelightfulUserEntity $userEntity, DelightfulMessageEntity $messageEntity): void
@@ -151,12 +151,12 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 }
                 $messageSenderDelightfulId = $this->delightfulUserRepository->getUserById($messageEntity->getSenderId())?->getDelightfulId();
                 if ($delightfulId === $messageSenderDelightfulId) {
-                    // ai from己hairmessage,not能again触hairprocesscall!
+                    // ai from己hairmessage,notcanagain触hairprocesscall!
                     $this->logger->error('UserCallAgentEventError delightful_id:{delightful_id} ai can not call flow', ['delightful_id' => $delightfulId]);
                     return;
                 }
                 try {
-                    # ai send已读return执
+                    # ai sendalready读return执
                     $this->aiSendReadStatusChangeReceipt($selfSeqEntity, $userEntity);
                     # call flow
                     // todo can做 optimizeflowresponsesuccessrate: syncetc待flowexecute,细致判断,toat本seq_id,uptimeflowresponsewhethertimeout,ifis,直接丢弃,notagainhairgiveflow
@@ -173,8 +173,8 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 }
                 break;
             case ConversationType::User:
-                // todo one定要做! publishsubscribeuserabbitmqimplement,notagainuseredispub/sub. meanwhile,pushbackneedcustomer端returnack,然backupdateseqstatus
-                // todo one定要做! 只推seq_id,publishsubscribe收toseq_idback,againgodatabase查seqdetail,again推givecustomer端
+                // todo one定want做! publishsubscribeuserabbitmqimplement,notagainuseredispub/sub. meanwhile,pushbackneedcustomer端returnack,然backupdateseqstatus
+                // todo one定want做! 只推seq_id,publishsubscribe收toseq_idback,againgodatabase查seqdetail,again推givecustomer端
                 $pushData = SeqAssembler::getClientSeqStruct($selfSeqEntity, $messageEntity)->toArray();
                 // notprint敏感info
                 $pushLogData = [
@@ -265,7 +265,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
     }
 
     /**
-     * send已读return执.
+     * sendalready读return执.
      */
     private function aiSendReadStatusChangeReceipt(DelightfulSeqEntity $selfSeqEntity, DelightfulUserEntity $userEntity): void
     {
@@ -337,7 +337,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         // getmessageEntity
         $messageEntity = $this->delightfulMessageRepository->getMessageByDelightfulMessageId($seqEntity->getDelightfulMessageId());
 
-        // onlychatmessageand已读return执才触hairflow
+        // onlychatmessageandalready读return执才触hairflow
         $messageType = $messageEntity?->getMessageType();
         if ($messageType instanceof ChatMessageType || $seqEntity->canTriggerFlow()) {
             // getusertrue名
@@ -348,7 +348,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
             $language = di(TranslatorInterface::class)->getLocale();
 
             $this->logger->info('userCallFlow language: ' . $language);
-            // callflowmaybevery耗o clock,not能letcustomer端one直etc待
+            // callflowmaybevery耗o clock,notcanletcustomer端one直etc待
             Coroutine::create(function () use (
                 $agentAccountEntity,
                 $agentUserEntity,

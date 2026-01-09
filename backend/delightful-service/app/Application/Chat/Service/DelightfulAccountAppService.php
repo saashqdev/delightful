@@ -58,7 +58,7 @@ class DelightfulAccountAppService extends AbstractAppService
     }
 
     /**
-     * @param null|AccountEntity $accountDTO supportenable/disable智能body
+     * @param null|AccountEntity $accountDTO supportenable/disable智canbody
      * @throws Throwable
      */
     public function aiRegister(DelightfulUserEntity $userDTO, DelightfulUserAuthorization $authorization, string $aiCode, ?AccountEntity $accountDTO = null): DelightfulUserEntity
@@ -88,7 +88,7 @@ class DelightfulAccountAppService extends AbstractAppService
             }
 
             $dataIsolation = $this->createDataIsolation($authorization);
-            // 智能body账numberinformation
+            // 智canbody账numberinformation
             if (! isset($accountDTO)) {
                 $accountDTO = new AccountEntity();
             }

@@ -12,10 +12,10 @@ namespace App\Domain\OrganizationEnvironment\Entity\ValueObject;
  */
 enum OrganizationSyncStatus: int
 {
-    /* 未同 */
+    /* not同 */
     case NotSynced = 0;
 
-    /* 已同 */
+    /* already同 */
     case Synced = 1;
 
     /* 同failed */

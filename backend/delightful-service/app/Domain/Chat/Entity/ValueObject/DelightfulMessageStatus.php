@@ -11,16 +11,16 @@ use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 
 enum DelightfulMessageStatus: int
 {
-    // 未读
+    // not读
     case Unread = 0;
 
-    // 已读
+    // already读
     case Seen = 1;
 
-    // 已view（non纯text复杂typemessage，userpoint击detail）
+    // alreadyview（non纯text复杂typemessage，userpoint击detail）
     case Read = 2;
 
-    // 已withdraw
+    // alreadywithdraw
     case Revoked = 3;
 
     public function getStatusName(): string

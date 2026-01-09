@@ -73,7 +73,7 @@ class DelightfulAgentDomainService
             // create助理o clockaddsystem交互finger令
             $this->initSystemInstructs($agent->getOrganizationCode(), $agent->getId(), $agentEntity->getUpdatedUid());
         } else {
-            // whether能modify
+            // whethercanmodify
             $agent = $this->getAgentById($agentEntity->getId());
             $agent->setRobotName($agentEntity->getAgentName());
             $agent->setRobotDescription($agentEntity->getAgentDescription());

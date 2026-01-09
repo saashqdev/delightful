@@ -166,7 +166,7 @@ class FileCleanupRecordRepository
         return FileCleanupRecordModel::query()
             ->where('file_key', $fileKey)
             ->where('organization_code', $organizationCode)
-            ->where('status', 0) // 只能cancel待cleanupstatusrecord
+            ->where('status', 0) // 只cancancel待cleanupstatusrecord
             ->delete() > 0;
     }
 
@@ -203,7 +203,7 @@ class FileCleanupRecordRepository
         $cutoffDate = date('Y-m-d H:i:s', time() - ($daysToKeep * 24 * 3600));
 
         return FileCleanupRecordModel::query()
-            ->where('status', 1) // 只cleanup已successrecord
+            ->where('status', 1) // 只cleanupalreadysuccessrecord
             ->where('updated_at', '<', $cutoffDate)
             ->delete();
     }

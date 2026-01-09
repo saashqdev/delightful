@@ -248,7 +248,7 @@ return [
             'custom_error_mapping_rules' => [],
             'logging' => [
                 // logfield白名singleconfiguration
-                // iffornullarrayor未configuration，thenprint所havefield
+                // iffornullarrayornotconfiguration，thenprint所havefield
                 // ifconfigurationfieldcolumn表，then只printfinger定field
                 // support嵌setfield，usepoint语法如 'args.messages'
                 // 注意：messages and tools fieldnotin白名singlemiddle，notwillbeprint

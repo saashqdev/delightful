@@ -179,7 +179,7 @@ class FileParser
      *
      * @param string $fileUrl fileURLground址
      * @param int $maxSize filesizelimit（字section），0table示notlimit
-     * @return bool truetable示已checksizeandinlimitinside，falsetable示ischunked传输needstreamdownload
+     * @return bool truetable示alreadychecksizeandinlimitinside，falsetable示ischunked传输needstreamdownload
      * @throws Exception whenfilesize超passlimitorfilesizeunknownandnonchunked传输o clock
      */
     private static function checkUrlFileSize(string $fileUrl, int $maxSize = 0): bool

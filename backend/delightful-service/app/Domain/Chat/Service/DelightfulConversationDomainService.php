@@ -59,7 +59,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $conversationDTO->setUserOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $conversationDTO->setReceiveId($messageStruct->getReceiveId());
         $conversationDTO->setReceiveType(ConversationType::from($messageStruct->getReceiveType()));
-        // 判断 uid and receiverId whether已经存inconversation
+        // 判断 uid and receiverId whetheralready经存inconversation
         $existsConversation = $this->delightfulConversationRepository->getConversationByUserIdAndReceiveId($conversationDTO);
         if ($existsConversation) {
             // 改变messagetype,fromcreateconversationwindow,变moreforopenconversationwindow
@@ -68,7 +68,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
                 $messageType->getName(),
                 $messageDTO->getContent()->toArray()
             );
-            // needmeanwhilemodifytypeandcontent,才能messagecontent变moreforopenconversationwindow
+            // needmeanwhilemodifytypeandcontent,才canmessagecontent变moreforopenconversationwindow
             $messageDTO->setMessageType($messageTypeInterface->getMessageTypeEnum());
             $messageDTO->setContent($messageTypeInterface);
             $messageDTO->setReceiveType($conversationEntity->getReceiveType());
@@ -118,7 +118,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $messageStruct = $messageDTO->getContent();
         $conversationId = $messageStruct->getConversationId();
         $conversationEntity = $this->checkAndGetSelfConversation($conversationId, $dataIsolation);
-        // according to要操astype，more改database
+        // according towant操astype，more改database
         $updateData = [];
         if ($messageStruct instanceof ConversationTopMessage) {
             $updateData = ['is_top' => $messageStruct->getIsTop()];
@@ -153,7 +153,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * 正ininputmiddlestatus只needpushgiveto方,notneed推givefrom己设备.
+     * justininputmiddlestatus只needpushgiveto方,notneed推givefrom己设备.
      */
     public function clientOperateConversationStatus(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
@@ -190,7 +190,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * 智能body触hairconversationstartinputor者endinput.
+     * 智canbody触hairconversationstartinputor者endinput.
      * 直接操asto方conversationwindow，whilenotismessagehairinfrom己conversationwindow然backagain经bymessageminutehair模pieceforwardtoto方conversationwindow.
      * @deprecated user端call agentOperateConversationStatusV2 method代替
      */
@@ -229,7 +229,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * use intermediate eventconductmiddlebetweenstatemessagepush，not持久化message. support话题level别“正ininputmiddle”
+     * use intermediate eventconductmiddlebetweenstatemessagepush，not持久化message. support话题level别“justininputmiddle”
      * 直接操asto方conversationwindow，whilenotismessagehairinfrom己conversationwindow然backagain经bymessageminutehair模pieceforwardtoto方conversationwindow.
      */
     public function agentOperateConversationStatusV2(ControlMessageType $controlMessageType, string $agentConversationId, ?string $topicId = null): bool
@@ -269,7 +269,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             'seq_type' => $messageDTO->getMessageType()->getName(),
             'content' => $content->toArray(),
             'conversation_id' => $receiveConversationEntity->getId(),
-            'status' => DelightfulMessageStatus::Read->value, // 控制messagenotneed已读return执
+            'status' => DelightfulMessageStatus::Read->value, // 控制messagenotneedalready读return执
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => $messageDTO->getAppMessageId(),
@@ -292,7 +292,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     {
         $users = $this->delightfulUserRepository->getUserByIds($userIds);
         $users = array_column($users, null, 'user_id');
-        // 判断thistheseuserwhether已经存inconversationwindow,只iswindowstatusbemarkfordelete
+        // 判断thistheseuserwhetheralready经存inconversationwindow,只iswindowstatusbemarkfordelete
         $conversations = $this->delightfulConversationRepository->batchGetConversations($userIds, $groupEntity->getId(), ConversationType::Group);
         /** @var DelightfulConversationEntity[] $conversations */
         $conversations = array_column($conversations, null, 'user_id');
@@ -385,7 +385,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $conversationDTO->setUserId($senderUserId);
         $conversationDTO->setReceiveId($receiveId);
         $conversationDTO->setReceiveType($receiverType);
-        // 判断 uid and receiverId whether已经存inconversation
+        // 判断 uid and receiverId whetheralready经存inconversation
         $conversationEntity = $this->delightfulConversationRepository->getConversationByUserIdAndReceiveId($conversationDTO);
         if ($conversationEntity === null) {
             if (in_array($conversationDTO->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {

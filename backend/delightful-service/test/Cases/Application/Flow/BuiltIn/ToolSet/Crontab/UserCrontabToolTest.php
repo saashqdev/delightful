@@ -97,7 +97,7 @@ JSON, true));
 2、currenttimeis:{$currentDateTime}
 -topic_idis：750436587206451201
 -agent_idis：725682656757252096
-​​3、你needcheckday+time  whetherratiocurrenttime大，ifnot大，needreminderusertime只能is未cometime
+​​3、你needcheckday+time  whetherratiocurrenttime大，ifnot大，needreminderusertime只canisnotcometime
 4、你need保证userinputhint词middle，haveday, timeandnamevalue
 
 # updown文

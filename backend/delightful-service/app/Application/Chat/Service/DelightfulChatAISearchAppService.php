@@ -247,7 +247,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             $parallel->add(function () use ($questionId, $associateQuestion, $dto, $currentContextChunk) {
                 $start = microtime(true);
                 CoContext::setRequestId($dto->getRequestId());
-                // 已generateassociateissue，准备sendsearchresult
+                // alreadygenerateassociateissue，准备sendsearchresult
                 $pageCount = random_int(30, 60);
                 $onePageWords = random_int(50, 200);
                 $totalWords = $pageCount * $onePageWords;
@@ -313,7 +313,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $noRepeatSearchContexts, $associateQuestion['title']);
                 $associateQuestionsQueryVo->setMessageHistory(new MessageHistory());
                 $associateSubQuestions = $this->delightfulLLMDomainService->getRelatedQuestions($associateQuestionsQueryVo, 2, 3);
-                // todo byatthiswithinisto所have维degreesummarybackagain精读，therefore丢失each维degreequantity，只能随机generate。
+                // todo byatthiswithinisto所have维degreesummarybackagain精读，therefore丢失each维degreequantity，只can随机generate。
                 // etc待front端adjust渲染 ui
                 $pageCount = random_int(30, 60);
                 $onePageWords = random_int(200, 2000);
@@ -327,7 +327,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                     // getsummarywebpagequantity
                     'page_count' => $pageCount,
                 ];
-                // 已generateassociateissue，准备sendsearchresult
+                // alreadygenerateassociateissue，准备sendsearchresult
                 $this->aiSendMessage(
                     $dto->getConversationId(),
                     (string) $this->idGenerator->generate(),
@@ -520,7 +520,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
      */
     public function sendAssociateQuestionResponse(DelightfulChatAggregateSearchReqDTO $dto, string $associateQuestionId): void
     {
-        $content = ['llm_response' => '已经for您找to答案，请etc待generate总结'];
+        $content = ['llm_response' => 'already经for您找to答案，请etc待generate总结'];
         $this->aiSendMessage(
             $dto->getConversationId(),
             (string) $this->idGenerator->generate(),
@@ -820,7 +820,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
     private function getSearchData(array $noRepeatSearchContexts): array
     {
         $searchList = [];
-        foreach ($noRepeatSearchContexts as $search) { // $search 已经is切slicebackyuan素
+        foreach ($noRepeatSearchContexts as $search) { // $search already经is切slicebackyuan素
             // compatiblehistorydata，key use小驼峰
             $searchList[] = [
                 'id' => $search->getId(),

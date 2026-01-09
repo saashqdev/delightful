@@ -12,15 +12,15 @@ namespace App\Domain\Contact\Entity\ValueObject;
  */
 enum UserStatus: int
 {
-    // 0:freeze (刚同passcomenotactivate)
+    // 0:freeze (just同passcomenotactivate)
     case Frozen = 0;
 
     // 1:activated
     case Activated = 1;
 
-    // 2:已离职
+    // 2:already离职
     case Resigned = 2;
 
-    // 3:已exit
+    // 3:alreadyexit
     case Exited = 3;
 }

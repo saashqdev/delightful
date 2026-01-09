@@ -45,7 +45,7 @@ interface OrganizationBasedModelFilterInterface
     public function getAvailableModelIdentifiers(string $organizationCode): array;
 
     /**
-     * getorganizationneed升level才能usemodelIDlist.
+     * getorganizationneed升level才canusemodelIDlist.
      *
      * @param string $organizationCode organizationencoding
      * @return array need升levelmodelIDarray，for example: ['gpt-4o-advanced', 'claude-3-opus', ...]

@@ -150,7 +150,7 @@ class QwenImageEditModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // validation必要parameter
+        // validation必wantparameter
         $this->validateEditRequest($imageGenerateRequest);
 
         $this->logger->info('通义thousand问graphlikeedit：startedit', [

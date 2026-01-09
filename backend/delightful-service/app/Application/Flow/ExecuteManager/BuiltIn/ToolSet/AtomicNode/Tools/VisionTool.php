@@ -41,7 +41,7 @@ class VisionTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '提供视觉能力。useat识别usertoimage意graph，andreturn识别result';
+        return '提供视觉can力。useat识别usertoimage意graph，andreturn识别result';
     }
 
     /**
@@ -243,7 +243,7 @@ JSON, true)));
    - 技术info：如havegraphtable/data，analyzeits含义
    
 4. analyzeformatrequire：
-   - toat重要analyzeresult，use结构化JSONformat呈现，如：{"category别":"xx", "主body":"xx", "特征":["xx","xx"]}
+   - toat重wantanalyzeresult，use结构化JSONformat呈现，如：{"category别":"xx", "主body":"xx", "特征":["xx","xx"]}
    - toatnotcertaincontent，explicittable明speculatedpropertyquality，for example："maybeis..."
    - 如imagequalitymore低，fingeroutlimit因素and尽力analyze
    - toat多graphanalyze，minute别markimage序numberconductparse，and总结itsassociateproperty

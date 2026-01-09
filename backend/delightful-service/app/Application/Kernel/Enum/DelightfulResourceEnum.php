@@ -35,9 +35,9 @@ enum DelightfulResourceEnum: string
 
     // ===== threelevel：specificresource (useatspecificbindinterface）=====
     case ADMIN_AI_MODEL = 'platform.ai.model_management'; # AI管理-model管理
-    case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AI管理-智能绘graph管理
+    case ADMIN_AI_IMAGE = 'platform.ai.image_generation'; # AI管理-智can绘graph管理
     case ADMIN_AI_MODE = 'platform.ai.mode_management'; # AI管理-模type管理管理
-    case ADMIN_AI_ABILITY = 'platform.ai.ability'; # AI管理-能力管理
+    case ADMIN_AI_ABILITY = 'platform.ai.ability'; # AI管理-can力管理
     case SAFE_SUB_ADMIN = 'admin.safe.sub_admin';  # security管控-子administrator
     case PLATFORM_SETTING_PLATFORM_INFO = 'platform.setting.platform_info'; # 平台管理 - systemset - 平台info
     case PLATFORM_SETTING_MAINTENANCE = 'platform.setting.maintenance'; # 平台管理 - systeminfo - 维护管理
@@ -73,7 +73,7 @@ enum DelightfulResourceEnum: string
 
     /**
      * uplevelresource.
-     * 注意：new操asresourceback要补充thisconfiguration.
+     * 注意：new操asresourcebackwant补充thisconfiguration.
      */
     public function parent(): ?self
     {

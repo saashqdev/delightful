@@ -14,6 +14,6 @@ class AbstractAgent implements AgentInterface
 {
     public function execute(UserCallAgentEvent $event)
     {
-        throw new RuntimeException('executemethod未implement');
+        throw new RuntimeException('executemethodnotimplement');
     }
 }

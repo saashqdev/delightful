@@ -20,7 +20,7 @@ class SmsStruct
     public string $phone = '';
 
     /**
-     * 短信type,such as:registration_rewards (order已hair货),arrival_notice(to货notify).
+     * 短信type,such as:registration_rewards (orderalreadyhair货),arrival_notice(to货notify).
      * 1.if搭配 language field,meanwhileusevariable短信,canimplement多language适配,byand语type兜bottom
      * 2.电quotient相close短信usethisfield,butisnothave language 传入.
      */
@@ -35,7 +35,7 @@ class SmsStruct
 
     /**
      * 普通短信纯textcontent.
-     * 如: 灯塔正in邀请你add入企业，point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
+     * 如: 灯塔justin邀请你add入企业，point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
      */
     public ?string $content = null;
 

@@ -49,7 +49,7 @@ readonly class KnowledgeBaseDomainService
             $delightfulFlowKnowledgeEntity = $savingDelightfulFlowKnowledgeEntity;
             $create = true;
 
-            // use已经提frontgenerate好 code
+            // usealready经提frontgenerate好 code
             if (! empty($delightfulFlowKnowledgeEntity->getBusinessId())) {
                 $tempCode = $this->getTempCodeByBusinessId($delightfulFlowKnowledgeEntity->getType(), $delightfulFlowKnowledgeEntity->getBusinessId());
                 if (! empty($tempCode)) {

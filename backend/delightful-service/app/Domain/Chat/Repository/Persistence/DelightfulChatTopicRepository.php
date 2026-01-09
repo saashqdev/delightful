@@ -64,7 +64,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     public function updateTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity
     {
         $name = $delightfulTopicEntity->getName();
-        // lengthnot能超pass 50
+        // lengthnotcan超pass 50
         if (mb_strlen($name) > 50) {
             ExceptionBuilder::throw(
                 ChatErrorCode::INPUT_PARAM_ERROR,

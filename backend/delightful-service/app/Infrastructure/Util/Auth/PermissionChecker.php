@@ -16,7 +16,7 @@ class PermissionChecker
      * checkhand机numberwhetherhavepermissionaccessfinger定permission.
      *
      * @param string $mobile hand机number
-     * @param SuperPermissionEnum $permissionEnum 要checkpermissiontype
+     * @param SuperPermissionEnum $permissionEnum wantcheckpermissiontype
      * @return bool whetherhavepermission
      */
     public static function mobileHasPermission(string $mobile, SuperPermissionEnum $permissionEnum): bool
@@ -33,7 +33,7 @@ class PermissionChecker
      * inside部permissioncheckmethod，便attest.
      *
      * @param string $mobile hand机number
-     * @param SuperPermissionEnum $permission 要checkpermission
+     * @param SuperPermissionEnum $permission wantcheckpermission
      * @param array $permissions permissionconfiguration
      * @return bool whetherhavepermission
      */

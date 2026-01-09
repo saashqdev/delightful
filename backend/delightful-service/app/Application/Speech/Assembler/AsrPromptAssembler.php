@@ -50,7 +50,7 @@ usersubmitonesegment录音content，录音content经passvoice识别转fortext，
 
 ## titlegeneraterequire
 
-### 优先level原then（重要）
+### 优先level原then（重want）
 1. **笔记优先**：if存in<笔记content>，titleshould侧重笔记content
 2. **重视笔记title**：if笔记is Markdown formatandcontaintitle（# openheadline），优先采use笔记middletitlecontent
 3. **综合考虑**：meanwhile参考voice识别content，ensuretitlecompleteaccurate
@@ -59,14 +59,14 @@ usersubmitonesegment录音content，录音content经passvoice识别转fortext，
 ### formatrequire
 1. **lengthlimit**：not超pass 20 character（汉字按 1 charactercalculate）
 2. **languagestyle**：use陈述property语sentence，避免疑问sentence
-3. **简洁explicit**：直接概括核coretheme，not要addmodification词
-4. **纯textoutput**：只outputtitlecontent，not要addany标point符number、引numberorothermodification
+3. **简洁explicit**：直接概括核coretheme，notwantaddmodification词
+4. **纯textoutput**：只outputtitlecontent，notwantaddany标point符number、引numberorothermodification
 
 ### forbidlinefor
-- not要return答contentmiddleissue
-- not要conduct额outside解释
-- not要add"录音"、"笔记"etcfront缀词
-- not要outputtitlebyoutsideanycontent
+- notwantreturn答contentmiddleissue
+- notwantconduct额outside解释
+- notwantadd"录音"、"笔记"etcfront缀词
+- notwantoutputtitlebyoutsideanycontent
 
 ## 录音content
 {textContent}
@@ -82,7 +82,7 @@ PROMPT;
     }
 
     /**
-     * generatefileupload场景录音titlehint词（emphasizefile名重要property）.
+     * generatefileupload场景录音titlehint词（emphasizefile名重wantproperty）.
      *
      * @param string $userRequestMessage userinchat框sendrequestmessage
      * @param string $language outputlanguage（如：zh_CN, en_US）
@@ -106,9 +106,9 @@ usersendoriginalmessage如down：
 
 ## titlegeneraterequire
 
-### 优先level原then（non常重要）
+### 优先level原then（non常重want）
 1. **file名优先**：file名usuallyisuser精core命名，containmost核corethemeinfo，请重point参考usermessagemiddle @ backsurfacefile名
-2. **智能判断**：
+2. **智can判断**：
    - iffile名语义清晰（如"2024yearQ4product规划will议.mp3"、"customer需求discussion.wav"），优先based onfile名generatetitle
    - iffile名isdatetime戳（如"20241112_143025.mp3"）orno意义character（如"录音001.mp3"），thenuse通usedescription
 3. **extractkeyword**：fromfile名middleextractmost核corekeywordandtheme
@@ -116,13 +116,13 @@ usersendoriginalmessage如down：
 ### formatrequire
 1. **lengthlimit**：not超pass 20 character（汉字按 1 charactercalculate）
 2. **languagestyle**：use陈述property语sentence，避免疑问sentence
-3. **简洁explicit**：直接概括核coretheme，not要addmodification词
-4. **纯textoutput**：只outputtitlecontent，not要addany标point符number、引numberorothermodification
+3. **简洁explicit**：直接概括核coretheme，notwantaddmodification词
+4. **纯textoutput**：只outputtitlecontent，notwantaddany标point符number、引numberorothermodification
 
 ### forbidlinefor
-- not要保留fileextension名（.mp3、.wav、.webm etc）
-- not要outputtitlebyoutsideanycontent
-- not要add引number、书名numberetc标point符number
+- notwant保留fileextension名（.mp3、.wav、.webm etc）
+- notwantoutputtitlebyoutsideanycontent
+- notwantadd引number、书名numberetc标point符number
 
 ## outputlanguage
 请use {language} languageoutputtitle。

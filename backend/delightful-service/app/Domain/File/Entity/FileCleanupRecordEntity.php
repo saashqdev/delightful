@@ -273,7 +273,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * checkwhether已expire.
+     * checkwhetheralreadyexpire.
      */
     public function isExpired(): bool
     {
@@ -289,7 +289,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * checkwhether已cleanup.
+     * checkwhetheralreadycleanup.
      */
     public function isCleaned(): bool
     {

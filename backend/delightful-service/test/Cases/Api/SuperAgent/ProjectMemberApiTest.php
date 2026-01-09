@@ -111,7 +111,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         // 5. 切换tonothavepermissionusertestpermission控制
         $this->switchUserTest2();
-        // testnonprojectmembernot能置top - shouldreturnpermissionerror
+        // testnonprojectmembernotcan置top - shouldreturnpermissionerror
         $this->pinProject($projectId, true, 51202); // false设51202ispermissionerror码
     }
 

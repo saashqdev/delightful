@@ -119,7 +119,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('DELIGHTFUL-FLOW-NODE-662617c1a07615-9318288811', [
-            'content' => '你好吗',
+            'content' => '你好',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());

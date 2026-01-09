@@ -71,7 +71,7 @@ class DelightfulMessageTest extends BaseTest
         $aiUserId = 'usi_8e4bde5582491a6cabfe0d0ba8b7ae8e';
         $chatAppService = di(DelightfulChatMessageAppService::class);
         // will多segmentstreammessage，passthis id associateupcome
-        // ai searchcardmessage多segmentresponse，已经will app_message_id asforassociate id，streamresponseneed另outside id come做associate
+        // ai searchcardmessage多segmentresponse，already经will app_message_id asforassociate id，streamresponseneed另outside id come做associate
         $appMessageId = IdGenerator::getUniqueId32();
         $streamOptions = (new StreamOptions())->setStream(true)->setStreamAppMessageId($appMessageId)->setStatus(StreamMessageStatus::Start);
         $messageContent = new TextMessage();

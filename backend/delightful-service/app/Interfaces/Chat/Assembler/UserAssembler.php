@@ -124,7 +124,7 @@ class UserAssembler
 
             foreach ($user->toArray() as $key => $value) {
                 if (isset($userDetailAdd[$key])) {
-                    // if已经存in，skip
+                    // ifalready经存in，skip
                     continue;
                 }
                 $userDetailAdd[$key] = $value;
@@ -193,7 +193,7 @@ class UserAssembler
 
             // step2.3: updateorcreateuserdepartmentdetailobject
             if (! empty($usersDepartmentDetailDTOList[$userId])) {
-                // update已存inuserdepartmentdetail
+                // updatealready存inuserdepartmentdetail
                 $userDepartmentDetailDTO = $usersDepartmentDetailDTOList[$userId];
 
                 if ($withDepartmentFullPath && ! empty($fullPathNodes)) {

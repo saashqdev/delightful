@@ -174,7 +174,7 @@ class AsrHeartbeatMonitor
      */
     private function shouldTriggerAutoSummary(AsrTaskStatusDTO $taskStatus): bool
     {
-        // if已cancel，not触hair
+        // ifalreadycancel，not触hair
         if ($taskStatus->recordingStatus === AsrRecordingStatusEnum::CANCELED->value) {
             return false;
         }
@@ -197,7 +197,7 @@ class AsrHeartbeatMonitor
             return false;
         }
 
-        // if沙箱task未create，not触hair
+        // if沙箱tasknotcreate，not触hair
         if (! $taskStatus->sandboxTaskCreated) {
             return false;
         }
@@ -211,9 +211,9 @@ class AsrHeartbeatMonitor
     private function triggerAutoSummary(AsrTaskStatusDTO $taskStatus): void
     {
         try {
-            // poweretcpropertycheck：iftask已complete，skipprocess
+            // poweretcpropertycheck：iftaskalreadycomplete，skipprocess
             if ($taskStatus->isSummaryCompleted()) {
-                $this->logger->info('task已complete，skipcore跳timeoutprocess', [
+                $this->logger->info('taskalreadycomplete，skipcore跳timeoutprocess', [
                     'task_key' => $taskStatus->taskKey,
                     'audio_file_id' => $taskStatus->audioFileId,
                     'status' => $taskStatus->status->value,
@@ -240,7 +240,7 @@ class AsrHeartbeatMonitor
             // 直接callfrom动总结method（willinmethodinside部updatestatus）
             $this->asrFileAppService->autoTriggerSummary($taskStatus, $taskStatus->userId, $organizationCode);
 
-            $this->logger->info('core跳timeoutfrom动总结已触hair', [
+            $this->logger->info('core跳timeoutfrom动总结already触hair', [
                 'task_key' => $taskStatus->taskKey,
                 'user_id' => $taskStatus->userId,
             ]);

@@ -64,7 +64,7 @@ class DelightfulFlowToolSetEntity extends AbstractEntity
         $toolSet->setId(0);
         $toolSet->setOrganizationCode($organizationCode);
         $toolSet->setCode(ConstValue::TOOL_SET_DEFAULT_CODE);
-        $toolSet->setName('未category');
+        $toolSet->setName('notcategory');
         $toolSet->setEnabled(true);
         $toolSet->setCreator('system');
         $toolSet->setCreatedAt(new DateTime());

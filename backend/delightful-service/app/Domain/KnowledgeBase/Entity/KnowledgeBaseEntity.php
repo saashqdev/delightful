@@ -69,7 +69,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     protected int $expectedNum = 0;
 
     /**
-     * 业务维护已completequantity.
+     * 业务维护alreadycompletequantity.
      */
     protected int $completedNum = 0;
 
@@ -91,7 +91,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     protected int $expectedCount = 0;
 
     /**
-     * 已completeslicesegmentquantity.
+     * alreadycompleteslicesegmentquantity.
      */
     protected int $completedCount = 0;
 
@@ -121,16 +121,16 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function prepareForCreation(): void
     {
         if (empty($this->name)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basename not能forempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basename notcanforempty');
         }
         if (empty($this->type)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basetype not能forempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basetype notcanforempty');
         }
         if (empty($this->organizationCode)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'organizationencoding not能forempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'organizationencoding notcanforempty');
         }
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 not能forempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 notcanforempty');
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
@@ -156,10 +156,10 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function prepareForModification(KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void
     {
         if (empty($this->name)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basename not能forempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge basename notcanforempty');
         }
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 not能forempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 notcanforempty');
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
@@ -186,13 +186,13 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public function prepareForModifyProcess(KnowledgeBaseEntity $delightfulFlowKnowledgeEntity): void
     {
         if (empty($this->creator)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 not能forempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者 notcanforempty');
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();
         }
         if ($this->completedNum > $this->expectedNum) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, '已completequantitynot能greater thanexpectquantity');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'alreadycompletequantitynotcangreater thanexpectquantity');
         }
         $delightfulFlowKnowledgeEntity->setExpectedNum($this->expectedNum);
         $delightfulFlowKnowledgeEntity->setCompletedNum($this->completedNum);
@@ -603,7 +603,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     private function checkModel(): void
     {
         if (empty($this->model)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'model not能forempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'model notcanforempty');
         }
     }
 

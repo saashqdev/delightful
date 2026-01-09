@@ -157,7 +157,7 @@ class ModeDomainService
         }
         $mode = $modeAggregate->getMode();
 
-        // default模typenot能bedisable
+        // default模typenotcanbedisable
         if ($mode->isDefaultMode() && ! $status) {
             ExceptionBuilder::throw(ModeErrorCode::MODE_IN_USE_CANNOT_DELETE);
         }
@@ -268,7 +268,7 @@ class ModeDomainService
             // ifis跟随模type，建立mappingclose系
             if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
                 $followMap[$mode->getId()] = $mode->getFollowModeId();
-                $modeIds[] = $mode->getFollowModeId(); // also要收collectionbe跟随模typeID
+                $modeIds[] = $mode->getFollowModeId(); // alsowant收collectionbe跟随模typeID
             }
         }
         $modeIds = array_unique($modeIds);

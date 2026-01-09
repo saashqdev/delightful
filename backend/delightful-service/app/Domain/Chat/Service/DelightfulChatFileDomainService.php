@@ -114,7 +114,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
 
     /**
      * saveorupdatefile
-     * iffile_key已存in，thenupdatefileinfo
+     * iffile_keyalready存in，thenupdatefileinfo
      * iffile_keynot存in，thencreate新file.
      *
      * @param DelightfulChatFileEntity $fileEntity file实body

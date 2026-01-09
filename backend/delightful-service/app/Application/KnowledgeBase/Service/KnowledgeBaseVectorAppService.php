@@ -90,9 +90,9 @@ class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
 
         $documentEntity->setSyncStatus(KnowledgeSyncStatus::Syncing->value);
         $this->knowledgeBaseDocumentDomainService->changeSyncStatus($dataIsolation, $documentEntity);
-        $this->logger->info('正inparsefile，file名：' . $documentFile->getName());
+        $this->logger->info('justinparsefile，file名：' . $documentFile->getName());
         $content = $this->documentFileStrategy->parseContent($dataIsolation, $documentFile, $knowledgeBaseEntity->getCode());
-        $this->logger->info('parsefilecomplete，正infileminutesegment，file名：' . $documentFile->getName());
+        $this->logger->info('parsefilecomplete，justinfileminutesegment，file名：' . $documentFile->getName());
         $splitText = $this->knowledgeBaseFragmentDomainService->processFragmentsByContent($dataIsolation, $content, $documentEntity->getFragmentConfig());
         $this->logger->info('fileminutesegmentcomplete，file名：' . $documentFile->getName() . '，minutesegmentquantity:' . count($splitText));
 

@@ -96,7 +96,7 @@ class FileTypeTest extends TestCase
     public function testGetTypeFromHeaders()
     {
         // markthistestforskip，因forneed模拟all局function
-        $this->markTestSkipped('needfunction模拟feature才能completetest');
+        $this->markTestSkipped('needfunction模拟feature才cancompletetest');
     }
 
     /**
@@ -105,7 +105,7 @@ class FileTypeTest extends TestCase
      */
     public function testInvalidFileType()
     {
-        $this->markTestSkipped('needfunction模拟feature才能completetest');
+        $this->markTestSkipped('needfunction模拟feature才cancompletetest');
     }
 
     /**
@@ -113,6 +113,6 @@ class FileTypeTest extends TestCase
      */
     public function testFileTooLarge()
     {
-        $this->markTestSkipped('needfunction模拟feature才能completetest');
+        $this->markTestSkipped('needfunction模拟feature才cancompletetest');
     }
 }

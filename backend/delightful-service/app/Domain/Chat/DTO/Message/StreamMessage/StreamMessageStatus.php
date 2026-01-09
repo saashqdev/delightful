@@ -20,7 +20,7 @@ enum StreamMessageStatus: int
     case Processing = 1;
 
     /**
-     * 已complete.
+     * alreadycomplete.
      */
     case Completed = 2;
 }

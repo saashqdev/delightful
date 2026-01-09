@@ -112,7 +112,7 @@ class ServiceProviderApiTest extends BaseTest
 
         // findcreatemodel
         $createdModel = $this->findModelInDetailResponse($detailResponse['data'], $modelId);
-        $this->assertNotNull($createdModel, 'should能indetailmiddle找tocreatemodel');
+        $this->assertNotNull($createdModel, 'shouldcanindetailmiddle找tocreatemodel');
 
         // validate4costfield存inandvaluecorrect
         $this->assertArrayHasKey('config', $createdModel, 'modelshouldhaveconfigfield');
@@ -185,7 +185,7 @@ class ServiceProviderApiTest extends BaseTest
 
         // findupdatebackmodel
         $updatedModel = $this->findModelInDetailResponse($updatedDetailResponse['data'], $modelId);
-        $this->assertNotNull($updatedModel, 'should能indetailmiddle找toupdatebackmodel');
+        $this->assertNotNull($updatedModel, 'shouldcanindetailmiddle找toupdatebackmodel');
 
         // validateupdateback4costfield
         $this->assertArrayHasKey('config', $updatedModel, 'updatebackmodelshouldhaveconfigfield');
@@ -308,7 +308,7 @@ class ServiceProviderApiTest extends BaseTest
      *
      * @param array $detailData detailresponsedata
      * @param string $modelId modelID
-     * @return null|array 找tomodeldata，未找toreturnnull
+     * @return null|array 找tomodeldata，not找toreturnnull
      */
     private function findModelInDetailResponse(array $detailData, string $modelId): ?array
     {

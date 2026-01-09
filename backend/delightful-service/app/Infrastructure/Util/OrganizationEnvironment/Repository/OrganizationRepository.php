@@ -176,7 +176,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * checkencodingwhether已存in.
+     * checkencodingwhetheralready存in.
      */
     public function existsByCode(string $code, ?int $excludeId = null): bool
     {

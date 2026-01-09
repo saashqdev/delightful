@@ -134,7 +134,7 @@ MARKDOWN;
 finger令parameter instruction（optional）：
 • format：[{"name": "finger令name", "value": "finger令value"}, ...]
 • single-selecttype：fromoptionalvaluemiddlechooseone，for example "yes", "no"
-• switchtype：只能is "on" or "off"
+• switchtype：只canis "on" or "off"
 • ifnot提供finger令parameter，willusedefaultvalue
 
 callexample：
@@ -170,7 +170,7 @@ MARKDOWN;
                     'properties' => [
                         'agent_id' => [
                             'type' => 'string',
-                            'description' => '要call AI 助理 ID',
+                            'description' => 'wantcall AI 助理 ID',
                         ],
                         'message' => [
                             'type' => 'string',
@@ -267,7 +267,7 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => 'finger令parameterarray，useat控制AI助理linefor。eachobjectcontain name（finger令name）and value（finger令value）field。single-selecttypefinger令needfromoptionalvaluemiddlechooseone，switchtypefinger令只能is "on" or "off"。',
+            'description' => 'finger令parameterarray，useat控制AI助理linefor。eachobjectcontain name（finger令name）and value（finger令value）field。single-selecttypefinger令needfromoptionalvaluemiddlechooseone，switchtypefinger令只canis "on" or "off"。',
             'items' => [
                 'type' => 'object',
                 'properties' => [
@@ -277,7 +277,7 @@ MARKDOWN;
                     ],
                     'value' => [
                         'type' => 'string',
-                        'description' => 'finger令value，single-selecttypefromoptionalvaluemiddlechoose，switchtype只能is "on" or "off"',
+                        'description' => 'finger令value，single-selecttypefromoptionalvaluemiddlechoose，switchtype只canis "on" or "off"',
                     ],
                 ],
                 'required' => ['name', 'value'],

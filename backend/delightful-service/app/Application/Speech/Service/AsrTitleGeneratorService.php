@@ -39,7 +39,7 @@ readonly class AsrTitleGeneratorService
      * according todifferent场景generatetitle.
      *
      * 场景one：have asr_stream_content（front端实o clock录音），直接usecontentgeneratetitle
-     * 场景two：have file_id（upload已havefile），buildhint词generatetitle
+     * 场景two：have file_id（uploadalreadyhavefile），buildhint词generatetitle
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
      * @param string $asrStreamContent ASRstream识别content
@@ -68,11 +68,11 @@ readonly class AsrTitleGeneratorService
                 return $this->sanitizeTitle($title);
             }
 
-            // 场景two：have file_id（upload已havefile）
+            // 场景two：have file_id（uploadalreadyhavefile）
             if (! empty($fileId)) {
                 $fileEntity = $this->taskFileDomainService->getById((int) $fileId);
                 if ($fileEntity === null) {
-                    $this->logger->warning('generatetitleo clock未找tofile', [
+                    $this->logger->warning('generatetitleo clocknot找tofile', [
                         'file_id' => $fileId,
                         'task_key' => $taskKey,
                     ]);

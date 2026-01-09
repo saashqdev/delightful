@@ -41,12 +41,12 @@ class ProviderConfigDTO extends AbstractDTO
     protected string $serviceProviderId = '';
 
     /**
-     * 大modelspecificconfiguration，ak,sk,host 之category（已脱敏）.
+     * 大modelspecificconfiguration，ak,sk,host 之category（already脱敏）.
      */
     protected ?ProviderConfigItem $config = null;
 
     /**
-     * 已decryptconfiguration，notconductdata脱敏process.
+     * alreadydecryptconfiguration，notconductdata脱敏process.
      */
     protected ?ProviderConfigItem $decryptedConfig = null;
 
@@ -343,7 +343,7 @@ class ProviderConfigDTO extends AbstractDTO
             $this->decryptedConfig = $decryptedConfig;
         }
 
-        // 注意：已decryptconfigurationnotconductdata脱敏process
+        // 注意：alreadydecryptconfigurationnotconductdata脱敏process
     }
 
     public function getIsModelsEnable(): bool

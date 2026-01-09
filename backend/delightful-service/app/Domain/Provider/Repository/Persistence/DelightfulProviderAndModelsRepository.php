@@ -60,7 +60,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             return null;
         }
 
-        // 3. querycurrentorganizationwhether已havetheservicequotientconfiguration
+        // 3. querycurrentorganizationwhetheralreadyhavetheservicequotientconfiguration
         $configBuilder = $this->createConfigQuery()->where('organization_code', $organizationCode);
         $configBuilder->where('service_provider_id', $delightfulProvider->getId());
 
@@ -181,7 +181,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * find Delightful modelwhether已经inorganizationmiddle.
+     * find Delightful modelwhetheralready经inorganizationmiddle.
      */
     public function getDelightfulModelByParentId(ProviderDataIsolation $dataIsolation, string $modelParentId): ?ProviderModelEntity
     {

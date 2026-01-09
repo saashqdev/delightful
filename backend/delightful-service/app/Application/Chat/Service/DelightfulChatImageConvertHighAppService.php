@@ -113,7 +113,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 }
                 sleep(2);
             }
-            // if未complete，then报错timeout
+            // ifnotcomplete，then报错timeout
             if (! $response?->isFinishStatus() || empty($response?->getUrls())) {
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.task_timeout');
             }

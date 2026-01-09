@@ -40,7 +40,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected UserType $userType;
 
     /**
-     * userintheorganizationdownstatus:0:freeze,1:activated,2:已离职,3:已exit.
+     * userintheorganizationdownstatus:0:freeze,1:activated,2:already离职,3:alreadyexit.
      */
     protected string $status;
 

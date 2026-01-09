@@ -123,7 +123,7 @@ readonly class LongTermMemoryDomainService
                 // batchquantityquery记忆
                 $memories = $this->repository->findByIds($memoryIds);
 
-                // batchquantityaccept记忆suggestion：willpending_contentmovetocontent，settingstatusfor已accept，enable记忆
+                // batchquantityaccept记忆suggestion：willpending_contentmovetocontent，settingstatusforalreadyaccept，enable记忆
                 foreach ($memories as $memory) {
                     // ifhavepending_content，thenwillitsmovetocontent
                     if ($memory->getPendingContent() !== null) {
@@ -159,7 +159,7 @@ readonly class LongTermMemoryDomainService
                     if (empty($content) && ! empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }
-                    // ifcontentandPendingContentallnotfornull，then清nullPendingContent即can，not要delete记忆
+                    // ifcontentandPendingContentallnotfornull，then清nullPendingContent即can，notwantdelete记忆
                     elseif (! empty($content) && ! empty($pendingContent)) {
                         $memory->setPendingContent(null);
                         $memory->setStatus(MemoryStatus::ACTIVE);
@@ -584,7 +584,7 @@ readonly class LongTermMemoryDomainService
             return true;
         }
 
-        // 长time未accessand重要propertyvery低
+        // 长timenotaccessand重wantpropertyvery低
         if ($memory->getLastAccessedAt() && $memory->getImportance() < 0.2) {
             $daysSinceLastAccess = new DateTime()->diff($memory->getLastAccessedAt())->days;
             if ($daysSinceLastAccess > 30) {
@@ -597,7 +597,7 @@ readonly class LongTermMemoryDomainService
 
     /**
      * validate记忆enablequantitylimit.
-     * @param array $memoryIds 要enable记忆IDcolumn表
+     * @param array $memoryIds wantenable记忆IDcolumn表
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID
@@ -605,7 +605,7 @@ readonly class LongTermMemoryDomainService
      */
     private function validateMemoryEnablementLimits(array $memoryIds, string $orgId, string $appId, string $userId): void
     {
-        // get要enable记忆实body
+        // getwantenable记忆实body
         $memoriesToEnable = $this->repository->findByIds($memoryIds);
 
         // getcurrentproject记忆andall局记忆enablequantity
@@ -629,7 +629,7 @@ readonly class LongTermMemoryDomainService
                 $projectedCounts[$categoryKey] = 0;
             }
 
-            // onlycurrent未enable记忆才willincreasecount
+            // onlycurrentnotenable记忆才willincreasecount
             if (! $memory->isEnabled()) {
                 ++$projectedCounts[$categoryKey];
             }

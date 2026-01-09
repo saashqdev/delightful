@@ -49,7 +49,7 @@ class KnowledgeBaseDTO extends AbstractFlowDTO
     public int $expectedCount = 0;
 
     /**
-     * 已completeslicesegmentquantity.
+     * alreadycompleteslicesegmentquantity.
      */
     public int $completedCount = 0;
 
@@ -61,7 +61,7 @@ class KnowledgeBaseDTO extends AbstractFlowDTO
     public int $expectedNum = 0;
 
     /**
-     * 业务维护已completequantity.
+     * 业务维护alreadycompletequantity.
      */
     public int $completedNum = 0;
 

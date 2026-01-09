@@ -27,13 +27,13 @@ class ClientSequence extends AbstractEntity
     // usermessageid，userdown唯one。
     protected string $messageId;
 
-    // 本itemmessagefingertodelightful_message_id。 useatimplement已读return执场景。存inquoteclose系o clock，send_msg_idfieldnotagainreturn，因forsend方messageidnothave改变。
+    // 本itemmessagefingertodelightful_message_id。 useatimplementalready读return执场景。存inquoteclose系o clock，send_msg_idfieldnotagainreturn，因forsend方messageidnothave改变。
     protected ?string $referMessageId;
 
     // send方messageid
     protected ?string $senderMessageId;
 
-    // message所属sessionwindow。 customer端canaccording tothisvaluecertainmessagewhether要reminderetc。if本groundnothavehair现thissessionid，主动toservice端querysessionwindowdetail
+    // message所属sessionwindow。 customer端canaccording tothisvaluecertainmessagewhetherwantreminderetc。if本groundnothavehair现thissessionid，主动toservice端querysessionwindowdetail
     protected ?string $conversationId;
 
     protected string $organizationCode;

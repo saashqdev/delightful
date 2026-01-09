@@ -27,10 +27,10 @@ enum ControlMessageType: string
     // session免打扰
     case MuteConversation = 'mute_conversation';
 
-    // 已读
+    // already读
     case SeenMessages = 'seen_messages';
 
-    // 已viewmessage
+    // alreadyviewmessage
     case ReadMessage = 'read_message';
 
     // withdrawmessage

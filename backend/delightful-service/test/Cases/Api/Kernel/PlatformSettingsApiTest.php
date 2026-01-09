@@ -117,7 +117,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // verifymiddle文 logo 已update
+        // verifymiddle文 logo alreadyupdate
         $this->assertSame('https://example.com/updated_logo_zh.png', $data['logo']['zh_CN']['url']);
         // verifyEnglish logo 保持not变
         $this->assertSame('https://example.com/initial_logo_en.png', $data['logo']['en_US']['url']);

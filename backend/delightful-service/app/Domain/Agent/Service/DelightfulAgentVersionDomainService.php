@@ -81,7 +81,7 @@ class DelightfulAgentVersionDomainService
         $reviewOpen = false;
 
         $msg = '';
-        // if旧status已经is企业or者市场，thennotallowback
+        // if旧statusalready经is企业or者市场，thennotallowback
         $oldDelightfulAgentVersionEntity = $this->agentVersionRepository->getNewestAgentVersionEntity($delightfulAgentVersionEntity->getAgentId());
         if ($oldDelightfulAgentVersionEntity !== null) {
             $this->validateVersionNumber($delightfulAgentVersionEntity->getVersionNumber(), $oldDelightfulAgentVersionEntity->getVersionNumber());
@@ -198,7 +198,7 @@ class DelightfulAgentVersionDomainService
 
         // if MINOR 达to 10，enter位to MAJOR（canaccording to需求adjustthisrule）
         if ($minor > 99) {
-            // notresetminor，whileis直接增大major，避免not必要reset
+            // notresetminor，whileis直接增大major，避免not必wantreset
             $minor = 0;
             $major = (int) $major + 1;
         }

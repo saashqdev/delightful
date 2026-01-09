@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->string('third_country', 32)->comment('国家orground区 Code 缩写')->default('CN');
             $table->string('third_join_time', 64)->comment('入职time。secondleveltime戳format，table示from 1970 year 1 month 1 daystart所经passsecond数。');
             $table->string('third_employee_no', 32)->comment('工number')->default('');
-            $table->tinyInteger('third_employee_type')->comment('员工type。1：正type员工2：实习生3：outsidepackage4：劳务 5：顾问')->default(1);
+            $table->tinyInteger('third_employee_type')->comment('员工type。1：justtype员工2：实习生3：outsidepackage4：劳务 5：顾问')->default(1);
             $table->text('third_custom_attrs')->comment('customizefield。');
             $table->text('third_department_path')->comment('departmentpath。');
             $table->text('third_platform_department_users_extra')->comment('额outsideinfo');

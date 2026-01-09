@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\Provider\DTO;
 
 /**
- * AI能力columntableDTO.
+ * AIcan力columntableDTO.
  */
 class AiAbilityListDTO
 {

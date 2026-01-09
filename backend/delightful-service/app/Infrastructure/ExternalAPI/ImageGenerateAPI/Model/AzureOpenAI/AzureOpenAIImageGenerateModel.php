@@ -273,7 +273,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
     private function validateRequest(AzureOpenAIImageGenerateRequest $request): void
     {
         if (empty($request->getPrompt())) {
-            $this->logger->error('Azure OpenAIgraphlikegenerate：缺少必要parameter - prompt');
+            $this->logger->error('Azure OpenAIgraphlikegenerate：缺少必wantparameter - prompt');
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.prompt_required');
         }
 

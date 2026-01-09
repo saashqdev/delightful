@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->string('flow_code', 80)->comment('processencoding');
             $table->string('flow_version', 80)->comment('processversion');
             $table->integer('timeout')->default(0)->comment('timeouttime戳');
-            $table->boolean('handled')->default(false)->comment('whether已process');
+            $table->boolean('handled')->default(false)->comment('whetheralreadyprocess');
             $table->json('persistent_data')->nullable()->comment('持久化data');
             $table->string('created_uid', 80)->comment('createperson');
             $table->dateTime('created_at')->comment('creation time');

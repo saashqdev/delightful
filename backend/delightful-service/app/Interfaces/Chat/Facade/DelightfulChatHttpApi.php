@@ -196,7 +196,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 智能according to话题idget话题name.
+     * 智canaccording to话题idget话题name.
      */
     public function intelligenceGetTopicName(string $conversationId, string $topicId): array
     {
@@ -237,7 +237,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $delightfulGroupDTO->setGroupName($params['group_name']);
         $delightfulGroupDTO->setGroupType(GroupTypeEnum::from($params['group_type']));
         $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
-        // person员anddepartmentnot能meanwhileforempty
+        // person员anddepartmentnotcanmeanwhileforempty
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_SELECT_ERROR);
         }
@@ -258,7 +258,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $authorization = $this->getAuthorization();
         $delightfulGroupDTO = new DelightfulGroupEntity();
         $delightfulGroupDTO->setId($id);
-        // person员anddepartmentnot能meanwhileforempty
+        // person员anddepartmentnotcanmeanwhileforempty
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_SELECT_ERROR);
         }
@@ -336,7 +336,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $delightfulGroupDTO->setId($id);
         $delightfulGroupDTO->setGroupName($params['group_name'] ?? null);
         $delightfulGroupDTO->setGroupAvatar($params['group_avatar'] ?? null);
-        // name and avatar not能meanwhileforempty
+        // name and avatar notcanmeanwhileforempty
         if (empty($delightfulGroupDTO->getGroupName()) && empty($delightfulGroupDTO->getGroupAvatar())) {
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR);
         }

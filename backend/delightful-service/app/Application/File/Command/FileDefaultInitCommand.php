@@ -201,7 +201,7 @@ class FileDefaultInitCommand extends Command
         // meanwhilehandleoriginaldefaultgraph标file（ifneed话）
         $this->processDefaultIcons($baseFileDir, $organizationCode, $totalFiles, $skippedFiles);
 
-        $this->info("fileinitializecomplete，共handle {$totalFiles} file，skip {$skippedFiles} 已存infile");
+        $this->info("fileinitializecomplete，共handle {$totalFiles} file，skip {$skippedFiles} already存infile");
     }
 
     /**

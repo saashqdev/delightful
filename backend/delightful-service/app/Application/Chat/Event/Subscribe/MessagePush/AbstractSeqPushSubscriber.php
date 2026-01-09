@@ -19,7 +19,7 @@ use Throwable;
 /**
  * messagepush模piece.
  * according togenerateseqbyand它优先level,use长connectpushgiveuser.
- * eachseqmaybe要推giveuser1to几tencustomer端.
+ * eachseqmaybewant推giveuser1to几tencustomer端.
  */
 abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
 {
@@ -50,7 +50,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
         try {
             foreach ($seqIds as $seqId) {
                 $seqId = (string) $seqId;
-                // useredis检测seqwhether已经尝试多time,if超pass n time,thennotagainpush
+                // useredis检测seqwhetheralready经尝试多time,if超pass n time,thennotagainpush
                 $seqRetryKey = sprintf('messagePush:seqRetry:%s', $seqId);
                 $seqRetryCount = $this->redis->get($seqRetryKey);
                 if ($seqRetryCount >= 3) {
@@ -60,7 +60,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                 $this->addSeqRetryNumber($seqRetryKey);
                 // recordseq尝试pushcount,useatback续判断whetherneedretry
                 $this->delightfulSeqAppService->pushSeq($seqId);
-                // 未报错,notagain重推
+                // not报错,notagain重推
                 $this->setSeqCanNotRetry($seqRetryKey);
             }
         } catch (Throwable $exception) {

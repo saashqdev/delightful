@@ -230,7 +230,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         if ($conversationEntity->getReceiveType() !== ConversationType::Ai && $conversationEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
-        // conversationwhether已bedelete
+        // conversationwhetheralreadybedelete
         if ($conversationEntity->getStatus() === ConversationStatus::Delete) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_DELETED);
         }
@@ -251,7 +251,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                     return $fileEntity->getFileId();
                 }, $fileEntities);
 
-                // checkwhetherhaverequestfile ID notin已querytofile ID middle
+                // checkwhetherhaverequestfile ID notinalreadyquerytofile ID middle
                 $missingFileIds = array_diff($fileIds, $existingFileIds);
                 if (! empty($missingFileIds)) {
                     ExceptionBuilder::throw(ChatErrorCode::FILE_NOT_FOUND);
@@ -348,10 +348,10 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     ): array {
         // 1.判断 $senderUserId and $receiverUserIdconversationwhether存in（参考getOrCreateConversationmethod）
         $senderConversationEntity = $this->delightfulConversationDomainService->getOrCreateConversation($senderUserId, $receiverId, $receiverType);
-        // also要createreceive方conversationwindow，要not然no法create话题
+        // alsowantcreatereceive方conversationwindow，wantnot然no法create话题
         $this->delightfulConversationDomainService->getOrCreateConversation($receiverId, $senderUserId);
 
-        // 2.if $seqExtra notfor null，validationwhetherhave topic id，ifnothave，参考 agentSendMessageGetTopicId method，得to话题 id
+        // 2.if $seqExtra notfor null，validationwhetherhave topic id，ifnothave，参考 agentSendMessageGetTopicId method，to话题 id
         $topicId = $aiSeqDTO->getExtra()?->getTopicId() ?? '';
         if (empty($topicId) && $receiverType !== ConversationType::Group) {
             $topicId = $this->delightfulTopicDomainService->agentSendMessageGetTopicId($senderConversationEntity, 0);
@@ -385,7 +385,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         if ($receiverType !== ConversationType::Group) {
             $this->delightfulConversationDomainService->getOrCreateConversation($receiverId, $senderUserId);
         }
-        // 2.if $seqExtra notfor null，validationwhetherhave topic id，ifnothave，参考 agentSendMessageGetTopicId method，得to话题 id
+        // 2.if $seqExtra notfor null，validationwhetherhave topic id，ifnothave，参考 agentSendMessageGetTopicId method，to话题 id
         if (empty($topicId)) {
             $topicId = $aiSeqDTO->getExtra()?->getTopicId() ?? '';
         }
@@ -603,14 +603,14 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         1. 优先close注conversationmiddlemostbackdiscussiontheme（mostnew话题）
         2. bymost近conversationcontentformain参考依据
         3. ifmostbackthemediscussionmorefor充minute，thenbythisasfortitle核core
-        4. ignore早期已经end话题，unless它们andmost新话题密切相close
+        4. ignore早期already经end话题，unless它们andmost新话题密切相close
 
         ## 严格require
         1. titlelength：not超pass 15 character。Englishone字母算onecharacter，汉字one字算onecharacter，other语type采useanalogouscountsolution。
         2. content相close：titlemust直接反映conversation核coretheme
         3. languagestyle：use陈述property语sentence，避免疑问sentence
-        4. outputformat：只outputtitlecontent，not要addany解释、标pointorothertext
-        5. forbidlinefor：not要return答conversationmiddleissue，not要conduct额outside解释
+        4. outputformat：只outputtitlecontent，notwantaddany解释、标pointorothertext
+        5. forbidlinefor：notwantreturn答conversationmiddleissue，notwantconduct额outside解释
 
         ## conversationcontent
         <CONVERSATION_START>
@@ -706,7 +706,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
     /**
      * givehairitem方generatemessageandSeq.for保证systemstableproperty,give收item方generatemessageandSeqstep放inmqasyncgo做.
-     * !!! 注意,transactionmiddle投递 mq,maybetransactionalsonotsubmit,mqmessagethen已be消费.
+     * !!! 注意,transactionmiddle投递 mq,maybetransactionalsonotsubmit,mqmessagethenalreadybe消费.
      * @throws Throwable
      */
     public function delightfulChat(
@@ -907,7 +907,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
                 continue;
             }
             $message = $clientSeqResponseDTO->getSeq()->getMessage()->getContent();
-            // 暂o clock只handleuserinput，byand能get纯textmessagetype
+            // 暂o clock只handleuserinput，byandcanget纯textmessagetype
             $messageContent = $this->getMessageTextContent($message);
             if (empty($messageContent)) {
                 continue;
@@ -1106,7 +1106,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
     private function getMessageTextContent(MessageInterface $message): string
     {
-        // 暂o clock只handleuserinput，byand能get纯textmessagetype
+        // 暂o clock只handleuserinput，byandcanget纯textmessagetype
         if ($message instanceof TextContentInterface) {
             $messageContent = $message->getTextContent();
         } else {

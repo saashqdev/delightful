@@ -250,7 +250,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'Please enter the content to converse with the agent.',
-                    'zh_CN' => '请inputand智能bodyconversationcontent',
+                    'zh_CN' => '请inputand智canbodyconversationcontent',
                 ]),
                 'identifier' => 'chat',
                 'icon' => 'IconMessages',

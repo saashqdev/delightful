@@ -158,7 +158,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 'line' => $throwable->getLine(),
                 'trace' => $throwable->getTraceAsString(),
             ]);
-            // defaultis要抛exception
+            // defaultiswant抛exception
             if ($throw) {
                 throw $throwable;
             }
@@ -239,7 +239,7 @@ abstract class NodeRunner implements NodeRunnerInterface
             if (! is_string($attachment)) {
                 continue;
             }
-            // if已经存in，直接addtoresultmiddle
+            // ifalready经存in，直接addtoresultmiddle
             $path = get_path_by_url($attachment);
             if ($attachmentObj = $executionData->getAttachmentRecord($path)) {
                 $flowExecutionAttachments[] = $attachmentObj;

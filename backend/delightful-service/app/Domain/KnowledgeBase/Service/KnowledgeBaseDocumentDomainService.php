@@ -124,7 +124,7 @@ readonly class KnowledgeBaseDocumentDomainService
 
         // ifforce重建or者syncstatusforfail，then重新sync
         if ($force || $document->getSyncStatus() === 2) { // 2 table示syncfail
-            $document->setSyncStatus(0); // 0 table示未sync
+            $document->setSyncStatus(0); // 0 table示notsync
             $document->setSyncStatusMessage('');
             $document->setSyncTimes(0);
             $this->knowledgeBaseDocumentRepository->update($dataIsolation, $document);
@@ -174,7 +174,7 @@ readonly class KnowledgeBaseDocumentDomainService
         // ifdocumentnot存in，createnewdefaultdocument
         $documentEntity = (new KnowledgeBaseDocumentEntity())
             ->setCode($defaultDocumentCode)
-            ->setName('未命名document.txt')
+            ->setName('not命名document.txt')
             ->setKnowledgeBaseCode($knowledgeBaseEntity->getCode())
             ->setCreatedUid($knowledgeBaseEntity->getCreator())
             ->setUpdatedUid($knowledgeBaseEntity->getCreator())
@@ -253,15 +253,15 @@ readonly class KnowledgeBaseDocumentDomainService
     private function prepareForCreation(KnowledgeBaseDocumentEntity $documentEntity): void
     {
         if (empty($documentEntity->getName())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'documentnamenot能forempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'documentnamenotcanforempty');
         }
 
         if (empty($documentEntity->getKnowledgeBaseCode())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge baseencodingnot能forempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge baseencodingnotcanforempty');
         }
 
         if (empty($documentEntity->getCreatedUid())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者not能forempty');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者notcanforempty');
         }
 
         // setdefaultvalue
@@ -272,7 +272,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $documentFile = $documentEntity->getDocumentFile();
         $documentEntity->setUpdatedAt($documentEntity->getCreatedAt());
         $documentEntity->setUpdatedUid($documentEntity->getCreatedUid());
-        $documentEntity->setSyncStatus(0); // 0 table示未sync
+        $documentEntity->setSyncStatus(0); // 0 table示notsync
         // bydownproperty均fromdocumentfilemiddleget
         $documentEntity->setDocType($documentFile?->getDocType() ?? DocType::TXT->value);
         $documentEntity->setThirdFileId($documentFile?->getThirdFileId());

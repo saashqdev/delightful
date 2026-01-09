@@ -101,7 +101,7 @@ readonly class AsrSandboxService
             $organizationCode
         );
 
-        $this->logger->info('startRecordingTask ASR 录音：沙箱已then绪', [
+        $this->logger->info('startRecordingTask ASR 录音：沙箱alreadythen绪', [
             'task_key' => $taskStatus->taskKey,
             'requested_sandbox_id' => $sandboxId,
             'actual_sandbox_id' => $actualSandboxId,
@@ -138,7 +138,7 @@ readonly class AsrSandboxService
 
         $taskStatus->sandboxTaskCreated = true;
 
-        $this->logger->info('ASR 录音：沙箱task已create', [
+        $this->logger->info('ASR 录音：沙箱taskalreadycreate', [
             'task_key' => $taskStatus->taskKey,
             'sandbox_id' => $actualSandboxId,
             'status' => $response->getStatus(),
@@ -174,7 +174,7 @@ readonly class AsrSandboxService
             ExceptionBuilder::throw(AsrErrorCode::SandboxCancelFailed, '', ['message' => $response->message]);
         }
 
-        $this->logger->info('ASR 录音：沙箱task已cancel', [
+        $this->logger->info('ASR 录音：沙箱taskalreadycancel', [
             'task_key' => $taskStatus->taskKey,
             'sandbox_id' => $sandboxId,
             'status' => $response->getStatus(),
@@ -231,7 +231,7 @@ readonly class AsrSandboxService
             $organizationCode
         );
 
-        // updateactual沙箱ID（maybe已经change）
+        // updateactual沙箱ID（maybealready经change）
         if ($actualSandboxId !== $requestedSandboxId) {
             $this->logger->warning('沙箱IDhair生change，maybeis沙箱restart', [
                 'task_key' => $taskStatus->taskKey,
@@ -240,7 +240,7 @@ readonly class AsrSandboxService
             ]);
         }
 
-        $this->logger->info('沙箱已then绪，准备call finish', [
+        $this->logger->info('沙箱alreadythen绪，准备call finish', [
             'task_key' => $taskStatus->taskKey,
             'sandbox_id' => $actualSandboxId,
             'full_workdir' => $fullWorkdir,
@@ -256,7 +256,7 @@ readonly class AsrSandboxService
             'note_file_id' => $taskStatus->noteFileId,
         ]);
 
-        // updatetaskstatus（filerecord已byresponsehandle器create）
+        // updatetaskstatus（filerecordalreadybyresponsehandle器create）
         $taskStatus->updateStatus(AsrTaskStatusEnum::COMPLETED);
 
         $this->logger->info('沙箱audiohandlecomplete', [
@@ -273,7 +273,7 @@ readonly class AsrSandboxService
      * call沙箱 finish andround询etc待complete.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
-     * @param string $intelligentTitle 智能title（useatrename）
+     * @param string $intelligentTitle 智cantitle（useatrename）
      * @return AsrSandboxMergeResultDTO mergeresult
      */
     private function callSandboxFinishAndWait(
@@ -502,11 +502,11 @@ readonly class AsrSandboxService
 
         while (time() < $endTime) {
             try {
-                // 尝试getwork区status，as long asinterface能successreturntheninstruction沙箱已start
+                // 尝试getwork区status，as long asinterfacecansuccessreturntheninstruction沙箱alreadystart
                 $response = $this->agentDomainService->getWorkspaceStatus($sandboxId);
                 $status = $response->getDataValue('status');
 
-                $this->logger->info('ASR 录音：沙箱已startandcanresponse', [
+                $this->logger->info('ASR 录音：沙箱alreadystartandcanresponse', [
                     'task_key' => $taskKey,
                     'sandbox_id' => $sandboxId,
                     'status' => $status,
@@ -514,11 +514,11 @@ readonly class AsrSandboxService
                     'elapsed_seconds' => time() - $startTime,
                 ]);
 
-                // interfacesuccessreturn，沙箱已start
+                // interfacesuccessreturn，沙箱alreadystart
                 return;
             } catch (Throwable $e) {
-                // interfacecallfail，instruction沙箱also未start，continueetc待
-                $this->logger->debug('ASR 录音：沙箱尚未start，continueetc待', [
+                // interfacecallfail，instruction沙箱alsonotstart，continueetc待
+                $this->logger->debug('ASR 录音：沙箱尚notstart，continueetc待', [
                     'task_key' => $taskKey,
                     'sandbox_id' => $sandboxId,
                     'error' => $e->getMessage(),
@@ -569,7 +569,7 @@ readonly class AsrSandboxService
         try {
             $workspaceStatusResponse = $this->agentDomainService->getWorkspaceStatus($requestedSandboxId);
         } catch (Throwable $throwable) {
-            $this->logger->warning('get沙箱work区statusfail，沙箱maybe未start，willcreate新沙箱', [
+            $this->logger->warning('get沙箱work区statusfail，沙箱maybenotstart，willcreate新沙箱', [
                 'task_key' => $taskStatus->taskKey,
                 'sandbox_id' => $requestedSandboxId,
                 'error' => $throwable->getMessage(),
@@ -581,9 +581,9 @@ readonly class AsrSandboxService
             $responseCode = $workspaceStatusResponse->getCode();
             $workspaceStatus = (int) $workspaceStatusResponse->getDataValue('status');
 
-            // ifresponsesuccess（code 1000）andwork区已then绪，直接return
+            // ifresponsesuccess（code 1000）andwork区alreadythen绪，直接return
             if ($responseCode === ResponseCode::SUCCESS && WorkspaceStatus::isReady($workspaceStatus)) {
-                $this->logger->info('检测to沙箱work区已then绪，no需initialize', [
+                $this->logger->info('检测to沙箱work区alreadythen绪，no需initialize', [
                     'task_key' => $taskStatus->taskKey,
                     'sandbox_id' => $requestedSandboxId,
                     'status' => $workspaceStatus,
@@ -595,8 +595,8 @@ readonly class AsrSandboxService
                 return $requestedSandboxId;
             }
 
-            // ifresponsesuccessbutwork区未initialize，orresponsefail，needinitializework区
-            $this->logger->info('检测to沙箱work区未initializeorresponseexception，needinitializework区', [
+            // ifresponsesuccessbutwork区notinitialize，orresponsefail，needinitializework区
+            $this->logger->info('检测to沙箱work区notinitializeorresponseexception，needinitializework区', [
                 'task_key' => $taskStatus->taskKey,
                 'sandbox_id' => $requestedSandboxId,
                 'response_code' => $responseCode,
@@ -610,7 +610,7 @@ readonly class AsrSandboxService
             return $requestedSandboxId;
         }
 
-        // work区statusresponsenot存in，沙箱未start，needcreate沙箱
+        // work区statusresponsenot存in，沙箱notstart，needcreate沙箱
         $dataIsolation = DataIsolation::simpleMake($organizationCode, $userId);
 
         $this->logger->info('准备call AgentDomainService create沙箱', [
@@ -659,7 +659,7 @@ readonly class AsrSandboxService
         string $userId,
         string $organizationCode
     ): void {
-        $this->logger->info('沙箱已start，准备sendinitializemessage', [
+        $this->logger->info('沙箱alreadystart，准备sendinitializemessage', [
             'task_key' => $taskStatus->taskKey,
             'actual_sandbox_id' => $actualSandboxId,
             'topic_id' => $taskStatus->topicId,
@@ -715,7 +715,7 @@ readonly class AsrSandboxService
         $initMetadata = (new InitializationMetadataDTO(skipInitMessages: true));
         $this->agentDomainService->initializeAgent($dataIsolation, $taskContext, null, $projectOrganizationCode, $initMetadata);
 
-        $this->logger->info('沙箱initializemessage已send，etc待work区initializecomplete', [
+        $this->logger->info('沙箱initializemessagealreadysend，etc待work区initializecomplete', [
             'task_key' => $taskStatus->taskKey,
             'actual_sandbox_id' => $actualSandboxId,
             'task_id' => $taskEntity->getId(),
@@ -728,20 +728,20 @@ readonly class AsrSandboxService
             AsrConfig::POLLING_INTERVAL
         );
 
-        $this->logger->info('沙箱work区已initializecomplete，file已sync，canstartuse', [
+        $this->logger->info('沙箱work区alreadyinitializecomplete，filealreadysync，canstartuse', [
             'task_key' => $taskStatus->taskKey,
             'actual_sandbox_id' => $actualSandboxId,
             'task_id' => $taskEntity->getId(),
         ]);
 
-        // update话题statusfor已complete（match DDD minutelayer，pass Domain Service 操as）
+        // update话题statusforalreadycomplete（match DDD minutelayer，pass Domain Service 操as）
         $this->topicDomainService->updateTopicStatus(
             (int) $taskStatus->topicId,
             $taskEntity->getId(),
             TaskStatus::FINISHED
         );
 
-        $this->logger->info('话题status已updatefor finished', [
+        $this->logger->info('话题statusalreadyupdatefor finished', [
             'task_key' => $taskStatus->taskKey,
             'topic_id' => $taskStatus->topicId,
             'task_id' => $taskEntity->getId(),
@@ -753,7 +753,7 @@ readonly class AsrSandboxService
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param null|string $targetDirectory goaldirectory（optional，defaultand源directorysame）
-     * @param null|string $intelligentTitle 智能title（optional，useatrename）
+     * @param null|string $intelligentTitle 智cantitle（optional，useatrename）
      */
     private function buildNoteFileConfig(
         AsrTaskStatusDTO $taskStatus,
@@ -766,7 +766,7 @@ readonly class AsrSandboxService
 
         $workspaceRelativePath = AsrAssembler::extractWorkspaceRelativePath($taskStatus->presetNoteFilePath);
 
-        // if未finger定goaldirectory，use源path（notrename）
+        // ifnotfinger定goaldirectory，use源path（notrename）
         if ($targetDirectory === null || $intelligentTitle === null) {
             return new AsrNoteFileConfig(
                 sourcePath: $workspaceRelativePath,
@@ -774,7 +774,7 @@ readonly class AsrSandboxService
             );
         }
 
-        // needrename：use智能titleand国际化笔记back缀buildgoalpath
+        // needrename：use智cantitleand国际化笔记back缀buildgoalpath
         $fileExtension = pathinfo($workspaceRelativePath, PATHINFO_EXTENSION);
         $noteSuffix = trans('asr.file_names.note_suffix'); // according tolanguageget国际化"笔记"/"Note"
         $noteFilename = sprintf('%s-%s.%s', $intelligentTitle, $noteSuffix, $fileExtension);

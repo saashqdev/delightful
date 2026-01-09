@@ -227,7 +227,7 @@ class ImageWatermarkProcessor
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
             $bbox = imagettfbbox($ttfFontSize, 0, $fontFile, $text);
             $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // increase20%securityside距
-            $textHeight = (int) abs($bbox[1] - $bbox[7]); // use绝tovalueensureheightfor正
+            $textHeight = (int) abs($bbox[1] - $bbox[7]); // use绝tovalueensureheightforjust
 
             // TTF字bodydown降部minute（descender）
             $descender = (int) abs($bbox[1]); // 基linebydown部minute
@@ -432,7 +432,7 @@ class ImageWatermarkProcessor
         try {
             $subDir = 'open';
 
-            // 直接use已containXMPwatermarkbase64data
+            // 直接usealreadycontainXMPwatermarkbase64data
             $uploadFile = new UploadFile($base64Image, $subDir, '');
 
             $fileDomainService->uploadByCredential($organizationCode, $uploadFile, StorageBucketType::Public);

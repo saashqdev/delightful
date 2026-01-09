@@ -14,7 +14,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 
 abstract class AbstractDocumentFile extends AbstractValueObject implements DocumentFileInterface
 {
-    public string $name = '未命名document';
+    public string $name = 'not命名document';
 
     public ?int $docType = null;
 

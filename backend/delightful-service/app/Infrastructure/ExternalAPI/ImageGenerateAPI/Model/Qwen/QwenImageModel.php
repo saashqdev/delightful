@@ -280,7 +280,7 @@ class QwenImageModel extends AbstractImageGenerate
             $params = [
                 'prompt' => $prompt,
                 'size' => $request->getWidth() . '*' . $request->getHeight(),
-                'n' => 1, // 通义thousand问eachtime只能generate1张image
+                'n' => 1, // 通义thousand问eachtime只cangenerate1张image
                 'model' => $request->getModel(),
                 'watermark' => false, // closeAPIwatermark，use统onePHPwatermark
                 'prompt_extend' => $request->isPromptExtend(),

@@ -154,16 +154,16 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
 
         if ($this->name !== null) {
             if (empty(trim($this->name))) {
-                $errors[] = 'rolenamenot能forempty';
+                $errors[] = 'rolenamenotcanforempty';
             }
 
             if (strlen($this->name) > 255) {
-                $errors[] = 'rolenamelengthnot能超pass255character';
+                $errors[] = 'rolenamelengthnotcan超pass255character';
             }
         }
 
         if ($this->status !== null && ! in_array($this->status, [0, 1])) {
-            $errors[] = 'rolestatusvalueinvalid，只能is0or1';
+            $errors[] = 'rolestatusvalueinvalid，只canis0or1';
         }
 
         if ($this->permissions !== null) {
@@ -186,7 +186,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
     }
 
     /**
-     * get所have已setupdatefield.
+     * get所havealreadysetupdatefield.
      */
     public function getUpdateFields(): array
     {

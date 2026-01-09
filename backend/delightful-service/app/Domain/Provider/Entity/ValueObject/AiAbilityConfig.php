@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Provider\Entity\ValueObject;
 
 /**
- * AI 能力configurationvalueobject.
+ * AI can力configurationvalueobject.
  */
 class AiAbilityConfig
 {

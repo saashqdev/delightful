@@ -208,7 +208,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         // callmethod
         $result = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($this->testOrganizationCode));
 
-        // verifyreturn实bodycontain所have必要field
+        // verifyreturn实bodycontain所have必wantfield
         $this->assertCount(1, $result);
         $entity = $result[0];
 

@@ -15,7 +15,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
         $content = $this->convertToCsv($content);
         // delete ## openheadline
         $content = preg_replace('/^##.*\n/', '', $content);
-        // use正thentable达typematchnotin引numberinside换line符
+        // usejustthentable达typematchnotin引numberinside换line符
         return preg_replace('/(?<!")[\r\n]+(?!")/', "\n\n", $content);
     }
 

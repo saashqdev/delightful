@@ -19,7 +19,7 @@ use Exception;
 use Hyperf\Contract\ConfigInterface;
 
 /**
- * AI 能力领域service.
+ * AI can力领域service.
  */
 class AiAbilityDomainService
 {
@@ -30,12 +30,12 @@ class AiAbilityDomainService
     }
 
     /**
-     * according to能力codegetAI能力实body（useat运lineo clock，notvalidationorganization）.
+     * according tocan力codegetAIcan力实body（useat运lineo clock，notvalidationorganization）.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
-     * @param AiAbilityCode $code 能力code
-     * @return AiAbilityEntity AI能力实body
-     * @throws Exception when能力not存inor未enableo clockthrowexception
+     * @param AiAbilityCode $code can力code
+     * @return AiAbilityEntity AIcan力实body
+     * @throws Exception whencan力not存inornotenableo clockthrowexception
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): AiAbilityEntity
     {
@@ -49,10 +49,10 @@ class AiAbilityDomainService
     }
 
     /**
-     * get所haveAI能力list（nopagination）.
+     * get所haveAIcan力list（nopagination）.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
-     * @return array<AiAbilityEntity> AI能力实bodylist
+     * @return array<AiAbilityEntity> AIcan力实bodylist
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array
     {
@@ -63,7 +63,7 @@ class AiAbilityDomainService
     }
 
     /**
-     * paginationqueryAI能力list.
+     * paginationqueryAIcan力list.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param AiAbilityQuery $query queryitemitem
@@ -76,17 +76,17 @@ class AiAbilityDomainService
     }
 
     /**
-     * updateAI能力.
+     * updateAIcan力.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
-     * @param AiAbilityCode $code 能力code
+     * @param AiAbilityCode $code can力code
      * @param array $data updatedata
      * @return bool whetherupdatesuccess
-     * @throws Exception when能力not存ino clockthrowexception
+     * @throws Exception whencan力not存ino clockthrowexception
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool
     {
-        // check能力whether存in
+        // checkcan力whether存in
         $entity = $this->aiAbilityRepository->getByCode($dataIsolation, $code);
         if ($entity === null) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::AI_ABILITY_NOT_FOUND);
@@ -100,7 +100,7 @@ class AiAbilityDomainService
     }
 
     /**
-     * initializeAI能力data.
+     * initializeAIcan力data.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @return int initializequantity
@@ -112,7 +112,7 @@ class AiAbilityDomainService
         $count = 0;
 
         foreach ($abilities as $abilityConfig) {
-            // checkdatabasemiddlewhether已存in
+            // checkdatabasemiddlewhetheralready存in
             $code = AiAbilityCode::from($abilityConfig['code']);
             $existingEntity = $this->aiAbilityRepository->getByCode($dataIsolation, $code);
 

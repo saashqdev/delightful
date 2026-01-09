@@ -10,7 +10,7 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 enum KnowledgeSyncStatus: int
 {
     /*
-     * 未同
+     * not同
      */
     case NotSynced = 0;
 
@@ -20,7 +20,7 @@ enum KnowledgeSyncStatus: int
     case Syncing = 3;
 
     /*
-     * 已同
+     * already同
      */
     case Synced = 1;
 

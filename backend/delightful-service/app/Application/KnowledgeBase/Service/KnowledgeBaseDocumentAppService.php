@@ -154,7 +154,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         // call领域service重新toquantity化
         $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $knowledgeBaseCode);
         $documentEntity = $this->knowledgeBaseDocumentDomainService->show($dataIsolation, $knowledgeBaseCode, $documentCode);
-        // byathistorydocumentnothave document_file field，not能be重新toquantity化
+        // byathistorydocumentnothave document_file field，notcanbe重新toquantity化
         if (! $documentEntity->getDocumentFile()) {
             ExceptionBuilder::throw(PermissionErrorCode::Error, 'flow.knowledge_base.re_vectorized_not_support');
         }

@@ -159,7 +159,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             $content = $content->toArray();
             // pass protobuf message结构,createdelightful chatobject,for弃use protobuf 做准备
             if (in_array($controlMessageType, [ControlMessageType::GroupUsersRemove, ControlMessageType::GroupDisband], true)) {
-                // thistheseuser已经from群membertablemiddle移except,butis他们also未收tobe移exceptmessage
+                // thistheseuseralready经from群membertablemiddle移except,butis他们alsonot收tobe移exceptmessage
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
                 if ($controlMessageType === ControlMessageType::GroupDisband) {
                     // 解散group chat,所havepersonallisbe移except.thiswithindecreasestreamquantityconsume.
@@ -241,7 +241,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             'refer_message_id' => '',
             'sender_message_id' => '',
             'conversation_id' => $seqContent['conversation_id'] ?? '',
-            'status' => DelightfulMessageStatus::Read->value, // 控制messagenotneed已读return执
+            'status' => DelightfulMessageStatus::Read->value, // 控制messagenotneedalready读return执
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => '',
@@ -284,7 +284,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             if (empty($userId)) {
                 continue;
             }
-            // notfor操authorduplicategenerateseq. 因forin投mq之front,已经for操authorgenerateseq
+            // notfor操authorduplicategenerateseq. 因forin投mq之front,already经for操authorgenerateseq
             if ($userId === $operateUserId) {
                 continue;
             }
@@ -303,12 +303,12 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 'seq_type' => $controlMessageType->value,
                 'content' => Json::encode($userContent, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE),
                 'receive_list' => '',
-                'delightful_message_id' => '', // 控制messagenot能have delightful_message_id
+                'delightful_message_id' => '', // 控制messagenotcanhave delightful_message_id
                 'message_id' => $seqId,
                 'refer_message_id' => '',
                 'sender_message_id' => '',
                 'conversation_id' => $conversationId,
-                'status' => DelightfulMessageStatus::Read->value, // send方from己message,default已读
+                'status' => DelightfulMessageStatus::Read->value, // send方from己message,defaultalready读
                 'created_at' => $time,
                 'updated_at' => $time,
                 'app_message_id' => '',

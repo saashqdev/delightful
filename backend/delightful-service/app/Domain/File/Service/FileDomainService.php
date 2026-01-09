@@ -112,7 +112,7 @@ readonly class FileDomainService
      */
     public function getBatchLinksByOrgPaths(array $filePaths, ?StorageBucketType $bucketType = null): array
     {
-        // filteremptypathand已经isURLpath
+        // filteremptypathandalready经isURLpath
         $validPaths = array_filter($filePaths, static fn ($path) => ! empty($path) && ! is_url($path));
 
         if (empty($validPaths)) {

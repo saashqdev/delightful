@@ -153,7 +153,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     {
         // if传入explicitstatusvalue，then直接set
         if ($enable !== null) {
-            // ifcurrentstatusand要setstatussame，thenno需操as
+            // ifcurrentstatusandwantsetstatussame，thenno需操as
             if ($delightfulFlow->isEnabled() === $enable) {
                 return;
             }

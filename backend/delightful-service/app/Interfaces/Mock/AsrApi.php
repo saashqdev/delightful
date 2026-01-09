@@ -137,7 +137,7 @@ class AsrApi
             $timestamp = '_' . $matches[1];
         }
 
-        // buildnewdirectory名：智能title + time戳
+        // buildnewdirectory名：智cantitle + time戳
         $renamedDir = $outputFilename . $timestamp;
 
         // buildaudiofileinfo
@@ -148,7 +148,7 @@ class AsrApi
         $responseData = [
             'status' => SandboxAsrStatusEnum::COMPLETED->value,
             'task_key' => $taskKey,
-            'intelligent_title' => $outputFilename, // useoutputfile名asfor智能title
+            'intelligent_title' => $outputFilename, // useoutputfile名asfor智cantitle
             'error_message' => null,
             'files' => [
                 'audio_file' => [
@@ -198,7 +198,7 @@ class AsrApi
 
         return [
             'code' => 1000,
-            'message' => 'audiomerge已complete',
+            'message' => 'audiomergealreadycomplete',
             'data' => $responseData,
         ];
     }

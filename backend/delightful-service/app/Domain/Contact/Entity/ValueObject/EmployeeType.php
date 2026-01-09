@@ -15,7 +15,7 @@ enum EmployeeType: int
     // unknown(such asisperson版user)
     case Unknown = 0;
 
-    // 正type员工
+    // justtype员工
     case Formal = 1;
 
     // 实习生

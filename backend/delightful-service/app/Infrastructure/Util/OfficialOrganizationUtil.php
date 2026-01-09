@@ -41,7 +41,7 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * check官方organizationencodingwhether已configuration.
+     * check官方organizationencodingwhetheralreadyconfiguration.
      */
     public static function hasOfficialOrganization(): bool
     {

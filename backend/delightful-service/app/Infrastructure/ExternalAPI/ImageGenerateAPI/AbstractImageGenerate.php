@@ -101,7 +101,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
         try {
             $result = $this->redisLocker->release($lockKey, $owner);
             if (! $result) {
-                $this->logger->warning('Redislockreleasefail，maybe已beotherenter程release', [
+                $this->logger->warning('Redislockreleasefail，maybealreadybeotherenter程release', [
                     'lock_key' => $lockKey,
                     'owner' => $owner,
                 ]);
@@ -114,7 +114,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
                 'owner' => $owner,
                 'error' => $e->getMessage(),
             ]);
-            // lockreleasefailnot影响业务逻辑，but要recordlog
+            // lockreleasefailnot影响业务逻辑，butwantrecordlog
         }
     }
 

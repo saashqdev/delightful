@@ -100,7 +100,7 @@ class ProviderModelSyncAppService
             $models = $this->fetchModelsFromApi($url, $apiKey, $types, $language);
 
             if (empty($models)) {
-                $this->logger->warning('未fromoutside部APIgettomodel', [
+                $this->logger->warning('notfromoutside部APIgettomodel', [
                     'config_id' => $providerConfigEntity->getId(),
                     'url' => $url,
                 ]);
@@ -126,7 +126,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * according toservicequotientcategorycertain要pullmodeltype.
+     * according toservicequotientcategorycertainwantpullmodeltype.
      */
     private function getModelTypesByCategory(Category $category): array
     {

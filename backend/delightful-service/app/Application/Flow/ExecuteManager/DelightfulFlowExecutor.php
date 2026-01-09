@@ -171,7 +171,7 @@ class DelightfulFlowExecutor
 
     protected function begin(array $args): void
     {
-        // meanwhile只能haveoneprocessidinexecute
+        // meanwhile只canhaveoneprocessidinexecute
         if (! $this->locker->mutexLock($this->getLockerKey(), $this->executorId)) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, "{$this->executorId} is running");
         }
@@ -304,7 +304,7 @@ class DelightfulFlowExecutor
         /** @var TriggerType $appointTriggerType */
         $appointTriggerType = $args['appoint_trigger_type'];
         if ($appointTriggerType === TriggerType::LoopStart) {
-            // loopo clock，not能deletethedata
+            // loopo clock，notcandeletethedata
             return;
         }
 
@@ -321,7 +321,7 @@ class DelightfulFlowExecutor
         if ($this->executionData->getStreamStatus() !== FlowStreamStatus::Processing) {
             return;
         }
-        // only主process才能end（thezerolayer）
+        // only主process才canend（thezerolayer）
         if ($this->executionData->getLevel() !== 0) {
             return;
         }
@@ -340,7 +340,7 @@ class DelightfulFlowExecutor
     {
         $result = $this->delightfulFlowEntity->getCallback()($this->executionData);
         if (is_array($result)) {
-            // 得result赋valuetoendsectionpointupsurface
+            // result赋valuetoendsectionpointupsurface
             $this->executionData->saveNodeContext($this->delightfulFlowEntity->getEndNode()->getNodeId(), $result);
         }
         if (! is_array($result)) {
@@ -449,13 +449,13 @@ class DelightfulFlowExecutor
                 // thiswithingeneralcome说notwillfornull，先not管null情况
                 $childrenIds = [];
                 foreach ($vertex->children as $childVertex) {
-                    // not能from己连from己
+                    // notcanfrom己连from己
                     if ($node->getNodeId() == $childVertex->key) {
                         continue;
                     }
                     $childrenIds[] = $childVertex->key;
                 }
-                // defaultis要调degreedownonelevel，ifnotneed调degree，inspecificexecutemiddlecansetfor[]
+                // defaultiswant调degreedownonelevel，ifnotneed调degree，inspecificexecutemiddlecansetfor[]
                 $vertexResult->setChildrenIds($childrenIds);
                 // add flow
                 $frontResults['current_flow_entity'] = $this->delightfulFlowEntity;
@@ -507,7 +507,7 @@ class DelightfulFlowExecutor
 
     private function archiveToCloud(VertexResult $vertexResult): void
     {
-        // 已经运linepass，alsonot归档
+        // already经运linepass，alsonot归档
         if ($vertexResult->hasDebugLog('history_vertex_result')) {
             return;
         }

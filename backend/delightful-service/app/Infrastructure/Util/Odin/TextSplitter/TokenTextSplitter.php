@@ -79,7 +79,7 @@ class TokenTextSplitter extends TextSplitter
     /**
      * splittext.
      *
-     * @param string $text 要splittext
+     * @param string $text wantsplittext
      * @return array splitbacktextpiecearray
      */
     public function splitText(string $text): array
@@ -136,7 +136,7 @@ class TokenTextSplitter extends TextSplitter
     /**
      * mergetextpiece.
      *
-     * @param array $splits 要mergetextpiece
+     * @param array $splits wantmergetextpiece
      * @param string $separator minute隔符
      * @return array mergebacktextpiecearray
      */
@@ -268,7 +268,7 @@ class TokenTextSplitter extends TextSplitter
     /**
      * recursionsplittext.
      *
-     * @param string $text 要splittext
+     * @param string $text wantsplittext
      * @return array splitbacktextpiecearray
      */
     private function recursiveSplitText(string $text, int $separatorBeginIndex = 0): array

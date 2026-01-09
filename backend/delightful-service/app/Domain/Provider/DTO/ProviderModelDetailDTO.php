@@ -42,7 +42,7 @@ class ProviderModelDetailDTO extends AbstractDTO
 
     protected Status $status;
 
-    protected ?DisabledByType $disabledBy = null; // disablecome源：official-官方disable，user-userdisable，NULL-未disable
+    protected ?DisabledByType $disabledBy = null; // disablecome源：official-官方disable，user-userdisable，NULL-notdisable
 
     protected int $beDelightfulDisplayState = 0;
 

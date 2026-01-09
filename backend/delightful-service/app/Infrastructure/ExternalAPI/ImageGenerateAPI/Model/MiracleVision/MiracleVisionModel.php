@@ -68,7 +68,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             $this->validateApiResponse($styles);
 
             $styleId = $this->determineStyleId($styles);
-            $this->logger->info('美graph超清convert：已chooseconvert样type', ['style_id' => $styleId]);
+            $this->logger->info('美graph超清convert：alreadychooseconvert样type', ['style_id' => $styleId]);
 
             $result = $this->api->submitTask($imageGenerateRequest->getUrl(), $styleId);
             $this->validateApiResponse($result);
@@ -192,7 +192,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             case self::STATUS_INIT:
                 $response->setFinishStatus(false);
                 $response->setProgress($result['data']['progress']);
-                $this->logger->info('美graph超清convert：task正ininitialize', [
+                $this->logger->info('美graph超清convert：taskjustininitialize', [
                     'progress' => $result['data']['progress'],
                 ]);
                 break;
@@ -263,7 +263,7 @@ class MiracleVisionModel extends AbstractImageGenerate
         $this->logger->info('美graphAPI：responsedataverifypass');
     }
 
-    // todo xhy 目front只能forcereturn 26 ，因forno法toimage场景做match
+    // todo xhy 目front只canforcereturn 26 ，因forno法toimage场景做match
     private function determineStyleId(array $styles): int
     {
         if (empty($styles['data']['style_list'])) {

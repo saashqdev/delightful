@@ -30,7 +30,7 @@ interface FontProviderInterface
     /**
      * 检测textwhethercontainmiddle文character.
      *
-     * @param string $text 要检测text
+     * @param string $text want检测text
      * @return bool truetable示containmiddle文character，falsetable示notcontain
      */
     public function containsChinese(string $text): bool;

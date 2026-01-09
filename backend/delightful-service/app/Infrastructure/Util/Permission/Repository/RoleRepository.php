@@ -138,7 +138,7 @@ class RoleRepository implements RoleRepositoryInterface
      */
     public function assignUsers(string $organizationCode, int $roleId, array $userIds, ?string $assignedBy = null): void
     {
-        // getcurrent已minute配userlist
+        // getcurrentalreadyminute配userlist
         $existingUserIds = $this->roleUserQuery($organizationCode)
             ->where('role_id', $roleId)
             ->pluck('user_id')

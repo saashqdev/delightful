@@ -29,7 +29,7 @@ enum UserSettingKey: string
     // 平台setting（平台information、Logo、Favicon、i18n etc）
     case PlatformSettings = 'PlatformSettings';
 
-    // 智能bodysortconfiguration
+    // 智canbodysortconfiguration
     case BeDelightfulAgentSort = 'BeDelightfulAgentSort';
 
     public static function genBeDelightfulProjectMCPServers(string $projectId): string

@@ -235,7 +235,7 @@ class MessageAssembler
             ControlMessageType::TopConversation => new ConversationTopMessage($messageStructArray),
             ControlMessageType::HideConversation => new ConversationHideMessage($messageStructArray),
             ControlMessageType::MuteConversation => new ConversationMuteMessage($messageStructArray),
-            ControlMessageType::SeenMessages => new MessagesSeen($messageStructArray), // 已读
+            ControlMessageType::SeenMessages => new MessagesSeen($messageStructArray), // already读
             ControlMessageType::RevokeMessage => new MessageRevoked($messageStructArray), // withdraw
             ControlMessageType::CreateTopic => new TopicCreateMessage($messageStructArray),
             ControlMessageType::UpdateTopic => new TopicUpdateMessage($messageStructArray),
@@ -302,7 +302,7 @@ class MessageAssembler
             $formattedMessage = sprintf("%s: %s\n", $role, $content);
             $messageLength = mb_strlen($formattedMessage, 'UTF-8');
 
-            // ifistheoneitemmessage，even if超passlengthlimitalso要contain
+            // ifistheoneitemmessage，even if超passlengthlimitalsowantcontain
             if ($messageCount === 0) {
                 array_unshift($limitedMessages, $formattedMessage);
                 $currentLength += $messageLength;

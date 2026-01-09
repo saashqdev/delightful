@@ -18,7 +18,7 @@ enum VolcengineStatusCode: string
     case SUCCESS = '20000000';
 
     /**
-     * 正inprocessmiddle - responsebodyforempty.
+     * justinprocessmiddle - responsebodyforempty.
      */
     case PROCESSING = '20000001';
 
@@ -99,7 +99,7 @@ enum VolcengineStatusCode: string
     {
         return match ($this) {
             self::SUCCESS => '识别success',
-            self::PROCESSING => '正inprocessmiddle',
+            self::PROCESSING => 'justinprocessmiddle',
             self::QUEUED => 'taskinqueuemiddle',
             self::SILENT_AUDIO => 'muteaudio',
             self::INVALID_PARAMS => 'requestparameterinvalid',

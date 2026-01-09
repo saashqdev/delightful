@@ -429,7 +429,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
                 ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'yuandata  key mustisstring');
             }
             if (! is_string($value) && ! is_numeric($value)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'yuandata  value 只能is stringornumber');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'yuandata  value 只canis stringornumber');
             }
         }
         return $this;

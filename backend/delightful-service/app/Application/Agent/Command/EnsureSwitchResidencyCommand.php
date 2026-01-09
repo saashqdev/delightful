@@ -83,12 +83,12 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         );
                     }
                     ++$updated;
-                    $this->output->writeln(sprintf('已%s助理 [%s] switchfinger令', $isDryRun ? '检测toneedupdate' : 'update', $agent['id']));
+                    $this->output->writeln(sprintf('already%s助理 [%s] switchfinger令', $isDryRun ? '检测toneedupdate' : 'update', $agent['id']));
                 }
             }
 
             $offset += $batchSize;
-            $this->output->writeln(sprintf('已process %d 助理...', $total));
+            $this->output->writeln(sprintf('alreadyprocess %d 助理...', $total));
         }
 
         $this->output->writeln(sprintf(
@@ -132,12 +132,12 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         );
                     }
                     ++$versionUpdated;
-                    $this->output->writeln(sprintf('已%s助理version [%s] switchfinger令', $isDryRun ? '检测toneedupdate' : 'update', $version['id']));
+                    $this->output->writeln(sprintf('already%s助理version [%s] switchfinger令', $isDryRun ? '检测toneedupdate' : 'update', $version['id']));
                 }
             }
 
             $offset += $batchSize;
-            $this->output->writeln(sprintf('已process %d 助理version...', $versionTotal));
+            $this->output->writeln(sprintf('alreadyprocess %d 助理version...', $versionTotal));
         }
 
         $this->output->writeln(sprintf(
@@ -180,7 +180,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
 
         $this->output->writeln(sprintf(
             'processcomplete！finger令collection%supdate',
-            $hasChanges ? '已' : 'no需'
+            $hasChanges ? 'already' : 'no需'
         ));
 
         return 0;
@@ -213,8 +213,8 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         $item['residency'] = true;
                         $hasChanges = true;
                         $this->output->writeln(sprintf(
-                            'hair现switchfinger令 [%s](%s) 缺少 residency property，已add',
-                            $item['name'] ?? '未命名',
+                            'hair现switchfinger令 [%s](%s) 缺少 residency property，alreadyadd',
+                            $item['name'] ?? 'not命名',
                             $item['id'] ?? 'noID'
                         ));
                     }

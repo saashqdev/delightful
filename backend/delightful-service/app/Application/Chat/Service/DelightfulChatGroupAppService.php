@@ -120,9 +120,9 @@ class DelightfulChatGroupAppService extends AbstractAppService
         // get本timeneedadd群member (综合 finger定user_id + departmentiddownuser)
         $wantJoinUsers = $this->getGroupAddUsers($groupAddUserIds, $dataIsolation, $inputDepartmentIds, $chatGroupUserNumLimit);
         $wantJoinUserIds = array_column($wantJoinUsers, 'user_id');
-        // 判断哪theseuser已经ingroup chatmiddle
+        // 判断哪theseuseralready经ingroup chatmiddle
         $groupUsers = $this->delightfulGroupDomainService->getGroupUserList($groupId, '', $dataIsolation, ['user_id']);
-        // 已经存inatgroup chatmiddleuserid
+        // already经存inatgroup chatmiddleuserid
         $existUserIds = array_column($groupUsers, 'user_id');
         $needAddGroupUserIds = array_diff($wantJoinUserIds, $existUserIds);
         if (empty($needAddGroupUserIds)) {
@@ -164,7 +164,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         if ($groupEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NOT_FOUND);
         }
-        // not能踢out群主
+        // notcan踢out群主
         $groupOwner = $groupEntity->getGroupOwner();
         if (in_array($groupOwner, $userIds, true)) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_CANNOT_KICK_OWNER);
@@ -186,12 +186,12 @@ class DelightfulChatGroupAppService extends AbstractAppService
         if ($groupEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NOT_FOUND);
         }
-        // 群主not能exitgroup chat,need先转移群主身share
+        // 群主notcanexitgroup chat,need先转移群主身share
         $groupOwner = $groupEntity->getGroupOwner();
         if ($groupOwner === $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_TRANSFER_OWNER_BEFORE_LEAVE);
         }
-        // poweretc.checkuserwhether已leavegroup
+        // poweretc.checkuserwhetheralreadyleavegroup
         $isInGroup = $this->delightfulGroupDomainService->isUserInGroup($groupId, $dataIsolation->getCurrentUserId());
         if (! $isInGroup) {
             // returnuseruptimeleavegroup chat seq
@@ -223,16 +223,16 @@ class DelightfulChatGroupAppService extends AbstractAppService
         if ($groupEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NOT_FOUND);
         }
-        // checkgroupwhether已解散
+        // checkgroupwhetheralready解散
         if ($groupEntity->getGroupStatus() === GroupStatusEnum::Disband) {
             // 找totheuser解散groupseq
             $seqEntity = $this->delightfulGroupDomainService->getGroupControlSeq($groupEntity, $dataIsolation, ControlMessageType::GroupDisband);
-            // if已经存ingroup chat解散 seq,then直接return
+            // ifalready经存ingroup chat解散 seq,then直接return
             if (isset($seqEntity)) {
                 return $this->noticeGroupChangeSeq($seqEntity);
             }
         }
-        // 只能群主解散group chat
+        // 只can群主解散group chat
         $groupOwner = $groupEntity->getGroupOwner();
         if ($groupOwner !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_ONLY_OWNER_CAN_DISBAND);
@@ -371,7 +371,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         // querygroup chatmiddleuser
         $groupUsers = $this->delightfulGroupDomainService->getGroupUserList($groupEntity->getId(), '', $dataIsolation, ['user_id']);
         $groupUsers = array_column($groupUsers, 'user_id');
-        // 判断要移exceptuserwhetheringroup chatmiddle
+        // 判断want移exceptuserwhetheringroup chatmiddle
         $removeUserIds = array_intersect($userIds, $groupUsers);
         if (empty($removeUserIds)) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NO_USER_TO_REMOVE);

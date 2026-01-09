@@ -93,7 +93,7 @@ class UserSearchTool extends AbstractBuiltInTool
             "type": "string",
             "key": "filter_type",
             "title": "filtertype",
-            "description": "filtertype。支持的filtertype有：all、any。分别代table 所有条件、任意条件。default是 all",
+            "description": "filtertype。support的filtertype有：all、any。分别代table 所有条件、任意条件。default是 all",
             "required": null,
             "value": null,
             "encryption": false,

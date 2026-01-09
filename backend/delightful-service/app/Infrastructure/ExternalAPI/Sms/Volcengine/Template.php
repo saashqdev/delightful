@@ -22,7 +22,7 @@ class Template extends AbstractTemplate
     public const string DEFAULT_MESSAGE_GROUP_ID = '77a48cb1';
 
     /**
-     * messagegroup支持的signaturelist.
+     * messagegroupsupport的signaturelist.
      */
     public static array $signToMessageGroup = ['灯塔engine'];
 
@@ -46,7 +46,7 @@ class Template extends AbstractTemplate
     ];
 
     /**
-     * 火山云短信的signature暂未支持国际化.
+     * 火山云短信的signature暂未support国际化.
      */
     protected array $signMap = [
         '灯塔engine' => [
@@ -71,11 +71,11 @@ class Template extends AbstractTemplate
 
     /**
      * according to传来的短信文本,parsevariable. 只有variable的value,未匹配variable的key!
-     * needvariableparse的原因:火山短信只支持variable短信的send,而业务方will出于创蓝短信的原因,will传来整个短信文本content,没有variable.
+     * needvariableparse的原因:火山短信只supportvariable短信的send,而业务方will出于创蓝短信的原因,will传来整个短信文本content,没有variable.
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
     {
-        // 找到指定的templatevariable正则parse规则. 如果没传模版id,循环正则匹配will降低匹配速度和准确度
+        // 找到指定的templatevariable正则parserule. 如果没传模版id,循环正则匹配will降低匹配速度和准确度
         if ($templateId) {
             // 判断template是否存在
             if (! isset($this->idContents[$templateId])) {

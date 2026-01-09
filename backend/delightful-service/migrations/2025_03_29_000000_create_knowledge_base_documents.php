@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->unsignedInteger('doc_type')->comment('documenttype');
             $table->json('doc_metadata')->nullable()->comment('document元data');
             $table->tinyInteger('sync_status')->default(0)->comment('syncstatus');
-            $table->tinyInteger('sync_times')->default(0)->comment('sync次数');
+            $table->tinyInteger('sync_times')->default(0)->comment('synccount');
             $table->string('sync_status_message', 1000)->default('')->comment('syncstatusmessage');
             $table->string('organization_code')->comment('organizationencoding');
             $table->unsignedBigInteger('word_count')->default(0)->comment('字数statistics');

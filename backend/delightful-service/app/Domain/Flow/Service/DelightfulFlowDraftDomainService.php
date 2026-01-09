@@ -24,7 +24,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
     }
 
     /**
-     * query草稿列表.
+     * querydraft列表.
      * @return array{total: int, list: array<DelightfulFlowDraftEntity>}
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowDraftQuery $query, Page $page): array
@@ -33,7 +33,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
     }
 
     /**
-     * get草稿detail.
+     * getdraftdetail.
      */
     public function show(FlowDataIsolation $dataIsolation, string $flowCode, string $draftCode): DelightfulFlowDraftEntity
     {
@@ -45,7 +45,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
     }
 
     /**
-     * delete草稿.
+     * deletedraft.
      */
     public function remove(FlowDataIsolation $dataIsolation, string $flowCode, string $draftCode): void
     {
@@ -57,7 +57,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
     }
 
     /**
-     * save草稿.
+     * savedraft.
      */
     #[Transactional]
     public function save(FlowDataIsolation $dataIsolation, DelightfulFlowDraftEntity $savingDelightfulFlowDraftEntity): DelightfulFlowDraftEntity

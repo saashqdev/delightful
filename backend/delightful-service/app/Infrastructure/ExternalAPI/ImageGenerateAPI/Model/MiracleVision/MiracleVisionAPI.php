@@ -45,7 +45,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * get美图超清convert支持的样式列表.
+     * get美图超清convertsupport的样式列表.
      */
     public function getStyle(): array
     {

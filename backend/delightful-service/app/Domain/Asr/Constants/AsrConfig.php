@@ -9,7 +9,7 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR configurationconstant
- * 统一管理 ASR 相关的所有configurationconstant，includetimeouttime、轮询间隔、retry次数等.
+ * 统一管理 ASR 相关的所有configurationconstant，includetimeouttime、轮询间隔、retrycount等.
  */
 class AsrConfig
 {
@@ -65,12 +65,12 @@ class AsrConfig
     // ==================== retryconfiguration ====================
 
     /**
-     * service端自动总结最大retry次数.
+     * service端自动总结最大retrycount.
      */
     public const int SERVER_SUMMARY_MAX_RETRY = 10;
 
     /**
-     * 沙箱start最大retry次数.
+     * 沙箱start最大retrycount.
      */
     public const int SANDBOX_STARTUP_MAX_RETRY = 3;
 
@@ -82,12 +82,12 @@ class AsrConfig
     public const int SANDBOX_MERGE_LOG_INTERVAL = 10;
 
     /**
-     * 沙箱audiomergelogrecord频率（每N次尝试record一次）.
+     * 沙箱audiomergelogrecordfrequency（每N次尝试record一次）.
      */
     public const int SANDBOX_MERGE_LOG_FREQUENCY = 10;
 
     /**
-     * audiofilerecordquerylogrecord频率（每N次尝试record一次）.
+     * audiofilerecordquerylogrecordfrequency（每N次尝试record一次）.
      */
     public const int FILE_RECORD_QUERY_LOG_FREQUENCY = 3;
 

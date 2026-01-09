@@ -15,7 +15,7 @@ use Throwable;
 
 /**
  * 防抖tool类
- * implement"execute最后一次request"防抖策略.
+ * implement"execute最后一次request"防抖strategy.
  */
 class SlidingWindowUtil
 {
@@ -28,7 +28,7 @@ class SlidingWindowUtil
     }
 
     /**
-     * 防抖interface - execute最后一次request策略
+     * 防抖interface - execute最后一次requeststrategy
      * 在指定time窗口内，只有最后一次requestwill被execute.
      *
      * @param string $debounceKey 防抖键
@@ -51,7 +51,7 @@ class SlidingWindowUtil
             // 等待verifytime
             Coroutine::sleep($delayVerificationSeconds);
 
-            // 原子化地verify并声明execute权
+            // 原子化地verify并statementexecute权
             $script = <<<'LUA'
                 if redis.call('get', KEYS[1]) == ARGV[1] then
                     return redis.call('del', KEYS[1])

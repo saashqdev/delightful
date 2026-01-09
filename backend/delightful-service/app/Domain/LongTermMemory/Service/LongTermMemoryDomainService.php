@@ -133,7 +133,7 @@ readonly class LongTermMemoryDomainService
                         $memory->setPendingContent(null);
                     }
 
-                    // settingstatus为已生效
+                    // settingstatus为in effect
                     $memory->setStatus(MemoryStatus::ACTIVE);
 
                     // enable记忆
@@ -317,7 +317,7 @@ readonly class LongTermMemoryDomainService
                 ExceptionBuilder::throw(LongTermMemoryErrorCode::MEMORY_NOT_FOUND);
             }
 
-            // 如果update了pending_content，needaccording to业务规则调整status
+            // 如果update了pending_content，needaccording to业务rule调整status
             if ($dto->pendingContent !== null) {
                 $this->adjustMemoryStatusBasedOnPendingContent($memory, $dto->pendingContent);
             }
@@ -574,7 +574,7 @@ readonly class LongTermMemoryDomainService
      */
     public function shouldMemoryBeEvicted(LongTermMemoryEntity $memory): bool
     {
-        // expire时间check
+        // expiretimecheck
         if ($memory->getExpiresAt() && $memory->getExpiresAt() < new DateTime()) {
             return true;
         }
@@ -584,7 +584,7 @@ readonly class LongTermMemoryDomainService
             return true;
         }
 
-        // 长时间未access且重要性很低
+        // 长time未access且重要性很低
         if ($memory->getLastAccessedAt() && $memory->getImportance() < 0.2) {
             $daysSinceLastAccess = new DateTime()->diff($memory->getLastAccessedAt())->days;
             if ($daysSinceLastAccess > 30) {

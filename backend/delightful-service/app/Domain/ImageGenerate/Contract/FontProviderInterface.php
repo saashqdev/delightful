@@ -16,14 +16,14 @@ interface FontProviderInterface
     /**
      * getTTF字体filepath.
      *
-     * @return null|string 字体file的绝对path，如果为null则不支持TTF字体
+     * @return null|string 字体file的绝对path，如果为null则not supportedTTF字体
      */
     public function getFontPath(): ?string;
 
     /**
-     * 检测是否支持TTF字体渲染.
+     * 检测是否supportTTF字体渲染.
      *
-     * @return bool truetable示支持TTF字体，falsetable示仅支持内置字体
+     * @return bool truetable示supportTTF字体，falsetable示仅support内置字体
      */
     public function supportsTTF(): bool;
 

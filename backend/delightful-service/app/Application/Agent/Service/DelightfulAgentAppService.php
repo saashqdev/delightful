@@ -851,7 +851,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $userId = $authenticatable->getId();
         $lockKey = 'agent:init_agents:' . $orgCode;
 
-        // 尝试getlock，timeout时间setting为60秒
+        // 尝试getlock，timeouttimesetting为60秒
         if (! $this->redisLocker->mutexLock($lockKey, $userId, 60)) {
             $this->logger->warning(sprintf('get initAgents lockfail, orgCode: %s, userId: %s', $orgCode, $userId));
             // getlockfail，can选择直接return或throwexception，这里选择直接return避免阻塞
@@ -1502,7 +1502,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $delightfulAgentVersionEntity->setVersionNumber(null);
         $delightfulAgentVersionEntity->setVersionDescription(null);
 
-        // setting时间info
+        // settingtimeinfo
         $delightfulAgentVersionEntity->setCreatedAt($agentEntity->getCreatedAt());
         $delightfulAgentVersionEntity->setUpdatedUid($agentEntity->getUpdatedUid());
         $delightfulAgentVersionEntity->setUpdatedAt($agentEntity->getUpdatedAt());

@@ -60,9 +60,9 @@ class GraphSearchConfig extends AbstractValueObject
     private float $timeout = 5.0;
 
     /**
-     * retry次数.
+     * retrycount.
      *
-     * API requestfail时的retry次数
+     * API requestfail时的retrycount
      */
     private int $retryCount = 3;
 
@@ -199,7 +199,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * getretry次数.
+     * getretrycount.
      */
     public function getRetryCount(): int
     {
@@ -207,7 +207,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * setretry次数.
+     * setretrycount.
      */
     public function setRetryCount(int $retryCount): self
     {

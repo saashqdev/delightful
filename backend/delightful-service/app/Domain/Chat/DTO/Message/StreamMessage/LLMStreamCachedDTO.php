@@ -24,7 +24,7 @@ class LLMStreamCachedDTO extends AbstractEntity
 
     protected StreamMessageStatus $status;
 
-    // 避免频繁操作datalibrary，record最后一次updatedatalibrary的时间
+    // 避免频繁操作datalibrary，record最后一次updatedatalibrary的time
     protected ?int $lastUpdateDatabaseTime;
 
     public function getLastUpdateDatabaseTime(): ?int

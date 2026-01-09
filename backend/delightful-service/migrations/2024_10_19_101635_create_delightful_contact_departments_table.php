@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->string('order', 64)->comment('department的sort，即department在其同级department的展示顺序。取value越小sort越靠前。')->nullable()->default('');
             $table->string('leader_user_id', 64)->comment('department主管的user ID')->nullable()->default('');
             $table->string('organization_code', 64)->comment('麦吉organizationencoding');
-            $table->text('status')->comment('departmentstatus,jsonformat,目前支持 is_deleted:是否delete');
+            $table->text('status')->comment('departmentstatus,jsonformat,目前support is_deleted:是否delete');
             $table->string('document_id', 64)->comment('departmentinstruction书（云documentid）');
             // level
             $table->integer('level')->comment('department层级')->default(0);

@@ -53,7 +53,7 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * create带国际化支持的实体.
+     * create带国际化support的实体.
      * @template T of object
      * @param class-string<T> $entityClass 实体类名
      * @param array $data dataarray

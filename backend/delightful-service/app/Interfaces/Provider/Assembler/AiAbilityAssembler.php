@@ -42,7 +42,7 @@ class AiAbilityAssembler
         // getoriginalconfiguration
         $config = $entity->getConfig();
 
-        // 递归脱敏所有 api_key field（支持任意嵌套结构）
+        // 递归脱敏所有 api_key field（support任意嵌套结构）
         $maskedConfig = self::maskConfigRecursively($config);
 
         return new AiAbilityDetailDTO(

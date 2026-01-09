@@ -250,7 +250,7 @@ return [
                 // logfield白名单configuration
                 // 如果为nullarray或未configuration，则打印所有field
                 // 如果configuration了field列表，则只打印指定的field
-                // 支持嵌套field，use点语法如 'args.messages'
+                // support嵌套field，use点语法如 'args.messages'
                 // 注意：messages 和 tools field不在白名单中，不will被打印
                 'whitelist_fields' => [
                     // 基本requestinfo
@@ -285,7 +285,7 @@ return [
                     'args.max_completion_tokens',             // 最大token限制
                     'args.top_p',                  // Top-pparameter
                     'args.top_k',                  // Top-kparameter
-                    'args.frequency_penalty',      // 频率惩罚
+                    'args.frequency_penalty',      // frequency惩罚
                     'args.presence_penalty',       // 存在惩罚
                     'args.stream',                 // streamresponse标志
                     'args.stop',                   // stop词
@@ -306,7 +306,7 @@ return [
                     'error.message',               // errormessage（不contain具体content）
 
                     // 其他元data
-                    'created',                     // create时间戳
+                    'created',                     // createtime戳
                     'id',                         // requestID
                     'object',                     // objecttype
                     'system_fingerprint',         // 系统指纹

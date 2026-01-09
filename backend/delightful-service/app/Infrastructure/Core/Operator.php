@@ -41,7 +41,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * get操作时间.
+     * get操作time.
      */
     public function getTime(): DateTime
     {
@@ -67,7 +67,7 @@ class Operator extends AbstractValueObject
     }
 
     /**
-     * setting操作时间.
+     * setting操作time.
      */
     public function setTime(DateTime $time): self
     {

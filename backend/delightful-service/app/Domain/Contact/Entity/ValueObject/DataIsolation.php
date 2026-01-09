@@ -18,7 +18,7 @@ use App\Infrastructure\Core\AbstractObject;
 class DataIsolation extends AbstractObject
 {
     /**
-     * when前的账号id. 所有账号统一注意隐私保护,不对第third-partyreturn.
+     * when前的账号id. 所有账号统一注意privacy保护,不对第third-partyreturn.
      */
     protected string $currentDelightfulId = '';
 

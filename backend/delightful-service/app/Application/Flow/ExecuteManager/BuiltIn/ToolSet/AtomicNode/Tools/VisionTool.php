@@ -238,7 +238,7 @@ JSON, true)));
 3. 再对imagecontent进行多维度详细analyze，include但不限于：
    - 主体content识别：人物、物体、场景、文字等
    - 视觉特征：color、构图、光线、quality等
-   - 语义info：活动、情绪、关系、背景故事等
+   - 语义info：activity、情绪、关系、背景故事等
    - 文字识别：如有文字，准确提取并理解含义
    - 技术info：如有图table/data，analyze其含义
    

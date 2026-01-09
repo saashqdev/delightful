@@ -167,7 +167,7 @@ class ImageWatermarkProcessor
         // 优先useTTF字体，特别是对于中文文本
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && ($this->fontProvider->containsChinese($text) || $this->fontProvider->supportsTTF())) {
-            // useTTF字体渲染，支持中文
+            // useTTF字体渲染，support中文
             // TTF字体sizeneed调整，通常比内置字体小一些
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
 
@@ -182,7 +182,7 @@ class ImageWatermarkProcessor
 
             imagettftext($image, $ttfFontSize, 0, $x, $ttfY, $fontColor, $fontFile, $text);
         } else {
-            // 降级use内置字体（仅支持ASCII字符）
+            // 降级use内置字体（仅supportASCII字符）
             // 内置字体的Y坐标是文字顶部，need从基线positionconvert
             $builtinY = $y - (int) ($fontSize * 0.8); // 从基线positionconvert为顶部position
             imagestring($image, 5, $x, $builtinY, $text, $fontColor);
@@ -312,7 +312,7 @@ class ImageWatermarkProcessor
     /**
      * outputimage（无损version）.
      * @param mixed $image
-     * @param string $format 目标format (png/jpeg/webp/gif)
+     * @param string $format goalformat (png/jpeg/webp/gif)
      */
     private function outputImage($image, string $format = 'auto'): void
     {
@@ -347,7 +347,7 @@ class ImageWatermarkProcessor
                 case 'jpg':
                 default:
                     if ($this->fontProvider->hasTransparency($image)) {
-                        // JPEG不支持透明度，自动转PNG
+                        // JPEGnot supported透明度，自动转PNG
                         $this->logger->info('JPEG does not support transparency, converting to PNG');
                         imagepng($image, null, 0);
                     } else {
@@ -439,7 +439,7 @@ class ImageWatermarkProcessor
 
             $fileLink = $fileDomainService->getLink($organizationCode, $uploadFile->getKey(), StorageBucketType::Public);
 
-            // settingobject元data作为备用方案
+            // settingobject元data作为备用solution
             $validityPeriod = $imageGenerateRequest->getValidityPeriod();
             $metadataContent = [];
             if ($validityPeriod !== null) {

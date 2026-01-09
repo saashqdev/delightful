@@ -23,8 +23,8 @@ class CreateDelightfulApiMsgLogTable extends Migration
             $table->string('model')->comment('usemodelid');
             $table->string('organization_code')->comment('organizationid');
             $table->string('user_id')->comment('userid');
-            $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('create时间');
-            $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('修改时间')->nullable();
+            $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('createtime');
+            $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('修改time')->nullable();
             $table->timestamp('deleted_at')->comment('逻辑delete')->nullable();
         });
     }

@@ -145,7 +145,7 @@ abstract class AbstractDomainService
 
     /**
      * notify收件方有新message(收件方可能是自己,或者是chatobject).
-     * @todo 考虑对 seqIds merge同类项,减少push次数,减轻网络/mq/service器stress
+     * @todo 考虑对 seqIds merge同类项,减少pushcount,减轻网络/mq/service器stress
      */
     public function pushControlSequence(DelightfulSeqEntity $seqEntity): SeqCreatedEvent
     {
@@ -180,7 +180,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 批量分发message:提高performance,merge多个 seq_id 为一条message,减少messagepush次数.
+     * 批量分发message:提高performance,merge多个 seq_id 为一条message,减少messagepushcount.
      */
     public function batchDispatchSeq(array $seqIds, MessagePriority $messagePriority, string $conversationId): void
     {
@@ -276,7 +276,7 @@ abstract class AbstractDomainService
 
     /**
      * 系统稳定性保障模块之一:message优先级的确定
-     * 优先级规则:
+     * 优先级rule:
      * 1.private chat/100人以内的group chat,优先级最高
      * 2.系统applicationmessage,高优先级
      * 3.apimessage(第三方callgenerate)/100~1000人group chat,中优先级

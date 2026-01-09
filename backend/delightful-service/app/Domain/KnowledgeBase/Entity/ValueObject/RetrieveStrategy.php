@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 
 /**
- * 检索策略枚举类.
+ * 检索strategy枚举类.
  *
- * 定义了两种检索策略：
+ * 定义了两种检索strategy：
  * - SINGLE: 单一检索，从单个knowledge base中检索info
  * - MULTIPLE: 多重检索，同时从多个knowledge base中检索info，然后对result进行重新sort
  */
@@ -20,7 +20,7 @@ class RetrieveStrategy
      * 单一检索.
      *
      * 从单个knowledge base中检索info。
-     * 该策略passconfigurationparameter `retrieve_strategy` fieldset，
+     * 该strategypassconfigurationparameter `retrieve_strategy` fieldset，
      * 从database中的 retrieve_config configurationget。
      */
     public const SINGLE = 'single';
@@ -29,14 +29,14 @@ class RetrieveStrategy
      * 多重检索.
      *
      * 同时从多个knowledge base中检索info，然后对result进行重新sort。
-     * 该策略passconfigurationparameter `retrieve_strategy` fieldset，
+     * 该strategypassconfigurationparameter `retrieve_strategy` fieldset，
      * 从database中的 retrieve_config configurationget。
-     * 它支持different的重sort策略，如use重sortmodel或加权分数。
+     * 它supportdifferent的重sortstrategy，如use重sortmodel或加权分数。
      */
     public const MULTIPLE = 'multiple';
 
     /**
-     * get所有可用的检索策略.
+     * get所有可用的检索strategy.
      *
      * @return array<string>
      */
@@ -49,7 +49,7 @@ class RetrieveStrategy
     }
 
     /**
-     * check给定的策略是否valid.
+     * check给定的strategy是否valid.
      */
     public static function isValid(string $strategy): bool
     {

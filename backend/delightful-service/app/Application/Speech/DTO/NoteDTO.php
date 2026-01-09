@@ -26,7 +26,7 @@ readonly class NoteDTO
      */
     public function isValidFileType(): bool
     {
-        // 支持的filetype
+        // support的filetype
         $supportedTypes = ['txt', 'md', 'json'];
         return in_array(strtolower($this->fileExtension), $supportedTypes, true);
     }

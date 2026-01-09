@@ -63,7 +63,7 @@ class Oauth2Config extends AbstractValueObject
 
     /**
      * Authorization Content Type - 向OAuth提供者senddata的contenttype。
-     * 目前仅支持application/jsontype。
+     * 目前仅supportapplication/jsontype。
      */
     protected string $authorizationContentType = 'application/json';
 

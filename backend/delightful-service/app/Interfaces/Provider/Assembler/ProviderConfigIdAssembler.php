@@ -33,7 +33,7 @@ class ProviderConfigIdAssembler
 
     /**
      * check给定的configurationID是否为任何service商的template.
-     * 支持数value型stringformat的templateID.
+     * support数value型stringformat的templateID.
      */
     public static function isAnyProviderTemplate(null|int|string $configId): bool
     {
@@ -42,7 +42,7 @@ class ProviderConfigIdAssembler
 
     /**
      * according totemplateconfigurationIDparse出ProviderCode和Category.
-     * 支持数value型stringformat的templateID.
+     * support数value型stringformat的templateID.
      * @return null|array{providerCode: ProviderCode, category: Category}
      */
     public static function parseProviderTemplate(null|int|string $configId): ?array

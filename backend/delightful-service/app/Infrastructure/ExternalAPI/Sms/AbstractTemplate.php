@@ -73,7 +73,7 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
-     * according to短信type,returntype支持的语种list.
+     * according to短信type,returntypesupport的语种list.
      * @return string[]
      */
     public function getTemplateLanguagesByType(string $type): array
@@ -105,7 +105,7 @@ abstract class AbstractTemplate implements TemplateInterface
                 break;
             }
         }
-        // 如果 $sign 在 $defaultLanguages 不存在value,则给一个type支持的语种
+        // 如果 $sign 在 $defaultLanguages 不存在value,则给一个typesupport的语种
         $firstLanguage = null;
         if (isset($this->signMap[$sign]) && is_array($this->signMap[$sign])) {
             $firstLanguage = array_key_first($this->signMap[$sign]);

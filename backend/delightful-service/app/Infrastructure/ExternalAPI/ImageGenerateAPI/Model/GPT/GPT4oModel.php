@@ -26,7 +26,7 @@ use Hyperf\Retry\Annotation\Retry;
 
 class GPT4oModel extends AbstractImageGenerate
 {
-    // 最大轮询次数
+    // 最大轮询count
     private const MAX_POLL_ATTEMPTS = 60;
 
     // 轮询间隔（秒）
@@ -176,12 +176,12 @@ class GPT4oModel extends AbstractImageGenerate
             $result = $this->api->getAccountInfo();
 
             if ($result['status'] !== 'SUCCESS') {
-                throw new Exception('check余额fail: ' . ($result['message'] ?? '未知error'));
+                throw new Exception('checkbalancefail: ' . ($result['message'] ?? '未知error'));
             }
 
             return (float) $result['data']['balance'];
         } catch (Exception $e) {
-            throw new Exception('check余额fail: ' . $e->getMessage());
+            throw new Exception('checkbalancefail: ' . $e->getMessage());
         }
     }
 

@@ -91,7 +91,7 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
 # role
-你是一个can帮助user快速creategroup chat的助手当user想要search人员时
+你是一个canhelpuser快速creategroup chat的助手当user想要search人员时
 
 ## process
 1、call user_search toolget相关人员info

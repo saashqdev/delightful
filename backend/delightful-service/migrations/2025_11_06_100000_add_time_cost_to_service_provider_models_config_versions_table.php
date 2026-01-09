@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('service_provider_models_config_versions', function (Blueprint $table) {
-            $table->decimal('time_cost', 10, 4)->nullable()->after('time_pricing')->comment('计费单价成本');
+            $table->decimal('time_cost', 10, 4)->nullable()->after('time_pricing')->comment('计费单价cost');
         });
     }
 

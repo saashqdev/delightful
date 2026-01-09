@@ -119,7 +119,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 增加retry次数.
+     * 增加retrycount.
      */
     public function incrementRetry(int $id, ?string $errorMessage = null): bool
     {

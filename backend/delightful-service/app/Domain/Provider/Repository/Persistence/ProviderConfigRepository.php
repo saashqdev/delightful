@@ -202,7 +202,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     /**
      * according toorganization和service商typegetservice商configuration列表.
      * 新逻辑：以database中的actualconfiguration为准，对于database中没有的service商type，usetemplate补充
-     * 支持多个same provider_code 的configuration（organization管理员手动添加的）
+     * support多个same provider_code 的configuration（organization管理员手动添加的）
      * finalresulthandle时，官方organizationwillfilter掉Delightfulservice商，普通organizationwill将Delightfulservice商置顶.
      * @param string $organizationCode organizationencoding
      * @param Category $category service商type

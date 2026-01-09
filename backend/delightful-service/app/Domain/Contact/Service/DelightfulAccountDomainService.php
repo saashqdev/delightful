@@ -47,7 +47,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
     {
         // 手机号是否可用check
         $this->checkPhoneStatus($type, $stateCode, $phone);
-        // 短信频率check
+        // 短信frequencycheck
         $this->checkSmsLimit($stateCode, $phone);
         $code = (string) random_int(100000, 999999);
         $variables = ['timeout' => 10, 'verification_code' => $code];
@@ -150,7 +150,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             }
             // generateorganization下userinfo
             if (empty($userDTO->getUserId())) {
-                // 确定user_id的generate规则
+                // 确定user_id的generaterule
                 $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $userDTO->getOrganizationCode());
                 $userDTO->setUserId($userId);
                 // 1.47x(10**-29) 概率下,user_idwill重复,will被mysql唯一索引拦截,让user重新login一次就行.
@@ -166,7 +166,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
     }
 
     /**
-     * @param AccountEntity $accountDTO 支持enable/disable智能体
+     * @param AccountEntity $accountDTO supportenable/disable智能体
      * @throws Throwable
      */
     public function aiRegister(DelightfulUserEntity $userDTO, DataIsolation $dataIsolation, AccountEntity $accountDTO): DelightfulUserEntity
@@ -329,7 +329,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
      */
     private function checkSmsLimit(string $stateCode, string $phone): void
     {
-        // 短信send频率控制
+        // 短信sendfrequency控制
         $timeInterval = config('sms.time_interval') ?: 60;
         $lastSendTimeKey = $this->getSmsLastSendTimeKey($stateCode . $phone);
         $setSuccess = $this->redis->set($lastSendTimeKey, '1', ['nx', 'ex' => $timeInterval]);

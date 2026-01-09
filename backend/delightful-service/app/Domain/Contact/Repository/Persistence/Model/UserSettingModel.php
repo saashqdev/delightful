@@ -19,9 +19,9 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $key setting键
  * @property array $value settingvalue
  * @property string $creator create者
- * @property DateTime $created_at create时间
+ * @property DateTime $created_at createtime
  * @property string $modifier 修改者
- * @property DateTime $updated_at update时间
+ * @property DateTime $updated_at updatetime
  */
 class UserSettingModel extends AbstractModel
 {

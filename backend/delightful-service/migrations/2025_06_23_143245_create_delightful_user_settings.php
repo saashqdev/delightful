@@ -21,9 +21,9 @@ return new class extends Migration {
             $table->string('key', 80)->comment('setting键');
             $table->json('value')->comment('settingvalue');
             $table->string('creator', 100)->comment('create者');
-            $table->timestamp('created_at')->nullable()->comment('create时间');
+            $table->timestamp('created_at')->nullable()->comment('createtime');
             $table->string('modifier', 100)->comment('修改者');
-            $table->timestamp('updated_at')->nullable()->comment('update时间');
+            $table->timestamp('updated_at')->nullable()->comment('updatetime');
 
             $table->index(['organization_code', 'user_id'], 'idx_org_user');
             $table->unique(['organization_code', 'user_id', 'key'], 'uk_org_user_key');

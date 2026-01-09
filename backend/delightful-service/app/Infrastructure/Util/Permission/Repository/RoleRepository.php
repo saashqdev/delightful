@@ -44,7 +44,7 @@ class RoleRepository implements RoleRepositoryInterface
             $model = RoleModel::create($data);
             $roleEntity->setId($model->id);
         } else {
-            // usemodelupdate以便use casts process JSON 与日期field
+            // usemodelupdate以便use casts process JSON 与datefield
             $model = $this->roleQuery($organizationCode)
                 ->where('id', $roleEntity->getId())
                 ->first();

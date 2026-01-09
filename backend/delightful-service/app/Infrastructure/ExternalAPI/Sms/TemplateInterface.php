@@ -32,13 +32,13 @@ interface TemplateInterface
     public function getTemplateVariables(string $content, array $messages): array;
 
     /**
-     * according to短信type,returntype支持的语种list.
+     * according to短信type,returntypesupport的语种list.
      * @return string[]
      */
     public function getTemplateLanguagesByType(string $type): array;
 
     /**
-     * according to语种要求和短信支持的signaturelist,return对应的signature文本.
+     * according to语种要求和短信support的signaturelist,return对应的signature文本.
      */
     public function formatSign(string $sign, ?LanguageEnum $language, ?LanguageEnum $defaultLanguage = LanguageEnum::ZH_CN): string;
 }

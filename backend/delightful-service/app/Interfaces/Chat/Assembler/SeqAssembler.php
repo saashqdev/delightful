@@ -156,7 +156,7 @@ class SeqAssembler
 
     /**
      * according to已经存在的seqEntity,generate已读/已查看/withdraw/edit等messagestatus变更type的回执message.
-     * @param string $referMessageId 支持指定quote的messageid,用于给receive方的其他设备push回执,或者给发件方push回执
+     * @param string $referMessageId support指定quote的messageid,用于给receive方的其他设备push回执,或者给发件方push回执
      */
     public static function generateStatusChangeSeqEntity(array $seqData, string $referMessageId): DelightfulSeqEntity
     {
@@ -292,7 +292,7 @@ class SeqAssembler
             'type' => $messageTypeName,
             // 回显未读人数,如果user点击了detail,再request具体的messagecontent
             'unread_count' => $unreadCount,
-            // messagesend时间，与 delightful_message_id 一起，用于withdraw、editmessage时的唯一性校验。
+            // messagesendtime，与 delightful_message_id 一起，用于withdraw、editmessage时的唯一性校验。
             'send_time' => $carbon->getTimestamp(),
             // chatmessagestatus:unread | seen | read |revoked  .对应中文释义：未读|已读|已查看（非纯文本的复杂typemessage，user点击了detail）  | withdraw
             'status' => $messageStatus ?: '',

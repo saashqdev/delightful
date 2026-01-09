@@ -195,7 +195,7 @@ readonly class KnowledgeBaseFragmentDomainService
         };
         $preprocessRule = $selectedFragmentConfig->getTextPreprocessRule();
         // 先进行预process
-        // needfilterREPLACE_WHITESPACE规则，REPLACE_WHITESPACE规则在分段后进行process
+        // needfilterREPLACE_WHITESPACErule，REPLACE_WHITESPACErule在分段后进行process
         $filterPreprocessRule = array_filter($preprocessRule, fn (TextPreprocessRule $rule) => $rule !== TextPreprocessRule::REPLACE_WHITESPACE);
         $start = microtime(true);
         $this->logger->info('前置文本预process开始。');
@@ -217,7 +217,7 @@ readonly class KnowledgeBaseFragmentDomainService
         $fragments = $splitter->splitText($content);
         $this->logger->info('文本分段结束，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
-        // need额外进行process的规则
+        // need额外进行process的rule
         $start = microtime(true);
         $this->logger->info('后置文本预process开始。');
         if (in_array(TextPreprocessRule::REPLACE_WHITESPACE, $preprocessRule)) {

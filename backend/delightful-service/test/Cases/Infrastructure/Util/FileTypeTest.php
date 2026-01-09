@@ -101,7 +101,7 @@ class FileTypeTest extends TestCase
 
     /**
      * test无法识别filetype时throwexception.
-     * 同样needfunction模拟支持
+     * 同样needfunction模拟support
      */
     public function testInvalidFileType()
     {

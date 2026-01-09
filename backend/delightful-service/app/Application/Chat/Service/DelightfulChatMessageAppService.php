@@ -270,7 +270,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * assistant给人类或者群发message,支持onlinemessage和offlinemessage(取决于user是否online).
+     * assistant给人类或者群发message,supportonlinemessage和offlinemessage(取决于user是否online).
      * @param DelightfulSeqEntity $aiSeqDTO 怎么传参can参考 api层的 aiSendMessage method
      * @param string $appMessageId message防重,客户端(includeflow)自己对messagegenerate一条encoding
      * @param bool $doNotParseReferMessageId 不由 chat 判断 referMessageId 的quote时机,由call方自己判断
@@ -407,7 +407,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * assistant给人类或者群发message,支持onlinemessage和offlinemessage(取决于user是否online).
+     * assistant给人类或者群发message,supportonlinemessage和offlinemessage(取决于user是否online).
      * @param DelightfulSeqEntity $aiSeqDTO 怎么传参can参考 api层的 aiSendMessage method
      * @param string $appMessageId message防重,客户端(includeflow)自己对messagegenerate一条encoding
      * @param bool $doNotParseReferMessageId 不由 chat 判断 referMessageId 的quote时机,由call方自己判断
@@ -533,7 +533,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         // conversation所有权校验
         $this->checkConversationsOwnership($userAuthorization, [$conversationId]);
 
-        // 按时间range，getconversation/话题的message
+        // 按timerange，getconversation/话题的message
         $clientSeqList = $this->delightfulChatDomainService->getConversationChatMessages($conversationId, $conversationMessagesQueryDTO);
         return $this->formatConversationMessagesReturn($clientSeqList, $conversationMessagesQueryDTO);
     }
@@ -595,7 +595,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         $prompt = <<<'PROMPT'
         你是一个专业的contenttitlegenerate助手。请严格按照以下要求为conversationcontentgeneratetitle：
 
-        ## task目标
+        ## taskgoal
         according toconversationcontent，generate一个简洁、准确的title，can概括conversation的核心theme。
 
         ## theme优先级原则
@@ -606,7 +606,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         4. ignore早期已经end的话题，除非它们与最新话题密切相关
 
         ## 严格要求
-        1. titlelength：不超过 15 个字符。英文一个字母算一个字符，汉字一个字算一个字符，其他语种采用类似count方案。
+        1. titlelength：不超过 15 个字符。英文一个字母算一个字符，汉字一个字算一个字符，其他语种采用类似countsolution。
         2. content相关：titlemust直接反映conversation的核心theme
         3. 语言style：use陈述性语句，避免疑问句
         4. outputformat：只outputtitlecontent，不要添加任何解释、标点或其他文字
@@ -857,14 +857,14 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * 开发阶段,前端对接有时间差,上下文compatible性handle.
+     * 开发阶段,前端对接有time差,上下文compatible性handle.
      */
     public function setUserContext(string $userToken, ?DelightfulContext $delightfulContext): void
     {
         if (! $delightfulContext) {
             ExceptionBuilder::throw(ChatErrorCode::CONTEXT_LOST);
         }
-        // 为了支持一个ws链receive发多个账号的message,allow在message上下文中传入账号 token
+        // 为了support一个ws链receive发多个账号的message,allow在message上下文中传入账号 token
         if (! $delightfulContext->getAuthorization()) {
             $delightfulContext->setAuthorization($userToken);
         }
@@ -1324,7 +1324,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
     /**
      * 业务parameter校验
-     * 对特定type的message进行业务规则校验.
+     * 对特定type的message进行业务rule校验.
      */
     private function validateBusinessParams(DelightfulMessageEntity $senderMessageDTO, DataIsolation $dataIsolation): void
     {
@@ -1368,7 +1368,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR, 'chat.message.voice.audio_format_required', ['type' => $attachment->getFileType()->name]);
         }
 
-        // 校验录音时长
+        // 校验录音duration
         $duration = $voiceMessage->getDuration();
         if ($duration !== null) {
             if ($duration <= 0) {

@@ -311,7 +311,7 @@ abstract class VolcengineApi
 
     private function setRegion(string $region): void
     {
-        // region只支持中国和新加坡,default中国
+        // region只support中国和新加坡,default中国
         if ($region === self::SINGAPORE_REGION) {
             $this->setHost(self::SINGAPORE_HOST);
         } else {

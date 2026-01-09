@@ -102,7 +102,7 @@ class ServiceProviderApiTest extends BaseTest
         $modelId = $createResponse['data']['id'];
         $this->assertNotEmpty($modelId, 'modelID不应为null');
 
-        // ========== 步骤2: calldetailinterfacevalidate4个成本field ==========
+        // ========== 步骤2: calldetailinterfacevalidate4个costfield ==========
         $detailUri = $this->baseUri . '/' . $serviceProviderConfigId;
         $detailResponse = $this->get($detailUri, [], $this->getCommonHeaders());
 
@@ -114,7 +114,7 @@ class ServiceProviderApiTest extends BaseTest
         $createdModel = $this->findModelInDetailResponse($detailResponse['data'], $modelId);
         $this->assertNotNull($createdModel, 'should能在detail中找到create的model');
 
-        // validate4个成本field存在且valuecorrect
+        // validate4个costfield存在且valuecorrect
         $this->assertArrayHasKey('config', $createdModel, 'modelshould有configfield');
         $this->verifyConfigCostFields($createdModel['config'], [
             'input_cost' => 0.001,
@@ -177,7 +177,7 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertArrayHasKey('data', $updateResponse);
         $this->assertSame($modelId, $updateResponse['data']['id'], 'update后modelID应保持不变');
 
-        // ========== 步骤5: 再次calldetailinterfacevalidateupdate后的4个成本field ==========
+        // ========== 步骤5: 再次calldetailinterfacevalidateupdate后的4个costfield ==========
         $updatedDetailResponse = $this->get($detailUri, [], $this->getCommonHeaders());
 
         $this->assertIsArray($updatedDetailResponse);
@@ -187,7 +187,7 @@ class ServiceProviderApiTest extends BaseTest
         $updatedModel = $this->findModelInDetailResponse($updatedDetailResponse['data'], $modelId);
         $this->assertNotNull($updatedModel, 'should能在detail中找到update后的model');
 
-        // validateupdate后的4个成本field
+        // validateupdate后的4个costfield
         $this->assertArrayHasKey('config', $updatedModel, 'update后的modelshould有configfield');
         $this->verifyConfigCostFields($updatedModel['config'], [
             'input_cost' => 0.003,
@@ -330,10 +330,10 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * validateconfiguration中的4个成本field.
+     * validateconfiguration中的4个costfield.
      *
      * @param array $config configurationdata
-     * @param array $expectedCosts expect的成本value
+     * @param array $expectedCosts expect的costvalue
      */
     private function verifyConfigCostFields(array $config, array $expectedCosts): void
     {

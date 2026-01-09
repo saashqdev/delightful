@@ -162,7 +162,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
         switch (Type::tryFrom($query->getType())) {
             case Type::Main:
-                // 不支持主process的query
+                // not supported主process的query
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_support', ['label' => 'type']);
                 // no break
             case Type::Sub:

@@ -158,7 +158,7 @@ readonly class AsrTaskRepository
      */
     private function generateTaskKey(string $taskKey, string $userId): string
     {
-        // 按统一规则generatestring，然后 MD5 避免键名过长
+        // 按统一rulegeneratestring，然后 MD5 避免键名过长
         $keyString = sprintf('%s:%s', $userId, $taskKey);
         $keyHash = md5($keyString);
         return sprintf(AsrRedisKeys::TASK_HASH, $keyHash);

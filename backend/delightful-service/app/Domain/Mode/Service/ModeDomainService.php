@@ -130,7 +130,7 @@ class ModeDomainService
      */
     public function updateMode(ModeDataIsolation $dataIsolation, ModeEntity $modeEntity): ModeEntity
     {
-        // 如果是跟随模式，validate跟随的目标模式存在 todo xhy use业务exception
+        // 如果是跟随模式，validate跟随的goal模式存在 todo xhy use业务exception
         if ($modeEntity->isInheritedConfiguration() && $modeEntity->hasFollowMode()) {
             $followMode = $this->modeRepository->findById($dataIsolation, $modeEntity->getFollowModeId());
             if (! $followMode) {
@@ -394,7 +394,7 @@ class ModeDomainService
 
         $visited[] = $modeId;
 
-        // 递归查找跟随目标的final源
+        // 递归查找跟随goal的final源
         return $this->findUltimateSourceId($followMap[$modeId], $followMap, $visited);
     }
 }

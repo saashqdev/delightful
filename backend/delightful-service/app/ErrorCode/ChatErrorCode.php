@@ -189,7 +189,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.topic.id_not_found')]
     case TOPIC_ID_NOT_FOUND = 3038;
 
-    // 不支持sync这个第三方平台的departmentdata
+    // not supportedsync这个第三方平台的departmentdata
         // Syncing department data from this third-party platform is not supported
     #[ErrorMessage('chat.department.sync_not_support')]
     case DEPARTMENT_SYNC_NOT_SUPPORT = 3039;
@@ -227,7 +227,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.delightful.ticket_not_found')]
     case APP_TICKET_NOT_FOUND = 3046;
 
-    // streammessage不支持该message
+    // streammessagenot supported该message
         // Streaming messages do not support this message type
     #[ErrorMessage('chat.message.stream.type_not_support')]
     case STREAM_TYPE_NOT_SUPPORT = 3100;

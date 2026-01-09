@@ -16,7 +16,7 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 class ResourceReadHandler extends AbstractMethodHandler
 {
     /**
-     * get该process器支持的methodname.
+     * get该process器support的methodname.
      */
     public function getMethod(): string
     {

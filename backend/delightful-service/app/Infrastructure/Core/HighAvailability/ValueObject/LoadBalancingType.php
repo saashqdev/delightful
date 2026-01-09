@@ -8,27 +8,27 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\HighAvailability\ValueObject;
 
 /**
- * 负载均衡策略type枚举.
+ * 负载均衡strategytype枚举.
  */
 enum LoadBalancingType: int
 {
     /**
-     * 随机策略 - 随机选择一个可用的后端service
+     * 随机strategy - 随机选择一个可用的后端service
      */
     case RANDOM = 1;
 
     /**
-     * 轮询策略 - 按顺序依次选择后端service
+     * 轮询strategy - 按顺序依次选择后端service
      */
     case ROUND_ROBIN = 2;
 
     /**
-     * 加权轮询策略 - according to权重比例选择后端service
+     * 加权轮询strategy - according to权重比例选择后端service
      */
     case WEIGHTED_ROUND_ROBIN = 3;
 
     /**
-     * hash策略 - according torequest的hashvalue选择后端service
+     * hashstrategy - according torequest的hashvalue选择后端service
      */
     case HASH = 4;
 
@@ -48,9 +48,9 @@ enum LoadBalancingType: int
     }
 
     /**
-     * checkcurrent负载均衡type是否支持权重.
+     * checkcurrent负载均衡type是否support权重.
      *
-     * @return bool 是否支持权重
+     * @return bool 是否support权重
      */
     public function supportsWeight(): bool
     {

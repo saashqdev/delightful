@@ -1734,7 +1734,7 @@ class LLMAppService extends AbstractLLMAppService
         // convert providerModelId 为整数
         $serviceProviderModelsId = is_numeric($providerModelId) ? (int) $providerModelId : null;
 
-        // get价格configurationversionID
+        // getpriceconfigurationversionID
         $priceId = $this->getPriceIdByServiceProviderModelId($serviceProviderModelsId, $organizationCode);
 
         // build并publishevent
@@ -1753,7 +1753,7 @@ class LLMAppService extends AbstractLLMAppService
     }
 
     /**
-     * getservice商model的价格configurationversionID.
+     * getservice商model的priceconfigurationversionID.
      */
     private function getPriceIdByServiceProviderModelId(?int $serviceProviderModelsId, string $organizationCode): ?int
     {

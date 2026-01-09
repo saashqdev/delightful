@@ -56,7 +56,7 @@ class OrganizationEntity extends AbstractEntity
 
     protected ?OrganizationSyncStatus $syncStatus = null; // 同status
 
-    protected ?DateTime $syncTime = null; // 同时间
+    protected ?DateTime $syncTime = null; // 同time
 
     public function shouldCreate(): bool
     {

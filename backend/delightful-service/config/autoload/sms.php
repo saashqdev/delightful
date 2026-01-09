@@ -7,7 +7,7 @@ declare(strict_types=1);
 use function Hyperf\Support\env;
 
 return [
-    // 一天at mostsend次数
+    // 一天at mostsendcount
     'day_max_count' => 30,
     // 每次send间隔60s
     'time_interval' => 60,

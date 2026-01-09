@@ -26,7 +26,7 @@ enum MCPErrorCode: int
 
     // toolassociate相关error码
     #[ErrorMessage(message: 'mcp.rel.not_found')]
-    case RelNotFound = 51520; // associate资源不存在
+    case RelNotFound = 51520; // associateresource not found
 
     #[ErrorMessage(message: 'mcp.rel_version.not_found')]
     case RelVersionNotFound = 51521; // associate资源version不存在

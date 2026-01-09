@@ -257,7 +257,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
         $entity->setIsOrganizationCreator((bool) ($data['is_organization_creator'] ?? false));
         $entity->setRemarks($data['remarks'] ?? null);
 
-        // process日期field
+        // processdatefield
         if (isset($data['granted_at']) && $data['granted_at']) {
             $entity->setGrantedAt(new DateTime($data['granted_at']));
         }

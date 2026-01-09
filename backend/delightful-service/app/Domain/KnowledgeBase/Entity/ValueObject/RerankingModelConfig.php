@@ -53,9 +53,9 @@ class RerankingModelConfig extends AbstractValueObject
     private float $timeout = 3.0;
 
     /**
-     * retry次数.
+     * retrycount.
      *
-     * API requestfail时的retry次数
+     * API requestfail时的retrycount
      */
     private int $retryCount = 2;
 
@@ -176,7 +176,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * getretry次数.
+     * getretrycount.
      */
     public function getRetryCount(): int
     {
@@ -184,7 +184,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * setretry次数.
+     * setretrycount.
      */
     public function setRetryCount(int $retryCount): self
     {

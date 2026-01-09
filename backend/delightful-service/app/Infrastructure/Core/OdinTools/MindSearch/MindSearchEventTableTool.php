@@ -27,7 +27,7 @@ class MindSearchEventTableTool
                         ],
                         'event_time' => [
                             'type' => 'string',
-                            'description' => 'associateevent发生时间',
+                            'description' => 'associateevent发生time',
                         ],
                         'event_description' => [
                             'type' => 'string',

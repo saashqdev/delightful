@@ -193,14 +193,14 @@ class DelightfulFlowDomainService extends AbstractDomainService
             'flowCode' => $delightfulFlow->getCode(),
         ];
 
-        // 先清理一下historyscheduletask和调度规则
+        // 先清理一下historyscheduletask和调度rule
         $this->taskSchedulerDomainService->clearByExternalId($externalId);
 
         foreach ($routineConfigs as $branchId => $routineConfig) {
             try {
                 $routineConfig->validate();
             } catch (Throwable $throwable) {
-                simple_logger('CreateRoutine')->notice('invalid的schedule规则', [
+                simple_logger('CreateRoutine')->notice('invalid的schedulerule', [
                     'flowCode' => $delightfulFlow->getCode(),
                     'branchId' => $branchId,
                     'routineConfig' => $routineConfig->toConfigArray(),

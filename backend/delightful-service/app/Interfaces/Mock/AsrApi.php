@@ -84,7 +84,7 @@ class AsrApi
     }
 
     /**
-     * complete ASR task（支持轮询）- V2 结构化version
+     * complete ASR task（support轮询）- V2 结构化version
      * POST /api/v1/sandboxes/{sandboxId}/proxy/api/asr/task/finish.
      */
     public function finishTask(RequestInterface $request): array
@@ -172,7 +172,7 @@ class AsrApi
         // 如果有笔记fileconfiguration且filesize > 0，添加到return中（模拟真实沙箱的笔记filecontentcheck）
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
             // userequest中提供的 target_path，而不是硬encodingfile名
-            // 这样cancorrect支持国际化的file名
+            // 这样cancorrectsupport国际化的file名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 

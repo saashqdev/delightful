@@ -18,7 +18,7 @@ class EndpointDTO extends AbstractDTO
     /**
      * getEndpointList interfacereturn的 id。
      * different的业务含义different。对于model网关来说，这里的 id 是 service_provider_models table的 id。
-     * 前端可能不支持 bigint，所以这里用 string.
+     * 前端可能not supported bigint，所以这里用 string.
      */
     protected ?string $businessId = null;
 

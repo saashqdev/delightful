@@ -17,7 +17,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 class DelightfulFlowDraftAppService extends AbstractFlowAppService
 {
     /**
-     * query草稿列table.
+     * querydraft列table.
      * @return array{total: int, list: array<DelightfulFlowDraftEntity>, users: array}
      */
     public function queries(Authenticatable $authorization, DelightfulFLowDraftQuery $query, Page $page): array
@@ -41,7 +41,7 @@ class DelightfulFlowDraftAppService extends AbstractFlowAppService
     }
 
     /**
-     * get草稿detail.
+     * getdraftdetail.
      */
     public function show(Authenticatable $authorization, string $flowCode, string $draftCode): DelightfulFlowDraftEntity
     {
@@ -52,7 +52,7 @@ class DelightfulFlowDraftAppService extends AbstractFlowAppService
     }
 
     /**
-     * delete草稿.
+     * deletedraft.
      */
     public function remove(Authenticatable $authorization, string $flowCode, string $draftCode): void
     {
@@ -62,7 +62,7 @@ class DelightfulFlowDraftAppService extends AbstractFlowAppService
     }
 
     /**
-     * save草稿.
+     * savedraft.
      */
     public function save(Authenticatable $authorization, DelightfulFlowDraftEntity $savingDelightfulFlowDraftEntity): DelightfulFlowDraftEntity
     {

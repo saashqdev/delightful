@@ -27,7 +27,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $third_platform_type 第三方平台type
  * @property string $third_file_id 第三方fileID
  * @property int $sync_status syncstatus
- * @property int $sync_times sync次数
+ * @property int $sync_times synccount
  * @property string $sync_status_message syncstatusmessage
  * @property string $embedding_model 嵌入model
  * @property string $vector_db 向量database

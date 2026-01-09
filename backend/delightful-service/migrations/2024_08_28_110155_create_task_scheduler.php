@@ -21,11 +21,11 @@ class CreateTaskScheduler extends Migration
             $table->bigIncrements('id');
             $table->string('external_id', 64)->comment('业务 id')->index();
             $table->string('name', 64)->comment('name');
-            $table->dateTimeTz('expect_time')->comment('expectedexecute时间');
-            $table->dateTimeTz('actual_time')->nullable()->comment('actualexecute时间');
+            $table->dateTimeTz('expect_time')->comment('expectedexecutetime');
+            $table->dateTimeTz('actual_time')->nullable()->comment('actualexecutetime');
             $table->tinyInteger('type')->default(2)->comment('type');
             $table->integer('cost_time')->default(0)->comment('耗时 毫秒');
-            $table->integer('retry_times')->default(0)->comment('remainingretry次数');
+            $table->integer('retry_times')->default(0)->comment('remainingretrycount');
             $table->tinyInteger('status')->default(0)->comment('status');
             $table->json('callback_method')->comment('callbackmethod');
             $table->json('callback_params')->comment('callbackparameter');

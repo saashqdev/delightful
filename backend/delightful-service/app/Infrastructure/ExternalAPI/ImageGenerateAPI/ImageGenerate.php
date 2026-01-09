@@ -13,10 +13,10 @@ use App\Infrastructure\ExternalAPI\ImageGenerateAPI\Response\OpenAIFormatRespons
 
 interface ImageGenerate
 {
-    // retry次数
+    // retrycount
     public const GENERATE_RETRY_COUNT = 3;
 
-    // retry时间
+    // retrytime
     public const GENERATE_RETRY_TIME = 1000;
 
     public const IMAGE_GENERATE_KEY_PREFIX = 'text2image:';

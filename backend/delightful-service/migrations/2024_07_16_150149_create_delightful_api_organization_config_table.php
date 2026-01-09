@@ -21,8 +21,8 @@ class CreateDelightfulApiOrganizationConfigTable extends Migration
             $table->string('organization_code')->comment('organizationencoding');
             $table->unsignedDecimal('total_amount', 40, 6)->comment('总quota');
             $table->unsignedDecimal('use_amount', 40, 6)->comment('usequota')->default(0);
-            $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('create时间');
-            $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('修改时间')->nullable();
+            $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('createtime');
+            $table->timestamp('updated_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('修改time')->nullable();
             $table->timestamp('deleted_at')->comment('逻辑delete')->nullable();
             // rpm
             $table->unsignedInteger('rpm')->comment('RPM限stream')->default(5000);

@@ -120,7 +120,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * 统一的水印process逻辑
-     * 支持URL和base64两种format的image水印process.
+     * supportURL和base64两种format的image水印process.
      */
     private function applyWatermark(ImageGenerateResponse $response, ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {

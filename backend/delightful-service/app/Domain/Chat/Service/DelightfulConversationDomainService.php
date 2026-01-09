@@ -229,7 +229,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * use intermediate event进行中间态messagepush，不持久化message. 支持话题级别的“正在input中”
+     * use intermediate event进行中间态messagepush，不持久化message. support话题级别的“正在input中”
      * 直接操作对方的conversation窗口，而不是把message发在自己的conversation窗口然后再经由message分发模块forward到对方的conversation窗口.
      */
     public function agentOperateConversationStatusV2(ControlMessageType $controlMessageType, string $agentConversationId, ?string $topicId = null): bool
@@ -356,7 +356,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * getconversation窗口，不存在则create.支持user/group chat/ai.
+     * getconversation窗口，不存在则create.supportuser/group chat/ai.
      */
     public function getOrCreateConversation(string $senderUserId, string $receiveId, ?ConversationType $receiverType = null): DelightfulConversationEntity
     {

@@ -208,7 +208,7 @@ class DocumentFileStrategy
             return $driver;
         }
 
-        $this->logger->warning('没有与[' . get_class($documentFile) . ']匹配的文本parse策略！将return空value！');
+        $this->logger->warning('没有与[' . get_class($documentFile) . ']匹配的文本parsestrategy！将return空value！');
         return null;
     }
 }

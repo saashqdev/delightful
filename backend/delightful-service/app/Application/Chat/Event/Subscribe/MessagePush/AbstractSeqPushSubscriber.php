@@ -58,7 +58,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                     return Result::ACK;
                 }
                 $this->addSeqRetryNumber($seqRetryKey);
-                // recordseq尝试push的次数,用于后续判断是否needretry
+                // recordseq尝试push的count,用于后续判断是否needretry
                 $this->delightfulSeqAppService->pushSeq($seqId);
                 // 未报错,不再重推
                 $this->setSeqCanNotRetry($seqRetryKey);

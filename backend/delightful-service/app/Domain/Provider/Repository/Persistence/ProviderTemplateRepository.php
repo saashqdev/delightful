@@ -17,7 +17,7 @@ use DateTime;
 
 /**
  * service商templategenerate仓储
- * 支持为所有 ProviderCode generatetemplateconfiguration.
+ * support为所有 ProviderCode generatetemplateconfiguration.
  */
 readonly class ProviderTemplateRepository
 {

@@ -109,8 +109,8 @@ usersend的originalmessage如下：
 ### 优先级原则（非常重要）
 1. **file名优先**：file名通常是user精心命名的，contain了最核心的themeinfo，请重点参考usermessage中 @ 后面的file名
 2. **智能判断**：
-   - 如果file名语义清晰（如"2024年Q4产品规划will议.mp3"、"客户需求discussion.wav"），优先based onfile名generatetitle
-   - 如果file名是日期时间戳（如"20241112_143025.mp3"）或无意义字符（如"录音001.mp3"），则use通用description
+   - 如果file名语义清晰（如"2024年Q4product规划will议.mp3"、"客户需求discussion.wav"），优先based onfile名generatetitle
+   - 如果file名是datetime戳（如"20241112_143025.mp3"）或无意义字符（如"录音001.mp3"），则use通用description
 3. **提取关键词**：从file名中提取最核心的关键词和theme
 
 ### format要求

@@ -53,12 +53,12 @@ class ImageGeneratedEvent extends AbstractEvent
     protected ?int $priceId = null;
 
     /**
-     * call时间.
+     * calltime.
      */
     protected ?string $callTime = null;
 
     /**
-     * response时间.
+     * responsetime.
      */
     protected ?int $responseTime = null;
 

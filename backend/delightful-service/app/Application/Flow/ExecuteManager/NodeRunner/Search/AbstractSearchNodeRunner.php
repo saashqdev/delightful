@@ -46,7 +46,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 $rightValue,
                 $rangeIds
             );
-            // null 代table不支持的searchtype，直接skip
+            // null 代tablenot supported的searchtype，直接skip
             if ($currentIds === null) {
                 continue;
             }

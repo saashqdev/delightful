@@ -37,7 +37,7 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
             $maxLimit = min(20, $queryNum * 3);
             $filter->setLimit($maxLimit);
         }
-        // 兜底方案
+        // 兜底solution
         $question = $filter->getQuestion();
         if ($question === '') {
             $question = $filter->getQuery();

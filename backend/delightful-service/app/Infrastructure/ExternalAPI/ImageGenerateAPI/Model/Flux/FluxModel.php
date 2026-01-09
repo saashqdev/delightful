@@ -265,8 +265,8 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * checkaccount余额.
-     * @return float 余额
+     * checkaccountbalance.
+     * @return float balance
      * @throws Exception
      */
     protected function checkBalance(): float
@@ -275,12 +275,12 @@ class FluxModel extends AbstractImageGenerate
             $result = $this->api->getAccountInfo();
 
             if ($result['status'] !== 'SUCCESS') {
-                throw new Exception('check余额fail: ' . ($result['message'] ?? '未知error'));
+                throw new Exception('checkbalancefail: ' . ($result['message'] ?? '未知error'));
             }
 
             return (float) $result['data']['balance'];
         } catch (Exception $e) {
-            throw new Exception('check余额fail: ' . $e->getMessage());
+            throw new Exception('checkbalancefail: ' . $e->getMessage());
         }
     }
 

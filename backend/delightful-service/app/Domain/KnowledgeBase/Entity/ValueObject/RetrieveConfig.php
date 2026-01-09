@@ -13,7 +13,7 @@ use InvalidArgumentException;
 /**
  * knowledge base检索configurationvalueobject
  *
- * contain检索策略、检索method、重sortconfiguration等parameter
+ * contain检索strategy、检索method、重sortconfiguration等parameter
  */
 class RetrieveConfig extends AbstractValueObject
 {

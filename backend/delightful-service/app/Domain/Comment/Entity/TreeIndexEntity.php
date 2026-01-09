@@ -32,12 +32,12 @@ class TreeIndexEntity
     protected string $organizationCode;
 
     /**
-     * create时间.
+     * createtime.
      */
     protected string $createdAt;
 
     /**
-     * update时间.
+     * updatetime.
      */
     protected string $updatedAt;
 

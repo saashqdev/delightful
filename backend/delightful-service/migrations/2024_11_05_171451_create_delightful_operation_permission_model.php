@@ -19,8 +19,8 @@ return new class extends Migration {
             $table->string('organization_code', 20)->comment('organizationencoding');
             $table->unsignedTinyInteger('resource_type')->comment('资源type');
             $table->string('resource_id', 50)->comment('资源id');
-            $table->unsignedTinyInteger('target_type')->comment('目标type');
-            $table->string('target_id', 50)->comment('目标id');
+            $table->unsignedTinyInteger('target_type')->comment('goaltype');
+            $table->string('target_id', 50)->comment('goalid');
             $table->unsignedTinyInteger('operation')->comment('操作');
             $table->string('created_uid', 50)->comment('create人');
             $table->string('updated_uid', 50)->comment('修改人');

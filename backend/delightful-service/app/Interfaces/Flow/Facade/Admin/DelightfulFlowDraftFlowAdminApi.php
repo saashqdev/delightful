@@ -22,7 +22,7 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     protected DelightfulFlowDraftAppService $delightfulFlowDraftAppService;
 
     /**
-     * save草稿.
+     * savedraft.
      */
     public function save(string $flowId)
     {
@@ -38,7 +38,7 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * query草稿列table.
+     * querydraft列table.
      */
     public function queries(string $flowId)
     {
@@ -56,7 +56,7 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * query草稿detail.
+     * querydraftdetail.
      */
     public function show(string $flowId, string $draftId)
     {
@@ -66,7 +66,7 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * delete草稿.
+     * deletedraft.
      */
     public function remove(string $flowId, string $draftId)
     {

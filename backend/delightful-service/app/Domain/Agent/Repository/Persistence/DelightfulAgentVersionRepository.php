@@ -76,7 +76,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
         }
         return $builder
             ->where('organization_code', $organizationCode)
-            ->where('enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value) // ensure外层筛选enablestatus
+            ->where('enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value) // ensure外层filterenablestatus
             ->whereIn('id', $agentIds)
             ->count();
     }

@@ -86,7 +86,7 @@ class ServiceProviderInitializer
                 'id' => '759103339540475904',
                 'name' => 'Delightful',
                 'provider_code' => 'Official',
-                'description' => '由 Delightful pass官方deploy的 API 来implement AI model的call，可直接购买积分use海量的大model。',
+                'description' => '由 Delightful pass官方deploy的 API 来implement AI model的call，可直接购买pointsuse海量的大model。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/delightful.png',
                 'provider_type' => 1, // Official
                 'category' => 'llm',
@@ -102,7 +102,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'The AI model invocation is achieved through the API officially deployed by Delightful, and you can directly purchase points to use a vast number of large models.',
-                        'zh_CN' => '由 Delightful pass官方deploy的 API 来implement AI model的call，可直接购买积分use海量的大model。',
+                        'zh_CN' => '由 Delightful pass官方deploy的 API 来implement AI model的call，可直接购买pointsuse海量的大model。',
                     ],
                 ]),
                 'remark' => '',
@@ -112,7 +112,7 @@ class ServiceProviderInitializer
                 'id' => '759109912413282304',
                 'name' => 'Microsoft Azure',
                 'provider_code' => 'MicrosoftAzure',
-                'description' => 'Azure 提供多种先进的AImodel、includeGPT-3.5和最newGPT-4系列、支持多种datatype和复杂task，致力于security、可靠和可持续的AIresolve方案,',
+                'description' => 'Azure 提供多种先进的AImodel、includeGPT-3.5和最newGPT-4系列、support多种datatype和复杂task，致力于security、可靠和可持续的AIresolvesolution,',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/azure Avatars.png',
                 'provider_type' => 0, // Normal
                 'category' => 'llm',
@@ -128,7 +128,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Azure provides a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, committed to safe, reliable and sustainable AI solutions.',
-                        'zh_CN' => 'Azure 提供多种先进的AImodel、includeGPT-3.5和最newGPT-4系列、支持多种datatype和复杂task，致力于security、可靠和可持续的AIresolve方案,',
+                        'zh_CN' => 'Azure 提供多种先进的AImodel、includeGPT-3.5和最newGPT-4系列、support多种datatype和复杂task，致力于security、可靠和可持续的AIresolvesolution,',
                     ],
                 ]),
                 'remark' => '',
@@ -216,7 +216,7 @@ class ServiceProviderInitializer
                 'id' => '759144726407426049',
                 'name' => 'Delightful',
                 'provider_code' => 'Official',
-                'description' => '由 Delightful pass官方deploy的 API 来implement多种热门的文生图、图生图等model的call，可直接购买积分use海量的大model。',
+                'description' => '由 Delightful pass官方deploy的 API 来implement多种热门的文生图、图生图等model的call，可直接购买pointsuse海量的大model。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/delightful.png',
                 'provider_type' => 1, // Official
                 'category' => 'vlm',
@@ -232,7 +232,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Delightful implements the invocation of various popular models such as text-to-image and image-to-image through the officially deployed API. You can directly purchase points to use a vast number of large models.',
-                        'zh_CN' => '由 Delightful pass官方deploy的 API 来implement多种热门的文生图、图生图等model的call，可直接购买积分use海量的大model。',
+                        'zh_CN' => '由 Delightful pass官方deploy的 API 来implement多种热门的文生图、图生图等model的call，可直接购买pointsuse海量的大model。',
                     ],
                 ]),
                 'remark' => '',
@@ -287,14 +287,14 @@ class ServiceProviderInitializer
                         'zh_CN' => '请useinterface与 OpenAI API same形式的service商',
                     ],
                 ]),
-                'remark' => '支持 OpenAI API 形式',
+                'remark' => 'support OpenAI API 形式',
             ],
             // Amazon Bedrock - LLM
             [
                 'id' => '771078297613344768',
                 'name' => 'Amazon Bedrock',
                 'provider_code' => 'AWSBedrock',
-                'description' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项service，专注于为企业提供先进的 AI 语言model和视觉model。其model家族include Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高performance的多种选择，支持文本generate、conversation、图像handle等多种task，适用于different规模和需求的企业application。',
+                'description' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项service，专注于为企业提供先进的 AI 语言model和视觉model。其model家族include Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高performance的多种选择，support文本generate、conversation、图像handle等多种task，适用于different规模和需求的企业application。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/awsAvatars.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -310,7 +310,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => "Amazon Bedrock is a service offered by Amazon AWS that focuses on advanced AI language models and visual models for businesses. Its model family, including Anthropic's Claude series and Meta's Llama 3.1 series, covers a variety of options from lightweight to high-performance, supporting a variety of tasks such as text generation, dialogue, image processing, and suitable for enterprise applications of different sizes and needs.",
-                        'zh_CN' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项service，专注于为企业提供先进的 AI 语言model和视觉model。其model家族include Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高performance的多种选择，支持文本generate、conversation、图像handle等多种task，适用于different规模和需求的企业application。',
+                        'zh_CN' => 'Amazon Bedrock 是亚马逊 AWS 提供的一项service，专注于为企业提供先进的 AI 语言model和视觉model。其model家族include Anthropic 的 Claude 系列、Meta 的 Llama 3.1 系列等，涵盖从轻量级到高performance的多种选择，support文本generate、conversation、图像handle等多种task，适用于different规模和需求的企业application。',
                     ],
                 ]),
                 'remark' => '',
@@ -320,7 +320,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920384',
                 'name' => 'Microsoft Azure',
                 'provider_code' => 'MicrosoftAzure',
-                'description' => '提供多种先进的AImodel、includeGPT-3.5和最newGPT-4系列、支持多种datatype和复杂task，致力于security、可靠和可持续的AIresolve方案。',
+                'description' => '提供多种先进的AImodel、includeGPT-3.5和最newGPT-4系列、support多种datatype和复杂task，致力于security、可靠和可持续的AIresolvesolution。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/azure Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -336,7 +336,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Azure offers a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, and is committed to providing safe, reliable and sustainable AI solutions.',
-                        'zh_CN' => 'Azure 提供多种先进的AImodel，includeGPT-3.5和最newGPT-4系列，支持多种datatype和复杂task，致力于security、可靠和可持续的AIresolve方案。',
+                        'zh_CN' => 'Azure 提供多种先进的AImodel，includeGPT-3.5和最newGPT-4系列，support多种datatype和复杂task，致力于security、可靠和可持续的AIresolvesolution。',
                     ],
                 ]),
                 'remark' => '',
@@ -346,7 +346,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920385',
                 'name' => 'Qwen',
                 'provider_code' => 'Qwen',
-                'description' => '提供通用图像generatemodel，支持多种艺术style，尤其擅长复杂文本渲染，特别是中英文文本渲染。',
+                'description' => '提供通用图像generatemodel，support多种艺术style，尤其擅长复杂文本渲染，特别是中英文文本渲染。',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/qwen Avatars White.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -362,7 +362,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'It provides a universal image generation model, supports multiple artistic styles, and is particularly skilled at complex text rendering, especially in both Chinese and English text rendering.',
-                        'zh_CN' => '提供通用图像generatemodel，支持多种艺术style，尤其擅长复杂文本渲染，特别是中英文文本渲染。',
+                        'zh_CN' => '提供通用图像generatemodel，support多种艺术style，尤其擅长复杂文本渲染，特别是中英文文本渲染。',
                     ],
                 ]),
                 'remark' => '',

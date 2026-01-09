@@ -50,7 +50,7 @@ class DelightfulAgentVersionDTO extends AbstractEntity
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.version_publisher_is_empty');
         }
 
-        // 校验 $versionNumber ,遵循 语义化version 规则
+        // 校验 $versionNumber ,遵循 语义化version rule
         if (! preg_match('/^\d{1,2}+\.\d{1,2}+\.\d{1,2}+$/', $this->versionNumber)) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.format_error_example_1_0_0');
         }

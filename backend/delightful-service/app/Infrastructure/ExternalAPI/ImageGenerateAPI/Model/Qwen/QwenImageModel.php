@@ -26,7 +26,7 @@ use Hyperf\Retry\Annotation\Retry;
 
 class QwenImageModel extends AbstractImageGenerate
 {
-    // 最大轮询retry次数
+    // 最大轮询retrycount
     private const MAX_RETRY_COUNT = 30;
 
     // 轮询retry间隔（秒）
@@ -400,7 +400,7 @@ class QwenImageModel extends AbstractImageGenerate
      */
     private function validateQwenImageSize(string $size): void
     {
-        // qwen-image支持的固定size列表
+        // qwen-imagesupport的固定size列表
         $supportedSizes = [
             '1664x928',   // 16:9
             '1472x1140',  // 4:3
@@ -410,7 +410,7 @@ class QwenImageModel extends AbstractImageGenerate
         ];
 
         if (! in_array($size, $supportedSizes, true)) {
-            $this->logger->error('通义千问文生图：qwen-image不支持的imagesize', [
+            $this->logger->error('通义千问文生图：qwen-imagenot supported的imagesize', [
                 'requested_size' => $size,
                 'supported_sizes' => $supportedSizes,
                 'model' => 'qwen-image',
@@ -445,12 +445,12 @@ class QwenImageModel extends AbstractImageGenerate
         $width = (int) $dimensions[0];
         $height = (int) $dimensions[1];
 
-        // wan2.2-t2i-flash支持512-1440像素区间
+        // wan2.2-t2i-flashsupport512-1440像素区间
         $minSize = 512;
         $maxSize = 1440;
 
         if ($width < $minSize || $width > $maxSize || $height < $minSize || $height > $maxSize) {
-            $this->logger->error('通义千问文生图：wan2.2-t2i-flashsize超出支持range', [
+            $this->logger->error('通义千问文生图：wan2.2-t2i-flashsize超出supportrange', [
                 'requested_size' => $size,
                 'width' => $width,
                 'height' => $height,

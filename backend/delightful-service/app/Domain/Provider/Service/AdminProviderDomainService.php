@@ -348,7 +348,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get官方的activatemodelconfiguration（支持return多个）.
+     * get官方的activatemodelconfiguration（supportreturn多个）.
      * @param string $modelOriginId model
      * @return ProviderConfigItem[] service商configurationarray
      */

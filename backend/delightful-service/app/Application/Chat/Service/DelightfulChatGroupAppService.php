@@ -405,7 +405,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         } else {
             $departmentIds = [];
         }
-        // 目前只支持添加同organization的user
+        // 目前只support添加同organization的user
         $groupAddUsers = $this->delightfulUserDomainService->getUserByIds($needAddGroupUserIds, $dataIsolation, ['user_id', 'nickname']);
         // 按departmentgetuser
         if (! empty($departmentIds)) {

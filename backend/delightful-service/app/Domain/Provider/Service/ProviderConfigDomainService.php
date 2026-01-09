@@ -45,7 +45,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
 
     /**
      * pass service_provider_config_id getservice商、configuration和model的aggregateinfo.
-     * 支持传入service商template id.
+     * support传入service商template id.
      * @param string $configId 可能是template id，such as ProviderConfigIdAssembler
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId): ?ProviderConfigModelsDTO
@@ -259,7 +259,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * create虚拟的service商configuration实体（支持所有service商type）.
+     * create虚拟的service商configuration实体（support所有service商type）.
      */
     private function createVirtualProviderConfig(ProviderDataIsolation $dataIsolation, ProviderEntity $providerEntity, string $templateId): ProviderConfigEntity
     {
@@ -348,13 +348,13 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderConfigError);
         }
 
-        // get对应的 Provider info进行业务规则validate
+        // get对应的 Provider info进行业务rulevalidate
         $provider = $this->getProviderById($dataIsolation, $existingConfigEntity->getServiceProviderId());
         if ($provider === null) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotFound);
         }
 
-        // 支持修改官方service商
+        // support修改官方service商
         /*if ($provider->getProviderType() === ProviderType::Official) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::SystemError);
         }*/

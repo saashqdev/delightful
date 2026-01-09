@@ -176,7 +176,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * （前端performance有issue的temporary方案）按session id 分groupget几条最新message.
+     * （前端performance有issue的temporarysolution）按session id 分groupget几条最新message.
      */
     public function conversationsMessagesGroupQueries(RequestInterface $request): array
     {

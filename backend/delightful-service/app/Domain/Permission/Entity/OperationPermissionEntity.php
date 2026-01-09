@@ -32,12 +32,12 @@ class OperationPermissionEntity extends AbstractEntity
     protected string $resourceId;
 
     /**
-     * 目标type.
+     * goaltype.
      */
     protected TargetType $targetType;
 
     /**
-     * 目标。
+     * goal。
      */
     protected string $targetId;
 

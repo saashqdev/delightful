@@ -53,7 +53,7 @@ class MultiModalContentFormatter
 
     /**
      * format化imagecontent到文本
-     * 支持单张image和多张image场景.
+     * support单张image和多张image场景.
      *
      * @param string $originalContent original文本content
      * @param string $visionResponse 视觉analyzeresult

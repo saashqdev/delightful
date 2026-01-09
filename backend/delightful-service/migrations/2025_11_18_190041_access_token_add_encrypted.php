@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_api_access_tokens', function (Blueprint $table) {
             $table->string('encrypted_access_token', 64)->default('')->comment('')->index();
-            $table->timestamp('last_used_at')->comment('上次use时间')->nullable();
+            $table->timestamp('last_used_at')->comment('上次usetime')->nullable();
         });
     }
 

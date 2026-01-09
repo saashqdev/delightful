@@ -52,7 +52,7 @@ class VolceApiClient extends AbstractSms
     {
         $variables = $smsStruct->variables;
         $smsStruct->language = $this->getContentLanguage($smsStruct);
-        // 火山短信只支持variable短信,according to完整的 $message 适配对应的 templatevariable
+        // 火山短信只supportvariable短信,according to完整的 $message 适配对应的 templatevariable
 
         // $variables 可能为索引array ["商品A","供应商A",10],火山短信need还原成associatearray
         if ($smsStruct->templateId && $this->array_is_list($variables)) {

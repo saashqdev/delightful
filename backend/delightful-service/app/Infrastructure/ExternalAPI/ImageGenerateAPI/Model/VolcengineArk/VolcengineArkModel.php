@@ -166,7 +166,7 @@ class VolcengineArkModel extends AbstractImageGenerate
 
     protected function checkBalance(): float
     {
-        // VolcengineArk API 目前没有余额queryinterface，returndefaultvalue
+        // VolcengineArk API 目前没有balancequeryinterface，returndefaultvalue
         return 999.0;
     }
 
@@ -196,7 +196,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             $payload['sequential_image_generation_options'] = $sequentialOptions;
         }
 
-        // 如果有参考图像，则添加imagefield（支持多张image）
+        // 如果有参考图像，则添加imagefield（support多张image）
         if (! empty($referImages)) {
             if (count($referImages) === 1) {
                 $payload['image'] = $referImages[0];
@@ -237,7 +237,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             $payload['sequential_image_generation_options'] = $sequentialOptions;
         }
 
-        // 如果有参考图像，则添加imagefield（支持多张image）
+        // 如果有参考图像，则添加imagefield（support多张image）
         if (! empty($referImages)) {
             if (count($referImages) === 1) {
                 $payload['image'] = $referImages[0];

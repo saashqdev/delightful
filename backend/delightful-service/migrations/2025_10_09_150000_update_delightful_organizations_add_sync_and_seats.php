@@ -32,7 +32,7 @@ return new class extends Migration {
                 $table->tinyInteger('sync_status')->default(0)->comment('同status')->after('sync_type');
             }
             if (! Schema::hasColumn('delightful_organizations', 'sync_time')) {
-                $table->timestamp('sync_time')->nullable()->comment('同时间')->after('sync_status');
+                $table->timestamp('sync_time')->nullable()->comment('同time')->after('sync_status');
             }
 
             // 索引：type（organizationtype）

@@ -158,7 +158,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
     protected function checkBalance(): float
     {
-        // Google Gemini API 目前没有余额queryinterface，returndefaultvalue
+        // Google Gemini API 目前没有balancequeryinterface，returndefaultvalue
         return 999.0;
     }
 

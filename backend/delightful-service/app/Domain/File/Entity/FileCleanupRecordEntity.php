@@ -205,7 +205,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * getretry次数.
+     * getretrycount.
      */
     public function getRetryCount(): int
     {
@@ -213,7 +213,7 @@ class FileCleanupRecordEntity extends AbstractEntity
     }
 
     /**
-     * setretry次数.
+     * setretrycount.
      */
     public function setRetryCount(int $retryCount): self
     {

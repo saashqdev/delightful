@@ -143,7 +143,7 @@ class DelightfulLLMDomainService
 
     // according touser的key词，search一次后，split更细致的question深入search
     private string $moreQuestionsPrompt = <<<'PROMPT'
-    # 时间context
+    # timecontext
     - system time: {date_now}
     
     ## core logic
@@ -152,7 +152,7 @@ class DelightfulLLMDomainService
     handle步骤：
     1.1 实体识别
        - 显性命名实体提取，识别实体间的关系与property
-       - 推导user的隐性需求和潜在意图，特别关注隐含的时间因素
+       - 推导user的隐性需求和潜在意图，特别关注隐含的time因素
     1.2 dimension拆解
        - according to识别出的实体和需求，选择合适的analyzedimension，for example：政策解读、datavalidate、案例研究、影响评估、技术原理、市场前景、user体验等
     1.3 子questiongenerate
@@ -161,9 +161,9 @@ class DelightfulLLMDomainService
     ### 2. search代理模块
     mustcalltool: batchSubQuestionsSearch
     parameterstandard：
-    2.1 key词规则
+    2.1 key词rule
        - generategreater thanequal 3 个高quality的可检索key词，include核心实体、keyproperty和相关概念
-       - 时间限定符override率≥30%
+       - time限定符override率≥30%
        - 对比类question占比≥20%
     
     ## 硬性约束（force遵守）
@@ -176,7 +176,7 @@ class DelightfulLLMDomainService
     
     ## contextexceptionhandle
     当 {context} 为null时：
-    1. start备选generate策略，application5W1Hframework（Who/What/When/Where/Why/How），并结合user的originalquestion进行填充
+    1. start备选generatestrategy，application5W1Hframework（Who/What/When/Where/Why/How），并结合user的originalquestion进行填充
     2. generatedefaultdimension，for example：政策背景 | 最新data | 专家观点 | 对比analyze | 行业趋势
     
     ## outputstandard
@@ -188,7 +188,7 @@ class DelightfulLLMDomainService
       "导致M发生的主要原因是什么？", // 原因/机制类
       "什么是N？它的核心特征是什么？", // 定义/解释类
       "未来五年P领域的发展趋势是什么？", // 趋势/预测类
-      "针对Qquestion，有哪些可行的resolve方案？" // resolve方案/suggestion类
+      "针对Qquestion，有哪些可行的resolvesolution？" // resolvesolution/suggestion类
     ]
     
     currentcontextsummary：
@@ -205,7 +205,7 @@ class DelightfulLLMDomainService
     在我给你的searchresult中，每个result都是[webpage X begin]...[webpage X end]format的，X代表每篇文章的number索引。请在适当的情况下在句子末尾quotecontext。请按照quote编号[citation:X]的format在答案中对应部分quotecontext。如果一句话源自多个context，请列出所有相关的quote编号，for example[citation:3][citation:5]，切记不要将quote集中在最后returnquote编号，而是在答案对应部分列出。
     在回答时，请注意以下几点：
     - 今天是{date_now}。
-    - 并非searchresult的所有content都与user的question密切相关，你need结合question，对searchresult进行甄别、筛选。
+    - 并非searchresult的所有content都与user的question密切相关，你need结合question，对searchresult进行甄别、filter。
     - 对于列举类的question（如列举所有航班information），尽量将答案控制在10个要点以内，并告诉usercan查看search来源、获得完整information。优先提供information完整、最相关的列举项；如非必要，不要主动告诉usersearchresult未提供的content。
     - 对于创作类的question（如写论文），请务必在正文的段落中quote对应的参考编号，for example[citation:3][citation:5]，不能只在文章末尾quote。你need解读并概括user的题目要求，选择合适的format，充分利用searchresult并抽取重要information，generatematchuser要求、极具思想深度、富有创造力与专业性的答案。你的创作篇幅need尽可能延长，对于每一个要点的论述要推测user的意图，给出尽可能多角度的回答要点，且务必information量大、论述详尽。
     - 如果回答很长，请尽量结构化、分段落总结。如果need分点作答，尽量控制在5个点以内，并merge相关的content。
@@ -225,27 +225,27 @@ class DelightfulLLMDomainService
     private string $eventPrompt = <<<'PROMPT'
     # 你是一个新闻eventgenerate器，userwill提供searchcontent并询问question。
     ## Current Time是 {data_now}  
-    ## according touser的question，你需从user提供的searchcontent中整理相关event，eventincludeeventname、event时间和event概述。
+    ## according touser的question，你需从user提供的searchcontent中整理相关event，eventincludeeventname、eventtime和event概述。
     ### 注意事项：
     1. **eventnameformat**：
        - 在eventname后添加searchquote的编号，format为 `[[citation:x]]`，编号来源于searchcontent中的quotemark（如 `[[citation:1]]`）。
        - 如果一个event涉及多个quote，merge所有相关quote编号。
        - 不要在 "description" 中添加quote。
-    2. **时间handle**：
-       - event时间尽量精确到月份（如 "2023-05"），若searchcontent未提供具体月份，但有指出上半年或者下半年，canuse（"2023 上半年"），若没有则，use年份（如 "2023"）。
-       - 若同一event在多个quote中出现，优先use最早的时间。
-       - 若时间不明确，according tocontext推测最早可能的时间，并ensure合理。
-    3. **event提取与筛选**：
-       - **event定义**：event是searchcontent中mention的、具有时间associate（明确或可推测）的独立事实、变化或活动，include但不限于create、publish、开业、update、合作、活动等。
+    2. **timehandle**：
+       - eventtime尽量精确到月份（如 "2023-05"），若searchcontent未提供具体月份，但有指出上半年或者下半年，canuse（"2023 上半年"），若没有则，use年份（如 "2023"）。
+       - 若同一event在多个quote中出现，优先use最早的time。
+       - 若time不明确，according tocontext推测最早可能的time，并ensure合理。
+    3. **event提取与filter**：
+       - **event定义**：event是searchcontent中mention的、具有timeassociate（明确或可推测）的独立事实、变化或activity，include但不限于create、publish、开业、update、合作、activity等。
        - according touserquestion，提取与之相关的event，保持description简洁，聚焦具体发生的事情。
        - **skip无关content**：
-         - 纯静态description（如不变的property、背景介绍，无时间变化）。
+         - 纯静态description（如不变的property、背景介绍，无time变化）。
          - datastatistics或财务information（如营收、利润）。
          - 主观comment、analyze或推测（除非与event直接相关）。
-         - 无时间associate且与question无关的细节。
-       - **保留原则**：只要content与时间相关且matchquestiontheme，尽量保留为event。
+         - 无timeassociate且与question无关的细节。
+       - **保留原则**：只要content与time相关且matchquestiontheme，尽量保留为event。
     4. **output要求**：
-       - 以 JSON formatreturn，event按时间倒序排列（从晚到早）。
+       - 以 JSON formatreturn，event按time倒序排列（从晚到早）。
        - 每个eventcontain "name"、"time"、"description" 三个field。
        - 若searchcontent不足以generateevent，returnnullarray `[]`，避免凭null臆造。
     
@@ -267,7 +267,7 @@ class DelightfulLLMDomainService
     ## useinstruction
     - user需提供searchcontent（containquotemark如 [[citation:x]]）和具体question。
     - according toquestion，从searchcontent中提取matchevent定义的content，按要求generateoutput。
-    - 若question涉及current时间，based on {date_now} 进行推算。
+    - 若question涉及currenttime，based on {date_now} 进行推算。
     
     ## quote
     {citations}
@@ -289,8 +289,8 @@ class DelightfulLLMDomainService
     ## 要求
     - forbid直接回答user的question，一定要return与userquestion有associate性的索引。
     - search contexts的format为 "[[x]] content" ，其中 x 是search contexts的索引。x 不能greater than 50
-    - 请以correct的 JSON formatreply筛选后的索引，for example：[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
-    - 如果 search keywords 与时间相关，重点注意 search contexts 中与current时间相关的content。与current时间越近越重要。
+    - 请以correct的 JSON formatreplyfilter后的索引，for example：[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19]
+    - 如果 search keywords 与time相关，重点注意 search contexts 中与currenttime相关的content。与currenttime越近越重要。
 
     
     ## search keywords
@@ -580,7 +580,7 @@ class DelightfulLLMDomainService
         $searchContextsString = '';
         // 清洗searchresult
         foreach ($searchContexts as $index => $context) {
-            // can传入网页detail，以便更好的筛选
+            // can传入网页detail，以便更好的filter
             $searchContextsString .= '[[' . $index . ']] ' . $context->getSnippet() . "\n\n";
         }
         $systemPrompt = str_replace(
@@ -1066,7 +1066,7 @@ class DelightfulLLMDomainService
         foreach ($searchContexts as $searchIndex => $context) {
             $index = $searchIndex + 1;
             $searchContextsDetail .= sprintf(
-                '[webpage %d begin] contentpublish日期:%s，summary：%s' . "\n" . 'detailcontent:%s ' . "[webpage %d end]\n",
+                '[webpage %d begin] contentpublishdate:%s，summary：%s' . "\n" . 'detailcontent:%s ' . "[webpage %d end]\n",
                 $index,
                 $context->getDatePublished() ?? '',
                 $context->getSnippet(),

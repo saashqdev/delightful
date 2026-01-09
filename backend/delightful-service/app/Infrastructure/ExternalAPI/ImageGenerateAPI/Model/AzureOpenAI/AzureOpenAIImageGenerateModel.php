@@ -123,7 +123,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
         }
 
         try {
-            // 3. 图像generate（synchandle，Azure OpenAI API 支持 n parameter一次性generate多张image）
+            // 3. 图像generate（synchandle，Azure OpenAI API support n parameter一次性generate多张image）
             if (! empty($imageGenerateRequest->getReferenceImages())) {
                 $editModel = new AzureOpenAIImageEditModel($this->configItem);
                 $editRequest = $this->convertToEditRequest($imageGenerateRequest);

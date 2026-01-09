@@ -194,7 +194,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
     /**
      * get层级结构的permission树
-     * generate无限极permission树,规则：according topermission资源string（如 Admin.ai.model_management）逐段split，逐层构造树。
+     * generate无限极permission树,rule：according topermission资源string（如 Admin.ai.model_management）逐段split，逐层构造树。
      *
      * returnformat：
      * [
@@ -241,7 +241,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 $accumKey .= '.' . $segment;
                 $isLastSegment = $index === array_key_last($segments);
 
-                // 取 label：第一段use模块中文名，其余按规则
+                // 取 label：第一段use模块中文名，其余按rule
                 $label = match (true) {
                     $index === 0 => $this->getResourceModule($permission['resource']),                // 模块层
                     $isLastSegment => $permission['resource_label'],      // 资源层
@@ -305,12 +305,12 @@ class DelightfulPermission implements DelightfulPermissionInterface
     /**
      * 判断userpermission集合中是否拥有指定permission（考虑隐式contain）。
      *
-     * 规则：
+     * rule：
      *   1. 如直接命中permission键，return true；
      *   2. 如果拥有全局permission ALL_PERMISSIONS，return true；
      *   3. 若未命中，则check由该permission隐式contain的permission集合（for example *edit* 隐式contain *query*）。
      *
-     * @param string $permissionKey 目标permission键
+     * @param string $permissionKey goalpermission键
      * @param string[] $userPermissions user已拥有的permission键集合
      * @param bool $isPlatformOrganization 是否平台organization
      */
@@ -360,7 +360,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         if (! enum_exists($opEnumClass)) {
             throw new InvalidArgumentException('Operation enum not found for resource: ' . $resource);
         }
-        // 仅支持 BackedEnum，因为后续needread ->value
+        // 仅support BackedEnum，因为后续needread ->value
         if (! is_subclass_of($opEnumClass, BackedEnum::class)) {
             throw new InvalidArgumentException('Operation enum for resource must be BackedEnum: ' . $opEnumClass);
         }

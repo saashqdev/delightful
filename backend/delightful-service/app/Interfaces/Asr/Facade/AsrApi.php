@@ -536,7 +536,7 @@ class AsrApi extends AbstractApi
         if (! $note->isValidFileType()) {
             ExceptionBuilder::throw(
                 GenericErrorCode::ParameterMissing,
-                sprintf('不支持的filetype: %s，支持的type: txt, md, json', $noteFileType)
+                sprintf('not supported的filetype: %s，support的type: txt, md, json', $noteFileType)
             );
         }
 

@@ -21,7 +21,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $user_id userID，对应delightful_contact_users.user_id
  * @property string $organization_code organizationencoding
  * @property null|string $assigned_by 分配者userID
- * @property null|Carbon $assigned_at 分配时间
+ * @property null|Carbon $assigned_at 分配time
  * @property Carbon $created_at creation time
  * @property Carbon $updated_at update time
  * @property null|Carbon $deleted_at deletion time

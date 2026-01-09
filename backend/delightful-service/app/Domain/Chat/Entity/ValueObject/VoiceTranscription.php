@@ -11,7 +11,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 
 /**
  * voice转文字resultvalueobject
- * 支持多语言转录resultstorage.
+ * support多语言转录resultstorage.
  */
 class VoiceTranscription extends AbstractValueObject
 {
@@ -98,7 +98,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * get所有支持的语言code
+     * get所有support的语言code
      * @return string[]
      */
     public function getSupportedLanguages(): array

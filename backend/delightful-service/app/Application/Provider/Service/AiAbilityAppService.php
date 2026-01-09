@@ -92,7 +92,7 @@ class AiAbilityAppService extends AbstractKernelAppService
             ExceptionBuilder::throw(ServiceProviderErrorCode::AI_ABILITY_NOT_FOUND);
         }
 
-        // buildupdatedata（支持选择性update）
+        // buildupdatedata（support选择性update）
         $updateData = [];
         if ($request->hasStatus()) {
             $updateData['status'] = $request->getStatus();

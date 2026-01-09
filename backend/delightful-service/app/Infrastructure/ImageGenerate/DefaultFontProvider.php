@@ -26,8 +26,8 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * 检测是否支持TTF字体渲染.
-     * 开源version仅支持内置字体.
+     * 检测是否supportTTF字体渲染.
+     * 开源version仅support内置字体.
      */
     public function supportsTTF(): bool
     {

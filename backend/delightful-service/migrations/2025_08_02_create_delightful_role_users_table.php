@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('user_id', 64)->comment('userID，对应delightful_contact_users.user_id');
             $table->string('organization_code', 64)->comment('organizationencoding');
             $table->string('assigned_by', 64)->nullable()->comment('分配者userID');
-            $table->timestamp('assigned_at')->nullable()->comment('分配时间');
+            $table->timestamp('assigned_at')->nullable()->comment('分配time');
             $table->timestamps();
             $table->softDeletes();
 

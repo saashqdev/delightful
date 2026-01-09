@@ -130,7 +130,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * updatemodelstatus（支持写时复制逻辑）.
+     * updatemodelstatus（support写时复制逻辑）.
      */
     public function updateStatus(ProviderDataIsolation $dataIsolation, string $id, Status $status): void
     {

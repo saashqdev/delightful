@@ -52,13 +52,13 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
             if ($alertCount > 1) {
                 $trace = str_replace(["\n", "\r"], ' | ', $coroutine->getTraceAsString());
                 $logger->error(sprintf(
-                    '麦吉看门狗 发现阻塞 协程 id:%s，同个协程阻塞次数：%s trace :%s ',
+                    '麦吉看门狗 发现阻塞 协程 id:%s，同个协程阻塞count：%s trace :%s ',
                     $coroutine->getId(),
                     $alertCount,
                     $trace
                 ));
             }
-            // 让出时间片，让其他协程有机willexecute
+            // 让出time片，让其他协程有机willexecute
             $millSeconds = 10 * 1000; // 10 毫秒
             usleep($millSeconds * $alertCount);
         });

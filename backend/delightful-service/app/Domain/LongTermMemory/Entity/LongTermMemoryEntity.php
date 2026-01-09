@@ -299,8 +299,8 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 内部setenablestatus（不进行业务规则check）.
-     * 用于datainitialize和内部操作，skip业务规则限制.
+     * 内部setenablestatus（不进行业务rulecheck）.
+     * 用于datainitialize和内部操作，skip业务rule限制.
      */
     public function setEnabledInternal(bool $enabled): void
     {
@@ -370,7 +370,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     // 业务method
 
     /**
-     * access记忆（updateaccess次数和time）.
+     * access记忆（updateaccesscount和time）.
      */
     public function access(): void
     {
@@ -379,7 +379,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 强化记忆（update强化次数和time，提升重要性）.
+     * 强化记忆（update强化count和time，提升重要性）.
      */
     public function reinforce(): void
     {
@@ -400,7 +400,7 @@ final class LongTermMemoryEntity extends AbstractEntity
         // 计算time衰减
         $timeDecay = $this->calculateTimeDecay();
 
-        // 计算access频率加成
+        // 计算accessfrequency加成
         $accessBonus = $this->calculateAccessBonus();
 
         return $baseScore * $timeDecay * $this->decayFactor + $accessBonus;
@@ -445,7 +445,7 @@ final class LongTermMemoryEntity extends AbstractEntity
      */
     protected function set(string $key, mixed $value): void
     {
-        // enabled field在initialize时use内部method，skip业务规则check
+        // enabled field在initialize时use内部method，skip业务rulecheck
         if (strtolower($key) === 'enabled' && is_bool($value)) {
             $this->setEnabledInternal($value);
             return;
@@ -470,7 +470,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 计算access频率加成.
+     * 计算accessfrequency加成.
      */
     private function calculateAccessBonus(): float
     {
@@ -478,7 +478,7 @@ final class LongTermMemoryEntity extends AbstractEntity
             return 0.0;
         }
 
-        // access次数的对数加成，避免过度奖励
+        // accesscount的对数加成，避免过度reward
         return min(0.3, log($this->accessCount + 1) * 0.1);
     }
 }

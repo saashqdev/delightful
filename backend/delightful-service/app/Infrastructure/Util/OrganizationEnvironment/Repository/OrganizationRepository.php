@@ -53,7 +53,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
             $model = OrganizationModel::create($data);
             $organizationEntity->setId($model->id);
         } else {
-            // usemodelupdate以便use casts process JSON 与日期field
+            // usemodelupdate以便use casts process JSON 与datefield
             $model = OrganizationModel::query()
                 ->where('id', $organizationEntity->getId())
                 ->first();
@@ -218,12 +218,12 @@ class OrganizationRepository implements OrganizationRepositoryInterface
             $query->where('type', (int) $filters['type']);
         }
 
-        // syncstatus筛选
+        // syncstatusfilter
         if (isset($filters['sync_status'])) {
             $query->where('sync_status', (int) $filters['sync_status']);
         }
 
-        // createtime区间筛选
+        // createtime区间filter
         if (! empty($filters['created_at_start'])) {
             $query->where('created_at', '>=', $filters['created_at_start'] . ' 00:00:00');
         }

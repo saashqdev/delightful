@@ -311,7 +311,7 @@ readonly class AsrSandboxService
             'transcript_file_config' => $transcriptFileConfig?->toArray(),
         ]);
 
-        // recordstart时间
+        // recordstarttime
         $finishStartTime = microtime(true);
 
         // 首次call finish
@@ -324,7 +324,7 @@ readonly class AsrSandboxService
             $transcriptFileConfig
         );
 
-        // 轮询等待complete（based onpreset时间与休眠间隔）
+        // 轮询等待complete（based onpresettime与休眠间隔）
         $timeoutSeconds = AsrConfig::SANDBOX_MERGE_TIMEOUT;
         $pollingInterval = AsrConfig::POLLING_INTERVAL;
         $attempt = 0;
@@ -373,7 +373,7 @@ readonly class AsrSandboxService
                 $lastLogTime = $currentTime;
             }
 
-            // 时间不足，不再 sleep，直接进行最后一次 finishTask
+            // time不足，不再 sleep，直接进行最后一次 finishTask
             if (($elapsedSeconds + $pollingInterval) >= $timeoutSeconds) {
                 break;
             }
@@ -391,7 +391,7 @@ readonly class AsrSandboxService
             );
         }
 
-        // 时间即将耗尽，进行最后一次check
+        // time即将耗尽，进行最后一次check
         $statusString = $response->getStatus();
         $status = SandboxAsrStatusEnum::from($statusString);
         $result = $this->checkAndHandleResponseStatus(
@@ -427,8 +427,8 @@ readonly class AsrSandboxService
      * @param SandboxAsrStatusEnum $status status枚举
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $sandboxId 沙箱ID
-     * @param float $finishStartTime start时间
-     * @param int $attempt 尝试次数
+     * @param float $finishStartTime starttime
+     * @param int $attempt 尝试count
      * @return null|AsrSandboxMergeResultDTO 如果complete则returnresult，否则returnnull
      * @throws BusinessException 如果是errorstatus则throwexception
      */
@@ -752,7 +752,7 @@ readonly class AsrSandboxService
      * build笔记fileconfigurationobject.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
-     * @param null|string $targetDirectory 目标directory（optional，default与源directorysame）
+     * @param null|string $targetDirectory goaldirectory（optional，default与源directorysame）
      * @param null|string $intelligentTitle 智能title（optional，用于重命名）
      */
     private function buildNoteFileConfig(
@@ -766,7 +766,7 @@ readonly class AsrSandboxService
 
         $workspaceRelativePath = AsrAssembler::extractWorkspaceRelativePath($taskStatus->presetNoteFilePath);
 
-        // 如果未指定目标directory，use源path（不重命名）
+        // 如果未指定goaldirectory，use源path（不重命名）
         if ($targetDirectory === null || $intelligentTitle === null) {
             return new AsrNoteFileConfig(
                 sourcePath: $workspaceRelativePath,
@@ -774,7 +774,7 @@ readonly class AsrSandboxService
             );
         }
 
-        // need重命名：use智能title和国际化的笔记后缀build目标path
+        // need重命名：use智能title和国际化的笔记后缀buildgoalpath
         $fileExtension = pathinfo($workspaceRelativePath, PATHINFO_EXTENSION);
         $noteSuffix = trans('asr.file_names.note_suffix'); // according to语言get国际化的"笔记"/"Note"
         $noteFilename = sprintf('%s-%s.%s', $intelligentTitle, $noteSuffix, $fileExtension);

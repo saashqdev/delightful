@@ -63,7 +63,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             $paramsConfig->getModelConfig()->setVisionModel($modelName);
         }
 
-        // 如果主动close视觉能力。或者 currentmodel支持，但是选择了别的model，也是相当于要closecurrentmodel的视觉能力
+        // 如果主动close视觉能力。或者 currentmodelsupport，但是选择了别的model，也是相当于要closecurrentmodel的视觉能力
         if (! $paramsConfig->getModelConfig()->isVision() || ($model->getModelOptions()->isMultiModal() && $paramsConfig->getModelConfig()->getVisionModel() !== $modelName)) {
             $model->getModelOptions()->setMultiModal(false);
         }
@@ -132,7 +132,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 $currentModel = $model->getModelName();
                 $visionModel = $paramsConfig->getModelConfig()->getVisionModel();
 
-                // 只有 currentmodel与视觉model不一致，或者 currentmodel不支持多模态 时。在视觉model的tool中，currentmodelequal视觉model并且具有视觉能力，就不will产生死循环
+                // 只有 currentmodel与视觉model不一致，或者 currentmodelnot supported多模态 时。在视觉model的tool中，currentmodelequal视觉model并且具有视觉能力，就不will产生死循环
                 if ($currentModel !== $visionModel || ! $model->getModelOptions()->isMultiModal()) {
                     $multiModalLoglog = MultiModalBuilder::vision(
                         executionData: $executionData,
@@ -326,7 +326,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         }
         /** @var ReplyMessageNodeParamsConfig $paramsConfig */
         $paramsConfig = $nextNode->getNodeParamsConfig();
-        // 只支持 text 和 markdown
+        // 只support text 和 markdown
         if (! in_array($paramsConfig->getType(), [DelightfulFlowMessageType::Text, DelightfulFlowMessageType::Markdown], true)) {
             return false;
         }

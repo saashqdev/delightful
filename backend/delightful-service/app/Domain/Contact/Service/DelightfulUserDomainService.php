@@ -222,7 +222,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * according touserID和userorganization列表queryuserdetail，according touserorganization决定filter策略.
+     * according touserID和userorganization列表queryuserdetail，according touserorganization决定filterstrategy.
      * @param array $userIds userIDarray
      * @param array $userOrganizations currentuser拥有的organizationencodingarray
      * @return array<UserDetailDTO>
@@ -235,13 +235,13 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         // mergeuserorganization和官方organization
         $orgCodes = array_filter(array_unique(array_merge($userOrganizations, [$officialOrganizationCode])));
 
-        // 从 user表拿基本info，支持多organizationquery
+        // 从 user表拿基本info，support多organizationquery
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds, $orgCodes);
 
         // checkcurrentuser是否拥有官方organization
         $hasOfficialOrganization = in_array($officialOrganizationCode, $userOrganizations, true);
 
-        // according touser是否拥有官方organization来决定filter策略
+        // according touser是否拥有官方organization来决定filterstrategy
         if (! $hasOfficialOrganization) {
             // 如果user没有官方organization，filter掉官方organization的非AIuser
             $users = array_filter($users, static function (DelightfulUserEntity $user) use ($officialOrganizationCode) {

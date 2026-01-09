@@ -32,7 +32,7 @@ class RetrievalMethod
      *
      * based on关键词匹配的检索method。
      * 索引document中的所有单词，returncontainquery词的文本片段。
-     * 适合精确匹配（如产品name、人名、ID）和低频词匹配。
+     * 适合精确匹配（如productname、人名、ID）和低频词匹配。
      */
     public const string FULL_TEXT_SEARCH = 'full_text_search';
 
@@ -41,7 +41,7 @@ class RetrievalMethod
      *
      * 结合语义检索和全文检索的method。
      * 同时execute全文检索和向量检索，然后pass重sort步骤选择最佳result。
-     * 结合了两种检索技术的优势，弥补各自的不足。
+     * 结合了两种检索技术的advantage，弥补各自的不足。
      */
     public const string HYBRID_SEARCH = 'hybrid_search';
 

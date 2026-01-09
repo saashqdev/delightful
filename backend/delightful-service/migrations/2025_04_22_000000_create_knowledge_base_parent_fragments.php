@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->string('created_uid', 255)->comment('create者ID');
             $table->string('updated_uid', 255)->comment('update者ID');
 
-            // status时间点
+            // statustime点
             $table->datetimes();
             $table->softDeletes();
 

@@ -22,9 +22,9 @@ return new class extends Migration {
             $table->string('description', 255)->default('')->comment('description');
             $table->string('icon', 255)->default('')->comment('icon');
             $table->string('created_uid', 80)->default('')->comment('create人');
-            $table->dateTime('created_at')->comment('create时间');
+            $table->dateTime('created_at')->comment('createtime');
             $table->string('updated_uid', 80)->default('')->comment('修改人');
-            $table->dateTime('updated_at')->comment('修改时间');
+            $table->dateTime('updated_at')->comment('修改time');
             $table->softDeletes();
 
             $table->unique(['organization_code', 'code']);

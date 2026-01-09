@@ -151,7 +151,7 @@ class DelightfulChatDomainService extends AbstractDomainService
 
     /**
      * 系统稳定性保障模块之一:message优先级的确定
-     * 优先级规则:
+     * 优先级rule:
      * 1.private chat/100人以内的group chat,优先级最高
      * 2.系统applicationmessage,高优先级
      * 3.apimessage(第三方callgenerate)/100~1000人group chat,中优先级
@@ -190,7 +190,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         if ($aiConversationEntity === null) {
             return $aiSeqDTO;
         }
-        # ai reply时quotemessage的规则:
+        # ai reply时quotemessage的rule:
         // 1. 本次reply前,user连续发了2条及以上的message
         // 2. 算上本次reply.ai连续发了2条及以上的message
         $conversationMessagesQueryDTO = new MessagesQueryDTO();
@@ -235,7 +235,7 @@ class DelightfulChatDomainService extends AbstractDomainService
 
     /**
      * notify收件方有新message(收件方可能是自己,或者是chatobject).
-     * @todo 考虑对 seqIds merge同类项,减少push次数,减轻网络/mq/service器stress
+     * @todo 考虑对 seqIds merge同类项,减少pushcount,减轻网络/mq/service器stress
      */
     public function pushChatSequence(SeqCreatedEvent $seqCreatedEvent): void
     {
@@ -432,7 +432,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             return [];
         }
         $topicEntities = $this->delightfulChatTopicRepository->getTopicsByConversationId($conversationEntity->getId(), $topicIds);
-        // 将时间转为时间戳
+        // 将time转为time戳
         $topics = [];
         foreach ($topicEntities as &$topic) {
             $topic = $topic->toArray();
@@ -691,9 +691,9 @@ class DelightfulChatDomainService extends AbstractDomainService
      * 1.need先call createAndSendStreamStartSequence create一个 seq ，然后再call streamSendJsonMessage sendmessage.
      * 2.streamsendJsonmessage,每次update json 的某个fieldmessage。
      * 3.use本机内存进行messagecache，提升大 json 读写performance。
-     * @todo 如果要对外提供stream api，need改为 redis cache，以支持断线重连。
+     * @todo 如果要对外提供stream api，need改为 redis cache，以support断线重连。
      *
-     *  支持一次push多个field的streammessage，如果 json 层级较深，use field_1.*.field_2 作为 key。 其中 * 是指array的下标。
+     *  support一次push多个field的streammessage，如果 json 层级较深，use field_1.*.field_2 作为 key。 其中 * 是指array的下标。
      *  service端willcache所有stream的data，并在streamend时一次性push，以减少丢package的概率，提升message完整性。
      *  for example：
      *  [
@@ -911,7 +911,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     {
         Db::beginTransaction();
         try {
-            // check是否支持streampush的messagetype
+            // check是否supportstreampush的messagetype
             if (! $messageStruct instanceof StreamMessageInterface || $messageStruct->getStreamOptions() === null) {
                 ExceptionBuilder::throw(ChatErrorCode::STREAM_MESSAGE_NOT_FOUND);
             }
@@ -1012,7 +1012,7 @@ class DelightfulChatDomainService extends AbstractDomainService
 
     /**
      * use本机内存进行messagecache，提升大 json 读写performance。
-     * @todo 如果要对外提供stream api，need改为 redis cache，以支持断线重连。
+     * @todo 如果要对外提供stream api，need改为 redis cache，以support断线重连。
      *
      * content的format  for example：
      *   [
@@ -1068,12 +1068,12 @@ class DelightfulChatDomainService extends AbstractDomainService
         // updatestreamdata
         $jsonStreamCachedDTO->setContent($memoryCacheContent);
         $memoryCache['content'] = $memoryCacheContent;
-        // updatecache，use更长的TTL以减少expire重建频率
-        $this->memoryDriver->set($cacheKey, $memoryCache, 600); // setting10分钟expire时间
+        // updatecache，use更长的TTL以减少expire重建frequency
+        $this->memoryDriver->set($cacheKey, $memoryCache, 600); // setting10分钟expiretime
     }
 
     /**
-     * 批量get$cacheKey中的多个field. 支持嵌套field.
+     * 批量get$cacheKey中的多个field. support嵌套field.
      */
     private function getCacheStreamData(string $cacheKey): ?JsonStreamCachedDTO
     {

@@ -92,7 +92,7 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     public function execute(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults = []): void
     {
-        // 节点运行最大次数限制，防止死循环
+        // 节点运行最大count限制，防止死循环
         $max = 10000;
         $executeNum = $executionData->getExecuteNum($this->node->getNodeId());
         if ($executeNum >= $max) {
@@ -168,7 +168,7 @@ abstract class NodeRunner implements NodeRunnerInterface
             $debugResult->setChildrenIds($vertexResult->getChildrenIds());
             $debugResult->addLoopDebugResult($debugResult);
 
-            // record节点次数的result
+            // record节点count的result
             $executionData->increaseExecuteNum($this->node->getNodeId(), $vertexResult);
         }
     }

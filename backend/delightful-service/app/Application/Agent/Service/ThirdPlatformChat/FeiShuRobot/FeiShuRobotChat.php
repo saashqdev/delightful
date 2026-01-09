@@ -156,13 +156,13 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     {
         // validatemessagetype
         if (! $message instanceof TextMessage) {
-            $this->logger->warning('不支持的messagetype', ['message_type' => get_class($message)]);
+            $this->logger->warning('not supported的messagetype', ['message_type' => get_class($message)]);
             return;
         }
 
         // validateconversationtype
         if (! $thirdPlatformChatMessage->isOne() && ! $thirdPlatformChatMessage->isGroup()) {
-            $this->logger->warning('不支持的conversationtype', ['conversation_type' => $thirdPlatformChatMessage->getType()]);
+            $this->logger->warning('not supported的conversationtype', ['conversation_type' => $thirdPlatformChatMessage->getType()]);
             return;
         }
 
@@ -270,7 +270,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $result = $this->processMessageContent($messageType, $content, $chatMessage, $organizationCode, $messageId);
 
         if ($result === false) {
-            // 不支持的messagetype，已sendhint并settingevent为None
+            // not supported的messagetype，已sendhint并settingevent为None
             return $chatMessage;
         }
 
@@ -495,7 +495,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                     $attachments = $data['attachments'];
                     break;
                 default:
-                    // send不支持的messagetypehint
+                    // sendnot supported的messagetypehint
                     $this->sendUnsupportedMessageTypeNotice($chatMessage->getOriginConversationId());
                     $chatMessage->setEvent(ThirdPlatformChatEvent::None);
                     return false;
@@ -572,7 +572,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * send不支持的messagetypenotify.
+     * sendnot supported的messagetypenotify.
      *
      * @param string $receiverId receive者ID
      */
@@ -582,12 +582,12 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             'receive_id' => $receiverId,
             'msg_type' => 'text',
             'content' => [
-                'text' => '暂不支持的messagetype',
+                'text' => '暂not supported的messagetype',
             ],
         ];
         $this->application->message->send($data, 'chat_id');
 
-        $this->logger->info('已send不支持messagetypenotify', ['receive_id' => $receiverId]);
+        $this->logger->info('已sendnot supportedmessagetypenotify', ['receive_id' => $receiverId]);
     }
 
     /**

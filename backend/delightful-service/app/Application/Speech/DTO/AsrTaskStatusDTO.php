@@ -69,9 +69,9 @@ class AsrTaskStatusDTO
 
     public ?string $sandboxId = null; // 沙箱ID
 
-    public int $sandboxRetryCount = 0; // 沙箱startretry次数
+    public int $sandboxRetryCount = 0; // 沙箱startretrycount
 
-    public int $serverSummaryRetryCount = 0; // service端总结触发retry次数
+    public int $serverSummaryRetryCount = 0; // service端总结触发retrycount
 
     public bool $serverSummaryLocked = false; // service端总结是否lock定客户端
 
@@ -265,7 +265,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 从array中按优先级getstringvalue（支持 snake_case 和 camelCase）.
+     * 从array中按优先级getstringvalue（support snake_case 和 camelCase）.
      *
      * @param array<string, mixed> $data dataarray
      * @param array<string> $keys 键名列表（按优先级sort）
@@ -282,7 +282,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 从array中按优先级get整数value（支持 snake_case 和 camelCase）.
+     * 从array中按优先级get整数value（support snake_case 和 camelCase）.
      *
      * @param array<string, mixed> $data dataarray
      * @param array<string> $keys 键名列表（按优先级sort）
@@ -299,7 +299,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 从array中按优先级getbooleanvalue（支持多种format：true/false、1/0、'1'/'0'）.
+     * 从array中按优先级getbooleanvalue（support多种format：true/false、1/0、'1'/'0'）.
      *
      * @param array<string, mixed> $data dataarray
      * @param array<string> $keys 键名列表（按优先级sort）

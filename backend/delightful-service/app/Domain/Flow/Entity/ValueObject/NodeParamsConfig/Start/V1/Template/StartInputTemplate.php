@@ -93,7 +93,7 @@ class StartInputTemplate
             "message_time": {
                 "type": "string",
                 "key": "message_time",
-                "title": "send时间",
+                "title": "sendtime",
                 "description": "",
                 "items": null,
                 "properties": null,

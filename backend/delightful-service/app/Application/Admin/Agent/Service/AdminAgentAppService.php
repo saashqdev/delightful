@@ -275,7 +275,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         // getenable的机器人list
         $enabledAgents = $this->delightfulAgentDomainService->getEnabledAgents();
 
-        // according to筛选typefilter
+        // according tofiltertypefilter
         $enabledAgents = $this->filterEnableAgentsByType($authorization, $enabledAgents, $type);
 
         // 提取enable机器人list中的 agent_version_id

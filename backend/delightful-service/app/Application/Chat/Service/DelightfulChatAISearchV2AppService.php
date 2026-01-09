@@ -96,7 +96,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         if (! $agentConversationEntity) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }
-        // 计费用，传入的是触发assistant的user id和organization code
+        // 计fee，传入的是触发assistant的user id和organization code
         $dto->setUserId($agentConversationEntity->getReceiveId());
         $dto->setOrganizationCode($agentConversationEntity->getReceiveOrganizationCode());
         if (empty($dto->getRequestId())) {
@@ -162,7 +162,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     }
 
     /**
-     * 麦吉互联网search简单版，适配process，仅支持简单search.
+     * 麦吉互联网search简单版，适配process，仅support简单search.
      * @throws Throwable
      * @throws RedisException
      */
@@ -758,7 +758,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     }
 
     /**
-     * 精读的过程中，隔随机时间push一次associateissuesearch完毕给前端。
+     * 精读的过程中，隔随机timepush一次associateissuesearch完毕给前端。
      * 完全精读完毕时，最后再推一次
      */
     private function sendLLMResponseForAssociateQuestions(
@@ -816,7 +816,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
                     // according to精读进度，pushassociateissuesearch完毕给前端
                     if (($currentDetailReadCount % $perReadResponseNum === 0) && $readPagesDetailChannel->isAvailable()) {
                         $readPagesDetailChannel->push(1, 5);
-                        // needpush的次数减少
+                        // needpush的count减少
                         --$questionsNum;
                     }
                 } catch (Throwable $e) {
@@ -831,7 +831,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             });
         }
         $parallel->wait();
-        // 如果还有needpush的次数，循环push
+        // 如果还有needpush的count，循环push
         while ($questionsNum > 0 && $readPagesDetailChannel->isAvailable()) {
             $readPagesDetailChannel->push(1, 5);
             --$questionsNum;

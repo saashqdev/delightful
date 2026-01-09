@@ -55,7 +55,7 @@ class FileParser
             $extension = FileType::getType($fileUrl);
 
             $interface = match ($extension) {
-                // 更多的filetype支持
+                // 更多的filetypesupport
                 'png', 'jpeg', 'jpg' => OcrFileParserDriverInterface::class,
                 'pdf' => PdfFileParserDriverInterface::class,
                 'xlsx', 'xls', 'xlsm' => ExcelFileParserDriverInterface::class,
@@ -104,7 +104,7 @@ class FileParser
             return;
         }
 
-        // 如果url是本地file协议，convert为actualpath
+        // 如果url是本地fileagreement，convert为actualpath
         if (str_starts_with($url, 'file://')) {
             $localPath = substr($url, 7);
             if (file_exists($localPath)) {

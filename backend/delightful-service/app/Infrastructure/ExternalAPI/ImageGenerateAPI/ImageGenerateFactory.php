@@ -39,7 +39,7 @@ use InvalidArgumentException;
 class ImageGenerateFactory
 {
     /**
-     * 各model支持的固定比例mappingtable.
+     * 各modelsupport的固定比例mappingtable.
      */
     private const SIZE_FIXED_RATIOS = [
         'VolcengineArk' => [
@@ -365,7 +365,7 @@ class ImageGenerateFactory
 
     /**
      * parse各种 size format为 [width, height] array.
-     * 支持format：1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 等.
+     * supportformat：1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 等.
      * @param string $size sizestring
      * @param null|string $modelKey model键名，如果指定则优先use该model的固定比例configuration
      */

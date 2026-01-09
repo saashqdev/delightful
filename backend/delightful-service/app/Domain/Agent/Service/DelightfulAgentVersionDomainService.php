@@ -190,13 +190,13 @@ class DelightfulAgentVersionDomainService
         // 将 PATCH 部分加 1
         $patch = (int) $patch + 1;
 
-        // 如果 PATCH 达到 10，进位到 MINOR（canaccording to需求调整此规则）
+        // 如果 PATCH 达到 10，进位到 MINOR（canaccording to需求调整此rule）
         if ($patch > 99) {
             $patch = 0;
             $minor = (int) $minor + 1;
         }
 
-        // 如果 MINOR 达到 10，进位到 MAJOR（canaccording to需求调整此规则）
+        // 如果 MINOR 达到 10，进位到 MAJOR（canaccording to需求调整此rule）
         if ($minor > 99) {
             // 不resetminor，而是直接增大major，避免不必要的reset
             $minor = 0;

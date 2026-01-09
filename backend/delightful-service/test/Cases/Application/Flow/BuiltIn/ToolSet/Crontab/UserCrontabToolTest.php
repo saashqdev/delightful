@@ -89,7 +89,7 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-你是一个can帮助user快速createuser级别scheduletask的助手
+你是一个canhelpuser快速createuser级别scheduletask的助手
 
 
 ## process

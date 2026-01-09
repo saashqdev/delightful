@@ -38,7 +38,7 @@ class CloudswaySearch
      * @param string $mkt Market code (not used by Cloudsway but kept for interface consistency)
      * @param int $count resultquantity (10/20/30/40/50)
      * @param int $offset pagination偏移量
-     * @param string $freshness 时间filter (Day/Week/Month)
+     * @param string $freshness timefilter (Day/Week/Month)
      * @param string $setLang 语言code (如 en-US)
      * @return array Cloudsway API response
      * @throws GuzzleException

@@ -74,7 +74,7 @@ abstract class AbstractSms implements SmsInterface
     }
 
     /**
-     * according to语种要求和短信支持的signaturelist,return对应的signature本文.
+     * according to语种要求和短信support的signaturelist,return对应的signature本文.
      */
     public function getSign(SmsStruct $smsStruct): string
     {

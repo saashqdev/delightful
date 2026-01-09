@@ -29,7 +29,7 @@ use Hyperf\Retry\Annotation\Retry;
 
 class VolcengineModel extends AbstractImageGenerate
 {
-    // 最大轮询retry次数
+    // 最大轮询retrycount
     private const MAX_RETRY_COUNT = 30;
 
     // 轮询retry间隔（秒）

@@ -24,7 +24,7 @@ return new class extends Migration {
                 'tokentype对应的value.type为0时,此value为account_id;type为1时,此value为user_id;type为2时,此value为organizationencoding;type为3时,此value为app_id;type为4时,此value为flow_id'
             );
             $table->string('token', 256)->comment('token的value,全局唯一');
-            $table->timestamp('expired_at')->comment('expire时间');
+            $table->timestamp('expired_at')->comment('expiretime');
             $table->unique(['token'], 'idx_token');
             $table->timestamps();
         });

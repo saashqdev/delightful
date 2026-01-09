@@ -83,7 +83,7 @@ class DelightfulChatAIImageReqDTO
         if ($userMessage instanceof TextMessage) {
             $this->params->setUserPrompt($userMessage->getContent());
         } else {
-            throw new Exception('不支持的messagetype');
+            throw new Exception('not supported的messagetype');
         }
         /* @phpstan-ignore-next-line */
         if ($userMessage instanceof ChatFileInterface) {

@@ -140,7 +140,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
             ->select($columns)
             ->where('group_id', $groupId);
         $userList = Db::select($userList->toSql(), $userList->getBindings());
-        // 将时间还原成时间戳
+        // 将time还原成time戳
         foreach ($userList as &$user) {
             ! empty($user['created_at']) && $user['created_at'] = strtotime($user['created_at']);
             ! empty($user['updated_at']) && $user['updated_at'] = strtotime($user['updated_at']);

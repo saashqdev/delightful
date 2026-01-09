@@ -30,7 +30,7 @@ class SimpleJWT
         $token = [
             'iss' => app_name(), // 签发者 optional
             'aud' => '', // receive该JWT的一方，optional
-            'exp' => time() + $expires, // expire时间
+            'exp' => time() + $expires, // expiretime
             'data' => $data, // customizedata
         ];
         return [

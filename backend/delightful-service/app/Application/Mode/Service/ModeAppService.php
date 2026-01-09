@@ -176,7 +176,7 @@ class ModeAppService extends AbstractModeAppService
     /**
      * 批量getmodel和service商status（performanceoptimizeversion）.
      * @param array $allModelIds 所有needquery的modelId
-     * @return array<string, ProviderModelEntity> 已pass级联status筛选的可用model
+     * @return array<string, ProviderModelEntity> 已pass级联statusfilter的可用model
      */
     private function getModelsBatch(array $allModelIds): array
     {
@@ -206,7 +206,7 @@ class ModeAppService extends AbstractModeAppService
             }
         }
 
-        // application级联status筛选，return可用model
+        // application级联statusfilter，return可用model
         $availableModels = [];
         foreach ($allModels as $modelId => $models) {
             $bestModel = $this->selectBestModelForBatch($models, $providerStatuses);

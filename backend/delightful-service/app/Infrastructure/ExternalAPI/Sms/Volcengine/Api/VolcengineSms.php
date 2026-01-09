@@ -39,7 +39,7 @@ class VolcengineSms extends VolcengineApi
     protected Template $template;
 
     /**
-     * sendverify码,火山的verify码短信不支持传入指定的数字.
+     * sendverify码,火山的verify码短信not supported传入指定的数字.
      */
     public function request(string $phone, array $templateVariables, SignEnum $sign, string $templateId): SendResult
     {
@@ -51,7 +51,7 @@ class VolcengineSms extends VolcengineApi
             return $sendResult->setResult(-1, '未匹配到对应的短信template!');
         }
         if (! in_array($signStr, Template::$signToMessageGroup, true)) {
-            return $sendResult->setResult(-1, '短信signature:' . $signStr . ' 不支持!');
+            return $sendResult->setResult(-1, '短信signature:' . $signStr . ' not supported!');
         }
 
         $errCode = 0;

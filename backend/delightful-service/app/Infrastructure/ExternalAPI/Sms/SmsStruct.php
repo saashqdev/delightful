@@ -20,7 +20,7 @@ class SmsStruct
     public string $phone = '';
 
     /**
-     * 短信的type,such as:registration_rewards (订单已发货),arrival_notice(到货notify).
+     * 短信的type,such as:registration_rewards (order已发货),arrival_notice(到货notify).
      * 1.如果搭配 language field,同时usevariable短信,canimplement多语言适配,以及语种兜底
      * 2.电商的相关短信use此field,但是没有 language 传入.
      */
@@ -51,7 +51,7 @@ class SmsStruct
     public ?string $language = null;
 
     /**
-     * 短信的default语种,支持业务方customize. 不传给defaultvaluezh_CN.
+     * 短信的default语种,support业务方customize. 不传给defaultvaluezh_CN.
      */
     public ?string $defaultLanguage = null;
 

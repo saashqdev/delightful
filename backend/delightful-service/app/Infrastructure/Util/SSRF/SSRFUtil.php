@@ -35,7 +35,7 @@ class SSRFUtil
      * @param string $url needcheck的URL
      * @param array $blackList blacklistIP或域名
      * @param array $whiteList 白名单IP或域名
-     * @param array $allowProtocols allow的协议
+     * @param array $allowProtocols allow的agreement
      * @param bool $replaceIp 是否替换为IPaccess
      * @param bool $allowRedirect 是否allow重定向
      * @return string security的URL
@@ -67,7 +67,7 @@ class SSRFUtil
      * @param string $url needcheck的URL
      * @param array $blackList blacklistIP或域名
      * @param array $whiteList 白名单IP或域名
-     * @param array $allowProtocols allow的协议
+     * @param array $allowProtocols allow的agreement
      * @param bool $replaceIp 是否替换为IPaccess
      * @param bool $allowRedirect 是否allow重定向
      * @return bool 是否security

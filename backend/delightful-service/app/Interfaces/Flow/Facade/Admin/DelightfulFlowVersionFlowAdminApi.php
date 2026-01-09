@@ -21,7 +21,7 @@ class DelightfulFlowVersionFlowAdminApi extends AbstractFlowAdminApi
     protected DelightfulFlowVersionAppService $delightfulFlowVersionAppService;
 
     /**
-     * 版本列表.
+     * 版本列table.
      */
     public function queries(string $flowId)
     {

@@ -45,7 +45,7 @@ class SubAdminAssembler
     public static function assembleWithUserInfo(RoleEntity $entity, array $userInfoList, array $updatedUser = []): array
     {
         $data = self::toArray($entity);
-        $data['users'] = $userInfoList; // 用户详细信息列表
+        $data['users'] = $userInfoList; // 用户详细信息列table
         $data['updated_user'] = $updatedUser;
         return $data;
     }

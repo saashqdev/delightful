@@ -162,7 +162,7 @@ class KnowledgeSimilarityNodeParamsConfig extends AbstractKnowledgeNodeParamsCon
                 "type": "array",
                 "key": "root",
                 "sort": 2,
-                "title": "片段列表",
+                "title": "片段列table",
                 "description": "",
                 "required": null,
                 "value": null,

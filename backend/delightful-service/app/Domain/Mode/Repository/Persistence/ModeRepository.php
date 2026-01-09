@@ -54,7 +54,7 @@ class ModeRepository extends AbstractRepository implements ModeRepositoryInterfa
     {
         $builder = $this->createBuilder($dataIsolation, ModeModel::query());
 
-        // 是否过滤默认模式
+        // 是否过滤默认mode
         if ($query->isExcludeDefault()) {
             $builder->where('is_default', 0);
         }
@@ -63,7 +63,7 @@ class ModeRepository extends AbstractRepository implements ModeRepositoryInterfa
             $builder->where('status', $query->getStatus());
         }
 
-        // 排序：is_default优先（默认模式在开头），然后sort字段，最后created_at
+        // 排序：is_default优先（默认mode在开头），然后sortfield，最后created_at
         $builder->orderBy('is_default', 'desc')
             ->orderBy('sort', $query->getSortDirection())
             ->orderBy('created_at', 'desc');

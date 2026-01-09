@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\OrganizationEnvironment\Entity\Facade;
 
 /**
- * 开放平台的所有配置保存在数据库的一个字段中.
+ * 开放平台的所有配置保存在数据库的一个field中.
  */
 interface OpenPlatformConfigInterface
 {

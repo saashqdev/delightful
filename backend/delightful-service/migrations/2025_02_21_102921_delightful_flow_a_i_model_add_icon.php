@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_flow_ai_models', function (Blueprint $table) {
-            $table->string('icon')->default('')->comment('图标')->after('label');
+            $table->string('icon')->default('')->comment('icon')->after('label');
             $table->boolean('display')->default(true)->comment('是否显示')->after('enabled');
         });
     }

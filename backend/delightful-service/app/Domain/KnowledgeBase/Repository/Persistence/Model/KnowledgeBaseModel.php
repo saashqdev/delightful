@@ -36,7 +36,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property array $fragment_config
  * @property array $embedding_config
  * @property int $word_count 字数统计
- * @property string $icon 图标
+ * @property string $icon icon
  * @property ?int $source_type
  */
 class KnowledgeBaseModel extends AbstractModel

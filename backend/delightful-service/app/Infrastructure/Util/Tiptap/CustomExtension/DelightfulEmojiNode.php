@@ -11,7 +11,7 @@ use App\Infrastructure\Util\Tiptap\AbstractCustomNode;
 use Hyperf\Codec\Json;
 
 /**
- * 富文本的表情解析.
+ * 富文本的table情解析.
  */
 class DelightfulEmojiNode extends AbstractCustomNode
 {

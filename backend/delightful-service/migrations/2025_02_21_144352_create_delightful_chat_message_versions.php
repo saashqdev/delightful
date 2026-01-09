@@ -19,11 +19,11 @@ return new class extends Migration {
         }
         Schema::create('delightful_chat_message_versions', function (Blueprint $table) {
             $table->bigIncrements('version_id');
-            $table->string('delightful_message_id', 64)->comment('delightful_chat_message 表的 delightful_message_id');
+            $table->string('delightful_message_id', 64)->comment('delightful_chat_message table的 delightful_message_id');
             $table->longText('message_content')->comment('消息内容');
             $table->index(['delightful_message_id', 'version_id'], 'idx_delightful_message_id_version_id');
             $table->timestamps();
-            $table->comment('消息版本表,记录消息的版本information');
+            $table->comment('消息版本table,记录消息的版本information');
             $table->softDeletes();
         });
     }

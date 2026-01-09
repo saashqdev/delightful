@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('code', 64)->default('')->comment('编码');
             $table->string('name', 64)->default('')->comment('名称');
             $table->string('description', 255)->default('')->comment('描述');
-            $table->string('icon', 255)->default('')->comment('图标');
+            $table->string('icon', 255)->default('')->comment('icon');
             $table->string('created_uid', 80)->default('')->comment('创建人');
             $table->dateTime('created_at')->comment('创建时间');
             $table->string('updated_uid', 80)->default('')->comment('修改人');

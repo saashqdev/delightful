@@ -25,7 +25,7 @@ class DelightfulFlowDTO extends AbstractFlowDTO
     public string $description = '';
 
     /**
-     * 流程图标（助理头像）.
+     * 流程icon（助理头像）.
      */
     public string $icon = '';
 

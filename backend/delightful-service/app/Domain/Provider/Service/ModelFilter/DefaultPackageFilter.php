@@ -12,7 +12,7 @@ use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 class DefaultPackageFilter implements PackageFilterInterface
 {
     /**
-     * 默认实现：不进行任何过滤，直接返回原始模型列表.
+     * 默认实现：不进行任何过滤，直接返回原始模型列table.
      */
     public function getCurrentPackage(string $organizationCode): ?string
     {

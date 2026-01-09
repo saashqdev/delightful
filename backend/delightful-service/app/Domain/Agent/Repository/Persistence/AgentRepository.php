@@ -21,7 +21,7 @@ class AgentRepository extends AbstractRepository implements AgentRepositoryInter
     protected bool $filterOrganizationCode = true;
 
     /**
-     * 查询 Agent 列表.
+     * 查询 Agent 列table.
      *
      * @return array{total: int, list: array<DelightfulAgentEntity>}
      */

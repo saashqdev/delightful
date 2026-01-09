@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::table('delightful_contact_accounts', static function (Blueprint $table) {
             // delightful_environment_id
-            $table->bigInteger('delightful_environment_id')->comment('delightful_environments 表的 id')->default(0);
+            $table->bigInteger('delightful_environment_id')->comment('delightful_environments table的 id')->default(0);
             $table->dropIndex('unq_country_code_phone');
             $table->index(['country_code', 'phone', 'delightful_environment_id'], 'idx_country_code_phone');
         });

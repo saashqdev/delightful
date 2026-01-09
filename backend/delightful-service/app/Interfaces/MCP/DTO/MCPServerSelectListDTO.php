@@ -25,7 +25,7 @@ class MCPServerSelectListDTO extends AbstractDTO
     public string $description = '';
 
     /**
-     * MCP服务图标.
+     * MCP服务icon.
      */
     public string $icon = '';
 
@@ -35,7 +35,7 @@ class MCPServerSelectListDTO extends AbstractDTO
     public string $type = '';
 
     /**
-     * 需要的动态字段.
+     * 需要的动态field.
      *
      * @var array<array<string, string>>
      */

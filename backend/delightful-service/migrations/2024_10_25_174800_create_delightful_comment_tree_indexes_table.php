@@ -19,8 +19,8 @@ return new class extends Migration {
         }
         Schema::create('delightful_comment_tree_indexes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('ancestor_id')->index()->comment('祖先节点id, comments表的主键id');
-            $table->unsignedBigInteger('descendant_id')->index()->comment('后代节点id, comments表的主键id');
+            $table->unsignedBigInteger('ancestor_id')->index()->comment('祖先节点id, commentstable的主键id');
+            $table->unsignedBigInteger('descendant_id')->index()->comment('后代节点id, commentstable的主键id');
             $table->unsignedInteger('distance')->comment('祖先节点到后代节点的距离');
             $table->string('organization_code')->index()->comment('组织code');
 

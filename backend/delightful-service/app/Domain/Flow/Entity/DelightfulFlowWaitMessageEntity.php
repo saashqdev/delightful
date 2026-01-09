@@ -32,7 +32,7 @@ class DelightfulFlowWaitMessageEntity extends AbstractEntity
 
     /**
      * 超时时间戳.
-     * 0 代表永不超时.
+     * 0 代table永不超时.
      */
     protected int $timeout = 0;
 

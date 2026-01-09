@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 修改表结构，添加新字段
+        // 修改table结构，添加新field
         Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
             $table->unsignedBigInteger('word_count')->default(0)->comment('字数统计');
         });

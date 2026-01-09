@@ -182,7 +182,7 @@ readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInter
     }
 
     /**
-     * 获取项目的 MCP 服务器 ID 列表.
+     * 获取项目的 MCP 服务器 ID 列table.
      */
     private function getProjectMcpServerIds(MCPDataIsolation $mcpDataIsolation, string $projectId): array
     {

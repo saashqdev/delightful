@@ -20,7 +20,7 @@ class MCPServerToolAdminApi extends AbstractMCPAdminApi
     protected MCPServerToolAppService $mcpServerToolAppService;
 
     /**
-     * 获取MCP服务下的工具列表.
+     * 获取MCP服务下的工具列table.
      */
     public function queries(string $code)
     {

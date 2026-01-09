@@ -34,7 +34,7 @@ class PageDTO extends AbstractDTO
     }
 
     /**
-     * 获取列表数据.
+     * 获取列table数据.
      */
     public function getList(): array
     {
@@ -60,7 +60,7 @@ class PageDTO extends AbstractDTO
     }
 
     /**
-     * 设置列表数据.
+     * 设置列table数据.
      */
     public function setList(array $list): self
     {

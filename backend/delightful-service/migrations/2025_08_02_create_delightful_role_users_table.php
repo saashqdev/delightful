@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->index(['organization_code', 'role_id', 'user_id'], 'idx_organization_code_role_user_id');
             $table->index(['organization_code', 'user_id'], 'idx_organization_code_user_id');
 
-            $table->comment('RBAC角色用户关联表');
+            $table->comment('RBAC角色用户关联table');
         });
     }
 

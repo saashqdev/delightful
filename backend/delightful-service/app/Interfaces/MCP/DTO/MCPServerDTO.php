@@ -27,7 +27,7 @@ class MCPServerDTO extends AbstractDTO
     public string $description = '';
 
     /**
-     * MCP服务图标.
+     * MCP服务icon.
      */
     public string $icon = '';
 

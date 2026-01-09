@@ -118,7 +118,7 @@ class ToolNodeParamsConfig extends AbstractLLMNodeParamsConfig
             'custom_system_input' => $customSystemInput->toArray(),
             'async' => false,
 
-            // 当选择 LLM 模式时，需要有以下值
+            // 当选择 LLM mode时，需要有以下值
             'model' => $this->getDefaultModelString(),
             'model_config' => (new ModelConfig())->getLLMChatConfig(),
             'user_prompt' => ComponentFactory::generateTemplate(StructureType::Value)->toArray(),

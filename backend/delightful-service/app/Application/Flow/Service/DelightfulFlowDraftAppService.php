@@ -17,7 +17,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 class DelightfulFlowDraftAppService extends AbstractFlowAppService
 {
     /**
-     * 查询草稿列表.
+     * 查询草稿列table.
      * @return array{total: int, list: array<DelightfulFlowDraftEntity>, users: array}
      */
     public function queries(Authenticatable $authorization, DelightfulFLowDraftQuery $query, Page $page): array

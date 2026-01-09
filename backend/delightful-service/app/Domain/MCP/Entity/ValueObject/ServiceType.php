@@ -16,7 +16,7 @@ use App\Domain\MCP\Entity\ValueObject\ServiceConfig\SSEServiceConfig;
 
 enum ServiceType: string
 {
-    // 麦吉提供的 mcp 服务
+    // Mage提供的 mcp 服务
     case SSE = 'sse';
     case STDIO = 'stdio';
 

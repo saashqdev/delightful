@@ -38,7 +38,7 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 查询草稿列表.
+     * 查询草稿列table.
      */
     public function queries(string $flowId)
     {

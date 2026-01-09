@@ -42,7 +42,7 @@ class DelightfulFlowVersionDomainService extends AbstractDomainService
     }
 
     /**
-     * 查询版本列表.
+     * 查询版本列table.
      * @return array{total: int, list: array<DelightfulFlowVersionEntity>}
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowVersionQuery $query, Page $page): array

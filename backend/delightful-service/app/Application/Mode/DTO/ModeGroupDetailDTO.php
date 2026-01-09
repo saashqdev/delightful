@@ -97,7 +97,7 @@ class ModeGroupDetailDTO extends AbstractDTO
     }
 
     /**
-     * 对模型按sort字段排序（降序，越大越前）.
+     * 对模型按sortfield排序（降序，越大越前）.
      */
     public function sortModels(): void
     {

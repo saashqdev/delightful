@@ -15,7 +15,7 @@ class AbstractAppService extends AbstractKernelAppService
     use DataIsolationTrait;
 
     /**
-     * 公共匹配字段.
+     * 公共匹配field.
      */
     public function getCommonRules(): array
     {

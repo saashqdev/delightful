@@ -12,7 +12,7 @@ class ThirdPlatformCreateSceneGroup
     // 群名
     private string $title;
 
-    // 群所have者的userid
+    // 群所have者userid
     private string $ownerUserId;
 
     // templateid
@@ -24,10 +24,10 @@ class ThirdPlatformCreateSceneGroup
     // administratorlist
     private array $subadminIds;
 
-    // 新memberwhether可viewhistorymessage
+    // 新memberwhethercanviewhistorymessage
     private int $showHistoryType;
 
-    // whether可searchgroup chat, 0（default）：not可search 1 search
+    // whethercansearchgroup chat, 0（default）：notcansearch 1 search
     private int $searchable = 0;
 
     // 入群whetherneedverify：0（default）：notverify 1：入群verify
@@ -36,7 +36,7 @@ class ThirdPlatformCreateSceneGroup
     // @all userange： 0（default）：所havepersonallcan@all
     private int $mentionAllAuthority = 0;
 
-    // 群管理type：0（default）：所haveperson可管理，1：仅群主可管理
+    // 群管理type：0（default）：所havepersoncan管理，1：仅群主can管理
     private int $managementType = 0;
 
     // whetherstart群禁言：0（default）：not禁言，1：all员禁言

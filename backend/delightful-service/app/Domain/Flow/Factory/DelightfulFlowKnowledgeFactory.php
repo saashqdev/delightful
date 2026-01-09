@@ -45,7 +45,7 @@ class DelightfulFlowKnowledgeFactory
 
         // process检索configuration
         if (! empty($model->retrieve_config)) {
-            // if是string（JSON string），先decoding
+            // ifisstring（JSON string），先decoding
             $config = json_decode($model->retrieve_config, true);
 
             if (is_array($config)) {
@@ -55,7 +55,7 @@ class DelightfulFlowKnowledgeFactory
                 $entity->setRetrieveConfig(RetrieveConfig::createDefault());
             }
         } else {
-            // ifconfiguration为null，settingdefaultconfiguration
+            // ifconfigurationfornull，settingdefaultconfiguration
             $entity->setRetrieveConfig(RetrieveConfig::createDefault());
         }
 
@@ -63,7 +63,7 @@ class DelightfulFlowKnowledgeFactory
     }
 
     /**
-     * 将实bodyconvert为modelpropertyarray.
+     * will实bodyconvertformodelpropertyarray.
      */
     public static function entityToAttributes(KnowledgeBaseEntity $entity): array
     {

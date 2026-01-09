@@ -24,7 +24,7 @@ interface DelightfulChatTopicRepositoryInterface
     public function deleteTopic(DelightfulTopicEntity $delightfulTopicDTO): int;
 
     /**
-     * getconversation的conversationcolumn表.
+     * getconversationconversationcolumn表.
      * @param string[] $topicIds
      * @return array<DelightfulTopicEntity>
      */
@@ -51,7 +51,7 @@ interface DelightfulChatTopicRepositoryInterface
     public function getTopicMessagesByConversationId(string $conversationId): array;
 
     /**
-     * 按timerangegetconversationdownsome话题的message.
+     * 按timerangegetconversationdownsome话题message.
      * @return ClientSequenceResponse[]
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array;

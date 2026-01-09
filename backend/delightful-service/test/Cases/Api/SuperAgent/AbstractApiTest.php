@@ -30,7 +30,7 @@ class AbstractApiTest extends AbstractHttpTest
     {
         return [
             'organization-code' => env('TEST_ORGANIZATION_CODE'),
-            // 换become自己的
+            // 换becomefrom己
             'Authorization' => $this->authorization,
         ];
     }

@@ -36,7 +36,7 @@ class ReplyMessageTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'reply一segmentfinger定content给user';
+        return 'reply一segmentfinger定contentgiveuser';
     }
 
     public function getCallback(): ?Closure
@@ -81,7 +81,7 @@ class ReplyMessageTool extends AbstractBuiltInTool
             "type": "string",
             "key": "type",
             "title": "messagetype",
-            "description": "messagetype；可usetypehave text、markdown、image、video、audio、file，default是 text",
+            "description": "messagetype；canusetypehave text、markdown、image、video、audio、file，defaultis text",
             "required": null,
             "value": null,
             "encryption": false,

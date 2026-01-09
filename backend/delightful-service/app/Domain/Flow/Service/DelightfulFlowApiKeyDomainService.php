@@ -30,7 +30,7 @@ class DelightfulFlowApiKeyDomainService extends AbstractDomainService
         if ($savingDelightfulFlowApiKeyEntity->shouldCreate()) {
             $savingDelightfulFlowApiKeyEntity->prepareForCreate();
             $delightfulFlowApiKeyEntity = $savingDelightfulFlowApiKeyEntity;
-            // checkwhether重复，毕竟是need一对一的关系
+            // checkwhether重复，毕竟isneed一to一close系
             /* @phpstan-ignore-next-line */
             if ($delightfulFlowApiKeyEntity->getType() === ApiKeyType::Personal) {
                 if ($this->delightfulFlowApiKeyRepository->exist($dataIsolation, $delightfulFlowApiKeyEntity)) {
@@ -50,7 +50,7 @@ class DelightfulFlowApiKeyDomainService extends AbstractDomainService
 
     public function changeSecretKey(FlowDataIsolation $dataIsolation, string $code, ?string $operator = null): DelightfulFlowApiKeyEntity
     {
-        // 只能modify自己的
+        // 只能modifyfrom己
         $delightfulFlowApiKeyEntity = $this->delightfulFlowApiKeyRepository->getByCode($dataIsolation, $code, $operator);
         if (! $delightfulFlowApiKeyEntity) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $code]);

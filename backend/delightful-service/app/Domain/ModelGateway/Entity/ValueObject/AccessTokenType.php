@@ -9,7 +9,7 @@ namespace App\Domain\ModelGateway\Entity\ValueObject;
 
 /**
  * accesstokentype: user、organization、application.
- * application/user是跨organization的.
+ * application/useris跨organization.
  */
 enum AccessTokenType: string
 {

@@ -64,7 +64,7 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     }
 
     /**
-     * passDelightfulID和organizationencodingfinduser.
+     * passDelightfulIDandorganizationencodingfinduser.
      */
     public function findUserByDelightfulIdAndOrganization(string $delightfulId, ?string $organizationCode = null): ?DelightfulUserEntity
     {

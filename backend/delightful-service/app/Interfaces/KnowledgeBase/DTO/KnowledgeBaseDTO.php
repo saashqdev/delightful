@@ -44,24 +44,24 @@ class KnowledgeBaseDTO extends AbstractFlowDTO
     public int $fragmentCount = 0;
 
     /**
-     * expected的slicesegmentquantity.
+     * expectedslicesegmentquantity.
      */
     public int $expectedCount = 0;
 
     /**
-     * 已complete的slicesegmentquantity.
+     * 已completeslicesegmentquantity.
      */
     public int $completedCount = 0;
 
     public int $userOperation = 0;
 
     /**
-     * 业务维护的expecttotal.
+     * 业务维护expecttotal.
      */
     public int $expectedNum = 0;
 
     /**
-     * 业务维护的已complete的quantity.
+     * 业务维护已completequantity.
      */
     public int $completedNum = 0;
 

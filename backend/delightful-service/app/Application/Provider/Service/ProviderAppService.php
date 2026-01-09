@@ -44,7 +44,7 @@ class ProviderAppService
         // builddata隔离object
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
-        // 收集所have唯一的service商configurationID
+        // 收集所have唯一service商configurationID
         $configIds = array_unique(array_map(fn ($model) => $model->getServiceProviderConfigId(), $models));
 
         // 批quantitygetservice商实body（避免嵌setquery）
@@ -53,7 +53,7 @@ class ProviderAppService
         // 批quantitygetservice商configuration实body（useatget别名）
         $configEntities = $this->providerConfigDomainService->getConfigByIdsWithoutOrganizationFilter($configIds);
 
-        // 收集所havegraph标path按organizationencodingminutegroup（includemodelgraph标和service商graph标）
+        // 收集所havegraph标path按organizationencodingminutegroup（includemodelgraph标andservice商graph标）
         $iconsByOrg = [];
         $iconToModelMap = [];
         $iconToProviderMap = [];
@@ -116,7 +116,7 @@ class ProviderAppService
             }
         }
         $locale = $this->translator->getLocale();
-        // createDTO并setgraph标URL
+        // createDTOandsetgraph标URL
         $modelDTOs = [];
         foreach ($models as $model) {
             $modelDTO = new BeDelightfulModelDTO($model->toArray());
@@ -189,7 +189,7 @@ class ProviderAppService
     }
 
     /**
-     * 判断whether为customizeservice商.
+     * 判断whetherforcustomizeservice商.
      */
     private function isCustomProvider(ProviderEntity $providerEntity): bool
     {

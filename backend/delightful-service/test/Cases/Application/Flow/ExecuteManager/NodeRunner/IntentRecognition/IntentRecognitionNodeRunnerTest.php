@@ -73,7 +73,7 @@ class IntentRecognitionNodeRunnerTest extends ExecuteManagerBaseTest
                     "expression_value": [
                         {
                             "type": "input",
-                            "value": "品尝了美食，喝了饮料，喝水not算",
+                            "value": "品尝美食，喝饮料，喝水not算",
                             "name": "",
                             "args": null
                         }
@@ -150,7 +150,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => '我今day去了广州看了小蛮腰，downtime想带我朋友一起去',
+            'intent' => '我今daygo广州看小蛮腰，downtime想带我朋友一upgo',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['456'], $vertexResult->getChildrenIds());
@@ -158,7 +158,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => '我今day吃了糖醋rowbone',
+            'intent' => '我今day吃糖醋rowbone',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['123'], $vertexResult->getChildrenIds());
@@ -217,7 +217,7 @@ JSON,
                     "expression_value": [
                         {
                             "type": "input",
-                            "value": "品尝了美食\n喝了饮料\n喝水not算",
+                            "value": "品尝美食\n喝饮料\n喝水not算",
                             "name": "",
                             "args": null
                         }
@@ -294,7 +294,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => '我今day去了广州吃了莞城大package，downtime想带我朋友一起去',
+            'intent' => '我今daygo广州吃莞城大package，downtime想带我朋友一upgo',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['123'], $vertexResult->getChildrenIds());

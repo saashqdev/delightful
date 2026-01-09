@@ -11,17 +11,17 @@ use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 
 /**
  * 多模statecontentformat化tool
- * useat统一processdifferent场景down的多模statecontentformat化.
+ * useat统一processdifferent场景down多模statecontentformat化.
  */
 class MultiModalContentFormatter
 {
     /**
-     * 将所haveattachmentformat化totextmiddle.
+     * will所haveattachmentformat化totextmiddle.
      *
      * @param string $originalContent originaltextcontent
      * @param string $visionResponse 视觉analyzeresult
      * @param AttachmentInterface[] $attachments 所haveattachmentarray
-     * @return string format化back的textcontent
+     * @return string format化backtextcontent
      */
     public static function formatAllAttachments(
         string $originalContent,
@@ -32,7 +32,7 @@ class MultiModalContentFormatter
             return $originalContent;
         }
 
-        // minute离image和nonimageattachment
+        // minute离imageandnonimageattachment
         $imageAttachments = [];
         $nonImageAttachments = [];
 
@@ -53,12 +53,12 @@ class MultiModalContentFormatter
 
     /**
      * format化imagecontenttotext
-     * support单张image和多张image场景.
+     * support单张imageand多张image场景.
      *
      * @param string $originalContent originaltextcontent
      * @param string $visionResponse 视觉analyzeresult
      * @param AttachmentInterface[] $imageAttachments imageattachmentarray
-     * @return string add了imageinfo的textcontent
+     * @return string addimageinfotextcontent
      */
     protected static function formatImageContent(
         string $originalContent,
@@ -92,7 +92,7 @@ class MultiModalContentFormatter
      *
      * @param string $originalContent originaltextcontent
      * @param AttachmentInterface[] $nonImageAttachments nonimageattachmentarray
-     * @return string add了nonimageattachmentinfo的textcontent
+     * @return string addnonimageattachmentinfotextcontent
      */
     protected static function formatNonImageAttachments(
         string $originalContent,
@@ -105,7 +105,7 @@ class MultiModalContentFormatter
 
         $content = $originalContent;
 
-        // addnonimageattachment的link
+        // addnonimageattachmentlink
         foreach ($nonImageAttachments as $attachment) {
             $url = $attachment->getUrl();
             $name = $attachment->getName();

@@ -78,7 +78,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
             $departmentIds = array_column($departmentUsers, 'department_id');
 
             $departments = $departmentDomain->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
-            // add path 去again查一time
+            // add path goagain查一time
             foreach ($departments as $department) {
                 $pathDepartments = explode('/', $department->getPath());
                 $departmentIds = array_merge($departmentIds, $pathDepartments);
@@ -97,7 +97,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
                 $phoneDesensitization = true;
             }
             foreach ($delightfulUsers as $delightfulUser) {
-                // ifnot是personcategory，filter
+                // ifnotispersoncategory，filter
                 if ($delightfulUser->getUserType() !== UserType::Human) {
                     continue;
                 }
@@ -142,7 +142,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         $executionData->saveNodeContext($this->node->getNodeId(), $result);
     }
 
-    // -------- bydownmethod十minute粗暴，notsuggestion学习 🔞🈲 --------  todo etc es or flink cdc 之category的出来againoptimize
+    // -------- bydownmethod十minute粗暴，notsuggestion学习 🔞🈲 --------  todo etc es or flink cdc 之categoryoutcomeagainoptimize
 
     private function getUserIdsByUsername(Operator $operator, OperatorType $operatorType, mixed $username, ?array $filterUserIds = null): array
     {
@@ -377,7 +377,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         if (empty($departmentPaths)) {
             return [];
         }
-        // get这些department的所havedownleveldepartmentid
+        // get这些department所havedownleveldepartmentid
         $departmentSubIds = $this->getAllChildrenByDepartmentIds($operator, $departmentPaths);
         $departmentIds = array_merge(array_keys($departmentPaths), $departmentSubIds);
         $userDB = DepartmentUserModel::query()
@@ -407,7 +407,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         }
 
         $departmentsChildrenIds = $childrenDepartments;
-        // merge && 去重
+        // merge && go重
         $departmentIds = array_merge(...$departmentsChildrenIds);
         return array_values(array_unique($departmentIds));
     }

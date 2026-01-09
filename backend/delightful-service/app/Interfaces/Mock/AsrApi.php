@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * ASR task Mock service
- * 模拟沙箱middle的audiomerge和 ASR taskprocess.
+ * 模拟沙箱middleaudiomergeand ASR taskprocess.
  */
 class AsrApi
 {
@@ -98,7 +98,7 @@ class AsrApi
         $noteFileConfig = $request->input('note_file');
         $transcriptFileConfig = $request->input('transcript_file');
 
-        // use Redis count器模拟round询进degree
+        // use Redis count器模拟round询enterdegree
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $count = (int) $this->redis->incr($countKey);
         $this->redis->expire($countKey, AsrConfig::MOCK_POLLING_TTL); // 10minute钟expire
@@ -130,8 +130,8 @@ class AsrApi
         $targetDir = $audioConfig['target_dir'] ?? '';
         $outputFilename = $audioConfig['output_filename'] ?? 'audio';
 
-        // 模拟真实沙箱line为：according to output_filename 重命名directory
-        // extract原directorymiddle的time戳部minute（format：_YYYYMMDD_HHMMSS）
+        // 模拟真实沙箱linefor：according to output_filename 重命名directory
+        // extract原directorymiddletime戳部minute（format：_YYYYMMDD_HHMMSS）
         $timestamp = '';
         if (preg_match('/_(\d{8}_\d{6})$/', $targetDir, $matches)) {
             $timestamp = '_' . $matches[1];
@@ -148,18 +148,18 @@ class AsrApi
         $responseData = [
             'status' => SandboxAsrStatusEnum::COMPLETED->value,
             'task_key' => $taskKey,
-            'intelligent_title' => $outputFilename, // useoutputfile名作为智能title
+            'intelligent_title' => $outputFilename, // useoutputfile名asfor智能title
             'error_message' => null,
             'files' => [
                 'audio_file' => [
                     'filename' => $audioFileName,
-                    'path' => $audioPath, // use重命名back的directorypath
+                    'path' => $audioPath, // use重命名backdirectorypath
                     'size' => 127569,
                     'duration' => 17.0,
                     'action_performed' => 'merged_and_created',
                     'source_path' => null,
                 ],
-                'note_file' => null, // default为 null，table示笔记file为空ornot存in
+                'note_file' => null, // defaultfor null，table示笔记filefor空ornot存in
             ],
             'deleted_files' => [],
             'operations' => [
@@ -169,26 +169,26 @@ class AsrApi
             ],
         ];
 
-        // ifhave笔记fileconfigurationandfilesize > 0，addtoreturnmiddle（模拟真实沙箱的笔记filecontentcheck）
+        // ifhave笔记fileconfigurationandfilesize > 0，addtoreturnmiddle（模拟真实沙箱笔记filecontentcheck）
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
-            // userequestmiddle提供的 target_path，而not是硬encodingfile名
-            // 这样cancorrectsupport国际化的file名
+            // userequestmiddle提供 target_path，whilenotis硬encodingfile名
+            // 这样cancorrectsupport国际化file名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 
-            // 模拟真实沙箱line为：onlywhen笔记filehavecontento clock才return详细info
-            // 这withinsimplifyprocess，default假设havecontent（真实沙箱willcheckfilecontentwhether为空）
+            // 模拟真实沙箱linefor：onlywhen笔记filehavecontento clock才return详细info
+            // 这withinsimplifyprocess，default假设havecontent（真实沙箱willcheckfilecontentwhetherfor空）
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
-                'path' => $noteFilePath, // userequestmiddle的 target_path
-                'size' => 256, // 模拟havecontent的filesize
+                'path' => $noteFilePath, // userequestmiddle target_path
+                'size' => 256, // 模拟havecontentfilesize
                 'duration' => null,
                 'action_performed' => 'renamed_and_moved',
                 'source_path' => $noteFileConfig['source_path'] ?? '',
             ];
         }
 
-        // ifhavestream识别fileconfiguration，recorddelete操作
+        // ifhavestream识别fileconfiguration，recorddelete操as
         if ($transcriptFileConfig !== null && isset($transcriptFileConfig['source_path'])) {
             $responseData['deleted_files'][] = [
                 'path' => $transcriptFileConfig['source_path'],
@@ -220,7 +220,7 @@ class AsrApi
             'workspace_dir' => $workspaceDir,
         ]);
 
-        // cleanuptask相关的 Redis status
+        // cleanuptask相close Redis status
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $this->redis->del($countKey);
 

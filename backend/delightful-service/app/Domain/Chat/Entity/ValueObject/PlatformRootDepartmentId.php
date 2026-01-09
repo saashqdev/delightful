@@ -10,7 +10,7 @@ namespace App\Domain\Chat\Entity\ValueObject;
 use App\Domain\Contact\Entity\ValueObject\PlatformType;
 
 /**
- * 平台的rootdepartmentID.
+ * 平台rootdepartmentID.
  */
 class PlatformRootDepartmentId
 {

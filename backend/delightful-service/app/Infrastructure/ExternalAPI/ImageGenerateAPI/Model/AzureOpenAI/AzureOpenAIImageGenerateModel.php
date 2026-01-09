@@ -42,7 +42,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
     public function generateImageRaw(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof AzureOpenAIImageGenerateRequest) {
-            $this->logger->error('Azure OpenAIgraph像generate：requesttypeerror', [
+            $this->logger->error('Azure OpenAIgraphlikegenerate：requesttypeerror', [
                 'expected' => AzureOpenAIImageGenerateRequest::class,
                 'actual' => get_class($imageGenerateRequest),
             ]);
@@ -51,8 +51,8 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
 
         $this->validateRequest($imageGenerateRequest);
 
-        // 无参考graph像，use原have的generate逻辑
-        $this->logger->info('Azure OpenAIgraph像generate：startcallgenerateAPI', [
+        // 无参考graphlike，use原havegenerate逻辑
+        $this->logger->info('Azure OpenAIgraphlikegenerate：startcallgenerateAPI', [
             'prompt' => $imageGenerateRequest->getPrompt(),
             'size' => $imageGenerateRequest->getSize(),
             'quality' => $imageGenerateRequest->getQuality(),
@@ -69,13 +69,13 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
 
             $result = $this->api->generateImage($requestData);
 
-            $this->logger->info('Azure OpenAIgraph像generate：APIcallsuccess', [
+            $this->logger->info('Azure OpenAIgraphlikegenerate：APIcallsuccess', [
                 'result_data_count' => isset($result['data']) ? count($result['data']) : 0,
             ]);
 
             return $result;
         } catch (Exception $e) {
-            $this->logger->error('Azure OpenAIgraph像generate：APIcallfail', [
+            $this->logger->error('Azure OpenAIgraphlikegenerate：APIcallfail', [
                 'error' => $e->getMessage(),
             ]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
@@ -105,7 +105,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraph像并returnOpenAIformatresponse - Azure OpenAIversion.
+     * generategraphlikeandreturnOpenAIformatresponse - Azure OpenAIversion.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
@@ -118,12 +118,12 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof AzureOpenAIImageGenerateRequest) {
-            $this->logger->error('Azure OpenAI OpenAIformat生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Azure OpenAI OpenAIformat生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
         try {
-            // 3. graph像generate（synchandle，Azure OpenAI API support n parameter一timepropertygenerate多张image）
+            // 3. graphlikegenerate（synchandle，Azure OpenAI API support n parameter一timepropertygenerate多张image）
             if (! empty($imageGenerateRequest->getReferenceImages())) {
                 $editModel = new AzureOpenAIImageEditModel($this->configItem);
                 $editRequest = $this->convertToEditRequest($imageGenerateRequest);
@@ -175,7 +175,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
             $result = $this->generateImageRaw($imageGenerateRequest);
             return $this->buildResponse($result);
         } catch (Exception $e) {
-            $this->logger->error('Azure OpenAIgraph像generate：graph像generatefail', [
+            $this->logger->error('Azure OpenAIgraphlikegenerate：graphlikegeneratefail', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -187,14 +187,14 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
     {
         try {
             if (! isset($result['data'])) {
-                $this->logger->error('Azure OpenAIgraph像generate：responseformaterror - 缺少datafield', [
+                $this->logger->error('Azure OpenAIgraphlikegenerate：responseformaterror - 缺少datafield', [
                     'response' => $result,
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR, 'image_generate.response_format_error');
             }
 
             if (empty($result['data'])) {
-                $this->logger->error('Azure OpenAIgraph像generate：responsedata为null', [
+                $this->logger->error('Azure OpenAIgraphlikegenerate：responsedatafornull', [
                     'response' => $result,
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::NO_VALID_IMAGE, 'image_generate.no_image_generated');
@@ -203,7 +203,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
             $images = array_column($result['data'], 'b64_json');
 
             if (empty($images)) {
-                $this->logger->error('Azure OpenAIgraph像generate：所havegraph像datainvalid');
+                $this->logger->error('Azure OpenAIgraphlikegenerate：所havegraphlikedatainvalid');
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, 'image_generate.invalid_image_data');
             }
 
@@ -211,13 +211,13 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
             $images = array_filter($images);
 
             if (empty($images)) {
-                $this->logger->error('Azure OpenAIgraph像generate：filterback无validgraph像data');
+                $this->logger->error('Azure OpenAIgraphlikegenerate：filterback无validgraphlikedata');
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, 'image_generate.no_valid_image_data');
             }
 
             return new ImageGenerateResponse(ImageGenerateType::BASE_64, $images);
         } catch (Exception $e) {
-            $this->logger->error('Azure OpenAIgraph像generate：buildresponsefail', [
+            $this->logger->error('Azure OpenAIgraphlikegenerate：buildresponsefail', [
                 'error' => $e->getMessage(),
                 'result' => $result,
             ]);
@@ -231,7 +231,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
     }
 
     /**
-     * whenhave参考graph像o clock，usegraph像editmodelgenerategraph像.
+     * whenhave参考graphlikeo clock，usegraphlikeeditmodelgenerategraphlike.
      */
     private function generateImageWithReference(AzureOpenAIImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -240,7 +240,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
             $editRequest = $this->convertToEditRequest($imageGenerateRequest);
             return $editModel->generateImage($editRequest);
         } catch (Exception $e) {
-            $this->logger->error('Azure OpenAIgraph像generate：参考graph像generatefail', [
+            $this->logger->error('Azure OpenAIgraphlikegenerate：参考graphlikegeneratefail', [
                 'error' => $e->getMessage(),
             ]);
             throw $e;
@@ -248,7 +248,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
     }
 
     /**
-     * 将graph像generaterequestconvert为graph像editrequest
+     * willgraphlikegeneraterequestconvertforgraphlikeeditrequest
      */
     private function convertToEditRequest(AzureOpenAIImageGenerateRequest $imageGenerateRequest): AzureOpenAIImageEditRequest
     {
@@ -258,12 +258,12 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
             $editRequest->setReferenceImages($imageGenerateRequest->getReferenceImages());
             $editRequest->setSize($imageGenerateRequest->getSize());
             $editRequest->setN($imageGenerateRequest->getN());
-            // graph像editnotneedmask，所bysetting为null
+            // graphlikeeditnotneedmask，所bysettingfornull
             $editRequest->setMaskUrl(null);
 
             return $editRequest;
         } catch (Exception $e) {
-            $this->logger->error('Azure OpenAIgraph像generate：requestformatconvertfail', [
+            $this->logger->error('Azure OpenAIgraphlikegenerate：requestformatconvertfail', [
                 'error' => $e->getMessage(),
             ]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.request_conversion_failed');
@@ -273,12 +273,12 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
     private function validateRequest(AzureOpenAIImageGenerateRequest $request): void
     {
         if (empty($request->getPrompt())) {
-            $this->logger->error('Azure OpenAIgraph像generate：缺少必要parameter - prompt');
+            $this->logger->error('Azure OpenAIgraphlikegenerate：缺少必要parameter - prompt');
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.prompt_required');
         }
 
         if ($request->getN() < 1 || $request->getN() > 10) {
-            $this->logger->error('Azure OpenAIgraph像generate：generatequantity超出range', [
+            $this->logger->error('Azure OpenAIgraphlikegenerate：generatequantity超outrange', [
                 'requested' => $request->getN(),
                 'valid_range' => '1-10',
             ]);
@@ -287,7 +287,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
     }
 
     /**
-     * 为Azure OpenAIoriginaldataaddwatermark.
+     * forAzure OpenAIoriginaldataaddwatermark.
      */
     private function processAzureOpenAIRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -301,7 +301,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
             }
 
             try {
-                // handlebase64format的image
+                // handlebase64formatimage
                 $item['b64_json'] = $this->watermarkProcessor->addWatermarkToBase64($item['b64_json'], $imageGenerateRequest);
             } catch (Exception $e) {
                 // watermarkhandlefailo clock，recorderrorbutnot影响imagereturn
@@ -326,7 +326,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
         }
 
         if (empty($result['data']) || ! is_array($result['data'])) {
-            throw new Exception('Azure OpenAIresponsedataformaterror：datafield为nullornot是array');
+            throw new Exception('Azure OpenAIresponsedataformaterror：datafieldfornullornotisarray');
         }
 
         $hasValidImage = false;
@@ -338,12 +338,12 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
         }
 
         if (! $hasValidImage) {
-            throw new Exception('Azure OpenAIresponsedataformaterror：缺少valid的graph像data');
+            throw new Exception('Azure OpenAIresponsedataformaterror：缺少validgraphlikedata');
         }
     }
 
     /**
-     * 将Azure OpenAIimagedataaddtoOpenAIresponseobjectmiddle.
+     * willAzure OpenAIimagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponseAzureOpenAI(
         OpenAIFormatResponse $response,
@@ -362,7 +362,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
                 continue;
             }
 
-            // handlewatermark（将base64convert为URL）
+            // handlewatermark（willbase64convertforURL）
             $processedUrl = $item['b64_json'];
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToBase64($item['b64_json'], $imageGenerateRequest);
@@ -373,7 +373,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
                 // watermarkhandlefailo clockuseoriginalbase64data
             }
 
-            // 只returnURLformat，与其他model保持一致
+            // 只returnURLformat，and其他model保持一致
             $currentData[] = [
                 'url' => $processedUrl,
             ];

@@ -16,7 +16,7 @@ use App\Infrastructure\Core\AbstractDTO;
 use Hyperf\Codec\Json;
 
 /**
- * service商downsurface单modeldetail的 dto.
+ * service商downsurface单modeldetail dto.
  */
 class ProviderModelDetailDTO extends AbstractDTO
 {
@@ -42,7 +42,7 @@ class ProviderModelDetailDTO extends AbstractDTO
 
     protected Status $status;
 
-    protected ?DisabledByType $disabledBy = null; // disable来源：official-官方disable，user-userdisable，NULL-未disable
+    protected ?DisabledByType $disabledBy = null; // disablecome源：official-官方disable，user-userdisable，NULL-未disable
 
     protected int $beDelightfulDisplayState = 0;
 

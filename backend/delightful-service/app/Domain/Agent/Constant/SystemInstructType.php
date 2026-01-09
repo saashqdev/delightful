@@ -52,7 +52,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * getsystemfinger令对应的graph标.
+     * getsystemfinger令to应graph标.
      */
     public function getIcon(): string
     {
@@ -66,7 +66,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * getdefault的system交互finger令configuration.
+     * getdefaultsystem交互finger令configuration.
      */
     public static function getDefaultInstructs(): array
     {
@@ -136,7 +136,7 @@ enum SystemInstructType: int
     public static function requiresContent(int $type): bool
     {
         // 目front所havesystemfinger令allnotneedcontent
-        // if未来havesystemfinger令needcontent，canin这withinadd判断
+        // if未comehavesystemfinger令needcontent，canin这withinadd判断
         return match (self::fromType($type)) {
             self::EMOJI, self::FILE, self::NEW_TOPIC, self::SCHEDULE, self::RECORD => false,
         };
@@ -144,7 +144,7 @@ enum SystemInstructType: int
 
     /**
      * ensuresystem交互finger令存in，if缺少then补充.
-     * @return array return补充back的finger令array
+     * @return array return补充backfinger令array
      */
     public static function ensureSystemInstructs(array $instructs): array
     {
@@ -153,7 +153,7 @@ enum SystemInstructType: int
         $toolbarGroupIndex = null;
         $toolbarGroup = null;
 
-        // findtool栏group和现have的systemfinger令
+        // findtool栏groupand现havesystemfinger令
         foreach ($instructs as $index => $group) {
             if (isset($group['position']) && $group['position'] === InstructGroupPosition::TOOLBAR->value) {
                 $hasSystemGroup = true;
@@ -172,7 +172,7 @@ enum SystemInstructType: int
             ];
         }
 
-        // minute离systemfinger令和nonsystemfinger令
+        // minute离systemfinger令andnonsystemfinger令
         $systemInstructs = [];
         $normalInstructs = [];
         foreach ($toolbarGroup['items'] as $item) {
@@ -184,7 +184,7 @@ enum SystemInstructType: int
             }
         }
 
-        // check缺失的systemfinger令type并补充
+        // check缺失systemfinger令typeand补充
         foreach (self::cases() as $case) {
             if (! in_array($case->value, $systemTypes)) {
                 $systemInstructs[$case->value] = [
@@ -200,7 +200,7 @@ enum SystemInstructType: int
         // 按枚举definition顺序sortsystemfinger令
         ksort($systemInstructs);
 
-        // 重新group合tool栏group的 items，systemfinger令infront
+        // 重新group合tool栏group items，systemfinger令infront
         $toolbarGroup['items'] = array_merge(array_values($systemInstructs), $normalInstructs);
 
         // updateoraddtool栏group

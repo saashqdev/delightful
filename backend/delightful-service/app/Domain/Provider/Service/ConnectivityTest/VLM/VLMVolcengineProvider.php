@@ -42,7 +42,7 @@ class VLMVolcengineProvider implements IProvider
         $body = [];
         // 文生graphconfiguration
         $body['req_key'] = $modelVersion;
-        $body['model_version'] = 'general_v2.1_L'; // 先写死notissue的，目front的文生graphsupport这value，graph生graphnot这value
+        $body['model_version'] = 'general_v2.1_L'; // 先写死notissue，目front文生graphsupport这value，graph生graphnot这value
         $body['width'] = 512;
         $body['height'] = 512;
         $body['prompt'] = 'generate一只狗';

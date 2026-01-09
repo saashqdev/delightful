@@ -53,7 +53,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
     // decrease群member
     public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int
     {
-        // todo if是群主leave,need转移群主
+        // todo ifis群主leave,need转移群主
         return $this->delightfulGroupRepository->removeUsersFromGroup($delightfulGroupEntity, $userIds);
     }
 
@@ -116,14 +116,14 @@ class DelightfulGroupDomainService extends AbstractDomainService
     {
         $groupPageResponseDTO = $this->delightfulGroupRepository->getUserGroupList($pageToken, $dataIsolation->getCurrentUserId(), $pageSize);
         $groupDTOS = $groupPageResponseDTO->getItems();
-        // userin这些group chatmiddle的sessionid
+        // userin这些group chatmiddlesessionid
         $groupIds = array_column($groupDTOS, 'id');
         $conversations = $this->delightfulConversationRepository->getConversationsByReceiveIds($dataIsolation->getCurrentUserId(), $groupIds);
         /** @var DelightfulConversationEntity[] $conversations */
         $conversations = array_column($conversations, null, 'receive_id');
         $groupList = [];
         foreach ($groupDTOS as $groupDTO) {
-            // returngroup chat对应的sessionid
+            // returngroup chatto应sessionid
             $groupId = $groupDTO->getId();
             $groupDTO->setConversationId($conversations[$groupId]->getId() ?? null);
             $groupList[] = $groupDTO;
@@ -157,12 +157,12 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 }
             }
             $content = $content->toArray();
-            // pass protobuf message结构,createdelightful chat的object,为弃use protobuf 做准备
+            // pass protobuf message结构,createdelightful chatobject,for弃use protobuf 做准备
             if (in_array($controlMessageType, [ControlMessageType::GroupUsersRemove, ControlMessageType::GroupDisband], true)) {
-                // 这些user已经from群membertablemiddle移except,but是他们also未收tobe移except的message
+                // 这些user已经from群membertablemiddle移except,butis他们also未收tobe移exceptmessage
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
                 if ($controlMessageType === ControlMessageType::GroupDisband) {
-                    // 解散group chat,所havepersonall是be移except的.这withindecreasestreamquantityconsume.
+                    // 解散group chat,所havepersonallisbe移except.这withindecreasestreamquantityconsume.
                     $content['user_ids'] = [];
                 }
             }
@@ -180,7 +180,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         array $seqContent,
         ControlMessageType $controlMessageType
     ): DelightfulSeqEntity {
-        // returnsessionid,方便front端操作
+        // returnsessionid,方便front端操as
         $userConversations = $this->getGroupUserConversationsByUserIds([$dataIsolation->getCurrentUserId()], $groupEntity->getId());
         $seqContent['conversation_id'] = $userConversations[$dataIsolation->getCurrentUserId()] ?? '';
         $seqEntity = $this->getGroupChangeSeqEntity($dataIsolation, $groupEntity, $seqContent, $controlMessageType);
@@ -208,18 +208,18 @@ class DelightfulGroupDomainService extends AbstractDomainService
 
     public function transferGroupOwner(DelightfulGroupEntity $groupEntity, DataIsolation $dataIsolation, DelightfulGroupEntity $delightfulGroupDTO): bool
     {
-        // checkuserwhether是群主
+        // checkuserwhetheris群主
         $oldGroupOwner = $groupEntity->getGroupOwner();
         if ($oldGroupOwner !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_ONLY_OWNER_CAN_TRANSFER);
         }
-        // checkbe转让的userwhetheringroup chatmiddle
+        // checkbe转letuserwhetheringroup chatmiddle
         $groupId = $groupEntity->getId();
         $newOwnerUserId = $delightfulGroupDTO->getGroupOwner();
         if (! $this->isUserInGroup($groupId, $newOwnerUserId)) {
             ExceptionBuilder::throw(ChatErrorCode::USER_NOT_FOUND);
         }
-        // 转让群主
+        // 转let群主
         return $this->delightfulGroupRepository->transferGroupOwner($groupId, $oldGroupOwner, $newOwnerUserId);
     }
 
@@ -241,7 +241,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             'refer_message_id' => '',
             'sender_message_id' => '',
             'conversation_id' => $seqContent['conversation_id'] ?? '',
-            'status' => DelightfulMessageStatus::Read->value, // 控制messagenotneed已读回执
+            'status' => DelightfulMessageStatus::Read->value, // 控制messagenotneed已读return执
             'created_at' => $time,
             'updated_at' => $time,
             'app_message_id' => '',
@@ -276,7 +276,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         $time = date('Y-m-d H:i:s');
         $seqListCreateDTO = [];
         $groupId = $content['group_id'] ?? '';
-        // 群memberincreaseo clock,为新加入的memberreturnsessionid
+        // 群memberincreaseo clock,for新加入memberreturnsessionid
         $userConversations = $this->getGroupUserConversationsByUserIds(array_keys($users), $groupId);
         $userContent = $content;
         foreach ($users as $user) {
@@ -284,7 +284,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             if (empty($userId)) {
                 continue;
             }
-            // not为操author重复generateseq. 因为in投mq之front,已经为操authorgenerate了seq
+            // notfor操author重复generateseq. 因forin投mq之front,已经for操authorgenerateseq
             if ($userId === $operateUserId) {
                 continue;
             }
@@ -308,7 +308,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 'refer_message_id' => '',
                 'sender_message_id' => '',
                 'conversation_id' => $conversationId,
-                'status' => DelightfulMessageStatus::Read->value, // send方自己的message,default已读
+                'status' => DelightfulMessageStatus::Read->value, // send方from己message,default已读
                 'created_at' => $time,
                 'updated_at' => $time,
                 'app_message_id' => '',

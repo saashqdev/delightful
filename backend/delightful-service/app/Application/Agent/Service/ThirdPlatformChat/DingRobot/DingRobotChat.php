@@ -117,7 +117,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
     public function sendMessage(ThirdPlatformChatMessage $thirdPlatformChatMessage, MessageInterface $message): void
     {
-        // 目front仅sendtext出去
+        // 目front仅sendtextoutgo
         if (! $message instanceof TextMessage) {
             return;
         }
@@ -134,7 +134,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendOneOnOneChatMessages($param);
             } catch (Throwable $throwable) {
-                // 钉钉 downloadimagetimemore长，超过了3000ms，网关直接return了timeouterror。sendmessage此o clockskip
+                // 钉钉 downloadimagetimemore长，超pass3000ms，网close直接returntimeouterror。sendmessage此o clockskip
                 simple_log('SendOneOnOneChatMessagesError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -152,7 +152,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendGroupMessage($param);
             } catch (Throwable $throwable) {
-                // 钉钉 downloadimagetimemore长，超过了3000ms，网关直接return了timeouterror。sendmessage此o clockskip
+                // 钉钉 downloadimagetimemore长，超pass3000ms，网close直接returntimeouterror。sendmessage此o clockskip
                 simple_log('SendGroupMessageError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -243,7 +243,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
     private function setUserExtInfo(ThirdPlatformChatMessage $thirdPlatformChatMessage): void
     {
-        // cache起来
+        // cacheupcome
         $cacheKey = "ding_user_ext_info_{$thirdPlatformChatMessage->getUserId()}";
         if ($cacheValue = $this->cache->get($cacheKey)) {
             $userExtInfo = unserialize($cacheValue);
@@ -265,7 +265,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             realName: $userInfo->getName(),
         );
 
-        // getuser的所havedepartmentuplevel
+        // getuser所havedepartmentuplevel
         $param = new GetAllParentDepartmentByUserParameter($this->openDevFactory->accessTokenEndpoint->get());
         $param->setUserId($thirdPlatformChatMessage->getUserId());
         $list = $this->openDevFactory->departmentEndpoint->getAllParentDepartmentByUser($param);

@@ -83,7 +83,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * initialize实body的ID和time戳（为新create的实bodyset）.
+     * initialize实bodyIDandtime戳（for新create实bodyset）.
      * @param mixed $entity
      */
     protected function initializeEntityForCreation($entity, array &$attributes): void
@@ -106,14 +106,14 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * override getAttributes methodbycorrectprocess复杂field的serialize.
+     * override getAttributes methodbycorrectprocess复杂fieldserialize.
      */
     protected function getFieldAttributes(AbstractEntity $entity): array
     {
         $attributes = [];
         $array = $entity->toArray();
         foreach ($array as $key => $value) {
-            // 对复杂fieldconduct特殊process
+            // to复杂fieldconduct特殊process
             if (in_array($key, ['config', 'translate'], true) && (is_array($value) || is_object($value))) {
                 $value = Json::encode($value);
             }
@@ -132,7 +132,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 准备移except软删相关feature，temporary这样写。create带have软deletefilter的 ProviderConfigModel querybuild器.
+     * 准备移except软删相closefeature，temporary这样写。create带have软deletefilter ProviderConfigModel querybuild器.
      */
     private function createConfigQuery(): Builder
     {
@@ -140,7 +140,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * 准备移except软删相关feature，temporary这样写。create带have软deletefilter的 ProviderModelModel querybuild器.
+     * 准备移except软删相closefeature，temporary这样写。create带have软deletefilter ProviderModelModel querybuild器.
      */
     private function createProviderModelQuery(): Builder
     {

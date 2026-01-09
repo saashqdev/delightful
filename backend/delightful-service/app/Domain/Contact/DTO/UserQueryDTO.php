@@ -23,7 +23,7 @@ class UserQueryDTO extends AbstractEntity
     protected string $departmentId = '';
 
     /**
-     * up一页的token. 对atmysql来说,return累积offsetquantity;对ates来说,return游标.
+     * up一页token. toatmysqlcome说,return累积offsetquantity;toatescome说,return游标.
      */
     protected string $pageToken = '';
 

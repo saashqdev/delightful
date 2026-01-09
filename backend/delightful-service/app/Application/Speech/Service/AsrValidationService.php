@@ -38,7 +38,7 @@ readonly class AsrValidationService
     }
 
     /**
-     * verifyprojectpermission - ensureproject属atcurrentuser和organization.
+     * verifyprojectpermission - ensureproject属atcurrentuserandorganization.
      *
      * @param string $projectId projectID
      * @param string $userId userID
@@ -64,7 +64,7 @@ readonly class AsrValidationService
                 return $projectEntity;
             }
 
-            // checkuserwhether是projectmember
+            // checkuserwhetherisprojectmember
             if ($this->projectMemberDomainService->isProjectMemberByUser((int) $projectId, $userId)) {
                 return $projectEntity;
             }
@@ -80,19 +80,19 @@ readonly class AsrValidationService
             // 所havepermissioncheckallfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessDeniedUser);
         } catch (BusinessException $e) {
-            // process ExceptionBuilder::throw throw的业务exception
+            // process ExceptionBuilder::throw throw业务exception
             if ($e->getCode() === BeAgentErrorCode::PROJECT_NOT_FOUND->value) {
                 ExceptionBuilder::throw(AsrErrorCode::ProjectNotFound);
             }
             if ($e->getCode() >= 43000 && $e->getCode() < 44000) {
-                // 已经是 AsrErrorCode，直接重新throw
+                // 已经is AsrErrorCode，直接重新throw
                 throw $e;
             }
 
-            // 其他业务exceptionconvert为permissionverifyfail
+            // 其他业务exceptionconvertforpermissionverifyfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         } catch (Throwable $e) {
-            // 其他exception统一process为permissionverifyfail
+            // 其他exception统一processforpermissionverifyfail
             ExceptionBuilder::throw(AsrErrorCode::ProjectAccessValidationFailed, '', ['error' => $e->getMessage()]);
         }
     }
@@ -121,7 +121,7 @@ readonly class AsrValidationService
     }
 
     /**
-     * verify并gettaskstatus.
+     * verifyandgettaskstatus.
      *
      * @param string $taskKey task键
      * @param string $userId userID
@@ -135,7 +135,7 @@ readonly class AsrValidationService
             ExceptionBuilder::throw(AsrErrorCode::UploadAudioFirst);
         }
 
-        // verifyuserID匹配（基本的securitycheck）
+        // verifyuserID匹配（基本securitycheck）
         if ($taskStatus->userId !== $userId) {
             ExceptionBuilder::throw(AsrErrorCode::TaskNotBelongToUser);
         }

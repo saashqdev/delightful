@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject\MessageType;
 
 /**
- * chatmessagecontent的type.
+ * chatmessagecontenttype.
  */
 enum ControlMessageType: string
 {
-    // queueetc场景的core跳
+    // queueetc场景core跳
     case Ping = 'ping';
 
     // createsessionwindow
@@ -57,7 +57,7 @@ enum ControlMessageType: string
     // delete话题
     case DeleteTopic = 'delete_topic';
 
-    // setsession的话题(set为空table示leave话题)
+    // setsession话题(setfor空table示leave话题)
     case SetConversationTopic = 'set_conversation_topic';
 
     // creategroup chat
@@ -81,10 +81,10 @@ enum ControlMessageType: string
     // 群memberrole变more(批quantitysetadministrator/普通member)
     case GroupUserRoleChange = 'group_user_role_change';
 
-    // 转让群主
+    // 转let群主
     case GroupOwnerChange = 'group_owner_change';
 
-    // 助理的交互finger令
+    // 助理交互finger令
     case AgentInstruct = 'bot_instruct';
 
     // 翻译configurationitem
@@ -101,7 +101,7 @@ enum ControlMessageType: string
 
     /**
      * 未知message。
-     * 由atversion迭代，hair版timediffetcreason，可能产生未知type的message。
+     * byatversion迭代，hair版timediffetcreason，maybe产生未知typemessage。
      */
     case Unknown = 'unknown';
 
@@ -115,8 +115,8 @@ enum ControlMessageType: string
      */
     public static function getMessageStatusChangeType(): array
     {
-        // notcontaineditmessage的status变more!
-        // editmessagenotwill改变message的status,只will改变message的content.
+        // notcontaineditmessagestatus变more!
+        // editmessagenotwill改变messagestatus,只will改变messagecontent.
         return [
             self::RevokeMessage,
             self::ReadMessage,

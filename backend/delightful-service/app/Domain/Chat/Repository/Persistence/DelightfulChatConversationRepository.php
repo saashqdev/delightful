@@ -124,7 +124,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
     }
 
     /**
-     * (minuteorganization)getuser与finger定user的sessionwindowinfo.
+     * (minuteorganization)getuserandfinger定usersessionwindowinfo.
      * @return array<DelightfulConversationEntity>
      */
     public function getConversationsByReceiveIds(string $userId, array $receiveIds, ?string $userOrganizationCode = null): array
@@ -140,12 +140,12 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
 
     public function getReceiveConversationBySenderConversationId(string $senderConversationId): ?DelightfulConversationEntity
     {
-        // gethairitem方的info
+        // gethairitem方info
         $senderConversationEntity = $this->getConversationById($senderConversationId);
         if ($senderConversationEntity === null) {
             return null;
         }
-        // get收item方的sessionwindow
+        // get收item方sessionwindow
         $receiveConversationDTO = new DelightfulConversationEntity();
         $receiveConversationDTO->setUserId($senderConversationEntity->getReceiveId());
         $receiveConversationDTO->setReceiveId($senderConversationEntity->getUserId());
@@ -250,8 +250,8 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
     }
 
     /**
-     * 批quantityupdatesessionwindow的交互finger令.
-     * @param array $updateData format为：[['conversation_id' => 'xxx', 'instructs' => [...]], ...]
+     * 批quantityupdatesessionwindow交互finger令.
+     * @param array $updateData formatfor：[['conversation_id' => 'xxx', 'instructs' => [...]], ...]
      */
     public function batchUpdateInstructs(array $updateData): void
     {
@@ -327,7 +327,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
             ->when($conversation->hasReceiveType(), function ($query) use ($conversation) {
                 $query->where('receive_type', $conversation->getReceiveType()->value);
             });
-        // receive_type +  receive_id 其实是all局唯一的,can确定organizationencoding. but是ifneedqueryo clockfinger定organization,also是加up
+        // receive_type +  receive_id 其实isall局唯一,can确定organizationencoding. butisifneedqueryo clockfinger定organization,alsois加up
         if ($conversation->getUserOrganizationCode()) {
             $query->where('user_organization_code', $conversation->getUserOrganizationCode());
         }
@@ -341,7 +341,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
         return $result;
     }
 
-    // 避免 redis cacheserialize的object,占usetoo多inside存
+    // 避免 redis cacheserializeobject,占usetoo多inside存
     #[Cacheable(prefix: 'conversation', value: '_#{conversationId}', ttl: 10)]
     private function getConversationArrayById(string $conversationId): array
     {

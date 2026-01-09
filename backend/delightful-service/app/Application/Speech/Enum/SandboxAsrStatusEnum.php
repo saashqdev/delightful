@@ -10,13 +10,13 @@ namespace App\Application\Speech\Enum;
 /**
  * 沙箱 ASR taskstatus枚举.
  *
- * 【作use域】outside部system - 沙箱audiomergeservice
- * 【use途】table示沙箱middleaudiomergetask的executestatus
+ * 【asuse域】outside部system - 沙箱audiomergeservice
+ * 【use途】table示沙箱middleaudiomergetaskexecutestatus
  * 【use场景】
- * - call沙箱 finishTask interface的round询status判断
+ * - call沙箱 finishTask interfaceround询status判断
  * - 判断audiominuteslicemergewhethercomplete
  *
- * 【与其他枚举的区别】
+ * 【and其他枚举区别】
  * - AsrRecordingStatusEnum: front端录音实o clockstatus（录音交互layer）
  * - AsrTaskStatusEnum: inside部taskallprocessstatus（业务管理layer）
  * - SandboxAsrStatusEnum: 沙箱mergetaskstatus（基础设施layer）✓ current
@@ -27,8 +27,8 @@ enum SandboxAsrStatusEnum: string
 {
     case WAITING = 'waiting';           // etc待middle：task已submit，etc待沙箱process
     case RUNNING = 'running';           // 运linemiddle：沙箱正inprocessaudiominuteslice
-    case FINALIZING = 'finalizing';     // 正inexecutefinalmerge：沙箱正inmergeaudio并process笔记file
-    case COMPLETED = 'completed';       // taskcomplete（V2 新format）：audiomerge和fileprocessall部complete
+    case FINALIZING = 'finalizing';     // 正inexecutefinalmerge：沙箱正inmergeaudioandprocess笔记file
+    case COMPLETED = 'completed';       // taskcomplete（V2 新format）：audiomergeandfileprocessall部complete
     case FINISHED = 'finished';         // taskcomplete（tobackcompatible旧format）：保留useatcompatible旧version沙箱
     case ERROR = 'error';               // error：沙箱processfail
 
@@ -48,7 +48,7 @@ enum SandboxAsrStatusEnum: string
     }
 
     /**
-     * whether为completestatus（contain新旧两typeformat）.
+     * whetherforcompletestatus（contain新旧两typeformat）.
      */
     public function isCompleted(): bool
     {
@@ -56,7 +56,7 @@ enum SandboxAsrStatusEnum: string
     }
 
     /**
-     * whether为errorstatus.
+     * whetherforerrorstatus.
      */
     public function isError(): bool
     {
@@ -64,7 +64,7 @@ enum SandboxAsrStatusEnum: string
     }
 
     /**
-     * whether为middlebetweenstatus（needcontinueround询）.
+     * whetherformiddlebetweenstatus（needcontinueround询）.
      */
     public function isInProgress(): bool
     {

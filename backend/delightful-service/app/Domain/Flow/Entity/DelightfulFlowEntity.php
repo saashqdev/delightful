@@ -32,7 +32,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯一encoding，仅increateo clockgenerate，use作给front端的id.
+     * 唯一encoding，仅increateo clockgenerate，useasgivefront端id.
      */
     protected string $code;
 
@@ -59,7 +59,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $toolSetId = '';
 
     /**
-     * 仅front端need，process编row放to node sectionpointconfiguration的 next_nodes middle.
+     * 仅front端need，process编row放to node sectionpointconfiguration next_nodes middle.
      */
     protected array $edges;
 
@@ -85,12 +85,12 @@ class DelightfulFlowEntity extends AbstractEntity
     private bool $isCollectingNodes = false;
 
     /**
-     * process的入口.
+     * process入口.
      */
     private ?NodeInput $input = null;
 
     /**
-     * process的出口.
+     * processout口.
      */
     private ?NodeOutput $output = null;
 
@@ -107,7 +107,7 @@ class DelightfulFlowEntity extends AbstractEntity
     private int $userOperation = 0;
 
     /**
-     * process的callbackfunction，ifhave该value，那么将直接execute该choose，而not是passNodeRunner来execute.
+     * processcallbackfunction，ifhave该value，那么will直接execute该choose，whilenotispassNodeRunnercomeexecute.
      */
     private ?Closure $callback = null;
 
@@ -125,7 +125,7 @@ class DelightfulFlowEntity extends AbstractEntity
 
     public function prepareTestRun(): void
     {
-        // 试运line是要按照starto clock计算
+        // 试运lineis要按照starto clock计算
         $this->enabled = true;
 
         // process试运line其实只need nodes
@@ -180,7 +180,7 @@ class DelightfulFlowEntity extends AbstractEntity
     {
         $this->enabled = ! $this->enabled;
         if ($this->enabled) {
-            // if是要start，need检测whetherhave nodes configuration
+            // ifis要start，need检测whetherhave nodes configuration
             if (empty($this->nodes)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
             }
@@ -207,7 +207,7 @@ class DelightfulFlowEntity extends AbstractEntity
         $this->modifier = $publisher;
         $this->updatedAt = new DateTime('now');
 
-        // publisho clockneed按照start来process
+        // publisho clockneed按照startcomeprocess
         $enable = $this->enabled;
         $this->enabled = true;
         $this->nodeValidate(true);
@@ -238,7 +238,7 @@ class DelightfulFlowEntity extends AbstractEntity
             }
 
             if ($node->isStart() && ! $node->getParentId()) {
-                // if已经have一了，那么是error的process，出现了多startsectionpoint
+                // if已经have一，那么iserrorprocess，out现多startsectionpoint
                 if ($this->startNode) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.only_one');
                 }
@@ -252,7 +252,7 @@ class DelightfulFlowEntity extends AbstractEntity
             }
         }
 
-        // 已经是publishstatus的才need检测
+        // 已经ispublishstatus才need检测
         if ($this->enabled) {
             //            if (! $this->startNode) {
             //                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.must_exist');
@@ -299,7 +299,7 @@ class DelightfulFlowEntity extends AbstractEntity
                 $result['error_information'] = $nodeDebugResult->getErrorMessage();
             }
             if ($node->isEnd() && $nodeDebugResult && $nodeDebugResult->hasExecute()) {
-                // result优先，if已经存in，thennotneed了
+                // result优先，if已经存in，thennotneed
                 if (empty($result)) {
                     $result = $nodeDebugResult->getOutput() ?? [];
                 }

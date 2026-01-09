@@ -32,13 +32,13 @@ return new class extends Migration {
             $table->string('mapping_type', 32)->comment('mappingtype（user、department、space、organization）');
             // thethird-party平台type：企业微信、钉钉、飞书
             $table->string('third_platform_type', 32)->comment('thethird-party平台type（wechat_work、dingtalk、lark）');
-            // delightful body系的organizationencoding
-            $table->string('delightful_organization_code', 32)->comment('delightful body系的organizationencoding');
+            // delightful body系organizationencoding
+            $table->string('delightful_organization_code', 32)->comment('delightful body系organizationencoding');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['new_id', 'mapping_type'], 'new_id_mapping_type');
             $table->unique(['delightful_organization_code', 'third_platform_type', 'mapping_type', 'origin_id'], 'unique_origin_id_mapping_type');
-            $table->comment('department、user、nullbetweenencodingetc的mapping关系record');
+            $table->comment('department、user、nullbetweenencodingetcmappingclose系record');
         });
     }
 

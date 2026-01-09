@@ -12,12 +12,12 @@ use App\Infrastructure\Util\Context\CoContext;
 class BaseDataIsolation implements DataIsolationInterface
 {
     /**
-     * whenfront的organizationencoding.
+     * whenfrontorganizationencoding.
      */
     private string $currentOrganizationCode;
 
     /**
-     * whenfront的userid.
+     * whenfrontuserid.
      */
     private string $currentUserId;
 
@@ -31,7 +31,7 @@ class BaseDataIsolation implements DataIsolationInterface
     private bool $enabled = true;
 
     /**
-     * 多organizationdown的environment ID.
+     * 多organizationdownenvironment ID.
      */
     private int $envId = 0;
 

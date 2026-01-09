@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\DTO\Message;
 
 /**
- * frommessagemiddlegetfileids，useat判断userwhetherhavefile的upload/downloadpermission.
+ * frommessagemiddlegetfileids，useat判断userwhetherhavefileupload/downloadpermission.
  */
 interface ChatFileInterface extends MessageInterface
 {

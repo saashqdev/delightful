@@ -98,7 +98,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
             $query->where('user_id', $filters['user_id']);
         }
 
-        // sort：先按whether为organizationcreate者sort，again按authorizationtimesort，all是降序
+        // sort：先按whetherfororganizationcreate者sort，again按authorizationtimesort，allis降序
         $query->orderBy('is_organization_creator', 'desc')
             ->orderBy('granted_at', 'desc');
 
@@ -129,7 +129,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * checkuserwhether为organizationadministrator.
+     * checkuserwhetherfororganizationadministrator.
      */
     public function isOrganizationAdmin(DataIsolation $dataIsolation, string $userId): bool
     {
@@ -155,7 +155,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
         $entity->setUserId($userId);
         $entity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
 
-        // getuser的 delightful_id
+        // getuser delightful_id
         $user = $this->userRepository->getUserById($userId);
         if ($user) {
             $entity->setDelightfulId($user->getDelightfulId());
@@ -212,7 +212,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 批quantitycheckuserwhether为organizationadministrator.
+     * 批quantitycheckuserwhetherfororganizationadministrator.
      */
     public function batchCheckOrganizationAdmin(DataIsolation $dataIsolation, array $userIds): array
     {
@@ -244,7 +244,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
      */
     private function mapArrayToEntity($row): OrganizationAdminEntity
     {
-        // process DB::select return的 stdClass objectorarray
+        // process DB::select return stdClass objectorarray
         $data = is_array($row) ? $row : (array) $row;
 
         $entity = new OrganizationAdminEntity();

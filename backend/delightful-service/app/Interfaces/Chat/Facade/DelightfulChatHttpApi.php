@@ -58,14 +58,14 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * pulluser的收itemmessage.
+     * pulluser收itemmessage.
      * @throws Throwable
      */
     public function pullByPageToken(RequestInterface $request): array
     {
         $params = $request->all();
         $rules = [
-            'page_token' => 'string', // private chat的本groundmost大 seq_id
+            'page_token' => 'string', // private chat本groundmost大 seq_id
         ];
         $params = $this->checkParams($params, $rules);
         $this->logger->info('pullMessage:' . Json::encode($params));
@@ -77,7 +77,7 @@ class DelightfulChatHttpApi extends AbstractApi
     {
         $params = $request->all();
         $rules = [
-            'page_token' => 'string', // private chat的本groundmost大 seq_id
+            'page_token' => 'string', // private chat本groundmost大 seq_id
         ];
         $params = $this->checkParams($params, $rules);
         $this->logger->info('pullMessageByAppMessageId:' . $appMessageId);
@@ -86,7 +86,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * pulluser的most近一segmenttime收itemmessage.
+     * pullusermost近一segmenttime收itemmessage.
      * @throws Throwable
      */
     public function pullRecentMessage(RequestInterface $request): array
@@ -176,7 +176,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * （front端performancehaveissue的temporarysolution）按session id minutegroupget几itemmost新message.
+     * （front端performancehaveissuetemporarysolution）按session id minutegroupget几itemmost新message.
      */
     public function conversationsMessagesGroupQueries(RequestInterface $request): array
     {
@@ -237,7 +237,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $delightfulGroupDTO->setGroupName($params['group_name']);
         $delightfulGroupDTO->setGroupType(GroupTypeEnum::from($params['group_type']));
         $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
-        // person员和departmentnot能meanwhile为空
+        // person员anddepartmentnot能meanwhilefor空
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_SELECT_ERROR);
         }
@@ -245,7 +245,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 批quantity拉person进群.
+     * 批quantity拉personenter群.
      */
     public function groupAddUsers(string $id, RequestInterface $request): array
     {
@@ -258,7 +258,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $authorization = $this->getAuthorization();
         $delightfulGroupDTO = new DelightfulGroupEntity();
         $delightfulGroupDTO->setId($id);
-        // person员和departmentnot能meanwhile为空
+        // person员anddepartmentnot能meanwhilefor空
         if (empty($params['user_ids']) && empty($params['department_ids'])) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_USER_SELECT_ERROR);
         }
@@ -336,7 +336,7 @@ class DelightfulChatHttpApi extends AbstractApi
         $delightfulGroupDTO->setId($id);
         $delightfulGroupDTO->setGroupName($params['group_name'] ?? null);
         $delightfulGroupDTO->setGroupAvatar($params['group_avatar'] ?? null);
-        // name 和 avatar not能meanwhile为空
+        // name and avatar not能meanwhilefor空
         if (empty($delightfulGroupDTO->getGroupName()) && empty($delightfulGroupDTO->getGroupAvatar())) {
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR);
         }
@@ -509,7 +509,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * processchat补all的共同逻辑.
+     * processchat补all共同逻辑.
      */
     protected function handleChatCompletions(array $params, ?string $conversationId, ?string $topicId): array
     {

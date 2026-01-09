@@ -25,7 +25,7 @@ enum CircuitBreakerStatus: string
     case OPEN = 'open';
 
     /**
-     * 半开status - 尝试restoremiddle.
+     * 半openstatus - 尝试restoremiddle.
      */
     case HALF_OPEN = 'half_open';
 
@@ -42,7 +42,7 @@ enum CircuitBreakerStatus: string
     }
 
     /**
-     * checkwhether是valid的statusvalue
+     * checkwhetherisvalidstatusvalue
      */
     public static function isValid(string $status): bool
     {

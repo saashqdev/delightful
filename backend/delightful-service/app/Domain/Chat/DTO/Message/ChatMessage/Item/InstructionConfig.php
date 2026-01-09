@@ -44,7 +44,7 @@ class InstructionConfig extends AbstractEntity
     protected int $insertLocation = InstructionInsertLocation::Cursor->value;
 
     /**
-     * finger令type, 取value 1 为processfinger令，取value 2 为conversationfinger令，default为 conversationfinger令。
+     * finger令type, 取value 1 forprocessfinger令，取value 2 forconversationfinger令，defaultfor conversationfinger令。
      */
     protected int $instructionType = InstructionType::Conversation->value;
 
@@ -54,7 +54,7 @@ class InstructionConfig extends AbstractEntity
     protected string $name = '';
 
     /**
-     * 直接sendfinger令，userpoint击finger令back将直接send给助理.
+     * 直接sendfinger令，userpoint击finger令backwill直接sendgive助理.
      */
     protected bool $sendDirectly = false;
 
@@ -71,12 +71,12 @@ class InstructionConfig extends AbstractEntity
     protected array $values = [];
 
     /**
-     * switchopenstatus的textdescription.
+     * switchopenstatustextdescription.
      */
     protected string $on = '';
 
     /**
-     * switchclosestatus的textdescription.
+     * switchclosestatustextdescription.
      */
     protected string $off = '';
 
@@ -128,7 +128,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setDisplayType($displayType): void
     {
-        // ensure display_type 是整数type
+        // ensure display_type is整数type
         $this->displayType = is_numeric($displayType) ? (int) $displayType : InstructionDisplayType::Normal->value;
     }
 
@@ -149,7 +149,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setInsertLocation($insertLocation): void
     {
-        // ensure insert_location 是整数type
+        // ensure insert_location is整数type
         $this->insertLocation = is_numeric($insertLocation) ? (int) $insertLocation : InstructionInsertLocation::Cursor->value;
     }
 
@@ -160,7 +160,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setInstructionType($instructionType): void
     {
-        // ensure instruction_type 是整数type
+        // ensure instruction_type is整数type
         $this->instructionType = is_numeric($instructionType) ? (int) $instructionType : InstructionType::Conversation->value;
     }
 
@@ -181,7 +181,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setSendDirectly($sendDirectly): void
     {
-        // ensure send_directly 是布尔type
+        // ensure send_directly is布尔type
         $this->sendDirectly = filter_var($sendDirectly, FILTER_VALIDATE_BOOLEAN);
     }
 
@@ -192,7 +192,7 @@ class InstructionConfig extends AbstractEntity
 
     public function setType($type): void
     {
-        // ensure type 是整数type
+        // ensure type is整数type
         $this->type = is_numeric($type) ? (int) $type : InstructionComponentType::Radio->value;
     }
 
@@ -215,7 +215,7 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // ensure $values 是array
+        // ensure $values isarray
         if (! is_array($values)) {
             $this->values = [];
             return;
@@ -227,13 +227,13 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // iffirstyuan素已经是 InstructionValue object，then直接use
+        // iffirstyuan素已经is InstructionValue object，then直接use
         if (isset($values[0]) && $values[0] instanceof InstructionValue) {
             $this->values = $values;
             return;
         }
 
-        // 否then，将eachyuan素convert为 InstructionValue object
+        // 否then，willeachyuan素convertfor InstructionValue object
         $processedValues = [];
         foreach ($values as $value) {
             $processedValues[] = new InstructionValue($value);
@@ -242,7 +242,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * getswitchopenstatus的textdescription.
+     * getswitchopenstatustextdescription.
      */
     public function getOn(): string
     {
@@ -250,7 +250,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * setswitchopenstatus的textdescription.
+     * setswitchopenstatustextdescription.
      * @param mixed $on
      */
     public function setOn($on): void
@@ -259,7 +259,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * getswitchclosestatus的textdescription.
+     * getswitchclosestatustextdescription.
      */
     public function getOff(): string
     {
@@ -267,7 +267,7 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * setswitchclosestatus的textdescription.
+     * setswitchclosestatustextdescription.
      * @param mixed $off
      */
     public function setOff($off): void
@@ -316,15 +316,15 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * according tofinger令groupitemtypeget对应的name和value.
+     * according tofinger令groupitemtypegetto应nameandvalue.
      *
-     * type为switcho clock，name 取is 开/关，value 取 $instruction->getOn / $instruction->getOff
-     * type为single-selecto clock, name 取is displayname，value：$instructionValue
-     * type为statusbuttono clock，name 取isstatustext，value: $instructionValue
-     * default name 为空， value = $instructionValue
+     * typeforswitcho clock，name 取is open/close，value 取 $instruction->getOn / $instruction->getOff
+     * typeforsingle-selecto clock, name 取is displayname，value：$instructionValue
+     * typeforstatusbuttono clock，name 取isstatustext，value: $instructionValue
+     * default name for空， value = $instructionValue
      *
      * @param string $instructionValue finger令value
-     * @return array returncontain name 和 value 的array
+     * @return array returncontain name and value array
      */
     public function getNameAndValueByType(string $instructionValue): array
     {
@@ -339,7 +339,7 @@ class InstructionConfig extends AbstractEntity
                 break;
             case InstructionComponentType::Radio->value:
                 // single-selecttype
-                // find对应的 InstructionValue object
+                // findto应 InstructionValue object
                 foreach ($this->values as $instructionValueObj) {
                     if ($instructionValueObj->getId() === $instructionValue || $instructionValueObj->getValue() === $value) {
                         $name = $instructionValueObj->getName();
@@ -350,7 +350,7 @@ class InstructionConfig extends AbstractEntity
                 break;
             case InstructionComponentType::Status->value:
                 // statusbuttontype
-                // find对应的 InstructionValue object
+                // findto应 InstructionValue object
                 foreach ($this->values as $instructionValueObj) {
                     if ($instructionValueObj->getValue() === $instructionValue) {
                         $name = $instructionValueObj->getName();

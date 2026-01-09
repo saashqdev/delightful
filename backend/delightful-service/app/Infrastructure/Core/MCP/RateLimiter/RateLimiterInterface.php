@@ -18,14 +18,14 @@ interface RateLimiterInterface
     /**
      * checkcustomer端whetherallowexecuterequest.
      *
-     * @throws InvalidParamsException whenrequest超过speedrate限制o clock
+     * @throws InvalidParamsException whenrequest超passspeedrate限制o clock
      */
     public function check(string $clientId, MessageInterface $request): void;
 
     /**
-     * getwhenfront的限制configuration.
+     * getwhenfront限制configuration.
      *
-     * @return array<string, bool|int> contain限制configuration的array
+     * @return array<string, bool|int> contain限制configurationarray
      */
     public function getLimits(): array;
 }

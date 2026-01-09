@@ -31,7 +31,7 @@ class ModeAssembler
         $groupAggregatesDTOs = [];
         foreach ($aggregate->getGroupAggregates() as $groupAggregate) {
             $groupDTO = self::groupAggregateToDTO($groupAggregate, $providerModels, $upgradeRequiredModelIds, $providerImageModels);
-            // onlywhenminutegroupdownhavemodelorgraph像modelo clock才add（front台filter空minutegroup）
+            // onlywhenminutegroupdownhavemodelorgraphlikemodelo clock才add（front台filter空minutegroup）
             if (! empty($groupDTO->getModels()) || ! empty($groupDTO->getImageModels())) {
                 $groupAggregatesDTOs[] = $groupDTO;
             }
@@ -57,7 +57,7 @@ class ModeAssembler
         foreach ($groupAggregate->getRelations() as $relation) {
             $modelDTO = new ModeGroupModelDTO($relation->toArray());
 
-            // filter掉set餐的情况
+            // filter掉set餐情况
             $providerModelId = $relation->getModelId();
             if (isset($providerModels[$providerModelId])) {
                 $providerModel = $providerModels[$providerModelId];
@@ -72,7 +72,7 @@ class ModeAssembler
             }
         }
 
-        // process VLM graph像model
+        // process VLM graphlikemodel
         $imageModels = [];
         foreach ($groupAggregate->getRelations() as $relation) {
             $modelDTO = new ModeGroupModelDTO($relation->toArray());
@@ -111,7 +111,7 @@ class ModeAssembler
     }
 
     /**
-     * 将ModeAggregateconvert为扁平化的minutegroupDTOarray.
+     * willModeAggregateconvertfor扁平化minutegroupDTOarray.
      * @param $providerModels ProviderModelEntity[]
      * @return ModeGroupDetailDTO[]
      */
@@ -130,7 +130,7 @@ class ModeAssembler
             foreach ($groupAggregate->getRelations() as $relation) {
                 $modelDTO = new ModeGroupModelDTO($relation->toArray());
 
-                // if提供了modelinfo，then填充modelname和graph标
+                // if提供modelinfo，then填充modelnameandgraph标
                 $providerModelId = $relation->getModelId();
                 if (isset($providerModels[$providerModelId])) {
                     $providerModel = $providerModels[$providerModelId];
@@ -152,12 +152,12 @@ class ModeAssembler
             // onlywhenminutegroupdownhavemodelo clock才add（front台filter空minutegroup）
             if (! empty($models)) {
                 $modeGroupDetailDTO->setModels($models);
-                $modeGroupDetailDTO->sortModels(); // 对modelsort
+                $modeGroupDetailDTO->sortModels(); // tomodelsort
                 $flatGroups[] = $modeGroupDetailDTO;
             }
         }
 
-        // 对minutegroupsort（降序，more大morefront）
+        // tominutegroupsort（降序，more大morefront）
         usort($flatGroups, function ($a, $b) {
             return $b->getSort() <=> $a->getSort();
         });

@@ -14,16 +14,16 @@ use Hyperf\Snowflake\Concern\Snowflake;
 /**
  * @property int $id primary keyID
  * @property string $organization_code organizationencoding
- * @property string $mcp_server_code associate的mcpservicecode
+ * @property string $mcp_server_code associatemcpservicecode
  * @property string $name toolname
  * @property string $description tooldescription
- * @property int $source tool来源
- * @property string $rel_code associate的toolcode
- * @property string $rel_version_code associate的toolversioncode
+ * @property int $source toolcome源
+ * @property string $rel_code associatetoolcode
+ * @property string $rel_version_code associatetoolversioncode
  * @property string $version toolversion
  * @property bool $enabled whetherenable
  * @property array $options toolconfiguration
- * @property array $rel_info associate的information
+ * @property array $rel_info associateinformation
  * @property string $creator create者
  * @property DateTime $created_at creation time
  * @property string $modifier modify者

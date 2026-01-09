@@ -122,7 +122,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             return $ownershipValidation;
         }
 
-        // 3. processcontentupdate并buildDTO
+        // 3. processcontentupdateandbuildDTO
         $dto = $this->buildUpdateMemoryDTO(
             $validatedParams['content'] ?? null,
             $validatedParams['pending_content'] ?? null
@@ -246,7 +246,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             'status' => $status,
             'enabled' => $enabled,
             'pageToken' => $validatedParams['page_token'] ?? null,
-            'limit' => (int) $pageSize, // 传递originalpagesize，让applicationservicelayerprocesspagination逻辑
+            'limit' => (int) $pageSize, // 传递originalpagesize，letapplicationservicelayerprocesspagination逻辑
         ]);
         // parse pageToken
         $dto->parsePageToken();
@@ -310,7 +310,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             $authorization->getId()
         );
 
-        // checkwhetherhavenot属atuser的记忆
+        // checkwhetherhavenot属atuser记忆
         if (! $allMemoriesBelongToUser) {
             return [
                 'success' => false,
@@ -348,7 +348,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             $authorization->getId()
         );
 
-        // checkwhetherhavenot属atuser的记忆
+        // checkwhetherhavenot属atuser记忆
         if (! $allMemoriesBelongToUser) {
             return [
                 'success' => false,
@@ -389,7 +389,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             $authorization->getId()
         );
 
-        // checkwhetherhavenot属atuser的记忆
+        // checkwhetherhavenot属atuser记忆
         if (! $allMemoriesBelongToUser) {
             return [
                 'success' => false,
@@ -399,10 +399,10 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         $action = $validatedParams['action'];
         $memoryIds = $validatedParams['memory_ids'];
-        $scenarioString = $validatedParams['scenario'] ?? 'admin_panel'; // default为管理back台
+        $scenarioString = $validatedParams['scenario'] ?? 'admin_panel'; // defaultfor管理back台
         $scenario = MemoryOperationScenario::from($scenarioString);
 
-        // verifywhen scenario 是 memory_card_quick o clock，delightful_message_id must提供
+        // verifywhen scenario is memory_card_quick o clock，delightful_message_id must提供
         if ($scenarioString === 'memory_card_quick' && empty($validatedParams['delightful_message_id'])) {
             return [
                 'success' => false,
@@ -412,7 +412,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         try {
             if ($action === 'accept') {
-                // 批quantity接受记忆suggestion：status 改为 accept，enabled 为 true
+                // 批quantity接受记忆suggestion：status 改for accept，enabled for true
                 $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::ACCEPT, $scenario, $validatedParams['delightful_message_id'] ?? null);
 
                 return [
@@ -569,7 +569,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * verifyupdate记忆的requestparameter.
+     * verifyupdate记忆requestparameter.
      */
     private function validateUpdateMemoryParams(RequestInterface $request): array
     {
@@ -581,7 +581,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         $validatedParams = $this->checkParams($params, $rules);
 
-        // verifycontent和pending_content只能二选一
+        // verifycontentandpending_content只能二选一
         $hasContent = ! empty($validatedParams['content']);
         $hasPendingContent = ! empty($validatedParams['pending_content']);
 
@@ -648,15 +648,15 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * processcontentupdate并buildupdate记忆的DTO.
+     * processcontentupdateandbuildupdate记忆DTO.
      */
     private function buildUpdateMemoryDTO(?string $inputContent, ?string $inputPendingContent = null): UpdateMemoryDTO
     {
-        // buildDTO（lengthcheck已inparameterverify阶segmentcomplete，andat leasthave一fieldnot为空）
+        // buildDTO（lengthcheck已inparameterverify阶segmentcomplete，andat leasthave一fieldnotfor空）
         $status = null;
         $explanation = null;
 
-        // ifupdate了content，setstatus为ACTIVE
+        // ifupdatecontent，setstatusforACTIVE
         if ($inputContent !== null) {
             $status = MemoryStatus::ACTIVE->value;
             $explanation = trans('long_term_memory.api.user_manual_edit_explanation');

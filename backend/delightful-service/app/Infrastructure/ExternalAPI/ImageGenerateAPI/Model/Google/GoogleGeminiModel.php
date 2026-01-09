@@ -64,7 +64,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraph像并returnOpenAIformatresponse - Google Geminiversion.
+     * generategraphlikeandreturnOpenAIformatresponse - Google Geminiversion.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
@@ -77,11 +77,11 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof GoogleGeminiRequest) {
-            $this->logger->error('GoogleGemini OpenAIformat生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('GoogleGemini OpenAIformat生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
-        // 3. 并hairhandle - 直接操作responseobject
+        // 3. andhairhandle - 直接操asresponseobject
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
@@ -113,7 +113,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 4. recordfinalresult
-        $this->logger->info('GoogleGemini OpenAIformat生graph：并hairhandlecomplete', [
+        $this->logger->info('GoogleGemini OpenAIformat生graph：andhairhandlecomplete', [
             '总request数' => $count,
             'successimage数' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
@@ -172,15 +172,15 @@ class GoogleGeminiModel extends AbstractImageGenerate
         $modelId = $imageGenerateRequest->getModel();
         $referImages = $imageGenerateRequest->getReferImages();
 
-        // ifrequestmiddlefinger定了model，then动statesetting
+        // ifrequestmiddlefinger定model，then动statesetting
         if (! empty($modelId)) {
             $this->api->setModelId($modelId);
         }
 
         try {
-            // ifhave参考graph像，thenexecutegraph像edit
+            // ifhave参考graphlike，thenexecutegraphlikeedit
             if (! empty($referImages)) {
-                // 取the一张参考graph像conductedit
+                // 取the一张参考graphlikeconductedit
                 $referImage = $referImages[0];
                 $result = $this->processImageEdit($referImage, $prompt);
             } else {
@@ -200,7 +200,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
     private function processImageEdit(string $referImageUrl, string $instructions): array
     {
-        // 直接handleURLgraph像
+        // 直接handleURLgraphlike
         $imageBase64 = $this->downloadImageAsBase64($referImageUrl);
         $mimeType = $this->detectMimeTypeFromUrl($referImageUrl);
 
@@ -214,21 +214,21 @@ class GoogleGeminiModel extends AbstractImageGenerate
             $response = $client->get($url);
 
             if ($response->getStatusCode() !== 200) {
-                throw new Exception("无法downloadgraph像，HTTPstatus码: {$response->getStatusCode()}");
+                throw new Exception("无法downloadgraphlike，HTTPstatus码: {$response->getStatusCode()}");
             }
 
             $imageContent = $response->getBody()->getContents();
             if (empty($imageContent)) {
-                throw new Exception('download的graph像content为null');
+                throw new Exception('downloadgraphlikecontentfornull');
             }
 
             return base64_encode($imageContent);
         } catch (Exception $e) {
-            $this->logger->error('Google Geminigraph生graph：graph像downloadfail', [
+            $this->logger->error('Google Geminigraph生graph：graphlikedownloadfail', [
                 'url' => $url,
                 'error' => $e->getMessage(),
             ]);
-            throw new Exception("downloadgraph像fail: {$e->getMessage()}");
+            throw new Exception("downloadgraphlikefail: {$e->getMessage()}");
         }
     }
 
@@ -248,11 +248,11 @@ class GoogleGeminiModel extends AbstractImageGenerate
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof GoogleGeminiRequest) {
-            $this->logger->error('Google Gemini文生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Google Gemini文生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // Google Gemini APIeachtime只能generate一张graph，pass并haircallimplement多graphgenerate
+        // Google Gemini APIeachtime只能generate一张graph，passandhaircallimplement多graphgenerate
         $count = $imageGenerateRequest->getGenerateNum();
         $rawResults = [];
         $errors = [];
@@ -369,28 +369,28 @@ class GoogleGeminiModel extends AbstractImageGenerate
         }
 
         if (! $hasValidImage) {
-            throw new Exception('Google Geminiresponsedataformaterror：缺少graph像data');
+            throw new Exception('Google Geminiresponsedataformaterror：缺少graphlikedata');
         }
     }
 
     /**
-     * 将Google GeminiimagedataaddtoOpenAIresponseobjectmiddle（convert为URLformat）.
+     * willGoogle GeminiimagedataaddtoOpenAIresponseobjectmiddle（convertforURLformat）.
      */
     private function addImageDataToResponseGemini(
         OpenAIFormatResponse $response,
         array $geminiResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedislockensure并hairsecurity
+        // useRedislockensureandhairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
-            // use现havemethodextractgraph像data
+            // use现havemethodextractgraphlikedata
             $imageBase64 = $this->extractImageDataFromResponse($geminiResult);
 
             $currentData = $response->getData();
             $currentUsage = $response->getUsage() ?? new ImageUsage();
 
-            // watermarkhandle（will将base64convert为URL）
+            // watermarkhandle（willwillbase64convertforURL）
             $processedUrl = $imageBase64;
             try {
                 $processedUrl = $this->watermarkProcessor->addWatermarkToBase64($imageBase64, $imageGenerateRequest);
@@ -401,7 +401,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
                 // watermarkhandlefailo clockuseoriginalbase64data（but这usuallynotshouldhair生）
             }
 
-            // 只returnURLformat，与其他model保持一致
+            // 只returnURLformat，and其他model保持一致
             $currentData[] = [
                 'url' => $processedUrl,
             ];

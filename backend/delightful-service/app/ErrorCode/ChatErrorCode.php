@@ -79,7 +79,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.topic.not_found')]
     case TOPIC_NOT_FOUND = 3016;
 
-    // 话题的messagenot存in
+    // 话题messagenot存in
         // Topic message not found
     #[ErrorMessage('chat.topic.message.not_found')]
     case TOPIC_MESSAGE_NOT_FOUND = 3017;
@@ -94,7 +94,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.user_select_error')]
     case GROUP_USER_SELECT_ERROR = 3019;
 
-    // group chatperson数超出限制
+    // group chatperson数超out限制
         // Group size exceeds limit
     #[ErrorMessage('chat.group.user_num_limit_error')]
     case GROUP_USER_NUM_LIMIT_ERROR = 3020;
@@ -139,12 +139,12 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.no_user_to_remove')]
     case GROUP_NO_USER_TO_REMOVE = 3028;
 
-    // not能踢出群主
+    // not能踢out群主
         // Cannot remove the group owner
     #[ErrorMessage('chat.group.group_cannot_kick_owner')]
     case GROUP_CANNOT_KICK_OWNER = 3029;
 
-    // 请先转让群主againexitgroup chat
+    // 请先转let群主againexitgroup chat
         // Transfer ownership before leaving the group
     #[ErrorMessage('chat.group.transfer_owner_before_leave')]
     case GROUP_TRANSFER_OWNER_BEFORE_LEAVE = 3030;
@@ -154,7 +154,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.only_owner_can_disband')]
     case GROUP_ONLY_OWNER_CAN_DISBAND = 3031;
 
-    // only群主才能转让group
+    // only群主才能转letgroup
         // Only the owner can transfer the group
     #[ErrorMessage('chat.group.only_owner_can_transfer')]
     case GROUP_ONLY_OWNER_CAN_TRANSFER = 3032;
@@ -174,12 +174,12 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.login.failed')]
     case LOGIN_FAILED = 3035;
 
-    // 操作fail
+    // 操asfail
         // Operation failed
     #[ErrorMessage('chat.operation.failed')]
     case OPERATION_FAILED = 3036;
 
-    // messagemiddle的filenot存in
+    // messagemiddlefilenot存in
         // File in message not found
     #[ErrorMessage('chat.file.not_found')]
     case FILE_NOT_FOUND = 3037;
@@ -189,7 +189,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.topic.id_not_found')]
     case TOPIC_ID_NOT_FOUND = 3038;
 
-    // not supportedsync这the三方平台的departmentdata
+    // not supportedsync这the三方平台departmentdata
         // Syncing department data from this third-party platform is not supported
     #[ErrorMessage('chat.department.sync_not_support')]
     case DEPARTMENT_SYNC_NOT_SUPPORT = 3039;

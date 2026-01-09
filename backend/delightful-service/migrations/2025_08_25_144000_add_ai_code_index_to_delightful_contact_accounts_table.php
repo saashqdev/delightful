@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_contact_accounts', function (Blueprint $table) {
-            // 为 ai_code fieldadd索引
+            // for ai_code fieldadd索引
             $table->index('ai_code', 'idx_ai_code');
         });
     }

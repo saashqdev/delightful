@@ -32,7 +32,7 @@ class SlidingWindowUtil
      * infinger定timewindowinside，onlymostback一timerequestwillbeexecute.
      *
      * @param string $debounceKey 防抖键
-     * @param float $delayVerificationSeconds delayverifytime（second），also是actual的防抖window
+     * @param float $delayVerificationSeconds delayverifytime（second），alsoisactual防抖window
      * @return bool whethershouldexecutecurrentrequest
      */
     public function shouldExecuteWithDebounce(
@@ -40,18 +40,18 @@ class SlidingWindowUtil
         float $delayVerificationSeconds = 0.5
     ): bool {
         $uniqueRequestId = uniqid('req_', true) . '_' . getmypid();
-        // 键的expiretime应greater thandelayverifytime，by作为security保障
+        // 键expiretime应greater thandelayverifytime，byasforsecurity保障
         $totalExpirationSeconds = (int) ceil($delayVerificationSeconds) + 1;
         $latestRequestRedisKey = $debounceKey . ':last_req';
 
         try {
-            // mark为most新request
+            // markformost新request
             $this->redis->set($latestRequestRedisKey, $uniqueRequestId, ['EX' => $totalExpirationSeconds]);
 
             // etc待verifytime
             Coroutine::sleep($delayVerificationSeconds);
 
-            // 原子化groundverify并statementexecute权
+            // 原子化groundverifyandstatementexecute权
             $script = <<<'LUA'
                 if redis.call('get', KEYS[1]) == ARGV[1] then
                     return redis.call('del', KEYS[1])
@@ -66,7 +66,7 @@ LUA;
                 'debounce_key' => $debounceKey,
                 'exception' => $exception,
             ]);
-            // 出现exceptiono clockdefaultallowexecute，避免关键业务be阻塞
+            // out现exceptiono clockdefaultallowexecute，避免close键业务be阻塞
             return true;
         }
     }

@@ -67,7 +67,7 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'sendmessage给person';
+        return 'sendmessagegiveperson';
     }
 
     public function getInput(): ?NodeInput
@@ -94,8 +94,8 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
         "receiver_user_ids": {
             "type": "array",
             "key": "receiver_user_ids",
-            "title": "receiveperson的userid",
-            "description": "receiveperson的userid",
+            "title": "receivepersonuserid",
+            "description": "receivepersonuserid",
             "required": null,
             "value": null,
             "encryption": false,

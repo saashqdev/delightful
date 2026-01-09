@@ -10,14 +10,14 @@ namespace App\Application\Speech\Enum;
 /**
  * ASR taskstatus枚举（inside部业务process）.
  *
- * 【作use域】inside部system - delightful-service 业务layer
- * 【use途】table示 ASR 录音总结task的all生命periodstatus
+ * 【asuse域】inside部system - delightful-service 业务layer
+ * 【use途】table示 ASR 录音总结taskall生命periodstatus
  * 【use场景】
  * - taskstatus持久化（Redis/database）
- * - 业务process控制和幂etcproperty判断
+ * - 业务process控制and幂etcproperty判断
  * - 整bodytaskstatustrace（录音 → merge → generatetitle → sendmessage）
  *
- * 【与其他枚举的区别】
+ * 【and其他枚举区别】
  * - AsrRecordingStatusEnum: front端录音实o clockstatus（录音交互layer）
  * - AsrTaskStatusEnum: inside部taskallprocessstatus（业务管理layer）✓ current
  * - SandboxAsrStatusEnum: 沙箱mergetaskstatus（基础设施layer）
@@ -45,7 +45,7 @@ enum AsrTaskStatusEnum: string
     }
 
     /**
-     * checkwhether为successstatus
+     * checkwhetherforsuccessstatus
      */
     public function isSuccess(): bool
     {

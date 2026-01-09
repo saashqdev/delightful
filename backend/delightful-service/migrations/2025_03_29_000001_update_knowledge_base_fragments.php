@@ -32,7 +32,7 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // 移exceptadd的field
+        // 移exceptaddfield
         Schema::table('delightful_flow_knowledge_fragment', function (Blueprint $table) {
             if (Schema::hasColumn('delightful_flow_knowledge_fragment', 'document_code')) {
                 $table->dropColumn('document_code');

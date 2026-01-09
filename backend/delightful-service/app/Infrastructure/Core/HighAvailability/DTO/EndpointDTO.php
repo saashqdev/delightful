@@ -11,19 +11,19 @@ use App\Infrastructure\Core\AbstractDTO;
 use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\CircuitBreakerStatus;
 
 /**
- * useatin业务processmiddlemeanwhilesave业务ID和高可usegroupitem接入pointdatabaseID.
+ * useatin业务processmiddlemeanwhilesave业务IDand高canusegroupitem接入pointdatabaseID.
  */
 class EndpointDTO extends AbstractDTO
 {
     /**
-     * getEndpointList interfacereturn的 id。
-     * different的业务含义different。对atmodel网关来说，这within的 id 是 service_provider_models table的 id。
-     * front端可能not supported bigint，所by这withinuse string.
+     * getEndpointList interfacereturn id。
+     * different业务含义different。toatmodel网closecome说，这within id is service_provider_models table id。
+     * front端maybenot supported bigint，所by这withinuse string.
      */
     protected ?string $businessId = null;
 
     /**
-     * database接入pointID（高可usetableprimary key）.
+     * database接入pointID（高canusetableprimary key）.
      */
     protected ?string $endpointId = null;
 
@@ -48,7 +48,7 @@ class EndpointDTO extends AbstractDTO
     protected ?string $config = null;
 
     /**
-     * resource的consume的 id list. 一timerequest可能willconsume多resource。
+     * resourceconsume id list. 一timerequestmaybewillconsume多resource。
      * @var null|string[]
      */
     protected ?array $resources = null;
@@ -83,7 +83,7 @@ class EndpointDTO extends AbstractDTO
         parent::__construct($data);
     }
 
-    // 原have EndpointDTO 的所havemethod
+    // 原have EndpointDTO 所havemethod
     public function getResources(): ?array
     {
         return $this->resources ?? null;
@@ -185,7 +185,7 @@ class EndpointDTO extends AbstractDTO
 
     /**
      * set接入pointwhetherenable.
-     * @param bool|int|string $enabled 可传入布尔value、整数orstring
+     * @param bool|int|string $enabled can传入布尔value、整数orstring
      */
     public function setEnabled(bool|int|string $enabled): static
     {
@@ -197,7 +197,7 @@ class EndpointDTO extends AbstractDTO
         return $this;
     }
 
-    // new的enhancefieldmethod
+    // newenhancefieldmethod
     /**
      * getdatabase接入pointID.
      */

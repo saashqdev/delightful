@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * userid的associatevalue的含义.
+ * useridassociatevalue含义.
  */
 enum UserIdRelationType: int
 {
@@ -23,12 +23,12 @@ enum UserIdRelationType: int
     case applicationCode = 1;
 
     /**
-     * application的createorganizationencoding
+     * applicationcreateorganizationencoding
      */
     case applicationCreatedOrganizationCode = 2;
 
     /**
-     * 将枚举typeconvert:
+     * will枚举typeconvert:
      */
     public static function getCaseFromUserIdType(UserIdType $userIdType): self
     {

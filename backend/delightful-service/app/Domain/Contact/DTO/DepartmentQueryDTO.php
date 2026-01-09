@@ -21,14 +21,14 @@ class DepartmentQueryDTO extends AbstractEntity
     protected array $departmentIds = [];
 
     /**
-     * down一页的token, useatpagination. 暂o clockvalue为mysql的offset,back续可能为es的scroll_id,or自lineimplementsnapshot机制.
+     * down一页token, useatpagination. 暂o clockvalueformysqloffset,back续maybeforesscroll_id,orfromlineimplementsnapshot机制.
      */
     protected string $pageToken = '';
 
     // is_recursive whether递归query
     protected bool $isRecursive = false;
 
-    // departmentmember求和type
+    // departmentmember求andtype
     protected DepartmentSumType $sumType = DepartmentSumType::DirectEmployee;
 
     protected int $pageSize = 100;

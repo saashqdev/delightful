@@ -12,8 +12,8 @@ use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 class FileMessage extends AbstractAttachmentMessage
 {
     /**
-     * getfileID（returntheonefile的ID）
-     * 对at单filemessage（如voice、videoetc）veryhaveuse.
+     * getfileID（returntheonefileID）
+     * toat单filemessage（如voice、videoetc）veryhaveuse.
      */
     public function getFileId(): ?string
     {
@@ -23,7 +23,7 @@ class FileMessage extends AbstractAttachmentMessage
 
     /**
      * gettheoneattachmentobject
-     * 对at单attachmentmessage（如voice、videoetc）veryhaveuse.
+     * toat单attachmentmessage（如voice、videoetc）veryhaveuse.
      */
     public function getAttachment(): ?object
     {

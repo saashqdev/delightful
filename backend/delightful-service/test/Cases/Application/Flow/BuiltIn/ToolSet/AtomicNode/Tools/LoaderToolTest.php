@@ -83,8 +83,8 @@ JSON, true));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'system_prompt' => 'whenuserneedextract远程filecontento clock，call document_parse tool 来parsecontent并整理output',
-            'user_prompt' => '帮我extract一down https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/出师表.txt 和 https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/test.csv 的content',
+            'system_prompt' => 'whenuserneedextract远程filecontento clock，call document_parse tool comeparsecontentand整理output',
+            'user_prompt' => '帮我extract一down https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/out师表.txt and https://example.tos-cn-beijing.volces.com/DELIGHTFUL/test/test.csv content',
         ]);
         $runner->execute($vertexResult, $executionData);
 

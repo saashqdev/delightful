@@ -19,8 +19,8 @@ return new class extends Migration {
         }
         Schema::create('delightful_chat_files', static function (Blueprint $table) {
             $table->bigIncrements('file_id');
-            // upload者的 user_id
-            $table->string('user_id', 128)->comment('upload者的user_id');
+            // upload者 user_id
+            $table->string('user_id', 128)->comment('upload者user_id');
             // messageid
             $table->string('delightful_message_id', 64)->comment('messageid');
             // organizationencoding

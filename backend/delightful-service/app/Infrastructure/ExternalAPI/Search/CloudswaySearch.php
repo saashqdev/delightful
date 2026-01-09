@@ -33,7 +33,7 @@ class CloudswaySearch
      * Execute Cloudsway search.
      *
      * @param string $query searchquery词
-     * @param string $requestUrl 完整的 endpoint URL (from config)
+     * @param string $requestUrl 完整 endpoint URL (from config)
      * @param string $apiKey api key for authorization (from config)
      * @param string $mkt Market code (not used by Cloudsway but kept for interface consistency)
      * @param int $count resultquantity (10/20/30/40/50)

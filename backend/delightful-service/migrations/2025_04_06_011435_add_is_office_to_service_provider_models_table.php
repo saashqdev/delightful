@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('service_provider_models', function (Blueprint $table) {
-            $table->tinyInteger('is_office')->default(0)->comment('whether为官方model：0-否，1-是');
+            $table->tinyInteger('is_office')->default(0)->comment('whetherfor官方model：0-否，1-is');
         });
     }
 

@@ -29,12 +29,12 @@ interface DelightfulThirdPlatformDepartmentRepositoryInterface
     public function getSubDepartmentsById(string $departmentId, string $organizationCode, int $size, int $offset): array;
 
     /**
-     * getsome一layerlevel的department.
+     * getsome一layerleveldepartment.
      * @return DelightfulThirdPlatformDepartmentEntity[]
      */
     public function getSubDepartmentsByLevel(int $currentDepartmentLevel, string $organizationCode, int $depth, int $size, int $offset): array;
 
-    // 给定的departmentidwhetherhavedownleveldepartment
+    // give定departmentidwhetherhavedownleveldepartment
     #[ArrayShape([
         'third_parent_department_id' => 'string',
     ])]
@@ -43,7 +43,7 @@ interface DelightfulThirdPlatformDepartmentRepositoryInterface
     public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?DelightfulThirdPlatformDepartmentEntity;
 
     /**
-     * getorganization的所havedepartment.
+     * getorganization所havedepartment.
      * @return DelightfulThirdPlatformDepartmentEntity[]
      */
     public function getOrganizationDepartments(string $organizationCode, array $fields = ['*']): array;

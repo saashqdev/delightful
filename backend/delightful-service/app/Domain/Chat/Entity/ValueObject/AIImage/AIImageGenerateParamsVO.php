@@ -72,12 +72,12 @@ class AIImageGenerateParamsVO extends AbstractValueObject
     }
 
     /**
-     * 将not supported的ratio例setting为推荐ratio例.
+     * willnot supportedratio例settingfor推荐ratio例.
      * @return $this
      */
     public function setRatioForModel(string $ratio, ImageGenerateModelType $model): AIImageGenerateParamsVO
     {
-        // Fluxnot supported的sizeratio例，将ratio例setting为推荐ratio例
+        // Fluxnot supportedsizeratio例，willratio例settingfor推荐ratio例
         if ($model === ImageGenerateModelType::Flux) {
             $ratio = match ($ratio) {
                 Radio::TwoToThree->value, Radio::ThreeToFour->value => Radio::NineToSixteen->value,

@@ -16,7 +16,7 @@ use App\Domain\Contact\Service\DelightfulUserDomainService;
 /**
  * Delightfuluserinfoapplicationservice.
  *
- * aggregateuser的基本info、accountinfo和departmentinfo，提供完整的userinfo。
+ * aggregateuser基本info、accountinfoanddepartmentinfo，提供完整userinfo。
  */
 class DelightfulUserInfoAppService extends AbstractAppService
 {
@@ -29,11 +29,11 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * get完整的userinfo.
+     * get完整userinfo.
      *
      * @param string $userId userID
      * @param ContactDataIsolation $dataIsolation data隔离object
-     * @return array containuser完整info的array
+     * @return array containuser完整infoarray
      */
     public function getUserInfo(string $userId, ContactDataIsolation $dataIsolation): array
     {
@@ -52,7 +52,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
         // getdepartmentuserassociateinfo
         $departmentUserEntities = $this->departmentUserDomainService->getDepartmentUsersByUserIds([$userId], $dataIsolation);
 
-        // extract工number和职位
+        // extract工numberand职位
         $workNumber = '';
         $position = '';
         if (! empty($departmentUserEntities)) {
@@ -80,7 +80,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
      *
      * @param array $userIds userIDarray
      * @param ContactDataIsolation $dataIsolation data隔离object
-     * @return array userinfoarray，键为userID
+     * @return array userinfoarray，键foruserID
      */
     public function getBatchUserInfo(array $userIds, ContactDataIsolation $dataIsolation): array
     {
@@ -104,7 +104,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * getuser的maindepartmentinfo.
+     * getusermaindepartmentinfo.
      *
      * @param string $userId userID
      * @param ContactDataIsolation $dataIsolation data隔离object
@@ -163,10 +163,10 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * build空的userinfo.
+     * build空userinfo.
      *
      * @param string $userId userID
-     * @return array 空的userinfoarray
+     * @return array 空userinfoarray
      */
     private function getEmptyUserInfo(string $userId): array
     {

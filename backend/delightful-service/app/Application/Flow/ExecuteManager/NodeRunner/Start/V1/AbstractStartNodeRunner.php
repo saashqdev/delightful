@@ -39,7 +39,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
         $result = $this->getChatMessageResult($executionData);
 
-        // content or者 files meanwhile为空
+        // content or者 files meanwhilefor空
         if ($result['message_content'] === '' && empty($executionData->getTriggerData()->getAttachments())) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.start.content_empty');
         }
@@ -86,11 +86,11 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             'open_time' => $openChatTime->format('Y-m-d H:i:s'),
         ];
 
-        // getuptimeopen触hair的time
+        // getuptimeopen触hairtime
         $key = 'open_chat_notice_' . $executionData->getConversationId();
         $lastNoticeTime = $this->cache->get($key);
 
-        // ifnothaveuptime，or者距离uptime的timesecond已经超过了，那么thenneedexecute
+        // ifnothaveuptime，or者距离uptimetimesecond已经超pass，那么thenneedexecute
         $config = $triggerBranch->getConfig();
         $intervalSeconds = $this->getIntervalSeconds($config['interval'] ?? 0, $config['unit'] ?? '');
         if (! $lastNoticeTime || (Carbon::make($openChatTime)->diffInSeconds(Carbon::make($lastNoticeTime)) > $intervalSeconds)) {
@@ -149,7 +149,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         $executionData->saveNodeContext($this->node->getSystemNodeId(), $systemOutputResult);
         $vertexResult->addDebugLog('system_response', $executionData->getNodeContext($this->node->getSystemNodeId()));
 
-        // increasecustomize的systemoutput
+        // increasecustomizesystemoutput
         $customSystemOutput = $triggerBranch->getCustomSystemOutput()?->getFormComponent()?->getForm();
         if ($customSystemOutput) {
             $customSystemOutput->appendConstValue($executionData->getTriggerData()->getSystemParams());
@@ -163,7 +163,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
     protected function routine(VertexResult $vertexResult, ExecutionData $executionData, StartNodeParamsConfig $startNodeParamsConfig): array
     {
-        // schedule入参，all由outside部call，判断是哪branch
+        // schedule入参，allbyoutside部call，判断is哪branch
         $branchId = $executionData->getTriggerData()->getParams()['branch_id'] ?? '';
         if (empty($branchId)) {
             // nothave找to任何branch，直接运line
@@ -254,13 +254,13 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         if (! $delightfulFlowEntity || ! $delightfulFlowEntity->getType()->isMain()) {
             return;
         }
-        // 兜bottom，ifnothave agent 的processfinger令，尝试实o clockget
+        // 兜bottom，ifnothave agent processfinger令，尝试实o clockget
         if (empty($executionData->getInstructionConfigs())) {
             $instructs = di(DelightfulAgentDomainService::class)->getAgentById($executionData->getAgentId())->getInstructs();
             $executionData->setInstructionConfigs($instructs);
         }
 
-        // getcurrentmessagebody的finger令value
+        // getcurrentmessagebodyfinger令value
         $messageChatInstructions = $messageEntity->getChatInstructions();
         $messageChatInstructionIdMaps = [];
         $messageChatInstructionNameMaps = [];
@@ -274,7 +274,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         }
 
         $instructions = [];
-        // 只放current agent configuration的processfinger令
+        // 只放current agent configurationprocessfinger令
         foreach ($executionData->getInstructionConfigs() as $instructionConfig) {
             if (! $instructionConfig->isFlowInstructionType()) {
                 continue;
@@ -351,7 +351,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             $container = ApplicationContext::getContainer();
             $messageRepository = $container->get(DelightfulMessageRepositoryInterface::class);
 
-            // 将 VoiceMessage convert为arrayformatuseatupdate
+            // will VoiceMessage convertforarrayformatuseatupdate
             $messageContent = $voiceMessage->toArray();
 
             $messageRepository->updateMessageContent($delightfulMessageId, $messageContent);

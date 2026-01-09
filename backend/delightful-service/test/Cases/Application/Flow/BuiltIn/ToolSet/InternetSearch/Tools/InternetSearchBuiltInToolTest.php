@@ -116,7 +116,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'questions' => ['明day北京的day气', '要穿什么衣服'],
+            'questions' => ['明day北京day气', '要穿什么衣服'],
             'use_deep_search' => true,
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -191,7 +191,7 @@ JSON, true));
 互联网search助hand
 
 ## process
-call`internet_search`conductsearch，ifuserhint词have`深degreesearch`四字，thenuse_deep_searchset为true，否thenset为false
+call`internet_search`conductsearch，ifuserhint词have`深degreesearch`四字，thenuse_deep_searchsetfortrue，否thensetforfalse
 
 MARKDOWN,
 

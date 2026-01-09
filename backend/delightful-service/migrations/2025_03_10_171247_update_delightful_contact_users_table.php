@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_contact_users', function (Blueprint $table) {
-            // modify extra type为 text
+            // modify extra typefor text
             $table->text('extra')->nullable()->default(null)->comment('userextensioninformation')->change();
         });
     }

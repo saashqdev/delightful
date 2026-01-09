@@ -77,7 +77,7 @@ class RoleApiTest extends AbstractHttpTest
         ];
 
         $requestData = [
-            'name' => 'update的子administratorrole' . rand(100, 999),
+            'name' => 'update子administratorrole' . rand(100, 999),
             'status' => 0,
             'permissions' => $testPermissions,
             'user_ids' => ['usi_343adbdbe8a026226311c67bdea152ea'],
@@ -103,7 +103,7 @@ class RoleApiTest extends AbstractHttpTest
 
         // === testquery子administrator ===
         $detailResp = $this->get(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
-        // assertdetailinterfaceresponse结构与data
+        // assertdetailinterfaceresponse结构anddata
         $this->assertIsArray($detailResp);
         $this->assertEquals(1000, $detailResp['code'] ?? null);
 
@@ -125,7 +125,7 @@ class RoleApiTest extends AbstractHttpTest
             false
         );
 
-        // 核对datacontent
+        // 核todatacontent
         $this->assertEquals($id, $detailResp['data']['id'] ?? null);
         $this->assertEquals($requestData['name'], $detailResp['data']['name'] ?? null);
         $this->assertEquals($requestData['status'], $detailResp['data']['status'] ?? null);
@@ -140,7 +140,7 @@ class RoleApiTest extends AbstractHttpTest
 
         // againtimequery应whenreturnrolenot存inor空
         $detailResp = $this->get(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
-        // expected这withinwillreturnerror码，specificaccording to业务而定，只要non1000即可
+        // expected这withinwillreturnerror码，specificaccording to业务while定，as long asnon1000即can
         $this->assertNotEquals(1000, $detailResp['code'] ?? null);
         // === testdelete子administratorEND ===
     }
@@ -161,7 +161,7 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertIsArray($response);
         $this->assertEquals(1000, $response['code'] ?? null);
 
-        // assert data field存inand为array
+        // assert data field存inandforarray
         $this->assertArrayHasKey('data', $response);
         $this->assertIsArray($response['data']);
 

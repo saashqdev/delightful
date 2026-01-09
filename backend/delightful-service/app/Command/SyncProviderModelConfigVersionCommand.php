@@ -117,7 +117,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * get已存in的versionquantity.
+     * get已存inversionquantity.
      */
     private function getExistingVersionCount(ProviderModelModel $model): int
     {
@@ -223,7 +223,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
         $this->logger->info(sprintf('模type: %s', $isDryRun ? '试运line（notwritedatabase）' : '正typeexecute'));
 
         if ($isForce) {
-            $this->logger->warning('force模type已enable：将为所havemodelcreate新version');
+            $this->logger->warning('force模type已enable：willfor所havemodelcreate新version');
         }
 
         if ($limit > 0) {

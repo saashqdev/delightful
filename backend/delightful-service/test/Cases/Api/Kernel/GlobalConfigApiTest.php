@@ -40,16 +40,16 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $putData = $putResponse['data'];
         $this->assertArrayEquals($payload, $putData, 'PUT returndatanot一致');
 
-        // againtime GET verifycache及持久化
+        // againtime GET verifycacheand持久化
         $getResponse = $this->get($this->url, [], $this->getCommonHeaders());
         $this->assertSame(1000, $getResponse['code']);
         $getData = $getResponse['data'];
-        $this->assertArrayEquals($payload, $getData, 'GET returndata与expectednot符');
+        $this->assertArrayEquals($payload, $getData, 'GET returndataandexpectednot符');
     }
 
     public function testGetGlobalConfigWithPlatformSettings(): void
     {
-        // 首先set平台set
+        // firstset平台set
         $platformPayload = [
             'logo_zh_url' => 'https://example.com/logo_zh.png',
             'logo_en_url' => 'https://example.com/logo_en.png',
@@ -78,7 +78,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertArrayHasKey('favicon', $data);
         $this->assertArrayHasKey('default_language', $data);
 
-        // verify平台set的value
+        // verify平台setvalue
         if (isset($data['logo']['zh_CN']['url'])) {
             $this->assertSame('https://example.com/logo_zh.png', $data['logo']['zh_CN']['url']);
         }

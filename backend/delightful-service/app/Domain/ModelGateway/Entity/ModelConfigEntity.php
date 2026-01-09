@@ -20,7 +20,7 @@ class ModelConfigEntity extends AbstractEntity
     protected ?int $id = null;
 
     /**
-     * service商侧接入point id.such as火山的：ep-xxxx.
+     * service商侧接入point id.such as火山：ep-xxxx.
      */
     protected string $model;
 
@@ -276,7 +276,7 @@ class ModelConfigEntity extends AbstractEntity
         if (! is_null($this->actualImplementationConfig)) {
             return $this->actualImplementationConfig;
         }
-        // fromconfigurationmiddlegetactual的configuration
+        // fromconfigurationmiddlegetactualconfiguration
         $configs = [];
         foreach ($this->implementationConfig as $index => $item) {
             $item = explode('|', $item);

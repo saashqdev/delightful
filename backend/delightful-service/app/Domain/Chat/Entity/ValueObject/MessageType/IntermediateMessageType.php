@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject\MessageType;
 
 /**
- * temporarymessagecontent的type.
+ * temporarymessagecontenttype.
  */
 enum IntermediateMessageType: string
 {
-    // 超levelMage的交互instruction
+    // 超levelMage交互instruction
     case BeDelightfulInstruction = 'be_delightful_instruction';
 
     public function getName(): string

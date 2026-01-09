@@ -22,27 +22,27 @@ class CommentEntity extends AbstractEntity
     protected int $type;
 
     /**
-     * comment的resourceid，for example云documentid、sheet表id.
+     * commentresourceid，for example云documentid、sheet表id.
      */
     protected int $resourceId;
 
     /**
-     * comment的resourcetype，for example云document、sheet表.
+     * commentresourcetype，for example云document、sheet表.
      */
     protected int $resourceType;
 
     /**
-     * 父levelcomment的primary keyid.
+     * 父levelcommentprimary keyid.
      */
     protected int $parentId;
 
     /**
-     * 对comment的简短description，main是给动stateuse的，for examplecreate待办、uploadimageetcsystem动state.
+     * tocomment简短description，mainisgive动stateuse，for examplecreate待办、uploadimageetcsystem动state.
      */
     protected string $description = '';
 
     /**
-     * comment的content.
+     * commentcontent.
      */
     protected ?array $message = [];
 

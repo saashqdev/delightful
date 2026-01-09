@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string('organization_code')->default('')->comment('organizationcode');
             $table->string('flow_type')->default('')->comment('processtype');
             $table->string('parent_flow_code')->default('')->comment('父processcode');
-            $table->string('operator_id')->default('')->comment('操作员ID');
+            $table->string('operator_id')->default('')->comment('操as员ID');
             $table->integer('level')->default(0)->comment('level别');
             $table->string('execution_type')->default('')->comment('executetype');
         });

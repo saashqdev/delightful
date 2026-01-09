@@ -27,7 +27,7 @@ class ProviderAdminAssembler
     }
 
     /**
-     * 实bodyconvert为configuration DTO.
+     * 实bodyconvertforconfiguration DTO.
      */
     public static function entityToModelsDTO(ProviderConfigEntity $entity): ProviderConfigModelsDTO
     {
@@ -42,7 +42,7 @@ class ProviderAdminAssembler
     }
 
     /**
-     * model实bodyconvert为 DTO.
+     * model实bodyconvertfor DTO.
      */
     public static function modelEntityToDTO(ProviderModelEntity $entity): ProviderModelDetailDTO
     {
@@ -50,7 +50,7 @@ class ProviderAdminAssembler
     }
 
     /**
-     * originalmodel实bodyconvert为 DTO.
+     * originalmodel实bodyconvertfor DTO.
      */
     public static function originalModelEntityToDTO(ProviderOriginalModelEntity $entity): ProviderOriginalModelDTO
     {
@@ -58,7 +58,7 @@ class ProviderAdminAssembler
     }
 
     /**
-     * 批quantityoriginalmodel实bodyconvert为 DTO.
+     * 批quantityoriginalmodel实bodyconvertfor DTO.
      *
      * @param array<ProviderOriginalModelEntity> $entities
      * @return array<ProviderOriginalModelDTO>
@@ -103,7 +103,7 @@ class ProviderAdminAssembler
         $dto->setConfig($providerConfig->getConfig());
         $dto->setSort($providerConfig->getSort());
 
-        // convertmodel Entity 为 DTO
+        // convertmodel Entity for DTO
         $modelDTOs = [];
         foreach ($models as $model) {
             if ($model instanceof ProviderModelEntity) {

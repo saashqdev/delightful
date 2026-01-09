@@ -67,7 +67,7 @@ class SpeechSubmitDTO extends AbstractRequestDTO
     }
 
     /**
-     * generate完整的火山enginerequestparameter（notcontainappfield，appfield由基础设施layergroup装）.
+     * generate完整火山enginerequestparameter（notcontainappfield，appfieldby基础设施layergroup装）.
      */
     public function toVolcengineRequestData(): array
     {
@@ -76,7 +76,7 @@ class SpeechSubmitDTO extends AbstractRequestDTO
             'audio' => $this->audio->toArray(),
         ];
 
-        // addoptional的attach加configuration
+        // addoptionalattach加configuration
         if ($this->additions) {
             $requestData['additions'] = $this->additions;
         }

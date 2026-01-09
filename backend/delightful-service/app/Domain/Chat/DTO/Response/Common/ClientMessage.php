@@ -14,33 +14,33 @@ use App\Interfaces\Chat\Assembler\MessageAssembler;
 use Throwable;
 
 /**
- * customer端收to的message结构body.
+ * customer端收tomessage结构body.
  */
 class ClientMessage extends AbstractEntity
 {
-    // service端generate的message唯一id，all局唯一。useatwithdraw、editmessage。
+    // service端generatemessage唯一id，all局唯一。useatwithdraw、editmessage。
     protected string $delightfulMessageId;
 
-    // customer端generate，needios/安卓/web三端共同确定一generate算法。useat告知customer端，delightful_message_id的由来
+    // customer端generate，needios/安卓/web三端共同确定一generate算法。useat告知customer端，delightful_message_idbycome
     protected ?string $appMessageId;
 
     // 话题id
     protected ?string $topicId;
 
-    // message的小category。控制message的小category：已读回执；withdraw；edit；入群/退群；organization架构变动; 。 showmessage：text,voice,img,file,videoetc
+    // message小category。控制message小category：已读return执；withdraw；edit；入群/退群；organization架构变动; 。 showmessage：text,voice,img,file,videoetc
 
     protected string $type;
 
-    // 回显未读person数,ifuserpoint击了detail,againrequestspecific的messagecontent
+    // return显未读person数,ifuserpoint击detail,againrequestspecificmessagecontent
     protected ?int $unreadCount;
 
-    // messagesend者,自己or者他person
+    // messagesend者,from己or者他person
     protected string $senderId;
 
-    // messagesendtime，与 delightful_message_id 一起，useatwithdraw、editmessageo clock的唯一property校验。
+    // messagesendtime，and delightful_message_id 一up，useatwithdraw、editmessageo clock唯一property校验。
     protected int $sendTime;
 
-    // chatmessagestatus:unread | seen | read |revoked  .对应middle文释义：未读|已读|已view（non纯text的复杂typemessage，userpoint击了detail）  | withdraw
+    // chatmessagestatus:unread | seen | read |revoked  .to应middle文释义：未读|已读|已view（non纯text复杂typemessage，userpoint击detail）  | withdraw
     protected ?string $status;
 
     protected MessageInterface $content;
@@ -69,7 +69,7 @@ class ClientMessage extends AbstractEntity
             'sender_id' => $this->getSenderId(),
             'send_time' => $this->getSendTime(),
             'status' => $this->getStatus(),
-            // 这within key 是 $this->getType() 对应messagetype，value 是messagecontent
+            // 这within key is $this->getType() to应messagetype，value ismessagecontent
             $this->type => $this->content->toArray($filterNull),
         ];
     }

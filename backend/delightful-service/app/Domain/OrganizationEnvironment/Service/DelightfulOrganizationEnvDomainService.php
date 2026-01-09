@@ -34,12 +34,12 @@ class DelightfulOrganizationEnvDomainService
 
     public function getOrCreateOrganizationsEnvironment(string $originOrganizationCode, DelightfulEnvironmentEntity $delightfulEnvEntity): DelightfulOrganizationEnvEntity
     {
-        // 加自旋lock防并hair
+        // 加from旋lock防andhair
         $spinLockKey = sprintf('getOrCreateOrganizationsEnvironment:envId:%s', $delightfulEnvEntity->getId());
         $owner = random_bytes(8);
         $this->lock->spinLock($spinLockKey, $owner);
         try {
-            // organization所in的environment
+            // organization所inenvironment
             $orgEnvEntity = $this->delightfulOrganizationsEnvironmentRepository->getOrganizationEnvironmentByOrganizationCode(
                 $originOrganizationCode,
                 $delightfulEnvEntity
@@ -47,7 +47,7 @@ class DelightfulOrganizationEnvDomainService
             if (! empty($orgEnvEntity)) {
                 return $orgEnvEntity;
             }
-            // createorganizationenvironment:if是 saas thennot改变organizationencoding。
+            // createorganizationenvironment:ifis saas thennot改变organizationencoding。
             if ($delightfulEnvEntity->getDeployment() === DeploymentEnum::SaaS) {
                 $delightfulOrganizationCode = $originOrganizationCode;
             } else {
@@ -78,20 +78,20 @@ class DelightfulOrganizationEnvDomainService
 
     public function getDelightfulEnvironmentById(int $envId): ?DelightfulEnvironmentEntity
     {
-        // organization所in的environment
+        // organization所inenvironment
         return $this->delightfulEnvironmentsRepository->getEnvById((string) $envId);
     }
 
     public function getOrganizationsEnvironmentDTO(string $delightfulOrganizationCode): ?DelightfulOrganizationEnvDTO
     {
-        // organization所in的environment id
+        // organization所inenvironment id
         $organizationEnvEntity = $this->delightfulOrganizationsEnvironmentRepository->getOrganizationEnvironmentByDelightfulOrganizationCode(
             $delightfulOrganizationCode
         );
         if (! $organizationEnvEntity) {
             return null;
         }
-        // environment的detail
+        // environmentdetail
         $environmentEntity = $this->delightfulEnvironmentsRepository->getEnvById((string) $organizationEnvEntity->getEnvironmentId());
         if (! $environmentEntity) {
             return null;
@@ -117,7 +117,7 @@ class DelightfulOrganizationEnvDomainService
      */
     public function getEnvironmentEntities(): array
     {
-        // 所have存in开放平台的environment
+        // 所have存inopen放平台environment
         return $this->delightfulEnvironmentsRepository->getDelightfulEnvironments();
     }
 
@@ -153,7 +153,7 @@ class DelightfulOrganizationEnvDomainService
         if ($data) {
             return new DelightfulEnvironmentEntity(Json::decode($data));
         }
-        // query token whether已经bind (call了 delightful/auth/check)
+        // query token whether已经bind (call delightful/auth/check)
         $tokenDTO = new DelightfulTokenEntity();
         $tokenDTO->setType(DelightfulTokenType::Account);
         $tokenDTO->setToken($tokenDTO->getDelightfulShortToken($authorization));
@@ -175,7 +175,7 @@ class DelightfulOrganizationEnvDomainService
     }
 
     /**
-     * currentenvironmentdefault的 env configuration。 access saas o clockallowfront端not传environment id，usedefault的environmentconfiguration。
+     * currentenvironmentdefault env configuration。 access saas o clockallowfront端not传environment id，usedefaultenvironmentconfiguration。
      */
     public function getCurrentDefaultDelightfulEnv(): ?DelightfulEnvironmentEntity
     {

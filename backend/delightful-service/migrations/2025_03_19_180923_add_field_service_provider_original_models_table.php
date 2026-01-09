@@ -15,8 +15,8 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('service_provider_original_models', function (Blueprint $table) {
-            // addtype，systemdefault的，自己add的
-            $table->tinyInteger('type')->default(0)->comment('type，0：systemdefault，1：自己add');
+            // addtype，systemdefault，from己add
+            $table->tinyInteger('type')->default(0)->comment('type，0：systemdefault，1：from己add');
             // organizationencoding
             $table->string('organization_code')->default('')->comment('organizationencoding');
         });

@@ -19,7 +19,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Hyperf\Codec\Json;
 
 /**
- * 账number收item箱的序columnnumbertable,each账number的所havemessagemust单调递增.
+ * 账number收item箱序columnnumbertable,each账number所havemessagemust单调递增.
  */
 final class DelightfulSeqEntity extends AbstractEntity
 {
@@ -29,7 +29,7 @@ final class DelightfulSeqEntity extends AbstractEntity
 
     protected ConversationType $objectType;
 
-    // object_type 为0or者1o clock,此处代table delightful_id
+    // object_type for0or者1o clock,此处代table delightful_id
     protected string $objectId = '';
 
     protected string $seqId = '';
@@ -73,7 +73,7 @@ final class DelightfulSeqEntity extends AbstractEntity
     public function __construct(?array $data = [])
     {
         if ($data) {
-            // processmessage的contenttypeconvert
+            // processmessagecontenttypeconvert
             if (! empty($data['content'])) {
                 if (is_string($data['content'])) {
                     $data['content'] = Json::decode($data['content']);
@@ -288,7 +288,7 @@ final class DelightfulSeqEntity extends AbstractEntity
         if (is_string($receiveList) && $receiveList !== '') {
             $receiveList = Json::decode($receiveList);
         }
-        // 对at收itemperson来说,notneedrecordmessagereceivepersonlist
+        // toat收itempersoncome说,notneedrecordmessagereceivepersonlist
         if (empty($receiveList)) {
             $receiveListObj = null;
         } elseif (is_array($receiveList)) {
@@ -355,7 +355,7 @@ final class DelightfulSeqEntity extends AbstractEntity
 
     public function canTriggerFlow(): bool
     {
-        // if是chatmessage，or者是加好友/opensessionwindow的控制message，then能触hair flow
+        // ifischatmessage，or者is加好友/opensessionwindow控制message，then能触hair flow
         return $this->seqType instanceof ChatMessageType || in_array($this->seqType, [ControlMessageType::AddFriendSuccess, ControlMessageType::OpenConversation], true);
     }
 }

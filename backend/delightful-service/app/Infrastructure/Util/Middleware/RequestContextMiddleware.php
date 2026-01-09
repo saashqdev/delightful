@@ -31,7 +31,7 @@ class RequestContextMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // 注意！为了迭代可控，只能in api layer对协程context赋value
+        // 注意！for迭代can控，只能in api layerto协程context赋value
         $accessToken = $request->getHeaderLine('api-key');
 
         if (! empty($accessToken)) {
@@ -39,7 +39,7 @@ class RequestContextMiddleware implements MiddlewareInterface
         } else {
             $delightfulUserAuthorization = $this->getAuthorization();
         }
-        // 将userinformation存入协程context，方便 api layerget
+        // willuserinformation存入协程context，方便 api layerget
         RequestCoContext::setUserAuthorization($delightfulUserAuthorization);
         return $handler->handle($request);
     }
@@ -52,7 +52,7 @@ class RequestContextMiddleware implements MiddlewareInterface
         try {
             return di(AuthManager::class)->guard(name: 'web')->user();
         } catch (BusinessException $exception) {
-            // if是业务exception，直接throw，not改变exceptiontype
+            // ifis业务exception，直接throw，not改变exceptiontype
             throw $exception;
         } catch (Throwable $exception) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR, throwable: $exception);
@@ -83,7 +83,7 @@ class RequestContextMiddleware implements MiddlewareInterface
             $delightfulUserAuthorization->setUserType(UserType::Human);
             return $delightfulUserAuthorization;
         } catch (BusinessException $exception) {
-            // if是业务exception，直接throw，not改变exceptiontype
+            // ifis业务exception，直接throw，not改变exceptiontype
             throw $exception;
         } catch (Throwable $exception) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR, throwable: $exception);

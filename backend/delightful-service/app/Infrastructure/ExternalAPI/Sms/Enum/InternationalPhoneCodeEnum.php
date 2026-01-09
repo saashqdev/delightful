@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\Sms\Enum;
 
 /**
- * 电话的国际区numbercode
+ * 电话国际区numbercode
  */
 enum InternationalPhoneCodeEnum: string
 {
@@ -303,7 +303,7 @@ enum InternationalPhoneCodeEnum: string
     }
 
     /**
-     * 去掉hand机number的"+"number,by及可能存in的"-","00".
+     * go掉hand机number"+"number,byandmaybe存in"-","00".
      * @example +8613104871111
      * @example +86-13104871111
      * @example +0086-13104871111

@@ -29,7 +29,7 @@ use function Hyperf\Support\retry;
 
 /**
  * service商modelsyncapplicationservice.
- * 负责fromoutside部APIpullmodel并synctoOfficialservice商.
+ * 负责fromoutside部APIpullmodelandsynctoOfficialservice商.
  */
 class ProviderModelSyncAppService
 {
@@ -47,19 +47,19 @@ class ProviderModelSyncAppService
 
     /**
      * fromoutside部APIsyncmodel.
-     * whenservice商configurationcreateorupdateo clock，if是Officialservice商and是官方organization，thenfromoutside部APIpullmodel.
+     * whenservice商configurationcreateorupdateo clock，ifisOfficialservice商andis官方organization，thenfromoutside部APIpullmodel.
      */
     public function syncModelsFromExternalApi(
         ProviderConfigEntity $providerConfigEntity,
         string $language,
         string $organizationCode
     ): void {
-        // 1. checkwhether为Officialservice商
+        // 1. checkwhetherforOfficialservice商
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
         $provider = $this->providerConfigDomainService->getProviderById($dataIsolation, $providerConfigEntity->getServiceProviderId());
 
         if (! $provider || $provider->getProviderCode() !== ProviderCode::Official) {
-            $this->logger->debug('not是Officialservice商，skipsync', [
+            $this->logger->debug('notisOfficialservice商，skipsync', [
                 'config_id' => $providerConfigEntity->getId(),
                 'provider_code' => $provider?->getProviderCode()->value,
             ]);
@@ -76,7 +76,7 @@ class ProviderModelSyncAppService
             // 3. parseconfiguration
             $config = $providerConfigEntity->getConfig();
             if (! $config) {
-                $this->logger->warning('configuration为空，skipsync', [
+                $this->logger->warning('configurationfor空，skipsync', [
                     'config_id' => $providerConfigEntity->getId(),
                 ]);
                 return;
@@ -126,7 +126,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * according toservice商category确定要pull的modeltype.
+     * according toservice商category确定要pullmodeltype.
      */
     private function getModelTypesByCategory(Category $category): array
     {
@@ -147,7 +147,7 @@ class ProviderModelSyncAppService
 
         $allModels = [];
 
-        // 为eachtypecallAPI
+        // foreachtypecallAPI
         foreach ($types as $type) {
             try {
                 $models = retry(3, function () use ($apiUrl, $apiKey, $type, $language) {
@@ -210,7 +210,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * 将modelsynctodatabase.
+     * willmodelsynctodatabase.
      */
     private function syncModelsToDatabase(
         ProviderDataIsolation $dataIsolation,
@@ -220,16 +220,16 @@ class ProviderModelSyncAppService
     ): void {
         $configId = $providerConfigEntity->getId();
 
-        // get现have的所havemodel
+        // get现have所havemodel
         $existingModels = $this->providerModelDomainService->getByProviderConfigId($dataIsolation, (string) $configId);
 
-        // 建立model_id -> entity的mapping
+        // 建立model_id -> entitymapping
         $existingModelMap = [];
         foreach ($existingModels as $model) {
             $existingModelMap[$model->getModelId()] = $model;
         }
 
-        // extract新model的model_id
+        // extract新modelmodel_id
         $newModelIds = array_column($models, 'id');
 
         // 遍历新model，createorupdate
@@ -256,7 +256,7 @@ class ProviderModelSyncAppService
             }
         }
 
-        // deletenotagain存in的model
+        // deletenotagain存inmodel
         foreach ($existingModelMap as $modelId => $existingModel) {
             if (! in_array($modelId, $newModelIds)) {
                 try {
@@ -325,7 +325,7 @@ class ProviderModelSyncAppService
         ProviderConfigEntity $providerConfigEntity,
         string $language
     ): SaveProviderModelDTO {
-        // if是一link，那么need对 url conduct限制
+        // ifis一link，那么needto url conduct限制
         $iconUrl = $modelData['info']['attributes']['icon'] ?? '';
         try {
             $iconUrl = str_replace(' ', '%20', $iconUrl);

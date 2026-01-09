@@ -18,12 +18,12 @@ enum UserIdType: string
     case UserId = 'user_id';
 
     /**
-     * organization的someapplicationdown唯一
+     * organizationsomeapplicationdown唯一
      */
     case OpenId = 'open_id';
 
     /**
-     * application的createorganizationdown唯一(useatapplication跨organizationtraceuseat).
+     * applicationcreateorganizationdown唯一(useatapplication跨organizationtraceuseat).
      */
     case UnionId = 'union_id';
 

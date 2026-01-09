@@ -131,7 +131,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->deleteAgentById($authorization, $agentId);
     }
 
-    // getcurrentuser的助理
+    // getcurrentuser助理
 
     /**
      * @deprecated
@@ -156,7 +156,7 @@ class DelightfulAgentApi extends AbstractApi
         return $agentsByUserIdPage;
     }
 
-    // getpublishversion的助理
+    // getpublishversion助理
     public function getAgentVersionById(RequestInterface $request, ?string $agentVersionId = null)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -167,7 +167,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAssembler::createAgentV1Response($delightfulAgentVO, $delightfulFlowDTO);
     }
 
-    // get企业inside部的助理
+    // get企业inside部助理
     public function getAgentsByOrganization(RequestInterface $request)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -238,7 +238,7 @@ class DelightfulAgentApi extends AbstractApi
         return $result;
     }
 
-    // query助理的versionrecord
+    // query助理versionrecord
     public function getReleaseAgentVersions(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -266,7 +266,7 @@ class DelightfulAgentApi extends AbstractApi
         $this->delightfulAgentAppService->updateAgentStatus($authorization, $agentId, DelightfulAgentVersionStatus::from($status));
     }
 
-    // 改变助理publishtoorganization的status
+    // 改变助理publishtoorganizationstatus
     public function updateAgentEnterpriseStatus(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -315,7 +315,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->isUpdated($authenticatable, $agentId);
     }
 
-    // according to userId getpublishversion的助理detail
+    // according to userId getpublishversion助理detail
     public function getDetailByUserId(RequestInterface $request, ?string $userId = null)
     {
         $this->getAuthorization();
@@ -363,7 +363,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->saveInstruct($authenticatable, $agentId, $instructs);
     }
 
-    // getchat模type可use助理list
+    // getchat模typecanuse助理list
     public function getChatModeAvailableAgents()
     {
         /** @var DelightfulUserAuthorization $authenticatable */

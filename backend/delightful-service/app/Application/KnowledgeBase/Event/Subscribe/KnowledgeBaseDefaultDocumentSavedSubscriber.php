@@ -44,7 +44,7 @@ readonly class KnowledgeBaseDefaultDocumentSavedSubscriber implements ListenerIn
         $knowledge = $event->knowledgeBaseEntity;
         $documentEntity = $event->knowledgeBaseDocumentEntity;
         $dataIsolation = $event->dataIsolation;
-        // if是基础knowledge basetype，then传knowledge basecreate者，避免permissionnot足
+        // ifis基础knowledge basetype，then传knowledge basecreate者，避免permissionnot足
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }

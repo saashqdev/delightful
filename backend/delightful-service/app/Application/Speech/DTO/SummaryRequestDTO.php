@@ -9,7 +9,7 @@ namespace App\Application\Speech\DTO;
 
 /**
  * ASR总结requestDTO
- * save总结request的所have必传和optionalparameter.
+ * save总结request所have必传andoptionalparameter.
  */
 readonly class SummaryRequestDTO
 {

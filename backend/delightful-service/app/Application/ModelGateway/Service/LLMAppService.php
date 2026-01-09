@@ -617,7 +617,7 @@ class LLMAppService extends AbstractLLMAppService
         $size = $textGenerateImageDTO->getSize();
         [$width, $height] = explode('x', $size);
 
-        // 计算stringformat的ratio例，如 "1:1", "3:4"
+        // 计算stringformatratio例，如 "1:1", "3:4"
         $ratio = $this->calculateRatio((int) $width, (int) $height);
         $imageGenerateParamsVO->setRatio($ratio);
         $imageGenerateParamsVO->setWidth($width);
@@ -656,7 +656,7 @@ class LLMAppService extends AbstractLLMAppService
                 if (! empty($generateImageRaw)) {
                     $this->recordImageGenerateMessageLog($modelVersion, $creator, $organizationCode);
                     $n = $textGenerateImageDTO->getN();
-                    // except了 mj 是 1 time之outside，其他all按张数算
+                    // except mj is 1 time之outside，其他all按张数算
                     if (in_array($modelVersion, ImageGenerateModelType::getMidjourneyModes())) {
                         $n = 1;
                     }
@@ -718,7 +718,7 @@ class LLMAppService extends AbstractLLMAppService
 
         [$width, $height] = explode('x', $size);
 
-        // 计算stringformat的ratio例，如 "1:1", "3:4"
+        // 计算stringformatratio例，如 "1:1", "3:4"
         $imageGenerateRequest->setWidth($width);
         $imageGenerateRequest->setHeight($height);
 
@@ -1139,7 +1139,7 @@ class LLMAppService extends AbstractLLMAppService
         $imageGenerateParamsVO->setSequentialImageGenerationOptions($proxyModelRequest->getSequentialImageGenerationOptions());
         $imageGenerateParamsVO->setReferenceImages($proxyModelRequest->getImages());
 
-        // 直接透传original size parameter，让eachservice商according to自己的需求process
+        // 直接透传original size parameter，leteachservice商according tofrom己需求process
         $imageGenerateParamsVO->setSize($proxyModelRequest->getSize());
 
         $data = $imageGenerateParamsVO->toArray();
@@ -1169,7 +1169,7 @@ class LLMAppService extends AbstractLLMAppService
 
             // 计算计费quantity
             $n = $proxyModelRequest->getN();
-            // except了 mj和 graph生graph 是 1 time之outside，其他all按张数算
+            // except mjand graph生graph is 1 time之outside，其他all按张数算
             if (in_array($modelVersion, ImageGenerateModelType::getMidjourneyModes())) {
                 $n = 1;
             }
@@ -1567,7 +1567,7 @@ class LLMAppService extends AbstractLLMAppService
 
     private function createAwsAutoCacheConfig(ProxyModelRequestInterface $proxyModelRequest, string $modelName): array
     {
-        // onlycontain anthropic.claude 的model
+        // onlycontain anthropic.claude model
         if (! str_contains($modelName, 'anthropic.claude')) {
             return [];
         }
@@ -1731,13 +1731,13 @@ class LLMAppService extends AbstractLLMAppService
         // 计算responsetime（毫second）
         $responseTime = (int) ((microtime(true) - $startTime) * 1000);
 
-        // convert providerModelId 为整数
+        // convert providerModelId for整数
         $serviceProviderModelsId = is_numeric($providerModelId) ? (int) $providerModelId : null;
 
         // getpriceconfigurationversionID
         $priceId = $this->getPriceIdByServiceProviderModelId($serviceProviderModelsId, $organizationCode);
 
-        // build并publishevent
+        // buildandpublishevent
         $event = $this->buildImageGenerateEntity(
             $creator,
             $organizationCode,
@@ -1753,7 +1753,7 @@ class LLMAppService extends AbstractLLMAppService
     }
 
     /**
-     * getservice商model的priceconfigurationversionID.
+     * getservice商modelpriceconfigurationversionID.
      */
     private function getPriceIdByServiceProviderModelId(?int $serviceProviderModelsId, string $organizationCode): ?int
     {

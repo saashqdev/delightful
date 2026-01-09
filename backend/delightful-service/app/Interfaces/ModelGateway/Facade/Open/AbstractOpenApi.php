@@ -18,7 +18,7 @@ abstract class AbstractOpenApi
 
     protected function getAccessToken(): string
     {
-        // allsurfacecompatible openai 的 api_key format
+        // allsurfacecompatible openai  api_key format
 
         // 1. 按顺序尝试fromrequestheadmiddleget
         $headers = [
@@ -59,7 +59,7 @@ abstract class AbstractOpenApi
     }
 
     /**
-     * fromfinger定的requestheadcolumn表middle按顺序gettoken.
+     * fromfinger定requestheadcolumn表middle按顺序gettoken.
      */
     protected function getTokenFromHeaders(array $headerNames): string
     {

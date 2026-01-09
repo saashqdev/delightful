@@ -12,11 +12,11 @@ use Hyperf\Contract\Arrayable;
 use JsonSerializable;
 
 /**
- * streampush大model的responsemessage.
+ * streampush大modelresponsemessage.
  */
 interface StreamMessageInterface extends JsonSerializable, Arrayable
 {
-    // messagewhether是streammessage
+    // messagewhetherisstreammessage
     public function isStream(): bool;
 
     public function getStreamOptions(): ?StreamOptions;

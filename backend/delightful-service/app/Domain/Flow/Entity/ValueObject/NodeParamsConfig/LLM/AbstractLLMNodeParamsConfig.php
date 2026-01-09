@@ -55,13 +55,13 @@ abstract class AbstractLLMNodeParamsConfig extends NodeParamsConfig
         if (! $this->isLoadAgentPlugin) {
             return [];
         }
-        // loadplugin的configuration
+        // loadpluginconfiguration
         $agentParams = [];
         foreach (AgentPluginCollector::list() as $plugin) {
             $agentPlugin = $plugin->createAgentPlugin();
             // parsepluginparameter
             $agentParams = array_merge($agentParams, $agentPlugin->parseParams($params));
-            // 注入本time运lineo clockuse的plugin
+            // 注入本time运lineo clockuseplugin
             $this->agentPlugins[] = $agentPlugin;
         }
         return $agentParams;

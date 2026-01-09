@@ -15,7 +15,7 @@ use InvalidArgumentException;
 enum DelimiterType: string
 {
     /**
-     * 高可useapplicationtype+modeltype+organizationencoding的minute隔符.
+     * 高canuseapplicationtype+modeltype+organizationencodingminute隔符.
      */
     case HIGH_AVAILABILITY = '||';
 
@@ -30,7 +30,7 @@ enum DelimiterType: string
     }
 
     /**
-     * checkwhether是valid的minute隔符type.
+     * checkwhetherisvalidminute隔符type.
      */
     public static function isValid(string $type): bool
     {
@@ -44,7 +44,7 @@ enum DelimiterType: string
     {
         return match ($type) {
             self::HIGH_AVAILABILITY->value => self::HIGH_AVAILABILITY,
-            default => throw new InvalidArgumentException("invalid的minute隔符type: {$type}"),
+            default => throw new InvalidArgumentException("invalidminute隔符type: {$type}"),
         };
     }
 }

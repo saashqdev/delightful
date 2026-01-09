@@ -27,10 +27,10 @@ class LLMResponseParseUtil
     {
         $content = trim($content);
         $typePattern = sprintf('/```%s\s*([\s\S]*?)\s*```/i', $type);
-        // 匹配 ```json or ``` between的 JSON data
+        // 匹配 ```json or ``` between JSON data
         if (preg_match($typePattern, $content, $matches)) {
             $matchString = $matches[1];
-        } elseif (preg_match('/```\s*([\s\S]*?)\s*```/i', $content, $matches)) { // 匹配 ``` between的content
+        } elseif (preg_match('/```\s*([\s\S]*?)\s*```/i', $content, $matches)) { // 匹配 ``` betweencontent
             $matchString = $matches[1];
         } else {
             $matchString = ''; // nothave找to JSON data

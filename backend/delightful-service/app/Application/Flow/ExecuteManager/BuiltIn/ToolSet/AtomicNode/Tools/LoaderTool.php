@@ -36,7 +36,7 @@ class LoaderTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'documentparse。useatparse远程documentmiddlecontent，extractdocumentmiddle的contentoutput。';
+        return 'documentparse。useatparse远程documentmiddlecontent，extractdocumentmiddlecontentoutput。';
     }
 
     public function getCallback(): ?Closure
@@ -107,7 +107,7 @@ class LoaderTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "file_name",
                         "title": "filename",
-                        "description": "filename。nothaveo clock可use url middle的file名",
+                        "description": "filename。nothaveo clockcanuse url middlefile名",
                         "required": null,
                         "value": null,
                         "encryption": false,

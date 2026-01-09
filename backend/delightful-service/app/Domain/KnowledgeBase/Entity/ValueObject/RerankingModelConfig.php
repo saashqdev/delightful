@@ -13,7 +13,7 @@ use InvalidArgumentException;
 /**
  * 重sortmodelconfigurationvalueobject
  *
- * contain重sortmodel的相关configurationparameter，如modelname、提供商、API 端pointetc
+ * contain重sortmodel相closeconfigurationparameter，如modelname、提供商、API 端pointetc
  */
 class RerankingModelConfig extends AbstractValueObject
 {
@@ -34,42 +34,42 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * API 端point.
      *
-     * 重sortservice的 API 端point
+     * 重sortservice API 端point
      */
     private string $apiEndpoint = '';
 
     /**
      * API key.
      *
-     * access重sortservice的 API key
+     * access重sortservice API key
      */
     private string $apiKey = '';
 
     /**
      * timeouttime（second）.
      *
-     * API request的timeouttime，unit为second
+     * API requesttimeouttime，unitforsecond
      */
     private float $timeout = 3.0;
 
     /**
      * retrycount.
      *
-     * API requestfailo clock的retrycount
+     * API requestfailo clockretrycount
      */
     private int $retryCount = 2;
 
     /**
-     * return的most大resultquantity.
+     * returnmost大resultquantity.
      *
-     * 重sortbackreturn的most大resultquantity
+     * 重sortbackreturnmost大resultquantity
      */
     private int $topN = 3;
 
     /**
      * 批processsize.
      *
-     * 批quantityprocessdocument的size，useat提高performance
+     * 批quantityprocessdocumentsize，useat提高performance
      */
     private int $batchSize = 16;
 
@@ -83,7 +83,7 @@ class RerankingModelConfig extends AbstractValueObject
     /**
      * cacheexpiretime（second）.
      *
-     * cache的expiretime，unit为second
+     * cacheexpiretime，unitforsecond
      */
     private int $cacheTtl = 3600;
 
@@ -196,7 +196,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * getreturn的most大resultquantity.
+     * getreturnmost大resultquantity.
      */
     public function getTopN(): int
     {
@@ -204,7 +204,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * setreturn的most大resultquantity.
+     * setreturnmost大resultquantity.
      */
     public function setTopN(int $topN): self
     {
@@ -331,7 +331,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * convert为array.
+     * convertforarray.
      */
     public function toArray(): array
     {

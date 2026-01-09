@@ -36,7 +36,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
 
     /**
      * @param array<int> $ids
-     * @return array<int, ProviderEntity> returnbyid为key的实bodyobjectarray
+     * @return array<int, ProviderEntity> returnbyidforkey实bodyobjectarray
      */
     public function getByIds(array $ids): array
     {
@@ -151,7 +151,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     }
 
     /**
-     * getfinger定category别的non官方service商 (Legacy).
+     * getfinger定category别non官方service商 (Legacy).
      *
      * @param Category $category service商category别
      * @return ProviderEntity[] non官方service商list
@@ -173,7 +173,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     {
         $builder = $this->createProviderQuery();
         $builder->where('category', $category->value);
-        // notrowexcept任何service商，include Official，因为templateneed所haveservice商
+        // notrowexcept任何service商，include Official，因fortemplateneed所haveservice商
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
         return ProviderAssembler::toEntities($result);
@@ -230,7 +230,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     }
 
     /**
-     * 准备移except软删相关feature，temporary这样写。create带have软deletefilter的 ProviderModel querybuild器.
+     * 准备移except软删相closefeature，temporary这样写。create带have软deletefilter ProviderModel querybuild器.
      */
     private function createProviderQuery(): Builder
     {

@@ -65,15 +65,15 @@ class EditAgentGlobalSettingsRequestDTO extends AbstractDTO
     public function messages(): array
     {
         return [
-            '*.required' => 'Agentall局settingcannot为null',
-            '*.array' => 'Agentall局settingmust是array',
-            '*.type.required' => 'typecannot为null',
-            '*.type.integer' => 'typemust为整数',
+            '*.required' => 'Agentall局settingcannotfornull',
+            '*.array' => 'Agentall局settingmustisarray',
+            '*.type.required' => 'typecannotfornull',
+            '*.type.integer' => 'typemustfor整数',
             '*.type.in' => 'typevalueinvalid',
-            '*.status.required' => 'statuscannot为null',
-            '*.status.integer' => 'statusmust为整数',
+            '*.status.required' => 'statuscannotfornull',
+            '*.status.integer' => 'statusmustfor整数',
             '*.status.in' => 'statusvalueinvalid',
-            '*.extra.array' => '额outsideparametermust是array',
+            '*.extra.array' => '额outsideparametermustisarray',
         ];
     }
 

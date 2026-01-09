@@ -22,7 +22,7 @@ use Throwable;
 
 /**
  * ASR presetfileservice
- * 负责createpreset笔记和stream识别file，供front端writecontent.
+ * 负责createpreset笔记andstream识别file，供front端writecontent.
  */
 readonly class AsrPresetFileService
 {
@@ -37,14 +37,14 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * createpreset笔记和stream识别file.
+     * createpreset笔记andstream识别file.
      *
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
      * @param int $projectId projectID
-     * @param string $displayDir displaydirectory相对path (如: 录音总结_xxx)
+     * @param string $displayDir displaydirectory相topath (如: 录音总结_xxx)
      * @param int $displayDirId displaydirectoryID
-     * @param string $hiddenDir hiddendirectory相对path (如: .asr_recordings/session_xxx)
+     * @param string $hiddenDir hiddendirectory相topath (如: .asr_recordings/session_xxx)
      * @param int $hiddenDirId hiddendirectoryID
      * @param string $taskKey task键
      * @return array{note_file: TaskFileEntity, transcript_file: TaskFileEntity}
@@ -103,7 +103,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * delete笔记file（笔记content为空o clockcleanup）.
+     * delete笔记file（笔记contentfor空o clockcleanup）.
      *
      * @param string $fileId fileID
      * @return bool whetherdeletesuccess
@@ -179,7 +179,7 @@ readonly class AsrPresetFileService
         string $fullPrefix,
         string $workDir
     ): TaskFileEntity {
-        // ⚠️ use CoContext 和 di() getcorrect的language和翻译
+        // ⚠️ use CoContext and di() getcorrectlanguageand翻译
         $language = CoContext::getLanguage();
         $translator = di(TranslatorInterface::class);
         $translator->setLocale($language);
@@ -216,7 +216,7 @@ readonly class AsrPresetFileService
         string $fullPrefix,
         string $workDir
     ): TaskFileEntity {
-        // ⚠️ use CoContext 和 di() getcorrect的language和翻译
+        // ⚠️ use CoContext and di() getcorrectlanguageand翻译
         $language = CoContext::getLanguage();
         $translator = di(TranslatorInterface::class);
         $translator->setLocale($language);
@@ -241,7 +241,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * createpresetfile的通usemethod.
+     * createpresetfile通usemethod.
      */
     private function createPresetFile(
         string $userId,
@@ -279,7 +279,7 @@ readonly class AsrPresetFileService
             'file_name' => $fileName,
             'file_extension' => 'md',
             'file_key' => $fileKey,
-            'file_size' => 0, // initial为0，front端writebackwillupdate
+            'file_size' => 0, // initialfor0，front端writebackwillupdate
             'external_url' => '',
             'storage_type' => 'workspace',
             'is_hidden' => $isHidden,

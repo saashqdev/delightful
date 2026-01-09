@@ -12,26 +12,26 @@ namespace App\Domain\Token\Entity\ValueObject;
  */
 enum DelightfulTokenType: int
 {
-    // user(organizationdown的oneuser),type_relation_value为userid
+    // user(organizationdownoneuser),type_relation_valueforuserid
     case User = 0;
 
-    // 账number,type_relation_value为账numberid
+    // 账number,type_relation_valuefor账numberid
     case Account = 1;
 
-    // organization,type_relation_value为organizationid
+    // organization,type_relation_valuefororganizationid
     case Organization = 2;
 
-    // application,type_relation_value为applicationid
+    // application,type_relation_valueforapplicationid
     case App = 3;
 
-    // process,type_relation_value为processid
+    // process,type_relation_valueforprocessid
     case Flow = 4;
 
-    // day书开放平台
+    // day书open放平台
     case TeamshareOpenPlatform = 5;
 
     /**
-     * pass枚举valuename的stringget枚举value.
+     * pass枚举valuenamestringget枚举value.
      */
     public static function getCaseFromName(string $typeName): ?DelightfulTokenType
     {

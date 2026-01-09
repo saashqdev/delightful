@@ -28,7 +28,7 @@ class VolceOCRClient implements OCRClientInterface
 
     public function ocr(?string $url = null): string
     {
-        // configuration特定的 OCR customer端
+        // configuration特定 OCR customer端
         $client = Visual::getInstance();
         $client->setAccessKey(config('volce_cv.ocr_pdf.ak'));
         $client->setSecretKey(config('volce_cv.ocr_pdf.sk'));
@@ -49,7 +49,7 @@ class VolceOCRClient implements OCRClientInterface
         $content = $response->getContents();
         $this->logger->info('火山OCRresponse: ' . $content);
         $result = Json::decode($content);
-        $code = $result['code'] ?? 0; // ifnothave 'code'，thenusedefault的errorcode
+        $code = $result['code'] ?? 0; // ifnothave 'code'，thenusedefaulterrorcode
         if ($code !== 10000) {
             $message = $result['Message'] ?? '火山OCR遇toerror,message not存in'; // ifnothave 'message'，thenusedefaultmessage
             $this->logger->error(sprintf(
@@ -87,7 +87,7 @@ class VolceOCRClient implements OCRClientInterface
         // parse Content-Type
         $contentType = is_array($headers['Content-Type']) ? $headers['Content-Type'][0] : $headers['Content-Type'];
 
-        // checkfiletypewhether为 PDF orimage
+        // checkfiletypewhetherfor PDF orimage
         if ($contentType === 'application/pdf') {
             return 'pdf';
         }
@@ -95,6 +95,6 @@ class VolceOCRClient implements OCRClientInterface
             return 'image';
         }
 
-        return null; // 既not是 PDF alsonot是finger定的imageformat
+        return null; // 既notis PDF alsonotisfinger定imageformat
     }
 }

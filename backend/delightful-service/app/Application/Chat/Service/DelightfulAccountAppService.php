@@ -67,7 +67,7 @@ class DelightfulAccountAppService extends AbstractAppService
 
         $spinLockKey = 'chat:aiRegister:lock:' . $aiCode;
         $spinLockKeyOwner = random_bytes(8);
-        // 自旋lock
+        // from旋lock
         $this->locker->spinLock($spinLockKey, $spinLockKeyOwner, 3);
         try {
             $userDTO->setUserType(UserType::Ai);
@@ -77,7 +77,7 @@ class DelightfulAccountAppService extends AbstractAppService
                 $authorization->setOrganizationCode($delightfulInfo?->getOrganizationCode());
             }
             // pass aiCode query delightful_flows 表get所属organization。
-            // 注意超level麦吉whenfront是作为onenothavewrite delightful_flows datalibrary的 flow 存in。 SUPER_DELIGHTFUL_CODE write了 accounts 表。
+            // 注意超level麦吉whenfrontisasforonenothavewrite delightful_flows datalibrary flow 存in。 SUPER_DELIGHTFUL_CODE write accounts 表。
             if ($aiCode !== AgentConstant::SUPER_DELIGHTFUL_CODE) {
                 $disabledDataIsolation = FlowDataIsolation::create()->disabled();
                 $delightfulFlowEntity = $this->delightfulFlowDomainService->getByCode($disabledDataIsolation, $aiCode);

@@ -75,16 +75,16 @@ class CreateSubAdminRequestDTO extends AbstractDTO
     }
 
     /**
-     * verifyDTOdata的validproperty.
+     * verifyDTOdatavalidproperty.
      */
     public function validate(): bool
     {
-        // verifyrolenamenot能为空
+        // verifyrolenamenot能for空
         if (empty(trim($this->name))) {
             return false;
         }
 
-        // verifyrolenamelengthnot超过255character
+        // verifyrolenamelengthnot超pass255character
         if (strlen($this->name) > 255) {
             return false;
         }
@@ -94,7 +94,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
             return false;
         }
 
-        // verifypermissionlistwhether为stringarray
+        // verifypermissionlistwhetherforstringarray
         if (! empty($this->permissions)) {
             foreach ($this->permissions as $permission) {
                 if (! is_string($permission)) {
@@ -103,7 +103,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
             }
         }
 
-        // verifyuserIDlistwhether为stringarray
+        // verifyuserIDlistwhetherforstringarray
         if (! empty($this->userIds)) {
             foreach ($this->userIds as $userId) {
                 if (! is_string($userId)) {
@@ -124,21 +124,21 @@ class CreateSubAdminRequestDTO extends AbstractDTO
         $errors = [];
 
         if (empty(trim($this->name))) {
-            $errors[] = 'rolenamenot能为空';
+            $errors[] = 'rolenamenot能for空';
         }
 
         if (strlen($this->name) > 255) {
-            $errors[] = 'rolenamelengthnot能超过255character';
+            $errors[] = 'rolenamelengthnot能超pass255character';
         }
 
         if (! in_array($this->status, [0, 1])) {
-            $errors[] = 'rolestatusvalueinvalid，只能是0or1';
+            $errors[] = 'rolestatusvalueinvalid，只能is0or1';
         }
 
         if (! empty($this->permissions)) {
             foreach ($this->permissions as $index => $permission) {
                 if (! is_string($permission)) {
-                    $errors[] = "permissionlistthe{$index}itemmust是string";
+                    $errors[] = "permissionlistthe{$index}itemmustisstring";
                 }
             }
         }
@@ -146,7 +146,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
         if (! empty($this->userIds)) {
             foreach ($this->userIds as $index => $userId) {
                 if (! is_string($userId)) {
-                    $errors[] = "userIDlistthe{$index}itemmust是string";
+                    $errors[] = "userIDlistthe{$index}itemmustisstring";
                 }
             }
         }

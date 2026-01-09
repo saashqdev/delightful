@@ -78,10 +78,10 @@ class BeDelightfulChatManager
      */
     private static function getAgents(FlowDataIsolation $flowDataIsolation, array $agentIds): array
     {
-        // 1. query所have可use agent
+        // 1. query所havecanuse agent
         $agents = di(DelightfulAgentDomainService::class)->getAgentByIds($agentIds);
 
-        // ifnothave可use的 agents，直接return空array
+        // ifnothavecanuse agents，直接return空array
         if (empty($agents)) {
             return [];
         }
@@ -89,11 +89,11 @@ class BeDelightfulChatManager
         $hasAgents = false;
         $allInstructions = [];
 
-        // 2. generate一share大modelcalltool可阅读的description
+        // 2. generate一share大modelcalltoolcan阅读description
         $description = <<<'MARKDOWN'
 call麦吉 AI 助理conductconversation
 
-可use的 AI 助理list：
+canuse AI 助理list：
 
 MARKDOWN;
 
@@ -108,7 +108,7 @@ MARKDOWN;
                 $agent->getId(),
                 $agent->getAgentName(),
                 $agent->getAgentDescription() ?: '暂无description',
-                $instructionDescription ? "\n  可usefinger令: {$instructionDescription}" : ''
+                $instructionDescription ? "\n  canusefinger令: {$instructionDescription}" : ''
             );
 
             // 收集所havefinger令infouseatgenerate schema
@@ -121,8 +121,8 @@ MARKDOWN;
 
         $usageInstructions = <<<'MARKDOWN'
 useinstruction：
-• must提供 agent_id 和 message parameter
-• conversation_id useat保持conversation连续property，sameID的messagewillsharedupdown文
+• must提供 agent_id and message parameter
+• conversation_id useat保持conversation连续property，sameIDmessagewillsharedupdown文
 
 MARKDOWN;
 
@@ -134,8 +134,8 @@ MARKDOWN;
 finger令parameter instruction（optional）：
 • format：[{"name": "finger令name", "value": "finger令value"}, ...]
 • single-selecttype：fromoptionalvaluemiddlechoose一，for example "yes", "no"
-• switchtype：只能是 "on" or "off"
-• ifnot提供finger令parameter，将usedefaultvalue
+• switchtype：只能is "on" or "off"
+• ifnot提供finger令parameter，willusedefaultvalue
 
 callexample：
 ```json
@@ -159,7 +159,7 @@ MARKDOWN;
             return [];
         }
 
-        // generatefinger令的 JSON Schema
+        // generatefinger令 JSON Schema
         $instructionSchema = self::generateInstructionSchema($allInstructions);
 
         $registeredAgent = new RegisteredTool(
@@ -170,15 +170,15 @@ MARKDOWN;
                     'properties' => [
                         'agent_id' => [
                             'type' => 'string',
-                            'description' => '要call的 AI 助理 ID',
+                            'description' => '要call AI 助理 ID',
                         ],
                         'message' => [
                             'type' => 'string',
-                            'description' => 'send给 AI 助理的messagecontent',
+                            'description' => 'sendgive AI 助理messagecontent',
                         ],
                         'conversation_id' => [
                             'type' => 'string',
-                            'description' => 'sessionID，useat记忆feature，samesessionID的message将具haveshared的updown文',
+                            'description' => 'sessionID，useat记忆feature，samesessionIDmessagewill具havesharedupdown文',
                         ],
                         'instruction' => $instructionSchema,
                     ],
@@ -267,17 +267,17 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => 'finger令parameterarray，useat控制AI助理的line为。eachobjectcontain name（finger令name）和 value（finger令value）field。single-selecttypefinger令needfromoptionalvaluemiddlechoose一，switchtypefinger令只能是 "on" or "off"。',
+            'description' => 'finger令parameterarray，useat控制AI助理linefor。eachobjectcontain name（finger令name）and value（finger令value）field。single-selecttypefinger令needfromoptionalvaluemiddlechoose一，switchtypefinger令只能is "on" or "off"。',
             'items' => [
                 'type' => 'object',
                 'properties' => [
                     'name' => [
                         'type' => 'string',
-                        'description' => 'finger令name，must与AI助理definition的finger令name完all匹配',
+                        'description' => 'finger令name，mustandAI助理definitionfinger令name完all匹配',
                     ],
                     'value' => [
                         'type' => 'string',
-                        'description' => 'finger令value，single-selecttypefromoptionalvaluemiddlechoose，switchtype只能是 "on" or "off"',
+                        'description' => 'finger令value，single-selecttypefromoptionalvaluemiddlechoose，switchtype只能is "on" or "off"',
                     ],
                 ],
                 'required' => ['name', 'value'],
@@ -285,7 +285,7 @@ MARKDOWN;
             ],
         ];
 
-        // ifhavespecific的finger令info，generatemore详细的 schema
+        // ifhavespecificfinger令info，generatemore详细 schema
         if (! empty($allInstructions)) {
             $examples = [];
             foreach ($allInstructions as $instructions) {

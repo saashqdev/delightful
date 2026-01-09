@@ -112,13 +112,13 @@ class CreateGroupNodeParamsConfig extends NodeParamsConfig
             'group_owner' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
             // 群member
             'group_members' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
-            // 群type，此处对at \App\Domain\Group\Entity\ValueObject\GroupTypeEnum
+            // 群type，此处toat \App\Domain\Group\Entity\ValueObject\GroupTypeEnum
             'group_type' => 0,
             // containwhenfrontuser
             'include_current_user' => $this->includeCurrentUser,
             // containwhenfront助理
             'include_current_assistant' => $this->includeCurrentAssistant,
-            // 助理开场白
+            // 助理open场白
             'assistant_opening_speech' => ComponentFactory::generateTemplate(StructureType::Value)?->toArray(),
         ]);
     }

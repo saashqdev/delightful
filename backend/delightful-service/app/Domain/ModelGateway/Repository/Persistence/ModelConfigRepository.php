@@ -20,14 +20,14 @@ class ModelConfigRepository extends AbstractRepository implements ModelConfigRep
 {
     public function save(LLMDataIsolation $dataIsolation, ModelConfigEntity $modelConfigEntity): ModelConfigEntity
     {
-        // 由at可能双写2张表，therefore开transaction。again由atnot想generate代理category，thereforeuse Db::transaction
+        // byatmaybe双写2张表，thereforeopentransaction。againbyatnot想generate代理category，thereforeuse Db::transaction
         return Db::transaction(function () use ($dataIsolation, $modelConfigEntity) {
             $model = $this->createBuilder($dataIsolation, ModelConfigModel::query())->where('model', $modelConfigEntity->getModel())->first();
             if (! $model) {
                 $model = new ModelConfigModel();
             }
             $attributes = $this->getAttributes($modelConfigEntity);
-            // 无法bemodify的field
+            // 无法bemodifyfield
             unset($attributes['use_amount']);
             $model->fill($attributes);
             $model->save();

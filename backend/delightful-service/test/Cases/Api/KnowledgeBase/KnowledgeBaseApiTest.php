@@ -610,7 +610,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $this->assertSame(1000, $res['code'], $res['message']);
         $this->assertIsArray($res['data']);
 
-        // verifyreturnresult的结构
+        // verifyreturnresult结构
         if (! empty($res['data'])) {
             $result = $res['data']['list'][0];
             $this->assertArrayHasKey('id', $result);
@@ -621,7 +621,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
             $this->assertArrayHasKey('doc_type', $result);
             $this->assertArrayHasKey('knowledge_base_code', $result);
 
-            // verifyreturn的contentcontainquerykeyword
+            // verifyreturncontentcontainquerykeyword
             $this->assertStringContainsString('test', $result['content']);
         }
     }
@@ -658,7 +658,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * createtestdocument并returndocumentdata.
+     * createtestdocumentandreturndocumentdata.
      */
     protected function createDocument(array $overrideData = [], ?string $knowledgeBaseCode = null): array
     {
@@ -695,8 +695,8 @@ class KnowledgeBaseApiTest extends HttpTestCase
     protected function clearTestKnowledgeBaseData()
     {
         // according toactual情况implementcleanup逻辑
-        // can直接calldatabase操作deletetestdata
-        // or者call相应的servicemethod
+        // can直接calldatabase操asdeletetestdata
+        // or者call相应servicemethod
     }
 
     protected function createKnowledgeBase(array $data = []): array
@@ -704,7 +704,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $data = array_merge([
             'source_type' => SourceType::EXTERNAL_FILE->value,
             'name' => 'testknowledge base',
-            'description' => '这是一testknowledge basedescription',
+            'description' => '这is一testknowledge basedescription',
             'icon' => 'qqqq',
             'enabled' => true,
             'is_draft' => true,
@@ -742,7 +742,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * createtestslicesegment并returndata.
+     * createtestslicesegmentandreturndata.
      */
     protected function createFragment(array $overrideData = [], ?string $documentCode = null, ?string $knowledgeBaseCode = null): array
     {
@@ -760,7 +760,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         }
 
         $defaultData = [
-            'content' => '这是一testslicesegmentcontent',
+            'content' => '这is一testslicesegmentcontent',
             'metadata' => ['page' => 1],
             'embedding_model' => 'test-model',
             'vector_db' => 'test-db',

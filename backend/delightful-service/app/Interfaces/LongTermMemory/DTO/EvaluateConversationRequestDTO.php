@@ -21,7 +21,7 @@ class EvaluateConversationRequestDTO extends AbstractDTO
     public string $conversationContent = '';
 
     /**
-     * use的modelname.
+     * usemodelname.
      */
     public string $modelName = LLMModelEnum::DEEPSEEK_V3->value;
 

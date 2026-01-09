@@ -74,7 +74,7 @@ readonly class KnowledgeBaseFragmentDomainService
         $savingDelightfulFlowKnowledgeFragmentEntity->setDocumentCode($knowledgeBaseDocumentEntity->getCode());
         $savingDelightfulFlowKnowledgeFragmentEntity->setCreator($dataIsolation->getCurrentUserId());
 
-        // ifhave业务id，并and业务 ID 存in，alsocan相whenatupdate
+        // ifhave业务id，andand业务 ID 存in，alsocan相whenatupdate
         $knowledgeBaseFragmentEntity = null;
         if (! empty($savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId()) && empty($savingDelightfulFlowKnowledgeFragmentEntity->getId())) {
             $knowledgeBaseFragmentEntity = $this->knowledgeBaseFragmentRepository->getByBusinessId($dataIsolation, $savingDelightfulFlowKnowledgeFragmentEntity->getKnowledgeCode(), $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId());
@@ -91,7 +91,7 @@ readonly class KnowledgeBaseFragmentDomainService
             if (empty($knowledgeBaseFragmentEntity)) {
                 ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, "[{$savingDelightfulFlowKnowledgeFragmentEntity->getId()}] nothave找to");
             }
-            // ifnothavechange，thennotneedupdate了
+            // ifnothavechange，thennotneedupdate
             if (! $knowledgeBaseFragmentEntity->hasModify($savingDelightfulFlowKnowledgeFragmentEntity)) {
                 return $knowledgeBaseFragmentEntity;
             }
@@ -158,7 +158,7 @@ readonly class KnowledgeBaseFragmentDomainService
     }
 
     /**
-     * according to point_id get所have相关slicesegment，按 version 倒序sort.
+     * according to point_id get所have相closeslicesegment，按 version 倒序sort.
      * @return array<KnowledgeBaseFragmentEntity>
      */
     public function getFragmentsByPointId(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, string $pointId, bool $lock = false): array
@@ -203,7 +203,7 @@ readonly class KnowledgeBaseFragmentDomainService
         $this->logger->info('front置text预processend，耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
         // againconductminutesegment
-        // process转义的minute隔符
+        // process转义minute隔符
         $start = microtime(true);
         $this->logger->info('textminutesegmentstart。');
         $separator = stripcslashes($selectedFragmentConfig->getSegmentRule()->getSeparator());
@@ -217,7 +217,7 @@ readonly class KnowledgeBaseFragmentDomainService
         $fragments = $splitter->splitText($content);
         $this->logger->info('textminutesegmentend，耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
-        // need额outsideconductprocess的rule
+        // need额outsideconductprocessrule
         $start = microtime(true);
         $this->logger->info('back置text预processstart。');
         if (in_array(TextPreprocessRule::REPLACE_WHITESPACE, $preprocessRule)) {

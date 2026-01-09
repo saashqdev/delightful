@@ -65,12 +65,12 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
             $childrenNodes[$title] = $branch['next_nodes'] ?? [];
         }
 
-        // at least是兜bottombranch
+        // at leastis兜bottombranch
         $vertexResult->setChildrenIds($elseBranch['next_nodes'] ?? []);
 
         $systemPrompt = $this->createSystemPrompt($intentPrompts);
 
-        // if意graph识别start了自动load记忆，那么need剔exceptcurrentmessage
+        // if意graph识别startfrom动load记忆，那么need剔exceptcurrentmessage
         $ignoreMessageIds = [];
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
@@ -105,16 +105,16 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         return <<<MARKDOWN
 '# role
-你是一意graph识别sectionpoint，useatanalyzeuser的意graph，你将得to一shareuserinput的content，帮我analyze出user的意graph和置信degree。
-resultneedin限定的意graphrangemiddle。
+你is一意graph识别sectionpoint，useatanalyzeuser意graph，你will得to一shareuserinputcontent，帮我analyzeoutuser意graphand置信degree。
+resultneedin限定意graphrangemiddle。
 
 # 技能 - 意graph识别
-将你的responseformat化为 JSON object，format如down：
+will你responseformat化for JSON object，format如down：
 {
     "whether识别": true,
     "识别failreason": "",
     "most佳意graph": "吃饭",
-    "匹配to的意graphhave": [
+    "匹配to意graphhave": [
         {
             "意graph": "吃饭",
             "置信degree": 0.8
@@ -133,17 +133,17 @@ resultneedin限定的意graphrangemiddle。
 }    
 
 # process
-1. 你将得to一shareuserinput的content，帮我analyze出user的意graph和置信degree。
-2. 推理user的意graph，将推理procedure放to JSON middle的 推导procedure field，解释为什么will得出这些意graph和置信degree。
-3. if识别to了意graph，请填写most佳匹配和匹配to的意graph，whether识别为 true，most佳意graph 一定是置信degreemost高的，其middle 匹配to的意graphhave field是according to 置信degree from大to小rowcolumn。
-4. ifincurrentrangenothave找to任何意graph，whether识别为 false，请填写识别failreason，most佳匹配和匹配to的意graphallshould是空的。
-5. 只willreturn JSON format，notwillagainreturn其他content，if一定needhavereturn，请放toremarkmiddle，回答的content一定能be JSON toolparse。
+1. 你will得to一shareuserinputcontent，帮我analyzeoutuser意graphand置信degree。
+2. 推理user意graph，will推理procedure放to JSON middle 推导procedure field，解释for什么will得out这些意graphand置信degree。
+3. if识别to意graph，请填写most佳匹配and匹配to意graph，whether识别for true，most佳意graph 一定is置信degreemost高，其middle 匹配to意graphhave fieldisaccording to 置信degree from大to小rowcolumn。
+4. ifincurrentrangenothave找to任何意graph，whether识别for false，请填写识别failreason，most佳匹配and匹配to意graphallshouldis空。
+5. 只willreturn JSON format，notwillagainreturn其他content，if一定needhavereturn，请放toremarkmiddle，return答content一定能be JSON toolparse。
 
 # 限制
-- 意graphrange的format是 '意graph'：'意graphdescription'。其middle意graphdescriptioncan为空。意graph和意graphdescription一定是use '' package裹的data。
-- notcan回答其他issue，只能回答意graph识别的issue。
+- 意graphrangeformatis '意graph'：'意graphdescription'。其middle意graphdescriptioncanfor空。意graphand意graphdescription一定isuse '' package裹data。
+- notcanreturn答其他issue，只能return答意graph识别issue。
 
-# needanalyze的意graphrange如down
+# needanalyze意graphrange如down
 {$content}
 MARKDOWN;
     }

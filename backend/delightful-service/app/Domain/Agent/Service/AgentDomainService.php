@@ -35,7 +35,7 @@ readonly class AgentDomainService
     }
 
     /**
-     * getorganizationinside可use的 Agent version.
+     * getorganizationinsidecanuse Agent version.
      *
      * @return array{total: int, list: array<DelightfulAgentVersionEntity>}
      */

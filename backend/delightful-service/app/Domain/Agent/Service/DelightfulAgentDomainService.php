@@ -161,16 +161,16 @@ class DelightfulAgentDomainService
     // 商业code目frontalsodependency
     public function getBotsByOrganization(RequestContext $requestContext, string $agentName, ?string $pageToken = null, int $pageSize = 50, ?string $descriptionKeyword = null): array
     {
-        // getdata隔离object并getcurrentorganization的organizationcode
+        // getdata隔离objectandgetcurrentorganizationorganizationcode
         $organizationCode = $requestContext->getUserAuthorization()->getOrganizationCode();
 
-        // getenable的助理list
+        // getenable助理list
         $enabledAgents = $this->getEnabledAgents();
 
-        // extractenable助理listmiddle的 agent_version_id
+        // extractenable助理listmiddle agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // getfinger定organization和助理version的助理data及其total
+        // getfinger定organizationand助理version助理dataand其total
         $page = ((int) ceil((int) $pageToken / $pageSize)) + 1;
         $agents = $this->agentVersionRepository->getAgentsByOrganization($organizationCode, $agentVersionIds, $page, $pageSize, $agentName, $descriptionKeyword);
 
@@ -204,7 +204,7 @@ class DelightfulAgentDomainService
             $links = array_merge(...$links);
         }
 
-        // 替换each助理的avatarlink
+        // 替换each助理avatarlink
         foreach ($agents as &$agent) {
             $avatarKey = $agent['agent_avatar'];
             $fileLink = $links[$avatarKey] ?? null;
@@ -222,7 +222,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * save助理的交互finger令.
+     * save助理交互finger令.
      */
     public function updateInstruct(string $organizationCode, string $agentId, array $instructs, string $userId = '', bool $valid = true): array
     {
@@ -244,7 +244,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * query企业down的所have助理,itemitemquery：status，createperson，search.
+     * query企业down所have助理,itemitemquery：status，createperson，search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
@@ -258,7 +258,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * get企业down的所have助理create者.
+     * get企业down所have助理create者.
      * @return array<string>
      */
     public function getOrganizationAgentsCreators(string $organizationCode): array

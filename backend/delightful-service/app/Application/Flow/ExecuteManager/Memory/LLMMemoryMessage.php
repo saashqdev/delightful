@@ -135,7 +135,7 @@ class LLMMemoryMessage
             return null;
         }
 
-        // according tomessagetypecreate对应的message
+        // according tomessagetypecreateto应message
         $messageType = $delightfulMessageEntity->getSenderType() ?? ConversationType::Ai;
         $role = ($messageType === ConversationType::Ai) ? Role::Assistant : Role::User;
 
@@ -176,7 +176,7 @@ class LLMMemoryMessage
             $customMessage->setAttachments($attachments);
         }
 
-        // verifywhether是valid的
+        // verifywhetherisvalid
         if (! $customMessage->isValid()) {
             return null;
         }

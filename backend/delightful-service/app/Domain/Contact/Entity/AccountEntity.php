@@ -23,7 +23,7 @@ class AccountEntity extends AbstractEntity
     protected ?UserType $type = null;
 
     /**
-     * flowgenerate的ai code.
+     * flowgenerateai code.
      */
     protected ?string $aiCode = null;
 
@@ -64,7 +64,7 @@ class AccountEntity extends AbstractEntity
 
     protected ?string $createdAt = null;
 
-    // 为了trace哪withincreate的账number，留down这构造function
+    // fortrace哪withincreate账number，留down这构造function
     public function __construct(array $data = [])
     {
         parent::__construct($data);
@@ -104,7 +104,7 @@ class AccountEntity extends AbstractEntity
     }
 
     /**
-     * get国家code (state_code的别名).
+     * get国家code (state_code别名).
      */
     public function getStateCode(): ?string
     {

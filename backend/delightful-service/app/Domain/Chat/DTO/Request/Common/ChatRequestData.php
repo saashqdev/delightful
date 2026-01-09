@@ -17,7 +17,7 @@ class ChatRequestData extends AbstractEntity
     protected Message $message;
 
     /**
-     * message所属的conversationID.
+     * message所属conversationID.
      */
     protected string $conversationId;
 

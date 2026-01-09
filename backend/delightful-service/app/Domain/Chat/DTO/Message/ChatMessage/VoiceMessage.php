@@ -227,7 +227,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
         $submitDTO->setUser($userDTO);
         $submitDTO->setRequest(['model_name' => 'bigmodel']);
 
-        // callFlashvoice识别并getresponse
+        // callFlashvoice识别andgetresponse
         $flashResponse = $speechClient->submitFlashTask($submitDTO);
 
         // If response contains audio duration info, set it to current object (convert to seconds)
@@ -236,7 +236,7 @@ class VoiceMessage extends FileMessage implements TextContentInterface
             $this->setDuration((int) ceil($audioDuration / 1000)); // Convert milliseconds to seconds, round up
         }
 
-        // extract并returntextcontent
+        // extractandreturntextcontent
         return $flashResponse->extractTextContent();
     }
 

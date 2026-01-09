@@ -64,7 +64,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     public function updateTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity
     {
         $name = $delightfulTopicEntity->getName();
-        // lengthnot能超过 50
+        // lengthnot能超pass 50
         if (mb_strlen($name) > 50) {
             ExceptionBuilder::throw(
                 ChatErrorCode::INPUT_PARAM_ERROR,
@@ -95,7 +95,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     /**
-     * getsession的sessionlist.
+     * getsessionsessionlist.
      * @param string[] $topicIds
      * @return array<DelightfulTopicEntity>
      */
@@ -188,7 +188,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     /**
-     * 按timerangegetsessiondownsome话题的message.
+     * 按timerangegetsessiondownsome话题message.
      * @return ClientSequenceResponse[]
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array
@@ -294,7 +294,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
         return TopicAssembler::getTopicMessageEntities($topicMessages);
     }
 
-    // 避免 redis cacheserialize的object,占usetoo多inside存
+    // 避免 redis cacheserializeobject,占usetoo多inside存
     #[Cacheable(prefix: 'topic:id:conversation', value: '_#{delightfulTopicDTO.topicId}_#{delightfulTopicDTO.conversationId}', ttl: 60)]
     private function getTopicArray(DelightfulTopicEntity $delightfulTopicDTO): ?array
     {

@@ -30,7 +30,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Throwable;
 
 /**
- * 控制message相关.
+ * 控制message相close.
  */
 class DelightfulIntermediateMessageAppService extends AbstractAppService
 {
@@ -41,7 +41,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
     }
 
     /**
-     * according tocustomer端hair来的控制messagetype,minutehairto对应的process模piece.
+     * according tocustomer端haircome控制messagetype,minutehairtoto应process模piece.
      * @throws Throwable
      */
     public function dispatchClientIntermediateMessage(ChatRequest $chatRequest, DelightfulUserAuthorization $userAuthorization): ?array
@@ -79,7 +79,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
 
     public function checkSendMessageAuth(DelightfulConversationEntity $conversationEntity, DataIsolation $dataIsolation): void
     {
-        // checkconversation id所属organization，与whenfront传入organizationencoding的一致property
+        // checkconversation id所属organization，andwhenfront传入organizationencoding一致property
         if ($conversationEntity->getUserOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }

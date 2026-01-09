@@ -17,7 +17,7 @@ use Hyperf\Contract\TranslatorInterface;
 
 /**
  * chatmessage装配器
- * 负责buildASR总结相关的chatmessage.
+ * 负责buildASR总结相closechatmessage.
  */
 readonly class ChatMessageAssembler
 {
@@ -75,7 +75,7 @@ readonly class ChatMessageAssembler
         $translator->setLocale(CoContext::getLanguage());
         // buildmessagecontent
         if ($noteData !== null && ! empty($noteData->fileName) && ! empty($noteData->filePath)) {
-            // have笔记o clock的messagecontent：meanwhile提to录音file和笔记file
+            // have笔记o clockmessagecontent：meanwhile提to录音fileand笔记file
 
             $messageContent = [
                 [
@@ -112,7 +112,7 @@ readonly class ChatMessageAssembler
                 ],
             ];
         } else {
-            // 无笔记o clock的messagecontent：只提to录音file
+            // 无笔记o clockmessagecontent：只提to录音file
             $messageContent = [
                 [
                     'type' => 'text',

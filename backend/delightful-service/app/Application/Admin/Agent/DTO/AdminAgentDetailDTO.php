@@ -31,7 +31,7 @@ class AdminAgentDetailDTO extends AbstractDTO
     // assistant creator nickname
     protected string $createdName;
 
-    // version number，ifnothaveversion numberthen为：no version
+    // version number，ifnothaveversion numberthenfor：no version
     protected string $versionNumber;
 
     // enabled status

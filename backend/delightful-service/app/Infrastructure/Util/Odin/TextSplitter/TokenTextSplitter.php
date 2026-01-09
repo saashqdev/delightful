@@ -18,7 +18,7 @@ class TokenTextSplitter extends TextSplitter
 {
     /**
      * setmost大cachetextlength（character数）
-     * 超过此length的text将notwillbecachein协程updown文middle.
+     * 超pass此lengthtextwillnotwillbecachein协程updown文middle.
      */
     private const int MAX_CACHE_TEXT_LENGTH = 1000;
 
@@ -38,17 +38,17 @@ class TokenTextSplitter extends TextSplitter
     private $tokenizer;
 
     /**
-     * defaulttoken计算闭packageuseto的encoderProvider.
+     * defaulttoken计算闭packageusetoencoderProvider.
      */
     private EncoderProvider $defaultEncoderProvider;
 
     /**
-     * defaulttoken计算闭packageuseto的encoder.
+     * defaulttoken计算闭packageusetoencoder.
      */
     private Encoder $defaultEncoder;
 
     /**
-     * @var bool splitback的text保留minute隔符
+     * @var bool splitbacktext保留minute隔符
      */
     private bool $preserveSeparator = false;
 
@@ -79,8 +79,8 @@ class TokenTextSplitter extends TextSplitter
     /**
      * splittext.
      *
-     * @param string $text 要split的text
-     * @return array splitback的textpiecearray
+     * @param string $text 要splittext
+     * @return array splitbacktextpiecearray
      */
     public function splitText(string $text): array
     {
@@ -89,10 +89,10 @@ class TokenTextSplitter extends TextSplitter
         // saveoriginaltext，useatalso原tag
         $originalText = $text;
 
-        // 1. 先把原文middle的0x00替换become0x000x00
+        // 1. 先原文middle0x00替换become0x000x00
         $text = str_replace("\x00", "\x00\x00", $text);
 
-        // 2. 把tag替换become0x00
+        // 2. tag替换become0x00
         $text = preg_replace('/<DelightfulCompressibleContent.*?<\/DelightfulCompressibleContent>/s', "\x00", $text);
 
         // 3. splittext
@@ -102,7 +102,7 @@ class TokenTextSplitter extends TextSplitter
             $chunks = [$text];
         }
 
-        // 计算eachchunk的tokenlength
+        // 计算eachchunktokenlength
         $chunksLengths = array_map(function ($chunk) {
             return ($this->tokenizer)($chunk);
         }, $chunks);
@@ -124,7 +124,7 @@ class TokenTextSplitter extends TextSplitter
         $tagIndex = 0;
 
         return array_map(function ($chunk) use ($tags, &$tagIndex) {
-            // also原0x000x00为0x00
+            // also原0x000x00for0x00
             $chunk = str_replace("\x00\x00", "\x00", $chunk);
             // also原tag
             return preg_replace_callback('/\x00/', function () use ($tags, &$tagIndex) {
@@ -136,9 +136,9 @@ class TokenTextSplitter extends TextSplitter
     /**
      * mergetextpiece.
      *
-     * @param array $splits 要merge的textpiece
+     * @param array $splits 要mergetextpiece
      * @param string $separator minute隔符
-     * @return array mergeback的textpiecearray
+     * @return array mergebacktextpiecearray
      */
     protected function mergeSplits(array $splits, string $separator): array
     {
@@ -192,7 +192,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * processminute隔符，将minute隔符splicetoeachminutepiece的frontsurface（except了first）.
+     * processminute隔符，willminute隔符splicetoeachminutepiecefrontsurface（exceptfirst）.
      */
     private function preserveSeparator(array $chunks, string $separator): array
     {
@@ -202,7 +202,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 检测并converttextencoding
+     * 检测andconverttextencoding
      */
     private function ensureUtf8Encoding(string $text): string
     {
@@ -218,7 +218,7 @@ class TokenTextSplitter extends TextSplitter
      */
     private function splitByFixedLength(string $text): array
     {
-        $chunkSize = (int) floor($this->chunkSize / 2); // usemore小的piecesize
+        $chunkSize = (int) floor($this->chunkSize / 2); // usemore小piecesize
         $length = mb_strlen($text);
         $splits = [];
         for ($i = 0; $i < $length; $i += $chunkSize) {
@@ -228,7 +228,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * process无minute隔符的textsplit.
+     * process无minute隔符textsplit.
      */
     private function handleNoSeparatorSplits(array $splits, array $splitLengths): array
     {
@@ -268,8 +268,8 @@ class TokenTextSplitter extends TextSplitter
     /**
      * 递归splittext.
      *
-     * @param string $text 要split的text
-     * @return array splitback的textpiecearray
+     * @param string $text 要splittext
+     * @return array splitbacktextpiecearray
      */
     private function recursiveSplitText(string $text, int $separatorBeginIndex = 0): array
     {
@@ -277,7 +277,7 @@ class TokenTextSplitter extends TextSplitter
         $separator = end($this->separators);
         $newSeparators = [];
 
-        // find合适的minute隔符, from$separatorBeginIndexstart
+        // find合适minute隔符, from$separatorBeginIndexstart
         for ($i = $separatorBeginIndex; $i < count($this->separators); ++$i) {
             $sep = $this->separators[$i];
             if ($sep === '') {
@@ -292,20 +292,20 @@ class TokenTextSplitter extends TextSplitter
         }
         $separatorBeginIndex = min($i + 1, count($this->separators));
 
-        // use选定的minute隔符splittext
+        // use选定minute隔符splittext
         if ($separator !== '') {
             $splits = $this->splitBySeparator($text, $separator);
         } else {
             $splits = $this->splitByFixedLength($text);
         }
 
-        // 计算eachsplit的tokenlength
+        // 计算eachsplittokenlength
         $splitLengths = array_map(function ($split) {
             return ($this->tokenizer)($split);
         }, $splits);
 
         if ($separator !== '') {
-            // processhaveminute隔符的情况
+            // processhaveminute隔符情况
             $goodSplits = [];
             $goodSplitsLengths = [];
             $actualSeparator = $this->keepSeparator ? $separator : '';
@@ -347,7 +347,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 计算text的tokenquantity.
+     * 计算texttokenquantity.
      */
     private function calculateTokenCount(string $text): int
     {
@@ -366,7 +366,7 @@ class TokenTextSplitter extends TextSplitter
     private function getDefaultTokenizer(): callable
     {
         return function (string $text) {
-            // iftextlength超过限制，直接计算notcache
+            // iftextlength超pass限制，直接计算notcache
             if (mb_strlen($text) > self::MAX_CACHE_TEXT_LENGTH) {
                 return $this->calculateTokenCount($text);
             }
@@ -391,7 +391,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 检测filecontent的encoding
+     * 检测filecontentencoding
      */
     private function detectEncoding(string $content): string
     {

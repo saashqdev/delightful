@@ -109,11 +109,11 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->addTeamMembers($projectId);
 
-        // 4. 现intest2userbecome为member，butpermissionnot足 - addmembershouldfail
+        // 4. 现intest2userbecomeformember，butpermissionnot足 - addmembershouldfail
         $this->switchUserTest2();
-        $this->addTeamMembers($projectId, 51202); // 仍然无permission，因为not是管理者
+        $this->addTeamMembers($projectId, 51202); // 仍然无permission，因fornotis管理者
 
-        // 5. 给test2user管理permission
+        // 5. givetest2user管理permission
         $this->switchUserTest1();
         $this->updateMemberToManager($projectId, $this->testUserId2);
 
@@ -123,7 +123,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * test协作setting管理.
+     * test协assetting管理.
      */
     public function testCollaborationSettings(): void
     {
@@ -131,28 +131,28 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->switchUserTest1();
 
-        // 1. testget协作setting - defaultclosestatus
+        // 1. testget协assetting - defaultclosestatus
         $response = $this->getCollaborationSettings($projectId);
         $this->assertFalse($response['data']['is_collaboration_enabled']);
         $this->assertEquals(true, in_array($response['data']['default_join_permission'], ['viewer', 'editor']));
 
-        // 2. start协作feature
+        // 2. start协asfeature
         $this->enableCollaboration($projectId);
 
-        // 3. validate协作已start
+        // 3. validate协as已start
         $response = $this->getCollaborationSettings($projectId);
         $this->assertTrue($response['data']['is_collaboration_enabled']);
 
-        // 4. close协作feature
+        // 4. close协asfeature
         $this->disableCollaboration($projectId);
 
-        // 5. validate协作已close
+        // 5. validate协as已close
         $response = $this->getCollaborationSettings($projectId);
         $this->assertFalse($response['data']['is_collaboration_enabled']);
     }
 
     /**
-     * test批quantity操作permission控制.
+     * test批quantity操aspermission控制.
      */
     public function testBatchOperationsPermissionControl(): void
     {
@@ -170,7 +170,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         // 3. non管理者尝试批quantitydeletemember - shouldfail
         $this->batchDeleteMembers($projectId, 51202);
 
-        // 4. 管理者canconduct批quantity操作
+        // 4. 管理者canconduct批quantity操as
         $this->switchUserTest1();
         $this->batchUpdateMemberPermissions($projectId);
         $this->batchDeleteMembers($projectId);
@@ -186,7 +186,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->enableCollaboration($projectId);
 
-        // 尝试add其他organization的user - shouldfail
+        // 尝试add其他organizationuser - shouldfail
         $requestData = [
             'members' => [
                 [
@@ -224,18 +224,18 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->addTeamMembers($projectId);
         //        $this->addTeamMembers($projectId); // 重复add
 
-        // 3. testinvalid的permissionlevel别
+        // 3. testinvalidpermissionlevel别
         $this->addMembersWithInvalidPermission($projectId, 5003);
 
-        // 4. testnot能delete自己
+        // 4. testnot能deletefrom己
         $this->switchUserTest2();
         $this->cannotDeleteSelf($projectId);
 
         $this->switchUserTest1();
 
-        // 5. test协作closeo clocknot能addmember
+        // 5. test协ascloseo clocknot能addmember
         $this->disableCollaboration($projectId);
-        $this->addTeamMembers($projectId, 51202); // 协作已closeerror
+        $this->addTeamMembers($projectId, 51202); // 协as已closeerror
     }
 
     /**
@@ -250,16 +250,16 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $response = $this->addTeamMembers($projectId, 51202);
         $this->assertStringContainsString('permission', $response['message']);
 
-        // 2. test协作未starterror
+        // 2. test协as未starterror
         $this->switchUserTest1();
         $response = $this->addTeamMembers($projectId, 51202);
-        $this->assertStringContainsString('协作', $response['message']);
+        $this->assertStringContainsString('协as', $response['message']);
     }
 
     // ========== 辅助testmethod ==========
 
     /**
-     * startproject协作.
+     * startproject协as.
      */
     public function enableCollaboration(string $projectId, int $expectedCode = 1000): array
     {
@@ -271,7 +271,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, 'responsenotshould为null');
+        $this->assertNotNull($response, 'responsenotshouldfornull');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -284,7 +284,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * closeproject协作.
+     * closeproject协as.
      */
     public function disableCollaboration(string $projectId, int $expectedCode = 1000): array
     {
@@ -296,14 +296,14 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, 'responsenotshould为null');
+        $this->assertNotNull($response, 'responsenotshouldfornull');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         return $response;
     }
 
     /**
-     * get协作setting.
+     * get协assetting.
      */
     public function getCollaborationSettings(string $projectId, int $expectedCode = 1000): array
     {
@@ -313,7 +313,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, 'responsenotshould为null');
+        $this->assertNotNull($response, 'responsenotshouldfornull');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -351,7 +351,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, 'responsenotshould为null');
+        $this->assertNotNull($response, 'responsenotshouldfornull');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -383,7 +383,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, 'responsenotshould为null');
+        $this->assertNotNull($response, 'responsenotshouldfornull');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         return $response;
@@ -402,14 +402,14 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, 'responsenotshould为null');
+        $this->assertNotNull($response, 'responsenotshouldfornull');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         return $response;
     }
 
     /**
-     * addinvalidpermission的member.
+     * addinvalidpermissionmember.
      */
     public function addMembersWithInvalidPermission(string $projectId, int $expectedCode = 51221): array
     {
@@ -429,7 +429,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, 'responsenotshould为null');
+        $this->assertNotNull($response, 'responsenotshouldfornull');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         return $response;
@@ -456,7 +456,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, 'responsenotshould为null');
+        $this->assertNotNull($response, 'responsenotshouldfornull');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -488,7 +488,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        $this->assertNotNull($response, 'responsenotshould为null');
+        $this->assertNotNull($response, 'responsenotshouldfornull');
         $this->assertEquals($expectedCode, $response['code'], $response['message'] ?? '');
 
         if ($expectedCode === 1000) {
@@ -501,7 +501,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * updatemember为管理者.
+     * updatememberfor管理者.
      */
     public function updateMemberToManager(string $projectId, string $userId): array
     {
@@ -526,14 +526,14 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * testnot能delete自己.
+     * testnot能deletefrom己.
      */
     public function cannotDeleteSelf(string $projectId): void
     {
-        // 先addcurrentuser为member
+        // 先addcurrentuserformember
         //        $this->addTeamMembers($projectId);
 
-        // 尝试delete自己
+        // 尝试deletefrom己
         $currentUserId = $this->testUserId2; // test2user
         $requestData = [
             'members' => [
@@ -550,7 +550,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
             $this->getCommonHeaders()
         );
 
-        // shouldreturnnot能delete自己的error
+        // shouldreturnnot能deletefrom己error
         $this->assertNotEquals(1000, $response['code']);
     }
 
@@ -583,7 +583,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->assertEquals(1000, $response['code']);
         $this->assertGreaterThan(0, count($response['data']['members']));
 
-        // validateadd的member存in
+        // validateaddmember存in
         $memberIds = array_column($response['data']['members'], 'user_id');
         $departmentIds = array_column($response['data']['members'], 'department_id');
 
@@ -604,7 +604,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->assertEquals(1000, $response['code']);
 
-        // findfinger定user的permission
+        // findfinger定userpermission
         $members = $response['data']['members'];
         foreach ($members as $member) {
             if (isset($member['user_id']) && $member['user_id'] === $this->testUserId2) {
@@ -627,7 +627,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->assertEquals(1000, $response['code']);
 
-        // validatedelete的membernot存in
+        // validatedeletemembernot存in
         $memberIds = array_column($response['data']['members'], 'user_id');
         $this->assertNotContains($this->testUserId2, array_filter($memberIds));
     }

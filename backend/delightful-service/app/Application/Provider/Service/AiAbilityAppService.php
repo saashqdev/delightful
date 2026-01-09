@@ -98,16 +98,16 @@ class AiAbilityAppService extends AbstractKernelAppService
             $updateData['status'] = $request->getStatus();
         }
         if ($request->hasConfig()) {
-            // getcurrentdatabasemiddle的configuration
+            // getcurrentdatabasemiddleconfiguration
             $entity = $this->aiAbilityDomainService->getByCode($dataIsolation, $code);
             $dbConfig = $entity->getConfig();
 
-            // 智能mergeconfiguration（保留be脱敏的api_key）
+            // 智能mergeconfiguration（保留be脱敏api_key）
             $mergedConfig = $this->mergeConfigPreservingApiKeys($dbConfig, $request->getConfig());
             $updateData['config'] = $mergedConfig;
         }
 
-        // ifnothave要update的data，直接returnsuccess
+        // ifnothave要updatedata，直接returnsuccess
         if (empty($updateData)) {
             return true;
         }
@@ -120,7 +120,7 @@ class AiAbilityAppService extends AbstractKernelAppService
      * initializeAI能力data（fromconfigurationfilesynctodatabase）.
      *
      * @param DelightfulUserAuthorization $authorization userauthorizationinfo
-     * @return int initialize的quantity
+     * @return int initializequantity
      */
     public function initializeAbilities(DelightfulUserAuthorization $authorization): int
     {
@@ -130,37 +130,37 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * 智能mergeconfiguration（保留be脱敏的api_keyoriginalvalue）.
+     * 智能mergeconfiguration（保留be脱敏api_keyoriginalvalue）.
      *
      * @param array $dbConfig databaseoriginalconfiguration
-     * @param array $frontendConfig front端传来的configuration（可能contain脱敏的api_key）
-     * @return array mergeback的configuration
+     * @param array $frontendConfig front端传comeconfiguration（maybecontain脱敏api_key）
+     * @return array mergebackconfiguration
      */
     private function mergeConfigPreservingApiKeys(array $dbConfig, array $frontendConfig): array
     {
         $result = [];
 
-        // 遍历front端configuration的所havefield
+        // 遍历front端configuration所havefield
         foreach ($frontendConfig as $key => $value) {
-            // if是 api_key fieldandcontain脱敏mark ***
+            // ifis api_key fieldandcontain脱敏mark ***
             if ($key === 'api_key' && is_string($value) && str_contains($value, '*')) {
-                // usedatabasemiddle的originalvalue
+                // usedatabasemiddleoriginalvalue
                 $result[$key] = $dbConfig[$key] ?? $value;
             }
-            // if是array，递归process
+            // ifisarray，递归process
             elseif (is_array($value)) {
                 $dbValue = $dbConfig[$key] ?? [];
                 $result[$key] = is_array($dbValue)
                     ? $this->mergeConfigPreservingApiKeys($dbValue, $value)
                     : $value;
             }
-            // 其他情况直接usefront端的value
+            // 其他情况直接usefront端value
             else {
                 $result[$key] = $value;
             }
         }
 
-        // front端未传的field, thendatabasemiddlefield为defaultvalue ''
+        // front端未传field, thendatabasemiddlefieldfordefaultvalue ''
         foreach ($dbConfig as $key => $value) {
             if (! array_key_exists($key, $result)) {
                 $result[$key] = '';

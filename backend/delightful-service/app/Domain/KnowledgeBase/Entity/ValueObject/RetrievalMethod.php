@@ -10,52 +10,52 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 /**
  * 检索method枚举category.
  *
- * definition了四type检索method：
- * - SEMANTIC_SEARCH: 语义检索，based ontoquantitysimilardegree的检索method
- * - FULL_TEXT_SEARCH: all文检索，based onkeyword匹配的检索method
- * - HYBRID_SEARCH: 混合检索，结合语义检索和all文检索的method
- * - GRAPH_SEARCH: graph检索，based on知识graph谱的检索method
+ * definition四type检索method：
+ * - SEMANTIC_SEARCH: 语义检索，based ontoquantitysimilardegree检索method
+ * - FULL_TEXT_SEARCH: all文检索，based onkeyword匹配检索method
+ * - HYBRID_SEARCH: 混合检索，结合语义检索andall文检索method
+ * - GRAPH_SEARCH: graph检索，based on知识graph谱检索method
  */
 class RetrievalMethod
 {
     /**
      * 语义检索.
      *
-     * based ontoquantitysimilardegree的检索method。
-     * 将querytextconvert为toquantity，然backintoquantitydatabasemiddlefindmostsimilar的document。
-     * 适合理解语义关系、多language理解、processblurdescription。
+     * based ontoquantitysimilardegree检索method。
+     * willquerytextconvertfortoquantity，然backintoquantitydatabasemiddlefindmostsimilardocument。
+     * 适合理解语义close系、多language理解、processblurdescription。
      */
     public const string SEMANTIC_SEARCH = 'semantic_search';
 
     /**
      * all文检索.
      *
-     * based onkeyword匹配的检索method。
-     * 索引documentmiddle的所have单词，returncontainquery词的textslicesegment。
-     * 适合精确匹配（如productname、person名、ID）和低频词匹配。
+     * based onkeyword匹配检索method。
+     * 索引documentmiddle所have单词，returncontainquery词textslicesegment。
+     * 适合精确匹配（如productname、person名、ID）and低频词匹配。
      */
     public const string FULL_TEXT_SEARCH = 'full_text_search';
 
     /**
      * 混合检索.
      *
-     * 结合语义检索和all文检索的method。
-     * meanwhileexecuteall文检索和toquantity检索，然backpass重sortstepchoosemost佳result。
-     * 结合了两type检索技术的advantage，弥补each自的not足。
+     * 结合语义检索andall文检索method。
+     * meanwhileexecuteall文检索andtoquantity检索，然backpass重sortstepchoosemost佳result。
+     * 结合两type检索技术advantage，弥补eachfromnot足。
      */
     public const string HYBRID_SEARCH = 'hybrid_search';
 
     /**
      * graph检索.
      *
-     * based on知识graph谱的检索method。
-     * 利use实bodybetween的关系conduct检索，适合process复杂的associatequery。
-     * canhair现隐含的关系和connect。
+     * based on知识graph谱检索method。
+     * 利use实bodybetweenclose系conduct检索，适合process复杂associatequery。
+     * canhair现隐含close系andconnect。
      */
     public const string GRAPH_SEARCH = 'graph_search';
 
     /**
-     * get所have可use的检索method.
+     * get所havecanuse检索method.
      *
      * @return array<string>
      */
@@ -70,7 +70,7 @@ class RetrievalMethod
     }
 
     /**
-     * check给定的检索methodwhethervalid.
+     * checkgive定检索methodwhethervalid.
      */
     public static function isValid(string $method): bool
     {

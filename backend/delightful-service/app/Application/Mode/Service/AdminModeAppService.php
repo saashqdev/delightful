@@ -39,7 +39,7 @@ class AdminModeAppService extends AbstractModeAppService
     }
 
     /**
-     * according toIDget模typeaggregateroot（contain模typedetail、minutegroup、model关系）.
+     * according toIDget模typeaggregateroot（contain模typedetail、minutegroup、modelclose系）.
      */
     public function getModeById(DelightfulUserAuthorization $authorization, string $id): AdminModeAggregateDTO
     {
@@ -52,7 +52,7 @@ class AdminModeAppService extends AbstractModeAppService
 
         $providerModels = $this->getDetailedModels($modeAggregate);
 
-        // convert为DTO
+        // convertforDTO
         $modeAggregateDTO = AdminModeAssembler::aggregateToAdminDTO($modeAggregate, $providerModels);
 
         // processicon
@@ -69,7 +69,7 @@ class AdminModeAppService extends AbstractModeAppService
             ExceptionBuilder::throw(ModeErrorCode::MODE_NOT_FOUND);
         }
         $providerModels = $this->getDetailedModels($modeAggregate);
-        // convert为DTO
+        // convertforDTO
         $modeAggregateDTO = AdminModeAssembler::aggregateToAdminDTO($modeAggregate, $providerModels);
 
         // processicon
@@ -110,7 +110,7 @@ class AdminModeAppService extends AbstractModeAppService
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
 
-        // 先get现have的完整实body
+        // 先get现have完整实body
         $existingMode = $this->modeDomainService->getModeById($dataIsolation, $modeId);
         if (! $existingMode) {
             ExceptionBuilder::throw(ModeErrorCode::MODE_NOT_FOUND);
@@ -118,7 +118,7 @@ class AdminModeAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // 将updaterequestapplicationto现have实body（只updateallowmodify的field）
+            // willupdaterequestapplicationto现have实body（只updateallowmodifyfield）
             AdminModeAssembler::applyUpdateRequestToEntity($request, $existingMode);
 
             $updatedMode = $this->modeDomainService->updateMode($dataIsolation, $existingMode);
@@ -175,7 +175,7 @@ class AdminModeAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // 将DTOconvert为领域object
+            // willDTOconvertfor领域object
             $modeAggregateEntity = AdminModeAssembler::aggregateDTOToEntity($modeAggregateDTO);
 
             $this->modeDomainService->saveModeConfig($dataIsolation, $modeAggregateEntity);

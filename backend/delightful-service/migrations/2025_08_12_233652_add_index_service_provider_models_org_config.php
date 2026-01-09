@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // add service_provider_models table的索引
+        // add service_provider_models table索引
         Schema::table('service_provider_models', function (Blueprint $table) {
             // deleteold model_parent_id_status 索引（if存in）
             if (Schema::hasIndex('service_provider_models', 'service_provider_models_model_parent_id_status_index')) {
@@ -47,7 +47,7 @@ return new class extends Migration {
             }
         });
 
-        // add service_provider_configs table的索引
+        // add service_provider_configs table索引
         Schema::table('service_provider_configs', function (Blueprint $table) {
             // organization+status联合索引（ifnot存in）
             if (! Schema::hasIndex('service_provider_configs', 'idx_org_status')) {
@@ -60,7 +60,7 @@ return new class extends Migration {
             }
         });
 
-        // add service_provider_original_models table的索引
+        // add service_provider_original_models table索引
         Schema::table('service_provider_original_models', function (Blueprint $table) {
             // 核coregroup合索引（ifnot存in）
             if (! Schema::hasIndex('service_provider_original_models', 'idx_org_type')) {

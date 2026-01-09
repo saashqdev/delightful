@@ -48,10 +48,10 @@ class RoleApi extends AbstractPermissionApi
         // createpaginationobject
         $page = $this->createPage();
 
-        // buildqueryobject（自动filter掉paginationfield）
+        // buildqueryobject（from动filter掉paginationfield）
         $query = new SubAdminQuery($this->request->all());
 
-        // convert为仓储filterarray
+        // convertfor仓储filterarray
         $filters = $query->toFilters();
 
         // queryrolelist
@@ -63,7 +63,7 @@ class RoleApi extends AbstractPermissionApi
             $authorization->getId()
         );
 
-        // 收集needquery的userID
+        // 收集needqueryuserID
         $roleUserIdsMap = [];
         $allNeedUserIds = [];
         foreach ($result['list'] as $index => $roleEntity) {
@@ -113,7 +113,7 @@ class RoleApi extends AbstractPermissionApi
         // getroledetail
         $roleEntity = $this->roleAppService->show($dataIsolation, $id);
 
-        // getroleassociate的userinfo
+        // getroleassociateuserinfo
         $contactIsolation = ContactDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -138,7 +138,7 @@ class RoleApi extends AbstractPermissionApi
             $authorization->getId()
         );
 
-        // create并verifyrequestDTO
+        // createandverifyrequestDTO
         $requestDTO = new CreateSubAdminRequestDTO($this->request->all());
         if (! $requestDTO->validate()) {
             $errors = $requestDTO->getValidationErrors();
@@ -177,7 +177,7 @@ class RoleApi extends AbstractPermissionApi
         // getroleID
         $roleId = (int) $this->request->route('id');
 
-        // create并verifyrequestDTO
+        // createandverifyrequestDTO
         $requestDTO = new UpdateSubAdminRequestDTO($this->request->all());
 
         if (! $requestDTO->validate()) {
@@ -185,7 +185,7 @@ class RoleApi extends AbstractPermissionApi
             throw new InvalidArgumentException('requestparameterverifyfail: ' . implode(', ', $errors));
         }
         if (! $requestDTO->hasUpdates()) {
-            throw new InvalidArgumentException('at leastneed提供一要update的field');
+            throw new InvalidArgumentException('at leastneed提供一要updatefield');
         }
 
         // get现haverole
@@ -225,7 +225,7 @@ class RoleApi extends AbstractPermissionApi
         // deleterole
         $this->roleAppService->destroy($dataIsolation, $id);
 
-        // return空arrayby触hair统一的 ApiResponse 封装
+        // return空arrayby触hair统一 ApiResponse 封装
         return [];
     }
 }

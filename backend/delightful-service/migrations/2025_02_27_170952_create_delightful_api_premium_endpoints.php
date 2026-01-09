@@ -22,18 +22,18 @@ return new class extends Migration {
 
         Schema::create('delightful_api_premium_endpoints', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('type', 255)->comment('接入pointtype。userneed自己保证not与其他业务重复');
+            $table->string('type', 255)->comment('接入pointtype。userneedfrom己保证notand其他业务重复');
             $table->string('provider', 255)->comment('提供商')->nullable();
             $table->string('name', 255)->comment('接入pointname');
-            $table->text('config')->comment('让user自己存一些configurationinfo')->nullable();
+            $table->text('config')->comment('letuserfrom己存一些configurationinfo')->nullable();
             $table->tinyInteger('enabled')->default(1)->comment('whetherenable: 1=enable, 0=disable');
             $table->string('circuit_breaker_status', 32)
                 ->default(CircuitBreakerStatus::CLOSED->value)
                 ->comment('circuit breakstatus: closed=normalservicemiddle, open=circuit breakmiddle, half_open=尝试restoremiddle');
-            $table->string('resources', 255)->comment('resource的consume id list，一timerequest可能consume多typeresource')->nullable();
+            $table->string('resources', 255)->comment('resourceconsume id list，一timerequestmaybeconsume多typeresource')->nullable();
             $table->datetimes();
             $table->unique(['enabled', 'type', 'provider', 'name'], 'unique_enabled_type_provider_name');
-            $table->comment('API接入pointtable，associate了接入point的可consumeresourceinfo');
+            $table->comment('API接入pointtable，associate接入pointcanconsumeresourceinfo');
         });
     }
 

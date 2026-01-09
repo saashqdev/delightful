@@ -34,7 +34,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
      */
     public function getDepartmentFullPathByIds(DataIsolation $dataIsolation, array $departmentIds): array
     {
-        // 对departmentidsconduct去重
+        // todepartmentidsconductgo重
         $departmentIds = array_values(array_unique($departmentIds));
         // getorganization所havedepartment
         $departments = $this->departmentRepository->getOrganizationDepartments($dataIsolation->getCurrentOrganizationCode(), keyById: true);
@@ -109,7 +109,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
         foreach ($departments as $department) {
             $hasChild = isset($childDepartments[$department->getDepartmentId()]);
             $department->setHasChild($hasChild);
-            // 移exceptnotneed的field
+            // 移exceptnotneedfield
             $departmentsHasChild[] = $department;
         }
         return $departmentsHasChild;
@@ -136,7 +136,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 批quantitygetdepartment的所have子department.
+     * 批quantitygetdepartment所have子department.
      * @return DelightfulDepartmentEntity[]
      */
     public function getAllChildrenByDepartmentIds(array $departmentIds, DataIsolation $dataIsolation): array
@@ -147,7 +147,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
         );
 
         $departmentsChildrenEntities = $this->getChildrenByDepartmentIds($departments, $departmentIds);
-        // merge && 去重
+        // merge && go重
         $departmentIds = array_column(array_merge(...$departmentsChildrenEntities), 'department_id');
         return array_values(array_unique($departmentIds));
     }
@@ -163,26 +163,26 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * rootdepartmentbe抽象为 -1，所by这withinneedconvert为actual的rootdepartment id.
+     * rootdepartmentbe抽象for -1，所by这withinneedconvertforactualrootdepartment id.
      */
     public function getDepartmentRootId(DataIsolation $dataIsolation): string
     {
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
-        // getorganization所属的平台type
+        // getorganization所属平台type
         $platformType = $this->organizationsPlatformRepository->getOrganizationPlatformType($organizationCode);
         if ($platformType === PlatformType::Delightful) {
             // getrootdepartmentID
             return $this->departmentRepository->getDepartmentRootId($organizationCode);
         }
 
-        // according toorganizationencoding和平台typegetrootdepartmentID
+        // according toorganizationencodingand平台typegetrootdepartmentID
         return $this->thirdPlatformIdMappingRepository->getDepartmentRootId($organizationCode, $platformType);
     }
 
     /**
-     * 批quantityget多organization的rootdepartmentinfo.
+     * 批quantityget多organizationrootdepartmentinfo.
      * @param array $organizationCodes organizationcodearray
-     * @return array<string,DelightfulDepartmentEntity> byorganizationcode为键，rootdepartment实body为value的associatearray
+     * @return array<string,DelightfulDepartmentEntity> byorganizationcodefor键，rootdepartment实bodyforvalueassociatearray
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array
     {
@@ -193,7 +193,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
             return [];
         }
 
-        // processdataformat，byorganizationcode为键，rootdepartment实body为value
+        // processdataformat，byorganizationcodefor键，rootdepartment实bodyforvalue
         $result = [];
         foreach ($rootDepartments as $department) {
             $result[$department->getOrganizationCode()] = $department;
@@ -246,7 +246,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * getdepartment的所have子department.
+     * getdepartment所have子department.
      * @param DelightfulDepartmentEntity[] $allDepartments
      */
     protected function getChildrenByDepartmentIds(array $allDepartments, array $departmentIds): array

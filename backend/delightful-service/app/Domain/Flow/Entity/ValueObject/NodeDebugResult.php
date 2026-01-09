@@ -34,7 +34,7 @@ class NodeDebugResult extends AbstractValueObject
     protected int $errorCode = 0;
 
     /**
-     *  sectionpointexecutefailedo clock的errorinformation.
+     *  sectionpointexecutefailedo clockerrorinformation.
      */
     protected string $errorMessage = '';
 

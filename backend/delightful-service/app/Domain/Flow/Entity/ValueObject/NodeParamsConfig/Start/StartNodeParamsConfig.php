@@ -80,14 +80,14 @@ class StartNodeParamsConfig extends NodeParamsConfig
             $systemOutput = null;
             $customSystemOutput = null;
             $config = $branch['config'] ?? [];
-            // 可meanwhilechoose多typemethod触hair，所by他的入参和出参放to这within来process
+            // canmeanwhilechoose多typemethod触hair，所by他入参andout参放to这withincomeprocess
             switch ($triggerType) {
                 case TriggerType::ChatMessage:
                     $output = $this->getChatMessageOutputTemplate();
                     break;
                 case TriggerType::OpenChatWindow:
                     $output = $this->getOpenChatWindowOutputTemplate();
-                    // ifhavedown游sectionpoint，那么between隔timethennot能为空
+                    // ifhavedown游sectionpoint，那么between隔timethennot能for空
                     if (! empty($nextNodes) && ! empty($branch['config'])) {
                         // second
                         $interval = $branch['config']['interval'] ?? 0;
@@ -155,7 +155,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
             $list[] = $branchStructure->toArray();
         }
 
-        // 这俩parameternothaveuse了
+        // 这俩parameternothaveuse
         $this->node->setInput(null);
         $this->node->setOutput(null);
 

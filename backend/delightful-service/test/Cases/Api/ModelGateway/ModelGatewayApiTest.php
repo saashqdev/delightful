@@ -22,7 +22,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     private const DEFAULT_MODEL = 'deepseek-v3';
 
     /**
-     * test chatCompletions method的高可useproperty.
+     * test chatCompletions method高canuseproperty.
      */
     public function testHighAvaiable()
     {
@@ -50,10 +50,10 @@ class ModelGatewayApiTest extends AbstractHttpTest
             ],
         ];
 
-        // create一 Parallel 实例，setmost大并hair数为 10
+        // create一 Parallel 实例，setmost大andhair数for 10
         $parallel = new Parallel(10);
 
-        // definition多different的request场景
+        // definition多differentrequest场景
         $scenario = $this->buildRequestData([
             'business_params' => [
                 'organization_id' => '000',
@@ -62,15 +62,15 @@ class ModelGatewayApiTest extends AbstractHttpTest
             ],
         ]);
 
-        // add并hairtask
+        // addandhairtask
         $index = 0;
-        $count = 10; // 进一步decreasetestquantity，只要have一successthenline
+        $count = 10; // enter一步decreasetestquantity，as long ashave一successthenline
         while ($index < $count) {
             $parallel->add(function () use ($scenario, $index, $expectedResponse) {
                 try {
                     // sendHTTPrequest
                     $response = $this->json('/v1/chat/completions', $scenario, $this->getTestHeaders());
-                    // assertresultcontainexpected的content
+                    // assertresultcontainexpectedcontent
                     $this->assertArrayValueTypesEquals($expectedResponse, $response);
 
                     return [
@@ -90,9 +90,9 @@ class ModelGatewayApiTest extends AbstractHttpTest
             });
             ++$index;
         }
-        // execute所have并hairtask并getresult
+        // execute所haveandhairtaskandgetresult
         $results = $parallel->wait();
-        // statisticssuccess和fail的request
+        // statisticssuccessandfailrequest
         $successCount = 0;
         foreach ($results as $result) {
             if ($result['success']) {
@@ -113,7 +113,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * test chatCompletions method的基本feature.
+     * test chatCompletions method基本feature.
      */
     public function testChatCompletions(): void
     {
@@ -151,18 +151,18 @@ class ModelGatewayApiTest extends AbstractHttpTest
                 'prompt_tokens_details' => [],
             ],
         ];
-        $this->assertArrayValueTypesEquals($expectedResponse, $response, 'response结构及typeverifyfail');
+        $this->assertArrayValueTypesEquals($expectedResponse, $response, 'response结构andtypeverifyfail');
     }
 
     /**
-     * test embeddings method的基本feature.
+     * test embeddings method基本feature.
      */
     public function testEmbeddings(): void
     {
         // 构造toquantity嵌入requestparameter
         $requestData = [
             'model' => self::DEFAULT_MODEL,
-            'input' => '这是一useattest的text',
+            'input' => '这is一useattesttext',
             'business_params' => [
                 'organization_id' => '000',
                 'user_id' => '9527',
@@ -194,18 +194,18 @@ class ModelGatewayApiTest extends AbstractHttpTest
                 'total_tokens' => 0,
             ],
         ];
-        $this->assertArrayValueTypesEquals($expectedResponse, $response, 'response结构及typeverifyfail');
+        $this->assertArrayValueTypesEquals($expectedResponse, $response, 'response结构andtypeverifyfail');
     }
 
     /**
-     * 提供testuse的通usemessagedata.
+     * 提供testuse通usemessagedata.
      */
     private function getTestMessages(): array
     {
         return [
             [
                 'role' => 'system',
-                'content' => '你是一助hand',
+                'content' => '你is一助hand',
             ],
             [
                 'role' => 'user',
@@ -215,7 +215,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * 提供testuse的requesthead.
+     * 提供testuserequesthead.
      */
     private function getTestHeaders(): array
     {
@@ -226,7 +226,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * build基础的requestdata.
+     * build基础requestdata.
      */
     private function buildRequestData(array $overrides = []): array
     {

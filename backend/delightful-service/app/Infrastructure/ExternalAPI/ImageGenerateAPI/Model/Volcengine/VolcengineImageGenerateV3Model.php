@@ -62,7 +62,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
     }
 
     /**
-     * generategraph像并returnOpenAIformatresponse - V3version.
+     * generategraphlikeandreturnOpenAIformatresponse - V3version.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
@@ -75,7 +75,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof VolcengineModelRequest) {
-            $this->logger->error('VolcengineV3 OpenAIformat生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('VolcengineV3 OpenAIformat生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
@@ -84,7 +84,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
 
         for ($i = 0; $i < $count; ++$i) {
             try {
-                // submittask并round询result
+                // submittaskandround询result
                 $taskId = $this->submitAsyncTask($imageGenerateRequest);
                 $result = $this->pollTaskResult($taskId, $imageGenerateRequest);
 
@@ -152,16 +152,16 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
     }
 
     /**
-     * generategraph像的核core逻辑，returnnativeresult.
+     * generategraphlike核core逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof VolcengineModelRequest) {
-            $this->logger->error('火山文生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('火山文生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // 判断是graph生graphalso是文生graph
+        // 判断isgraph生graphalsois文生graph
         $count = $imageGenerateRequest->getGenerateNum();
 
         $this->logger->info('火山文生graph：start生graph', [
@@ -201,7 +201,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
         }
 
         if (empty($rawResults)) {
-            // 优先usespecific的error码，ifall是通useerrorthenuse NO_VALID_IMAGE
+            // 优先usespecificerror码，ifallis通useerrorthenuse NO_VALID_IMAGE
             $finalErrorCode = ImageGenerateErrorCode::NO_VALID_IMAGE;
             $finalErrorMsg = '';
 
@@ -359,7 +359,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT_WITH_REASON);
                         // no break
                     default:
-                        $this->logger->error('火山文生graph：未知的taskstatus', ['status' => $status, 'response' => $response]);
+                        $this->logger->error('火山文生graph：未知taskstatus', ['status' => $status, 'response' => $response]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT_WITH_REASON);
                 }
 
@@ -400,14 +400,14 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
     }
 
     /**
-     * 将火山engineV3imagedataaddtoOpenAIresponseobjectmiddle.
+     * will火山engineV3imagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponseV3(
         OpenAIFormatResponse $response,
         array $volcengineResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // uselockensure并hairsecurity（althoughV3usesync，but保持一致property）
+        // uselockensureandhairsecurity（althoughV3usesync，but保持一致property）
         $lockOwner = $this->lockResponse($response);
         try {
             // from火山engineV3responsemiddleextractdata
@@ -458,7 +458,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
                 }
             }
 
-            // 累计usageinfo（ifhave的话）
+            // 累计usageinfo（ifhave话）
             if (! empty($volcengineResult['usage']) && is_array($volcengineResult['usage'])) {
                 $currentUsage->addGeneratedImages($volcengineResult['usage']['generated_images'] ?? 1);
                 $currentUsage->completionTokens += $volcengineResult['usage']['output_tokens'] ?? 0;
@@ -478,7 +478,7 @@ class VolcengineImageGenerateV3Model extends AbstractImageGenerate
     }
 
     /**
-     * 为火山engineV3originaldataaddwatermark.
+     * for火山engineV3originaldataaddwatermark.
      */
     private function processVolcengineV3RawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {

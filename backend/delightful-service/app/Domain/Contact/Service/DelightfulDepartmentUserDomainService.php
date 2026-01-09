@@ -48,7 +48,7 @@ readonly class DelightfulDepartmentUserDomainService
     }
 
     /**
-     * getdepartment和其所have子departmentuserquantity.
+     * getdepartmentand其所have子departmentuserquantity.
      */
     public function getDepartmentUsersByDepartmentIds(array $departmentIds, DataIsolation $dataIsolation, int $limit, array $fields = ['*']): array
     {
@@ -62,7 +62,7 @@ readonly class DelightfulDepartmentUserDomainService
 
     /**
      * getuser所indepartment.
-     * 一对多关系.
+     * 一to多close系.
      */
     public function getDepartmentIdsByUserIds(DataIsolation $dataIsolation, array $userIds, bool $withAllParentIds = false): array
     {
@@ -71,7 +71,7 @@ readonly class DelightfulDepartmentUserDomainService
 
     /**
      * getuser所indepartment.
-     * 一对多关系.
+     * 一to多close系.
      */
     public function getDepartmentIdsByUserId(DataIsolation $dataIsolation, string $userId, bool $withAllParentIds = false): array
     {

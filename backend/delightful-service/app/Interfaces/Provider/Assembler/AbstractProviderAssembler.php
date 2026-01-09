@@ -11,7 +11,7 @@ use Hyperf\Contract\TranslatorInterface;
 
 /**
  * Provider Assembler抽象基category
- * extract公共的convert逻辑，decreasecode重复.
+ * extract公共convert逻辑，decreasecode重复.
  */
 abstract class AbstractProviderAssembler
 {
@@ -53,7 +53,7 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * create带国际化support的实body.
+     * create带国际化support实body.
      * @template T of object
      * @param class-string<T> $entityClass 实bodycategory名
      * @param array $data dataarray

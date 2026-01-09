@@ -104,7 +104,7 @@ JSON, true));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'content' => 'Q: 如何做to好的汇报？ A: can阅读 [述职思维导graphv1.1.2](https://xxxxx.com/docx/605565507182194688) orcontinue阅读down文； 即，我pass回答哪些issuecan达become「说清楚我做了什么、做得怎么样」 issue清单 (青春版) 1. in去year/up季degree，你main负责or参与的project，ineach阶segment的原定的plan是怎样的？这些planmiddle你所负责的部minuteall按o clockcomplete了吗？finalactual落ground的情况如何？ a. ifprojectcomplete的very好，这好的result与你所做的哪些努力have关？ b. ifprojectcomplete的not好，存in的issue与你的反思是什么？你是如何improvement的？improvement的result如何？ 2. 过去一yearwithin，你all为你的team做了什么事情？付出了什么？这些事情和付出的result是如何？好in哪within？not好是什么reason？为什么？ 3. 过去一yearwithin，你all为你自己all做了什么事情？付出了什么？这些事情和付出的result是如何？好in哪within？not好是什么reason？为什么？ 4. 明yearup半year的plan是什么？',
+            'content' => 'Q: 如何做to好汇报？ A: can阅读 [述职思维导graphv1.1.2](https://xxxxx.com/docx/605565507182194688) orcontinue阅读down文； 即，我passreturn答哪些issuecan达become「说清楚我做什么、做得怎么样」 issue清单 (青春版) 1. ingoyear/up季degree，你main负责or参andproject，ineach阶segment原定planis怎样？这些planmiddle你所负责部minuteall按o clockcomplete吗？finalactual落ground情况如何？ a. ifprojectcompletevery好，这好resultand你所做哪些努力haveclose？ b. ifprojectcompletenot好，存inissueand你反思is什么？你is如何improvement？improvementresult如何？ 2. passgo一yearwithin，你allfor你team做什么事情？付out什么？这些事情and付outresultis如何？好in哪within？not好is什么reason？for什么？ 3. passgo一yearwithin，你allfor你from己all做什么事情？付out什么？这些事情and付outresultis如何？好in哪within？not好is什么reason？for什么？ 4. 明yearup半yearplanis什么？',
             'business_id' => '',
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -212,7 +212,7 @@ JSON, true));
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
             'vector_database_id' => 'KNOWLEDGE-674d1987228b42-90330502',
-            'content' => 'Q: 我为什么要in述职准备upflowertime？ A: 假设你本身的work产出是90minute，一好的述职呈现能将你这 90 minute的work完美ground呈现给所haveperson，but一incontent结构、validinfoquantity和可读propertyupallnot尽如person意的 PPT 可能只能呈现出你30minute的workbecomefruit。 并and，if你in述职的表达与呈现方surface做得verynot尽如person意、nothavebody现出结构化的思考method、nothave SMART 的未来规划，那么同样的，你inday常departmentwill议middle的沟通协作能力、workmiddle的逻辑思维能力、自我管理和规划的能力alsowill备受quality疑。 述职often是一personday常为person处事statedegree的良好影射，优秀的personoftennot吝atto公众show自己的becomefruit，这also是为什么像 GitHub 这样的开源社区will存in，and汇聚了大quantity的优秀person才。 meanwhile，述职also是一non常珍贵的、让你have机will了解其它personin做什么的场域。',
+            'content' => 'Q: 我for什么要in述职准备upflowertime？ A: 假设你本身work产outis90minute，一好述职呈现能will你这 90 minutework完美ground呈现give所haveperson，but一incontent结构、validinfoquantityandcan读propertyupallnot尽如person意 PPT maybe只能呈现out你30minuteworkbecomefruit。 andand，if你in述职表达and呈现方surface做得verynot尽如person意、nothavebody现out结构化思考method、nothave SMART 未come规划，那么同样，你inday常departmentwill议middle沟通协as能力、workmiddle逻辑思维能力、from我管理and规划能力alsowill备受quality疑。 述职oftenis一personday常forperson处事statedegree良好影射，优秀personoftennot吝atto公众showfrom己becomefruit，这alsoisfor什么like GitHub 这样open源社区will存in，and汇聚大quantity优秀person才。 meanwhile，述职alsois一non常珍贵、let你have机will解其它personin做什么场域。',
             'business_id' => '',
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -325,7 +325,7 @@ JSON, true));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'content' => 'Q: 我为什么要in述职准备upflowertime？ A: 假设你本身的work产出是90minute，一好的述职呈现能将你这 90 minute的work完美ground呈现给所haveperson，but一incontent结构、validinfoquantity和可读propertyupallnot尽如person意的 PPT 可能只能呈现出你30minute的workbecomefruit。 并and，if你in述职的表达与呈现方surface做得verynot尽如person意、nothavebody现出结构化的思考method、nothave SMART 的未来规划，那么同样的，你inday常departmentwill议middle的沟通协作能力、workmiddle的逻辑思维能力、自我管理和规划的能力alsowill备受quality疑。 述职often是一personday常为person处事statedegree的良好影射，优秀的personoftennot吝atto公众show自己的becomefruit，这also是为什么像 GitHub 这样的开源社区will存in，and汇聚了大quantity的优秀person才。 meanwhile，述职also是一non常珍贵的、让你have机will了解其它personin做什么的场域。',
+            'content' => 'Q: 我for什么要in述职准备upflowertime？ A: 假设你本身work产outis90minute，一好述职呈现能will你这 90 minutework完美ground呈现give所haveperson，but一incontent结构、validinfoquantityandcan读propertyupallnot尽如person意 PPT maybe只能呈现out你30minuteworkbecomefruit。 andand，if你in述职表达and呈现方surface做得verynot尽如person意、nothavebody现out结构化思考method、nothave SMART 未come规划，那么同样，你inday常departmentwill议middle沟通协as能力、workmiddle逻辑思维能力、from我管理and规划能力alsowill备受quality疑。 述职oftenis一personday常forperson处事statedegree良好影射，优秀personoftennot吝atto公众showfrom己becomefruit，这alsoisfor什么like GitHub 这样open源社区will存in，and汇聚大quantity优秀person才。 meanwhile，述职alsois一non常珍贵、let你have机will解其它personin做什么场域。',
             'business_id' => '',
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -433,7 +433,7 @@ JSON, true));
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
             'vector_database_id' => ConstValue::KNOWLEDGE_USER_CURRENT_TOPIC,
-            'content' => 'Q: 我为什么要in述职准备upflowertime？ A: 假设你本身的work产出是90minute，一好的述职呈现能将你这 90 minute的work完美ground呈现给所haveperson，but一incontent结构、validinfoquantity和可读propertyupallnot尽如person意的 PPT 可能只能呈现出你30minute的workbecomefruit。 并and，if你in述职的表达与呈现方surface做得verynot尽如person意、nothavebody现出结构化的思考method、nothave SMART 的未来规划，那么同样的，你inday常departmentwill议middle的沟通协作能力、workmiddle的逻辑思维能力、自我管理和规划的能力alsowill备受quality疑。 述职often是一personday常为person处事statedegree的良好影射，优秀的personoftennot吝atto公众show自己的becomefruit，这also是为什么像 GitHub 这样的开源社区will存in，and汇聚了大quantity的优秀person才。 meanwhile，述职also是一non常珍贵的、让你have机will了解其它personin做什么的场域。',
+            'content' => 'Q: 我for什么要in述职准备upflowertime？ A: 假设你本身work产outis90minute，一好述职呈现能will你这 90 minutework完美ground呈现give所haveperson，but一incontent结构、validinfoquantityandcan读propertyupallnot尽如person意 PPT maybe只能呈现out你30minuteworkbecomefruit。 andand，if你in述职表达and呈现方surface做得verynot尽如person意、nothavebody现out结构化思考method、nothave SMART 未come规划，那么同样，你inday常departmentwill议middle沟通协as能力、workmiddle逻辑思维能力、from我管理and规划能力alsowill备受quality疑。 述职oftenis一personday常forperson处事statedegree良好影射，优秀personoftennot吝atto公众showfrom己becomefruit，这alsoisfor什么like GitHub 这样open源社区will存in，and汇聚大quantity优秀person才。 meanwhile，述职alsois一non常珍贵、let你have机will解其它personin做什么场域。',
             'business_id' => '',
         ]);
         $runner->execute($vertexResult, $executionData, []);

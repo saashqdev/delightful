@@ -16,11 +16,11 @@ use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\HighAvailability
 class EndpointAssembler
 {
     /**
-     * generatestandard化的端pointtype标识.
+     * generatestandard化端pointtype标识.
      *
-     * @param HighAvailabilityAppType $appType 高可useapplicationtype
+     * @param HighAvailabilityAppType $appType 高canuseapplicationtype
      * @param string $modelId modelID
-     * @return string standard化的端pointtype标识
+     * @return string standard化端pointtype标识
      */
     public static function generateEndpointType(HighAvailabilityAppType $appType, string $modelId): string
     {
@@ -28,14 +28,14 @@ class EndpointAssembler
     }
 
     /**
-     * fromformat化的端pointtype标识middlealso原original的modelID.
+     * fromformat化端pointtype标识middlealso原originalmodelID.
      *
-     * @param string $formattedModelId 可能containformat化front缀的modelID
-     * @return string original的modelID
+     * @param string $formattedModelId maybecontainformat化front缀modelID
+     * @return string originalmodelID
      */
     public static function extractOriginalModelId(string $formattedModelId): string
     {
-        // 遍历所have的 HighAvailabilityAppType 枚举value
+        // 遍历所have HighAvailabilityAppType 枚举value
         foreach (HighAvailabilityAppType::cases() as $appType) {
             $prefix = $appType->value . DelimiterType::HIGH_AVAILABILITY->value;
 
@@ -50,14 +50,14 @@ class EndpointAssembler
     }
 
     /**
-     * check给定的stringwhether为format化的端pointtype标识.
+     * checkgive定stringwhetherforformat化端pointtype标识.
      *
-     * @param string $modelId 待check的modelID
-     * @return bool whether为format化的端pointtype标识
+     * @param string $modelId 待checkmodelID
+     * @return bool whetherforformat化端pointtype标识
      */
     public static function isFormattedEndpointType(string $modelId): bool
     {
-        // 遍历所have的 HighAvailabilityAppType 枚举value
+        // 遍历所have HighAvailabilityAppType 枚举value
         foreach (HighAvailabilityAppType::cases() as $appType) {
             $prefix = $appType->value . DelimiterType::HIGH_AVAILABILITY->value;
             if (str_starts_with($modelId, $prefix)) {

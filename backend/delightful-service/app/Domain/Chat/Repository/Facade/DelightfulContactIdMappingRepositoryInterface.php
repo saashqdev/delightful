@@ -15,7 +15,7 @@ use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 interface DelightfulContactIdMappingRepositoryInterface
 {
     /**
-     * getthethird-party平台departmentID的mapping关系.
+     * getthethird-party平台departmentIDmappingclose系.
      *
      * @param string[] $thirdDepartmentIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -28,7 +28,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     ): array;
 
     /**
-     * getthethird-party平台userID的mapping关系.
+     * getthethird-party平台userIDmappingclose系.
      *
      * @param string[] $thirdUserIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -41,7 +41,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     ): array;
 
     /**
-     * get麦吉平台userID的mapping关系.
+     * get麦吉平台userIDmappingclose系.
      *
      * @param string[] $delightfulIds
      */
@@ -69,7 +69,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     public function getDepartmentRootId(string $delightfulOrganizationCode, PlatformType $platformType): string;
 
     /**
-     * getDelightfuldepartmentID的mapping关系.
+     * getDelightfuldepartmentIDmappingclose系.
      */
     public function getDelightfulDepartmentIdsMapping(
         array $delightfulDepartmentIds,
@@ -82,7 +82,7 @@ interface DelightfulContactIdMappingRepositoryInterface
     /**
      * according to origin_id 批quantity软deletethethird-party平台mappingrecord。
      *
-     * @param string[] $originIds thethird-party平台的originalIDcolumn表
+     * @param string[] $originIds thethird-party平台originalIDcolumn表
      */
     public function deleteThirdPlatformIdsMapping(
         array $originIds,

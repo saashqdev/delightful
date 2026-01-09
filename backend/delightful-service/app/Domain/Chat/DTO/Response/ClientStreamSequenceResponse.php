@@ -13,19 +13,19 @@ use Hyperf\Codec\Json;
 
 class ClientStreamSequenceResponse extends AbstractEntity
 {
-    // 要updategoal seqId 的content
+    // 要updategoal seqId content
     protected string $targetSeqId;
 
-    // 为了implement丢package重传，needrecordwhenfront的seqId。一定单调递增。
+    // forimplement丢package重传，needrecordwhenfrontseqId。一定单调递增。
     protected ?int $seqId;
 
-    // 大model的总结
+    // 大model总结
     protected ?string $content;
 
-    // have些message的大modelresponsefieldnot是 content，这within特殊process
+    // have些message大modelresponsefieldnotis content，这within特殊process
     protected ?string $llmResponse;
 
-    // 大model的推理content
+    // 大model推理content
     protected ?string $reasoningContent;
 
     protected StreamMessageStatus $status;

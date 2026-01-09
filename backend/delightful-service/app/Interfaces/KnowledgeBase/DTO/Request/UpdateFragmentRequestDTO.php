@@ -35,13 +35,13 @@ class UpdateFragmentRequestDTO extends AbstractRequestDTO
     public static function getHyperfValidationMessage(): array
     {
         return [
-            'id.required' => 'knowledge baseencodingcannot为null',
-            'knowledge_base_code.required' => 'knowledge baseencodingcannot为null',
-            'knowledge_base_code.max' => 'knowledge baseencodinglengthcannot超过255character',
-            'document_code.required' => 'documentencodingcannot为null',
-            'document_code.max' => 'documentencodinglengthcannot超过255character',
-            'content.required' => 'slicesegmentcontentcannot为null',
-            'content.max' => 'slicesegmentcontentlengthcannot超过65535character',
+            'id.required' => 'knowledge baseencodingcannotfornull',
+            'knowledge_base_code.required' => 'knowledge baseencodingcannotfornull',
+            'knowledge_base_code.max' => 'knowledge baseencodinglengthcannot超pass255character',
+            'document_code.required' => 'documentencodingcannotfornull',
+            'document_code.max' => 'documentencodinglengthcannot超pass255character',
+            'content.required' => 'slicesegmentcontentcannotfornull',
+            'content.max' => 'slicesegmentcontentlengthcannot超pass65535character',
         ];
     }
 

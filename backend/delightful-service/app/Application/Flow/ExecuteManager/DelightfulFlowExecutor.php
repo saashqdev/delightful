@@ -45,7 +45,7 @@ class DelightfulFlowExecutor
     private ?string $rootId = null;
 
     /**
-     * useatrecord nodes 的 next_nodes，作为 edges 的编row.
+     * useatrecord nodes  next_nodes，asfor edges 编row.
      */
     private array $nextNodeIds = [];
 
@@ -148,7 +148,7 @@ class DelightfulFlowExecutor
             $this->addEdges();
             $this->checkCircularDependencies();
         } else {
-            // 具have callback 的processnot参与retry与async
+            // 具have callback processnot参andretryandasync
             $this->async = false;
         }
         if ($this->executionData->getExecutionType()->isDebug()) {
@@ -189,7 +189,7 @@ class DelightfulFlowExecutor
         /** @var TriggerType $appointTriggerType */
         $appointTriggerType = $args['appoint_trigger_type'];
         if ($appointTriggerType === TriggerType::LoopStart) {
-            // loopo clock，notprocessbacksurface的data
+            // loopo clock，notprocessbacksurfacedata
             return;
         }
 
@@ -199,7 +199,7 @@ class DelightfulFlowExecutor
             $this->delightfulFlowEntity->getCreator()
         );
 
-        // 为了in运linemiddle，给haveneedgetcurrentprocess的sectionpointuse
+        // forin运linemiddle，givehaveneedgetcurrentprocesssectionpointuse
         ExecutionDataCollector::add($this->executionData);
     }
 
@@ -207,7 +207,7 @@ class DelightfulFlowExecutor
     {
         $nodeDebugResult = $node->getNodeDebugResult();
         if (! $nodeDebugResult->isSuccess()) {
-            // 只要have一sectionpoint是fail的，那么processthen是fail
+            // as long ashave一sectionpointisfail，那么processthenisfail
             $this->success = false;
         }
         $this->logger->info('HandledNode', [
@@ -227,9 +227,9 @@ class DelightfulFlowExecutor
         $this->archiveToCloud($vertexResult);
 
         if (! $nodeDebugResult->isSuccess()) {
-            // if是 API request，throwerrorinfo
+            // ifis API request，throwerrorinfo
             if ($this->executionData->getExecutionType()->isApi()) {
-                // ifnot是助理parametercall 才recorderrorinfo
+                // ifnotis助理parametercall 才recorderrorinfo
                 if (! $this->executionData->getTriggerData()->isAssistantParamCall()) {
                     $errorMessage = new Message([], $this->executionData->getOriginConversationId());
                     $errorMessage->setErrorInformation($nodeDebugResult->getErrorMessage());
@@ -255,7 +255,7 @@ class DelightfulFlowExecutor
     {
         $result = [];
 
-        // if是asynccall的 API or者 executefail了
+        // ifisasynccall API or者 executefail
         if ($this->executionData->getExecutionType()->isApi() || ! $this->success) {
             $result = match ($this->executionData->getTriggerType()) {
                 TriggerType::ChatMessage => [
@@ -283,7 +283,7 @@ class DelightfulFlowExecutor
             $this->updateStatus(ExecuteLogStatus::Failed, $result);
         }
 
-        // 将currentprocess产生的 api executeresult传递给up一layer的data
+        // willcurrentprocess产生 api executeresult传递giveup一layerdata
         if ($parentExecutionData = ExecutionDataCollector::get($this->executionData->getUniqueParentId())) {
             foreach ($this->executionData->getReplyMessages() as $replyMessage) {
                 $parentExecutionData->addReplyMessage($replyMessage);
@@ -340,7 +340,7 @@ class DelightfulFlowExecutor
     {
         $result = $this->delightfulFlowEntity->getCallback()($this->executionData);
         if (is_array($result)) {
-            // 得把result赋valuetoendsectionpointupsurface
+            // 得result赋valuetoendsectionpointupsurface
             $this->executionData->saveNodeContext($this->delightfulFlowEntity->getEndNode()->getNodeId(), $result);
         }
         if (! is_array($result)) {
@@ -422,15 +422,15 @@ class DelightfulFlowExecutor
     private function addNodes(DelightfulFlowEntity $delightfulFlowEntity): void
     {
         foreach ($delightfulFlowEntity->getNodes() as $node) {
-            // skipinloopbodymiddle的sectionpoint
+            // skipinloopbodymiddlesectionpoint
             if ($node->getParentId()) {
                 continue;
             }
-            // 运linefrontthen先尝试conduct所havesectionpoint的parameter检测，useat提frontgenerate好 NodeParamsConfig
+            // 运linefrontthen先尝试conduct所havesectionpointparameter检测，useat提frontgenerate好 NodeParamsConfig
             try {
                 $node->validate();
             } catch (Throwable $throwable) {
-                // have些是悬浮sectionpoint（即inprocess运linemiddlenotwillbeusesectionpoint)，兜bottomwillinexecuteo clockagaintimeconductparameterverify
+                // have些is悬浮sectionpoint（即inprocess运linemiddlenotwillbeusesectionpoint)，兜bottomwillinexecuteo clockagaintimeconductparameterverify
             }
 
             $job = function (array $frontResults) use ($node): VertexResult {
@@ -440,22 +440,22 @@ class DelightfulFlowExecutor
                 if (! $executionData) {
                     return $vertexResult;
                 }
-                // if是debug sectionpoint，并andnot是 debug 模type运line，那么该sectionpointnotallow
+                // ifisdebug sectionpoint，andandnotis debug 模type运line，那么该sectionpointnotallow
                 if ($node->getDebug() && ! $executionData->isDebug()) {
                     return $vertexResult;
                 }
 
                 $vertex = $this->dag->getVertex($node->getNodeId());
-                // 这withingeneral来说notwill为null，先not管null的情况
+                // 这withingeneralcome说notwillfornull，先not管null情况
                 $childrenIds = [];
                 foreach ($vertex->children as $childVertex) {
-                    // not能自己连自己
+                    // not能from己连from己
                     if ($node->getNodeId() == $childVertex->key) {
                         continue;
                     }
                     $childrenIds[] = $childVertex->key;
                 }
-                // default是要调degreedown一level的，ifnotneed调degree，inspecific的executemiddlecanset为[]
+                // defaultis要调degreedown一level，ifnotneed调degree，inspecificexecutemiddlecansetfor[]
                 $vertexResult->setChildrenIds($childrenIds);
                 // add flow
                 $frontResults['current_flow_entity'] = $this->delightfulFlowEntity;
@@ -468,13 +468,13 @@ class DelightfulFlowExecutor
             $vertex = Vertex::make($job, $node->getNodeId());
             if (is_null($this->rootId)) {
                 if ($this->appointRootId) {
-                    // ifhavefinger定的，thenusefinger定的
+                    // ifhavefinger定，thenusefinger定
                     if ($node->getNodeId() === $this->appointRootId) {
                         $vertex->markAsRoot();
                         $this->rootId = $this->appointRootId;
                     }
                 } else {
-                    // nothavefinger定的mustusestartsectionpoint
+                    // nothavefinger定mustusestartsectionpoint
                     if ($node->isStart()) {
                         $vertex->markAsRoot();
                         $this->rootId = $node->getNodeId();
@@ -497,7 +497,7 @@ class DelightfulFlowExecutor
         foreach ($this->nextNodeIds as $nodeId => $nextNodeIds) {
             foreach ($nextNodeIds as $nextNodeId) {
                 if ($nextNodeId === $this->rootId) {
-                    // root sectionpointnotallowhave父sectionpoint的连line
+                    // root sectionpointnotallowhave父sectionpoint连line
                     continue;
                 }
                 $this->dag->addEdgeByKey((string) $nodeId, (string) $nextNodeId);
@@ -507,11 +507,11 @@ class DelightfulFlowExecutor
 
     private function archiveToCloud(VertexResult $vertexResult): void
     {
-        // 已经运line过的，alsonot归档
+        // 已经运linepass，alsonot归档
         if ($vertexResult->hasDebugLog('history_vertex_result')) {
             return;
         }
-        // onlythe一layer的process才willconduct归档
+        // onlythe一layerprocess才willconduct归档
         if (! $this->executionData->isTop() || $this->inLoop) {
             return;
         }
@@ -520,7 +520,7 @@ class DelightfulFlowExecutor
             Coroutine::create(function () use ($fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
 
-                // 利use自旋lock来控制only一insave
+                // 利usefrom旋lockcome控制only一insave
                 if (! $this->locker->spinLock($this->getLockerKey() . ':archive', $this->delightfulFlowExecuteLogEntity->getExecuteDataId(), 20)) {
                     ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'archive file failed');
                 }

@@ -24,7 +24,7 @@ class ModeGroupDetailDTO extends AbstractDTO
     protected int $sort;
 
     /**
-     * @var ModeGroupModelDTO[] 该minutegroup对应的model详细infoarray
+     * @var ModeGroupModelDTO[] 该minutegroupto应model详细infoarray
      */
     protected array $models = [];
 
@@ -97,7 +97,7 @@ class ModeGroupDetailDTO extends AbstractDTO
     }
 
     /**
-     * 对model按sortfieldsort（降序，more大morefront）.
+     * tomodel按sortfieldsort（降序，more大morefront）.
      */
     public function sortModels(): void
     {

@@ -106,7 +106,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'group_name' => '单测create的testgroup chat',
+            'group_name' => '单测createtestgroup chat',
         ]);
         $executionData->getTriggerData()->setAgentKey('1234567890abcdef1234567890abcdef1234567890abcdef1234567890abcdef');
         $runner->execute($vertexResult, $executionData, []);

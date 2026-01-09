@@ -14,9 +14,9 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // onlywhentable存ino clock才execute索引操作
+        // onlywhentable存ino clock才execute索引操as
         if (Schema::hasTable('delightful_chat_sequences')) {
-            // check并create idx_object_type_id_refer_message_id 索引
+            // checkandcreate idx_object_type_id_refer_message_id 索引
             $this->createIndexIfNotExists(
                 'delightful_chat_sequences',
                 'idx_object_type_id_refer_message_id',
@@ -24,7 +24,7 @@ return new class extends Migration {
                 ON `delightful_chat_sequences` (object_type, object_id, refer_message_id, seq_id DESC)'
             );
 
-            // check并create idx_object_type_id_seq_id 索引
+            // checkandcreate idx_object_type_id_seq_id 索引
             $this->createIndexIfNotExists(
                 'delightful_chat_sequences',
                 'idx_object_type_id_seq_id',
@@ -32,7 +32,7 @@ return new class extends Migration {
                 ON `delightful_chat_sequences` (object_type, object_id, seq_id)'
             );
 
-            // check并create idx_conversation_id_seq_id 索引
+            // checkandcreate idx_conversation_id_seq_id 索引
             $this->createIndexIfNotExists(
                 'delightful_chat_sequences',
                 'idx_conversation_id_seq_id',
@@ -60,7 +60,7 @@ return new class extends Migration {
      *
      * @param string $table table名
      * @param string $indexName 索引name
-     * @param string $createStatement create索引的SQL语sentence
+     * @param string $createStatement create索引SQL语sentence
      */
     private function createIndexIfNotExists(string $table, string $indexName, string $createStatement): void
     {

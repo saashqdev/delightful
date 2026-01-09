@@ -12,17 +12,17 @@ use App\Infrastructure\ExternalAPI\Sms\Enum\LanguageEnum;
 abstract class AbstractTemplate implements TemplateInterface
 {
     /**
-     * 短信type与templateid的mapping关系.
+     * 短信typeandtemplateidmappingclose系.
      */
     protected array $typeToIdMap = [];
 
     /**
-     * according to短信type,conductvariable短信的适配,also原整item短信textcontent.
+     * according to短信type,conductvariable短信适配,also原整item短信textcontent.
      */
     protected array $typeContents = [];
 
     /**
-     * according totemplateid,conductvariable短信的适配,also原整item短信textcontent.
+     * according totemplateid,conductvariable短信适配,also原整item短信textcontent.
      */
     protected array $idContents = [];
 
@@ -53,15 +53,15 @@ abstract class AbstractTemplate implements TemplateInterface
     public function getTemplateVariables(string $content, array $messages): array
     {
         $matches = [];
-        // 匹配text ${code} middle的code
+        // 匹配text ${code} middlecode
         $matched = preg_match_all('/\$\{([^}]+)}/uS', $content, $matches);
-        // 匹配text {$code} middle的code
+        // 匹配text {$code} middlecode
         ! $matched && $matched = preg_match_all('/\{\$([^}]+)}/uS', $content, $matches);
         if (! $matched) {
             return $messages;
         }
         $variables = [];
-        // template$contentmiddlenot存in "${xxx}" or者 {$xxx) type的character.then按index顺序匹配
+        // template$contentmiddlenot存in "${xxx}" or者 {$xxx) typecharacter.then按index顺序匹配
         foreach ($matches[1] as $index => $variableKey) {
             if (isset($messages[$variableKey])) {
                 $variables[$variableKey] = $messages[$variableKey];
@@ -73,7 +73,7 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
-     * according to短信type,returntypesupport的语typelist.
+     * according to短信type,returntypesupport语typelist.
      * @return string[]
      */
     public function getTemplateLanguagesByType(string $type): array
@@ -95,9 +95,9 @@ abstract class AbstractTemplate implements TemplateInterface
             return $sign;
         }
 
-        // 确定signature的语type,needfrom userfinger定语type,userfinger定兜bottom语type,systemdefault的兜bottom语type middle确定出来一value
+        // 确定signature语type,needfrom userfinger定语type,userfinger定兜bottom语type,systemdefault兜bottom语type middle确定outcome一value
         $signLanguage = null;
-        // 语type兜bottom的顺序
+        // 语type兜bottom顺序
         $defaultLanguages = [$language, $defaultLanguage, LanguageEnum::EN_US, LanguageEnum::ZH_CN];
         foreach ($defaultLanguages as $value) {
             if (isset($this->signMap[$sign][$value])) {
@@ -105,7 +105,7 @@ abstract class AbstractTemplate implements TemplateInterface
                 break;
             }
         }
-        // if $sign in $defaultLanguages not存invalue,then给一typesupport的语type
+        // if $sign in $defaultLanguages not存invalue,thengive一typesupport语type
         $firstLanguage = null;
         if (isset($this->signMap[$sign]) && is_array($this->signMap[$sign])) {
             $firstLanguage = array_key_first($this->signMap[$sign]);
@@ -115,7 +115,7 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
-     * when传入的signaturetypenot存ino clock,get短信的defaultsignaturetype.
+     * when传入signaturetypenot存ino clock,get短信defaultsignaturetype.
      */
     abstract protected function getTemplateDefaultSignType(string $sign): string;
 

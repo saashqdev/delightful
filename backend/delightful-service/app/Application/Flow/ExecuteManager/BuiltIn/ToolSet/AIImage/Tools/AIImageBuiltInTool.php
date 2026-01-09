@@ -36,7 +36,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getCallback(): ?Closure
     {
-        // 可接受parameterfinger定任意 model，default是火山。
+        // can接受parameterfinger定任意 model，defaultis火山。
         return function (ExecutionData $executionData) {
             $args = $executionData->getTriggerData()?->getParams();
             $model = $args['model'] ?? ImageGenerateModelType::Volcengine->value;
@@ -64,7 +64,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "model": {
             "type": "string",
             "key": "model",
-            "title": "所use的文生graphmodel",
+            "title": "所use文生graphmodel",
             "description": "optional：Volcengine,Midjourney,Flux1-Schnell,defaultVolcengine,TTAPI-GPT4o",
             "required": null,
             "value": null,
@@ -76,7 +76,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "radio": {
             "type": "string",
             "key": "radio",
-            "title": "generateimage的ratio例",
+            "title": "generateimageratio例",
             "description": "optional：\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",default\"1:1\"",
             "required": null,
             "value": null,
@@ -100,8 +100,8 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "reference_image_ids": {
             "type": "array",
             "key": "reference_image_ids",
-            "title": "quote的imageidcolumn表",
-            "description": "quote的imageidcolumn表",
+            "title": "quoteimageidcolumn表",
+            "description": "quoteimageidcolumn表",
             "required": null,
             "value": null,
             "encryption": false,

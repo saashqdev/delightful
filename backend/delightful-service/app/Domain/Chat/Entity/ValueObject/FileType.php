@@ -38,7 +38,7 @@ enum FileType: int
 
     public static function getTypeFromFileExtension(string $fileExtension): self
     {
-        // fromfile的extension名，推理出filetype
+        // fromfileextension名，推理outfiletype
         return match (strtolower($fileExtension)) {
             // 网址
             'http', 'https' => self::Link,

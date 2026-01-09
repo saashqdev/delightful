@@ -25,9 +25,9 @@ class ServiceProviderApiTest extends BaseTest
         $uri = $this->baseUri . '?category=llm';
         $response = $this->get($uri, [], $this->getCommonHeaders());
 
-        // ifreturnauthenticationorpermission相关error，skiptest（仅validate路由可use）
+        // ifreturnauthenticationorpermission相closeerror，skiptest（仅validate路bycanuse）
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003], true)) {
-            $this->markTestSkipped('interfaceauthenticationfailor无permission，路由校验pass');
+            $this->markTestSkipped('interfaceauthenticationfailor无permission，路by校验pass');
             return;
         }
 
@@ -40,7 +40,7 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * testmodelcreate和morenew完整process，includeconfigurationversionvalidate.
+     * testmodelcreateandmorenew完整process，includeconfigurationversionvalidate.
      */
     public function testSaveModelToServiceProviderCreate(): void
     {
@@ -84,7 +84,7 @@ class ServiceProviderApiTest extends BaseTest
                     'en_US' => 'Test Model',
                 ],
                 'description' => [
-                    'zh_CN' => '这是一testmodel',
+                    'zh_CN' => '这is一testmodel',
                     'en_US' => 'This is a test model',
                 ],
             ],
@@ -100,7 +100,7 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertArrayHasKey('id', $createResponse['data'], 'returndata应containmodelID');
 
         $modelId = $createResponse['data']['id'];
-        $this->assertNotEmpty($modelId, 'modelIDnot应为null');
+        $this->assertNotEmpty($modelId, 'modelIDnot应fornull');
 
         // ========== step2: calldetailinterfacevalidate4costfield ==========
         $detailUri = $this->baseUri . '/' . $serviceProviderConfigId;
@@ -110,9 +110,9 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertSame(1000, $detailResponse['code'], 'getdetailshouldsuccess');
         $this->assertArrayHasKey('data', $detailResponse);
 
-        // findcreate的model
+        // findcreatemodel
         $createdModel = $this->findModelInDetailResponse($detailResponse['data'], $modelId);
-        $this->assertNotNull($createdModel, 'should能indetailmiddle找tocreate的model');
+        $this->assertNotNull($createdModel, 'should能indetailmiddle找tocreatemodel');
 
         // validate4costfield存inandvaluecorrect
         $this->assertArrayHasKey('config', $createdModel, 'modelshouldhaveconfigfield');
@@ -159,11 +159,11 @@ class ServiceProviderApiTest extends BaseTest
             'service_provider_config_id' => $serviceProviderConfigId,
             'translate' => [
                 'name' => [
-                    'zh_CN' => 'updateback的testmodel',
+                    'zh_CN' => 'updatebacktestmodel',
                     'en_US' => 'Updated Test Model',
                 ],
                 'description' => [
-                    'zh_CN' => '这是updateback的testmodel',
+                    'zh_CN' => '这isupdatebacktestmodel',
                     'en_US' => 'This is an updated test model',
                 ],
             ],
@@ -177,18 +177,18 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertArrayHasKey('data', $updateResponse);
         $this->assertSame($modelId, $updateResponse['data']['id'], 'updatebackmodelID应保持not变');
 
-        // ========== step5: againtimecalldetailinterfacevalidateupdateback的4costfield ==========
+        // ========== step5: againtimecalldetailinterfacevalidateupdateback4costfield ==========
         $updatedDetailResponse = $this->get($detailUri, [], $this->getCommonHeaders());
 
         $this->assertIsArray($updatedDetailResponse);
         $this->assertSame(1000, $updatedDetailResponse['code'], 'getupdatebackdetailshouldsuccess');
 
-        // findupdateback的model
+        // findupdatebackmodel
         $updatedModel = $this->findModelInDetailResponse($updatedDetailResponse['data'], $modelId);
-        $this->assertNotNull($updatedModel, 'should能indetailmiddle找toupdateback的model');
+        $this->assertNotNull($updatedModel, 'should能indetailmiddle找toupdatebackmodel');
 
-        // validateupdateback的4costfield
-        $this->assertArrayHasKey('config', $updatedModel, 'updateback的modelshouldhaveconfigfield');
+        // validateupdateback4costfield
+        $this->assertArrayHasKey('config', $updatedModel, 'updatebackmodelshouldhaveconfigfield');
         $this->verifyConfigCostFields($updatedModel['config'], [
             'input_cost' => 0.003,
             'output_cost' => 0.006,
@@ -196,7 +196,7 @@ class ServiceProviderApiTest extends BaseTest
             'cache_hit_cost' => 0.0003,
         ]);
 
-        // ========== step6: validateupdateback的configurationversion（version=2） ==========
+        // ========== step6: validateupdatebackconfigurationversion（version=2） ==========
         $this->verifyConfigVersion((int) $modelId, $updateRequestData['config'], 2);
     }
 
@@ -289,7 +289,7 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * testcreate和deletemodel.
+     * testcreateanddeletemodel.
      */
     public function testCreateAndDeleteModel()
     {
@@ -304,15 +304,15 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * indetailresponsemiddlefindfinger定ID的model.
+     * indetailresponsemiddlefindfinger定IDmodel.
      *
      * @param array $detailData detailresponsedata
      * @param string $modelId modelID
-     * @return null|array 找to的modeldata，未找toreturnnull
+     * @return null|array 找tomodeldata，未找toreturnnull
      */
     private function findModelInDetailResponse(array $detailData, string $modelId): ?array
     {
-        // detailinterface可能return models arrayor其他结构，这withinneedaccording toactualinterfaceadjust
+        // detailinterfacemaybereturn models arrayor其他结构，这withinneedaccording toactualinterfaceadjust
         if (isset($detailData['models']) && is_array($detailData['models'])) {
             foreach ($detailData['models'] as $model) {
                 if (isset($model['id']) && (string) $model['id'] === (string) $modelId) {
@@ -321,7 +321,7 @@ class ServiceProviderApiTest extends BaseTest
             }
         }
 
-        // if是其他结构，continuefind
+        // ifis其他结构，continuefind
         if (isset($detailData['id']) && (string) $detailData['id'] === (string) $modelId) {
             return $detailData;
         }
@@ -330,10 +330,10 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * validateconfigurationmiddle的4costfield.
+     * validateconfigurationmiddle4costfield.
      *
      * @param array $config configurationdata
-     * @param array $expectedCosts expect的costvalue
+     * @param array $expectedCosts expectcostvalue
      */
     private function verifyConfigCostFields(array $config, array $expectedCosts): void
     {
@@ -376,8 +376,8 @@ class ServiceProviderApiTest extends BaseTest
      * validateconfigurationversionwhethercorrect落library.
      *
      * @param int $modelId modelID
-     * @param array $expectedConfig expect的configurationdata
-     * @param int $expectedVersion expect的versionnumber
+     * @param array $expectedConfig expectconfigurationdata
+     * @param int $expectedVersion expectversionnumber
      */
     private function verifyConfigVersion(int $modelId, array $expectedConfig, int $expectedVersion): void
     {
@@ -393,7 +393,7 @@ class ServiceProviderApiTest extends BaseTest
 
         $this->assertNotNull($versionEntity, 'configurationversionshould存in');
 
-        // validate int typefield（stringshouldbeconvert为 int）
+        // validate int typefield（stringshouldbeconvertfor int）
         if (isset($expectedConfig['max_output_tokens'])) {
             $this->assertSame(
                 (int) $expectedConfig['max_output_tokens'],
@@ -418,7 +418,7 @@ class ServiceProviderApiTest extends BaseTest
             );
         }
 
-        // validate float typefield（stringshouldbeconvert为 float）
+        // validate float typefield（stringshouldbeconvertfor float）
         if (isset($expectedConfig['input_pricing'])) {
             $this->assertEqualsWithDelta(
                 (float) $expectedConfig['input_pricing'],
@@ -511,7 +511,7 @@ class ServiceProviderApiTest extends BaseTest
 
         if (isset($expectedConfig['temperature'])) {
             if ($expectedConfig['temperature'] === null) {
-                $this->assertNull($versionEntity->getTemperature(), 'temperature should为 null');
+                $this->assertNull($versionEntity->getTemperature(), 'temperature shouldfor null');
             } else {
                 $this->assertEqualsWithDelta(
                     (float) $expectedConfig['temperature'],
@@ -556,8 +556,8 @@ class ServiceProviderApiTest extends BaseTest
             );
         }
 
-        // validateversionnumber和currentversionmark
-        $this->assertSame($expectedVersion, $versionEntity->getVersion(), "versionnumbershould是 {$expectedVersion}");
-        $this->assertTrue($versionEntity->isCurrentVersion(), 'should是currentversion');
+        // validateversionnumberandcurrentversionmark
+        $this->assertSame($expectedVersion, $versionEntity->getVersion(), "versionnumbershouldis {$expectedVersion}");
+        $this->assertTrue($versionEntity->isCurrentVersion(), 'shouldiscurrentversion');
     }
 }

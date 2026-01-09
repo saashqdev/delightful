@@ -10,7 +10,7 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 enum KnowledgeType: int
 {
     /*
-     * user自建knowledge base
+     * userfrom建knowledge base
      */
     case UserKnowledgeBase = 1;
 

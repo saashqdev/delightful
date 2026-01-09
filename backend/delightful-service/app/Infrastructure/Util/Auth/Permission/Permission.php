@@ -36,7 +36,7 @@ class Permission implements PermissionInterface
     }
 
     /**
-     * get该usehand机number码down所拥have的organizationadministratorcode.
+     * get该usehand机number码down所拥haveorganizationadministratorcode.
      */
     public function getOrganizationAdminList(string $delightfulId): array
     {

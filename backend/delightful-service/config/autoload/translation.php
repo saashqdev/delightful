@@ -7,8 +7,8 @@ declare(strict_types=1);
 return [
     // defaultlanguage
     'locale' => 'zh_CN',
-    // backlanguage，whendefaultlanguage的languagetextnothave提供o clock，thenwillusebacklanguage的对应languagetext
+    // backlanguage，whendefaultlanguagelanguagetextnothave提供o clock，thenwillusebacklanguageto应languagetext
     'fallback_locale' => 'en_US',
-    // languagefile存放的file夹
+    // languagefile存放file夹
     'path' => BASE_PATH . '/storage/languages',
 ];

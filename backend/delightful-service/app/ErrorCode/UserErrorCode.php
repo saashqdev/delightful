@@ -55,7 +55,7 @@ enum UserErrorCode: int
     #[ErrorMessage('user.create_user_too_frequently')]
     case CREATE_USER_TOO_FREQUENTLY = 2174;
 
-    // createidassociate关系too频繁
+    // createidassociateclose系too频繁
     #[ErrorMessage('user.create_id_relation_too_frequently')]
     case CREATE_ID_RELATION_TOO_FREQUENTLY = 2175;
 

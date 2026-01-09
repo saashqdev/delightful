@@ -13,82 +13,82 @@ use InvalidArgumentException;
 /**
  * graphsearchconfigurationvalueobject
  *
- * containgraphsearch的相关configurationparameter，如 API 端point、authinfo、timeoutsetetc
+ * containgraphsearch相closeconfigurationparameter，如 API 端point、authinfo、timeoutsetetc
  */
 class GraphSearchConfig extends AbstractValueObject
 {
     /**
-     * 关系权重.
+     * close系权重.
      *
-     * graphsearchmiddle关系的权重，useat计算finalsimilardegreeminute数
+     * graphsearchmiddleclose系权重，useat计算finalsimilardegreeminute数
      */
     private float $relationWeight = 0.5;
 
     /**
      * most大search深degree.
      *
-     * graphsearch的most大深degree，即from起始sectionpointstart，at mostsearch几跳关系
+     * graphsearchmost大深degree，即fromup始sectionpointstart，at mostsearch几跳close系
      */
     private int $maxDepth = 2;
 
     /**
      * whethercontainproperty.
      *
-     * whetherinsearchresultmiddlecontainsectionpoint和关系的property
+     * whetherinsearchresultmiddlecontainsectionpointandclose系property
      */
     private bool $includeProperties = true;
 
     /**
      * API 端point.
      *
-     * graphsearchservice的 API 端point
+     * graphsearchservice API 端point
      */
     private string $apiEndpoint = '';
 
     /**
      * API key.
      *
-     * accessgraphsearchservice的 API key
+     * accessgraphsearchservice API key
      */
     private string $apiKey = '';
 
     /**
      * timeouttime（second）.
      *
-     * API request的timeouttime，unit为second
+     * API requesttimeouttime，unitforsecond
      */
     private float $timeout = 5.0;
 
     /**
      * retrycount.
      *
-     * API requestfailo clock的retrycount
+     * API requestfailo clockretrycount
      */
     private int $retryCount = 3;
 
     /**
-     * 关系type.
+     * close系type.
      *
-     * searcho clock考虑的关系typelist，为空table示所havetype
+     * searcho clock考虑close系typelist，for空table示所havetype
      */
     private array $relationTypes = [];
 
     /**
      * sectionpointtype.
      *
-     * searcho clock考虑的sectionpointtypelist，为空table示所havetype
+     * searcho clock考虑sectionpointtypelist，for空table示所havetype
      */
     private array $nodeTypes = [];
 
     /**
      * result限制.
      *
-     * return的most大resultquantity
+     * returnmost大resultquantity
      */
     private int $limit = 10;
 
     /**
-     * get关系权重.
+     * getclose系权重.
      */
     public function getRelationWeight(): float
     {
@@ -96,7 +96,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * set关系权重.
+     * setclose系权重.
      */
     public function setRelationWeight(float $relationWeight): self
     {
@@ -219,7 +219,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * get关系type.
+     * getclose系type.
      */
     public function getRelationTypes(): array
     {
@@ -227,7 +227,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * set关系type.
+     * setclose系type.
      */
     public function setRelationTypes(array $relationTypes): self
     {
@@ -331,7 +331,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * convert为array.
+     * convertforarray.
      */
     public function toArray(): array
     {

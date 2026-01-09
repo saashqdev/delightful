@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * imagegenerate统一抽象category
- * integrationwatermarkprocess和钉钉alertfeature
+ * integrationwatermarkprocessand钉钉alertfeature
  * 所haveimagegenerateProviderallshouldinherit此category.
  */
 abstract class AbstractImageGenerate implements ImageGenerate
@@ -37,8 +37,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     protected RedisLocker $redisLocker;
 
     /**
-     * 统一的imagegenerate入口method
-     * 先call子categoryimplement的originalimagegenerate，again统一addwatermark.
+     * 统一imagegenerate入口method
+     * 先call子categoryimplementoriginalimagegenerate，again统一addwatermark.
      */
     final public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -48,8 +48,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * implementinterface要求的带watermarkoriginaldatamethod
-     * each子categorymustaccording to自己的dataformatimplement此method.
+     * implementinterface要求带watermarkoriginaldatamethod
+     * each子categorymustaccording tofrom己dataformatimplement此method.
      */
     abstract public function generateImageRawWithWatermark(ImageGenerateRequest $imageGenerateRequest): array;
 
@@ -59,29 +59,29 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 子categoryimplement的originalimagegeneratemethod
-     * 只负责calleach自APIgenerateimage，notuse关corewatermarkprocess.
+     * 子categoryimplementoriginalimagegeneratemethod
+     * 只负责calleachfromAPIgenerateimage，notuseclosecorewatermarkprocess.
      */
     abstract protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 
     /**
-     * getresponseobject的lock，useat并hairsecurityground操作 OpenAIFormatResponse.
-     * useRedis自旋lockimplementrow队etc待.
+     * getresponseobjectlock，useatandhairsecurityground操as OpenAIFormatResponse.
+     * useRedisfrom旋lockimplementrow队etc待.
      *
-     * @return string returnlock的owner，useatreleaselock
+     * @return string returnlockowner，useatreleaselock
      */
     protected function lockResponse(OpenAIFormatResponse $response): string
     {
         $lockKey = 'img_response_' . spl_object_id($response);
-        $owner = bin2hex(random_bytes(8)); // 16位随机string作为owner
+        $owner = bin2hex(random_bytes(8)); // 16位随机stringasforowner
 
-        // spinLockwill自动etc待，untilgetsuccessortimeout（30second）
+        // spinLockwillfrom动etc待，untilgetsuccessortimeout（30second）
         if (! $this->redisLocker->spinLock($lockKey, $owner, 30)) {
-            $this->logger->error('getgraph像responseRedislocktimeout', [
+            $this->logger->error('getgraphlikeresponseRedislocktimeout', [
                 'lock_key' => $lockKey,
                 'timeout' => 30,
             ]);
-            throw new Exception('getgraph像responselocktimeout，请稍backretry');
+            throw new Exception('getgraphlikeresponselocktimeout，请稍backretry');
         }
 
         $this->logger->debug('Redislockgetsuccess', ['lock_key' => $lockKey, 'owner' => $owner]);
@@ -89,10 +89,10 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * releaseresponseobject的lock.
+     * releaseresponseobjectlock.
      *
      * @param OpenAIFormatResponse $response responseobject
-     * @param string $owner lock的owner
+     * @param string $owner lockowner
      */
     protected function unlockResponse(OpenAIFormatResponse $response, string $owner): void
     {
@@ -101,7 +101,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
         try {
             $result = $this->redisLocker->release($lockKey, $owner);
             if (! $result) {
-                $this->logger->warning('Redislockreleasefail，可能已be其他进程release', [
+                $this->logger->warning('Redislockreleasefail，maybe已be其他enter程release', [
                     'lock_key' => $lockKey,
                     'owner' => $owner,
                 ]);
@@ -119,8 +119,8 @@ abstract class AbstractImageGenerate implements ImageGenerate
     }
 
     /**
-     * 统一的watermarkprocess逻辑
-     * supportURL和base64两typeformat的imagewatermarkprocess.
+     * 统一watermarkprocess逻辑
+     * supportURLandbase64两typeformatimagewatermarkprocess.
      */
     private function applyWatermark(ImageGenerateResponse $response, ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {

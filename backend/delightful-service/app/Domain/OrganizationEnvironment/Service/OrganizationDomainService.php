@@ -55,15 +55,15 @@ readonly class OrganizationDomainService
 
         if ($creatorId !== null && $savedOrganization->getType() !== 1) {
             // personorganizationnotaddorganizationadministrator
-            // 为create者addorganizationadministratorpermission并mark为organizationcreateperson
+            // forcreate者addorganizationadministratorpermissionandmarkfororganizationcreateperson
             try {
                 $dataIsolation = DataIsolation::simpleMake($savedOrganization->getDelightfulOrganizationCode(), (string) $creatorId);
                 $this->organizationAdminDomainService->grant(
                     $dataIsolation,
                     (string) $creatorId,
-                    (string) $creatorId, // 授予者also是create者自己
-                    'organizationcreate者自动获得administratorpermission',
-                    true // mark为organizationcreateperson
+                    (string) $creatorId, // 授予者alsoiscreate者from己
+                    'organizationcreate者from动获得administratorpermission',
+                    true // markfororganizationcreateperson
                 );
             } catch (Throwable $e) {
                 // if授予administratorpermissionfail，recordlogbutnot影响organizationcreate
@@ -192,7 +192,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * checkorganizationencodingwhether可use.
+     * checkorganizationencodingwhethercanuse.
      */
     public function isCodeAvailable(string $code, ?int $excludeId = null): bool
     {

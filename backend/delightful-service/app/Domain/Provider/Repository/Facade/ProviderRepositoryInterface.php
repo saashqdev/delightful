@@ -20,7 +20,7 @@ interface ProviderRepositoryInterface
 
     /**
      * @param array<int> $ids
-     * @return array<int, ProviderEntity> returnbyid为key的实bodyobjectarray
+     * @return array<int, ProviderEntity> returnbyidforkey实bodyobjectarray
      */
     public function getByIds(array $ids): array;
 
@@ -39,7 +39,7 @@ interface ProviderRepositoryInterface
     public function getByCategory(Category $category): array;
 
     /**
-     * according toProviderCode和Categorygetservice商.
+     * according toProviderCodeandCategorygetservice商.
      * @param ProviderCode $providerCode service商encoding
      * @param Category $category category
      * @return null|ProviderEntity service商实body
@@ -58,7 +58,7 @@ interface ProviderRepositoryInterface
      * according toIDarraygetservice商实bodylist（not按organizationfilter，all局query）.
      *
      * @param array<int> $ids service商IDarray
-     * @return array<int, ProviderEntity> returnbyid为key的service商实bodyarray
+     * @return array<int, ProviderEntity> returnbyidforkeyservice商实bodyarray
      */
     public function getByIdsWithoutOrganizationFilter(array $ids): array;
 }

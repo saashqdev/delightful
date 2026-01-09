@@ -101,7 +101,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $documentEntity = null;
         Db::transaction(function () use ($dataIsolation, $documentCode, $knowledgeBaseEntity) {
             $knowledgeBaseCode = $knowledgeBaseEntity->getCode();
-            // 首先deletedocumentdown的所haveslicesegment
+            // firstdeletedocumentdown所haveslicesegment
             $this->destroyFragments($dataIsolation, $knowledgeBaseCode, $documentCode);
             $documentEntity = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode, true);
             // 然backdeletedocument本身
@@ -122,7 +122,7 @@ readonly class KnowledgeBaseDocumentDomainService
     {
         $document = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode);
 
-        // ifforce重建or者syncstatus为fail，then重新sync
+        // ifforce重建or者syncstatusforfail，then重新sync
         if ($force || $document->getSyncStatus() === 2) { // 2 table示syncfail
             $document->setSyncStatus(0); // 0 table示未sync
             $document->setSyncStatusMessage('');
@@ -240,7 +240,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * deletedocumentdown的所haveslicesegment.
+     * deletedocumentdown所haveslicesegment.
      */
     private function destroyFragments(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -253,15 +253,15 @@ readonly class KnowledgeBaseDocumentDomainService
     private function prepareForCreation(KnowledgeBaseDocumentEntity $documentEntity): void
     {
         if (empty($documentEntity->getName())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'documentnamenot能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'documentnamenot能for空');
         }
 
         if (empty($documentEntity->getKnowledgeBaseCode())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge baseencodingnot能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'knowledge baseencodingnot能for空');
         }
 
         if (empty($documentEntity->getCreatedUid())) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者not能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'create者not能for空');
         }
 
         // setdefaultvalue
@@ -284,7 +284,7 @@ readonly class KnowledgeBaseDocumentDomainService
      */
     private function prepareForUpdate(KnowledgeBaseDocumentEntity $newDocument, KnowledgeBaseDocumentEntity $oldDocument): void
     {
-        // notallowmodify的field保持原value
+        // notallowmodifyfield保持原value
         $newDocument->setId($oldDocument->getId());
         $newDocument->setCode($oldDocument->getCode());
         $newDocument->setKnowledgeBaseCode($oldDocument->getKnowledgeBaseCode());

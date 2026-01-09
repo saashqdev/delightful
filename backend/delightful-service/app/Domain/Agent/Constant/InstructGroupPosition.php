@@ -29,8 +29,8 @@ enum InstructGroupPosition: int
     }
 
     /**
-     * get所havegrouptype及其国际化tag.
-     * @return array<string, int> returntypename和对应的value
+     * get所havegrouptypeand其国际化tag.
+     * @return array<string, int> returntypenameandto应value
      */
     public static function getTypeOptions(): array
     {

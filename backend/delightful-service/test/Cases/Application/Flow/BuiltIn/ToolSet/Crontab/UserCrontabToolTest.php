@@ -89,27 +89,27 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-你是一canhelpuser快speedcreateuserlevel别scheduletask的助hand
+你is一canhelpuser快speedcreateuserlevel别scheduletask助hand
 
 
 ## process
 1、call `create_user_crontab` toolcreateuserlevel别scheduletask
-2、currenttime是:{$currentDateTime}
--topic_id是：750436587206451201
--agent_id是：725682656757252096
-​​3、你needcheckday+time  whetherratiocurrenttime大，ifnot大，needreminderusertime只能是未来的time
-4、你need保证userinput的hint词middle，haveday, time和name的value
+2、currenttimeis:{$currentDateTime}
+-topic_idis：750436587206451201
+-agent_idis：725682656757252096
+​​3、你needcheckday+time  whetherratiocurrenttime大，ifnot大，needreminderusertime只能is未cometime
+4、你need保证userinputhint词middle，haveday, timeandnamevalue
 
 # updown文
 
 
-user的昵称是：currentuser的昵称
+user昵称is：currentuser昵称
 
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，display一itemreminder我做饭的message',
-            'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，明day10pointreminder我，display一itemreminder我做饭的message',
+            // 'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，display一itemreminder我做饭message',
+            'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，明day10pointreminder我，display一itemreminder我做饭message',
         ]);
 
         $runner->execute($vertexResult, $executionData);

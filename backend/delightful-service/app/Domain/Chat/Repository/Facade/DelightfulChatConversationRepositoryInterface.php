@@ -29,7 +29,7 @@ interface DelightfulChatConversationRepositoryInterface
     public function addConversation(DelightfulConversationEntity $conversation): DelightfulConversationEntity;
 
     /**
-     * (minuteorganization)getuser与finger定user的conversationwindowinformation.
+     * (minuteorganization)getuserandfinger定userconversationwindowinformation.
      * @return array<DelightfulConversationEntity>
      */
     public function getConversationsByReceiveIds(string $userId, array $receiveIds, ?string $userOrganizationCode = null): array;

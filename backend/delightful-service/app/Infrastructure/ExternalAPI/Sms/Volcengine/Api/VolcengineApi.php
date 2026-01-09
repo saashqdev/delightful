@@ -23,7 +23,7 @@ use RuntimeException;
 use function Hyperf\Config\config;
 
 /**
- * 火山短信所have api 的基础category.
+ * 火山短信所have api 基础category.
  * @see https://www.volcengine.com/docs/6361/171579
  */
 abstract class VolcengineApi
@@ -98,7 +98,7 @@ abstract class VolcengineApi
 
     public function __construct(ClientFactory $clientFactory, StdoutLoggerInterface $logger, string $region = self::CHINA_REGION)
     {
-        // 部minute公共fixed的parameterin构造parametermiddle确定
+        // 部minute公共fixedparameterin构造parametermiddle确定
         $this->setRegion($region);
         $this->setSecretKey(config('sms.volcengine.secretKey'));
         $this->setAccessKey(config('sms.volcengine.accessKey'));
@@ -118,7 +118,7 @@ abstract class VolcengineApi
      */
     protected function sendRequest()
     {
-        // setrequest的signature和X-Daterequesthead
+        // setrequestsignatureandX-Daterequesthead
         $this->setAuth();
         try {
             // requestheadappendsignature
@@ -149,7 +149,7 @@ abstract class VolcengineApi
     }
 
     /**
-     * 接受different的短信typesend
+     * 接受different短信typesend
      */
     protected function init(string $messageGroupId, string $sign, string $templateId): void
     {
@@ -165,7 +165,7 @@ abstract class VolcengineApi
 
     protected function addHeader(string $key, $value): void
     {
-        // 字section方的requesthead的value是array,才能参与back续的signature
+        // 字section方requestheadvalueisarray,才能参andback续signature
         $value = is_array($value) ? $value : [$value];
         $this->headers[$key] = $value;
     }
@@ -176,7 +176,7 @@ abstract class VolcengineApi
     }
 
     /**
-     * setparameter的signature和公共requestheadparameterX-Date.
+     * setparametersignatureand公共requestheadparameterX-Date.
      */
     protected function setAuth(): void
     {
@@ -195,7 +195,7 @@ abstract class VolcengineApi
         $req->setIsSignUrl(false);
         $req->setMethod($this->getMethod());
         $req->setQueryList($this->getQuery());
-        // !!! 注意,这withinnot能加up JSON_UNESCAPED_UNICODE,加了will导致bodyhavemiddle文o clocksignaturenotcorrect!
+        // !!! 注意,这withinnot能加up JSON_UNESCAPED_UNICODE,加will导致bodyhavemiddle文o clocksignaturenotcorrect!
         $bodyStream = Utils::streamFor(Json::encode($this->getBody(), JSON_THROW_ON_ERROR));
         $req->setPayloadHash(Utils::hash($bodyStream, 'sha256'));
         $result = $sign->signOnly($req, $credentials);
@@ -311,7 +311,7 @@ abstract class VolcengineApi
 
     private function setRegion(string $region): void
     {
-        // region只supportmiddle国和新加坡,defaultmiddle国
+        // region只supportmiddle国and新加坡,defaultmiddle国
         if ($region === self::SINGAPORE_REGION) {
             $this->setHost(self::SINGAPORE_HOST);
         } else {

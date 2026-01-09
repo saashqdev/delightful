@@ -22,19 +22,19 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
         $filterType = $paramsConfig->getFilterType();
         foreach ($paramsConfig->getFilters() as $filter) {
             $rightValue = $filter->getRightValue()->getValue()->getResult($executionData->getExpressionFieldData());
-            // null、''、0、[]、false  直接skip吧，谁not事搜这些啊。right侧not填value的notconductsearch
+            // null、''、0、[]、false  直接skip吧，谁not事搜这些啊。right侧not填valuenotconductsearch
             if (empty($rightValue)) {
                 continue;
             }
 
-            // definition本time的 range id，if是 null 代tablealso未conduct限制
+            // definition本time range id，ifis null 代tablealso未conduct限制
             $rangeIds = null;
             if ($filterType->isAll()) {
-                // if是所haveitemitem满足，那么已经存in的 id setthen是本time的range
+                // ifis所haveitemitem满足，那么已经存in id setthenis本timerange
                 $rangeIds = $allIds;
             }
 
-            // ifrange id bedefinitionbecome了空array，代table已经nothave符合itemitem的data了，直接跳出loop
+            // ifrange id bedefinitionbecome空array，代table已经nothave符合itemitemdata，直接跳outloop
             if (is_array($rangeIds) && empty($rangeIds)) {
                 break;
             }
@@ -46,15 +46,15 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 $rightValue,
                 $rangeIds
             );
-            // null 代tablenot supported的searchtype，直接skip
+            // null 代tablenot supportedsearchtype，直接skip
             if ($currentIds === null) {
                 continue;
             }
             if ($filterType->isAny()) {
-                // if是任意itemitem满足，那么将本time的 id 与已have的 id conductmerge
+                // ifis任意itemitem满足，那么will本time id and已have id conductmerge
                 $allIds = array_merge($allIds ?? [], $currentIds);
             } else {
-                // if是所haveitemitem满足，那么将本time的 id 与已have的 id conduct交集
+                // ifis所haveitemitem满足，那么will本time id and已have id conduct交集
                 $allIds = $allIds === null ? $currentIds : array_intersect($allIds, $currentIds);
             }
         }

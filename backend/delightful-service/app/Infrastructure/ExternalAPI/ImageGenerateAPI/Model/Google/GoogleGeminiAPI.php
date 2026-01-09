@@ -70,7 +70,7 @@ class GoogleGeminiAPI
     public function editLocalImage(string $imagePath, string $instructions): array
     {
         if (! file_exists($imagePath)) {
-            throw new Exception("graph像filenot存in: {$imagePath}");
+            throw new Exception("graphlikefilenot存in: {$imagePath}");
         }
 
         $finfo = finfo_open(FILEINFO_MIME_TYPE);
@@ -96,11 +96,11 @@ class GoogleGeminiAPI
             ],
         ];
 
-        // 为graph像editsettingcorrect的generateconfiguration
+        // forgraphlikeeditsettingcorrectgenerateconfiguration
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,
-            'responseModalities' => ['TEXT', 'IMAGE'], // 关键：finger定我们needgraph像response
+            'responseModalities' => ['TEXT', 'IMAGE'], // close键：finger定我们needgraphlikeresponse
             'topP' => 0.95,
         ];
 
@@ -150,11 +150,11 @@ class GoogleGeminiAPI
             ],
         ];
 
-        // 为graph像editsettingcorrect的generateconfiguration
+        // forgraphlikeeditsettingcorrectgenerateconfiguration
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,
-            'responseModalities' => ['TEXT', 'IMAGE'], // 关键：finger定我们needgraph像response
+            'responseModalities' => ['TEXT', 'IMAGE'], // close键：finger定我们needgraphlikeresponse
             'topP' => 0.95,
         ];
 

@@ -69,7 +69,7 @@ class DelightfulFlowWaitMessageEntity extends AbstractEntity
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow_code']);
         }
         if (empty($this->flowVersion)) {
-            // have可能是nothaveversion的情况
+            // havemaybeisnothaveversion情况
             $this->flowVersion = '';
         }
         if (empty($this->creator)) {

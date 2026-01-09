@@ -11,13 +11,13 @@ use App\Domain\Chat\Entity\AbstractEntity;
 use App\Domain\Chat\Entity\ValueObject\FileType;
 
 /**
- * attachmentnot是一typemessagetype，而是message的一部minute.
+ * attachmentnotis一typemessagetype，whileismessage一部minute.
  */
 class ChatAttachment extends AbstractEntity
 {
     /**
      * chatfileneed先uploadto chat fileservice器，then才能sendmessage.
-     * 这 id 是 delightful_chat_file 表的primary key.
+     * 这 id is delightful_chat_file 表primary key.
      */
     protected string $fileId = '';
 

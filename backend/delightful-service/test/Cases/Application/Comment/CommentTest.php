@@ -30,7 +30,7 @@ class CommentTest extends BaseTest
         $commentEntity->setResourceId(705457565907976193);
         $commentEntity->setResourceType(CommentResourceType::SCHEDULE);
         $commentEntity->setParentId(0);
-        $commentEntity->setMessage(['xhycomment了schedule-A']);
+        $commentEntity->setMessage(['xhycommentschedule-A']);
         $commentEntity->setOrganizationCode($requestContext->getOrganizationCode());
         $commentEntity->setCreator($requestContext->getUserId());
         $commentEntity->setAttachments(['DT001/588417216353927169/2c17c6393771ee3048ae34d6b380c5ec/672448c5eca2a.png']);
@@ -42,7 +42,7 @@ class CommentTest extends BaseTest
         $commentEntity->setResourceId(705457565907976193);
         $commentEntity->setResourceType(CommentResourceType::SCHEDULE);
         $commentEntity->setParentId($parentId);
-        $commentEntity->setMessage(['xhyreply了comment']);
+        $commentEntity->setMessage(['xhyreplycomment']);
         $commentEntity->setOrganizationCode($requestContext->getOrganizationCode());
         $commentEntity->setCreator($requestContext->getUserId());
         $commentResult = $commentR->create($requestContext, $commentEntity);

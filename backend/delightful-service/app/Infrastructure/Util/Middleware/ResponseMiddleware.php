@@ -31,7 +31,7 @@ class ResponseMiddleware implements MiddlewareInterface
         'api-key',
     ];
 
-    // finger定的 uri notprintrequest和responsedetail
+    // finger定 uri notprintrequestandresponsedetail
     private array $desensitizeUris = [
         '/conversation/chatCompletions',
         '/message',
@@ -122,7 +122,7 @@ class ResponseMiddleware implements MiddlewareInterface
             'parsed_body' => $parsedBody,
         ];
         $responseBody = $errorResponse ?? $response;
-        // greater than 5K 的datanotrecord
+        // greater than 5K datanotrecord
         if (strlen($responseBody) > 5 * 1024) {
             $responseBody = 'ResponseBodyIsTooLarge';
         }

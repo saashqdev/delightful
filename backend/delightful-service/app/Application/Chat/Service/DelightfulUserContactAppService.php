@@ -76,14 +76,14 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * @param string $friendId 好友的userid. 好友可能是ai
+     * @param string $friendId 好友userid. 好友maybeisai
      * @throws Throwable
      */
     public function addFriend(DelightfulUserAuthorization $userAuthorization, string $friendId, AddFriendType $addFriendType): bool
     {
         $dataIsolation = $this->createDataIsolation($userAuthorization);
 
-        // checkwhether已经是好友
+        // checkwhether已经is好友
         if ($this->userDomainService->isFriend($dataIsolation->getCurrentUserId(), $friendId)) {
             return true;
         }
@@ -91,7 +91,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         if (! $this->userDomainService->addFriend($dataIsolation, $friendId)) {
             return false;
         }
-        // sendadd好友message。加好友split为：好友申请/好友同意/好友reject
+        // sendadd好友message。加好友splitfor：好友申请/好友同意/好友reject
         if ($addFriendType === AddFriendType::PASS) {
             // sendadd好友控制message
             $friendUserEntity = new DelightfulUserEntity();
@@ -107,7 +107,7 @@ class DelightfulUserContactAppService extends AbstractAppService
      */
     public function sendAddFriendControlMessage(DataIsolation $dataIsolation, DelightfulUserEntity $friendUserEntity): bool
     {
-        // checkwhether已经是好友
+        // checkwhether已经is好友
         if ($this->userDomainService->isFriend($dataIsolation->getCurrentUserId(), $friendUserEntity->getUserId())) {
             return true;
         }
@@ -161,7 +161,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 批quantityqueryorganization架构、ai 、or者person版的user.
+     * 批quantityqueryorganization架构、ai 、or者person版user.
      */
     public function getUserDetailByIds(UserQueryDTO $dto, DelightfulUserAuthorization $authorization): array
     {
@@ -173,10 +173,10 @@ class DelightfulUserContactAppService extends AbstractAppService
         $queryType = $dto->getQueryType();
         $dataIsolation = $this->createDataIsolation($authorization);
 
-        // getcurrentuser拥have的organizationcolumn表
+        // getcurrentuser拥haveorganizationcolumn表
         $userOrganizations = $this->userDomainService->getUserOrganizations($dataIsolation->getCurrentUserId());
 
-        // 基本userinfoquery - 传入user拥have的organizationcolumn表
+        // 基本userinfoquery - 传入user拥haveorganizationcolumn表
         $usersDetailDTOList = $this->userDomainService->getUserDetailByUserIdsWithOrgCodes($userIds, $userOrganizations);
         // handleuseravatar
         $usersDetail = $this->getUsersAvatarCoordinator($usersDetailDTOList, $dataIsolation);
@@ -198,11 +198,11 @@ class DelightfulUserContactAppService extends AbstractAppService
             // getdepartmentdetail
             $departmentsInfo = $this->departmentChartDomainService->getDepartmentFullPathByIds($dataIsolation, $departmentIds);
 
-            // group装user和departmentinfo
+            // group装useranddepartmentinfo
             $users = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfo, $withDepartmentFullPath);
         }
 
-        // 通讯录和search相关interface，filterhiddendepartment和hiddenuser。
+        // 通讯录andsearch相closeinterface，filterhiddendepartmentandhiddenuser。
         $users = $this->filterDepartmentOrUserHidden($users);
         return PageListAssembler::pageByMysql($users, (int) $dto->getPageToken(), $pageSize, count($dto->getUserIds()));
     }
@@ -210,12 +210,12 @@ class DelightfulUserContactAppService extends AbstractAppService
     public function getUsersDetailByDepartmentId(UserQueryDTO $dto, DelightfulUserAuthorization $authorization): array
     {
         $dataIsolation = $this->createDataIsolation($authorization);
-        // rootdepartmentbe抽象为 -1，所by这withinneedconvert
+        // rootdepartmentbe抽象for -1，所by这withinneedconvert
         if ($dto->getDepartmentId() === PlatformRootDepartmentId::Delightful) {
             $departmentId = $this->departmentChartDomainService->getDepartmentRootId($dataIsolation);
             $dto->setDepartmentId($departmentId);
         }
-        // departmentdown的usercolumn表，限制了 pageSize
+        // departmentdownusercolumn表，限制 pageSize
         $usersPageResponseDTO = $this->departmentUserDomainService->getDepartmentUsersByDepartmentId($dto, $dataIsolation);
         $departmentUsers = $usersPageResponseDTO->getItems();
         $departmentIds = array_column($departmentUsers, 'department_id');
@@ -225,16 +225,16 @@ class DelightfulUserContactAppService extends AbstractAppService
         foreach ($departmentsInfo as $departmentInfo) {
             $departmentsInfoWithFullPath[$departmentInfo->getDepartmentId()] = [$departmentInfo];
         }
-        // getuser的真名/nickname/hand机number/avataretcinfo
+        // getuser真名/nickname/hand机number/avataretcinfo
         $userIds = array_values(array_unique(array_column($departmentUsers, 'user_id')));
         $usersDetail = $this->userDomainService->getUserDetailByUserIds($userIds, $dataIsolation);
         $usersDetail = $this->getUsersAvatar($usersDetail, $dataIsolation);
         // organizationuser + departmentdetail
         $userDepartmentDetailDTOS = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfoWithFullPath);
-        // 通讯录和search相关interface，filterhiddendepartment和hiddenuser。
+        // 通讯录andsearch相closeinterface，filterhiddendepartmentandhiddenuser。
         $userDepartmentDetailDTOS = $this->filterDepartmentOrUserHidden($userDepartmentDetailDTOS);
-        // 由at $usersPageResponseDTO 的 items 限制的parametertype，fromcodestandard的angledegree，again new 一通use的 PageResponseDTO， 按pagination的结构return
-        // 另outside，由atfilter逻辑的存in，可能本timereturn的 items quantity少at $limit,but是againhavedown一页。
+        // byat $usersPageResponseDTO  items 限制parametertype，fromcodestandardangledegree，again new 一通use PageResponseDTO， 按pagination结构return
+        // 另outside，byatfilter逻辑存in，maybe本timereturn items quantity少at $limit,butisagainhavedown一页。
         $pageResponseDTO = new PageResponseDTO();
         $pageResponseDTO->setPageToken($usersPageResponseDTO->getpageToken());
         $pageResponseDTO->setHasMore($usersPageResponseDTO->getHasMore());
@@ -253,7 +253,7 @@ class DelightfulUserContactAppService extends AbstractAppService
 
         $usersForQueryDepartmentPath = [];
         $usersForQueryJobTitle = [];
-        // searchpositioncontainsearch词的person
+        // searchpositioncontainsearch词person
         if ($queryDTO->isQueryByJobTitle()) {
             $departmentUsers = $this->departmentUserDomainService->searchDepartmentUsersByJobTitle($queryDTO->getQuery(), $dataIsolation);
             // getuser详细info
@@ -269,10 +269,10 @@ class DelightfulUserContactAppService extends AbstractAppService
 
         // mergeresult
         $usersForQueryDepartmentPath = array_merge($usersForQueryJobTitle, $usersForQueryDepartmentPath, $usersByNickname, $usersByPhoneOrRealName);
-        // 去重
+        // go重
         $usersForQueryDepartmentPath = array_values(array_column($usersForQueryDepartmentPath, null, 'user_id'));
 
-        // 去exceptAIassistant
+        // goexceptAIassistant
         if ($queryDTO->isFilterAgent()) {
             $usersForQueryDepartmentPath = array_filter($usersForQueryDepartmentPath, static fn ($user) => $user['user_type'] !== UserType::Ai->value);
         }
@@ -368,13 +368,13 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 为useraddAgentinfo(applicationlayer协调器).
+     * foruseraddAgentinfo(applicationlayer协调器).
      * @param array<UserDetailDTO> $usersDetailDTOList
      */
     public function addAgentInfoToUsers(Authenticatable $authorization, array $usersDetailDTOList): array
     {
         $aiCodes = [];
-        // if是 AI assistant，那么return AI assistant相关info和对它的permission
+        // ifis AI assistant，那么return AI assistant相closeinfoandto它permission
         foreach ($usersDetailDTOList as $userDetailDTO) {
             if (! empty($userDetailDTO->getAiCode())) {
                 $aiCodes[] = $userDetailDTO->getAiCode();
@@ -389,7 +389,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         $agentIds = array_keys($agents);
         $agentPermissions = [];
         if (! empty($agentIds)) {
-            // query user 对这些 agent 的permission
+            // query user to这些 agent permission
             $permissionDataIsolation = $this->createPermissionDataIsolation($authorization);
             $agentPermissions = $this->operationPermissionDomainService->getResourceOperationByUserIds(
                 $permissionDataIsolation,
@@ -417,7 +417,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 通讯录和search相关interface，filterhiddendepartment和hiddenuser。
+     * 通讯录andsearch相closeinterface，filterhiddendepartmentandhiddenuser。
      * @param UserDepartmentDetailDTO[]|UserDetailDTO[] $usersDepartmentDetails
      */
     private function filterDepartmentOrUserHidden(array $usersDepartmentDetails): array
@@ -429,12 +429,12 @@ class DelightfulUserContactAppService extends AbstractAppService
                 continue;
             }
             if ($userDepartmentDetail instanceof UserDetailDTO) {
-                // not要checkuser的departmentinfo
+                // not要checkuserdepartmentinfo
                 continue;
             }
             $userPathNodes = [];
             foreach ($userDepartmentDetail->getPathNodes() as $pathNode) {
-                // user所in的departmentwhetherhidden
+                // user所indepartmentwhetherhidden
                 if ($pathNode->getOption() === DepartmentOption::Hidden) {
                     continue;
                 }
@@ -462,7 +462,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     private function getUsersAvatarCoordinator(array $usersDetail, DataIsolation $dataIsolation): array
     {
         $fileKeys = array_column($usersDetail, 'avatar_url');
-        // 移exceptnullvalue/httpor者 https开head的/lengthless than 32的
+        // 移exceptnullvalue/httpor者 httpsopenhead/lengthless than 32
         $validFileKeys = [];
         foreach ($fileKeys as $fileKey) {
             if (! empty($fileKey) && mb_strlen($fileKey) >= 32 && ! str_starts_with($fileKey, 'http')) {

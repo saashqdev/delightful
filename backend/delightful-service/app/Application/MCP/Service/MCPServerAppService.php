@@ -118,14 +118,14 @@ class MCPServerAppService extends AbstractMCPAppService
 
         $resources = [];
         if (is_null($office)) {
-            // 官方data和organizationinside的，一并query
+            // 官方dataandorganizationinside，一andquery
             $resources = $this->operationPermissionAppService->getResourceOperationByUserIds(
                 $dataIsolation,
                 ResourceType::MCPServer,
                 [$dataIsolation->getCurrentUserId()]
             )[$dataIsolation->getCurrentUserId()] ?? [];
             $resourceIds = array_keys($resources);
-            // get官方的 code
+            // get官方 code
             $officialCodes = $this->mcpServerDomainService->getOfficialMCPServerCodes($dataIsolation);
             $resourceIds = array_merge($resourceIds, $officialCodes);
         } else {
@@ -158,7 +158,7 @@ class MCPServerAppService extends AbstractMCPAppService
 
             $operation = Operation::None;
             if (in_array($item->getOrganizationCode(), $dataIsolation->getOfficialOrganizationCodes(), true)) {
-                // if是官方organizationdata，andwhenfrontorganization所in的organization是官方organization，thensetting操作permission为administrator
+                // ifis官方organizationdata，andwhenfrontorganization所inorganizationis官方organization，thensetting操aspermissionforadministrator
                 if ($dataIsolation->isOfficialOrganization()) {
                     $operation = Operation::Admin;
                 }
@@ -169,7 +169,7 @@ class MCPServerAppService extends AbstractMCPAppService
         }
         $orgData['icons'] = $icons;
 
-        // getuser填写的configuration
+        // getuser填写configuration
         $validationResults = MCPServerConfigUtil::batchValidateUserConfigurations($dataIsolation, $orgData['list'] ?? []);
         $orgData['validation_results'] = $validationResults;
 

@@ -28,7 +28,7 @@ use Hyperf\Contract\TranslatorInterface;
 class AdminModeAssembler
 {
     /**
-     * 实bodyconvert为管理back台DTO (contain完整的i18nfield).
+     * 实bodyconvertfor管理back台DTO (contain完整i18nfield).
      */
     public static function modeToAdminDTO(ModeEntity $entity): AdminModeDTO
     {
@@ -42,7 +42,7 @@ class AdminModeAssembler
     }
 
     /**
-     * associate实bodyconvert为DTO.
+     * associate实bodyconvertforDTO.
      */
     public static function relationEntityToDTO(ModeGroupRelationEntity $entity): ModeGroupRelationDTO
     {
@@ -50,10 +50,10 @@ class AdminModeAssembler
     }
 
     /**
-     * aggregaterootconvert为DTO.
+     * aggregaterootconvertforDTO.
      *
      * @param ModeAggregate $aggregate 模typeaggregateroot
-     * @param array $providerModels optional的modelinfomapping [modelId => ProviderModelEntity]
+     * @param array $providerModels optionalmodelinfomapping [modelId => ProviderModelEntity]
      */
     public static function aggregateToAdminDTO(ModeAggregate $aggregate, array $providerModels = []): AdminModeAggregateDTO
     {
@@ -71,10 +71,10 @@ class AdminModeAssembler
     }
 
     /**
-     * minutegroupaggregaterootconvert为DTO.
+     * minutegroupaggregaterootconvertforDTO.
      *
      * @param ModeGroupAggregate $groupAggregate minutegroupaggregateroot
-     * @param array $providerModels optional的modelinfomapping [model_id => ['best' => ProviderModelEntity|null, 'all' => ProviderModelEntity[], 'status' => string]]
+     * @param array $providerModels optionalmodelinfomapping [model_id => ['best' => ProviderModelEntity|null, 'all' => ProviderModelEntity[], 'status' => string]]
      */
     public static function groupAggregateToAdminDTO(ModeGroupAggregate $groupAggregate, array $providerModels = []): AdminModeGroupAggregateDTO
     {
@@ -91,11 +91,11 @@ class AdminModeAssembler
             $modelInfo = $providerModels[$modelId] ?? null;
 
             if ($modelInfo && $modelInfo['best']) {
-                // 找to可usemodel，usemost佳model的info
+                // 找tocanusemodel，usemost佳modelinfo
                 $providerModel = $modelInfo['best'];
                 $modelDTO->setModelName($providerModel->getName());
                 $modelDTO->setModelIcon($providerModel->getIcon());
-                $modelDTO->setModelStatus($modelInfo['status']); // use计算出的status
+                $modelDTO->setModelStatus($modelInfo['status']); // use计算outstatus
                 $description = '';
                 $translate = $providerModel->getTranslate();
                 if (is_array($translate) && isset($translate['description'][$locale])) {
@@ -105,10 +105,10 @@ class AdminModeAssembler
                 }
                 $modelDTO->setModelDescription($description);
 
-                // 保持tobackcompatible，set providerModelId 为findto的model的ID
+                // 保持tobackcompatible，set providerModelId forfindtomodelID
                 $modelDTO->setProviderModelId((string) $providerModel->getId());
             } else {
-                // back台管理needdisplay所havestatus，include无可usemodel的情况
+                // back台管理needdisplay所havestatus，include无canusemodel情况
                 $status = $modelInfo['status'] ?? ModelStatus::Deleted;
                 $modelDTO->setModelStatus($status);
                 $modelDTO->setModelStatus($status);
@@ -123,7 +123,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 实bodyarrayconvert为管理back台DTOarray.
+     * 实bodyarrayconvertfor管理back台DTOarray.
      */
     public static function entitiesToAdminDTOs(array $entities): array
     {
@@ -131,7 +131,7 @@ class AdminModeAssembler
     }
 
     /**
-     * minutegroup实bodyarrayconvert为管理back台DTOarray.
+     * minutegroup实bodyarrayconvertfor管理back台DTOarray.
      */
     public static function groupEntitiesToAdminDTOs(array $entities): array
     {
@@ -139,7 +139,7 @@ class AdminModeAssembler
     }
 
     /**
-     * associate实bodyarrayconvert为DTOarray.
+     * associate实bodyarrayconvertforDTOarray.
      */
     public static function relationEntitiesToDTOs(array $entities): array
     {
@@ -152,7 +152,7 @@ class AdminModeAssembler
     }
 
     /**
-     * ModeAggregateDTOconvert为ModeAggregate实body.
+     * ModeAggregateDTOconvertforModeAggregate实body.
      */
     public static function aggregateDTOToEntity(AdminModeAggregateDTO $dto): ModeAggregate
     {
@@ -167,7 +167,7 @@ class AdminModeAssembler
     }
 
     /**
-     * ModeGroupAggregateDTOconvert为ModeGroupAggregate实body.
+     * ModeGroupAggregateDTOconvertforModeGroupAggregate实body.
      */
     public static function groupAggregateDTOToEntity(AdminModeGroupAggregateDTO $dto): ModeGroupAggregate
     {
@@ -184,7 +184,7 @@ class AdminModeAssembler
     }
 
     /**
-     * ModeGroupDTOconvert为ModeGroupEntity实body.
+     * ModeGroupDTOconvertforModeGroupEntity实body.
      */
     public static function groupDTOToEntity(AdminModeGroupDTO $dto): ModeGroupEntity
     {
@@ -192,7 +192,7 @@ class AdminModeAssembler
     }
 
     /**
-     * CreateModeRequestconvert为ModeEntity.
+     * CreateModeRequestconvertforModeEntity.
      */
     public static function createModeRequestToEntity(CreateModeRequest $request): ModeEntity
     {
@@ -200,11 +200,11 @@ class AdminModeAssembler
     }
 
     /**
-     * 将UpdateModeRequest的dataapplicationto现haveModeEntity（部minuteupdate）.
+     * willUpdateModeRequestdataapplicationto现haveModeEntity（部minuteupdate）.
      */
     public static function applyUpdateRequestToEntity(UpdateModeRequest $request, ModeEntity $existingEntity): void
     {
-        // 只updaterequestmiddlecontain的allowmodify的field
+        // 只updaterequestmiddlecontainallowmodifyfield
         $existingEntity->setNameI18n($request->getNameI18n());
         $existingEntity->setPlaceholderI18n($request->getPlaceholderI18n());
         $existingEntity->setIdentifier($request->getIdentifier());
@@ -242,7 +242,7 @@ class AdminModeAssembler
     }
 
     /**
-     * CreateModeGroupRequestconvert为ModeGroupEntity.
+     * CreateModeGroupRequestconvertforModeGroupEntity.
      */
     public static function createModeGroupRequestToEntity(CreateModeGroupRequest $request): ModeGroupEntity
     {
@@ -250,7 +250,7 @@ class AdminModeAssembler
     }
 
     /**
-     * UpdateModeGroupRequestconvert为ModeGroupEntity.
+     * UpdateModeGroupRequestconvertforModeGroupEntity.
      */
     public static function updateModeGroupRequestToEntity(UpdateModeGroupRequest $request, string $groupId): ModeGroupEntity
     {

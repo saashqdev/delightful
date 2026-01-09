@@ -65,7 +65,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraph像并returnOpenAIformatresponse - Fluxversion.
+     * generategraphlikeandreturnOpenAIformatresponse - Fluxversion.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
@@ -78,11 +78,11 @@ class FluxModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof FluxModelRequest) {
-            $this->logger->error('Flux OpenAIformat生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Flux OpenAIformat生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
-        // 3. 并hairhandle - 直接操作responseobject
+        // 3. andhairhandle - 直接操asresponseobject
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
@@ -91,7 +91,7 @@ class FluxModel extends AbstractImageGenerate
             $parallel->add(function () use ($imageGenerateRequest, $response, $fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
                 try {
-                    // submittask并round询result
+                    // submittaskandround询result
                     $jobId = $this->requestImageGeneration($imageGenerateRequest);
                     $result = $this->pollTaskResultForRaw($jobId);
 
@@ -117,7 +117,7 @@ class FluxModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 4. recordfinalresult
-        $this->logger->info('Flux OpenAIformat生graph：并hairhandlecomplete', [
+        $this->logger->info('Flux OpenAIformat生graph：andhairhandlecomplete', [
             '总request数' => $count,
             'successimage数' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
@@ -164,7 +164,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * requestgenerateimage并returntaskID.
+     * requestgenerateimageandreturntaskID.
      */
     #[RateLimit(create: 20, consume: 1, capacity: 0, key: self::IMAGE_GENERATE_KEY_PREFIX . self::IMAGE_GENERATE_SUBMIT_KEY_PREFIX . ImageGenerateModelType::Flux->value, waitTimeout: 60)]
     #[Retry(
@@ -227,7 +227,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * round询taskresult并returnnativedata.
+     * round询taskresultandreturnnativedata.
      */
     #[RateLimit(create: 40, consume: 1, capacity: 40, key: self::IMAGE_GENERATE_KEY_PREFIX . self::IMAGE_GENERATE_POLL_KEY_PREFIX . ImageGenerateModelType::Flux->value, waitTimeout: 60)]
     #[Retry(
@@ -243,7 +243,7 @@ class FluxModel extends AbstractImageGenerate
                 $result = $this->api->getTaskResult($jobId);
 
                 if ($result['status'] === 'SUCCESS') {
-                    // 直接return完整的nativedata
+                    // 直接return完整nativedata
                     return $result;
                 }
 
@@ -293,12 +293,12 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraph像的核core逻辑，returnnativeresult.
+     * generategraphlike核core逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof FluxModelRequest) {
-            $this->logger->error('Flux文生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Flux文生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
@@ -306,7 +306,7 @@ class FluxModel extends AbstractImageGenerate
         $rawResults = [];
         $errors = [];
 
-        // use Parallel 并linehandle
+        // use Parallel andlinehandle
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
         for ($i = 0; $i < $count; ++$i) {
@@ -334,7 +334,7 @@ class FluxModel extends AbstractImageGenerate
             });
         }
 
-        // get所have并linetask的result
+        // get所haveandlinetaskresult
         $results = $parallel->wait();
 
         // handleresult，保持nativeformat
@@ -359,7 +359,7 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * 为Fluxoriginaldataaddwatermark.
+     * forFluxoriginaldataaddwatermark.
      */
     private function processFluxRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -399,14 +399,14 @@ class FluxModel extends AbstractImageGenerate
     }
 
     /**
-     * 将FluximagedataaddtoOpenAIresponseobjectmiddle.
+     * willFluximagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponseFlux(
         OpenAIFormatResponse $response,
         array $fluxResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedislockensure并hairsecurity
+        // useRedislockensureandhairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
             // fromFluxresponsemiddleextractdata

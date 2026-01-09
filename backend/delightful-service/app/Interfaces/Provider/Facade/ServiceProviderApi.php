@@ -60,7 +60,7 @@ class ServiceProviderApi extends AbstractApi
         return $this->getProvidersByCategory($request);
     }
 
-    // getservice商和modellist
+    // getservice商andmodellist
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getServiceProviderConfigModels(RequestInterface $request, ?string $serviceProviderConfigId = null)
     {
@@ -68,7 +68,7 @@ class ServiceProviderApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authenticatable */
         $authenticatable = $this->getAuthorization();
         $providerConfigAggregateDTO = $this->adminProviderAppService->getProviderModelsByConfigId($authenticatable, $serviceProviderConfigId);
-        // 将新formatdataconvert为旧formatby保持tobackcompatibleproperty
+        // will新formatdataconvertfor旧formatby保持tobackcompatibleproperty
         return $this->convertToLegacyFormat($providerConfigAggregateDTO);
     }
 
@@ -93,7 +93,7 @@ class ServiceProviderApi extends AbstractApi
         $this->adminProviderAppService->updateModelStatus($authenticatable, $modelId, $status);
     }
 
-    // getcurrentorganizationwhether是官方organization
+    // getcurrentorganizationwhetheris官方organization
     public function isCurrentOrganizationOfficial(): array
     {
         $organizationCode = $this->getAuthorization()->getOrganizationCode();
@@ -200,25 +200,25 @@ class ServiceProviderApi extends AbstractApi
 
     /**
      * get所havenon官方LLMservice商list
-     * 直接fromdatabasemiddlequerycategory为llmandprovider_typenot为OFFICIAL的service商
-     * notdependencyatcurrentorganization，适useatneedaddservice商的场景.
+     * 直接fromdatabasemiddlequerycategoryforllmandprovider_typenotforOFFICIALservice商
+     * notdependencyatcurrentorganization，适useatneedaddservice商场景.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getNonOfficialLlmProviders()
     {
         $authenticatable = $this->getAuthorization();
-        // 直接get所haveLLMtype的non官方service商
+        // 直接get所haveLLMtypenon官方service商
         return $this->adminProviderAppService->getAllNonOfficialProviders(Category::LLM, $authenticatable->getOrganizationCode());
     }
 
     /**
-     * get所have可use的LLMservice商list（include官方service商）.
+     * get所havecanuseLLMservice商list（include官方service商）.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getAllAvailableLlmProviders()
     {
         $authenticatable = $this->getAuthorization();
-        // get所haveLLMtype的service商（includeOfficial）
+        // get所haveLLMtypeservice商（includeOfficial）
         return $this->adminProviderAppService->getAllAvailableLlmProviders(Category::LLM, $authenticatable->getOrganizationCode());
     }
 
@@ -264,7 +264,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 将新formatdataconvert为旧format，保持tobackcompatibleproperty.
+     * will新formatdataconvertfor旧format，保持tobackcompatibleproperty.
      * @param ?ProviderConfigModelsDTO $aggregateDTO aggregateDTOobject
      * @return array 旧formatdata
      */
@@ -275,12 +275,12 @@ class ServiceProviderApi extends AbstractApi
         }
         $data = $aggregateDTO->toArray();
 
-        // ifnot是新format结构，直接return
+        // ifnotis新format结构，直接return
         if (! isset($data['provider_config'])) {
             return $data;
         }
 
-        // 将 provider_config content提升torootlevel别，并add alias 和 models
+        // will provider_config content提升torootlevel别，andadd alias and models
         return array_merge($data['provider_config'], [
             'alias' => $data['provider_config']['translate']['alias']['zh_CN'] ?? '',
             'models' => $data['models'] ?? [],

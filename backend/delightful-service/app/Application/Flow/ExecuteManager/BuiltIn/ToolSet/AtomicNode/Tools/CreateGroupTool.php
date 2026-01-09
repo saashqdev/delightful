@@ -36,7 +36,7 @@ class CreateGroupTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'create一具havefinger定person员的group chatday';
+        return 'create一具havefinger定person员group chatday';
     }
 
     public function getCallback(): ?Closure
@@ -209,8 +209,8 @@ class CreateGroupTool extends AbstractBuiltInTool
         "opening_speech": {
             "type": "string",
             "key": "opening_speech",
-            "title": "开场白",
-            "description": "已current助理的身sharesend一timegroup chat的开场白。defaultnot传该value，unlessfinger定needsend开场白。",
+            "title": "open场白",
+            "description": "已current助理身sharesend一timegroup chatopen场白。defaultnot传该value，unlessfinger定needsendopen场白。",
             "required": null,
             "value": null,
             "encryption": false,

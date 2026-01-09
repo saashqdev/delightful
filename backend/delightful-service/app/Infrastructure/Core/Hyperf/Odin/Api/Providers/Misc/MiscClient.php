@@ -31,7 +31,7 @@ class MiscClient extends Client
             $endTime = microtime(true);
             $duration = round(($endTime - $startTime) * 1000); // 毫second
 
-            // 这within的 response 的 content 是 ['embedding' => '', 'count' => '']
+            // 这within response  content is ['embedding' => '', 'count' => '']
             $content = json_decode($response->getBody()->getContents(), true);
 
             // convertresponseformatbycompatibleEmbeddingResponse
@@ -45,7 +45,7 @@ class MiscClient extends Client
                 ],
             ];
 
-            // 将单embeddingconvert为EmbeddingResponseexpect的data结构
+            // will单embeddingconvertforEmbeddingResponseexpectdata结构
             if (isset($content['embedding'])) {
                 $compatibleContent['data'][] = [
                     'object' => 'embedding',

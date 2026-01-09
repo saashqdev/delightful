@@ -13,10 +13,10 @@ use App\Infrastructure\Util\Auth\Permission\PermissionInterface;
 class PermissionChecker
 {
     /**
-     * checkhand机numberwhetherhavepermissionaccessfinger定的permission.
+     * checkhand机numberwhetherhavepermissionaccessfinger定permission.
      *
      * @param string $mobile hand机number
-     * @param SuperPermissionEnum $permissionEnum 要check的permissiontype
+     * @param SuperPermissionEnum $permissionEnum 要checkpermissiontype
      * @return bool whetherhavepermission
      */
     public static function mobileHasPermission(string $mobile, SuperPermissionEnum $permissionEnum): bool
@@ -33,7 +33,7 @@ class PermissionChecker
      * inside部permissioncheckmethod，便attest.
      *
      * @param string $mobile hand机number
-     * @param SuperPermissionEnum $permission 要check的permission
+     * @param SuperPermissionEnum $permission 要checkpermission
      * @param array $permissions permissionconfiguration
      * @return bool whetherhavepermission
      */
@@ -64,7 +64,7 @@ class PermissionChecker
     }
 
     /**
-     * getuser拥haveadministratorpermission的organizationencodinglist.
+     * getuser拥haveadministratorpermissionorganizationencodinglist.
      */
     public static function getUserOrganizationAdminList(string $mageId): array
     {

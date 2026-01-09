@@ -40,22 +40,22 @@ class DelightfulFlowMemoryHistoryEntity extends AbstractEntity
     public function prepareForCreation(): void
     {
         if (empty($this->conversationId)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'conversationId cannot为null');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'conversationId cannotfornull');
         }
         if (empty($this->requestId)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'requestId cannot为null');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'requestId cannotfornull');
         }
         if (empty($this->role)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'role cannot为null');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'role cannotfornull');
         }
         if (empty($this->type)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'type cannot为null');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'type cannotfornull');
         }
         if (empty($this->content)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'content cannot为null');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'content cannotfornull');
         }
         if (empty($this->createdUid)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'createdUid cannot为null');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'createdUid cannotfornull');
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();

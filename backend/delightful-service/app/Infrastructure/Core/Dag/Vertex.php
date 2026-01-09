@@ -59,7 +59,7 @@ class Vertex
     }
 
     /**
-     * mark为rootsectionpoint.
+     * markforrootsectionpoint.
      */
     public function markAsRoot(): void
     {

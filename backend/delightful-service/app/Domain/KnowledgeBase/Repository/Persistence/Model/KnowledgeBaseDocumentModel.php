@@ -48,7 +48,7 @@ class KnowledgeBaseDocumentModel extends Model
     use Snowflake;
 
     /**
-     * whether自增.
+     * whetherfrom增.
      */
     public bool $incrementing = true;
 
@@ -63,7 +63,7 @@ class KnowledgeBaseDocumentModel extends Model
     protected string $primaryKey = 'id';
 
     /**
-     * 可填充field.
+     * can填充field.
      */
     protected array $fillable = [
         'organization_code',

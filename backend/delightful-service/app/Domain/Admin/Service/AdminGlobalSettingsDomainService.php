@@ -59,16 +59,16 @@ readonly class AdminGlobalSettingsDomainService
             $dataIsolation->getCurrentOrganizationCode()
         );
 
-        // get已存in的settingtype，use array_flip optimizefind
+        // get已存insettingtype，use array_flip optimizefind
         $existingTypes = array_flip(array_map(fn ($setting) => $setting->getType()->value, $settings));
 
-        // 找出not存in的settingtype
+        // 找outnot存insettingtype
         $missingTypes = array_filter($types, function ($type) use ($existingTypes) {
             return ! isset($existingTypes[$type->value]);
         });
 
         if (! empty($missingTypes)) {
-            // 批quantitycreatenot存in的setting
+            // 批quantitycreatenot存insetting
             $missingEntities = array_map(function ($type) use ($dataIsolation) {
                 return (new AdminGlobalSettingsEntity())
                     ->setType($type)
@@ -76,7 +76,7 @@ readonly class AdminGlobalSettingsDomainService
                     ->setStatus(AdminGlobalSettingsStatus::DISABLED);
             }, $missingTypes);
 
-            // 批quantityupdatenot存in的setting
+            // 批quantityupdatenot存insetting
             $newSettings = $this->globalSettingsRepository->updateSettingsBatch($missingEntities);
             $settings = array_merge($settings, $newSettings);
         }

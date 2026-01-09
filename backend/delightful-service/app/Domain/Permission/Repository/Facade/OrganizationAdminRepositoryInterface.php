@@ -40,7 +40,7 @@ interface OrganizationAdminRepositoryInterface
     public function delete(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdminEntity): void;
 
     /**
-     * checkuserwhether为organizationadministrator.
+     * checkuserwhetherfororganizationadministrator.
      */
     public function isOrganizationAdmin(DataIsolation $dataIsolation, string $userId): bool;
 
@@ -65,7 +65,7 @@ interface OrganizationAdminRepositoryInterface
     public function getAllOrganizationAdmins(DataIsolation $dataIsolation): array;
 
     /**
-     * 批quantitycheckuserwhether为organizationadministrator.
+     * 批quantitycheckuserwhetherfororganizationadministrator.
      */
     public function batchCheckOrganizationAdmin(DataIsolation $dataIsolation, array $userIds): array;
 }

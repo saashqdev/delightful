@@ -41,12 +41,12 @@ class RoleModel extends AbstractModel
     public const int STATUS_ENABLED = 1;
 
     /**
-     * 与modelassociate的table名.
+     * andmodelassociatetable名.
      */
     protected ?string $table = 'delightful_roles';
 
     /**
-     * 可批quantity赋value的property.
+     * can批quantity赋valueproperty.
      */
     protected array $fillable = [
         'id',

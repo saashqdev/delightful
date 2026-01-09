@@ -31,7 +31,7 @@ class DelightfulMessageRepository implements DelightfulMessageRepositoryInterfac
 
     public function getMessages(array $delightfulMessageIds, ?array $rangMessageTypes = null): array
     {
-        // 去exceptnullvalue
+        // goexceptnullvalue
         $delightfulMessageIds = array_filter($delightfulMessageIds);
         if (empty($delightfulMessageIds)) {
             return [];

@@ -22,7 +22,7 @@ readonly class DelightfulUserIdRelationRepository implements DelightfulUserIdRel
 
     public function createUserIdRelation(DelightfulUserIdRelationEntity $userIdRelationEntity): void
     {
-        // generateassociate关系
+        // generateassociateclose系
         $time = date('Y-m-d H:i:s');
         $id = IdGenerator::getSnowId();
         $userIdRelationEntity->setId($id);
@@ -40,7 +40,7 @@ readonly class DelightfulUserIdRelationRepository implements DelightfulUserIdRel
 
     public function getRelationIdExists(DelightfulUserIdRelationEntity $userIdRelationEntity): array
     {
-        // according to account_id/id_type/relation_value querywhether已经generate了associate关系
+        // according to account_id/id_type/relation_value querywhether已经generateassociateclose系
         $userIdRelationModel = $this->userIdRelationModel::query()
             ->where('delightful_id', $userIdRelationEntity->getAccountId())
             ->where('relation_type', $userIdRelationEntity->getRelationType())
@@ -50,7 +50,7 @@ readonly class DelightfulUserIdRelationRepository implements DelightfulUserIdRel
         return is_array($relation) ? $relation : [];
     }
 
-    // id_type,relation_type,relation_value query user_id,then去queryuserinformation
+    // id_type,relation_type,relation_value query user_id,thengoqueryuserinformation
     public function getUerIdByRelation(DelightfulUserIdRelationEntity $userIdRelationEntity): string
     {
         $query = $this->userIdRelationModel::query()

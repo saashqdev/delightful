@@ -27,7 +27,7 @@ class SubAdminQuery extends AbstractQuery
     private ?int $status = null;
 
     /**
-     * 构造functionsupportfromarray批quantityinitializeproperty（inherit自 AbstractObject）。
+     * 构造functionsupportfromarray批quantityinitializeproperty（inheritfrom AbstractObject）。
      */
 
     /* -------------------- getter / setter -------------------- */
@@ -54,7 +54,7 @@ class SubAdminQuery extends AbstractQuery
     }
 
     /**
-     * 将queryobjectconvert为仓储layer可识别的filterarray。
+     * willqueryobjectconvertfor仓储layercan识别filterarray。
      */
     public function toFilters(): array
     {

@@ -12,7 +12,7 @@ use Hyperf\Contract\Arrayable;
 
 /**
  * 快speedpropertyaccess基category
- * 其他category可inherit此category，获得便捷的propertyset和access能力.
+ * 其他categorycaninherit此category，获得便捷propertysetandaccess能力.
  */
 abstract class BaseObject extends UnderlineObjectJsonSerializable implements ArrayAccess, Arrayable
 {
@@ -60,13 +60,13 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
 
     protected function get(string $key): mixed
     {
-        // property一定要是小驼峰！not supported其他format！
+        // property一定要is小驼峰！not supported其他format！
         $humpKey = $this->getCamelizeValueFromCache($key);
-        // 判断propertywhether存in，避免callnot存in的propertyo clock，死loop触hair __get method
+        // 判断propertywhether存in，避免callnot存inpropertyo clock，死loop触hair __get method
         if (! property_exists($this, $humpKey)) {
             return null;
         }
-        // php 的methodnot区minutesize写
+        // php methodnot区minutesize写
         $methodName = 'get' . $humpKey;
         if (method_exists($this, $methodName)) {
             return $this->{$methodName}($humpKey);
@@ -76,13 +76,13 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
 
     protected function set(string $key, mixed $value): void
     {
-        // property一定要是小驼峰！not supported其他format！
+        // property一定要is小驼峰！not supported其他format！
         $humpKey = $this->getCamelizeValueFromCache($key);
-        // 判断propertywhether存in，避免callnot存in的propertyo clock，死loop触hair __set method
+        // 判断propertywhether存in，避免callnot存inpropertyo clock，死loop触hair __set method
         if (! property_exists($this, $humpKey)) {
             return;
         }
-        // php 的methodnot区minutesize写
+        // php methodnot区minutesize写
         $methodName = 'set' . $humpKey;
         if (method_exists($this, $methodName)) {
             $this->{$methodName}($value);

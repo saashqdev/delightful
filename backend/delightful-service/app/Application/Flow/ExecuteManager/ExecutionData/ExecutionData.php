@@ -78,7 +78,7 @@ class ExecutionData
     private array $variables = [];
 
     /**
-     * attachment。processexecuteo clock产生的所havefilerecord.
+     * attachment。processexecuteo clock产生所havefilerecord.
      * @var array<string, AbstractAttachment>
      */
     private array $attachmentRecords = [];
@@ -99,12 +99,12 @@ class ExecutionData
     private ?string $topicId = null;
 
     /**
-     * use作传递一些特殊的parameter，预留.
+     * useas传递一些特殊parameter，预留.
      */
     private array $ext = [];
 
     /**
-     * current操作person.
+     * current操asperson.
      */
     private Operator $operator;
 
@@ -127,10 +127,10 @@ class ExecutionData
     private FlowStreamStatus $flowStreamStatus = FlowStreamStatus::Pending;
 
     /**
-     * send方的冗余info.
-     * $userEntity. send方的userinfo.
-     * $seqEntity. send方的sessionwindowinfo.
-     * $messageEntity. send方的messageinfo.
+     * send方冗余info.
+     * $userEntity. send方userinfo.
+     * $seqEntity. send方sessionwindowinfo.
+     * $messageEntity. send方messageinfo.
      */
     private array $senderEntities = [];
 
@@ -143,7 +143,7 @@ class ExecutionData
     private ?DelightfulFlowEntity $delightfulFlowEntity = null;
 
     /**
-     * current agent 的finger令configurationlist.
+     * current agent finger令configurationlist.
      * @var array<InstructionConfig>
      */
     private array $instructionConfigs = [];
@@ -566,7 +566,7 @@ class ExecutionData
     }
 
     /**
-     * getcurrent agent 的 user_id.
+     * getcurrent agent  user_id.
      */
     public function getAgentUserId(): ?string
     {

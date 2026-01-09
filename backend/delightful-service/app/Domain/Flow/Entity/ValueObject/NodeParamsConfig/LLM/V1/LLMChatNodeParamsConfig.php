@@ -60,7 +60,7 @@ class LLMChatNodeParamsConfig extends AbstractLLMNodeParamsConfig
         $this->createOptionsToolsByParams($params['option_tools'] ?? []);
 
         $paramsConfig = [
-            // 这within得convertbecomestring给front端
+            // 这within得convertbecomestringgivefront端
             'model' => $this->model->getValue()->getResult(),
             'system_prompt' => $this->systemPrompt->toArray(),
             'user_prompt' => $this->userPrompt->toArray(),
@@ -179,13 +179,13 @@ JSON,
             "tool_calls": {
                 "type": "array",
                 "key": "use_tools",
-                "title": "call过的tool",
+                "title": "callpasstool",
                 "description": "",
                 "items": {
                     "type": "object",
                     "key": "",
                     "sort": 0,
-                    "title": "call过的tool",
+                    "title": "callpasstool",
                     "description": "",
                     "items": null,
                     "properties": {

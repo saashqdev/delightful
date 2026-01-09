@@ -11,7 +11,7 @@ use App\Domain\ImageGenerate\ValueObject\WatermarkConfig;
 
 /**
  * watermarkconfigurationinterface
- * useatin开源projectmiddledefinitionwatermarkconfigurationstandard，由企业projectimplementspecific逻辑.
+ * useatinopen源projectmiddledefinitionwatermarkconfigurationstandard，by企业projectimplementspecific逻辑.
  */
 interface WatermarkConfigInterface
 {
@@ -19,7 +19,7 @@ interface WatermarkConfigInterface
      * getwatermarkconfiguration.
      *
      * @param null|string $orgCode organizationcode，useat判断whetherenablewatermark
-     * @return null|WatermarkConfig returnwatermarkconfiguration，if为nullthennotaddwatermark
+     * @return null|WatermarkConfig returnwatermarkconfiguration，iffornullthennotaddwatermark
      */
     public function getWatermarkConfig(?string $orgCode = null): ?WatermarkConfig;
 }

@@ -47,7 +47,7 @@ class MiscEmbeddingModel extends OpenAIModel
      */
     protected function getClient(): ClientInterface
     {
-        // processAPI基础URL，ensurecontaincorrect的versionpath
+        // processAPI基础URL，ensurecontaincorrectversionpath
         $config = $this->config;
         $this->processApiBaseUrl($config);
 
@@ -61,7 +61,7 @@ class MiscEmbeddingModel extends OpenAIModel
 
     /**
      * getAPIversionpath.
-     * OpenAI的APIversionpath为 v1.
+     * OpenAIAPIversionpathfor v1.
      */
     protected function getApiVersionPath(): string
     {
@@ -74,7 +74,7 @@ class MiscEmbeddingModel extends OpenAIModel
      */
     private function createClient(array $config, ApiOptions $apiOptions, LoggerInterface $logger): Client
     {
-        // verify必要的configurationparameter
+        // verify必要configurationparameter
         $apiKey = $config['api_key'] ?? '';
         $baseUrl = $config['base_url'] ?? '';
 

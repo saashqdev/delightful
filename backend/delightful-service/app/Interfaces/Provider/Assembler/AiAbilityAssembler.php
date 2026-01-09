@@ -21,7 +21,7 @@ use function Hyperf\Config\config;
 class AiAbilityAssembler
 {
     /**
-     * AI能力Entityconvert为ListDTO.
+     * AI能力EntityconvertforListDTO.
      */
     public static function entityToListDTO(AiAbilityEntity $entity, string $locale = 'zh_CN'): AiAbilityListDTO
     {
@@ -35,7 +35,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * AI能力Entityconvert为DetailDTO.
+     * AI能力EntityconvertforDetailDTO.
      */
     public static function entityToDetailDTO(AiAbilityEntity $entity, string $locale = 'zh_CN'): AiAbilityDetailDTO
     {
@@ -58,7 +58,7 @@ class AiAbilityAssembler
     }
 
     /**
-     * AI能力Entitylistconvert为ListDTOlist.
+     * AI能力EntitylistconvertforListDTOlist.
      *
      * @param array<AiAbilityEntity> $entities
      * @return array<AiAbilityListDTO>
@@ -87,11 +87,11 @@ class AiAbilityAssembler
     }
 
     /**
-     * 对configurationdataconductdecrypt.
+     * toconfigurationdataconductdecrypt.
      *
-     * @param string $config encrypt的configurationstring
-     * @param string $salt 盐value(usually是recordID)
-     * @return array decryptback的configurationarray
+     * @param string $config encryptconfigurationstring
+     * @param string $salt 盐value(usuallyisrecordID)
+     * @return array decryptbackconfigurationarray
      */
     public static function decodeConfig(string $config, string $salt): array
     {
@@ -103,11 +103,11 @@ class AiAbilityAssembler
     }
 
     /**
-     * 对configurationdataconductencoding(JSONencoding + AESencrypt).
+     * toconfigurationdataconductencoding(JSONencoding + AESencrypt).
      *
      * @param array $config configurationarray
-     * @param string $salt 盐value(usually是recordID)
-     * @return string encryptback的configurationstring
+     * @param string $salt 盐value(usuallyisrecordID)
+     * @return string encryptbackconfigurationstring
      */
     public static function encodeConfig(array $config, string $salt): string
     {
@@ -116,21 +116,21 @@ class AiAbilityAssembler
     }
 
     /**
-     * 递归脱敏configurationmiddle的所have api_key field.
+     * 递归脱敏configurationmiddle所have api_key field.
      *
      * @param array $config configurationarray
-     * @return array 脱敏back的configurationarray
+     * @return array 脱敏backconfigurationarray
      */
     private static function maskConfigRecursively(array $config): array
     {
         $result = [];
 
         foreach ($config as $key => $value) {
-            // if是 api_key field，conduct脱敏（front4back4）
+            // ifis api_key field，conduct脱敏（front4back4）
             if ($key === 'api_key' && is_string($value) && ! empty($value)) {
                 $result[$key] = self::maskApiKey($value);
             }
-            // if是array，递归process
+            // ifisarray，递归process
             elseif (is_array($value)) {
                 $result[$key] = self::maskConfigRecursively($value);
             }
@@ -149,7 +149,7 @@ class AiAbilityAssembler
      * @param string $apiKey original API Key
      * @param int $prefixLength 保留front几位（default3）
      * @param int $suffixLength 保留back几位（default3）
-     * @return string 脱敏back的 API Key
+     * @return string 脱敏back API Key
      */
     private static function maskApiKey(string $apiKey, int $prefixLength = 4, int $suffixLength = 4): string
     {
@@ -161,7 +161,7 @@ class AiAbilityAssembler
             return str_repeat('*', $length);
         }
 
-        // displayfrontN位和backN位
+        // displayfrontN位andbackN位
         $prefix = mb_substr($apiKey, 0, $prefixLength);
         $suffix = mb_substr($apiKey, -$suffixLength);
         $maskLength = $length - $minLength;

@@ -83,7 +83,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
 
         // according toconversation_id queryagent_user_id
         $conversation = $this->delightfulConversationDomainService->getConversationByIdWithoutCheck($userTaskDTO->getConversationId());
-        // compatibleflow middle的conversation_id 跟chat middle的conversation_id not一致issue
+        // compatibleflow middleconversation_id 跟chat middleconversation_id not一致issue
         if (empty($conversation)) {
             $dataIsolation = DataIsolation::create();
             $dataIsolation->setCurrentOrganizationCode($flow->getOrganizationCode());
@@ -99,7 +99,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
 
         $callbackParams = $this->getCallbackParams($userTaskDTO, $userTaskValueDTO, $flowCode);
         $enabled = true;
-        // if是not重复的，那么是直接create调degreetask
+        // ifisnot重复，那么is直接create调degreetask
         if ($taskConfigDomainService->getType() === TaskType::NoRepeat) {
             $taskScheduler = new TaskScheduler();
             $taskScheduler->setExternalId($externalId);
@@ -114,7 +114,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // if是customize重复，那么直接create调degreetask,meanwhilecloseschedulegenerate调degreetask
+        // ifiscustomize重复，那么直接create调degreetask,meanwhilecloseschedulegenerate调degreetask
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;
@@ -238,11 +238,11 @@ class DelightfulUserTaskAppService extends AbstractAppService
             ExceptionBuilder::throw(UserTaskErrorCode::TASK_ALREADY_EXISTS);
         }
 
-        // 先清except待execute的task
+        // 先清except待executetask
         $this->taskSchedulerDomainService->clearTaskByExternalId($task->getExternalId());
 
         $enabled = true;
-        // if是not重复的，那么是直接create调degreetask
+        // ifisnot重复，那么is直接create调degreetask
         if ($taskConfigDomainService->getType() === TaskType::NoRepeat) {
             $taskScheduler = new TaskScheduler();
             $taskScheduler->setExternalId($externalId);
@@ -257,7 +257,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
             $enabled = false;
         }
 
-        // if是customize重复，那么直接create调degreetask,meanwhilecloseschedulegenerate调degreetask
+        // ifiscustomize重复，那么直接create调degreetask,meanwhilecloseschedulegenerate调degreetask
         if ($taskConfigDomainService->getType() === TaskType::CustomRepeat) {
             $this->createCustomRepeatTask($userTaskDTO, $userTaskValueDTO, $externalId, $callbackMethod, $callbackParams);
             $enabled = false;
@@ -378,7 +378,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     //     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_found', ['label' => 'trigger_type']);
     //     // }
 
-    //     // 改为静statecall
+    //     // 改for静statecall
     //     $flowDataIsolation = self::createFlowDataIsolationStaticMethod($authorization);
 
     //     // $flowDataIsolation = FlowDataIsolation::create();
@@ -426,7 +426,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //         messageInfo: ['message_entity' => TriggerData::createMessageEntity(new TextMessage(['content' => $triggerConfig['trigger_data']['content']]))],
     //         params: $triggerConfig['trigger_data'],
     //         paramsForm: $triggerConfig['trigger_data_form'],
-    //         // 试运lineo clock，all局variable为hand动传入
+    //         // 试运lineo clock，all局variableforhand动传入
     //         globalVariable: ComponentFactory::fastCreate($globalVariable) ?? $delightfulFlow->getGlobalVariable(),
     //     );
 
@@ -459,12 +459,12 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     // get node 运lineresult
     //     foreach ($delightfulFlow->getNodes() as $node) {
     //         if ($node->getNodeDebugResult()) {
-    //             // have一failthen判定为fail
+    //             // have一failthen判定forfail
     //             if (! $node->getNodeDebugResult()->isSuccess()) {
     //                 $result['success'] = false;
     //             }
     //             if ($node->getNodeType() === NodeType::ReplyMessage) {
-    //                 // if是replymessagesectionpoint，then将messagecontentaddtoresultmiddle
+    //                 // ifisreplymessagesectionpoint，thenwillmessagecontentaddtoresultmiddle
     //                 $result['message'] = $node->getNodeDebugResult()->getOutput();
     //             }
     //         }

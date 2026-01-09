@@ -12,12 +12,12 @@ use App\Domain\Chat\Entity\AbstractEntity;
 class DelightfulContext extends AbstractEntity
 {
     /**
-     * userwhenfront的organizationencoding
+     * userwhenfrontorganizationencoding
      */
     protected string $organizationCode;
 
     /**
-     * loginsuccessbackdownhair的token.
+     * loginsuccessbackdownhairtoken.
      */
     protected string $authorization;
 

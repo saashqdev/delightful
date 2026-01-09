@@ -127,7 +127,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
     }
 
     /**
-     * getall局configuration（organization_code/user_id/delightful_id 均为 NULL）。
+     * getall局configuration（organization_code/user_id/delightful_id 均for NULL）。
      */
     public function getGlobal(string $key): ?DelightfulUserSettingEntity
     {

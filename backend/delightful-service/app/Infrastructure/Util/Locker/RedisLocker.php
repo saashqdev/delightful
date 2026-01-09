@@ -23,8 +23,8 @@ class RedisLocker implements LockerInterface
 
     /**
      * get互斥lock
-     * @param string $name lock的name，finger定lock的name
-     * @param string $owner lock的所have者，finger定lock的唯一标识，避免errorrelease
+     * @param string $name lockname，finger定lockname
+     * @param string $owner lock所have者，finger定lock唯一标识，避免errorrelease
      * @param int $expire expiretime，second
      */
     public function mutexLock(string $name, string $owner, int $expire = 180): bool
@@ -37,9 +37,9 @@ class RedisLocker implements LockerInterface
     }
 
     /**
-     * 自旋lock
-     * @param string $name lock的name，finger定lock的name
-     * @param string $owner lock的所have者，finger定lock的唯一标识，避免errorrelease
+     * from旋lock
+     * @param string $name lockname，finger定lockname
+     * @param string $owner lock所have者，finger定lock唯一标识，避免errorrelease
      * @param int $expire expiretime，second
      */
     public function spinLock(string $name, string $owner, int $expire = 10): bool
@@ -47,7 +47,7 @@ class RedisLocker implements LockerInterface
         try {
             $key = $this->getLockKey($name);
             $timeSpace = 1000 * 10; // each 10 毫second尝试一time
-            $microTime = $expire * 1000 * 1000; // convert为微second
+            $microTime = $expire * 1000 * 1000; // convertfor微second
             $time = 0;
             while (! $this->redis->set($key, $owner, ['NX', 'EX' => $expire])) {
                 usleep($timeSpace);

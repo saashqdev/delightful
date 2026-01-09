@@ -12,7 +12,7 @@ use Hyperf\Codec\Json;
 
 /**
  * Result DTO for speech recognition result information.
- * 对应 JSON middle的 result object
+ * to应 JSON middle result object
  */
 class ResultDTO extends AbstractDTO
 {

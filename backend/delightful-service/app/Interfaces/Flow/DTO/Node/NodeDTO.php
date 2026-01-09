@@ -25,12 +25,12 @@ class NodeDTO extends AbstractFlowDTO
     public string $nodeVersion = '';
 
     /**
-     * sectionpointyuandata，可use作给front端的locate，back端仅storage和show，nothave任何逻辑.
+     * sectionpointyuandata，canuseasgivefront端locate，back端仅storageandshow，nothave任何逻辑.
      */
     public array $meta = [];
 
     /**
-     * sectionpointparameterconfiguration，目front依靠array来data传递.
+     * sectionpointparameterconfiguration，目front依靠arraycomedata传递.
      */
     public array $params = [];
 
@@ -60,7 +60,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * getwhether为debug模type.
+     * getwhetherfordebug模type.
      */
     public function isDebug(): bool
     {
@@ -73,7 +73,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * setwhether为debug模type.
+     * setwhetherfordebug模type.
      */
     public function setDebug(?bool $debug): self
     {

@@ -129,7 +129,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 $callback($vertexResult, $executionData, $frontResults);
             } else {
                 $this->node->validate();
-                // 提frontget本time的result，ifhave，then直接use
+                // 提frontget本timeresult，ifhave，then直接use
                 $nextExecuteNum = $executeNum + 1;
                 $historyVertexResult = $executionData->getNodeHistoryVertexResult($this->node->getNodeId(), $nextExecuteNum);
                 if ($historyVertexResult) {
@@ -148,7 +148,7 @@ abstract class NodeRunner implements NodeRunnerInterface
             $debugResult->setSuccess(false);
             $debugResult->setErrorCode((int) $throwable->getCode());
             $debugResult->setErrorMessage($throwable->getMessage());
-            // 出现exceptiono clocknot运lineback续sectionpoint
+            // out现exceptiono clocknot运lineback续sectionpoint
             $vertexResult->setChildrenIds([]);
             $this->logger->warning('NodeRunnerFailed', [
                 'node_id' => $this->node->getNodeId(),
@@ -158,7 +158,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 'line' => $throwable->getLine(),
                 'trace' => $throwable->getTraceAsString(),
             ]);
-            // default是要抛exception的
+            // defaultis要抛exception
             if ($throw) {
                 throw $throwable;
             }
@@ -168,7 +168,7 @@ abstract class NodeRunner implements NodeRunnerInterface
             $debugResult->setChildrenIds($vertexResult->getChildrenIds());
             $debugResult->addLoopDebugResult($debugResult);
 
-            // recordsectionpointcount的result
+            // recordsectionpointcountresult
             $executionData->increaseExecuteNum($this->node->getNodeId(), $vertexResult);
         }
     }
@@ -196,17 +196,17 @@ abstract class NodeRunner implements NodeRunnerInterface
     protected function formatJson(string $json): array
     {
         $response = trim($json);
-        // if $response by ```json 开headthen去except
+        // if $response by ```json openheadthengoexcept
         if (str_starts_with($response, '```json')) {
             $response = substr($response, 7);
         }
-        // if $response by ``` 结tailthen去except
+        // if $response by ``` 结tailthengoexcept
         if (str_ends_with($response, '```')) {
             $response = substr($response, 0, -3);
         }
         $response = trim($response, '\\');
         $response = str_replace('\\\\\"', '\"', $response);
-        // if $response 本身then是 JSON format的，那么直接return
+        // if $response 本身thenis JSON format，那么直接return
         $data = json_decode(trim($response), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             return [];
@@ -222,8 +222,8 @@ abstract class NodeRunner implements NodeRunnerInterface
     abstract protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void;
 
     /**
-     * todo 这within暂notimplement重复upload的issue，均when做新fileupload
-     * recordprocess所产生的file，均willmeanwhileuploadto云端，back续sectionpointneeduseo clockfromexecuteprocessdatamiddle优先匹配.
+     * todo 这within暂notimplement重复uploadissue，均when做新fileupload
+     * recordprocess所产生file，均willmeanwhileuploadto云端，back续sectionpointneeduseo clockfromexecuteprocessdatamiddle优先匹配.
      * @return AbstractAttachment[]
      * @throws SSRFException
      */
@@ -245,7 +245,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 $flowExecutionAttachments[] = $attachmentObj;
                 continue;
             }
-            // if是一link，那么need对 url conduct限制
+            // ifis一link，那么needto url conduct限制
             if (EasyFileTools::isUrl($attachment)) {
                 SSRFUtil::getSafeUrl($attachment, replaceIp: false);
             }

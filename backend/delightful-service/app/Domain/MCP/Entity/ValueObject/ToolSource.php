@@ -8,11 +8,11 @@ declare(strict_types=1);
 namespace App\Domain\MCP\Entity\ValueObject;
 
 /**
- * tool来源: 0:未知来源, 1:FlowTool.
+ * toolcome源: 0:未知come源, 1:FlowTool.
  */
 enum ToolSource: int
 {
-    // 未知来源
+    // 未知come源
     case Unknown = 0;
 
     // FlowTool
@@ -24,7 +24,7 @@ enum ToolSource: int
     public function getLabel(): string
     {
         return match ($this) {
-            self::Unknown => '未知来源',
+            self::Unknown => '未知come源',
             self::FlowTool => 'FlowTool',
         };
     }

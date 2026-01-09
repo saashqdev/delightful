@@ -10,18 +10,18 @@ namespace App\Domain\Flow\Entity\ValueObject;
 /**
  * sectionpointtype
  * 1 ~ 99 原子sectionpoint
- * 100 ~ 199 group合sectionpoint的硬encodingimplement.
+ * 100 ~ 199 group合sectionpoint硬encodingimplement.
  */
 enum NodeType: int
 {
     /*
      * Start Node
-     * use作触hair器。windowopeno clock、have新messageo clock、schedule;parametercall（仅子process可use）
+     * useas触hair器。windowopeno clock、have新messageo clock、schedule;parametercall（仅子processcanuse）
      */
     case Start = 1;
 
     /*
-     * LLM Chat 这within是historyreason的group合sectionpoint
+     * LLM Chat 这withinishistoryreasongroup合sectionpoint
      * 大languagemodel optionalmodel、prompt、temperature
      */
     case LLM = 2;
@@ -61,7 +61,7 @@ enum NodeType: int
 
     /*
      * Loader
-     * dataload。来源：toquantitydatabase、file、network
+     * dataload。come源：toquantitydatabase、file、network
      */
     case Loader = 8;
 
@@ -200,7 +200,7 @@ enum NodeType: int
     case KnowledgeSearch = 52;
 
     /**
-     * graph像generate.
+     * graphlikegenerate.
      */
     case ImageGenerate = 53;
 

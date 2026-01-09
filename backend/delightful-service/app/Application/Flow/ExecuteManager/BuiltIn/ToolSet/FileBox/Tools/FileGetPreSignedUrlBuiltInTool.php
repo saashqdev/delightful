@@ -35,7 +35,7 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'according tofile名getfileupload的预signatureURL。仅能操作本process产生的file';
+        return 'according tofile名getfileupload预signatureURL。仅能操as本process产生file';
     }
 
     public function getCallback(): ?Closure
@@ -49,7 +49,7 @@ class FileGetPreSignedUrlBuiltInTool extends AbstractBuiltInTool
             }
             $organizationCode = $executionData->getDataIsolation()->getCurrentOrganizationCode();
 
-            // permissionissue，目front仅allow操作本process产生的file。因为currenttoolalso是一 flow，所byneedget父process的 code
+            // permissionissue，目front仅allow操as本process产生file。因forcurrenttoolalsois一 flow，所byneedget父process code
             $name = $executionData->getParentFlowCode() . '/' . ltrim($name, '/');
 
             $fileDomain = di(FileDomainService::class);
@@ -129,7 +129,7 @@ JSON,
             "type": "string",
             "key": "url",
             "title": "URL",
-            "description": "fileupload的预signatureURL",
+            "description": "fileupload预signatureURL",
             "required": null,
             "value": null,
             "encryption": false,
@@ -141,7 +141,7 @@ JSON,
             "type": "object",
             "key": "headers",
             "title": "Headers",
-            "description": "fileupload的预signatureURL的Headers",
+            "description": "fileupload预signatureURLHeaders",
             "required": null,
             "value": null,
             "encryption": false,
@@ -153,7 +153,7 @@ JSON,
             "type": "number",
             "key": "expires",
             "title": "expiretime",
-            "description": "fileupload的预signatureURL的expiretime",
+            "description": "fileupload预signatureURLexpiretime",
             "required": null,
             "value": null,
             "encryption": false,
@@ -165,7 +165,7 @@ JSON,
             "type": "string",
             "key": "key",
             "title": "key",
-            "description": "file的完整Key",
+            "description": "file完整Key",
             "required": null,
             "value": null,
             "encryption": false,

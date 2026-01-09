@@ -30,11 +30,11 @@ return new class extends Migration {
             $table->string('color', 10)->default('')->comment('模typecolor');
             $table->bigInteger('sort')->default(0)->comment('sort');
             $table->text('description')->comment('模typedescription');
-            $table->tinyInteger('is_default')->default(0)->comment('whetherdefault模type 0:否 1:是');
+            $table->tinyInteger('is_default')->default(0)->comment('whetherdefault模type 0:否 1:is');
             $table->tinyInteger('status')->default(1)->comment('status 0:disable 1:enable');
             $table->tinyInteger('distribution_type')->default(1)->comment('minute配method 1:customizeconfiguration 2:跟随其他模type');
-            $table->bigInteger('follow_mode_id')->unsigned()->default(0)->comment('跟随的模typeID，0table示not跟随');
-            $table->json('restricted_mode_identifiers')->comment('限制的模type标识array');
+            $table->bigInteger('follow_mode_id')->unsigned()->default(0)->comment('跟随模typeID，0table示not跟随');
+            $table->json('restricted_mode_identifiers')->comment('限制模type标识array');
             $table->string('organization_code', 32)->default('')->comment('organizationcode');
             $table->string('creator_id', 64)->default('')->comment('createpersonID');
             $table->timestamps();
@@ -63,7 +63,7 @@ return new class extends Migration {
             'icon' => '',
             'sort' => 0,
             'color' => '#6366f1',
-            'description' => '仅useatcreateo clockinitialize模type及reset模typemiddle的configuration',
+            'description' => '仅useatcreateo clockinitialize模typeandreset模typemiddleconfiguration',
             'is_default' => 1,
             'status' => 1,
             'distribution_type' => 1, // 独立configuration

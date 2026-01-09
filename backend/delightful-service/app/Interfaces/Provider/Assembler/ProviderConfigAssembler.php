@@ -47,9 +47,9 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 将service商configurationarrayconvert为 DTO list，contain完整的 provider info.
+     * willservice商configurationarrayconvertfor DTO list，contain完整 provider info.
      * @param array $serviceProviderConfigs service商configurationarray
-     * @param array $providerMap provider ID to provider data的mapping
+     * @param array $providerMap provider ID to provider datamapping
      * @return ProviderConfigDTO[]
      */
     public static function toDTOListWithProviders(array $serviceProviderConfigs, array $providerMap): array
@@ -65,9 +65,9 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 将service商configurationconvert为 DTO，contain完整的 provider info.
+     * willservice商configurationconvertfor DTO，contain完整 provider info.
      * @param array $serviceProviderConfig service商configurationdata
-     * @param array $providerMap provider ID to provider data的mapping
+     * @param array $providerMap provider ID to provider datamapping
      */
     public static function toDTOWithProvider(array $serviceProviderConfig, array $providerMap): ProviderConfigDTO
     {
@@ -79,7 +79,7 @@ class ProviderConfigAssembler
         $translator = di(TranslatorInterface::class);
         $locale = $translator->getLocale();
 
-        // from providerMap middleget对应的 provider info
+        // from providerMap middlegetto应 provider info
         $providerId = $serviceProviderConfig['service_provider_id'];
         if (isset($providerMap[$providerId])) {
             $provider = $providerMap[$providerId];
@@ -94,7 +94,7 @@ class ProviderConfigAssembler
             $preparedConfig['provider_code'] = $provider['provider_code'] ?? null;
             $preparedConfig['is_models_enable'] = $provider['is_models_enable'] ?? true;
 
-            // 直接use provider 的翻译info（config middleonly ak、sk etcconfiguration，nothave翻译data）
+            // 直接use provider 翻译info（config middleonly ak、sk etcconfiguration，nothave翻译data）
             if (! empty($provider['translate'])) {
                 $providerTranslate = is_string($provider['translate'])
                     ? Json::decode($provider['translate'])
@@ -131,7 +131,7 @@ class ProviderConfigAssembler
     }
 
     /**
-     * 对configurationdataconductencoding（JSONencoding + AESencrypt）.
+     * toconfigurationdataconductencoding（JSONencoding + AESencrypt）.
      */
     public static function encodeConfig(array $config, string $salt): string
     {
@@ -150,7 +150,7 @@ class ProviderConfigAssembler
             $decodeConfig = self::decodeConfig($serviceProviderConfig['config'], (string) $serviceProviderConfig['id']);
         }
 
-        // setdefault的translate
+        // setdefaulttranslate
         if (empty($serviceProviderConfig['translate'])) {
             $serviceProviderConfig['translate'] = [];
         }

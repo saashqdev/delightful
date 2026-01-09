@@ -36,7 +36,7 @@ class UserSearchTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'usersearch。notallowsearchall部person员，一定是具havefinger定filtervalue';
+        return 'usersearch。notallowsearchall部person员，一定is具havefinger定filtervalue';
     }
 
     public function getCallback(): ?Closure
@@ -93,7 +93,7 @@ class UserSearchTool extends AbstractBuiltInTool
             "type": "string",
             "key": "filter_type",
             "title": "filtertype",
-            "description": "filtertype。support的filtertypehave：all、any。minute别代table 所haveitemitem、任意itemitem。default是 all",
+            "description": "filtertype。supportfiltertypehave：all、any。minute别代table 所haveitemitem、任意itemitem。defaultis all",
             "required": null,
             "value": null,
             "encryption": false,

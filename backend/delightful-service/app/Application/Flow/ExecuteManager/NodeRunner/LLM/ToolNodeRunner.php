@@ -65,7 +65,7 @@ class ToolNodeRunner extends AbstractLLMNodeRunner
         $systemPrompt = $this->buildSystemPrompt($delightfulFlowEntity);
         $paramsConfig->setSystemPrompt($systemPrompt);
 
-        // 一定是ignorewhenfrontmessage
+        // 一定isignorewhenfrontmessage
         $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
 
         $memoryManager = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), ignoreMessageIds: $ignoreMessageIds);

@@ -15,7 +15,7 @@ class DelightfulStreamTextProcessor
 {
     private const int STATE_NORMAL = 0;    // 普通textstatus
 
-    private const int STATE_TAG_START = 1; // 可能是tagstart
+    private const int STATE_TAG_START = 1; // maybeistagstart
 
     private const int STATE_IN_TAG = 2;    // confirmintaginside
 
@@ -114,7 +114,7 @@ class DelightfulStreamTextProcessor
 
     private function isValidTagContent(): array
     {
-        // 正then挺费performance的，先采usefixed的stringlength吧
+        // 正then挺费performance，先采usefixedstringlength吧
         if (! in_array(mb_strlen($this->buffer), $this->successLengths)) {
             return [];
         }

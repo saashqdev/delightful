@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\DTO\Message\Trait;
 
 /**
- * 大model的response.
+ * 大modelresponse.
  */
 trait LLMMessageTrait
 {

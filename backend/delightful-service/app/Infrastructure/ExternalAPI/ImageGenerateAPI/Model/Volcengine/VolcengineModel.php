@@ -80,7 +80,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraph像并returnOpenAIformatresponse - V2一body化version.
+     * generategraphlikeandreturnOpenAIformatresponse - V2一body化version.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
@@ -93,15 +93,15 @@ class VolcengineModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof VolcengineModelRequest) {
-            $this->logger->error('Volcengine OpenAIformat生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Volcengine OpenAIformat生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
-        // 3. 判断是graph生graphalso是文生graph
+        // 3. 判断isgraph生graphalsois文生graph
         $isImageToImage = ! empty($imageGenerateRequest->getReferenceImage());
         $count = $isImageToImage ? self::IMAGE_TO_IMAGE_IMAGE_COUNT : $imageGenerateRequest->getGenerateNum();
 
-        // 4. 并hairhandle - 直接操作responseobject
+        // 4. andhairhandle - 直接操asresponseobject
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
 
@@ -132,7 +132,7 @@ class VolcengineModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 5. recordfinalresult
-        $this->logger->info('Volcengine OpenAIformat生graph：并hairhandlecomplete', [
+        $this->logger->info('Volcengine OpenAIformat生graph：andhairhandlecomplete', [
             '总request数' => $count,
             'successimage数' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
@@ -149,16 +149,16 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraph像的核core逻辑，return ImageGenerateResponse.
+     * generategraphlike核core逻辑，return ImageGenerateResponse.
      */
     protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
         if (! $imageGenerateRequest instanceof VolcengineModelRequest) {
-            $this->logger->error('火山文生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('火山文生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // 判断是graph生graphalso是文生graph
+        // 判断isgraph生graphalsois文生graph
         $isImageToImage = ! empty($imageGenerateRequest->getReferenceImage());
         $count = $isImageToImage ? self::IMAGE_TO_IMAGE_IMAGE_COUNT : $imageGenerateRequest->getGenerateNum();
 
@@ -172,7 +172,7 @@ class VolcengineModel extends AbstractImageGenerate
             'textToImageReqScheduleConf' => $this->textToImageReqScheduleConf,
         ]);
 
-        // use Parallel 并linehandle
+        // use Parallel andlinehandle
         $parallel = new Parallel();
         for ($i = 0; $i < $count; ++$i) {
             $fromCoroutineId = Coroutine::id();
@@ -204,7 +204,7 @@ class VolcengineModel extends AbstractImageGenerate
             });
         }
 
-        // get所have并linetask的result
+        // get所haveandlinetaskresult
         $results = $parallel->wait();
         $rawResults = [];
         $errors = [];
@@ -222,7 +222,7 @@ class VolcengineModel extends AbstractImageGenerate
         }
 
         if (empty($rawResults)) {
-            // 优先usespecific的error码，ifall是通useerrorthenuse NO_VALID_IMAGE
+            // 优先usespecificerror码，ifallis通useerrorthenuse NO_VALID_IMAGE
             $finalErrorCode = ImageGenerateErrorCode::NO_VALID_IMAGE;
             $finalErrorMsg = '';
 
@@ -266,16 +266,16 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraph像的核core逻辑，returnnativeresult.
+     * generategraphlike核core逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof VolcengineModelRequest) {
-            $this->logger->error('火山文生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('火山文生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // 判断是graph生graphalso是文生graph
+        // 判断isgraph生graphalsois文生graph
         $isImageToImage = ! empty($imageGenerateRequest->getReferenceImage());
         $count = $isImageToImage ? self::IMAGE_TO_IMAGE_IMAGE_COUNT : $imageGenerateRequest->getGenerateNum();
 
@@ -289,7 +289,7 @@ class VolcengineModel extends AbstractImageGenerate
             'textToImageReqScheduleConf' => $this->textToImageReqScheduleConf,
         ]);
 
-        // use Parallel 并linehandle
+        // use Parallel andlinehandle
         $parallel = new Parallel();
         for ($i = 0; $i < $count; ++$i) {
             $fromCoroutineId = Coroutine::id();
@@ -345,7 +345,7 @@ class VolcengineModel extends AbstractImageGenerate
             }
         }
 
-        // checkwhetherhavesuccess的imagegenerate
+        // checkwhetherhavesuccessimagegenerate
         if (empty($rawResults)) {
             $this->logger->error('火山文生graph：所haveimagegenerate均fail', ['errors' => $errors]);
             ExceptionBuilder::throw($finalErrorCode, $finalErrorMsg);
@@ -519,7 +519,7 @@ class VolcengineModel extends AbstractImageGenerate
                         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT_WITH_REASON);
                         // no break
                     default:
-                        $this->logger->error('火山文生graph：未知的taskstatus', ['status' => $status, 'response' => $response]);
+                        $this->logger->error('火山文生graph：未知taskstatus', ['status' => $status, 'response' => $response]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT_WITH_REASON);
                 }
 
@@ -541,7 +541,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * V2version：group合submittask和round询result，useatOpenAIformatgenerate.
+     * V2version：group合submittaskandround询result，useatOpenAIformatgenerate.
      */
     private function requestImageGenerationV2(VolcengineModelRequest $imageGenerateRequest, bool $isImageToImage): array
     {
@@ -572,14 +572,14 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * 将火山engineimagedataaddtoOpenAIresponseobjectmiddle.
+     * will火山engineimagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
         array $volcengineResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedislockensure并hairsecurity
+        // useRedislockensureandhairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
             // from火山engineresponsemiddleextractdata
@@ -630,7 +630,7 @@ class VolcengineModel extends AbstractImageGenerate
                 }
             }
 
-            // 累计usageinfo（ifhave的话）
+            // 累计usageinfo（ifhave话）
             if (! empty($volcengineResult['usage']) && is_array($volcengineResult['usage'])) {
                 $currentUsage->addGeneratedImages($volcengineResult['usage']['generated_images'] ?? 1);
                 $currentUsage->completionTokens += $volcengineResult['usage']['output_tokens'] ?? 0;
@@ -652,7 +652,7 @@ class VolcengineModel extends AbstractImageGenerate
     private function validateImageToImageAspectRatio(array $referenceImages)
     {
         if (empty($referenceImages)) {
-            $this->logger->error('火山graph生graph：参考imagecolumn表为null');
+            $this->logger->error('火山graph生graph：参考imagecolumn表fornull');
             ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, '缺少参考image');
         }
 
@@ -681,7 +681,7 @@ class VolcengineModel extends AbstractImageGenerate
         $aspectRatio = $maxDimension / $minDimension;
 
         if ($aspectRatio > $maxAspectRatio) {
-            $this->logger->error('火山graph生graph：长宽ratio例超出限制', [
+            $this->logger->error('火山graph生graph：长宽ratio例超out限制', [
                 'width' => $width,
                 'height' => $height,
                 'aspect_ratio' => $aspectRatio,
@@ -722,7 +722,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * 为火山engineoriginaldataaddwatermark.
+     * for火山engineoriginaldataaddwatermark.
      */
     private function processVolcengineRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {

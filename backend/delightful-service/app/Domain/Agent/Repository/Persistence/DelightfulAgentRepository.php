@@ -132,12 +132,12 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
 
     public function getAgentById(string $agentId): DelightfulAgentEntity
     {
-        // querydatabase，getfinger定 agentId 和 userId 的data
+        // querydatabase，getfinger定 agentId and userId data
         $agent = $this->agentModel::query()
             ->where('id', $agentId)
             ->first();
 
-        // ifqueryresult为空，throwexceptionorreturn null，according to业务需求process
+        // ifqueryresultfor空，throwexceptionorreturn null，according to业务需求process
         if (! $agent) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_not_exist');
         }
@@ -278,7 +278,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * query企业down的所have助理,itemitemquery：status，createperson，search.
+     * query企业down所have助理,itemitemquery：status，createperson，search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
@@ -328,7 +328,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * get企业down的所have助理create者.
+     * get企业down所have助理create者.
      * @return array<string>
      */
     public function getOrganizationAgentsCreators(string $organizationCode): array

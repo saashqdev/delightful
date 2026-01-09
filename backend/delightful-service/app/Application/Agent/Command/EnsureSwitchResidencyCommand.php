@@ -30,8 +30,8 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
     public function configure()
     {
         parent::configure();
-        $this->setDescription('ensure所have助理的switchfinger令allhave residency=true property')
-            ->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'test模type：提供JSONformat的testdataconductprocess', '')
+        $this->setDescription('ensure所have助理switchfinger令allhave residency=true property')
+            ->addOption('test', 't', InputOption::VALUE_OPTIONAL, 'test模type：提供JSONformattestdataconductprocess', '')
             ->addOption('dry-run', null, InputOption::VALUE_NONE, '空运line模type：只checkbutnotupdatetodatabase');
     }
 
@@ -46,7 +46,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         if ($isDryRun) {
-            $this->output->writeln('<info>运linein空运line模type，将notwillactualupdatedatabase</info>');
+            $this->output->writeln('<info>运linein空运line模type，willnotwillactualupdatedatabase</info>');
         }
 
         $batchSize = 20;
@@ -70,7 +70,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                     continue;
                 }
 
-                // check并修复switchfinger令的 residency property
+                // checkand修复switchfinger令 residency property
                 $hasChanges = $this->ensureSwitchResidency($instructs);
 
                 // iffinger令havechange，saveupdate
@@ -83,7 +83,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         );
                     }
                     ++$updated;
-                    $this->output->writeln(sprintf('已%s助理 [%s] 的switchfinger令', $isDryRun ? '检测toneedupdate' : 'update', $agent['id']));
+                    $this->output->writeln(sprintf('已%s助理 [%s] switchfinger令', $isDryRun ? '检测toneedupdate' : 'update', $agent['id']));
                 }
             }
 
@@ -92,9 +92,9 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         $this->output->writeln(sprintf(
-            'processcomplete！共process %d 助理，%s %d 助理的switchfinger令',
+            'processcomplete！共process %d 助理，%s %d 助理switchfinger令',
             $total,
-            $isDryRun ? 'hair现needupdate' : 'update了',
+            $isDryRun ? 'hair现needupdate' : 'update',
             $updated
         ));
 
@@ -121,7 +121,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                     continue;
                 }
 
-                // check并修复switchfinger令的 residency property
+                // checkand修复switchfinger令 residency property
                 $hasChanges = $this->ensureSwitchResidency($instructs);
 
                 // iffinger令havechange，saveupdate
@@ -132,7 +132,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                         );
                     }
                     ++$versionUpdated;
-                    $this->output->writeln(sprintf('已%s助理version [%s] 的switchfinger令', $isDryRun ? '检测toneedupdate' : 'update', $version['id']));
+                    $this->output->writeln(sprintf('已%s助理version [%s] switchfinger令', $isDryRun ? '检测toneedupdate' : 'update', $version['id']));
                 }
             }
 
@@ -141,9 +141,9 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         $this->output->writeln(sprintf(
-            'processcomplete！共process %d 助理version，%s %d 助理version的switchfinger令',
+            'processcomplete！共process %d 助理version，%s %d 助理versionswitchfinger令',
             $versionTotal,
-            $isDryRun ? 'hair现needupdate' : 'update了',
+            $isDryRun ? 'hair现needupdate' : 'update',
             $versionUpdated
         ));
     }
@@ -151,8 +151,8 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
     /**
      * processtest模type.
      *
-     * @param string $testData JSONformat的testdata
-     * @param bool $isDryRun whether为空运line模type
+     * @param string $testData JSONformattestdata
+     * @param bool $isDryRun whetherfor空运line模type
      */
     private function handleTestMode(string $testData, bool $isDryRun): int
     {
@@ -171,11 +171,11 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         $this->output->writeln('<comment>originalfinger令:</comment>');
         $this->output->writeln(Json::encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
-        // check并修复switchfinger令的 residency property
+        // checkand修复switchfinger令 residency property
         $hasChanges = $this->ensureSwitchResidency($data);
 
         // displayprocessresult
-        $this->output->writeln('<comment>processback的finger令:</comment>');
+        $this->output->writeln('<comment>processbackfinger令:</comment>');
         $this->output->writeln(Json::encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 
         $this->output->writeln(sprintf(
@@ -206,7 +206,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
                     continue;
                 }
 
-                // checkwhether是switchfinger令(type = 2)
+                // checkwhetherisswitchfinger令(type = 2)
                 if (isset($item['type']) && (int) $item['type'] === InstructType::SWITCH->value) {
                     // ifnothave residency property，add residency = true
                     if (! isset($item['residency'])) {

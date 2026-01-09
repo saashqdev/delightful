@@ -21,9 +21,9 @@ class PermissionApiTest extends AbstractHttpTest
         $response = $this->get(self::API, [], $this->getCommonHeaders());
         var_dump($response);
 
-        // ifreturnauthenticationerror，skiptest（仅verify路由可use）
+        // ifreturnauthenticationerror，skiptest（仅verify路bycanuse）
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003])) {
-            $this->markTestSkipped('interfaceauthenticationfailed，可能need其他authenticationconfiguration - 路由校验pass');
+            $this->markTestSkipped('interfaceauthenticationfailed，maybeneed其他authenticationconfiguration - 路by校验pass');
             return;
         }
 

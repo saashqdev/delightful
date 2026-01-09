@@ -12,7 +12,7 @@ namespace App\Domain\Contact\Entity\ValueObject;
  */
 enum EmployeeType: int
 {
-    // 未知(such as是person版user)
+    // 未知(such asisperson版user)
     case Unknown = 0;
 
     // 正type员工

@@ -83,7 +83,7 @@ class FileListBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'column出usercurrentsession产生的file';
+        return 'columnoutusercurrentsession产生file';
     }
 
     public function getInput(): ?NodeInput
@@ -133,7 +133,7 @@ class FileListBuiltInTool extends AbstractBuiltInTool
             "key": "start_time",
             "sort": 2,
             "title": "starttime",
-            "description": "timerangesearch的starttime。formatexample：Y-m-d H:i:s",
+            "description": "timerangesearchstarttime。formatexample：Y-m-d H:i:s",
             "required": null,
             "value": null,
             "encryption": false,
@@ -146,7 +146,7 @@ class FileListBuiltInTool extends AbstractBuiltInTool
             "key": "end_time",
             "sort": 3,
             "title": "endtime",
-            "description": "timerangesearch的endtime。formatexample：Y-m-d H:i:s",
+            "description": "timerangesearchendtime。formatexample：Y-m-d H:i:s",
             "required": null,
             "value": null,
             "encryption": false,

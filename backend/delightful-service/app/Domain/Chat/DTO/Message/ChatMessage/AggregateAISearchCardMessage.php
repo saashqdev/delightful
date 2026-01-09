@@ -17,7 +17,7 @@ use App\Domain\Chat\Entity\ValueObject\AggregateSearch\SearchDeepLevel;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * aggregateAIsearch的responsecardmessage.
+ * aggregateAIsearchresponsecardmessage.
  */
 class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements TextContentInterface, StreamMessageInterface, LLMMessageInterface
 {
@@ -36,7 +36,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
 
     protected ?array $associateQuestions = null;
 
-    // 这within要compatible老version的jsondata
+    // 这within要compatible老versionjsondata
     protected null|array|string $mindMap = null;
 
     protected ?array $searchKeywords = null;
@@ -105,7 +105,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
     public function setLlmResponse(?string $llmResponse): self
     {
         $this->llmResponse = $llmResponse;
-        // outside部implementalso是读的 content，这withinalso同给 content 赋value
+        // outside部implementalsois读 content，这withinalso同give content 赋value
         isset($llmResponse) && $this->content = $llmResponse;
         return $this;
     }
@@ -225,7 +225,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
     }
 
     /**
-     * 只return大modelreturn的textcontent， andignoreinvalid的content，如: "已经为您找to答案，请etc待generate总结“.
+     * 只return大modelreturntextcontent， andignoreinvalidcontent，如: "已经for您找to答案，请etc待generate总结“.
      */
     public function getTextContent(): string
     {
@@ -243,7 +243,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
     public function setContent(string $content): static
     {
         $this->setLlmResponse($content);
-        // outside部implementalso是读的 content，这withinalso同给 content 赋value
+        // outside部implementalsois读 content，这withinalso同give content 赋value
         $this->content = $content;
         return $this;
     }

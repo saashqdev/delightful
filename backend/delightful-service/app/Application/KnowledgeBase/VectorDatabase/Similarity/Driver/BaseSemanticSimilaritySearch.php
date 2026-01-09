@@ -30,10 +30,10 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
 
     public function search(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeSimilarityFilter $filter, KnowledgeBaseEntity $knowledgeBaseEntity, RetrieveConfig $retrieveConfig): array
     {
-        // 场景verify， ifstart重新sort，can多召回data，然backaccording to得minuteconductsort，取 limit ，at mostnot超过 20 or者 limit up限
+        // 场景verify， ifstart重新sort，can多召returndata，然backaccording to得minuteconductsort，取 limit ，at mostnot超pass 20 or者 limit up限
         $queryNum = $filter->getLimit();
         if ($retrieveConfig->isRerankingEnable()) {
-            // ifstart重sort，increase召回quantity，butnot超过20ororiginallimit的3times
+            // ifstart重sort，increase召returnquantity，butnot超pass20ororiginallimit3times
             $maxLimit = min(20, $queryNum * 3);
             $filter->setLimit($maxLimit);
         }
@@ -88,13 +88,13 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
         //                return $b['relevance_score'] <=> $a['relevance_score'];
         //            });
         //
-        //            // according tosortback的result重新rowcolumn $result array
+        //            // according tosortbackresult重新rowcolumn $result array
         //            $sortedResult = [];
         //            foreach ($rerankResult as $item) {
         //                $sortedResult[] = $result[$item['index']];
         //            }
         //            $result = $sortedResult;
-        //            // restoretooriginal的 limit value
+        //            // restoretooriginal limit value
         //            if (count($result) > $filter->getLimit()) {
         //                $result = array_slice($result, 0, $filter->getLimit());
         //            }

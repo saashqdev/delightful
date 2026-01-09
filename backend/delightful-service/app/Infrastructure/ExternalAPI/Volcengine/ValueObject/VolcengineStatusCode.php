@@ -18,12 +18,12 @@ enum VolcengineStatusCode: string
     case SUCCESS = '20000000';
 
     /**
-     * 正inprocessmiddle - responsebody为空.
+     * 正inprocessmiddle - responsebodyfor空.
      */
     case PROCESSING = '20000001';
 
     /**
-     * taskinqueuemiddle - responsebody为空.
+     * taskinqueuemiddle - responsebodyfor空.
      */
     case QUEUED = '20000002';
 
@@ -53,7 +53,7 @@ enum VolcengineStatusCode: string
     case SERVER_BUSY = '55000031';
 
     /**
-     * 判断whether为successstatus
+     * 判断whetherforsuccessstatus
      */
     public function isSuccess(): bool
     {
@@ -61,7 +61,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断whether为processmiddlestatus（includeprocessmiddle和row队middle）.
+     * 判断whetherforprocessmiddlestatus（includeprocessmiddleandrow队middle）.
      */
     public function isProcessing(): bool
     {
@@ -69,7 +69,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断whether为failstatus
+     * 判断whetherforfailstatus
      */
     public function isFailed(): bool
     {
@@ -77,7 +77,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断whether为可retry的failstatus
+     * 判断whetherforcanretryfailstatus
      */
     public function isRetryable(): bool
     {
@@ -93,7 +93,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * getstatus码的descriptioninfo.
+     * getstatus码descriptioninfo.
      */
     public function getDescription(): string
     {
@@ -118,7 +118,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断whether为serviceinside部error（550xxxx系column）.
+     * 判断whetherforserviceinside部error（550xxxx系column）.
      */
     public static function isInternalServerError(string $statusCode): bool
     {

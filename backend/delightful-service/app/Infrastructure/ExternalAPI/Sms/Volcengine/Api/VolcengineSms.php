@@ -16,7 +16,7 @@ use Hyperf\Di\Annotation\Inject;
 use Throwable;
 
 /**
- * 火山引起短信categoryinterface.
+ * 火山引up短信categoryinterface.
  * @see https://www.volcengine.com/docs/6361/171579
  */
 class VolcengineSms extends VolcengineApi
@@ -39,16 +39,16 @@ class VolcengineSms extends VolcengineApi
     protected Template $template;
 
     /**
-     * sendverify码,火山的verify码短信not supported传入finger定的number.
+     * sendverify码,火山verify码短信not supported传入finger定number.
      */
     public function request(string $phone, array $templateVariables, SignEnum $sign, string $templateId): SendResult
     {
-        // 去掉hand机number的特殊format
+        // go掉hand机number特殊format
         $phone = str_replace(['+00', '-'], '', $phone);
         $sendResult = new SendResult();
         $signStr = SignEnum::format($sign, LanguageEnum::EN_US);
         if (empty($templateVariables)) {
-            return $sendResult->setResult(-1, '未匹配to对应的短信template!');
+            return $sendResult->setResult(-1, '未匹配toto应短信template!');
         }
         if (! in_array($signStr, Template::$signToMessageGroup, true)) {
             return $sendResult->setResult(-1, '短信signature:' . $signStr . ' not supported!');
@@ -58,9 +58,9 @@ class VolcengineSms extends VolcengineApi
         $msg = 'success';
         try {
             $groupId = $this->template->getMessageGroupId($templateId);
-            // initialize,set公共的requestparameter
+            // initialize,set公共requestparameter
             $this->init($groupId, $signStr, $templateId);
-            // setverify码短信的特havebody结构
+            // setverify码短信特havebody结构
             $body = [
                 'SmsAccount' => $this->getMessageGroupId(),
                 'Sign' => $this->getSign(),
@@ -69,9 +69,9 @@ class VolcengineSms extends VolcengineApi
                 'PhoneNumbers' => $phone,
             ];
             $this->setBody($body);
-            // if是单yuantest,nothair短信,只verifyvariableparse/短信content&&短信signature多语type适配/国际区numbercorrectparse
+            // ifis单yuantest,nothair短信,只verifyvariableparse/短信content&&短信signature多语type适配/国际区numbercorrectparse
             if (defined('IN_UNIT_TEST')) {
-                // 单yuantest,not真的hair短信
+                // 单yuantest,not真hair短信
                 return $sendResult->setResult($errCode, $msg);
             }
             $this->sendRequest();
@@ -80,7 +80,7 @@ class VolcengineSms extends VolcengineApi
             $msg = '短信sendfail';
             $this->logger->error('短信sendfail：' . $exception->getMessage() . ',trace:' . $exception->getTraceAsString());
         }
-        // 将returnresult与创蓝统一,避免bug
+        // willreturnresultand创蓝统一,避免bug
         return $sendResult->setResult($errCode, $msg);
     }
 }

@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 /**
  * knowledge base检索resultvalueobject.
  *
- * 统一table示fromdifferent检索method（语义检索、all文检索、graph检索etc）return的知识slicesegment
+ * 统一table示fromdifferent检索method（语义检索、all文检索、graph检索etc）return知识slicesegment
  */
 class KnowledgeRetrievalResult extends AbstractValueObject
 {
@@ -114,7 +114,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * create空的检索result.
+     * create空检索result.
      */
     public static function empty(): self
     {
@@ -217,7 +217,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * checkwhether为语义检索type.
+     * checkwhetherfor语义检索type.
      */
     public function isSemantic(): bool
     {
@@ -225,7 +225,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * checkwhether为all文检索type.
+     * checkwhetherforall文检索type.
      */
     public function isFulltext(): bool
     {
@@ -233,7 +233,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * checkwhether为graph检索type.
+     * checkwhetherforgraph检索type.
      */
     public function isGraph(): bool
     {
@@ -241,7 +241,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * checkwhether为混合检索type.
+     * checkwhetherfor混合检索type.
      */
     public function isHybrid(): bool
     {

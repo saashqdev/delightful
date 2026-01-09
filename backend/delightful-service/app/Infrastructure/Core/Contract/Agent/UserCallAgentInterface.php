@@ -12,7 +12,7 @@ use App\Domain\Chat\Event\Agent\UserCallAgentEvent;
 interface UserCallAgentInterface
 {
     /**
-     * processusercall Agent 的event.
+     * processusercall Agent event.
      */
     public function process(UserCallAgentEvent $event): void;
 
@@ -24,8 +24,8 @@ interface UserCallAgentInterface
     /**
      * getprocess器优先level.
      *
-     * numbermore大优先levelmore高，default为0
-     * 企业版canreturnmore高的优先levelby覆盖defaultimplement
+     * numbermore大优先levelmore高，defaultfor0
+     * 企业版canreturnmore高优先levelby覆盖defaultimplement
      */
     public static function getPriority(): int;
 }

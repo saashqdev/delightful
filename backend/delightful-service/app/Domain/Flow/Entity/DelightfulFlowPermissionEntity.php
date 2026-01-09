@@ -39,7 +39,7 @@ class DelightfulFlowPermissionEntity extends AbstractEntity
 
     /**
      * goal。
-     * 例子： process开放平台applicationid、api_key.
+     * 例子： processopen放平台applicationid、api_key.
      */
     protected string $targetId;
 

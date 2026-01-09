@@ -14,7 +14,7 @@ use App\Interfaces\Mode\DTO\Request\UpdateModeGroupRequest;
 class ModeGroupApiAssembler
 {
     /**
-     * createrequestconvert为minutegroupDTO.
+     * createrequestconvertforminutegroupDTO.
      */
     public static function createRequestToModeGroupDTO(CreateModeGroupRequest $request): ModeGroupDTO
     {
@@ -22,7 +22,7 @@ class ModeGroupApiAssembler
     }
 
     /**
-     * updaterequestconvert为minutegroupDTO.
+     * updaterequestconvertforminutegroupDTO.
      */
     public static function updateRequestToModeGroupDTO(UpdateModeGroupRequest $request): ModeGroupDTO
     {

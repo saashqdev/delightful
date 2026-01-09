@@ -12,12 +12,12 @@ use Hyperf\Odin\Api\Response\Usage;
 class ImageUsage extends Usage
 {
     /**
-     * @param int $promptTokens prompt词的tokenquantity
-     * @param int $completionTokens completecontent的tokenquantity
-     * @param int $totalTokens use的总tokenquantity
-     * @param int $generatedImages generate的imagequantity
-     * @param array $completionTokensDetails completetoken的详细information
-     * @param array $promptTokensDetails prompttoken的详细information
+     * @param int $promptTokens prompt词tokenquantity
+     * @param int $completionTokens completecontenttokenquantity
+     * @param int $totalTokens use总tokenquantity
+     * @param int $generatedImages generateimagequantity
+     * @param array $completionTokensDetails completetoken详细information
+     * @param array $promptTokensDetails prompttoken详细information
      */
     public function __construct(
         public int $promptTokens = 0,

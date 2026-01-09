@@ -36,8 +36,8 @@ enum InstructType: int
     }
 
     /**
-     * get所havefinger令type及其国际化tag.
-     * @return array<string, int> returntypename和对应的value
+     * get所havefinger令typeand其国际化tag.
+     * @return array<string, int> returntypenameandto应value
      */
     public static function getTypeOptions(): array
     {
@@ -54,7 +54,7 @@ enum InstructType: int
      */
     public function validate(array &$items): void
     {
-        // 其他type的verify
+        // 其他typeverify
         match ($this) {
             self::SINGLE_CHOICE => $this->validateSingleChoice($items),
             self::SWITCH => $this->validateSwitch($items),
@@ -68,17 +68,17 @@ enum InstructType: int
      */
     public static function requiresContent(int $type, ?int $displayType = null, ?int $instructionType = null): bool
     {
-        // if是processfinger令，thennot可configurationfinger令content
+        // ifisprocessfinger令，thennotcanconfigurationfinger令content
         if ($instructionType == InstructCategory::FLOW) {
             return false;
         }
 
-        // if是systemfinger令，useSystemInstructType的判断
+        // ifissystemfinger令，useSystemInstructType判断
         if ($displayType === InstructDisplayType::SYSTEM) {
             return SystemInstructType::requiresContent($type);
         }
 
-        // 普通finger令的判断
+        // 普通finger令判断
         return match (self::fromType($type)) {
             self::STATUS => false,  // statustypenotneedcontent
             self::SINGLE_CHOICE, self::SWITCH, self::TEXT => true,  // 其他typeneedcontent
@@ -121,7 +121,7 @@ enum InstructType: int
             }
         }
 
-        // processfinger令not可configuration sendfinger令检测
+        // processfinger令notcanconfiguration sendfinger令检测
         if ($instructionType == InstructCategory::FLOW && isset($item['send_directly']) && $item['send_directly']) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.send_directly_only_allow_flow_instruction');
         }
@@ -130,7 +130,7 @@ enum InstructType: int
             $item['id'] = (string) IdGenerator::getSnowId();
         }
 
-        // if是普通finger令，verifytype
+        // ifis普通finger令，verifytype
         if (! isset($item['display_type'])) {
             self::fromType((int) $item['type'])->validate($item);
         }
@@ -172,7 +172,7 @@ enum InstructType: int
     }
 
     /**
-     * securityverifyfinger令，catchexception并returnresult.
+     * securityverifyfinger令，catchexceptionandreturnresult.
      * @return array{success: bool, message: null|string}
      */
     public static function safeValidateInstructs(array &$instructs): array
@@ -268,7 +268,7 @@ enum InstructType: int
      */
     private function validateSwitch(array &$item): void
     {
-        // verifymust存in on 和 off field
+        // verifymust存in on and off field
         if (! array_key_exists('on', $item) || ! array_key_exists('off', $item)) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_switch_fields_missing');
         }

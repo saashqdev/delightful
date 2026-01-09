@@ -37,7 +37,7 @@ class VectorProgress
     }
 
     /**
-     * get进degree.
+     * getenterdegree.
      */
     public function getProgress(string $key): array
     {

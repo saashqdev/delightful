@@ -88,7 +88,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
 
         if ($result) {
             $entity->setId($model->id);
-            // useIDencryptconfig并update
+            // useIDencryptconfigandupdate
             $encryptedConfig = AiAbilityAssembler::encodeConfig($entity->getConfig(), (string) $model->id);
             $model->config = $encryptedConfig;
             $model->save();
@@ -173,7 +173,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * 将Modelconvert为Entity.
+     * willModelconvertforEntity.
      */
     private function modelToEntity(AiAbilityModel $model): AiAbilityEntity
     {
@@ -187,18 +187,18 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
         $entity->setSortOrder($model->sort_order);
         $entity->setStatus($model->status);
 
-        // parseconfig（compatibleoldJSONformat和newencryptformat）
+        // parseconfig（compatibleoldJSONformatandnewencryptformat）
         $config = $model->config ?? '';
         if (empty($config)) {
             $config = [];
         } elseif (is_string($config)) {
-            // 尝试作为JSONparse
+            // 尝试asforJSONparse
             $jsonDecoded = json_decode($config, true);
             if (json_last_error() === JSON_ERROR_NONE && is_array($jsonDecoded)) {
-                // JSONparsesuccess，instruction是旧data（未encrypt）
+                // JSONparsesuccess，instructionis旧data（未encrypt）
                 $config = $jsonDecoded;
             } else {
-                // JSONparsefail，instruction是encryptdata，conductdecrypt
+                // JSONparsefail，instructionisencryptdata，conductdecrypt
                 $config = AiAbilityAssembler::decodeConfig($config, (string) $model->id);
             }
         } else {

@@ -9,7 +9,7 @@ namespace App\Domain\Asr\Constants;
 
 /**
  * ASR configurationconstant
- * 统一管理 ASR 相关的所haveconfigurationconstant，includetimeouttime、round询between隔、retrycountetc.
+ * 统一管理 ASR 相close所haveconfigurationconstant，includetimeouttime、round询between隔、retrycountetc.
  */
 class AsrConfig
 {
@@ -36,7 +36,7 @@ class AsrConfig
     public const int MOCK_POLLING_TTL = 600;
 
     /**
-     * 沙箱audiomerge的most长etc待time（second）.
+     * 沙箱audiomergemost长etc待time（second）.
      */
     public const int SANDBOX_MERGE_TIMEOUT = 1200;
 
@@ -65,7 +65,7 @@ class AsrConfig
     // ==================== retryconfiguration ====================
 
     /**
-     * service端自动总结most大retrycount.
+     * service端from动总结most大retrycount.
      */
     public const int SERVER_SUMMARY_MAX_RETRY = 10;
 

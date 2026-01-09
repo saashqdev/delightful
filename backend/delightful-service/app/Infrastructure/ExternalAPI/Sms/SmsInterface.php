@@ -10,22 +10,22 @@ namespace App\Infrastructure\ExternalAPI\Sms;
 interface SmsInterface
 {
     /**
-     * get短信的templateid. 并not一定存intemplateid.
+     * get短信templateid. andnot一定存intemplateid.
      */
     public function getTemplateId(SmsStruct $smsStruct): ?string;
 
     /**
-     * send短信,force要求所have短信驱动的return结构same.
+     * send短信,force要求所have短信驱动return结构same.
      */
     public function send(SmsStruct $smsStruct): SendResult;
 
     /**
-     * parse变quantity短信,return完整的短信text.
+     * parse变quantity短信,return完整短信text.
      */
     public function getContent(SmsStruct $smsStruct): string;
 
     /**
-     * get短信文案的语type,与signature无关. 可能短信content是印尼语,signature是English.
+     * get短信文案语type,andsignature无close. maybe短信contentis印尼语,signatureisEnglish.
      */
     public function getContentLanguage(SmsStruct $smsStruct): string;
 

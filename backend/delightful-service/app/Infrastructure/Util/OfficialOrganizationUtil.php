@@ -9,7 +9,7 @@ namespace App\Infrastructure\Util;
 
 /**
  * 官方organizationtoolcategory
- * 统一管理官方organization相关的configuration和判断逻辑.
+ * 统一管理官方organization相closeconfigurationand判断逻辑.
  */
 class OfficialOrganizationUtil
 {
@@ -22,7 +22,7 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * 判断whether为官方organization.
+     * 判断whetherfor官方organization.
      */
     public static function isOfficialOrganization(string $organizationCode): bool
     {
@@ -30,9 +30,9 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * getcontain官方organizationininside的organizationencodingarray.
+     * getcontain官方organizationininsideorganizationencodingarray.
      * @param string $currentOrganizationCode whenfrontorganizationencoding
-     * @return array 去重back的organizationencodingarray
+     * @return array go重backorganizationencodingarray
      */
     public static function getOrganizationCodesWithOfficial(string $currentOrganizationCode): array
     {

@@ -12,7 +12,7 @@ use Hyperf\Odin\Model\OpenAIModel;
 
 use function Hyperf\Support\env;
 
-// 递归handleconfigurationvaluemiddle的environmentvariable
+// 递归handleconfigurationvaluemiddleenvironmentvariable
 function processConfigValue(&$value): void
 {
     if (is_string($value)) {
@@ -32,7 +32,7 @@ function processConfigValue(&$value): void
     // 其他type（如 int, bool etc）：保留原value，notconductparse
 }
 
-// handleconfigurationmiddle的environmentvariable
+// handleconfigurationmiddleenvironmentvariable
 function processModelConfig(&$modelItem, string $modelName): void
 {
     // handlemodelvalue
@@ -61,7 +61,7 @@ function processModelConfig(&$modelItem, string $modelName): void
         }
     }
 
-    // 优雅的printloadsuccess的model
+    // 优雅printloadsuccessmodel
     echo "\033[32m✓\033[0m modelloadsuccess: \033[1m" . $modelName . ' (' . $modelItem['model'] . ")\033[0m" . PHP_EOL;
 }
 
@@ -248,10 +248,10 @@ return [
             'custom_error_mapping_rules' => [],
             'logging' => [
                 // logfield白名单configuration
-                // if为nullarrayor未configuration，thenprint所havefield
-                // ifconfiguration了fieldcolumn表，then只printfinger定的field
+                // iffornullarrayor未configuration，thenprint所havefield
+                // ifconfigurationfieldcolumn表，then只printfinger定field
                 // support嵌setfield，usepoint语法如 'args.messages'
-                // 注意：messages 和 tools fieldnotin白名单middle，notwillbeprint
+                // 注意：messages and tools fieldnotin白名单middle，notwillbeprint
                 'whitelist_fields' => [
                     // 基本requestinfo
                     'request_id',                  // requestID
@@ -274,7 +274,7 @@ return [
                     'options.json.thinking',
 
                     // usequantitystatistics
-                    'usage',                       // 完整的usageobject
+                    'usage',                       // 完整usageobject
                     'usage.input_tokens',          // inputtokenquantity
                     'usage.output_tokens',         // outputtokenquantity
                     'usage.total_tokens',          // 总tokenquantity
@@ -321,13 +321,13 @@ return [
                 ],
                 // whetherenablefield白名单filter，defaulttrue（enablefilter）
                 'enable_whitelist' => env('ODIN_LOG_WHITELIST_ENABLED', true),
-                // most大stringlength限制，超过此length的string将be替换为 [Long Text]，setting为 0 表示not限制
+                // most大stringlength限制，超pass此lengthstringwillbe替换for [Long Text]，settingfor 0 表示not限制
                 'max_text_length' => env('ODIN_LOG_MAX_TEXT_LENGTH', 0),
             ],
             'network_retry_count' => 1,
         ],
         'models' => $models,
-        // all局model options，可bemodel本身的 options override
+        // all局model options，canbemodel本身 options override
         'model_options' => [
             'error_mapping_rules' => [
                 // example：customizeerrormapping

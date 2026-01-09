@@ -70,7 +70,7 @@ class ModeGroupDomainService
             ExceptionBuilder::throw(ModeErrorCode::GROUP_NOT_FOUND);
         }
 
-        // deleteminutegroupdown的所havemodelassociate
+        // deleteminutegroupdown所havemodelassociate
         $this->relationRepository->deleteByGroupId($dataIsolation, $groupId);
 
         // deleteminutegroup
@@ -78,7 +78,7 @@ class ModeGroupDomainService
     }
 
     /**
-     * getminutegroupdown的modelassociate.
+     * getminutegroupdownmodelassociate.
      */
     public function getGroupModels(ModeDataIsolation $dataIsolation, string $groupId): array
     {

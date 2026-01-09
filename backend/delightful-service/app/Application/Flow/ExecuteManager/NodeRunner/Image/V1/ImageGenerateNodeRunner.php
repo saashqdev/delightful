@@ -19,7 +19,7 @@ use App\Interfaces\Authorization\Web\DelightfulUserAuthorization;
 #[FlowNodeDefine(
     type: NodeType::ImageGenerate->value,
     code: NodeType::ImageGenerate->name,
-    name: 'graph像generate',
+    name: 'graphlikegenerate',
     paramsConfig: ImageGenerateNodeParamsConfig::class,
     version: 'v1',
     singleDebug: false,
@@ -76,7 +76,7 @@ class ImageGenerateNodeRunner extends NodeRunner
         $delightfulUserAuthorization->setId($flowDataIsolation->getCurrentUserId());
         $images = $this->llmAppService->imageGenerate($delightfulUserAuthorization, '', $modelId, $data);
 
-        // 这within可能是 url、base64，均recordtoprocessexecuteattachmentmiddle（此o clockwillconductuploadto云service端）。uploadfailed的filewill直接skip
+        // 这withinmaybeis url、base64，均recordtoprocessexecuteattachmentmiddle（此o clockwillconductuploadto云service端）。uploadfailedfilewill直接skip
         $attachments = $this->recordFlowExecutionAttachments($executionData, $images, true);
         $vertexResult->addDebugLog('attachments', array_map(fn (AbstractAttachment $attachment) => $attachment->toArray(), $attachments));
         $result = [

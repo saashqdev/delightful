@@ -19,8 +19,8 @@ return new class extends Migration {
         }
 
         Schema::table('delightful_ai_abilities', function (Blueprint $table) {
-            // 将 config fieldfrom json 改为 text type
-            $table->text('config')->change()->comment('configurationinformation（AESencryptback的JSONstring）');
+            // will config fieldfrom json 改for text type
+            $table->text('config')->change()->comment('configurationinformation（AESencryptbackJSONstring）');
         });
     }
 
@@ -34,7 +34,7 @@ return new class extends Migration {
         }
 
         Schema::table('delightful_ai_abilities', function (Blueprint $table) {
-            // rollback：将 config field改回 json type
+            // rollback：will config field改return json type
             $table->json('config')->change()->comment('configurationinformation（provider_code, access_point, api_key, model_idetc）');
         });
     }

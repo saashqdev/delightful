@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Application\Kernel;
 
 /**
- * 跨organization的超levelpermission枚举category.
+ * 跨organization超levelpermission枚举category.
  */
 enum SuperPermissionEnum: string
 {
@@ -18,7 +18,7 @@ enum SuperPermissionEnum: string
     // processadministrator,目frontonly queryToolSets useto
     case FLOW_ADMIN = 'flow_admin';
 
-    // （the三方平台的）助理administrator
+    // （the三方平台）助理administrator
     case ASSISTANT_ADMIN = 'assistant_admin';
 
     // 大modelconfiguration管理
@@ -33,7 +33,7 @@ enum SuperPermissionEnum: string
     // 麦吉多environment管理
     case DELIGHTFUL_ENV_MANAGEMENT = 'delightful_env_management';
 
-    // service商的administrator
+    // service商administrator
     case SERVICE_PROVIDER_ADMIN = 'service_provider_admin';
 
     // 超level麦吉邀请useuser

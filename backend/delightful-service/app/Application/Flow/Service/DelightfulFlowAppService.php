@@ -100,7 +100,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             executionType: ExecutionType::Debug,
         );
         $executionData->setFlowCode('single_debug');
-        // 计算 trigger_config middle的 node_contexts
+        // 计算 trigger_config middle node_contexts
         $nodeContextsComponent = ComponentFactory::fastCreate($triggerConfig['node_contexts'] ?? []);
         if ($nodeContextsComponent?->isForm()) {
             $nodeContextsResult = $nodeContextsComponent->getForm()->getKeyValue();
@@ -162,11 +162,11 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
         switch (Type::tryFrom($query->getType())) {
             case Type::Main:
-                // not supported主process的query
+                // not supported主processquery
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_support', ['label' => 'type']);
                 // no break
             case Type::Sub:
-                // 仅get具havepermission的子process
+                // 仅get具havepermission子process
                 $subResources = $this->operationPermissionAppService->getResourceOperationByUserIds(
                     $permissionDataIsolation,
                     ResourceType::SubFlowCode,
@@ -178,7 +178,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
                 $query->setSelect(['id', 'code', 'name', 'description', 'icon', 'type', 'tool_set_id', 'enabled', 'version_code', 'organization_code', 'created_uid', 'created_at', 'updated_uid', 'updated_at', 'deleted_at']);
                 break;
             case Type::Tools:
-                // need具have该tool集的读permission
+                // need具have该tool集读permission
                 if (empty($query->getToolSetId())) {
                     break;
                     //                    ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'tool_set_id']);
@@ -243,7 +243,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
         $query->setType(Type::Tools->value);
-        // 一定是finger定query的tool codes
+        // 一定isfinger定querytool codes
         if (empty($query->getCodes())) {
             return ['total' => 0, 'list' => []];
         }
@@ -255,7 +255,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         )[$authorization->getId()] ?? [];
         $toolSetIds = array_keys($toolSetResources);
 
-        // againfilter一downenable的tool集
+        // againfilter一downenabletool集
         $toolSetQuery = new DelightfulFlowToolSetQuery();
         $toolSetQuery->setCodes($toolSetIds);
         $toolSetQuery->setEnabled(true);
@@ -314,7 +314,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
                 $toolSetData['list'][] = $builtInToolSet->generateToolSet();
                 foreach ($builtInToolSet->getTools() as $builtInTool) {
-                    // 私havetool，needhave高levelgraph像convertURIpermission才能display
+                    // 私havetool，needhave高levelgraphlikeconvertURIpermission才能display
                     if ($builtInTool->getCode() === 'ai_image_image_convert_high'
                         && ! PermissionChecker::mobileHasPermission($authorization->getMobile(), SuperPermissionEnum::FLOW_ADMIN)
                     ) {
@@ -365,7 +365,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             $toolSetData['list'][$index]->addTool($toolInfo);
         }
 
-        // filter掉nothave任何tool的tool集
+        // filter掉nothave任何tooltool集
         $toolSetData['list'] = array_filter($toolSetData['list'], fn (DelightfulFlowToolSetEntity $toolSet) => ! empty($toolSet->getTools()));
         $toolSetData['total'] = count($toolSetData['list']);
 
@@ -396,7 +396,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
 
         $query = new KnowledgeBaseQuery();
         $query->setCodes(array_keys($resources));
-        // 目front仅get自建text的knowledge base
+        // 目front仅getfrom建textknowledge base
         $query->setTypes([KnowledgeType::UserKnowledgeBase->value]);
         $query->setEnabled(true);
         $knowledgeData = $this->delightfulFlowKnowledgeDomainService->queries($this->createKnowledgeBaseDataIsolation($dataIsolation), $query, $page);

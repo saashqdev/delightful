@@ -35,7 +35,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
         $delightfulFlowKnowledgeEntity->setCreator($dataIsolation->getCurrentUserId());
 
         $oldKnowledge = null;
-        // if具have业务 id，那么then是update了，need先query出来
+        // if具have业务 id，那么thenisupdate，need先queryoutcome
         if (! empty($delightfulFlowKnowledgeEntity->getBusinessId())) {
             $oldKnowledge = $this->getByBusinessId($authorization, $delightfulFlowKnowledgeEntity->getBusinessId());
             if ($oldKnowledge) {
@@ -52,17 +52,17 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
             $operation = $this->knowledgeBaseStrategy->getKnowledgeOperation($dataIsolation, $oldKnowledge->getCode());
             $operation->validate('w', $oldKnowledge->getCode());
 
-            // use原来的model和toquantitylibrary
+            // use原comemodelandtoquantitylibrary
             $delightfulFlowKnowledgeEntity->setModel($oldKnowledge->getModel());
             $delightfulFlowKnowledgeEntity->setVectorDB($oldKnowledge->getVectorDB());
         }
         $modelGatewayMapper = di(ModelGatewayMapper::class);
 
-        // create的才needsetting
+        // create才needsetting
         if ($delightfulFlowKnowledgeEntity->shouldCreate()) {
             $modelId = $delightfulFlowKnowledgeEntity->getEmbeddingConfig()['model_id'] ?? null;
             if (! $modelId) {
-                // 优先useconfiguration的model
+                // 优先useconfigurationmodel
                 $modelId = EmbeddingGenerator::defaultModel();
                 if (! $modelGatewayMapper->exists($dataIsolation, $modelId)) {
                     // gettheone
@@ -84,7 +84,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
 
         $modelName = $delightfulFlowKnowledgeEntity->getModel();
         $delightfulFlowKnowledgeEntity->setForceCreateCode(Code::Knowledge->gen());
-        // createknowledge basefront，先对嵌入modelconduct连通propertytest
+        // createknowledge basefront，先to嵌入modelconduct连通propertytest
         try {
             $embeddingModel = di(ModelGatewayMapper::class)->getEmbeddingModelProxy($dataIsolation, $delightfulFlowKnowledgeEntity->getModel());
             $modelName = $embeddingModel->getModelName();

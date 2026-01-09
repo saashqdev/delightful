@@ -12,11 +12,11 @@ use function Hyperf\Translation\__;
 /**
  * Delightful resource枚举.
  *
- * 1. use Backed Enum 将eachresourcemapping为唯一string key。
+ * 1. use Backed Enum willeachresourcemappingfor唯一string key。
  * 2. passmethod提供 label / parent  etcyuaninfo，方便back续generatepermissiontree、做 i18n etc。
- * 3. 仅definitionresource本身，not涉及操作type（如 query / edit）。
+ * 3. 仅definitionresource本身，not涉and操astype（如 query / edit）。
  *
- * 注意：if你modify了这file，请execute单yuantest PermissionApiTest.testGetPermissionTree.
+ * 注意：if你modify这file，请execute单yuantest PermissionApiTest.testGetPermissionTree.
  */
 enum DelightfulResourceEnum: string
 {
@@ -45,7 +45,7 @@ enum DelightfulResourceEnum: string
     case ADMINPLUS_AI_MODEL = 'admin_plus.ai.model_management'; # organization管理back台plus-AI管理-model管理
 
     /**
-     * 对应 i18n key.
+     * to应 i18n key.
      */
     public function translationKey(): string
     {
@@ -54,7 +54,7 @@ enum DelightfulResourceEnum: string
             self::ADMIN => 'permission.resource.admin',
             self::ADMIN_AI => 'permission.resource.admin_ai',
             self::ADMINPLUS_AI => 'permission.resource.admin_plus_ai',
-            self::ADMIN_SAFE => 'permission.resource.admin_safe', # security与permission
+            self::ADMIN_SAFE => 'permission.resource.admin_safe', # securityandpermission
             self::ADMIN_AI_MODEL => 'permission.resource.ai_model',
             self::ADMINPLUS_AI_MODEL => 'permission.resource.ai_model',
             self::ADMIN_AI_IMAGE => 'permission.resource.ai_image',
@@ -73,7 +73,7 @@ enum DelightfulResourceEnum: string
 
     /**
      * uplevelresource.
-     * 注意：new操作resourceback要补充这configuration.
+     * 注意：new操asresourceback要补充这configuration.
      */
     public function parent(): ?self
     {
@@ -89,7 +89,7 @@ enum DelightfulResourceEnum: string
             self::ADMIN_AI,
             self::ADMIN_SAFE => self::ADMIN,
             self::ADMINPLUS_AI => self::ADMINPLUS,
-            // 操作resource
+            // 操asresource
             self::ADMIN_AI_MODEL,
             self::ADMIN_AI_IMAGE,
             self::ADMIN_AI_MODE => self::PLATFORM_AI,
@@ -108,9 +108,9 @@ enum DelightfulResourceEnum: string
     }
 
     /**
-     * return与该resourcebind的 Operation Enum category名。
+     * returnand该resourcebind Operation Enum category名。
      * defaultuse DelightfulOperationEnum。
-     * 如需为特定resourcecustomize操作集，可in此returncustomize Enum::class。
+     * 如需for特定resourcecustomize操as集，canin此returncustomize Enum::class。
      */
     public function operationEnumClass(): string
     {

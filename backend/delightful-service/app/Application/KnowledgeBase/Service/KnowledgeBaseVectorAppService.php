@@ -22,7 +22,7 @@ use Throwable;
 class KnowledgeBaseVectorAppService extends AbstractKnowledgeAppService
 {
     /**
-     * checkknowledge base的toquantitysetwhether存in.
+     * checkknowledge basetoquantitysetwhether存in.
      *
      * @throws BusinessException
      */

@@ -13,7 +13,7 @@ use BackedEnum;
 use Hyperf\Di\Annotation\AbstractAnnotation;
 
 /**
- * permission校验annotation，useatmethodorcategoryupstatement所需的permission。
+ * permission校验annotation，useatmethodorcategoryupstatement所需permission。
  *
  * example：
  * #[CheckPermission(DelightfulResourceEnum::CONSOLE_API_ASSISTANT, DelightfulOperationEnum::QUERY)]
@@ -27,13 +27,13 @@ class CheckPermission extends AbstractAnnotation
     public array|string $resource;
 
     /**
-     * 操作标识（仅support单）。
+     * 操as标识（仅support单）。
      */
     public string $operation;
 
     /**
      * @param array|BackedEnum|string $resource resource，string/枚举or其array
-     * @param BackedEnum|string $operation 操作，仅stringor枚举
+     * @param BackedEnum|string $operation 操as，仅stringor枚举
      */
     public function __construct(array|BackedEnum|string $resource, BackedEnum|string $operation)
     {
@@ -42,18 +42,18 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * group合为完整permission键，如 "console.api.assistant.query".
+     * group合for完整permission键，如 "console.api.assistant.query".
      */
     public function getPermissionKey(): string
     {
-        // 为了compatible旧逻辑，returnfirstgroup合键
+        // forcompatible旧逻辑，returnfirstgroup合键
         $keys = $this->getPermissionKeys();
         return $keys[0] ?? '';
     }
 
     /**
-     * return所havepermission键group合（resources x operations 的笛卡尔积）。
-     * whenstatement了多resourceor多操作o clock，permissionpass任意一键即可。
+     * return所havepermission键group合（resources x operations 笛卡尔积）。
+     * whenstatement多resourceor多操aso clock，permissionpass任意一键即can。
      *
      * @return array<string>
      */
@@ -72,7 +72,7 @@ class CheckPermission extends AbstractAnnotation
     }
 
     /**
-     * 将string/枚举or其array统一为stringarray。
+     * willstring/枚举or其array统一forstringarray。
      * @return array<string>
      */
     private function normalizeToValues(array|BackedEnum|string $input): array

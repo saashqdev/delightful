@@ -24,7 +24,7 @@ class DelightfulChatAIImageReqDTO
 
     public string $conversationId;
 
-    public string $topicId = ''; // 话题 id，can为null
+    public string $topicId = ''; // 话题 id，canfornull
 
     public string $appMessageId;
 
@@ -83,7 +83,7 @@ class DelightfulChatAIImageReqDTO
         if ($userMessage instanceof TextMessage) {
             $this->params->setUserPrompt($userMessage->getContent());
         } else {
-            throw new Exception('not supported的messagetype');
+            throw new Exception('not supportedmessagetype');
         }
         /* @phpstan-ignore-next-line */
         if ($userMessage instanceof ChatFileInterface) {

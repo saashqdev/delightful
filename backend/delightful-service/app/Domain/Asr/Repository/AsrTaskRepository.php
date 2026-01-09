@@ -18,7 +18,7 @@ use function Hyperf\Translation\trans;
 
 /**
  * ASR taskstatus仓储
- * 统一管理 Redis middle的taskstatus CRUD.
+ * 统一管理 Redis middletaskstatus CRUD.
  */
 readonly class AsrTaskRepository
 {
@@ -45,7 +45,7 @@ readonly class AsrTaskRepository
             // setexpiretime
             $this->redis->expire($redisKey, $ttl);
         } catch (Throwable $e) {
-            // Redis 操作failo clockrecordbutnotthrowexception
+            // Redis 操asfailo clockrecordbutnotthrowexception
             $this->logger->warning(trans('asr.api.redis.save_task_status_failed'), [
                 'task_key' => $taskStatus->taskKey ?? 'unknown',
                 'user_id' => $taskStatus->userId ?? 'unknown',
@@ -55,7 +55,7 @@ readonly class AsrTaskRepository
     }
 
     /**
-     * according totask键和userIDquerytaskstatus.
+     * according totask键anduserIDquerytaskstatus.
      *
      * @param string $taskKey task键
      * @param string $userId userID
@@ -150,7 +150,7 @@ readonly class AsrTaskRepository
     }
 
     /**
-     * generatetaskstatus的 Redis 键名.
+     * generatetaskstatus Redis 键名.
      *
      * @param string $taskKey task键
      * @param string $userId userID
@@ -158,7 +158,7 @@ readonly class AsrTaskRepository
      */
     private function generateTaskKey(string $taskKey, string $userId): string
     {
-        // 按统一rulegeneratestring，然back MD5 避免键名过长
+        // 按统一rulegeneratestring，然back MD5 避免键名pass长
         $keyString = sprintf('%s:%s', $userId, $taskKey);
         $keyHash = md5($keyString);
         return sprintf(AsrRedisKeys::TASK_HASH, $keyHash);

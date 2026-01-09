@@ -61,14 +61,14 @@ class CreateGroupNodeRunner extends NodeRunner
         $groupOwnerId = $groupOwner[0]['id'] ?? ($groupOwner[0]['user_id'] ?? '');
         $vertexResult->addDebugLog('group_owner', $groupOwnerId);
 
-        // get owner 的userinformation
+        // get owner userinformation
         $groupOwnerInfo = di(DelightfulUserDomainService::class)->getUserById($groupOwnerId);
         if (! $groupOwnerInfo) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'common.not_found', ['label' => 'group_owner']);
         }
         $vertexResult->addDebugLog('group_owner_delightful_id', $groupOwnerInfo->getDelightfulId());
 
-        // 群member，all是user ID
+        // 群member，allisuser ID
         $groupMembers = $paramsConfig->getGroupMembers()?->getValue()->getResult($executionData->getExpressionFieldData());
         $groupMemberIds = [];
         foreach ($groupMembers as $groupMember) {
@@ -90,7 +90,7 @@ class CreateGroupNodeRunner extends NodeRunner
         if ($paramsConfig->isIncludeCurrentAssistant()) {
             if ($agentUserId = $executionData->getAgentUserId()) {
                 $groupMemberIds[] = $agentUserId;
-                // only assistant start，才willhave开场白
+                // only assistant start，才willhaveopen场白
                 $assistantOpeningSpeech = $paramsConfig->getAssistantOpeningSpeech()?->getValue()->getResult($executionData->getExpressionFieldData()) ?? '';
             }
         }
@@ -110,7 +110,7 @@ class CreateGroupNodeRunner extends NodeRunner
             return;
         }
 
-        // by owner 的身share去create
+        // by owner 身sharegocreate
         $ownerAuthorization = new DelightfulUserAuthorization();
         $ownerAuthorization->setId($groupOwnerInfo->getUserId());
         $ownerAuthorization->setOrganizationCode($groupOwnerInfo->getOrganizationCode());
@@ -123,7 +123,7 @@ class CreateGroupNodeRunner extends NodeRunner
         $delightfulGroupDTO->setGroupType($groupType);
         $delightfulGroupDTO->setGroupStatus(GroupStatusEnum::Normal);
 
-        // pass conversationID get来源 和 助理 key，并creategroup chat
+        // pass conversationID getcome源 and 助理 key，andcreategroup chat
         $agentKey = $executionData->getTriggerData()->getAgentKey();
         $this->createChatGroup($agentKey, $groupMemberIds, $ownerAuthorization, $delightfulGroupDTO);
 

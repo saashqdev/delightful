@@ -61,7 +61,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraph像并returnOpenAIformatresponse - Midjourneyversion.
+     * generategraphlikeandreturnOpenAIformatresponse - Midjourneyversion.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
@@ -74,7 +74,7 @@ class MidjourneyModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof MidjourneyModelRequest) {
-            $this->logger->error('Midjourney OpenAIformat生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Midjourney OpenAIformat生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
@@ -133,7 +133,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * round询taskresult并returnnativedata.
+     * round询taskresultandreturnnativedata.
      * @throws Exception
      */
     protected function pollTaskResultForRaw(string $jobId): array
@@ -159,7 +159,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 ]);
 
                 if ($result['status'] === 'SUCCESS') {
-                    // 直接return完整的nativedata
+                    // 直接return完整nativedata
                     return $result;
                 }
 
@@ -171,7 +171,7 @@ class MidjourneyModel extends AbstractImageGenerate
                     ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
                 }
 
-                // if是其他status（如 PENDING_QUEUE or ON_QUEUE），continueetc待
+                // ifis其他status（如 PENDING_QUEUE or ON_QUEUE），continueetc待
                 ++$retryCount;
                 sleep(self::RETRY_INTERVAL);
             } catch (Exception $e) {
@@ -293,12 +293,12 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraph像的核core逻辑，returnnativeresult.
+     * generategraphlike核core逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof MidjourneyModelRequest) {
-            $this->logger->error('MJ文生graph：invalid的requesttype', [
+            $this->logger->error('MJ文生graph：invalidrequesttype', [
                 'class' => get_class($imageGenerateRequest),
             ]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
@@ -346,7 +346,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 为Midjourneyoriginaldataaddwatermark.
+     * forMidjourneyoriginaldataaddwatermark.
      */
     private function processMidjourneyRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -388,16 +388,16 @@ class MidjourneyModel extends AbstractImageGenerate
         }
 
         if (empty($result['data']['images']) || ! is_array($result['data']['images'])) {
-            throw new Exception('Midjourneyresponsedataformaterror：缺少imagesfieldorimagesnot是array');
+            throw new Exception('Midjourneyresponsedataformaterror：缺少imagesfieldorimagesnotisarray');
         }
 
         if (count($result['data']['images']) === 0) {
-            throw new Exception('Midjourneyresponsedataformaterror：imagesarray为null');
+            throw new Exception('Midjourneyresponsedataformaterror：imagesarrayfornull');
         }
     }
 
     /**
-     * 将MidjourneyimagedataaddtoOpenAIresponseobjectmiddle（仅handleimagesfield）.
+     * willMidjourneyimagedataaddtoOpenAIresponseobjectmiddle（仅handleimagesfield）.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
@@ -412,7 +412,7 @@ class MidjourneyModel extends AbstractImageGenerate
         $currentData = $response->getData();
         $currentUsage = $response->getUsage() ?? new ImageUsage();
 
-        // 仅handle images arraymiddle的URL
+        // 仅handle images arraymiddleURL
         foreach ($midjourneyResult['data']['images'] as $imageUrl) {
             if (! empty($imageUrl)) {
                 // handlewatermark

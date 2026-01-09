@@ -32,7 +32,7 @@ interface ProviderConfigRepositoryInterface
     public function delete(ProviderDataIsolation $dataIsolation, string $id): void;
 
     /**
-     * passconfigurationID和organizationencodinggetservice商configuration实body.
+     * passconfigurationIDandorganizationencodinggetservice商configuration实body.
      *
      * @param string $serviceProviderConfigId service商configurationID
      * @param string $organizationCode organizationencoding
@@ -61,12 +61,12 @@ interface ProviderConfigRepositoryInterface
      * according toIDarraygetconfiguration实bodylist（not按organizationfilter，all局query）.
      *
      * @param array<int> $ids configurationIDarray
-     * @return array<int, ProviderConfigEntity> returnbyid为key的configuration实bodyarray
+     * @return array<int, ProviderConfigEntity> returnbyidforkeyconfiguration实bodyarray
      */
     public function getByIdsWithoutOrganizationFilter(array $ids): array;
 
     /**
-     * getorganizationdown所haveenable的service商configuration.
+     * getorganizationdown所haveenableservice商configuration.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @return array<ProviderConfigEntity> service商configuration实bodyarray

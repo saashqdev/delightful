@@ -42,11 +42,11 @@ class DefaultAgent extends AbstractAgent
         ]);
         // get触hairtype
         $triggerType = TriggerType::fromSeqType($seqEntity->getSeqType());
-        # 传入的parameter:
-        // 1. $userAccountEntity containtrue名,hand机numberetchavesecurity风险,shouldneedauthauthorization的information
+        # 传入parameter:
+        // 1. $userAccountEntity containtrue名,hand机numberetchavesecurity风险,shouldneedauthauthorizationinformation
         // 2. $userEntity userdetail,containuserid,user昵称,useravataretcinformation
-        // 3. $seqEntity conversationwindowid,quote的message_id,messagetype(chatmessage/open了conversationwindow)
-        // 4. $messageEntity savehavemessagetype,message的specificcontent,hairitempersonid,sendtime
+        // 3. $seqEntity conversationwindowid,quotemessage_id,messagetype(chatmessage/openconversationwindow)
+        // 4. $messageEntity savehavemessagetype,messagespecificcontent,hairitempersonid,sendtime
         $this->getDelightfulFlowExecuteAppService()->imChat(
             $agentAccountEntity->getAiCode(),
             $triggerType,

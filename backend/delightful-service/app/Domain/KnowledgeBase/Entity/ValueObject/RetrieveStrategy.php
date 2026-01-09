@@ -10,9 +10,9 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 /**
  * 检索strategy枚举category.
  *
- * definition了两type检索strategy：
+ * definition两type检索strategy：
  * - SINGLE: 单一检索，from单knowledge basemiddle检索info
- * - MULTIPLE: 多重检索，meanwhilefrom多knowledge basemiddle检索info，然back对resultconduct重新sort
+ * - MULTIPLE: 多重检索，meanwhilefrom多knowledge basemiddle检索info，然backtoresultconduct重新sort
  */
 class RetrieveStrategy
 {
@@ -21,22 +21,22 @@ class RetrieveStrategy
      *
      * from单knowledge basemiddle检索info。
      * 该strategypassconfigurationparameter `retrieve_strategy` fieldset，
-     * fromdatabasemiddle的 retrieve_config configurationget。
+     * fromdatabasemiddle retrieve_config configurationget。
      */
     public const SINGLE = 'single';
 
     /**
      * 多重检索.
      *
-     * meanwhilefrom多knowledge basemiddle检索info，然back对resultconduct重新sort。
+     * meanwhilefrom多knowledge basemiddle检索info，然backtoresultconduct重新sort。
      * 该strategypassconfigurationparameter `retrieve_strategy` fieldset，
-     * fromdatabasemiddle的 retrieve_config configurationget。
-     * 它supportdifferent的重sortstrategy，如use重sortmodelor加权minute数。
+     * fromdatabasemiddle retrieve_config configurationget。
+     * 它supportdifferent重sortstrategy，如use重sortmodelor加权minute数。
      */
     public const MULTIPLE = 'multiple';
 
     /**
-     * get所have可use的检索strategy.
+     * get所havecanuse检索strategy.
      *
      * @return array<string>
      */
@@ -49,7 +49,7 @@ class RetrieveStrategy
     }
 
     /**
-     * check给定的strategywhethervalid.
+     * checkgive定strategywhethervalid.
      */
     public static function isValid(string $strategy): bool
     {

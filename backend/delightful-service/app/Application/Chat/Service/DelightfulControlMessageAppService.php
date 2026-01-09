@@ -23,7 +23,7 @@ use App\Interfaces\Chat\Assembler\SeqAssembler;
 use Throwable;
 
 /**
- * 控制message相关.
+ * 控制message相close.
  */
 class DelightfulControlMessageAppService extends DelightfulSeqAppService
 {
@@ -38,7 +38,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * according tocustomer端hair来的控制messagetype,minutehairto对应的process模piece.
+     * according tocustomer端haircome控制messagetype,minutehairtoto应process模piece.
      * @throws Throwable
      */
     public function dispatchClientControlMessage(DelightfulMessageEntity $messageDTO, DelightfulUserAuthorization $userAuthorization): ?array
@@ -55,7 +55,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
             ControlMessageType::HideConversation,
             ControlMessageType::MuteConversation,
             ControlMessageType::TopConversation => $this->conversationDomainService->conversationOptionChange($messageDTO, $dataIsolation),
-            // withdraw,已读,已读回执,editmessage
+            // withdraw,已读,已读return执,editmessage
             ControlMessageType::SeenMessages,
             ControlMessageType::ReadMessage,
             ControlMessageType::RevokeMessage,
@@ -64,7 +64,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
             ControlMessageType::CreateTopic,
             ControlMessageType::UpdateTopic,
             ControlMessageType::DeleteTopic, => $this->clientOperateTopicMessage($messageDTO, $dataIsolation),
-            // （单聊的sessionwindowmiddle）startinput/endinput
+            // （单聊sessionwindowmiddle）startinput/endinput
             ControlMessageType::StartConversationInput,
             ControlMessageType::EndConversationInput => $this->conversationDomainService->clientOperateConversationStatus($messageDTO, $dataIsolation),
             // setsession话题，准备废弃
@@ -74,8 +74,8 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * minutehairasyncmessagequeuemiddle的seq.
-     * such asaccording tohairitem方的seq,为收item方generateseq,投递seq.
+     * minutehairasyncmessagequeuemiddleseq.
+     * such asaccording tohairitem方seq,for收item方generateseq,投递seq.
      * @throws Throwable
      */
     public function dispatchMQControlMessage(DelightfulSeqEntity $delightfulSeqEntity): void
@@ -84,7 +84,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         switch ($controlMessageType) {
             case ControlMessageType::SeenMessages:
             case ControlMessageType::ReadMessage:
-                // 已读回执etc场景,according to一item控制message,generate其他person的seq.
+                // 已读return执etc场景,according to一item控制message,generate其他personseq.
                 $this->controlDomainService->handlerMQReceiptSeq($delightfulSeqEntity);
                 break;
             case ControlMessageType::RevokeMessage:
@@ -95,7 +95,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
             case ControlMessageType::CreateTopic:
             case ControlMessageType::UpdateTopic:
             case ControlMessageType::DeleteTopic:
-                // 话题操作
+                // 话题操as
                 $this->handlerMQTopicControlMessage($delightfulSeqEntity);
                 break;
             case ControlMessageType::GroupCreate:
@@ -104,7 +104,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
             case ControlMessageType::GroupDisband:
             case ControlMessageType::GroupUpdate:
             case ControlMessageType::GroupOwnerChange:
-                // 群操作
+                // 群操as
                 $this->groupDomainService->handlerMQGroupUserChangeSeq($delightfulSeqEntity);
                 break;
         }
@@ -112,31 +112,31 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
 
     public function clientOperateInstructMessage(DelightfulMessageEntity $messageEntity, string $conversationId): ?array
     {
-        // 给自己的messagestreamgenerate序column.
+        // givefrom己messagestreamgenerate序column.
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageEntity, $conversationId);
-        // async将generate的messagestreamnotifyuser的其他设备.
+        // asyncwillgeneratemessagestreamnotifyuser其他设备.
         $this->controlDomainService->pushControlSequence($seqEntity);
-        // 将messagestreamreturn给currentcustomer端! but是also是willasyncpush给user的所haveonlinecustomer端.
+        // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 
     private function clientOperateTopicMessage(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
         $conversationId = $this->topicDomainService->clientOperateTopic($messageDTO, $dataIsolation);
-        // 给自己的messagestreamgenerate序column.
+        // givefrom己messagestreamgenerate序column.
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageDTO, $conversationId);
-        // async将generate的messagestreamnotifyuser的其他设备.
+        // asyncwillgeneratemessagestreamnotifyuser其他设备.
         $seqCreatedEvent = $this->controlDomainService->pushControlSequence($seqEntity);
-        // asyncminutehair控制message,对方操作了session的话题
+        // asyncminutehair控制message,to方操assession话题
         $this->controlDomainService->dispatchSeq($seqCreatedEvent);
-        // 将messagestreamreturn给currentcustomer端! but是also是willasyncpush给user的所haveonlinecustomer端.
+        // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
     }
 
     private function handlerMQTopicControlMessage(DelightfulSeqEntity $delightfulSeqEntity): void
     {
         $receiveSeqEntity = $this->topicDomainService->dispatchMQTopicOperation($delightfulSeqEntity);
-        // asyncpush给收item方,havenew话题
+        // asyncpushgive收item方,havenew话题
         $receiveSeqEntity && $this->controlDomainService->pushControlSequence($receiveSeqEntity);
     }
 }

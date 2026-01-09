@@ -46,11 +46,11 @@ enum UserTaskErrorCode: int
     #[ErrorMessage('task.get_failed')]
     case TASK_GET_FAILED = 8008;
 
-    // agentId cannot为null
+    // agentId cannotfornull
     #[ErrorMessage('task.agent_id_required')]
     case AGENT_ID_REQUIRED = 8009;
 
-    // topicId cannot为null
+    // topicId cannotfornull
     #[ErrorMessage('task.topic_id_required')]
     case TOPIC_ID_REQUIRED = 8010;
 }

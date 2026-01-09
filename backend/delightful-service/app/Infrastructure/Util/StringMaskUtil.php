@@ -10,8 +10,8 @@ namespace App\Infrastructure\Util;
 class StringMaskUtil
 {
     /**
-     * 对stringconduct脱敏process
-     * 保留front三位和back三位，middlebetweenuse星number代替.
+     * tostringconduct脱敏process
+     * 保留front三位andback三位，middlebetweenuse星number代替.
      */
     public static function mask(string $value): string
     {
@@ -24,10 +24,10 @@ class StringMaskUtil
             return str_repeat('*', $length);
         }
 
-        // 保留front三位和back三位，middlebetweenuse原characterquantitysame的星number代替
+        // 保留front三位andback三位，middlebetweenuse原characterquantitysame星number代替
         $prefix = mb_substr($value, 0, 3);
         $suffix = mb_substr($value, -3, 3);
-        $middleLength = $length - 6; // 减去front三位和back三位
+        $middleLength = $length - 6; // 减gofront三位andback三位
         $maskedMiddle = str_repeat('*', $middleLength);
         return $prefix . $maskedMiddle . $suffix;
     }

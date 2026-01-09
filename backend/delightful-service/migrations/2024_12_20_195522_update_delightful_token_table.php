@@ -20,7 +20,7 @@ return new class extends Migration {
         }
         Schema::table('delightful_tokens', static function (Blueprint $table) {
             $table->string('type_relation_value', 255)->comment(
-                'tokentype对应的value.type为0o clock,此value为account_id;type为1o clock,此value为user_id;type为2o clock,此value为organizationencoding;type为3o clock,此value为app_id;type为4o clock,此value为flow_id'
+                'tokentypeto应value.typefor0o clock,此valueforaccount_id;typefor1o clock,此valueforuser_id;typefor2o clock,此valuefororganizationencoding;typefor3o clock,此valueforapp_id;typefor4o clock,此valueforflow_id'
             )->default('')->change();
             // 判断 idx_token whether存in
             if (Schema::hasIndex('delightful_tokens', 'idx_token')) {

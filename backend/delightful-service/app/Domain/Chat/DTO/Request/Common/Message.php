@@ -20,13 +20,13 @@ class Message extends AbstractEntity
     protected string $topicId;
 
     /**
-     * 控制messageorchatmessage的type.
-     * according to type 来确定messagetype是哪one.
+     * 控制messageorchatmessagetype.
+     * according to type come确定messagetypeis哪one.
      */
     protected string $type;
 
     /**
-     * according to type 的type,来确定 DelightfulMessage 的specifictype.
+     * according to type type,come确定 DelightfulMessage specifictype.
      */
     protected MessageInterface $delightfulMessage;
 

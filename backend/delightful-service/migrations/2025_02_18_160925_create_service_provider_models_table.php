@@ -22,11 +22,11 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('service_provider_config_id')->index()->comment('service商ID');
             $table->string('name', 50)->comment('modelname');
-            $table->string('model_version', 50)->comment('modelinservice商down的name');
+            $table->string('model_version', 50)->comment('modelinservice商downname');
             $table->string('model_id', 50)->comment('modeltrue实ID');
             $table->string('category')->comment('modelcategory：llm/vlm');
             $table->tinyInteger('model_type')->comment('specifictype,useatminutegroupuse');
-            $table->json('config')->comment('model的configurationinformation');
+            $table->json('config')->comment('modelconfigurationinformation');
             $table->string('description', 255)->nullable()->comment('modeldescription');
             $table->integer('sort')->default(0)->comment('sort');
             $table->string('icon')->default('')->comment('graph标');

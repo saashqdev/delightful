@@ -57,10 +57,10 @@ class ReplyMessageNodeRunner extends NodeRunner
         /** @var ReplyMessageNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        // if具have 大model的streamresponsebody，那么直接start
+        // if具have 大modelstreamresponsebody，那么直接start
         if ($executionData->getExecutionType()->isSupportStream() && ! empty($frontResults['chat_completion_choice_generator'])) {
             $streamResponse = $this->sendMessageForStream($executionData, $frontResults);
-            // generate大modelsectionpoint的response给回去
+            // generate大modelsectionpointresponsegivereturngo
             $vertexResult->addDebugLog('llm_stream_response', $streamResponse->getLlmStreamResponse());
             $vertexResult->addDebugLog('llm_stream_reasoning_response', $streamResponse->getLlmStreamReasoningResponse());
             return;
@@ -73,10 +73,10 @@ class ReplyMessageNodeRunner extends NodeRunner
             $paramsConfig->getLinkDesc()
         );
 
-        // if是resourcecategory的data，那么need提frontupload了
+        // ifisresourcecategorydata，那么need提frontupload
         $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
-        // 由atwithinsurfacewillconduct重命名，所by这within直接get对应的name传入进去
+        // byatwithinsurfacewillconduct重命名，所by这within直接getto应name传入entergo
         $linkPaths = array_map(function (AbstractAttachment $attachment) {
             return $attachment->getPath();
         }, $attachments);
@@ -108,7 +108,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $this->sendMessageForStreamApi($executionData, $chatCompletionChoiceGenerator, $streamResponse);
         }
 
-        // Chat call，eachtimestreamall是一item新message
+        // Chat call，eachtimestreamallis一item新message
         if ($executionData->getExecutionType()->isImChat()) {
             $this->sendMessageForStreamIMChat($executionData, $chatCompletionChoiceGenerator, $streamResponse);
         }
@@ -205,7 +205,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                 $receiveSeqDTO->setContent($IMResponse);
                 $receiveSeqDTO->setSeqType($IMResponse->getMessageTypeEnum());
 
-                // todo according tostartsectionpointconfiguration的话题来choose话题
+                // todo according tostartsectionpointconfiguration话题comechoose话题
 
                 $delightfulChatMessageAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $userId, IdGenerator::getUniqueId32());
             });
@@ -398,7 +398,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         foreach ($recipientsData as $recipient) {
             $userId = null;
             if (is_array($recipient)) {
-                // 引入一的time
+                // 引入一time
                 if (isset($recipient['type'])) {
                     switch ($recipient['type']) {
                         case 'department':
@@ -412,7 +412,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                     }
                     continue;
                 }
-                // 引入多的time
+                // 引入多time
                 foreach ($recipient as $item) {
                     if (is_string($item)) {
                         $userIds[] = $item;
@@ -437,12 +437,12 @@ class ReplyMessageNodeRunner extends NodeRunner
             $userIds = array_merge($userIds, $this->getUserIdsByDepartmentIds($executionData, $departmentIds));
         }
 
-        // if为空，兜bottomcurrentuser
+        // iffor空，兜bottomcurrentuser
         if (empty($userIds)) {
             $userIds[] = $executionData->getOperator()->getUid();
         }
 
-        // filternotlegal的user
+        // filternotlegaluser
         $userIds = array_values(array_unique($userIds));
 
         return Db::table('delightful_contact_users')
@@ -452,7 +452,7 @@ class ReplyMessageNodeRunner extends NodeRunner
 
     private function getUserIdsByDepartmentIds(ExecutionData $executionData, array $departmentIds): array
     {
-        // 先粗糙的直连 Db
+        // 先粗糙直连 Db
         $allDepartments = Db::table('delightful_contact_departments')
             ->select(['department_id', 'parent_department_id', 'name', 'path'])
             ->where('organization_code', '=', $executionData->getDataIsolation()->getCurrentOrganizationCode())

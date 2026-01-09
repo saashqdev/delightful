@@ -15,7 +15,7 @@ use App\Domain\Contact\Entity\DelightfulUserEntity;
 use App\Infrastructure\Core\AbstractEvent;
 
 /**
- * user给agenthair了message.
+ * usergiveagenthairmessage.
  */
 class UserCallAgentEvent extends AbstractEvent
 {

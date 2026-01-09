@@ -10,10 +10,10 @@ namespace App\Infrastructure\ExternalAPI\OCR;
 interface OCRClientInterface
 {
     /**
-     *  OCR request,目front只support pdf 和 image.
+     *  OCR request,目front只support pdf and image.
      *
-     * @param null|string $url graph像的 URL ground址|graph像的 Base64 encoding
-     * @return string OCR processback的result
+     * @param null|string $url graphlike URL ground址|graphlike Base64 encoding
+     * @return string OCR processbackresult
      */
     public function ocr(?string $url = null): string;
 }

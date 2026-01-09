@@ -120,7 +120,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             // 计o clockend，outputsecondleveltime
             $end = microtime(true);
             $this->logger->info(sprintf('转高清end，耗o clock: %ssecond。', $end - $start));
-            // 将新旧image存入attachment
+            // will新旧image存入attachment
             $newFile = $this->upLoadFiles($requestContext, [$response->getUrls()[0]])[0] ?? [];
             $this->aiSendMessage(
                 $reqDTO->getConversationId(),
@@ -137,13 +137,13 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 $reqDTO->getReferMessageId(),
             );
         } catch (Throwable $e) {
-            // hair生exceptiono clock，sendterminationmessage，并throwexception
+            // hair生exceptiono clock，sendterminationmessage，andthrowexception
             $this->handleGlobalThrowable($reqDTO, $e);
         }
     }
 
     /**
-     * 将fileuploadto云端.
+     * willfileuploadto云端.
      */
     #[ArrayShape([['file_id' => 'string', 'url' => 'string']])]
     private function upLoadFiles(RequestContext $requestContext, array $attachments): array
@@ -159,7 +159,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 $this->fileDomainService->uploadByCredential($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile);
                 // geturl
                 $url = $this->fileDomainService->getLink($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile->getKey())->getUrl();
-                // syncfile至delightful
+                // syncfiletodelightful
                 $fileUploadDTOs = [];
                 $fileType = FileType::getTypeFromFileExtension($uploadFile->getExt());
                 $fileUploadDTO = new DelightfulChatFileEntity();
@@ -218,11 +218,11 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
 
     private function getErrorMessageFromImageGenerateErrorCode(ImageGenerateErrorCode $case): ?string
     {
-        // get枚举constant的reflectionobject
+        // get枚举constantreflectionobject
         $reflectionEnum = new ReflectionEnum($case);
         $reflectionCase = $reflectionEnum->getCase($case->name);
 
-        // getconstant的所haveannotation
+        // getconstant所haveannotation
         $attributes = $reflectionCase->getAttributes(ErrorMessage::class);
 
         // checkwhether存in ErrorMessage annotation
@@ -230,7 +230,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             // 实例化annotationobject
             $errorMessageAttribute = $attributes[0]->newInstance();
 
-            // returnannotationmiddle的 message property
+            // returnannotationmiddle message property
             return '[' . __($errorMessageAttribute->getMessage()) . ']';
         }
 
@@ -242,7 +242,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
         ?string $id,
         ImageConvertHighResponseType $type,
         array $content,
-        // streamresponse，拿tocustomer端传来的 app_message_id ，作为responsetime的唯一标识
+        // streamresponse，拿tocustomer端传come app_message_id ，asforresponsetime唯一标识
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

@@ -16,7 +16,7 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 interface AuthenticationInterface
 {
     /**
-     * verifyrequest的身shareinfo.
+     * verifyrequest身shareinfo.
      *
      * @throws InvalidParamsException whenverifyfailo clockthrow
      */

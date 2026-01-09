@@ -14,7 +14,7 @@ use App\Infrastructure\Util\Tiptap\CustomExtension\ValueObject\SwitchStatus;
 use Hyperf\Codec\Json;
 
 /**
- * rich text的快捷instruction.
+ * rich text快捷instruction.
  */
 class QuickInstructionNode extends AbstractCustomNode
 {
@@ -47,7 +47,7 @@ class QuickInstructionNode extends AbstractCustomNode
                 $switchText = $switchStatus === SwitchStatus::ON ? $messageForStatusOn : $messageForStatusOff;
                 $value = '';
                 if (json_validate($templateContent)) {
-                    // normal的format
+                    // normalformat
                     $templateContentParsed = Json::decode($templateContent);
                     foreach ($templateContentParsed as $item) {
                         switch (InstructionContentType::tryFrom($item['type'])) {
@@ -69,19 +69,19 @@ class QuickInstructionNode extends AbstractCustomNode
                 return htmlspecialchars($nodeForArray['text'] ?? '', ENT_QUOTES, 'UTF-8');
             case InstructionType::SINGLE_CHOICE:
             default:
-                // front端传的 value 是 id thereforeneedprocess一down
+                // front端传 value is id thereforeneedprocess一down
                 $value = $nodeForArray['attrs']['value'] ?? '';
                 $instruction = $nodeForArray['attrs']['instruction'] ?? [];
                 $values = $instruction['values'] ?? [];
 
-                // usearrayfilter和键valuefind替代loop
+                // usearrayfilterand键valuefind替代loop
                 if (! empty($values) && is_array($values)) {
-                    // find匹配 id 的instructionvalue
+                    // find匹配 id instructionvalue
                     $matchedValues = array_filter($values, function ($item) use ($value) {
                         return isset($item['id']) && $item['id'] == $value;
                     });
 
-                    // if找to匹配item，取theone匹配item的 value
+                    // if找to匹配item，取theone匹配item value
                     if (! empty($matchedValues)) {
                         $firstMatch = reset($matchedValues);
                         $value = $firstMatch['value'] ?? $value;

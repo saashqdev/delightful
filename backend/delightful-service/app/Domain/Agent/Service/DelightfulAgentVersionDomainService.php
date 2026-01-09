@@ -45,7 +45,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimizeversion：直接getenable的助理version，避免传入大quantityID.
+     * optimizeversion：直接getenable助理version，避免传入大quantityID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -54,7 +54,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimizeversion：getenable助理的total.
+     * optimizeversion：getenable助理total.
      */
     public function getEnabledAgentsByOrganizationCount(string $organizationCode, string $agentName): int
     {
@@ -81,7 +81,7 @@ class DelightfulAgentVersionDomainService
         $reviewOpen = false;
 
         $msg = '';
-        // if旧status已经是企业or者市场，thennotallowback
+        // if旧status已经is企业or者市场，thennotallowback
         $oldDelightfulAgentVersionEntity = $this->agentVersionRepository->getNewestAgentVersionEntity($delightfulAgentVersionEntity->getAgentId());
         if ($oldDelightfulAgentVersionEntity !== null) {
             $this->validateVersionNumber($delightfulAgentVersionEntity->getVersionNumber(), $oldDelightfulAgentVersionEntity->getVersionNumber());
@@ -177,9 +177,9 @@ class DelightfulAgentVersionDomainService
 
     public function getAgentMaxVersion(string $agentId): string
     {
-        // returnis语义化version，needinreturn的基础up+1
+        // returnis语义化version，needinreturn基础up+1
         $agentMaxVersion = $this->agentVersionRepository->getAgentMaxVersion($agentId);
-        // ifversionnumber是整数format（如 1），将其convert为语义化versionnumber（如 1.0.0）
+        // ifversionnumberis整数format（如 1），will其convertfor语义化versionnumber（如 1.0.0）
         if (is_numeric($agentMaxVersion) && strpos($agentMaxVersion, '.') === false) {
             $agentMaxVersion = $agentMaxVersion . '.0.0';
         }
@@ -187,28 +187,28 @@ class DelightfulAgentVersionDomainService
         // parseversionnumber，for example "0.0.1" => ['0', '0', '1']
         [$major, $minor, $patch] = explode('.', $agentMaxVersion);
 
-        // 将 PATCH 部minute加 1
+        // will PATCH 部minute加 1
         $patch = (int) $patch + 1;
 
-        // if PATCH 达to 10，进位to MINOR（canaccording to需求adjust此rule）
+        // if PATCH 达to 10，enter位to MINOR（canaccording to需求adjust此rule）
         if ($patch > 99) {
             $patch = 0;
             $minor = (int) $minor + 1;
         }
 
-        // if MINOR 达to 10，进位to MAJOR（canaccording to需求adjust此rule）
+        // if MINOR 达to 10，enter位to MAJOR（canaccording to需求adjust此rule）
         if ($minor > 99) {
-            // notresetminor，而是直接增大major，避免not必要的reset
+            // notresetminor，whileis直接增大major，避免not必要reset
             $minor = 0;
             $major = (int) $major + 1;
         }
 
-        // splice并returnnewversionnumber
+        // spliceandreturnnewversionnumber
         return "{$major}.{$minor}.{$patch}";
     }
 
     /**
-     * according to助理 id getdefault的version.
+     * according to助理 id getdefaultversion.
      */
     public function getDefaultVersions(array $agentIds): void
     {
@@ -239,10 +239,10 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * based on游标paginationgetfinger定organization的助理versionlist.
+     * based on游标paginationgetfinger定organization助理versionlist.
      * @param string $organizationCode organizationcode
      * @param array $agentVersionIds 助理versionIDlist
-     * @param string $cursor 游标ID，if为空stringthenfrommost新start
+     * @param string $cursor 游标ID，iffor空stringthenfrommost新start
      * @param int $pageSize each页quantity
      * @return array<DelightfulAgentVersionEntity>
      */
@@ -275,7 +275,7 @@ class DelightfulAgentVersionDomainService
             return;
         }
 
-        // checkwhether试graphfrommore高level别的publishrangebacktomore低level别
+        // checkwhether试graphfrommore高level别publishrangebacktomore低level别
         $errorMessage = match ($oldScope) {
             DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value => 'agent.already_published_to_enterprise_cannot_publish_to_individual',
             DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value => 'agent.already_published_to_market_cannot_publish_to_individual',

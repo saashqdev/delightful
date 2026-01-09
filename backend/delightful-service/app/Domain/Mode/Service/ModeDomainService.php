@@ -41,7 +41,7 @@ class ModeDomainService
     }
 
     /**
-     * according toIDget模typeaggregateroot（contain模typedetail、group、model关系）.
+     * according toIDget模typeaggregateroot（contain模typedetail、group、modelclose系）.
      */
     public function getModeDetailById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeAggregate
     {
@@ -50,11 +50,11 @@ class ModeDomainService
             return null;
         }
 
-        // if是跟随模type，getbe跟随模type的groupconfiguration
+        // ifis跟随模type，getbe跟随模typegroupconfiguration
         if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
             $followModeAggregate = $this->getModeDetailById($dataIsolation, $mode->getFollowModeId());
             if ($followModeAggregate) {
-                // usecurrent模type的基本info + be跟随模type的groupconfiguration
+                // usecurrent模type基本info + be跟随模typegroupconfiguration
                 return new ModeAggregate($mode, $followModeAggregate->getGroupAggregates());
             }
         }
@@ -90,11 +90,11 @@ class ModeDomainService
             return null;
         }
 
-        // if是跟随模type，getbe跟随模type的groupconfiguration
+        // ifis跟随模type，getbe跟随模typegroupconfiguration
         if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
             $followModeAggregate = $this->getModeDetailById($dataIsolation, $mode->getFollowModeId());
             if ($followModeAggregate) {
-                // usecurrent模type的基本info + be跟随模type的groupconfiguration
+                // usecurrent模type基本info + be跟随模typegroupconfiguration
                 return new ModeAggregate($mode, $followModeAggregate->getGroupAggregates());
             }
         }
@@ -130,7 +130,7 @@ class ModeDomainService
      */
     public function updateMode(ModeDataIsolation $dataIsolation, ModeEntity $modeEntity): ModeEntity
     {
-        // if是跟随模type，validate跟随的goal模type存in todo xhy use业务exception
+        // ifis跟随模type，validate跟随goal模type存in todo xhy use业务exception
         if ($modeEntity->isInheritedConfiguration() && $modeEntity->hasFollowMode()) {
             $followMode = $this->modeRepository->findById($dataIsolation, $modeEntity->getFollowModeId());
             if (! $followMode) {
@@ -180,15 +180,15 @@ class ModeDomainService
 
         $this->updateMode($dataIsolation, $modeEntity);
 
-        // if是inheritconfiguration模type
+        // ifisinheritconfiguration模type
         if ($mode->getDistributionType() === DistributionTypeEnum::INHERITED) {
             return $this->getModeDetailById($dataIsolation, $id);
         }
 
-        // 直接delete该模type的所have现haveconfiguration
+        // 直接delete该模type所have现haveconfiguration
         $this->relationRepository->deleteByModeId($dataIsolation, $id);
 
-        // delete该模type的所have现havegroup
+        // delete该模type所have现havegroup
         $this->groupRepository->deleteByModeId($dataIsolation, $id);
 
         // save模type基本info
@@ -214,7 +214,7 @@ class ModeDomainService
 
             $newGroupEntities[] = $newGroup;
 
-            // updateaggregatemiddle的groupquote
+            // updateaggregatemiddlegroupquote
             $groupAggregate->setGroup($newGroup);
         }
 
@@ -223,7 +223,7 @@ class ModeDomainService
             $this->groupRepository->batchSave($dataIsolation, $newGroupEntities);
         }
 
-        // 批quantitybuildgroup实body和关系实body
+        // 批quantitybuildgroup实bodyandclose系实body
         $relationEntities = [];
 
         foreach ($modeAggregate->getGroupAggregates() as $groupAggregate) {
@@ -231,19 +231,19 @@ class ModeDomainService
                 $relation->setModeId((string) $id);
                 $relation->setOrganizationCode($mode->getOrganizationCode());
 
-                // setting为新create的groupID
+                // settingfor新creategroupID
                 $relation->setGroupId($groupAggregate->getGroup()->getId());
 
                 $relationEntities[] = $relation;
             }
         }
 
-        // 批quantitysave关系
+        // 批quantitysaveclose系
         if (! empty($relationEntities)) {
             $this->relationRepository->batchSave($dataIsolation, $relationEntities);
         }
 
-        // returnupdateback的aggregateroot
+        // returnupdatebackaggregateroot
         return $this->getModeDetailById($dataIsolation, $id);
     }
 
@@ -258,22 +258,22 @@ class ModeDomainService
             return [];
         }
 
-        // the一步：建立跟随关系mapping followMap[跟随者ID] = be跟随者ID
+        // the一步：建立跟随close系mapping followMap[跟随者ID] = be跟随者ID
         $followMap = [];
         $modeIds = [];
 
         foreach ($modes as $mode) {
             $modeIds[] = $mode->getId();
 
-            // if是跟随模type，建立mapping关系
+            // ifis跟随模type，建立mappingclose系
             if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
                 $followMap[$mode->getId()] = $mode->getFollowModeId();
-                $modeIds[] = $mode->getFollowModeId(); // also要收集be跟随的模typeID
+                $modeIds[] = $mode->getFollowModeId(); // also要收集be跟随模typeID
             }
         }
         $modeIds = array_unique($modeIds);
 
-        // the二步：批quantityget所havegroup和关系
+        // the二步：批quantityget所havegroupandclose系
         $allGroups = $this->groupRepository->findByModeIds($dataIsolation, $modeIds);
         $allRelations = $this->relationRepository->findByModeIds($dataIsolation, $modeIds);
 
@@ -302,7 +302,7 @@ class ModeDomainService
             // buildgroupaggregaterootarray
             $groupAggregates = [];
             foreach ($groups as $group) {
-                // get该groupdown的所haveassociate关系
+                // get该groupdown所haveassociateclose系
                 $groupRelations = array_filter($relations, fn ($relation) => $relation->getGroupId() === $group->getId());
                 usort($groupRelations, fn ($a, $b) => $a->getSort() <=> $b->getSort());
 
@@ -320,7 +320,7 @@ class ModeDomainService
      */
     private function buildModeAggregate(ModeDataIsolation $dataIsolation, ModeEntity $mode): ModeAggregate
     {
-        // getgroup和associate关系
+        // getgroupandassociateclose系
         $groups = $this->groupRepository->findByModeId($dataIsolation, $mode->getId());
         $relations = $this->relationRepository->findByModeId($dataIsolation, $mode->getId());
 
@@ -332,7 +332,7 @@ class ModeDomainService
                 ExceptionBuilder::throw(ModeErrorCode::VALIDATE_FAILED);
             }
 
-            // get该groupdown的所haveassociate关系
+            // get该groupdown所haveassociateclose系
             $groupRelations = array_filter($relations, fn ($relation) => $relation->getGroupId() === $group->getId());
             usort($groupRelations, fn ($a, $b) => $a->getSort() <=> $b->getSort());
 
@@ -374,9 +374,9 @@ class ModeDomainService
     }
 
     /**
-     * according to跟随关系mapping递归findfinal源模typeID.
+     * according to跟随close系mapping递归findfinal源模typeID.
      * @param int $modeId current模typeID
-     * @param array $followMap 跟随关系mapping [跟随者ID => be跟随者ID]
+     * @param array $followMap 跟随close系mapping [跟随者ID => be跟随者ID]
      * @param array $visited 防止loop跟随
      * @return int final源模typeID
      */
@@ -387,14 +387,14 @@ class ModeDomainService
             return $modeId;
         }
 
-        // if该模typenothave跟随关系，instruction它then是final源
+        // if该模typenothave跟随close系，instruction它thenisfinal源
         if (! isset($followMap[$modeId])) {
             return $modeId;
         }
 
         $visited[] = $modeId;
 
-        // 递归find跟随goal的final源
+        // 递归find跟随goalfinal源
         return $this->findUltimateSourceId($followMap[$modeId], $followMap, $visited);
     }
 }

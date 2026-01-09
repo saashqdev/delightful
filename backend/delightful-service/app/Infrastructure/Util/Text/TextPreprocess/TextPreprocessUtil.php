@@ -36,14 +36,14 @@ class TextPreprocessUtil
             $text
         );
 
-        // 将FORMAT_EXCELrule放toarrayfrontsurface
+        // willFORMAT_EXCELrule放toarrayfrontsurface
         $excelSheetLineRemoveRule = array_filter($rules, fn (TextPreprocessRule $rule) => $rule === TextPreprocessRule::FORMAT_EXCEL);
         $otherRules = array_filter(
             $rules,
             fn (TextPreprocessRule $rule) => $rule !== TextPreprocessRule::FORMAT_EXCEL
         );
 
-        // ensureFORMAT_EXCEL的fixed顺序
+        // ensureFORMAT_EXCELfixed顺序
         $orderedRules = [];
         if (! empty($excelSheetLineRemoveRule)) {
             $orderedRules[] = TextPreprocessRule::FORMAT_EXCEL;

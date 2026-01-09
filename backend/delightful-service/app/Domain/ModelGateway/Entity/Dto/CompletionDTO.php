@@ -14,7 +14,7 @@ class CompletionDTO extends AbstractRequestDTO
     protected ?float $temperature = 0.9;
 
     /**
-     * @var null|int -1 代tableuseconfiguration的most大value
+     * @var null|int -1 代tableuseconfigurationmost大value
      */
     protected ?int $maxTokens = 0;
 

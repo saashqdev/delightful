@@ -34,7 +34,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     protected MCPServerAppService $mcpServerAppService;
 
     /**
-     * get所havesectionpoint的version.
+     * get所havesectionpointversion.
      */
     public function nodeVersions()
     {
@@ -133,7 +133,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * query可usetool集.
+     * querycanusetool集.
      */
     public function queryToolSets()
     {
@@ -163,7 +163,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * query可usetoquantityknowledge base.
+     * querycanusetoquantityknowledge base.
      */
     public function queryKnowledge()
     {

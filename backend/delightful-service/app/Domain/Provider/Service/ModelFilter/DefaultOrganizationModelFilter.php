@@ -8,15 +8,15 @@ declare(strict_types=1);
 namespace App\Domain\Provider\Service\ModelFilter;
 
 /**
- * default的organizationmodelfilter器implement.
+ * defaultorganizationmodelfilter器implement.
  *
  * notconduct任何filter，直接returnoriginalmodellist
- * useat开源versionor企业package未configurationo clock的backsolution
+ * useatopen源versionor企业package未configurationo clockbacksolution
  */
 class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInterface
 {
     /**
-     * defaultimplement：notconductfilter，return所have传入的model.
+     * defaultimplement：notconductfilter，return所have传入model.
      */
     public function filterModelsByOrganization(string $organizationCode, array $models): array
     {
@@ -24,7 +24,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement：所havemodelall可use.
+     * defaultimplement：所havemodelallcanuse.
      */
     public function isModelAvailableForOrganization(string $organizationCode, string $modelIdentifier): bool
     {
@@ -32,7 +32,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement：return空array，table示nothave特定的modelbind.
+     * defaultimplement：return空array，table示nothave特定modelbind.
      */
     public function getAvailableModelIdentifiers(string $organizationCode): array
     {

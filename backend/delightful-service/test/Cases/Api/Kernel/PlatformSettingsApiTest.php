@@ -54,7 +54,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
                 'en_US' => 'AI,Test',
             ],
             'description_i18n' => [
-                'zh_CN' => '这是一test平台',
+                'zh_CN' => '这is一test平台',
                 'en_US' => 'This is a test platform',
             ],
         ];
@@ -96,7 +96,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
     public function testUpdatePlatformSettingsPartially(): void
     {
-        // 首先set完整data
+        // firstset完整data
         $initialPayload = [
             'logo_zh_url' => 'https://example.com/initial_logo_zh.png',
             'logo_en_url' => 'https://example.com/initial_logo_en.png',
@@ -129,7 +129,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
     {
         $payload = [
             'favicon_url' => 'https://example.com/favicon.ico',
-            'default_language' => 'invalid_locale', // invalid的language
+            'default_language' => 'invalid_locale', // invalidlanguage
         ];
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
@@ -151,7 +151,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
     public function testUpdatePlatformSettingsWithEmptyFavicon(): void
     {
-        // 首先set favicon
+        // firstset favicon
         $initialPayload = [
             'favicon_url' => 'https://example.com/favicon.ico',
         ];
@@ -165,7 +165,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
 
         $response = $this->put($this->putUrl, $payload, $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
-        // favicon should保持原value（因为空stringnotwillupdate）
+        // favicon should保持原value（因for空stringnotwillupdate）
         $data = $response['data'];
         $this->assertSame('https://example.com/favicon.ico', $data['favicon']['url']);
     }
@@ -175,7 +175,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $payload = [
             'favicon_url' => 'https://example.com/favicon.ico',
             'name_i18n' => [
-                'zh_CN' => '我的平台',
+                'zh_CN' => '我平台',
                 'en_US' => 'My Platform',
             ],
             'title_i18n' => [

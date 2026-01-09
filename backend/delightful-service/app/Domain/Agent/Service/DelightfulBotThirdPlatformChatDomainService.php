@@ -75,7 +75,7 @@ readonly class DelightfulBotThirdPlatformChatDomainService
             unset($historyList[$thirdPlatformChatEntity->getKey()]);
         }
 
-        // 剩down的all是要delete的
+        // 剩downallis要delete
         foreach ($historyList as $item) {
             $this->destroy($item);
         }

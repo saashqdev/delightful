@@ -31,7 +31,7 @@ class OrganizationAdminEntity extends AbstractEntity
 
     protected int $status = 1; // status: 0=disable, 1=enable
 
-    protected bool $isOrganizationCreator = false; // whether为organizationcreateperson
+    protected bool $isOrganizationCreator = false; // whetherfororganizationcreateperson
 
     protected ?string $remarks = null;
 

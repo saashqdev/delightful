@@ -100,7 +100,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             executionType: ExecutionType::IMChat,
         );
 
-        // if是 conversation，forcestart stream 模type
+        // ifis conversation，forcestart stream 模type
         if ($triggerType === TriggerType::ChatMessage) {
             $executionData->setStream(true);
         }
@@ -369,12 +369,12 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         if (! $log) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $apiChatDTO->getTaskId()]);
         }
-        // 只能querythe一layer的data
+        // 只能querythe一layerdata
         if (! $log->isTop()) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $apiChatDTO->getTaskId()]);
         }
 
-        // checkwhether具have该process的permission
+        // checkwhether具have该processpermission
         $this->getFlow($flowDataIsolation, $log->getFlowCode(), operationValidate: 'read');
 
         return $log;
@@ -385,7 +385,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
      */
     public static function routine(string $flowCode, string $branchId, array $routineConfig = []): void
     {
-        // 暂o clockonlysystemlevel别的scheduletask
+        // 暂o clockonlysystemlevel别scheduletask
         $dataIsolation = FlowDataIsolation::create();
         $delightfulFlow = di(DelightfulFlowDomainService::class)->getByCode($dataIsolation, $flowCode);
         if (! $delightfulFlow) {
@@ -481,7 +481,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             messageInfo: ['message_entity' => TriggerData::createMessageEntity(new TextMessage(['content' => $triggerConfig['trigger_data']['content'] ?? '']))],
             params: $triggerConfig['trigger_data'] ?? [],
             paramsForm: $triggerConfig['trigger_data_form'] ?? [],
-            // 试运lineo clock，all局variable为hand动传入
+            // 试运lineo clock，all局variableforhand动传入
             globalVariable: ComponentFactory::fastCreate($triggerConfig['global_variable'] ?? []) ?? $delightfulFlowEntity->getGlobalVariable(),
             attachments: AttachmentUtil::getByApiArray($triggerConfig['trigger_data']['files'] ?? []),
         );
@@ -510,7 +510,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         // get node 运lineresult
         foreach ($delightfulFlowEntity->getNodes() as $node) {
             if ($node->getNodeDebugResult()) {
-                // have一failthen判定为fail
+                // have一failthen判定forfail
                 if (! $node->getNodeDebugResult()->isSuccess()) {
                     $result['success'] = false;
                 }

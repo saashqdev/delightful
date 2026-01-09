@@ -43,7 +43,7 @@ return new class extends Migration {
             $table->json('embedding_config')->nullable()->comment('嵌入configuration');
             $table->json('vector_db_config')->nullable()->comment('toquantitydatabaseconfiguration');
 
-            // 操作record
+            // 操asrecord
             $table->string('created_uid', 255)->comment('create者ID');
             $table->string('updated_uid', 255)->comment('update者ID');
 

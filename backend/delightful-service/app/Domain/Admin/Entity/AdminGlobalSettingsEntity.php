@@ -74,7 +74,7 @@ class AdminGlobalSettingsEntity extends AbstractEntity
     {
         if (is_string($extra)) {
             $extra = Json::decode($extra);
-            // according to type 来决定use哪specific的 Extra category
+            // according to type come决定use哪specific Extra category
             $extraClass = $this->getExtraClassByType($this->getType()->value);
             if ($extraClass) {
                 $extra = new $extraClass($extra);
@@ -129,7 +129,7 @@ class AdminGlobalSettingsEntity extends AbstractEntity
             AdminGlobalSettingsType::DEFAULT_FRIEND => DefaultFriendExtra::class,
             AdminGlobalSettingsType::ASSISTANT_CREATE => AssistantCreateExtra::class,
             AdminGlobalSettingsType::THIRD_PARTY_PUBLISH => ThirdPartyPublishExtra::class,
-            // add其他type的mapping...
+            // add其他typemapping...
             default => null,
         };
     }

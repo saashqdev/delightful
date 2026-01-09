@@ -15,7 +15,7 @@ enum SocketEventType: string
     // connect
     case Connect = 'connect';
 
-    // login. bybacklogincan投一item控制message,来implementuplinenotifyetc逻辑
+    // login. bybacklogincan投一item控制message,comeimplementuplinenotifyetc逻辑
     case Login = 'login';
 
     // chatmessage
@@ -28,7 +28,7 @@ enum SocketEventType: string
     case Stream = 'stream';
 
     /**
-     * 实o clockproperty极高的transitionmessage，nothave seq_id，notwillbe持久化，alsonotwillbecache。
+     * 实o clockproperty极高transitionmessage，nothave seq_id，notwillbe持久化，alsonotwillbecache。
      */
     case Intermediate = 'intermediate';
 }

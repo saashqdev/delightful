@@ -13,17 +13,17 @@ namespace App\Domain\LongTermMemory\Entity\ValueObject;
 enum MemoryCategory: string
 {
     /**
-     * project记忆 - 与特定project相关的记忆.
+     * project记忆 - and特定project相close记忆.
      */
     case PROJECT = 'project';
 
     /**
-     * all局记忆 - not特定atsomeproject的记忆.
+     * all局记忆 - not特定atsomeproject记忆.
      */
     case GENERAL = 'general';
 
     /**
-     * getcategory的middle文name.
+     * getcategorymiddle文name.
      */
     public function getDisplayName(): string
     {
@@ -42,7 +42,7 @@ enum MemoryCategory: string
     }
 
     /**
-     * get该category的enablequantity限制.
+     * get该categoryenablequantity限制.
      */
     public function getEnabledLimit(): int
     {

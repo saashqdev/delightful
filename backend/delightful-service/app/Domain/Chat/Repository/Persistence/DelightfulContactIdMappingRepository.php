@@ -27,7 +27,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * getthe三方平台departmentID的mapping关系.
+     * getthe三方平台departmentIDmappingclose系.
      *
      * @param string[] $thirdDepartmentIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -41,8 +41,8 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $relationEnvIds = $this->getEnvRelationIds($delightfulEnvironmentEntity);
         $data = $this->delightfulContactIdMappingModel::query();
 
-        // 保持原have的queryfield顺序
-        // according toenvironmentIDquantitychoose合适的querymethod
+        // 保持原havequeryfield顺序
+        // according toenvironmentIDquantitychoose合适querymethod
         if (count($relationEnvIds) === 1) {
             $data->where('delightful_environment_id', reset($relationEnvIds));
         } else {
@@ -66,7 +66,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * getDelightfuldepartmentID的mapping关系.
+     * getDelightfuldepartmentIDmappingclose系.
      *
      * @param string[] $delightfulDepartmentIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -90,7 +90,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * getthe三方平台userID的mapping关系.
+     * getthe三方平台userIDmappingclose系.
      *
      * @param string[] $thirdUserIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -104,8 +104,8 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $relationEnvIds = $this->getEnvRelationIds($delightfulEnvironmentEntity);
         $query = $this->delightfulContactIdMappingModel::query();
 
-        // 保持原have的queryfield顺序
-        // according toenvironmentIDquantitychoose合适的querymethod
+        // 保持原havequeryfield顺序
+        // according toenvironmentIDquantitychoose合适querymethod
         if (count($relationEnvIds) === 1) {
             $query->where('delightful_environment_id', reset($relationEnvIds));
         } else {
@@ -127,7 +127,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * get麦吉平台userID的mapping关系.
+     * get麦吉平台userIDmappingclose系.
      *
      * @param string[] $delightfulIds
      * @return DelightfulThirdPlatformIdMappingEntity[]
@@ -180,7 +180,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
             $delightfulThirdPlatformIdMappingEntity->setCreatedAt($time);
             $delightfulThirdPlatformIdMappingEntity->setUpdatedAt($time);
             $thirdPlatformIdMappings[] = [
-                'id' => $id, // 暂o clock把primary key idset为与new_idsame的value，bybackhaveneedcan拆minute
+                'id' => $id, // 暂o clockprimary key idsetforandnew_idsamevalue，bybackhaveneedcan拆minute
                 'delightful_organization_code' => $delightfulThirdPlatformIdMappingEntity->getDelightfulOrganizationCode(),
                 'mapping_type' => $delightfulThirdPlatformIdMappingEntity->getMappingType(),
                 'third_platform_type' => $delightfulThirdPlatformIdMappingEntity->getThirdPlatformType(),
@@ -245,7 +245,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
     }
 
     /**
-     * 预publish和生产can看做是一environment，所by这withinprocess一downassociate的environment ids.
+     * 预publishand生产can看做is一environment，所by这withinprocess一downassociateenvironment ids.
      * */
     private function getEnvRelationIds(DelightfulEnvironmentEntity $delightfulEnvironmentEntity): array
     {
@@ -254,14 +254,14 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
             $relationEnvIds = [$delightfulEnvironmentEntity->getId()];
         } else {
             $relationEnvIds[] = $delightfulEnvironmentEntity->getId();
-            // 对environmentIDconduct去重process
+            // toenvironmentIDconductgo重process
             $relationEnvIds = array_unique($relationEnvIds);
         }
         return $relationEnvIds;
     }
 
     /**
-     * 将arraydataconvert为实bodyobject
+     * willarraydataconvertfor实bodyobject
      * @return DelightfulThirdPlatformIdMappingEntity[]
      */
     private function convertToEntities(array $dataArrays): array

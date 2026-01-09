@@ -29,7 +29,7 @@ class SessionAppService implements SessionInterface
     public function LoginCheck(LoginCheckInterface $loginCheck, DelightfulEnvironmentEntity $delightfulEnvironmentEntity, ?string $delightfulOrganizationCode = null): array
     {
         $loginResponses = $this->delightfulUserDomainService->delightfulUserLoginCheck($loginCheck->getAuthorization(), $delightfulEnvironmentEntity, $delightfulOrganizationCode);
-        // increaseorganizationname和avatar
+        // increaseorganizationnameandavatar
         if (! empty($loginResponses)) {
             // 收集所haveorganizationcode
             $orgCodes = [];
@@ -40,9 +40,9 @@ class SessionAppService implements SessionInterface
                 }
             }
 
-            // ifhaveorganizationcode，批quantityget所haveorganization的rootdepartmentinformation
+            // ifhaveorganizationcode，批quantityget所haveorganizationrootdepartmentinformation
             if (! empty($orgCodes)) {
-                // 一timeproperty批quantityget所haveorganization的rootdepartmentinformation
+                // 一timeproperty批quantityget所haveorganizationrootdepartmentinformation
                 $rootDepartments = $this->delightfulDepartmentDomainService->getOrganizationsRootDepartment($orgCodes);
 
                 // 填充loginresponseinformation

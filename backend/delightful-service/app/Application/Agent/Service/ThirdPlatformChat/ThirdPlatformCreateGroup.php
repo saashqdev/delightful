@@ -12,16 +12,16 @@ class ThirdPlatformCreateGroup
     // 群名
     private string $name;
 
-    // 群主的userid
+    // 群主userid
     private string $owner;
 
     // memberlist
     private array $useridlist = [];
 
-    // 新memberwhether可viewhistorymessage：1（default）：可view，0：not可view
+    // 新memberwhethercanviewhistorymessage：1（default）：canview，0：notcanview
     private int $showHistoryType = 1;
 
-    // whether可searchgroup chat, 0（default）：not可search 1：可search
+    // whethercansearchgroup chat, 0（default）：notcansearch 1：cansearch
     private int $searchable = 0;
 
     // 入群whetherneedverify：0（default）：notverify 1：入群verify
@@ -30,7 +30,7 @@ class ThirdPlatformCreateGroup
     // @all userange： 0（default）：所havepersonallcan@all
     private int $mentionAllAuthority = 0;
 
-    // 群管理type：0（default）：所haveperson可管理，1：仅群主可管理
+    // 群管理type：0（default）：所havepersoncan管理，1：仅群主can管理
     private int $managementType = 0;
 
     // whetherstart群禁言：0（default）：not禁言，1：all员禁言

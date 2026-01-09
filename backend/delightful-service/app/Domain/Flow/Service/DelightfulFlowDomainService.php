@@ -151,19 +151,19 @@ class DelightfulFlowDomainService extends AbstractDomainService
      */
     public function changeEnable(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow, ?bool $enable = null): void
     {
-        // if传入了明确的statusvalue，then直接set
+        // if传入明确statusvalue，then直接set
         if ($enable !== null) {
-            // ifcurrentstatus与要set的statussame，then无需操作
+            // ifcurrentstatusand要setstatussame，then无需操as
             if ($delightfulFlow->isEnabled() === $enable) {
                 return;
             }
             $delightfulFlow->setEnabled($enable);
         } else {
-            // 否then保持原have的自动切换逻辑
+            // 否then保持原havefrom动切换逻辑
             $delightfulFlow->prepareForChangeEnable();
         }
 
-        // ifenablestatus为true，needconductverify
+        // ifenablestatusfortrue，needconductverify
         if ($delightfulFlow->isEnabled() && empty($delightfulFlow->getNodes())) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.cannot_enable_empty_nodes');
         }
@@ -176,7 +176,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
      */
     public function createRoutine(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow): void
     {
-        // getstartsectionpoint的scheduleconfiguration
+        // getstartsectionpointscheduleconfiguration
         /** @var null|StartNodeParamsConfig $startNodeParamsConfig */
         $startNodeParamsConfig = $delightfulFlow->getStartNode()?->getNodeParamsConfig();
         if (! $startNodeParamsConfig) {
@@ -185,7 +185,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
         $startNodeParamsConfig->validate();
         $routineConfigs = $startNodeParamsConfig->getRoutineConfigs();
 
-        // useprocess的 code 作为outside部 id
+        // useprocess code asforoutside部 id
         $externalId = $delightfulFlow->getCode();
         $retryTimes = 2;
         $callbackMethod = [DelightfulFlowExecuteAppService::class, 'routine'];
@@ -193,14 +193,14 @@ class DelightfulFlowDomainService extends AbstractDomainService
             'flowCode' => $delightfulFlow->getCode(),
         ];
 
-        // 先cleanup一downhistoryscheduletask和调degreerule
+        // 先cleanup一downhistoryscheduletaskand调degreerule
         $this->taskSchedulerDomainService->clearByExternalId($externalId);
 
         foreach ($routineConfigs as $branchId => $routineConfig) {
             try {
                 $routineConfig->validate();
             } catch (Throwable $throwable) {
-                simple_logger('CreateRoutine')->notice('invalid的schedulerule', [
+                simple_logger('CreateRoutine')->notice('invalidschedulerule', [
                     'flowCode' => $delightfulFlow->getCode(),
                     'branchId' => $branchId,
                     'routineConfig' => $routineConfig->toConfigArray(),
@@ -210,7 +210,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
 
             $callbackParams['branchId'] = $branchId;
             $callbackParams['routineConfig'] = $routineConfig->toConfigArray();
-            // if是not重复的，那么是直接create调degreetask
+            // ifisnot重复，那么is直接create调degreetask
             if ($routineConfig->getType() === RoutineType::NoRepeat) {
                 $taskScheduler = new TaskScheduler();
                 $taskScheduler->setExternalId($externalId);

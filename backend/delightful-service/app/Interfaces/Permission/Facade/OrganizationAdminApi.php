@@ -76,7 +76,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
 
         $organizationAdmin = $this->organizationAdminAppService->grant($dataIsolation, $userId, $grantorUserId, $remarks);
 
-        // getcontainuserinformation的完整data
+        // getcontainuserinformation完整data
         $organizationAdminData = $this->organizationAdminAppService->show($dataIsolation, $organizationAdmin->getId());
 
         return OrganizationAdminAssembler::assembleWithUserInfo($organizationAdminData)->toArray();
@@ -96,7 +96,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     }
 
     /**
-     * 转让organizationcreateperson身share.
+     * 转letorganizationcreateperson身share.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::EDIT)]
     public function transferOwner(): array
@@ -107,7 +107,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
 
         $newOwnerUserId = $this->request->input('user_id');
         if (empty($newOwnerUserId)) {
-            throw new InvalidArgumentException('neworganizationcreatepersonuserIDcannot为null');
+            throw new InvalidArgumentException('neworganizationcreatepersonuserIDcannotfornull');
         }
 
         $this->organizationAdminAppService->transferOwnership(

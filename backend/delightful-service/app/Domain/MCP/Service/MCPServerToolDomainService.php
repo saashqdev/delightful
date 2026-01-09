@@ -103,7 +103,7 @@ class MCPServerToolDomainService
     }
 
     /**
-     * according toID和mcpServerCode联合querytool.
+     * according toIDandmcpServerCode联合querytool.
      */
     public function getByIdAndMcpServerCode(MCPDataIsolation $dataIsolation, int $id, string $mcpServerCode): ?MCPServerToolEntity
     {

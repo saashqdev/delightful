@@ -20,7 +20,7 @@ use Throwable;
 
 /**
  * 同modeltoOfficialservice商listen器.
- * listenservice商configurationcreate/updateevent，fromoutside部APIpullmodel并同toOfficialservice商.
+ * listenservice商configurationcreate/updateevent，fromoutside部APIpullmodeland同toOfficialservice商.
  */
 #[AsyncListener]
 #[Listener]
@@ -65,7 +65,7 @@ class SyncModelsToOfficialListener implements ListenerInterface
 
     /**
      * processservice商configurationcreateorupdateevent.
-     * if是Officialservice商and是官方organization，thenfromoutside部APIpullmodel并同.
+     * ifisOfficialservice商andis官方organization，thenfromoutside部APIpullmodeland同.
      */
     private function handleProviderConfig(
         ProviderConfigCreatedEvent|ProviderConfigUpdatedEvent $event,

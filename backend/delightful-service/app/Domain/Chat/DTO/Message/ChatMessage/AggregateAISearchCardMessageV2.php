@@ -19,7 +19,7 @@ use App\Domain\Chat\Entity\ValueObject\AggregateSearch\SearchDeepLevel;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * aggregateAIsearch的responsecardmessage.
+ * aggregateAIsearchresponsecardmessage.
  */
 class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implements TextContentInterface, StreamMessageInterface
 {
@@ -28,7 +28,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     public const string NULL_PARENT_ID = '0';
 
     /**
-     * associate_questions的 key的front缀，避免自动将string 0 转 int 0.
+     * associate_questions keyfront缀，避免from动willstring 0 转 int 0.
      */
     public const string QUESTION_DELIMITER = 'question_';
 
@@ -36,28 +36,28 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected SearchDeepLevel $searchDeepLevel;
 
     /**
-     * 子issue的associateissue。supportassociateissueagain产生子issue，but是willbe拍平become二维array。
+     * 子issueassociateissue。supportassociateissueagain产生子issue，butiswillbe拍平become二维array。
      * @var array<string,QuestionItem[]>
-     * @example according touserinput的issue，generateassociateissue。
+     * @example according touserinputissue，generateassociateissue。
      */
     protected ?array $associateQuestions;
 
     /**
-     * （所have子issue的）searchwebpagelist.
+     * （所have子issue）searchwebpagelist.
      *
      * @var QuestionSearchResult[]
      */
     protected array $searchWebPages;
 
     /**
-     * 由at多time子issuesearcho clock，will出现多重复的searchresult，所byneed ai 去重back，again丢给大model总结。
+     * byat多time子issuesearcho clock，willout现多重复searchresult，所byneed ai go重back，again丢give大model总结。
      *
      * @var SearchDetailItem[]
      */
     protected array $noRepeatSearchDetails;
 
     /**
-     * 总结,minute为思考procedure和总结两部minute.
+     * 总结,minutefor思考procedureand总结两部minute.
      */
     protected SummaryItem $summary;
 
@@ -67,19 +67,19 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected array $events;
 
     /**
-     * @var string 思维导graph。markdown format的string
+     * @var string 思维导graph。markdown formatstring
      */
     protected string $mindMap;
 
     /**
-     * @var string ppt。markdown format的string
+     * @var string ppt。markdown formatstring
      */
     protected string $ppt;
 
     /**
-     * get本timeneedstreampush的field。
-     * support一timepush多field的streammessage，if json layerlevelmore深，use field_1.*.field_2 作为 key。 其middle * 是fingerarray的down标。
-     * service端willcache所havestream的data，并instreamendo clock一timepropertypush，bydecrease丢package的概rate，提升message完整property。
+     * get本timeneedstreampushfield。
+     * support一timepush多fieldstreammessage，if json layerlevelmore深，use field_1.*.field_2 asfor key。 其middle * isfingerarraydown标。
+     * service端willcache所havestreamdata，andinstreamendo clock一timepropertypush，bydecrease丢package概rate，提升message完整property。
      * for example：
      * [
      *     'users.0.name' => 'delightful',
@@ -120,7 +120,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
         //            {
         //                "parent_question_id": "1",
         //                "question_id": "3",
-        //                "question": "百degree是干嘛的"
+        //                "question": "百degreeis干嘛"
         //            }
         //        ]
         //    }
@@ -128,14 +128,14 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
 
         foreach ($associateQuestions as $key => $data) {
             if (str_contains((string) $key, self::QUESTION_DELIMITER) && is_array($data)) {
-                // $data是 questionItem 的array
+                // $datais questionItem array
                 foreach ($data as $item) {
                     $questionItem = $item instanceof QuestionItem ? $item : new QuestionItem($item);
                     $itemKey = self::QUESTION_DELIMITER . $questionItem->getParentQuestionId();
                     $this->associateQuestions[$itemKey][] = $questionItem;
                 }
             } else {
-                // 单QuestionItem的情况
+                // 单QuestionItem情况
                 $questionItem = $data instanceof QuestionItem ? $data : new QuestionItem($data);
                 $itemKey = self::QUESTION_DELIMITER . $questionItem->getParentQuestionId();
                 $this->associateQuestions[$itemKey][] = $questionItem;

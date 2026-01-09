@@ -47,7 +47,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
 
-        // default是create
+        // defaultiscreate
         $operation = Operation::Owner;
         if (! $savingDelightfulFLowToolSetEntity->shouldCreate()) {
             // modifyneedcheckpermission
@@ -75,7 +75,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = PermissionDataIsolation::create($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
 
-        // 仅query目frontuser具havepermission的tool集
+        // 仅query目frontuser具havepermissiontool集
         $resources = $this->operationPermissionAppService->getResourceOperationByUserIds(
             $permissionDataIsolation,
             ResourceType::ToolSet,
@@ -83,7 +83,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         )[$authorization->getId()] ?? [];
         $resourceIds = array_keys($resources);
 
-        // 其实nottoo适合的 whereIn 暂o clocknot想to其他好way
+        // 其实nottoo适合 whereIn 暂o clocknot想to其他好way
         $query->setCodes($resourceIds);
 
         $data = $this->delightfulFlowToolSetDomainService->queries($dataIsolation, $query, $page);
@@ -91,7 +91,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         foreach ($data['list'] ?? [] as $item) {
             $filePaths[] = $item->getIcon();
             if ($item->getCode() === ConstValue::TOOL_SET_DEFAULT_CODE) {
-                // 未minutegroup的直接minute配administratorpermission
+                // 未minutegroup直接minute配administratorpermission
                 $item->setUserOperation(Operation::Admin->value);
             } else {
                 $operation = $resources[$item->getCode()] ?? Operation::None;

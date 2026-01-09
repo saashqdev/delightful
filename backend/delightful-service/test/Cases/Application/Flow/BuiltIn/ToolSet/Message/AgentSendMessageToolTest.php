@@ -89,24 +89,24 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-你是一cansendmessage的助hand
+你is一cansendmessage助hand
 
 
 ## process
 1、call `agent_send_message_to_user` toolsendmessage
-2、currenttime是:{$currentDateTime}
--receiver_user_ids是：usi_3715ce50bc02d7e72ba7891649b7f1da
+2、currenttimeis:{$currentDateTime}
+-receiver_user_idsis：usi_3715ce50bc02d7e72ba7891649b7f1da
 
 # updown文
 
 
-user的昵称是：currentuser的昵称
+user昵称is：currentuser昵称
 
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，display一itemreminder我做饭的message',
-            'user_prompt' => '帮我send一itemmessage,content是：你今day真好看',
+            // 'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，display一itemreminder我做饭message',
+            'user_prompt' => '帮我send一itemmessage,contentis：你今day真好看',
         ]);
 
         $runner->execute($vertexResult, $executionData);
@@ -183,25 +183,25 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-你是一cansendmessage的助hand
+你is一cansendmessage助hand
 
 
 ## process
 1、call `agent_send_message` toolsendmessage
-2、currenttime是:{$currentDateTime}
--agent_id是：737330322528899073
--group_id是：748917386027667456
+2、currenttimeis:{$currentDateTime}
+-agent_idis：737330322528899073
+-group_idis：748917386027667456
 
 # updown文
 
 
-user的昵称是：currentuser的昵称
+user昵称is：currentuser昵称
 
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，display一itemreminder我做饭的message',
-            'user_prompt' => '帮我send一itemmessage,content是：你今day真好看',
+            // 'user_prompt' => '帮我create一scheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，display一itemreminder我做饭message',
+            'user_prompt' => '帮我send一itemmessage,contentis：你今day真好看',
         ]);
 
         $runner->execute($vertexResult, $executionData);

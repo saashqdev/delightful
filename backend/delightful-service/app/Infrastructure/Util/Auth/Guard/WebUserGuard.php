@@ -58,7 +58,7 @@ class WebUserGuard extends AbstractAuthGuard
         }
 
         try {
-            // downsurface这segmentactualcallis DelightfulUserAuthorization 的 retrieveById method
+            // downsurface这segmentactualcallis DelightfulUserAuthorization  retrieveById method
             /** @var null|DelightfulUserAuthorization $user */
             $user = $this->userProvider->retrieveByCredentials([
                 'authorization' => $authorization,

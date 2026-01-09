@@ -23,7 +23,7 @@ class RequestIdMiddleware implements MiddlewareInterface
             CoContext::setRequestId($requestId);
         }
 
-        // processheader的Delightful-User-Id 存in["usi_8","xxxxxxxxx"]issue，merge为"usi_8xxxxxxxxx"
+        // processheaderDelightful-User-Id 存in["usi_8","xxxxxxxxx"]issue，mergefor"usi_8xxxxxxxxx"
         $delightfulUserId = $request->getHeader('delightful-user-id');
         if ($delightfulUserId && count($delightfulUserId) > 1) {
             $delightfulUserId = implode('', $delightfulUserId);

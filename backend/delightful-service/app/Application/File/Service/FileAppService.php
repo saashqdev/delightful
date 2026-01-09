@@ -44,7 +44,7 @@ class FileAppService extends AbstractAppService
             $contentType,
             $sts
         );
-        // if是本ground驱动，那么increase一temporary key
+        // ifis本ground驱动，那么increase一temporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $this->cache->set(
@@ -135,7 +135,7 @@ class FileAppService extends AbstractAppService
             $keysByOrg[$keyOrganizationCode][] = $key;
         }
 
-        // 批quantitygeteachorganization的filelink
+        // 批quantitygeteachorganizationfilelink
         $allFileLinks = [];
         foreach ($keysByOrg as $orgCode => $orgKeys) {
             $links = $this->fileDomainService->getLinks($orgCode, $orgKeys);
@@ -197,7 +197,7 @@ class FileAppService extends AbstractAppService
             return false;
         }
 
-        // checkwhether为defaultfile
+        // checkwhetherfordefaultfile
         if ($fileEntity->getFileType() === DefaultFileType::DEFAULT->value) {
             return false;
         }
@@ -222,7 +222,7 @@ class FileAppService extends AbstractAppService
             $autoBucket,
         );
 
-        // if是本ground驱动，那么increase一temporary key
+        // ifis本ground驱动，那么increase一temporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $data['temporary_credential']['dir'] = $organizationCode . '/' . $data['temporary_credential']['dir'];
@@ -249,7 +249,7 @@ class FileAppService extends AbstractAppService
             $autoBucket,
         );
 
-        // if是本ground驱动，那么increase一temporary key
+        // ifis本ground驱动，那么increase一temporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $data['temporary_credential']['dir'] = $organizationCode . '/' . $data['temporary_credential']['dir'];

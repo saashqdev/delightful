@@ -27,12 +27,12 @@ class Dag implements Runner
     public const int NON_WAITING_MODE = 2;
 
     /**
-     * 并hair运line.
+     * andhair运line.
      */
     public const int CONCURRENCY_RUNNING_MODE = 1;
 
     /**
-     * non并hair运line.
+     * nonandhair运line.
      */
     public const int NON_CONCURRENCY_RUNNING_MODE = 2;
 

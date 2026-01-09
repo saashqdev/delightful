@@ -16,7 +16,7 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 class NoAuthentication implements AuthenticationInterface
 {
     /**
-     * verifyrequest的身shareinformation.
+     * verifyrequest身shareinformation.
      * in此implementmiddle，始终allow所haverequestpass.
      */
     public function authenticate(MessageInterface $request): void

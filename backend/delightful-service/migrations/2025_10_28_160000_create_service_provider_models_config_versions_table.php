@@ -44,7 +44,7 @@ return new class extends Migration {
             $table->decimal('cache_hit_cost', 10, 4)->nullable()->comment('cache命middlecost');
             $table->decimal('cache_write_cost', 10, 4)->nullable()->comment('cachewritecost');
             $table->integer('version')->default(1)->comment('versionnumber');
-            $table->boolean('is_current_version')->default(true)->comment('whethercurrentversion：1-是，0-否');
+            $table->boolean('is_current_version')->default(true)->comment('whethercurrentversion：1-is，0-否');
             $table->timestamps();
 
             $table->index(['service_provider_model_id', 'is_current_version'], 'idx_model_id_is_current');

@@ -276,7 +276,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * test并line调degreesectionpoint - Test parallel node scheduling with coroutine ID tracking.
+     * testandline调degreesectionpoint - Test parallel node scheduling with coroutine ID tracking.
      */
     public function test1(): void
     {
@@ -326,7 +326,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因为vertex2的executetimeratiovertex3长，所byvertex3will先execute，先outputresult
+        // 因forvertex2executetimeratiovertex3长，所byvertex3will先execute，先outputresult
         $this->assertEquals(['vertex1', 'vertex3', 'vertex2'], array_keys($result));
 
         // Verify concurrent execution - vertex2 and vertex3 should run in different coroutines
@@ -380,7 +380,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因为vertex3的executetimeratiovertex2长，所byvertex2will先execute，先outputresult
+        // 因forvertex3executetimeratiovertex2长，所byvertex2will先execute，先outputresult
         $this->assertEquals(['vertex1', 'vertex2', 'vertex3'], array_keys($result));
 
         // Verify concurrent execution again
@@ -466,7 +466,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * test并hair调degreeandetc待父sectionpointcomplete.
+     * testandhair调degreeandetc待父sectionpointcomplete.
      * root -> vertex2
      * root -> vertex3
      * vertex2 -> vertex5
@@ -527,12 +527,12 @@ class DagTest extends BaseTest
     }
 
     /**
-     * test并hair+itemitem调degreesectionpoint.
+     * testandhair+itemitem调degreesectionpoint.
      * root -> vertex2
      * root -> vertex3
      * vertex2 -> vertex5
      * vertex3 -> vertex4
-     * vertex4 -> vertex5 （but是not调degree）.
+     * vertex4 -> vertex5 （butisnot调degree）.
      */
     public function test4(): void
     {
@@ -588,7 +588,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testnon并hair模type.
+     * testnonandhair模type.
      * vertex1 -> vertex2
      * vertex1 -> vertex3
      * vertex2 -> vertex4
@@ -667,7 +667,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testnon并hair模type.
+     * testnonandhair模type.
      * vertex1 -> vertex2
      * vertex2 -> vertex3.
      */
@@ -717,7 +717,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * testnon并hair模type.
+     * testnonandhair模type.
      * vertex1 -> vertex2（not调degree）
      * vertex1 -> vertex3（调degree）.
      * vertex1 -> vertex4（not调degree）.
@@ -778,7 +778,7 @@ class DagTest extends BaseTest
     }
 
     /**
-     * test并line调degreesectionpoint.
+     * testandline调degreesectionpoint.
      */
     public function test8(): void
     {
@@ -839,7 +839,7 @@ class DagTest extends BaseTest
         $result = $dag->run();
         $this->assertNotEmpty($result);
 
-        // 因为vertex2的executetimeratiovertex3长，所byvertex3will先execute，先outputresult
+        // 因forvertex2executetimeratiovertex3长，所byvertex3will先execute，先outputresult
         $this->assertEquals(['vertex1', 'vertex3', 'vertex5', 'vertex2', 'vertex4', 'vertex6'], array_keys($result));
     }
 

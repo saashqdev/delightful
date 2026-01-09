@@ -41,7 +41,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'useuserissue和keyword，去检索knowledge basemiddle的content，return与userissuesimilardegreemost高的content。';
+        return 'useuserissueandkeyword，go检索knowledge basemiddlecontent，returnanduserissuesimilardegreemost高content。';
     }
 
     public function getAppendSystemPrompt(array $customParams = []): string
@@ -56,27 +56,27 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
             $knowledgePrompt .= "- {$knowledge->getName()}：{$knowledge->getDescription()}\n";
         }
         return <<<MARKDOWN
-# allowbeuse的能力: knowledge base检索
+# allowbeuse能力: knowledge base检索
 ## knowledge basecolumn表
 > knowledge basename：knowledge basedescription
 {$knowledgePrompt}
 ## process
-1. 结合updown文提炼user的issue，generate多keyword，at mostnot超过 5 ，多keyworduseEnglish逗number"," 隔开，useatusedifferentkeywordfromknowledge basemiddle检索most相关的info；
-2. 结合updown文，analyzeuser的issue，generate `names` parameter，useatfinger定与userissue可能have关的多knowledge basename，按照相关propertysort，相关property需结合updown文、knowledge basename和knowledge basedescriptionconduct判断；
-3. usekeyword和userissue，call `{$this->getName()}` tool检索knowledge basemiddle的content，keyword的parameter是 `keyword`，userissue的parameter是 `question`, 请ensureparameterallbecorrect填入，tool将return与userissuesimilardegreemost高的contentslicesegment；
-4. knowledge base检索出来的contentwithinwillcontain一些customize的 Delightful tag，你要善atuse它们，havebydown几typetag：
-    - <DelightfulImage></DelightfulImage> 表示一image，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，eachtagallwillinfront端messagecard渲染出一张image；
-    - <DelightfulVideo></DelightfulVideo> 表示一video，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，eachtagallwillinfront端messagecard渲染出一video；
-    - <DelightfulMention></DelightfulMention> 表示一person员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，eachtagallwillinfront端messagecardshapebecome一 @somesomeperson 的effect；
-5. 优先usecontain <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> etchave Delightful tag的slicesegment；
-6. 结合knowledge basereturn的content整理back尽可能丰富ground回答user的issue。
-## toolmiddle关键的returnvalueinstruction
-- fragments: 本time检索to的所haveknowledge baseslicesegment
+1. 结合updown文提炼userissue，generate多keyword，at mostnot超pass 5 ，多keyworduseEnglish逗number"," 隔open，useatusedifferentkeywordfromknowledge basemiddle检索most相closeinfo；
+2. 结合updown文，analyzeuserissue，generate `names` parameter，useatfinger定anduserissuemaybehaveclose多knowledge basename，按照相closepropertysort，相closeproperty需结合updown文、knowledge basenameandknowledge basedescriptionconduct判断；
+3. usekeywordanduserissue，call `{$this->getName()}` tool检索knowledge basemiddlecontent，keywordparameteris `keyword`，userissueparameteris `question`, 请ensureparameterallbecorrect填入，toolwillreturnanduserissuesimilardegreemost高contentslicesegment；
+4. knowledge base检索outcomecontentwithinwillcontain一些customize Delightful tag，你要善atuse它们，havebydown几typetag：
+    - <DelightfulImage></DelightfulImage> 表示一image，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，eachtagallwillinfront端messagecard渲染out一张image；
+    - <DelightfulVideo></DelightfulVideo> 表示一video，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，eachtagallwillinfront端messagecard渲染out一video；
+    - <DelightfulMention></DelightfulMention> 表示一person员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，eachtagallwillinfront端messagecardshapebecome一 @somesomeperson effect；
+5. 优先usecontain <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> etchave Delightful tagslicesegment；
+6. 结合knowledge basereturncontent整理back尽maybe丰富groundreturn答userissue。
+## toolmiddleclose键returnvalueinstruction
+- fragments: 本time检索to所haveknowledge baseslicesegment
 - fragments.*.content: slicesegmentcontent
-- fragments.*.metadata.url: currentslicesegment的原文link
-- graph.*.content: 来自知识graph谱的data，能enhanceinfo，让你more好回答issue
+- fragments.*.metadata.url: currentslicesegment原文link
+- graph.*.content: comefrom知识graph谱data，能enhanceinfo，let你more好return答issue
 ## 限制
-- 回答的contentmiddlenotallow出现not是Delightfultag的link。
+- return答contentmiddlenotallowout现notisDelightfultaglink。
 MARKDOWN;
     }
 
@@ -184,8 +184,8 @@ MARKDOWN;
             "type": "string",
             "key": "question",
             "sort": 0,
-            "title": "user的originalissue",
-            "description": "user的originalissue",
+            "title": "useroriginalissue",
+            "description": "useroriginalissue",
             "required": null,
             "value": null,
             "encryption": false,
@@ -198,7 +198,7 @@ MARKDOWN;
             "key": "names",
             "sort": 1,
             "title": "knowledge base names",
-            "description": "needbe检索的knowledge basename",
+            "description": "needbe检索knowledge basename",
             "required": null,
             "value": null,
             "encryption": false,
@@ -248,7 +248,7 @@ JSON,
             "type": "string",
             "key": "content",
             "sort": 0,
-            "title": "检索to的所havecontent",
+            "title": "检索to所havecontent",
             "description": "",
             "required": null,
             "value": null,
@@ -337,7 +337,7 @@ JSON,
          "limit": {
             "type": "number",
             "key": "limit",
-            "title": "most大召回quantity",
+            "title": "most大召returnquantity",
             "description": "",
             "required": null,
             "value": null,

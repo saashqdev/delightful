@@ -24,7 +24,7 @@ use Throwable;
 class DelightfulMessageTest extends BaseTest
 {
     /**
-     * testai往群withinhairmessage.
+     * testaito群withinhairmessage.
      * @throws Throwable
      */
     public function testAgentSendMessage()
@@ -43,7 +43,7 @@ class DelightfulMessageTest extends BaseTest
     }
 
     /**
-     * test模拟user给agent hairmessage.
+     * test模拟usergiveagent hairmessage.
      * @throws Throwable
      */
     public function testUserSendMessageToAgent()
@@ -70,8 +70,8 @@ class DelightfulMessageTest extends BaseTest
         $receiveUserId = 'usi_7839078ce6af2d3249b82e7aaed643b8';
         $aiUserId = 'usi_8e4bde5582491a6cabfe0d0ba8b7ae8e';
         $chatAppService = di(DelightfulChatMessageAppService::class);
-        // 将多segmentstreammessage，pass此 id associate起来
-        // ai searchcardmessage的多segmentresponse，已经将 app_message_id 作为associate id，streamresponseneed另outside的 id 来做associate
+        // will多segmentstreammessage，pass此 id associateupcome
+        // ai searchcardmessage多segmentresponse，已经will app_message_id asforassociate id，streamresponseneed另outside id come做associate
         $appMessageId = IdGenerator::getUniqueId32();
         $streamOptions = (new StreamOptions())->setStream(true)->setStreamAppMessageId($appMessageId)->setStatus(StreamMessageStatus::Start);
         $messageContent = new TextMessage();

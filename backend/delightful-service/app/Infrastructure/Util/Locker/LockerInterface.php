@@ -11,22 +11,22 @@ interface LockerInterface
 {
     /**
      * get互斥lock
-     * @param string $name lock的name，finger定lock的name
-     * @param string $owner lock的所have者，finger定lock的唯一标识，判断errorrelease
+     * @param string $name lockname，finger定lockname
+     * @param string $owner lock所have者，finger定lock唯一标识，判断errorrelease
      * @param int $expire expiretime，second
      */
     public function mutexLock(string $name, string $owner, int $expire = 180): bool;
 
     /**
-     * 自旋lock
+     * from旋lock
      * @param int $expire expiretime，unit:second
      */
     public function spinLock(string $name, string $owner, int $expire = 10): bool;
 
     /**
      * releaselock
-     * @param string $name lock的name，finger定lock的name
-     * @param string $owner lock的所have者，finger定lock的唯一标识，判断errorrelease
+     * @param string $name lockname，finger定lockname
+     * @param string $owner lock所have者，finger定lock唯一标识，判断errorrelease
      */
     public function release(string $name, string $owner): bool;
 }

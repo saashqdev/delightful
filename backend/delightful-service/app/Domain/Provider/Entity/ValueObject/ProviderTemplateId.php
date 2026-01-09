@@ -9,47 +9,47 @@ namespace App\Domain\Provider\Entity\ValueObject;
 
 /**
  * service商templateID枚举
- * 将ProviderCode和Category的group合mapping为fixed的数value型string.
+ * willProviderCodeandCategorygroup合mappingforfixed数value型string.
  */
 enum ProviderTemplateId: string
 {
-    // Official 相关
+    // Official 相close
     case OfficialLlm = '0';
     case OfficialVlm = '1';
 
-    // Volcengine 相关
+    // Volcengine 相close
     case VolcengineLlm = '2';
     case VolcengineVlm = '3';
 
-    // OpenAI 相关
+    // OpenAI 相close
     case OpenAILlm = '4';
     case OpenAIVlm = '5';
 
-    // MicrosoftAzure 相关
+    // MicrosoftAzure 相close
     case MicrosoftAzureLlm = '6';
     case MicrosoftAzureVlm = '7';
 
-    // Qwen 相关
+    // Qwen 相close
     case QwenLlm = '8';
     case QwenVlm = '9';
 
-    // DeepSeek 相关
+    // DeepSeek 相close
     case DeepSeekLlm = '10';
     case DeepSeekVlm = '11';
 
-    // Tencent 相关
+    // Tencent 相close
     case TencentLlm = '12';
     case TencentVlm = '13';
 
-    // TTAPI 相关
+    // TTAPI 相close
     case TTAPILlm = '14';
     case TTAPIVlm = '15';
 
-    // MiracleVision 相关
+    // MiracleVision 相close
     case MiracleVisionLlm = '16';
     case MiracleVisionVlm = '17';
 
-    // AWSBedrock 相关
+    // AWSBedrock 相close
     case AWSBedrockLlm = '18';
     case AWSBedrockVlm = '19';
     case GoogleVlm = '20';
@@ -57,7 +57,7 @@ enum ProviderTemplateId: string
     case Gemini = '22';
 
     /**
-     * according toProviderCode和Categoryget对应的templateID.
+     * according toProviderCodeandCategorygetto应templateID.
      */
     public static function fromProviderCodeAndCategory(ProviderCode $providerCode, Category $category): ?self
     {
@@ -90,7 +90,7 @@ enum ProviderTemplateId: string
     }
 
     /**
-     * parsetemplateID，return对应的ProviderCode和Category.
+     * parsetemplateID，returnto应ProviderCodeandCategory.
      *
      * @return array{providerCode: ProviderCode, category: Category}
      */
@@ -124,7 +124,7 @@ enum ProviderTemplateId: string
     }
 
     /**
-     * gettemplate的descriptionname.
+     * gettemplatedescriptionname.
      */
     public function getDescription(): string
     {

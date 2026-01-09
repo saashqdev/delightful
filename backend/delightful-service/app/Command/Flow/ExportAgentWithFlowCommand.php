@@ -58,21 +58,21 @@ class ExportAgentWithFlowCommand extends HyperfCommand
 
         $flowCode = $agent->getFlowCode();
         if (empty($flowCode)) {
-            $this->output->error('助理nothaveassociate的process');
+            $this->output->error('助理nothaveassociateprocess');
             return 1;
         }
 
-        // from助理实bodymiddlegetorganizationcode和userID
+        // from助理实bodymiddlegetorganizationcodeanduserID
         $orgCode = $agent->getOrganizationCode();
         $userId = $agent->getCreatedUid();
 
         // createdata隔离object
         $dataIsolation = new FlowDataIsolation($orgCode, $userId);
 
-        // exportprocess及助理info
+        // exportprocessand助理info
         $exportData = $this->exportImportService->exportFlowWithAgent($dataIsolation, $flowCode, $agent);
 
-        // 将datasave为temporaryfile
+        // willdatasavefortemporaryfile
         $filename = "agent-export-{$agentId}-" . time() . '.json';
         $tempFile = tempnam(sys_get_temp_dir(), 'flow_export_');
         file_put_contents($tempFile, json_encode($exportData, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT));
@@ -81,22 +81,22 @@ class ExportAgentWithFlowCommand extends HyperfCommand
         $uploadDir = $orgCode . '/open/' . md5(StorageBucketType::Public->value);
         $uploadFile = new UploadFile($tempFile, $uploadDir, $filename);
 
-        // use已have的fileserviceupload
+        // use已havefileserviceupload
         try {
             // definitionuploaddirectory
             $subDir = 'open';
 
-            // createuploadfileobject（not自动重命名）
+            // createuploadfileobject（notfrom动重命名）
             $uploadFile = new UploadFile($tempFile, $subDir, '', false);
 
-            // uploadfile（finger定not自动createdirectory）
+            // uploadfile（finger定notfrom动createdirectory）
             $this->fileDomainService->uploadByCredential($orgCode, $uploadFile);
 
-            // generate可access的link
+            // generatecanaccesslink
             $fileLink = $this->fileDomainService->getLink($orgCode, $uploadFile->getKey(), StorageBucketType::Private);
 
             if ($fileLink) {
-                // use这typemethodpoint击link是valid的link
+                // use这typemethodpoint击linkisvalidlink
                 return 0;
             }
 

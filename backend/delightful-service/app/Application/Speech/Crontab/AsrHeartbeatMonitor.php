@@ -30,7 +30,7 @@ use Throwable;
     rule: '* * * * *',                    // eachminute钟execute一time
     name: 'AsrHeartbeatMonitor',
     singleton: true,                      // 单例模type防止重复execute
-    mutexExpires: 60,                     // 互斥lockexpiretime（second），对应 AsrConfig::HEARTBEAT_MONITOR_MUTEX_EXPIRES
+    mutexExpires: 60,                     // 互斥lockexpiretime（second），to应 AsrConfig::HEARTBEAT_MONITOR_MUTEX_EXPIRES
     onOneServer: true,                    // 仅in一台service器upexecute
     callback: 'execute',
     memo: 'ASR recording heartbeat monitoring task'
@@ -111,12 +111,12 @@ class AsrHeartbeatMonitor
     private function handleHeartbeatTimeout(string $key): void
     {
         try {
-            // from key middleextract task_key 和 user_id
+            // from key middleextract task_key and user_id
             // Key format：asr:heartbeat:{md5(user_id:task_key)}
             $this->logger->info('检测tocore跳timeout', ['key' => $key]);
 
-            // 由at key 是 MD5 hash，我们无法直接反toget task_key 和 user_id
-            // needfrom Redis middle扫描所have asr:task:* 来find匹配的task
+            // byat key is MD5 hash，我们无法直接反toget task_key and user_id
+            // needfrom Redis middle扫描所have asr:task:* comefind匹配task
             $this->findAndTriggerTimeoutTask($key);
         } catch (Throwable $e) {
             $this->logger->error('processcore跳timeoutfail', [
@@ -127,7 +127,7 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * find并触hairtimeouttask的自动总结.
+     * findand触hairtimeouttaskfrom动总结.
      */
     private function findAndTriggerTimeoutTask(string $heartbeatKey): void
     {
@@ -154,7 +154,7 @@ class AsrHeartbeatMonitor
                 );
 
                 if ($expectedHeartbeatKey === $heartbeatKey) {
-                    // 找to匹配的task，checkwhetherneed触hair自动总结
+                    // 找to匹配task，checkwhetherneed触hairfrom动总结
                     if ($this->shouldTriggerAutoSummary($taskStatus)) {
                         $this->triggerAutoSummary($taskStatus);
                     }
@@ -170,7 +170,7 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * 判断whethershould触hair自动总结.
+     * 判断whethershould触hairfrom动总结.
      */
     private function shouldTriggerAutoSummary(AsrTaskStatusDTO $taskStatus): bool
     {
@@ -184,7 +184,7 @@ class AsrHeartbeatMonitor
             return false;
         }
 
-        // if录音statusnot是 start or recording，not触hair
+        // if录音statusnotis start or recording，not触hair
         if (! in_array($taskStatus->recordingStatus, [
             AsrRecordingStatusEnum::START->value,
             AsrRecordingStatusEnum::RECORDING->value,
@@ -206,7 +206,7 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * 触hair自动总结.
+     * 触hairfrom动总结.
      */
     private function triggerAutoSummary(AsrTaskStatusDTO $taskStatus): void
     {
@@ -221,7 +221,7 @@ class AsrHeartbeatMonitor
                 return;
             }
 
-            $this->logger->info('触haircore跳timeout自动总结', [
+            $this->logger->info('触haircore跳timeoutfrom动总结', [
                 'task_key' => $taskStatus->taskKey,
                 'user_id' => $taskStatus->userId,
                 'project_id' => $taskStatus->projectId,
@@ -237,15 +237,15 @@ class AsrHeartbeatMonitor
             $userAuthorization = DelightfulUserAuthorization::fromUserEntity($userEntity);
             $organizationCode = $taskStatus->organizationCode ?? $userAuthorization->getOrganizationCode();
 
-            // 直接call自动总结method（willinmethodinside部updatestatus）
+            // 直接callfrom动总结method（willinmethodinside部updatestatus）
             $this->asrFileAppService->autoTriggerSummary($taskStatus, $taskStatus->userId, $organizationCode);
 
-            $this->logger->info('core跳timeout自动总结已触hair', [
+            $this->logger->info('core跳timeoutfrom动总结已触hair', [
                 'task_key' => $taskStatus->taskKey,
                 'user_id' => $taskStatus->userId,
             ]);
         } catch (Throwable $e) {
-            $this->logger->error('触hair自动总结fail', [
+            $this->logger->error('触hairfrom动总结fail', [
                 'task_key' => $taskStatus->taskKey,
                 'user_id' => $taskStatus->userId,
                 'error' => $e->getMessage(),

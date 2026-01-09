@@ -16,11 +16,11 @@ use App\Domain\MCP\Entity\ValueObject\ServiceConfig\SSEServiceConfig;
 
 enum ServiceType: string
 {
-    // Mage提供的 mcp service
+    // Mage提供 mcp service
     case SSE = 'sse';
     case STDIO = 'stdio';
 
-    // outside部提供的 mcp service
+    // outside部提供 mcp service
     case ExternalSSE = 'external_sse';
     case ExternalStreamableHttp = 'external_http';
     case ExternalStdio = 'external_stdio';

@@ -70,22 +70,22 @@ readonly class OCRService
             ],
         ]);
 
-        // get远程file的headinfo
+        // get远程fileheadinfo
         $headers = get_headers($url, true, $context);
         if ($headers === false) {
             throw new RuntimeException("无法getheadinfo: {$url}");
         }
 
-        // extract `Last-Modified`、`ETag` 和 `Content-Length`（if存in）
+        // extract `Last-Modified`、`ETag` and `Content-Length`（if存in）
         $lastModified = $headers['Last-Modified'] ?? null;
         $etag = $headers['Etag'] ?? null;
         $contentLength = $headers['Content-Length'] ?? null;
 
-        // checkcachemiddle的 `Last-Modified`、`ETag` 和 `Content-Length`
+        // checkcachemiddle `Last-Modified`、`ETag` and `Content-Length`
         if ($cachedData) {
             $isCacheValid = true;
 
-            // check Last-Modified 和 ETag
+            // check Last-Modified and ETag
             if ($lastModified && $etag) {
                 $isCacheValid = $cachedData['Last-Modified'] === $lastModified && $cachedData['Etag'] === $etag;
             }

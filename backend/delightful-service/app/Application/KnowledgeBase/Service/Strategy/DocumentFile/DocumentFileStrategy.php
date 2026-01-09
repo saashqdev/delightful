@@ -61,7 +61,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 预processdocumentfile，according todocumentfiletype，conductdifferent的process.
+     * 预processdocumentfile，according todocumentfiletype，conductdifferentprocess.
      */
     public function preProcessDocumentFiles(KnowledgeBaseDataIsolation $dataIsolation, array $documentFiles): array
     {
@@ -73,7 +73,7 @@ class DocumentFileStrategy
         }
 
         $result = [];
-        // 对eachminutegroupminute别process
+        // toeachminutegroupminute别process
         foreach ($groupedFiles as $class => $files) {
             $driver = $this->getImplement($files[0]);
             if ($driver) {
@@ -91,7 +91,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 替换contentmiddle的image为 DelightfulCompressibleContent tag.
+     * 替换contentmiddleimagefor DelightfulCompressibleContent tag.
      */
     private function replaceImages(string $content, KnowledgeBaseDataIsolation $dataIsolation, ?string $knowledgeBaseCode = null): string
     {
@@ -99,7 +99,7 @@ class DocumentFileStrategy
         $pattern = '/(!\[.*\]\((.*?)\))/';
         $matches = [];
         preg_match_all($pattern, $content, $matches);
-        $fullMatches = $matches[1] ?? [];  // 完整的markdownimage语法
+        $fullMatches = $matches[1] ?? [];  // 完整markdownimage语法
         $imageUrls = $matches[2] ?? [];  // imageURLorbase64
 
         foreach ($imageUrls as $index => $imageUrl) {
@@ -140,7 +140,7 @@ class DocumentFileStrategy
                     $imagePath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $imageName;
                     rename($tempFile, $imagePath);
 
-                    // createuploadfileobject并upload
+                    // createuploadfileobjectandupload
                     $uploadFile = new UploadFile($imagePath, 'knowledge-base/' . $knowledgeBaseCode, $imageName);
                     $this->fileDomainService->uploadByCredential(
                         $dataIsolation->getCurrentOrganizationCode(),
@@ -208,7 +208,7 @@ class DocumentFileStrategy
             return $driver;
         }
 
-        $this->logger->warning('nothave与[' . get_class($documentFile) . ']匹配的textparsestrategy！将return空value！');
+        $this->logger->warning('nothaveand[' . get_class($documentFile) . ']匹配textparsestrategy！willreturn空value！');
         return null;
     }
 }

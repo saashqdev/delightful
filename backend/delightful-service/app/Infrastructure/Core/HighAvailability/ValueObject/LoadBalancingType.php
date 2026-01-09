@@ -13,7 +13,7 @@ namespace App\Infrastructure\Core\HighAvailability\ValueObject;
 enum LoadBalancingType: int
 {
     /**
-     * 随机strategy - 随机choose一可use的back端service
+     * 随机strategy - 随机choose一canuseback端service
      */
     case RANDOM = 1;
 
@@ -28,12 +28,12 @@ enum LoadBalancingType: int
     case WEIGHTED_ROUND_ROBIN = 3;
 
     /**
-     * hashstrategy - according torequest的hashvaluechooseback端service
+     * hashstrategy - according torequesthashvaluechooseback端service
      */
     case HASH = 4;
 
     /**
-     * get负载均衡type的descriptiontext.
+     * get负载均衡typedescriptiontext.
      *
      * @return string descriptiontext
      */
@@ -58,7 +58,7 @@ enum LoadBalancingType: int
     }
 
     /**
-     * get所have可use的负载均衡type.
+     * get所havecanuse负载均衡type.
      *
      * @return array<LoadBalancingType> 负载均衡typearray
      */

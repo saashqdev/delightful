@@ -38,7 +38,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * exportassistantprocess
-     * 递归exportprocess相关的所havesectionpoint，include子process和toolprocess.
+     * 递归exportprocess相close所havesectionpoint，include子processandtoolprocess.
      */
     public function exportFlow(FlowDataIsolation $dataIsolation, string $flowCode): array
     {
@@ -48,7 +48,7 @@ class DelightfulFlowExportImportAppService
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_found', ['label' => $flowCode]);
         }
 
-        // ensure是主process
+        // ensureis主process
         if (! $mainFlow->getType()->isMain()) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.export.not_main_flow', ['label' => $flowCode]);
         }
@@ -66,11 +66,11 @@ class DelightfulFlowExportImportAppService
             'tool_sets' => [],
         ];
 
-        // 已handle的processencoding，防止重复handle
+        // 已handleprocessencoding，防止重复handle
         $processedFlowCodes = [$flowCode];
         $processedToolSetIds = [];
 
-        // 递归handle主processmiddle的子process和tool
+        // 递归handle主processmiddle子processandtool
         $this->processFlowForExport($dataIsolation, $mainFlow, $exportData, $processedFlowCodes, $processedToolSetIds);
 
         return $exportData;
@@ -78,7 +78,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * importassistantprocess
-     * 遇to重复的toolorprocesswillcreate新实例，并passname区minute.
+     * 遇to重复toolorprocesswillcreate新实例，andpassname区minute.
      */
     public function importFlow(FlowDataIsolation $dataIsolation, array $importData, string $agentId = ''): DelightfulFlowEntity
     {
@@ -88,14 +88,14 @@ class DelightfulFlowExportImportAppService
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.import.missing_main_flow');
         }
 
-        // storage新旧IDmapping关系
+        // storage新旧IDmappingclose系
         $idMapping = [
             'flows' => [], // 老ID => 新ID
             'tool_sets' => [], // 老ID => 新ID
             'nodes' => [], // 老ID => 新ID
         ];
 
-        // import报告，recordcreate、重命名和errorinfo
+        // import报告，recordcreate、重命名anderrorinfo
         $importReport = [
             'created' => [],
             'renamed' => [],
@@ -138,9 +138,9 @@ class DelightfulFlowExportImportAppService
             }
         }
 
-        // 4. mostbackimport主process，并associatetofinger定assistant（if提供了agentId）
+        // 4. mostbackimport主process，andassociatetofinger定assistant（if提供agentId）
         try {
-            // if提供了agentId，settingto主processdatamiddle
+            // if提供agentId，settingto主processdatamiddle
             if (! empty($agentId)) {
                 $mainFlowData['agent_id'] = $agentId;
             }
@@ -152,12 +152,12 @@ class DelightfulFlowExportImportAppService
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.import.main_flow_failed', ['error' => $e->getMessage()]);
         }
 
-        // 5. get并returnimportback的主process实body
+        // 5. getandreturnimportback主process实body
         $mainFlow = $this->delightfulFlowDomainService->getByCode($dataIsolation, $newMainFlowId);
         if (! $mainFlow) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.import.failed', ['label' => $newMainFlowId]);
         }
-        // associateprocess与assistant
+        // associateprocessandassistant
         if (! empty($agentId)) {
             $this->associateFlowWithAgent($dataIsolation, $mainFlow->getCode(), $agentId);
         }
@@ -170,12 +170,12 @@ class DelightfulFlowExportImportAppService
      */
     public function checkCircularDependency(FlowDataIsolation $dataIsolation, string $flowCode, array $visited = []): bool
     {
-        // ifcurrentprocess已inaccesspathmiddle，instructionshapebecome了loop
+        // ifcurrentprocess已inaccesspathmiddle，instructionshapebecomeloop
         if (in_array($flowCode, $visited)) {
             return true; // hair现loopdependency
         }
 
-        // 将currentprocessaddtoaccesspath
+        // willcurrentprocessaddtoaccesspath
         $visited[] = $flowCode;
 
         // getprocess实body
@@ -194,7 +194,7 @@ class DelightfulFlowExportImportAppService
                 }
             }
 
-            // checkLLMsectionpointmiddle的toolquote
+            // checkLLMsectionpointmiddletoolquote
             if ($node->getNodeType() === NodeType::LLM->value || $node->getNodeType() === NodeType::Tool->value) {
                 $params = $node->getParams();
                 if (isset($params['option_tools']) && is_array($params['option_tools'])) {
@@ -215,8 +215,8 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * exportprocess和assistantinfo
-     * containprocess的所havedataby及assistant的基本info.
+     * exportprocessandassistantinfo
+     * containprocess所havedatabyandassistant基本info.
      */
     public function exportFlowWithAgent(FlowDataIsolation $dataIsolation, string $flowCode, DelightfulAgentEntity $agent): array
     {
@@ -243,8 +243,8 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * importprocess和assistantinfo
-     * fromexport的datamiddlecreatenewprocess和assistant，并建立associate.
+     * importprocessandassistantinfo
+     * fromexportdatamiddlecreatenewprocessandassistant，and建立associate.
      */
     public function importFlowWithAgent(FlowDataIsolation $dataIsolation, array $importData): array
     {
@@ -258,12 +258,12 @@ class DelightfulFlowExportImportAppService
         // 1. 先importprocess
         $mainFlow = $this->importFlow($dataIsolation, $flowData);
 
-        // 2. createnewassistant并associateprocess
+        // 2. createnewassistantandassociateprocess
         $agentDomainService = di(DelightfulAgentDomainService::class);
 
         $agentEntity = new DelightfulAgentEntity();
         $agentEntity->setId('');
-        $agentEntity->setAgentName($agentData['name'] ?? ('import的assistant_' . date('YmdHis')));
+        $agentEntity->setAgentName($agentData['name'] ?? ('importassistant_' . date('YmdHis')));
         $agentEntity->setAgentDescription($agentData['description'] ?? '');
         $agentEntity->setAgentAvatar($agentData['avatar'] ?? '');
         $agentEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
@@ -293,11 +293,11 @@ class DelightfulFlowExportImportAppService
 
     /**
      * import单process
-     * generate新ID并checkname重复.
+     * generate新IDandcheckname重复.
      */
     private function importSingleFlow(FlowDataIsolation $dataIsolation, array $flowData, array &$idMapping, array &$importReport): string
     {
-        // recordoriginalname和ID
+        // recordoriginalnameandID
         $originalName = $flowData['name'] ?? '';
         $originalCode = $flowData['code'] ?? '';
 
@@ -309,7 +309,7 @@ class DelightfulFlowExportImportAppService
         $newName = $this->generateUniqueName($dataIsolation, $originalName, $flowType);
         if ($newName !== $originalName) {
             $flowData['name'] = $newName;
-            $importReport['renamed'][] = "process '{$originalName}' 重命名为 '{$newName}'";
+            $importReport['renamed'][] = "process '{$originalName}' 重命名for '{$newName}'";
         }
 
         // updatesectionpointIDmapping
@@ -322,15 +322,15 @@ class DelightfulFlowExportImportAppService
             $flowData['tool_set_id'] = $newToolSetId;
         }
 
-        // updateprocesssectionpointmiddle的quote关系
+        // updateprocesssectionpointmiddlequoteclose系
         $this->updateFlowReferences($flowData, $idMapping);
 
         // updateorganizationinfo
         $flowData['organization_code'] = $dataIsolation->getCurrentOrganizationCode();
 
-        // 保留agentIdfield，if存in的话
+        // 保留agentIdfield，if存in话
         $agentId = $flowData['agent_id'] ?? '';
-        // createprocess实body并save
+        // createprocess实bodyandsave
         $flowEntity = DelightfulFlowFactory::arrayToEntity($flowData);
         $flowEntity->setCreator($dataIsolation->getCurrentUserId());
         $flowEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
@@ -340,8 +340,8 @@ class DelightfulFlowExportImportAppService
             $flowEntity->setAgentId($agentId);
         }
 
-        // ensuresetting为新建process
-        $flowEntity->setId(0); // settingID为0表示新建
+        // ensuresettingfor新建process
+        $flowEntity->setId(0); // settingIDfor0表示新建
         $flowEntity->setId(null);
         $savedFlow = $this->delightfulFlowDomainService->create($dataIsolation, $flowEntity);
         $importReport['created'][] = "createprocess: {$savedFlow->getName()} (ID: {$savedFlow->getCode()})";
@@ -351,11 +351,11 @@ class DelightfulFlowExportImportAppService
 
     /**
      * importtool集
-     * generate新ID并checkname重复.
+     * generate新IDandcheckname重复.
      */
     private function importToolSet(FlowDataIsolation $dataIsolation, array $toolSetData, array &$idMapping, array &$importReport): string
     {
-        // recordoriginalname和ID
+        // recordoriginalnameandID
         $originalName = $toolSetData['name'] ?? '';
         $originalCode = $toolSetData['code'] ?? '';
 
@@ -366,7 +366,7 @@ class DelightfulFlowExportImportAppService
         $newName = $this->generateUniqueToolSetName($dataIsolation, $originalName);
         if ($newName !== $originalName) {
             $toolSetData['name'] = $newName;
-            $importReport['renamed'][] = "tool集 '{$originalName}' 重命名为 '{$newName}'";
+            $importReport['renamed'][] = "tool集 '{$originalName}' 重命名for '{$newName}'";
         }
 
         // updateorganizationinfo
@@ -374,11 +374,11 @@ class DelightfulFlowExportImportAppService
         $toolSetData['created_uid'] = $dataIsolation->getCurrentUserId();
         $toolSetData['updated_uid'] = $dataIsolation->getCurrentUserId();
 
-        // 移except可能影响create逻辑的field
+        // 移exceptmaybe影响create逻辑field
         unset($toolSetData['created_at'], $toolSetData['updated_at'], $toolSetData['id']);
 
-        // settingcreate实body必要的field
-        $toolSetData['id'] = 0; // ensuresetting为新建
+        // settingcreate实body必要field
+        $toolSetData['id'] = 0; // ensuresettingfor新建
         $toolSetData['created_at'] = new DateTime();
         $toolSetData['updated_at'] = new DateTime();
 
@@ -389,14 +389,14 @@ class DelightfulFlowExportImportAppService
         $savedToolSet = $this->delightfulFlowToolSetDomainService->create($dataIsolation, $toolSetEntity);
         $importReport['created'][] = "createtool集: {$savedToolSet->getName()} (ID: {$savedToolSet->getCode()})";
 
-        // record新旧ID的mapping关系
+        // record新旧IDmappingclose系
         $idMapping['tool_sets'][$originalCode] = $savedToolSet->getCode();
 
         return $savedToolSet->getCode();
     }
 
     /**
-     * generate唯一的processname
+     * generate唯一processname
      * when检测to同名processo clock，add(n)back缀
      */
     private function generateUniqueName(FlowDataIsolation $dataIsolation, string $name, Type $type): string
@@ -404,7 +404,7 @@ class DelightfulFlowExportImportAppService
         $newName = $name;
         $counter = 1;
 
-        // toolnotuse重名，因为tool集notsame
+        // toolnotuse重名，因fortool集notsame
         if ($type === Type::Tools) {
             return $name;
         }
@@ -418,7 +418,7 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * generate唯一的tool集name
+     * generate唯一tool集name
      * when检测to同名tool集o clock，add(n)back缀
      */
     private function generateUniqueToolSetName(FlowDataIsolation $dataIsolation, string $name): string
@@ -453,7 +453,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * updatesectionpointIDmapping
-     * 为所havesectionpointgenerate新ID并维护mapping关系.
+     * for所havesectionpointgenerate新IDand维护mappingclose系.
      */
     private function updateNodeIdsMapping(array &$flowData, array &$idMapping): void
     {
@@ -475,7 +475,7 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * updateprocessmiddle的quote关系
+     * updateprocessmiddlequoteclose系
      * includesectionpointquote、子processquote、toolquoteetc.
      */
     private function updateFlowReferences(array &$flowData, array $idMapping): void
@@ -487,7 +487,7 @@ class DelightfulFlowExportImportAppService
         foreach ($flowData['nodes'] as &$nodeData) {
             $nodeType = $nodeData['node_type'] ?? 0;
 
-            // updatesectionpointparametermiddle的quote
+            // updatesectionpointparametermiddlequote
             if (! empty($nodeData['params'])) {
                 // 子processsectionpoint
                 if ($nodeType === NodeType::Sub->value) {
@@ -498,7 +498,7 @@ class DelightfulFlowExportImportAppService
                     }
                 }
 
-                // handletype26的toolsectionpoint直接quote
+                // handletype26toolsectionpoint直接quote
                 if ($nodeType === NodeType::Tool->value) {
                     if (isset($nodeData['params']['tool_id'])) {
                         $oldToolId = $nodeData['params']['tool_id'];
@@ -524,16 +524,16 @@ class DelightfulFlowExportImportAppService
                     }
                 }
 
-                // handleparametermiddle的表达type
+                // handleparametermiddle表达type
                 $this->updateExpressionReferences($nodeData['params'], $idMapping);
             }
 
-            // 通usehandle input field (if存inand为array)
+            // 通usehandle input field (if存inandforarray)
             if (isset($nodeData['input']) && is_array($nodeData['input'])) {
                 $this->processSpecialNodeFieldValue($nodeData['input'], $idMapping);
             }
 
-            // 通usehandle output field (if存inand为array)
+            // 通usehandle output field (if存inandforarray)
             if (isset($nodeData['output']) && is_array($nodeData['output'])) {
                 $this->processSpecialNodeFieldValue($nodeData['output'], $idMapping);
             }
@@ -559,7 +559,7 @@ class DelightfulFlowExportImportAppService
             }
         }
 
-        // handleedgesmiddle的source和targetquote
+        // handleedgesmiddlesourceandtargetquote
         if (isset($flowData['edges']) && is_array($flowData['edges'])) {
             foreach ($flowData['edges'] as &$edge) {
                 // updatesourcequote
@@ -576,21 +576,21 @@ class DelightfulFlowExportImportAppService
                     $edge['target'] = $newTargetId;
                 }
 
-                // updatesourceHandlemiddle可能contain的sectionpointIDquote
+                // updatesourceHandlemiddlemaybecontainsectionpointIDquote
                 if (isset($edge['sourceHandle']) && is_string($edge['sourceHandle'])) {
                     foreach ($idMapping['nodes'] as $oldId => $newId) {
-                        // ensureoldId是stringtype
+                        // ensureoldIdisstringtype
                         $oldIdStr = (string) $oldId;
                         $newIdStr = (string) $newId;
 
-                        // use正then表达typeensure只替换完整的ID
+                        // use正then表达typeensure只替换完整ID
                         if (preg_match('/^' . preg_quote($oldIdStr, '/') . '_/', $edge['sourceHandle'])) {
                             $edge['sourceHandle'] = preg_replace('/^' . preg_quote($oldIdStr, '/') . '/', $newIdStr, $edge['sourceHandle']);
                         }
                     }
                 }
 
-                // updateedge的ID（ifhave）
+                // updateedgeID（ifhave）
                 if (isset($edge['id'])) {
                     $edge['id'] = IdGenerator::getUniqueId32();
                 }
@@ -599,8 +599,8 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * 递归handlearraymiddle的表达typequote
-     * find并update所havecontainsectionpointID的表达typefield.
+     * 递归handlearraymiddle表达typequote
+     * findandupdate所havecontainsectionpointID表达typefield.
      */
     private function updateExpressionReferences(array &$data, array $idMapping): void
     {
@@ -616,11 +616,11 @@ class DelightfulFlowExportImportAppService
 
                 // checkwhethercontainsectionpointIDquote（format如：nodeId.fieldName）
                 foreach ($idMapping['nodes'] as $oldNodeId => $newNodeId) {
-                    // ensureID是stringtype
+                    // ensureIDisstringtype
                     $oldNodeIdStr = (string) $oldNodeId;
                     $newNodeIdStr = (string) $newNodeId;
 
-                    // use正then表达typeensure只替换完整的sectionpointID
+                    // use正then表达typeensure只替换完整sectionpointID
                     if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $item)) {
                         $fieldName = substr($item, strlen($oldNodeIdStr));
                         $item = $newNodeIdStr . $fieldName;
@@ -630,7 +630,7 @@ class DelightfulFlowExportImportAppService
             }
         }
 
-        // handleobjectshapetype的表达typevalue（如form结构middle的field）
+        // handleobjectshapetype表达typevalue（如form结构middlefield）
         if (isset($data['field'])) {
             $field = $data['field'];
             if (is_string($field)) {
@@ -655,12 +655,12 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * 判断whether为inside置tool
+     * 判断whetherforinside置tool
      * inside置toolnotneed重新create，can直接use.
      */
     private function isBuiltInTool(string $toolId, string $toolSetId): bool
     {
-        // 常见的inside置tool集front缀
+        // 常见inside置tool集front缀
         $builtInToolSetPrefixes = [
             'file_box',      // file盒tool集
             'search_engine', // searchenginetool集
@@ -676,12 +676,12 @@ class DelightfulFlowExportImportAppService
             }
         }
 
-        // 判断toolIDwhetherbytool集ID开head，这是inside置tool的常见模type
+        // 判断toolIDwhetherbytool集IDopenhead，这isinside置tool常见模type
         if (! empty($toolSetId) && strpos($toolId, $toolSetId . '_') === 0) {
             return true;
         }
 
-        // getconfigurationmiddle的inside置toolcolumn表（ifhave）
+        // getconfigurationmiddleinside置toolcolumn表（ifhave）
         $builtInTools = $this->config->get('flow.built_in_tools', []);
         if (in_array($toolId, $builtInTools)) {
             return true;
@@ -691,8 +691,8 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * associateprocess与assistant
-     * inimportprocessback将其与finger定的assistantassociate.
+     * associateprocessandassistant
+     * inimportprocessbackwill其andfinger定assistantassociate.
      */
     private function associateFlowWithAgent(FlowDataIsolation $dataIsolation, string $flowCode, string $agentId): void
     {
@@ -701,12 +701,12 @@ class DelightfulFlowExportImportAppService
         }
 
         $agentDomainService = di(DelightfulAgentDomainService::class);
-        // settingprocesscode并saveassistant
+        // settingprocesscodeandsaveassistant
         $agentDomainService->associateFlowWithAgent($agentId, $flowCode);
     }
 
     /**
-     * handle特殊的表达typevaluefield.
+     * handle特殊表达typevaluefield.
      */
     private function processSpecialNodeFieldValue(array &$value, array $idMapping): void
     {
@@ -715,36 +715,36 @@ class DelightfulFlowExportImportAppService
                 // 递归handle嵌setarray
                 $this->processSpecialNodeFieldValue($item, $idMapping);
             } elseif (is_string($item)) {
-                // handlestringmiddle的sectionpointIDquote
+                // handlestringmiddlesectionpointIDquote
                 $this->updateStringNodeReference($item, $idMapping);
             }
         }
 
-        // 特殊handleconst_valuearraymiddle的object
+        // 特殊handleconst_valuearraymiddleobject
         if (isset($value['const_value']) && is_array($value['const_value'])) {
             foreach ($value['const_value'] as &$constItem) {
                 if (is_array($constItem)) {
-                    // handleobjectshapetype的const_valueitem
+                    // handleobjectshapetypeconst_valueitem
                     if (isset($constItem['value']) && is_string($constItem['value'])) {
                         $this->updateStringNodeReference($constItem['value'], $idMapping);
                     }
                     // 递归handle其他field
                     $this->processSpecialNodeFieldValue($constItem, $idMapping);
                 } elseif (is_string($constItem)) {
-                    // handlestringshapetype的const_valueitem
+                    // handlestringshapetypeconst_valueitem
                     $this->updateStringNodeReference($constItem, $idMapping);
                 }
             }
         }
 
-        // handleexpression_valuemiddle的quote
+        // handleexpression_valuemiddlequote
         if (isset($value['expression_value']) && is_array($value['expression_value'])) {
             $this->processExpressionValue($value['expression_value'], $idMapping);
         }
     }
 
     /**
-     * updatestringmiddle的sectionpointIDquote.
+     * updatestringmiddlesectionpointIDquote.
      */
     private function updateStringNodeReference(string &$str, array $idMapping): void
     {
@@ -758,7 +758,7 @@ class DelightfulFlowExportImportAppService
             $oldNodeIdStr = (string) $oldNodeId;
             $newNodeIdStr = (string) $newNodeId;
 
-            // use正then表达typeensure只替换完整的sectionpointID
+            // use正then表达typeensure只替换完整sectionpointID
             if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $str)) {
                 $fieldName = substr($str, strlen($oldNodeIdStr));
                 $str = $newNodeIdStr . $fieldName;
@@ -768,7 +768,7 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * handle表达typevaluemiddle的sectionpointquote.
+     * handle表达typevaluemiddlesectionpointquote.
      */
     private function processExpressionValue(array &$expressionValue, array $idMapping): void
     {
@@ -777,12 +777,12 @@ class DelightfulFlowExportImportAppService
                 // 递归handle嵌setarray
                 $this->processExpressionValue($item, $idMapping);
             } elseif (is_string($item)) {
-                // handlestringmiddle的sectionpointIDquote
+                // handlestringmiddlesectionpointIDquote
                 $this->updateStringNodeReference($item, $idMapping);
             }
         }
 
-        // handleobjectshapetype的表达typevalue（如form结构middle的field）
+        // handleobjectshapetype表达typevalue（如form结构middlefield）
         if (isset($expressionValue['field'])) {
             $field = $expressionValue['field'];
             if (is_string($field)) {
@@ -791,29 +791,29 @@ class DelightfulFlowExportImportAppService
             }
         }
 
-        // handle嵌set的valuefield
+        // handle嵌setvaluefield
         if (isset($expressionValue['value']) && is_array($expressionValue['value'])) {
             $this->processExpressionValue($expressionValue['value'], $idMapping);
         }
 
-        // handleconst_valuetype的嵌set结构
+        // handleconst_valuetype嵌set结构
         if (isset($expressionValue['const_value']) && is_array($expressionValue['const_value'])) {
             $this->processExpressionValue($expressionValue['const_value'], $idMapping);
         }
 
-        // handleexpression_valuetype的嵌set结构
+        // handleexpression_valuetype嵌set结构
         if (isset($expressionValue['expression_value']) && is_array($expressionValue['expression_value'])) {
             $this->processExpressionValue($expressionValue['expression_value'], $idMapping);
         }
 
-        // handleform结构middle的fieldarray
+        // handleform结构middlefieldarray
         if (isset($expressionValue['form']) && is_array($expressionValue['form'])) {
             foreach ($expressionValue['form'] as &$formItem) {
                 if (isset($formItem['field']) && is_string($formItem['field'])) {
                     $this->updateStringNodeReference($formItem['field'], $idMapping);
                 }
 
-                // 递归handleformItemmiddle的其他可能field
+                // 递归handleformItemmiddle其他maybefield
                 if (is_array($formItem)) {
                     $this->updateExpressionReferences($formItem, $idMapping);
                 }
@@ -822,7 +822,7 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * 递归handleprocessmiddle的子process和toolquote.
+     * 递归handleprocessmiddle子processandtoolquote.
      */
     private function processFlowForExport(
         FlowDataIsolation $dataIsolation,
@@ -851,14 +851,14 @@ class DelightfulFlowExportImportAppService
         array &$processedToolSetIds
     ): void {
         $toolSetId = $flow->getToolSetId();
-        // skip官方tool(not_grouped)和已handle的tool集
+        // skip官方tool(not_grouped)and已handletool集
         if (empty($toolSetId) || $toolSetId === 'not_grouped' || in_array($toolSetId, $processedToolSetIds)) {
             return;
         }
 
         // gettool集info
         $toolSet = $this->delightfulFlowToolSetDomainService->getByCode($dataIsolation, $toolSetId);
-        // mark为已handle
+        // markfor已handle
         $processedToolSetIds[] = $toolSetId;
 
         // addtoexportdatamiddle
@@ -876,10 +876,10 @@ class DelightfulFlowExportImportAppService
         array &$processedToolSetIds
     ): void {
         foreach ($flow->getNodes() as $node) {
-            // if是子processsectionpoint
+            // ifis子processsectionpoint
             if ($node->getNodeType() === NodeType::Sub->value) {
                 $subFlowId = $node->getParams()['sub_flow_id'] ?? '';
-                // skipnullID和已handle的子process
+                // skipnullIDand已handle子process
                 if (! $subFlowId || in_array($subFlowId, $processedFlowCodes)) {
                     continue;
                 }
@@ -891,20 +891,20 @@ class DelightfulFlowExportImportAppService
                     continue;
                 }
 
-                // mark为已handle
+                // markfor已handle
                 $processedFlowCodes[] = $subFlowId;
 
                 // addtoexportdatamiddle
                 $exportData['sub_flows'][$subFlowId] = $subFlow->toArray();
 
-                // 递归handle子processmiddle的子process和tool
+                // 递归handle子processmiddle子processandtool
                 $this->processFlowForExport($dataIsolation, $subFlow, $exportData, $processedFlowCodes, $processedToolSetIds);
             }
         }
     }
 
     /**
-     * handletoolsectionpoint和LLMsectionpointmiddle的option_tools.
+     * handletoolsectionpointandLLMsectionpointmiddleoption_tools.
      */
     private function processToolNodes(
         FlowDataIsolation $dataIsolation,
@@ -914,7 +914,7 @@ class DelightfulFlowExportImportAppService
         array &$processedToolSetIds
     ): void {
         foreach ($flow->getNodes() as $node) {
-            // handlesectionpointtype26（直接inparamsmiddlehavetool_id的toolsectionpoint）
+            // handlesectionpointtype26（直接inparamsmiddlehavetool_idtoolsectionpoint）
             if ($node->getNodeType() === NodeType::Tool->value) {
                 $params = $node->getParams();
                 $toolId = $params['tool_id'] ?? '';
@@ -929,7 +929,7 @@ class DelightfulFlowExportImportAppService
                     continue;
                 }
 
-                // mark为已handle
+                // markfor已handle
                 $processedFlowCodes[] = $toolId;
 
                 // addtoexportdatamiddle
@@ -939,7 +939,7 @@ class DelightfulFlowExportImportAppService
                 $this->processFlowForExport($dataIsolation, $toolFlow, $exportData, $processedFlowCodes, $processedToolSetIds);
             }
 
-            // maincheckLLM和Toolsectionpoint
+            // maincheckLLMandToolsectionpoint
             if ($node->getNodeType() === NodeType::LLM->value || $node->getNodeType() === NodeType::Tool->value) {
                 $params = $node->getParams();
                 if (isset($params['option_tools']) && is_array($params['option_tools'])) {
@@ -947,7 +947,7 @@ class DelightfulFlowExportImportAppService
                         $toolId = $optionToolData['tool_id'] ?? '';
                         $toolSetId = $optionToolData['tool_set_id'] ?? '';
 
-                        // 判断whether为inside置tool，inside置tool直接skip
+                        // 判断whetherforinside置tool，inside置tool直接skip
                         if ($this->isBuiltInTool($toolId, $toolSetId)) {
                             continue;
                         }
@@ -971,13 +971,13 @@ class DelightfulFlowExportImportAppService
                             continue;
                         }
 
-                        // mark为已handle
+                        // markfor已handle
                         $processedFlowCodes[] = $toolId;
 
                         // addtoexportdatamiddle
                         $exportData['tool_flows'][$toolId] = $toolFlow->toArray();
 
-                        // 递归handletoolprocessmiddle的子process和其他tool
+                        // 递归handletoolprocessmiddle子processand其他tool
                         $this->processFlowForExport($dataIsolation, $toolFlow, $exportData, $processedFlowCodes, $processedToolSetIds);
                     }
                 }

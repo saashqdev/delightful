@@ -41,7 +41,7 @@ class VisionTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '提供视觉能力。useat识别user对image的意graph，并return识别result';
+        return '提供视觉能力。useat识别usertoimage意graph，andreturn识别result';
     }
 
     /**
@@ -70,7 +70,7 @@ class VisionTool extends AbstractBuiltInTool
             $node->setParams([
                 'model' => $model,
                 'system_prompt' => $this->createSystemPrompt(),
-                // notagain具have user，直接采use自linegroup装的 messages
+                // notagain具have user，直接采usefromlinegroup装 messages
                 'messages' => $this->createMessages($executionData, $params),
                 'user_prompt' => ComponentFactory::generateTemplate(StructureType::Value),
                 'model_config' => [
@@ -116,7 +116,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "string",
             "key": "model",
             "title": "model",
-            "description": "可usemodel。non必填",
+            "description": "canusemodel。non必填",
             "required": null,
             "value": null,
             "encryption": false,
@@ -128,7 +128,7 @@ class VisionTool extends AbstractBuiltInTool
             "type": "string",
             "key": "intent",
             "title": "意graph",
-            "description": "意graph。user对image的意graph",
+            "description": "意graph。usertoimage意graph",
             "required": null,
             "value": null,
             "encryption": false,
@@ -231,27 +231,27 @@ JSON, true)));
     {
         return ComponentFactory::fastCreate([
             'type' => StructureType::Value,
-            'structure' => Value::buildConst('你是一专业的视觉理解助理，请按照bydownstep回应user：
+            'structure' => Value::buildConst('你is一专业视觉理解助理，请按照bydownstepreturn应user：
 
-1. 优先理解user的意graph，始终use与usersame的language回答
-2. 提供简洁明了的直接回答，直接满足user的mainissue
-3. again对imagecontentconduct多维degree详细analyze，includebutnot限at：
+1. 优先理解user意graph，始终useandusersamelanguagereturn答
+2. 提供简洁明直接return答，直接满足usermainissue
+3. againtoimagecontentconduct多维degree详细analyze，includebutnot限at：
    - 主bodycontent识别：person物、物body、场景、textetc
    - 视觉特征：color、composition、光line、qualityetc
-   - 语义info：activity、情绪、关系、background故事etc
-   - text识别：如havetext，准确extract并理解含义
+   - 语义info：activity、情绪、close系、background故事etc
+   - text识别：如havetext，准确extractand理解含义
    - 技术info：如havegraphtable/data，analyze其含义
    
 4. analyzeformat要求：
-   - 对at重要analyzeresult，use结构化JSONformat呈现，如：{"category别":"xx", "主body":"xx", "特征":["xx","xx"]}
-   - 对atnot确定content，明确table明推测propertyquality，for example："可能是..."
-   - 如imagequalitymore低，finger出限制因素并尽力analyze
-   - 对at多graphanalyze，minute别markimage序numberconductparse，并总结其associateproperty
+   - toat重要analyzeresult，use结构化JSONformat呈现，如：{"category别":"xx", "主body":"xx", "特征":["xx","xx"]}
+   - toatnot确定content，明确table明推测propertyquality，for example："maybeis..."
+   - 如imagequalitymore低，fingerout限制因素and尽力analyze
+   - toat多graphanalyze，minute别markimage序numberconductparse，and总结其associateproperty
    
 5. 注意事item：
-   - 避免对敏感content做主观评判
+   - 避免to敏感content做主观评判
    - when无法确定some部minutecontento clock，坦诚table达not确定property
-   - 保持客观专业的语气'),
+   - 保持客观专业语气'),
         ]);
     }
 

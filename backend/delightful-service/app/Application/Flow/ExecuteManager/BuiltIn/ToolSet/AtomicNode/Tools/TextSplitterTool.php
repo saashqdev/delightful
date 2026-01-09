@@ -36,7 +36,7 @@ class TextSplitterTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '将长text按照既定strategyconduct切割';
+        return 'will长text按照既定strategyconduct切割';
     }
 
     public function getCallback(): ?Closure
@@ -79,8 +79,8 @@ class TextSplitterTool extends AbstractBuiltInTool
         "content": {
             "type": "string",
             "key": "content",
-            "title": "need切割的content",
-            "description": "need切割的长text",
+            "title": "need切割content",
+            "description": "need切割长text",
             "required": null,
             "value": null,
             "encryption": false,

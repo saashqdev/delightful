@@ -50,7 +50,7 @@ class LoopMainNodeRunner extends NodeRunner
         }
 
         $breakVariableKey = "#{$bodyId}_break";
-        // 采usevariable来initialize跳出loopconfiguration
+        // 采usevariablecomeinitialize跳outloopconfiguration
         $executionData->variableSave($breakVariableKey, false);
 
         $params = $this->node->getParams();
@@ -143,18 +143,18 @@ class LoopMainNodeRunner extends NodeRunner
             return null;
         }
 
-        // get所have 父 id 是这loopbody的sectionpoint
+        // get所have 父 id is这loopbodysectionpoint
         $childNodes = $delightfulFlow->getNodesByParentId($bodyId);
         if (empty($childNodes)) {
             return null;
         }
-        // 去except父 id property，not然willbefilter
+        // goexcept父 id property，not然willbefilter
         foreach ($childNodes as $node) {
             $meta = $node->getMeta();
             $meta['parent_id'] = '';
             $node->setMeta($meta);
         }
-        // more换execute的sectionpoint
+        // more换executesectionpoint
         $loopDelightfulFlow->setNodes($childNodes);
 
         return $loopDelightfulFlow;
@@ -165,12 +165,12 @@ class LoopMainNodeRunner extends NodeRunner
         try {
             $subExecutor = new DelightfulFlowExecutor($loopDelightfulFlow, $executionData);
             $subExecutor->setInLoop(true);
-            // 复usecurrent的executedata，loopbodyinside可access和modify
+            // 复usecurrentexecutedata，loopbodyinsidecanaccessandmodify
             $subExecutor->execute(TriggerType::LoopStart);
         } catch (Throwable $throwable) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $throwable->getMessage()]);
         }
-        // sectionpointinside部的exceptionin node 的 debug infomiddlerecord
+        // sectionpointinside部exceptionin node  debug infomiddlerecord
         foreach ($loopDelightfulFlow->getNodes() as $node) {
             if ($node->getNodeDebugResult() && ! $node->getNodeDebugResult()->isSuccess()) {
                 ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $node->getNodeDebugResult()->getErrorMessage()]);

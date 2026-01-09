@@ -19,9 +19,9 @@ return new class extends Migration {
         }
         Schema::create('delightful_contact_third_platform_users', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('delightful_id', 64)->nullable()->comment('delightful_user_account table的 delightful_id');
-            $table->string('delightful_user_id', 64)->nullable()->comment('delightful_user_organization table的 user_id');
-            $table->string('delightful_organization_code', 32)->comment('麦吉userbody系down的organizationcode');
+            $table->string('delightful_id', 64)->nullable()->comment('delightful_user_account table delightful_id');
+            $table->string('delightful_user_id', 64)->nullable()->comment('delightful_user_organization table user_id');
+            $table->string('delightful_organization_code', 32)->comment('麦吉userbody系downorganizationcode');
             $table->string('third_user_id', 128)->comment('the三方平台userid');
             $table->string('third_union_id', 128)->comment('the三方平台user union_id');
             $table->string('third_platform_type', 32)->comment('the三方平台type dingTalk/lark/weCom/teamShare');
@@ -38,7 +38,7 @@ return new class extends Migration {
             $table->unique(['third_union_id', 'third_platform_type', 'delightful_organization_code'], 'unique_third_id');
             $table->softDeletes();
             $table->timestamps();
-            $table->comment('the三方平台sync过来的userinfotable. not过day书havepoint特殊,can直接把day书的userwhen做麦吉的user.');
+            $table->comment('the三方平台syncpasscomeuserinfotable. notpassday书havepoint特殊,can直接day书userwhen做麦吉user.');
         });
     }
 

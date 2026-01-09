@@ -64,7 +64,7 @@ class AgentSendMessageToGroupTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'sendmessage给group';
+        return 'sendmessagegivegroup';
     }
 
     public function getInput(): ?NodeInput
@@ -91,8 +91,8 @@ class AgentSendMessageToGroupTool extends AbstractBuiltInTool
         "group_id": {
             "type": "string",
             "key": "group_id",
-            "title": "receive的群id",
-            "description": "receive的群id",
+            "title": "receive群id",
+            "description": "receive群id",
             "required": null,
             "value": null,
             "encryption": false,

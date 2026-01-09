@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject\MessageType;
 
 /**
- * chatmessagecontent的type.
+ * chatmessagecontenttype.
  * valuefrom0start.
  */
 enum ChatMessageType: string
@@ -42,7 +42,7 @@ enum ChatMessageType: string
     case Location = 'location';
 
     /**
-     * compare low 的push多time seq，front端mergebecome一渲染.
+     * compare low push多time seq，front端mergebecome一渲染.
      */
     case AggregateAISearchCard = 'aggregate_ai_search_card';
 
@@ -70,7 +70,7 @@ enum ChatMessageType: string
 
     /**
      * 未知message。
-     * 由atversion迭代，hair版timediffetcreason，可能产生未知type的message。
+     * byatversion迭代，hair版timediffetcreason，maybe产生未知typemessage。
      */
     case Unknown = 'unknown';
 

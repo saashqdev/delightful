@@ -58,12 +58,12 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         $dataIsolation = ModelGatewayDataIsolation::createByOrganizationCodeWithoutSubscription($executionData->getDataIsolation()->getCurrentOrganizationCode(), $executionData->getDataIsolation()->getCurrentUserId());
         $model = $this->modelGatewayMapper->getChatModelProxy($dataIsolation, $modelName);
 
-        // default视觉modelconfigurationthen是自己
+        // default视觉modelconfigurationthenisfrom己
         if ($paramsConfig->getModelConfig()->getVisionModel() === '') {
             $paramsConfig->getModelConfig()->setVisionModel($modelName);
         }
 
-        // if主动close视觉能力。or者 currentmodelsupport，but是choose了别的model，also是相whenat要closecurrentmodel的视觉能力
+        // if主动close视觉能力。or者 currentmodelsupport，butischoose别model，alsois相whenat要closecurrentmodel视觉能力
         if (! $paramsConfig->getModelConfig()->isVision() || ($model->getModelOptions()->isMultiModal() && $paramsConfig->getModelConfig()->getVisionModel() !== $modelName)) {
             $model->getModelOptions()->setMultiModal(false);
         }
@@ -87,7 +87,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         // load记忆
         $memoryManager = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), $paramsConfig->getMessages(), $ignoreMessageIds);
 
-        // only自动记忆needprocessbydown多模statemessage
+        // onlyfrom动记忆needprocessbydown多模statemessage
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId();
             $contentMessage = null;
@@ -107,7 +107,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                         // 仅仅addattachment
                         $imageUrls = $executionData->getTriggerData()->getAttachmentImageUrls();
                         if ($imageUrls) {
-                            // havecontentandhaveattachment，addtext和imagecontent
+                            // havecontentandhaveattachment，addtextandimagecontent
                             $contentMessage->addContent(UserMessageContent::text($userPrompt));
                             foreach ($imageUrls as $imageUrl) {
                                 $contentMessage->addContent(UserMessageContent::imageUrl($imageUrl));
@@ -126,13 +126,13 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 }
             }
 
-            // processcurrent的多模statemessage - only content 的need立刻call去process
+            // processcurrent多模statemessage - only content need立刻callgoprocess
             /** @var null|UserMessage $contentMessage */
             if ($contentMessage?->hasImageMultiModal() && $paramsConfig->getModelConfig()->isVision()) {
                 $currentModel = $model->getModelName();
                 $visionModel = $paramsConfig->getModelConfig()->getVisionModel();
 
-                // only currentmodel与视觉modelnot一致，or者 currentmodelnot supported多模state o clock。in视觉model的toolmiddle，currentmodelequal视觉model并and具have视觉能力，thennotwill产生死loop
+                // only currentmodeland视觉modelnot一致，or者 currentmodelnot supported多模state o clock。in视觉modeltoolmiddle，currentmodelequal视觉modelandand具have视觉能力，thennotwill产生死loop
                 if ($currentModel !== $visionModel || ! $model->getModelOptions()->isMultiModal()) {
                     $multiModalLoglog = MultiModalBuilder::vision(
                         executionData: $executionData,
@@ -147,7 +147,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
                 }
             }
 
-            // 永远processcurrentsectionpoint的historyattachmentmessage
+            // 永远processcurrentsectionpointhistoryattachmentmessage
             $delightfulMessageIds = [];
             foreach ($memoryManager->getMessages() as $message) {
                 $delightfulMessageIds[] = $message->getIdentifier();
@@ -245,7 +245,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
     }
 
     /**
-     * execute代理并getresponse.
+     * execute代理andgetresponse.
      *
      * @param Agent $agent 代理object
      * @param VertexResult $vertexResult sectionpointexecuteresult
@@ -326,7 +326,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         }
         /** @var ReplyMessageNodeParamsConfig $paramsConfig */
         $paramsConfig = $nextNode->getNodeParamsConfig();
-        // 只support text 和 markdown
+        // 只support text and markdown
         if (! in_array($paramsConfig->getType(), [DelightfulFlowMessageType::Text, DelightfulFlowMessageType::Markdown], true)) {
             return false;
         }
@@ -336,13 +336,13 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             return false;
         }
 
-        // haveandonly一currentsectionpoint的table达typequote
+        // haveandonly一currentsectionpointtable达typequote
         $expressionItems = $contentValue->getAllFieldsExpressionItem() ?? [];
         if (count($expressionItems) !== 1) {
             return false;
         }
 
-        // 可能alsohave其他stringsplice，暂o clockalsonotinside敛
+        // maybealsohave其他stringsplice，暂o clockalsonotinside敛
         $items = match ($contentValue->getType()) {
             ValueType::Const => $contentValue->getConstValue()?->getItems() ?? [],
             ValueType::Expression => $contentValue->getExpressionValue()?->getItems() ?? [],

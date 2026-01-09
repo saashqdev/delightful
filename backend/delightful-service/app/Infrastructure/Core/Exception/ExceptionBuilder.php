@@ -44,8 +44,8 @@ class ExceptionBuilder
     }
 
     /**
-     * @param string $message allow传入customize的errorinformation
-     * @return never-return // 为了phpstan检测
+     * @param string $message allow传入customizeerrorinformation
+     * @return never-return // forphpstan检测
      */
     public static function throw(BackedEnum $error, string $message = '', array $replace = [], ?string $locale = null, ?Throwable $throwable = null): void
     {
@@ -53,7 +53,7 @@ class ExceptionBuilder
             // recordoriginalexceptioninformation
             $logger = ApplicationContext::getContainer()->get(LoggerFactory::class)?->get(__CLASS__);
             $logger->error(sprintf(
-                'recordoriginal的 throwable exception message:%s, code:%d, file:%s, line:%s, trace:%s',
+                'recordoriginal throwable exception message:%s, code:%d, file:%s, line:%s, trace:%s',
                 $throwable->getMessage(),
                 $throwable->getCode(),
                 $throwable->getFile(),
@@ -120,7 +120,7 @@ class ExceptionBuilder
 
     private function getMessageTranslate(string $message = '', array $replace = [], ?string $locale = null): string
     {
-        // process占位符的国际化
+        // process占位符国际化
         foreach ($replace as $key => $value) {
             if (is_string($value)) {
                 $replace[$key] = trans($value, [], $locale);

@@ -53,7 +53,7 @@ class DelightfulChatUserApi extends AbstractApi
     }
 
     /**
-     * return ai 的avatar昵称etcinformation.
+     * return ai avatar昵称etcinformation.
      * @throws Throwable
      */
     #[ArrayShape([
@@ -83,9 +83,9 @@ class DelightfulChatUserApi extends AbstractApi
     {
         $authorization = $this->getAuthorization();
         $pageToken = (string) $request->query('page_token', '');
-        // 0:ai 1:personcategory 2: ai和personcategory
+        // 0:ai 1:personcategory 2: aiandpersoncategory
         $friendType = (int) $request->query('friend_type', '');
-        // 将 flow_codes when做 data表middle的 ai_code process了
+        // will flow_codes when做 data表middle ai_code process
         $aiCodes = (array) $request->input('flow_codes', []);
         $friendQueryDTO = new FriendQueryDTO();
         $friendType = UserType::from($friendType);

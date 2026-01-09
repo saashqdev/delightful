@@ -18,15 +18,15 @@ use App\Infrastructure\Util\StringMaskUtil;
 use Hyperf\Codec\Json;
 
 /**
- * service_provider_config_id 对应的service商+modellist。
+ * service_provider_config_id to应service商+modellist。
  *
- * 同一service商indifferent的organizationdownhavedifferent的 service_provider_config_id。
- * 一service_provider_config_id对应多specific的model。
+ * 同一service商indifferentorganizationdownhavedifferent service_provider_config_id。
+ * 一service_provider_config_idto应多specificmodel。
  */
 class ProviderConfigDTO extends AbstractDTO
 {
     /**
-     * service_provider_config_id 的value
+     * service_provider_config_id value
      */
     protected string $id = '';
 
@@ -41,12 +41,12 @@ class ProviderConfigDTO extends AbstractDTO
     protected string $serviceProviderId = '';
 
     /**
-     * 大model的specificconfiguration，ak,sk,host 之category（已脱敏）.
+     * 大modelspecificconfiguration，ak,sk,host 之category（已脱敏）.
      */
     protected ?ProviderConfigItem $config = null;
 
     /**
-     * 已decrypt的configuration，notconductdata脱敏process.
+     * 已decryptconfiguration，notconductdata脱敏process.
      */
     protected ?ProviderConfigItem $decryptedConfig = null;
 
@@ -61,7 +61,7 @@ class ProviderConfigDTO extends AbstractDTO
     protected bool $isModelsEnable = true;
 
     /**
-     * 为了interfacecompatible，fixedreturn空array.
+     * forinterfacecompatible，fixedreturn空array.
      */
     protected array $models = [];
 
@@ -78,7 +78,7 @@ class ProviderConfigDTO extends AbstractDTO
         parent::__construct($data);
     }
 
-    // ===== 基础field的Getter/Setter =====
+    // ===== 基础fieldGetter/Setter =====
 
     public function getId(): string
     {
@@ -264,7 +264,7 @@ class ProviderConfigDTO extends AbstractDTO
         }
     }
 
-    // ===== configuration相关field的Getter/Setter =====
+    // ===== configuration相closefieldGetter/Setter =====
 
     public function getAlias(): string
     {
@@ -343,7 +343,7 @@ class ProviderConfigDTO extends AbstractDTO
             $this->decryptedConfig = $decryptedConfig;
         }
 
-        // 注意：已decrypt的configurationnotconductdata脱敏process
+        // 注意：已decryptconfigurationnotconductdata脱敏process
     }
 
     public function getIsModelsEnable(): bool
@@ -362,7 +362,7 @@ class ProviderConfigDTO extends AbstractDTO
         }
     }
 
-    // ===== model相关field的Getter/Setter =====
+    // ===== model相closefieldGetter/Setter =====
 
     /**
      * @return ProviderModelDetailDTO[]
@@ -418,7 +418,7 @@ class ProviderConfigDTO extends AbstractDTO
 
     public function addModel(ProviderModelEntity $model): void
     {
-        // 把modelconvert为ProviderModelDetailDTO
+        // modelconvertforProviderModelDetailDTO
         $modelDTO = new ProviderModelDetailDTO($model->toArray());
         $this->models[] = $modelDTO;
     }

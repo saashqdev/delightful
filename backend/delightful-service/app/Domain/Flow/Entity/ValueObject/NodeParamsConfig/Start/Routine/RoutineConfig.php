@@ -23,11 +23,11 @@ class RoutineConfig
         private ?string $day = null,
         // specifictime
         private readonly ?string $time = null,
-        // customizeperiod的time，between隔unit day / week / month / year
+        // customizeperiodtime，between隔unit day / week / month / year
         private ?IntervalUnit $unit = null,
-        // customizeperiod的time，between隔frequency，如eachday，eachweek，eachmonth，eachyear
+        // customizeperiodtime，between隔frequency，如eachday，eachweek，eachmonth，eachyear
         private ?int $interval = null,
-        // unit=weeko clock为[1~7]，unit=montho clock为[1~31]
+        // unit=weeko clockfor[1~7]，unit=montho clockfor[1~31]
         private ?array $values = null,
         // enddate，该datebacknotgeneratedata
         private readonly ?DateTime $deadline = null,
@@ -76,7 +76,7 @@ class RoutineConfig
             case RoutineType::DailyRepeat:
                 break;
             case RoutineType::WeeklyRepeat:
-                // 0-6 table示week一toweekday，所by得compatible一down crontab 的rule 0 table示weekday
+                // 0-6 table示week一toweekday，所by得compatible一down crontab rule 0 table示weekday
                 $dayOfWeek = (int) $this->day + 1;
                 if ($dayOfWeek === 7) {
                     $dayOfWeek = 0;
@@ -133,27 +133,27 @@ class RoutineConfig
         }
         if ($this->type === RoutineType::CustomRepeat) {
             if (empty($this->unit)) {
-                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔unit not能为空');
+                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔unit not能for空');
             }
             if (empty($this->interval)) {
-                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency not能为空');
+                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency not能for空');
             }
-            // onlyeachday的time，才能customize interval，其余all是 1
+            // onlyeachdaytime，才能customize interval，其余allis 1
             if (in_array($this->unit, [IntervalUnit::Week, IntervalUnit::Month, IntervalUnit::Year])) {
                 $this->interval = 1;
             }
             if ($this->interval < 1 || $this->interval > 30) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency 只能in1~30between');
             }
-            // only是weekor者month的time，才能have values
+            // onlyisweekor者monthtime，才能have values
             if (in_array($this->unit, [IntervalUnit::Week, IntervalUnit::Month])) {
                 if (empty($this->values)) {
-                    ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency not能为空');
+                    ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency not能for空');
                 }
                 if ($this->unit === IntervalUnit::Week) {
                     foreach ($this->values as $value) {
                         if (! is_int($value)) {
-                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency 只能是整数');
+                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency 只能is整数');
                         }
                         if ($value < 0 || $value > 6) {
                             ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency 只能in0~6between');
@@ -163,7 +163,7 @@ class RoutineConfig
                 if ($this->unit === IntervalUnit::Month) {
                     foreach ($this->values as $value) {
                         if (! is_int($value)) {
-                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency 只能是整数');
+                            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency 只能is整数');
                         }
                         if ($value < 1 || $value > 31) {
                             ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'customizeperiodbetween隔frequency 只能in1~31between');
@@ -179,13 +179,13 @@ class RoutineConfig
             $this->values = null;
         }
         if ($this->type->needDay() && is_null($this->day)) {
-            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date not能为空');
+            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date not能for空');
         }
         if ($this->type->needTime() && is_null($this->time)) {
-            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'time not能为空');
+            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'time not能for空');
         }
 
-        // eachweek的time，day table示week几 0-6  0是week一
+        // eachweektime，day table示week几 0-6  0isweek一
         if ($this->type === RoutineType::WeeklyRepeat) {
             if (! is_numeric($this->day) || $this->day < 0 || $this->day > 6) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date 只能in0~6between');
@@ -193,7 +193,7 @@ class RoutineConfig
             $this->day = (string) ((int) $this->day);
         }
 
-        // eachmonth的time，day table示the几day
+        // eachmonthtime，day table示the几day
         if ($this->type === RoutineType::MonthlyRepeat) {
             if (! is_numeric($this->day) || $this->day < 1 || $this->day > 31) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date 只能in1~31between');
@@ -201,7 +201,7 @@ class RoutineConfig
             $this->day = (string) ((int) $this->day);
         }
 
-        // not重复、eachyear、eachmonth的time，day table示date
+        // not重复、eachyear、eachmonthtime，day table示date
         if (in_array($this->type, [RoutineType::NoRepeat, RoutineType::AnnuallyRepeat])) {
             if (! is_string($this->day) || empty($this->day) || ! strtotime($this->day)) {
                 ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date formaterror');
@@ -210,19 +210,19 @@ class RoutineConfig
 
         $dayTimestamp = strtotime($this->day ?? '');
         if ($dayTimestamp) {
-            // time只能是未来的，havebug， whendayalsowill认为是未来的
+            // time只能is未come，havebug， whendayalsowill认foris未come
             // if (! is_null($this->day) && $dayTimestamp < time()) {
             //
-            //     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date not能是过去的');
+            //     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'date not能ispassgo');
             // }
             if (! is_null($this->time) && ! is_null($this->day) && strtotime($this->day . ' ' . $this->time) < time()) {
-                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'time not能是过去的');
+                ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'time not能ispassgo');
             }
         }
 
-        // deadlinetime只能是未来的
+        // deadlinetime只能is未come
         if (! is_null($this->deadline) && $this->deadline->getTimestamp() < time()) {
-            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'deadlinedate not能是过去的');
+            ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'deadlinedate not能ispassgo');
         }
     }
 }

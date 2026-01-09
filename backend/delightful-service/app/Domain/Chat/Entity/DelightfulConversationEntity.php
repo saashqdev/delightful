@@ -14,7 +14,7 @@ use App\Domain\Chat\Entity\ValueObject\ConversationType;
 use Hyperf\Codec\Json;
 
 /**
- * conversation,oneuserindifferentorganizationdown的conversation是different的.
+ * conversation,oneuserindifferentorganizationdownconversationisdifferent.
  */
 final class DelightfulConversationEntity extends AbstractEntity
 {

@@ -46,7 +46,7 @@ readonly class AsrTitleGeneratorService
      * @param null|string $fileId fileID
      * @param null|NoteDTO $note 笔记content
      * @param string $taskKey task键（useatlog）
-     * @return null|string generate的title
+     * @return null|string generatetitle
      */
     public function generateTitleForScenario(
         DelightfulUserAuthorization $userAuthorization,
@@ -116,15 +116,15 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * fromtaskstatusgeneratetitle（usesave的 ASR content和笔记content）.
+     * fromtaskstatusgeneratetitle（usesave ASR contentand笔记content）.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
-     * @return string generate的title（failo clockreturndefaulttitle）
+     * @return string generatetitle（failo clockreturndefaulttitle）
      */
     public function generateFromTaskStatus(AsrTaskStatusDTO $taskStatus): string
     {
         try {
-            // useup报o clocksave的语type，ifnothavethenusecurrent语type
+            // useup报o clocksave语type，ifnothavethenusecurrent语type
             $language = $taskStatus->language ?: $this->translator->getLocale() ?: 'zh_CN';
 
             $this->logger->info('use语typegeneratetitle', [
@@ -145,7 +145,7 @@ readonly class AsrTitleGeneratorService
                     );
                 }
 
-                // get完整的录音总结hint词
+                // get完整录音总结hint词
                 $customPrompt = AsrPromptAssembler::getTitlePrompt(
                     $taskStatus->asrStreamContent,
                     $note,
@@ -174,10 +174,10 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 清洗title，移exceptfile/directorynotallow的character并truncatelength.
+     * 清洗title，移exceptfile/directorynotallowcharacterandtruncatelength.
      *
      * @param string $title originaltitle
-     * @return string 清洗back的title
+     * @return string 清洗backtitle
      */
     public function sanitizeTitle(string $title): string
     {
@@ -190,7 +190,7 @@ readonly class AsrTitleGeneratorService
         $title = preg_replace('/[\\\\\/:*?"<>|]/u', '', $title) ?? '';
         // compressnull白
         $title = preg_replace('/\s+/u', ' ', $title) ?? '';
-        // 限制length，避免过长path
+        // 限制length，避免pass长path
         if (mb_strlen($title) > 50) {
             $title = mb_substr($title, 0, 50);
         }
@@ -199,7 +199,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * generatedefault的directoryname.
+     * generatedefaultdirectoryname.
      *
      * @param null|string $customTitle customizetitle
      * @return string directoryname
@@ -211,12 +211,12 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 为file直传场景generatetitle（仅according tofile名）.
+     * forfile直传场景generatetitle（仅according tofile名）.
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
      * @param string $fileName file名
      * @param string $taskKey task键（useatlog）
-     * @return null|string generate的title
+     * @return null|string generatetitle
      */
     public function generateTitleForFileUpload(
         DelightfulUserAuthorization $userAuthorization,
@@ -242,7 +242,7 @@ readonly class AsrTitleGeneratorService
 
             return $this->sanitizeTitle($title);
         } catch (Throwable $e) {
-            $this->logger->warning('为file直传generatetitlefail', [
+            $this->logger->warning('forfile直传generatetitlefail', [
                 'task_key' => $taskKey,
                 'file_name' => $fileName,
                 'error' => $e->getMessage(),
@@ -256,12 +256,12 @@ readonly class AsrTitleGeneratorService
      *
      * @param string $audioFileName audiofilename
      * @param null|string $noteFileName 笔记filename（optional）
-     * @return string format化back的userrequest
+     * @return string format化backuserrequest
      */
     private function buildUserRequestMessage(string $audioFileName, ?string $noteFileName): string
     {
         if ($noteFileName !== null) {
-            // have笔记的情况："请帮我把 @yearwillsolutiondiscussion.webm 录音content和 @yearwill笔记.md 的content转化为一share超level产物"
+            // have笔记情况："请帮我 @yearwillsolutiondiscussion.webm 录音contentand @yearwill笔记.md content转化for一share超level产物"
             return sprintf(
                 '%s@%s%s@%s%s',
                 $this->translator->trans('asr.messages.summary_prefix_with_note'),
@@ -272,7 +272,7 @@ readonly class AsrTitleGeneratorService
             );
         }
 
-        // onlyaudiofile的情况："请帮我把 @yearwillsolutiondiscussion.webm 录音content转化为一share超level产物"
+        // onlyaudiofile情况："请帮我 @yearwillsolutiondiscussion.webm 录音content转化for一share超level产物"
         return sprintf(
             '%s@%s%s',
             $this->translator->trans('asr.messages.summary_prefix'),

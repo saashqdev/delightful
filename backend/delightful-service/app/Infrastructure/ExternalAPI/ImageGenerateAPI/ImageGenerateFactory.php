@@ -39,7 +39,7 @@ use InvalidArgumentException;
 class ImageGenerateFactory
 {
     /**
-     * eachmodelsupport的fixedratio例mappingtable.
+     * eachmodelsupportfixedratio例mappingtable.
      */
     private const SIZE_FIXED_RATIOS = [
         'VolcengineArk' => [
@@ -115,7 +115,7 @@ class ImageGenerateFactory
 
     private static function createVolcengineRequest(array $data): VolcengineModelRequest
     {
-        // parse size parameter为 width 和 height
+        // parse size parameterfor width and height
         [$width, $height] = self::parseSizeToWidthHeight($data['size'] ?? '1024x1024');
 
         $request = new VolcengineModelRequest(
@@ -137,12 +137,12 @@ class ImageGenerateFactory
         $model = $data['model'];
         $mode = strtolower(explode('-', $model, limit: 2)[1] ?? 'fast');
 
-        // Midjourney notuse宽高parameter，只need prompt 和 mode，but是 Request categoryinheritneed这些parameter
-        // 所by我们给defaultvalue即可
+        // Midjourney notuse宽高parameter，只need prompt and mode，butis Request categoryinheritneed这些parameter
+        // 所by我们givedefaultvalue即can
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
 
-        // Midjourney not关corespecific的宽高ratio例，but我们保留这fieldby防将来need
+        // Midjourney notclosecorespecific宽高ratio例，but我们保留这fieldby防willcomeneed
         if (isset($data['size'])) {
             [$width, $height] = self::parseSizeToWidthHeight($data['size']);
             $ratio = self::calculateRatio((int) $width, (int) $height);
@@ -161,12 +161,12 @@ class ImageGenerateFactory
         }
         $model = strtolower($model);
 
-        // parse size parameter为 width 和 height
+        // parse size parameterfor width and height
         [$widthStr, $heightStr] = self::parseSizeToWidthHeight($data['size'] ?? '1024x1024');
         $width = (int) $widthStr;
         $height = (int) $heightStr;
 
-        // todo xhy 先兜bottom，因为整文生graphalsonothave闭环
+        // todo xhy 先兜bottom，因for整文生graphalsonothave闭环
         if (
             ! ($width === 1024 && $height === 1024)
             && ! ($width === 1024 && $height === 1792)
@@ -251,7 +251,7 @@ class ImageGenerateFactory
 
     private static function createQwenImageRequest(array $data): QwenImageModelRequest
     {
-        // parse size parameter为 width 和 height
+        // parse size parameterfor width and height
         [$width, $height] = self::parseSizeToWidthHeight($data['size'] ?? '1328x1328');
 
         $request = new QwenImageModelRequest(
@@ -321,7 +321,7 @@ class ImageGenerateFactory
 
     private static function createVolcengineArkRequest(array $data): VolcengineArkRequest
     {
-        // parse size parameter为 width 和 height（use VolcengineArk 的fixedratio例configuration）
+        // parse size parameterfor width and height（use VolcengineArk fixedratio例configuration）
         [$width, $height] = self::parseSizeToWidthHeight($data['size'] ?? '1024x1024', ImageGenerateModelType::VolcengineArk->value);
 
         $request = new VolcengineArkRequest(
@@ -364,10 +364,10 @@ class ImageGenerateFactory
     }
 
     /**
-     * parseeachtype size format为 [width, height] array.
+     * parseeachtype size formatfor [width, height] array.
      * supportformat：1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 etc.
      * @param string $size sizestring
-     * @param null|string $modelKey model键名，iffinger定then优先use该model的fixedratio例configuration
+     * @param null|string $modelKey model键名，iffinger定then优先use该modelfixedratio例configuration
      */
     private static function parseSizeToWidthHeight(string $size, ?string $modelKey = null): array
     {
@@ -400,7 +400,7 @@ class ImageGenerateFactory
                 return $fixedSize;
             }
 
-            // ifnothavefixedconfiguration，按照normal换算（based on1024为基准）
+            // ifnothavefixedconfiguration，按照normal换算（based on1024for基准）
             if ($width >= $height) {
                 // 横to
                 $actualWidth = 1024;
@@ -418,7 +418,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * getfinger定model的fixedratio例sizeconfiguration.
+     * getfinger定modelfixedratio例sizeconfiguration.
      * @param null|string $modelKey model键名
      * @param string $ratioKey ratio例键名，如 "1:1", "16:9"
      * @return null|array if存infixedconfigurationreturn [width, height] array，否thenreturn null table示needuse换算
@@ -430,7 +430,7 @@ class ImageGenerateFactory
             return null;
         }
 
-        // checkwhether存in该model的fixedratio例configuration
+        // checkwhether存in该modelfixedratio例configuration
         if (isset(self::SIZE_FIXED_RATIOS[$modelKey])) {
             return self::SIZE_FIXED_RATIOS[$modelKey][$ratioKey] ?? self::SIZE_FIXED_RATIOS[$modelKey]['1:1'];
         }
@@ -440,7 +440,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * 计算宽高ratio例（from LLMAppService 移过来的逻辑）.
+     * 计算宽高ratio例（from LLMAppService 移passcome逻辑）.
      */
     private static function calculateRatio(int $width, int $height): string
     {
@@ -451,7 +451,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * 计算most大公约数（from LLMAppService 移过来的逻辑）.
+     * 计算most大公约数（from LLMAppService 移passcome逻辑）.
      */
     private static function gcd(int $a, int $b): int
     {

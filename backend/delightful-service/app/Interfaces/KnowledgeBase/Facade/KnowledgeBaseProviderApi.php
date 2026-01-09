@@ -26,7 +26,7 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
         $dto->setId('official_rerank');
         $dto->setName('官方重sortservice商');
         $dto->setProviderType(ProviderType::Official->value);
-        $dto->setDescription('官方提供的重sortservice');
+        $dto->setDescription('官方提供重sortservice');
         $dto->setIcon('');
         $dto->setCategory('rerank');
         $dto->setStatus(1); // 1 表示enable

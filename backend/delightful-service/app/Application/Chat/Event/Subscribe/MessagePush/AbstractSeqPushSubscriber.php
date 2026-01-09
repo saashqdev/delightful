@@ -18,16 +18,16 @@ use Throwable;
 
 /**
  * messagepush模piece.
- * according togenerate的seqby及它的优先level,use长connectpush给user.
- * eachseq可能要推给user的1to几十customer端.
+ * according togenerateseqbyand它优先level,use长connectpushgiveuser.
+ * eachseqmaybe要推giveuser1to几十customer端.
  */
 abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
 {
     protected AmqpTopicType $topic = AmqpTopicType::Seq;
 
     /**
-     * 1.本ground开hairo clocknotstart,避免消费了testenvironment的data,导致testenvironment的user收nottomessage
-     * 2.if本ground开hairo clock想debug,请自linein本ground搭建front端environment,more换mq的host. or者申请一devenvironment,隔离mq.
+     * 1.本groundopenhairo clocknotstart,避免消费testenvironmentdata,导致testenvironmentuser收nottomessage
+     * 2.if本groundopenhairo clock想debug,请fromlinein本ground搭建front端environment,more换mqhost. or者申请一devenvironment,隔离mq.
      */
     public function isEnable(): bool
     {
@@ -35,7 +35,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
     }
 
     /**
-     * according to序columnnumber优先level.实o clocknotify收item方. 这可能needpublishsubscribe.
+     * according to序columnnumber优先level.实o clocknotify收item方. 这maybeneedpublishsubscribe.
      * @param SeqCreatedEvent $data
      */
     public function consumeMessage($data, AMQPMessage $message): Result
@@ -50,7 +50,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
         try {
             foreach ($seqIds as $seqId) {
                 $seqId = (string) $seqId;
-                // useredis检测seqwhether已经尝试多time,if超过 n time,thennotagainpush
+                // useredis检测seqwhether已经尝试多time,if超pass n time,thennotagainpush
                 $seqRetryKey = sprintf('messagePush:seqRetry:%s', $seqId);
                 $seqRetryCount = $this->redis->get($seqRetryKey);
                 if ($seqRetryCount >= 3) {
@@ -58,7 +58,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                     return Result::ACK;
                 }
                 $this->addSeqRetryNumber($seqRetryKey);
-                // recordseq尝试push的count,useatback续判断whetherneedretry
+                // recordseq尝试pushcount,useatback续判断whetherneedretry
                 $this->delightfulSeqAppService->pushSeq($seqId);
                 // 未报错,notagain重推
                 $this->setSeqCanNotRetry($seqRetryKey);
@@ -71,7 +71,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessagequality保证模piece,if是service器stress大导致的fail,then放入delayretryqueue,并finger数level延长retrytimebetween隔
+            // todo callmessagequality保证模piece,ifisservice器stress大导致fail,then放入delayretryqueue,andfinger数level延长retrytimebetween隔
             return Result::REQUEUE;
         }
         return Result::ACK;

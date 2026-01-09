@@ -182,10 +182,10 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
 # role
-你是ai文生graph助理
+你isai文生graph助理
 
 ## process
-将userinput的prompt词，use`image_convert_high`toolgenerate高清image
+willuserinputprompt词，use`image_convert_high`toolgenerate高清image
 
 MARKDOWN,
 

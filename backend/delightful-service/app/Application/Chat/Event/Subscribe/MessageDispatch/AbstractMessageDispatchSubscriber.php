@@ -25,15 +25,15 @@ use function Hyperf\Support\retry;
 
 /**
  * messageminutehair模piece.
- * processdifferent优先levelmessage的consumer,useat写收item方的seq.
+ * processdifferent优先levelmessageconsumer,useat写收item方seq.
  */
 abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
 {
     protected AmqpTopicType $topic = AmqpTopicType::Message;
 
     /**
-     * 1.本ground开hairo clocknotstart,避免消费了testenvironment的data,导致testenvironment的user收nottomessage
-     * 2.if本ground开hairo clock想debug,请自linein本ground搭建front端environment,more换mq的host. or者申请一devenvironment,隔离mq.
+     * 1.本groundopenhairo clocknotstart,避免消费testenvironmentdata,导致testenvironmentuser收nottomessage
+     * 2.if本groundopenhairo clock想debug,请fromlinein本ground搭建front端environment,more换mqhost. or者申请一devenvironment,隔离mq.
      */
     public function isEnable(): bool
     {
@@ -41,7 +41,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
     }
 
     /**
-     * according tomessage优先level.将收item方的messagegenerate序columnnumber.
+     * according tomessage优先level.will收item方messagegenerate序columnnumber.
      * @param SeqCreatedEvent $data
      */
     public function consumeMessage($data, AMQPMessage $message): Result
@@ -51,7 +51,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
             return Result::ACK;
         }
         $conversationId = $data['conversationId'] ?? null;
-        // generate收item方的seq
+        // generate收item方seq
         $this->logger->info(sprintf('messageDispatch 收tomessage data:%s', Json::encode($data)));
         $lock = di(LockerInterface::class);
         try {
@@ -62,7 +62,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
             }
             foreach ($seqIds as $seqId) {
                 $seqId = (string) $seqId;
-                // useredis检测seqwhether已经尝试多time,if超过 n time,thennotagainpush
+                // useredis检测seqwhether已经尝试多time,if超pass n time,thennotagainpush
                 $seqRetryKey = sprintf('messageDispatch:seqRetry:%s', $seqId);
                 $seqRetryCount = $this->redis->get($seqRetryKey);
                 if ($seqRetryCount >= 3) {
@@ -75,18 +75,18 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 retry(3, function () use ($seqId, &$userSeqEntity) {
                     $userSeqEntity = $this->delightfulChatSeqRepository->getSeqByMessageId($seqId);
                     if ($userSeqEntity === null) {
-                        // 可能是transactionalso未submit,mq已经消费,delayretry
+                        // maybeistransactionalso未submit,mq已经消费,delayretry
                         ExceptionBuilder::throw(ChatErrorCode::SEQ_NOT_FOUND);
                     }
                 }, 100);
-                // send方的seq
+                // send方seq
                 if ($userSeqEntity === null) {
                     $this->logger->error('messageDispatch seq not found:{seq_id} ', ['seq_id' => $seqId]);
                     $this->setSeqCanNotRetry($seqRetryKey);
                 }
                 $this->setRequestId($userSeqEntity->getAppMessageId());
                 $this->logger->info(sprintf('messageDispatch startminutehairmessage seq:%s seqEntity:%s ', $seqId, Json::encode($userSeqEntity->toArray())));
-                // if是控制message,checkwhether是needminutehair的控制message
+                // ifis控制message,checkwhetherisneedminutehair控制message
                 if ($userSeqEntity->getSeqType() instanceof ControlMessageType) {
                     $this->delightfulControlMessageAppService->dispatchMQControlMessage($userSeqEntity);
                     $this->setSeqCanNotRetry($seqRetryKey);
@@ -116,7 +116,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessagequality保证模piece,if是service器stress大导致的fail,then放入delayretryqueue,并finger数level延长retrytimebetween隔
+            // todo callmessagequality保证模piece,ifisservice器stress大导致fail,then放入delayretryqueue,andfinger数level延长retrytimebetween隔
             return Result::REQUEUE;
         } finally {
             if (isset($lockKey, $owner)) {

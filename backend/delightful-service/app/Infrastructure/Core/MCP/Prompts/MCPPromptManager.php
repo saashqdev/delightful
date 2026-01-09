@@ -9,7 +9,7 @@ namespace App\Infrastructure\Core\MCP\Prompts;
 
 /**
  * MCPpromptmanager.
- * whenfrontversion为nullimplement，仅returnnullcolumn表.
+ * whenfrontversionfornullimplement，仅returnnullcolumn表.
  */
 class MCPPromptManager
 {
@@ -20,7 +20,7 @@ class MCPPromptManager
 
     /**
      * registerprompt.
-     * whenfront为nullimplement.
+     * whenfrontfornullimplement.
      */
     public function registerPrompt(array $prompt): void
     {
@@ -29,7 +29,7 @@ class MCPPromptManager
 
     /**
      * getpromptcolumn表.
-     * whenfront为nullimplement，returnnullarray.
+     * whenfrontfornullimplement，returnnullarray.
      *
      * @return array<int, array<string, mixed>>
      */
@@ -39,8 +39,8 @@ class MCPPromptManager
     }
 
     /**
-     * getfinger定ID的prompt.
-     * whenfront为nullimplement，始终returnnull.
+     * getfinger定IDprompt.
+     * whenfrontfornullimplement，始终returnnull.
      */
     public function getPrompt(string $id): ?array
     {
@@ -48,7 +48,7 @@ class MCPPromptManager
     }
 
     /**
-     * checkfinger定ID的promptwhether存in.
+     * checkfinger定IDpromptwhether存in.
      */
     public function hasPrompt(string $id): bool
     {

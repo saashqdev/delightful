@@ -40,8 +40,8 @@ class TreeIndexRepository
     }
 
     /**
-     * false设现in的父子level关系是1 -> 2 -> 3 -> 4，现inneedin4的backsurfaceinsert5，那么need做的操作是：
-     * getto4的所have祖先sectionpoint，thenuse4的所have祖先sectionpoint去update5的祖先sectionpoint，thenagaincreate一item5 -> 5的关系。
+     * false设现in父子levelclose系is1 -> 2 -> 3 -> 4，现inneedin4backsurfaceinsert5，那么need做操asis：
+     * getto4所have祖先sectionpoint，thenuse4所have祖先sectionpointgoupdate5祖先sectionpoint，thenagaincreate一item5 -> 5close系。
      * 1->4
      * 2->4
      * 3->4
@@ -183,12 +183,12 @@ class TreeIndexRepository
         Builder $builder,
         array $nodeIds
     ): void {
-        // delete祖先sectionpoint是 nodeIds 的索引
+        // delete祖先sectionpointis nodeIds 索引
         $builder->newModelInstance()->whereIn('ancestor_id', $nodeIds)
             ->where('organization_code', $requestContext->getOrganizationCode())
             ->delete();
 
-        // deleteback代sectionpoint是 nodeIds 的索引
+        // deleteback代sectionpointis nodeIds 索引
         $builder->newModelInstance()->whereIn('descendant_id', $nodeIds)
             ->where('organization_code', $requestContext->getOrganizationCode())
             ->delete();

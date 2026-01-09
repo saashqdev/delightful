@@ -39,11 +39,11 @@ class MethodHandlerFactory
     }
 
     /**
-     * createfinger定method的process器实例.
+     * createfinger定methodprocess器实例.
      * eachtimecallallcreatenewprocess器实例，ensure短生命period.
-     * 注意：call者needhand动为return的process器set所需的Managergroupitem.
+     * 注意：call者needhand动forreturnprocess器set所需Managergroupitem.
      *
-     * @return null|MethodHandlerInterface if找notto对应method的process器thenreturnnull
+     * @return null|MethodHandlerInterface if找nottoto应methodprocess器thenreturnnull
      */
     public function createHandler(string $method): ?MethodHandlerInterface
     {
@@ -57,7 +57,7 @@ class MethodHandlerFactory
     }
 
     /**
-     * checkwhether存infinger定method的process器.
+     * checkwhether存infinger定methodprocess器.
      */
     public function hasHandler(string $method): bool
     {
@@ -65,7 +65,7 @@ class MethodHandlerFactory
     }
 
     /**
-     * get所havesupport的method.
+     * get所havesupportmethod.
      *
      * @return array<string>
      */

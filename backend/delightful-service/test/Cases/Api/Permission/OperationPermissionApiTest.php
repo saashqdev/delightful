@@ -34,20 +34,20 @@ class OperationPermissionApiTest extends AbstractHttpTest
 
         // ifreturnautherror，skiptest
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003])) {
-            $this->markTestSkipped('interfaceauthfail，可能need其他authconfiguration - interfacerouteverifynormal');
+            $this->markTestSkipped('interfaceauthfail，maybeneed其他authconfiguration - interfacerouteverifynormal');
             return;
         }
 
         // assertresponse结构
-        $this->assertIsArray($response, 'responseshould是arrayformat');
+        $this->assertIsArray($response, 'responseshouldisarrayformat');
         $this->assertArrayHasKey('data', $response, 'response应containdatafield');
 
         // verifydata结构
         $data = $response['data'];
         $this->assertArrayHasKey('organization_codes', $data, 'data应containorganization_codesfield');
         $this->assertArrayHasKey('total', $data, 'data应containtotalfield');
-        $this->assertIsArray($data['organization_codes'], 'organization_codesshould是array');
-        $this->assertIsInt($data['total'], 'totalshould是整数');
-        $this->assertEquals(count($data['organization_codes']), $data['total'], 'totalshouldequalorganization_codes的quantity');
+        $this->assertIsArray($data['organization_codes'], 'organization_codesshouldisarray');
+        $this->assertIsInt($data['total'], 'totalshouldis整数');
+        $this->assertEquals(count($data['organization_codes']), $data['total'], 'totalshouldequalorganization_codesquantity');
     }
 }

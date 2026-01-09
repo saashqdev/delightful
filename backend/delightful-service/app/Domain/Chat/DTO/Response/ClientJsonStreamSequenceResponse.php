@@ -13,40 +13,40 @@ use App\Domain\Chat\Entity\AbstractEntity;
 use Hyperf\Codec\Json;
 
 /**
- * todo 为了compatible旧版streammessage，need将 content/reasoning_content/status field放tomostoutsidelayer。
+ * todo forcompatible旧版streammessage，needwill content/reasoning_content/status field放tomostoutsidelayer。
  */
 class ClientJsonStreamSequenceResponse extends AbstractEntity
 {
-    // 要updategoal seqId 的content
+    // 要updategoal seqId content
     protected string $targetSeqId;
 
-    // 为了implement丢package重传，needrecordcurrent的 $streamId。一定单调递增。
+    // forimplement丢package重传，needrecordcurrent $streamId。一定单调递增。
     protected ?int $streamId;
 
     /**
-     * 大 json 的streampush
+     * 大 json streampush
      */
     protected array $streams;
 
     protected ?StreamOptions $streamOptions;
 
     /**
-     * @deprecated 为了compatible旧版streammessage，need将 content/reasoning_content/status/llm_response field放tomostoutsidelayer
+     * @deprecated forcompatible旧版streammessage，needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
      */
     protected ?string $content;
 
     /**
-     * @deprecated 为了compatible旧版streammessage，need将 content/reasoning_content/status/llm_response field放tomostoutsidelayer
+     * @deprecated forcompatible旧版streammessage，needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
      */
     protected ?string $reasoningContent;
 
     /**
-     * @deprecated 为了compatible旧版streammessage，need将 content/reasoning_content/status/llm_response field放tomostoutsidelayer
+     * @deprecated forcompatible旧版streammessage，needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
      */
     protected ?int $status;
 
     /**
-     * @deprecated 为了compatible旧版streammessage，need将 content/reasoning_content/status/llm_response field放tomostoutsidelayer
+     * @deprecated forcompatible旧版streammessage，needwill content/reasoning_content/status/llm_response field放tomostoutsidelayer
      */
     protected ?string $llmResponse;
 

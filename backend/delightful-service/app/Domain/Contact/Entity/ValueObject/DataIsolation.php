@@ -18,17 +18,17 @@ use App\Infrastructure\Core\AbstractObject;
 class DataIsolation extends AbstractObject
 {
     /**
-     * whenfront的账numberid. 所have账number统一注意privacy保护,not对thethird-partyreturn.
+     * whenfront账numberid. 所have账number统一注意privacy保护,nottothethird-partyreturn.
      */
     protected string $currentDelightfulId = '';
 
     /**
-     * whenfront的organizationencoding.
+     * whenfrontorganizationencoding.
      */
     protected string $currentOrganizationCode = '';
 
     /**
-     * whenfront的organizationdown的userid.
+     * whenfrontorganizationdownuserid.
      */
     protected ?string $currentUserId = null;
 

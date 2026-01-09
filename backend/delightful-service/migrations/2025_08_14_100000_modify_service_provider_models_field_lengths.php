@@ -14,15 +14,15 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // modify service_provider 表的 name fieldlength
+        // modify service_provider 表 name fieldlength
         Schema::table('service_provider', function (Blueprint $table) {
             $table->string('name', 255)->comment('service商name')->change();
         });
 
-        // modify service_provider_models 表的相关fieldlength
+        // modify service_provider_models 表相closefieldlength
         Schema::table('service_provider_models', function (Blueprint $table) {
             $table->string('name', 255)->comment('modelname')->change();
-            $table->string('model_version', 255)->comment('modelinservice商down的name')->change();
+            $table->string('model_version', 255)->comment('modelinservice商downname')->change();
             $table->string('model_id', 255)->comment('modeltrue实ID')->change();
         });
     }
@@ -32,15 +32,15 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        // rollback service_provider 表的 name fieldlength
+        // rollback service_provider 表 name fieldlength
         Schema::table('service_provider', function (Blueprint $table) {
             $table->string('name', 50)->comment('service商name')->change();
         });
 
-        // rollback service_provider_models 表的相关fieldlength
+        // rollback service_provider_models 表相closefieldlength
         Schema::table('service_provider_models', function (Blueprint $table) {
             $table->string('name', 50)->comment('modelname')->change();
-            $table->string('model_version', 50)->comment('modelinservice商down的name')->change();
+            $table->string('model_version', 50)->comment('modelinservice商downname')->change();
             $table->string('model_id', 50)->comment('modeltrue实ID')->change();
         });
     }

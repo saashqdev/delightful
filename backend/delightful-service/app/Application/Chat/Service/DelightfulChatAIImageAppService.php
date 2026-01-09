@@ -70,9 +70,9 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     {
         $referContent = $this->getReferContentForAIImage($reqDTO->getReferMessageId());
         $referText = $this->getReferTextByContentForAIImage($referContent);
-        // if是graph生graph，thensize保持和originalimagesize一致
+        // ifisgraph生graph，thensize保持andoriginalimagesize一致
         if ($referContent instanceof AIImageCardMessage || $referContent instanceof ImageConvertHighCardMessage) {
-            // setactualrequest的size和ratio例
+            // setactualrequestsizeandratio例
             $radio = $referContent->getRadio() ?? Radio::OneToOne->value;
             $enumModel = ImageGenerateModelType::fromModel($reqDTO->getParams()->getModel(), false);
             $reqDTO->getParams()->setRatioForModel($radio, $enumModel);
@@ -99,20 +99,20 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                 $reqDTO->getReferMessageId(),
             );
             if (! empty($reqDTO->getAttachments())) {
-                // 对quotecontent重新文生graph
+                // toquotecontent重新文生graph
                 $this->handleGenerateImageByReference($requestContext, $reqDTO);
             } else {
                 // 文生graph
                 $this->handleGenerateImage($requestContext, $reqDTO);
             }
         } catch (Throwable $e) {
-            // hair生exceptiono clock，sendterminationmessage，并throwexception
+            // hair生exceptiono clock，sendterminationmessage，andthrowexception
             $this->handleGlobalThrowable($reqDTO, $e);
         }
     }
 
     /**
-     * 对quotecontent重新文生graph.
+     * toquotecontent重新文生graph.
      */
     private function handleGenerateImageByReference(RequestContext $requestContext, DelightfulChatAIImageReqDTO $reqDTO): void
     {
@@ -157,7 +157,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     private function generateImage(RequestContext $requestContext, AIImageGenerateParamsVO $generateParamsVO): array
     {
         $model = $generateParamsVO->getModel();
-        // according tomodeltypecreate对应的service
+        // according tomodeltypecreateto应service
         $data = $generateParamsVO->toArray();
         $delightfulUserAuthorization = $requestContext->getUserAuthorization();
         $images = $this->llmAppService->imageGenerate($delightfulUserAuthorization, $model, '', $data);
@@ -169,7 +169,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
     }
 
     /**
-     * 将fileuploadto云端.
+     * willfileuploadto云端.
      */
     #[ArrayShape([['file_id' => 'string', 'url' => 'string']])]
     private function uploadFiles(RequestContext $requestContext, array $attachments): array
@@ -185,7 +185,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
                 $this->fileDomainService->uploadByCredential($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile);
                 // geturl
                 $url = $this->fileDomainService->getLink($requestContext->getUserAuthorization()->getOrganizationCode(), $uploadFile->getKey())->getUrl();
-                // syncfile至delightful
+                // syncfiletodelightful
                 $fileUploadDTOs = [];
                 $fileType = FileType::getTypeFromFileExtension($uploadFile->getExt());
                 $fileUploadDTO = new DelightfulChatFileEntity();
@@ -244,7 +244,7 @@ class DelightfulChatAIImageAppService extends AbstractAIImageAppService
         ?string $id,
         AIImageCardResponseType $type,
         array $content,
-        // streamresponse，拿tocustomer端传来的 app_message_id ，作为responsetime的唯一标识
+        // streamresponse，拿tocustomer端传come app_message_id ，asforresponsetime唯一标识
         string $appMessageId = '',
         string $topicId = '',
         string $referMessageId = '',

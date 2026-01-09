@@ -95,7 +95,7 @@ class TriggerDataUserExtInfo
     }
 
     /**
-     * load delightful 的userinfo.
+     * load delightful userinfo.
      */
     private function loadDelightfulUserDepartments(): void
     {
@@ -103,12 +103,12 @@ class TriggerDataUserExtInfo
         $departmentUserDomain = di(DelightfulDepartmentUserDomainService::class);
 
         $contactDataIsolation = ContactDataIsolation::create($this->organizationCode, $this->userId);
-        // getuser的departmentid
+        // getuserdepartmentid
         $departmentUserEntities = $departmentUserDomain->getDepartmentUsersByUserIds([$this->userId], $contactDataIsolation);
         $departmentIds = array_column($departmentUserEntities, 'department_id');
 
         $departments = $departmentDomain->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
-        // add path 去again查一time
+        // add path goagain查一time
         foreach ($departments as $department) {
             $pathDepartments = explode('/', $department->getPath());
             $departmentIds = array_merge($departmentIds, $pathDepartments);

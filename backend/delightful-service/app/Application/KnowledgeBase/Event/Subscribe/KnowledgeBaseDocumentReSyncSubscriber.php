@@ -54,7 +54,7 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
         // getminute布typelock
         $lockKey = "document_re_sync:{$documentEntity->getKnowledgeBaseCode()}:{$documentEntity->getCode()}";
         if (! $lock->mutexLock($lockKey, $event->knowledgeBaseDocumentEntity->getCreatedUid(), 300)) { // 5minute钟timeout
-            $logger->info('document[' . $documentEntity->getCode() . ']正inbe其他进程process，skipsync');
+            $logger->info('document[' . $documentEntity->getCode() . ']正inbe其他enter程process，skipsync');
             return;
         }
 
@@ -71,7 +71,7 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
         $knowledge = $event->knowledgeBaseEntity;
         $documentEntity = $event->knowledgeBaseDocumentEntity;
         $dataIsolation = $event->dataIsolation;
-        // if是基础knowledge basetype，then传knowledge basecreate者，避免permissionnot足
+        // ifis基础knowledge basetype，then传knowledge basecreate者，避免permissionnot足
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }
@@ -82,9 +82,9 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
         /** @var KnowledgeBaseVectorAppService $knowledgeBaseVectorAppService */
         $knowledgeBaseVectorAppService = di(KnowledgeBaseVectorAppService::class);
 
-        // 自增versionnumber(抢lock)
+        // from增versionnumber(抢lock)
         $affectedRows = $knowledgeBaseDocumentDomainService->increaseVersion($dataIsolation, $documentEntity);
-        // if自增fail，instruction已经重新toquantity化过了，提frontend
+        // iffrom增fail，instruction已经重新toquantity化pass，提frontend
         if ($affectedRows === 0) {
             $logger->info('document已重新toquantity化，skipsync');
             return;

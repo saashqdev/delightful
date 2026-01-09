@@ -29,7 +29,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function batchCreateSeq(array $seqList): array;
 
     /**
-     * return $userLocalMaxSeqId 之back的 $limit itemmessage.
+     * return $userLocalMaxSeqId 之back $limit itemmessage.
      * @return ClientSequenceResponse[]
      */
     public function getAccountSeqListByDelightfulId(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array;
@@ -41,7 +41,7 @@ interface DelightfulChatSeqRepositoryInterface
     public function getAccountSeqListByAppMessageId(DataIsolation $dataIsolation, string $appMessageId, string $pageToken, int $pageSize): array;
 
     /**
-     * returnmost大message的倒数 n item序column.
+     * returnmost大message倒数 n item序column.
      * @return ClientSequenceResponse[]
      */
     public function pullRecentMessage(DataIsolation $dataIsolation, int $userLocalMaxSeqId, int $limit): array;
@@ -57,7 +57,7 @@ interface DelightfulChatSeqRepositoryInterface
      * @return ClientSequenceResponse[]
      * @todo 挪to delightful_chat_topic_messages process
      * sessionwindowscrollloadhistoryrecord.
-     * message_id= seqtable的primary keyid,thereforenotneed单独对 message_id 加索引.
+     * message_id= seqtableprimary keyid,thereforenotneed单独to message_id 加索引.
      */
     public function getConversationsChatMessages(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
 
@@ -67,13 +67,13 @@ interface DelightfulChatSeqRepositoryInterface
     public function getConversationsMessagesGroupById(MessagesQueryDTO $messagesQueryDTO, array $conversationIds): array;
 
     /**
-     * get收item方message的status变morestream.
+     * get收item方messagestatus变morestream.
      * @return DelightfulSeqEntity[]
      */
     public function getReceiveMessagesStatusChange(array $referMessageIds, string $userId): array;
 
     /**
-     * gethairitem方message的status变morestream.
+     * gethairitem方messagestatus变morestream.
      * @return DelightfulSeqEntity[]
      */
     public function getSenderMessagesStatusChange(string $senderMessageId, string $userId): array;
@@ -96,11 +96,11 @@ interface DelightfulChatSeqRepositoryInterface
     public function getMinSeqListByDelightfulMessageId(string $delightfulMessageId): array;
 
     /**
-     * getmessage的withdraw seq.
+     * getmessagewithdraw seq.
      */
     public function getMessageRevokedSeq(string $messageId, DelightfulUserEntity $userEntity, ControlMessageType $controlMessageType): ?DelightfulSeqEntity;
 
-    // 按typegetsessionmiddle的seq
+    // 按typegetsessionmiddleseq
     public function getConversationSeqByType(string $delightfulId, string $conversationId, ControlMessageType $seqType): ?DelightfulSeqEntity;
 
     /**
@@ -112,10 +112,10 @@ interface DelightfulChatSeqRepositoryInterface
 
     public function deleteSeqMessageByIds(array $seqIds): int;
 
-    // 为了移except脏data写的method
+    // for移except脏data写method
     public function getSeqByDelightfulId(string $delightfulId, int $limit): array;
 
-    // 为了移except脏data写的method
+    // for移except脏data写method
     public function getHasTrashMessageUsers(): array;
 
     public function updateSeqExtra(string $seqId, SeqExtra $seqExtra): bool;

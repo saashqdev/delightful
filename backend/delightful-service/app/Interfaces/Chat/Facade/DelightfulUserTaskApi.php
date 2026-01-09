@@ -76,7 +76,7 @@ class DelightfulUserTaskApi extends AbstractApi
                 }
             }
 
-            // 将deadlineconvert为DateTimeobject
+            // willdeadlineconvertforDateTimeobject
             if ($userTaskDTO->getValue()['deadline']) {
                 $userTaskValueDTO->setDeadline(new DateTime($userTaskDTO->getValue()['deadline']));
             }
@@ -137,7 +137,7 @@ class DelightfulUserTaskApi extends AbstractApi
             $userTaskValueDTO->setValues($values);
             $userTaskValueDTO->setMonth($month);
 
-            // 将deadlineconvert为DateTimeobject
+            // willdeadlineconvertforDateTimeobject
             if ($userTaskDTO->getValue()['deadline']) {
                 $userTaskValueDTO->setDeadline(new DateTime($userTaskDTO->getValue()['deadline']));
             }

@@ -57,7 +57,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
         // verifyresponse结构
         if (isset($response['data'])) {
             $this->assertIsArray($response['data']);
-            // verifyreturn的organizationcode
+            // verifyreturnorganizationcode
             if (isset($response['data']['delightful_organization_code'])) {
                 $this->assertEquals($requestData['delightful_organization_code'], $response['data']['delightful_organization_code']);
             }
@@ -65,7 +65,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
     }
 
     /**
-     * testset空organizationcode的error情况.
+     * testset空organizationcodeerror情况.
      */
     public function testSetCurrentOrganizationCodeWithEmptyCodeViaHttp(): void
     {
@@ -81,7 +81,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
     }
 
     /**
-     * testget账numberdown可切换的organizationlist.
+     * testget账numberdowncan切换organizationlist.
      */
     public function testListOrganizationsViaHttp(): void
     {

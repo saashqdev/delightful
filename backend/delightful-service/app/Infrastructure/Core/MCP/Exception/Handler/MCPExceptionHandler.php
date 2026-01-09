@@ -25,7 +25,7 @@ class MCPExceptionHandler
     }
 
     /**
-     * processexception并convert为standarderrorresponse.
+     * processexceptionandconvertforstandarderrorresponse.
      */
     public function handle(Throwable $exception, int $id = 0, string $jsonrpc = '2.0'): ErrorResponse
     {
@@ -55,7 +55,7 @@ class MCPExceptionHandler
             return $exception->getRpcCode();
         }
 
-        // 对at其他type的exception，usestandardmapping
+        // toat其他typeexception，usestandardmapping
         return match (true) {
             $exception instanceof InvalidArgumentException => -32602, // Invalid params
             $exception instanceof RuntimeException => -32603, // Internal error

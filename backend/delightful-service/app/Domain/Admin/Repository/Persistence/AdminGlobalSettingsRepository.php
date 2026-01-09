@@ -76,7 +76,7 @@ class AdminGlobalSettingsRepository implements AdminGlobalSettingsRepositoryInte
             return [];
         }
 
-        // 准备批quantityupdate的data
+        // 准备批quantityupdatedata
         $values = array_map(function ($entity) {
             /** @var ?AbstractSettingExtra $extra */
             $extra = $entity->getExtra();
@@ -97,7 +97,7 @@ class AdminGlobalSettingsRepository implements AdminGlobalSettingsRepositoryInte
             ['status', 'extra', 'updated_at']
         );
 
-        // getupdateback的record
+        // getupdatebackrecord
         $typeValues = array_map(fn ($entity) => $entity->getType()->value, $entities);
         $organization = $entities[0]->getOrganization();
 

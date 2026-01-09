@@ -149,7 +149,7 @@ class MCPHandler implements MCPHandlerInterface
 
             $this->getAuthentication()->authenticate($request);
 
-            // getrequest的methodname
+            // getrequestmethodname
             $method = $request->getMethod();
 
             // createprocess器实例（短生命period）
@@ -157,7 +157,7 @@ class MCPHandler implements MCPHandlerInterface
 
             $result = null;
             if ($handler) {
-                // 为process器set所需的managergroupitem
+                // forprocess器set所需managergroupitem
                 $handler->setToolManager($this->toolManager)
                     ->setResourceManager($this->resourceManager)
                     ->setPromptManager($this->promptManager);

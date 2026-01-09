@@ -39,7 +39,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
     protected array $metadata = [];
 
     /**
-     * 业务 ID，可useat业务方record自己的 ID use来conductupdatedata.
+     * 业务 ID，canuseat业务方recordfrom己 ID usecomeconductupdatedata.
      */
     protected string $businessId = '';
 
@@ -124,7 +124,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
 
     public function hasModify(KnowledgeBaseFragmentEntity $savingDelightfulFlowKnowledgeFragmentEntity): bool
     {
-        // if content 和 metadata allnothavechange，thennotneedupdate了
+        // if content and metadata allnothavechange，thennotneedupdate
         if ($savingDelightfulFlowKnowledgeFragmentEntity->getContent() === $this->content
             && $savingDelightfulFlowKnowledgeFragmentEntity->getMetadata() === $this->metadata
             && $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId() === $this->businessId
@@ -368,7 +368,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
         return $this->wordCount;
     }
 
-    // 这withinnotusesetting，直接according tocontent计算出来thenline
+    // 这withinnotusesetting，直接according tocontent计算outcomethenline
     public function setWordCount(int $wordCount): KnowledgeBaseFragmentEntity
     {
         $this->wordCount = $wordCount;
@@ -423,13 +423,13 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
     {
         foreach ($this->metadata as $key => $value) {
             if (Str::startsWith($key, self::PAYLOAD_PREFIX)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'yuandata key cannotby ' . self::PAYLOAD_PREFIX . ' 开head');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'yuandata key cannotby ' . self::PAYLOAD_PREFIX . ' openhead');
             }
             if (! is_string($key)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'yuandata 的 key must是string');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'yuandata  key mustisstring');
             }
             if (! is_string($value) && ! is_numeric($value)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'yuandata 的 value 只能是 stringornumber');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'yuandata  value 只能is stringornumber');
             }
         }
         return $this;

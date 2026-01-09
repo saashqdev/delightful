@@ -26,7 +26,7 @@ class LoginApiTest extends AbstractHttpTest
         // 构造requestparameter - hand机number密码login
         $requestData = [
             'state_code' => '+86',
-            'phone' => '13812345678', // testenvironmentmiddlenot存in的账number
+            'phone' => '13812345678', // testenvironmentmiddlenot存in账number
             'password' => '123456',
             'type' => 'phone_password',
         ];
@@ -71,14 +71,14 @@ class LoginApiTest extends AbstractHttpTest
         // 构造requestparameter - testhand机numbernot存in
         $requestData = [
             'state_code' => '+86',
-            'phone' => '19999999999', // use一确定not存in的hand机number
+            'phone' => '19999999999', // use一确定not存inhand机number
             'password' => '123456',
             'type' => 'phone_password',
         ];
 
         // sendPOSTrequest
         $response = $this->json(self::API, $requestData);
-        // expecthand机numbernot存ino clockreturn相应的error码和message
+        // expecthand机numbernot存ino clockreturn相应error码andmessage
         $expectData = [
             'code' => AuthenticationErrorCode::AccountNotFound->value,
         ];
@@ -87,7 +87,7 @@ class LoginApiTest extends AbstractHttpTest
     }
 
     /**
-     * testvalid的 token verify
+     * testvalid token verify
      * @depends testPhonePasswordLogin
      */
     public function testValidTokenVerification(string $authorization): void
@@ -113,7 +113,7 @@ class LoginApiTest extends AbstractHttpTest
     }
 
     /**
-     * testinvalid的 token verify
+     * testinvalid token verify
      */
     public function testInvalidTokenVerification(): void
     {

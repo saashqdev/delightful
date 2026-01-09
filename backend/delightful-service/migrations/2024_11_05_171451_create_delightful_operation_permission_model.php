@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('resource_id', 50)->comment('resourceid');
             $table->unsignedTinyInteger('target_type')->comment('goaltype');
             $table->string('target_id', 50)->comment('goalid');
-            $table->unsignedTinyInteger('operation')->comment('操作');
+            $table->unsignedTinyInteger('operation')->comment('操as');
             $table->string('created_uid', 50)->comment('createperson');
             $table->string('updated_uid', 50)->comment('modifyperson');
             $table->timestamps();

@@ -105,14 +105,14 @@ readonly class FileDomainService
     }
 
     /**
-     * 批quantitygetfilelink（自动frompathextractorganizationencoding并minutegroupprocess）.
-     * @param string[] $filePaths containorganizationencoding的filepatharray，format：orgCode/path/file.ext
-     * @param null|StorageBucketType $bucketType storage桶type，default为Public
-     * @return array<string,FileLink> filepathtoFileLink的mapping
+     * 批quantitygetfilelink（from动frompathextractorganizationencodingandminutegroupprocess）.
+     * @param string[] $filePaths containorganizationencodingfilepatharray，format：orgCode/path/file.ext
+     * @param null|StorageBucketType $bucketType storage桶type，defaultforPublic
+     * @return array<string,FileLink> filepathtoFileLinkmapping
      */
     public function getBatchLinksByOrgPaths(array $filePaths, ?StorageBucketType $bucketType = null): array
     {
-        // filter空path和已经是URL的path
+        // filter空pathand已经isURLpath
         $validPaths = array_filter($filePaths, static fn ($path) => ! empty($path) && ! is_url($path));
 
         if (empty($validPaths)) {
@@ -159,7 +159,7 @@ readonly class FileDomainService
 
     /**
      * start sts 模type.
-     * gettemporary凭证给front端use.
+     * gettemporary凭证givefront端use.
      * @todo securityissue，dir nothave校验，nothaveorganization隔离
      */
     public function getStsTemporaryCredential(
@@ -234,7 +234,7 @@ readonly class FileDomainService
     public function getFullWorkDir(string $organizationCode, string $userId, int $projectId, string $code = 'be-delightful', string $lastPath = 'project'): string
     {
         $prefix = $this->getFullPrefix($organizationCode);
-        # 判断mostnextcharacterwhether是 /,if是，去掉
+        # 判断mostnextcharacterwhetheris /,ifis，go掉
         if (substr($prefix, -1) === '/') {
             $prefix = substr($prefix, 0, -1);
         }
@@ -265,7 +265,7 @@ readonly class FileDomainService
         string $directoryPrefix,
         StorageBucketType $bucketType = StorageBucketType::Private
     ): array {
-        // uselistObjectsByCredentialcolumn出directoryfile
+        // uselistObjectsByCredentialcolumnoutdirectoryfile
         $objectsResponse = $this->cloudFileRepository->listObjectsByCredential(
             $organizationCode,
             $directoryPrefix,

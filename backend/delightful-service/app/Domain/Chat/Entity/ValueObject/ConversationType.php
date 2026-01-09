@@ -8,14 +8,14 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject;
 
 /**
- * conversation的messagetype.
+ * conversationmessagetype.
  */
 enum ConversationType: int
 {
-    // 与ai的conversation(private chat)
+    // andaiconversation(private chat)
     case Ai = 0;
 
-    // 与personcategory的conversation(private chat)
+    // andpersoncategoryconversation(private chat)
     case User = 1;
 
     // group chat
@@ -37,7 +37,7 @@ enum ConversationType: int
     case App = 7;
 
     /**
-     * 将枚举typeconvert.
+     * will枚举typeconvert.
      */
     public static function getCaseFromName(string $typeName): ?ConversationType
     {

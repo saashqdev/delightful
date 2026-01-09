@@ -21,16 +21,16 @@ return new class extends Migration {
 
         Schema::create('delightful_api_premium_endpoint_statistics', function (Blueprint $table) {
             $table->bigIncrements('id');
-            // 这withincanimplement对接入pointrequest的statistics逻辑
+            // 这withincanimplementto接入pointrequeststatistics逻辑
             // for example：recordrequestcount、requesttype、resourceconsumeetc
             $table->string('endpoint_id', 64)->nullable()->default(null)->comment('接入pointid');
             $table->integer('request_count')->nullable()->default(null)->comment('requestcount');
             $table->integer('request_success_count')->nullable()->default(null)->comment('requestsuccesscount');
             $table->integer('request_error_count')->nullable()->default(null)->comment('requestfailcount');
-            $table->double('request_success_rate')->nullable()->default(null)->comment('requestsuccessrate,most大value为 100，not带%');
+            $table->double('request_success_rate')->nullable()->default(null)->comment('requestsuccessrate,most大valuefor 100，not带%');
             $table->integer('request_average_time')->nullable()->default(null)->comment('requestaveragetime，unit毫second');
-            $table->integer('request_max_time')->nullable()->default(null)->comment('requestconsume的most大time，unit毫second');
-            $table->integer('request_min_time')->nullable()->default(null)->comment('requestconsume的most小time，unit毫second');
+            $table->integer('request_max_time')->nullable()->default(null)->comment('requestconsumemost大time，unit毫second');
+            $table->integer('request_min_time')->nullable()->default(null)->comment('requestconsumemost小time，unit毫second');
             // statisticstimesegment
             $table->bigInteger('statistics_time')->nullable()->default(null)->comment('statisticstimesegment');
             // statisticslevel别：0-secondlevel，1-minute钟level，2-hourlevel，3-daylevel

@@ -15,7 +15,7 @@ use App\Domain\File\Service\FileDomainService;
 
 /**
  * chatfileapplicationservice
- * 提供给其他领域use的interface.
+ * 提供give其他领域useinterface.
  */
 class DelightfulChatFileAppService extends AbstractAppService
 {
@@ -32,7 +32,7 @@ class DelightfulChatFileAppService extends AbstractAppService
      * @param string $fileKey filekey
      * @param DataIsolation $dataIsolation data隔离object
      * @param array $fileData filedata
-     * @return array returncontainfileinfo的array
+     * @return array returncontainfileinfoarray
      */
     public function saveOrUpdateByFileKey(string $fileKey, DataIsolation $dataIsolation, array $fileData): array
     {

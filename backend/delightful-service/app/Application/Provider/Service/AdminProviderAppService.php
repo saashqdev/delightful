@@ -69,13 +69,13 @@ readonly class AdminProviderAppService
             $authorization->getId(),
         );
 
-        // pass领域layermethod一timepropertygetservice商、configuration和modelinfo
+        // pass领域layermethod一timepropertygetservice商、configurationandmodelinfo
         $providerModels = $this->providerConfigDomainService->getProviderModelsByConfigId($dataIsolation, $configId);
         if ($providerModels === null) {
             return null;
         }
 
-        // ProviderModelsDTO 已经contain所haveneed的data，统一handle provider 和 models 的 icon 并return
+        // ProviderModelsDTO 已经contain所haveneeddata，统一handle provider and models  icon andreturn
         $this->processProviderAndModelsIcons($providerModels);
         return $providerModels;
     }
@@ -229,15 +229,15 @@ readonly class AdminProviderAppService
     {
         $dataIsolation = ProviderDataIsolation::create($authorization->getOrganizationCode(), $authorization->getId());
 
-        // record是createalso是update
+        // recordiscreatealsoisupdate
         $isCreate = ! $saveProviderModelDTO->getId();
 
         $saveProviderModelDTO = $this->providerModelDomainService->saveModel($dataIsolation, $saveProviderModelDTO);
 
-        // getsaveback的model实body
+        // getsavebackmodel实body
         $modelEntity = $this->providerModelDomainService->getById($dataIsolation, $saveProviderModelDTO->getId());
 
-        // 触hair相应的event
+        // 触hair相应event
         if ($isCreate) {
             $this->eventDispatcher->dispatch(new ProviderModelCreatedEvent(
                 $modelEntity,
@@ -251,21 +251,21 @@ readonly class AdminProviderAppService
         }
 
         $saveProviderModelData = $saveProviderModelDTO->toArray();
-        // icon传入是 url，returnalsoneed是 url，but是saveindatabase是 file_key
-        // 所by SaveProviderModelDTO 的 setIcon 做了 url to file_key的convert
+        // icon传入is url，returnalsoneedis url，butissaveindatabaseis file_key
+        // 所by SaveProviderModelDTO  setIcon 做 url to file_keyconvert
         $saveProviderModelData['icon'] = $this->getFileUrl($saveProviderModelDTO->getIcon());
         return $saveProviderModelData;
     }
 
     /**
-     * according toorganizationencoding和service商categoryget活跃的service商configuration.
+     * according toorganizationencodingandservice商categoryget活跃service商configuration.
      * @param string $organizationCode organizationencoding
      * @param Category $category service商category
      * @return ProviderConfigDTO[]
      */
     public function getOrganizationProvidersModelsByCategory(string $organizationCode, Category $category): array
     {
-        // call领域layero clockpass modelTypes parameter，让仓储layercompletequery和filter
+        // call领域layero clockpass modelTypes parameter，let仓储layercompletequeryandfilter
         $serviceProviderModelsDTOs = $this->adminProviderDomainService->getOrganizationProvidersModelsByCategory($organizationCode, $category);
 
         // handlegraph标
@@ -285,12 +285,12 @@ readonly class AdminProviderAppService
             $authorization->getId(),
         );
 
-        // pass领域layermethodget完整的modeldetailinfo
+        // pass领域layermethodget完整modeldetailinfo
         $providerModelEntity = $this->providerModelDomainService->getById(
             $dataIsolation,
             $modelPrimaryId
         );
-        // according toservice商type和modeltypeconduct连通propertytest
+        // according toservice商typeandmodeltypeconduct连通propertytest
         return match ($this->getConnectivityTestType($providerModelEntity->getCategory()->value, $providerModelEntity->getModelType()->value)) {
             NaturalLanguageProcessing::EMBEDDING => $this->embeddingConnectivityTest($modelPrimaryId, $authorization),
             NaturalLanguageProcessing::LLM => $this->llmConnectivityTest($modelPrimaryId, $authorization),
@@ -321,11 +321,11 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * get所have可use的service商column表（include官方service商），notdependencyatorganization.
+     * get所havecanuseservice商column表（include官方service商），notdependencyatorganization.
      *
      * @param Category $category service商category
      * @param string $organizationCode organizationencoding
-     * @return ProviderConfigModelsDTO[] 所have可useservice商column表
+     * @return ProviderConfigModelsDTO[] 所havecanuseservice商column表
      */
     public function getAllAvailableLlmProviders(Category $category, string $organizationCode): array
     {
@@ -383,7 +383,7 @@ readonly class AdminProviderAppService
             $iconUrlMap[] = $links;
         }
         ! empty($iconUrlMap) && $iconUrlMap = array_merge(...$iconUrlMap);
-        // createDTO并settinggraph标URL
+        // createDTOandsettinggraph标URL
         $modelDTOs = [];
         foreach ($models as $model) {
             $modelDTO = new ProviderModelDetailDTO($model->toArray());
@@ -403,7 +403,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * get官方organizationdown的所have可usemodel.
+     * get官方organizationdown所havecanusemodel.
      * @return ProviderModelDetailDTO[]
      */
     public function queriesModels(DelightfulUserAuthorization $authorization, ProviderModelQuery $providerModelQuery): array
@@ -481,7 +481,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 填充 provider info并handle icon.
+     * 填充 provider infoandhandle icon.
      */
     private function fillProviderInfoAndIcon(
         ProviderEntity $provider,
@@ -510,11 +510,11 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * 统一handle Provider 和 Models 的graph标，convert为完整URL.
+     * 统一handle Provider and Models graph标，convertfor完整URL.
      */
     private function processProviderAndModelsIcons(ProviderConfigModelsDTO $providerDTO): void
     {
-        // 收集所havegraph标path和对应的organizationencoding
+        // 收集所havegraph标pathandto应organizationencoding
         $iconsByOrg = [];
         $providerIconMap = [];  // providergraph标mapping
         $modelIconMap = [];     // modelgraph标mapping
@@ -549,7 +549,7 @@ readonly class AdminProviderAppService
                 }
                 $iconsByOrg[$organizationCode][] = $icon;
 
-                // recordgraph标tomodel的mapping关系
+                // recordgraph标tomodelmappingclose系
                 if (! isset($modelIconMap[$icon])) {
                     $modelIconMap[$icon] = [];
                 }
@@ -580,7 +580,7 @@ readonly class AdminProviderAppService
         }
     }
 
-    // whether是官方organization
+    // whetheris官方organization
     private function isOfficialOrganization(string $organizationCode): bool
     {
         $officialOrganization = config('service_provider.office_organization');
@@ -608,7 +608,7 @@ readonly class AdminProviderAppService
         }
         $proxyModelRequest->setModel($modelPrimaryId);
         $proxyModelRequest->setInput('test');
-        $proxyModelRequest->setEnableHighAvailability(false); // 连通propertytesto clocknotenable高可use
+        $proxyModelRequest->setEnableHighAvailability(false); // 连通propertytesto clocknotenable高canuse
         $proxyModelRequest->setBusinessParams([
             'organization_id' => $authorization->getOrganizationCode(),
             'user_id' => $authorization->getId(),
@@ -635,7 +635,7 @@ readonly class AdminProviderAppService
         }
         $completionDTO->setMessages([['role' => 'user', 'content' => '你好']]);
         $completionDTO->setModel($modelPrimaryId);
-        $completionDTO->setEnableHighAvailability(false); // 连通propertytesto clocknotenable高可use
+        $completionDTO->setEnableHighAvailability(false); // 连通propertytesto clocknotenable高canuse
         $completionDTO->setBusinessParams([
             'organization_id' => $authorization->getOrganizationCode(),
             'user_id' => $authorization->getId(),
@@ -655,7 +655,7 @@ readonly class AdminProviderAppService
     }
 
     /**
-     * handleservice提供商实bodycolumn表的graph标.
+     * handleservice提供商实bodycolumn表graph标.
      *
      * @param ProviderConfigModelsDTO[] $serviceProviders service提供商实bodycolumn表
      * @param string $organizationCode organizationencoding
@@ -668,14 +668,14 @@ readonly class AdminProviderAppService
             $icons[] = $serviceProvider->getIcon();
         }
 
-        // 批quantityget所havegraph标的link
+        // 批quantityget所havegraph标link
         $iconUrlMap = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
 
         // 只handlegraph标URL，直接return实bodyobject
         foreach ($serviceProviders as $serviceProvider) {
             $icon = $serviceProvider->getIcon();
 
-            // ifhaveURLmapping，usemapping的URL
+            // ifhaveURLmapping，usemappingURL
             if (isset($iconUrlMap[$icon])) {
                 $serviceProvider->setIcon($iconUrlMap[$icon]->getUrl());
             }

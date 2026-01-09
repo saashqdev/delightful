@@ -18,7 +18,7 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 interface MethodHandlerInterface
 {
     /**
-     * processrequest并returnresult.
+     * processrequestandreturnresult.
      *
      * @return null|array<string, mixed> processresult，ifnotneedreturndatathenreturnnull
      */

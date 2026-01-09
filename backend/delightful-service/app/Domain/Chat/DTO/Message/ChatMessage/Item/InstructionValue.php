@@ -20,12 +20,12 @@ class InstructionValue extends AbstractEntity
     protected string $id = '';
 
     /**
-     * option的displayname.
+     * optiondisplayname.
      */
     protected string $name = '';
 
     /**
-     * option的value.
+     * optionvalue.
      */
     protected string $value = '';
 

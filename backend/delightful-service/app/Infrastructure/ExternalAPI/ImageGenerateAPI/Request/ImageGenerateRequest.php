@@ -24,7 +24,7 @@ class ImageGenerateRequest
 
     protected string $defaultNegativePrompt = '--no nsfw, nude, blurry, watermark, identifying mark, low resolution, mutated, lack of hierarchy';
 
-    // 对mjinvalid
+    // tomjinvalid
     protected int $generateNum = 1;
 
     protected string $model;

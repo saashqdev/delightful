@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_bots', function (Blueprint $table) {
-            $table->bigInteger('bot_version_id')->nullable()->comment('助理bind的versionid')->change();
+            $table->bigInteger('bot_version_id')->nullable()->comment('助理bindversionid')->change();
         });
     }
 

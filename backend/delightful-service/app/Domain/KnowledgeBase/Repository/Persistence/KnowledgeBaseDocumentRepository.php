@@ -41,7 +41,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
         $attributes = $this->prepareAttributes($documentEntity);
         $attributes['organization_code'] = $dataIsolation->getCurrentOrganizationCode();
 
-        // createmodel并save
+        // createmodelandsave
         $model = new KnowledgeBaseDocumentModel();
         $model->fill($attributes);
         $model->save();
@@ -56,7 +56,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             $attrs['organization_code'] = $documentEntity->getOrganizationCode();
             $attrs['created_at'] = date('Y-m-d H:i:s');
             $attrs['updated_at'] = date('Y-m-d H:i:s');
-            // 将arraytype的fieldconvert为 JSON string
+            // willarraytypefieldconvertfor JSON string
             foreach ($attrs as $key => $attr) {
                 if (is_array($attr)) {
                     $attrs[$key] = Json::encode($attr);
@@ -77,7 +77,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
         $attributes = $this->prepareAttributes($documentEntity);
         $attributes['organization_code'] = $dataIsolation->getCurrentOrganizationCode();
 
-        // createmodel并save
+        // createmodelandsave
         $model = KnowledgeBaseDocumentModel::withTrashed()
             ->firstOrCreate(
                 [
@@ -86,7 +86,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
                 ],
                 $attributes
             );
-        // if是软delete的，thenrestore
+        // ifis软delete，thenrestore
         if ($model->trashed()) {
             $model->restore();
             $model->fill($attributes)->save();
@@ -141,7 +141,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
      */
     public function getDocumentCountByKnowledgeBaseCode(KnowledgeBaseDataIsolation $dataIsolation, array $knowledgeBaseCodes): array
     {
-        // minutegroupaggregatequery，geteachknowledge base的documentquantity
+        // minutegroupaggregatequery，geteachknowledge basedocumentquantity
         $res = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query())
             ->select('knowledge_base_code', Db::raw('count(*) as count'))
             ->groupBy('knowledge_base_code')
@@ -160,7 +160,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
      */
     public function getDocumentsByCodes(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, array $knowledgeBaseDocumentCodes): array
     {
-        // geteachdocument的document名
+        // geteachdocumentdocument名
         $res = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query())
             ->where('knowledge_base_code', $knowledgeBaseCode)
             ->whereIn('code', $knowledgeBaseDocumentCodes)
@@ -278,7 +278,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             'sync_status_message' => mb_substr($documentEntity->getSyncStatusMessage(), 0, 900),
         ];
 
-        // if是已syncorsyncfailstatus，synccount加1
+        // ifis已syncorsyncfailstatus，synccount加1
         if (in_array($documentEntity->getSyncStatus(), [KnowledgeSyncStatus::Synced->value, KnowledgeSyncStatus::SyncFailed->value])) {
             KnowledgeBaseDocumentModel::withTrashed()
                 ->where('id', $documentEntity->getId())
@@ -366,7 +366,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * getuseatcreateorupdatemodel的propertyarray.
+     * getuseatcreateorupdatemodelpropertyarray.
      */
     protected function prepareAttributes(KnowledgeBaseDocumentEntity $entity): array
     {

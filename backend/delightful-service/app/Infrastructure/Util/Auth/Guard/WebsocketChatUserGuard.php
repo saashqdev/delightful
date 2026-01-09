@@ -16,7 +16,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 use Throwable;
 
 /**
- * needparse websocket contextmiddle的 token information，therefore跟 WebUserGuard different.
+ * needparse websocket contextmiddle token information，therefore跟 WebUserGuard different.
  */
 class WebsocketChatUserGuard extends WebUserGuard
 {
@@ -36,7 +36,7 @@ class WebsocketChatUserGuard extends WebUserGuard
         if (empty($organizationCode)) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
-        // getuserinformation的cache
+        // getuserinformationcache
         $contextKey = $this->resultKey($userAuthToken);
         if ($result = WebSocketContext::get($contextKey)) {
             if ($result instanceof Throwable) {
@@ -47,7 +47,7 @@ class WebsocketChatUserGuard extends WebUserGuard
             }
             ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND);
         }
-        // downsurface这segmentactualcallis DelightfulUserAuthorization 的 retrieveById method
+        // downsurface这segmentactualcallis DelightfulUserAuthorization  retrieveById method
         /** @var DelightfulUserAuthorization $user */
         $user = $this->userProvider->retrieveByCredentials([
             'authorization' => $userAuthToken,

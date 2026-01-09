@@ -131,11 +131,11 @@ class ExcelFileParserDriver implements ExcelFileParserDriverInterface
     }
 
     /**
-     * format化CSV单yuan格content，对特殊contentadd引number.
+     * format化CSV单yuan格content，to特殊contentadd引number.
      */
     private function formatCsvCell(string $value): string
     {
-        // if单yuan格content为null，直接returnnullstring
+        // if单yuan格contentfornull，直接returnnullstring
         if ($value === '') {
             return '';
         }

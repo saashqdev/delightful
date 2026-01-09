@@ -87,7 +87,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
         $contactDataIsolation = ContactDataIsolation::simpleMake($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId());
         // according to userid getuserinformation
         $users = $this->delightfulUserDomainService->getByUserIds($contactDataIsolation, $userIds);
-        // getuser的 departmentId
+        // getuser departmentId
         $userDepartmentList = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserIds($contactDataIsolation, $userIds);
         foreach ($userDepartmentList as $userDepartmentIds) {
             $departmentIds = array_merge($departmentIds, $userDepartmentIds);
@@ -105,7 +105,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * 对resourceconductauthorization.
+     * toresourceconductauthorization.
      * @param array<OperationPermissionEntity> $operationPermissions
      */
     public function resourceAccess(Authenticatable $authorization, ResourceType $resourceType, string $resourceId, array $operationPermissions): void
@@ -123,7 +123,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * getuser对someresource的most高permission.
+     * getusertosomeresourcemost高permission.
      */
     public function getOperationByResourceAndUser(PermissionDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, string $userId): Operation
     {
@@ -134,7 +134,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * getuser对some一categoryresource的most高操作permission.
+     * getusertosome一categoryresourcemost高操aspermission.
      */
     #[ArrayShape([
         // userId => [resourceId => Operation]

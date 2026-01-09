@@ -129,7 +129,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
                 'organization_code' => $user['organization_code'],
             ];
         }
-        // 批quantity往groupmiddleadduser
+        // 批quantitytogroupmiddleadduser
         ! empty($groupUsers) && $this->groupUserModel::query()->insert($groupUsers);
         return true;
     }
@@ -140,7 +140,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
             ->select($columns)
             ->where('group_id', $groupId);
         $userList = Db::select($userList->toSql(), $userList->getBindings());
-        // 将timealso原becometime戳
+        // willtimealso原becometime戳
         foreach ($userList as &$user) {
             ! empty($user['created_at']) && $user['created_at'] = strtotime($user['created_at']);
             ! empty($user['updated_at']) && $user['updated_at'] = strtotime($user['updated_at']);
@@ -193,7 +193,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
     }
 
     /**
-     * 将userfromgroupmiddle移except.
+     * willuserfromgroupmiddle移except.
      */
     public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int
     {
@@ -229,7 +229,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
     }
 
     /**
-     * getassociate的usergroup.
+     * getassociateusergroup.
      * @param array<string> $groupIds
      * @param array<string> $userIds
      */

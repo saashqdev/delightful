@@ -44,7 +44,7 @@ class ExcelLoaderNodeRunner extends NodeRunner
 
             $link = SSRFUtil::getSafeUrl($fileUrl, replaceIp: false);
 
-            // according tolinkgetfiletype，这within只getback缀可能not准确
+            // according tolinkgetfiletype，这within只getback缀maybenot准确
             $fileExtension = FileType::getType($link);
             if (! in_array($fileExtension, ['xlsx', 'xls'])) {
                 ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loader.unsupported_file_type', ['file_extension' => $fileExtension]);
@@ -75,7 +75,7 @@ class ExcelLoaderNodeRunner extends NodeRunner
                 ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, sprintf('Download remote file failed: %s', $url));
             }
             $outputStream = fopen($tempFile, 'w');
-            // readinputstream并writetooutputstream
+            // readinputstreamandwritetooutputstream
             while ($data = fread($inputStream, 1024)) {
                 fwrite($outputStream, $data);
             }

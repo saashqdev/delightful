@@ -41,7 +41,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
 
         $delightfulId = $this->getDelightfulIdByAuthorization($authorization);
 
-        // getcurrentuser的organizationcode
+        // getcurrentuserorganizationcode
         return $this->userOrganizationAppService->getCurrentOrganizationCode($delightfulId);
     }
 
@@ -69,7 +69,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
     }
 
     /**
-     * get账numberdown所have可切换的organizationlist。
+     * get账numberdown所havecan切换organizationlist。
      */
     public function listOrganizations(RequestInterface $request): array
     {
@@ -87,7 +87,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
         if (empty($userDetails)) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
-        // 同一账numberdown delightful_id all局唯一，这within取first即可
+        // 同一账numberdown delightful_id all局唯一，这within取first即can
         return $userDetails[0]->getDelightfulId();
     }
 }

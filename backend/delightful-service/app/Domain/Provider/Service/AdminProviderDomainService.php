@@ -69,7 +69,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // 3. group装 ProviderConfigDTO
         $configData = $providerConfigEntity->toArray();
         $providerData = $providerEntity->toArray();
-        // mergeconfiguration和service商data
+        // mergeconfigurationandservice商data
         $mergedData = array_merge($configData, [
             'name' => $providerData['name'],
             'description' => $providerData['description'],
@@ -85,11 +85,11 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
         if (! empty($configData['config'])) {
             if ($decryptConfig) {
-                // whenneeddecrypto clock，setting已decrypt的configuration（not脱敏)
-                // need new 两timeProviderConfigItemobject，因为 setConfig methodwill操作originalobjectconduct脱敏
+                // whenneeddecrypto clock，setting已decryptconfiguration（not脱敏)
+                // need new 两timeProviderConfigItemobject，因for setConfig methodwill操asoriginalobjectconduct脱敏
                 $mergedData['decryptedConfig'] = new ProviderConfigItem($configData['config']);
             }
-            // config field的 set methodwill脱敏
+            // config field set methodwill脱敏
             $mergedData['config'] = new ProviderConfigItem($configData['config']);
         }
 
@@ -101,7 +101,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * according toorganization和service商typegetservice商configurationcolumn表.
+     * according toorganizationandservice商typegetservice商configurationcolumn表.
      * @param string $organizationCode organizationencoding
      * @param Category $category service商type
      * @return ProviderConfigDTO[]
@@ -112,7 +112,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * vlm 的连通propertytest. llm/嵌入的in app layer。
+     * vlm 连通propertytest. llm/嵌入in app layer。
      * @throws Exception
      */
     public function vlmConnectivityTest(string $serviceProviderConfigId, string $modelVersion, string $organizationCode): ConnectResponse
@@ -134,7 +134,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
     /**
      * getservice商configuration（综合method）
-     * according tomodelversion、modelID和organizationencodinggetservice商configuration.
+     * according tomodelversion、modelIDandorganizationencodinggetservice商configuration.
      *
      * @param string $modelOriginId modelversion
      * @param string $modelId modelID
@@ -148,22 +148,22 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         string $organizationCode,
         bool $throw = true,
     ): ?ProviderConfigEntity {
-        // 1. if提供了 modelId，走new逻辑
+        // 1. if提供 modelId，走new逻辑
         if (! empty($modelId)) {
             return $this->getServiceProviderConfigByModelId($modelId, $organizationCode, $throw);
         }
 
-        // 2. ifonly modelOriginId，先尝试find对应的model
+        // 2. ifonly modelOriginId，先尝试findto应model
         if (! empty($modelOriginId)) {
             $models = $this->getModelsByVersionAndOrganization($modelOriginId, $organizationCode);
             if (! empty($models)) {
-                // if找tomodel，not直接return官方service商configuration，而是conduct进一步判断
-                $this->logger->info('找to对应model，判断service商configuration', [
+                // if找tomodel，not直接return官方service商configuration，whileisconductenter一步判断
+                $this->logger->info('找toto应model，判断service商configuration', [
                     'modelVersion' => $modelOriginId,
                     'organizationCode' => $organizationCode,
                 ]);
 
-                // fromactivate的modelmiddlefind可use的service商configuration
+                // fromactivatemodelmiddlefindcanuseservice商configuration
                 return $this->findAvailableServiceProviderFromModels($models);
             }
         }
@@ -197,7 +197,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         }
 
         if ($serviceProviderModelEntity->getIsOffice()) {
-            // get父level的modelservice商 id
+            // get父levelmodelservice商 id
             $serviceProviderConfigId = $this->getModelById((string) $serviceProviderModelEntity->getModelParentId())->getServiceProviderConfigId();
         } else {
             $serviceProviderConfigId = $serviceProviderModelEntity->getServiceProviderConfigId();
@@ -214,7 +214,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         if ($serviceProviderEntity === null) {
             return null;
         }
-        // 5. 判断service商type和status
+        // 5. 判断service商typeandstatus
         $serviceProviderType = $serviceProviderEntity->getProviderType();
         if (
             $serviceProviderType !== ProviderType::Official
@@ -233,13 +233,13 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * returnmodel和service商allbeactivate了的接入pointcolumn表.
-     * 要判断 model_parent_id 的model和service商whetheractivate.
+     * returnmodelandservice商allbeactivate接入pointcolumn表.
+     * 要判断 model_parent_id modelandservice商whetheractivate.
      * @return ProviderModelEntity[]
      */
     public function getOrganizationActiveModelsByIdOrType(string $key, string $orgCode): array
     {
-        // createdata隔离object并get可usemodel
+        // createdata隔离objectandgetcanusemodel
         $dataIsolation = ProviderDataIsolation::create($orgCode);
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
@@ -268,7 +268,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     /**
      * get超清修复service商configuration。
      * fromImageGenerateModelType::getMiracleVisionModes()[0]getmodel。
-     * if官方和non官方allenable，优先usenon官方configuration。
+     * if官方andnon官方allenable，优先usenon官方configuration。
      *
      * @param string $modelId modelversion
      * @param string $organizationCode organizationencoding
@@ -279,7 +279,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // createdata隔离object
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
-        // get所havecategory的可usemodel
+        // get所havecategorycanusemodel
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
         // 按model_idfilter
@@ -296,7 +296,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
         }
 
-        // 收集所haveactivate的model
+        // 收集所haveactivatemodel
         $activeModels = [];
         foreach ($models as $model) {
             if ($model->getStatus() === Status::Enabled) {
@@ -304,12 +304,12 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             }
         }
 
-        // ifnothaveactivate的model，throwexception
+        // ifnothaveactivatemodel，throwexception
         if (empty($activeModels)) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotActive);
         }
 
-        // fromactivate的modelmiddlefind可use的service商configuration
+        // fromactivatemodelmiddlefindcanuseservice商configuration
         return $this->findAvailableServiceProviderFromModels($activeModels);
     }
 
@@ -326,7 +326,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get所have可use的service商column表（include官方service商），notdependencyatorganizationencoding.
+     * get所havecanuseservice商column表（include官方service商），notdependencyatorganizationencoding.
      *
      * @param Category $category service商category别
      * @return ProviderConfigModelsDTO[]
@@ -348,7 +348,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * get官方的activatemodelconfiguration（supportreturn多）.
+     * get官方activatemodelconfiguration（supportreturn多）.
      * @param string $modelOriginId model
      * @return ProviderConfigItem[] service商configurationarray
      */
@@ -360,17 +360,17 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         $filteredModels = $this->getModelsByVersionAndOrganization($modelOriginId, OfficialOrganizationUtil::getOfficialOrganizationCode());
 
         if (empty($filteredModels)) {
-            // ifnothave找to匹配的activatemodel，returnnullarray
+            // ifnothave找to匹配activatemodel，returnnullarray
             return [];
         }
 
-        // createconfigurationIDtoconfiguration实body的mapping，便at快speedfind
+        // createconfigurationIDtoconfiguration实bodymapping，便at快speedfind
         $configMap = [];
         foreach ($serviceProviderConfigEntities as $configEntity) {
             $configMap[$configEntity->getId()] = $configEntity;
         }
 
-        // 收集所have匹配的service商configuration
+        // 收集所have匹配service商configuration
         $result = [];
         foreach ($filteredModels as $activeModel) {
             $targetConfigId = $activeModel->getServiceProviderConfigId();
@@ -397,7 +397,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     {
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
-        // get所havecategory的可usemodel
+        // get所havecategorycanusemodel
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
         // 按be_delightful_display_statefilter
@@ -417,7 +417,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             $beDelightfulModels[] = $model;
         }
 
-        // according to modelId 去重
+        // according to modelId go重
         $uniqueModels = [];
         foreach ($beDelightfulModels as $model) {
             $uniqueModels[$model->getModelId()] = $model;
@@ -435,7 +435,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     {
         $providerModelEntities = $this->providerModelRepository->getModelsForOrganization($dataIsolation, $providerModelQuery->getCategory(), $providerModelQuery->getStatus());
 
-        // modelId 经过filter，去重选一
+        // modelId 经passfilter，go重选一
         if ($providerModelQuery->isModelIdFilter()) {
             $uniqueModels = [];
             foreach ($providerModelEntities as $model) {
@@ -461,7 +461,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         $officialOrganization = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
         foreach ($categories as $category) {
-            // findprovider_code=Official的service商
+            // findprovider_code=Officialservice商
             $provider = $this->serviceProviderRepository->getByCodeAndCategory(
                 ProviderCode::Official,
                 $category
@@ -510,10 +510,10 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * fromactivate的modelmiddlefind可use的service商configuration
+     * fromactivatemodelmiddlefindcanuseservice商configuration
      * 优先returnnon官方configuration，ifnothavethenreturn官方configuration.
      *
-     * @param ProviderModelEntity[] $activeModels activate的modelcolumn表
+     * @param ProviderModelEntity[] $activeModels activatemodelcolumn表
      */
     private function findAvailableServiceProviderFromModels(array $activeModels): ProviderConfigEntity
     {
@@ -521,7 +521,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotActive);
         }
 
-        // 1. 收集所haveneedquery的 serviceProviderConfigId
+        // 1. 收集所haveneedquery serviceProviderConfigId
         $configIds = [];
         foreach ($activeModels as $model) {
             $configIds[] = $model->getServiceProviderConfigId();
@@ -531,7 +531,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // 2. 批quantityquery所haveconfiguration
         $configMap = $this->providerConfigRepository->getByIdsWithoutOrganizationFilter($configIds);
 
-        // 3. 收集所haveneedquery的 serviceProviderId
+        // 3. 收集所haveneedquery serviceProviderId
         $providerIds = [];
         foreach ($configMap as $config) {
             $providerIds[] = $config->getServiceProviderId();
@@ -563,43 +563,43 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             // getservice商type
             $providerType = $serviceProviderEntity->getProviderType();
 
-            // 对atnon官方service商，check其whetheractivate
+            // toatnon官方service商，check其whetheractivate
             if ($providerType !== ProviderType::Official) {
-                // if是non官方service商but未activate，thenskip
+                // ifisnon官方service商but未activate，thenskip
                 if ($serviceProviderConfigEntity->getStatus() !== Status::Enabled) {
                     continue;
                 }
-                // 找toactivate的non官方configuration，立即return（优先levelmost高）
+                // 找toactivatenon官方configuration，立即return（优先levelmost高）
                 return $serviceProviderConfigEntity;
             }
 
-            // if是官方service商configuration，先save，ifnothave找tonon官方的againuse
+            // ifis官方service商configuration，先save，ifnothave找tonon官方againuse
             if ($officialConfig === null) {
                 $officialConfig = $serviceProviderConfigEntity;
             }
         }
 
-        // if找to了官方configuration，thenreturn
+        // if找to官方configuration，thenreturn
         if ($officialConfig !== null) {
             return $officialConfig;
         }
 
-        // if官方和non官方allnothave找toactivate的configuration，throwexception
+        // if官方andnon官方allnothave找toactivateconfiguration，throwexception
         ExceptionBuilder::throw(ServiceProviderErrorCode::ServiceProviderNotActive);
     }
 
     /**
-     * according tomodelversion和organizationgetmodelcolumn表.
+     * according tomodelversionandorganizationgetmodelcolumn表.
      * @param string $modelOriginId modelid
      * @param string $organizationCode organizationcode
-     * @return ProviderModelEntity[] filterback的modelcolumn表
+     * @return ProviderModelEntity[] filterbackmodelcolumn表
      */
     private function getModelsByVersionAndOrganization(string $modelOriginId, string $organizationCode): array
     {
         // createdata隔离object
         $dataIsolation = ProviderDataIsolation::create($organizationCode);
 
-        // get所havecategory的可usemodel
+        // get所havecategorycanusemodel
         $allModels = $this->providerModelRepository->getModelsForOrganization($dataIsolation);
 
         // 按model_versionfilter

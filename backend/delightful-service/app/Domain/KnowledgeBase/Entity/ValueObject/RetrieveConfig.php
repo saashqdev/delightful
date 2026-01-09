@@ -20,7 +20,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * currentconfigurationversion.
      *
-     * useatconfiguration结构变moreo clock的compatiblepropertyprocess
+     * useatconfiguration结构变moreo clockcompatiblepropertyprocess
      */
     public const int CURRENT_VERSION = 1;
 
@@ -38,14 +38,14 @@ class RetrieveConfig extends AbstractValueObject
     protected string $searchMethod = RetrievalMethod::SEMANTIC_SEARCH;
 
     /**
-     * return的most大resultquantity.
+     * returnmost大resultquantity.
      */
     protected int $topK = 3;
 
     /**
      * minute数阈value
      *
-     * 只returnsimilardegreeminute数greater than该阈value的result
+     * 只returnsimilardegreeminute数greater than该阈valueresult
      */
     protected float $scoreThreshold = 0.5;
 
@@ -73,7 +73,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * 权重configuration.
      *
-     * containtoquantity检索和keyword检索的权重configuration
+     * containtoquantity检索andkeyword检索权重configuration
      */
     protected array $weights = [
         'vector_setting' => [
@@ -96,7 +96,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * 重sortmodelconfiguration.
      *
-     * contain重sortmodel的相关configurationparameter
+     * contain重sortmodel相closeconfigurationparameter
      */
     protected array $rerankingModel = [
         'reranking_model_name' => '',
@@ -106,7 +106,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * configurationversion.
      *
-     * useatconfiguration结构变moreo clock的compatiblepropertyprocess
+     * useatconfiguration结构变moreo clockcompatiblepropertyprocess
      */
     private int $version = self::CURRENT_VERSION;
 
@@ -148,7 +148,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * getreturn的most大resultquantity.
+     * getreturnmost大resultquantity.
      */
     public function getTopK(): int
     {
@@ -156,7 +156,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * setreturn的most大resultquantity.
+     * setreturnmost大resultquantity.
      */
     public function setTopK(int $topK): self
     {
@@ -264,7 +264,7 @@ class RetrieveConfig extends AbstractValueObject
             throw new InvalidArgumentException('Vector setting must contain vector_weight and keyword setting must contain keyword_weight');
         }
 
-        // verify graph_setting mustcontain必要的field
+        // verify graph_setting mustcontain必要field
         if (! isset($weights['graph_setting']['relation_weight'])
             || ! isset($weights['graph_setting']['max_depth'])
             || ! isset($weights['graph_setting']['include_properties'])) {
@@ -351,7 +351,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * convert为array.
+     * convertforarray.
      */
     public function toArray(): array
     {

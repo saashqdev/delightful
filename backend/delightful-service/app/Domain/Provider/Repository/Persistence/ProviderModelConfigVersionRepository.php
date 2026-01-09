@@ -26,27 +26,27 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
         Db::transaction(function () use ($dataIsolation, $entity) {
             $serviceProviderModelId = $entity->getServiceProviderModelId();
 
-            // 1. getmost新versionnumber并计算新versionnumber（use FOR UPDATE linelock防止并hairissue）
+            // 1. getmost新versionnumberand计算新versionnumber（use FOR UPDATE linelock防止andhairissue）
             $builder = $this->createBuilder($dataIsolation, ProviderModelConfigVersionModel::query());
             $latestVersion = $builder
                 ->where('service_provider_model_id', $serviceProviderModelId)
-                ->lockForUpdate()  // 悲观lock，防止并hair
+                ->lockForUpdate()  // 悲观lock，防止andhair
                 ->max('version');
 
             $newVersion = $latestVersion ? (int) $latestVersion + 1 : 1;
 
-            // 2. 将该model的所have旧versionmark为noncurrentversion
+            // 2. will该model所have旧versionmarkfornoncurrentversion
             $updateBuilder = $this->createBuilder($dataIsolation, ProviderModelConfigVersionModel::query());
             $updateBuilder
                 ->where('service_provider_model_id', $serviceProviderModelId)
                 ->where('is_current_version', true)
                 ->update(['is_current_version' => false]);
 
-            // 3. setversionnumber并create新versionrecord
+            // 3. setversionnumberandcreate新versionrecord
             $entity->setVersion($newVersion);
             $entity->setIsCurrentVersion(true);
 
-            // convert为array并移except null 的 created_at，让 Model 自动processtime戳
+            // convertforarrayand移except null  created_at，let Model from动processtime戳
             $data = $entity->toArray();
 
             ProviderModelConfigVersionModel::query()->create($data);
@@ -54,7 +54,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
     }
 
     /**
-     * getfinger定model的most新versionID.
+     * getfinger定modelmost新versionID.
      */
     public function getLatestVersionId(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?int
     {
@@ -66,7 +66,7 @@ class ProviderModelConfigVersionRepository extends AbstractProviderModelReposito
     }
 
     /**
-     * getfinger定model的most新configurationversion实body.
+     * getfinger定modelmost新configurationversion实body.
      */
     public function getLatestVersionEntity(ProviderDataIsolation $dataIsolation, int $serviceProviderModelId): ?ProviderModelConfigVersionEntity
     {

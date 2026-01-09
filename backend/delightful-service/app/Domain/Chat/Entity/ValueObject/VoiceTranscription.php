@@ -57,7 +57,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * add单language的转录result.
+     * add单language转录result.
      */
     public function addTranscription(string $language, string $text): self
     {
@@ -69,7 +69,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * getfinger定language的转录result.
+     * getfinger定language转录result.
      */
     public function getTranscription(string $language): ?string
     {
@@ -77,7 +77,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * getmainlanguage的转录result.
+     * getmainlanguage转录result.
      */
     public function getPrimaryTranscription(): ?string
     {
@@ -85,12 +85,12 @@ class VoiceTranscription extends AbstractValueObject
             return $this->transcriptions[$this->primaryLanguage];
         }
 
-        // ifnothavesetmainlanguage，returnfirst可use的转录result
+        // ifnothavesetmainlanguage，returnfirstcanuse转录result
         return ! empty($this->transcriptions) ? reset($this->transcriptions) : null;
     }
 
     /**
-     * checkwhetherhavefinger定language的转录result.
+     * checkwhetherhavefinger定language转录result.
      */
     public function hasTranscription(string $language): bool
     {
@@ -98,7 +98,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * get所havesupport的languagecode
+     * get所havesupportlanguagecode
      * @return string[]
      */
     public function getSupportedLanguages(): array
@@ -166,7 +166,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * checkwhether为空（nothave任何转录result）.
+     * checkwhetherfor空（nothave任何转录result）.
      */
     public function isEmpty(): bool
     {

@@ -11,7 +11,7 @@ use function Hyperf\Translation\trans;
 
 /**
  * 笔记DTO
- * useatASR总结middle的笔记information.
+ * useatASR总结middle笔记information.
  */
 readonly class NoteDTO
 {
@@ -26,7 +26,7 @@ readonly class NoteDTO
      */
     public function isValidFileType(): bool
     {
-        // support的filetype
+        // supportfiletype
         $supportedTypes = ['txt', 'md', 'json'];
         return in_array(strtolower($this->fileExtension), $supportedTypes, true);
     }
@@ -42,12 +42,12 @@ readonly class NoteDTO
     /**
      * generatefile名.
      *
-     * @param null|string $generatedTitle generate的title，if提供thenuse {title}-笔记.{ext} format
+     * @param null|string $generatedTitle generatetitle，if提供thenuse {title}-笔记.{ext} format
      */
     public function generateFileName(?string $generatedTitle = null): string
     {
         if (! empty($generatedTitle)) {
-            // usegenerate的titleformat：{title}-笔记.{ext}
+            // usegeneratetitleformat：{title}-笔记.{ext}
             return sprintf('%s-%s.%s', $generatedTitle, trans('asr.file_names.note_suffix'), $this->getFileExtension());
         }
 
@@ -66,7 +66,7 @@ readonly class NoteDTO
     /**
      * fromarraycreate实例.
      *
-     * @param array $data containcontent和file_type的array
+     * @param array $data containcontentandfile_typearray
      */
     public static function fromArray(array $data): self
     {
@@ -77,7 +77,7 @@ readonly class NoteDTO
     }
 
     /**
-     * convert为array.
+     * convertforarray.
      */
     public function toArray(): array
     {

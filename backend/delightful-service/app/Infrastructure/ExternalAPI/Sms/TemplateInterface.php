@@ -12,33 +12,33 @@ use App\Infrastructure\ExternalAPI\Sms\Enum\LanguageEnum;
 interface TemplateInterface
 {
     /**
-     * according to传入的短信type和语type,尝试确定可能存in的templateid.
+     * according to传入短信typeand语type,尝试确定maybe存intemplateid.
      */
     public function getTemplateIdByTypeAndLanguage(string $type, ?string $language): ?string;
 
     /**
-     * according to传入的短信type和语type,确定短信content. 可能will动stateadjusttype对应的templatecontent.
+     * according to传入短信typeand语type,确定短信content. maybewill动stateadjusttypeto应templatecontent.
      */
     public function getContentBySMSTypeAndLanguage(string $type, ?string $language): string;
 
     /**
-     * according tofront传入的短信templateid,确定短信content.
+     * according tofront传入短信templateid,确定短信content.
      */
     public function getContentByTemplateId(string $templateId): string;
 
     /**
-     * parsetemplatevariable,得to variablekey与variablevalue 的array.
+     * parsetemplatevariable,得to variablekeyandvariablevalue array.
      */
     public function getTemplateVariables(string $content, array $messages): array;
 
     /**
-     * according to短信type,returntypesupport的语typelist.
+     * according to短信type,returntypesupport语typelist.
      * @return string[]
      */
     public function getTemplateLanguagesByType(string $type): array;
 
     /**
-     * according to语type要求和短信support的signaturelist,return对应的signaturetext.
+     * according to语type要求and短信supportsignaturelist,returnto应signaturetext.
      */
     public function formatSign(string $sign, ?LanguageEnum $language, ?LanguageEnum $defaultLanguage = LanguageEnum::ZH_CN): string;
 }

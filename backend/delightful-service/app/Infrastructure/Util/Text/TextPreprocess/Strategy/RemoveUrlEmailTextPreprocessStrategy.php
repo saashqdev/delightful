@@ -11,7 +11,7 @@ class RemoveUrlEmailTextPreprocessStrategy extends AbstractTextPreprocessStrateg
 {
     public function preprocess(string $content): string
     {
-        // 移exceptURL（supportstandard和nonstandardformat）
+        // 移exceptURL（supportstandardandnonstandardformat）
         $content = preg_replace(
             '/(?:(?:https?|ftp|file):\/\/|www\.|ftp\.)(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[-A-Z0-9+&@#\/%=~_|$?!:,.])*(?:\([-A-Z0-9+&@#\/%=~_|$?!:,.]*\)|[A-Z0-9+&@#\/%=~_|$])/i',
             '',

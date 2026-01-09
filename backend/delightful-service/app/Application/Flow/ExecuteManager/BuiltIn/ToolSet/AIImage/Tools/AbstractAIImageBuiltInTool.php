@@ -49,7 +49,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
         "radio": {
             "type": "string",
             "key": "radio",
-            "title": "generateimage的ratio例",
+            "title": "generateimageratio例",
             "description": "optional：\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",default\"1:1\"",
             "required": null,
             "value": null,
@@ -73,8 +73,8 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
         "reference_image_ids": {
             "type": "array",
             "key": "reference_image_ids",
-            "title": "quote的imageidlist",
-            "description": "quote的imageidlist",
+            "title": "quoteimageidlist",
+            "description": "quoteimageidlist",
             "required": null,
             "value": null,
             "encryption": false,
@@ -206,7 +206,7 @@ JSON,
             ->setUserMessage($textMessage)
             ->setAttachments($executionData->getTriggerData()?->getAttachments())
             ->setReferMessageId($executionData->getTriggerData()?->getSeqEntity()?->getSeqId());
-        // setactualrequest的size和ratio例
+        // setactualrequestsizeandratio例
         $enumModel = ImageGenerateModelType::fromModel($model, false);
         $imageGenerateParamsVO = $reqDto->getParams();
         $imageGenerateParamsVO->setSourceId($this->getCode());
@@ -220,7 +220,7 @@ JSON,
 
     protected function getAssistantAuthorization(string $assistantUserId): DelightfulUserAuthorization
     {
-        // get助理的userinfo。generate的imageupload者是助理自己。
+        // get助理userinfo。generateimageupload者is助理from己。
         $assistantInfoEntity = $this->getDelightfulUserDomainService()->getUserById($assistantUserId);
         if ($assistantInfoEntity === null) {
             ExceptionBuilder::throw(GenericErrorCode::SystemError, 'assistant_not_found');

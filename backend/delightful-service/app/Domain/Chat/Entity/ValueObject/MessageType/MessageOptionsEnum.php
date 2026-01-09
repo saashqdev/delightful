@@ -8,10 +8,10 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject\MessageType;
 
 /**
- * message的optionalitem.
+ * messageoptionalitem.
  */
 enum MessageOptionsEnum: string
 {
-    //  message的optionalitem
+    //  messageoptionalitem
     case EDIT_MESSAGE_OPTIONS = 'edit_message_options';
 }

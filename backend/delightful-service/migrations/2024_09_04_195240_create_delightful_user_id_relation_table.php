@@ -18,15 +18,15 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('user_id', 64)->comment('userid,organizationdown唯一.其他open_id,union_idneedaccording touser_idgenerate')->default('');
             $table->string('id_type', 12)->comment('idtype:open_id/union_id')->default('');
-            $table->string('id_value', 64)->comment('idtype对应的value')->default('');
-            $table->string('relation_type', 12)->comment('id对应的associatetype:applicationencoding/create该application的organizationencoding')->default('');
-            $table->string('relation_value', 64)->comment('id对应的associatetype的value')->default('');
+            $table->string('id_value', 64)->comment('idtypeto应value')->default('');
+            $table->string('relation_type', 12)->comment('idto应associatetype:applicationencoding/create该applicationorganizationencoding')->default('');
+            $table->string('relation_value', 64)->comment('idto应associatetypevalue')->default('');
             // 确定唯一value,防conflict
             $table->unique(['id_type', 'id_value', 'relation_type', 'relation_value'], 'unq_id_relation');
-            // 便at按organization/applicationetcfind所haveassociate的user
+            // 便at按organization/applicationetcfind所haveassociateuser
             $table->index(['relation_type', 'relation_value'], 'idx_relation');
             $table->index(['user_id'], 'idx_user_id');
-            $table->comment('useridassociate表. record user_id 与 open_id/union_idetc的associate');
+            $table->comment('useridassociate表. record user_id and open_id/union_idetcassociate');
             $table->datetimes();
             $table->softDeletes();
         });

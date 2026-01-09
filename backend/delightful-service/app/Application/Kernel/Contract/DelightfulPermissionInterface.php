@@ -9,12 +9,12 @@ namespace App\Application\Kernel\Contract;
 
 /**
  * permission枚举interface
- * 提供permission管理的统一抽象
+ * 提供permission管理统一抽象
  */
 interface DelightfulPermissionInterface
 {
     /**
-     * get所have操作type.
+     * get所have操astype.
      */
     public function getOperations(): array;
 
@@ -34,14 +34,14 @@ interface DelightfulPermissionInterface
     public function parsePermission(string $permissionKey): array;
 
     /**
-     * generate所have可能的permissiongroup合.
+     * generate所havemaybepermissiongroup合.
      */
     public function generateAllPermissions(): array;
 
     /**
      * getpermissiontree结构.
      *
-     * @param bool $isPlatformOrganization whether平台organization，平台organizationdown才contain platform 平台的resourcetree
+     * @param bool $isPlatformOrganization whether平台organization，平台organizationdown才contain platform 平台resourcetree
      */
     public function getPermissionTree(bool $isPlatformOrganization = false): array;
 
@@ -56,12 +56,12 @@ interface DelightfulPermissionInterface
     public function getResourceLabel(string $resource): string;
 
     /**
-     * get操作tag.
+     * get操astag.
      */
     public function getOperationLabel(string $operation): string;
 
     /**
-     * getresource的模piece.
+     * getresource模piece.
      */
     public function getResourceModule(string $resource): string;
 

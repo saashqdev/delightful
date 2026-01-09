@@ -31,13 +31,13 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
 
     /**
      * permission键list（optional，仅inneedupdateo clock提供）.
-     * 注意：if提供了此field，将替换所have现havepermission.
+     * 注意：if提供此field，will替换所have现havepermission.
      */
     public ?array $permissions = null;
 
     /**
      * userIDlist（optional，仅inneedupdateo clock提供）.
-     * 注意：if提供了此field，将替换所have现haveuserassociate.
+     * 注意：if提供此field，will替换所have现haveuserassociate.
      */
     public ?array $userIds = null;
 
@@ -92,7 +92,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
     }
 
     /**
-     * checkwhetherhaveneedupdate的field.
+     * checkwhetherhaveneedupdatefield.
      */
     public function hasUpdates(): bool
     {
@@ -104,7 +104,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
     }
 
     /**
-     * verifyDTOdata的validproperty.
+     * verifyDTOdatavalidproperty.
      */
     public function validate(): bool
     {
@@ -154,22 +154,22 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
 
         if ($this->name !== null) {
             if (empty(trim($this->name))) {
-                $errors[] = 'rolenamenot能为空';
+                $errors[] = 'rolenamenot能for空';
             }
 
             if (strlen($this->name) > 255) {
-                $errors[] = 'rolenamelengthnot能超过255character';
+                $errors[] = 'rolenamelengthnot能超pass255character';
             }
         }
 
         if ($this->status !== null && ! in_array($this->status, [0, 1])) {
-            $errors[] = 'rolestatusvalueinvalid，只能是0or1';
+            $errors[] = 'rolestatusvalueinvalid，只能is0or1';
         }
 
         if ($this->permissions !== null) {
             foreach ($this->permissions as $index => $permission) {
                 if (! is_string($permission)) {
-                    $errors[] = "permissionlistthe{$index}itemmust是string";
+                    $errors[] = "permissionlistthe{$index}itemmustisstring";
                 }
             }
         }
@@ -177,7 +177,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
         if ($this->userIds !== null) {
             foreach ($this->userIds as $index => $userId) {
                 if (! is_string($userId)) {
-                    $errors[] = "userIDlistthe{$index}itemmust是string";
+                    $errors[] = "userIDlistthe{$index}itemmustisstring";
                 }
             }
         }
@@ -186,7 +186,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
     }
 
     /**
-     * get所have已set的updatefield.
+     * get所have已setupdatefield.
      */
     public function getUpdateFields(): array
     {

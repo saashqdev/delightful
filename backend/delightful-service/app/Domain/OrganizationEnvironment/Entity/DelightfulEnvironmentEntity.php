@@ -156,7 +156,7 @@ class DelightfulEnvironmentEntity extends AbstractEntity
         $this->updatedAt = $updatedAt;
     }
 
-    // 预publish和生产can看做是oneenvironment，所by这within存一downassociate的environment ids
+    // 预publishand生产can看做isoneenvironment，所by这within存一downassociateenvironment ids
     public function getRelationEnvIds(): array
     {
         $relationEnvIds = $this->getExtra()?->getRelationEnvIds();
@@ -165,7 +165,7 @@ class DelightfulEnvironmentEntity extends AbstractEntity
         } else {
             $relationEnvIds[] = $this->getId();
         }
-        // 去重
+        // go重
         return array_values(array_unique($relationEnvIds));
     }
 

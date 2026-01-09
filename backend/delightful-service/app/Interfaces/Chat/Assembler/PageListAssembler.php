@@ -19,7 +19,7 @@ class PageListAssembler
             // if知道总record数，then直接compare
             $hasMore = ($currentOffset + $currentLimit) < $maxRecords;
         } else {
-            // ifnot知道总record数，whenfrontresult集not为nullthenhavedown一页
+            // ifnot知道总record数，whenfrontresult集notfornullthenhavedown一页
             $hasMore = empty($data) ? false : true;
         }
         $nextPageToken = $hasMore ? (string) ($currentOffset + $currentLimit) : '';

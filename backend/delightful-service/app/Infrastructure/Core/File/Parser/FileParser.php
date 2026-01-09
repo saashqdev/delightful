@@ -34,12 +34,12 @@ class FileParser
      *
      * @param string $fileUrl fileURLground址
      * @param bool $textPreprocess whetherconducttext预process
-     * @return string parseback的filecontent
+     * @return string parsebackfilecontent
      * @throws Exception whenfileparsefailo clock
      */
     public function parse(string $fileUrl, bool $textPreprocess = false): string
     {
-        // usemd5作为cachekey
+        // usemd5asforcachekey
         $cacheKey = 'file_parser:parse_' . md5($fileUrl) . '_' . ($textPreprocess ? 1 : 0);
         // checkcache,if存inthenreturncachecontent
         if ($this->cache->has($cacheKey)) {
@@ -55,7 +55,7 @@ class FileParser
             $extension = FileType::getType($fileUrl);
 
             $interface = match ($extension) {
-                // more多的filetypesupport
+                // more多filetypesupport
                 'png', 'jpeg', 'jpg' => OcrFileParserDriverInterface::class,
                 'pdf' => PdfFileParserDriverInterface::class,
                 'xlsx', 'xls', 'xlsm' => ExcelFileParserDriverInterface::class,
@@ -72,7 +72,7 @@ class FileParser
             /** @var FileParserDriverInterface $driver */
             $driver = di($interface);
             $res = $driver->parse($tempFile, $fileUrl, $extension);
-            // if是csv、xlsx、xlsfile，needconduct额outsideprocess
+            // ifiscsv、xlsx、xlsfile，needconduct额outsideprocess
             if ($textPreprocess && in_array($extension, ['csv', 'xlsx', 'xls'])) {
                 $res = TextPreprocessUtil::preprocess([TextPreprocessRule::FORMAT_EXCEL], $res);
             }
@@ -99,12 +99,12 @@ class FileParser
      */
     private static function downloadFile(string $url, string $tempFile, int $maxSize = 0): void
     {
-        // if是本groundfilepath，直接return
+        // ifis本groundfilepath，直接return
         if (file_exists($url)) {
             return;
         }
 
-        // ifurl是本groundfileagreement，convert为actualpath
+        // ifurlis本groundfileagreement，convertforactualpath
         if (str_starts_with($url, 'file://')) {
             $localPath = substr($url, 7);
             if (file_exists($localPath)) {
@@ -141,7 +141,7 @@ class FileParser
     }
 
     /**
-     * streamdownload并控制filesize.
+     * streamdownloadand控制filesize.
      *
      * @param resource $fileStream 远程filestreamresource
      * @param resource $localFile 本groundfilestreamresource
@@ -164,7 +164,7 @@ class FileParser
 
             // Check if size limit exceeded
             if ($downloadedBytes > $maxSize) {
-                ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesize超过限制');
+                ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesize超pass限制');
             }
 
             // Write buffer to local file
@@ -179,8 +179,8 @@ class FileParser
      *
      * @param string $fileUrl fileURLground址
      * @param int $maxSize filesize限制（字section），0table示not限制
-     * @return bool truetable示已checksizeandin限制inside，falsetable示是chunked传输needstreamdownload
-     * @throws Exception whenfilesize超过限制orfilesize未知andnonchunked传输o clock
+     * @return bool truetable示已checksizeandin限制inside，falsetable示ischunked传输needstreamdownload
+     * @throws Exception whenfilesize超pass限制orfilesize未知andnonchunked传输o clock
      */
     private static function checkUrlFileSize(string $fileUrl, int $maxSize = 0): bool
     {
@@ -192,12 +192,12 @@ class FileParser
         if (isset($headers['Content-Length'])) {
             $fileSize = (int) $headers['Content-Length'];
             if ($fileSize > $maxSize) {
-                ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesize超过限制');
+                ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesize超pass限制');
             }
             return true;
         }
 
-        // nothaveContent-Length，checkwhether为chunked传输
+        // nothaveContent-Length，checkwhetherforchunked传输
         $transferEncoding = $headers['Transfer-Encoding'] ?? '';
         if (is_array($transferEncoding)) {
             $transferEncoding = end($transferEncoding);
@@ -208,7 +208,7 @@ class FileParser
             return false;
         }
 
-        // 既nothaveContent-Length，alsonot是chunked传输，rejectdownload
+        // 既nothaveContent-Length，alsonotischunked传输，rejectdownload
         ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesize未知，forbiddownload');
     }
 }

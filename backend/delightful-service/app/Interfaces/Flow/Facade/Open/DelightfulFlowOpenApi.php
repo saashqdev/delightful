@@ -84,7 +84,7 @@ class DelightfulFlowOpenApi extends AbstractOpenApi
         $apiChatDTO->setApiKey($this->request->header('api-key', ''));
         $apiChatDTO->setAuthorization($this->request->header('authorization', ''));
 
-        // if environment_code 存in与 header middle
+        // if environment_code 存inand header middle
         if (empty($apiChatDTO->getEnvironmentCode())
             && ($this->request->hasHeader('environment-code') || $this->request->hasHeader('environment_code') || $this->request->hasHeader('teamshare_environment_code'))) {
             $apiChatDTO->setEnvironmentCode(
@@ -92,7 +92,7 @@ class DelightfulFlowOpenApi extends AbstractOpenApi
             );
         }
 
-        // compatible openai 的 messages 入参
+        // compatible openai  messages 入参
         $params = $this->request->all();
         if (isset($params['messages'])) {
             foreach ($params['messages'] as $messageArr) {

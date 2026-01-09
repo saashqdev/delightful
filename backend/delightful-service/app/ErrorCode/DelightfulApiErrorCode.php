@@ -35,7 +35,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.token.expired')]
     case TOKEN_EXPIRED = 4005;
 
-    // organization的quotanot足
+    // organizationquotanot足
     #[ErrorMessage(message: 'api.organization.quota_not_enough')]
     case ORGANIZATION_QUOTA_NOT_ENOUGH = 4006;
 
@@ -43,7 +43,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.token.quota_not_enough')]
     case TOKEN_QUOTA_NOT_ENOUGH = 4007;
 
-    // message为null
+    // messagefornull
     #[ErrorMessage(message: 'api.message.empty')]
     case MESSAGE_EMPTY = 4008;
 
@@ -51,7 +51,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.rate_limit')]
     case RATE_LIMIT = 4009;
 
-    // message为null
+    // messagefornull
     #[ErrorMessage(message: 'api.msg_empty')]
     case MSG_EMPTY = 4010;
 
@@ -67,11 +67,11 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.token.create_error')]
     case TOKEN_CREATE_ERROR = 4013;
 
-    // usercreate的tokenquantity超过限制
+    // usercreatetokenquantity超pass限制
     #[ErrorMessage(message: 'api.user.create_access_token_limit')]
     case USER_CREATE_ACCESS_TOKEN_LIMIT = 4014;
 
-    // useruse的tokenquantity超过限制
+    // userusetokenquantity超pass限制
     #[ErrorMessage(message: 'api.user.use_access_token_limit')]
     case USER_USE_ACCESS_TOKEN_LIMIT = 4015;
 

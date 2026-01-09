@@ -44,7 +44,7 @@ class RoleRepository implements RoleRepositoryInterface
             $model = RoleModel::create($data);
             $roleEntity->setId($model->id);
         } else {
-            // usemodelupdateby便use casts process JSON 与datefield
+            // usemodelupdateby便use casts process JSON anddatefield
             $model = $this->roleQuery($organizationCode)
                 ->where('id', $roleEntity->getId())
                 ->first();
@@ -87,7 +87,7 @@ class RoleRepository implements RoleRepositoryInterface
     public function queries(string $organizationCode, Page $page, ?array $filters = null): array
     {
         $query = $this->roleQuery($organizationCode);
-        // default只queryneedshow的role
+        // default只queryneedshowrole
         $query->where('is_display', 1);
 
         // applicationfilteritemitem
@@ -134,21 +134,21 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 为roleminute配user.
+     * forroleminute配user.
      */
     public function assignUsers(string $organizationCode, int $roleId, array $userIds, ?string $assignedBy = null): void
     {
-        // getcurrent已minute配的userlist
+        // getcurrent已minute配userlist
         $existingUserIds = $this->roleUserQuery($organizationCode)
             ->where('role_id', $roleId)
             ->pluck('user_id')
             ->toArray();
 
-        // 计算needadd和移except的user
+        // 计算needaddand移exceptuser
         $toAdd = array_diff($userIds, $existingUserIds);
         $toRemove = array_diff($existingUserIds, $userIds);
 
-        // 移exceptnotagain属at该role的user
+        // 移exceptnotagain属at该roleuser
         if (! empty($toRemove)) {
             $this->roleUserQuery($organizationCode)
                 ->where('role_id', $roleId)
@@ -156,7 +156,7 @@ class RoleRepository implements RoleRepositoryInterface
                 ->delete();
         }
 
-        // insertnew关系
+        // insertnewclose系
         $data = [];
         foreach ($toAdd as $userId) {
             $data[] = [
@@ -187,7 +187,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * getrole的userlist.
+     * getroleuserlist.
      */
     public function getRoleUsers(string $organizationCode, int $roleId): array
     {
@@ -198,7 +198,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 批quantitygetrole的userlist，return [roleId => userIds[]]。
+     * 批quantitygetroleuserlist，return [roleId => userIds[]]。
      */
     public function getRoleUsersMap(string $organizationCode, array $roleIds): array
     {
@@ -226,7 +226,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * getuser的rolelist.
+     * getuserrolelist.
      */
     public function getUserRoles(string $organizationCode, string $userId): array
     {
@@ -241,7 +241,7 @@ class RoleRepository implements RoleRepositoryInterface
 
         $models = $this->roleQuery($organizationCode)
             ->whereIn('id', $roleIds)
-            ->where('status', RoleModel::STATUS_ENABLED) // 只returnenable的role
+            ->where('status', RoleModel::STATUS_ENABLED) // 只returnenablerole
             ->get();
 
         $roles = [];
@@ -253,7 +253,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * getuser的所havepermission.
+     * getuser所havepermission.
      */
     public function getUserPermissions(string $organizationCode, string $userId): array
     {

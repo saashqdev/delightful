@@ -59,7 +59,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
             $memoryManager->addSystemMessage(new SystemMessage($systemPrompt));
         }
 
-        // generate function call 的 tools format
+        // generate function call  tools format
         $tools = $this->createTools($executionData, $LLMNodeParamsConfig->getOptionTools(), $LLMNodeParamsConfig->getTools());
         $vertexResult->addDebugLog('tools', ToolsExecutor::toolsToArray($tools));
 
@@ -81,7 +81,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
     protected function loadAgentPlugins(FlowDataIsolation $flowDataIsolation, ModelInterface $model, AbstractLLMNodeParamsConfig $LLMNodeParamsConfig, string &$systemPrompt): void
     {
         $mcpServerConfigs = [];
-        // load Agent 的plugin。generalthen是loadtool和appendsystemprompt词，先做着两的吧
+        // load Agent plugin。generalthenisloadtoolandappendsystemprompt词，先做着两吧
         foreach ($LLMNodeParamsConfig->getAgentPlugins() as $agentPlugin) {
             $appendSystemPrompt = $agentPlugin->getAppendSystemPrompt();
             if ($appendSystemPrompt !== '') {
@@ -124,7 +124,7 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
                 topicId: $executionData->getTopicId(),
                 limit: $modelConfig->getMaxRecord(),
             );
-            // if来源isthethird-partychattool，仅getmost近 3 hour的记忆
+            // ifcome源isthethird-partychattool，仅getmost近 3 hour记忆
             if ($executionData->isThirdPlatformChat()) {
                 $memoryQuery->setStartTime(new DateTime('-3 hours'));
             }

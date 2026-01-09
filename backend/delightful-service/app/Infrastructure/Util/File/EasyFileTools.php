@@ -14,7 +14,7 @@ class EasyFileTools
     public static function saveFile(string $path, string $stream): void
     {
         $file = fopen($path, 'wb');
-        // 把stream切割become1000kb的小piece，eachtimewritefile
+        // stream切割become1000kb小piece，eachtimewritefile
 
         fwrite($file, $stream);
         fclose($file);
@@ -22,7 +22,7 @@ class EasyFileTools
 
     public static function mergeWavFiles(string $file1, string $blob): void
     {
-        // iffilenot存in，直接将 blob write为newfile
+        // iffilenot存in，直接will blob writefornewfile
         if (! file_exists($file1)) {
             self::saveFile($file1, $blob);
             return;
@@ -33,10 +33,10 @@ class EasyFileTools
         if (! $wav1) {
             throw new InvalidArgumentException('Failed to open the base file.');
         }
-        // 去掉blob的head
+        // go掉blobhead
         $blob = substr($blob, 44);
 
-        // 将新dataappendtofile末tail
+        // will新dataappendtofile末tail
         // getfilesize
         fseek($wav1, 0, SEEK_END);
         fwrite($wav1, $blob);

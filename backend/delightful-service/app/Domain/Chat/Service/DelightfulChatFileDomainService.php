@@ -34,7 +34,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     }
 
     /**
-     * 判断user的messagemiddle，whethercontain本time他想download的file.
+     * 判断usermessagemiddle，whethercontain本time他想downloadfile.
      * @param DelightfulChatFileEntity[] $fileDTOs
      * @return DelightfulChatFileEntity[]
      */
@@ -44,7 +44,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
         $seqIds = array_column($fileDTOs, 'message_id');
         $seqList = $this->delightfulSeqRepository->batchGetSeqByMessageIds($seqIds);
         $delightfulMessageIdsMap = [];
-        // checkuserwhether收to了这些message
+        // checkuserwhether收to这些message
         foreach ($seqList as $seq) {
             if ($seq->getObjectId() !== $dataIsolation->getCurrentDelightfulId()) {
                 continue;
@@ -63,7 +63,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
             $messageEntities[$entity->getDelightfulMessageId()] = $entity;
         }
 
-        // 给 $fileDTOs 加up delightful_message_id
+        // give $fileDTOs 加up delightful_message_id
         foreach ($fileDTOs as $fileDTO) {
             $messageId = $fileDTO->getMessageId();
             /* @var DelightfulChatFileEntity $fileDTO */
@@ -73,7 +73,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
             }
         }
 
-        // 判断user的messagemiddle，whethercontain本time他想download的file
+        // 判断usermessagemiddle，whethercontain本time他想downloadfile
         $fileMaps = [];
         foreach ($fileDTOs as $fileDTO) {
             $delightfulMessageId = $fileDTO->getDelightfulMessageId();
@@ -119,7 +119,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
      *
      * @param DelightfulChatFileEntity $fileEntity file实body
      * @param DataIsolation $dataIsolation data隔离
-     * @return DelightfulChatFileEntity saveorupdateback的file实body
+     * @return DelightfulChatFileEntity saveorupdatebackfile实body
      */
     public function saveOrUpdateByFileKey(DelightfulChatFileEntity $fileEntity, DataIsolation $dataIsolation): DelightfulChatFileEntity
     {
@@ -145,7 +145,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     }
 
     /**
-     * 判断user的messagemiddle的attachment是not是他自己upload的.
+     * 判断usermessagemiddleattachmentisnotis他from己upload.
      * @param ChatAttachment[] $attachments
      * @return ChatAttachment[]
      */
@@ -154,7 +154,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
         $fileIds = array_column($attachments, 'file_id');
         $fileEntities = $this->getFileEntitiesByFileIds($fileIds);
         $fileEntities = array_column($fileEntities, null, 'file_id');
-        // todo ifmessagemiddlehavefile:1.判断file的所have者whether是currentuser;2.判断userwhetherreceive过这些file。
+        // todo ifmessagemiddlehavefile:1.判断file所have者whetheriscurrentuser;2.判断userwhetherreceivepass这些file。
         //        foreach ($fileEntities as $fileEntity) {
         //            if ($fileEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
         //                ExceptionBuilder::throw(ChatErrorCode::FILE_NOT_FOUND);

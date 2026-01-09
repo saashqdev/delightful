@@ -14,12 +14,12 @@ use InvalidArgumentException;
 
 /**
  * service商templateIDprocesstoolcategory
- * useatgenerate和parseservice商templateID（usefixed的数value型string）.
+ * useatgenerateandparseservice商templateID（usefixed数value型string）.
  */
 class ProviderConfigIdAssembler
 {
     /**
-     * according toProviderCode和Categorygenerateservice商template的config_id.
+     * according toProviderCodeandCategorygenerateservice商templateconfig_id.
      */
     public static function generateProviderTemplate(ProviderCode $providerCode, Category $category): string
     {
@@ -32,8 +32,8 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * check给定的configurationIDwhether为任何service商的template.
-     * support数value型stringformat的templateID.
+     * checkgive定configurationIDwhetherfor任何service商template.
+     * support数value型stringformattemplateID.
      */
     public static function isAnyProviderTemplate(null|int|string $configId): bool
     {
@@ -41,8 +41,8 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * according totemplateconfigurationIDparse出ProviderCode和Category.
-     * support数value型stringformat的templateID.
+     * according totemplateconfigurationIDparseoutProviderCodeandCategory.
+     * support数value型stringformattemplateID.
      * @return null|array{providerCode: ProviderCode, category: Category}
      */
     public static function parseProviderTemplate(null|int|string $configId): ?array
@@ -62,7 +62,7 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * according toProviderTemplateIdget对应的数value型string.
+     * according toProviderTemplateIdgetto应数value型string.
      */
     public static function getTemplateIdValue(ProviderTemplateId $templateId): string
     {
@@ -70,7 +70,7 @@ class ProviderConfigIdAssembler
     }
 
     /**
-     * according to数value型stringget对应的ProviderTemplateId.
+     * according to数value型stringgetto应ProviderTemplateId.
      */
     public static function getTemplateIdFromValue(null|int|string $configId): ?ProviderTemplateId
     {

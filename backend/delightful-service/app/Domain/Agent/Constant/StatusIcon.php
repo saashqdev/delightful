@@ -162,7 +162,7 @@ enum StatusIcon: string
     }
 
     /**
-     * get所have可use的graph标value.
+     * get所havecanusegraph标value.
      * @return array<string> return所havegraph标value
      */
     public static function getValues(): array

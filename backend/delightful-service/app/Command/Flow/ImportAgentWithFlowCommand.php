@@ -30,7 +30,7 @@ class ImportAgentWithFlowCommand extends HyperfCommand
         $this->exportImportService = $container->get(DelightfulFlowExportImportAppService::class);
         parent::__construct('agent:import');
         $this->setDescription('fromOSSimport助理（contain主process、tool、子processetc）');
-        $this->addArgument('file_url', InputArgument::REQUIRED, 'export助理datafile的URL');
+        $this->addArgument('file_url', InputArgument::REQUIRED, 'export助理datafileURL');
         $this->addArgument('user_id', InputArgument::REQUIRED, 'userid');
         $this->addArgument('organization_code', InputArgument::REQUIRED, 'organizationencoding');
     }
@@ -48,11 +48,11 @@ class ImportAgentWithFlowCommand extends HyperfCommand
             // parseJSONcontent
             $importData = json_decode($content, true);
             if (! $importData || ! is_array($importData)) {
-                $this->output->error('filemiddle的JSONdatainvalid');
+                $this->output->error('filemiddleJSONdatainvalid');
                 return 1;
             }
 
-            // fromimportdatamiddlegetorganizationcode和userID
+            // fromimportdatamiddlegetorganizationcodeanduserID
             $orgCode = $this->input->getArgument('organization_code');
             $userId = $this->input->getArgument('user_id');
 
@@ -64,7 +64,7 @@ class ImportAgentWithFlowCommand extends HyperfCommand
             // createdata隔离object
             $dataIsolation = new FlowDataIsolation($orgCode, $userId);
 
-            // importprocess及助理info
+            // importprocessand助理info
             $result = $this->exportImportService->importFlowWithAgent($dataIsolation, $importData);
             $this->output->success('助理importsuccess。' . $result['agent_name']);
             return 0;

@@ -51,7 +51,7 @@ class ChatInstruction extends AbstractEntity
                 $this->instruction = new InstructionConfig($instruction);
             /* @phpstan-ignore-next-line */
             } elseif (! $instruction instanceof InstructionConfig) {
-                // ifnot是arrayalsonot是 InstructionConfig object，thencreateonenull的 InstructionConfig object
+                // ifnotisarrayalsonotis InstructionConfig object，thencreateonenull InstructionConfig object
                 $this->instruction = new InstructionConfig([]);
             }
         } else {

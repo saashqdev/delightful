@@ -48,12 +48,12 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
             return;
         }
 
-        // executespecific的speedrate限制check
+        // executespecificspeedrate限制check
         $this->doCheck($clientId, $request);
     }
 
     /**
-     * getcurrent的限制configuration.
+     * getcurrent限制configuration.
      */
     public function getLimits(): array
     {
@@ -66,8 +66,8 @@ abstract class AbstractRateLimiter implements RateLimiterInterface
     }
 
     /**
-     * actualexecute的speedrate限制check.
-     * 由子categoryimplementspecific逻辑.
+     * actualexecutespeedrate限制check.
+     * by子categoryimplementspecific逻辑.
      */
     abstract protected function doCheck(string $clientId, MessageInterface $request): void;
 }

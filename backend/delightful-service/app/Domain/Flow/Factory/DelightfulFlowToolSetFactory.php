@@ -35,7 +35,7 @@ class DelightfulFlowToolSetFactory
     }
 
     /**
-     * 将arrayconvert为tool集实body.
+     * willarrayconvertfortool集实body.
      */
     public static function arrayToEntity(array $toolSetData): DelightfulFlowToolSetEntity
     {
@@ -55,12 +55,12 @@ class DelightfulFlowToolSetFactory
             $entity->setTools($toolSetData['tools']);
         }
 
-        // settinguser操作permission
+        // settinguser操aspermission
         if (isset($toolSetData['user_operation'])) {
             $entity->setUserOperation($toolSetData['user_operation']);
         }
 
-        // settingcreate者和modify者information
+        // settingcreate者andmodify者information
         $entity->setCreator($toolSetData['created_uid'] ?? $toolSetData['creator'] ?? '');
         $entity->setModifier($toolSetData['updated_uid'] ?? $toolSetData['modifier'] ?? '');
 

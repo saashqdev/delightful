@@ -125,7 +125,7 @@ class MCPServerAdminApi extends AbstractMCPAdminApi
         $authorization = $this->getAuthorization();
         $requestData = $this->request->all();
 
-        // enabled parameterdefault为 false
+        // enabled parameterdefaultfor false
         $enabled = (bool) ($requestData['enabled'] ?? false);
         $entity = $this->mcpServerAppService->updateStatus($authorization, $code, $enabled);
 

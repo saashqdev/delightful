@@ -15,12 +15,12 @@ use App\Infrastructure\Core\AbstractDTO;
 class PageResponseDTO extends AbstractDTO
 {
     /**
-     * response的paginationToken.
+     * responsepaginationToken.
      */
     protected string $pageToken = '';
 
     /**
-     * responsedataresponse，not限制arraymiddle的yuan素type.
+     * responsedataresponse，not限制arraymiddleyuan素type.
      */
     protected array $items = [];
 

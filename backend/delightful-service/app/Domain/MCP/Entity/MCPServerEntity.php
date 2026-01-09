@@ -22,7 +22,7 @@ class MCPServerEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯一encoding，仅increateo clockgenerate，use作给front端的id.
+     * 唯一encoding，仅increateo clockgenerate，useasgivefront端id.
      */
     protected string $code;
 

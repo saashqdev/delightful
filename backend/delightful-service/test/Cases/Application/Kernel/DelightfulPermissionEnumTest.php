@@ -76,7 +76,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $permissions = $this->permissionEnum->generateAllPermissions();
 
         $this->assertIsArray($permissions);
-        // shouldhave 2 resource × 2 操作 = 4 permission（rowexceptexport操作）
+        // shouldhave 2 resource × 2 操as = 4 permission（rowexceptexport操as）
         $this->assertCount(4, $permissions);
 
         // checkpermission结构
@@ -105,7 +105,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         // testall局permission
         $this->assertTrue($this->permissionEnum->isValidPermission(DelightfulPermission::ALL_PERMISSIONS));
 
-        // testvalid的permissiongroup合
+        // testvalidpermissiongroup合
         $this->assertTrue($this->permissionEnum->isValidPermission('admin.ai.model_management.query'));
         $this->assertTrue($this->permissionEnum->isValidPermission('admin.ai.model_management.manage'));
         $this->assertTrue($this->permissionEnum->isValidPermission('admin.ai.image_generation.query'));
@@ -114,7 +114,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
 
     public function testIsValidPermissionWithInvalidKeys()
     {
-        // testinvalid的permission键
+        // testinvalidpermission键
         $this->assertFalse($this->permissionEnum->isValidPermission('invalid_permission'));
         $this->assertFalse($this->permissionEnum->isValidPermission('Admin.ai.invalid_resource.query'));
         $this->assertFalse($this->permissionEnum->isValidPermission('Admin.ai.model_management.invalid_operation'));
@@ -129,7 +129,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $this->assertIsArray($tree);
         $this->assertGreaterThanOrEqual(1, count($tree));
 
-        // 找to Admin 平台sectionpointconduct进一步校验
+        // 找to Admin 平台sectionpointconductenter一步校验
         $platformsByKey = [];
         foreach ($tree as $node) {
             $platformsByKey[$node['permission_key']] = $node;
@@ -155,14 +155,14 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     }
 
     /**
-     * test私havemethodisValidCombination的line为
+     * test私havemethodisValidCombinationlinefor
      * passgenerateAllPermissionsbetween接test.
      */
     public function testIsValidCombinationThroughGenerateAllPermissions()
     {
         $permissions = $this->permissionEnum->generateAllPermissions();
 
-        // ensurenothaveexport操作的permission
+        // ensurenothaveexport操aspermission
         foreach ($permissions as $permission) {
             $this->assertNotEquals('export', $permission['operation']);
         }
@@ -178,12 +178,12 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $this->assertFalse($this->permissionEnum->isOperation(''));
         $this->assertFalse($this->permissionEnum->isValidPermission(''));
 
-        // testnullvalueprocess（PHPwillconvert为string）
+        // testnullvalueprocess（PHPwillconvertforstring）
         $this->assertFalse($this->permissionEnum->isValidPermission('null'));
     }
 
     /**
-     * testcategoryimplement了correct的interface.
+     * testcategoryimplementcorrectinterface.
      */
     public function testImplementsInterface()
     {

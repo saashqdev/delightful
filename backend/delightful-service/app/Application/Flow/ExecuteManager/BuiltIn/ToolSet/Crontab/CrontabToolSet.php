@@ -26,6 +26,6 @@ class CrontabToolSet extends AbstractBuiltInToolSet
 
     public function getDescription(): string
     {
-        return '提供了userlevel别scheduletask相关的tool，includecreateeachday、eachweek、eachmonthetc重复和not重复的scheduletask';
+        return '提供userlevel别scheduletask相closetool，includecreateeachday、eachweek、eachmonthetc重复andnot重复scheduletask';
     }
 }

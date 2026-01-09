@@ -23,7 +23,7 @@ class MCPToolManager
     }
 
     /**
-     * get所haveregister的tool.
+     * get所haveregistertool.
      *
      * @return array<string, MCPTool>
      */
@@ -33,7 +33,7 @@ class MCPToolManager
     }
 
     /**
-     * gettoolcolumn表的Schemashapetype.
+     * gettoolcolumn表Schemashapetype.
      *
      * @return array<int, array<string, mixed>>
      */
@@ -47,7 +47,7 @@ class MCPToolManager
     }
 
     /**
-     * getfinger定name的tool.
+     * getfinger定nametool.
      */
     public function getTool(string $name): ?MCPTool
     {
@@ -55,7 +55,7 @@ class MCPToolManager
     }
 
     /**
-     * checkfinger定name的toolwhether存in.
+     * checkfinger定nametoolwhether存in.
      */
     public function hasTool(string $name): bool
     {

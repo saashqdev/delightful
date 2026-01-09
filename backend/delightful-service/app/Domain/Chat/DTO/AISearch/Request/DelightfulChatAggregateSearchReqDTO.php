@@ -25,7 +25,7 @@ class DelightfulChatAggregateSearchReqDTO
 
     public string $conversationId;
 
-    public string $topicId = ''; // 话题 id，can为null
+    public string $topicId = ''; // 话题 id，canfornull
 
     public bool $getDetail = true;
 
@@ -104,7 +104,7 @@ class DelightfulChatAggregateSearchReqDTO
             $text = TiptapUtil::getTextContent($userMessage->getContent());
             $this->userMessage = $text;
         } else {
-            throw new Exception('not supported的messagetype');
+            throw new Exception('not supportedmessagetype');
         }
 
         return $this;

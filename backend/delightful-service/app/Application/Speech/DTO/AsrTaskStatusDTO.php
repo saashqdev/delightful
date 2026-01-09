@@ -12,7 +12,7 @@ use App\Application\Speech\Enum\AsrTaskStatusEnum;
 
 /**
  * ASRtaskstatusDTO - 管理Redis Hashfieldmapping.
- * 这not是from JSON response结构来的，而是useat管理taskstatus
+ * 这notisfrom JSON response结构come，whileisuseat管理taskstatus
  */
 class AsrTaskStatusDTO
 {
@@ -20,29 +20,29 @@ class AsrTaskStatusDTO
 
     public string $userId = '';
 
-    public ?string $organizationCode = null; // organizationencoding（useat自动总结）
+    public ?string $organizationCode = null; // organizationencoding（useatfrom动总结）
 
     // analogous：project_821749697183776769/workspace/录音总结_20250910_174251/original录音file.webm
     public ?string $filePath = null; // work区filepath
 
-    // fileID（databasemiddle的actualID）
-    public ?string $audioFileId = null; // audiofileID（writedelightful_super_agent_task_files表backreturn的ID）
+    // fileID（databasemiddleactualID）
+    public ?string $audioFileId = null; // audiofileID（writedelightful_super_agent_task_files表backreturnID）
 
     // note fileinfo
-    public ?string $noteFileName = null; // notefile名（与audiofilein同一directory，为null表示无笔记file）
+    public ?string $noteFileName = null; // notefile名（andaudiofilein同一directory，fornull表示无笔记file）
 
-    public ?string $noteFileId = null; // notefileID（useatchatmessagemiddle的filequote）
+    public ?string $noteFileId = null; // notefileID（useatchatmessagemiddlefilequote）
 
     // presetfileinfo（useatfront端write）
     public ?string $presetNoteFileId = null; // preset笔记fileID
 
     public ?string $presetTranscriptFileId = null; // presetstream识别fileID
 
-    public ?string $presetNoteFilePath = null; // preset笔记file相对path
+    public ?string $presetNoteFilePath = null; // preset笔记file相topath
 
-    public ?string $presetTranscriptFilePath = null; // presetstream识别file相对path
+    public ?string $presetTranscriptFilePath = null; // presetstream识别file相topath
 
-    // project和话题info
+    // projectand话题info
     public ?string $projectId = null; // projectID
 
     public ?string $topicId = null; // 话题ID
@@ -50,16 +50,16 @@ class AsrTaskStatusDTO
     // 录音directoryinfo
     public ?string $tempHiddenDirectory = null; // hiddendirectorypath（存放minuteslicefile）
 
-    public ?string $displayDirectory = null; // displaydirectorypath（存放streamtext和笔记）
+    public ?string $displayDirectory = null; // displaydirectorypath（存放streamtextand笔记）
 
-    public ?int $tempHiddenDirectoryId = null; // hiddendirectory的fileID
+    public ?int $tempHiddenDirectoryId = null; // hiddendirectoryfileID
 
-    public ?int $displayDirectoryId = null; // displaydirectory的fileID
+    public ?int $displayDirectoryId = null; // displaydirectoryfileID
 
     public AsrTaskStatusEnum $status = AsrTaskStatusEnum::FAILED;
 
     // 录音status管理field
-    public ?string $modelId = null; // AI modelID，useat自动总结
+    public ?string $modelId = null; // AI modelID，useatfrom动总结
 
     public ?string $recordingStatus = null; // 录音status：start|recording|paused|stopped
 
@@ -75,7 +75,7 @@ class AsrTaskStatusDTO
 
     public bool $serverSummaryLocked = false; // service端总结whetherlock定customer端
 
-    // ASR content和笔记（useatgeneratetitle）
+    // ASR contentand笔记（useatgeneratetitle）
     public ?string $asrStreamContent = null; // ASR stream识别content
 
     public ?string $noteContent = null; // 笔记content
@@ -84,7 +84,7 @@ class AsrTaskStatusDTO
 
     public ?string $language = null; // 语type（zh_CN、en_USetc），useatgeneratetitleo clockuse
 
-    public ?string $uploadGeneratedTitle = null; // upload-tokens generate的title（useat summary 复use）
+    public ?string $uploadGeneratedTitle = null; // upload-tokens generatetitle（useat summary 复use）
 
     public function __construct(array $data = [])
     {
@@ -98,11 +98,11 @@ class AsrTaskStatusDTO
         $this->noteFileName = self::getStringValue($data, ['note_file_name', 'noteFileName']);
         $this->noteFileId = self::getStringValue($data, ['note_file_id', 'noteFileId']);
 
-        // project和话题info
+        // projectand话题info
         $this->projectId = self::getStringValue($data, ['project_id', 'projectId']);
         $this->topicId = self::getStringValue($data, ['topic_id', 'topicId']);
 
-        // 录音directoryinfo（自动清洗为相对path）
+        // 录音directoryinfo（from动清洗for相topath）
         $this->tempHiddenDirectory = self::extractRelativePath(
             self::getStringValue($data, ['temp_hidden_directory', 'tempHiddenDirectory'])
         );
@@ -128,7 +128,7 @@ class AsrTaskStatusDTO
         $this->presetNoteFilePath = self::getStringValue($data, ['preset_note_file_path', 'presetNoteFilePath']);
         $this->presetTranscriptFilePath = self::getStringValue($data, ['preset_transcript_file_path', 'presetTranscriptFilePath']);
 
-        // ASR content和笔记
+        // ASR contentand笔记
         $this->asrStreamContent = self::getStringValue($data, ['asr_stream_content', 'asrStreamContent']);
         $this->noteContent = self::getStringValue($data, ['note_content', 'noteContent']);
         $this->noteFileType = self::getStringValue($data, ['note_file_type', 'noteFileType']);
@@ -145,7 +145,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * convert为array（useatstoragetoRedis）.
+     * convertforarray（useatstoragetoRedis）.
      *
      * @return array<string, null|bool|int|string>
      */
@@ -187,7 +187,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * checkwhether为null（not存in）.
+     * checkwhetherfornull（not存in）.
      */
     public function isEmpty(): bool
     {
@@ -214,7 +214,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * 判断service端总结whether对customer端加lock.
+     * 判断service端总结whethertocustomer端加lock.
      */
     public function hasServerSummaryLock(): bool
     {
@@ -242,12 +242,12 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * extract相对at workspace 的相对path
-     * ifpathcontain workspace/，extract其back的部minute
-     * 这样can自动修正 Redis middlestorage的旧formatdata（完整path）.
+     * extract相toat workspace 相topath
+     * ifpathcontain workspace/，extract其back部minute
+     * 这样canfrom动修正 Redis middlestorage旧formatdata（完整path）.
      *
      * @param null|string $path originalpath
-     * @return null|string 相对path
+     * @return null|string 相topath
      */
     private static function extractRelativePath(?string $path): ?string
     {
@@ -255,7 +255,7 @@ class AsrTaskStatusDTO
             return $path;
         }
 
-        // ifpathcontain workspace/，extract workspace/ backsurface的部minute
+        // ifpathcontain workspace/，extract workspace/ backsurface部minute
         if (str_contains($path, 'workspace/')) {
             $parts = explode('workspace/', $path, 2);
             return $parts[1] ?? $path;
@@ -265,7 +265,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarraymiddle按优先levelgetstringvalue（support snake_case 和 camelCase）.
+     * fromarraymiddle按优先levelgetstringvalue（support snake_case and camelCase）.
      *
      * @param array<string, mixed> $data dataarray
      * @param array<string> $keys 键名column表（按优先levelsort）
@@ -282,7 +282,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarraymiddle按优先levelget整数value（support snake_case 和 camelCase）.
+     * fromarraymiddle按优先levelget整数value（support snake_case and camelCase）.
      *
      * @param array<string, mixed> $data dataarray
      * @param array<string> $keys 键名column表（按优先levelsort）

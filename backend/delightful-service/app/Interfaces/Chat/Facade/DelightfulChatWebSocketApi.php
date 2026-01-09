@@ -89,7 +89,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[VerifyStructure]
     public function onConnect(Socket $socket)
     {
-        // linko clockrefresh sid cache的permissioninfo，避免极端情况down，use了byfront的 sid permission
+        // linko clockrefresh sid cachepermissioninfo，避免极端情况down，usebyfront sid permission
         $this->logger->info(sprintf('sid:%s connect', $socket->getSid()));
     }
 
@@ -117,7 +117,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->delightfulChatMessageAppService->setUserContext($userToken, $context);
             // call guard getuserinfo
             $userAuthorization = $this->getAuthorization();
-            // 将账number的所have设备加入同一room
+            // will账number所have设备加入同一room
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return ['type' => 'user', 'user' => [
                 'delightful_id' => $userAuthorization->getDelightfulId(),
@@ -179,7 +179,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->delightfulChatMessageAppService->setUserContext($userToken, $controlRequest->getContext());
             // getuserinfo
             $userAuthorization = $this->getAuthorization();
-            // according tomessagetype,minutehairto对应的process模piece
+            // according tomessagetype,minutehairtoto应process模piece
             $messageDTO = MessageAssembler::getControlMessageDTOByRequest($controlRequest, $userAuthorization, ConversationType::User);
             return $this->delightfulControlMessageAppService->dispatchClientControlMessage($messageDTO, $userAuthorization);
         } catch (BusinessException $exception) {
@@ -216,7 +216,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
      */
     public function onChatMessage(Socket $socket, array $params)
     {
-        // 判断messagetype,if是控制message,minutehairto对应的process模piece
+        // 判断messagetype,ifis控制message,minutehairtoto应process模piece
         try {
             $appendRules = [
                 'data.conversation_id' => 'required|string',
@@ -233,9 +233,9 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             // compatiblehistoryversion,fromquerymiddlegettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
-            // according tomessagetype,minutehairto对应的process模piece
+            // according tomessagetype,minutehairtoto应process模piece
             $userAuthorization = $this->getAuthorization();
-            // 将账number的所have设备加入同一room
+            // will账number所have设备加入同一room
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return $this->delightfulChatMessageAppService->onChatMessage($chatRequest, $userAuthorization);
         } catch (BusinessException $businessException) {
@@ -259,7 +259,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[Event('intermediate')]
     #[VerifyStructure]
     /**
-     * not存入database的实o clockmessage，useat一些temporarymessage场景。
+     * not存入database实o clockmessage，useat一些temporarymessage场景。
      * @throws Throwable
      */
     public function onIntermediateMessage(Socket $socket, array $params)
@@ -287,9 +287,9 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             // compatiblehistoryversion,fromquerymiddlegettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
-            // according tomessagetype,minutehairto对应的process模piece
+            // according tomessagetype,minutehairtoto应process模piece
             $userAuthorization = $this->getAuthorization();
-            // 将账number的所have设备加入同一room
+            // will账number所have设备加入同一room
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return $this->delightfulIntermediateMessageAppService->dispatchClientIntermediateMessage($chatRequest, $userAuthorization);
         } catch (BusinessException $businessException) {
@@ -333,19 +333,19 @@ class DelightfulChatWebSocketApi extends BaseNamespace
 
     private function relationAppMsgIdAndRequestId(?string $appMsgId): void
     {
-        // 直接use appMsgId 作为 requestIdwill导致very多invalid log，难bytrace。
+        // 直接use appMsgId asfor requestIdwill导致very多invalid log，难bytrace。
         $requestId = empty($appMsgId) ? (string) IdGenerator::getSnowId() : $appMsgId;
         CoContext::setRequestId($requestId);
         $this->logger->info('relationAppMsgIdAndRequestId requestId:' . $requestId . ' appMsgId: ' . $appMsgId);
     }
 
     /**
-     * publishsubscribe/多messageminutehair和push的queue保活.
+     * publishsubscribe/多messageminutehairandpushqueue保活.
      */
     private function keepSubscribeAlive(): void
     {
-        // 只need一进程能schedulepublishmessage,让subscribe的redislink保活即可.
-        // not把lock放inmostoutsidelayer,是为了防止pod频繁重启o clock,nothave任何一进程canpublishmessage
+        // 只need一enter程能schedulepublishmessage,letsubscriberedislink保活即can.
+        // notlock放inmostoutsidelayer,isfor防止pod频繁重启o clock,nothave任何一enter程canpublishmessage
         co(function () {
             // each 5 second推一timemessage
             $this->timer->tick(
@@ -357,14 +357,14 @@ class DelightfulChatWebSocketApi extends BaseNamespace
                     SocketIOUtil::sendIntermediate(SocketEventType::Chat, 'delightful-im:subscribe:keepalive', ControlMessageType::Ping->value);
 
                     $producer = ApplicationContext::getContainer()->get(Producer::class);
-                    // 对所havequeue投一itemmessage,by保活link/queue
+                    // to所havequeue投一itemmessage,by保活link/queue
                     $messagePriorities = MessagePriority::cases();
                     foreach ($messagePriorities as $priority) {
                         $seqCreatedEvent = new SeqCreatedEvent([ControlMessageType::Ping->value]);
                         $seqCreatedEvent->setPriority($priority);
-                        // messageminutehair. 一itemseq可能willgenerate多itemseq
+                        // messageminutehair. 一itemseqmaybewillgenerate多itemseq
                         $messageDispatch = new MessageDispatchPublisher($seqCreatedEvent);
-                        // messagepush. 一itemseq只willpush给一user(的多设备)
+                        // messagepush. 一itemseq只willpushgive一user(多设备)
                         $messagePush = new MessagePushPublisher($seqCreatedEvent);
                         $producer->produce($messageDispatch);
                         $producer->produce($messagePush);

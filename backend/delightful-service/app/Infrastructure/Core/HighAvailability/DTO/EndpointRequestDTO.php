@@ -13,7 +13,7 @@ use App\Infrastructure\Core\HighAvailability\ValueObject\StatisticsLevel;
 
 /**
  * 接入pointrequest DTO.
- * useat封装 getAvailableEndpoint method的requestparameter.
+ * useat封装 getAvailableEndpoint methodrequestparameter.
  */
 class EndpointRequestDTO extends AbstractDTO
 {
@@ -38,8 +38,8 @@ class EndpointRequestDTO extends AbstractDTO
     protected ?string $endpointName = null;
 
     /**
-     * uptimechoose的接入pointID (optional).
-     * useatconversation延续etc场景，优先chooseuptimeuse的接入point.
+     * uptimechoose接入pointID (optional).
+     * useatconversation延续etc场景，优先chooseuptimeuse接入point.
      */
     protected ?string $lastSelectedEndpointId = null;
 
@@ -147,12 +147,12 @@ class EndpointRequestDTO extends AbstractDTO
 
     public function setTimeRange(int $timeRange): static
     {
-        $this->timeRange = max(1, $timeRange); // ensuretimerangeat least为1minute钟
+        $this->timeRange = max(1, $timeRange); // ensuretimerangeat leastfor1minute钟
         return $this;
     }
 
     /**
-     * checkwhetherhaveuptimechoose的接入pointID.
+     * checkwhetherhaveuptimechoose接入pointID.
      */
     public function hasLastSelectedEndpointId(): bool
     {
@@ -160,7 +160,7 @@ class EndpointRequestDTO extends AbstractDTO
     }
 
     /**
-     * fromarraydatacreate实例的便捷method.
+     * fromarraydatacreate实例便捷method.
      */
     public static function create(
         string $endpointType,

@@ -300,7 +300,7 @@ final class LongTermMemoryEntity extends AbstractEntity
 
     /**
      * inside部setenablestatus（notconduct业务rulecheck）.
-     * useatdatainitialize和inside部操作，skip业务rule限制.
+     * useatdatainitializeandinside部操as，skip业务rule限制.
      */
     public function setEnabledInternal(bool $enabled): void
     {
@@ -370,7 +370,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     // 业务method
 
     /**
-     * access记忆（updateaccesscount和time）.
+     * access记忆（updateaccesscountandtime）.
      */
     public function access(): void
     {
@@ -379,7 +379,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 强化记忆（update强化count和time，提升重要property）.
+     * 强化记忆（update强化countandtime，提升重要property）.
      */
     public function reinforce(): void
     {
@@ -391,7 +391,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 计算current记忆的validminute数（考虑衰减）.
+     * 计算current记忆validminute数（考虑衰减）.
      */
     public function getEffectiveScore(): float
     {
@@ -441,7 +441,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * override set method，对 enabled fieldconduct特殊process.
+     * override set method，to enabled fieldconduct特殊process.
      */
     protected function set(string $key, mixed $value): void
     {
@@ -478,7 +478,7 @@ final class LongTermMemoryEntity extends AbstractEntity
             return 0.0;
         }
 
-        // accesscount的对数加become，避免过degreereward
+        // accesscountto数加become，避免passdegreereward
         return min(0.3, log($this->accessCount + 1) * 0.1);
     }
 }

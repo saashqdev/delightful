@@ -41,7 +41,7 @@ class FlowBreakpointRetryCrontab
         $parallel = new Parallel(50);
         while (true) {
             $parallel->clear();
-            // get所have 10 minute钟alsoinconductmiddle的process
+            // get所have 10 minute钟alsoinconductmiddleprocess
             $list = $this->delightfulFlowExecuteLogDomainService->getRunningTimeoutList($flowDataIsolation, 60 * 10, $page);
             if (empty($list)) {
                 break;

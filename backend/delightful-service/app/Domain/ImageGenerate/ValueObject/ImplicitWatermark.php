@@ -30,7 +30,7 @@ class ImplicitWatermark
     public function __construct()
     {
         $this->createdAt = new DateTime();
-        // settingdefaultsignature，insettinguserinformationbackwill自动encrypt
+        // settingdefaultsignature，insettinguserinformationbackwillfrom动encrypt
         $this->sign = 'be_delightful';
     }
 
@@ -116,7 +116,7 @@ class ImplicitWatermark
             'userId' => $this->userId,
             'organizationCode' => $this->organizationCode,
             'createdAt' => $this->createdAt->format('Y-m-d H:i:s'),
-            'sign' => $this->sign, // usedecryptback的signature
+            'sign' => $this->sign, // usedecryptbacksignature
         ];
 
         if ($this->topicId !== '') {

@@ -18,7 +18,7 @@ class AiAbilityConfig
     // apikey
     private ?string $apiKey = null;
 
-    // model_id，对应service_provider_models.model_id
+    // model_id，to应service_provider_models.model_id
     private ?string $modelId = null;
 
     // url
@@ -82,7 +82,7 @@ class AiAbilityConfig
     }
 
     /**
-     * convert为array.
+     * convertforarray.
      */
     public function toArray(): array
     {

@@ -45,14 +45,14 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
      */
     public function sendVerificationCode(string $stateCode, string $phone, string $type): array
     {
-        // hand机numberwhether可usecheck
+        // hand机numberwhethercanusecheck
         $this->checkPhoneStatus($type, $stateCode, $phone);
         // 短信frequencycheck
         $this->checkSmsLimit($stateCode, $phone);
         $code = (string) random_int(100000, 999999);
         $variables = ['timeout' => 10, 'verification_code' => $code];
         $sign = SignEnum::DENG_TA;
-        // 将业务场景type 转为 短信type
+        // will业务场景type 转for 短信type
         $smsType = match ($type) {
             SmsSceneType::BIND_PHONE,
             SmsSceneType::CHANGE_PHONE,
@@ -119,7 +119,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
         $existsAccount = $this->accountRepository->getAccountInfoByDelightfulId($delightfulId);
         if ($existsAccount !== null) {
             $userEntity = $this->userRepository->getUserByAccountAndOrganization($delightfulId, $userDTO->getOrganizationCode());
-            // 账number存in,andin该organizationdown已经generate了userinfo,直接return
+            // 账number存in,andin该organizationdown已经generateuserinfo,直接return
             if ($userEntity !== null) {
                 $userDTO->setUserId($userEntity->getUserId());
                 $userDTO->setNickname($userEntity->getNickname());
@@ -127,7 +127,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 return;
             }
         }
-        // 加lock防止并hair
+        // 加lock防止andhair
         $key = sprintf('addUserAndAccount:%s', $delightfulId);
         if (! $this->locker->mutexLock($key, $delightfulId, 5)) {
             ExceptionBuilder::throw(UserErrorCode::CREATE_USER_TOO_FREQUENTLY);
@@ -138,10 +138,10 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                 // 账numbernot存in,new账number
                 $accountEntity = $this->accountRepository->createAccount($accountDTO);
             } else {
-                // 账number存in,but是该organizationdownnothaveuserinfo
+                // 账number存in,butis该organizationdownnothaveuserinfo
                 $accountEntity = $existsAccount;
             }
-            // 将generate的账numberinfoassociatetouserEntity
+            // willgenerate账numberinfoassociatetouserEntity
             $userDTO->setDelightfulId($accountEntity->getDelightfulId());
             $userEntity = $this->userRepository->getUserByAccountAndOrganization($delightfulId, $userDTO->getOrganizationCode());
             if ($userEntity && $userEntity->getUserId()) {
@@ -150,10 +150,10 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             }
             // generateorganizationdownuserinfo
             if (empty($userDTO->getUserId())) {
-                // 确定user_id的generaterule
+                // 确定user_idgeneraterule
                 $userId = $this->userRepository->getUserIdByType(UserIdType::UserId, $userDTO->getOrganizationCode());
                 $userDTO->setUserId($userId);
-                // 1.47x(10**-29) 概ratedown,user_idwill重复,willbemysql唯一索引拦截,让user重新login一timethenline.
+                // 1.47x(10**-29) 概ratedown,user_idwill重复,willbemysql唯一索引拦截,letuser重新login一timethenline.
                 $this->userRepository->createUser($userDTO);
             }
             Db::commit();
@@ -179,7 +179,7 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             $accountEntity = $this->accountRepository->getAccountInfoByAiCode($accountDTO->getAiCode());
             if ($accountEntity) {
                 $userDTO->setDelightfulId($accountEntity->getDelightfulId());
-                // update ai 的昵称
+                // update ai 昵称
                 $accountEntity->setRealName($userDTO->getNickname());
                 // update账numberinfo
                 if ($accountDTO->getStatus() !== null) {
@@ -187,13 +187,13 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
                     $accountEntity->setStatus($accountDTO->getStatus());
                 }
                 $this->accountRepository->saveAccount($accountEntity);
-                // update账numberin该organizationdown的userinfo
+                // update账numberin该organizationdownuserinfo
                 $userEntity = $this->userRepository->getUserByAccountAndOrganization($accountEntity->getDelightfulId(), $dataIsolation->getCurrentOrganizationCode());
                 if ($userEntity === null) {
-                    # 账number存in,but是该organizationdownnothaveuserinfo. generateuserinfo
+                    # 账number存in,butis该organizationdownnothaveuserinfo. generateuserinfo
                     $userEntity = $this->createUser($userDTO, $dataIsolation);
                 } else {
-                    // 账number和userinfoall存in,update一downuserinfo
+                    // 账numberanduserinfoall存in,update一downuserinfo
                     $userEntity->setNickname($userDTO->getNickname());
                     $userEntity->setAvatarUrl($userDTO->getAvatarUrl());
                     $userEntity->setDescription($userDTO->getDescription());
@@ -215,12 +215,12 @@ class DelightfulAccountDomainService extends AbstractContactDomainService
             $accountDTO->setGender(GenderType::Unknown);
             $accountDTO->setPhone($accountDTO->getAiCode());
             $accountDTO->setType(UserType::Ai);
-            # 账numbernot存in(user肯定alsonot存in),generate账number和userinfo
+            # 账numbernot存in(user肯定alsonot存in),generate账numberanduserinfo
             $delightfulId = (string) IdGenerator::getSnowId();
             $accountDTO->setDelightfulId($delightfulId);
             $this->accountRepository->createAccount($accountDTO);
             $userDTO->setDelightfulId($delightfulId);
-            // 为账numberincurrentorganizationcreateuser
+            // for账numberincurrentorganizationcreateuser
             $result = $this->createUser($userDTO, $dataIsolation);
             Db::commit();
             return $result;

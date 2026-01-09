@@ -21,11 +21,11 @@ use Psr\Log\LoggerInterface;
 
 /**
  * 字section跳动voiceserviceSTStokenservice
- * useatgetvoiceservice的JWT token.
+ * useatgetvoiceserviceJWT token.
  */
 class ByteDanceSTSService
 {
-    /** service端requestJWT token的API端point */
+    /** service端requestJWT tokenAPI端point */
     private const string STS_TOKEN_URL = 'https://openspeech.bytedance.com/api/v1/sts/token';
 
     /** JWT Tokencachefront缀 */
@@ -54,7 +54,7 @@ class ByteDanceSTSService
      * @param string $delightfulId userDelightful ID
      * @param int $duration valid期（second），default7200second
      * @param bool $refresh whetherforcerefreshtoken，defaultfalse
-     * @return array containJWT Token和相关info的array
+     * @return array containJWT Tokenand相closeinfoarray
      * @throws Exception
      */
     public function getJwtTokenForUser(string $delightfulId, int $duration = 7200, bool $refresh = false): array
@@ -63,7 +63,7 @@ class ByteDanceSTSService
             ExceptionBuilder::throw(AsrErrorCode::InvalidDelightfulId, 'asr.config_error.invalid_delightful_id');
         }
 
-        // checkcache（ifnot是forcerefresh）
+        // checkcache（ifnotisforcerefresh）
         $cacheKey = $this->getCacheKey($delightfulId);
         if (! $refresh) {
             $cachedData = $this->getCachedJwtToken($cacheKey);
@@ -73,7 +73,7 @@ class ByteDanceSTSService
                 $remainingDuration = $cachedData['expires_at'] - time();
                 $cachedData['duration'] = max(0, $remainingDuration);
 
-                $this->logger->info('returncache的JWT Token', [
+                $this->logger->info('returncacheJWT Token', [
                     'delightful_id' => $delightfulId,
                     'cache_expires_at' => $cachedData['expires_at'],
                     'remaining_duration' => $remainingDuration,
@@ -106,7 +106,7 @@ class ByteDanceSTSService
         $cacheExpiry = max(1, $duration - 30);
         $this->cacheJwtToken($cacheKey, $tokenData, $cacheExpiry);
 
-        $this->logger->info('generate并cachenewJWT Token', [
+        $this->logger->info('generateandcachenewJWT Token', [
             'delightful_id' => $delightfulId,
             'duration' => $duration,
             'cache_expiry' => $cacheExpiry,
@@ -212,7 +212,7 @@ class ByteDanceSTSService
     }
 
     /**
-     * 清exceptuser的JWT Tokencache.
+     * 清exceptuserJWT Tokencache.
      *
      * @param string $delightfulId userDelightful ID
      * @return bool whethersuccess清except
@@ -253,7 +253,7 @@ class ByteDanceSTSService
      * fromcachegetJWT Token.
      *
      * @param string $cacheKey cache键
-     * @return null|array cache的dataornull
+     * @return null|array cachedataornull
      */
     private function getCachedJwtToken(string $cacheKey): ?array
     {
@@ -266,7 +266,7 @@ class ByteDanceSTSService
 
             $data = Json::decode($cachedData);
 
-            // checkwhether已expire（额outside的securitycheck）
+            // checkwhether已expire（额outsidesecuritycheck）
             if (isset($data['expires_at']) && $data['expires_at'] <= time()) {
                 $this->redis->del($cacheKey);
                 return null;

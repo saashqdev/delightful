@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractObject;
 class StepFinishedDTO extends AbstractObject
 {
     /**
-     * 大 json 的 key.
+     * 大 json  key.
      */
     protected string $key;
 

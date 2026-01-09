@@ -11,17 +11,17 @@ use App\Domain\ImageGenerate\ValueObject\ImplicitWatermark;
 
 /**
  * imageenhanceprocess器interface
- * useat为image嵌入enhanceinformation（如隐typewatermarketc）.
+ * useatforimage嵌入enhanceinformation（如隐typewatermarketc）.
  */
 interface ImageEnhancementProcessorInterface
 {
     /**
-     * 为imagedata嵌入enhanceinformation.
+     * forimagedata嵌入enhanceinformation.
      */
     public function enhanceImageData(string $imageData, ImplicitWatermark $watermark): string;
 
     /**
-     * 为imageURL嵌入enhanceinformation.
+     * forimageURL嵌入enhanceinformation.
      */
     public function enhanceImageUrl(string $imageUrl, ImplicitWatermark $watermark): string;
 

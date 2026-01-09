@@ -25,7 +25,7 @@ class CreateDelightfulChatFriendTable extends Migration
             $table->string('user_organization_code', 64)->comment('userorganizationencoding')->default('');
             $table->string('friend_id', 64)->comment('好友id');
             // 好友所属organization
-            $table->string('friend_organization_code', 64)->comment('好友的organizationencoding')->default('');
+            $table->string('friend_organization_code', 64)->comment('好友organizationencoding')->default('');
             // 好友type
             $table->tinyInteger('friend_type')->comment('好友type，0:ai 1:personcategory')->default(0);
             $table->string('remarks', 256)->comment('note');

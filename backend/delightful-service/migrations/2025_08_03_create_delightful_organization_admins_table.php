@@ -19,13 +19,13 @@ return new class extends Migration {
         }
         Schema::create('delightful_organization_admins', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id', 64)->comment('userID，对应delightful_contact_users.user_id');
+            $table->string('user_id', 64)->comment('userID，to应delightful_contact_users.user_id');
             $table->string('organization_code', 64)->comment('organizationencoding');
             $table->string('delightful_id', 64)->nullable()->comment('Delightful ID');
             $table->string('grantor_user_id', 64)->nullable()->comment('authorization者userID');
             $table->timestamp('granted_at')->nullable()->comment('authorizationtime');
             $table->tinyInteger('status')->default(1)->comment('status: 0=disable, 1=enable');
-            $table->tinyInteger('is_organization_creator')->default(0)->comment('whether为organizationcreateperson: 0=否, 1=是');
+            $table->tinyInteger('is_organization_creator')->default(0)->comment('whetherfororganizationcreateperson: 0=否, 1=is');
             $table->text('remarks')->nullable()->comment('note');
             $table->timestamps();
             $table->softDeletes();

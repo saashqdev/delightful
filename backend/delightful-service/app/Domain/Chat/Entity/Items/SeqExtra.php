@@ -20,8 +20,8 @@ class SeqExtra extends AbstractEntity
     protected string $topicId = '';
 
     /**
-     * userhair这itemmessageo clock，他所login的environment id.（such asin saas 生产填了someprivatedeploy预publishenvironment的码）
-     * useatrequestfinger定privatedeploy的test/预publish/生产environment.
+     * userhair这itemmessageo clock，他所loginenvironment id.（such asin saas 生产填someprivatedeploy预publishenvironment码）
+     * useatrequestfinger定privatedeploytest/预publish/生产environment.
      */
     protected ?int $delightfulEnvId = null;
 
@@ -49,7 +49,7 @@ class SeqExtra extends AbstractEntity
         return $this;
     }
 
-    // seqExtra have些field是notallowcopy的
+    // seqExtra have些fieldisnotallowcopy
     public function getExtraCanCopyData(): array
     {
         return [

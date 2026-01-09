@@ -42,12 +42,12 @@ class KnowledgeBaseListDTO extends AbstractFlowDTO
     public int $userOperation = 0;
 
     /**
-     * 业务维护的expecttotal.
+     * 业务维护expecttotal.
      */
     public int $expectedNum = 0;
 
     /**
-     * 业务维护的已complete的quantity.
+     * 业务维护已completequantity.
      */
     public int $completedNum = 0;
 
@@ -285,7 +285,7 @@ class KnowledgeBaseListDTO extends AbstractFlowDTO
     public static function fromEntity(KnowledgeBaseEntity $entity, array $users = [], array $knowledgeBaseDocumentCountMap = []): KnowledgeBaseListDTO
     {
         $listDTO = new KnowledgeBaseListDTO($entity->toArray());
-        // compatible旧knowledge base逻辑，旧knowledge base逻辑id为code
+        // compatible旧knowledge base逻辑，旧knowledge base逻辑idforcode
         $listDTO->setId($entity->getCode());
         $listDTO->setCode($entity->getCode());
         $listDTO->setCreator($entity->getCreator());

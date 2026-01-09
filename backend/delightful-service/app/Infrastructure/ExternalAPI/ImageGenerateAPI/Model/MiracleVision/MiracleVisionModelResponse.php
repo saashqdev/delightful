@@ -17,7 +17,7 @@ class MiracleVisionModelResponse extends AbstractEntity
     // image
     protected array $urls = [];
 
-    // 进degreeitem
+    // enterdegreeitem
     protected float $progress = 0;
 
     protected string $error = '';

@@ -33,11 +33,11 @@ readonly class LoginAppService
     }
 
     /**
-     * checkuserlogininfo并颁hairtoken.
+     * checkuserlogininfoand颁hairtoken.
      */
     public function login(CheckLoginRequest $request): CheckLoginResponse
     {
-        // verifyaccountinfo并getaccount
+        // verifyaccountinfoandgetaccount
         $account = $this->verifyAndGetAccount($request);
 
         // verifyuserinorganizationinsidewhether存in
@@ -51,7 +51,7 @@ readonly class LoginAppService
     }
 
     /**
-     * according tologintypeverifyaccountinfo并returnaccount实body.
+     * according tologintypeverifyaccountinfoandreturnaccount实body.
      */
     private function verifyAndGetAccount(CheckLoginRequest $request): AccountEntity
     {
@@ -153,7 +153,7 @@ readonly class LoginAppService
     }
 
     /**
-     * format化国家code，ensureby+开head.
+     * format化国家code，ensureby+openhead.
      */
     private function formatStateCode(string $stateCode): string
     {

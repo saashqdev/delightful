@@ -45,7 +45,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * get美graph超清convertsupport的样typecolumn表.
+     * get美graph超清convertsupport样typecolumn表.
      */
     public function getStyle(): array
     {
@@ -115,7 +115,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * create带signature的request
+     * create带signaturerequest
      */
     private function createSignedRequest(string $url, string $method, array $headers = [], string $body = ''): Request
     {
@@ -134,7 +134,7 @@ class MiracleVisionAPI
     }
 
     /**
-     * sendrequest并returnresponse.
+     * sendrequestandreturnresponse.
      *
      * @throws GuzzleException
      * @throws Exception

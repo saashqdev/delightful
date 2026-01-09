@@ -161,7 +161,7 @@ class ToolsExecutor extends AbstractTool
                 return null;
             }
             $toolsExecutor->execute();
-            // sectionpointinside部的exceptionin node 的 debug informationmiddlerecord
+            // sectionpointinside部exceptionin node  debug informationmiddlerecord
             foreach ($toolFlow->getNodes() as $node) {
                 if ($node->getNodeDebugResult() && ! $node->getNodeDebugResult()->isSuccess()) {
                     $logger->warning(
@@ -248,7 +248,7 @@ class ToolsExecutor extends AbstractTool
         if (! $form) {
             return;
         }
-        // 暂o clock只process object 的data
+        // 暂o clock只process object data
         if (! $form->getType()->isObject()) {
             return;
         }

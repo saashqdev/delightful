@@ -16,7 +16,7 @@ enum ProviderOriginalModelType: int
     {
         return match ($this) {
             self::System => 'systemdefault',
-            self::Custom => '自己add',
+            self::Custom => 'from己add',
         };
     }
 

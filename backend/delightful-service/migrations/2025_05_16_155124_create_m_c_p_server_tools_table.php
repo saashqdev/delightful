@@ -17,13 +17,13 @@ return new class extends Migration {
         Schema::create('delightful_mcp_server_tools', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('organization_code', 32)->comment('organizationencoding');
-            $table->string('mcp_server_code', 80)->comment('associate的 mcp service code')->index();
+            $table->string('mcp_server_code', 80)->comment('associate mcp service code')->index();
             $table->string('name', 64)->default('')->comment('toolname');
             $table->string('description', 512)->default('')->comment('tooldescription');
-            $table->tinyInteger('source')->default(0)->comment('tool来源');
-            $table->string('rel_code', 80)->default('')->comment('associate的tool code');
-            $table->string('rel_version_code', 80)->default('')->comment('associate的toolversion code');
-            $table->json('rel_info')->nullable()->comment('associate的information');
+            $table->tinyInteger('source')->default(0)->comment('toolcome源');
+            $table->string('rel_code', 80)->default('')->comment('associatetool code');
+            $table->string('rel_version_code', 80)->default('')->comment('associatetoolversion code');
+            $table->json('rel_info')->nullable()->comment('associateinformation');
             $table->string('version', 80)->default('')->comment('toolversion');
             $table->boolean('enabled')->default(false)->comment('whetherenable: 0-disable, 1-enable');
             $table->json('options')->nullable()->comment('toolconfiguration name、description、inputSchema');

@@ -46,7 +46,7 @@ class DelightfulAgentDTO extends AbstractEntity
     private string $currentOrganizationCode = '';
 
     /**
-     * whenfront的userid.
+     * whenfrontuserid.
      */
     private string $currentUserId = '';
 

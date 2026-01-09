@@ -12,7 +12,7 @@ use Psr\SimpleCache\CacheInterface;
 class CompressibleContent
 {
     /**
-     * needprocess的compresstag.
+     * needprocesscompresstag.
      */
     private static array $tags = [
         ['<DelightfulCompressibleContent Type="Image">', '</DelightfulCompressibleContent>', '<DelightfulImage>', '</DelightfulImage>'],
@@ -84,7 +84,7 @@ class CompressibleContent
 
     private static function deCompressByCompatible(string $content): string
     {
-        // decompresso clock，可能少了tag，那么尝试对 cp_ 开head的contentconductdecompress
+        // decompresso clock，maybe少tag，那么尝试to cp_ openheadcontentconductdecompress
         preg_match_all('/cp_[a-f0-9]{13}/', $content, $matches);
         foreach ($matches[0] as $match) {
             $id = $match;

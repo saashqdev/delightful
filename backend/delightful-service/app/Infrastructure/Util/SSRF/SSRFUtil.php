@@ -32,13 +32,13 @@ class SSRFUtil
     /**
      * getSSRF防御securitylink.
      *
-     * @param string $url needcheck的URL
+     * @param string $url needcheckURL
      * @param array $blackList blacklistIPor域名
      * @param array $whiteList 白名单IPor域名
-     * @param array $allowProtocols allow的agreement
-     * @param bool $replaceIp whether替换为IPaccess
+     * @param array $allowProtocols allowagreement
+     * @param bool $replaceIp whether替换forIPaccess
      * @param bool $allowRedirect whetherallow重定to
-     * @return string security的URL
+     * @return string securityURL
      * @throws Exception\SSRFException whenURLnotsecurityo clockthrowexception
      */
     public static function getSafeUrl(
@@ -64,11 +64,11 @@ class SSRFUtil
     /**
      * checkURLwhethersecurity（not抛exception，return布尔value）.
      *
-     * @param string $url needcheck的URL
+     * @param string $url needcheckURL
      * @param array $blackList blacklistIPor域名
      * @param array $whiteList 白名单IPor域名
-     * @param array $allowProtocols allow的agreement
-     * @param bool $replaceIp whether替换为IPaccess
+     * @param array $allowProtocols allowagreement
+     * @param bool $replaceIp whether替换forIPaccess
      * @param bool $allowRedirect whetherallow重定to
      * @return bool whethersecurity
      */
@@ -89,7 +89,7 @@ class SSRFUtil
     }
 
     /**
-     * getURL对应的IP.
+     * getURLto应IP.
      *
      * @param string $url URL
      * @return null|string IPground址ornull（ifparsefail）

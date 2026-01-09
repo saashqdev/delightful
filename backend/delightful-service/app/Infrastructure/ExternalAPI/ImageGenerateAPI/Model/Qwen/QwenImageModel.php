@@ -51,12 +51,12 @@ class QwenImageModel extends AbstractImageGenerate
 
     public function setAK(string $ak)
     {
-        // 通义千问notuseAK/SKauthentication，此method为nullimplement
+        // 通义千问notuseAK/SKauthentication，此methodfornullimplement
     }
 
     public function setSK(string $sk)
     {
-        // 通义千问notuseAK/SKauthentication，此method为nullimplement
+        // 通义千问notuseAK/SKauthentication，此methodfornullimplement
     }
 
     public function setApiKey(string $apiKey)
@@ -72,7 +72,7 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraph像并returnOpenAIformatresponse - Qwenversion.
+     * generategraphlikeandreturnOpenAIformatresponse - Qwenversion.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
@@ -85,11 +85,11 @@ class QwenImageModel extends AbstractImageGenerate
 
         // 2. parametervalidate
         if (! $imageGenerateRequest instanceof QwenImageModelRequest) {
-            $this->logger->error('Qwen OpenAIformat生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('Qwen OpenAIformat生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             return $response; // returnnulldataresponse
         }
 
-        // 3. 并hairhandle - 直接操作responseobject
+        // 3. andhairhandle - 直接操asresponseobject
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
@@ -98,7 +98,7 @@ class QwenImageModel extends AbstractImageGenerate
             $parallel->add(function () use ($imageGenerateRequest, $response, $fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
                 try {
-                    // submittask并round询result
+                    // submittaskandround询result
                     $taskId = $this->submitAsyncTask($imageGenerateRequest);
                     $result = $this->pollTaskResult($taskId, $imageGenerateRequest);
 
@@ -124,7 +124,7 @@ class QwenImageModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 4. recordfinalresult
-        $this->logger->info('Qwen OpenAIformat生graph：并hairhandlecomplete', [
+        $this->logger->info('Qwen OpenAIformat生graph：andhairhandlecomplete', [
             '总request数' => $count,
             'successimage数' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
@@ -162,16 +162,16 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraph像的核core逻辑，returnnativeresult.
+     * generategraphlike核core逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
         if (! $imageGenerateRequest instanceof QwenImageModelRequest) {
-            $this->logger->error('通义千问文生graph：invalid的requesttype', ['class' => get_class($imageGenerateRequest)]);
+            $this->logger->error('通义千问文生graph：invalidrequesttype', ['class' => get_class($imageGenerateRequest)]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // 其他文生graph是 x ，阿within是 * ，保持up游一致，final传入also是 *
+        // 其他文生graphis x ，阿withinis * ，保持up游一致，final传入alsois *
         $size = $imageGenerateRequest->getWidth() . 'x' . $imageGenerateRequest->getHeight();
 
         // 校验imagesize
@@ -185,7 +185,7 @@ class QwenImageModel extends AbstractImageGenerate
             'count' => $count,
         ]);
 
-        // use Parallel 并linehandle
+        // use Parallel andlinehandle
         $parallel = new Parallel();
         for ($i = 0; $i < $count; ++$i) {
             $fromCoroutineId = Coroutine::id();
@@ -217,7 +217,7 @@ class QwenImageModel extends AbstractImageGenerate
             });
         }
 
-        // get所have并linetask的result
+        // get所haveandlinetaskresult
         $results = $parallel->wait();
         $rawResults = [];
         $errors = [];
@@ -235,7 +235,7 @@ class QwenImageModel extends AbstractImageGenerate
         }
 
         if (empty($rawResults)) {
-            // 优先usespecific的error码，ifall是通useerrorthenuse NO_VALID_IMAGE
+            // 优先usespecificerror码，ifallis通useerrorthenuse NO_VALID_IMAGE
             $finalErrorCode = ImageGenerateErrorCode::NO_VALID_IMAGE;
             $finalErrorMsg = '';
 
@@ -356,7 +356,7 @@ class QwenImageModel extends AbstractImageGenerate
                         ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, $errorMsg);
                         // no break
                     default:
-                        $this->logger->error('通义千问文生graph：未知的taskstatus', ['status' => $taskStatus, 'response' => $response]);
+                        $this->logger->error('通义千问文生graph：未知taskstatus', ['status' => $taskStatus, 'response' => $response]);
                         ExceptionBuilder::throw(ImageGenerateErrorCode::TASK_TIMEOUT_WITH_REASON);
                 }
 
@@ -378,7 +378,7 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * 校验imagesizewhethermatch通义千问model的规格
+     * 校验imagesizewhethermatch通义千问model规格
      */
     private function validateImageSize(string $size, string $model): void
     {
@@ -396,11 +396,11 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * 校验qwen-imagemodel的fixedsizecolumn表.
+     * 校验qwen-imagemodelfixedsizecolumn表.
      */
     private function validateQwenImageSize(string $size): void
     {
-        // qwen-imagesupport的fixedsizecolumn表
+        // qwen-imagesupportfixedsizecolumn表
         $supportedSizes = [
             '1664x928',   // 16:9
             '1472x1140',  // 4:3
@@ -410,7 +410,7 @@ class QwenImageModel extends AbstractImageGenerate
         ];
 
         if (! in_array($size, $supportedSizes, true)) {
-            $this->logger->error('通义千问文生graph：qwen-imagenot supported的imagesize', [
+            $this->logger->error('通义千问文生graph：qwen-imagenot supportedimagesize', [
                 'requested_size' => $size,
                 'supported_sizes' => $supportedSizes,
                 'model' => 'qwen-image',
@@ -428,7 +428,7 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * 校验wan2.2-t2i-flashmodel的区betweensize.
+     * 校验wan2.2-t2i-flashmodel区betweensize.
      */
     private function validateWan22FlashSize(string $size): void
     {
@@ -445,12 +445,12 @@ class QwenImageModel extends AbstractImageGenerate
         $width = (int) $dimensions[0];
         $height = (int) $dimensions[1];
 
-        // wan2.2-t2i-flashsupport512-1440像素区between
+        // wan2.2-t2i-flashsupport512-1440like素区between
         $minSize = 512;
         $maxSize = 1440;
 
         if ($width < $minSize || $width > $maxSize || $height < $minSize || $height > $maxSize) {
-            $this->logger->error('通义千问文生graph：wan2.2-t2i-flashsize超出supportrange', [
+            $this->logger->error('通义千问文生graph：wan2.2-t2i-flashsize超outsupportrange', [
                 'requested_size' => $size,
                 'width' => $width,
                 'height' => $height,
@@ -472,7 +472,7 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * 为通义千问originaldataaddwatermark.
+     * for通义千问originaldataaddwatermark.
      */
     private function processQwenRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -482,7 +482,7 @@ class QwenImageModel extends AbstractImageGenerate
             }
 
             try {
-                // handle results arraymiddle的imageURL
+                // handle results arraymiddleimageURL
                 foreach ($result['output']['results'] as $i => &$resultItem) {
                     if (! empty($resultItem['url'])) {
                         $resultItem['url'] = $this->watermarkProcessor->addWatermarkToUrl($resultItem['url'], $imageGenerateRequest);
@@ -523,14 +523,14 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * 将通义千问imagedataaddtoOpenAIresponseobjectmiddle.
+     * will通义千问imagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponseQwen(
         OpenAIFormatResponse $response,
         array $qwenResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedislockensure并hairsecurity
+        // useRedislockensureandhairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
             // from通义千问responsemiddleextractdata
@@ -542,7 +542,7 @@ class QwenImageModel extends AbstractImageGenerate
             $currentData = $response->getData();
             $currentUsage = $response->getUsage() ?? new ImageUsage();
 
-            // handle results arraymiddle的firstimageURL
+            // handle results arraymiddlefirstimageURL
             foreach ($results as $resultItem) {
                 if (! empty($resultItem['url'])) {
                     try {

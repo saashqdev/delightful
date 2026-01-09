@@ -75,7 +75,7 @@ class MCPAgentPlugin extends AbstractAgentPlugin
 
         $configs = [];
         foreach ($data['list'] ?? [] as $MCPServerEntity) {
-            // 具havecustomizeconfiguration or need oauth2 的，我们本timenotprocess
+            // 具havecustomizeconfiguration or need oauth2 ，我们本timenotprocess
             $serverConfig = $MCPServerEntity->getServiceConfig();
             if ($serverConfig instanceof ExternalSSEServiceConfig) {
                 if ($serverConfig->getRequireFields()) {

@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->tinyInteger('user_role')->default(1)->comment('userrole,1:普通user；2：administrator 3:群主');
             $table->tinyInteger('user_type')->default(1)->comment('usertype,0:ai；1：personcategory. 冗余field');
             $table->tinyInteger('status')->default(1)->comment('status,1:normal；2：禁言');
-            $table->string('organization_code', 64)->comment('进群o clock,user所inorganizationencoding');
+            $table->string('organization_code', 64)->comment('enter群o clock,user所inorganizationencoding');
             $table->unique(['group_id', 'user_id', 'organization_code'], 'uniq_idx_group_user');
             $table->softDeletes();
             $table->timestamps();

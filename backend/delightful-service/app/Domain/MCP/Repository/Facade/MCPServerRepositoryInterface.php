@@ -18,7 +18,7 @@ interface MCPServerRepositoryInterface
 
     /**
      * @param array<int> $ids
-     * @return array<int, MCPServerEntity> returnbyid为key的实bodyobjectarray
+     * @return array<int, MCPServerEntity> returnbyidforkey实bodyobjectarray
      */
     public function getByIds(MCPDataIsolation $dataIsolation, array $ids): array;
 

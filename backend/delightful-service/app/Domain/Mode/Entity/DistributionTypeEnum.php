@@ -42,7 +42,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * whether为独立configuration.
+     * whetherfor独立configuration.
      */
     public function isIndependent(): bool
     {
@@ -50,7 +50,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * whether为inheritconfiguration.
+     * whetherforinheritconfiguration.
      */
     public function isInherited(): bool
     {

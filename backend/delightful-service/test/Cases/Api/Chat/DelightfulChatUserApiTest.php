@@ -572,7 +572,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         self::$accessToken = $loginResponse['data']['access_token'];
 
         // outputdebuginfo
-        echo "\nloginsuccess,获token: " . self::$accessToken . "\n";
+        echo "\nloginsuccess,obtaintoken: " . self::$accessToken . "\n";
         echo "\ncompleteloginresponse: " . json_encode($loginResponse, JSON_UNESCAPED_UNICODE) . "\n";
 
         return self::$accessToken;

@@ -602,7 +602,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         whenconversationinvolveandmultipledifferentthemeo clock:
         1. priorityclosenoteconversationmiddlemostbackdiscussiontheme(mostnewtopic)
         2. bymostnearconversationcontentformainreferencebasis
-        3. ifmostbackthemediscussionmorefor充minute,thenbythisasfortitlecorecore
+        3. ifmostbackthemediscussionmoreforfillminute,thenbythisasfortitlecorecore
         4. ignoreearlyalreadyalreadyendtopic,unlessitusandmostnewtopicclosely relatedclose
 
         ## strictrequire

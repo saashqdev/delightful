@@ -22,7 +22,7 @@ class ClientStreamSequenceResponse extends AbstractEntity
     // bigmodelsummary
     protected ?string $content;
 
-    // havethesemessagebigmodelresponsefieldnotis content,thiswithin特殊process
+    // havethesemessagebigmodelresponsefieldnotis content,thiswithinspecialprocess
     protected ?string $llmResponse;
 
     // bigmodelinferencecontent

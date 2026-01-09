@@ -113,7 +113,7 @@ abstract class AbstractModelRepository extends AbstractRepository
         $attributes = [];
         $array = $entity->toArray();
         foreach ($array as $key => $value) {
-            // tocomplexfieldconduct特殊process
+            // tocomplexfieldconductspecialprocess
             if (in_array($key, ['config', 'translate'], true) && (is_array($value) || is_object($value))) {
                 $value = Json::encode($value);
             }

@@ -141,7 +141,7 @@ class DelightfulLLMDomainService
 
     PROMPT;
 
-    // according touserkey词,searchonetimeback,splitmore细致questionin-depthsearch
+    // according touserkey词,searchonetimeback,splitmoremeticulousquestionin-depthsearch
     private string $moreQuestionsPrompt = <<<'PROMPT'
     # timecontext
     - system time: {date_now}
@@ -177,7 +177,7 @@ class DelightfulLLMDomainService
     ## contextexceptionhandle
     when {context} fornullo clock:
     1. start备选generatestrategy,application5W1Hframework(Who/What/When/Where/Why/How),andcombineuseroriginalquestionconductpopulate
-    2. generatedefaultdimension,for example:policybackground | mostnewdata | 专家观point | toratioanalyze | line业trend
+    2. generatedefaultdimension,for example:policybackground | mostnewdata | expert viewpoint | toratioanalyze | line业trend
     
     ## outputstandard
     混合bydownthreetypeandmore多typequestion范type,byensure子questiondiversepropertyandoverrideproperty:
@@ -202,12 +202,12 @@ class DelightfulLLMDomainService
     # task
     youneedbased onusermessage,according toIprovidesearchresult,according to总minute总structure,outputhighquality,structure化detailedreturn答,formatfor markdown.
     
-    inIgiveyousearchresultmiddle,eachresultallis[webpage X begin]...[webpage X end]format,Xrepresenteach篇文chapternumberindex.请in适whensituationdowninsentence子末tailquotecontext.请according toquote编number[citation:X]formatinanswermiddletoshould deployminutequotecontext.ifonesentence话源from多context,请columnout所have相closequote编number,for example[citation:3][citation:5],切记notwantwillquotecollectionmiddleinmostbackreturnquote编number,whileisinanswertoshould deployminutecolumnout.
+    inIgiveyousearchresultmiddle,eachresultallis[webpage X begin]...[webpage X end]format,Xrepresenteacharticlechapternumberindex.请in适whensituationdowninsentence子末tailquotecontext.请according toquote编number[citation:X]formatinanswermiddletoshould deployminutequotecontext.ifonesentence话源from多context,请columnout所have相closequote编number,for example[citation:3][citation:5],切记notwantwillquotecollectionmiddleinmostbackreturnquote编number,whileisinanswertoshould deployminutecolumnout.
     inreturn答o clock,请noticebydown几point:
     - 今dayis{date_now}.
     - andnonsearchresult所havecontentallanduserquestionclosely relatedclose,youneedcombinequestion,tosearchresultconduct甄别,filter.
-    - toatcolumn举categoryquestion(如column举所have航班information),尽quantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcome源,获completeinformation.priorityprovideinformationcomplete,most相closecolumn举item;如non必want,notwant主动tellusersearchresultnotprovidecontent.
-    - toat创ascategoryquestion(如写论文),请务必injust文segment落middlequoteto应reference编number,for example[citation:3][citation:5],notcanonlyin文chapter末tailquote.youneedinterpretandsummarizeuser题目require,choosesuitableformat,充minute利usesearchresultanddraw重wantinformation,generatematchuserrequire,极具思想深degree,富havecreate力andprofessionalpropertyanswer.you创as篇幅need尽maybe延long,toateachonewantpoint论述wantspeculateduser意graph,giveout尽maybe多angledegreereturn答wantpoint,and务必informationquantitybig,论述详尽.
+    - toatcolumn举categoryquestion(如column举所have航班information),尽quantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcome源,获completeinformation.priorityprovideinformationcomplete,most相closecolumn举item;如non必want,notwantactivetellusersearchresultnotprovidecontent.
+    - toat创ascategoryquestion(如写论文),请务必injust文segment落middlequoteto应reference编number,for example[citation:3][citation:5],notcanonlyin文chapter末tailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minute利usesearchresultanddraw重wantinformation,generatematchuserrequire,极具思想深degree,富havecreate力andprofessionalpropertyanswer.you创as篇幅need尽maybe延long,toateachonewantpoint论述wantspeculateduser意graph,giveout尽maybe多angledegreereturn答wantpoint,and务必informationquantitybig,论述详尽.
     - ifreturn答verylong,请尽quantitystructure化,minutesegment落summary.ifneedminutepointas答,尽quantitycontrolin5pointbyinside,andmerge相closecontent.
     - toat客观categoryQ&A,ifquestionanswernon常简short,can适whensupplementoneto两sentence相closeinformation,by丰富content.
     - youneedaccording touserrequireandreturn答contentchoosesuitable,beautifulreturn答format,ensurecan读propertystrong.
@@ -225,7 +225,7 @@ class DelightfulLLMDomainService
     private string $eventPrompt = <<<'PROMPT'
     # youisonenew闻eventgenerate器,userwillprovidesearchcontentandaskquestion.
     ## Current Timeis {data_now}  
-    ## according touserquestion,you需fromuserprovidesearchcontentmiddleorganize相closeevent,eventincludeeventname,eventtimeandevent概述.
+    ## according touserquestion,you需fromuserprovidesearchcontentmiddleorganize相closeevent,eventincludeeventname,eventtimeandeventoverview.
     ### notice事item:
     1. **eventnameformat**:
        - ineventnamebackaddsearchquote编number,formatfor `[[citation:x]]`,编numbercome源atsearchcontentmiddlequotemark(如 `[[citation:1]]`).
@@ -239,7 +239,7 @@ class DelightfulLLMDomainService
        - **eventdefinition**:eventissearchcontentmiddlemention,具havetimeassociate(explicitorcanspeculated)独立事实,changeoractivity,includebutnot限atcreate,publish,open业,update,合as,activityetc.
        - according touserquestion,extractandrelatedcloseevent,maintaindescriptionconcise,聚焦specifichair生thing.
        - **skipnoclosecontent**:
-         - 纯静statedescription(如not变property,background介绍,notimechange).
+         - pure and quietstatedescription(如not变property,background介绍,notimechange).
          - datastatisticsor财务information(如营收,利润).
          - 主观comment,analyzeorspeculated(unlessandeventdirectly相close).
          - notimeassociateandandquestionnoclosedetail.
@@ -255,7 +255,7 @@ class DelightfulLLMDomainService
         {
             "name": "someeventhair生[[citation:3]] [[citation:5]]",
             "time": "2024-11",
-            "description": "someeventin2024year11monthhair生,specificsituation概述."
+            "description": "someeventin2024year11monthhair生,specificsituationoverview."
         },
         {
             "name": "另oneeventstart[[citation:1]]",

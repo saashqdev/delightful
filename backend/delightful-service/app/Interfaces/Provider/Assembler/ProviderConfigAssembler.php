@@ -73,7 +73,7 @@ class ProviderConfigAssembler
     {
         [$preparedConfig, $decodeConfig] = self::prepareServiceProviderConfig($serviceProviderConfig);
         $preparedConfig['config'] = $decodeConfig;
-        // no特殊statementnotprocess
+        // nospecialstatementnotprocess
         $preparedConfig['decryptedConfig'] = null;
 
         $translator = di(TranslatorInterface::class);

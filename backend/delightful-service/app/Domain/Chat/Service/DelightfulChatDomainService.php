@@ -150,7 +150,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * systemstableproperty保障模piece之one:messageprioritylevelcertain
+     * systemstablepropertyguarantee modepiece之one:messageprioritylevelcertain
      * prioritylevelrule:
      * 1.private chat/100personbyinsidegroup chat,prioritylevelmosthigh
      * 2.systemapplicationmessage,highprioritylevel
@@ -259,7 +259,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR);
         }
         $time = date('Y-m-d H:i:s');
-        // need按收itemperson身sharegoqueryconversationwindowid
+        // needby receiptitemperson身sharegoqueryconversationwindowid
         $receiveConversationDTO = new DelightfulConversationEntity();
         $receiveConversationDTO->setUserId($messageEntity->getReceiveId());
         $receiveConversationDTO->setUserOrganizationCode($messageEntity->getReceiveOrganizationCode());
@@ -788,7 +788,7 @@ class DelightfulChatDomainService extends AbstractDomainService
                         ->setDelightfulMessageId($oldMessageEntity->getDelightfulMessageId())
                         ->setMessageType($oldMessageEntity->getMessageType()->value)
                         ->setMessageContent(Json::encode($oldMessageEntity->getContent()->toArray()));
-                    // 先firstversionmessage存入 message_version table
+                    // 先firstversionmessagedeposit message_version table
                     $this->delightfulChatMessageVersionsRepository->createMessageVersion($messageVersionEntity);
                     // 初timeedito clock,update收hairdoublehairmessageinitial seq,markmessagealreadyedit,convenientfrontclient rendering
                     $seqList = $this->delightfulSeqRepository->getBothSeqListByDelightfulMessageId($messageEntity->getDelightfulMessageId());

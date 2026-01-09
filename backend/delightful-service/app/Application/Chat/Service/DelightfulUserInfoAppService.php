@@ -16,7 +16,7 @@ use App\Domain\Contact\Service\DelightfulUserDomainService;
 /**
  * Delightfuluserinfoapplicationservice.
  *
- * aggregateuser基本info,accountinfoanddepartmentinfo,providecompleteuserinfo.
+ * aggregateuserbasicinfo,accountinfoanddepartmentinfo,providecompleteuserinfo.
  */
 class DelightfulUserInfoAppService extends AbstractAppService
 {
@@ -37,7 +37,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
      */
     public function getUserInfo(string $userId, ContactDataIsolation $dataIsolation): array
     {
-        // get基本userinfo
+        // getbasicuserinfo
         $userEntity = $this->userDomainService->getUserById($userId);
         if (! $userEntity) {
             return $this->getEmptyUserInfo($userId);

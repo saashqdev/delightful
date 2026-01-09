@@ -156,7 +156,7 @@ class SeqAssembler
 
     /**
      * according toalready经存inseqEntity,generatealready读/alreadyview/withdraw/editetcmessagestatus变moretypereturn执message.
-     * @param string $referMessageId supportfinger定quotemessageid,useatgivereceive方other设备pushreturn执,or者givehairitem方pushreturn执
+     * @param string $referMessageId supportfinger定quotemessageid,useatgivereceive方otherdevicepushreturn执,or者givehairitem方pushreturn执
      */
     public static function generateStatusChangeSeqEntity(array $seqData, string $referMessageId): DelightfulSeqEntity
     {
@@ -312,7 +312,7 @@ class SeqAssembler
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // send方messageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),
-            // messagebelong toconversationwindow. customer端canaccording tothisvaluecertainmessagewhetherwantreminderetc.if本groundnothavehair现thisconversationid,主动toservice端queryconversationwindowdetail
+            // messagebelong toconversationwindow. customer端canaccording tothisvaluecertainmessagewhetherwantreminderetc.if本groundnothavehair现thisconversationid,activetoservice端queryconversationwindowdetail
             'conversation_id' => $seqEntity->getConversationId(),
             // 本itemmessagebelong toorganization
             'organization_code' => $seqEntity->getOrganizationCode(),

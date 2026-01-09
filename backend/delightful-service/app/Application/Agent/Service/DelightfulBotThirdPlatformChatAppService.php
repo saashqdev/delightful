@@ -48,7 +48,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.empty', ['label' => 'key']);
         }
 
-        // 特殊logic,ifis飞书,andandischallenge
+        // speciallogic,ifis飞书,andandischallenge
         $platform = $params['platform'] ?? '';
         if ($platform === ThirdPlatformChatType::FeiShuRobot->value && isset($params['challenge'])) {
             $chatMessage = new ThirdPlatformChatMessage();
@@ -256,7 +256,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
 
     private function clearMemory(string $conversationId): void
     {
-        // cleanup flow from身记忆,onlymore改原sessionforbackupsession
+        // cleanup flow from身memory,onlymore改原sessionforbackupsession
         di(DelightfulFlowMemoryHistoryDomainService::class)->removeByConversationId(
             FlowDataIsolation::create('', ''),
             $conversationId

@@ -256,7 +256,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->assertStringContainsString('协as', $response['message']);
     }
 
-    // ========== 辅助testmethod ==========
+    // ========== assisttestmethod ==========
 
     /**
      * startproject协as.

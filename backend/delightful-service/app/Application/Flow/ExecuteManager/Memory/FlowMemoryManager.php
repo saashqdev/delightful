@@ -26,7 +26,7 @@ readonly class FlowMemoryManager
     {
         $messages = $this->queries($memoryQuery, $ignoreMessageIds);
 
-        // eachtimeallisnew记忆,thiswithinifwantinprocessmiddle共useoneshare记忆,willimpacttoothersectionpoint,暂o clockeachtimeallisnew
+        // eachtimeallisnewmemory,thiswithinifwantinprocessmiddle共useonesharememory,willimpacttoothersectionpoint,暂o clockeachtimeallisnew
         $memoryManager = new MemoryManager(policy: new LimitCountPolicy(['max_count' => $memoryQuery->getLimit()]));
 
         foreach ($messages as $message) {
@@ -89,7 +89,7 @@ readonly class FlowMemoryManager
     }
 
     /**
-     * according to记忆typequerychatrecord.
+     * according tomemorytypequerychatrecord.
      * @return LLMMemoryMessage[]
      */
     public function queries(MemoryQuery $memoryQuery, array $ignoreMessageIds = []): array

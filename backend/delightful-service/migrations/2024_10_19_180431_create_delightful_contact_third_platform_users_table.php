@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->string('third_union_id', 128)->comment('thethree方platformuser union_id');
             $table->string('third_platform_type', 32)->comment('thethree方platformtype dingTalk/lark/weCom/teamShare');
             $table->string('third_employee_no', 64)->nullable()->default('')->comment('工number');
-            $table->string('third_real_name', 64)->comment('员工姓名');
+            $table->string('third_real_name', 64)->comment('员工name');
             $table->string('third_nick_name', 64)->nullable()->default('')->comment('员工昵称');
             $table->text('third_avatar')->nullable()->comment('avatar');
             $table->tinyInteger('third_gender')->default(0)->comment('员工property别 0-unknown 1-男 2-女');
@@ -38,7 +38,7 @@ return new class extends Migration {
             $table->unique(['third_union_id', 'third_platform_type', 'delightful_organization_code'], 'unique_third_id');
             $table->softDeletes();
             $table->timestamps();
-            $table->comment('thethree方platformsyncpasscomeuserinfotable. notpassday书havepoint特殊,candirectlyday书userwhen做麦吉user.');
+            $table->comment('thethree方platformsyncpasscomeuserinfotable. notpassday书havepointspecial,candirectlyday书userwhen做麦吉user.');
         });
     }
 

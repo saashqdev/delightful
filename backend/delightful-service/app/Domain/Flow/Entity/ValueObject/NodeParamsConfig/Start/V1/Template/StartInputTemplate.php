@@ -225,7 +225,7 @@ class StartInputTemplate
                     "real_name": {
                         "type": "string",
                         "key": "real_name",
-                        "title": "true实姓名",
+                        "title": "true实name",
                         "description": "",
                         "items": null,
                         "properties": null,

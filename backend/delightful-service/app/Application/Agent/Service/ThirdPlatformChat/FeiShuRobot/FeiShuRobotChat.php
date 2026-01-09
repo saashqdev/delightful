@@ -260,7 +260,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $messageId = $params['event']['message']['message_id'] ?? '';
         $organizationCode = $params['delightful_system']['organization_code'] ?? '';
 
-        // setting基本info
+        // settingbasicinfo
         $this->setMessageBasicInfo($params, $chatMessage);
 
         // handlemessagecontent
@@ -365,7 +365,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private function fetchUserInfoFromFeiShu(string $openId): array
     {
         try {
-            // getuser基本info
+            // getuserbasicinfo
             $userInfo = $this->application->contact->user($openId);
 
             if (empty($userInfo) || ! isset($userInfo['user'])) {
@@ -408,7 +408,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * settingmessage基本info.
+     * settingmessagebasicinfo.
      *
      * @param array $params requestparameter
      * @param ThirdPlatformChatMessage $chatMessage chatmessageobject

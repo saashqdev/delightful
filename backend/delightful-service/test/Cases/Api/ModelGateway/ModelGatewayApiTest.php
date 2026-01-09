@@ -113,7 +113,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * test chatCompletions method基本feature.
+     * test chatCompletions methodbasicfeature.
      */
     public function testChatCompletions(): void
     {
@@ -155,7 +155,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * test embeddings method基本feature.
+     * test embeddings methodbasicfeature.
      */
     public function testEmbeddings(): void
     {

@@ -130,7 +130,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $unreadList = $senderReceiveList->getUnreadList();
                     if (! in_array($receiveUserEntity->getUserId(), $unreadList, true)) {
                         $this->logger->error(sprintf(
-                            'messageDispatch usernotinmessagenot读columntablemiddle(maybeother设备already读) $unreadList:%s $delightfulSeqEntity:%s',
+                            'messageDispatch usernotinmessagenot读columntablemiddle(maybeotherdevicealready读) $unreadList:%s $delightfulSeqEntity:%s',
                             Json::encode($unreadList),
                             Json::encode($receiveDelightfulSeqEntity->toArray())
                         ));
@@ -209,7 +209,7 @@ class DelightfulControlDomainService extends AbstractDomainService
         $spinLockKey = 'chat:seq:lock:' . $revokeMessageId;
         try {
             if (! $this->redisLocker->mutexLock($spinLockKey, $revokeMessageId)) {
-                // 互斥fail
+                // mutually exclusivefail
                 $this->logger->error(sprintf(
                     'messageDispatch withdrawor者editmessagefail $spinLockKey:%s $delightfulSeqEntity:%s',
                     $spinLockKey,

@@ -246,7 +246,7 @@ readonly class RoleDomainService
      * forfinger定usercreateor维护“organizationadministrator”role(拥haveall局permission).
      *
      * logic:
-     * 1. according tocurrentorganizationfindwhetheralreadyhave同名role;
+     * 1. according tocurrentorganizationfindwhetheralreadyhavesame namerole;
      * 2. 若not存in,thencreatenewroleand赋予 DelightfulPermission::ALL_PERMISSIONS;
      * 3. 若存in,thenensureitscontain ALL_PERMISSIONS;
      * 4. willuser ID columntableadd入roleassociateusercolumntable;

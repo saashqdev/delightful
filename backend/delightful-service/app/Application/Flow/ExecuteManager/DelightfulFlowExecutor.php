@@ -241,7 +241,7 @@ class DelightfulFlowExecutor
                 }
             }
 
-            // ifneed主动throwexception
+            // ifneedactivethrowexception
             if ($nodeDebugResult->isThrowException()) {
                 if ($nodeDebugResult->isUnAuthorized()) {
                     throw new BusinessException($nodeDebugResult->getErrorMessage(), $nodeDebugResult->getErrorCode());

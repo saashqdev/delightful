@@ -53,7 +53,7 @@ enum NodeType: int
     //    case Vector = 6;
 
     /*
-     * 记忆
+     * memory
      * Short-term Memory
      * Long-term Memory
      */

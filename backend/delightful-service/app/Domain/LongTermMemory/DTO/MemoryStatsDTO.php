@@ -10,7 +10,7 @@ namespace App\Domain\LongTermMemory\DTO;
 use App\Infrastructure\Core\AbstractDTO;
 
 /**
- * 记忆statisticsinformation DTO.
+ * memorystatisticsinformation DTO.
  */
 class MemoryStatsDTO extends AbstractDTO
 {

@@ -216,7 +216,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * exportprocessandassistantinfo
-     * containprocess所havedatabyandassistant基本info.
+     * containprocess所havedatabyandassistantbasicinfo.
      */
     public function exportFlowWithAgent(FlowDataIsolation $dataIsolation, string $flowCode, DelightfulAgentEntity $agent): array
     {
@@ -304,7 +304,7 @@ class DelightfulFlowExportImportAppService
         // generatenewID
         $flowData['code'] = Code::DelightfulFlow->gen();
 
-        // checkwhether存in同名process,if存inthenrename
+        // checkwhether存insame nameprocess,if存inthenrename
         $flowType = isset($flowData['type']) ? Type::from($flowData['type']) : Type::Main;
         $newName = $this->generateUniqueName($dataIsolation, $originalName, $flowType);
         if ($newName !== $originalName) {
@@ -362,7 +362,7 @@ class DelightfulFlowExportImportAppService
         // generatenewID
         $toolSetData['code'] = Code::DelightfulFlowToolSet->gen();
 
-        // checkwhether存in同名toolcollection,if存inthenrename
+        // checkwhether存insame nametoolcollection,if存inthenrename
         $newName = $this->generateUniqueToolSetName($dataIsolation, $originalName);
         if ($newName !== $originalName) {
             $toolSetData['name'] = $newName;
@@ -397,7 +397,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * generate唯oneprocessname
-     * whendetectto同名processo clock,add(n)back缀
+     * whendetecttosame nameprocesso clock,add(n)back缀
      */
     private function generateUniqueName(FlowDataIsolation $dataIsolation, string $name, Type $type): string
     {
@@ -408,7 +408,7 @@ class DelightfulFlowExportImportAppService
         if ($type === Type::Tools) {
             return $name;
         }
-        // checkwhether存in同名process
+        // checkwhether存insame nameprocess
         while ($this->delightfulFlowDomainService->getByName($dataIsolation, $newName, $type)) {
             $newName = "{$name}__{$counter}";
             ++$counter;
@@ -419,14 +419,14 @@ class DelightfulFlowExportImportAppService
 
     /**
      * generate唯onetoolcollectionname
-     * whendetectto同名toolcollectiono clock,add(n)back缀
+     * whendetecttosame nametoolcollectiono clock,add(n)back缀
      */
     private function generateUniqueToolSetName(FlowDataIsolation $dataIsolation, string $name): string
     {
         $newName = $name;
         $counter = 1;
 
-        // usequeryobjectcheckwhether存in同名toolcollection
+        // usequeryobjectcheckwhether存insame nametoolcollection
         while (true) {
             $query = new DelightfulFlowToolSetQuery();
             $query->setName($newName);
@@ -706,7 +706,7 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * handle特殊table达typevaluefield.
+     * handlespecialtable达typevaluefield.
      */
     private function processSpecialNodeFieldValue(array &$value, array $idMapping): void
     {
@@ -720,7 +720,7 @@ class DelightfulFlowExportImportAppService
             }
         }
 
-        // 特殊handleconst_valuearraymiddleobject
+        // specialhandleconst_valuearraymiddleobject
         if (isset($value['const_value']) && is_array($value['const_value'])) {
             foreach ($value['const_value'] as &$constItem) {
                 if (is_array($constItem)) {

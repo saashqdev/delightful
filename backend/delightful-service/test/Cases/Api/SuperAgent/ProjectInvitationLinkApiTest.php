@@ -15,7 +15,7 @@ use Mockery;
 
 /**
  * @internal
- * project邀请linkAPItest
+ * projectinvitationlinkAPItest
  */
 class ProjectInvitationLinkApiTest extends AbstractApiTest
 {
@@ -25,7 +25,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
 
     private string $projectId = '816065897791012866';
 
-    // testproceduremiddlegenerate邀请linkinfo
+    // testproceduremiddlegenerateinvitationlinkinfo
     private ?string $invitationToken = null;
 
     private ?string $invitationPassword = null;
@@ -42,7 +42,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * test邀请linkcompleteprocess.
+     * testinvitationlinkcompleteprocess.
      */
     public function testInvitationLinkCompleteFlow(): void
     {
@@ -51,18 +51,18 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 0. cleanuptestdata - ensuretest2usernotisprojectmember
         $this->cleanupTestData($projectId);
 
-        // 1. project所have者start邀请link
+        // 1. project所have者startinvitationlink
         $this->switchUserTest1();
         $this->assertToggleInvitationLinkOn($projectId);
 
-        // 2. get邀请linkinfo
+        // 2. getinvitationlinkinfo
         $linkInfo = $this->getInvitationLink($projectId);
         $this->invitationToken = $linkInfo['data']['token'];
 
         // 3. settingpasswordprotected
         $this->assertSetPasswordProtection($projectId, true);
 
-        // 4. outside部userpassTokenget邀请info
+        // 4. outside部userpassTokengetinvitationinfo
         $this->switchUserTest2();
         $invitationInfo = $this->getInvitationByToken($this->invitationToken);
         $this->assertTrue($invitationInfo['data']['requires_password']);
@@ -82,27 +82,27 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 8. validateuseralreadybecomeforprojectmember(againtimeadd入shouldfail)
         $this->joinProjectAlreadyMember($this->invitationToken, $this->invitationPassword);
 
-        // 9. project所have者close邀请link
+        // 9. project所have者closeinvitationlink
         $this->switchUserTest1();
         $this->assertToggleInvitationLinkOff($projectId);
 
-        // 10. outside部usertryaccessalreadyclose邀请link
+        // 10. outside部usertryaccessalreadycloseinvitationlink
         $this->switchUserTest2();
         $this->getInvitationByTokenDisabled($this->invitationToken);
     }
 
     /**
-     * test邀请linkpermissioncontrol.
+     * testinvitationlinkpermissioncontrol.
      */
     public function testInvitationLinkPermissions(): void
     {
         $projectId = $this->projectId;
 
-        // 1. nonprojectmembertrymanage邀请link(shouldfail)
+        // 1. nonprojectmembertrymanageinvitationlink(shouldfail)
         $this->switchUserTest2();
         $this->getInvitationLink($projectId, 51202); // permissionnot足
 
-        // 2. project所have者canmanage邀请link
+        // 2. project所have者canmanageinvitationlink
         $this->switchUserTest1();
         $this->getInvitationLink($projectId, 1000); // success
     }
@@ -116,7 +116,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
 
         $this->switchUserTest1();
 
-        // 1. start邀请link
+        // 1. startinvitationlink
         $this->toggleInvitationLink($projectId, true);
 
         // 2. testmodifypermissionlevel别formanagepermission
@@ -130,7 +130,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * get邀请linkinfo.
+     * getinvitationlinkinfo.
      */
     public function getInvitationLink(string $projectId, int $expectedCode = 1000): array
     {
@@ -147,7 +147,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * start/close邀请link.
+     * start/closeinvitationlink.
      */
     public function toggleInvitationLink(string $projectId, bool $enabled, int $expectedCode = 1000): array
     {
@@ -164,7 +164,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * reset邀请link.
+     * resetinvitationlink.
      */
     public function resetInvitationLink(string $projectId, int $expectedCode = 1000): array
     {
@@ -236,7 +236,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * passTokenget邀请info.
+     * passTokengetinvitationinfo.
      */
     public function getInvitationByToken(string $token, int $expectedCode = 1000): array
     {
@@ -264,11 +264,11 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * getdisabled邀请link(shouldfail).
+     * getdisabledinvitationlink(shouldfail).
      */
     public function getInvitationByTokenDisabled(string $token): void
     {
-        $response = $this->getInvitationByToken($token, 51222); // 邀请linkdisabled
+        $response = $this->getInvitationByToken($token, 51222); // invitationlinkdisabled
     }
 
     /**
@@ -375,7 +375,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // cleanuptestdata
         $this->getResourceShareDomainService()->deleteShareByResource($projectId, ResourceType::ProjectInvitation->value);
 
-        // continuousfastspeedstart/close邀请link
+        // continuousfastspeedstart/closeinvitationlink
         $this->toggleInvitationLink($projectId, true);
         $this->toggleInvitationLink($projectId, false);
         $this->toggleInvitationLink($projectId, true);
@@ -386,7 +386,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
 
         // validatelinkisenablestatus(compatiblenumberandbooleanvalue)
         $isEnabled = $response['data']['is_enabled'];
-        $this->assertTrue($isEnabled === true || $isEnabled === 1, '邀请linkshouldisenablestatus');
+        $this->assertTrue($isEnabled === true || $isEnabled === 1, 'invitationlinkshouldisenablestatus');
     }
 
     /**
@@ -397,7 +397,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $projectId = $this->projectId;
         $this->switchUserTest1();
 
-        // 1. start邀请link
+        // 1. startinvitationlink
         $this->toggleInvitationLink($projectId, true);
 
         // 2. 多timesettingpasswordprotected,validatepasswordgenerate
@@ -426,7 +426,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 0. cleanuptestdata
         $this->cleanupTestData($projectId);
 
-        // 1. start邀请link
+        // 1. startinvitationlink
         $this->toggleInvitationLink($projectId, true);
 
         // 2. settingpasswordprotected
@@ -478,13 +478,13 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $projectId = $this->projectId;
         $this->switchUserTest1();
 
-        // 0. cleanuptestdataandreset邀请link
+        // 0. cleanuptestdataandresetinvitationlink
         $this->cleanupTestData($projectId);
 
-        // passdomainservicedelete现have邀请link
+        // passdomainservicedelete现haveinvitationlink
         $this->getResourceShareDomainService()->deleteShareByResource($projectId, ResourceType::ProjectInvitation->value);
 
-        // 1. start邀请link
+        // 1. startinvitationlink
         $this->toggleInvitationLink($projectId, true);
 
         // 2. settinginitialpasswordprotected
@@ -545,7 +545,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * test邀请linkuserstatusandcreate者info.
+     * testinvitationlinkuserstatusandcreate者info.
      */
     public function testInvitationLinkUserStatusAndCreatorInfo(): void
     {
@@ -556,19 +556,19 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->cleanupTestData($projectId);
         $this->getResourceShareDomainService()->deleteShareByResource($projectId, ResourceType::ProjectInvitation->value, '', true);
 
-        // 1. projectcreate者(test1)start邀请link
+        // 1. projectcreate者(test1)startinvitationlink
         $this->toggleInvitationLink($projectId, true);
 
-        // get邀请linkinfo
+        // getinvitationlinkinfo
         $linkResponse = $this->getInvitationLink($projectId);
         $token = $linkResponse['data']['token'];
 
-        // 2. testcreate者access邀请link - should show has_joined = true
+        // 2. testcreate者accessinvitationlink - should show has_joined = true
         $this->switchUserTest1();
         $invitationInfo = $this->getInvitationByToken($token);
 
-        // check基本responsestructure
-        $this->assertEquals(1000, $invitationInfo['code'], 'get邀请infoshouldsuccess');
+        // checkbasicresponsestructure
+        $this->assertEquals(1000, $invitationInfo['code'], 'getinvitationinfoshouldsuccess');
         $this->assertIsArray($invitationInfo['data'], 'responsedatashouldisarray');
 
         // checknewfieldwhether存in
@@ -586,12 +586,12 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->assertIsString($invitationInfo['data']['creator_name'], 'creator_nameshouldisstringtype');
         $this->assertIsString($invitationInfo['data']['creator_avatar'], 'creator_avatarshouldisstringtype');
 
-        // 3. testnotadd入useraccess邀请link - should show has_joined = false
+        // 3. testnotadd入useraccessinvitationlink - should show has_joined = false
         $this->switchUserTest2();
         $invitationInfo = $this->getInvitationByToken($token);
 
-        // check基本response
-        $this->assertEquals(1000, $invitationInfo['code'], 'notadd入userget邀请infoshouldsuccess');
+        // checkbasicresponse
+        $this->assertEquals(1000, $invitationInfo['code'], 'notadd入usergetinvitationinfoshouldsuccess');
         $this->assertArrayHasKey('has_joined', $invitationInfo['data'], 'responseshouldcontainhas_joinedfield');
         $this->assertFalse($invitationInfo['data']['has_joined'], 'notadd入usershoulddisplaynotadd入project');
 
@@ -604,10 +604,10 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $joinResult = $this->joinProjectSuccess($token, $password);
         $this->assertEquals(1000, $joinResult['code']);
 
-        // 5. testalreadyadd入memberaccess邀请link - should show has_joined = true
+        // 5. testalreadyadd入memberaccessinvitationlink - should show has_joined = true
         $invitationInfo = $this->getInvitationByToken($token);
 
-        $this->assertEquals(1000, $invitationInfo['code'], 'alreadyadd入memberget邀请infoshouldsuccess');
+        $this->assertEquals(1000, $invitationInfo['code'], 'alreadyadd入membergetinvitationinfoshouldsuccess');
         $this->assertArrayHasKey('has_joined', $invitationInfo['data'], 'responseshouldcontainhas_joinedfield');
         $this->assertTrue($invitationInfo['data']['has_joined'], 'alreadyadd入membershoulddisplayalreadyadd入project');
 
@@ -630,7 +630,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * start邀请link (私have辅助method).
+     * startinvitationlink (私haveassistmethod).
      */
     private function assertToggleInvitationLinkOn(string $projectId): void
     {
@@ -640,14 +640,14 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
 
         // validatelinkisenablestatus(compatiblenumberandbooleanvalue)
         $isEnabled = $response['data']['is_enabled'];
-        $this->assertTrue($isEnabled === true || $isEnabled === 1, '邀请linkshouldisenablestatus');
+        $this->assertTrue($isEnabled === true || $isEnabled === 1, 'invitationlinkshouldisenablestatus');
 
         $this->assertNotEmpty($response['data']['token']);
         $this->assertEquals('viewer', $response['data']['default_join_permission']);
     }
 
     /**
-     * close邀请link (私have辅助method).
+     * closeinvitationlink (私haveassistmethod).
      */
     private function assertToggleInvitationLinkOff(string $projectId): void
     {
@@ -657,11 +657,11 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
 
         // validatelinkisdisablestatus(compatiblenumberandbooleanvalue)
         $isEnabled = $response['data']['is_enabled'];
-        $this->assertTrue($isEnabled === false || $isEnabled === 0, '邀请linkshouldisdisablestatus');
+        $this->assertTrue($isEnabled === false || $isEnabled === 0, 'invitationlinkshouldisdisablestatus');
     }
 
     /**
-     * settingpasswordprotected (私have辅助method).
+     * settingpasswordprotected (私haveassistmethod).
      */
     private function assertSetPasswordProtection(string $projectId, bool $enabled): void
     {
@@ -677,7 +677,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * modify邀请linkpassword (私have辅助method).
+     * modifyinvitationlinkpassword (私haveassistmethod).
      */
     private function changeInvitationPassword(string $projectId, string $password, int $expectedCode = 1000): array
     {

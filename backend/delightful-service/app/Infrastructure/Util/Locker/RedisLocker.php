@@ -22,7 +22,7 @@ class RedisLocker implements LockerInterface
     }
 
     /**
-     * get互斥lock
+     * getmutually exclusivelock
      * @param string $name lockname,finger定lockname
      * @param string $owner lock所have者,finger定lock唯oneidentifier,avoiderrorrelease
      * @param int $expire expiretime,second

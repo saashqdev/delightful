@@ -190,7 +190,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
             $configData[$field] = $config[$field] ?? $this->getDefaultValue($field);
         }
 
-        // 特殊fieldprocess
+        // specialfieldprocess
         $configData['vector_size'] = $config['vector_size'] ?? 2048;
 
         return array_merge($baseData, $configData);

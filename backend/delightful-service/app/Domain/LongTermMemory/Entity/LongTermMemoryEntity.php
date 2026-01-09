@@ -14,7 +14,7 @@ use DateTime;
 use Hyperf\Codec\Json;
 
 /**
- * long-term记忆实body.
+ * long-termmemory实body.
  */
 final class LongTermMemoryEntity extends AbstractEntity
 {
@@ -370,7 +370,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     // businessmethod
 
     /**
-     * access记忆(updateaccesscountandtime).
+     * accessmemory(updateaccesscountandtime).
      */
     public function access(): void
     {
@@ -379,7 +379,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * strong化记忆(updatestrong化countandtime,enhance重wantproperty).
+     * strong化memory(updatestrong化countandtime,enhance重wantproperty).
      */
     public function reinforce(): void
     {
@@ -391,7 +391,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * calculatecurrent记忆validminute数(consider衰subtract).
+     * calculatecurrentmemoryvalidminute数(consider衰subtract).
      */
     public function getEffectiveScore(): float
     {
@@ -441,7 +441,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * override set method,to enabled fieldconduct特殊process.
+     * override set method,to enabled fieldconductspecialprocess.
      */
     protected function set(string $key, mixed $value): void
     {

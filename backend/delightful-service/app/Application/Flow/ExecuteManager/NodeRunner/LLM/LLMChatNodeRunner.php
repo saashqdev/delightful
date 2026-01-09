@@ -47,12 +47,12 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
         }
 
-        // load记忆
+        // loadmemory
         $memoryManager = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), $paramsConfig->getMessages(), $ignoreMessageIds);
 
         $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId();
         $contentMessage = $currentMessage = null;
-        // tryin记忆middle找to content message
+        // tryinmemorymiddle找to content message
         foreach ($memoryManager->getMessages() as $message) {
             if ($message->getIdentifier() === $contentMessageId) {
                 $contentMessage = $message;

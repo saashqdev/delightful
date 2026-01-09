@@ -97,7 +97,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // verify基本structure
+        // verifybasicstructure
         $this->assertIsArray($data);
         $this->assertArrayHasKey('is_maintenance', $data);
         $this->assertArrayHasKey('maintenance_description', $data);

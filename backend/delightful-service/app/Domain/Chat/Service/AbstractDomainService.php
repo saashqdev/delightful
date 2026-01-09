@@ -275,7 +275,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * systemstableproperty保障模piece之one:messageprioritylevelcertain
+     * systemstablepropertyguarantee modepiece之one:messageprioritylevelcertain
      * prioritylevelrule:
      * 1.private chat/100personbyinsidegroup chat,prioritylevelmosthigh
      * 2.systemapplicationmessage,highprioritylevel
@@ -338,12 +338,12 @@ abstract class AbstractDomainService
                     try {
                         // batchquantitygivefrom己generatestatus变moremessagestream序column
                         $this->delightfulSeqRepository->batchCreateSeq($userMessageStatusChangeSeqEntities);
-                        // more改databasemiddlemessagestatus,avoidnew设备logino clockdisplaynot读
+                        // more改databasemiddlemessagestatus,avoidnewdevicelogino clockdisplaynot读
                         if (! empty($needUpdateStatusSeqIds)) {
                             $this->delightfulSeqRepository->batchUpdateSeqStatus($needUpdateStatusSeqIds, DelightfulMessageStatus::Seen);
                         }
                         $messagePriority = $this->getControlMessagePriority($userMessageStatusChangeSeqEntities[0], count($userMessageStatusChangeSeqEntities));
-                        // asyncwillgeneratemessagestreamnotifyuserother设备.
+                        // asyncwillgeneratemessagestreamnotifyuserotherdevice.
                         $seqIds = array_column($userMessageStatusChangeSeqEntities, 'id');
                         // batchquantityminutehairalready读message,givemessagesend者
                         $this->batchDispatchSeq($seqIds, $messagePriority, $userMessageStatusChangeSeqEntities[0]->getConversationId());
@@ -353,7 +353,7 @@ abstract class AbstractDomainService
                         Db::rollBack();
                         throw $exception;
                     }
-                    // batchquantitypushgivefrom己other设备,letother设备displayalready读,notagainduplicatesendreturn执
+                    // batchquantitypushgivefrom己otherdevice,letotherdevicedisplayalready读,notagainduplicatesendreturn执
                     $this->batchPushSeq($seqIds, $messagePriority);
                 }
 
@@ -409,9 +409,9 @@ abstract class AbstractDomainService
                             // batchquantitygivefrom己generatestatus变moremessagestream序column
                             $this->delightfulSeqRepository->batchCreateSeq([$userRevokedSeqEntity]);
                             $messagePriority = $this->getControlMessagePriority($userRevokedSeqEntity);
-                            // more改databasemiddlemessagestatus,avoidnew设备logino clockdisplaynot读
+                            // more改databasemiddlemessagestatus,avoidnewdevicelogino clockdisplaynot读
                             $this->delightfulSeqRepository->batchUpdateSeqStatus([$messageStruct->getReferMessageId()], DelightfulMessageStatus::Revoked);
-                            // asyncwillgeneratemessagestreamnotifyuserother设备.
+                            // asyncwillgeneratemessagestreamnotifyuserotherdevice.
                             $seqIds = [$userRevokedSeqEntity->getId()];
                             // batchquantityminutehairalready读message,givemessagesend者
                             $this->batchDispatchSeq($seqIds, $messagePriority, $userSeqEntity->getConversationId());
@@ -421,7 +421,7 @@ abstract class AbstractDomainService
                             Db::rollBack();
                             throw $exception;
                         }
-                        // batchquantitypushgivefrom己other设备,letother设备displayalready读,notagainduplicatesendreturn执
+                        // batchquantitypushgivefrom己otherdevice,letotherdevicedisplayalready读,notagainduplicatesendreturn执
                         $this->batchPushSeq($seqIds, $messagePriority);
                     }
                     // poweretc,get refer_message_ids 实o clockstatus,ando clockresponsecustomer端
@@ -496,7 +496,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * user主动createtopichandle.
+     * useractivecreatetopichandle.
      * @throws Throwable
      */
     public function userCreateTopicHandler(TopicCreateMessage $messageStruct, DataIsolation $dataIsolation): DelightfulTopicEntity
@@ -615,9 +615,9 @@ abstract class AbstractDomainService
             }
             // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
             $data = SeqAssembler::getClientSeqStruct($seqEntity, $messageDTO)->toArray();
-            // notifyuserother设备,thiswithineven ifdeliverfailalsonotimpact,所by放协程within,transactionoutside.
+            // notifyuserotherdevice,thiswithineven ifdeliverfailalsonotimpact,所by放协程within,transactionoutside.
             co(function () use ($seqEntity) {
-                // asyncpushmessagegivefrom己other设备
+                // asyncpushmessagegivefrom己otherdevice
                 $this->pushControlSequence($seqEntity);
             });
             Db::commit();
@@ -728,7 +728,7 @@ abstract class AbstractDomainService
     /**
      * return收item方多itemmessagefinalreadstatus
      * @return DelightfulSeqEntity[]
-     * @todo consideruserA设备editmessage,B设备withdrawmessagescenario
+     * @todo consideruserAdeviceeditmessage,Bdevicewithdrawmessagescenario
      */
     private function getReceiveMessageLatestReadStatus(array $referMessageIds, DataIsolation $dataIsolation): array
     {

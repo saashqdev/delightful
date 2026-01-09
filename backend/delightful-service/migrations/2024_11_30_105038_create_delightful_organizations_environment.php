@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::create('delightful_organizations_environment', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('login_code', 32)->comment('login码,useatassociateorganizationandenvironment,caninlogino clockhand动填写.lengthmoreshort,便at记忆');
+            $table->string('login_code', 32)->comment('login码,useatassociateorganizationandenvironment,caninlogino clockhand动fill in.lengthmoreshort,便atmemory');
             $table->string('delightful_organization_code', 32)->comment('麦吉organization code');
             $table->string('origin_organization_code', 32)->comment('originalorganization code');
             // environmentid

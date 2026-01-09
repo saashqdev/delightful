@@ -135,7 +135,7 @@ readonly class AsrValidationService
             ExceptionBuilder::throw(AsrErrorCode::UploadAudioFirst);
         }
 
-        // verifyuserIDmatch(基本securitycheck)
+        // verifyuserIDmatch(basicsecuritycheck)
         if ($taskStatus->userId !== $userId) {
             ExceptionBuilder::throw(AsrErrorCode::TaskNotBelongToUser);
         }

@@ -137,9 +137,9 @@ class DelightfulConversationDomainService extends AbstractDomainService
             // givefrom己messagestreamgenerate序column.
             $seqEntity = $this->generateSenderSequenceByControlMessage($messageDTO, $conversationEntity->getId());
             $seqEntity->setConversationId($conversationEntity->getId());
-            // notifyuserother设备,thiswithineven ifdeliverfailalsonotimpact,所by放协程within,transactionoutside.
+            // notifyuserotherdevice,thiswithineven ifdeliverfailalsonotimpact,所by放协程within,transactionoutside.
             co(function () use ($seqEntity) {
-                // asyncpushmessagegivefrom己other设备
+                // asyncpushmessagegivefrom己otherdevice
                 $this->pushControlSequence($seqEntity);
             });
             // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
@@ -153,7 +153,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * justininputmiddlestatusonlyneedpushgiveto方,notneed推givefrom己设备.
+     * justininputmiddlestatusonlyneedpushgiveto方,notneed推givefrom己device.
      */
     public function clientOperateConversationStatus(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
@@ -223,7 +223,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $messageDTO->setContent($messageStruct);
         // generatemessagestreamgenerate序column.
         $seqEntity = $this->generateReceiveSequenceByControlMessage($messageDTO, $receiveConversationEntity);
-        // notify收item方所have设备
+        // notify收item方所havedevice
         $this->pushControlSequence($seqEntity);
         return true;
     }

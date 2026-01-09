@@ -45,7 +45,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
     }
 
     /**
-     * customer端主动操asback,minutehairthis操asgivereceive方.
+     * customer端active操asback,minutehairthis操asgivereceive方.
      * noticethiso clockmessagestructure(eachtypeidetc)allishairup方value.
      * @throws Throwable
      */
@@ -135,7 +135,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
     }
 
     /**
-     * 主动操astopic.
+     * active操astopic.
      * @return string sessionid
      * @throws Throwable
      */

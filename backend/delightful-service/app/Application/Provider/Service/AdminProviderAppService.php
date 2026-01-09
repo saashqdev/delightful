@@ -487,7 +487,7 @@ readonly class AdminProviderAppService
         ProviderEntity $provider,
         ProviderConfigModelsDTO $providerModelsDTO
     ): void {
-        // populate provider 基本info
+        // populate provider basicinfo
         $providerModelsDTO->setName($provider->getName());
         $providerModelsDTO->setDescription($provider->getDescription());
         $providerModelsDTO->setServiceProviderId((string) $provider->getId());

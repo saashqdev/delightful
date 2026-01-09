@@ -24,8 +24,8 @@ return new class extends Migration {
             $table->string('platform_type', 64)->nullable()->comment('platformtype');
             $table->mediumText('logo')->nullable()->comment('organizationlogo');
             $table->mediumText('introduction')->nullable()->comment('enterprisedescription');
-            $table->string('contact_user')->nullable()->comment('联系person');
-            $table->string('contact_mobile', 32)->nullable()->comment('联系电话');
+            $table->string('contact_user')->nullable()->comment('contactperson');
+            $table->string('contact_mobile', 32)->nullable()->comment('contact电话');
             $table->string('industry_type')->comment('organizationline业type');
             $table->string('number', 32)->nullable()->comment('enterprisescale');
             $table->tinyInteger('status')->default(1)->comment('status 1:normal 2:disable');

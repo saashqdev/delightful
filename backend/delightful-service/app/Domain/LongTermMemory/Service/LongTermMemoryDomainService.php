@@ -32,7 +32,7 @@ use Throwable;
 use function Hyperf\Translation\trans;
 
 /**
- * long-term记忆domainservice
+ * long-termmemorydomainservice
  */
 readonly class LongTermMemoryDomainService
 {
@@ -45,7 +45,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * batchquantitystrong化记忆.
+     * batchquantitystrong化memory.
      */
     public function reinforceMemories(array $memoryIds): void
     {
@@ -53,12 +53,12 @@ readonly class LongTermMemoryDomainService
             return;
         }
 
-        // generatelocknameand所have者(based on记忆IDsortbackgenerate唯onelock名)
+        // generatelocknameand所have者(based onmemoryIDsortbackgenerate唯onelock名)
         sort($memoryIds);
         $lockName = 'memory:batch:reinforce:' . md5(implode(',', $memoryIds));
         $lockOwner = getmypid() . '_' . microtime(true);
 
-        // get互斥lock
+        // getmutually exclusivelock
         if (! $this->locker->mutexLock($lockName, $lockOwner, 60)) {
             $this->logger->error('Failed to acquire lock for batch memory reinforcement', [
                 'lock_name' => $lockName,
@@ -68,7 +68,7 @@ readonly class LongTermMemoryDomainService
         }
 
         try {
-            // batchquantityquery记忆
+            // batchquantityquerymemory
             $memories = $this->repository->findByIds($memoryIds);
 
             if (empty($memories)) {
@@ -95,7 +95,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * batchquantityhandle记忆suggestion(accept/reject).
+     * batchquantityhandlememorysuggestion(accept/reject).
      */
     public function batchProcessMemorySuggestions(array $memoryIds, MemoryOperationAction $action, MemoryOperationScenario $scenario = MemoryOperationScenario::ADMIN_PANEL, ?string $delightfulMessageId = null): void
     {
@@ -108,22 +108,22 @@ readonly class LongTermMemoryDomainService
             throw new InvalidArgumentException('delightful_message_id is required when scenario is memory_card_quick');
         }
 
-        // generatelocknameand所have者(based on记忆IDsortbackgenerate唯onelock名)
+        // generatelocknameand所have者(based onmemoryIDsortbackgenerate唯onelock名)
         sort($memoryIds);
         $lockName = sprintf('memory:batch:%s:%s:%s', $action->value, $scenario->value, md5(implode(',', $memoryIds)));
         $lockOwner = getmypid() . '_' . microtime(true);
 
-        // get互斥lock
+        // getmutually exclusivelock
         if (! $this->locker->mutexLock($lockName, $lockOwner, 60)) {
             ExceptionBuilder::throw(LongTermMemoryErrorCode::UPDATE_FAILED);
         }
 
         try {
             if ($action === MemoryOperationAction::ACCEPT) {
-                // batchquantityquery记忆
+                // batchquantityquerymemory
                 $memories = $this->repository->findByIds($memoryIds);
 
-                // batchquantityaccept记忆suggestion:willpending_contentmovetocontent,settingstatusforalreadyaccept,enable记忆
+                // batchquantityacceptmemorysuggestion:willpending_contentmovetocontent,settingstatusforalreadyaccept,enablememory
                 foreach ($memories as $memory) {
                     // ifhavepending_content,thenwillitsmovetocontent
                     if ($memory->getPendingContent() !== null) {
@@ -136,7 +136,7 @@ readonly class LongTermMemoryDomainService
                     // settingstatusforin effect
                     $memory->setStatus(MemoryStatus::ACTIVE);
 
-                    // enable记忆
+                    // enablememory
                     $memory->setEnabledInternal(true);
                 }
 
@@ -145,7 +145,7 @@ readonly class LongTermMemoryDomainService
                     ExceptionBuilder::throw(LongTermMemoryErrorCode::UPDATE_FAILED);
                 }
             } elseif ($action === MemoryOperationAction::REJECT) {
-                // batchquantityreject记忆suggestion:according to记忆statusdecidedeletealsois清nullpending_content
+                // batchquantityrejectmemorysuggestion:according tomemorystatusdecidedeletealsois清nullpending_content
                 $memories = $this->repository->findByIds($memoryIds);
 
                 $memoriesToDelete = [];
@@ -155,32 +155,32 @@ readonly class LongTermMemoryDomainService
                     $content = $memory->getContent();
                     $pendingContent = $memory->getPendingContent();
 
-                    // ifcontentfornullandPendingContentnotfornull,directlydelete记忆
+                    // ifcontentfornullandPendingContentnotfornull,directlydeletememory
                     if (empty($content) && ! empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }
-                    // ifcontentandPendingContentallnotfornull,then清nullPendingContent即can,notwantdelete记忆
+                    // ifcontentandPendingContentallnotfornull,then清nullPendingContent即can,notwantdeletememory
                     elseif (! empty($content) && ! empty($pendingContent)) {
                         $memory->setPendingContent(null);
                         $memory->setStatus(MemoryStatus::ACTIVE);
                         $memoriesToUpdate[] = $memory;
                     }
-                    // ifcontentnotfornullbutPendingContentfornull,alsodirectlydelete记忆(原havelogicmaintain)
+                    // ifcontentnotfornullbutPendingContentfornull,alsodirectlydeletememory(原havelogicmaintain)
                     elseif (! empty($content) && empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }
-                    // ifcontentfornullandPendingContentalsofornull,directlydelete记忆(原havelogicmaintain)
+                    // ifcontentfornullandPendingContentalsofornull,directlydeletememory(原havelogicmaintain)
                     elseif (empty($content) && empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }
                 }
 
-                // batchquantitydeleteneeddelete记忆
+                // batchquantitydeleteneeddeletememory
                 if (! empty($memoriesToDelete) && ! $this->repository->deleteBatch($memoriesToDelete)) {
                     ExceptionBuilder::throw(LongTermMemoryErrorCode::DELETION_FAILED);
                 }
 
-                // batchquantityupdateneed清nullpending_content记忆
+                // batchquantityupdateneed清nullpending_contentmemory
                 if (! empty($memoriesToUpdate) && ! $this->repository->updateBatch($memoriesToUpdate)) {
                     ExceptionBuilder::throw(LongTermMemoryErrorCode::UPDATE_FAILED);
                 }
@@ -197,7 +197,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * access记忆(updateaccessstatistics).
+     * accessmemory(updateaccessstatistics).
      */
     public function accessMemory(string $memoryId): void
     {
@@ -215,7 +215,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * batchquantityaccess记忆.
+     * batchquantityaccessmemory.
      */
     public function accessMemories(array $memoryIds): void
     {
@@ -223,7 +223,7 @@ readonly class LongTermMemoryDomainService
             return;
         }
 
-        // batchquantityquery记忆
+        // batchquantityquerymemory
         $memories = $this->repository->findByIds($memoryIds);
 
         if (empty($memories)) {
@@ -248,7 +248,7 @@ readonly class LongTermMemoryDomainService
         $lockName = sprintf('memory:create:%s:%s:%s', $dto->orgId, $dto->appId, $dto->userId);
         $lockOwner = getmypid() . '_' . microtime(true);
 
-        // get互斥lock
+        // getmutually exclusivelock
         if (! $this->locker->mutexLock($lockName, $lockOwner, 30)) {
             $this->logger->error('Failed to acquire lock for memory creation', [
                 'lock_name' => $lockName,
@@ -258,7 +258,7 @@ readonly class LongTermMemoryDomainService
         }
 
         try {
-            // validateuser记忆quantitylimit
+            // validateusermemoryquantitylimit
             $count = $this->countByUser($dto->orgId, $dto->appId, $dto->userId);
             if ($count >= 40) {
                 throw new InvalidArgumentException(trans('long_term_memory.entity.user_memory_limit_exceeded'));
@@ -302,7 +302,7 @@ readonly class LongTermMemoryDomainService
         $lockName = sprintf('memory:update:%s', $memoryId);
         $lockOwner = getmypid() . '_' . microtime(true);
 
-        // get互斥lock
+        // getmutually exclusivelock
         if (! $this->locker->mutexLock($lockName, $lockOwner, 30)) {
             $this->logger->error('Failed to acquire lock for memory update', [
                 'lock_name' => $lockName,
@@ -341,7 +341,7 @@ readonly class LongTermMemoryDomainService
         $lockName = sprintf('memory:delete:%s', $memoryId);
         $lockOwner = getmypid() . '_' . microtime(true);
 
-        // get互斥lock
+        // getmutually exclusivelock
         if (! $this->locker->mutexLock($lockName, $lockOwner, 30)) {
             $this->logger->error('Failed to acquire lock for memory deletion', [
                 'lock_name' => $lockName,
@@ -368,7 +368,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * according toprojectIDcolumntablebatchquantitydelete记忆.
+     * according toprojectIDcolumntablebatchquantitydeletememory.
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID
@@ -392,22 +392,22 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * getuservalid记忆andbuildhint词string.
+     * getuservalidmemoryandbuildhint词string.
      */
     public function getEffectiveMemoriesForPrompt(string $orgId, string $appId, string $userId, ?string $projectId, int $maxLength = 4000): string
     {
-        // getuserall局记忆(nothaveprojectID记忆)
+        // getuseralllocal memory(nothaveprojectIDmemory)
         $generalMemoryLimit = MemoryCategory::GENERAL->getEnabledLimit();
         $generalMemories = $this->repository->findEffectiveMemoriesByUser($orgId, $appId, $userId, '', $generalMemoryLimit);
 
-        // getproject相close记忆
+        // getproject相closememory
         $projectMemoryLimit = MemoryCategory::PROJECT->getEnabledLimit();
         $projectMemories = $this->repository->findEffectiveMemoriesByUser($orgId, $appId, $userId, $projectId ?? '', $projectMemoryLimit);
 
-        // merge记忆,按minute数sort
+        // mergememory,按minute数sort
         $memories = array_merge($generalMemories, $projectMemories);
 
-        // filter掉shouldbe淘汰记忆
+        // filter掉shouldbe淘汰memory
         $validMemories = array_filter($memories, function ($memory) {
             return ! $this->shouldMemoryBeEvicted($memory);
         });
@@ -441,26 +441,26 @@ readonly class LongTermMemoryDomainService
         $memoryIds = array_map(static fn ($memory) => $memory->getId(), $selectedMemories);
         $this->accessMemories($memoryIds);
 
-        // build记忆hint词string
+        // buildmemoryhint词string
         if (empty($selectedMemories)) {
             return '';
         }
 
-        $prompt = '<userlong-term记忆>';
+        $prompt = '<userlong-termmemory>';
 
         foreach ($selectedMemories as $memory) {
             $memoryId = $memory->getId();
             $memoryText = $memory->getContent();
-            $prompt .= sprintf("\n[记忆ID: %s] %s", $memoryId, $memoryText);
+            $prompt .= sprintf("\n[memoryID: %s] %s", $memoryId, $memoryText);
         }
 
-        $prompt .= "\n</userlong-term记忆>";
+        $prompt .= "\n</userlong-termmemory>";
 
         return $prompt;
     }
 
     /**
-     * get记忆statisticsinfo.
+     * getmemorystatisticsinfo.
      */
     public function getMemoryStats(string $orgId, string $appId, string $userId): array
     {
@@ -482,7 +482,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * find记忆 by ID.
+     * findmemory by ID.
      */
     public function findById(string $memoryId): ?LongTermMemoryEntity
     {
@@ -499,7 +499,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * according toqueryconditionstatistics记忆quantity.
+     * according toqueryconditionstatisticsmemoryquantity.
      */
     public function countMemories(MemoryQueryDTO $dto): int
     {
@@ -507,7 +507,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * statisticsuser记忆quantity.
+     * statisticsusermemoryquantity.
      */
     public function countByUser(string $orgId, string $appId, string $userId): int
     {
@@ -515,7 +515,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * batchquantitycheck记忆whether属atuser.
+     * batchquantitycheckmemorywhether属atuser.
      */
     public function filterMemoriesByUser(array $memoryIds, string $orgId, string $appId, string $userId): array
     {
@@ -523,8 +523,8 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * batchquantityenableordisable记忆.
-     * @param array $memoryIds 记忆IDcolumntable
+     * batchquantityenableordisablememory.
+     * @param array $memoryIds memoryIDcolumntable
      * @param bool $enabled enablestatus
      * @param string $orgId organizationID
      * @param string $appId applicationID
@@ -538,25 +538,25 @@ readonly class LongTermMemoryDomainService
             return 0;
         }
 
-        // generatelocknameand所have者(based on记忆IDsortbackgenerate唯onelock名)
+        // generatelocknameand所have者(based onmemoryIDsortbackgenerate唯onelock名)
         sort($memoryIds);
         $enabledStatus = $enabled ? 'enable' : 'disable';
         $lockName = sprintf('memory:batch:%s:%s', $enabledStatus, md5(implode(',', $memoryIds)));
         $lockOwner = getmypid() . '_' . microtime(true);
 
-        // get互斥lock
+        // getmutually exclusivelock
         if (! $this->locker->mutexLock($lockName, $lockOwner, 60)) {
             ExceptionBuilder::throw(LongTermMemoryErrorCode::UPDATE_FAILED);
         }
 
         try {
-            // validate记忆IDvalidpropertyandbelong to权
+            // validatememoryIDvalidpropertyandbelong to权
             $validMemoryIds = $this->repository->filterMemoriesByUser($memoryIds, $orgId, $appId, $userId);
             if (empty($validMemoryIds)) {
                 return 0;
             }
 
-            // ifisenable记忆,conductquantitylimitcheck
+            // ifisenablememory,conductquantitylimitcheck
             if ($enabled) {
                 $this->validateMemoryEnablementLimits($validMemoryIds, $orgId, $appId, $userId);
             }
@@ -570,7 +570,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * judge记忆whethershouldbe淘汰.
+     * judgememorywhethershouldbe淘汰.
      */
     public function shouldMemoryBeEvicted(LongTermMemoryEntity $memory): bool
     {
@@ -596,8 +596,8 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * validate记忆enablequantitylimit.
-     * @param array $memoryIds wantenable记忆IDcolumntable
+     * validatememoryenablequantitylimit.
+     * @param array $memoryIds wantenablememoryIDcolumntable
      * @param string $orgId organizationID
      * @param string $appId applicationID
      * @param string $userId userID
@@ -605,10 +605,10 @@ readonly class LongTermMemoryDomainService
      */
     private function validateMemoryEnablementLimits(array $memoryIds, string $orgId, string $appId, string $userId): void
     {
-        // getwantenable记忆实body
+        // getwantenablememory实body
         $memoriesToEnable = $this->repository->findByIds($memoryIds);
 
-        // getcurrentproject记忆andall局记忆enablequantity
+        // getcurrentprojectmemoryandalllocal memoryenablequantity
         $currentProjectCount = $this->repository->getEnabledMemoryCountByCategory($orgId, $appId, $userId, MemoryCategory::PROJECT);
         $currentGeneralCount = $this->repository->getEnabledMemoryCountByCategory($orgId, $appId, $userId, MemoryCategory::GENERAL);
 
@@ -629,7 +629,7 @@ readonly class LongTermMemoryDomainService
                 $projectedCounts[$categoryKey] = 0;
             }
 
-            // onlycurrentnotenable记忆才willincreasecount
+            // onlycurrentnotenablememory才willincreasecount
             if (! $memory->isEnabled()) {
                 ++$projectedCounts[$categoryKey];
             }
@@ -648,7 +648,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * according topending_contentchangeadjust记忆status.
+     * according topending_contentchangeadjustmemorystatus.
      */
     private function adjustMemoryStatusBasedOnPendingContent(LongTermMemoryEntity $memory, ?string $pendingContent): void
     {
@@ -672,17 +672,17 @@ readonly class LongTermMemoryDomainService
         // statusconvertmatrix
         return match ([$currentStatus, $hasPendingContent]) {
             // pending_contentfornullo clockstatusconvert
-            [MemoryStatus::PENDING_REVISION, false], [MemoryStatus::ACTIVE, false] => MemoryStatus::ACTIVE,        // 修订complete → 生效
+            [MemoryStatus::PENDING_REVISION, false], [MemoryStatus::ACTIVE, false] => MemoryStatus::ACTIVE,        // revisioncomplete → 生效
             [MemoryStatus::PENDING, false], [MemoryStatus::PENDING, true] => MemoryStatus::PENDING,                 // 待acceptstatusmaintainnot变
             // pending_contentnotfornullo clockstatusconvert
-            [MemoryStatus::ACTIVE, true], [MemoryStatus::PENDING_REVISION, true] => MemoryStatus::PENDING_REVISION,         // 生效记忆have修订 → 待修订
+            [MemoryStatus::ACTIVE, true], [MemoryStatus::PENDING_REVISION, true] => MemoryStatus::PENDING_REVISION,         // 生效memoryhaverevision → 待revision
             // defaultsituation(notshouldto达thiswithin)
             default => $currentStatus,
         };
     }
 
     /**
-     * updatemessagecontent,setting记忆操asinfo.
+     * updatemessagecontent,settingmemory操asinfo.
      */
     private function updateMessageWithMemoryOperation(string $delightfulMessageId, MemoryOperationAction $action, array $memoryIds): void
     {

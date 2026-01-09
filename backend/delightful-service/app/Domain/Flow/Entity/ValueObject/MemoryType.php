@@ -20,7 +20,7 @@ enum MemoryType: int
     // IM chatrecord
     case IMChat = 3;
 
-    // 挂载记忆
+    // 挂载memory
     case Mount = 4;
 
     public function isNone(): bool

@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\Constants;
 class SmsSceneType
 {
     /**
-     * 设备logout.
+     * devicelogout.
      */
     public const DEVICE_LOGOUT = 'device_logout';
 

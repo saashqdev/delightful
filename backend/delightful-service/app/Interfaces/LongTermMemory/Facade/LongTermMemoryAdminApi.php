@@ -33,7 +33,7 @@ use Psr\Log\LoggerInterface;
 use function Hyperf\Translation\trans;
 
 /**
- * long-term记忆back台manage API.
+ * long-termmemoryback台manage API.
  */
 #[ApiResponse('low_code')]
 class LongTermMemoryAdminApi extends AbstractApi
@@ -55,7 +55,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * create记忆.
+     * creatememory.
      */
     public function createMemory(RequestInterface $request): array
     {
@@ -108,7 +108,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * update记忆.
+     * updatememory.
      */
     public function updateMemory(string $memoryId, RequestInterface $request): array
     {
@@ -136,7 +136,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * delete记忆.
+     * deletememory.
      */
     public function deleteMemory(string $memoryId): array
     {
@@ -164,7 +164,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * get记忆detail.
+     * getmemorydetail.
      */
     public function getMemory(string $memoryId): array
     {
@@ -221,7 +221,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * get记忆list.
+     * getmemorylist.
      */
     public function getMemoryList(RequestInterface $request): array
     {
@@ -270,7 +270,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * search记忆.
+     * searchmemory.
      */
     public function searchMemories(RequestInterface $request): array
     {
@@ -296,13 +296,13 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * strong化记忆.
+     * strong化memory.
      */
     public function reinforceMemory(string $memoryId): array
     {
         $authorization = $this->getAuthorization();
 
-        // batchquantityverify记忆whether属atcurrentuser
+        // batchquantityverifymemorywhether属atcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             [$memoryId],
             $authorization->getOrganizationCode(),
@@ -310,7 +310,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             $authorization->getId()
         );
 
-        // checkwhetherhavenot属atuser记忆
+        // checkwhetherhavenot属atusermemory
         if (! $allMemoriesBelongToUser) {
             return [
                 'success' => false,
@@ -327,7 +327,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * batchquantitystrong化记忆.
+     * batchquantitystrong化memory.
      */
     public function reinforceMemories(RequestInterface $request): array
     {
@@ -340,7 +340,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $validatedParams = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
 
-        // batchquantityverify所have记忆all属atcurrentuser
+        // batchquantityverify所havememoryall属atcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             $validatedParams['memory_ids'],
             $authorization->getOrganizationCode(),
@@ -348,7 +348,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             $authorization->getId()
         );
 
-        // checkwhetherhavenot属atuser记忆
+        // checkwhetherhavenot属atusermemory
         if (! $allMemoriesBelongToUser) {
             return [
                 'success' => false,
@@ -365,7 +365,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * batchquantityprocess记忆suggestion(accept/reject).
+     * batchquantityprocessmemorysuggestion(accept/reject).
      */
     public function batchProcessMemorySuggestions(RequestInterface $request): array
     {
@@ -381,7 +381,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $validatedParams = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
 
-        // batchquantityverify所have记忆all属atcurrentuser
+        // batchquantityverify所havememoryall属atcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             $validatedParams['memory_ids'],
             $authorization->getOrganizationCode(),
@@ -389,7 +389,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             $authorization->getId()
         );
 
-        // checkwhetherhavenot属atuser记忆
+        // checkwhetherhavenot属atusermemory
         if (! $allMemoriesBelongToUser) {
             return [
                 'success' => false,
@@ -412,7 +412,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         try {
             if ($action === 'accept') {
-                // batchquantityaccept记忆suggestion:status 改for accept,enabled for true
+                // batchquantityacceptmemorysuggestion:status 改for accept,enabled for true
                 $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::ACCEPT, $scenario, $validatedParams['delightful_message_id'] ?? null);
 
                 return [
@@ -423,7 +423,7 @@ class LongTermMemoryAdminApi extends AbstractApi
                     'scenario' => $scenario->value,
                 ];
             }
-            // delete记忆or者rejectupdate记忆
+            // deletememoryor者rejectupdatememory
             $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::REJECT, $scenario, $validatedParams['delightful_message_id'] ?? null);
 
             return [
@@ -453,7 +453,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * batchquantityupdate记忆enablestatus.
+     * batchquantityupdatememoryenablestatus.
      */
     public function batchUpdateMemoryStatus(RequestInterface $request): array
     {
@@ -479,7 +479,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * get记忆statistics.
+     * getmemorystatistics.
      */
     public function getMemoryStats(): array
     {
@@ -497,7 +497,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * get记忆hint词.
+     * getmemoryhint词.
      */
     public function getMemoryPrompt(RequestInterface $request): array
     {
@@ -525,7 +525,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * evaluateconversationcontentbycreate记忆.
+     * evaluateconversationcontentbycreatememory.
      */
     public function evaluateConversation(RequestInterface $request): array
     {
@@ -569,7 +569,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * verifyupdate记忆requestparameter.
+     * verifyupdatememoryrequestparameter.
      */
     private function validateUpdateMemoryParams(RequestInterface $request): array
     {
@@ -625,7 +625,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * verify记忆所have权.
+     * verifymemory所have权.
      *
      * @param mixed $authorization
      * @return array{success: bool, message?: string}
@@ -648,7 +648,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * processcontentupdateandbuildupdate记忆DTO.
+     * processcontentupdateandbuildupdatememoryDTO.
      */
     private function buildUpdateMemoryDTO(?string $inputContent, ?string $inputPendingContent = null): UpdateMemoryDTO
     {

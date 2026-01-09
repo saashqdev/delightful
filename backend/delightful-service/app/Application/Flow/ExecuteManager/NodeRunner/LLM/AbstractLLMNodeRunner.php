@@ -124,13 +124,13 @@ abstract class AbstractLLMNodeRunner extends NodeRunner
                 topicId: $executionData->getTopicId(),
                 limit: $modelConfig->getMaxRecord(),
             );
-            // ifcome源isthethird-partychattool,onlygetmost近 3 hour记忆
+            // ifcome源isthethird-partychattool,onlygetmost近 3 hourmemory
             if ($executionData->isThirdPlatformChat()) {
                 $memoryQuery->setStartTime(new DateTime('-3 hours'));
             }
             $memoryManager = $this->flowMemoryManager->createMemoryManagerByAuto($memoryQuery, $ignoreMessageIds);
         } else {
-            // hand动记忆
+            // hand动memory
             $messages = $messagesComponent?->getForm()?->getKeyValue($executionData->getExpressionFieldData()) ?? [];
             $memoryManager = $this->flowMemoryManager->createMemoryManagerByArray($messages);
         }

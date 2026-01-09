@@ -17,7 +17,7 @@ return new class extends Migration {
         Schema::table('delightful_api_msg_logs', function (Blueprint $table) {
             $table->dropColumn('msg');
             $table->string('source_id')->default('')->comment('comesourceID');
-            $table->string('user_name')->default('')->comment('user姓名');
+            $table->string('user_name')->default('')->comment('username');
         });
     }
 

@@ -70,13 +70,13 @@ class IntentRecognitionNodeRunner extends AbstractLLMNodeRunner
 
         $systemPrompt = $this->createSystemPrompt($intentPrompts);
 
-        // if意graphidentifystartfrom动load记忆,that么need剔exceptcurrentmessage
+        // if意graphidentifystartfrom动loadmemory,that么need剔exceptcurrentmessage
         $ignoreMessageIds = [];
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
         }
 
-        // load记忆
+        // loadmemory
         $messageHistory = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), ignoreMessageIds: $ignoreMessageIds);
 
         $agent = $this->createAgent($executionData, $vertexResult, $paramsConfig, $messageHistory, $systemPrompt);
@@ -135,8 +135,8 @@ willyouresponseformat化for JSON object,format如down:
 # process
 1. youwilltooneshareuserinputcontent,帮Ianalyzeoutuser意graphand置信degree.
 2. inferenceuser意graph,willinferenceprocedure放to JSON middle 推导procedure field,explainforwhatwilloutthisthese意graphand置信degree.
-3. ifidentifyto意graph,请填写most佳matchandmatchto意graph,whetheridentifyfor true,most佳意graph one定is置信degreemosthigh,itsmiddle matchto意graphhave fieldisaccording to 置信degree frombigtosmallrowcolumn.
-4. ifincurrentrangenothave找toany意graph,whetheridentifyfor false,请填写identifyfailreason,most佳matchandmatchto意graphallshouldisempty.
+3. ifidentifyto意graph,请fill inmost佳matchandmatchto意graph,whetheridentifyfor true,most佳意graph one定is置信degreemosthigh,itsmiddle matchto意graphhave fieldisaccording to 置信degree frombigtosmallrowcolumn.
+4. ifincurrentrangenothave找toany意graph,whetheridentifyfor false,请fill inidentifyfailreason,most佳matchandmatchto意graphallshouldisempty.
 5. onlywillreturn JSON format,notwillagainreturnothercontent,ifone定needhavereturn,请放toremarkmiddle,return答contentone定canbe JSON toolparse.
 
 # limit

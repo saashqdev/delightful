@@ -41,7 +41,7 @@ class DelightfulFlowToolSetFactory
     {
         $entity = new DelightfulFlowToolSetEntity();
 
-        // setting基本property
+        // settingbasicproperty
         $entity->setId($toolSetData['id'] ?? 0);
         $entity->setCode($toolSetData['code'] ?? '');
         $entity->setName($toolSetData['name'] ?? '');

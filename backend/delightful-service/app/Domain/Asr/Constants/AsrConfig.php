@@ -106,7 +106,7 @@ class AsrConfig
     // ==================== scheduletaskconfiguration ====================
 
     /**
-     * core跳monitorscheduletask互斥lockexpiretime(second).
+     * core跳monitorscheduletaskmutually exclusivelockexpiretime(second).
      */
     public const int HEARTBEAT_MONITOR_MUTEX_EXPIRES = 60;
 }

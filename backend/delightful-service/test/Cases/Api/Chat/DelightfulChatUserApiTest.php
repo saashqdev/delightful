@@ -234,7 +234,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * test特殊characterhandle.
+     * testspecialcharacterhandle.
      */
     public function testUpdateUserInfoWithSpecialCharacters(): void
     {

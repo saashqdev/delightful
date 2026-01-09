@@ -31,7 +31,7 @@ class ServiceProviderApiTest extends BaseTest
             return;
         }
 
-        // 基本assert
+        // basicassert
         $this->assertIsArray($response);
         $this->assertArrayHasKey('code', $response);
         $this->assertSame(1000, $response['code']);

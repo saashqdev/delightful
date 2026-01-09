@@ -13,7 +13,7 @@ use App\Infrastructure\Core\AbstractDTO;
 use DateTime;
 
 /**
- * create记忆 DTO.
+ * creatememory DTO.
  */
 class CreateMemoryDTO extends AbstractDTO
 {
@@ -57,7 +57,7 @@ class CreateMemoryDTO extends AbstractDTO
     }
 
     /**
-     * setting记忆type.
+     * settingmemorytype.
      */
     public function setMemoryType(MemoryType|string $memoryType): void
     {
@@ -69,7 +69,7 @@ class CreateMemoryDTO extends AbstractDTO
     }
 
     /**
-     * setting记忆status.
+     * settingmemorystatus.
      */
     public function setStatus(MemoryStatus|string $status): void
     {

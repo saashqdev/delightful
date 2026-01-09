@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\LongTermMemory\Entity\ValueObject;
 
 /**
- * 记忆type枚举.
+ * memorytype枚举.
  */
 enum MemoryType: string
 {
@@ -31,7 +31,7 @@ enum MemoryType: string
     }
 
     /**
-     * whetherforusergenerate记忆.
+     * whetherforusergeneratememory.
      */
     public function isUserGenerated(): bool
     {
@@ -42,7 +42,7 @@ enum MemoryType: string
     }
 
     /**
-     * whetherforsystemgenerate记忆.
+     * whetherforsystemgeneratememory.
      */
     public function isSystemGenerated(): bool
     {

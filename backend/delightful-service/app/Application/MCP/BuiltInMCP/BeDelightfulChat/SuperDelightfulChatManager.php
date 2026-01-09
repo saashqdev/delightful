@@ -178,7 +178,7 @@ MARKDOWN;
                         ],
                         'conversation_id' => [
                             'type' => 'string',
-                            'description' => 'sessionID,useat记忆feature,samesessionIDmessagewill具havesharedupdown文',
+                            'description' => 'sessionID,useatmemoryfeature,samesessionIDmessagewill具havesharedupdown文',
                         ],
                         'instruction' => $instructionSchema,
                     ],

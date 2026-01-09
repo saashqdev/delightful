@@ -36,7 +36,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * saveknowledge base - 基本information.
+     * saveknowledge base - basicinformation.
      * @param array<DocumentFileInterface> $files
      */
     public function save(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $savingDelightfulFlowKnowledgeEntity, array $files = []): KnowledgeBaseEntity

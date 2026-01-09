@@ -266,7 +266,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             }
         }
 
-        // todo checkwhetherhavehairmessagepermission(needhavegood友close系,enterpriseclose系,collection团close系,合as伙伴close系etc)
+        // todo checkwhetherhavehairmessagepermission(needhavegood友close系,enterpriseclose系,collection团close系,合aspartnerclose系etc)
     }
 
     /**
@@ -606,7 +606,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         4. ignore早期already经endtopic,unlessit们andmostnewtopicclosely relatedclose
 
         ## strictrequire
-        1. titlelength:not超pass 15 character.Englishone字母算onecharacter,汉字one字算onecharacter,other语type采useanalogouscountsolution.
+        1. titlelength:not超pass 15 character.Englishone字母算onecharacter,Chinese charactersone字算onecharacter,other语type采useanalogouscountsolution.
         2. content相close:titlemustdirectlyreflectconversation核coretheme
         3. languagestyle:usestatementproperty语sentence,avoidquestionsentence
         4. outputformat:onlyoutputtitlecontent,notwantaddanyexplain,标pointorothertext
@@ -677,7 +677,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         $dataIsolation = $this->createDataIsolation($authorization);
         // permissionvalidation,judgeusermessagemiddle,whethercontain本timehe想downloadfile
         $fileEntities = $this->delightfulChatFileDomainService->checkAndGetFilePaths($fileDTOs, $dataIsolation);
-        // downloado clockalso原file原本name
+        // downloado clockalso原fileoriginalname
         $downloadNames = [];
         $fileDownloadUrls = [];
         $filePaths = [];
@@ -808,7 +808,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         }
         // use mq pushmessagegive收item方
         isset($receiveSeqEntity) && $this->pushReceiveChatSequence($messageEntity, $receiveSeqEntity);
-        // asyncpushmessagegivefrom己other设备
+        // asyncpushmessagegivefrom己otherdevice
         if ($messageEntity->getSenderType() !== ConversationType::Ai) {
             co(function () use ($senderChatSeqCreatedEvent) {
                 $this->delightfulChatDomainService->pushChatSequence($senderChatSeqCreatedEvent);
@@ -864,7 +864,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         if (! $delightfulContext) {
             ExceptionBuilder::throw(ChatErrorCode::CONTEXT_LOST);
         }
-        // forsupportonews链receivehair多账numbermessage,allowinmessageupdown文middlepass in账number token
+        // forsupportonews链receivehairmultiple accountsnumbermessage,allowinmessageupdown文middlepass in账number token
         if (! $delightfulContext->getAuthorization()) {
             $delightfulContext->setAuthorization($userToken);
         }
@@ -1051,7 +1051,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     private function syncHandlerSingleChatMessage(DelightfulSeqEntity $senderSeqEntity, DelightfulMessageEntity $senderMessageEntity): DelightfulSeqEntity
     {
         $delightfulSeqStatus = DelightfulMessageStatus::Unread;
-        # assistantmaybe参andprivate chat/group chatetcscenario,read记忆o clock,needreadfrom己conversationwindowdownmessage.
+        # assistantmaybe参andprivate chat/group chatetcscenario,readmemoryo clock,needreadfrom己conversationwindowdownmessage.
         $receiveSeqEntity = $this->delightfulChatDomainService->generateReceiveSequenceByChatMessage($senderSeqEntity, $senderMessageEntity, $delightfulSeqStatus);
         // avoid seq tablecarrytoo多feature,addtoo多index,thereforewilltopicmessagesingle独writeto topic_messages tablemiddle
         $this->delightfulChatDomainService->createTopicMessage($receiveSeqEntity);

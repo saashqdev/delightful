@@ -88,7 +88,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
      */
     public function pushControlSeq(DelightfulSeqEntity $seqEntity, DelightfulUserEntity $seqUserEntity, ?DelightfulMessageEntity $messageEntity = null): void
     {
-        // havethesecontrolmessage,notonlycontrolfrom己设备,alsoneedcontrolto方设备
+        // havethesecontrolmessage,notonlycontrolfrom己device,alsoneedcontrolto方device
         // controlmessagepush. todo:待optimize,mergepushalready读controlmessage
         if ($seqEntity->getObjectType() === ConversationType::User && ($seqEntity->getSeqType() instanceof ControlMessageType)) {
             SocketIOUtil::sendSequenceId($seqEntity);
@@ -159,7 +159,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                     # ai sendalready读return执
                     $this->aiSendReadStatusChangeReceipt($selfSeqEntity, $userEntity);
                     # call flow
-                    // todo can做 optimizeflowresponsesuccessrate: syncetc待flowexecute,细致judge,toat本seq_id,uptimeflowresponsewhethertimeout,ifis,directly丢弃,notagainhairgiveflow
+                    // todo can做 optimizeflowresponsesuccessrate: syncetc待flowexecute,meticulousjudge,toat本seq_id,uptimeflowresponsewhethertimeout,ifis,directly丢弃,notagainhairgiveflow
                     $this->userCallFlow($aiAccountEntity, $userEntity, $senderUserEntity, $selfSeqEntity);
                 } catch (Throwable $throwable) {
                     $this->logger->error('UserCallAgentEventError', [

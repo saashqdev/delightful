@@ -54,7 +54,7 @@ class ModeDomainService
         if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
             $followModeAggregate = $this->getModeDetailById($dataIsolation, $mode->getFollowModeId());
             if ($followModeAggregate) {
-                // usecurrent模type基本info + be跟随模typegroupconfiguration
+                // usecurrent模typebasicinfo + be跟随模typegroupconfiguration
                 return new ModeAggregate($mode, $followModeAggregate->getGroupAggregates());
             }
         }
@@ -73,7 +73,7 @@ class ModeDomainService
     }
 
     /**
-     * according toIDget模type实body(onlyget模type基本info).
+     * according toIDget模type实body(onlyget模typebasicinfo).
      */
     public function getModeById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeEntity
     {
@@ -94,7 +94,7 @@ class ModeDomainService
         if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
             $followModeAggregate = $this->getModeDetailById($dataIsolation, $mode->getFollowModeId());
             if ($followModeAggregate) {
-                // usecurrent模type基本info + be跟随模typegroupconfiguration
+                // usecurrent模typebasicinfo + be跟随模typegroupconfiguration
                 return new ModeAggregate($mode, $followModeAggregate->getGroupAggregates());
             }
         }
@@ -191,7 +191,7 @@ class ModeDomainService
         // deletethe模type所have现havegroup
         $this->groupRepository->deleteByModeId($dataIsolation, $id);
 
-        // save模type基本info
+        // save模typebasicinfo
         $this->modeRepository->save($dataIsolation, $mode);
 
         // batchquantitycreategroupcopy

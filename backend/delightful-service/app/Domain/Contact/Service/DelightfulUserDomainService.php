@@ -235,7 +235,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         // mergeuserorganizationandofficialorganization
         $orgCodes = array_filter(array_unique(array_merge($userOrganizations, [$officialOrganizationCode])));
 
-        // from usertable拿基本info,support多organizationquery
+        // from usertable拿basicinfo,support多organizationquery
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds, $orgCodes);
 
         // checkcurrentuserwhether拥haveofficialorganization
@@ -397,7 +397,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
      */
     public function getUserDetailByUserIdsInDelightful(array $userIds): array
     {
-        // from usertable拿基本info
+        // from usertable拿basicinfo
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds);
         // parseavataretcinfo
         $delightfulIds = array_column($users, 'delightful_id');
@@ -595,7 +595,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * get互斥lock
+     * getmutually exclusivelock
      * @return string lock所have者identifier
      */
     protected function acquireLock(string $lockKey): string
@@ -610,7 +610,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * release互斥lock
+     * releasemutually exclusivelock
      */
     protected function releaseLock(string $lockKey, string $owner): void
     {

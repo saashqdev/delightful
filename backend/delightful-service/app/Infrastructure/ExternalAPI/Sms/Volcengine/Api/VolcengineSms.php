@@ -43,7 +43,7 @@ class VolcengineSms extends VolcengineApi
      */
     public function request(string $phone, array $templateVariables, SignEnum $sign, string $templateId): SendResult
     {
-        // go掉hand机number特殊format
+        // go掉hand机numberspecialformat
         $phone = str_replace(['+00', '-'], '', $phone);
         $sendResult = new SendResult();
         $signStr = SignEnum::format($sign, LanguageEnum::EN_US);

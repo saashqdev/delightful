@@ -114,7 +114,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
     {
         // givefrom己messagestreamgenerate序column.
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageEntity, $conversationId);
-        // asyncwillgeneratemessagestreamnotifyuserother设备.
+        // asyncwillgeneratemessagestreamnotifyuserotherdevice.
         $this->controlDomainService->pushControlSequence($seqEntity);
         // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
@@ -125,7 +125,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         $conversationId = $this->topicDomainService->clientOperateTopic($messageDTO, $dataIsolation);
         // givefrom己messagestreamgenerate序column.
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageDTO, $conversationId);
-        // asyncwillgeneratemessagestreamnotifyuserother设备.
+        // asyncwillgeneratemessagestreamnotifyuserotherdevice.
         $seqCreatedEvent = $this->controlDomainService->pushControlSequence($seqEntity);
         // asyncminutehaircontrolmessage,to方操assessiontopic
         $this->controlDomainService->dispatchSeq($seqCreatedEvent);

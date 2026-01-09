@@ -117,7 +117,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->delightfulChatMessageAppService->setUserContext($userToken, $context);
             // call guard getuserinfo
             $userAuthorization = $this->getAuthorization();
-            // will账number所have设备add入同oneroom
+            // will账number所havedeviceadd入同oneroom
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return ['type' => 'user', 'user' => [
                 'delightful_id' => $userAuthorization->getDelightfulId(),
@@ -235,7 +235,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
             // according tomessagetype,minutehairtoto应process模piece
             $userAuthorization = $this->getAuthorization();
-            // will账number所have设备add入同oneroom
+            // will账number所havedeviceadd入同oneroom
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return $this->delightfulChatMessageAppService->onChatMessage($chatRequest, $userAuthorization);
         } catch (BusinessException $businessException) {
@@ -259,7 +259,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[Event('intermediate')]
     #[VerifyStructure]
     /**
-     * not存入database实o clockmessage,useatonethesetemporarymessagescenario.
+     * notdepositdatabase实o clockmessage,useatonethesetemporarymessagescenario.
      * @throws Throwable
      */
     public function onIntermediateMessage(Socket $socket, array $params)
@@ -289,7 +289,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->delightfulChatMessageAppService->setUserContext($userToken, $chatRequest->getContext());
             // according tomessagetype,minutehairtoto应process模piece
             $userAuthorization = $this->getAuthorization();
-            // will账number所have设备add入同oneroom
+            // will账number所havedeviceadd入同oneroom
             $this->delightfulChatMessageAppService->joinRoom($userAuthorization, $socket);
             return $this->delightfulIntermediateMessageAppService->dispatchClientIntermediateMessage($chatRequest, $userAuthorization);
         } catch (BusinessException $businessException) {
@@ -364,7 +364,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
                         $seqCreatedEvent->setPriority($priority);
                         // messageminutehair. oneitemseqmaybewillgenerate多itemseq
                         $messageDispatch = new MessageDispatchPublisher($seqCreatedEvent);
-                        // messagepush. oneitemseqonlywillpushgiveoneuser(多设备)
+                        // messagepush. oneitemseqonlywillpushgiveoneuser(多device)
                         $messagePush = new MessagePushPublisher($seqCreatedEvent);
                         $producer->produce($messageDispatch);
                         $producer->produce($messagePush);

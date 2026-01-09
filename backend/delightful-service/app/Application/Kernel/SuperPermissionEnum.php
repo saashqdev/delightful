@@ -36,7 +36,7 @@ enum SuperPermissionEnum: string
     // servicequotientadministrator
     case SERVICE_PROVIDER_ADMIN = 'service_provider_admin';
 
-    // 超level麦吉邀请useuser
+    // 超level麦吉invitationuseuser
     case SUPER_INVITE_USER = 'be_delightful_invite_use_user';
 
     // 超level麦吉看板manageperson员

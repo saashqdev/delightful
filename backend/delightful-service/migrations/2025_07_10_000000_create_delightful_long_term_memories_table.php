@@ -15,14 +15,14 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('delightful_long_term_memories', function (Blueprint $table) {
-            $table->string('id', 36)->primary()->comment('记忆唯oneID');
-            $table->text('content')->comment('记忆content');
-            $table->text('pending_content')->nullable()->comment('待变more记忆content,etc待useraccept变more');
-            $table->text('explanation')->nullable()->comment('记忆explain,instructionthisitem记忆forwhatvaluerecord');
+            $table->string('id', 36)->primary()->comment('memory唯oneID');
+            $table->text('content')->comment('memorycontent');
+            $table->text('pending_content')->nullable()->comment('待变morememorycontent,etc待useraccept变more');
+            $table->text('explanation')->nullable()->comment('memoryexplain,instructionthisitemmemoryforwhatvaluerecord');
             $table->text('origin_text')->nullable()->comment('originaltextcontent');
-            $table->string('memory_type', 50)->default('manual_input')->comment('记忆type');
-            $table->string('status', 20)->default('pending')->comment('记忆status:pending-待accept, active-in effect, pending_revision-待修订');
-            $table->tinyInteger('enabled')->default(0)->comment('whetherenable:0-disable,1-enable(only active status记忆canset)');
+            $table->string('memory_type', 50)->default('manual_input')->comment('memorytype');
+            $table->string('status', 20)->default('pending')->comment('memorystatus:pending-待accept, active-in effect, pending_revision-待revision');
+            $table->tinyInteger('enabled')->default(0)->comment('whetherenable:0-disable,1-enable(only active statusmemorycanset)');
             $table->decimal('confidence', 3, 2)->unsigned()->default(0.8)->comment('置信degree(0-1)');
             $table->decimal('importance', 3, 2)->unsigned()->default(0.5)->comment('重wantproperty(0-1)');
             $table->unsignedInteger('access_count')->default(0)->comment('accesscount');

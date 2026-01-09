@@ -11,12 +11,12 @@ use App\Domain\LongTermMemory\DTO\UpdateMemoryDTO;
 use App\Domain\LongTermMemory\Entity\LongTermMemoryEntity;
 
 /**
- * long-term记忆group装器.
+ * long-termmemorygroup装器.
  */
 class LongTermMemoryAssembler
 {
     /**
-     * use UpdateMemoryDTO update记忆实body.
+     * use UpdateMemoryDTO updatememory实body.
      */
     public static function updateEntityFromDTO(LongTermMemoryEntity $entity, UpdateMemoryDTO $dto): void
     {

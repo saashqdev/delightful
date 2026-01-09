@@ -886,7 +886,7 @@ class DelightfulAgentAppService extends AbstractAppService
         }
 
         $loadPresetConfig = $this->loadPresetConfig('chat', ['modelName' => $modelName]);
-        // prepare基本configuration
+        // preparebasicconfiguration
         $config = [
             'agent_name' => '麦吉assistant',
             'agent_description' => 'Iwillreturn答youone切',
@@ -914,7 +914,7 @@ class DelightfulAgentAppService extends AbstractAppService
         }
 
         $loadPresetConfig = $this->loadPresetConfig('generate_image', ['modelName' => $modelName]);
-        // prepare基本configuration
+        // preparebasicconfiguration
         $config = [
             'agent_name' => 'text generationgraph助hand',
             'agent_description' => 'onestrongbigAItextgenerategraphlike助hand,canaccording to您descriptioncreate精美graphlike.',
@@ -942,7 +942,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $modelName = $models['list'][0]->getModelName();
         }
 
-        // prepare基本configuration
+        // preparebasicconfiguration
         $config = [
             'agent_name' => 'documentparse助hand',
             'agent_description' => 'documentparse助hand',
@@ -1487,7 +1487,7 @@ class DelightfulAgentAppService extends AbstractAppService
     {
         $delightfulAgentVersionEntity = new DelightfulAgentVersionEntity();
 
-        // setting基本info
+        // settingbasicinfo
         $delightfulAgentVersionEntity->setFlowCode($agentEntity->getFlowCode());
         $delightfulAgentVersionEntity->setAgentId($agentEntity->getId());
         $delightfulAgentVersionEntity->setAgentName($agentEntity->getAgentName());

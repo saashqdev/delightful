@@ -282,7 +282,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
      */
     public function isValidPermission(string $permissionKey): bool
     {
-        // all局permission特殊handle
+        // all局permissionspecialhandle
         if ($permissionKey === self::ALL_PERMISSIONS) {
             return true;
         }

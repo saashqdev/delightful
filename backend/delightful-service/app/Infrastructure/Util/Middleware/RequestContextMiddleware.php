@@ -39,7 +39,7 @@ class RequestContextMiddleware implements MiddlewareInterface
         } else {
             $delightfulUserAuthorization = $this->getAuthorization();
         }
-        // willuserinformation存入协程context,convenient api layerget
+        // willuserinformationdeposit协程context,convenient api layerget
         RequestCoContext::setUserAuthorization($delightfulUserAuthorization);
         return $handler->handle($request);
     }

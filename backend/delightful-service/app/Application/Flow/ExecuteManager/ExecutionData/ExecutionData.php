@@ -99,7 +99,7 @@ class ExecutionData
     private ?string $topicId = null;
 
     /**
-     * useas传递onethese特殊parameter,预留.
+     * useas传递onethesespecialparameter,预留.
      */
     private array $ext = [];
 

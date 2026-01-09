@@ -217,7 +217,7 @@ class UserAssembler
                     $userDepartmentDetail['path_nodes'] = $allPathNodes;
                 }
 
-                // mergeuser基本info
+                // mergeuserbasicinfo
                 $userInfoArray = $userInfo->toArray();
                 foreach ($userInfoArray as $key => $value) {
                     $userDepartmentDetail[$key] = $value;

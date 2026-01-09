@@ -253,7 +253,7 @@ return [
                 // support嵌setfield,usepoint语法如 'args.messages'
                 // notice:messages and tools fieldnotin白名singlemiddle,notwillbeprint
                 'whitelist_fields' => [
-                    // 基本requestinfo
+                    // basicrequestinfo
                     'request_id',                  // requestID
                     'model_id',                    // modelID
                     'model',                       // modelname

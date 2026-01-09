@@ -102,7 +102,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
      */
     private function enrichOrganizationAdminWithUserInfo(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdmin): array
     {
-        // getuser基本info
+        // getuserbasicinfo
         $userInfo = $this->getUserInfo($organizationAdmin->getUserId());
 
         // getauthorizationpersoninfo

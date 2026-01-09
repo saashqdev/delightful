@@ -63,7 +63,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             $paramsConfig->getModelConfig()->setVisionModel($modelName);
         }
 
-        // if主动closevisualcan力.or者 currentmodelsupport,butischoose别model,alsois相whenatwantclosecurrentmodelvisualcan力
+        // ifactiveclosevisualcan力.or者 currentmodelsupport,butischoose别model,alsois相whenatwantclosecurrentmodelvisualcan力
         if (! $paramsConfig->getModelConfig()->isVision() || ($model->getModelOptions()->isMultiModal() && $paramsConfig->getModelConfig()->getVisionModel() !== $modelName)) {
             $model->getModelOptions()->setMultiModal(false);
         }
@@ -84,14 +84,14 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             }
         }
 
-        // load记忆
+        // loadmemory
         $memoryManager = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), $paramsConfig->getMessages(), $ignoreMessageIds);
 
-        // onlyfrom动记忆needprocessbydown多模statemessage
+        // onlyfrom动memoryneedprocessbydown多模statemessage
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId();
             $contentMessage = null;
-            // tryin记忆middle找to content message
+            // tryinmemorymiddle找to content message
             foreach ($memoryManager->getMessages() as $message) {
                 if ($message->getIdentifier() === $contentMessageId) {
                     $contentMessage = $message;

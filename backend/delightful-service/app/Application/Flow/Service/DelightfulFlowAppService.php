@@ -124,7 +124,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * save基本info.
+     * savebasicinfo.
      */
     #[Transactional]
     public function save(Authenticatable $authorization, DelightfulFlowEntity $delightfulFlowEntity): DelightfulFlowEntity

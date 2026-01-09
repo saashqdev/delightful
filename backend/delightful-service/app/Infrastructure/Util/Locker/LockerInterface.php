@@ -10,7 +10,7 @@ namespace App\Infrastructure\Util\Locker;
 interface LockerInterface
 {
     /**
-     * get互斥lock
+     * getmutually exclusivelock
      * @param string $name lockname,finger定lockname
      * @param string $owner lock所have者,finger定lock唯oneidentifier,judgeerrorrelease
      * @param int $expire expiretime,second

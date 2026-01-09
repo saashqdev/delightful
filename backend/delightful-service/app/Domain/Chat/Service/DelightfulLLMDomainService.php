@@ -164,7 +164,7 @@ class DelightfulLLMDomainService
     2.1 keywordrule
        - generategreater thanequal 3 highqualitycanretrievekeyword,includecorecoreactualbody,keypropertyandrelatedcloseconcept
        - timequalifieroverriderate≥30%
-       - toratiocategoryquestion占ratio≥20%
+       - toratiocategoryquestionoccupyratio≥20%
     
     ## hardpropertyconstraint(forcecomply)
     1. languageonetoproperty
@@ -177,7 +177,7 @@ class DelightfulLLMDomainService
     ## contextexceptionhandle
     when {context} fornullo clock:
     1. startalternativegeneratestrategy,application5W1Hframework(Who/What/When/Where/Why/How),andcombineuseroriginalquestionconductpopulate
-    2. generatedefaultdimension,for example:policybackground | mostnewdata | expert viewpoint | toratioanalyze | line业trend
+    2. generatedefaultdimension,for example:policybackground | mostnewdata | expert viewpoint | toratioanalyze | lineindustrytrend
     
     ## outputstandard
     hybridbydownthreetypeandmoremultipletypequestionscopetype,byensurechildquestiondiversepropertyandoverrideproperty:
@@ -207,13 +207,13 @@ class DelightfulLLMDomainService
     - todaydayis{date_now}.
     - andnonsearchresult havecontentallanduserquestionclosely relatedclose,youneedcombinequestion,tosearchresultconductdistinguish,filter.
     - toatcolumn举categoryquestion(likecolumnraise haveflightinformation),exhaustedquantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcomesource,获completeinformation.priorityprovideinformationcomplete,mostrelatedclosecolumn举item;likenonrequiredwant,notwantactivetellusersearchresultnotprovidecontent.
-    - toatcreateascategoryquestion(like writing paper),please be sureinjusttextsegmentfallmiddlequotetoshouldreferencecodenumber,for example[citation:3][citation:5],notcanonlyintextchapterendtailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minute利usesearchresultanddrawreloadwantinformation,generatematchuserrequire,very thoughtfuldegree,富havecreatecapabilityandprofessionalpropertyanswer.youcreateaslengthneedexhaustedmaybe延long,toateachonewantpointdiscussionwantspeculateduserintentiongraph,giveoutexhaustedmaybemultipleangledegreereturnanswerwantpoint,and务requiredinformationquantitybig,detailed discussion.
+    - toatcreateascategoryquestion(like writing paper),please be sureinjusttextsegmentfallmiddlequotetoshouldreferencecodenumber,for example[citation:3][citation:5],notcanonlyintextchapterendtailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minute利usesearchresultanddrawreloadwantinformation,generatematchuserrequire,very thoughtfuldegree,richhavecreatecapabilityandprofessionalpropertyanswer.youcreateaslengthneedexhaustedmaybe延long,toateachonewantpointdiscussionwantspeculateduserintentiongraph,giveoutexhaustedmaybemultipleangledegreereturnanswerwantpoint,and务requiredinformationquantitybig,detailed discussion.
     - ifreturnanswerverylong,please盡quantitystructureization,minutesegmentfallsummary.ifneedminutepointasanswer,exhaustedquantitycontrolin5pointbyinside,andmergerelatedclosecontent.
     - toatobjectivecategoryQ&A,ifquestionanswernonoften simpleshort,canfitwhensupplementonetotwosentencerelatedcloseinformation,byrichcontent.
     - youneedaccording touserrequireandreturnanswercontentchoosesuitable,beautifulreturnanswerformat,ensurecanreadpropertystrong.
     - youreturnanswershouldcomprehensivemultiple aspectsclosewebpagecomereturnanswer,notcanduplicatequoteonewebpage.
     - unlessuserrequire,nothenyoureturnanswerlanguageneedanduserasklanguagemaintainoneto.
-    - outputbeautifulmarkdown format,contentmiddleaddonetheseandthemerelatedcloseemojitable情symbolnumber.
+    - outputbeautifulmarkdown format,contentmiddleaddonetheseandthemerelatedcloseemojitableemotionsymbolnumber.
     
     ## usermessagefor:
     {question}
@@ -236,7 +236,7 @@ class DelightfulLLMDomainService
        - ifsameoneeventinmultiplequotemiddleoutshow,priorityusemostearlytime.
        - iftimenotexplicit,according tocontextspeculatedmostearlymaybetime,andensurereasonable.
     3. **eventextractandfilter**:
-       - **eventdefinition**:eventissearchcontentmiddlemention,withhavetimeassociate(explicitorcanspeculated)independentfact,changeoractivity,includebutnotlimitatcreate,publish,open业,update,combineas,activityetc.
+       - **eventdefinition**:eventissearchcontentmiddlemention,withhavetimeassociate(explicitorcanspeculated)independentfact,changeoractivity,includebutnotlimitatcreate,publish,openindustry,update,combineas,activityetc.
        - according touserquestion,extractandrelatedcloseevent,maintaindescriptionconcise,focusspecifichairgeneratething.
        - **skipnoclosecontent**:
          - pure and quietstatedescription(likenotchangeproperty,backgroundintroduce,notimechange).
@@ -715,7 +715,7 @@ class DelightfulLLMDomainService
             'getSearchResults according touseroriginalquestion,generatesearchword,endcalculateo clock,consumeo clock::%s second',
             number_format($costTime / 1000, 2)
         ));
-        // bigmodelnothavesplit孙questioniso clock,directlyusechildquestionsearch
+        // bigmodelnothavesplitgrandsonquestioniso clock,directlyusechildquestionsearch
         if (! empty($subKeywords)) {
             $searchKeywords = $subKeywords;
         } else {

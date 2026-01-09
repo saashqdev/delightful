@@ -33,7 +33,7 @@ readonly class LoginAppService
     }
 
     /**
-     * checkuserlogininfoand颁hairtoken.
+     * checkuserlogininfoandissuehairtoken.
      */
     public function login(CheckLoginRequest $request): CheckLoginResponse
     {

@@ -54,7 +54,7 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
         // getminute布typelock
         $lockKey = "document_re_sync:{$documentEntity->getKnowledgeBaseCode()}:{$documentEntity->getCode()}";
         if (! $lock->mutexLock($lockKey, $event->knowledgeBaseDocumentEntity->getCreatedUid(), 300)) { // 5minutesecondstimeout
-            $logger->info('document[' . $documentEntity->getCode() . ']justinbeotherenter程process,skipsync');
+            $logger->info('document[' . $documentEntity->getCode() . ']justinbeotherenterprocedureprocess,skipsync');
             return;
         }
 
@@ -82,9 +82,9 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
         /** @var KnowledgeBaseVectorAppService $knowledgeBaseVectorAppService */
         $knowledgeBaseVectorAppService = di(KnowledgeBaseVectorAppService::class);
 
-        // from增versionnumber(抢lock)
+        // fromincreaseversionnumber(grablock)
         $affectedRows = $knowledgeBaseDocumentDomainService->increaseVersion($dataIsolation, $documentEntity);
-        // iffrom增fail,instructionalreadyalreadyreloadnewtoquantityizationpass,submitfrontend
+        // iffromincreasefail,instructionalreadyalreadyreloadnewtoquantityizationpass,submitfrontend
         if ($affectedRows === 0) {
             $logger->info('documentalreadyreloadnewtoquantityization,skipsync');
             return;

@@ -263,7 +263,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
     private function handleStreamedResponse(Agent $agent, VertexResult $vertexResult, ExecutionData $executionData): array
     {
         $chatCompletionChoiceGenerator = $agent->chatStreamed();
-        // inside敛reply
+        // insideconvergereply
         $frontResults['chat_completion_choice_generator'] = $chatCompletionChoiceGenerator;
         return $this->tryIntrovertedReplyMessageNode($vertexResult, $executionData, $frontResults);
     }
@@ -342,7 +342,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
             return false;
         }
 
-        // maybealsohaveotherstringsplice,temporaryo clockalsonotinside敛
+        // maybealsohaveotherstringsplice,temporaryo clockalsonotinsideconverge
         $items = match ($contentValue->getType()) {
             ValueType::Const => $contentValue->getConstValue()?->getItems() ?? [],
             ValueType::Expression => $contentValue->getExpressionValue()?->getItems() ?? [],

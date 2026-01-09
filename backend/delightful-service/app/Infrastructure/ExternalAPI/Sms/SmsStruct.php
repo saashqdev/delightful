@@ -20,9 +20,9 @@ class SmsStruct
     public string $phone = '';
 
     /**
-     * shortmessagetype,such as:registration_rewards (orderalreadyhair货),arrival_notice(to货notify).
+     * shortmessagetype,such as:registration_rewards (orderalreadyhairgoods),arrival_notice(togoodsnotify).
      * 1.ifmatch language field,meanwhileusevariableshortmessage,canimplementmultiplelanguageadapt,byandlanguagetypefallbackbottom
-     * 2.电quotientrelatedcloseshortmessageusethisfield,butisnothave language pass in.
+     * 2.electricquotientrelatedcloseshortmessageusethisfield,butisnothave language pass in.
      */
     public ?string $type = null;
 

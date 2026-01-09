@@ -158,7 +158,7 @@ class DelightfulAgentDomainService
         return $this->agentRepository->isDefaultAssistantConversationExist($userId, $aiCode);
     }
 
-    // quotient业codeitemfrontalsodependency
+    // quotientindustrycodeitemfrontalsodependency
     public function getBotsByOrganization(RequestContext $requestContext, string $agentName, ?string $pageToken = null, int $pageSize = 50, ?string $descriptionKeyword = null): array
     {
         // getdataisolationobjectandgetcurrentorganizationorganizationcode

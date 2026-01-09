@@ -38,7 +38,7 @@ class MiracleVisionProvider implements IProvider
 
         try {
             $miracleVisionApi = new MiracleVisionAPI($ak, $sk);
-            // 搞onesheetimage todo xhy
+            // doonesheetimage todo xhy
             $url = $this->getImage();
             $miracleVisionApi->submitTask($url, 1);
         } catch (Exception $e) {

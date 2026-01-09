@@ -28,7 +28,7 @@ class Page
     }
 
     /**
-     * according topage numberandpage countcalculateminuteslicedataup始position.
+     * according topage numberandpage countcalculateminuteslicedataupstartposition.
      */
     public function getSliceStart(): int
     {

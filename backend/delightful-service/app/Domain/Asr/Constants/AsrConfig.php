@@ -21,7 +21,7 @@ class AsrConfig
     public const int SUMMARY_LOCK_TTL = 120;
 
     /**
-     * corejumpdetecttimeout阈value(second).
+     * corejumpdetecttimeoutthresholdvalue(second).
      */
     public const int HEARTBEAT_TIMEOUT = 600;
 

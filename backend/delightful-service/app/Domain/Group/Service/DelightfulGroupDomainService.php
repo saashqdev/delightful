@@ -157,7 +157,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 }
             }
             $content = $content->toArray();
-            // pass protobuf messagestructure,createdelightful chatobject,for弃use protobuf makeprepare
+            // pass protobuf messagestructure,createdelightful chatobject,forabandonuse protobuf makeprepare
             if (in_array($controlMessageType, [ControlMessageType::GroupUsersRemove, ControlMessageType::GroupDisband], true)) {
                 // thistheseuseralreadyalreadyfromgroupmembertablemiddlemoveexcept,butishe们alsonotreceivetobemoveexceptmessage
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));

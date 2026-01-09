@@ -111,7 +111,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
             goto create_user;
         }
 
-        // multipleenvironmentdown $authorization maybeduplicate,willhaveissue(概rateapproachinfinitesmall)
+        // multipleenvironmentdown $authorization maybeduplicate,willhaveissue(generallyrateapproachinfinitesmall)
         $delightfulEnvEntity = $delightfulEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
         if ($delightfulEnvEntity === null) {
             $delightfulEnvEntity = $delightfulEnvDomainService->getCurrentDefaultDelightfulEnv();

@@ -14,7 +14,7 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
  * - SEMANTIC_SEARCH: semanticretrieve,based ontoquantitysimilardegreeretrievemethod
  * - FULL_TEXT_SEARCH: alltextretrieve,based onkeywordmatchretrievemethod
  * - HYBRID_SEARCH: hybridretrieve,combinesemanticretrieveandalltextretrievemethod
- * - GRAPH_SEARCH: graphretrieve,based onknowledgegraph谱retrievemethod
+ * - GRAPH_SEARCH: graphretrieve,based onknowledgegraphspectrumretrievemethod
  */
 class RetrievalMethod
 {
@@ -48,7 +48,7 @@ class RetrievalMethod
     /**
      * graphretrieve.
      *
-     * based onknowledgegraph谱retrievemethod.
+     * based onknowledgegraphspectrumretrievemethod.
      * 利useactualbodybetweenclosesystemconductretrieve,suitableprocesscomplexassociatequery.
      * canhairshow implicitclosesystemandconnect.
      */

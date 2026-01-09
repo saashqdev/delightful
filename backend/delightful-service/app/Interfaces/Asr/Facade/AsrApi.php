@@ -333,7 +333,7 @@ class AsrApi extends AbstractApi
     }
 
     /**
-     * recordingstatusup报interface
+     * recordingstatusupreportinterface
      * POST /api/v1/asr/status.
      */
     public function reportStatus(RequestInterface $request): array
@@ -378,7 +378,7 @@ class AsrApi extends AbstractApi
         $taskStatus = $this->asrFileAppService->getTaskStatusFromRedis($taskKey, $userId);
         if (! $taskStatus->isEmpty()) {
             if ($taskStatus->hasServerSummaryLock()) {
-                $this->logger->info('reportStatus serviceclientsummaryconductmiddle,rejectstatusup报', [
+                $this->logger->info('reportStatus serviceclientsummaryconductmiddle,rejectstatusupreport', [
                     'task_key' => $taskKey,
                     'user_id' => $userId,
                     'retry_count' => $taskStatus->serverSummaryRetryCount,

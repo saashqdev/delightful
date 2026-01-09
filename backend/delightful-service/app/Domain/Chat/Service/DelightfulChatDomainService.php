@@ -680,7 +680,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         foreach ($delightfulIds as $delightfulId) {
             $sequences = $this->delightfulSeqRepository->getSeqByDelightfulId($delightfulId, 100);
             if (count($sequences) < 100) {
-                // onlytonewuserproduce少quantitydirtydata
+                // onlytonewuserproducefewquantitydirtydata
                 $deleteCount += $this->delightfulSeqRepository->deleteSeqMessageByIds(array_column($sequences, 'id'));
             }
         }
@@ -694,7 +694,7 @@ class DelightfulChatDomainService extends AbstractDomainService
      * @todo ifwanttooutsideprovidestream api,needchangefor redis cache,bysupport断linereconnect.
      *
      *  supportonetimepushmultiplefieldstreammessage,if json layerlevelmoredeep,use field_1.*.field_2 asfor key. itsmiddle * isfingerarraydownmark.
-     *  serviceclientwillcache havestreamdata,andinstreamendo clockonetimepropertypush,bydecrease丢package概rate,enhancemessagecompleteproperty.
+     *  serviceclientwillcache havestreamdata,andinstreamendo clockonetimepropertypush,bydecrease丢packagegenerallyrate,enhancemessagecompleteproperty.
      *  for example:
      *  [
      *      'users.0.name' => 'delightful',
@@ -790,7 +790,7 @@ class DelightfulChatDomainService extends AbstractDomainService
                         ->setMessageContent(Json::encode($oldMessageEntity->getContent()->toArray()));
                     // firstfirstversionmessagedeposit message_version table
                     $this->delightfulChatMessageVersionsRepository->createMessageVersion($messageVersionEntity);
-                    // 初timeedito clock,updatereceivehairdoublehairmessageinitial seq,markmessagealreadyedit,convenientfrontclient rendering
+                    // initialtimeedito clock,updatereceivehairdoublehairmessageinitial seq,markmessagealreadyedit,convenientfrontclient rendering
                     $seqList = $this->delightfulSeqRepository->getBothSeqListByDelightfulMessageId($messageEntity->getDelightfulMessageId());
                     foreach ($seqList as $seqData) {
                         $extra = $seqData['extra'] ?? null;

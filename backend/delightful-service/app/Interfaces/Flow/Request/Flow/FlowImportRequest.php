@@ -40,7 +40,7 @@ class FlowImportRequest extends FormRequest
             'import_data.main_flow.code' => 'mainprocessencoding',
             'import_data.main_flow.name' => 'mainprocessname',
             'import_data.main_flow.nodes' => 'mainprocesssectionpoint',
-            'import_data.main_flow.edges' => 'mainprocessside缘',
+            'import_data.main_flow.edges' => 'mainprocesssidefate',
             'import_data.sub_flows' => 'childprocess',
             'import_data.tool_flows' => 'toolprocess',
             'import_data.tool_sets' => 'toolcollection',

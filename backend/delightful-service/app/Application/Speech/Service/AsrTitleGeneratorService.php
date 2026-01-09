@@ -124,7 +124,7 @@ readonly class AsrTitleGeneratorService
     public function generateFromTaskStatus(AsrTaskStatusDTO $taskStatus): string
     {
         try {
-            // useup报o clocksavelanguagetype,ifnothavethenusecurrentlanguagetype
+            // useupreporto clocksavelanguagetype,ifnothavethenusecurrentlanguagetype
             $language = $taskStatus->language ?: $this->translator->getLocale() ?: 'zh_CN';
 
             $this->logger->info('uselanguagetypegeneratetitle', [

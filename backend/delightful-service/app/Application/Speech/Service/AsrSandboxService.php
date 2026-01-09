@@ -518,7 +518,7 @@ readonly class AsrSandboxService
                 return;
             } catch (Throwable $e) {
                 // interfacecallfail,instructionsandboxalsonotstart,continueetcpending
-                $this->logger->debug('ASR recording:sandbox尚notstart,continueetcpending', [
+                $this->logger->debug('ASR recording:sandboxstillnotstart,continueetcpending', [
                     'task_key' => $taskKey,
                     'sandbox_id' => $sandboxId,
                     'error' => $e->getMessage(),

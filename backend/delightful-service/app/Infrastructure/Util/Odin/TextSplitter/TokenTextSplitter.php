@@ -33,17 +33,17 @@ class TokenTextSplitter extends TextSplitter
     private array $separators;
 
     /**
-     * @var callable tokencalculate闭package
+     * @var callable tokencalculateclosedpackage
      */
     private $tokenizer;
 
     /**
-     * defaulttokencalculate闭packageusetoencoderProvider.
+     * defaulttokencalculateclosedpackageusetoencoderProvider.
      */
     private EncoderProvider $defaultEncoderProvider;
 
     /**
-     * defaulttokencalculate闭packageusetoencoder.
+     * defaulttokencalculateclosedpackageusetoencoder.
      */
     private Encoder $defaultEncoder;
 

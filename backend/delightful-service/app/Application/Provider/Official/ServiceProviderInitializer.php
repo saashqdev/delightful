@@ -138,7 +138,7 @@ class ServiceProviderInitializer
                 'id' => '759110465734258688',
                 'name' => 'Volcanoengine',
                 'provider_code' => 'Volcengine',
-                'description' => 'fieldsectionByteDancedowncloudserviceplatform,havefrommain researchhair豆packagebigmodelsystemcolumn.cover Doubanpackagecommonusemodel Pro,lite,havedifferenttexthandleandcomprehensivecancapability,alsohaveroleplay,voicecombinebecomeetcmultipletypemodel.',
+                'description' => 'fieldsectionByteDancedowncloudserviceplatform,havefrommain researchhairbeanpackagebigmodelsystemcolumn.cover Doubanpackagecommonusemodel Pro,lite,havedifferenttexthandleandcomprehensivecancapability,alsohaveroleplay,voicecombinebecomeetcmultipletypemodel.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/volcengine Avatars.png',
                 'provider_type' => 0,
                 'category' => 'llm',
@@ -154,7 +154,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'A cloud service platform under ByteDance, with independently developed Doubao large model series. Includes Doubao general models Pro and lite with different text processing and comprehensive capabilities, as well as various models for role-playing, speech synthesis, etc.',
-                        'zh_CN' => 'fieldsectionByteDancedowncloudserviceplatform,havefrommain researchhair豆packagebigmodelsystemcolumn.cover Doubanpackagecommonusemodel Pro,lite,havedifferenttexthandleandcomprehensivecancapability,alsohaveroleplay,voicecombinebecomeetcmultipletypemodel.',
+                        'zh_CN' => 'fieldsectionByteDancedowncloudserviceplatform,havefrommain researchhairbeanpackagebigmodelsystemcolumn.cover Doubanpackagecommonusemodel Pro,lite,havedifferenttexthandleandcomprehensivecancapability,alsohaveroleplay,voicecombinebecomeetcmultipletypemodel.',
                     ],
                 ]),
                 'remark' => '',
@@ -164,7 +164,7 @@ class ServiceProviderInitializer
                 'id' => '759115881155366912',
                 'name' => 'Volcanoengine',
                 'provider_code' => 'Volcengine',
-                'description' => 'providemultipletypeintelligencecan绘graphbigmodel,generategraphstylediverse,securityproperty极high,canwidespreadapplicationeducation,entertainment,officeetc场quantity.',
+                'description' => 'providemultipletypeintelligencecandrawgraphbigmodel,generategraphstylediverse,securityproperty极high,canwidespreadapplicationeducation,entertainment,officeetc场quantity.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/volcengine Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -180,7 +180,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'Provides a variety of intelligent drawing models, with diverse image generation styles, extremely high security, and can be widely applied to education, entertainment, office and other scenarios.',
-                        'zh_CN' => 'providemultipletypeintelligencecan绘graphbigmodel,generategraphstylediverse,securityproperty极high,canwidespreadapplicationeducation,entertainment,officeetc场quantity.',
+                        'zh_CN' => 'providemultipletypeintelligencecandrawgraphbigmodel,generategraphstylediverse,securityproperty极high,canwidespreadapplicationeducation,entertainment,officeetc场quantity.',
                     ],
                 ]),
                 'remark' => '',
@@ -346,7 +346,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920385',
                 'name' => 'Qwen',
                 'provider_code' => 'Qwen',
-                'description' => 'providecommonusegraphlikegeneratemodel,supportmultipletypeartstyle,particularly擅longcomplextextrender,especiallyismiddleEnglishtextrender.',
+                'description' => 'providecommonusegraphlikegeneratemodel,supportmultipletypeartstyle,particularlyexcellongcomplextextrender,especiallyismiddleEnglishtextrender.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/qwen Avatars White.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -358,11 +358,11 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Qwen',
-                        'zh_CN' => '阿withincloudhundred炼',
+                        'zh_CN' => '阿withincloudhundredrefine',
                     ],
                     'description' => [
                         'en_US' => 'It provides a universal image generation model, supports multiple artistic styles, and is particularly skilled at complex text rendering, especially in both Chinese and English text rendering.',
-                        'zh_CN' => 'providecommonusegraphlikegeneratemodel,supportmultipletypeartstyle,particularly擅longcomplextextrender,especiallyismiddleEnglishtextrender.',
+                        'zh_CN' => 'providecommonusegraphlikegeneratemodel,supportmultipletypeartstyle,particularlyexcellongcomplextextrender,especiallyismiddleEnglishtextrender.',
                     ],
                 ]),
                 'remark' => '',

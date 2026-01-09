@@ -13,7 +13,7 @@ enum DelightfulAgentVersionStatus: int
     case APPROVAL_PENDING = 1; // pendingapproval
     case APPROVAL_IN_PROGRESS = 2; // approvalmiddle
     case APPROVAL_PASSED = 3; // approvalpass
-    case APPROVAL_REJECTED = 4; // already驳return
+    case APPROVAL_REJECTED = 4; // alreadyrefutereturn
 
     // AI Agentpublish (enterprise)
     case ENTERPRISE_UNPUBLISHED = 5; // notpublish

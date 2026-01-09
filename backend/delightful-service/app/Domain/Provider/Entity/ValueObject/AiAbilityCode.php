@@ -53,7 +53,7 @@ enum AiAbilityCode: string
             self::RealtimeSpeechRecognition => 'thiscancoverageplatform havevoicetransfertextapplicationscenario,actualo clocklisteneraudiostreamandgraduallyoutputaccuratetextcontent.',
             self::AudioFileRecognition => 'thiscancoverageplatform haveaudiofiletransfertextapplicationscenario,preciseidentifyspeakperson,audiotextetcinfo.',
             self::AutoCompletion => 'thiscancoverageplatform haveinputcontentfromauto supplementallapplicationscenario,according tocomprehendupdowntextforuserfromauto supplementallcontent,byuserchoosewhetheradopt.',
-            self::ContentSummary => 'thiscancoverageplatform havecontentsummaryapplicationscenario,tolong篇document,reportorwebpagetextchapterconductdeepdegreeanalyze.',
+            self::ContentSummary => 'thiscancoverageplatform havecontentsummaryapplicationscenario,tolongarticledocument,reportorwebpagetextchapterconductdeepdegreeanalyze.',
             self::VisualUnderstanding => 'thiscancoverageplatform haveneedletbigmodelconductvisualcomprehendapplicationscenario,precisecomprehendeachtypegraphlikemiddlecontentbyandcomplexclosesystem.',
             self::SmartRename => 'thiscancoverageplatform havesupport AI renameapplicationscenario,according tocomprehendupdowntextforuserfromautoconductcontenttitlenaming.',
             self::AiOptimization => 'thiscancoverageplatform havesupport AI optimizecontentapplicationscenario,according tocomprehendupdowntextforuserfromautotocontentconductoptimize.',

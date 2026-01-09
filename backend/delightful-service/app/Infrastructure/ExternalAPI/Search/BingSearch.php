@@ -59,7 +59,7 @@ class BingSearch
         if (empty($requestUrl)) {
             $requestUrl = trim(config('search.drivers.bing.endpoint'));
         }
-        // ensure endpoint by /search 结tail
+        // ensure endpoint by /search resulttail
         if (! str_ends_with($requestUrl, '/search')) {
             $requestUrl = rtrim($requestUrl, '/') . '/search';
         }

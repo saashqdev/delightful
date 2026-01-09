@@ -208,7 +208,7 @@ class FileParser
             return false;
         }
 
-        // 既nothaveContent-Length,alsonotischunkedtransmission,rejectdownload
+        // alreadynothaveContent-Length,alsonotischunkedtransmission,rejectdownload
         ExceptionBuilder::throw(FlowErrorCode::Error, message: 'filesizeunknown,forbiddownload');
     }
 }

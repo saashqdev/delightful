@@ -31,7 +31,7 @@ return new class extends Migration {
             // organizationencoding
             $table->string('organization_code', 64)->comment('organizationencoding');
             // topiccomesource
-            $table->string('source_id', 64)->default('')->comment('topiccomesource. such as甲createonetopic,乙topicidthencomefromat甲.needsameupdate.');
+            $table->string('source_id', 64)->default('')->comment('topiccomesource. such asarmorcreateonetopic,secondtopicidthencomefromatarmor.needsameupdate.');
             # index
             $table->index(['conversation_id'], 'idx_conversation_id');
             $table->index(['topic_id'], 'idx_topic_id');

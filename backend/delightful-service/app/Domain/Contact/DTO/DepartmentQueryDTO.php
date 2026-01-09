@@ -28,7 +28,7 @@ class DepartmentQueryDTO extends AbstractEntity
     // is_recursive whetherrecursionquery
     protected bool $isRecursive = false;
 
-    // departmentmember求andtype
+    // departmentmemberrequestandtype
     protected DepartmentSumType $sumType = DepartmentSumType::DirectEmployee;
 
     protected int $pageSize = 100;

@@ -31,7 +31,7 @@ class RequestContextMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // notice!foriterationcan控,onlycanin api layertocoroutinecontextassignvalue
+        // notice!foriterationcancontrol,onlycanin api layertocoroutinecontextassignvalue
         $accessToken = $request->getHeaderLine('api-key');
 
         if (! empty($accessToken)) {

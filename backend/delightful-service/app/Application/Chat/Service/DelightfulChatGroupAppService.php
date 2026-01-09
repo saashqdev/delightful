@@ -164,7 +164,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         if ($groupEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_NOT_FOUND);
         }
-        // notcan踢outgroup owner
+        // notcankickoutgroup owner
         $groupOwner = $groupEntity->getGroupOwner();
         if (in_array($groupOwner, $userIds, true)) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_CANNOT_KICK_OWNER);

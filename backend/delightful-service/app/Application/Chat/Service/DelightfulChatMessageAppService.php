@@ -199,7 +199,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         // seq extensioninfo. ifneedretrievetopicmessage,pleasequery topic_messages table
         $topicId && $seqExtra->setTopicId($topicId);
         $seqDTO->setExtra($seqExtra);
-        // ifis跟assistantprivate chat,andnothavetopic id,fromautocreateonetopic
+        // ifisfollowassistantprivate chat,andnothavetopic id,fromautocreateonetopic
         if ($conversationEntity->getReceiveType() === ConversationType::Ai && empty($seqDTO->getExtra()?->getTopicId())) {
             $topicId = $this->delightfulTopicDomainService->agentSendMessageGetTopicId($conversationEntity, 0);
             // notimpactoriginalhavelogic,will topicId settingto extra middle
@@ -600,7 +600,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
         ## themepriorityleveloriginalthen
         whenconversationinvolveandmultipledifferentthemeo clock:
-        1. priorityclose注conversationmiddlemostbackdiscussiontheme(mostnewtopic)
+        1. priorityclosenoteconversationmiddlemostbackdiscussiontheme(mostnewtopic)
         2. bymostnearconversationcontentformainreferencebasis
         3. ifmostbackthemediscussionmorefor充minute,thenbythisasfortitlecorecore
         4. ignoreearlyalreadyalreadyendtopic,unlessit们andmostnewtopicclosely relatedclose
@@ -857,7 +857,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * openhairlevelsegment,frontclientto接havetimedifference,updowntextcompatiblepropertyhandle.
+     * openhairlevelsegment,frontclienttoconnecthavetimedifference,updowntextcompatiblepropertyhandle.
      */
     public function setUserContext(string $userToken, ?DelightfulContext $delightfulContext): void
     {
@@ -873,7 +873,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * chatwindow打fieldo clock补alluserinput.foradaptgroup chat,thiswithin role itsactualisusernickname,whilenotisroletype.
+     * chatwindowhitfieldo clock补alluserinput.foradaptgroup chat,thiswithin role itsactualisusernickname,whilenotisroletype.
      */
     public function getConversationChatCompletionsHistory(
         DelightfulUserAuthorization $userAuthorization,

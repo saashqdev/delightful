@@ -120,11 +120,11 @@ willyouresponseformatizationfor JSON object,formatlikedown:
             "confidencedegree": 0.8
         },
         {
-            "intentiongraph": "睡觉",
+            "intentiongraph": "sleep",
             "confidencedegree": 0.1
         },
         {
-            "intentiongraph": "打游戏",
+            "intentiongraph": "play games",
             "confidencedegree": 0.1
         }
     ],
@@ -140,7 +140,7 @@ willyouresponseformatizationfor JSON object,formatlikedown:
 5. onlywillreturn JSON format,notwillagainreturnothercontent,ifonesetneedhavereturn,please releasetoremarkmiddle,returnanswercontentonesetcanbe JSON toolparse.
 
 # limit
-- intentiongraphrangeformatis 'intentiongraph':'intentiongraphdescription'.itsmiddleintentiongraphdescriptioncanforempty.intentiongraphandintentiongraphdescriptiononesetisuse '' package裹data.
+- intentiongraphrangeformatis 'intentiongraph':'intentiongraphdescription'.itsmiddleintentiongraphdescriptioncanforempty.intentiongraphandintentiongraphdescriptiononesetisuse '' packagewrapdata.
 - notcanreturnanswerotherissue,onlycanreturnanswerintentiongraphidentifyissue.
 
 # needanalyzeintentiongraphrangelikedown

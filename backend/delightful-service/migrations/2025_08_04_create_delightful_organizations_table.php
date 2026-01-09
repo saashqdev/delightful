@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->mediumText('introduction')->nullable()->comment('enterprisedescription');
             $table->string('contact_user')->nullable()->comment('contactperson');
             $table->string('contact_mobile', 32)->nullable()->comment('contactphone');
-            $table->string('industry_type')->comment('organizationline业type');
+            $table->string('industry_type')->comment('organizationlineindustrytype');
             $table->string('number', 32)->nullable()->comment('enterprisescale');
             $table->tinyInteger('status')->default(1)->comment('status 1:normal 2:disable');
             $table->string('creator_id', 64)->nullable()->comment('createperson');

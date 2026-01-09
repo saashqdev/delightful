@@ -22,7 +22,7 @@ class CreateDelightfulApiModelConfigTable extends Migration
             $table->unsignedDecimal('total_amount', 40, 6)->comment('totalquota');
             $table->unsignedDecimal('use_amount', 40, 6)->comment('usequota')->default(0);
             $table->integer('rpm')->comment('limitstream');
-            $table->unsignedDecimal('exchange_rate')->comment('汇rate');
+            $table->unsignedDecimal('exchange_rate')->comment('gatherrate');
             $table->unsignedDecimal('input_cost_per_1000', 40, 6)->comment('1000 token input feeuse');
             $table->unsignedDecimal('output_cost_per_1000', 40, 6)->comment('1000 token 輸out費use');
             $table->timestamp('created_at')->default(Db::raw('CURRENT_TIMESTAMP'))->comment('creation time');

@@ -64,7 +64,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
             ControlMessageType::CreateTopic,
             ControlMessageType::UpdateTopic,
             ControlMessageType::DeleteTopic, => $this->clientOperateTopicMessage($messageDTO, $dataIsolation),
-            // (single聊sessionwindowmiddle)startinput/endinput
+            // (singlechatsessionwindowmiddle)startinput/endinput
             ControlMessageType::StartConversationInput,
             ControlMessageType::EndConversationInput => $this->conversationDomainService->clientOperateConversationStatus($messageDTO, $dataIsolation),
             // setsessiontopic,preparedeprecated

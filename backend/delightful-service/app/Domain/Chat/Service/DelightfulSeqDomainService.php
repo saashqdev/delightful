@@ -348,7 +348,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
             $language = di(TranslatorInterface::class)->getLocale();
 
             $this->logger->info('userCallFlow language: ' . $language);
-            // callflowmaybeveryconsumeo clock,notcanletcustomerclientone直etcpending
+            // callflowmaybeveryconsumeo clock,notcanletcustomerclientonestraightetcpending
             Coroutine::create(function () use (
                 $agentAccountEntity,
                 $agentUserEntity,

@@ -84,7 +84,7 @@ PROMPT;
     /**
      * generatefileuploadscenariorecordingtitlehintword(emphasizefilenamereloadwantproperty).
      *
-     * @param string $userRequestMessage userinchat框sendrequestmessage
+     * @param string $userRequestMessage userinchatframesendrequestmessage
      * @param string $language outputlanguage(like:zh_CN, en_US)
      * @return string completehintword
      */
@@ -96,9 +96,9 @@ PROMPT;
 youisoneprofessionalrecordingcontenttitlegeneratehelphand.
 
 ## backgroundinstruction
-useruploadoneaudiofiletosystemmiddle,andinchat框middlesendsummaryrequest.showinneedyouaccording touserrequestmessage(itsmiddlecontainfilename),forthistimerecordingsummarygenerateoneconciseaccuratetitle.
+useruploadoneaudiofiletosystemmiddle,andinchatframemiddlesendsummaryrequest.showinneedyouaccording touserrequestmessage(itsmiddlecontainfilename),forthistimerecordingsummarygenerateoneconciseaccuratetitle.
 
-## userinchat框request
+## userinchatframerequest
 usersendoriginalmessagelikedown:
 ```
 {userRequestMessage}
@@ -107,7 +107,7 @@ usersendoriginalmessagelikedown:
 ## titlegeneraterequire
 
 ### priorityleveloriginalthen(nonoftenreloadwant)
-1. **filenamepriority**:filenameusuallyisuser精corenaming,containmostcorecorethemeinfo,pleasereloadpointreferenceusermessagemiddle @ backsurfacefilename
+1. **filenamepriority**:filenameusuallyisuseressencecorenaming,containmostcorecorethemeinfo,pleasereloadpointreferenceusermessagemiddle @ backsurfacefilename
 2. **intelligencecanjudge**:
    - iffilenamesemanticclear(like"2024yearQ4productplanwillproposal.mp3","customerrequirementdiscussion.wav"),prioritybased onfilenamegeneratetitle
    - iffilenameisdatetimestamp(like"20241112_143025.mp3")ornomeaningcharacter(like"recording001.mp3"),thenusecommonusedescription

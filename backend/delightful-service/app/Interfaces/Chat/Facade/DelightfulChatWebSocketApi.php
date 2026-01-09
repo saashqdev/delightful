@@ -333,7 +333,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
 
     private function relationAppMsgIdAndRequestId(?string $appMsgId): void
     {
-        // directlyuse appMsgId asfor requestIdwillcauseverymultipleinvalid log,难bytrace.
+        // directlyuse appMsgId asfor requestIdwillcauseverymultipleinvalid log,difficultbytrace.
         $requestId = empty($appMsgId) ? (string) IdGenerator::getSnowId() : $appMsgId;
         CoContext::setRequestId($requestId);
         $this->logger->info('relationAppMsgIdAndRequestId requestId:' . $requestId . ' appMsgId: ' . $appMsgId);
@@ -344,8 +344,8 @@ class DelightfulChatWebSocketApi extends BaseNamespace
      */
     private function keepSubscribeAlive(): void
     {
-        // onlyneedoneenter程canschedulepublishmessage,letsubscriberedislinkkeep aliveimmediatelycan.
-        // notlockputinmostoutsidelayer,isforpreventpodfrequentrestarto clock,nothaveanyoneenter程canpublishmessage
+        // onlyneedoneenterprocedurecanschedulepublishmessage,letsubscriberedislinkkeep aliveimmediatelycan.
+        // notlockputinmostoutsidelayer,isforpreventpodfrequentrestarto clock,nothaveanyoneenterprocedurecanpublishmessage
         co(function () {
             // each 5 secondpushonetimemessage
             $this->timer->tick(

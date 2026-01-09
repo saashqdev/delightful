@@ -299,7 +299,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
         if (empty($topicId)) {
             return null;
         }
-        // judgedefaulttopicbe删nothave
+        // judgedefaulttopicbedeletenothave
         $topicEntities = $this->delightfulChatTopicRepository->getTopicsByConversationId($conversationEntity->getId(), [$topicId]);
         return ($topicEntities[0] ?? null)?->getTopicId();
     }

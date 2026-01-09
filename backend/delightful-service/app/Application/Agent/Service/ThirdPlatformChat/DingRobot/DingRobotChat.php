@@ -49,7 +49,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
     public function parseChatParam(array $params): ThirdPlatformChatMessage
     {
-        // 1 single聊 2 group chat
+        // 1 singlechat 2 group chat
         if (empty($params['conversationType'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'common.empty', ['label' => 'conversationType']);
         }

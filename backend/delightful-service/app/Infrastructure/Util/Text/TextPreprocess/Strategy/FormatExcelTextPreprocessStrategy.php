@@ -86,7 +86,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             }
         }
 
-        // ifnothavefindtominuteseparator,defaultuse逗number
+        // ifnothavefindtominuteseparator,defaultuseteasenumber
         return ',';
     }
 

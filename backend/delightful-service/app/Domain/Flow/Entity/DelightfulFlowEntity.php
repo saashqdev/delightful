@@ -90,7 +90,7 @@ class DelightfulFlowEntity extends AbstractEntity
     private ?NodeInput $input = null;
 
     /**
-     * processout口.
+     * processoutmouth.
      */
     private ?NodeOutput $output = null;
 

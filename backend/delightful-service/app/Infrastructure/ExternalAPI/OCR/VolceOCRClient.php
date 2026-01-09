@@ -95,6 +95,6 @@ class VolceOCRClient implements OCRClientInterface
             return 'image';
         }
 
-        return null; // 既notis PDF alsonotisfingersetimageformat
+        return null; // alreadynotis PDF alsonotisfingersetimageformat
     }
 }

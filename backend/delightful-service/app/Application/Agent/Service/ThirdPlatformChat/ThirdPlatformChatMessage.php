@@ -35,7 +35,7 @@ class ThirdPlatformChatMessage
     private string $robotCode;
 
     /**
-     * 1 single聊 2 group chat.
+     * 1 singlechat 2 group chat.
      */
     private int $type = 0;
 

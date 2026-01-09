@@ -61,7 +61,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * judgewhetherforprocessmiddlestatus(includeprocessmiddleandrow队middle).
+     * judgewhetherforprocessmiddlestatus(includeprocessmiddleandrowqueuemiddle).
      */
     public function isProcessing(): bool
     {

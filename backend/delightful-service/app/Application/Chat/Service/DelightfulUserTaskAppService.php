@@ -83,7 +83,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
 
         // according toconversation_id queryagent_user_id
         $conversation = $this->delightfulConversationDomainService->getConversationByIdWithoutCheck($userTaskDTO->getConversationId());
-        // compatibleflow middleconversation_id 跟chat middleconversation_id notonetoissue
+        // compatibleflow middleconversation_id followchat middleconversation_id notonetoissue
         if (empty($conversation)) {
             $dataIsolation = DataIsolation::create();
             $dataIsolation->setCurrentOrganizationCode($flow->getOrganizationCode());
@@ -378,7 +378,7 @@ class DelightfulUserTaskAppService extends AbstractAppService
     //     //     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.common.not_found', ['label' => 'trigger_type']);
     //     // }
 
-    //     // changefor静statecall
+    //     // changeforstaticstatecall
     //     $flowDataIsolation = self::createFlowDataIsolationStaticMethod($authorization);
 
     //     // $flowDataIsolation = FlowDataIsolation::create();

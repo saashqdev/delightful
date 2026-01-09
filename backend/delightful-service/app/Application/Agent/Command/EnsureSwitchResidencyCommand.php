@@ -92,7 +92,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         $this->output->writeln(sprintf(
-            'processcomplete!共process %d assistant,%s %d assistantswitchfingercommand',
+            'processcomplete!sharedprocess %d assistant,%s %d assistantswitchfingercommand',
             $total,
             $isDryRun ? 'hairshowneedupdate' : 'update',
             $updated
@@ -141,7 +141,7 @@ class EnsureSwitchResidencyCommand extends HyperfCommand
         }
 
         $this->output->writeln(sprintf(
-            'processcomplete!共process %d assistantversion,%s %d assistantversionswitchfingercommand',
+            'processcomplete!sharedprocess %d assistantversion,%s %d assistantversionswitchfingercommand',
             $versionTotal,
             $isDryRun ? 'hairshowneedupdate' : 'update',
             $versionUpdated

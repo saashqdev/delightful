@@ -65,7 +65,7 @@ $response = trim($result);
 if (str_starts_with($response, '```json')) {
     $response = substr($response, 7);
 }
-// if $response by ``` 结tailthengoexcept
+// if $response by ``` resulttailthengoexcept
 if (str_ends_with($response, '```')) {
     $response = substr($response, 0, -3);
 }

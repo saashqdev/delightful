@@ -95,7 +95,7 @@ class AsrHeartbeatMonitor
     {
         // readcorejumptimestamp
         $last = (int) $this->redis->get($key);
-        // timeout阈value:90 second
+        // timeoutthresholdvalue:90 second
         if (($last > 0) && (time() - $last) <= AsrConfig::HEARTBEAT_TIMEOUT) {
             return false;
         }
@@ -115,7 +115,7 @@ class AsrHeartbeatMonitor
             // Key format:asr:heartbeat:{md5(user_id:task_key)}
             $this->logger->info('detecttocorejumptimeout', ['key' => $key]);
 
-            // byat key is MD5 hash,wenomethoddirectly反toget task_key and user_id
+            // byat key is MD5 hash,wenomethoddirectlyreversetoget task_key and user_id
             // needfrom Redis middlescan allhave asr:task:* comefindmatchtask
             $this->findAndTriggerTimeoutTask($key);
         } catch (Throwable $e) {

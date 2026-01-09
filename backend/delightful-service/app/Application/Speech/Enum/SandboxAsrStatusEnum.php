@@ -10,7 +10,7 @@ namespace App\Application\Speech\Enum;
 /**
  * sandbox ASR taskstatusenum.
  *
- * 【asuse域】outsidedepartmentsystem - sandboxaudiomergeservice
+ * 【asusedomain】outsidedepartmentsystem - sandboxaudiomergeservice
  * 【use途】tableshowsandboxmiddleaudiomergetaskexecutestatus
  * 【usescenario】
  * - callsandbox finishTask interfaceroundquerystatusjudge

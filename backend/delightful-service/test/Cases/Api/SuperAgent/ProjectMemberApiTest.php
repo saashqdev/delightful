@@ -714,7 +714,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * getcoordinateasprojectcolumntableandreturncomplete响applicationatsettopvalidate.
+     * getcoordinateasprojectcolumntableandreturncompletesoundapplicationatsettopvalidate.
      */
     public function collaborationProjectsWithPinCheck(): array
     {

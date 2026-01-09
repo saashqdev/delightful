@@ -66,7 +66,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * getresponseobjectlock,useatandhairsecuritygroundoperationas OpenAIFormatResponse.
-     * useRedisfromrotatelockimplementrow队etcpending.
+     * useRedisfromrotatelockimplementrowqueueetcpending.
      *
      * @return string returnlockowner,useatreleaselock
      */
@@ -101,7 +101,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
         try {
             $result = $this->redisLocker->release($lockKey, $owner);
             if (! $result) {
-                $this->logger->warning('Redislockreleasefail,maybealreadybeotherenter程release', [
+                $this->logger->warning('Redislockreleasefail,maybealreadybeotherenterprocedurerelease', [
                     'lock_key' => $lockKey,
                     'owner' => $owner,
                 ]);

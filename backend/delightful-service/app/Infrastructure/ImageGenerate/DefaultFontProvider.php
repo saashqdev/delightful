@@ -51,11 +51,11 @@ class DefaultFontProvider implements FontProviderInterface
     public function hasTransparency($image): bool
     {
         if (! imageistruecolor($image)) {
-            // adjustcolor板graphlikechecktransparentcolorindex
+            // adjustcolorboardgraphlikechecktransparentcolorindex
             return imagecolortransparent($image) !== -1;
         }
 
-        // true彩colorgraphlikecheckalphachannel
+        // truecolorcolorgraphlikecheckalphachannel
         $width = imagesx($image);
         $height = imagesy($image);
 

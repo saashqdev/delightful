@@ -234,7 +234,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         // address bookandsearchrelatedcloseinterface,filterhiddendepartmentandhiddenuser.
         $userDepartmentDetailDTOS = $this->filterDepartmentOrUserHidden($userDepartmentDetailDTOS);
         // byat $usersPageResponseDTO  items limitparametertype,fromcodestandardangledegree,again new onecommonuse PageResponseDTO, bypaginationstructurereturn
-        // anotheroutside,byatfilterlogicexistsin,maybethistimereturn items quantity少at $limit,butisagainhavedownonepage.
+        // anotheroutside,byatfilterlogicexistsin,maybethistimereturn items quantityfewat $limit,butisagainhavedownonepage.
         $pageResponseDTO = new PageResponseDTO();
         $pageResponseDTO->setPageToken($usersPageResponseDTO->getpageToken());
         $pageResponseDTO->setHasMore($usersPageResponseDTO->getHasMore());

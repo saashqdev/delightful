@@ -277,7 +277,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the theme and specific requirements of the PPT, or upload files, Be Delightful will help you create a beautiful PPT. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => 'youcaninput PPT themeandspecificrequire,oruploadfile,exceedslevelMagicwillforyou制asexquisite PPT. Enter send ; Shift + Enter exchangeline',
+                    'zh_CN' => 'youcaninput PPT themeandspecificrequire,oruploadfile,exceedslevelMagicwillforyousystemasexquisite PPT. Enter send ; Shift + Enter exchangeline',
                 ]),
                 'identifier' => 'ppt',
                 'icon' => 'IconPresentation',
@@ -304,7 +304,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can select data sources or upload Excel files, and then enter the requirements for analysis. Be Delightful will perform comprehensive data analysis for you. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => 'youoptional择datasourceorupload Excel fileback,inputneedanalyzerequirement,exceedslevelMagicwillforyouconductallsurfacedataanalyze. Enter send ; Shift + Enter exchangeline',
+                    'zh_CN' => 'youoptionalchoosedatasourceorupload Excel fileback,inputneedanalyzerequirement,exceedslevelMagicwillforyouconductallsurfacedataanalyze. Enter send ; Shift + Enter exchangeline',
                 ]),
                 'identifier' => 'data_analysis',
                 'icon' => 'IconChartBarPopular',

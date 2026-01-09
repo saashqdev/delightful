@@ -148,7 +148,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * @return ClientSequenceResponse[]
-     * @todo 挪to delightful_chat_topic_messages process
+     * @todo moveto delightful_chat_topic_messages process
      * sessionwindowscrollloadhistoryrecord.
      * message_id= seqtableprimary keyid,thereforenotneedsingleuniqueto message_id addindex.
      */
@@ -159,7 +159,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
 
     /**
      * @return ClientSequenceResponse[]
-     * @todo 挪to delightful_chat_topic_messages process
+     * @todo moveto delightful_chat_topic_messages process
      * sessionwindowscrollloadhistoryrecord.
      * message_id= seqtableprimary keyid,thereforenotneedsingleuniqueto message_id addindex.
      */
@@ -541,7 +541,7 @@ sql;
         return SeqAssembler::sortSeqList($clientSequenceResponses, $order);
     }
 
-    // avoid redis cacheserializeobject,占usetoomultipleinsideexists
+    // avoid redis cacheserializeobject,occupyusetoomultipleinsideexists
     private function getAccountIdByUserId(string $uid): ?DelightfulUserEntity
     {
         // according touidfindtoaccount_id

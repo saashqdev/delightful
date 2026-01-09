@@ -10,7 +10,7 @@ namespace App\Application\Speech\Enum;
 /**
  * ASR taskstatusenum(insidedepartmentbusinessprocess).
  *
- * 【asuse域】insidedepartmentsystem - delightful-service businesslayer
+ * 【asusedomain】insidedepartmentsystem - delightful-service businesslayer
  * 【use途】tableshow ASR recordingsummarytaskalllifeperiodstatus
  * 【usescenario】
  * - taskstatuspersistence(Redis/database)

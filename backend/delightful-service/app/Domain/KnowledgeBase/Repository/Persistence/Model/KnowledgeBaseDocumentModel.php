@@ -48,7 +48,7 @@ class KnowledgeBaseDocumentModel extends Model
     use Snowflake;
 
     /**
-     * whetherfrom增.
+     * whetherfromincrease.
      */
     public bool $incrementing = true;
 

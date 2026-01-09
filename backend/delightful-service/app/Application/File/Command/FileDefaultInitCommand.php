@@ -194,14 +194,14 @@ class FileDefaultInitCommand extends Command
                 $this->line("    - successhandle {$fileCount} file");
                 $totalFiles += $fileCount;
             } catch (Exception $e) {
-                $this->error("  - handlemodepiece {$moduleName} o clockout错: {$e->getMessage()}");
+                $this->error("  - handlemodepiece {$moduleName} o clockouterror: {$e->getMessage()}");
             }
         }
 
         // meanwhilehandleoriginaldefaultgraphmarkfile(ifneed话)
         $this->processDefaultIcons($baseFileDir, $organizationCode, $totalFiles, $skippedFiles);
 
-        $this->info("fileinitializecomplete,共handle {$totalFiles} file,skip {$skippedFiles} alreadyexistsinfile");
+        $this->info("fileinitializecomplete,sharedhandle {$totalFiles} file,skip {$skippedFiles} alreadyexistsinfile");
     }
 
     /**

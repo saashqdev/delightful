@@ -33,7 +33,7 @@ class AccessTokenDomainService extends AbstractDomainService
             $accessTokenEntity = clone $savingAccessTokenEntity;
             $accessTokenEntity->prepareForCreation();
 
-            // eachtypetypedown,createdatanot宜passmultiple,thiswithinlimitonedown
+            // eachtypetypedown,createdatanotshouldpassmultiple,thiswithinlimitonedown
             if ($this->accessTokenRepository->countByTypeAndRelationId(
                 $dataIsolation,
                 $savingAccessTokenEntity->getType(),

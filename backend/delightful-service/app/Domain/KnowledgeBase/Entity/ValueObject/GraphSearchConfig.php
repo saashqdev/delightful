@@ -27,7 +27,7 @@ class GraphSearchConfig extends AbstractValueObject
     /**
      * mostbigsearchdeepdegree.
      *
-     * graphsearchmostbigdeepdegree,immediatelyfromup始sectionpointstart,at mostsearchseveral hopsclosesystem
+     * graphsearchmostbigdeepdegree,immediatelyfromupstartsectionpointstart,at mostsearchseveral hopsclosesystem
      */
     private int $maxDepth = 2;
 

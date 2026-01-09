@@ -311,7 +311,7 @@ abstract class VolcengineApi
 
     private function setRegion(string $region): void
     {
-        // regiononlysupportmiddlecountryandnewadd坡,defaultmiddlecountry
+        // regiononlysupportmiddlecountryandnewaddslope,defaultmiddlecountry
         if ($region === self::SINGAPORE_REGION) {
             $this->setHost(self::SINGAPORE_HOST);
         } else {

@@ -194,7 +194,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
     /**
      * getlayerlevelstructurepermissiontree
-     * generatenolimit极permissiontree,rule:according topermissionresourcestring(like Admin.ai.model_management)逐segmentsplit,逐layerconstructtree.
+     * generatenolimit极permissiontree,rule:according topermissionresourcestring(like Admin.ai.model_management)graduallysegmentsplit,graduallylayerconstructtree.
      *
      * returnformat:
      * [
@@ -234,7 +234,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 ];
             }
 
-            // fromtoptodown逐segmentconstruct
+            // fromtoptodowngraduallysegmentconstruct
             $current = &$tree[$platformKey];
             $accumKey = $platformKey;
             foreach ($segments as $index => $segment) {
@@ -382,7 +382,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
     /**
      * toatnon DelightfulResourceEnum definitionresource,childcategorycanoverridethemethodbyparsetocorresponding Operation Enum.
-     * opensourcedefaultthrow错.
+     * opensourcedefaultthrowerror.
      */
     protected function resolveOperationEnumClassFromUnknownResource(string $resource): string
     {

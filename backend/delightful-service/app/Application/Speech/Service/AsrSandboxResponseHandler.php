@@ -305,7 +305,7 @@ readonly class AsrSandboxResponseHandler
             sleep($pollingInterval);
         }
 
-        // roundquerytimeout,仍notfindtofilerecord
+        // roundquerytimeout,stillnotfindtofilerecord
         $totalElapsedTime = (int) (microtime(true) - $startTime);
         $this->logger->warning(sprintf('roundquerytimeout,notfindto%srecord', $fileTypeName), [
             'task_key' => $taskStatus->taskKey,
@@ -323,7 +323,7 @@ readonly class AsrSandboxResponseHandler
             ExceptionBuilder::throw(
                 AsrErrorCode::CreateAudioFileFailed,
                 '',
-                ['error' => sprintf('etcpending %d secondback仍notfindto%srecord', $timeoutSeconds, $fileTypeName)]
+                ['error' => sprintf('etcpending %d secondbackstillnotfindto%srecord', $timeoutSeconds, $fileTypeName)]
             );
         }
 

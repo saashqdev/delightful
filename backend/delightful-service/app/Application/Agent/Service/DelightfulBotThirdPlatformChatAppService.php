@@ -141,7 +141,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             'code' => $exception->getCode(),
                             'trace' => $exception->getTraceAsString(),
                         ]);
-                        $message = new TextMessage(['content' => 'notgoodmeaning,meanwhilequestionIissuepersontooDora,havepoint忙notpasscome,youcanonewill儿againcomequestionI?thank you for understanding!']);
+                        $message = new TextMessage(['content' => 'notgoodmeaning,meanwhilequestionIissuepersontooDora,havepointbusynotpasscome,youcanonewillchildagaincomequestionI?thank you for understanding!']);
                         $thirdPlatformChat->sendMessage($thirdPlatformChatMessage, $message);
                     }
                 });

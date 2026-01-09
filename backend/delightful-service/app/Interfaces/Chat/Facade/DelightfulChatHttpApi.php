@@ -245,7 +245,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * batchquantity拉personentergroup.
+     * batchquantitypullpersonentergroup.
      */
     public function groupAddUsers(string $id, RequestInterface $request): array
     {

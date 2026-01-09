@@ -79,7 +79,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     /**
      * getthistimeneedstreampushfield.
      * supportonetimepushmultiplefieldstreammessage,if json layerlevelmoredeep,use field_1.*.field_2 asfor key. itsmiddle * isfingerarraydownmark.
-     * serviceclientwillcache havestreamdata,andinstreamendo clockonetimepropertypush,bydecrease丢package概rate,enhancemessagecompleteproperty.
+     * serviceclientwillcache havestreamdata,andinstreamendo clockonetimepropertypush,bydecrease丢packagegenerallyrate,enhancemessagecompleteproperty.
      * for example:
      * [
      *     'users.0.name' => 'delightful',
@@ -113,7 +113,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
         //            {
         //                "parent_question_id": "0",
         //                "question_id": "1",
-        //                "question": "small米collectionteam flagdownhavewhichthesebrand"
+        //                "question": "smallricecollectionteam flagdownhavewhichthesebrand"
         //            }
         //        ],
         //        "question_1": [

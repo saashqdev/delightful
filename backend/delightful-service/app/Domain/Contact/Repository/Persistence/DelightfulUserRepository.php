@@ -478,7 +478,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         return UserModel::query()->whereIn('user_id', $userIds)->pluck('delightful_id')->toArray();
     }
 
-    // avoid redis cacheserializeobject,占usetoomultipleinsideexists
+    // avoid redis cacheserializeobject,occupyusetoomultipleinsideexists
     #[Cacheable(prefix: 'userEntity', value: '_#{id}', ttl: 60)]
     private function getUser(string $id): ?array
     {
@@ -488,7 +488,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         return Db::select($query->toSql(), $query->getBindings())[0] ?? null;
     }
 
-    // avoid redis cacheserializeobject,占usetoomultipleinsideexists
+    // avoid redis cacheserializeobject,occupyusetoomultipleinsideexists
     #[Cacheable(prefix: 'userAccount', ttl: 60)]
     private function getUserArrayByAccountAndOrganization(string $accountId, string $organizationCode): ?array
     {

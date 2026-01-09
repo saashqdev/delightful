@@ -16,7 +16,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 use Throwable;
 
 /**
- * needparse websocket contextmiddle token information,therefore跟 WebUserGuard different.
+ * needparse websocket contextmiddle token information,thereforefollow WebUserGuard different.
  */
 class WebsocketChatUserGuard extends WebUserGuard
 {

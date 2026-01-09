@@ -170,7 +170,7 @@ willuserinputpromptword,use`ai_image`toolgenerateimage
 
 MARKDOWN,
 
-            'user_prompt' => 'DoraA梦',
+            'user_prompt' => 'DoraAdream',
         ]);
         $runner->execute($vertexResult, $executionData);
 

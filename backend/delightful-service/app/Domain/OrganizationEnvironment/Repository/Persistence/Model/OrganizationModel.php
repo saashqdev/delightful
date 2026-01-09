@@ -23,7 +23,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property null|string $introduction enterprisedescription
  * @property null|string $contact_user contactperson
  * @property null|string $contact_mobile contactphone
- * @property string $industry_type organizationline业type
+ * @property string $industry_type organizationlineindustrytype
  * @property null|string $number enterprisescale
  * @property int $status status 1:normal 2:disable
  * @property null|string $creator_id createperson

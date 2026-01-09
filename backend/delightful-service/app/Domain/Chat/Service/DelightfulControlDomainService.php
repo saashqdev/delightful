@@ -117,7 +117,7 @@ class DelightfulControlDomainService extends AbstractDomainService
 
             switch ($controlMessageType) {
                 case ControlMessageType::SeenMessages:
-                    # alreadyreadreturnexecute(扫oneeyemessage,toatnontextcomplextypemessage,nothaveviewdetail).
+                    # alreadyreadreturnexecute(scanoneeyemessage,toatnontextcomplextypemessage,nothaveviewdetail).
                     $senderReceiveList = $senderLatestSeq->getReceiveList();
                     if ($senderReceiveList === null) {
                         $this->logger->error(sprintf(

@@ -156,7 +156,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
 
     /**
      * testprivatehavemethodisValidCombinationlinefor
-     * passgenerateAllPermissionsbetween接test.
+     * passgenerateAllPermissionsbetweenconnecttest.
      */
     public function testIsValidCombinationThroughGenerateAllPermissions()
     {

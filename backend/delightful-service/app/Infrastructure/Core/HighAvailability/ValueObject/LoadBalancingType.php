@@ -18,7 +18,7 @@ enum LoadBalancingType: int
     case RANDOM = 1;
 
     /**
-     * roundquerystrategy - byorder依timechoosebackclientservice
+     * roundquerystrategy - byorderdependtimechoosebackclientservice
      */
     case ROUND_ROBIN = 2;
 

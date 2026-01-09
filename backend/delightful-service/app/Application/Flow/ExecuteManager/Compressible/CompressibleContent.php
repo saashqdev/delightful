@@ -84,7 +84,7 @@ class CompressibleContent
 
     private static function deCompressByCompatible(string $content): string
     {
-        // decompresso clock,maybe少tag,thatwhattryto cp_ openheadcontentconductdecompress
+        // decompresso clock,maybefewtag,thatwhattryto cp_ openheadcontentconductdecompress
         preg_match_all('/cp_[a-f0-9]{13}/', $content, $matches);
         foreach ($matches[0] as $match) {
             $id = $match;

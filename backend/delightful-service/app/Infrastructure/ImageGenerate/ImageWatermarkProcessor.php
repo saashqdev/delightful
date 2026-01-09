@@ -71,7 +71,7 @@ class ImageWatermarkProcessor
 
     /**
      * forURLformatimageaddwatermark
-     * optional择returnformat:URL or base64.
+     * optionalchoosereturnformat:URL or base64.
      */
     public function addWatermarkToUrl(string $imageUrl, ImageGenerateRequest $imageGenerateRequest): string
     {
@@ -226,7 +226,7 @@ class ImageWatermarkProcessor
             // useTTFfieldbodycalculateactualtextsideboundary box
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
             $bbox = imagettfbbox($ttfFontSize, 0, $fontFile, $text);
-            $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // increase20%securityside距
+            $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // increase20%securitysidedistance
             $textHeight = (int) abs($bbox[1] - $bbox[7]); // use绝tovalueensureheightforjust
 
             // TTFfieldbodydowndowngrademinute(descender)
@@ -237,14 +237,14 @@ class ImageWatermarkProcessor
             // decreaseleveluseestimatemethod
             // toatmiddletextcharacter,eachcharacterwidth约equalfieldbodysize
             $chineseCharCount = mb_strlen($text, 'UTF-8');
-            $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // increasesecurityside距
+            $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // increasesecuritysidedistance
             $textHeight = $fontSize;
             $descender = (int) ($fontSize * 0.2); // insideset fieldbodyestimatedowndowngrademinute
             $ascender = (int) ($fontSize * 0.8); // insideset fieldbodyestimateupupgradedepartmentminute
             $totalTextHeight = $textHeight;
         }
 
-        // autostateside距:based onfieldbodysizecalculate,ensureenough够nullbetween
+        // autostatesidedistance:based onfieldbodysizecalculate,ensureenoughenoughnullbetween
         $margin = max(20, (int) ($fontSize * 0.8));
 
         switch ($position) {
@@ -439,7 +439,7 @@ class ImageWatermarkProcessor
 
             $fileLink = $fileDomainService->getLink($organizationCode, $uploadFile->getKey(), StorageBucketType::Public);
 
-            // settingobjectyuandataasfor备usesolution
+            // settingobjectyuandataasforprepareusesolution
             $validityPeriod = $imageGenerateRequest->getValidityPeriod();
             $metadataContent = [];
             if ($validityPeriod !== null) {

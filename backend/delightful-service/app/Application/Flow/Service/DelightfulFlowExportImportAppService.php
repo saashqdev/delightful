@@ -181,7 +181,7 @@ class DelightfulFlowExportImportAppService
         // getprocessactualbody
         $flow = $this->delightfulFlowDomainService->getByCode($dataIsolation, $flowCode);
         if (! $flow) {
-            return false; // processnotexistsin,not构becomeloop
+            return false; // processnotexistsin,notconstructbecomeloop
         }
 
         // traverse havesectionpointcheckdependency
@@ -281,7 +281,7 @@ class DelightfulFlowExportImportAppService
                 'flow_name' => $mainFlow->getName(),
             ];
         } catch (Throwable $e) {
-            // ifcreateassistantfail,butprocessalreadyimport,仍returnprocessinfo
+            // ifcreateassistantfail,butprocessalreadyimport,stillreturnprocessinfo
             return [
                 'agent_id' => null,
                 'agent_error' => $e->getMessage(),
@@ -662,7 +662,7 @@ class DelightfulFlowExportImportAppService
     {
         // commoninsidesettoolcollectionfrontsuffix
         $builtInToolSetPrefixes = [
-            'file_box',      // file盒toolcollection
+            'file_box',      // fileboxtoolcollection
             'search_engine', // searchenginetoolcollection
             'web_browse',    // webpagebrowsetoolcollection
             'system',        // systemtoolcollection

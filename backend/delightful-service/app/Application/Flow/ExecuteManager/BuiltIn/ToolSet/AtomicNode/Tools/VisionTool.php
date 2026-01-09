@@ -236,8 +236,8 @@ JSON, true)));
 1. prioritycomprehenduserintentiongraph,alwaysuseandusersamelanguagereturnanswer
 2. provideconcisecleardirectlyreturnanswer,directlyfullenoughusermainissue
 3. againtoimagecontentconductmulti-dimensionaldegreedetailedanalyze,includebutnotlimitat:
-   - mainbodycontentidentify:person物,物body,scenario,textetc
-   - visualfeature:color,composition,光line,qualityetc
+   - mainbodycontentidentify:personobject,objectbody,scenario,textetc
+   - visualfeature:color,composition,lightline,qualityetc
    - semanticinfo:activity,emotion,closesystem,backgroundstoryetc
    - textidentify:likehavetext,accurateextractandcomprehendimplication
    - technologyinfo:likehavegraphtable/data,analyzeitsimplication
@@ -250,7 +250,7 @@ JSON, true)));
    
 5. noticethingitem:
    - avoidtosensitivecontentmake subjective judgment
-   - whennomethodcertainsomedepartmentminutecontento clock,坦诚tablereachnotcertainproperty
+   - whennomethodcertainsomedepartmentminutecontento clock,franktablereachnotcertainproperty
    - maintainobjectiveprofessionallanguageair'),
         ]);
     }

@@ -55,7 +55,7 @@ interface DelightfulChatSeqRepositoryInterface
 
     /**
      * @return ClientSequenceResponse[]
-     * @todo 挪to delightful_chat_topic_messages process
+     * @todo moveto delightful_chat_topic_messages process
      * sessionwindowscrollloadhistoryrecord.
      * message_id= seqtableprimary keyid,thereforenotneedsingleuniqueto message_id addindex.
      */

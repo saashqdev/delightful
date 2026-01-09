@@ -139,7 +139,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.no_user_to_remove')]
     case GROUP_NO_USER_TO_REMOVE = 3028;
 
-    // notcan踢outgroup owner
+    // notcankickoutgroup owner
         // Cannot remove the group owner
     #[ErrorMessage('chat.group.group_cannot_kick_owner')]
     case GROUP_CANNOT_KICK_OWNER = 3029;

@@ -19,11 +19,11 @@ return new class extends Migration {
         }
         Schema::create('delightful_chat_sequences', static function (Blueprint $table) {
             // according toupsurfacebuildtablelanguagesentence,outbydowncode
-            $table->bigIncrements('id')->comment('primary keyid,not啥use');
+            $table->bigIncrements('id')->comment('primary keyid,notwhatuse');
             $table->string('organization_code', 64)->comment('sequencecolumnnumberbelong toorganizationencoding.')->default('');
             $table->tinyInteger('object_type')->comment('objecttype,0:ai,1:user;2:application;3:document;4:multi-dimensionaltableformat');
             $table->string('object_id', 64)->comment('objectid. ifisusero clock,tableshowdelightful_id');
-            $table->string('seq_id', 64)->comment('messagesequencecolumnnumber id,eachaccountnumber havemessagemustgradually增big');
+            $table->string('seq_id', 64)->comment('messagesequencecolumnnumber id,eachaccountnumber havemessagemustgraduallyincreasebig');
             $table->string('seq_type', 32)->comment('messagebigtype:controlmessage,chatmessage.');
             $table->text('content')->comment('sequencecolumnnumberdetail. onethesenotvisiblecontrolmessage,onlyinseqtableexistsindetail. byandwriteo clockcopyonesharemessagetablecontenttoseqtableuse.');
             $table->string('delightful_message_id', 64)->comment('serviceclientgenerateuniqueonemessageid,useatmessagewithdraw/edit');

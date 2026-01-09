@@ -54,7 +54,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
         protected DelightfulSeqDomainService $delightfulSeqDomainService,
         protected DelightfulUserRepository $delightfulUserRepository,
     ) {
-        // settingcolumn队prioritylevel
+        // settingcolumnqueueprioritylevel
         $this->arguments['x-max-priority'] = ['I', $this->priority->value];
         $this->exchange = $this->getExchangeName($this->topic);
         $this->routingKey = $this->getRoutingKeyName($this->topic, $this->priority);

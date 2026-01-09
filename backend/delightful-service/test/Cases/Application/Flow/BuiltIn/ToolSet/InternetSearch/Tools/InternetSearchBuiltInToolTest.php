@@ -116,7 +116,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'questions' => ['cleardayBeijingdayair', 'want穿whatclothes'],
+            'questions' => ['cleardayBeijingdayair', 'wantwearwhatclothes'],
             'use_deep_search' => true,
         ]);
         $runner->execute($vertexResult, $executionData, []);

@@ -198,7 +198,7 @@ class DelightfulAgentVersionDomainService
 
         // if MINOR reachto 10,enterpositionto MAJOR(canaccording torequirementadjustthisrule)
         if ($minor > 99) {
-            // notresetminor,whileisdirectly增bigmajor,avoidnotrequiredwantreset
+            // notresetminor,whileisdirectlyincreasebigmajor,avoidnotrequiredwantreset
             $minor = 0;
             $major = (int) $major + 1;
         }
@@ -275,7 +275,7 @@ class DelightfulAgentVersionDomainService
             return;
         }
 
-        // checkwhether试graphfrommorehighlevelotherpublishrangebacktomorelowlevelother
+        // checkwhethertestgraphfrommorehighlevelotherpublishrangebacktomorelowlevelother
         $errorMessage = match ($oldScope) {
             DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value => 'agent.already_published_to_enterprise_cannot_publish_to_individual',
             DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value => 'agent.already_published_to_market_cannot_publish_to_individual',

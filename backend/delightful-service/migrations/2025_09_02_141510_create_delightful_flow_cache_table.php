@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('cache_hash', 32)->unique()->comment('cachekeyMD5hashvalue(cache_prefix+cache_key)');
             $table->string('cache_prefix')->comment('cachefrontsuffix');
             $table->string('cache_key')->comment('cachekeyname');
-            $table->string('scope_tag', 10)->comment('asuse域identifier');
+            $table->string('scope_tag', 10)->comment('asusedomainidentifier');
             $table->longText('cache_value')->comment('cachevaluecontent');
             $table->unsignedInteger('ttl_seconds')->default(7200)->comment('TTLsecondcount(0representpermanentcache)');
             $table->timestamp('expires_at')->comment('expiretimestamp');

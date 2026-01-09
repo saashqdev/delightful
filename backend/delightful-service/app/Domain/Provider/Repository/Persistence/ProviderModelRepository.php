@@ -250,7 +250,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
                 ->where('organization_code', $organizationCode)
                 ->whereIn('service_provider_config_id', $enabledConfigIdArray);
             if (! OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
-                // querynormalorganizationfromselfmodel. officialorganizationmodelshowin model_parent_id equalitfromself,need洗data.
+                // querynormalorganizationfromselfmodel. officialorganizationmodelshowin model_parent_id equalitfromself,needwashdata.
                 $organizationModelsBuilder->where('model_parent_id', 0);
             }
             // iffingersetcategory,addcategoryfiltercondition

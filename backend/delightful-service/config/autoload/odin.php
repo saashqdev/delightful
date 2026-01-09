@@ -87,7 +87,7 @@ if (env('AZURE_OPENAI_GPT4O_ENABLED', false)) {
     ];
 }
 
-// 豆packagePro 32k
+// beanpackagePro 32k
 if (env('DOUBAO_PRO_32K_ENABLED', false)) {
     $envModelConfigs['doubao-pro-32k'] = [
         'model' => 'DOUBAO_PRO_32K_ENDPOINT|doubao-1.5-pro-32k',
@@ -144,7 +144,7 @@ if (env('DEEPSEEK_V3_ENABLED', false)) {
     ];
 }
 
-// 豆package Embedding
+// beanpackage Embedding
 if (env('DOUBAO_EMBEDDING_ENABLED', false)) {
     $envModelConfigs['doubao-embedding-text-240715'] = [
         'model' => 'DOUBAO_EMBEDDING_ENDPOINT|doubao-embedding-text-240715',
@@ -309,14 +309,14 @@ return [
                     'created',                     // createtimestamp
                     'id',                         // requestID
                     'object',                     // objecttype
-                    'system_fingerprint',         // systemfinger纹
+                    'system_fingerprint',         // systemfingerpattern
                     'performance_flag',            // performancemark(slowrequestidentifier)
 
                     // notice:bydownfieldberowexcept,notwillprint
                     // - args.messages (usermessagecontent)
                     // - args.tools (tooldefinition)
                     // - choices.0.message (responsemessagecontent)
-                    // - choices.0.delta (streamresponse增quantitycontent)
+                    // - choices.0.delta (streamresponseincreasequantitycontent)
                     // - content (responsecontent)
                 ],
                 // whetherenablefieldwhitelistsinglefilter,defaulttrue(enablefilter)

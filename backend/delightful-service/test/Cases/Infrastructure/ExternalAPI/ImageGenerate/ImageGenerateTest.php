@@ -95,7 +95,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByVolcengine()
     {
         $volcengineModelRequest = new VolcengineModelRequest();
-        $volcengineModelRequest->setPrompt('photographyasproduct,truepersonwritetruestyle,one画ten thousand圣sectiondress up womanpersonhandwithingetonejack-o-lantern,thedesigncoldcoloradjustandwarmcoloradjustcombine,coldcoloradjustandwarmcoloradjusttransitionfromthen,colorgentleand,cinematic feel,movie poster,highlevel感,16k,exceedsdetailed,UHD');
+        $volcengineModelRequest->setPrompt('photographyasproduct,truepersonwritetruestyle,onedrawten thousandsaintsectiondress up womanpersonhandwithingetonejack-o-lantern,thedesigncoldcoloradjustandwarmcoloradjustcombine,coldcoloradjustandwarmcoloradjusttransitionfromthen,colorgentleand,cinematic feel,movie poster,highlevelfeeling,16k,exceedsdetailed,UHD');
         $volcengineModelRequest->setGenerateNum(1);
         $volcengineModelRequest->setWidth('1024');
         $volcengineModelRequest->setHeight('1024');
@@ -108,7 +108,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByFluix()
     {
         $FluxModelRequest = new FluxModelRequest();
-        $FluxModelRequest->setPrompt('photographyasproduct,truepersonwritetruestyle,one画ten thousand圣sectiondress up womanpersonhandwithingetonejack-o-lantern,thedesigncoldcoloradjustandwarmcoloradjustcombine,coldcoloradjustandwarmcoloradjusttransitionfromthen,colorgentleand,cinematic feel,movie poster,highlevel感,16k,exceedsdetailed,UHD');
+        $FluxModelRequest->setPrompt('photographyasproduct,truepersonwritetruestyle,onedrawten thousandsaintsectiondress up womanpersonhandwithingetonejack-o-lantern,thedesigncoldcoloradjustandwarmcoloradjustcombine,coldcoloradjustandwarmcoloradjusttransitionfromthen,colorgentleand,cinematic feel,movie poster,highlevelfeeling,16k,exceedsdetailed,UHD');
         $FluxModelRequest->setGenerateNum(1);
         $FluxModelRequest->setWidth('1024');
         $FluxModelRequest->setHeight('1024');
@@ -121,7 +121,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByMJ()
     {
         $MjModelRequest = new MidjourneyModelRequest();
-        $MjModelRequest->setPrompt('photographyasproduct,truepersonwritetruestyle,one画ten thousand圣sectiondress up womanpersonhandwithingetonejack-o-lantern,thedesigncoldcoloradjustandwarmcoloradjustcombine,coldcoloradjustandwarmcoloradjusttransitionfromthen,colorgentleand,cinematic feel,movie poster,highlevel感,16k,exceedsdetailed,UHD');
+        $MjModelRequest->setPrompt('photographyasproduct,truepersonwritetruestyle,onedrawten thousandsaintsectiondress up womanpersonhandwithingetonejack-o-lantern,thedesigncoldcoloradjustandwarmcoloradjustcombine,coldcoloradjustandwarmcoloradjusttransitionfromthen,colorgentleand,cinematic feel,movie poster,highlevelfeeling,16k,exceedsdetailed,UHD');
         $MjModelRequest->setGenerateNum(1);
         $MjModelRequest->setModel('relax');
         $MjModel = new MidjourneyModel();
@@ -137,7 +137,7 @@ class ImageGenerateTest extends BaseTest
 
         // createrequestinstance
         $gpt4oModelRequest = new GPT4oModelRequest();
-        $gpt4oModelRequest->setPrompt('oneonlysmall金毛justingrasslandup欢fastrun');
+        $gpt4oModelRequest->setPrompt('oneonlysmallgolden retrieverjustingrasslandupjoyfastrun');
         $gpt4oModelRequest->setGenerateNum(4);
 
         // generateimage
@@ -163,7 +163,7 @@ class ImageGenerateTest extends BaseTest
 
         // createrequestinstance
         $gpt4oModelRequest = new GPT4oModelRequest();
-        $gpt4oModelRequest->setPrompt('adjustonegroup of witcheshandwithin捧南瓜inworshiponeperson');
+        $gpt4oModelRequest->setPrompt('adjustonegroup of witcheshandwithinhold pumpkininworshiponeperson');
         $gpt4oModelRequest->setGenerateNum(1);
 
         // setreferenceimage
@@ -202,7 +202,7 @@ class ImageGenerateTest extends BaseTest
         //
         //        // createrequestinstance
         //        $qwenImageRequest = new QwenImageModelRequest();
-        //        $qwenImageRequest->setPrompt('oneonlycan爱smallcatinflower园withinplay,sunny,colorrich colors,highqualityphotography');
+        //        $qwenImageRequest->setPrompt('oneonlycanlovesmallcatinflower园withinplay,sunny,colorrich colors,highqualityphotography');
         //        $qwenImageRequest->setHeight('1328');
         //        $qwenImageRequest->setWidth('1328');
         //        $qwenImageRequest->setGenerateNum(1);

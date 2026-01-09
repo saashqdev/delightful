@@ -126,7 +126,7 @@ class MessageUtil
                     return null;
                 }
                 $contentString = $content->getKeyValue($executionData->getExpressionFieldData());
-                // todo actualupnotimplement,bydownis伪code
+                // todo actualupnotimplement,bydownisfakecode
                 return new AggregateAISearchCardMessageV2([
                     'search' => $contentString['search'] ?? [],
                     'llm_response' => $contentString['llm_response'] ?? '',
@@ -138,7 +138,7 @@ class MessageUtil
     }
 
     /**
-     * up报file.
+     * upreportfile.
      */
     private static function report2ChatFile(AbstractAttachment $attachment, ExecutionData $executionData): DelightfulChatFileEntity
     {

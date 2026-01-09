@@ -137,12 +137,12 @@ class ImageGenerateFactory
         $model = $data['model'];
         $mode = strtolower(explode('-', $model, limit: 2)[1] ?? 'fast');
 
-        // Midjourney notuse宽highparameter,onlyneed prompt and mode,butis Request categoryinheritneedthistheseparameter
+        // Midjourney notusewidthhighparameter,onlyneed prompt and mode,butis Request categoryinheritneedthistheseparameter
         //  bywegivedefaultvalueimmediatelycan
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
 
-        // Midjourney notclosecorespecific宽highratioexample,butweretainthisfieldbypreventwillcomeneed
+        // Midjourney notclosecorespecificwidthhighratioexample,butweretainthisfieldbypreventwillcomeneed
         if (isset($data['size'])) {
             [$width, $height] = self::parseSizeToWidthHeight($data['size']);
             $ratio = self::calculateRatio((int) $width, (int) $height);
@@ -402,11 +402,11 @@ class ImageGenerateFactory
 
             // ifnothavefixedconfiguration,according tonormalconvert(based on1024forbaseline)
             if ($width >= $height) {
-                // 横to
+                // horizontalto
                 $actualWidth = 1024;
                 $actualHeight = (int) (1024 * $height / $width);
             } else {
-                // 纵to
+                // verticalto
                 $actualHeight = 1024;
                 $actualWidth = (int) (1024 * $width / $height);
             }
@@ -440,7 +440,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * calculate宽highratioexample(from LLMAppService movepasscomelogic).
+     * calculatewidthhighratioexample(from LLMAppService movepasscomelogic).
      */
     private static function calculateRatio(int $width, int $height): string
     {

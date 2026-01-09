@@ -294,7 +294,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
         return TopicAssembler::getTopicMessageEntities($topicMessages);
     }
 
-    // avoid redis cacheserializeobject,占usetoomultipleinsideexists
+    // avoid redis cacheserializeobject,occupyusetoomultipleinsideexists
     #[Cacheable(prefix: 'topic:id:conversation', value: '_#{delightfulTopicDTO.topicId}_#{delightfulTopicDTO.conversationId}', ttl: 60)]
     private function getTopicArray(DelightfulTopicEntity $delightfulTopicDTO): ?array
     {

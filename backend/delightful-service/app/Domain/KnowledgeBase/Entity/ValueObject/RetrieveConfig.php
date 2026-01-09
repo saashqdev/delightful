@@ -45,7 +45,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * minutethreshold countvalue
      *
-     * onlyreturnsimilardegreeminutecountgreater thanthe阈valueresult
+     * onlyreturnsimilardegreeminutecountgreater thanthethresholdvalueresult
      */
     protected float $scoreThreshold = 0.5;
 

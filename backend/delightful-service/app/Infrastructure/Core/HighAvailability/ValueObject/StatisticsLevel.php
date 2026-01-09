@@ -46,7 +46,7 @@ enum StatisticsLevel: int
     }
 
     /**
-     * getstatisticslevelothername(静statemethod,useatcompatibleoldcode).
+     * getstatisticslevelothername(staticstatemethod,useatcompatibleoldcode).
      * @deprecated useenuminstance getName() methodreplace
      */
     public static function getLevelName(int|self $level): string

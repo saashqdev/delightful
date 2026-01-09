@@ -71,7 +71,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                 $exception->getLine(),
                 $exception->getTraceAsString()
             ));
-            // todo callmessagequalityguaranteemodepiece,ifisservicedevicestressbigcausefail,thenput intodelayretryqueue,andfingercountlevel延longretrytimebetweenseparator
+            // todo callmessagequalityguaranteemodepiece,ifisservicedevicestressbigcausefail,thenput intodelayretryqueue,andfingercountlevelextendlongretrytimebetweenseparator
             return Result::REQUEUE;
         }
         return Result::ACK;

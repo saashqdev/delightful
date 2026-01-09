@@ -120,7 +120,7 @@ class ImageWatermarkProcessor
         // addvisualwatermark
         $watermarkedImage = $this->addWatermarkToImageResource($image, $watermarkConfig);
 
-        // usedetecttoformatconductno损output
+        // usedetecttoformatconductnodecreaseoutput
         ob_start();
         $this->outputImage($watermarkedImage, $detectedFormat);
         $watermarkedData = ob_get_contents();
@@ -310,7 +310,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * outputimage(no损version).
+     * outputimage(nodecreaseversion).
      * @param mixed $image
      * @param string $format goalformat (png/jpeg/webp/gif)
      */
@@ -328,7 +328,7 @@ class ImageWatermarkProcessor
         try {
             switch (strtolower($format)) {
                 case 'png':
-                    imagepng($image, null, 0); // PNGno损compress
+                    imagepng($image, null, 0); // PNGnodecreasecompress
                     break;
                 case 'webp':
                     if (function_exists('imagewebp')) {

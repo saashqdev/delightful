@@ -284,7 +284,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             if (empty($userId)) {
                 continue;
             }
-            // notforoperationauthorduplicategenerateseq. factorforin投mqoffront,alreadyalreadyforoperationauthorgenerateseq
+            // notforoperationauthorduplicategenerateseq. factorforinthrowmqoffront,alreadyalreadyforoperationauthorgenerateseq
             if ($userId === $operateUserId) {
                 continue;
             }

@@ -151,7 +151,7 @@ class DelightfulStreamTextProcessorTest extends ExecuteManagerBaseTest
             $processor->process($current);
         }
         $processor->end();
-        $this->assertEquals(['<title', '>', '管', 'manage', 'b', 'b', '</titl', 'e', '>'], $result);
+        $this->assertEquals(['<title', '>', 'manage', 'manage', 'b', 'b', '</titl', 'e', '>'], $result);
     }
 
     public function testMultibyteCharacters()

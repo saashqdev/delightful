@@ -446,7 +446,7 @@ class DelightfulFlowExecutor
                 }
 
                 $vertex = $this->dag->getVertex($node->getNodeId());
-                // thiswithingeneralcomesaynotwillfornull,firstnot管nullsituation
+                // thiswithingeneralcomesaynotwillfornull,firstnotmanagenullsituation
                 $childrenIds = [];
                 foreach ($vertex->children as $childVertex) {
                     // notcanfromself-connectedfromself

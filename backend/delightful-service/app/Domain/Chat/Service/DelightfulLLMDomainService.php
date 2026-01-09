@@ -206,8 +206,8 @@ class DelightfulLLMDomainService
     inreturnanswero clock,pleasenoticebydownseveralpoint:
     - todaydayis{date_now}.
     - andnonsearchresult havecontentallanduserquestionclosely relatedclose,youneedcombinequestion,tosearchresultconductdistinguish,filter.
-    - toatcolumn舉categoryquestion(likecolumnraise haveflightinformation),exhaustedquantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcomesource,获completeinformation.priorityprovideinformationcomplete,mostrelatedclosecolumn舉item;likenonrequiredwant,notwantactivetellusersearchresultnotprovidecontent.
-    - toatcreateascategoryquestion(like writing paper),please be sureinjusttextsegmentfallmiddlequotetoshouldreferencecodenumber,for example[citation:3][citation:5],notcanonlyintextchapterendtailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minuteprofitusesearchresultanddrawreloadwantinformation,generatematchuserrequire,very thoughtfuldegree,richhavecreatecapabilityandprofessionalpropertyanswer.youcreateaslengthneedexhaustedmaybe延long,toateachonewantpointdiscussionwantspeculateduserintentiongraph,giveoutexhaustedmaybemultipleangledegreereturnanswerwantpoint,and务requiredinformationquantitybig,detailed discussion.
+    - toatcolumnraisecategoryquestion(likecolumnraise haveflightinformation),exhaustedquantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcomesource,获completeinformation.priorityprovideinformationcomplete,mostrelatedclosecolumnraiseitem;likenonrequiredwant,notwantactivetellusersearchresultnotprovidecontent.
+    - toatcreateascategoryquestion(like writing paper),please be sureinjusttextsegmentfallmiddlequotetoshouldreferencecodenumber,for example[citation:3][citation:5],notcanonlyintextchapterendtailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minuteprofitusesearchresultanddrawreloadwantinformation,generatematchuserrequire,very thoughtfuldegree,richhavecreatecapabilityandprofessionalpropertyanswer.youcreateaslengthneedexhaustedmaybeextendlong,toateachonewantpointdiscussionwantspeculateduserintentiongraph,giveoutexhaustedmaybemultipleangledegreereturnanswerwantpoint,and务requiredinformationquantitybig,detailed discussion.
     - ifreturnanswerverylong,please盡quantitystructureization,minutesegmentfallsummary.ifneedminutepointasanswer,exhaustedquantitycontrolin5pointbyinside,andmergerelatedclosecontent.
     - toatobjectivecategoryQ&A,ifquestionanswernonoften simpleshort,canfitwhensupplementonetotwosentencerelatedcloseinformation,byrichcontent.
     - youneedaccording touserrequireandreturnanswercontentchoosesuitable,beautifulreturnanswerformat,ensurecanreadpropertystrong.
@@ -403,7 +403,7 @@ class DelightfulLLMDomainService
             );
             $searchContextsCitations .= sprintf('[[citation:%d]] snippet:%s ' . "\n\n", $index, $context->getSnippet());
         }
-        // exceedspassmostbigvaluethendirectlytruncate,avoidresponsetoo久
+        // exceedspassmostbigvaluethendirectlytruncate,avoidresponsetoolong
         $maxLen = self::LLM_STR_MAX_LEN;
         if (mb_strlen($searchContextsCitations) > $maxLen) {
             $searchContextsCitations = mb_substr($searchContextsCitations, 0, $maxLen);
@@ -1075,7 +1075,7 @@ class DelightfulLLMDomainService
             );
         }
 
-        // exceedspassmostbigvaluethendirectlytruncate,avoidresponsetoo久
+        // exceedspassmostbigvaluethendirectlytruncate,avoidresponsetoolong
         $maxLen = self::LLM_STR_MAX_LEN;
         if (mb_strlen($searchContextsDetail) > $maxLen) {
             $searchContextsDetail = mb_substr($searchContextsDetail, 0, $maxLen);

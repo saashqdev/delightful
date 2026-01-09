@@ -15,7 +15,7 @@ class SubNodeParamsConfig extends NodeParamsConfig
 {
     public function validate(): array
     {
-        // getchildprocessinput parameterandoutparticipate,byuserinputparameterfor准,canfornull,accuratepropertyputtoexecuteo clockvalidation
+        // getchildprocessinput parameterandoutparticipate,byuserinputparameterforaccurate,canfornull,accuratepropertyputtoexecuteo clockvalidation
         $subFlowId = $this->node->getParams()['sub_flow_id'] ?? '';
         if (! $subFlowId) {
             ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'flow.node.sub.flow_id_empty');

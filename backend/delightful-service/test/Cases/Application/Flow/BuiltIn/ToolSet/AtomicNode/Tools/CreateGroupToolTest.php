@@ -99,7 +99,7 @@ youisonecanhelpuserfastspeedcreategroup chathelphandwhenuser想wantsearchpersonm
 
 MARKDOWN,
 
-            'user_prompt' => 'helpIgive small明,small红,smalljust createoneuseatresolvestoreprintmachineissueworkersinglegroup,group ownerissmall明,andandforwardonedowncurrentissueiswhattogroupwithin',
+            'user_prompt' => 'helpIgive small明,smallred,smalljust createoneuseatresolvestoreprintmachineissueworkersinglegroup,group ownerissmall明,andandforwardonedowncurrentissueiswhattogroupwithin',
         ]);
         $runner->execute($vertexResult, $executionData);
 

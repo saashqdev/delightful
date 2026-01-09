@@ -501,7 +501,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $this->switchUserTest1();
 
-        // 1. testadd入edit
+        // 1. testaddinputedit
         $this->joinFileEditing($fileId);
 
         // 2. testgetedituserquantity - shouldhave1userinedit
@@ -533,7 +533,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * testadd入fileedit.
+     * testaddinputfileedit.
      */
     public function joinFileEditing(string $fileId, int $expectedCode = 1000): array
     {
@@ -598,7 +598,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $this->switchUserTest2();
 
-        // testnopermissionadd入edit - shouldreturnerror
+        // testnopermissionaddinputedit - shouldreturnerror
         $this->joinFileEditing($unauthorizedFileId, 51202); // falseset51200isnopermissionerrorcode
 
         // testnopermissionleaveedit - shouldreturnerror
@@ -615,9 +615,9 @@ class ProjectMemberApiTest extends AbstractApiTest
     {
         $this->switchUserTest1();
 
-        // 1. duplicateadd入edit - shouldnormalhandle
+        // 1. duplicateaddinputedit - shouldnormalhandle
         $this->joinFileEditing($fileId);
-        $this->joinFileEditing($fileId); // duplicateadd入
+        $this->joinFileEditing($fileId); // duplicateaddinput
 
         // validateuserquantitystillis1
         $editingCount = $this->getEditingUsers($fileId);

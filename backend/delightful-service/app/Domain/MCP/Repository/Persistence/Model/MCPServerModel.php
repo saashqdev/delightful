@@ -14,7 +14,7 @@ use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
- * @property int $id 雪flowerID
+ * @property int $id snowflowerID
  * @property string $organization_code organizationencoding
  * @property string $code uniqueoneencoding
  * @property string $name MCPservicename

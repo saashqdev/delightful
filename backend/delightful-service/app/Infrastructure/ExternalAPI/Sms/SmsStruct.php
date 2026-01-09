@@ -35,7 +35,7 @@ class SmsStruct
 
     /**
      * normalshortpure messagetextcontent.
-     * like: lighthousejustininvitationyouadd入enterprise,point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
+     * like: lighthousejustininvitationyouaddinputenterprise,point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
      */
     public ?string $content = null;
 

@@ -144,21 +144,21 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * reloadnewtoquantity化.
+     * reloadnewtoquantityization.
      */
     public function reVectorized(Authenticatable $authorization, string $knowledgeBaseCode, string $documentCode): void
     {
         $dataIsolation = $this->createKnowledgeBaseDataIsolation($authorization);
         $this->checkKnowledgeBaseOperation($dataIsolation, 'manage', $knowledgeBaseCode, $documentCode);
 
-        // calldomainservicereloadnewtoquantity化
+        // calldomainservicereloadnewtoquantityization
         $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $knowledgeBaseCode);
         $documentEntity = $this->knowledgeBaseDocumentDomainService->show($dataIsolation, $knowledgeBaseCode, $documentCode);
-        // byathistorydocumentnothave document_file field,notcanbereloadnewtoquantity化
+        // byathistorydocumentnothave document_file field,notcanbereloadnewtoquantityization
         if (! $documentEntity->getDocumentFile()) {
             ExceptionBuilder::throw(PermissionErrorCode::Error, 'flow.knowledge_base.re_vectorized_not_support');
         }
-        // minutehairevent,reloadnewtoquantity化
+        // minutehairevent,reloadnewtoquantityization
         $documentSavedEvent = new KnowledgeBaseDocumentSavedEvent(
             $dataIsolation,
             $knowledgeBaseEntity,

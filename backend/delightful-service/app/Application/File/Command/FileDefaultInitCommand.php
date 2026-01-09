@@ -48,9 +48,9 @@ class FileDefaultInitCommand extends Command
         $this->fileDomainService = $this->container->get(FileDomainService::class);
         $this->defaultFileDomainService = $this->container->get(DefaultFileDomainService::class);
 
-        // get公havebucketconfiguration
+        // getpublichavebucketconfiguration
         $publicBucketConfig = config('cloudfile.storages.' . StorageBucketType::Public->value);
-        $this->line('公havebucketconfiguration:' . json_encode($publicBucketConfig, JSON_UNESCAPED_UNICODE));
+        $this->line('publichavebucketconfiguration:' . json_encode($publicBucketConfig, JSON_UNESCAPED_UNICODE));
 
         // ifis local driven,notneedinitialize
         if ($publicBucketConfig['adapter'] === 'local') {

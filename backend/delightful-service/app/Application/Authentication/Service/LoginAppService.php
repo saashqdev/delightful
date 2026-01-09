@@ -153,7 +153,7 @@ readonly class LoginAppService
     }
 
     /**
-     * format化countrycode,ensureby+openhead.
+     * formatizationcountrycode,ensureby+openhead.
      */
     private function formatStateCode(string $stateCode): string
     {

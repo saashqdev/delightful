@@ -30,7 +30,7 @@ class EndpointAssembler
     /**
      * fromformatclientpointtypeidentifiermiddlealsooriginaloriginalmodelID.
      *
-     * @param string $formattedModelId maybecontainformat化frontsuffixmodelID
+     * @param string $formattedModelId maybecontainformatizationfrontsuffixmodelID
      * @return string originalmodelID
      */
     public static function extractOriginalModelId(string $formattedModelId): string

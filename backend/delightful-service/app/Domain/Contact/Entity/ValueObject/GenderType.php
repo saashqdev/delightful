@@ -15,9 +15,9 @@ enum GenderType: int
     // unknown
     case Unknown = 0;
 
-    // 男
+    // male
     case Male = 1;
 
-    // 女
+    // female
     case Female = 2;
 }

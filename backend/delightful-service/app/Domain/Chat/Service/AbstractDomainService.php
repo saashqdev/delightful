@@ -361,7 +361,7 @@ abstract class AbstractDomainService
                 // geteachitemmessagefinalstatus
                 $messageStatusSeqEntities = $this->getReceiveMessageLatestReadStatus($referMessageIds, $dataIsolation);
                 foreach ($messageStatusSeqEntities as $userSeqEntity) {
-                    // format化responsestructure
+                    // formatizationresponsestructure
                     $batchResponse[] = SeqAssembler::getClientSeqStruct($userSeqEntity, $messageDTO)->toArray();
                 }
                 break;
@@ -425,7 +425,7 @@ abstract class AbstractDomainService
                         $this->batchPushSeq($seqIds, $messagePriority);
                     }
                     // poweretc,get refer_message_ids actualo clockstatus,ando clockresponsecustomerclient
-                    // format化responsestructure
+                    // formatizationresponsestructure
                     $batchResponse[] = SeqAssembler::getClientSeqStruct($userRevokedSeqEntity, $messageDTO)->toArray();
                 } finally {
                     // releaselock

@@ -91,9 +91,9 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
     }
 
     /**
-     * format化CSVsingleyuanformatcontent,tospecialcontentaddimportnumber.
+     * formatizationCSVsingleyuanformatcontent,tospecialcontentaddimportnumber.
      * @param string $value singleyuanformatcontent
-     * @return string format化backsingleyuanformatcontent
+     * @return string formatizationbacksingleyuanformatcontent
      */
     private function formatCsvCell(string $value): string
     {

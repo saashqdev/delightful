@@ -10,18 +10,18 @@ namespace App\Application\Flow\ExecuteManager\Memory\MultiModal;
 use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 
 /**
- * multi-modalstatecontentformat化tool
- * useat统oneprocessdifferentscenariodownmulti-modalstatecontentformat化.
+ * multi-modalstatecontentformatizationtool
+ * useat统oneprocessdifferentscenariodownmulti-modalstatecontentformatization.
  */
 class MultiModalContentFormatter
 {
     /**
-     * will haveattachmentformat化totextmiddle.
+     * will haveattachmentformatizationtotextmiddle.
      *
      * @param string $originalContent originaltextcontent
      * @param string $visionResponse visualanalyzeresult
      * @param AttachmentInterface[] $attachments  haveattachmentarray
-     * @return string format化backtextcontent
+     * @return string formatizationbacktextcontent
      */
     public static function formatAllAttachments(
         string $originalContent,
@@ -52,7 +52,7 @@ class MultiModalContentFormatter
     }
 
     /**
-     * format化imagecontenttotext
+     * formatizationimagecontenttotext
      * supportsingle张imageandmultipleimagescenario.
      *
      * @param string $originalContent originaltextcontent
@@ -88,7 +88,7 @@ class MultiModalContentFormatter
     }
 
     /**
-     * format化nonimageattachmenttotext.
+     * formatizationnonimageattachmenttotext.
      *
      * @param string $originalContent originaltextcontent
      * @param AttachmentInterface[] $nonImageAttachments nonimageattachmentarray

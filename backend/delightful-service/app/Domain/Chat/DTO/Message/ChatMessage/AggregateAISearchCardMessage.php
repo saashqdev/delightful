@@ -36,7 +36,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
 
     protected ?array $associateQuestions = null;
 
-    // thiswithinwantcompatible老versionjsondata
+    // thiswithinwantcompatibleoldversionjsondata
     protected null|array|string $mindMap = null;
 
     protected ?array $searchKeywords = null;

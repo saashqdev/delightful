@@ -45,7 +45,7 @@ readonly class ModelGatewayEndpointProvider implements EndpointProviderInterface
             return [];
         }
 
-        // if modelId containformat化frontsuffix,thenalsooriginalforclean modelId
+        // if modelId containformatizationfrontsuffix,thenalsooriginalforclean modelId
         $pureModelId = EndpointAssembler::extractOriginalModelId($modelId);
 
         // Get service provider models by model ID and organization code

@@ -276,7 +276,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         $time = date('Y-m-d H:i:s');
         $seqListCreateDTO = [];
         $groupId = $content['group_id'] ?? '';
-        // groupmemberincreaseo clock,fornewadd入memberreturnsessionid
+        // groupmemberincreaseo clock,fornewaddinputmemberreturnsessionid
         $userConversations = $this->getGroupUserConversationsByUserIds(array_keys($users), $groupId);
         $userContent = $content;
         foreach ($users as $user) {

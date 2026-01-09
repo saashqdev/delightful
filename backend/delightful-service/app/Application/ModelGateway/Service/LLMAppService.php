@@ -1715,7 +1715,7 @@ class LLMAppService extends AbstractLLMAppService
      * @param int $imageCount imagequantity
      * @param string $providerModelId servicequotientmodelID
      * @param string $callTime calltime
-     * @param float $startTime starttime(微second)
+     * @param float $startTime starttime(microsecond)
      * @param null|AccessTokenEntity $accessTokenEntity accesstokenactualbody
      */
     private function dispatchImageGeneratedEvent(

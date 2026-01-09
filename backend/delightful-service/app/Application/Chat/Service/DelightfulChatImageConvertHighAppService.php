@@ -227,7 +227,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
 
         // checkwhetherexistsin ErrorMessage annotation
         if (! empty($attributes)) {
-            // instance化annotationobject
+            // instanceizationannotationobject
             $errorMessageAttribute = $attributes[0]->newInstance();
 
             // returnannotationmiddle message property

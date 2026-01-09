@@ -10,7 +10,7 @@ namespace App\Domain\Authentication\Entity\ValueObject;
 use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 
 /**
- * dataisolation SaaS化
+ * dataisolation SaaSization
  * displaytypepass in,preventhiddentypepass in,causenotknowwhichtheseplaceneedmakeisolation.
  */
 class AuthenticationDataIsolation extends BaseDataIsolation

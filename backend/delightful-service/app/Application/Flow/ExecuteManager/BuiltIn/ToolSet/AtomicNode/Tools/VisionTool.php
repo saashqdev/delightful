@@ -243,7 +243,7 @@ JSON, true)));
    - technologyinfo:likehavegraphtable/data,analyzeitsimplication
    
 4. analyzeformatrequire:
-   - toatreloadwantanalyzeresult,usestructure化JSONformatpresent,like:{"categoryother":"xx", "mainbody":"xx", "feature":["xx","xx"]}
+   - toatreloadwantanalyzeresult,usestructureizationJSONformatpresent,like:{"categoryother":"xx", "mainbody":"xx", "feature":["xx","xx"]}
    - toatnotcertaincontent,explicittable明speculatedpropertyquality,for example:"maybeis..."
    - likeimagequalitymorelow,fingeroutlimitelementanddo one's bestanalyze
    - toatmultiplegraphanalyze,minuteothermarkimagesequencenumberconductparse,andsummaryitsassociateproperty

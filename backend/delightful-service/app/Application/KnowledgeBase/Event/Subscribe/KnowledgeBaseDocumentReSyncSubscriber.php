@@ -84,9 +84,9 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
 
         // from增versionnumber(抢lock)
         $affectedRows = $knowledgeBaseDocumentDomainService->increaseVersion($dataIsolation, $documentEntity);
-        // iffrom增fail,instructionalreadyalreadyreloadnewtoquantity化pass,submitfrontend
+        // iffrom增fail,instructionalreadyalreadyreloadnewtoquantityizationpass,submitfrontend
         if ($affectedRows === 0) {
-            $logger->info('documentalreadyreloadnewtoquantity化,skipsync');
+            $logger->info('documentalreadyreloadnewtoquantityization,skipsync');
             return;
         }
 

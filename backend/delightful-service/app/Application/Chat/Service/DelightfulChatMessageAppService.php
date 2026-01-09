@@ -108,7 +108,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
     public function joinRoom(DelightfulUserAuthorization $userAuthorization, Socket $socket): void
     {
-        // will have sid alladd入toroom id valuefor delightfulId roommiddle
+        // will have sid alladdinputtoroom id valuefor delightfulId roommiddle
         $this->delightfulChatDomainService->joinRoom($userAuthorization->getDelightfulId(), $socket);
     }
 

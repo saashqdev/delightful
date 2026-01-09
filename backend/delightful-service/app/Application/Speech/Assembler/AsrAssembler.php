@@ -125,7 +125,7 @@ class AsrAssembler
      */
     public static function extractWorkspaceRelativePath(string $fileKey): string
     {
-        // standard化pathminuteseparator
+        // standardizationpathminuteseparator
         $normalizedPath = str_replace('\\', '/', trim($fileKey, '/'));
 
         // find workspace/ position

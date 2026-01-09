@@ -47,7 +47,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         $this->logger = $loggerFactory->get('user');
     }
 
-    // returnmostpopularandmostnewadd入 agent list
+    // returnmostpopularandmostnewaddinput agent list
     public function getSquareAgentList(): array
     {
         // mostpopular

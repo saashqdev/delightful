@@ -255,7 +255,7 @@ class ProviderEntity extends AbstractEntity
     }
 
     /**
-     * getthisground化servicequotientname.
+     * getthisgroundizationservicequotientname.
      */
     public function getLocalizedName(string $locale): string
     {

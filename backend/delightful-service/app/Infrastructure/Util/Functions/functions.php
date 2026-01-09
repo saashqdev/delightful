@@ -185,7 +185,7 @@ if (! function_exists('format_micro_time')) {
             $microseconds = (int) $microTimes[0] * 1000000;
         } else {
             $integerTimestamp = (int) $microTime;
-            $microseconds = ($microTime - $integerTimestamp) * 1000000; // 微seconddepartmentminute
+            $microseconds = ($microTime - $integerTimestamp) * 1000000; // microseconddepartmentminute
         }
         $dateTime = date('Y-m-d H:i:s', $integerTimestamp);
         return "{$dateTime}.{$microseconds}";

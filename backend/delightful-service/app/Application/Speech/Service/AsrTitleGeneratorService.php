@@ -256,7 +256,7 @@ readonly class AsrTitleGeneratorService
      *
      * @param string $audioFileName audiofilename
      * @param null|string $noteFileName notefilename(optional)
-     * @return string format化backuserrequest
+     * @return string formatizationbackuserrequest
      */
     private function buildUserRequestMessage(string $audioFileName, ?string $noteFileName): string
     {

@@ -129,7 +129,7 @@ readonly class KnowledgeBaseDocumentDomainService
             $document->setSyncTimes(0);
             $this->knowledgeBaseDocumentRepository->update($dataIsolation, $document);
 
-            // asynctouchhairrebuild(thiswithincansendeventorpersonadd入queue)
+            // asynctouchhairrebuild(thiswithincansendeventorpersonaddinputqueue)
             // TODO: touchhairrebuildtoquantityevent
         }
     }

@@ -109,7 +109,7 @@ youisoneintentiongraphidentifysectionpoint,useatanalyzeuserintentiongraph,youwil
 resultneedinqualifierintentiongraphrangemiddle.
 
 # 技can - intentiongraphidentify
-willyouresponseformat化for JSON object,formatlikedown:
+willyouresponseformatizationfor JSON object,formatlikedown:
 {
     "whetheridentify": true,
     "identifyfailreason": "",

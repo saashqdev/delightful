@@ -29,7 +29,7 @@ return new class extends Migration {
             $table->string('third_real_name', 64)->comment('employeename');
             $table->string('third_nick_name', 64)->nullable()->default('')->comment('employeenickname');
             $table->text('third_avatar')->nullable()->comment('avatar');
-            $table->tinyInteger('third_gender')->default(0)->comment('employeepropertyother 0-unknown 1-男 2-女');
+            $table->tinyInteger('third_gender')->default(0)->comment('employeepropertyother 0-unknown 1-male 2-female');
             $table->string('third_email', 128)->nullable()->default('')->comment('mailbox');
             $table->string('third_mobile', 64)->nullable()->default('')->comment('thethreesideplatformemployeehandmachinenumber');
             $table->string('third_id_number', 64)->nullable()->default('')->comment('employeebodyshare证');

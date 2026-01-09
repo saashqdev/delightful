@@ -59,7 +59,7 @@ use function Hyperf\Coroutine\co;
 class DelightfulChatDomainService extends AbstractDomainService
 {
     /**
-     * add入room.
+     * addinputroom.
      */
     public function joinRoom(string $accountId, Socket $socket): void
     {

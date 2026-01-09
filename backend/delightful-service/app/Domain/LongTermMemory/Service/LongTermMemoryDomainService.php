@@ -45,7 +45,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * batchquantitystrong化memory.
+     * batchquantitystrongizationmemory.
      */
     public function reinforceMemories(array $memoryIds): void
     {
@@ -76,7 +76,7 @@ readonly class LongTermMemoryDomainService
                 return;
             }
 
-            // batchquantitystrong化
+            // batchquantitystrongization
             foreach ($memories as $memory) {
                 $memory->reinforce();
             }

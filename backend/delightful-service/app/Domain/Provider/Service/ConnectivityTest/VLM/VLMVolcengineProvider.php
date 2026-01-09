@@ -45,7 +45,7 @@ class VLMVolcengineProvider implements IProvider
         $body['model_version'] = 'general_v2.1_L'; // hardcode firstnotissue,itemfronttext generationgraphsupportthisvalue,graphgenerategraphnotthisvalue
         $body['width'] = 512;
         $body['height'] = 512;
-        $body['prompt'] = 'generateoneonly狗';
+        $body['prompt'] = 'generateoneonlydog';
         try {
             $volcengineAPI->submitTask($body);
         } catch (Exception $e) {

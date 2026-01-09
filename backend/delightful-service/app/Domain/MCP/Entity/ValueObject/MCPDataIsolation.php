@@ -10,7 +10,7 @@ namespace App\Domain\MCP\Entity\ValueObject;
 use App\Infrastructure\Core\DataIsolation\BaseDataIsolation;
 
 /**
- * dataisolation SaaS化
+ * dataisolation SaaSization
  * displaytypepass in,preventhiddentypepass in,causenotknowwhichtheseplaceneedmakeisolation.
  */
 class MCPDataIsolation extends BaseDataIsolation

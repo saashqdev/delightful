@@ -70,7 +70,7 @@ class VolcengineArkModel extends AbstractImageGenerate
     }
 
     /**
-     * generategraphlikeandreturnOpenAIformatresponse - V2onebody化version.
+     * generategraphlikeandreturnOpenAIformatresponse - V2onebodyizationversion.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {

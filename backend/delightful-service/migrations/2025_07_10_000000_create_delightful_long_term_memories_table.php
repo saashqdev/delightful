@@ -26,7 +26,7 @@ return new class extends Migration {
             $table->decimal('confidence', 3, 2)->unsigned()->default(0.8)->comment('confidencedegree(0-1)');
             $table->decimal('importance', 3, 2)->unsigned()->default(0.5)->comment('reloadwantproperty(0-1)');
             $table->unsignedInteger('access_count')->default(0)->comment('accesscount');
-            $table->unsignedInteger('reinforcement_count')->default(0)->comment('strong化count');
+            $table->unsignedInteger('reinforcement_count')->default(0)->comment('strongizationcount');
             $table->decimal('decay_factor', 3, 2)->unsigned()->default(1.0)->comment('衰subtractfactor(0-1)');
             $table->json('tags')->nullable()->comment('taglist');
             $table->json('metadata')->nullable()->comment('yuandata');
@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->string('project_id', 36)->nullable()->default(null)->comment('projectID');
             $table->string('user_id', 36)->comment('userID');
             $table->timestamp('last_accessed_at')->nullable()->comment('mostbackaccesstime');
-            $table->timestamp('last_reinforced_at')->nullable()->comment('mostbackstrong化time');
+            $table->timestamp('last_reinforced_at')->nullable()->comment('mostbackstrongizationtime');
             $table->timestamp('expires_at')->nullable()->comment('expiretime');
             $table->timestamp('created_at')->useCurrent()->comment('createtime');
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->comment('updatetime');

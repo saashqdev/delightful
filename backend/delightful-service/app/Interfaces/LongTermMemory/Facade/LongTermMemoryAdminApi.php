@@ -296,7 +296,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * strong化memory.
+     * strongizationmemory.
      */
     public function reinforceMemory(string $memoryId): array
     {
@@ -327,7 +327,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * batchquantitystrong化memory.
+     * batchquantitystrongizationmemory.
      */
     public function reinforceMemories(RequestInterface $request): array
     {

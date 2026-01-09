@@ -90,9 +90,9 @@ class DelightfulFlowExportImportAppService
 
         // storageageIDmappingclosesystem
         $idMapping = [
-            'flows' => [], // 老ID => newID
-            'tool_sets' => [], // 老ID => newID
-            'nodes' => [], // 老ID => newID
+            'flows' => [], // oldID => newID
+            'tool_sets' => [], // oldID => newID
+            'nodes' => [], // oldID => newID
         ];
 
         // importreport,recordcreate,renameanderrorinfo

@@ -47,7 +47,7 @@ enum ChatMessageType: string
     case AggregateAISearchCard = 'aggregate_ai_search_card';
 
     /**
-     * multipletimestreamresponseback,finalmergebecomeoneitemmessage入library.
+     * multipletimestreamresponseback,finalmergebecomeoneitemmessageinputlibrary.
      */
     case AggregateAISearchCardV2 = 'aggregate_ai_search_card_v2';
 

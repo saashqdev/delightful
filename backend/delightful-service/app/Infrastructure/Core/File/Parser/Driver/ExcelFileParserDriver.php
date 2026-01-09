@@ -131,7 +131,7 @@ class ExcelFileParserDriver implements ExcelFileParserDriverInterface
     }
 
     /**
-     * format化CSVsingleyuanformatcontent,tospecialcontentaddimportnumber.
+     * formatizationCSVsingleyuanformatcontent,tospecialcontentaddimportnumber.
      */
     private function formatCsvCell(string $value): string
     {

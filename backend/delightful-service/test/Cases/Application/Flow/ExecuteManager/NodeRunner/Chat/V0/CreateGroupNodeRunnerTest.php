@@ -78,7 +78,7 @@ class CreateGroupNodeRunnerTest extends ExecuteManagerBaseTest
                     "member_value": [
                         {
                             "id": "usi_123456789abcdef123456789abcdef13",
-                            "name": "small红"
+                            "name": "smallred"
                         },
                         {
                             "id": "usi_123456789abcdef123456789abcdef14",

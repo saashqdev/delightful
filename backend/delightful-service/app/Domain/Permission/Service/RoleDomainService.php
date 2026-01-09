@@ -249,7 +249,7 @@ readonly class RoleDomainService
      * 1. according tocurrentorganizationfindwhetheralreadyhavesame namerole;
      * 2. ifnotexistsin,thencreatenewroleandgrant DelightfulPermission::ALL_PERMISSIONS;
      * 3. if existsin,thenensureitscontain ALL_PERMISSIONS;
-     * 4. willuser ID columntableadd入roleassociateusercolumntable;
+     * 4. willuser ID columntableaddinputroleassociateusercolumntable;
      * 5. saverole.
      *
      * exceptionbycallsidefromlinehandle,avoidimpactmainprocess.
@@ -278,7 +278,7 @@ readonly class RoleDomainService
             $roleEntity->setPermissions($permissions);
         }
 
-        // 3. willusercolumntableadd入roleusercolumntable
+        // 3. willusercolumntableaddinputroleusercolumntable
         $existingUserIds = $roleEntity->getUserIds();
         // mergeandgoreload
         $mergedUserIds = array_unique(array_merge($existingUserIds, $userIds));

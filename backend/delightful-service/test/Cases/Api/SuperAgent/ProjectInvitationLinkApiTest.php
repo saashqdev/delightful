@@ -67,7 +67,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $invitationInfo = $this->getInvitationByToken($this->invitationToken);
         $this->assertTrue($invitationInfo['data']['requires_password']);
 
-        // 5. outsidedepartmentusertryadd入project(passworderror)
+        // 5. outsidedepartmentusertryaddinputproject(passworderror)
         $this->joinProjectWithWrongPassword($this->invitationToken);
 
         // 6. project havepersonresetpassword
@@ -75,11 +75,11 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $passwordInfo = $this->resetInvitationPassword($projectId);
         $this->invitationPassword = $passwordInfo['data']['password'];
 
-        // 7. outsidedepartmentuserusecorrectpasswordadd入project
+        // 7. outsidedepartmentuserusecorrectpasswordaddinputproject
         $this->switchUserTest2();
         $this->joinProjectSuccess($this->invitationToken, $this->invitationPassword);
 
-        // 8. validateuseralreadybecomeforprojectmember(againtimeadd入shouldfail)
+        // 8. validateuseralreadybecomeforprojectmember(againtimeaddinputshouldfail)
         $this->joinProjectAlreadyMember($this->invitationToken, $this->invitationPassword);
 
         // 9. project havepersoncloseinvitationlink
@@ -272,7 +272,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * add入project(passworderror).
+     * addinputproject(passworderror).
      */
     public function joinProjectWithWrongPassword(string $token): void
     {
@@ -289,7 +289,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * successadd入project.
+     * successaddinputproject.
      */
     public function joinProjectSuccess(string $token, ?string $password = null): array
     {
@@ -314,7 +314,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * tryduplicateadd入project(shouldfail).
+     * tryduplicateaddinputproject(shouldfail).
      */
     public function joinProjectAlreadyMember(string $token, ?string $password = null): void
     {
@@ -463,7 +463,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->assertEquals(1000, $linkInfo['code']);
         $this->assertTrue($linkInfo['data']['requires_password']);
 
-        // 8. validateuseoriginalpasswordcansuccessadd入project
+        // 8. validateuseoriginalpasswordcansuccessaddinputproject
         $this->switchUserTest2();
         $joinResult = $this->joinProjectSuccess($token, $originalPassword);
         $this->assertEquals(1000, $joinResult['code']);
@@ -578,7 +578,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->assertArrayHasKey('creator_id', $invitationInfo['data'], 'responseshouldcontaincreator_idfield');
 
         // checkfieldvalue
-        $this->assertTrue($invitationInfo['data']['has_joined'], 'createpersonshoulddisplayalreadyadd入project');
+        $this->assertTrue($invitationInfo['data']['has_joined'], 'createpersonshoulddisplayalreadyaddinputproject');
         $this->assertNotEmpty($invitationInfo['data']['creator_id'], 'creator_idnotshouldfornull');
 
         // validatefieldtype
@@ -586,30 +586,30 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->assertIsString($invitationInfo['data']['creator_name'], 'creator_nameshouldisstringtype');
         $this->assertIsString($invitationInfo['data']['creator_avatar'], 'creator_avatarshouldisstringtype');
 
-        // 3. testnotadd入useraccessinvitationlink - should show has_joined = false
+        // 3. testnotaddinputuseraccessinvitationlink - should show has_joined = false
         $this->switchUserTest2();
         $invitationInfo = $this->getInvitationByToken($token);
 
         // checkbasicresponse
-        $this->assertEquals(1000, $invitationInfo['code'], 'notadd入usergetinvitationinfoshouldsuccess');
+        $this->assertEquals(1000, $invitationInfo['code'], 'notaddinputusergetinvitationinfoshouldsuccess');
         $this->assertArrayHasKey('has_joined', $invitationInfo['data'], 'responseshouldcontainhas_joinedfield');
-        $this->assertFalse($invitationInfo['data']['has_joined'], 'notadd入usershoulddisplaynotadd入project');
+        $this->assertFalse($invitationInfo['data']['has_joined'], 'notaddinputusershoulddisplaynotaddinputproject');
 
         // validatecreatepersoninfostill existsin(notno matter whoaccess,createpersoninfoallshoulddisplay)
         $this->assertArrayHasKey('creator_name', $invitationInfo['data'], 'responseshouldcontaincreator_namefield');
         $this->assertArrayHasKey('creator_avatar', $invitationInfo['data'], 'responseshouldcontaincreator_avatarfield');
 
-        // 4. test2useradd入project - needprovidepassword
+        // 4. test2useraddinputproject - needprovidepassword
         $password = $linkResponse['data']['password'] ?? null;
         $joinResult = $this->joinProjectSuccess($token, $password);
         $this->assertEquals(1000, $joinResult['code']);
 
-        // 5. testalreadyadd入memberaccessinvitationlink - should show has_joined = true
+        // 5. testalreadyaddinputmemberaccessinvitationlink - should show has_joined = true
         $invitationInfo = $this->getInvitationByToken($token);
 
-        $this->assertEquals(1000, $invitationInfo['code'], 'alreadyadd入membergetinvitationinfoshouldsuccess');
+        $this->assertEquals(1000, $invitationInfo['code'], 'alreadyaddinputmembergetinvitationinfoshouldsuccess');
         $this->assertArrayHasKey('has_joined', $invitationInfo['data'], 'responseshouldcontainhas_joinedfield');
-        $this->assertTrue($invitationInfo['data']['has_joined'], 'alreadyadd入membershoulddisplayalreadyadd入project');
+        $this->assertTrue($invitationInfo['data']['has_joined'], 'alreadyaddinputmembershoulddisplayalreadyaddinputproject');
 
         // 6. validateresponsedatacompleteproperty
         $data = $invitationInfo['data'];

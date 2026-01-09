@@ -11,7 +11,7 @@ use App\Domain\Contact\Repository\Facade\DelightfulUserRepositoryInterface;
 use App\Infrastructure\Core\AbstractObject;
 
 /**
- * dataisolation SaaS化
+ * dataisolation SaaSization
  * itemfrontonlyhaveorganizationisolation
  * displaytypepass in,preventhiddentypepass in,causenotknowwhichtheseplaceneedmakeisolation.
  */

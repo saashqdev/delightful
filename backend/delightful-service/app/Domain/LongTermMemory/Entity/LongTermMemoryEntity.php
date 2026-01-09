@@ -379,14 +379,14 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * strong化memory(updatestrong化countandtime,enhancereloadwantproperty).
+     * strongizationmemory(updatestrongizationcountandtime,enhancereloadwantproperty).
      */
     public function reinforce(): void
     {
         ++$this->reinforcementCount;
         $this->lastReinforcedAt = new DateTime();
 
-        // strong化willenhancereloadwantproperty,buthaveuplimit
+        // strongizationwillenhancereloadwantproperty,buthaveuplimit
         $this->importance = min(1.0, $this->importance + 0.1);
     }
 

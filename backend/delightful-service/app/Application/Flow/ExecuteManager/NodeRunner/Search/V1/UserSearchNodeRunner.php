@@ -87,7 +87,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
             $departments = $departmentDomain->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
 
             $userDepartments = [];
-            // one人可以有很多department
+            // one人can有很多department
             foreach ($departmentUsers as $departmentUser) {
                 $userDepartments[$departmentUser['user_id']][] = $departmentUser;
             }
@@ -97,7 +97,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
                 $phoneDesensitization = true;
             }
             foreach ($delightfulUsers as $delightfulUser) {
-                // 如果不是人类，filter
+                // if不是人类，filter
                 if ($delightfulUser->getUserType() !== UserType::Human) {
                     continue;
                 }
@@ -142,7 +142,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         $executionData->saveNodeContext($this->node->getNodeId(), $result);
     }
 
-    // -------- 以下方法十分粗暴，不建议学习 🔞🈲 --------  todo 等 es 或 flink cdc 之类的出来再优化
+    // -------- 以下method十分粗暴，不建议学习 🔞🈲 --------  todo 等 es 或 flink cdc 之类的出来再优化
 
     private function getUserIdsByUsername(Operator $operator, OperatorType $operatorType, mixed $username, ?array $filterUserIds = null): array
     {

@@ -20,7 +20,7 @@ return new class extends Migration {
 
         Schema::create('delightful_mode_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('mode_id')->unsigned()->default(0)->comment('模式ID');
+            $table->bigInteger('mode_id')->unsigned()->default(0)->comment('modeID');
             $table->json('name_i18n')->comment('分组名称国际化');
             $table->string('icon', 255)->default('')->comment('分组图标');
             $table->string('color', 10)->default('')->comment('分组颜色');

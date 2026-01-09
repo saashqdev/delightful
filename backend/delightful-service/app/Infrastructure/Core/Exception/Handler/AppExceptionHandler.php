@@ -32,7 +32,7 @@ class AppExceptionHandler extends ExceptionHandler
     public function handle(Throwable $throwable, ResponseInterface $response): MessageInterface|ResponseInterface
     {
         if ($throwable instanceof SocketException) {
-            // tcp链接正常断开,不需要打印exception
+            // tcp链接正常断开,不need打印exception
             return $response;
         }
         $request = $this->container->get(RequestInterface::class);

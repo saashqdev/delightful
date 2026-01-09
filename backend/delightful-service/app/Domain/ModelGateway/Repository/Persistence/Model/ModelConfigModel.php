@@ -78,7 +78,7 @@ class ModelConfigModel extends Model
     ];
 
     /**
-     * 框架自动调用此方法进行对称加密.
+     * 框架自动调用此method进行对称加密.
      */
     public function setImplementationConfigAttribute(?array $config): void
     {
@@ -89,7 +89,7 @@ class ModelConfigModel extends Model
     }
 
     /**
-     * 框架自动调用此方法进行对称解密.
+     * 框架自动调用此method进行对称解密.
      */
     public function getImplementationConfigAttribute(?string $config): array
     {

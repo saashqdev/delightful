@@ -18,7 +18,7 @@ interface MCPUserSettingRepositoryInterface
 
     /**
      * @param array<int> $ids
-     * @return array<int, MCPUserSettingEntity> return以id为key的实体对象数组
+     * @return array<int, MCPUserSettingEntity> return以id为key的实体objectarray
      */
     public function getByIds(MCPDataIsolation $dataIsolation, array $ids): array;
 

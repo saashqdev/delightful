@@ -13,7 +13,7 @@ use App\Domain\ImageGenerate\ValueObject\WatermarkConfig;
 /**
  * 默认水印configuration实现
  * 开源项目中的默认实现，不启用水印
- * 企业项目可以通过继承或重新实现来提供具体的水印逻辑.
+ * 企业项目can通过继承或重新实现来提供具体的水印逻辑.
  */
 class DefaultWatermarkConfig implements WatermarkConfigInterface
 {

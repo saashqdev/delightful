@@ -41,14 +41,14 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
         }
         $quantum = 10 * 1000 * 1000; // 单位：毫秒
         $logger = ApplicationContext::getContainer()->get(LoggerFactory::class)?->get('DelightfulWatchDogSubscriber');
-        // 看门狗找同步阻塞的地方
+        // 看门狗找同阻塞的地方
         $logger->info('麦吉看门狗，启动！');
         $alertCountMap = new WeakMap();
         Watchdog::run($quantum * 5, 0, static function () use (&$alertCountMap, $logger) {
             $coroutine = Coroutine::getCurrent();
             $alertCount = ($alertCountMap[$coroutine] ??= 0) + 1;
             $alertCountMap[$coroutine] = $alertCount;
-            // 当单个协程运行超过 $millSeconds 时，会触发看门狗，打印协程调用栈
+            // when单个协程运行超过 $millSeconds 时，会触发看门狗，打印协程调用栈
             if ($alertCount > 1) {
                 $trace = str_replace(["\n", "\r"], ' | ', $coroutine->getTraceAsString());
                 $logger->error(sprintf(

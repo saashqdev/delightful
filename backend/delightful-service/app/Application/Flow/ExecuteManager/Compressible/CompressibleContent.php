@@ -12,7 +12,7 @@ use Psr\SimpleCache\CacheInterface;
 class CompressibleContent
 {
     /**
-     * 需要处理的压缩标签.
+     * need处理的压缩标签.
      */
     private static array $tags = [
         ['<DelightfulCompressibleContent Type="Image">', '</DelightfulCompressibleContent>', '<DelightfulImage>', '</DelightfulImage>'],

@@ -107,7 +107,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
 
         $newOwnerUserId = $this->request->input('user_id');
         if (empty($newOwnerUserId)) {
-            throw new InvalidArgumentException('新的organizationcreate人userID不能为空');
+            throw new InvalidArgumentException('新的organizationcreate人userIDcannot为null');
         }
 
         $this->organizationAdminAppService->transferOwnership(

@@ -56,7 +56,7 @@ class LLMChatNodeParamsConfig extends AbstractLLMNodeParamsConfig
         $this->createOptionsToolsByParams($params['option_tools'] ?? []);
 
         $paramsConfig = [
-            // 这里得转换成字符串给前端
+            // 这里得转换成string给前端
             'model' => $this->model->getValue()->getResult(),
             'system_prompt' => $this->systemPrompt->toArray(),
             'user_prompt' => $this->userPrompt->toArray(),
@@ -213,7 +213,7 @@ JSON,
                             "type": "object",
                             "key": "arguments",
                             "sort": 3,
-                            "title": "tool参数",
+                            "title": "toolparameter",
                             "description": "",
                             "items": null,
                             "properties": null,

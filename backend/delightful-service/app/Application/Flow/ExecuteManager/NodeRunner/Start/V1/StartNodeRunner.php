@@ -43,7 +43,7 @@ class StartNodeRunner extends AbstractStartNodeRunner
 
         $triggerBranch = $paramsConfig->getBranchByTriggerType($triggerType);
         if (empty($triggerBranch)) {
-            // 如果没有找到任何触发方式，直接结束就好
+            // if没有找到任何触发方式，直接结束就好
             $vertexResult->clearChildren();
             return;
         }

@@ -20,7 +20,7 @@ enum DelimiterType: string
     case HIGH_AVAILABILITY = '||';
 
     /**
-     * get所有分隔符type值数组.
+     * get所有分隔符type值array.
      */
     public static function values(): array
     {
@@ -38,7 +38,7 @@ enum DelimiterType: string
     }
 
     /**
-     * 从字符串create枚举实例.
+     * 从stringcreate枚举实例.
      */
     public static function fromString(string $type): self
     {

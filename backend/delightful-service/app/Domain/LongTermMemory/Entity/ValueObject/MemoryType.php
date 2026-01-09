@@ -15,7 +15,7 @@ enum MemoryType: string
     case MANUAL_INPUT = 'manual_input';           // 手动input
     case CONVERSATION_ANALYSIS = 'conversation_analysis';  // 对话分析
     case USER_NOTE = 'user_note';                // user笔记
-    case SYSTEM_KNOWLEDGE = 'system_knowledge';  // 系统知识
+    case SYSTEM_KNOWLEDGE = 'system_knowledge';  // system知识
 
     /**
      * get中文description.
@@ -26,7 +26,7 @@ enum MemoryType: string
             self::MANUAL_INPUT => '手动input',
             self::CONVERSATION_ANALYSIS => '对话分析',
             self::USER_NOTE => 'user笔记',
-            self::SYSTEM_KNOWLEDGE => '系统知识',
+            self::SYSTEM_KNOWLEDGE => 'system知识',
         };
     }
 
@@ -42,7 +42,7 @@ enum MemoryType: string
     }
 
     /**
-     * 是否为系统生成的记忆.
+     * 是否为system生成的记忆.
      */
     public function isSystemGenerated(): bool
     {

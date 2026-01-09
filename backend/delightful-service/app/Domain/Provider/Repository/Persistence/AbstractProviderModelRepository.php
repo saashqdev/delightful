@@ -38,7 +38,7 @@ abstract class AbstractProviderModelRepository extends AbstractRepository
         if ($modelEntity->getId() === null) {
             $modelEntity->setId(IdGenerator::getSnowId());
         }
-        // 检查时间字段是否为空
+        // 检查时间字段是否为null
         if ($modelEntity->getCreatedAt() === null || $modelEntity->getUpdatedAt() === null) {
             $modelEntity->setCreatedAt(new DateTime());
             $modelEntity->setUpdatedAt(new DateTime());
@@ -53,7 +53,7 @@ abstract class AbstractProviderModelRepository extends AbstractRepository
     }
 
     /**
-     * 将实体序列化为数组，包含JSON序列化复杂字段.
+     * 将实体序列化为array，包含JSON序列化复杂字段.
      */
     protected function serializeEntityToArray(ProviderModelEntity $entity): array
     {

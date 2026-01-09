@@ -16,7 +16,7 @@ use App\Domain\Chat\Entity\ValueObject\AIImage\AIImageGenerateParamsVO;
 use Exception;
 
 /**
- * AI文生图chat请求参数.
+ * AI文生图chat请求parameter.
  */
 class DelightfulChatAIImageReqDTO
 {
@@ -24,7 +24,7 @@ class DelightfulChatAIImageReqDTO
 
     public string $conversationId;
 
-    public string $topicId = ''; // 话题 id，可以为空
+    public string $topicId = ''; // 话题 id，can为null
 
     public string $appMessageId;
 

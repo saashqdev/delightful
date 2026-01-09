@@ -50,7 +50,7 @@ readonly class DelightfulUserIdRelationRepository implements DelightfulUserIdRel
         return is_array($relation) ? $relation : [];
     }
 
-    // id_type,relation_type,relation_value query user_id,然后去queryuserinformation
+    // id_type,relation_type,relation_value query user_id,then去queryuserinformation
     public function getUerIdByRelation(DelightfulUserIdRelationEntity $userIdRelationEntity): string
     {
         $query = $this->userIdRelationModel::query()

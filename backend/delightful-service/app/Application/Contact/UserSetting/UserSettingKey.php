@@ -20,7 +20,7 @@ enum UserSettingKey: string
     // 项目话题模型configuration
     case BeDelightfulProjectTopicModel = 'BeDelightfulProjectTopicModel';
 
-    // user当前organization
+    // userwhen前organization
     case CurrentOrganization = 'CurrentOrganization';
 
     // 全局configuration

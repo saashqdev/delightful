@@ -13,7 +13,7 @@ class InstructDisplayType
 {
     public const NORMAL = 1;    // 普通
 
-    public const SYSTEM = 2;    // 系统
+    public const SYSTEM = 2;    // system
 
     /**
      * 验证显示类型是否有效.

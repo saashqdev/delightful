@@ -45,17 +45,17 @@ class DelightfulFlowKnowledgeFactory
 
         // 处理检索configuration
         if (! empty($model->retrieve_config)) {
-            // 如果是字符串（JSON 字符串），先解码
+            // if是string（JSON string），先解码
             $config = json_decode($model->retrieve_config, true);
 
             if (is_array($config)) {
                 $entity->setRetrieveConfig(RetrieveConfig::fromArray($config));
             } else {
-                // 如果configuration无效，setting默认configuration
+                // ifconfiguration无效，setting默认configuration
                 $entity->setRetrieveConfig(RetrieveConfig::createDefault());
             }
         } else {
-            // 如果configuration为空，setting默认configuration
+            // ifconfiguration为null，setting默认configuration
             $entity->setRetrieveConfig(RetrieveConfig::createDefault());
         }
 
@@ -63,7 +63,7 @@ class DelightfulFlowKnowledgeFactory
     }
 
     /**
-     * 将实体转换为模型属性数组.
+     * 将实体转换为模型属性array.
      */
     public static function entityToAttributes(KnowledgeBaseEntity $entity): array
     {

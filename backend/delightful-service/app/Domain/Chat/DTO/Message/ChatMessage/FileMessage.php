@@ -22,7 +22,7 @@ class FileMessage extends AbstractAttachmentMessage
     }
 
     /**
-     * get第one附件对象
+     * get第one附件object
      * 对于单附件message（如语音、视频等）很有用.
      */
     public function getAttachment(): ?object

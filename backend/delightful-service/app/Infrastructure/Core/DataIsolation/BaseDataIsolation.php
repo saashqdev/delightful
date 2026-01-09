@@ -12,19 +12,19 @@ use App\Infrastructure\Util\Context\CoContext;
 class BaseDataIsolation implements DataIsolationInterface
 {
     /**
-     * 当前的organization编码.
+     * when前的organization编码.
      */
     private string $currentOrganizationCode;
 
     /**
-     * 当前的userid.
+     * when前的userid.
      */
     private string $currentUserId;
 
     private string $delightfulId;
 
     /**
-     * 当前环境 app_env().
+     * when前环境 app_env().
      */
     private string $environment;
 

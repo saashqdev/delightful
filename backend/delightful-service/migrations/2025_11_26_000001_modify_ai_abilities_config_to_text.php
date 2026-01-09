@@ -20,7 +20,7 @@ return new class extends Migration {
 
         Schema::table('delightful_ai_abilities', function (Blueprint $table) {
             // 将 config 字段从 json 改为 text type
-            $table->text('config')->change()->comment('configurationinformation（AES加密后的JSON字符串）');
+            $table->text('config')->change()->comment('configurationinformation（AES加密后的JSONstring）');
         });
     }
 

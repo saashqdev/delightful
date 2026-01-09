@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\Dag;
 class VertexResult
 {
     /**
-     * 存储需要被调度的子节点.
+     * 存储need被调度的子节点.
      * @var array<string>
      */
     protected array $childrenIds = [];

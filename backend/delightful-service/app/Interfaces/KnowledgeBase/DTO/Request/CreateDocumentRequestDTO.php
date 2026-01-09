@@ -39,11 +39,11 @@ class CreateDocumentRequestDTO extends AbstractRequestDTO
     public static function getHyperfValidationMessage(): array
     {
         return [
-            'knowledge_base_code.required' => '知识库编码不能为空',
-            'knowledge_base_code.max' => '知识库编码长度不能超过64个字符',
-            'name.required' => 'document名称不能为空',
-            'name.max' => 'document名称长度不能超过255个字符',
-            'doc_type.required' => 'documenttype不能为空',
+            'knowledge_base_code.required' => '知识库编码cannot为null',
+            'knowledge_base_code.max' => '知识库编码长度cannot超过64个字符',
+            'name.required' => 'document名称cannot为null',
+            'name.max' => 'document名称长度cannot超过255个字符',
+            'doc_type.required' => 'documenttypecannot为null',
             'doc_type.integer' => 'documenttype必须为整数',
             'doc_type.min' => 'documenttype必须大于等于0',
         ];

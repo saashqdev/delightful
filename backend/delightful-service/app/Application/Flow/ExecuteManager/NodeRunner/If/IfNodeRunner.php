@@ -15,7 +15,7 @@ use App\Infrastructure\Core\Collector\ExecuteManager\Annotation\FlowNodeDefine;
 use App\Infrastructure\Core\Dag\VertexResult;
 use Delightful\FlowExprEngine\ComponentFactory;
 
-#[FlowNodeDefine(type: NodeType::If->value, code: NodeType::If->name, name: '选择器', paramsConfig: IfNodeParamsConfig::class, version: 'v0', singleDebug: false, needInput: false, needOutput: false)]
+#[FlowNodeDefine(type: NodeType::If->value, code: NodeType::If->name, name: 'select器', paramsConfig: IfNodeParamsConfig::class, version: 'v0', singleDebug: false, needInput: false, needOutput: false)]
 class IfNodeRunner extends NodeRunner
 {
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void
@@ -56,7 +56,7 @@ class IfNodeRunner extends NodeRunner
             ];
         }
 
-        // 如果没有命中 if，就走else
+        // if没有命中 if，就走else
         if (! $if && $elseBranch) {
             $nextNodes = $elseBranch['next_nodes'] ?? [];
             $debug[] = [

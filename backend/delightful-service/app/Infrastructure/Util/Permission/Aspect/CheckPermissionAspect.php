@@ -22,7 +22,7 @@ use Hyperf\Di\Aop\ProceedingJoinPoint;
 class CheckPermissionAspect extends AbstractAspect
 {
     /**
-     * 需要拦截的注解列表.
+     * need拦截的注解列表.
      */
     public array $annotations = [
         CheckPermission::class,
@@ -43,7 +43,7 @@ class CheckPermissionAspect extends AbstractAspect
             return $proceedingJoinPoint->process();
         }
 
-        // get当前登录user授权information
+        // getwhen前登录user授权information
         $authorization = RequestCoContext::getUserAuthorization();
         if ($authorization === null) {
             ExceptionBuilder::throw(PermissionErrorCode::AccessDenied, 'permission.error.access_denied');

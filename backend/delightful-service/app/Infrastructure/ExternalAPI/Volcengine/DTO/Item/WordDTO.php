@@ -11,7 +11,7 @@ use App\Infrastructure\Core\AbstractDTO;
 
 /**
  * Word DTO for speech recognition word information.
- * 对应 JSON 中的 result.utterances[].words[] 数组元素.
+ * 对应 JSON 中的 result.utterances[].words[] array元素.
  */
 class WordDTO extends AbstractDTO
 {

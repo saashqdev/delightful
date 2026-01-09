@@ -43,7 +43,7 @@ class DocumentQueryRequestDTO extends AbstractRequestDTO
         return [
             'page.min' => '页码必须大于等于1',
             'page_size.min' => '每页数量必须大于等于1',
-            'page_size.max' => '每页数量不能超过100',
+            'page_size.max' => '每页数量cannot超过100',
         ];
     }
 

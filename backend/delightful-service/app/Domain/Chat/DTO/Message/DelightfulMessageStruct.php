@@ -47,7 +47,7 @@ abstract class DelightfulMessageStruct extends AbstractEntity implements Message
         }
         // 去掉 message_type 字段
         unset($data['control_message_type'], $data['chat_message_type'], $data['intermediate_message_type']);
-        // 如果data为空，则去掉为每条message附近的 attachments 和 instructs
+        // ifdata为null，则去掉为每条message附近的 attachments 和 instructs
         foreach (['attachments', 'instructs'] as $field) {
             if (empty($data[$field])) {
                 unset($data[$field]);
@@ -74,7 +74,7 @@ abstract class DelightfulMessageStruct extends AbstractEntity implements Message
      */
     public function setInstructs(?array $instructs): void
     {
-        // 确保 instructs 数组中的每个元素都是 ChatInstruction 对象
+        // 确保 instructs array中的每个元素都是 ChatInstruction object
         if ($instructs !== null) {
             foreach ($instructs as $key => $instruct) {
                 /* @phpstan-ignore-next-line */

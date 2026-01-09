@@ -29,7 +29,7 @@ class EnvManager
             return;
         }
         if (empty($envId)) {
-            // 尝试get当前环境的环境 ID.
+            // 尝试getwhen前环境的环境 ID.
             $envId = $baseDataIsolation->getEnvId();
         }
 

@@ -10,7 +10,7 @@ namespace App\Domain\Permission\Entity\ValueObject\Query;
 use App\Infrastructure\Core\AbstractQuery;
 
 /**
- * 子管理员列表query对象.
+ * 子管理员列表queryobject.
  *
  * 使用示例：
  * $query = new SubAdminQuery([
@@ -27,7 +27,7 @@ class SubAdminQuery extends AbstractQuery
     private ?int $status = null;
 
     /**
-     * 构造函数支持从数组批量初始化属性（继承自 AbstractObject）。
+     * 构造函数支持从array批量初始化属性（继承自 AbstractObject）。
      */
 
     /* -------------------- getter / setter -------------------- */
@@ -54,7 +54,7 @@ class SubAdminQuery extends AbstractQuery
     }
 
     /**
-     * 将query对象转换为仓储层可识别的filter数组。
+     * 将queryobject转换为仓储层可识别的filterarray。
      */
     public function toFilters(): array
     {

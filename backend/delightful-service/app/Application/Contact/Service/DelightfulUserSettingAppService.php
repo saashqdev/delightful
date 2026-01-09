@@ -119,7 +119,7 @@ class DelightfulUserSettingAppService extends AbstractContactAppService
     }
 
     /**
-     * 保存当前organizationinformation（通过 delightfulId）.
+     * 保存when前organizationinformation（通过 delightfulId）.
      * @param string $delightfulId 账号标识
      * @param array<string, mixed> $organizationData organizationinformationdata
      */
@@ -133,7 +133,7 @@ class DelightfulUserSettingAppService extends AbstractContactAppService
     }
 
     /**
-     * get当前organizationinformation（通过 delightfulId）.
+     * getwhen前organizationinformation（通过 delightfulId）.
      * @param string $delightfulId 账号标识
      * @return null|array<string, mixed>
      */

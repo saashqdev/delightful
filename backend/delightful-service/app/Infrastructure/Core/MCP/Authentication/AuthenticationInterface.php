@@ -18,7 +18,7 @@ interface AuthenticationInterface
     /**
      * 验证请求的身份信息.
      *
-     * @throws InvalidParamsException 当验证失败时抛出
+     * @throws InvalidParamsException when验证失败时抛出
      */
     public function authenticate(MessageInterface $request): void;
 }

@@ -24,7 +24,7 @@ class DelightfulFlowApiChatDTO extends AbstractFlowDTO
     public array $params = [];
 
     /**
-     * 指令列table.
+     * instruction列table.
      *
      * @var InstructionValue[]
      */
@@ -89,7 +89,7 @@ class DelightfulFlowApiChatDTO extends AbstractFlowDTO
     }
 
     /**
-     * get指令列table.
+     * getinstruction列table.
      *
      * @return InstructionValue[]
      */
@@ -174,7 +174,7 @@ class DelightfulFlowApiChatDTO extends AbstractFlowDTO
     }
 
     /**
-     * setting指令列table.
+     * settinginstruction列table.
      */
     public function setInstruction(?array $instruction): void
     {

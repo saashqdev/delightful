@@ -127,8 +127,8 @@ JSON,
 /* "value": {
      "type": "object",
      "key": "value",
-     "title": "自定义重复参数",
-     "description": "自定义重复参数",
+     "title": "自定义重复parameter",
+     "description": "自定义重复parameter",
      "required": [
    "unit",
    "deadline",

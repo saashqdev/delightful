@@ -24,7 +24,7 @@ enum TriggerType: int
     // 定时
     case Routine = 3;
 
-    // 参数调用
+    // parameter调用
     case ParamCall = 4;
 
     // 循环体开始节点

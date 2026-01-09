@@ -107,7 +107,7 @@ class KnowledgeSimilarityManager
                     $knowledgeBaseEntity,
                     $pointIds
                 );
-                // 还需要delete相同 point_id 的内容，因为目前允许重复
+                // 还needdelete相同 point_id 的内容，因为目前允许重复
                 $knowledgeBaseEntity->getVectorDBDriver()->removeByFilter(
                     $knowledgeBaseEntity->getCollectionName(),
                     $filter->getMetadataFilter(),

@@ -38,7 +38,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         }
 
         $result = $this->getChatMessageResult($executionData);
-        // content 或者 files 同时为空
+        // content or files 同时为null
         if ($result['content'] === '' && empty($result['files'])) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.start.content_empty');
         }

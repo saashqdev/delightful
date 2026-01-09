@@ -25,7 +25,7 @@ class DelightfulChatAggregateSearchReqDTO
 
     public string $conversationId;
 
-    public string $topicId = ''; // 话题 id，可以为空
+    public string $topicId = ''; // 话题 id，can为null
 
     public bool $getDetail = true;
 

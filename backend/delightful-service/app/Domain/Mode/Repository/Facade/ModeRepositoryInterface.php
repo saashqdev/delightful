@@ -15,17 +15,17 @@ use App\Infrastructure\Core\ValueObject\Page;
 interface ModeRepositoryInterface
 {
     /**
-     * 根据IDget模式.
+     * 根据IDgetmode.
      */
     public function findById(ModeDataIsolation $dataIsolation, int|string $id): ?ModeEntity;
 
     /**
-     * 根据标识符get模式.
+     * 根据标识符getmode.
      */
     public function findByIdentifier(ModeDataIsolation $dataIsolation, string $identifier): ?ModeEntity;
 
     /**
-     * get默认模式.
+     * get默认mode.
      */
     public function findDefaultMode(ModeDataIsolation $dataIsolation): ?ModeEntity;
 
@@ -35,12 +35,12 @@ interface ModeRepositoryInterface
     public function queries(ModeDataIsolation $dataIsolation, ModeQuery $query, Page $page): array;
 
     /**
-     * 保存模式.
+     * 保存mode.
      */
     public function save(ModeDataIsolation $dataIsolation, ModeEntity $modeEntity): ModeEntity;
 
     /**
-     * delete模式.
+     * deletemode.
      */
     public function delete(ModeDataIsolation $dataIsolation, string $id): bool;
 
@@ -50,17 +50,17 @@ interface ModeRepositoryInterface
     public function isIdentifierUnique(ModeDataIsolation $dataIsolation, string $identifier, ?string $excludeId = null): bool;
 
     /**
-     * get所有启用的模式.
+     * get所有启用的mode.
      */
     public function findEnabledModes(ModeDataIsolation $dataIsolation): array;
 
     /**
-     * 根据跟随模式IDget模式列表.
+     * 根据跟随modeIDgetmode列表.
      */
     public function findByFollowModeId(ModeDataIsolation $dataIsolation, string $followModeId): array;
 
     /**
-     * update模式status
+     * updatemodestatus
      */
     public function updateStatus(ModeDataIsolation $dataIsolation, string $id, bool $status): bool;
 }

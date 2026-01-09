@@ -10,7 +10,7 @@ namespace App\Infrastructure\Core\MCP\Server\Handler\Method;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * tool列table方法处理器.
+ * tool列tablemethod处理器.
  */
 class ToolListHandler extends AbstractMethodHandler
 {

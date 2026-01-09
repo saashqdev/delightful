@@ -31,12 +31,12 @@ class AsrRedisKeys
     public const SUMMARY_LOCK = 'asr:summary:task:%s';
 
     /**
-     * 任务status扫描模式.
+     * 任务status扫描mode.
      */
     public const TASK_SCAN_PATTERN = 'asr:task:*';
 
     /**
-     * 心跳扫描模式.
+     * 心跳扫描mode.
      */
     public const HEARTBEAT_SCAN_PATTERN = 'asr:heartbeat:*';
 

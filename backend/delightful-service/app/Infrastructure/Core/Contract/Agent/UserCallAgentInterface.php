@@ -17,15 +17,15 @@ interface UserCallAgentInterface
     public function process(UserCallAgentEvent $event): void;
 
     /**
-     * 判断当前处理器是否可以处理该 AI Code.
+     * 判断when前处理器是否can处理该 AI Code.
      */
     public function canHandle(string $aiCode): bool;
 
     /**
      * get处理器优先级.
      *
-     * 数字越大优先级越高，默认为0
-     * 企业版可以return更高的优先级以覆盖默认实现
+     * number越大优先级越高，默认为0
+     * 企业版canreturn更高的优先级以覆盖默认实现
      */
     public static function getPriority(): int;
 }

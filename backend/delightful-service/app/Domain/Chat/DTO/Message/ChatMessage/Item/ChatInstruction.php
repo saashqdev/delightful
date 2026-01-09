@@ -10,17 +10,17 @@ namespace App\Domain\Chat\DTO\Message\ChatMessage\Item;
 use App\Domain\Chat\Entity\AbstractEntity;
 
 /**
- * 聊天指令实体类，根据 proto 定义.
+ * 聊天instruction实体类，根据 proto 定义.
  */
 class ChatInstruction extends AbstractEntity
 {
     /**
-     * 指令值.
+     * instruction值.
      */
     protected string $value = '';
 
     /**
-     * 指令type.
+     * instructiontype.
      */
     protected ?InstructionConfig $instruction = null;
 
@@ -51,7 +51,7 @@ class ChatInstruction extends AbstractEntity
                 $this->instruction = new InstructionConfig($instruction);
             /* @phpstan-ignore-next-line */
             } elseif (! $instruction instanceof InstructionConfig) {
-                // 如果不是数组也不是 InstructionConfig 对象，则createone空的 InstructionConfig 对象
+                // if不是array也不是 InstructionConfig object，则createonenull的 InstructionConfig object
                 $this->instruction = new InstructionConfig([]);
             }
         } else {

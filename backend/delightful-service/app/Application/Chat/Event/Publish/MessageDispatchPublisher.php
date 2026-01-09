@@ -14,7 +14,7 @@ use Hyperf\Amqp\Annotation\Producer;
 use Hyperf\Amqp\Message\ProducerMessage;
 
 /**
- * message分发模块,可能需要根据oneseq,生成one或者多个seq.
+ * message分发模块,可能need根据oneseq,生成oneor多个seq.
  */
 #[Producer]
 class MessageDispatchPublisher extends ProducerMessage

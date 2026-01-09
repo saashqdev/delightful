@@ -16,7 +16,7 @@ class ClientStreamSequenceResponse extends AbstractEntity
     // 要update目标 seqId 的content
     protected string $targetSeqId;
 
-    // 为了实现丢包重传，需要记录当前的seqId。一定单调递增。
+    // 为了实现丢包重传，need记录when前的seqId。一定单调递增。
     protected ?int $seqId;
 
     // 大模型的总结

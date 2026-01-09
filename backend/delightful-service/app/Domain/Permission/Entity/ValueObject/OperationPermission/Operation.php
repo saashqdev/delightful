@@ -94,7 +94,7 @@ enum Operation: int
 
     public function gt(?Operation $operation = null): bool
     {
-        // 比较permission，如果当前permission大于传入的permission则returntrue
+        // 比较permission，ifwhen前permission大于传入的permission则returntrue
         $level = [
             self::Owner,
             self::Admin,

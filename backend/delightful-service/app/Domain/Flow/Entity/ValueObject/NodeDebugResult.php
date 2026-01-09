@@ -41,7 +41,7 @@ class NodeDebugResult extends AbstractValueObject
     protected string $nodeVersion = '';
 
     /**
-     *  节点执行参数.
+     *  节点执行parameter.
      */
     protected array $params = [];
 
@@ -276,7 +276,7 @@ class NodeDebugResult extends AbstractValueObject
     public function toArray(): array
     {
         $loopDebugResults = $this->loopDebugResults ?? [];
-        // 有多个结果时，才需要有 loop_debug_results
+        // 有多个结果时，才need有 loop_debug_results
         if (count($loopDebugResults) <= 1) {
             $loopDebugResults = [];
         }
@@ -303,7 +303,7 @@ class NodeDebugResult extends AbstractValueObject
     public function toDesensitizationArray(): array
     {
         $loopDebugResults = $this->loopDebugResults ?? [];
-        // 有多个结果时，才需要有 loop_debug_results
+        // 有多个结果时，才need有 loop_debug_results
         if (count($loopDebugResults) <= 1) {
             $loopDebugResults = [];
         }

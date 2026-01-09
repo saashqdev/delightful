@@ -14,7 +14,7 @@ use App\Infrastructure\Util\Tiptap\CustomExtension\ValueObject\SwitchStatus;
 use Hyperf\Codec\Json;
 
 /**
- * 富文本的快捷指令.
+ * 富文本的快捷instruction.
  */
 class QuickInstructionNode extends AbstractCustomNode
 {
@@ -69,19 +69,19 @@ class QuickInstructionNode extends AbstractCustomNode
                 return htmlspecialchars($nodeForArray['text'] ?? '', ENT_QUOTES, 'UTF-8');
             case InstructionType::SINGLE_CHOICE:
             default:
-                // 前端传的 value 是 id 因此需要处理一下
+                // 前端传的 value 是 id 因此need处理一下
                 $value = $nodeForArray['attrs']['value'] ?? '';
                 $instruction = $nodeForArray['attrs']['instruction'] ?? [];
                 $values = $instruction['values'] ?? [];
 
-                // 使用数组filter和键值查找替代循环
+                // 使用arrayfilter和键值查找替代循环
                 if (! empty($values) && is_array($values)) {
-                    // 查找匹配 id 的指令值
+                    // 查找匹配 id 的instruction值
                     $matchedValues = array_filter($values, function ($item) use ($value) {
                         return isset($item['id']) && $item['id'] == $value;
                     });
 
-                    // 如果找到匹配项，取第one匹配项的 value
+                    // if找到匹配项，取第one匹配项的 value
                     if (! empty($matchedValues)) {
                         $firstMatch = reset($matchedValues);
                         $value = $firstMatch['value'] ?? $value;

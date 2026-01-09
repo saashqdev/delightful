@@ -24,7 +24,7 @@ class ProviderModelDetailDTO extends AbstractDTO
 
     protected string $serviceProviderConfigId; // 服务商configurationID
 
-    protected string $modelId = ''; // 模型真实ID
+    protected string $modelId = ''; // 模型true实ID
 
     protected string $name;
 

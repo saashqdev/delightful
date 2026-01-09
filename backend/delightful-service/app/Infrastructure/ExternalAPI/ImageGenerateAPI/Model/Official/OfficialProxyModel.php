@@ -156,7 +156,7 @@ class OfficialProxyModel extends AbstractImageGenerate
 
     protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
-        // 官方代理不使用此方法，直接使用 generateImageOpenAIFormat
+        // 官方代理不使用此method，直接使用 generateImageOpenAIFormat
         throw new Exception('OfficialProxyModel does not support generateImageInternal method');
     }
 }

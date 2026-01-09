@@ -22,7 +22,7 @@ enum DelightfulFlowMessageType: string
     case Audio = 'audio';
     case File = 'file';
 
-    // 这个是暂时的，本身应该不会存在这个，利用卡片message的形式来实现才对
+    // 这个是暂时的，本身should不会存在这个，利用卡片message的形式来实现才对
     case AIMessage = 'ai_message';
 
     public function isAttachment(): bool

@@ -61,11 +61,11 @@ PHP;
     {
         $code = <<<'PHP'
 $response = trim($result);
-// 如果 $response 以 ```json 开头则去除
+// if $response 以 ```json 开头则去除
 if (str_starts_with($response, '```json')) {
     $response = substr($response, 7);
 }
-// 如果 $response 以 ``` 结尾则去除
+// if $response 以 ``` 结尾则去除
 if (str_ends_with($response, '```')) {
     $response = substr($response, 0, -3);
 }
@@ -73,7 +73,7 @@ var_dump($response);
 $response = trim($response, '\n');
 var_dump($response);
 $response  = str_replace('\\"', '"', $response);
-// 如果 $response 本身就是 JSON 格式的，那么直接return
+// if $response 本身就是 JSON 格式的，那么直接return
 $decodedJson = json_decode($response, true);
 echo PHP_EOL;
 return [

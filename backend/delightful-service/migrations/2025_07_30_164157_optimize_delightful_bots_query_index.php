@@ -12,7 +12,7 @@ return new class extends Migration {
     /**
      * Run the migrations.
      * 优化 delightful_bots 和 delightful_bot_versions 表的多个query场景性能
-     * 添加多个复合索引支持不同的query模式.
+     * 添加多个复合索引支持不同的querymode.
      */
     public function up(): void
     {
@@ -22,7 +22,7 @@ return new class extends Migration {
             // 对应SQL: delightful_bots.bot_version_id = delightful_bot_versions.id AND delightful_bots.status = '7'
             $table->index(['bot_version_id', 'status'], 'idx_bot_version_status');
 
-            // 2. 优化企业助理query (queriesAgents方法)
+            // 2. 优化企业助理query (queriesAgentsmethod)
             // 对应SQL: WHERE organization_code = ? AND status = ?
             $table->index(['organization_code', 'status'], 'idx_organization_status');
         });

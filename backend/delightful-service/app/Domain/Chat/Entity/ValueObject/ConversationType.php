@@ -21,7 +21,7 @@ enum ConversationType: int
     // 群聊
     case Group = 2;
 
-    // 系统message
+    // systemmessage
     case System = 3;
 
     // 云document

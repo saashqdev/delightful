@@ -96,7 +96,7 @@ class ExcelLoaderNodeRunner extends NodeRunner
                 while (($row = $sheet->nextRow()) !== null) {
                     ++$rowIndex;
                     if (empty($row)) {
-                        // 跳过空白行
+                        // 跳过null白行
                         continue;
                     }
 

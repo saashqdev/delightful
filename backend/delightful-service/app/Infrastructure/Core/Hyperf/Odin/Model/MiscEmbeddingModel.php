@@ -74,11 +74,11 @@ class MiscEmbeddingModel extends OpenAIModel
      */
     private function createClient(array $config, ApiOptions $apiOptions, LoggerInterface $logger): Client
     {
-        // 验证必要的configuration参数
+        // 验证必要的configurationparameter
         $apiKey = $config['api_key'] ?? '';
         $baseUrl = $config['base_url'] ?? '';
 
-        // createconfiguration对象
+        // createconfigurationobject
         $clientConfig = new OpenAIConfig(
             apiKey: $apiKey,
             organization: '',

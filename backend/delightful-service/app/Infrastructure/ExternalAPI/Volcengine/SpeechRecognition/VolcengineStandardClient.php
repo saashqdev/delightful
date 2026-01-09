@@ -451,7 +451,7 @@ class VolcengineStandardClient
      * 验证火山引擎API响应status码
      * 只用于提交任务时验证是否success提交（20000000）.
      *
-     * @param array $responseHeaders 响应头数组
+     * @param array $responseHeaders 响应头array
      * @param string $requestId 请求ID，用于日志记录
      */
     private function validateApiStatusCode(array $responseHeaders, string $requestId): void

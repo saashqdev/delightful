@@ -40,22 +40,22 @@ class DelightfulFlowMemoryHistoryEntity extends AbstractEntity
     public function prepareForCreation(): void
     {
         if (empty($this->conversationId)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'conversationId 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'conversationId cannot为null');
         }
         if (empty($this->requestId)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'requestId 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'requestId cannot为null');
         }
         if (empty($this->role)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'role 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'role cannot为null');
         }
         if (empty($this->type)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'type 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'type cannot为null');
         }
         if (empty($this->content)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'content 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'content cannot为null');
         }
         if (empty($this->createdUid)) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'createdUid 不能为空');
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'createdUid cannot为null');
         }
         if (empty($this->createdAt)) {
             $this->createdAt = new DateTime();

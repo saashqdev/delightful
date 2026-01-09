@@ -200,7 +200,7 @@ class AISearchCommonQueryVo
         return $this;
     }
 
-    // delightful api 二期参数
+    // delightful api 二期parameter
     public function getDelightfulApiBusinessParam(): array
     {
         return [

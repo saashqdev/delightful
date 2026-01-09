@@ -28,7 +28,7 @@ class AdminModeApi extends AbstractApi
     }
 
     /**
-     * get模式列表.
+     * getmode列表.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::QUERY)]
     public function getModes(RequestInterface $request)
@@ -43,7 +43,7 @@ class AdminModeApi extends AbstractApi
     }
 
     /**
-     * get模式详情.
+     * getmode详情.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::QUERY)]
     public function getMode(RequestInterface $request, string $id)
@@ -60,7 +60,7 @@ class AdminModeApi extends AbstractApi
     }
 
     /**
-     * create模式.
+     * createmode.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::EDIT)]
     public function createMode(CreateModeRequest $request)
@@ -71,7 +71,7 @@ class AdminModeApi extends AbstractApi
     }
 
     /**
-     * update模式.
+     * updatemode.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::EDIT)]
     public function updateMode(UpdateModeRequest $request, string $id)
@@ -82,7 +82,7 @@ class AdminModeApi extends AbstractApi
     }
 
     /**
-     * update模式status
+     * updatemodestatus
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::EDIT)]
     public function updateModeStatus(RequestInterface $request, string $id)
@@ -94,7 +94,7 @@ class AdminModeApi extends AbstractApi
     }
 
     /**
-     * get默认模式.
+     * get默认mode.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODE], DelightfulOperationEnum::QUERY)]
     public function getDefaultMode()

@@ -57,7 +57,7 @@ interface DelightfulChatTopicRepositoryInterface
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array;
 
     /**
-     * 通过topic_idget话题information（不需要conversation_id）.
+     * 通过topic_idget话题information（不needconversation_id）.
      */
     public function getTopicByTopicId(string $topicId): ?DelightfulTopicEntity;
 
@@ -66,7 +66,7 @@ interface DelightfulChatTopicRepositoryInterface
     /**
      * Get topics by topic ID.
      * @param string $topicId 话题ID
-     * @return DelightfulTopicEntity[] 话题实体数组
+     * @return DelightfulTopicEntity[] 话题实体array
      */
     public function getTopicsByTopicId(string $topicId): array;
 
@@ -75,7 +75,7 @@ interface DelightfulChatTopicRepositoryInterface
      * @param string $conversationId conversationID
      * @param string $topicId 话题ID
      * @param int $maxSeqId 最大序列ID（包含该ID）
-     * @return DelightfulTopicMessageEntity[] 话题message实体数组
+     * @return DelightfulTopicMessageEntity[] 话题message实体array
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array;
 }

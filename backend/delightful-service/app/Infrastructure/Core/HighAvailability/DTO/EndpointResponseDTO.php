@@ -28,7 +28,7 @@ class EndpointResponseDTO extends AbstractDTO
     protected string $endpointId;
 
     /**
-     * 请求参数长度.
+     * 请求parameter长度.
      */
     protected int $requestLength;
 

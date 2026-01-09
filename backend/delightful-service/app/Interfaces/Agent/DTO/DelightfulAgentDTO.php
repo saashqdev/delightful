@@ -20,7 +20,7 @@ class DelightfulAgentDTO extends AbstractDTO
 
     public ?string $botVersionId = null;
 
-    // 交互指令
+    // 交互instruction
     public ?array $instruct = null;
 
     /**

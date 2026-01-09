@@ -13,7 +13,7 @@ use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
- * 当前表先延用之前的表，然后映射到通用的实体中，全面上线后，需要回来更改字段名.
+ * when前表先延用之前的表，then映射到通用的实体中，全面上线后，need回来更改字段名.
  * @property int $id
  * @property string $organization_code
  * @property string $code

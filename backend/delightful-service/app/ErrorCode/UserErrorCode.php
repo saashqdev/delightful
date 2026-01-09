@@ -70,7 +70,7 @@ enum UserErrorCode: int
     #[ErrorMessage('user.token_not_found')]
     case TOKEN_NOT_FOUND = 2179;
 
-    // input参数error
+    // inputparametererror
     #[ErrorMessage('user.input_param_error')]
     case INPUT_PARAM_ERROR = 2180;
 

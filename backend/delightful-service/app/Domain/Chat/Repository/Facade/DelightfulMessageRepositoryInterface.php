@@ -33,14 +33,14 @@ interface DelightfulMessageRepositoryInterface
 
     /**
      * Get messages by delightful message IDs.
-     * @param array $delightfulMessageIds Delightful message ID数组
-     * @return DelightfulMessageEntity[] message实体数组
+     * @param array $delightfulMessageIds Delightful message IDarray
+     * @return DelightfulMessageEntity[] message实体array
      */
     public function getMessagesByDelightfulMessageIds(array $delightfulMessageIds): array;
 
     /**
      * Batch create messages.
-     * @param array $messagesData messagedata数组
+     * @param array $messagesData messagedataarray
      * @return bool 是否create成功
      */
     public function batchCreateMessages(array $messagesData): bool;

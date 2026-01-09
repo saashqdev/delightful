@@ -17,6 +17,6 @@ interface DelightfulUserIdRelationRepositoryInterface
     // query
     public function getRelationIdExists(DelightfulUserIdRelationEntity $userIdRelationEntity): array;
 
-    // id_type,relation_type,relation_value query user_id,然后去queryuserinformation
+    // id_type,relation_type,relation_value query user_id,then去queryuserinformation
     public function getUerIdByRelation(DelightfulUserIdRelationEntity $userIdRelationEntity): string;
 }

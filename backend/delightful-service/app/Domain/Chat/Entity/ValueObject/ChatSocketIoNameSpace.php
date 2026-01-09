@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject;
 
 /**
- * SocketIo命名空间.
+ * SocketIo命名null间.
  */
 enum ChatSocketIoNameSpace: string
 {

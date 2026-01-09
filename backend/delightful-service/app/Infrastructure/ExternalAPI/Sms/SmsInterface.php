@@ -30,7 +30,7 @@ interface SmsInterface
     public function getContentLanguage(SmsStruct $smsStruct): string;
 
     /**
-     * get短信签名. 需要多语种适配,语种兜底!
+     * get短信签名. need多语种适配,语种兜底!
      */
     public function getSign(SmsStruct $smsStruct): string;
 }

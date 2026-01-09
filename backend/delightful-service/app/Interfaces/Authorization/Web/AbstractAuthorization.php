@@ -14,7 +14,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 abstract class AbstractAuthorization extends UnderlineObjectJsonSerializable implements Authenticatable
 {
     /**
-     * 通过对象的方法调用操作auth,而不是直接使用协程,减少迭代和理解成本.
+     * 通过object的method调用操作auth,而不是直接使用协程,减少迭代和理解成本.
      */
     public function setUserAuthToContext(string $key): void
     {

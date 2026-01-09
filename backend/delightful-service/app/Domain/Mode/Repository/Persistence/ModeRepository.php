@@ -63,7 +63,7 @@ class ModeRepository extends AbstractRepository implements ModeRepositoryInterfa
             $builder->where('status', $query->getStatus());
         }
 
-        // 排序：is_default优先（默认mode在开头），然后sortfield，最后created_at
+        // 排序：is_default优先（默认mode在开头），thensortfield，最后created_at
         $builder->orderBy('is_default', 'desc')
             ->orderBy('sort', $query->getSortDirection())
             ->orderBy('created_at', 'desc');

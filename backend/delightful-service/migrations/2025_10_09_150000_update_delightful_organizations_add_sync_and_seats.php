@@ -24,15 +24,15 @@ return new class extends Migration {
                 $table->unsignedInteger('seats')->default(0)->comment('席位数量')->after('number');
             }
 
-            // 同步相关字段
+            // 同相关字段
             if (! Schema::hasColumn('delightful_organizations', 'sync_type')) {
-                $table->string('sync_type', 32)->default('')->comment('同步type')->after('seats');
+                $table->string('sync_type', 32)->default('')->comment('同type')->after('seats');
             }
             if (! Schema::hasColumn('delightful_organizations', 'sync_status')) {
-                $table->tinyInteger('sync_status')->default(0)->comment('同步status')->after('sync_type');
+                $table->tinyInteger('sync_status')->default(0)->comment('同status')->after('sync_type');
             }
             if (! Schema::hasColumn('delightful_organizations', 'sync_time')) {
-                $table->timestamp('sync_time')->nullable()->comment('同步时间')->after('sync_status');
+                $table->timestamp('sync_time')->nullable()->comment('同时间')->after('sync_status');
             }
 
             // 索引：type（organizationtype）

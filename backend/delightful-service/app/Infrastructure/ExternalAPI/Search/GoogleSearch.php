@@ -22,7 +22,7 @@ class GoogleSearch
 
     private const int DEFAULT_SEARCH_ENGINE_TIMEOUT = 5;
 
-    private const int REFERENCE_COUNT = 8; // 替换为你需要的引用数量
+    private const int REFERENCE_COUNT = 8; // 替换为你need的引用数量
 
     public function __construct(protected readonly StdoutLoggerInterface $logger, protected readonly ConfigInterface $config)
     {

@@ -50,7 +50,7 @@ class DelightfulFlowToolSetAppService extends AbstractFlowAppService
         // 默认是create
         $operation = Operation::Owner;
         if (! $savingDelightfulFLowToolSetEntity->shouldCreate()) {
-            // 修改需要检查permission
+            // 修改need检查permission
             $operation = $this->operationPermissionAppService->getOperationByResourceAndUser(
                 $permissionDataIsolation,
                 ResourceType::ToolSet,

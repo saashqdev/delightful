@@ -62,7 +62,7 @@ class DelightfulFlowWaitMessageRepository extends DelightfulFlowAbstractReposito
             ->orderBy('id', 'asc')
             ->get();
 
-        // 使用foreach循环代替map方法
+        // 使用foreach循环代替mapmethod
         $result = [];
         foreach ($models as $model) {
             $result[] = DelightfulFlowWaitMessageFactory::modelToEntity($model);

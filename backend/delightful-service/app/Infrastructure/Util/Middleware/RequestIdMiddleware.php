@@ -17,7 +17,7 @@ class RequestIdMiddleware implements MiddlewareInterface
 {
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // 如果外部有request-id，则直接使用
+        // if外部有request-id，则直接使用
         $requestId = $request->getHeaderLine('request-id');
         if ($requestId) {
             CoContext::setRequestId($requestId);

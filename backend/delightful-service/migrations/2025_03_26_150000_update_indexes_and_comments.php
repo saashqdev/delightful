@@ -13,7 +13,7 @@ class UpdateIndexesAndComments extends Migration
 {
     public function up(): void
     {
-        // 清空 delightful_api_premium_endpoint_statistics 表data
+        // 清null delightful_api_premium_endpoint_statistics 表data
         Db::table('delightful_api_premium_endpoint_statistics')->truncate();
 
         // 修改 delightful_api_premium_endpoint_statistics 表的 statistics_level 注释

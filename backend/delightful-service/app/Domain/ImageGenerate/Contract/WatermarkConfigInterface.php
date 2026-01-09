@@ -19,7 +19,7 @@ interface WatermarkConfigInterface
      * get水印configuration.
      *
      * @param null|string $orgCode organization代码，用于判断是否启用水印
-     * @return null|WatermarkConfig return水印configuration，如果为null则不添加水印
+     * @return null|WatermarkConfig return水印configuration，if为null则不添加水印
      */
     public function getWatermarkConfig(?string $orgCode = null): ?WatermarkConfig;
 }

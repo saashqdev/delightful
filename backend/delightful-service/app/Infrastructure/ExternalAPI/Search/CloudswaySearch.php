@@ -53,7 +53,7 @@ class CloudswaySearch
         string $freshness = '',
         string $setLang = ''
     ): array {
-        // 构建query参数
+        // 构建queryparameter
         $queryParams = [
             'q' => $query,
             'count' => $count,
@@ -67,7 +67,7 @@ class CloudswaySearch
             $requestUrl = rtrim($basePath, '/') . '/search/' . trim($endpoint, '/') . '/smart';
         }
 
-        // 添加可选参数
+        // 添加可选parameter
         if (! empty($freshness)) {
             $queryParams['freshness'] = $freshness;
         }

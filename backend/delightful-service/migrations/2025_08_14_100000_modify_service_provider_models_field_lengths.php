@@ -23,7 +23,7 @@ return new class extends Migration {
         Schema::table('service_provider_models', function (Blueprint $table) {
             $table->string('name', 255)->comment('模型名称')->change();
             $table->string('model_version', 255)->comment('模型在服务商下的名称')->change();
-            $table->string('model_id', 255)->comment('模型真实ID')->change();
+            $table->string('model_id', 255)->comment('模型true实ID')->change();
         });
     }
 
@@ -41,7 +41,7 @@ return new class extends Migration {
         Schema::table('service_provider_models', function (Blueprint $table) {
             $table->string('name', 50)->comment('模型名称')->change();
             $table->string('model_version', 50)->comment('模型在服务商下的名称')->change();
-            $table->string('model_id', 50)->comment('模型真实ID')->change();
+            $table->string('model_id', 50)->comment('模型true实ID')->change();
         });
     }
 };

@@ -27,7 +27,7 @@ class BusinessExceptionHandler extends AbstractExceptionHandler
             'error' => [],
         ]);
         if ($throwable instanceof SocketException) {
-            // tcp链接正常断开,不需要打印exception
+            // tcp链接正常断开,不need打印exception
             return $response;
         }
         $this->logger->error(sprintf(

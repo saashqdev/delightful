@@ -43,7 +43,7 @@ readonly class KnowledgeBaseSyncSubscriber implements ListenerInterface
         }
         $knowledge = $event->delightfulFlowKnowledgeEntity;
         $dataIsolation = $event->dataIsolation;
-        // 如果是基础知识库type，则传知识库create者，避免permission不足
+        // if是基础知识库type，则传知识库create者，避免permission不足
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }
@@ -95,7 +95,7 @@ readonly class KnowledgeBaseSyncSubscriber implements ListenerInterface
             $logger->error($throwable->getMessage() . PHP_EOL . $throwable->getTraceAsString());
             $knowledge->setSyncStatus(KnowledgeSyncStatus::SyncFailed);
             $knowledge->setSyncStatusMessage($throwable->getMessage());
-            // 同步failed，回退version
+            // 同failed，回退version
             $knowledge->setVersion(max(1, $knowledge->getVersion() - 1));
             $changed = true;
         }

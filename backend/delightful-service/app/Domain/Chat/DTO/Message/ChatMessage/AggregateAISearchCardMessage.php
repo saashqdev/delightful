@@ -105,7 +105,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
     public function setLlmResponse(?string $llmResponse): self
     {
         $this->llmResponse = $llmResponse;
-        // 外部实现还是读的 content，这里也同步给 content 赋值
+        // 外部实现还是读的 content，这里也同给 content 赋值
         isset($llmResponse) && $this->content = $llmResponse;
         return $this;
     }
@@ -243,7 +243,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
     public function setContent(string $content): static
     {
         $this->setLlmResponse($content);
-        // 外部实现还是读的 content，这里也同步给 content 赋值
+        // 外部实现还是读的 content，这里也同给 content 赋值
         $this->content = $content;
         return $this;
     }

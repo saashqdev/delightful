@@ -13,7 +13,7 @@ use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 /**
- * 暂时没啥用,留着当个模板
+ * 暂时没啥用,留着when个模板
  */
 class WebSocketAuthMiddleware implements MiddlewareInterface
 {

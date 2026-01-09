@@ -12,7 +12,7 @@ use App\Domain\Chat\Entity\AbstractEntity;
 class DelightfulContext extends AbstractEntity
 {
     /**
-     * user当前的organization编码
+     * userwhen前的organization编码
      */
     protected string $organizationCode;
 

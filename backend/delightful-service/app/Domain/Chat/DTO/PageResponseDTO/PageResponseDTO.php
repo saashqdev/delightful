@@ -20,7 +20,7 @@ class PageResponseDTO extends AbstractDTO
     protected string $pageToken = '';
 
     /**
-     * 响应data响应，不限制数组中的元素type.
+     * 响应data响应，不限制array中的元素type.
      */
     protected array $items = [];
 

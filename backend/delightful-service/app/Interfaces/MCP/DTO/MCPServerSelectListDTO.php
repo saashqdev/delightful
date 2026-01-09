@@ -35,7 +35,7 @@ class MCPServerSelectListDTO extends AbstractDTO
     public string $type = '';
 
     /**
-     * 需要的动态field.
+     * need的动态field.
      *
      * @var array<array<string, string>>
      */

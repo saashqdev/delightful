@@ -67,7 +67,7 @@ class SpeechSubmitDTO extends AbstractRequestDTO
     }
 
     /**
-     * 生成完整的火山引擎请求参数（不包含app字段，app字段由基础设施层组装）.
+     * 生成完整的火山引擎请求parameter（不包含app字段，app字段由基础设施层组装）.
      */
     public function toVolcengineRequestData(): array
     {

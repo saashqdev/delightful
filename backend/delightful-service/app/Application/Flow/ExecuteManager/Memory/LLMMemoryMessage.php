@@ -66,7 +66,7 @@ class LLMMemoryMessage
     private string $requestId = '';
 
     /**
-     * @var string messagetype字符串
+     * @var string messagetypestring
      */
     private string $messageTypeString = '';
 

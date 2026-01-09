@@ -18,7 +18,7 @@ class JsonStreamCachedDTO extends AbstractEntity
     protected string $receiveMessageId;
 
     /**
-     * 收发双方的 message_id 不同，但是 delightful_message_id 相同。
+     * 收发双方的 message_id 不同，but delightful_message_id 相同。
      */
     protected string $delightfulMessageId;
 

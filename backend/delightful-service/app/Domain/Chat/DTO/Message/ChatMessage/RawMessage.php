@@ -13,7 +13,7 @@ use App\Domain\Chat\DTO\Message\StreamMessageInterface;
 use App\Domain\Chat\Entity\ValueObject\MessageType\ChatMessageType;
 
 /**
- * 原始message，可快速用于一些需要临时转发的数据格式，原样output.
+ * 原始message，可快速用于一些need临时转发的数据格式，原样output.
  */
 class RawMessage extends DelightfulMessageStruct implements StreamMessageInterface
 {

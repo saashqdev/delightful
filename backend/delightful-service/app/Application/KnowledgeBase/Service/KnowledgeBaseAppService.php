@@ -35,7 +35,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
         $delightfulFlowKnowledgeEntity->setCreator($dataIsolation->getCurrentUserId());
 
         $oldKnowledge = null;
-        // 如果具有业务 id，那么就是update了，需要先query出来
+        // if具有业务 id，那么就是update了，need先query出来
         if (! empty($delightfulFlowKnowledgeEntity->getBusinessId())) {
             $oldKnowledge = $this->getByBusinessId($authorization, $delightfulFlowKnowledgeEntity->getBusinessId());
             if ($oldKnowledge) {
@@ -58,7 +58,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
         }
         $modelGatewayMapper = di(ModelGatewayMapper::class);
 
-        // create的才需要setting
+        // create的才needsetting
         if ($delightfulFlowKnowledgeEntity->shouldCreate()) {
             $modelId = $delightfulFlowKnowledgeEntity->getEmbeddingConfig()['model_id'] ?? null;
             if (! $modelId) {

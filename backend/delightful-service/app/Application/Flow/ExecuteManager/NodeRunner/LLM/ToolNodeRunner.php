@@ -47,7 +47,7 @@ class ToolNodeRunner extends AbstractLLMNodeRunner
         }
         $vertexResult->setInput($inputResult);
 
-        //  自定义系统input
+        //  自定义systeminput
         $customSystemInput = $paramsConfig->getCustomSystemInput()?->getFormComponent()?->getForm()?->getKeyValue($executionData->getExpressionFieldData()) ?? [];
         $vertexResult->addDebugLog('custom_system_input', $customSystemInput);
 
@@ -65,7 +65,7 @@ class ToolNodeRunner extends AbstractLLMNodeRunner
         $systemPrompt = $this->buildSystemPrompt($delightfulFlowEntity);
         $paramsConfig->setSystemPrompt($systemPrompt);
 
-        // 一定是忽略当前message
+        // 一定是忽略when前message
         $ignoreMessageIds = [$executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId()];
 
         $memoryManager = $this->createMemoryManager($executionData, $vertexResult, $paramsConfig->getModelConfig(), ignoreMessageIds: $ignoreMessageIds);

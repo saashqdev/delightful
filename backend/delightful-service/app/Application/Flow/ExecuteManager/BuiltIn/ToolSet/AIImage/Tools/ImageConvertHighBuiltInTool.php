@@ -44,7 +44,7 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
     {
         return function (ExecutionData $executionData) {
             if ($executionData->getExecutionType()->isDebug()) {
-                // debug 模式
+                // debug mode
                 return ['image_convert_high: current not support debug model'];
             }
             $args = $executionData->getTriggerData()?->getParams();
@@ -93,8 +93,8 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
         "user_prompt": {
             "type": "string",
             "key": "user_prompt",
-            "title": "user提示词",
-            "description": "user提示词",
+            "title": "userprompt词",
+            "description": "userprompt词",
             "required": null,
             "value": null,
             "encryption": false,
@@ -105,8 +105,8 @@ class ImageConvertHighBuiltInTool extends AbstractAIImageBuiltInTool
         "attachments": {
             "type": "array",
             "key": "attachments",
-            "title": "附件数组",
-            "description": "传入文件列表数组",
+            "title": "附件array",
+            "description": "传入文件列表array",
             "required": null,
             "value": null,
             "encryption": false,

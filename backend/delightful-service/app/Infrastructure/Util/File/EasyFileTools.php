@@ -22,13 +22,13 @@ class EasyFileTools
 
     public static function mergeWavFiles(string $file1, string $blob): void
     {
-        // 如果文件不存在，直接将 blob 写入为新的文件
+        // if文件不存在，直接将 blob 写入为新的文件
         if (! file_exists($file1)) {
             self::saveFile($file1, $blob);
             return;
         }
 
-        // 打开 file1 文件以读写模式
+        // 打开 file1 文件以读写mode
         $wav1 = fopen($file1, 'r+b');
         if (! $wav1) {
             throw new InvalidArgumentException('Failed to open the base file.');

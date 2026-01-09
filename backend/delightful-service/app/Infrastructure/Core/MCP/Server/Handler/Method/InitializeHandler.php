@@ -11,7 +11,7 @@ use App\Infrastructure\Core\MCP\Capabilities;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * 初始化方法处理器.
+ * 初始化method处理器.
  */
 class InitializeHandler extends AbstractMethodHandler
 {

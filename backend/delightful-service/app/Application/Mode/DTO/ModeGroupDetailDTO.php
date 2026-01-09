@@ -24,7 +24,7 @@ class ModeGroupDetailDTO extends AbstractDTO
     protected int $sort;
 
     /**
-     * @var ModeGroupModelDTO[] 该分组对应的模型详细信息数组
+     * @var ModeGroupModelDTO[] 该分组对应的模型详细信息array
      */
     protected array $models = [];
 

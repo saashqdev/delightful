@@ -9,9 +9,9 @@ namespace App\Domain\Chat\Entity\ValueObject;
 
 enum InstructionType: int
 {
-    // 流程指令
+    // 流程instruction
     case Flow = 1;
 
-    // 对话指令
+    // 对话instruction
     case Conversation = 2;
 }

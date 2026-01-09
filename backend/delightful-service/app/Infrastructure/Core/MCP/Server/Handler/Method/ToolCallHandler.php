@@ -11,7 +11,7 @@ use App\Infrastructure\Core\MCP\Exception\InvalidParamsException;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * tool调用方法处理器.
+ * tool调用method处理器.
  */
 class ToolCallHandler extends AbstractMethodHandler
 {

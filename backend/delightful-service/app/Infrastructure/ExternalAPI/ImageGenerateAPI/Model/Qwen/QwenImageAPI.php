@@ -58,7 +58,7 @@ class QwenImageAPI
             'parameters' => [],
         ];
 
-        // setting可选参数
+        // setting可选parameter
         if (isset($params['size'])) {
             $body['parameters']['size'] = $params['size'];
         }
@@ -87,7 +87,7 @@ class QwenImageAPI
     }
 
     /**
-     * 提交图像编辑任务 - 同步调用.
+     * 提交图像编辑任务 - 同调用.
      */
     public function submitEditTask(array $params): array
     {
@@ -122,7 +122,7 @@ class QwenImageAPI
             ];
         }
 
-        // 添加文本提示
+        // 添加文本prompt
         if (isset($params['prompt']) && ! empty($params['prompt'])) {
             $body['input']['messages'][0]['content'][] = [
                 'text' => $params['prompt'],

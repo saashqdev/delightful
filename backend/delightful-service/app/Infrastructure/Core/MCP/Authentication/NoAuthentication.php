@@ -11,7 +11,7 @@ use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
  * 无认证实现.
- * 当系统设计要求有身份验证但不需要实际验证时使用.
+ * whensystem设计要求有身份验证但不need实际验证时使用.
  */
 class NoAuthentication implements AuthenticationInterface
 {
@@ -21,6 +21,6 @@ class NoAuthentication implements AuthenticationInterface
      */
     public function authenticate(MessageInterface $request): void
     {
-        // 空实现，始终允许所有请求通过
+        // null实现，始终允许所有请求通过
     }
 }

@@ -10,12 +10,12 @@ namespace App\Domain\Mode\Entity;
 enum DistributionTypeEnum: int
 {
     /**
-     * 独立configuration模式.
+     * 独立configurationmode.
      */
     case INDEPENDENT = 1;
 
     /**
-     * 继承configuration模式.
+     * 继承configurationmode.
      */
     case INHERITED = 2;
 
@@ -77,7 +77,7 @@ enum DistributionTypeEnum: int
     }
 
     /**
-     * get选项数组（用于前端展示）.
+     * get选项array（用于前端展示）.
      */
     public static function getOptions(): array
     {

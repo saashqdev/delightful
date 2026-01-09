@@ -47,7 +47,7 @@ class VolcengineAPI
     }
 
     /**
-     * 提交异步任务
+     * 提交异任务
      */
     public function submitTask(array $body): array
     {

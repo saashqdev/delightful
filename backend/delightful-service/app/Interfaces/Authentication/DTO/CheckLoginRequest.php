@@ -25,7 +25,7 @@ class CheckLoginRequest extends AbstractDTO
     protected string $password;
 
     /**
-     * organization编码,不传默认为空.
+     * organization编码,不传默认为null.
      */
     protected string $organizationCode = '';
 

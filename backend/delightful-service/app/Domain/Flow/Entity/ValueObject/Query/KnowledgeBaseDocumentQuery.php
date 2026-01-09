@@ -29,7 +29,7 @@ class KnowledgeBaseDocumentQuery extends Query
     protected ?string $updatedUid = null;
 
     /**
-     * 知识库document代码数组，用于批量query.
+     * 知识库document代码array，用于批量query.
      *
      * @var null|string[]
      */

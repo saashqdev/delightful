@@ -23,7 +23,7 @@ readonly class AsrRecordingDirectoryDTO
     }
 
     /**
-     * 转换为数组.
+     * 转换为array.
      */
     public function toArray(): array
     {

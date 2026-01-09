@@ -31,13 +31,13 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
 {
     use ChatAmqpTrait;
 
-    // 子类需要指明 topic type
+    // 子类need指明 topic type
     protected AmqpTopicType $topic;
 
     protected LoggerInterface $logger;
 
     /**
-     * setting队列优先级参数.
+     * setting队列优先级parameter.
      */
     protected AMQPTable|array $arguments = [
         'x-ha-policy' => ['S', 'all'], // 将队列镜像到所有节点,hyperf 默认configuration
@@ -63,7 +63,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
     }
 
     /**
-     * 继承以实现setting队列相关参数.
+     * 继承以实现setting队列相关parameter.
      */
     public function getQueueBuilder(): QueueBuilder
     {

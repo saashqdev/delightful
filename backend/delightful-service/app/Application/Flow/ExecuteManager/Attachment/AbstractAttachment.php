@@ -32,7 +32,7 @@ abstract class AbstractAttachment implements AttachmentInterface
         if ($name === '') {
             return;
         }
-        // 判断是否有扩展名，如果有，则去掉重新添加
+        // 判断是否有扩展名，if有，则去掉重新添加
         $ext = pathinfo($name, PATHINFO_EXTENSION);
         if ($ext) {
             $name = rtrim($name, '.' . $ext);

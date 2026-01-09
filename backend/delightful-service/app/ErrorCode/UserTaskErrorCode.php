@@ -14,7 +14,7 @@ use App\Infrastructure\Core\Exception\Annotation\ErrorMessage;
  */
 enum UserTaskErrorCode: int
 {
-    // 参数不合法 不合法
+    // parameter不合法 不合法
     #[ErrorMessage('task.invalid')]
     case PARAMETER_INVALID = 8001;
 
@@ -46,11 +46,11 @@ enum UserTaskErrorCode: int
     #[ErrorMessage('task.get_failed')]
     case TASK_GET_FAILED = 8008;
 
-    // agentId 不能为空
+    // agentId cannot为null
     #[ErrorMessage('task.agent_id_required')]
     case AGENT_ID_REQUIRED = 8009;
 
-    // topicId 不能为空
+    // topicId cannot为null
     #[ErrorMessage('task.topic_id_required')]
     case TOPIC_ID_REQUIRED = 8010;
 }

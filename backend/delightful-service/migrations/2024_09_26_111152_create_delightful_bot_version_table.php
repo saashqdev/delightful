@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->string('flow_code')->comment('工作流code');
             $table->string('flow_version')->comment('工作流version');
-            $table->json('instruct')->comment('交互指令');
+            $table->json('instruct')->comment('交互instruction');
             $table->bigInteger('root_id')->comment('根id');
             $table->string('robot_name')->comment('assistant name');
             $table->string('robot_avatar')->comment('assistant avatar');

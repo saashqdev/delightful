@@ -36,7 +36,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getCallback(): ?Closure
     {
-        // 可接受参数指定任意 model，默认是火山。
+        // 可接受parameter指定任意 model，默认是火山。
         return function (ExecutionData $executionData) {
             $args = $executionData->getTriggerData()?->getParams();
             $model = $args['model'] ?? ImageGenerateModelType::Volcengine->value;
@@ -88,8 +88,8 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "user_prompt": {
             "type": "string",
             "key": "user_prompt",
-            "title": "user提示词",
-            "description": "user提示词",
+            "title": "userprompt词",
+            "description": "userprompt词",
             "required": null,
             "value": null,
             "encryption": false,
@@ -124,8 +124,8 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "attachments": {
             "type": "array",
             "key": "attachments",
-            "title": "附件数组",
-            "description": "传入文件列表数组",
+            "title": "附件array",
+            "description": "传入文件列表array",
             "required": null,
             "value": null,
             "encryption": false,

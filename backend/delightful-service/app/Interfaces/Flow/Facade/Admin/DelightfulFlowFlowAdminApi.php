@@ -192,7 +192,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
      */
     public function changeEnable(string $flowId)
     {
-        // 从请求中getenable参数，如果没有传递则不影响原有逻辑
+        // 从请求中getenableparameter，if没有传递则不影响原有逻辑
         $enable = $this->request->has('enable') ? (bool) $this->request->input('enable') : null;
         $this->delightfulFlowAppService->changeEnable($this->getAuthorization(), $flowId, $enable);
     }

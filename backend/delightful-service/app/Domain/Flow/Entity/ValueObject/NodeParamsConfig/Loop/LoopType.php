@@ -12,7 +12,7 @@ enum LoopType: string
     // 计数
     case Count = 'count';
 
-    // 遍历数组
+    // 遍历array
     case Array = 'array';
 
     // 条件比较

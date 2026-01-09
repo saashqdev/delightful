@@ -53,7 +53,7 @@ enum ImageGenerateModelType: string
     }
 
     /**
-     * Midjourney的所有模式.
+     * Midjourney的所有mode.
      * @return string[]
      */
     public static function getMidjourneyModes(): array
@@ -62,7 +62,7 @@ enum ImageGenerateModelType: string
     }
 
     /**
-     * Flux的所有模式.
+     * Flux的所有mode.
      * @return string[]
      */
     public static function getFluxModes(): array
@@ -71,7 +71,7 @@ enum ImageGenerateModelType: string
     }
 
     /**
-     * Volecengin的所有模式.
+     * Volecengin的所有mode.
      * @return string[]
      */
     public static function getVolcengineModes(): array

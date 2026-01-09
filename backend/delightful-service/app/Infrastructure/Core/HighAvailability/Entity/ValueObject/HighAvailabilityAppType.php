@@ -20,7 +20,7 @@ enum HighAvailabilityAppType: string
     case MODEL_GATEWAY = 'modelGateway';
 
     /**
-     * get所有应用type值数组.
+     * get所有应用type值array.
      */
     public static function values(): array
     {
@@ -38,7 +38,7 @@ enum HighAvailabilityAppType: string
     }
 
     /**
-     * 从字符串create枚举实例.
+     * 从stringcreate枚举实例.
      */
     public static function fromString(string $type): self
     {

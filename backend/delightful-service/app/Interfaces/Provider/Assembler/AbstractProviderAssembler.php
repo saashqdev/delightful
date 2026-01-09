@@ -16,10 +16,10 @@ use Hyperf\Contract\TranslatorInterface;
 abstract class AbstractProviderAssembler
 {
     /**
-     * 批量转换数组到实体.
+     * 批量转换array到实体.
      * @template T of object
      * @param class-string<T> $entityClass 实体类名
-     * @param array $dataArray data数组
+     * @param array $dataArray dataarray
      * @return T[]
      */
     protected static function batchToEntities(string $entityClass, array $dataArray): array
@@ -36,8 +36,8 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * 批量转换实体到数组.
-     * @param array $entities 实体数组
+     * 批量转换实体到array.
+     * @param array $entities 实体array
      */
     protected static function batchToArrays(array $entities): array
     {
@@ -56,7 +56,7 @@ abstract class AbstractProviderAssembler
      * create带国际化支持的实体.
      * @template T of object
      * @param class-string<T> $entityClass 实体类名
-     * @param array $data data数组
+     * @param array $data dataarray
      * @param bool $enableI18n 是否启用国际化
      * @return T
      */
@@ -73,7 +73,7 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * 空值检查助手方法.
+     * null值检查助手method.
      */
     protected static function isEmptyArray(?array $data): bool
     {

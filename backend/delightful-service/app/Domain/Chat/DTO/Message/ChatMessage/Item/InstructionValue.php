@@ -10,7 +10,7 @@ namespace App\Domain\Chat\DTO\Message\ChatMessage\Item;
 use App\Domain\Chat\Entity\AbstractEntity;
 
 /**
- * 指令选项值实体类，根据 proto 定义.
+ * instruction选项值实体类，根据 proto 定义.
  */
 class InstructionValue extends AbstractEntity
 {

@@ -10,7 +10,7 @@ namespace App\Application\Speech\DTO\Response;
 use Delightful\BeDelightful\Domain\BeAgent\Entity\TaskFileEntity;
 
 /**
- * ASR 文件data传输对象
+ * ASR 文件data传输object
  * 用于在聊天message中引用文件.
  */
 readonly class AsrFileDataDTO
@@ -44,7 +44,7 @@ readonly class AsrFileDataDTO
     }
 
     /**
-     * 转换为数组格式，用于聊天message.
+     * 转换为array格式，用于聊天message.
      */
     public function toArray(): array
     {

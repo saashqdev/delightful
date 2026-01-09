@@ -71,7 +71,7 @@ class DelightfulMessageTest extends BaseTest
         $aiUserId = 'usi_8e4bde5582491a6cabfe0d0ba8b7ae8e';
         $chatAppService = di(DelightfulChatMessageAppService::class);
         // 将多段流式message，通过此 id 关联起来
-        // ai search卡片message的多段响应，已经将 app_message_id 作为关联 id，流式响应需要另外的 id 来做关联
+        // ai search卡片message的多段响应，已经将 app_message_id 作为关联 id，流式响应need另外的 id 来做关联
         $appMessageId = IdGenerator::getUniqueId32();
         $streamOptions = (new StreamOptions())->setStream(true)->setStreamAppMessageId($appMessageId)->setStatus(StreamMessageStatus::Start);
         $messageContent = new TextMessage();

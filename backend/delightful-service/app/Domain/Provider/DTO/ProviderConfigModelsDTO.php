@@ -19,7 +19,7 @@ use Hyperf\Codec\Json;
 class ProviderConfigModelsDTO extends ProviderConfigDTO
 {
     /**
-     * Provider模型DTO数组.
+     * Provider模型DTOarray.
      * @var ProviderModelDetailDTO[]
      */
     protected array $models = [];

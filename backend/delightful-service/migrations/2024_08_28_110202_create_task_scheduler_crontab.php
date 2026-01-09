@@ -25,8 +25,8 @@ class CreateTaskSchedulerCrontab extends Migration
             $table->dateTime('last_gen_time')->nullable()->comment('最后生成时间');
             $table->boolean('enabled')->default(true)->comment('是否启用');
             $table->integer('retry_times')->default(0)->comment('总重试次数');
-            $table->json('callback_method')->comment('回调方法');
-            $table->json('callback_params')->comment('回调参数');
+            $table->json('callback_method')->comment('回调method');
+            $table->json('callback_params')->comment('回调parameter');
             $table->string('remark', 255)->default('')->comment('备注');
             $table->dateTime('deadline')->nullable()->comment('结束时间');
             $table->string('creator', 64)->default('')->comment('create人');

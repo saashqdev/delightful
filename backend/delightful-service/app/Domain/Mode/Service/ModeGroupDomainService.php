@@ -53,7 +53,7 @@ class ModeGroupDomainService
     }
 
     /**
-     * 根据模式IDget分组列表.
+     * 根据modeIDget分组列表.
      */
     public function getGroupsByModeId(ModeDataIsolation $dataIsolation, string $modeId): array
     {
@@ -86,7 +86,7 @@ class ModeGroupDomainService
     }
 
     /**
-     * 验证模式是否存在.
+     * 验证mode是否存在.
      */
     private function validateModeExists(ModeDataIsolation $dataIsolation, int $modeId): void
     {

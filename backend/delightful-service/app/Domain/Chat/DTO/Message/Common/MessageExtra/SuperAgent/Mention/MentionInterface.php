@@ -10,7 +10,7 @@ namespace App\Domain\Chat\DTO\Message\Common\MessageExtra\BeAgent\Mention;
 use JsonSerializable;
 
 /**
- * 通用 Mention 接口，所有提及对象均需实现。
+ * 通用 Mention 接口，所有提及object均需实现。
  */
 interface MentionInterface extends JsonSerializable
 {
@@ -20,7 +20,7 @@ interface MentionInterface extends JsonSerializable
     public function getMentionTextStruct(): string;
 
     /**
-     * get Mention 对象的 JSON 结构.
+     * get Mention object的 JSON 结构.
      */
     public function getMentionJsonStruct(): array;
 }

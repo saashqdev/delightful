@@ -40,7 +40,7 @@ class SessionAppService implements SessionInterface
                 }
             }
 
-            // 如果有organization代码，批量get所有organization的根departmentinformation
+            // if有organization代码，批量get所有organization的根departmentinformation
             if (! empty($orgCodes)) {
                 // 一次性批量get所有organization的根departmentinformation
                 $rootDepartments = $this->delightfulDepartmentDomainService->getOrganizationsRootDepartment($orgCodes);

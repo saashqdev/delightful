@@ -42,8 +42,8 @@ class DefaultAgent extends AbstractAgent
         ]);
         // get触发type
         $triggerType = TriggerType::fromSeqType($seqEntity->getSeqType());
-        # 传入的参数:
-        // 1. $userAccountEntity 包含真名,手机号等有安全风险,应该需要auth授权的information
+        # 传入的parameter:
+        // 1. $userAccountEntity 包含true名,手机号等有安全风险,shouldneedauth授权的information
         // 2. $userEntity user详情,包含userid,user昵称,user头像等information
         // 3. $seqEntity conversation窗口id,引用的message_id,messagetype(聊天message/打开了conversation窗口)
         // 4. $messageEntity 保存有messagetype,message的具体content,发件人id,发送时间

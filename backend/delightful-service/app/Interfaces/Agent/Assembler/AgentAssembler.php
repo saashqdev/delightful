@@ -42,7 +42,7 @@ class AgentAssembler
         $offset = ($page->getPage() - 1) * $page->getPageNum();
         $pagedList = array_slice($list, $offset, $page->getPageNum());
 
-        // 直接return数组数据，因为已经包含conversationID等信息
+        // 直接returnarray数据，因为已经包含conversationID等信息
         return new PageDTO($page->getPage(), $total, $pagedList);
     }
 }

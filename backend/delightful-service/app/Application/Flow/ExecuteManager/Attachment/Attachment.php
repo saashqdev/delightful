@@ -27,7 +27,7 @@ class Attachment extends AbstractAttachment
         $this->size = $size;
         $this->chatFileId = $chatFileId;
         $this->url = trim($url);
-        // 如果没有 ext，从 url 中提取
+        // if没有 ext，从 url 中提取
         if (empty($this->ext)) {
             $this->ext = FileType::getType($this->url);
         } else {

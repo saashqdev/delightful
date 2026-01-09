@@ -61,7 +61,7 @@ class QwenProvider implements IProvider
                 return $connectResponse;
             }
 
-            // 连通性测试success，不需要等待任务完成
+            // 连通性测试success，不need等待任务完成
             $connectResponse->setStatus(true);
             $connectResponse->setMessage('连接测试success');
         } catch (Exception $e) {

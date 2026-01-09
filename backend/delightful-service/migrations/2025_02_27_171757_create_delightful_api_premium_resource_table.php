@@ -28,7 +28,7 @@ return new class extends Migration {
             $table->timestamps();
             $table->softDeletes();
             $table->index(['endpoint_id', 'id'], 'index_endpoint_id');
-            $table->comment('API资源计费规则表，支持总量或者速率计费');
+            $table->comment('API资源计费规则表，支持总量or速率计费');
         });
     }
 

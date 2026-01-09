@@ -14,7 +14,7 @@ class ModeAggregateDTO extends AbstractDTO
     protected ModeDTO $mode;
 
     /**
-     * @var ModeGroupAggregateDTO[] 分组聚合根数组
+     * @var ModeGroupAggregateDTO[] 分组聚合根array
      */
     protected array $groups = [];
 

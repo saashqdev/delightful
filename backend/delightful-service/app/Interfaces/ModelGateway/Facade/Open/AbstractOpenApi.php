@@ -43,7 +43,7 @@ abstract class AbstractOpenApi
             return $token;
         }
 
-        // 4. 从query参数中get
+        // 4. 从queryparameter中get
         $apiKey = $this->request->query('api_key');
         if (! empty($apiKey)) {
             return $apiKey;

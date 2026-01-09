@@ -11,7 +11,7 @@ use App\Infrastructure\Core\AbstractDTO;
 
 /**
  * Audio Info DTO for speech recognition audio information.
- * 对应 JSON 中的 audio_info 对象
+ * 对应 JSON 中的 audio_info object
  */
 class AudioInfoDTO extends AbstractDTO
 {

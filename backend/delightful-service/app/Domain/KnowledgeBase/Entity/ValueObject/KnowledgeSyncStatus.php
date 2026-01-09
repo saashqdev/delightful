@@ -10,22 +10,22 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 enum KnowledgeSyncStatus: int
 {
     /*
-     * 未同步
+     * 未同
      */
     case NotSynced = 0;
 
     /*
-     * 同步中
+     * 同中
      */
     case Syncing = 3;
 
     /*
-     * 已同步
+     * 已同
      */
     case Synced = 1;
 
     /*
-     * 同步failed
+     * 同failed
      */
     case SyncFailed = 2;
 
@@ -45,7 +45,7 @@ enum KnowledgeSyncStatus: int
     case Rebuilding = 6;
 
     /*
-     * 需要进行补偿的status
+     * need进行补偿的status
      */
     public static function needCompensate(): array
     {

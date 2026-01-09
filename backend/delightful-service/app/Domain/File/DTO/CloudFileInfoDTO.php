@@ -53,7 +53,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * 从数组createDTO.
+     * 从arraycreateDTO.
      */
     public static function fromArray(array $data): self
     {
@@ -66,7 +66,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * 转换为数组（向后兼容）.
+     * 转换为array（向后兼容）.
      */
     public function toArray(): array
     {

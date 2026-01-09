@@ -69,7 +69,7 @@ class DelightfulFlowDraftDomainService extends AbstractDomainService
             $delightfulFlowDraftEntity->prepareForCreation();
         } else {
             if (empty($savingDelightfulFlowDraftEntity->getCode())) {
-                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'code 不能为空');
+                ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'code cannot为null');
             }
             $delightfulFlowDraftEntity = $this->delightfulFlowDraftRepository->getByFlowCodeAndCode($dataIsolation, $savingDelightfulFlowDraftEntity->getFlowCode(), $savingDelightfulFlowDraftEntity->getCode());
             if (! $delightfulFlowDraftEntity) {

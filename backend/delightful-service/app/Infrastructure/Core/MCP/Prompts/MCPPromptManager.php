@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\MCP\Prompts;
 
 /**
- * MCP提示管理器.
- * 当前version为空实现，仅return空列表.
+ * MCPprompt管理器.
+ * when前version为null实现，仅returnnull列表.
  */
 class MCPPromptManager
 {
@@ -19,17 +19,17 @@ class MCPPromptManager
     private array $prompts = [];
 
     /**
-     * 注册提示.
-     * 当前为空实现.
+     * 注册prompt.
+     * when前为null实现.
      */
     public function registerPrompt(array $prompt): void
     {
-        // 空实现，暂不注册任何提示
+        // null实现，暂不注册任何prompt
     }
 
     /**
-     * get提示列表.
-     * 当前为空实现，return空数组.
+     * getprompt列表.
+     * when前为null实现，returnnullarray.
      *
      * @return array<int, array<string, mixed>>
      */
@@ -39,8 +39,8 @@ class MCPPromptManager
     }
 
     /**
-     * get指定ID的提示.
-     * 当前为空实现，始终returnnull.
+     * get指定ID的prompt.
+     * when前为null实现，始终returnnull.
      */
     public function getPrompt(string $id): ?array
     {
@@ -48,7 +48,7 @@ class MCPPromptManager
     }
 
     /**
-     * 检查指定ID的提示是否存在.
+     * 检查指定ID的prompt是否存在.
      */
     public function hasPrompt(string $id): bool
     {
@@ -56,7 +56,7 @@ class MCPPromptManager
     }
 
     /**
-     * 检查是否没有任何提示.
+     * 检查是否没有任何prompt.
      */
     public function isEmpty(): bool
     {

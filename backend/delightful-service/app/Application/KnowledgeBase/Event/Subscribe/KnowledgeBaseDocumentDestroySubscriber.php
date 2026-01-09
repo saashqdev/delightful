@@ -46,7 +46,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
         $knowledge = $event->knowledgeBaseEntity;
         $document = $event->knowledgeBaseDocumentEntity;
         $dataIsolation = $event->dataIsolation;
-        // 如果是基础知识库type，则传知识库create者，避免permission不足
+        // if是基础知识库type，则传知识库create者，避免permission不足
         if (in_array($knowledge->getType(), KnowledgeType::getAll())) {
             $dataIsolation->setCurrentUserId($knowledge->getCreator())->setCurrentOrganizationCode($knowledge->getOrganizationCode());
         }
@@ -59,7 +59,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
 
         $knowledgeBaseEntity = $knowledgeBaseDomainService->show($dataIsolation, $document->getKnowledgeBaseCode());
 
-        // 这里需要delete所有片段，在deletedocument
+        // 这里needdelete所有片段，在deletedocument
         $query = new KnowledgeBaseFragmentQuery()->setDocumentCode($document->getCode());
         /** @var KnowledgeBaseFragmentEntity[][] $fragments */
         $fragments = [];
@@ -91,7 +91,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
         }
         $knowledgeBaseFragmentDomainService->batchChangeSyncStatus(array_column($fragments, 'id'), $fragmentSyncStatus, $fragmentSyncMessage);
 
-        // delete片段完成后，将document同步标记为已delete
+        // delete片段完成后，将document同标记为已delete
         $knowledgeBaseDataIsolation = KnowledgeBaseDataIsolation::createByBaseDataIsolation($dataIsolation);
         $documentDomainService->changeSyncStatus($knowledgeBaseDataIsolation, $document->setSyncStatus($documentSyncStatus->value));
     }

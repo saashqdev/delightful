@@ -37,7 +37,7 @@ class InternetSearchBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '麦吉互联网search，批量对user的多个含义相同或者不同的问题进行互联网search。';
+        return '麦吉互联网search，批量对user的多个含义相同or不同的问题进行互联网search。';
     }
 
     public function getCallback(): ?Closure
@@ -52,7 +52,7 @@ class InternetSearchBuiltInTool extends AbstractBuiltInTool
             $userQuestion = implode(' ', $questions);
             $conversationId = $executionData->getOriginConversationId();
             if ($executionData->getExecutionType()->isDebug()) {
-                // debug 模式
+                // debug mode
                 return ['deep_internet_search : current not support debug model'];
             }
             $topicId = $executionData->getTopicId();

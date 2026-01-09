@@ -43,7 +43,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.token.quota_not_enough')]
     case TOKEN_QUOTA_NOT_ENOUGH = 4007;
 
-    // message为空
+    // message为null
     #[ErrorMessage(message: 'api.message.empty')]
     case MESSAGE_EMPTY = 4008;
 
@@ -51,7 +51,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.rate_limit')]
     case RATE_LIMIT = 4009;
 
-    // message为空
+    // message为null
     #[ErrorMessage(message: 'api.msg_empty')]
     case MSG_EMPTY = 4010;
 

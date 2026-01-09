@@ -30,9 +30,9 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * get包含官方organization在内的organization编码数组.
-     * @param string $currentOrganizationCode 当前organization编码
-     * @return array 去重后的organization编码数组
+     * get包含官方organization在内的organization编码array.
+     * @param string $currentOrganizationCode when前organization编码
+     * @return array 去重后的organization编码array
      */
     public static function getOrganizationCodesWithOfficial(string $currentOrganizationCode): array
     {

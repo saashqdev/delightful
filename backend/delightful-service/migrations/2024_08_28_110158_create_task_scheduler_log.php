@@ -27,8 +27,8 @@ class CreateTaskSchedulerLog extends Migration
             $table->tinyInteger('type')->default(2)->comment('type');
             $table->integer('cost_time')->default(0)->comment('耗时');
             $table->tinyInteger('status')->default(0)->comment('status');
-            $table->json('callback_method')->comment('回调方法');
-            $table->json('callback_params')->comment('回调参数');
+            $table->json('callback_method')->comment('回调method');
+            $table->json('callback_params')->comment('回调parameter');
             $table->string('remark', 255)->default('')->comment('备注');
             $table->string('creator', 64)->default('')->comment('create人');
             $table->dateTime('created_at')->comment('creation time');

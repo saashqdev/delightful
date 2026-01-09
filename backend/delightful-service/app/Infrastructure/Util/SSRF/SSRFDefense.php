@@ -45,7 +45,7 @@ class SSRFDefense
         $this->isValid($allowRedirect);
 
         $url = $this->url;
-        // 替换成 ip 访问，此时需要在请求中添加 Host 才行
+        // 替换成 ip 访问，此时need在请求中添加 Host 才行
         if ($this->options->isReplaceIp()) {
             $url = str_replace($this->host, $this->ip, $url);
         }

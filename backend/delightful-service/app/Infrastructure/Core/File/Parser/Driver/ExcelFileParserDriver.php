@@ -135,12 +135,12 @@ class ExcelFileParserDriver implements ExcelFileParserDriverInterface
      */
     private function formatCsvCell(string $value): string
     {
-        // 如果单元格content为空，直接return空字符串
+        // if单元格content为null，直接returnnullstring
         if ($value === '') {
             return '';
         }
 
-        // 如果单元格content包含以下任意字符，需要用引号包围
+        // if单元格content包含以下任意字符，need用引号包围
         if (str_contains($value, ',')
             || str_contains($value, '"')
             || str_contains($value, "\n")

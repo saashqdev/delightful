@@ -15,7 +15,7 @@ enum ProviderOriginalModelType: int
     public function label(): string
     {
         return match ($this) {
-            self::System => '系统默认',
+            self::System => 'system默认',
             self::Custom => '自己添加',
         };
     }

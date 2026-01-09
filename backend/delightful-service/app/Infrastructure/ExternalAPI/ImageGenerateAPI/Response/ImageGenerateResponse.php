@@ -14,7 +14,7 @@ class ImageGenerateResponse
 {
     private ImageGenerateType $imageGenerateType;
 
-    // 可以是 base64 也可能是 urls
+    // can是 base64 也可能是 urls
     private array $data;
 
     public function __construct(ImageGenerateType $imageGenerateType, array $data)

@@ -38,11 +38,11 @@ class UpdateDocumentRequestDTO extends AbstractRequestDTO
     public static function getHyperfValidationMessage(): array
     {
         return [
-            'code.required' => 'document编码不能为空',
-            'code.max' => 'document编码长度不能超过64个字符',
-            'name.required' => 'document名称不能为空',
-            'name.max' => 'document名称长度不能超过255个字符',
-            'enabled.boolean' => 'enabled status必须为布尔值',
+            'code.required' => 'document编码cannot为null',
+            'code.max' => 'document编码长度cannot超过64个字符',
+            'name.required' => 'document名称cannot为null',
+            'name.max' => 'document名称长度cannot超过255个字符',
+            'enabled.boolean' => 'enabled status必须为boolean值',
         ];
     }
 

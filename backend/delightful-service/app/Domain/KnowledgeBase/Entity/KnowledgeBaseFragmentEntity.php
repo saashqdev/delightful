@@ -124,7 +124,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
 
     public function hasModify(KnowledgeBaseFragmentEntity $savingDelightfulFlowKnowledgeFragmentEntity): bool
     {
-        // 如果 content 和 metadata 都没有变化，就不需要update了
+        // if content 和 metadata 都没有变化，就不needupdate了
         if ($savingDelightfulFlowKnowledgeFragmentEntity->getContent() === $this->content
             && $savingDelightfulFlowKnowledgeFragmentEntity->getMetadata() === $this->metadata
             && $savingDelightfulFlowKnowledgeFragmentEntity->getBusinessId() === $this->businessId
@@ -423,13 +423,13 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
     {
         foreach ($this->metadata as $key => $value) {
             if (Str::startsWith($key, self::PAYLOAD_PREFIX)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data key 不能以 ' . self::PAYLOAD_PREFIX . ' 开头');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data key cannot以 ' . self::PAYLOAD_PREFIX . ' 开头');
             }
             if (! is_string($key)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data 的 key 必须是字符串');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data 的 key 必须是string');
             }
             if (! is_string($value) && ! is_numeric($value)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data 的 value 只能是 字符串或者数字');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data 的 value 只能是 stringornumber');
             }
         }
         return $this;

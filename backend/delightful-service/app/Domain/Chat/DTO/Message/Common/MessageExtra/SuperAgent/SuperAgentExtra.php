@@ -45,7 +45,7 @@ class BeAgentExtra extends AbstractDTO
     protected ?string $queueId;
 
     /**
-     * 动态参数（用于向沙箱传递额外参数，如 task_key 等）.
+     * 动态parameter（用于向沙箱传递额外parameter，如 task_key 等）.
      */
     protected ?array $dynamicParams;
 
@@ -55,7 +55,7 @@ class BeAgentExtra extends AbstractDTO
     protected ?bool $enableWebSearch = null;
 
     /**
-     * get mentions 的 JSON 结构数组.
+     * get mentions 的 JSON 结构array.
      */
     public function getMentionsJsonStruct(): ?array
     {
@@ -194,7 +194,7 @@ class BeAgentExtra extends AbstractDTO
     }
 
     /**
-     * get单个动态参数.
+     * get单个动态parameter.
      */
     public function getDynamicParam(string $key, mixed $default = null): mixed
     {
@@ -202,7 +202,7 @@ class BeAgentExtra extends AbstractDTO
     }
 
     /**
-     * setting单个动态参数.
+     * setting单个动态parameter.
      */
     public function setDynamicParam(string $key, mixed $value): void
     {

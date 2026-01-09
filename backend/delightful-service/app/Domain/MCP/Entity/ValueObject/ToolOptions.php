@@ -35,7 +35,7 @@ class ToolOptions extends AbstractValueObject
     }
 
     /**
-     * 从数组create实例.
+     * 从arraycreate实例.
      */
     public static function fromArray(?array $data): self
     {

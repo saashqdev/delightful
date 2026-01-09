@@ -26,7 +26,7 @@ readonly class FlowMemoryManager
     {
         $messages = $this->queries($memoryQuery, $ignoreMessageIds);
 
-        // 每次都是新记忆，这里如果要在流程中共用一份记忆，会影响到其他节点，暂时每次都是新的
+        // 每次都是新记忆，这里if要在流程中共用一份记忆，会影响到其他节点，暂时每次都是新的
         $memoryManager = new MemoryManager(policy: new LimitCountPolicy(['max_count' => $memoryQuery->getLimit()]));
 
         foreach ($messages as $message) {

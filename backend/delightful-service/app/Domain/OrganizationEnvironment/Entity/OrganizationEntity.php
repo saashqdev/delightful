@@ -52,11 +52,11 @@ class OrganizationEntity extends AbstractEntity
 
     protected ?int $seats = null; // 席位数
 
-    protected ?string $syncType = null; // 同步type
+    protected ?string $syncType = null; // 同type
 
-    protected ?OrganizationSyncStatus $syncStatus = null; // 同步status
+    protected ?OrganizationSyncStatus $syncStatus = null; // 同status
 
-    protected ?DateTime $syncTime = null; // 同步时间
+    protected ?DateTime $syncTime = null; // 同时间
 
     public function shouldCreate(): bool
     {

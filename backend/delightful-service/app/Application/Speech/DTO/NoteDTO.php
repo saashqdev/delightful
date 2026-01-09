@@ -42,7 +42,7 @@ readonly class NoteDTO
     /**
      * 生成文件名.
      *
-     * @param null|string $generatedTitle 生成的标题，如果提供则使用 {title}-笔记.{ext} 格式
+     * @param null|string $generatedTitle 生成的标题，if提供则使用 {title}-笔记.{ext} 格式
      */
     public function generateFileName(?string $generatedTitle = null): string
     {
@@ -64,9 +64,9 @@ readonly class NoteDTO
     }
 
     /**
-     * 从数组create实例.
+     * 从arraycreate实例.
      *
-     * @param array $data 包含content和file_type的数组
+     * @param array $data 包含content和file_type的array
      */
     public static function fromArray(array $data): self
     {
@@ -77,7 +77,7 @@ readonly class NoteDTO
     }
 
     /**
-     * 转换为数组.
+     * 转换为array.
      */
     public function toArray(): array
     {

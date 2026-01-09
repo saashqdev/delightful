@@ -42,15 +42,15 @@ class DelightfulFlowWaitMessageDomainService extends AbstractDomainService
 
     public function getLastWaitMessage(FlowDataIsolation $dataIsolation, string $conversationId, string $flowCode, string $flowVersion): ?DelightfulFlowWaitMessageEntity
     {
-        // 应该不会很多，直接取所有
+        // should不会很多，直接取所有
         $waitMessages = $this->listByUnhandledConversationId($dataIsolation, $conversationId);
         foreach ($waitMessages as $waitMessage) {
-            // 如果超时
+            // if超时
             $isTimeout = false;
             if (! empty($waitMessage->getTimeout())) {
                 $isTimeout = $waitMessage->getTimeout() < time();
             }
-            // 如果version变更
+            // ifversion变更
             $isVersionChanged = $waitMessage->getFlowCode() !== $flowCode || $waitMessage->getFlowVersion() !== $flowVersion;
             if ($isTimeout || $isVersionChanged) {
                 $this->handled($dataIsolation, $waitMessage->getId());

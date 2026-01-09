@@ -36,7 +36,7 @@ class TextPreprocessUtil
             $text
         );
 
-        // 将FORMAT_EXCEL规则放到数组前面
+        // 将FORMAT_EXCEL规则放到array前面
         $excelSheetLineRemoveRule = array_filter($rules, fn (TextPreprocessRule $rule) => $rule === TextPreprocessRule::FORMAT_EXCEL);
         $otherRules = array_filter(
             $rules,

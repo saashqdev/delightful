@@ -20,7 +20,7 @@ class Message extends AbstractEntity
     protected string $topicId;
 
     /**
-     * 控制message或者聊天message的type.
+     * 控制messageor聊天message的type.
      * 根据 type 来确定messagetype是哪one.
      */
     protected string $type;

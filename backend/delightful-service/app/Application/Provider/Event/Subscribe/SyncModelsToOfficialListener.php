@@ -19,8 +19,8 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * 同步模型到Official服务商监听器.
- * 监听服务商configurationcreate/update事件，从外部API拉取模型并同步到Official服务商.
+ * 同模型到Official服务商监听器.
+ * 监听服务商configurationcreate/update事件，从外部API拉取模型并同到Official服务商.
  */
 #[AsyncListener]
 #[Listener]
@@ -53,7 +53,7 @@ class SyncModelsToOfficialListener implements ListenerInterface
                 default => null,
             };
         } catch (Throwable $e) {
-            $this->logger->error('从外部API同步模型failed', [
+            $this->logger->error('从外部API同模型failed', [
                 'event' => get_class($event),
                 'error' => $e->getMessage(),
                 'file' => $e->getFile(),
@@ -65,7 +65,7 @@ class SyncModelsToOfficialListener implements ListenerInterface
 
     /**
      * 处理服务商configurationcreate或update事件.
-     * 如果是Official服务商且是官方organization，则从外部API拉取模型并同步.
+     * if是Official服务商且是官方organization，则从外部API拉取模型并同.
      */
     private function handleProviderConfig(
         ProviderConfigCreatedEvent|ProviderConfigUpdatedEvent $event,

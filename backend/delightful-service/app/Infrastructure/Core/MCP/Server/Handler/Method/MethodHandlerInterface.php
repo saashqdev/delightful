@@ -13,14 +13,14 @@ use App\Infrastructure\Core\MCP\Tools\MCPToolManager;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * MCP方法处理器接口.
+ * MCPmethod处理器接口.
  */
 interface MethodHandlerInterface
 {
     /**
      * 处理请求并return结果.
      *
-     * @return null|array<string, mixed> 处理结果，如果不需要returndata则returnnull
+     * @return null|array<string, mixed> 处理结果，if不needreturndata则returnnull
      */
     public function handle(MessageInterface $request): ?array;
 
@@ -45,12 +45,12 @@ interface MethodHandlerInterface
     public function getResourceManager(): MCPResourceManager;
 
     /**
-     * setting提示管理器.
+     * settingprompt管理器.
      */
     public function setPromptManager(MCPPromptManager $promptManager): self;
 
     /**
-     * get提示管理器.
+     * getprompt管理器.
      */
     public function getPromptManager(): MCPPromptManager;
 }

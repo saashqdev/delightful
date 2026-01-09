@@ -19,7 +19,7 @@ use Hyperf\Coroutine\Parallel;
 use Hyperf\Crontab\Annotation\Crontab;
 use Psr\Container\ContainerInterface;
 
-#[Crontab(rule: '* * * * *', name: 'FlowBreakpointRetryCrontab', singleton: true, mutexExpires: 60 * 5, onOneServer: true, callback: 'execute', memo: 'process断pointretryscheduletask', enable: true)]
+#[Crontab(rule: '* * * * *', name: 'FlowBreakpointRetryCrontab', singleton: true, mutexExpires: 60 * 5, onOneServer: true, callback: 'execute', memo: 'processbreakpointretryscheduletask', enable: true)]
 class FlowBreakpointRetryCrontab
 {
     private DelightfulFlowExecuteLogDomainService $delightfulFlowExecuteLogDomainService;

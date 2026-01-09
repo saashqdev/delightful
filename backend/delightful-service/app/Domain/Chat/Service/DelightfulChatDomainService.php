@@ -691,7 +691,7 @@ class DelightfulChatDomainService extends AbstractDomainService
      * 1.needfirstcall createAndSendStreamStartSequence createone seq ,thenbackagaincall streamSendJsonMessage sendmessage.
      * 2.streamsendJsonmessage,eachtimeupdate json somefieldmessage.
      * 3.uselocalinsideexistsconductmessagecache,enhancebig json read/writeperformance.
-     * @todo ifwanttooutsideprovidestream api,needchangefor redis cache,bysupport断linereconnect.
+     * @todo ifwanttooutsideprovidestream api,needchangefor redis cache,bysupportbreaklinereconnect.
      *
      *  supportonetimepushmultiplefieldstreammessage,if json layerlevelmoredeep,use field_1.*.field_2 asfor key. itsmiddle * isfingerarraydownmark.
      *  serviceclientwillcache havestreamdata,andinstreamendo clockonetimepropertypush,bydecreasediscardpackagegenerallyrate,enhancemessagecompleteproperty.
@@ -1012,7 +1012,7 @@ class DelightfulChatDomainService extends AbstractDomainService
 
     /**
      * uselocalinsideexistsconductmessagecache,enhancebig json read/writeperformance.
-     * @todo ifwanttooutsideprovidestream api,needchangefor redis cache,bysupport断linereconnect.
+     * @todo ifwanttooutsideprovidestream api,needchangefor redis cache,bysupportbreaklinereconnect.
      *
      * contentformat  for example:
      *   [

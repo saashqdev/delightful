@@ -187,7 +187,7 @@ class DelightfulLLMDomainService
       "closeatABfingermark",    // fingermark/propertycategory
       "causeMhairgeneratemainreasoniswhat?", // reason/mechanismcategory
       "whatisN?itcorecorefeatureiswhat?", // definition/explaincategory
-      "notcomefiveyearPdomainhair展trendiswhat?", // trend/predictioncategory
+      "notcomefiveyearPdomainhairexpandtrendiswhat?", // trend/predictioncategory
       "needletoQquestion,havewhichthesecanlineresolvesolution?" // resolvesolution/suggestioncategory
     ]
     

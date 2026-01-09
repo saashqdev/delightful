@@ -12,9 +12,9 @@ namespace App\Domain\LongTermMemory\Entity\ValueObject;
  */
 enum MemoryStatus: string
 {
-    case PENDING = 'pending';                   // 待接受（theonetimegenerate记忆o clock）
-    case ACTIVE = 'active';                     // in effect（记忆已be接受，pending_contentfornull）
-    case PENDING_REVISION = 'pending_revision'; // 待修订（记忆已be接受，butpending_contentnotfornull）
+    case PENDING = 'pending';                   // 待accept（theonetimegenerate记忆o clock）
+    case ACTIVE = 'active';                     // in effect（记忆已beaccept，pending_contentfornull）
+    case PENDING_REVISION = 'pending_revision'; // 待修订（记忆已beaccept，butpending_contentnotfornull）
 
     /**
      * getstatusdescription.
@@ -22,7 +22,7 @@ enum MemoryStatus: string
     public function getDescription(): string
     {
         return match ($this) {
-            self::PENDING => '待接受',
+            self::PENDING => '待accept',
             self::ACTIVE => 'in effect',
             self::PENDING_REVISION => '待修订',
         };

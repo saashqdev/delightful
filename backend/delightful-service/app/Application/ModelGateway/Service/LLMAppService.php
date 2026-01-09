@@ -617,7 +617,7 @@ class LLMAppService extends AbstractLLMAppService
         $size = $textGenerateImageDTO->getSize();
         [$width, $height] = explode('x', $size);
 
-        // 计算stringformatratio例，如 "1:1", "3:4"
+        // calculatestringformatratio例，如 "1:1", "3:4"
         $ratio = $this->calculateRatio((int) $width, (int) $height);
         $imageGenerateParamsVO->setRatio($ratio);
         $imageGenerateParamsVO->setWidth($width);
@@ -718,7 +718,7 @@ class LLMAppService extends AbstractLLMAppService
 
         [$width, $height] = explode('x', $size);
 
-        // 计算stringformatratio例，如 "1:1", "3:4"
+        // calculatestringformatratio例，如 "1:1", "3:4"
         $imageGenerateRequest->setWidth($width);
         $imageGenerateRequest->setHeight($height);
 
@@ -1167,7 +1167,7 @@ class LLMAppService extends AbstractLLMAppService
             // recordlog
             $this->recordImageGenerateMessageLog($modelVersion, $creator, $organizationCode);
 
-            // 计算计费quantity
+            // calculate计费quantity
             $n = $proxyModelRequest->getN();
             // except mjand graph生graph is 1 time之outside，其他all按张数算
             if (in_array($modelVersion, ImageGenerateModelType::getMidjourneyModes())) {
@@ -1728,7 +1728,7 @@ class LLMAppService extends AbstractLLMAppService
         float $startTime,
         ?AccessTokenEntity $accessTokenEntity = null
     ): void {
-        // 计算responsetime（毫second）
+        // calculateresponsetime（毫second）
         $responseTime = (int) ((microtime(true) - $startTime) * 1000);
 
         // convert providerModelId forinteger

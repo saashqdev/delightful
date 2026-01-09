@@ -20,7 +20,7 @@ class GraphSearchConfig extends AbstractValueObject
     /**
      * close系权重.
      *
-     * graphsearchmiddleclose系权重，useat计算finalsimilardegreeminute数
+     * graphsearchmiddleclose系权重，useatcalculatefinalsimilardegreeminute数
      */
     private float $relationWeight = 0.5;
 

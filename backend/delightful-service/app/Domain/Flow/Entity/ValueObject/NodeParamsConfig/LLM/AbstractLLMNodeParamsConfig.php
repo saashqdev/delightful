@@ -61,7 +61,7 @@ abstract class AbstractLLMNodeParamsConfig extends NodeParamsConfig
             $agentPlugin = $plugin->createAgentPlugin();
             // parsepluginparameter
             $agentParams = array_merge($agentParams, $agentPlugin->parseParams($params));
-            // 注入本time运lineo clockuseplugin
+            // injection本time运lineo clockuseplugin
             $this->agentPlugins[] = $agentPlugin;
         }
         return $agentParams;

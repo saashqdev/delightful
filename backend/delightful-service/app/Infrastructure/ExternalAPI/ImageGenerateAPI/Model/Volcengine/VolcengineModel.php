@@ -661,7 +661,7 @@ class VolcengineModel extends AbstractImageGenerate
         $imageDimensions = $this->getImageDimensions($referenceImageUrl);
 
         if (! $imageDimensions) {
-            $this->logger->warning('火山graph生graph：no法get参考graphsize，skip长宽ratio例校验', ['image_url' => $referenceImageUrl]);
+            $this->logger->warning('火山graph生graph：no法get参考graphsize，skip长宽ratio例validation', ['image_url' => $referenceImageUrl]);
             return; // Skip validation and continue execution
         }
 
@@ -674,7 +674,7 @@ class VolcengineModel extends AbstractImageGenerate
         $maxDimension = max($width, $height);
 
         if ($minDimension <= 0) {
-            $this->logger->warning('火山graph生graph：imagesizeinvalid，skip长宽ratio例校验', ['width' => $width, 'height' => $height]);
+            $this->logger->warning('火山graph生graph：imagesizeinvalid，skip长宽ratio例validation', ['width' => $width, 'height' => $height]);
             return; // Skip validation and continue execution
         }
 

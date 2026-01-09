@@ -44,7 +44,7 @@ return new class extends Migration {
             // delightful_message_id 索引
             $table->index(['delightful_message_id'], 'idx_delightful_message_id');
             // 因for经常need按 seq_id sort，所byincrease联合索引
-            // bydown索引create移动tosingle独migratefilemiddle
+            // bydown索引createmovetosingle独migratefilemiddle
             $table->timestamps();
             $table->softDeletes();
             $table->comment('账number收item箱序columnnumbertable,each账number所havemessagemustsingle调递增');

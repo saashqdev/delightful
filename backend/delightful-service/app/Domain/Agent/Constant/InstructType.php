@@ -22,7 +22,7 @@ enum InstructType: int
     case STATUS = 4;        // statustype
 
     /**
-     * gettype实例.
+     * gettypeinstance.
      */
     public static function fromType(int $type): self
     {

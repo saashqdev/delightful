@@ -100,7 +100,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             executionType: ExecutionType::Debug,
         );
         $executionData->setFlowCode('single_debug');
-        // 计算 trigger_config middle node_contexts
+        // calculate trigger_config middle node_contexts
         $nodeContextsComponent = ComponentFactory::fastCreate($triggerConfig['node_contexts'] ?? []);
         if ($nodeContextsComponent?->isForm()) {
             $nodeContextsResult = $nodeContextsComponent->getForm()->getKeyValue();
@@ -418,7 +418,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         }
         $knowledgeData['users'] = $this->delightfulUserDomainService->getByUserIds($this->createContactDataIsolation($dataIsolation), $userIds);
 
-        // 重新计算total
+        // 重新calculatetotal
         $knowledgeData['total'] = count($knowledgeData['list']);
 
         return $knowledgeData;

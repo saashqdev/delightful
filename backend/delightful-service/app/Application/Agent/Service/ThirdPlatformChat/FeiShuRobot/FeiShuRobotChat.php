@@ -70,7 +70,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private const int DEFAULT_IMAGE_HEIGHT = 300;
 
     /**
-     * 飞书application实例.
+     * 飞书applicationinstance.
      */
     private Application $application;
 
@@ -87,7 +87,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private CacheInterface $cache;
 
     /**
-     * 构造function.
+     * constructfunction.
      *
      * @param array $options 飞书configurationoption
      * @throws Exception ifconfigurationinvalid

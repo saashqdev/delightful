@@ -60,7 +60,7 @@ class CheckPermissionAspect extends AbstractAspect
             $authorization->getId()
         );
 
-        // executepermission校验：任意onepermission键passthen放line
+        // executepermissionvalidation：任意onepermission键passthen放line
         $hasPermission = false;
         foreach ($permissionKeys as $permissionKey) {
             if ($this->roleAppService->hasPermission($dataIsolation, $authorization->getId(), $permissionKey)) {

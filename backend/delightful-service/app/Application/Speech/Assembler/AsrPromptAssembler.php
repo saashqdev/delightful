@@ -57,7 +57,7 @@ usersubmitonesegment录音content，录音content经passvoice识别转fortext，
 4. **keywordextract**：from笔记andvoice识别contentmiddleextractmost核corekeyword
 
 ### format要求
-1. **length限制**：not超pass 20 character（汉字按 1 character计算）
+1. **length限制**：not超pass 20 character（汉字按 1 charactercalculate）
 2. **languagestyle**：use陈述property语sentence，避免疑问sentence
 3. **简洁explicit**：直接概括核coretheme，not要addmodification词
 4. **纯textoutput**：只outputtitlecontent，not要add任何标point符number、引numberor其他modification
@@ -114,7 +114,7 @@ usersendoriginalmessage如down：
 3. **extractkeyword**：fromfile名middleextractmost核corekeywordandtheme
 
 ### format要求
-1. **length限制**：not超pass 20 character（汉字按 1 character计算）
+1. **length限制**：not超pass 20 character（汉字按 1 charactercalculate）
 2. **languagestyle**：use陈述property语sentence，避免疑问sentence
 3. **简洁explicit**：直接概括核coretheme，not要addmodification词
 4. **纯textoutput**：只outputtitlecontent，not要add任何标point符number、引numberor其他modification

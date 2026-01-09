@@ -110,7 +110,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * according tostatus码stringcreate枚举实例.
+     * according tostatus码stringcreate枚举instance.
      */
     public static function fromString(string $statusCode): ?self
     {

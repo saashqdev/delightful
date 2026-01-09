@@ -144,7 +144,7 @@ class RoleRepository implements RoleRepositoryInterface
             ->pluck('user_id')
             ->toArray();
 
-        // 计算needaddand移exceptuser
+        // calculateneedaddand移exceptuser
         $toAdd = array_diff($userIds, $existingUserIds);
         $toRemove = array_diff($existingUserIds, $userIds);
 
@@ -268,7 +268,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * based onorganizationencodingget RoleModel query构造器.
+     * based onorganizationencodingget RoleModel queryconstruct器.
      */
     private function roleQuery(string $organizationCode)
     {
@@ -276,7 +276,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * based onorganizationencodingget RoleUserModel query构造器.
+     * based onorganizationencodingget RoleUserModel queryconstruct器.
      */
     private function roleUserQuery(string $organizationCode)
     {

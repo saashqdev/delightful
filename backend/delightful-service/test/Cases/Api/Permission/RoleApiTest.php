@@ -165,7 +165,7 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertArrayHasKey('data', $response);
         $this->assertIsArray($response['data']);
 
-        // if data nonempty，简single校验sectionpoint结构
+        // if data nonempty，简singlevalidationsectionpoint结构
         if (! empty($response['data'])) {
             $this->assertArrayHasKey('permission_key', $response['data']);
         }

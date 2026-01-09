@@ -54,12 +54,12 @@ readonly class AsrValidationService
                 ExceptionBuilder::throw(BeAgentErrorCode::PROJECT_NOT_FOUND);
             }
 
-            // 校验projectwhether属atcurrentorganization
+            // validationprojectwhether属atcurrentorganization
             if ($projectEntity->getUserOrganizationCode() !== $organizationCode) {
                 ExceptionBuilder::throw(AsrErrorCode::ProjectAccessDeniedOrganization);
             }
 
-            // 校验projectwhether属atcurrentuser
+            // validationprojectwhether属atcurrentuser
             if ($projectEntity->getUserId() === $userId) {
                 return $projectEntity;
             }

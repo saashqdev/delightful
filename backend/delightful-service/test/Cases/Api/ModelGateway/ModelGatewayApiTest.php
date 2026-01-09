@@ -50,7 +50,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
             ],
         ];
 
-        // createone Parallel 实例，setmost大andhair数for 10
+        // createone Parallel instance，setmost大andhair数for 10
         $parallel = new Parallel(10);
 
         // definition多differentrequest场景
@@ -117,7 +117,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
      */
     public function testChatCompletions(): void
     {
-        // 构造requestparameter
+        // constructrequestparameter
         $requestData = $this->buildRequestData([
             'business_params' => [
                 'organization_id' => '000',
@@ -159,7 +159,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
      */
     public function testEmbeddings(): void
     {
-        // 构造toquantity嵌入requestparameter
+        // constructtoquantity嵌入requestparameter
         $requestData = [
             'model' => self::DEFAULT_MODEL,
             'input' => '这isoneuseattesttext',

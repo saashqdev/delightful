@@ -18,7 +18,7 @@ class PasswordService
     }
 
     /**
-     * 校验密码
+     * validation密码
      */
     public function verifyPassword(string $plainPassword, string $hashedPassword): bool
     {

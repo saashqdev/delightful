@@ -11,15 +11,15 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
  * 重sort模type枚举category.
  *
  * definition两type重sort模type：
- * - RERANKING_MODEL: use重sortmodelto检索resultconduct重sort
- * - WEIGHTED_SCORE: useadd权minute数to检索resultconduct重sort
+ * - RERANKING_MODEL: use重sortmodeltoretrieveresultconduct重sort
+ * - WEIGHTED_SCORE: useadd权minute数toretrieveresultconduct重sort
  */
 class RerankMode
 {
     /**
      * 重sortmodel.
      *
-     * use专门重sortmodel（如 BAAI/bge-reranker-large）to检索resultconduct重sort。
+     * use专门重sortmodel（如 BAAI/bge-reranker-large）toretrieveresultconduct重sort。
      * 重sortmodelwillaccording toqueryanddocument相closepropertygiveoutmoreaccuratesort。
      * 该模typepassconfigurationparameter `reranking_mode` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。
@@ -29,8 +29,8 @@ class RerankMode
     /**
      * add权minute数.
      *
-     * usedifferent检索methodminute数add权计算finalminute数，to检索resultconduct重sort。
-     * for example，cansettoquantity检索result权重for 0.7，keyword检索result权重for 0.3。
+     * usedifferentretrievemethodminute数add权calculatefinalminute数，toretrieveresultconduct重sort。
+     * for example，cansettoquantityretrieveresult权重for 0.7，keywordretrieveresult权重for 0.3。
      * 该模typepassconfigurationparameter `reranking_mode` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。
      */

@@ -32,7 +32,7 @@ use App\Infrastructure\Core\Dag\VertexResult;
 #[FlowNodeDefine(
     type: NodeType::UserSearch->value,
     code: NodeType::UserSearch->name,
-    name: 'person员检索',
+    name: 'person员retrieve',
     paramsConfig: UserSearchNodeParamsConfig::class,
     version: 'v1',
     singleDebug: false,

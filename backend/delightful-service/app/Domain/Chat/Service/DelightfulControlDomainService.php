@@ -160,7 +160,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                     $seqData = SeqAssembler::getInsertDataByEntity($senderSeenSeqEntity);
                     $seqData['app_message_id'] = $receiveDelightfulSeqEntity->getAppMessageId();
                     Db::transaction(function () use ($senderMessageId, $senderReceiveList, $seqData) {
-                        // 写database,updatemessagesend方已读column表。这isfor复usemessage收hair通道，notifycustomer端havenew已读return执。
+                        // 写database,updatemessagesend方已读column表。这isfor复usemessage收hairchannel，notifycustomer端havenew已读return执。
                         $this->delightfulSeqRepository->createSequence($seqData);
                         // updateoriginal chat_seq messagereceivepersoncolumn表。 避免pullhistorymessageo clock，to方已读messagealsoisdisplay未读。
                         $originalSeq = $this->delightfulSeqRepository->getSeqByMessageId($senderMessageId);

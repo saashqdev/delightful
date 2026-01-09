@@ -91,7 +91,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         if (! $this->userDomainService->addFriend($dataIsolation, $friendId)) {
             return false;
         }
-        // sendadd好友message。add好友splitfor：好友申请/好友同意/好友reject
+        // sendadd好友message。add好友splitfor：好友申请/好友agree/好友reject
         if ($addFriendType === AddFriendType::PASS) {
             // sendadd好友控制message
             $friendUserEntity = new DelightfulUserEntity();
@@ -210,7 +210,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     public function getUsersDetailByDepartmentId(UserQueryDTO $dto, DelightfulUserAuthorization $authorization): array
     {
         $dataIsolation = $this->createDataIsolation($authorization);
-        // rootdepartmentbe抽象for -1，所by这withinneedconvert
+        // rootdepartmentbeabstractfor -1，所by这withinneedconvert
         if ($dto->getDepartmentId() === PlatformRootDepartmentId::Delightful) {
             $departmentId = $this->departmentChartDomainService->getDepartmentRootId($dataIsolation);
             $dto->setDepartmentId($departmentId);

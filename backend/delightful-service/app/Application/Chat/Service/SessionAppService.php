@@ -23,7 +23,7 @@ class SessionAppService implements SessionInterface
     }
 
     /**
-     * login校验.
+     * loginvalidation.
      * @return LoginResponseDTO[]
      */
     public function LoginCheck(LoginCheckInterface $loginCheck, DelightfulEnvironmentEntity $delightfulEnvironmentEntity, ?string $delightfulOrganizationCode = null): array

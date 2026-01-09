@@ -41,7 +41,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'useuserissueandkeyword，go检索knowledge basemiddlecontent，returnanduserissuesimilardegreemost高content。';
+        return 'useuserissueandkeyword，goretrieveknowledge basemiddlecontent，returnanduserissuesimilardegreemost高content。';
     }
 
     public function getAppendSystemPrompt(array $customParams = []): string
@@ -56,22 +56,22 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
             $knowledgePrompt .= "- {$knowledge->getName()}：{$knowledge->getDescription()}\n";
         }
         return <<<MARKDOWN
-# allowbeuse能力: knowledge base检索
+# allowbeuse能力: knowledge baseretrieve
 ## knowledge basecolumn表
 > knowledge basename：knowledge basedescription
 {$knowledgePrompt}
 ## process
-1. 结合updown文提炼userissue，generate多keyword，at mostnot超pass 5 ，多keyworduseEnglish逗number"," 隔open，useatusedifferentkeywordfromknowledge basemiddle检索most相closeinfo；
+1. 结合updown文提炼userissue，generate多keyword，at mostnot超pass 5 ，多keyworduseEnglish逗number"," 隔open，useatusedifferentkeywordfromknowledge basemiddleretrievemost相closeinfo；
 2. 结合updown文，analyzeuserissue，generate `names` parameter，useatfinger定anduserissuemaybehaveclose多knowledge basename，按照相closepropertysort，相closeproperty需结合updown文、knowledge basenameandknowledge basedescriptionconduct判断；
-3. usekeywordanduserissue，call `{$this->getName()}` tool检索knowledge basemiddlecontent，keywordparameteris `keyword`，userissueparameteris `question`, 请ensureparameterallbecorrect填入，toolwillreturnanduserissuesimilardegreemost高contentslicesegment；
-4. knowledge base检索outcomecontentwithinwillcontainone些customize Delightful tag，你要善atuse它们，havebydown几typetag：
+3. usekeywordanduserissue，call `{$this->getName()}` toolretrieveknowledge basemiddlecontent，keywordparameteris `keyword`，userissueparameteris `question`, 请ensureparameterallbecorrect填入，toolwillreturnanduserissuesimilardegreemost高contentslicesegment；
+4. knowledge baseretrieveoutcomecontentwithinwillcontainone些customize Delightful tag，你要善atuse它们，havebydown几typetag：
     - <DelightfulImage></DelightfulImage> indicateoneimage，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，eachtagallwillinfront端messagecard渲染outone张image；
     - <DelightfulVideo></DelightfulVideo> indicateonevideo，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，eachtagallwillinfront端messagecard渲染outonevideo；
     - <DelightfulMention></DelightfulMention> indicateoneperson员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，eachtagallwillinfront端messagecardshapebecomeone @somesomeperson effect；
 5. 优先usecontain <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> etchave Delightful tagslicesegment；
 6. 结合knowledge basereturncontent整理back尽maybe丰富groundreturn答userissue。
 ## toolmiddleclose键returnvalueinstruction
-- fragments: 本time检索to所haveknowledge baseslicesegment
+- fragments: 本timeretrieveto所haveknowledge baseslicesegment
 - fragments.*.content: slicesegmentcontent
 - fragments.*.metadata.url: currentslicesegment原文link
 - graph.*.content: comefrom知识graph谱data，能enhanceinfo，let你more好return答issue
@@ -198,7 +198,7 @@ MARKDOWN;
             "key": "names",
             "sort": 1,
             "title": "knowledge base names",
-            "description": "needbe检索knowledge basename",
+            "description": "needberetrieveknowledge basename",
             "required": null,
             "value": null,
             "encryption": false,
@@ -248,7 +248,7 @@ JSON,
             "type": "string",
             "key": "content",
             "sort": 0,
-            "title": "检索to所havecontent",
+            "title": "retrieveto所havecontent",
             "description": "",
             "required": null,
             "value": null,

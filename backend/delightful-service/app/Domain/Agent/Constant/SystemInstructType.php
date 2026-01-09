@@ -22,7 +22,7 @@ enum SystemInstructType: int
     case RECORD = 5;
 
     /**
-     * fromtypevaluegetsystemfinger令type实例.
+     * fromtypevaluegetsystemfinger令typeinstance.
      */
     public static function fromType(int $type): self
     {

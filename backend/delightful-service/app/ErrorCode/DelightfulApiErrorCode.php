@@ -59,7 +59,7 @@ enum DelightfulApiErrorCode: int
     #[ErrorMessage(message: 'api.user_id_not_exist')]
     case USER_ID_NOT_EXIST = 4011;
 
-    // token 计算exception
+    // token calculateexception
     #[ErrorMessage(message: 'api.token.calculate_error')]
     case TOKEN_CALCULATE_ERROR = 4012;
 

@@ -94,7 +94,7 @@ readonly class LoginAppService
         }
 
         // verify密码
-        // useSHA256校验密码
+        // useSHA256validation密码
         if (! $this->passwordService->verifyPassword($request->getPassword(), $account->getPassword())) {
             ExceptionBuilder::throw(AuthenticationErrorCode::PasswordError);
         }

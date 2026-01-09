@@ -14,7 +14,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        // 重命名表 delightful_token->delightful_tokens
+        // rename表 delightful_token->delightful_tokens
         if (Schema::hasTable('delightful_token')) {
             Schema::rename('delightful_token', 'delightful_tokens');
         }

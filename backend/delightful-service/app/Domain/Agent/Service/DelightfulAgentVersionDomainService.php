@@ -151,7 +151,7 @@ class DelightfulAgentVersionDomainService
         // approvalswitch
         /* @phpstan-ignore-next-line */
         if ($approvalOpen) {
-            // 校验status
+            // validationstatus
             if ($agent->getApprovalStatus() !== DelightfulAgentVersionStatus::APPROVAL_PASSED->value) {
                 ExceptionBuilder::throw(AgentErrorCode::VERSION_CAN_ONLY_BE_ENABLED_AFTER_APPROVAL);
             }

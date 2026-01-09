@@ -28,7 +28,7 @@ class Page
     }
 
     /**
-     * according to页码and页数计算minuteslicedataup始position.
+     * according to页码and页数calculateminuteslicedataup始position.
      */
     public function getSliceStart(): int
     {
@@ -36,7 +36,7 @@ class Page
     }
 
     /**
-     * according to页码and页数计算minuteslicedataendposition.
+     * according to页码and页数calculateminuteslicedataendposition.
      */
     public function getSliceEnd(): int
     {

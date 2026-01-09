@@ -11,9 +11,9 @@ use App\Infrastructure\Core\AbstractValueObject;
 use InvalidArgumentException;
 
 /**
- * knowledge base检索configurationvalueobject
+ * knowledge baseretrieveconfigurationvalueobject
  *
- * contain检索strategy、检索method、重sortconfigurationetcparameter
+ * containretrievestrategy、retrievemethod、重sortconfigurationetcparameter
  */
 class RetrieveConfig extends AbstractValueObject
 {
@@ -25,13 +25,13 @@ class RetrieveConfig extends AbstractValueObject
     public const int CURRENT_VERSION = 1;
 
     /**
-     * 检索method.
+     * retrievemethod.
      *
      * optionalvalue：
-     * - semantic_search: 语义检索
-     * - full_text_search: all文检索
-     * - hybrid_search: 混合检索
-     * - graph_search: graph检索
+     * - semantic_search: 语义retrieve
+     * - full_text_search: all文retrieve
+     * - hybrid_search: 混合retrieve
+     * - graph_search: graphretrieve
      *
      * @see RetrievalMethod
      */
@@ -73,7 +73,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * 权重configuration.
      *
-     * containtoquantity检索andkeyword检索权重configuration
+     * containtoquantityretrieveandkeywordretrieve权重configuration
      */
     protected array $weights = [
         'vector_setting' => [
@@ -128,7 +128,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * get检索method.
+     * getretrievemethod.
      */
     public function getSearchMethod(): string
     {
@@ -136,7 +136,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * set检索method.
+     * setretrievemethod.
      */
     public function setSearchMethod(string $searchMethod): self
     {

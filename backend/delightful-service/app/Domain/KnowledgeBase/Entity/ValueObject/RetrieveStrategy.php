@@ -8,27 +8,27 @@ declare(strict_types=1);
 namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 
 /**
- * 检索strategy枚举category.
+ * retrievestrategy枚举category.
  *
- * definition两type检索strategy：
- * - SINGLE: single检索，fromsingleknowledge basemiddle检索info
- * - MULTIPLE: 多重检索，meanwhilefrom多knowledge basemiddle检索info，然backtoresultconduct重新sort
+ * definition两typeretrievestrategy：
+ * - SINGLE: singleretrieve，fromsingleknowledge basemiddleretrieveinfo
+ * - MULTIPLE: 多重retrieve，meanwhilefrom多knowledge basemiddleretrieveinfo，然backtoresultconduct重新sort
  */
 class RetrieveStrategy
 {
     /**
-     * single检索.
+     * singleretrieve.
      *
-     * fromsingleknowledge basemiddle检索info。
+     * fromsingleknowledge basemiddleretrieveinfo。
      * 该strategypassconfigurationparameter `retrieve_strategy` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。
      */
     public const SINGLE = 'single';
 
     /**
-     * 多重检索.
+     * 多重retrieve.
      *
-     * meanwhilefrom多knowledge basemiddle检索info，然backtoresultconduct重新sort。
+     * meanwhilefrom多knowledge basemiddleretrieveinfo，然backtoresultconduct重新sort。
      * 该strategypassconfigurationparameter `retrieve_strategy` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。
      * 它supportdifferent重sortstrategy，如use重sortmodeloradd权minute数。
@@ -36,7 +36,7 @@ class RetrieveStrategy
     public const MULTIPLE = 'multiple';
 
     /**
-     * get所havecanuse检索strategy.
+     * get所havecanuseretrievestrategy.
      *
      * @return array<string>
      */

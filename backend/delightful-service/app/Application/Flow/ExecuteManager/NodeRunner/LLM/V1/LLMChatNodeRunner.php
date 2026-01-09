@@ -245,9 +245,9 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
     }
 
     /**
-     * execute代理andgetresponse.
+     * executeproxyandgetresponse.
      *
-     * @param Agent $agent 代理object
+     * @param Agent $agent proxyobject
      * @param VertexResult $vertexResult sectionpointexecuteresult
      * @param ExecutionData $executionData executedata
      * @return array [推理text, responsetext]

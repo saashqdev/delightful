@@ -196,7 +196,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         if ($editMessageOptions !== null) {
             $seqExtra->setEditMessageOptions($editMessageOptions);
         }
-        // seq extensioninfo. ifneed检索话题message,请query topic_messages 表
+        // seq extensioninfo. ifneedretrieve话题message,请query topic_messages 表
         $topicId && $seqExtra->setTopicId($topicId);
         $seqDTO->setExtra($seqExtra);
         // ifis跟assistantprivate chat，andnothave话题 id，from动createone话题
@@ -351,7 +351,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         // also要createreceive方conversationwindow，要not然no法create话题
         $this->delightfulConversationDomainService->getOrCreateConversation($receiverId, $senderUserId);
 
-        // 2.if $seqExtra notfor null，校验whetherhave topic id，ifnothave，参考 agentSendMessageGetTopicId method，得to话题 id
+        // 2.if $seqExtra notfor null，validationwhetherhave topic id，ifnothave，参考 agentSendMessageGetTopicId method，得to话题 id
         $topicId = $aiSeqDTO->getExtra()?->getTopicId() ?? '';
         if (empty($topicId) && $receiverType !== ConversationType::Group) {
             $topicId = $this->delightfulTopicDomainService->agentSendMessageGetTopicId($senderConversationEntity, 0);
@@ -385,7 +385,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         if ($receiverType !== ConversationType::Group) {
             $this->delightfulConversationDomainService->getOrCreateConversation($receiverId, $senderUserId);
         }
-        // 2.if $seqExtra notfor null，校验whetherhave topic id，ifnothave，参考 agentSendMessageGetTopicId method，得to话题 id
+        // 2.if $seqExtra notfor null，validationwhetherhave topic id，ifnothave，参考 agentSendMessageGetTopicId method，得to话题 id
         if (empty($topicId)) {
             $topicId = $aiSeqDTO->getExtra()?->getTopicId() ?? '';
         }
@@ -530,7 +530,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
      */
     public function getMessagesByConversationId(DelightfulUserAuthorization $userAuthorization, string $conversationId, MessagesQueryDTO $conversationMessagesQueryDTO): array
     {
-        // conversation所have权校验
+        // conversation所have权validation
         $this->checkConversationsOwnership($userAuthorization, [$conversationId]);
 
         // 按timerange，getconversation/话题message
@@ -543,7 +543,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
      */
     public function getMessageByConversationIds(DelightfulUserAuthorization $userAuthorization, MessagesQueryDTO $conversationMessagesQueryDTO): array
     {
-        // conversation所have权校验
+        // conversation所have权validation
         $conversationIds = $conversationMessagesQueryDTO->getConversationIds();
         if (! empty($conversationIds)) {
             $this->checkConversationsOwnership($userAuthorization, $conversationIds);
@@ -557,7 +557,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     // 按conversation id groupget几itemmost新message
     public function getConversationsMessagesGroupById(DelightfulUserAuthorization $userAuthorization, MessagesQueryDTO $conversationMessagesQueryDTO): array
     {
-        // conversation所have权校验
+        // conversation所have权validation
         $conversationIds = $conversationMessagesQueryDTO->getConversationIds();
         if (! empty($conversationIds)) {
             $this->checkConversationsOwnership($userAuthorization, $conversationIds);
@@ -675,7 +675,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     public function getFileDownUrl(array $fileDTOs, DelightfulUserAuthorization $authorization): array
     {
         $dataIsolation = $this->createDataIsolation($authorization);
-        // permission校验，判断usermessagemiddle，whethercontain本time他想downloadfile
+        // permissionvalidation，判断usermessagemiddle，whethercontain本time他想downloadfile
         $fileEntities = $this->delightfulChatFileDomainService->checkAndGetFilePaths($fileDTOs, $dataIsolation);
         // downloado clockalso原file原本name
         $downloadNames = [];
@@ -1205,9 +1205,9 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             $dataIsolation = $this->createDataIsolation($userAuthorization);
             // message鉴权
             $this->checkSendMessageAuth($senderSeqDTO, $senderMessageDTO, $senderConversationEntity, $dataIsolation);
-            // securityproperty保证，校验attachmentmiddlefilewhether属atcurrentuser
+            // securityproperty保证，validationattachmentmiddlefilewhether属atcurrentuser
             $senderMessageDTO = $this->checkAndFillAttachments($senderMessageDTO, $dataIsolation);
-            // 业务parameter校验
+            // 业务parametervalidation
             $this->validateBusinessParams($senderMessageDTO, $dataIsolation);
             // messageminutehair
             $conversationType = $senderConversationEntity->getReceiveType();
@@ -1223,7 +1223,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * 校验attachmentmiddlefilewhether属atcurrentuser,and填充attachmentinfo.（file名/typeetcfield）.
+     * validationattachmentmiddlefilewhether属atcurrentuser,and填充attachmentinfo.（file名/typeetcfield）.
      */
     private function checkAndFillAttachments(DelightfulMessageEntity $senderMessageDTO, DataIsolation $dataIsolation): DelightfulMessageEntity
     {
@@ -1323,26 +1323,26 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * 业务parameter校验
-     * to特定typemessageconduct业务rule校验.
+     * 业务parametervalidation
+     * to特定typemessageconduct业务rulevalidation.
      */
     private function validateBusinessParams(DelightfulMessageEntity $senderMessageDTO, DataIsolation $dataIsolation): void
     {
         $content = $senderMessageDTO->getContent();
         $messageType = $senderMessageDTO->getMessageType();
 
-        // voicemessage校验
+        // voicemessagevalidation
         if ($messageType === ChatMessageType::Voice && $content instanceof VoiceMessage) {
             $this->validateVoiceMessageParams($content, $dataIsolation);
         }
     }
 
     /**
-     * 校验voicemessage业务parameter.
+     * validationvoicemessage业务parameter.
      */
     private function validateVoiceMessageParams(VoiceMessage $voiceMessage, DataIsolation $dataIsolation): void
     {
-        // 校验attachment
+        // validationattachment
         $attachments = $voiceMessage->getAttachments();
         if (empty($attachments)) {
             ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR, 'chat.message.voice.attachment_required');
@@ -1368,7 +1368,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR, 'chat.message.voice.audio_format_required', ['type' => $attachment->getFileType()->name]);
         }
 
-        // 校验录音duration
+        // validation录音duration
         $duration = $voiceMessage->getDuration();
         if ($duration !== null) {
             if ($duration <= 0) {

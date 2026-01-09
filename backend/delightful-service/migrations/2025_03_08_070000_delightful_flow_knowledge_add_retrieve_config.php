@@ -16,7 +16,7 @@ class DelightfulFlowKnowledgeAddRetrieveConfig extends Migration
     public function up(): void
     {
         Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
-            $table->string('retrieve_config', 2000)->nullable()->comment('检索configuration');
+            $table->string('retrieve_config', 2000)->nullable()->comment('retrieveconfiguration');
         });
 
         // notsettingdefaultconfiguration，letfield保持for null

@@ -183,7 +183,7 @@ class CreateKnowledgeBaseRequestDTO extends AbstractRequestDTO
             'fragment_config.parent_child.parent_segment_rule.chunk_size' => 'required_if:fragment_config.mode,2|integer|min:1',
             'fragment_config.parent_child.text_preprocess_rule' => 'array',
             'fragment_config.parent_child.text_preprocess_rule.*' => 'integer|in:1,2',
-            // todo 检索setting
+            // todo retrievesetting
         ];
     }
 

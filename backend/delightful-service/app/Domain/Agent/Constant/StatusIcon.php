@@ -57,7 +57,7 @@ enum StatusIcon: string
     case IconWand = 'IconWand';
 
     /**
-     * fromstringgetgraph标实例.
+     * fromstringgetgraph标instance.
      */
     public static function fromString(string $icon): self
     {

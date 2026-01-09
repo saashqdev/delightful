@@ -22,7 +22,7 @@ use Hyperf\Codec\Json;
 use Throwable;
 
 /**
- * 官方代理model.
+ * 官方proxymodel.
  */
 class OfficialProxyModel extends AbstractImageGenerate
 {
@@ -52,7 +52,7 @@ class OfficialProxyModel extends AbstractImageGenerate
             $officialProxyRequest = $imageGenerateRequest;
             $data = $officialProxyRequest->toArray();
 
-            $this->logger->info('官方代理：sendimagegeneraterequest', [
+            $this->logger->info('官方proxy：sendimagegeneraterequest', [
                 'url' => $fullUrl,
                 'data' => $data,
             ]);
@@ -68,14 +68,14 @@ class OfficialProxyModel extends AbstractImageGenerate
             $statusCode = $response->getStatusCode();
             $responseBody = $response->getBody()->getContents();
 
-            $this->logger->info('官方代理：收toresponse', [
+            $this->logger->info('官方proxy：收toresponse', [
                 'status_code' => $statusCode,
                 'response_length' => strlen($responseBody),
             ]);
 
             $responseData = Json::decode($responseBody);
 
-            $this->logger->info('官方代理：requestsuccess', [
+            $this->logger->info('官方proxy：requestsuccess', [
                 'url' => $this->url,
                 'data_count' => count($responseData['data'] ?? []),
             ]);
@@ -94,7 +94,7 @@ class OfficialProxyModel extends AbstractImageGenerate
                 $errorBody = 'Failed to read response body: ' . $bodyException->getMessage();
             }
 
-            $this->logger->error('官方代理：requestfailed', [
+            $this->logger->error('官方proxy：requestfailed', [
                 'url' => $fullUrl,
                 'error' => $e->getMessage(),
                 'code' => $e->getCode(),
@@ -107,7 +107,7 @@ class OfficialProxyModel extends AbstractImageGenerate
                 message: is_array($errorBody) ? $errorBody['error']['message'] : $errorBody,
             );
         } catch (Throwable $e) {
-            $this->logger->error('官方代理：unknownerror', [
+            $this->logger->error('官方proxy：unknownerror', [
                 'url' => $fullUrl,
                 'error' => $e->getMessage(),
                 'code' => $e->getCode(),
@@ -156,7 +156,7 @@ class OfficialProxyModel extends AbstractImageGenerate
 
     protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
-        // 官方代理notuse此method，直接use generateImageOpenAIFormat
+        // 官方proxynotuse此method，直接use generateImageOpenAIFormat
         throw new Exception('OfficialProxyModel does not support generateImageInternal method');
     }
 }

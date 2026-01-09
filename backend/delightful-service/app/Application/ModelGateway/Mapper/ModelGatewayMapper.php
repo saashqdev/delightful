@@ -81,7 +81,7 @@ class ModelGatewayMapper extends ModelMapper
 
     /**
      * inside部use chat o clock，one定isuse该method.
-     * willfrom动替代for本ground代理model.
+     * willfrom动替代for本groundproxymodel.
      */
     public function getChatModelProxy(BaseDataIsolation $dataIsolation, string $model, bool $useOfficialAccessToken = false): DelightfulAILocalModel
     {
@@ -98,7 +98,7 @@ class ModelGatewayMapper extends ModelMapper
 
     /**
      * inside部use embedding o clock，one定isuse该method.
-     * willfrom动替代for本ground代理model.
+     * willfrom动替代for本groundproxymodel.
      */
     public function getEmbeddingModelProxy(BaseDataIsolation $dataIsolation, string $model): DelightfulAILocalModel
     {
@@ -111,14 +111,14 @@ class ModelGatewayMapper extends ModelMapper
         if (! $odinModel instanceof AbstractModel) {
             throw new InvalidArgumentException(sprintf('Model %s is not a valid Odin model.', $model));
         }
-        // convertfor代理
+        // convertforproxy
         return $this->createProxy($dataIsolation, $model, $odinModel->getModelOptions(), $odinModel->getApiRequestOptions());
     }
 
     /**
      * 该methodgettoone定istrue实callmodel.
      * 仅 ModelGateway 领域use.
-     * @param string $model expectedis管理back台 model_id，passdegree阶segment接受传入 model_version
+     * @param string $model expectedis管理back台 model_id，passdegree阶segmentaccept传入 model_version
      */
     public function getOrganizationChatModel(BaseDataIsolation $dataIsolation, string $model): ModelInterface|OdinModel
     {
@@ -133,7 +133,7 @@ class ModelGatewayMapper extends ModelMapper
     /**
      * 该methodgettoone定istrue实callmodel.
      * 仅 ModelGateway 领域use.
-     * @param string $model modelname expectedis管理back台 model_id，passdegree阶segment接受 model_version
+     * @param string $model modelname expectedis管理back台 model_id，passdegree阶segmentaccept model_version
      */
     public function getOrganizationEmbeddingModel(BaseDataIsolation $dataIsolation, string $model): EmbeddingInterface|OdinModel
     {
@@ -361,7 +361,7 @@ class ModelGatewayMapper extends ModelMapper
             $list = $orderedList;
         }
 
-        $this->logger->info('检索tomodel', $modelLogs);
+        $this->logger->info('retrievetomodel', $modelLogs);
 
         return $list;
     }
@@ -516,7 +516,7 @@ class ModelGatewayMapper extends ModelMapper
 
     private function createProxy(ModelGatewayDataIsolation $dataIsolation, string $model, ModelOptions $modelOptions, ApiOptions $apiOptions, bool $useOfficialAccessToken = false): DelightfulAILocalModel
     {
-        // useModelFactorycreatemodel实例
+        // useModelFactorycreatemodelinstance
         $odinModel = ModelFactory::create(
             DelightfulAILocalModel::class,
             $model,

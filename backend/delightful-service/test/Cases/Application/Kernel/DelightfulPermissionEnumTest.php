@@ -129,7 +129,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $this->assertIsArray($tree);
         $this->assertGreaterThanOrEqual(1, count($tree));
 
-        // 找to Admin 平台sectionpointconductenterone步校验
+        // 找to Admin 平台sectionpointconductenterone步validation
         $platformsByKey = [];
         foreach ($tree as $node) {
             $platformsByKey[$node['permission_key']] = $node;

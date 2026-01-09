@@ -365,7 +365,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * batchquantityprocess记忆suggestion（接受/reject）.
+     * batchquantityprocess记忆suggestion（accept/reject）.
      */
     public function batchProcessMemorySuggestions(RequestInterface $request): array
     {
@@ -412,7 +412,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         try {
             if ($action === 'accept') {
-                // batchquantity接受记忆suggestion：status 改for accept，enabled for true
+                // batchquantityaccept记忆suggestion：status 改for accept，enabled for true
                 $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::ACCEPT, $scenario, $validatedParams['delightful_message_id'] ?? null);
 
                 return [
@@ -551,7 +551,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 校验requestparameter.
+     * validationrequestparameter.
      */
     protected function checkParams(array $params, array $rules, ?string $method = null): array
     {

@@ -165,7 +165,7 @@ enum NodeType: int
     case KnowledgeFragmentRemove = 27;
 
     /**
-     * person员检索.
+     * person员retrieve.
      */
     case UserSearch = 28;
 
@@ -195,7 +195,7 @@ enum NodeType: int
     case ExcelLoader = 51;
 
     /**
-     * knowledge base 检索.
+     * knowledge base retrieve.
      */
     case KnowledgeSearch = 52;
 

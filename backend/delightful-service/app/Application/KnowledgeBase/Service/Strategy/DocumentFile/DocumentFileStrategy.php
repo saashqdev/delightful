@@ -135,7 +135,7 @@ class DocumentFileStrategy
                     finfo_close($finfo);
                     $extension = $this->getExtensionFromMimeType($mimeType);
 
-                    // 重命名temporaryfile
+                    // renametemporaryfile
                     $imageName = uniqid() . '.' . $extension;
                     $imagePath = sys_get_temp_dir() . DIRECTORY_SEPARATOR . $imageName;
                     rename($tempFile, $imagePath);

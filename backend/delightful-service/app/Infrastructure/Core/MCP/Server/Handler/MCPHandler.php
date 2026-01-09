@@ -57,7 +57,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * getauthinterface实例.
+     * getauthinterfaceinstance.
      */
     public function getAuthentication(): AuthenticationInterface
     {
@@ -65,7 +65,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * setauthinterface实例.
+     * setauthinterfaceinstance.
      */
     public function setAuthentication(AuthenticationInterface $authentication): self
     {
@@ -74,7 +74,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * getspeedrate限制器实例.
+     * getspeedrate限制器instance.
      */
     public function getRateLimiter(): RateLimiterInterface
     {
@@ -82,7 +82,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * setspeedrate限制器实例.
+     * setspeedrate限制器instance.
      */
     public function setRateLimiter(RateLimiterInterface $rateLimiter): self
     {
@@ -91,7 +91,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * gettoolmanager实例.
+     * gettoolmanagerinstance.
      */
     public function getToolManager(): MCPToolManager
     {
@@ -99,7 +99,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * settoolmanager实例.
+     * settoolmanagerinstance.
      */
     public function setToolManager(MCPToolManager $toolManager): self
     {
@@ -108,7 +108,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * getresourcemanager实例.
+     * getresourcemanagerinstance.
      */
     public function getResourceManager(): MCPResourceManager
     {
@@ -116,7 +116,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * setresourcemanager实例.
+     * setresourcemanagerinstance.
      */
     public function setResourceManager(MCPResourceManager $resourceManager): self
     {
@@ -125,7 +125,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * gethintmanager实例.
+     * gethintmanagerinstance.
      */
     public function getPromptManager(): MCPPromptManager
     {
@@ -133,7 +133,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * sethintmanager实例.
+     * sethintmanagerinstance.
      */
     public function setPromptManager(MCPPromptManager $promptManager): self
     {
@@ -152,7 +152,7 @@ class MCPHandler implements MCPHandlerInterface
             // getrequestmethodname
             $method = $request->getMethod();
 
-            // createprocess器实例（短生命period）
+            // createprocess器instance（短生命period）
             $handler = $this->methodHandlerFactory->createHandler($method);
 
             $result = null;

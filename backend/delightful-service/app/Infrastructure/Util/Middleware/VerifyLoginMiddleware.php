@@ -23,7 +23,7 @@ class VerifyLoginMiddleware implements MiddlewareInterface
         if (! $token) {
             ExceptionBuilder::throw(HttpErrorCode::Unauthorized);
         }
-        // 校验token
+        // validationtoken
 
         return $handler->handle($request);
     }

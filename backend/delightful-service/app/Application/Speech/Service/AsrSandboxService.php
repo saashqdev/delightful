@@ -108,7 +108,7 @@ readonly class AsrSandboxService
             'full_workdir' => $fullWorkdir,
         ]);
 
-        // buildfileconfigurationobject（复use公共method）
+        // buildfileconfigurationobject（复usepublicmethod）
         $noteFileConfig = $this->buildNoteFileConfig($taskStatus);
         $transcriptFileConfig = $this->buildTranscriptFileConfig($taskStatus);
 
@@ -122,7 +122,7 @@ readonly class AsrSandboxService
         ]);
 
         // call沙箱starttask
-        // 注意：沙箱 API 只接受work区相topath (如: .asr_recordings/session_xxx)
+        // 注意：沙箱 API 只acceptwork区相topath (如: .asr_recordings/session_xxx)
         $response = $this->asrRecorder->startTask(
             $actualSandboxId,
             $taskStatus->taskKey,
@@ -233,7 +233,7 @@ readonly class AsrSandboxService
 
         // updateactual沙箱ID（maybe已经change）
         if ($actualSandboxId !== $requestedSandboxId) {
-            $this->logger->warning('沙箱IDhair生change，maybeis沙箱重启', [
+            $this->logger->warning('沙箱IDhair生change，maybeis沙箱restart', [
                 'task_key' => $taskStatus->taskKey,
                 'old_sandbox_id' => $requestedSandboxId,
                 'new_sandbox_id' => $actualSandboxId,
@@ -273,7 +273,7 @@ readonly class AsrSandboxService
      * call沙箱 finish andround询etc待complete.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
-     * @param string $intelligentTitle 智能title（useat重命名）
+     * @param string $intelligentTitle 智能title（useatrename）
      * @return AsrSandboxMergeResultDTO mergeresult
      */
     private function callSandboxFinishAndWait(
@@ -293,7 +293,7 @@ readonly class AsrSandboxService
             outputFilename: $intelligentTitle              // 如: be讨厌勇气
         );
 
-        // build笔记fileconfigurationobject（need重命名）
+        // build笔记fileconfigurationobject（needrename）
         $noteFileConfig = $this->buildNoteFileConfig(
             $taskStatus,
             $taskStatus->displayDirectory,
@@ -442,7 +442,7 @@ readonly class AsrSandboxService
     ): ?AsrSandboxMergeResultDTO {
         // checkwhetherforcompletestatus（contain completed and finished）
         if ($status->isCompleted()) {
-            // 计算总耗o clock
+            // calculate总耗o clock
             $finishEndTime = microtime(true);
             $totalElapsedTime = round($finishEndTime - $finishStartTime);
 
@@ -753,7 +753,7 @@ readonly class AsrSandboxService
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param null|string $targetDirectory goaldirectory（optional，defaultand源directorysame）
-     * @param null|string $intelligentTitle 智能title（optional，useat重命名）
+     * @param null|string $intelligentTitle 智能title（optional，useatrename）
      */
     private function buildNoteFileConfig(
         AsrTaskStatusDTO $taskStatus,
@@ -766,7 +766,7 @@ readonly class AsrSandboxService
 
         $workspaceRelativePath = AsrAssembler::extractWorkspaceRelativePath($taskStatus->presetNoteFilePath);
 
-        // if未finger定goaldirectory，use源path（not重命名）
+        // if未finger定goaldirectory，use源path（notrename）
         if ($targetDirectory === null || $intelligentTitle === null) {
             return new AsrNoteFileConfig(
                 sourcePath: $workspaceRelativePath,
@@ -774,7 +774,7 @@ readonly class AsrSandboxService
             );
         }
 
-        // need重命名：use智能titleand国际化笔记back缀buildgoalpath
+        // needrename：use智能titleand国际化笔记back缀buildgoalpath
         $fileExtension = pathinfo($workspaceRelativePath, PATHINFO_EXTENSION);
         $noteSuffix = trans('asr.file_names.note_suffix'); // according tolanguageget国际化"笔记"/"Note"
         $noteFilename = sprintf('%s-%s.%s', $intelligentTitle, $noteSuffix, $fileExtension);

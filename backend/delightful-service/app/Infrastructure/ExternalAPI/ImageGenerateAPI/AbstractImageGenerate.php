@@ -18,7 +18,7 @@ use Hyperf\Redis\Redis;
 use Psr\Log\LoggerInterface;
 
 /**
- * imagegenerate统one抽象category
+ * imagegenerate统oneabstractcategory
  * integrationwatermarkprocessand钉钉alertfeature
  * 所haveimagegenerateProviderallshouldinherit此category.
  */

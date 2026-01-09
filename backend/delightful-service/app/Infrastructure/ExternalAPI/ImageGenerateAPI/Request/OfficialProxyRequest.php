@@ -18,7 +18,7 @@ class OfficialProxyRequest extends ImageGenerateRequest
     }
 
     /**
-     * 官方代理request，data原封not动传递.
+     * 官方proxyrequest，data原封not动传递.
      */
     public function toArray(): array
     {

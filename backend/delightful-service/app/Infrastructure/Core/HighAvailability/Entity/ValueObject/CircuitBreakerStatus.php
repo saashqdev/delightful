@@ -50,7 +50,7 @@ enum CircuitBreakerStatus: string
     }
 
     /**
-     * fromstringcreate枚举实例.
+     * fromstringcreate枚举instance.
      */
     public static function fromString(string $status): self
     {

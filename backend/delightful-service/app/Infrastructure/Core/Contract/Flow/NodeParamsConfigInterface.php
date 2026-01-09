@@ -12,7 +12,7 @@ interface NodeParamsConfigInterface
     public function setValidateScene(string $scene): void;
 
     /**
-     * parameter校验.
+     * parametervalidation.
      */
     public function validate(): array;
 

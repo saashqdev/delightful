@@ -64,7 +64,7 @@ readonly class RoleDomainService
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
         $savingRoleEntity->setOrganizationCode($organizationCode);
 
-        // 校验传入userIDwhether属atcurrentorganization
+        // validation传入userIDwhether属atcurrentorganization
         $inputUserIds = $savingRoleEntity->getUserIds();
         if (! empty($inputUserIds)) {
             $validUsers = $this->userRepository->getByUserIds($organizationCode, $inputUserIds);
@@ -78,11 +78,11 @@ readonly class RoleDomainService
             }
         }
 
-        // 1. 校验permission键validproperty
+        // 1. validationpermission键validproperty
         // update permissionTag info：according topermission键extracttwolevel模piecetag，useatfront端showcategory
         $permissionTags = [];
         foreach ($savingRoleEntity->getPermissions() as $permissionKey) {
-            // 校验permission键validproperty
+            // validationpermission键validproperty
             if (! $this->permission->isValidPermission($permissionKey)) {
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.invalid_permission_key', ['key' => $permissionKey]);
             }
@@ -99,7 +99,7 @@ readonly class RoleDomainService
                 $moduleLabel = $this->permission->getResourceModule($resource);
                 $permissionTags[$moduleLabel] = $moduleLabel; // use键valuego重
             } catch (Throwable $e) {
-                // parsefailo clockignore该permissiontagextract，校验已pass，not影响save
+                // parsefailo clockignore该permissiontagextract，validation已pass，not影响save
             }
         }
 

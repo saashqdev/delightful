@@ -194,7 +194,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
     /**
      * getlayerlevel结构permissiontree
-     * generateno限极permissiontree,rule：according topermissionresourcestring（如 Admin.ai.model_management）逐segmentsplit，逐layer构造tree。
+     * generateno限极permissiontree,rule：according topermissionresourcestring（如 Admin.ai.model_management）逐segmentsplit，逐layerconstructtree。
      *
      * returnformat：
      * [
@@ -234,7 +234,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 ];
             }
 
-            // fromtoptodown逐segment构造
+            // fromtoptodown逐segmentconstruct
             $current = &$tree[$platformKey];
             $accumKey = $platformKey;
             foreach ($segments as $index => $segment) {
@@ -316,7 +316,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
      */
     public function checkPermission(string $permissionKey, array $userPermissions, bool $isPlatformOrganization = false): bool
     {
-        // 平台organization校验：non平台organizationnotallowaccess platform 平台resource
+        // 平台organizationvalidation：non平台organizationnotallowaccess platform 平台resource
         $parsed = $this->parsePermission($permissionKey);
         $platformKey = explode('.', $parsed['resource'])[0];
         if ($platformKey === DelightfulResourceEnum::PLATFORM->value && ! $isPlatformOrganization) {

@@ -69,7 +69,7 @@ class ByteDanceSTSService
             $cachedData = $this->getCachedJwtToken($cacheKey);
 
             if ($cachedData !== null) {
-                // 计算remainingvalidtime
+                // calculateremainingvalidtime
                 $remainingDuration = $cachedData['expires_at'] - time();
                 $cachedData['duration'] = max(0, $remainingDuration);
 

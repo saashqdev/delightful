@@ -10,8 +10,8 @@ namespace App\Interfaces\Provider\Assembler;
 use Hyperf\Contract\TranslatorInterface;
 
 /**
- * Provider Assembler抽象基category
- * extract公共convert逻辑，decreasecode重复.
+ * Provider Assemblerabstract基category
+ * extractpublicconvert逻辑，decreasecode重复.
  */
 abstract class AbstractProviderAssembler
 {

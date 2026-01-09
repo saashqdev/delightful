@@ -242,22 +242,22 @@ class MidjourneyModel extends AbstractImageGenerate
             $result = $this->api->checkPrompt($prompt);
 
             if (! isset($result['status'])) {
-                $this->logger->error('MJ文生graph：Prompt校验responseformaterror', [
+                $this->logger->error('MJ文生graph：Promptvalidationresponseformaterror', [
                     'response' => $result,
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR);
             }
 
             if ($result['status'] !== 'SUCCESS') {
-                $this->logger->warning('MJ文生graph：Prompt校验fail', [
+                $this->logger->warning('MJ文生graph：Promptvalidationfail', [
                     'message' => $result['message'] ?? 'unknownerror',
                 ]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::INVALID_PROMPT);
             }
 
-            $this->logger->info('MJ文生graph：Prompt校验complete');
+            $this->logger->info('MJ文生graph：Promptvalidationcomplete');
         } catch (Exception $e) {
-            $this->logger->error('MJ文生graph：Prompt校验requestfail', [
+            $this->logger->error('MJ文生graph：Promptvalidationrequestfail', [
                 'error' => $e->getMessage(),
             ]);
             ExceptionBuilder::throw(ImageGenerateErrorCode::PROMPT_CHECK_FAILED);

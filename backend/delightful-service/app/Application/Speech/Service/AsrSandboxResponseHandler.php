@@ -59,7 +59,7 @@ readonly class AsrSandboxResponseHandler
             return;
         }
 
-        // 2. checkandhandledirectory重命名（沙箱havebug，will重命名directorybutisnothavenotifyfile变动，nothave改databaserecord）
+        // 2. checkandhandledirectoryrename（沙箱havebug，willrenamedirectorybutisnothavenotifyfile变动，nothave改databaserecord）
         $taskStatus->displayDirectory = $this->extractDirectoryPath($audioFile);
 
         // 3. findaudiofilerecord
@@ -67,7 +67,7 @@ readonly class AsrSandboxResponseHandler
 
         // 4. handle笔记file
         if ($noteFile !== null) {
-            // pass file_key findmostnew笔记file ID（directorymaybebe重命名）
+            // pass file_key findmostnew笔记file ID（directorymaybeberename）
             $this->getNoteFileId($taskStatus, $noteFile);
         } else {
             // 笔记filefornullornot存in，deletepreset笔记filerecord

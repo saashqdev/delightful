@@ -27,7 +27,7 @@ class ServiceProviderApiTest extends BaseTest
 
         // ifreturnauthenticationorpermission相closeerror，skiptest（仅validate路bycanuse）
         if (isset($response['code']) && in_array($response['code'], [401, 403, 2179, 3035, 4001, 4003], true)) {
-            $this->markTestSkipped('interfaceauthenticationfailornopermission，路by校验pass');
+            $this->markTestSkipped('interfaceauthenticationfailornopermission，路byvalidationpass');
             return;
         }
 
@@ -384,7 +384,7 @@ class ServiceProviderApiTest extends BaseTest
         // get Domain Service
         $domainService = $this->getContainer()->get(ProviderModelDomainService::class);
 
-        // 构造data隔离object
+        // constructdata隔离object
         $organizationCode = env('TEST_ORGANIZATION_CODE');
         $dataIsolation = new ProviderDataIsolation($organizationCode, '', '');
 

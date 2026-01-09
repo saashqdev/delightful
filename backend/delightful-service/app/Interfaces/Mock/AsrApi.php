@@ -130,7 +130,7 @@ class AsrApi
         $targetDir = $audioConfig['target_dir'] ?? '';
         $outputFilename = $audioConfig['output_filename'] ?? 'audio';
 
-        // 模拟true实沙箱linefor：according to output_filename 重命名directory
+        // 模拟true实沙箱linefor：according to output_filename renamedirectory
         // extract原directorymiddletime戳部minute（format：_YYYYMMDD_HHMMSS）
         $timestamp = '';
         if (preg_match('/_(\d{8}_\d{6})$/', $targetDir, $matches)) {
@@ -153,7 +153,7 @@ class AsrApi
             'files' => [
                 'audio_file' => [
                     'filename' => $audioFileName,
-                    'path' => $audioPath, // use重命名backdirectorypath
+                    'path' => $audioPath, // userenamebackdirectorypath
                     'size' => 127569,
                     'duration' => 17.0,
                     'action_performed' => 'merged_and_created',

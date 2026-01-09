@@ -200,7 +200,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             return (int) $cachedData;
         }
 
-        // usefrom旋lock避免andhair计算
+        // usefrom旋lock避免andhaircalculate
         $lockKey = sprintf('department_calc_lock:%s', $organizationCode);
         $lockOwner = uniqid('dept_calc_', true);
 
@@ -212,7 +212,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
             // onetimepropertygetorganizationdown所havedepartmentdata
             $allDepartments = $this->getAllDepartmentsForCalculation($organizationCode);
 
-            // 计算eachdepartment员工totalandcacheto Redis
+            // calculateeachdepartment员工totalandcacheto Redis
             $this->calculateAndCacheAllDepartmentEmployeeSums($organizationCode, $allDepartments, $cacheKey);
             $result = $this->redis->hget($cacheKey, $departmentId);
 
@@ -224,7 +224,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
-            // hair生exceptiono clock直接计算not走cache
+            // hair生exceptiono clock直接calculatenot走cache
             return $this->calculateSelfAndChildrenEmployeeSum($organizationCode, $departmentId);
         } finally {
             $this->locker->release($lockKey, $lockOwner);
@@ -408,7 +408,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * onetimepropertygetorganizationdown所havedepartmentdata，useat员工数计算.
+     * onetimepropertygetorganizationdown所havedepartmentdata，useat员工数calculate.
      */
     private function getAllDepartmentsForCalculation(string $organizationCode): array
     {
@@ -420,7 +420,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 计算andcache所havedepartment员工total.
+     * calculateandcache所havedepartment员工total.
      */
     private function calculateAndCacheAllDepartmentEmployeeSums(string $organizationCode, array $allDepartments, string $cacheKey): void
     {
@@ -493,7 +493,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 直接计算singledepartment员工total（notusecache）.
+     * 直接calculatesingledepartment员工total（notusecache）.
      */
     private function calculateSelfAndChildrenEmployeeSum(string $organizationCode, string $departmentId): int
     {

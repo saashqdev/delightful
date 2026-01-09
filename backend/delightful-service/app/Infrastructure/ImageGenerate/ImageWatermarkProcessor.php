@@ -161,7 +161,7 @@ class ImageWatermarkProcessor
         $fontSize = $this->calculateFontSize($width, $height);
         $fontColor = $this->createTransparentColor($image, $config->getOpacity());
 
-        // 计算watermarkposition
+        // calculatewatermarkposition
         [$x, $y] = $this->calculateWatermarkPosition($width, $height, $text, $fontSize, $config->getPosition());
 
         // 优先useTTF字body，especiallyistoatmiddle文text
@@ -171,7 +171,7 @@ class ImageWatermarkProcessor
             // TTF字bodysizeneedadjust，usuallyratioinside置字body小one些
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
 
-            // correct计算TTF字body基lineposition
+            // correctcalculateTTF字body基lineposition
             if (function_exists('imagettfbbox')) {
                 // 直接use传入Ycoordinateasfor基lineposition
                 $ttfY = $y;
@@ -195,7 +195,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 计算字bodysize.
+     * calculate字bodysize.
      */
     private function calculateFontSize(int $width, int $height): int
     {
@@ -216,14 +216,14 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 计算watermarkposition.
+     * calculatewatermarkposition.
      */
     private function calculateWatermarkPosition(int $width, int $height, string $text, int $fontSize, int $position): array
     {
         // moreprecisetextwidth估算
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && $this->fontProvider->supportsTTF() && function_exists('imagettfbbox')) {
-            // useTTF字body计算actualtextside界框
+            // useTTF字bodycalculateactualtextside界框
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
             $bbox = imagettfbbox($ttfFontSize, 0, $fontFile, $text);
             $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // increase20%securityside距
@@ -244,7 +244,7 @@ class ImageWatermarkProcessor
             $totalTextHeight = $textHeight;
         }
 
-        // 动stateside距：based on字bodysize计算，ensure足够nullbetween
+        // 动stateside距：based on字bodysizecalculate，ensure足够nullbetween
         $margin = max(20, (int) ($fontSize * 0.8));
 
         switch ($position) {

@@ -51,7 +51,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
         $waitMessageEntity->setFlowCode($executionData->getFlowCode());
         $waitMessageEntity->setFlowVersion($executionData->getFlowVersion());
         $waitMessageEntity->setCreator($executionData->getOperator()->getUid());
-        // 计算 timeout
+        // calculate timeout
         $params = $this->node->getParams();
         $timeoutConfig = $params['timeout_config'] ?? [];
         if ($timeoutConfig['enabled'] ?? false) {

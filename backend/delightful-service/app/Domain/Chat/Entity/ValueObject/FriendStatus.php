@@ -15,7 +15,7 @@ enum FriendStatus: int
     // 申请
     case Apply = 1;
 
-    // 同意
+    // agree
     case Agree = 2;
 
     // reject

@@ -236,7 +236,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         //        $this->sendMessage($workspaceId, $projectId, $topicId);
         // projectfile
         $file = $this->attachments($workspaceId, $projectId, $topicId);
-        // 重命名projectfile
+        // renameprojectfile
         //        $this->renameAttachments((string) $file['file_id']);
 
         // delete话题

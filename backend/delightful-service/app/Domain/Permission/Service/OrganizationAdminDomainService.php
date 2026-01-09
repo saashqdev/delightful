@@ -127,7 +127,7 @@ class OrganizationAdminDomainService
      */
     public function grant(DataIsolation $dataIsolation, string $userId, ?string $grantorUserId, ?string $remarks = null, bool $isOrganizationCreator = false): OrganizationAdminEntity
     {
-        // organization校验and限制
+        // organizationvalidationand限制
         $orgCode = $dataIsolation->getCurrentOrganizationCode();
         $organization = $this->organizationRepository->getByCode($orgCode);
         if (! $organization) {

@@ -162,7 +162,7 @@ class DelightfulUserSettingRepository extends AbstractDelightfulContactRepositor
             $delightfulUserSettingEntity->setId($model->id);
         }
 
-        // use工厂generatedatabackhand动覆盖 NULL field
+        // usefactorygeneratedatabackhand动覆盖 NULL field
         $delightfulUserSettingEntity->setOrganizationCode(null);
         $delightfulUserSettingEntity->setUserId(null);
         $delightfulUserSettingEntity->setDelightfulId(null);

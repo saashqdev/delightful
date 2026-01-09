@@ -268,7 +268,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $friendDataIsolation->setCurrentUserId($authorization->getId());
         $friendDataIsolation->setCurrentOrganizationCode($organizationCode);
 
-        // getuser代理好友column表
+        // getuserproxy好友column表
         $userAgentFriends = $this->delightfulUserDomainService->getUserAgentFriendsList($friendQueryDTO, $friendDataIsolation);
 
         $delightfulAgentVO->setIsAdd(isset($userAgentFriends[$delightfulAgentVersionEntity->getFlowCode()]));
@@ -562,7 +562,7 @@ class DelightfulAgentAppService extends AbstractAppService
     {
         $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $agentId)->validate('w', $agentId);
 
-        // 校验
+        // validation
         if ($status !== DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value && $status !== DelightfulAgentVersionStatus::ENTERPRISE_UNPUBLISHED->value) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.status_can_only_be_published_or_unpublished');
         }
@@ -581,7 +581,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // getassistantversion
         $delightfulAgentVersionEntity = $this->delightfulAgentVersionDomainService->getById($delightfulAgentEntity->getAgentVersionId());
 
-        // 校验statuswhetherallowbemodify: APPROVAL_PASSED
+        // validationstatuswhetherallowbemodify: APPROVAL_PASSED
         if ($delightfulAgentVersionEntity->getApprovalStatus() !== DelightfulAgentVersionStatus::APPROVAL_PASSED->value) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.approval_not_passed_cannot_modify_status');
         }
@@ -641,7 +641,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $friendDataIsolation->setCurrentUserId($authenticatable->getId());
             $friendDataIsolation->setCurrentOrganizationCode($authenticatable->getOrganizationCode());
 
-            // getuser代理好友column表
+            // getuserproxy好友column表
             $userAgentFriends = $this->delightfulUserDomainService->getUserAgentFriendsList($friendQueryDTO, $friendDataIsolation);
 
             $delightfulAgentVO->setIsAdd(isset($userAgentFriends[$delightfulAgentVersionEntity->getFlowCode()]));
@@ -747,7 +747,7 @@ class DelightfulAgentAppService extends AbstractAppService
                 Db::transaction(function () use ($dataIsolation, $aiUserEntity, $aiCode, $userEntity) {
                     // insertdefaultconversationrecord
                     $this->delightfulAgentDomainService->insertDefaultAssistantConversation($userEntity->getUserId(), $aiCode);
-                    // add好友，assistantdefault同意好友
+                    // add好友，assistantdefaultagree好友
                     $friendId = $aiUserEntity->getUserId();
                     $this->delightfulUserDomainService->addFriend($dataIsolation, $friendId);
                     // sendadd好友控制message

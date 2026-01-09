@@ -36,7 +36,7 @@ interface FontProviderInterface
     public function containsChinese(string $text): bool;
 
     /**
-     * 检测graphlikewhethercontain透明通道.
+     * 检测graphlikewhethercontain透明channel.
      *
      * @param mixed $image GDgraphlikeresource
      * @return bool truetable示contain透明degree，falsetable示notcontain

@@ -58,7 +58,7 @@ class VolcengineSms extends VolcengineApi
         $msg = 'success';
         try {
             $groupId = $this->template->getMessageGroupId($templateId);
-            // initialize,set公共requestparameter
+            // initialize,setpublicrequestparameter
             $this->init($groupId, $signStr, $templateId);
             // setverify码短信特havebody结构
             $body = [

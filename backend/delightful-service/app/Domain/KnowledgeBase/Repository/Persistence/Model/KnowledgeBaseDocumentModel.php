@@ -31,7 +31,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $sync_status_message syncstatusmessage
  * @property string $embedding_model 嵌入model
  * @property string $vector_db toquantitydatabase
- * @property array $retrieve_config 检索configuration
+ * @property array $retrieve_config retrieveconfiguration
  * @property array $fragment_config slicesegmentconfiguration
  * @property array $embedding_config 嵌入configuration
  * @property array $vector_db_config toquantitydatabaseconfiguration

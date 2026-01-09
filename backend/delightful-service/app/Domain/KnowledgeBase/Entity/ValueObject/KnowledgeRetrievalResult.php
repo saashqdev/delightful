@@ -10,29 +10,29 @@ namespace App\Domain\KnowledgeBase\Entity\ValueObject;
 use App\Infrastructure\Core\AbstractValueObject;
 
 /**
- * knowledge base检索resultvalueobject.
+ * knowledge baseretrieveresultvalueobject.
  *
- * 统onetable示fromdifferent检索method（语义检索、all文检索、graph检索etc）return知识slicesegment
+ * 统onetable示fromdifferentretrievemethod（语义retrieve、all文retrieve、graphretrieveetc）return知识slicesegment
  */
 class KnowledgeRetrievalResult extends AbstractValueObject
 {
     /**
-     * 语义检索type.
+     * 语义retrievetype.
      */
     public const string TYPE_SEMANTIC = 'semantic';
 
     /**
-     * all文检索type.
+     * all文retrievetype.
      */
     public const string TYPE_FULLTEXT = 'fulltext';
 
     /**
-     * graph检索type.
+     * graphretrievetype.
      */
     public const string TYPE_GRAPH = 'graph';
 
     /**
-     * 混合检索type.
+     * 混合retrievetype.
      */
     public const string TYPE_HYBRID = 'hybrid';
 
@@ -64,7 +64,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     private float $score = 0;
 
     /**
-     * fromknowledge baseslicesegment实bodycreate检索result.
+     * fromknowledge baseslicesegment实bodycreateretrieveresult.
      *
      * @param string $id 唯oneidentifier
      * @param string $content content
@@ -90,7 +90,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * fromgraphdatacreate检索result.
+     * fromgraphdatacreateretrieveresult.
      *
      * @param string $id 唯oneidentifier
      * @param string $content content
@@ -114,7 +114,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * createempty检索result.
+     * createemptyretrieveresult.
      */
     public static function empty(): self
     {
@@ -217,7 +217,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * checkwhetherfor语义检索type.
+     * checkwhetherfor语义retrievetype.
      */
     public function isSemantic(): bool
     {
@@ -225,7 +225,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * checkwhetherforall文检索type.
+     * checkwhetherforall文retrievetype.
      */
     public function isFulltext(): bool
     {
@@ -233,7 +233,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * checkwhetherforgraph检索type.
+     * checkwhetherforgraphretrievetype.
      */
     public function isGraph(): bool
     {
@@ -241,7 +241,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * checkwhetherfor混合检索type.
+     * checkwhetherfor混合retrievetype.
      */
     public function isHybrid(): bool
     {

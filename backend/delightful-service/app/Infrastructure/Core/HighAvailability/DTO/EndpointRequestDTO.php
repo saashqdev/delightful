@@ -13,7 +13,7 @@ use App\Infrastructure\Core\HighAvailability\ValueObject\StatisticsLevel;
 
 /**
  * 接入pointrequest DTO.
- * useat封装 getAvailableEndpoint methodrequestparameter.
+ * useatencapsulation getAvailableEndpoint methodrequestparameter.
  */
 class EndpointRequestDTO extends AbstractDTO
 {
@@ -160,7 +160,7 @@ class EndpointRequestDTO extends AbstractDTO
     }
 
     /**
-     * fromarraydatacreate实例便捷method.
+     * fromarraydatacreateinstance便捷method.
      */
     public static function create(
         string $endpointType,

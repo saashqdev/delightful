@@ -440,7 +440,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * 计算宽高ratio例（from LLMAppService 移passcome逻辑）.
+     * calculate宽高ratio例（from LLMAppService 移passcome逻辑）.
      */
     private static function calculateRatio(int $width, int $height): string
     {
@@ -451,7 +451,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * 计算most大公约数（from LLMAppService 移passcome逻辑）.
+     * calculatemost大公约数（from LLMAppService 移passcome逻辑）.
      */
     private static function gcd(int $a, int $b): int
     {

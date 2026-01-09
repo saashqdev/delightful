@@ -110,7 +110,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
         }
         $this->setLocale($params['context']['language'] ?? '');
         try {
-            // use delightfulChatContract 校验parameter
+            // use delightfulChatContract validationparameter
             $context = new DelightfulContext($params['context']);
             // compatiblehistoryversion,fromquerymiddlegettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
@@ -172,7 +172,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->relationAppMsgIdAndRequestId($params['data']['message']['app_message_id'] ?? '');
             $this->checkParams($appendRules, $params);
             $this->setLocale($params['context']['language'] ?? '');
-            // use delightfulChatContract 校验parameter
+            // use delightfulChatContract validationparameter
             $controlRequest = new ControlRequest($params);
             // compatiblehistoryversion,fromquerymiddlegettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
@@ -228,7 +228,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->relationAppMsgIdAndRequestId($params['data']['message']['app_message_id'] ?? '');
             $this->checkParams($appendRules, $params);
             $this->setLocale($params['context']['language'] ?? '');
-            # use delightfulChatContract 校验parameter
+            # use delightfulChatContract validationparameter
             $chatRequest = new ChatRequest($params);
             // compatiblehistoryversion,fromquerymiddlegettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
@@ -282,7 +282,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
             $this->relationAppMsgIdAndRequestId($params['data']['message']['app_message_id'] ?? '');
             $this->checkParams($appendRules, $params);
             $this->setLocale($params['context']['language'] ?? '');
-            # use delightfulChatContract 校验parameter
+            # use delightfulChatContract validationparameter
             $chatRequest = new ChatRequest($params);
             // compatiblehistoryversion,fromquerymiddlegettoken
             $userToken = $socket->getRequest()->getQueryParams()['authorization'] ?? '';
@@ -345,7 +345,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     private function keepSubscribeAlive(): void
     {
         // 只needoneenter程能schedulepublishmessage,letsubscriberedislink保活即can.
-        // notlock放inmostoutsidelayer,isfor防止pod频繁重启o clock,nothave任何oneenter程canpublishmessage
+        // notlock放inmostoutsidelayer,isfor防止pod频繁restarto clock,nothave任何oneenter程canpublishmessage
         co(function () {
             // each 5 second推onetimemessage
             $this->timer->tick(

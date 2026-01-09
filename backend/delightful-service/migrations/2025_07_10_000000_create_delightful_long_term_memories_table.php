@@ -17,11 +17,11 @@ return new class extends Migration {
         Schema::create('delightful_long_term_memories', function (Blueprint $table) {
             $table->string('id', 36)->primary()->comment('记忆唯oneID');
             $table->text('content')->comment('记忆content');
-            $table->text('pending_content')->nullable()->comment('待变more记忆content，etc待user接受变more');
+            $table->text('pending_content')->nullable()->comment('待变more记忆content，etc待useraccept变more');
             $table->text('explanation')->nullable()->comment('记忆解释，instruction这item记忆for什么value得record');
             $table->text('origin_text')->nullable()->comment('originaltextcontent');
             $table->string('memory_type', 50)->default('manual_input')->comment('记忆type');
-            $table->string('status', 20)->default('pending')->comment('记忆status：pending-待接受, active-in effect, pending_revision-待修订');
+            $table->string('status', 20)->default('pending')->comment('记忆status：pending-待accept, active-in effect, pending_revision-待修订');
             $table->tinyInteger('enabled')->default(0)->comment('whetherenable：0-disable，1-enable（仅 active status记忆canset）');
             $table->decimal('confidence', 3, 2)->unsigned()->default(0.8)->comment('置信degree(0-1)');
             $table->decimal('importance', 3, 2)->unsigned()->default(0.5)->comment('重要property(0-1)');

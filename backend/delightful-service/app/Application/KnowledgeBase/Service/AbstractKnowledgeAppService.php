@@ -60,7 +60,7 @@ abstract class AbstractKnowledgeAppService extends AbstractKernelAppService
     }
 
     /**
-     * knowledge basepermission校验.
+     * knowledge basepermissionvalidation.
      * @param string $knowledgeBaseCode 必传
      * @param null|string $documentCode 选传
      * @param null|int $fragmentId 选传
@@ -72,14 +72,14 @@ abstract class AbstractKnowledgeAppService extends AbstractKernelAppService
         ?string $documentCode = null,
         ?int $fragmentId = null,
     ): Operation {
-        // if传slicesegmentid，thengetdocumentto应knowledge basecodeanddocumentcode，andconduct校验
+        // if传slicesegmentid，thengetdocumentto应knowledge basecodeanddocumentcode，andconductvalidation
         if ($fragmentId) {
             $fragment = $this->knowledgeBaseFragmentDomainService->show($dataIsolation, $fragmentId);
             if ($knowledgeBaseCode !== $fragment->getKnowledgeCode() || $documentCode !== $fragment->getDocumentCode()) {
                 ExceptionBuilder::throw(PermissionErrorCode::AccessDenied, 'common.access', ['label' => $operation]);
             }
         }
-        // if传documentcode，thengetdocumentto应knowledge basecode，andconduct校验
+        // if传documentcode，thengetdocumentto应knowledge basecode，andconductvalidation
         if ($documentCode) {
             $document = $this->knowledgeBaseDocumentDomainService->show($dataIsolation, $knowledgeBaseCode, $documentCode);
             if ($knowledgeBaseCode !== $document->getKnowledgeBaseCode()) {

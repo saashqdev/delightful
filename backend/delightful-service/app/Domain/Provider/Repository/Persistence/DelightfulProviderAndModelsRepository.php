@@ -241,7 +241,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
                 ExceptionBuilder::throw(ServiceProviderErrorCode::ModelOfficiallyDisabled);
             }
 
-            // 2. find现haveorganizationmodelrecord（inlock保护downagaintimecheck）
+            // 2. find现haveorganizationmodelrecord（inlockprotecteddownagaintimecheck）
             $organizationModel = $this->getDelightfulModelByParentId($dataIsolation, (string) $officialModel->getId());
 
             if ($organizationModel) {

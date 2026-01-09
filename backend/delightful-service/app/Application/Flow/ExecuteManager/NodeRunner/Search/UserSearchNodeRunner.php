@@ -26,7 +26,7 @@ use Hyperf\DbConnection\Db;
 #[FlowNodeDefine(
     type: NodeType::UserSearch->value,
     code: NodeType::UserSearch->name,
-    name: 'person员检索',
+    name: 'person员retrieve',
     paramsConfig: UserSearchNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,

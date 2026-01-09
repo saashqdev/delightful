@@ -23,7 +23,7 @@ class LoginApiTest extends AbstractHttpTest
      */
     public function testPhonePasswordLogin(): string
     {
-        // 构造requestparameter - hand机number密码login
+        // constructrequestparameter - hand机number密码login
         $requestData = [
             'state_code' => '+86',
             'phone' => '13812345678', // testenvironmentmiddlenot存in账number
@@ -68,7 +68,7 @@ class LoginApiTest extends AbstractHttpTest
      */
     public function testPhoneNotExists(): void
     {
-        // 构造requestparameter - testhand机numbernot存in
+        // constructrequestparameter - testhand机numbernot存in
         $requestData = [
             'state_code' => '+86',
             'phone' => '19999999999', // useonecertainnot存inhand机number

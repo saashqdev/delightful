@@ -120,7 +120,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
                 ExceptionBuilder::throw(ChatErrorCode::Delightful_ENVIRONMENT_NOT_FOUND);
             }
         }
-        // ifis麦吉from己downhair Token,thenbyfrom己校验
+        // ifis麦吉from己downhair Token,thenbyfrom己validation
         $loginCheckDTO = new LoginCheckDTO();
         $loginCheckDTO->setAuthorization($authorization);
         /** @var LoginResponseDTO[] $currentEnvDelightfulOrganizationUsers */

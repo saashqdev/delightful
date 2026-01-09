@@ -225,7 +225,7 @@ class RoleApi extends AbstractPermissionApi
         // deleterole
         $this->roleAppService->destroy($dataIsolation, $id);
 
-        // returnemptyarrayby触hair统one ApiResponse 封装
+        // returnemptyarrayby触hair统one ApiResponse encapsulation
         return [];
     }
 }

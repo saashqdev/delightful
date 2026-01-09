@@ -12,7 +12,7 @@ use App\Domain\ImageGenerate\Contract\FontProviderInterface;
 /**
  * default字body提供者implement
  * open源projectmiddledefaultimplement，提供基础字bodyfeature
- * 企业projectcanpassdependency注入覆盖此implementcome提供高level字bodyfeature.
+ * 企业projectcanpassdependencyinjection覆盖此implementcome提供高level字bodyfeature.
  */
 class DefaultFontProvider implements FontProviderInterface
 {
@@ -44,7 +44,7 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * 检测graphlikewhethercontain透明通道.
+     * 检测graphlikewhethercontain透明channel.
      * 提供基础透明degree检测feature.
      * @param mixed $image
      */
@@ -55,7 +55,7 @@ class DefaultFontProvider implements FontProviderInterface
             return imagecolortransparent($image) !== -1;
         }
 
-        // true彩colorgraphlikecheckalpha通道
+        // true彩colorgraphlikecheckalphachannel
         $width = imagesx($image);
         $height = imagesy($image);
 

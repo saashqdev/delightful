@@ -78,7 +78,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * importassistantprocess
-     * 遇to重复toolorprocesswillcreate新实例，andpassname区minute.
+     * 遇to重复toolorprocesswillcreate新instance，andpassname区minute.
      */
     public function importFlow(FlowDataIsolation $dataIsolation, array $importData, string $agentId = ''): DelightfulFlowEntity
     {
@@ -95,7 +95,7 @@ class DelightfulFlowExportImportAppService
             'nodes' => [], // 老ID => 新ID
         ];
 
-        // import报告，recordcreate、重命名anderrorinfo
+        // import报告，recordcreate、renameanderrorinfo
         $importReport = [
             'created' => [],
             'renamed' => [],
@@ -304,12 +304,12 @@ class DelightfulFlowExportImportAppService
         // generate新ID
         $flowData['code'] = Code::DelightfulFlow->gen();
 
-        // checkwhether存in同名process，if存inthen重命名
+        // checkwhether存in同名process，if存inthenrename
         $flowType = isset($flowData['type']) ? Type::from($flowData['type']) : Type::Main;
         $newName = $this->generateUniqueName($dataIsolation, $originalName, $flowType);
         if ($newName !== $originalName) {
             $flowData['name'] = $newName;
-            $importReport['renamed'][] = "process '{$originalName}' 重命名for '{$newName}'";
+            $importReport['renamed'][] = "process '{$originalName}' renamefor '{$newName}'";
         }
 
         // updatesectionpointIDmapping
@@ -362,11 +362,11 @@ class DelightfulFlowExportImportAppService
         // generate新ID
         $toolSetData['code'] = Code::DelightfulFlowToolSet->gen();
 
-        // checkwhether存in同名toolcollection，if存inthen重命名
+        // checkwhether存in同名toolcollection，if存inthenrename
         $newName = $this->generateUniqueToolSetName($dataIsolation, $originalName);
         if ($newName !== $originalName) {
             $toolSetData['name'] = $newName;
-            $importReport['renamed'][] = "toolcollection '{$originalName}' 重命名for '{$newName}'";
+            $importReport['renamed'][] = "toolcollection '{$originalName}' renamefor '{$newName}'";
         }
 
         // updateorganizationinfo
@@ -382,7 +382,7 @@ class DelightfulFlowExportImportAppService
         $toolSetData['created_at'] = new DateTime();
         $toolSetData['updated_at'] = new DateTime();
 
-        // use工厂methodcreatetoolcollection实body
+        // usefactorymethodcreatetoolcollection实body
         $toolSetEntity = DelightfulFlowToolSetFactory::arrayToEntity($toolSetData);
 
         // savetoolcollection

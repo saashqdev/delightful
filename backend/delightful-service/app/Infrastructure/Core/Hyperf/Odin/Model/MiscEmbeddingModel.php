@@ -85,7 +85,7 @@ class MiscEmbeddingModel extends OpenAIModel
             baseUrl: $baseUrl
         );
 
-        // createAPI实例
+        // createAPIinstance
         return (new Misc())->getClient($clientConfig, $apiOptions, $logger);
     }
 }

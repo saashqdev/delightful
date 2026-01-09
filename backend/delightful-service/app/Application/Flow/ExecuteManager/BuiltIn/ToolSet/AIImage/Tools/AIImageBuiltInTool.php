@@ -36,7 +36,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getCallback(): ?Closure
     {
-        // can接受parameterfinger定任意 model，defaultis火山。
+        // canacceptparameterfinger定任意 model，defaultis火山。
         return function (ExecutionData $executionData) {
             $args = $executionData->getTriggerData()?->getParams();
             $model = $args['model'] ?? ImageGenerateModelType::Volcengine->value;

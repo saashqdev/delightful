@@ -74,9 +74,9 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     protected int $completedNum = 0;
 
     /**
-     * 检索configuration.
+     * retrieveconfiguration.
      *
-     * contain检索strategy、检索method、重sortconfigurationetcparameter
+     * containretrievestrategy、retrievemethod、重sortconfigurationetcparameter
      */
     protected ?RetrieveConfig $retrieveConfig = null;
 
@@ -497,7 +497,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     }
 
     /**
-     * get检索configuration.
+     * getretrieveconfiguration.
      */
     public function getRetrieveConfig(): ?RetrieveConfig
     {
@@ -505,7 +505,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     }
 
     /**
-     * set检索configuration.
+     * setretrieveconfiguration.
      */
     public function setRetrieveConfig(null|array|RetrieveConfig $retrieveConfig): void
     {
@@ -515,9 +515,9 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     }
 
     /**
-     * getorcreate检索configuration.
+     * getorcreateretrieveconfiguration.
      *
-     * if检索configurationnot存in，thencreatedefaultconfiguration
+     * ifretrieveconfigurationnot存in，thencreatedefaultconfiguration
      */
     public function getOrCreateRetrieveConfig(): RetrieveConfig
     {

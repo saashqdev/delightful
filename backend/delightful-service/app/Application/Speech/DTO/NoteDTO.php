@@ -64,7 +64,7 @@ readonly class NoteDTO
     }
 
     /**
-     * fromarraycreate实例.
+     * fromarraycreateinstance.
      *
      * @param array $data containcontentandfile_typearray
      */

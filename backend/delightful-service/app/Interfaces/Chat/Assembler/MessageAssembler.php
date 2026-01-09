@@ -123,7 +123,7 @@ class MessageAssembler
         $time = date('Y-m-d H:i:s');
         $appMessageId = $chatRequest->getData()->getMessage()->getAppMessageId();
         $requestMessage = $chatRequest->getData()->getMessage();
-        // messagetypeandcontent抽象outcome
+        // messagetypeandcontentabstractoutcome
         $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setSenderId($conversationEntity->getUserId());
         // TODO sessiontableshould冗remainderrecord收hairdouble方usertype，目front只record收item方，need补充
@@ -152,7 +152,7 @@ class MessageAssembler
         $appMessageId = $chatRequest->getData()->getMessage()->getAppMessageId();
         $requestMessage = $chatRequest->getData()->getMessage();
         $topicId = $chatRequest->getData()->getMessage()->getTopicId();
-        // messagetypeandcontent抽象outcome
+        // messagetypeandcontentabstractoutcome
         $messageDTO = new DelightfulMessageDTO();
         $messageDTO->setSenderId($conversationEntity->getUserId());
         // TODO sessiontableshould冗remainderrecord收hairdouble方usertype，目front只record收item方，need补充
@@ -187,7 +187,7 @@ class MessageAssembler
         $messageEntity->setSenderOrganizationCode($userAuthorization->getOrganizationCode());
         $time = date('Y-m-d H:i:s');
         $messageEntity->setAppMessageId($appMessageId);
-        // messagetypeandcontent抽象outcome
+        // messagetypeandcontentabstractoutcome
         $messageEntity->setContent($messageStruct);
         $messageEntity->setMessageType($messageStruct->getMessageTypeEnum());
         $messageEntity->setSendTime($time);

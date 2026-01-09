@@ -158,7 +158,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * fromarraycreate实例.
+     * fromarraycreateinstance.
      */
     public static function fromArray(array $data): self
     {

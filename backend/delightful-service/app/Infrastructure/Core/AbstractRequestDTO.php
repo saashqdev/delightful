@@ -20,7 +20,7 @@ abstract class AbstractRequestDTO extends AbstractDTO
     {
         /* @phpstan-ignore-next-line */
         $dto = new static();
-        // parameter校验
+        // parametervalidation
         $data = $request->all();
         // 这within要addupfrom路byupload递parameter, keyneedconvertfor蛇shape
         $rawParams = $request->getAttribute(Dispatched::class)->params;

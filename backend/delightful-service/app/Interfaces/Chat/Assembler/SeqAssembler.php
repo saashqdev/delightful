@@ -292,7 +292,7 @@ class SeqAssembler
             'type' => $messageTypeName,
             // return显未读person数,ifuserpoint击detail,againrequestspecificmessagecontent
             'unread_count' => $unreadCount,
-            // messagesendtime，and delightful_message_id oneup，useatwithdraw、editmessageo clock唯oneproperty校验。
+            // messagesendtime，and delightful_message_id oneup，useatwithdraw、editmessageo clock唯onepropertyvalidation。
             'send_time' => $carbon->getTimestamp(),
             // chatmessagestatus:unread | seen | read |revoked  .to应middle文释义：未读|已读|已view（non纯text复杂typemessage，userpoint击detail）  | withdraw
             'status' => $messageStatus ?: '',

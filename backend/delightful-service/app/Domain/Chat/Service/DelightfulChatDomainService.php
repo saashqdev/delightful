@@ -803,7 +803,7 @@ class DelightfulChatDomainService extends AbstractDomainService
                         $seqExtra->setEditMessageOptions(
                             (new EditMessageOptions())->setMessageVersionId(null)->setDelightfulMessageId($messageEntity->getDelightfulMessageId())
                         );
-                        // 这within要update收hairdouble方 seq eachonetime，and $seqExtra valuemaybedifferent，loopmiddleupdate 2 timedatabaseshouldis能接受。
+                        // 这within要update收hairdouble方 seq eachonetime，and $seqExtra valuemaybedifferent，loopmiddleupdate 2 timedatabaseshouldis能accept。
                         $this->delightfulSeqRepository->updateSeqExtra((string) $seqData['id'], $seqExtra);
                     }
                 }

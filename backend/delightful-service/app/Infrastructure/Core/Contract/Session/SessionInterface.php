@@ -12,11 +12,11 @@ use App\Domain\OrganizationEnvironment\Entity\DelightfulEnvironmentEntity;
 interface SessionInterface
 {
     /**
-     * 麦吉to其他service端hairuplogin校验。if想复use已haveuserbody系,needimplement该interface.
+     * 麦吉to其他service端hairuploginvalidation。if想复use已haveuserbody系,needimplement该interface.
      *
-     * implementprocess：front端tonon麦吉from建账numberbody系conductloginrequest,thenagainrequest麦吉login校验interface。
+     * implementprocess：front端tonon麦吉from建账numberbody系conductloginrequest,thenagainrequest麦吉loginvalidationinterface。
      *
-     * @param LoginCheckInterface $loginCheck login校验data
+     * @param LoginCheckInterface $loginCheck loginvalidationdata
      * @param DelightfulEnvironmentEntity $delightfulEnvironmentEntity 要loginenvironment
      * @param null|string $delightfulOrganizationCode 要loginorganization
      * @return LoginResponseInterface[] loginresponsedata

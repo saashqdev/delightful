@@ -174,7 +174,7 @@ class QwenImageModel extends AbstractImageGenerate
         // 其他文生graphis x ，阿withinis * ，保持up游one致，final传入alsois *
         $size = $imageGenerateRequest->getWidth() . 'x' . $imageGenerateRequest->getHeight();
 
-        // 校验imagesize
+        // validationimagesize
         $this->validateImageSize($size, $imageGenerateRequest->getModel());
 
         $count = $imageGenerateRequest->getGenerateNum();
@@ -378,7 +378,7 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * 校验imagesizewhethermatch通义thousand问model规格
+     * validationimagesizewhethermatch通义thousand问model规格
      */
     private function validateImageSize(string $size, string $model): void
     {
@@ -390,13 +390,13 @@ class QwenImageModel extends AbstractImageGenerate
                 $this->validateWan22FlashSize($size);
                 break;
             default:
-                // 其他model暂not校验
+                // 其他model暂notvalidation
                 break;
         }
     }
 
     /**
-     * 校验qwen-imagemodelfixedsizecolumn表.
+     * validationqwen-imagemodelfixedsizecolumn表.
      */
     private function validateQwenImageSize(string $size): void
     {
@@ -428,7 +428,7 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * 校验wan2.2-t2i-flashmodel区betweensize.
+     * validationwan2.2-t2i-flashmodel区betweensize.
      */
     private function validateWan22FlashSize(string $size): void
     {

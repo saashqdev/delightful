@@ -30,7 +30,7 @@ class AiAbilityDomainService
     }
 
     /**
-     * according to能力codegetAI能力实body（useat运lineo clock，not校验organization）.
+     * according to能力codegetAI能力实body（useat运lineo clock，notvalidationorganization）.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param AiAbilityCode $code 能力code

@@ -95,7 +95,7 @@ readonly class LongTermMemoryDomainService
     }
 
     /**
-     * batchquantityhandle记忆suggestion（接受/reject）.
+     * batchquantityhandle记忆suggestion（accept/reject）.
      */
     public function batchProcessMemorySuggestions(array $memoryIds, MemoryOperationAction $action, MemoryOperationScenario $scenario = MemoryOperationScenario::ADMIN_PANEL, ?string $delightfulMessageId = null): void
     {
@@ -123,9 +123,9 @@ readonly class LongTermMemoryDomainService
                 // batchquantityquery记忆
                 $memories = $this->repository->findByIds($memoryIds);
 
-                // batchquantity接受记忆suggestion：willpending_content移动tocontent，settingstatusfor已接受，enable记忆
+                // batchquantityaccept记忆suggestion：willpending_contentmovetocontent，settingstatusfor已accept，enable记忆
                 foreach ($memories as $memory) {
-                    // ifhavepending_content，thenwill其移动tocontent
+                    // ifhavepending_content，thenwill其movetocontent
                     if ($memory->getPendingContent() !== null) {
                         // willpending_contentvaluecopytocontentfield
                         $memory->setContent($memory->getPendingContent());
@@ -617,7 +617,7 @@ readonly class LongTermMemoryDomainService
             MemoryCategory::GENERAL->value => $currentGeneralCount,
         ];
 
-        // 计算enablebackeachcategory别quantity
+        // calculateenablebackeachcategory别quantity
         $projectedCounts = $currentEnabledCounts;
 
         foreach ($memoriesToEnable as $memory) {
@@ -673,7 +673,7 @@ readonly class LongTermMemoryDomainService
         return match ([$currentStatus, $hasPendingContent]) {
             // pending_contentfornullo clockstatusconvert
             [MemoryStatus::PENDING_REVISION, false], [MemoryStatus::ACTIVE, false] => MemoryStatus::ACTIVE,        // 修订complete → 生效
-            [MemoryStatus::PENDING, false], [MemoryStatus::PENDING, true] => MemoryStatus::PENDING,                 // 待接受status保持not变
+            [MemoryStatus::PENDING, false], [MemoryStatus::PENDING, true] => MemoryStatus::PENDING,                 // 待acceptstatus保持not变
             // pending_contentnotfornullo clockstatusconvert
             [MemoryStatus::ACTIVE, true], [MemoryStatus::PENDING_REVISION, true] => MemoryStatus::PENDING_REVISION,         // 生效记忆have修订 → 待修订
             // default情况（notshouldto达这within）

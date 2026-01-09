@@ -98,7 +98,7 @@ abstract class VolcengineApi
 
     public function __construct(ClientFactory $clientFactory, StdoutLoggerInterface $logger, string $region = self::CHINA_REGION)
     {
-        // 部minute公共fixedparameterin构造parametermiddlecertain
+        // 部minutepublicfixedparameterinconstructparametermiddlecertain
         $this->setRegion($region);
         $this->setSecretKey(config('sms.volcengine.secretKey'));
         $this->setAccessKey(config('sms.volcengine.accessKey'));
@@ -149,7 +149,7 @@ abstract class VolcengineApi
     }
 
     /**
-     * 接受different短信typesend
+     * acceptdifferent短信typesend
      */
     protected function init(string $messageGroupId, string $sign, string $templateId): void
     {
@@ -176,7 +176,7 @@ abstract class VolcengineApi
     }
 
     /**
-     * setparametersignatureand公共requestheadparameterX-Date.
+     * setparametersignatureandpublicrequestheadparameterX-Date.
      */
     protected function setAuth(): void
     {

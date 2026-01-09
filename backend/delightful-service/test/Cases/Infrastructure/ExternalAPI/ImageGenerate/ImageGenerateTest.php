@@ -132,10 +132,10 @@ class ImageGenerateTest extends BaseTest
 
     public function testText2ImageByGPT4o()
     {
-        // createGPT4omodel实例
+        // createGPT4omodelinstance
         $gpt4oModel = new GPT4oModel();
 
-        // createrequest实例
+        // createrequestinstance
         $gpt4oModelRequest = new GPT4oModelRequest();
         $gpt4oModelRequest->setPrompt('one只小金毛正in草原up欢快奔跑');
         $gpt4oModelRequest->setGenerateNum(4);
@@ -158,10 +158,10 @@ class ImageGenerateTest extends BaseTest
 
     public function testText2ImageByGPT4oWithReferenceImages()
     {
-        // createGPT4omodel实例
+        // createGPT4omodelinstance
         $gpt4oModel = new GPT4oModel();
 
-        // createrequest实例
+        // createrequestinstance
         $gpt4oModelRequest = new GPT4oModelRequest();
         $gpt4oModelRequest->setPrompt('adjustone群女巫handwithin捧着南瓜in膜拜oneperson');
         $gpt4oModelRequest->setGenerateNum(1);
@@ -197,10 +197,10 @@ class ImageGenerateTest extends BaseTest
         //        $config = $providerModelsByConfig->getConfig();
         //        // createservice提供quotientconfiguration
         //
-        //        // create通义thousand问model实例
+        //        // create通义thousand问modelinstance
         //        $qwenImageModel = new QwenImageModel($config);
         //
-        //        // createrequest实例
+        //        // createrequestinstance
         //        $qwenImageRequest = new QwenImageModelRequest();
         //        $qwenImageRequest->setPrompt('one只can爱小猫咪inflower园within玩耍，阳光明媚，color彩丰富，高quality摄影');
         //        $qwenImageRequest->setHeight('1328');

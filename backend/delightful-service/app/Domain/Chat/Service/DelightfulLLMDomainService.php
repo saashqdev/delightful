@@ -158,11 +158,11 @@ class DelightfulLLMDomainService
     1.3 子questiongenerate
        - generate正交子questioncollection（Jaccardsimilardegree<0.25），ensureeach子question能fromdifferentangledegree探索user需求，避免generatepassat宽泛orsimilarquestion
     
-    ### 2. search代理模piece
+    ### 2. searchproxy模piece
     mustcalltool: batchSubQuestionsSearch
     parameterstandard：
     2.1 key词rule
-       - generategreater thanequal 3 高qualitycan检索key词，include核core实body、keypropertyand相close概念
+       - generategreater thanequal 3 高qualitycanretrievekey词，include核core实body、keypropertyand相close概念
        - time限定符overriderate≥30%
        - toratiocategoryquestion占ratio≥20%
     
@@ -1052,7 +1052,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * build总结systemhint词 - 公共method，useat复usecode
+     * build总结systemhint词 - publicmethod，useat复usecode
      */
     private function buildSummarizeSystemPrompt(AISearchCommonQueryVo $queryVo): string
     {
@@ -1122,7 +1122,7 @@ class DelightfulLLMDomainService
     }
 
     /**
-     * streamcall，迭代器is \Hyperf\Odin\Api\OpenAI\Response\ChatCompletionChoice.
+     * streamcall，iteratoris \Hyperf\Odin\Api\OpenAI\Response\ChatCompletionChoice.
      */
     private function llmChatStreamed(
         string $systemPrompt,

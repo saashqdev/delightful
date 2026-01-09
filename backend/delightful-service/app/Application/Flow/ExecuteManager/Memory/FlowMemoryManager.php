@@ -102,7 +102,7 @@ readonly class FlowMemoryManager
     }
 
     /**
-     * 接受message.
+     * acceptmessage.
      */
     public function receive(MemoryType $memoryType, LLMMemoryMessage $LLMMemoryMessage, bool $nodeDebug = false): void
     {

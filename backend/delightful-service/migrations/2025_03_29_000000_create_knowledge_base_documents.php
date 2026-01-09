@@ -38,7 +38,7 @@ return new class extends Migration {
             // configurationinfo
             $table->string('embedding_model', 255)->comment('嵌入model');
             $table->string('vector_db', 255)->comment('toquantitydatabase');
-            $table->json('retrieve_config')->nullable()->comment('检索configuration');
+            $table->json('retrieve_config')->nullable()->comment('retrieveconfiguration');
             $table->json('fragment_config')->nullable()->comment('minutesegmentconfiguration');
             $table->json('embedding_config')->nullable()->comment('嵌入configuration');
             $table->json('vector_db_config')->nullable()->comment('toquantitydatabaseconfiguration');

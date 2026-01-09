@@ -33,17 +33,17 @@ class TokenTextSplitter extends TextSplitter
     private array $separators;
 
     /**
-     * @var callable token计算闭package
+     * @var callable tokencalculate闭package
      */
     private $tokenizer;
 
     /**
-     * defaulttoken计算闭packageusetoencoderProvider.
+     * defaulttokencalculate闭packageusetoencoderProvider.
      */
     private EncoderProvider $defaultEncoderProvider;
 
     /**
-     * defaulttoken计算闭packageusetoencoder.
+     * defaulttokencalculate闭packageusetoencoder.
      */
     private Encoder $defaultEncoder;
 
@@ -53,7 +53,7 @@ class TokenTextSplitter extends TextSplitter
     private bool $preserveSeparator = false;
 
     /**
-     * @param null|callable $tokenizer token计算function
+     * @param null|callable $tokenizer tokencalculatefunction
      * @param null|array $separators 备选minute隔符list
      * @throws Exception
      */
@@ -102,7 +102,7 @@ class TokenTextSplitter extends TextSplitter
             $chunks = [$text];
         }
 
-        // 计算eachchunktokenlength
+        // calculateeachchunktokenlength
         $chunksLengths = array_map(function ($chunk) {
             return ($this->tokenizer)($chunk);
         }, $chunks);
@@ -299,7 +299,7 @@ class TokenTextSplitter extends TextSplitter
             $splits = $this->splitByFixedLength($text);
         }
 
-        // 计算eachsplittokenlength
+        // calculateeachsplittokenlength
         $splitLengths = array_map(function ($split) {
             return ($this->tokenizer)($split);
         }, $splits);
@@ -347,7 +347,7 @@ class TokenTextSplitter extends TextSplitter
     }
 
     /**
-     * 计算texttokenquantity.
+     * calculatetexttokenquantity.
      */
     private function calculateTokenCount(string $text): int
     {
@@ -358,7 +358,7 @@ class TokenTextSplitter extends TextSplitter
             }
             return count($this->defaultEncoder->encode($text));
         } catch (Throwable $e) {
-            // if计算tokenfail，returnoneestimatedvalue
+            // ifcalculatetokenfail，returnoneestimatedvalue
             return (int) ceil(mb_strlen($text) / 4);
         }
     }
@@ -366,7 +366,7 @@ class TokenTextSplitter extends TextSplitter
     private function getDefaultTokenizer(): callable
     {
         return function (string $text) {
-            // iftextlength超pass限制，直接计算notcache
+            // iftextlength超pass限制，直接calculatenotcache
             if (mb_strlen($text) > self::MAX_CACHE_TEXT_LENGTH) {
                 return $this->calculateTokenCount($text);
             }
@@ -380,7 +380,7 @@ class TokenTextSplitter extends TextSplitter
                 return $count;
             }
 
-            // 计算 token quantity
+            // calculate token quantity
             $count = $this->calculateTokenCount($text);
 
             // storageto协程updown文

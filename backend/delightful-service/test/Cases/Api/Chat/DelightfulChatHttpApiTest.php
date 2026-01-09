@@ -19,7 +19,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
      */
     public function testConversationChatCompletions(): void
     {
-        // 构造requestparameter
+        // constructrequestparameter
         $requestData = [
             'conversation_id' => 'test_conversation_id',
             'topic_id' => 'test_topic_id',
@@ -38,7 +38,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
 
         // setrequesthead
         $headers = [
-            // todo mock authorization校验
+            // todo mock authorizationvalidation
             'authorization' => '',
             'Content-Type' => 'application/json',
         ];
@@ -82,7 +82,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
      */
     public function testConversationChatCompletionsWithInvalidParams(): void
     {
-        // 构造缺少必要parameterrequest
+        // construct缺少必要parameterrequest
         $requestData = [
             // 缺少 conversation_id
             'topic_id' => 'test_topic_id',
@@ -114,7 +114,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
      */
     public function testConversationChatCompletionsWithInvalidAuth(): void
     {
-        // 构造requestparameter
+        // constructrequestparameter
         $requestData = [
             'conversation_id' => 'test_conversation_id',
             'message' => '你好，testmessage',

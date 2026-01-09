@@ -57,7 +57,7 @@ readonly class AuthenticationDomainService
     /**
      * generate账numbertoken.
      *
-     * byat麦吉support其他账numberbody系接入，thereforefront端processis，先gosome账numberbody系login，againby麦吉做login校验。
+     * byat麦吉support其他账numberbody系接入，thereforefront端processis，先gosome账numberbody系login，againby麦吉做loginvalidation。
      * therefore，even ifuse麦吉from己账numberbody系，alsoneed遵守这process。
      */
     public function generateAccountToken(string $delightfulId): string

@@ -11,7 +11,7 @@ use InvalidArgumentException;
 use Psr\Container\ContainerInterface;
 
 /**
- * MCPmethodprocess器工厂.
+ * MCPmethodprocess器factory.
  */
 class MethodHandlerFactory
 {
@@ -39,8 +39,8 @@ class MethodHandlerFactory
     }
 
     /**
-     * createfinger定methodprocess器实例.
-     * eachtimecallallcreatenewprocess器实例，ensure短生命period.
+     * createfinger定methodprocess器instance.
+     * eachtimecallallcreatenewprocess器instance，ensure短生命period.
      * 注意：call者needhand动forreturnprocess器set所需Managergroupitem.
      *
      * @return null|MethodHandlerInterface if找nottoto应methodprocess器thenreturnnull

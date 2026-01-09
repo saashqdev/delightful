@@ -272,7 +272,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         $userAuth = new DelightfulUserAuthorization();
         $userAuth->setId($userEntity->getUserId());
         $userAuth->setOrganizationCode($selfSeqEntity->getOrganizationCode());
-        // messagetypeandcontent抽象outcome
+        // messagetypeandcontentabstractoutcome
         $messageDTO = $this->getControlMessageDTO($userAuth, $selfSeqEntity);
         // according tomessagetype,minutehairtoto应handle模piece
         $dataIsolation = new DataIsolation();
@@ -316,7 +316,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         $messageDTO->setSenderType(ConversationType::Ai);
         $messageDTO->setSenderOrganizationCode($userAuth->getOrganizationCode());
         $messageDTO->setAppMessageId(IdGenerator::getUniqueId32());
-        // messagetypeandcontent抽象outcome
+        // messagetypeandcontentabstractoutcome
         $messageDTO->setContent($content);
         $messageDTO->setMessageType($messageType);
         $messageDTO->setSendTime($time);

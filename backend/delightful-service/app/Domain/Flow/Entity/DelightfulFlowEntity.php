@@ -125,7 +125,7 @@ class DelightfulFlowEntity extends AbstractEntity
 
     public function prepareTestRun(): void
     {
-        // 试运lineis要按照starto clock计算
+        // 试运lineis要按照starto clockcalculate
         $this->enabled = true;
 
         // process试运line其实只need nodes

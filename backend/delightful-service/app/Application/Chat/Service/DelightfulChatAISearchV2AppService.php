@@ -920,7 +920,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     {
         // pass降level链getmodelname
         $modelName = di(ModelConfigAppService::class)->getChatModelTypeByFallbackChain($orgCode, $userId, $modelName);
-        // getmodel代理
+        // getmodelproxy
         $dataIsolation = ModelGatewayDataIsolation::createByOrganizationCodeWithoutSubscription($orgCode, $userId);
         return di(ModelGatewayMapper::class)->getChatModelProxy($dataIsolation, $modelName);
     }

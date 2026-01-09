@@ -66,7 +66,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         if (isset($response['code']) && $response['code'] !== 1000) {
             echo "\ninterfacereturnerror: code=" . $response['code'] . ', message=' . ($response['message'] ?? 'unknown') . "\n";
 
-            // ifisauthenticationerror，我们can接受andskiptest
+            // ifisauthenticationerror，我们canacceptandskiptest
             if ($response['code'] === 2179 || $response['code'] === 3035) {
                 $this->markTestSkipped('interfaceauthenticationfail，maybeneed其他authenticationconfiguration - interface路byvalidatenormal');
                 return;
@@ -308,7 +308,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // according to业务逻辑，maybe接受任何stringasforavatar_url，orconductvalidate
+        // according to业务逻辑，maybeaccept任何stringasforavatar_url，orconductvalidate
         $this->assertIsArray($response, 'invalidURLformat应be妥善handle');
 
         // ifisauthenticationerror，skiptest
@@ -405,7 +405,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         if (isset($response['code']) && $response['code'] !== 1000) {
             echo "\ninterfacereturnerror: code=" . $response['code'] . ', message=' . ($response['message'] ?? 'unknown') . "\n";
 
-            // ifisauthenticationerror，我们can接受andskiptest
+            // ifisauthenticationerror，我们canacceptandskiptest
             if ($response['code'] === 2179 || $response['code'] === 3035) {
                 $this->markTestSkipped('interfaceauthenticationfail，maybeneed其他authenticationconfiguration - interface路byvalidatenormal');
                 return;

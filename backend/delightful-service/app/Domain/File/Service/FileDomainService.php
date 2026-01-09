@@ -160,7 +160,7 @@ readonly class FileDomainService
     /**
      * start sts 模type.
      * gettemporary凭证givefront端use.
-     * @todo securityissue，dir nothave校验，nothaveorganization隔离
+     * @todo securityissue，dir nothavevalidation，nothaveorganization隔离
      */
     public function getStsTemporaryCredential(
         string $organizationCode,

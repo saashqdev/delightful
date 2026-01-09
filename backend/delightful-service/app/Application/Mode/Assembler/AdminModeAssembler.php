@@ -95,7 +95,7 @@ class AdminModeAssembler
                 $providerModel = $modelInfo['best'];
                 $modelDTO->setModelName($providerModel->getName());
                 $modelDTO->setModelIcon($providerModel->getIcon());
-                $modelDTO->setModelStatus($modelInfo['status']); // use计算outstatus
+                $modelDTO->setModelStatus($modelInfo['status']); // usecalculateoutstatus
                 $description = '';
                 $translate = $providerModel->getTranslate();
                 if (is_array($translate) && isset($translate['description'][$locale])) {

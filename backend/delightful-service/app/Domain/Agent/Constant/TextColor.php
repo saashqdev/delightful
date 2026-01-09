@@ -20,7 +20,7 @@ enum TextColor: string
     case RED = 'red';
 
     /**
-     * fromstringgetcolor实例.
+     * fromstringgetcolorinstance.
      */
     public static function fromString(string $color): self
     {

@@ -225,7 +225,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
                 return $existingConfig;
             }
 
-            // not存ino clock才构造virtualservicequotientconfiguration实body
+            // not存ino clock才constructvirtualservicequotientconfiguration实body
             return $this->createVirtualProviderConfig($dataIsolation, $providerEntity, $configId);
         }
 

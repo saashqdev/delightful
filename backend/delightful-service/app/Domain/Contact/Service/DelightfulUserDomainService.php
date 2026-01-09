@@ -56,7 +56,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         $friendUserInfo = $usersInfo[$friendId];
         $friendStatus = FriendStatus::Apply;
         if ($friendUserInfo->getUserType() === UserType::Ai) {
-            // ifis ai ,直接同意
+            // ifis ai ,直接agree
             $friendStatus = FriendStatus::Agree;
         } else {
             // ifispersoncategory，check他们whether处at同oneorganization
@@ -274,7 +274,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * searchusernickname（alldelightful平台检索）.
+     * searchusernickname（alldelightful平台retrieve）.
      */
     public function searchUserByNickNameInDelightful(string $query): array
     {
@@ -332,7 +332,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 麦吉userbody系downlogin校验.
+     * 麦吉userbody系downloginvalidation.
      * @return LoginResponseDTO[]
      */
     public function delightfulUserLoginCheck(string $authorization, DelightfulEnvironmentEntity $delightfulEnvironmentEntity, ?string $delightfulOrganizationCode = null): array
@@ -582,7 +582,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * cachelogin校验result.
+     * cacheloginvalidationresult.
      * @param array<LoginResponseDTO> $result
      */
     protected function cacheLoginCheckResult(string $cacheKey, array $result): void
@@ -618,7 +618,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * getcachelogin校验result.
+     * getcacheloginvalidationresult.
      * @return null|array<LoginResponseDTO>
      */
     private function getCachedLoginCheckResult(string $cacheKey): ?array

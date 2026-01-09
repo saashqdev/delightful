@@ -216,7 +216,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
         // 2. getorganizationdownalreadyconfigurationservicequotient
         $organizationProviders = $this->getOrganizationProvidersFromDatabase($organizationCode, $category, $status);
 
-        // 3. firstadddatabasemiddle所haveactualconfiguration(保留多same provider_code configuration)
+        // 3. firstadddatabasemiddle所haveactualconfiguration(retain多same provider_code configuration)
         $result = $organizationProviders;
 
         // 4. check哪theseservicequotienttypeindatabasemiddlenothaveconfiguration,forthistheseaddtemplate

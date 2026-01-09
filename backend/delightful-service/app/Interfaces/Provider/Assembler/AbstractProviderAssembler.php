@@ -53,11 +53,11 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * create带国际化support实body.
+     * create带internationalizationsupport实body.
      * @template T of object
      * @param class-string<T> $entityClass 实bodycategory名
      * @param array $data dataarray
-     * @param bool $enableI18n whetherenable国际化
+     * @param bool $enableI18n whetherenableinternationalization
      * @return T
      */
     protected static function createEntityFromArray(string $entityClass, array $data, bool $enableI18n = true): object

@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_modes', function (Blueprint $table) {
-            $table->json('placeholder_i18n')->nullable()->comment('mode占位符国际化')->after('name_i18n');
+            $table->json('placeholder_i18n')->nullable()->comment('modeplaceholderinternationalization')->after('name_i18n');
         });
     }
 

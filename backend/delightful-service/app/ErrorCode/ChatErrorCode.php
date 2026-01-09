@@ -64,7 +64,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.data.write_failed')]
     case DATA_WRITE_FAILED = 3013;
 
-    // requestupdown文丢失
+    // requestupdown文lost
         // Request context lost
     #[ErrorMessage('chat.context.lost')]
     case CONTEXT_LOST = 3014;

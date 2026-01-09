@@ -21,7 +21,7 @@ interface FontProviderInterface
     public function getFontPath(): ?string;
 
     /**
-     * detectwhethersupportTTF字body渲染.
+     * detectwhethersupportTTF字bodyrender.
      *
      * @return bool truetable示supportTTF字body,falsetable示onlysupportinside置字body
      */

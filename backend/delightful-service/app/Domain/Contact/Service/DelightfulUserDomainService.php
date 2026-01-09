@@ -194,7 +194,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         // 4. filterorganizationencodingandbuild delightfulId => userId mapping
         $delightfulIdToUserIdMap = [];
         foreach ($users as $user) {
-            // only保留currentorganizationuser
+            // onlyretaincurrentorganizationuser
             if ($user->getOrganizationCode() === $dataIsolation->getCurrentOrganizationCode()) {
                 $delightfulIdToUserIdMap[$user->getDelightfulId()] = $user->getUserId();
             }
@@ -245,11 +245,11 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         if (! $hasOfficialOrganization) {
             // ifusernothave官方organization,filter掉官方organizationnonAIuser
             $users = array_filter($users, static function (DelightfulUserEntity $user) use ($officialOrganizationCode) {
-                // ifnotis官方organization,directly保留
+                // ifnotis官方organization,directlyretain
                 if ($user->getOrganizationCode() !== $officialOrganizationCode) {
                     return true;
                 }
-                // ifis官方organization,only保留AIuser
+                // ifis官方organization,onlyretainAIuser
                 return $user->getUserType() === UserType::Ai;
             });
         }

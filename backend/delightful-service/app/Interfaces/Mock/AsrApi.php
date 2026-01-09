@@ -172,7 +172,7 @@ class AsrApi
         // ifhavenotefileconfigurationandfilesize > 0,addtoreturnmiddle(mocktrue实sandboxnotefilecontentcheck)
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
             // userequestmiddleprovide target_path,whilenotis硬encodingfile名
-            // this样cancorrectsupport国际化file名
+            // this样cancorrectsupportinternationalizationfile名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 

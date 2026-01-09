@@ -79,7 +79,7 @@ if (! function_exists('is_unit_test')) {
 
 if (! function_exists('camelize')) {
     /**
-     * down划line转驼峰.
+     * down划line转camel case.
      * @param string $unCamelizeWords needconvertstring
      * @param string $separator minute隔符
      */
@@ -89,7 +89,7 @@ if (! function_exists('camelize')) {
             return '';
         }
         if (! str_contains($unCamelizeWords, $separator)) {
-            // 认foralready经issmall驼峰
+            // 认foralready经issmallcamel case
             return $unCamelizeWords;
         }
         $unCamelizeWords = $separator . str_replace($separator, ' ', strtolower($unCamelizeWords));
@@ -99,7 +99,7 @@ if (! function_exists('camelize')) {
 
 if (! function_exists('un_camelize')) {
     /**
-     * 驼峰命名转down划line命名.
+     * camel case命名转down划line命名.
      * @param string $camelCaps needconvertstring
      * @param string $separator minute隔符
      */
@@ -114,7 +114,7 @@ if (! function_exists('un_camelize')) {
 
 if (! function_exists('string_to_hump')) {
     /**
-     * down划line转become驼峰命名,defaultsmall驼峰.
+     * down划line转becomecamel case命名,defaultsmallcamel case.
      * @param string $string wantconvertstring
      * @param bool $firstUp whether首字母big写,defaultno
      */
@@ -127,7 +127,7 @@ if (! function_exists('string_to_hump')) {
 
 if (! function_exists('string_to_line')) {
     /**
-     * 驼峰命名转down划line
+     * camel case命名转down划line
      * @param string $string wantconvertstring
      */
     function string_to_line(string $string, string $separator = '_'): string
@@ -158,7 +158,7 @@ if (! function_exists('array_key_to_line')) {
 
 if (! function_exists('array_key_to_hump')) {
     /**
-     * convertarraykeybecome驼峰.
+     * convertarraykeybecomecamel case.
      * @param array $array wantconvertarray
      */
     function array_key_to_hump(array $array, bool $firstUp = false, bool $loop = true): array

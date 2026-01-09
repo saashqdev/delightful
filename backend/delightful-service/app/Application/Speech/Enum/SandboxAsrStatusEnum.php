@@ -29,7 +29,7 @@ enum SandboxAsrStatusEnum: string
     case RUNNING = 'running';           // 运linemiddle:sandboxjustinprocessaudiominuteslice
     case FINALIZING = 'finalizing';     // justinexecutefinalmerge:sandboxjustinmergeaudioandprocessnotefile
     case COMPLETED = 'completed';       // taskcomplete(V2 newformat):audiomergeandfileprocessall部complete
-    case FINISHED = 'finished';         // taskcomplete(tobackcompatibleoldformat):保留useatcompatibleoldversionsandbox
+    case FINISHED = 'finished';         // taskcomplete(tobackcompatibleoldformat):retainuseatcompatibleoldversionsandbox
     case ERROR = 'error';               // error:sandboxprocessfail
 
     /**

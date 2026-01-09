@@ -11,7 +11,7 @@ use App\Application\Speech\DTO\NoteDTO;
 
 /**
  * ASRhint词装配器
- * 负责buildASR相closehint词template.
+ * responsiblebuildASR相closehint词template.
  */
 class AsrPromptAssembler
 {
@@ -109,7 +109,7 @@ usersendoriginalmessage如down:
 ### prioritylevel原then(non常重want)
 1. **file名priority**:file名usuallyisuser精core命名,containmost核corethemeinfo,请重pointreferenceusermessagemiddle @ backsurfacefile名
 2. **智canjudge**:
-   - iffile名语义clear(如"2024yearQ4product规划will议.mp3","customerrequirementdiscussion.wav"),prioritybased onfile名generatetitle
+   - iffile名语义clear(如"2024yearQ4productplanwill议.mp3","customerrequirementdiscussion.wav"),prioritybased onfile名generatetitle
    - iffile名isdatetime戳(如"20241112_143025.mp3")ornomeaningcharacter(如"recording001.mp3"),thenuse通usedescription
 3. **extractkeyword**:fromfile名middleextractmost核corekeywordandtheme
 
@@ -120,7 +120,7 @@ usersendoriginalmessage如down:
 4. **纯textoutput**:onlyoutputtitlecontent,notwantaddany标point符number,引numberorothermodification
 
 ### forbidlinefor
-- notwant保留fileextension名(.mp3,.wav,.webm etc)
+- notwantretainfileextension名(.mp3,.wav,.webm etc)
 - notwantoutputtitlebyoutsideanycontent
 - notwantadd引number,书名numberetc标point符number
 

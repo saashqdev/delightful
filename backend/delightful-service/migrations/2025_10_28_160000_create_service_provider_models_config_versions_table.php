@@ -35,7 +35,7 @@ return new class extends Migration {
             $table->decimal('cache_hit_pricing', 10, 4)->nullable()->comment('cache命middle定价');
             $table->integer('max_output_tokens')->nullable()->comment('mostbigoutputtoken数');
             $table->boolean('support_embedding')->default(false)->comment('whethersupportembedding');
-            $table->boolean('support_deep_think')->default(false)->comment('whethersupport深degree思考');
+            $table->boolean('support_deep_think')->default(false)->comment('whethersupport深degreethink');
             $table->decimal('cache_write_pricing', 10, 4)->nullable()->comment('cachewrite定价');
             $table->boolean('support_multi_modal')->default(false)->comment('whethersupport多模state');
             $table->boolean('official_recommended')->default(false)->comment('whether官方recommended');

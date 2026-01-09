@@ -22,7 +22,7 @@ use Throwable;
 
 /**
  * ASR titlegenerateservice
- * 负责according todifferentscenariogeneraterecordingsummarytitle.
+ * responsibleaccording todifferentscenariogeneraterecordingsummarytitle.
  */
 readonly class AsrTitleGeneratorService
 {
@@ -252,7 +252,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * builduserrequestmessage(mockuserchatmessage,use国际化text).
+     * builduserrequestmessage(mockuserchatmessage,useinternationalizationtext).
      *
      * @param string $audioFileName audiofilename
      * @param null|string $noteFileName notefilename(optional)

@@ -31,7 +31,7 @@ return new class extends Migration {
             $table->string('label', 256)->comment('fromItag,多use逗numberminute隔')->default('');
             $table->tinyInteger('status')->comment('userintheorganizationstatus,0:freeze,1:activated,2:already离职,3:alreadyexit')->default(0);
             $table->string('nickname', 64)->comment('昵称')->default('');
-            $table->text('i18n_name')->comment('国际化username');
+            $table->text('i18n_name')->comment('internationalizationusername');
             $table->string('avatar_url', 128)->comment('useravatarlink')->default('');
             $table->string('extra', 1024)->comment('attachaddproperty')->default('');
             $table->string('user_manual', 64)->comment('userinstruction书(云document)')->default('');

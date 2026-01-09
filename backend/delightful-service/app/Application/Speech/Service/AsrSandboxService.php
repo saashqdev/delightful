@@ -44,7 +44,7 @@ use function Hyperf\Translation\trans;
 
 /**
  * ASR sandboxservice
- * 负责sandboxtaskstart,merge,round询andfilerecordcreate.
+ * responsiblesandboxtaskstart,merge,round询andfilerecordcreate.
  */
 readonly class AsrSandboxService
 {
@@ -774,9 +774,9 @@ readonly class AsrSandboxService
             );
         }
 
-        // needrename:use智cantitleand国际化noteback缀buildgoalpath
+        // needrename:use智cantitleandinternationalizationnoteback缀buildgoalpath
         $fileExtension = pathinfo($workspaceRelativePath, PATHINFO_EXTENSION);
-        $noteSuffix = trans('asr.file_names.note_suffix'); // according tolanguageget国际化"note"/"Note"
+        $noteSuffix = trans('asr.file_names.note_suffix'); // according tolanguagegetinternationalization"note"/"Note"
         $noteFilename = sprintf('%s-%s.%s', $intelligentTitle, $noteSuffix, $fileExtension);
 
         return new AsrNoteFileConfig(

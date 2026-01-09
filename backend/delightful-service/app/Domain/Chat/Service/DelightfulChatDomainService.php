@@ -283,7 +283,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         }
         $receiveConversationId = $receiveConversationEntity->getId();
         $receiveUserEntity = $this->getUserInfo($messageEntity->getReceiveId());
-        // byatoneitemmessage,in2conversationwindow渲染o clock,willgenerate2messageid,thereforeneedparseoutcome收item方can看tomessagequoteid.
+        // byatoneitemmessage,in2conversationwindowrendero clock,willgenerate2messageid,thereforeneedparseoutcome收item方can看tomessagequoteid.
         $minSeqListByReferMessageId = $this->getMinSeqListByReferMessageId($senderSeqEntity);
         $receiverReferMessageId = $minSeqListByReferMessageId[$receiveUserEntity->getDelightfulId()] ?? '';
         $seqId = (string) IdGenerator::getSnowId();
@@ -351,7 +351,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             'refer_message_id' => $seqDTO->getReferMessageId(), // judgecontrolmessagetype,ifisalready读/withdraw/edit/quote,needparseoutcomequoteid
             'sender_message_id' => '', // judgecontrolmessagetype,ifisalready读/withdraw/edit/quote,needparseoutcomequoteid
             'conversation_id' => $conversationId,
-            'status' => DelightfulMessageStatus::Read, // from己sendmessage,notneedjudge阅读status
+            'status' => DelightfulMessageStatus::Read, // from己sendmessage,notneedjudgereadstatus
             'created_at' => $time,
             'updated_at' => $time,
             'extra' => (array) $seqDTO->getExtra()?->toArray(),
@@ -904,7 +904,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * createonestream seq andimmediatelypush,byatfrontclient rendering占位.notice,streammessagenotcanusecomeupdatealready经push完毕message,avoid篡改originalcontent!
+     * createonestream seq andimmediatelypush,byatfrontclient rendering占位.notice,streammessagenotcanusecomeupdatealready经pushcompletedmessage,avoid篡改originalcontent!
      * ifneedtoalready经hairoutmessageconductupdate,needuse editMessage method,editmessagewillrecordcompletemessagehistoryversion.
      */
     public function createAndSendStreamStartSequence(CreateStreamSeqDTO $createStreamSeqDTO, MessageInterface $messageStruct, DelightfulConversationEntity $senderConversationEntity): DelightfulSeqEntity
@@ -977,7 +977,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             Db::rollBack();
             throw $exception;
         }
-        // frontclient renderingneed:ifisstreamstarto clock,推onenormal seq givefront端,useat渲染占位,butis seq_id andnothave落library.
+        // frontclient renderingneed:ifisstreamstarto clock,推onenormal seq givefront端,useatrender占位,butis seq_id andnothave落library.
         SocketIOUtil::sendSequenceId($receiveSeqEntity);
         return $senderSeqEntity;
     }

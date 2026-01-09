@@ -332,7 +332,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * assistantgivepersoncategoryorgrouphairmessage,cannot传conversationandtopic id,from动createconversation,nongroupconversationfrom动适配topic id.
+     * assistantgivepersoncategoryorgrouphairmessage,cannot传conversationandtopic id,from动createconversation,nongroupconversationfrom动adapttopic id.
      * @param string $appMessageId messageprevent duplicate,customer端(includeflow)from己tomessagegenerateoneitemencoding
      * @param bool $doNotParseReferMessageId cannotby chat judge referMessageId quoteo clock机,bycall方from己judge
      * @throws Throwable
@@ -364,7 +364,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * personcategorygiveassistantorgrouphairmessage,cannot传conversationandtopic id,from动createconversation,nongroupconversationfrom动适配topic id.
+     * personcategorygiveassistantorgrouphairmessage,cannot传conversationandtopic id,from动createconversation,nongroupconversationfrom动adapttopic id.
      * @param string $appMessageId messageprevent duplicate,customer端(includeflow)from己tomessagegenerateoneitemencoding
      * @param bool $doNotParseReferMessageId cannotby chat judge referMessageId quoteo clock机,bycall方from己judge
      * @throws Throwable
@@ -593,7 +593,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             return '';
         }
         $prompt = <<<'PROMPT'
-        youisone专业contenttitlegenerate助hand.请严格按照bydownrequireforconversationcontentgeneratetitle:
+        youisone专业contenttitlegenerate助hand.请strict按照bydownrequireforconversationcontentgeneratetitle:
 
         ## taskgoal
         according toconversationcontent,generateoneconcise,accuratetitle,cansummarizeconversation核coretheme.
@@ -605,7 +605,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         3. ifmostbackthemediscussionmorefor充minute,thenbythisasfortitle核core
         4. ignore早期already经endtopic,unlessit们andmostnewtopic密切相close
 
-        ## 严格require
+        ## strictrequire
         1. titlelength:not超pass 15 character.Englishone字母算onecharacter,汉字one字算onecharacter,other语type采useanalogouscountsolution.
         2. content相close:titlemustdirectly反映conversation核coretheme
         3. languagestyle:use陈述property语sentence,avoid疑问sentence
@@ -777,7 +777,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             }
             // givefrom己messagestreamgenerate序column,andcertainmessagereceivepersoncolumntable
             $senderSeqEntity = $this->delightfulChatDomainService->generateSenderSequenceByChatMessage($senderSeqDTO, $messageEntity, $senderConversationEntity);
-            // avoid seq table承载too多feature,addtoo多index,thereforewilltopicmessagesingle独writeto topic_messages tablemiddle
+            // avoid seq tablecarrytoo多feature,addtoo多index,thereforewilltopicmessagesingle独writeto topic_messages tablemiddle
             $this->delightfulChatDomainService->createTopicMessage($senderSeqEntity);
             // certainmessageprioritylevel
             $receiveList = $senderSeqEntity->getReceiveList();
@@ -873,7 +873,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     }
 
     /**
-     * chatwindow打字o clock补alluserinput.for适配group chat,thiswithin role its实isusernickname,whilenotisroletype.
+     * chatwindow打字o clock补alluserinput.foradaptgroup chat,thiswithin role its实isusernickname,whilenotisroletype.
      */
     public function getConversationChatCompletionsHistory(
         DelightfulUserAuthorization $userAuthorization,
@@ -1053,7 +1053,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         $delightfulSeqStatus = DelightfulMessageStatus::Unread;
         # assistantmaybe参andprivate chat/group chatetcscenario,read记忆o clock,needreadfrom己conversationwindowdownmessage.
         $receiveSeqEntity = $this->delightfulChatDomainService->generateReceiveSequenceByChatMessage($senderSeqEntity, $senderMessageEntity, $delightfulSeqStatus);
-        // avoid seq table承载too多feature,addtoo多index,thereforewilltopicmessagesingle独writeto topic_messages tablemiddle
+        // avoid seq tablecarrytoo多feature,addtoo多index,thereforewilltopicmessagesingle独writeto topic_messages tablemiddle
         $this->delightfulChatDomainService->createTopicMessage($receiveSeqEntity);
         return $receiveSeqEntity;
     }
@@ -1096,7 +1096,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
         $chatCompletionResponse = $agent->chatAndNotAutoExecuteTools();
         $choiceContent = $chatCompletionResponse->getFirstChoice()?->getMessage()->getContent();
-        // iftitlelength超pass20characterthenbacksurfaceuse...代替
+        // iftitlelength超pass20characterthenbacksurfaceuse...replace
         if (mb_strlen($choiceContent) > 20) {
             $choiceContent = mb_substr($choiceContent, 0, 20) . '...';
         }

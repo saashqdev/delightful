@@ -21,7 +21,7 @@ use Throwable;
 
 /**
  * ASR sandboxresponsehandleservice
- * 负责handlesandbox finish interfaceresponse,updatefileanddirectoryrecord.
+ * responsiblehandlesandbox finish interfaceresponse,updatefileanddirectoryrecord.
  */
 readonly class AsrSandboxResponseHandler
 {

@@ -29,7 +29,7 @@ enum InstructGroupPosition: int
     }
 
     /**
-     * get所havegrouptypeandits国际化tag.
+     * get所havegrouptypeanditsinternationalizationtag.
      * @return array<string, int> returntypenameandto应value
      */
     public static function getTypeOptions(): array

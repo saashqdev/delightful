@@ -124,7 +124,7 @@ class ProviderAppService
             $localizedModelName = $model->getLocalizedName($locale);
             $localizedModelDescription = $model->getLocalizedDescription($locale);
 
-            // ifhave国际化namethenuse,nothenmaintain原name
+            // ifhaveinternationalizationnamethenuse,nothenmaintain原name
             if (! empty($localizedModelName)) {
                 $modelDTO->setName($localizedModelName);
             }
@@ -184,7 +184,7 @@ class ProviderAppService
             return $configEntity->getAlias();
         }
 
-        // 3. defaultuse国际化name
+        // 3. defaultuseinternationalizationname
         return $providerEntity->getLocalizedName($locale);
     }
 

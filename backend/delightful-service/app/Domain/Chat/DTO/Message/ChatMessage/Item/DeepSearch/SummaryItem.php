@@ -14,7 +14,7 @@ use App\Infrastructure\Core\AbstractObject;
 /**
  * @property string $questionId issue id
  * @property string $content summarycontent
- * @property string $reasoningContent 思考process
+ * @property string $reasoningContent thinkprocess
  */
 class SummaryItem extends AbstractObject
 {

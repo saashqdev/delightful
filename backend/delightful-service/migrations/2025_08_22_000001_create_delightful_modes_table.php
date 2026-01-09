@@ -24,7 +24,7 @@ return new class extends Migration {
 
         Schema::create('delightful_modes', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->json('name_i18n')->comment('模typename国际化');
+            $table->json('name_i18n')->comment('模typenameinternationalization');
             $table->string('identifier', 50)->default('')->comment('模typeidentifier,唯one');
             $table->string('icon', 255)->default('')->comment('模typegraph标');
             $table->string('color', 10)->default('')->comment('模typecolor');

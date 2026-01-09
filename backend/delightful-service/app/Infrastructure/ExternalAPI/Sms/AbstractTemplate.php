@@ -17,12 +17,12 @@ abstract class AbstractTemplate implements TemplateInterface
     protected array $typeToIdMap = [];
 
     /**
-     * according toshort信type,conductvariableshort信适配,also原整itemshort信textcontent.
+     * according toshort信type,conductvariableshort信adapt,also原整itemshort信textcontent.
      */
     protected array $typeContents = [];
 
     /**
-     * according totemplateid,conductvariableshort信适配,also原整itemshort信textcontent.
+     * according totemplateid,conductvariableshort信adapt,also原整itemshort信textcontent.
      */
     protected array $idContents = [];
 

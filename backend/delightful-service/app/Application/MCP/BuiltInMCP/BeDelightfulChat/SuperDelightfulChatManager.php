@@ -89,7 +89,7 @@ class BeDelightfulChatManager
         $hasAgents = false;
         $allInstructions = [];
 
-        // 2. generateonesharebigmodelcalltoolcan阅读description
+        // 2. generateonesharebigmodelcalltoolcanreaddescription
         $description = <<<'MARKDOWN'
 call麦吉 AI 助理conductconversation
 

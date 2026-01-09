@@ -152,7 +152,7 @@ class DelightfulLLMDomainService
     handlestep:
     1.1 实bodyidentify
        - 显property命名实bodyextract,identify实bodybetweenclose系andproperty
-       - 推导user隐propertyrequirementand潜in意graph,especiallyclose注隐含time因素
+       - 推导user隐propertyrequirementand潜in意graph,especiallycloseimplicittime因素
     1.2 dimensiondecompose
        - according toidentifyout实bodyandrequirement,choosesuitableanalyzedimension,for example:policyinterpret,datavalidate,caseresearch,impactevaluate,技术原理,市场front景,userbody验etc
     1.3 子questiongenerate
@@ -194,7 +194,7 @@ class DelightfulLLMDomainService
     currentcontextsummary:
     {context}
     
-    // finaloutput(严格JSONarray):
+    // finaloutput(strictJSONarray):
     ```json
     PROMPT;
 
@@ -225,7 +225,7 @@ class DelightfulLLMDomainService
     private string $eventPrompt = <<<'PROMPT'
     # youisonenew闻eventgenerate器,userwillprovidesearchcontentandaskquestion.
     ## Current Timeis {data_now}  
-    ## according touserquestion,you需fromuserprovidesearchcontentmiddle整理相closeevent,eventincludeeventname,eventtimeandevent概述.
+    ## according touserquestion,you需fromuserprovidesearchcontentmiddleorganize相closeevent,eventincludeeventname,eventtimeandevent概述.
     ### notice事item:
     1. **eventnameformat**:
        - ineventnamebackaddsearchquote编number,formatfor `[[citation:x]]`,编numbercome源atsearchcontentmiddlequotemark(如 `[[citation:1]]`).
@@ -237,13 +237,13 @@ class DelightfulLLMDomainService
        - 若timenotexplicit,according tocontextspeculatedmost早maybetime,andensure合理.
     3. **eventextractandfilter**:
        - **eventdefinition**:eventissearchcontentmiddlemention,具havetimeassociate(explicitorcanspeculated)独立事实,changeoractivity,includebutnot限atcreate,publish,open业,update,合as,activityetc.
-       - according touserquestion,extractand之相closeevent,maintaindescriptionconcise,聚焦specifichair生thing.
+       - according touserquestion,extractandrelatedcloseevent,maintaindescriptionconcise,聚焦specifichair生thing.
        - **skipnoclosecontent**:
          - 纯静statedescription(如not变property,background介绍,notimechange).
          - datastatisticsor财务information(如营收,利润).
          - 主观comment,analyzeorspeculated(unlessandeventdirectly相close).
          - notimeassociateandandquestionnoclosedetail.
-       - **保留原then**:as long ascontentandtime相closeandmatchquestiontheme,尽quantity保留forevent.
+       - **retain原then**:as long ascontentandtime相closeandmatchquestiontheme,尽quantityretainforevent.
     4. **outputrequire**:
        - by JSON formatreturn,event按time倒序rowcolumn(from晚to早).
        - eacheventcontain "name","time","description" threefield.
@@ -321,7 +321,7 @@ class DelightfulLLMDomainService
 
     public function generatePPTFromMindMap(AISearchCommonQueryVo $queryVo, string $mindMap): string
     {
-        // directlyuse思维导graphgenerate ppt
+        // directlyusethinking导graphgenerate ppt
         return $mindMap;
     }
 
@@ -345,7 +345,7 @@ class DelightfulLLMDomainService
             }
         } catch (Exception) {
         }
-        // goexcept掉quote,avoid思维导graphmiddleout现quote
+        // goexcept掉quote,avoidthinking导graphmiddleout现quote
         $responseMessage = preg_replace('/\[\[citation:(\d+)]]/', '', $responseMessage);
         // observetosystemhint词variable串,看看isnotisnothavecopyonesharequestion
         $systemPrompt = str_replace(
@@ -358,7 +358,7 @@ class DelightfulLLMDomainService
         ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
         // access llm
         try {
-            // according tosummary + useroriginalquestionalready经cangenerate思维导graph,notneedagainpass inhistorymessage
+            // according tosummary + useroriginalquestionalready经cangeneratethinking导graph,notneedagainpass inhistorymessage
             $mindMapMessage = $this->llmChat(
                 $systemPrompt,
                 $responseMessage,
@@ -377,7 +377,7 @@ class DelightfulLLMDomainService
             ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE));
             return $this->stripMarkdownCodeBlock($mindMapMessage, 'markdown');
         } catch (Throwable $e) {
-            $this->logger->error(sprintf('mindSearch generate思维导grapho clockhair生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
+            $this->logger->error(sprintf('mindSearch generatethinking导grapho clockhair生error:%s,file:%s,line:%s trace:%s, will generate again.', $e->getMessage(), $e->getFile(), $e->getLine(), $e->getTraceAsString()));
             throw $e;
         }
     }
@@ -669,7 +669,7 @@ class DelightfulLLMDomainService
             ));
         }
 
-        // record阅读word count
+        // recordreadword count
         $totalWords = 0;
         if (! empty($searchArrayList)) {
             foreach ($searchArrayList as $searchContext) {
@@ -898,7 +898,7 @@ class DelightfulLLMDomainService
             foreach ($searchContexts as $searchContext) {
                 $contextString .= $searchContext->getSnippet() . "\n\n";
             }
-            // use str_replace functioncomereplace占位符
+            // use str_replace functioncomereplaceplaceholder
             // 带upyearmonthdayo clockminutesecond,avoidduplicatequestion
             $systemPrompt = str_replace(
                 ['{context}', '{date_now}', '{sub_questions_min}', '{sub_questions_max}'],

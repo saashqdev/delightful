@@ -119,7 +119,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // fromnativeresultmiddleextractimageURL - 适配newresponseformat output.choices
+        // fromnativeresultmiddleextractimageURL - adaptnewresponseformat output.choices
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             $output = $result['output'];
@@ -205,7 +205,7 @@ class QwenImageEditModel extends AbstractImageGenerate
 
             $response = $this->api->submitEditTask($params);
 
-            // checkresponseformat - 适配newsyncresponseformat
+            // checkresponseformat - adaptnewsyncresponseformat
             if (! isset($response['output']['choices'])) {
                 $errorMsg = $response['message'] ?? 'unknownerror';
                 $this->logger->warning('通义thousand问graphlikeedit:responseformaterror', ['response' => $response]);
@@ -235,7 +235,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * for通义thousand问edit模typeoriginaldataaddwatermark - 适配newchoicesformat.
+     * for通义thousand问edit模typeoriginaldataaddwatermark - adaptnewchoicesformat.
      */
     private function processQwenEditRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -344,7 +344,7 @@ class QwenImageEditModel extends AbstractImageGenerate
             }
         }
 
-        // 累计usageinfo - 通义thousand问editusageformat适配
+        // 累计usageinfo - 通义thousand问editusageformatadapt
         if (! empty($qwenResult['usage']) && is_array($qwenResult['usage'])) {
             $currentUsage->addGeneratedImages(1); // editgenerate1张image
             $currentUsage->promptTokens += $qwenResult['usage']['input_tokens'] ?? 0;

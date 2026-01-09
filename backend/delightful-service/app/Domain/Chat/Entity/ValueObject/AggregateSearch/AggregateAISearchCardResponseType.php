@@ -20,7 +20,7 @@ class AggregateAISearchCardResponseType
     // LLM response
     public const int LLM_RESPONSE = 1;
 
-    // 思维导graph
+    // thinking导graph
     public const int MIND_MAP = 2;
 
     // associateissue
@@ -46,7 +46,7 @@ class AggregateAISearchCardResponseType
         $typeNames = [
             self::SEARCH => 'searchresult',
             self::LLM_RESPONSE => 'LLMresponse',
-            self::MIND_MAP => '思维导graph',
+            self::MIND_MAP => 'thinking导graph',
             self::ASSOCIATE_QUESTIONS => 'associateissue',
             self::EVENT => 'event',
             self::PING_PONG => 'ping_pong',

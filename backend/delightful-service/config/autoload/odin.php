@@ -24,12 +24,12 @@ function processConfigValue(&$value): void
             $value = env($parts[0], $parts[0]);
         }
     } elseif (is_array($value)) {
-        // arraytype:recursionhandleeachyuan素,保留arraystructure
+        // arraytype:recursionhandleeachyuan素,retainarraystructure
         foreach ($value as &$item) {
             processConfigValue($item);
         }
     }
-    // othertype(如 int, bool etc):保留原value,notconductparse
+    // othertype(如 int, bool etc):retain原value,notconductparse
 }
 
 // handleconfigurationmiddleenvironmentvariable
@@ -241,7 +241,7 @@ return [
                 'write' => 10.0,      // writetimeout(second)
                 'read' => 300.0,      // readtimeout(second)
                 'total' => 350.0,     // 总bodytimeout(second)
-                'thinking' => 120.0,  // 思考timeout(second)
+                'thinking' => 120.0,  // thinktimeout(second)
                 'stream_chunk' => 30.0, // streampiecebetweentimeout(second)
                 'stream_first' => 60.0, // 首streampiecetimeout(second)
             ],
@@ -289,7 +289,7 @@ return [
                     'args.presence_penalty',       // 存in惩罚
                     'args.stream',                 // streamresponse标志
                     'args.stop',                   // stop词
-                    'args.seed',                   // 随机type子
+                    'args.seed',                   // randomtype子
 
                     // Token预估info
                     'token_estimate',              // Token估算detail

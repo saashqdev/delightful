@@ -60,7 +60,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
 
     /**
      * 子categoryimplementoriginalimagegeneratemethod
-     * only负责calleachfromAPIgenerateimage,notuseclosecorewatermarkprocess.
+     * onlyresponsiblecalleachfromAPIgenerateimage,notuseclosecorewatermarkprocess.
      */
     abstract protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 
@@ -73,7 +73,7 @@ abstract class AbstractImageGenerate implements ImageGenerate
     protected function lockResponse(OpenAIFormatResponse $response): string
     {
         $lockKey = 'img_response_' . spl_object_id($response);
-        $owner = bin2hex(random_bytes(8)); // 16位随机stringasforowner
+        $owner = bin2hex(random_bytes(8)); // 16位randomstringasforowner
 
         // spinLockwillfrom动etc待,untilgetsuccessortimeout(30second)
         if (! $this->redisLocker->spinLock($lockKey, $owner, 30)) {

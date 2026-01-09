@@ -48,7 +48,7 @@ class TokenTextSplitter extends TextSplitter
     private Encoder $defaultEncoder;
 
     /**
-     * @var bool splitbacktext保留minute隔符
+     * @var bool splitbacktextretainminute隔符
      */
     private bool $preserveSeparator = false;
 

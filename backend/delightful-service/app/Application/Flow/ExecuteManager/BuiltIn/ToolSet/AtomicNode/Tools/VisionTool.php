@@ -243,7 +243,7 @@ JSON, true)));
    - 技术info:如havegraphtable/data,analyzeitsimplication
    
 4. analyzeformatrequire:
-   - toat重wantanalyzeresult,usestructure化JSONformat呈现,如:{"category别":"xx", "主body":"xx", "feature":["xx","xx"]}
+   - toat重wantanalyzeresult,usestructure化JSONformatpresent,如:{"category别":"xx", "主body":"xx", "feature":["xx","xx"]}
    - toatnotcertaincontent,explicittable明speculatedpropertyquality,for example:"maybeis..."
    - 如imagequalitymorelow,fingeroutlimit因素and尽力analyze
    - toat多graphanalyze,minute别markimage序numberconductparse,andsummaryitsassociateproperty

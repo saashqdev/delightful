@@ -167,7 +167,7 @@ class ImageWatermarkProcessor
         // priorityuseTTF字body,especiallyistoatmiddle文text
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && ($this->fontProvider->containsChinese($text) || $this->fontProvider->supportsTTF())) {
-            // useTTF字body渲染,supportmiddle文
+            // useTTF字bodyrender,supportmiddle文
             // TTF字bodysizeneedadjust,usuallyratioinside置字bodysmallonethese
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
 

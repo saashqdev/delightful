@@ -281,9 +281,9 @@ JSON,
     public function testParamCallWithSystemParamKey()
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionMessage('field名 [conversation_id] andsystem保留fieldconflict,请useothername');
+        $this->expectExceptionMessage('field名 [conversation_id] andsystemretainfieldconflict,请useothername');
 
-        // createonecontainsystem保留fieldsectionpointconfiguration,thisshouldinvalidate阶segmentthrowexception
+        // createonecontainsystemretainfieldsectionpointconfiguration,thisshouldinvalidate阶segmentthrowexception
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {
@@ -337,9 +337,9 @@ JSON,
     public function testParamCallWithSystemParamKeyInCustomSystemOutput()
     {
         $this->expectException(BusinessException::class);
-        $this->expectExceptionMessage('field名 [message_type] andsystem保留fieldconflict,请useothername');
+        $this->expectExceptionMessage('field名 [message_type] andsystemretainfieldconflict,请useothername');
 
-        // testincustom_system_outputmiddleusesystem保留field
+        // testincustom_system_outputmiddleusesystemretainfield
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {
@@ -395,7 +395,7 @@ JSON,
         $this->expectException(BusinessException::class);
         $this->expectExceptionMessage('JSON Schema formaterror:[user_list] Array type must have items');
 
-        // createonecontainsystem保留fieldsectionpointconfiguration,thisshouldinvalidate阶segmentthrowexception
+        // createonecontainsystemretainfieldsectionpointconfiguration,thisshouldinvalidate阶segmentthrowexception
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {

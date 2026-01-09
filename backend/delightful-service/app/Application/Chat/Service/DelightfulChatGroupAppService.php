@@ -440,7 +440,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
             $nicknames = array_column($someUsers, 'nickname');
             array_unshift($nicknames, $ownerNickname);
             $groupName = implode(',', $nicknames);
-            // length超pass20characterback,use...代替
+            // length超pass20characterback,use...replace
             if (mb_strlen($groupName) > 20) {
                 $groupName = mb_substr($groupName, 0, 20) . '...';
             }

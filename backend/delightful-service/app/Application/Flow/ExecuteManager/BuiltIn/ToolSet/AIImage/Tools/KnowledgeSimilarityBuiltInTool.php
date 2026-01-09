@@ -65,11 +65,11 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 2. combineupdown文,analyzeuserissue,generate `names` parameter,useatfinger定anduserissuemaybehaveclose多knowledge basename,按照相closepropertysort,相closeproperty需combineupdown文,knowledge basenameandknowledge basedescriptionconductjudge;
 3. usekeywordanduserissue,call `{$this->getName()}` toolretrieveknowledge basemiddlecontent,keywordparameteris `keyword`,userissueparameteris `question`, 请ensureparameterallbecorrect填入,toolwillreturnanduserissuesimilardegreemosthighcontentslicesegment;
 4. knowledge baseretrieveoutcomecontentwithinwillcontainonethesecustomize Delightful tag,youwant善atuseit们,havebydown几typetag:
-    - <DelightfulImage></DelightfulImage> indicateoneimage,如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>,eachtagallwillinfront端messagecard渲染outone张image;
-    - <DelightfulVideo></DelightfulVideo> indicateonevideo,如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>,eachtagallwillinfront端messagecard渲染outonevideo;
+    - <DelightfulImage></DelightfulImage> indicateoneimage,如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>,eachtagallwillinfront端messagecardrenderoutone张image;
+    - <DelightfulVideo></DelightfulVideo> indicateonevideo,如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>,eachtagallwillinfront端messagecardrenderoutonevideo;
     - <DelightfulMention></DelightfulMention> indicateoneperson员info,如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>,eachtagallwillinfront端messagecardshapebecomeone @somesomeperson effect;
 5. priorityusecontain <DelightfulImage></DelightfulImage>,<DelightfulVideo></DelightfulVideo>,<DelightfulMention></DelightfulMention> etchave Delightful tagslicesegment;
-6. combineknowledge basereturncontent整理back尽maybe丰富groundreturn答userissue.
+6. combineknowledge basereturncontentorganizeback尽maybe丰富groundreturn答userissue.
 ## toolmiddleclosekeyreturnvalueinstruction
 - fragments: 本timeretrieveto所haveknowledge baseslicesegment
 - fragments.*.content: slicesegmentcontent

@@ -330,7 +330,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $result = Db::select($builder->toSql(), $builder->getBindings());
         $entities = ProviderModelAssembler::toEntities($result);
 
-        // convertforbymodel_idforkeyarray,保留所havemodel
+        // convertforbymodel_idforkeyarray,retain所havemodel
         $modelsByModelId = [];
         foreach ($entities as $entity) {
             $modelId = $entity->getModelId();

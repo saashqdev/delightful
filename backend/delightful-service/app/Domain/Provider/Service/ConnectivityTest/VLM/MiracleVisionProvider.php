@@ -54,7 +54,7 @@ class MiracleVisionProvider implements IProvider
 
     protected function getImage(): string
     {
-        // 随机useone张image即can
+        // randomuseone张image即can
         $fileKey = di(DefaultFileDomainService::class)->getOnePublicKey(DefaultFileBusinessType::SERVICE_PROVIDER);
         return di(FileDomainService::class)->getLink('', $fileKey)?->getUrl();
     }

@@ -102,7 +102,7 @@ class AiAbilityAppService extends AbstractKernelAppService
             $entity = $this->aiAbilityDomainService->getByCode($dataIsolation, $code);
             $dbConfig = $entity->getConfig();
 
-            // 智canmergeconfiguration(保留be脱敏api_key)
+            // 智canmergeconfiguration(retainbe脱敏api_key)
             $mergedConfig = $this->mergeConfigPreservingApiKeys($dbConfig, $request->getConfig());
             $updateData['config'] = $mergedConfig;
         }
@@ -130,7 +130,7 @@ class AiAbilityAppService extends AbstractKernelAppService
     }
 
     /**
-     * 智canmergeconfiguration(保留be脱敏api_keyoriginalvalue).
+     * 智canmergeconfiguration(retainbe脱敏api_keyoriginalvalue).
      *
      * @param array $dbConfig databaseoriginalconfiguration
      * @param array $frontendConfig front端传comeconfiguration(maybecontain脱敏api_key)

@@ -46,7 +46,7 @@ class Template extends AbstractTemplate
     ];
 
     /**
-     * 火山云short信signature暂notsupport国际化.
+     * 火山云short信signature暂notsupportinternationalization.
      */
     protected array $signMap = [
         '灯塔engine' => [

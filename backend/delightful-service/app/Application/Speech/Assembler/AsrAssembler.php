@@ -16,7 +16,7 @@ use Hyperf\Codec\Json;
 
 /**
  * ASR group装器
- * 负责 ASR 相close实bodygroup装andpathconvert.
+ * responsible ASR 相close实bodygroup装andpathconvert.
  *
  * pathformatinstruction:
  * - work区相topath (workspace-relative): .asr_recordings/session_xxx or recordingsummary_xxx

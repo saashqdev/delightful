@@ -192,7 +192,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     /**
      * 智canbody触hairconversationstartinputor者endinput.
      * directly操asto方conversationwindow,whilenotismessagehairinfrom己conversationwindow然backagain经bymessageminutehair模pieceforwardtoto方conversationwindow.
-     * @deprecated user端call agentOperateConversationStatusV2 method代替
+     * @deprecated user端call agentOperateConversationStatusV2 methodreplace
      */
     public function agentOperateConversationStatus(ControlMessageType $controlMessageType, string $agentConversationId): bool
     {

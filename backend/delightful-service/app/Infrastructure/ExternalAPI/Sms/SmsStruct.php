@@ -21,7 +21,7 @@ class SmsStruct
 
     /**
      * short信type,such as:registration_rewards (orderalreadyhair货),arrival_notice(to货notify).
-     * 1.if搭配 language field,meanwhileusevariableshort信,canimplement多language适配,byand语type兜bottom
+     * 1.if搭配 language field,meanwhileusevariableshort信,canimplement多languageadapt,byand语type兜bottom
      * 2.电quotient相closeshort信usethisfield,butisnothave language pass in.
      */
     public ?string $type = null;

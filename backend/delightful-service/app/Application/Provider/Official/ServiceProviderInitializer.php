@@ -346,7 +346,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920385',
                 'name' => 'Qwen',
                 'provider_code' => 'Qwen',
-                'description' => 'provide通usegraphlikegeneratemodel,support多type艺术style,particularly擅longcomplextext渲染,especiallyismiddleEnglishtext渲染.',
+                'description' => 'provide通usegraphlikegeneratemodel,support多type艺术style,particularly擅longcomplextextrender,especiallyismiddleEnglishtextrender.',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/qwen Avatars White.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -362,7 +362,7 @@ class ServiceProviderInitializer
                     ],
                     'description' => [
                         'en_US' => 'It provides a universal image generation model, supports multiple artistic styles, and is particularly skilled at complex text rendering, especially in both Chinese and English text rendering.',
-                        'zh_CN' => 'provide通usegraphlikegeneratemodel,support多type艺术style,particularly擅longcomplextext渲染,especiallyismiddleEnglishtext渲染.',
+                        'zh_CN' => 'provide通usegraphlikegeneratemodel,support多type艺术style,particularly擅longcomplextextrender,especiallyismiddleEnglishtextrender.',
                     ],
                 ]),
                 'remark' => '',

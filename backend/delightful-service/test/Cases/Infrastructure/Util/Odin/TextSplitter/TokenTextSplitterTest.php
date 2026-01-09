@@ -234,7 +234,7 @@ EOT;
         $this->assertIsArray($chunks);
         $this->assertNotEmpty($chunks);
 
-        // validatetagcontentbecomplete保留
+        // validatetagcontentbecompleteretain
         $this->assertStringContainsString('testword', $chunks[0]);
         $this->assertStringContainsString('<DelightfulCompressibleContent', $chunks[0]);
         $this->assertStringContainsString('</DelightfulCompressibleContent>', $chunks[0]);
@@ -263,7 +263,7 @@ EOT;
         $this->assertIsArray($chunks);
         $this->assertNotEmpty($chunks);
 
-        // validate所havetagcontentallbecomplete保留
+        // validate所havetagcontentallbecompleteretain
         $this->assertStringContainsString('theonesegmenttext', $chunks[0]);
         $this->assertStringContainsString('thetwosegmenttext', $chunks[1]);
         $this->assertStringContainsString('<DelightfulCompressibleContent Type="Image">image2.png</DelightfulCompressibleContent>', $chunks[1]);

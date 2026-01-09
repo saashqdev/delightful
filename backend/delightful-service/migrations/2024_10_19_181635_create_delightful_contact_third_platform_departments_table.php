@@ -25,7 +25,7 @@ return new class extends Migration {
             $table->string('third_department_id', 64)->comment('thethree方departmentid');
             $table->string('third_parent_department_id', 64)->comment('thethree方父departmentdepartment ID')->nullable();
             $table->string('third_name', 64)->comment('thethree方departmentname');
-            $table->text('third_i18n_name')->comment('thethree方国际化departmentname');
+            $table->text('third_i18n_name')->comment('thethree方internationalizationdepartmentname');
             $table->string('third_platform_type')->comment('thethree方platformtype dingTalk/lark/weCom/teamShare');
             $table->text('third_platform_departments_extra')->comment('额outsideinfo.thethree方departmentstatus,jsonformat,目frontsupport is_deleted:whetherdelete');
             $table->comment('userservicedepartmentandthethree方platformuserrecordtable.useatandthethree方platform实o clockdatasync,activaterecordetc');

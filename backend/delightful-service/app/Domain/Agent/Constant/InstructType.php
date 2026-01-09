@@ -36,7 +36,7 @@ enum InstructType: int
     }
 
     /**
-     * get所havefinger令typeandits国际化tag.
+     * get所havefinger令typeanditsinternationalizationtag.
      * @return array<string, int> returntypenameandto应value
      */
     public static function getTypeOptions(): array

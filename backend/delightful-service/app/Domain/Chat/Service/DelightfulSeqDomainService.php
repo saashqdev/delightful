@@ -382,7 +382,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                         'code' => $throwable->getCode(),
                         'trace' => $throwable->getTraceAsString(),
                     ]);
-                    // returnoneitem国际化errormessage
+                    // returnoneiteminternationalizationerrormessage
                     event_dispatch(new UserCallAgentFailEvent($seqEntity));
                 }
             });

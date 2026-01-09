@@ -42,7 +42,7 @@ enum ChatMessageType: string
     case Location = 'location';
 
     /**
-     * compare low push多time seq,front端mergebecomeone渲染.
+     * compare low push多time seq,front端mergebecomeonerender.
      */
     case AggregateAISearchCard = 'aggregate_ai_search_card';
 

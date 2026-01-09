@@ -26,7 +26,7 @@ class DefaultFontProvider implements FontProviderInterface
     }
 
     /**
-     * detectwhethersupportTTF字body渲染.
+     * detectwhethersupportTTF字bodyrender.
      * open源versiononlysupportinside置字body.
      */
     public function supportsTTF(): bool
@@ -36,7 +36,7 @@ class DefaultFontProvider implements FontProviderInterface
 
     /**
      * detecttextwhethercontainmiddle文character.
-     * open源version视所havetextfornonmiddle文,useinside置字body渲染.
+     * open源version视所havetextfornonmiddle文,useinside置字bodyrender.
      */
     public function containsChinese(string $text): bool
     {

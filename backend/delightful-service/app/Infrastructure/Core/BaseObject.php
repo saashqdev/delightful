@@ -60,7 +60,7 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
 
     protected function get(string $key): mixed
     {
-        // propertyone定wantissmall驼峰!not supportedotherformat!
+        // propertyone定wantissmallcamel case!not supportedotherformat!
         $humpKey = $this->getCamelizeValueFromCache($key);
         // judgepropertywhether存in,avoidcallnot存inpropertyo clock,死loop触hair __get method
         if (! property_exists($this, $humpKey)) {
@@ -76,7 +76,7 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
 
     protected function set(string $key, mixed $value): void
     {
-        // propertyone定wantissmall驼峰!not supportedotherformat!
+        // propertyone定wantissmallcamel case!not supportedotherformat!
         $humpKey = $this->getCamelizeValueFromCache($key);
         // judgepropertywhether存in,avoidcallnot存inpropertyo clock,死loop触hair __set method
         if (! property_exists($this, $humpKey)) {

@@ -39,7 +39,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * getresource国际化tag(by DelightfulResourceEnum provide).
+     * getresourceinternationalizationtag(by DelightfulResourceEnum provide).
      */
     public function getResourceLabel(string $resource): string
     {
@@ -109,7 +109,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * get操as国际化tag.
+     * get操asinternationalizationtag.
      */
     public function getOperationLabel(string $operation): string
     {

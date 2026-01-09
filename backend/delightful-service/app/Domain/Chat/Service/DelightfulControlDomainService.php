@@ -24,7 +24,7 @@ use Throwable;
 class DelightfulControlDomainService extends AbstractDomainService
 {
     /**
-     * return收item方多itemmessagefinal阅读status
+     * return收item方多itemmessagefinalreadstatus
      */
     public function getSenderMessageLatestReadStatus(string $senderMessageId, string $senderUserId): ?DelightfulSeqEntity
     {

@@ -147,8 +147,8 @@ class AiAbilityAssembler
      * 脱敏 API Key.
      *
      * @param string $apiKey original API Key
-     * @param int $prefixLength 保留front几位(default3)
-     * @param int $suffixLength 保留back几位(default3)
+     * @param int $prefixLength retainfront几位(default3)
+     * @param int $suffixLength retainback几位(default3)
      * @return string 脱敏back API Key
      */
     private static function maskApiKey(string $apiKey, int $prefixLength = 4, int $suffixLength = 4): string

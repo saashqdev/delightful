@@ -29,7 +29,7 @@ readonly class ClearDelightfulMessageCrontab
 
     public function clearDelightfulMessage(string $time): void
     {
-        // recordingfeaturealready移except,thismethod保留fornullimplement,canaccording toneedaddothercleanuplogic
+        // recordingfeaturealready移except,thismethodretainfornullimplement,canaccording toneedaddothercleanuplogic
         $this->logger->info(sprintf('ClearDelightfulMessageCrontab time: %s - recording functionality removed', $time));
     }
 }

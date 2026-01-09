@@ -462,7 +462,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * avoid seq table承载too多feature,addtoo多index,thereforewilltopicmessagesingle独writeto topic_messages tablemiddle.
+     * avoid seq tablecarrytoo多feature,addtoo多index,thereforewilltopicmessagesingle独writeto topic_messages tablemiddle.
      */
     public function createTopicMessage(DelightfulSeqEntity $seqEntity, ?string $topicId = null): ?DelightfulTopicMessageEntity
     {
@@ -672,7 +672,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * byatoneitemmessage,in2conversationwindow渲染o clock,willgenerate2messageid,thereforeneedparseoutcome收item方can看tomessagequoteid.
+     * byatoneitemmessage,in2conversationwindowrendero clock,willgenerate2messageid,thereforeneedparseoutcome收item方can看tomessagequoteid.
      * according to delightful_message_id + object_id + object_type 找tomessage收item方refer_message_id.
      * Support for the message editing function: For multiple sequences (seqs) of the same object_id, only the one with the smallest seq_id is returned.
      */
@@ -726,7 +726,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * return收item方多itemmessagefinal阅读status
+     * return收item方多itemmessagefinalreadstatus
      * @return DelightfulSeqEntity[]
      * @todo consideruserA设备editmessage,B设备withdrawmessagescenario
      */

@@ -24,7 +24,7 @@ use function di;
 
 #[BuiltInToolDefine]
 /**
- * 采useone seq push所havesearch相closecontent,front端notagain多 seq mergebecomeone渲染.
+ * 采useone seq push所havesearch相closecontent,front端notagain多 seq mergebecomeonerender.
  */
 class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
 {

@@ -69,7 +69,7 @@ class VolcengineSms extends VolcengineApi
                 'PhoneNumbers' => $phone,
             ];
             $this->setBody($body);
-            // ifissingleyuantest,nothairshort信,onlyverifyvariableparse/short信content&&short信signature多语type适配/国际区numbercorrectparse
+            // ifissingleyuantest,nothairshort信,onlyverifyvariableparse/short信content&&short信signature多语typeadapt/国际区numbercorrectparse
             if (defined('IN_UNIT_TEST')) {
                 // singleyuantest,nottruehairshort信
                 return $sendResult->setResult($errCode, $msg);

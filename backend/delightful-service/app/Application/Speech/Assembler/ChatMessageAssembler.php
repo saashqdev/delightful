@@ -17,7 +17,7 @@ use Hyperf\Contract\TranslatorInterface;
 
 /**
  * chatmessage装配器
- * 负责buildASRsummary相closechatmessage.
+ * responsiblebuildASRsummary相closechatmessage.
  */
 readonly class ChatMessageAssembler
 {

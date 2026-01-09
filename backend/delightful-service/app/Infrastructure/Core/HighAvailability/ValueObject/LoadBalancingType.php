@@ -13,7 +13,7 @@ namespace App\Infrastructure\Core\HighAvailability\ValueObject;
 enum LoadBalancingType: int
 {
     /**
-     * 随机strategy - 随机chooseonecanuseback端service
+     * randomstrategy - randomchooseonecanuseback端service
      */
     case RANDOM = 1;
 
@@ -40,7 +40,7 @@ enum LoadBalancingType: int
     public function getDescription(): string
     {
         return match ($this) {
-            self::RANDOM => '随机',
+            self::RANDOM => 'random',
             self::ROUND_ROBIN => 'round询',
             self::WEIGHTED_ROUND_ROBIN => 'add权round询',
             self::HASH => 'hash',

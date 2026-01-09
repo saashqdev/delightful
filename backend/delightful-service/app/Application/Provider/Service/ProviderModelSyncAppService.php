@@ -29,7 +29,7 @@ use function Hyperf\Support\retry;
 
 /**
  * servicequotientmodelsyncapplicationservice.
- * 负责fromoutside部APIpullmodelandsynctoOfficialservicequotient.
+ * responsiblefromoutside部APIpullmodelandsynctoOfficialservicequotient.
  */
 class ProviderModelSyncAppService
 {

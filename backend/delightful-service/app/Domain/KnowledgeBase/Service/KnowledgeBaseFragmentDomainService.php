@@ -158,7 +158,7 @@ readonly class KnowledgeBaseFragmentDomainService
     }
 
     /**
-     * according to point_id get所have相关片段，按 version 倒序sort.
+     * according to point_id get所have相关slicesegment，按 version 倒序sort.
      * @return array<KnowledgeBaseFragmentEntity>
      */
     public function getFragmentsByPointId(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeCode, string $pointId, bool $lock = false): array
@@ -175,7 +175,7 @@ readonly class KnowledgeBaseFragmentDomainService
     }
 
     /**
-     * updateknowledge base片段status.
+     * updateknowledge baseslicesegmentstatus.
      */
     public function batchChangeSyncStatus(array $ids, KnowledgeSyncStatus $syncStatus, string $syncMessage = ''): void
     {
@@ -195,17 +195,17 @@ readonly class KnowledgeBaseFragmentDomainService
         };
         $preprocessRule = $selectedFragmentConfig->getTextPreprocessRule();
         // 先conduct预process
-        // needfilterREPLACE_WHITESPACErule，REPLACE_WHITESPACErulein分段后conductprocess
+        // needfilterREPLACE_WHITESPACErule，REPLACE_WHITESPACEruleinminutesegmentbackconductprocess
         $filterPreprocessRule = array_filter($preprocessRule, fn (TextPreprocessRule $rule) => $rule !== TextPreprocessRule::REPLACE_WHITESPACE);
         $start = microtime(true);
-        $this->logger->info('前置文本预processstart。');
+        $this->logger->info('front置文本预processstart。');
         $content = TextPreprocessUtil::preprocess($filterPreprocessRule, $content);
-        $this->logger->info('前置文本预processend，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
+        $this->logger->info('front置文本预processend，耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
-        // againconduct分段
-        // process转义的分隔符
+        // againconductminutesegment
+        // process转义的minute隔符
         $start = microtime(true);
-        $this->logger->info('文本分段start。');
+        $this->logger->info('文本minutesegmentstart。');
         $separator = stripcslashes($selectedFragmentConfig->getSegmentRule()->getSeparator());
         $splitter = new TokenTextSplitter(
             chunkSize: $selectedFragmentConfig->getSegmentRule()->getChunkSize(),
@@ -215,17 +215,17 @@ readonly class KnowledgeBaseFragmentDomainService
         );
 
         $fragments = $splitter->splitText($content);
-        $this->logger->info('文本分段end，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
+        $this->logger->info('文本minutesegmentend，耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
-        // need额外conductprocess的rule
+        // need额outsideconductprocess的rule
         $start = microtime(true);
-        $this->logger->info('后置文本预processstart。');
+        $this->logger->info('back置文本预processstart。');
         if (in_array(TextPreprocessRule::REPLACE_WHITESPACE, $preprocessRule)) {
             foreach ($fragments as &$fragment) {
                 $fragment = TextPreprocessUtil::preprocess([TextPreprocessRule::REPLACE_WHITESPACE], $fragment);
             }
         }
-        $this->logger->info('后置文本预processend，耗时:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
+        $this->logger->info('back置文本预processend，耗o clock:' . TimeUtil::getMillisecondDiffFromNow($start) / 1000);
 
         // filter掉空string
         return array_values(array_filter($fragments, function ($fragment) {

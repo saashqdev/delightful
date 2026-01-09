@@ -54,7 +54,7 @@ readonly class OrganizationDomainService
         $savedOrganization = $this->organizationRepository->save($organizationEntity);
 
         if ($creatorId !== null && $savedOrganization->getType() !== 1) {
-            // 个人organizationnot添加organization管理员
+            // 人organizationnot添加organization管理员
             // 为create者添加organization管理员permission并mark为organizationcreate人
             try {
                 $dataIsolation = DataIsolation::simpleMake($savedOrganization->getDelightfulOrganizationCode(), (string) $creatorId);
@@ -83,7 +83,7 @@ readonly class OrganizationDomainService
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_NOT_EXISTS);
         }
 
-        // checkencodingwhether已存in（排exceptcurrentorganization）
+        // checkencodingwhether已存in（rowexceptcurrentorganization）
         if ($this->organizationRepository->existsByCode($organizationEntity->getDelightfulOrganizationCode(), $organizationEntity->getId())) {
             ExceptionBuilder::throw(PermissionErrorCode::ORGANIZATION_CODE_EXISTS);
         }
@@ -110,7 +110,7 @@ readonly class OrganizationDomainService
     }
 
     /**
-     * according toencodinglist批量getorganization.
+     * according toencodinglist批quantitygetorganization.
      * @param string[] $delightfulOrganizationCodes
      * @return OrganizationEntity[]
      */

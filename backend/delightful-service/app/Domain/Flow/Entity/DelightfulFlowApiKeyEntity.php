@@ -205,7 +205,7 @@ class DelightfulFlowApiKeyEntity extends AbstractEntity
     public function getSecretKey(bool $isDesensitization = false): string
     {
         if ($isDesensitization) {
-            // 只保留about 4 位数，剩下的use * 代替
+            // 只保留about 4 位数，剩down的use * 代替
             return substr($this->secretKey, 0, 4) . str_repeat('*', strlen($this->secretKey) - 8) . substr($this->secretKey, -4);
         }
         return $this->secretKey;

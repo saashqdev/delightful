@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_api_access_tokens', function (Blueprint $table) {
-            $table->string('models', 512)->comment('modelid，多个use，split')->default('')->change();
+            $table->string('models', 512)->comment('modelid，多use，split')->default('')->change();
         });
     }
 

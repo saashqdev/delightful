@@ -88,9 +88,9 @@ class FileTypeTest extends TestCase
     }
 
     /**
-     * testfromHTTP头infogettype（need模拟HTTPresponse）.
+     * testfromHTTPheadinfogettype（need模拟HTTPresponse）.
      *
-     * 注意：这个test可能needusefunction模拟，ifproject中nothaveconfigurationfunction模拟，
+     * 注意：这test可能needusefunction模拟，ifprojectmiddlenothaveconfigurationfunction模拟，
      * can将此testmark为skiporuse真实URLconducttest
      */
     public function testGetTypeFromHeaders()
@@ -100,7 +100,7 @@ class FileTypeTest extends TestCase
     }
 
     /**
-     * test无法识别filetype时throwexception.
+     * test无法识别filetypeo clockthrowexception.
      * 同样needfunction模拟support
      */
     public function testInvalidFileType()

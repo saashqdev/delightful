@@ -36,7 +36,7 @@ class DelightfulChatFileAppService extends AbstractAppService
      */
     public function saveOrUpdateByFileKey(string $fileKey, DataIsolation $dataIsolation, array $fileData): array
     {
-        // 1. 准备file实体
+        // 1. 准备file实body
         $fileEntity = new DelightfulChatFileEntity();
         $fileEntity->setFileKey($fileKey);
         $fileEntity->setFileExtension($fileData['file_extension'] ?? '');
@@ -77,7 +77,7 @@ class DelightfulChatFileAppService extends AbstractAppService
      */
     public function getFileInfo(string $fileId): ?array
     {
-        // passIDgetfile实体
+        // passIDgetfile实body
         $fileEntities = $this->delightfulChatFileDomainService->getFileEntitiesByFileIds([$fileId], null, null, true);
         if (empty($fileEntities)) {
             return null;

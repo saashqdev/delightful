@@ -60,12 +60,12 @@ interface OrganizationAdminRepositoryInterface
     public function getOrganizationCreator(DataIsolation $dataIsolation): ?OrganizationAdminEntity;
 
     /**
-     * getorganization下所haveorganization管理员.
+     * getorganizationdown所haveorganization管理员.
      */
     public function getAllOrganizationAdmins(DataIsolation $dataIsolation): array;
 
     /**
-     * 批量checkuserwhether为organization管理员.
+     * 批quantitycheckuserwhether为organization管理员.
      */
     public function batchCheckOrganizationAdmin(DataIsolation $dataIsolation, array $userIds): array;
 }

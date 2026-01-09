@@ -21,7 +21,7 @@ return new class extends Migration {
         // 话题contain的 message_id list. notinseqtable加话题idfield,避免seq承载的featuretoo多,need加too多索引
         Schema::create('delightful_chat_topic_messages', static function (Blueprint $table) {
             // messageid
-            $table->bigIncrements('seq_id')->comment('message的序列id.notinseqtable加话题idfield,避免seq承载的featuretoo多,need加too多索引');
+            $table->bigIncrements('seq_id')->comment('message的序columnid.notinseqtable加话题idfield,避免seq承载的featuretoo多,need加too多索引');
             // sessionid. 冗余field
             $table->string('conversation_id', 64)->comment('message所属sessionid');
             // organizationencoding. 冗余field

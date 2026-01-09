@@ -14,7 +14,7 @@ use App\Infrastructure\ExternalAPI\Volcengine\ValueObject\VolcengineStatusCode;
 
 /**
  * Speech Recognition Result DTO for complete speech recognition response.
- * 根级别 DTO - 对应完整的 JSON response结构.
+ * rootlevel别 DTO - 对应完整的 JSON response结构.
  */
 class SpeechRecognitionResultDTO extends AbstractDTO
 {

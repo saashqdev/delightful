@@ -98,7 +98,7 @@ class LoopMainNodeRunner extends NodeRunner
                 if (! $conditionComponent?->isCondition()) {
                     ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.component.format_error', ['label' => 'condition']);
                 }
-                // initial条件
+                // initialitemitem
                 $condition = $conditionComponent->getCondition()->getResult($executionData->getExpressionFieldData()) ?? [];
 
                 $maxLoopCountComponent = ComponentFactory::fastCreate($params['max_loop_count'] ?? []);
@@ -120,7 +120,7 @@ class LoopMainNodeRunner extends NodeRunner
                     if ($loopCount >= $maxLoopCount) {
                         break;
                     }
-                    // each次重新计算条件
+                    // eachtime重新计算itemitem
                     $condition = $conditionComponent->getCondition()->getResult($executionData->getExpressionFieldData());
                 }
                 break;
@@ -133,17 +133,17 @@ class LoopMainNodeRunner extends NodeRunner
     {
         $loopDelightfulFlow = clone $delightfulFlow;
 
-        // 做区分
+        // 做区minute
         $loopDelightfulFlow->setCode($delightfulFlow->getCode() . '_loop');
         $loopDelightfulFlow->setType(Type::Loop);
 
-        // 循环体节点
+        // 循环bodysectionpoint
         $bodyNode = $delightfulFlow->getNodeById($bodyId);
         if (! $bodyNode) {
             return null;
         }
 
-        // get所have 父 id 是这个循环体的节点
+        // get所have 父 id 是这循环body的sectionpoint
         $childNodes = $delightfulFlow->getNodesByParentId($bodyId);
         if (empty($childNodes)) {
             return null;
@@ -154,7 +154,7 @@ class LoopMainNodeRunner extends NodeRunner
             $meta['parent_id'] = '';
             $node->setMeta($meta);
         }
-        // more换execute的节点
+        // more换execute的sectionpoint
         $loopDelightfulFlow->setNodes($childNodes);
 
         return $loopDelightfulFlow;
@@ -165,12 +165,12 @@ class LoopMainNodeRunner extends NodeRunner
         try {
             $subExecutor = new DelightfulFlowExecutor($loopDelightfulFlow, $executionData);
             $subExecutor->setInLoop(true);
-            // 复usecurrent的executedata，循环体内可access和修改
+            // 复usecurrent的executedata，循环bodyinside可access和修改
             $subExecutor->execute(TriggerType::LoopStart);
         } catch (Throwable $throwable) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $throwable->getMessage()]);
         }
-        // 节点内部的exceptionin node 的 debug info中record
+        // sectionpointinside部的exceptionin node 的 debug infomiddlerecord
         foreach ($loopDelightfulFlow->getNodes() as $node) {
             if ($node->getNodeDebugResult() && ! $node->getNodeDebugResult()->isSuccess()) {
                 ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $node->getNodeDebugResult()->getErrorMessage()]);

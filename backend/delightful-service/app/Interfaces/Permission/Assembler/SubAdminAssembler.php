@@ -14,7 +14,7 @@ use App\Interfaces\Kernel\DTO\PageDTO;
 class SubAdminAssembler
 {
     /**
-     * 将 RoleEntity convert为arrayformat，供前端use。
+     * 将 RoleEntity convert为arrayformat，供front端use。
      */
     public static function toArray(RoleEntity $entity): array
     {
@@ -45,7 +45,7 @@ class SubAdminAssembler
     public static function assembleWithUserInfo(RoleEntity $entity, array $userInfoList, array $updatedUser = []): array
     {
         $data = self::toArray($entity);
-        $data['users'] = $userInfoList; // user详细info列table
+        $data['users'] = $userInfoList; // user详细infocolumntable
         $data['updated_user'] = $updatedUser;
         return $data;
     }

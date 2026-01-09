@@ -27,7 +27,7 @@ class AgentAppService extends AbstractAppService
      * query Agent list.
      *
      * @param Authenticatable $authorization authorizationuser
-     * @param DelightfulAgentQuery $query query条件
+     * @param DelightfulAgentQuery $query queryitemitem
      * @param Page $page paginationinfo
      * @return array{total: int, list: array<DelightfulAgentEntity>, icons: array<string,FileLink>}
      */
@@ -44,7 +44,7 @@ class AgentAppService extends AbstractAppService
         if ($agentIds !== false) {
             $agentIds = Json::decode($agentIds);
         } else {
-            // getorganization内可use的 Agent Ids
+            // getorganizationinside可use的 Agent Ids
             $orgAgentIds = $this->getOrgAvailableAgentIds($agentDataIsolation, $containOfficialOrganization);
 
             // get自己havepermission的 id
@@ -59,9 +59,9 @@ class AgentAppService extends AbstractAppService
             // merge
             $agentIds = array_unique(array_merge($orgAgentIds, $selfAgentIds));
 
-            // cacheresult（仅whennot为空时）
+            // cacheresult（仅whennot为空o clock）
             if (! empty($agentIds)) {
-                $this->redis->setex($cacheKey, 180, Json::encode($agentIds)); // cache 3 分钟
+                $this->redis->setex($cacheKey, 180, Json::encode($agentIds)); // cache 3 minute钟
             }
         }
 
@@ -74,7 +74,7 @@ class AgentAppService extends AbstractAppService
 
         $data = $this->agentDomainService->queries($agentDataIsolation, $query, $page);
 
-        // ifcontain官方organization，按照传入的ID顺序重新sortresult，保持官方organization助理in前
+        // ifcontain官方organization，按照传入的ID顺序重新sortresult，保持官方organization助理infront
         if ($containOfficialOrganization) {
             $data['list'] = $this->sortAgentsByIdOrder($data['list'], $agentIds);
         }
@@ -100,7 +100,7 @@ class AgentAppService extends AbstractAppService
         $contactDataIsolation = $this->createContactDataIsolationByBase($agentDataIsolation);
         $userDepartmentIds = $this->delightfulDepartmentUserDomainService->getDepartmentIdsByUserId($contactDataIsolation, $agentDataIsolation->getCurrentUserId(), true);
 
-        // ifneedcontain官方organization，then将官方organization的助理排inmost前面
+        // ifneedcontain官方organization，then将官方organization的助理rowinmostfrontsurface
         if ($containOfficialOrganization) {
             $officialAgents = [];
             $nonOfficialAgents = [];
@@ -113,27 +113,27 @@ class AgentAppService extends AbstractAppService
                 }
             }
 
-            // 重新sort：官方organization的助理in前
+            // 重新sort：官方organization的助理infront
             $data['list'] = array_merge($officialAgents, $nonOfficialAgents);
         }
         $visibleAgents = [];
         foreach ($data['list'] as $agentVersion) {
             $visibilityConfig = $agentVersion->getVisibilityConfig();
 
-            // all部可见or无可见性configuration
+            // all部可见or无可见propertyconfiguration
             if ($visibilityConfig === null || $visibilityConfig->getVisibilityType() === VisibilityType::All->value) {
                 $visibleAgents[] = $agentVersion->getAgentId();
                 continue;
             }
 
-            // whetherin个人可见中
+            // whetherin人可见middle
             foreach ($visibilityConfig->getUsers() as $visibleUser) {
                 if ($visibleUser->getId() === $agentDataIsolation->getCurrentUserId()) {
                     $visibleAgents[] = $agentVersion->getAgentId();
                 }
             }
 
-            // whetherindepartment可见中
+            // whetherindepartment可见middle
             foreach ($visibilityConfig->getDepartments() as $visibleDepartment) {
                 if (in_array($visibleDepartment->getId(), $userDepartmentIds)) {
                     $visibleAgents[] = $agentVersion->getAgentId();
@@ -144,11 +144,11 @@ class AgentAppService extends AbstractAppService
     }
 
     /**
-     * 按照指定的ID顺序对助理listconductsort.
+     * 按照finger定的ID顺序对助理listconductsort.
      *
-     * @param array<DelightfulAgentEntity> $agents 助理实体array
+     * @param array<DelightfulAgentEntity> $agents 助理实bodyarray
      * @param array $sortedIds sort的IDarray
-     * @return array sort后的助理array
+     * @return array sortback的助理array
      */
     private function sortAgentsByIdOrder(array $agents, array $sortedIds): array
     {
@@ -156,13 +156,13 @@ class AgentAppService extends AbstractAppService
             return $agents;
         }
 
-        // 快速create ID to实体的mapping
+        // 快speedcreate ID to实body的mapping
         $agentMap = [];
         foreach ($agents as $agent) {
             $agentMap[$agent->getId()] = $agent;
         }
 
-        // 按照指定顺序重新organizationarray
+        // 按照finger定顺序重新organizationarray
         $sortedAgents = [];
         foreach ($sortedIds as $id) {
             if (isset($agentMap[$id])) {

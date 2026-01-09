@@ -116,7 +116,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
     {
         $groupPageResponseDTO = $this->delightfulGroupRepository->getUserGroupList($pageToken, $dataIsolation->getCurrentUserId(), $pageSize);
         $groupDTOS = $groupPageResponseDTO->getItems();
-        // userin这些group chat中的sessionid
+        // userin这些group chatmiddle的sessionid
         $groupIds = array_column($groupDTOS, 'id');
         $conversations = $this->delightfulConversationRepository->getConversationsByReceiveIds($dataIsolation->getCurrentUserId(), $groupIds);
         /** @var DelightfulConversationEntity[] $conversations */
@@ -140,7 +140,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         Db::beginTransaction();
         try {
             $controlMessageType = $groupUserChangeSeqEntity->getSeqType();
-            // 批量generate群member变moremessage
+            // 批quantitygenerate群member变moremessage
             /** @var GroupCreateMessage|GroupInfoUpdateMessage|GroupOwnerChangeMessage|GroupUserAddMessage|GroupUserRemoveMessage $content */
             $content = $groupUserChangeSeqEntity->getContent();
             $groupId = $content->getGroupId();
@@ -159,10 +159,10 @@ class DelightfulGroupDomainService extends AbstractDomainService
             $content = $content->toArray();
             // pass protobuf message结构,createdelightful chat的object,为弃use protobuf 做准备
             if (in_array($controlMessageType, [ControlMessageType::GroupUsersRemove, ControlMessageType::GroupDisband], true)) {
-                // 这些user已经from群membertable中移except,but是他们also未收tobe移except的message
+                // 这些user已经from群membertablemiddle移except,but是他们also未收tobe移except的message
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
                 if ($controlMessageType === ControlMessageType::GroupDisband) {
-                    // 解散group chat,所have人all是be移except的.这里减少stream量consume.
+                    // 解散group chat,所have人all是be移except的.这within减少streamquantityconsume.
                     $content['user_ids'] = [];
                 }
             }
@@ -180,7 +180,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         array $seqContent,
         ControlMessageType $controlMessageType
     ): DelightfulSeqEntity {
-        // returnsessionid,方便前端操作
+        // returnsessionid,方便front端操作
         $userConversations = $this->getGroupUserConversationsByUserIds([$dataIsolation->getCurrentUserId()], $groupEntity->getId());
         $seqContent['conversation_id'] = $userConversations[$dataIsolation->getCurrentUserId()] ?? '';
         $seqEntity = $this->getGroupChangeSeqEntity($dataIsolation, $groupEntity, $seqContent, $controlMessageType);
@@ -213,7 +213,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         if ($oldGroupOwner !== $dataIsolation->getCurrentUserId()) {
             ExceptionBuilder::throw(ChatErrorCode::GROUP_ONLY_OWNER_CAN_TRANSFER);
         }
-        // checkbe转让的userwhetheringroup chat中
+        // checkbe转让的userwhetheringroup chatmiddle
         $groupId = $groupEntity->getId();
         $newOwnerUserId = $delightfulGroupDTO->getGroupOwner();
         if (! $this->isUserInGroup($groupId, $newOwnerUserId)) {
@@ -251,7 +251,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
 
     private function getGroupUpdateReceiveUsers(string $groupId): array
     {
-        // 批量generate群member变moremessage
+        // 批quantitygenerate群member变moremessage
         $groupEntity = $this->delightfulGroupRepository->getGroupInfoById($groupId);
         if ($groupEntity === null || $groupEntity->getGroupStatus() === GroupStatusEnum::Disband) {
             return [];
@@ -270,13 +270,13 @@ class DelightfulGroupDomainService extends AbstractDomainService
     private function batchCreateGroupUserSeqEntity(array $userIds, ControlMessageType $controlMessageType, array $content): void
     {
         $operateUserId = $content['operate_user_id'] ?? '';
-        // 批量getuserEntity
+        // 批quantitygetuserEntity
         $users = $this->delightfulUserRepository->getUserByIds($userIds);
         $users = array_column($users, null, 'user_id');
         $time = date('Y-m-d H:i:s');
         $seqListCreateDTO = [];
         $groupId = $content['group_id'] ?? '';
-        // 群member增加时,为新加入的memberreturnsessionid
+        // 群member增加o clock,为新加入的memberreturnsessionid
         $userConversations = $this->getGroupUserConversationsByUserIds(array_keys($users), $groupId);
         $userContent = $content;
         foreach ($users as $user) {
@@ -284,7 +284,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             if (empty($userId)) {
                 continue;
             }
-            // not为操作者重复generateseq. 因为in投mq之前,已经为操作者generate了seq
+            // not为操作者重复generateseq. 因为in投mq之front,已经为操作者generate了seq
             if ($userId === $operateUserId) {
                 continue;
             }

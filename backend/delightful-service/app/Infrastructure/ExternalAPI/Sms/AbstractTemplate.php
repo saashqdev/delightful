@@ -17,12 +17,12 @@ abstract class AbstractTemplate implements TemplateInterface
     protected array $typeToIdMap = [];
 
     /**
-     * according to短信type,conductvariable短信的适配,also原整条短信文本content.
+     * according to短信type,conductvariable短信的适配,also原整item短信文本content.
      */
     protected array $typeContents = [];
 
     /**
-     * according totemplateid,conductvariable短信的适配,also原整条短信文本content.
+     * according totemplateid,conductvariable短信的适配,also原整item短信文本content.
      */
     protected array $idContents = [];
 
@@ -53,15 +53,15 @@ abstract class AbstractTemplate implements TemplateInterface
     public function getTemplateVariables(string $content, array $messages): array
     {
         $matches = [];
-        // 匹配文本 ${code} 中的code
+        // 匹配文本 ${code} middle的code
         $matched = preg_match_all('/\$\{([^}]+)}/uS', $content, $matches);
-        // 匹配文本 {$code} 中的code
+        // 匹配文本 {$code} middle的code
         ! $matched && $matched = preg_match_all('/\{\$([^}]+)}/uS', $content, $matches);
         if (! $matched) {
             return $messages;
         }
         $variables = [];
-        // template$content中not存in "${xxx}" or者 {$xxx) type的字符.then按index顺序匹配
+        // template$contentmiddlenot存in "${xxx}" or者 {$xxx) type的字符.then按index顺序匹配
         foreach ($matches[1] as $index => $variableKey) {
             if (isset($messages[$variableKey])) {
                 $variables[$variableKey] = $messages[$variableKey];
@@ -73,7 +73,7 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
-     * according to短信type,returntypesupport的语种list.
+     * according to短信type,returntypesupport的语typelist.
      * @return string[]
      */
     public function getTemplateLanguagesByType(string $type): array
@@ -95,9 +95,9 @@ abstract class AbstractTemplate implements TemplateInterface
             return $sign;
         }
 
-        // 确定signature的语种,needfrom user指定语种,user指定兜底语种,系统default的兜底语种 中确定出来一个value
+        // 确定signature的语type,needfrom userfinger定语type,userfinger定兜bottom语type,系统default的兜bottom语type middle确定出来一value
         $signLanguage = null;
-        // 语种兜底的顺序
+        // 语type兜bottom的顺序
         $defaultLanguages = [$language, $defaultLanguage, LanguageEnum::EN_US, LanguageEnum::ZH_CN];
         foreach ($defaultLanguages as $value) {
             if (isset($this->signMap[$sign][$value])) {
@@ -105,7 +105,7 @@ abstract class AbstractTemplate implements TemplateInterface
                 break;
             }
         }
-        // if $sign in $defaultLanguages not存invalue,then给一个typesupport的语种
+        // if $sign in $defaultLanguages not存invalue,then给一typesupport的语type
         $firstLanguage = null;
         if (isset($this->signMap[$sign]) && is_array($this->signMap[$sign])) {
             $firstLanguage = array_key_first($this->signMap[$sign]);
@@ -115,7 +115,7 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
-     * when传入的signaturetypenot存in时,get短信的defaultsignaturetype.
+     * when传入的signaturetypenot存ino clock,get短信的defaultsignaturetype.
      */
     abstract protected function getTemplateDefaultSignType(string $sign): string;
 

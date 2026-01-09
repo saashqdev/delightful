@@ -43,7 +43,7 @@ readonly class AsrValidationService
      * @param string $projectId projectID
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
-     * @return ProjectEntity project实体
+     * @return ProjectEntity project实body
      */
     public function validateProjectAccess(string $projectId, string $userId, string $organizationCode): ProjectEntity
     {
@@ -102,7 +102,7 @@ readonly class AsrValidationService
      *
      * @param int $topicId 话题ID
      * @param string $userId userID
-     * @return TopicEntity 话题实体
+     * @return TopicEntity 话题实body
      */
     public function validateTopicOwnership(int $topicId, string $userId): TopicEntity
     {

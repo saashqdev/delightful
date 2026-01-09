@@ -38,7 +38,7 @@ class HistoryMessageNodeRunnerTest extends ExecuteManagerBaseTest
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "required": [
             "history_messages"

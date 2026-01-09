@@ -29,7 +29,7 @@ class KnowledgeBaseDocumentQuery extends Query
     protected ?string $updatedUid = null;
 
     /**
-     * knowledge basedocumentcodearray，useat批量query.
+     * knowledge basedocumentcodearray，useat批quantityquery.
      *
      * @var null|string[]
      */

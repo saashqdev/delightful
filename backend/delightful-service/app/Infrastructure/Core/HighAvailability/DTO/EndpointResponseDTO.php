@@ -23,7 +23,7 @@ class EndpointResponseDTO extends AbstractDTO
     protected string $requestId;
 
     /**
-     * 接入点ID.
+     * 接入pointID.
      */
     protected string $endpointId;
 
@@ -33,7 +33,7 @@ class EndpointResponseDTO extends AbstractDTO
     protected int $requestLength;
 
     /**
-     * responseconsume的time，unit：毫秒.
+     * responseconsume的time，unit：毫second.
      */
     protected int $responseTime;
 
@@ -73,7 +73,7 @@ class EndpointResponseDTO extends AbstractDTO
     protected string $updatedAt;
 
     /**
-     * 方便 debug 时trace哪里 new 了它.
+     * 方便 debug o clocktrace哪within new 了它.
      * @param mixed $data
      */
     public function __construct($data = [])

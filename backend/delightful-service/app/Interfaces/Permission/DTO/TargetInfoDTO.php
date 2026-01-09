@@ -31,7 +31,7 @@ class TargetInfoDTO extends AbstractDTO
         $targetInfoDTO->setId($userEntity->getUserId());
         $targetInfoDTO->setName($userEntity->getNickname());
         $targetInfoDTO->setIcon($userEntity->getAvatarUrl());
-        // 这里descriptionuse departmentinformation
+        // 这withindescriptionuse departmentinformation
         $targetInfoDTO->setDescription('');
         return $targetInfoDTO;
     }

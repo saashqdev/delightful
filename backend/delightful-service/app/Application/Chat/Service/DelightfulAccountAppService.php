@@ -58,7 +58,7 @@ class DelightfulAccountAppService extends AbstractAppService
     }
 
     /**
-     * @param null|AccountEntity $accountDTO supportenable/disable智能体
+     * @param null|AccountEntity $accountDTO supportenable/disable智能body
      * @throws Throwable
      */
     public function aiRegister(DelightfulUserEntity $userDTO, DelightfulUserAuthorization $authorization, string $aiCode, ?AccountEntity $accountDTO = null): DelightfulUserEntity
@@ -77,7 +77,7 @@ class DelightfulAccountAppService extends AbstractAppService
                 $authorization->setOrganizationCode($delightfulInfo?->getOrganizationCode());
             }
             // pass aiCode query delightful_flows 表get所属organization。
-            // 注意超级麦吉when前是作为onenothavewrite delightful_flows datalibrary的 flow 存in。 SUPER_DELIGHTFUL_CODE write了 accounts 表。
+            // 注意超level麦吉whenfront是作为onenothavewrite delightful_flows datalibrary的 flow 存in。 SUPER_DELIGHTFUL_CODE write了 accounts 表。
             if ($aiCode !== AgentConstant::SUPER_DELIGHTFUL_CODE) {
                 $disabledDataIsolation = FlowDataIsolation::create()->disabled();
                 $delightfulFlowEntity = $this->delightfulFlowDomainService->getByCode($disabledDataIsolation, $aiCode);
@@ -88,7 +88,7 @@ class DelightfulAccountAppService extends AbstractAppService
             }
 
             $dataIsolation = $this->createDataIsolation($authorization);
-            // 智能体账号information
+            // 智能body账numberinformation
             if (! isset($accountDTO)) {
                 $accountDTO = new AccountEntity();
             }

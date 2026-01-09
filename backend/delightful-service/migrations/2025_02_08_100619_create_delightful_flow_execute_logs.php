@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->string('conversation_id')->default('')->comment('conversationID');
             $table->string('flow_code')->default('')->comment('processencoding');
             $table->string('flow_version_code')->default('')->comment('versionencoding');
-            $table->integer('status')->default(0)->comment('status 1 准备运行;2 运行中;3 complete;4 failed;5 cancel')->index();
+            $table->integer('status')->default(0)->comment('status 1 准备运line;2 运linemiddle;3 complete;4 failed;5 cancel')->index();
             $table->json('ext_params')->nullable()->comment('extensionparameter');
             $table->json('result')->nullable()->comment('result');
             $table->timestamp('created_at')->nullable()->comment('creation time');

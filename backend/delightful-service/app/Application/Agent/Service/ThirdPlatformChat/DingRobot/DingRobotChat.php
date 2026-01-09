@@ -81,7 +81,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
         $message = '';
         $attachments = [];
-        // 目前只parse 文本、image、rich text
+        // 目front只parse 文本、image、rich text
         switch ($params['msgtype']) {
             case 'text':
                 $message = $params['text']['content'] ?? '';
@@ -117,7 +117,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
 
     public function sendMessage(ThirdPlatformChatMessage $thirdPlatformChatMessage, MessageInterface $message): void
     {
-        // 目前仅send文本出去
+        // 目front仅send文本出去
         if (! $message instanceof TextMessage) {
             return;
         }
@@ -134,7 +134,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendOneOnOneChatMessages($param);
             } catch (Throwable $throwable) {
-                // 钉钉 downloadimagetimemore长，超过了3000ms，网关直接return了timeouterror。sendmessage此时skip
+                // 钉钉 downloadimagetimemore长，超过了3000ms，网关直接return了timeouterror。sendmessage此o clockskip
                 simple_log('SendOneOnOneChatMessagesError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -152,7 +152,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendGroupMessage($param);
             } catch (Throwable $throwable) {
-                // 钉钉 downloadimagetimemore长，超过了3000ms，网关直接return了timeouterror。sendmessage此时skip
+                // 钉钉 downloadimagetimemore长，超过了3000ms，网关直接return了timeouterror。sendmessage此o clockskip
                 simple_log('SendGroupMessageError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -161,9 +161,9 @@ class DingRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * pass手机号get第三方userid.
-     * @param string $mobile 手机号码
-     * @return string 第三方userid，returnformat
+     * passhand机numbergetthe三方userid.
+     * @param string $mobile hand机number码
+     * @return string the三方userid，returnformat
      */
     public function getThirdPlatformUserIdByMobiles(string $mobile): string
     {
@@ -265,7 +265,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             realName: $userInfo->getName(),
         );
 
-        // getuser的所havedepartment上级
+        // getuser的所havedepartmentuplevel
         $param = new GetAllParentDepartmentByUserParameter($this->openDevFactory->accessTokenEndpoint->get());
         $param->setUserId($thirdPlatformChatMessage->getUserId());
         $list = $this->openDevFactory->departmentEndpoint->getAllParentDepartmentByUser($param);

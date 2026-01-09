@@ -26,7 +26,7 @@ class DelightfulSettingAppService extends AbstractKernelAppService
 
     /**
      * saveall局configuration
-     * all局configurationnot属at任何账号、organizationoruser.
+     * all局configurationnot属at任何账number、organizationoruser.
      */
     public function save(GlobalConfig $config): GlobalConfig
     {

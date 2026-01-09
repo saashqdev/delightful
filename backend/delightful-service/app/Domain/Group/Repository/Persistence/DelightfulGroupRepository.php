@@ -44,7 +44,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
         return GroupAssembler::getGroupEntity($groupInfo);
     }
 
-    // 批量querygroupinformation
+    // 批quantityquerygroupinformation
 
     /**
      * @return DelightfulGroupEntity[]
@@ -106,7 +106,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
         $users = array_column($users, null, 'user_id');
         $time = date('Y-m-d H:i:s');
         $groupUsers = [];
-        // 批量getuserinformation
+        // 批quantitygetuserinformation
         foreach ($userIds as $userId) {
             $user = $users[$userId] ?? null;
             if (empty($user)) {
@@ -129,7 +129,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
                 'organization_code' => $user['organization_code'],
             ];
         }
-        // 批量往group中添加user
+        // 批quantity往groupmiddle添加user
         ! empty($groupUsers) && $this->groupUserModel::query()->insert($groupUsers);
         return true;
     }
@@ -140,7 +140,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
             ->select($columns)
             ->where('group_id', $groupId);
         $userList = Db::select($userList->toSql(), $userList->getBindings());
-        // 将timealso原成time戳
+        // 将timealso原becometime戳
         foreach ($userList as &$user) {
             ! empty($user['created_at']) && $user['created_at'] = strtotime($user['created_at']);
             ! empty($user['updated_at']) && $user['updated_at'] = strtotime($user['updated_at']);
@@ -193,7 +193,7 @@ readonly class DelightfulGroupRepository implements DelightfulGroupRepositoryInt
     }
 
     /**
-     * 将userfromgroup中移except.
+     * 将userfromgroupmiddle移except.
      */
     public function removeUsersFromGroup(DelightfulGroupEntity $delightfulGroupEntity, array $userIds): int
     {

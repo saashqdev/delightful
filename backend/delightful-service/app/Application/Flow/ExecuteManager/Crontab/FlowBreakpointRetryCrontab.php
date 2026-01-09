@@ -19,7 +19,7 @@ use Hyperf\Coroutine\Parallel;
 use Hyperf\Crontab\Annotation\Crontab;
 use Psr\Container\ContainerInterface;
 
-#[Crontab(rule: '* * * * *', name: 'FlowBreakpointRetryCrontab', singleton: true, mutexExpires: 60 * 5, onOneServer: true, callback: 'execute', memo: 'process断点retryscheduletask', enable: true)]
+#[Crontab(rule: '* * * * *', name: 'FlowBreakpointRetryCrontab', singleton: true, mutexExpires: 60 * 5, onOneServer: true, callback: 'execute', memo: 'process断pointretryscheduletask', enable: true)]
 class FlowBreakpointRetryCrontab
 {
     private DelightfulFlowExecuteLogDomainService $delightfulFlowExecuteLogDomainService;
@@ -41,7 +41,7 @@ class FlowBreakpointRetryCrontab
         $parallel = new Parallel(50);
         while (true) {
             $parallel->clear();
-            // get所have 10 分钟alsoinconduct中的process
+            // get所have 10 minute钟alsoinconductmiddle的process
             $list = $this->delightfulFlowExecuteLogDomainService->getRunningTimeoutList($flowDataIsolation, 60 * 10, $page);
             if (empty($list)) {
                 break;
@@ -70,7 +70,7 @@ class FlowBreakpointRetryCrontab
         try {
             $flowDataIsolation = FlowDataIsolation::create()->disabled();
 
-            // 实时querymost新
+            // 实o clockquerymost新
             $delightfulFlowExecuteLogEntity = $this->delightfulFlowExecuteLogDomainService->getByExecuteId($flowDataIsolation, $delightfulFlowExecuteLogEntity->getExecuteDataId());
             if ($delightfulFlowExecuteLogEntity->getRetryCount() >= 1) {
                 return;

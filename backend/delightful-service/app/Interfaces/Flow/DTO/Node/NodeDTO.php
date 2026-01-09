@@ -25,12 +25,12 @@ class NodeDTO extends AbstractFlowDTO
     public string $nodeVersion = '';
 
     /**
-     * 节点元data，可use作给前端的定位，后端仅storage和展示，nothave任何逻辑.
+     * sectionpointyuandata，可use作给front端的定位，back端仅storage和展示，nothave任何逻辑.
      */
     public array $meta = [];
 
     /**
-     * 节点parameterconfiguration，目前依靠array来data传递.
+     * sectionpointparameterconfiguration，目front依靠array来data传递.
      */
     public array $params = [];
 
@@ -43,7 +43,7 @@ class NodeDTO extends AbstractFlowDTO
     public ?NodeOutputDTO $systemOutput = null;
 
     /**
-     * get节点ID.
+     * getsectionpointID.
      */
     public function getNodeId(): string
     {
@@ -51,7 +51,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set节点ID.
+     * setsectionpointID.
      */
     public function setNodeId(?string $nodeId): self
     {
@@ -60,7 +60,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * getwhether为debug模式.
+     * getwhether为debug模type.
      */
     public function isDebug(): bool
     {
@@ -73,7 +73,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * setwhether为debug模式.
+     * setwhether为debug模type.
      */
     public function setDebug(?bool $debug): self
     {
@@ -82,7 +82,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get节点name.
+     * getsectionpointname.
      */
     public function getName(): string
     {
@@ -90,7 +90,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set节点name.
+     * setsectionpointname.
      */
     public function setName(?string $name): self
     {
@@ -99,7 +99,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get节点description.
+     * getsectionpointdescription.
      */
     public function getDescription(): string
     {
@@ -107,7 +107,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set节点description.
+     * setsectionpointdescription.
      */
     public function setDescription(?string $description): self
     {
@@ -116,7 +116,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get节点type.
+     * getsectionpointtype.
      */
     public function getNodeType(): int
     {
@@ -124,7 +124,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set节点type.
+     * setsectionpointtype.
      */
     public function setNodeType(null|int|string $nodeType): self
     {
@@ -133,7 +133,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get节点version.
+     * getsectionpointversion.
      */
     public function getNodeVersion(): string
     {
@@ -141,7 +141,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set节点version.
+     * setsectionpointversion.
      */
     public function setNodeVersion(?string $nodeVersion): self
     {
@@ -150,7 +150,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get节点元data.
+     * getsectionpointyuandata.
      */
     public function getMeta(): array
     {
@@ -158,7 +158,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set节点元data.
+     * setsectionpointyuandata.
      */
     public function setMeta(?array $meta): self
     {
@@ -167,7 +167,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get节点parameterconfiguration.
+     * getsectionpointparameterconfiguration.
      */
     public function getParams(): array
     {
@@ -175,7 +175,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set节点parameterconfiguration.
+     * setsectionpointparameterconfiguration.
      */
     public function setParams(?array $params): self
     {
@@ -184,7 +184,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get下一节点list.
+     * getdown一sectionpointlist.
      */
     public function getNextNodes(): array
     {
@@ -192,7 +192,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set下一节点list.
+     * setdown一sectionpointlist.
      */
     public function setNextNodes(?array $nextNodes): self
     {
@@ -201,7 +201,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get节点input.
+     * getsectionpointinput.
      */
     public function getInput(): ?NodeInputDTO
     {
@@ -209,7 +209,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set节点input.
+     * setsectionpointinput.
      */
     public function setInput(mixed $input): void
     {
@@ -217,7 +217,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * get节点output.
+     * getsectionpointoutput.
      */
     public function getOutput(): ?NodeOutputDTO
     {
@@ -225,7 +225,7 @@ class NodeDTO extends AbstractFlowDTO
     }
 
     /**
-     * set节点output.
+     * setsectionpointoutput.
      */
     public function setOutput(mixed $output): void
     {

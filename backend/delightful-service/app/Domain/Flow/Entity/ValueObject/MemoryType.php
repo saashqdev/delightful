@@ -11,7 +11,7 @@ enum MemoryType: int
 {
     case None = 0;
 
-    // 大语言modelrecord 暂时notrecord了 无use
+    // 大语言modelrecord 暂o clocknotrecord了 无use
     case LLM = 1;
 
     // Flow chatrecord

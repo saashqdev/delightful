@@ -30,7 +30,7 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
             $params = $executionData->getTriggerData()->getParams();
             // $delightfulAgentAppService = di(DelightfulAgentAppService::class);
             $senderUserId = $executionData->getAgentUserId();
-            // 助手sendmessage
+            // 助handsendmessage
             $assistantMessage = new TextMessage(['content' => $params['content']]);
             $appMessageId = IdGenerator::getUniqueId32();
             $receiveSeqDTO = new DelightfulSeqEntity();
@@ -67,7 +67,7 @@ class AgentSendMessageToUserTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'sendmessage给个人';
+        return 'sendmessage给人';
     }
 
     public function getInput(): ?NodeInput
@@ -146,7 +146,7 @@ JSON,
        "type": "string",
        "key": "unit",
        "title": "unit",
-       "description": "unit ，day 天，week 周，month 月，year 年",
+       "description": "unit ，day day，week week，month month，year year",
        "required": null,
        "value": null,
        "encryption": false,

@@ -18,7 +18,7 @@ return new class extends Migration {
         Schema::table('delightful_flow_knowledge', function (Blueprint $table) {
             // checkwhether已存infield，避免重复添加
             if (! Schema::hasColumn('delightful_flow_knowledge', 'fragment_config')) {
-                $table->string('fragment_config', 2000)->nullable()->comment('分段configuration');
+                $table->string('fragment_config', 2000)->nullable()->comment('minutesegmentconfiguration');
             }
             if (! Schema::hasColumn('delightful_flow_knowledge', 'embedding_config')) {
                 $table->string('embedding_config', 2000)->nullable()->comment('嵌入configuration');

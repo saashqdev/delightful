@@ -22,7 +22,7 @@ enum SystemInstructType: int
     case RECORD = 5;
 
     /**
-     * fromtypevalueget系统指令type实例.
+     * fromtypevalueget系统finger令type实例.
      */
     public static function fromType(int $type): self
     {
@@ -37,7 +37,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * get系统指令typeoption.
+     * get系统finger令typeoption.
      * @return array<int, mixed>
      */
     public static function getTypeOptions(): array
@@ -52,7 +52,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * get系统指令对应的图标.
+     * get系统finger令对应的图标.
      */
     public function getIcon(): string
     {
@@ -66,7 +66,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * getdefault的系统交互指令configuration.
+     * getdefault的系统交互finger令configuration.
      */
     public static function getDefaultInstructs(): array
     {
@@ -116,7 +116,7 @@ enum SystemInstructType: int
     }
 
     /**
-     * get所have系统指令typevalue.
+     * get所have系统finger令typevalue.
      * @return array<int>
      */
     public static function getAllTypes(): array
@@ -131,20 +131,20 @@ enum SystemInstructType: int
     }
 
     /**
-     * 判断系统指令typewhetherneedcontentfield.
+     * 判断系统finger令typewhetherneedcontentfield.
      */
     public static function requiresContent(int $type): bool
     {
-        // 目前所have系统指令allnotneedcontent
-        // if未来have系统指令needcontent，canin这里添加判断
+        // 目front所have系统finger令allnotneedcontent
+        // if未来have系统finger令needcontent，canin这within添加判断
         return match (self::fromType($type)) {
             self::EMOJI, self::FILE, self::NEW_TOPIC, self::SCHEDULE, self::RECORD => false,
         };
     }
 
     /**
-     * ensure系统交互指令存in，if缺少then补充.
-     * @return array return补充后的指令array
+     * ensure系统交互finger令存in，if缺少then补充.
+     * @return array return补充back的finger令array
      */
     public static function ensureSystemInstructs(array $instructs): array
     {
@@ -153,7 +153,7 @@ enum SystemInstructType: int
         $toolbarGroupIndex = null;
         $toolbarGroup = null;
 
-        // 查找tool栏group和现have的系统指令
+        // 查找tool栏group和现have的系统finger令
         foreach ($instructs as $index => $group) {
             if (isset($group['position']) && $group['position'] === InstructGroupPosition::TOOLBAR->value) {
                 $hasSystemGroup = true;
@@ -163,7 +163,7 @@ enum SystemInstructType: int
             }
         }
 
-        // ifnothavetool栏group，create一个new
+        // ifnothavetool栏group，create一new
         if (! $hasSystemGroup) {
             $toolbarGroup = [
                 'id' => (string) IdGenerator::getSnowId(),
@@ -172,7 +172,7 @@ enum SystemInstructType: int
             ];
         }
 
-        // 分离系统指令和non系统指令
+        // minute离系统finger令和non系统finger令
         $systemInstructs = [];
         $normalInstructs = [];
         foreach ($toolbarGroup['items'] as $item) {
@@ -184,7 +184,7 @@ enum SystemInstructType: int
             }
         }
 
-        // check缺失的系统指令type并补充
+        // check缺失的系统finger令type并补充
         foreach (self::cases() as $case) {
             if (! in_array($case->value, $systemTypes)) {
                 $systemInstructs[$case->value] = [
@@ -197,10 +197,10 @@ enum SystemInstructType: int
             }
         }
 
-        // 按枚举定义顺序sort系统指令
+        // 按枚举定义顺序sort系统finger令
         ksort($systemInstructs);
 
-        // 重新group合tool栏group的 items，系统指令in前
+        // 重新group合tool栏group的 items，系统finger令infront
         $toolbarGroup['items'] = array_merge(array_values($systemInstructs), $normalInstructs);
 
         // updateor添加tool栏group

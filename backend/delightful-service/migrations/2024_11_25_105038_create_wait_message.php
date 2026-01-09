@@ -20,7 +20,7 @@ return new class extends Migration {
             $table->string('conversation_id', 120)->comment('conversationID');
             $table->string('origin_conversation_id', 80)->comment('originalconversationID');
             $table->string('message_id', 80)->comment('messageID');
-            $table->string('wait_node_id', 80)->comment('etc待节点ID');
+            $table->string('wait_node_id', 80)->comment('etc待sectionpointID');
             $table->string('flow_code', 80)->comment('processencoding');
             $table->string('flow_version', 80)->comment('processversion');
             $table->integer('timeout')->default(0)->comment('timeouttime戳');

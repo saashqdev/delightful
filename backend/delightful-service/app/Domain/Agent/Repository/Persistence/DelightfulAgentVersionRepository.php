@@ -76,13 +76,13 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
         }
         return $builder
             ->where('organization_code', $organizationCode)
-            ->where('enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value) // ensure外层filterenablestatus
+            ->where('enterprise_release_status', DelightfulAgentVersionStatus::ENTERPRISE_PUBLISHED->value) // ensureoutsidelayerfilterenablestatus
             ->whereIn('id', $agentIds)
             ->count();
     }
 
     /**
-     * optimizeversion：直接passJOINquerygetenable的助理version，避免传入大量ID.
+     * optimizeversion：直接passJOINquerygetenable的助理version，避免传入大quantityID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -143,7 +143,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function getAgentsFromMarketplaceCount(array $agentIds): int
     {
-        // use count() method来statistics符合条件的record数
+        // use count() method来statistics符合itemitem的record数
         return $this->agentVersionModel::query()
             ->whereIn('id', $agentIds)
             ->where('app_market_status', DelightfulAgentVersionStatus::APP_MARKET_LISTED)
@@ -177,7 +177,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function setEnterpriseStatus(string $id, int $status): void
     {
-        // 尝试update指定 ID 的record
+        // 尝试updatefinger定 ID 的record
         $this->agentVersionModel::query()
             ->where('id', $id)
             ->update(['enterprise_release_status' => $status]);
@@ -186,8 +186,8 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     // according to助理idgetmost大的 version_number
     public function getAgentMaxVersion(string $agentId): string
     {
-        // query指定 agent_id 和 user_id 下的most大version号,这里not能use max 取 version，因为will出现 0.3 greater than 0.10的情况，but是actual是 0.10greater than 0.3
-        // 而version号只能递增，thereforeusetime倒序取first即可
+        // queryfinger定 agent_id 和 user_id down的most大versionnumber,这withinnot能use max 取 version，因为will出现 0.3 greater than 0.10的情况，but是actual是 0.10greater than 0.3
+        // 而versionnumber只能递增，thereforeusetime倒序取first即可
         $maxVersion = $this->agentVersionModel::query()
             ->where('root_id', $agentId)
             ->orderByDesc('id')
@@ -203,7 +203,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function deleteByAgentId(string $agentId, string $organizationCode): void
     {
-        // query指定 agent_id 和 user_id 下的most大version号
+        // queryfinger定 agent_id 和 user_id down的most大versionnumber
         $this->agentVersionModel::query()
             ->where('root_id', $agentId)
             ->where('organization_code', $organizationCode)
@@ -291,7 +291,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * based on游标paginationget指定organization的助理versionlist.
+     * based on游标paginationgetfinger定organization的助理versionlist.
      * @param string $organizationCode organizationcode
      * @param array $agentVersionIds 助理versionIDlist
      * @param string $cursor 游标ID，if为空stringthenfrommost新start

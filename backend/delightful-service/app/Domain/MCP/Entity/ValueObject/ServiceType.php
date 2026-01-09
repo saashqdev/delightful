@@ -20,7 +20,7 @@ enum ServiceType: string
     case SSE = 'sse';
     case STDIO = 'stdio';
 
-    // 外部提供的 mcp service
+    // outside部提供的 mcp service
     case ExternalSSE = 'external_sse';
     case ExternalStreamableHttp = 'external_http';
     case ExternalStdio = 'external_stdio';

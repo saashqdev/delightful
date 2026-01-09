@@ -24,7 +24,7 @@ class CreateTaskScheduler extends Migration
             $table->dateTimeTz('expect_time')->comment('expectedexecutetime');
             $table->dateTimeTz('actual_time')->nullable()->comment('actualexecutetime');
             $table->tinyInteger('type')->default(2)->comment('type');
-            $table->integer('cost_time')->default(0)->comment('耗时 毫秒');
+            $table->integer('cost_time')->default(0)->comment('耗o clock 毫second');
             $table->integer('retry_times')->default(0)->comment('remainingretrycount');
             $table->tinyInteger('status')->default(0)->comment('status');
             $table->json('callback_method')->comment('callbackmethod');

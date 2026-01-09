@@ -32,11 +32,11 @@ interface ProviderConfigRepositoryInterface
     public function delete(ProviderDataIsolation $dataIsolation, string $id): void;
 
     /**
-     * passconfigurationID和organizationencodinggetservice商configuration实体.
+     * passconfigurationID和organizationencodinggetservice商configuration实body.
      *
      * @param string $serviceProviderConfigId service商configurationID
      * @param string $organizationCode organizationencoding
-     * @return null|ProviderConfigEntity service商configuration实体
+     * @return null|ProviderConfigEntity service商configuration实body
      */
     public function getProviderConfigEntityById(string $serviceProviderConfigId, string $organizationCode): ?ProviderConfigEntity;
 
@@ -45,31 +45,31 @@ interface ProviderConfigRepositoryInterface
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param int $serviceProviderId service商ID
-     * @return null|ProviderConfigEntity configuration实体
+     * @return null|ProviderConfigEntity configuration实body
      */
     public function findFirstByServiceProviderId(ProviderDataIsolation $dataIsolation, int $serviceProviderId): ?ProviderConfigEntity;
 
     /**
-     * according toIDgetconfiguration实体（not按organizationfilter，all局query）.
+     * according toIDgetconfiguration实body（not按organizationfilter，all局query）.
      *
      * @param int $id configurationID
-     * @return null|ProviderConfigEntity configuration实体
+     * @return null|ProviderConfigEntity configuration实body
      */
     public function getByIdWithoutOrganizationFilter(int $id): ?ProviderConfigEntity;
 
     /**
-     * according toIDarraygetconfiguration实体list（not按organizationfilter，all局query）.
+     * according toIDarraygetconfiguration实bodylist（not按organizationfilter，all局query）.
      *
      * @param array<int> $ids configurationIDarray
-     * @return array<int, ProviderConfigEntity> returnbyid为key的configuration实体array
+     * @return array<int, ProviderConfigEntity> returnbyid为key的configuration实bodyarray
      */
     public function getByIdsWithoutOrganizationFilter(array $ids): array;
 
     /**
-     * getorganization下所haveenable的service商configuration.
+     * getorganizationdown所haveenable的service商configuration.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
-     * @return array<ProviderConfigEntity> service商configuration实体array
+     * @return array<ProviderConfigEntity> service商configuration实bodyarray
      */
     public function getAllByOrganization(ProviderDataIsolation $dataIsolation): array;
 }

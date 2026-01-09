@@ -29,7 +29,7 @@ abstract class AbstractProviderModelRepository extends AbstractRepository
     protected array $attributeMaps = [];
 
     /**
-     * createnewmodel实体.
+     * createnewmodel实body.
      */
     public function create(ProviderDataIsolation $dataIsolation, ProviderModelEntity $modelEntity): ProviderModelEntity
     {
@@ -53,7 +53,7 @@ abstract class AbstractProviderModelRepository extends AbstractRepository
     }
 
     /**
-     * 将实体serialize为array，containJSONserialize复杂field.
+     * 将实bodyserialize为array，containJSONserialize复杂field.
      */
     protected function serializeEntityToArray(ProviderModelEntity $entity): array
     {

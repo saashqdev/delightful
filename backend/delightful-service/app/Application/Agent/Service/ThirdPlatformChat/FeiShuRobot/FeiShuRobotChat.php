@@ -53,12 +53,12 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     private const string EVENT_TYPE_MESSAGE_RECEIVE = 'im.message.receive_v1';
 
     /**
-     * lock定前缀
+     * lock定front缀
      */
     private const string LOCK_PREFIX = 'feishu_message_';
 
     /**
-     * lockschedule间 (秒).
+     * lockschedulebetween (second).
      */
     private const int LOCK_TTL = 7200;
 
@@ -110,7 +110,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      * parsechatparameter.
      *
      * @param array $params receiveto的parameter
-     * @return ThirdPlatformChatMessage parse后的messageobject
+     * @return ThirdPlatformChatMessage parseback的messageobject
      */
     public function parseChatParam(array $params): ThirdPlatformChatMessage
     {
@@ -130,7 +130,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
         $messageId = $params['event']['message']['message_id'] ?? '';
 
-        // 幂etc性handle：usemessageIDconduct去重
+        // 幂etcpropertyhandle：usemessageIDconduct去重
         if (! $this->checkMessageIdLock($messageId)) {
             $this->logger->info('飞书message已handle过，skip', ['message_id' => $messageId]);
             $chatMessage->setEvent(ThirdPlatformChatEvent::None);
@@ -213,7 +213,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      *
      * @param array $params requestparameter
      * @param ThirdPlatformChatMessage $chatMessage chatmessageobject
-     * @return ThirdPlatformChatMessage handle后的messageobject
+     * @return ThirdPlatformChatMessage handleback的messageobject
      */
     private function handleChallengeCheck(array $params, ThirdPlatformChatMessage $chatMessage): ThirdPlatformChatMessage
     {
@@ -252,7 +252,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      *
      * @param array $params requestparameter
      * @param ThirdPlatformChatMessage $chatMessage chatmessageobject
-     * @return ThirdPlatformChatMessage handle后的messageobject
+     * @return ThirdPlatformChatMessage handleback的messageobject
      */
     private function handleMessageReceive(array $params, ThirdPlatformChatMessage $chatMessage): ThirdPlatformChatMessage
     {
@@ -277,7 +277,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         // settingconversationID
         $this->setConversationId($params, $chatMessage);
 
-        // setting额外parameter
+        // setting额outsideparameter
         $chatMessage->setParams([
             'message_id' => $messageId,
         ]);
@@ -335,7 +335,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $nickname = ! empty($userInfo['nickname']) ? $userInfo['nickname'] : $realName;
             $userExtInfo = new TriggerDataUserExtInfo($organizationCode, $openId, $nickname, $realName);
 
-            // setting工号和position
+            // setting工number和position
             if (isset($userInfo['employee_no'])) {
                 $userExtInfo->setWorkNumber($userInfo['employee_no']);
             }
@@ -387,7 +387,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
      * parsemessagecontentJSON.
      *
      * @param string $content originalmessagecontent
-     * @return array parse后的contentarray
+     * @return array parseback的contentarray
      */
     private function decodeMessageContent(string $content): array
     {
@@ -421,7 +421,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         $chatMessage->setRobotCode($params['header']['app_id'] ?? '');
         $chatMessage->setUserId($openId);
         $chatMessage->setOriginConversationId($chatId);
-        $chatMessage->setNickname($openId); // initialsetting为OpenID，后续willpassuserinfoupdate
+        $chatMessage->setNickname($openId); // initialsetting为OpenID，back续willpassuserinfoupdate
     }
 
     /**
@@ -601,7 +601,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             'receive_id' => $receiverId,
             'msg_type' => 'text',
             'content' => [
-                'text' => 'handlemessage时发生error，请稍后again试',
+                'text' => 'handlemessageo clockhair生error，请稍backagain试',
             ],
         ];
         $this->application->message->send($data, 'chat_id');
@@ -627,7 +627,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $markdown .= "# {$content['title']}\n\n";
         }
 
-        // 优先use中文content，ifnothavethenuse英文content
+        // 优先usemiddle文content，ifnothavethenuse英文content
         $postContent = $content['content'] ?? [];
 
         foreach ($postContent as $paragraph) {
@@ -645,14 +645,14 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * handlecontent元素.
+     * handlecontentyuan素.
      *
-     * @param string $tag 元素tag
-     * @param array $element 元素content
-     * @param array &$attachments attachment列表
+     * @param string $tag yuan素tag
+     * @param array $element yuan素content
+     * @param array &$attachments attachmentcolumn表
      * @param string $organizationCode organizationcode
      * @param string $messageId messageID
-     * @return string handle后的Markdown文本
+     * @return string handleback的Markdown文本
      */
     private function processContentElement(
         string $tag,
@@ -691,7 +691,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                     return $element['text'] ?? '';
             }
         } catch (Exception $e) {
-            $this->logger->warning('handlecontent元素fail', [
+            $this->logger->warning('handlecontentyuan素fail', [
                 'tag' => $tag,
                 'error' => $e->getMessage(),
             ]);
@@ -700,13 +700,13 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * handleimage元素.
+     * handleimageyuan素.
      *
-     * @param array $element 元素content
-     * @param array &$attachments attachment列表
+     * @param array $element yuan素content
+     * @param array &$attachments attachmentcolumn表
      * @param string $organizationCode organizationcode
      * @param string $messageId messageID
-     * @return string handle后的Markdown文本
+     * @return string handleback的Markdown文本
      */
     private function processImageElement(
         array $element,
@@ -733,7 +733,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
 
     /**
      * parseMarkdowncontent，convert为飞书rich textformat
-     * 只handleimage，其他contentall部usemd样式.
+     * 只handleimage，其他contentall部usemd样type.
      *
      * @param string $markdown Markdowncontent
      * @return array 飞书rich textformat
@@ -746,7 +746,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             'content' => [],
         ];
 
-        // use正then表达式匹配Markdown中的image
+        // use正then表达type匹配Markdownmiddle的image
         $pattern = '/!\[(.*?)\]\((.*?)\)/';
 
         // ifnothaveimage，直接returnmdformat
@@ -770,7 +770,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $position = $match[1];
             $url = $matches[2][$index][0];
 
-            // 添加image前的文本（ifhave）
+            // 添加imagefront的文本（ifhave）
             $this->addTextBlockIfNotEmpty(
                 $contentBlocks,
                 substr($markdown, $lastPosition, $position - $lastPosition)
@@ -783,7 +783,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $lastPosition = $position + strlen($fullMatch);
         }
 
-        // 添加mostnextimage后的文本（ifhave）
+        // 添加mostnextimageback的文本（ifhave）
         $this->addTextBlockIfNotEmpty(
             $contentBlocks,
             substr($markdown, $lastPosition)
@@ -794,9 +794,9 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * 添加文本块（ifnot为null）.
+     * 添加文本piece（ifnot为null）.
      *
-     * @param array &$contentBlocks content块array
+     * @param array &$contentBlocks contentpiecearray
      * @param string $text 要添加的文本
      */
     private function addTextBlockIfNotEmpty(array &$contentBlocks, string $text): void
@@ -813,11 +813,11 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * handleimage块.
+     * handleimagepiece.
      *
-     * @param array &$contentBlocks content块array
+     * @param array &$contentBlocks contentpiecearray
      * @param string $url imageURL
-     * @param string $fallbackText uploadfail时的回退文本
+     * @param string $fallbackText uploadfailo clock的回退文本
      */
     private function processImageBlock(array &$contentBlocks, string $url, string $fallbackText): void
     {

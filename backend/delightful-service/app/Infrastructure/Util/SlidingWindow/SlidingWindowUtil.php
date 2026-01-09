@@ -14,8 +14,8 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * 防抖tool类
- * implement"executemost后一次request"防抖strategy.
+ * 防抖toolcategory
+ * implement"executemostback一timerequest"防抖strategy.
  */
 class SlidingWindowUtil
 {
@@ -28,11 +28,11 @@ class SlidingWindowUtil
     }
 
     /**
-     * 防抖interface - executemost后一次requeststrategy
-     * in指定time窗口内，onlymost后一次requestwillbeexecute.
+     * 防抖interface - executemostback一timerequeststrategy
+     * infinger定time窗口inside，onlymostback一timerequestwillbeexecute.
      *
      * @param string $debounceKey 防抖键
-     * @param float $delayVerificationSeconds delayverifytime（秒），also是actual的防抖窗口
+     * @param float $delayVerificationSeconds delayverifytime（second），also是actual的防抖窗口
      * @return bool whethershouldexecutecurrentrequest
      */
     public function shouldExecuteWithDebounce(
@@ -51,7 +51,7 @@ class SlidingWindowUtil
             // etc待verifytime
             Coroutine::sleep($delayVerificationSeconds);
 
-            // 原子化地verify并statementexecute权
+            // 原子化groundverify并statementexecute权
             $script = <<<'LUA'
                 if redis.call('get', KEYS[1]) == ARGV[1] then
                     return redis.call('del', KEYS[1])
@@ -66,7 +66,7 @@ LUA;
                 'debounce_key' => $debounceKey,
                 'exception' => $exception,
             ]);
-            // 出现exception时defaultallowexecute，避免关键业务be阻塞
+            // 出现exceptiono clockdefaultallowexecute，避免关键业务be阻塞
             return true;
         }
     }

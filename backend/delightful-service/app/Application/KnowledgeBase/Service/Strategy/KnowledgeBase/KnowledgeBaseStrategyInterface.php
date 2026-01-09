@@ -24,7 +24,7 @@ interface KnowledgeBaseStrategyInterface
     /**
      * getorcreatedefaultknowledge basedata源type.
      *
-     * @param KnowledgeBaseEntity $knowledgeBaseEntity knowledge base实体
+     * @param KnowledgeBaseEntity $knowledgeBaseEntity knowledge base实body
      *
      * @return null|int data源type
      */

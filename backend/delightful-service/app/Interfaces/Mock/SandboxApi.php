@@ -44,7 +44,7 @@ class SandboxApi
             'sandbox_id' => $sandboxId,
         ]);
 
-        // 模拟沙箱已存inand运行中
+        // 模拟沙箱已存inand运linemiddle
         return [
             'code' => 1000,
             'message' => 'Success',
@@ -149,7 +149,7 @@ class SandboxApi
      * initialize沙箱（simplify版，useat ASR etc无chatmessage场景）
      * POST /api/v1/sandboxes/{sandboxId}/proxy/v1/messages/chat.
      *
-     * request体example：
+     * requestbodyexample：
      * {
      *   "message_id": "asr_init_sandbox_001_1234567890",
      *   "type": "init",

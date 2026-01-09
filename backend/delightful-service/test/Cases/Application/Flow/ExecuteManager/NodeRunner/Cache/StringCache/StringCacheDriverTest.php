@@ -67,7 +67,7 @@ class StringCacheDriverTest extends ExecuteManagerBaseTest
 
     public function testSpecialCharacters()
     {
-        $specialValue = 'Special value with 中文, emojis 🚀, and symbols @#$%';
+        $specialValue = 'Special value with middle文, emojis 🚀, and symbols @#$%';
         $this->assertTrue($this->stringCache->set($this->flowDataIsolation, 'flowCode', 'specialKey', $specialValue));
         $this->assertEquals($specialValue, $this->stringCache->get($this->flowDataIsolation, 'flowCode', 'specialKey'));
 

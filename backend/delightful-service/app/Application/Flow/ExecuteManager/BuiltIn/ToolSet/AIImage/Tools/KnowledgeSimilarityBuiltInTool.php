@@ -41,7 +41,7 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'useuserissue和关键词，去检索knowledge base中的content，return与userissuesimilar度most高的content。';
+        return 'useuserissue和关键词，去检索knowledge basemiddle的content，return与userissuesimilardegreemost高的content。';
     }
 
     public function getAppendSystemPrompt(array $customParams = []): string
@@ -57,26 +57,26 @@ class KnowledgeSimilarityBuiltInTool extends AbstractBuiltInTool
         }
         return <<<MARKDOWN
 # allowbeuse的能力: knowledge base检索
-## knowledge base列表
+## knowledge basecolumn表
 > knowledge basename：knowledge basedescription
 {$knowledgePrompt}
 ## process
-1. 结合上下文提炼user的issue，generate多个关键词，at mostnot超过 5 个，多个关键词use英文逗号"," 隔开，useatusedifferent关键词fromknowledge base中检索most相关的info；
-2. 结合上下文，analyzeuser的issue，generate `names` parameter，useat指定与userissue可能have关的多个knowledge basename，按照相关性sort，相关性需结合上下文、knowledge basename和knowledge basedescriptionconduct判断；
-3. use关键词和userissue，call `{$this->getName()}` tool检索knowledge base中的content，关键词的parameter是 `keyword`，userissue的parameter是 `question`, 请ensureparameterallbecorrect填入，tool将return与userissuesimilar度most高的content片段；
-4. knowledge base检索出来的content里willcontain一些customize的 Delightful tag，你要善atuse它们，haveby下几种tag：
-    - <DelightfulImage></DelightfulImage> 表示一个image，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，each个tagallwillin前端messagecard渲染出一张image；
-    - <DelightfulVideo></DelightfulVideo> 表示一个video，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，each个tagallwillin前端messagecard渲染出一个video；
-    - <DelightfulMention></DelightfulMention> 表示一个人员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，each个tagallwillin前端messagecard形成一个 @somesome人 的effect；
-5. 优先usecontain <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> etchave Delightful tag的片段；
-6. 结合knowledge basereturn的content整理后尽可能丰富地回答user的issue。
-## tool中关键的returnvalueinstruction
-- fragments: 本次检索to的所haveknowledge base片段
-- fragments.*.content: 片段content
-- fragments.*.metadata.url: current片段的原文link
+1. 结合updown文提炼user的issue，generate多关键词，at mostnot超过 5 ，多关键词use英文逗number"," 隔开，useatusedifferent关键词fromknowledge basemiddle检索most相关的info；
+2. 结合updown文，analyzeuser的issue，generate `names` parameter，useatfinger定与userissue可能have关的多knowledge basename，按照相关propertysort，相关property需结合updown文、knowledge basename和knowledge basedescriptionconduct判断；
+3. use关键词和userissue，call `{$this->getName()}` tool检索knowledge basemiddle的content，关键词的parameter是 `keyword`，userissue的parameter是 `question`, 请ensureparameterallbecorrect填入，tool将return与userissuesimilardegreemost高的contentslicesegment；
+4. knowledge base检索出来的contentwithinwillcontain一些customize的 Delightful tag，你要善atuse它们，havebydown几typetag：
+    - <DelightfulImage></DelightfulImage> 表示一image，如 <DelightfulImage>cp_xxxxxxx</DelightfulImage>，eachtagallwillinfront端messagecard渲染出一张image；
+    - <DelightfulVideo></DelightfulVideo> 表示一video，如 <DelightfulVideo>cp_xxxxxxx</DelightfulVideo>，eachtagallwillinfront端messagecard渲染出一video；
+    - <DelightfulMention></DelightfulMention> 表示一人员info，如 <DelightfulMention>cp_xxxxxxx</DelightfulMention>，eachtagallwillinfront端messagecardshapebecome一 @somesome人 的effect；
+5. 优先usecontain <DelightfulImage></DelightfulImage>、<DelightfulVideo></DelightfulVideo>、<DelightfulMention></DelightfulMention> etchave Delightful tag的slicesegment；
+6. 结合knowledge basereturn的content整理back尽可能丰富ground回答user的issue。
+## toolmiddle关键的returnvalueinstruction
+- fragments: 本time检索to的所haveknowledge baseslicesegment
+- fragments.*.content: slicesegmentcontent
+- fragments.*.metadata.url: currentslicesegment的原文link
 - graph.*.content: 来自知识图谱的data，能增强info，让你more好回答issue
 ## 限制
-- 回答的content中notallow出现not是Delightfultag的link。
+- 回答的contentmiddlenotallow出现not是Delightfultag的link。
 MARKDOWN;
     }
 
@@ -158,7 +158,7 @@ MARKDOWN;
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "rootsectionpoint",
     "description": "",
     "items": null,
     "value": null,
@@ -236,7 +236,7 @@ JSON,
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "rootsectionpoint",
     "description": "",
     "items": null,
     "value": null,
@@ -277,7 +277,7 @@ JSON,
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "rootsectionpoint",
     "description": "",
     "items": null,
     "value": null,
@@ -314,7 +314,7 @@ JSON,
         "knowledge_list": {
             "type": "array",
             "key": "knowledge_list",
-            "title": "knowledge base列表",
+            "title": "knowledge basecolumn表",
             "description": "",
             "required": null,
             "value": null,
@@ -349,7 +349,7 @@ JSON,
         "score": {
             "type": "number",
             "key": "score",
-            "title": "similar度",
+            "title": "similardegree",
             "description": "",
             "required": null,
             "value": null,

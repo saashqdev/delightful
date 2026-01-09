@@ -109,7 +109,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->addTeamMembers($projectId);
 
-        // 4. 现intest2user成为member，butpermissionnot足 - 添加membershouldfail
+        // 4. 现intest2userbecome为member，butpermissionnot足 - 添加membershouldfail
         $this->switchUserTest2();
         $this->addTeamMembers($projectId, 51202); // 仍然无permission，因为not是管理者
 
@@ -152,7 +152,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * test批量操作permission控制.
+     * test批quantity操作permission控制.
      */
     public function testBatchOperationsPermissionControl(): void
     {
@@ -163,21 +163,21 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->enableCollaboration($projectId);
         $this->addTeamMembers($projectId);
 
-        // 2. non管理者尝试批量updatepermission - shouldfail
+        // 2. non管理者尝试批quantityupdatepermission - shouldfail
         $this->switchUserTest2();
         $this->batchUpdateMemberPermissions($projectId, 51202);
 
-        // 3. non管理者尝试批量deletemember - shouldfail
+        // 3. non管理者尝试批quantitydeletemember - shouldfail
         $this->batchDeleteMembers($projectId, 51202);
 
-        // 4. 管理者canconduct批量操作
+        // 4. 管理者canconduct批quantity操作
         $this->switchUserTest1();
         $this->batchUpdateMemberPermissions($projectId);
         $this->batchDeleteMembers($projectId);
     }
 
     /**
-     * testorganization边界控制.
+     * testorganizationside界控制.
      */
     public function testOrganizationBoundaryControl(): void
     {
@@ -208,7 +208,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * test边界情况.
+     * testside界情况.
      */
     public function testEdgeCases(): void
     {
@@ -217,14 +217,14 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->enableCollaboration($projectId);
 
-        // 1. test添加nullmember列表
+        // 1. test添加nullmembercolumn表
         $this->addEmptyMembersList($projectId, 5003);
 
         // 2. test重复添加samemember
         $this->addTeamMembers($projectId);
         //        $this->addTeamMembers($projectId); // 重复添加
 
-        // 3. testinvalid的permission级别
+        // 3. testinvalid的permissionlevel别
         $this->addMembersWithInvalidPermission($projectId, 5003);
 
         // 4. testnot能delete自己
@@ -233,7 +233,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->switchUserTest1();
 
-        // 5. test协作close时not能添加member
+        // 5. test协作closeo clocknot能添加member
         $this->disableCollaboration($projectId);
         $this->addTeamMembers($projectId, 51202); // 协作已closeerror
     }
@@ -245,7 +245,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 1. test中文errormessage
+        // 1. testmiddle文errormessage
         $this->switchUserTest2(); // 无permissionuser
         $response = $this->addTeamMembers($projectId, 51202);
         $this->assertStringContainsString('permission', $response['message']);
@@ -390,7 +390,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 添加nullmember列表.
+     * 添加nullmembercolumn表.
      */
     public function addEmptyMembersList(string $projectId, int $expectedCode = 1000): array
     {
@@ -436,7 +436,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 批量updatememberpermission.
+     * 批quantityupdatememberpermission.
      */
     public function batchUpdateMemberPermissions(string $projectId, int $expectedCode = 1000): array
     {
@@ -469,7 +469,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * 批量deletemember.
+     * 批quantitydeletemember.
      */
     public function batchDeleteMembers(string $projectId, int $expectedCode = 1000): array
     {
@@ -604,7 +604,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
 
         $this->assertEquals(1000, $response['code']);
 
-        // 查找指定user的permission
+        // 查找finger定user的permission
         $members = $response['data']['members'];
         foreach ($members as $member) {
             if (isset($member['user_id']) && $member['user_id'] === $this->testUserId2) {

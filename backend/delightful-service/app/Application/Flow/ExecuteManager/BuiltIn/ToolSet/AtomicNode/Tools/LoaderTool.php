@@ -36,7 +36,7 @@ class LoaderTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'documentparse。useatparse远程document中content，提取document中的contentoutput。';
+        return 'documentparse。useatparse远程documentmiddlecontent，提取documentmiddle的contentoutput。';
     }
 
     public function getCallback(): ?Closure
@@ -70,7 +70,7 @@ class LoaderTool extends AbstractBuiltInTool
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "rootsectionpoint",
     "description": "",
     "required": [
         "files"
@@ -107,7 +107,7 @@ class LoaderTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "file_name",
                         "title": "filename",
-                        "description": "filename。nothave时可use url 中的file名",
+                        "description": "filename。nothaveo clock可use url middle的file名",
                         "required": null,
                         "value": null,
                         "encryption": false,
@@ -118,8 +118,8 @@ class LoaderTool extends AbstractBuiltInTool
                     "file_url": {
                         "type": "string",
                         "key": "file_url",
-                        "title": "file地址。远程file地址",
-                        "description": "file地址。远程file地址",
+                        "title": "fileground址。远程fileground址",
+                        "description": "fileground址。远程fileground址",
                         "required": null,
                         "value": null,
                         "encryption": false,

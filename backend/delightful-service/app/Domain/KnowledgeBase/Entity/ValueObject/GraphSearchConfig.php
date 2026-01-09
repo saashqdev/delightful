@@ -13,35 +13,35 @@ use InvalidArgumentException;
 /**
  * 图searchconfigurationvalueobject
  *
- * contain图search的相关configurationparameter，如 API 端点、authinfo、timeoutsetetc
+ * contain图search的相关configurationparameter，如 API 端point、authinfo、timeoutsetetc
  */
 class GraphSearchConfig extends AbstractValueObject
 {
     /**
      * 关系权重.
      *
-     * 图search中关系的权重，useat计算finalsimilar度分数
+     * 图searchmiddle关系的权重，useat计算finalsimilardegreeminute数
      */
     private float $relationWeight = 0.5;
 
     /**
-     * most大search深度.
+     * most大search深degree.
      *
-     * 图search的most大深度，即from起始节点start，at mostsearch几跳关系
+     * 图search的most大深degree，即from起始sectionpointstart，at mostsearch几跳关系
      */
     private int $maxDepth = 2;
 
     /**
      * whethercontainproperty.
      *
-     * whetherinsearchresult中contain节点和关系的property
+     * whetherinsearchresultmiddlecontainsectionpoint和关系的property
      */
     private bool $includeProperties = true;
 
     /**
-     * API 端点.
+     * API 端point.
      *
-     * 图searchservice的 API 端点
+     * 图searchservice的 API 端point
      */
     private string $apiEndpoint = '';
 
@@ -53,30 +53,30 @@ class GraphSearchConfig extends AbstractValueObject
     private string $apiKey = '';
 
     /**
-     * timeouttime（秒）.
+     * timeouttime（second）.
      *
-     * API request的timeouttime，unit为秒
+     * API request的timeouttime，unit为second
      */
     private float $timeout = 5.0;
 
     /**
      * retrycount.
      *
-     * API requestfail时的retrycount
+     * API requestfailo clock的retrycount
      */
     private int $retryCount = 3;
 
     /**
      * 关系type.
      *
-     * search时考虑的关系typelist，为空table示所havetype
+     * searcho clock考虑的关系typelist，为空table示所havetype
      */
     private array $relationTypes = [];
 
     /**
-     * 节点type.
+     * sectionpointtype.
      *
-     * search时考虑的节点typelist，为空table示所havetype
+     * searcho clock考虑的sectionpointtypelist，为空table示所havetype
      */
     private array $nodeTypes = [];
 
@@ -108,7 +108,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * getmost大search深度.
+     * getmost大search深degree.
      */
     public function getMaxDepth(): int
     {
@@ -116,7 +116,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * setmost大search深度.
+     * setmost大search深degree.
      */
     public function setMaxDepth(int $maxDepth): self
     {
@@ -145,7 +145,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * get API 端点.
+     * get API 端point.
      */
     public function getApiEndpoint(): string
     {
@@ -153,7 +153,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * set API 端点.
+     * set API 端point.
      */
     public function setApiEndpoint(string $apiEndpoint): self
     {
@@ -236,7 +236,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * get节点type.
+     * getsectionpointtype.
      */
     public function getNodeTypes(): array
     {
@@ -244,7 +244,7 @@ class GraphSearchConfig extends AbstractValueObject
     }
 
     /**
-     * set节点type.
+     * setsectionpointtype.
      */
     public function setNodeTypes(array $nodeTypes): self
     {

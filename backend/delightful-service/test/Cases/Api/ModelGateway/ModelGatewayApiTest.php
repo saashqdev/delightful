@@ -22,7 +22,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     private const DEFAULT_MODEL = 'deepseek-v3';
 
     /**
-     * test chatCompletions method的高可use性.
+     * test chatCompletions method的高可useproperty.
      */
     public function testHighAvaiable()
     {
@@ -50,10 +50,10 @@ class ModelGatewayApiTest extends AbstractHttpTest
             ],
         ];
 
-        // create一个 Parallel 实例，setmost大并发数为 10
+        // create一 Parallel 实例，setmost大并hair数为 10
         $parallel = new Parallel(10);
 
-        // 定义多个different的request场景
+        // 定义多different的request场景
         $scenario = $this->buildRequestData([
             'business_params' => [
                 'organization_id' => '000',
@@ -62,9 +62,9 @@ class ModelGatewayApiTest extends AbstractHttpTest
             ],
         ]);
 
-        // 添加并发task
+        // 添加并hairtask
         $index = 0;
-        $count = 10; // 进一步减少testquantity，只要have一个successthen行
+        $count = 10; // 进一步减少testquantity，只要have一successthenline
         while ($index < $count) {
             $parallel->add(function () use ($scenario, $index, $expectedResponse) {
                 try {
@@ -90,7 +90,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
             });
             ++$index;
         }
-        // execute所have并发task并getresult
+        // execute所have并hairtask并getresult
         $results = $parallel->wait();
         // statisticssuccess和fail的request
         $successCount = 0;
@@ -103,13 +103,13 @@ class ModelGatewayApiTest extends AbstractHttpTest
             }
         }
 
-        // ensureat leasthave一个requestsuccess
-        $this->assertGreaterThan(0, $successCount, 'at leastshouldhave一个requestsuccess');
+        // ensureat leasthave一requestsuccess
+        $this->assertGreaterThan(0, $successCount, 'at leastshouldhave一requestsuccess');
 
-        // outputsuccess率
+        // outputsuccessrate
         $successRate = ($successCount / $count) * 100;
         echo PHP_EOL;
-        echo "testHighAvaiable requestsuccess率：{$successRate}% ({$successCount}/" . $count . ')' . PHP_EOL;
+        echo "testHighAvaiable requestsuccessrate：{$successRate}% ({$successCount}/" . $count . ')' . PHP_EOL;
     }
 
     /**
@@ -128,7 +128,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
 
         // sendPOSTrequest
         $response = $this->json('/v1/chat/completions', $requestData, $this->getTestHeaders());
-        // verify整个response结构
+        // verify整response结构
         $expectedResponse = [
             'id' => '',
             'object' => 'chat.completion',
@@ -159,10 +159,10 @@ class ModelGatewayApiTest extends AbstractHttpTest
      */
     public function testEmbeddings(): void
     {
-        // 构造to量嵌入requestparameter
+        // 构造toquantity嵌入requestparameter
         $requestData = [
             'model' => self::DEFAULT_MODEL,
-            'input' => '这是一个useattest的文本',
+            'input' => '这是一useattest的文本',
             'business_params' => [
                 'organization_id' => '000',
                 'user_id' => '9527',
@@ -205,7 +205,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
         return [
             [
                 'role' => 'system',
-                'content' => '你是一个助手',
+                'content' => '你是一助hand',
             ],
             [
                 'role' => 'user',
@@ -215,7 +215,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
     }
 
     /**
-     * 提供testuse的request头.
+     * 提供testuse的requesthead.
      */
     private function getTestHeaders(): array
     {

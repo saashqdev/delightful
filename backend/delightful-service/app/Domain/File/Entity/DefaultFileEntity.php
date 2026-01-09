@@ -123,7 +123,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * getfile后缀
+     * getfileback缀
      */
     public function getFileExtension(): string
     {
@@ -131,7 +131,7 @@ class DefaultFileEntity extends AbstractEntity
     }
 
     /**
-     * setfile后缀
+     * setfileback缀
      */
     public function setFileExtension(string $fileExtension): self
     {

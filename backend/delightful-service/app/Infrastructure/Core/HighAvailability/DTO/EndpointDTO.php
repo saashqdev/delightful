@@ -11,24 +11,24 @@ use App\Infrastructure\Core\AbstractDTO;
 use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\CircuitBreakerStatus;
 
 /**
- * useatin业务process中meanwhilesave业务ID和高可usegroup件接入点databaseID.
+ * useatin业务processmiddlemeanwhilesave业务ID和高可usegroupitem接入pointdatabaseID.
  */
 class EndpointDTO extends AbstractDTO
 {
     /**
      * getEndpointList interfacereturn的 id。
-     * different的业务含义different。对atmodel网关来说，这里的 id 是 service_provider_models table的 id。
-     * 前端可能not supported bigint，所by这里use string.
+     * different的业务含义different。对atmodel网关来说，这within的 id 是 service_provider_models table的 id。
+     * front端可能not supported bigint，所by这withinuse string.
      */
     protected ?string $businessId = null;
 
     /**
-     * database接入点ID（高可usetableprimary key）.
+     * database接入pointID（高可usetableprimary key）.
      */
     protected ?string $endpointId = null;
 
     /**
-     * 接入点type.
+     * 接入pointtype.
      */
     protected string $type;
 
@@ -38,7 +38,7 @@ class EndpointDTO extends AbstractDTO
     protected ?string $provider = null;
 
     /**
-     * 接入点name.
+     * 接入pointname.
      */
     protected string $name;
 
@@ -48,13 +48,13 @@ class EndpointDTO extends AbstractDTO
     protected ?string $config = null;
 
     /**
-     * 资源的consume的 id list. 一次request可能willconsume多个资源。
+     * 资源的consume的 id list. 一timerequest可能willconsume多资源。
      * @var null|string[]
      */
     protected ?array $resources = null;
 
     /**
-     * 接入点whetherenable.
+     * 接入pointwhetherenable.
      */
     protected bool $enabled = true;
 
@@ -184,7 +184,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * set接入点whetherenable.
+     * set接入pointwhetherenable.
      * @param bool|int|string $enabled 可传入布尔value、整数orstring
      */
     public function setEnabled(bool|int|string $enabled): static
@@ -199,7 +199,7 @@ class EndpointDTO extends AbstractDTO
 
     // 新增的增强fieldmethod
     /**
-     * getdatabase接入点ID.
+     * getdatabase接入pointID.
      */
     public function getEndpointId(): ?string
     {
@@ -207,7 +207,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * setdatabase接入点ID.
+     * setdatabase接入pointID.
      */
     public function setEndpointId(null|int|string $endpointId): static
     {
@@ -239,7 +239,7 @@ class EndpointDTO extends AbstractDTO
     }
 
     /**
-     * checkwhether存inatdatabase中.
+     * checkwhether存inatdatabasemiddle.
      */
     public function hasEndpointId(): bool
     {

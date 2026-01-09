@@ -12,9 +12,9 @@ use DateTime;
 use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
- * @property int $id 雪花ID
+ * @property int $id 雪flowerID
  * @property string $organization_code organizationencoding
- * @property string $delightful_id 账号DelightfulID
+ * @property string $delightful_id 账numberDelightfulID
  * @property string $user_id userID
  * @property string $key setting键
  * @property array $value settingvalue

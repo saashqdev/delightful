@@ -8,27 +8,27 @@ declare(strict_types=1);
 namespace App\Application\Speech\Enum;
 
 /**
- * ASR taskstatus枚举（内部业务process）.
+ * ASR taskstatus枚举（inside部业务process）.
  *
- * 【作use域】内部系统 - delightful-service 业务层
+ * 【作use域】inside部系统 - delightful-service 业务layer
  * 【use途】table示 ASR 录音总结task的all生命periodstatus
  * 【use场景】
  * - taskstatus持久化（Redis/database）
- * - 业务process控制和幂etc性判断
- * - 整体taskstatustrace（录音 → merge → generatetitle → sendmessage）
+ * - 业务process控制和幂etcproperty判断
+ * - 整bodytaskstatustrace（录音 → merge → generatetitle → sendmessage）
  *
  * 【与其他枚举的区别】
- * - AsrRecordingStatusEnum: 前端录音实时status（录音交互层）
- * - AsrTaskStatusEnum: 内部taskallprocessstatus（业务管理层）✓ current
- * - SandboxAsrStatusEnum: 沙箱mergetaskstatus（基础设施层）
+ * - AsrRecordingStatusEnum: front端录音实o clockstatus（录音交互layer）
+ * - AsrTaskStatusEnum: inside部taskallprocessstatus（业务管理layer）✓ current
+ * - SandboxAsrStatusEnum: 沙箱mergetaskstatus（基础设施layer）
  *
  * 【statusstream转】created → processing → completed | failed
  */
 enum AsrTaskStatusEnum: string
 {
     case CREATED = 'created';              // 已create：taskinitializecomplete，etc待process
-    case PROCESSING = 'processing';        // process中：正inexecute录音、mergeor总结
-    case COMPLETED = 'completed';          // 已complete：整个 ASR processall部complete（includemessagesend）
+    case PROCESSING = 'processing';        // processmiddle：正inexecute录音、mergeor总结
+    case COMPLETED = 'completed';          // 已complete：整 ASR processall部complete（includemessagesend）
     case FAILED = 'failed';                // fail：taskexecutefail
 
     /**
@@ -38,7 +38,7 @@ enum AsrTaskStatusEnum: string
     {
         return match ($this) {
             self::CREATED => '已create',
-            self::PROCESSING => 'process中',
+            self::PROCESSING => 'processmiddle',
             self::COMPLETED => '已complete',
             self::FAILED => 'fail',
         };

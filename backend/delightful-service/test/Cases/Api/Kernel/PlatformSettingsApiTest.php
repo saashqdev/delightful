@@ -54,7 +54,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
                 'en_US' => 'AI,Test',
             ],
             'description_i18n' => [
-                'zh_CN' => '这是一个test平台',
+                'zh_CN' => '这是一test平台',
                 'en_US' => 'This is a test platform',
             ],
         ];
@@ -84,7 +84,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $this->assertArrayEquals($payload['keywords_i18n'], $data['keywords_i18n'], 'keywords_i18n not匹配');
         $this->assertArrayEquals($payload['description_i18n'], $data['description_i18n'], 'description_i18n not匹配');
 
-        // again次 GET verify持久化
+        // againtime GET verify持久化
         $getResponse = $this->get($this->getUrl, [], $this->getCommonHeaders());
         $this->assertSame(1000, $getResponse['code']);
         $getData = $getResponse['data'];
@@ -109,7 +109,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         ];
         $this->put($this->putUrl, $initialPayload, $this->getCommonHeaders());
 
-        // 部分update：仅update中文 logo
+        // 部minuteupdate：仅updatemiddle文 logo
         $partialPayload = [
             'logo_zh_url' => 'https://example.com/updated_logo_zh.png',
         ];
@@ -117,7 +117,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // verify中文 logo 已update
+        // verifymiddle文 logo 已update
         $this->assertSame('https://example.com/updated_logo_zh.png', $data['logo']['zh_CN']['url']);
         // verify英文 logo 保持not变
         $this->assertSame('https://example.com/initial_logo_en.png', $data['logo']['en_US']['url']);

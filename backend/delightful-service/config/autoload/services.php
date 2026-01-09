@@ -5,7 +5,7 @@ declare(strict_types=1);
  * Copyright (c) Be Delightful , Distributed under the MIT software license
  */
 return [
-    // 国内delightful
+    // 国insidedelightful
     'domestic_delightful_service' => [
         'host' => env('DOMESTIC_DELIGHTFUL_HOST'),
     ],

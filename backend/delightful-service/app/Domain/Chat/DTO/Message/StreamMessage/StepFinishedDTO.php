@@ -19,7 +19,7 @@ class StepFinishedDTO extends AbstractObject
     /**
      * endreason：
      * 0:processend
-     * 1.发生exception.
+     * 1.hair生exception.
      */
     protected FinishedReasonEnum $finishedReason;
 

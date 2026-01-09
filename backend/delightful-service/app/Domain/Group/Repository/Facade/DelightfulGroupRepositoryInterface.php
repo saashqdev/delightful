@@ -15,7 +15,7 @@ interface DelightfulGroupRepositoryInterface
     // creategroup
     public function createGroup(DelightfulGroupEntity $delightfulGroupDTO): DelightfulGroupEntity;
 
-    // 批量querygroupinformation
+    // 批quantityquerygroupinformation
 
     /**
      * @return DelightfulGroupEntity[]
@@ -46,11 +46,11 @@ interface DelightfulGroupRepositoryInterface
 
     public function deleteGroup(DelightfulGroupEntity $delightfulGroupEntity): int;
 
-    // userwhetheringroup中
+    // userwhetheringroupmiddle
     public function isUserInGroup(string $groupId, string $userId): bool;
 
     /**
-     * userwhetheringroup中.
+     * userwhetheringroupmiddle.
      * @param array<string> $userIds
      */
     public function isUsersInGroup(string $groupId, array $userIds): bool;

@@ -79,13 +79,13 @@ class ProviderConfigAssembler
         $translator = di(TranslatorInterface::class);
         $locale = $translator->getLocale();
 
-        // from providerMap 中get对应的 provider info
+        // from providerMap middleget对应的 provider info
         $providerId = $serviceProviderConfig['service_provider_id'];
         if (isset($providerMap[$providerId])) {
             $provider = $providerMap[$providerId];
 
             $translate = Json::decode($provider['translate']);
-            // merge provider infotoconfiguration中
+            // merge provider infotoconfigurationmiddle
             $preparedConfig['name'] = self::getTranslatedText($translate['name'] ?? [], $locale);
             $preparedConfig['description'] = self::getTranslatedText($translate['description'] ?? [], $locale);
             $preparedConfig['icon'] = $provider['icon'] ?? '';
@@ -94,7 +94,7 @@ class ProviderConfigAssembler
             $preparedConfig['provider_code'] = $provider['provider_code'] ?? null;
             $preparedConfig['is_models_enable'] = $provider['is_models_enable'] ?? true;
 
-            // 直接use provider 的翻译info（config 中only ak、sk etcconfiguration，nothave翻译data）
+            // 直接use provider 的翻译info（config middleonly ak、sk etcconfiguration，nothave翻译data）
             if (! empty($provider['translate'])) {
                 $providerTranslate = is_string($provider['translate'])
                     ? Json::decode($provider['translate'])

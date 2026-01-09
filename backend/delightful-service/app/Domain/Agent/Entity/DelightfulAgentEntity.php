@@ -18,7 +18,7 @@ class DelightfulAgentEntity extends AbstractEntity
     protected string $id;
 
     /**
-     * 指定versionid.
+     * finger定versionid.
      */
     protected ?string $agentVersionId = null;
 

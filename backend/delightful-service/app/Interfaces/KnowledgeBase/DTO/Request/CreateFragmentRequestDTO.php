@@ -33,11 +33,11 @@ class CreateFragmentRequestDTO extends AbstractRequestDTO
     {
         return [
             'knowledge_base_code.required' => 'knowledge baseencodingcannot为null',
-            'knowledge_base_code.max' => 'knowledge baseencodinglengthcannot超过255个字符',
+            'knowledge_base_code.max' => 'knowledge baseencodinglengthcannot超过255字符',
             'document_code.required' => 'documentencodingcannot为null',
-            'document_code.max' => 'documentencodinglengthcannot超过255个字符',
-            'content.required' => '片段contentcannot为null',
-            'content.max' => '片段contentlengthcannot超过65535个字符',
+            'document_code.max' => 'documentencodinglengthcannot超过255字符',
+            'content.required' => 'slicesegmentcontentcannot为null',
+            'content.max' => 'slicesegmentcontentlengthcannot超过65535字符',
         ];
     }
 

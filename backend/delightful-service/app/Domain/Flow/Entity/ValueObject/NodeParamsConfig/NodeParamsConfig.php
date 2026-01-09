@@ -31,7 +31,7 @@ abstract class NodeParamsConfig implements NodeParamsConfigInterface
     }
 
     /**
-     * get节点configurationtemplate.
+     * getsectionpointconfigurationtemplate.
      */
     public function generateTemplate(): void
     {

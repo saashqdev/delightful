@@ -70,7 +70,7 @@ class DelightfulAgentDomainService
             $agent = $this->agentRepository->insert($agentEntity);
             $create = true;
 
-            // create助理时添加系统交互指令
+            // create助理o clock添加系统交互finger令
             $this->initSystemInstructs($agent->getOrganizationCode(), $agent->getId(), $agentEntity->getUpdatedUid());
         } else {
             // whether能修改
@@ -158,7 +158,7 @@ class DelightfulAgentDomainService
         return $this->agentRepository->isDefaultAssistantConversationExist($userId, $aiCode);
     }
 
-    // 商业code目前alsodependency
+    // 商业code目frontalsodependency
     public function getBotsByOrganization(RequestContext $requestContext, string $agentName, ?string $pageToken = null, int $pageSize = 50, ?string $descriptionKeyword = null): array
     {
         // getdata隔离object并getcurrentorganization的organizationcode
@@ -167,10 +167,10 @@ class DelightfulAgentDomainService
         // getenable的助理list
         $enabledAgents = $this->getEnabledAgents();
 
-        // 提取enable助理list中的 agent_version_id
+        // 提取enable助理listmiddle的 agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // get指定organization和助理version的助理data及其total
+        // getfinger定organization和助理version的助理data及其total
         $page = ((int) ceil((int) $pageToken / $pageSize)) + 1;
         $agents = $this->agentVersionRepository->getAgentsByOrganization($organizationCode, $agentVersionIds, $page, $pageSize, $agentName, $descriptionKeyword);
 
@@ -185,7 +185,7 @@ class DelightfulAgentDomainService
         // 移except空value
         $validFileKeys = array_filter($fileKeys, static fn ($fileKey) => ! empty($fileKey));
 
-        // 按organization分groupfileKeys
+        // 按organizationminutegroupfileKeys
         $orgFileKeys = [];
         foreach ($validFileKeys as $fileKey) {
             $orgCode = explode('/', $fileKey, 2)[0] ?? '';
@@ -194,7 +194,7 @@ class DelightfulAgentDomainService
             }
         }
 
-        // 按organization批量getlink
+        // 按organization批quantitygetlink
         $links = [];
         foreach ($orgFileKeys as $orgCode => $fileKeys) {
             $orgLinks = $this->cloudFileRepository->getLinks($orgCode, $fileKeys);
@@ -204,7 +204,7 @@ class DelightfulAgentDomainService
             $links = array_merge(...$links);
         }
 
-        // 替换each个助理的avatarlink
+        // 替换each助理的avatarlink
         foreach ($agents as &$agent) {
             $avatarKey = $agent['agent_avatar'];
             $fileLink = $links[$avatarKey] ?? null;
@@ -222,15 +222,15 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * save助理的交互指令.
+     * save助理的交互finger令.
      */
     public function updateInstruct(string $organizationCode, string $agentId, array $instructs, string $userId = '', bool $valid = true): array
     {
         if ($valid) {
-            // 校验普通交互指令
+            // 校验普通交互finger令
             InstructType::validateInstructs($instructs);
 
-            // ensure系统交互指令存in，if缺少then补充
+            // ensure系统交互finger令存in，if缺少then补充
             $instructs = SystemInstructType::ensureSystemInstructs($instructs);
         }
         // save
@@ -244,7 +244,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * query企业下的所have助理,条件query：status，create人，search.
+     * query企业down的所have助理,itemitemquery：status，create人，search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
@@ -258,7 +258,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * get企业下的所have助理create者.
+     * get企业down的所have助理create者.
      * @return array<string>
      */
     public function getOrganizationAgentsCreators(string $organizationCode): array
@@ -267,7 +267,7 @@ class DelightfulAgentDomainService
     }
 
     /**
-     * initialize系统交互指令.
+     * initialize系统交互finger令.
      */
     private function initSystemInstructs(string $organizationCode, string $agentId, string $userId): void
     {

@@ -10,7 +10,7 @@ namespace App\Application\Flow\ExecuteManager\Attachment;
 use App\Infrastructure\Util\FileType;
 
 /**
- * 这里的attachment一定是已经in云service端了.
+ * 这within的attachment一定是已经in云service端了.
  */
 class Attachment extends AbstractAttachment
 {
@@ -27,7 +27,7 @@ class Attachment extends AbstractAttachment
         $this->size = $size;
         $this->chatFileId = $chatFileId;
         $this->url = trim($url);
-        // ifnothave ext，from url 中提取
+        // ifnothave ext，from url middle提取
         if (empty($this->ext)) {
             $this->ext = FileType::getType($this->url);
         } else {

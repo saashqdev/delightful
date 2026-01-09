@@ -15,7 +15,7 @@ enum ParentMode: int
     public function getDescription(): string
     {
         return match ($this) {
-            self::PARAGRAPH => '段落',
+            self::PARAGRAPH => 'segment落',
             self::AUTHORITY => '权重',
         };
     }

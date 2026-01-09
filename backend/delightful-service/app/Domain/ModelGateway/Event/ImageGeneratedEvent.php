@@ -37,17 +37,17 @@ class ImageGeneratedEvent extends AbstractEvent
     protected string $providerModelId = '';
 
     /**
-     * accesstoken实体Id.
+     * accesstoken实bodyId.
      */
     protected ?int $accessTokenId = null;
 
     /**
-     * accesstoken实体name.
+     * accesstoken实bodyname.
      */
     protected ?string $accessTokenName = null;
 
     /**
-     * when前configurationversion，useat计价
+     * whenfrontconfigurationversion，useat计价
      * service_provider_models_config_versions.id.
      */
     protected ?int $priceId = null;

@@ -23,7 +23,7 @@ class NodeDebugResult extends AbstractValueObject
     private const MAX_LOOP_RESULTS_TAIL = 10;
 
     /**
-     *  节点whetherexecutesuccess
+     *  sectionpointwhetherexecutesuccess
      */
     protected bool $success = false;
 
@@ -34,24 +34,24 @@ class NodeDebugResult extends AbstractValueObject
     protected int $errorCode = 0;
 
     /**
-     *  节点executefailed时的errorinformation.
+     *  sectionpointexecutefailedo clock的errorinformation.
      */
     protected string $errorMessage = '';
 
     protected string $nodeVersion = '';
 
     /**
-     *  节点executeparameter.
+     *  sectionpointexecuteparameter.
      */
     protected array $params = [];
 
     /**
-     *  节点executeinput.
+     *  sectionpointexecuteinput.
      */
     protected array $input = [];
 
     /**
-     *  节点executeoutput.
+     *  sectionpointexecuteoutput.
      */
     protected array $output = [];
 
@@ -276,7 +276,7 @@ class NodeDebugResult extends AbstractValueObject
     public function toArray(): array
     {
         $loopDebugResults = $this->loopDebugResults ?? [];
-        // have多个result时，才needhave loop_debug_results
+        // have多resulto clock，才needhave loop_debug_results
         if (count($loopDebugResults) <= 1) {
             $loopDebugResults = [];
         }
@@ -303,7 +303,7 @@ class NodeDebugResult extends AbstractValueObject
     public function toDesensitizationArray(): array
     {
         $loopDebugResults = $this->loopDebugResults ?? [];
-        // have多个result时，才needhave loop_debug_results
+        // have多resulto clock，才needhave loop_debug_results
         if (count($loopDebugResults) <= 1) {
             $loopDebugResults = [];
         }

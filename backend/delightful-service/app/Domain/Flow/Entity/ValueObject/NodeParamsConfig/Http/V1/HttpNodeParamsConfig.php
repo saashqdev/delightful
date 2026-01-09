@@ -68,7 +68,7 @@ class HttpNodeParamsConfig extends NodeParamsConfig
             "type": "string",
             "key": "body",
             "sort": 0,
-            "title": "response体",
+            "title": "responsebody",
             "description": "",
             "items": null,
             "properties": null,

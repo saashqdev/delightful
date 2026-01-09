@@ -12,7 +12,7 @@ enum FlowStreamStatus: string
     // 未start
     case Pending = 'Pending';
 
-    // conduct中
+    // conductmiddle
     case Processing = 'Processing';
 
     // end

@@ -13,9 +13,9 @@ use App\Infrastructure\Util\Auth\Permission\PermissionInterface;
 class PermissionChecker
 {
     /**
-     * check手机号whetherhavepermissionaccess指定的permission.
+     * checkhand机numberwhetherhavepermissionaccessfinger定的permission.
      *
-     * @param string $mobile 手机号
+     * @param string $mobile hand机number
      * @param SuperPermissionEnum $permissionEnum 要check的permissiontype
      * @return bool whetherhavepermission
      */
@@ -30,9 +30,9 @@ class PermissionChecker
     }
 
     /**
-     * 内部permissioncheckmethod，便attest.
+     * inside部permissioncheckmethod，便attest.
      *
-     * @param string $mobile 手机号
+     * @param string $mobile hand机number
      * @param SuperPermissionEnum $permission 要check的permission
      * @param array $permissions permissionconfiguration
      * @return bool whetherhavepermission

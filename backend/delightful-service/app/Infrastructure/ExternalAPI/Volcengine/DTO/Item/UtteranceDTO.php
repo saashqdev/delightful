@@ -12,7 +12,7 @@ use Hyperf\Codec\Json;
 
 /**
  * Utterance DTO for speech recognition utterance information.
- * 对应 JSON 中的 result.utterances[] array元素.
+ * 对应 JSON middle的 result.utterances[] arrayyuan素.
  */
 class UtteranceDTO extends AbstractDTO
 {

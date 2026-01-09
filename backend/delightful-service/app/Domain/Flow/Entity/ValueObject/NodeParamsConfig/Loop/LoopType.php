@@ -15,6 +15,6 @@ enum LoopType: string
     // 遍历array
     case Array = 'array';
 
-    // 条件compare
+    // itemitemcompare
     case Condition = 'condition';
 }

@@ -28,7 +28,7 @@ use Hyperf\Contract\TranslatorInterface;
 class AdminModeAssembler
 {
     /**
-     * 实体convert为管理后台DTO (contain完整的i18nfield).
+     * 实bodyconvert为管理back台DTO (contain完整的i18nfield).
      */
     public static function modeToAdminDTO(ModeEntity $entity): AdminModeDTO
     {
@@ -42,7 +42,7 @@ class AdminModeAssembler
     }
 
     /**
-     * associate实体convert为DTO.
+     * associate实bodyconvert为DTO.
      */
     public static function relationEntityToDTO(ModeGroupRelationEntity $entity): ModeGroupRelationDTO
     {
@@ -50,9 +50,9 @@ class AdminModeAssembler
     }
 
     /**
-     * 聚合根convert为DTO.
+     * 聚合rootconvert为DTO.
      *
-     * @param ModeAggregate $aggregate 模式聚合根
+     * @param ModeAggregate $aggregate 模type聚合root
      * @param array $providerModels optional的modelinfomapping [modelId => ProviderModelEntity]
      */
     public static function aggregateToAdminDTO(ModeAggregate $aggregate, array $providerModels = []): AdminModeAggregateDTO
@@ -71,9 +71,9 @@ class AdminModeAssembler
     }
 
     /**
-     * 分group聚合根convert为DTO.
+     * minutegroup聚合rootconvert为DTO.
      *
-     * @param ModeGroupAggregate $groupAggregate 分group聚合根
+     * @param ModeGroupAggregate $groupAggregate minutegroup聚合root
      * @param array $providerModels optional的modelinfomapping [model_id => ['best' => ProviderModelEntity|null, 'all' => ProviderModelEntity[], 'status' => string]]
      */
     public static function groupAggregateToAdminDTO(ModeGroupAggregate $groupAggregate, array $providerModels = []): AdminModeGroupAggregateDTO
@@ -105,10 +105,10 @@ class AdminModeAssembler
                 }
                 $modelDTO->setModelDescription($description);
 
-                // 保持to后compatible，set providerModelId 为查找to的model的ID
+                // 保持tobackcompatible，set providerModelId 为查找to的model的ID
                 $modelDTO->setProviderModelId((string) $providerModel->getId());
             } else {
-                // 后台管理need显示所havestatus，include无可usemodel的情况
+                // back台管理need显示所havestatus，include无可usemodel的情况
                 $status = $modelInfo['status'] ?? ModelStatus::Deleted;
                 $modelDTO->setModelStatus($status);
                 $modelDTO->setModelStatus($status);
@@ -123,7 +123,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 实体arrayconvert为管理后台DTOarray.
+     * 实bodyarrayconvert为管理back台DTOarray.
      */
     public static function entitiesToAdminDTOs(array $entities): array
     {
@@ -131,7 +131,7 @@ class AdminModeAssembler
     }
 
     /**
-     * 分group实体arrayconvert为管理后台DTOarray.
+     * minutegroup实bodyarrayconvert为管理back台DTOarray.
      */
     public static function groupEntitiesToAdminDTOs(array $entities): array
     {
@@ -139,7 +139,7 @@ class AdminModeAssembler
     }
 
     /**
-     * associate实体arrayconvert为DTOarray.
+     * associate实bodyarrayconvert为DTOarray.
      */
     public static function relationEntitiesToDTOs(array $entities): array
     {
@@ -152,7 +152,7 @@ class AdminModeAssembler
     }
 
     /**
-     * ModeAggregateDTOconvert为ModeAggregate实体.
+     * ModeAggregateDTOconvert为ModeAggregate实body.
      */
     public static function aggregateDTOToEntity(AdminModeAggregateDTO $dto): ModeAggregate
     {
@@ -167,7 +167,7 @@ class AdminModeAssembler
     }
 
     /**
-     * ModeGroupAggregateDTOconvert为ModeGroupAggregate实体.
+     * ModeGroupAggregateDTOconvert为ModeGroupAggregate实body.
      */
     public static function groupAggregateDTOToEntity(AdminModeGroupAggregateDTO $dto): ModeGroupAggregate
     {
@@ -184,7 +184,7 @@ class AdminModeAssembler
     }
 
     /**
-     * ModeGroupDTOconvert为ModeGroupEntity实体.
+     * ModeGroupDTOconvert为ModeGroupEntity实body.
      */
     public static function groupDTOToEntity(AdminModeGroupDTO $dto): ModeGroupEntity
     {
@@ -200,11 +200,11 @@ class AdminModeAssembler
     }
 
     /**
-     * 将UpdateModeRequest的dataapplicationto现haveModeEntity（部分update）.
+     * 将UpdateModeRequest的dataapplicationto现haveModeEntity（部minuteupdate）.
      */
     public static function applyUpdateRequestToEntity(UpdateModeRequest $request, ModeEntity $existingEntity): void
     {
-        // 只updaterequest中contain的allow修改的field
+        // 只updaterequestmiddlecontain的allow修改的field
         $existingEntity->setNameI18n($request->getNameI18n());
         $existingEntity->setPlaceholderI18n($request->getPlaceholderI18n());
         $existingEntity->setIdentifier($request->getIdentifier());

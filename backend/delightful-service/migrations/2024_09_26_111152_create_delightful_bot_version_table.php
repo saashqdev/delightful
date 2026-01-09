@@ -19,18 +19,18 @@ return new class extends Migration {
             $table->string('flow_code')->comment('workflowcode');
             $table->string('flow_version')->comment('workflowversion');
             $table->json('instruct')->comment('交互instruction');
-            $table->bigInteger('root_id')->comment('根id');
+            $table->bigInteger('root_id')->comment('rootid');
             $table->string('robot_name')->comment('assistant name');
             $table->string('robot_avatar')->comment('assistant avatar');
             $table->string('robot_description')->comment('助理description');
 
             $table->string('version_description', 255)->default('')->comment('description');
             $table->string('version_number')->nullable()->comment('version number');
-            $table->integer('release_scope')->nullable()->comment('publishrange.1:publishto企业内部 2:publishtoapplication市场');
+            $table->integer('release_scope')->nullable()->comment('publishrange.1:publishto企业inside部 2:publishtoapplication市场');
 
             $table->integer('approval_status')->default(3)->nullable(false)->comment('approvalstatus');
             $table->integer('review_status')->default(0)->nullable(false)->comment('审核status');
-            $table->integer('enterprise_release_status')->default(0)->nullable(false)->comment('publishto企业内部status');
+            $table->integer('enterprise_release_status')->default(0)->nullable(false)->comment('publishto企业inside部status');
             $table->integer('app_market_status')->default(0)->nullable(false)->comment('publishtoapplication市场status');
 
             $table->string('organization_code')->comment('organizationencoding');

@@ -18,7 +18,7 @@ class UpdateIndexesAndComments extends Migration
 
         // 修改 delightful_api_premium_endpoint_statistics 表的 statistics_level comment
         Schema::table('delightful_api_premium_endpoint_statistics', function (Blueprint $table) {
-            $table->integer('statistics_level')->comment('statistics级别：0-秒级，1-分钟级，2-小时级，3-天级')->change();
+            $table->integer('statistics_level')->comment('statisticslevel别：0-secondlevel，1-minute钟level，2-hourlevel，3-daylevel')->change();
             // 修改 statistics_time 的datatype为 datetime
             $table->dateTime('statistics_time')->change();
         });

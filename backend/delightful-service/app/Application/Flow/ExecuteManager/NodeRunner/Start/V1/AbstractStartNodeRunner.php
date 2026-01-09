@@ -86,11 +86,11 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             'open_time' => $openChatTime->format('Y-m-d H:i:s'),
         ];
 
-        // get上次open触发的time
+        // getuptimeopen触hair的time
         $key = 'open_chat_notice_' . $executionData->getConversationId();
         $lastNoticeTime = $this->cache->get($key);
 
-        // ifnothave上次，or者距离上次的time秒已经超过了，那么thenneedexecute
+        // ifnothaveuptime，or者距离uptime的timesecond已经超过了，那么thenneedexecute
         $config = $triggerBranch->getConfig();
         $intervalSeconds = $this->getIntervalSeconds($config['interval'] ?? 0, $config['unit'] ?? '');
         if (! $lastNoticeTime || (Carbon::make($openChatTime)->diffInSeconds(Carbon::make($lastNoticeTime)) > $intervalSeconds)) {
@@ -131,7 +131,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
                 if ($property->getType()->isComplex()) {
                     $value = $appendConstValue[$key] ?? [];
                     if (is_string($value)) {
-                        // 尝试一次 json_decode
+                        // 尝试一time json_decode
                         $value = json_decode($value, true);
                     }
                     if (! is_array($value)) {
@@ -163,10 +163,10 @@ abstract class AbstractStartNodeRunner extends NodeRunner
 
     protected function routine(VertexResult $vertexResult, ExecutionData $executionData, StartNodeParamsConfig $startNodeParamsConfig): array
     {
-        // schedule入参，all由外部call，判断是哪个branch
+        // schedule入参，all由outside部call，判断是哪branch
         $branchId = $executionData->getTriggerData()->getParams()['branch_id'] ?? '';
         if (empty($branchId)) {
-            // nothave找to任何branch，直接运行
+            // nothave找to任何branch，直接运line
             $vertexResult->setChildrenIds([]);
             return [];
         }
@@ -254,13 +254,13 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         if (! $delightfulFlowEntity || ! $delightfulFlowEntity->getType()->isMain()) {
             return;
         }
-        // 兜底，ifnothave agent 的process指令，尝试实时get
+        // 兜bottom，ifnothave agent 的processfinger令，尝试实o clockget
         if (empty($executionData->getInstructionConfigs())) {
             $instructs = di(DelightfulAgentDomainService::class)->getAgentById($executionData->getAgentId())->getInstructs();
             $executionData->setInstructionConfigs($instructs);
         }
 
-        // getcurrentmessage体的指令value
+        // getcurrentmessagebody的finger令value
         $messageChatInstructions = $messageEntity->getChatInstructions();
         $messageChatInstructionIdMaps = [];
         $messageChatInstructionNameMaps = [];
@@ -274,7 +274,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         }
 
         $instructions = [];
-        // 只放current agent configuration的process指令
+        // 只放current agent configuration的processfinger令
         foreach ($executionData->getInstructionConfigs() as $instructionConfig) {
             if (! $instructionConfig->isFlowInstructionType()) {
                 continue;
@@ -290,7 +290,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
             if ($messageChatInstruction) {
                 $value = $messageChatInstruction->getValue();
             } else {
-                // ifmessage体中nothave指令value，usedefaultvalue
+                // ifmessagebodymiddlenothavefinger令value，usedefaultvalue
                 $value = $instructionConfig->getDefaultValue();
             }
             $instructions[$instructionConfig->getId()] = $instructionConfig->getNameAndValueByType($value);

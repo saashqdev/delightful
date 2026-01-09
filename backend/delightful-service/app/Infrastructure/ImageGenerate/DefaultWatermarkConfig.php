@@ -12,7 +12,7 @@ use App\Domain\ImageGenerate\ValueObject\WatermarkConfig;
 
 /**
  * default水印configurationimplement
- * 开源project中的defaultimplement，notenable水印
+ * 开源projectmiddle的defaultimplement，notenable水印
  * 企业projectcanpassinheritor重新implement来提供specific的水印逻辑.
  */
 class DefaultWatermarkConfig implements WatermarkConfigInterface
@@ -22,8 +22,8 @@ class DefaultWatermarkConfig implements WatermarkConfigInterface
         // 开源versiondefaultnotenable水印
         return new WatermarkConfig(
             logoTextContent: 'Delightful AI Generated', // default水印文字
-            position: 3, // 右下角
-            opacity: 0.3, // 30% 透明度,
+            position: 3, // rightdownangle
+            opacity: 0.3, // 30% 透明degree,
         );
     }
 }

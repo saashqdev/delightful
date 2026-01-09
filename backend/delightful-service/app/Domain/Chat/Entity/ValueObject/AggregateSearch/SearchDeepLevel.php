@@ -12,6 +12,6 @@ enum SearchDeepLevel: int
     // 简单search
     case SIMPLE = 1;
 
-    // 深度search
+    // 深degreesearch
     case DEEP = 2;
 }

@@ -91,7 +91,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * according toencodinglist批量getorganization.
+     * according toencodinglist批quantitygetorganization.
      */
     public function getByCodes(array $codes): array
     {
@@ -130,13 +130,13 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     {
         $query = OrganizationModel::query();
 
-        // applicationfilter条件
+        // applicationfilteritemitem
         $this->applyFilters($query, $filters);
 
         // gettotal
         $total = $query->count();
 
-        // sort：优先usefilter器中的sortfield，否thendefault按createtime倒序
+        // sort：优先usefilter器middle的sortfield，否thendefault按createtime倒序
         $orderBy = $filters['order_by'] ?? null;
         $orderDirection = strtolower((string) ($filters['order_direction'] ?? '')) === 'asc' ? 'asc' : 'desc';
         if (! empty($orderBy)) {
@@ -190,7 +190,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * applicationfilter条件.
+     * applicationfilteritemitem.
      */
     private function applyFilters(Builder $query, ?array $filters): void
     {
@@ -223,7 +223,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
             $query->where('sync_status', (int) $filters['sync_status']);
         }
 
-        // createtime区间filter
+        // createtime区betweenfilter
         if (! empty($filters['created_at_start'])) {
             $query->where('created_at', '>=', $filters['created_at_start'] . ' 00:00:00');
         }
@@ -233,7 +233,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
     }
 
     /**
-     * 将modelmapping为实体.
+     * 将modelmapping为实body.
      */
     private function mapToEntity(OrganizationModel $model): OrganizationEntity
     {

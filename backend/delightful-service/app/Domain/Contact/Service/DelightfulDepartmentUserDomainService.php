@@ -38,7 +38,7 @@ readonly class DelightfulDepartmentUserDomainService
 
     public function getDepartmentUsersByDepartmentId(UserQueryDTO $contactUserListQueryDTO, DataIsolation $dataIsolation): DepartmentUsersPageResponseDTO
     {
-        // 暂时not supported递归process
+        // 暂o clocknot supported递归process
         return $this->departmentUserRepository->getDepartmentUsersByDepartmentId(
             $contactUserListQueryDTO->getDepartmentId(),
             $dataIsolation->getCurrentOrganizationCode(),

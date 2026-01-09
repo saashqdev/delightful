@@ -47,7 +47,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
 
         // 嵌入configurationnot可edit
         $documentEntity->setEmbeddingConfig($knowledgeBaseEntity->getEmbeddingConfig());
-        // setdefault的嵌入model和to量database
+        // setdefault的嵌入model和toquantitydatabase
         $documentEntity->setEmbeddingModel($knowledgeBaseEntity->getModel());
         $documentEntity->setVectorDb(VectorStoreDriver::default()->value);
         if (! $documentEntity->getCode()) {
@@ -116,7 +116,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * 查看单个knowledge basedocumentdetail.
+     * 查看单knowledge basedocumentdetail.
      */
     public function show(Authenticatable $authorization, string $knowledgeBaseCode, string $documentCode): KnowledgeBaseDocumentEntity
     {
@@ -144,21 +144,21 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
     }
 
     /**
-     * 重新to量化.
+     * 重新toquantity化.
      */
     public function reVectorized(Authenticatable $authorization, string $knowledgeBaseCode, string $documentCode): void
     {
         $dataIsolation = $this->createKnowledgeBaseDataIsolation($authorization);
         $this->checkKnowledgeBaseOperation($dataIsolation, 'manage', $knowledgeBaseCode, $documentCode);
 
-        // call领域service重新to量化
+        // call领域service重新toquantity化
         $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $knowledgeBaseCode);
         $documentEntity = $this->knowledgeBaseDocumentDomainService->show($dataIsolation, $knowledgeBaseCode, $documentCode);
-        // 由athistorydocumentnothave document_file field，not能be重新to量化
+        // 由athistorydocumentnothave document_file field，not能be重新toquantity化
         if (! $documentEntity->getDocumentFile()) {
             ExceptionBuilder::throw(PermissionErrorCode::Error, 'flow.knowledge_base.re_vectorized_not_support');
         }
-        // 分发event，重新to量化
+        // minutehairevent，重新toquantity化
         $documentSavedEvent = new KnowledgeBaseDocumentSavedEvent(
             $dataIsolation,
             $knowledgeBaseEntity,

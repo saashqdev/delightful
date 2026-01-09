@@ -53,13 +53,13 @@ class ExecutionData
     private string $parentFlowCode = '';
 
     /**
-     * 节点上下文.
+     * sectionpointupdown文.
      * @var array {nodeId: {context}}
      */
     private array $nodeContext = [];
 
     /**
-     * 节点executecount.
+     * sectionpointexecutecount.
      */
     private array $executeNum = [];
 
@@ -78,7 +78,7 @@ class ExecutionData
     private array $variables = [];
 
     /**
-     * attachment。processexecute时产生的所havefilerecord.
+     * attachment。processexecuteo clock产生的所havefilerecord.
      * @var array<string, AbstractAttachment>
      */
     private array $attachmentRecords = [];
@@ -143,7 +143,7 @@ class ExecutionData
     private ?DelightfulFlowEntity $delightfulFlowEntity = null;
 
     /**
-     * current agent 的指令configurationlist.
+     * current agent 的finger令configurationlist.
      * @var array<InstructionConfig>
      */
     private array $instructionConfigs = [];
@@ -167,7 +167,7 @@ class ExecutionData
         $this->id = $id ?? 'e_' . IdGenerator::getUniqueId32();
         $this->conversationId = $conversationId ?? 'c_' . IdGenerator::getUniqueId32();
         $this->originConversationId = $originConversationId ?? $this->conversationId;
-        // initializeall局variabletovariable中
+        // initializeall局variabletovariablemiddle
         $this->initGlobalVariable();
     }
 

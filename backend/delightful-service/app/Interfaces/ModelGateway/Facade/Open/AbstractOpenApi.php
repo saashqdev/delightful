@@ -18,9 +18,9 @@ abstract class AbstractOpenApi
 
     protected function getAccessToken(): string
     {
-        // all面compatible openai 的 api_key format
+        // allsurfacecompatible openai 的 api_key format
 
-        // 1. 按顺序尝试fromrequest头中get
+        // 1. 按顺序尝试fromrequestheadmiddleget
         $headers = [
             'api-key',
             'llm-access-token',
@@ -31,25 +31,25 @@ abstract class AbstractOpenApi
             return $token;
         }
 
-        // 2. from Authorization 头中get Bearer token
+        // 2. from Authorization headmiddleget Bearer token
         $token = $this->getTokenFromBearerAuth();
         if (! empty($token)) {
             return $token;
         }
 
-        // 3. from HTTP Basic Auth 中get token
+        // 3. from HTTP Basic Auth middleget token
         $token = $this->getTokenFromBasicAuth();
         if (! empty($token)) {
             return $token;
         }
 
-        // 4. fromqueryparameter中get
+        // 4. fromqueryparametermiddleget
         $apiKey = $this->request->query('api_key');
         if (! empty($apiKey)) {
             return $apiKey;
         }
 
-        // 5. fromrequest体中get
+        // 5. fromrequestbodymiddleget
         $parsedBody = $this->request->getParsedBody();
         if (is_array($parsedBody) && isset($parsedBody['api_key'])) {
             return $parsedBody['api_key'];
@@ -59,7 +59,7 @@ abstract class AbstractOpenApi
     }
 
     /**
-     * from指定的request头列表中按顺序gettoken.
+     * fromfinger定的requestheadcolumn表middle按顺序gettoken.
      */
     protected function getTokenFromHeaders(array $headerNames): string
     {
@@ -73,7 +73,7 @@ abstract class AbstractOpenApi
     }
 
     /**
-     * from Authorization 头中get Bearer token.
+     * from Authorization headmiddleget Bearer token.
      */
     protected function getTokenFromBearerAuth(): string
     {
@@ -88,7 +88,7 @@ abstract class AbstractOpenApi
     }
 
     /**
-     * from HTTP Basic Auth 中get token.
+     * from HTTP Basic Auth middleget token.
      */
     protected function getTokenFromBasicAuth(): string
     {

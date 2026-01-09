@@ -40,7 +40,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $putData = $putResponse['data'];
         $this->assertArrayEquals($payload, $putData, 'PUT returndatanot一致');
 
-        // again次 GET verifycache及持久化
+        // againtime GET verifycache及持久化
         $getResponse = $this->get($this->url, [], $this->getCommonHeaders());
         $this->assertSame(1000, $getResponse['code']);
         $getData = $getResponse['data'];
@@ -69,7 +69,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // verifycontain维护模式configuration
+        // verifycontain维护模typeconfiguration
         $this->assertArrayHasKey('is_maintenance', $data);
         $this->assertArrayHasKey('maintenance_description', $data);
 

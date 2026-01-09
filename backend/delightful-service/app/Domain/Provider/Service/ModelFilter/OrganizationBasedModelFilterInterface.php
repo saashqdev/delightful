@@ -19,16 +19,16 @@ interface OrganizationBasedModelFilterInterface
 {
     /**
      * based onorganizationencodingfiltermodellist
-     * 这是企业package提供给开源package的核心filtermethod.
+     * 这是企业package提供给开源package的核corefiltermethod.
      *
      * @param string $organizationCode organizationencoding
      * @param array $models 待filter的modellist [modelId => ProviderModelEntity]
-     * @return array filter后的modellist [modelId => ProviderModelEntity]
+     * @return array filterback的modellist [modelId => ProviderModelEntity]
      */
     public function filterModelsByOrganization(string $organizationCode, array $models): array;
 
     /**
-     * check指定modelwhether对organization可use.
+     * checkfinger定modelwhether对organization可use.
      *
      * @param string $organizationCode organizationencoding
      * @param string $modelIdentifier model标识符 (如: gpt-4o)
@@ -45,10 +45,10 @@ interface OrganizationBasedModelFilterInterface
     public function getAvailableModelIdentifiers(string $organizationCode): array;
 
     /**
-     * getorganizationneed升级才能use的modelIDlist.
+     * getorganizationneed升level才能use的modelIDlist.
      *
      * @param string $organizationCode organizationencoding
-     * @return array need升级的modelIDarray，for example: ['gpt-4o-advanced', 'claude-3-opus', ...]
+     * @return array need升level的modelIDarray，for example: ['gpt-4o-advanced', 'claude-3-opus', ...]
      */
     public function getUpgradeRequiredModelIds(string $organizationCode): array;
 }

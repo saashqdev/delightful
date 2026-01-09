@@ -104,7 +104,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * get企业下的所have助理create者.
+     * get企业down的所have助理create者.
      * @return array<array{user_id:string,nickname:string,avatar:string}>
      */
     public function getOrganizationAgentsCreators(DelightfulUserAuthorization $authorization): array
@@ -140,7 +140,7 @@ class AdminAgentAppService extends AbstractKernelAppService
     }
 
     /**
-     * query企业下的所have助理,条件query：status，create人，search.
+     * query企业down的所have助理,itemitemquery：status，create人，search.
      */
     public function queriesAgents(DelightfulUserAuthorization $authorization, QueryPageAgentDTO $query): PageDTO
     {
@@ -215,7 +215,7 @@ class AdminAgentAppService extends AbstractKernelAppService
         // get所have Agent 相关的settype
         $agentSettingsTypes = AdminGlobalSettingsType::getAssistantGlobalSettingsType();
 
-        // 一次性get所haveset
+        // 一timepropertyget所haveset
         $settings = $this->globalSettingsDomainService->getSettingsByTypes(
             $agentSettingsTypes,
             $dataIsolation
@@ -249,7 +249,7 @@ class AdminAgentAppService extends AbstractKernelAppService
             return isset($agentSettingsTypes[$setting->getType()->value]);
         });
 
-        // convert为实体object
+        // convert为实bodyobject
         $entities = array_map(function ($setting) {
             /** @var AbstractSettingExtraDTO $extra */
             $extra = $setting->getExtra();
@@ -259,7 +259,7 @@ class AdminAgentAppService extends AbstractKernelAppService
                 ->setExtra(AbstractSettingExtra::fromDataByType($extra->toArray(), $setting->getType()));
         }, $settingsToUpdate);
 
-        // 一次性update所haveset
+        // 一timepropertyupdate所haveset
         $updatedSettings = $this->globalSettingsDomainService->updateSettingsBatch($entities, $dataIsolation);
 
         // convert为DTOreturn
@@ -278,10 +278,10 @@ class AdminAgentAppService extends AbstractKernelAppService
         // according tofiltertypefilter
         $enabledAgents = $this->filterEnableAgentsByType($authorization, $enabledAgents, $type);
 
-        // 提取enable机器人list中的 agent_version_id
+        // 提取enable机器人listmiddle的 agent_version_id
         $agentVersionIds = array_column($enabledAgents, 'agent_version_id');
 
-        // get指定organization和机器人version的机器人data及其total
+        // getfinger定organization和机器人version的机器人data及其total
         $agentVersions = $this->delightfulAgentVersionDomainService->getAgentsByOrganizationWithCursor(
             $organizationCode,
             $agentVersionIds,
@@ -362,13 +362,13 @@ class AdminAgentAppService extends AbstractKernelAppService
         }
 
         $selectedDefaultFriendRootIds = array_flip($this->getSelectedDefaultFriendRootIds($authorization));
-        // iftype为SELECTED_DEFAULT_FRIEND，then只return选中的default好友
+        // iftype为SELECTED_DEFAULT_FRIEND，then只return选middle的default好友
         if ($type === AgentFilterType::SELECTED_DEFAULT_FRIEND) {
             return array_filter($enabledAgents, function ($agent) use ($selectedDefaultFriendRootIds) {
                 return isset($selectedDefaultFriendRootIds[$agent->getId()]);
             });
         }
-        // iftype为NOT_SELECTED_DEFAULT_FRIEND，then只return未选中的default好友
+        // iftype为NOT_SELECTED_DEFAULT_FRIEND，then只return未选middle的default好友
         /* @phpstan-ignore-next-line */
         if ($type === AgentFilterType::NOT_SELECTED_DEFAULT_FRIEND) {
             return array_filter($enabledAgents, function ($agent) use ($selectedDefaultFriendRootIds) {

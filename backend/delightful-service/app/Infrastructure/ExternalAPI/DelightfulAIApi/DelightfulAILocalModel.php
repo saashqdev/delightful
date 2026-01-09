@@ -80,7 +80,7 @@ class DelightfulAILocalModel extends AbstractModel
     {
         $businessParams = $this->businessParamsHandler($businessParams);
         $response = $this->embeddings($input, $encoding_format, $user, $businessParams);
-        // fromresponse中提取嵌入to量
+        // fromresponsemiddle提取嵌入toquantity
         $embeddings = [];
         foreach ($response->getData() as $embedding) {
             $embeddings[] = $embedding->getEmbedding();

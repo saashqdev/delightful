@@ -11,7 +11,7 @@ namespace App\Domain\Provider\Service\ModelFilter;
  * default的organizationmodelfilter器implement.
  *
  * notconduct任何filter，直接returnoriginalmodellist
- * useat开源versionor企业package未configuration时的回退solution
+ * useat开源versionor企业package未configurationo clock的回退solution
  */
 class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInterface
 {
@@ -40,7 +40,7 @@ class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInte
     }
 
     /**
-     * defaultimplement：return空array，table示nothavemodelneed升级.
+     * defaultimplement：return空array，table示nothavemodelneed升level.
      */
     public function getUpgradeRequiredModelIds(string $organizationCode): array
     {

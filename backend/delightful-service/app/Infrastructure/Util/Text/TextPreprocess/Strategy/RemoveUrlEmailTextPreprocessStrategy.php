@@ -18,7 +18,7 @@ class RemoveUrlEmailTextPreprocessStrategy extends AbstractTextPreprocessStrateg
             $content
         );
 
-        // 移except电子邮件地址
+        // 移except电子邮itemground址
         return preg_replace(
             '/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/',
             '',

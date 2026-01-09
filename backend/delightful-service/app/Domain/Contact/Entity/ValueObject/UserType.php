@@ -15,7 +15,7 @@ enum UserType: int
     // ai
     case Ai = 0;
 
-    // 人类
+    // 人category
     case Human = 1;
 
     /**

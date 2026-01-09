@@ -15,14 +15,14 @@ class FriendQueryDTO extends AbstractEntity
     // friend_type
     protected UserType $friendType = UserType::Ai;
 
-    // 指定user ids,checkwhether是好友
+    // finger定user ids,checkwhether是好友
     protected array $userIds = [];
 
-    // 指定 ai codes,checkwhether是好友
+    // finger定 ai codes,checkwhether是好友
     protected array $aiCodes = [];
 
     /**
-     * 上一页的token. 对atmysql来说,return累积偏移量;对ates来说,return游标.
+     * up一页的token. 对atmysql来说,return累积偏移quantity;对ates来说,return游标.
      */
     protected string $pageToken = '';
 

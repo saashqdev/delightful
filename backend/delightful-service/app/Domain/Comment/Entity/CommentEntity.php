@@ -17,7 +17,7 @@ class CommentEntity extends AbstractEntity
     protected int $id;
 
     /**
-     * type，for examplecomment、动态.
+     * type，for examplecomment、动state.
      */
     protected int $type;
 
@@ -32,12 +32,12 @@ class CommentEntity extends AbstractEntity
     protected int $resourceType;
 
     /**
-     * 父级comment的primary keyid.
+     * 父levelcomment的primary keyid.
      */
     protected int $parentId;
 
     /**
-     * 对comment的简短description，main是给动态use的，for examplecreate待办、uploadimageetcsystem动态.
+     * 对comment的简短description，main是给动stateuse的，for examplecreate待办、uploadimageetcsystem动state.
      */
     protected string $description = '';
 

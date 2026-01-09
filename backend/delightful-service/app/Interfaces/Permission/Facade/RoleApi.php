@@ -39,7 +39,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdata隔离上下文
+        // createdata隔离updown文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -57,7 +57,7 @@ class RoleApi extends AbstractPermissionApi
         // queryrolelist
         $result = $this->roleAppService->queries($dataIsolation, $page, $filters);
 
-        // 批量getuserdetail（each个role仅取前5个userId）
+        // 批quantitygetuserdetail（eachrole仅取front5userId）
         $contactIsolation = ContactDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -75,7 +75,7 @@ class RoleApi extends AbstractPermissionApi
         }
         $allNeedUserIds = array_values(array_unique($allNeedUserIds));
 
-        // 批量queryuserinfo
+        // 批quantityqueryuserinfo
         $allUserInfo = [];
         if (! empty($allNeedUserIds)) {
             $allUserInfo = $this->userInfoAppService->getBatchUserInfo($allNeedUserIds, $contactIsolation);
@@ -104,7 +104,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdata隔离上下文
+        // createdata隔离updown文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -132,7 +132,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdata隔离上下文
+        // createdata隔离updown文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -145,7 +145,7 @@ class RoleApi extends AbstractPermissionApi
             throw new InvalidArgumentException('requestparameterverifyfail: ' . implode(', ', $errors));
         }
 
-        // createrole实体
+        // createrole实body
         $roleEntity = new RoleEntity();
         $roleEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $roleEntity->setCreatedUid($dataIsolation->getCurrentUserId());
@@ -168,7 +168,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdata隔离上下文
+        // createdata隔离updown文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -185,7 +185,7 @@ class RoleApi extends AbstractPermissionApi
             throw new InvalidArgumentException('requestparameterverifyfail: ' . implode(', ', $errors));
         }
         if (! $requestDTO->hasUpdates()) {
-            throw new InvalidArgumentException('at leastneed提供一个要update的field');
+            throw new InvalidArgumentException('at leastneed提供一要update的field');
         }
 
         // get现haverole
@@ -216,7 +216,7 @@ class RoleApi extends AbstractPermissionApi
         // getauthinfo
         $authorization = $this->getAuthorization();
 
-        // createdata隔离上下文
+        // createdata隔离updown文
         $dataIsolation = PermissionDataIsolation::create(
             $authorization->getOrganizationCode(),
             $authorization->getId()
@@ -225,7 +225,7 @@ class RoleApi extends AbstractPermissionApi
         // deleterole
         $this->roleAppService->destroy($dataIsolation, $id);
 
-        // return空arrayby触发统一的 ApiResponse 封装
+        // return空arrayby触hair统一的 ApiResponse 封装
         return [];
     }
 }

@@ -33,7 +33,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         parent::setUp();
         $this->organizationAdminDomainService = $this->getContainer()->get(OrganizationAdminDomainService::class);
 
-        // 为each个testgenerate唯一的userID，避免testbetween的dataconflict
+        // 为eachtestgenerate唯一的userID，避免testbetween的dataconflict
         $this->testUserIds = [
             'test_domain_user_' . uniqid(),
             'test_domain_user_' . uniqid(),
@@ -67,7 +67,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsWithSingleAdminReturnsOneEntity(): void
     {
-        // create一个organization管理员
+        // create一organization管理员
         $organizationAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -91,7 +91,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsWithMultipleAdminsReturnsAllEntities(): void
     {
-        // create多个organization管理员
+        // create多organization管理员
         $admins = [];
         foreach ($this->testUserIds as $index => $userId) {
             $admins[] = $this->organizationAdminDomainService->grant(
@@ -109,13 +109,13 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         $this->assertIsArray($result);
         $this->assertCount(3, $result);
 
-        // verifyeach个return的实体
+        // verifyeachreturn的实body
         $userIds = array_map(fn ($entity) => $entity->getUserId(), $result);
         foreach ($this->testUserIds as $testUserId) {
             $this->assertContains($testUserId, $userIds);
         }
 
-        // verify所have实体all是correct的type和organizationcode
+        // verify所have实bodyall是correct的type和organizationcode
         foreach ($result as $entity) {
             $this->assertInstanceOf(OrganizationAdminEntity::class, $entity);
             $this->assertEquals($this->testOrganizationCode, $entity->getOrganizationCode());
@@ -126,7 +126,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsOnlyReturnsAdminsFromSpecificOrganization(): void
     {
-        // intestorganization中create管理员
+        // intestorganizationmiddlecreate管理员
         $testOrgAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -134,7 +134,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             'Test org admin'
         );
 
-        // in另一个organization中create管理员
+        // in另一organizationmiddlecreate管理员
         $anotherOrgAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->anotherOrganizationCode),
             $this->testUserIds[1],
@@ -151,10 +151,10 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         $this->assertEquals($this->testUserIds[0], $testOrgResult[0]->getUserId());
         $this->assertEquals($this->testOrganizationCode, $testOrgResult[0]->getOrganizationCode());
 
-        // callmethodget另一个organization的管理员
+        // callmethodget另一organization的管理员
         $anotherOrgResult = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($this->anotherOrganizationCode));
 
-        // verify只return另一个organization的管理员
+        // verify只return另一organization的管理员
         $this->assertIsArray($anotherOrgResult);
         $this->assertCount(1, $anotherOrgResult);
         $this->assertEquals($this->testUserIds[1], $anotherOrgResult[0]->getUserId());
@@ -197,7 +197,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetAllOrganizationAdminsReturnsEntitiesWithAllRequiredFields(): void
     {
-        // create一个organization管理员
+        // create一organization管理员
         $organizationAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -208,7 +208,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
         // callmethod
         $result = $this->organizationAdminDomainService->getAllOrganizationAdmins($this->createDataIsolation($this->testOrganizationCode));
 
-        // verifyreturn的实体contain所have必要field
+        // verifyreturn的实bodycontain所have必要field
         $this->assertCount(1, $result);
         $entity = $result[0];
 
@@ -226,7 +226,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGrantWithOrganizationCreatorFlagSetsIsOrganizationCreatorCorrectly(): void
     {
-        // create一个普通管理员（nonorganizationcreate者）
+        // create一普通管理员（nonorganizationcreate者）
         $normalAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -237,7 +237,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
         $this->assertFalse($normalAdmin->isOrganizationCreator());
 
-        // create一个organizationcreate者
+        // create一organizationcreate者
         $creatorAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[1],
@@ -251,7 +251,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testIsOrganizationCreatorMethodReturnsCorrectValue(): void
     {
-        // create一个organizationcreate者
+        // create一organizationcreate者
         $creatorAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -275,7 +275,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
 
     public function testGetOrganizationCreatorReturnsCorrectEntity(): void
     {
-        // create多个管理员，其中一个是organizationcreate者
+        // create多管理员，其middle一是organizationcreate者
         $normalAdmin = $this->organizationAdminDomainService->grant(
             $this->createDataIsolation($this->testOrganizationCode),
             $this->testUserIds[0],
@@ -313,7 +313,7 @@ class OrganizationAdminDomainServiceTest extends HttpTestCase
             // 清理testorganization的data
             $this->cleanUpOrganizationAdmins($this->testOrganizationCode);
 
-            // 清理另一个organization的data
+            // 清理另一organization的data
             $this->cleanUpOrganizationAdmins($this->anotherOrganizationCode);
         } catch (Exception $e) {
             // ignore清理error

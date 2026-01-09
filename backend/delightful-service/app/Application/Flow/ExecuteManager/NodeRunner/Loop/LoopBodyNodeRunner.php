@@ -17,7 +17,7 @@ use App\Infrastructure\Core\Dag\VertexResult;
 #[FlowNodeDefine(
     type: NodeType::LoopBody->value,
     code: NodeType::LoopBody->name,
-    name: '循环 / 循环体',
+    name: '循环 / 循环body',
     paramsConfig: LoopBodyNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,

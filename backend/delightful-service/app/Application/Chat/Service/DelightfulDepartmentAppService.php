@@ -49,14 +49,14 @@ class DelightfulDepartmentAppService extends AbstractAppService
     // querydepartmentdetail,needreturnwhetherhave子department
     public function getDepartmentById(DepartmentQueryDTO $queryDTO, DelightfulUserAuthorization $userAuthorization): ?DelightfulDepartmentEntity
     {
-        // 对at前端来说, -1 table示根departmentinfo.
+        // 对atfront端来说, -1 table示rootdepartmentinfo.
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $departmentEntity = $this->delightfulDepartmentDomainService->getDepartmentById($dataIsolation, $queryDTO->getDepartmentId());
         if ($departmentEntity === null) {
             return null;
         }
         $this->setChildrenEmployeeSum($queryDTO, $departmentEntity);
-        // 判断whetherhave下级department
+        // 判断whetherhavedownleveldepartment
         $departmentEntity = $this->delightfulDepartmentDomainService->getDepartmentsHasChild([$departmentEntity], $dataIsolation->getCurrentOrganizationCode())[0];
         return $this->filterDepartmentsHidden([$departmentEntity])[0] ?? null;
     }
@@ -67,7 +67,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
      */
     public function getDepartmentByIds(DepartmentQueryDTO $queryDTO, DelightfulUserAuthorization $userAuthorization): array
     {
-        // 对at前端来说, -1 table示根departmentinfo.
+        // 对atfront端来说, -1 table示rootdepartmentinfo.
         $dataIsolation = $this->createDataIsolation($userAuthorization);
         $departmentEntities = $this->delightfulDepartmentDomainService->getDepartmentByIds($dataIsolation, $queryDTO->getDepartmentIds(), true);
         return $this->filterDepartmentsHidden($departmentEntities);
@@ -83,7 +83,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
             $offset = (int) $pageToken;
         }
         $dataIsolation = $this->createDataIsolation($userAuthorization);
-        // departmentId 为-1 table示get根department下的第一级department
+        // departmentId 为-1 table示getrootdepartmentdown的the一leveldepartment
         if ($departmentId === PlatformRootDepartmentId::Delightful) {
             $departmentsPageResponseDTO = $this->delightfulDepartmentDomainService->getSubDepartmentsByLevel($dataIsolation, 0, 1, $pageSize, $offset);
         } else {
@@ -112,7 +112,7 @@ class DelightfulDepartmentAppService extends AbstractAppService
         }
         // 通讯录和search相关interface，filter隐藏department和隐藏user。
         $departments = $this->filterDepartmentsHidden($departments);
-        // all量查找，nothavemore多
+        // allquantity查找，nothavemore多
         return PageListAssembler::pageByMysql($departments);
     }
 

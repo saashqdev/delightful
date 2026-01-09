@@ -62,7 +62,7 @@ class ExportAgentWithFlowCommand extends HyperfCommand
             return 1;
         }
 
-        // from助理实体中getorganizationcode和userID
+        // from助理实bodymiddlegetorganizationcode和userID
         $orgCode = $agent->getOrganizationCode();
         $userId = $agent->getCreatedUid();
 
@@ -89,14 +89,14 @@ class ExportAgentWithFlowCommand extends HyperfCommand
             // createuploadfileobject（not自动重命名）
             $uploadFile = new UploadFile($tempFile, $subDir, '', false);
 
-            // uploadfile（指定not自动createdirectory）
+            // uploadfile（finger定not自动createdirectory）
             $this->fileDomainService->uploadByCredential($orgCode, $uploadFile);
 
             // generate可access的link
             $fileLink = $this->fileDomainService->getLink($orgCode, $uploadFile->getKey(), StorageBucketType::Private);
 
             if ($fileLink) {
-                // use这种method点击link是valid的link
+                // use这typemethodpoint击link是valid的link
                 return 0;
             }
 

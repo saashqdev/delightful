@@ -49,21 +49,21 @@ interface KnowledgeBaseDocumentRepositoryInterface
     public function getDocumentsByCodes(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, array $knowledgeBaseDocumentCodes): array;
 
     /**
-     * queryknowledge basedocument列表.
+     * queryknowledge basedocumentcolumn表.
      *
      * @return array{total: int, list: array<KnowledgeBaseDocumentEntity>}
      */
     public function queries(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseDocumentQuery $query, Page $page): array;
 
     /**
-     * pass第third-partyfileidqueryknowledge basedocument列表.
+     * passthethird-partyfileidqueryknowledge basedocumentcolumn表.
      *
      * @return array<KnowledgeBaseDocumentEntity>
      */
     public function getByThirdFileId(KnowledgeBaseDataIsolation $dataIsolation, string $thirdPlatformType, string $thirdFileId, ?string $knowledgeBaseCode = null, ?int $lastId = null, int $pageSize = 500): array;
 
     /**
-     * 查看单个knowledge basedocumentdetail.
+     * 查看单knowledge basedocumentdetail.
      */
     public function show(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $selectForUpdate = false): ?KnowledgeBaseDocumentEntity;
 
@@ -73,7 +73,7 @@ interface KnowledgeBaseDocumentRepositoryInterface
     public function destroy(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void;
 
     /**
-     * according todocumentencodingdelete所have片段.
+     * according todocumentencodingdelete所haveslicesegment.
      */
     public function destroyFragmentsByDocumentCode(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void;
 

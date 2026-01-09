@@ -76,7 +76,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $permissions = $this->permissionEnum->generateAllPermissions();
 
         $this->assertIsArray($permissions);
-        // shouldhave 2 个资源 × 2 个操作 = 4 个permission（排exceptexport操作）
+        // shouldhave 2 资源 × 2 操作 = 4 permission（rowexceptexport操作）
         $this->assertCount(4, $permissions);
 
         // checkpermission结构
@@ -125,11 +125,11 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     {
         $tree = $this->permissionEnum->getPermissionTree();
 
-        // default情况下（non平台organization）notcontain platform 平台节点
+        // default情况down（non平台organization）notcontain platform 平台sectionpoint
         $this->assertIsArray($tree);
         $this->assertGreaterThanOrEqual(1, count($tree));
 
-        // 找to Admin 平台节点conduct进一步校验
+        // 找to Admin 平台sectionpointconduct进一步校验
         $platformsByKey = [];
         foreach ($tree as $node) {
             $platformsByKey[$node['permission_key']] = $node;
@@ -138,7 +138,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
         $this->assertArrayNotHasKey('platform', $platformsByKey);
         $platform = $platformsByKey['admin'];
 
-        $this->assertEquals('管理后台', $platform['label']);
+        $this->assertEquals('管理back台', $platform['label']);
         $this->assertArrayHasKey('children', $platform);
         $this->assertNotEmpty($platform['children']);
 
@@ -155,8 +155,8 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     }
 
     /**
-     * test私havemethodisValidCombination的行为
-     * passgenerateAllPermissions间接test.
+     * test私havemethodisValidCombination的line为
+     * passgenerateAllPermissionsbetween接test.
      */
     public function testIsValidCombinationThroughGenerateAllPermissions()
     {
@@ -169,7 +169,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     }
 
     /**
-     * test边界情况.
+     * testside界情况.
      */
     public function testEdgeCases()
     {
@@ -183,7 +183,7 @@ class DelightfulPermissionEnumTest extends HttpTestCase
     }
 
     /**
-     * test类implement了correct的interface.
+     * testcategoryimplement了correct的interface.
      */
     public function testImplementsInterface()
     {

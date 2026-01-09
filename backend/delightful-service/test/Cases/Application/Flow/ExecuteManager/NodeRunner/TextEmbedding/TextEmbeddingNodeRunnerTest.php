@@ -56,7 +56,7 @@ JSON, true));
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "required": [
             "embeddings"
@@ -68,7 +68,7 @@ JSON, true));
                 "type": "array",
                 "key": "embeddings",
                 "sort": 0,
-                "title": "to量",
+                "title": "toquantity",
                 "description": "",
                 "required": null,
                 "value": null,
@@ -76,7 +76,7 @@ JSON, true));
                     "type": "number",
                     "key": "0",
                     "sort": 0,
-                    "title": "to量",
+                    "title": "toquantity",
                     "description": "",
                     "required": null,
                     "value": null,

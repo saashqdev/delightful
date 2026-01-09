@@ -16,7 +16,7 @@ enum FragmentMode: int
     {
         return match ($this) {
             self::NORMAL => '通usemode',
-            self::PARENT_CHILD => '父子分段',
+            self::PARENT_CHILD => '父子minutesegment',
         };
     }
 }

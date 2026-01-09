@@ -48,7 +48,7 @@ class EasyInternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "items": null,
         "value": null,
@@ -59,8 +59,8 @@ class EasyInternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
             "questions": {
                 "type": "array",
                 "key": "questions",
-                "title": "userissue列表",
-                "description": "userissue列表",
+                "title": "userissuecolumn表",
+                "description": "userissuecolumn表",
                 "required": null,
                 "value": {
                     "type": "expression",
@@ -92,7 +92,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'questions' => ['明天北京的天气', '要穿什么衣服'],
+            'questions' => ['明day北京的day气', '要穿什么衣服'],
         ]);
         $runner->execute($vertexResult, $executionData, []);
 
@@ -163,14 +163,14 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
 # role
-互联网search助手
+互联网search助hand
 
 ## process
 call`easy_internet_search`conductsearch
 
 MARKDOWN,
 
-            'user_prompt' => '东莞下周天气',
+            'user_prompt' => '东莞downweekday气',
         ]);
         $runner->execute($vertexResult, $executionData);
 

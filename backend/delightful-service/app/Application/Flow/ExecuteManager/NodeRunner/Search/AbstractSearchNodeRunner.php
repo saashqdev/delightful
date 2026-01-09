@@ -22,19 +22,19 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
         $filterType = $paramsConfig->getFilterType();
         foreach ($paramsConfig->getFilters() as $filter) {
             $rightValue = $filter->getRightValue()->getValue()->getResult($executionData->getExpressionFieldData());
-            // null、''、0、[]、false  直接skip吧，谁not事搜这些啊。右侧not填value的notconductsearch
+            // null、''、0、[]、false  直接skip吧，谁not事搜这些啊。right侧not填value的notconductsearch
             if (empty($rightValue)) {
                 continue;
             }
 
-            // 定义本次的 range id，if是 null 代tablealso未conduct限制
+            // 定义本time的 range id，if是 null 代tablealso未conduct限制
             $rangeIds = null;
             if ($filterType->isAll()) {
-                // if是所have条件满足，那么已经存in的 id 集合then是本次的range
+                // if是所haveitemitem满足，那么已经存in的 id 集合then是本time的range
                 $rangeIds = $allIds;
             }
 
-            // ifrange id be定义成了空array，代table已经nothave符合条件的data了，直接跳出循环
+            // ifrange id be定义become了空array，代table已经nothave符合itemitem的data了，直接跳出循环
             if (is_array($rangeIds) && empty($rangeIds)) {
                 break;
             }
@@ -51,10 +51,10 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 continue;
             }
             if ($filterType->isAny()) {
-                // if是任意条件满足，那么将本次的 id 与已have的 id conductmerge
+                // if是任意itemitem满足，那么将本time的 id 与已have的 id conductmerge
                 $allIds = array_merge($allIds ?? [], $currentIds);
             } else {
-                // if是所have条件满足，那么将本次的 id 与已have的 id conduct交集
+                // if是所haveitemitem满足，那么将本time的 id 与已have的 id conduct交集
                 $allIds = $allIds === null ? $currentIds : array_intersect($allIds, $currentIds);
             }
         }

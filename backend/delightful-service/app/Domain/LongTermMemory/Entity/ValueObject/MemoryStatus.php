@@ -12,7 +12,7 @@ namespace App\Domain\LongTermMemory\Entity\ValueObject;
  */
 enum MemoryStatus: string
 {
-    case PENDING = 'pending';                   // 待接受（第一次generate记忆时）
+    case PENDING = 'pending';                   // 待接受（the一timegenerate记忆o clock）
     case ACTIVE = 'active';                     // in effect（记忆已be接受，pending_content为null）
     case PENDING_REVISION = 'pending_revision'; // 待修订（记忆已be接受，butpending_contentnot为null）
 

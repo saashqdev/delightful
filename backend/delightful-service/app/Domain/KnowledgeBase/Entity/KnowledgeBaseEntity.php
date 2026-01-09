@@ -81,17 +81,17 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     protected ?RetrieveConfig $retrieveConfig = null;
 
     /**
-     * 片段quantity.
+     * slicesegmentquantity.
      */
     protected int $fragmentCount = 0;
 
     /**
-     * expected的片段quantity.
+     * expected的slicesegmentquantity.
      */
     protected int $expectedCount = 0;
 
     /**
-     * 已complete的片段quantity.
+     * 已complete的slicesegmentquantity.
      */
     protected int $completedCount = 0;
 
@@ -204,7 +204,7 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     {
         $driver = VectorStoreDriver::tryFrom($this->vectorDB);
         if ($driver === null) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "to量database [{$this->vectorDB}] not存in");
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "toquantitydatabase [{$this->vectorDB}] not存in");
         }
         return $driver->get();
     }

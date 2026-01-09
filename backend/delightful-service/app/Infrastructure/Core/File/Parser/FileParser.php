@@ -32,10 +32,10 @@ class FileParser
     /**
      * parsefilecontent.
      *
-     * @param string $fileUrl fileURL地址
+     * @param string $fileUrl fileURLground址
      * @param bool $textPreprocess whetherconduct文本预process
-     * @return string parse后的filecontent
-     * @throws Exception whenfileparsefail时
+     * @return string parseback的filecontent
+     * @throws Exception whenfileparsefailo clock
      */
     public function parse(string $fileUrl, bool $textPreprocess = false): string
     {
@@ -46,7 +46,7 @@ class FileParser
             return $this->cache->get($cacheKey, '');
         }
         try {
-            // / 检测filesecurity性
+            // / 检测filesecurityproperty
             $safeUrl = SSRFUtil::getSafeUrl($fileUrl, replaceIp: false);
             $tempFile = tempnam(sys_get_temp_dir(), 'downloaded_');
 
@@ -72,7 +72,7 @@ class FileParser
             /** @var FileParserDriverInterface $driver */
             $driver = di($interface);
             $res = $driver->parse($tempFile, $fileUrl, $extension);
-            // if是csv、xlsx、xlsfile，needconduct额外process
+            // if是csv、xlsx、xlsfile，needconduct额outsideprocess
             if ($textPreprocess && in_array($extension, ['csv', 'xlsx', 'xls'])) {
                 $res = TextPreprocessUtil::preprocess([TextPreprocessRule::FORMAT_EXCEL], $res);
             }
@@ -92,19 +92,19 @@ class FileParser
     /**
      * downloadfiletotemporaryposition.
      *
-     * @param string $url fileURL地址
+     * @param string $url fileURLground址
      * @param string $tempFile temporaryfilepath
-     * @param int $maxSize filesize限制（字节），0table示not限制
-     * @throws Exception whendownloadfailorfile超限时
+     * @param int $maxSize filesize限制（字section），0table示not限制
+     * @throws Exception whendownloadfailorfile超限o clock
      */
     private static function downloadFile(string $url, string $tempFile, int $maxSize = 0): void
     {
-        // if是本地filepath，直接return
+        // if是本groundfilepath，直接return
         if (file_exists($url)) {
             return;
         }
 
-        // ifurl是本地fileagreement，convert为actualpath
+        // ifurl是本groundfileagreement，convert为actualpath
         if (str_starts_with($url, 'file://')) {
             $localPath = substr($url, 7);
             if (file_exists($localPath)) {
@@ -128,7 +128,7 @@ class FileParser
             ExceptionBuilder::throw(FlowErrorCode::Error, message: '无法openfilestream');
         }
 
-        // iffilesize未知，needindownload过程中控制size
+        // iffilesize未知，needindownload过程middle控制size
         if (! $sizeKnown && $maxSize > 0) {
             self::downloadWithSizeControl($fileStream, $localFile, $maxSize);
         } else {
@@ -144,9 +144,9 @@ class FileParser
      * streamdownload并控制filesize.
      *
      * @param resource $fileStream 远程filestream资源
-     * @param resource $localFile 本地filestream资源
-     * @param int $maxSize filesize限制（字节）
-     * @throws Exception whenfilesize超限orwritefail时
+     * @param resource $localFile 本groundfilestream资源
+     * @param int $maxSize filesize限制（字section）
+     * @throws Exception whenfilesize超限orwritefailo clock
      */
     private static function downloadWithSizeControl($fileStream, $localFile, int $maxSize): void
     {
@@ -177,17 +177,17 @@ class FileParser
     /**
      * checkfilesizewhether超限.
      *
-     * @param string $fileUrl fileURL地址
-     * @param int $maxSize filesize限制（字节），0table示not限制
-     * @return bool truetable示已checksizeandin限制内，falsetable示是chunked传输needstreamdownload
-     * @throws Exception whenfilesize超过限制orfilesize未知andnonchunked传输时
+     * @param string $fileUrl fileURLground址
+     * @param int $maxSize filesize限制（字section），0table示not限制
+     * @return bool truetable示已checksizeandin限制inside，falsetable示是chunked传输needstreamdownload
+     * @throws Exception whenfilesize超过限制orfilesize未知andnonchunked传输o clock
      */
     private static function checkUrlFileSize(string $fileUrl, int $maxSize = 0): bool
     {
         if ($maxSize <= 0) {
             return true;
         }
-        // download之前，检测filesize
+        // download之front，检测filesize
         $headers = get_headers($fileUrl, true);
         if (isset($headers['Content-Length'])) {
             $fileSize = (int) $headers['Content-Length'];

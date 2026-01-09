@@ -24,7 +24,7 @@ interface DelightfulChatTopicRepositoryInterface
     public function deleteTopic(DelightfulTopicEntity $delightfulTopicDTO): int;
 
     /**
-     * getconversation的conversation列表.
+     * getconversation的conversationcolumn表.
      * @param string[] $topicIds
      * @return array<DelightfulTopicEntity>
      */
@@ -51,7 +51,7 @@ interface DelightfulChatTopicRepositoryInterface
     public function getTopicMessagesByConversationId(string $conversationId): array;
 
     /**
-     * 按timerangegetconversation下some个话题的message.
+     * 按timerangegetconversationdownsome话题的message.
      * @return ClientSequenceResponse[]
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array;
@@ -66,7 +66,7 @@ interface DelightfulChatTopicRepositoryInterface
     /**
      * Get topics by topic ID.
      * @param string $topicId 话题ID
-     * @return DelightfulTopicEntity[] 话题实体array
+     * @return DelightfulTopicEntity[] 话题实bodyarray
      */
     public function getTopicsByTopicId(string $topicId): array;
 
@@ -74,8 +74,8 @@ interface DelightfulChatTopicRepositoryInterface
      * Get topic messages by conversation ID, topic ID and max seq ID.
      * @param string $conversationId conversationID
      * @param string $topicId 话题ID
-     * @param int $maxSeqId most大序列ID（contain该ID）
-     * @return DelightfulTopicMessageEntity[] 话题message实体array
+     * @param int $maxSeqId most大序columnID（contain该ID）
+     * @return DelightfulTopicMessageEntity[] 话题message实bodyarray
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array;
 }

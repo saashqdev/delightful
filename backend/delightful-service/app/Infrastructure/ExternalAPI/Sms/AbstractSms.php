@@ -22,7 +22,7 @@ abstract class AbstractSms implements SmsInterface
 
     public function getContent(SmsStruct $smsStruct): string
     {
-        // according to短信驱动确定对应的语种,并conduct语种兜底
+        // according to短信驱动确定对应的语type,并conduct语type兜bottom
         $language = $this->getContentLanguage($smsStruct);
         if (empty($smsStruct->variables)) {
             return $smsStruct->content ?: '';
@@ -48,8 +48,8 @@ abstract class AbstractSms implements SmsInterface
     }
 
     /**
-     *  对at $smsStruct , if language intemplate中not存in,thenuse default_language conduct检测
-     *  if default_language alsonothave对应的template,then按 type intemplate中匹配存in的语种,if存in多种,byzh_CN优先.
+     *  对at $smsStruct , if language intemplatemiddlenot存in,thenuse default_language conduct检测
+     *  if default_language alsonothave对应的template,then按 type intemplatemiddle匹配存in的语type,if存in多type,byzh_CN优先.
      */
     public function getContentLanguage(SmsStruct $smsStruct): string
     {
@@ -74,7 +74,7 @@ abstract class AbstractSms implements SmsInterface
     }
 
     /**
-     * according to语种要求和短信support的signaturelist,return对应的signature本文.
+     * according to语type要求和短信support的signaturelist,return对应的signature本文.
      */
     public function getSign(SmsStruct $smsStruct): string
     {
@@ -84,7 +84,7 @@ abstract class AbstractSms implements SmsInterface
 
     /**
      * 将variable的value与variable名associate,also原短信content.
-     * @param array $variables 短信的variable部分,可能是 valuearray,also可能是 key=>valuearray,need按$templateContent的content,统一also原成key=>valuearray
+     * @param array $variables 短信的variable部minute,可能是 valuearray,also可能是 key=>valuearray,need按$templateContent的content,统一also原becomekey=>valuearray
      */
     protected function translateContent(string $templateContent, array $variables): string
     {
@@ -93,7 +93,7 @@ abstract class AbstractSms implements SmsInterface
         }
         // conductvariable匹配短信匹配
         if (! empty($variables)) {
-            // compatible火山template的variable替换,先将 $message 中的variableparse出来 such as将[123456] parse为['VerificationCode'=>123456]后,againconducttemplatecontent替换
+            // compatible火山template的variable替换,先将 $message middle的variableparse出来 such as将[123456] parse为['VerificationCode'=>123456]back,againconducttemplatecontent替换
             $variables = $this->template->getTemplateVariables($templateContent, $variables);
             $i = 1;
             foreach ($variables as $k => $v) {

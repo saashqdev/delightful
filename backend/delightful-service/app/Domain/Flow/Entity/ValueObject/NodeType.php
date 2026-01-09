@@ -8,47 +8,47 @@ declare(strict_types=1);
 namespace App\Domain\Flow\Entity\ValueObject;
 
 /**
- * 节点type
- * 1 ~ 99 原子节点
- * 100 ~ 199 group合节点的硬encodingimplement.
+ * sectionpointtype
+ * 1 ~ 99 原子sectionpoint
+ * 100 ~ 199 group合sectionpoint的硬encodingimplement.
  */
 enum NodeType: int
 {
     /*
      * Start Node
-     * use作触发器。窗口open时、have新message时、schedule;parametercall（仅子process可use）
+     * use作触hair器。窗口openo clock、have新messageo clock、schedule;parametercall（仅子process可use）
      */
     case Start = 1;
 
     /*
-     * LLM Chat 这里是historyreason的group合节点
+     * LLM Chat 这within是historyreason的group合sectionpoint
      * 大语言model optionalmodel、prompt、temperature
      */
     case LLM = 2;
 
     /*
      * Reply Message
-     * replymessage节点
+     * replymessagesectionpoint
      */
     case ReplyMessage = 3;
 
     /*
      * If
-     * 条件判断节点
+     * itemitem判断sectionpoint
      */
     case If = 4;
 
     /*
      * Code
-     * codeexecute节点
+     * codeexecutesectionpoint
      */
     case Code = 5;
 
     /*
      * Vector
-     * 文本转to量
+     * 文本转toquantity
      * data匹配
-     * to量datastorage
+     * toquantitydatastorage
      */
     //    case Vector = 6;
 
@@ -61,7 +61,7 @@ enum NodeType: int
 
     /*
      * Loader
-     * dataload。来源：to量database、file、网络
+     * dataload。来源：toquantitydatabase、file、网络
      */
     case Loader = 8;
 
@@ -84,7 +84,7 @@ enum NodeType: int
 
     /*
      * End Node
-     * end节点
+     * endsectionpoint
      */
     case End = 12;
 
@@ -105,12 +105,12 @@ enum NodeType: int
     case TextEmbedding = 15;
 
     /*
-     * to量storage knowledge base片段
+     * toquantitystorage knowledge baseslicesegment
      */
     case KnowledgeFragmentStore = 16;
 
     /*
-     * 知识similar度
+     * 知识similardegree
      */
     case KnowledgeSimilarity = 17;
 
@@ -155,12 +155,12 @@ enum NodeType: int
     case LLMCall = 25;
 
     /**
-     * tool节点.
+     * toolsectionpoint.
      */
     case Tool = 26;
 
     /**
-     * knowledge base片段delete.
+     * knowledge baseslicesegmentdelete.
      */
     case KnowledgeFragmentRemove = 27;
 
@@ -175,12 +175,12 @@ enum NodeType: int
     case WaitMessage = 29;
 
     /**
-     * 循环节点.
+     * 循环sectionpoint.
      */
     case LoopMain = 30;
 
     /**
-     * 循环节点体.
+     * 循环sectionpointbody.
      */
     case LoopBody = 31;
 

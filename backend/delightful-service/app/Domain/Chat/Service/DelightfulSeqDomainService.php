@@ -48,7 +48,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
     public function pushSeq(string $seqId): void
     {
         $seqEntity = null;
-        // 查seq,faildelay后retry3次
+        // 查seq,faildelaybackretry3time
         retry(3, function () use ($seqId, &$seqEntity) {
             $seqEntity = $this->delightfulSeqRepository->getSeqByMessageId($seqId);
             if ($seqEntity === null) {
@@ -70,7 +70,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         }
 
         if ($seqEntity->getSeqType() instanceof ControlMessageType) {
-            // push控制message. 控制messagegeneralnothave messageEntity (chatmessage实体)
+            // push控制message. 控制messagegeneralnothave messageEntity (chatmessage实body)
             $this->pushControlSeq($seqEntity, $seqUserEntity);
         } else {
             $messageEntity = $this->delightfulMessageRepository->getMessageByDelightfulMessageId($seqEntity->getDelightfulMessageId());
@@ -78,7 +78,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 $this->logger->error('messagePush delightful_message_id:{delightful_message_id} message not found', ['delightful_message_id' => $seqEntity->getDelightfulMessageId()]);
                 return;
             }
-            // by下是chatmessagepush
+            // bydown是chatmessagepush
             $this->pushChatSeq($seqEntity, $seqUserEntity, $messageEntity);
         }
     }
@@ -95,16 +95,16 @@ class DelightfulSeqDomainService extends AbstractDomainService
         }
 
         if ($seqEntity->getObjectType() === ConversationType::Ai && ($seqEntity->getSeqType() instanceof ControlMessageType)) {
-            // if是给AI的need触发flowprocess的控制message，触发flowprocess
-            $agentUserEntity = $seqUserEntity; // 此时的 seqUserEntity 是 AI
+            // if是给AI的need触hairflowprocess的控制message，触hairflowprocess
+            $agentUserEntity = $seqUserEntity; // 此o clock的 seqUserEntity 是 AI
             $agentAccountEntity = $this->delightfulAccountRepository->getAccountInfoByDelightfulId($agentUserEntity->getDelightfulId());
             if ($agentAccountEntity === null) {
                 $this->logger->error('UserCallAgentEventError delightful_id:{delightful_id} ai not found', ['delightful_id' => $agentUserEntity->getDelightfulId()]);
                 return;
             }
-            $senderUserEntity = null; // （人类）send方的 user_entity
+            $senderUserEntity = null; // （人category）send方的 user_entity
             if ($seqEntity->getConversationId()) {
-                // 这里的conversation窗口是 ai自己的，那么对方是人类（also可能是另一个 ai，if存in ai 互撩的话）
+                // 这within的conversation窗口是 ai自己的，那么对方是人category（also可能是另一 ai，if存in ai 互撩的话）
                 $conversationEntity = $this->delightfulConversationRepository->getConversationById($seqEntity->getConversationId());
                 if ($conversationEntity === null) {
                     $this->logger->error('UserCallAgentEventError delightful_conversation_id:{delightful_conversation_id} conversation not found', ['delightful_conversation_id' => $seqEntity->getConversationId()]);
@@ -129,9 +129,9 @@ class DelightfulSeqDomainService extends AbstractDomainService
      */
     public function pushChatSeq(DelightfulSeqEntity $selfSeqEntity, DelightfulUserEntity $userEntity, DelightfulMessageEntity $messageEntity): void
     {
-        // if序列号归属at ai,and发件人是 ai,notneedpush
+        // if序columnnumber归属at ai,andhairitem人是 ai,notneedpush
         if ($selfSeqEntity->getObjectType() === ConversationType::Ai && $messageEntity->getSenderType() === ConversationType::Ai) {
-            $this->logger->error(sprintf('UserCallAgentEventError seq:%s 序列号归属at ai,and发件人是 ai,notneedpush', Json::encode($selfSeqEntity->toArray())));
+            $this->logger->error(sprintf('UserCallAgentEventError seq:%s 序columnnumber归属at ai,andhairitem人是 ai,notneedpush', Json::encode($selfSeqEntity->toArray())));
             return;
         }
         $receiveConversationType = $selfSeqEntity->getObjectType();
@@ -151,7 +151,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 }
                 $messageSenderDelightfulId = $this->delightfulUserRepository->getUserById($messageEntity->getSenderId())?->getDelightfulId();
                 if ($delightfulId === $messageSenderDelightfulId) {
-                    // ai 自己发的message,not能again触发processcall!
+                    // ai 自己hair的message,not能again触hairprocesscall!
                     $this->logger->error('UserCallAgentEventError delightful_id:{delightful_id} ai can not call flow', ['delightful_id' => $delightfulId]);
                     return;
                 }
@@ -159,7 +159,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                     # ai send已读回执
                     $this->aiSendReadStatusChangeReceipt($selfSeqEntity, $userEntity);
                     # call flow
-                    // todo can做 optimizeflowresponsesuccess率: syncetc待flowexecute,细致判断,对at本seq_id,上次flow的responsewhethertimeout,if是,直接丢弃,notagain发给flow
+                    // todo can做 optimizeflowresponsesuccessrate: syncetc待flowexecute,细致判断,对at本seq_id,uptimeflow的responsewhethertimeout,if是,直接丢弃,notagainhair给flow
                     $this->userCallFlow($aiAccountEntity, $userEntity, $senderUserEntity, $selfSeqEntity);
                 } catch (Throwable $throwable) {
                     $this->logger->error('UserCallAgentEventError', [
@@ -173,8 +173,8 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 }
                 break;
             case ConversationType::User:
-                // todo 一定要做! publishsubscribeuserabbitmqimplement,notagainuseredis的pub/sub. meanwhile,push后need客户端returnack,然后updateseq的status
-                // todo 一定要做! 只推seq_id,publishsubscribe收toseq_id后,again去database查seqdetail,again推给客户端
+                // todo 一定要做! publishsubscribeuserabbitmqimplement,notagainuseredis的pub/sub. meanwhile,pushbackneed客户端returnack,然backupdateseq的status
+                // todo 一定要做! 只推seq_id,publishsubscribe收toseq_idback,again去database查seqdetail,again推给客户端
                 $pushData = SeqAssembler::getClientSeqStruct($selfSeqEntity, $messageEntity)->toArray();
                 // not打印敏感info
                 $pushLogData = [
@@ -274,7 +274,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         $userAuth->setOrganizationCode($selfSeqEntity->getOrganizationCode());
         // message的type和content抽象出来
         $messageDTO = $this->getControlMessageDTO($userAuth, $selfSeqEntity);
-        // according tomessagetype,分发to对应的handle模块
+        // according tomessagetype,minutehairto对应的handle模piece
         $dataIsolation = new DataIsolation();
         $dataIsolation->setCurrentOrganizationCode($userAuth->getOrganizationCode());
         $dataIsolation->setCurrentUserId($userAuth->getId());
@@ -327,7 +327,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
     }
 
     /**
-     * 协程calldelightful flow,handleuser发来的message.
+     * 协程calldelightful flow,handleuserhair来的message.
      */
     private function userCallFlow(AccountEntity $agentAccountEntity, DelightfulUserEntity $agentUserEntity, DelightfulUserEntity $senderUserEntity, DelightfulSeqEntity $seqEntity): void
     {
@@ -337,7 +337,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         // getmessageEntity
         $messageEntity = $this->delightfulMessageRepository->getMessageByDelightfulMessageId($seqEntity->getDelightfulMessageId());
 
-        // onlychatmessage和已读回执才触发flow
+        // onlychatmessage和已读回执才触hairflow
         $messageType = $messageEntity?->getMessageType();
         if ($messageType instanceof ChatMessageType || $seqEntity->canTriggerFlow()) {
             // getuser的真名
@@ -348,7 +348,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
             $language = di(TranslatorInterface::class)->getLocale();
 
             $this->logger->info('userCallFlow language: ' . $language);
-            // callflow可能very耗时,not能让客户端一直etc待
+            // callflow可能very耗o clock,not能让客户端一直etc待
             Coroutine::create(function () use (
                 $agentAccountEntity,
                 $agentUserEntity,
@@ -364,7 +364,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 di(TranslatorInterface::class)->setLocale($language);
                 $this->logger->info('Coroutine  create userCallFlow language: ' . di(TranslatorInterface::class)->getLocale());
                 try {
-                    // 触发event
+                    // 触hairevent
                     event_dispatch(new UserCallAgentEvent(
                         $agentAccountEntity,
                         $agentUserEntity,
@@ -382,7 +382,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                         'code' => $throwable->getCode(),
                         'trace' => $throwable->getTraceAsString(),
                     ]);
-                    // 回一条国际化的报错message
+                    // 回一item国际化的报错message
                     event_dispatch(new UserCallAgentFailEvent($seqEntity));
                 }
             });

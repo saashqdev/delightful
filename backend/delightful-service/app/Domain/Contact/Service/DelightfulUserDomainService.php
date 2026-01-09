@@ -59,7 +59,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             // if是 ai ,直接同意
             $friendStatus = FriendStatus::Agree;
         } else {
-            // if是人类，check他们whether处at同一organization
+            // if是人category，check他们whether处at同一organization
             $this->assertUserInOrganization($friendId, $dataIsolation->getCurrentOrganizationCode());
         }
         // 将好友关系write friend 表.
@@ -78,7 +78,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * checkcurrentuserwhetherincurrentorganization内,并and账号是activatedstatus
+     * checkcurrentuserwhetherincurrentorganizationinside,并and账number是activatedstatus
      */
     public function assertUserInOrganization(string $userId, string $currentOrganizationCode): void
     {
@@ -89,7 +89,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * getuser所属的organization列表.
+     * getuser所属的organizationcolumn表.
      * @return string[]
      */
     public function getUserOrganizations(string $userId): array
@@ -98,7 +98,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * according to delightfulId getuser所属的organization列表.
+     * according to delightfulId getuser所属的organizationcolumn表.
      * @return string[]
      */
     public function getUserOrganizationsByDelightfulId(string $delightfulId): array
@@ -137,7 +137,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     {
         // check uid 和 friendId whether存in
         [$popular, $latest] = $this->userRepository->searchByKeyword($keyword);
-        // 按most受欢迎和most新加入each取前三
+        // 按most受欢迎和most新加入each取front三
         return $this->getAgents($popular, $latest);
     }
 
@@ -162,7 +162,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 批量according to aiCode（flowCode）+ organizationencodinggetassistant的 user_id.
+     * 批quantityaccording to aiCode（flowCode）+ organizationencodinggetassistant的 user_id.
      * @return array<string, string> return aiCode => userId 的mapping
      */
     public function getByAiCodes(DataIsolation $dataIsolation, array $aiCodes): array
@@ -171,7 +171,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return [];
         }
 
-        // 1. according to aiCodes 批量get account info
+        // 1. according to aiCodes 批quantityget account info
         $accounts = $this->accountRepository->getAccountInfoByAiCodes($aiCodes);
         if (empty($accounts)) {
             return [];
@@ -185,7 +185,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             $aiCodeToDelightfulIdMap[$account->getAiCode()] = $account->getDelightfulId();
         }
 
-        // 3. according to delightful_ids 批量getuserinfo
+        // 3. according to delightful_ids 批quantitygetuserinfo
         $users = $this->userRepository->getUserByDelightfulIds($delightfulIds);
         if (empty($users)) {
             return [];
@@ -222,7 +222,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * according touserID和userorganization列表queryuserdetail，according touserorganization决定filterstrategy.
+     * according touserID和userorganizationcolumn表queryuserdetail，according touserorganization决定filterstrategy.
      * @param array $userIds userIDarray
      * @param array $userOrganizations currentuser拥have的organizationencodingarray
      * @return array<UserDetailDTO>
@@ -260,7 +260,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
         // parseavataretcinfo
         $delightfulIds = array_column($users, 'delightful_id');
-        // from account 表拿手机号真名etcinfo
+        // from account 表拿hand机number真名etcinfo
         $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($delightfulIds);
         return UserAssembler::getUsersDetail($users, $accounts);
     }
@@ -282,7 +282,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 将 flowCodes settingto friendQueryDTO 中,并return flowCodewhether是该user的好友.
+     * 将 flowCodes settingto friendQueryDTO middle,并return flowCodewhether是该user的好友.
      * @return array<string, DelightfulFriendEntity>
      */
     public function getUserAgentFriendsList(FriendQueryDTO $friendQueryDTO, DataIsolation $dataIsolation): array
@@ -332,7 +332,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 麦吉user体系下的login校验.
+     * 麦吉userbody系down的login校验.
      * @return LoginResponseDTO[]
      */
     public function delightfulUserLoginCheck(string $authorization, DelightfulEnvironmentEntity $delightfulEnvironmentEntity, ?string $delightfulOrganizationCode = null): array
@@ -347,7 +347,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return $cachedResult;
         }
 
-        // 加lockhandle，防止并发request
+        // 加lockhandle，防止并hairrequest
         $owner = $this->acquireLock($lockKey);
 
         try {
@@ -401,7 +401,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         $users = $this->userRepository->getUserByIdsAndOrganizations($userIds);
         // parseavataretcinfo
         $delightfulIds = array_column($users, 'delightful_id');
-        // from account 表拿手机号真名etcinfo
+        // from account 表拿hand机number真名etcinfo
         $accounts = $this->accountRepository->getAccountInfoByDelightfulIds($delightfulIds);
         return UserAssembler::getUsersDetail($users, $accounts);
     }
@@ -417,7 +417,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * according touserIDgetuser手机号.
+     * according touserIDgetuserhand机number.
      */
     public function getUserPhoneByUserId(string $userId): ?string
     {
@@ -427,7 +427,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             return null;
         }
 
-        // pass delightful_id get账号info
+        // pass delightful_id get账numberinfo
         $account = $this->accountRepository->getAccountInfoByDelightfulId($user->getDelightfulId());
         if ($account === null) {
             return null;
@@ -530,7 +530,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * check两个userwhether是好友关系.
+     * check两userwhether是好友关系.
      */
     public function isFriend(string $userId, string $friendId): bool
     {
@@ -562,7 +562,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
 
     protected function getAgents(array $popular, array $latest): array
     {
-        // according todelightful_id,查账号detail
+        // according todelightful_id,查账numberdetail
         $delightfulIds[] = array_column($popular, 'delightful_id');
         $delightfulIds[] = array_column($latest, 'delightful_id');
         $delightfulIds = array_values(array_unique(array_merge(...$delightfulIds)));
@@ -626,7 +626,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         $loginCache = $this->redis->get($cacheKey);
         if (! empty($loginCache)) {
             $cachedData = Json::decode($loginCache);
-            // 将cache中的arrayconvert为DTOobject
+            // 将cachemiddle的arrayconvert为DTOobject
             return array_map(static function ($item) {
                 return new LoginResponseDTO($item);
             }, $cachedData);

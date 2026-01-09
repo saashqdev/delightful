@@ -20,7 +20,7 @@ enum UserSettingKey: string
     // project话题modelconfiguration
     case BeDelightfulProjectTopicModel = 'BeDelightfulProjectTopicModel';
 
-    // userwhen前organization
+    // userwhenfrontorganization
     case CurrentOrganization = 'CurrentOrganization';
 
     // all局configuration
@@ -29,7 +29,7 @@ enum UserSettingKey: string
     // 平台setting（平台information、Logo、Favicon、i18n etc）
     case PlatformSettings = 'PlatformSettings';
 
-    // 智能体sortconfiguration
+    // 智能bodysortconfiguration
     case BeDelightfulAgentSort = 'BeDelightfulAgentSort';
 
     public static function genBeDelightfulProjectMCPServers(string $projectId): string

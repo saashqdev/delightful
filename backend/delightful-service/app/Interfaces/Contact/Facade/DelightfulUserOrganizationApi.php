@@ -33,7 +33,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
      */
     public function getCurrentOrganizationCode(RequestInterface $request): array
     {
-        // fromrequest头get authorization
+        // fromrequestheadget authorization
         $authorization = (string) $request->header('authorization', '');
         if ($authorization === '') {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
@@ -50,7 +50,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
      */
     public function setCurrentOrganizationCode(RequestInterface $request): array
     {
-        // fromrequest头get authorization
+        // fromrequestheadget authorization
         $authorization = (string) $request->header('authorization', '');
         if ($authorization === '') {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
@@ -58,7 +58,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
 
         $delightfulId = $this->getDelightfulIdByAuthorization($authorization);
 
-        // fromrequest体getorganizationcode
+        // fromrequestbodygetorganizationcode
         $organizationCode = (string) $request->input('delightful_organization_code', '');
         if (empty($organizationCode)) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
@@ -69,7 +69,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
     }
 
     /**
-     * get账号下所have可切换的organizationlist。
+     * get账numberdown所have可切换的organizationlist。
      */
     public function listOrganizations(RequestInterface $request): array
     {
@@ -87,7 +87,7 @@ class DelightfulUserOrganizationApi extends AbstractApi
         if (empty($userDetails)) {
             ExceptionBuilder::throw(UserErrorCode::ACCOUNT_ERROR);
         }
-        // 同一账号下 delightful_id all局唯一，这里取first即可
+        // 同一账numberdown delightful_id all局唯一，这within取first即可
         return $userDetails[0]->getDelightfulId();
     }
 }

@@ -15,7 +15,7 @@ enum AdminGlobalSettingsType: int
     // 助理create管理
     case ASSISTANT_CREATE = 2;
 
-    // 第third-partypublish管控
+    // thethird-partypublish管控
     case THIRD_PARTY_PUBLISH = 3;
 
     // get助理all局settingtype

@@ -65,7 +65,7 @@ class FlowNodeCollector
                 self::$latestDefines[$define->getType()] = $define;
             }
         }
-        // type 是整数，按照from小to大排列一次。二级是version v0、v1，alsoneedfrom小to大排列
+        // type 是整数，按照from小to大rowcolumn一time。二level是version v0、v1，alsoneedfrom小to大rowcolumn
         ksort($list);
         foreach ($list as $type => $versions) {
             ksort($list[$type]);

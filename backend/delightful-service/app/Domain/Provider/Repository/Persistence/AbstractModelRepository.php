@@ -52,7 +52,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * according toconfigurationIDarraygetconfiguration实体list.
+     * according toconfigurationIDarraygetconfiguration实bodylist.
      * @return ProviderConfigEntity[]
      */
     public function getConfigsByIds(array $configIds): array
@@ -66,7 +66,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * according to多个service商configurationIDgetmodellist.
+     * according to多service商configurationIDgetmodellist.
      * @param array $configIds service商configurationIDarray
      * @return ProviderModelEntity[]
      */
@@ -83,7 +83,7 @@ abstract class AbstractModelRepository extends AbstractRepository
     }
 
     /**
-     * initialize实体的ID和time戳（为新create的实体set）.
+     * initialize实body的ID和time戳（为新create的实bodyset）.
      * @param mixed $entity
      */
     protected function initializeEntityForCreation($entity, array &$attributes): void
@@ -92,7 +92,7 @@ abstract class AbstractModelRepository extends AbstractRepository
         $nowString = $now->format('Y-m-d H:i:s');
         $id = IdGenerator::getSnowId();
 
-        // set实体property
+        // set实bodyproperty
         $entity->setId($id);
         $entity->setCreatedAt($now);
         $entity->setUpdatedAt($now);

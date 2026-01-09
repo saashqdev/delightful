@@ -200,7 +200,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
 
         $delightfulId = $userEntity->getDelightfulId();
 
-        // 第二次query：according to delightful_id query所have该账号indifferentorganization中的userrecord
+        // the二timequery：according to delightful_id query所have该账numberindifferentorganizationmiddle的userrecord
         $query = $this->userModel::query()
             ->select('organization_code')
             ->where('delightful_id', $delightfulId)
@@ -478,7 +478,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         return UserModel::query()->whereIn('user_id', $userIds)->pluck('delightful_id')->toArray();
     }
 
-    // 避免 redis cacheserialize的object,占usetoo多内存
+    // 避免 redis cacheserialize的object,占usetoo多inside存
     #[Cacheable(prefix: 'userEntity', value: '_#{id}', ttl: 60)]
     private function getUser(string $id): ?array
     {
@@ -488,7 +488,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
         return Db::select($query->toSql(), $query->getBindings())[0] ?? null;
     }
 
-    // 避免 redis cacheserialize的object,占usetoo多内存
+    // 避免 redis cacheserialize的object,占usetoo多inside存
     #[Cacheable(prefix: 'userAccount', ttl: 60)]
     private function getUserArrayByAccountAndOrganization(string $accountId, string $organizationCode): ?array
     {
@@ -499,7 +499,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     }
 
     /**
-     * 投递initializedefault助手sessioneventtoMQ.
+     * 投递initializedefault助handsessioneventtoMQ.
      */
     private function publishInitDefaultAssistantConversationEventForMQ(DelightfulUserEntity $userEntity): void
     {

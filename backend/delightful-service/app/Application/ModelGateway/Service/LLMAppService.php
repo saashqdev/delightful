@@ -617,13 +617,13 @@ class LLMAppService extends AbstractLLMAppService
         $size = $textGenerateImageDTO->getSize();
         [$width, $height] = explode('x', $size);
 
-        // 计算stringformat的比例，如 "1:1", "3:4"
+        // 计算stringformat的ratio例，如 "1:1", "3:4"
         $ratio = $this->calculateRatio((int) $width, (int) $height);
         $imageGenerateParamsVO->setRatio($ratio);
         $imageGenerateParamsVO->setWidth($width);
         $imageGenerateParamsVO->setHeight($height);
 
-        // fromservice商configurationarray中取firstconductprocess
+        // fromservice商configurationarraymiddle取firstconductprocess
         if (empty($serviceProviderConfigs)) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelNotFound);
         }
@@ -656,12 +656,12 @@ class LLMAppService extends AbstractLLMAppService
                 if (! empty($generateImageRaw)) {
                     $this->recordImageGenerateMessageLog($modelVersion, $creator, $organizationCode);
                     $n = $textGenerateImageDTO->getN();
-                    // except了 mj 是 1 次之外，其他all按张数算
+                    // except了 mj 是 1 time之outside，其他all按张数算
                     if (in_array($modelVersion, ImageGenerateModelType::getMidjourneyModes())) {
                         $n = 1;
                     }
 
-                    // 统一触发event
+                    // 统一触hairevent
                     $this->dispatchImageGeneratedEvent(
                         $creator,
                         $organizationCode,
@@ -718,7 +718,7 @@ class LLMAppService extends AbstractLLMAppService
 
         [$width, $height] = explode('x', $size);
 
-        // 计算stringformat的比例，如 "1:1", "3:4"
+        // 计算stringformat的ratio例，如 "1:1", "3:4"
         $imageGenerateRequest->setWidth($width);
         $imageGenerateRequest->setHeight($height);
 
@@ -731,7 +731,7 @@ class LLMAppService extends AbstractLLMAppService
                 $imageGenerateRequest->setModel($serviceProviderConfig->getModelVersion());
                 $generateImageRaw = $imageGenerateService->generateImageRawWithWatermark($imageGenerateRequest);
                 if (! empty($generateImageRaw)) {
-                    // 统一触发event（图生图default 1 张）
+                    // 统一触hairevent（图生图default 1 张）
                     $this->dispatchImageGeneratedEvent(
                         $creator,
                         $organizationCode,
@@ -1169,12 +1169,12 @@ class LLMAppService extends AbstractLLMAppService
 
             // 计算计费quantity
             $n = $proxyModelRequest->getN();
-            // except了 mj和 图生图 是 1 次之外，其他all按张数算
+            // except了 mj和 图生图 是 1 time之outside，其他all按张数算
             if (in_array($modelVersion, ImageGenerateModelType::getMidjourneyModes())) {
                 $n = 1;
             }
 
-            // 统一触发event
+            // 统一触hairevent
             $this->dispatchImageGeneratedEvent(
                 $creator,
                 $organizationCode,
@@ -1707,7 +1707,7 @@ class LLMAppService extends AbstractLLMAppService
     }
 
     /**
-     * 统一触发imagegenerateevent.
+     * 统一触hairimagegenerateevent.
      *
      * @param string $creator create者ID
      * @param string $organizationCode organizationencoding
@@ -1715,8 +1715,8 @@ class LLMAppService extends AbstractLLMAppService
      * @param int $imageCount imagequantity
      * @param string $providerModelId service商modelID
      * @param string $callTime calltime
-     * @param float $startTime starttime（微秒）
-     * @param null|AccessTokenEntity $accessTokenEntity accesstoken实体
+     * @param float $startTime starttime（微second）
+     * @param null|AccessTokenEntity $accessTokenEntity accesstoken实body
      */
     private function dispatchImageGeneratedEvent(
         string $creator,
@@ -1728,7 +1728,7 @@ class LLMAppService extends AbstractLLMAppService
         float $startTime,
         ?AccessTokenEntity $accessTokenEntity = null
     ): void {
-        // 计算responsetime（毫秒）
+        // 计算responsetime（毫second）
         $responseTime = (int) ((microtime(true) - $startTime) * 1000);
 
         // convert providerModelId 为整数

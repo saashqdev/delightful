@@ -30,12 +30,12 @@ class AiAbilityDomainService
     }
 
     /**
-     * according to能力codegetAI能力实体（useat运行时，not校验organization）.
+     * according to能力codegetAI能力实body（useat运lineo clock，not校验organization）.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param AiAbilityCode $code 能力code
-     * @return AiAbilityEntity AI能力实体
-     * @throws Exception when能力not存inor未enable时throwexception
+     * @return AiAbilityEntity AI能力实body
+     * @throws Exception when能力not存inor未enableo clockthrowexception
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): AiAbilityEntity
     {
@@ -52,7 +52,7 @@ class AiAbilityDomainService
      * get所haveAI能力list（无pagination）.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
-     * @return array<AiAbilityEntity> AI能力实体list
+     * @return array<AiAbilityEntity> AI能力实bodylist
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array
     {
@@ -66,7 +66,7 @@ class AiAbilityDomainService
      * paginationqueryAI能力list.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
-     * @param AiAbilityQuery $query query条件
+     * @param AiAbilityQuery $query queryitemitem
      * @param Page $page paginationinfo
      * @return array{total: int, list: array<AiAbilityEntity>}
      */
@@ -82,7 +82,7 @@ class AiAbilityDomainService
      * @param AiAbilityCode $code 能力code
      * @param array $data updatedata
      * @return bool whetherupdatesuccess
-     * @throws Exception when能力not存in时throwexception
+     * @throws Exception when能力not存ino clockthrowexception
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool
     {
@@ -112,7 +112,7 @@ class AiAbilityDomainService
         $count = 0;
 
         foreach ($abilities as $abilityConfig) {
-            // checkdatabase中whether已存in
+            // checkdatabasemiddlewhether已存in
             $code = AiAbilityCode::from($abilityConfig['code']);
             $existingEntity = $this->aiAbilityRepository->getByCode($dataIsolation, $code);
 

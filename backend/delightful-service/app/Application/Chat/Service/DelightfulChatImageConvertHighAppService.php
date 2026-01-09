@@ -100,9 +100,9 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 $reqDTO->getTopicId(),
                 $reqDTO->getReferMessageId(),
             );
-            // 计时start
+            // 计o clockstart
             $start = microtime(true);
-            // 轮询600次，until拿toimage
+            // round询600time，until拿toimage
             $count = 600;
             $response = null;
 
@@ -117,9 +117,9 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             if (! $response?->isFinishStatus() || empty($response?->getUrls())) {
                 ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR, 'image_generate.task_timeout');
             }
-            // 计时end，output秒级time
+            // 计o clockend，outputsecondleveltime
             $end = microtime(true);
-            $this->logger->info(sprintf('转高清end，耗时: %s秒。', $end - $start));
+            $this->logger->info(sprintf('转高清end，耗o clock: %ssecond。', $end - $start));
             // 将新旧image存入attachment
             $newFile = $this->upLoadFiles($requestContext, [$response->getUrls()[0]])[0] ?? [];
             $this->aiSendMessage(
@@ -137,7 +137,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
                 $reqDTO->getReferMessageId(),
             );
         } catch (Throwable $e) {
-            // 发生exception时，send终止message，并throwexception
+            // hair生exceptiono clock，send终止message，并throwexception
             $this->handleGlobalThrowable($reqDTO, $e);
         }
     }
@@ -230,7 +230,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             // 实例化annotationobject
             $errorMessageAttribute = $attributes[0]->newInstance();
 
-            // returnannotation中的 message property
+            // returnannotationmiddle的 message property
             return '[' . __($errorMessageAttribute->getMessage()) . ']';
         }
 

@@ -36,7 +36,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
 
     public function getCallback(): ?Closure
     {
-        // 可接受parameter指定任意 model，default是火山。
+        // 可接受parameterfinger定任意 model，default是火山。
         return function (ExecutionData $executionData) {
             $args = $executionData->getTriggerData()?->getParams();
             $model = $args['model'] ?? ImageGenerateModelType::Volcengine->value;
@@ -53,7 +53,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "rootsectionpoint",
     "description": "",
     "items": null,
     "value": null,
@@ -76,7 +76,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "radio": {
             "type": "string",
             "key": "radio",
-            "title": "generateimage的比例",
+            "title": "generateimage的ratio例",
             "description": "optional：\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",default\"1:1\"",
             "required": null,
             "value": null,
@@ -100,8 +100,8 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
         "reference_image_ids": {
             "type": "array",
             "key": "reference_image_ids",
-            "title": "quote的imageid列表",
-            "description": "quote的imageid列表",
+            "title": "quote的imageidcolumn表",
+            "description": "quote的imageidcolumn表",
             "required": null,
             "value": null,
             "encryption": false,
@@ -125,7 +125,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
             "type": "array",
             "key": "attachments",
             "title": "attachmentarray",
-            "description": "传入file列表array",
+            "description": "传入filecolumn表array",
             "required": null,
             "value": null,
             "encryption": false,
@@ -160,7 +160,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
                         "type": "string",
                         "key": "file_url",
                         "sort": 1,
-                        "title": "file地址",
+                        "title": "fileground址",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -173,7 +173,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
                         "type": "string",
                         "key": "file_ext",
                         "sort": 2,
-                        "title": "file后缀",
+                        "title": "fileback缀",
                         "description": "",
                         "required": null,
                         "value": null,

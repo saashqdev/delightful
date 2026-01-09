@@ -36,7 +36,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
 
     /**
      * @param array<int> $ids
-     * @return array<int, ProviderEntity> returnbyid为key的实体objectarray
+     * @return array<int, ProviderEntity> returnbyid为key的实bodyobjectarray
      */
     public function getByIds(array $ids): array
     {
@@ -47,7 +47,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
             return [];
         }
 
-        // 仅pull指定 ID，避免alltable扫描
+        // 仅pullfinger定 ID，避免alltable扫描
         $builder->whereIn('id', $ids);
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
@@ -151,9 +151,9 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     }
 
     /**
-     * get指定类别的non官方service商 (Legacy).
+     * getfinger定category别的non官方service商 (Legacy).
      *
-     * @param Category $category service商类别
+     * @param Category $category service商category别
      * @return ProviderEntity[] non官方service商list
      */
     public function getNonOfficialByCategory(Category $category): array
@@ -173,7 +173,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
     {
         $builder = $this->createProviderQuery();
         $builder->where('category', $category->value);
-        // not排except任何service商，include Official，因为templateneed所haveservice商
+        // notrowexcept任何service商，include Official，因为templateneed所haveservice商
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
         return ProviderAssembler::toEntities($result);
@@ -215,7 +215,7 @@ class ProviderRepository extends AbstractModelRepository implements ProviderRepo
             return [];
         }
 
-        // 仅pull指定 ID，避免alltable扫描
+        // 仅pullfinger定 ID，避免alltable扫描
         $builder->whereIn('id', $ids);
 
         $result = Db::select($builder->toSql(), $builder->getBindings());

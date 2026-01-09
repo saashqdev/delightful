@@ -32,7 +32,7 @@ class MiracleVisionModel extends AbstractImageGenerate
 
     private const STATUS_NOT_FOUND = -1;
 
-    // comment掉is目前usenotto
+    // comment掉is目frontusenotto
     //    private const STYLE_PORTRAIT = 25;
     private const STYLE_GENERAL = 26;
     //    private const STYLE_LANDSCAPE = 28;
@@ -68,7 +68,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             $this->validateApiResponse($styles);
 
             $styleId = $this->determineStyleId($styles);
-            $this->logger->info('美图超清convert：已选择convert样式', ['style_id' => $styleId]);
+            $this->logger->info('美图超清convert：已选择convert样type', ['style_id' => $styleId]);
 
             $result = $this->api->submitTask($imageGenerateRequest->getUrl(), $styleId);
             $this->validateApiResponse($result);
@@ -129,7 +129,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             $this->validateApiResponse($result);
             return $result;
         } catch (Exception $e) {
-            $this->logger->error('美图超清convert：get样式listexception', [
+            $this->logger->error('美图超清convert：get样typelistexception', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -185,7 +185,7 @@ class MiracleVisionModel extends AbstractImageGenerate
             case self::STATUS_PROCESSING:
                 $response->setFinishStatus(false);
                 $response->setProgress($result['data']['progress']);
-                $this->logger->info('美图超清convert：taskprocessconduct中', [
+                $this->logger->info('美图超清convert：taskprocessconductmiddle', [
                     'progress' => $result['data']['progress'],
                 ]);
                 // no break
@@ -263,7 +263,7 @@ class MiracleVisionModel extends AbstractImageGenerate
         $this->logger->info('美图API：responsedataverifypass');
     }
 
-    // todo xhy 目前只能forcereturn 26 ，因为无法对image场景做匹配
+    // todo xhy 目front只能forcereturn 26 ，因为无法对image场景做匹配
     private function determineStyleId(array $styles): int
     {
         if (empty($styles['data']['style_list'])) {

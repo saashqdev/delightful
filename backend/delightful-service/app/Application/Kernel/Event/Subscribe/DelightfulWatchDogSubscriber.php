@@ -39,7 +39,7 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
         if ((bool) env('ENABLE_DELIGHTFUL_WATCHDOG', true) !== true) {
             return;
         }
-        $quantum = 10 * 1000 * 1000; // unit：毫秒
+        $quantum = 10 * 1000 * 1000; // unit：毫second
         $logger = ApplicationContext::getContainer()->get(LoggerFactory::class)?->get('DelightfulWatchDogSubscriber');
         // 看门狗找同阻塞的place
         $logger->info('麦吉看门狗，start！');
@@ -48,18 +48,18 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
             $coroutine = Coroutine::getCurrent();
             $alertCount = ($alertCountMap[$coroutine] ??= 0) + 1;
             $alertCountMap[$coroutine] = $alertCount;
-            // when单个协程运行超过 $millSeconds 时，will触发看门狗，打印协程call栈
+            // when单协程运line超过 $millSeconds o clock，will触hair看门狗，打印协程call栈
             if ($alertCount > 1) {
                 $trace = str_replace(["\n", "\r"], ' | ', $coroutine->getTraceAsString());
                 $logger->error(sprintf(
-                    '麦吉看门狗 发现阻塞 协程 id:%s，同个协程阻塞count：%s trace :%s ',
+                    '麦吉看门狗 hair现阻塞 协程 id:%s，同协程阻塞count：%s trace :%s ',
                     $coroutine->getId(),
                     $alertCount,
                     $trace
                 ));
             }
-            // 让出time片，让其他协程have机willexecute
-            $millSeconds = 10 * 1000; // 10 毫秒
+            // 让出timeslice，让其他协程have机willexecute
+            $millSeconds = 10 * 1000; // 10 毫second
             usleep($millSeconds * $alertCount);
         });
     }

@@ -15,7 +15,7 @@ enum StreamMessageStatus: int
     case Start = 0;
 
     /**
-     * conduct中.
+     * conductmiddle.
      */
     case Processing = 1;
 

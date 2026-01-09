@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->bigIncrements('id');
             $table->unsignedInteger('type')->comment('type');
             $table->unsignedTinyInteger('status')->default(0)->comment('status');
-            $table->json('extra')->nullable()->comment('额外configuration');
+            $table->json('extra')->nullable()->comment('额outsideconfiguration');
             $table->string('organization')->comment('organizationencoding');
             $table->unique(['type', 'organization'], 'unique_type_organization');
             $table->datetimes();

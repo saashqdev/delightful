@@ -93,7 +93,7 @@ class ImageGenerateNodeParamsConfig extends NodeParamsConfig
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "items": null,
         "value": null,

@@ -19,11 +19,11 @@ use App\Infrastructure\Core\ValueObject\Page;
 interface AiAbilityRepositoryInterface
 {
     /**
-     * according to能力codegetAI能力实体.
+     * according to能力codegetAI能力实body.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param AiAbilityCode $code 能力code
-     * @return null|AiAbilityEntity AI能力实体
+     * @return null|AiAbilityEntity AI能力实body
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity;
 
@@ -31,37 +31,37 @@ interface AiAbilityRepositoryInterface
      * get所haveAI能力list.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
-     * @return array<AiAbilityEntity> AI能力实体list
+     * @return array<AiAbilityEntity> AI能力实bodylist
      */
     public function getAll(ProviderDataIsolation $dataIsolation): array;
 
     /**
-     * according toIDgetAI能力实体.
+     * according toIDgetAI能力实body.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param int $id 能力ID
-     * @return null|AiAbilityEntity AI能力实体
+     * @return null|AiAbilityEntity AI能力实body
      */
     public function getById(ProviderDataIsolation $dataIsolation, int $id): ?AiAbilityEntity;
 
     /**
-     * saveAI能力实体.
+     * saveAI能力实body.
      *
-     * @param AiAbilityEntity $entity AI能力实体
+     * @param AiAbilityEntity $entity AI能力实body
      * @return bool whethersavesuccess
      */
     public function save(AiAbilityEntity $entity): bool;
 
     /**
-     * updateAI能力实体.
+     * updateAI能力实body.
      *
-     * @param AiAbilityEntity $entity AI能力实体
+     * @param AiAbilityEntity $entity AI能力实body
      * @return bool whetherupdatesuccess
      */
     public function update(AiAbilityEntity $entity): bool;
 
     /**
-     * according tocodeupdate（support选择性update）.
+     * according tocodeupdate（support选择propertyupdate）.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
      * @param AiAbilityCode $code 能力code
@@ -74,7 +74,7 @@ interface AiAbilityRepositoryInterface
      * paginationqueryAI能力list.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离info
-     * @param AiAbilityQuery $query query条件
+     * @param AiAbilityQuery $query queryitemitem
      * @param Page $page paginationinfo
      * @return array{total: int, list: array<AiAbilityEntity>}
      */

@@ -92,13 +92,13 @@ class AiAbilityAppService extends AbstractKernelAppService
             ExceptionBuilder::throw(ServiceProviderErrorCode::AI_ABILITY_NOT_FOUND);
         }
 
-        // buildupdatedata（support选择性update）
+        // buildupdatedata（support选择propertyupdate）
         $updateData = [];
         if ($request->hasStatus()) {
             $updateData['status'] = $request->getStatus();
         }
         if ($request->hasConfig()) {
-            // getcurrentdatabase中的configuration
+            // getcurrentdatabasemiddle的configuration
             $entity = $this->aiAbilityDomainService->getByCode($dataIsolation, $code);
             $dbConfig = $entity->getConfig();
 
@@ -133,18 +133,18 @@ class AiAbilityAppService extends AbstractKernelAppService
      * 智能mergeconfiguration（保留be脱敏的api_keyoriginalvalue）.
      *
      * @param array $dbConfig databaseoriginalconfiguration
-     * @param array $frontendConfig 前端传来的configuration（可能contain脱敏的api_key）
-     * @return array merge后的configuration
+     * @param array $frontendConfig front端传来的configuration（可能contain脱敏的api_key）
+     * @return array mergeback的configuration
      */
     private function mergeConfigPreservingApiKeys(array $dbConfig, array $frontendConfig): array
     {
         $result = [];
 
-        // 遍历前端configuration的所havefield
+        // 遍历front端configuration的所havefield
         foreach ($frontendConfig as $key => $value) {
             // if是 api_key fieldandcontain脱敏mark ***
             if ($key === 'api_key' && is_string($value) && str_contains($value, '*')) {
-                // usedatabase中的originalvalue
+                // usedatabasemiddle的originalvalue
                 $result[$key] = $dbConfig[$key] ?? $value;
             }
             // if是array，递归process
@@ -154,13 +154,13 @@ class AiAbilityAppService extends AbstractKernelAppService
                     ? $this->mergeConfigPreservingApiKeys($dbValue, $value)
                     : $value;
             }
-            // 其他情况直接use前端的value
+            // 其他情况直接usefront端的value
             else {
                 $result[$key] = $value;
             }
         }
 
-        // 前端未传的field, thendatabase中field为defaultvalue ''
+        // front端未传的field, thendatabasemiddlefield为defaultvalue ''
         foreach ($dbConfig as $key => $value) {
             if (! array_key_exists($key, $result)) {
                 $result[$key] = '';

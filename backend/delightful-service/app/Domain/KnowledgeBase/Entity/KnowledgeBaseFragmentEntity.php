@@ -19,7 +19,7 @@ use Hyperf\Stringable\Str;
 use function mb_strlen;
 
 /**
- * to量knowledge base文本片段.
+ * toquantityknowledge base文本slicesegment.
  */
 class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
 {
@@ -32,7 +32,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
     protected string $documentCode = '';
 
     /**
-     * 片段content.
+     * slicesegmentcontent.
      */
     protected string $content;
 
@@ -368,7 +368,7 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
         return $this->wordCount;
     }
 
-    // 这里notusesetting，直接according tocontent计算出来then行
+    // 这withinnotusesetting，直接according tocontent计算出来thenline
     public function setWordCount(int $wordCount): KnowledgeBaseFragmentEntity
     {
         $this->wordCount = $wordCount;
@@ -423,13 +423,13 @@ class KnowledgeBaseFragmentEntity extends AbstractKnowledgeBaseEntity
     {
         foreach ($this->metadata as $key => $value) {
             if (Str::startsWith($key, self::PAYLOAD_PREFIX)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data key cannotby ' . self::PAYLOAD_PREFIX . ' 开头');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'yuandata key cannotby ' . self::PAYLOAD_PREFIX . ' 开head');
             }
             if (! is_string($key)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data 的 key must是string');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'yuandata 的 key must是string');
             }
             if (! is_string($value) && ! is_numeric($value)) {
-                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, '元data 的 value 只能是 stringornumber');
+                ExceptionBuilder::throw(FlowErrorCode::KnowledgeValidateFailed, 'yuandata 的 value 只能是 stringornumber');
             }
         }
         return $this;

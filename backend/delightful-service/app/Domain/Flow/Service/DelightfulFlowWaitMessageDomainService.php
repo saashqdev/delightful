@@ -28,7 +28,7 @@ class DelightfulFlowWaitMessageDomainService extends AbstractDomainService
             $waitMessageEntity = clone $savingWaitMessageEntity;
             $waitMessageEntity->prepareForCreation();
         } else {
-            // 暂时只supportcreate
+            // 暂o clock只supportcreate
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'unsupported update');
         }
 

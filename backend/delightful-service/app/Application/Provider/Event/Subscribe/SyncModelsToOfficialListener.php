@@ -20,7 +20,7 @@ use Throwable;
 
 /**
  * 同modeltoOfficialservice商listen器.
- * listenservice商configurationcreate/updateevent，from外部APIpullmodel并同toOfficialservice商.
+ * listenservice商configurationcreate/updateevent，fromoutside部APIpullmodel并同toOfficialservice商.
  */
 #[AsyncListener]
 #[Listener]
@@ -53,7 +53,7 @@ class SyncModelsToOfficialListener implements ListenerInterface
                 default => null,
             };
         } catch (Throwable $e) {
-            $this->logger->error('from外部API同modelfailed', [
+            $this->logger->error('fromoutside部API同modelfailed', [
                 'event' => get_class($event),
                 'error' => $e->getMessage(),
                 'file' => $e->getFile(),
@@ -65,7 +65,7 @@ class SyncModelsToOfficialListener implements ListenerInterface
 
     /**
      * processservice商configurationcreateorupdateevent.
-     * if是Officialservice商and是官方organization，thenfrom外部APIpullmodel并同.
+     * if是Officialservice商and是官方organization，thenfromoutside部APIpullmodel并同.
      */
     private function handleProviderConfig(
         ProviderConfigCreatedEvent|ProviderConfigUpdatedEvent $event,

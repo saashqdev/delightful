@@ -12,7 +12,7 @@ use App\Domain\Contact\Entity\ValueObject\PlatformType;
 interface OrganizationsPlatformRepositoryInterface
 {
     /**
-     * getorganization所属的(第third-party)平台.
+     * getorganization所属的(thethird-party)平台.
      * 麦吉supportfrom其他平台同organization架构, 所byneed知道organization所属的平台.
      */
     public function getOrganizationPlatformType(string $delightfulOrganizationCode): PlatformType;

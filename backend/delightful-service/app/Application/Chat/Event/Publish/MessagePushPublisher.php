@@ -14,7 +14,7 @@ use Hyperf\Amqp\Annotation\Producer;
 use Hyperf\Amqp\Message\ProducerMessage;
 
 /**
- * messagepush模块.
+ * messagepush模piece.
  * 直接pushseq给客户端.
  */
 #[Producer]

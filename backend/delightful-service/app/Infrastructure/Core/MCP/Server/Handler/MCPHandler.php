@@ -48,7 +48,7 @@ class MCPHandler implements MCPHandlerInterface
         $this->exceptionHandler = $this->container->get(MCPExceptionHandler::class);
         $this->methodHandlerFactory = new MethodHandlerFactory($this->container);
 
-        // initializedefaultgroup件
+        // initializedefaultgroupitem
         $this->authentication = new NoAuthentication();
         $this->rateLimiter = new NoRateLimiter();
         $this->toolManager = new MCPToolManager();
@@ -74,7 +74,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * get速率限制器实例.
+     * getspeedrate限制器实例.
      */
     public function getRateLimiter(): RateLimiterInterface
     {
@@ -82,7 +82,7 @@ class MCPHandler implements MCPHandlerInterface
     }
 
     /**
-     * set速率限制器实例.
+     * setspeedrate限制器实例.
      */
     public function setRateLimiter(RateLimiterInterface $rateLimiter): self
     {
@@ -157,7 +157,7 @@ class MCPHandler implements MCPHandlerInterface
 
             $result = null;
             if ($handler) {
-                // 为process器set所需的managergroup件
+                // 为process器set所需的managergroupitem
                 $handler->setToolManager($this->toolManager)
                     ->setResourceManager($this->resourceManager)
                     ->setPromptManager($this->promptManager);
@@ -183,7 +183,7 @@ class MCPHandler implements MCPHandlerInterface
     {
         $params = $request->getParams() ?? [];
 
-        // 尝试fromauthinfo中get
+        // 尝试fromauthinfomiddleget
         if (isset($params['auth'], $params['auth']['client_id'])) {
             return $params['auth']['client_id'];
         }

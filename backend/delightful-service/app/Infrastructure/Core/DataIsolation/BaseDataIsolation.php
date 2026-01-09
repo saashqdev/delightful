@@ -12,26 +12,26 @@ use App\Infrastructure\Util\Context\CoContext;
 class BaseDataIsolation implements DataIsolationInterface
 {
     /**
-     * when前的organizationencoding.
+     * whenfront的organizationencoding.
      */
     private string $currentOrganizationCode;
 
     /**
-     * when前的userid.
+     * whenfront的userid.
      */
     private string $currentUserId;
 
     private string $delightfulId;
 
     /**
-     * when前环境 app_env().
+     * whenfront环境 app_env().
      */
     private string $environment;
 
     private bool $enabled = true;
 
     /**
-     * 多organization下的环境 ID.
+     * 多organizationdown的环境 ID.
      */
     private int $envId = 0;
 
@@ -70,7 +70,7 @@ class BaseDataIsolation implements DataIsolationInterface
         $this->subscriptionManager = \Hyperf\Support\make(SubscriptionManagerInterface::class);
 
         if (config('office_organization')) {
-            // 目前only 1 个官方organization
+            // 目frontonly 1 官方organization
             $this->officialOrganizationCodes = [config('office_organization')];
         }
     }

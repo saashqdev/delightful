@@ -33,7 +33,7 @@ use Psr\Log\LoggerInterface;
 use function Hyperf\Translation\trans;
 
 /**
- * 长期记忆后台管理 API.
+ * 长期记忆back台管理 API.
  */
 #[ApiResponse('low_code')]
 class LongTermMemoryAdminApi extends AbstractApi
@@ -71,7 +71,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         $validatedParams = $this->checkParams($params, $rules);
 
-        // 手动checkcontentlength
+        // hand动checkcontentlength
         $contentLength = mb_strlen($validatedParams['content']);
         if ($contentLength > 5000) {
             ExceptionBuilder::throw(
@@ -246,7 +246,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             'status' => $status,
             'enabled' => $enabled,
             'pageToken' => $validatedParams['page_token'] ?? null,
-            'limit' => (int) $pageSize, // 传递originalpagesize，让applicationservice层processpagination逻辑
+            'limit' => (int) $pageSize, // 传递originalpagesize，让applicationservicelayerprocesspagination逻辑
         ]);
         // parse pageToken
         $dto->parsePageToken();
@@ -302,7 +302,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     {
         $authorization = $this->getAuthorization();
 
-        // 批量verify记忆whether属atcurrentuser
+        // 批quantityverify记忆whether属atcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             [$memoryId],
             $authorization->getOrganizationCode(),
@@ -327,7 +327,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 批量强化记忆.
+     * 批quantity强化记忆.
      */
     public function reinforceMemories(RequestInterface $request): array
     {
@@ -340,7 +340,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $validatedParams = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
 
-        // 批量verify所have记忆all属atcurrentuser
+        // 批quantityverify所have记忆all属atcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             $validatedParams['memory_ids'],
             $authorization->getOrganizationCode(),
@@ -365,7 +365,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 批量process记忆suggestion（接受/拒绝）.
+     * 批quantityprocess记忆suggestion（接受/拒绝）.
      */
     public function batchProcessMemorySuggestions(RequestInterface $request): array
     {
@@ -381,7 +381,7 @@ class LongTermMemoryAdminApi extends AbstractApi
         $validatedParams = $this->checkParams($params, $rules);
         $authorization = $this->getAuthorization();
 
-        // 批量verify所have记忆all属atcurrentuser
+        // 批quantityverify所have记忆all属atcurrentuser
         $allMemoriesBelongToUser = $this->longTermMemoryAppService->areMemoriesBelongToUser(
             $validatedParams['memory_ids'],
             $authorization->getOrganizationCode(),
@@ -399,10 +399,10 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         $action = $validatedParams['action'];
         $memoryIds = $validatedParams['memory_ids'];
-        $scenarioString = $validatedParams['scenario'] ?? 'admin_panel'; // default为管理后台
+        $scenarioString = $validatedParams['scenario'] ?? 'admin_panel'; // default为管理back台
         $scenario = MemoryOperationScenario::from($scenarioString);
 
-        // verifywhen scenario 是 memory_card_quick 时，delightful_message_id must提供
+        // verifywhen scenario 是 memory_card_quick o clock，delightful_message_id must提供
         if ($scenarioString === 'memory_card_quick' && empty($validatedParams['delightful_message_id'])) {
             return [
                 'success' => false,
@@ -412,7 +412,7 @@ class LongTermMemoryAdminApi extends AbstractApi
 
         try {
             if ($action === 'accept') {
-                // 批量接受记忆suggestion：status 改为 accept，enabled 为 true
+                // 批quantity接受记忆suggestion：status 改为 accept，enabled 为 true
                 $this->longTermMemoryAppService->batchProcessMemorySuggestions($memoryIds, MemoryOperationAction::ACCEPT, $scenario, $validatedParams['delightful_message_id'] ?? null);
 
                 return [
@@ -453,7 +453,7 @@ class LongTermMemoryAdminApi extends AbstractApi
     }
 
     /**
-     * 批量update记忆enablestatus.
+     * 批quantityupdate记忆enablestatus.
      */
     public function batchUpdateMemoryStatus(RequestInterface $request): array
     {
@@ -599,7 +599,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             );
         }
 
-        // 手动checkcontentlength
+        // hand动checkcontentlength
         if (isset($validatedParams['content'])) {
             $contentLength = mb_strlen($validatedParams['content']);
             if ($contentLength > 5000) {
@@ -610,7 +610,7 @@ class LongTermMemoryAdminApi extends AbstractApi
             }
         }
 
-        // 手动check pending_content length
+        // hand动check pending_content length
         if (isset($validatedParams['pending_content'])) {
             $contentLength = mb_strlen($validatedParams['pending_content']);
             if ($contentLength > 5000) {
@@ -652,7 +652,7 @@ class LongTermMemoryAdminApi extends AbstractApi
      */
     private function buildUpdateMemoryDTO(?string $inputContent, ?string $inputPendingContent = null): UpdateMemoryDTO
     {
-        // buildDTO（lengthcheck已inparameterverify阶段complete，andat leasthave一个fieldnot为空）
+        // buildDTO（lengthcheck已inparameterverify阶segmentcomplete，andat leasthave一fieldnot为空）
         $status = null;
         $explanation = null;
 

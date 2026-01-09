@@ -47,13 +47,13 @@ class ProviderAppService
         // 收集所have唯一的service商configurationID
         $configIds = array_unique(array_map(fn ($model) => $model->getServiceProviderConfigId(), $models));
 
-        // 批量getservice商实体（避免嵌套query）
+        // 批quantitygetservice商实body（避免嵌setquery）
         $providerEntities = $this->providerConfigDomainService->getProviderEntitiesByConfigIds($dataIsolation, $configIds);
 
-        // 批量getservice商configuration实体（useatget别名）
+        // 批quantitygetservice商configuration实body（useatget别名）
         $configEntities = $this->providerConfigDomainService->getConfigByIdsWithoutOrganizationFilter($configIds);
 
-        // 收集所have图标path按organizationencoding分group（includemodel图标和service商图标）
+        // 收集所have图标path按organizationencodingminutegroup（includemodel图标和service商图标）
         $iconsByOrg = [];
         $iconToModelMap = [];
         $iconToProviderMap = [];
@@ -94,7 +94,7 @@ class ProviderAppService
             $iconToProviderMap[$providerIcon][] = $configId;
         }
 
-        // 批量get图标URL
+        // 批quantityget图标URL
         $iconUrlMap = [];
         foreach ($iconsByOrg as $iconOrganizationCode => $icons) {
             $links = $this->fileDomainService->getLinks($iconOrganizationCode, array_unique($icons));

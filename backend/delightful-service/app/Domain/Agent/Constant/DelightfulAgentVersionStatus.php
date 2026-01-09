@@ -11,7 +11,7 @@ enum DelightfulAgentVersionStatus: int
 {
     // approvalstreamstatus
     case APPROVAL_PENDING = 1; // 待approval
-    case APPROVAL_IN_PROGRESS = 2; // approval中
+    case APPROVAL_IN_PROGRESS = 2; // approvalmiddle
     case APPROVAL_PASSED = 3; // approvalpass
     case APPROVAL_REJECTED = 4; // 已驳回
 
@@ -22,7 +22,7 @@ enum DelightfulAgentVersionStatus: int
     case ENTERPRISE_DISABLED = 8; // disable
 
     // AI Agentpublish (平台)
-    case APP_MARKET_UNLISTED = 9; // 未上架
-    case APP_MARKET_REVIEW = 10; // 审核中
-    case APP_MARKET_LISTED = 11; // 已上架
+    case APP_MARKET_UNLISTED = 9; // 未up架
+    case APP_MARKET_REVIEW = 10; // 审核middle
+    case APP_MARKET_LISTED = 11; // 已up架
 }

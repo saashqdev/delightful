@@ -10,26 +10,26 @@ namespace App\Application\Speech\Enum;
 /**
  * 沙箱 ASR taskstatus枚举.
  *
- * 【作use域】外部系统 - 沙箱audiomergeservice
- * 【use途】table示沙箱中audiomergetask的executestatus
+ * 【作use域】outside部系统 - 沙箱audiomergeservice
+ * 【use途】table示沙箱middleaudiomergetask的executestatus
  * 【use场景】
- * - call沙箱 finishTask interface的轮询status判断
- * - 判断audio分片mergewhethercomplete
+ * - call沙箱 finishTask interface的round询status判断
+ * - 判断audiominuteslicemergewhethercomplete
  *
  * 【与其他枚举的区别】
- * - AsrRecordingStatusEnum: 前端录音实时status（录音交互层）
- * - AsrTaskStatusEnum: 内部taskallprocessstatus（业务管理层）
- * - SandboxAsrStatusEnum: 沙箱mergetaskstatus（基础设施层）✓ current
+ * - AsrRecordingStatusEnum: front端录音实o clockstatus（录音交互layer）
+ * - AsrTaskStatusEnum: inside部taskallprocessstatus（业务管理layer）
+ * - SandboxAsrStatusEnum: 沙箱mergetaskstatus（基础设施layer）✓ current
  *
  * 【statusstream转】waiting → running → finalizing → completed/finished | error
  */
 enum SandboxAsrStatusEnum: string
 {
-    case WAITING = 'waiting';           // etc待中：task已submit，etc待沙箱process
-    case RUNNING = 'running';           // 运行中：沙箱正inprocessaudio分片
+    case WAITING = 'waiting';           // etc待middle：task已submit，etc待沙箱process
+    case RUNNING = 'running';           // 运linemiddle：沙箱正inprocessaudiominuteslice
     case FINALIZING = 'finalizing';     // 正inexecutefinalmerge：沙箱正inmergeaudio并process笔记file
     case COMPLETED = 'completed';       // taskcomplete（V2 新format）：audiomerge和fileprocessall部complete
-    case FINISHED = 'finished';         // taskcomplete（to后compatible旧format）：保留useatcompatible旧version沙箱
+    case FINISHED = 'finished';         // taskcomplete（tobackcompatible旧format）：保留useatcompatible旧version沙箱
     case ERROR = 'error';               // error：沙箱processfail
 
     /**
@@ -38,8 +38,8 @@ enum SandboxAsrStatusEnum: string
     public function getDescription(): string
     {
         return match ($this) {
-            self::WAITING => 'etc待中',
-            self::RUNNING => '运行中',
+            self::WAITING => 'etc待middle',
+            self::RUNNING => '运linemiddle',
             self::FINALIZING => '正inmerge',
             self::COMPLETED => '已complete',
             self::FINISHED => '已complete（旧）',
@@ -48,7 +48,7 @@ enum SandboxAsrStatusEnum: string
     }
 
     /**
-     * whether为completestatus（contain新旧两种format）.
+     * whether为completestatus（contain新旧两typeformat）.
      */
     public function isCompleted(): bool
     {
@@ -64,7 +64,7 @@ enum SandboxAsrStatusEnum: string
     }
 
     /**
-     * whether为中间status（needcontinue轮询）.
+     * whether为middlebetweenstatus（needcontinueround询）.
      */
     public function isInProgress(): bool
     {

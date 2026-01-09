@@ -9,11 +9,11 @@ namespace App\Infrastructure\ExternalAPI\ImageGenerateAPI\Request;
 
 class VolcengineModelRequest extends ImageGenerateRequest
 {
-    // 内置的超分feature，开启后可将上述宽高均乘by2return，此parameteropen后delaywillhave增加
-    // 如上述宽高均为512和512，此parameterclose出图 512*512 ，此parameteropen出图1024 * 1024
+    // inside置的超minutefeature，开启back可将up述宽高均乘by2return，此parameteropenbackdelaywillhave增加
+    // 如up述宽高均为512和512，此parameterclose出图 512*512 ，此parameteropen出图1024 * 1024
     private bool $useSr = false;
 
-    // 目前只support url
+    // 目front只support url
     private array $referenceImages = [];
 
     public function __construct(string $width = '512', string $height = '512', string $prompt = '', string $negativePrompt = '')

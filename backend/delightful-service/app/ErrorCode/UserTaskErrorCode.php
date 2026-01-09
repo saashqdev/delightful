@@ -38,7 +38,7 @@ enum UserTaskErrorCode: int
     #[ErrorMessage('task.delete_failed')]
     case TASK_DELETE_FAILED = 8006;
 
-    // task列表getfailed
+    // taskcolumn表getfailed
     #[ErrorMessage('task.list_failed')]
     case TASK_LIST_FAILED = 8007;
 

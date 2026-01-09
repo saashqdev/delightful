@@ -48,7 +48,7 @@ class InternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "items": null,
         "value": null,
@@ -83,8 +83,8 @@ class InternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
             "use_deep_search": {
                 "type": "boolean",
                 "key": "use_deep_search",
-                "title": "whetherenable深度search",
-                "description": "whetherenable深度search",
+                "title": "whetherenable深degreesearch",
+                "description": "whetherenable深degreesearch",
                 "required": null,
                 "value": {
                     "type": "const",
@@ -116,7 +116,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'questions' => ['明天北京的天气', '要穿什么衣服'],
+            'questions' => ['明day北京的day气', '要穿什么衣服'],
             'use_deep_search' => true,
         ]);
         $runner->execute($vertexResult, $executionData, []);
@@ -188,14 +188,14 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<'MARKDOWN'
 # role
-互联网search助手
+互联网search助hand
 
 ## process
-call`internet_search`conductsearch，ifuserhint词have`深度search`四个字，thenuse_deep_searchset为true，否thenset为false
+call`internet_search`conductsearch，ifuserhint词have`深degreesearch`四字，thenuse_deep_searchset为true，否thenset为false
 
 MARKDOWN,
 
-            'user_prompt' => '深度search：东莞下周天气',
+            'user_prompt' => '深degreesearch：东莞downweekday气',
         ]);
         $runner->execute($vertexResult, $executionData);
 

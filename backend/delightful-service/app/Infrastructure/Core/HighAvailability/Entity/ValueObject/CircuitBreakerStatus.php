@@ -15,17 +15,17 @@ use InvalidArgumentException;
 enum CircuitBreakerStatus: string
 {
     /**
-     * closestatus - 正常service中.
+     * closestatus - 正常servicemiddle.
      */
     case CLOSED = 'closed';
 
     /**
-     * 开启status - 熔断中.
+     * 开启status - 熔断middle.
      */
     case OPEN = 'open';
 
     /**
-     * 半开status - 尝试restore中.
+     * 半开status - 尝试restoremiddle.
      */
     case HALF_OPEN = 'half_open';
 

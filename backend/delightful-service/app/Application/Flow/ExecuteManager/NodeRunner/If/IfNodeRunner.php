@@ -45,9 +45,9 @@ class IfNodeRunner extends NodeRunner
             }
             $condition = $component->getCondition()->getResult($executionData->getExpressionFieldData());
             if ($condition) {
-                // 满足条件thenwill走
+                // 满足itemitemthenwill走
                 $nextNodes = array_merge($nextNodes, $branch['next_nodes'] ?? []);
-                // 命中 if
+                // 命middle if
                 $if = true;
             }
             $debug[] = [
@@ -56,7 +56,7 @@ class IfNodeRunner extends NodeRunner
             ];
         }
 
-        // ifnothave命中 if，then走else
+        // ifnothave命middle if，then走else
         if (! $if && $elseBranch) {
             $nextNodes = $elseBranch['next_nodes'] ?? [];
             $debug[] = [

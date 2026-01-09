@@ -40,7 +40,7 @@ class InitDelightfulProviderCommand extends HyperfCommand
 
         try {
             $count = $this->adminProviderAppService->initializeDelightfulProviderConfigs();
-            $this->info("successinitialize {$count} 个service商configuration");
+            $this->info("successinitialize {$count} service商configuration");
         } catch (Throwable $e) {
             $this->error('initializeDelightfulservice商configurationdatafailed: ' . $e->getMessage());
             $this->error($e->getTraceAsString());

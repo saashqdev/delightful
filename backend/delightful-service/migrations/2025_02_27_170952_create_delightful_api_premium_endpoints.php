@@ -22,18 +22,18 @@ return new class extends Migration {
 
         Schema::create('delightful_api_premium_endpoints', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('type', 255)->comment('接入点type。userneed自己保证not与其他业务重复');
+            $table->string('type', 255)->comment('接入pointtype。userneed自己保证not与其他业务重复');
             $table->string('provider', 255)->comment('提供商')->nullable();
-            $table->string('name', 255)->comment('接入点name');
+            $table->string('name', 255)->comment('接入pointname');
             $table->text('config')->comment('让user自己存一些configurationinfo')->nullable();
             $table->tinyInteger('enabled')->default(1)->comment('whetherenable: 1=enable, 0=disable');
             $table->string('circuit_breaker_status', 32)
                 ->default(CircuitBreakerStatus::CLOSED->value)
-                ->comment('熔断status: closed=正常service中, open=熔断中, half_open=尝试restore中');
-            $table->string('resources', 255)->comment('资源的consume id list，一次request可能consume多种资源')->nullable();
+                ->comment('熔断status: closed=正常servicemiddle, open=熔断middle, half_open=尝试restoremiddle');
+            $table->string('resources', 255)->comment('资源的consume id list，一timerequest可能consume多type资源')->nullable();
             $table->datetimes();
             $table->unique(['enabled', 'type', 'provider', 'name'], 'unique_enabled_type_provider_name');
-            $table->comment('API接入点table，associate了接入点的可consume资源info');
+            $table->comment('API接入pointtable，associate了接入point的可consume资源info');
         });
     }
 

@@ -45,7 +45,7 @@ class BeAgentExtra extends AbstractDTO
     protected ?string $queueId;
 
     /**
-     * 动态parameter（useatto沙箱传递额外parameter，如 task_key etc）.
+     * 动stateparameter（useatto沙箱传递额outsideparameter，如 task_key etc）.
      */
     protected ?array $dynamicParams;
 
@@ -194,7 +194,7 @@ class BeAgentExtra extends AbstractDTO
     }
 
     /**
-     * get单个动态parameter.
+     * get单动stateparameter.
      */
     public function getDynamicParam(string $key, mixed $default = null): mixed
     {
@@ -202,7 +202,7 @@ class BeAgentExtra extends AbstractDTO
     }
 
     /**
-     * setting单个动态parameter.
+     * setting单动stateparameter.
      */
     public function setDynamicParam(string $key, mixed $value): void
     {

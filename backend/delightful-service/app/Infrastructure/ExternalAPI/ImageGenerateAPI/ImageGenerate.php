@@ -31,7 +31,7 @@ interface ImageGenerate
     public function generateImage(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse;
 
     /**
-     * generate图像并return第third-partynativeformat的data.
+     * generate图像并returnthethird-partynativeformat的data.
      */
     public function generateImageRaw(ImageGenerateRequest $imageGenerateRequest): array;
 

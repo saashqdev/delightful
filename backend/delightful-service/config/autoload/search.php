@@ -32,9 +32,9 @@ return [
         ],
         SearchEngineType::Google->value => [
             'class_name' => GoogleSearchAdapter::class,
-            // if你useGOOGLE，你need指定searchAPIkey。注意你alsoshouldinenv中指定cx。
+            // if你useGOOGLE，你needfinger定searchAPIkey。注意你alsoshouldinenvmiddlefinger定cx。
             'api_key' => env('GOOGLE_SEARCH_API_KEY', ''),
-            // if你inusegoogle，请指定searchcx,alsothen是GOOGLE_SEARCH_ENGINE_ID
+            // if你inusegoogle，请finger定searchcx,alsothen是GOOGLE_SEARCH_ENGINE_ID
             'cx' => env('GOOGLE_SEARCH_CX', ''),
         ],
         SearchEngineType::Bing->value => [

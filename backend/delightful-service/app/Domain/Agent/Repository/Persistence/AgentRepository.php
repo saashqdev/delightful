@@ -21,7 +21,7 @@ class AgentRepository extends AbstractRepository implements AgentRepositoryInter
     protected bool $filterOrganizationCode = true;
 
     /**
-     * query Agent 列table.
+     * query Agent columntable.
      *
      * @return array{total: int, list: array<DelightfulAgentEntity>}
      */
@@ -29,7 +29,7 @@ class AgentRepository extends AbstractRepository implements AgentRepositoryInter
     {
         $builder = $this->createBuilder($agentDataIsolation, DelightfulAgentModel::query());
 
-        // settingquery条件
+        // settingqueryitemitem
         if (! is_null($agentQuery->getIds())) {
             if (empty($agentQuery->getIds())) {
                 return ['total' => 0, 'list' => []];

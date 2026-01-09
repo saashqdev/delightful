@@ -12,7 +12,7 @@ use Hyperf\Codec\Json;
 
 class MidjourneyAPI
 {
-    // requesttimeouttime（秒）
+    // requesttimeouttime（second）
     protected const REQUEST_TIMEOUT = 30;
 
     protected string $apiKey;

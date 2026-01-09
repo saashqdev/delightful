@@ -15,7 +15,7 @@ use HyperfTest\Cases\Api\AbstractHttpTest;
 class DelightfulChatHttpApiTest extends AbstractHttpTest
 {
     /**
-     * testsession窗口中的chat补allfeature.
+     * testsession窗口middle的chat补allfeature.
      */
     public function testConversationChatCompletions(): void
     {
@@ -36,7 +36,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
             ],
         ];
 
-        // setrequest头
+        // setrequesthead
         $headers = [
             // todo mock authorization的校验
             'authorization' => '',
@@ -73,12 +73,12 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         // useassertArrayValueTypesEqualsverifyresponse结构
         $this->assertArrayValueTypesEquals($expectedStructure, $response, 'response结构not符合expected');
 
-        // 额外verifyrolewhether是assistant（这个是精确valueverify）
+        // 额outsideverifyrolewhether是assistant（这是精确valueverify）
         $this->assertEquals('assistant', $response['data']['choices'][0]['message']['role'], 'role应为assistant');
     }
 
     /**
-     * testsession窗口中的chat补allfeature - parameterverifyfail.
+     * testsession窗口middle的chat补allfeature - parameterverifyfail.
      */
     public function testConversationChatCompletionsWithInvalidParams(): void
     {
@@ -89,7 +89,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
             'message' => '你好，testmessage',
         ];
 
-        // setrequest头
+        // setrequesthead
         $headers = [
             'Authorization' => env('TEST_TOKEN', 'test_token'),
             'Content-Type' => 'application/json',
@@ -100,17 +100,17 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
 
         // 定义expect的errorresponse结构
         $expectedErrorStructure = [
-            'code' => 0, // expectednot是1000的code，butspecific数value可能not确定，所by这里只是占位
+            'code' => 0, // expectednot是1000的code，butspecific数value可能not确定，所by这within只是占位
             'message' => '', // 只verify存inmessagefield，specificcontent可能not确定
         ];
 
         // verifyresponseshould是parameterverifyerror
-        $this->assertNotEquals(1000, $response['code'] ?? 0, '缺少必要parameter时，response码not应为1000');
+        $this->assertNotEquals(1000, $response['code'] ?? 0, '缺少必要parametero clock，response码not应为1000');
         $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'errorresponse结构not符合expected');
     }
 
     /**
-     * testsession窗口中的chat补allfeature - authorizationverifyfail.
+     * testsession窗口middle的chat补allfeature - authorizationverifyfail.
      */
     public function testConversationChatCompletionsWithInvalidAuth(): void
     {
@@ -120,7 +120,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
             'message' => '你好，testmessage',
         ];
 
-        // setinvalid的request头
+        // setinvalid的requesthead
         $headers = [
             'Authorization' => 'invalid_token',
             'Content-Type' => 'application/json',
@@ -136,7 +136,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         ];
 
         // verifyresponseshould是authorizationerror
-        $this->assertNotEquals(1000, $response['code'] ?? 0, 'invalidauthorization时，response码not应为1000');
+        $this->assertNotEquals(1000, $response['code'] ?? 0, 'invalidauthorizationo clock，response码not应为1000');
         $this->assertArrayValueTypesEquals($expectedErrorStructure, $response, 'authorizationerrorresponse结构not符合expected');
     }
 }

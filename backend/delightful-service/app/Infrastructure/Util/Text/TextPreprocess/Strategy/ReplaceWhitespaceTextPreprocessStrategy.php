@@ -11,7 +11,7 @@ class ReplaceWhitespaceTextPreprocessStrategy extends AbstractTextPreprocessStra
 {
     public function preprocess(string $content): string
     {
-        // 替换连续的null白字符(换行符、制table符、null格)
+        // 替换连续的null白字符(换line符、制table符、null格)
         return preg_replace('/[\s\n\t]+/', '', $content);
     }
 }

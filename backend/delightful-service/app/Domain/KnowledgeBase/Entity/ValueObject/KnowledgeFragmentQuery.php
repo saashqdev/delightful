@@ -32,7 +32,7 @@ class KnowledgeFragmentQuery
     }
 
     /**
-     * get元datafilter条件.
+     * getyuandatafilteritemitem.
      */
     public function getMetadataFilter(): array
     {
@@ -40,7 +40,7 @@ class KnowledgeFragmentQuery
     }
 
     /**
-     * setting元datafilter条件.
+     * settingyuandatafilteritemitem.
      */
     public function setMetadataFilter(array $metadataFilter): void
     {

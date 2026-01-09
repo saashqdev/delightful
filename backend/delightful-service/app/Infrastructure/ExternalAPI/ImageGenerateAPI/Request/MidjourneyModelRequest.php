@@ -11,7 +11,7 @@ class MidjourneyModelRequest extends ImageGenerateRequest
 {
     // generate的imagequantity(nothaveuse，butmust要带)
 
-    // 比例
+    // ratio例
     private string $ratio = '1:1';
 
     public function getGenerateNum(): int

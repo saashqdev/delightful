@@ -138,7 +138,7 @@ JSON,
                     "expression_value": [
                         {
                             "type": "input",
-                            "value": "技术中心",
+                            "value": "技术middlecore",
                             "name": "",
                             "args": null
                         }

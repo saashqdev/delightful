@@ -19,14 +19,14 @@ class LoginApiTest extends AbstractHttpTest
     public const string API = '/api/v1/sessions';
 
     /**
-     * test手机号密码login.
+     * testhand机number密码login.
      */
     public function testPhonePasswordLogin(): string
     {
-        // 构造requestparameter - 手机号密码login
+        // 构造requestparameter - hand机number密码login
         $requestData = [
             'state_code' => '+86',
-            'phone' => '13812345678', // test环境中not存in的账号
+            'phone' => '13812345678', // test环境middlenot存in的账number
             'password' => '123456',
             'type' => 'phone_password',
         ];
@@ -64,21 +64,21 @@ class LoginApiTest extends AbstractHttpTest
     }
 
     /**
-     * test手机号not存in.
+     * testhand机numbernot存in.
      */
     public function testPhoneNotExists(): void
     {
-        // 构造requestparameter - test手机号not存in
+        // 构造requestparameter - testhand机numbernot存in
         $requestData = [
             'state_code' => '+86',
-            'phone' => '19999999999', // use一个确定not存in的手机号
+            'phone' => '19999999999', // use一确定not存in的hand机number
             'password' => '123456',
             'type' => 'phone_password',
         ];
 
         // sendPOSTrequest
         $response = $this->json(self::API, $requestData);
-        // expect手机号not存in时return相应的error码和message
+        // expecthand机numbernot存ino clockreturn相应的error码和message
         $expectData = [
             'code' => AuthenticationErrorCode::AccountNotFound->value,
         ];

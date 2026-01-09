@@ -25,15 +25,15 @@ class AsrTaskStatusDTO
     // analogous：project_821749697183776769/workspace/录音总结_20250910_174251/original录音file.webm
     public ?string $filePath = null; // 工作区filepath
 
-    // fileID（database中的actualID）
-    public ?string $audioFileId = null; // audiofileID（writedelightful_super_agent_task_files表后return的ID）
+    // fileID（databasemiddle的actualID）
+    public ?string $audioFileId = null; // audiofileID（writedelightful_super_agent_task_files表backreturn的ID）
 
     // note fileinfo
     public ?string $noteFileName = null; // notefile名（与audiofilein同一directory，为null表示无笔记file）
 
-    public ?string $noteFileId = null; // notefileID（useatchatmessage中的filequote）
+    public ?string $noteFileId = null; // notefileID（useatchatmessagemiddle的filequote）
 
-    // presetfileinfo（useat前端write）
+    // presetfileinfo（useatfront端write）
     public ?string $presetNoteFileId = null; // preset笔记fileID
 
     public ?string $presetTranscriptFileId = null; // presetstream识别fileID
@@ -48,7 +48,7 @@ class AsrTaskStatusDTO
     public ?string $topicId = null; // 话题ID
 
     // 录音directoryinfo
-    public ?string $tempHiddenDirectory = null; // 隐藏directorypath（存放分片file）
+    public ?string $tempHiddenDirectory = null; // 隐藏directorypath（存放minuteslicefile）
 
     public ?string $displayDirectory = null; // 显示directorypath（存放stream文本和笔记）
 
@@ -71,7 +71,7 @@ class AsrTaskStatusDTO
 
     public int $sandboxRetryCount = 0; // 沙箱startretrycount
 
-    public int $serverSummaryRetryCount = 0; // service端总结触发retrycount
+    public int $serverSummaryRetryCount = 0; // service端总结触hairretrycount
 
     public bool $serverSummaryLocked = false; // service端总结whetherlock定客户端
 
@@ -82,7 +82,7 @@ class AsrTaskStatusDTO
 
     public ?string $noteFileType = null; // 笔记filetype（md、txt、json）
 
-    public ?string $language = null; // 语种（zh_CN、en_USetc），useatgeneratetitle时use
+    public ?string $language = null; // 语type（zh_CN、en_USetc），useatgeneratetitleo clockuse
 
     public ?string $uploadGeneratedTitle = null; // upload-tokens generate的title（useat summary 复use）
 
@@ -203,7 +203,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * check总结whether已complete（幂etc性判断）.
+     * check总结whether已complete（幂etcproperty判断）.
      * 判断standard：audiofile已merge（audioFileId 存in）and录音已stop.
      */
     public function isSummaryCompleted(): bool
@@ -222,7 +222,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * record一次service端总结尝试.
+     * record一timeservice端总结尝试.
      */
     public function markServerSummaryAttempt(): void
     {
@@ -231,7 +231,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * in一次service端总结end后updatestatus.
+     * in一timeservice端总结endbackupdatestatus.
      */
     public function finishServerSummaryAttempt(bool $success): void
     {
@@ -243,8 +243,8 @@ class AsrTaskStatusDTO
 
     /**
      * 提取相对at workspace 的相对path
-     * ifpathcontain workspace/，提取其后的部分
-     * 这样can自动修正 Redis 中storage的旧formatdata（完整path）.
+     * ifpathcontain workspace/，提取其back的部minute
+     * 这样can自动修正 Redis middlestorage的旧formatdata（完整path）.
      *
      * @param null|string $path originalpath
      * @return null|string 相对path
@@ -255,7 +255,7 @@ class AsrTaskStatusDTO
             return $path;
         }
 
-        // ifpathcontain workspace/，提取 workspace/ 后面的部分
+        // ifpathcontain workspace/，提取 workspace/ backsurface的部minute
         if (str_contains($path, 'workspace/')) {
             $parts = explode('workspace/', $path, 2);
             return $parts[1] ?? $path;
@@ -265,10 +265,10 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarray中按优先级getstringvalue（support snake_case 和 camelCase）.
+     * fromarraymiddle按优先levelgetstringvalue（support snake_case 和 camelCase）.
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys 键名列表（按优先级sort）
+     * @param array<string> $keys 键名column表（按优先levelsort）
      * @param null|string $default defaultvalue
      */
     private static function getStringValue(array $data, array $keys, ?string $default = null): ?string
@@ -282,10 +282,10 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarray中按优先级get整数value（support snake_case 和 camelCase）.
+     * fromarraymiddle按优先levelget整数value（support snake_case 和 camelCase）.
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys 键名列表（按优先级sort）
+     * @param array<string> $keys 键名column表（按优先levelsort）
      * @param null|int $default defaultvalue
      */
     private static function getIntValue(array $data, array $keys, ?int $default = null): ?int
@@ -299,10 +299,10 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarray中按优先级getbooleanvalue（support多种format：true/false、1/0、'1'/'0'）.
+     * fromarraymiddle按优先levelgetbooleanvalue（support多typeformat：true/false、1/0、'1'/'0'）.
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys 键名列表（按优先级sort）
+     * @param array<string> $keys 键名column表（按优先levelsort）
      */
     private static function getBoolValue(array $data, array $keys): bool
     {

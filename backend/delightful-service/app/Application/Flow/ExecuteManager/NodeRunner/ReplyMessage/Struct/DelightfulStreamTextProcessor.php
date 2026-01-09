@@ -17,7 +17,7 @@ class DelightfulStreamTextProcessor
 
     private const int STATE_TAG_START = 1; // 可能是tagstart
 
-    private const int STATE_IN_TAG = 2;    // confirmintag内
+    private const int STATE_IN_TAG = 2;    // confirmintaginside
 
     private Closure $outputCall;
 
@@ -26,7 +26,7 @@ class DelightfulStreamTextProcessor
     private string $buffer = '';
 
     /**
-     * @var int status 0 普通文本，1 tagstart，2 intag内
+     * @var int status 0 普通文本，1 tagstart，2 intaginside
      */
     private int $state = 0;
 

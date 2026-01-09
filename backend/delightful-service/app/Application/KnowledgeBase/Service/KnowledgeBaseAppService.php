@@ -52,7 +52,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
             $operation = $this->knowledgeBaseStrategy->getKnowledgeOperation($dataIsolation, $oldKnowledge->getCode());
             $operation->validate('w', $oldKnowledge->getCode());
 
-            // use原来的model和to量library
+            // use原来的model和toquantitylibrary
             $delightfulFlowKnowledgeEntity->setModel($oldKnowledge->getModel());
             $delightfulFlowKnowledgeEntity->setVectorDB($oldKnowledge->getVectorDB());
         }
@@ -65,7 +65,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
                 // 优先useconfiguration的model
                 $modelId = EmbeddingGenerator::defaultModel();
                 if (! $modelGatewayMapper->exists($dataIsolation, $modelId)) {
-                    // get第one
+                    // gettheone
                     $firstEmbeddingModel = $modelGatewayMapper->getEmbeddingModels($dataIsolation)[0] ?? null;
                     $modelId = $firstEmbeddingModel?->getKey();
                 }
@@ -84,7 +84,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
 
         $modelName = $delightfulFlowKnowledgeEntity->getModel();
         $delightfulFlowKnowledgeEntity->setForceCreateCode(Code::Knowledge->gen());
-        // createknowledge base前，先对嵌入modelconduct连通性test
+        // createknowledge basefront，先对嵌入modelconduct连通propertytest
         try {
             $embeddingModel = di(ModelGatewayMapper::class)->getEmbeddingModelProxy($dataIsolation, $delightfulFlowKnowledgeEntity->getModel());
             $modelName = $embeddingModel->getModelName();
@@ -160,7 +160,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
             [$authorization->getId()]
         )[$authorization->getId()] ?? [];
         $resourceIds = array_keys($resources);
-        // in这一堆中查找one
+        // in这一堆middle查找one
         $query = new KnowledgeBaseQuery();
         $query->setCodes($resourceIds);
         $query->setBusinessId($businessId);

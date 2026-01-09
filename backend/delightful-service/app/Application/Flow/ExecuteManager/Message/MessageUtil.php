@@ -61,14 +61,14 @@ class MessageUtil
                     if (! is_string($linkPath) || ! $attachment = $executionData->getAttachmentRecord($linkPath)) {
                         continue;
                     }
-                    // todo 批量process
+                    // todo 批quantityprocess
                     $chatFile = self::report2ChatFile($attachment, $executionData);
                     $chatAttachment = new ChatAttachment($chatFile->toArray());
                     $chatAttachment->setFileUrl($attachment->getUrl());
                     $chatAttachments[] = $chatAttachment;
 
                     if ($attachment instanceof ExternalAttachment) {
-                        // asyncdownload外链file并uploadto本service oss
+                        // asyncdownloadoutside链file并uploadto本service oss
                         $imageUploadEvent = new ExternalAttachmentUploadEvent($attachment, $executionData->getDataIsolation()->getCurrentOrganizationCode());
                         AsyncEventUtil::dispatch($imageUploadEvent);
                     }
@@ -77,7 +77,7 @@ class MessageUtil
                 $message = new FilesMessage([]);
                 $linkDesc = $delightfulFlowMessage->getLinkDesc()?->getValue()?->getResult($executionData->getExpressionFieldData());
                 if (is_string($linkDesc) && $linkDesc !== '') {
-                    // if具havedescription，那么should是rich text形式
+                    // if具havedescription，那么should是rich textshapetype
                     $message = new TextMessage([]);
                     $message->setContent($linkDesc);
                 }
@@ -90,17 +90,17 @@ class MessageUtil
                 return $message;
             case DelightfulFlowMessageType::File:
                 $chatAttachments = [];
-                // 这里的description是use来markfilename
+                // 这within的description是use来markfilename
                 $linkDesc = $delightfulFlowMessage->getLinkDesc()?->getValue()?->getResult($executionData->getExpressionFieldData());
                 foreach ($linkPaths as $linkPath) {
                     if (! is_string($linkPath) || ! $attachment = $executionData->getAttachmentRecord($linkPath)) {
                         continue;
                     }
-                    // getfilename。if linkPaths only 1 个，并and linkDesc also是only一个，那么can直接use linkDesc 作为filename
+                    // getfilename。if linkPaths only 1 ，并and linkDesc also是only一，那么can直接use linkDesc 作为filename
                     if (count($linkPaths) === 1 && is_string($linkDesc) && $linkDesc !== '') {
                         $attachment->setName($linkDesc);
                     }
-                    // 下标寻找
+                    // down标寻找
                     if (is_array($linkDesc) && $fileName = $linkDesc[$attachment->getOriginAttachment()] ?? null) {
                         is_string($fileName) && $attachment->setName($fileName);
                     }
@@ -111,7 +111,7 @@ class MessageUtil
                     $chatAttachments[] = $chatAttachment;
 
                     if ($attachment instanceof ExternalAttachment) {
-                        // asyncdownload外链file并uploadto本service oss
+                        // asyncdownloadoutside链file并uploadto本service oss
                         $imageUploadEvent = new ExternalAttachmentUploadEvent($attachment, $executionData->getDataIsolation()->getCurrentOrganizationCode());
                         AsyncEventUtil::dispatch($imageUploadEvent);
                     }
@@ -126,7 +126,7 @@ class MessageUtil
                     return null;
                 }
                 $contentString = $content->getKeyValue($executionData->getExpressionFieldData());
-                // todo actual上notimplement，by下是伪code
+                // todo actualupnotimplement，bydown是伪code
                 return new AggregateAISearchCardMessageV2([
                     'search' => $contentString['search'] ?? [],
                     'llm_response' => $contentString['llm_response'] ?? '',
@@ -138,11 +138,11 @@ class MessageUtil
     }
 
     /**
-     * 上报file.
+     * up报file.
      */
     private static function report2ChatFile(AbstractAttachment $attachment, ExecutionData $executionData): DelightfulChatFileEntity
     {
-        // 这里should是相whenat agent upload了file
+        // 这withinshould是相whenat agent upload了file
         $dataIsolation = ContactDataIsolation::create(
             $executionData->getDataIsolation()->getCurrentOrganizationCode(),
             $executionData->getAgentUserId() ?: $executionData->getDataIsolation()->getCurrentUserId()

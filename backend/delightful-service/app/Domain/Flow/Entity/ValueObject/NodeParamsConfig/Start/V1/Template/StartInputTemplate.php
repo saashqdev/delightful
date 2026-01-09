@@ -35,7 +35,7 @@ class StartInputTemplate
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "items": null,
         "value": null,
@@ -113,7 +113,7 @@ class StartInputTemplate
             "files": {
                 "type": "array",
                 "key": "files",
-                "title": "file列表",
+                "title": "filecolumn表",
                 "description": "",
                 "required": null,
                 "value": null,
@@ -247,7 +247,7 @@ class StartInputTemplate
                     "work_number": {
                         "type": "string",
                         "key": "work_number",
-                        "title": "工号",
+                        "title": "工number",
                         "description": "",
                         "items": null,
                         "properties": null,
@@ -327,7 +327,7 @@ class StartInputTemplate
             "bot_key": {
                 "type": "string",
                 "key": "bot_key",
-                "title": "第third-partychat机器人encoding",
+                "title": "thethird-partychat机器人encoding",
                 "description": "",
                 "items": null,
                 "properties": null,

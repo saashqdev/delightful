@@ -15,13 +15,13 @@ class SeqExtra extends AbstractEntity
     use EditMessageOptionsTrait;
 
     /**
-     * 序列号所属conversation id.
+     * 序columnnumber所属conversation id.
      */
     protected string $topicId = '';
 
     /**
-     * user发这条message时，他所login的环境 id.（such asin saas 生产填了some个privatedeploy预publish环境的码）
-     * useatrequest指定privatedeploy的test/预publish/生产环境.
+     * userhair这itemmessageo clock，他所login的环境 id.（such asin saas 生产填了someprivatedeploy预publish环境的码）
+     * useatrequestfinger定privatedeploy的test/预publish/生产环境.
      */
     protected ?int $delightfulEnvId = null;
 

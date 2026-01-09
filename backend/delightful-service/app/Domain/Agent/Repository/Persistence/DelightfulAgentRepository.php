@@ -33,7 +33,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
      */
     public function queries(DelightfulAgentQuery $query, Page $page): array
     {
-        // todo 这里at leastneedorganization隔离
+        // todo 这withinat leastneedorganization隔离
         $builder = DelightfulAgentModel::query();
 
         if (! is_null($query->getIds())) {
@@ -132,7 +132,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
 
     public function getAgentById(string $agentId): DelightfulAgentEntity
     {
-        // querydatabase，get指定 agentId 和 userId 的data
+        // querydatabase，getfinger定 agentId 和 userId 的data
         $agent = $this->agentModel::query()
             ->where('id', $agentId)
             ->first();
@@ -257,8 +257,8 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * 分批get助理list.
-     * @param int $offset 偏移量
+     * minute批get助理list.
+     * @param int $offset 偏移quantity
      * @param int $limit each批quantity
      * @return array 助理list
      */
@@ -278,7 +278,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * query企业下的所have助理,条件query：status，create人，search.
+     * query企业down的所have助理,itemitemquery：status，create人，search.
      * @return array<DelightfulAgentEntity>
      */
     public function queriesAgents(string $organizationCode, QueryPageAgentDTO $queryPageAgentDTO): array
@@ -328,7 +328,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
     }
 
     /**
-     * get企业下的所have助理create者.
+     * get企业down的所have助理create者.
      * @return array<string>
      */
     public function getOrganizationAgentsCreators(string $organizationCode): array

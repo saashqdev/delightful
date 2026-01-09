@@ -38,7 +38,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "rootsectionpoint",
     "description": "",
     "items": null,
     "value": null,
@@ -49,7 +49,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
         "radio": {
             "type": "string",
             "key": "radio",
-            "title": "generateimage的比例",
+            "title": "generateimage的ratio例",
             "description": "optional：\"1:1\",\"2:3\",\"4:3\",\"9:16\",\"16:9\",default\"1:1\"",
             "required": null,
             "value": null,
@@ -133,7 +133,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "file_url",
                         "sort": 1,
-                        "title": "file地址",
+                        "title": "fileground址",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -146,7 +146,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "file_ext",
                         "sort": 2,
-                        "title": "file后缀",
+                        "title": "fileback缀",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -183,7 +183,7 @@ JSON,
     protected function executeCallback(ExecutionData $executionData, string $modelVersion): array
     {
         if ($executionData->getExecutionType()->isDebug()) {
-            // debug 模式
+            // debug 模type
             return ['ai_image : current not support debug model'];
         }
 
@@ -206,7 +206,7 @@ JSON,
             ->setUserMessage($textMessage)
             ->setAttachments($executionData->getTriggerData()?->getAttachments())
             ->setReferMessageId($executionData->getTriggerData()?->getSeqEntity()?->getSeqId());
-        // setactualrequest的size和比例
+        // setactualrequest的size和ratio例
         $enumModel = ImageGenerateModelType::fromModel($model, false);
         $imageGenerateParamsVO = $reqDto->getParams();
         $imageGenerateParamsVO->setSourceId($this->getCode());

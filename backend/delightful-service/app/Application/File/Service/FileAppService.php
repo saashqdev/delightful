@@ -44,7 +44,7 @@ class FileAppService extends AbstractAppService
             $contentType,
             $sts
         );
-        // if是本地驱动，那么增加一个temporary key
+        // if是本ground驱动，那么增加一temporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $this->cache->set(
@@ -122,7 +122,7 @@ class FileAppService extends AbstractAppService
 
         $keys = array_column($files, 'key');
 
-        // 按organizationencoding分groupfile keys，参考 ProviderAppService 做法
+        // 按organizationencodingminutegroupfile keys，参考 ProviderAppService 做法
         $keysByOrg = [];
         foreach ($keys as $key) {
             if (empty($key)) {
@@ -135,7 +135,7 @@ class FileAppService extends AbstractAppService
             $keysByOrg[$keyOrganizationCode][] = $key;
         }
 
-        // 批量geteachorganization的filelink
+        // 批quantitygeteachorganization的filelink
         $allFileLinks = [];
         foreach ($keysByOrg as $orgCode => $orgKeys) {
             $links = $this->fileDomainService->getLinks($orgCode, $orgKeys);
@@ -161,7 +161,7 @@ class FileAppService extends AbstractAppService
         $defaultFileBusinessType = DefaultFileBusinessType::from($businessType);
         $organizationCode = $authorization->getOrganizationCode();
 
-        // checkfilewhether已经存inat该业务type下
+        // checkfilewhether已经存inat该业务typedown
         $existingFile = $this->defaultFileDomainService->getByKeyAndBusinessType($fileKey, $businessType, $organizationCode);
         if ($existingFile) {
             // iffile已存in，直接returnfilelink
@@ -222,7 +222,7 @@ class FileAppService extends AbstractAppService
             $autoBucket,
         );
 
-        // if是本地驱动，那么增加一个temporary key
+        // if是本ground驱动，那么增加一temporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $data['temporary_credential']['dir'] = $organizationCode . '/' . $data['temporary_credential']['dir'];
@@ -232,7 +232,7 @@ class FileAppService extends AbstractAppService
             $this->cache->set($localCredential, ['organization_code' => $organizationCode], (int) ($data['expires'] - time()));
         }
 
-        // delightful service service地址
+        // delightful service serviceground址
         $data['delightful_service_host'] = config('be-delightful.sandbox.callback_host', '');
 
         return $data;
@@ -249,7 +249,7 @@ class FileAppService extends AbstractAppService
             $autoBucket,
         );
 
-        // if是本地驱动，那么增加一个temporary key
+        // if是本ground驱动，那么增加一temporary key
         if ($data['platform'] === AdapterName::LOCAL) {
             $localCredential = 'local_credential:' . IdGenerator::getUniqueId32();
             $data['temporary_credential']['dir'] = $organizationCode . '/' . $data['temporary_credential']['dir'];
@@ -259,7 +259,7 @@ class FileAppService extends AbstractAppService
             $this->cache->set($localCredential, ['organization_code' => $organizationCode], (int) ($data['expires'] - time()));
         }
 
-        // delightful service service地址
+        // delightful service serviceground址
         $data['delightful_service_host'] = config('be-delightful.sandbox.callback_host', '');
 
         return $data;

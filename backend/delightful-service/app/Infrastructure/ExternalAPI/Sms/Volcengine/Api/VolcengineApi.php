@@ -23,18 +23,18 @@ use RuntimeException;
 use function Hyperf\Config\config;
 
 /**
- * 火山短信所have api 的基础类.
+ * 火山短信所have api 的基础category.
  * @see https://www.volcengine.com/docs/6361/171579
  */
 abstract class VolcengineApi
 {
     /**
-     * 国内短信request地址
+     * 国inside短信requestground址
      */
     private const CHINA_HOST = 'https://sms.volcengineapi.com';
 
     /**
-     * 国外短信request地址
+     * 国outside短信requestground址
      */
     private const SINGAPORE_HOST = 'https://sms.byteplusapi.com';
 
@@ -59,7 +59,7 @@ abstract class VolcengineApi
     protected string $version;
 
     /**
-     * request地址
+     * requestground址
      */
     protected string $host;
 
@@ -98,7 +98,7 @@ abstract class VolcengineApi
 
     public function __construct(ClientFactory $clientFactory, StdoutLoggerInterface $logger, string $region = self::CHINA_REGION)
     {
-        // 部分公共固定的parameterin构造parameter中确定
+        // 部minute公共固定的parameterin构造parametermiddle确定
         $this->setRegion($region);
         $this->setSecretKey(config('sms.volcengine.secretKey'));
         $this->setAccessKey(config('sms.volcengine.accessKey'));
@@ -118,10 +118,10 @@ abstract class VolcengineApi
      */
     protected function sendRequest()
     {
-        // setrequest的signature和X-Daterequest头
+        // setrequest的signature和X-Daterequesthead
         $this->setAuth();
         try {
-            // request头追加signature
+            // requesthead追加signature
             $options = [
                 RequestOptions::QUERY => $this->getQuery(),
                 RequestOptions::HEADERS => $this->getHeaders(),
@@ -165,7 +165,7 @@ abstract class VolcengineApi
 
     protected function addHeader(string $key, $value): void
     {
-        // 字节方的request头的value是array,才能参与后续的signature
+        // 字section方的requesthead的value是array,才能参与back续的signature
         $value = is_array($value) ? $value : [$value];
         $this->headers[$key] = $value;
     }
@@ -176,7 +176,7 @@ abstract class VolcengineApi
     }
 
     /**
-     * setparameter的signature和公共request头parameterX-Date.
+     * setparameter的signature和公共requestheadparameterX-Date.
      */
     protected function setAuth(): void
     {
@@ -195,20 +195,20 @@ abstract class VolcengineApi
         $req->setIsSignUrl(false);
         $req->setMethod($this->getMethod());
         $req->setQueryList($this->getQuery());
-        // !!! 注意,这里not能加上 JSON_UNESCAPED_UNICODE,加了will导致bodyhave中文时signaturenotcorrect!
+        // !!! 注意,这withinnot能加up JSON_UNESCAPED_UNICODE,加了will导致bodyhavemiddle文o clocksignaturenotcorrect!
         $bodyStream = Utils::streamFor(Json::encode($this->getBody(), JSON_THROW_ON_ERROR));
         $req->setPayloadHash(Utils::hash($bodyStream, 'sha256'));
         $result = $sign->signOnly($req, $credentials);
-        // request头加上X-Date
+        // requesthead加upX-Date
         $this->addHeader('X-Date', $result->getXDate());
         $auth = $result->getAuthorization();
-        // 加上signature
+        // 加upsignature
         $this->addHeader('Authorization', $auth);
     }
 
     protected function setHeaders(): void
     {
-        // 研究发现,document要求inrequest头中传AccessKey/SecretKey/ServiceName/Region,其实cannot传. Authorization头中have传AccessKey
+        // 研究hair现,document要求inrequestheadmiddle传AccessKey/SecretKey/ServiceName/Region,其实cannot传. Authorizationheadmiddlehave传AccessKey
         $this->headers = [
             'Content-Type' => ['application/json;charset=utf-8'],
             'User-Agent' => ['volc-sdk-php/v1.0.87'],
@@ -311,7 +311,7 @@ abstract class VolcengineApi
 
     private function setRegion(string $region): void
     {
-        // region只support中国和新加坡,default中国
+        // region只supportmiddle国和新加坡,defaultmiddle国
         if ($region === self::SINGAPORE_REGION) {
             $this->setHost(self::SINGAPORE_HOST);
         } else {

@@ -15,7 +15,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 class DelightfulFlowTriggerTestcaseAppService extends AbstractFlowAppService
 {
     /**
-     * save触发test集.
+     * save触hairtest集.
      */
     public function save(Authenticatable $authorization, DelightfulFlowTriggerTestcaseEntity $delightfulFlowTriggerTestcaseEntity): DelightfulFlowTriggerTestcaseEntity
     {
@@ -23,7 +23,7 @@ class DelightfulFlowTriggerTestcaseAppService extends AbstractFlowAppService
     }
 
     /**
-     * get触发test集.
+     * get触hairtest集.
      */
     public function show(Authenticatable $authorization, string $flowCode, string $testcaseCode): DelightfulFlowTriggerTestcaseEntity
     {
@@ -31,7 +31,7 @@ class DelightfulFlowTriggerTestcaseAppService extends AbstractFlowAppService
     }
 
     /**
-     * delete触发test集.
+     * delete触hairtest集.
      */
     public function remove(Authenticatable $authorization, string $flowCode, string $testcaseCode): void
     {
@@ -41,7 +41,7 @@ class DelightfulFlowTriggerTestcaseAppService extends AbstractFlowAppService
     }
 
     /**
-     * query触发test集.
+     * query触hairtest集.
      * @return array{total: int, list: array<DelightfulFlowTriggerTestcaseEntity>, users: array}
      */
     public function queries(Authenticatable $authorization, DelightfulFLowTriggerTestcaseQuery $query, Page $page): array

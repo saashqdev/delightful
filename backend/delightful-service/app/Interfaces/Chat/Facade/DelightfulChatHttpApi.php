@@ -58,14 +58,14 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * pulluser的收件message.
+     * pulluser的收itemmessage.
      * @throws Throwable
      */
     public function pullByPageToken(RequestInterface $request): array
     {
         $params = $request->all();
         $rules = [
-            'page_token' => 'string', // private chat的本地most大 seq_id
+            'page_token' => 'string', // private chat的本groundmost大 seq_id
         ];
         $params = $this->checkParams($params, $rules);
         $this->logger->info('pullMessage:' . Json::encode($params));
@@ -77,7 +77,7 @@ class DelightfulChatHttpApi extends AbstractApi
     {
         $params = $request->all();
         $rules = [
-            'page_token' => 'string', // private chat的本地most大 seq_id
+            'page_token' => 'string', // private chat的本groundmost大 seq_id
         ];
         $params = $this->checkParams($params, $rules);
         $this->logger->info('pullMessageByAppMessageId:' . $appMessageId);
@@ -86,7 +86,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * pulluser的most近一段time收件message.
+     * pulluser的most近一segmenttime收itemmessage.
      * @throws Throwable
      */
     public function pullRecentMessage(RequestInterface $request): array
@@ -176,7 +176,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * （前端performancehaveissue的temporarysolution）按session id 分groupget几条most新message.
+     * （front端performancehaveissue的temporarysolution）按session id minutegroupget几itemmost新message.
      */
     public function conversationsMessagesGroupQueries(RequestInterface $request): array
     {
@@ -245,7 +245,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 批量拉人进群.
+     * 批quantity拉人进群.
      */
     public function groupAddUsers(string $id, RequestInterface $request): array
     {
@@ -308,7 +308,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * 批量get群info（name、公告etc）.
+     * 批quantityget群info（name、公告etc）.
      */
     public function getDelightfulGroupList(RequestInterface $request): array
     {
@@ -466,7 +466,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * sessionsave交互指令.
+     * sessionsave交互finger令.
      */
     public function saveInstruct(string $conversationId, RequestInterface $request)
     {
@@ -494,7 +494,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * @param null|string $method havetimefieldnothave区分度，need加上method名
+     * @param null|string $method havetimefieldnothave区minutedegree，need加upmethod名
      */
     protected function checkParams(array $params, array $rules, ?string $method = null): array
     {

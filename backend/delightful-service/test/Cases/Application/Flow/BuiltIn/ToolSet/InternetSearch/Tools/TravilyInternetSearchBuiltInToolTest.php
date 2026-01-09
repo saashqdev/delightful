@@ -48,7 +48,7 @@ class TravilyInternetSearchBuiltInToolTest extends ExecuteManagerBaseTest
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "items": null,
         "value": null,
@@ -92,7 +92,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'search_keyword' => '周杰伦',
+            'search_keyword' => 'week杰伦',
         ]);
         $runner->execute($vertexResult, $executionData, []);
 

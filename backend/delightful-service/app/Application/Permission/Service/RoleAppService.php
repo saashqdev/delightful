@@ -21,7 +21,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * queryrole列表.
+     * queryrolecolumn表.
      * @return array{total: int, list: RoleEntity[]}
      */
     public function queries(PermissionDataIsolation $dataIsolation, Page $page, ?array $filters = null): array
@@ -71,7 +71,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * getuserrole列表.
+     * getuserrolecolumn表.
      */
     public function getUserRoles(PermissionDataIsolation $dataIsolation, string $userId): array
     {
@@ -87,7 +87,7 @@ class RoleAppService extends AbstractKernelAppService
     }
 
     /**
-     * checkuserwhether拥have指定permission.
+     * checkuserwhether拥havefinger定permission.
      */
     public function hasPermission(PermissionDataIsolation $dataIsolation, string $userId, string $permissionKey): bool
     {

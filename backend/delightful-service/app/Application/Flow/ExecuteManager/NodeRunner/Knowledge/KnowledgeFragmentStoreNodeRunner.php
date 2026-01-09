@@ -24,7 +24,7 @@ use DateTime;
 #[FlowNodeDefine(
     type: NodeType::KnowledgeFragmentStore->value,
     code: NodeType::KnowledgeFragmentStore->name,
-    name: 'to量database / to量storage',
+    name: 'toquantitydatabase / toquantitystorage',
     paramsConfig: KnowledgeFragmentStoreNodeParamsConfig::class,
     version: 'v0',
     singleDebug: true,
@@ -61,7 +61,7 @@ class KnowledgeFragmentStoreNodeRunner extends AbstractKnowledgeNodeRunner
         $dataIsolation = $executionData->getDataIsolation();
         $knowledgeBaseDataIsolation = KnowledgeBaseDataIsolation::create($dataIsolation->getCurrentOrganizationCode(), $dataIsolation->getCurrentUserId(), $dataIsolation->getDelightfulId());
         $knowledgeBaseEntity = $knowledgeBaseDomainService->show($knowledgeBaseDataIsolation, $knowledgeCode);
-        // 这里要建立one归纳的document
+        // 这within要建立one归纳的document
         $documentEntity = $documentDomainService->getOrCreateDefaultDocument($knowledgeBaseDataIsolation, $knowledgeBaseEntity);
 
         $savingDelightfulFlowKnowledgeFragmentEntity = new KnowledgeBaseFragmentEntity();

@@ -91,7 +91,7 @@ class FileCleanupRecordRepository
         $models = FileCleanupRecordModel::query()
             ->where('status', 2) // failstatus
             ->where('retry_count', '<', $maxRetries)
-            ->where('updated_at', '<=', date('Y-m-d H:i:s', time() - 300)) // 5分钟前update的record
+            ->where('updated_at', '<=', date('Y-m-d H:i:s', time() - 300)) // 5minute钟frontupdate的record
             ->orderBy('updated_at', 'asc')
             ->limit($limit)
             ->get();
@@ -149,7 +149,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 批量deleterecord.
+     * 批quantitydeleterecord.
      */
     public function batchDelete(array $ids): bool
     {
@@ -247,7 +247,7 @@ class FileCleanupRecordRepository
     }
 
     /**
-     * 将多个Modelconvert为Entityarray.
+     * 将多Modelconvert为Entityarray.
      */
     private function modelsToEntities(Collection $models): array
     {

@@ -68,7 +68,7 @@ class ServiceProviderApi extends AbstractApi
         /** @var DelightfulUserAuthorization $authenticatable */
         $authenticatable = $this->getAuthorization();
         $providerConfigAggregateDTO = $this->adminProviderAppService->getProviderModelsByConfigId($authenticatable, $serviceProviderConfigId);
-        // 将新formatdataconvert为旧formatby保持to后compatible性
+        // 将新formatdataconvert为旧formatby保持tobackcompatibleproperty
         return $this->convertToLegacyFormat($providerConfigAggregateDTO);
     }
 
@@ -113,7 +113,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 连通性test.
+     * 连通propertytest.
      * @throws Exception
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
@@ -200,7 +200,7 @@ class ServiceProviderApi extends AbstractApi
 
     /**
      * get所havenon官方LLMservice商list
-     * 直接fromdatabase中querycategory为llmandprovider_typenot为OFFICIAL的service商
+     * 直接fromdatabasemiddlequerycategory为llmandprovider_typenot为OFFICIAL的service商
      * notdependencyatcurrentorganization，适useatneed添加service商的场景.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
@@ -264,7 +264,7 @@ class ServiceProviderApi extends AbstractApi
     }
 
     /**
-     * 将新formatdataconvert为旧format，保持to后compatible性.
+     * 将新formatdataconvert为旧format，保持tobackcompatibleproperty.
      * @param ?ProviderConfigModelsDTO $aggregateDTO 聚合DTOobject
      * @return array 旧formatdata
      */
@@ -280,7 +280,7 @@ class ServiceProviderApi extends AbstractApi
             return $data;
         }
 
-        // 将 provider_config content提升to根级别，并添加 alias 和 models
+        // 将 provider_config content提升torootlevel别，并添加 alias 和 models
         return array_merge($data['provider_config'], [
             'alias' => $data['provider_config']['translate']['alias']['zh_CN'] ?? '',
             'models' => $data['models'] ?? [],

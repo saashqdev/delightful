@@ -57,7 +57,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * 添加单个语言的转录result.
+     * 添加单语言的转录result.
      */
     public function addTranscription(string $language, string $text): self
     {
@@ -69,7 +69,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * get指定语言的转录result.
+     * getfinger定语言的转录result.
      */
     public function getTranscription(string $language): ?string
     {
@@ -90,7 +90,7 @@ class VoiceTranscription extends AbstractValueObject
     }
 
     /**
-     * checkwhetherhave指定语言的转录result.
+     * checkwhetherhavefinger定语言的转录result.
      */
     public function hasTranscription(string $language): bool
     {

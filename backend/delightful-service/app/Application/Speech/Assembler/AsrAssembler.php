@@ -16,26 +16,26 @@ use Hyperf\Codec\Json;
 
 /**
  * ASR group装器
- * 负责 ASR 相关的实体group装和pathconvert.
+ * 负责 ASR 相关的实bodygroup装和pathconvert.
  *
  * pathformatinstruction：
  * - 工作区相对path (workspace-relative): .asr_recordings/session_xxx or 录音总结_xxx
  * - project工作directory (work directory): project_123/workspace
- * - organization码+APP_ID+bucket_md5前缀 (full prefix): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/
+ * - organization码+APP_ID+bucket_md5front缀 (full prefix): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/
  * - 完整path/file_key (full path): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx
  */
 class AsrAssembler
 {
     /**
-     * createdirectory实体.
+     * createdirectory实body.
      *
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
      * @param int $projectId projectID
      * @param string $relativePath 相对path（如：.asr_recordings/task_123 or 录音总结_xxx）
-     * @param string $fullPrefix 完整前缀（organization码+APP_ID+bucket_md5，如：DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/）
+     * @param string $fullPrefix 完整front缀（organization码+APP_ID+bucket_md5，如：DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/）
      * @param string $workDir 工作directory
-     * @param int $rootDirectoryId 根directoryID
+     * @param int $rootDirectoryId rootdirectoryID
      * @param bool $isHidden whether为隐藏directory
      * @param null|string $taskKey task键（仅隐藏directoryneed）
      */
@@ -101,7 +101,7 @@ class AsrAssembler
      *
      * convert关系: file_key = fullPrefix + workDir + "/" + relativePath
      *
-     * @param string $fullPrefix organization码+APP_ID+bucket_md5前缀 (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
+     * @param string $fullPrefix organization码+APP_ID+bucket_md5front缀 (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
      * @param string $workDir project工作directory (如: project_123/workspace)
      * @param string $relativePath 工作区相对path (如: .asr_recordings/session_xxx)
      * @return string 完整 file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
@@ -117,7 +117,7 @@ class AsrAssembler
     /**
      * from file_key 提取工作区相对path.
      *
-     * 将完整的 file_key convert为工作区相对path，useat沙箱 API call和界面展示
+     * 将完整的 file_key convert为工作区相对path，useat沙箱 API call和界surface展示
      * convert关系: relativePath = extractWorkspaceRelativePath(file_key)
      *
      * @param string $fileKey 完整 file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
@@ -125,13 +125,13 @@ class AsrAssembler
      */
     public static function extractWorkspaceRelativePath(string $fileKey): string
     {
-        // standard化path分隔符
+        // standard化pathminute隔符
         $normalizedPath = str_replace('\\', '/', trim($fileKey, '/'));
 
         // 查找 workspace/ 的position
         $workspacePos = strpos($normalizedPath, '/workspace/');
         if ($workspacePos !== false) {
-            // 提取 workspace/ 后面的部分
+            // 提取 workspace/ backsurface的部minute
             $relativePath = substr($normalizedPath, $workspacePos + 11); // 11 = strlen('/workspace/')
 
             // if相对pathnot为空，return相对path
@@ -140,9 +140,9 @@ class AsrAssembler
             }
         }
 
-        // ifnothave找to /workspace/，尝试查找 workspace/ 开头的情况
+        // ifnothave找to /workspace/，尝试查找 workspace/ 开head的情况
         if (str_starts_with($normalizedPath, 'workspace/')) {
-            $relativePath = substr($normalizedPath, 10); // 移except 'workspace/' 前缀
+            $relativePath = substr($normalizedPath, 10); // 移except 'workspace/' front缀
             if (! empty($relativePath)) {
                 return $relativePath;
             }

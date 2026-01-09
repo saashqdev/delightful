@@ -18,8 +18,8 @@ return new class extends Migration {
             $table->string('model', 80)->default('')->comment('model')->index()->change();
             $table->string('name', 80)->default('')->comment('customizename');
             $table->boolean('enabled')->default(1)->comment('whetherenable');
-            $table->string('implementation', 100)->default('')->comment('implement类');
-            $table->text('implementation_config')->nullable()->comment('implement类configuration');
+            $table->string('implementation', 100)->default('')->comment('implementcategory');
+            $table->text('implementation_config')->nullable()->comment('implementcategoryconfiguration');
         });
     }
 

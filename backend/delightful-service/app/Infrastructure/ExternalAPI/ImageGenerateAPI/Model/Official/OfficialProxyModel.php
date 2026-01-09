@@ -84,7 +84,7 @@ class OfficialProxyModel extends AbstractImageGenerate
             return new OpenAIFormatResponse($responseData);
         } catch (GuzzleException $e) {
             $errorBody = '';
-            // 尝试getresponse体
+            // 尝试getresponsebody
             try {
                 if ($e instanceof RequestException && $e->hasResponse()) {
                     $errorBody = $e->getResponse()->getBody()->getContents();

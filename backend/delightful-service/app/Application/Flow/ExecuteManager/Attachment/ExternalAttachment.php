@@ -10,7 +10,7 @@ namespace App\Application\Flow\ExecuteManager\Attachment;
 use App\Infrastructure\Util\FileType;
 
 /**
- * 外链.
+ * outside链.
  */
 class ExternalAttachment extends AbstractAttachment
 {

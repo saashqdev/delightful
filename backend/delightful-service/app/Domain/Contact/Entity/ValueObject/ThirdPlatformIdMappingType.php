@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * 第third-party平台与麦吉的department、user、organizationencoding、null间encodingetc的mapping关系record.
+ * thethird-party平台与麦吉的department、user、organizationencoding、nullbetweenencodingetc的mapping关系record.
  */
 enum ThirdPlatformIdMappingType: string
 {
@@ -21,6 +21,6 @@ enum ThirdPlatformIdMappingType: string
     // organization
     case Organization = 'organization';
 
-    // null间
+    // nullbetween
     case Space = 'space';
 }

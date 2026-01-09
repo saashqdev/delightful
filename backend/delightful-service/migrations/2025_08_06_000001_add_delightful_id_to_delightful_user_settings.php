@@ -14,7 +14,7 @@ return new class extends Migration {
         // Add delightful_id column and index if they do not exist
         if (! Schema::hasColumn('delightful_user_settings', 'delightful_id')) {
             Schema::table('delightful_user_settings', function (Blueprint $table) {
-                $table->string('delightful_id', 64)->nullable()->comment('账号 DelightfulId')->after('organization_code');
+                $table->string('delightful_id', 64)->nullable()->comment('账number DelightfulId')->after('organization_code');
                 $table->index(['delightful_id', 'key'], 'idx_delightful_user_settings_delightful_id_key');
             });
         }

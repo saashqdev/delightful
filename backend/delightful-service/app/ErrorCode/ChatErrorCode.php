@@ -54,7 +54,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.conversation.not_found')]
     case CONVERSATION_NOT_FOUND = 3011;
 
-    // 收件方not存in
+    // 收item方not存in
         // Receiver not found
     #[ErrorMessage('chat.user.receive_not_found')]
     case RECEIVER_NOT_FOUND = 3012;
@@ -64,7 +64,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.data.write_failed')]
     case DATA_WRITE_FAILED = 3013;
 
-    // request上下文丢失
+    // requestupdown文丢失
         // Request context lost
     #[ErrorMessage('chat.context.lost')]
     case CONTEXT_LOST = 3014;
@@ -84,7 +84,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.topic.message.not_found')]
     case TOPIC_MESSAGE_NOT_FOUND = 3017;
 
-    // message序列not存in
+    // message序columnnot存in
         // Message sequence not found
     #[ErrorMessage('chat.seq.not_found')]
     case SEQ_NOT_FOUND = 3018;
@@ -114,12 +114,12 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.message.delivery_failed')]
     case MESSAGE_DELIVERY_FAILED = 3023;
 
-    // 所haveuser已经in群里中
+    // 所haveuser已经in群withinmiddle
         // All users are already in the group
     #[ErrorMessage('chat.group.user_already_in_group')]
     case USER_ALREADY_IN_GROUP = 3024;
 
-    // 请sendmessage后againuse智能重命名feature
+    // 请sendmessagebackagainuse智能重命名feature
         // Send a message before using smart rename
     #[ErrorMessage('chat.topic.send_message_and_rename_topic')]
     case SEND_MESSAGE_AND_RENAME_TOPIC = 3025;
@@ -134,7 +134,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.update_error')]
     case GROUP_UPDATE_ERROR = 3027;
 
-    // nothaveusercanfromgroup chat中移except
+    // nothaveusercanfromgroup chatmiddle移except
         // No users can be removed from the group
     #[ErrorMessage('chat.group.no_user_to_remove')]
     case GROUP_NO_USER_TO_REMOVE = 3028;
@@ -179,7 +179,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.operation.failed')]
     case OPERATION_FAILED = 3036;
 
-    // message中的filenot存in
+    // messagemiddle的filenot存in
         // File in message not found
     #[ErrorMessage('chat.file.not_found')]
     case FILE_NOT_FOUND = 3037;
@@ -189,7 +189,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.topic.id_not_found')]
     case TOPIC_ID_NOT_FOUND = 3038;
 
-    // not supportedsync这个第三方平台的departmentdata
+    // not supportedsync这the三方平台的departmentdata
         // Syncing department data from this third-party platform is not supported
     #[ErrorMessage('chat.department.sync_not_support')]
     case DEPARTMENT_SYNC_NOT_SUPPORT = 3039;
@@ -237,7 +237,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.conversation.organization_code_empty')]
     case CONVERSATION_ORGANIZATION_CODE_EMPTY = 3101;
 
-    // useralso未create账号
+    // useralso未create账number
         // User has not created an account
     #[ErrorMessage('chat.user.not_create_account')]
     case USER_NOT_CREATE_ACCOUNT = 3102;

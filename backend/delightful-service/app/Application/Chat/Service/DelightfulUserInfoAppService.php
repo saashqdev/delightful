@@ -52,7 +52,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
         // getdepartmentuserassociateinfo
         $departmentUserEntities = $this->departmentUserDomainService->getDepartmentUsersByUserIds([$userId], $dataIsolation);
 
-        // 提取工号和职位
+        // 提取工number和职位
         $workNumber = '';
         $position = '';
         if (! empty($departmentUserEntities)) {
@@ -76,7 +76,7 @@ class DelightfulUserInfoAppService extends AbstractAppService
     }
 
     /**
-     * 批量getuserinfo.
+     * 批quantitygetuserinfo.
      *
      * @param array $userIds userIDarray
      * @param ContactDataIsolation $dataIsolation data隔离object

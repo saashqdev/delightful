@@ -49,7 +49,7 @@ readonly class KnowledgeBaseDomainService
             $delightfulFlowKnowledgeEntity = $savingDelightfulFlowKnowledgeEntity;
             $create = true;
 
-            // use已经提前generate好的 code
+            // use已经提frontgenerate好的 code
             if (! empty($delightfulFlowKnowledgeEntity->getBusinessId())) {
                 $tempCode = $this->getTempCodeByBusinessId($delightfulFlowKnowledgeEntity->getType(), $delightfulFlowKnowledgeEntity->getBusinessId());
                 if (! empty($tempCode)) {
@@ -73,7 +73,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * saveknowledge base - to量进度.
+     * saveknowledge base - toquantity进degree.
      */
     public function saveProcess(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $savingKnowledgeEntity): KnowledgeBaseEntity
     {
@@ -86,7 +86,7 @@ readonly class KnowledgeBaseDomainService
     }
 
     /**
-     * queryknowledge base列表.
+     * queryknowledge basecolumn表.
      * @return array{total: int, list: array<KnowledgeBaseEntity>}
      */
     public function queries(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseQuery $query, Page $page): array
@@ -99,7 +99,7 @@ readonly class KnowledgeBaseDomainService
      */
     public function getByCodes(KnowledgeBaseDataIsolation $dataIsolation, array $codes): array
     {
-        // 分批query
+        // minute批query
         $chunks = array_chunk($codes, 500);
         $entities = [];
         foreach ($chunks as $chunk) {

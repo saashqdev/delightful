@@ -76,10 +76,10 @@ class VolceOCRClient implements OCRClientInterface
                 'verify_peer_name' => false,
             ],
         ]);
-        // get HTTP 头部info
+        // get HTTP head部info
         $headers = get_headers($url, true, $context);
 
-        // checkwhethersuccessget头部info
+        // checkwhethersuccessgethead部info
         if ($headers === false || ! isset($headers['Content-Type'])) {
             return null; // 无法getfiletype
         }
@@ -95,6 +95,6 @@ class VolceOCRClient implements OCRClientInterface
             return 'image';
         }
 
-        return null; // 既not是 PDF alsonot是指定的imageformat
+        return null; // 既not是 PDF alsonot是finger定的imageformat
     }
 }

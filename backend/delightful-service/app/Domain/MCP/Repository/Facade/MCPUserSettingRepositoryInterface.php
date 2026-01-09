@@ -18,7 +18,7 @@ interface MCPUserSettingRepositoryInterface
 
     /**
      * @param array<int> $ids
-     * @return array<int, MCPUserSettingEntity> returnbyid为key的实体objectarray
+     * @return array<int, MCPUserSettingEntity> returnbyid为key的实bodyobjectarray
      */
     public function getByIds(MCPDataIsolation $dataIsolation, array $ids): array;
 
@@ -57,7 +57,7 @@ interface MCPUserSettingRepositoryInterface
     public function delete(MCPDataIsolation $dataIsolation, int $id): bool;
 
     /**
-     * deleteuser的指定MCPservicesetting.
+     * deleteuser的finger定MCPservicesetting.
      */
     public function deleteByUserAndMcpServer(MCPDataIsolation $dataIsolation, string $userId, string $mcpServerId): bool;
 

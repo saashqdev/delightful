@@ -36,7 +36,7 @@ enum InstructType: int
     }
 
     /**
-     * get所have指令type及其国际化tag.
+     * get所havefinger令type及其国际化tag.
      * @return array<string, int> returntypename和对应的value
      */
     public static function getTypeOptions(): array
@@ -50,7 +50,7 @@ enum InstructType: int
     }
 
     /**
-     * verify指令value
+     * verifyfinger令value
      */
     public function validate(array &$items): void
     {
@@ -64,21 +64,21 @@ enum InstructType: int
     }
 
     /**
-     * 判断指令typewhetherneedcontentfield.
+     * 判断finger令typewhetherneedcontentfield.
      */
     public static function requiresContent(int $type, ?int $displayType = null, ?int $instructionType = null): bool
     {
-        // if是process指令，thennot可configuration指令content
+        // if是processfinger令，thennot可configurationfinger令content
         if ($instructionType == InstructCategory::FLOW) {
             return false;
         }
 
-        // if是系统指令，useSystemInstructType的判断
+        // if是系统finger令，useSystemInstructType的判断
         if ($displayType === InstructDisplayType::SYSTEM) {
             return SystemInstructType::requiresContent($type);
         }
 
-        // 普通指令的判断
+        // 普通finger令的判断
         return match (self::fromType($type)) {
             self::STATUS => false,  // statustypenotneedcontent
             self::SINGLE_CHOICE, self::SWITCH, self::TEXT => true,  // 其他typeneedcontent
@@ -86,7 +86,7 @@ enum InstructType: int
     }
 
     /**
-     * verify普通交互指令项.
+     * verify普通交互finger令item.
      */
     public static function validateInstructItem(array &$item, array &$seenOuterNames): void
     {
@@ -121,7 +121,7 @@ enum InstructType: int
             }
         }
 
-        // process指令not可configuration send指令检测
+        // processfinger令not可configuration sendfinger令检测
         if ($instructionType == InstructCategory::FLOW && isset($item['send_directly']) && $item['send_directly']) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.send_directly_only_allow_flow_instruction');
         }
@@ -130,14 +130,14 @@ enum InstructType: int
             $item['id'] = (string) IdGenerator::getSnowId();
         }
 
-        // if是普通指令，verifytype
+        // if是普通finger令，verifytype
         if (! isset($item['display_type'])) {
             self::fromType((int) $item['type'])->validate($item);
         }
     }
 
     /**
-     * verify普通交互指令group.
+     * verify普通交互finger令group.
      */
     public static function validateInstructs(array &$instructs): void
     {
@@ -153,7 +153,7 @@ enum InstructType: int
             }
             InstructGroupPosition::fromPosition((int) $group['position']);
 
-            // verify指令quantity
+            // verifyfinger令quantity
             if (! is_array($group['items']) || (count($group['items']) - count(SystemInstructType::getTypeOptions())) > InstructGroupPosition::MAX_INSTRUCTS) {
                 ExceptionBuilder::throw(
                     AgentErrorCode::VALIDATE_FAILED,
@@ -172,7 +172,7 @@ enum InstructType: int
     }
 
     /**
-     * securityverify指令，catchexception并returnresult.
+     * securityverifyfinger令，catchexception并returnresult.
      * @return array{success: bool, message: null|string}
      */
     public static function safeValidateInstructs(array &$instructs): array
@@ -195,7 +195,7 @@ enum InstructType: int
         }
 
         $totalItems = count($items['values']);
-        // verifystatus项most小quantity
+        // verifystatusitemmost小quantity
         if ($totalItems < 2) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_items_min_count');
         }
@@ -213,14 +213,14 @@ enum InstructType: int
             );
         }
 
-        // verifystatus项
+        // verifystatusitem
         foreach ($items['values'] as &$item) {
-            // ensureeach个status项allhaveID
+            // ensureeachstatusitemallhaveID
             if (! isset($item['id'])) {
                 $item['id'] = (string) IdGenerator::getSnowId();
             }
 
-            // verifyeach个status项
+            // verifyeachstatusitem
             $this->validateStatus($item);
         }
     }
@@ -234,7 +234,7 @@ enum InstructType: int
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_select_cannot_be_empty');
         }
 
-        // verifywhether直接send指令
+        // verifywhether直接sendfinger令
         if (! isset($item['send_directly'])) {
             $item['send_directly'] = false;  // defaultnot直接send
         }
@@ -284,7 +284,7 @@ enum InstructType: int
      */
     private function validateText(array &$item): void
     {
-        // verifywhether直接send指令
+        // verifywhether直接sendfinger令
         if (! isset($item['send_directly'])) {
             $item['send_directly'] = false;  // defaultnot直接send
         }
@@ -324,7 +324,7 @@ enum InstructType: int
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_color_invalid');
         }
 
-        // verify指令value
+        // verifyfinger令value
         if (! isset($item['value']) || empty($item['value'])) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_status_value_required');
         }

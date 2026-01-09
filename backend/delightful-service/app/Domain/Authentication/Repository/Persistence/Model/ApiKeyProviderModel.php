@@ -13,7 +13,7 @@ use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
- * when前表先延use之前的表，thenmappingto通use的实体中，all面上线后，need回来more改field名.
+ * whenfront表先延use之front的表，thenmappingto通use的实bodymiddle，allsurfaceuplineback，need回来more改field名.
  * @property int $id
  * @property string $organization_code
  * @property string $code

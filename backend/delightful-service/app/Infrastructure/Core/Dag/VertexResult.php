@@ -10,19 +10,19 @@ namespace App\Infrastructure\Core\Dag;
 class VertexResult
 {
     /**
-     * storageneedbe调度的子节点.
+     * storageneedbe调degree的子sectionpoint.
      * @var array<string>
      */
     protected array $childrenIds = [];
 
     /**
-     * storage节点的executeresult.
+     * storagesectionpoint的executeresult.
      */
     protected mixed $result = null;
 
     /**
-     * storage节点的noteinformation.
-     * 可useat一些logrecord之类的.
+     * storagesectionpoint的noteinformation.
+     * 可useat一些logrecord之category的.
      */
     protected mixed $remarkData = null;
 

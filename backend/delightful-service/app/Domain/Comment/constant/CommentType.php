@@ -10,7 +10,7 @@ namespace App\Domain\Comment\constant;
 class CommentType
 {
     /**
-     * time线/动态
+     * timeline/动state
      */
     public const TIMELINE = 1;
 

@@ -29,7 +29,7 @@ class AgentSendMessageToGroupTool extends AbstractBuiltInTool
         return function (ExecutionData $executionData) {
             $params = $executionData->getTriggerData()->getParams();
             $senderUserId = $executionData->getAgentUserId();
-            // 助手sendmessage
+            // 助handsendmessage
             $assistantMessage = new TextMessage(['content' => $params['content']]);
             $appMessageId = IdGenerator::getUniqueId32();
             $receiveSeqDTO = new DelightfulSeqEntity();
@@ -143,7 +143,7 @@ JSON,
        "type": "string",
        "key": "unit",
        "title": "unit",
-       "description": "unit ，day 天，week 周，month 月，year 年",
+       "description": "unit ，day day，week week，month month，year year",
        "required": null,
        "value": null,
        "encryption": false,

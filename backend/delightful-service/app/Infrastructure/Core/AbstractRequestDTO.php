@@ -22,7 +22,7 @@ abstract class AbstractRequestDTO extends AbstractDTO
         $dto = new static();
         // parameter校验
         $data = $request->all();
-        // 这里要加上from路由upload递的parameter, keyneedconvert为蛇形
+        // 这within要加upfrom路由upload递的parameter, keyneedconvert为蛇shape
         $rawParams = $request->getAttribute(Dispatched::class)->params;
         $paramsForSnakeKey = [];
         foreach ($rawParams as $key => $param) {

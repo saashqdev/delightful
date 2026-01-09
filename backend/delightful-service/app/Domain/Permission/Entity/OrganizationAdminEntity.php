@@ -13,7 +13,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
 /**
- * organization管理员实体.
+ * organization管理员实body.
  */
 class OrganizationAdminEntity extends AbstractEntity
 {

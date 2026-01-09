@@ -39,7 +39,7 @@ use InvalidArgumentException;
 class ImageGenerateFactory
 {
     /**
-     * eachmodelsupport的固定比例mappingtable.
+     * eachmodelsupport的固定ratio例mappingtable.
      */
     private const SIZE_FIXED_RATIOS = [
         'VolcengineArk' => [
@@ -137,12 +137,12 @@ class ImageGenerateFactory
         $model = $data['model'];
         $mode = strtolower(explode('-', $model, limit: 2)[1] ?? 'fast');
 
-        // Midjourney notuse宽高parameter，只need prompt 和 mode，but是 Request 类inheritneed这些parameter
+        // Midjourney notuse宽高parameter，只need prompt 和 mode，but是 Request categoryinheritneed这些parameter
         // 所by我们给defaultvalue即可
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
 
-        // Midjourney not关心specific的宽高比例，but我们保留这个fieldby防将来need
+        // Midjourney not关corespecific的宽高ratio例，but我们保留这fieldby防将来need
         if (isset($data['size'])) {
             [$width, $height] = self::parseSizeToWidthHeight($data['size']);
             $ratio = self::calculateRatio((int) $width, (int) $height);
@@ -166,7 +166,7 @@ class ImageGenerateFactory
         $width = (int) $widthStr;
         $height = (int) $heightStr;
 
-        // todo xhy 先兜底，因为整个文生图alsonothave闭环
+        // todo xhy 先兜bottom，因为整文生图alsonothave闭环
         if (
             ! ($width === 1024 && $height === 1024)
             && ! ($width === 1024 && $height === 1792)
@@ -321,7 +321,7 @@ class ImageGenerateFactory
 
     private static function createVolcengineArkRequest(array $data): VolcengineArkRequest
     {
-        // parse size parameter为 width 和 height（use VolcengineArk 的固定比例configuration）
+        // parse size parameter为 width 和 height（use VolcengineArk 的固定ratio例configuration）
         [$width, $height] = self::parseSizeToWidthHeight($data['size'] ?? '1024x1024', ImageGenerateModelType::VolcengineArk->value);
 
         $request = new VolcengineArkRequest(
@@ -364,10 +364,10 @@ class ImageGenerateFactory
     }
 
     /**
-     * parseeach种 size format为 [width, height] array.
+     * parseeachtype size format为 [width, height] array.
      * supportformat：1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 etc.
      * @param string $size sizestring
-     * @param null|string $modelKey model键名，if指定then优先use该model的固定比例configuration
+     * @param null|string $modelKey model键名，iffinger定then优先use该model的固定ratio例configuration
      */
     private static function parseSizeToWidthHeight(string $size, ?string $modelKey = null): array
     {
@@ -378,7 +378,7 @@ class ImageGenerateFactory
             return [(string) $matches[1], (string) $matches[2]];
         }
 
-        // process乘号format：1024*1024
+        // process乘numberformat：1024*1024
         if (preg_match('/^(\d+)\*(\d+)$/', $size, $matches)) {
             return [(string) $matches[1], (string) $matches[2]];
         }
@@ -389,12 +389,12 @@ class ImageGenerateFactory
             return [(string) $resolution, (string) $resolution];
         }
 
-        // process比例format：16:9, 1:1, 3:4 etc
+        // processratio例format：16:9, 1:1, 3:4 etc
         if (preg_match('/^(\d+):(\d+)$/', $size, $matches)) {
             $width = (int) $matches[1];
             $height = (int) $matches[2];
 
-            // 尝试get固定比例configuration
+            // 尝试get固定ratio例configuration
             $fixedSize = self::getFixedRatioSize($modelKey, $size);
             if ($fixedSize !== null) {
                 return $fixedSize;
@@ -418,19 +418,19 @@ class ImageGenerateFactory
     }
 
     /**
-     * get指定model的固定比例sizeconfiguration.
+     * getfinger定model的固定ratio例sizeconfiguration.
      * @param null|string $modelKey model键名
-     * @param string $ratioKey 比例键名，如 "1:1", "16:9"
+     * @param string $ratioKey ratio例键名，如 "1:1", "16:9"
      * @return null|array if存in固定configurationreturn [width, height] array，否thenreturn null table示needuse换算
      */
     private static function getFixedRatioSize(?string $modelKey, string $ratioKey): ?array
     {
-        // ifnothave指定model，直接return null
+        // ifnothavefinger定model，直接return null
         if ($modelKey === null) {
             return null;
         }
 
-        // checkwhether存in该model的固定比例configuration
+        // checkwhether存in该model的固定ratio例configuration
         if (isset(self::SIZE_FIXED_RATIOS[$modelKey])) {
             return self::SIZE_FIXED_RATIOS[$modelKey][$ratioKey] ?? self::SIZE_FIXED_RATIOS[$modelKey]['1:1'];
         }
@@ -440,7 +440,7 @@ class ImageGenerateFactory
     }
 
     /**
-     * 计算宽高比例（from LLMAppService 移过来的逻辑）.
+     * 计算宽高ratio例（from LLMAppService 移过来的逻辑）.
      */
     private static function calculateRatio(int $width, int $height): string
     {

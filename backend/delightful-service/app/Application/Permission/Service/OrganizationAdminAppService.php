@@ -85,7 +85,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 转让organizationcreate人身份.
+     * 转让organizationcreate人身share.
      */
     public function transferOwnership(DataIsolation $dataIsolation, string $newOwnerUserId, string $currentOwnerUserId): void
     {
@@ -98,7 +98,7 @@ class OrganizationAdminAppService extends AbstractKernelAppService
     }
 
     /**
-     * 丰富organization管理员实体的userinfo.
+     * 丰富organization管理员实body的userinfo.
      */
     private function enrichOrganizationAdminWithUserInfo(DataIsolation $dataIsolation, OrganizationAdminEntity $organizationAdmin): array
     {

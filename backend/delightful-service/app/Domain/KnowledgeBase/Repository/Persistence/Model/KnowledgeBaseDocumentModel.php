@@ -19,22 +19,22 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $knowledge_base_code knowledge baseencoding
  * @property string $name documentname
  * @property string $code documentencoding
- * @property int $version version号
+ * @property int $version versionnumber
  * @property bool $enabled whetherenable
  * @property int $doc_type documenttype
- * @property array $doc_metadata document元data
+ * @property array $doc_metadata documentyuandata
  * @property DocumentFileInterface $document_file documentfileinfo
- * @property string $third_platform_type 第三方平台type
- * @property string $third_file_id 第三方fileID
+ * @property string $third_platform_type the三方平台type
+ * @property string $third_file_id the三方fileID
  * @property int $sync_status syncstatus
  * @property int $sync_times synccount
  * @property string $sync_status_message syncstatusmessage
  * @property string $embedding_model 嵌入model
- * @property string $vector_db to量database
+ * @property string $vector_db toquantitydatabase
  * @property array $retrieve_config 检索configuration
- * @property array $fragment_config 片段configuration
+ * @property array $fragment_config slicesegmentconfiguration
  * @property array $embedding_config 嵌入configuration
- * @property array $vector_db_config to量databaseconfiguration
+ * @property array $vector_db_config toquantitydatabaseconfiguration
  * @property string $created_uid create者UID
  * @property string $updated_uid update者UID
  * @property string $created_at createtime

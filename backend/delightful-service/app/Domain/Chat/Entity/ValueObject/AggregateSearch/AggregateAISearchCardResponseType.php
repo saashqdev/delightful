@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject\AggregateSearch;
 
 /**
- * response顺序：5 3 0 1 by后随意.
+ * response顺序：5 3 0 1 byback随意.
  */
 class AggregateAISearchCardResponseType
 {
@@ -38,7 +38,7 @@ class AggregateAISearchCardResponseType
     // PPT
     public const int PPT = 7;
 
-    // search深度
+    // search深degree
     public const int SEARCH_DEEP_LEVEL = 8;
 
     public static function getNameFromType(int $type): string
@@ -52,7 +52,7 @@ class AggregateAISearchCardResponseType
             self::PING_PONG => 'ping_pong',
             self::TERMINATE => 'exception终止',
             self::PPT => 'PPT',
-            self::SEARCH_DEEP_LEVEL => 'search深度',
+            self::SEARCH_DEEP_LEVEL => 'search深degree',
         ];
         return $typeNames[$type] ?? '未知type';
     }

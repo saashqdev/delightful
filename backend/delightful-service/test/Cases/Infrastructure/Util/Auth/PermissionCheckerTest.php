@@ -63,7 +63,7 @@ class PermissionCheckerTest extends TestCase
             $permissions
         ));
 
-        // 一个usercanhave多个permission
+        // 一usercanhave多permission
         $this->assertTrue(PermissionChecker::checkPermission(
             '13800000004',
             SuperPermissionEnum::FLOW_ADMIN,
@@ -95,7 +95,7 @@ class PermissionCheckerTest extends TestCase
             SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003', '13800000004'],
         ];
 
-        // notinpermissionlist中的user
+        // notinpermissionlistmiddle的user
         $this->assertFalse(PermissionChecker::checkPermission(
             '13800000099',
             SuperPermissionEnum::FLOW_ADMIN,
@@ -136,7 +136,7 @@ class PermissionCheckerTest extends TestCase
             '特定permissionuser' => ['13800000003', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], true],
             '无permissionuser' => ['13800000099', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
             'permissionnot存in' => ['13800000003', SuperPermissionEnum::HIDE_USER_OR_DEPT, [SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
-            '空手机号' => ['', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
+            '空hand机number' => ['', SuperPermissionEnum::FLOW_ADMIN, [SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'], SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003']], false],
         ];
     }
 }

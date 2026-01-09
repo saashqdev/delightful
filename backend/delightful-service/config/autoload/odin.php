@@ -12,7 +12,7 @@ use Hyperf\Odin\Model\OpenAIModel;
 
 use function Hyperf\Support\env;
 
-// 递归handleconfigurationvalue中的环境variable
+// 递归handleconfigurationvaluemiddle的环境variable
 function processConfigValue(&$value): void
 {
     if (is_string($value)) {
@@ -24,7 +24,7 @@ function processConfigValue(&$value): void
             $value = env($parts[0], $parts[0]);
         }
     } elseif (is_array($value)) {
-        // arraytype：递归handleeach个元素，保留array结构
+        // arraytype：递归handleeachyuan素，保留array结构
         foreach ($value as &$item) {
             processConfigValue($item);
         }
@@ -32,7 +32,7 @@ function processConfigValue(&$value): void
     // 其他type（如 int, bool etc）：保留原value，notconductparse
 }
 
-// handleconfiguration中的环境variable
+// handleconfigurationmiddle的环境variable
 function processModelConfig(&$modelItem, string $modelName): void
 {
     // handlemodelvalue
@@ -205,7 +205,7 @@ if (env('AWS_CLAUDE_ENABLED', false)) {
     ];
 }
 
-// loaddefaultmodelconfiguration（优先级most低）
+// loaddefaultmodelconfiguration（优先levelmost低）
 $models = [];
 
 // loaddefaultmodelconfiguration
@@ -214,7 +214,7 @@ foreach ($envModelConfigs as $modelKey => $config) {
     $models[$modelKey] = $config;
 }
 
-// load odin_models.json configuration（优先级more高，willoverridedefaultconfiguration）
+// load odin_models.json configuration（优先levelmore高，willoverridedefaultconfiguration）
 if (file_exists(BASE_PATH . '/odin_models.json')) {
     $customModels = json_decode(file_get_contents(BASE_PATH . '/odin_models.json'), true);
     if (is_array($customModels)) {
@@ -237,27 +237,27 @@ return [
         ],
         'general_api_options' => [
             'timeout' => [
-                'connection' => 5.0,  // connecttimeout（秒）
-                'write' => 10.0,      // writetimeout（秒）
-                'read' => 300.0,      // readtimeout（秒）
-                'total' => 350.0,     // 总体timeout（秒）
-                'thinking' => 120.0,  // 思考timeout（秒）
-                'stream_chunk' => 30.0, // stream块间timeout（秒）
-                'stream_first' => 60.0, // 首个stream块timeout（秒）
+                'connection' => 5.0,  // connecttimeout（second）
+                'write' => 10.0,      // writetimeout（second）
+                'read' => 300.0,      // readtimeout（second）
+                'total' => 350.0,     // 总bodytimeout（second）
+                'thinking' => 120.0,  // 思考timeout（second）
+                'stream_chunk' => 30.0, // streampiecebetweentimeout（second）
+                'stream_first' => 60.0, // 首streampiecetimeout（second）
             ],
             'custom_error_mapping_rules' => [],
             'logging' => [
                 // logfield白名单configuration
                 // if为nullarrayor未configuration，then打印所havefield
-                // ifconfiguration了field列表，then只打印指定的field
-                // support嵌套field，use点语法如 'args.messages'
-                // 注意：messages 和 tools fieldnotin白名单中，notwillbe打印
+                // ifconfiguration了fieldcolumn表，then只打印finger定的field
+                // support嵌setfield，usepoint语法如 'args.messages'
+                // 注意：messages 和 tools fieldnotin白名单middle，notwillbe打印
                 'whitelist_fields' => [
                     // 基本requestinfo
                     'request_id',                  // requestID
                     'model_id',                    // modelID
                     'model',                       // modelname
-                    'duration_ms',                 // request耗时
+                    'duration_ms',                 // request耗o clock
                     'url',                         // requestURL
                     'status_code',                 // responsestatus码
 
@@ -273,14 +273,14 @@ return [
                     'options.json.business_params',
                     'options.json.thinking',
 
-                    // use量statistics
+                    // usequantitystatistics
                     'usage',                       // 完整的usageobject
                     'usage.input_tokens',          // inputtokenquantity
                     'usage.output_tokens',         // outputtokenquantity
                     'usage.total_tokens',          // 总tokenquantity
 
-                    // requestparameter（排except敏感content）
-                    'args.temperature',            // 温度parameter
+                    // requestparameter（rowexcept敏感content）
+                    'args.temperature',            // 温degreeparameter
                     'args.max_tokens',             // most大token限制
                     'args.max_completion_tokens',             // most大token限制
                     'args.top_p',                  // Top-pparameter
@@ -289,14 +289,14 @@ return [
                     'args.presence_penalty',       // 存in惩罚
                     'args.stream',                 // streamresponse标志
                     'args.stop',                   // stop词
-                    'args.seed',                   // 随机种子
+                    'args.seed',                   // 随机type子
 
                     // Token预估info
                     'token_estimate',              // Token估算detail
                     'token_estimate.input_tokens', // 估算inputtokens
                     'token_estimate.output_tokens', // 估算outputtokens
 
-                    // responsecontent（排exceptspecificcontent）
+                    // responsecontent（rowexceptspecificcontent）
                     'choices.0.finish_reason',     // completereason
                     'choices.0.index',             // 选择索引
 
@@ -305,18 +305,18 @@ return [
                     'error.type',                  // errortype
                     'error.message',               // errormessage（notcontainspecificcontent）
 
-                    // 其他元data
+                    // 其他yuandata
                     'created',                     // createtime戳
                     'id',                         // requestID
                     'object',                     // objecttype
-                    'system_fingerprint',         // 系统指纹
+                    'system_fingerprint',         // 系统finger纹
                     'performance_flag',            // performancemark（慢request标识）
 
-                    // 注意：by下fieldbe排except，notwill打印
+                    // 注意：bydownfieldberowexcept，notwill打印
                     // - args.messages (usermessagecontent)
                     // - args.tools (tool定义)
                     // - choices.0.message (responsemessagecontent)
-                    // - choices.0.delta (streamresponse增量content)
+                    // - choices.0.delta (streamresponse增quantitycontent)
                     // - content (responsecontent)
                 ],
                 // whetherenablefield白名单filter，defaulttrue（enablefilter）

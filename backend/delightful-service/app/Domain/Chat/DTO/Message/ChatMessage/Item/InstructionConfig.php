@@ -14,57 +14,57 @@ use App\Domain\Chat\Entity\ValueObject\InstructionInsertLocation;
 use App\Domain\Chat\Entity\ValueObject\InstructionType;
 
 /**
- * 指令configuration实体类，according to proto 定义.
+ * finger令configuration实bodycategory，according to proto 定义.
  */
 class InstructionConfig extends AbstractEntity
 {
     /**
-     * 指令content.
+     * finger令content.
      */
     protected string $content = '';
 
     /**
-     * 指令description.
+     * finger令description.
      */
     protected string $description = '';
 
     /**
-     * 指令property，1 普通指令 2 系统指令.
+     * finger令property，1 普通finger令 2 系统finger令.
      */
     protected int $displayType = InstructionDisplayType::Normal->value;
 
     /**
-     * 指令ID.
+     * finger令ID.
      */
     protected string $id = '';
 
     /**
-     * 指令插入position，1 messagecontent前方，2 messagecontent中光标position，3 messagecontent后方.
+     * finger令插入position，1 messagecontentfront方，2 messagecontentmiddle光标position，3 messagecontentback方.
      */
     protected int $insertLocation = InstructionInsertLocation::Cursor->value;
 
     /**
-     * 指令type, 取value 1 为process指令，取value 2 为conversation指令，default为 conversation指令。
+     * finger令type, 取value 1 为processfinger令，取value 2 为conversationfinger令，default为 conversationfinger令。
      */
     protected int $instructionType = InstructionType::Conversation->value;
 
     /**
-     * 指令name.
+     * finger令name.
      */
     protected string $name = '';
 
     /**
-     * 直接send指令，user点击指令后将直接send给助理.
+     * 直接sendfinger令，userpoint击finger令back将直接send给助理.
      */
     protected bool $sendDirectly = false;
 
     /**
-     * 指令group件type，1 单option 2 开关 3 文本type 4 statustype.
+     * finger令groupitemtype，1 单option 2 开关 3 文本type 4 statustype.
      */
     protected int $type = InstructionComponentType::Radio->value;
 
     /**
-     * 指令value.
+     * finger令value.
      *
      * @var InstructionValue[]
      */
@@ -81,7 +81,7 @@ class InstructionConfig extends AbstractEntity
     protected string $off = '';
 
     /**
-     * 常驻指令，default只读.
+     * 常驻finger令，default只读.
      */
     protected bool $residency = true;
 
@@ -221,19 +221,19 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // process指令valuearray
+        // processfinger令valuearray
         if (empty($values)) {
             $this->values = [];
             return;
         }
 
-        // iffirst元素已经是 InstructionValue object，then直接use
+        // iffirstyuan素已经是 InstructionValue object，then直接use
         if (isset($values[0]) && $values[0] instanceof InstructionValue) {
             $this->values = $values;
             return;
         }
 
-        // 否then，将each个元素convert为 InstructionValue object
+        // 否then，将eachyuan素convert为 InstructionValue object
         $processedValues = [];
         foreach ($values as $value) {
             $processedValues[] = new InstructionValue($value);
@@ -316,14 +316,14 @@ class InstructionConfig extends AbstractEntity
     }
 
     /**
-     * according to指令group件typeget对应的name和value.
+     * according tofinger令groupitemtypeget对应的name和value.
      *
-     * type为开关时，name 取is 开/关，value 取 $instruction->getOn / $instruction->getOff
-     * type为单选时, name 取is 显示name，value：$instructionValue
-     * type为status按钮时，name 取isstatus文本，value: $instructionValue
+     * type为开关o clock，name 取is 开/关，value 取 $instruction->getOn / $instruction->getOff
+     * type为单选o clock, name 取is 显示name，value：$instructionValue
+     * type为status按钮o clock，name 取isstatus文本，value: $instructionValue
      * default name 为空， value = $instructionValue
      *
-     * @param string $instructionValue 指令value
+     * @param string $instructionValue finger令value
      * @return array returncontain name 和 value 的array
      */
     public function getNameAndValueByType(string $instructionValue): array

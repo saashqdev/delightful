@@ -23,7 +23,7 @@ class MidjourneyModel extends AbstractImageGenerate
     // most大retrycount
     protected const MAX_RETRIES = 20;
 
-    // retry间隔（秒）
+    // retrybetween隔（second）
     protected const RETRY_INTERVAL = 10;
 
     protected MidjourneyAPI $api;
@@ -78,7 +78,7 @@ class MidjourneyModel extends AbstractImageGenerate
             return $response; // returnnulldataresponse
         }
 
-        // 3. synchandle（Midjourney采use轮询机制）
+        // 3. synchandle（Midjourney采useround询机制）
         try {
             $result = $this->generateImageRawInternal($imageGenerateRequest);
             $this->validateMidjourneyResponse($result);
@@ -116,7 +116,7 @@ class MidjourneyModel extends AbstractImageGenerate
     {
         $rawResult = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // fromnativeresult中提取imageURL
+        // fromnativeresultmiddle提取imageURL
         if (! empty($rawResult['data']['images']) && is_array($rawResult['data']['images'])) {
             return new ImageGenerateResponse(ImageGenerateType::URL, $rawResult['data']['images']);
         }
@@ -133,7 +133,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 轮询taskresult并returnnativedata.
+     * round询taskresult并returnnativedata.
      * @throws Exception
      */
     protected function pollTaskResultForRaw(string $jobId): array
@@ -145,14 +145,14 @@ class MidjourneyModel extends AbstractImageGenerate
                 $result = $this->api->getTaskResult($jobId);
 
                 if (! isset($result['status'])) {
-                    $this->logger->error('MJ文生图：轮询responseformaterror', [
+                    $this->logger->error('MJ文生图：round询responseformaterror', [
                         'jobId' => $jobId,
                         'response' => $result,
                     ]);
                     ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR);
                 }
 
-                $this->logger->info('MJ文生图：轮询status', [
+                $this->logger->info('MJ文生图：round询status', [
                     'jobId' => $jobId,
                     'status' => $result['status'],
                     'retryCount' => $retryCount,
@@ -175,7 +175,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 ++$retryCount;
                 sleep(self::RETRY_INTERVAL);
             } catch (Exception $e) {
-                $this->logger->error('MJ文生图：轮询taskresultfail', [
+                $this->logger->error('MJ文生图：round询taskresultfail', [
                     'jobId' => $jobId,
                     'error' => $e->getMessage(),
                     'retryCount' => $retryCount,
@@ -285,7 +285,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * getalertmessage前缀
+     * getalertmessagefront缀
      */
     protected function getAlertPrefix(): string
     {
@@ -293,7 +293,7 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像的核心逻辑，returnnativeresult.
+     * generate图像的核core逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -363,12 +363,12 @@ class MidjourneyModel extends AbstractImageGenerate
                 unset($imageUrl);
             }
 
-            // handle单个 cdnImage
+            // handle单 cdnImage
             if (! empty($rawData['data']['cdnImage'])) {
                 $rawData['data']['cdnImage'] = $this->watermarkProcessor->addWatermarkToUrl($rawData['data']['cdnImage'], $imageGenerateRequest);
             }
         } catch (Exception $e) {
-            // 水印handlefail时，recorderrorbutnot影响imagereturn
+            // 水印handlefailo clock，recorderrorbutnot影响imagereturn
             $this->logger->error('Midjourneyimage水印handlefail', [
                 'error' => $e->getMessage(),
             ]);
@@ -397,14 +397,14 @@ class MidjourneyModel extends AbstractImageGenerate
     }
 
     /**
-     * 将Midjourneyimagedata添加toOpenAIresponseobject中（仅handleimagesfield）.
+     * 将Midjourneyimagedata添加toOpenAIresponseobjectmiddle（仅handleimagesfield）.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
         array $midjourneyResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // fromMidjourneyresponse中提取data.imagesfield
+        // fromMidjourneyresponsemiddle提取data.imagesfield
         if (empty($midjourneyResult['data']['images']) || ! is_array($midjourneyResult['data']['images'])) {
             return;
         }
@@ -412,7 +412,7 @@ class MidjourneyModel extends AbstractImageGenerate
         $currentData = $response->getData();
         $currentUsage = $response->getUsage() ?? new ImageUsage();
 
-        // 仅handle images array中的URL
+        // 仅handle images arraymiddle的URL
         foreach ($midjourneyResult['data']['images'] as $imageUrl) {
             if (! empty($imageUrl)) {
                 // handle水印
@@ -424,7 +424,7 @@ class MidjourneyModel extends AbstractImageGenerate
                         'error' => $e->getMessage(),
                         'url' => $imageUrl,
                     ]);
-                    // 水印handlefail时useoriginalURL
+                    // 水印handlefailo clockuseoriginalURL
                 }
 
                 $currentData[] = [

@@ -59,7 +59,7 @@ enum UserErrorCode: int
     #[ErrorMessage('user.create_id_relation_too_frequently')]
     case CREATE_ID_RELATION_TOO_FREQUENTLY = 2175;
 
-    // 手机号exception
+    // hand机numberexception
     #[ErrorMessage('user.phone_error')]
     case PHONE_ERROR = 2177;
 
@@ -74,7 +74,7 @@ enum UserErrorCode: int
     #[ErrorMessage('user.input_param_error')]
     case INPUT_PARAM_ERROR = 2180;
 
-    // 收件人typeexception
+    // 收item人typeexception
     #[ErrorMessage('user.receive_type_error')]
     case RECEIVE_TYPE_ERROR = 2181;
 

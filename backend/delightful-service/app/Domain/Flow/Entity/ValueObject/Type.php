@@ -20,10 +20,10 @@ enum Type: int
     // tool
     case Tools = 3;
 
-    // group合节点，运行methodhave点analogousat子process
+    // group合sectionpoint，运linemethodhavepointanalogousat子process
     case CombinedNode = 4;
 
-    // 循环节点
+    // 循环sectionpoint
     case Loop = 5;
 
     public function needEndNode(): bool

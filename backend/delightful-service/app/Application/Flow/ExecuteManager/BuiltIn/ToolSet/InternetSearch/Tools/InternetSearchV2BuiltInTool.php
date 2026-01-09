@@ -24,7 +24,7 @@ use function di;
 
 #[BuiltInToolDefine]
 /**
- * 采useone seq push所have的search相关content，前端notagain多个 seq merge成one渲染.
+ * 采useone seq push所have的search相关content，front端notagain多 seq mergebecomeone渲染.
  */
 class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
 {
@@ -40,7 +40,7 @@ class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '麦吉互联网search，批量对user的多个含义sameordifferent的issueconduct互联网search。';
+        return '麦吉互联网search，批quantity对user的多含义sameordifferent的issueconduct互联网search。';
     }
 
     public function getCallback(): ?Closure
@@ -80,7 +80,7 @@ class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "rootsectionpoint",
     "description": "",
     "items": null,
     "value": null,
@@ -91,8 +91,8 @@ class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
         "questions": {
             "type": "array",
             "key": "questions",
-            "title": "userissue列表",
-            "description": "userissue列表",
+            "title": "userissuecolumn表",
+            "description": "userissuecolumn表",
             "required": null,
             "value": null,
             "encryption": false,
@@ -115,8 +115,8 @@ class InternetSearchV2BuiltInTool extends AbstractBuiltInTool
         "use_deep_search": {
             "type": "boolean",
             "key": "use_deep_search",
-            "title": "whetheruse深度search",
-            "description": "whetheruse深度search",
+            "title": "whetheruse深degreesearch",
+            "description": "whetheruse深degreesearch",
             "required": null,
             "value": null,
             "encryption": false,

@@ -21,7 +21,7 @@ use Hyperf\Codec\Json;
 use InvalidArgumentException;
 
 /**
- * message的contentdetail. 一条message可能be多个session/序列号associate，所bymessagecontent是独立的.
+ * message的contentdetail. 一itemmessage可能be多session/序columnnumberassociate，所bymessagecontent是独立的.
  */
 class DelightfulMessageEntity extends AbstractEntity
 {
@@ -47,7 +47,7 @@ class DelightfulMessageEntity extends AbstractEntity
      */
     protected ConversationType $receiveType;
 
-    // 收件人organizationencoding
+    // 收item人organizationencoding
     protected string $receiveOrganizationCode = '';
 
     protected string $appMessageId = '';

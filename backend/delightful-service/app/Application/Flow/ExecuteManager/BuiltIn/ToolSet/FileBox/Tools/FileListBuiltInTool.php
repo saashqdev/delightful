@@ -83,7 +83,7 @@ class FileListBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '列出usercurrentsession产生的file';
+        return 'column出usercurrentsession产生的file';
     }
 
     public function getInput(): ?NodeInput
@@ -95,7 +95,7 @@ class FileListBuiltInTool extends AbstractBuiltInTool
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "rootsectionpoint",
     "description": "",
     "items": null,
     "value": null,
@@ -171,7 +171,7 @@ JSON,
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "rootsectionpoint",
     "description": "",
     "items": null,
     "value": null,
@@ -220,7 +220,7 @@ JSON,
                         "type": "string",
                         "key": "file_url",
                         "sort": 1,
-                        "title": "file地址",
+                        "title": "fileground址",
                         "description": "",
                         "required": null,
                         "value": null,
@@ -233,7 +233,7 @@ JSON,
                         "type": "string",
                         "key": "file_ext",
                         "sort": 2,
-                        "title": "file后缀",
+                        "title": "fileback缀",
                         "description": "",
                         "required": null,
                         "value": null,

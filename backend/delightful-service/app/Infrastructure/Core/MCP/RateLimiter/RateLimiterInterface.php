@@ -11,19 +11,19 @@ use App\Infrastructure\Core\MCP\Exception\InvalidParamsException;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * 速率限制器interface.
+ * speedrate限制器interface.
  */
 interface RateLimiterInterface
 {
     /**
      * check客户端whetherallowexecuterequest.
      *
-     * @throws InvalidParamsException whenrequest超过速率限制时
+     * @throws InvalidParamsException whenrequest超过speedrate限制o clock
      */
     public function check(string $clientId, MessageInterface $request): void;
 
     /**
-     * getwhen前的限制configuration.
+     * getwhenfront的限制configuration.
      *
      * @return array<string, bool|int> contain限制configuration的array
      */

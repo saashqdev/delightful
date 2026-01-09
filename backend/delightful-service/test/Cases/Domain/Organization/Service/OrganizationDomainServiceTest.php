@@ -100,7 +100,7 @@ class OrganizationDomainServiceTest extends HttpTestCase
 
     public function testCreateOrganizationWithDuplicateNameThrowsException(): void
     {
-        // create第oneorganization
+        // createtheoneorganization
         $organization1 = $this->createTestOrganizationEntity(0);
         $savedOrganization1 = $this->organizationDomainService->create($organization1);
         $this->testOrganizationIds[] = $savedOrganization1->getId();

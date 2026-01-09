@@ -108,7 +108,7 @@ class UserAssembler
                 $logger->warning("user[delightful_id: {$user['delightful_id']} ]not存in, skip！");
                 continue;
             }
-            // if存in手机号，将手机号的中间四位替换为*
+            // if存inhand机number，将hand机number的middlebetween四位替换为*
             $phone = $account->getPhone();
             if (! empty($phone)) {
                 $phone = substr_replace($phone, '****', 3, 4);
@@ -135,7 +135,7 @@ class UserAssembler
     }
 
     /**
-     * 一个user可能存inat多个department.
+     * 一user可能存inat多department.
      * @param DelightfulDepartmentUserEntity[] $departmentUsers
      * @param UserDetailDTO[] $usersDetail
      * @param array<string, DelightfulDepartmentEntity[]> $departmentsInfo
@@ -157,7 +157,7 @@ class UserAssembler
             $userDepartmentMap[$departmentUser->getUserId()][] = $departmentUser;
         }
 
-        // 步骤2: 为each个userbuild详细info
+        // 步骤2: 为eachuserbuild详细info
         foreach ($usersDetail as $userInfo) {
             $userId = $userInfo->getUserId();
             $userDepartmentRelations = $userDepartmentMap[$userId] ?? [];
@@ -173,14 +173,14 @@ class UserAssembler
 
                 if (! empty($departments)) {
                     if ($withDepartmentFullPath) {
-                        // 完整path模式: 为each个departmentsave完整层级结构
+                        // 完整path模type: 为eachdepartmentsave完整layerlevel结构
                         $pathNodes = array_map(
                             fn (DelightfulDepartmentEntity $department) => self::assemblePathNodeByDepartmentInfo($department),
                             $departments
                         );
                         $fullPathNodes[$userDepartmentId] = $pathNodes;
                     } else {
-                        // 简略模式: 只取each个department的mostnext节点
+                        // 简略模type: 只取eachdepartment的mostnextsectionpoint
                         $departmentInfo = end($departments);
                         $pathNode = self::assemblePathNodeByDepartmentInfo($departmentInfo);
                         $allPathNodes[] = $pathNode;
@@ -210,7 +210,7 @@ class UserAssembler
                     'is_leader' => (bool) ($defaultDepartmentUser['is_leader'] ?? false),
                 ];
 
-                // 添加path节点info
+                // 添加pathsectionpointinfo
                 if ($withDepartmentFullPath) {
                     $userDepartmentDetail['full_path_nodes'] = $fullPathNodes;
                 } else {
@@ -241,7 +241,7 @@ class UserAssembler
             'parent_department_id' => $departmentInfo->getParentDepartmentId(),
             // departmentpath
             'path' => $departmentInfo->getPath(),
-            // 可见性
+            // 可见property
             'visible' => ! ($departmentInfo->getOption() === DepartmentOption::Hidden),
             'option' => $departmentInfo->getOption(),
         ];

@@ -15,7 +15,7 @@ use App\Domain\MCP\Repository\Persistence\Model\MCPServerToolModel;
 class MCPServerToolFactory
 {
     /**
-     * frommodelcreate实体.
+     * frommodelcreate实body.
      */
     public static function createEntity(MCPServerToolModel $model): MCPServerToolEntity
     {

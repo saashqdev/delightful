@@ -36,7 +36,7 @@ class UserSearchTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'usersearch。notallowsearchall部人员，一定是具have指定filtervalue';
+        return 'usersearch。notallowsearchall部人员，一定是具havefinger定filtervalue';
     }
 
     public function getCallback(): ?Closure
@@ -93,7 +93,7 @@ class UserSearchTool extends AbstractBuiltInTool
             "type": "string",
             "key": "filter_type",
             "title": "filtertype",
-            "description": "filtertype。support的filtertypehave：all、any。分别代table 所have条件、任意条件。default是 all",
+            "description": "filtertype。support的filtertypehave：all、any。minute别代table 所haveitemitem、任意itemitem。default是 all",
             "required": null,
             "value": null,
             "encryption": false,
@@ -104,8 +104,8 @@ class UserSearchTool extends AbstractBuiltInTool
         "filters": {
             "type": "array",
             "key": "filters",
-            "title": "filter条件",
-            "description": "filter条件",
+            "title": "filteritemitem",
+            "description": "filteritemitem",
             "required": null,
             "value": null,
             "encryption": false,
@@ -126,7 +126,7 @@ class UserSearchTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "field",
                         "title": "filterfield",
-                        "description": "filterfield。optional枚举have：username、work_number、position、position、department_name、group_name。分别代table  user姓名、user工号、user岗位、user手机号、departmentname、group chatname",
+                        "description": "filterfield。optional枚举have：username、work_number、position、position、department_name、group_name。minute别代table  user姓名、user工number、user岗位、userhand机number、departmentname、group chatname",
                         "required": null,
                         "value": null,
                         "encryption": false,
@@ -138,7 +138,7 @@ class UserSearchTool extends AbstractBuiltInTool
                         "type": "string",
                         "key": "operator",
                         "title": "filter符",
-                        "description": "filter符。optional枚举have：equals、no_equals、contains、no_contains。分别代table equal、notequal、contain、notcontain",
+                        "description": "filter符。optional枚举have：equals、no_equals、contains、no_contains。minute别代table equal、notequal、contain、notcontain",
                         "required": null,
                         "value": null,
                         "encryption": false,

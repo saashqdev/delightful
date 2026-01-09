@@ -15,28 +15,28 @@ use App\Infrastructure\Core\AbstractDTO;
 class UpdateSubAdminRequestDTO extends AbstractDTO
 {
     /**
-     * rolename（optional，仅inneedupdate时提供）.
+     * rolename（optional，仅inneedupdateo clock提供）.
      */
     public ?string $name = null;
 
     /**
-     * rolestatus：0=disable, 1=enable（optional，仅inneedupdate时提供）.
+     * rolestatus：0=disable, 1=enable（optional，仅inneedupdateo clock提供）.
      */
     public ?int $status = null;
 
     /**
-     * permissiontag，useat前端展示category（optional，仅inneedupdate时提供）.
+     * permissiontag，useatfront端展示category（optional，仅inneedupdateo clock提供）.
      */
     public ?array $permissionTag = null;
 
     /**
-     * permission键list（optional，仅inneedupdate时提供）.
+     * permission键list（optional，仅inneedupdateo clock提供）.
      * 注意：if提供了此field，将替换所have现havepermission.
      */
     public ?array $permissions = null;
 
     /**
-     * userIDlist（optional，仅inneedupdate时提供）.
+     * userIDlist（optional，仅inneedupdateo clock提供）.
      * 注意：if提供了此field，将替换所have现haveuserassociate.
      */
     public ?array $userIds = null;
@@ -104,7 +104,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
     }
 
     /**
-     * verifyDTOdata的valid性.
+     * verifyDTOdata的validproperty.
      */
     public function validate(): bool
     {
@@ -158,7 +158,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
             }
 
             if (strlen($this->name) > 255) {
-                $errors[] = 'rolenamelengthnot能超过255个字符';
+                $errors[] = 'rolenamelengthnot能超过255字符';
             }
         }
 
@@ -169,7 +169,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
         if ($this->permissions !== null) {
             foreach ($this->permissions as $index => $permission) {
                 if (! is_string($permission)) {
-                    $errors[] = "permissionlist第{$index}项must是string";
+                    $errors[] = "permissionlistthe{$index}itemmust是string";
                 }
             }
         }
@@ -177,7 +177,7 @@ class UpdateSubAdminRequestDTO extends AbstractDTO
         if ($this->userIds !== null) {
             foreach ($this->userIds as $index => $userId) {
                 if (! is_string($userId)) {
-                    $errors[] = "userIDlist第{$index}项must是string";
+                    $errors[] = "userIDlistthe{$index}itemmust是string";
                 }
             }
         }

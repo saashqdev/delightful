@@ -21,7 +21,7 @@ enum OrganizationSyncStatus: int
     /* 同failed */
     case SyncFailed = 2;
 
-    /* 同中 */
+    /* 同middle */
     case Syncing = 3;
 
     /**

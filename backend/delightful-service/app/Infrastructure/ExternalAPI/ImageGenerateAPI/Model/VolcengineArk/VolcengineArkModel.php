@@ -34,7 +34,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             throw new Exception('VolcengineArk API Key configuration缺失');
         }
 
-        // ifnothaveconfigurationURL，usedefault端点
+        // ifnothaveconfigurationURL，usedefault端point
         if (empty($apiUrl)) {
             $this->api = new VolcengineArkAPI($apiKey);
         } else {
@@ -49,12 +49,12 @@ class VolcengineArkModel extends AbstractImageGenerate
 
     public function setAK(string $ak)
     {
-        // VolcengineArk notuseAK/SK，这里为nullimplement
+        // VolcengineArk notuseAK/SK，这within为nullimplement
     }
 
     public function setSK(string $sk)
     {
-        // VolcengineArk notuseAK/SK，这里为nullimplement
+        // VolcengineArk notuseAK/SK，这within为nullimplement
     }
 
     public function setApiKey(string $apiKey)
@@ -70,7 +70,7 @@ class VolcengineArkModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像并returnOpenAIformatresponse - V2一体化version.
+     * generate图像并returnOpenAIformatresponse - V2一body化version.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
@@ -87,7 +87,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             return $response; // returnnulldataresponse
         }
 
-        // 3. 并发handle - 直接操作responseobject
+        // 3. 并hairhandle - 直接操作responseobject
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
@@ -108,7 +108,7 @@ class VolcengineArkModel extends AbstractImageGenerate
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('VolcengineArk OpenAIformat生图：单个requestfail', [
+                    $this->logger->error('VolcengineArk OpenAIformat生图：单requestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -119,7 +119,7 @@ class VolcengineArkModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 4. recordfinalresult
-        $this->logger->info('VolcengineArk OpenAIformat生图：并发handlecomplete', [
+        $this->logger->info('VolcengineArk OpenAIformat生图：并hairhandlecomplete', [
             '总request数' => $count,
             'successimage数' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
@@ -139,10 +139,10 @@ class VolcengineArkModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // fromnativeresult中提取imageURL
+        // fromnativeresultmiddle提取imageURL
         $imageData = [];
         foreach ($rawResults as $index => $result) {
-            // check嵌套的data结构：result['data']['data'][0]['url']
+            // check嵌set的data结构：result['data']['data'][0]['url']
             if (! empty($result['data']['data']) && ! empty($result['data']['data'][0]['url'])) {
                 $imageData[$index] = $result['data']['data'][0]['url'];
             }
@@ -166,7 +166,7 @@ class VolcengineArkModel extends AbstractImageGenerate
 
     protected function checkBalance(): float
     {
-        // VolcengineArk API 目前nothavebalancequeryinterface，returndefaultvalue
+        // VolcengineArk API 目frontnothavebalancequeryinterface，returndefaultvalue
         return 999.0;
     }
 
@@ -246,7 +246,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             }
         }
 
-        // 直接callAPI，exception自然to上抛
+        // 直接callAPI，exception自然toup抛
         return $this->api->generateImage($payload);
     }
 
@@ -261,17 +261,17 @@ class VolcengineArkModel extends AbstractImageGenerate
     }
 
     /**
-     * 将火山方舟imagedata添加toOpenAIresponseobject中.
+     * 将火山方舟imagedata添加toOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
         array $volcengineResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedislockensure并发security
+        // useRedislockensure并hairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
-            // from火山方舟response中提取data
+            // from火山方舟responsemiddle提取data
             if (empty($volcengineResult['data']) || ! is_array($volcengineResult['data'])) {
                 return;
             }
@@ -290,7 +290,7 @@ class VolcengineArkModel extends AbstractImageGenerate
                             'error' => $e->getMessage(),
                             'url' => $item['url'],
                         ]);
-                        // 水印handlefail时useoriginalURL
+                        // 水印handlefailo clockuseoriginalURL
                     }
 
                     $currentData[] = [
@@ -323,7 +323,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             ExceptionBuilder::throw(ImageGenerateErrorCode::GENERAL_ERROR);
         }
 
-        // VolcengineArk APIeach次只能generate一张图，pass并发callimplement多图generate
+        // VolcengineArk APIeachtime只能generate一张图，pass并haircallimplement多图generate
         $count = $imageGenerateRequest->getGenerateNum();
         $rawResults = [];
         $errors = [];

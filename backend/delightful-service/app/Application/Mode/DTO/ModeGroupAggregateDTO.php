@@ -14,12 +14,12 @@ class ModeGroupAggregateDTO extends AbstractDTO
     protected ModeGroupDTO $group;
 
     /**
-     * @var ModeGroupModelDTO[] 该分group对应的model详细infoarray
+     * @var ModeGroupModelDTO[] 该minutegroup对应的model详细infoarray
      */
     protected array $models = [];
 
     /**
-     * @var ModeGroupModelDTO[] 该分group对应的图像model详细infoarray（VLM）
+     * @var ModeGroupModelDTO[] 该minutegroup对应的图像model详细infoarray（VLM）
      */
     protected array $imageModels = [];
 
@@ -67,7 +67,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * 添加modelID（to后compatible，butnot推荐use）.
+     * 添加modelID（tobackcompatible，butnot推荐use）.
      */
     public function addModelId(string $modelId): void
     {
@@ -93,7 +93,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * checkwhethercontain指定modelID.
+     * checkwhethercontainfinger定modelID.
      */
     public function hasModelId(string $modelId): bool
     {
@@ -114,7 +114,7 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * getmodelIDarray（to后compatible）.
+     * getmodelIDarray（tobackcompatible）.
      * @return string[]
      */
     public function getModelIds(): array
@@ -123,12 +123,12 @@ class ModeGroupAggregateDTO extends AbstractDTO
     }
 
     /**
-     * setmodelIDarray（to后compatible，butnot推荐use）.
+     * setmodelIDarray（tobackcompatible，butnot推荐use）.
      * @param string[] $modelIds
      */
     public function setModelIds(array $modelIds): void
     {
-        // 这个method保留useatto后compatible，butactual上need完整的modelinfo
+        // 这method保留useattobackcompatible，butactualupneed完整的modelinfo
         // suggestionuse setModels() method
         $this->models = [];
         foreach ($modelIds as $modelId) {

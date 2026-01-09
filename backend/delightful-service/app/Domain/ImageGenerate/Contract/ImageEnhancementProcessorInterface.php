@@ -11,7 +11,7 @@ use App\Domain\ImageGenerate\ValueObject\ImplicitWatermark;
 
 /**
  * image增强process器interface
- * useat为image嵌入增强information（如隐式水印etc）.
+ * useat为image嵌入增强information（如隐type水印etc）.
  */
 interface ImageEnhancementProcessorInterface
 {

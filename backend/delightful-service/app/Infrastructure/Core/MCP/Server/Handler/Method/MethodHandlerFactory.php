@@ -16,7 +16,7 @@ use Psr\Container\ContainerInterface;
 class MethodHandlerFactory
 {
     /**
-     * methodprocess器mapping，method名 => process器类名.
+     * methodprocess器mapping，method名 => process器category名.
      *
      * @var array<string, class-string<MethodHandlerInterface>>
      */
@@ -39,9 +39,9 @@ class MethodHandlerFactory
     }
 
     /**
-     * create指定method的process器实例.
-     * each次callallcreatenewprocess器实例，ensure短生命period.
-     * 注意：call者need手动为return的process器set所需的Managergroup件.
+     * createfinger定method的process器实例.
+     * eachtimecallallcreatenewprocess器实例，ensure短生命period.
+     * 注意：call者needhand动为return的process器set所需的Managergroupitem.
      *
      * @return null|MethodHandlerInterface if找notto对应method的process器thenreturnnull
      */
@@ -57,7 +57,7 @@ class MethodHandlerFactory
     }
 
     /**
-     * checkwhether存in指定method的process器.
+     * checkwhether存infinger定method的process器.
      */
     public function hasHandler(string $method): bool
     {
@@ -78,7 +78,7 @@ class MethodHandlerFactory
      * registercustomizemethodprocess器.
      *
      * @param string $method method名
-     * @param class-string<MethodHandlerInterface> $handlerClass process器类名
+     * @param class-string<MethodHandlerInterface> $handlerClass process器category名
      */
     public function registerCustomHandler(string $method, string $handlerClass): void
     {

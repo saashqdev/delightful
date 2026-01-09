@@ -100,7 +100,7 @@ class GoogleGeminiAPI
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,
-            'responseModalities' => ['TEXT', 'IMAGE'], // 关键：指定我们need图像response
+            'responseModalities' => ['TEXT', 'IMAGE'], // 关键：finger定我们need图像response
             'topP' => 0.95,
         ];
 
@@ -154,7 +154,7 @@ class GoogleGeminiAPI
         $generationConfig = [
             'temperature' => 1,
             'maxOutputTokens' => 32768,
-            'responseModalities' => ['TEXT', 'IMAGE'], // 关键：指定我们need图像response
+            'responseModalities' => ['TEXT', 'IMAGE'], // 关键：finger定我们need图像response
             'topP' => 0.95,
         ];
 

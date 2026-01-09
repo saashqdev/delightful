@@ -20,7 +20,7 @@ class ModelConfigEntity extends AbstractEntity
     protected ?int $id = null;
 
     /**
-     * service商侧接入点 id.such as火山的：ep-xxxx.
+     * service商侧接入point id.such as火山的：ep-xxxx.
      */
     protected string $model;
 
@@ -84,7 +84,7 @@ class ModelConfigEntity extends AbstractEntity
 
     public function checkRpm(): void
     {
-        // 目前not限制
+        // 目frontnot限制
     }
 
     public function calculateInputCost(int $inputTokens, int $outputTokens): string
@@ -276,7 +276,7 @@ class ModelConfigEntity extends AbstractEntity
         if (! is_null($this->actualImplementationConfig)) {
             return $this->actualImplementationConfig;
         }
-        // fromconfiguration中getactual的configuration
+        // fromconfigurationmiddlegetactual的configuration
         $configs = [];
         foreach ($this->implementationConfig as $index => $item) {
             $item = explode('|', $item);

@@ -18,7 +18,7 @@ use function Hyperf\Translation\trans;
 
 /**
  * ASR taskstatus仓储
- * 统一管理 Redis 中的taskstatus CRUD.
+ * 统一管理 Redis middle的taskstatus CRUD.
  */
 readonly class AsrTaskRepository
 {
@@ -32,7 +32,7 @@ readonly class AsrTaskRepository
      * savetaskstatusto Redis.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus DTO
-     * @param int $ttl expiretime（秒），default 7 天
+     * @param int $ttl expiretime（second），default 7 day
      */
     public function save(AsrTaskStatusDTO $taskStatus, int $ttl = AsrConfig::TASK_STATUS_TTL): void
     {
@@ -45,7 +45,7 @@ readonly class AsrTaskRepository
             // setexpiretime
             $this->redis->expire($redisKey, $ttl);
         } catch (Throwable $e) {
-            // Redis 操作fail时recordbutnotthrowexception
+            // Redis 操作failo clockrecordbutnotthrowexception
             $this->logger->warning(trans('asr.api.redis.save_task_status_failed'), [
                 'task_key' => $taskStatus->taskKey ?? 'unknown',
                 'user_id' => $taskStatus->userId ?? 'unknown',
@@ -59,7 +59,7 @@ readonly class AsrTaskRepository
      *
      * @param string $taskKey task键
      * @param string $userId userID
-     * @return null|AsrTaskStatusDTO taskstatus DTO，not存in时return null
+     * @return null|AsrTaskStatusDTO taskstatus DTO，not存ino clockreturn null
      */
     public function findByTaskKey(string $taskKey, string $userId): ?AsrTaskStatusDTO
     {
@@ -130,7 +130,7 @@ readonly class AsrTaskRepository
     }
 
     /**
-     * delete心跳 Key.
+     * deletecore跳 Key.
      *
      * @param string $taskKey task键
      * @param string $userId userID
@@ -141,7 +141,7 @@ readonly class AsrTaskRepository
             $key = $this->generateHeartbeatKey($taskKey, $userId);
             $this->redis->del($key);
         } catch (Throwable $e) {
-            $this->logger->warning('delete心跳 Key fail', [
+            $this->logger->warning('deletecore跳 Key fail', [
                 'task_key' => $taskKey,
                 'user_id' => $userId,
                 'error' => $e->getMessage(),
@@ -158,14 +158,14 @@ readonly class AsrTaskRepository
      */
     private function generateTaskKey(string $taskKey, string $userId): string
     {
-        // 按统一rulegeneratestring，然后 MD5 避免键名过长
+        // 按统一rulegeneratestring，然back MD5 避免键名过长
         $keyString = sprintf('%s:%s', $userId, $taskKey);
         $keyHash = md5($keyString);
         return sprintf(AsrRedisKeys::TASK_HASH, $keyHash);
     }
 
     /**
-     * generate心跳 Key.
+     * generatecore跳 Key.
      *
      * @param string $taskKey task键
      * @param string $userId userID

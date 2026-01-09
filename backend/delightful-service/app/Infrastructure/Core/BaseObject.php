@@ -11,8 +11,8 @@ use ArrayAccess;
 use Hyperf\Contract\Arrayable;
 
 /**
- * 快速propertyaccess基类
- * 其他类可inherit此类，获得便捷的propertyset和access能力.
+ * 快speedpropertyaccess基category
+ * 其他category可inherit此category，获得便捷的propertyset和access能力.
  */
 abstract class BaseObject extends UnderlineObjectJsonSerializable implements ArrayAccess, Arrayable
 {
@@ -62,11 +62,11 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
     {
         // property一定要是小驼峰！not supported其他format！
         $humpKey = $this->getCamelizeValueFromCache($key);
-        // 判断propertywhether存in，避免callnot存in的property时，死循环触发 __get method
+        // 判断propertywhether存in，避免callnot存in的propertyo clock，死循环触hair __get method
         if (! property_exists($this, $humpKey)) {
             return null;
         }
-        // php 的methodnot区分size写
+        // php 的methodnot区minutesize写
         $methodName = 'get' . $humpKey;
         if (method_exists($this, $methodName)) {
             return $this->{$methodName}($humpKey);
@@ -78,11 +78,11 @@ abstract class BaseObject extends UnderlineObjectJsonSerializable implements Arr
     {
         // property一定要是小驼峰！not supported其他format！
         $humpKey = $this->getCamelizeValueFromCache($key);
-        // 判断propertywhether存in，避免callnot存in的property时，死循环触发 __set method
+        // 判断propertywhether存in，避免callnot存in的propertyo clock，死循环触hair __set method
         if (! property_exists($this, $humpKey)) {
             return;
         }
-        // php 的methodnot区分size写
+        // php 的methodnot区minutesize写
         $methodName = 'set' . $humpKey;
         if (method_exists($this, $methodName)) {
             $this->{$methodName}($value);

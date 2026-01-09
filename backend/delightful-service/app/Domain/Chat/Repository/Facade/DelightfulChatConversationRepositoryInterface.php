@@ -29,7 +29,7 @@ interface DelightfulChatConversationRepositoryInterface
     public function addConversation(DelightfulConversationEntity $conversation): DelightfulConversationEntity;
 
     /**
-     * (分organization)getuser与指定user的conversation窗口information.
+     * (minuteorganization)getuser与finger定user的conversation窗口information.
      * @return array<DelightfulConversationEntity>
      */
     public function getConversationsByReceiveIds(string $userId, array $receiveIds, ?string $userOrganizationCode = null): array;
@@ -43,10 +43,10 @@ interface DelightfulChatConversationRepositoryInterface
      */
     public function batchGetConversations(array $userIds, string $receiveId, ConversationType $receiveType): array;
 
-    // 批量移exceptconversation窗口
+    // 批quantity移exceptconversation窗口
     public function batchRemoveConversations(array $userIds, string $receiveId, ConversationType $receiveType): int;
 
-    // 批量updateconversation窗口
+    // 批quantityupdateconversation窗口
     public function batchUpdateConversations(array $conversationIds, array $updateData): int;
 
     public function getAllConversationList(): array;

@@ -15,8 +15,8 @@ class StreamOptions extends AbstractEntity
 
     protected bool $stream;
 
-    // useat标识streammessage的associate性。多段streammessage的 stream_app_message_id same
-    // ai searchcardmessage的多段response，已经将 app_message_id 作为associate id，streamresponseneed另外的 id 来做associate
+    // useat标识streammessage的associateproperty。多segmentstreammessage的 stream_app_message_id same
+    // ai searchcardmessage的多segmentresponse，已经将 app_message_id 作为associate id，streamresponseneed另outside的 id 来做associate
     protected string $streamAppMessageId;
 
     /**
@@ -25,7 +25,7 @@ class StreamOptions extends AbstractEntity
     protected MessageAppendOptions $append;
 
     /**
-     * issuesearchend的标识，useat前端渲染end动画。or者pushexceptioninfo。
+     * issuesearchend的标识，useatfront端渲染end动画。or者pushexceptioninfo。
      * @var StepFinishedDTO[]
      */
     protected array $stepsFinished;

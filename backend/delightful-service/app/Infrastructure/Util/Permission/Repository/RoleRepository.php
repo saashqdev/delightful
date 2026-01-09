@@ -90,7 +90,7 @@ class RoleRepository implements RoleRepositoryInterface
         // default只queryneed展示的role
         $query->where('is_display', 1);
 
-        // applicationfilter条件
+        // applicationfilteritemitem
         if ($filters) {
             if (isset($filters['name']) && ! empty($filters['name'])) {
                 $query->where('name', 'like', '%' . $filters['name'] . '%');
@@ -134,11 +134,11 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 为role分配user.
+     * 为roleminute配user.
      */
     public function assignUsers(string $organizationCode, int $roleId, array $userIds, ?string $assignedBy = null): void
     {
-        // getcurrent已分配的userlist
+        // getcurrent已minute配的userlist
         $existingUserIds = $this->roleUserQuery($organizationCode)
             ->where('role_id', $roleId)
             ->pluck('user_id')
@@ -198,7 +198,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * 批量getrole的userlist，return [roleId => userIds[]]。
+     * 批quantitygetrole的userlist，return [roleId => userIds[]]。
      */
     public function getRoleUsersMap(string $organizationCode, array $roleIds): array
     {
@@ -284,7 +284,7 @@ class RoleRepository implements RoleRepositoryInterface
     }
 
     /**
-     * mappingmodelto实体.
+     * mappingmodelto实body.
      */
     private function mapToEntity(RoleModel $model): RoleEntity
     {

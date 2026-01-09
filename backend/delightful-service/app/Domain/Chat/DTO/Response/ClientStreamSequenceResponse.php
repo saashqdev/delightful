@@ -16,13 +16,13 @@ class ClientStreamSequenceResponse extends AbstractEntity
     // 要updategoal seqId 的content
     protected string $targetSeqId;
 
-    // 为了implement丢package重传，needrecordwhen前的seqId。一定单调递增。
+    // 为了implement丢package重传，needrecordwhenfront的seqId。一定单调递增。
     protected ?int $seqId;
 
     // 大model的总结
     protected ?string $content;
 
-    // have些message的大modelresponsefieldnot是 content，这里特殊process
+    // have些message的大modelresponsefieldnot是 content，这within特殊process
     protected ?string $llmResponse;
 
     // 大model的推理content

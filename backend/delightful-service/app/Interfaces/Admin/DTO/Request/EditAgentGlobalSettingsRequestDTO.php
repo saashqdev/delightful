@@ -73,7 +73,7 @@ class EditAgentGlobalSettingsRequestDTO extends AbstractDTO
             '*.status.required' => 'statuscannot为null',
             '*.status.integer' => 'statusmust为整数',
             '*.status.in' => 'statusvalueinvalid',
-            '*.extra.array' => '额外parametermust是array',
+            '*.extra.array' => '额outsideparametermust是array',
         ];
     }
 

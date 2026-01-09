@@ -8,13 +8,13 @@ declare(strict_types=1);
 namespace App\Infrastructure\Core\OdinTools\MindSearch;
 
 /**
- * 批量generateassociateissue的子issue，then批量互联网search.
+ * 批quantitygenerateassociateissue的子issue，then批quantity互联网search.
  */
 class AssociationsSubQuestionsTool
 {
     public static string $name = 'associationsSubQuestionsSearch';
 
-    public static string $description = '将each个associateissue拆分为多个子issue，then批量互联网search';
+    public static string $description = '将eachassociateissue拆minute为多子issue，then批quantity互联网search';
 
     protected static array $parameters = [
         'type' => 'object',
@@ -28,7 +28,7 @@ class AssociationsSubQuestionsTool
                 'items' => [
                     'type' => 'string',
                 ],
-                'description' => 'associateissue的多个子issue',
+                'description' => 'associateissue的多子issue',
             ],
         ],
         'required' => ['association', 'subQuestions'],

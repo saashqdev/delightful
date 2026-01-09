@@ -25,7 +25,7 @@ class LoginApi
     public function login(RequestInterface $request): CheckLoginResponse
     {
         $stateCode = $request->input('state_code', '');
-        // 去掉 +号
+        // 去掉 +number
         $stateCode = str_replace('+', '', $stateCode);
         $loginRequest = new CheckLoginRequest();
         $loginRequest->setEmail($request->input('email', ''));

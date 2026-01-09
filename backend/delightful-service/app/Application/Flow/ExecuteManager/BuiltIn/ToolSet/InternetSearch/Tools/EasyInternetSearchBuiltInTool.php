@@ -39,7 +39,7 @@ class EasyInternetSearchBuiltInTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return '麦吉互联网search简单版，批量对user的多个含义sameordifferent的issueconduct互联网search。';
+        return '麦吉互联网search简单版，批quantity对user的多含义sameordifferent的issueconduct互联网search。';
     }
 
     public function getCallback(): ?Closure
@@ -74,7 +74,7 @@ class EasyInternetSearchBuiltInTool extends AbstractBuiltInTool
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "rootsectionpoint",
     "description": "",
     "items": null,
     "value": null,
@@ -85,8 +85,8 @@ class EasyInternetSearchBuiltInTool extends AbstractBuiltInTool
         "questions": {
             "type": "array",
             "key": "questions",
-            "title": "userissue列表",
-            "description": "userissue列表",
+            "title": "userissuecolumn表",
+            "description": "userissuecolumn表",
             "required": null,
             "value": null,
             "encryption": false,
@@ -123,7 +123,7 @@ JSON,
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "rootsectionpoint",
     "description": "",
     "items": null,
     "value": null,

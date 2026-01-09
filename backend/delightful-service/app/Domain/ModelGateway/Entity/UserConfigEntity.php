@@ -17,12 +17,12 @@ class UserConfigEntity extends AbstractEntity
     protected string $userId;
 
     /**
-     * 个人版为null.
+     * 人版为null.
      */
     protected string $appCode = '';
 
     /**
-     * 个人版为null.
+     * 人版为null.
      */
     protected string $organizationCode = '';
 

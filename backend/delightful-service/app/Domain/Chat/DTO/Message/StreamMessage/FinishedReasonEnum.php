@@ -10,7 +10,7 @@ namespace App\Domain\Chat\DTO\Message\StreamMessage;
 /**
  * endreason：
  * 0:processend
- * 1.发生exception.
+ * 1.hair生exception.
  */
 enum FinishedReasonEnum: int
 {

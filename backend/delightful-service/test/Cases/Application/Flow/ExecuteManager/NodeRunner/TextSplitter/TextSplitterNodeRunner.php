@@ -56,7 +56,7 @@ JSON, true));
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "required": [
             "split_texts"
@@ -68,7 +68,7 @@ JSON, true));
                 "type": "array",
                 "key": "split_texts",
                 "sort": 0,
-                "title": "文本片段",
+                "title": "文本slicesegment",
                 "description": "",
                 "required": null,
                 "value": null,
@@ -76,7 +76,7 @@ JSON, true));
                     "type": "string",
                     "key": "0",
                     "sort": 0,
-                    "title": "文本片段",
+                    "title": "文本slicesegment",
                     "description": "",
                     "required": null,
                     "value": null,

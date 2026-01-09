@@ -20,15 +20,15 @@ use Hyperf\Redis\RedisFactory;
 use Psr\Log\LoggerInterface;
 
 /**
- * 字节跳动voiceserviceSTStokenservice
+ * 字section跳动voiceserviceSTStokenservice
  * useatgetvoiceservice的JWT token.
  */
 class ByteDanceSTSService
 {
-    /** service端requestJWT token的API端点 */
+    /** service端requestJWT token的API端point */
     private const string STS_TOKEN_URL = 'https://openspeech.bytedance.com/api/v1/sts/token';
 
-    /** JWT Tokencache前缀 */
+    /** JWT Tokencachefront缀 */
     private const string JWT_CACHE_PREFIX = 'asr:jwt_token:';
 
     /** logrecord器 */
@@ -52,7 +52,7 @@ class ByteDanceSTSService
      * according touserDelightful IDgetJWT Token（带cache）.
      *
      * @param string $delightfulId userDelightful ID
-     * @param int $duration valid期（秒），default7200秒
+     * @param int $duration valid期（second），default7200second
      * @param bool $refresh whetherforcerefreshtoken，defaultfalse
      * @return array containJWT Token和相关info的array
      * @throws Exception
@@ -82,7 +82,7 @@ class ByteDanceSTSService
             }
         }
 
-        // cache中nothaveor已expire，or者forcerefresh，getnewJWT Token
+        // cachemiddlenothaveor已expire，or者forcerefresh，getnewJWT Token
         $appId = config('asr.volcengine.app_id');
         $accessToken = config('asr.volcengine.token');
 
@@ -102,7 +102,7 @@ class ByteDanceSTSService
             'delightful_id' => $delightfulId,
         ];
 
-        // cacheJWT Token，提前30秒expireby避免边界issue
+        // cacheJWT Token，提front30secondexpireby避免side界issue
         $cacheExpiry = max(1, $duration - 30);
         $this->cacheJwtToken($cacheKey, $tokenData, $cacheExpiry);
 
@@ -121,7 +121,7 @@ class ByteDanceSTSService
      *
      * @param string $appId applicationID
      * @param string $accessToken accesstoken
-     * @param int $duration valid期（秒），default7200秒
+     * @param int $duration valid期（second），default7200second
      * @return string JWT token
      * @throws Exception
      */
@@ -164,7 +164,7 @@ class ByteDanceSTSService
             }
 
             if (! isset($responseData['jwt_token'])) {
-                $this->logger->error('response中缺少jwt_tokenfield', [
+                $this->logger->error('responsemiddle缺少jwt_tokenfield', [
                     'response' => $responseData,
                 ]);
                 ExceptionBuilder::throw(AsrErrorCode::Error, 'asr.sts_token.missing_jwt_token');
@@ -191,7 +191,7 @@ class ByteDanceSTSService
     /**
      * use环境variableconfigurationgetJWT token.
      *
-     * @param int $duration valid期（秒），default7200秒
+     * @param int $duration valid期（second），default7200second
      * @return string JWT token
      * @throws Exception
      */
@@ -266,7 +266,7 @@ class ByteDanceSTSService
 
             $data = Json::decode($cachedData);
 
-            // checkwhether已expire（额外的securitycheck）
+            // checkwhether已expire（额outside的securitycheck）
             if (isset($data['expires_at']) && $data['expires_at'] <= time()) {
                 $this->redis->del($cacheKey);
                 return null;
@@ -287,7 +287,7 @@ class ByteDanceSTSService
      *
      * @param string $cacheKey cache键
      * @param array $tokenData Tokendata
-     * @param int $expiry expiretime（秒）
+     * @param int $expiry expiretime（second）
      */
     private function cacheJwtToken(string $cacheKey, array $tokenData, int $expiry): void
     {

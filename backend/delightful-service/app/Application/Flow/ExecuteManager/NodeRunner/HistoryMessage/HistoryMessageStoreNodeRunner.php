@@ -44,10 +44,10 @@ class HistoryMessageStoreNodeRunner extends NodeRunner
             $paramsConfig->getLinkDesc()
         );
 
-        // if是资源类的data，那么need提前upload了
+        // if是资源category的data，那么need提frontupload了
         $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
-        // 由at里面willconduct重命名，所by这里直接get对应的name传入进去
+        // 由atwithinsurfacewillconduct重命名，所by这within直接get对应的name传入进去
         $linkPaths = array_map(function (AbstractAttachment $attachment) {
             return $attachment->getPath();
         }, $attachments);

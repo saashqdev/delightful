@@ -21,11 +21,11 @@ class AtomicNodeToolSet extends AbstractBuiltInToolSet
 
     public function getName(): string
     {
-        return '原子节点';
+        return '原子sectionpoint';
     }
 
     public function getDescription(): string
     {
-        return '提供了部分原子节点的toolcall能力';
+        return '提供了部minute原子sectionpoint的toolcall能力';
     }
 }

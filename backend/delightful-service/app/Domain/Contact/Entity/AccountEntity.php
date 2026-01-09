@@ -18,7 +18,7 @@ class AccountEntity extends AbstractEntity
     protected ?string $delightfulId = null;
 
     /**
-     * 账号type:0:ai 1:人类 2:application.
+     * 账numbertype:0:ai 1:人category 2:application.
      */
     protected ?UserType $type = null;
 
@@ -28,17 +28,17 @@ class AccountEntity extends AbstractEntity
     protected ?string $aiCode = null;
 
     /**
-     * 账号status,0:正常,1:disable.
+     * 账numberstatus,0:正常,1:disable.
      */
     protected ?AccountStatus $status = null;
 
     /**
-     * 手机号国家冠码
+     * hand机number国家冠码
      */
     protected ?string $countryCode = null;
 
     /**
-     * 手机号.
+     * hand机number.
      */
     protected ?string $phone = null;
 
@@ -64,7 +64,7 @@ class AccountEntity extends AbstractEntity
 
     protected ?string $createdAt = null;
 
-    // 为了trace哪里create的账号，留下这个构造函数
+    // 为了trace哪withincreate的账number，留down这构造函数
     public function __construct(array $data = [])
     {
         parent::__construct($data);

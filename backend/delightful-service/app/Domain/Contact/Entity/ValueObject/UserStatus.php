@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Contact\Entity\ValueObject;
 
 /**
- * userinorganization中的status
+ * userinorganizationmiddle的status
  */
 enum UserStatus: int
 {

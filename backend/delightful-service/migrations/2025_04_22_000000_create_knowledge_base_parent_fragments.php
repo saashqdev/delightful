@@ -18,7 +18,7 @@ return new class extends Migration {
             // primary key
             $table->bigIncrements('id');
 
-            // 元data
+            // yuandata
             $table->string('knowledge_base_code', 255);
             $table->string('knowledge_base_document_code', 255)->comment('associateknowledge basedocumentcode');
             $table->string('organization_code')->comment('organizationencoding');
@@ -27,7 +27,7 @@ return new class extends Migration {
             $table->string('created_uid', 255)->comment('create者ID');
             $table->string('updated_uid', 255)->comment('update者ID');
 
-            // statustime点
+            // statustimepoint
             $table->datetimes();
             $table->softDeletes();
 

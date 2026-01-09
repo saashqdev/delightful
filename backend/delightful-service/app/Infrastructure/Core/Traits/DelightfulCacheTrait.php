@@ -15,7 +15,7 @@ use Throwable;
 trait DelightfulCacheTrait
 {
     /**
-     * cacheobjectproperty的下划线和驼峰命名，避免频繁计算.
+     * cacheobjectproperty的down划line和驼峰命名，避免频繁计算.
      */
     protected static ?DriverInterface $propertyCacheDriver = null;
 
@@ -37,7 +37,7 @@ trait DelightfulCacheTrait
     }
 
     /**
-     * 类的propertyinframework运行时是not变的，所by这里usecache，避免重复计算.
+     * category的propertyinframework运lineo clock是not变的，所by这withinusecache，避免重复计算.
      * ifhasContainer是 false，theninstructionnothaveuse容器，notquerycache.
      */
     protected function getUnCamelizeValueFromCache(string $key): string
@@ -60,7 +60,7 @@ trait DelightfulCacheTrait
     }
 
     /**
-     * 类的propertyinframework运行时是not变的，所by这里usecache，避免重复计算.
+     * category的propertyinframework运lineo clock是not变的，所by这withinusecache，避免重复计算.
      */
     protected function getCamelizeValueFromCache(string $key): string
     {

@@ -15,27 +15,27 @@ enum RoutineType: string
     case NoRepeat = 'no_repeat';
 
     /**
-     * each天重复.
+     * eachday重复.
      */
     case DailyRepeat = 'daily_repeat';
 
     /**
-     * each周重复.
+     * eachweek重复.
      */
     case WeeklyRepeat = 'weekly_repeat';
 
     /**
-     * each月重复.
+     * eachmonth重复.
      */
     case MonthlyRepeat = 'monthly_repeat';
 
     /**
-     * each年重复.
+     * eachyear重复.
      */
     case AnnuallyRepeat = 'annually_repeat';
 
     /**
-     * each个工作日重复.
+     * each工作day重复.
      */
     case WeekdayRepeat = 'weekday_repeat';
 

@@ -29,7 +29,7 @@ use function Hyperf\Support\retry;
 
 /**
  * service商modelsyncapplicationservice.
- * 负责from外部APIpullmodel并synctoOfficialservice商.
+ * 负责fromoutside部APIpullmodel并synctoOfficialservice商.
  */
 class ProviderModelSyncAppService
 {
@@ -46,8 +46,8 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * from外部APIsyncmodel.
-     * whenservice商configurationcreateorupdate时，if是Officialservice商and是官方organization，thenfrom外部APIpullmodel.
+     * fromoutside部APIsyncmodel.
+     * whenservice商configurationcreateorupdateo clock，if是Officialservice商and是官方organization，thenfromoutside部APIpullmodel.
      */
     public function syncModelsFromExternalApi(
         ProviderConfigEntity $providerConfigEntity,
@@ -66,7 +66,7 @@ class ProviderModelSyncAppService
             return;
         }
 
-        $this->logger->info('startfrom外部APIsyncmodel', [
+        $this->logger->info('startfromoutside部APIsyncmodel', [
             'config_id' => $providerConfigEntity->getId(),
             'organization_code' => $organizationCode,
             'provider_code' => $provider->getProviderCode()->value,
@@ -96,11 +96,11 @@ class ProviderModelSyncAppService
             // 4. according tocategory确定typeparameter
             $types = $this->getModelTypesByCategory($provider->getCategory());
 
-            // 5. from外部APIpullmodel
+            // 5. fromoutside部APIpullmodel
             $models = $this->fetchModelsFromApi($url, $apiKey, $types, $language);
 
             if (empty($models)) {
-                $this->logger->warning('未from外部APIgettomodel', [
+                $this->logger->warning('未fromoutside部APIgettomodel', [
                     'config_id' => $providerConfigEntity->getId(),
                     'url' => $url,
                 ]);
@@ -110,12 +110,12 @@ class ProviderModelSyncAppService
             // 6. syncmodeltodatabase
             $this->syncModelsToDatabase($dataIsolation, $providerConfigEntity, $models, $language);
 
-            $this->logger->info('from外部APIsyncmodelcomplete', [
+            $this->logger->info('fromoutside部APIsyncmodelcomplete', [
                 'config_id' => $providerConfigEntity->getId(),
                 'model_count' => count($models),
             ]);
         } catch (Throwable $e) {
-            $this->logger->error('from外部APIsyncmodelfail', [
+            $this->logger->error('fromoutside部APIsyncmodelfail', [
                 'config_id' => $providerConfigEntity->getId(),
                 'error' => $e->getMessage(),
                 'file' => $e->getFile(),
@@ -138,16 +138,16 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * from外部APIpullmodel.
+     * fromoutside部APIpullmodel.
      */
     private function fetchModelsFromApi(string $url, string $apiKey, array $types, string $language): array
     {
-        // getAPI地址
+        // getAPIground址
         $apiUrl = $this->buildModelsApiUrl($url);
 
         $allModels = [];
 
-        // 为each个typecallAPI
+        // 为eachtypecallAPI
         foreach ($types as $type) {
             try {
                 $models = retry(3, function () use ($apiUrl, $apiKey, $type, $language) {
@@ -167,7 +167,7 @@ class ProviderModelSyncAppService
     }
 
     /**
-     * call外部APIgetmodellist.
+     * calloutside部APIgetmodellist.
      */
     private function callModelsApi(string $apiUrl, string $apiKey, string $type, string $language): array
     {
@@ -325,7 +325,7 @@ class ProviderModelSyncAppService
         ProviderConfigEntity $providerConfigEntity,
         string $language
     ): SaveProviderModelDTO {
-        // if是一个link，那么need对 url conduct限制
+        // if是一link，那么need对 url conduct限制
         $iconUrl = $modelData['info']['attributes']['icon'] ?? '';
         try {
             $iconUrl = str_replace(' ', '%20', $iconUrl);

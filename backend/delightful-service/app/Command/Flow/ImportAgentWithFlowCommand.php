@@ -48,16 +48,16 @@ class ImportAgentWithFlowCommand extends HyperfCommand
             // parseJSONcontent
             $importData = json_decode($content, true);
             if (! $importData || ! is_array($importData)) {
-                $this->output->error('file中的JSONdatainvalid');
+                $this->output->error('filemiddle的JSONdatainvalid');
                 return 1;
             }
 
-            // fromimportdata中getorganizationcode和userID
+            // fromimportdatamiddlegetorganizationcode和userID
             $orgCode = $this->input->getArgument('organization_code');
             $userId = $this->input->getArgument('user_id');
 
             if (empty($orgCode) || empty($userId)) {
-                $this->output->error('importdata中缺少organizationcodeoruserID');
+                $this->output->error('importdatamiddle缺少organizationcodeoruserID');
                 return 1;
             }
 

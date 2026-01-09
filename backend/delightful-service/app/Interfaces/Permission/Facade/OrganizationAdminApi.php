@@ -27,7 +27,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     protected OrganizationAdminAppService $organizationAdminAppService;
 
     /**
-     * getorganization管理员列表.
+     * getorganization管理员column表.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::QUERY)]
     public function list(): array
@@ -96,7 +96,7 @@ class OrganizationAdminApi extends AbstractPermissionApi
     }
 
     /**
-     * 转让organizationcreate人身份.
+     * 转让organizationcreate人身share.
      */
     #[CheckPermission(DelightfulAdminResourceEnum::ORGANIZATION_ADMIN, DelightfulOperationEnum::EDIT)]
     public function transferOwner(): array

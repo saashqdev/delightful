@@ -10,18 +10,18 @@ namespace App\Application\Flow\ExecuteManager\Memory\MultiModal;
 use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 
 /**
- * 多模态contentformat化tool
- * useat统一processdifferent场景下的多模态contentformat化.
+ * 多模statecontentformat化tool
+ * useat统一processdifferent场景down的多模statecontentformat化.
  */
 class MultiModalContentFormatter
 {
     /**
-     * 将所haveattachmentformat化to文本中.
+     * 将所haveattachmentformat化to文本middle.
      *
      * @param string $originalContent original文本content
      * @param string $visionResponse 视觉analyzeresult
      * @param AttachmentInterface[] $attachments 所haveattachmentarray
-     * @return string format化后的文本content
+     * @return string format化back的文本content
      */
     public static function formatAllAttachments(
         string $originalContent,
@@ -32,7 +32,7 @@ class MultiModalContentFormatter
             return $originalContent;
         }
 
-        // 分离image和nonimageattachment
+        // minute离image和nonimageattachment
         $imageAttachments = [];
         $nonImageAttachments = [];
 

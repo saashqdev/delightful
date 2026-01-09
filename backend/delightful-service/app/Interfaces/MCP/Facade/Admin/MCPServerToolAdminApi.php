@@ -20,7 +20,7 @@ class MCPServerToolAdminApi extends AbstractMCPAdminApi
     protected MCPServerToolAppService $mcpServerToolAppService;
 
     /**
-     * getMCPservice下的tool列table.
+     * getMCPservicedown的toolcolumntable.
      */
     public function queries(string $code)
     {

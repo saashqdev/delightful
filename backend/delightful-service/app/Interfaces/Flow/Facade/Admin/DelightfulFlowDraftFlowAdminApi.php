@@ -38,7 +38,7 @@ class DelightfulFlowDraftFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * querydraft列table.
+     * querydraftcolumntable.
      */
     public function queries(string $flowId)
     {

@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Domain\Asr\Constants;
 
 /**
- * ASR path常量
+ * ASR path常quantity
  * 统一管理 ASR 相关的directory和filepath.
  */
 class AsrPaths
@@ -19,7 +19,7 @@ class AsrPaths
     public const WORKSPACE_DIR = '.workspace';
 
     /**
-     * 隐藏录音directory前缀.
+     * 隐藏录音directoryfront缀.
      */
     public const HIDDEN_DIR_PREFIX = '.asr_recordings';
 

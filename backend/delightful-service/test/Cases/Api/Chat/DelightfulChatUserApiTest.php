@@ -22,7 +22,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     private const string LOGIN_API = '/api/v1/sessions';
 
     /**
-     * login账号：13800138001
+     * login账number：13800138001
      * 密码：123456.
      */
     private const string TEST_PHONE = '13800138001';
@@ -34,7 +34,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     private const string TEST_ORGANIZATION_CODE = 'test001';
 
     /**
-     * storagelogin后的token.
+     * storageloginback的token.
      */
     private static string $accessToken = '';
 
@@ -53,7 +53,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         ];
 
         $headers = $this->getTestHeaders();
-        echo "\nrequest头info: " . json_encode($headers, JSON_UNESCAPED_UNICODE) . "\n";
+        echo "\nrequestheadinfo: " . json_encode($headers, JSON_UNESCAPED_UNICODE) . "\n";
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $headers);
 
@@ -173,7 +173,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // nullparameter下should正常returncurrentuserinfo，not报错
+        // nullparameterdownshould正常returncurrentuserinfo，not报错
         $this->assertIsArray($response, 'responseshould是arrayformat');
 
         // if是authenticationerror，skiptest
@@ -218,7 +218,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
         // nullvalueshouldbecorrecthandle，not导致error
-        $this->assertIsArray($response, '传入nullvalue时应正常returnresponse');
+        $this->assertIsArray($response, '传入nullvalueo clock应正常returnresponse');
 
         // if是authenticationerror，skiptest
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
@@ -318,20 +318,20 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * test部分fieldupdate后的data完整性.
+     * test部minutefieldupdateback的data完整property.
      */
     public function testUpdateUserInfoDataIntegrity(): void
     {
         // 先logingettoken
         $this->performLogin();
 
-        // 第一次update：只updatenickname
+        // the一timeupdate：只updatenickname
         $firstUpdateData = [
-            'nickname' => '第一次morenewnickname',
+            'nickname' => 'the一timemorenewnickname',
         ];
 
         $firstResponse = $this->patch(self::UPDATE_USER_INFO_API, $firstUpdateData, $this->getTestHeaders());
-        $this->assertIsArray($firstResponse, '第一次updateresponseshould是arrayformat');
+        $this->assertIsArray($firstResponse, 'the一timeupdateresponseshould是arrayformat');
 
         // if是authenticationerror，skiptest
         if (isset($firstResponse['code']) && ($firstResponse['code'] === 2179 || $firstResponse['code'] === 3035)) {
@@ -339,27 +339,27 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             return;
         }
 
-        $this->assertArrayHasKey('data', $firstResponse, '第一次updateresponse应containdatafield');
-        $this->assertEquals(1000, $firstResponse['code'], '第一次updateshouldreturnsuccessresponse码');
+        $this->assertArrayHasKey('data', $firstResponse, 'the一timeupdateresponse应containdatafield');
+        $this->assertEquals(1000, $firstResponse['code'], 'the一timeupdateshouldreturnsuccessresponse码');
 
         $firstUserData = $firstResponse['data'];
         $originalAvatarUrl = $firstUserData['avatar_url'] ?? null;
 
-        // 第二次update：只updateavatar
+        // the二timeupdate：只updateavatar
         $secondUpdateData = [
             'avatar_url' => 'https://example.com/new-avatar-2.jpg',
         ];
 
         $secondResponse = $this->patch(self::UPDATE_USER_INFO_API, $secondUpdateData, $this->getTestHeaders());
-        $this->assertIsArray($secondResponse, '第二次updateresponseshould是arrayformat');
-        $this->assertArrayHasKey('data', $secondResponse, '第二次updateresponse应containdatafield');
-        $this->assertEquals(1000, $secondResponse['code'], '第二次updateshouldreturnsuccessresponse码');
+        $this->assertIsArray($secondResponse, 'the二timeupdateresponseshould是arrayformat');
+        $this->assertArrayHasKey('data', $secondResponse, 'the二timeupdateresponse应containdatafield');
+        $this->assertEquals(1000, $secondResponse['code'], 'the二timeupdateshouldreturnsuccessresponse码');
 
         $secondUserData = $secondResponse['data'];
 
-        // validatedata完整性：nickname应保持第一次morenewvalue
-        $this->assertEquals($firstUpdateData['nickname'], $secondUserData['nickname'], 'nickname应保持第一次morenewvalue');
-        $this->assertEquals($secondUpdateData['avatar_url'], $secondUserData['avatar_url'], 'avatar应为第二次morenewvalue');
+        // validatedata完整property：nickname应保持the一timemorenewvalue
+        $this->assertEquals($firstUpdateData['nickname'], $secondUserData['nickname'], 'nickname应保持the一timemorenewvalue');
+        $this->assertEquals($secondUpdateData['avatar_url'], $secondUserData['avatar_url'], 'avatar应为the二timemorenewvalue');
     }
 
     /**
@@ -371,7 +371,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             'nickname' => 'testnickname',
         ];
 
-        // notcontainauthorization头的request
+        // notcontainauthorizationhead的request
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, [
             'Content-Type' => 'application/json',
         ]);
@@ -392,7 +392,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         echo "\nusetokengetuserupdatepermission: " . $token . "\n";
 
         $headers = $this->getTestHeaders();
-        echo "\nrequest头info: " . json_encode($headers, JSON_UNESCAPED_UNICODE) . "\n";
+        echo "\nrequestheadinfo: " . json_encode($headers, JSON_UNESCAPED_UNICODE) . "\n";
 
         $response = $this->get(self::GET_USER_UPDATE_PERMISSION_API, $headers);
 
@@ -429,7 +429,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
      */
     public function testGetUserUpdatePermissionWithoutAuthorization(): void
     {
-        // notcontainauthorization头的request
+        // notcontainauthorizationhead的request
         $response = $this->get(self::GET_USER_UPDATE_PERMISSION_API, [
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
@@ -579,7 +579,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
     }
 
     /**
-     * gettestuse的request头.
+     * gettestuse的requesthead.
      */
     private function getTestHeaders(): array
     {

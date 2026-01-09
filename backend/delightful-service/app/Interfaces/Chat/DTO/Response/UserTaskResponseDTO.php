@@ -34,7 +34,7 @@ class UserTaskResponseDTO
 
     private string $agent_id;
 
-    // 实体转DTO
+    // 实body转DTO
     public static function entityToDTO(TaskSchedulerCrontab $taskSchedulerCrontab): UserTaskResponseDTO
     {
         $userTaskResponseDTO = new UserTaskResponseDTO();

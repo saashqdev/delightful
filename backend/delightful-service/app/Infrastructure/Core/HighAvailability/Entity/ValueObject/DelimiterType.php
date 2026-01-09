@@ -10,17 +10,17 @@ namespace App\Infrastructure\Core\HighAvailability\Entity\ValueObject;
 use InvalidArgumentException;
 
 /**
- * 分隔符type枚举.
+ * minute隔符type枚举.
  */
 enum DelimiterType: string
 {
     /**
-     * 高可useapplicationtype+modeltype+organizationencoding的分隔符.
+     * 高可useapplicationtype+modeltype+organizationencoding的minute隔符.
      */
     case HIGH_AVAILABILITY = '||';
 
     /**
-     * get所have分隔符typevaluearray.
+     * get所haveminute隔符typevaluearray.
      */
     public static function values(): array
     {
@@ -30,7 +30,7 @@ enum DelimiterType: string
     }
 
     /**
-     * checkwhether是valid的分隔符type.
+     * checkwhether是valid的minute隔符type.
      */
     public static function isValid(string $type): bool
     {
@@ -44,7 +44,7 @@ enum DelimiterType: string
     {
         return match ($type) {
             self::HIGH_AVAILABILITY->value => self::HIGH_AVAILABILITY,
-            default => throw new InvalidArgumentException("invalid的分隔符type: {$type}"),
+            default => throw new InvalidArgumentException("invalid的minute隔符type: {$type}"),
         };
     }
 }

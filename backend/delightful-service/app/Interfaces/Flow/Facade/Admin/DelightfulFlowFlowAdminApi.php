@@ -34,7 +34,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     protected MCPServerAppService $mcpServerAppService;
 
     /**
-     * get所have节点的version.
+     * get所havesectionpoint的version.
      */
     public function nodeVersions()
     {
@@ -45,7 +45,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * get节点configurationtemplate.
+     * getsectionpointconfigurationtemplate.
      */
     public function nodeTemplate()
     {
@@ -60,7 +60,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 节点单点debug.
+     * sectionpoint单pointdebug.
      */
     public function singleDebugNode()
     {
@@ -91,7 +91,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * 试运行.
+     * 试运line.
      */
     public function flowDebug(string $flowId)
     {
@@ -100,7 +100,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
         $delightfulFlowDO = DelightfulFlowAssembler::createDelightfulFlowDO($delightfulFlowDTO);
         $delightfulFlowDO->setCode($flowId);
 
-        // 触发method、触发data
+        // 触hairmethod、触hairdata
         $triggerConfig = $this->request->input('trigger_config', []);
 
         return $this->delightfulFlowExecuteAppService->testRun($authorization, $delightfulFlowDO, $triggerConfig);
@@ -163,7 +163,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
     }
 
     /**
-     * query可useto量knowledge base.
+     * query可usetoquantityknowledge base.
      */
     public function queryKnowledge()
     {
@@ -192,7 +192,7 @@ class DelightfulFlowFlowAdminApi extends AbstractFlowAdminApi
      */
     public function changeEnable(string $flowId)
     {
-        // fromrequest中getenableparameter，ifnothave传递thennot影响原have逻辑
+        // fromrequestmiddlegetenableparameter，ifnothave传递thennot影响原have逻辑
         $enable = $this->request->has('enable') ? (bool) $this->request->input('enable') : null;
         $this->delightfulFlowAppService->changeEnable($this->getAuthorization(), $flowId, $enable);
     }

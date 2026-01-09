@@ -20,7 +20,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * currentconfigurationversion.
      *
-     * useatconfiguration结构变more时的compatible性process
+     * useatconfiguration结构变moreo clock的compatiblepropertyprocess
      */
     public const int CURRENT_VERSION = 1;
 
@@ -43,23 +43,23 @@ class RetrieveConfig extends AbstractValueObject
     protected int $topK = 3;
 
     /**
-     * 分数阈value
+     * minute数阈value
      *
-     * 只returnsimilar度分数greater than该阈value的result
+     * 只returnsimilardegreeminute数greater than该阈value的result
      */
     protected float $scoreThreshold = 0.5;
 
     /**
-     * whetherenable分数阈valuefilter.
+     * whetherenableminute数阈valuefilter.
      */
     protected bool $scoreThresholdEnabled = false;
 
     /**
-     * 重sort模式.
+     * 重sort模type.
      *
      * optionalvalue：
      * - reranking_model: use重sortmodel
-     * - weighted_score: use加权分数
+     * - weighted_score: use加权minute数
      *
      * @see RerankMode
      */
@@ -73,7 +73,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * 权重configuration.
      *
-     * containto量检索和关键词检索的权重configuration
+     * containtoquantity检索和关键词检索的权重configuration
      */
     protected array $weights = [
         'vector_setting' => [
@@ -106,7 +106,7 @@ class RetrieveConfig extends AbstractValueObject
     /**
      * configurationversion.
      *
-     * useatconfiguration结构变more时的compatible性process
+     * useatconfiguration结构变moreo clock的compatiblepropertyprocess
      */
     private int $version = self::CURRENT_VERSION;
 
@@ -168,7 +168,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * get分数阈value
+     * getminute数阈value
      */
     public function getScoreThreshold(): float
     {
@@ -176,7 +176,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * set分数阈value
+     * setminute数阈value
      */
     public function setScoreThreshold(float $scoreThreshold): self
     {
@@ -188,7 +188,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * whetherenable分数阈valuefilter.
+     * whetherenableminute数阈valuefilter.
      */
     public function isScoreThresholdEnabled(): bool
     {
@@ -196,7 +196,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * setwhetherenable分数阈valuefilter.
+     * setwhetherenableminute数阈valuefilter.
      */
     public function setScoreThresholdEnabled(bool $scoreThresholdEnabled): self
     {
@@ -205,7 +205,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * get重sort模式.
+     * get重sort模type.
      */
     public function getRerankingMode(): string
     {
@@ -213,7 +213,7 @@ class RetrieveConfig extends AbstractValueObject
     }
 
     /**
-     * set重sort模式.
+     * set重sort模type.
      */
     public function setRerankingMode(string $rerankingMode): self
     {

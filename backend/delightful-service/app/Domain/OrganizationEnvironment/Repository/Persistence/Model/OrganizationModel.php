@@ -23,7 +23,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property null|string $introduction 企业description
  * @property null|string $contact_user 联系人
  * @property null|string $contact_mobile 联系电话
- * @property string $industry_type organization行业type
+ * @property string $industry_type organizationline业type
  * @property null|string $number 企业规模
  * @property int $status status 1:正常 2:disable
  * @property null|string $creator_id create人
@@ -54,7 +54,7 @@ class OrganizationModel extends AbstractModel
     protected ?string $table = 'delightful_organizations';
 
     /**
-     * 可批量赋value的property.
+     * 可批quantity赋value的property.
      */
     protected array $fillable = [
         'id',

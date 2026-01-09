@@ -35,7 +35,7 @@ class DelightfulFlowToolSetFactory
     }
 
     /**
-     * 将arrayconvert为tool集实体.
+     * 将arrayconvert为tool集实body.
      */
     public static function arrayToEntity(array $toolSetData): DelightfulFlowToolSetEntity
     {
@@ -50,7 +50,7 @@ class DelightfulFlowToolSetFactory
         $entity->setEnabled($toolSetData['enabled'] ?? true);
         $entity->setOrganizationCode($toolSetData['organization_code'] ?? '');
 
-        // settingtool列表
+        // settingtoolcolumn表
         if (! empty($toolSetData['tools'])) {
             $entity->setTools($toolSetData['tools']);
         }

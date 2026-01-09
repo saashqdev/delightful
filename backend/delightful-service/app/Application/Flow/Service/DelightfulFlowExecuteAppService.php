@@ -100,7 +100,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             executionType: ExecutionType::IMChat,
         );
 
-        // if是 conversation，force开启 stream 模式
+        // if是 conversation，force开启 stream 模type
         if ($triggerType === TriggerType::ChatMessage) {
             $executionData->setStream(true);
         }
@@ -114,7 +114,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $executor = new DelightfulFlowExecutor($delightfulFlow, $executionData);
         $executor->execute();
 
-        // ifhave节点executefail，throwexception
+        // ifhavesectionpointexecutefail，throwexception
         foreach ($delightfulFlow->getNodes() as $node) {
             $nodeDebugResult = $node->getNodeDebugResult();
             if ($nodeDebugResult && ! $nodeDebugResult->isSuccess()) {
@@ -142,7 +142,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $flowData = $this->getFlow($flowDataIsolation, $apiChatDTO->getFlowCode(), [Type::Main]);
         $delightfulFlow = $flowData['flow'];
 
-        // set指令
+        // setfinger令
         $messageEntity = new TextMessage(['content' => $apiChatDTO->getMessage()]);
         if (! empty($apiChatDTO->getInstruction())) {
             $msgInstruct = $this->generateChatInstruction($apiChatDTO);
@@ -211,7 +211,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $flowData = $this->getFlow($flowDataIsolation, $apiChatDTO->getFlowCode(), [Type::Sub, Type::Tools], operationValidate: $operationValidate);
         $delightfulFlow = $flowData['flow'];
 
-        // set指令
+        // setfinger令
         $messageEntity = new TextMessage(['content' => $apiChatDTO->getMessage()]);
 
         $triggerData = new TriggerData(
@@ -369,7 +369,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         if (! $log) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $apiChatDTO->getTaskId()]);
         }
-        // 只能query第一层的data
+        // 只能querythe一layer的data
         if (! $log->isTop()) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.not_found', ['label' => $apiChatDTO->getTaskId()]);
         }
@@ -381,11 +381,11 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
     }
 
     /**
-     * scheduletask触发.
+     * scheduletask触hair.
      */
     public static function routine(string $flowCode, string $branchId, array $routineConfig = []): void
     {
-        // 暂时only系统级别的scheduletask
+        // 暂o clockonly系统level别的scheduletask
         $dataIsolation = FlowDataIsolation::create();
         $delightfulFlow = di(DelightfulFlowDomainService::class)->getByCode($dataIsolation, $flowCode);
         if (! $delightfulFlow) {
@@ -440,7 +440,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
     }
 
     /**
-     * 试运行.
+     * 试运line.
      */
     public function testRun(Authenticatable $authorization, DelightfulFlowEntity $delightfulFlowEntity, array $triggerConfig): array
     {
@@ -481,7 +481,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
             messageInfo: ['message_entity' => TriggerData::createMessageEntity(new TextMessage(['content' => $triggerConfig['trigger_data']['content'] ?? '']))],
             params: $triggerConfig['trigger_data'] ?? [],
             paramsForm: $triggerConfig['trigger_data_form'] ?? [],
-            // 试运行时，all局variable为手动传入
+            // 试运lineo clock，all局variable为hand动传入
             globalVariable: ComponentFactory::fastCreate($triggerConfig['global_variable'] ?? []) ?? $delightfulFlowEntity->getGlobalVariable(),
             attachments: AttachmentUtil::getByApiArray($triggerConfig['trigger_data']['files'] ?? []),
         );
@@ -503,14 +503,14 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         $executionData->setTopicId($topicId);
         $executionData->setAgentId($delightfulFlowEntity->getAgentId());
         $executionData->setDebug((bool) ($triggerConfig['debug'] ?? false));
-        // 运行process图，检测whethercan运行
+        // 运lineprocess图，检测whethercan运line
         $executor = new DelightfulFlowExecutor($delightfulFlowEntity, $executionData);
         $executor->execute();
 
-        // get node 运行result
+        // get node 运lineresult
         foreach ($delightfulFlowEntity->getNodes() as $node) {
             if ($node->getNodeDebugResult()) {
-                // have一个failthen判定为fail
+                // have一failthen判定为fail
                 if (! $node->getNodeDebugResult()->isSuccess()) {
                     $result['success'] = false;
                 }
@@ -571,7 +571,7 @@ class DelightfulFlowExecuteAppService extends AbstractFlowAppService
         switch ($delightfulFlow->getType()) {
             case Type::Main:
                 $agent = $this->delightfulAgentDomainService->getByFlowCode($delightfulFlow->getCode());
-                // 仅allowcreate人canindisablestatus下call
+                // 仅allowcreate人canindisablestatusdowncall
                 if ($agent->getCreatedUid() !== $dataIsolation->getCurrentUserId() && ! $agent->isAvailable()) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.agent_disabled');
                 }

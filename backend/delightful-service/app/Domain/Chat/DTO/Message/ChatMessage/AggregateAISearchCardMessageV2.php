@@ -28,15 +28,15 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     public const string NULL_PARENT_ID = '0';
 
     /**
-     * associate_questions的 key的前缀，避免自动将string 0 转 int 0.
+     * associate_questions的 key的front缀，避免自动将string 0 转 int 0.
      */
     public const string QUESTION_DELIMITER = 'question_';
 
-    # search级别：简单/search
+    # searchlevel别：简单/search
     protected SearchDeepLevel $searchDeepLevel;
 
     /**
-     * 子issue的associateissue。supportassociateissueagain产生子issue，but是willbe拍平成二维array。
+     * 子issue的associateissue。supportassociateissueagain产生子issue，but是willbe拍平become二维array。
      * @var array<string,QuestionItem[]>
      * @example according touserinput的issue，generateassociateissue。
      */
@@ -50,14 +50,14 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected array $searchWebPages;
 
     /**
-     * 由at多次子issuesearch时，will出现多个重复的searchresult，所byneed ai 去重后，again丢给大model总结。
+     * 由at多time子issuesearcho clock，will出现多重复的searchresult，所byneed ai 去重back，again丢给大model总结。
      *
      * @var SearchDetailItem[]
      */
     protected array $noRepeatSearchDetails;
 
     /**
-     * 总结,分为思考过程和总结两部分.
+     * 总结,minute为思考过程和总结两部minute.
      */
     protected SummaryItem $summary;
 
@@ -77,9 +77,9 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected string $ppt;
 
     /**
-     * get本次needstreampush的field。
-     * support一次push多个field的streammessage，if json 层级more深，use field_1.*.field_2 作为 key。 其中 * 是指array的下标。
-     * service端willcache所havestream的data，并instreamend时一次性push，by减少丢package的概率，提升message完整性。
+     * get本timeneedstreampush的field。
+     * support一timepush多field的streammessage，if json layerlevelmore深，use field_1.*.field_2 作为 key。 其middle * 是fingerarray的down标。
+     * service端willcache所havestream的data，并instreamendo clock一timepropertypush，by减少丢package的概rate，提升message完整property。
      * for example：
      * [
      *     'users.0.name' => 'delightful',
@@ -113,14 +113,14 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
         //            {
         //                "parent_question_id": "0",
         //                "question_id": "1",
-        //                "question": "小米集团旗下have哪些品牌"
+        //                "question": "小米集团旗downhave哪些品牌"
         //            }
         //        ],
         //        "question_1": [
         //            {
         //                "parent_question_id": "1",
         //                "question_id": "3",
-        //                "question": "百度是干嘛的"
+        //                "question": "百degree是干嘛的"
         //            }
         //        ]
         //    }
@@ -135,7 +135,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
                     $this->associateQuestions[$itemKey][] = $questionItem;
                 }
             } else {
-                // 单个QuestionItem的情况
+                // 单QuestionItem的情况
                 $questionItem = $data instanceof QuestionItem ? $data : new QuestionItem($data);
                 $itemKey = self::QUESTION_DELIMITER . $questionItem->getParentQuestionId();
                 $this->associateQuestions[$itemKey][] = $questionItem;

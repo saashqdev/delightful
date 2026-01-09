@@ -37,7 +37,7 @@ readonly class AsrSandboxResponseHandler
      * handle沙箱 finish response，updatefile和directoryrecord.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
-     * @param array $sandboxResponse 沙箱responsedata（data 部分）
+     * @param array $sandboxResponse 沙箱responsedata（data 部minute）
      */
     public function handleFinishResponse(
         AsrTaskStatusDTO $taskStatus,
@@ -53,7 +53,7 @@ readonly class AsrSandboxResponseHandler
         $noteFile = $sandboxResponse['files']['note_file'] ?? null;
 
         if ($audioFile === null) {
-            $this->logger->warning('沙箱response中未找toaudiofileinfo', [
+            $this->logger->warning('沙箱responsemiddle未找toaudiofileinfo', [
                 'task_key' => $taskStatus->taskKey,
             ]);
             return;
@@ -100,8 +100,8 @@ readonly class AsrSandboxResponseHandler
     }
 
     /**
-     * according toresponse的audiofile名/filepath，找toaudiofile id，useat后续发chatmessage.
-     * use轮询机制etc待沙箱syncfiletodatabase（at mostetc待 30 秒）.
+     * according toresponse的audiofile名/filepath，找toaudiofile id，useatback续hairchatmessage.
+     * useround询机制etc待沙箱syncfiletodatabase（at mostetc待 30 second）.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param array $audioFile audiofileinfo
@@ -149,7 +149,7 @@ readonly class AsrSandboxResponseHandler
 
     /**
      * according toresponse的笔记filepath，找to笔记file id.
-     * use轮询机制etc待沙箱syncfiletodatabase（at mostetc待 30 秒）.
+     * useround询机制etc待沙箱syncfiletodatabase（at mostetc待 30 second）.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param array $noteFile 笔记fileinfo
@@ -209,13 +209,13 @@ readonly class AsrSandboxResponseHandler
     }
 
     /**
-     * passfilepath轮询queryfilerecord（通usemethod）.
+     * passfilepathround询queryfilerecord（通usemethod）.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param string $relativePath file相对path
      * @param string $fileTypeName filetypename（useatlog）
      * @param bool $throwOnTimeout timeoutwhetherthrowexception
-     * @return null|TaskFileEntity file实体，未找toreturnnull
+     * @return null|TaskFileEntity file实body，未找toreturnnull
      * @throws Throwable
      */
     private function findFileByPathWithPolling(
@@ -245,7 +245,7 @@ readonly class AsrSandboxResponseHandler
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($taskStatus->organizationCode);
         $fileKey = AsrAssembler::buildFileKey($fullPrefix, $workDir, $relativePath);
 
-        $this->logger->info(sprintf('start轮询query%srecord', $fileTypeName), [
+        $this->logger->info(sprintf('startround询query%srecord', $fileTypeName), [
             'task_key' => $taskStatus->taskKey,
             'file_type' => $fileTypeName,
             'relative_path' => $relativePath,
@@ -254,7 +254,7 @@ readonly class AsrSandboxResponseHandler
             'max_wait_seconds' => AsrConfig::FILE_RECORD_QUERY_TIMEOUT,
         ]);
 
-        // 轮询queryfilerecord
+        // round询queryfilerecord
         $timeoutSeconds = AsrConfig::FILE_RECORD_QUERY_TIMEOUT;
         $pollingInterval = AsrConfig::POLLING_INTERVAL;
         $startTime = microtime(true);
@@ -288,7 +288,7 @@ readonly class AsrSandboxResponseHandler
                 break;
             }
 
-            // record轮询进度
+            // recordround询进degree
             if ($attempt % AsrConfig::FILE_RECORD_QUERY_LOG_FREQUENCY === 0 || $attempt === 1) {
                 $remainingSeconds = max(0, $timeoutSeconds - $elapsedSeconds);
                 $this->logger->info(sprintf('etc待沙箱sync%stodatabase', $fileTypeName), [
@@ -301,13 +301,13 @@ readonly class AsrSandboxResponseHandler
                 ]);
             }
 
-            // etc待下一次轮询
+            // etc待down一timeround询
             sleep($pollingInterval);
         }
 
-        // 轮询timeout，仍未找tofilerecord
+        // round询timeout，仍未找tofilerecord
         $totalElapsedTime = (int) (microtime(true) - $startTime);
-        $this->logger->warning(sprintf('轮询timeout，未找to%srecord', $fileTypeName), [
+        $this->logger->warning(sprintf('round询timeout，未找to%srecord', $fileTypeName), [
             'task_key' => $taskStatus->taskKey,
             'file_type' => $fileTypeName,
             'file_key' => $fileKey,
@@ -323,7 +323,7 @@ readonly class AsrSandboxResponseHandler
             ExceptionBuilder::throw(
                 AsrErrorCode::CreateAudioFileFailed,
                 '',
-                ['error' => sprintf('etc待 %d 秒后仍未找to%srecord', $timeoutSeconds, $fileTypeName)]
+                ['error' => sprintf('etc待 %d secondback仍未找to%srecord', $timeoutSeconds, $fileTypeName)]
             );
         }
 
@@ -352,7 +352,7 @@ readonly class AsrSandboxResponseHandler
 
         $deleted = $this->presetFileService->deleteNoteFile($noteFileId);
         if ($deleted) {
-            // 清nulltaskstatus中的笔记file相关field
+            // 清nulltaskstatusmiddle的笔记file相关field
             $taskStatus->presetNoteFileId = null;
             $taskStatus->presetNoteFilePath = null;
             $taskStatus->noteFileId = null;

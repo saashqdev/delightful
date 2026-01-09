@@ -96,7 +96,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             return;
                         }
 
-                        // 这里是each个平台的user id，not是 delightful 的 user_id
+                        // 这within是each平台的user id，not是 delightful 的 user_id
                         $userId = $thirdPlatformChatMessage->getUserId();
                         $dataIsolation->setCurrentUserId($userId);
                         EnvManager::initDataIsolationEnv($dataIsolation);
@@ -141,7 +141,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
                             'code' => $exception->getCode(),
                             'trace' => $exception->getTraceAsString(),
                         ]);
-                        $message = new TextMessage(['content' => 'not好意思，meanwhile问我issue的人too多啦，have点忙not过来，你can一will儿again来问我吗？感谢谅解！']);
+                        $message = new TextMessage(['content' => 'not好意思，meanwhile问我issue的人too多啦，havepoint忙not过来，你can一will儿again来问我吗？感谢谅解！']);
                         $thirdPlatformChat->sendMessage($thirdPlatformChatMessage, $message);
                     }
                 });
@@ -215,7 +215,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         if (count($accounts) === 0) {
             ExceptionBuilder::throw(AgentErrorCode::CREATE_GROUP_USER_ACCOUNT_NOT_EXIST, 'user.not_exist', ['delightful_ids' => $delightfulIds]);
         }
-        // callinterface，换取第三方的user id
+        // callinterface，换取the三方的user id
         $parallel = new Parallel(2);
         $thirdPlatformChat = ThirdPlatformChatFactory::make($chatEntity);
         $requestId = CoContext::getRequestId();
@@ -228,7 +228,7 @@ class DelightfulBotThirdPlatformChatAppService extends AbstractAppService
         $thirdPlatformUserIds = [];
         $ownerThirdPlatformUserId = '';
         $result = $parallel->wait();
-        // 二位array转成一维
+        // 二位array转become一维
         foreach ($result as $item) {
             if ($item['delightful_id'] == $userAuthorization->getDelightfulId()) {
                 $ownerThirdPlatformUserId = $item['third_user_id'];

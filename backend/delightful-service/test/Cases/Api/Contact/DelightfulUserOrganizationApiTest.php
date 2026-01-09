@@ -81,7 +81,7 @@ class DelightfulUserOrganizationApiTest extends AbstractHttpTest
     }
 
     /**
-     * testget账号下可切换的organizationlist.
+     * testget账numberdown可切换的organizationlist.
      */
     public function testListOrganizationsViaHttp(): void
     {

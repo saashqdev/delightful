@@ -31,8 +31,8 @@ class EndNodeRunnerTest extends ExecuteManagerBaseTest
                 'type' => 'object',
                 'key' => 'root',
                 'sort' => 0,
-                'title' => 'root节点',
-                'description' => 'root节点',
+                'title' => 'rootsectionpoint',
+                'description' => 'rootsectionpoint',
                 'items' => null,
                 'value' => null,
                 'required' => [

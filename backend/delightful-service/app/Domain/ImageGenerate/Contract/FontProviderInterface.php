@@ -8,30 +8,30 @@ declare(strict_types=1);
 namespace App\Domain\ImageGenerate\Contract;
 
 /**
- * 字体提供者interface
- * useatin开源project中定义字体管理standard，由企业projectimplementspecific逻辑.
+ * 字body提供者interface
+ * useatin开源projectmiddle定义字body管理standard，由企业projectimplementspecific逻辑.
  */
 interface FontProviderInterface
 {
     /**
-     * getTTF字体filepath.
+     * getTTF字bodyfilepath.
      *
-     * @return null|string 字体file的绝对path，if为nullthennot supportedTTF字体
+     * @return null|string 字bodyfile的绝对path，if为nullthennot supportedTTF字body
      */
     public function getFontPath(): ?string;
 
     /**
-     * 检测whethersupportTTF字体渲染.
+     * 检测whethersupportTTF字body渲染.
      *
-     * @return bool truetable示supportTTF字体，falsetable示仅support内置字体
+     * @return bool truetable示supportTTF字body，falsetable示仅supportinside置字body
      */
     public function supportsTTF(): bool;
 
     /**
-     * 检测文本whethercontain中文字符.
+     * 检测文本whethercontainmiddle文字符.
      *
      * @param string $text 要检测的文本
-     * @return bool truetable示contain中文字符，falsetable示notcontain
+     * @return bool truetable示containmiddle文字符，falsetable示notcontain
      */
     public function containsChinese(string $text): bool;
 
@@ -39,7 +39,7 @@ interface FontProviderInterface
      * 检测图像whethercontain透明通道.
      *
      * @param mixed $image GD图像资源
-     * @return bool truetable示contain透明度，falsetable示notcontain
+     * @return bool truetable示contain透明degree，falsetable示notcontain
      */
     public function hasTransparency($image): bool;
 }

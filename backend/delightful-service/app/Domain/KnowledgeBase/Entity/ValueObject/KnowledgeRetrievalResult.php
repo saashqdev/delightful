@@ -12,7 +12,7 @@ use App\Infrastructure\Core\AbstractValueObject;
 /**
  * knowledge base检索resultvalueobject.
  *
- * 统一table示fromdifferent检索method（语义检索、all文检索、图检索etc）return的知识片段
+ * 统一table示fromdifferent检索method（语义检索、all文检索、图检索etc）return的知识slicesegment
  */
 class KnowledgeRetrievalResult extends AbstractValueObject
 {
@@ -52,7 +52,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     private string $businessId = '';
 
     /**
-     * 元data.
+     * yuandata.
      */
     private array $metadata = [];
 
@@ -64,12 +64,12 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     private float $score = 0;
 
     /**
-     * fromknowledge base片段实体create检索result.
+     * fromknowledge baseslicesegment实bodycreate检索result.
      *
      * @param string $id 唯一标识符
      * @param string $content content
      * @param string $businessId 业务ID
-     * @param array $metadata 元data
+     * @param array $metadata yuandata
      */
     public static function fromFragment(
         string $id = '',
@@ -95,7 +95,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
      * @param string $id 唯一标识符
      * @param string $content content
      * @param string $businessId 业务ID
-     * @param array $metadata 元data
+     * @param array $metadata yuandata
      */
     public static function fromGraphData(
         string $id = '',
@@ -179,7 +179,7 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * get元data.
+     * getyuandata.
      */
     public function getMetadata(): array
     {
@@ -187,9 +187,9 @@ class KnowledgeRetrievalResult extends AbstractValueObject
     }
 
     /**
-     * set元data.
+     * setyuandata.
      *
-     * @param array $metadata 元data
+     * @param array $metadata yuandata
      */
     public function setMetadata(array $metadata): self
     {

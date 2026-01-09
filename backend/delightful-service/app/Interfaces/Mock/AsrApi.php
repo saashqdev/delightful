@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * ASR task Mock service
- * 模拟沙箱中的audiomerge和 ASR taskprocess.
+ * 模拟沙箱middle的audiomerge和 ASR taskprocess.
  */
 class AsrApi
 {
@@ -63,7 +63,7 @@ class AsrApi
             'transcript_file_config' => $transcriptFileConfig,
         ]);
 
-        // initializetaskstatus（reset轮询计数）
+        // initializetaskstatus（resetround询计数）
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $this->redis->del($countKey);
 
@@ -84,7 +84,7 @@ class AsrApi
     }
 
     /**
-     * complete ASR task（support轮询）- V2 结构化version
+     * complete ASR task（supportround询）- V2 结构化version
      * POST /api/v1/sandboxes/{sandboxId}/proxy/api/asr/task/finish.
      */
     public function finishTask(RequestInterface $request): array
@@ -98,10 +98,10 @@ class AsrApi
         $noteFileConfig = $request->input('note_file');
         $transcriptFileConfig = $request->input('transcript_file');
 
-        // use Redis 计数器模拟轮询进度
+        // use Redis 计数器模拟round询进degree
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $count = (int) $this->redis->incr($countKey);
-        $this->redis->expire($countKey, AsrConfig::MOCK_POLLING_TTL); // 10分钟expire
+        $this->redis->expire($countKey, AsrConfig::MOCK_POLLING_TTL); // 10minute钟expire
 
         // recordcalllog
         $this->logger->info('[Mock Sandbox ASR] Finish task called (V2)', [
@@ -114,7 +114,7 @@ class AsrApi
             'call_count' => $count,
         ]);
 
-        // 前 3 次callreturn finalizing status
+        // front 3 timecallreturn finalizing status
         if ($count < 4) {
             return [
                 'code' => 1000,
@@ -126,12 +126,12 @@ class AsrApi
             ];
         }
 
-        // 第 4 次callreturn completed status
+        // the 4 timecallreturn completed status
         $targetDir = $audioConfig['target_dir'] ?? '';
         $outputFilename = $audioConfig['output_filename'] ?? 'audio';
 
-        // 模拟真实沙箱行为：according to output_filename 重命名directory
-        // 提取原directory中的time戳部分（format：_YYYYMMDD_HHMMSS）
+        // 模拟真实沙箱line为：according to output_filename 重命名directory
+        // 提取原directorymiddle的time戳部minute（format：_YYYYMMDD_HHMMSS）
         $timestamp = '';
         if (preg_match('/_(\d{8}_\d{6})$/', $targetDir, $matches)) {
             $timestamp = '_' . $matches[1];
@@ -153,7 +153,7 @@ class AsrApi
             'files' => [
                 'audio_file' => [
                     'filename' => $audioFileName,
-                    'path' => $audioPath, // use重命名后的directorypath
+                    'path' => $audioPath, // use重命名back的directorypath
                     'size' => 127569,
                     'duration' => 17.0,
                     'action_performed' => 'merged_and_created',
@@ -169,18 +169,18 @@ class AsrApi
             ],
         ];
 
-        // ifhave笔记fileconfigurationandfilesize > 0，添加toreturn中（模拟真实沙箱的笔记filecontentcheck）
+        // ifhave笔记fileconfigurationandfilesize > 0，添加toreturnmiddle（模拟真实沙箱的笔记filecontentcheck）
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
-            // userequest中提供的 target_path，而not是硬encodingfile名
+            // userequestmiddle提供的 target_path，而not是硬encodingfile名
             // 这样cancorrectsupport国际化的file名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 
-            // 模拟真实沙箱行为：onlywhen笔记filehavecontent时才return详细info
-            // 这里simplifyprocess，default假设havecontent（真实沙箱willcheckfilecontentwhether为空）
+            // 模拟真实沙箱line为：onlywhen笔记filehavecontento clock才return详细info
+            // 这withinsimplifyprocess，default假设havecontent（真实沙箱willcheckfilecontentwhether为空）
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
-                'path' => $noteFilePath, // userequest中的 target_path
+                'path' => $noteFilePath, // userequestmiddle的 target_path
                 'size' => 256, // 模拟havecontent的filesize
                 'duration' => null,
                 'action_performed' => 'renamed_and_moved',

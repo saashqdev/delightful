@@ -133,7 +133,7 @@ class DelightfulMessageRepository implements DelightfulMessageRepositoryInterfac
     /**
      * Get messages by delightful message IDs.
      * @param array $delightfulMessageIds Delightful message IDarray
-     * @return DelightfulMessageEntity[] message实体array
+     * @return DelightfulMessageEntity[] message实bodyarray
      */
     public function getMessagesByDelightfulMessageIds(array $delightfulMessageIds): array
     {

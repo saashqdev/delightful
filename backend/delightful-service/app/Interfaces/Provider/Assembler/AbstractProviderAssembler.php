@@ -10,15 +10,15 @@ namespace App\Interfaces\Provider\Assembler;
 use Hyperf\Contract\TranslatorInterface;
 
 /**
- * Provider Assembler抽象基类
+ * Provider Assembler抽象基category
  * 提取公共的convert逻辑，减少code重复.
  */
 abstract class AbstractProviderAssembler
 {
     /**
-     * 批量convertarrayto实体.
+     * 批quantityconvertarrayto实body.
      * @template T of object
-     * @param class-string<T> $entityClass 实体类名
+     * @param class-string<T> $entityClass 实bodycategory名
      * @param array $dataArray dataarray
      * @return T[]
      */
@@ -36,8 +36,8 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * 批量convert实体toarray.
-     * @param array $entities 实体array
+     * 批quantityconvert实bodytoarray.
+     * @param array $entities 实bodyarray
      */
     protected static function batchToArrays(array $entities): array
     {
@@ -53,9 +53,9 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * create带国际化support的实体.
+     * create带国际化support的实body.
      * @template T of object
-     * @param class-string<T> $entityClass 实体类名
+     * @param class-string<T> $entityClass 实bodycategory名
      * @param array $data dataarray
      * @param bool $enableI18n whetherenable国际化
      * @return T
@@ -73,7 +73,7 @@ abstract class AbstractProviderAssembler
     }
 
     /**
-     * nullvaluecheck助手method.
+     * nullvaluecheck助handmethod.
      */
     protected static function isEmptyArray(?array $data): bool
     {

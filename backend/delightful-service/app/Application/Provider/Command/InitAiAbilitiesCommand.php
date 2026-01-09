@@ -48,12 +48,12 @@ class InitAiAbilitiesCommand extends HyperfCommand
         $this->info("start为organization {$organizationCode} initializeAI能力data...");
 
         try {
-            // createonetemporary的 Authorization objectuseat命令行
+            // createonetemporary的 Authorization objectuseat命令line
             $authorization = new DelightfulUserAuthorization();
             $authorization->setOrganizationCode($organizationCode);
 
             $count = $this->aiAbilityAppService->initializeAbilities($authorization);
-            $this->info("successinitialize {$count} 个AI能力");
+            $this->info("successinitialize {$count} AI能力");
         } catch (Throwable $e) {
             $this->error('initializeAI能力datafailed: ' . $e->getMessage());
             $this->error($e->getTraceAsString());

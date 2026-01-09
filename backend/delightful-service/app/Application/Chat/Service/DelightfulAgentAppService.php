@@ -30,7 +30,7 @@ class DelightfulAgentAppService extends AbstractAppService
 
     public function square(): array
     {
-        // return agent 列tableinformation
+        // return agent columntableinformation
         return $this->userDomainService->getAgentList();
     }
 

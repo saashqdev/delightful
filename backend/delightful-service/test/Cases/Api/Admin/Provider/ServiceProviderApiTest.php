@@ -84,7 +84,7 @@ class ServiceProviderApiTest extends BaseTest
                     'en_US' => 'Test Model',
                 ],
                 'description' => [
-                    'zh_CN' => '这是一个testmodel',
+                    'zh_CN' => '这是一testmodel',
                     'en_US' => 'This is a test model',
                 ],
             ],
@@ -102,7 +102,7 @@ class ServiceProviderApiTest extends BaseTest
         $modelId = $createResponse['data']['id'];
         $this->assertNotEmpty($modelId, 'modelIDnot应为null');
 
-        // ========== 步骤2: calldetailinterfacevalidate4个costfield ==========
+        // ========== 步骤2: calldetailinterfacevalidate4costfield ==========
         $detailUri = $this->baseUri . '/' . $serviceProviderConfigId;
         $detailResponse = $this->get($detailUri, [], $this->getCommonHeaders());
 
@@ -112,9 +112,9 @@ class ServiceProviderApiTest extends BaseTest
 
         // 查找create的model
         $createdModel = $this->findModelInDetailResponse($detailResponse['data'], $modelId);
-        $this->assertNotNull($createdModel, 'should能indetail中找tocreate的model');
+        $this->assertNotNull($createdModel, 'should能indetailmiddle找tocreate的model');
 
-        // validate4个costfield存inandvaluecorrect
+        // validate4costfield存inandvaluecorrect
         $this->assertArrayHasKey('config', $createdModel, 'modelshouldhaveconfigfield');
         $this->verifyConfigCostFields($createdModel['config'], [
             'input_cost' => 0.001,
@@ -159,11 +159,11 @@ class ServiceProviderApiTest extends BaseTest
             'service_provider_config_id' => $serviceProviderConfigId,
             'translate' => [
                 'name' => [
-                    'zh_CN' => 'update后的testmodel',
+                    'zh_CN' => 'updateback的testmodel',
                     'en_US' => 'Updated Test Model',
                 ],
                 'description' => [
-                    'zh_CN' => '这是update后的testmodel',
+                    'zh_CN' => '这是updateback的testmodel',
                     'en_US' => 'This is an updated test model',
                 ],
             ],
@@ -175,20 +175,20 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertIsArray($updateResponse);
         $this->assertSame(1000, $updateResponse['code'], 'updatemodelshouldsuccess');
         $this->assertArrayHasKey('data', $updateResponse);
-        $this->assertSame($modelId, $updateResponse['data']['id'], 'update后modelID应保持not变');
+        $this->assertSame($modelId, $updateResponse['data']['id'], 'updatebackmodelID应保持not变');
 
-        // ========== 步骤5: again次calldetailinterfacevalidateupdate后的4个costfield ==========
+        // ========== 步骤5: againtimecalldetailinterfacevalidateupdateback的4costfield ==========
         $updatedDetailResponse = $this->get($detailUri, [], $this->getCommonHeaders());
 
         $this->assertIsArray($updatedDetailResponse);
-        $this->assertSame(1000, $updatedDetailResponse['code'], 'getupdate后detailshouldsuccess');
+        $this->assertSame(1000, $updatedDetailResponse['code'], 'getupdatebackdetailshouldsuccess');
 
-        // 查找update后的model
+        // 查找updateback的model
         $updatedModel = $this->findModelInDetailResponse($updatedDetailResponse['data'], $modelId);
-        $this->assertNotNull($updatedModel, 'should能indetail中找toupdate后的model');
+        $this->assertNotNull($updatedModel, 'should能indetailmiddle找toupdateback的model');
 
-        // validateupdate后的4个costfield
-        $this->assertArrayHasKey('config', $updatedModel, 'update后的modelshouldhaveconfigfield');
+        // validateupdateback的4costfield
+        $this->assertArrayHasKey('config', $updatedModel, 'updateback的modelshouldhaveconfigfield');
         $this->verifyConfigCostFields($updatedModel['config'], [
             'input_cost' => 0.003,
             'output_cost' => 0.006,
@@ -196,7 +196,7 @@ class ServiceProviderApiTest extends BaseTest
             'cache_hit_cost' => 0.0003,
         ]);
 
-        // ========== 步骤6: validateupdate后的configurationversion（version=2） ==========
+        // ========== 步骤6: validateupdateback的configurationversion（version=2） ==========
         $this->verifyConfigVersion((int) $modelId, $updateRequestData['config'], 2);
     }
 
@@ -224,11 +224,11 @@ class ServiceProviderApiTest extends BaseTest
     public function testCreateLLMOfficialProvider(): void
     {
         $provider = [
-            'alias' => '官方service商单元test',
+            'alias' => '官方service商单yuantest',
             'config' => [
-                // 国际接入点
+                // 国际接入point
                 'url' => 'international_access_point',
-                // 国内接入点
+                // 国inside接入point
                 //                'url' => 'domestic_access_points',
                 'api_key' => '****',
                 'priority' => 100,
@@ -237,7 +237,7 @@ class ServiceProviderApiTest extends BaseTest
             'status' => 1,
             'translate' => [
                 'alias' => [
-                    'zh_CN' => '官方service商单元test',
+                    'zh_CN' => '官方service商单yuantest',
                 ],
             ],
         ];
@@ -247,7 +247,7 @@ class ServiceProviderApiTest extends BaseTest
         $response = $this->get('/org/admin/service-providers/detail?service_provider_config_id=' . $response['data']['id'], [], $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $detail = $response['data'];
-        $this->assertEquals('官方service商单元test', $detail['alias']);
+        $this->assertEquals('官方service商单yuantest', $detail['alias']);
         $this->assertEquals('international_access_point', $detail['config']['proxy_url']);
         $this->assertEquals('****', $detail['config']['api_key']);
         $this->assertEquals('100', $detail['config']['priority']);
@@ -259,11 +259,11 @@ class ServiceProviderApiTest extends BaseTest
     public function testCreateVLMOfficialProvider(): void
     {
         $provider = [
-            'alias' => '官方service商单元test',
+            'alias' => '官方service商单yuantest',
             'config' => [
-                // 国际接入点
+                // 国际接入point
                 'proxy_url' => 'international_access_point',
-                // 国内接入点
+                // 国inside接入point
                 //                'proxy_url' => 'domestic_access_points',
                 'api_key' => 'sk-1111',
                 'priority' => 100,
@@ -272,7 +272,7 @@ class ServiceProviderApiTest extends BaseTest
             'status' => 1,
             'translate' => [
                 'alias' => [
-                    'zh_CN' => '官方service商单元test',
+                    'zh_CN' => '官方service商单yuantest',
                 ],
             ],
         ];
@@ -282,7 +282,7 @@ class ServiceProviderApiTest extends BaseTest
         $response = $this->get('/org/admin/service-providers/detail?service_provider_config_id=' . $response['data']['id'], [], $this->getCommonHeaders());
         $this->assertSame(1000, $response['code']);
         $detail = $response['data'];
-        $this->assertEquals('官方service商单元test', $detail['alias']);
+        $this->assertEquals('官方service商单yuantest', $detail['alias']);
         $this->assertEquals('international_access_point', $detail['config']['proxy_url']);
         $this->assertEquals('sk-*****************************bab', $detail['config']['api_key']);
         $this->assertEquals('100', $detail['config']['priority']);
@@ -304,7 +304,7 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * indetailresponse中查找指定ID的model.
+     * indetailresponsemiddle查找finger定ID的model.
      *
      * @param array $detailData detailresponsedata
      * @param string $modelId modelID
@@ -312,7 +312,7 @@ class ServiceProviderApiTest extends BaseTest
      */
     private function findModelInDetailResponse(array $detailData, string $modelId): ?array
     {
-        // detailinterface可能return models arrayor其他结构，这里needaccording toactualinterface调整
+        // detailinterface可能return models arrayor其他结构，这withinneedaccording toactualinterface调整
         if (isset($detailData['models']) && is_array($detailData['models'])) {
             foreach ($detailData['models'] as $model) {
                 if (isset($model['id']) && (string) $model['id'] === (string) $modelId) {
@@ -330,7 +330,7 @@ class ServiceProviderApiTest extends BaseTest
     }
 
     /**
-     * validateconfiguration中的4个costfield.
+     * validateconfigurationmiddle的4costfield.
      *
      * @param array $config configurationdata
      * @param array $expectedCosts expect的costvalue
@@ -342,7 +342,7 @@ class ServiceProviderApiTest extends BaseTest
         $this->assertArrayHasKey('cache_write_cost', $config, 'configshouldcontaincache_write_costfield');
         $this->assertArrayHasKey('cache_hit_cost', $config, 'configshouldcontaincache_hit_costfield');
 
-        // validatevaluewhethercorrect（allow浮点数误差）
+        // validatevaluewhethercorrect（allow浮point数误差）
         $this->assertEqualsWithDelta(
             $expectedCosts['input_cost'],
             (float) $config['input_cost'],
@@ -377,7 +377,7 @@ class ServiceProviderApiTest extends BaseTest
      *
      * @param int $modelId modelID
      * @param array $expectedConfig expect的configurationdata
-     * @param int $expectedVersion expect的version号
+     * @param int $expectedVersion expect的versionnumber
      */
     private function verifyConfigVersion(int $modelId, array $expectedConfig, int $expectedVersion): void
     {
@@ -556,8 +556,8 @@ class ServiceProviderApiTest extends BaseTest
             );
         }
 
-        // validateversion号和currentversionmark
-        $this->assertSame($expectedVersion, $versionEntity->getVersion(), "version号should是 {$expectedVersion}");
+        // validateversionnumber和currentversionmark
+        $this->assertSame($expectedVersion, $versionEntity->getVersion(), "versionnumbershould是 {$expectedVersion}");
         $this->assertTrue($versionEntity->isCurrentVersion(), 'should是currentversion');
     }
 }

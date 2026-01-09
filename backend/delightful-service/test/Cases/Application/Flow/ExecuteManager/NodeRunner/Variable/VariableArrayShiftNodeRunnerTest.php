@@ -33,7 +33,7 @@ class VariableArrayShiftNodeRunnerTest extends ExecuteManagerBaseTest
                 "type": "object",
                 "key": "root",
                 "sort": 0,
-                "title": "root节点",
+                "title": "rootsectionpoint",
                 "description": null,
                 "required": [
                     "variable_name"
@@ -45,7 +45,7 @@ class VariableArrayShiftNodeRunnerTest extends ExecuteManagerBaseTest
                         "type": "string",
                         "key": "variable_name",
                         "sort": 0,
-                        "title": "变量名",
+                        "title": "变quantity名",
                         "description": "",
                         "required": null,
                         "value": {
@@ -80,7 +80,7 @@ JSON, true));
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": null,
         "required": [
             "value"

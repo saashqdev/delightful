@@ -22,7 +22,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 #[FlowNodeDefine(
     type: NodeType::KnowledgeSimilarity->value,
     code: NodeType::KnowledgeSimilarity->name,
-    name: 'to量datalibrary / to量knowledge base匹配',
+    name: 'toquantitydatalibrary / toquantityknowledge base匹配',
     paramsConfig: KnowledgeSimilarityNodeParamsConfig::class,
     version: 'v1',
     singleDebug: true,

@@ -39,17 +39,17 @@ class KnowledgeBaseDTO extends AbstractFlowDTO
     public string $organizationCode;
 
     /**
-     * 片段quantity.
+     * slicesegmentquantity.
      */
     public int $fragmentCount = 0;
 
     /**
-     * expected的片段quantity.
+     * expected的slicesegmentquantity.
      */
     public int $expectedCount = 0;
 
     /**
-     * 已complete的片段quantity.
+     * 已complete的slicesegmentquantity.
      */
     public int $completedCount = 0;
 

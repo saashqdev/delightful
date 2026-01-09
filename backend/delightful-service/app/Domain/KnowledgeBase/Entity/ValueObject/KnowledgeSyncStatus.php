@@ -15,7 +15,7 @@ enum KnowledgeSyncStatus: int
     case NotSynced = 0;
 
     /*
-     * 同中
+     * 同middle
      */
     case Syncing = 3;
 
@@ -40,7 +40,7 @@ enum KnowledgeSyncStatus: int
     case DeleteFailed = 5;
 
     /*
-     * 重建中
+     * 重建middle
      */
     case Rebuilding = 6;
 

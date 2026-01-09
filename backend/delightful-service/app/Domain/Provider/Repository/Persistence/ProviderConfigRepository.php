@@ -93,7 +93,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             $builder->whereIn('id', $query->getIds());
         }
 
-        // 添加sort（numbermore大more靠前）
+        // 添加sort（numbermore大more靠front）
         $builder->orderBy('sort', 'DESC')->orderBy('id', 'ASC');
 
         $result = $this->getByPage($builder, $page, $query);
@@ -129,7 +129,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             $providerConfigEntity->setUpdatedAt($now);
             $attributes['updated_at'] = $now->format('Y-m-d H:i:s');
 
-            // update操作时，移exceptnotshouldbemorenewfield
+            // update操作o clock，移exceptnotshouldbemorenewfield
             unset($attributes['id'], $attributes['created_at']);
         }
 
@@ -200,26 +200,26 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * according toorganization和service商typegetservice商configuration列表.
-     * 新逻辑：bydatabase中的actualconfiguration为准，对atdatabase中nothave的service商type，usetemplate补充
-     * support多个same provider_code 的configuration（organization管理员手动添加的）
-     * finalresulthandle时，官方organizationwillfilter掉Delightfulservice商，普通organizationwill将Delightfulservice商置顶.
+     * according toorganization和service商typegetservice商configurationcolumn表.
+     * 新逻辑：bydatabasemiddle的actualconfiguration为准，对atdatabasemiddlenothave的service商type，usetemplate补充
+     * support多same provider_code 的configuration（organization管理员hand动添加的）
+     * finalresulthandleo clock，官方organizationwillfilter掉Delightfulservice商，普通organizationwill将Delightfulservice商置top.
      * @param string $organizationCode organizationencoding
      * @param Category $category service商type
      * @return ProviderConfigDTO[]
      */
     public function getOrganizationProviders(string $organizationCode, Category $category, ?Status $status = null): array
     {
-        // 1. getall量的service商template列表
+        // 1. getallquantity的service商templatecolumn表
         $templateProviders = $this->providerTemplateRepository->getAllProviderTemplates($category);
 
-        // 2. getorganization下已configuration的service商
+        // 2. getorganizationdown已configuration的service商
         $organizationProviders = $this->getOrganizationProvidersFromDatabase($organizationCode, $category, $status);
 
-        // 3. 首先添加database中的所haveactualconfiguration（保留多个same provider_code 的configuration）
+        // 3. 首先添加databasemiddle的所haveactualconfiguration（保留多same provider_code 的configuration）
         $result = $organizationProviders;
 
-        // 4. check哪些service商typeindatabase中nothaveconfiguration，为这些添加template
+        // 4. check哪些service商typeindatabasemiddlenothaveconfiguration，为这些添加template
         $existingProviderCodes = [];
         foreach ($organizationProviders as $config) {
             if ($config->getProviderCode()) {
@@ -227,7 +227,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             }
         }
 
-        // 为database中not存in的service商type添加templateconfiguration
+        // 为databasemiddlenot存in的service商type添加templateconfiguration
         foreach ($templateProviders as $template) {
             if (! $template->getProviderCode() || ! in_array($template->getProviderCode(), $existingProviderCodes, true)) {
                 $result[] = $template;
@@ -255,15 +255,15 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             }
         }
 
-        // 对其他service商按 sort fieldsort（numbermore大more靠前）
+        // 对其他service商按 sort fieldsort（numbermore大more靠front）
         usort($otherProviders, function ($a, $b) {
             if ($a->getSort() === $b->getSort()) {
-                return strcmp($a->getId(), $b->getId()); // same sort value时按 ID sort
+                return strcmp($a->getId(), $b->getId()); // same sort valueo clock按 ID sort
             }
-            return $b->getSort() <=> $a->getSort(); // 降序排列，number大的in前
+            return $b->getSort() <=> $a->getSort(); // 降序rowcolumn，number大的infront
         });
 
-        // if找to Delightful service商，将其放in第一位（non官方organization才willhave Delightful service商）
+        // if找to Delightful service商，将其放inthe一位（non官方organization才willhave Delightful service商）
         if ($delightfulProvider !== null) {
             $result = array_merge([$delightfulProvider], $otherProviders);
         } else {
@@ -290,7 +290,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * passconfigurationID和organizationencodinggetservice商configuration实体.
+     * passconfigurationID和organizationencodinggetservice商configuration实body.
      */
     public function getProviderConfigEntityById(string $serviceProviderConfigId, string $organizationCode): ?ProviderConfigEntity
     {
@@ -375,19 +375,19 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * fromdatabasegetorganization下已configuration的service商.
+     * fromdatabasegetorganizationdown已configuration的service商.
      * @return ProviderConfigDTO[]
      */
     private function getOrganizationProvidersFromDatabase(string $organizationCode, Category $category, ?Status $status = null): array
     {
-        // according tocategorygetservice商ID列表
+        // according tocategorygetservice商IDcolumn表
         $serviceProviderIds = $this->getServiceProviderIdsByCategory($category);
 
         if (empty($serviceProviderIds)) {
             return [];
         }
 
-        // according toorganizationencoding和service商ID列表getconfiguration
+        // according toorganizationencoding和service商IDcolumn表getconfiguration
         $providerConfigQuery = $this->createConfigQuery()
             ->where('organization_code', $organizationCode)
             ->whereIn('service_provider_id', $serviceProviderIds)
@@ -400,14 +400,14 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
 
         $providerConfigsResult = Db::select($providerConfigQuery->toSql(), $providerConfigQuery->getBindings());
 
-        // 批量query对应的 provider info
+        // 批quantityquery对应的 provider info
         $providerMap = $this->getProviderMapByConfigs($providerConfigsResult);
 
         return ProviderConfigAssembler::toDTOListWithProviders($providerConfigsResult, $providerMap);
     }
 
     /**
-     * according toconfigurationdata批量query对应的 provider info.
+     * according toconfigurationdata批quantityquery对应的 provider info.
      * @param array $configsResult configurationqueryresult
      * @return array provider ID to provider array的mapping
      */
@@ -428,7 +428,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             return [];
         }
 
-        // 批量query provider info
+        // 批quantityquery provider info
         $providerQuery = $this->createProviderQuery()
             ->whereIn('id', $providerIds);
         $providersResult = Db::select($providerQuery->toSql(), $providerQuery->getBindings());
@@ -443,7 +443,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * according tocategorygetservice商ID列表.
+     * according tocategorygetservice商IDcolumn表.
      *
      * @param Category $category service商category
      * @return array service商IDarray

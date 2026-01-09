@@ -42,7 +42,7 @@ class MultiModalBuilder
             return null;
         }
 
-        // calltool提前识别
+        // calltool提front识别
         $visionExecutionData = clone $executionData;
         $visionExecutionData->getTriggerData()->setParams([
             'model' => $visionModel,

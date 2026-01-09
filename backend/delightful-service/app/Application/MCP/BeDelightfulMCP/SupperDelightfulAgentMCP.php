@@ -182,7 +182,7 @@ readonly class SupperDelightfulAgentMCP implements SupperDelightfulAgentMCPInter
     }
 
     /**
-     * getproject的 MCP service器 ID 列table.
+     * getproject的 MCP service器 ID columntable.
      */
     private function getProjectMcpServerIds(MCPDataIsolation $mcpDataIsolation, string $projectId): array
     {

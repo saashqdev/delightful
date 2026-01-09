@@ -18,12 +18,12 @@ enum VolcengineStatusCode: string
     case SUCCESS = '20000000';
 
     /**
-     * 正inprocess中 - responsebody为空.
+     * 正inprocessmiddle - responsebody为空.
      */
     case PROCESSING = '20000001';
 
     /**
-     * taskinqueue中 - responsebody为空.
+     * taskinqueuemiddle - responsebody为空.
      */
     case QUEUED = '20000002';
 
@@ -61,7 +61,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断whether为process中status（includeprocess中和排队中）.
+     * 判断whether为processmiddlestatus（includeprocessmiddle和row队middle）.
      */
     public function isProcessing(): bool
     {
@@ -99,8 +99,8 @@ enum VolcengineStatusCode: string
     {
         return match ($this) {
             self::SUCCESS => '识别success',
-            self::PROCESSING => '正inprocess中',
-            self::QUEUED => 'taskinqueue中',
+            self::PROCESSING => '正inprocessmiddle',
+            self::QUEUED => 'taskinqueuemiddle',
             self::SILENT_AUDIO => '静音audio',
             self::INVALID_PARAMS => 'requestparameterinvalid',
             self::EMPTY_AUDIO => '空audio',
@@ -118,7 +118,7 @@ enum VolcengineStatusCode: string
     }
 
     /**
-     * 判断whether为service内部error（550xxxx系列）.
+     * 判断whether为serviceinside部error（550xxxx系column）.
      */
     public static function isInternalServerError(string $statusCode): bool
     {

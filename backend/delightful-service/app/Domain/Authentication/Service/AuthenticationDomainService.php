@@ -28,7 +28,7 @@ readonly class AuthenticationDomainService
     }
 
     /**
-     * verify账号凭证
+     * verify账number凭证
      */
     public function verifyAccountCredentials(string $email, string $password): ?AccountEntity
     {
@@ -47,7 +47,7 @@ readonly class AuthenticationDomainService
     }
 
     /**
-     * inorganization中查找user.
+     * inorganizationmiddle查找user.
      */
     public function findUserInOrganization(string $delightfulId, ?string $organizationCode = null): ?DelightfulUserEntity
     {
@@ -55,10 +55,10 @@ readonly class AuthenticationDomainService
     }
 
     /**
-     * generate账号token.
+     * generate账numbertoken.
      *
-     * 由at麦吉support其他账号体系的接入，therefore前端的processis，先去some个账号体系login，again由麦吉做login校验。
-     * therefore，即使use麦吉自己的账号体系，alsoneed遵守这个process。
+     * 由at麦吉support其他账numberbody系的接入，thereforefront端的processis，先去some账numberbody系login，again由麦吉做login校验。
+     * therefore，即使use麦吉自己的账numberbody系，alsoneed遵守这process。
      */
     public function generateAccountToken(string $delightfulId): string
     {
@@ -68,7 +68,7 @@ readonly class AuthenticationDomainService
         $delightfulTokenEntity->setType(DelightfulTokenType::Account);
         $delightfulTokenEntity->setTypeRelationValue($delightfulId);
         $delightfulTokenEntity->setToken($authorization);
-        // default 30 天
+        // default 30 day
         $carbon = Carbon::now()->addDays(30);
         $delightfulTokenEntity->setExpiredAt($carbon->toDateTimeString());
         $this->delightfulTokenRepository->createToken($delightfulTokenEntity);

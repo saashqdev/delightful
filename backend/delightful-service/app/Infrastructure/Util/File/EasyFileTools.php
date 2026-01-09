@@ -14,7 +14,7 @@ class EasyFileTools
     public static function saveFile(string $path, string $stream): void
     {
         $file = fopen($path, 'wb');
-        // 把stream切割成1000kb的小块，each次writefile
+        // 把stream切割become1000kb的小piece，eachtimewritefile
 
         fwrite($file, $stream);
         fclose($file);
@@ -33,20 +33,20 @@ class EasyFileTools
         if (! $wav1) {
             throw new InvalidArgumentException('Failed to open the base file.');
         }
-        // 去掉blob的头
+        // 去掉blob的head
         $blob = substr($blob, 44);
 
-        // 将新data追加tofile末尾
+        // 将新data追加tofile末tail
         // getfilesize
         fseek($wav1, 0, SEEK_END);
         fwrite($wav1, $blob);
         $fileSize = ftell($wav1);
 
-        // 修正 RIFF 块size（file总size - 8）
+        // 修正 RIFF piecesize（file总size - 8）
         fseek($wav1, 4);
         fwrite($wav1, pack('V', $fileSize - 8));
 
-        // 修正 data 块size（file总size - 44）
+        // 修正 data piecesize（file总size - 44）
         fseek($wav1, 40);
         fwrite($wav1, pack('V', $fileSize - 44));
 

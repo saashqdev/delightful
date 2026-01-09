@@ -16,11 +16,11 @@ use App\Infrastructure\Core\HighAvailability\Entity\ValueObject\HighAvailability
 class EndpointAssembler
 {
     /**
-     * generatestandard化的端点type标识.
+     * generatestandard化的端pointtype标识.
      *
      * @param HighAvailabilityAppType $appType 高可useapplicationtype
      * @param string $modelId modelID
-     * @return string standard化的端点type标识
+     * @return string standard化的端pointtype标识
      */
     public static function generateEndpointType(HighAvailabilityAppType $appType, string $modelId): string
     {
@@ -28,9 +28,9 @@ class EndpointAssembler
     }
 
     /**
-     * fromformat化的端点type标识中also原original的modelID.
+     * fromformat化的端pointtype标识middlealso原original的modelID.
      *
-     * @param string $formattedModelId 可能containformat化前缀的modelID
+     * @param string $formattedModelId 可能containformat化front缀的modelID
      * @return string original的modelID
      */
     public static function extractOriginalModelId(string $formattedModelId): string
@@ -39,21 +39,21 @@ class EndpointAssembler
         foreach (HighAvailabilityAppType::cases() as $appType) {
             $prefix = $appType->value . DelimiterType::HIGH_AVAILABILITY->value;
 
-            // if匹配to前缀，then移except前缀returnoriginal modelId
+            // if匹配tofront缀，then移exceptfront缀returnoriginal modelId
             if (str_starts_with($formattedModelId, $prefix)) {
                 return substr($formattedModelId, strlen($prefix));
             }
         }
 
-        // ifnothave匹配to任何前缀，then直接returnoriginalvalue
+        // ifnothave匹配to任何front缀，then直接returnoriginalvalue
         return $formattedModelId;
     }
 
     /**
-     * check给定的stringwhether为format化的端点type标识.
+     * check给定的stringwhether为format化的端pointtype标识.
      *
      * @param string $modelId 待check的modelID
-     * @return bool whether为format化的端点type标识
+     * @return bool whether为format化的端pointtype标识
      */
     public static function isFormattedEndpointType(string $modelId): bool
     {

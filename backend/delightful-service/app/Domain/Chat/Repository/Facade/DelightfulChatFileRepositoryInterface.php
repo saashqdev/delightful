@@ -15,7 +15,7 @@ interface DelightfulChatFileRepositoryInterface
     public function uploadFile(DelightfulChatFileEntity $delightfulFileDTO): DelightfulChatFileEntity;
 
     /**
-     * 批量uploadfile.
+     * 批quantityuploadfile.
      * @param DelightfulChatFileEntity[] $delightfulFileDTOs
      * @return DelightfulChatFileEntity[]
      */

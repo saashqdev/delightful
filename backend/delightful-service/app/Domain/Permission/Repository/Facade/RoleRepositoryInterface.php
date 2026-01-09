@@ -28,7 +28,7 @@ interface RoleRepositoryInterface
     public function getByName(string $organizationCode, string $name): ?RoleEntity;
 
     /**
-     * queryrole列表.
+     * queryrolecolumn表.
      * @return array{total: int, list: RoleEntity[]}
      */
     public function queries(string $organizationCode, Page $page, ?array $filters = null): array;
@@ -39,7 +39,7 @@ interface RoleRepositoryInterface
     public function delete(string $organizationCode, RoleEntity $roleEntity): void;
 
     /**
-     * 为role分配user.
+     * 为roleminute配user.
      */
     public function assignUsers(string $organizationCode, int $roleId, array $userIds, ?string $assignedBy = null): void;
 
@@ -49,23 +49,23 @@ interface RoleRepositoryInterface
     public function removeUsers(string $organizationCode, int $roleId, array $userIds): void;
 
     /**
-     * getrole的user列表.
+     * getrole的usercolumn表.
      */
     public function getRoleUsers(string $organizationCode, int $roleId): array;
 
     /**
-     * 批量get多个role的user列表。
+     * 批quantityget多role的usercolumn表。
      * returnformat为 [roleId => userId[]].
      *
      * @param string $organizationCode organizationencoding
-     * @param int[] $roleIds role ID 列表
+     * @param int[] $roleIds role ID column表
      *
      * @return array<int, array>
      */
     public function getRoleUsersMap(string $organizationCode, array $roleIds): array;
 
     /**
-     * getuser的role列表.
+     * getuser的rolecolumn表.
      */
     public function getUserRoles(string $organizationCode, string $userId): array;
 

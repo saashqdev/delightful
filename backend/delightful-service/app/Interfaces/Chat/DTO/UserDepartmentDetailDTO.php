@@ -54,14 +54,14 @@ class UserDepartmentDetailDTO extends AbstractDTO
     protected string $userManual;
 
     /**
-     * userin多个department时的departmentinformation，notcontain完整path。
+     * userin多departmento clock的departmentinformation，notcontain完整path。
      * @var array<DepartmentPathNodeDTO>
      */
     protected array $pathNodes;
 
     /**
      * @var array
-     *            userin多个department时的departmentinformation，contain完整path
+     *            userin多departmento clock的departmentinformation，contain完整path
      * @var null|array<string,DepartmentPathNodeDTO[]>
      */
     protected ?array $fullPathNodes;
@@ -326,7 +326,7 @@ class UserDepartmentDetailDTO extends AbstractDTO
     }
 
     /**
-     * userin多个department时的departmentinformation，contain完整path。
+     * userin多departmento clock的departmentinformation，contain完整path。
      * @param array<string,array>|array<string,DepartmentPathNodeDTO[]> $fullPathNodes
      */
     public function setFullPathNodes(array $fullPathNodes): UserDepartmentDetailDTO

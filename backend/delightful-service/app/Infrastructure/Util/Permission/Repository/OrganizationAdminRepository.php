@@ -196,7 +196,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * getorganization下所haveorganization管理员.
+     * getorganizationdown所haveorganization管理员.
      */
     public function getAllOrganizationAdmins(DataIsolation $dataIsolation): array
     {
@@ -212,7 +212,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * 批量checkuserwhether为organization管理员.
+     * 批quantitycheckuserwhether为organization管理员.
      */
     public function batchCheckOrganizationAdmin(DataIsolation $dataIsolation, array $userIds): array
     {
@@ -239,7 +239,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
     }
 
     /**
-     * mappingarraydatato实体.
+     * mappingarraydatato实body.
      * @param mixed $row
      */
     private function mapArrayToEntity($row): OrganizationAdminEntity

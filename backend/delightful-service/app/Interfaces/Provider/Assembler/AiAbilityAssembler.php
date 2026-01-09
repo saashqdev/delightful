@@ -42,7 +42,7 @@ class AiAbilityAssembler
         // getoriginalconfiguration
         $config = $entity->getConfig();
 
-        // 递归脱敏所have api_key field（support任意嵌套结构）
+        // 递归脱敏所have api_key field（support任意嵌set结构）
         $maskedConfig = self::maskConfigRecursively($config);
 
         return new AiAbilityDetailDTO(
@@ -91,7 +91,7 @@ class AiAbilityAssembler
      *
      * @param string $config encrypt的configurationstring
      * @param string $salt 盐value(usually是recordID)
-     * @return array decrypt后的configurationarray
+     * @return array decryptback的configurationarray
      */
     public static function decodeConfig(string $config, string $salt): array
     {
@@ -107,7 +107,7 @@ class AiAbilityAssembler
      *
      * @param array $config configurationarray
      * @param string $salt 盐value(usually是recordID)
-     * @return string encrypt后的configurationstring
+     * @return string encryptback的configurationstring
      */
     public static function encodeConfig(array $config, string $salt): string
     {
@@ -116,17 +116,17 @@ class AiAbilityAssembler
     }
 
     /**
-     * 递归脱敏configuration中的所have api_key field.
+     * 递归脱敏configurationmiddle的所have api_key field.
      *
      * @param array $config configurationarray
-     * @return array 脱敏后的configurationarray
+     * @return array 脱敏back的configurationarray
      */
     private static function maskConfigRecursively(array $config): array
     {
         $result = [];
 
         foreach ($config as $key => $value) {
-            // if是 api_key field，conduct脱敏（前4后4）
+            // if是 api_key field，conduct脱敏（front4back4）
             if ($key === 'api_key' && is_string($value) && ! empty($value)) {
                 $result[$key] = self::maskApiKey($value);
             }
@@ -147,9 +147,9 @@ class AiAbilityAssembler
      * 脱敏 API Key.
      *
      * @param string $apiKey original API Key
-     * @param int $prefixLength 保留前几位（default3）
-     * @param int $suffixLength 保留后几位（default3）
-     * @return string 脱敏后的 API Key
+     * @param int $prefixLength 保留front几位（default3）
+     * @param int $suffixLength 保留back几位（default3）
+     * @return string 脱敏back的 API Key
      */
     private static function maskApiKey(string $apiKey, int $prefixLength = 4, int $suffixLength = 4): string
     {
@@ -161,7 +161,7 @@ class AiAbilityAssembler
             return str_repeat('*', $length);
         }
 
-        // 显示前N位和后N位
+        // 显示frontN位和backN位
         $prefix = mb_substr($apiKey, 0, $prefixLength);
         $suffix = mb_substr($apiKey, -$suffixLength);
         $maskLength = $length - $minLength;

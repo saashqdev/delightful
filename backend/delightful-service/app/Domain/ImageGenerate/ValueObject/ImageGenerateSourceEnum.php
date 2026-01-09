@@ -9,7 +9,7 @@ namespace App\Domain\ImageGenerate\ValueObject;
 
 enum ImageGenerateSourceEnum: string
 {
-    // 超级Mage
+    // 超levelMage
     case SUPER_DELIGHTFUL = 'be_delightful';
 
     // agent
@@ -18,7 +18,7 @@ enum ImageGenerateSourceEnum: string
     // tool
     case TOOL = 'tool';
 
-    // process节点
+    // processsectionpoint
     case FLOW_NODE = 'flow_node';
 
     // API

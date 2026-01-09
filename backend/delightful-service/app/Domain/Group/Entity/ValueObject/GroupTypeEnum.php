@@ -9,21 +9,21 @@ namespace App\Domain\Group\Entity\ValueObject;
 
 enum GroupTypeEnum: int
 {
-    // 内部群
+    // inside部群
     case Internal = 1;
 
-    // 内部培训群
+    // inside部培训群
     case InternalTraining = 2;
 
-    // 内部will议群
+    // inside部will议群
     case InternalMeeting = 3;
 
-    // 内部project群
+    // inside部project群
     case InternalProject = 4;
 
-    // 内部工单群
+    // inside部工单群
     case InternalWorkOrder = 5;
 
-    // 外部群
+    // outside部群
     case External = 6;
 }

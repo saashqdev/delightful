@@ -10,12 +10,12 @@ namespace App\Infrastructure\Core\MCP\Server\Handler\Method;
 use App\Infrastructure\Core\MCP\Types\Message\MessageInterface;
 
 /**
- * prompt列tablemethodprocess器.
+ * promptcolumntablemethodprocess器.
  */
 class PromptListHandler extends AbstractMethodHandler
 {
     /**
-     * processprompt列tablerequest.
+     * processpromptcolumntablerequest.
      */
     public function handle(MessageInterface $request): ?array
     {

@@ -31,7 +31,7 @@ class RequestContextMiddleware implements MiddlewareInterface
 
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
-        // 注意！为了迭代可控，只能in api 层对协程context赋value
+        // 注意！为了迭代可控，只能in api layer对协程context赋value
         $accessToken = $request->getHeaderLine('api-key');
 
         if (! empty($accessToken)) {
@@ -39,7 +39,7 @@ class RequestContextMiddleware implements MiddlewareInterface
         } else {
             $delightfulUserAuthorization = $this->getAuthorization();
         }
-        // 将userinformation存入协程context，方便 api 层get
+        // 将userinformation存入协程context，方便 api layerget
         RequestCoContext::setUserAuthorization($delightfulUserAuthorization);
         return $handler->handle($request);
     }

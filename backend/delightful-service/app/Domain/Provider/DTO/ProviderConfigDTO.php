@@ -20,8 +20,8 @@ use Hyperf\Codec\Json;
 /**
  * service_provider_config_id 对应的service商+modellist。
  *
- * 同一个service商indifferent的organization下havedifferent的 service_provider_config_id。
- * 一个service_provider_config_id对应多个specific的model。
+ * 同一service商indifferent的organizationdownhavedifferent的 service_provider_config_id。
+ * 一service_provider_config_id对应多specific的model。
  */
 class ProviderConfigDTO extends AbstractDTO
 {
@@ -41,7 +41,7 @@ class ProviderConfigDTO extends AbstractDTO
     protected string $serviceProviderId = '';
 
     /**
-     * 大model的specificconfiguration，ak,sk,host 之类（已脱敏）.
+     * 大model的specificconfiguration，ak,sk,host 之category（已脱敏）.
      */
     protected ?ProviderConfigItem $config = null;
 

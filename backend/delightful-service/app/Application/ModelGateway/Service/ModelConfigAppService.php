@@ -59,48 +59,48 @@ class ModelConfigAppService extends AbstractLLMAppService
     }
 
     /**
-     * getmodel的降级链，mergeuser传入的降级链与系统default的降级链.
+     * getmodel的降level链，mergeuser传入的降level链与系统default的降level链.
      *
      * @param string $orgCode organizationencoding
      * @param string $userId userID
-     * @param string $modelType 指定的modeltype
-     * @param string[] $modelFallbackChain user传入的降级链
+     * @param string $modelType finger定的modeltype
+     * @param string[] $modelFallbackChain user传入的降level链
      *
      * @return string final的modeltype
      */
     public function getChatModelTypeByFallbackChain(string $orgCode, string $userId, string $modelType = '', array $modelFallbackChain = []): string
     {
         $dataIsolation = ModelGatewayDataIsolation::createByOrganizationCodeWithoutSubscription($orgCode, $userId);
-        // fromorganization可use的modellist中get所have可chat的model
+        // fromorganization可use的modellistmiddleget所have可chat的model
         $odinModels = di(ModelGatewayMapper::class)->getChatModels($dataIsolation) ?? [];
         $chatModelsName = array_keys($odinModels);
         if (empty($chatModelsName)) {
             return '';
         }
 
-        // if指定了modeltypeand该model存inat可usemodellist中，then直接return
+        // iffinger定了modeltypeand该model存inat可usemodellistmiddle，then直接return
         if (! empty($modelType) && in_array($modelType, $chatModelsName)) {
             return $modelType;
         }
 
-        // 将可usemodel转为hashtable，implementO(1)time复杂度的查找
+        // 将可usemodel转为hashtable，implementO(1)time复杂degree的查找
         $availableModels = array_flip($chatModelsName);
 
-        // get系统default的降级链
+        // get系统default的降level链
         $systemFallbackChain = config('delightful-api.model_fallback_chain.chat', []);
 
-        // mergeuser传入的降级链与系统default的降级链
-        // user传入的降级链优先级more高
+        // mergeuser传入的降level链与系统default的降level链
+        // user传入的降level链优先levelmore高
         $mergedFallbackChain = array_merge($systemFallbackChain, $modelFallbackChain);
 
-        // 按优先级顺序遍历merge后的降级链
+        // 按优先level顺序遍历mergeback的降level链
         foreach ($mergedFallbackChain as $modelName) {
             if (isset($availableModels[$modelName])) {
                 return $modelName;
             }
         }
 
-        // 后备solution：ifnothave匹配任何优先model，usefirst可usemodel
+        // back备solution：ifnothave匹配任何优先model，usefirst可usemodel
         return $chatModelsName[0] ?? '';
     }
 }

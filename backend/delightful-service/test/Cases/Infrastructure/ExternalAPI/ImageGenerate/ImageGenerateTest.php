@@ -42,7 +42,7 @@ class ImageGenerateTest extends BaseTest
         }
         $header = $data[0];
         $imageData = $data[1];
-        // check头部whether符合Base64encodingimage的format
+        // checkhead部whether符合Base64encodingimage的format
         if (! preg_match('/^data:image\/(png|jpeg|jpg|gif);base64$/', $header)) {
             return false;
         }
@@ -58,7 +58,7 @@ class ImageGenerateTest extends BaseTest
         $uploadFile = new UploadFile($base64, $uploadDir, 'test');
 
         $fileDomainService = di(FileDomainService::class);
-        // uploadfile（指定not自动createdirectory）
+        // uploadfile（finger定not自动createdirectory）
         $fileDomainService->uploadByCredential('DT001', $uploadFile);
 
         // generate可access的link
@@ -95,7 +95,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByVolcengine()
     {
         $volcengineModelRequest = new VolcengineModelRequest();
-        $volcengineModelRequest->setPrompt('摄影作品，真人写真style，一个画着万圣节装扮的女人手里拿着一个南瓜灯，该design冷色调与暖色调结合，冷色调与暖色调过渡自然，色调柔和，电影感，电影海报，高级感，16k，超详细，UHD');
+        $volcengineModelRequest->setPrompt('摄影作品，真人写真style，一画着万圣section装扮的女人handwithin拿着一南瓜灯，该design冷color调与暖color调结合，冷color调与暖color调过渡自然，color调柔和，电影感，电影海报，高level感，16k，超详细，UHD');
         $volcengineModelRequest->setGenerateNum(1);
         $volcengineModelRequest->setWidth('1024');
         $volcengineModelRequest->setHeight('1024');
@@ -108,7 +108,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByFluix()
     {
         $FluxModelRequest = new FluxModelRequest();
-        $FluxModelRequest->setPrompt('摄影作品，真人写真style，一个画着万圣节装扮的女人手里拿着一个南瓜灯，该design冷色调与暖色调结合，冷色调与暖色调过渡自然，色调柔和，电影感，电影海报，高级感，16k，超详细，UHD');
+        $FluxModelRequest->setPrompt('摄影作品，真人写真style，一画着万圣section装扮的女人handwithin拿着一南瓜灯，该design冷color调与暖color调结合，冷color调与暖color调过渡自然，color调柔和，电影感，电影海报，高level感，16k，超详细，UHD');
         $FluxModelRequest->setGenerateNum(1);
         $FluxModelRequest->setWidth('1024');
         $FluxModelRequest->setHeight('1024');
@@ -121,7 +121,7 @@ class ImageGenerateTest extends BaseTest
     public function testText2ImageByMJ()
     {
         $MjModelRequest = new MidjourneyModelRequest();
-        $MjModelRequest->setPrompt('摄影作品，真人写真style，一个画着万圣节装扮的女人手里拿着一个南瓜灯，该design冷色调与暖色调结合，冷色调与暖色调过渡自然，色调柔和，电影感，电影海报，高级感，16k，超详细，UHD');
+        $MjModelRequest->setPrompt('摄影作品，真人写真style，一画着万圣section装扮的女人handwithin拿着一南瓜灯，该design冷color调与暖color调结合，冷color调与暖color调过渡自然，color调柔和，电影感，电影海报，高level感，16k，超详细，UHD');
         $MjModelRequest->setGenerateNum(1);
         $MjModelRequest->setModel('relax');
         $MjModel = new MidjourneyModel();
@@ -137,7 +137,7 @@ class ImageGenerateTest extends BaseTest
 
         // createrequest实例
         $gpt4oModelRequest = new GPT4oModelRequest();
-        $gpt4oModelRequest->setPrompt('一只小金毛正in草原上欢快的奔跑');
+        $gpt4oModelRequest->setPrompt('一只小金毛正in草原up欢快的奔跑');
         $gpt4oModelRequest->setGenerateNum(4);
 
         // generateimage
@@ -163,7 +163,7 @@ class ImageGenerateTest extends BaseTest
 
         // createrequest实例
         $gpt4oModelRequest = new GPT4oModelRequest();
-        $gpt4oModelRequest->setPrompt('调整一群女巫手里捧着南瓜in膜拜一个人');
+        $gpt4oModelRequest->setPrompt('调整一群女巫handwithin捧着南瓜in膜拜一人');
         $gpt4oModelRequest->setGenerateNum(1);
 
         // set参考image
@@ -202,7 +202,7 @@ class ImageGenerateTest extends BaseTest
         //
         //        // createrequest实例
         //        $qwenImageRequest = new QwenImageModelRequest();
-        //        $qwenImageRequest->setPrompt('一只可爱的小猫咪in花园里玩耍，阳光明媚，色彩丰富，高quality摄影');
+        //        $qwenImageRequest->setPrompt('一只可爱的小猫咪inflower园within玩耍，阳光明媚，color彩丰富，高quality摄影');
         //        $qwenImageRequest->setHeight('1328');
         //        $qwenImageRequest->setWidth('1328');
         //        $qwenImageRequest->setGenerateNum(1);

@@ -29,10 +29,10 @@ use Hyperf\Retry\Annotation\Retry;
 
 class VolcengineModel extends AbstractImageGenerate
 {
-    // most大轮询retrycount
+    // most大round询retrycount
     private const MAX_RETRY_COUNT = 30;
 
-    // 轮询retry间隔（秒）
+    // round询retrybetween隔（second）
     private const RETRY_INTERVAL = 2;
 
     // 图生图quantity限制
@@ -80,7 +80,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像并returnOpenAIformatresponse - V2一体化version.
+     * generate图像并returnOpenAIformatresponse - V2一body化version.
      */
     public function generateImageOpenAIFormat(ImageGenerateRequest $imageGenerateRequest): OpenAIFormatResponse
     {
@@ -101,7 +101,7 @@ class VolcengineModel extends AbstractImageGenerate
         $isImageToImage = ! empty($imageGenerateRequest->getReferenceImage());
         $count = $isImageToImage ? self::IMAGE_TO_IMAGE_IMAGE_COUNT : $imageGenerateRequest->getGenerateNum();
 
-        // 4. 并发handle - 直接操作responseobject
+        // 4. 并hairhandle - 直接操作responseobject
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
 
@@ -121,7 +121,7 @@ class VolcengineModel extends AbstractImageGenerate
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('Volcengine OpenAIformat生图：单个requestfail', [
+                    $this->logger->error('Volcengine OpenAIformat生图：单requestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -132,7 +132,7 @@ class VolcengineModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 5. recordfinalresult
-        $this->logger->info('Volcengine OpenAIformat生图：并发handlecomplete', [
+        $this->logger->info('Volcengine OpenAIformat生图：并hairhandlecomplete', [
             '总request数' => $count,
             'successimage数' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
@@ -149,7 +149,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像的核心逻辑，return ImageGenerateResponse.
+     * generate图像的核core逻辑，return ImageGenerateResponse.
      */
     protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -172,7 +172,7 @@ class VolcengineModel extends AbstractImageGenerate
             'textToImageReqScheduleConf' => $this->textToImageReqScheduleConf,
         ]);
 
-        // use Parallel 并行handle
+        // use Parallel 并linehandle
         $parallel = new Parallel();
         for ($i = 0; $i < $count; ++$i) {
             $fromCoroutineId = Coroutine::id();
@@ -181,7 +181,7 @@ class VolcengineModel extends AbstractImageGenerate
                 try {
                     // submittask（带retry）
                     $taskId = $this->submitAsyncTask($imageGenerateRequest, $isImageToImage);
-                    // 轮询result（带retry）
+                    // round询result（带retry）
                     $result = $this->pollTaskResult($taskId, $imageGenerateRequest);
 
                     return [
@@ -204,7 +204,7 @@ class VolcengineModel extends AbstractImageGenerate
             });
         }
 
-        // get所have并行task的result
+        // get所have并linetask的result
         $results = $parallel->wait();
         $rawResults = [];
         $errors = [];
@@ -251,7 +251,7 @@ class VolcengineModel extends AbstractImageGenerate
             'imagequantity' => $count,
         ]);
 
-        // fromnativeresult中提取imageURL
+        // fromnativeresultmiddle提取imageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             $data = $result['data'];
@@ -266,7 +266,7 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像的核心逻辑，returnnativeresult.
+     * generate图像的核core逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -289,7 +289,7 @@ class VolcengineModel extends AbstractImageGenerate
             'textToImageReqScheduleConf' => $this->textToImageReqScheduleConf,
         ]);
 
-        // use Parallel 并行handle
+        // use Parallel 并linehandle
         $parallel = new Parallel();
         for ($i = 0; $i < $count; ++$i) {
             $fromCoroutineId = Coroutine::id();
@@ -298,7 +298,7 @@ class VolcengineModel extends AbstractImageGenerate
                 try {
                     // submittask（带retry）
                     $taskId = $this->submitAsyncTask($imageGenerateRequest, $isImageToImage);
-                    // 轮询result（带retry）
+                    // round询result（带retry）
                     $result = $this->pollTaskResult($taskId, $imageGenerateRequest);
 
                     return [
@@ -420,7 +420,7 @@ class VolcengineModel extends AbstractImageGenerate
             }
 
             if (! isset($response['data']['task_id'])) {
-                $this->logger->warning('火山文生图：response中缺少taskID', ['response' => $response]);
+                $this->logger->warning('火山文生图：responsemiddle缺少taskID', ['response' => $response]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::RESPONSE_FORMAT_ERROR);
             }
 
@@ -541,14 +541,14 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * V2version：group合submittask和轮询result，useatOpenAIformatgenerate.
+     * V2version：group合submittask和round询result，useatOpenAIformatgenerate.
      */
     private function requestImageGenerationV2(VolcengineModelRequest $imageGenerateRequest, bool $isImageToImage): array
     {
         // submittask
         $taskId = $this->submitAsyncTask($imageGenerateRequest, $isImageToImage);
 
-        // 轮询result
+        // round询result
         return $this->pollTaskResult($taskId, $imageGenerateRequest);
     }
 
@@ -562,7 +562,7 @@ class VolcengineModel extends AbstractImageGenerate
         }
 
         $data = $result['data'];
-        // 优先check image_urls，然后check binary_data_base64
+        // 优先check image_urls，然backcheck binary_data_base64
         $hasValidImageData = (! empty($data['image_urls']) && ! empty($data['image_urls'][0]))
                             || (! empty($data['binary_data_base64']) && ! empty($data['binary_data_base64'][0]));
 
@@ -572,17 +572,17 @@ class VolcengineModel extends AbstractImageGenerate
     }
 
     /**
-     * 将火山engineimagedata添加toOpenAIresponseobject中.
+     * 将火山engineimagedata添加toOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
         array $volcengineResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedislockensure并发security
+        // useRedislockensure并hairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
-            // from火山engineresponse中提取data
+            // from火山engineresponsemiddle提取data
             if (empty($volcengineResult['data']) || ! is_array($volcengineResult['data'])) {
                 return;
             }
@@ -605,7 +605,7 @@ class VolcengineModel extends AbstractImageGenerate
                         'error' => $e->getMessage(),
                         'url' => $imageUrl,
                     ]);
-                    // 水印handlefail时useoriginalURL
+                    // 水印handlefailo clockuseoriginalURL
                     $currentData[] = [
                         'url' => $imageUrl,
                     ];
@@ -623,7 +623,7 @@ class VolcengineModel extends AbstractImageGenerate
                     $this->logger->error('Volcengine添加imagedata：base64水印handlefail', [
                         'error' => $e->getMessage(),
                     ]);
-                    // 水印handlefail时useoriginaldata
+                    // 水印handlefailo clockuseoriginaldata
                     $currentData[] = [
                         'b64_json' => $base64Image,
                     ];
@@ -652,7 +652,7 @@ class VolcengineModel extends AbstractImageGenerate
     private function validateImageToImageAspectRatio(array $referenceImages)
     {
         if (empty($referenceImages)) {
-            $this->logger->error('火山图生图：参考image列表为null');
+            $this->logger->error('火山图生图：参考imagecolumn表为null');
             ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA, '缺少参考image');
         }
 
@@ -661,7 +661,7 @@ class VolcengineModel extends AbstractImageGenerate
         $imageDimensions = $this->getImageDimensions($referenceImageUrl);
 
         if (! $imageDimensions) {
-            $this->logger->warning('火山图生图：无法get参考图size，skip长宽比例校验', ['image_url' => $referenceImageUrl]);
+            $this->logger->warning('火山图生图：无法get参考图size，skip长宽ratio例校验', ['image_url' => $referenceImageUrl]);
             return; // Skip validation and continue execution
         }
 
@@ -674,14 +674,14 @@ class VolcengineModel extends AbstractImageGenerate
         $maxDimension = max($width, $height);
 
         if ($minDimension <= 0) {
-            $this->logger->warning('火山图生图：imagesizeinvalid，skip长宽比例校验', ['width' => $width, 'height' => $height]);
+            $this->logger->warning('火山图生图：imagesizeinvalid，skip长宽ratio例校验', ['width' => $width, 'height' => $height]);
             return; // Skip validation and continue execution
         }
 
         $aspectRatio = $maxDimension / $minDimension;
 
         if ($aspectRatio > $maxAspectRatio) {
-            $this->logger->error('火山图生图：长宽比例超出限制', [
+            $this->logger->error('火山图生图：长宽ratio例超出限制', [
                 'width' => $width,
                 'height' => $height,
                 'aspect_ratio' => $aspectRatio,
@@ -750,12 +750,12 @@ class VolcengineModel extends AbstractImageGenerate
                     unset($imageUrl);
                 }
             } catch (Exception $e) {
-                // 水印handlefail时，recorderrorbutnot影响imagereturn
+                // 水印handlefailo clock，recorderrorbutnot影响imagereturn
                 $this->logger->error('火山engineimage水印handlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandle下一张image，currentimage保持originalstatus
+                // continuehandledown一张image，currentimage保持originalstatus
             }
         }
 

@@ -12,10 +12,10 @@ use App\Domain\Chat\Entity\ValueObject\MessageType\ControlMessageType;
 
 enum TriggerType: int
 {
-    // 无触发
+    // 无触hair
     case None = 0;
 
-    // 新message时
+    // 新messageo clock
     case ChatMessage = 1;
 
     // openchat窗口
@@ -27,26 +27,26 @@ enum TriggerType: int
     // parametercall
     case ParamCall = 4;
 
-    // 循环体start节点
+    // 循环bodystartsectionpoint
     case LoopStart = 5;
 
     // etc待message
     case WaitMessage = 6;
 
-    // 添加好友时
+    // 添加好友o clock
     case AddFriend = 7;
 
     public static function fromSeqType(ChatMessageType|ControlMessageType $seqType): TriggerType
     {
         $triggerType = TriggerType::None;
         if ($seqType instanceof ChatMessageType) {
-            // chat触发
+            // chat触hair
             $triggerType = TriggerType::ChatMessage;
         } elseif ($seqType === ControlMessageType::OpenConversation) {
-            // openchat窗口触发
+            // openchat窗口触hair
             $triggerType = TriggerType::OpenChatWindow;
         } elseif ($seqType === ControlMessageType::AddFriendSuccess) {
-            // 添加好友触发
+            // 添加好友触hair
             $triggerType = TriggerType::AddFriend;
         }
         return $triggerType;

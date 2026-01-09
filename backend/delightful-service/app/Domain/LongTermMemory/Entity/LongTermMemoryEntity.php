@@ -14,7 +14,7 @@ use DateTime;
 use Hyperf\Codec\Json;
 
 /**
- * 长期记忆实体.
+ * 长期记忆实body.
  */
 final class LongTermMemoryEntity extends AbstractEntity
 {
@@ -299,8 +299,8 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 内部setenablestatus（notconduct业务rulecheck）.
-     * useatdatainitialize和内部操作，skip业务rule限制.
+     * inside部setenablestatus（notconduct业务rulecheck）.
+     * useatdatainitialize和inside部操作，skip业务rule限制.
      */
     public function setEnabledInternal(bool $enabled): void
     {
@@ -379,19 +379,19 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 强化记忆（update强化count和time，提升重要性）.
+     * 强化记忆（update强化count和time，提升重要property）.
      */
     public function reinforce(): void
     {
         ++$this->reinforcementCount;
         $this->lastReinforcedAt = new DateTime();
 
-        // 强化will提升重要性，buthave上限
+        // 强化will提升重要property，buthaveup限
         $this->importance = min(1.0, $this->importance + 0.1);
     }
 
     /**
-     * 计算current记忆的valid分数（考虑衰减）.
+     * 计算current记忆的validminute数（考虑衰减）.
      */
     public function getEffectiveScore(): float
     {
@@ -400,7 +400,7 @@ final class LongTermMemoryEntity extends AbstractEntity
         // 计算time衰减
         $timeDecay = $this->calculateTimeDecay();
 
-        // 计算accessfrequency加成
+        // 计算accessfrequency加become
         $accessBonus = $this->calculateAccessBonus();
 
         return $baseScore * $timeDecay * $this->decayFactor + $accessBonus;
@@ -425,7 +425,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 添加元data.
+     * 添加yuandata.
      */
     public function addMetadata(string $key, mixed $value): void
     {
@@ -433,7 +433,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * get元data.
+     * getyuandata.
      */
     public function getMetadataValue(string $key): mixed
     {
@@ -445,7 +445,7 @@ final class LongTermMemoryEntity extends AbstractEntity
      */
     protected function set(string $key, mixed $value): void
     {
-        // enabled fieldininitialize时use内部method，skip业务rulecheck
+        // enabled fieldininitializeo clockuseinside部method，skip业务rulecheck
         if (strtolower($key) === 'enabled' && is_bool($value)) {
             $this->setEnabledInternal($value);
             return;
@@ -470,7 +470,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * 计算accessfrequency加成.
+     * 计算accessfrequency加become.
      */
     private function calculateAccessBonus(): float
     {
@@ -478,7 +478,7 @@ final class LongTermMemoryEntity extends AbstractEntity
             return 0.0;
         }
 
-        // accesscount的对数加成，避免过度reward
+        // accesscount的对数加become，避免过degreereward
         return min(0.3, log($this->accessCount + 1) * 0.1);
     }
 }

@@ -24,11 +24,11 @@ return new class extends Migration {
             // request_id
             $table->string('request_id', 128)->nullable()->default(null)->comment('requestid');
             // endpoint_id
-            $table->string('endpoint_id', 64)->nullable()->default(null)->comment('接入点id');
+            $table->string('endpoint_id', 64)->nullable()->default(null)->comment('接入pointid');
             // requestparameterlength
             $table->integer('request_length')->nullable()->default(null)->comment('requestparameterlength');
-            // responseconsume的time，unit：毫秒
-            $table->integer('response_time')->nullable()->default(null)->comment('responseconsume的time，unit：毫秒');
+            // responseconsume的time，unit：毫second
+            $table->integer('response_time')->nullable()->default(null)->comment('responseconsume的time，unit：毫second');
             // response http status码
             $table->integer('http_status_code')->nullable()->default(null)->comment('response http status码');
             // response的业务status码
@@ -41,9 +41,9 @@ return new class extends Migration {
             $table->text('exception_message')->comment('exceptioninfo')->nullable();
             $table->datetimes();
             $table->index(['request_id'], 'request_id_index');
-            // 为 endpoint_id 和 created_at 添加联合索引，useat按timerangequery特定端点的response
+            // 为 endpoint_id 和 created_at 添加联合索引，useat按timerangequery特定端point的response
             $table->index(['endpoint_id', 'created_at'], 'endpoint_id_created_at_index');
-            $table->comment('接入点responserecordtable');
+            $table->comment('接入pointresponserecordtable');
         });
     }
 

@@ -27,7 +27,7 @@ readonly class OdinEmbeddingGenerator implements EmbeddingGeneratorInterface
             $data = $this->cache->get($cacheKey);
         } else {
             $response = $embeddingModel->embeddings($text, businessParams: $businessParams);
-            // fromresponse中提取嵌入to量
+            // fromresponsemiddle提取嵌入toquantity
             $embeddings = [];
             foreach ($response->getData() as $embedding) {
                 $embeddings[] = $embedding->getEmbedding();

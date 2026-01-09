@@ -69,7 +69,7 @@ class QuickInstructionNode extends AbstractCustomNode
                 return htmlspecialchars($nodeForArray['text'] ?? '', ENT_QUOTES, 'UTF-8');
             case InstructionType::SINGLE_CHOICE:
             default:
-                // 前端传的 value 是 id thereforeneedprocess一下
+                // front端传的 value 是 id thereforeneedprocess一down
                 $value = $nodeForArray['attrs']['value'] ?? '';
                 $instruction = $nodeForArray['attrs']['instruction'] ?? [];
                 $values = $instruction['values'] ?? [];
@@ -81,7 +81,7 @@ class QuickInstructionNode extends AbstractCustomNode
                         return isset($item['id']) && $item['id'] == $value;
                     });
 
-                    // if找to匹配项，取第one匹配项的 value
+                    // if找to匹配item，取theone匹配item的 value
                     if (! empty($matchedValues)) {
                         $firstMatch = reset($matchedValues);
                         $value = $firstMatch['value'] ?? $value;

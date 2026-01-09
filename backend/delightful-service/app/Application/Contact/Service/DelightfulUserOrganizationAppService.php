@@ -21,7 +21,7 @@ use Hyperf\Di\Annotation\Inject;
 use Throwable;
 
 /**
- * userwhen前organizationapplicationservice
+ * userwhenfrontorganizationapplicationservice
  */
 class DelightfulUserOrganizationAppService
 {
@@ -44,7 +44,7 @@ class DelightfulUserOrganizationAppService
     protected OrganizationProductResolver $organizationProductResolver;
 
     /**
-     * getuserwhen前organizationcode
+     * getuserwhenfrontorganizationcode
      */
     public function getCurrentOrganizationCode(string $delightfulId): ?array
     {
@@ -52,17 +52,17 @@ class DelightfulUserOrganizationAppService
     }
 
     /**
-     * settinguserwhen前organizationcode
+     * settinguserwhenfrontorganizationcode
      */
     public function setCurrentOrganizationCode(string $delightfulId, string $delightfulOrganizationCode): array
     {
-        // 1. queryuserwhetherin指定organization中
+        // 1. queryuserwhetherinfinger定organizationmiddle
         $userOrganizations = $this->userDomainService->getUserOrganizationsByDelightfulId($delightfulId);
         if (! in_array($delightfulOrganizationCode, $userOrganizations, true)) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
         }
 
-        // 2. query这个organization的相关information：delightful_organizations_environment
+        // 2. query这organization的相关information：delightful_organizations_environment
         $organizationEnvEntity = $this->organizationEnvDomainService->getOrganizationEnvironmentByDelightfulOrganizationCode($delightfulOrganizationCode);
         if (! $organizationEnvEntity) {
             ExceptionBuilder::throw(UserErrorCode::ORGANIZATION_NOT_EXIST);
@@ -81,7 +81,7 @@ class DelightfulUserOrganizationAppService
     }
 
     /**
-     * get账号下可useorganization列表（仅containenabled statusorganization）。
+     * get账numberdown可useorganizationcolumn表（仅containenabled statusorganization）。
      *
      * @throws Throwable
      */

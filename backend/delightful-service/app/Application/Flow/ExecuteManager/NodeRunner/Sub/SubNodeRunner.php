@@ -29,13 +29,13 @@ class SubNodeRunner extends NodeRunner
     {
         $subFlowId = $this->node->getParams()['sub_flow_id'] ?? '';
 
-        // 运行时才get子process的data，这里shouldin运行时thenload好，这里为了方便先这样写
+        // 运lineo clock才get子process的data，这withinshouldin运lineo clockthenload好，这within为了方便先这样写
         $subFlow = $this->delightfulFlowDomainService->getByCode($executionData->getDataIsolation(), $subFlowId);
         if (! $subFlow || $subFlow->getType() !== Type::Sub) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.sub.flow_not_found', ['flow_code' => $subFlowId]);
         }
 
-        // getstart节点、end节点
+        // getstartsectionpoint、endsectionpoint
         if (! $subFlow->getStartNode()) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.sub.start_node_not_found', ['flow_code' => $subFlowId]);
         }
@@ -75,7 +75,7 @@ class SubNodeRunner extends NodeRunner
                 ['flow_name' => $subFlow->getName(), 'error' => $throwable->getMessage()]
             );
         }
-        // 节点内部的exceptionin node 的 debug information中record
+        // sectionpointinside部的exceptionin node 的 debug informationmiddlerecord
         foreach ($subFlow->getNodes() as $node) {
             if ($node->getNodeDebugResult() && ! $node->getNodeDebugResult()->isSuccess()) {
                 ExceptionBuilder::throw(

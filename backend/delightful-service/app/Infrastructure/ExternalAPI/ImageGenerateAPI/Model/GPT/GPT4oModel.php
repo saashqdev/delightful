@@ -26,10 +26,10 @@ use Hyperf\Retry\Annotation\Retry;
 
 class GPT4oModel extends AbstractImageGenerate
 {
-    // most大轮询count
+    // most大round询count
     private const MAX_POLL_ATTEMPTS = 60;
 
-    // 轮询间隔（秒）
+    // round询between隔（second）
     private const POLL_INTERVAL = 5;
 
     protected GPTAPI $api;
@@ -84,7 +84,7 @@ class GPT4oModel extends AbstractImageGenerate
             return $response; // returnnulldataresponse
         }
 
-        // 3. 并发handle - 直接操作responseobject
+        // 3. 并hairhandle - 直接操作responseobject
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
@@ -93,7 +93,7 @@ class GPT4oModel extends AbstractImageGenerate
             $parallel->add(function () use ($imageGenerateRequest, $response, $fromCoroutineId) {
                 CoContext::copy($fromCoroutineId);
                 try {
-                    // submittask并轮询result
+                    // submittask并round询result
                     $jobId = $this->requestImageGeneration($imageGenerateRequest);
                     $result = $this->pollTaskResultForRaw($jobId);
 
@@ -108,7 +108,7 @@ class GPT4oModel extends AbstractImageGenerate
                         $response->setProviderErrorMessage($e->getMessage());
                     }
 
-                    $this->logger->error('GPT4o OpenAIformat生图：单个requestfail', [
+                    $this->logger->error('GPT4o OpenAIformat生图：单requestfail', [
                         'error_code' => $e->getCode(),
                         'error_message' => $e->getMessage(),
                     ]);
@@ -119,7 +119,7 @@ class GPT4oModel extends AbstractImageGenerate
         $parallel->wait();
 
         // 4. recordfinalresult
-        $this->logger->info('GPT4o OpenAIformat生图：并发handlecomplete', [
+        $this->logger->info('GPT4o OpenAIformat生图：并hairhandlecomplete', [
             '总request数' => $count,
             'successimage数' => count($response->getData()),
             'whetherhaveerror' => $response->hasError(),
@@ -139,7 +139,7 @@ class GPT4oModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // fromnativeresult中提取imageURL
+        // fromnativeresultmiddle提取imageURL
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             if (! empty($result['imageUrl'])) {
@@ -228,7 +228,7 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * 轮询taskresult.
+     * round询taskresult.
      * @throws Exception
      */
     #[Retry(
@@ -250,9 +250,9 @@ class GPT4oModel extends AbstractImageGenerate
                     return $result['data'];
                 }
 
-                // iftaskalsoinconduct中，etc待后continue轮询
+                // iftaskalsoinconductmiddle，etc待backcontinueround询
                 if ($result['status'] === 'ON_QUEUE') {
-                    $this->logger->info('GPT4o文生图：taskhandle中', [
+                    $this->logger->info('GPT4o文生图：taskhandlemiddle', [
                         'jobId' => $jobId,
                         'attempt' => $attempts + 1,
                     ]);
@@ -263,7 +263,7 @@ class GPT4oModel extends AbstractImageGenerate
 
                 throw new Exception('未知的taskstatus：' . $result['status']);
             } catch (Exception $e) {
-                $this->logger->error('GPT4o文生图：轮询taskfail', [
+                $this->logger->error('GPT4o文生图：round询taskfail', [
                     'jobId' => $jobId,
                     'error' => $e->getMessage(),
                 ]);
@@ -271,11 +271,11 @@ class GPT4oModel extends AbstractImageGenerate
             }
         }
 
-        throw new Exception('task轮询timeout');
+        throw new Exception('taskround询timeout');
     }
 
     /**
-     * 轮询taskresult，returnnativedataformat.
+     * round询taskresult，returnnativedataformat.
      */
     #[Retry(
         maxAttempts: self::GENERATE_RETRY_COUNT,
@@ -296,9 +296,9 @@ class GPT4oModel extends AbstractImageGenerate
                     return $result['data'];
                 }
 
-                // iftaskalsoinconduct中，etc待后continue轮询
+                // iftaskalsoinconductmiddle，etc待backcontinueround询
                 if ($result['status'] === 'ON_QUEUE') {
-                    $this->logger->info('GPT4o文生图：taskhandle中', [
+                    $this->logger->info('GPT4o文生图：taskhandlemiddle', [
                         'jobId' => $jobId,
                         'attempt' => $attempts + 1,
                     ]);
@@ -309,7 +309,7 @@ class GPT4oModel extends AbstractImageGenerate
 
                 throw new Exception('未知的taskstatus：' . $result['status']);
             } catch (Exception $e) {
-                $this->logger->error('GPT4o文生图：轮询taskfail', [
+                $this->logger->error('GPT4o文生图：round询taskfail', [
                     'jobId' => $jobId,
                     'error' => $e->getMessage(),
                 ]);
@@ -317,11 +317,11 @@ class GPT4oModel extends AbstractImageGenerate
             }
         }
 
-        throw new Exception('task轮询timeout');
+        throw new Exception('taskround询timeout');
     }
 
     /**
-     * generate图像的核心逻辑，returnnativeresult.
+     * generate图像的核core逻辑，returnnativeresult.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -334,7 +334,7 @@ class GPT4oModel extends AbstractImageGenerate
         $rawResults = [];
         $errors = [];
 
-        // use Parallel 并行handle
+        // use Parallel 并linehandle
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
         for ($i = 0; $i < $count; ++$i) {
@@ -362,7 +362,7 @@ class GPT4oModel extends AbstractImageGenerate
             });
         }
 
-        // get所have并行task的result
+        // get所have并linetask的result
         $results = $parallel->wait();
 
         // handleresult，保持nativeformat
@@ -400,12 +400,12 @@ class GPT4oModel extends AbstractImageGenerate
                 // handleimageURL
                 $result['imageUrl'] = $this->watermarkProcessor->addWatermarkToUrl($result['imageUrl'], $imageGenerateRequest);
             } catch (Exception $e) {
-                // 水印handlefail时，recorderrorbutnot影响imagereturn
+                // 水印handlefailo clock，recorderrorbutnot影响imagereturn
                 $this->logger->error('GPT4oimage水印handlefail', [
                     'index' => $index,
                     'error' => $e->getMessage(),
                 ]);
-                // continuehandle下一张image，currentimage保持originalstatus
+                // continuehandledown一张image，currentimage保持originalstatus
             }
         }
 
@@ -413,7 +413,7 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * validateGPT4o API轮询responsedataformat.
+     * validateGPT4o APIround询responsedataformat.
      */
     private function validateGPT4oResponse(array $result): void
     {
@@ -423,17 +423,17 @@ class GPT4oModel extends AbstractImageGenerate
     }
 
     /**
-     * 将GPT4oimagedata添加toOpenAIresponseobject中.
+     * 将GPT4oimagedata添加toOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponseGPT4o(
         OpenAIFormatResponse $response,
         array $gpt4oResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // useRedislockensure并发security
+        // useRedislockensure并hairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
-            // fromGPT4o轮询result中提取imageURL
+            // fromGPT4oround询resultmiddle提取imageURL
             if (empty($gpt4oResult['imageUrl'])) {
                 return;
             }
@@ -452,7 +452,7 @@ class GPT4oModel extends AbstractImageGenerate
                     'error' => $e->getMessage(),
                     'url' => $imageUrl,
                 ]);
-                // 水印handlefail时useoriginalURL
+                // 水印handlefailo clockuseoriginalURL
             }
 
             $currentData[] = [

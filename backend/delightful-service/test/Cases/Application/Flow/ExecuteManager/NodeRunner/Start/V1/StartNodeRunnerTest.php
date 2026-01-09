@@ -171,7 +171,7 @@ JSON, true));
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());
         $this->assertEquals(['node_2'], $vertexResult->getChildrenIds());
 
-        // 10s内，所bynotwillexecute
+        // 10sinside，所bynotwillexecute
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEmpty($vertexResult->getChildrenIds());
     }
@@ -196,8 +196,8 @@ JSON, true));
                         "type": "object",
                         "key": "root",
                         "sort": 0,
-                        "title": "root节点",
-                        "description": "root节点",
+                        "title": "rootsectionpoint",
+                        "description": "rootsectionpoint",
                         "items": null,
                         "value": null,
                         "required": [
@@ -227,8 +227,8 @@ JSON, true));
                         "type": "object",
                         "key": "root",
                         "sort": 0,
-                        "title": "root节点",
-                        "description": "root节点",
+                        "title": "rootsectionpoint",
+                        "description": "rootsectionpoint",
                         "items": null,
                         "value": null,
                         "required": [
@@ -283,7 +283,7 @@ JSON,
         $this->expectException(BusinessException::class);
         $this->expectExceptionMessage('field名 [conversation_id] 与系统保留fieldconflict，请use其他name');
 
-        // create一个contain系统保留field的节点configuration，这shouldinvalidate阶段throwexception
+        // create一contain系统保留field的sectionpointconfiguration，这shouldinvalidate阶segmentthrowexception
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {
@@ -302,8 +302,8 @@ JSON,
                         "type": "object",
                         "key": "root",
                         "sort": 0,
-                        "title": "root节点",
-                        "description": "root节点",
+                        "title": "rootsectionpoint",
+                        "description": "rootsectionpoint",
                         "items": null,
                         "value": null,
                         "required": [
@@ -339,7 +339,7 @@ JSON,
         $this->expectException(BusinessException::class);
         $this->expectExceptionMessage('field名 [message_type] 与系统保留fieldconflict，请use其他name');
 
-        // testincustom_system_output中use系统保留field
+        // testincustom_system_outputmiddleuse系统保留field
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {
@@ -358,8 +358,8 @@ JSON,
                         "type": "object",
                         "key": "root",
                         "sort": 0,
-                        "title": "root节点",
-                        "description": "root节点",
+                        "title": "rootsectionpoint",
+                        "description": "rootsectionpoint",
                         "items": null,
                         "value": null,
                         "required": [
@@ -395,7 +395,7 @@ JSON,
         $this->expectException(BusinessException::class);
         $this->expectExceptionMessage('JSON Schema formaterror：[user_list] Array type must have items');
 
-        // create一个contain系统保留field的节点configuration，这shouldinvalidate阶段throwexception
+        // create一contain系统保留field的sectionpointconfiguration，这shouldinvalidate阶segmentthrowexception
         $node = Node::generateTemplate(NodeType::Start, json_decode(
             <<<'JSON'
 {
@@ -414,8 +414,8 @@ JSON,
                         "type": "object",
                         "key": "root",
                         "sort": 0,
-                        "title": "root节点",
-                        "description": "root节点",
+                        "title": "rootsectionpoint",
+                        "description": "rootsectionpoint",
                         "items": null,
                         "value": null,
                         "required": [
@@ -496,7 +496,7 @@ JSON,
                         "type": "object",
                         "key": "root",
                         "sort": 0,
-                        "title": "root节点",
+                        "title": "rootsectionpoint",
                         "description": "",
                         "required": [
                             "trigger_time",
@@ -509,7 +509,7 @@ JSON,
                                 "type": "string",
                                 "key": "trigger_time",
                                 "sort": 0,
-                                "title": "触发time",
+                                "title": "触hairtime",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -520,7 +520,7 @@ JSON,
                                 "type": "number",
                                 "key": "trigger_timestamp",
                                 "sort": 1,
-                                "title": "触发time戳",
+                                "title": "触hairtime戳",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -557,7 +557,7 @@ JSON,
                         "type": "object",
                         "key": "root",
                         "sort": 0,
-                        "title": "root节点",
+                        "title": "rootsectionpoint",
                         "description": "",
                         "required": [
                             "trigger_time",
@@ -570,7 +570,7 @@ JSON,
                                 "type": "string",
                                 "key": "trigger_time",
                                 "sort": 0,
-                                "title": "触发time",
+                                "title": "触hairtime",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -581,7 +581,7 @@ JSON,
                                 "type": "number",
                                 "key": "trigger_timestamp",
                                 "sort": 1,
-                                "title": "触发time戳",
+                                "title": "触hairtime戳",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -634,7 +634,7 @@ JSON,
                         "type": "object",
                         "key": "root",
                         "sort": 0,
-                        "title": "root节点",
+                        "title": "rootsectionpoint",
                         "description": "",
                         "required": [
                             "trigger_time",
@@ -647,7 +647,7 @@ JSON,
                                 "type": "string",
                                 "key": "trigger_time",
                                 "sort": 0,
-                                "title": "触发time",
+                                "title": "触hairtime",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -658,7 +658,7 @@ JSON,
                                 "type": "number",
                                 "key": "trigger_timestamp",
                                 "sort": 1,
-                                "title": "触发time戳",
+                                "title": "触hairtime戳",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -695,7 +695,7 @@ JSON,
                         "type": "object",
                         "key": "root",
                         "sort": 0,
-                        "title": "root节点",
+                        "title": "rootsectionpoint",
                         "description": "",
                         "required": [
                             "trigger_time",
@@ -708,7 +708,7 @@ JSON,
                                 "type": "string",
                                 "key": "trigger_time",
                                 "sort": 0,
-                                "title": "触发time",
+                                "title": "触hairtime",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -719,7 +719,7 @@ JSON,
                                 "type": "number",
                                 "key": "trigger_timestamp",
                                 "sort": 1,
-                                "title": "触发time戳",
+                                "title": "触hairtime戳",
                                 "description": "",
                                 "required": null,
                                 "value": null,
@@ -828,8 +828,8 @@ JSON, true));
                                 'type' => 'object',
                                 'key' => 'root',
                                 'sort' => 0,
-                                'title' => 'root节点',
-                                'description' => 'root节点',
+                                'title' => 'rootsectionpoint',
+                                'description' => 'rootsectionpoint',
                                 'items' => null,
                                 'value' => null,
                                 'required' => [

@@ -12,38 +12,38 @@ use App\Infrastructure\Core\AbstractObject;
 
 /**
  * data隔离 SaaS化
- * 目前仅haveorganization隔离
- * 显式传入，防止隐式传入，导致not知道哪些placeneed做隔离.
+ * 目front仅haveorganization隔离
+ * 显type传入，防止隐type传入，导致not知道哪些placeneed做隔离.
  */
 class DataIsolation extends AbstractObject
 {
     /**
-     * when前的账号id. 所have账号统一注意privacy保护,not对第third-partyreturn.
+     * whenfront的账numberid. 所have账number统一注意privacy保护,not对thethird-partyreturn.
      */
     protected string $currentDelightfulId = '';
 
     /**
-     * when前的organizationencoding.
+     * whenfront的organizationencoding.
      */
     protected string $currentOrganizationCode = '';
 
     /**
-     * when前的organization下的userid.
+     * whenfront的organizationdown的userid.
      */
     protected ?string $currentUserId = null;
 
     /**
-     * when前环境.
+     * whenfront环境.
      */
     protected string $environment;
 
     /**
-     * when前applicationid.
+     * whenfrontapplicationid.
      */
     protected ?string $currentAppId = null;
 
     /**
-     * 第third-party平台organizationencoding.
+     * thethird-party平台organizationencoding.
      */
     protected ?string $thirdPartyOrganizationCode = null;
 

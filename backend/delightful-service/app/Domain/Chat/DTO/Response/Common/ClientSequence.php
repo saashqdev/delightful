@@ -12,28 +12,28 @@ use App\Domain\Chat\Entity\AbstractEntity;
 use App\Domain\Chat\Entity\ValueObject\MessageType\MessageOptionsEnum;
 
 /**
- * 客户端收to的message序列结构.
+ * 客户端收to的message序column结构.
  */
 class ClientSequence extends AbstractEntity
 {
     use EditMessageOptionsTrait;
 
-    // 序列号归属账号id
+    // 序columnnumber归属账numberid
     protected string $delightfulId;
 
-    // 序列号，一定not重复，一定growth，but是not保证连续。
+    // 序columnnumber，一定not重复，一定growth，but是not保证连续。
     protected string $seqId;
 
-    // user的messageid，user下唯一。
+    // user的messageid，userdown唯一。
     protected string $messageId;
 
-    // 本条message指to的delightful_message_id。 useatimplement已读回执场景。存inquote关系时，send_msg_idfieldnotagainreturn，因为send方的messageidnothave改变。
+    // 本itemmessagefingerto的delightful_message_id。 useatimplement已读回执场景。存inquote关系o clock，send_msg_idfieldnotagainreturn，因为send方的messageidnothave改变。
     protected ?string $referMessageId;
 
     // send方的messageid
     protected ?string $senderMessageId;
 
-    // message所属session窗口。 客户端canaccording to此value确定messagewhether要reminderetc。if本地nothave发现这个sessionid，主动toservice端querysession窗口detail
+    // message所属session窗口。 客户端canaccording to此value确定messagewhether要reminderetc。if本groundnothavehair现这sessionid，主动toservice端querysession窗口detail
     protected ?string $conversationId;
 
     protected string $organizationCode;

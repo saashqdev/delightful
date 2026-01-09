@@ -21,10 +21,10 @@ return new class extends Migration {
         Schema::create('delightful_mode_groups', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('mode_id')->unsigned()->default(0)->comment('modeID');
-            $table->json('name_i18n')->comment('分groupname国际化');
-            $table->string('icon', 255)->default('')->comment('分group图标');
-            $table->string('color', 10)->default('')->comment('分groupcolor');
-            $table->text('description')->comment('分groupdescription');
+            $table->json('name_i18n')->comment('minutegroupname国际化');
+            $table->string('icon', 255)->default('')->comment('minutegroup图标');
+            $table->string('color', 10)->default('')->comment('minutegroupcolor');
+            $table->text('description')->comment('minutegroupdescription');
             $table->integer('sort')->default(0)->comment('sort权重');
             $table->tinyInteger('status')->default(1)->comment('status 0:disable 1:enable');
             $table->string('organization_code', 32)->default('')->comment('organizationcode');

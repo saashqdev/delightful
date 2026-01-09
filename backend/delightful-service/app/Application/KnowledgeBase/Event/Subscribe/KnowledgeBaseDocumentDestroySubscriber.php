@@ -59,7 +59,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
 
         $knowledgeBaseEntity = $knowledgeBaseDomainService->show($dataIsolation, $document->getKnowledgeBaseCode());
 
-        // 这里needdelete所have片段，indeletedocument
+        // 这withinneeddelete所haveslicesegment，indeletedocument
         $query = new KnowledgeBaseFragmentQuery()->setDocumentCode($document->getCode());
         /** @var KnowledgeBaseFragmentEntity[][] $fragments */
         $fragments = [];
@@ -75,7 +75,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
         /** @var KnowledgeBaseFragmentEntity[] $fragments */
         $fragments = array_merge(...$fragments);
         $documentSyncStatus = KnowledgeSyncStatus::Deleted;
-        // 先delete片段
+        // 先deleteslicesegment
         $pointIds = array_column($fragments, 'point_id');
         $fragmentSyncStatus = KnowledgeSyncStatus::Deleted;
         $fragmentSyncMessage = '';
@@ -91,7 +91,7 @@ readonly class KnowledgeBaseDocumentDestroySubscriber implements ListenerInterfa
         }
         $knowledgeBaseFragmentDomainService->batchChangeSyncStatus(array_column($fragments, 'id'), $fragmentSyncStatus, $fragmentSyncMessage);
 
-        // delete片段complete后，将document同mark为已delete
+        // deleteslicesegmentcompleteback，将document同mark为已delete
         $knowledgeBaseDataIsolation = KnowledgeBaseDataIsolation::createByBaseDataIsolation($dataIsolation);
         $documentDomainService->changeSyncStatus($knowledgeBaseDataIsolation, $document->setSyncStatus($documentSyncStatus->value));
     }

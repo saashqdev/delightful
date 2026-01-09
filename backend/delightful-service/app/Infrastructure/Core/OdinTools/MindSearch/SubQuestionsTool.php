@@ -11,7 +11,7 @@ class SubQuestionsTool
 {
     public static string $name = 'batchSubQuestionsSearch';
 
-    public static string $description = 'according tooriginalissue，拆分多个子issue，useat批量互联网search';
+    public static string $description = 'according tooriginalissue，拆minute多子issue，useat批quantity互联网search';
 
     protected static array $parameters = [
         'type' => 'object',
@@ -19,7 +19,7 @@ class SubQuestionsTool
             'subQuestions' => [
                 'type' => 'array',
                 'items' => ['type' => 'string'],
-                'description' => 'according tooriginalissue拆分出来的one子issue',
+                'description' => 'according tooriginalissue拆minute出来的one子issue',
             ],
         ],
         'additionalProperties' => false,

@@ -38,7 +38,7 @@ readonly class AsrTitleGeneratorService
     /**
      * according todifferent场景generatetitle.
      *
-     * 场景一：have asr_stream_content（前端实时录音），直接usecontentgeneratetitle
+     * 场景一：have asr_stream_content（front端实o clock录音），直接usecontentgeneratetitle
      * 场景二：have file_id（upload已havefile），buildhint词generatetitle
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
@@ -58,7 +58,7 @@ readonly class AsrTitleGeneratorService
         try {
             $language = $this->translator->getLocale() ?: 'zh_CN';
 
-            // 场景一：have asr_stream_content（前端实时录音）
+            // 场景一：have asr_stream_content（front端实o clock录音）
             if (! empty($asrStreamContent)) {
                 $customPrompt = AsrPromptAssembler::getTitlePrompt($asrStreamContent, $note, $language);
                 $title = $this->delightfulChatMessageAppService->summarizeTextWithCustomPrompt(
@@ -72,7 +72,7 @@ readonly class AsrTitleGeneratorService
             if (! empty($fileId)) {
                 $fileEntity = $this->taskFileDomainService->getById((int) $fileId);
                 if ($fileEntity === null) {
-                    $this->logger->warning('generatetitle时未找tofile', [
+                    $this->logger->warning('generatetitleo clock未找tofile', [
                         'file_id' => $fileId,
                         'task_key' => $taskKey,
                     ]);
@@ -119,15 +119,15 @@ readonly class AsrTitleGeneratorService
      * fromtaskstatusgeneratetitle（usesave的 ASR content和笔记content）.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
-     * @return string generate的title（fail时returndefaulttitle）
+     * @return string generate的title（failo clockreturndefaulttitle）
      */
     public function generateFromTaskStatus(AsrTaskStatusDTO $taskStatus): string
     {
         try {
-            // use上报时save的语种，ifnothavethenusecurrent语种
+            // useup报o clocksave的语type，ifnothavethenusecurrent语type
             $language = $taskStatus->language ?: $this->translator->getLocale() ?: 'zh_CN';
 
-            $this->logger->info('use语种generatetitle', [
+            $this->logger->info('use语typegeneratetitle', [
                 'task_key' => $taskStatus->taskKey,
                 'language' => $language,
                 'has_asr_content' => ! empty($taskStatus->asrStreamContent),
@@ -177,7 +177,7 @@ readonly class AsrTitleGeneratorService
      * 清洗title，移exceptfile/directorynotallow的字符并truncatelength.
      *
      * @param string $title originaltitle
-     * @return string 清洗后的title
+     * @return string 清洗back的title
      */
     public function sanitizeTitle(string $title): string
     {
@@ -256,12 +256,12 @@ readonly class AsrTitleGeneratorService
      *
      * @param string $audioFileName audiofilename
      * @param null|string $noteFileName 笔记filename（optional）
-     * @return string format化后的userrequest
+     * @return string format化back的userrequest
      */
     private function buildUserRequestMessage(string $audioFileName, ?string $noteFileName): string
     {
         if ($noteFileName !== null) {
-            // have笔记的情况："请帮我把 @年willsolutiondiscussion.webm 录音content和 @年will笔记.md 的content转化为一份超级产物"
+            // have笔记的情况："请帮我把 @yearwillsolutiondiscussion.webm 录音content和 @yearwill笔记.md 的content转化为一share超level产物"
             return sprintf(
                 '%s@%s%s@%s%s',
                 $this->translator->trans('asr.messages.summary_prefix_with_note'),
@@ -272,7 +272,7 @@ readonly class AsrTitleGeneratorService
             );
         }
 
-        // onlyaudiofile的情况："请帮我把 @年willsolutiondiscussion.webm 录音content转化为一份超级产物"
+        // onlyaudiofile的情况："请帮我把 @yearwillsolutiondiscussion.webm 录音content转化为一share超level产物"
         return sprintf(
             '%s@%s%s',
             $this->translator->trans('asr.messages.summary_prefix'),

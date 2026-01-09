@@ -25,7 +25,7 @@ class DelightfulAgentEventAppService implements AgentExecuteInterface
         $seqEntity = $userCallAgentEvent->seqEntity;
         $agentAccountEntity = $userCallAgentEvent->agentAccountEntity;
 
-        // processstartexecute前,触发startinputevent
+        // processstartexecutefront,触hairstartinputevent
         if ($seqEntity->canTriggerFlow()) {
             $this->delightfulConversationDomainService->agentOperateConversationStatusV2(
                 ControlMessageType::StartConversationInput,
@@ -38,7 +38,7 @@ class DelightfulAgentEventAppService implements AgentExecuteInterface
         AgentFactory::make($agentAccountEntity->getAiCode())->execute($userCallAgentEvent);
 
         // processexecuteend，pushendinputevent
-        // ai准备start发message了,endinputstatus
+        // ai准备starthairmessage了,endinputstatus
         if ($seqEntity->canTriggerFlow()) {
             $this->delightfulConversationDomainService->agentOperateConversationStatusV2(
                 ControlMessageType::EndConversationInput,

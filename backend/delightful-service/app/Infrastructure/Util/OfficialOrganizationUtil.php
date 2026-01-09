@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\Util;
 
 /**
- * 官方organizationtool类
+ * 官方organizationtoolcategory
  * 统一管理官方organization相关的configuration和判断逻辑.
  */
 class OfficialOrganizationUtil
@@ -30,9 +30,9 @@ class OfficialOrganizationUtil
     }
 
     /**
-     * getcontain官方organizationin内的organizationencodingarray.
-     * @param string $currentOrganizationCode when前organizationencoding
-     * @return array 去重后的organizationencodingarray
+     * getcontain官方organizationininside的organizationencodingarray.
+     * @param string $currentOrganizationCode whenfrontorganizationencoding
+     * @return array 去重back的organizationencodingarray
      */
     public static function getOrganizationCodesWithOfficial(string $currentOrganizationCode): array
     {

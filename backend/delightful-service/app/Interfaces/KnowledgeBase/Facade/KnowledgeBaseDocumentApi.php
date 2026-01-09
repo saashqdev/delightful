@@ -49,14 +49,14 @@ class KnowledgeBaseDocumentApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * getdocument列表.
+     * getdocumentcolumn表.
      */
     public function queries(string $knowledgeBaseCode)
     {
         $dto = DocumentQueryRequestDTO::fromRequest($this->request);
         $query = new KnowledgeBaseDocumentQuery($this->request->all());
 
-        // settingquery条件
+        // settingqueryitemitem
         $query->setOrder(['updated_at' => 'desc']);
         $query->setKnowledgeBaseCode($knowledgeBaseCode);
         $query->setDocType($dto->getDocType());
@@ -90,7 +90,7 @@ class KnowledgeBaseDocumentApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * 重新to量化.
+     * 重新toquantity化.
      */
     public function reVectorized(string $knowledgeBaseCode, string $code)
     {

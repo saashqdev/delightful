@@ -16,7 +16,7 @@ use Psr\Container\ContainerInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * MCPmethodprocess器抽象基类.
+ * MCPmethodprocess器抽象基category.
  */
 abstract class AbstractMethodHandler implements MethodHandlerInterface
 {
@@ -46,7 +46,7 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
 
     /**
      * gettoolmanager.
-     * @throws InternalErrorException whentoolmanager未set时throw
+     * @throws InternalErrorException whentoolmanager未seto clockthrow
      */
     public function getToolManager(): MCPToolManager
     {
@@ -67,7 +67,7 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
 
     /**
      * get资源manager.
-     * @throws InternalErrorException when资源manager未set时throw
+     * @throws InternalErrorException when资源manager未seto clockthrow
      */
     public function getResourceManager(): MCPResourceManager
     {
@@ -88,7 +88,7 @@ abstract class AbstractMethodHandler implements MethodHandlerInterface
 
     /**
      * gethintmanager.
-     * @throws InternalErrorException whenhintmanager未set时throw
+     * @throws InternalErrorException whenhintmanager未seto clockthrow
      */
     public function getPromptManager(): MCPPromptManager
     {

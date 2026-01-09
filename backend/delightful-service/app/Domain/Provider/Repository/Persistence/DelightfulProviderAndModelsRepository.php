@@ -43,7 +43,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * getorganization下的 Delightful service商configuration（not containmodeldetail）.
+     * getorganizationdown的 Delightful service商configuration（not containmodeldetail）.
      */
     public function getDelightfulProvider(ProviderDataIsolation $dataIsolation, Category $category, ?Status $status = null): ?ProviderConfigDTO
     {
@@ -64,7 +64,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         $configBuilder = $this->createConfigQuery()->where('organization_code', $organizationCode);
         $configBuilder->where('service_provider_id', $delightfulProvider->getId());
 
-        // if指定了status，添加statusfilter
+        // iffinger定了status，添加statusfilter
         if ($status !== null) {
             $configBuilder->where('status', $status->value);
         }
@@ -73,13 +73,13 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
 
         // if找to现haveconfiguration，直接return
         if (! empty($configResult)) {
-            // 批量query对应的 provider info
+            // 批quantityquery对应的 provider info
             $providerMap = [$delightfulProvider->getId() => $delightfulProvider->toArray()];
             return ProviderConfigAssembler::toDTOWithProvider($configResult[0], $providerMap);
         }
 
         // 4. nothave找toconfiguration，buildtemplatedata的 ProviderConfigDTO
-        // if指定了statusandnot是enablestatus，thennotreturntemplatedata
+        // iffinger定了statusandnot是enablestatus，thennotreturntemplatedata
         if ($status !== null && $status !== Status::Enabled) {
             return null;
         }
@@ -111,18 +111,18 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * according toorganizationencoding和类别get Delightful service商enable中的model列表.
+     * according toorganizationencoding和category别get Delightful service商enablemiddle的modelcolumn表.
      *
      * @param string $organizationCode organizationencoding
-     * @param null|Category $category service商类别，为null时return所havecategorymodel
-     * @return array<ProviderModelEntity> Delightful service商model实体array
+     * @param null|Category $category service商category别，为nullo clockreturn所havecategorymodel
+     * @return array<ProviderModelEntity> Delightful service商model实bodyarray
      */
     public function getDelightfulEnableModels(string $organizationCode, ?Category $category = null): array
     {
         if (OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
             return [];
         }
-        // data集 A：get官方organization下所haveenable的model（containconfigurationfilter）
+        // data集 A：get官方organizationdown所haveenable的model（containconfigurationfilter）
         $officialModels = $this->getOfficialEnabledModels($category);
 
         // ifnothave官方model，直接returnnullarray
@@ -136,11 +136,11 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             $officialModelIds[] = $officialModel->getId();
         }
 
-        // data集 B：querycurrentorganization下 model_parent_id in官方model ID 列表中的model
+        // data集 B：querycurrentorganizationdown model_parent_id in官方model ID column表middle的model
         $configBuilder = $this->createProviderModelQuery();
         $configBuilder->where('organization_code', $organizationCode)->whereIn('model_parent_id', $officialModelIds);
 
-        // if指定了category，添加categoryfiltercondition
+        // iffinger定了category，添加categoryfiltercondition
         if ($category !== null) {
             $configBuilder->where('category', $category->value);
         }
@@ -156,7 +156,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             }
         }
 
-        // ifconfigurationmodelmapping为null，直接return官方model列表
+        // ifconfigurationmodelmapping为null，直接return官方modelcolumn表
         if (empty($modelMap)) {
             $finalModels = $officialModels;
         } else {
@@ -176,12 +176,12 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             }
         }
 
-        // application套餐filter
+        // applicationset餐filter
         return $this->applyPackageFilteringToModels($finalModels, $organizationCode);
     }
 
     /**
-     * 查找 Delightful modelwhether已经inorganization中.
+     * 查找 Delightful modelwhether已经inorganizationmiddle.
      */
     public function getDelightfulModelByParentId(ProviderDataIsolation $dataIsolation, string $modelParentId): ?ProviderModelEntity
     {
@@ -216,7 +216,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * non官方organizationupdate Delightful modelstatus（写时复制逻辑）.
+     * non官方organizationupdate Delightful modelstatus（写o clock复制逻辑）.
      */
     public function updateDelightfulModelStatus(
         ProviderDataIsolation $dataIsolation,
@@ -230,7 +230,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         );
         $lockOwner = uniqid('copy_model_', true);
 
-        // get互斥lock，防止并发createsame的model
+        // get互斥lock，防止并haircreatesame的model
         if (! $this->locker->mutexLock($lockName, $lockOwner, 30)) {
             ExceptionBuilder::throw(ServiceProviderErrorCode::ModelOperationLocked);
         }
@@ -241,7 +241,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
                 ExceptionBuilder::throw(ServiceProviderErrorCode::ModelOfficiallyDisabled);
             }
 
-            // 2. 查找现have的organizationmodelrecord（inlock保护下again次check）
+            // 2. 查找现have的organizationmodelrecord（inlock保护downagaintimecheck）
             $organizationModel = $this->getDelightfulModelByParentId($dataIsolation, (string) $officialModel->getId());
 
             if ($organizationModel) {
@@ -260,17 +260,17 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * get官方organization下所haveenable的model（containconfigurationfilter）.
+     * get官方organizationdown所haveenable的model（containconfigurationfilter）.
      *
-     * @param null|Category $category service商类别，为null时return所havecategorymodel
-     * @return array<ProviderModelEntity> filter后的官方model列表
+     * @param null|Category $category service商category别，为nullo clockreturn所havecategorymodel
+     * @return array<ProviderModelEntity> filterback的官方modelcolumn表
      */
     private function getOfficialEnabledModels(?Category $category = null): array
     {
         // get官方organizationencoding
         $officialOrganizationCode = OfficialOrganizationUtil::getOfficialOrganizationCode();
 
-        // 1. 先query官方organization下enable的service商configurationID
+        // 1. 先query官方organizationdownenable的service商configurationID
         $enabledConfigQuery = $this->createConfigQuery()
             ->where('organization_code', $officialOrganizationCode)
             ->where('status', Status::Enabled->value)
@@ -285,7 +285,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
                 ->where('status', Status::Enabled->value)
                 ->whereIn('service_provider_config_id', $enabledConfigIdArray);
 
-            // if指定了category，添加categoryfiltercondition
+            // iffinger定了category，添加categoryfiltercondition
             if ($category !== null) {
                 $officialBuilder->where('category', $category->value);
             }
@@ -298,11 +298,11 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * application套餐filterhandle（针对model实体列表）.
+     * applicationset餐filterhandle（针对model实bodycolumn表）.
      *
-     * @param array<ProviderModelEntity> $models model实体列表
+     * @param array<ProviderModelEntity> $models model实bodycolumn表
      * @param string $organizationCode organizationencoding
-     * @return array<ProviderModelEntity> filter后的model实体列表
+     * @return array<ProviderModelEntity> filterback的model实bodycolumn表
      */
     private function applyPackageFilteringToModels(array $models, string $organizationCode): array
     {
@@ -314,13 +314,13 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         $filteredModels = [];
         foreach ($models as $model) {
             $visiblePackages = $model->getVisiblePackages();
-            // ifnothaveconfiguration可见套餐，then对所have套餐可见
+            // ifnothaveconfiguration可见set餐，then对所haveset餐可见
             if (empty($visiblePackages)) {
                 $filteredModels[] = $model;
                 continue;
             }
 
-            // ifconfiguration了可见套餐，checkcurrent套餐whetherin其中
+            // ifconfiguration了可见set餐，checkcurrentset餐whetherin其middle
             if ($currentPackage && in_array($currentPackage, $visiblePackages)) {
                 $filteredModels[] = $model;
             }
@@ -362,11 +362,11 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         ProviderDataIsolation $dataIsolation,
         ProviderModelEntity $officialModel
     ): ProviderModelEntity {
-        // create新modelrecord(避免新增field导致复制报错，直接all量 copy 然后 set 新value)
+        // create新modelrecord(避免新增field导致复制报错，直接allquantity copy 然back set 新value)
         $organizationModel = new ProviderModelEntity($officialModel->toArray());
         $organizationModel->setServiceProviderConfigId(0);
         $organizationModel->setModelParentId($officialModel->getId());
-        $organizationModel->setIsOffice(true); // Delightfulservice商下的model
+        $organizationModel->setIsOffice(true); // Delightfulservice商down的model
         $organizationModel->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $organizationModel->setId(IdGenerator::getSnowId());
         // 避免error复制 config

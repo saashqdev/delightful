@@ -110,7 +110,7 @@ class CreateGroupNodeRunner extends NodeRunner
             return;
         }
 
-        // by owner 的身份去create
+        // by owner 的身share去create
         $ownerAuthorization = new DelightfulUserAuthorization();
         $ownerAuthorization->setId($groupOwnerInfo->getUserId());
         $ownerAuthorization->setOrganizationCode($groupOwnerInfo->getOrganizationCode());
@@ -128,7 +128,7 @@ class CreateGroupNodeRunner extends NodeRunner
         $this->createChatGroup($agentKey, $groupMemberIds, $ownerAuthorization, $delightfulGroupDTO);
 
         if (! empty($assistantOpeningSpeech)) {
-            // 助手sendgroup chatmessage
+            // 助handsendgroup chatmessage
             $assistantMessage = new TextMessage(['content' => $assistantOpeningSpeech]);
             $appMessageId = IdGenerator::getUniqueId32();
             $receiveSeqDTO = new DelightfulSeqEntity();

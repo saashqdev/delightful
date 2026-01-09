@@ -10,12 +10,12 @@ namespace App\Infrastructure\ExternalAPI\Sms\Enum;
 enum LanguageEnum: string
 {
     /**
-     * 简中.
+     * 简middle.
      */
     case ZH_CN = 'zh_CN';
 
     /**
-     * 美式英语.
+     * 美type英语.
      */
     case EN_US = 'en_US';
 

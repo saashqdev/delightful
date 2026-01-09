@@ -12,7 +12,7 @@ namespace App\Domain\Chat\Entity\ValueObject\MessageType;
  */
 enum ControlMessageType: string
 {
-    // queueetc场景的心跳
+    // queueetc场景的core跳
     case Ping = 'ping';
 
     // createsession窗口
@@ -21,7 +21,7 @@ enum ControlMessageType: string
     // 移exceptsession窗口（listnot显示）
     case HideConversation = 'hide_conversation';
 
-    // 置顶session窗口
+    // 置topsession窗口
     case TopConversation = 'top_conversation';
 
     // session免打扰
@@ -78,16 +78,16 @@ enum ControlMessageType: string
     // 解散group chat
     case GroupDisband = 'group_disband';
 
-    // 群memberrole变more(批量set管理员/普通member)
+    // 群memberrole变more(批quantityset管理员/普通member)
     case GroupUserRoleChange = 'group_user_role_change';
 
     // 转让群主
     case GroupOwnerChange = 'group_owner_change';
 
-    // 助理的交互指令
+    // 助理的交互finger令
     case AgentInstruct = 'bot_instruct';
 
-    // 翻译configuration项
+    // 翻译configurationitem
     case TranslateConfig = 'translate_config';
 
     // 翻译
@@ -101,7 +101,7 @@ enum ControlMessageType: string
 
     /**
      * 未知message。
-     * 由atversion迭代，发版timediffetcreason，可能产生未知type的message。
+     * 由atversion迭代，hair版timediffetcreason，可能产生未知type的message。
      */
     case Unknown = 'unknown';
 

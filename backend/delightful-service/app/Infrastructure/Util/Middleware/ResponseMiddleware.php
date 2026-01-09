@@ -31,7 +31,7 @@ class ResponseMiddleware implements MiddlewareInterface
         'api-key',
     ];
 
-    // 指定的 uri not打印request和responsedetail
+    // finger定的 uri not打印request和responsedetail
     private array $desensitizeUris = [
         '/conversation/chatCompletions',
         '/message',
@@ -58,7 +58,7 @@ class ResponseMiddleware implements MiddlewareInterface
     {
         $path = $request->getUri()->getPath();
         if (! in_array($path, $this->ignoreUris, true)) {
-            // 提前recordrequestlog、request url、request头
+            // 提frontrecordrequestlog、request url、requesthead
             $this->logger->info('request跟踪start', [
                 'url' => $request->getRequestTarget(),
                 'method' => $request->getMethod(),
@@ -82,7 +82,7 @@ class ResponseMiddleware implements MiddlewareInterface
                 if (in_array($path, $this->ignoreUris, true)) {
                     return;
                 }
-                // temporary加一下敏感filter
+                // temporary加一down敏感filter
                 if (! str_contains($path, 'aes')) {
                     $this->logger->info('request跟踪information', $this->formatMessage($request, $response, $startTime, $endTime));
                 }

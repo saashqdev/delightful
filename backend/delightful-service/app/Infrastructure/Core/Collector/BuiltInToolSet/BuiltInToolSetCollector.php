@@ -32,7 +32,7 @@ class BuiltInToolSetCollector
     }
 
     /**
-     * get所have内置tool集 - tool.
+     * get所haveinside置tool集 - tool.
      * @return array<BuiltInToolSetInterface>
      */
     public static function list(): array

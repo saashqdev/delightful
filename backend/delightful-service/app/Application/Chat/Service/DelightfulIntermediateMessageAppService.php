@@ -41,7 +41,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
     }
 
     /**
-     * according to客户端发来的控制messagetype,分发to对应的process模块.
+     * according to客户端hair来的控制messagetype,minutehairto对应的process模piece.
      * @throws Throwable
      */
     public function dispatchClientIntermediateMessage(ChatRequest $chatRequest, DelightfulUserAuthorization $userAuthorization): ?array
@@ -79,7 +79,7 @@ class DelightfulIntermediateMessageAppService extends AbstractAppService
 
     public function checkSendMessageAuth(DelightfulConversationEntity $conversationEntity, DataIsolation $dataIsolation): void
     {
-        // checkconversation id所属organization，与when前传入organizationencoding的一致性
+        // checkconversation id所属organization，与whenfront传入organizationencoding的一致property
         if ($conversationEntity->getUserOrganizationCode() !== $dataIsolation->getCurrentOrganizationCode()) {
             ExceptionBuilder::throw(ChatErrorCode::CONVERSATION_NOT_FOUND);
         }

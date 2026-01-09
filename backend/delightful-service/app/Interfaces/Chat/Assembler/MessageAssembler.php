@@ -126,7 +126,7 @@ class MessageAssembler
         // message的type和content抽象出来
         $messageDTO = new DelightfulMessageEntity();
         $messageDTO->setSenderId($conversationEntity->getUserId());
-        // TODO sessiontableshould冗余的record收发双方的usertype，目前只record了收件方的，need补充
+        // TODO sessiontableshould冗余的record收hair双方的usertype，目front只record了收item方的，need补充
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
         $messageDTO->setSenderType($senderType);
         $messageDTO->setSenderOrganizationCode($conversationEntity->getUserOrganizationCode());
@@ -155,7 +155,7 @@ class MessageAssembler
         // message的type和content抽象出来
         $messageDTO = new DelightfulMessageDTO();
         $messageDTO->setSenderId($conversationEntity->getUserId());
-        // TODO sessiontableshould冗余的record收发双方的usertype，目前只record了收件方的，need补充
+        // TODO sessiontableshould冗余的record收hair双方的usertype，目front只record了收item方的，need补充
         $senderType = ConversationType::from($senderUserEntity->getUserType()->value);
         $messageDTO->setSenderType($senderType);
         $messageDTO->setSenderOrganizationCode($conversationEntity->getUserOrganizationCode());
@@ -227,7 +227,7 @@ class MessageAssembler
      */
     public static function getControlMessageStruct(ControlMessageType $messageTypeEnum, array $messageStructArray): MessageInterface
     {
-        // 其实can直接use protobuf generate的 php object,but是暂时nothavetimeall量替换,by后again说.
+        // 其实can直接use protobuf generate的 php object,but是暂o clocknothavetimeallquantity替换,bybackagain说.
         return match ($messageTypeEnum) {
             # 控制message
             ControlMessageType::CreateConversation => new ConversationWindowCreateMessage($messageStructArray),
@@ -302,7 +302,7 @@ class MessageAssembler
             $formattedMessage = sprintf("%s: %s\n", $role, $content);
             $messageLength = mb_strlen($formattedMessage, 'UTF-8');
 
-            // if是第一条message，即使超过length限制also要contain
+            // if是the一itemmessage，即使超过length限制also要contain
             if ($messageCount === 0) {
                 array_unshift($limitedMessages, $formattedMessage);
                 $currentLength += $messageLength;

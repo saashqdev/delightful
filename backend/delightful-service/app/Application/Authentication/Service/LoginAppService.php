@@ -33,14 +33,14 @@ readonly class LoginAppService
     }
 
     /**
-     * checkuserlogininfo并颁发token.
+     * checkuserlogininfo并颁hairtoken.
      */
     public function login(CheckLoginRequest $request): CheckLoginResponse
     {
         // verifyaccountinfo并getaccount
         $account = $this->verifyAndGetAccount($request);
 
-        // verifyuserinorganization内whether存in
+        // verifyuserinorganizationinsidewhether存in
         $user = $this->verifyAndGetUserInOrganization($account, $request->getOrganizationCode());
 
         // generatetoken
@@ -51,7 +51,7 @@ readonly class LoginAppService
     }
 
     /**
-     * according tologintypeverifyaccountinfo并returnaccount实体.
+     * according tologintypeverifyaccountinfo并returnaccount实body.
      */
     private function verifyAndGetAccount(CheckLoginRequest $request): AccountEntity
     {
@@ -62,7 +62,7 @@ readonly class LoginAppService
     }
 
     /**
-     * verify手机号login.
+     * verifyhand机numberlogin.
      */
     private function verifyPhoneAccount(CheckLoginRequest $request): AccountEntity
     {
@@ -102,7 +102,7 @@ readonly class LoginAppService
     }
 
     /**
-     * verifyuserinorganization内whether存in.
+     * verifyuserinorganizationinsidewhether存in.
      */
     private function verifyAndGetUserInOrganization(AccountEntity $account, string $organizationCode): DelightfulUserEntity
     {
@@ -153,7 +153,7 @@ readonly class LoginAppService
     }
 
     /**
-     * format化国家code，ensureby+开头.
+     * format化国家code，ensureby+开head.
      */
     private function formatStateCode(string $stateCode): string
     {

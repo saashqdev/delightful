@@ -79,9 +79,9 @@ if (! function_exists('is_unit_test')) {
 
 if (! function_exists('camelize')) {
     /**
-     * 下划线转驼峰.
+     * down划line转驼峰.
      * @param string $unCamelizeWords needconvert的string
-     * @param string $separator 分隔符
+     * @param string $separator minute隔符
      */
     function camelize(string $unCamelizeWords, string $separator = '_'): string
     {
@@ -99,9 +99,9 @@ if (! function_exists('camelize')) {
 
 if (! function_exists('un_camelize')) {
     /**
-     * 驼峰命名转下划线命名.
+     * 驼峰命名转down划line命名.
      * @param string $camelCaps needconvert的string
-     * @param string $separator 分隔符
+     * @param string $separator minute隔符
      */
     function un_camelize(string $camelCaps, string $separator = '_'): string
     {
@@ -114,7 +114,7 @@ if (! function_exists('un_camelize')) {
 
 if (! function_exists('string_to_hump')) {
     /**
-     * 下划线转成驼峰命名,default小驼峰.
+     * down划line转become驼峰命名,default小驼峰.
      * @param string $string 要convert的string
      * @param bool $firstUp whether首字母大写,default否
      */
@@ -127,7 +127,7 @@ if (! function_exists('string_to_hump')) {
 
 if (! function_exists('string_to_line')) {
     /**
-     * 驼峰命名转下划线
+     * 驼峰命名转down划line
      * @param string $string 要convert的string
      */
     function string_to_line(string $string, string $separator = '_'): string
@@ -138,7 +138,7 @@ if (! function_exists('string_to_line')) {
 
 if (! function_exists('array_key_to_line')) {
     /**
-     * convertarraykey成下划线
+     * convertarraykeybecomedown划line
      * @param array $array 要convert的array
      */
     function array_key_to_line(array $array): array
@@ -158,7 +158,7 @@ if (! function_exists('array_key_to_line')) {
 
 if (! function_exists('array_key_to_hump')) {
     /**
-     * convertarraykey成驼峰.
+     * convertarraykeybecome驼峰.
      * @param array $array 要convert的array
      */
     function array_key_to_hump(array $array, bool $firstUp = false, bool $loop = true): array
@@ -185,7 +185,7 @@ if (! function_exists('format_micro_time')) {
             $microseconds = (int) $microTimes[0] * 1000000;
         } else {
             $integerTimestamp = (int) $microTime;
-            $microseconds = ($microTime - $integerTimestamp) * 1000000; // 微秒部分
+            $microseconds = ($microTime - $integerTimestamp) * 1000000; // 微second部minute
         }
         $dateTime = date('Y-m-d H:i:s', $integerTimestamp);
         return "{$dateTime}.{$microseconds}";
@@ -247,7 +247,7 @@ if (! function_exists('calculate_elapsed_time')) {
 
 if (! function_exists('diff_day')) {
     /**
-     * fromstarttimeto现in是第几天.
+     * fromstarttimeto现in是the几day.
      */
     function diff_day(DateTime $startTime): int
     {

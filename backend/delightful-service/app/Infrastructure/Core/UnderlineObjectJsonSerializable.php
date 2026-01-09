@@ -34,7 +34,7 @@ abstract class UnderlineObjectJsonSerializable implements JsonSerializable, Arra
     }
 
     /**
-     * get类的property，notinclude动态property.
+     * getcategory的property，notinclude动stateproperty.
      */
     public function toArray(): array
     {
@@ -43,7 +43,7 @@ abstract class UnderlineObjectJsonSerializable implements JsonSerializable, Arra
 
     public function toJsonString(): string
     {
-        // 避免call toArray methodcall本method时，againcall hyperf 的 Json::encode method造成死循环
+        // 避免call toArray methodcall本methodo clock，againcall hyperf 的 Json::encode method造become死循环
         try {
             $json = json_encode($this, JSON_UNESCAPED_UNICODE | JSON_THROW_ON_ERROR);
         } catch (Throwable $exception) {

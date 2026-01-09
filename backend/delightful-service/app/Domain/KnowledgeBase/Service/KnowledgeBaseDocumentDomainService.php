@@ -82,7 +82,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * 查看单个knowledge basedocumentdetail.
+     * 查看单knowledge basedocumentdetail.
      */
     public function show(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $selectForUpdate = false): KnowledgeBaseDocumentEntity
     {
@@ -101,22 +101,22 @@ readonly class KnowledgeBaseDocumentDomainService
         $documentEntity = null;
         Db::transaction(function () use ($dataIsolation, $documentCode, $knowledgeBaseEntity) {
             $knowledgeBaseCode = $knowledgeBaseEntity->getCode();
-            // 首先deletedocument下的所have片段
+            // 首先deletedocumentdown的所haveslicesegment
             $this->destroyFragments($dataIsolation, $knowledgeBaseCode, $documentCode);
             $documentEntity = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode, true);
-            // 然后deletedocument本身
+            // 然backdeletedocument本身
             $this->knowledgeBaseDocumentRepository->destroy($dataIsolation, $knowledgeBaseCode, $documentCode);
             // update字符数
             $deltaWordCount = -$documentEntity->getWordCount();
             $this->updateWordCount($dataIsolation, $knowledgeBaseCode, $documentEntity->getCode(), $deltaWordCount);
         });
-        // asyncdeleteto量database片段
+        // asyncdeletetoquantitydatabaseslicesegment
         /* @phpstan-ignore-next-line */
         ! is_null($documentEntity) && AsyncEventUtil::dispatch(new KnowledgeBaseDocumentRemovedEvent($dataIsolation, $knowledgeBaseEntity, $documentEntity));
     }
 
     /**
-     * 重建knowledge basedocumentto量索引.
+     * 重建knowledge basedocumenttoquantity索引.
      */
     public function rebuild(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $force = false): void
     {
@@ -129,8 +129,8 @@ readonly class KnowledgeBaseDocumentDomainService
             $document->setSyncTimes(0);
             $this->knowledgeBaseDocumentRepository->update($dataIsolation, $document);
 
-            // async触发重建（这里cansendeventor者加入queue）
-            // TODO: 触发重建to量event
+            // async触hair重建（这withincansendeventor者加入queue）
+            // TODO: 触hair重建toquantityevent
         }
     }
 
@@ -227,7 +227,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $lastId = null;
         /** @var array<KnowledgeBaseDocumentEntity> $res */
         $res = [];
-        // at mostallowget一万份document
+        // at mostallowget一万sharedocument
         while ($loopCount--) {
             $entities = $this->knowledgeBaseDocumentRepository->getByThirdFileId($dataIsolation, $thirdPlatformType, $thirdFileId, $knowledgeBaseCode, $lastId, $pageSize);
             if (empty($entities)) {
@@ -240,7 +240,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * deletedocument下的所have片段.
+     * deletedocumentdown的所haveslicesegment.
      */
     private function destroyFragments(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -273,7 +273,7 @@ readonly class KnowledgeBaseDocumentDomainService
         $documentEntity->setUpdatedAt($documentEntity->getCreatedAt());
         $documentEntity->setUpdatedUid($documentEntity->getCreatedUid());
         $documentEntity->setSyncStatus(0); // 0 table示未sync
-        // by下property均fromdocumentfile中get
+        // bydownproperty均fromdocumentfilemiddleget
         $documentEntity->setDocType($documentFile?->getDocType() ?? DocType::TXT->value);
         $documentEntity->setThirdFileId($documentFile?->getThirdFileId());
         $documentEntity->setThirdPlatformType($documentFile?->getPlatformType());

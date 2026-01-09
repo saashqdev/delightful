@@ -14,7 +14,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use DateTime;
 
 /**
- * organization实体.
+ * organization实body.
  */
 class OrganizationEntity extends AbstractEntity
 {
@@ -42,7 +42,7 @@ class OrganizationEntity extends AbstractEntity
 
     protected ?string $creatorId = null;
 
-    protected int $type = 0; // organizationtype 0:teamorganization 1:个人organization
+    protected int $type = 0; // organizationtype 0:teamorganization 1:人organization
 
     protected ?DateTime $createdAt = null;
 

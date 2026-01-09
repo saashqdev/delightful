@@ -52,7 +52,7 @@ JSON, true));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            '888' => '你好，我是onehaveuse的助手，叫 delightful',
+            '888' => '你好，我是onehaveuse的助hand，叫 delightful',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());

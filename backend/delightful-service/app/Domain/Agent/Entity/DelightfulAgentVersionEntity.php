@@ -23,11 +23,11 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected string $flowCode;
 
     /**
-     * workflowversion号.
+     * workflowversionnumber.
      */
     protected string $flowVersion;
 
-    // 交互指令
+    // 交互finger令
     protected ?array $instructs = [];
 
     /**
@@ -64,12 +64,12 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected ?string $versionDescription = '';
 
     /**
-     * version号.
+     * versionnumber.
      */
     protected ?string $versionNumber = '';
 
     /**
-     * publishrange. 0:个人use,1:企业内部,2:application市场.
+     * publishrange. 0:人use,1:企业inside部,2:application市场.
      */
     protected ?int $releaseScope = 0;
 
@@ -84,7 +84,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected ?int $reviewStatus;
 
     /**
-     * publishto企业内部status.
+     * publishto企业inside部status.
      */
     protected ?int $enterpriseReleaseStatus;
 
@@ -126,7 +126,7 @@ class DelightfulAgentVersionEntity extends AbstractEntity
     protected bool $startPage = false;
 
     /**
-     * 可见性configuration.
+     * 可见propertyconfiguration.
      */
     protected ?VisibilityConfig $visibilityConfig = null;
 

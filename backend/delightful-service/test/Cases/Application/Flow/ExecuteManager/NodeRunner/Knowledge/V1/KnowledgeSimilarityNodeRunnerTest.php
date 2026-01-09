@@ -38,7 +38,7 @@ class KnowledgeSimilarityNodeRunnerTest extends ExecuteManagerBaseTest
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "币种",
+                    "value": "币type",
                     "name": "",
                     "args": null
                 }
@@ -94,7 +94,7 @@ JSON,
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "required": [
             "similarity_contents",
@@ -169,7 +169,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "币种",
+                    "value": "币type",
                     "name": "",
                     "args": null
                 }
@@ -225,7 +225,7 @@ JSON,
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "required": [
             "similarity_contents",
@@ -316,7 +316,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "币种",
+                    "value": "币type",
                     "name": "",
                     "args": null
                 }
@@ -372,7 +372,7 @@ JSON,
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "required": [
             "similarity_contents",
@@ -473,7 +473,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "币种",
+                    "value": "币type",
                     "name": "",
                     "args": null
                 }
@@ -529,7 +529,7 @@ JSON,
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "required": [
             "similarity_contents",
@@ -621,7 +621,7 @@ JSON, true)));
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "币种",
+                    "value": "币type",
                     "name": "",
                     "args": null
                 }
@@ -677,7 +677,7 @@ JSON,
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "required": [
             "similarity_contents",

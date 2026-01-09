@@ -24,9 +24,9 @@ return new class extends Migration {
             $table->string('exception_type', 255)->comment('exceptiontype');
             $table->boolean('can_retry')->comment('whethercanretry')->nullable();
             $table->integer('retry_max_times')->comment('retrymost大count')->nullable();
-            $table->integer('retry_interval')->comment('retrytime间隔')->nullable();
+            $table->integer('retry_interval')->comment('retrytimebetween隔')->nullable();
             $table->datetimes();
-            $table->comment('exceptioninformation表，储存exceptiontype，whethercanretry，retrymost大count，retrytime间隔');
+            $table->comment('exceptioninformation表，储存exceptiontype，whethercanretry，retrymost大count，retrytimebetween隔');
         });
     }
 

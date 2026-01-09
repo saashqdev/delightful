@@ -13,7 +13,7 @@ use InvalidArgumentException;
 /**
  * 重sortmodelconfigurationvalueobject
  *
- * contain重sortmodel的相关configurationparameter，如modelname、提供商、API 端点etc
+ * contain重sortmodel的相关configurationparameter，如modelname、提供商、API 端pointetc
  */
 class RerankingModelConfig extends AbstractValueObject
 {
@@ -32,9 +32,9 @@ class RerankingModelConfig extends AbstractValueObject
     private string $rerankingProviderName = '';
 
     /**
-     * API 端点.
+     * API 端point.
      *
-     * 重sortservice的 API 端点
+     * 重sortservice的 API 端point
      */
     private string $apiEndpoint = '';
 
@@ -46,30 +46,30 @@ class RerankingModelConfig extends AbstractValueObject
     private string $apiKey = '';
 
     /**
-     * timeouttime（秒）.
+     * timeouttime（second）.
      *
-     * API request的timeouttime，unit为秒
+     * API request的timeouttime，unit为second
      */
     private float $timeout = 3.0;
 
     /**
      * retrycount.
      *
-     * API requestfail时的retrycount
+     * API requestfailo clock的retrycount
      */
     private int $retryCount = 2;
 
     /**
      * return的most大resultquantity.
      *
-     * 重sort后return的most大resultquantity
+     * 重sortbackreturn的most大resultquantity
      */
     private int $topN = 3;
 
     /**
      * 批processsize.
      *
-     * 批量processdocument的size，useat提高performance
+     * 批quantityprocessdocument的size，useat提高performance
      */
     private int $batchSize = 16;
 
@@ -81,9 +81,9 @@ class RerankingModelConfig extends AbstractValueObject
     private bool $useCache = true;
 
     /**
-     * cacheexpiretime（秒）.
+     * cacheexpiretime（second）.
      *
-     * cache的expiretime，unit为秒
+     * cache的expiretime，unit为second
      */
     private int $cacheTtl = 3600;
 
@@ -122,7 +122,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * get API 端点.
+     * get API 端point.
      */
     public function getApiEndpoint(): string
     {
@@ -130,7 +130,7 @@ class RerankingModelConfig extends AbstractValueObject
     }
 
     /**
-     * set API 端点.
+     * set API 端point.
      */
     public function setApiEndpoint(string $apiEndpoint): self
     {

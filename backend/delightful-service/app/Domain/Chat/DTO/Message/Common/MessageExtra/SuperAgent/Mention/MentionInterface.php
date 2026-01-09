@@ -15,7 +15,7 @@ use JsonSerializable;
 interface MentionInterface extends JsonSerializable
 {
     /**
-     * inmessage的 content 中 @了 file/mcp/tool etc.
+     * inmessage的 content middle @了 file/mcp/tool etc.
      */
     public function getMentionTextStruct(): string;
 

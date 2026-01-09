@@ -23,7 +23,7 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 #[FlowNodeDefine(
     type: NodeType::KnowledgeFragmentRemove->value,
     code: NodeType::KnowledgeFragmentRemove->name,
-    name: 'to量database / to量delete',
+    name: 'toquantitydatabase / toquantitydelete',
     paramsConfig: KnowledgeFragmentRemoveNodeParamsConfig::class,
     version: 'v0',
     singleDebug: true,
@@ -59,7 +59,7 @@ class KnowledgeFragmentRemoveNodeRunner extends AbstractKnowledgeNodeRunner
         $KnowledgeEntity = $knowledgeDomainService->show($knowledgeBaseDataIsolation, $knowledgeCode);
 
         if (! empty($businessId)) {
-            // 优先级高
+            // 优先level高
             $fragment = $fragmentDomainService->showByBusinessId(
                 $knowledgeBaseDataIsolation,
                 $knowledgeCode,

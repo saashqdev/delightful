@@ -22,7 +22,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * image水印handle器
- * 统一handleeach种formatimage的水印添加.
+ * 统一handleeachtypeformatimage的水印添加.
  */
 class ImageWatermarkProcessor
 {
@@ -57,7 +57,7 @@ class ImageWatermarkProcessor
             $imageData = $this->addWaterMarkHandler($imageData, $imageGenerateRequest, $targetFormat);
         }
 
-        // 立即添加XMP隐式水印
+        // 立即添加XMP隐type水印
         $implicitWatermark = $imageGenerateRequest->getImplicitWatermark();
         $xmpWatermarkedData = $this->imageEnhancementProcessor->enhanceImageData(
             $imageData,
@@ -81,14 +81,14 @@ class ImageWatermarkProcessor
             $imageData = $this->addWaterMarkHandler($imageData, $imageGenerateRequest);
         }
 
-        // 立即添加XMP隐式水印
+        // 立即添加XMP隐type水印
         $implicitWatermark = $imageGenerateRequest->getImplicitWatermark();
         $xmpWatermarkedData = $this->imageEnhancementProcessor->enhanceImageData(
             $imageData,
             $implicitWatermark
         );
 
-        // according toactualoutputformatgeneratecorrect的base64前缀
+        // according toactualoutputformatgeneratecorrect的base64front缀
         $outputPrefix = $this->generateBase64Prefix($imageData);
         return $this->processBase64Images($outputPrefix . base64_encode($xmpWatermarkedData), $imageGenerateRequest);
     }
@@ -126,7 +126,7 @@ class ImageWatermarkProcessor
         $watermarkedData = ob_get_contents();
         ob_end_clean();
 
-        // 清理内存
+        // 清理inside存
         imagedestroy($image);
         imagedestroy($watermarkedImage);
         return $watermarkedData;
@@ -164,30 +164,30 @@ class ImageWatermarkProcessor
         // 计算水印position
         [$x, $y] = $this->calculateWatermarkPosition($width, $height, $text, $fontSize, $config->getPosition());
 
-        // 优先useTTF字体，especially是对at中文文本
+        // 优先useTTF字body，especially是对atmiddle文文本
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && ($this->fontProvider->containsChinese($text) || $this->fontProvider->supportsTTF())) {
-            // useTTF字体渲染，support中文
-            // TTF字体sizeneed调整，usually比内置字体小一些
+            // useTTF字body渲染，supportmiddle文
+            // TTF字bodysizeneed调整，usuallyratioinside置字body小一些
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
 
-            // correct计算TTF字体的基线position
+            // correct计算TTF字body的基lineposition
             if (function_exists('imagettfbbox')) {
-                // 直接use传入的Y坐标作为基线position
+                // 直接use传入的Y坐标作为基lineposition
                 $ttfY = $y;
             } else {
-                // if无法get边界框，直接use传入的Y坐标
+                // if无法getside界框，直接use传入的Y坐标
                 $ttfY = $y;
             }
 
             imagettftext($image, $ttfFontSize, 0, $x, $ttfY, $fontColor, $fontFile, $text);
         } else {
-            // 降级use内置字体（仅supportASCII字符）
-            // 内置字体的Y坐标是文字顶部，needfrom基线positionconvert
-            $builtinY = $y - (int) ($fontSize * 0.8); // from基线positionconvert为顶部position
+            // 降leveluseinside置字body（仅supportASCII字符）
+            // inside置字body的Y坐标是文字top部，needfrom基linepositionconvert
+            $builtinY = $y - (int) ($fontSize * 0.8); // from基linepositionconvert为top部position
             imagestring($image, 5, $x, $builtinY, $text, $fontColor);
 
-            // if文本contain中文butnothaveTTF字体，recordwarning
+            // if文本containmiddle文butnothaveTTF字body，recordwarning
             if ($this->fontProvider->containsChinese($text)) {
                 $this->logger->warning('Chinese text detected but TTF font not available, may display incorrectly');
             }
@@ -195,11 +195,11 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * 计算字体size.
+     * 计算字bodysize.
      */
     private function calculateFontSize(int $width, int $height): int
     {
-        // according toimagesize动态调整字体size
+        // according toimagesize动state调整字bodysize
         $size = min($width, $height) / 20;
         return max(12, min(36, (int) $size));
     }
@@ -210,7 +210,7 @@ class ImageWatermarkProcessor
      */
     private function createTransparentColor($image, float $opacity): int
     {
-        // create白色半透明水印
+        // create白color半透明水印
         $alpha = (int) ((1 - $opacity) * 127);
         return imagecolorallocatealpha($image, 255, 255, 255, $alpha);
     }
@@ -223,50 +223,50 @@ class ImageWatermarkProcessor
         // more精确的文字width估算
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && $this->fontProvider->supportsTTF() && function_exists('imagettfbbox')) {
-            // useTTF字体计算actual文本边界框
+            // useTTF字body计算actual文本side界框
             $ttfFontSize = max(8, (int) ($fontSize * 0.8));
             $bbox = imagettfbbox($ttfFontSize, 0, $fontFile, $text);
-            $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // 增加20%security边距
+            $textWidth = (int) (($bbox[4] - $bbox[0]) * 1.2);  // 增加20%securityside距
             $textHeight = (int) abs($bbox[1] - $bbox[7]); // use绝对valueensureheight为正
 
-            // TTF字体的下降部分（descender）
-            $descender = (int) abs($bbox[1]); // 基线by下的部分
-            $ascender = (int) abs($bbox[7]);  // 基线by上的部分
+            // TTF字body的down降部minute（descender）
+            $descender = (int) abs($bbox[1]); // 基linebydown的部minute
+            $ascender = (int) abs($bbox[7]);  // 基linebyup的部minute
             $totalTextHeight = $descender + $ascender;
         } else {
-            // 降级use估算method
-            // 对at中文字符，each个字符width约equal字体size
+            // 降leveluse估算method
+            // 对atmiddle文字符，each字符width约equal字bodysize
             $chineseCharCount = mb_strlen($text, 'UTF-8');
-            $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // 增加security边距
+            $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // 增加securityside距
             $textHeight = $fontSize;
-            $descender = (int) ($fontSize * 0.2); // 内置字体估算下降部分
-            $ascender = (int) ($fontSize * 0.8); // 内置字体估算上升部分
+            $descender = (int) ($fontSize * 0.2); // inside置字body估算down降部minute
+            $ascender = (int) ($fontSize * 0.8); // inside置字body估算up升部minute
             $totalTextHeight = $textHeight;
         }
 
-        // 动态边距：based on字体size计算，ensure足够的null间
+        // 动stateside距：based on字bodysize计算，ensure足够的nullbetween
         $margin = max(20, (int) ($fontSize * 0.8));
 
         switch ($position) {
-            case 1: // 左上角
+            case 1: // leftupangle
                 return [$margin, $margin + $ascender];
-            case 2: // 上方中央
+            case 2: // up方middle央
                 return [max($margin, (int) (($width - $textWidth) / 2)), $margin + $ascender];
-            case 3: // 右上角
+            case 3: // rightupangle
                 return [max($margin, $width - $textWidth - $margin), $margin + $ascender];
-            case 4: // 左侧中央
+            case 4: // left侧middle央
                 return [$margin, (int) (($height + $ascender - $descender) / 2)];
-            case 5: // 中央
+            case 5: // middle央
                 return [max($margin, (int) (($width - $textWidth) / 2)), (int) (($height + $ascender - $descender) / 2)];
-            case 6: // 右侧中央
+            case 6: // right侧middle央
                 return [max($margin, $width - $textWidth - $margin), (int) (($height + $ascender - $descender) / 2)];
-            case 7: // 左下角
+            case 7: // leftdownangle
                 return [$margin, $height - $margin - $descender];
-            case 8: // 下方中央
+            case 8: // down方middle央
                 return [max($margin, (int) (($width - $textWidth) / 2)), $height - $margin - $descender];
-            case 9: // 右下角
+            case 9: // rightdownangle
                 return [max($margin, $width - $textWidth - $margin), $height - $margin - $descender];
-            default: // default右下角
+            default: // defaultrightdownangle
                 return [max($margin, $width - $textWidth - $margin), $height - $margin - $descender];
         }
     }
@@ -276,7 +276,7 @@ class ImageWatermarkProcessor
      */
     private function decodeBase64Image(string $base64Image): string
     {
-        // 移exceptdata URL前缀
+        // 移exceptdata URLfront缀
         if (str_contains($base64Image, ',')) {
             $base64Image = substr($base64Image, strpos($base64Image, ',') + 1);
         }
@@ -319,9 +319,9 @@ class ImageWatermarkProcessor
         // 自动format检测
         if ($format === 'auto') {
             if ($this->fontProvider->hasTransparency($image)) {
-                $format = 'png'; // have透明度usePNG
+                $format = 'png'; // have透明degreeusePNG
             } else {
-                $format = 'jpeg'; // 无透明度useJPEG高quality
+                $format = 'jpeg'; // 无透明degreeuseJPEG高quality
             }
         }
 
@@ -332,14 +332,14 @@ class ImageWatermarkProcessor
                     break;
                 case 'webp':
                     if (function_exists('imagewebp')) {
-                        imagewebp($image, null, 100); // WebP无损模式
+                        imagewebp($image, null, 100); // WebP无损模type
                     } else {
                         $this->logger->warning('WebP not supported, falling back to PNG');
                         imagepng($image, null, 0);
                     }
                     break;
                 case 'gif':
-                    // GIF限制more多，suggestion升级为PNG
+                    // GIF限制more多，suggestion升level为PNG
                     $this->logger->info('Converting GIF to PNG for better quality');
                     imagepng($image, null, 0);
                     break;
@@ -347,7 +347,7 @@ class ImageWatermarkProcessor
                 case 'jpg':
                 default:
                     if ($this->fontProvider->hasTransparency($image)) {
-                        // JPEGnot supported透明度，自动转PNG
+                        // JPEGnot supported透明degree，自动转PNG
                         $this->logger->info('JPEG does not support transparency, converting to PNG');
                         imagepng($image, null, 0);
                     } else {
@@ -356,7 +356,7 @@ class ImageWatermarkProcessor
                     break;
             }
         } catch (Exception $e) {
-            // encodingfail时usePNG兜底
+            // encodingfailo clockusePNG兜bottom
             $this->logger->error('Image encoding failed, falling back to PNG', [
                 'format' => $format,
                 'error' => $e->getMessage(),
@@ -386,7 +386,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * frombase64前缀提取图像format.
+     * frombase64front缀提取图像format.
      */
     private function extractBase64Format(string $base64Image): string
     {
@@ -412,7 +412,7 @@ class ImageWatermarkProcessor
     }
 
     /**
-     * according toformatgeneratebase64前缀.
+     * according toformatgeneratebase64front缀.
      */
     private function generateBase64Prefix(string $format): string
     {
@@ -439,7 +439,7 @@ class ImageWatermarkProcessor
 
             $fileLink = $fileDomainService->getLink($organizationCode, $uploadFile->getKey(), StorageBucketType::Public);
 
-            // settingobject元data作为备usesolution
+            // settingobjectyuandata作为备usesolution
             $validityPeriod = $imageGenerateRequest->getValidityPeriod();
             $metadataContent = [];
             if ($validityPeriod !== null) {

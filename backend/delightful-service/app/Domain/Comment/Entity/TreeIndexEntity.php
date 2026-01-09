@@ -12,17 +12,17 @@ class TreeIndexEntity
     protected int $id;
 
     /**
-     * 祖先节点id.
+     * 祖先sectionpointid.
      */
     protected int $ancestorId;
 
     /**
-     * 后代节点id.
+     * back代sectionpointid.
      */
     protected int $descendantId;
 
     /**
-     * 祖先节点to后代节点的距离.
+     * 祖先sectionpointtoback代sectionpoint的距离.
      */
     protected int $distance;
 

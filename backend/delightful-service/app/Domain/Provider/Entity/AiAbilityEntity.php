@@ -12,7 +12,7 @@ use App\Domain\Provider\Entity\ValueObject\Status;
 use App\Infrastructure\Core\AbstractEntity;
 
 /**
- * AI 能力实体.
+ * AI 能力实body.
  */
 class AiAbilityEntity extends AbstractEntity
 {
@@ -91,7 +91,7 @@ class AiAbilityEntity extends AbstractEntity
     }
 
     /**
-     * getwhen前语言的name.
+     * getwhenfront语言的name.
      */
     public function getLocalizedName(?string $locale = null): string
     {
@@ -116,7 +116,7 @@ class AiAbilityEntity extends AbstractEntity
     }
 
     /**
-     * getwhen前语言的description.
+     * getwhenfront语言的description.
      */
     public function getLocalizedDescription(?string $locale = null): string
     {

@@ -13,20 +13,20 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
     {
         // convert为csvformat
         $content = $this->convertToCsv($content);
-        // delete ## 开头的行
+        // delete ## 开head的line
         $content = preg_replace('/^##.*\n/', '', $content);
-        // use正thentable达式匹配notin引号内的换行符
+        // use正thentable达type匹配notin引numberinside的换line符
         return preg_replace('/(?<!")[\r\n]+(?!")/', "\n\n", $content);
     }
 
     /**
      * 将contentconvert为CSVformat.
      * @param string $content originalcontent
-     * @return string convert后的CSVformatcontent
+     * @return string convertback的CSVformatcontent
      */
     private function convertToCsv(string $content): string
     {
-        // 将content按行split，but保留单元格内的换行符
+        // 将content按linesplit，but保留单yuan格inside的换line符
         $lines = preg_split('/(?<!")[\r\n]+(?!")/', $content);
         $result = [];
         $headers = [];
@@ -39,22 +39,22 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
                 continue;
             }
 
-            // if是空行，skip
+            // if是空line，skip
             if (empty(trim($line))) {
                 $result[] = '';
                 continue;
             }
 
-            // usefgetcsv的methodparseCSV行
+            // usefgetcsv的methodparseCSVline
             $row = str_getcsv($line);
 
-            // if是第一行andnot是sheetmark，then作为title行
+            // if是the一lineandnot是sheetmark，then作为titleline
             if (empty($headers) && ! empty($line)) {
                 $headers = $row;
                 continue;
             }
 
-            // processdata行
+            // processdataline
             $rowResult = [];
             foreach ($row as $index => $value) {
                 if (isset($headers[$index])) {
@@ -62,7 +62,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
                 }
             }
 
-            // useoriginal行的分隔符
+            // useoriginalline的minute隔符
             $originalSeparator = $this->detectSeparator($line);
             $result[] = implode($originalSeparator, $rowResult);
         }
@@ -71,13 +71,13 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
     }
 
     /**
-     * 检测CSV行的分隔符.
-     * @param string $line CSV行content
-     * @return string 检测to的分隔符
+     * 检测CSVline的minute隔符.
+     * @param string $line CSVlinecontent
+     * @return string 检测to的minute隔符
      */
     private function detectSeparator(string $line): string
     {
-        // 常见的CSV分隔符
+        // 常见的CSVminute隔符
         $separators = [',', ';', '\t'];
 
         foreach ($separators as $separator) {
@@ -86,30 +86,30 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
             }
         }
 
-        // ifnothave找to分隔符，defaultuse逗号
+        // ifnothave找tominute隔符，defaultuse逗number
         return ',';
     }
 
     /**
-     * format化CSV单元格content，对特殊content添加引号.
-     * @param string $value 单元格content
-     * @return string format化后的单元格content
+     * format化CSV单yuan格content，对特殊content添加引number.
+     * @param string $value 单yuan格content
+     * @return string format化back的单yuan格content
      */
     private function formatCsvCell(string $value): string
     {
-        // if单元格content为空，直接return空string
+        // if单yuan格content为空，直接return空string
         if ($value === '') {
             return '';
         }
 
-        // if单元格contentcontainby下任意字符，needuse引号package围
+        // if单yuan格contentcontainbydown任意字符，needuse引numberpackage围
         if (str_contains($value, ',')
             || str_contains($value, '"')
             || str_contains($value, "\n")
             || str_contains($value, "\r")
             || str_starts_with($value, ' ')
             || str_ends_with($value, ' ')) {
-            // 转义双引号
+            // 转义双引number
             $value = str_replace('"', '""', $value);
             return '"' . $value . '"';
         }

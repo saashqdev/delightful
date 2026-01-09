@@ -65,7 +65,7 @@ class DocumentFileStrategy
      */
     public function preProcessDocumentFiles(KnowledgeBaseDataIsolation $dataIsolation, array $documentFiles): array
     {
-        // 按类分group
+        // 按categoryminutegroup
         $groupedFiles = [];
         foreach ($documentFiles as $file) {
             $class = get_class($file);
@@ -73,7 +73,7 @@ class DocumentFileStrategy
         }
 
         $result = [];
-        // 对each个分group分别process
+        // 对eachminutegroupminute别process
         foreach ($groupedFiles as $class => $files) {
             $driver = $this->getImplement($files[0]);
             if ($driver) {
@@ -91,7 +91,7 @@ class DocumentFileStrategy
     }
 
     /**
-     * 替换content中的image为 DelightfulCompressibleContent tag.
+     * 替换contentmiddle的image为 DelightfulCompressibleContent tag.
      */
     private function replaceImages(string $content, KnowledgeBaseDataIsolation $dataIsolation, ?string $knowledgeBaseCode = null): string
     {

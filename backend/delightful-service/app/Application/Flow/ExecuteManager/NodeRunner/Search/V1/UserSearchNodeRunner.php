@@ -78,7 +78,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
             $departmentIds = array_column($departmentUsers, 'department_id');
 
             $departments = $departmentDomain->getDepartmentByIds($contactDataIsolation, $departmentIds, true);
-            // 添加 path 去again查一次
+            // 添加 path 去again查一time
             foreach ($departments as $department) {
                 $pathDepartments = explode('/', $department->getPath());
                 $departmentIds = array_merge($departmentIds, $pathDepartments);
@@ -97,7 +97,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
                 $phoneDesensitization = true;
             }
             foreach ($delightfulUsers as $delightfulUser) {
-                // ifnot是人类，filter
+                // ifnot是人category，filter
                 if ($delightfulUser->getUserType() !== UserType::Human) {
                     continue;
                 }
@@ -142,7 +142,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         $executionData->saveNodeContext($this->node->getNodeId(), $result);
     }
 
-    // -------- by下method十分粗暴，notsuggestion学习 🔞🈲 --------  todo etc es or flink cdc 之类的出来againoptimize
+    // -------- bydownmethod十minute粗暴，notsuggestion学习 🔞🈲 --------  todo etc es or flink cdc 之category的出来againoptimize
 
     private function getUserIdsByUsername(Operator $operator, OperatorType $operatorType, mixed $username, ?array $filterUserIds = null): array
     {
@@ -377,7 +377,7 @@ class UserSearchNodeRunner extends AbstractSearchNodeRunner
         if (empty($departmentPaths)) {
             return [];
         }
-        // get这些department的所have下级departmentid
+        // get这些department的所havedownleveldepartmentid
         $departmentSubIds = $this->getAllChildrenByDepartmentIds($operator, $departmentPaths);
         $departmentIds = array_merge(array_keys($departmentPaths), $departmentSubIds);
         $userDB = DepartmentUserModel::query()

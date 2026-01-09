@@ -167,7 +167,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAssembler::createAgentV1Response($delightfulAgentVO, $delightfulFlowDTO);
     }
 
-    // get企业内部的助理
+    // get企业inside部的助理
     public function getAgentsByOrganization(RequestInterface $request)
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -247,7 +247,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->getReleaseAgentVersions($authenticatable, $agentId);
     }
 
-    // get助理most新version号
+    // get助理most新versionnumber
     public function getAgentMaxVersion(RequestInterface $request, ?string $agentId = null)
     {
         /** @var DelightfulUserAuthorization $authorization */
@@ -327,13 +327,13 @@ class DelightfulAgentApi extends AbstractApi
         return $delightfulAgentVersionEntity->toArray();
     }
 
-    // get交互指令type
+    // get交互finger令type
     public function getInstructTypeOptions()
     {
         return InstructType::getTypeOptions();
     }
 
-    // get交互指令grouptype
+    // get交互finger令grouptype
     public function getInstructGroupTypeOptions()
     {
         return InstructGroupPosition::getTypeOptions();
@@ -363,7 +363,7 @@ class DelightfulAgentApi extends AbstractApi
         return $this->delightfulAgentAppService->saveInstruct($authenticatable, $agentId, $instructs);
     }
 
-    // getchat模式可use助理list
+    // getchat模type可use助理list
     public function getChatModeAvailableAgents()
     {
         /** @var DelightfulUserAuthorization $authenticatable */
@@ -375,10 +375,10 @@ class DelightfulAgentApi extends AbstractApi
         // createpaginationobject
         $page = $this->createPage();
 
-        // getall量data
+        // getallquantitydata
         $data = $this->delightfulAgentAppService->getChatModeAvailableAgents($authenticatable, $query);
 
-        // in API 层conductpaginationprocess
+        // in API layerconductpaginationprocess
         return AgentAssembler::createChatModelAvailableList($page, $data['total'], $data['list']);
     }
 }

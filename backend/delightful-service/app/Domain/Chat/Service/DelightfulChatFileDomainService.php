@@ -34,7 +34,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     }
 
     /**
-     * 判断user的message中，whethercontain本次他想download的file.
+     * 判断user的messagemiddle，whethercontain本time他想download的file.
      * @param DelightfulChatFileEntity[] $fileDTOs
      * @return DelightfulChatFileEntity[]
      */
@@ -63,7 +63,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
             $messageEntities[$entity->getDelightfulMessageId()] = $entity;
         }
 
-        // 给 $fileDTOs 加上 delightful_message_id
+        // 给 $fileDTOs 加up delightful_message_id
         foreach ($fileDTOs as $fileDTO) {
             $messageId = $fileDTO->getMessageId();
             /* @var DelightfulChatFileEntity $fileDTO */
@@ -73,7 +73,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
             }
         }
 
-        // 判断user的message中，whethercontain本次他想download的file
+        // 判断user的messagemiddle，whethercontain本time他想download的file
         $fileMaps = [];
         foreach ($fileDTOs as $fileDTO) {
             $delightfulMessageId = $fileDTO->getDelightfulMessageId();
@@ -117,9 +117,9 @@ class DelightfulChatFileDomainService extends AbstractDomainService
      * iffile_key已存in，thenupdatefileinfo
      * iffile_keynot存in，thencreate新file.
      *
-     * @param DelightfulChatFileEntity $fileEntity file实体
+     * @param DelightfulChatFileEntity $fileEntity file实body
      * @param DataIsolation $dataIsolation data隔离
-     * @return DelightfulChatFileEntity saveorupdate后的file实体
+     * @return DelightfulChatFileEntity saveorupdateback的file实body
      */
     public function saveOrUpdateByFileKey(DelightfulChatFileEntity $fileEntity, DataIsolation $dataIsolation): DelightfulChatFileEntity
     {
@@ -145,7 +145,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     }
 
     /**
-     * 判断user的message中的attachment是not是他自己upload的.
+     * 判断user的messagemiddle的attachment是not是他自己upload的.
      * @param ChatAttachment[] $attachments
      * @return ChatAttachment[]
      */
@@ -154,7 +154,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
         $fileIds = array_column($attachments, 'file_id');
         $fileEntities = $this->getFileEntitiesByFileIds($fileIds);
         $fileEntities = array_column($fileEntities, null, 'file_id');
-        // todo ifmessage中havefile:1.判断file的所have者whether是currentuser;2.判断userwhetherreceive过这些file。
+        // todo ifmessagemiddlehavefile:1.判断file的所have者whether是currentuser;2.判断userwhetherreceive过这些file。
         //        foreach ($fileEntities as $fileEntity) {
         //            if ($fileEntity->getUserId() !== $dataIsolation->getCurrentUserId()) {
         //                ExceptionBuilder::throw(ChatErrorCode::FILE_NOT_FOUND);

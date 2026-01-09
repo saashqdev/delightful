@@ -17,7 +17,7 @@ use Qbhy\HyperfAuth\Authenticatable;
 class DelightfulFlowVersionAppService extends AbstractFlowAppService
 {
     /**
-     * queryversion列table.
+     * queryversioncolumntable.
      * @return array{total: int, list: array<DelightfulFlowVersionEntity>, users: array}
      */
     public function queries(Authenticatable $authorization, DelightfulFLowVersionQuery $query, Page $page): array

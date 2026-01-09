@@ -33,7 +33,7 @@ class MCPServerRepository extends MCPAbstractRepository implements MCPServerRepo
 
     /**
      * @param array<int> $ids
-     * @return array<int, MCPServerEntity> returnbyid为key的实体objectarray
+     * @return array<int, MCPServerEntity> returnbyid为key的实bodyobjectarray
      */
     public function getByIds(MCPDataIsolation $dataIsolation, array $ids): array
     {

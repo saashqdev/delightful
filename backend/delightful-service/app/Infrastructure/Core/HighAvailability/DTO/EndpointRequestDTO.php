@@ -12,13 +12,13 @@ use App\Infrastructure\Core\HighAvailability\ValueObject\LoadBalancingType;
 use App\Infrastructure\Core\HighAvailability\ValueObject\StatisticsLevel;
 
 /**
- * 接入点request DTO.
+ * 接入pointrequest DTO.
  * useat封装 getAvailableEndpoint method的requestparameter.
  */
 class EndpointRequestDTO extends AbstractDTO
 {
     /**
-     * 端点type/modelID.
+     * 端pointtype/modelID.
      */
     protected string $endpointType;
 
@@ -33,13 +33,13 @@ class EndpointRequestDTO extends AbstractDTO
     protected ?string $provider = null;
 
     /**
-     * 端点name (optional).
+     * 端pointname (optional).
      */
     protected ?string $endpointName = null;
 
     /**
-     * 上次选择的接入点ID (optional).
-     * useatconversation延续etc场景，优先选择上次use的接入点.
+     * uptime选择的接入pointID (optional).
+     * useatconversation延续etc场景，优先选择uptimeuse的接入point.
      */
     protected ?string $lastSelectedEndpointId = null;
 
@@ -49,12 +49,12 @@ class EndpointRequestDTO extends AbstractDTO
     protected LoadBalancingType $balancingType = LoadBalancingType::RANDOM;
 
     /**
-     * statistics级别.
+     * statisticslevel别.
      */
     protected StatisticsLevel $statisticsLevel = StatisticsLevel::LEVEL_MINUTE;
 
     /**
-     * statisticstimerange（分钟）.
+     * statisticstimerange（minute钟）.
      */
     protected int $timeRange = 30;
 
@@ -147,12 +147,12 @@ class EndpointRequestDTO extends AbstractDTO
 
     public function setTimeRange(int $timeRange): static
     {
-        $this->timeRange = max(1, $timeRange); // ensuretimerangeat least为1分钟
+        $this->timeRange = max(1, $timeRange); // ensuretimerangeat least为1minute钟
         return $this;
     }
 
     /**
-     * checkwhetherhave上次选择的接入点ID.
+     * checkwhetherhaveuptime选择的接入pointID.
      */
     public function hasLastSelectedEndpointId(): bool
     {

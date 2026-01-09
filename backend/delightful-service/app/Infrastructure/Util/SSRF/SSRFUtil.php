@@ -10,7 +10,7 @@ namespace App\Infrastructure\Util\SSRF;
 use Throwable;
 
 /**
- * SSRF防御tool类.
+ * SSRF防御toolcategory.
  *
  * useexample：
  * // 简单use，defaultconfiguration
@@ -19,7 +19,7 @@ use Throwable;
  * // customizeparameter
  * $safeUrl = SSRFUtil::getSafeUrl('https://example.com', replaceIp: false, allowRedirect: true);
  *
- * // 高级configuration
+ * // 高levelconfiguration
  * $safeUrl = SSRFUtil::getSafeUrl(
  *     'https://example.com',
  *     blackList: ['192.168.1.1'],
@@ -39,7 +39,7 @@ class SSRFUtil
      * @param bool $replaceIp whether替换为IPaccess
      * @param bool $allowRedirect whetherallow重定to
      * @return string security的URL
-     * @throws Exception\SSRFException whenURLnotsecurity时throwexception
+     * @throws Exception\SSRFException whenURLnotsecurityo clockthrowexception
      */
     public static function getSafeUrl(
         string $url,
@@ -92,7 +92,7 @@ class SSRFUtil
      * getURL对应的IP.
      *
      * @param string $url URL
-     * @return null|string IP地址ornull（ifparsefail）
+     * @return null|string IPground址ornull（ifparsefail）
      */
     public static function getUrlIp(string $url): ?string
     {

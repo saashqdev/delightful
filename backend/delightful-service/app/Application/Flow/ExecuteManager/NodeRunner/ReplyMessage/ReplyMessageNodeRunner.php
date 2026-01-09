@@ -57,10 +57,10 @@ class ReplyMessageNodeRunner extends NodeRunner
         /** @var ReplyMessageNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        // if具have 大model的streamresponse体，那么直接start
+        // if具have 大model的streamresponsebody，那么直接start
         if ($executionData->getExecutionType()->isSupportStream() && ! empty($frontResults['chat_completion_choice_generator'])) {
             $streamResponse = $this->sendMessageForStream($executionData, $frontResults);
-            // generate大model节点的response给回去
+            // generate大modelsectionpoint的response给回去
             $vertexResult->addDebugLog('llm_stream_response', $streamResponse->getLlmStreamResponse());
             $vertexResult->addDebugLog('llm_stream_reasoning_response', $streamResponse->getLlmStreamReasoningResponse());
             return;
@@ -73,10 +73,10 @@ class ReplyMessageNodeRunner extends NodeRunner
             $paramsConfig->getLinkDesc()
         );
 
-        // if是资源类的data，那么need提前upload了
+        // if是资源category的data，那么need提frontupload了
         $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
-        // 由at里面willconduct重命名，所by这里直接get对应的name传入进去
+        // 由atwithinsurfacewillconduct重命名，所by这within直接get对应的name传入进去
         $linkPaths = array_map(function (AbstractAttachment $attachment) {
             return $attachment->getPath();
         }, $attachments);
@@ -108,7 +108,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $this->sendMessageForStreamApi($executionData, $chatCompletionChoiceGenerator, $streamResponse);
         }
 
-        // Chat call，each次streamall是一条新message
+        // Chat call，eachtimestreamall是一item新message
         if ($executionData->getExecutionType()->isImChat()) {
             $this->sendMessageForStreamIMChat($executionData, $chatCompletionChoiceGenerator, $streamResponse);
         }
@@ -205,7 +205,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                 $receiveSeqDTO->setContent($IMResponse);
                 $receiveSeqDTO->setSeqType($IMResponse->getMessageTypeEnum());
 
-                // todo according tostart节点configuration的话题来选择话题
+                // todo according tostartsectionpointconfiguration的话题来选择话题
 
                 $delightfulChatMessageAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $userId, IdGenerator::getUniqueId32());
             });
@@ -371,7 +371,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                 'line' => $throwable->getLine(),
                 'trace' => $throwable->getTraceAsString(),
             ]);
-            // 报错push兜底message
+            // 报错push兜bottommessage
             $streamOptions->setStatus(StreamMessageStatus::Processing);
             $messageContent = new TextMessage();
             $messageContent->setStreamOptions($streamOptions);
@@ -398,7 +398,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         foreach ($recipientsData as $recipient) {
             $userId = null;
             if (is_array($recipient)) {
-                // 引入一个的time
+                // 引入一的time
                 if (isset($recipient['type'])) {
                     switch ($recipient['type']) {
                         case 'department':
@@ -412,7 +412,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                     }
                     continue;
                 }
-                // 引入多个的time
+                // 引入多的time
                 foreach ($recipient as $item) {
                     if (is_string($item)) {
                         $userIds[] = $item;
@@ -437,7 +437,7 @@ class ReplyMessageNodeRunner extends NodeRunner
             $userIds = array_merge($userIds, $this->getUserIdsByDepartmentIds($executionData, $departmentIds));
         }
 
-        // if为空，兜底currentuser
+        // if为空，兜bottomcurrentuser
         if (empty($userIds)) {
             $userIds[] = $executionData->getOperator()->getUid();
         }

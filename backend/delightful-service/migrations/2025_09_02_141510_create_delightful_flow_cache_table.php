@@ -17,11 +17,11 @@ return new class extends Migration {
         Schema::create('delightful_flow_cache', function (Blueprint $table) {
             $table->id();
             $table->string('cache_hash', 32)->unique()->comment('cache键MD5hashvalue(cache_prefix+cache_key)');
-            $table->string('cache_prefix')->comment('cache前缀');
+            $table->string('cache_prefix')->comment('cachefront缀');
             $table->string('cache_key')->comment('cache键名');
             $table->string('scope_tag', 10)->comment('作use域标识');
             $table->longText('cache_value')->comment('cachevaluecontent');
-            $table->unsignedInteger('ttl_seconds')->default(7200)->comment('TTL秒数（0代表permanentcache）');
+            $table->unsignedInteger('ttl_seconds')->default(7200)->comment('TTLsecond数（0代表permanentcache）');
             $table->timestamp('expires_at')->comment('expiretime戳');
             $table->string('organization_code', 64)->comment('organization隔离');
             $table->string('created_uid', 64)->default('')->comment('create人');

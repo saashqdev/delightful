@@ -14,7 +14,7 @@ use Hyperf\Database\Model\SoftDeletes;
 use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
- * @property int $id 雪花ID
+ * @property int $id 雪flowerID
  * @property string $organization_code organizationencoding
  * @property string $code 唯一encoding
  * @property string $name MCPservicename
@@ -22,7 +22,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $icon MCPservice图标
  * @property string $type servicetype ('sse' or 'stdio')
  * @property bool $enabled whetherenable
- * @property string $external_sse_url 外部SSEserviceURL
+ * @property string $external_sse_url outside部SSEserviceURL
  * @property null|array $service_config serviceconfiguration
  * @property string $creator create者
  * @property DateTime $created_at creation time

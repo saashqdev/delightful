@@ -58,7 +58,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * get节点configurationtemplate.
+     * getsectionpointconfigurationtemplate.
      */
     public function getNodeTemplate(Authenticatable $authorization, Node $node): Node
     {
@@ -66,7 +66,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * 单节点debug.
+     * 单sectionpointdebug.
      */
     public function singleDebugNode(Authenticatable $authorization, Node $node, array $nodeContexts = [], array $triggerConfig = []): ?NodeDebugResult
     {
@@ -100,7 +100,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
             executionType: ExecutionType::Debug,
         );
         $executionData->setFlowCode('single_debug');
-        // 计算 trigger_config 中的 node_contexts
+        // 计算 trigger_config middle的 node_contexts
         $nodeContextsComponent = ComponentFactory::fastCreate($triggerConfig['node_contexts'] ?? []);
         if ($nodeContextsComponent?->isForm()) {
             $nodeContextsResult = $nodeContextsComponent->getForm()->getKeyValue();
@@ -145,7 +145,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
     }
 
     /**
-     * save节点.
+     * savesectionpoint.
      */
     public function saveNode(Authenticatable $authorization, DelightfulFlowEntity $delightfulFlowEntity): DelightfulFlowEntity
     {
@@ -243,7 +243,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $dataIsolation = $this->createFlowDataIsolation($authorization);
         $permissionDataIsolation = $this->createPermissionDataIsolation($dataIsolation);
         $query->setType(Type::Tools->value);
-        // 一定是指定query的tool codes
+        // 一定是finger定query的tool codes
         if (empty($query->getCodes())) {
             return ['total' => 0, 'list' => []];
         }
@@ -255,7 +255,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         )[$authorization->getId()] ?? [];
         $toolSetIds = array_keys($toolSetResources);
 
-        // againfilter一下enable的tool集
+        // againfilter一downenable的tool集
         $toolSetQuery = new DelightfulFlowToolSetQuery();
         $toolSetQuery->setCodes($toolSetIds);
         $toolSetQuery->setEnabled(true);
@@ -269,7 +269,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $query->setEnabled(true);
         $data = $this->delightfulFlowDomainService->queries($dataIsolation, $query, $page);
 
-        // 增加系统内置tool
+        // 增加系统inside置tool
         foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
             foreach ($builtInToolSet->getTools() as $builtInTool) {
                 if ($builtInTool->isShow() && in_array($builtInTool->getCode(), $query->getCodes())) {
@@ -308,13 +308,13 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $toolSetQuery->setOrder(['updated_at' => 'desc']);
         $toolSetData = $this->delightfulFlowToolSetDomainService->queries($dataIsolation, $toolSetQuery, $page);
 
-        // 增加系统内置tool集
+        // 增加系统inside置tool集
         $builtInTools = [];
         if ($withBuiltInTools) {
             foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
                 $toolSetData['list'][] = $builtInToolSet->generateToolSet();
                 foreach ($builtInToolSet->getTools() as $builtInTool) {
-                    // 私havetool，needhave高级图像convertURIpermission才能显示
+                    // 私havetool，needhave高level图像convertURIpermission才能显示
                     if ($builtInTool->getCode() === 'ai_image_image_convert_high'
                         && ! PermissionChecker::mobileHasPermission($authorization->getMobile(), SuperPermissionEnum::FLOW_ADMIN)
                     ) {
@@ -344,13 +344,13 @@ class DelightfulFlowAppService extends AbstractFlowAppService
         $toolQuery->setOrder(['updated_at' => 'desc']);
         $toolResult = $this->delightfulFlowDomainService->queries($dataIsolation, $toolQuery, $page);
 
-        // 增加系统内置tool
+        // 增加系统inside置tool
         /** @var BuiltInToolInterface $builtInTool */
         foreach ($builtInTools as $builtInTool) {
             $toolResult['list'][] = $builtInTool->generateToolFlow($dataIsolation->getCurrentOrganizationCode());
         }
 
-        // 挂载totool上面
+        // 挂载totoolupsurface
         foreach ($toolResult['list'] as $tool) {
             $index = array_search($tool->getToolSetId(), $toolSetIds);
             if ($index === false) {
@@ -396,7 +396,7 @@ class DelightfulFlowAppService extends AbstractFlowAppService
 
         $query = new KnowledgeBaseQuery();
         $query->setCodes(array_keys($resources));
-        // 目前仅get自建文本的knowledge base
+        // 目front仅get自建文本的knowledge base
         $query->setTypes([KnowledgeType::UserKnowledgeBase->value]);
         $query->setEnabled(true);
         $knowledgeData = $this->delightfulFlowKnowledgeDomainService->queries($this->createKnowledgeBaseDataIsolation($dataIsolation), $query, $page);

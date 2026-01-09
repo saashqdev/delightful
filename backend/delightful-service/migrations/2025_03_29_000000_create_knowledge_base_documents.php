@@ -21,14 +21,14 @@ return new class extends Migration {
             // associatefield
             $table->string('knowledge_base_code', 255)->comment('associateknowledge basecode')->index();
 
-            // document元data
+            // documentyuandata
             $table->string('name', 255)->comment('documentname');
             $table->string('description', 255)->comment('description');
             $table->string('code', 255)->comment('documentcode');
             $table->unsignedInteger('version')->default(1)->comment('version');
             $table->boolean('enabled')->default(true)->comment('1 enable 0 disable');
             $table->unsignedInteger('doc_type')->comment('documenttype');
-            $table->json('doc_metadata')->nullable()->comment('document元data');
+            $table->json('doc_metadata')->nullable()->comment('documentyuandata');
             $table->tinyInteger('sync_status')->default(0)->comment('syncstatus');
             $table->tinyInteger('sync_times')->default(0)->comment('synccount');
             $table->string('sync_status_message', 1000)->default('')->comment('syncstatusmessage');
@@ -37,17 +37,17 @@ return new class extends Migration {
 
             // configurationinfo
             $table->string('embedding_model', 255)->comment('嵌入model');
-            $table->string('vector_db', 255)->comment('to量database');
+            $table->string('vector_db', 255)->comment('toquantitydatabase');
             $table->json('retrieve_config')->nullable()->comment('检索configuration');
-            $table->json('fragment_config')->nullable()->comment('分段configuration');
+            $table->json('fragment_config')->nullable()->comment('minutesegmentconfiguration');
             $table->json('embedding_config')->nullable()->comment('嵌入configuration');
-            $table->json('vector_db_config')->nullable()->comment('to量databaseconfiguration');
+            $table->json('vector_db_config')->nullable()->comment('toquantitydatabaseconfiguration');
 
             // 操作record
             $table->string('created_uid', 255)->comment('create者ID');
             $table->string('updated_uid', 255)->comment('update者ID');
 
-            // statustime点
+            // statustimepoint
             $table->datetimes();
             $table->softDeletes();
 

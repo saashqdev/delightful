@@ -47,7 +47,7 @@ class DelightfulFlowMultiModalLogRepository extends DelightfulFlowAbstractReposi
     }
 
     /**
-     * 批量get多个messageID对应的多模态logrecord.
+     * 批quantityget多messageID对应的多模statelogrecord.
      *
      * @param array<string> $messageIds
      * @return array<DelightfulFlowMultiModalLogEntity>

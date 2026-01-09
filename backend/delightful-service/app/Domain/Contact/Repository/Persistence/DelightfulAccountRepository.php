@@ -119,7 +119,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
             return [];
         }
         $sqlQuery = $this->accountModel::query();
-        // 判断 $query whetherall部是中文,orlengthgreater than3
+        // 判断 $query whetherall部是middle文,orlengthgreater than3
         if (preg_match('/^[\x{4e00}-\x{9fa5}]+$/u', $query) || strlen($query) > 3) {
             $sqlQuery->where('real_name', 'like', "%{$query}%");
         }
@@ -149,7 +149,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
         // update
         $accountData = $accountDTO->toArray();
         $this->updateAccount($accountDTO->getDelightfulId(), $accountData);
-        # 防止 $accountDTO 中parameternotall,again查一次library
+        # 防止 $accountDTO middleparameternotall,again查一timelibrary
         return $this->getDelightfulEntityWithoutCache($accountDTO->getDelightfulId());
     }
 
@@ -187,7 +187,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
 
     private function getDelightfulEntityWithoutCache(string $delightfulId): ?AccountEntity
     {
-        # 防止 $accountDTO 中parameternotall,again查一次library
+        # 防止 $accountDTO middleparameternotall,again查一timelibrary
         $account = $this->accountModel::query()->where('delightful_id', $delightfulId);
         $account = Db::select($account->toSql(), $account->getBindings())[0] ?? null;
         if (empty($account)) {
@@ -196,7 +196,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
         return UserAssembler::getAccountEntity($account);
     }
 
-    // 避免 redis cacheserialize的object,占usetoo多内存
+    // 避免 redis cacheserialize的object,占usetoo多inside存
     #[Cacheable(prefix: 'accountDelightfulId', ttl: 60)]
     private function getAccountInfo(string $delightfulId): ?array
     {
@@ -204,7 +204,7 @@ readonly class DelightfulAccountRepository implements DelightfulAccountRepositor
         return Db::select($query->toSql(), $query->getBindings())[0] ?? null;
     }
 
-    // 避免 redis cacheserialize的object,占usetoo多内存
+    // 避免 redis cacheserialize的object,占usetoo多inside存
     #[Cacheable(prefix: 'accountAiCode', ttl: 60)]
     private function getAccountArrayByAiCode(string $aiCode): ?array
     {

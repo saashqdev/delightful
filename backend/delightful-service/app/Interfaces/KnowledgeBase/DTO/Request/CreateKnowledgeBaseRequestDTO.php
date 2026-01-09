@@ -161,7 +161,7 @@ class CreateKnowledgeBaseRequestDTO extends AbstractRequestDTO
             'document_files.*.key' => 'required_if:document_files.*.type,1|string',
             'document_files.*.third_file_id' => 'required_if:document_files.*.type,2|string',
             'document_files.*.platform_type' => 'required_if:document_files.*.type,2|string',
-            // 分段setting
+            // minutesegmentsetting
             'fragment_config' => 'array',
             'fragment_config.mode' => 'integer|in:1,2',
             'fragment_config.normal' => 'required_if:fragment_config.mode,1|array',

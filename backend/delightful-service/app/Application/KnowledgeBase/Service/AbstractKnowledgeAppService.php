@@ -72,7 +72,7 @@ abstract class AbstractKnowledgeAppService extends AbstractKernelAppService
         ?string $documentCode = null,
         ?int $fragmentId = null,
     ): Operation {
-        // if传了片段id，thengetdocument对应的knowledge basecode和documentcode，并conduct校验
+        // if传了slicesegmentid，thengetdocument对应的knowledge basecode和documentcode，并conduct校验
         if ($fragmentId) {
             $fragment = $this->knowledgeBaseFragmentDomainService->show($dataIsolation, $fragmentId);
             if ($knowledgeBaseCode !== $fragment->getKnowledgeCode() || $documentCode !== $fragment->getDocumentCode()) {

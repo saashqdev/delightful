@@ -13,7 +13,7 @@ use BackedEnum;
 use Hyperf\Di\Annotation\AbstractAnnotation;
 
 /**
- * permission校验annotation，useatmethodor类上statement所需的permission。
+ * permission校验annotation，useatmethodorcategoryupstatement所需的permission。
  *
  * example：
  * #[CheckPermission(DelightfulResourceEnum::CONSOLE_API_ASSISTANT, DelightfulOperationEnum::QUERY)]
@@ -22,12 +22,12 @@ use Hyperf\Di\Annotation\AbstractAnnotation;
 class CheckPermission extends AbstractAnnotation
 {
     /**
-     * 资源标识（support单个or多个）。
+     * 资源标识（support单or多）。
      */
     public array|string $resource;
 
     /**
-     * 操作标识（仅support单个）。
+     * 操作标识（仅support单）。
      */
     public string $operation;
 
@@ -53,7 +53,7 @@ class CheckPermission extends AbstractAnnotation
 
     /**
      * return所havepermission键group合（resources x operations 的笛卡尔积）。
-     * whenstatement了多个资源or多个操作时，permissionpass任意一个键即可。
+     * whenstatement了多资源or多操作o clock，permissionpass任意一键即可。
      *
      * @return array<string>
      */

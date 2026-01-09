@@ -14,21 +14,21 @@ use App\Domain\Provider\Entity\ValueObject\ProviderDataIsolation;
 use App\Domain\Provider\Entity\ValueObject\Status;
 
 /**
- * organization下的 Delightful service商及model的相关interface（non官方organization才have Delightful service商）.
+ * organizationdown的 Delightful service商及model的相关interface（non官方organization才have Delightful service商）.
  */
 interface DelightfulProviderAndModelsInterface
 {
     /**
-     * getorganization下的 Delightful service商configuration（not containmodeldetail）.
+     * getorganizationdown的 Delightful service商configuration（not containmodeldetail）.
      */
     public function getDelightfulProvider(ProviderDataIsolation $dataIsolation, Category $category, ?Status $status = null): ?ProviderConfigDTO;
 
     /**
-     * according toorganizationencoding和类别get Delightful service商modellist.
+     * according toorganizationencoding和category别get Delightful service商modellist.
      *
      * @param string $organizationCode organizationencoding
-     * @param null|Category $category service商类别，为空时return所havecategorymodel
-     * @return array<ProviderModelEntity> Delightful service商model实体array
+     * @param null|Category $category service商category别，为空o clockreturn所havecategorymodel
+     * @return array<ProviderModelEntity> Delightful service商model实bodyarray
      */
     public function getDelightfulEnableModels(string $organizationCode, ?Category $category = null): array;
 
@@ -37,7 +37,7 @@ interface DelightfulProviderAndModelsInterface
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string $modelParentId model父ID
-     * @return null|ProviderModelEntity 找to的organizationmodel实体，not存inthenreturnnull
+     * @return null|ProviderModelEntity 找to的organizationmodel实body，not存inthenreturnnull
      */
     public function getDelightfulModelByParentId(ProviderDataIsolation $dataIsolation, string $modelParentId): ?ProviderModelEntity;
 
@@ -45,15 +45,15 @@ interface DelightfulProviderAndModelsInterface
      * according toIDgetorganization Delightful model.
      *
      * @param int $id modelID`
-     * @return null|ProviderModelEntity 找to的model实体，not存inthenreturnnull
+     * @return null|ProviderModelEntity 找to的model实body，not存inthenreturnnull
      */
     public function getDelightfulModelById(int $id): ?ProviderModelEntity;
 
     /**
-     * non官方organizationupdate Delightful modelstatus（写时复制逻辑）.
+     * non官方organizationupdate Delightful modelstatus（写o clock复制逻辑）.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
-     * @param ProviderModelEntity $officialModel 官方model实体
+     * @param ProviderModelEntity $officialModel 官方model实body
      * @return string organizationmodelID
      */
     public function updateDelightfulModelStatus(

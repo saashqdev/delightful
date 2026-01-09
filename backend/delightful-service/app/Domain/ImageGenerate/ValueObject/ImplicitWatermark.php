@@ -12,7 +12,7 @@ use DateTime;
 
 use function Hyperf\Config\config;
 
-// 隐式水印
+// 隐type水印
 class ImplicitWatermark
 {
     protected string $userId;
@@ -30,7 +30,7 @@ class ImplicitWatermark
     public function __construct()
     {
         $this->createdAt = new DateTime();
-        // settingdefaultsignature，insettinguserinformation后will自动encrypt
+        // settingdefaultsignature，insettinguserinformationbackwill自动encrypt
         $this->sign = 'be_delightful';
     }
 
@@ -116,7 +116,7 @@ class ImplicitWatermark
             'userId' => $this->userId,
             'organizationCode' => $this->organizationCode,
             'createdAt' => $this->createdAt->format('Y-m-d H:i:s'),
-            'sign' => $this->sign, // usedecrypt后的signature
+            'sign' => $this->sign, // usedecryptback的signature
         ];
 
         if ($this->topicId !== '') {

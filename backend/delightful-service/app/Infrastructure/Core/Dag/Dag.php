@@ -17,22 +17,22 @@ use SplStack;
 class Dag implements Runner
 {
     /**
-     * etc待mode.（节点只allow运行一次）.
+     * etc待mode.（sectionpoint只allow运line一time）.
      */
     public const int WAITING_MODE = 1;
 
     /**
-     * nonetc待mode.（节点allow运行多次）.
+     * nonetc待mode.（sectionpointallow运line多time）.
      */
     public const int NON_WAITING_MODE = 2;
 
     /**
-     * 并发运行.
+     * 并hair运line.
      */
     public const int CONCURRENCY_RUNNING_MODE = 1;
 
     /**
-     * non并发运行.
+     * non并hair运line.
      */
     public const int NON_CONCURRENCY_RUNNING_MODE = 2;
 
@@ -42,12 +42,12 @@ class Dag implements Runner
     protected array $vertexes = [];
 
     /**
-     * 节点etc待mode.
+     * sectionpointetc待mode.
      */
     protected int $nodeWaitingMode = self::WAITING_MODE;
 
     /**
-     * 运行mode.
+     * 运linemode.
      */
     protected int $runningMode = self::CONCURRENCY_RUNNING_MODE;
 

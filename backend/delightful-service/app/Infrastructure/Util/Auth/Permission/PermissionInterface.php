@@ -13,9 +13,9 @@ interface PermissionInterface
      * 判断whetherorganization管理员.
      *
      * @param string $organizationCode organizationencoding
-     * @param string $mobile 手机号
+     * @param string $mobile hand机number
      *
-     * @return bool whether超级管理员
+     * @return bool whether超level管理员
      */
     public function isOrganizationAdmin(string $organizationCode, string $mobile): bool;
 

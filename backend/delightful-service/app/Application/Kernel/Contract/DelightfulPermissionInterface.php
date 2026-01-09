@@ -41,7 +41,7 @@ interface DelightfulPermissionInterface
     /**
      * getpermission树结构.
      *
-     * @param bool $isPlatformOrganization whether平台organization，平台organization下才contain platform 平台的资源树
+     * @param bool $isPlatformOrganization whether平台organization，平台organizationdown才contain platform 平台的资源树
      */
     public function getPermissionTree(bool $isPlatformOrganization = false): array;
 
@@ -61,12 +61,12 @@ interface DelightfulPermissionInterface
     public function getOperationLabel(string $operation): string;
 
     /**
-     * get资源的模块.
+     * get资源的模piece.
      */
     public function getResourceModule(string $resource): string;
 
     /**
-     * checkuserpermission集合中whethercontain指定permission（考虑隐式contain）。
+     * checkuserpermission集合middlewhethercontainfinger定permission（考虑隐typecontain）。
      */
     public function checkPermission(string $permissionKey, array $userPermissions, bool $isPlatformOrganization = false): bool;
 }

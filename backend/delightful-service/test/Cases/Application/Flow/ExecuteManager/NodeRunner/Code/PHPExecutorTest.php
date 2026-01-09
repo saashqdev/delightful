@@ -61,11 +61,11 @@ PHP;
     {
         $code = <<<'PHP'
 $response = trim($result);
-// if $response by ```json 开头then去except
+// if $response by ```json 开headthen去except
 if (str_starts_with($response, '```json')) {
     $response = substr($response, 7);
 }
-// if $response by ``` 结尾then去except
+// if $response by ``` 结tailthen去except
 if (str_ends_with($response, '```')) {
     $response = substr($response, 0, -3);
 }

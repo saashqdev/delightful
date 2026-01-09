@@ -45,7 +45,7 @@ class SSRFDefense
         $this->isValid($allowRedirect);
 
         $url = $this->url;
-        // 替换成 ip access，此时needinrequest中添加 Host 才行
+        // 替换become ip access，此o clockneedinrequestmiddle添加 Host 才line
         if ($this->options->isReplaceIp()) {
             $url = str_replace($this->host, $this->ip, $url);
         }
@@ -162,12 +162,12 @@ class SSRFDefense
     {
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_NOBODY, true);              // 只getHTTP头，notdownloadbody
+        curl_setopt($ch, CURLOPT_NOBODY, true);              // 只getHTTPhead，notdownloadbody
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_FOLLOWLOCATION, false);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);                // timeout5秒
-        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);         // connecttimeout3秒
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);                // timeout5second
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);         // connecttimeout3second
         curl_setopt($ch, CURLOPT_MAXREDIRS, 0);              // not跟随重定to
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);      // verifySSL证书
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);         // verifySSL主机

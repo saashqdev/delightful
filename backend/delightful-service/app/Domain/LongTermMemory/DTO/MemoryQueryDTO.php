@@ -42,7 +42,7 @@ class MemoryQueryDTO extends AbstractDTO
     // pagination相关
     public ?string $pageToken = null;
 
-    public int $offset = 0; // 偏移量
+    public int $offset = 0; // 偏移quantity
 
     public function __construct(?array $data = [])
     {

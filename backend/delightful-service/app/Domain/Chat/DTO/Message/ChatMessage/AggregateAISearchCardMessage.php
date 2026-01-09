@@ -36,7 +36,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
 
     protected ?array $associateQuestions = null;
 
-    // 这里要compatible老version的jsondata
+    // 这within要compatible老version的jsondata
     protected null|array|string $mindMap = null;
 
     protected ?array $searchKeywords = null;
@@ -105,7 +105,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
     public function setLlmResponse(?string $llmResponse): self
     {
         $this->llmResponse = $llmResponse;
-        // 外部implementalso是读的 content，这里also同给 content 赋value
+        // outside部implementalso是读的 content，这withinalso同给 content 赋value
         isset($llmResponse) && $this->content = $llmResponse;
         return $this;
     }
@@ -243,7 +243,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
     public function setContent(string $content): static
     {
         $this->setLlmResponse($content);
-        // 外部implementalso是读的 content，这里also同给 content 赋value
+        // outside部implementalso是读的 content，这withinalso同给 content 赋value
         $this->content = $content;
         return $this;
     }

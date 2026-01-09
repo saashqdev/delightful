@@ -34,7 +34,7 @@ class DelightfulOrganizationEnvDomainService
 
     public function getOrCreateOrganizationsEnvironment(string $originOrganizationCode, DelightfulEnvironmentEntity $delightfulEnvEntity): DelightfulOrganizationEnvEntity
     {
-        // 加自旋lock防并发
+        // 加自旋lock防并hair
         $spinLockKey = sprintf('getOrCreateOrganizationsEnvironment:envId:%s', $delightfulEnvEntity->getId());
         $owner = random_bytes(8);
         $this->lock->spinLock($spinLockKey, $owner);
@@ -175,7 +175,7 @@ class DelightfulOrganizationEnvDomainService
     }
 
     /**
-     * current环境default的 env configuration。 access saas 时allow前端not传环境 id，usedefault的环境configuration。
+     * current环境default的 env configuration。 access saas o clockallowfront端not传环境 id，usedefault的环境configuration。
      */
     public function getCurrentDefaultDelightfulEnv(): ?DelightfulEnvironmentEntity
     {

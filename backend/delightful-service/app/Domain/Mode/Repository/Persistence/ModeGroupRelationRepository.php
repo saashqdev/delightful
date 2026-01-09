@@ -101,7 +101,7 @@ class ModeGroupRelationRepository extends AbstractRepository implements ModeGrou
     }
 
     /**
-     * according to多个modeID批量getassociate关系.
+     * according to多modeID批quantitygetassociate关系.
      * @param int[]|string[] $modeIds
      * @return ModeGroupRelationEntity[]
      */

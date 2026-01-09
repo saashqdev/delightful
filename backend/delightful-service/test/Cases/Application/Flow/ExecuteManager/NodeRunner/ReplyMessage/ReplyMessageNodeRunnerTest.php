@@ -142,7 +142,7 @@ JSON, true));
                     "member_value": [
                         {
                             "id": "7272364210894970891",
-                            "name": "技术中心",
+                            "name": "技术middlecore",
                             "type": "department",
                             "avatar": ""
                         },

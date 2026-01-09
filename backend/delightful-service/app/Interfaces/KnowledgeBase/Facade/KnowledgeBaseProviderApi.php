@@ -17,7 +17,7 @@ use Delightful\ApiResponse\Annotation\ApiResponse;
 class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
 {
     /**
-     * get官方重sort提供商列表.
+     * get官方重sort提供商column表.
      * @return array<ProviderConfigModelsDTO>
      */
     public function getOfficialRerankProviderList(): array
@@ -32,13 +32,13 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
         $dto->setStatus(1); // 1 表示enable
         $dto->setCreatedAt(date('Y-m-d H:i:s'));
 
-        // settingmodel列表
+        // settingmodelcolumn表
         $models = [];
 
         // 基础重sortmodel
         $baseModel = new ProviderModelDetailDTO();
         $baseModel->setId('official_rerank_model');
-        $baseModel->setName('官方重排model');
+        $baseModel->setName('官方重rowmodel');
         $baseModel->setModelVersion('v1.0');
         $baseModel->setDescription('基础重sortmodel，适useatgeneral场景');
         $baseModel->setIcon('');
@@ -55,7 +55,7 @@ class KnowledgeBaseProviderApi extends AbstractKnowledgeBaseApi
     }
 
     /**
-     * get嵌入提供商列表.
+     * get嵌入提供商column表.
      * @return array<ProviderConfigModelsDTO>
      */
     public function getEmbeddingProviderList(): array

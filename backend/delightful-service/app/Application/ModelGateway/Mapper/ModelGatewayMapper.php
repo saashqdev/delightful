@@ -35,7 +35,7 @@ use InvalidArgumentException;
 use Throwable;
 
 /**
- * 集合project本身多套的 ModelGatewayMapper - finalall部convert为 odin model parameterformat.
+ * 集合project本身多set的 ModelGatewayMapper - finalall部convert为 odin model parameterformat.
  */
 class ModelGatewayMapper extends ModelMapper
 {
@@ -80,8 +80,8 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 内部use chat 时，一定是use该method.
-     * will自动替代为本地代理model.
+     * inside部use chat o clock，一定是use该method.
+     * will自动替代为本ground代理model.
      */
     public function getChatModelProxy(BaseDataIsolation $dataIsolation, string $model, bool $useOfficialAccessToken = false): DelightfulAILocalModel
     {
@@ -97,8 +97,8 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * 内部use embedding 时，一定是use该method.
-     * will自动替代为本地代理model.
+     * inside部use embedding o clock，一定是use该method.
+     * will自动替代为本ground代理model.
      */
     public function getEmbeddingModelProxy(BaseDataIsolation $dataIsolation, string $model): DelightfulAILocalModel
     {
@@ -118,7 +118,7 @@ class ModelGatewayMapper extends ModelMapper
     /**
      * 该methodgetto的一定是真实call的model.
      * 仅 ModelGateway 领域use.
-     * @param string $model expected是管理后台的 model_id，过度阶段接受传入 model_version
+     * @param string $model expected是管理back台的 model_id，过degree阶segment接受传入 model_version
      */
     public function getOrganizationChatModel(BaseDataIsolation $dataIsolation, string $model): ModelInterface|OdinModel
     {
@@ -133,7 +133,7 @@ class ModelGatewayMapper extends ModelMapper
     /**
      * 该methodgetto的一定是真实call的model.
      * 仅 ModelGateway 领域use.
-     * @param string $model modelname expected是管理后台的 model_id，过度阶段接受 model_version
+     * @param string $model modelname expected是管理back台的 model_id，过degree阶segment接受 model_version
      */
     public function getOrganizationEmbeddingModel(BaseDataIsolation $dataIsolation, string $model): EmbeddingInterface|OdinModel
     {
@@ -159,7 +159,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * getcurrentorganization下的所have可use chat model.
+     * getcurrentorganizationdown的所have可use chat model.
      * @return OdinModel[]
      */
     public function getChatModels(BaseDataIsolation $dataIsolation): array
@@ -169,7 +169,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * getcurrentorganization下的所have可use embedding model.
+     * getcurrentorganizationdown的所have可use embedding model.
      * @return OdinModel[]
      */
     public function getEmbeddingModels(BaseDataIsolation $dataIsolation): array
@@ -222,7 +222,7 @@ class ModelGatewayMapper extends ModelMapper
 
     protected function loadEnvModels(): void
     {
-        // env 添加的model增加上 attributes
+        // env 添加的model增加up attributes
         /**
          * @var string $name
          * @var AbstractModel $model
@@ -267,7 +267,7 @@ class ModelGatewayMapper extends ModelMapper
     }
 
     /**
-     * getcurrentorganization下指定type的所have可usemodel.
+     * getcurrentorganizationdownfinger定type的所have可usemodel.
      * @return OdinModel[]
      */
     private function getModelsByType(ModelGatewayDataIsolation $dataIsolation, ModelType $modelType): array
@@ -289,13 +289,13 @@ class ModelGatewayMapper extends ModelMapper
                     }
                     break;
                 default:
-                    // ifnothave指定type，thenall部添加
+                    // ifnothavefinger定type，thenall部添加
                     break;
             }
             $list[$name] = new OdinModel(key: $name, model: $model, attributes: $this->attributes[$name]);
         }
 
-        // getcurrent套餐下的可usemodel
+        // getcurrentset餐down的可usemodel
         $availableModelIds = $dataIsolation->getSubscriptionManager()->getAvailableModelIds($modelType);
 
         // needcontain官方organization的data
@@ -400,7 +400,7 @@ class ModelGatewayMapper extends ModelMapper
             // customizeservice商统一显示别名，ifnothave别名then显示“customizeservice商”（need考虑多语言）
             $providerName = $providerConfigEntity->getLocalizedAlias($providerDataIsolation->getLanguage());
         } else {
-            // 内置service商的统一显示 service商name，notuse显示别名（need考虑多语言）
+            // inside置service商的统一显示 service商name，notuse显示别名（need考虑多语言）
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 
@@ -484,7 +484,7 @@ class ModelGatewayMapper extends ModelMapper
             return null;
         }
 
-        // checkcurrent套餐whetherhave这个model的usepermission - 目前only LLM modelhave这个限制
+        // checkcurrentset餐whetherhave这model的usepermission - 目frontonly LLM modelhave这限制
         if ($providerModelEntity->getModelType()->isLLM()) {
             if (! $dataIsolation->isOfficialOrganization() && ! $dataIsolation->getSubscriptionManager()->isValidModelAvailable($providerModelEntity->getModelId(), $modelType)) {
                 $this->logger->info('modelnotin可use名单', ['model' => $providerModelEntity->getModelId(), 'model_type' => $modelType?->value]);

@@ -23,12 +23,12 @@ class SimpleJWT
     }
 
     /**
-     * 颁发token.
+     * 颁hairtoken.
      */
     public function issueToken(array $data, int $expires = 7200): array
     {
         $token = [
-            'iss' => app_name(), // 签发者 optional
+            'iss' => app_name(), // 签hair者 optional
             'aud' => '', // receive该JWT的一方，optional
             'exp' => time() + $expires, // expiretime
             'data' => $data, // customizedata

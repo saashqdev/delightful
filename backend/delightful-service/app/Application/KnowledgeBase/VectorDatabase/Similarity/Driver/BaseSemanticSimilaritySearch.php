@@ -30,14 +30,14 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
 
     public function search(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeSimilarityFilter $filter, KnowledgeBaseEntity $knowledgeBaseEntity, RetrieveConfig $retrieveConfig): array
     {
-        // 场景verify， if开启重新sort，can多召回data，然后according to得分conductsort，取 limit ，at mostnot超过 20 or者 limit 上限
+        // 场景verify， if开启重新sort，can多召回data，然backaccording to得minuteconductsort，取 limit ，at mostnot超过 20 or者 limit up限
         $queryNum = $filter->getLimit();
         if ($retrieveConfig->isRerankingEnable()) {
-            // if开启重sort，增加召回quantity，butnot超过20ororiginallimit的3倍
+            // if开启重sort，增加召回quantity，butnot超过20ororiginallimit的3times
             $maxLimit = min(20, $queryNum * 3);
             $filter->setLimit($maxLimit);
         }
-        // 兜底solution
+        // 兜bottomsolution
         $question = $filter->getQuestion();
         if ($question === '') {
             $question = $filter->getQuery();
@@ -46,7 +46,7 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
         $modelGatewayMapper = di(ModelGatewayMapper::class);
 
         $result = [];
-        // according tomodelconductto量化
+        // according tomodelconducttoquantity化
         $model = $modelGatewayMapper->getEmbeddingModelProxy($dataIsolation, $knowledgeBaseEntity->getModel());
         $embeddingGenerator = di(EmbeddingGeneratorInterface::class);
         $queryEmbeddings = $embeddingGenerator->embedText($model, $question, options: [
@@ -88,7 +88,7 @@ class BaseSemanticSimilaritySearch implements SemanticSimilaritySearchInterface
         //                return $b['relevance_score'] <=> $a['relevance_score'];
         //            });
         //
-        //            // according tosort后的result重新排列 $result array
+        //            // according tosortback的result重新rowcolumn $result array
         //            $sortedResult = [];
         //            foreach ($rerankResult as $item) {
         //                $sortedResult[] = $result[$item['index']];

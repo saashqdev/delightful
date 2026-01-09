@@ -52,26 +52,26 @@ interface ProviderModelRepositoryInterface
     /**
      * getorganization可usemodellist（containorganization自己的model和Delightfulmodel）.
      * @param ProviderDataIsolation $dataIsolation data隔离object
-     * @param null|Category $category modelcategory，为空时return所havecategorymodel
+     * @param null|Category $category modelcategory，为空o clockreturn所havecategorymodel
      * @return ProviderModelEntity[] 按sort降序sort的modellist，containorganizationmodel和Delightfulmodel（not去重）
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, Status $status = Status::Enabled): array;
 
     /**
-     * 批量according toIDgetmodel.
+     * 批quantityaccording toIDgetmodel.
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $ids modelIDarray
-     * @return ProviderModelEntity[] model实体array，byID为键
+     * @return ProviderModelEntity[] model实bodyarray，byID为键
      */
     public function getByIds(ProviderDataIsolation $dataIsolation, array $ids): array;
 
     public function getModelByIdWithoutOrgFilter(string $id): ?ProviderModelEntity;
 
     /**
-     * 批量according toModelIDgetmodel.
+     * 批quantityaccording toModelIDgetmodel.
      * @param ProviderDataIsolation $dataIsolation data隔离object
      * @param string[] $modelIds model标识array
-     * @return array<string, ProviderModelEntity[]> model实体array，bymodel_id为键，value为对应的modellist
+     * @return array<string, ProviderModelEntity[]> model实bodyarray，bymodel_id为键，value为对应的modellist
      */
     public function getByModelIds(ProviderDataIsolation $dataIsolation, array $modelIds): array;
 
@@ -81,11 +81,11 @@ interface ProviderModelRepositoryInterface
     public function queries(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query, Page $page): array;
 
     /**
-     * according toquery条件get按modeltype分group的modelIDlist.
+     * according toqueryitemitemget按modeltypeminutegroup的modelIDlist.
      *
      * @param ProviderDataIsolation $dataIsolation data隔离object
-     * @param ProviderModelQuery $query query条件
-     * @return array<string, array<string>> 按modeltype分group的modelIDarray，format: [modelType => [model_id, model_id]]
+     * @param ProviderModelQuery $query queryitemitem
+     * @return array<string, array<string>> 按modeltypeminutegroup的modelIDarray，format: [modelType => [model_id, model_id]]
      */
     public function getModelIdsGroupByType(ProviderDataIsolation $dataIsolation, ProviderModelQuery $query): array;
 }

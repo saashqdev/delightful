@@ -141,7 +141,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
      */
     public function getDocumentCountByKnowledgeBaseCode(KnowledgeBaseDataIsolation $dataIsolation, array $knowledgeBaseCodes): array
     {
-        // 分group聚合query，geteach个knowledge base的documentquantity
+        // minutegroup聚合query，geteachknowledge base的documentquantity
         $res = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query())
             ->select('knowledge_base_code', Db::raw('count(*) as count'))
             ->groupBy('knowledge_base_code')
@@ -160,7 +160,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
      */
     public function getDocumentsByCodes(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, array $knowledgeBaseDocumentCodes): array
     {
-        // geteach个document的document名
+        // geteachdocument的document名
         $res = $this->createBuilder($dataIsolation, KnowledgeBaseDocumentModel::query())
             ->where('knowledge_base_code', $knowledgeBaseCode)
             ->whereIn('code', $knowledgeBaseDocumentCodes)
@@ -214,7 +214,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * 查看单个knowledge basedocumentdetail.
+     * 查看单knowledge basedocumentdetail.
      */
     public function show(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode, bool $selectForUpdate = false): ?KnowledgeBaseDocumentEntity
     {
@@ -244,7 +244,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
     }
 
     /**
-     * according todocumentencodingdelete所have片段.
+     * according todocumentencodingdelete所haveslicesegment.
      */
     public function destroyFragmentsByDocumentCode(KnowledgeBaseDataIsolation $dataIsolation, string $knowledgeBaseCode, string $documentCode): void
     {
@@ -349,7 +349,7 @@ class KnowledgeBaseDocumentRepository extends KnowledgeBaseAbstractRepository im
             $builder->where('updated_uid', $query->getUpdatedUid());
         }
 
-        // 按documentencodingarray批量query
+        // 按documentencodingarray批quantityquery
         if ($query->getCodes() !== null && ! empty($query->getCodes())) {
             $builder->whereIn('code', $query->getCodes());
         }

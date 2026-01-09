@@ -12,7 +12,7 @@ use Hyperf\Codec\Json;
 
 class FluxAPI
 {
-    // requesttimeouttime（秒）
+    // requesttimeouttime（second）
     protected const REQUEST_TIMEOUT = 30;
 
     protected string $apiKey;

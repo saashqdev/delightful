@@ -20,7 +20,7 @@ use Delightful\FlowExprEngine\ComponentFactory;
 #[FlowNodeDefine(
     type: NodeType::VariableArrayPush->value,
     code: NodeType::VariableArrayPush->name,
-    name: '变量 / array尾部追加',
+    name: '变quantity / arraytail部追加',
     paramsConfig: VariableArrayPushNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,
@@ -49,7 +49,7 @@ class VariableArrayPushNodeRunner extends NodeRunner
             ExceptionBuilder::throw(FlowErrorCode::ExecuteValidateFailed, 'flow.node.variable.variable_not_array', ['var_name' => $variableName]);
         }
         $elementList = $result['element_list'];
-        // if变量value是pass表达式get的，是when做one整体
+        // if变quantityvalue是pass表达typeget的，是when做one整body
         if ($inputFields->getForm()->getProperties()['element_list']->getExecuteValue()?->isExpression()) {
             $elementList = [$elementList];
         }

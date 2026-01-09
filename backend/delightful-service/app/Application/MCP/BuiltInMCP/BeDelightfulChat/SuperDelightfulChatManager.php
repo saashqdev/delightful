@@ -89,7 +89,7 @@ class BeDelightfulChatManager
         $hasAgents = false;
         $allInstructions = [];
 
-        // 2. generate一份大modelcalltool可阅读的description
+        // 2. generate一share大modelcalltool可阅读的description
         $description = <<<'MARKDOWN'
 call麦吉 AI 助理conductconversation
 
@@ -108,10 +108,10 @@ MARKDOWN;
                 $agent->getId(),
                 $agent->getAgentName(),
                 $agent->getAgentDescription() ?: '暂无description',
-                $instructionDescription ? "\n  可use指令: {$instructionDescription}" : ''
+                $instructionDescription ? "\n  可usefinger令: {$instructionDescription}" : ''
             );
 
-            // 收集所have指令infouseatgenerate schema
+            // 收集所havefinger令infouseatgenerate schema
             if ($instruction) {
                 $allInstructions[$agent->getId()] = $instruction;
             }
@@ -122,26 +122,26 @@ MARKDOWN;
         $usageInstructions = <<<'MARKDOWN'
 useinstruction：
 • must提供 agent_id 和 message parameter
-• conversation_id useat保持conversation连续性，sameID的messagewill共享上下文
+• conversation_id useat保持conversation连续property，sameID的messagewill共享updown文
 
 MARKDOWN;
 
         $description .= $usageInstructions;
 
-        // 添加指令parameterinstruction
+        // 添加finger令parameterinstruction
         if (! empty($allInstructions)) {
             $instructionHelp = <<<'MARKDOWN'
-指令parameter instruction（optional）：
-• format：[{"name": "指令name", "value": "指令value"}, ...]
-• 单选type：fromoptionalvalue中选择一个，for example "yes", "no"
+finger令parameter instruction（optional）：
+• format：[{"name": "finger令name", "value": "finger令value"}, ...]
+• 单选type：fromoptionalvaluemiddle选择一，for example "yes", "no"
 • 开关type：只能是 "on" or "off"
-• ifnot提供指令parameter，将usedefaultvalue
+• ifnot提供finger令parameter，将usedefaultvalue
 
 callexample：
 ```json
 {
   "agent_id": "123456",
-  "message": "你好，请帮我analyze一下...",
+  "message": "你好，请帮我analyze一down...",
   "conversation_id": "conv_001",
   "instruction": [
     {"name": "开关", "value": "on"},
@@ -159,7 +159,7 @@ MARKDOWN;
             return [];
         }
 
-        // generate指令的 JSON Schema
+        // generatefinger令的 JSON Schema
         $instructionSchema = self::generateInstructionSchema($allInstructions);
 
         $registeredAgent = new RegisteredTool(
@@ -178,7 +178,7 @@ MARKDOWN;
                         ],
                         'conversation_id' => [
                             'type' => 'string',
-                            'description' => 'sessionID，useat记忆feature，samesessionID的message将具have共享的上下文',
+                            'description' => 'sessionID，useat记忆feature，samesessionID的message将具have共享的updown文',
                         ],
                         'instruction' => $instructionSchema,
                     ],
@@ -267,17 +267,17 @@ MARKDOWN;
     {
         $schema = [
             'type' => 'array',
-            'description' => '指令parameterarray，useat控制AI助理的行为。each个objectcontain name（指令name）和 value（指令value）field。单选type指令needfromoptionalvalue中选择一个，开关type指令只能是 "on" or "off"。',
+            'description' => 'finger令parameterarray，useat控制AI助理的line为。eachobjectcontain name（finger令name）和 value（finger令value）field。单选typefinger令needfromoptionalvaluemiddle选择一，开关typefinger令只能是 "on" or "off"。',
             'items' => [
                 'type' => 'object',
                 'properties' => [
                     'name' => [
                         'type' => 'string',
-                        'description' => '指令name，must与AI助理定义的指令name完all匹配',
+                        'description' => 'finger令name，must与AI助理定义的finger令name完all匹配',
                     ],
                     'value' => [
                         'type' => 'string',
-                        'description' => '指令value，单选typefromoptionalvalue中选择，开关type只能是 "on" or "off"',
+                        'description' => 'finger令value，单选typefromoptionalvaluemiddle选择，开关type只能是 "on" or "off"',
                     ],
                 ],
                 'required' => ['name', 'value'],
@@ -285,7 +285,7 @@ MARKDOWN;
             ],
         ];
 
-        // ifhavespecific的指令info，generatemore详细的 schema
+        // ifhavespecific的finger令info，generatemore详细的 schema
         if (! empty($allInstructions)) {
             $examples = [];
             foreach ($allInstructions as $instructions) {

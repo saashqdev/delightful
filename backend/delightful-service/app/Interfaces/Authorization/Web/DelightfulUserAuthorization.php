@@ -23,24 +23,24 @@ use App\Infrastructure\Core\Exception\ExceptionBuilder;
 use Qbhy\HyperfAuth\Authenticatable;
 
 /**
- * if改了这个类的name/property/命名空间，请修改 WebUserGuard.php 的 cacheKey ，避免cache无法also原
+ * if改了这category的name/property/命名空between，请修改 WebUserGuard.php 的 cacheKey ，避免cache无法also原
  */
 class DelightfulUserAuthorization extends AbstractAuthorization
 {
     /**
-     * 账号insome个organization下的id,即user_id.
+     * 账numberinsomeorganizationdown的id,即user_id.
      */
     protected string $id = '';
 
     /**
-     * userregister后generate的delightful_id,all局唯一
+     * userregisterbackgenerate的delightful_id,all局唯一
      */
     protected string $delightfulId = '';
 
     protected UserType $userType;
 
     /**
-     * userin该organization下的status:0:freeze,1:activated,2:已离职,3:已exit.
+     * userin该organizationdown的status:0:freeze,1:activated,2:已离职,3:已exit.
      */
     protected string $status;
 
@@ -58,12 +58,12 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     protected string $applicationCode = '';
 
     /**
-     * 手机号,not带国际冠码
+     * hand机number,not带国际冠码
      */
     protected string $mobile = '';
 
     /**
-     * 手机号的国际冠码
+     * hand机number的国际冠码
      */
     protected string $countryCode = '';
 
@@ -72,13 +72,13 @@ class DelightfulUserAuthorization extends AbstractAuthorization
     // currentuser所处的环境id
     protected int $delightfulEnvId = 0;
 
-    // 第三方平台的originalorganizationencoding
+    // the三方平台的originalorganizationencoding
     protected string $thirdPlatformOrganizationCode = '';
 
-    // 第三方平台的originaluser ID
+    // the三方平台的originaluser ID
     protected ?string $thirdPlatformUserId = '';
 
-    // 第三方平台type
+    // the三方平台type
     protected ?PlatformType $thirdPlatformType = null;
 
     public function __construct()
@@ -99,7 +99,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
 
         $beDelightfulAgentUserId = $key['beDelightfulAgentUserId'] ?? '';
         if ($beDelightfulAgentUserId) {
-            // process超级麦吉的 agent user
+            // process超level麦吉的 agent user
             $sandboxToken = config('be-delightful.sandbox.token', '');
             if (empty($sandboxToken) || $sandboxToken !== $authorization) {
                 ExceptionBuilder::throw(UserErrorCode::TOKEN_NOT_FOUND, 'token error');
@@ -111,7 +111,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
             goto create_user;
         }
 
-        // 多环境下 $authorization 可能重复，willhaveissue（概率趋近无穷小）
+        // 多环境down $authorization 可能重复，willhaveissue（概rate趋近无穷小）
         $delightfulEnvEntity = $delightfulEnvDomainService->getEnvironmentEntityByAuthorization($authorization);
         if ($delightfulEnvEntity === null) {
             $delightfulEnvEntity = $delightfulEnvDomainService->getCurrentDefaultDelightfulEnv();
@@ -120,7 +120,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
                 ExceptionBuilder::throw(ChatErrorCode::Delightful_ENVIRONMENT_NOT_FOUND);
             }
         }
-        // if是麦吉自己下发的 Token,then由自己校验
+        // if是麦吉自己downhair的 Token,then由自己校验
         $loginCheckDTO = new LoginCheckDTO();
         $loginCheckDTO->setAuthorization($authorization);
         /** @var LoginResponseDTO[] $currentEnvDelightfulOrganizationUsers */

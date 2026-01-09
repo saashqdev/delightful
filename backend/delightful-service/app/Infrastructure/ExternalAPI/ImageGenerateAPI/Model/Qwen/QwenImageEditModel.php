@@ -119,7 +119,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     {
         $rawResults = $this->generateImageRawInternal($imageGenerateRequest);
 
-        // fromnativeresult中提取imageURL - 适配newresponseformat output.choices
+        // fromnativeresultmiddle提取imageURL - 适配newresponseformat output.choices
         $imageUrls = [];
         foreach ($rawResults as $index => $result) {
             $output = $result['output'];
@@ -141,7 +141,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * generate图像的核心逻辑，returnnativeresult - synccall.
+     * generate图像的核core逻辑，returnnativeresult - synccall.
      */
     private function generateImageRawInternal(ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -158,7 +158,7 @@ class QwenImageEditModel extends AbstractImageGenerate
             'image_count' => count($imageGenerateRequest->getImageUrls()),
         ]);
 
-        // 直接handle单个request，图像edit只handle一张image
+        // 直接handle单request，图像edit只handle一张image
         try {
             $result = $this->callSyncEditAPI($imageGenerateRequest);
             $rawResults = [
@@ -215,7 +215,7 @@ class QwenImageEditModel extends AbstractImageGenerate
             // checkwhetherhave图像data
             $choices = $response['output']['choices'];
             if (empty($choices)) {
-                $this->logger->error('通义千问图像edit：response中缺少图像data', ['response' => $response]);
+                $this->logger->error('通义千问图像edit：responsemiddle缺少图像data', ['response' => $response]);
                 ExceptionBuilder::throw(ImageGenerateErrorCode::MISSING_IMAGE_DATA);
             }
 
@@ -235,7 +235,7 @@ class QwenImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * 为通义千问edit模式originaldata添加水印 - 适配newchoicesformat.
+     * 为通义千问edit模typeoriginaldata添加水印 - 适配newchoicesformat.
      */
     private function processQwenEditRawDataWithWatermark(array $rawData, ImageGenerateRequest $imageGenerateRequest): array
     {
@@ -258,14 +258,14 @@ class QwenImageEditModel extends AbstractImageGenerate
                         // handleURLformat的image
                         $content['image'] = $this->watermarkProcessor->addWatermarkToUrl($content['image'], $imageGenerateRequest);
                     } catch (Exception $e) {
-                        // 水印handlefail时，recorderrorbutnot影响imagereturn
+                        // 水印handlefailo clock，recorderrorbutnot影响imagereturn
                         $this->logger->error('通义千问图像edit水印handlefail', [
                             'index' => $index,
                             'choiceIndex' => $choiceIndex,
                             'contentIndex' => $contentIndex,
                             'error' => $e->getMessage(),
                         ]);
-                        // continuehandle下一张image，currentimage保持originalstatus
+                        // continuehandledown一张image，currentimage保持originalstatus
                     }
                 }
             }
@@ -301,14 +301,14 @@ class QwenImageEditModel extends AbstractImageGenerate
     }
 
     /**
-     * 将通义千问editimagedata添加toOpenAIresponseobject中.
+     * 将通义千问editimagedata添加toOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponseQwenEdit(
         OpenAIFormatResponse $response,
         array $qwenResult,
         ImageGenerateRequest $imageGenerateRequest
     ): void {
-        // from通义千问editresponse中提取data
+        // from通义千问editresponsemiddle提取data
         if (empty($qwenResult['output']['choices']) || ! is_array($qwenResult['output']['choices'])) {
             return;
         }
@@ -335,7 +335,7 @@ class QwenImageEditModel extends AbstractImageGenerate
                         'error' => $e->getMessage(),
                         'url' => $content['image'],
                     ]);
-                    // 水印handlefail时useoriginalURL
+                    // 水印handlefailo clockuseoriginalURL
                 }
 
                 $currentData[] = [

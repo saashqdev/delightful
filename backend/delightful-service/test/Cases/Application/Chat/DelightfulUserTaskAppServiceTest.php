@@ -94,7 +94,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $userTask->setTopicId('749639569880518657');
         $userTask->setCreator('usi_3715ce50bc02d7e72ba7891649b7f1da');
         $userTask->setNickname('xxx');
-        $userTask->setName('customizeeach两周重复task-2');
+        $userTask->setName('customizeeach两week重复task-2');
         $userTask->setAgentId('737330322528899073');
         $userTask->setDay('');
         $userTask->setTime('16:00');
@@ -119,7 +119,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $userTask->setTopicId('749639569880518657');
         $userTask->setCreator('usi_3715ce50bc02d7e72ba7891649b7f1da');
         $userTask->setNickname('xxx');
-        $userTask->setName('testcustomize重复task-月');
+        $userTask->setName('testcustomize重复task-month');
         $userTask->setAgentId('737330322528899073');
         $userTask->setDay('');
         $userTask->setTime('22:00');
@@ -145,7 +145,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $userTask->setTopicId('749639569880518657');
         $userTask->setCreator('usi_3715ce50bc02d7e72ba7891649b7f1da');
         $userTask->setNickname('xxx');
-        $userTask->setName('testcustomize重复年task');
+        $userTask->setName('testcustomize重复yeartask');
         $userTask->setAgentId('737330322528899073');
         $userTask->setDay('2025-02-27');
         $userTask->setTime('13:00');

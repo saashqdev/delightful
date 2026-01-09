@@ -22,7 +22,7 @@ use Throwable;
 
 /**
  * ASR presetfileservice
- * 负责createpreset笔记和stream识别file，供前端writecontent.
+ * 负责createpreset笔记和stream识别file，供front端writecontent.
  */
 readonly class AsrPresetFileService
 {
@@ -63,7 +63,7 @@ readonly class AsrPresetFileService
         $projectEntity = $this->projectDomainService->getProject($projectId, $userId);
         $workDir = $projectEntity->getWorkDir();
 
-        // getorganization码+APP_ID+bucket_md5前缀
+        // getorganization码+APP_ID+bucket_md5front缀
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($organizationCode);
 
         // create笔记file（放in显示directory，user可见）
@@ -103,7 +103,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * delete笔记file（笔记content为空时清理）.
+     * delete笔记file（笔记content为空o clock清理）.
      *
      * @param string $fileId fileID
      * @return bool whetherdeletesuccess
@@ -135,7 +135,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * deletestream识别file（总结complete后清理）.
+     * deletestream识别file（总结completeback清理）.
      *
      * @param string $fileId fileID
      * @return bool whetherdeletesuccess
@@ -260,7 +260,7 @@ readonly class AsrPresetFileService
         // 完整 file_key
         $fileKey = AsrAssembler::buildFileKey($fullPrefix, $workDir, $relativePath);
 
-        // 元data
+        // yuandata
         $metadata = [
             'asr_preset_file' => true,
             'file_type' => $fileType,
@@ -279,7 +279,7 @@ readonly class AsrPresetFileService
             'file_name' => $fileName,
             'file_extension' => 'md',
             'file_key' => $fileKey,
-            'file_size' => 0, // initial为0，前端write后willupdate
+            'file_size' => 0, // initial为0，front端writebackwillupdate
             'external_url' => '',
             'storage_type' => 'workspace',
             'is_hidden' => $isHidden,

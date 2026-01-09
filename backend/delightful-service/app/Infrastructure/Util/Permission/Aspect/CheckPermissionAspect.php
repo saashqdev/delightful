@@ -22,7 +22,7 @@ use Hyperf\Di\Aop\ProceedingJoinPoint;
 class CheckPermissionAspect extends AbstractAspect
 {
     /**
-     * need拦截的annotation列表.
+     * need拦截的annotationcolumn表.
      */
     public array $annotations = [
         CheckPermission::class,
@@ -38,18 +38,18 @@ class CheckPermissionAspect extends AbstractAspect
         /** @var null|CheckPermission $permissionAnnotation */
         $permissionAnnotation = $annotationMetadata->method[CheckPermission::class] ?? $annotationMetadata->class[CheckPermission::class] ?? null;
 
-        // 若无annotation，直接放行
+        // 若无annotation，直接放line
         if ($permissionAnnotation === null) {
             return $proceedingJoinPoint->process();
         }
 
-        // getwhen前loginuserauthorizationinformation
+        // getwhenfrontloginuserauthorizationinformation
         $authorization = RequestCoContext::getUserAuthorization();
         if ($authorization === null) {
             ExceptionBuilder::throw(PermissionErrorCode::AccessDenied, 'permission.error.access_denied');
         }
 
-        // buildpermission键（support多个，任一满足即pass）
+        // buildpermission键（support多，任一满足即pass）
         $permissionKeys = method_exists($permissionAnnotation, 'getPermissionKeys')
             ? $permissionAnnotation->getPermissionKeys()
             : [$permissionAnnotation->getPermissionKey()];
@@ -60,7 +60,7 @@ class CheckPermissionAspect extends AbstractAspect
             $authorization->getId()
         );
 
-        // executepermission校验：任意onepermission键passthen放行
+        // executepermission校验：任意onepermission键passthen放line
         $hasPermission = false;
         foreach ($permissionKeys as $permissionKey) {
             if ($this->roleAppService->hasPermission($dataIsolation, $authorization->getId(), $permissionKey)) {

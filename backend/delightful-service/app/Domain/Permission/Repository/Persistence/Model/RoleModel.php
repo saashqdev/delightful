@@ -19,7 +19,7 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property string $name rolename
  * @property array $permission_key rolepermissionlist
  * @property string $organization_code organizationencoding
- * @property null|array $permission_tag permissiontag，useat前端展示category
+ * @property null|array $permission_tag permissiontag，useatfront端展示category
  * @property int $is_display whether显示
  * @property int $status status: 0=disable, 1=enable
  * @property null|string $created_uid create者userID
@@ -46,7 +46,7 @@ class RoleModel extends AbstractModel
     protected ?string $table = 'delightful_roles';
 
     /**
-     * 可批量赋value的property.
+     * 可批quantity赋value的property.
      */
     protected array $fillable = [
         'id',

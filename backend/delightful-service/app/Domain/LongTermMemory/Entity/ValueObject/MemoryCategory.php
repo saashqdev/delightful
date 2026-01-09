@@ -18,12 +18,12 @@ enum MemoryCategory: string
     case PROJECT = 'project';
 
     /**
-     * all局记忆 - not特定atsome个project的记忆.
+     * all局记忆 - not特定atsomeproject的记忆.
      */
     case GENERAL = 'general';
 
     /**
-     * getcategory的中文name.
+     * getcategory的middle文name.
      */
     public function getDisplayName(): string
     {

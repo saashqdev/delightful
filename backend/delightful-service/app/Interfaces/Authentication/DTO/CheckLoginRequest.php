@@ -35,7 +35,7 @@ class CheckLoginRequest extends AbstractDTO
     protected string $stateCode = '+86';
 
     /**
-     * 手机号.
+     * hand机number.
      */
     protected string $phone = '';
 

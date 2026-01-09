@@ -107,7 +107,7 @@ JSON,
                     "type": "object",
                     "key": "root",
                     "sort": 0,
-                    "title": "root节点",
+                    "title": "rootsectionpoint",
                     "description": "",
                     "required": [
                         "intent"
@@ -150,7 +150,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => '我今天去了广州看了小蛮腰，下次想带我朋友一起去',
+            'intent' => '我今day去了广州看了小蛮腰，downtime想带我朋友一起去',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['456'], $vertexResult->getChildrenIds());
@@ -158,7 +158,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => '我今天吃了糖醋排骨',
+            'intent' => '我今day吃了糖醋rowbone',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['123'], $vertexResult->getChildrenIds());
@@ -251,7 +251,7 @@ JSON,
                     "type": "object",
                     "key": "root",
                     "sort": 0,
-                    "title": "root节点",
+                    "title": "rootsectionpoint",
                     "description": "",
                     "required": [
                         "intent"
@@ -294,7 +294,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'intent' => '我今天去了广州吃了莞城大package，下次想带我朋友一起去',
+            'intent' => '我今day去了广州吃了莞城大package，downtime想带我朋友一起去',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertEquals(['123'], $vertexResult->getChildrenIds());

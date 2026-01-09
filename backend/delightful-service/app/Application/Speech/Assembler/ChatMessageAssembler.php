@@ -35,7 +35,7 @@ readonly class ChatMessageAssembler
      */
     public function buildSummaryMessage(ProcessSummaryTaskDTO $dto, AsrFileDataDTO $audioFileData, ?AsrFileDataDTO $noteFileData = null): ChatRequest
     {
-        // in协程环境中，use di() get translator 实例byensure协程上下文correct
+        // in协程环境middle，use di() get translator 实例byensure协程updown文correct
         $translator = di(TranslatorInterface::class);
         $translator->setLocale(CoContext::getLanguage());
         // buildmessagecontent
@@ -70,12 +70,12 @@ readonly class ChatMessageAssembler
      */
     public function buildMessageContent(string $modelId, AsrFileDataDTO $fileData, ?AsrFileDataDTO $noteData = null): array
     {
-        // in协程环境中，use di() get translator 实例byensure协程上下文correct
+        // in协程环境middle，use di() get translator 实例byensure协程updown文correct
         $translator = di(TranslatorInterface::class);
         $translator->setLocale(CoContext::getLanguage());
         // buildmessagecontent
         if ($noteData !== null && ! empty($noteData->fileName) && ! empty($noteData->filePath)) {
-            // have笔记时的messagecontent：meanwhile提to录音file和笔记file
+            // have笔记o clock的messagecontent：meanwhile提to录音file和笔记file
 
             $messageContent = [
                 [
@@ -112,7 +112,7 @@ readonly class ChatMessageAssembler
                 ],
             ];
         } else {
-            // 无笔记时的messagecontent：只提to录音file
+            // 无笔记o clock的messagecontent：只提to录音file
             $messageContent = [
                 [
                     'type' => 'text',

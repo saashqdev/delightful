@@ -16,7 +16,7 @@ interface DelightfulDepartmentRepositoryInterface
 {
     public function getDepartmentById(string $departmentId, string $organizationCode): ?DelightfulDepartmentEntity;
 
-    // get父department下的一个子department
+    // get父departmentdown的一子department
     public function getDepartmentByParentId(string $departmentId, string $organizationCode): ?DelightfulDepartmentEntity;
 
     /**
@@ -30,16 +30,16 @@ interface DelightfulDepartmentRepositoryInterface
     public function getDepartmentsByIdsInDelightful(array $departmentIds, bool $keyById = false): array;
 
     /**
-     * 批量getdepartment的下n级department.
+     * 批quantitygetdepartment的downnleveldepartment.
      */
     public function getSubDepartmentsById(string $departmentId, string $organizationCode, int $size, int $offset): DepartmentsPageResponseDTO;
 
     /**
-     * getsome一层级的department.
+     * getsome一layerlevel的department.
      */
     public function getSubDepartmentsByLevel(int $level, string $organizationCode, int $depth, int $size, int $offset): DepartmentsPageResponseDTO;
 
-    // 给定的departmentidwhetherhave下级department
+    // 给定的departmentidwhetherhavedownleveldepartment
     #[ArrayShape([
         [
             'parent_department_id' => 'string',
@@ -79,19 +79,19 @@ interface DelightfulDepartmentRepositoryInterface
     public function updateDepartmentsOptionByIds(array $departmentIds, ?DepartmentOption $departmentOption = null): int;
 
     /**
-     * according todepartmentID批量deletedepartment（逻辑delete，set deleted_at field）。
+     * according todepartmentID批quantitydeletedepartment（逻辑delete，set deleted_at field）。
      */
     public function deleteDepartmentsByIds(array $departmentIds, string $organizationCode): int;
 
     /**
-     * getorganization的根departmentID.
+     * getorganization的rootdepartmentID.
      */
     public function getDepartmentRootId(string $organizationCode): ?string;
 
     /**
-     * 批量get多个organization的根departmentinfo.
+     * 批quantityget多organization的rootdepartmentinfo.
      * @param array $organizationCodes organizationcodearray
-     * @return DelightfulDepartmentEntity[] 根department实体array
+     * @return DelightfulDepartmentEntity[] rootdepartment实bodyarray
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array;
 

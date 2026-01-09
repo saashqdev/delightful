@@ -33,7 +33,7 @@ class Template extends AbstractTemplate
     ];
 
     protected array $idContents = [
-        VolcengineTemplateIdEnum::ST_79E262F3->value => '您的verify码是：${verification_code}，valid期 ${timeout} 分钟。请inpage中inputverify码completeverify。如non本人操作，请ignore。',
+        VolcengineTemplateIdEnum::ST_79E262F3->value => '您的verify码是：${verification_code}，valid期 ${timeout} minute钟。请inpagemiddleinputverify码completeverify。如non本人操作，请ignore。',
     ];
 
     /**
@@ -71,11 +71,11 @@ class Template extends AbstractTemplate
 
     /**
      * according to传来的短信文本,parsevariable. onlyvariable的value,未匹配variable的key!
-     * needvariableparse的reason:火山短信只supportvariable短信的send,而业务方will出at创蓝短信的reason,will传来整个短信文本content,nothavevariable.
+     * needvariableparse的reason:火山短信只supportvariable短信的send,而业务方will出at创蓝短信的reason,will传来整短信文本content,nothavevariable.
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
     {
-        // 找to指定的templatevariable正thenparserule. ifnot传模版id,循环正then匹配will降低匹配速度和准确度
+        // 找tofinger定的templatevariable正thenparserule. ifnot传模版id,循环正then匹配will降低匹配speeddegree和准确degree
         if ($templateId) {
             // 判断templatewhether存in
             if (! isset($this->idContents[$templateId])) {
@@ -103,7 +103,7 @@ class Template extends AbstractTemplate
     }
 
     /**
-     * @param array $pregVariableAnalyse ['templateid_xxx'=>'正thentable达式']
+     * @param array $pregVariableAnalyse ['templateid_xxx'=>'正thentable达type']
      */
     private function variablePregMatch(array $pregVariableAnalyse, string $message): array
     {

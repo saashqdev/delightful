@@ -87,7 +87,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * testproject置顶permission控制.
+     * testproject置toppermission控制.
      */
     public function testProjectPinPermission(): void
     {
@@ -97,11 +97,11 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
-        // 2. 切换tohavepermission的usertest置顶success
+        // 2. 切换tohavepermission的usertest置topsuccess
         $this->switchUserTest2();
         $this->pinProject($projectId, true);
 
-        // 3. validate置顶success
+        // 3. validate置topsuccess
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
@@ -111,12 +111,12 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         // 5. 切换tonothavepermission的usertestpermission控制
         $this->switchUserTest2();
-        // testnonprojectmembernot能置顶 - shouldreturnpermissionerror
+        // testnonprojectmembernot能置top - shouldreturnpermissionerror
         $this->pinProject($projectId, true, 51202); // 假设51202是permissionerror码
     }
 
     /**
-     * test置顶feature边界情况.
+     * test置topfeatureside界情况.
      */
     public function testProjectPinEdgeCases(): void
     {
@@ -127,19 +127,19 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateMembers($projectId);
         $this->switchUserTest2();
 
-        // 1. 重复置顶同一个project - should正常handle
+        // 1. 重复置top同一project - should正常handle
         $this->pinProject($projectId, true);
-        $this->pinProject($projectId, true); // 重复置顶
+        $this->pinProject($projectId, true); // 重复置top
 
-        // validateproject仍然是置顶status
+        // validateproject仍然是置topstatus
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
-        // 2. 重复cancel置顶 - should正常handle
+        // 2. 重复cancel置top - should正常handle
         $this->pinProject($projectId, false);
-        $this->pinProject($projectId, false); // 重复cancel置顶
+        $this->pinProject($projectId, false); // 重复cancel置top
 
-        // validateprojectnot是置顶status
+        // validateprojectnot是置topstatus
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, false);
     }
@@ -174,17 +174,17 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertSame(1000, $response['code']);
         $projectId = $response['data']['project']['id'];*/
 
-        // 话题列表
+        // 话题column表
         $workspaceId = $this->workspaceId;
         $projectId = $this->projectId;
 
         $this->updateProject($workspaceId, $projectId);
         $this->updateProject($workspaceId, $projectId);
 
-        // ensurenotwill对原havefeature造成影响
+        // ensurenotwill对原havefeature造become影响
         // create话题
         $topicId = $this->createTopic($workspaceId, $projectId);
-        // 话题列表
+        // 话题column表
         $this->topicList($workspaceId, $projectId);
         // update话题
         $this->renameTopic($workspaceId, $projectId, $topicId);
@@ -220,13 +220,13 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         // 7. 查看projectmember
         $this->projectMember($projectId);
-        // 8. 查看协作project列表
+        // 8. 查看协作projectcolumn表
         $this->collaborationProjects();
         $this->collaborationProjects('test');
 
         // create话题
         $topicId = $this->createTopic($workspaceId, $projectId);
-        // 话题列表
+        // 话题column表
         $this->topicList($workspaceId, $projectId);
         // update话题
         $this->renameTopic($workspaceId, $projectId, $topicId);
@@ -242,10 +242,10 @@ class ProjectMemberApiTest extends AbstractApiTest
         // delete话题
         $this->deleteTopic($workspaceId, $projectId, $topicId);
 
-        // 9. testproject置顶feature
+        // 9. testproject置topfeature
         $this->projectPinFeature($projectId);
 
-        // 10. test协作projectcreate者列表feature
+        // 10. test协作projectcreate者column表feature
         //        $this->collaborationProjectCreatorFeature();
 
         // 11. 清nullnullmember
@@ -504,22 +504,22 @@ class ProjectMemberApiTest extends AbstractApiTest
         // 1. test加入edit
         $this->joinFileEditing($fileId);
 
-        // 2. testgetedituserquantity - shouldhave1个userinedit
+        // 2. testgetedituserquantity - shouldhave1userinedit
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
-        // 3. 切换to另一个user，test多useredit
+        // 3. 切换to另一user，test多useredit
         $this->switchUserTest2();
         $this->joinFileEditing($fileId);
 
-        // 4. again次getedituserquantity - shouldhave2个userinedit
+        // 4. againtimegetedituserquantity - shouldhave2userinedit
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(2, $editingCount);
 
         // 5. test离开edit
         $this->leaveFileEditing($fileId);
 
-        // 6. getedituserquantity - should只剩1个user
+        // 6. getedituserquantity - should只剩1user
         $editingCount = $this->getEditingUsers($fileId);
         $this->assertEquals(1, $editingCount);
 
@@ -609,7 +609,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * testfileedit边界情况.
+     * testfileeditside界情况.
      */
     public function fileEditingEdgeCases(string $fileId): void
     {
@@ -661,37 +661,37 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * testproject置顶feature - 完整processtest.
+     * testproject置topfeature - 完整processtest.
      */
     public function projectPinFeature(string $projectId): void
     {
         // ensurecurrentuser是projectmember
         $this->switchUserTest2();
 
-        // 1. test置顶project
+        // 1. test置topproject
         $this->pinProject($projectId, true);
 
-        // 2. validate协作project列表中projectbe置顶
+        // 2. validate协作projectcolumn表middleprojectbe置top
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, true);
 
-        // 3. testcancel置顶
+        // 3. testcancel置top
         $this->pinProject($projectId, false);
 
-        // 4. validate协作project列表中projectnotagain置顶
+        // 4. validate协作projectcolumn表middleprojectnotagain置top
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyProjectPinStatus($response, $projectId, false);
 
-        // 5. 重新置顶projectbytestsort
+        // 5. 重新置topprojectbytestsort
         $this->pinProject($projectId, true);
 
-        // 6. validate置顶project排in前面
+        // 6. validate置topprojectrowinfrontsurface
         $response = $this->collaborationProjectsWithPinCheck();
         $this->verifyPinnedProjectsAtTop($response);
     }
 
     /**
-     * 置顶orcancel置顶project.
+     * 置toporcancel置topproject.
      */
     public function pinProject(string $projectId, bool $isPinned, int $expectedCode = 1000): array
     {
@@ -707,14 +707,14 @@ class ProjectMemberApiTest extends AbstractApiTest
         if ($expectedCode === 1000) {
             $this->assertEquals('ok', $response['message']);
             $this->assertIsArray($response['data']);
-            $this->assertEmpty($response['data']); // 置顶操作returnnullarray
+            $this->assertEmpty($response['data']); // 置top操作returnnullarray
         }
 
         return $response;
     }
 
     /**
-     * get协作project列表并return完整响applicationat置顶validate.
+     * get协作projectcolumn表并return完整响applicationat置topvalidate.
      */
     public function collaborationProjectsWithPinCheck(): array
     {
@@ -725,7 +725,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data']);
 
-        // validateresponse结构contain置顶相关field
+        // validateresponse结构contain置top相关field
         $this->assertArrayHasKey('list', $response['data'], 'response应containlistfield');
         $this->assertArrayHasKey('total', $response['data'], 'response应containtotalfield');
 
@@ -739,7 +739,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * validateproject的置顶status.
+     * validateproject的置topstatus.
      */
     public function verifyProjectPinStatus(array $response, string $projectId, bool $expectedPinned): void
     {
@@ -753,16 +753,16 @@ class ProjectMemberApiTest extends AbstractApiTest
             }
         }
 
-        $this->assertNotNull($targetProject, "project {$projectId} shouldin协作project列表中");
+        $this->assertNotNull($targetProject, "project {$projectId} shouldin协作projectcolumn表middle");
         $this->assertEquals(
             $expectedPinned,
             $targetProject['is_pinned'],
-            "project {$projectId} 的置顶statusshould为 " . ($expectedPinned ? 'true' : 'false')
+            "project {$projectId} 的置topstatusshould为 " . ($expectedPinned ? 'true' : 'false')
         );
     }
 
     /**
-     * validate置顶project排in列表前面.
+     * validate置topprojectrowincolumn表frontsurface.
      */
     public function verifyPinnedProjectsAtTop(array $response): void
     {
@@ -771,7 +771,7 @@ class ProjectMemberApiTest extends AbstractApiTest
 
         foreach ($projects as $project) {
             if ($project['is_pinned']) {
-                $this->assertFalse($pinnedProjectsEnded, '置顶projectshould排innon置顶project前面');
+                $this->assertFalse($pinnedProjectsEnded, '置topprojectshouldrowinnon置topprojectfrontsurface');
             } else {
                 $pinnedProjectsEnded = true;
             }
@@ -779,16 +779,16 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test协作projectcreate者列表feature - 完整processtest.
+     * test协作projectcreate者column表feature - 完整processtest.
      */
     public function collaborationProjectCreatorFeature(): void
     {
-        // 1. testhavepermissionusergetcreate者列表
+        // 1. testhavepermissionusergetcreate者column表
         $this->switchUserTest2(); // ensure是havepermission的协作user
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
 
-        // 2. testpermission控制 - 清nullmember后无permission
+        // 2. testpermission控制 - 清nullmemberback无permission
         $this->switchUserTest1(); // 切换toproject所have者
         $this->updateEmptyMembers($this->projectId); // 清nullprojectmember
 
@@ -796,13 +796,13 @@ class ProjectMemberApiTest extends AbstractApiTest
         $emptyResponse = $this->getCollaborationProjectCreators();
         $this->verifyEmptyCreatorListResponse($emptyResponse);
 
-        // 3. restoreprojectmemberstatus，by免影响后续test
+        // 3. restoreprojectmemberstatus，by免影响back续test
         $this->switchUserTest1();
         $this->updateMembers($this->projectId);
     }
 
     /**
-     * test协作projectcreate者列表permission控制.
+     * test协作projectcreate者column表permission控制.
      */
     public function testCollaborationProjectCreatorsPermission(): void
     {
@@ -812,7 +812,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->updateMembers($projectId);
 
-        // 2. 切换tohavepermission的usertestgetcreate者列表success
+        // 2. 切换tohavepermission的usertestgetcreate者column表success
         $this->switchUserTest2();
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListResponse($response);
@@ -828,7 +828,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * test协作projectcreate者列表边界情况.
+     * test协作projectcreate者column表side界情况.
      */
     public function testCollaborationProjectCreatorsEdgeCases(): void
     {
@@ -837,20 +837,20 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateMembers($this->projectId);
         $this->switchUserTest2();
 
-        // 1. 多次callAPI - shouldreturn一致result
+        // 1. 多timecallAPI - shouldreturn一致result
         $response1 = $this->getCollaborationProjectCreators();
         $response2 = $this->getCollaborationProjectCreators();
 
         $this->assertEquals($response1['code'], $response2['code']);
         $this->assertEquals(count($response1['data']), count($response2['data']));
 
-        // 2. validatecreate者去重 - 同一create者只should出现一次
+        // 2. validatecreate者去重 - 同一create者只should出现一time
         $response = $this->getCollaborationProjectCreators();
         $this->verifyCreatorListDeduplication($response);
     }
 
     /**
-     * get协作projectcreate者列表.
+     * get协作projectcreate者column表.
      */
     public function getCollaborationProjectCreators(int $expectedCode = 1000): array
     {
@@ -868,7 +868,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * validatecreate者列表response结构.
+     * validatecreate者column表response结构.
      */
     public function verifyCreatorListResponse(array $response): void
     {
@@ -876,8 +876,8 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data'], 'responsedatashould是array');
 
-        // validateat leasthave一个create者
-        $this->assertGreaterThan(0, count($response['data']), 'shouldat leasthave一个create者');
+        // validateat leasthave一create者
+        $this->assertGreaterThan(0, count($response['data']), 'shouldat leasthave一create者');
 
         // validatecreate者data结构
         $creator = $response['data'][0];
@@ -898,18 +898,18 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * validatenullcreate者列表response.
+     * validatenullcreate者column表response.
      */
     public function verifyEmptyCreatorListResponse(array $response): void
     {
         $this->assertEquals(1000, $response['code']);
         $this->assertEquals('ok', $response['message']);
         $this->assertIsArray($response['data'], 'responsedatashould是array');
-        $this->assertEquals(0, count($response['data']), '无permission时shouldreturnnullarray');
+        $this->assertEquals(0, count($response['data']), '无permissiono clockshouldreturnnullarray');
     }
 
     /**
-     * validatecreate者列表去重.
+     * validatecreate者column表去重.
      */
     public function verifyCreatorListDeduplication(array $response): void
     {
@@ -920,7 +920,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertEquals(
             count($userIds),
             count($uniqueUserIds),
-            'create者列表中notshouldhave重复的user_id'
+            'create者column表middlenotshouldhave重复的user_id'
         );
     }
 

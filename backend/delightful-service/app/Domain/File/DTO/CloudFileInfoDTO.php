@@ -45,7 +45,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * getmost后modification time.
+     * getmostbackmodification time.
      */
     public function getLastModified(): ?string
     {
@@ -66,7 +66,7 @@ readonly class CloudFileInfoDTO
     }
 
     /**
-     * convert为array（to后compatible）.
+     * convert为array（tobackcompatible）.
      */
     public function toArray(): array
     {

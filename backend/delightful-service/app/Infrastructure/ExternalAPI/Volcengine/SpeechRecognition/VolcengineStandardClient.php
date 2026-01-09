@@ -449,9 +449,9 @@ class VolcengineStandardClient
 
     /**
      * verify火山engineAPIresponsestatus码
-     * 只useatsubmittask时verifywhethersuccesssubmit（20000000）.
+     * 只useatsubmittasko clockverifywhethersuccesssubmit（20000000）.
      *
-     * @param array $responseHeaders response头array
+     * @param array $responseHeaders responseheadarray
      * @param string $requestId requestID，useatlogrecord
      */
     private function validateApiStatusCode(array $responseHeaders, string $requestId): void

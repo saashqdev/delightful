@@ -19,9 +19,9 @@ return new class extends Migration {
         }
         Schema::create('delightful_tokens', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('type')->default(0)->comment('tokentype. 0:账号,1:user,2:organization,3:application,4:process');
+            $table->unsignedBigInteger('type')->default(0)->comment('tokentype. 0:账number,1:user,2:organization,3:application,4:process');
             $table->string('type_relation_value', 64)->comment(
-                'tokentype对应的value.type为0时,此value为account_id;type为1时,此value为user_id;type为2时,此value为organizationencoding;type为3时,此value为app_id;type为4时,此value为flow_id'
+                'tokentype对应的value.type为0o clock,此value为account_id;type为1o clock,此value为user_id;type为2o clock,此value为organizationencoding;type为3o clock,此value为app_id;type为4o clock,此value为flow_id'
             );
             $table->string('token', 256)->comment('token的value,all局唯一');
             $table->timestamp('expired_at')->comment('expiretime');

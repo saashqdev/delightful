@@ -42,7 +42,7 @@ class DelightfulFlowVersionDomainService extends AbstractDomainService
     }
 
     /**
-     * queryversion列table.
+     * queryversioncolumntable.
      * @return array{total: int, list: array<DelightfulFlowVersionEntity>}
      */
     public function queries(FlowDataIsolation $dataIsolation, DelightfulFLowVersionQuery $query, Page $page): array
@@ -63,7 +63,7 @@ class DelightfulFlowVersionDomainService extends AbstractDomainService
     }
 
     /**
-     * 发版.
+     * hair版.
      */
     #[Transactional]
     public function publish(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow, DelightfulFlowVersionEntity $delightfulFlowVersionEntity): DelightfulFlowVersionEntity

@@ -25,10 +25,10 @@ return new class extends Migration {
 
             if (Schema::hasColumn('delightful_chat_files', 'file_extension')) {
                 // fileextension名
-                $table->string('file_extension', 64)->comment('file后缀')->change();
+                $table->string('file_extension', 64)->comment('fileback缀')->change();
             } else {
                 // fileextension名
-                $table->string('file_extension', 64)->comment('file后缀');
+                $table->string('file_extension', 64)->comment('fileback缀');
             }
 
             if (Schema::hasColumn('delightful_chat_files', 'file_type')) {

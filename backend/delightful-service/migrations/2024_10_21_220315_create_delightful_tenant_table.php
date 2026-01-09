@@ -20,15 +20,15 @@ return new class extends Migration {
         Schema::create('delightful_tenant', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name', 255)->comment('企业name');
-            $table->string('display_id', 255)->comment('企业编号，平台内唯一');
-            $table->tinyInteger('tenant_tag')->default(0)->comment('个人版/team版标志. 1：team版 2：个人版');
+            $table->string('display_id', 255)->comment('企业编number，平台inside唯一');
+            $table->tinyInteger('tenant_tag')->default(0)->comment('人版/team版标志. 1：team版 2：人版');
             $table->string('tenant_key', 32)->comment('企业标识');
             $table->text('avatar')->comment('企业avatar');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['tenant_key'], 'index_tenant_key');
             $table->index(['display_id'], 'index_display_id');
-            $table->comment('企业name、企业编号etc企业information');
+            $table->comment('企业name、企业编numberetc企业information');
         });
     }
 

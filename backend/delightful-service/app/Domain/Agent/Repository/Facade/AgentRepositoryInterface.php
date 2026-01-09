@@ -15,7 +15,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 interface AgentRepositoryInterface
 {
     /**
-     * query Agent 列table.
+     * query Agent columntable.
      *
      * @return array{total: int, list: array<DelightfulAgentEntity>}
      */

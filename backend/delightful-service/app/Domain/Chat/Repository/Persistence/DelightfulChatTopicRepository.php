@@ -188,7 +188,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     /**
-     * 按timerangegetsession下some个话题的message.
+     * 按timerangegetsessiondownsome话题的message.
      * @return ClientSequenceResponse[]
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array
@@ -266,7 +266,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     /**
      * Get topics by topic ID.
      * @param string $topicId 话题ID
-     * @return DelightfulTopicEntity[] 话题实体array
+     * @return DelightfulTopicEntity[] 话题实bodyarray
      */
     public function getTopicsByTopicId(string $topicId): array
     {
@@ -279,8 +279,8 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
      * Get topic messages by conversation ID, topic ID and max seq ID.
      * @param string $conversationId sessionID
      * @param string $topicId 话题ID
-     * @param int $maxSeqId most大序列ID（contain该ID）
-     * @return DelightfulTopicMessageEntity[] 话题message实体array
+     * @param int $maxSeqId most大序columnID（contain该ID）
+     * @return DelightfulTopicMessageEntity[] 话题message实bodyarray
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array
     {
@@ -294,7 +294,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
         return TopicAssembler::getTopicMessageEntities($topicMessages);
     }
 
-    // 避免 redis cacheserialize的object,占usetoo多内存
+    // 避免 redis cacheserialize的object,占usetoo多inside存
     #[Cacheable(prefix: 'topic:id:conversation', value: '_#{delightfulTopicDTO.topicId}_#{delightfulTopicDTO.conversationId}', ttl: 60)]
     private function getTopicArray(DelightfulTopicEntity $delightfulTopicDTO): ?array
     {

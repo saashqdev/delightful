@@ -40,12 +40,12 @@ class LLMMemoryMessage
     private string $mountId = '';
 
     /**
-     * @var AttachmentInterface[] attachment列表
+     * @var AttachmentInterface[] attachmentcolumn表
      */
     private array $attachments = [];
 
     /**
-     * @var string originalmessageanalyzeresult(多模态analyze)
+     * @var string originalmessageanalyzeresult(多模stateanalyze)
      */
     private string $analysisResult = '';
 

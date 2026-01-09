@@ -16,7 +16,7 @@ use App\Domain\Chat\Entity\ValueObject\MessageType\IntermediateMessageType;
 use Hyperf\Codec\Json;
 
 /**
- * chat和控制message的基类.
+ * chat和控制message的基category.
  */
 abstract class DelightfulMessageStruct extends AbstractEntity implements MessageInterface
 {
@@ -47,7 +47,7 @@ abstract class DelightfulMessageStruct extends AbstractEntity implements Message
         }
         // 去掉 message_type field
         unset($data['control_message_type'], $data['chat_message_type'], $data['intermediate_message_type']);
-        // ifdata为null，then去掉为each条message附近的 attachments 和 instructs
+        // ifdata为null，then去掉为eachitemmessageattach近的 attachments 和 instructs
         foreach (['attachments', 'instructs'] as $field) {
             if (empty($data[$field])) {
                 unset($data[$field]);
@@ -74,7 +74,7 @@ abstract class DelightfulMessageStruct extends AbstractEntity implements Message
      */
     public function setInstructs(?array $instructs): void
     {
-        // ensure instructs array中的each个元素all是 ChatInstruction object
+        // ensure instructs arraymiddle的eachyuan素all是 ChatInstruction object
         if ($instructs !== null) {
             foreach ($instructs as $key => $instruct) {
                 /* @phpstan-ignore-next-line */

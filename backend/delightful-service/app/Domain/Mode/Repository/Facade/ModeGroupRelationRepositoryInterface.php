@@ -24,7 +24,7 @@ interface ModeGroupRelationRepositoryInterface
     public function findByModeId(ModeDataIsolation $dataIsolation, int|string $modeId): array;
 
     /**
-     * according to分groupIDgetassociate关系.
+     * according tominutegroupIDgetassociate关系.
      * @return ModeGroupRelationEntity[]
      */
     public function findByGroupId(ModeDataIsolation $dataIsolation, int|string $groupId): array;
@@ -35,7 +35,7 @@ interface ModeGroupRelationRepositoryInterface
     public function save(ModeGroupRelationEntity $relationEntity): ModeGroupRelationEntity;
 
     /**
-     * according to分groupIDdeleteassociate关系.
+     * according tominutegroupIDdeleteassociate关系.
      */
     public function deleteByGroupId(ModeDataIsolation $dataIsolation, int|string $groupId): bool;
 
@@ -50,7 +50,7 @@ interface ModeGroupRelationRepositoryInterface
     public function batchSave(ModeDataIsolation $dataIsolation, array $relationEntities);
 
     /**
-     * according to多个modeID批量getassociate关系.
+     * according to多modeID批quantitygetassociate关系.
      * @param int[]|string[] $modeIds
      * @return ModeGroupRelationEntity[]
      */

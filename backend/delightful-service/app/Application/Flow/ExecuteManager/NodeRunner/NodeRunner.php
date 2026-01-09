@@ -84,7 +84,7 @@ abstract class NodeRunner implements NodeRunnerInterface
         $this->llmAppService = di(LLMAppService::class);
 
         $this->node = $node;
-        // initialize运行result
+        // initialize运lineresult
         if (! $this->node->getNodeDebugResult()) {
             $this->node->setNodeDebugResult(new NodeDebugResult($this->node->getNodeVersion()));
         }
@@ -92,7 +92,7 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     public function execute(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults = []): void
     {
-        // 节点运行most大count限制，防止死循环
+        // sectionpoint运linemost大count限制，防止死循环
         $max = 10000;
         $executeNum = $executionData->getExecuteNum($this->node->getNodeId());
         if ($executeNum >= $max) {
@@ -129,7 +129,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 $callback($vertexResult, $executionData, $frontResults);
             } else {
                 $this->node->validate();
-                // 提前get本次的result，ifhave，then直接use
+                // 提frontget本time的result，ifhave，then直接use
                 $nextExecuteNum = $executeNum + 1;
                 $historyVertexResult = $executionData->getNodeHistoryVertexResult($this->node->getNodeId(), $nextExecuteNum);
                 if ($historyVertexResult) {
@@ -148,7 +148,7 @@ abstract class NodeRunner implements NodeRunnerInterface
             $debugResult->setSuccess(false);
             $debugResult->setErrorCode((int) $throwable->getCode());
             $debugResult->setErrorMessage($throwable->getMessage());
-            // 出现exception时not运行后续节点
+            // 出现exceptiono clocknot运lineback续sectionpoint
             $vertexResult->setChildrenIds([]);
             $this->logger->warning('NodeRunnerFailed', [
                 'node_id' => $this->node->getNodeId(),
@@ -168,7 +168,7 @@ abstract class NodeRunner implements NodeRunnerInterface
             $debugResult->setChildrenIds($vertexResult->getChildrenIds());
             $debugResult->addLoopDebugResult($debugResult);
 
-            // record节点count的result
+            // recordsectionpointcount的result
             $executionData->increaseExecuteNum($this->node->getNodeId(), $vertexResult);
         }
     }
@@ -196,11 +196,11 @@ abstract class NodeRunner implements NodeRunnerInterface
     protected function formatJson(string $json): array
     {
         $response = trim($json);
-        // if $response by ```json 开头then去except
+        // if $response by ```json 开headthen去except
         if (str_starts_with($response, '```json')) {
             $response = substr($response, 7);
         }
-        // if $response by ``` 结尾then去except
+        // if $response by ``` 结tailthen去except
         if (str_ends_with($response, '```')) {
             $response = substr($response, 0, -3);
         }
@@ -222,8 +222,8 @@ abstract class NodeRunner implements NodeRunnerInterface
     abstract protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void;
 
     /**
-     * todo 这里暂notimplement重复upload的issue，均when做新fileupload
-     * recordprocess所产生的file，均willmeanwhileuploadto云端，后续节点needuse时fromexecuteprocessdata中优先匹配.
+     * todo 这within暂notimplement重复upload的issue，均when做新fileupload
+     * recordprocess所产生的file，均willmeanwhileuploadto云端，back续sectionpointneeduseo clockfromexecuteprocessdatamiddle优先匹配.
      * @return AbstractAttachment[]
      * @throws SSRFException
      */
@@ -239,13 +239,13 @@ abstract class NodeRunner implements NodeRunnerInterface
             if (! is_string($attachment)) {
                 continue;
             }
-            // if已经存in，直接添加toresult中
+            // if已经存in，直接添加toresultmiddle
             $path = get_path_by_url($attachment);
             if ($attachmentObj = $executionData->getAttachmentRecord($path)) {
                 $flowExecutionAttachments[] = $attachmentObj;
                 continue;
             }
-            // if是一个link，那么need对 url conduct限制
+            // if是一link，那么need对 url conduct限制
             if (EasyFileTools::isUrl($attachment)) {
                 SSRFUtil::getSafeUrl($attachment, replaceIp: false);
             }

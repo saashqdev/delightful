@@ -20,42 +20,42 @@ class SmsSceneType
     public const CHANGE_PASSWORD = 'change_password';
 
     /**
-     * bind手机.
+     * bindhand机.
      */
     public const BIND_PHONE = 'bind_phone';
 
     /**
-     * 修改手机.
+     * 修改hand机.
      */
     public const CHANGE_PHONE = 'change_phone';
 
     /**
-     * 账号register.
+     * 账numberregister.
      */
     public const REGISTER_ACCOUNT = 'register_account';
 
     /**
-     * 账号loginactivate.
+     * 账numberloginactivate.
      */
     public const ACCOUNT_LOGIN_ACTIVE = 'account_login_active';
 
     /**
-     * 账号registeractivate.
+     * 账numberregisteractivate.
      */
     public const ACCOUNT_REGISTER_ACTIVE = 'account_register_active';
 
     /**
-     * 账号login.
+     * 账numberlogin.
      */
     public const ACCOUNT_LOGIN = 'account_login';
 
     /**
-     * 账号loginbind第third-party平台.
+     * 账numberloginbindthethird-party平台.
      */
     public const ACCOUNT_LOGIN_BIND_THIRD_PLATFORM = 'account_login_bind_third_platform';
 
     /**
-     * 身份verify
+     * 身shareverify
      */
     public const IDENTIFY_VERIFY = 'identity_verify';
 }

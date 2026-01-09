@@ -17,7 +17,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
 {
     public function getDepartmentById(DataIsolation $dataIsolation, string $departmentId): ?DelightfulDepartmentEntity
     {
-        // -1 table示根departmentinfo.
+        // -1 table示rootdepartmentinfo.
         return $this->departmentRepository->getDepartmentById($departmentId, $dataIsolation->getCurrentOrganizationCode());
     }
 
@@ -79,7 +79,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
         $orgCode = $dataIsolation->getCurrentOrganizationCode();
         $departmentsPageResponseDTO = $this->departmentRepository->getSubDepartmentsByLevel($level, $orgCode, $depth, $size, $offset);
         $departments = $departmentsPageResponseDTO->getItems();
-        // 确定下级departmentwhetheralsohave子department
+        // 确定downleveldepartmentwhetheralsohave子department
         $items = $this->getDepartmentsHasChild($departments, $orgCode);
         $departmentsPageResponseDTO->setItems($items);
         return $departmentsPageResponseDTO;
@@ -90,7 +90,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
         $orgCode = $dataIsolation->getCurrentOrganizationCode();
         $departmentsPageResponseDTO = $this->departmentRepository->getSubDepartmentsById($departmentId, $orgCode, $size, $offset);
         $departments = $departmentsPageResponseDTO->getItems();
-        // 确定下级departmentwhetheralsohave子department
+        // 确定downleveldepartmentwhetheralsohave子department
         $items = $this->getDepartmentsHasChild($departments, $orgCode);
         $departmentsPageResponseDTO->setItems($items);
         return $departmentsPageResponseDTO;
@@ -136,7 +136,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 批量getdepartment的所have子department.
+     * 批quantitygetdepartment的所have子department.
      * @return DelightfulDepartmentEntity[]
      */
     public function getAllChildrenByDepartmentIds(array $departmentIds, DataIsolation $dataIsolation): array
@@ -163,7 +163,7 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
     }
 
     /**
-     * 根departmentbe抽象为 -1，所by这里needconvert为actual的根department id.
+     * rootdepartmentbe抽象为 -1，所by这withinneedconvert为actual的rootdepartment id.
      */
     public function getDepartmentRootId(DataIsolation $dataIsolation): string
     {
@@ -171,29 +171,29 @@ class DelightfulDepartmentDomainService extends AbstractContactDomainService
         // getorganization所属的平台type
         $platformType = $this->organizationsPlatformRepository->getOrganizationPlatformType($organizationCode);
         if ($platformType === PlatformType::Delightful) {
-            // get根departmentID
+            // getrootdepartmentID
             return $this->departmentRepository->getDepartmentRootId($organizationCode);
         }
 
-        // according toorganizationencoding和平台typeget根departmentID
+        // according toorganizationencoding和平台typegetrootdepartmentID
         return $this->thirdPlatformIdMappingRepository->getDepartmentRootId($organizationCode, $platformType);
     }
 
     /**
-     * 批量get多个organization的根departmentinfo.
+     * 批quantityget多organization的rootdepartmentinfo.
      * @param array $organizationCodes organizationcodearray
-     * @return array<string,DelightfulDepartmentEntity> byorganizationcode为键，根department实体为value的associatearray
+     * @return array<string,DelightfulDepartmentEntity> byorganizationcode为键，rootdepartment实body为value的associatearray
      */
     public function getOrganizationsRootDepartment(array $organizationCodes): array
     {
         $rootDepartments = $this->departmentRepository->getOrganizationsRootDepartment($organizationCodes);
 
-        // checkwhetherhave根departmentdata
+        // checkwhetherhaverootdepartmentdata
         if (empty($rootDepartments)) {
             return [];
         }
 
-        // processdataformat，byorganizationcode为键，根department实体为value
+        // processdataformat，byorganizationcode为键，rootdepartment实body为value
         $result = [];
         foreach ($rootDepartments as $department) {
             $result[$department->getOrganizationCode()] = $department;

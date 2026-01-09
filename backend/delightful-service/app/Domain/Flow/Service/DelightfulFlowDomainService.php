@@ -37,7 +37,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * get节点configurationtemplate.
+     * getsectionpointconfigurationtemplate.
      */
     public function getNodeTemplate(FlowDataIsolation $dataIsolation, Node $node): Node
     {
@@ -110,7 +110,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
     }
 
     /**
-     * save节点，nodes、edges.
+     * savesectionpoint，nodes、edges.
      */
     public function saveNode(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $savingDelightfulFlow): DelightfulFlowEntity
     {
@@ -176,7 +176,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
      */
     public function createRoutine(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow): void
     {
-        // getstart节点的scheduleconfiguration
+        // getstartsectionpoint的scheduleconfiguration
         /** @var null|StartNodeParamsConfig $startNodeParamsConfig */
         $startNodeParamsConfig = $delightfulFlow->getStartNode()?->getNodeParamsConfig();
         if (! $startNodeParamsConfig) {
@@ -185,7 +185,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
         $startNodeParamsConfig->validate();
         $routineConfigs = $startNodeParamsConfig->getRoutineConfigs();
 
-        // useprocess的 code 作为外部 id
+        // useprocess的 code 作为outside部 id
         $externalId = $delightfulFlow->getCode();
         $retryTimes = 2;
         $callbackMethod = [DelightfulFlowExecuteAppService::class, 'routine'];
@@ -193,7 +193,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
             'flowCode' => $delightfulFlow->getCode(),
         ];
 
-        // 先清理一下historyscheduletask和调度rule
+        // 先清理一downhistoryscheduletask和调degreerule
         $this->taskSchedulerDomainService->clearByExternalId($externalId);
 
         foreach ($routineConfigs as $branchId => $routineConfig) {
@@ -210,7 +210,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
 
             $callbackParams['branchId'] = $branchId;
             $callbackParams['routineConfig'] = $routineConfig->toConfigArray();
-            // if是not重复的，那么是直接create调度task
+            // if是not重复的，那么是直接create调degreetask
             if ($routineConfig->getType() === RoutineType::NoRepeat) {
                 $taskScheduler = new TaskScheduler();
                 $taskScheduler->setExternalId($externalId);

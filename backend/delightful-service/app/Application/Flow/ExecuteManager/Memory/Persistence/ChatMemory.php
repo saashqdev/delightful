@@ -61,7 +61,7 @@ class ChatMemory implements MemoryPersistenceInterface
             return;
         }
 
-        // 这里storageis historymessagestorage节点 挂载message
+        // 这withinstorageis historymessagestoragesectionpoint 挂载message
         $history = new DelightfulFlowMemoryHistoryEntity();
         $history->setType(MemoryType::Mount);
         $history->setConversationId($LLMMemoryMessage->getConversationId());
@@ -78,16 +78,16 @@ class ChatMemory implements MemoryPersistenceInterface
     }
 
     /**
-     * 已经是排好序的所havemessage.
+     * 已经是row好序的所havemessage.
      * @return array<DelightfulMessageEntity>
      */
     public function getImChatMessages(MemoryQuery $memoryQuery): array
     {
         $seqLimit = $memoryQuery->getLimit();
 
-        // todo 后续inquery侧optimize
-        // when为 ai_card 的message，samemessagehave 20 条，need去重，but是inquery的time，是not知道have重复的
-        // in这里先放量query，at mostquery 200 条，然后againconduct重。
+        // todo back续inquery侧optimize
+        // when为 ai_card 的message，samemessagehave 20 item，need去重，but是inquery的time，是not知道have重复的
+        // in这within先放quantityquery，at mostquery 200 item，然backagainconduct重。
         $seqLimit = ($seqLimit * 20 <= 200) ? $seqLimit * 20 : 200;
 
         $messagesQueryDTO = (new MessagesQueryDTO());
@@ -118,7 +118,7 @@ class ChatMemory implements MemoryPersistenceInterface
             if ($messageId) {
                 $messageIds[] = $messageId;
             }
-            // 特殊process, when开启去重，andreturn的条数greater thanequal limit，thennotagaincontinuequery
+            // 特殊process, when开启去重，andreturn的item数greater thanequal limit，thennotagaincontinuequery
             if (count($messageIds) >= $memoryQuery->getLimit()) {
                 break;
             }
@@ -127,7 +127,7 @@ class ChatMemory implements MemoryPersistenceInterface
         if (! empty($messageIds)) {
             $imMessages = $this->delightfulChatDomainService->getMessageEntitiesByMaicMessageIds($messageIds, $memoryQuery->getRangMessageTypes());
             foreach ($imMessages as $imMessage) {
-                // 这里是为了sortcorrect according to seq 的顺序conduct排
+                // 这within是为了sortcorrect according to seq 的顺序conductrow
                 $index = array_search($imMessage->getDelightfulMessageId(), $messageIds);
                 if ($index !== false) {
                     $messageLists[$index] = $imMessage;
@@ -140,7 +140,7 @@ class ChatMemory implements MemoryPersistenceInterface
     }
 
     /**
-     * 添加挂载记忆，即in Chat 时call了 historymessagestorage节点.
+     * 添加挂载记忆，即in Chat o clockcall了 historymessagestoragesectionpoint.
      * @return array<LLMMemoryMessage>
      */
     private function mountMessages(array $moundIds, array $messageLists): array

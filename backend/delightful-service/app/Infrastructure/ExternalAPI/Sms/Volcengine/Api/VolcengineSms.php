@@ -16,7 +16,7 @@ use Hyperf\Di\Annotation\Inject;
 use Throwable;
 
 /**
- * 火山引起短信类interface.
+ * 火山引起短信categoryinterface.
  * @see https://www.volcengine.com/docs/6361/171579
  */
 class VolcengineSms extends VolcengineApi
@@ -39,11 +39,11 @@ class VolcengineSms extends VolcengineApi
     protected Template $template;
 
     /**
-     * sendverify码,火山的verify码短信not supported传入指定的number.
+     * sendverify码,火山的verify码短信not supported传入finger定的number.
      */
     public function request(string $phone, array $templateVariables, SignEnum $sign, string $templateId): SendResult
     {
-        // 去掉手机号的特殊format
+        // 去掉hand机number的特殊format
         $phone = str_replace(['+00', '-'], '', $phone);
         $sendResult = new SendResult();
         $signStr = SignEnum::format($sign, LanguageEnum::EN_US);
@@ -69,9 +69,9 @@ class VolcengineSms extends VolcengineApi
                 'PhoneNumbers' => $phone,
             ];
             $this->setBody($body);
-            // if是单元test,not发短信,只verifyvariableparse/短信content&&短信signature多语种适配/国际区号correctparse
+            // if是单yuantest,nothair短信,只verifyvariableparse/短信content&&短信signature多语type适配/国际区numbercorrectparse
             if (defined('IN_UNIT_TEST')) {
-                // 单元test,not真的发短信
+                // 单yuantest,not真的hair短信
                 return $sendResult->setResult($errCode, $msg);
             }
             $this->sendRequest();

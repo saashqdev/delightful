@@ -48,7 +48,7 @@ class AIImageBuiltInToolTest extends ExecuteManagerBaseTest
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "items": null,
         "value": null,
@@ -92,7 +92,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'user_prompt' => '一朵花',
+            'user_prompt' => '一朵flower',
         ]);
         $runner->execute($vertexResult, $executionData, []);
 

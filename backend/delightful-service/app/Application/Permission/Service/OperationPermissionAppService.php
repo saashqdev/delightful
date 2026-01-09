@@ -123,7 +123,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * getuser对some个资源的most高permission.
+     * getuser对some资源的most高permission.
      */
     public function getOperationByResourceAndUser(PermissionDataIsolation $dataIsolation, ResourceType $resourceType, string $resourceId, string $userId): Operation
     {
@@ -134,7 +134,7 @@ class OperationPermissionAppService extends AbstractPermissionAppService
     }
 
     /**
-     * getuser对some一类资源的most高操作permission.
+     * getuser对some一category资源的most高操作permission.
      */
     #[ArrayShape([
         // userId => [resourceId => Operation]

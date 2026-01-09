@@ -39,7 +39,7 @@ class DelightfulAccessToken
             $application = $applicationDomainService->save($llmDataIsolation, $application);
         }
 
-        // 这里的常量 AccessToken not落library，仅存inat内存中，保证内部call时use一致
+        // 这within的常quantity AccessToken not落library，仅存inatinside存middle，保证inside部callo clockuse一致
         $accessToken = new AccessTokenEntity();
         $accessToken->setId(1);
         $accessToken->setName($application->getCode());
@@ -51,7 +51,7 @@ class DelightfulAccessToken
         $accessToken->prepareForCreation();
         SystemAccessTokenManager::setSystemAccessToken($accessToken);
 
-        // 新增官方organization个人accesstoken常量
+        // 新增官方organization人accesstoken常quantity
         $userAccessToken = new AccessTokenEntity();
         $userAccessToken->setId(2);
         $userAccessToken->setName($application->getCode());

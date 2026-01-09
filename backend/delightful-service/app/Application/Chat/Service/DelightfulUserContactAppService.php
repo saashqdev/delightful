@@ -161,7 +161,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 批量queryorganization架构、ai 、or者个人版的user.
+     * 批quantityqueryorganization架构、ai 、or者人版的user.
      */
     public function getUserDetailByIds(UserQueryDTO $dto, DelightfulUserAuthorization $authorization): array
     {
@@ -173,10 +173,10 @@ class DelightfulUserContactAppService extends AbstractAppService
         $queryType = $dto->getQueryType();
         $dataIsolation = $this->createDataIsolation($authorization);
 
-        // getcurrentuser拥have的organization列表
+        // getcurrentuser拥have的organizationcolumn表
         $userOrganizations = $this->userDomainService->getUserOrganizations($dataIsolation->getCurrentUserId());
 
-        // 基本userinfoquery - 传入user拥have的organization列表
+        // 基本userinfoquery - 传入user拥have的organizationcolumn表
         $usersDetailDTOList = $this->userDomainService->getUserDetailByUserIdsWithOrgCodes($userIds, $userOrganizations);
         // handleuseravatar
         $usersDetail = $this->getUsersAvatarCoordinator($usersDetailDTOList, $dataIsolation);
@@ -210,12 +210,12 @@ class DelightfulUserContactAppService extends AbstractAppService
     public function getUsersDetailByDepartmentId(UserQueryDTO $dto, DelightfulUserAuthorization $authorization): array
     {
         $dataIsolation = $this->createDataIsolation($authorization);
-        // 根departmentbe抽象为 -1，所by这里needconvert
+        // rootdepartmentbe抽象为 -1，所by这withinneedconvert
         if ($dto->getDepartmentId() === PlatformRootDepartmentId::Delightful) {
             $departmentId = $this->departmentChartDomainService->getDepartmentRootId($dataIsolation);
             $dto->setDepartmentId($departmentId);
         }
-        // department下的user列表，限制了 pageSize
+        // departmentdown的usercolumn表，限制了 pageSize
         $usersPageResponseDTO = $this->departmentUserDomainService->getDepartmentUsersByDepartmentId($dto, $dataIsolation);
         $departmentUsers = $usersPageResponseDTO->getItems();
         $departmentIds = array_column($departmentUsers, 'department_id');
@@ -225,7 +225,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         foreach ($departmentsInfo as $departmentInfo) {
             $departmentsInfoWithFullPath[$departmentInfo->getDepartmentId()] = [$departmentInfo];
         }
-        // getuser的真名/nickname/手机号/avataretcinfo
+        // getuser的真名/nickname/hand机number/avataretcinfo
         $userIds = array_values(array_unique(array_column($departmentUsers, 'user_id')));
         $usersDetail = $this->userDomainService->getUserDetailByUserIds($userIds, $dataIsolation);
         $usersDetail = $this->getUsersAvatar($usersDetail, $dataIsolation);
@@ -233,8 +233,8 @@ class DelightfulUserContactAppService extends AbstractAppService
         $userDepartmentDetailDTOS = UserAssembler::getUserDepartmentDetailDTOList($departmentUsers, $usersDetail, $departmentsInfoWithFullPath);
         // 通讯录和search相关interface，filter隐藏department和隐藏user。
         $userDepartmentDetailDTOS = $this->filterDepartmentOrUserHidden($userDepartmentDetailDTOS);
-        // 由at $usersPageResponseDTO 的 items 限制的parametertype，fromcodestandard的角度，again new 一个通use的 PageResponseDTO， 按pagination的结构return
-        // 另外，由atfilter逻辑的存in，可能本次return的 items quantity少at $limit,but是againhave下一页。
+        // 由at $usersPageResponseDTO 的 items 限制的parametertype，fromcodestandard的angledegree，again new 一通use的 PageResponseDTO， 按pagination的结构return
+        // 另outside，由atfilter逻辑的存in，可能本timereturn的 items quantity少at $limit,but是againhavedown一页。
         $pageResponseDTO = new PageResponseDTO();
         $pageResponseDTO->setPageToken($usersPageResponseDTO->getpageToken());
         $pageResponseDTO->setHasMore($usersPageResponseDTO->getHasMore());
@@ -243,7 +243,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 按 usernickname/真名/手机号/email/departmentpath/position searchuser.
+     * 按 usernickname/真名/hand机number/email/departmentpath/position searchuser.
      */
     public function searchDepartmentUser(UserQueryDTO $queryDTO, DelightfulUserAuthorization $authorization): array
     {
@@ -264,7 +264,7 @@ class DelightfulUserContactAppService extends AbstractAppService
 
         // 按nicknamesearch
         $usersByNickname = $this->userDomainService->searchUserByNickName($queryDTO->getQuery(), $dataIsolation);
-        // 按手机号/真名search
+        // 按hand机number/真名search
         $usersByPhoneOrRealName = $this->accountDomainService->searchUserByPhoneOrRealName($queryDTO->getQuery(), $dataIsolation);
 
         // mergeresult
@@ -368,7 +368,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 为user添加Agentinfo(application层协调器).
+     * 为user添加Agentinfo(applicationlayer协调器).
      * @param array<UserDetailDTO> $usersDetailDTOList
      */
     public function addAgentInfoToUsers(Authenticatable $authorization, array $usersDetailDTOList): array
@@ -455,14 +455,14 @@ class DelightfulUserContactAppService extends AbstractAppService
     }
 
     /**
-     * 读私haveor者公have桶，拿avatar(application层协调器).
+     * 读私haveor者公have桶，拿avatar(applicationlayer协调器).
      * @param array<UserDetailDTO> $usersDetail
      * @return array<UserDetailDTO>
      */
     private function getUsersAvatarCoordinator(array $usersDetail, DataIsolation $dataIsolation): array
     {
         $fileKeys = array_column($usersDetail, 'avatar_url');
-        // 移exceptnullvalue/httpor者 https开头的/lengthless than 32的
+        // 移exceptnullvalue/httpor者 https开head的/lengthless than 32的
         $validFileKeys = [];
         foreach ($fileKeys as $fileKey) {
             if (! empty($fileKey) && mb_strlen($fileKey) >= 32 && ! str_starts_with($fileKey, 'http')) {
@@ -479,7 +479,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             }
         }
 
-        // 按organization批量getlink
+        // 按organization批quantitygetlink
         $links = [];
         foreach ($orgFileKeys as $orgCode => $fileKeys) {
             $orgLinks = $this->fileDomainService->getLinks($orgCode, $fileKeys);

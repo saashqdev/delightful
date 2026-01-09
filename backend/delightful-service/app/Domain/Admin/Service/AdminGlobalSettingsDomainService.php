@@ -68,7 +68,7 @@ readonly class AdminGlobalSettingsDomainService
         });
 
         if (! empty($missingTypes)) {
-            // 批量createnot存in的setting
+            // 批quantitycreatenot存in的setting
             $missingEntities = array_map(function ($type) use ($dataIsolation) {
                 return (new AdminGlobalSettingsEntity())
                     ->setType($type)
@@ -76,7 +76,7 @@ readonly class AdminGlobalSettingsDomainService
                     ->setStatus(AdminGlobalSettingsStatus::DISABLED);
             }, $missingTypes);
 
-            // 批量updatenot存in的setting
+            // 批quantityupdatenot存in的setting
             $newSettings = $this->globalSettingsRepository->updateSettingsBatch($missingEntities);
             $settings = array_merge($settings, $newSettings);
         }

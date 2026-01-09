@@ -76,7 +76,7 @@ class CodeNodeParamsConfig extends NodeParamsConfig
         }
         if ($codeMode === CodeMode::Normal) {
             $code = $params['code'] ?? '';
-            // 这里的 code 可能是混淆后的
+            // 这within的 code 可能是混淆back的
             is_string($code) && $this->code = ShadowCode::unShadow($code);
         }
 

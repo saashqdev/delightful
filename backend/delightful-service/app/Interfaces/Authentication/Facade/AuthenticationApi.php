@@ -29,7 +29,7 @@ class AuthenticationApi
 
     public function authCheck(RequestInterface $request): array
     {
-        // according tologin码，get对应的access环境，去麦吉/天书校验whetherhavepermission
+        // according tologin码，get对应的access环境，去麦吉/day书校验whetherhavepermission
         $authorization = (string) $request->input('authorization', '');
         if (empty($authorization)) {
             $authorization = (string) $request->header('authorization');
@@ -45,7 +45,7 @@ class AuthenticationApi
     }
 
     /**
-     * 前端自身业务use，get authorization 对应的private识别码
+     * front端自身业务use，get authorization 对应的private识别码
      */
     public function authEnvironment(RequestInterface $request): array
     {

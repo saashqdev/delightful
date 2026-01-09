@@ -45,7 +45,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimizeversion：直接getenable的助理version，避免传入大量ID.
+     * optimizeversion：直接getenable的助理version，避免传入大quantityID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -89,10 +89,10 @@ class DelightfulAgentVersionDomainService
         }
 
         if ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PERSONAL_USE->value) {
-            // 个人use
+            // 人use
             $msg = 'publishsuccess';
         } elseif ($delightfulAgentVersionEntity->getReleaseScope() === DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value) {
-            // publishto企业内部
+            // publishto企业inside部
             /* @phpstan-ignore-next-line */
             if ($approvalOpen) {
                 $delightfulAgentVersionEntity->setApprovalStatus(DelightfulAgentVersionStatus::APPROVAL_PENDING->value);
@@ -177,17 +177,17 @@ class DelightfulAgentVersionDomainService
 
     public function getAgentMaxVersion(string $agentId): string
     {
-        // returnis语义化version，needinreturn的基础上+1
+        // returnis语义化version，needinreturn的基础up+1
         $agentMaxVersion = $this->agentVersionRepository->getAgentMaxVersion($agentId);
-        // ifversion号是整数format（如 1），将其convert为语义化version号（如 1.0.0）
+        // ifversionnumber是整数format（如 1），将其convert为语义化versionnumber（如 1.0.0）
         if (is_numeric($agentMaxVersion) && strpos($agentMaxVersion, '.') === false) {
             $agentMaxVersion = $agentMaxVersion . '.0.0';
         }
 
-        // parseversion号，for example "0.0.1" => ['0', '0', '1']
+        // parseversionnumber，for example "0.0.1" => ['0', '0', '1']
         [$major, $minor, $patch] = explode('.', $agentMaxVersion);
 
-        // 将 PATCH 部分加 1
+        // 将 PATCH 部minute加 1
         $patch = (int) $patch + 1;
 
         // if PATCH 达to 10，进位to MINOR（canaccording to需求调整此rule）
@@ -203,7 +203,7 @@ class DelightfulAgentVersionDomainService
             $major = (int) $major + 1;
         }
 
-        // 拼接并returnnewversion号
+        // 拼接并returnnewversionnumber
         return "{$major}.{$minor}.{$patch}";
     }
 
@@ -239,7 +239,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * based on游标paginationget指定organization的助理versionlist.
+     * based on游标paginationgetfinger定organization的助理versionlist.
      * @param string $organizationCode organizationcode
      * @param array $agentVersionIds 助理versionIDlist
      * @param string $cursor 游标ID，if为空stringthenfrommost新start
@@ -253,7 +253,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * verify新version号whetherlegal.
+     * verify新versionnumberwhetherlegal.
      * @throws BusinessException
      */
     private function validateVersionNumber(string $newVersion, string $oldVersion): void
@@ -275,7 +275,7 @@ class DelightfulAgentVersionDomainService
             return;
         }
 
-        // checkwhether试图frommore高级别的publishrange回退tomore低级别
+        // checkwhether试图frommore高level别的publishrange回退tomore低level别
         $errorMessage = match ($oldScope) {
             DelightfulAgentReleaseStatus::PUBLISHED_TO_ENTERPRISE->value => 'agent.already_published_to_enterprise_cannot_publish_to_individual',
             DelightfulAgentReleaseStatus::PUBLISHED_TO_MARKET->value => 'agent.already_published_to_market_cannot_publish_to_individual',

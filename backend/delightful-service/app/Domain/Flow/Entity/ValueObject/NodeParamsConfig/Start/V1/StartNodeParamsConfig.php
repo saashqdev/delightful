@@ -83,16 +83,16 @@ class StartNodeParamsConfig extends NodeParamsConfig
             $systemOutput = null;
             $customSystemOutput = null;
             $config = $branch['config'] ?? [];
-            // 可meanwhile选择多种method触发，所by他的入参和出参放to这里来process
+            // 可meanwhile选择多typemethod触hair，所by他的入参和出参放to这within来process
             switch ($triggerType) {
                 case TriggerType::ChatMessage:
                     $output = $this->getChatMessageOutputTemplate();
                     break;
                 case TriggerType::OpenChatWindow:
                     $output = $this->getOpenChatWindowOutputTemplate();
-                    // ifhave下游节点，那么间隔timethennot能为空
+                    // ifhavedown游sectionpoint，那么between隔timethennot能为空
                     if (! empty($nextNodes) && ! empty($branch['config'])) {
-                        // 秒
+                        // second
                         $interval = $branch['config']['interval'] ?? 0;
                         if (! is_int($interval) || $interval <= 0) {
                             ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'flow.node.start.interval_valid');
@@ -112,7 +112,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     break;
                 case TriggerType::ParamCall:
                     $outputComponent = ComponentFactory::fastCreate($branch['output']['form'] ?? []);
-                    // parametercallcan无parameter触发，for example触发一个event
+                    // parametercallcan无parameter触hair，for example触hair一event
                     if ($outputComponent) {
                         $output = new NodeOutput();
                         $output->setForm($outputComponent);
@@ -151,7 +151,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     $output = $this->getRoutineOutputTemplate();
                     break;
                 case TriggerType::LoopStart:
-                    // 循环start节点，notneedconfiguration
+                    // 循环startsectionpoint，notneedconfiguration
                     break;
                 default:
                     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'flow.node.start.unsupported_trigger_type', ['trigger_type' => $triggerType->name]);
@@ -274,7 +274,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "items": null,
         "value": null,
@@ -373,7 +373,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     "work_number": {
                         "type": "string",
                         "key": "work_number",
-                        "title": "工号",
+                        "title": "工number",
                         "description": "",
                         "items": null,
                         "properties": null,
@@ -484,7 +484,7 @@ JSON;
         "type": "object",
         "key": "root",
         "sort": 0,
-        "title": "root节点",
+        "title": "rootsectionpoint",
         "description": "",
         "items": null,
         "value": null,
@@ -497,7 +497,7 @@ JSON;
                 "type": "string",
                 "key": "trigger_time",
                 "sort": 0,
-                "title": "触发time",
+                "title": "触hairtime",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -508,7 +508,7 @@ JSON;
                 "type": "number",
                 "key": "trigger_timestamp",
                 "sort": 1,
-                "title": "触发time戳",
+                "title": "触hairtime戳",
                 "description": "",
                 "items": null,
                 "properties": null,
@@ -533,7 +533,7 @@ JSON;
     "type": "object",
     "key": "root",
     "sort": 0,
-    "title": "root节点",
+    "title": "rootsectionpoint",
     "description": "",
     "items": null,
     "value": null,
@@ -600,7 +600,7 @@ JSON;
                         "type": "string",
                         "key": "work_number",
                         "sort": 4,
-                        "title": "工号",
+                        "title": "工number",
                         "description": "",
                         "items": null,
                         "properties": null,

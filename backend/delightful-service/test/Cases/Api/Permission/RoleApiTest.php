@@ -138,9 +138,9 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertIsArray($deleteResp);
         $this->assertEquals(1000, $deleteResp['code']);
 
-        // again次query应whenreturnrolenot存inor空
+        // againtimequery应whenreturnrolenot存inor空
         $detailResp = $this->get(self::SUB_ADMIN_API . $id, [], $this->getCommonHeaders());
-        // expected这里willreturnerror码，specificaccording to业务而定，只要non1000即可
+        // expected这withinwillreturnerror码，specificaccording to业务而定，只要non1000即可
         $this->assertNotEquals(1000, $detailResp['code'] ?? null);
         // === testdelete子管理员END ===
     }
@@ -165,7 +165,7 @@ class RoleApiTest extends AbstractHttpTest
         $this->assertArrayHasKey('data', $response);
         $this->assertIsArray($response['data']);
 
-        // if data non空，简单校验节点结构
+        // if data non空，简单校验sectionpoint结构
         if (! empty($response['data'])) {
             $this->assertArrayHasKey('permission_key', $response['data']);
         }

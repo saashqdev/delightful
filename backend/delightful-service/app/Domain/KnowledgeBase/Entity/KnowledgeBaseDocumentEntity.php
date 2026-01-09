@@ -17,7 +17,7 @@ use App\Infrastructure\Core\Embeddings\VectorStores\VectorStoreInterface;
 use App\Infrastructure\Core\Exception\ExceptionBuilder;
 
 /**
- * knowledge basedocument实体.
+ * knowledge basedocument实body.
  */
 class KnowledgeBaseDocumentEntity extends AbstractKnowledgeBaseEntity
 {
@@ -365,7 +365,7 @@ class KnowledgeBaseDocumentEntity extends AbstractKnowledgeBaseEntity
     {
         $driver = VectorStoreDriver::tryFrom($this->vectorDb);
         if ($driver === null) {
-            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "to量datalibrary [{$this->vectorDb}] not存in");
+            ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, "toquantitydatalibrary [{$this->vectorDb}] not存in");
         }
         return $driver->get();
     }

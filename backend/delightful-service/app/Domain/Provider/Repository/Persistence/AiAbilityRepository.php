@@ -24,7 +24,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     protected bool $filterOrganizationCode = true;
 
     /**
-     * according to能力codegetAI能力实体.
+     * according to能力codegetAI能力实body.
      */
     public function getByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code): ?AiAbilityEntity
     {
@@ -55,7 +55,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * according toIDgetAI能力实体.
+     * according toIDgetAI能力实body.
      */
     public function getById(ProviderDataIsolation $dataIsolation, int $id): ?AiAbilityEntity
     {
@@ -70,7 +70,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * saveAI能力实体.
+     * saveAI能力实body.
      */
     public function save(AiAbilityEntity $entity): bool
     {
@@ -98,7 +98,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
     }
 
     /**
-     * updateAI能力实体.
+     * updateAI能力实body.
      */
     public function update(AiAbilityEntity $entity): bool
     {
@@ -116,14 +116,14 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
         $model->sort_order = $entity->getSortOrder();
         $model->status = $entity->getStatus()->value;
 
-        // encryptconfig后againsave
+        // encryptconfigbackagainsave
         $model->config = AiAbilityAssembler::encodeConfig($entity->getConfig(), (string) $model->id);
 
         return $model->save();
     }
 
     /**
-     * according tocodeupdate（support选择性update）.
+     * according tocodeupdate（support选择propertyupdate）.
      */
     public function updateByCode(ProviderDataIsolation $dataIsolation, AiAbilityCode $code, array $data): bool
     {

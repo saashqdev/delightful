@@ -64,7 +64,7 @@ class MCPServerToolDTO extends AbstractDTO
     public array $sourceVersion = [];
 
     /**
-     * associate的information，给前端use，无业务逻辑.
+     * associate的information，给front端use，无业务逻辑.
      */
     public ?array $relInfo = null;
 

@@ -105,7 +105,7 @@ readonly class FileDomainService
     }
 
     /**
-     * 批量getfilelink（自动frompath提取organizationencoding并分groupprocess）.
+     * 批quantitygetfilelink（自动frompath提取organizationencoding并minutegroupprocess）.
      * @param string[] $filePaths containorganizationencoding的filepatharray，format：orgCode/path/file.ext
      * @param null|StorageBucketType $bucketType storage桶type，default为Public
      * @return array<string,FileLink> filepathtoFileLink的mapping
@@ -119,7 +119,7 @@ readonly class FileDomainService
             return [];
         }
 
-        // 按organizationcode分groupfilepath
+        // 按organizationcodeminutegroupfilepath
         $pathsByOrg = [];
         foreach ($validPaths as $filePath) {
             $orgCode = explode('/', $filePath, 2)[0] ?? '';
@@ -128,7 +128,7 @@ readonly class FileDomainService
             }
         }
 
-        // 批量getfilelink
+        // 批quantitygetfilelink
         $allLinks = [];
         foreach ($pathsByOrg as $orgCode => $paths) {
             $orgLinks = $this->getLinks($orgCode, $paths, $bucketType);
@@ -158,8 +158,8 @@ readonly class FileDomainService
     }
 
     /**
-     * 开启 sts 模式.
-     * gettemporary凭证给前端use.
+     * 开启 sts 模type.
+     * gettemporary凭证给front端use.
      * @todo securityissue，dir nothave校验，nothaveorganization隔离
      */
     public function getStsTemporaryCredential(
@@ -256,7 +256,7 @@ readonly class FileDomainService
      * from云storagegetfilelist.
      *
      * @param string $organizationCode organizationencoding
-     * @param string $directoryPrefix directory前缀
+     * @param string $directoryPrefix directoryfront缀
      * @param StorageBucketType $bucketType storage桶type
      * @return CloudFileInfoDTO[] fileDTOobjectarray
      */
@@ -265,7 +265,7 @@ readonly class FileDomainService
         string $directoryPrefix,
         StorageBucketType $bucketType = StorageBucketType::Private
     ): array {
-        // uselistObjectsByCredential列出directoryfile
+        // uselistObjectsByCredentialcolumn出directoryfile
         $objectsResponse = $this->cloudFileRepository->listObjectsByCredential(
             $organizationCode,
             $directoryPrefix,
@@ -285,7 +285,7 @@ readonly class FileDomainService
                 key: $objectKey,
                 filename: $filename,
                 size: $object['size'] ?? null,
-                lastModified: null // ASR业务中notuse该field，直接传null
+                lastModified: null // ASR业务middlenotuse该field，直接传null
             );
         }
         return $files;

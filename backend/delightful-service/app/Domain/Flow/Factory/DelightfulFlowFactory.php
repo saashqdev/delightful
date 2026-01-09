@@ -72,7 +72,7 @@ class DelightfulFlowFactory
             $systemOutput = new NodeOutput();
             $systemOutput->setForm(ComponentFactory::fastCreate($nodeArr['system_output']['form'] ?? [], lazy: true));
             $node->setSystemOutput($systemOutput);
-            // 这里except了检测alsowillinitializedata，所bynot要delete
+            // 这withinexcept了检测alsowillinitializedata，所bynot要delete
             $node->validate();
 
             $nodes[] = $node;

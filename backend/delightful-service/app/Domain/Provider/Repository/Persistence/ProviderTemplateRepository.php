@@ -27,19 +27,19 @@ readonly class ProviderTemplateRepository
     }
 
     /**
-     * get所haveservice商的template列表.
+     * get所haveservice商的templatecolumn表.
      * @param Category $category service商category
-     * @return ProviderConfigDTO[] service商template列表
+     * @return ProviderConfigDTO[] service商templatecolumn表
      */
     public function getAllProviderTemplates(Category $category): array
     {
         $templates = [];
 
-        // get指定category下所haveenable的service商
+        // getfinger定categorydown所haveenable的service商
         $providers = $this->providerRepository->getByCategory($category);
 
         foreach ($providers as $provider) {
-            // 为each个service商createtemplateconfiguration
+            // 为eachservice商createtemplateconfiguration
             $templateId = ProviderConfigIdAssembler::generateProviderTemplate($provider->getProviderCode(), $category);
 
             // except了 delightful service商，defaultstatusall是close

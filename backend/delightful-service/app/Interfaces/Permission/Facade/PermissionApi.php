@@ -31,7 +31,7 @@ class PermissionApi extends AbstractPermissionApi
 
     public function getUserPermissions(): array
     {
-        // getwhen前loginuser的authenticationinformation
+        // getwhenfrontloginuser的authenticationinformation
         $authorization = $this->getAuthorization();
 
         // buildpermissiondata隔离context
@@ -40,7 +40,7 @@ class PermissionApi extends AbstractPermissionApi
             $authorization->getId()
         );
 
-        // getuser拥have的permission列表（扁平permission键array）
+        // getuser拥have的permissioncolumn表（扁平permission键array）
         $permissions = $this->roleAppService->getUserPermissions($dataIsolation, $authorization->getId());
         return ['permission_key' => $permissions];
     }

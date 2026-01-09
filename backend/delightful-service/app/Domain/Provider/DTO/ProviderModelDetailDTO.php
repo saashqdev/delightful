@@ -16,7 +16,7 @@ use App\Infrastructure\Core\AbstractDTO;
 use Hyperf\Codec\Json;
 
 /**
- * service商下面单个modeldetail的 dto.
+ * service商downsurface单modeldetail的 dto.
  */
 class ProviderModelDetailDTO extends AbstractDTO
 {

@@ -70,7 +70,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
         $models = $this->fetchModels($limit);
         $stats['total'] = $models->count();
 
-        $this->logger->info(sprintf('找to %d 个service商modelneedprocess', $stats['total']));
+        $this->logger->info(sprintf('找to %d service商modelneedprocess', $stats['total']));
 
         foreach ($models as $model) {
             try {
@@ -215,15 +215,15 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     }
 
     /**
-     * output头部info.
+     * outputhead部info.
      */
     private function logHeader(bool $isDryRun, bool $isForce, int $limit): void
     {
         $this->logger->info('startsyncservice商modelconfigurationversiondata...');
-        $this->logger->info(sprintf('模式: %s', $isDryRun ? '试运行（notwritedatabase）' : '正式execute'));
+        $this->logger->info(sprintf('模type: %s', $isDryRun ? '试运line（notwritedatabase）' : '正typeexecute'));
 
         if ($isForce) {
-            $this->logger->warning('force模式已enable：将为所havemodelcreate新version');
+            $this->logger->warning('force模type已enable：将为所havemodelcreate新version');
         }
 
         if ($limit > 0) {
@@ -251,7 +251,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
     private function logSkipped(ProviderModelModel $model, int $existingVersionCount): void
     {
         $this->logger->debug(sprintf(
-            '[skip] model ID: %d, name: %s (已have %d 个configurationversion)',
+            '[skip] model ID: %d, name: %s (已have %d configurationversion)',
             $model->id,
             $model->name ?: $model->model_id,
             $existingVersionCount
@@ -263,7 +263,7 @@ class SyncProviderModelConfigVersionCommand extends HyperfCommand
      */
     private function logCreated(ProviderModelModel $model, int $version, bool $isDryRun): void
     {
-        $prefix = $isDryRun ? '[试运行]' : '[create]';
+        $prefix = $isDryRun ? '[试运line]' : '[create]';
         $this->logger->info(sprintf(
             '%s model ID: %d, name: %s, version: %d',
             $prefix,

@@ -14,12 +14,12 @@ use Hyperf\Snowflake\Concern\Snowflake;
 
 /**
  * @property int $id primary keyID
- * @property int $business_type 模块type，file属at哪个模块
+ * @property int $business_type 模piecetype，file属at哪模piece
  * @property int $file_type filetype：0:官方添加，1:organization添加
  * @property string $key filekey
  * @property int $file_size filesize
  * @property string $organization organizationencoding
- * @property string $file_extension file后缀
+ * @property string $file_extension fileback缀
  * @property string $user_id upload者ID
  * @property DateTime $created_at creation time
  * @property DateTime $updated_at update time
@@ -36,7 +36,7 @@ class DefaultFileModel extends Model
     protected ?string $table = 'default_files';
 
     /**
-     * 可批量赋value的property.
+     * 可批quantity赋value的property.
      */
     protected array $fillable = [
         'id',

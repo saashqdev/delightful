@@ -75,7 +75,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
     }
 
     /**
-     * verifyDTOdata的valid性.
+     * verifyDTOdata的validproperty.
      */
     public function validate(): bool
     {
@@ -89,7 +89,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
             return false;
         }
 
-        // verifystatusvaluevalid性
+        // verifystatusvaluevalidproperty
         if (! in_array($this->status, [0, 1])) {
             return false;
         }
@@ -128,7 +128,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
         }
 
         if (strlen($this->name) > 255) {
-            $errors[] = 'rolenamelengthnot能超过255个字符';
+            $errors[] = 'rolenamelengthnot能超过255字符';
         }
 
         if (! in_array($this->status, [0, 1])) {
@@ -138,7 +138,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
         if (! empty($this->permissions)) {
             foreach ($this->permissions as $index => $permission) {
                 if (! is_string($permission)) {
-                    $errors[] = "permissionlist第{$index}项must是string";
+                    $errors[] = "permissionlistthe{$index}itemmust是string";
                 }
             }
         }
@@ -146,7 +146,7 @@ class CreateSubAdminRequestDTO extends AbstractDTO
         if (! empty($this->userIds)) {
             foreach ($this->userIds as $index => $userId) {
                 if (! is_string($userId)) {
-                    $errors[] = "userIDlist第{$index}项must是string";
+                    $errors[] = "userIDlistthe{$index}itemmust是string";
                 }
             }
         }

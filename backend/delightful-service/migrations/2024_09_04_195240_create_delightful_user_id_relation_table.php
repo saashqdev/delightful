@@ -16,7 +16,7 @@ return new class extends Migration {
     {
         Schema::create('delightful_user_id_relation', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('user_id', 64)->comment('userid,organization下唯一.其他open_id,union_idneedaccording touser_idgenerate')->default('');
+            $table->string('user_id', 64)->comment('userid,organizationdown唯一.其他open_id,union_idneedaccording touser_idgenerate')->default('');
             $table->string('id_type', 12)->comment('idtype:open_id/union_id')->default('');
             $table->string('id_value', 64)->comment('idtype对应的value')->default('');
             $table->string('relation_type', 12)->comment('id对应的associatetype:applicationencoding/create该application的organizationencoding')->default('');

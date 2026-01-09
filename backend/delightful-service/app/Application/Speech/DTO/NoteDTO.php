@@ -11,7 +11,7 @@ use function Hyperf\Translation\trans;
 
 /**
  * 笔记DTO
- * useatASR总结中的笔记information.
+ * useatASR总结middle的笔记information.
  */
 readonly class NoteDTO
 {

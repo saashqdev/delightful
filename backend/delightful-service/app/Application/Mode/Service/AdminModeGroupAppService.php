@@ -19,7 +19,7 @@ use InvalidArgumentException;
 class AdminModeGroupAppService extends AbstractModeAppService
 {
     /**
-     * according tomodeIDget分group列表 (管理后台use，contain完整i18nfield).
+     * according tomodeIDgetminutegroupcolumn表 (管理back台use，contain完整i18nfield).
      */
     public function getGroupsByModeId(DelightfulUserAuthorization $authorization, string $modeId): array
     {
@@ -28,14 +28,14 @@ class AdminModeGroupAppService extends AbstractModeAppService
 
         $groupDTOs = AdminModeAssembler::groupEntitiesToAdminDTOs($groups);
 
-        // process分group图标
+        // processminutegroup图标
         $this->processGroupIcons($groupDTOs);
 
         return $groupDTOs;
     }
 
     /**
-     * get分groupdetail (管理后台use).
+     * getminutegroupdetail (管理back台use).
      */
     public function getGroupById(DelightfulUserAuthorization $authorization, string $groupId): ?array
     {
@@ -57,7 +57,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * create分group (管理后台use).
+     * createminutegroup (管理back台use).
      */
     public function createGroup(DelightfulUserAuthorization $authorization, CreateModeGroupRequest $request): AdminModeGroupDTO
     {
@@ -88,7 +88,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * update分group (管理后台use).
+     * updateminutegroup (管理back台use).
      */
     public function updateGroup(DelightfulUserAuthorization $authorization, string $groupId, UpdateModeGroupRequest $request): AdminModeGroupDTO
     {
@@ -96,7 +96,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // fromrequestobject直接convert为实体
+            // fromrequestobject直接convert为实body
             $groupEntity = AdminModeAssembler::updateModeGroupRequestToEntity($request, $groupId);
 
             $updatedGroup = $this->groupDomainService->updateGroup($dataIsolation, $groupEntity);
@@ -117,7 +117,7 @@ class AdminModeGroupAppService extends AbstractModeAppService
     }
 
     /**
-     * delete分group.
+     * deleteminutegroup.
      */
     public function deleteGroup(DelightfulUserAuthorization $authorization, string $groupId): void
     {

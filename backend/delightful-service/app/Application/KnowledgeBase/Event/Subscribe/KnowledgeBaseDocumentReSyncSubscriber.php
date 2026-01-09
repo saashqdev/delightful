@@ -51,9 +51,9 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
         /** @var LoggerInterface $logger */
         $logger = di(LoggerInterface::class);
 
-        // get分布式lock
+        // getminute布typelock
         $lockKey = "document_re_sync:{$documentEntity->getKnowledgeBaseCode()}:{$documentEntity->getCode()}";
-        if (! $lock->mutexLock($lockKey, $event->knowledgeBaseDocumentEntity->getCreatedUid(), 300)) { // 5分钟timeout
+        if (! $lock->mutexLock($lockKey, $event->knowledgeBaseDocumentEntity->getCreatedUid(), 300)) { // 5minute钟timeout
             $logger->info('document[' . $documentEntity->getCode() . ']正inbe其他进程process，skipsync');
             return;
         }
@@ -82,11 +82,11 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
         /** @var KnowledgeBaseVectorAppService $knowledgeBaseVectorAppService */
         $knowledgeBaseVectorAppService = di(KnowledgeBaseVectorAppService::class);
 
-        // 自增version号(抢lock)
+        // 自增versionnumber(抢lock)
         $affectedRows = $knowledgeBaseDocumentDomainService->increaseVersion($dataIsolation, $documentEntity);
-        // if自增fail，instruction已经重新to量化过了，提前end
+        // if自增fail，instruction已经重新toquantity化过了，提frontend
         if ($affectedRows === 0) {
-            $logger->info('document已重新to量化，skipsync');
+            $logger->info('document已重新toquantity化，skipsync');
             return;
         }
 
@@ -101,7 +101,7 @@ readonly class KnowledgeBaseDocumentReSyncSubscriber implements ListenerInterfac
             return;
         }
 
-        // 销毁旧分段
+        // 销毁旧minutesegment
         try {
             $knowledgeBaseVectorAppService->destroyOldFragments($dataIsolation, $knowledge, $documentEntity);
         } catch (Throwable $throwable) {

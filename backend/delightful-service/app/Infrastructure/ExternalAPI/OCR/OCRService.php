@@ -38,7 +38,7 @@ readonly class OCRService
         $ocrClient = $this->clientFactory->getClient($type);
         try {
             $result = retry(1, function () use ($ocrClient, $url) {
-                // ifalsohave其他service商，这里can故障转移
+                // ifalsohave其他service商，这withincan故障转移
                 return $this->get($url, $ocrClient);
             }, 1000);
         } catch (Throwable $throwable) {
@@ -70,10 +70,10 @@ readonly class OCRService
             ],
         ]);
 
-        // get远程file的头info
+        // get远程file的headinfo
         $headers = get_headers($url, true, $context);
         if ($headers === false) {
-            throw new RuntimeException("无法get头info: {$url}");
+            throw new RuntimeException("无法getheadinfo: {$url}");
         }
 
         // 提取 `Last-Modified`、`ETag` 和 `Content-Length`（if存in）
@@ -81,7 +81,7 @@ readonly class OCRService
         $etag = $headers['Etag'] ?? null;
         $contentLength = $headers['Content-Length'] ?? null;
 
-        // checkcache中的 `Last-Modified`、`ETag` 和 `Content-Length`
+        // checkcachemiddle的 `Last-Modified`、`ETag` 和 `Content-Length`
         if ($cachedData) {
             $isCacheValid = true;
 

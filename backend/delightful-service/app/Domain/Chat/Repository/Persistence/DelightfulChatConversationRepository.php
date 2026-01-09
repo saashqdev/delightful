@@ -124,7 +124,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
     }
 
     /**
-     * (分organization)getuser与指定user的session窗口info.
+     * (minuteorganization)getuser与finger定user的session窗口info.
      * @return array<DelightfulConversationEntity>
      */
     public function getConversationsByReceiveIds(string $userId, array $receiveIds, ?string $userOrganizationCode = null): array
@@ -140,12 +140,12 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
 
     public function getReceiveConversationBySenderConversationId(string $senderConversationId): ?DelightfulConversationEntity
     {
-        // get发件方的info
+        // gethairitem方的info
         $senderConversationEntity = $this->getConversationById($senderConversationId);
         if ($senderConversationEntity === null) {
             return null;
         }
-        // get收件方的session窗口
+        // get收item方的session窗口
         $receiveConversationDTO = new DelightfulConversationEntity();
         $receiveConversationDTO->setUserId($senderConversationEntity->getReceiveId());
         $receiveConversationDTO->setReceiveId($senderConversationEntity->getUserId());
@@ -200,7 +200,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
     }
 
     /**
-     * 批量移exceptsession窗口.
+     * 批quantity移exceptsession窗口.
      */
     public function batchRemoveConversations(array $userIds, string $receiveId, ConversationType $receiveType): int
     {
@@ -216,7 +216,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
             ]);
     }
 
-    // 批量updatesession窗口
+    // 批quantityupdatesession窗口
     public function batchUpdateConversations(array $conversationIds, array $updateData): int
     {
         return $this->delightfulChatConversationModel::query()
@@ -250,7 +250,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
     }
 
     /**
-     * 批量updatesession窗口的交互指令.
+     * 批quantityupdatesession窗口的交互finger令.
      * @param array $updateData format为：[['conversation_id' => 'xxx', 'instructs' => [...]], ...]
      */
     public function batchUpdateInstructs(array $updateData): void
@@ -327,7 +327,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
             ->when($conversation->hasReceiveType(), function ($query) use ($conversation) {
                 $query->where('receive_type', $conversation->getReceiveType()->value);
             });
-        // receive_type +  receive_id 其实是all局唯一的,can确定organizationencoding. but是ifneedquery时指定organization,also是加上
+        // receive_type +  receive_id 其实是all局唯一的,can确定organizationencoding. but是ifneedqueryo clockfinger定organization,also是加up
         if ($conversation->getUserOrganizationCode()) {
             $query->where('user_organization_code', $conversation->getUserOrganizationCode());
         }
@@ -341,7 +341,7 @@ class DelightfulChatConversationRepository implements DelightfulChatConversation
         return $result;
     }
 
-    // 避免 redis cacheserialize的object,占usetoo多内存
+    // 避免 redis cacheserialize的object,占usetoo多inside存
     #[Cacheable(prefix: 'conversation', value: '_#{conversationId}', ttl: 10)]
     private function getConversationArrayById(string $conversationId): array
     {

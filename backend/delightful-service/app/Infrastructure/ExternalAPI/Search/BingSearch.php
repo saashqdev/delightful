@@ -54,12 +54,12 @@ class BingSearch
         string $requestUrl = ''
     ): array {
         /*
-         * use bing search并return上下文。
+         * use bing search并returnupdown文。
          */
         if (empty($requestUrl)) {
             $requestUrl = trim(config('search.drivers.bing.endpoint'));
         }
-        // ensure endpoint by /search 结尾
+        // ensure endpoint by /search 结tail
         if (! str_ends_with($requestUrl, '/search')) {
             $requestUrl = rtrim($requestUrl, '/') . '/search';
         }
@@ -96,11 +96,11 @@ class BingSearch
         ];
 
         $attempt = 0;
-        $maxAttempts = 2; // originalrequest + 1次retry
+        $maxAttempts = 2; // originalrequest + 1timeretry
 
         while ($attempt < $maxAttempts) {
             try {
-                // if是retry(第二次尝试)，disableSSLverify
+                // if是retry(the二time尝试)，disableSSLverify
                 if ($attempt !== 0) {
                     $clientConfig['verify'] = false;
                     $this->logger->warning('Retrying request with SSL verification disabled', [
@@ -116,7 +116,7 @@ class BingSearch
                     'query' => $queryParams,
                 ]);
 
-                // getresponse体content
+                // getresponsebodycontent
                 $body = $response->getBody()->getContents();
 
                 // ifneed将 JSON convert为arrayorobject，canuse json_decode
@@ -144,7 +144,7 @@ class BingSearch
             }
         }
 
-        // if走to这里，instruction所have尝试allfail了
+        // if走to这within，instruction所have尝试allfail了
         throw new RuntimeException('Search engine error.');
     }
 }

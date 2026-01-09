@@ -599,8 +599,8 @@ class KnowledgeBaseApiTest extends HttpTestCase
             'content' => 'This is a test fragment content for testing similarity query functionality',
         ], $document['code'], $code);
 
-        // executesimilar度query
-        $query = 'testsimilar度query';
+        // executesimilardegreequery
+        $query = 'testsimilardegreequery';
         $res = $this->post(
             sprintf('%s/%s/fragments/similarity', self::API, $code),
             ['query' => $query],
@@ -627,7 +627,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * test重新to量化.
+     * test重新toquantity化.
      */
     public function testReVectorized()
     {
@@ -704,7 +704,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         $data = array_merge([
             'source_type' => SourceType::EXTERNAL_FILE->value,
             'name' => 'testknowledge base',
-            'description' => '这是一个testknowledge basedescription',
+            'description' => '这是一testknowledge basedescription',
             'icon' => 'qqqq',
             'enabled' => true,
             'is_draft' => true,
@@ -742,7 +742,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
     }
 
     /**
-     * createtest片段并returndata.
+     * createtestslicesegment并returndata.
      */
     protected function createFragment(array $overrideData = [], ?string $documentCode = null, ?string $knowledgeBaseCode = null): array
     {
@@ -760,7 +760,7 @@ class KnowledgeBaseApiTest extends HttpTestCase
         }
 
         $defaultData = [
-            'content' => '这是一个test片段content',
+            'content' => '这是一testslicesegmentcontent',
             'metadata' => ['page' => 1],
             'embedding_model' => 'test-model',
             'vector_db' => 'test-db',

@@ -32,7 +32,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $organizationCode;
 
     /**
-     * 唯一encoding，仅increate时generate，use作给前端的id.
+     * 唯一encoding，仅increateo clockgenerate，use作给front端的id.
      */
     protected string $code;
 
@@ -59,7 +59,7 @@ class DelightfulFlowEntity extends AbstractEntity
     protected string $toolSetId = '';
 
     /**
-     * 仅前端need，process编排放to node 节点configuration的 next_nodes 中.
+     * 仅front端need，process编row放to node sectionpointconfiguration的 next_nodes middle.
      */
     protected array $edges;
 
@@ -125,10 +125,10 @@ class DelightfulFlowEntity extends AbstractEntity
 
     public function prepareTestRun(): void
     {
-        // 试运行是要按照开启时计算
+        // 试运line是要按照开启o clock计算
         $this->enabled = true;
 
-        // process试运行其实只need nodes
+        // process试运line其实只need nodes
         if (empty($this->nodes)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'common.empty', ['label' => 'flow.fields.nodes']);
         }
@@ -207,7 +207,7 @@ class DelightfulFlowEntity extends AbstractEntity
         $this->modifier = $publisher;
         $this->updatedAt = new DateTime('now');
 
-        // publish时need按照开启来process
+        // publisho clockneed按照开启来process
         $enable = $this->enabled;
         $this->enabled = true;
         $this->nodeValidate(true);
@@ -238,14 +238,14 @@ class DelightfulFlowEntity extends AbstractEntity
             }
 
             if ($node->isStart() && ! $node->getParentId()) {
-                // if已经have一个了，那么是error的process，出现了多个start节点
+                // if已经have一了，那么是error的process，出现了多startsectionpoint
                 if ($this->startNode) {
                     ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.node.start.only_one');
                 }
                 $this->startNode = $node;
             }
             if ($node->isEnd() && ! $node->getParentId()) {
-                // 多个end节点时，暂时取first，should要做成只能have一个end节点
+                // 多endsectionpointo clock，暂o clock取first，should要做become只能have一endsectionpoint
                 if (! $this->endNode) {
                     $this->endNode = $node;
                 }
@@ -674,12 +674,12 @@ class DelightfulFlowEntity extends AbstractEntity
         }
 
         if ($this->type === Type::Tools) {
-            // name只能contain 字母、number、下划线
+            // name只能contain 字母、number、down划line
             if (! preg_match('/^[a-zA-Z0-9_]+$/', $this->name)) {
                 ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.tool.name.invalid_format');
             }
             // todo 要唯一
-            // todo 内置tool名allowbeuse
+            // todo inside置tool名allowbeuse
         }
     }
 

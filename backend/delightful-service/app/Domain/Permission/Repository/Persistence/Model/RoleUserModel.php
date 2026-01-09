@@ -20,8 +20,8 @@ use Hyperf\Snowflake\Concern\Snowflake;
  * @property int $role_id roleID
  * @property string $user_id userID，对应delightful_contact_users.user_id
  * @property string $organization_code organizationencoding
- * @property null|string $assigned_by 分配者userID
- * @property null|Carbon $assigned_at 分配time
+ * @property null|string $assigned_by minute配者userID
+ * @property null|Carbon $assigned_at minute配time
  * @property Carbon $created_at creation time
  * @property Carbon $updated_at update time
  * @property null|Carbon $deleted_at deletion time
@@ -37,7 +37,7 @@ class RoleUserModel extends AbstractModel
     protected ?string $table = 'delightful_role_users';
 
     /**
-     * 可批量赋value的property.
+     * 可批quantity赋value的property.
      */
     protected array $fillable = [
         'id',

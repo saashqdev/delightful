@@ -31,17 +31,17 @@ class Node extends AbstractValueObject
     protected string $nodeVersion = '';
 
     /**
-     * 节点元data，可use作给前端的定位，后端仅storage和展示，nothave任何逻辑.
+     * sectionpointyuandata，可use作给front端的定位，back端仅storage和展示，nothave任何逻辑.
      */
     protected array $meta = [];
 
     /**
-     * 节点parameterconfiguration，目前依靠array来data传递.
+     * sectionpointparameterconfiguration，目front依靠array来data传递.
      */
     protected array $params = [];
 
     /**
-     * 下一个节点 id list.
+     * down一sectionpoint id list.
      */
     protected array $nextNodes = [];
 
@@ -52,13 +52,13 @@ class Node extends AbstractValueObject
     protected ?NodeOutput $systemOutput = null;
 
     /**
-     * 节点debugresult.
+     * sectionpointdebugresult.
      */
     protected ?NodeDebugResult $nodeDebugResult = null;
 
     /**
-     * 节点execute的callbackfunction，ifhave该value，那么将直接execute该选择，而not是passNodeRunner来execute.
-     * 这里暂时想tois为了单测方便.
+     * sectionpointexecute的callbackfunction，ifhave该value，那么将直接execute该选择，而not是passNodeRunner来execute.
+     * 这within暂o clock想tois为了单测方便.
      */
     private ?Closure $callback = null;
 

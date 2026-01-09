@@ -33,7 +33,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
         $dataIsolation = $executionData->getDataIsolation();
         $waitMessageDomainService = di(DelightfulFlowWaitMessageDomainService::class);
 
-        // if是作为start节点
+        // if是作为startsectionpoint
         if ($executionData->getTriggerType() === TriggerType::WaitMessage) {
             $result = $this->chatMessage($vertexResult, $executionData);
             $vertexResult->setResult($result);
@@ -41,7 +41,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
             return;
         }
 
-        // if是作为运行节点 仅record，thenendwhen前execute
+        // if是作为运linesectionpoint 仅record，thenendwhenfrontexecute
         $waitMessageEntity = new DelightfulFlowWaitMessageEntity();
         $waitMessageEntity->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
         $waitMessageEntity->setConversationId($executionData->getConversationId());
@@ -60,7 +60,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
             $waitMessageEntity->setTimeout(time() + $intervalSeconds);
         }
 
-        // 暂时also是放todatalibrary中，后续考虑放to objectstorage 中
+        // 暂o clockalso是放todatalibrarymiddle，back续考虑放to objectstorage middle
         $persistenceData = $executionData->getPersistenceData();
         $waitMessageEntity->setPersistentData($persistenceData);
 

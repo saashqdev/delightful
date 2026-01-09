@@ -153,11 +153,11 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             return $this->getServiceProviderConfigByModelId($modelId, $organizationCode, $throw);
         }
 
-        // 2. ifonly modelOriginId,先尝试findto应model
+        // 2. ifonly modelOriginId,先tryfindto应model
         if (! empty($modelOriginId)) {
             $models = $this->getModelsByVersionAndOrganization($modelOriginId, $organizationCode);
             if (! empty($models)) {
-                // if找tomodel,not直接return官方servicequotientconfiguration,whileisconductenterone步judge
+                // if找tomodel,notdirectlyreturn官方servicequotientconfiguration,whileisconductenterone步judge
                 $this->logger->info('找toto应model,judgeservicequotientconfiguration', [
                     'modelVersion' => $modelOriginId,
                     'organizationCode' => $organizationCode,
@@ -268,7 +268,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
     /**
      * get超清修复servicequotientconfiguration.
      * fromImageGenerateModelType::getMiracleVisionModes()[0]getmodel.
-     * if官方andnon官方allenable,优先usenon官方configuration.
+     * if官方andnon官方allenable,priorityusenon官方configuration.
      *
      * @param string $modelId modelversion
      * @param string $organizationCode organizationencoding
@@ -511,7 +511,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
 
     /**
      * fromactivatemodelmiddlefindcanuseservicequotientconfiguration
-     * 优先returnnon官方configuration,ifnothavethenreturn官方configuration.
+     * priorityreturnnon官方configuration,ifnothavethenreturn官方configuration.
      *
      * @param ProviderModelEntity[] $activeModels activatemodelcolumntable
      */
@@ -541,7 +541,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
         // 4. batchquantityquery所haveservicequotient
         $providerMap = $this->serviceProviderRepository->getByIds($providerIds);
 
-        // 5. 重建优先levelhandlelogic
+        // 5. 重建prioritylevelhandlelogic
         $officialConfig = null;
 
         foreach ($activeModels as $model) {
@@ -569,7 +569,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
                 if ($serviceProviderConfigEntity->getStatus() !== Status::Enabled) {
                     continue;
                 }
-                // 找toactivatenon官方configuration,immediatelyreturn(优先levelmosthigh)
+                // 找toactivatenon官方configuration,immediatelyreturn(prioritylevelmosthigh)
                 return $serviceProviderConfigEntity;
             }
 

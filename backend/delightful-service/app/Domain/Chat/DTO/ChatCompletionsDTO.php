@@ -15,7 +15,7 @@ class ChatCompletionsDTO extends AbstractDTO
 
     protected string $message;
 
-    // ifnotinconversationmiddle,supportoutside部传入historymessage
+    // ifnotinconversationmiddle,supportoutside部pass inhistorymessage
     protected array $history;
 
     protected string $topicId = '';

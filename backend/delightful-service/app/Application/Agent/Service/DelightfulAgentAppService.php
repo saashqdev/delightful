@@ -193,7 +193,7 @@ class DelightfulAgentAppService extends AbstractAppService
     public function getAgentById(string $agentVersionId, DelightfulUserAuthorization $authorization): DelightfulAgentVersionEntity
     {
         try {
-            // first尝试asfor agent_version_id fromalreadypublishversionmiddleget
+            // firsttryasfor agent_version_id fromalreadypublishversionmiddleget
             $delightfulAgentVersionEntity = $this->delightfulAgentVersionDomainService->getAgentById($agentVersionId);
         } catch (Throwable $e) {
             // iffail,from delightful_bots tablegetoriginalassistantdata,andconvertfor DelightfulAgentVersionEntity(versionnumberfor null)
@@ -851,10 +851,10 @@ class DelightfulAgentAppService extends AbstractAppService
         $userId = $authenticatable->getId();
         $lockKey = 'agent:init_agents:' . $orgCode;
 
-        // 尝试getlock,timeouttimesettingfor60second
+        // trygetlock,timeouttimesettingfor60second
         if (! $this->redisLocker->mutexLock($lockKey, $userId, 60)) {
             $this->logger->warning(sprintf('get initAgents lockfail, orgCode: %s, userId: %s', $orgCode, $userId));
-            // getlockfail,canchoose直接returnorthrowexception,thiswithinchoose直接returnavoid阻塞
+            // getlockfail,canchoosedirectlyreturnorthrowexception,thiswithinchoosedirectlyreturnavoid阻塞
             return;
         }
 
@@ -886,7 +886,7 @@ class DelightfulAgentAppService extends AbstractAppService
         }
 
         $loadPresetConfig = $this->loadPresetConfig('chat', ['modelName' => $modelName]);
-        // 准备基本configuration
+        // prepare基本configuration
         $config = [
             'agent_name' => '麦吉assistant',
             'agent_description' => 'Iwillreturn答youone切',
@@ -914,7 +914,7 @@ class DelightfulAgentAppService extends AbstractAppService
         }
 
         $loadPresetConfig = $this->loadPresetConfig('generate_image', ['modelName' => $modelName]);
-        // 准备基本configuration
+        // prepare基本configuration
         $config = [
             'agent_name' => '文生graph助hand',
             'agent_description' => 'onestrongbigAItextgenerategraphlike助hand,canaccording to您descriptioncreate精美graphlike.',
@@ -942,7 +942,7 @@ class DelightfulAgentAppService extends AbstractAppService
             $modelName = $models['list'][0]->getModelName();
         }
 
-        // 准备基本configuration
+        // prepare基本configuration
         $config = [
             'agent_name' => 'documentparse助hand',
             'agent_description' => 'documentparse助hand',
@@ -1030,11 +1030,11 @@ class DelightfulAgentAppService extends AbstractAppService
 
     /**
      * getenableassistantversioncolumntable.
-     * optimize:直接in领域servicelayerconductJOINquery,avoid传入pass多ID.
+     * optimize:directlyindomainservicelayerconductJOINquery,avoidpass inpass多ID.
      */
     private function getEnabledAgentVersions(string $organizationCode, int $page, int $pageSize, string $agentName): array
     {
-        // 直接call领域servicegettheorganizationdownenableassistantversion,avoid先get所haveIDagainquery
+        // directlycalldomainservicegettheorganizationdownenableassistantversion,avoid先get所haveIDagainquery
         return $this->delightfulAgentVersionDomainService->getEnabledAgentsByOrganization($organizationCode, $page, $pageSize, $agentName);
     }
 
@@ -1052,7 +1052,7 @@ class DelightfulAgentAppService extends AbstractAppService
         $departmentUserEntities = $this->delightfulDepartmentUserDomainService->getDepartmentUsersByUserIds([$currentUserId], $dataIsolation);
         $directDepartmentIds = [];
 
-        // getuser直接所属departmentID
+        // getuserdirectlybelong todepartmentID
         foreach ($departmentUserEntities as $entity) {
             $directDepartmentIds[] = $entity->getDepartmentId();
         }
@@ -1128,8 +1128,8 @@ class DelightfulAgentAppService extends AbstractAppService
 
     /**
      * getassistanttotal.
-     * optimize:useJOINqueryavoid传入bigquantityID.
-     * optimize:useJOINqueryavoid传入bigquantityID.
+     * optimize:useJOINqueryavoidpass inbigquantityID.
+     * optimize:useJOINqueryavoidpass inbigquantityID.
      */
     private function getTotalAgentsCount(string $organizationCode, string $agentName): int
     {

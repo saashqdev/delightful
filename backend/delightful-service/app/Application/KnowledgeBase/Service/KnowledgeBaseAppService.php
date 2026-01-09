@@ -62,7 +62,7 @@ class KnowledgeBaseAppService extends AbstractKnowledgeAppService
         if ($delightfulFlowKnowledgeEntity->shouldCreate()) {
             $modelId = $delightfulFlowKnowledgeEntity->getEmbeddingConfig()['model_id'] ?? null;
             if (! $modelId) {
-                // 优先useconfigurationmodel
+                // priorityuseconfigurationmodel
                 $modelId = EmbeddingGenerator::defaultModel();
                 if (! $modelGatewayMapper->exists($dataIsolation, $modelId)) {
                     // gettheone

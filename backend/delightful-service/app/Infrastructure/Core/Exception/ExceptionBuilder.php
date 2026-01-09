@@ -44,7 +44,7 @@ class ExceptionBuilder
     }
 
     /**
-     * @param string $message allow传入customizeerrorinformation
+     * @param string $message allowpass incustomizeerrorinformation
      * @return never-return // forphpstandetect
      */
     public static function throw(BackedEnum $error, string $message = '', array $replace = [], ?string $locale = null, ?Throwable $throwable = null): void

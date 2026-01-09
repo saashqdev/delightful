@@ -82,7 +82,7 @@ class AiAbilityEntity extends AbstractEntity
     public function setName(array|string $name): void
     {
         if (is_string($name)) {
-            // ifisstring,尝试parseJSON
+            // ifisstring,tryparseJSON
             $decoded = json_decode($name, true);
             $this->name = is_array($decoded) ? $decoded : [];
         } else {
@@ -107,7 +107,7 @@ class AiAbilityEntity extends AbstractEntity
     public function setDescription(array|string $description): void
     {
         if (is_string($description)) {
-            // ifisstring,尝试parseJSON
+            // ifisstring,tryparseJSON
             $decoded = json_decode($description, true);
             $this->description = is_array($decoded) ? $decoded : [];
         } else {

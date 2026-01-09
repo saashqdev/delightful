@@ -38,7 +38,7 @@ return new class extends Migration {
             $table->unique(['third_union_id', 'third_platform_type', 'delightful_organization_code'], 'unique_third_id');
             $table->softDeletes();
             $table->timestamps();
-            $table->comment('thethree方platformsyncpasscomeuserinfotable. notpassday书havepoint特殊,can直接day书userwhen做麦吉user.');
+            $table->comment('thethree方platformsyncpasscomeuserinfotable. notpassday书havepoint特殊,candirectlyday书userwhen做麦吉user.');
         });
     }
 

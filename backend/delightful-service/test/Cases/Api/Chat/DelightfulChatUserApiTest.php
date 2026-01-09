@@ -173,7 +173,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
-        // nullparameterdownshouldnormalreturncurrentuserinfo,not报错
+        // nullparameterdownshouldnormalreturncurrentuserinfo,noterror
         $this->assertIsArray($response, 'responseshouldisarrayformat');
 
         // ifisauthenticationerror,skiptest
@@ -218,7 +218,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
         // nullvalueshouldbecorrecthandle,not导致error
-        $this->assertIsArray($response, '传入nullvalueo clock应normalreturnresponse');
+        $this->assertIsArray($response, 'pass innullvalueo clock应normalreturnresponse');
 
         // ifisauthenticationerror,skiptest
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
@@ -482,7 +482,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
 
         $response = $this->get(self::GET_USER_UPDATE_PERMISSION_API, $headers);
 
-        // maybereturnerrororsuccess,取决atbusinesslogic
+        // maybereturnerrororsuccess,depend onatbusinesslogic
         $this->assertIsArray($response, 'responseshouldisarrayformat');
         $this->assertArrayHasKey('code', $response, 'response应containcodefield');
 
@@ -545,7 +545,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
      */
     private function performLogin(): string
     {
-        // ifalready经havetoken,直接return
+        // ifalready经havetoken,directlyreturn
         if (! empty(self::$accessToken)) {
             return self::$accessToken;
         }

@@ -31,7 +31,7 @@ class VolcengineArkModel extends AbstractImageGenerate
         $apiKey = $serviceProviderConfig['api_key'];
 
         if (empty($apiKey)) {
-            throw new Exception('VolcengineArk API Key configuration缺失');
+            throw new Exception('VolcengineArk API Key configurationmissing');
         }
 
         // ifnothaveconfigurationURL,usedefault端point
@@ -87,7 +87,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             return $response; // returnnulldataresponse
         }
 
-        // 3. andhairhandle - 直接操asresponseobject
+        // 3. andhairhandle - directly操asresponseobject
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
@@ -196,7 +196,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             $payload['sequential_image_generation_options'] = $sequentialOptions;
         }
 
-        // ifhave参考graphlike,thenaddimagefield(support多张image)
+        // ifhavereferencegraphlike,thenaddimagefield(support多张image)
         if (! empty($referImages)) {
             if (count($referImages) === 1) {
                 $payload['image'] = $referImages[0];
@@ -237,7 +237,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             $payload['sequential_image_generation_options'] = $sequentialOptions;
         }
 
-        // ifhave参考graphlike,thenaddimagefield(support多张image)
+        // ifhavereferencegraphlike,thenaddimagefield(support多张image)
         if (! empty($referImages)) {
             if (count($referImages) === 1) {
                 $payload['image'] = $referImages[0];
@@ -246,7 +246,7 @@ class VolcengineArkModel extends AbstractImageGenerate
             }
         }
 
-        // 直接callAPI,exceptionfrom然toup抛
+        // directlycallAPI,exceptionfrom然toup抛
         return $this->api->generateImage($payload);
     }
 

@@ -80,7 +80,7 @@ class DelightfulStreamTextProcessor
         }
 
         if ($this->state === self::STATE_IN_TAG) {
-            // ifalready经detectlengthalready经达tomostbiglength,直接response
+            // ifalready经detectlengthalready经达tomostbiglength,directlyresponse
             if (mb_strlen($this->buffer) > max($this->successLengths)) {
                 $this->output($params);
                 return;

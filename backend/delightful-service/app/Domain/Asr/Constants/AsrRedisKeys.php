@@ -26,7 +26,7 @@ class AsrRedisKeys
     public const HEARTBEAT = 'asr:heartbeat:%s';
 
     /**
-     * 总结tasklock Key format.
+     * summarytasklock Key format.
      */
     public const SUMMARY_LOCK = 'asr:summary:task:%s';
 

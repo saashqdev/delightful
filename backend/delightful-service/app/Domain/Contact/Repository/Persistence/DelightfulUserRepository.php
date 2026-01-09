@@ -213,7 +213,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     }
 
     /**
-     * according to delightfulId getuser所属organizationlist.
+     * according to delightfulId getuserbelong toorganizationlist.
      * @return string[]
      */
     public function getUserOrganizationsByDelightfulId(string $delightfulId): array
@@ -499,7 +499,7 @@ readonly class DelightfulUserRepository implements DelightfulUserRepositoryInter
     }
 
     /**
-     * 投递initializedefault助handsessioneventtoMQ.
+     * deliverinitializedefault助handsessioneventtoMQ.
      */
     private function publishInitDefaultAssistantConversationEventForMQ(DelightfulUserEntity $userEntity): void
     {

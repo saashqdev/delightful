@@ -107,7 +107,7 @@ class DelightfulUserAuthorization extends AbstractAuthorization
             $delightfulUserId = $beDelightfulAgentUserId;
             $delightfulEnvEntity = null;
             $loginResponseDTO = null;
-            // 直接login
+            // directlylogin
             goto create_user;
         }
 

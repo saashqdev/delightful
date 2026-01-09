@@ -134,7 +134,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendOneOnOneChatMessages($param);
             } catch (Throwable $throwable) {
-                // 钉钉 downloadimagetimemorelong,超pass3000ms,网close直接returntimeouterror.sendmessagethiso clockskip
+                // 钉钉 downloadimagetimemorelong,超pass3000ms,网closedirectlyreturntimeouterror.sendmessagethiso clockskip
                 simple_log('SendOneOnOneChatMessagesError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -152,7 +152,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
             try {
                 $this->openDevFactory->chatBotEndpoint->sendGroupMessage($param);
             } catch (Throwable $throwable) {
-                // 钉钉 downloadimagetimemorelong,超pass3000ms,网close直接returntimeouterror.sendmessagethiso clockskip
+                // 钉钉 downloadimagetimemorelong,超pass3000ms,网closedirectlyreturntimeouterror.sendmessagethiso clockskip
                 simple_log('SendGroupMessageError', [
                     'error' => $throwable->getMessage(),
                 ]);
@@ -185,7 +185,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * create场景群.
+     * createscenario群.
      */
     public function createSceneGroup(ThirdPlatformCreateSceneGroup $params): string
     {

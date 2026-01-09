@@ -32,7 +32,7 @@ use Throwable;
 use function Hyperf\Translation\trans;
 
 /**
- * long-term记忆领域service
+ * long-term记忆domainservice
  */
 readonly class LongTermMemoryDomainService
 {
@@ -155,7 +155,7 @@ readonly class LongTermMemoryDomainService
                     $content = $memory->getContent();
                     $pendingContent = $memory->getPendingContent();
 
-                    // ifcontentfornullandPendingContentnotfornull,直接delete记忆
+                    // ifcontentfornullandPendingContentnotfornull,directlydelete记忆
                     if (empty($content) && ! empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }
@@ -165,11 +165,11 @@ readonly class LongTermMemoryDomainService
                         $memory->setStatus(MemoryStatus::ACTIVE);
                         $memoriesToUpdate[] = $memory;
                     }
-                    // ifcontentnotfornullbutPendingContentfornull,also直接delete记忆(原havelogicmaintain)
+                    // ifcontentnotfornullbutPendingContentfornull,alsodirectlydelete记忆(原havelogicmaintain)
                     elseif (! empty($content) && empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }
-                    // ifcontentfornullandPendingContentalsofornull,直接delete记忆(原havelogicmaintain)
+                    // ifcontentfornullandPendingContentalsofornull,directlydelete记忆(原havelogicmaintain)
                     elseif (empty($content) && empty($pendingContent)) {
                         $memoriesToDelete[] = $memory->getId();
                     }
@@ -186,7 +186,7 @@ readonly class LongTermMemoryDomainService
                 }
             }
 
-            // ifis memory_card_quick 场景,needupdateto应messagecontent
+            // ifis memory_card_quick scenario,needupdateto应messagecontent
             if ($scenario === MemoryOperationScenario::MEMORY_CARD_QUICK && ! empty($delightfulMessageId)) {
                 $this->updateMessageWithMemoryOperation($delightfulMessageId, $action, $memoryIds);
             }
@@ -550,7 +550,7 @@ readonly class LongTermMemoryDomainService
         }
 
         try {
-            // validate记忆IDvalidpropertyand所属权
+            // validate记忆IDvalidpropertyandbelong to权
             $validMemoryIds = $this->repository->filterMemoriesByUser($memoryIds, $orgId, $appId, $userId);
             if (empty($validMemoryIds)) {
                 return 0;

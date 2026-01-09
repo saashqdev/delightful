@@ -51,7 +51,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
 
         $this->validateRequest($imageGenerateRequest);
 
-        // no参考graphlike,use原havegeneratelogic
+        // noreferencegraphlike,use原havegeneratelogic
         $this->logger->info('Azure OpenAIgraphlikegenerate:startcallgenerateAPI', [
             'prompt' => $imageGenerateRequest->getPrompt(),
             'size' => $imageGenerateRequest->getSize(),
@@ -231,7 +231,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
     }
 
     /**
-     * whenhave参考graphlikeo clock,usegraphlikeeditmodelgenerategraphlike.
+     * whenhavereferencegraphlikeo clock,usegraphlikeeditmodelgenerategraphlike.
      */
     private function generateImageWithReference(AzureOpenAIImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
@@ -240,7 +240,7 @@ class AzureOpenAIImageGenerateModel extends AbstractImageGenerate
             $editRequest = $this->convertToEditRequest($imageGenerateRequest);
             return $editModel->generateImage($editRequest);
         } catch (Exception $e) {
-            $this->logger->error('Azure OpenAIgraphlikegenerate:参考graphlikegeneratefail', [
+            $this->logger->error('Azure OpenAIgraphlikegenerate:referencegraphlikegeneratefail', [
                 'error' => $e->getMessage(),
             ]);
             throw $e;

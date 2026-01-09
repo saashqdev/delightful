@@ -18,7 +18,7 @@ use Throwable;
 
 /**
  * messagepush模piece.
- * according togenerateseqbyandit优先level,uselongconnectpushgiveuser.
+ * according togenerateseqbyanditprioritylevel,uselongconnectpushgiveuser.
  * eachseqmaybewant推giveuser1to几tencustomer端.
  */
 abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
@@ -26,7 +26,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
     protected AmqpTopicType $topic = AmqpTopicType::Seq;
 
     /**
-     * 1.本groundopenhairo clocknotstart,avoid消费testenvironmentdata,导致testenvironmentuser收nottomessage
+     * 1.本groundopenhairo clocknotstart,avoidconsumetestenvironmentdata,导致testenvironmentuser收nottomessage
      * 2.if本groundopenhairo clock想debug,请fromlinein本ground搭建front端environment,more换mqhost. or者applyonedevenvironment,isolationmq.
      */
     public function isEnable(): bool
@@ -35,7 +35,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
     }
 
     /**
-     * according to序columnnumber优先level.实o clocknotify收item方. thismaybeneedpublishsubscribe.
+     * according to序columnnumberprioritylevel.实o clocknotify收item方. thismaybeneedpublishsubscribe.
      * @param SeqCreatedEvent $data
      */
     public function consumeMessage($data, AMQPMessage $message): Result
@@ -50,7 +50,7 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
         try {
             foreach ($seqIds as $seqId) {
                 $seqId = (string) $seqId;
-                // useredisdetectseqwhetheralready经尝试多time,if超pass n time,thennotagainpush
+                // useredisdetectseqwhetheralready经try多time,if超pass n time,thennotagainpush
                 $seqRetryKey = sprintf('messagePush:seqRetry:%s', $seqId);
                 $seqRetryCount = $this->redis->get($seqRetryKey);
                 if ($seqRetryCount >= 3) {
@@ -58,9 +58,9 @@ abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer
                     return Result::ACK;
                 }
                 $this->addSeqRetryNumber($seqRetryKey);
-                // recordseq尝试pushcount,useatback续judgewhetherneedretry
+                // recordseqtrypushcount,useatback续judgewhetherneedretry
                 $this->delightfulSeqAppService->pushSeq($seqId);
-                // not报错,notagain重推
+                // noterror,notagain重推
                 $this->setSeqCanNotRetry($seqRetryKey);
             }
         } catch (Throwable $exception) {

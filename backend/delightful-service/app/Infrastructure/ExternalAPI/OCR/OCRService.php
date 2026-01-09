@@ -57,7 +57,7 @@ readonly class OCRService
         // definition Redis cachekey
         $cacheKey = 'file_cache:' . md5($url);
 
-        // 尝试fromcachegetdata
+        // tryfromcachegetdata
         $cachedData = $this->cache->get($cacheKey);
         if ($cachedData) {
             $cachedData = Json::decode($cachedData);
@@ -94,7 +94,7 @@ readonly class OCRService
                 $isCacheValid = $cachedData['Content-Length'] === $contentLength;
             }
 
-            // ifcachedatavalid,直接returncachecontent
+            // ifcachedatavalid,directlyreturncachecontent
             if ($isCacheValid) {
                 return $cachedData['content'];
             }

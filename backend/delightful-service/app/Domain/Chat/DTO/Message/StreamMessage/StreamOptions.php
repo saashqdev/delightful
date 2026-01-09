@@ -25,7 +25,7 @@ class StreamOptions extends AbstractEntity
     protected MessageAppendOptions $append;
 
     /**
-     * issuesearchendidentifier,useatfront端渲染endanimation.or者pushexceptioninfo.
+     * issuesearchendidentifier,useatfrontclient renderingendanimation.or者pushexceptioninfo.
      * @var StepFinishedDTO[]
      */
     protected array $stepsFinished;

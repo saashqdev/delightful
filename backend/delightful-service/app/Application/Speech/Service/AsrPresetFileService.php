@@ -22,7 +22,7 @@ use Throwable;
 
 /**
  * ASR presetfileservice
- * 负责createpreset笔记andstreamidentifyfile,供front端writecontent.
+ * 负责createpresetnoteandstreamidentifyfile,供front端writecontent.
  */
 readonly class AsrPresetFileService
 {
@@ -37,12 +37,12 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * createpreset笔记andstreamidentifyfile.
+     * createpresetnoteandstreamidentifyfile.
      *
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
      * @param int $projectId projectID
-     * @param string $displayDir displaydirectory相topath (如: 录音总结_xxx)
+     * @param string $displayDir displaydirectory相topath (如: recordingsummary_xxx)
      * @param int $displayDirId displaydirectoryID
      * @param string $hiddenDir hiddendirectory相topath (如: .asr_recordings/session_xxx)
      * @param int $hiddenDirId hiddendirectoryID
@@ -66,7 +66,7 @@ readonly class AsrPresetFileService
         // getorganization码+APP_ID+bucket_md5front缀
         $fullPrefix = $this->taskFileDomainService->getFullPrefix($organizationCode);
 
-        // create笔记file(放indisplaydirectory,uservisible)
+        // createnotefile(放indisplaydirectory,uservisible)
         $noteFile = $this->createNoteFile(
             $userId,
             $organizationCode,
@@ -103,7 +103,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * delete笔记file(笔记contentforemptyo clockcleanup).
+     * deletenotefile(notecontentforemptyo clockcleanup).
      *
      * @param string $fileId fileID
      * @return bool whetherdeletesuccess
@@ -113,20 +113,20 @@ readonly class AsrPresetFileService
         try {
             $fileEntity = $this->taskFileDomainService->getById((int) $fileId);
             if ($fileEntity === null) {
-                $this->logger->warning('笔记filenot存in', ['file_id' => $fileId]);
+                $this->logger->warning('notefilenot存in', ['file_id' => $fileId]);
                 return false;
             }
 
             $this->taskFileDomainService->deleteById($fileEntity->getFileId());
 
-            $this->logger->info('delete笔记filesuccess', [
+            $this->logger->info('deletenotefilesuccess', [
                 'file_id' => $fileId,
                 'file_name' => $fileEntity->getFileName(),
             ]);
 
             return true;
         } catch (Throwable $e) {
-            $this->logger->error('delete笔记filefail', [
+            $this->logger->error('deletenotefilefail', [
                 'file_id' => $fileId,
                 'error' => $e->getMessage(),
             ]);
@@ -135,7 +135,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * deletestreamidentifyfile(总结completebackcleanup).
+     * deletestreamidentifyfile(summarycompletebackcleanup).
      *
      * @param string $fileId fileID
      * @return bool whetherdeletesuccess
@@ -167,7 +167,7 @@ readonly class AsrPresetFileService
     }
 
     /**
-     * create笔记file(放indisplaydirectory).
+     * createnotefile(放indisplaydirectory).
      */
     private function createNoteFile(
         string $userId,
@@ -199,7 +199,7 @@ readonly class AsrPresetFileService
             taskKey: $taskKey,
             fullPrefix: $fullPrefix,
             workDir: $workDir,
-            logPrefix: 'preset笔记file'
+            logPrefix: 'presetnotefile'
         );
     }
 

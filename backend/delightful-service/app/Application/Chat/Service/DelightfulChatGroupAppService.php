@@ -227,7 +227,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         if ($groupEntity->getGroupStatus() === GroupStatusEnum::Disband) {
             // 找totheuser解散groupseq
             $seqEntity = $this->delightfulGroupDomainService->getGroupControlSeq($groupEntity, $dataIsolation, ControlMessageType::GroupDisband);
-            // ifalready经存ingroup chat解散 seq,then直接return
+            // ifalready经存ingroup chat解散 seq,thendirectlyreturn
             if (isset($seqEntity)) {
                 return $this->noticeGroupChangeSeq($seqEntity);
             }

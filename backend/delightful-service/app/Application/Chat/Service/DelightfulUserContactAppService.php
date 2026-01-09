@@ -176,7 +176,7 @@ class DelightfulUserContactAppService extends AbstractAppService
         // getcurrentuser拥haveorganizationcolumntable
         $userOrganizations = $this->userDomainService->getUserOrganizations($dataIsolation->getCurrentUserId());
 
-        // 基本userinfoquery - 传入user拥haveorganizationcolumntable
+        // 基本userinfoquery - pass inuser拥haveorganizationcolumntable
         $usersDetailDTOList = $this->userDomainService->getUserDetailByUserIdsWithOrgCodes($userIds, $userOrganizations);
         // handleuseravatar
         $usersDetail = $this->getUsersAvatarCoordinator($usersDetailDTOList, $dataIsolation);
@@ -191,7 +191,7 @@ class DelightfulUserContactAppService extends AbstractAppService
             // querydepartmentinfo
             $withDepartmentFullPath = $queryType === UserQueryType::UserAndDepartmentFullPath;
 
-            // getuser所属department
+            // getuserbelong todepartment
             $departmentUsers = $this->departmentUserDomainService->getDepartmentUsersByUserIds($userIds, $dataIsolation);
             $departmentIds = array_column($departmentUsers, 'department_id');
 

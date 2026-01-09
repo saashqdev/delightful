@@ -73,7 +73,7 @@ var_dump($response);
 $response = trim($response, '\n');
 var_dump($response);
 $response  = str_replace('\\"', '"', $response);
-// if $response itselfthenis JSON format,that么直接return
+// if $response itselfthenis JSON format,that么directlyreturn
 $decodedJson = json_decode($response, true);
 echo PHP_EOL;
 return [

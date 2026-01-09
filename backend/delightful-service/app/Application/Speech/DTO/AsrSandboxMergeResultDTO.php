@@ -10,7 +10,7 @@ namespace App\Application\Speech\DTO;
 use App\Application\Speech\Enum\SandboxAsrStatusEnum;
 
 /**
- * ASR 沙箱mergeresult DTO.
+ * ASR sandboxmergeresult DTO.
  */
 readonly class AsrSandboxMergeResultDTO
 {
@@ -24,7 +24,7 @@ readonly class AsrSandboxMergeResultDTO
     }
 
     /**
-     * from沙箱 API responsecreate DTO.
+     * fromsandbox API responsecreate DTO.
      */
     public static function fromSandboxResponse(array $response): self
     {

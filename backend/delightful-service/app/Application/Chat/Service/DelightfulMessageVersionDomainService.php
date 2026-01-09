@@ -13,7 +13,7 @@ use App\Domain\Chat\Service\AbstractDomainService;
 class DelightfulMessageVersionDomainService extends AbstractDomainService
 {
     /**
-     * getmessageversioncolumntable,按 version_id 升序.
+     * getmessageversioncolumntable,按 version_id ascending.
      * @return null|DelightfulMessageVersionEntity[]
      */
     public function getMessageVersions(string $delightfulMessageId): ?array
@@ -22,7 +22,7 @@ class DelightfulMessageVersionDomainService extends AbstractDomainService
         if (empty($messageVersions)) {
             return null;
         }
-        // 按 version_id 升序
+        // 按 version_id ascending
         usort($messageVersions, function ($a, $b) {
             return $a->getVersionId() <=> $b->getVersionId();
         });

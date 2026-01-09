@@ -200,14 +200,14 @@ class ServiceProviderApi extends AbstractApi
 
     /**
      * get所havenon官方LLMservicequotientlist
-     * 直接fromdatabasemiddlequerycategoryforllmandprovider_typenotforOFFICIALservicequotient
-     * notdependencyatcurrentorganization,适useatneedaddservicequotient场景.
+     * directlyfromdatabasemiddlequerycategoryforllmandprovider_typenotforOFFICIALservicequotient
+     * notdependencyatcurrentorganization,适useatneedaddservicequotientscenario.
      */
     #[CheckPermission([DelightfulResourceEnum::ADMIN_AI_MODEL, DelightfulResourceEnum::ADMIN_AI_IMAGE], DelightfulOperationEnum::QUERY)]
     public function getNonOfficialLlmProviders()
     {
         $authenticatable = $this->getAuthorization();
-        // 直接get所haveLLMtypenon官方servicequotient
+        // directlyget所haveLLMtypenon官方servicequotient
         return $this->adminProviderAppService->getAllNonOfficialProviders(Category::LLM, $authenticatable->getOrganizationCode());
     }
 
@@ -275,7 +275,7 @@ class ServiceProviderApi extends AbstractApi
         }
         $data = $aggregateDTO->toArray();
 
-        // ifnotisnewformatstructure,直接return
+        // ifnotisnewformatstructure,directlyreturn
         if (! isset($data['provider_config'])) {
             return $data;
         }

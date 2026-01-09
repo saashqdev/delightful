@@ -285,7 +285,7 @@ readonly class FileDomainService
                 key: $objectKey,
                 filename: $filename,
                 size: $object['size'] ?? null,
-                lastModified: null // ASRbusinessmiddlenotusethefield,直接传null
+                lastModified: null // ASRbusinessmiddlenotusethefield,directly传null
             );
         }
         return $files;

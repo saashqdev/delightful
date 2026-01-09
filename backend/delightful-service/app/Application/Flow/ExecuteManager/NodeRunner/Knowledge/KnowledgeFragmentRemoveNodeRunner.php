@@ -59,7 +59,7 @@ class KnowledgeFragmentRemoveNodeRunner extends AbstractKnowledgeNodeRunner
         $KnowledgeEntity = $knowledgeDomainService->show($knowledgeBaseDataIsolation, $knowledgeCode);
 
         if (! empty($businessId)) {
-            // 优先levelhigh
+            // prioritylevelhigh
             $fragment = $fragmentDomainService->showByBusinessId(
                 $knowledgeBaseDataIsolation,
                 $knowledgeCode,

@@ -60,7 +60,7 @@ class WaitMessageNodeRunner extends AbstractStartNodeRunner
             $waitMessageEntity->setTimeout(time() + $intervalSeconds);
         }
 
-        // 暂o clockalsois放todatalibrarymiddle,back续考虑放to objectstorage middle
+        // 暂o clockalsois放todatalibrarymiddle,back续consider放to objectstorage middle
         $persistenceData = $executionData->getPersistenceData();
         $waitMessageEntity->setPersistentData($persistenceData);
 

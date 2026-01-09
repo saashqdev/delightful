@@ -25,7 +25,7 @@ use Delightful\AsyncEvent\AsyncEventUtil;
 use Hyperf\DbConnection\Db;
 
 /**
- * knowledge basedocument领域service
+ * knowledge basedocumentdomainservice
  */
 readonly class KnowledgeBaseDocumentDomainService
 {
@@ -165,7 +165,7 @@ readonly class KnowledgeBaseDocumentDomainService
 
     public function getOrCreateDefaultDocument(KnowledgeBaseDataIsolation $dataIsolation, KnowledgeBaseEntity $knowledgeBaseEntity): KnowledgeBaseDocumentEntity
     {
-        // 尝试getdefaultdocument
+        // trygetdefaultdocument
         $defaultDocumentCode = $knowledgeBaseEntity->getDefaultDocumentCode();
         $documentEntity = $this->knowledgeBaseDocumentRepository->show($dataIsolation, $knowledgeBaseEntity->getCode(), $defaultDocumentCode);
         if ($documentEntity) {
@@ -248,7 +248,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * 准备create.
+     * preparecreate.
      */
     private function prepareForCreation(KnowledgeBaseDocumentEntity $documentEntity): void
     {
@@ -280,7 +280,7 @@ readonly class KnowledgeBaseDocumentDomainService
     }
 
     /**
-     * 准备update.
+     * prepareupdate.
      */
     private function prepareForUpdate(KnowledgeBaseDocumentEntity $newDocument, KnowledgeBaseDocumentEntity $oldDocument): void
     {

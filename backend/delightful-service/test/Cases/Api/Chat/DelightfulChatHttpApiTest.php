@@ -31,7 +31,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
                 ],
                 [
                     'role' => 'assistant',
-                    'content' => 'yougood,have什么canhelpyou?',
+                    'content' => 'yougood,havewhatcanhelpyou?',
                 ],
             ],
         ];

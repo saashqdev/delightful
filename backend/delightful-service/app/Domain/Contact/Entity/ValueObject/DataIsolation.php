@@ -13,7 +13,7 @@ use App\Infrastructure\Core\AbstractObject;
 /**
  * dataisolation SaaS化
  * 目frontonlyhaveorganizationisolation
- * 显type传入,prevent隐type传入,导致notknow哪theseplaceneed做isolation.
+ * 显typepass in,prevent隐typepass in,导致notknow哪theseplaceneed做isolation.
  */
 class DataIsolation extends AbstractObject
 {

@@ -16,7 +16,7 @@ class OrganizationConfigEntity extends AbstractEntity
 
     /**
      * 目frontonlyapplication具haveorganization.
-     * 所属application code.
+     * belong toapplication code.
      */
     protected string $appCode;
 

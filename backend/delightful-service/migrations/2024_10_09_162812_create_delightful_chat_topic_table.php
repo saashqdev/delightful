@@ -26,8 +26,8 @@ return new class extends Migration {
             $table->string('name', 50)->comment('topicname');
             // topicdescription
             $table->text('description')->comment('topicdescription');
-            // 所属conversationID
-            $table->bigInteger('conversation_id')->comment('所属conversationID');
+            // belong toconversationID
+            $table->bigInteger('conversation_id')->comment('belong toconversationID');
             // organizationencoding
             $table->string('organization_code', 64)->comment('organizationencoding');
             // topiccome源

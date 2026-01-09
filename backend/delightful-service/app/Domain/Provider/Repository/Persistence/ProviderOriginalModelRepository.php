@@ -101,7 +101,7 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
         // mergeresult
         $allModels = array_merge($systemModels, $organizationModels);
 
-        // 按 id 降序sort
+        // 按 id descendingsort
         usort($allModels, static function (array $a, array $b) {
             return $b['id'] <=> $a['id'];
         });
@@ -120,8 +120,8 @@ class ProviderOriginalModelRepository extends AbstractModelRepository implements
     }
 
     /**
-     * 准备移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderOriginalModelModel querybuild器.
-     * @param null|ProviderDataIsolation $dataIsolation if传入thenaddorganizationcodefilter
+     * prepare移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderOriginalModelModel querybuild器.
+     * @param null|ProviderDataIsolation $dataIsolation ifpass inthenaddorganizationcodefilter
      */
     private function createProviderOriginalModelQuery(?ProviderDataIsolation $dataIsolation = null): Builder
     {

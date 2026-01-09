@@ -157,7 +157,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
                 }
             }
             $content = $content->toArray();
-            // pass protobuf messagestructure,createdelightful chatobject,for弃use protobuf 做准备
+            // pass protobuf messagestructure,createdelightful chatobject,for弃use protobuf 做prepare
             if (in_array($controlMessageType, [ControlMessageType::GroupUsersRemove, ControlMessageType::GroupDisband], true)) {
                 // thistheseuseralready经from群membertablemiddle移except,butishe们alsonot收tobe移exceptmessage
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
@@ -180,7 +180,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
         array $seqContent,
         ControlMessageType $controlMessageType
     ): DelightfulSeqEntity {
-        // returnsessionid,方便front端操as
+        // returnsessionid,convenientfront端操as
         $userConversations = $this->getGroupUserConversationsByUserIds([$dataIsolation->getCurrentUserId()], $groupEntity->getId());
         $seqContent['conversation_id'] = $userConversations[$dataIsolation->getCurrentUserId()] ?? '';
         $seqEntity = $this->getGroupChangeSeqEntity($dataIsolation, $groupEntity, $seqContent, $controlMessageType);

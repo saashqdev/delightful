@@ -192,7 +192,7 @@ class AiAbilityRepository extends AbstractModelRepository implements AiAbilityRe
         if (empty($config)) {
             $config = [];
         } elseif (is_string($config)) {
-            // 尝试asforJSONparse
+            // tryasforJSONparse
             $jsonDecoded = json_decode($config, true);
             if (json_last_error() === JSON_ERROR_NONE && is_array($jsonDecoded)) {
                 // JSONparsesuccess,instructionisolddata(notencrypt)

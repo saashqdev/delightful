@@ -426,7 +426,7 @@ class DelightfulFlowExecutor
             if ($node->getParentId()) {
                 continue;
             }
-            // 运linefrontthen先尝试conduct所havesectionpointparameterdetect,useat提frontgenerategood NodeParamsConfig
+            // 运linefrontthen先tryconduct所havesectionpointparameterdetect,useat提frontgenerategood NodeParamsConfig
             try {
                 $node->validate();
             } catch (Throwable $throwable) {

@@ -82,7 +82,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
     }
 
     /**
-     * optimizeversion:直接passJOINquerygetenable助理version,avoid传入bigquantityID.
+     * optimizeversion:directlypassJOINquerygetenable助理version,avoidpass inbigquantityID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -177,7 +177,7 @@ class DelightfulAgentVersionRepository implements DelightfulAgentVersionReposito
 
     public function setEnterpriseStatus(string $id, int $status): void
     {
-        // 尝试updatefinger定 ID record
+        // tryupdatefinger定 ID record
         $this->agentVersionModel::query()
             ->where('id', $id)
             ->update(['enterprise_release_status' => $status]);

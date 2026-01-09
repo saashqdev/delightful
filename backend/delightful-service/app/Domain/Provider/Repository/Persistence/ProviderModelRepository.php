@@ -106,14 +106,14 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
 
     public function saveModel(ProviderDataIsolation $dataIsolation, SaveProviderModelDTO $dto): ProviderModelEntity
     {
-        // settingorganizationencoding(优先useDTOmiddleorganizationencoding,nothenusecurrentdataisolationmiddle)
+        // settingorganizationencoding(priorityuseDTOmiddleorganizationencoding,nothenusecurrentdataisolationmiddle)
         $dto->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
 
         $data = $dto->toArray();
         $entity = new ProviderModelEntity($data);
 
         if ($dto->getId()) {
-            // 准备updatedata,onlycontainhavechangefield
+            // prepareupdatedata,onlycontainhavechangefield
             $updateData = $this->serializeEntityToArray($entity);
             $updateData['updated_at'] = date('Y-m-d H:i:s');
             $success = ProviderModelModel::query()
@@ -143,9 +143,9 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         $currentOrganizationCode = $dataIsolation->getCurrentOrganizationCode();
         $modelOrganizationCode = $model->getOrganizationCode();
 
-        // 2. judgemodel所属organizationwhetherandcurrentorganizationone致
+        // 2. judgemodelbelong toorganizationwhetherandcurrentorganizationone致
         if ($modelOrganizationCode !== $currentOrganizationCode) {
-            // organizationnotone致:judgemodel所属organizationwhetheris官方organization
+            // organizationnotone致:judgemodelbelong toorganizationwhetheris官方organization
             if ($this->isOfficialOrganization($modelOrganizationCode)
                 && ! $this->isOfficialOrganization($currentOrganizationCode)) {
                 // model属at官方organizationandcurrentorganizationnotis官方organization:走写o clockcopylogic
@@ -205,7 +205,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
      * getorganizationcanusemodelcolumntable(containorganizationfrom己modelandDelightfulmodel).
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param null|Category $category modelcategory,fornullo clockreturn所havecategorymodel
-     * @return ProviderModelEntity[] 按sort降序sortmodelcolumntable,containorganizationmodelandDelightfulmodel(notgo重)
+     * @return ProviderModelEntity[] 按sortdescendingsortmodelcolumntable,containorganizationmodelandDelightfulmodel(notgo重)
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, ?Status $status = Status::Enabled): array
     {
@@ -214,7 +214,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
         // generatecachekey
         $cacheKey = sprintf('provider_models:available:%s:%s', $organizationCode, $category->value ?? 'all');
 
-        // 尝试fromcacheget
+        // tryfromcacheget
         $redis = di(Redis::class);
         $cachedData = $redis->get($cacheKey);
 
@@ -272,10 +272,10 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
             $delightfulModels = $this->delightfulProviderAndModels->getDelightfulEnableModels($organizationCode, $category);
         }
 
-        // 4. 直接mergemodelcolumntable,notgo重
+        // 4. directlymergemodelcolumntable,notgo重
         $allModels = array_merge($organizationModels, $delightfulModels);
 
-        // 5. 按sort降序sort
+        // 5. 按sortdescendingsort
         usort($allModels, static function ($a, $b) {
             return $b->getSort() <=> $a->getSort();
         });
@@ -324,7 +324,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
 
         $builder = $this->createBuilder($dataIsolation, ProviderModelModel::query())
             ->whereIn('model_id', $modelIds)
-            ->orderBy('status', 'desc') // 优先sort:enablestatusinfront
+            ->orderBy('status', 'desc') // prioritysort:enablestatusinfront
             ->orderBy('id'); // itstime按IDsort,guaranteeresultone致property
 
         $result = Db::select($builder->toSql(), $builder->getBindings());
@@ -444,7 +444,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 直接updatemodelstatus.
+     * directlyupdatemodelstatus.
      */
     private function updateStatusDirect(ProviderDataIsolation $dataIsolation, string $id, Status $status): void
     {
@@ -453,7 +453,7 @@ class ProviderModelRepository extends AbstractProviderModelRepository implements
     }
 
     /**
-     * 准备移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderModelModel querybuild器.
+     * prepare移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderModelModel querybuild器.
      */
     private function createProviderModelQuery(): Builder
     {

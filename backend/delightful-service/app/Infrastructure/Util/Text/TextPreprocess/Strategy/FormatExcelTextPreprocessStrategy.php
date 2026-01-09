@@ -97,7 +97,7 @@ class FormatExcelTextPreprocessStrategy extends AbstractTextPreprocessStrategy
      */
     private function formatCsvCell(string $value): string
     {
-        // ifsingleyuan格contentforempty,直接returnemptystring
+        // ifsingleyuan格contentforempty,directlyreturnemptystring
         if ($value === '') {
             return '';
         }

@@ -48,7 +48,7 @@ class UserCallAgentFailSubscriber implements ListenerInterface
             $messageStruct = [
                 'content' => __('chat.agent.user_call_agent_fail_notice'),
             ];
-            // message防重
+            // messageprevent duplicate
             $appMessageId = 'system-' . IdGenerator::getUniqueId32();
             $seqDTO = new DelightfulSeqEntity();
             // table明quoteclose系

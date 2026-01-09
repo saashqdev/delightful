@@ -16,7 +16,7 @@ class PageListAssembler
             // notlimititem数,所bynothavedownone页
             $hasMore = false;
         } elseif ($maxRecords !== null) {
-            // ifknow总record数,then直接compare
+            // ifknow总record数,thendirectlycompare
             $hasMore = ($currentOffset + $currentLimit) < $maxRecords;
         } else {
             // ifnotknow总record数,whenfrontresultcollectionnotfornullthenhavedownone页

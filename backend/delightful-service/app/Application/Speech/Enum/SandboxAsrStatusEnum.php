@@ -8,29 +8,29 @@ declare(strict_types=1);
 namespace App\Application\Speech\Enum;
 
 /**
- * 沙箱 ASR taskstatus枚举.
+ * sandbox ASR taskstatus枚举.
  *
- * 【asuse域】outside部system - 沙箱audiomergeservice
- * 【use途】table示沙箱middleaudiomergetaskexecutestatus
- * 【use场景】
- * - call沙箱 finishTask interfaceround询statusjudge
+ * 【asuse域】outside部system - sandboxaudiomergeservice
+ * 【use途】table示sandboxmiddleaudiomergetaskexecutestatus
+ * 【usescenario】
+ * - callsandbox finishTask interfaceround询statusjudge
  * - judgeaudiominuteslicemergewhethercomplete
  *
  * 【andother枚举区别】
- * - AsrRecordingStatusEnum: front端录音实o clockstatus(录音交互layer)
+ * - AsrRecordingStatusEnum: front端recording实o clockstatus(recording交互layer)
  * - AsrTaskStatusEnum: inside部taskallprocessstatus(businessmanagelayer)
- * - SandboxAsrStatusEnum: 沙箱mergetaskstatus(infrastructurelayer)✓ current
+ * - SandboxAsrStatusEnum: sandboxmergetaskstatus(infrastructurelayer)✓ current
  *
  * 【statusstream转】waiting → running → finalizing → completed/finished | error
  */
 enum SandboxAsrStatusEnum: string
 {
-    case WAITING = 'waiting';           // etc待middle:taskalreadysubmit,etc待沙箱process
-    case RUNNING = 'running';           // 运linemiddle:沙箱justinprocessaudiominuteslice
-    case FINALIZING = 'finalizing';     // justinexecutefinalmerge:沙箱justinmergeaudioandprocess笔记file
+    case WAITING = 'waiting';           // etc待middle:taskalreadysubmit,etc待sandboxprocess
+    case RUNNING = 'running';           // 运linemiddle:sandboxjustinprocessaudiominuteslice
+    case FINALIZING = 'finalizing';     // justinexecutefinalmerge:sandboxjustinmergeaudioandprocessnotefile
     case COMPLETED = 'completed';       // taskcomplete(V2 newformat):audiomergeandfileprocessall部complete
-    case FINISHED = 'finished';         // taskcomplete(tobackcompatibleoldformat):保留useatcompatibleoldversion沙箱
-    case ERROR = 'error';               // error:沙箱processfail
+    case FINISHED = 'finished';         // taskcomplete(tobackcompatibleoldformat):保留useatcompatibleoldversionsandbox
+    case ERROR = 'error';               // error:sandboxprocessfail
 
     /**
      * getstatusdescription.

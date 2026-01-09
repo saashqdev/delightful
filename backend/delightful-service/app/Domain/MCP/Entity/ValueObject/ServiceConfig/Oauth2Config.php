@@ -37,7 +37,7 @@ class Oauth2Config extends AbstractValueObject
      * userlogino clock,扣子willwilluser引导to"[client_url]?response_type=code&client_id=
      * [client_id]&scope=[scope]&state=xyz123&redirect_uri=[cozeplatformcallbacksecurityground址]".
      *
-     * 参考service方authorizationdocumentgetclient_url,本example参考扣子openhairguidedocument,input
+     * referenceservice方authorizationdocumentgetclient_url,本examplereference扣子openhairguidedocument,input
      * https://www.coze.cn/api/permission/oauth2/authorize
      */
     protected string $clientUrl = '';
@@ -45,7 +45,7 @@ class Oauth2Config extends AbstractValueObject
     /**
      * Scope - allowapplicationprocedurerequestaccessuserdatarange.
      *
-     * 参考service方authorizationdocumentinputscope.
+     * referenceservice方authorizationdocumentinputscope.
      */
     protected string $scope = '';
 
@@ -56,7 +56,7 @@ class Oauth2Config extends AbstractValueObject
      * and转tocallbackground址.thiso clock,service器provide方willpassto应datatoauthorization_urlhairuprequest,
      * getuseraccess_token.
      *
-     * 参考service方authorizationdocumentgetauthorization_url,本example参考扣子openhairguidedocument,input
+     * referenceservice方authorizationdocumentgetauthorization_url,本examplereference扣子openhairguidedocument,input
      * https://api.coze.cn/api/permission/oauth2/token
      */
     protected string $authorizationUrl = '';

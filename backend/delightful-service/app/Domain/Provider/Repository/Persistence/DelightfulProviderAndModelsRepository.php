@@ -71,7 +71,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
 
         $configResult = Db::select($configBuilder->toSql(), $configBuilder->getBindings());
 
-        // if找to现haveconfiguration,直接return
+        // if找to现haveconfiguration,directlyreturn
         if (! empty($configResult)) {
             // batchquantityqueryto应 provider info
             $providerMap = [$delightfulProvider->getId() => $delightfulProvider->toArray()];
@@ -125,7 +125,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         // datacollection A:get官方organizationdown所haveenablemodel(containconfigurationfilter)
         $officialModels = $this->getOfficialEnabledModels($category);
 
-        // ifnothave官方model,直接returnnullarray
+        // ifnothave官方model,directlyreturnnullarray
         if (empty($officialModels)) {
             return [];
         }
@@ -156,7 +156,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             }
         }
 
-        // ifconfigurationmodelmappingfornull,直接return官方modelcolumntable
+        // ifconfigurationmodelmappingfornull,directlyreturn官方modelcolumntable
         if (empty($modelMap)) {
             $finalModels = $officialModels;
         } else {
@@ -169,7 +169,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
                 if (isset($modelMap[$modelId])) {
                     $organizationModel = $modelMap[$modelId];
 
-                    // 直接useconfigurationmodelstatusreplace官方modelstatus
+                    // directlyuseconfigurationmodelstatusreplace官方modelstatus
                     $officialModel->setStatus($organizationModel->getStatus());
                 }
                 $finalModels[] = $officialModel;
@@ -306,7 +306,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
      */
     private function applyPackageFilteringToModels(array $models, string $organizationCode): array
     {
-        // ifis官方organization,直接return所have
+        // ifis官方organization,directlyreturn所have
         if (OfficialOrganizationUtil::isOfficialOrganization($organizationCode)) {
             return $models;
         }
@@ -338,7 +338,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * 准备移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderConfigModel querybuild器.
+     * prepare移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderConfigModel querybuild器.
      */
     private function createConfigQuery(): Builder
     {
@@ -347,7 +347,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
     }
 
     /**
-     * 准备移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderModelModel querybuild器.
+     * prepare移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderModelModel querybuild器.
      */
     private function createProviderModelQuery(): Builder
     {
@@ -362,7 +362,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
         ProviderDataIsolation $dataIsolation,
         ProviderModelEntity $officialModel
     ): ProviderModelEntity {
-        // createnewmodelrecord(avoidnewfield导致copy报错,直接allquantity copy 然back set newvalue)
+        // createnewmodelrecord(avoidnewfield导致copyerror,directlyallquantity copy 然back set newvalue)
         $organizationModel = new ProviderModelEntity($officialModel->toArray());
         $organizationModel->setServiceProviderConfigId(0);
         $organizationModel->setModelParentId($officialModel->getId());

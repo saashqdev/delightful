@@ -277,7 +277,7 @@ class TokenTextSplitter extends TextSplitter
         $separator = end($this->separators);
         $newSeparators = [];
 
-        // find合适minute隔符, from$separatorBeginIndexstart
+        // findsuitableminute隔符, from$separatorBeginIndexstart
         for ($i = $separatorBeginIndex; $i < count($this->separators); ++$i) {
             $sep = $this->separators[$i];
             if ($sep === '') {
@@ -366,7 +366,7 @@ class TokenTextSplitter extends TextSplitter
     private function getDefaultTokenizer(): callable
     {
         return function (string $text) {
-            // iftextlength超passlimit,直接calculatenotcache
+            // iftextlength超passlimit,directlycalculatenotcache
             if (mb_strlen($text) > self::MAX_CACHE_TEXT_LENGTH) {
                 return $this->calculateTokenCount($text);
             }
@@ -374,7 +374,7 @@ class TokenTextSplitter extends TextSplitter
             // generateupdown文key
             $contextKey = 'token_count:' . md5($text);
 
-            // 尝试from协程updown文get
+            // tryfrom协程updown文get
             $count = Context::get($contextKey);
             if ($count !== null) {
                 return $count;
@@ -406,10 +406,10 @@ class TokenTextSplitter extends TextSplitter
             return 'UTF-16BE';
         }
 
-        // 尝试detectencoding
+        // trydetectencoding
         $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], true);
         if ($encoding === false) {
-            // ifno法detecttoencoding,尝试use iconv detect
+            // ifno法detecttoencoding,tryuse iconv detect
             $encoding = mb_detect_encoding($content, ['UTF-8', 'GBK', 'GB2312', 'BIG5', 'ASCII'], false);
             if ($encoding === false) {
                 return 'UTF-8'; // defaultuse UTF-8

@@ -205,7 +205,7 @@ if (env('AWS_CLAUDE_ENABLED', false)) {
     ];
 }
 
-// loaddefaultmodelconfiguration(优先levelmostlow)
+// loaddefaultmodelconfiguration(prioritylevelmostlow)
 $models = [];
 
 // loaddefaultmodelconfiguration
@@ -214,7 +214,7 @@ foreach ($envModelConfigs as $modelKey => $config) {
     $models[$modelKey] = $config;
 }
 
-// load odin_models.json configuration(优先levelmorehigh,willoverridedefaultconfiguration)
+// load odin_models.json configuration(prioritylevelmorehigh,willoverridedefaultconfiguration)
 if (file_exists(BASE_PATH . '/odin_models.json')) {
     $customModels = json_decode(file_get_contents(BASE_PATH . '/odin_models.json'), true);
     if (is_array($customModels)) {

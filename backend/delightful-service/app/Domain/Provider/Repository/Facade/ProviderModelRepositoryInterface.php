@@ -53,7 +53,7 @@ interface ProviderModelRepositoryInterface
      * getorganizationcanusemodellist(containorganizationfrom己modelandDelightfulmodel).
      * @param ProviderDataIsolation $dataIsolation dataisolationobject
      * @param null|Category $category modelcategory,foremptyo clockreturn所havecategorymodel
-     * @return ProviderModelEntity[] 按sort降序sortmodellist,containorganizationmodelandDelightfulmodel(notgo重)
+     * @return ProviderModelEntity[] 按sortdescendingsortmodellist,containorganizationmodelandDelightfulmodel(notgo重)
      */
     public function getModelsForOrganization(ProviderDataIsolation $dataIsolation, ?Category $category = null, Status $status = Status::Enabled): array;
 

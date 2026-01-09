@@ -21,19 +21,19 @@ class ClientSequence extends AbstractEntity
     // 序columnnumber归属账numberid
     protected string $delightfulId;
 
-    // 序columnnumber,one定notduplicate,one定growth,butisnotguarantee连续.
+    // 序columnnumber,one定notduplicate,one定growth,butisnotguaranteecontinuous.
     protected string $seqId;
 
     // usermessageid,userdown唯one.
     protected string $messageId;
 
-    // 本itemmessagefingertodelightful_message_id. useatimplementalready读return执场景.存inquoteclose系o clock,send_msg_idfieldnotagainreturn,因forsend方messageidnothavealter.
+    // 本itemmessagefingertodelightful_message_id. useatimplementalready读return执scenario.存inquoteclose系o clock,send_msg_idfieldnotagainreturn,因forsend方messageidnothavealter.
     protected ?string $referMessageId;
 
     // send方messageid
     protected ?string $senderMessageId;
 
-    // message所属sessionwindow. customer端canaccording tothisvaluecertainmessagewhetherwantreminderetc.if本groundnothavehair现thissessionid,主动toservice端querysessionwindowdetail
+    // messagebelong tosessionwindow. customer端canaccording tothisvaluecertainmessagewhetherwantreminderetc.if本groundnothavehair现thissessionid,主动toservice端querysessionwindowdetail
     protected ?string $conversationId;
 
     protected string $organizationCode;

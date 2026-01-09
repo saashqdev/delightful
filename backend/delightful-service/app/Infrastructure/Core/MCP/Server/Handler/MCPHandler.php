@@ -183,7 +183,7 @@ class MCPHandler implements MCPHandlerInterface
     {
         $params = $request->getParams() ?? [];
 
-        // 尝试fromauthinfomiddleget
+        // tryfromauthinfomiddleget
         if (isset($params['auth'], $params['auth']['client_id'])) {
             return $params['auth']['client_id'];
         }

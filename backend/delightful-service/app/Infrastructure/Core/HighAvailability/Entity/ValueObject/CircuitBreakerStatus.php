@@ -25,7 +25,7 @@ enum CircuitBreakerStatus: string
     case OPEN = 'open';
 
     /**
-     * halfopenstatus - 尝试restoremiddle.
+     * halfopenstatus - tryrestoremiddle.
      */
     case HALF_OPEN = 'half_open';
 

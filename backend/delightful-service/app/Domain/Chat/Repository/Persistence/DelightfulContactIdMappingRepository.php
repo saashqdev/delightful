@@ -42,7 +42,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $data = $this->delightfulContactIdMappingModel::query();
 
         // maintain原havequeryfieldorder
-        // according toenvironmentIDquantitychoose合适querymethod
+        // according toenvironmentIDquantitychoosesuitablequerymethod
         if (count($relationEnvIds) === 1) {
             $data->where('delightful_environment_id', reset($relationEnvIds));
         } else {
@@ -105,7 +105,7 @@ class DelightfulContactIdMappingRepository implements DelightfulContactIdMapping
         $query = $this->delightfulContactIdMappingModel::query();
 
         // maintain原havequeryfieldorder
-        // according toenvironmentIDquantitychoose合适querymethod
+        // according toenvironmentIDquantitychoosesuitablequerymethod
         if (count($relationEnvIds) === 1) {
             $query->where('delightful_environment_id', reset($relationEnvIds));
         } else {

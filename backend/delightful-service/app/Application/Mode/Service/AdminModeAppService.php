@@ -28,7 +28,7 @@ class AdminModeAppService extends AbstractModeAppService
     public function getModes(DelightfulUserAuthorization $authorization, Page $page): array
     {
         $dataIsolation = $this->getModeDataIsolation($authorization);
-        // manageback台query:sort降序,notfilterdefault模type
+        // manageback台query:sortdescending,notfilterdefault模type
         $query = new ModeQuery('desc', false);
         $result = $this->modeDomainService->getModes($dataIsolation, $query, $page);
 
@@ -175,7 +175,7 @@ class AdminModeAppService extends AbstractModeAppService
 
         Db::beginTransaction();
         try {
-            // willDTOconvertfor领域object
+            // willDTOconvertfordomainobject
             $modeAggregateEntity = AdminModeAssembler::aggregateDTOToEntity($modeAggregateDTO);
 
             $this->modeDomainService->saveModeConfig($dataIsolation, $modeAggregateEntity);

@@ -137,7 +137,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             // givefrom己messagestreamgenerate序column.
             $seqEntity = $this->generateSenderSequenceByControlMessage($messageDTO, $conversationEntity->getId());
             $seqEntity->setConversationId($conversationEntity->getId());
-            // notifyuserother设备,thiswithineven if投递failalsonotimpact,所by放协程within,transactionoutside.
+            // notifyuserother设备,thiswithineven ifdeliverfailalsonotimpact,所by放协程within,transactionoutside.
             co(function () use ($seqEntity) {
                 // asyncpushmessagegivefrom己other设备
                 $this->pushControlSequence($seqEntity);
@@ -166,7 +166,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         if (in_array($messageType, [ControlMessageType::StartConversationInput, ControlMessageType::EndConversationInput], true)) {
             /** @var ConversationEndInputMessage|ConversationStartInputMessage $messageStruct */
             $messageStruct = $messageDTO->getContent();
-            // conversationnot存in直接return
+            // conversationnot存indirectlyreturn
             if (! $messageStruct->getConversationId()) {
                 return [];
             }
@@ -174,7 +174,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             // generatecontrolmessage,pushgive收hairdoublehair
             $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($messageStruct->getConversationId());
             if ($receiveConversationEntity === null) {
-                // checkto方whether存inconversation,ifnot存in直接return
+                // checkto方whether存inconversation,ifnot存indirectlyreturn
                 return [];
             }
             // replaceconversationidforreceive方from己
@@ -191,7 +191,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
 
     /**
      * 智canbody触hairconversationstartinputor者endinput.
-     * 直接操asto方conversationwindow,whilenotismessagehairinfrom己conversationwindow然backagain经bymessageminutehair模pieceforwardtoto方conversationwindow.
+     * directly操asto方conversationwindow,whilenotismessagehairinfrom己conversationwindow然backagain经bymessageminutehair模pieceforwardtoto方conversationwindow.
      * @deprecated user端call agentOperateConversationStatusV2 method代替
      */
     public function agentOperateConversationStatus(ControlMessageType $controlMessageType, string $agentConversationId): bool
@@ -230,7 +230,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
 
     /**
      * use intermediate eventconductmiddlebetweenstatemessagepush,notpersistencemessage. supporttopiclevel别“justininputmiddle”
-     * 直接操asto方conversationwindow,whilenotismessagehairinfrom己conversationwindow然backagain经bymessageminutehair模pieceforwardtoto方conversationwindow.
+     * directly操asto方conversationwindow,whilenotismessagehairinfrom己conversationwindow然backagain经bymessageminutehair模pieceforwardtoto方conversationwindow.
      */
     public function agentOperateConversationStatusV2(ControlMessageType $controlMessageType, string $agentConversationId, ?string $topicId = null): bool
     {
@@ -280,7 +280,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $seqEntity = SeqAssembler::getSeqEntity($seqData);
         // seq alsoaddup topicId
         $pushData = SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
-        // 直接pushmessagegive收item方
+        // directlypushmessagegive收item方
         SocketIOUtil::sendIntermediate(SocketEventType::Intermediate, $receiveUserEntity->getDelightfulId(), $pushData);
         return true;
     }
@@ -391,7 +391,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
             if (in_array($conversationDTO->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {
                 # createconversationwindow
                 $conversationDTO = $this->parsePrivateChatConversationReceiveType($conversationDTO);
-                # 准备generateoneconversationwindow
+                # preparegenerateoneconversationwindow
                 $conversationEntity = $this->delightfulConversationRepository->addConversation($conversationDTO);
 
                 # 触hairconversationcreateevent

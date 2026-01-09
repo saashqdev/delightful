@@ -76,7 +76,7 @@ class AdminGlobalSettingsRepository implements AdminGlobalSettingsRepositoryInte
             return [];
         }
 
-        // 准备batchquantityupdatedata
+        // preparebatchquantityupdatedata
         $values = array_map(function ($entity) {
             /** @var ?AbstractSettingExtra $extra */
             $extra = $entity->getExtra();

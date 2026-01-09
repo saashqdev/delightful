@@ -391,7 +391,7 @@ final class LongTermMemoryEntity extends AbstractEntity
     }
 
     /**
-     * calculatecurrent记忆validminute数(考虑衰subtract).
+     * calculatecurrent记忆validminute数(consider衰subtract).
      */
     public function getEffectiveScore(): float
     {

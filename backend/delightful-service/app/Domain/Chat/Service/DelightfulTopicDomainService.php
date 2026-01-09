@@ -160,7 +160,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
                 $messageStruct = $messageDTO->getContent();
                 // judgesessionwhether存in,whether属atcurrentuser
                 $this->checkAndGetSelfConversation($messageStruct->getConversationId(), $dataIsolation);
-                // todo topicnamecreateo clockallowforempty,back续 ai 总结topicname,pushgivecustomer端
+                // todo topicnamecreateo clockallowforempty,back续 ai summarytopicname,pushgivecustomer端
                 $topicEntity = $this->userCreateTopicHandler($messageStruct, $dataIsolation);
                 break;
             case ControlMessageType::UpdateTopic:
@@ -252,7 +252,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
             $conversationDTO->setReceiveId($senderConversationEntity->getUserId());
             # createsessionwindow
             $conversationDTO = $this->parsePrivateChatConversationReceiveType($conversationDTO);
-            # 准备generateonesessionwindow
+            # preparegenerateonesessionwindow
             $receiverConversationEntity = $this->delightfulConversationRepository->addConversation($conversationDTO);
         }
         $senderTopicId = $this->checkDefaultTopicExist($senderConversationEntity);
@@ -281,7 +281,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
 
     private function checkTopicBelong(DelightfulTopicEntity $topicDTO, DataIsolation $dataIsolation): void
     {
-        // judgetopicid所属sessionidwhetheriscurrentuser
+        // judgetopicidbelong tosessionidwhetheriscurrentuser
         $topicEntity = $this->delightfulChatTopicRepository->getTopicEntity($topicDTO);
         if ($topicEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);

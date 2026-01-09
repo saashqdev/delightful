@@ -91,7 +91,7 @@ abstract class AbstractTemplate implements TemplateInterface
             $sign = $this->getTemplateDefaultSignType($sign);
         }
         if (empty($this->signMap[$sign])) {
-            // signaturetypenot存in,直接return
+            // signaturetypenot存in,directlyreturn
             return $sign;
         }
 
@@ -115,7 +115,7 @@ abstract class AbstractTemplate implements TemplateInterface
     }
 
     /**
-     * when传入signaturetypenot存ino clock,getshort信defaultsignaturetype.
+     * whenpass insignaturetypenot存ino clock,getshort信defaultsignaturetype.
      */
     abstract protected function getTemplateDefaultSignType(string $sign): string;
 

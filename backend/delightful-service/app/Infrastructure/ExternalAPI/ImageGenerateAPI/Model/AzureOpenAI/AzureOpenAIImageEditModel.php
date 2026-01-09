@@ -189,7 +189,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
         // validategraphlikeURLformat
         foreach ($request->getReferenceImages() as $index => $imageUrl) {
             if (empty($imageUrl) || ! filter_var($imageUrl, FILTER_VALIDATE_URL)) {
-                $this->logger->error('Azure OpenAIgraphlikeedit:invalid参考graphlikeURL', [
+                $this->logger->error('Azure OpenAIgraphlikeedit:invalidreferencegraphlikeURL', [
                     'index' => $index,
                     'url' => $imageUrl,
                 ]);

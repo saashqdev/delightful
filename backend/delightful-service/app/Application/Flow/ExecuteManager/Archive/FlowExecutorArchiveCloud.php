@@ -17,13 +17,13 @@ class FlowExecutorArchiveCloud
     {
         $name = "{$key}.log";
 
-        // 直接checkserializebackdatasize
+        // directlycheckserializebackdatasize
         $serializedData = serialize($data);
         $dataSize = strlen($serializedData);
         $maxSize = 100 * 1024 * 1024; // 100MB
 
         if ($dataSize > $maxSize) {
-            // datapassbig,notupload,直接returnnullstring
+            // datapassbig,notupload,directlyreturnnullstring
             return '';
         }
 

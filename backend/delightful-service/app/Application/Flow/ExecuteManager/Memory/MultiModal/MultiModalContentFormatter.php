@@ -11,7 +11,7 @@ use App\Application\Flow\ExecuteManager\Attachment\AttachmentInterface;
 
 /**
  * 多模statecontentformat化tool
- * useat统oneprocessdifferent场景down多模statecontentformat化.
+ * useat统oneprocessdifferentscenariodown多模statecontentformat化.
  */
 class MultiModalContentFormatter
 {
@@ -53,7 +53,7 @@ class MultiModalContentFormatter
 
     /**
      * format化imagecontenttotext
-     * supportsingle张imageand多张image场景.
+     * supportsingle张imageand多张imagescenario.
      *
      * @param string $originalContent originaltextcontent
      * @param string $visionResponse 视觉analyzeresult
@@ -65,7 +65,7 @@ class MultiModalContentFormatter
         string $visionResponse,
         array $imageAttachments
     ): string {
-        // ifnothaveimageattachment,直接returnoriginalcontent
+        // ifnothaveimageattachment,directlyreturnoriginalcontent
         if (empty($imageAttachments)) {
             return $originalContent;
         }
@@ -98,7 +98,7 @@ class MultiModalContentFormatter
         string $originalContent,
         array $nonImageAttachments
     ): string {
-        // ifnothaveattachment,直接returnoriginalcontent
+        // ifnothaveattachment,directlyreturnoriginalcontent
         if (empty($nonImageAttachments)) {
             return $originalContent;
         }

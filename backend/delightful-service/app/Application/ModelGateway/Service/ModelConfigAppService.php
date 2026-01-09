@@ -59,12 +59,12 @@ class ModelConfigAppService extends AbstractLLMAppService
     }
 
     /**
-     * getmodel降level链,mergeuser传入降level链andsystemdefault降level链.
+     * getmodel降level链,mergeuserpass in降level链andsystemdefault降level链.
      *
      * @param string $orgCode organizationencoding
      * @param string $userId userID
      * @param string $modelType finger定modeltype
-     * @param string[] $modelFallbackChain user传入降level链
+     * @param string[] $modelFallbackChain userpass in降level链
      *
      * @return string finalmodeltype
      */
@@ -78,7 +78,7 @@ class ModelConfigAppService extends AbstractLLMAppService
             return '';
         }
 
-        // iffinger定modeltypeandthemodel存inatcanusemodellistmiddle,then直接return
+        // iffinger定modeltypeandthemodel存inatcanusemodellistmiddle,thendirectlyreturn
         if (! empty($modelType) && in_array($modelType, $chatModelsName)) {
             return $modelType;
         }
@@ -89,18 +89,18 @@ class ModelConfigAppService extends AbstractLLMAppService
         // getsystemdefault降level链
         $systemFallbackChain = config('delightful-api.model_fallback_chain.chat', []);
 
-        // mergeuser传入降level链andsystemdefault降level链
-        // user传入降level链优先levelmorehigh
+        // mergeuserpass in降level链andsystemdefault降level链
+        // userpass in降level链prioritylevelmorehigh
         $mergedFallbackChain = array_merge($systemFallbackChain, $modelFallbackChain);
 
-        // 按优先levelorder遍历mergeback降level链
+        // 按prioritylevelorder遍历mergeback降level链
         foreach ($mergedFallbackChain as $modelName) {
             if (isset($availableModels[$modelName])) {
                 return $modelName;
             }
         }
 
-        // back备solution:ifnothavematchany优先model,usefirstcanusemodel
+        // back备solution:ifnothavematchanyprioritymodel,usefirstcanusemodel
         return $chatModelsName[0] ?? '';
     }
 }

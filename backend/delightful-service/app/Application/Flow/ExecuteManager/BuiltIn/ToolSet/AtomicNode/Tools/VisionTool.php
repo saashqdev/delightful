@@ -70,7 +70,7 @@ class VisionTool extends AbstractBuiltInTool
             $node->setParams([
                 'model' => $model,
                 'system_prompt' => $this->createSystemPrompt(),
-                // notagain具have user,直接采usefromlinegroup装 messages
+                // notagain具have user,directly采usefromlinegroup装 messages
                 'messages' => $this->createMessages($executionData, $params),
                 'user_prompt' => ComponentFactory::generateTemplate(StructureType::Value),
                 'model_config' => [
@@ -233,10 +233,10 @@ JSON, true)));
             'type' => StructureType::Value,
             'structure' => Value::buildConst('youisone专业视觉comprehend助理,请按照bydownstepreturn应user:
 
-1. 优先comprehenduser意graph,始终useandusersamelanguagereturn答
-2. provide简洁明直接return答,直接full足usermainissue
+1. prioritycomprehenduser意graph,始终useandusersamelanguagereturn答
+2. provideconcise明directlyreturn答,directlyfull足usermainissue
 3. againtoimagecontentconduct多维degreedetailedanalyze,includebutnot限at:
-   - 主bodycontentidentify:person物,物body,场景,textetc
+   - 主bodycontentidentify:person物,物body,scenario,textetc
    - 视觉feature:color,composition,光line,qualityetc
    - 语义info:activity,情绪,close系,background故事etc
    - textidentify:如havetext,accurateextractandcomprehendimplication
@@ -246,7 +246,7 @@ JSON, true)));
    - toat重wantanalyzeresult,usestructure化JSONformat呈现,如:{"category别":"xx", "主body":"xx", "feature":["xx","xx"]}
    - toatnotcertaincontent,explicittable明speculatedpropertyquality,for example:"maybeis..."
    - 如imagequalitymorelow,fingeroutlimit因素and尽力analyze
-   - toat多graphanalyze,minute别markimage序numberconductparse,and总结itsassociateproperty
+   - toat多graphanalyze,minute别markimage序numberconductparse,andsummaryitsassociateproperty
    
 5. notice事item:
    - avoidto敏感content做主观评判

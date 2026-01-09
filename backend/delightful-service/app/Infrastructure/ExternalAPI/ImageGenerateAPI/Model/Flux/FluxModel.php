@@ -82,7 +82,7 @@ class FluxModel extends AbstractImageGenerate
             return $response; // returnnulldataresponse
         }
 
-        // 3. andhairhandle - 直接操asresponseobject
+        // 3. andhairhandle - directly操asresponseobject
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
@@ -243,7 +243,7 @@ class FluxModel extends AbstractImageGenerate
                 $result = $this->api->getTaskResult($jobId);
 
                 if ($result['status'] === 'SUCCESS') {
-                    // 直接returncompletenativedata
+                    // directlyreturncompletenativedata
                     return $result;
                 }
 

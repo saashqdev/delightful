@@ -317,7 +317,7 @@ class ModelConfigItem extends AbstractDTO
     private function handleCreativityAndTemperatureConflict(): void
     {
         if ($this->creativity !== null && $this->temperature !== null) {
-            // 优先保留 temperature,will creativity 设for null
+            // priority保留 temperature,will creativity 设for null
             $this->creativity = null;
         }
     }

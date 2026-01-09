@@ -95,7 +95,7 @@ enum NodeType: int
     case HistoryMessage = 13;
 
     /*
-     * text切割
+     * textsplit
      */
     case TextSplitter = 14;
 

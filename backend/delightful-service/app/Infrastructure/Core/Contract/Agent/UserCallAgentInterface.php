@@ -22,10 +22,10 @@ interface UserCallAgentInterface
     public function canHandle(string $aiCode): bool;
 
     /**
-     * getprocess器优先level.
+     * getprocess器prioritylevel.
      *
-     * numbermorebig优先levelmorehigh,defaultfor0
-     * 企业版canreturnmorehigh优先levelby覆盖defaultimplement
+     * numbermorebigprioritylevelmorehigh,defaultfor0
+     * 企业版canreturnmorehighprioritylevelby覆盖defaultimplement
      */
     public static function getPriority(): int;
 }

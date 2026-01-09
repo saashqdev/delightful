@@ -99,7 +99,7 @@ class FileParser
      */
     private static function downloadFile(string $url, string $tempFile, int $maxSize = 0): void
     {
-        // ifis本groundfilepath,直接return
+        // ifis本groundfilepath,directlyreturn
         if (file_exists($url)) {
             return;
         }
@@ -112,7 +112,7 @@ class FileParser
             }
         }
 
-        // 尝试预先checkfilesize
+        // try预先checkfilesize
         $sizeKnown = self::checkUrlFileSize($url, $maxSize);
 
         $context = stream_context_create([
@@ -132,7 +132,7 @@ class FileParser
         if (! $sizeKnown && $maxSize > 0) {
             self::downloadWithSizeControl($fileStream, $localFile, $maxSize);
         } else {
-            // filesizeknownorno需limit,直接copy
+            // filesizeknownorno需limit,directlycopy
             stream_copy_to_stream($fileStream, $localFile);
         }
 

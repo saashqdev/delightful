@@ -109,7 +109,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.not_found')]
     case GROUP_NOT_FOUND = 3022;
 
-    // message投递fail
+    // messagedeliverfail
         // Message delivery failed
     #[ErrorMessage('chat.message.delivery_failed')]
     case MESSAGE_DELIVERY_FAILED = 3023;

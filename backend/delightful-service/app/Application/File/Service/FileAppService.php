@@ -122,7 +122,7 @@ class FileAppService extends AbstractAppService
 
         $keys = array_column($files, 'key');
 
-        // 按organizationencodingminutegroupfile keys,参考 ProviderAppService 做法
+        // 按organizationencodingminutegroupfile keys,reference ProviderAppService 做法
         $keysByOrg = [];
         foreach ($keys as $key) {
             if (empty($key)) {
@@ -164,7 +164,7 @@ class FileAppService extends AbstractAppService
         // checkfilewhetheralready经存inatthebusinesstypedown
         $existingFile = $this->defaultFileDomainService->getByKeyAndBusinessType($fileKey, $businessType, $organizationCode);
         if ($existingFile) {
-            // iffilealready存in,直接returnfilelink
+            // iffilealready存in,directlyreturnfilelink
             return $this->fileDomainService->getLink($organizationCode, $fileKey)->getUrl();
         }
 

@@ -120,7 +120,7 @@ class FileListBuiltInTool extends AbstractBuiltInTool
             "key": "sort",
             "sort": 1,
             "title": "sort",
-            "description": "sortrule.asc 升序;desc 降序.default desc",
+            "description": "sortrule.asc ascending;desc descending.default desc",
             "required": null,
             "value": null,
             "encryption": false,

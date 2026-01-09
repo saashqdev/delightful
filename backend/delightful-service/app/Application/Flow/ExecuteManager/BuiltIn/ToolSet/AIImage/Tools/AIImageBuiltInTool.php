@@ -125,7 +125,7 @@ class AIImageBuiltInTool extends AbstractAIImageBuiltInTool
             "type": "array",
             "key": "attachments",
             "title": "attachmentarray",
-            "description": "传入filecolumntablearray",
+            "description": "pass infilecolumntablearray",
             "required": null,
             "value": null,
             "encryption": false,

@@ -85,7 +85,7 @@ class SSRFDefense
             $label = "[{$this->ip}]";
         }
 
-        // blacklist优先
+        // blacklistpriority
         if (in_array($this->ip, $this->options->getBlackList())) {
             throw new SSRFException("{$label} is in black list");
         }

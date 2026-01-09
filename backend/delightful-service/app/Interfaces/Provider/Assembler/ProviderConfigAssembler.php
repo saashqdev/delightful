@@ -94,7 +94,7 @@ class ProviderConfigAssembler
             $preparedConfig['provider_code'] = $provider['provider_code'] ?? null;
             $preparedConfig['is_models_enable'] = $provider['is_models_enable'] ?? true;
 
-            // 直接use provider translateinfo(config middleonly ak,sk etcconfiguration,nothavetranslatedata)
+            // directlyuse provider translateinfo(config middleonly ak,sk etcconfiguration,nothavetranslatedata)
             if (! empty($provider['translate'])) {
                 $providerTranslate = is_string($provider['translate'])
                     ? Json::decode($provider['translate'])

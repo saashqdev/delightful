@@ -19,7 +19,7 @@ use Hyperf\Codec\Json;
  * 负责 ASR 相close实bodygroup装andpathconvert.
  *
  * pathformatinstruction:
- * - work区相topath (workspace-relative): .asr_recordings/session_xxx or 录音总结_xxx
+ * - work区相topath (workspace-relative): .asr_recordings/session_xxx or recordingsummary_xxx
  * - projectworkdirectory (work directory): project_123/workspace
  * - organization码+APP_ID+bucket_md5front缀 (full prefix): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/
  * - completepath/file_key (full path): DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx
@@ -32,7 +32,7 @@ class AsrAssembler
      * @param string $userId userID
      * @param string $organizationCode organizationencoding
      * @param int $projectId projectID
-     * @param string $relativePath 相topath(如:.asr_recordings/task_123 or 录音总结_xxx)
+     * @param string $relativePath 相topath(如:.asr_recordings/task_123 or recordingsummary_xxx)
      * @param string $fullPrefix completefront缀(organization码+APP_ID+bucket_md5,如:DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/)
      * @param string $workDir workdirectory
      * @param int $rootDirectoryId rootdirectoryID
@@ -117,7 +117,7 @@ class AsrAssembler
     /**
      * from file_key extractwork区相topath.
      *
-     * willcomplete file_key convertforwork区相topath,useat沙箱 API calland界surfaceshow
+     * willcomplete file_key convertforwork区相topath,useatsandbox API calland界surfaceshow
      * convertclose系: relativePath = extractWorkspaceRelativePath(file_key)
      *
      * @param string $fileKey complete file_key (如: DT001/open/5f4dcc3b5aa765d61d8327deb882cf99/project_123/workspace/.asr_recordings/session_xxx)
@@ -140,7 +140,7 @@ class AsrAssembler
             }
         }
 
-        // ifnothave找to /workspace/,尝试find workspace/ openhead情况
+        // ifnothave找to /workspace/,tryfind workspace/ openhead情况
         if (str_starts_with($normalizedPath, 'workspace/')) {
             $relativePath = substr($normalizedPath, 10); // 移except 'workspace/' front缀
             if (! empty($relativePath)) {
@@ -148,7 +148,7 @@ class AsrAssembler
             }
         }
 
-        // ifallnot找toworkspaceidentifier,直接returnoriginalpath(maybealready经is相topath)
+        // ifallnot找toworkspaceidentifier,directlyreturnoriginalpath(maybealready经is相topath)
         return $normalizedPath;
     }
 }

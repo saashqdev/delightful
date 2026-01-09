@@ -19,7 +19,7 @@ use App\Infrastructure\Core\ValueObject\Page;
 use Throwable;
 
 /**
- * organization领域service.
+ * organizationdomainservice.
  */
 readonly class OrganizationDomainService
 {

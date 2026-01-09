@@ -192,7 +192,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
         $organizationCode = $delightfulDepartmentEntity->getOrganizationCode();
         $departmentId = $delightfulDepartmentEntity->getDepartmentId();
 
-        // 先尝试from Redis cacheget
+        // 先tryfrom Redis cacheget
         $cacheKey = sprintf('department_employee_sum:%s', $organizationCode);
 
         $cachedData = $this->redis->hget($cacheKey, $departmentId);
@@ -224,7 +224,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
-            // hair生exceptiono clock直接calculatenot走cache
+            // hair生exceptiono clockdirectlycalculatenot走cache
             return $this->calculateSelfAndChildrenEmployeeSum($organizationCode, $departmentId);
         } finally {
             $this->locker->release($lockKey, $lockOwner);
@@ -493,7 +493,7 @@ class DelightfulDepartmentRepository implements DelightfulDepartmentRepositoryIn
     }
 
     /**
-     * 直接calculatesingledepartment员工total(notusecache).
+     * directlycalculatesingledepartment员工total(notusecache).
      */
     private function calculateSelfAndChildrenEmployeeSum(string $organizationCode, string $departmentId): int
     {

@@ -121,7 +121,7 @@ class MidjourneyModel extends AbstractImageGenerate
             return new ImageGenerateResponse(ImageGenerateType::URL, $rawResult['data']['images']);
         }
 
-        // ifnothave images array,尝试use cdnImage
+        // ifnothave images array,tryuse cdnImage
         if (! empty($rawResult['data']['cdnImage'])) {
             return new ImageGenerateResponse(ImageGenerateType::URL, [$rawResult['data']['cdnImage']]);
         }
@@ -159,7 +159,7 @@ class MidjourneyModel extends AbstractImageGenerate
                 ]);
 
                 if ($result['status'] === 'SUCCESS') {
-                    // 直接returncompletenativedata
+                    // directlyreturncompletenativedata
                     return $result;
                 }
 

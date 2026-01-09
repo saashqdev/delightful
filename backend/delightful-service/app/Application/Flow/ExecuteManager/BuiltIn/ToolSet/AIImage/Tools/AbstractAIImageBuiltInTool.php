@@ -98,7 +98,7 @@ abstract class AbstractAIImageBuiltInTool extends AbstractBuiltInTool
             "type": "array",
             "key": "attachments",
             "title": "attachmentarray",
-            "description": "传入filelistarray",
+            "description": "pass infilelistarray",
             "required": null,
             "value": null,
             "encryption": false,

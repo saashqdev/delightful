@@ -15,7 +15,7 @@ class SeqExtra extends AbstractEntity
     use EditMessageOptionsTrait;
 
     /**
-     * 序columnnumber所属conversation id.
+     * 序columnnumberbelong toconversation id.
      */
     protected string $topicId = '';
 

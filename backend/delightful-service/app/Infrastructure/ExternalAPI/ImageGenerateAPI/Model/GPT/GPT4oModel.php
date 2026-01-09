@@ -84,7 +84,7 @@ class GPT4oModel extends AbstractImageGenerate
             return $response; // returnnulldataresponse
         }
 
-        // 3. andhairhandle - 直接操asresponseobject
+        // 3. andhairhandle - directly操asresponseobject
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();

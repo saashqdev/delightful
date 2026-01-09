@@ -46,7 +46,7 @@ class RedisLocker implements LockerInterface
     {
         try {
             $key = $this->getLockKey($name);
-            $timeSpace = 1000 * 10; // each 10 毫second尝试onetime
+            $timeSpace = 1000 * 10; // each 10 毫secondtryonetime
             $microTime = $expire * 1000 * 1000; // convertfor微second
             $time = 0;
             while (! $this->redis->set($key, $owner, ['NX', 'EX' => $expire])) {

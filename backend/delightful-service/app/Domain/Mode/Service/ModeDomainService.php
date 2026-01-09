@@ -185,7 +185,7 @@ class ModeDomainService
             return $this->getModeDetailById($dataIsolation, $id);
         }
 
-        // 直接deletethe模type所have现haveconfiguration
+        // directlydeletethe模type所have现haveconfiguration
         $this->relationRepository->deleteByModeId($dataIsolation, $id);
 
         // deletethe模type所have现havegroup

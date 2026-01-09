@@ -66,7 +66,7 @@ interface DelightfulPermissionInterface
     public function getResourceModule(string $resource): string;
 
     /**
-     * checkuserpermissionsetmiddlewhethercontainfinger定permission(考虑隐typecontain).
+     * checkuserpermissionsetmiddlewhethercontainfinger定permission(consider隐typecontain).
      */
     public function checkPermission(string $permissionKey, array $userPermissions, bool $isPlatformOrganization = false): bool;
 }

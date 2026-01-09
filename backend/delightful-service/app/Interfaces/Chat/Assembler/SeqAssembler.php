@@ -40,7 +40,7 @@ class SeqAssembler
     }
 
     /**
-     * willentityconvertforcan直接writedatabasedata.
+     * willentityconvertforcandirectlywritedatabasedata.
      */
     public static function getInsertDataByEntity(DelightfulSeqEntity $delightfulSeqEntity): array
     {
@@ -51,7 +51,7 @@ class SeqAssembler
     }
 
     /**
-     * batchquantityreturncustomer端needSeqstructure,toresultcollectionforce重new降序rowcolumn.
+     * batchquantityreturncustomer端needSeqstructure,toresultcollectionforce重newdescendingrowcolumn.
      * @return ClientSequenceResponse[]
      */
     public static function getClientSeqStructs(array $seqInfos, array $messageInfos): array
@@ -69,7 +69,7 @@ class SeqAssembler
             }
             $seqStructs[$seqEntity->getSeqId()] = self::getClientSeqStruct($seqEntity, $messageEntity);
         }
-        // toresultcollectionforce重new降序rowcolumn
+        // toresultcollectionforce重newdescendingrowcolumn
         krsort($seqStructs);
         return array_values($seqStructs);
     }
@@ -185,7 +185,7 @@ class SeqAssembler
         $time = date('Y-m-d H:i:s');
         // resetseq相closeid
         $seqData['id'] = $messageId;
-        // 序column所属usermaybehair生变more
+        // 序columnbelong tousermaybehair生变more
         if ($receiveUserEntity !== null) {
             $seqData['object_id'] = $receiveUserEntity->getDelightfulId();
             $seqData['object_type'] = $receiveUserEntity->getUserType()->value;
@@ -255,7 +255,7 @@ class SeqAssembler
 
     private static function getClientSequence(DelightfulSeqEntity $seqEntity, ?DelightfulMessageEntity $messageEntity = null): ClientSequence
     {
-        // byateditmessagemaybemore改messagetype,thereforeif $messageEntity notfornull,优先use $messageEntity messagetype
+        // byateditmessagemaybemore改messagetype,thereforeif $messageEntity notfornull,priorityuse $messageEntity messagetype
         if ($messageEntity !== null) {
             $messageType = $messageEntity->getContent()->getMessageTypeEnum();
         } else {
@@ -304,17 +304,17 @@ class SeqAssembler
         $clientSequenceData = [
             // 序columnnumber归属账numberid
             'delightful_id' => $seqEntity->getObjectId(),
-            // 序columnnumber,one定notduplicate,one定growth,butisnotguarantee连续.
+            // 序columnnumber,one定notduplicate,one定growth,butisnotguaranteecontinuous.
             'seq_id' => $seqEntity->getSeqId(),
             // usermessageid,userdown唯one.
             'message_id' => $seqEntity->getMessageId(),
-            // 本itemmessagefingertodelightful_message_id. useatimplementalready读return执场景.存inquoteclose系o clock,send_msg_idfieldnotagainreturn,因forsend方messageidnothavealter.
+            // 本itemmessagefingertodelightful_message_id. useatimplementalready读return执scenario.存inquoteclose系o clock,send_msg_idfieldnotagainreturn,因forsend方messageidnothavealter.
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // send方messageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),
-            // message所属conversationwindow. customer端canaccording tothisvaluecertainmessagewhetherwantreminderetc.if本groundnothavehair现thisconversationid,主动toservice端queryconversationwindowdetail
+            // messagebelong toconversationwindow. customer端canaccording tothisvaluecertainmessagewhetherwantreminderetc.if本groundnothavehair现thisconversationid,主动toservice端queryconversationwindowdetail
             'conversation_id' => $seqEntity->getConversationId(),
-            // 本itemmessage所属organization
+            // 本itemmessagebelong toorganization
             'organization_code' => $seqEntity->getOrganizationCode(),
             'message' => $clientSeqMessage,
             // editmessageoption

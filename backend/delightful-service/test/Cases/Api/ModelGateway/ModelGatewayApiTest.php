@@ -53,7 +53,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
         // createone Parallel instance,setmostbigandhair数for 10
         $parallel = new Parallel(10);
 
-        // definition多differentrequest场景
+        // definition多differentrequestscenario
         $scenario = $this->buildRequestData([
             'business_params' => [
                 'organization_id' => '000',
@@ -79,7 +79,7 @@ class ModelGatewayApiTest extends AbstractHttpTest
                         'content' => $response['choices'][0]['message']['content'] ?? '',
                     ];
                 } catch (Throwable $e) {
-                    // 直接returnfailinfo,notconductretry
+                    // directlyreturnfailinfo,notconductretry
                     return [
                         'success' => false,
                         'index' => $index,

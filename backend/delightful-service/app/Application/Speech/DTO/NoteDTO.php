@@ -10,8 +10,8 @@ namespace App\Application\Speech\DTO;
 use function Hyperf\Translation\trans;
 
 /**
- * 笔记DTO
- * useatASR总结middle笔记information.
+ * noteDTO
+ * useatASRsummarymiddlenoteinformation.
  */
 readonly class NoteDTO
 {
@@ -42,12 +42,12 @@ readonly class NoteDTO
     /**
      * generatefile名.
      *
-     * @param null|string $generatedTitle generatetitle,ifprovidethenuse {title}-笔记.{ext} format
+     * @param null|string $generatedTitle generatetitle,ifprovidethenuse {title}-note.{ext} format
      */
     public function generateFileName(?string $generatedTitle = null): string
     {
         if (! empty($generatedTitle)) {
-            // usegeneratetitleformat:{title}-笔记.{ext}
+            // usegeneratetitleformat:{title}-note.{ext}
             return sprintf('%s-%s.%s', $generatedTitle, trans('asr.file_names.note_suffix'), $this->getFileExtension());
         }
 

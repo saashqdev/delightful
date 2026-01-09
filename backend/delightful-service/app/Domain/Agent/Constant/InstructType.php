@@ -234,9 +234,9 @@ enum InstructType: int
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.interaction_command_select_cannot_be_empty');
         }
 
-        // verifywhether直接sendfinger令
+        // verifywhetherdirectlysendfinger令
         if (! isset($item['send_directly'])) {
-            $item['send_directly'] = false;  // defaultnot直接send
+            $item['send_directly'] = false;  // defaultnotdirectlysend
         }
 
         if (! is_bool($item['send_directly'])) {
@@ -284,9 +284,9 @@ enum InstructType: int
      */
     private function validateText(array &$item): void
     {
-        // verifywhether直接sendfinger令
+        // verifywhetherdirectlysendfinger令
         if (! isset($item['send_directly'])) {
-            $item['send_directly'] = false;  // defaultnot直接send
+            $item['send_directly'] = false;  // defaultnotdirectlysend
         }
 
         if (! is_bool($item['send_directly'])) {

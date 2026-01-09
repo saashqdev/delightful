@@ -31,7 +31,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
         $apiUrl = $serviceProviderConfig['url'];
 
         if (empty($apiUrl)) {
-            throw new Exception('Google Gemini API URL configuration缺失');
+            throw new Exception('Google Gemini API URL configurationmissing');
         }
 
         $this->api = new GoogleGeminiAPI($serviceProviderConfig['api_key'], $apiUrl, $serviceProviderConfig['model_version']);
@@ -81,7 +81,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
             return $response; // returnnulldataresponse
         }
 
-        // 3. andhairhandle - 直接操asresponseobject
+        // 3. andhairhandle - directly操asresponseobject
         $count = $imageGenerateRequest->getGenerateNum();
         $parallel = new Parallel();
         $fromCoroutineId = Coroutine::id();
@@ -178,9 +178,9 @@ class GoogleGeminiModel extends AbstractImageGenerate
         }
 
         try {
-            // ifhave参考graphlike,thenexecutegraphlikeedit
+            // ifhavereferencegraphlike,thenexecutegraphlikeedit
             if (! empty($referImages)) {
-                // 取theone张参考graphlikeconductedit
+                // 取theone张referencegraphlikeconductedit
                 $referImage = $referImages[0];
                 $result = $this->processImageEdit($referImage, $prompt);
             } else {
@@ -200,7 +200,7 @@ class GoogleGeminiModel extends AbstractImageGenerate
 
     private function processImageEdit(string $referImageUrl, string $instructions): array
     {
-        // 直接handleURLgraphlike
+        // directlyhandleURLgraphlike
         $imageBase64 = $this->downloadImageAsBase64($referImageUrl);
         $mimeType = $this->detectMimeTypeFromUrl($referImageUrl);
 

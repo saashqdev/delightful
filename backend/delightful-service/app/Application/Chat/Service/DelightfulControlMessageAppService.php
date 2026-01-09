@@ -67,7 +67,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
             // (single聊sessionwindowmiddle)startinput/endinput
             ControlMessageType::StartConversationInput,
             ControlMessageType::EndConversationInput => $this->conversationDomainService->clientOperateConversationStatus($messageDTO, $dataIsolation),
-            // setsessiontopic,准备废弃
+            // setsessiontopic,prepare废弃
             ControlMessageType::SetConversationTopic => [],
             default => ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR),
         };
@@ -75,7 +75,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
 
     /**
      * minutehairasyncmessagequeuemiddleseq.
-     * such asaccording tohairitem方seq,for收item方generateseq,投递seq.
+     * such asaccording tohairitem方seq,for收item方generateseq,deliverseq.
      * @throws Throwable
      */
     public function dispatchMQControlMessage(DelightfulSeqEntity $delightfulSeqEntity): void
@@ -84,12 +84,12 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         switch ($controlMessageType) {
             case ControlMessageType::SeenMessages:
             case ControlMessageType::ReadMessage:
-                // already读return执etc场景,according tooneitemcontrolmessage,generateotherpersonseq.
+                // already读return执etcscenario,according tooneitemcontrolmessage,generateotherpersonseq.
                 $this->controlDomainService->handlerMQReceiptSeq($delightfulSeqEntity);
                 break;
             case ControlMessageType::RevokeMessage:
             case ControlMessageType::EditMessage:
-                // withdrawmessage,editmessageetc场景
+                // withdrawmessage,editmessageetcscenario
                 $this->controlDomainService->handlerMQUserSelfMessageChange($delightfulSeqEntity);
                 break;
             case ControlMessageType::CreateTopic:

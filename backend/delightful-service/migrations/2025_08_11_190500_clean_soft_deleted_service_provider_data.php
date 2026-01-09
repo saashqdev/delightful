@@ -26,7 +26,7 @@ return new class extends Migration {
         // cleanup service_provider 相closefour张tablemiddle软deletedata
         $this->cleanSoftDeletedData();
 
-        // 清洗 service_provider tablemiddle provider_code='Official' record
+        // clean service_provider tablemiddle provider_code='Official' record
         $this->cleanOfficialProviderData();
 
         // cleanup service_provider_models tablemiddle冗remainderdata
@@ -156,17 +156,17 @@ return new class extends Migration {
     }
 
     /**
-     * 清洗 Official servicequotientdata.
+     * clean Official servicequotientdata.
      */
     private function cleanOfficialProviderData(): void
     {
         $logger = $this->getLogger();
-        $logger->info('start清洗 Official servicequotient description and translate field');
+        $logger->info('startclean Official servicequotient description and translate field');
 
         try {
             // usetransactionensuredataone致property
             Db::transaction(function () use ($logger) {
-                // queryneed清洗 Official servicequotientrecord
+                // queryneedclean Official servicequotientrecord
                 $query = Db::table('service_provider')
                     ->select(['id', 'description', 'translate'])
                     ->where('provider_code', 'Official');
@@ -198,11 +198,11 @@ return new class extends Migration {
                     }
                 }
 
-                $logger->info("清洗complete,总共impactline数: {$updateCount}");
-                $logger->info('Official servicequotientdata清洗complete');
+                $logger->info("cleancomplete,总共impactline数: {$updateCount}");
+                $logger->info('Official servicequotientdatacleancomplete');
             });
         } catch (Throwable $e) {
-            $logger->error('data清洗proceduremiddlehair生error: ' . $e->getMessage());
+            $logger->error('datacleanproceduremiddlehair生error: ' . $e->getMessage());
             throw $e;
         }
     }

@@ -8,9 +8,9 @@ declare(strict_types=1);
 namespace App\Domain\Chat\Entity\ValueObject;
 
 /**
- * message优先level.
- * 按照 rabbitmq suggestion,mostbig优先levelnot超pass5
- * different优先levelmessagewillbe投递toto应queuemiddle.
+ * messageprioritylevel.
+ * 按照 rabbitmq suggestion,mostbigprioritylevelnot超pass5
+ * differentprioritylevelmessagewillbedelivertoto应queuemiddle.
  */
 enum MessagePriority: int
 {

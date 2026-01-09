@@ -69,7 +69,7 @@ readonly class AdminProviderAppService
             $authorization->getId(),
         );
 
-        // pass领域layermethodonetimepropertygetservicequotient,configurationandmodelinfo
+        // passdomainlayermethodonetimepropertygetservicequotient,configurationandmodelinfo
         $providerModels = $this->providerConfigDomainService->getProviderModelsByConfigId($dataIsolation, $configId);
         if ($providerModels === null) {
             return null;
@@ -251,7 +251,7 @@ readonly class AdminProviderAppService
         }
 
         $saveProviderModelData = $saveProviderModelDTO->toArray();
-        // icon传入is url,returnalsoneedis url,butissaveindatabaseis file_key
+        // iconpass inis url,returnalsoneedis url,butissaveindatabaseis file_key
         // 所by SaveProviderModelDTO  setIcon 做 url to file_keyconvert
         $saveProviderModelData['icon'] = $this->getFileUrl($saveProviderModelDTO->getIcon());
         return $saveProviderModelData;
@@ -265,7 +265,7 @@ readonly class AdminProviderAppService
      */
     public function getOrganizationProvidersModelsByCategory(string $organizationCode, Category $category): array
     {
-        // call领域layero clockpass modelTypes parameter,let仓储layercompletequeryandfilter
+        // calldomainlayero clockpass modelTypes parameter,let仓储layercompletequeryandfilter
         $serviceProviderModelsDTOs = $this->adminProviderDomainService->getOrganizationProvidersModelsByCategory($organizationCode, $category);
 
         // handlegraph标
@@ -285,7 +285,7 @@ readonly class AdminProviderAppService
             $authorization->getId(),
         );
 
-        // pass领域layermethodgetcompletemodeldetailinfo
+        // passdomainlayermethodgetcompletemodeldetailinfo
         $providerModelEntity = $this->providerModelDomainService->getById(
             $dataIsolation,
             $modelPrimaryId
@@ -671,7 +671,7 @@ readonly class AdminProviderAppService
         // batchquantityget所havegraph标link
         $iconUrlMap = $this->fileDomainService->getLinks($organizationCode, array_unique($icons));
 
-        // onlyhandlegraph标URL,直接return实bodyobject
+        // onlyhandlegraph标URL,directlyreturn实bodyobject
         foreach ($serviceProviders as $serviceProvider) {
             $icon = $serviceProvider->getIcon();
 

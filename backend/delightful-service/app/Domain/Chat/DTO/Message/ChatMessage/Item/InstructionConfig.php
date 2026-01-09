@@ -54,7 +54,7 @@ class InstructionConfig extends AbstractEntity
     protected string $name = '';
 
     /**
-     * 直接sendfinger令,userpoint击finger令backwill直接sendgive助理.
+     * directlysendfinger令,userpoint击finger令backwilldirectlysendgive助理.
      */
     protected bool $sendDirectly = false;
 
@@ -227,7 +227,7 @@ class InstructionConfig extends AbstractEntity
             return;
         }
 
-        // iffirstyuan素already经is InstructionValue object,then直接use
+        // iffirstyuan素already经is InstructionValue object,thendirectlyuse
         if (isset($values[0]) && $values[0] instanceof InstructionValue) {
             $this->values = $values;
             return;

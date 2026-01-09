@@ -91,7 +91,7 @@ class LLMChatNodeRunner extends AbstractLLMNodeRunner
         if ($paramsConfig->getModelConfig()->isAutoMemory()) {
             $contentMessageId = $executionData->getTriggerData()->getMessageEntity()->getDelightfulMessageId();
             $contentMessage = null;
-            // 尝试in记忆middle找to content message
+            // tryin记忆middle找to content message
             foreach ($memoryManager->getMessages() as $message) {
                 if ($message->getIdentifier() === $contentMessageId) {
                     $contentMessage = $message;

@@ -184,7 +184,7 @@ enum SystemInstructType: int
             }
         }
 
-        // check缺失systemfinger令typeand补充
+        // checkmissingsystemfinger令typeand补充
         foreach (self::cases() as $case) {
             if (! in_array($case->value, $systemTypes)) {
                 $systemInstructs[$case->value] = [

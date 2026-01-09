@@ -158,16 +158,16 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 1. 准备testenvironment
+        // 1. preparetestenvironment
         $this->switchUserTest1();
         $this->enableCollaboration($projectId);
         $this->addTeamMembers($projectId);
 
-        // 2. nonmanage者尝试batchquantityupdatepermission - shouldfail
+        // 2. nonmanage者trybatchquantityupdatepermission - shouldfail
         $this->switchUserTest2();
         $this->batchUpdateMemberPermissions($projectId, 51202);
 
-        // 3. nonmanage者尝试batchquantitydeletemember - shouldfail
+        // 3. nonmanage者trybatchquantitydeletemember - shouldfail
         $this->batchDeleteMembers($projectId, 51202);
 
         // 4. manage者canconductbatchquantity操as
@@ -186,7 +186,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->enableCollaboration($projectId);
 
-        // 尝试addotherorganizationuser - shouldfail
+        // tryaddotherorganizationuser - shouldfail
         $requestData = [
             'members' => [
                 [
@@ -533,7 +533,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
         // 先addcurrentuserformember
         //        $this->addTeamMembers($projectId);
 
-        // 尝试deletefrom己
+        // trydeletefrom己
         $currentUserId = $this->testUserId2; // test2user
         $requestData = [
             'members' => [
@@ -633,7 +633,7 @@ class ProjectMemberV2ApiTest extends AbstractApiTest
     }
 
     /**
-     * cleanupprojectmemberdata(直接databasedelete).
+     * cleanupprojectmemberdata(directlydatabasedelete).
      */
     private function cleanupProjectMembers(string $projectId): void
     {

@@ -627,7 +627,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
             $markdown .= "# {$content['title']}\n\n";
         }
 
-        // 优先usemiddle文content,ifnothavethenuseEnglishcontent
+        // priorityusemiddle文content,ifnothavethenuseEnglishcontent
         $postContent = $content['content'] ?? [];
 
         foreach ($postContent as $paragraph) {
@@ -687,7 +687,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
                     $text = $element['text'] ?? '';
                     return "{$text}\n";
                 default:
-                    // toatunknowntag,尝试extracttextcontent
+                    // toatunknowntag,tryextracttextcontent
                     return $element['text'] ?? '';
             }
         } catch (Exception $e) {
@@ -749,7 +749,7 @@ class FeiShuRobotChat implements ThirdPlatformChatInterface
         // usejustthentable达typematchMarkdownmiddleimage
         $pattern = '/!\[(.*?)\]\((.*?)\)/';
 
-        // ifnothaveimage,直接returnmdformat
+        // ifnothaveimage,directlyreturnmdformat
         if (! preg_match_all($pattern, $markdown, $matches, PREG_OFFSET_CAPTURE)) {
             $postContent['content'][] = [
                 [

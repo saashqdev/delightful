@@ -51,7 +51,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             ));
             return;
         }
-        // passreturn执send者quotemessageid,找tosend者messageid. (notcan直接usereceive者 sender_message_id field,thisisonenotgooddesign,随o clockcancel)
+        // passreturn执send者quotemessageid,找tosend者messageid. (notcandirectlyusereceive者 sender_message_id field,thisisonenotgooddesign,随o clockcancel)
         $senderMessageId = $this->delightfulSeqRepository->getSeqByMessageId($receiveDelightfulSeqEntity->getReferMessageId())?->getSenderMessageId();
         if ($senderMessageId === null) {
             $this->logger->error(sprintf(
@@ -195,7 +195,7 @@ class DelightfulControlDomainService extends AbstractDomainService
     public function handlerMQUserSelfMessageChange(DelightfulSeqEntity $changeMessageStatusSeqEntity): void
     {
         $controlMessageType = $changeMessageStatusSeqEntity->getSeqType();
-        // passreturn执send者quotemessageid,找tosend者messageid. (notcan直接usereceive者 sender_message_id field,thisisonenotgooddesign,随o clockcancel)
+        // passreturn执send者quotemessageid,找tosend者messageid. (notcandirectlyusereceive者 sender_message_id field,thisisonenotgooddesign,随o clockcancel)
         $needChangeSeqEntity = $this->delightfulSeqRepository->getSeqByMessageId($changeMessageStatusSeqEntity->getReferMessageId());
         if ($needChangeSeqEntity === null) {
             $this->logger->error(sprintf(

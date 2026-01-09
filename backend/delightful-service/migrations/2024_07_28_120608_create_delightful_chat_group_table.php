@@ -25,7 +25,7 @@ class CreateDelightfulChatGroupTable extends Migration
             $table->string('group_avatar', 255)->comment('群avatar')->default('');
             $table->string('group_notice', 255)->comment('群公告')->default('');
             $table->string('group_owner', 64)->comment('群主');
-            // 群所属organization
+            // 群belong toorganization
             $table->string('organization_code', 64)->comment('群organizationencoding')->default('');
             $table->string('group_tag', 64)->comment('群tag:0:notag,1:outside部群;2:inside部群;3:all员群')->default('0');
             $table->tinyInteger('group_type')->default(1)->comment('群type,1:conversation;2:topic');

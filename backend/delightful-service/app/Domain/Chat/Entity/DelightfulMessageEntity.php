@@ -35,7 +35,7 @@ class DelightfulMessageEntity extends AbstractEntity
     protected ConversationType $senderType;
 
     /**
-     * send者所属organizationencoding.
+     * send者belong toorganizationencoding.
      */
     protected string $senderOrganizationCode = '';
 

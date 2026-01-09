@@ -259,7 +259,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
     #[Event('intermediate')]
     #[VerifyStructure]
     /**
-     * not存入database实o clockmessage,useatonethesetemporarymessage场景.
+     * not存入database实o clockmessage,useatonethesetemporarymessagescenario.
      * @throws Throwable
      */
     public function onIntermediateMessage(Socket $socket, array $params)
@@ -333,7 +333,7 @@ class DelightfulChatWebSocketApi extends BaseNamespace
 
     private function relationAppMsgIdAndRequestId(?string $appMsgId): void
     {
-        // 直接use appMsgId asfor requestIdwill导致very多invalid log,难bytrace.
+        // directlyuse appMsgId asfor requestIdwill导致very多invalid log,难bytrace.
         $requestId = empty($appMsgId) ? (string) IdGenerator::getSnowId() : $appMsgId;
         CoContext::setRequestId($requestId);
         $this->logger->info('relationAppMsgIdAndRequestId requestId:' . $requestId . ' appMsgId: ' . $appMsgId);

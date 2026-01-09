@@ -19,7 +19,7 @@ use Exception;
 use Hyperf\Contract\ConfigInterface;
 
 /**
- * AI can力领域service.
+ * AI can力domainservice.
  */
 class AiAbilityDomainService
 {

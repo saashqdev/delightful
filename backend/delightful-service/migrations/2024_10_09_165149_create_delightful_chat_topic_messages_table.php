@@ -23,11 +23,11 @@ return new class extends Migration {
             // messageid
             $table->bigIncrements('seq_id')->comment('message序columnid.notinseqtableaddtopicidfield,avoidseq承载featuretoo多,needaddtoo多index');
             // sessionid. 冗remainderfield
-            $table->string('conversation_id', 64)->comment('message所属sessionid');
+            $table->string('conversation_id', 64)->comment('messagebelong tosessionid');
             // organizationencoding. 冗remainderfield
             $table->string('organization_code', 64)->comment('organizationencoding');
             // topicid
-            $table->unsignedBigInteger('topic_id')->comment('message所属topicid');
+            $table->unsignedBigInteger('topic_id')->comment('messagebelong totopicid');
             # index
             $table->index(['conversation_id', 'topic_id'], 'idx_conversation_topic_id');
             $table->timestamps();

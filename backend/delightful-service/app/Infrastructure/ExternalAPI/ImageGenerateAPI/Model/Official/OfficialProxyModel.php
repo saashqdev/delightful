@@ -84,7 +84,7 @@ class OfficialProxyModel extends AbstractImageGenerate
             return new OpenAIFormatResponse($responseData);
         } catch (GuzzleException $e) {
             $errorBody = '';
-            // 尝试getresponsebody
+            // trygetresponsebody
             try {
                 if ($e instanceof RequestException && $e->hasResponse()) {
                     $errorBody = $e->getResponse()->getBody()->getContents();
@@ -156,7 +156,7 @@ class OfficialProxyModel extends AbstractImageGenerate
 
     protected function generateImageInternal(ImageGenerateRequest $imageGenerateRequest): ImageGenerateResponse
     {
-        // 官方proxynotusethismethod,直接use generateImageOpenAIFormat
+        // 官方proxynotusethismethod,directlyuse generateImageOpenAIFormat
         throw new Exception('OfficialProxyModel does not support generateImageInternal method');
     }
 }

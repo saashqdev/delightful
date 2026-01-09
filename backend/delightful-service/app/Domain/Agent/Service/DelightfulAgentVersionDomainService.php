@@ -45,7 +45,7 @@ class DelightfulAgentVersionDomainService
     }
 
     /**
-     * optimizeversion:直接getenable助理version,avoid传入bigquantityID.
+     * optimizeversion:directlygetenable助理version,avoidpass inbigquantityID.
      * @return DelightfulAgentVersionEntity[]
      */
     public function getEnabledAgentsByOrganization(string $organizationCode, int $page, int $pageSize, string $agentName): array
@@ -190,15 +190,15 @@ class DelightfulAgentVersionDomainService
         // will PATCH 部minuteadd 1
         $patch = (int) $patch + 1;
 
-        // if PATCH 达to 10,enter位to MINOR(canaccording to需求adjustthisrule)
+        // if PATCH 达to 10,enter位to MINOR(canaccording torequirementadjustthisrule)
         if ($patch > 99) {
             $patch = 0;
             $minor = (int) $minor + 1;
         }
 
-        // if MINOR 达to 10,enter位to MAJOR(canaccording to需求adjustthisrule)
+        // if MINOR 达to 10,enter位to MAJOR(canaccording torequirementadjustthisrule)
         if ($minor > 99) {
-            // notresetminor,whileis直接增bigmajor,avoidnot必wantreset
+            // notresetminor,whileisdirectly增bigmajor,avoidnot必wantreset
             $minor = 0;
             $major = (int) $major + 1;
         }

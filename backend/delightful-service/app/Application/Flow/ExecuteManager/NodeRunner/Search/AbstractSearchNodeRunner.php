@@ -22,7 +22,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
         $filterType = $paramsConfig->getFilterType();
         foreach ($paramsConfig->getFilters() as $filter) {
             $rightValue = $filter->getRightValue()->getValue()->getResult($executionData->getExpressionFieldData());
-            // null,'',0,[],false  直接skip,谁not事搜thisthese.right侧not填valuenotconductsearch
+            // null,'',0,[],false  directlyskip,谁not事搜thisthese.right侧not填valuenotconductsearch
             if (empty($rightValue)) {
                 continue;
             }
@@ -34,7 +34,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 $rangeIds = $allIds;
             }
 
-            // ifrange id bedefinitionbecomeemptyarray,代tablealready经nothaveconformitemitemdata,直接跳outloop
+            // ifrange id bedefinitionbecomeemptyarray,代tablealready经nothaveconformitemitemdata,directly跳outloop
             if (is_array($rangeIds) && empty($rangeIds)) {
                 break;
             }
@@ -46,7 +46,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
                 $rightValue,
                 $rangeIds
             );
-            // null 代tablenot supportedsearchtype,直接skip
+            // null 代tablenot supportedsearchtype,directlyskip
             if ($currentIds === null) {
                 continue;
             }

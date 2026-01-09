@@ -263,7 +263,7 @@ class MiracleVisionModel extends AbstractImageGenerate
         $this->logger->info('美graphAPI:responsedataverifypass');
     }
 
-    // todo xhy 目frontonlycanforcereturn 26 ,因forno法toimage场景做match
+    // todo xhy 目frontonlycanforcereturn 26 ,因forno法toimagescenario做match
     private function determineStyleId(array $styles): int
     {
         if (empty($styles['data']['style_list'])) {

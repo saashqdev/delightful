@@ -81,7 +81,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
     }
 
     /**
-     * returnmostbigmessage倒数 n item序column.
+     * returnmostbigmessagecountdown n item序column.
      * message_id= seqtableprimary keyid,thereforenotneedsingle独to message_id addindex.
      * @return ClientSequenceResponse[]
      */
@@ -482,7 +482,7 @@ sql;
             ->forceIndex('idx_object_type_id_seq_id')
             ->orderBy('seq_id', 'desc');
         $seqList = Db::select($query->toSql(), $query->getBindings());
-        // mergebackagain降序rowcolumn,fastspeed找outmessagemostnewstatus
+        // mergebackagaindescendingrowcolumn,fastspeed找outmessagemostnewstatus
         $seqList = array_merge($seqList, $referMessages);
         $seqList = array_column($seqList, null, 'id');
         krsort($seqList);
@@ -490,7 +490,7 @@ sql;
     }
 
     /**
-     * toresultcollectionforce重new降序rowcolumn.
+     * toresultcollectionforce重newdescendingrowcolumn.
      * @return ClientSequenceResponse[]
      */
     private function getClientSequencesResponse(array $seqInfos): array

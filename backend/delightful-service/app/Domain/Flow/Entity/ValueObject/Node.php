@@ -57,8 +57,8 @@ class Node extends AbstractValueObject
     protected ?NodeDebugResult $nodeDebugResult = null;
 
     /**
-     * sectionpointexecutecallbackfunction,ifhavethevalue,that么will直接executethechoose,whilenotispassNodeRunnercomeexecute.
-     * thiswithin暂o clock想toisforsingle测方便.
+     * sectionpointexecutecallbackfunction,ifhavethevalue,that么willdirectlyexecutethechoose,whilenotispassNodeRunnercomeexecute.
+     * thiswithin暂o clock想toisforsingle测convenient.
      */
     private ?Closure $callback = null;
 

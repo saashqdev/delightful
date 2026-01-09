@@ -67,7 +67,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $invitationInfo = $this->getInvitationByToken($this->invitationToken);
         $this->assertTrue($invitationInfo['data']['requires_password']);
 
-        // 5. outside部user尝试add入project(passworderror)
+        // 5. outside部usertryadd入project(passworderror)
         $this->joinProjectWithWrongPassword($this->invitationToken);
 
         // 6. project所have者resetpassword
@@ -86,7 +86,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->switchUserTest1();
         $this->assertToggleInvitationLinkOff($projectId);
 
-        // 10. outside部user尝试accessalreadyclose邀请link
+        // 10. outside部usertryaccessalreadyclose邀请link
         $this->switchUserTest2();
         $this->getInvitationByTokenDisabled($this->invitationToken);
     }
@@ -98,7 +98,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     {
         $projectId = $this->projectId;
 
-        // 1. nonprojectmember尝试manage邀请link(shouldfail)
+        // 1. nonprojectmembertrymanage邀请link(shouldfail)
         $this->switchUserTest2();
         $this->getInvitationLink($projectId, 51202); // permissionnot足
 
@@ -314,7 +314,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * 尝试duplicateadd入project(shouldfail).
+     * tryduplicateadd入project(shouldfail).
      */
     public function joinProjectAlreadyMember(string $token, ?string $password = null): void
     {
@@ -375,7 +375,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // cleanuptestdata
         $this->getResourceShareDomainService()->deleteShareByResource($projectId, ResourceType::ProjectInvitation->value);
 
-        // 连续fastspeedstart/close邀请link
+        // continuousfastspeedstart/close邀请link
         $this->toggleInvitationLink($projectId, true);
         $this->toggleInvitationLink($projectId, false);
         $this->toggleInvitationLink($projectId, true);
@@ -481,7 +481,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         // 0. cleanuptestdataandreset邀请link
         $this->cleanupTestData($projectId);
 
-        // pass领域servicedelete现have邀请link
+        // passdomainservicedelete现have邀请link
         $this->getResourceShareDomainService()->deleteShareByResource($projectId, ResourceType::ProjectInvitation->value);
 
         // 1. start邀请link
@@ -698,12 +698,12 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
      */
     private function cleanupTestData(string $projectId): void
     {
-        // pass领域servicedeletetest2userprojectmemberclose系(if存in)
+        // passdomainservicedeletetest2userprojectmemberclose系(if存in)
         $this->getProjectMemberDomainService()->removeMemberByUser((int) $projectId, 'usi_e9d64db5b986d062a342793013f682e8');
     }
 
     /**
-     * getresourceshare领域service.
+     * getresourcesharedomainservice.
      */
     private function getResourceShareDomainService(): ResourceShareDomainService
     {
@@ -712,7 +712,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
     }
 
     /**
-     * getprojectmember领域service.
+     * getprojectmemberdomainservice.
      */
     private function getProjectMemberDomainService(): ProjectMemberDomainService
     {

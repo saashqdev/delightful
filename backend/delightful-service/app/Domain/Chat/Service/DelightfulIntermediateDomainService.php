@@ -150,7 +150,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
         }
 
-        // verifytopic所属sessionwhether属atcurrentuser
+        // verifytopicbelong tosessionwhether属atcurrentuser
         $this->checkAndGetSelfConversation($topicEntity->getConversationId(), $dataIsolation);
     }
 }

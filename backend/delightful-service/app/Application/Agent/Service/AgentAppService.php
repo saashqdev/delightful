@@ -39,7 +39,7 @@ class AgentAppService extends AbstractAppService
         // generatecache key
         $cacheKey = sprintf('queriesAvailableAgents:user:%s:official:%s', $authorization->getId(), $containOfficialOrganization ? '1' : '0');
 
-        // 尝试fromcacheget agentIds
+        // tryfromcacheget agentIds
         $agentIds = $this->redis->get($cacheKey);
         if ($agentIds !== false) {
             $agentIds = Json::decode($agentIds);
@@ -74,7 +74,7 @@ class AgentAppService extends AbstractAppService
 
         $data = $this->agentDomainService->queries($agentDataIsolation, $query, $page);
 
-        // ifcontain官方organization,按照传入IDorder重newsortresult,maintain官方organization助理infront
+        // ifcontain官方organization,按照pass inIDorder重newsortresult,maintain官方organization助理infront
         if ($containOfficialOrganization) {
             $data['list'] = $this->sortAgentsByIdOrder($data['list'], $agentIds);
         }

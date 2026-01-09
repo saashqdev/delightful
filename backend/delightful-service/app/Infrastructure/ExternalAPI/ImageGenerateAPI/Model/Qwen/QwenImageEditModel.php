@@ -158,7 +158,7 @@ class QwenImageEditModel extends AbstractImageGenerate
             'image_count' => count($imageGenerateRequest->getImageUrls()),
         ]);
 
-        // 直接handlesinglerequest,graphlikeeditonlyhandleone张image
+        // directlyhandlesinglerequest,graphlikeeditonlyhandleone张image
         try {
             $result = $this->callSyncEditAPI($imageGenerateRequest);
             $rawResults = [

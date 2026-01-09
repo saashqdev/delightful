@@ -43,7 +43,7 @@ class PlatformSettingsApi
 
         $payload = $request->validated();
 
-        // allow部minutefieldupdate:onlywhen传入nonnullo clockreplace
+        // allow部minutefieldupdate:onlywhenpass innonnullo clockreplace
         if (array_key_exists('logo_zh_url', $payload) && $payload['logo_zh_url'] !== null) {
             $data['logo_urls']['zh_CN'] = (string) $payload['logo_zh_url'];
         }
@@ -80,7 +80,7 @@ class PlatformSettingsApi
     }
 
     /**
-     * 简single URL and必填itemvalidation(follow需求:save URL;size/typevalidationinfileserviceandfront端process).
+     * 简single URL and必填itemvalidation(followrequirement:save URL;size/typevalidationinfileserviceandfront端process).
      */
     private function validateUrls(array $data): void
     {

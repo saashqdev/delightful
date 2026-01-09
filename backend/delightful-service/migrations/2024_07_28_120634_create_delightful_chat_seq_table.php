@@ -20,7 +20,7 @@ return new class extends Migration {
         Schema::create('delightful_chat_sequences', static function (Blueprint $table) {
             // according toupsurface建table语sentence,outbydowncode
             $table->bigIncrements('id')->comment('primary keyid,not啥use');
-            $table->string('organization_code', 64)->comment('序columnnumber所属organizationencoding.')->default('');
+            $table->string('organization_code', 64)->comment('序columnnumberbelong toorganizationencoding.')->default('');
             $table->tinyInteger('object_type')->comment('objecttype,0:ai,1:user;2:application;3:document;4:多维table格');
             $table->string('object_id', 64)->comment('objectid. ifisusero clock,table示delightful_id');
             $table->string('seq_id', 64)->comment('message序columnnumber id,each账number所havemessagemustgradually增big');
@@ -33,7 +33,7 @@ return new class extends Migration {
             // sender_message_id
             $table->string('sender_message_id', 64)->comment('send方messageid,useatmessagewithdraw/edit');
             // sessionid
-            $table->string('conversation_id', 64)->comment('message所属sessionid,冗remainderfield');
+            $table->string('conversation_id', 64)->comment('messagebelong tosessionid,冗remainderfield');
             $table->tinyInteger('status')->default(0)->comment('messagestatus,0:unread, 1:seen, 2:read, 3:revoked');
             // messagereceivepersonlist
             $table->text('receive_list')->comment('messagereceivepersonlist,allquantityrecordnot读/already读/alreadyviewuserlist');

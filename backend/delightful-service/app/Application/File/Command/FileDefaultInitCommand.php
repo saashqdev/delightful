@@ -100,7 +100,7 @@ class FileDefaultInitCommand extends Command
             $moduleName = basename($moduleDir);
 
             try {
-                // 尝试will模piece名mappingtoto应businesstype
+                // trywill模piece名mappingtoto应businesstype
                 $businessType = $this->mapModuleToBusinessType($moduleName);
 
                 if ($businessType === null) {
@@ -154,7 +154,7 @@ class FileDefaultInitCommand extends Command
                         $mimeType = mime_content_type($filePath) ?: 'image/png';
                         $base64Content = 'data:' . $mimeType . ';base64,' . base64_encode($fileContent);
 
-                        // 完all参考 ImageWatermarkProcessor success做法,butfinger定file名
+                        // 完allreference ImageWatermarkProcessor success做法,butfinger定file名
                         $uploadFile = new UploadFile($base64Content, 'default-files', $fileName);
                         $this->fileDomainService->uploadByCredential(
                             $organizationCode,
@@ -164,7 +164,7 @@ class FileDefaultInitCommand extends Command
 
                         // immediatelyvalidatefilewhethercanget(closekeyvalidatestep)
                         $actualKey = $uploadFile->getKey();
-                        // from key middleextractorganizationencoding,参考 ProviderAppService correct做法
+                        // from key middleextractorganizationencoding,reference ProviderAppService correct做法
                         $keyOrganizationCode = substr($actualKey, 0, strpos($actualKey, '/'));
                         $fileLink = $this->fileDomainService->getLink($keyOrganizationCode, $actualKey, StorageBucketType::Public);
                         if (! $fileLink || ! $fileLink->getUrl()) {
@@ -209,11 +209,11 @@ class FileDefaultInitCommand extends Command
      */
     protected function mapModuleToBusinessType(string $moduleName): ?DefaultFileBusinessType
     {
-        // 尝试直接mapping
+        // trydirectlymapping
         try {
             return DefaultFileBusinessType::from($moduleName);
         } catch (ValueError) {
-            // if直接mappingfail,尝试passnamematch
+            // ifdirectlymappingfail,trypassnamematch
             return match (strtolower($moduleName)) {
                 'service_provider', 'serviceprovider', 'service-provider' => DefaultFileBusinessType::SERVICE_PROVIDER,
                 'flow', 'workflow' => DefaultFileBusinessType::FLOW,

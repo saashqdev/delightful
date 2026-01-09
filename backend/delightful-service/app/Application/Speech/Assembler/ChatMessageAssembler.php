@@ -17,7 +17,7 @@ use Hyperf\Contract\TranslatorInterface;
 
 /**
  * chatmessage装配器
- * 负责buildASR总结相closechatmessage.
+ * 负责buildASRsummary相closechatmessage.
  */
 readonly class ChatMessageAssembler
 {
@@ -26,11 +26,11 @@ readonly class ChatMessageAssembler
     }
 
     /**
-     * buildchatrequestobjectuseat总结task
+     * buildchatrequestobjectuseatsummarytask
      *
-     * @param ProcessSummaryTaskDTO $dto process总结taskDTO
+     * @param ProcessSummaryTaskDTO $dto processsummarytaskDTO
      * @param AsrFileDataDTO $audioFileData audiofiledata
-     * @param null|AsrFileDataDTO $noteFileData 笔记filedata,optional
+     * @param null|AsrFileDataDTO $noteFileData notefiledata,optional
      * @return ChatRequest chatrequestobject
      */
     public function buildSummaryMessage(ProcessSummaryTaskDTO $dto, AsrFileDataDTO $audioFileData, ?AsrFileDataDTO $noteFileData = null): ChatRequest
@@ -65,7 +65,7 @@ readonly class ChatMessageAssembler
      *
      * @param string $modelId modelID
      * @param AsrFileDataDTO $fileData filedata
-     * @param null|AsrFileDataDTO $noteData 笔记filedata,optional
+     * @param null|AsrFileDataDTO $noteData notefiledata,optional
      * @return array messagecontentarray
      */
     public function buildMessageContent(string $modelId, AsrFileDataDTO $fileData, ?AsrFileDataDTO $noteData = null): array
@@ -75,7 +75,7 @@ readonly class ChatMessageAssembler
         $translator->setLocale(CoContext::getLanguage());
         // buildmessagecontent
         if ($noteData !== null && ! empty($noteData->fileName) && ! empty($noteData->filePath)) {
-            // have笔记o clockmessagecontent:meanwhile提to录音fileand笔记file
+            // havenoteo clockmessagecontent:meanwhile提torecordingfileandnotefile
 
             $messageContent = [
                 [
@@ -112,7 +112,7 @@ readonly class ChatMessageAssembler
                 ],
             ];
         } else {
-            // no笔记o clockmessagecontent:only提to录音file
+            // nonoteo clockmessagecontent:only提torecordingfile
             $messageContent = [
                 [
                     'type' => 'text',

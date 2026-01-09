@@ -24,7 +24,7 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * ASR 录音core跳monitorscheduletask.
+ * ASR recordingcore跳monitorscheduletask.
  */
 #[Crontab(
     rule: '* * * * *',                    // eachminute钟executeonetime
@@ -54,7 +54,7 @@ class AsrHeartbeatMonitor
     public function execute(): void
     {
         try {
-            $this->logger->info('startexecute ASR 录音core跳monitortask');
+            $this->logger->info('startexecute ASR recordingcore跳monitortask');
 
             // 扫描所havecore跳 key(use RedisUtil::scanKeys prevent阻塞)
             $keys = RedisUtil::scanKeys(
@@ -77,11 +77,11 @@ class AsrHeartbeatMonitor
                 }
             }
 
-            $this->logger->info('ASR 录音core跳monitortaskexecutecomplete', [
+            $this->logger->info('ASR recordingcore跳monitortaskexecutecomplete', [
                 'timeout_count' => $timeoutCount,
             ]);
         } catch (Throwable $e) {
-            $this->logger->error('ASR 录音core跳monitortaskexecutefail', [
+            $this->logger->error('ASR recordingcore跳monitortaskexecutefail', [
                 'error' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),
             ]);
@@ -115,7 +115,7 @@ class AsrHeartbeatMonitor
             // Key format:asr:heartbeat:{md5(user_id:task_key)}
             $this->logger->info('detecttocore跳timeout', ['key' => $key]);
 
-            // byat key is MD5 hash,weno法直接反toget task_key and user_id
+            // byat key is MD5 hash,weno法directly反toget task_key and user_id
             // needfrom Redis middle扫描所have asr:task:* comefindmatchtask
             $this->findAndTriggerTimeoutTask($key);
         } catch (Throwable $e) {
@@ -127,7 +127,7 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * findand触hairtimeouttaskfrom动总结.
+     * findand触hairtimeouttaskfrom动summary.
      */
     private function findAndTriggerTimeoutTask(string $heartbeatKey): void
     {
@@ -154,7 +154,7 @@ class AsrHeartbeatMonitor
                 );
 
                 if ($expectedHeartbeatKey === $heartbeatKey) {
-                    // 找tomatchtask,checkwhetherneed触hairfrom动总结
+                    // 找tomatchtask,checkwhetherneed触hairfrom动summary
                     if ($this->shouldTriggerAutoSummary($taskStatus)) {
                         $this->triggerAutoSummary($taskStatus);
                     }
@@ -170,7 +170,7 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * judgewhethershould触hairfrom动总结.
+     * judgewhethershould触hairfrom动summary.
      */
     private function shouldTriggerAutoSummary(AsrTaskStatusDTO $taskStatus): bool
     {
@@ -184,7 +184,7 @@ class AsrHeartbeatMonitor
             return false;
         }
 
-        // if录音statusnotis start or recording,not触hair
+        // ifrecordingstatusnotis start or recording,not触hair
         if (! in_array($taskStatus->recordingStatus, [
             AsrRecordingStatusEnum::START->value,
             AsrRecordingStatusEnum::RECORDING->value,
@@ -197,7 +197,7 @@ class AsrHeartbeatMonitor
             return false;
         }
 
-        // if沙箱tasknotcreate,not触hair
+        // ifsandboxtasknotcreate,not触hair
         if (! $taskStatus->sandboxTaskCreated) {
             return false;
         }
@@ -206,7 +206,7 @@ class AsrHeartbeatMonitor
     }
 
     /**
-     * 触hairfrom动总结.
+     * 触hairfrom动summary.
      */
     private function triggerAutoSummary(AsrTaskStatusDTO $taskStatus): void
     {
@@ -221,7 +221,7 @@ class AsrHeartbeatMonitor
                 return;
             }
 
-            $this->logger->info('触haircore跳timeoutfrom动总结', [
+            $this->logger->info('触haircore跳timeoutfrom动summary', [
                 'task_key' => $taskStatus->taskKey,
                 'user_id' => $taskStatus->userId,
                 'project_id' => $taskStatus->projectId,
@@ -237,15 +237,15 @@ class AsrHeartbeatMonitor
             $userAuthorization = DelightfulUserAuthorization::fromUserEntity($userEntity);
             $organizationCode = $taskStatus->organizationCode ?? $userAuthorization->getOrganizationCode();
 
-            // 直接callfrom动总结method(willinmethodinside部updatestatus)
+            // directlycallfrom动summarymethod(willinmethodinside部updatestatus)
             $this->asrFileAppService->autoTriggerSummary($taskStatus, $taskStatus->userId, $organizationCode);
 
-            $this->logger->info('core跳timeoutfrom动总结already触hair', [
+            $this->logger->info('core跳timeoutfrom动summaryalready触hair', [
                 'task_key' => $taskStatus->taskKey,
                 'user_id' => $taskStatus->userId,
             ]);
         } catch (Throwable $e) {
-            $this->logger->error('触hairfrom动总结fail', [
+            $this->logger->error('触hairfrom动summaryfail', [
                 'task_key' => $taskStatus->taskKey,
                 'user_id' => $taskStatus->userId,
                 'error' => $e->getMessage(),

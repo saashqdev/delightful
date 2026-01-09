@@ -20,8 +20,8 @@ use Psr\Log\LoggerInterface;
 use Throwable;
 
 /**
- * ASR 沙箱responsehandleservice
- * 负责handle沙箱 finish interfaceresponse,updatefileanddirectoryrecord.
+ * ASR sandboxresponsehandleservice
+ * 负责handlesandbox finish interfaceresponse,updatefileanddirectoryrecord.
  */
 readonly class AsrSandboxResponseHandler
 {
@@ -34,16 +34,16 @@ readonly class AsrSandboxResponseHandler
     }
 
     /**
-     * handle沙箱 finish response,updatefileanddirectoryrecord.
+     * handlesandbox finish response,updatefileanddirectoryrecord.
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
-     * @param array $sandboxResponse 沙箱responsedata(data 部minute)
+     * @param array $sandboxResponse sandboxresponsedata(data 部minute)
      */
     public function handleFinishResponse(
         AsrTaskStatusDTO $taskStatus,
         array $sandboxResponse,
     ): void {
-        $this->logger->info('starthandle沙箱 finish response', [
+        $this->logger->info('starthandlesandbox finish response', [
             'task_key' => $taskStatus->taskKey,
             'response_keys' => array_keys($sandboxResponse),
         ]);
@@ -53,28 +53,28 @@ readonly class AsrSandboxResponseHandler
         $noteFile = $sandboxResponse['files']['note_file'] ?? null;
 
         if ($audioFile === null) {
-            $this->logger->warning('沙箱responsemiddlenot找toaudiofileinfo', [
+            $this->logger->warning('sandboxresponsemiddlenot找toaudiofileinfo', [
                 'task_key' => $taskStatus->taskKey,
             ]);
             return;
         }
 
-        // 2. checkandhandledirectoryrename(沙箱havebug,willrenamedirectorybutisnothavenotifyfile变动,nothave改databaserecord)
+        // 2. checkandhandledirectoryrename(sandboxhavebug,willrenamedirectorybutisnothavenotifyfile变动,nothave改databaserecord)
         $taskStatus->displayDirectory = $this->extractDirectoryPath($audioFile);
 
         // 3. findaudiofilerecord
         $this->getAudioFileId($taskStatus, $audioFile);
 
-        // 4. handle笔记file
+        // 4. handlenotefile
         if ($noteFile !== null) {
-            // pass file_key findmostnew笔记file ID(directorymaybeberename)
+            // pass file_key findmostnewnotefile ID(directorymaybeberename)
             $this->getNoteFileId($taskStatus, $noteFile);
         } else {
-            // 笔记filefornullornot存in,deletepreset笔记filerecord
+            // notefilefornullornot存in,deletepresetnotefilerecord
             $this->handleEmptyNoteFile($taskStatus);
         }
 
-        $this->logger->info('沙箱 finish responsehandlecomplete', [
+        $this->logger->info('sandbox finish responsehandlecomplete', [
             'task_key' => $taskStatus->taskKey,
             'audio_file_id' => $taskStatus->audioFileId,
             'note_file_id' => $taskStatus->noteFileId,
@@ -101,7 +101,7 @@ readonly class AsrSandboxResponseHandler
 
     /**
      * according toresponseaudiofile名/filepath,找toaudiofile id,useatback续hairchatmessage.
-     * useround询机制etc待沙箱syncfiletodatabase(at mostetc待 30 second).
+     * useround询机制etc待sandboxsyncfiletodatabase(at mostetc待 30 second).
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @param array $audioFile audiofileinfo
@@ -138,7 +138,7 @@ readonly class AsrSandboxResponseHandler
                 'error' => $e->getMessage(),
             ]);
 
-            // ifiswefrom己throwexception,直接重newthrow
+            // ifiswefrom己throwexception,directly重newthrow
             if ($e instanceof BusinessException) {
                 throw $e;
             }
@@ -148,11 +148,11 @@ readonly class AsrSandboxResponseHandler
     }
 
     /**
-     * according toresponse笔记filepath,找to笔记file id.
-     * useround询机制etc待沙箱syncfiletodatabase(at mostetc待 30 second).
+     * according toresponsenotefilepath,找tonotefile id.
+     * useround询机制etc待sandboxsyncfiletodatabase(at mostetc待 30 second).
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
-     * @param array $noteFile 笔记fileinfo
+     * @param array $noteFile notefileinfo
      */
     private function getNoteFileId(
         AsrTaskStatusDTO $taskStatus,
@@ -161,7 +161,7 @@ readonly class AsrSandboxResponseHandler
         $relativePath = $noteFile['path'] ?? '';
 
         if (empty($relativePath)) {
-            $this->logger->warning('笔记filepathfornull,清null笔记fileID', [
+            $this->logger->warning('notefilepathfornull,清nullnotefileID', [
                 'task_key' => $taskStatus->taskKey,
             ]);
             $taskStatus->noteFileId = null;
@@ -173,15 +173,15 @@ readonly class AsrSandboxResponseHandler
             $fileEntity = $this->findFileByPathWithPolling(
                 $taskStatus,
                 $relativePath,
-                '笔记file',
-                false // 笔记filequeryfailnot抛exception
+                'notefile',
+                false // notefilequeryfailnot抛exception
             );
 
             if ($fileEntity !== null) {
                 $taskStatus->noteFileId = (string) $fileEntity->getFileId();
                 $taskStatus->noteFileName = $noteFile['filename'] ?? $noteFile['path'] ?? '';
 
-                $this->logger->info('success找to笔记filerecord', [
+                $this->logger->info('success找tonotefilerecord', [
                     'task_key' => $taskStatus->taskKey,
                     'note_file_id' => $taskStatus->noteFileId,
                     'note_file_name' => $taskStatus->noteFileName,
@@ -189,7 +189,7 @@ readonly class AsrSandboxResponseHandler
                 ]);
             } else {
                 // not找tothen清null,notusepresetID
-                $this->logger->warning('not找to笔记filerecord', [
+                $this->logger->warning('not找tonotefilerecord', [
                     'task_key' => $taskStatus->taskKey,
                     'relative_path' => $relativePath,
                 ]);
@@ -197,8 +197,8 @@ readonly class AsrSandboxResponseHandler
                 $taskStatus->noteFileName = null;
             }
         } catch (Throwable $e) {
-            // 笔记filequeryfail,清null笔记fileinfo
-            $this->logger->warning('query笔记filerecordfail', [
+            // notefilequeryfail,清nullnotefileinfo
+            $this->logger->warning('querynotefilerecordfail', [
                 'task_key' => $taskStatus->taskKey,
                 'relative_path' => $relativePath,
                 'error' => $e->getMessage(),
@@ -291,7 +291,7 @@ readonly class AsrSandboxResponseHandler
             // recordround询enterdegree
             if ($attempt % AsrConfig::FILE_RECORD_QUERY_LOG_FREQUENCY === 0 || $attempt === 1) {
                 $remainingSeconds = max(0, $timeoutSeconds - $elapsedSeconds);
-                $this->logger->info(sprintf('etc待沙箱sync%stodatabase', $fileTypeName), [
+                $this->logger->info(sprintf('etc待sandboxsync%stodatabase', $fileTypeName), [
                     'task_key' => $taskStatus->taskKey,
                     'file_type' => $fileTypeName,
                     'file_key' => $fileKey,
@@ -331,7 +331,7 @@ readonly class AsrSandboxResponseHandler
     }
 
     /**
-     * handlenull笔记file(deletepreset笔记filerecord).
+     * handlenullnotefile(deletepresetnotefilerecord).
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      */
@@ -339,26 +339,26 @@ readonly class AsrSandboxResponseHandler
     {
         $noteFileId = $taskStatus->presetNoteFileId;
         if (empty($noteFileId)) {
-            $this->logger->debug('preset笔记fileIDfornull,no需delete', [
+            $this->logger->debug('presetnotefileIDfornull,no需delete', [
                 'task_key' => $taskStatus->taskKey,
             ]);
             return;
         }
 
-        $this->logger->info('笔记filefornullornot存in,deletepreset笔记filerecord', [
+        $this->logger->info('notefilefornullornot存in,deletepresetnotefilerecord', [
             'task_key' => $taskStatus->taskKey,
             'note_file_id' => $noteFileId,
         ]);
 
         $deleted = $this->presetFileService->deleteNoteFile($noteFileId);
         if ($deleted) {
-            // 清nulltaskstatusmiddle笔记file相closefield
+            // 清nulltaskstatusmiddlenotefile相closefield
             $taskStatus->presetNoteFileId = null;
             $taskStatus->presetNoteFilePath = null;
             $taskStatus->noteFileId = null;
             $taskStatus->noteFileName = null;
 
-            $this->logger->info('null笔记filehandlecomplete', [
+            $this->logger->info('nullnotefilehandlecomplete', [
                 'task_key' => $taskStatus->taskKey,
             ]);
         }

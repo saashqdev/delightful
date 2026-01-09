@@ -151,7 +151,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
      */
     public function changeEnable(FlowDataIsolation $dataIsolation, DelightfulFlowEntity $delightfulFlow, ?bool $enable = null): void
     {
-        // if传入explicitstatusvalue,then直接set
+        // ifpass inexplicitstatusvalue,thendirectlyset
         if ($enable !== null) {
             // ifcurrentstatusandwantsetstatussame,thenno需操as
             if ($delightfulFlow->isEnabled() === $enable) {
@@ -210,7 +210,7 @@ class DelightfulFlowDomainService extends AbstractDomainService
 
             $callbackParams['branchId'] = $branchId;
             $callbackParams['routineConfig'] = $routineConfig->toConfigArray();
-            // ifisnotduplicate,that么is直接create调degreetask
+            // ifisnotduplicate,that么isdirectlycreate调degreetask
             if ($routineConfig->getType() === RoutineType::NoRepeat) {
                 $taskScheduler = new TaskScheduler();
                 $taskScheduler->setExternalId($externalId);

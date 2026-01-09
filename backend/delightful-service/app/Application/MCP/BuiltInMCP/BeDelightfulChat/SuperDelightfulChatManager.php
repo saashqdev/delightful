@@ -81,7 +81,7 @@ class BeDelightfulChatManager
         // 1. query所havecanuse agent
         $agents = di(DelightfulAgentDomainService::class)->getAgentByIds($agentIds);
 
-        // ifnothavecanuse agents,直接returnemptyarray
+        // ifnothavecanuse agents,directlyreturnemptyarray
         if (empty($agents)) {
             return [];
         }
@@ -122,7 +122,7 @@ MARKDOWN;
         $usageInstructions = <<<'MARKDOWN'
 useinstruction:
 • mustprovide agent_id and message parameter
-• conversation_id useatmaintainconversation连续property,sameIDmessagewillsharedupdown文
+• conversation_id useatmaintainconversationcontinuousproperty,sameIDmessagewillsharedupdown文
 
 MARKDOWN;
 

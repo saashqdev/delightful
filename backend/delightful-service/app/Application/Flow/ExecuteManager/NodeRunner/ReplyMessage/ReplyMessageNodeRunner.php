@@ -57,7 +57,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         /** @var ReplyMessageNodeParamsConfig $paramsConfig */
         $paramsConfig = $this->node->getNodeParamsConfig();
 
-        // if具have bigmodelstreamresponsebody,that么直接start
+        // if具have bigmodelstreamresponsebody,that么directlystart
         if ($executionData->getExecutionType()->isSupportStream() && ! empty($frontResults['chat_completion_choice_generator'])) {
             $streamResponse = $this->sendMessageForStream($executionData, $frontResults);
             // generatebigmodelsectionpointresponsegivereturngo
@@ -76,7 +76,7 @@ class ReplyMessageNodeRunner extends NodeRunner
         // ifisresourcecategorydata,that么need提frontupload
         $links = $delightfulFlowMessage->getLinks($executionData->getExpressionFieldData());
         $attachments = $this->recordFlowExecutionAttachments($executionData, $links);
-        // byatwithinsurfacewillconductrename,所bythiswithin直接getto应name传入entergo
+        // byatwithinsurfacewillconductrename,所bythiswithindirectlygetto应namepass inentergo
         $linkPaths = array_map(function (AbstractAttachment $attachment) {
             return $attachment->getPath();
         }, $attachments);
@@ -371,7 +371,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                 'line' => $throwable->getLine(),
                 'trace' => $throwable->getTraceAsString(),
             ]);
-            // 报错push兜bottommessage
+            // errorpush兜bottommessage
             $streamOptions->setStatus(StreamMessageStatus::Processing);
             $messageContent = new TextMessage();
             $messageContent->setStreamOptions($streamOptions);

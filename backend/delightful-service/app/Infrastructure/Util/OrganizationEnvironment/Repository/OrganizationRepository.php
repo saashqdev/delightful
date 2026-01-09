@@ -136,7 +136,7 @@ class OrganizationRepository implements OrganizationRepositoryInterface
         // gettotal
         $total = $query->count();
 
-        // sort:优先usefilter器middlesortfield,nothendefault按createtime倒序
+        // sort:priorityusefilter器middlesortfield,nothendefault按createtime倒序
         $orderBy = $filters['order_by'] ?? null;
         $orderDirection = strtolower((string) ($filters['order_direction'] ?? '')) === 'asc' ? 'asc' : 'desc';
         if (! empty($orderBy)) {

@@ -46,7 +46,7 @@ class VolceApiClient extends AbstractSms
     }
 
     /**
-     * parse传入variablevariableor者textshort信,totemplateshort信variableassociatearray.
+     * parsepass invariablevariableor者textshort信,totemplateshort信variableassociatearray.
      */
     private function parseVariables(SmsStruct $smsStruct): array
     {

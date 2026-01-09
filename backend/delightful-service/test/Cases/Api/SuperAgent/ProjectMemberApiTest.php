@@ -145,7 +145,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * testupdateprojectmember - success场景.
+     * testupdateprojectmember - successscenario.
      */
     public function testUpdateProjectMembersSuccess(): void
     {
@@ -925,7 +925,7 @@ class ProjectMemberApiTest extends AbstractApiTest
     }
 
     /**
-     * cleanupprojectmemberdata(直接databasedelete).
+     * cleanupprojectmemberdata(directlydatabasedelete).
      */
     private function cleanupProjectMembers(string $projectId): void
     {

@@ -16,7 +16,7 @@ class AsrConfig
     // ==================== timeoutconfiguration ====================
 
     /**
-     * 总结taskminute布typelock TTL(second).
+     * summarytaskminute布typelock TTL(second).
      */
     public const int SUMMARY_LOCK_TTL = 120;
 
@@ -36,7 +36,7 @@ class AsrConfig
     public const int MOCK_POLLING_TTL = 600;
 
     /**
-     * 沙箱audiomergemostlongetc待time(second).
+     * sandboxaudiomergemostlongetc待time(second).
      */
     public const int SANDBOX_MERGE_TIMEOUT = 1200;
 
@@ -46,7 +46,7 @@ class AsrConfig
     public const int FILE_RECORD_QUERY_TIMEOUT = 120;
 
     /**
-     * 沙箱starttimeout(second).
+     * sandboxstarttimeout(second).
      */
     public const int SANDBOX_STARTUP_TIMEOUT = 121;
 
@@ -65,29 +65,29 @@ class AsrConfig
     // ==================== retryconfiguration ====================
 
     /**
-     * service端from动总结mostbigretrycount.
+     * service端from动summarymostbigretrycount.
      */
     public const int SERVER_SUMMARY_MAX_RETRY = 10;
 
     /**
-     * 沙箱startmostbigretrycount.
+     * sandboxstartmostbigretrycount.
      */
     public const int SANDBOX_STARTUP_MAX_RETRY = 3;
 
     // ==================== logrecordconfiguration ====================
 
     /**
-     * 沙箱audiomergelogrecordbetween隔(second).
+     * sandboxaudiomergelogrecordbetween隔(second).
      */
     public const int SANDBOX_MERGE_LOG_INTERVAL = 10;
 
     /**
-     * 沙箱audiomergelogrecordfrequency(eachNtime尝试recordonetime).
+     * sandboxaudiomergelogrecordfrequency(eachNtimetryrecordonetime).
      */
     public const int SANDBOX_MERGE_LOG_FREQUENCY = 10;
 
     /**
-     * audiofilerecordquerylogrecordfrequency(eachNtime尝试recordonetime).
+     * audiofilerecordquerylogrecordfrequency(eachNtimetryrecordonetime).
      */
     public const int FILE_RECORD_QUERY_LOG_FREQUENCY = 3;
 

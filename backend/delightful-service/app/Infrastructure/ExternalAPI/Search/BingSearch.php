@@ -100,7 +100,7 @@ class BingSearch
 
         while ($attempt < $maxAttempts) {
             try {
-                // ifisretry(thetwotime尝试),disableSSLverify
+                // ifisretry(thetwotimetry),disableSSLverify
                 if ($attempt !== 0) {
                     $clientConfig['verify'] = false;
                     $this->logger->warning('Retrying request with SSL verification disabled', [
@@ -132,7 +132,7 @@ class BingSearch
                         'endpoint' => $requestUrl,
                         'statusCode' => $statusCode,
                     ]);
-                    break; // HTTPerrornotretry,直接跳outloop
+                    break; // HTTPerrornotretry,directly跳outloop
                 }
                 $this->logger->warning('Network error occurred', [
                     'endpoint' => $requestUrl,
@@ -144,7 +144,7 @@ class BingSearch
             }
         }
 
-        // if走tothiswithin,instruction所have尝试allfail
+        // if走tothiswithin,instruction所havetryallfail
         throw new RuntimeException('Search engine error.');
     }
 }

@@ -109,7 +109,7 @@ class ImageWatermarkProcessor
 
     protected function addWaterMarkHandler(string $imageData, ImageGenerateRequest $imageGenerateRequest, ?string $format = null): string
     {
-        // detectimageformat,优先use传入format
+        // detectimageformat,priorityusepass informat
         $detectedFormat = $format ?? $this->detectImageFormat($imageData);
 
         $image = imagecreatefromstring($imageData);
@@ -164,7 +164,7 @@ class ImageWatermarkProcessor
         // calculatewatermarkposition
         [$x, $y] = $this->calculateWatermarkPosition($width, $height, $text, $fontSize, $config->getPosition());
 
-        // 优先useTTF字body,especiallyistoatmiddle文text
+        // priorityuseTTF字body,especiallyistoatmiddle文text
         $fontFile = $this->fontProvider->getFontPath();
         if ($fontFile !== null && ($this->fontProvider->containsChinese($text) || $this->fontProvider->supportsTTF())) {
             // useTTF字body渲染,supportmiddle文
@@ -173,10 +173,10 @@ class ImageWatermarkProcessor
 
             // correctcalculateTTF字body基lineposition
             if (function_exists('imagettfbbox')) {
-                // 直接use传入Ycoordinateasfor基lineposition
+                // directlyusepass inYcoordinateasfor基lineposition
                 $ttfY = $y;
             } else {
-                // ifno法getside界框,直接use传入Ycoordinate
+                // ifno法getside界框,directlyusepass inYcoordinate
                 $ttfY = $y;
             }
 
@@ -432,7 +432,7 @@ class ImageWatermarkProcessor
         try {
             $subDir = 'open';
 
-            // 直接usealreadycontainXMPwatermarkbase64data
+            // directlyusealreadycontainXMPwatermarkbase64data
             $uploadFile = new UploadFile($base64Image, $subDir, '');
 
             $fileDomainService->uploadByCredential($organizationCode, $uploadFile, StorageBucketType::Public);

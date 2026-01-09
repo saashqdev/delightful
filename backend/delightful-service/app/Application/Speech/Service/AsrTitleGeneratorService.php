@@ -22,7 +22,7 @@ use Throwable;
 
 /**
  * ASR titlegenerateservice
- * 负责according todifferent场景generate录音总结title.
+ * 负责according todifferentscenariogeneraterecordingsummarytitle.
  */
 readonly class AsrTitleGeneratorService
 {
@@ -36,15 +36,15 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * according todifferent场景generatetitle.
+     * according todifferentscenariogeneratetitle.
      *
-     * 场景one:have asr_stream_content(front端实o clock录音),直接usecontentgeneratetitle
-     * 场景two:have file_id(uploadalreadyhavefile),buildhint词generatetitle
+     * scenarioone:have asr_stream_content(front端实o clockrecording),directlyusecontentgeneratetitle
+     * scenariotwo:have file_id(uploadalreadyhavefile),buildhint词generatetitle
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
      * @param string $asrStreamContent ASRstreamidentifycontent
      * @param null|string $fileId fileID
-     * @param null|NoteDTO $note 笔记content
+     * @param null|NoteDTO $note notecontent
      * @param string $taskKey taskkey(useatlog)
      * @return null|string generatetitle
      */
@@ -58,7 +58,7 @@ readonly class AsrTitleGeneratorService
         try {
             $language = $this->translator->getLocale() ?: 'zh_CN';
 
-            // 场景one:have asr_stream_content(front端实o clock录音)
+            // scenarioone:have asr_stream_content(front端实o clockrecording)
             if (! empty($asrStreamContent)) {
                 $customPrompt = AsrPromptAssembler::getTitlePrompt($asrStreamContent, $note, $language);
                 $title = $this->delightfulChatMessageAppService->summarizeTextWithCustomPrompt(
@@ -68,7 +68,7 @@ readonly class AsrTitleGeneratorService
                 return $this->sanitizeTitle($title);
             }
 
-            // 场景two:have file_id(uploadalreadyhavefile)
+            // scenariotwo:have file_id(uploadalreadyhavefile)
             if (! empty($fileId)) {
                 $fileEntity = $this->taskFileDomainService->getById((int) $fileId);
                 if ($fileEntity === null) {
@@ -82,7 +82,7 @@ readonly class AsrTitleGeneratorService
                 // getaudiofilename
                 $audioFileName = $fileEntity->getFileName();
 
-                // build笔记file名(ifhave)
+                // buildnotefile名(ifhave)
                 $noteFileName = null;
                 if ($note !== null && $note->hasContent()) {
                     $noteFileName = $note->generateFileName();
@@ -116,7 +116,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * fromtaskstatusgeneratetitle(usesave ASR contentand笔记content).
+     * fromtaskstatusgeneratetitle(usesave ASR contentandnotecontent).
      *
      * @param AsrTaskStatusDTO $taskStatus taskstatus
      * @return string generatetitle(failo clockreturndefaulttitle)
@@ -136,7 +136,7 @@ readonly class AsrTitleGeneratorService
 
             // ifhave ASR streamcontent,useitgeneratetitle
             if (! empty($taskStatus->asrStreamContent)) {
-                // build笔记 DTO(ifhave)
+                // buildnote DTO(ifhave)
                 $note = null;
                 if (! empty($taskStatus->noteContent)) {
                     $note = new NoteDTO(
@@ -145,7 +145,7 @@ readonly class AsrTitleGeneratorService
                     );
                 }
 
-                // getcomplete录音总结hint词
+                // getcompleterecordingsummaryhint词
                 $customPrompt = AsrPromptAssembler::getTitlePrompt(
                     $taskStatus->asrStreamContent,
                     $note,
@@ -174,10 +174,10 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * 清洗title,移exceptfile/directorynotallowcharacterandtruncatelength.
+     * cleantitle,移exceptfile/directorynotallowcharacterandtruncatelength.
      *
      * @param string $title originaltitle
-     * @return string 清洗backtitle
+     * @return string cleanbacktitle
      */
     public function sanitizeTitle(string $title): string
     {
@@ -211,7 +211,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * forfile直传场景generatetitle(onlyaccording tofile名).
+     * forfile直传scenariogeneratetitle(onlyaccording tofile名).
      *
      * @param DelightfulUserAuthorization $userAuthorization userauthorization
      * @param string $fileName file名
@@ -255,13 +255,13 @@ readonly class AsrTitleGeneratorService
      * builduserrequestmessage(mockuserchatmessage,use国际化text).
      *
      * @param string $audioFileName audiofilename
-     * @param null|string $noteFileName 笔记filename(optional)
+     * @param null|string $noteFileName notefilename(optional)
      * @return string format化backuserrequest
      */
     private function buildUserRequestMessage(string $audioFileName, ?string $noteFileName): string
     {
         if ($noteFileName !== null) {
-            // have笔记情况:"请帮I @yearwillsolutiondiscussion.webm 录音contentand @yearwill笔记.md contentconversionforoneshare超level产物"
+            // havenote情况:"请帮I @yearwillsolutiondiscussion.webm recordingcontentand @yearwillnote.md contentconversionforoneshare超level产物"
             return sprintf(
                 '%s@%s%s@%s%s',
                 $this->translator->trans('asr.messages.summary_prefix_with_note'),
@@ -272,7 +272,7 @@ readonly class AsrTitleGeneratorService
             );
         }
 
-        // onlyaudiofile情况:"请帮I @yearwillsolutiondiscussion.webm 录音contentconversionforoneshare超level产物"
+        // onlyaudiofile情况:"请帮I @yearwillsolutiondiscussion.webm recordingcontentconversionforoneshare超level产物"
         return sprintf(
             '%s@%s%s',
             $this->translator->trans('asr.messages.summary_prefix'),

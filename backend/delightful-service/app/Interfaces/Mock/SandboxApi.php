@@ -17,8 +17,8 @@ use Psr\Container\NotFoundExceptionInterface;
 use Psr\Log\LoggerInterface;
 
 /**
- * 沙箱manage Mock service
- * mock沙箱create,statusquery,work区statusetcmanageinterface.
+ * sandboxmanage Mock service
+ * mocksandboxcreate,statusquery,work区statusetcmanageinterface.
  */
 class SandboxApi
 {
@@ -33,7 +33,7 @@ class SandboxApi
     }
 
     /**
-     * query沙箱status
+     * querysandboxstatus
      * GET /api/v1/sandboxes/{sandboxId}.
      */
     public function getSandboxStatus(RequestInterface $request): array
@@ -44,7 +44,7 @@ class SandboxApi
             'sandbox_id' => $sandboxId,
         ]);
 
-        // mock沙箱already存inand运linemiddle
+        // mocksandboxalready存inand运linemiddle
         return [
             'code' => 1000,
             'message' => 'Success',
@@ -58,7 +58,7 @@ class SandboxApi
     }
 
     /**
-     * create沙箱
+     * createsandbox
      * POST /api/v1/sandboxes.
      */
     public function createSandbox(RequestInterface $request): array
@@ -73,7 +73,7 @@ class SandboxApi
             'project_oss_path' => $projectOssPath,
         ]);
 
-        // mock沙箱createsuccess
+        // mocksandboxcreatesuccess
         return [
             'code' => 1000,
             'message' => 'Sandbox created successfully',
@@ -146,7 +146,7 @@ class SandboxApi
     }
 
     /**
-     * initialize沙箱(simplify版,useat ASR etcnochatmessage场景)
+     * initializesandbox(simplify版,useat ASR etcnochatmessagescenario)
      * POST /api/v1/sandboxes/{sandboxId}/proxy/v1/messages/chat.
      *
      * requestbodyexample:
@@ -193,7 +193,7 @@ class SandboxApi
             ];
         }
 
-        // mock沙箱initializesuccessresponse
+        // mocksandboxinitializesuccessresponse
         return [
             'code' => 1000,
             'message' => 'work区initializesuccess',

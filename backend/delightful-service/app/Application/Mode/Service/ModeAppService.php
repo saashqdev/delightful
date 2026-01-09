@@ -229,7 +229,7 @@ class ModeAppService extends AbstractModeAppService
             return null;
         }
 
-        // 优先chooseservicequotientenableandmodelenablemodel
+        // prioritychooseservicequotientenableandmodelenablemodel
         foreach ($models as $model) {
             $providerId = $model->getServiceProviderConfigId();
             $providerStatus = $providerStatuses[$providerId] ?? Status::Disabled;

@@ -117,8 +117,8 @@ class ModelGatewayMapper extends ModelMapper
 
     /**
      * themethodgettoone定istrue实callmodel.
-     * only ModelGateway 领域use.
-     * @param string $model expectedismanageback台 model_id,passdegree阶segmentaccept传入 model_version
+     * only ModelGateway domainuse.
+     * @param string $model expectedismanageback台 model_id,passdegree阶segmentacceptpass in model_version
      */
     public function getOrganizationChatModel(BaseDataIsolation $dataIsolation, string $model): ModelInterface|OdinModel
     {
@@ -132,7 +132,7 @@ class ModelGatewayMapper extends ModelMapper
 
     /**
      * themethodgettoone定istrue实callmodel.
-     * only ModelGateway 领域use.
+     * only ModelGateway domainuse.
      * @param string $model modelname expectedismanageback台 model_id,passdegree阶segmentaccept model_version
      */
     public function getOrganizationEmbeddingModel(BaseDataIsolation $dataIsolation, string $model): EmbeddingInterface|OdinModel
@@ -397,10 +397,10 @@ class ModelGatewayMapper extends ModelMapper
         $implementationConfig = $providerEntity->getProviderCode()->getImplementationConfig($providerConfigItem, $providerModelEntity->getModelVersion());
 
         if ($providerEntity->getProviderType()->isCustom()) {
-            // customizeservicequotient统onedisplay别名,ifnothave别名thendisplay“customizeservicequotient”(need考虑多language)
+            // customizeservicequotient统onedisplay别名,ifnothave别名thendisplay“customizeservicequotient”(needconsider多language)
             $providerName = $providerConfigEntity->getLocalizedAlias($providerDataIsolation->getLanguage());
         } else {
-            // inside置servicequotient统onedisplay servicequotientname,notusedisplay别名(need考虑多language)
+            // inside置servicequotient统onedisplay servicequotientname,notusedisplay别名(needconsider多language)
             $providerName = $providerEntity->getLocalizedName($providerDataIsolation->getLanguage());
         }
 

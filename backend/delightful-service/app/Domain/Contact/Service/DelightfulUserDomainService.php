@@ -56,7 +56,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         $friendUserInfo = $usersInfo[$friendId];
         $friendStatus = FriendStatus::Apply;
         if ($friendUserInfo->getUserType() === UserType::Ai) {
-            // ifis ai ,直接agree
+            // ifis ai ,directlyagree
             $friendStatus = FriendStatus::Agree;
         } else {
             // ifispersoncategory,checkhe们whether处at同oneorganization
@@ -89,7 +89,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * getuser所属organizationcolumntable.
+     * getuserbelong toorganizationcolumntable.
      * @return string[]
      */
     public function getUserOrganizations(string $userId): array
@@ -98,7 +98,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
     }
 
     /**
-     * according to delightfulId getuser所属organizationcolumntable.
+     * according to delightfulId getuserbelong toorganizationcolumntable.
      * @return string[]
      */
     public function getUserOrganizationsByDelightfulId(string $delightfulId): array
@@ -245,7 +245,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         if (! $hasOfficialOrganization) {
             // ifusernothave官方organization,filter掉官方organizationnonAIuser
             $users = array_filter($users, static function (DelightfulUserEntity $user) use ($officialOrganizationCode) {
-                // ifnotis官方organization,直接保留
+                // ifnotis官方organization,directly保留
                 if ($user->getOrganizationCode() !== $officialOrganizationCode) {
                     return true;
                 }
@@ -341,7 +341,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         $cacheKey = md5(sprintf('OrganizationUserLogin:auth:%s:env:%s:', $authorization, $delightfulEnvironmentEntity->getId()));
         $lockKey = $this->generateLockKey(PlatformType::Delightful, $authorization);
 
-        // 尝试fromcachegetresult
+        // tryfromcachegetresult
         $cachedResult = $this->getCachedLoginCheckResult($cacheKey);
         if ($cachedResult !== null) {
             return $cachedResult;

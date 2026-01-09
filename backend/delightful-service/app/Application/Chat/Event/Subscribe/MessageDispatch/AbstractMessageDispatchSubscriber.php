@@ -25,14 +25,14 @@ use function Hyperf\Support\retry;
 
 /**
  * messageminutehair模piece.
- * processdifferent优先levelmessageconsumer,useat写收item方seq.
+ * processdifferentprioritylevelmessageconsumer,useat写收item方seq.
  */
 abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
 {
     protected AmqpTopicType $topic = AmqpTopicType::Message;
 
     /**
-     * 1.本groundopenhairo clocknotstart,avoid消费testenvironmentdata,导致testenvironmentuser收nottomessage
+     * 1.本groundopenhairo clocknotstart,avoidconsumetestenvironmentdata,导致testenvironmentuser收nottomessage
      * 2.if本groundopenhairo clock想debug,请fromlinein本ground搭建front端environment,more换mqhost. or者applyonedevenvironment,isolationmq.
      */
     public function isEnable(): bool
@@ -41,7 +41,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
     }
 
     /**
-     * according tomessage优先level.will收item方messagegenerate序columnnumber.
+     * according tomessageprioritylevel.will收item方messagegenerate序columnnumber.
      * @param SeqCreatedEvent $data
      */
     public function consumeMessage($data, AMQPMessage $message): Result
@@ -62,7 +62,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
             }
             foreach ($seqIds as $seqId) {
                 $seqId = (string) $seqId;
-                // useredisdetectseqwhetheralready经尝试多time,if超pass n time,thennotagainpush
+                // useredisdetectseqwhetheralready经try多time,if超pass n time,thennotagainpush
                 $seqRetryKey = sprintf('messageDispatch:seqRetry:%s', $seqId);
                 $seqRetryCount = $this->redis->get($seqRetryKey);
                 if ($seqRetryCount >= 3) {
@@ -75,7 +75,7 @@ abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
                 retry(3, function () use ($seqId, &$userSeqEntity) {
                     $userSeqEntity = $this->delightfulChatSeqRepository->getSeqByMessageId($seqId);
                     if ($userSeqEntity === null) {
-                        // maybeistransactionalsonotsubmit,mqalready经消费,delayretry
+                        // maybeistransactionalsonotsubmit,mqalready经consume,delayretry
                         ExceptionBuilder::throw(ChatErrorCode::SEQ_NOT_FOUND);
                     }
                 }, 100);

@@ -28,7 +28,7 @@ enum VolcengineStatusCode: string
     case QUEUED = '20000002';
 
     /**
-     * muteaudio - no需重newquery,直接重newsubmit.
+     * muteaudio - no需重newquery,directly重newsubmit.
      */
     case SILENT_AUDIO = '20000003';
 

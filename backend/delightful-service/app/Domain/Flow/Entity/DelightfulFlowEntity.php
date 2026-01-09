@@ -107,7 +107,7 @@ class DelightfulFlowEntity extends AbstractEntity
     private int $userOperation = 0;
 
     /**
-     * processcallbackfunction,ifhavethevalue,that么will直接executethechoose,whilenotispassNodeRunnercomeexecute.
+     * processcallbackfunction,ifhavethevalue,that么willdirectlyexecutethechoose,whilenotispassNodeRunnercomeexecute.
      */
     private ?Closure $callback = null;
 
@@ -299,7 +299,7 @@ class DelightfulFlowEntity extends AbstractEntity
                 $result['error_information'] = $nodeDebugResult->getErrorMessage();
             }
             if ($node->isEnd() && $nodeDebugResult && $nodeDebugResult->hasExecute()) {
-                // result优先,ifalready经存in,thennotneed
+                // resultpriority,ifalready经存in,thennotneed
                 if (empty($result)) {
                     $result = $nodeDebugResult->getOutput() ?? [];
                 }

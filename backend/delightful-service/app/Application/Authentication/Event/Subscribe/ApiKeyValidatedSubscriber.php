@@ -41,7 +41,7 @@ readonly class ApiKeyValidatedSubscriber implements ListenerInterface
         // createonenulldataisolationobject
         $dataIsolation = AuthenticationDataIsolation::create($apiKeyProvider->getOrganizationCode())->disabled();
 
-        // pass领域serviceupdatemostbackusetime
+        // passdomainserviceupdatemostbackusetime
         $this->container->get(ApiKeyProviderDomainService::class)
             ->updateLastUsed($dataIsolation, $apiKeyProvider);
     }

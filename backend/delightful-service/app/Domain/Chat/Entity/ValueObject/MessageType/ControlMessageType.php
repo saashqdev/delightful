@@ -12,7 +12,7 @@ namespace App\Domain\Chat\Entity\ValueObject\MessageType;
  */
 enum ControlMessageType: string
 {
-    // queueetc场景core跳
+    // queueetcscenariocore跳
     case Ping = 'ping';
 
     // createsessionwindow

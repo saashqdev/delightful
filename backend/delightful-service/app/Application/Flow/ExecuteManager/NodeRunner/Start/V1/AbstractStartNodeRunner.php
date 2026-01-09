@@ -131,7 +131,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
                 if ($property->getType()->isComplex()) {
                     $value = $appendConstValue[$key] ?? [];
                     if (is_string($value)) {
-                        // 尝试onetime json_decode
+                        // tryonetime json_decode
                         $value = json_decode($value, true);
                     }
                     if (! is_array($value)) {
@@ -166,7 +166,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         // schedule入参,allbyoutside部call,judgeis哪branch
         $branchId = $executionData->getTriggerData()->getParams()['branch_id'] ?? '';
         if (empty($branchId)) {
-            // nothave找toanybranch,直接运line
+            // nothave找toanybranch,directly运line
             $vertexResult->setChildrenIds([]);
             return [];
         }
@@ -254,7 +254,7 @@ abstract class AbstractStartNodeRunner extends NodeRunner
         if (! $delightfulFlowEntity || ! $delightfulFlowEntity->getType()->isMain()) {
             return;
         }
-        // 兜bottom,ifnothave agent processfinger令,尝试实o clockget
+        // 兜bottom,ifnothave agent processfinger令,try实o clockget
         if (empty($executionData->getInstructionConfigs())) {
             $instructs = di(DelightfulAgentDomainService::class)->getAgentById($executionData->getAgentId())->getInstructs();
             $executionData->setInstructionConfigs($instructs);

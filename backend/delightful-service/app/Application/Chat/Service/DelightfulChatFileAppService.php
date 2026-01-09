@@ -15,7 +15,7 @@ use App\Domain\File\Service\FileDomainService;
 
 /**
  * chatfileapplicationservice
- * providegiveother领域useinterface.
+ * providegiveotherdomainuseinterface.
  */
 class DelightfulChatFileAppService extends AbstractAppService
 {
@@ -36,7 +36,7 @@ class DelightfulChatFileAppService extends AbstractAppService
      */
     public function saveOrUpdateByFileKey(string $fileKey, DataIsolation $dataIsolation, array $fileData): array
     {
-        // 1. 准备file实body
+        // 1. preparefile实body
         $fileEntity = new DelightfulChatFileEntity();
         $fileEntity->setFileKey($fileKey);
         $fileEntity->setFileExtension($fileData['file_extension'] ?? '');

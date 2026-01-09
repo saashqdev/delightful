@@ -11,7 +11,7 @@ enum Type: int
 {
     case None = 0;
 
-    // 主process(直接useas助理)
+    // 主process(directlyuseas助理)
     case Main = 1;
 
     // 子process

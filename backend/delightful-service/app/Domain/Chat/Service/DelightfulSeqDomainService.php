@@ -52,7 +52,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         retry(3, function () use ($seqId, &$seqEntity) {
             $seqEntity = $this->delightfulSeqRepository->getSeqByMessageId($seqId);
             if ($seqEntity === null) {
-                // maybeistransactionalsonotsubmit,mqalready经消费,delayretry
+                // maybeistransactionalsonotsubmit,mqalready经consume,delayretry
                 ExceptionBuilder::throw(ChatErrorCode::SEQ_NOT_FOUND);
             }
         }, 100);
@@ -61,7 +61,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
             return;
         }
         $this->setRequestId($seqEntity->getAppMessageId());
-        $this->logger->info(sprintf('messagePush 准备startpush seq:%s seqEntity:%s ', $seqId, Json::encode($seqEntity->toArray())));
+        $this->logger->info(sprintf('messagePush preparestartpush seq:%s seqEntity:%s ', $seqId, Json::encode($seqEntity->toArray())));
         // judgemessagetype,iscontrolmessage,alsoischatmessage
         $seqUserEntity = $this->delightfulUserRepository->getUserByAccountAndOrganization($seqEntity->getObjectId(), $seqEntity->getOrganizationCode());
         if ($seqUserEntity === null) {
@@ -159,7 +159,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                     # ai sendalready读return执
                     $this->aiSendReadStatusChangeReceipt($selfSeqEntity, $userEntity);
                     # call flow
-                    // todo can做 optimizeflowresponsesuccessrate: syncetc待flowexecute,细致judge,toat本seq_id,uptimeflowresponsewhethertimeout,ifis,直接丢弃,notagainhairgiveflow
+                    // todo can做 optimizeflowresponsesuccessrate: syncetc待flowexecute,细致judge,toat本seq_id,uptimeflowresponsewhethertimeout,ifis,directly丢弃,notagainhairgiveflow
                     $this->userCallFlow($aiAccountEntity, $userEntity, $senderUserEntity, $selfSeqEntity);
                 } catch (Throwable $throwable) {
                     $this->logger->error('UserCallAgentEventError', [
@@ -382,7 +382,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                         'code' => $throwable->getCode(),
                         'trace' => $throwable->getTraceAsString(),
                     ]);
-                    // returnoneitem国际化报错message
+                    // returnoneitem国际化errormessage
                     event_dispatch(new UserCallAgentFailEvent($seqEntity));
                 }
             });

@@ -21,10 +21,10 @@ class CreateDelightfulChatFriendTable extends Migration
         Schema::create('delightful_chat_friends', static function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('user_id', 64)->comment('userid');
-            // user所属organization
+            // userbelong toorganization
             $table->string('user_organization_code', 64)->comment('userorganizationencoding')->default('');
             $table->string('friend_id', 64)->comment('good友id');
-            // good友所属organization
+            // good友belong toorganization
             $table->string('friend_organization_code', 64)->comment('good友organizationencoding')->default('');
             // good友type
             $table->tinyInteger('friend_type')->comment('good友type,0:ai 1:personcategory')->default(0);

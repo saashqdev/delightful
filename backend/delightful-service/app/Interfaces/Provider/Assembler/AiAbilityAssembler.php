@@ -134,7 +134,7 @@ class AiAbilityAssembler
             elseif (is_array($value)) {
                 $result[$key] = self::maskConfigRecursively($value);
             }
-            // othervalue直接赋value
+            // othervaluedirectly赋value
             else {
                 $result[$key] = $value;
             }

@@ -10,13 +10,13 @@ namespace App\Domain\Provider\Service\ModelFilter;
 /**
  * defaultorganizationmodelfilter器implement.
  *
- * notconductanyfilter,直接returnoriginalmodellist
+ * notconductanyfilter,directlyreturnoriginalmodellist
  * useatopen源versionor企业packagenotconfigurationo clockbacksolution
  */
 class DefaultOrganizationModelFilter implements OrganizationBasedModelFilterInterface
 {
     /**
-     * defaultimplement:notconductfilter,return所have传入model.
+     * defaultimplement:notconductfilter,return所havepass inmodel.
      */
     public function filterModelsByOrganization(string $organizationCode, array $models): array
     {

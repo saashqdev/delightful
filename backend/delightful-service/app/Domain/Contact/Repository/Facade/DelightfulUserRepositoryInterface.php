@@ -54,7 +54,7 @@ interface DelightfulUserRepositoryInterface
     public function getUserOrganizations(string $userId): array;
 
     /**
-     * according to delightfulId getuser所属organizationcolumntable.
+     * according to delightfulId getuserbelong toorganizationcolumntable.
      * @return string[]
      */
     public function getUserOrganizationsByDelightfulId(string $delightfulId): array;

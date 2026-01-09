@@ -83,7 +83,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
             $this->knowledgeBaseStrategy->getOrCreateDefaultDocument($dataIsolation, $knowledgeBaseEntity);
         }
 
-        // call领域servicequerydocument
+        // calldomainservicequerydocument
         $entities = $this->knowledgeBaseDocumentDomainService->queries($dataIsolation, $query, $page);
         $documentCodeFinalSyncStatusMap = $this->knowledgeBaseFragmentDomainService->getFinalSyncStatusByDocumentCodes(
             $dataIsolation,
@@ -139,7 +139,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         $this->checkKnowledgeBaseOperation($dataIsolation, 'del', $knowledgeBaseCode, $documentCode);
         $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $knowledgeBaseCode);
 
-        // call领域servicedeletedocument
+        // calldomainservicedeletedocument
         $this->knowledgeBaseDocumentDomainService->destroy($dataIsolation, $knowledgeBaseEntity, $documentCode);
     }
 
@@ -151,7 +151,7 @@ class KnowledgeBaseDocumentAppService extends AbstractKnowledgeAppService
         $dataIsolation = $this->createKnowledgeBaseDataIsolation($authorization);
         $this->checkKnowledgeBaseOperation($dataIsolation, 'manage', $knowledgeBaseCode, $documentCode);
 
-        // call领域service重newtoquantity化
+        // calldomainservice重newtoquantity化
         $knowledgeBaseEntity = $this->knowledgeBaseDomainService->show($dataIsolation, $knowledgeBaseCode);
         $documentEntity = $this->knowledgeBaseDocumentDomainService->show($dataIsolation, $knowledgeBaseCode, $documentCode);
         // byathistorydocumentnothave document_file field,notcanbe重newtoquantity化

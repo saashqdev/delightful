@@ -18,13 +18,13 @@ class NullImageEnhancementProcessor implements ImageEnhancementProcessorInterfac
 {
     public function enhanceImageData(string $imageData, ImplicitWatermark $watermark): string
     {
-        // open源versionnotconductanyenhanceprocess,直接returnoriginaldata
+        // open源versionnotconductanyenhanceprocess,directlyreturnoriginaldata
         return $imageData;
     }
 
     public function enhanceImageUrl(string $imageUrl, ImplicitWatermark $watermark): string
     {
-        // open源versionnotconductanyenhanceprocess,直接returnoriginalURL
+        // open源versionnotconductanyenhanceprocess,directlyreturnoriginalURL
         return $imageUrl;
     }
 

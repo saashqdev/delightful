@@ -96,7 +96,7 @@ class MessageUtil
                     if (! is_string($linkPath) || ! $attachment = $executionData->getAttachmentRecord($linkPath)) {
                         continue;
                     }
-                    // getfilename.if linkPaths only 1 ,andand linkDesc alsoisonlyone,that么can直接use linkDesc asforfilename
+                    // getfilename.if linkPaths only 1 ,andand linkDesc alsoisonlyone,that么candirectlyuse linkDesc asforfilename
                     if (count($linkPaths) === 1 && is_string($linkDesc) && $linkDesc !== '') {
                         $attachment->setName($linkDesc);
                     }

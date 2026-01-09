@@ -137,7 +137,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
             ->where('id', $agentId)
             ->first();
 
-        // ifqueryresultforempty,throwexceptionorreturn null,according tobusiness需求process
+        // ifqueryresultforempty,throwexceptionorreturn null,according tobusinessrequirementprocess
         if (! $agent) {
             ExceptionBuilder::throw(AgentErrorCode::VALIDATE_FAILED, 'agent.agent_not_exist');
         }

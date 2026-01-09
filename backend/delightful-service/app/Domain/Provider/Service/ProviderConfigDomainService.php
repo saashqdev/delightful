@@ -45,7 +45,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
 
     /**
      * pass service_provider_config_id getservicequotient,configurationandmodelaggregateinfo.
-     * support传入servicequotienttemplate id.
+     * supportpass inservicequotienttemplate id.
      * @param string $configId maybeistemplate id,such as ProviderConfigIdAssembler
      */
     public function getProviderModelsByConfigId(ProviderDataIsolation $dataIsolation, string $configId): ?ProviderConfigModelsDTO
@@ -55,7 +55,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         if (! $providerConfigEntity) {
             return null;
         }
-        // 存intemplatevirtual configId andalready经writedatabase configId,thereforethiswithinuse getProviderConfig returnservicequotient id replace传入value
+        // 存intemplatevirtual configId andalready经writedatabase configId,thereforethiswithinuse getProviderConfig returnservicequotient id replacepass invalue
         $configId = (string) $providerConfigEntity->getId();
         // 2. query Provider
         $providerEntity = $this->getProviderById($dataIsolation, $providerConfigEntity->getServiceProviderId());
@@ -110,7 +110,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         }
 
         // establishconfigurationIDtoservicequotient实bodymapping
-        // 两arrayallisby id for key,can直接access
+        // 两arrayallisby id for key,candirectlyaccess
         $configToProviderMap = [];
         foreach ($configEntities as $configId => $config) {
             $providerId = $config->getServiceProviderId();

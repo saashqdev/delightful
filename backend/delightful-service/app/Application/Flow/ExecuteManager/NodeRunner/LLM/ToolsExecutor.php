@@ -90,7 +90,7 @@ class ToolsExecutor extends AbstractTool
             return [];
         }
         $list = [];
-        // 优先尝试inside置tool
+        // prioritytryinside置tool
         foreach (BuiltInToolSetCollector::list() as $builtInToolSet) {
             foreach ($builtInToolSet->getTools() as $tool) {
                 if (in_array($tool->getCode(), $codes)) {

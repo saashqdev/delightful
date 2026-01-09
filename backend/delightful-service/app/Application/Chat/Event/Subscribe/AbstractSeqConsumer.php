@@ -37,7 +37,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
     protected LoggerInterface $logger;
 
     /**
-     * settingqueue优先levelparameter.
+     * settingqueueprioritylevelparameter.
      */
     protected AMQPTable|array $arguments = [
         'x-ha-policy' => ['S', 'all'], // willqueuemirrorto所havesectionpoint,hyperf defaultconfiguration
@@ -54,7 +54,7 @@ abstract class AbstractSeqConsumer extends ConsumerMessage
         protected DelightfulSeqDomainService $delightfulSeqDomainService,
         protected DelightfulUserRepository $delightfulUserRepository,
     ) {
-        // settingcolumn队优先level
+        // settingcolumn队prioritylevel
         $this->arguments['x-max-priority'] = ['I', $this->priority->value];
         $this->exchange = $this->getExchangeName($this->topic);
         $this->routingKey = $this->getRoutingKeyName($this->topic, $this->priority);

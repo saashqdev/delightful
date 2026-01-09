@@ -260,7 +260,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
             if ($a->getSort() === $b->getSort()) {
                 return strcmp($a->getId(), $b->getId()); // same sort valueo clock按 ID sort
             }
-            return $b->getSort() <=> $a->getSort(); // 降序rowcolumn,numberbiginfront
+            return $b->getSort() <=> $a->getSort(); // descendingrowcolumn,numberbiginfront
         });
 
         // if找to Delightful servicequotient,willits放intheone位(non官方organization才willhave Delightful servicequotient)
@@ -357,7 +357,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
     }
 
     /**
-     * 准备移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderConfigModel querybuild器.
+     * prepare移except软删相closefeature,temporarythis样写.create带have软deletefilter ProviderConfigModel querybuild器.
      */
     protected function createConfigQuery(): Builder
     {

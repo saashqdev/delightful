@@ -129,7 +129,7 @@ abstract class NodeRunner implements NodeRunnerInterface
                 $callback($vertexResult, $executionData, $frontResults);
             } else {
                 $this->node->validate();
-                // 提frontget本timeresult,ifhave,then直接use
+                // 提frontget本timeresult,ifhave,thendirectlyuse
                 $nextExecuteNum = $executeNum + 1;
                 $historyVertexResult = $executionData->getNodeHistoryVertexResult($this->node->getNodeId(), $nextExecuteNum);
                 if ($historyVertexResult) {
@@ -206,7 +206,7 @@ abstract class NodeRunner implements NodeRunnerInterface
         }
         $response = trim($response, '\\');
         $response = str_replace('\\\\\"', '\"', $response);
-        // if $response itselfthenis JSON format,that么直接return
+        // if $response itselfthenis JSON format,that么directlyreturn
         $data = json_decode(trim($response), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             return [];
@@ -223,7 +223,7 @@ abstract class NodeRunner implements NodeRunnerInterface
 
     /**
      * todo thiswithin暂notimplementduplicateuploadissue,均when做newfileupload
-     * recordprocess所producefile,均willmeanwhileuploadto云端,back续sectionpointneeduseo clockfromexecuteprocessdatamiddle优先match.
+     * recordprocess所producefile,均willmeanwhileuploadto云端,back续sectionpointneeduseo clockfromexecuteprocessdatamiddleprioritymatch.
      * @return AbstractAttachment[]
      * @throws SSRFException
      */
@@ -239,7 +239,7 @@ abstract class NodeRunner implements NodeRunnerInterface
             if (! is_string($attachment)) {
                 continue;
             }
-            // ifalready经存in,直接addtoresultmiddle
+            // ifalready经存in,directlyaddtoresultmiddle
             $path = get_path_by_url($attachment);
             if ($attachmentObj = $executionData->getAttachmentRecord($path)) {
                 $flowExecutionAttachments[] = $attachmentObj;

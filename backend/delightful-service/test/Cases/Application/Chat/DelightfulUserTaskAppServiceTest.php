@@ -26,7 +26,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
 
     // public function testCallbackSuccess()
     // {
-    //     // 准备testdata
+    //     // preparetestdata
     //     $userTask = [
     //         'conversation_id' => '728277721403252736',
     //         'topic_id' => '749639569880518657',
@@ -85,7 +85,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $this->assertTrue(true);
     }
 
-    // testcreatecustomizeduplicatetask week 场景
+    // testcreatecustomizeduplicatetask week scenario
     public function testCreateCustomRepeatTaskWeek()
     {
         $service = make(DelightfulUserTaskAppService::class);
@@ -110,7 +110,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $this->assertTrue(true);
     }
 
-    // testcreatecustomizeduplicatetask month 场景
+    // testcreatecustomizeduplicatetask month scenario
     public function testCreateCustomRepeatTaskMonth()
     {
         $service = make(DelightfulUserTaskAppService::class);
@@ -135,7 +135,7 @@ class DelightfulUserTaskAppServiceTest extends BaseTest
         $this->assertTrue(true);
     }
 
-    // testcreatecustomizeduplicatetask year 场景
+    // testcreatecustomizeduplicatetask year scenario
     public function testCreateCustomRepeatTaskYear()
     {
         $service = make(DelightfulUserTaskAppService::class);

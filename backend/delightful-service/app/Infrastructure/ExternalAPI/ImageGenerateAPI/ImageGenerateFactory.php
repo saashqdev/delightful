@@ -367,7 +367,7 @@ class ImageGenerateFactory
      * parseeachtype size formatfor [width, height] array.
      * supportformat:1024x1024, 1024*1024, 2k, 3k, 16:9, 1:1 etc.
      * @param string $size sizestring
-     * @param null|string $modelKey modelkey名,iffinger定then优先usethemodelfixedratio例configuration
+     * @param null|string $modelKey modelkey名,iffinger定thenpriorityusethemodelfixedratio例configuration
      */
     private static function parseSizeToWidthHeight(string $size, ?string $modelKey = null): array
     {
@@ -394,7 +394,7 @@ class ImageGenerateFactory
             $width = (int) $matches[1];
             $height = (int) $matches[2];
 
-            // 尝试getfixedratio例configuration
+            // trygetfixedratio例configuration
             $fixedSize = self::getFixedRatioSize($modelKey, $size);
             if ($fixedSize !== null) {
                 return $fixedSize;
@@ -425,7 +425,7 @@ class ImageGenerateFactory
      */
     private static function getFixedRatioSize(?string $modelKey, string $ratioKey): ?array
     {
-        // ifnothavefinger定model,直接return null
+        // ifnothavefinger定model,directlyreturn null
         if ($modelKey === null) {
             return null;
         }

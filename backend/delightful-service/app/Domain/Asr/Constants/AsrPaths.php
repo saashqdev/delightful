@@ -19,7 +19,7 @@ class AsrPaths
     public const WORKSPACE_DIR = '.workspace';
 
     /**
-     * hidden录音directoryfront缀.
+     * hiddenrecordingdirectoryfront缀.
      */
     public const HIDDEN_DIR_PREFIX = '.asr_recordings';
 
@@ -50,7 +50,7 @@ class AsrPaths
     }
 
     /**
-     * get录音directory相topath(父directory).
+     * getrecordingdirectory相topath(父directory).
      *
      * @return string format:.asr_recordings
      */

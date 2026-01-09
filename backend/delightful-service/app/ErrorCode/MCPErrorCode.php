@@ -68,7 +68,7 @@ enum MCPErrorCode: int
 
     // 必填fieldverify相closeerror码
     #[ErrorMessage(message: 'mcp.required_fields.missing')]
-    case RequiredFieldsMissing = 51550; // 必填field缺失
+    case RequiredFieldsMissing = 51550; // 必填fieldmissing
 
     #[ErrorMessage(message: 'mcp.required_fields.empty')]
     case RequiredFieldsEmpty = 51551; // 必填fieldforempty

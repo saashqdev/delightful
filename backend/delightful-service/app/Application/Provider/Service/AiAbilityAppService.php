@@ -107,7 +107,7 @@ class AiAbilityAppService extends AbstractKernelAppService
             $updateData['config'] = $mergedConfig;
         }
 
-        // ifnothavewantupdatedata,直接returnsuccess
+        // ifnothavewantupdatedata,directlyreturnsuccess
         if (empty($updateData)) {
             return true;
         }
@@ -154,7 +154,7 @@ class AiAbilityAppService extends AbstractKernelAppService
                     ? $this->mergeConfigPreservingApiKeys($dbValue, $value)
                     : $value;
             }
-            // other情况直接usefront端value
+            // other情况directlyusefront端value
             else {
                 $result[$key] = $value;
             }

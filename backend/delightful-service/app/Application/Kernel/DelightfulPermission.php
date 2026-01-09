@@ -49,7 +49,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         }
 
         $translated = $enum->label();
-        // iflanguagepackage缺失,return仍然isoriginal key,thiso clockthrowexceptionreminder
+        // iflanguagepackagemissing,return仍然isoriginal key,thiso clockthrowexceptionreminder
         if ($translated === $enum->translationKey()) {
             ExceptionBuilder::throw(PermissionErrorCode::BusinessException, 'Missing i18n for key: ' . $enum->translationKey());
         }
@@ -136,14 +136,14 @@ class DelightfulPermission implements DelightfulPermissionInterface
             throw new InvalidArgumentException('Not a resource type: ' . $resource);
         }
 
-        // 模piecelayerdefinitionfortwolevelresource(即platform直接子resource)
+        // 模piecelayerdefinitionfortwolevelresource(即platformdirectly子resource)
         if ($enum->parent() === null) {
             // toplevelresource(platformitself)
             $moduleEnum = $enum;
         } else {
             $parent = $enum->parent();
             if ($parent->parent() === null) {
-                // currentresourcealready经istwolevellayerlevel,直接asfor模piece
+                // currentresourcealready经istwolevellayerlevel,directlyasfor模piece
                 $moduleEnum = $enum;
             } else {
                 // more深layerlevel,模piece取父level(twolevel)
@@ -153,7 +153,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
         $moduleLabel = $moduleEnum->label();
         if ($moduleLabel === $moduleEnum->translationKey()) {
-            // if缺失translate,hand动compatibleknown模piece
+            // ifmissingtranslate,hand动compatibleknown模piece
             return match ($moduleEnum) {
                 DelightfulResourceEnum::ADMIN_AI => 'AImanage',
                 default => $moduleEnum->value,
@@ -303,10 +303,10 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * judgeuserpermissionsetmiddlewhether拥havefinger定permission(考虑隐typecontain).
+     * judgeuserpermissionsetmiddlewhether拥havefinger定permission(consider隐typecontain).
      *
      * rule:
-     *   1. 如直接命middlepermissionkey,return true;
+     *   1. 如directly命middlepermissionkey,return true;
      *   2. if拥haveall局permission ALL_PERMISSIONS,return true;
      *   3. 若not命middle,thencheckbythepermission隐typecontainpermissionset(for example *edit* 隐typecontain *query*).
      *
@@ -323,12 +323,12 @@ class DelightfulPermission implements DelightfulPermissionInterface
             return false;
         }
 
-        // 命middleall局permission直接放line
+        // 命middleall局permissiondirectly放line
         if (in_array(self::ALL_PERMISSIONS, $userPermissions, true)) {
             return true;
         }
 
-        // 直接命middle
+        // directly命middle
         if (in_array($permissionKey, $userPermissions, true)) {
             return true;
         }

@@ -35,7 +35,7 @@ class ProviderConfigItem extends AbstractDTO
     protected string $providerModelId;
 
     /**
-     * 优先level.
+     * prioritylevel.
      */
     protected ?int $priority = null;
 

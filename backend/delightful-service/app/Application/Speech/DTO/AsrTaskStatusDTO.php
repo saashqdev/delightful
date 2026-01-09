@@ -20,25 +20,25 @@ class AsrTaskStatusDTO
 
     public string $userId = '';
 
-    public ?string $organizationCode = null; // organizationencoding(useatfrom动总结)
+    public ?string $organizationCode = null; // organizationencoding(useatfrom动summary)
 
-    // analogous:project_821749697183776769/workspace/录音总结_20250910_174251/original录音file.webm
+    // analogous:project_821749697183776769/workspace/recordingsummary_20250910_174251/originalrecordingfile.webm
     public ?string $filePath = null; // work区filepath
 
     // fileID(databasemiddleactualID)
     public ?string $audioFileId = null; // audiofileID(writedelightful_super_agent_task_filestablebackreturnID)
 
     // note fileinfo
-    public ?string $noteFileName = null; // notefile名(andaudiofilein同onedirectory,fornullindicateno笔记file)
+    public ?string $noteFileName = null; // notefile名(andaudiofilein同onedirectory,fornullindicatenonotefile)
 
     public ?string $noteFileId = null; // notefileID(useatchatmessagemiddlefilequote)
 
     // presetfileinfo(useatfront端write)
-    public ?string $presetNoteFileId = null; // preset笔记fileID
+    public ?string $presetNoteFileId = null; // presetnotefileID
 
     public ?string $presetTranscriptFileId = null; // presetstreamidentifyfileID
 
-    public ?string $presetNoteFilePath = null; // preset笔记file相topath
+    public ?string $presetNoteFilePath = null; // presetnotefile相topath
 
     public ?string $presetTranscriptFilePath = null; // presetstreamidentifyfile相topath
 
@@ -47,10 +47,10 @@ class AsrTaskStatusDTO
 
     public ?string $topicId = null; // topicID
 
-    // 录音directoryinfo
+    // recordingdirectoryinfo
     public ?string $tempHiddenDirectory = null; // hiddendirectorypath(存放minuteslicefile)
 
-    public ?string $displayDirectory = null; // displaydirectorypath(存放streamtextand笔记)
+    public ?string $displayDirectory = null; // displaydirectorypath(存放streamtextandnote)
 
     public ?int $tempHiddenDirectoryId = null; // hiddendirectoryfileID
 
@@ -58,29 +58,29 @@ class AsrTaskStatusDTO
 
     public AsrTaskStatusEnum $status = AsrTaskStatusEnum::FAILED;
 
-    // 录音statusmanagefield
-    public ?string $modelId = null; // AI modelID,useatfrom动总结
+    // recordingstatusmanagefield
+    public ?string $modelId = null; // AI modelID,useatfrom动summary
 
-    public ?string $recordingStatus = null; // 录音status:start|recording|paused|stopped
+    public ?string $recordingStatus = null; // recordingstatus:start|recording|paused|stopped
 
-    public bool $sandboxTaskCreated = false; // 沙箱taskwhetheralreadycreate
+    public bool $sandboxTaskCreated = false; // sandboxtaskwhetheralreadycreate
 
     public bool $isPaused = false; // whether处atpausestatus(useattimeoutjudge)
 
-    public ?string $sandboxId = null; // 沙箱ID
+    public ?string $sandboxId = null; // sandboxID
 
-    public int $sandboxRetryCount = 0; // 沙箱startretrycount
+    public int $sandboxRetryCount = 0; // sandboxstartretrycount
 
-    public int $serverSummaryRetryCount = 0; // service端总结触hairretrycount
+    public int $serverSummaryRetryCount = 0; // service端summary触hairretrycount
 
-    public bool $serverSummaryLocked = false; // service端总结whetherlock定customer端
+    public bool $serverSummaryLocked = false; // service端summarywhetherlock定customer端
 
-    // ASR contentand笔记(useatgeneratetitle)
+    // ASR contentandnote(useatgeneratetitle)
     public ?string $asrStreamContent = null; // ASR streamidentifycontent
 
-    public ?string $noteContent = null; // 笔记content
+    public ?string $noteContent = null; // notecontent
 
-    public ?string $noteFileType = null; // 笔记filetype(md,txt,json)
+    public ?string $noteFileType = null; // notefiletype(md,txt,json)
 
     public ?string $language = null; // 语type(zh_CN,en_USetc),useatgeneratetitleo clockuse
 
@@ -102,7 +102,7 @@ class AsrTaskStatusDTO
         $this->projectId = self::getStringValue($data, ['project_id', 'projectId']);
         $this->topicId = self::getStringValue($data, ['topic_id', 'topicId']);
 
-        // 录音directoryinfo(from动清洗for相topath)
+        // recordingdirectoryinfo(from动cleanfor相topath)
         $this->tempHiddenDirectory = self::extractRelativePath(
             self::getStringValue($data, ['temp_hidden_directory', 'tempHiddenDirectory'])
         );
@@ -112,7 +112,7 @@ class AsrTaskStatusDTO
         $this->tempHiddenDirectoryId = self::getIntValue($data, ['temp_hidden_directory_id', 'tempHiddenDirectoryId']);
         $this->displayDirectoryId = self::getIntValue($data, ['display_directory_id', 'displayDirectoryId']);
 
-        // 录音statusmanagefield
+        // recordingstatusmanagefield
         $this->modelId = self::getStringValue($data, ['model_id', 'modelId']);
         $this->recordingStatus = self::getStringValue($data, ['recording_status', 'recordingStatus']);
         $this->sandboxTaskCreated = self::getBoolValue($data, ['sandbox_task_created', 'sandboxTaskCreated']);
@@ -128,7 +128,7 @@ class AsrTaskStatusDTO
         $this->presetNoteFilePath = self::getStringValue($data, ['preset_note_file_path', 'presetNoteFilePath']);
         $this->presetTranscriptFilePath = self::getStringValue($data, ['preset_transcript_file_path', 'presetTranscriptFilePath']);
 
-        // ASR contentand笔记
+        // ASR contentandnote
         $this->asrStreamContent = self::getStringValue($data, ['asr_stream_content', 'asrStreamContent']);
         $this->noteContent = self::getStringValue($data, ['note_content', 'noteContent']);
         $this->noteFileType = self::getStringValue($data, ['note_file_type', 'noteFileType']);
@@ -203,8 +203,8 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * check总结whetheralreadycomplete(poweretcpropertyjudge).
-     * judgestandard:audiofilealreadymerge(audioFileId 存in)and录音alreadystop.
+     * checksummarywhetheralreadycomplete(poweretcpropertyjudge).
+     * judgestandard:audiofilealreadymerge(audioFileId 存in)andrecordingalreadystop.
      */
     public function isSummaryCompleted(): bool
     {
@@ -214,7 +214,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * judgeservice端总结whethertocustomer端addlock.
+     * judgeservice端summarywhethertocustomer端addlock.
      */
     public function hasServerSummaryLock(): bool
     {
@@ -222,7 +222,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * recordonetimeservice端总结尝试.
+     * recordonetimeservice端summarytry.
      */
     public function markServerSummaryAttempt(): void
     {
@@ -231,7 +231,7 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * inonetimeservice端总结endbackupdatestatus.
+     * inonetimeservice端summaryendbackupdatestatus.
      */
     public function finishServerSummaryAttempt(bool $success): void
     {
@@ -265,10 +265,10 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarraymiddle按优先levelgetstringvalue(support snake_case and camelCase).
+     * fromarraymiddle按prioritylevelgetstringvalue(support snake_case and camelCase).
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys key名columntable(按优先levelsort)
+     * @param array<string> $keys key名columntable(按prioritylevelsort)
      * @param null|string $default defaultvalue
      */
     private static function getStringValue(array $data, array $keys, ?string $default = null): ?string
@@ -282,10 +282,10 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarraymiddle按优先levelgetintegervalue(support snake_case and camelCase).
+     * fromarraymiddle按prioritylevelgetintegervalue(support snake_case and camelCase).
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys key名columntable(按优先levelsort)
+     * @param array<string> $keys key名columntable(按prioritylevelsort)
      * @param null|int $default defaultvalue
      */
     private static function getIntValue(array $data, array $keys, ?int $default = null): ?int
@@ -299,10 +299,10 @@ class AsrTaskStatusDTO
     }
 
     /**
-     * fromarraymiddle按优先levelgetbooleanvalue(support多typeformat:true/false,1/0,'1'/'0').
+     * fromarraymiddle按prioritylevelgetbooleanvalue(support多typeformat:true/false,1/0,'1'/'0').
      *
      * @param array<string, mixed> $data dataarray
-     * @param array<string> $keys key名columntable(按优先levelsort)
+     * @param array<string> $keys key名columntable(按prioritylevelsort)
      */
     private static function getBoolValue(array $data, array $keys): bool
     {

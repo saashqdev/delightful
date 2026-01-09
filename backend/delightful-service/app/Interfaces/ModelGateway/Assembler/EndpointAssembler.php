@@ -45,7 +45,7 @@ class EndpointAssembler
             }
         }
 
-        // ifnothavematchtoanyfront缀,then直接returnoriginalvalue
+        // ifnothavematchtoanyfront缀,thendirectlyreturnoriginalvalue
         return $formattedModelId;
     }
 

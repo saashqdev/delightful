@@ -8,8 +8,8 @@ declare(strict_types=1);
 namespace App\Application\Speech\DTO;
 
 /**
- * ASR总结requestDTO
- * save总结request所have必传andoptionalparameter.
+ * ASRsummaryrequestDTO
+ * savesummaryrequest所have必传andoptionalparameter.
  */
 readonly class SummaryRequestDTO
 {
@@ -26,7 +26,7 @@ readonly class SummaryRequestDTO
     }
 
     /**
-     * whetherhavefileID(场景two:直接uploadalreadyhaveaudiofile).
+     * whetherhavefileID(scenariotwo:directlyuploadalreadyhaveaudiofile).
      */
     public function hasFileId(): bool
     {

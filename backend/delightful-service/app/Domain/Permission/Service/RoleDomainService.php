@@ -64,7 +64,7 @@ readonly class RoleDomainService
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
         $savingRoleEntity->setOrganizationCode($organizationCode);
 
-        // validation传入userIDwhether属atcurrentorganization
+        // validationpass inuserIDwhether属atcurrentorganization
         $inputUserIds = $savingRoleEntity->getUserIds();
         if (! empty($inputUserIds)) {
             $validUsers = $this->userRepository->getByUserIds($organizationCode, $inputUserIds);
@@ -259,7 +259,7 @@ readonly class RoleDomainService
         // getcurrentorganizationencoding
         $organizationCode = $dataIsolation->getCurrentOrganizationCode();
 
-        // 1. 尝试getalready存inorganizationadministratorrole
+        // 1. trygetalready存inorganizationadministratorrole
         $roleEntity = $this->getByName($dataIsolation, self::ORGANIZATION_ADMIN_ROLE_NAME);
 
         if ($roleEntity === null) {
@@ -293,9 +293,9 @@ readonly class RoleDomainService
      *
      * logic:
      * 1. getcurrentorganizationdown名for ORGANIZATION_ADMIN_ROLE_NAME role;
-     * 2. 若not存in直接return;
+     * 2. 若not存indirectlyreturn;
      * 3. call仓library移exceptuserandtheroleassociateclose系;
-     * 4. ifrolenotagainassociateanyuser,maintainroleitselfnot变(如haveneed,can考虑back续cleanup).
+     * 4. ifrolenotagainassociateanyuser,maintainroleitselfnot变(如haveneed,canconsiderback续cleanup).
      */
     public function removeOrganizationAdmin(PermissionDataIsolation $dataIsolation, string $userId): void
     {

@@ -14,7 +14,7 @@ class EasyFileTools
     public static function saveFile(string $path, string $stream): void
     {
         $file = fopen($path, 'wb');
-        // stream切割become1000kbsmallpiece,eachtimewritefile
+        // streamsplitbecome1000kbsmallpiece,eachtimewritefile
 
         fwrite($file, $stream);
         fclose($file);
@@ -22,13 +22,13 @@ class EasyFileTools
 
     public static function mergeWavFiles(string $file1, string $blob): void
     {
-        // iffilenot存in,直接will blob writefornewfile
+        // iffilenot存in,directlywill blob writefornewfile
         if (! file_exists($file1)) {
             self::saveFile($file1, $blob);
             return;
         }
 
-        // open file1 fileby读写mode
+        // open file1 filebyread/writemode
         $wav1 = fopen($file1, 'r+b');
         if (! $wav1) {
             throw new InvalidArgumentException('Failed to open the base file.');

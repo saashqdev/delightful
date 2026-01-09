@@ -13,7 +13,7 @@ use App\Infrastructure\Core\AbstractObject;
 
 /**
  * @property string $questionId issue id
- * @property string $content 总结content
+ * @property string $content summarycontent
  * @property string $reasoningContent 思考process
  */
 class SummaryItem extends AbstractObject

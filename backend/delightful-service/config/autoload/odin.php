@@ -327,7 +327,7 @@ return [
             'network_retry_count' => 1,
         ],
         'models' => $models,
-        // all局model options，canbemodel本身 options override
+        // all局model options，canbemodelitself options override
         'model_options' => [
             'error_mapping_rules' => [
                 // example：customizeerrormapping

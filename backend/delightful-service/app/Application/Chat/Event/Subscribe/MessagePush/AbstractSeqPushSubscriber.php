@@ -18,7 +18,7 @@ use Throwable;
 
 /**
  * messagepush模piece.
- * according togenerateseqbyand它优先level,use长connectpushgiveuser.
+ * according togenerateseqbyandit优先level,use长connectpushgiveuser.
  * eachseqmaybewant推giveuser1to几tencustomer端.
  */
 abstract class AbstractSeqPushSubscriber extends AbstractSeqConsumer

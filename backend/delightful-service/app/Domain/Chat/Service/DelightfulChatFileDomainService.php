@@ -34,7 +34,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     }
 
     /**
-     * judgeusermessagemiddle，whethercontain本time他想downloadfile.
+     * judgeusermessagemiddle，whethercontain本timehe想downloadfile.
      * @param DelightfulChatFileEntity[] $fileDTOs
      * @return DelightfulChatFileEntity[]
      */
@@ -73,7 +73,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
             }
         }
 
-        // judgeusermessagemiddle，whethercontain本time他想downloadfile
+        // judgeusermessagemiddle，whethercontain本timehe想downloadfile
         $fileMaps = [];
         foreach ($fileDTOs as $fileDTO) {
             $delightfulMessageId = $fileDTO->getDelightfulMessageId();
@@ -145,7 +145,7 @@ class DelightfulChatFileDomainService extends AbstractDomainService
     }
 
     /**
-     * judgeusermessagemiddleattachmentisnotis他from己upload.
+     * judgeusermessagemiddleattachmentisnotishefrom己upload.
      * @param ChatAttachment[] $attachments
      * @return ChatAttachment[]
      */

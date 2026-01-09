@@ -175,7 +175,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                         }
                     });
 
-                    // 3. asyncpushgivemessagesend方,havepersonalready读他hairoutmessage
+                    // 3. asyncpushgivemessagesend方,havepersonalready读hehairoutmessage
                     $this->pushControlSequence($senderSeenSeqEntity);
                     break;
                 case ControlMessageType::ReadMessage:

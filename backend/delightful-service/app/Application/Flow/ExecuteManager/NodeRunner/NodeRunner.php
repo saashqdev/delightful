@@ -206,7 +206,7 @@ abstract class NodeRunner implements NodeRunnerInterface
         }
         $response = trim($response, '\\');
         $response = str_replace('\\\\\"', '\"', $response);
-        // if $response 本身thenis JSON format，that么直接return
+        // if $response itselfthenis JSON format，that么直接return
         $data = json_decode(trim($response), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
             return [];

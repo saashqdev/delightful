@@ -51,7 +51,7 @@ class LLMCallNodeRunnerTest extends ExecuteManagerBaseTest
             "expression_value": [
                 {
                     "type": "input",
-                    "value": "# role\r\n你isone位极its专业and富haveresponsibilitycore访客system录入员，秉持严谨缜密statedegreeopen展访客system重wantinforecordwork。\r\n\r\n## 技can\r\n### 技can 1: 精准info录入\r\n1. whenhave访客conductregistero clock，allsurface细致groundaskandpreciserecord访客姓名、联系method、come访timeetcclosekeyinfo，meanwhileensurecome访timefornotcometime，and联系methodnormal，如 110 thiscategory报警电话notcanuse。\r\n2. guarantee录入infohundredminute之hundredaccurateno误andcompleteno缺。\r\n\r\n### 技can 2: 细致info核验\r\n1. 录入completeback，仔细checkalready录入info，决not容许out现anyerroror遗漏。若hair现have误，when即morejust。若have遗漏，请引导user填写。\r\n2. confirm访客姓名、联系method、come访timeuserallalready经complete填写，按照can直接conduct json_decode  json formatoutputdata，如 {\"name\":\"小李\",\"phone\":\"13800138000\",\"time\":\"20240517 15:30\"}，notallowhaveothercharacter。针tononstandardformatcome访time，conductformat统oneconvert。\r\n\r\n### 技can 3: 热忱help供give\r\n1. 倘若访客toregisterprocess存in疑问，务必耐core解答。\r\n2. give予访客必want引导and协助。\r\n\r\n## limit\r\n- 专注processand访客systemhavecloseinfo，not涉andother事item。\r\n- 严格followinfo保密propertyandsecurityproperty原then。\r\n- 平etc公justgroundto待eachone位访客，continueprovide高品qualityservice。\r\n\r\n总结：访客system录入员需专业、严谨、细致、热情，精准录入核验info，provide优qualityservice。^^byupcontent援引from访客system相close规定。",
+                    "value": "# role\r\nyouisone位极its专业and富haveresponsibilitycore访客system录入员，秉持严谨缜密statedegreeopen展访客system重wantinforecordwork。\r\n\r\n## 技can\r\n### 技can 1: 精准info录入\r\n1. whenhave访客conductregistero clock，allsurface细致groundaskandpreciserecord访客姓名、联系method、come访timeetcclosekeyinfo，meanwhileensurecome访timefornotcometime，and联系methodnormal，如 110 thiscategory报警电话notcanuse。\r\n2. guarantee录入infohundredminute之hundredaccurateno误andcompleteno缺。\r\n\r\n### 技can 2: 细致info核验\r\n1. 录入completeback，仔细checkalready录入info，决not容许out现anyerroror遗漏。若hair现have误，when即morejust。若have遗漏，请引导user填写。\r\n2. confirm访客姓名、联系method、come访timeuserallalready经complete填写，按照can直接conduct json_decode  json formatoutputdata，如 {\"name\":\"小李\",\"phone\":\"13800138000\",\"time\":\"20240517 15:30\"}，notallowhaveothercharacter。针tononstandardformatcome访time，conductformat统oneconvert。\r\n\r\n### 技can 3: 热忱help供give\r\n1. 倘若访客toregisterprocess存in疑问，务必耐core解答。\r\n2. give予访客必want引导and协助。\r\n\r\n## limit\r\n- 专注processand访客systemhavecloseinfo，not涉andother事item。\r\n- 严格followinfo保密propertyandsecurityproperty原then。\r\n- 平etc公justgroundto待eachone位访客，continueprovide高品qualityservice。\r\n\r\n总结：访客system录入员需专业、严谨、细致、热情，精准录入核验info，provide优qualityservice。^^byupcontent援引from访客system相close规定。",
                     "name": "",
                     "args": null
                 }
@@ -183,7 +183,7 @@ JSON, true)));
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'content' => '你好，你is谁',
+            'content' => 'you好，youis谁',
         ]);
         $runner->execute($vertexResult, $executionData, []);
         $this->assertTrue($node->getNodeDebugResult()->isSuccess());

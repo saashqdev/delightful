@@ -374,7 +374,7 @@ class DelightfulUserContactAppService extends AbstractAppService
     public function addAgentInfoToUsers(Authenticatable $authorization, array $usersDetailDTOList): array
     {
         $aiCodes = [];
-        // ifis AI assistant，that么return AI assistant相closeinfoandto它permission
+        // ifis AI assistant，that么return AI assistant相closeinfoandtoitpermission
         foreach ($usersDetailDTOList as $userDetailDTO) {
             if (! empty($userDetailDTO->getAiCode())) {
                 $aiCodes[] = $userDetailDTO->getAiCode();

@@ -138,11 +138,11 @@ class ImageGenerateFactory
         $mode = strtolower(explode('-', $model, limit: 2)[1] ?? 'fast');
 
         // Midjourney notuse宽高parameter，只need prompt and mode，butis Request categoryinheritneedthistheseparameter
-        // 所by我们givedefaultvalue即can
+        // 所bywegivedefaultvalue即can
         $request = new MidjourneyModelRequest('1024', '1024', $data['user_prompt'], $data['negative_prompt']);
         $request->setModel($mode);
 
-        // Midjourney notclosecorespecific宽高ratio例，but我们保留thisfieldby防willcomeneed
+        // Midjourney notclosecorespecific宽高ratio例，butwe保留thisfieldby防willcomeneed
         if (isset($data['size'])) {
             [$width, $height] = self::parseSizeToWidthHeight($data['size']);
             $ratio = self::calculateRatio((int) $width, (int) $height);

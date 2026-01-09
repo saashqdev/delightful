@@ -23,15 +23,15 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         $requestData = [
             'conversation_id' => 'test_conversation_id',
             'topic_id' => 'test_topic_id',
-            'message' => '你好，testmessage',
+            'message' => 'you好，testmessage',
             'history' => [
                 [
                     'role' => 'user',
-                    'content' => '你好',
+                    'content' => 'you好',
                 ],
                 [
                     'role' => 'assistant',
-                    'content' => '你好，have什么canhelp你？',
+                    'content' => 'you好，have什么canhelpyou？',
                 ],
             ],
         ];
@@ -64,7 +64,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
                 'request_info' => [
                     'conversation_id' => 'test_conversation_id',
                     'topic_id' => 'test_topic_id',
-                    'message' => '你好，testmessage',
+                    'message' => 'you好，testmessage',
                     'history' => [],
                 ],
             ],
@@ -86,7 +86,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         $requestData = [
             // 缺少 conversation_id
             'topic_id' => 'test_topic_id',
-            'message' => '你好，testmessage',
+            'message' => 'you好，testmessage',
         ];
 
         // setrequesthead
@@ -117,7 +117,7 @@ class DelightfulChatHttpApiTest extends AbstractHttpTest
         // constructrequestparameter
         $requestData = [
             'conversation_id' => 'test_conversation_id',
-            'message' => '你好，testmessage',
+            'message' => 'you好，testmessage',
         ];
 
         // setinvalidrequesthead

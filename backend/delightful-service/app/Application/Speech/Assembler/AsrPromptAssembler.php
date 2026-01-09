@@ -39,10 +39,10 @@ class AsrPromptAssembler
         $textContent = implode("\n\n", $contentParts);
 
         $template = <<<'PROMPT'
-你isone专业录音contenttitlegenerate助hand。
+youisone专业录音contenttitlegenerate助hand。
 
 ## backgroundinstruction
-usersubmitonesegment录音content，录音content经passvoiceidentify转fortext，usermaybealsowillprovidehand写笔记asfor补充instruction。现inneed你according tothisthesecontentgenerateone简洁accuratetitle。
+usersubmitonesegment录音content，录音content经passvoiceidentify转fortext，usermaybealsowillprovidehand写笔记asfor补充instruction。现inneedyouaccording tothisthesecontentgenerateone简洁accuratetitle。
 
 ## contentcome源instruction
 - <笔记content>：userhand写笔记content，isto录音重pointrecordand总结，usuallycontainclosekeyinfo
@@ -93,10 +93,10 @@ PROMPT;
         string $language
     ): string {
         $template = <<<'PROMPT'
-你isone专业录音contenttitlegenerate助hand。
+youisone专业录音contenttitlegenerate助hand。
 
 ## backgroundinstruction
-useruploadoneaudiofiletosystemmiddle，andinchat框middlesend总结request。现inneed你according touserrequestmessage（itsmiddlecontainfile名），forthistime录音总结generateone简洁accuratetitle。
+useruploadoneaudiofiletosystemmiddle，andinchat框middlesend总结request。现inneedyouaccording touserrequestmessage（itsmiddlecontainfile名），forthistime录音总结generateone简洁accuratetitle。
 
 ## userinchat框request
 usersendoriginalmessage如down：

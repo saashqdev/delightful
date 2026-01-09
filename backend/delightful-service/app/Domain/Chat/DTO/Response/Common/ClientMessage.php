@@ -34,7 +34,7 @@ class ClientMessage extends AbstractEntity
     // return显not读person数,ifuserpoint击detail,againrequestspecificmessagecontent
     protected ?int $unreadCount;
 
-    // messagesend者,from己or者他person
+    // messagesend者,from己or者heperson
     protected string $senderId;
 
     // messagesendtime，and delightful_message_id oneup，useatwithdraw、editmessageo clock唯onepropertyvalidation。

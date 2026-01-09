@@ -356,7 +356,7 @@ class AzureOpenAIImageEditModel extends AbstractImageGenerate
             $currentUsage->addGeneratedImages(1);
         }
 
-        // ifAzure OpenAIresponsecontainusageinfo，thenuse它
+        // ifAzure OpenAIresponsecontainusageinfo，thenuseit
         if (! empty($azureResult['usage']) && is_array($azureResult['usage'])) {
             $usage = $azureResult['usage'];
             $currentUsage->promptTokens += $usage['input_tokens'] ?? 0;

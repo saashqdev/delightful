@@ -175,7 +175,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
         $payload = [
             'favicon_url' => 'https://example.com/favicon.ico',
             'name_i18n' => [
-                'zh_CN' => '我平台',
+                'zh_CN' => 'I平台',
                 'en_US' => 'My Platform',
             ],
             'title_i18n' => [

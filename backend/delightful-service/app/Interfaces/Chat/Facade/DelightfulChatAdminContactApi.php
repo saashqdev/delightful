@@ -67,7 +67,7 @@ class DelightfulChatAdminContactApi extends AbstractApi
     }
 
     /**
-     * 按useridquery,returnuserbyand他所indepartmentinfo.
+     * 按useridquery,returnuserbyandhe所indepartmentinfo.
      */
     public function userGetByIds(RequestInterface $request): array
     {

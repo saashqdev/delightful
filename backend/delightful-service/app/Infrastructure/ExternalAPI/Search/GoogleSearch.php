@@ -22,7 +22,7 @@ class GoogleSearch
 
     private const int DEFAULT_SEARCH_ENGINE_TIMEOUT = 5;
 
-    private const int REFERENCE_COUNT = 8; // replacefor你needquotequantity
+    private const int REFERENCE_COUNT = 8; // replaceforyouneedquotequantity
 
     public function __construct(protected readonly StdoutLoggerInterface $logger, protected readonly ConfigInterface $config)
     {

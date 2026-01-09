@@ -159,7 +159,7 @@ class DelightfulGroupDomainService extends AbstractDomainService
             $content = $content->toArray();
             // pass protobuf message结构,createdelightful chatobject,for弃use protobuf 做准备
             if (in_array($controlMessageType, [ControlMessageType::GroupUsersRemove, ControlMessageType::GroupDisband], true)) {
-                // thistheseuseralready经from群membertablemiddle移except,butis他们alsonot收tobe移exceptmessage
+                // thistheseuseralready经from群membertablemiddle移except,butishe们alsonot收tobe移exceptmessage
                 $userIds = array_values(array_unique(array_merge($userIds, $changeUserIds)));
                 if ($controlMessageType === ControlMessageType::GroupDisband) {
                     // 解散group chat,所havepersonallisbe移except.thiswithindecreasestreamquantityconsume.

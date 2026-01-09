@@ -115,7 +115,7 @@ class AsrHeartbeatMonitor
             // Key format：asr:heartbeat:{md5(user_id:task_key)}
             $this->logger->info('detecttocore跳timeout', ['key' => $key]);
 
-            // byat key is MD5 hash，我们no法直接反toget task_key and user_id
+            // byat key is MD5 hash，weno法直接反toget task_key and user_id
             // needfrom Redis middle扫描所have asr:task:* comefindmatchtask
             $this->findAndTriggerTimeoutTask($key);
         } catch (Throwable $e) {

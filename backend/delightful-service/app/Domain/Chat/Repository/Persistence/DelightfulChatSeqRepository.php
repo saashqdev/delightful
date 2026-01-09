@@ -179,7 +179,7 @@ class DelightfulChatSeqRepository implements DelightfulChatSeqRepositoryInterfac
         $limit = $messagesQueryDTO->getLimit();
         $query = $this->delightfulSeq::query()->whereIn('conversation_id', $conversationIds);
         if (! empty($pageToken)) {
-            // currentsessionhistorymessagemiddlemost小 seq id. willusecome查ratio它also小value
+            // currentsessionhistorymessagemiddlemost小 seq id. willusecome查ratioitalso小value
             $query->where('seq_id', $operator, $pageToken);
         }
         if ($timeStart !== null) {

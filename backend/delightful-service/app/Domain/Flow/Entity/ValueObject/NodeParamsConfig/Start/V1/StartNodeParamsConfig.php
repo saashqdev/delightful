@@ -83,7 +83,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
             $systemOutput = null;
             $customSystemOutput = null;
             $config = $branch['config'] ?? [];
-            // canmeanwhilechoose多typemethod触hair，所by他入参andout参放tothiswithincomeprocess
+            // canmeanwhilechoose多typemethod触hair，所byhe入参andout参放tothiswithincomeprocess
             switch ($triggerType) {
                 case TriggerType::ChatMessage:
                     $output = $this->getChatMessageOutputTemplate();

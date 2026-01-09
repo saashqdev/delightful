@@ -35,7 +35,7 @@ use InvalidArgumentException;
 use Throwable;
 
 /**
- * setproject本身多set ModelGatewayMapper - finalall部convertfor odin model parameterformat.
+ * setprojectitself多set ModelGatewayMapper - finalall部convertfor odin model parameterformat.
  */
 class ModelGatewayMapper extends ModelMapper
 {

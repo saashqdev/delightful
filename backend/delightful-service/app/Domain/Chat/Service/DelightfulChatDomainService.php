@@ -174,7 +174,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * ifusergiveaisend多itemmessage,aireplyo clock,needletuser知晓aireplyis他哪itemmessage.
+     * ifusergiveaisend多itemmessage,aireplyo clock,needletuser知晓aireplyishe哪itemmessage.
      */
     public function aiReferMessage(DelightfulSeqEntity $aiSeqDTO, bool $doNotParseReferMessageId = false): DelightfulSeqEntity
     {

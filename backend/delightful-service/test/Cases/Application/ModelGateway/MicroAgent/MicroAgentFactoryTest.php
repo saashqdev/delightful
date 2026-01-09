@@ -208,7 +208,7 @@ YAML;
     {
         $this->markTestSkipped('Requires actual API calls and valid configuration.');
         $example = $this->factory->getAgent('example');
-        $response = $example->easyCall(organizationCode: 'DT001', userPrompt: '你好', businessParams: [
+        $response = $example->easyCall(organizationCode: 'DT001', userPrompt: 'you好', businessParams: [
             'organization_id' => 'DT001',
             'user_id' => 'user_123456',
         ]);

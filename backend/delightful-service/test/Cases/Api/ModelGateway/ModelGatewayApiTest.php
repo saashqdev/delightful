@@ -205,11 +205,11 @@ class ModelGatewayApiTest extends AbstractHttpTest
         return [
             [
                 'role' => 'system',
-                'content' => '你isone助hand',
+                'content' => 'youisone助hand',
             ],
             [
                 'role' => 'user',
-                'content' => '你好',
+                'content' => 'you好',
             ],
         ];
     }

@@ -387,7 +387,7 @@ class ModeDomainService
             return $modeId;
         }
 
-        // ifthe模typenothave跟随close系，instruction它thenisfinal源
+        // ifthe模typenothave跟随close系，instructionitthenisfinal源
         if (! isset($followMap[$modeId])) {
             return $modeId;
         }

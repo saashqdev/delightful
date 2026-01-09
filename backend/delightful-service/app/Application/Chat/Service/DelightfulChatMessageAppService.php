@@ -286,7 +286,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             if ($sendTime === null) {
                 $sendTime = new Carbon();
             }
-            // ifusergiveassistantsend多itemmessage,assistantreplyo clock,needletuser知晓assistantreplyis他哪itemmessage.
+            // ifusergiveassistantsend多itemmessage,assistantreplyo clock,needletuser知晓assistantreplyishe哪itemmessage.
             $aiSeqDTO = $this->delightfulChatDomainService->aiReferMessage($aiSeqDTO, $doNotParseReferMessageId);
             // getassistantconversationwindow
             $aiConversationEntity = $this->delightfulChatDomainService->getConversationById($aiSeqDTO->getConversationId());
@@ -423,7 +423,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             if ($sendTime === null) {
                 $sendTime = new Carbon();
             }
-            // ifusergiveassistantsend多itemmessage,assistantreplyo clock,needletuser知晓assistantreplyis他哪itemmessage.
+            // ifusergiveassistantsend多itemmessage,assistantreplyo clock,needletuser知晓assistantreplyishe哪itemmessage.
             $aiSeqDTO = $this->delightfulChatDomainService->aiReferMessage($aiSeqDTO, $doNotParseReferMessageId);
             // getassistantconversationwindow
             $aiConversationEntity = $this->delightfulChatDomainService->getConversationById($aiSeqDTO->getConversationId());
@@ -593,7 +593,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
             return '';
         }
         $prompt = <<<'PROMPT'
-        你isone专业contenttitlegenerate助hand。请严格按照bydownrequireforconversationcontentgeneratetitle：
+        youisone专业contenttitlegenerate助hand。请严格按照bydownrequireforconversationcontentgeneratetitle：
 
         ## taskgoal
         according toconversationcontent，generateone简洁、accuratetitle，can概括conversation核coretheme。
@@ -603,7 +603,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         1. 优先close注conversationmiddlemostbackdiscussiontheme（mostnew话题）
         2. bymost近conversationcontentformain参考basis
         3. ifmostbackthemediscussionmorefor充minute，thenbythisasfortitle核core
-        4. ignore早期already经end话题，unless它们andmost新话题密切相close
+        4. ignore早期already经end话题，unlessit们andmost新话题密切相close
 
         ## 严格require
         1. titlelength：not超pass 15 character。Englishone字母算onecharacter，汉字one字算onecharacter，other语type采useanalogouscountsolution。
@@ -675,7 +675,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
     public function getFileDownUrl(array $fileDTOs, DelightfulUserAuthorization $authorization): array
     {
         $dataIsolation = $this->createDataIsolation($authorization);
-        // permissionvalidation，judgeusermessagemiddle，whethercontain本time他想downloadfile
+        // permissionvalidation，judgeusermessagemiddle，whethercontain本timehe想downloadfile
         $fileEntities = $this->delightfulChatFileDomainService->checkAndGetFilePaths($fileDTOs, $dataIsolation);
         // downloado clockalso原file原本name
         $downloadNames = [];
@@ -817,7 +817,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
 
         // ifiseditmessage，andisusereditassistanthaircomeapprovalformo clock，returnnullarray。
         // 因forthiso clockcreate seq_id isassistant，notisuser，returnwill造become困扰。
-        // 经by mq minutehairmessageback，userwillasync收to属at他from己messagepush。
+        // 经by mq minutehairmessageback，userwillasync收to属athefrom己messagepush。
         if (isset($editMessageOptions) && ! empty($editMessageOptions->getDelightfulMessageId())
             && $messageEntity->getSenderId() !== $senderMessageDTO->getSenderId()) {
             return [];

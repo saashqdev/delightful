@@ -551,7 +551,7 @@ class DelightfulAgentAppService extends AbstractAppService
     {
         $this->getAgentOperation($this->createPermissionDataIsolation($authorization), $agentId)->validate('w', $agentId);
 
-        // modifyassistant本身status
+        // modifyassistantitselfstatus
         $this->delightfulAgentDomainService->updateAgentStatus($agentId, $status->value);
     }
 
@@ -889,7 +889,7 @@ class DelightfulAgentAppService extends AbstractAppService
         // 准备基本configuration
         $config = [
             'agent_name' => '麦吉assistant',
-            'agent_description' => '我willreturn答你one切',
+            'agent_description' => 'Iwillreturn答youone切',
             'agent_avatar' => $this->fileDomainService->getDefaultIconPaths()['bot'] ?? '',
             'flow' => $loadPresetConfig['flow'],
         ];

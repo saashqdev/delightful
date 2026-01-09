@@ -186,7 +186,7 @@ class DelightfulLLMDomainService
       "Z领域典型application",  // application/案例category
       "closeatABfinger标",    // finger标/propertycategory
       "导致Mhair生mainreasonis什么？", // reason/机制category
-      "什么isN？它核core特征is什么？", // definition/解释category
+      "什么isN？it核core特征is什么？", // definition/解释category
       "notcomefiveyearP领域hair展trendis什么？", // trend/预测category
       "针toQquestion，have哪thesecanlineresolvesolution？" // resolvesolution/suggestioncategory
     ]
@@ -200,19 +200,19 @@ class DelightfulLLMDomainService
 
     private string $summarizePrompt = <<<'PROMPT'
     # task
-    你needbased onusermessage，according to我providesearchresult，按照总minute总结构，output高quality，结构化detailedreturn答，formatfor markdown。
+    youneedbased onusermessage，according toIprovidesearchresult，按照总minute总结构，output高quality，结构化detailedreturn答，formatfor markdown。
     
-    in我give你searchresultmiddle，eachresultallis[webpage X begin]...[webpage X end]format，Xrepresenteach篇文chapternumberindex。请in适when情况downinsentence子末tailquotecontext。请按照quote编number[citation:X]formatin答案middleto应部minutequotecontext。ifonesentence话源from多context，请columnout所have相closequote编number，for example[citation:3][citation:5]，切记notwantwillquotecollectionmiddleinmostbackreturnquote编number，whileisin答案to应部minutecolumnout。
+    inIgiveyousearchresultmiddle，eachresultallis[webpage X begin]...[webpage X end]format，Xrepresenteach篇文chapternumberindex。请in适when情况downinsentence子末tailquotecontext。请按照quote编number[citation:X]formatin答案middleto应部minutequotecontext。ifonesentence话源from多context，请columnout所have相closequote编number，for example[citation:3][citation:5]，切记notwantwillquotecollectionmiddleinmostbackreturnquote编number，whileisin答案to应部minutecolumnout。
     inreturn答o clock，请noticebydown几point：
     - 今dayis{date_now}。
-    - andnonsearchresult所havecontentallanduserquestion密切相close，你need结合question，tosearchresultconduct甄别、filter。
+    - andnonsearchresult所havecontentallanduserquestion密切相close，youneed结合question，tosearchresultconduct甄别、filter。
     - toatcolumn举categoryquestion（如column举所have航班information），尽quantitywill答案controlin10wantpointbyinside，and告诉usercanviewsearchcome源、获completeinformation。优先provideinformationcomplete、most相closecolumn举item；如non必want，notwant主动告诉usersearchresultnotprovidecontent。
-    - toat创ascategoryquestion（如写论文），请务必injust文segment落middlequoteto应参考编number，for example[citation:3][citation:5]，notcan只in文chapter末tailquote。你need解读and概括user题目require，choose合适format，充minute利usesearchresultanddraw重wantinformation，generatematchuserrequire、极具思想深degree、富havecreate力and专业property答案。你创as篇幅need尽maybe延长，toateachonewantpoint论述wantspeculateduser意graph，giveout尽maybe多angledegreereturn答wantpoint，and务必informationquantity大、论述详尽。
+    - toat创ascategoryquestion（如写论文），请务必injust文segment落middlequoteto应参考编number，for example[citation:3][citation:5]，notcan只in文chapter末tailquote。youneed解读and概括user题目require，choose合适format，充minute利usesearchresultanddraw重wantinformation，generatematchuserrequire、极具思想深degree、富havecreate力and专业property答案。you创as篇幅need尽maybe延长，toateachonewantpoint论述wantspeculateduser意graph，giveout尽maybe多angledegreereturn答wantpoint，and务必informationquantity大、论述详尽。
     - ifreturn答very长，请尽quantity结构化、minutesegment落总结。ifneedminutepointas答，尽quantitycontrolin5pointbyinside，andmerge相closecontent。
     - toat客观category问答，ifquestion答案non常简短，can适when补充oneto两sentence相closeinformation，by丰富content。
-    - 你needaccording touserrequireandreturn答contentchoose合适、美观return答format，ensurecan读property强。
-    - 你return答should综合多相closewebpagecomereturn答，notcanduplicatequoteonewebpage。
-    - unlessuserrequire，否then你return答languageneedanduser提问languagemaintainone致。
+    - youneedaccording touserrequireandreturn答contentchoose合适、美观return答format，ensurecan读property强。
+    - youreturn答should综合多相closewebpagecomereturn答，notcanduplicatequoteonewebpage。
+    - unlessuserrequire，否thenyoureturn答languageneedanduser提问languagemaintainone致。
     - output漂亮markdown format，contentmiddleaddonetheseandtheme相closeemoji表情符number。
     
     ## usermessagefor：
@@ -223,9 +223,9 @@ class DelightfulLLMDomainService
     PROMPT;
 
     private string $eventPrompt = <<<'PROMPT'
-    # 你isone新闻eventgenerate器，userwillprovidesearchcontentandaskquestion。
+    # youisone新闻eventgenerate器，userwillprovidesearchcontentandaskquestion。
     ## Current Timeis {data_now}  
-    ## according touserquestion，你需fromuserprovidesearchcontentmiddle整理相closeevent，eventincludeeventname、eventtimeandevent概述。
+    ## according touserquestion，you需fromuserprovidesearchcontentmiddle整理相closeevent，eventincludeeventname、eventtimeandevent概述。
     ### notice事item：
     1. **eventnameformat**：
        - ineventnamebackaddsearchquote编number，formatfor `[[citation:x]]`，编numbercome源atsearchcontentmiddlequotemark（如 `[[citation:1]]`）。

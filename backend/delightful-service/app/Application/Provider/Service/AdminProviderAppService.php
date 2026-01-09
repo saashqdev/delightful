@@ -633,7 +633,7 @@ readonly class AdminProviderAppService
         if (defined('DELIGHTFUL_ACCESS_TOKEN')) {
             $completionDTO->setAccessToken(DELIGHTFUL_ACCESS_TOKEN);
         }
-        $completionDTO->setMessages([['role' => 'user', 'content' => '你好']]);
+        $completionDTO->setMessages([['role' => 'user', 'content' => 'you好']]);
         $completionDTO->setModel($modelPrimaryId);
         $completionDTO->setEnableHighAvailability(false); // 连通propertytesto clocknotenable高canuse
         $completionDTO->setBusinessParams([

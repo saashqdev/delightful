@@ -31,7 +31,7 @@ class RetrieveStrategy
      * meanwhilefrom多knowledge basemiddleretrieveinfo，然backtoresultconduct重新sort。
      * thestrategypassconfigurationparameter `retrieve_strategy` fieldset，
      * fromdatabasemiddle retrieve_config configurationget。
-     * 它supportdifferent重sortstrategy，如use重sortmodeloradd权minute数。
+     * itsupportdifferent重sortstrategy，如use重sortmodeloradd权minute数。
      */
     public const MULTIPLE = 'multiple';
 

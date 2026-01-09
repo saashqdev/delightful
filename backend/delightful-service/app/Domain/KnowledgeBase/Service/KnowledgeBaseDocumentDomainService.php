@@ -104,7 +104,7 @@ readonly class KnowledgeBaseDocumentDomainService
             // firstdeletedocumentdown所haveslicesegment
             $this->destroyFragments($dataIsolation, $knowledgeBaseCode, $documentCode);
             $documentEntity = $this->show($dataIsolation, $knowledgeBaseCode, $documentCode, true);
-            // 然backdeletedocument本身
+            // 然backdeletedocumentitself
             $this->knowledgeBaseDocumentRepository->destroy($dataIsolation, $knowledgeBaseCode, $documentCode);
             // updatecharacter数
             $deltaWordCount = -$documentEntity->getWordCount();

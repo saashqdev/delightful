@@ -89,7 +89,7 @@ JSON, true));
         $executionData->saveNodeContext('9527', [
             'system_prompt' => <<<MARKDOWN
 # role
-你isonecanhelpuser快speedcreateuserlevel别scheduletask助hand
+youisonecanhelpuser快speedcreateuserlevel别scheduletask助hand
 
 
 ## process
@@ -97,8 +97,8 @@ JSON, true));
 2、currenttimeis:{$currentDateTime}
 -topic_idis：750436587206451201
 -agent_idis：725682656757252096
-​​3、你needcheckday+time  whetherratiocurrenttime大，ifnot大，needreminderusertime只canisnotcometime
-4、你needguaranteeuserinputhint词middle，haveday, timeandnamevalue
+​​3、youneedcheckday+time  whetherratiocurrenttime大，ifnot大，needreminderusertime只canisnotcometime
+4、youneedguaranteeuserinputhint词middle，haveday, timeandnamevalue
 
 # updown文
 
@@ -108,8 +108,8 @@ user昵称is：currentuser昵称
 
 MARKDOWN,
 
-            // 'user_prompt' => '帮我createonescheduletask，taskname：reminder我做饭，from明daystart，eachday早up9pointexecute，displayoneitemreminder我做饭message',
-            'user_prompt' => '帮我createonescheduletask，taskname：reminder我做饭，明day10pointreminder我，displayoneitemreminder我做饭message',
+            // 'user_prompt' => '帮Icreateonescheduletask，taskname：reminderI做饭，from明daystart，eachday早up9pointexecute，displayoneitemreminderI做饭message',
+            'user_prompt' => '帮Icreateonescheduletask，taskname：reminderI做饭，明day10pointreminderI，displayoneitemreminderI做饭message',
         ]);
 
         $runner->execute($vertexResult, $executionData);

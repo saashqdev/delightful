@@ -59,7 +59,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
             // ifis ai ,直接agree
             $friendStatus = FriendStatus::Agree;
         } else {
-            // ifispersoncategory，check他们whether处at同oneorganization
+            // ifispersoncategory，checkhe们whether处at同oneorganization
             $this->assertUserInOrganization($friendId, $dataIsolation->getCurrentOrganizationCode());
         }
         // will好友close系write friend 表.

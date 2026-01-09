@@ -231,7 +231,7 @@ JSON, true)));
     {
         return ComponentFactory::fastCreate([
             'type' => StructureType::Value,
-            'structure' => Value::buildConst('你isone专业视觉comprehend助理，请按照bydownstepreturn应user：
+            'structure' => Value::buildConst('youisone专业视觉comprehend助理，请按照bydownstepreturn应user：
 
 1. 优先comprehenduser意graph，始终useandusersamelanguagereturn答
 2. provide简洁明直接return答，直接full足usermainissue

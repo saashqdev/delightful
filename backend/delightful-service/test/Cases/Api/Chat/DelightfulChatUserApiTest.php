@@ -66,7 +66,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         if (isset($response['code']) && $response['code'] !== 1000) {
             echo "\ninterfacereturnerror: code=" . $response['code'] . ', message=' . ($response['message'] ?? 'unknown') . "\n";
 
-            // ifisauthenticationerror，我们canacceptandskiptest
+            // ifisauthenticationerror，wecanacceptandskiptest
             if ($response['code'] === 2179 || $response['code'] === 3035) {
                 $this->markTestSkipped('interfaceauthenticationfail，maybeneedotherauthenticationconfiguration - interface路byvalidatenormal');
                 return;
@@ -405,7 +405,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         if (isset($response['code']) && $response['code'] !== 1000) {
             echo "\ninterfacereturnerror: code=" . $response['code'] . ', message=' . ($response['message'] ?? 'unknown') . "\n";
 
-            // ifisauthenticationerror，我们canacceptandskiptest
+            // ifisauthenticationerror，wecanacceptandskiptest
             if ($response['code'] === 2179 || $response['code'] === 3035) {
                 $this->markTestSkipped('interfaceauthenticationfail，maybeneedotherauthenticationconfiguration - interface路byvalidatenormal');
                 return;

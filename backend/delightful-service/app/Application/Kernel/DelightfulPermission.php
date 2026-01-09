@@ -138,7 +138,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
 
         // 模piecelayerdefinitionfortwolevelresource（即平台直接子resource）
         if ($enum->parent() === null) {
-            // toplevelresource（平台本身）
+            // toplevelresource（平台itself）
             $moduleEnum = $enum;
         } else {
             $parent = $enum->parent();

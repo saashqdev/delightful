@@ -134,7 +134,7 @@ readonly class AsrTitleGeneratorService
                 'has_note' => ! empty($taskStatus->noteContent),
             ]);
 
-            // ifhave ASR streamcontent，use它generatetitle
+            // ifhave ASR streamcontent，useitgeneratetitle
             if (! empty($taskStatus->asrStreamContent)) {
                 // build笔记 DTO（ifhave）
                 $note = null;
@@ -261,7 +261,7 @@ readonly class AsrTitleGeneratorService
     private function buildUserRequestMessage(string $audioFileName, ?string $noteFileName): string
     {
         if ($noteFileName !== null) {
-            // have笔记情况："请帮我 @yearwillsolutiondiscussion.webm 录音contentand @yearwill笔记.md content转化foroneshare超level产物"
+            // have笔记情况："请帮I @yearwillsolutiondiscussion.webm 录音contentand @yearwill笔记.md content转化foroneshare超level产物"
             return sprintf(
                 '%s@%s%s@%s%s',
                 $this->translator->trans('asr.messages.summary_prefix_with_note'),
@@ -272,7 +272,7 @@ readonly class AsrTitleGeneratorService
             );
         }
 
-        // onlyaudiofile情况："请帮我 @yearwillsolutiondiscussion.webm 录音content转化foroneshare超level产物"
+        // onlyaudiofile情况："请帮I @yearwillsolutiondiscussion.webm 录音content转化foroneshare超level产物"
         return sprintf(
             '%s@%s%s',
             $this->translator->trans('asr.messages.summary_prefix'),

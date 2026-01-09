@@ -141,7 +141,7 @@ enum ProviderTemplateId: string
             ProviderCode::MiracleVision => 'MiracleVision',
             ProviderCode::AWSBedrock => 'AWS Bedrock',
             ProviderCode::Google => 'Google',
-            ProviderCode::VolcengineArk => '火山engine-方舟',
+            ProviderCode::VolcengineArk => '火山engine-Ark',
             ProviderCode::Gemini => 'Google Gemini',
             default => 'unknownservicequotient',
         };

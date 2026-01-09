@@ -398,7 +398,7 @@ class ServiceProviderInitializer
                 'id' => '792047422971920387',
                 'name' => 'VolcengineArk',
                 'provider_code' => 'VolcengineArk',
-                'description' => '火山engine方舟',
+                'description' => '火山engineArk',
                 'icon' => 'DELIGHTFUL/713471849556451329/default/volcengine Avatars.png',
                 'provider_type' => 0,
                 'category' => 'vlm',
@@ -410,7 +410,7 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'VolcengineArk',
-                        'zh_CN' => '火山engine（方舟）',
+                        'zh_CN' => '火山engine（Ark）',
                     ],
                     'description' => [
                         'en_US' => '',

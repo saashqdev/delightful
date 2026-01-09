@@ -179,7 +179,7 @@ readonly class AsrPresetFileService
         string $fullPrefix,
         string $workDir
     ): TaskFileEntity {
-        // ⚠️ use CoContext and di() getcorrectlanguageand翻译
+        // ⚠️ use CoContext and di() getcorrectlanguageandtranslate
         $language = CoContext::getLanguage();
         $translator = di(TranslatorInterface::class);
         $translator->setLocale($language);
@@ -216,7 +216,7 @@ readonly class AsrPresetFileService
         string $fullPrefix,
         string $workDir
     ): TaskFileEntity {
-        // ⚠️ use CoContext and di() getcorrectlanguageand翻译
+        // ⚠️ use CoContext and di() getcorrectlanguageandtranslate
         $language = CoContext::getLanguage();
         $translator = di(TranslatorInterface::class);
         $translator->setLocale($language);

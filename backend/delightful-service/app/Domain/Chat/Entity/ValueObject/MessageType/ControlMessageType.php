@@ -87,10 +87,10 @@ enum ControlMessageType: string
     // 助理交互finger令
     case AgentInstruct = 'bot_instruct';
 
-    // 翻译configurationitem
+    // translateconfigurationitem
     case TranslateConfig = 'translate_config';
 
-    // 翻译
+    // translate
     case Translate = 'translate';
 
     // addgood友success

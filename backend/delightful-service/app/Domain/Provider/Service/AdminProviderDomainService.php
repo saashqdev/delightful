@@ -93,7 +93,7 @@ class AdminProviderDomainService extends AbstractProviderDomainService
             $mergedData['config'] = new ProviderConfigItem($configData['config']);
         }
 
-        // 5. handle翻译field
+        // 5. handletranslatefield
         $configTranslate = $providerConfigEntity->getTranslate() ?: [];
         $providerTranslate = $providerEntity->getTranslate() ?: [];
         $mergedData['translate'] = array_merge($configTranslate, $providerTranslate);

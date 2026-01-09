@@ -251,17 +251,17 @@ class VolcengineArkModel extends AbstractImageGenerate
     }
 
     /**
-     * validate火山方舟APIresponsedataformat.
+     * validate火山ArkAPIresponsedataformat.
      */
     private function validateVolcengineArkResponse(array $result): void
     {
         if (empty($result['data']) || ! is_array($result['data']) || empty($result['data'][0]['url'])) {
-            throw new Exception('火山方舟responsedataformaterror');
+            throw new Exception('火山Arkresponsedataformaterror');
         }
     }
 
     /**
-     * will火山方舟imagedataaddtoOpenAIresponseobjectmiddle.
+     * will火山ArkimagedataaddtoOpenAIresponseobjectmiddle.
      */
     private function addImageDataToResponse(
         OpenAIFormatResponse $response,
@@ -271,7 +271,7 @@ class VolcengineArkModel extends AbstractImageGenerate
         // useRedislockensureandhairsecurity
         $lockOwner = $this->lockResponse($response);
         try {
-            // from火山方舟responsemiddleextractdata
+            // from火山Arkresponsemiddleextractdata
             if (empty($volcengineResult['data']) || ! is_array($volcengineResult['data'])) {
                 return;
             }

@@ -69,7 +69,7 @@ class GlobalConfigApiTest extends AbstractHttpTest
         $this->assertSame(1000, $response['code']);
         $data = $response['data'];
 
-        // verifycontain维护模typeconfiguration
+        // verifycontainmaintain模typeconfiguration
         $this->assertArrayHasKey('is_maintenance', $data);
         $this->assertArrayHasKey('maintenance_description', $data);
 

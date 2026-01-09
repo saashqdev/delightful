@@ -40,7 +40,7 @@ enum DelightfulResourceEnum: string
     case ADMIN_AI_ABILITY = 'platform.ai.ability'; # AImanage-can力manage
     case SAFE_SUB_ADMIN = 'admin.safe.sub_admin';  # security管控-子administrator
     case PLATFORM_SETTING_PLATFORM_INFO = 'platform.setting.platform_info'; # platformmanage - systemset - platforminfo
-    case PLATFORM_SETTING_MAINTENANCE = 'platform.setting.maintenance'; # platformmanage - systeminfo - 维护manage
+    case PLATFORM_SETTING_MAINTENANCE = 'platform.setting.maintenance'; # platformmanage - systeminfo - maintainmanage
     case PLATFORM_ORGANIZATION_LIST = 'platform.organization.list'; # platformmanage - organizationmanage - organizationlist
     case ADMINPLUS_AI_MODEL = 'admin_plus.ai.model_management'; # organizationmanageback台plus-AImanage-modelmanage
 

@@ -726,7 +726,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * return收item方多itemmessagefinalreadstatus
+     * return收itemmany waysitemmessagefinalreadstatus
      * @return DelightfulSeqEntity[]
      * @todo consideruserAdeviceeditmessage,Bdevicewithdrawmessagescenario
      */

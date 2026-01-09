@@ -134,7 +134,7 @@ enum ProviderTemplateId: string
             ProviderCode::Volcengine => 'Volcanoengine',
             ProviderCode::OpenAI => 'OpenAI',
             ProviderCode::MicrosoftAzure => 'Microsoft Azure',
-            ProviderCode::Qwen => '通义thousand问',
+            ProviderCode::Qwen => 'general meaningthousand问',
             ProviderCode::DeepSeek => 'DeepSeek',
             ProviderCode::Tencent => '腾讯云',
             ProviderCode::TTAPI => 'TTAPI',

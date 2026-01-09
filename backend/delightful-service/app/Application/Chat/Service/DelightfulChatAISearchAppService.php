@@ -520,7 +520,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
      */
     public function sendAssociateQuestionResponse(DelightfulChatAggregateSearchReqDTO $dto, string $associateQuestionId): void
     {
-        $content = ['llm_response' => 'already经for您找toanswer,请etc待generatesummary'];
+        $content = ['llm_response' => 'already经foryou are looking fortoanswer,请etc待generatesummary'];
         $this->aiSendMessage(
             $dto->getConversationId(),
             (string) $this->idGenerator->generate(),
@@ -967,7 +967,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
 
     private function sleepToFixBug(float $seconds = 0.2): void
     {
-        // !!! byat收item方messagegenerateisasync,maybe乱序,therefore,thiswithin sleep onesmallwill,尽quantityguarantee收item方messagegenerateorder
+        // !!! byat收item方messagegenerateisasync,mayberandom order,therefore,thiswithin sleep onesmallwill,尽quantityguarantee收item方messagegenerateorder
         Coroutine::sleep($seconds);
     }
 
@@ -980,7 +980,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         string $parentId,
         int $type,
         array $content,
-        // todo streamresponse,拿tocustomer端传come app_message_id ,asforresponsetime唯oneidentifier
+        // todo streamresponse,拿tocustomerclient transmissioncome app_message_id ,asforresponsetime唯oneidentifier
         string $appMessageId = '',
         string $topicId = ''
     ): void {

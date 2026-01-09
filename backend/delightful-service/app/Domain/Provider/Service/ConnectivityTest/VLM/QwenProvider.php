@@ -19,7 +19,7 @@ use Psr\Log\LoggerInterface;
 use function Hyperf\Translation\__;
 
 /**
- * 通义thousand问servicequotient.
+ * general meaningthousand问servicequotient.
  */
 class QwenProvider implements IProvider
 {

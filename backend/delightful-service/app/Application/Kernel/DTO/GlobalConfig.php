@@ -18,7 +18,7 @@ class GlobalConfig
     }
 
     /**
-     * whether处at维护mode.
+     * whether处atmaintainmode.
      */
     public function isMaintenance(): bool
     {

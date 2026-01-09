@@ -8,7 +8,7 @@ declare(strict_types=1);
 namespace App\Infrastructure\ExternalAPI\Sms\Enum;
 
 /**
- * 电话国际区numbercode
+ * phone国际区numbercode
  */
 enum InternationalPhoneCodeEnum: string
 {

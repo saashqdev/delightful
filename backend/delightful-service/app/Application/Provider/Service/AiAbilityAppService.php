@@ -133,7 +133,7 @@ class AiAbilityAppService extends AbstractKernelAppService
      * 智canmergeconfiguration(retainbe脱敏api_keyoriginalvalue).
      *
      * @param array $dbConfig databaseoriginalconfiguration
-     * @param array $frontendConfig front端传comeconfiguration(maybecontain脱敏api_key)
+     * @param array $frontendConfig frontclient transmissioncomeconfiguration(maybecontain脱敏api_key)
      * @return array mergebackconfiguration
      */
     private function mergeConfigPreservingApiKeys(array $dbConfig, array $frontendConfig): array

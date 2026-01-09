@@ -225,7 +225,7 @@ class AggregateAISearchCardMessage extends AbstractChatMessageStruct implements 
     }
 
     /**
-     * onlyreturnbigmodelreturntextcontent, andignoreinvalidcontent,如: "already经for您找toanswer,请etc待generatesummary“.
+     * onlyreturnbigmodelreturntextcontent, andignoreinvalidcontent,如: "already经foryou are looking fortoanswer,请etc待generatesummary“.
      */
     public function getTextContent(): string
     {

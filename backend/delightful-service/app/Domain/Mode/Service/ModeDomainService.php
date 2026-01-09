@@ -50,11 +50,11 @@ class ModeDomainService
             return null;
         }
 
-        // ifis跟随模type,getbe跟随模typegroupconfiguration
+        // ifisfollow模type,getbefollow模typegroupconfiguration
         if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
             $followModeAggregate = $this->getModeDetailById($dataIsolation, $mode->getFollowModeId());
             if ($followModeAggregate) {
-                // usecurrent模typebasicinfo + be跟随模typegroupconfiguration
+                // usecurrent模typebasicinfo + befollow模typegroupconfiguration
                 return new ModeAggregate($mode, $followModeAggregate->getGroupAggregates());
             }
         }
@@ -90,11 +90,11 @@ class ModeDomainService
             return null;
         }
 
-        // ifis跟随模type,getbe跟随模typegroupconfiguration
+        // ifisfollow模type,getbefollow模typegroupconfiguration
         if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
             $followModeAggregate = $this->getModeDetailById($dataIsolation, $mode->getFollowModeId());
             if ($followModeAggregate) {
-                // usecurrent模typebasicinfo + be跟随模typegroupconfiguration
+                // usecurrent模typebasicinfo + befollow模typegroupconfiguration
                 return new ModeAggregate($mode, $followModeAggregate->getGroupAggregates());
             }
         }
@@ -130,14 +130,14 @@ class ModeDomainService
      */
     public function updateMode(ModeDataIsolation $dataIsolation, ModeEntity $modeEntity): ModeEntity
     {
-        // ifis跟随模type,validate跟随goal模type存in todo xhy usebusinessexception
+        // ifisfollow模type,validatefollowgoal模type存in todo xhy usebusinessexception
         if ($modeEntity->isInheritedConfiguration() && $modeEntity->hasFollowMode()) {
             $followMode = $this->modeRepository->findById($dataIsolation, $modeEntity->getFollowModeId());
             if (! $followMode) {
                 ExceptionBuilder::throw(ModeErrorCode::FOLLOW_MODE_NOT_FOUND);
             }
 
-            // preventloop跟随
+            // preventloopfollow
             if ($this->hasCircularFollow($dataIsolation, $modeEntity->getId(), $modeEntity->getFollowModeId())) {
                 ExceptionBuilder::throw(ModeErrorCode::CANNOT_FOLLOW_SELF);
             }
@@ -258,17 +258,17 @@ class ModeDomainService
             return [];
         }
 
-        // theone步:establish跟随close系mapping followMap[跟随者ID] = be跟随者ID
+        // theone步:establishfollowclose系mapping followMap[follow者ID] = befollow者ID
         $followMap = [];
         $modeIds = [];
 
         foreach ($modes as $mode) {
             $modeIds[] = $mode->getId();
 
-            // ifis跟随模type,establishmappingclose系
+            // ifisfollow模type,establishmappingclose系
             if ($mode->isInheritedConfiguration() && $mode->hasFollowMode()) {
                 $followMap[$mode->getId()] = $mode->getFollowModeId();
-                $modeIds[] = $mode->getFollowModeId(); // alsowant收collectionbe跟随模typeID
+                $modeIds[] = $mode->getFollowModeId(); // alsowant收collectionbefollow模typeID
             }
         }
         $modeIds = array_unique($modeIds);
@@ -293,7 +293,7 @@ class ModeDomainService
         foreach ($modes as $mode) {
             $modeId = $mode->getId();
 
-            // findfinal源模typeID(recursionfind跟随链)
+            // findfinalsource modetypeID(recursionfindfollow chain)
             $ultimateSourceId = $this->findUltimateSourceId($modeId, $followMap);
 
             $groups = $groupsByModeId[$ultimateSourceId] ?? [];
@@ -343,7 +343,7 @@ class ModeDomainService
     }
 
     /**
-     * checkwhether存inloop跟随.
+     * checkwhether存inloopfollow.
      */
     private function hasCircularFollow(ModeDataIsolation $dataIsolation, int|string $modeId, int|string $followModeId, array $visited = []): bool
     {
@@ -374,27 +374,27 @@ class ModeDomainService
     }
 
     /**
-     * according to跟随close系mappingrecursionfindfinal源模typeID.
+     * according tofollowclose系mappingrecursionfindfinalsource modetypeID.
      * @param int $modeId current模typeID
-     * @param array $followMap 跟随close系mapping [跟随者ID => be跟随者ID]
-     * @param array $visited preventloop跟随
-     * @return int final源模typeID
+     * @param array $followMap followclose系mapping [follow者ID => befollow者ID]
+     * @param array $visited preventloopfollow
+     * @return int finalsource modetypeID
      */
     private function findUltimateSourceId(int $modeId, array $followMap, array $visited = []): int
     {
-        // preventloop跟随
+        // preventloopfollow
         if (in_array($modeId, $visited)) {
             return $modeId;
         }
 
-        // ifthe模typenothave跟随close系,instructionitthenisfinal源
+        // ifthe模typenothavefollowclose系,instructionitthenisfinal源
         if (! isset($followMap[$modeId])) {
             return $modeId;
         }
 
         $visited[] = $modeId;
 
-        // recursionfind跟随goalfinal源
+        // recursionfindfollowgoalfinal源
         return $this->findUltimateSourceId($followMap[$modeId], $followMap, $visited);
     }
 }

@@ -595,7 +595,7 @@ class ProjectInvitationLinkApiTest extends AbstractApiTest
         $this->assertArrayHasKey('has_joined', $invitationInfo['data'], 'responseshouldcontainhas_joinedfield');
         $this->assertFalse($invitationInfo['data']['has_joined'], 'notadd入usershoulddisplaynotadd入project');
 
-        // validatecreate者info依然存in(not管谁access,create者infoallshoulddisplay)
+        // validatecreate者info依然存in(notno matter whoaccess,create者infoallshoulddisplay)
         $this->assertArrayHasKey('creator_name', $invitationInfo['data'], 'responseshouldcontaincreator_namefield');
         $this->assertArrayHasKey('creator_avatar', $invitationInfo['data'], 'responseshouldcontaincreator_avatarfield');
 

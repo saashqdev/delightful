@@ -137,7 +137,7 @@ readonly class RoleDomainService
         // saveroleitself
         $savedRoleEntity = $this->roleRepository->save($organizationCode, $roleEntity);
 
-        // 2. 维护roleanduserassociateclose系
+        // 2. maintainroleanduserassociateclose系
         $userIds = $savedRoleEntity->getUserIds();
         if (! empty($userIds)) {
             $this->roleRepository->assignUsers(
@@ -243,7 +243,7 @@ readonly class RoleDomainService
     }
 
     /**
-     * forfinger定usercreateor维护“organizationadministrator”role(拥haveall局permission).
+     * forfinger定usercreateormaintain“organizationadministrator”role(拥haveall局permission).
      *
      * logic:
      * 1. according tocurrentorganizationfindwhetheralreadyhavesame namerole;

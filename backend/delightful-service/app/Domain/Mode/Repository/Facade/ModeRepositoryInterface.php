@@ -55,7 +55,7 @@ interface ModeRepositoryInterface
     public function findEnabledModes(ModeDataIsolation $dataIsolation): array;
 
     /**
-     * according to跟随modeIDgetmodecolumntable.
+     * according tofollowmodeIDgetmodecolumntable.
      */
     public function findByFollowModeId(ModeDataIsolation $dataIsolation, string $followModeId): array;
 

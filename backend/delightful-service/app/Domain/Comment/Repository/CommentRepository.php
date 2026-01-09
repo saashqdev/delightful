@@ -22,7 +22,7 @@ class CommentRepository
     }
 
     /**
-     * createonenewcommentand维护相closeindexandattachment.
+     * createonenewcommentandmaintain相closeindexandattachment.
      *
      * @param CommentEntity $commentEntity comment实body
      * @return CommentEntity createbackcomment实body
@@ -45,7 +45,7 @@ class CommentRepository
         $commentEntity->setCreatedAt($model->created_at);
         $commentEntity->setUpdatedAt($model->updated_at);
 
-        // 维护index
+        // maintainindex
         $this->treeIndexRepository->createIndexes(
             $organizationCode,
             CommentTreeIndexModel::query(),

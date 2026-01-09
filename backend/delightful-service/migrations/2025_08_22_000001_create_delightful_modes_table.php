@@ -32,8 +32,8 @@ return new class extends Migration {
             $table->text('description')->comment('模typedescription');
             $table->tinyInteger('is_default')->default(0)->comment('whetherdefault模type 0:no 1:is');
             $table->tinyInteger('status')->default(1)->comment('status 0:disable 1:enable');
-            $table->tinyInteger('distribution_type')->default(1)->comment('minute配method 1:customizeconfiguration 2:跟随other模type');
-            $table->bigInteger('follow_mode_id')->unsigned()->default(0)->comment('跟随模typeID,0table示not跟随');
+            $table->tinyInteger('distribution_type')->default(1)->comment('minute配method 1:customizeconfiguration 2:followother模type');
+            $table->bigInteger('follow_mode_id')->unsigned()->default(0)->comment('follow模typeID,0table示notfollow');
             $table->json('restricted_mode_identifiers')->comment('limit模typeidentifierarray');
             $table->string('organization_code', 32)->default('')->comment('organizationcode');
             $table->string('creator_id', 64)->default('')->comment('createpersonID');

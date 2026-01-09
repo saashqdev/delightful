@@ -404,7 +404,7 @@ class DelightfulFlowExportImportAppService
         $newName = $name;
         $counter = 1;
 
-        // toolnotuse重名,因fortoolcollectionnotsame
+        // toolnotuseduplicate name,因fortoolcollectionnotsame
         if ($type === Type::Tools) {
             return $name;
         }
@@ -453,7 +453,7 @@ class DelightfulFlowExportImportAppService
 
     /**
      * updatesectionpointIDmapping
-     * for所havesectionpointgeneratenewIDand维护mappingclose系.
+     * for所havesectionpointgeneratenewIDandmaintainmappingclose系.
      */
     private function updateNodeIdsMapping(array &$flowData, array &$idMapping): void
     {

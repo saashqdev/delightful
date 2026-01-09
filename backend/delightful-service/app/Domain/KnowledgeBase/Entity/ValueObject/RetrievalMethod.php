@@ -50,7 +50,7 @@ class RetrievalMethod
      *
      * based onknowledgegraph谱retrievemethod.
      * 利use实bodybetweenclose系conductretrieve,suitableprocesscomplexassociatequery.
-     * canhair现隐含close系andconnect.
+     * canhairshow implicitclose系andconnect.
      */
     public const string GRAPH_SEARCH = 'graph_search';
 

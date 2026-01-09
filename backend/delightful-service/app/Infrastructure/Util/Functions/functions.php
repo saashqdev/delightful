@@ -116,7 +116,7 @@ if (! function_exists('string_to_hump')) {
     /**
      * down划line转becomecamel casenaming,defaultsmallcamel case.
      * @param string $string wantconvertstring
-     * @param bool $firstUp whether首字母big写,defaultno
+     * @param bool $firstUp whetherinitialbig写,defaultno
      */
     function string_to_hump(string $string, bool $firstUp = false): string
     {

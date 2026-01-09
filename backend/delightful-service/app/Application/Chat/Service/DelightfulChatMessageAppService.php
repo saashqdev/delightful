@@ -606,7 +606,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         4. ignore早期already经endtopic,unlessit们andmostnewtopicclosely relatedclose
 
         ## strictrequire
-        1. titlelength:not超pass 15 character.Englishone字母算onecharacter,Chinese charactersonecharacter countonecharacter,other语type采useanalogouscountsolution.
+        1. titlelength:not超pass 15 character.Englishoneletter算onecharacter,Chinese charactersonecharacter countonecharacter,other语type采useanalogouscountsolution.
         2. content相close:titlemustdirectlyreflectconversation核coretheme
         3. languagestyle:usestatementproperty语sentence,avoidquestionsentence
         4. outputformat:onlyoutputtitlecontent,notwantaddanyexplain,标pointorothertext

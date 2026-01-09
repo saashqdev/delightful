@@ -222,7 +222,7 @@ class DelightfulControlDomainService extends AbstractDomainService
             $this->delightfulSeqRepository->batchUpdateSeqStatus([$needChangeSeqEntity->getSeqId()], $messageStatus);
             // according to delightful_message_id 找to所havemessagereceive者
             $notifyAllReceiveSeqList = $this->batchCreateSeqByRevokeOrEditMessage($needChangeSeqEntity, $controlMessageType);
-            // rowexceptuserfrom己,因foralready经提front
+            // rowexceptuserfrom己,因foralreadyalready提front
             $this->batchPushControlSeqList($notifyAllReceiveSeqList);
         } finally {
             // releaselock

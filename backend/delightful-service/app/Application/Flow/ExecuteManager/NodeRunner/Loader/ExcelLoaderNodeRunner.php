@@ -19,7 +19,7 @@ use App\Infrastructure\Util\FileType;
 use App\Infrastructure\Util\SSRF\SSRFUtil;
 use Vtiful\Kernel\Excel;
 
-#[FlowNodeDefine(type: NodeType::ExcelLoader->value, code: NodeType::ExcelLoader->name, name: '电子tableparse', paramsConfig: ExcelLoaderNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: false, needOutput: true)]
+#[FlowNodeDefine(type: NodeType::ExcelLoader->value, code: NodeType::ExcelLoader->name, name: 'electronictableparse', paramsConfig: ExcelLoaderNodeParamsConfig::class, version: 'v0', singleDebug: true, needInput: false, needOutput: true)]
 class ExcelLoaderNodeRunner extends NodeRunner
 {
     protected function run(VertexResult $vertexResult, ExecutionData $executionData, array $frontResults): void

@@ -36,7 +36,7 @@ class TextSplitterTool extends AbstractBuiltInTool
 
     public function getDescription(): string
     {
-        return 'willlongtextaccording to既定strategyconductsplit';
+        return 'willlongtextaccording toestablishedstrategyconductsplit';
     }
 
     public function getCallback(): ?Closure

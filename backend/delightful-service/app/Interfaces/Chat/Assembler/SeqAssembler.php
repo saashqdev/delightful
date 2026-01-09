@@ -288,7 +288,7 @@ class SeqAssembler
             // send者
             'sender_id' => (string) $messageEntity?->getSenderId(),
             'topic_id' => $messageTopicId,
-            // messagesmallcategory.controlmessagesmallcategory:already读return执;withdraw;edit;join group/退群;organizationarchitecture change; . showmessage:text,voice,img,file,videoetc
+            // messagesmallcategory.controlmessagesmallcategory:already读return执;withdraw;edit;join group/leave group;organizationarchitecture change; . showmessage:text,voice,img,file,videoetc
             'type' => $messageTypeName,
             // return显not读person数,ifuserpoint击detail,againrequestspecificmessagecontent
             'unread_count' => $unreadCount,

@@ -78,7 +78,7 @@ class FragmentPreviewRequestDTO extends AbstractRequestDTO
             'fragment_config.parent_child.separator.required_if' => 'minutesegmentidentifiernotcanforempty',
             'fragment_config.parent_child.chunk_size.required_if' => 'textnotcanforempty',
             'fragment_config.parent_child.parent_mode.required_if' => '父piece模typenotcanforempty',
-            'fragment_config.parent_child.parent_mode.in' => '父piece模typemustis 1(segment落) or 2(权威)',
+            'fragment_config.parent_child.parent_mode.in' => '父piece模typemustis 1(segment落) or 2(authority)',
             'fragment_config.parent_child.child_segment_rule.required_if' => '子pieceminutesegmentrulenotcanforempty',
             'fragment_config.parent_child.child_segment_rule.separator.required_if' => '子pieceminutesegmentidentifiernotcanforempty',
             'fragment_config.parent_child.child_segment_rule.chunk_size.required_if' => '子piecemostbigminutesegmentlengthnotcanforempty',

@@ -136,7 +136,7 @@ enum ProviderTemplateId: string
             ProviderCode::MicrosoftAzure => 'Microsoft Azure',
             ProviderCode::Qwen => 'general meaningthousand问',
             ProviderCode::DeepSeek => 'DeepSeek',
-            ProviderCode::Tencent => '腾讯云',
+            ProviderCode::Tencent => 'Tencent Cloud',
             ProviderCode::TTAPI => 'TTAPI',
             ProviderCode::MiracleVision => 'MiracleVision',
             ProviderCode::AWSBedrock => 'AWS Bedrock',

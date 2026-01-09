@@ -83,7 +83,7 @@ class MessageUtil
                 }
                 if (empty($chatAttachments)) {
                     return new TextMessage([
-                        'content' => $linkDesc ?: '抱歉',
+                        'content' => $linkDesc ?: 'sorry',
                     ]);
                 }
                 $message->setAttachments($chatAttachments);

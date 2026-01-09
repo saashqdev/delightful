@@ -54,7 +54,7 @@ class TokenTextSplitter extends TextSplitter
 
     /**
      * @param null|callable $tokenizer tokencalculatefunction
-     * @param null|array $separators 备选minuteseparatorlist
+     * @param null|array $separators alternativeminuteseparatorlist
      * @throws Exception
      */
     public function __construct(

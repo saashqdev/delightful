@@ -23,7 +23,7 @@ use RuntimeException;
 use function Hyperf\Config\config;
 
 /**
- * Volcanoshort信所have api foundationcategory.
+ * Volcanoshortmessage所have api foundationcategory.
  * @see https://www.volcengine.com/docs/6361/171579
  */
 abstract class VolcengineApi

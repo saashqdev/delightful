@@ -24,7 +24,7 @@ enum EmployeeType: int
     // outsidepackage
     case Outsourcing = 3;
 
-    // labor派遣
+    // labordispatch
     case LaborDispatch = 4;
 
     // consultant

@@ -27,7 +27,7 @@ enum SuperPermissionEnum: string
     // hiddendepartmentor者user
     case HIDE_USER_OR_DEPT = 'hide_user_or_dept';
 
-    // 特权hairmessage
+    // privilegehairmessage
     case PRIVILEGE_SEND_MESSAGE = 'privilege_send_message';
 
     // Magic多environmentmanage

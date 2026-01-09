@@ -290,7 +290,7 @@ class DelightfulUserDomainService extends AbstractContactDomainService
         $userIdToFlowCodeMaps = $this->setUserIdsByAiCodes($friendQueryDTO, $dataIsolation);
         $friendList = $this->friendRepository->getFriendList($friendQueryDTO, $dataIsolation->getCurrentUserId());
         $flowFriends = [];
-        // use flowCode 置换 friendId
+        // use flowCode swap friendId
         foreach ($friendList as $friend) {
             $friendId = $friend->getFriendId();
             if (isset($userIdToFlowCodeMaps[$friendId])) {

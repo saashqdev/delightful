@@ -166,7 +166,7 @@ class ImageGenerateFactory
         $width = (int) $widthStr;
         $height = (int) $heightStr;
 
-        // todo xhy first fallbackbottom,因for整text generationgraphalsonothave闭环
+        // todo xhy first fallbackbottom,因for整text generationgraphalsonothaveclosed loop
         if (
             ! ($width === 1024 && $height === 1024)
             && ! ($width === 1024 && $height === 1792)
@@ -400,7 +400,7 @@ class ImageGenerateFactory
                 return $fixedSize;
             }
 
-            // ifnothavefixedconfiguration,according tonormalconvert(based on1024for基准)
+            // ifnothavefixedconfiguration,according tonormalconvert(based on1024forbaseline)
             if ($width >= $height) {
                 // 横to
                 $actualWidth = 1024;

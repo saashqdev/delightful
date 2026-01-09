@@ -75,7 +75,7 @@ class Template extends AbstractTemplate
      */
     public function smsVariableAnalyse(string $message, string $templateId, ?string $language): array
     {
-        // 找tofinger定templatevariablejustthenparserule. ifnot传模版id,loopjustthenmatchwilldecreasematchspeeddegreeandaccuratedegree
+        // 找tofinger定templatevariablejustthenparserule. ifnottemplateid,loopjustthenmatchwilldecreasematchspeeddegreeandaccuratedegree
         if ($templateId) {
             // judgetemplatewhether存in
             if (! isset($this->idContents[$templateId])) {

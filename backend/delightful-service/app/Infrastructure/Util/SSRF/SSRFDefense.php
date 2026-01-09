@@ -169,7 +169,7 @@ class SSRFDefense
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);                // timeout5second
         curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 3);         // connecttimeout3second
         curl_setopt($ch, CURLOPT_MAXREDIRS, 0);              // notfollowredirectto
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);      // verifySSL证书
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true);      // verifySSLcertificate
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2);         // verifySSLhost
         try {
             curl_exec($ch);

@@ -36,7 +36,7 @@ class DefaultFontProvider implements FontProviderInterface
 
     /**
      * detecttextwhethercontainmiddle文character.
-     * open源version视所havetextfornonmiddle文,useinsideset fieldbodyrender.
+     * open源version視所havetextfornonmiddle文,useinsideset fieldbodyrender.
      */
     public function containsChinese(string $text): bool
     {

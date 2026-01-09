@@ -176,7 +176,7 @@ class DelightfulLLMDomainService
     
     ## contextexceptionhandle
     when {context} fornullo clock:
-    1. start备选generatestrategy,application5W1Hframework(Who/What/When/Where/Why/How),andcombineuseroriginalquestionconductpopulate
+    1. startalternativegeneratestrategy,application5W1Hframework(Who/What/When/Where/Why/How),andcombineuseroriginalquestionconductpopulate
     2. generatedefaultdimension,for example:policybackground | mostnewdata | expert viewpoint | toratioanalyze | line业trend
     
     ## outputstandard
@@ -185,7 +185,7 @@ class DelightfulLLMDomainService
       "XtoYimpactdiff",  // toratio/comparecategory
       "Zdomaintypicalapplication",  // application/casecategory
       "closeatABfinger标",    // finger标/propertycategory
-      "causeMhair生mainreasoniswhat?", // reason/机制category
+      "causeMhair生mainreasoniswhat?", // reason/mechanismcategory
       "whatisN?it核corefeatureiswhat?", // definition/explaincategory
       "notcomefiveyearPdomainhair展trendiswhat?", // trend/predictioncategory
       "针toQquestion,have哪thesecanlineresolvesolution?" // resolvesolution/suggestioncategory
@@ -236,7 +236,7 @@ class DelightfulLLMDomainService
        - 若同oneeventin多quotemiddleout现,priorityusemost早time.
        - 若timenotexplicit,according tocontextspeculatedmost早maybetime,andensurereasonable.
     3. **eventextractandfilter**:
-       - **eventdefinition**:eventissearchcontentmiddlemention,具havetimeassociate(explicitorcanspeculated)independent事实,changeoractivity,includebutnot限atcreate,publish,open业,update,合as,activityetc.
+       - **eventdefinition**:eventissearchcontentmiddlemention,具havetimeassociate(explicitorcanspeculated)independentfact,changeoractivity,includebutnot限atcreate,publish,open业,update,合as,activityetc.
        - according touserquestion,extractandrelatedcloseevent,maintaindescriptionconcise,focusspecifichair生thing.
        - **skipnoclosecontent**:
          - pure and quietstatedescription(如not变property,backgroundintroduce,notimechange).
@@ -1113,7 +1113,7 @@ class DelightfulLLMDomainService
             temperature: 0.1,
             businessParams: $businessParams,
         );
-        // 捕捉 LLMNetworkException exception,retryonetime
+        // capture LLMNetworkException exception,retryonetime
         return Retry::whenThrows(LLMNetworkException::class)->sleep(500)->max(3)->call(
             function () use ($agent, $query) {
                 return $agent->chatAndNotAutoExecuteTools(new UserMessage($query));

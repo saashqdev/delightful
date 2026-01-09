@@ -108,7 +108,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             $messageEntity->setMessageType($messageDTO->getMessageType());
             $messageEntity->setSendTime($messageDTO->getSendTime());
 
-            // 6. createsend者额outsideinfo
+            // 6. createsendquotaoutsideinfo
             $senderExtraDTO = new SenderExtraDTO();
             // temporarymessagemaybenotneedenvironmentID,usedefaultvalue
             $senderExtraDTO->setDelightfulEnvId(null);
@@ -124,7 +124,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
                 $senderExtraDTO
             ));
         } catch (Throwable $e) {
-            // recorderrorlog,butnot阻断processprocess
+            // recorderrorlog,butnotblockprocessprocess
             $this->logger?->error('HandleBeDelightfulInstructionMessage failed', [
                 'message' => $e->getMessage(),
                 'trace' => $e->getTraceAsString(),

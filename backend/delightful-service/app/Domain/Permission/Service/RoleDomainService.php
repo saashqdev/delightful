@@ -87,7 +87,7 @@ readonly class RoleDomainService
                 ExceptionBuilder::throw(PermissionErrorCode::ValidateFailed, 'permission.error.invalid_permission_key', ['key' => $permissionKey]);
             }
 
-            // skipall局permissionconstant,no需参andtagextract
+            // skipall局permissionconstant,noneed参andtagextract
             if ($permissionKey === DelightfulPermission::ALL_PERMISSIONS) {
                 continue;
             }
@@ -247,7 +247,7 @@ readonly class RoleDomainService
      *
      * logic:
      * 1. according tocurrentorganizationfindwhetheralreadyhavesame namerole;
-     * 2. 若not存in,thencreatenewroleand赋予 DelightfulPermission::ALL_PERMISSIONS;
+     * 2. 若not存in,thencreatenewroleandgrant DelightfulPermission::ALL_PERMISSIONS;
      * 3. if existsin,thenensureitscontain ALL_PERMISSIONS;
      * 4. willuser ID columntableadd入roleassociateusercolumntable;
      * 5. saverole.

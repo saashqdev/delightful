@@ -507,7 +507,7 @@ class DelightfulFlowExecutor
 
     private function archiveToCloud(VertexResult $vertexResult): void
     {
-        // already经运linepass,alsonotarchive
+        // alreadyalready运linepass,alsonotarchive
         if ($vertexResult->hasDebugLog('history_vertex_result')) {
             return;
         }

@@ -12,7 +12,7 @@ class ThirdPlatformCreateSceneGroup
     // group name
     private string $title;
 
-    // 群所have者userid
+    // group所have者userid
     private string $ownerUserId;
 
     // templateid

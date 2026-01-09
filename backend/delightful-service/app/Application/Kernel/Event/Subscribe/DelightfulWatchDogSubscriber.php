@@ -41,7 +41,7 @@ readonly class DelightfulWatchDogSubscriber implements ListenerInterface
         }
         $quantum = 10 * 1000 * 1000; // unit:毫second
         $logger = ApplicationContext::getContainer()->get(LoggerFactory::class)?->get('DelightfulWatchDogSubscriber');
-        // watchdog找同blockingplace
+        // watchdogfind同blockingplace
         $logger->info('Magicwatchdog,start!');
         $alertCountMap = new WeakMap();
         Watchdog::run($quantum * 5, 0, static function () use (&$alertCountMap, $logger) {

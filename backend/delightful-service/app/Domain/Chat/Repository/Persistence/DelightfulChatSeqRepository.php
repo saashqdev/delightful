@@ -466,7 +466,7 @@ sql;
      */
     private function getMessagesStatusChangeSeq(array $referMessageIds, DelightfulUserEntity $userEntity): array
     {
-        // will orWhereIn 拆minutefor 2 itemquery,avoidindex失效
+        // will orWhereIn 拆minutefor 2 itemquery,avoidindexinvalid
         $query = $this->delightfulSeq::query()
             ->where('object_type', $userEntity->getUserType()->value)
             ->where('object_id', $userEntity->getDelightfulId())

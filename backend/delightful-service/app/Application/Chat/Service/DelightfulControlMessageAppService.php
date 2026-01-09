@@ -127,7 +127,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageDTO, $conversationId);
         // asyncwillgeneratemessagestreamnotifyuserotherdevice.
         $seqCreatedEvent = $this->controlDomainService->pushControlSequence($seqEntity);
-        // asyncminutehaircontrolmessage,to方操assessiontopic
+        // asyncminutehaircontrolmessage,to方operationassessiontopic
         $this->controlDomainService->dispatchSeq($seqCreatedEvent);
         // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();

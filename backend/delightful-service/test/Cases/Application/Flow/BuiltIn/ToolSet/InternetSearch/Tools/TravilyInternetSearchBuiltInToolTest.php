@@ -92,7 +92,7 @@ JSON,
         $vertexResult = new VertexResult();
         $executionData = $this->createExecutionData();
         $executionData->saveNodeContext('9527', [
-            'search_keyword' => 'week杰伦',
+            'search_keyword' => 'weekJay Chou',
         ]);
         $runner->execute($vertexResult, $executionData, []);
 

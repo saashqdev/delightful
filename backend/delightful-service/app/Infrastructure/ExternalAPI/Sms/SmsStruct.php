@@ -34,7 +34,7 @@ class SmsStruct
     public ?array $variables = null;
 
     /**
-     * normalshort信纯textcontent.
+     * normalshortpure messagetextcontent.
      * 如: lighthousejustininvitationyouadd入enterprise,point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
      */
     public ?string $content = null;
@@ -46,7 +46,7 @@ class SmsStruct
     public SignEnum $sign;
 
     /**
-     * short信语type,andtypefieldandvariableshortmessage matchinguse.
+     * shortmessage languagetype,andtypefieldandvariableshortmessage matchinguse.
      */
     public ?string $language = null;
 

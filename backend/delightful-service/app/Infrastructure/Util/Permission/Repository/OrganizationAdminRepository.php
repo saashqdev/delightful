@@ -98,7 +98,7 @@ readonly class OrganizationAdminRepository implements OrganizationAdminRepositor
             $query->where('user_id', $filters['user_id']);
         }
 
-        // sort:先按whetherfororganizationcreate者sort,again按authorizationtimesort,allisdescending
+        // sort:first按whetherfororganizationcreate者sort,again按authorizationtimesort,allisdescending
         $query->orderBy('is_organization_creator', 'desc')
             ->orderBy('granted_at', 'desc');
 

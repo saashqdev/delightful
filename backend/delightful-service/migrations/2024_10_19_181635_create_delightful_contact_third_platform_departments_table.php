@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('delightful_organization_code', 64)->comment('Magicorganizationencoding');
             $table->string('third_leader_user_id', 64)->comment('departmentsupervisoruser ID')->nullable()->default('');
             $table->string('third_department_id', 64)->comment('thethree方departmentid');
-            $table->string('third_parent_department_id', 64)->comment('thethree方父departmentdepartment ID')->nullable();
+            $table->string('third_parent_department_id', 64)->comment('thethreeparent方departmentdepartment ID')->nullable();
             $table->string('third_name', 64)->comment('thethree方departmentname');
             $table->text('third_i18n_name')->comment('thethree方internationalizationdepartmentname');
             $table->string('third_platform_type')->comment('thethree方platformtype dingTalk/lark/weCom/teamShare');

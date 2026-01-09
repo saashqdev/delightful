@@ -10,7 +10,7 @@ namespace App\Application\Speech\Assembler;
 use App\Application\Speech\DTO\NoteDTO;
 
 /**
- * ASRhint词装配器
+ * ASRhint词assembler
  * responsiblebuildASR相closehint词template.
  */
 class AsrPromptAssembler

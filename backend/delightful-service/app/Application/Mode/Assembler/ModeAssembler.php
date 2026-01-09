@@ -111,7 +111,7 @@ class ModeAssembler
     }
 
     /**
-     * willModeAggregateconvertfor扁平化minutegroupDTOarray.
+     * willModeAggregateconvertforflat化minutegroupDTOarray.
      * @param $providerModels ProviderModelEntity[]
      * @return ModeGroupDetailDTO[]
      */

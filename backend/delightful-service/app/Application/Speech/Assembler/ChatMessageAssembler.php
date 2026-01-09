@@ -16,7 +16,7 @@ use Hyperf\Codec\Json;
 use Hyperf\Contract\TranslatorInterface;
 
 /**
- * chatmessage装配器
+ * chatmessageassembler
  * responsiblebuildASRsummary相closechatmessage.
  */
 readonly class ChatMessageAssembler

@@ -78,7 +78,7 @@ class ChatMemory implements MemoryPersistenceInterface
     }
 
     /**
-     * already经isrowgood序所havemessage.
+     * already经isrowgoodsequence所havemessage.
      * @return array<DelightfulMessageEntity>
      */
     public function getImChatMessages(MemoryQuery $memoryQuery): array
@@ -87,7 +87,7 @@ class ChatMemory implements MemoryPersistenceInterface
 
         // todo back续inquery侧optimize
         // whenfor ai_card message,samemessagehave 20 item,needgo重,butisinquerytime,isnotknowhaveduplicate
-        // inthiswithin先放quantityquery,at mostquery 200 item,然backagainconduct重.
+        // inthiswithinfirst放quantityquery,at mostquery 200 item,然backagainconduct重.
         $seqLimit = ($seqLimit * 20 <= 200) ? $seqLimit * 20 : 200;
 
         $messagesQueryDTO = (new MessagesQueryDTO());

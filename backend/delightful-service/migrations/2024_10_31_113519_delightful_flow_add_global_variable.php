@@ -15,7 +15,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::table('delightful_flows', function (Blueprint $table) {
-            $table->json('global_variable')->nullable()->comment('all局变quantity')->after('nodes');
+            $table->json('global_variable')->nullable()->comment('alllocal changequantity')->after('nodes');
         });
     }
 

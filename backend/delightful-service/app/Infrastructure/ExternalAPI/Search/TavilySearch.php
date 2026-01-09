@@ -88,7 +88,7 @@ class TavilySearch
         string $requestUrl = '',
         string $apiKey = ''
     ): array {
-        // if $query lengthless than 5,use省略numberpopulateto 5
+        // if $query lengthless than 5,useomitnumberpopulateto 5
         if (mb_strlen($query) < 5) {
             $query = mb_str_pad($query, 6, '.');
         }

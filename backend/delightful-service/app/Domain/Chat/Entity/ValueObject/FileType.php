@@ -40,7 +40,7 @@ enum FileType: int
     {
         // fromfileextension名,inferenceoutfiletype
         return match (strtolower($fileExtension)) {
-            // 网址
+            // URL
             'http', 'https' => self::Link,
             // doc
             'doc', 'docx', 'dot' => self::Word,

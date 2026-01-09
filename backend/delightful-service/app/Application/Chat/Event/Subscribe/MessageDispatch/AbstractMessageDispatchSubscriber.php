@@ -25,7 +25,7 @@ use function Hyperf\Support\retry;
 
 /**
  * messageminutehair模piece.
- * processdifferentprioritylevelmessageconsumer,useat写收item方seq.
+ * processdifferentprioritylevelmessageconsumer,useatwrite收item方seq.
  */
 abstract class AbstractMessageDispatchSubscriber extends AbstractSeqConsumer
 {

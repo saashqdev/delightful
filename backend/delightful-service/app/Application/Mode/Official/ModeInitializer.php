@@ -277,7 +277,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the theme and specific requirements of the PPT, or upload files, Be Delightful will help you create a beautiful PPT. Enter to send; Shift + Enter to line break',
-                    'zh_CN' => '您caninput PPT themeandspecificrequire,oruploadfile,超levelMagicwillfor您制asexquisite PPT. Enter send ; Shift + Enter 换line',
+                    'zh_CN' => '您caninput PPT themeandspecificrequire,oruploadfile,超levelMagicwillforyou制asexquisite PPT. Enter send ; Shift + Enter 换line',
                 ]),
                 'identifier' => 'ppt',
                 'icon' => 'IconPresentation',
@@ -327,11 +327,11 @@ class ModeInitializer
                 'id' => '821139708794552321',
                 'name_i18n' => json_encode([
                     'en_US' => 'Report Mode',
-                    'zh_CN' => '研报模type',
+                    'zh_CN' => 'research report模type',
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the theme and specific requirements of your research report, or upload a file, and Super Maggie will write a complete and detailed report for you. Press Enter to send; press Shift + Enter to wrap lines.',
-                    'zh_CN' => '您caninputresearchreportthemeandspecificrequirement,oruploadfile,超levelMagicwillfor您conductcompleteanddetailedreport撰写. Enter send ; Shift + Enter 换line',
+                    'zh_CN' => '您caninputresearchreportthemeandspecificrequirement,oruploadfile,超levelMagicwillfor您conductcompleteanddetailedreportwrite. Enter send ; Shift + Enter 换line',
                 ]),
                 'identifier' => 'report',
                 'icon' => 'IconMicroscope',

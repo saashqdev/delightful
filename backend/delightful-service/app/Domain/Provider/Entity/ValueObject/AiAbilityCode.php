@@ -48,10 +48,10 @@ enum AiAbilityCode: string
     public function description(): string
     {
         return match ($this) {
-            self::Ocr => '本cancoverageplatform所have OCR applicationscenario,precise捕捉andextract PDF,scanitemandeachcategoryimagemiddletextinfo.',
-            self::WebSearch => '本cancoverageplatform AI bigmodelinternetsearchscenario,precisegetand整合mostnewnew闻,事实anddatainfo.',
-            self::RealtimeSpeechRecognition => '本cancoverageplatform所havevoice转textapplicationscenario,实o clocklisteneraudiostreamand逐步outputaccuratetextcontent.',
-            self::AudioFileRecognition => '本cancoverageplatform所haveaudiofile转textapplicationscenario,preciseidentify说话person,audiotextetcinfo.',
+            self::Ocr => '本cancoverageplatform所have OCR applicationscenario,precisecaptureandextract PDF,scanitemandeachcategoryimagemiddletextinfo.',
+            self::WebSearch => '本cancoverageplatform AI bigmodelinternetsearchscenario,precisegetandintegrationmostnewnew闻,factanddatainfo.',
+            self::RealtimeSpeechRecognition => '本cancoverageplatform所havevoice转textapplicationscenario,实o clocklisteneraudiostreamandgraduallyoutputaccuratetextcontent.',
+            self::AudioFileRecognition => '本cancoverageplatform所haveaudiofile转textapplicationscenario,preciseidentifyspeakperson,audiotextetcinfo.',
             self::AutoCompletion => '本cancoverageplatform所haveinputcontentfromauto supplementallapplicationscenario,according tocomprehendupdown文foruserfromauto supplementallcontent,byuserchoosewhetheradopt.',
             self::ContentSummary => '本cancoverageplatform所havecontentsummaryapplicationscenario,tolong篇document,reportorwebpage文chapterconduct深degreeanalyze.',
             self::VisualUnderstanding => '本cancoverageplatform所haveneedletbigmodelconductvisualcomprehendapplicationscenario,precisecomprehendeachtypegraphlikemiddlecontentbyandcomplexclose系.',

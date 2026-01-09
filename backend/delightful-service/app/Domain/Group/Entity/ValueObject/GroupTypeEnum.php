@@ -12,7 +12,7 @@ enum GroupTypeEnum: int
     // insidedepartment group
     case Internal = 1;
 
-    // inside部培训群
+    // insidedepartment training group
     case InternalTraining = 2;
 
     // inside部willdiscussion group
@@ -21,7 +21,7 @@ enum GroupTypeEnum: int
     // inside部project群
     case InternalProject = 4;
 
-    // inside部工single群
+    // insidedepartment工single群
     case InternalWorkOrder = 5;
 
     // outsidedepartment group

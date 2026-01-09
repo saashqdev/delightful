@@ -22,7 +22,7 @@ abstract class AbstractSearchNodeRunner extends NodeRunner
         $filterType = $paramsConfig->getFilterType();
         foreach ($paramsConfig->getFilters() as $filter) {
             $rightValue = $filter->getRightValue()->getValue()->getResult($executionData->getExpressionFieldData());
-            // null,'',0,[],false  directlyskip,谁not事搜thisthese.right侧not填valuenotconductsearch
+            // null,'',0,[],false  directlyskip,谁notsearch事thisthese.right侧not填valuenotconductsearch
             if (empty($rightValue)) {
                 continue;
             }

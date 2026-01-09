@@ -23,7 +23,7 @@ class CreateDelightfulChatGroupTable extends Migration
             $table->bigIncrements('id');
             $table->string('group_name', 64)->comment('群name')->default('');
             $table->string('group_avatar', 255)->comment('群avatar')->default('');
-            $table->string('group_notice', 255)->comment('群公告')->default('');
+            $table->string('group_notice', 255)->comment('群announcement')->default('');
             $table->string('group_owner', 64)->comment('group owner');
             // 群belong toorganization
             $table->string('organization_code', 64)->comment('群organizationencoding')->default('');

@@ -144,7 +144,7 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.group.group_cannot_kick_owner')]
     case GROUP_CANNOT_KICK_OWNER = 3029;
 
-    // 请先转letgroup owneragainexitgroup chat
+    // please transfer firstletgroup owneragainexitgroup chat
         // Transfer ownership before leaving the group
     #[ErrorMessage('chat.group.transfer_owner_before_leave')]
     case GROUP_TRANSFER_OWNER_BEFORE_LEAVE = 3030;

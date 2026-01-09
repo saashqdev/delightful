@@ -57,7 +57,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected array $noRepeatSearchDetails;
 
     /**
-     * summary,minuteforthinkprocedureandsummary两部minute.
+     * summary,minuteforthinkprocedureandsummarytwo departmentsminute.
      */
     protected SummaryItem $summary;
 
@@ -113,7 +113,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
         //            {
         //                "parent_question_id": "0",
         //                "question_id": "1",
-        //                "question": "small米collectionteam flagdownhave哪these品牌"
+        //                "question": "small米collectionteam flagdownhave哪thesebrand"
         //            }
         //        ],
         //        "question_1": [

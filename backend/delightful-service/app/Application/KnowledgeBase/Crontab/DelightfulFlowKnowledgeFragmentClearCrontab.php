@@ -15,7 +15,7 @@ readonly class DelightfulFlowKnowledgeFragmentClearCrontab
 {
     public function execute(): void
     {
-        // schedulecleanup软删knowledge baseandslicesegment onlyretain 1 day
+        // schedulecleanupsoft deleteknowledge baseandslicesegment onlyretain 1 day
 
         $this->clearKnowledge();
         $this->clearDocument();

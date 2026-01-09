@@ -85,7 +85,7 @@ class Template extends AbstractTemplate
             // ifaccording toshort信contentmatchtotemplateid,then变more传入templateidvalue
             $pregMatch && [$templateId, $matchedVariables] = $this->variablePregMatch([$templateId => $pregMatch], $message);
         } elseif (isset($this->variablePregAnalyse[$language])) {
-            // 火山普通short信,andno法according totype + language certaintemplateid,尝试according toshort信textcontent + language certaintemplateidandvariable
+            // 火山normalshort信,andno法according totype + language certaintemplateid,尝试according toshort信textcontent + language certaintemplateidandvariable
             [$templateId, $matchedVariables] = $this->variablePregMatch($this->variablePregAnalyse[$language], $message);
         }
         if (empty($templateId)) {

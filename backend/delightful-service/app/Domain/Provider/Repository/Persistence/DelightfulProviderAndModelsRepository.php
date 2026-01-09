@@ -165,7 +165,7 @@ class DelightfulProviderAndModelsRepository extends AbstractProviderModelReposit
             foreach ($officialModels as $officialModel) {
                 $modelId = $officialModel->getId();
 
-                // checkwhetherhave普通organizationquotemodel
+                // checkwhetherhavenormalorganizationquotemodel
                 if (isset($modelMap[$modelId])) {
                     $organizationModel = $modelMap[$modelId];
 

@@ -9,7 +9,7 @@ namespace App\Domain\Chat\Entity\ValueObject;
 
 enum InstructionDisplayType: int
 {
-    // 普通instruction
+    // normalinstruction
     case Normal = 1;
 
     // systeminstruction

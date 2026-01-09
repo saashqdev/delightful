@@ -203,7 +203,7 @@ class ProviderConfigRepository extends AbstractModelRepository implements Provid
      * according toorganizationandservicequotienttypegetservicequotientconfigurationcolumn表.
      * newlogic:bydatabasemiddleactualconfigurationfor准,toatdatabasemiddlenothaveservicequotienttype,usetemplate补充
      * support多same provider_code configuration(organizationadministratorhand动add)
-     * finalresulthandleo clock,官方organizationwillfilter掉Delightfulservicequotient,普通organizationwillwillDelightfulservicequotient置top.
+     * finalresulthandleo clock,官方organizationwillfilter掉Delightfulservicequotient,normalorganizationwillwillDelightfulservicequotient置top.
      * @param string $organizationCode organizationencoding
      * @param Category $category servicequotienttype
      * @return ProviderConfigDTO[]

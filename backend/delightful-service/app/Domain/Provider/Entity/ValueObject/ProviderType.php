@@ -16,7 +16,7 @@ enum ProviderType: int
     public function label(): string
     {
         return match ($this) {
-            self::Normal => '普通',
+            self::Normal => 'normal',
             self::Official => '官方',
             self::Custom => 'customize',
         };

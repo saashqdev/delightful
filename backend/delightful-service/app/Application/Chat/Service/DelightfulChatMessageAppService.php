@@ -722,7 +722,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         }
 
         $language = CoContext::getLanguage();
-        // 审计需求:ifiseditmessage,writemessageversion表,andupdate原messageversion_id
+        // audit需求:ifiseditmessage,writemessageversion表,andupdate原messageversion_id
         $extra = $senderSeqDTO->getExtra();
         // settinglanguageinfo
         $editMessageOptions = $extra?->getEditMessageOptions();

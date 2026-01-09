@@ -88,7 +88,7 @@ readonly class AsrTitleGeneratorService
                     $noteFileName = $note->generateFileName();
                 }
 
-                // builduserrequestmessage(模拟userchatmessage)
+                // builduserrequestmessage(mockuserchatmessage)
                 $userRequestMessage = $this->buildUserRequestMessage($audioFileName, $noteFileName);
 
                 // use AsrPromptAssembler buildhint词
@@ -226,7 +226,7 @@ readonly class AsrTitleGeneratorService
         try {
             $language = $this->translator->getLocale() ?: 'zh_CN';
 
-            // builduserrequestmessage(模拟userchatmessage)
+            // builduserrequestmessage(mockuserchatmessage)
             $userRequestMessage = $this->buildUserRequestMessage($fileName, null);
 
             // use AsrPromptAssembler buildhint词
@@ -252,7 +252,7 @@ readonly class AsrTitleGeneratorService
     }
 
     /**
-     * builduserrequestmessage(模拟userchatmessage,use国际化text).
+     * builduserrequestmessage(mockuserchatmessage,use国际化text).
      *
      * @param string $audioFileName audiofilename
      * @param null|string $noteFileName 笔记filename(optional)

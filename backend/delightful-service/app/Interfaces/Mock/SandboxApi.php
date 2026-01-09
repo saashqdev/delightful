@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * 沙箱manage Mock service
- * 模拟沙箱create,statusquery,work区statusetcmanageinterface.
+ * mock沙箱create,statusquery,work区statusetcmanageinterface.
  */
 class SandboxApi
 {
@@ -44,7 +44,7 @@ class SandboxApi
             'sandbox_id' => $sandboxId,
         ]);
 
-        // 模拟沙箱already存inand运linemiddle
+        // mock沙箱already存inand运linemiddle
         return [
             'code' => 1000,
             'message' => 'Success',
@@ -73,7 +73,7 @@ class SandboxApi
             'project_oss_path' => $projectOssPath,
         ]);
 
-        // 模拟沙箱createsuccess
+        // mock沙箱createsuccess
         return [
             'code' => 1000,
             'message' => 'Sandbox created successfully',
@@ -99,7 +99,7 @@ class SandboxApi
             'sandbox_id' => $sandboxId,
         ]);
 
-        // 模拟work区then绪status
+        // mockwork区then绪status
         // notice:status mustreturnintegertype,to应 WorkspaceStatus constant
         return [
             'code' => 1000,
@@ -193,7 +193,7 @@ class SandboxApi
             ];
         }
 
-        // 模拟沙箱initializesuccessresponse
+        // mock沙箱initializesuccessresponse
         return [
             'code' => 1000,
             'message' => 'work区initializesuccess',

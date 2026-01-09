@@ -20,7 +20,7 @@ use Psr\Log\LoggerInterface;
 
 /**
  * ASR task Mock service
- * 模拟沙箱middleaudiomergeand ASR taskprocess.
+ * mock沙箱middleaudiomergeand ASR taskprocess.
  */
 class AsrApi
 {
@@ -98,7 +98,7 @@ class AsrApi
         $noteFileConfig = $request->input('note_file');
         $transcriptFileConfig = $request->input('transcript_file');
 
-        // use Redis count器模拟round询enterdegree
+        // use Redis count器mockround询enterdegree
         $countKey = sprintf(AsrRedisKeys::MOCK_FINISH_COUNT, $taskKey);
         $count = (int) $this->redis->incr($countKey);
         $this->redis->expire($countKey, AsrConfig::MOCK_POLLING_TTL); // 10minute钟expire
@@ -130,7 +130,7 @@ class AsrApi
         $targetDir = $audioConfig['target_dir'] ?? '';
         $outputFilename = $audioConfig['output_filename'] ?? 'audio';
 
-        // 模拟true实沙箱linefor:according to output_filename renamedirectory
+        // mocktrue实沙箱linefor:according to output_filename renamedirectory
         // extract原directorymiddletime戳部minute(format:_YYYYMMDD_HHMMSS)
         $timestamp = '';
         if (preg_match('/_(\d{8}_\d{6})$/', $targetDir, $matches)) {
@@ -169,19 +169,19 @@ class AsrApi
             ],
         ];
 
-        // ifhave笔记fileconfigurationandfilesize > 0,addtoreturnmiddle(模拟true实沙箱笔记filecontentcheck)
+        // ifhave笔记fileconfigurationandfilesize > 0,addtoreturnmiddle(mocktrue实沙箱笔记filecontentcheck)
         if ($noteFileConfig !== null && isset($noteFileConfig['target_path'])) {
             // userequestmiddleprovide target_path,whilenotis硬encodingfile名
             // this样cancorrectsupport国际化file名
             $noteFilePath = $noteFileConfig['target_path'];
             $noteFilename = basename($noteFilePath);
 
-            // 模拟true实沙箱linefor:onlywhen笔记filehavecontento clock才returndetailedinfo
+            // mocktrue实沙箱linefor:onlywhen笔记filehavecontento clock才returndetailedinfo
             // thiswithinsimplifyprocess,defaultfalse设havecontent(true实沙箱willcheckfilecontentwhetherforempty)
             $responseData['files']['note_file'] = [
                 'filename' => $noteFilename,
                 'path' => $noteFilePath, // userequestmiddle target_path
-                'size' => 256, // 模拟havecontentfilesize
+                'size' => 256, // mockhavecontentfilesize
                 'duration' => null,
                 'action_performed' => 'renamed_and_moved',
                 'source_path' => $noteFileConfig['source_path'] ?? '',

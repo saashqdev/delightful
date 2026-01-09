@@ -43,7 +43,7 @@ class DelightfulMessageTest extends BaseTest
     }
 
     /**
-     * test模拟usergiveagent hairmessage.
+     * testmockusergiveagent hairmessage.
      * @throws Throwable
      */
     public function testUserSendMessageToAgent()

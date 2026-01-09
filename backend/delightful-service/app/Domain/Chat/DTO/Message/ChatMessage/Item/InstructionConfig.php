@@ -29,7 +29,7 @@ class InstructionConfig extends AbstractEntity
     protected string $description = '';
 
     /**
-     * finger令property,1 普通finger令 2 systemfinger令.
+     * finger令property,1 normalfinger令 2 systemfinger令.
      */
     protected int $displayType = InstructionDisplayType::Normal->value;
 

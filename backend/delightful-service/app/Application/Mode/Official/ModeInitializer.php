@@ -331,7 +331,7 @@ class ModeInitializer
                 ]),
                 'placeholder_i18n' => json_encode([
                     'en_US' => 'You can enter the theme and specific requirements of your research report, or upload a file, and Super Maggie will write a complete and detailed report for you. Press Enter to send; press Shift + Enter to wrap lines.',
-                    'zh_CN' => '您caninputresearch报告themeandspecific需求,oruploadfile,超level麦吉willfor您conductcompleteanddetailed报告撰写. Enter send ; Shift + Enter 换line',
+                    'zh_CN' => '您caninputresearchreportthemeandspecific需求,oruploadfile,超level麦吉willfor您conductcompleteanddetailedreport撰写. Enter send ; Shift + Enter 换line',
                 ]),
                 'identifier' => 'report',
                 'icon' => 'IconMicroscope',

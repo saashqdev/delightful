@@ -129,7 +129,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
         if (ProviderConfigIdAssembler::isAnyProviderTemplate($configId)) {
             return $this->handleTemplateConfigUpdate($dataIsolation, $providerConfigEntity);
         }
-        // 2. 普通configurationupdatelogic(原havelogic)
+        // 2. normalconfigurationupdatelogic(原havelogic)
         return $this->handleNormalConfigUpdate($dataIsolation, $providerConfigEntity);
     }
 
@@ -338,7 +338,7 @@ class ProviderConfigDomainService extends AbstractProviderDomainService
     }
 
     /**
-     * handle普通configurationupdatelogic(原havelogic).
+     * handlenormalconfigurationupdatelogic(原havelogic).
      */
     private function handleNormalConfigUpdate(ProviderDataIsolation $dataIsolation, ProviderConfigEntity $providerConfigEntity): ProviderConfigEntity
     {

@@ -782,7 +782,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             }
             Db::beginTransaction();
             try {
-                // ifthisismessagefirstversion,needbyfrontmessage copy oneshareto message_version 表middle,方便审计
+                // ifthisismessagefirstversion,needbyfrontmessage copy oneshareto message_version 表middle,方便audit
                 if (empty($oldMessageEntity->getCurrentVersionId())) {
                     $messageVersionEntity = (new DelightfulMessageVersionEntity())
                         ->setDelightfulMessageId($oldMessageEntity->getDelightfulMessageId())
@@ -977,7 +977,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             Db::rollBack();
             throw $exception;
         }
-        // front端渲染need:ifisstreamstarto clock,推one普通 seq givefront端,useat渲染占位,butis seq_id andnothave落library.
+        // front端渲染need:ifisstreamstarto clock,推onenormal seq givefront端,useat渲染占位,butis seq_id andnothave落library.
         SocketIOUtil::sendSequenceId($receiveSeqEntity);
         return $senderSeqEntity;
     }

@@ -78,7 +78,7 @@ enum InstructType: int
             return SystemInstructType::requiresContent($type);
         }
 
-        // 普通finger令judge
+        // normalfinger令judge
         return match (self::fromType($type)) {
             self::STATUS => false,  // statustypenotneedcontent
             self::SINGLE_CHOICE, self::SWITCH, self::TEXT => true,  // othertypeneedcontent
@@ -86,7 +86,7 @@ enum InstructType: int
     }
 
     /**
-     * verify普通交互finger令item.
+     * verifynormal交互finger令item.
      */
     public static function validateInstructItem(array &$item, array &$seenOuterNames): void
     {
@@ -130,14 +130,14 @@ enum InstructType: int
             $item['id'] = (string) IdGenerator::getSnowId();
         }
 
-        // ifis普通finger令,verifytype
+        // ifisnormalfinger令,verifytype
         if (! isset($item['display_type'])) {
             self::fromType((int) $item['type'])->validate($item);
         }
     }
 
     /**
-     * verify普通交互finger令group.
+     * verifynormal交互finger令group.
      */
     public static function validateInstructs(array &$instructs): void
     {

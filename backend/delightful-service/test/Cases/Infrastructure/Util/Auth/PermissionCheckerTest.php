@@ -24,7 +24,7 @@ class PermissionCheckerTest extends TestCase
      */
     public function testGlobalAdminHasPermission(): void
     {
-        // 模拟configuration
+        // mockconfiguration
         $permissions = [
             SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001', '13800000002'],
             SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003', '13800000004'],
@@ -49,7 +49,7 @@ class PermissionCheckerTest extends TestCase
      */
     public function testSpecificPermission(): void
     {
-        // 模拟configuration
+        // mockconfiguration
         $permissions = [
             SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'],
             SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003', '13800000004'],
@@ -89,7 +89,7 @@ class PermissionCheckerTest extends TestCase
      */
     public function testNoPermission(): void
     {
-        // 模拟configuration
+        // mockconfiguration
         $permissions = [
             SuperPermissionEnum::GLOBAL_ADMIN->value => ['13800000001'],
             SuperPermissionEnum::FLOW_ADMIN->value => ['13800000003', '13800000004'],

@@ -11,7 +11,7 @@ use function Hyperf\Translation\__;
 
 class InstructDisplayType
 {
-    public const NORMAL = 1;    // 普通
+    public const NORMAL = 1;    // normal
 
     public const SYSTEM = 2;    // system
 

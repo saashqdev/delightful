@@ -227,7 +227,7 @@ class DelightfulAgentDomainService
     public function updateInstruct(string $organizationCode, string $agentId, array $instructs, string $userId = '', bool $valid = true): array
     {
         if ($valid) {
-            // validation普通交互finger令
+            // validationnormal交互finger令
             InstructType::validateInstructs($instructs);
 
             // ensuresystem交互finger令存in,if缺少then补充

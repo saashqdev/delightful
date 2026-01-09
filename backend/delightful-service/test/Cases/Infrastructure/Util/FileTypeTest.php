@@ -88,24 +88,24 @@ class FileTypeTest extends TestCase
     }
 
     /**
-     * testfromHTTPheadinfogettype(need模拟HTTPresponse).
+     * testfromHTTPheadinfogettype(needmockHTTPresponse).
      *
-     * notice:thistestmaybeneedusefunction模拟,ifprojectmiddlenothaveconfigurationfunction模拟,
+     * notice:thistestmaybeneedusefunctionmock,ifprojectmiddlenothaveconfigurationfunctionmock,
      * canwillthistestmarkforskiporusetrue实URLconducttest
      */
     public function testGetTypeFromHeaders()
     {
-        // markthistestforskip,因forneed模拟all局function
-        $this->markTestSkipped('needfunction模拟feature才cancompletetest');
+        // markthistestforskip,因forneedmockall局function
+        $this->markTestSkipped('needfunctionmockfeature才cancompletetest');
     }
 
     /**
      * testno法identifyfiletypeo clockthrowexception.
-     * 同样needfunction模拟support
+     * 同样needfunctionmocksupport
      */
     public function testInvalidFileType()
     {
-        $this->markTestSkipped('needfunction模拟feature才cancompletetest');
+        $this->markTestSkipped('needfunctionmockfeature才cancompletetest');
     }
 
     /**
@@ -113,6 +113,6 @@ class FileTypeTest extends TestCase
      */
     public function testFileTooLarge()
     {
-        $this->markTestSkipped('needfunction模拟feature才cancompletetest');
+        $this->markTestSkipped('needfunctionmockfeature才cancompletetest');
     }
 }

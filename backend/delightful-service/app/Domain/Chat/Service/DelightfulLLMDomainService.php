@@ -893,7 +893,7 @@ class DelightfulLLMDomainService
         $subQuestions = [];
         // based onqueryandcontextget相closequestion
         try {
-            // use array_map and join functioncome模拟 Python middle join method
+            // use array_map and join functioncomemock Python middle join method
             $contextString = '';
             foreach ($searchContexts as $searchContext) {
                 $contextString .= $searchContext->getSnippet() . "\n\n";

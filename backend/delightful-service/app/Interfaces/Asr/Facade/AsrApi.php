@@ -386,12 +386,12 @@ class AsrApi extends AbstractApi
                 ExceptionBuilder::throw(AsrErrorCode::TaskIsSummarizing);
             }
 
-            // statuscheck 1:taskalreadycomplete,notallow报告status(unlessis canceled)
+            // statuscheck 1:taskalreadycomplete,notallowreportstatus(unlessis canceled)
             if ($statusEnum !== AsrRecordingStatusEnum::CANCELED && $taskStatus->isSummaryCompleted()) {
                 ExceptionBuilder::throw(AsrErrorCode::TaskAlreadyCompleted);
             }
 
-            // statuscheck 2:taskalreadycancel,notallowagain报告otherstatus
+            // statuscheck 2:taskalreadycancel,notallowagainreportotherstatus
             if (
                 $taskStatus->recordingStatus === AsrRecordingStatusEnum::CANCELED->value
                 && $statusEnum !== AsrRecordingStatusEnum::CANCELED

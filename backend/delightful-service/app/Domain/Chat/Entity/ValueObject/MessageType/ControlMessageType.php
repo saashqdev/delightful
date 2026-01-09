@@ -78,7 +78,7 @@ enum ControlMessageType: string
     // 解散group chat
     case GroupDisband = 'group_disband';
 
-    // 群memberrole变more(batchquantitysetadministrator/普通member)
+    // 群memberrole变more(batchquantitysetadministrator/normalmember)
     case GroupUserRoleChange = 'group_user_role_change';
 
     // 转let群主

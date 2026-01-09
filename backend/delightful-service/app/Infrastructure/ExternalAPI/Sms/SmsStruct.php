@@ -34,7 +34,7 @@ class SmsStruct
     public ?array $variables = null;
 
     /**
-     * 普通short信纯textcontent.
+     * normalshort信纯textcontent.
      * 如: 灯塔justin邀请youadd入企业,point击linkregisterorlogin https://xxxx.com/sso?r_ce=vB5932.
      */
     public ?string $content = null;

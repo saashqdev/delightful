@@ -207,7 +207,7 @@ class DingRobotChat implements ThirdPlatformChatInterface
     }
 
     /**
-     * create普通group.
+     * createnormalgroup.
      * @see https://oapi.dingtalk.com/chat/create
      */
     public function createGroup(ThirdPlatformCreateGroup $params): string

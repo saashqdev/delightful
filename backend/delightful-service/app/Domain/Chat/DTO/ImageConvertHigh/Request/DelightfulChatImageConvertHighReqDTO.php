@@ -16,7 +16,7 @@ class DelightfulChatImageConvertHighReqDTO
 
     public string $conversationId;
 
-    public string $topicId = ''; // 话题 id,canfornull
+    public string $topicId = ''; // topic id,canfornull
 
     public string $appMessageId;
 

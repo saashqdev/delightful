@@ -87,7 +87,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         );
         $this->logger->info(sprintf('mindSearch aggregateSearch startaggregatesearch  searchKeyword:%s searchtype:%s', $searchKeyword, $dto->getSearchDeepLevel()->name));
         $antiRepeatKey = md5($conversationId . $topicId);
-        // 防重:if同oneconversation同one话题down,2secondinsidehaveduplicatemessage,not触hairprocess
+        // 防重:if同oneconversation同onetopicdown,2secondinsidehaveduplicatemessage,not触hairprocess
         if (! $this->redis->set($antiRepeatKey, '1', ['nx', 'ex' => 2])) {
             return;
         }
@@ -109,7 +109,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         try {
             # initializestreammessageandsendsearch深degree
             $this->initStreamAndSendSearchDeepLevel($dto);
-            // get im middlefinger定conversationdownsome话题historymessage,asfor llm historymessage
+            // get im middlefinger定conversationdownsometopichistorymessage,asfor llm historymessage
             $rawHistoryMessages = $this->getDelightfulChatMessages($dto->getConversationId(), $dto->getTopicId());
             $dto->setDelightfulChatMessageHistory($rawHistoryMessages);
 
@@ -172,7 +172,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $topicId = $dto->getTopicId();
         $searchKeyword = $dto->getUserMessage();
         $antiRepeatKey = md5($conversationId . $topicId . $searchKeyword);
-        // 防重(notknow哪comebug):if同oneconversation同one话题down,2secondinsidehaveduplicatemessage,not触hairprocess
+        // 防重(notknow哪comebug):if同oneconversation同onetopicdown,2secondinsidehaveduplicatemessage,not触hairprocess
         if (! $this->redis->set($antiRepeatKey, '1', ['nx', 'ex' => 2])) {
             return null;
         }
@@ -907,7 +907,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     }
 
     /**
-     * get immiddlefinger定conversationdownsome话题historymessage,asfor llm historymessage.
+     * get immiddlefinger定conversationdownsometopichistorymessage,asfor llm historymessage.
      */
     private function getDelightfulChatMessages(string $delightfulChatConversationId, string $topicId): array
     {

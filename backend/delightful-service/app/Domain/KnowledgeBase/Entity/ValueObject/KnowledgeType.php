@@ -15,7 +15,7 @@ enum KnowledgeType: int
     case UserKnowledgeBase = 1;
 
     /*
-     * user话题
+     * usertopic
      */
     case UserTopic = 4;
 

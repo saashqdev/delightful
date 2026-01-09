@@ -462,7 +462,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * avoid seq table承载too多feature,addtoo多index,thereforewill话题messagesingle独writeto topic_messages tablemiddle.
+     * avoid seq table承载too多feature,addtoo多index,thereforewilltopicmessagesingle独writeto topic_messages tablemiddle.
      */
     public function createTopicMessage(DelightfulSeqEntity $seqEntity, ?string $topicId = null): ?DelightfulTopicMessageEntity
     {
@@ -476,7 +476,7 @@ abstract class AbstractDomainService
         if (! empty($seqEntity->getExtra()?->getEditMessageOptions()?->getDelightfulMessageId())) {
             return null;
         }
-        // check话题whether存in
+        // checktopicwhether存in
         $topicDTO = new DelightfulTopicEntity();
         $topicDTO->setTopicId($topicId);
         $topicDTO->setConversationId($seqEntity->getConversationId());
@@ -496,7 +496,7 @@ abstract class AbstractDomainService
     }
 
     /**
-     * user主动create话题handle.
+     * user主动createtopichandle.
      * @throws Throwable
      */
     public function userCreateTopicHandler(TopicCreateMessage $messageStruct, DataIsolation $dataIsolation): DelightfulTopicEntity
@@ -504,14 +504,14 @@ abstract class AbstractDomainService
         Db::beginTransaction();
         try {
             $conversationId = $messageStruct->getConversationId();
-            // formessagesend方create话题
+            // formessagesend方createtopic
             $topicDTO = new DelightfulTopicEntity();
             $topicDTO->setOrganizationCode($dataIsolation->getCurrentOrganizationCode());
             $topicDTO->setConversationId($conversationId);
             $topicDTO->setName($messageStruct->getName());
             $topicDTO->setDescription($messageStruct->getDescription());
             $senderTopicEntity = $this->delightfulChatTopicRepository->createTopic($topicDTO);
-            // formessagereceive方create话题
+            // formessagereceive方createtopic
             $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($conversationId);
             if ($receiveConversationEntity === null) {
                 // justaddgood友,receive方conversation id alsonotgenerate
@@ -523,7 +523,7 @@ abstract class AbstractDomainService
             $receiveTopicDTO->setConversationId($receiveConversationEntity->getId());
             $receiveTopicDTO->setOrganizationCode($receiveConversationEntity->getUserOrganizationCode());
             $receiveTopicDTO->setDescription($senderTopicEntity->getDescription());
-            // for收item方createonenew话题
+            // for收item方createonenewtopic
             $this->delightfulChatTopicRepository->createTopic($receiveTopicDTO);
             return $senderTopicEntity;
         } catch (Throwable $exception) {

@@ -30,8 +30,8 @@ return new class extends Migration {
             $table->string('country_code', 16)->comment('国际冠码')->default('');
             // hand机number
             $table->string('phone', 64)->comment('hand机number')->default('');
-            // 邮箱
-            $table->string('email', 64)->comment('邮箱')->default('');
+            // mailbox
+            $table->string('email', 64)->comment('mailbox')->default('');
             // true名
             $table->string('real_name', 64)->comment('true名')->default('');
             // property别

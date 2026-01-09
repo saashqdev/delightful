@@ -24,7 +24,7 @@ class ClientMessage extends AbstractEntity
     // customer端generate,needios/安卓/webthree端共同certainonegeneratealgorithm.useat告知customer端,delightful_message_idbycome
     protected ?string $appMessageId;
 
-    // 话题id
+    // topicid
     protected ?string $topicId;
 
     // messagesmallcategory.controlmessagesmallcategory:already读return执;withdraw;edit;入群/退群;organization架构变动; . showmessage:text,voice,img,file,videoetc

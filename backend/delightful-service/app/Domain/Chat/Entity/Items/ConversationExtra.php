@@ -11,7 +11,7 @@ use App\Domain\Agent\Entity\AbstractEntity;
 
 class ConversationExtra extends AbstractEntity
 {
-    // default话题Id
+    // defaulttopicId
     protected string $defaultTopicId;
 
     public function __construct(?array $data = null)

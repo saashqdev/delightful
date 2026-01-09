@@ -83,7 +83,7 @@ readonly class LoginAppService
     }
 
     /**
-     * verify邮箱login.
+     * verifymailboxlogin.
      */
     private function verifyEmailAccount(CheckLoginRequest $request): AccountEntity
     {

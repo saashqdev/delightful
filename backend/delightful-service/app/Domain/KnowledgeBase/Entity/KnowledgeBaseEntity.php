@@ -530,8 +530,8 @@ class KnowledgeBaseEntity extends AbstractKnowledgeBaseEntity
     public static function createCurrentTopicTemplate(string $organizationCode, string $creator): KnowledgeBaseEntity
     {
         $self = self::createTemplate($organizationCode, ConstValue::KNOWLEDGE_USER_CURRENT_TOPIC, $creator);
-        $self->setName('current话题');
-        $self->setDescription("{$creator} 话题");
+        $self->setName('currenttopic');
+        $self->setDescription("{$creator} topic");
         $self->setType(KnowledgeType::UserTopic->value);
         return $self;
     }

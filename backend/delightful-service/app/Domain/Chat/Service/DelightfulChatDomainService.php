@@ -382,11 +382,11 @@ class DelightfulChatDomainService extends AbstractDomainService
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR, 'chat.common.param_error', ['param' => 'timeEnd']);
         }
         if ($messagesQueryDTO->getTopicId() === null) {
-            // getconversationwindow所havemessage. have话题 + nothave话题
+            // getconversationwindow所havemessage. havetopic + nothavetopic
             return $this->delightfulSeqRepository->getConversationChatMessages($messagesQueryDTO);
         }
         if ($messagesQueryDTO->getTopicId() === '') {
-            // todo get本conversationwindowmiddle,notcontainany话题message.
+            // todo get本conversationwindowmiddle,notcontainanytopicmessage.
             return $this->delightfulSeqRepository->getConversationChatMessages($messagesQueryDTO);
         }
         return $this->delightfulChatTopicRepository->getTopicMessages($messagesQueryDTO);
@@ -405,7 +405,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         if ($messagesQueryDTO->getLimit() > 1000) {
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR, 'chat.common.param_error', ['param' => 'limit']);
         }
-        // todo get本conversationwindowmiddle,notcontainany话题message.
+        // todo get本conversationwindowmiddle,notcontainanytopicmessage.
         return $this->delightfulSeqRepository->getConversationsChatMessages($messagesQueryDTO, $messagesQueryDTO->getConversationIds());
     }
 
@@ -623,7 +623,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         // group装bigmodelmessagerequest
         $messagesQueryDTO = new MessagesQueryDTO();
         $messagesQueryDTO->setConversationId($conversationId)->setLimit(200)->setTopicId($topicId);
-        // get话题most近 20 itemconversationrecord
+        // gettopicmost近 20 itemconversationrecord
         $clientSeqResponseDTOS = $this->getConversationChatMessages($conversationId, $messagesQueryDTO);
 
         $userMessages = [];
@@ -829,7 +829,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     /**
      * pass topic_id get conversation_id.
      *
-     * @param string $topicId 话题ID
+     * @param string $topicId topicID
      * @return string conversation_id
      */
     public function getConversationIdByTopicId(string $topicId): string
@@ -957,9 +957,9 @@ class DelightfulChatDomainService extends AbstractDomainService
             $senderSeqEntity = $this->generateSenderSequenceByChatMessage($senderSeqDTO, $messageEntity, $senderConversationEntity);
             // immediatelygive收item方generate seq
             $receiveSeqEntity = $this->generateReceiveSequenceByChatMessage($senderSeqEntity, $messageEntity);
-            // hairitem方话题message
+            // hairitem方topicmessage
             $this->createTopicMessage($senderSeqEntity);
-            // 收item方话题message
+            // 收item方topicmessage
             $this->createTopicMessage($receiveSeqEntity);
             // cachestreammessage
             $cachedStreamMessageKey = $this->getStreamMessageCacheKey($createStreamSeqDTO->getAppMessageId());
@@ -1122,16 +1122,16 @@ class DelightfulChatDomainService extends AbstractDomainService
         if ($editOptions !== null) {
             $receiveSeqExtra->setEditMessageOptions($editOptions);
         }
-        // handle话题
+        // handletopic
         $senderTopicId = $senderSeqExtra->getTopicId();
         if (empty($senderTopicId)) {
             return $receiveSeqExtra;
         }
-        // 收hairdoublehair话题idone致,butis话题所属conversationiddifferent
+        // 收hairdoublehairtopicidone致,butistopic所属conversationiddifferent
         $receiveSeqExtra->setTopicId($senderTopicId);
         // hairitem方所inenvironmentid
         $receiveSeqExtra->setDelightfulEnvId($senderSeqEntity->getExtra()?->getDelightfulEnvId());
-        // judge收item方话题 idwhether存in
+        // judge收item方topic idwhether存in
         $topicDTO = new DelightfulTopicEntity();
         $topicDTO->setConversationId($receiveConversationEntity->getId());
         $topicDTO->setTopicId($senderTopicId);
@@ -1140,7 +1140,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         $topicDTO->setDescription('');
         $topicEntity = $this->delightfulChatTopicRepository->getTopicEntity($topicDTO);
         if ($topicEntity === null) {
-            // for收item方create话题
+            // for收item方createtopic
             $this->delightfulChatTopicRepository->createTopic($topicDTO);
         }
         return $receiveSeqExtra;

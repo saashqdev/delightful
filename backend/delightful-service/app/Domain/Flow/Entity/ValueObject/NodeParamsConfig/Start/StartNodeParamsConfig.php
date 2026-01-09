@@ -309,7 +309,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                 "type": "string",
                 "key": "topic_id",
                 "sort": 5,
-                "title": "话题 ID",
+                "title": "topic ID",
                 "description": "",
                 "items": null,
                 "properties": null,

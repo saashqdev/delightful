@@ -20,7 +20,7 @@ return new class extends Migration {
         Schema::create('delightful_attachments', function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
             $table->unsignedBigInteger('target_id');
-            $table->unsignedTinyInteger('target_type')->comment('0-unknown1-待办');
+            $table->unsignedTinyInteger('target_type')->comment('0-unknown1-todo');
             $table->string('uid', 64);
             $table->text('key');
             $table->text('name');

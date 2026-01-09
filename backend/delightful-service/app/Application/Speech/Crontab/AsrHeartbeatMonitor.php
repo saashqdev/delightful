@@ -192,7 +192,7 @@ class AsrHeartbeatMonitor
             return false;
         }
 
-        // ifnothaveprojectIDor话题ID,not触hair
+        // ifnothaveprojectIDortopicID,not触hair
         if (empty($taskStatus->projectId) || empty($taskStatus->topicId)) {
             return false;
         }

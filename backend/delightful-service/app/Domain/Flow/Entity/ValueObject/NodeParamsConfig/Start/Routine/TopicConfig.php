@@ -12,7 +12,7 @@ use Delightful\FlowExprEngine\Component;
 class TopicConfig
 {
     /**
-     * @var string assigned_topic finger定话题 / recent_topic most近话题
+     * @var string assigned_topic finger定topic / recent_topic most近topic
      */
     private string $type;
 

@@ -17,17 +17,17 @@ return new class extends Migration {
         if (Schema::hasTable('delightful_chat_topic_messages')) {
             return;
         }
-        // 话题相closemessagetable
-        // 话题contain message_id list. notinseqtableadd话题idfield,avoidseq承载featuretoo多,needaddtoo多index
+        // topic相closemessagetable
+        // topiccontain message_id list. notinseqtableaddtopicidfield,avoidseq承载featuretoo多,needaddtoo多index
         Schema::create('delightful_chat_topic_messages', static function (Blueprint $table) {
             // messageid
-            $table->bigIncrements('seq_id')->comment('message序columnid.notinseqtableadd话题idfield,avoidseq承载featuretoo多,needaddtoo多index');
+            $table->bigIncrements('seq_id')->comment('message序columnid.notinseqtableaddtopicidfield,avoidseq承载featuretoo多,needaddtoo多index');
             // sessionid. 冗remainderfield
             $table->string('conversation_id', 64)->comment('message所属sessionid');
             // organizationencoding. 冗remainderfield
             $table->string('organization_code', 64)->comment('organizationencoding');
-            // 话题id
-            $table->unsignedBigInteger('topic_id')->comment('message所属话题id');
+            // topicid
+            $table->unsignedBigInteger('topic_id')->comment('message所属topicid');
             # index
             $table->index(['conversation_id', 'topic_id'], 'idx_conversation_topic_id');
             $table->timestamps();

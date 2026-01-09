@@ -31,7 +31,7 @@ class RoutineConfig
         private ?array $values = null,
         // enddate,thedatebacknotgeneratedata
         private readonly ?DateTime $deadline = null,
-        // 话题configuration
+        // topicconfiguration
         private readonly ?TopicConfig $topicConfig = null
     ) {
         // saveconfigurationo clocknotagainstronglinedetect,放togeneraterule处detect

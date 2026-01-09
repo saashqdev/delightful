@@ -15,7 +15,7 @@ use App\Infrastructure\Core\AbstractDTO;
 class CheckLoginRequest extends AbstractDTO
 {
     /**
-     * 邮箱.
+     * mailbox.
      */
     protected string $email = '';
 

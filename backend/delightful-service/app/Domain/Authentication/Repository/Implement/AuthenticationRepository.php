@@ -29,7 +29,7 @@ class AuthenticationRepository implements AuthenticationRepositoryInterface
     }
 
     /**
-     * pass邮箱find账number.
+     * passmailboxfind账number.
      */
     public function findAccountByEmail(string $email): ?AccountEntity
     {

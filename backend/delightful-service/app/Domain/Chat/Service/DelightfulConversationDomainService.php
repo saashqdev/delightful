@@ -229,7 +229,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * use intermediate eventconductmiddlebetweenstatemessagepush,notpersistencemessage. support话题level别“justininputmiddle”
+     * use intermediate eventconductmiddlebetweenstatemessagepush,notpersistencemessage. supporttopiclevel别“justininputmiddle”
      * 直接操asto方conversationwindow,whilenotismessagehairinfrom己conversationwindow然backagain经bymessageminutehair模pieceforwardtoto方conversationwindow.
      */
     public function agentOperateConversationStatusV2(ControlMessageType $controlMessageType, string $agentConversationId, ?string $topicId = null): bool

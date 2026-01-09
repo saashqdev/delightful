@@ -34,7 +34,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     ) {
     }
 
-    // create话题
+    // createtopic
     public function createTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity
     {
         if (empty($delightfulTopicEntity->getOrganizationCode())) {
@@ -60,7 +60,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
         return $delightfulTopicEntity;
     }
 
-    // update话题
+    // updatetopic
     public function updateTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity
     {
         $name = $delightfulTopicEntity->getName();
@@ -84,7 +84,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
         return $delightfulTopicEntity;
     }
 
-    // delete话题
+    // deletetopic
     public function deleteTopic(DelightfulTopicEntity $delightfulTopicDTO): int
     {
         $this->checkEntity($delightfulTopicDTO);
@@ -188,7 +188,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     /**
-     * 按timerangegetsessiondownsome话题message.
+     * 按timerangegetsessiondownsometopicmessage.
      * @return ClientSequenceResponse[]
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array
@@ -235,7 +235,7 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     }
 
     /**
-     * passtopic_idget话题info(notneedconversation_id).
+     * passtopic_idgettopicinfo(notneedconversation_id).
      */
     public function getTopicByTopicId(string $topicId): ?DelightfulTopicEntity
     {
@@ -265,8 +265,8 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
 
     /**
      * Get topics by topic ID.
-     * @param string $topicId 话题ID
-     * @return DelightfulTopicEntity[] 话题实bodyarray
+     * @param string $topicId topicID
+     * @return DelightfulTopicEntity[] topic实bodyarray
      */
     public function getTopicsByTopicId(string $topicId): array
     {
@@ -278,9 +278,9 @@ class DelightfulChatTopicRepository implements DelightfulChatTopicRepositoryInte
     /**
      * Get topic messages by conversation ID, topic ID and max seq ID.
      * @param string $conversationId sessionID
-     * @param string $topicId 话题ID
+     * @param string $topicId topicID
      * @param int $maxSeqId mostbig序columnID(containtheID)
-     * @return DelightfulTopicMessageEntity[] 话题message实bodyarray
+     * @return DelightfulTopicMessageEntity[] topicmessage实bodyarray
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array
     {

@@ -174,7 +174,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->assertSame(1000, $response['code']);
         $projectId = $response['data']['project']['id'];*/
 
-        // 话题columntable
+        // topiccolumntable
         $workspaceId = $this->workspaceId;
         $projectId = $this->projectId;
 
@@ -182,17 +182,17 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->updateProject($workspaceId, $projectId);
 
         // ensurenotwillto原havefeature造becomeimpact
-        // create话题
+        // createtopic
         $topicId = $this->createTopic($workspaceId, $projectId);
-        // 话题columntable
+        // topiccolumntable
         $this->topicList($workspaceId, $projectId);
-        // update话题
+        // updatetopic
         $this->renameTopic($workspaceId, $projectId, $topicId);
-        // share话题
+        // sharetopic
         $this->createTopicShare($workspaceId, $projectId, $topicId);
         // projectfile
         $this->attachments($workspaceId, $projectId, $topicId);
-        // delete话题
+        // deletetopic
         $this->deleteTopic($workspaceId, $projectId, $topicId);
 
         $this->updateEmptyMembers($projectId);
@@ -224,13 +224,13 @@ class ProjectMemberApiTest extends AbstractApiTest
         $this->collaborationProjects();
         $this->collaborationProjects('test');
 
-        // create话题
+        // createtopic
         $topicId = $this->createTopic($workspaceId, $projectId);
-        // 话题columntable
+        // topiccolumntable
         $this->topicList($workspaceId, $projectId);
-        // update话题
+        // updatetopic
         $this->renameTopic($workspaceId, $projectId, $topicId);
-        // share话题
+        // sharetopic
         $this->createTopicShare($workspaceId, $projectId, $topicId);
         // sendmessage
         //        $this->sendMessage($workspaceId, $projectId, $topicId);
@@ -239,7 +239,7 @@ class ProjectMemberApiTest extends AbstractApiTest
         // renameprojectfile
         //        $this->renameAttachments((string) $file['file_id']);
 
-        // delete话题
+        // deletetopic
         $this->deleteTopic($workspaceId, $projectId, $topicId);
 
         // 9. testproject置topfeature

@@ -60,14 +60,14 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
             ControlMessageType::ReadMessage,
             ControlMessageType::RevokeMessage,
             ControlMessageType::EditMessage => $this->controlDomainService->clientOperateMessageStatus($messageDTO, $dataIsolation),
-            // create,update,delete,set话题
+            // create,update,delete,settopic
             ControlMessageType::CreateTopic,
             ControlMessageType::UpdateTopic,
             ControlMessageType::DeleteTopic, => $this->clientOperateTopicMessage($messageDTO, $dataIsolation),
             // (single聊sessionwindowmiddle)startinput/endinput
             ControlMessageType::StartConversationInput,
             ControlMessageType::EndConversationInput => $this->conversationDomainService->clientOperateConversationStatus($messageDTO, $dataIsolation),
-            // setsession话题,准备废弃
+            // setsessiontopic,准备废弃
             ControlMessageType::SetConversationTopic => [],
             default => ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR),
         };
@@ -95,7 +95,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
             case ControlMessageType::CreateTopic:
             case ControlMessageType::UpdateTopic:
             case ControlMessageType::DeleteTopic:
-                // 话题操as
+                // topic操as
                 $this->handlerMQTopicControlMessage($delightfulSeqEntity);
                 break;
             case ControlMessageType::GroupCreate:
@@ -127,7 +127,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
         $seqEntity = $this->controlDomainService->generateSenderSequenceByControlMessage($messageDTO, $conversationId);
         // asyncwillgeneratemessagestreamnotifyuserother设备.
         $seqCreatedEvent = $this->controlDomainService->pushControlSequence($seqEntity);
-        // asyncminutehaircontrolmessage,to方操assession话题
+        // asyncminutehaircontrolmessage,to方操assessiontopic
         $this->controlDomainService->dispatchSeq($seqCreatedEvent);
         // willmessagestreamreturngivecurrentcustomer端! butisalsoiswillasyncpushgiveuser所haveonlinecustomer端.
         return SeqAssembler::getClientSeqStruct($seqEntity)->toArray();
@@ -136,7 +136,7 @@ class DelightfulControlMessageAppService extends DelightfulSeqAppService
     private function handlerMQTopicControlMessage(DelightfulSeqEntity $delightfulSeqEntity): void
     {
         $receiveSeqEntity = $this->topicDomainService->dispatchMQTopicOperation($delightfulSeqEntity);
-        // asyncpushgive收item方,havenew话题
+        // asyncpushgive收item方,havenewtopic
         $receiveSeqEntity && $this->controlDomainService->pushControlSequence($receiveSeqEntity);
     }
 }

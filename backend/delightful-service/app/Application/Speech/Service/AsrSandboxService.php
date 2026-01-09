@@ -683,7 +683,7 @@ readonly class AsrSandboxService
             ExceptionBuilder::throw(
                 AsrErrorCode::SandboxTaskCreationFailed,
                 '',
-                ['message' => '话题not存in']
+                ['message' => 'topicnot存in']
             );
         }
 
@@ -734,14 +734,14 @@ readonly class AsrSandboxService
             'task_id' => $taskEntity->getId(),
         ]);
 
-        // update话题statusforalreadycomplete(match DDD minutelayer,pass Domain Service 操as)
+        // updatetopicstatusforalreadycomplete(match DDD minutelayer,pass Domain Service 操as)
         $this->topicDomainService->updateTopicStatus(
             (int) $taskStatus->topicId,
             $taskEntity->getId(),
             TaskStatus::FINISHED
         );
 
-        $this->logger->info('话题statusalreadyupdatefor finished', [
+        $this->logger->info('topicstatusalreadyupdatefor finished', [
             'task_key' => $taskStatus->taskKey,
             'topic_id' => $taskStatus->topicId,
             'task_id' => $taskEntity->getId(),
@@ -841,7 +841,7 @@ readonly class AsrSandboxService
             ExceptionBuilder::throw(
                 AsrErrorCode::SandboxTaskCreationFailed,
                 '',
-                ['message' => '话题not存in']
+                ['message' => 'topicnot存in']
             );
         }
 

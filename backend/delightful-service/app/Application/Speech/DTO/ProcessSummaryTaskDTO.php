@@ -14,8 +14,8 @@ readonly class ProcessSummaryTaskDTO
         public string $organizationCode,
         public string $projectId,
         public string $userId,
-        public string $topicId, // BeAgent话题ID
-        public string $chatTopicId, // Chat话题ID
+        public string $topicId, // BeAgenttopicID
+        public string $chatTopicId, // ChattopicID
         public string $conversationId,
         public string $modelId
     ) {

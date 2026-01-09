@@ -91,7 +91,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         );
         $this->logger->info(sprintf('mindSearch aggregateSearch startaggregatesearch  searchKeyword:%s searchtype:%s', $searchKeyword, $dto->getSearchDeepLevel()->name));
         $antiRepeatKey = md5($conversationId . $topicId . $searchKeyword);
-        // 防重(notknow哪comebug):if同oneconversation同one话题down,2secondinsidehaveduplicatemessage,not触hairprocess
+        // 防重(notknow哪comebug):if同oneconversation同onetopicdown,2secondinsidehaveduplicatemessage,not触hairprocess
         if (! $this->redis->set($antiRepeatKey, '1', ['nx', 'ex' => 2])) {
             return;
         }
@@ -113,7 +113,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         try {
             // 1.sendping pongresponse,representstartreply
             $this->sendPingPong($dto);
-            // get im middlefinger定conversationdownsome话题historymessage,asfor llm historymessage
+            // get im middlefinger定conversationdownsometopichistorymessage,asfor llm historymessage
             $rawHistoryMessages = $this->getDelightfulChatMessages($dto->getConversationId(), $dto->getTopicId());
             $dto->setDelightfulChatMessageHistory($rawHistoryMessages);
             // 3.0 sendsearch深degree
@@ -183,7 +183,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
         $topicId = $dto->getTopicId();
         $searchKeyword = $dto->getUserMessage();
         $antiRepeatKey = md5($conversationId . $topicId . $searchKeyword);
-        // 防重(notknow哪comebug):if同oneconversation同one话题down,2secondinsidehaveduplicatemessage,not触hairprocess
+        // 防重(notknow哪comebug):if同oneconversation同onetopicdown,2secondinsidehaveduplicatemessage,not触hairprocess
         if (! $this->redis->set($antiRepeatKey, '1', ['nx', 'ex' => 2])) {
             return null;
         }
@@ -1013,12 +1013,12 @@ class DelightfulChatAISearchAppService extends AbstractAppService
             ->setSeqType($messageInterface->getMessageTypeEnum())
             ->setAppMessageId($appMessageId)
             ->setExtra($extra);
-        // setting话题 id
+        // settingtopic id
         $this->getDelightfulChatMessageAppService()->aiSendMessage($seqDTO, $appMessageId);
     }
 
     /**
-     * get immiddlefinger定conversationdownsome话题historymessage,asfor llm historymessage.
+     * get immiddlefinger定conversationdownsometopichistorymessage,asfor llm historymessage.
      */
     private function getDelightfulChatMessages(string $delightfulChatConversationId, string $topicId): array
     {

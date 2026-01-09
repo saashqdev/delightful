@@ -275,7 +275,7 @@ class DelightfulChatImageConvertHighAppService extends AbstractAIImageAppService
             ->setAppMessageId($appMessageId)
             ->setReferMessageId($referMessageId)
             ->setExtra($extra);
-        // set话题 id
+        // settopic id
         return $this->getDelightfulChatMessageAppService()->aiSendMessage($seqDTO, $appMessageId, doNotParseReferMessageId: true);
     }
 

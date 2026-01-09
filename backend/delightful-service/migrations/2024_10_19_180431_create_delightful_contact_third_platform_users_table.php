@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->string('third_nick_name', 64)->nullable()->default('')->comment('员工昵称');
             $table->text('third_avatar')->nullable()->comment('avatar');
             $table->tinyInteger('third_gender')->default(0)->comment('员工property别 0-unknown 1-男 2-女');
-            $table->string('third_email', 128)->nullable()->default('')->comment('邮箱');
+            $table->string('third_email', 128)->nullable()->default('')->comment('mailbox');
             $table->string('third_mobile', 64)->nullable()->default('')->comment('thethree方platform员工hand机number');
             $table->string('third_id_number', 64)->nullable()->default('')->comment('员工身share证');
             $table->text('third_platform_users_extra')->comment('额outsideinfo');

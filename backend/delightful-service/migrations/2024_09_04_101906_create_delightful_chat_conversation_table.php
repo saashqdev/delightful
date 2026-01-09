@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('user_id', 64)->comment('userid.thissessionwindow属attheuser.');
             $table->string('user_organization_code', 64)->comment('userorganizationencoding');
             // 收itempersonorganizationencoding
-            $table->tinyInteger('receive_type')->comment('sessiontype.1:private chat,2:group chat,3:systemmessage,4:云document,5:多维table格 6:话题 7:applicationmessage');
+            $table->tinyInteger('receive_type')->comment('sessiontype.1:private chat,2:group chat,3:systemmessage,4:云document,5:多维table格 6:topic 7:applicationmessage');
             $table->string('receive_id', '64')->comment('session另one方id.differentconversation type,idimplicationdifferent.');
             $table->string('receive_organization_code', 64)->comment('收itempersonorganizationencoding');
             // whether免打扰
@@ -34,8 +34,8 @@ return new class extends Migration {
             $table->tinyInteger('is_mark')->default(0)->comment('whethermark 0no 1is');
             // status
             $table->tinyInteger('status')->default(0)->comment('sessionstatus.0:normal 1:notdisplay 2:delete');
-            // current话题 id
-            $table->string('current_topic_id', 64)->comment('current话题id')->nullable()->default('');
+            // currenttopic id
+            $table->string('current_topic_id', 64)->comment('currenttopicid')->nullable()->default('');
             // customizefield
             $table->text('extra')->comment('customizefield')->nullable();
             $table->timestamps();

@@ -18,7 +18,7 @@ class AttachmentTargetType
     public const NONE = 0;
 
     /**
-     * 待办.
+     * todo.
      */
     public const TODO = 1;
 

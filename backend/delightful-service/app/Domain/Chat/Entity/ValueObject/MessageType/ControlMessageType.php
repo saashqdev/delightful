@@ -48,16 +48,16 @@ enum ControlMessageType: string
     // opensessionwindow
     case OpenConversation = 'open_conversation';
 
-    // create话题
+    // createtopic
     case CreateTopic = 'create_topic';
 
-    // update话题
+    // updatetopic
     case UpdateTopic = 'update_topic';
 
-    // delete话题
+    // deletetopic
     case DeleteTopic = 'delete_topic';
 
-    // setsession话题(setforemptytable示leave话题)
+    // setsessiontopic(setforemptytable示leavetopic)
     case SetConversationTopic = 'set_conversation_topic';
 
     // creategroup chat

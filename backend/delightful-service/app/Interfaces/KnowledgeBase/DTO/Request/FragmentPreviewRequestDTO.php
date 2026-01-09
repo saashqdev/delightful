@@ -67,7 +67,7 @@ class FragmentPreviewRequestDTO extends AbstractRequestDTO
             'fragment_config.normal.text_preprocess_rule.required_if' => 'text预processrulenotcanforempty',
             'fragment_config.normal.text_preprocess_rule.*.required' => '预processruleitemnotcanforempty',
             'fragment_config.normal.text_preprocess_rule.*.integer' => '预processrulemustisinteger',
-            'fragment_config.normal.text_preprocess_rule.*.in' => '预processrulemustis 1(replacespaceetc) or 2(deleteURLand邮箱)',
+            'fragment_config.normal.text_preprocess_rule.*.in' => '预processrulemustis 1(replacespaceetc) or 2(deleteURLandmailbox)',
             'fragment_config.normal.segment_rule.required_if' => 'minutesegmentrulenotcanforempty',
             'fragment_config.normal.segment_rule.separator.required_if' => 'minutesegmentidentifiernotcanforempty',
             'fragment_config.normal.segment_rule.chunk_size.required_if' => 'mostbigminutesegmentlengthnotcanforempty',
@@ -90,7 +90,7 @@ class FragmentPreviewRequestDTO extends AbstractRequestDTO
             'fragment_config.parent_child.text_preprocess_rule.required_if' => 'text预processrulenotcanforempty',
             'fragment_config.parent_child.text_preprocess_rule.*.required' => '预processruleitemnotcanforempty',
             'fragment_config.parent_child.text_preprocess_rule.*.integer' => '预processrulemustisinteger',
-            'fragment_config.parent_child.text_preprocess_rule.*.in' => '预processrulemustis 1(replacespaceetc) or 2(deleteURLand邮箱)',
+            'fragment_config.parent_child.text_preprocess_rule.*.in' => '预processrulemustis 1(replacespaceetc) or 2(deleteURLandmailbox)',
         ];
     }
 

@@ -33,7 +33,7 @@ class DelightfulFlowApiKeyEntity extends AbstractEntity
     protected string $secretKey;
 
     /**
-     * conversation ID(canis子conversation,如话题),and sk onetoonebind.
+     * conversation ID(canis子conversation,如topic),and sk onetoonebind.
      */
     protected string $conversationId;
 

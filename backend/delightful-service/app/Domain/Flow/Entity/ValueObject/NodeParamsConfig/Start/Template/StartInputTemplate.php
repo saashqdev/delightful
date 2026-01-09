@@ -197,7 +197,7 @@ class StartInputTemplate
                 "type": "string",
                 "key": "topic_id",
                 "sort": 8,
-                "title": "话题 ID",
+                "title": "topic ID",
                 "description": "",
                 "items": null,
                 "properties": null,

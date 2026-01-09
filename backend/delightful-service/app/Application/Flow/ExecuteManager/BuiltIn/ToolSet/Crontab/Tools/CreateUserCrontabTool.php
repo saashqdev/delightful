@@ -121,8 +121,8 @@ class CreateUserCrontabTool extends AbstractBuiltInTool
         "topic_id": {
             "type": "string",
             "key": "topic_id",
-            "title": "话题ID",
-            "description": "话题ID, ifforempty,thenusecurrent话题ID",
+            "title": "topicID",
+            "description": "topicID, ifforempty,thenusecurrenttopicID",
             "required": null,
             "value": null,
             "encryption": false,

@@ -17,27 +17,27 @@ return new class extends Migration {
         if (Schema::hasTable('delightful_chat_topics')) {
             return;
         }
-        // 话题table
+        // topictable
         Schema::create('delightful_chat_topics', static function (Blueprint $table) {
             $table->bigIncrements('id');
-            // 话题 id
-            $table->string('topic_id', 64)->comment('话题 id. differentconversationwindowmiddle,话题idone致');
-            // 话题name
-            $table->string('name', 50)->comment('话题name');
-            // 话题description
-            $table->text('description')->comment('话题description');
+            // topic id
+            $table->string('topic_id', 64)->comment('topic id. differentconversationwindowmiddle,topicidone致');
+            // topicname
+            $table->string('name', 50)->comment('topicname');
+            // topicdescription
+            $table->text('description')->comment('topicdescription');
             // 所属conversationID
             $table->bigInteger('conversation_id')->comment('所属conversationID');
             // organizationencoding
             $table->string('organization_code', 64)->comment('organizationencoding');
-            // 话题come源
-            $table->string('source_id', 64)->default('')->comment('话题come源. such as甲createone话题,乙话题idthencomefromat甲.need同update.');
+            // topiccome源
+            $table->string('source_id', 64)->default('')->comment('topiccome源. such as甲createonetopic,乙topicidthencomefromat甲.need同update.');
             # index
             $table->index(['conversation_id'], 'idx_conversation_id');
             $table->index(['topic_id'], 'idx_topic_id');
             $table->timestamps();
             $table->softDeletes();
-            $table->comment('话题table');
+            $table->comment('topictable');
         });
     }
 

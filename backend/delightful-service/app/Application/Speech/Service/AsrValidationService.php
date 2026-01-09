@@ -24,7 +24,7 @@ use Throwable;
 
 /**
  * ASR verifyservice
- * 负责projectpermission,话题归属,taskstatusetcverifylogic.
+ * 负责projectpermission,topic归属,taskstatusetcverifylogic.
  */
 readonly class AsrValidationService
 {
@@ -98,11 +98,11 @@ readonly class AsrValidationService
     }
 
     /**
-     * verify话题归属.
+     * verifytopic归属.
      *
-     * @param int $topicId 话题ID
+     * @param int $topicId topicID
      * @param string $userId userID
-     * @return TopicEntity 话题实body
+     * @return TopicEntity topic实body
      */
     public function validateTopicOwnership(int $topicId, string $userId): TopicEntity
     {
@@ -112,7 +112,7 @@ readonly class AsrValidationService
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND);
         }
 
-        // verify话题属atcurrentuser
+        // verifytopic属atcurrentuser
         if ($topicEntity->getUserId() !== $userId) {
             ExceptionBuilder::throw(BeAgentErrorCode::TOPIC_NOT_FOUND);
         }
@@ -144,9 +144,9 @@ readonly class AsrValidationService
     }
 
     /**
-     * from话题getprojectID(contain话题归属verify).
+     * fromtopicgetprojectID(containtopic归属verify).
      *
-     * @param int $topicId 话题ID
+     * @param int $topicId topicID
      * @param string $userId userID
      * @return string projectID
      */

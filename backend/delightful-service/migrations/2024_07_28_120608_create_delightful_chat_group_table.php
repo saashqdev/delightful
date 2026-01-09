@@ -28,7 +28,7 @@ class CreateDelightfulChatGroupTable extends Migration
             // 群所属organization
             $table->string('organization_code', 64)->comment('群organizationencoding')->default('');
             $table->string('group_tag', 64)->comment('群tag:0:notag,1:outside部群;2:inside部群;3:all员群')->default('0');
-            $table->tinyInteger('group_type')->default(1)->comment('群type,1:conversation;2:话题');
+            $table->tinyInteger('group_type')->default(1)->comment('群type,1:conversation;2:topic');
             $table->tinyInteger('group_status')->default(1)->comment('群status,1:normal;2:解散');
             // memberup限
             $table->integer('member_limit')->default(1000)->comment('群memberup限');

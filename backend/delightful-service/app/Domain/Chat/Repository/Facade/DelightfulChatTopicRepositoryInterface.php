@@ -14,13 +14,13 @@ use App\Domain\Chat\Entity\DelightfulTopicMessageEntity;
 
 interface DelightfulChatTopicRepositoryInterface
 {
-    // create话题
+    // createtopic
     public function createTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity;
 
-    // update话题
+    // updatetopic
     public function updateTopic(DelightfulTopicEntity $delightfulTopicEntity): DelightfulTopicEntity;
 
-    // delete话题
+    // deletetopic
     public function deleteTopic(DelightfulTopicEntity $delightfulTopicDTO): int;
 
     /**
@@ -51,13 +51,13 @@ interface DelightfulChatTopicRepositoryInterface
     public function getTopicMessagesByConversationId(string $conversationId): array;
 
     /**
-     * 按timerangegetconversationdownsome话题message.
+     * 按timerangegetconversationdownsometopicmessage.
      * @return ClientSequenceResponse[]
      */
     public function getTopicMessages(MessagesQueryDTO $messagesQueryDTO): array;
 
     /**
-     * passtopic_idget话题information(notneedconversation_id).
+     * passtopic_idgettopicinformation(notneedconversation_id).
      */
     public function getTopicByTopicId(string $topicId): ?DelightfulTopicEntity;
 
@@ -65,17 +65,17 @@ interface DelightfulChatTopicRepositoryInterface
 
     /**
      * Get topics by topic ID.
-     * @param string $topicId 话题ID
-     * @return DelightfulTopicEntity[] 话题实bodyarray
+     * @param string $topicId topicID
+     * @return DelightfulTopicEntity[] topic实bodyarray
      */
     public function getTopicsByTopicId(string $topicId): array;
 
     /**
      * Get topic messages by conversation ID, topic ID and max seq ID.
      * @param string $conversationId conversationID
-     * @param string $topicId 话题ID
+     * @param string $topicId topicID
      * @param int $maxSeqId mostbig序columnID(containtheID)
-     * @return DelightfulTopicMessageEntity[] 话题message实bodyarray
+     * @return DelightfulTopicMessageEntity[] topicmessage实bodyarray
      */
     public function getTopicMessagesBySeqId(string $conversationId, string $topicId, int $maxSeqId): array;
 }

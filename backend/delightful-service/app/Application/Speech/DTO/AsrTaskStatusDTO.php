@@ -42,10 +42,10 @@ class AsrTaskStatusDTO
 
     public ?string $presetTranscriptFilePath = null; // presetstreamidentifyfile相topath
 
-    // projectand话题info
+    // projectandtopicinfo
     public ?string $projectId = null; // projectID
 
-    public ?string $topicId = null; // 话题ID
+    public ?string $topicId = null; // topicID
 
     // 录音directoryinfo
     public ?string $tempHiddenDirectory = null; // hiddendirectorypath(存放minuteslicefile)
@@ -98,7 +98,7 @@ class AsrTaskStatusDTO
         $this->noteFileName = self::getStringValue($data, ['note_file_name', 'noteFileName']);
         $this->noteFileId = self::getStringValue($data, ['note_file_id', 'noteFileId']);
 
-        // projectand话题info
+        // projectandtopicinfo
         $this->projectId = self::getStringValue($data, ['project_id', 'projectId']);
         $this->topicId = self::getStringValue($data, ['topic_id', 'topicId']);
 

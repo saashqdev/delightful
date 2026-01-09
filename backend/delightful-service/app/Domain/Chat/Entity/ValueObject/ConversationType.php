@@ -30,7 +30,7 @@ enum ConversationType: int
     // multidimensional table
     case MultidimensionalTable = 5;
 
-    // 话题
+    // topic
     case Topic = 6;
 
     // applicationmessage

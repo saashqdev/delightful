@@ -205,7 +205,7 @@ class ReplyMessageNodeRunner extends NodeRunner
                 $receiveSeqDTO->setContent($IMResponse);
                 $receiveSeqDTO->setSeqType($IMResponse->getMessageTypeEnum());
 
-                // todo according tostartsectionpointconfiguration话题comechoose话题
+                // todo according tostartsectionpointconfigurationtopiccomechoosetopic
 
                 $delightfulChatMessageAppService->agentSendMessage($receiveSeqDTO, $aiUserId, $userId, IdGenerator::getUniqueId32());
             });

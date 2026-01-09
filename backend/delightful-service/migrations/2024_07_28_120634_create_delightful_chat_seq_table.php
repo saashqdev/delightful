@@ -37,7 +37,7 @@ return new class extends Migration {
             $table->tinyInteger('status')->default(0)->comment('messagestatus,0:unread, 1:seen, 2:read, 3:revoked');
             // messagereceivepersonlist
             $table->text('receive_list')->comment('messagereceivepersonlist,allquantityrecordnot读/already读/alreadyviewuserlist');
-            $table->text('extra')->comment('attachaddfield,recordonetheseextensionproperty. such as话题id.');
+            $table->text('extra')->comment('attachaddfield,recordonetheseextensionproperty. such astopicid.');
             // app_message_id
             $table->string('app_message_id', 64)->default('')->comment('冗remainderfield,customer端generatemessageid,useat防customer端duplicate');
             # bydownisindexset

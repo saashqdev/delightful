@@ -94,7 +94,7 @@ class ExecutionData
     private string $originConversationId = '';
 
     /**
-     * 话题ID.
+     * topicID.
      */
     private ?string $topicId = null;
 

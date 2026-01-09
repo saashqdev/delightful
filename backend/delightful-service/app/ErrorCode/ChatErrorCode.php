@@ -74,12 +74,12 @@ enum ChatErrorCode: int
     #[ErrorMessage('chat.refer_message.not_found')]
     case REFER_MESSAGE_NOT_FOUND = 3015;
 
-    // 话题not存in
+    // topicnot存in
         // Topic not found
     #[ErrorMessage('chat.topic.not_found')]
     case TOPIC_NOT_FOUND = 3016;
 
-    // 话题messagenot存in
+    // topicmessagenot存in
         // Topic message not found
     #[ErrorMessage('chat.topic.message.not_found')]
     case TOPIC_MESSAGE_NOT_FOUND = 3017;

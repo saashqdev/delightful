@@ -86,7 +86,7 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
             // from messageDTO middleget topicId
             $topicId = $messageDTO->getTopicId() ?? '';
 
-            // if topicId notforempty,verify话题whether属atcurrentuser
+            // if topicId notforempty,verifytopicwhether属atcurrentuser
             if (empty($topicId)) {
                 ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
             }
@@ -135,22 +135,22 @@ class DelightfulIntermediateDomainService extends AbstractDomainService
     }
 
     /**
-     * verify话题whether属atcurrentuser.
+     * verifytopicwhether属atcurrentuser.
      */
     private function validateTopicOwnership(string $topicId, string $conversationId, DataIsolation $dataIsolation): void
     {
-        // create话题DTO
+        // createtopicDTO
         $topicDTO = new DelightfulTopicEntity();
         $topicDTO->setTopicId($topicId);
         $topicDTO->setConversationId($conversationId);
 
-        // get话题实body
+        // gettopic实body
         $topicEntity = $this->delightfulChatTopicRepository->getTopicEntity($topicDTO);
         if ($topicEntity === null) {
             ExceptionBuilder::throw(ChatErrorCode::TOPIC_NOT_FOUND);
         }
 
-        // verify话题所属sessionwhether属atcurrentuser
+        // verifytopic所属sessionwhether属atcurrentuser
         $this->checkAndGetSelfConversation($topicEntity->getConversationId(), $dataIsolation);
     }
 }

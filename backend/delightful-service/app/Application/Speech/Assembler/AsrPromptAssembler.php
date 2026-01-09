@@ -52,7 +52,7 @@ usersubmitonesegmentrecordingcontent,recordingcontent经passvoiceidentify转fort
 
 ### prioritylevel原then(重want)
 1. **notepriority**:if存in<notecontent>,titleshould侧重notecontent
-2. **重视notetitle**:ifnoteis Markdown formatandcontaintitle(# openheadline),priority采usenotemiddletitlecontent
+2. **attach importancenotetitle**:ifnoteis Markdown formatandcontaintitle(# openheadline),priority采usenotemiddletitlecontent
 3. **comprehensiveconsider**:meanwhilereferencevoiceidentifycontent,ensuretitlecompleteaccurate
 4. **keywordextract**:fromnoteandvoiceidentifycontentmiddleextractmost核corekeyword
 
@@ -65,7 +65,7 @@ usersubmitonesegmentrecordingcontent,recordingcontent经passvoiceidentify转fort
 ### forbidlinefor
 - notwantreturn答contentmiddleissue
 - notwantconduct额outsideexplain
-- notwantadd"recording","note"etcfront缀词
+- notwantadd"recording","note"etcfrontconjunction
 - notwantoutputtitlebyoutsideanycontent
 
 ## recordingcontent
@@ -106,8 +106,8 @@ usersendoriginalmessage如down:
 
 ## titlegeneraterequire
 
-### prioritylevel原then(non常重want)
-1. **file名priority**:file名usuallyisuser精corenaming,containmost核corethemeinfo,请重pointreferenceusermessagemiddle @ backsurfacefile名
+### prioritylevel原then(nonoften重want)
+1. **file名priority**:file名usuallyisuser精corenaming,containmost核corethemeinfo,please重pointreferenceusermessagemiddle @ backsurfacefile名
 2. **智canjudge**:
    - iffile名semanticclear(如"2024yearQ4productplanwill议.mp3","customerrequirementdiscussion.wav"),prioritybased onfile名generatetitle
    - iffile名isdatetime戳(如"20241112_143025.mp3")ornomeaningcharacter(如"recording001.mp3"),thenuse通usedescription
@@ -122,7 +122,7 @@ usersendoriginalmessage如down:
 ### forbidlinefor
 - notwantretainfileextension名(.mp3,.wav,.webm etc)
 - notwantoutputtitlebyoutsideanycontent
-- notwantadd引number,书名numberetc标point符number
+- notwantadd引number,book titlenumberetc标point符number
 
 ## outputlanguage
 请use {language} languageoutputtitle.

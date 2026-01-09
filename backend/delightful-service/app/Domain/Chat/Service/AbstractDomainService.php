@@ -115,7 +115,7 @@ abstract class AbstractDomainService
 
     /**
      * messageminutehair模piece.
-     * willhairitem方messagedelivertomqmiddle,useatback续按messageprioritylevel,deliverto收item方messagestreammiddle.
+     * willhairitem方messagedelivertomqmiddle,useatbackcontinue按messageprioritylevel,deliverto收item方messagestreammiddle.
      */
     public function dispatchSeq(SeqCreatedEvent $seqCreatedEvent): void
     {

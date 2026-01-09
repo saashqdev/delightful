@@ -251,7 +251,7 @@ JSON, true)));
 5. notice事item:
    - avoidtosensitivecontentmake subjective judgment
    - whenno法certainsome部minutecontento clock,坦诚table达notcertainproperty
-   - maintain客观professional语气'),
+   - maintainobjectiveprofessional语气'),
         ]);
     }
 

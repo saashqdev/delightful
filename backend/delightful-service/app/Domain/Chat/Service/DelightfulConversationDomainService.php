@@ -286,7 +286,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * forfinger定群membercreateconversationwindow.
+     * forfingerset groupmembercreateconversationwindow.
      */
     public function batchCreateGroupConversationByUserIds(DelightfulGroupEntity $groupEntity, array $userIds): array
     {

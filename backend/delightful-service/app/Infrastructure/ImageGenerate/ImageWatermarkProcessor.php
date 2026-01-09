@@ -240,7 +240,7 @@ class ImageWatermarkProcessor
             $textWidth = (int) ($chineseCharCount * $fontSize * 1.0); // increasesecurityside距
             $textHeight = $fontSize;
             $descender = (int) ($fontSize * 0.2); // insideset fieldbodyestimatedowndowngrademinute
-            $ascender = (int) ($fontSize * 0.8); // insideset fieldbodyestimateup升部minute
+            $ascender = (int) ($fontSize * 0.8); // insideset fieldbodyestimateupupgrade部minute
             $totalTextHeight = $textHeight;
         }
 
@@ -332,7 +332,7 @@ class ImageWatermarkProcessor
                     break;
                 case 'webp':
                     if (function_exists('imagewebp')) {
-                        imagewebp($image, null, 100); // WebPno损模type
+                        imagewebp($image, null, 100); // WebPno損模type
                     } else {
                         $this->logger->warning('WebP not supported, falling back to PNG');
                         imagepng($image, null, 0);

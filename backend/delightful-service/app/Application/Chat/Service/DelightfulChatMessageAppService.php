@@ -603,7 +603,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         1. priorityclose注conversationmiddlemostbackdiscussiontheme(mostnewtopic)
         2. bymost近conversationcontentformainreferencebasis
         3. ifmostbackthemediscussionmorefor充minute,thenbythisasfortitle核core
-        4. ignore早期already经endtopic,unlessit们andmostnewtopicclosely relatedclose
+        4. ignoreearlyalready经endtopic,unlessit们andmostnewtopicclosely relatedclose
 
         ## strictrequire
         1. titlelength:not超pass 15 character.Englishoneletter算onecharacter,Chinese charactersonecharacter countonecharacter,other语type采useanalogouscountsolution.
@@ -816,7 +816,7 @@ class DelightfulChatMessageAppService extends DelightfulSeqAppService
         }
 
         // ifiseditmessage,andisusereditassistanthaircomeapprovalformo clock,returnnullarray.
-        // 因forthiso clockcreate seq_id isassistant,notisuser,returnwill造become困扰.
+        // 因forthiso clockcreate seq_id isassistant,notisuser,returnwill造becometrouble.
         // 经by mq minutehairmessageback,userwillasync收to属athefrom己messagepush.
         if (isset($editMessageOptions) && ! empty($editMessageOptions->getDelightfulMessageId())
             && $messageEntity->getSenderId() !== $senderMessageDTO->getSenderId()) {

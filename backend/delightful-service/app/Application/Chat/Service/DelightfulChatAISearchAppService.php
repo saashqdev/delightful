@@ -836,7 +836,7 @@ class DelightfulChatAISearchAppService extends AbstractAppService
                 'language' => $search->getLanguage(),
                 'isNavigational' => $search->isNavigational(),
                 'noCache' => $search->isNoCache(),
-                'detail' => '', // section省streamquantity,givefront端推messagenot传 detail
+                'detail' => '', // section省streamquantity,givefrontclient pushmessagenot传 detail
             ];
         }
         return $searchList;

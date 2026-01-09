@@ -309,7 +309,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
         $response = $this->patch(self::UPDATE_USER_INFO_API, $requestData, $this->getTestHeaders());
 
         // according tobusinesslogic,maybeacceptanystringasforavatar_url,orconductvalidate
-        $this->assertIsArray($response, 'invalidURLformat应be妥善handle');
+        $this->assertIsArray($response, 'invalidURLformat应beproperlyhandle');
 
         // ifisauthenticationerror,skiptest
         if (isset($response['code']) && ($response['code'] === 2179 || $response['code'] === 3035)) {
@@ -477,7 +477,7 @@ class DelightfulChatUserApiTest extends AbstractHttpTest
             'Authorization' => $token,
             'Content-Type' => 'application/json',
             'Accept' => 'application/json',
-            // 故意notcontain organization-code
+            // intentionalnotcontain organization-code
         ];
 
         $response = $this->get(self::GET_USER_UPDATE_PERMISSION_API, $headers);

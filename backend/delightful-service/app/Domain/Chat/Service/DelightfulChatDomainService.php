@@ -185,7 +185,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         }
         // 清exceptinvalidquotemessage
         $aiSeqDTO->setReferMessageId('');
-        // 反查userandaiconversationwindow
+        // reverse lookupuserandaiconversationwindow
         $aiConversationEntity = $this->getConversationById($aiConversationId);
         if ($aiConversationEntity === null) {
             return $aiSeqDTO;
@@ -706,7 +706,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         array $thisTimeStreamMessages,
         ?StreamMessageStatus $streamMessageStatus = null
     ): JsonStreamCachedDTO {
-        // from旋lock,avoiddata竞争.另outsidealsoneedonescheduletaskscan redis ,toattimeoutstreammessage,updatedatabase.
+        // from旋lock,avoiddatacompetition.另outsidealsoneedonescheduletaskscan redis ,toattimeoutstreammessage,updatedatabase.
         $lockKey = 'delightful_stream_message:' . $appMessageId;
         $lockOwner = random_bytes(16);
         $this->locker->spinLock($lockKey, $lockOwner);

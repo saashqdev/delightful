@@ -154,7 +154,7 @@ class DelightfulLLMDomainService
        - 显propertynaming实bodyextract,identify实bodybetweenclose系andproperty
        - deduceuser隐propertyrequirementand潜in意graph,especiallycloseimplicittimeelement
     1.2 dimensiondecompose
-       - according toidentifyout实bodyandrequirement,choosesuitableanalyzedimension,for example:policyinterpret,datavalidate,caseresearch,impactevaluate,technology原理,marketfront景,userbody验etc
+       - according toidentifyout实bodyandrequirement,choosesuitableanalyzedimension,for example:policyinterpret,datavalidate,caseresearch,impactevaluate,technologyprinciple,marketfront景,userbody验etc
     1.3 子questiongenerate
        - generatejustintersectionquestioncollection(Jaccardsimilardegree<0.25),ensureeach子questioncanfromdifferentangledegreeexploreuserrequirement,avoidgeneratepassat宽泛orsimilarquestion
     
@@ -163,7 +163,7 @@ class DelightfulLLMDomainService
     parameterstandard:
     2.1 key词rule
        - generategreater thanequal 3 highqualitycanretrievekey词,include核core实body,keypropertyand相closeconcept
-       - time限定符overriderate≥30%
+       - timequalifieroverriderate≥30%
        - toratiocategoryquestion占ratio≥20%
     
     ## 硬propertyconstraint(forcecomply)
@@ -206,14 +206,14 @@ class DelightfulLLMDomainService
     inreturn答o clock,请noticebydown几point:
     - 今dayis{date_now}.
     - andnonsearchresult所havecontentallanduserquestionclosely relatedclose,youneedcombinequestion,tosearchresultconductdistinguish,filter.
-    - toatcolumn举categoryquestion(如column举所haveflightinformation),尽quantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcome源,获completeinformation.priorityprovideinformationcomplete,most相closecolumn举item;如non必want,notwantactivetellusersearchresultnotprovidecontent.
-    - toat创ascategoryquestion(like writing paper),please be sureinjust文segment落middlequoteto应reference编number,for example[citation:3][citation:5],notcanonlyin文chapter末tailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minute利usesearchresultanddraw重wantinformation,generatematchuserrequire,极具思想深degree,富havecreate力andprofessionalpropertyanswer.you创as篇幅need尽maybe延long,toateachonewantpoint论述wantspeculateduser意graph,giveout尽maybe多angledegreereturn答wantpoint,and务必informationquantitybig,论述详尽.
-    - ifreturn答verylong,请尽quantitystructure化,minutesegment落summary.ifneedminutepointas答,尽quantitycontrolin5pointbyinside,andmerge相closecontent.
-    - toat客观categoryQ&A,ifquestionanswernonoften simpleshort,can适whensupplementoneto两sentence相closeinformation,byrichcontent.
+    - toatcolumn举categoryquestion(如columnraise所haveflightinformation),尽quantitywillanswercontrolin10wantpointbyinside,andtellusercanviewsearchcome源,获completeinformation.priorityprovideinformationcomplete,most相closecolumn举item;如non必want,notwantactivetellusersearchresultnotprovidecontent.
+    - toat创ascategoryquestion(like writing paper),please be sureinjust文segment落middlequoteto应reference编number,for example[citation:3][citation:5],notcanonlyin文chapter末tailquote.youneedinterpretandsummarizeusertitlerequire,choosesuitableformat,充minute利usesearchresultanddraw重wantinformation,generatematchuserrequire,very thoughtfuldegree,富havecreate力andprofessionalpropertyanswer.you创aslengthneed尽maybe延long,toateachonewantpoint论述wantspeculateduser意graph,giveout尽maybe多angledegreereturn答wantpoint,and务必informationquantitybig,detailed discussion.
+    - ifreturn答verylong,please盡quantitystructure化,minutesegment落summary.ifneedminutepointas答,尽quantitycontrolin5pointbyinside,andmerge相closecontent.
+    - toatobjectivecategoryQ&A,ifquestionanswernonoften simpleshort,can适whensupplementoneto两sentence相closeinformation,byrichcontent.
     - youneedaccording touserrequireandreturn答contentchoosesuitable,beautifulreturn答format,ensurecan读propertystrong.
     - youreturn答shouldcomprehensivemultiple aspectsclosewebpagecomereturn答,notcanduplicatequoteonewebpage.
     - unlessuserrequire,nothenyoureturn答languageneedanduserasklanguagemaintainone致.
-    - output漂亮markdown format,contentmiddleaddonetheseandtheme相closeemojitable情符number.
+    - outputbeautifulmarkdown format,contentmiddleaddonetheseandtheme相closeemojitable情符number.
     
     ## usermessagefor:
     {question}
@@ -241,7 +241,7 @@ class DelightfulLLMDomainService
        - **skipnoclosecontent**:
          - pure and quietstatedescription(如not变property,backgroundintroduce,notimechange).
          - datastatisticsorfinanceinformation(like revenue,利润).
-         - 主观comment,analyzeorspeculated(unlessandeventdirectly相close).
+         - subjectivecomment,analyzeorspeculated(unlessandeventdirectly相close).
          - notimeassociateandandquestionnoclosedetail.
        - **retain原then**:as long ascontentandtime相closeandmatchquestiontheme,尽quantityretainforevent.
     4. **outputrequire**:
@@ -267,7 +267,7 @@ class DelightfulLLMDomainService
     ## useinstruction
     - user需providesearchcontent(containquotemark如 [[citation:x]])andspecificquestion.
     - according toquestion,fromsearchcontentmiddleextractmatcheventdefinitioncontent,按requiregenerateoutput.
-    - 若question涉andcurrenttime,based on {date_now} conduct推算.
+    - 若question涉andcurrenttime,based on {date_now} conductcalculate.
     
     ## quote
     {citations}

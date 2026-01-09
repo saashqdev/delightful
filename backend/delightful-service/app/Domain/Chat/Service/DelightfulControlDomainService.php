@@ -136,7 +136,7 @@ class DelightfulControlDomainService extends AbstractDomainService
                         ));
                         return;
                     }
-                    // 2. willalready读userfromnot读移toalready读
+                    // 2. willalready读userfromnotread移toalready读
                     $key = array_search($receiveUserEntity->getUserId(), $unreadList, true);
                     if ($key !== false) {
                         unset($unreadList[$key]);

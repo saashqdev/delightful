@@ -124,7 +124,7 @@ class ServiceProviderInitializer
                 'translate' => json_encode([
                     'name' => [
                         'en_US' => 'Microsoft Azure',
-                        'zh_CN' => '微软 Azure',
+                        'zh_CN' => 'Microsoft Azure',
                     ],
                     'description' => [
                         'en_US' => 'Azure provides a variety of advanced AI models, including GPT-3.5 and the latest GPT-4 series, supporting multiple data types and complex tasks, committed to safe, reliable and sustainable AI solutions.',

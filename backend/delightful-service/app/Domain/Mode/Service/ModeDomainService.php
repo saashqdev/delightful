@@ -223,7 +223,7 @@ class ModeDomainService
             $this->groupRepository->batchSave($dataIsolation, $newGroupEntities);
         }
 
-        // batchquantitybuildgroup实bodyandclose系实body
+        // batchquantitybuildgroup实bodyandclose系實body
         $relationEntities = [];
 
         foreach ($modeAggregate->getGroupAggregates() as $groupAggregate) {
@@ -277,7 +277,7 @@ class ModeDomainService
         $allGroups = $this->groupRepository->findByModeIds($dataIsolation, $modeIds);
         $allRelations = $this->relationRepository->findByModeIds($dataIsolation, $modeIds);
 
-        // thethree步:按模typeIDgroupdata
+        // thethree步:by modetypeIDgroupdata
         $groupsByModeId = [];
         foreach ($allGroups as $group) {
             $groupsByModeId[$group->getModeId()][] = $group;

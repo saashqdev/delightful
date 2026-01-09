@@ -159,7 +159,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                     # ai sendalready读return执
                     $this->aiSendReadStatusChangeReceipt($selfSeqEntity, $userEntity);
                     # call flow
-                    // todo can做 optimizeflowresponsesuccessrate: syncetc待flowexecute,meticulousjudge,toat本seq_id,uptimeflowresponsewhethertimeout,ifis,directly丢弃,notagainhairgiveflow
+                    // todo can做 optimizeflowresponsesuccessrate: syncetc待flowexecute,meticulousjudge,toat本seq_id,uptimeflowresponsewhethertimeout,ifis,directlydiscard,notagainhairgiveflow
                     $this->userCallFlow($aiAccountEntity, $userEntity, $senderUserEntity, $selfSeqEntity);
                 } catch (Throwable $throwable) {
                     $this->logger->error('UserCallAgentEventError', [
@@ -337,7 +337,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
         // getmessageEntity
         $messageEntity = $this->delightfulMessageRepository->getMessageByDelightfulMessageId($seqEntity->getDelightfulMessageId());
 
-        // onlychatmessageandalready读return执才触hairflow
+        // onlychatmessageandalready读return執才觸hairflow
         $messageType = $messageEntity?->getMessageType();
         if ($messageType instanceof ChatMessageType || $seqEntity->canTriggerFlow()) {
             // getusertrue名

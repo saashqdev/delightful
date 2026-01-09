@@ -290,7 +290,7 @@ readonly class AsrSandboxService
         $audioConfig = new AsrAudioConfig(
             sourceDir: $taskStatus->tempHiddenDirectory,  // 如: .asr_recordings/session_xxx
             targetDir: $taskStatus->displayDirectory,     // 如: recordingsummary_20251027_230949
-            outputFilename: $intelligentTitle              // 如: be讨厌勇气
+            outputFilename: $intelligentTitle              // 如: behate courage
         );
 
         // buildnotefileconfigurationobject(needrename)
@@ -324,7 +324,7 @@ readonly class AsrSandboxService
             $transcriptFileConfig
         );
 
-        // round询etc待complete(based onpresettimeand休眠between隔)
+        // round询etc待complete(based onpresettimeandsleepbetween隔)
         $timeoutSeconds = AsrConfig::SANDBOX_MERGE_TIMEOUT;
         $pollingInterval = AsrConfig::POLLING_INTERVAL;
         $attempt = 0;
@@ -391,7 +391,7 @@ readonly class AsrSandboxService
             );
         }
 
-        // time即will耗尽,conductmostbackonetimecheck
+        // time即willexhausted,conductmostbackonetimecheck
         $statusString = $response->getStatus();
         $status = SandboxAsrStatusEnum::from($statusString);
         $result = $this->checkAndHandleResponseStatus(
@@ -442,7 +442,7 @@ readonly class AsrSandboxService
     ): ?AsrSandboxMergeResultDTO {
         // checkwhetherforcompletestatus(contain completed and finished)
         if ($status->isCompleted()) {
-            // calculate总耗o clock
+            // calculatetotal consumptiono clock
             $finishEndTime = microtime(true);
             $totalElapsedTime = round($finishEndTime - $finishStartTime);
 

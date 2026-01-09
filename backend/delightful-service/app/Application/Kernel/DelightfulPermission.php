@@ -241,7 +241,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
                 $accumKey .= '.' . $segment;
                 $isLastSegment = $index === array_key_last($segments);
 
-                // 取 label:theonesegmentuse模piecemiddle文名,itsremainder按rule
+                // 取 label:theonesegmentuse模piecemiddledocument name,itsremainder按rule
                 $label = match (true) {
                     $index === 0 => $this->getResourceModule($permission['resource']),                // 模piecelayer
                     $isLastSegment => $permission['resource_label'],      // resourcelayer
@@ -334,7 +334,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
         }
 
         $parsed = $this->parsePermission($permissionKey);
-        // default隐type:edit -> query(若两操as均存in)
+        // default隐type:edit -> query(if two operationsas均存in)
         $ops = $this->getOperationsByResource($parsed['resource']);
         if (in_array(DelightfulOperationEnum::EDIT->value, $ops, true) && in_array(DelightfulOperationEnum::QUERY->value, $ops, true)) {
             if ($parsed['operation'] === DelightfulOperationEnum::QUERY->value) {
@@ -430,7 +430,7 @@ class DelightfulPermission implements DelightfulPermissionInterface
     }
 
     /**
-     * according toplatform key getdisplayname,can按需extension.
+     * according toplatform key getdisplayname,canon demandextension.
      */
     private function getPlatformLabel(string $platformKey): string
     {

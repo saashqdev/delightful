@@ -189,7 +189,7 @@ class DelightfulFlowExecutor
         /** @var TriggerType $appointTriggerType */
         $appointTriggerType = $args['appoint_trigger_type'];
         if ($appointTriggerType === TriggerType::LoopStart) {
-            // 循环o clock，notprocessbacksurface的data
+            // loopo clock，notprocessbacksurface的data
             return;
         }
 
@@ -304,7 +304,7 @@ class DelightfulFlowExecutor
         /** @var TriggerType $appointTriggerType */
         $appointTriggerType = $args['appoint_trigger_type'];
         if ($appointTriggerType === TriggerType::LoopStart) {
-            // 循环o clock，not能delete该data
+            // loopo clock，not能delete该data
             return;
         }
 
@@ -422,7 +422,7 @@ class DelightfulFlowExecutor
     private function addNodes(DelightfulFlowEntity $delightfulFlowEntity): void
     {
         foreach ($delightfulFlowEntity->getNodes() as $node) {
-            // skipin循环bodymiddle的sectionpoint
+            // skipinloopbodymiddle的sectionpoint
             if ($node->getParentId()) {
                 continue;
             }

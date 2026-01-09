@@ -14,7 +14,7 @@ use InvalidArgumentException;
 
 /**
  * service商templateIDprocesstoolcategory
- * useatgenerate和parseservice商templateID（use固定的数value型string）.
+ * useatgenerate和parseservice商templateID（usefixed的数value型string）.
  */
 class ProviderConfigIdAssembler
 {

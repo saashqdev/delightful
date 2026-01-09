@@ -146,7 +146,7 @@ class DelightfulChatHttpApi extends AbstractApi
     }
 
     /**
-     * session窗口scrollloadmessage.
+     * sessionwindowscrollloadmessage.
      */
     public function messageQueries(RequestInterface $request, string $conversationId): array
     {

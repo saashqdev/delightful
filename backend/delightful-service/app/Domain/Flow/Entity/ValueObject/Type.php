@@ -23,7 +23,7 @@ enum Type: int
     // group合sectionpoint，运linemethodhavepointanalogousat子process
     case CombinedNode = 4;
 
-    // 循环sectionpoint
+    // loopsectionpoint
     case Loop = 5;
 
     public function needEndNode(): bool

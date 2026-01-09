@@ -15,13 +15,13 @@ enum ControlMessageType: string
     // queueetc场景的core跳
     case Ping = 'ping';
 
-    // createsession窗口
+    // createsessionwindow
     case CreateConversation = 'create_conversation';
 
-    // 移exceptsession窗口（listnotdisplay）
+    // 移exceptsessionwindow（listnotdisplay）
     case HideConversation = 'hide_conversation';
 
-    // 置topsession窗口
+    // 置topsessionwindow
     case TopConversation = 'top_conversation';
 
     // session免打扰
@@ -39,13 +39,13 @@ enum ControlMessageType: string
     // editmessage
     case EditMessage = 'edit_message';
 
-    // startinsession窗口input
+    // startinsessionwindowinput
     case StartConversationInput = 'start_conversation_input';
 
-    // endinsession窗口input
+    // endinsessionwindowinput
     case EndConversationInput = 'end_conversation_input';
 
-    // opensession窗口
+    // opensessionwindow
     case OpenConversation = 'open_conversation';
 
     // create话题

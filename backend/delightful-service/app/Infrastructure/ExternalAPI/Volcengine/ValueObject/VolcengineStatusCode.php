@@ -28,7 +28,7 @@ enum VolcengineStatusCode: string
     case QUEUED = '20000002';
 
     /**
-     * 静音audio - 无需重新query，直接重新submit.
+     * muteaudio - 无需重新query，直接重新submit.
      */
     case SILENT_AUDIO = '20000003';
 
@@ -101,7 +101,7 @@ enum VolcengineStatusCode: string
             self::SUCCESS => '识别success',
             self::PROCESSING => '正inprocessmiddle',
             self::QUEUED => 'taskinqueuemiddle',
-            self::SILENT_AUDIO => '静音audio',
+            self::SILENT_AUDIO => 'muteaudio',
             self::INVALID_PARAMS => 'requestparameterinvalid',
             self::EMPTY_AUDIO => '空audio',
             self::INVALID_AUDIO_FORMAT => 'audioformatnotcorrect',

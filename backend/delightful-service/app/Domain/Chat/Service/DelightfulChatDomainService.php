@@ -156,7 +156,7 @@ class DelightfulChatDomainService extends AbstractDomainService
      * 2.systemapplicationmessage,高优先level
      * 3.apimessage(the三方callgenerate)/100~1000persongroup chat,middle优先level
      * 4.控制message/1000personbyup的group chat,most低优先level.
-     * 5.部minute控制message与chat强相关的,can把优先level提to高. such asconversation窗口的create.
+     * 5.部minute控制message与chat强相关的,can把优先level提to高. such asconversationwindow的create.
      */
     public function getChatMessagePriority(ConversationType $conversationType, ?int $receiveUserCount = 1): MessagePriority
     {
@@ -185,7 +185,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         }
         // 清exceptinvalid的quotemessage
         $aiSeqDTO->setReferMessageId('');
-        // 反查user与ai的conversation窗口
+        // 反查user与ai的conversationwindow
         $aiConversationEntity = $this->getConversationById($aiConversationId);
         if ($aiConversationEntity === null) {
             return $aiSeqDTO;
@@ -198,7 +198,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         $messages = $this->getConversationChatMessages($aiConversationEntity->getId(), $conversationMessagesQueryDTO);
         $userSendCount = 0;
         $aiSendCount = 1;
-        // message是conversation窗口show的倒序
+        // message是conversationwindowshow的倒序
         foreach ($messages as $message) {
             $senderMessageId = $message->getSeq()->getSenderMessageId();
             if (! empty($senderMessageId)) {// 对方send的
@@ -259,7 +259,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR);
         }
         $time = date('Y-m-d H:i:s');
-        // need按收itemperson的身share去queryconversation窗口id
+        // need按收itemperson的身share去queryconversationwindowid
         $receiveConversationDTO = new DelightfulConversationEntity();
         $receiveConversationDTO->setUserId($messageEntity->getReceiveId());
         $receiveConversationDTO->setUserOrganizationCode($messageEntity->getReceiveOrganizationCode());
@@ -269,10 +269,10 @@ class DelightfulChatDomainService extends AbstractDomainService
 
         $receiveConversationEntity = $this->delightfulConversationRepository->getConversationByUserIdAndReceiveId($receiveConversationDTO);
         if ($receiveConversationEntity === null) {
-            // 自动为收itempersoncreateconversation窗口,butnotuse触hair收itemperson的窗口openevent
+            // 自动为收itempersoncreateconversationwindow,butnotuse触hair收itemperson的windowopenevent
             $receiveConversationEntity = $this->delightfulConversationRepository->addConversation($receiveConversationDTO);
         }
-        // if收item方已经hidden了这conversation窗口，改为normal
+        // if收item方已经hidden了这conversationwindow，改为normal
         if ($receiveConversationEntity->getStatus() !== ConversationStatus::Normal) {
             $this->delightfulConversationRepository->updateConversationById(
                 $receiveConversationEntity->getId(),
@@ -283,7 +283,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         }
         $receiveConversationId = $receiveConversationEntity->getId();
         $receiveUserEntity = $this->getUserInfo($messageEntity->getReceiveId());
-        // 由at一itemmessage,in2conversation窗口渲染o clock,willgenerate2messageid,thereforeneedparse出来收item方能看to的messagequote的id.
+        // 由at一itemmessage,in2conversationwindow渲染o clock,willgenerate2messageid,thereforeneedparse出来收item方能看to的messagequote的id.
         $minSeqListByReferMessageId = $this->getMinSeqListByReferMessageId($senderSeqEntity);
         $receiverReferMessageId = $minSeqListByReferMessageId[$receiveUserEntity->getDelightfulId()] ?? '';
         $seqId = (string) IdGenerator::getSnowId();
@@ -382,11 +382,11 @@ class DelightfulChatDomainService extends AbstractDomainService
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR, 'chat.common.param_error', ['param' => 'timeEnd']);
         }
         if ($messagesQueryDTO->getTopicId() === null) {
-            // getconversation窗口的所havemessage. have话题 + nothave话题
+            // getconversationwindow的所havemessage. have话题 + nothave话题
             return $this->delightfulSeqRepository->getConversationChatMessages($messagesQueryDTO);
         }
         if ($messagesQueryDTO->getTopicId() === '') {
-            // todo get本conversation窗口middle,notcontain任何话题的message.
+            // todo get本conversationwindowmiddle,notcontain任何话题的message.
             return $this->delightfulSeqRepository->getConversationChatMessages($messagesQueryDTO);
         }
         return $this->delightfulChatTopicRepository->getTopicMessages($messagesQueryDTO);
@@ -405,7 +405,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         if ($messagesQueryDTO->getLimit() > 1000) {
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR, 'chat.common.param_error', ['param' => 'limit']);
         }
-        // todo get本conversation窗口middle,notcontain任何话题的message.
+        // todo get本conversationwindowmiddle,notcontain任何话题的message.
         return $this->delightfulSeqRepository->getConversationsChatMessages($messagesQueryDTO, $messagesQueryDTO->getConversationIds());
     }
 
@@ -551,7 +551,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     }
 
     /**
-     * according to已经存in的chat相关 seqEntity,给群membergenerateconversation窗口.
+     * according to已经存in的chat相关 seqEntity,给群membergenerateconversationwindow.
      */
     public function generateGroupSeqEntityByChatSeq(
         array $userEntity,
@@ -803,7 +803,7 @@ class DelightfulChatDomainService extends AbstractDomainService
                         $seqExtra->setEditMessageOptions(
                             (new EditMessageOptions())->setMessageVersionId(null)->setDelightfulMessageId($messageEntity->getDelightfulMessageId())
                         );
-                        // 这within要update收hair双方的 seq each一time，and $seqExtra value可能different，循环middleupdate 2 timedatabaseshould是能接受的。
+                        // 这within要update收hair双方的 seq each一time，and $seqExtra value可能different，loopmiddleupdate 2 timedatabaseshould是能接受的。
                         $this->delightfulSeqRepository->updateSeqExtra((string) $seqData['id'], $seqExtra);
                     }
                 }
@@ -881,7 +881,7 @@ class DelightfulChatDomainService extends AbstractDomainService
         $delightfulMsgId = empty($delightfulMsgId) ? IdGenerator::getUniqueId32() : $delightfulMsgId;
         $time = date('Y-m-d H:i:s');
         $id = (string) IdGenerator::getSnowId();
-        // 一itemmessagewill出现in两person的conversation窗口within(group chato clock出现in几千person的conversation窗口idwithin),所by直接not存了,needconversation窗口ido clockagainaccording to收itemperson/hairitempersonid去 delightful_user_conversation 取
+        // 一itemmessagewill出现in两person的conversationwindowwithin(group chato clock出现in几千person的conversationwindowidwithin),所by直接not存了,needconversationwindowido clockagainaccording to收itemperson/hairitempersonid去 delightful_user_conversation 取
         $messageData = [
             'id' => $id,
             'sender_id' => $senderUserEntity->getUserId(),
@@ -927,7 +927,7 @@ class DelightfulChatDomainService extends AbstractDomainService
             $streamOptions->setStreamAppMessageId($createStreamSeqDTO->getAppMessageId());
             $time = date('Y-m-d H:i:s');
             $language = di(TranslatorInterface::class)->getLocale();
-            // 一itemmessagewill出现in两person的conversation窗口within(group chato clock出现in几千person的conversation窗口idwithin),所by直接not存了,needconversation窗口ido clockagainaccording to收itemperson/hairitempersonid去 delightful_user_conversation 取
+            // 一itemmessagewill出现in两person的conversationwindowwithin(group chato clock出现in几千person的conversationwindowidwithin),所by直接not存了,needconversationwindowido clockagainaccording to收itemperson/hairitempersonid去 delightful_user_conversation 取
             $messageData = [
                 'id' => (string) IdGenerator::getSnowId(),
                 'sender_id' => $senderUserEntity->getUserId(),
@@ -1099,7 +1099,7 @@ class DelightfulChatDomainService extends AbstractDomainService
     private function handlerGroupReceiverConversation(array $groupUserConversations): void
     {
         $needUpdateIds = [];
-        // ifconversation窗口behidden，那么againtimeopen
+        // ifconversationwindowbehidden，那么againtimeopen
         foreach ($groupUserConversations as $groupUserConversation) {
             if ($groupUserConversation->getStatus() !== ConversationStatus::Normal) {
                 $needUpdateIds[] = $groupUserConversation->getId();

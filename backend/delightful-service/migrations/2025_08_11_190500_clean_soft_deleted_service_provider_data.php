@@ -461,7 +461,7 @@ return new class extends Migration {
 
         $invalidConfigIds = [];
 
-        // 2. 循环checkeachconfiguration的validproperty
+        // 2. loopcheckeachconfiguration的validproperty
         foreach ($configs as $config) {
             try {
                 // decryptconfiguration（useconfiguration ID 作为 salt）

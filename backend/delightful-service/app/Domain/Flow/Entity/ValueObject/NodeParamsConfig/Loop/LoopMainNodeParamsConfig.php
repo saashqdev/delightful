@@ -59,7 +59,7 @@ class LoopMainNodeParamsConfig extends NodeParamsConfig
             'max_loop_count' => ComponentFactory::generateTemplate(StructureType::Value)->toArray(),
         ]);
         $this->node->setMeta([
-            // associate的循环bodysectionpointID
+            // associate的loopbodysectionpointID
             'relation_id' => '',
         ]);
     }

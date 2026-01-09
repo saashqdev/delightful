@@ -137,7 +137,7 @@ class ModeDomainService
                 ExceptionBuilder::throw(ModeErrorCode::FOLLOW_MODE_NOT_FOUND);
             }
 
-            // 防止循环跟随
+            // 防止loop跟随
             if ($this->hasCircularFollow($dataIsolation, $modeEntity->getId(), $modeEntity->getFollowModeId())) {
                 ExceptionBuilder::throw(ModeErrorCode::CANNOT_FOLLOW_SELF);
             }
@@ -343,7 +343,7 @@ class ModeDomainService
     }
 
     /**
-     * checkwhether存in循环跟随.
+     * checkwhether存inloop跟随.
      */
     private function hasCircularFollow(ModeDataIsolation $dataIsolation, int|string $modeId, int|string $followModeId, array $visited = []): bool
     {
@@ -377,12 +377,12 @@ class ModeDomainService
      * according to跟随关系mapping递归findfinal源模typeID.
      * @param int $modeId current模typeID
      * @param array $followMap 跟随关系mapping [跟随者ID => be跟随者ID]
-     * @param array $visited 防止循环跟随
+     * @param array $visited 防止loop跟随
      * @return int final源模typeID
      */
     private function findUltimateSourceId(int $modeId, array $followMap, array $visited = []): int
     {
-        // 防止循环跟随
+        // 防止loop跟随
         if (in_array($modeId, $visited)) {
             return $modeId;
         }

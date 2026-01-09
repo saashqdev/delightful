@@ -244,7 +244,7 @@ class DelightfulControlDomainService extends AbstractDomainService
         unset($receiveSeqList[$needChangeSeqEntity->getObjectId()]);
         $seqListCreateDTO = [];
         foreach ($receiveSeqList as $receiveSeq) {
-            // withdraw的all是收item方自己conversation窗口middle的messageid
+            // withdraw的all是收item方自己conversationwindowmiddle的messageid
             $revokeMessageId = $receiveSeq['message_id'];
             $receiveSeq['status'] = DelightfulMessageStatus::Seen;
             $receiveSeq['seq_type'] = $controlMessageType->value;

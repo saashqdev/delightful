@@ -119,7 +119,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             // 3.1 generateassociateissue并send给front端
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $searchDetailItems);
             $associateQuestions = $this->generateAndSendAssociateQuestions($dto, $associateQuestionsQueryVo, AggregateAISearchCardMessageV2::NULL_PARENT_ID);
-            // 3.2 according toassociateissue，hair起简单search（not拿网页detail),并filter掉重复or者与issueassociatepropertynot高的网页content
+            // 3.2 according toassociateissue，hair起简单search（not拿webpagedetail),并filter掉重复or者与issueassociatepropertynot高的webpagecontent
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
 
             // 3.4 according tosearch深degree，决定whethercontinuesearchassociateissue的子issue
@@ -190,7 +190,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             // 2.1 generateassociateissue
             $associateQuestionsQueryVo = $this->getAssociateQuestionsQueryVo($dto, $searchDetailItems);
             $associateQuestions = $this->generateAssociateQuestions($associateQuestionsQueryVo, AggregateAISearchCardMessageV2::NULL_PARENT_ID);
-            // 2.2 according toassociateissue，hair起简单search（not拿网页detail),并filter掉重复or者与issueassociatepropertynot高的网页content
+            // 2.2 according toassociateissue，hair起简单search（not拿webpagedetail),并filter掉重复or者与issueassociatepropertynot高的webpagecontent
             $noRepeatSearchContexts = $this->generateSearchResults($dto, $associateQuestions);
 
             // 3. according toeachassociateissuereply，generate总结.
@@ -414,7 +414,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
     public function generateSearchResults(DelightfulChatAggregateSearchReqDTO $dto, array $associateQuestions): array
     {
         $start = microtime(true);
-        // according toassociateissue，hair起简单search（not拿网页detail),并filter掉重复or者与issueassociatepropertynot高的网页content
+        // according toassociateissue，hair起简单search（not拿webpagedetail),并filter掉重复or者与issueassociatepropertynot高的webpagecontent
         $searchKeywords = $this->getSearchKeywords($associateQuestions);
         $queryVo = (new AISearchCommonQueryVo())
             ->setSearchKeywords($searchKeywords)
@@ -473,7 +473,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
         $noRepeatSearchData = [];
         foreach ($noRepeatSearchContexts as $searchDetailItem) {
             $noRepeatSearch = $searchDetailItem->toArray();
-            // front端not要网页detail，移except detail，meanwhile保留总结o clock的searchdetail
+            // front端not要webpagedetail，移except detail，meanwhile保留总结o clock的searchdetail
             unset($noRepeatSearch['detail']);
             $noRepeatSearchData[] = $noRepeatSearch;
         }
@@ -801,7 +801,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
                 if (str_contains($context->getCachedPageUrl(), 'zhihu.com')) {
                     return;
                 }
-                // 只取finger定quantity网页的详细content
+                // 只取finger定quantitywebpage的详细content
                 if ($currentDetailReadCount > $detailReadMaxNum) {
                     return;
                 }
@@ -831,7 +831,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             });
         }
         $parallel->wait();
-        // ifalsohaveneedpush的count，循环push
+        // ifalsohaveneedpush的count，looppush
         while ($questionsNum > 0 && $readPagesDetailChannel->isAvailable()) {
             $readPagesDetailChannel->push(1, 5);
             --$questionsNum;
@@ -896,7 +896,7 @@ class DelightfulChatAISearchV2AppService extends AbstractAppService
             $this->generateAndSendAssociateSubQuestions($dto, $noRepeatSearchContexts, $associateQuestions);
         });
         $parallel->add(function () use (&$noRepeatSearchContexts, $readPagesDetailChannel, $associateQuestions) {
-            // 3.4.a.2 并line：精读associateissuesearch的网页detail
+            // 3.4.a.2 并line：精读associateissuesearch的webpagedetail
             $this->getSearchPageDetails($noRepeatSearchContexts, $associateQuestions, $readPagesDetailChannel);
         });
         $parallel->wait();

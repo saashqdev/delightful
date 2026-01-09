@@ -74,7 +74,7 @@ class QuickInstructionNode extends AbstractCustomNode
                 $instruction = $nodeForArray['attrs']['instruction'] ?? [];
                 $values = $instruction['values'] ?? [];
 
-                // usearrayfilter和键valuefind替代循环
+                // usearrayfilter和键valuefind替代loop
                 if (! empty($values) && is_array($values)) {
                     // find匹配 id 的instructionvalue
                     $matchedValues = array_filter($values, function ($item) use ($value) {

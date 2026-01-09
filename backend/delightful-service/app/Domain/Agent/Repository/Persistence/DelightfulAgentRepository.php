@@ -258,7 +258,7 @@ class DelightfulAgentRepository extends AbstractRepository implements Delightful
 
     /**
      * minute批get助理list.
-     * @param int $offset 偏移quantity
+     * @param int $offset offsetquantity
      * @param int $limit each批quantity
      * @return array 助理list
      */

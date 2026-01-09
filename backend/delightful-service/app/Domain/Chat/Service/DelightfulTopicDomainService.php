@@ -245,14 +245,14 @@ class DelightfulTopicDomainService extends AbstractDomainService
     public function agentSendMessageGetTopicId(DelightfulConversationEntity $senderConversationEntity, int $getType): string
     {
         $receiverConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($senderConversationEntity->getId());
-        // 为收item方createsession，but是notagain触hair ConversationCreatedEvent event，避免event循环
+        // 为收item方createsession，but是notagain触hair ConversationCreatedEvent event，避免eventloop
         if (($receiverConversationEntity === null) && in_array($senderConversationEntity->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {
             $conversationDTO = new DelightfulConversationEntity();
             $conversationDTO->setUserId($senderConversationEntity->getReceiveId());
             $conversationDTO->setReceiveId($senderConversationEntity->getUserId());
-            # createsession窗口
+            # createsessionwindow
             $conversationDTO = $this->parsePrivateChatConversationReceiveType($conversationDTO);
-            # 准备generate一session窗口
+            # 准备generate一sessionwindow
             $receiverConversationEntity = $this->delightfulConversationRepository->addConversation($conversationDTO);
         }
         $senderTopicId = $this->checkDefaultTopicExist($senderConversationEntity);
@@ -316,7 +316,7 @@ class DelightfulTopicDomainService extends AbstractDomainService
         $topicDTO->setName(__('chat.topic.system_default_topic'));
         $topicDTO->setDescription('');
         $this->delightfulChatTopicRepository->createTopic($topicDTO);
-        // 将default话题id回写进session窗口
+        // 将default话题id回写进sessionwindow
         $senderConversationExtra = $conversationEntity->getExtra();
         if ($senderConversationExtra === null) {
             $senderConversationExtra = new ConversationExtra();

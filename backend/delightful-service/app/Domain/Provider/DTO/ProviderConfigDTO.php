@@ -61,7 +61,7 @@ class ProviderConfigDTO extends AbstractDTO
     protected bool $isModelsEnable = true;
 
     /**
-     * 为了interfacecompatible，固定return空array.
+     * 为了interfacecompatible，fixedreturn空array.
      */
     protected array $models = [];
 

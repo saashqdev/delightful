@@ -29,10 +29,10 @@ class SlidingWindowUtil
 
     /**
      * 防抖interface - executemostback一timerequeststrategy
-     * infinger定time窗口inside，onlymostback一timerequestwillbeexecute.
+     * infinger定timewindowinside，onlymostback一timerequestwillbeexecute.
      *
      * @param string $debounceKey 防抖键
-     * @param float $delayVerificationSeconds delayverifytime（second），also是actual的防抖窗口
+     * @param float $delayVerificationSeconds delayverifytime（second），also是actual的防抖window
      * @return bool whethershouldexecutecurrentrequest
      */
     public function shouldExecuteWithDebounce(

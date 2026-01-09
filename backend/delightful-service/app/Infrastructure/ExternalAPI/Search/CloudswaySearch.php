@@ -37,7 +37,7 @@ class CloudswaySearch
      * @param string $apiKey api key for authorization (from config)
      * @param string $mkt Market code (not used by Cloudsway but kept for interface consistency)
      * @param int $count resultquantity (10/20/30/40/50)
-     * @param int $offset pagination偏移quantity
+     * @param int $offset paginationoffsetquantity
      * @param string $freshness timefilter (Day/Week/Month)
      * @param string $setLang languagecode (如 en-US)
      * @return array Cloudsway API response

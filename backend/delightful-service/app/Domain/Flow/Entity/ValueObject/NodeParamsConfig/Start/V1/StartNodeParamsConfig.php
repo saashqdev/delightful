@@ -151,7 +151,7 @@ class StartNodeParamsConfig extends NodeParamsConfig
                     $output = $this->getRoutineOutputTemplate();
                     break;
                 case TriggerType::LoopStart:
-                    // 循环startsectionpoint，notneedconfiguration
+                    // loopstartsectionpoint，notneedconfiguration
                     break;
                 default:
                     ExceptionBuilder::throw(FlowErrorCode::FlowNodeValidateFailed, 'flow.node.start.unsupported_trigger_type', ['trigger_type' => $triggerType->name]);

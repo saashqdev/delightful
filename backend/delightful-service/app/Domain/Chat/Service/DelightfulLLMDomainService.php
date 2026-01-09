@@ -211,7 +211,7 @@ class DelightfulLLMDomainService
     - if回答very长，请尽quantity结构化、minutesegment落总结。ifneedminutepoint作答，尽quantity控制in5pointbyinside，并merge相关的content。
     - 对at客观category的问答，ifquestion的答案non常简短，can适when补充一to两sentence相关information，by丰富content。
     - 你needaccording touser要求和回答contentchoose合适、美观的回答format，ensure可读property强。
-    - 你的回答should综合多相关网页来回答，not能重复quote一网页。
+    - 你的回答should综合多相关webpage来回答，not能重复quote一webpage。
     - unlessuser要求，否then你回答的languageneed和user提问的language保持一致。
     - output漂亮的markdown format，contentmiddleadd一些与theme相关的emoji表情符number。
     
@@ -580,7 +580,7 @@ class DelightfulLLMDomainService
         $searchContextsString = '';
         // 清洗searchresult
         foreach ($searchContexts as $index => $context) {
-            // can传入网页detail，by便more好的filter
+            // can传入webpagedetail，by便more好的filter
             $searchContextsString .= '[[' . $index . ']] ' . $context->getSnippet() . "\n\n";
         }
         $systemPrompt = str_replace(

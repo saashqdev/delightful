@@ -114,7 +114,7 @@ class DelightfulStreamTextProcessor
 
     private function isValidTagContent(): array
     {
-        // 正then挺费performance的，先采use固定的stringlength吧
+        // 正then挺费performance的，先采usefixed的stringlength吧
         if (! in_array(mb_strlen($this->buffer), $this->successLengths)) {
             return [];
         }

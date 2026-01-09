@@ -43,7 +43,7 @@ class AggregateAISearchCardMessageV2 extends AbstractChatMessageStruct implement
     protected ?array $associateQuestions;
 
     /**
-     * （所have子issue的）search网页list.
+     * （所have子issue的）searchwebpagelist.
      *
      * @var QuestionSearchResult[]
      */

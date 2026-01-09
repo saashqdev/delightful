@@ -25,7 +25,7 @@ class StreamOptions extends AbstractEntity
     protected MessageAppendOptions $append;
 
     /**
-     * issuesearchend的标识，useatfront端渲染end动画。or者pushexceptioninfo。
+     * issuesearchend的标识，useatfront端渲染endanimation。or者pushexceptioninfo。
      * @var StepFinishedDTO[]
      */
     protected array $stepsFinished;

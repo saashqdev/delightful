@@ -27,7 +27,7 @@ use Throwable;
 #[FlowNodeDefine(
     type: NodeType::LoopMain->value,
     code: NodeType::LoopMain->name,
-    name: '循环 / 主循环',
+    name: 'loop / 主loop',
     paramsConfig: LoopMainNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,
@@ -50,7 +50,7 @@ class LoopMainNodeRunner extends NodeRunner
         }
 
         $breakVariableKey = "#{$bodyId}_break";
-        // 采usevariable来initialize跳出循环configuration
+        // 采usevariable来initialize跳出loopconfiguration
         $executionData->variableSave($breakVariableKey, false);
 
         $params = $this->node->getParams();
@@ -137,13 +137,13 @@ class LoopMainNodeRunner extends NodeRunner
         $loopDelightfulFlow->setCode($delightfulFlow->getCode() . '_loop');
         $loopDelightfulFlow->setType(Type::Loop);
 
-        // 循环bodysectionpoint
+        // loopbodysectionpoint
         $bodyNode = $delightfulFlow->getNodeById($bodyId);
         if (! $bodyNode) {
             return null;
         }
 
-        // get所have 父 id 是这循环body的sectionpoint
+        // get所have 父 id 是这loopbody的sectionpoint
         $childNodes = $delightfulFlow->getNodesByParentId($bodyId);
         if (empty($childNodes)) {
             return null;
@@ -165,7 +165,7 @@ class LoopMainNodeRunner extends NodeRunner
         try {
             $subExecutor = new DelightfulFlowExecutor($loopDelightfulFlow, $executionData);
             $subExecutor->setInLoop(true);
-            // 复usecurrent的executedata，循环bodyinside可access和modify
+            // 复usecurrent的executedata，loopbodyinside可access和modify
             $subExecutor->execute(TriggerType::LoopStart);
         } catch (Throwable $throwable) {
             ExceptionBuilder::throw(FlowErrorCode::ExecuteFailed, 'flow.node.loop.loop_flow_execute_failed', ['error' => $throwable->getMessage()]);

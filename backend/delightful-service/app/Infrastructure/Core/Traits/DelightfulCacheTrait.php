@@ -38,7 +38,7 @@ trait DelightfulCacheTrait
 
     /**
      * category的propertyinframework运lineo clock是not变的，所by这withinusecache，避免重复计算.
-     * ifhasContainer是 false，theninstructionnothaveuse容器，notquerycache.
+     * ifhasContainer是 false，theninstructionnothaveusecontainer，notquerycache.
      */
     protected function getUnCamelizeValueFromCache(string $key): string
     {

@@ -132,7 +132,7 @@ class BingSearch
                         'endpoint' => $requestUrl,
                         'statusCode' => $statusCode,
                     ]);
-                    break; // HTTPerrornotretry，直接跳出循环
+                    break; // HTTPerrornotretry，直接跳出loop
                 }
                 $this->logger->warning('Network error occurred', [
                     'endpoint' => $requestUrl,

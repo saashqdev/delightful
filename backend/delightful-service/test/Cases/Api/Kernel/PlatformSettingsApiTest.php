@@ -179,7 +179,7 @@ class PlatformSettingsApiTest extends AbstractHttpTest
                 'en_US' => 'My Platform',
             ],
             'title_i18n' => [
-                'zh_CN' => '网站title',
+                'zh_CN' => 'websitetitle',
                 'en_US' => 'Website Title',
             ],
         ];

@@ -396,11 +396,11 @@ class QwenImageModel extends AbstractImageGenerate
     }
 
     /**
-     * 校验qwen-imagemodel的固定sizecolumn表.
+     * 校验qwen-imagemodel的fixedsizecolumn表.
      */
     private function validateQwenImageSize(string $size): void
     {
-        // qwen-imagesupport的固定sizecolumn表
+        // qwen-imagesupport的fixedsizecolumn表
         $supportedSizes = [
             '1664x928',   // 16:9
             '1472x1140',  // 4:3

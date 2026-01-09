@@ -104,7 +104,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
             }
             $senderUserEntity = null; // （personcategory）send方的 user_entity
             if ($seqEntity->getConversationId()) {
-                // 这within的conversation窗口是 ai自己的，那么对方是personcategory（also可能是另一 ai，if存in ai 互撩的话）
+                // 这within的conversationwindow是 ai自己的，那么对方是personcategory（also可能是另一 ai，if存in ai 互撩的话）
                 $conversationEntity = $this->delightfulConversationRepository->getConversationById($seqEntity->getConversationId());
                 if ($conversationEntity === null) {
                     $this->logger->error('UserCallAgentEventError delightful_conversation_id:{delightful_conversation_id} conversation not found', ['delightful_conversation_id' => $seqEntity->getConversationId()]);
@@ -112,7 +112,7 @@ class DelightfulSeqDomainService extends AbstractDomainService
                 }
                 $senderUserEntity = $this->delightfulUserRepository->getUserById($conversationEntity->getReceiveId());
             } elseif ($seqEntity->getSeqType() === ControlMessageType::AddFriendSuccess) {
-                // 因为加好友nothaveconversation窗口，所byneedaccording tomessage的sendid查出对方的 user_entity
+                // 因为加好友nothaveconversationwindow，所byneedaccording tomessage的sendid查出对方的 user_entity
                 /** @var AddFriendMessage $seqContent */
                 $seqContent = $seqEntity->getContent();
                 $senderUserEntity = $this->delightfulUserRepository->getUserById($seqContent->getUserId());

@@ -72,7 +72,7 @@ class DelightfulChatAdminContactApi extends AbstractApi
     public function userGetByIds(RequestInterface $request): array
     {
         $ids = $request->input('user_ids', '');
-        // up一页的token. 对atmysql来说,return累积偏移quantity;对ates来说,return游标
+        // up一页的token. 对atmysql来说,return累积offsetquantity;对ates来说,return游标
         $pageToken = (string) $request->input('page_token', '');
         $queryType = (int) ($request->input('query_type') ?: UserQueryType::User->value);
         if (! in_array($queryType, UserQueryType::types())) {
@@ -93,7 +93,7 @@ class DelightfulChatAdminContactApi extends AbstractApi
     public function departmentUserList(string $id, RequestInterface $request): array
     {
         // departmentid
-        // up一页的token. 对atmysql来说,return累积偏移quantity;对ates来说,return游标
+        // up一页的token. 对atmysql来说,return累积offsetquantity;对ates来说,return游标
         $pageToken = (string) $request->input('page_token', '');
         // whether递归
         $recursive = (bool) $request->input('recursive', false);
@@ -109,7 +109,7 @@ class DelightfulChatAdminContactApi extends AbstractApi
     {
         $authorization = $this->getAuthorization();
         $query = (string) $request->input('query', '');
-        // up一页的token. 对atmysql来说,return累积偏移quantity;对ates来说,return游标
+        // up一页的token. 对atmysql来说,return累积offsetquantity;对ates来说,return游标
         $pageToken = (string) $request->input('page_token', '');
         if (empty($query)) {
             ExceptionBuilder::throw(ChatErrorCode::INPUT_PARAM_ERROR, 'chat.common.param_error', ['param' => 'query']);

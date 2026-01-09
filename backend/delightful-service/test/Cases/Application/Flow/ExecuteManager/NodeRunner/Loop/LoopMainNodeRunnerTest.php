@@ -52,7 +52,7 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
 {
     "id": 1,
     "code": "DELIGHTFUL-FLOW-66ab6425d066a7-xxx",
-    "name": "test循环sectionpoint",
+    "name": "testloopsectionpoint",
     "description": "",
     "icon": "",
     "type": 1,
@@ -123,7 +123,7 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
         },
         {
             "node_id": "DELIGHTFUL-FLOW-NODE-66dfc283ad6ba2-06103935",
-            "name": "循环",
+            "name": "loop",
             "description": "",
             "node_type": 30,
             "meta": {
@@ -195,7 +195,7 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
         },
         {
             "node_id": "DELIGHTFUL-FLOW-NODE-66dfc3d81b31b1-78900688",
-            "name": "循环body",
+            "name": "loopbody",
             "description": "",
             "node_type": 31,
             "meta": {
@@ -208,7 +208,7 @@ class LoopMainNodeRunnerTest extends ExecuteManagerBaseTest
         },
         {
             "node_id": "DELIGHTFUL-FLOW-NODE-66dfc32637e0b5-42629375",
-            "name": "循环startsectionpoint",
+            "name": "loopstartsectionpoint",
             "description": "",
             "node_type": 1,
             "meta": {

@@ -53,7 +53,7 @@ class DelightfulFlowExportImportAppService
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.export.not_main_flow', ['label' => $flowCode]);
         }
 
-        // checkwhether存in循环dependency
+        // checkwhether存inloopdependency
         if ($this->checkCircularDependency($dataIsolation, $flowCode)) {
             ExceptionBuilder::throw(FlowErrorCode::ValidateFailed, 'flow.export.circular_dependency_detected');
         }
@@ -165,14 +165,14 @@ class DelightfulFlowExportImportAppService
     }
 
     /**
-     * validatewhether存in循环dependency
-     * use深degree优先search检测循环quote.
+     * validatewhether存inloopdependency
+     * use深degree优先search检测loopquote.
      */
     public function checkCircularDependency(FlowDataIsolation $dataIsolation, string $flowCode, array $visited = []): bool
     {
-        // ifcurrentprocess已inaccesspathmiddle，instructionshapebecome了循环
+        // ifcurrentprocess已inaccesspathmiddle，instructionshapebecome了loop
         if (in_array($flowCode, $visited)) {
-            return true; // hair现循环dependency
+            return true; // hair现loopdependency
         }
 
         // 将currentprocessaddtoaccesspath
@@ -181,7 +181,7 @@ class DelightfulFlowExportImportAppService
         // getprocess实body
         $flow = $this->delightfulFlowDomainService->getByCode($dataIsolation, $flowCode);
         if (! $flow) {
-            return false; // processnot存in，not构become循环
+            return false; // processnot存in，not构becomeloop
         }
 
         // 遍历所havesectionpointcheckdependency
@@ -190,7 +190,7 @@ class DelightfulFlowExportImportAppService
             if ($node->getNodeType() === NodeType::Sub->value) {
                 $subFlowId = $node->getParams()['sub_flow_id'] ?? '';
                 if ($subFlowId && $this->checkCircularDependency($dataIsolation, $subFlowId, $visited)) {
-                    return true; // 子processmiddle存in循环dependency
+                    return true; // 子processmiddle存inloopdependency
                 }
             }
 
@@ -202,16 +202,16 @@ class DelightfulFlowExportImportAppService
                         $toolId = $optionTool['tool_id'] ?? '';
                         $toolSetId = $optionTool['tool_set_id'] ?? '';
 
-                        // inside置toolskip循环dependencycheck
+                        // inside置toolskiploopdependencycheck
                         if ($toolId && ! $this->isBuiltInTool($toolId, $toolSetId) && $this->checkCircularDependency($dataIsolation, $toolId, $visited)) {
-                            return true; // toolquotemiddle存in循环dependency
+                            return true; // toolquotemiddle存inloopdependency
                         }
                     }
                 }
             }
         }
 
-        return false; // nothave检测to循环dependency
+        return false; // nothave检测toloopdependency
     }
 
     /**
@@ -624,7 +624,7 @@ class DelightfulFlowExportImportAppService
                     if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $item)) {
                         $fieldName = substr($item, strlen($oldNodeIdStr));
                         $item = $newNodeIdStr . $fieldName;
-                        break; // 找to匹配backexit循环
+                        break; // 找to匹配backexitloop
                     }
                 }
             }
@@ -664,7 +664,7 @@ class DelightfulFlowExportImportAppService
         $builtInToolSetPrefixes = [
             'file_box',      // file盒tool集
             'search_engine', // searchenginetool集
-            'web_browse',    // 网页browsetool集
+            'web_browse',    // webpagebrowsetool集
             'system',        // systemtool集
             'knowledge',     // knowledge basetool集
         ];
@@ -762,7 +762,7 @@ class DelightfulFlowExportImportAppService
             if (preg_match('/^' . preg_quote($oldNodeIdStr, '/') . '\./', $str)) {
                 $fieldName = substr($str, strlen($oldNodeIdStr));
                 $str = $newNodeIdStr . $fieldName;
-                break; // 找to匹配backexit循环
+                break; // 找to匹配backexitloop
             }
         }
     }

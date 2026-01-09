@@ -380,7 +380,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
         try {
             // 往group chatmiddledecreaseuser
             $this->delightfulGroupDomainService->removeUsersFromGroup($groupEntity, $removeUserIds);
-            // 移except这些user的conversation窗口
+            // 移except这些user的conversationwindow
             $this->delightfulConversationDomainService->batchDeleteGroupConversationByUserIds($groupEntity, $removeUserIds);
             // generate群memberdecrease的seq
             $seqContent = ['user_ids' => $removeUserIds, 'group_id' => $groupEntity->getId(), 'operate_user_id' => $dataIsolation->getCurrentUserId()];
@@ -458,7 +458,7 @@ class DelightfulChatGroupAppService extends AbstractAppService
     ): DelightfulSeqEntity {
         // 往group chatmiddleadduser
         $this->delightfulGroupDomainService->addUsersToGroup($groupEntity, $userIds);
-        // 为new的membercreateconversation窗口
+        // 为new的membercreateconversationwindow
         $this->delightfulConversationDomainService->batchCreateGroupConversationByUserIds($groupEntity, $userIds);
         return $this->createAndDispatchOperateGroupUsersSeq($structure, $groupEntity, $dataIsolation, $controlMessageType);
     }

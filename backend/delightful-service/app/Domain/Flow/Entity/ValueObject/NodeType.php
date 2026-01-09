@@ -16,7 +16,7 @@ enum NodeType: int
 {
     /*
      * Start Node
-     * use作触hair器。窗口openo clock、have新messageo clock、schedule;parametercall（仅子process可use）
+     * use作触hair器。windowopeno clock、have新messageo clock、schedule;parametercall（仅子process可use）
      */
     case Start = 1;
 
@@ -175,17 +175,17 @@ enum NodeType: int
     case WaitMessage = 29;
 
     /**
-     * 循环sectionpoint.
+     * loopsectionpoint.
      */
     case LoopMain = 30;
 
     /**
-     * 循环sectionpointbody.
+     * loopsectionpointbody.
      */
     case LoopBody = 31;
 
     /**
-     * 循环end.
+     * loopend.
      */
     case LoopStop = 32;
 

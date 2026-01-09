@@ -43,11 +43,11 @@ use function Hyperf\Coroutine\co;
 class DelightfulConversationDomainService extends AbstractDomainService
 {
     /**
-     * create/updateconversation窗口.
+     * create/updateconversationwindow.
      */
     public function saveConversation(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): DelightfulConversationEntity
     {
-        // frommessageStructmiddleparse出来conversation窗口detail
+        // frommessageStructmiddleparse出来conversationwindowdetail
         $messageType = $messageDTO->getMessageType();
         if (! $messageType instanceof ControlMessageType) {
             ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR);
@@ -62,17 +62,17 @@ class DelightfulConversationDomainService extends AbstractDomainService
         // 判断 uid 和 receiverId whether已经存inconversation
         $existsConversation = $this->delightfulConversationRepository->getConversationByUserIdAndReceiveId($conversationDTO);
         if ($existsConversation) {
-            // 改变messagetype,fromcreateconversation窗口,变more为openconversation窗口
+            // 改变messagetype,fromcreateconversationwindow,变more为openconversationwindow
             $conversationEntity = $existsConversation;
             $messageTypeInterface = MessageAssembler::getMessageStructByArray(
                 $messageType->getName(),
                 $messageDTO->getContent()->toArray()
             );
-            // needmeanwhilemodifytype和content,才能把messagecontent变more为openconversation窗口
+            // needmeanwhilemodifytype和content,才能把messagecontent变more为openconversationwindow
             $messageDTO->setMessageType($messageTypeInterface->getMessageTypeEnum());
             $messageDTO->setContent($messageTypeInterface);
             $messageDTO->setReceiveType($conversationEntity->getReceiveType());
-            // updateconversation窗口status
+            // updateconversationwindowstatus
             if (in_array($messageDTO->getMessageType(), [ControlMessageType::CreateConversation, ControlMessageType::OpenConversation], true)) {
                 $this->delightfulConversationRepository->updateConversationById($conversationEntity->getId(), [
                     'status' => ConversationStatus::Normal->value,
@@ -90,7 +90,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * openconversation窗口.
+     * openconversationwindow.
      * 控制message,只inseq表writedata,notinmessage表写.
      * @throws Throwable
      */
@@ -109,7 +109,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * conversation窗口：置top/移except/免打扰.
+     * conversationwindow：置top/移except/免打扰.
      * @throws Throwable
      */
     public function conversationOptionChange(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
@@ -157,7 +157,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
      */
     public function clientOperateConversationStatus(DelightfulMessageEntity $messageDTO, DataIsolation $dataIsolation): array
     {
-        // frommessageStructmiddleparse出来conversation窗口detail
+        // frommessageStructmiddleparse出来conversationwindowdetail
         $messageType = $messageDTO->getMessageType();
         if (! in_array($messageType, [ControlMessageType::StartConversationInput, ControlMessageType::EndConversationInput], true)) {
             ExceptionBuilder::throw(ChatErrorCode::MESSAGE_TYPE_ERROR);
@@ -191,12 +191,12 @@ class DelightfulConversationDomainService extends AbstractDomainService
 
     /**
      * 智能body触hairconversation的startinputor者endinput.
-     * 直接操作对方的conversation窗口，而not是把messagehairin自己的conversation窗口然backagain经由messageminutehair模pieceforwardto对方的conversation窗口.
+     * 直接操作对方的conversationwindow，而not是把messagehairin自己的conversationwindow然backagain经由messageminutehair模pieceforwardto对方的conversationwindow.
      * @deprecated user端call agentOperateConversationStatusV2 method代替
      */
     public function agentOperateConversationStatus(ControlMessageType $controlMessageType, string $agentConversationId): bool
     {
-        // find对方的conversation窗口
+        // find对方的conversationwindow
         $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($agentConversationId);
         if ($receiveConversationEntity === null) {
             return true;
@@ -230,11 +230,11 @@ class DelightfulConversationDomainService extends AbstractDomainService
 
     /**
      * use intermediate eventconductmiddlebetweenstatemessagepush，not持久化message. support话题level别的“正ininputmiddle”
-     * 直接操作对方的conversation窗口，而not是把messagehairin自己的conversation窗口然backagain经由messageminutehair模pieceforwardto对方的conversation窗口.
+     * 直接操作对方的conversationwindow，而not是把messagehairin自己的conversationwindow然backagain经由messageminutehair模pieceforwardto对方的conversationwindow.
      */
     public function agentOperateConversationStatusV2(ControlMessageType $controlMessageType, string $agentConversationId, ?string $topicId = null): bool
     {
-        // find对方的conversation窗口
+        // find对方的conversationwindow
         $receiveConversationEntity = $this->delightfulConversationRepository->getReceiveConversationBySenderConversationId($agentConversationId);
         if ($receiveConversationEntity === null) {
             return true;
@@ -286,17 +286,17 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * 为finger定群membercreateconversation窗口.
+     * 为finger定群membercreateconversationwindow.
      */
     public function batchCreateGroupConversationByUserIds(DelightfulGroupEntity $groupEntity, array $userIds): array
     {
         $users = $this->delightfulUserRepository->getUserByIds($userIds);
         $users = array_column($users, null, 'user_id');
-        // 判断这些userwhether已经存inconversation窗口,只是窗口statusbemark为delete
+        // 判断这些userwhether已经存inconversationwindow,只是windowstatusbemark为delete
         $conversations = $this->delightfulConversationRepository->batchGetConversations($userIds, $groupEntity->getId(), ConversationType::Group);
         /** @var DelightfulConversationEntity[] $conversations */
         $conversations = array_column($conversations, null, 'user_id');
-        // 给这些群member批quantitygeneratecreateconversation窗口message
+        // 给这些群member批quantitygeneratecreateconversationwindowmessage
         $conversationsCreateDTO = [];
         $conversationsUpdateIds = [];
         foreach ($users as $user) {
@@ -338,7 +338,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * 为群主和群memberdeleteconversation窗口.
+     * 为群主和群memberdeleteconversationwindow.
      */
     public function batchDeleteGroupConversationByUserIds(DelightfulGroupEntity $groupEntity, array $userIds): int
     {
@@ -356,7 +356,7 @@ class DelightfulConversationDomainService extends AbstractDomainService
     }
 
     /**
-     * getconversation窗口，not存inthencreate.supportuser/group chat/ai.
+     * getconversationwindow，not存inthencreate.supportuser/group chat/ai.
      */
     public function getOrCreateConversation(string $senderUserId, string $receiveId, ?ConversationType $receiverType = null): DelightfulConversationEntity
     {
@@ -389,9 +389,9 @@ class DelightfulConversationDomainService extends AbstractDomainService
         $conversationEntity = $this->delightfulConversationRepository->getConversationByUserIdAndReceiveId($conversationDTO);
         if ($conversationEntity === null) {
             if (in_array($conversationDTO->getReceiveType(), [ConversationType::User, ConversationType::Ai], true)) {
-                # createconversation窗口
+                # createconversationwindow
                 $conversationDTO = $this->parsePrivateChatConversationReceiveType($conversationDTO);
-                # 准备generate一conversation窗口
+                # 准备generate一conversationwindow
                 $conversationEntity = $this->delightfulConversationRepository->addConversation($conversationDTO);
 
                 # 触hairconversationcreateevent

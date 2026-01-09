@@ -22,7 +22,7 @@ class FriendQueryDTO extends AbstractEntity
     protected array $aiCodes = [];
 
     /**
-     * up一页的token. 对atmysql来说,return累积偏移quantity;对ates来说,return游标.
+     * up一页的token. 对atmysql来说,return累积offsetquantity;对ates来说,return游标.
      */
     protected string $pageToken = '';
 

@@ -129,7 +129,7 @@ class ExecutionData
     /**
      * send方的冗余info.
      * $userEntity. send方的userinfo.
-     * $seqEntity. send方的session窗口info.
+     * $seqEntity. send方的sessionwindowinfo.
      * $messageEntity. send方的messageinfo.
      */
     private array $senderEntities = [];

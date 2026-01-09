@@ -46,7 +46,7 @@ class OrganizationListRequestDTO extends AbstractDTO
         $dto->syncStatus = ($request->input('sync_status') !== null) ? (int) $request->input('sync_status') : null;
         $dto->createdAtStart = $request->input('created_at_start');
         $dto->createdAtEnd = $request->input('created_at_end');
-        // 固定sort
+        // fixedsort
         $dto->orderBy = 'id';
         $dto->orderDirection = 'asc';
         return $dto;

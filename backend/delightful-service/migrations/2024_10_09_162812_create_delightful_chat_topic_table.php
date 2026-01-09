@@ -21,7 +21,7 @@ return new class extends Migration {
         Schema::create('delightful_chat_topics', static function (Blueprint $table) {
             $table->bigIncrements('id');
             // 话题 id
-            $table->string('topic_id', 64)->comment('话题 id. differentconversation窗口middle,话题id一致');
+            $table->string('topic_id', 64)->comment('话题 id. differentconversationwindowmiddle,话题id一致');
             // 话题name
             $table->string('name', 50)->comment('话题name');
             // 话题description

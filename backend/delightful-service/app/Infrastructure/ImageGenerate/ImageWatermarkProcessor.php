@@ -173,17 +173,17 @@ class ImageWatermarkProcessor
 
             // correct计算TTF字body的基lineposition
             if (function_exists('imagettfbbox')) {
-                // 直接use传入的Y坐标作为基lineposition
+                // 直接use传入的Ycoordinate作为基lineposition
                 $ttfY = $y;
             } else {
-                // if无法getside界框，直接use传入的Y坐标
+                // if无法getside界框，直接use传入的Ycoordinate
                 $ttfY = $y;
             }
 
             imagettftext($image, $ttfFontSize, 0, $x, $ttfY, $fontColor, $fontFile, $text);
         } else {
             // 降leveluseinside置字body（仅supportASCIIcharacter）
-            // inside置字body的Y坐标是texttop部，needfrom基linepositionconvert
+            // inside置字body的Ycoordinate是texttop部，needfrom基linepositionconvert
             $builtinY = $y - (int) ($fontSize * 0.8); // from基linepositionconvert为top部position
             imagestring($image, 5, $x, $builtinY, $text, $fontColor);
 

@@ -281,7 +281,7 @@ abstract class AbstractDomainService
      * 2.systemapplicationmessage,高优先level
      * 3.apimessage(the三方callgenerate)/100~1000persongroup chat,middle优先level
      * 4.控制message/1000personbyup的group chat,most低优先level.
-     * 5.部minute控制message与chat强相关的,can把优先level提to高. such asconversation窗口的create.
+     * 5.部minute控制message与chat强相关的,can把优先level提to高. such asconversationwindow的create.
      */
     public function getControlMessagePriority(DelightfulSeqEntity $seqEntity, ?int $receiveUserCount = 1): MessagePriority
     {
@@ -597,7 +597,7 @@ abstract class AbstractDomainService
             // 给自己的messagestreamgenerate序column.
             $seqEntity = $this->generateSenderSequenceByControlMessage($messageDTO, $conversationEntity->getId());
             $seqEntity->setConversationId($conversationEntity->getId());
-            // group chatneed给群membercreateconversation窗口
+            // group chatneed给群membercreateconversationwindow
             if ($conversationEntity->getReceiveType() === ConversationType::Group || $messageDTO->getReceiveType() === ConversationType::Ai) {
                 // 确定message优先level
                 $seqCreatedEvent = $this->getControlSeqCreatedEvent($seqEntity);
@@ -672,13 +672,13 @@ abstract class AbstractDomainService
     }
 
     /**
-     * 由at一itemmessage,in2conversation窗口渲染o clock,willgenerate2messageid,thereforeneedparse出来收item方能看to的messagequote的id.
+     * 由at一itemmessage,in2conversationwindow渲染o clock,willgenerate2messageid,thereforeneedparse出来收item方能看to的messagequote的id.
      * according to delightful_message_id + object_id + object_type 找tomessage的收item方的refer_message_id.
      * Support for the message editing function: For multiple sequences (seqs) of the same object_id, only the one with the smallest seq_id is returned.
      */
     protected function getMinSeqListByReferMessageId(DelightfulSeqEntity $senderSeqEntity): array
     {
-        // send方自己的conversation窗口within,quote的messageid,needconvertbecome收item方的messageid
+        // send方自己的conversationwindowwithin,quote的messageid,needconvertbecome收item方的messageid
         $sendReferMessageId = $senderSeqEntity->getReferMessageId();
         if (empty($sendReferMessageId)) {
             // nothavemessagequote

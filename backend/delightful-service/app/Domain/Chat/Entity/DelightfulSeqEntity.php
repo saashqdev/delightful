@@ -355,7 +355,7 @@ final class DelightfulSeqEntity extends AbstractEntity
 
     public function canTriggerFlow(): bool
     {
-        // if是chatmessage，or者是加好友/opensession窗口的控制message，then能触hair flow
+        // if是chatmessage，or者是加好友/opensessionwindow的控制message，then能触hair flow
         return $this->seqType instanceof ChatMessageType || in_array($this->seqType, [ControlMessageType::AddFriendSuccess, ControlMessageType::OpenConversation], true);
     }
 }

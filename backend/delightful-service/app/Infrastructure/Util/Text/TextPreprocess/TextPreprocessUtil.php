@@ -43,7 +43,7 @@ class TextPreprocessUtil
             fn (TextPreprocessRule $rule) => $rule !== TextPreprocessRule::FORMAT_EXCEL
         );
 
-        // ensureFORMAT_EXCEL的固定顺序
+        // ensureFORMAT_EXCEL的fixed顺序
         $orderedRules = [];
         if (! empty($excelSheetLineRemoveRule)) {
             $orderedRules[] = TextPreprocessRule::FORMAT_EXCEL;

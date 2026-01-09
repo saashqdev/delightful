@@ -312,7 +312,7 @@ class SeqAssembler
             'refer_message_id' => $seqEntity->getReferMessageId(),
             // send方的messageid
             'sender_message_id' => $seqEntity->getSenderMessageId(),
-            // message所属conversation窗口。 customer端canaccording to此value确定messagewhether要reminderetc。if本groundnothavehair现这conversationid，主动toservice端queryconversation窗口detail
+            // message所属conversationwindow。 customer端canaccording to此value确定messagewhether要reminderetc。if本groundnothavehair现这conversationid，主动toservice端queryconversationwindowdetail
             'conversation_id' => $seqEntity->getConversationId(),
             // 本itemmessage所属organization
             'organization_code' => $seqEntity->getOrganizationCode(),

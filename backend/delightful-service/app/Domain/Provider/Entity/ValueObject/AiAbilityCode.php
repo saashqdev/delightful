@@ -53,7 +53,7 @@ enum AiAbilityCode: string
             self::RealtimeSpeechRecognition => '本能力覆盖平台所havevoice转text的application场景，实o clocklisteneraudiostream并逐步output准确的textcontent。',
             self::AudioFileRecognition => '本能力覆盖平台所haveaudiofile转text的application场景，精准识别说话person、audiotextetcinfo。',
             self::AutoCompletion => '本能力覆盖平台所haveinputcontent自动补all的application场景，according to理解updown文为user自动补allcontent，由userchoosewhether采纳。',
-            self::ContentSummary => '本能力覆盖平台所havecontent总结的application场景，对长篇document、报告or网页文chapterconduct深degreeanalyze。',
+            self::ContentSummary => '本能力覆盖平台所havecontent总结的application场景，对长篇document、报告orwebpage文chapterconduct深degreeanalyze。',
             self::VisualUnderstanding => '本能力覆盖平台所haveneed让大modelconduct视觉理解的application场景，精准理解eachtypegraph像middle的contentby及复杂关系。',
             self::SmartRename => '本能力覆盖平台所havesupport AI 重命名的application场景，according to理解updown文为user自动conductcontenttitle的命名。',
             self::AiOptimization => '本能力覆盖平台所havesupport AI optimizecontent的application场景，according to理解updown文为user自动对contentconductoptimize。',

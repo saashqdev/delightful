@@ -17,7 +17,7 @@ use App\Infrastructure\Core\Dag\VertexResult;
 #[FlowNodeDefine(
     type: NodeType::LoopStop->value,
     code: NodeType::LoopStop->name,
-    name: '循环 / 跳出循环',
+    name: 'loop / 跳出loop',
     paramsConfig: LoopStopNodeParamsConfig::class,
     version: 'v0',
     singleDebug: false,

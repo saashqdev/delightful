@@ -18,7 +18,7 @@ enum TriggerType: int
     // 新messageo clock
     case ChatMessage = 1;
 
-    // openchat窗口
+    // openchatwindow
     case OpenChatWindow = 2;
 
     // schedule
@@ -27,7 +27,7 @@ enum TriggerType: int
     // parametercall
     case ParamCall = 4;
 
-    // 循环bodystartsectionpoint
+    // loopbodystartsectionpoint
     case LoopStart = 5;
 
     // etc待message
@@ -43,7 +43,7 @@ enum TriggerType: int
             // chat触hair
             $triggerType = TriggerType::ChatMessage;
         } elseif ($seqType === ControlMessageType::OpenConversation) {
-            // openchat窗口触hair
+            // openchatwindow触hair
             $triggerType = TriggerType::OpenChatWindow;
         } elseif ($seqType === ControlMessageType::AddFriendSuccess) {
             // add好友触hair
